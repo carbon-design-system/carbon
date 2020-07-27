@@ -22,7 +22,7 @@ const pictograms = () => {
       Joi.object().keys({
         name: Joi.string().required(),
         friendly_name: Joi.string().required(),
-        aliases: Joi.array(),
+        aliases: Joi.array().items(Joi.string()),
       })
     ),
 

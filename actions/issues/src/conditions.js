@@ -26,7 +26,7 @@ const states = {
       key: 'from_non_collaborator',
       run(context) {
         const { issue } = context.payload;
-        const roles = new Set(['OWNER', 'COLLABORATOR']);
+        const roles = new Set(['OWNER', 'COLLABORATOR', 'MEMBER']);
         return roles.has(issue.author_association);
       },
     },

@@ -16,7 +16,7 @@ const plugin = {
   conditions: [events.issues.opened],
   async run(context, octokit) {
     const { issue, repository } = context.payload;
-    const roles = new Set(['OWNER', 'COLLABORATOR']);
+    const roles = new Set(['OWNER', 'COLLABORATOR', 'MEMBER']);
     if (roles.has(issue.author_association)) {
       core.info(
         'Issue opened by project collaborator. No triage label necessary'

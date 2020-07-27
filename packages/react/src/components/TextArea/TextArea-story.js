@@ -34,6 +34,12 @@ const TextAreaProps = () => ({
 });
 
 storiesOf('TextArea', module)
+  .addParameters({
+    component: TextArea,
+    subcomponents: {
+      TextAreaSkeleton,
+    },
+  })
   .addDecorator(withKnobs)
   .add('Default', () => <TextArea {...TextAreaProps()} />, {
     info: {

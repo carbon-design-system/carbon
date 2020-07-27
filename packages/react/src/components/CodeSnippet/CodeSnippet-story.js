@@ -71,6 +71,12 @@ const lightPropMessage = (
 );
 
 storiesOf('CodeSnippet', module)
+  .addParameters({
+    component: CodeSnippet,
+    subcomponents: {
+      CodeSnippetSkeleton,
+    },
+  })
   .addDecorator(withKnobs)
   .add(
     'inline',

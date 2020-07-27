@@ -30,7 +30,7 @@ const icons = () => {
           Joi.string().valid('glyph'),
           Joi.number().valid([16, 20, 24, 32])
         ),
-        aliases: Joi.array(),
+        aliases: Joi.array().items(Joi.string()),
       })
     ),
 

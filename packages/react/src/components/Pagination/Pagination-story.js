@@ -45,6 +45,9 @@ const props = () => ({
 });
 
 storiesOf('Pagination', module)
+  .addParameters({
+    component: Pagination,
+  })
   .addDecorator(withKnobs)
   .addDecorator((story) => <div style={{ maxWidth: '800px' }}>{story()}</div>)
   .add('Pagination', () => <Pagination {...props()} />, {

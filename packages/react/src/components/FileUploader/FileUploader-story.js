@@ -139,6 +139,15 @@ const props = {
 };
 
 storiesOf('FileUploader', module)
+  .addParameters({
+    component: FileUploader,
+    subcomponents: {
+      FileUploaderButton,
+      FileUploaderSkeleton,
+      FileUploaderItem,
+      FileUploaderDropContainer,
+    },
+  })
   .addDecorator(withKnobs)
   .add(
     'FileUploaderButton',

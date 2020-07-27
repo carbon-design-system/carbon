@@ -58,9 +58,13 @@ const props = () => ({
   ),
 });
 
-NumberInput.displayName = 'NumberInput';
-
 storiesOf('NumberInput', module)
+  .addParameters({
+    component: NumberInput,
+    subcomponents: {
+      NumberInputSkeleton,
+    },
+  })
   .addDecorator(withKnobs)
   .add(
     'Default',

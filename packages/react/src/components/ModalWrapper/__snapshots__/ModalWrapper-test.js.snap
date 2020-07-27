@@ -22,7 +22,7 @@ exports[`ModalWrapper should render 1`] = `
     onKeyDown={[Function]}
     role="presentation"
   >
-    <ForwardRef(Button)
+    <Button
       className="btn-trigger"
       disabled={false}
       iconDescription="Provide icon description if icon is used"
@@ -40,7 +40,7 @@ exports[`ModalWrapper should render 1`] = `
       >
         Test Modal
       </button>
-    </ForwardRef(Button)>
+    </Button>
     <Modal
       aria-label="test modal"
       hasScrollingContent={false}
@@ -151,7 +151,7 @@ exports[`ModalWrapper should render 1`] = `
           <div
             className="bx--modal-footer"
           >
-            <ForwardRef(Button)
+            <Button
               disabled={false}
               kind="secondary"
               onClick={[Function]}
@@ -167,8 +167,8 @@ exports[`ModalWrapper should render 1`] = `
               >
                 Cancel
               </button>
-            </ForwardRef(Button)>
-            <ForwardRef(Button)
+            </Button>
+            <Button
               disabled={false}
               kind="primary"
               onClick={[Function]}
@@ -184,7 +184,7 @@ exports[`ModalWrapper should render 1`] = `
               >
                 Save
               </button>
-            </ForwardRef(Button)>
+            </Button>
           </div>
         </div>
         <span

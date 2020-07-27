@@ -140,6 +140,30 @@ const StoryContent = ({ useResponsiveOffset = true }) => {
 // components and try and piece them together to figure out what are standard
 // usage patterns for each to see what kind of component API we should expose
 storiesOf('UI Shell', module)
+  .addParameters({
+    subcomponents: {
+      Content,
+      Header,
+      HeaderMenuButton,
+      HeaderName,
+      HeaderNavigation,
+      HeaderMenu,
+      HeaderMenuItem,
+      HeaderGlobalBar,
+      HeaderGlobalAction,
+      HeaderPanel,
+      HeaderSideNavItems,
+      SkipToContent,
+      SideNav,
+      SideNavItems,
+      SideNavLink,
+      SideNavMenu,
+      SideNavMenuItem,
+      Switcher,
+      SwitcherItem,
+      SwitcherDivider,
+    },
+  })
   .add(
     'Header Base',
     withReadme(readme, () => (
