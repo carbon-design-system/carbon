@@ -100,6 +100,7 @@ Map {
     "defaultProps": Object {
       "disabled": false,
       "kind": "primary",
+      "size": "default",
       "tabIndex": 0,
       "type": "button",
     },

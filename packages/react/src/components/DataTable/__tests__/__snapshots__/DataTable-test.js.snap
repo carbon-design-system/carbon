@@ -2024,6 +2024,7 @@ exports[`DataTable should render 1`] = `
                           "render": [Function],
                         }
                       }
+                      size="default"
                       tabIndex={0}
                       type="button"
                     >
@@ -2093,6 +2094,7 @@ exports[`DataTable should render 1`] = `
                           "render": [Function],
                         }
                       }
+                      size="default"
                       tabIndex={0}
                       type="button"
                     >
@@ -2162,6 +2164,7 @@ exports[`DataTable should render 1`] = `
                           "render": [Function],
                         }
                       }
+                      size="default"
                       tabIndex={0}
                       type="button"
                     >
@@ -2217,6 +2220,7 @@ exports[`DataTable should render 1`] = `
                     disabled={false}
                     kind="primary"
                     onClick={[Function]}
+                    size="default"
                     tabIndex={-1}
                     type="button"
                   >
@@ -3014,6 +3018,7 @@ exports[`DataTable sticky header should render 1`] = `
                           "render": [Function],
                         }
                       }
+                      size="default"
                       tabIndex={0}
                       type="button"
                     >
@@ -3083,6 +3088,7 @@ exports[`DataTable sticky header should render 1`] = `
                           "render": [Function],
                         }
                       }
+                      size="default"
                       tabIndex={0}
                       type="button"
                     >
@@ -3152,6 +3158,7 @@ exports[`DataTable sticky header should render 1`] = `
                           "render": [Function],
                         }
                       }
+                      size="default"
                       tabIndex={0}
                       type="button"
                     >
@@ -3207,6 +3214,7 @@ exports[`DataTable sticky header should render 1`] = `
                     disabled={false}
                     kind="primary"
                     onClick={[Function]}
+                    size="default"
                     tabIndex={-1}
                     type="button"
                   >
