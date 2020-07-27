@@ -79,6 +79,12 @@ const props = () => ({
 });
 
 storiesOf('Dropdown', module)
+  .addParameters({
+    component: Dropdown,
+    subcomponents: {
+      DropdownSkeleton,
+    },
+  })
   .addDecorator(withKnobs)
   .add(
     'default',

@@ -88,6 +88,9 @@ const props = () => {
 };
 
 storiesOf('ModalWrapper', module)
+  .addParameters({
+    component: ModalWrapper,
+  })
   .addDecorator(withKnobs)
   .add(
     'transactional/passive modal',

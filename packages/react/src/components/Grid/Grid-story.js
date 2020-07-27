@@ -3,8 +3,13 @@ import React from 'react';
 import { Grid, Row, Column } from './';
 
 export default {
-  decorators: [(storyFn) => <div id="templates">{storyFn()}</div>],
   title: 'Grid',
+  component: Grid,
+  subcomponents: {
+    Row,
+    Column,
+  },
+  decorators: [(storyFn) => <div id="templates">{storyFn()}</div>],
 };
 
 function DemoContent({ children }) {

@@ -26,6 +26,12 @@ const props = () => ({
 });
 
 storiesOf('Checkbox', module)
+  .addParameters({
+    component: Checkbox,
+    subcomponents: {
+      CheckboxSkeleton,
+    },
+  })
   .addDecorator(withKnobs)
   .add(
     'checked',

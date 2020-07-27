@@ -36,7 +36,9 @@ function Container({ story }) {
           flexDirection: 'column',
           alignItems: 'center',
         }}>
-        {story()}
+        <div style={{ position: 'relative', width: '100%', zIndex: 0 }}>
+          {story()}
+        </div>
       </div>
     </React.StrictMode>
   );

@@ -34,6 +34,12 @@ const props = {
 };
 
 storiesOf('ContentSwitcher', module)
+  .addParameters({
+    component: ContentSwitcher,
+    subcomponents: {
+      Switch,
+    },
+  })
   .addDecorator(withKnobs)
   .add(
     'Default',

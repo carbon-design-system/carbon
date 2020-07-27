@@ -18,6 +18,9 @@ const props = () => ({
 });
 
 storiesOf('Loading', module)
+  .addParameters({
+    component: Loading,
+  })
   .addDecorator(withKnobs)
   .add(
     'Default',

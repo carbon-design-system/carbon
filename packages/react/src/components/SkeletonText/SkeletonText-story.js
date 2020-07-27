@@ -30,6 +30,9 @@ const props = () => ({
 });
 
 storiesOf('SkeletonText', module)
+  .addParameters({
+    component: SkeletonText,
+  })
   .addDecorator(withKnobs)
   .add(
     'Default',
