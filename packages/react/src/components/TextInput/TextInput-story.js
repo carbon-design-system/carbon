@@ -101,6 +101,13 @@ const props = {
 TextInput.displayName = 'TextInput';
 
 storiesOf('TextInput', module)
+  .addParameters({
+    component: TextInput,
+    subcomponents: {
+      TextInputSkeleton,
+      'TextInput.ControlledPasswordInput': TextInput.ControlledPasswordInput,
+    },
+  })
   .addDecorator(withKnobs)
   .add(
     'Default',

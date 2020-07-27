@@ -17,6 +17,12 @@ import { settings } from 'carbon-components';
 const { prefix } = settings;
 
 storiesOf('ProgressIndicator', module)
+  .addParameters({
+    component: ProgressIndicator,
+    subcomponents: {
+      ProgressStep,
+    },
+  })
   .addDecorator(withKnobs)
   .add(
     'Default',

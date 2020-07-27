@@ -42,6 +42,12 @@ const notificationProps = () => ({
 });
 
 storiesOf('Notifications', module)
+  .addParameters({
+    subcomponents: {
+      ToastNotification,
+      InlineNotification,
+    },
+  })
   .addDecorator(withKnobs)
   .add('Toast', () => (
     <ToastNotification

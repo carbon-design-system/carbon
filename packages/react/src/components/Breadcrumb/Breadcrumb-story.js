@@ -20,6 +20,13 @@ const props = () => ({
 });
 
 storiesOf('Breadcrumb', module)
+  .addParameters({
+    component: Breadcrumb,
+    subcomponents: {
+      BreadcrumbItem,
+      BreadcrumbSkeleton,
+    },
+  })
   .addDecorator(withKnobs)
   .add(
     'default',

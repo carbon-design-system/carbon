@@ -134,6 +134,14 @@ const scrollingContent = (
 );
 
 storiesOf('ComposedModal', module)
+  .addParameters({
+    component: ComposedModal,
+    subcomponents: {
+      ModalHeader,
+      ModalBody,
+      ModalFooter,
+    },
+  })
   .addDecorator(withKnobs)
   .add(
     'Using Header / Footer Props',

@@ -15,7 +15,7 @@ exports[`DataTable.TableBatchActions should render 1`] = `
       <div
         className="bx--action-list"
       >
-        <ForwardRef(Button)
+        <Button
           className="bx--batch-summary__cancel"
           disabled={false}
           kind="primary"
@@ -32,7 +32,7 @@ exports[`DataTable.TableBatchActions should render 1`] = `
           >
             Cancel
           </button>
-        </ForwardRef(Button)>
+        </Button>
       </div>
     </TableActionList>
     <div
@@ -65,7 +65,7 @@ exports[`DataTable.TableBatchActions should render 2`] = `
       <div
         className="bx--action-list"
       >
-        <ForwardRef(Button)
+        <Button
           className="bx--batch-summary__cancel"
           disabled={false}
           kind="primary"
@@ -82,7 +82,7 @@ exports[`DataTable.TableBatchActions should render 2`] = `
           >
             Cancel
           </button>
-        </ForwardRef(Button)>
+        </Button>
       </div>
     </TableActionList>
     <div

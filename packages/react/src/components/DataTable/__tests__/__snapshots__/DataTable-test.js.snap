@@ -1869,7 +1869,7 @@ exports[`DataTable should render 1`] = `
                     Action 3
                   </TableToolbarAction>
                 </TableToolbarMenu>
-                <ForwardRef(Button)
+                <Button
                   disabled={false}
                   kind="primary"
                   onClick={[MockFunction]}
@@ -1878,7 +1878,7 @@ exports[`DataTable should render 1`] = `
                   type="button"
                 >
                   Add new
-                </ForwardRef(Button)>
+                </Button>
               </TableToolbarContent>
             </TableToolbar>
             <Table
@@ -2014,7 +2014,7 @@ exports[`DataTable should render 1`] = `
                       }
                     }
                   >
-                    <ForwardRef(Button)
+                    <Button
                       disabled={false}
                       kind="primary"
                       onClick={[MockFunction]}
@@ -2072,7 +2072,7 @@ exports[`DataTable should render 1`] = `
                           </Icon>
                         </ForwardRef(AddFilled16)>
                       </button>
-                    </ForwardRef(Button)>
+                    </Button>
                   </TableBatchAction>
                   <TableBatchAction
                     onClick={[MockFunction]}
@@ -2083,7 +2083,7 @@ exports[`DataTable should render 1`] = `
                       }
                     }
                   >
-                    <ForwardRef(Button)
+                    <Button
                       disabled={false}
                       kind="primary"
                       onClick={[MockFunction]}
@@ -2141,7 +2141,7 @@ exports[`DataTable should render 1`] = `
                           </Icon>
                         </ForwardRef(AddFilled16)>
                       </button>
-                    </ForwardRef(Button)>
+                    </Button>
                   </TableBatchAction>
                   <TableBatchAction
                     onClick={[MockFunction]}
@@ -2152,7 +2152,7 @@ exports[`DataTable should render 1`] = `
                       }
                     }
                   >
-                    <ForwardRef(Button)
+                    <Button
                       disabled={false}
                       kind="primary"
                       onClick={[MockFunction]}
@@ -2210,9 +2210,9 @@ exports[`DataTable should render 1`] = `
                           </Icon>
                         </ForwardRef(AddFilled16)>
                       </button>
-                    </ForwardRef(Button)>
+                    </Button>
                   </TableBatchAction>
-                  <ForwardRef(Button)
+                  <Button
                     className="bx--batch-summary__cancel"
                     disabled={false}
                     kind="primary"
@@ -2229,7 +2229,7 @@ exports[`DataTable should render 1`] = `
                     >
                       Cancel
                     </button>
-                  </ForwardRef(Button)>
+                  </Button>
                 </div>
               </TableActionList>
               <div
@@ -2478,7 +2478,7 @@ exports[`DataTable should render 1`] = `
                   </OverflowMenu>
                 </ForwardRef(OverflowMenu)>
               </TableToolbarMenu>
-              <ForwardRef(Button)
+              <Button
                 disabled={false}
                 kind="primary"
                 onClick={[MockFunction]}
@@ -2495,7 +2495,7 @@ exports[`DataTable should render 1`] = `
                 >
                   Add new
                 </button>
-              </ForwardRef(Button)>
+              </Button>
             </div>
           </TableToolbarContent>
         </section>
@@ -2856,7 +2856,7 @@ exports[`DataTable sticky header should render 1`] = `
                     Action 3
                   </TableToolbarAction>
                 </TableToolbarMenu>
-                <ForwardRef(Button)
+                <Button
                   disabled={false}
                   kind="primary"
                   onClick={[MockFunction]}
@@ -2865,7 +2865,7 @@ exports[`DataTable sticky header should render 1`] = `
                   type="button"
                 >
                   Add new
-                </ForwardRef(Button)>
+                </Button>
               </TableToolbarContent>
             </TableToolbar>
             <Table
@@ -3004,7 +3004,7 @@ exports[`DataTable sticky header should render 1`] = `
                       }
                     }
                   >
-                    <ForwardRef(Button)
+                    <Button
                       disabled={false}
                       kind="primary"
                       onClick={[MockFunction]}
@@ -3062,7 +3062,7 @@ exports[`DataTable sticky header should render 1`] = `
                           </Icon>
                         </ForwardRef(AddFilled16)>
                       </button>
-                    </ForwardRef(Button)>
+                    </Button>
                   </TableBatchAction>
                   <TableBatchAction
                     onClick={[MockFunction]}
@@ -3073,7 +3073,7 @@ exports[`DataTable sticky header should render 1`] = `
                       }
                     }
                   >
-                    <ForwardRef(Button)
+                    <Button
                       disabled={false}
                       kind="primary"
                       onClick={[MockFunction]}
@@ -3131,7 +3131,7 @@ exports[`DataTable sticky header should render 1`] = `
                           </Icon>
                         </ForwardRef(AddFilled16)>
                       </button>
-                    </ForwardRef(Button)>
+                    </Button>
                   </TableBatchAction>
                   <TableBatchAction
                     onClick={[MockFunction]}
@@ -3142,7 +3142,7 @@ exports[`DataTable sticky header should render 1`] = `
                       }
                     }
                   >
-                    <ForwardRef(Button)
+                    <Button
                       disabled={false}
                       kind="primary"
                       onClick={[MockFunction]}
@@ -3200,9 +3200,9 @@ exports[`DataTable sticky header should render 1`] = `
                           </Icon>
                         </ForwardRef(AddFilled16)>
                       </button>
-                    </ForwardRef(Button)>
+                    </Button>
                   </TableBatchAction>
-                  <ForwardRef(Button)
+                  <Button
                     className="bx--batch-summary__cancel"
                     disabled={false}
                     kind="primary"
@@ -3219,7 +3219,7 @@ exports[`DataTable sticky header should render 1`] = `
                     >
                       Cancel
                     </button>
-                  </ForwardRef(Button)>
+                  </Button>
                 </div>
               </TableActionList>
               <div
@@ -3468,7 +3468,7 @@ exports[`DataTable sticky header should render 1`] = `
                   </OverflowMenu>
                 </ForwardRef(OverflowMenu)>
               </TableToolbarMenu>
-              <ForwardRef(Button)
+              <Button
                 disabled={false}
                 kind="primary"
                 onClick={[MockFunction]}
@@ -3485,7 +3485,7 @@ exports[`DataTable sticky header should render 1`] = `
                 >
                   Add new
                 </button>
-              </ForwardRef(Button)>
+              </Button>
             </div>
           </TableToolbarContent>
         </section>

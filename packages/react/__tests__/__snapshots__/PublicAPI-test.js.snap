@@ -103,6 +103,7 @@ Map {
       "tabIndex": 0,
       "type": "button",
     },
+    "displayName": "Button",
     "propTypes": Object {
       "as": Object {
         "args": Array [
