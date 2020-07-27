@@ -1,0 +1,61 @@
+import { Meta, Story } from '@storybook/addon-docs/blocks';
+import * as stories from './Button-story.js';
+import {
+  Button,
+  ButtonSkeleton
+} from '../Button';
+
+<Meta
+  title="Button"
+  component={Button}
+  subcomponents={{
+    ButtonSkeleton
+  }}
+/>
+
+> How to build a(n) [component name] using React.
+
+## Overview
+
+<Story name="test">{stories._Default()}</Story>
+
+
+<Story name="test2">{stories.IconOnlyButtons()}</Story>
+
+<!--
+This should include the default use-case(s) for a component, at most 2.
+This should be the most common way the component is used.
+It should summarize what this common is for and provide snippets for how
+to accomplish these common use-cases
+-->
+
+## [Use case, for example, Skeleton state or Sorting]
+<!--
+Each use-case of this component becomes its own section. For example,
+if an accordion had a skeleton then you would name this section Skeleton.
+
+If the component had a specific piece of functionality or behavior, like
+how you can sort with a Data Table, then Sorting would be the name of this
+section.
+
+This section should include an explainer for the use-case and when to use it,
+along with a code snippet that someone could bring into their project.
+-->
+
+## Component API
+
+### [Component name] [prop name]
+<!--
+Used to clarify prop usage, provide additional info or snippets
+-->
+
+
+## References
+<!--
+A place for references, links, or a way clarify points made earlier
+in the documentation.
+-->
+
+## Feedback
+
+Help us improve these docs by [editing this file on GitHub](https://github.com/carbon-design-system/carbon/edit/master/packages/react/src/components/Accordion/Accordion.stories.mdx)

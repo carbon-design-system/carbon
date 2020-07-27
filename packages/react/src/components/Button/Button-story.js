@@ -124,9 +124,11 @@ const CustomLink = ({ children, href, ...other }) => (
 export default {
   title: 'Button',
   decorators: [withKnobs],
+  includeStories: ['IconOnlyButtons'],
 
   parameters: {
     component: Button,
+    includeStories: ['_Default'],
 
     subcomponents: {
       ButtonSkeleton,
