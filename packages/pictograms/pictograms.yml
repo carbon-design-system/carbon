@@ -3269,16 +3269,13 @@
     - soft ice cream
     - ice cream
     - food
-    - name: softlayer--enablement
-      friendly_name: Softlayer enablement
-      aliases:
-        - softlayer enablement
-        - enablement
-        - softlayer
-        - cloud
 - name: softlayer--enablement
-  friendly_name: softlayer--enablement
-  aliases: []
+  friendly_name: Softlayer enablement
+  aliases:
+    - softlayer enablement
+    - enablement
+    - softlayer
+    - cloud
 - name: solar--field
   friendly_name: Solar field
   aliases:
