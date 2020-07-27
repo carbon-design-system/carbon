@@ -27,6 +27,9 @@ const props = () => ({
 });
 
 storiesOf('PaginationNav', module)
+  .addParameters({
+    component: PaginationNav,
+  })
   .addDecorator(withKnobs)
   .addDecorator((story) => <div style={{ width: '800px' }}>{story()}</div>)
   .add('PaginationNav', () => <PaginationNav {...props()} />, {

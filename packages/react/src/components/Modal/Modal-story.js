@@ -101,6 +101,9 @@ const titleOnlyProps = () => {
 };
 
 storiesOf('Modal', module)
+  .addParameters({
+    component: Modal,
+  })
   .addDecorator(withKnobs)
   .add(
     'Default',

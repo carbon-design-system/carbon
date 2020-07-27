@@ -111,6 +111,13 @@ const TabContentRenderedOnlyWhenSelected = ({
   );
 
 storiesOf('Tabs', module)
+  .addParameters({
+    component: Tabs,
+    subcomponents: {
+      Tab,
+      TabsSkeleton,
+    },
+  })
   .addDecorator(withKnobs)
   .add(
     'Default',

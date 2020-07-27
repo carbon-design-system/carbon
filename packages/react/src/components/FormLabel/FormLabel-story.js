@@ -16,6 +16,9 @@ const additionalProps = {
 };
 
 storiesOf('FormLabel', module)
+  .addParameters({
+    component: FormLabel,
+  })
   .add('Default', () => <FormLabel {...additionalProps}>Label</FormLabel>, {
     info: {
       text: 'Form label.',

@@ -12,6 +12,9 @@ import { ErrorBoundary, ErrorBoundaryContext } from './';
 import Button from '../Button';
 
 storiesOf('ErrorBoundary', module)
+  .addParameters({
+    component: ErrorBoundary,
+  })
   .add('default', () => {
     function DemoComponent() {
       const [shouldThrowError, setShouldThrowError] = useState(false);

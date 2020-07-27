@@ -40,6 +40,9 @@ const props = () => ({
 });
 
 storiesOf('TooltipDefinition', module)
+  .addParameters({
+    component: TooltipDefinition,
+  })
   .addDecorator(withKnobs)
   .add(
     'default',

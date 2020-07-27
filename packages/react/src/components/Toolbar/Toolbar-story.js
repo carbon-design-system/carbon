@@ -29,57 +29,79 @@ const inputProps = {
   onChange: action('onChange'),
 };
 
-storiesOf('Toolbar [Deprecated]', module).add(
-  'Default',
-  () => (
-    <Toolbar {...toolbarProps} className="some-class">
-      <ToolbarItem type="search" placeHolderText="Search" />
-      <ToolbarItem>
-        <OverflowMenu renderIcon={Filter16}>
-          <ToolbarTitle title="FILTER BY" />
-          <ToolbarOption>
-            <Checkbox {...inputProps} id="opt-1" labelText="Filter option 1" />
-          </ToolbarOption>
-          <ToolbarOption>
-            <Checkbox {...inputProps} id="opt-2" labelText="Filter option 2" />
-          </ToolbarOption>
-          <ToolbarOption>
-            <Checkbox {...inputProps} id="opt-3" labelText="Filter option 3" />
-          </ToolbarOption>
-        </OverflowMenu>
-      </ToolbarItem>
-      <ToolbarItem>
-        <OverflowMenu>
-          <OverflowMenuItem itemText="Refresh table" />
-          <ToolbarDivider />
-          <ToolbarTitle title="ROW HEIGHT" />
-          <ToolbarOption>
-            <RadioButton
-              {...inputProps}
-              value="short"
-              id="radio-1"
-              name="toolbar-radio"
-              labelText="Short"
-            />
-          </ToolbarOption>
-          <ToolbarOption>
-            <RadioButton
-              {...inputProps}
-              value="tall"
-              id="radio-2"
-              name="toolbar-radio"
-              labelText="Tall"
-            />
-          </ToolbarOption>
-        </OverflowMenu>
-      </ToolbarItem>
-    </Toolbar>
-  ),
-  {
-    info: {
-      text: `
+storiesOf('Toolbar [Deprecated]', module)
+  .addParameters({
+    component: Toolbar,
+    subcomponents: {
+      ToolbarItem,
+      ToolbarTitle,
+      ToolbarOption,
+      ToolbarDivider,
+    },
+  })
+  .add(
+    'Default',
+    () => (
+      <Toolbar {...toolbarProps} className="some-class">
+        <ToolbarItem type="search" placeHolderText="Search" />
+        <ToolbarItem>
+          <OverflowMenu renderIcon={Filter16}>
+            <ToolbarTitle title="FILTER BY" />
+            <ToolbarOption>
+              <Checkbox
+                {...inputProps}
+                id="opt-1"
+                labelText="Filter option 1"
+              />
+            </ToolbarOption>
+            <ToolbarOption>
+              <Checkbox
+                {...inputProps}
+                id="opt-2"
+                labelText="Filter option 2"
+              />
+            </ToolbarOption>
+            <ToolbarOption>
+              <Checkbox
+                {...inputProps}
+                id="opt-3"
+                labelText="Filter option 3"
+              />
+            </ToolbarOption>
+          </OverflowMenu>
+        </ToolbarItem>
+        <ToolbarItem>
+          <OverflowMenu>
+            <OverflowMenuItem itemText="Refresh table" />
+            <ToolbarDivider />
+            <ToolbarTitle title="ROW HEIGHT" />
+            <ToolbarOption>
+              <RadioButton
+                {...inputProps}
+                value="short"
+                id="radio-1"
+                name="toolbar-radio"
+                labelText="Short"
+              />
+            </ToolbarOption>
+            <ToolbarOption>
+              <RadioButton
+                {...inputProps}
+                value="tall"
+                id="radio-2"
+                name="toolbar-radio"
+                labelText="Tall"
+              />
+            </ToolbarOption>
+          </OverflowMenu>
+        </ToolbarItem>
+      </Toolbar>
+    ),
+    {
+      info: {
+        text: `
           Toolbar stuff
         `,
-    },
-  }
-);
+      },
+    }
+  );

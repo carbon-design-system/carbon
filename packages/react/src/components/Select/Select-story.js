@@ -47,6 +47,14 @@ const props = {
 };
 
 storiesOf('Select', module)
+  .addParameters({
+    component: Select,
+    subcomponents: {
+      SelectItem,
+      SelectItemGroup,
+      SelectSkeleton,
+    },
+  })
   .addDecorator(withKnobs)
   .add(
     'Default',
