@@ -9,6 +9,28 @@ import { storiesOf } from '@storybook/react';
 import { withKnobs, boolean, select } from '@storybook/addon-knobs';
 import { withReadme } from 'storybook-readme';
 import readme from './README.md';
+import DataTable, {
+  Table,
+  TableActionList,
+  TableBatchAction,
+  TableBatchActions,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableExpandHeader,
+  TableExpandRow,
+  TableExpandedRow,
+  TableHead,
+  TableHeader,
+  TableRow,
+  TableSelectAll,
+  TableSelectRow,
+  TableToolbar,
+  TableToolbarAction,
+  TableToolbarContent,
+  TableToolbarSearch,
+  TableToolbarMenu,
+} from '../DataTable';
 
 const readmeURL = 'https://bit.ly/2Z9PGsC';
 
@@ -23,6 +45,31 @@ const props = () => ({
 });
 
 storiesOf('DataTable', module)
+  .addParameters({
+    component: DataTable,
+    subcomponents: {
+      Table,
+      TableActionList,
+      TableBatchAction,
+      TableBatchActions,
+      TableBody,
+      TableCell,
+      TableContainer,
+      TableExpandHeader,
+      TableExpandRow,
+      TableExpandedRow,
+      TableHead,
+      TableHeader,
+      TableRow,
+      TableSelectAll,
+      TableSelectRow,
+      TableToolbar,
+      TableToolbarAction,
+      TableToolbarContent,
+      TableToolbarSearch,
+      TableToolbarMenu,
+    },
+  })
   .addDecorator(withKnobs)
   .add(
     'default',

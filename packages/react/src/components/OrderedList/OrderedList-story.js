@@ -4,6 +4,12 @@ import OrderedList from '../OrderedList';
 import ListItem from '../ListItem';
 
 storiesOf('OrderedList', module)
+  .addParameters({
+    component: OrderedList,
+    subcomponents: {
+      ListItem,
+    },
+  })
   .add(
     'default',
     () => (

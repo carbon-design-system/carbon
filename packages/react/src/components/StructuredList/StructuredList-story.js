@@ -22,6 +22,16 @@ import { settings } from 'carbon-components';
 const { prefix } = settings;
 
 storiesOf('StructuredList', module)
+  .addParameters({
+    component: StructuredListWrapper,
+    subcomponents: {
+      StructuredListHead,
+      StructuredListBody,
+      StructuredListRow,
+      StructuredListInput,
+      StructuredListCell,
+    },
+  })
   .add(
     'Simple',
     () => (

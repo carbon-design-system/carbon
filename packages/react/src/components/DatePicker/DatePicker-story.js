@@ -75,6 +75,13 @@ const props = {
 };
 
 storiesOf('DatePicker', module)
+  .addParameters({
+    component: DatePicker,
+    subcomponents: {
+      DatePickerInput,
+      DatePickerSkeleton,
+    },
+  })
   .addDecorator(withKnobs)
   .add(
     'simple',

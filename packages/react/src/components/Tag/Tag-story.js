@@ -39,6 +39,12 @@ const props = {
 };
 
 storiesOf('Tag', module)
+  .addParameters({
+    component: Tag,
+    subcomponents: {
+      TagSkeleton,
+    },
+  })
   .addDecorator(withKnobs)
   .add(
     'Default',

@@ -39,6 +39,14 @@ const props = () => ({
 });
 
 storiesOf('Search', module)
+  .addParameters({
+    component: Search,
+    subcomponents: {
+      SearchSkeleton,
+      SearchFilterButton,
+      SearchLayoutButton,
+    },
+  })
   .addDecorator(withKnobs)
   .add('Default', () => <Search {...props()} id="search-1" />, {
     info: {

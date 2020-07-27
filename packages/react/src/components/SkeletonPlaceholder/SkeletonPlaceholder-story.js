@@ -24,6 +24,9 @@ const props = () => ({
 });
 
 storiesOf('SkeletonPlaceholder', module)
+  .addParameters({
+    component: SkeletonPlaceholder,
+  })
   .addDecorator(withKnobs)
   .add(
     'Default',

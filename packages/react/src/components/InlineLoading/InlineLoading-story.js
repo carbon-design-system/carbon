@@ -34,6 +34,9 @@ const props = () => ({
 });
 
 storiesOf('InlineLoading', module)
+  .addParameters({
+    component: InlineLoading,
+  })
   .addDecorator(withKnobs)
   .add('Inline loading', () => <InlineLoading {...props()} />, {
     info: {
