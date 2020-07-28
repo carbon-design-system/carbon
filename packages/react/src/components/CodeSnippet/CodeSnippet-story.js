@@ -21,6 +21,7 @@ const props = {
       'ARIA label for the snippet/copy button (copyLabel)',
       'copyable code snippet'
     ),
+    hideCopyButton: boolean('Hide copy button (hideCopyButton)', false),
   }),
   single: () => ({
     light: boolean('Light variant (light)', false),
@@ -33,6 +34,7 @@ const props = {
       'ARIA label of the container (ariaLabel)',
       'Container label'
     ),
+    hideCopyButton: boolean('Hide copy button (hideCopyButton)', false),
     onClick: action('onClick'),
   }),
   multiline: () => ({
@@ -46,6 +48,7 @@ const props = {
       'Text for "show less" button (showLessText)',
       'Show less'
     ),
+    hideCopyButton: boolean('Hide copy button (hideCopyButton)', false),
     onClick: action('onClick'),
   }),
 };

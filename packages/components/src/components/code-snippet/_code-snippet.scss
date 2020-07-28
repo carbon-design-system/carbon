@@ -94,6 +94,15 @@
     padding: 0 $spacing-03;
   }
 
+  .#{$prefix}--snippet--inline.#{$prefix}--snippet--no-copy {
+    display: inline-block;
+
+    &:hover {
+      background-color: $ui-01;
+      cursor: auto;
+    }
+  }
+
   // Single Line Snippet
   .#{$prefix}--snippet--single {
     @include bx--snippet;
@@ -101,8 +110,15 @@
     min-width: rem(320px);
     max-width: rem(760px);
     height: $carbon--spacing-08;
-    padding: 0 $carbon--spacing-08 0 0;
-    border: none;
+    padding-right: $carbon--spacing-08;
+  }
+
+  .#{$prefix}--snippet--single.#{$prefix}--snippet--no-copy {
+    padding: 0;
+
+    &::after {
+      right: $carbon--spacing-05;
+    }
   }
 
   .#{$prefix}--snippet--single .#{$prefix}--snippet-container {
@@ -144,7 +160,6 @@
     min-width: rem(320px);
     max-width: 100%;
     padding: $carbon--spacing-05;
-    border: none;
   }
 
   //closed snippet container
@@ -169,6 +184,12 @@
     padding-right: $carbon--spacing-08;
     padding-bottom: rem(24px);
     overflow-x: scroll;
+  }
+
+  .#{$prefix}--snippet--multi.#{$prefix}--snippet--no-copy
+    .#{$prefix}--snippet-container
+    pre {
+    padding-right: 0;
   }
 
   // expanded pre
