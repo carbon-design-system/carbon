@@ -47,8 +47,6 @@
   .#{$prefix}--text-area::placeholder {
     @include placeholder-colors;
     @include type-style('body-long-01');
-
-    opacity: 1;
   }
 
   .#{$prefix}--text-area--light {
