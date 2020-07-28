@@ -22,6 +22,7 @@ import {
   AccordionSkeleton,
 } from '../Accordion';
 import Button from '../Button';
+import mdx from './Accordion.mdx';
 
 export default {
   title: 'Accordion',
@@ -31,6 +32,11 @@ export default {
     AccordionSkeleton,
   },
   decorators: [withKnobs],
+  parameters: {
+    docs: {
+      page: mdx,
+    },
+  },
 };
 
 export const accordion = () => (
