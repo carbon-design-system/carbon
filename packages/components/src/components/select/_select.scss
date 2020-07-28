@@ -111,18 +111,6 @@
     padding-right: carbon--mini-units(10);
   }
 
-  .#{$prefix}--select-input__wrapper[data-invalid] .#{$prefix}--select-input,
-  .#{$prefix}--select-input__wrapper[data-invalid]
-    .#{$prefix}--select-input:focus {
-    @include focus-outline('invalid');
-  }
-
-  .#{$prefix}--form-requirement {
-    display: block;
-    overflow: visible;
-    font-weight: 400;
-  }
-
   .#{$prefix}--select-input:disabled ~ .#{$prefix}--select__arrow {
     fill: $disabled-02;
   }
