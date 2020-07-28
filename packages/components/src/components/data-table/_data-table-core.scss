@@ -20,6 +20,9 @@
   .#{$prefix}--data-table-container {
     // Allow space for focus styles
     padding-top: $spacing-01;
+  }
+
+  .#{$prefix}--data-table-content {
     overflow-x: auto;
   }
 
