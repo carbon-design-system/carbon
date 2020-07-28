@@ -109,6 +109,9 @@ function UncontrolledTooltipExample() {
 }
 
 storiesOf('Tooltip', module)
+  .addParameters({
+    component: Tooltip,
+  })
   .addDecorator(withKnobs)
   .add(
     'default (bottom)',

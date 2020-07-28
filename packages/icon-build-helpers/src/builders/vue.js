@@ -125,7 +125,9 @@ async function builder(metadata, { output }) {
  */
 function createIconComponent(moduleName, descriptor) {
   const { attrs, content } = descriptor;
-  const { width, height, viewBox } = attrs;
+  const attrsAsString = Object.keys(attrs)
+    .map((attr) => `${attr}: "${attrs[attr]}"`)
+    .join(',');
   const source = `${BANNER}
 import { getAttributes } from '@carbon/icon-helpers';
 export default {
@@ -137,9 +139,7 @@ export default {
   render(createElement, context) {
     const { children, data, listeners, props } = context;
     const attrs = getAttributes({
-      width: '${width}',
-      height: '${height}',
-      viewBox: '${viewBox}',
+      ${attrsAsString},
       preserveAspectRatio: 'xMidYMid meet',
       xmlns: 'http://www.w3.org/2000/svg',
       // Special case here, we need to coordinate that we are using title,

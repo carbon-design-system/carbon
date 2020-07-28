@@ -32,6 +32,9 @@ const props = () => ({
 });
 
 storiesOf('DataTableSkeleton', module)
+  .addParameters({
+    component: DataTableSkeleton,
+  })
   .addDecorator(withKnobs)
   .add(
     'default',

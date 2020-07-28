@@ -31,6 +31,9 @@ const props = () => ({
 });
 
 storiesOf('TooltipIcon', module)
+  .addParameters({
+    component: TooltipIcon,
+  })
   .addDecorator(withKnobs)
   .add(
     'default',

@@ -26,6 +26,9 @@ const props = () => ({
 });
 
 storiesOf('CopyButton', module)
+  .addParameters({
+    component: CopyButton,
+  })
   .addDecorator(withKnobs)
   .add('Default', () => <CopyButton {...props()} />, {
     info: {
