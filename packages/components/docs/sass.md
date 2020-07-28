@@ -6996,7 +6996,6 @@ $text-05: if(
 - **Type**: `{undefined}`
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
-  - [combo-box [mixin]](#combo-box-mixin)
   - [date-picker [mixin]](#date-picker-mixin)
   - [search [mixin]](#search-mixin)
   - [time-picker [mixin]](#time-picker-mixin)
@@ -8198,7 +8197,6 @@ $disabled-02: if(
   - [button-base [mixin]](#button-base-mixin)
   - [button-theme [mixin]](#button-theme-mixin)
   - [checkbox [mixin]](#checkbox-mixin)
-  - [combo-box [mixin]](#combo-box-mixin)
   - [content-switcher [mixin]](#content-switcher-mixin)
   - [date-picker [mixin]](#date-picker-mixin)
   - [dropdown [mixin]](#dropdown-mixin)
@@ -14948,18 +14946,8 @@ Combo box styles
 
 ```scss
 @mixin combo-box() {
-  .#{$prefix}--combo-box .#{$prefix}--text-input {
-    &::placeholder {
-      color: $text-05;
-    }
-
-    &[disabled]::placeholder {
-      color: $disabled-02;
-    }
-
-    &::-ms-clear {
-      display: none;
-    }
+  .#{$prefix}--combo-box .#{$prefix}--text-input::-ms-clear {
+    display: none;
   }
 
   .#{$prefix}--combo-box.#{$prefix}--list-box--expanded
@@ -14982,8 +14970,6 @@ Combo box styles
 - **Group**: [combo-box](#combo-box)
 - **Requires**:
   - [prefix [variable]](#prefix-variable)
-  - [text-05 [variable]](#text-05-variable)
-  - [disabled-02 [variable]](#disabled-02-variable)
   - [ui-03 [variable]](#ui-03-variable)
 
 ## content-switcher
@@ -23736,8 +23722,6 @@ Text area styles
   .#{$prefix}--text-area::placeholder {
     @include placeholder-colors;
     @include type-style('body-long-01');
-
-    opacity: 1;
   }
 
   .#{$prefix}--text-area--light {
