@@ -16,11 +16,15 @@ const { prefix } = settings;
 
 describe('Code Snippet', () => {
   describe('Renders as expected', () => {
-    const snippet = shallow(
-      <CodeSnippet className="some-class" type="single">
-        {'node -v'}
-      </CodeSnippet>
-    );
+    let snippet;
+
+    beforeEach(() => {
+      snippet = shallow(
+        <CodeSnippet className="some-class" type="single">
+          {'node -v'}
+        </CodeSnippet>
+      );
+    });
 
     it('should use the appropriate snippet class', () => {
       expect(snippet.hasClass(`${prefix}--snippet`)).toEqual(true);
@@ -33,6 +37,12 @@ describe('Code Snippet', () => {
 
     it('should all for custom classes to be applied', () => {
       expect(snippet.hasClass('some-class')).toEqual(true);
+    });
+
+    it('should allow hiding of the copy button', () => {
+      expect(snippet.find(CopyButton).length).toBe(1);
+      snippet.setProps({ hideCopyButton: true });
+      expect(snippet.find(CopyButton).length).toBe(0);
     });
   });
 
