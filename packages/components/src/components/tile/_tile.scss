@@ -186,6 +186,10 @@
   .#{$prefix}--tile-input {
     @include hidden;
   }
+
+  .#{$prefix}--tile-input:focus + .#{$prefix}--tile {
+    @include focus-outline('outline');
+  }
 }
 
 @include exports('tile') {

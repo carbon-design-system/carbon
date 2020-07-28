@@ -61,15 +61,12 @@ function RadioTile({
         name={name}
         value={value}
         className={`${prefix}--tile-input`}
+        tabIndex={tabIndex}
         onChange={handleOnChange}
+        onKeyDown={handleOnKeyDown}
         id={inputId}
       />
-      {/* eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions */}
-      <label
-        htmlFor={inputId}
-        className={classes}
-        tabIndex={tabIndex}
-        onKeyDown={handleOnKeyDown}>
+      <label htmlFor={inputId} className={classes}>
         <span className={`${prefix}--tile__checkmark`}>
           <CheckmarkFilled />
         </span>
