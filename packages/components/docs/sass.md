@@ -16873,6 +16873,37 @@ Data table sort styles
     display: flex;
     align-items: center;
     height: 100%;
+    min-height: 3rem;
+  }
+
+  .#{$prefix}--data-table--sort:not(.#{$prefix}--data-table--compact):not(.#{$prefix}--data-table--short):not(.#{$prefix}--data-table--tall)
+    th
+    .#{$prefix}--table-sort__flex {
+    /* IE11 workaround for align-items: center and min-height
+        https://github.com/philipwalton/flexbugs/issues/231 */
+    @media screen and (-ms-high-contrast: active),
+      screen and (-ms-high-contrast: none) {
+      height: 2.99rem;
+    }
+  }
+
+  .#{$prefix}--data-table--compact.#{$prefix}--data-table--sort
+    th
+    .#{$prefix}--table-sort__flex {
+    min-height: 1.5rem;
+  }
+
+  .#{$prefix}--data-table--short.#{$prefix}--data-table--sort
+    th
+    .#{$prefix}--table-sort__flex {
+    min-height: 2rem;
+  }
+
+  .#{$prefix}--data-table--tall.#{$prefix}--data-table--sort
+    th
+    .#{$prefix}--table-sort__flex {
+    align-items: flex-start;
+    min-height: 4rem;
   }
 
   // -------------------------------------
@@ -16888,7 +16919,7 @@ Data table sort styles
   }
 
   .#{$prefix}--table-sort__icon-unsorted {
-    width: auto;
+    width: rem(20px);
     min-width: $layout-01;
     margin-right: $spacing-05;
     margin-left: $spacing-03;
@@ -16917,7 +16948,7 @@ Data table sort styles
   }
 
   .#{$prefix}--table-sort__icon {
-    width: auto;
+    width: rem(20px);
     min-width: $layout-01;
     margin-right: $spacing-05;
     margin-left: $spacing-03;
@@ -16950,12 +16981,6 @@ Data table sort styles
     .#{$prefix}--table-sort {
     display: inline-block;
     height: rem(64px);
-  }
-
-  .#{$prefix}--data-table--tall.#{$prefix}--data-table--sort
-    th
-    .#{$prefix}--table-sort__flex {
-    align-items: flex-start;
   }
 
   .#{$prefix}--data-table--tall .#{$prefix}--table-sort__icon-unsorted,
@@ -22307,6 +22332,10 @@ Search styles
       vertical-align: middle;
       fill: currentColor;
     }
+  }
+
+  .#{$prefix}--search-close svg {
+    fill: inherit;
   }
 
   .#{$prefix}--search-close,

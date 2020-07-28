@@ -30,6 +30,7 @@ function CodeSnippet({
   light,
   showMoreText,
   showLessText,
+  hideCopyButton,
   ...rest
 }) {
   const [expandedCode, setExpandedCode] = useState(false);
@@ -52,11 +53,20 @@ function CodeSnippet({
     [`${prefix}--snippet--${type}`]: type,
     [`${prefix}--snippet--expand`]: expandedCode,
     [`${prefix}--snippet--light`]: light,
+    [`${prefix}--snippet--no-copy`]: hideCopyButton,
   });
 
   const expandCodeBtnText = expandedCode ? showLessText : showMoreText;
 
   if (type === 'inline') {
+    if (hideCopyButton) {
+      return (
+        <span className={codeSnippetClasses}>
+          <code id={uid}>{children}</code>
+        </span>
+      );
+    }
+
     return (
       <Copy
         {...rest}
@@ -81,11 +91,13 @@ function CodeSnippet({
           <pre ref={codeContentRef}>{children}</pre>
         </code>
       </div>
-      <CopyButton
-        onClick={onClick}
-        feedback={feedback}
-        iconDescription={copyButtonDescription}
-      />
+      {!hideCopyButton && (
+        <CopyButton
+          onClick={onClick}
+          feedback={feedback}
+          iconDescription={copyButtonDescription}
+        />
+      )}
       {shouldShowMoreLessBtn && (
         <Button
           kind="ghost"
@@ -168,6 +180,11 @@ CodeSnippet.propTypes = {
    * typically used for inline snippet to display an alternate color
    */
   light: PropTypes.bool,
+
+  /**
+   * Specify whether or not a copy button should be used/rendered.
+   */
+  hideCopyButton: PropTypes.bool,
 };
 
 CodeSnippet.defaultProps = {
