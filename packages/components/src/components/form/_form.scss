@@ -63,17 +63,23 @@
     font-family: carbon--font-family('mono');
   }
 
-  input[data-invalid],
-  .#{$prefix}--text-input__field-wrapper[data-invalid],
+  input[data-invalid]:not(:focus),
+  .#{$prefix}--number[data-invalid] input[type='number']:not(:focus),
+  .#{$prefix}--text-input__field-wrapper[data-invalid]
+    > .#{$prefix}--text-input--invalid:not(:focus),
   .#{$prefix}--text-area__wrapper[data-invalid]
-    > .#{$prefix}--text-area--invalid,
-  .#{$prefix}--select-input__wrapper[data-invalid],
-  .#{$prefix}--list-box[data-invalid],
-  .#{$prefix}--combo-box[data-invalid] .#{$prefix}--text-input {
+    > .#{$prefix}--text-area--invalid:not(:focus),
+  .#{$prefix}--select-input__wrapper[data-invalid]
+    .#{$prefix}--select-input:not(:focus),
+  .#{$prefix}--list-box[data-invalid]:not(:focus),
+  .#{$prefix}--combo-box[data-invalid] .#{$prefix}--text-input:not(:focus) {
     @include focus-outline('invalid');
   }
 
   input[data-invalid],
+  .#{$prefix}--number[data-invalid] .#{$prefix}--number__input-wrapper,
+  .#{$prefix}--date-picker-input__wrapper,
+  .#{$prefix}--time-picker--invalid,
   .#{$prefix}--text-input__field-wrapper[data-invalid],
   .#{$prefix}--text-input--warn,
   .#{$prefix}--text-area__wrapper[data-invalid],
@@ -83,10 +89,15 @@
     ~ .#{$prefix}--form-requirement {
       display: block;
       max-height: rem(200px);
+      overflow: visible;
+      font-weight: 400;
     }
   }
 
   input[data-invalid],
+  .#{$prefix}--number[data-invalid] .#{$prefix}--number__input-wrapper,
+  .#{$prefix}--date-picker-input__wrapper,
+  .#{$prefix}--time-picker--invalid,
   .#{$prefix}--text-input__field-wrapper[data-invalid],
   .#{$prefix}--text-area__wrapper[data-invalid],
   .#{$prefix}--select-input__wrapper[data-invalid],
