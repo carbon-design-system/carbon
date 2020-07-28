@@ -3383,10 +3383,8 @@ $carbon--spacing-02: 0.25rem;
   - `spacing-02`
 - **Used by**:
   - [checkbox [mixin]](#checkbox-mixin)
-  - [date-picker [mixin]](#date-picker-mixin)
   - [form [mixin]](#form-mixin)
   - [inline-notifications [mixin]](#inline-notifications-mixin)
-  - [number-input [mixin]](#number-input-mixin)
   - [pseudo-underline [mixin]](#pseudo-underline-mixin)
   - [tags [mixin]](#tags-mixin)
   - [tooltip [mixin]](#tooltip-mixin)
@@ -6998,7 +6996,6 @@ $text-05: if(
 - **Type**: `{undefined}`
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
-  - [combo-box [mixin]](#combo-box-mixin)
   - [date-picker [mixin]](#date-picker-mixin)
   - [search [mixin]](#search-mixin)
   - [time-picker [mixin]](#time-picker-mixin)
@@ -7025,11 +7022,9 @@ $text-error: if(
 - **Type**: `{undefined}`
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
-  - [date-picker [mixin]](#date-picker-mixin)
   - [dropdown [mixin]](#dropdown-mixin)
   - [file-uploader [mixin]](#file-uploader-mixin)
   - [form [mixin]](#form-mixin)
-  - [number-input [mixin]](#number-input-mixin)
 
 ### ✅icon-01 [variable]
 
@@ -8202,7 +8197,6 @@ $disabled-02: if(
   - [button-base [mixin]](#button-base-mixin)
   - [button-theme [mixin]](#button-theme-mixin)
   - [checkbox [mixin]](#checkbox-mixin)
-  - [combo-box [mixin]](#combo-box-mixin)
   - [content-switcher [mixin]](#content-switcher-mixin)
   - [date-picker [mixin]](#date-picker-mixin)
   - [dropdown [mixin]](#dropdown-mixin)
@@ -14527,6 +14521,15 @@ Code snippet styles
     padding: 0 $spacing-03;
   }
 
+  .#{$prefix}--snippet--inline.#{$prefix}--snippet--no-copy {
+    display: inline-block;
+
+    &:hover {
+      background-color: $ui-01;
+      cursor: auto;
+    }
+  }
+
   // Single Line Snippet
   .#{$prefix}--snippet--single {
     @include bx--snippet;
@@ -14534,8 +14537,15 @@ Code snippet styles
     min-width: rem(320px);
     max-width: rem(760px);
     height: $carbon--spacing-08;
-    padding: 0 $carbon--spacing-08 0 0;
-    border: none;
+    padding-right: $carbon--spacing-08;
+  }
+
+  .#{$prefix}--snippet--single.#{$prefix}--snippet--no-copy {
+    padding: 0;
+
+    &::after {
+      right: $carbon--spacing-05;
+    }
   }
 
   .#{$prefix}--snippet--single .#{$prefix}--snippet-container {
@@ -14577,7 +14587,6 @@ Code snippet styles
     min-width: rem(320px);
     max-width: 100%;
     padding: $carbon--spacing-05;
-    border: none;
   }
 
   //closed snippet container
@@ -14602,6 +14611,12 @@ Code snippet styles
     padding-right: $carbon--spacing-08;
     padding-bottom: rem(24px);
     overflow-x: scroll;
+  }
+
+  .#{$prefix}--snippet--multi.#{$prefix}--snippet--no-copy
+    .#{$prefix}--snippet-container
+    pre {
+    padding-right: 0;
   }
 
   // expanded pre
@@ -14911,7 +14926,6 @@ Code snippet base styles
   width: 100%;
   max-width: rem(600px);
   background: $snippet-background-color;
-  border: 1px solid $snippet-border-color;
 }
 ```
 
@@ -14932,18 +14946,8 @@ Combo box styles
 
 ```scss
 @mixin combo-box() {
-  .#{$prefix}--combo-box .#{$prefix}--text-input {
-    &::placeholder {
-      color: $text-05;
-    }
-
-    &[disabled]::placeholder {
-      color: $disabled-02;
-    }
-
-    &::-ms-clear {
-      display: none;
-    }
+  .#{$prefix}--combo-box .#{$prefix}--text-input::-ms-clear {
+    display: none;
   }
 
   .#{$prefix}--combo-box.#{$prefix}--list-box--expanded
@@ -14966,8 +14970,6 @@ Combo box styles
 - **Group**: [combo-box](#combo-box)
 - **Requires**:
   - [prefix [variable]](#prefix-variable)
-  - [text-05 [variable]](#text-05-variable)
-  - [disabled-02 [variable]](#disabled-02-variable)
   - [ui-03 [variable]](#ui-03-variable)
 
 ## content-switcher
@@ -17037,19 +17039,6 @@ Date picker styles
     position: relative;
     display: flex;
     align-items: center;
-
-    ~ .#{$prefix}--form-requirement {
-      display: block;
-      max-height: rem(200px);
-      margin-top: $carbon--spacing-02;
-      overflow: visible;
-      color: $text-error;
-      font-weight: 400;
-
-      &::before {
-        display: none;
-      }
-    }
   }
 
   .#{$prefix}--date-picker.#{$prefix}--date-picker--simple {
@@ -17088,11 +17077,6 @@ Date picker styles
     &:focus,
     &.#{$prefix}--focused {
       @include focus-outline('outline');
-    }
-
-    &[data-invalid],
-    &[data-invalid]:focus {
-      @include focus-outline('invalid');
     }
 
     &:disabled {
@@ -17182,8 +17166,6 @@ Date picker styles
 - **Requires**:
   - [prefix [variable]](#prefix-variable)
   - [field-02 [variable]](#field-02-variable)
-  - [carbon--spacing-02 [variable]](#carbon--spacing-02-variable)
-  - [text-error [variable]](#text-error-variable)
   - [carbon--spacing-05 [variable]](#carbon--spacing-05-variable)
   - [text-01 [variable]](#text-01-variable)
   - [field-01 [variable]](#field-01-variable)
@@ -18048,17 +18030,23 @@ Form styles
     font-family: carbon--font-family('mono');
   }
 
-  input[data-invalid],
-  .#{$prefix}--text-input__field-wrapper[data-invalid],
+  input[data-invalid]:not(:focus),
+  .#{$prefix}--number[data-invalid] input[type='number']:not(:focus),
+  .#{$prefix}--text-input__field-wrapper[data-invalid]
+    > .#{$prefix}--text-input--invalid:not(:focus),
   .#{$prefix}--text-area__wrapper[data-invalid]
-    > .#{$prefix}--text-area--invalid,
-  .#{$prefix}--select-input__wrapper[data-invalid],
-  .#{$prefix}--list-box[data-invalid],
-  .#{$prefix}--combo-box[data-invalid] .#{$prefix}--text-input {
+    > .#{$prefix}--text-area--invalid:not(:focus),
+  .#{$prefix}--select-input__wrapper[data-invalid]
+    .#{$prefix}--select-input:not(:focus),
+  .#{$prefix}--list-box[data-invalid]:not(:focus),
+  .#{$prefix}--combo-box[data-invalid] .#{$prefix}--text-input:not(:focus) {
     @include focus-outline('invalid');
   }
 
   input[data-invalid],
+  .#{$prefix}--number[data-invalid] .#{$prefix}--number__input-wrapper,
+  .#{$prefix}--date-picker-input__wrapper,
+  .#{$prefix}--time-picker--invalid,
   .#{$prefix}--text-input__field-wrapper[data-invalid],
   .#{$prefix}--text-input--warn,
   .#{$prefix}--text-area__wrapper[data-invalid],
@@ -18068,10 +18056,15 @@ Form styles
     ~ .#{$prefix}--form-requirement {
       display: block;
       max-height: rem(200px);
+      overflow: visible;
+      font-weight: 400;
     }
   }
 
   input[data-invalid],
+  .#{$prefix}--number[data-invalid] .#{$prefix}--number__input-wrapper,
+  .#{$prefix}--date-picker-input__wrapper,
+  .#{$prefix}--time-picker--invalid,
   .#{$prefix}--text-input__field-wrapper[data-invalid],
   .#{$prefix}--text-area__wrapper[data-invalid],
   .#{$prefix}--select-input__wrapper[data-invalid],
@@ -20544,17 +20537,6 @@ Number input styles
     position: relative;
     display: flex;
     align-items: center;
-
-    ~ .#{$prefix}--form-requirement {
-      margin-top: $carbon--spacing-02;
-      overflow: visible;
-      color: $text-error;
-      font-weight: 400;
-
-      &::before {
-        display: none;
-      }
-    }
   }
 
   .#{$prefix}--number__controls {
@@ -20615,17 +20597,6 @@ Number input styles
 
   .#{$prefix}--number--readonly .#{$prefix}--number__control-btn {
     display: none;
-  }
-
-  .#{$prefix}--number[data-invalid] {
-    .#{$prefix}--form-requirement {
-      display: inline-block;
-      max-height: rem(200px);
-    }
-
-    input[type='number'] {
-      @include focus-outline('invalid');
-    }
   }
 
   .#{$prefix}--number__invalid {
@@ -20765,8 +20736,6 @@ Number input styles
   - [text-01 [variable]](#text-01-variable)
   - [field-01 [variable]](#field-01-variable)
   - [ui-04 [variable]](#ui-04-variable)
-  - [carbon--spacing-02 [variable]](#carbon--spacing-02-variable)
-  - [text-error [variable]](#text-error-variable)
   - [icon-01 [variable]](#icon-01-variable)
   - [support-01 [variable]](#support-01-variable)
   - [field-02 [variable]](#field-02-variable)
@@ -22546,18 +22515,6 @@ Select styles
     padding-right: carbon--mini-units(10);
   }
 
-  .#{$prefix}--select-input__wrapper[data-invalid] .#{$prefix}--select-input,
-  .#{$prefix}--select-input__wrapper[data-invalid]
-    .#{$prefix}--select-input:focus {
-    @include focus-outline('invalid');
-  }
-
-  .#{$prefix}--form-requirement {
-    display: block;
-    overflow: visible;
-    font-weight: 400;
-  }
-
   .#{$prefix}--select-input:disabled ~ .#{$prefix}--select__arrow {
     fill: $disabled-02;
   }
@@ -23765,8 +23722,6 @@ Text area styles
   .#{$prefix}--text-area::placeholder {
     @include placeholder-colors;
     @include type-style('body-long-01');
-
-    opacity: 1;
   }
 
   .#{$prefix}--text-area--light {
@@ -24070,6 +24025,23 @@ Text input styles
     background: $field-02;
   }
 
+  .#{$prefix}--form--fluid
+    .#{$prefix}--text-input__field-wrapper[data-invalid]
+    > .#{$prefix}--text-input--invalid {
+    @include focus-outline('reset');
+  }
+
+  .#{$prefix}--form--fluid
+    .#{$prefix}--text-input__field-wrapper[data-invalid]:not(:focus) {
+    @include focus-outline('invalid');
+  }
+
+  .#{$prefix}--form--fluid
+    .#{$prefix}--text-input__field-wrapper[data-invalid]
+    > .#{$prefix}--text-input--invalid:focus {
+    @include focus-outline('outline');
+  }
+
   //-----------------------------
   // Inline Text Input
   //-----------------------------
@@ -24348,10 +24320,6 @@ Time picker styles
   .#{$prefix}--time-picker {
     display: flex;
     align-items: flex-end;
-  }
-
-  .#{$prefix}--time-picker[data-invalid] .#{$prefix}--time-picker__input-field {
-    @include focus-outline('invalid');
   }
 
   .#{$prefix}--time-picker__select {
