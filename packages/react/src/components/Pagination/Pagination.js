@@ -322,7 +322,7 @@ export default class Pagination extends Component {
               ? pageText(statePage)
               : pageRangeText(statePage, totalPages)}
           </span>
-          <div className={`${prefix}--pagination__controll-buttons`}>
+          <div className={`${prefix}--pagination__control-buttons`}>
             <Button
               kind="ghost"
               className={backButtonClasses}
