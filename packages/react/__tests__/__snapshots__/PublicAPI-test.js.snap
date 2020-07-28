@@ -286,6 +286,9 @@ Map {
       "feedback": Object {
         "type": "string",
       },
+      "hideCopyButton": Object {
+        "type": "bool",
+      },
       "light": Object {
         "type": "bool",
       },
