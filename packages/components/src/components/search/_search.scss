@@ -32,7 +32,7 @@
 
   .#{$prefix}--search-input {
     @include reset;
-    @include type-style('body-short-02');
+    @include type-style('body-short-01');
     @include focus-outline('reset');
 
     order: 1;
@@ -82,20 +82,14 @@
   }
 
   .#{$prefix}--search--sm .#{$prefix}--search-input {
-    @include type-style('body-short-01');
-
     height: rem(32px);
   }
 
   .#{$prefix}--search--lg .#{$prefix}--search-input {
-    @include type-style('body-short-02');
-
     height: rem(40px);
   }
 
   .#{$prefix}--search--xl .#{$prefix}--search-input {
-    @include type-style('body-short-02');
-
     height: rem(48px);
     padding: 0 rem(64px) 0 rem(48px);
   }
@@ -103,20 +97,13 @@
   .#{$prefix}--search-magnifier {
     position: absolute;
     top: 50%;
-    left: 0.75rem;
+    left: $spacing-05;
     z-index: 2;
     width: rem(16px);
     height: rem(16px);
     transform: translateY(-50%);
     pointer-events: none;
     fill: $icon-02;
-  }
-
-  .#{$prefix}--search--xl .#{$prefix}--search-magnifier {
-    left: rem(24px);
-    width: rem(20px);
-    height: rem(20px);
-    transform: translate(-50%, -50%);
   }
 
   .#{$prefix}--search-close {
