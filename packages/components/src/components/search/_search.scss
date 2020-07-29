@@ -81,17 +81,32 @@
     background: $field-02;
   }
 
+  // Small styles
   .#{$prefix}--search--sm .#{$prefix}--search-input {
     height: rem(32px);
+    // 8px padding on either side of icon + 16px icon (32px)
+    padding: 0 $spacing-07;
   }
 
+  .#{$prefix}--search--sm .#{$prefix}--search-magnifier {
+    left: rem(8px);
+  }
+
+  // Large styles
   .#{$prefix}--search--lg .#{$prefix}--search-input {
     height: rem(40px);
+    // 12px padding on either side of icon + 16px icon (40px)
+    padding: 0 $spacing-08;
+  }
+
+  .#{$prefix}--search--lg .#{$prefix}--search-magnifier {
+    left: rem(12px);
   }
 
   .#{$prefix}--search--xl .#{$prefix}--search-input {
     height: rem(48px);
-    padding: 0 rem(64px) 0 rem(48px);
+    // 16px padding on either side of icon + 16px icon (48px)
+    padding: 0 $spacing-09;
   }
 
   .#{$prefix}--search-magnifier {
