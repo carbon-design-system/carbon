@@ -24,10 +24,6 @@
     align-items: flex-end;
   }
 
-  .#{$prefix}--time-picker[data-invalid] .#{$prefix}--time-picker__input-field {
-    @include focus-outline('invalid');
-  }
-
   .#{$prefix}--time-picker__select {
     justify-content: center;
 
