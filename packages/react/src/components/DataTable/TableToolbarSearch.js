@@ -100,7 +100,7 @@ const TableToolbarSearch = ({
     }
   };
 
-  const searchExpanded = expanded || persistent || persistant;
+  const searchExpanded = expanded || persistent;
 
   return (
     // eslint-disable-next-line jsx-a11y/no-static-element-interactions
