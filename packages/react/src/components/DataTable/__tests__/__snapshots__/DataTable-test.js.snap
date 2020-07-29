@@ -2017,6 +2017,17 @@ exports[`DataTable should render 1`] = `
             <div
               className="bx--batch-actions"
             >
+              <div
+                className="bx--batch-summary"
+              >
+                <p
+                  className="bx--batch-summary__para"
+                >
+                  <span>
+                    0 item selected
+                  </span>
+                </p>
+              </div>
               <TableActionList>
                 <div
                   className="bx--action-list"
@@ -2248,17 +2259,6 @@ exports[`DataTable should render 1`] = `
                   </Button>
                 </div>
               </TableActionList>
-              <div
-                className="bx--batch-summary"
-              >
-                <p
-                  className="bx--batch-summary__para"
-                >
-                  <span>
-                    0 item selected
-                  </span>
-                </p>
-              </div>
             </div>
           </TableBatchActions>
           <TableToolbarContent>
@@ -3011,6 +3011,17 @@ exports[`DataTable sticky header should render 1`] = `
             <div
               className="bx--batch-actions"
             >
+              <div
+                className="bx--batch-summary"
+              >
+                <p
+                  className="bx--batch-summary__para"
+                >
+                  <span>
+                    0 item selected
+                  </span>
+                </p>
+              </div>
               <TableActionList>
                 <div
                   className="bx--action-list"
@@ -3242,17 +3253,6 @@ exports[`DataTable sticky header should render 1`] = `
                   </Button>
                 </div>
               </TableActionList>
-              <div
-                className="bx--batch-summary"
-              >
-                <p
-                  className="bx--batch-summary__para"
-                >
-                  <span>
-                    0 item selected
-                  </span>
-                </p>
-              </div>
             </div>
           </TableBatchActions>
           <TableToolbarContent>
