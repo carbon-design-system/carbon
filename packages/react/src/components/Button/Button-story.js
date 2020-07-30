@@ -13,6 +13,9 @@ import { Add16, AddFilled16, Search16 } from '@carbon/icons-react';
 import Button from '../Button';
 import ButtonSkeleton from '../Button/Button.Skeleton';
 import ButtonSet from '../ButtonSet';
+import mdx from './Button.mdx';
+
+const { prefix } = settings;
 
 const icons = {
   None: 'None',
@@ -61,7 +64,13 @@ const props = {
     };
   },
   iconOnly: () => {
-    const iconToUse = iconMap[select('Icon (icon)', icons, 'Add16')];
+    let iconToUse;
+
+    if (iconMap[select('Icon (icon)', icons, 'Add16')] == undefined) {
+      iconToUse = Add16;
+    } else {
+      iconToUse = iconMap[select('Icon (icon)', icons, 'Add16')];
+    }
     return {
       className: 'some-class',
       kind: select(
@@ -124,14 +133,13 @@ const CustomLink = ({ children, href, ...other }) => (
 export default {
   title: 'Button',
   decorators: [withKnobs],
-  includeStories: ['IconOnlyButtons'],
-
   parameters: {
     component: Button,
-    includeStories: ['_Default'],
-
     subcomponents: {
       ButtonSkeleton,
+    },
+    docs: {
+      page: mdx,
     },
   },
 };
@@ -195,15 +203,13 @@ _Default.story = {
   },
 };
 
-export const IconOnlyButtons = () => (
-  <Button {...props.iconOnly()} hasIconOnly />
-);
+export const IconButton = () => <Button {...props.iconOnly()} hasIconOnly />;
 
-IconOnlyButtons.story = {
-  name: 'Icon-only buttons',
+IconButton.story = {
+  name: 'Icon button',
 };
 
-export const SetsOfButtons = () => {
+export const SetOfButtons = () => {
   const setProps = props.set();
   return (
     <div className={`${prefix}--btn-set`}>
@@ -217,8 +223,8 @@ export const SetsOfButtons = () => {
   );
 };
 
-SetsOfButtons.story = {
-  name: 'Sets of Buttons',
+SetOfButtons.story = {
+  name: 'Set of buttons',
 
   parameters: {
     info: {
@@ -240,7 +246,7 @@ export const Skeleton = () => (
 );
 
 Skeleton.story = {
-  name: 'skeleton',
+  name: 'Skeleton',
 
   parameters: {
     info: {

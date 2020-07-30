@@ -1,0 +1,83 @@
+import { Story, Props, Source, Preview } from '@storybook/addon-docs/blocks';
+import { withKnobs, boolean, select, text } from '@storybook/addon-knobs';
+import * as stories from './Button-story.js';
+import Button from '../Button';
+import { Add16, AddFilled16, Search16 } from '@carbon/icons-react';
+
+# Button
+
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+
+## Table of Contents
+
+- [Overview](#overview)
+- [Skeleton state](#skeleton-state)
+- [Component API](#component-api)
+- [References](#references)
+- [Feedback](#feedback)
+
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+
+## Overview
+
+<!--
+This should include the default use-case(s) for a component, at most 2.
+This should be the most common way the component is used.
+It should summarize what this common is for and provide snippets for how
+to accomplish these common use-cases
+-->
+
+<Preview>
+  <Story id="button--default" />
+</Preview>
+
+## Icon-only Buttons
+
+<Preview>
+  <Story id="button--icon-button" />
+</Preview>
+
+## Set of Buttons
+
+<Preview>
+  <Story id="button--set-of-buttons" />
+</Preview>
+
+## Skeleton state
+
+<!--
+Each use-case of this component becomes its own section. For example,
+if an accordion had a skeleton then you would name this section Skeleton.
+
+If the component had a specific piece of functionality or behavior, like
+how you can sort with a Data Table, then Sorting would be the name of this
+section.
+
+This section should include an explainer for the use-case and when to use it,
+along with a code snippet that someone could bring into their project.
+-->
+
+You can use the `ButtonSkeleton` component to render a skeleton variant of a
+button. This is useful to display on initial page load to indicate tousers that
+content is being loaded.
+
+<Preview>
+  <Story id="button--skeleton" />
+</Preview>
+
+## Component API
+
+<Props />
+
+## References
+
+<!--
+A place for references, links, or a way clarify points made earlier
+in the documentation.
+-->
+
+## Feedback
+
+Help us improve these docs by
+[editing this file on GitHub](https://github.com/carbon-design-system/carbon/edit/master/packages/react/src/components/Accordion/Accordion.stories.mdx)
