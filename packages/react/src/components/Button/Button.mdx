@@ -21,12 +21,10 @@ import { Add16, AddFilled16, Search16 } from '@carbon/icons-react';
 
 ## Overview
 
-<!--
-This should include the default use-case(s) for a component, at most 2.
-This should be the most common way the component is used.
-It should summarize what this common is for and provide snippets for how
-to accomplish these common use-cases
--->
+Buttons are clickable elements that are used to trigger actions. They
+communicate calls to action to the user and allow users to interact with pages
+in a variety of ways. Button labels express what action will occur when the user
+interacts with it.
 
 <Preview>
   <Story id="button--default" />
@@ -34,11 +32,22 @@ to accomplish these common use-cases
 
 ## Icon-only Buttons
 
+Icon buttons allow users to take actions, and make choices, with a single tap.
+Icon buttons can take the form of any of the five types (Primary, Secondary,
+Tertiary, Danger and Ghost) but most commonly will be styled as primary or ghost
+buttons.
+
 <Preview>
   <Story id="button--icon-button" />
 </Preview>
 
 ## Set of Buttons
+
+When an action required by the user has more than one option, always use a a
+negative action button (secondary) paired with a positive action button
+(primary) in that order. Negative action buttons will be on the left. Positive
+action buttons should be on the right. When these two types buttons are paired
+in the correct order, they will automatically space themselves apart.
 
 <Preview>
   <Story id="button--set-of-buttons" />
