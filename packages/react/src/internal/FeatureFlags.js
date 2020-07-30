@@ -5,6 +5,10 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+import { addFeatureFlag, featureFlagEnabled } from '@carbon/feature-flags';
+
+addFeatureFlag('useControlledStateWithValue', false);
+
 /**
  * This file contains the list of the default values of compile-time feature flags.
  *
@@ -44,4 +48,6 @@
  *   * `rest` tells you additional information based on the source component
  * * _Without_ this feature flag the event handler has component-specific signature, e.g. `onChange(event, direction)`.
  */
-export const useControlledStateWithValue = false;
+export const useControlledStateWithValue = featureFlagEnabled(
+  'useControlledStateWithValue'
+);
