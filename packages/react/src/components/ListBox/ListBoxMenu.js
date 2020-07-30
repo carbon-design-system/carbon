@@ -9,7 +9,6 @@ import React from 'react';
 import { settings } from 'carbon-components';
 import PropTypes from 'prop-types';
 import ListBoxMenuItem from './ListBoxMenuItem';
-import childrenOfType from '../../prop-types/childrenOfType';
 
 const { prefix } = settings;
 
@@ -39,7 +38,10 @@ ListBoxMenu.propTypes = {
   /**
    * Provide the contents of your ListBoxMenu
    */
-  children: childrenOfType(ListBoxMenuItem),
+  children: PropTypes.oneOfType([
+    PropTypes.arrayOf(ListBoxMenuItem),
+    PropTypes.bool, // used in Dropdown for closed state
+  ]),
 
   /**
    * Specify a custom `id`
