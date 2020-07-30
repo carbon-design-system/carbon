@@ -399,6 +399,10 @@
     color: $text-04;
   }
 
+  .#{$prefix}--action-list .#{$prefix}--btn:disabled {
+    color: $disabled-03;
+  }
+
   .#{$prefix}--action-list .#{$prefix}--btn .#{$prefix}--btn__icon {
     position: static;
     margin-left: $spacing-03;
