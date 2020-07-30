@@ -7,5 +7,5 @@
 
 feature-flags:
   - name: enable-css-custom-properties
-    description: Describe what the flag does
+    description: Emit CSS Custom Properties for theme tokens
     enabled: false
