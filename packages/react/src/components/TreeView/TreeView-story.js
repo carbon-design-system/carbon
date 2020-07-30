@@ -16,7 +16,7 @@ import {
   text,
   withKnobs,
 } from '@storybook/addon-knobs';
-import TreeView, { TreeNode } from '../TreeView';
+import UnstableTreeView, { TreeNode } from '../TreeView';
 
 const sizes = {
   default: 'default',
@@ -250,8 +250,10 @@ function renderTree({ nodes, withIcons = false }) {
 storiesOf('TreeView', module)
   .addDecorator(withKnobs)
   .add('default', () => (
-    <TreeView {...props()}>{renderTree({ nodes })}</TreeView>
+    <UnstableTreeView {...props()}>{renderTree({ nodes })}</UnstableTreeView>
   ))
   .add('with icons', () => (
-    <TreeView {...props()}>{renderTree({ nodes, withIcons: true })}</TreeView>
+    <UnstableTreeView {...props()}>
+      {renderTree({ nodes, withIcons: true })}
+    </UnstableTreeView>
   ));
