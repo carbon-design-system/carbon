@@ -3769,6 +3769,7 @@ $spacing-05: $carbon--spacing-05;
   - [data-table-sort [mixin]](#data-table-sort-mixin)
   - [modal [mixin]](#modal-mixin)
   - [pagination [mixin]](#pagination-mixin)
+  - [search [mixin]](#search-mixin)
   - [select [mixin]](#select-mixin)
   - [tabs [mixin]](#tabs-mixin)
   - [carbon-switcher [mixin]](#carbon-switcher-mixin)
@@ -3809,6 +3810,7 @@ $spacing-07: $carbon--spacing-07;
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
   - [modal [mixin]](#modal-mixin)
+  - [search [mixin]](#search-mixin)
   - [select [mixin]](#select-mixin)
   - [carbon-switcher [mixin]](#carbon-switcher-mixin)
 
@@ -3829,6 +3831,7 @@ $spacing-08: $carbon--spacing-08;
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
   - [dropdown [mixin]](#dropdown-mixin)
+  - [search [mixin]](#search-mixin)
 
 ### ✅spacing-09 [variable]
 
@@ -3848,6 +3851,7 @@ $spacing-09: $carbon--spacing-09;
   - [carbon--theme [mixin]](#carbon--theme-mixin)
   - [data-table-v2-action [mixin]](#data-table-v2-action-mixin)
   - [modal [mixin]](#modal-mixin)
+  - [search [mixin]](#search-mixin)
   - [select [mixin]](#select-mixin)
   - [tabs [mixin]](#tabs-mixin)
   - [carbon-side-nav [mixin]](#carbon-side-nav-mixin)
@@ -22176,7 +22180,7 @@ Search styles
 
   .#{$prefix}--search-input {
     @include reset;
-    @include type-style('body-short-02');
+    @include type-style('body-short-01');
     @include focus-outline('reset');
 
     order: 1;
@@ -22225,42 +22229,44 @@ Search styles
     background: $field-02;
   }
 
+  // Small styles
   .#{$prefix}--search--sm .#{$prefix}--search-input {
-    @include type-style('body-short-01');
-
     height: rem(32px);
+    // 8px padding on either side of icon + 16px icon (32px)
+    padding: 0 $spacing-07;
   }
 
-  .#{$prefix}--search--lg .#{$prefix}--search-input {
-    @include type-style('body-short-02');
+  .#{$prefix}--search--sm .#{$prefix}--search-magnifier {
+    left: rem(8px);
+  }
 
+  // Large styles
+  .#{$prefix}--search--lg .#{$prefix}--search-input {
     height: rem(40px);
+    // 12px padding on either side of icon + 16px icon (40px)
+    padding: 0 $spacing-08;
+  }
+
+  .#{$prefix}--search--lg .#{$prefix}--search-magnifier {
+    left: rem(12px);
   }
 
   .#{$prefix}--search--xl .#{$prefix}--search-input {
-    @include type-style('body-short-02');
-
     height: rem(48px);
-    padding: 0 rem(64px) 0 rem(48px);
+    // 16px padding on either side of icon + 16px icon (48px)
+    padding: 0 $spacing-09;
   }
 
   .#{$prefix}--search-magnifier {
     position: absolute;
     top: 50%;
-    left: 0.75rem;
+    left: $spacing-05;
     z-index: 2;
     width: rem(16px);
     height: rem(16px);
     transform: translateY(-50%);
     pointer-events: none;
     fill: $icon-02;
-  }
-
-  .#{$prefix}--search--xl .#{$prefix}--search-magnifier {
-    left: rem(24px);
-    width: rem(20px);
-    height: rem(20px);
-    transform: translate(-50%, -50%);
   }
 
   .#{$prefix}--search-close {
@@ -22406,6 +22412,10 @@ Search styles
   - [ui-04 [variable]](#ui-04-variable)
   - [text-05 [variable]](#text-05-variable)
   - [field-02 [variable]](#field-02-variable)
+  - [spacing-07 [variable]](#spacing-07-variable)
+  - [spacing-08 [variable]](#spacing-08-variable)
+  - [spacing-09 [variable]](#spacing-09-variable)
+  - [spacing-05 [variable]](#spacing-05-variable)
   - [icon-02 [variable]](#icon-02-variable)
   - [hover-field [variable]](#hover-field-variable)
   - [carbon--spacing-01 [variable]](#carbon--spacing-01-variable)
