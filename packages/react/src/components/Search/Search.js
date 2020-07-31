@@ -8,7 +8,7 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import classNames from 'classnames';
-import { Search16, Close16, Close20 } from '@carbon/icons-react';
+import { Search16, Close16 } from '@carbon/icons-react';
 import { settings } from 'carbon-components';
 import deprecate from '../../prop-types/deprecate';
 
@@ -162,8 +162,6 @@ export default class Search extends Component {
       [`${prefix}--search-close--hidden`]: !hasContent,
     });
 
-    const CloseIconX = size === 'xl' ? Close20 : Close16;
-
     const searchId = `${id}-search`;
 
     return (
@@ -190,7 +188,7 @@ export default class Search extends Component {
           onClick={this.clearInput}
           type="button"
           aria-label={closeButtonLabelText}>
-          <CloseIconX />
+          <Close16 />
         </button>
       </div>
     );
