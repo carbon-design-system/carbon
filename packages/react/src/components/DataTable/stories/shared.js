@@ -13,7 +13,9 @@ export const initialRows = [
     name: 'Load Balancer 3',
     protocol: 'HTTP',
     port: 3000,
-    rule: 'Round robin',
+    rule: {
+      name: 'Round robin',
+    },
     attached_groups: 'Kevin’s VM Groups',
     status: 'Disabled',
   },
@@ -22,7 +24,9 @@ export const initialRows = [
     name: 'Load Balancer 1',
     protocol: 'HTTP',
     port: 443,
-    rule: 'Round robin',
+    rule: {
+      name: 'Round robin',
+    },
     attached_groups: 'Maureen’s VM Groups',
     status: 'Starting',
   },
@@ -31,7 +35,9 @@ export const initialRows = [
     name: 'Load Balancer 2',
     protocol: 'HTTP',
     port: 80,
-    rule: 'DNS delegation',
+    rule: {
+      name: 'DNS delegation',
+    },
     attached_groups: 'Andrew’s VM Groups',
     status: 'Active',
   },
@@ -40,7 +46,9 @@ export const initialRows = [
     name: 'Load Balancer 6',
     protocol: 'HTTP',
     port: 3000,
-    rule: 'Round robin',
+    rule: {
+      name: 'Round robin',
+    },
     attached_groups: 'Marc’s VM Groups',
     status: 'Disabled',
   },
@@ -49,7 +57,9 @@ export const initialRows = [
     name: 'Load Balancer 4',
     protocol: 'HTTP',
     port: 443,
-    rule: 'Round robin',
+    rule: {
+      name: 'Round robin',
+    },
     attached_groups: 'Mel’s VM Groups',
     status: 'Starting',
   },
@@ -58,7 +68,9 @@ export const initialRows = [
     name: 'Load Balancer 5',
     protocol: 'HTTP',
     port: 80,
-    rule: 'DNS delegation',
+    rule: {
+      name: 'DNS delegation',
+    },
     attached_groups: 'Ronja’s VM Groups',
     status: 'Active',
   },
@@ -78,7 +90,7 @@ export const headers = [
     header: 'Port',
   },
   {
-    key: 'rule',
+    key: 'rule.name',
     header: 'Rule',
   },
   {

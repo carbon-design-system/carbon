@@ -15,26 +15,32 @@ describe('normalize', () => {
     mockRows = [
       {
         id: 'a',
-        fieldA: 'fieldA',
+        fieldA: {
+          deepFieldA: 'fieldA',
+        },
         fieldB: 'fieldB',
         fieldC: 'fieldC',
       },
       {
         id: 'b',
-        fieldA: 'fieldA',
+        fieldA: {
+          deepFieldA: 'fieldA',
+        },
         fieldB: 'fieldB',
         fieldC: 'fieldC',
       },
       {
         id: 'c',
-        fieldA: 'fieldA',
+        fieldA: {
+          deepFieldA: 'fieldA',
+        },
         fieldB: 'fieldB',
         fieldC: 'fieldC',
       },
     ];
     mockHeaders = [
       {
-        key: 'fieldA',
+        key: 'fieldA.deepFieldA',
         header: 'Field A',
       },
       {

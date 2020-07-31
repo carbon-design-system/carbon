@@ -202,19 +202,19 @@ example:
 const rows = [
   {
     id: 'a',
-    foo: 'Foo a',
+    foo: { deepFoo: 'Foo a' },
     bar: 'Bar a',
     baz: 'Baz a',
   },
   {
     id: 'b',
-    foo: 'Foo b',
+    foo: { deepFoo: 'Foo b' },
     bar: 'Bar b',
     baz: 'Baz b',
   },
   {
     id: 'c',
-    foo: 'Foo c',
+    foo: { deepFoo: 'Foo c' },
     bar: 'Bar c',
     baz: 'Baz c',
   },
@@ -224,7 +224,7 @@ const rows = [
 const headers = [
   {
     // `key` is the name of the field on the row object itself for the header
-    key: 'foo',
+    key: 'foo.deepFoo',
     // `header` will be the name you want rendered in the Table Header
     header: 'Foo',
   },

@@ -45,12 +45,14 @@ const normalize = (rows, headers, prevState = {}) => {
       rowsById[row.id].isExpanded = prevRowsByIds[row.id].isExpanded;
     }
 
+    const deep_value = (o, p) => p.split('.').reduce((a, v) => a[v], o);
+
     headers.forEach(({ key }, i) => {
       const id = getCellId(row.id, key);
       // Initialize the cell info and state values, namely for editing
       cellsById[id] = {
         id,
-        value: row[key],
+        value: deep_value(row, key),
         isEditable: false,
         isEditing: false,
         isValid: true,
