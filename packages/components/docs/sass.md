@@ -24299,6 +24299,10 @@ Tile styles
   .#{$prefix}--tile-input {
     @include hidden;
   }
+
+  .#{$prefix}--tile-input:focus + .#{$prefix}--tile {
+    @include focus-outline('outline');
+  }
 }
 ```
 
