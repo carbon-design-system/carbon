@@ -62,6 +62,8 @@
   .#{$prefix}--data-table--sort th .#{$prefix}--table-sort__flex {
     display: flex;
     align-items: center;
+    justify-content: space-between;
+    width: 100%;
     height: 100%;
     min-height: 3rem;
   }
@@ -111,7 +113,7 @@
   .#{$prefix}--table-sort__icon-unsorted {
     width: rem(20px);
     min-width: $layout-01;
-    margin-right: $spacing-05;
+    margin-right: $spacing-03;
     margin-left: $spacing-03;
     opacity: 0;
     fill: $ui-05;
@@ -140,7 +142,7 @@
   .#{$prefix}--table-sort__icon {
     width: rem(20px);
     min-width: $layout-01;
-    margin-right: $spacing-05;
+    margin-right: $spacing-03;
     margin-left: $spacing-03;
     transform: rotate(0);
     opacity: 1;

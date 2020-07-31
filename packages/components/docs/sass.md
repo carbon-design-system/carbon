@@ -3766,7 +3766,6 @@ $spacing-05: $carbon--spacing-05;
   - [data-table-v2-action [mixin]](#data-table-v2-action-mixin)
   - [data-table-core [mixin]](#data-table-core-mixin)
   - [data-table-expandable [mixin]](#data-table-expandable-mixin)
-  - [data-table-sort [mixin]](#data-table-sort-mixin)
   - [modal [mixin]](#modal-mixin)
   - [pagination [mixin]](#pagination-mixin)
   - [search [mixin]](#search-mixin)
@@ -16878,6 +16877,8 @@ Data table sort styles
   .#{$prefix}--data-table--sort th .#{$prefix}--table-sort__flex {
     display: flex;
     align-items: center;
+    justify-content: space-between;
+    width: 100%;
     height: 100%;
     min-height: 3rem;
   }
@@ -16927,7 +16928,7 @@ Data table sort styles
   .#{$prefix}--table-sort__icon-unsorted {
     width: rem(20px);
     min-width: $layout-01;
-    margin-right: $spacing-05;
+    margin-right: $spacing-03;
     margin-left: $spacing-03;
     opacity: 0;
     fill: $ui-05;
@@ -16956,7 +16957,7 @@ Data table sort styles
   .#{$prefix}--table-sort__icon {
     width: rem(20px);
     min-width: $layout-01;
-    margin-right: $spacing-05;
+    margin-right: $spacing-03;
     margin-left: $spacing-03;
     transform: rotate(0);
     opacity: 1;
@@ -17005,7 +17006,6 @@ Data table sort styles
   - [text-01 [variable]](#text-01-variable)
   - [ui-03 [variable]](#ui-03-variable)
   - [layout-01 [variable]](#layout-01-variable)
-  - [spacing-05 [variable]](#spacing-05-variable)
   - [spacing-03 [variable]](#spacing-03-variable)
   - [ui-05 [variable]](#ui-05-variable)
 
