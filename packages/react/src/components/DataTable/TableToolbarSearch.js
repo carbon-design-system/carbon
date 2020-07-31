@@ -100,10 +100,12 @@ const TableToolbarSearch = ({
     }
   };
 
+  const searchExpanded = expanded || persistent;
+
   return (
     // eslint-disable-next-line jsx-a11y/no-static-element-interactions
     <div
-      tabIndex={expandedState ? '-1' : tabIndex}
+      tabIndex={searchExpanded ? '-1' : tabIndex}
       ref={searchRef}
       onKeyDown={(event) => onClick(event)}
       onClick={(event) => onClick(event)}
@@ -112,11 +114,11 @@ const TableToolbarSearch = ({
       className={searchContainerClasses}>
       <Search
         size="sm"
-        tabIndex={expandedState ? tabIndex : '-1'}
+        tabIndex={searchExpanded ? tabIndex : '-1'}
         className={className}
         value={value}
         id={typeof id !== 'undefined' ? id : uniqueId.toString()}
-        aria-hidden={!expanded}
+        aria-hidden={!searchExpanded}
         labelText={labelText || t('carbon.table.toolbar.search.label')}
         placeHolderText={
           placeHolderText || t('carbon.table.toolbar.search.placeholder')
