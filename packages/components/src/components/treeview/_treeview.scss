@@ -102,7 +102,7 @@
     }
 
     .#{$prefix}--tree-parent-node__toggle-icon {
-      transform: rotate(270deg);
+      transform: rotate(-90deg);
       transition: all $duration--fast-02 motion(standard, productive);
       fill: $icon-01;
     }
