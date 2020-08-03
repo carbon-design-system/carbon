@@ -23,8 +23,8 @@ import { Add16, AddFilled16, Search16 } from '@carbon/icons-react';
 
 Buttons are clickable elements that are used to trigger actions. They
 communicate calls to action to the user and allow users to interact with pages
-in a variety of ways. Button labels express what action will occur when the user
-interacts with it.
+in a variety of ways. `Button` labels express what action will occur when the
+user interacts with it.
 
 <Preview>
   <Story id="button--default" />
@@ -44,7 +44,7 @@ buttons.
 ## Set of Buttons
 
 When an action required by the user has more than one option, always use a a
-negative action button (secondary) paired with a positive action button
+negative action `Button` (secondary) paired with a positive action `Button`
 (primary) in that order. Negative action buttons will be on the left. Positive
 action buttons should be on the right. When these two types buttons are paired
 in the correct order, they will automatically space themselves apart.
@@ -54,18 +54,6 @@ in the correct order, they will automatically space themselves apart.
 </Preview>
 
 ## Skeleton state
-
-<!--
-Each use-case of this component becomes its own section. For example,
-if an accordion had a skeleton then you would name this section Skeleton.
-
-If the component had a specific piece of functionality or behavior, like
-how you can sort with a Data Table, then Sorting would be the name of this
-section.
-
-This section should include an explainer for the use-case and when to use it,
-along with a code snippet that someone could bring into their project.
--->
 
 You can use the `ButtonSkeleton` component to render a skeleton variant of a
 button. This is useful to display on initial page load to indicate tousers that
@@ -78,6 +66,46 @@ content is being loaded.
 ## Component API
 
 <Props />
+
+Additional props passed into `Button` will be forwarded along to the underlying
+button element.
+
+### Button `as`
+
+This prop allows you to specify a different element to be rendered as a
+`Button`.
+
+```jsx
+<Button as="a" href="https://www.carbondesignsystem.com/">
+  Navigate
+</Button>
+```
+
+### Button `className`
+
+The className prop passed into `Button` will be forwarded along to the
+underlying `Button` element. This is useful for specifying a custom class name
+for layout.
+
+```jsx
+<Button className="custom-class">Submit</Button>
+```
+
+### Button `size`
+
+This prop specifies which size the `Button` should be rendered at. Valid values
+are `field`, `small`, and `default`. If no `size` is specified, it renders as
+`default`.
+
+<Button>Submit</Button> <Button size="field">Submit</Button> <Button size="small">
+  Submit
+</Button>
+
+```jsx
+<Button>Submit</Button>
+<Button size="field">Submit</Button>
+<Button size="small">Submit</Button>
+```
 
 ## References
 
