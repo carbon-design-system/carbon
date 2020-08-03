@@ -668,8 +668,10 @@
       @include text-overflow;
 
       max-width: calc(100% - 10px);
-      padding-top: 1rem;
+      // Needed to reduce 1px jump when toggling between variations
+      padding-top: rem(15px);
       padding-bottom: 1rem;
+      overflow-y: hidden;
     }
 
     &.#{$prefix}--data-table--compact th .#{$prefix}--table-header-label {
@@ -680,6 +682,15 @@
     &.#{$prefix}--data-table--short th .#{$prefix}--table-header-label {
       padding-top: rem(8px);
       padding-bottom: 0;
+    }
+
+    &.#{$prefix}--data-table--tall th .#{$prefix}--table-header-label {
+      padding-top: 1rem;
+    }
+
+    &.#{$prefix}--data-table--tall th.#{$prefix}--table-expand {
+      display: flex;
+      align-items: flex-start;
     }
   }
 
