@@ -107,6 +107,7 @@ Button.propTypes = {
     PropTypes.string,
     PropTypes.elementType,
   ]),
+
   /**
    * Specify the content of your Button
    */
@@ -210,6 +211,8 @@ Button.defaultProps = {
   disabled: false,
   kind: 'primary',
   size: 'default',
+  tooltipAlignment: 'center',
+  tooltipPosition: 'top',
 };
 
 export default Button;
