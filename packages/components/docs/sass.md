@@ -2278,6 +2278,7 @@ Generate a media query for the maximum width of the given styles
 - **Group**: [@carbon/layout](#carbonlayout)
 - **Used by**:
   - [carbon--breakpoint-between [mixin]](#carbon--breakpoint-between-mixin)
+  - [pagination [mixin]](#pagination-mixin)
   - [carbon-side-nav [mixin]](#carbon-side-nav-mixin)
 
 ### ✅carbon--breakpoint-between [mixin]
@@ -15536,6 +15537,7 @@ Data table action styles
     height: 100%;
     padding-right: $spacing-06;
     padding-left: $spacing-06;
+    overflow-x: auto;
     background-color: $interactive-01;
     transform: translate3d(0, 48px, 0);
     transition: transform $duration--fast-02 motion(standard, productive), clip-path
@@ -15558,9 +15560,6 @@ Data table action styles
 
   //btns container
   .#{$prefix}--action-list {
-    position: absolute;
-    top: 0;
-    right: 0;
     display: flex;
   }
 
@@ -15636,8 +15635,6 @@ Data table action styles
 
   // items selected text
   .#{$prefix}--batch-summary {
-    position: absolute;
-    left: 0;
     display: flex;
     align-items: center;
     margin-left: $spacing-05;
@@ -15813,9 +15810,11 @@ Data table core styles
   // Container
   //----------------------------------------------------------------------------
   .#{$prefix}--data-table-container {
-    min-width: rem(500px);
     // Allow space for focus styles
     padding-top: $spacing-01;
+  }
+
+  .#{$prefix}--data-table-content {
     overflow-x: auto;
   }
 
@@ -21088,6 +21087,19 @@ Pagination styles
     @include carbon--breakpoint('md') {
       overflow: initial;
     }
+
+    // mobile friendly pagination
+    @include carbon--breakpoint-down('md') {
+      .#{$prefix}--pagination__left > *,
+      .#{$prefix}--pagination__right > * {
+        display: none;
+      }
+
+      .#{$prefix}--pagination__items-count,
+      .#{$prefix}--pagination__control-buttons {
+        display: initial;
+      }
+    }
   }
 
   .#{$prefix}--pagination .#{$prefix}--select {
@@ -21232,6 +21244,7 @@ Pagination styles
 - **Group**: [pagination](#pagination)
 - **Requires**:
   - [carbon--breakpoint [mixin]](#carbon--breakpoint-mixin)
+  - [carbon--breakpoint-down [mixin]](#carbon--breakpoint-down-mixin)
   - [prefix [variable]](#prefix-variable)
   - [ui-01 [variable]](#ui-01-variable)
   - [ui-03 [variable]](#ui-03-variable)
