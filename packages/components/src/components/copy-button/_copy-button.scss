@@ -75,9 +75,6 @@
   }
 
   // TODO: deprecate above styles
-  .#{$prefix}--copy {
-    font-size: 0;
-  }
 
   .#{$prefix}--copy-btn {
     @include reset;
@@ -138,5 +135,10 @@
       .#{$prefix}--copy-btn__feedback {
       animation: $duration--fast-02 motion(standard, productive) show-feedback;
     }
+  }
+
+  // Needs to come after reset so hidden text is not set to font-size: 100%
+  .#{$prefix}--copy {
+    font-size: 0;
   }
 }
