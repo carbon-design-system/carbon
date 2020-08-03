@@ -107,6 +107,10 @@ Button.propTypes = {
     PropTypes.string,
     PropTypes.elementType,
   ]),
+  /**
+   * Specify the content of your Button
+   */
+  children: PropTypes.node,
 
   /**
    * Specify the content of your Button

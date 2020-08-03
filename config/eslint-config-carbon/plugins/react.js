@@ -37,6 +37,9 @@ module.exports = {
     // react-hooks
     'react-hooks/rules-of-hooks': 2,
     'react-hooks/exhaustive-deps': 2,
+
+    // prop-types
+    'react/sort-prop-types': 1,
   },
   overrides: [
     // Sometimes we'll want to define a quick component in a story to use as a
