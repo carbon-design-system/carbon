@@ -42,6 +42,19 @@ $css--helpers: true;
     @include carbon--breakpoint('md') {
       overflow: initial;
     }
+
+    // mobile friendly pagination
+    @include carbon--breakpoint-down('md') {
+      .#{$prefix}--pagination__left > *,
+      .#{$prefix}--pagination__right > * {
+        display: none;
+      }
+
+      .#{$prefix}--pagination__items-count,
+      .#{$prefix}--pagination__control-buttons {
+        display: initial;
+      }
+    }
   }
 
   .#{$prefix}--pagination .#{$prefix}--select {

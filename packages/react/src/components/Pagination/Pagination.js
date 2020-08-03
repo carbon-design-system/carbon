@@ -291,7 +291,8 @@ export default class Pagination extends Component {
               <SelectItem key={size} value={size} text={String(size)} />
             ))}
           </Select>
-          <span className={`${prefix}--pagination__text`}>
+          <span
+            className={`${prefix}--pagination__text ${prefix}--pagination__items-count`}>
             {pagesUnknown
               ? itemText(
                   statePageSize * (statePage - 1) + 1,
@@ -321,28 +322,30 @@ export default class Pagination extends Component {
               ? pageText(statePage)
               : pageRangeText(statePage, totalPages)}
           </span>
-          <Button
-            kind="ghost"
-            className={backButtonClasses}
-            hasIconOnly
-            renderIcon={CaretLeft16}
-            iconDescription={backwardText}
-            tooltipAlignment="center"
-            tooltipPosition="top"
-            onClick={this.decrementPage}
-            disabled={backButtonDisabled}
-          />
-          <Button
-            kind="ghost"
-            className={forwardButtonClasses}
-            hasIconOnly
-            renderIcon={CaretRight16}
-            iconDescription={forwardText}
-            tooltipAlignment="end"
-            tooltipPosition="top"
-            onClick={this.incrementPage}
-            disabled={forwardButtonDisabled || isLastPage}
-          />
+          <div className={`${prefix}--pagination__control-buttons`}>
+            <Button
+              kind="ghost"
+              className={backButtonClasses}
+              hasIconOnly
+              renderIcon={CaretLeft16}
+              iconDescription={backwardText}
+              tooltipAlignment="center"
+              tooltipPosition="top"
+              onClick={this.decrementPage}
+              disabled={backButtonDisabled}
+            />
+            <Button
+              kind="ghost"
+              className={forwardButtonClasses}
+              hasIconOnly
+              renderIcon={CaretRight16}
+              iconDescription={forwardText}
+              tooltipAlignment="end"
+              tooltipPosition="top"
+              onClick={this.incrementPage}
+              disabled={forwardButtonDisabled || isLastPage}
+            />
+          </div>
         </div>
       </div>
     );

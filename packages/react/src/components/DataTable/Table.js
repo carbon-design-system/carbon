@@ -36,9 +36,11 @@ export const Table = ({
     [`${prefix}--data-table--visible-overflow-menu`]: !overflowMenuOnHover,
   });
   const table = (
-    <table {...other} className={componentClass}>
-      {children}
-    </table>
+    <div className={`${prefix}--data-table-content`}>
+      <table {...other} className={componentClass}>
+        {children}
+      </table>
+    </div>
   );
   return stickyHeader ? (
     <section className={`${prefix}--data-table_inner-container`}>
