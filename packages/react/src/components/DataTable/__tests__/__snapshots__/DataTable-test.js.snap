@@ -2278,17 +2278,17 @@ exports[`DataTable should render 1`] = `
                   onClick={[Function]}
                   onFocus={[Function]}
                   onKeyDown={[Function]}
-                  tabIndex="0"
+                  tabIndex="-1"
                 >
                   <Search
-                    aria-hidden={true}
+                    aria-hidden={false}
                     closeButtonLabelText="Clear search input"
                     id="custom-id"
                     labelText="Filter table"
                     onChange={[Function]}
                     placeHolderText="Filter table"
                     size="sm"
-                    tabIndex="-1"
+                    tabIndex="0"
                     type="text"
                     value=""
                   >
@@ -2334,14 +2334,14 @@ exports[`DataTable should render 1`] = `
                         Filter table
                       </label>
                       <input
-                        aria-hidden={true}
+                        aria-hidden={false}
                         autoComplete="off"
                         className="bx--search-input"
                         id="custom-id"
                         onChange={[Function]}
                         placeholder="Filter table"
                         role="searchbox"
-                        tabIndex="-1"
+                        tabIndex="0"
                         type="text"
                         value=""
                       />
@@ -3272,17 +3272,17 @@ exports[`DataTable sticky header should render 1`] = `
                   onClick={[Function]}
                   onFocus={[Function]}
                   onKeyDown={[Function]}
-                  tabIndex="0"
+                  tabIndex="-1"
                 >
                   <Search
-                    aria-hidden={true}
+                    aria-hidden={false}
                     closeButtonLabelText="Clear search input"
                     id="custom-id"
                     labelText="Filter table"
                     onChange={[Function]}
                     placeHolderText="Filter table"
                     size="sm"
-                    tabIndex="-1"
+                    tabIndex="0"
                     type="text"
                     value=""
                   >
@@ -3328,14 +3328,14 @@ exports[`DataTable sticky header should render 1`] = `
                         Filter table
                       </label>
                       <input
-                        aria-hidden={true}
+                        aria-hidden={false}
                         autoComplete="off"
                         className="bx--search-input"
                         id="custom-id"
                         onChange={[Function]}
                         placeholder="Filter table"
                         role="searchbox"
-                        tabIndex="-1"
+                        tabIndex="0"
                         type="text"
                         value=""
                       />
