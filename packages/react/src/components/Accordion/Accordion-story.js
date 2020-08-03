@@ -22,6 +22,7 @@ import {
   AccordionSkeleton,
 } from '../Accordion';
 import Button from '../Button';
+import mdx from './Accordion.mdx';
 
 export default {
   title: 'Accordion',
@@ -31,6 +32,11 @@ export default {
     AccordionSkeleton,
   },
   decorators: [withKnobs],
+  parameters: {
+    docs: {
+      page: mdx,
+    },
+  },
 };
 
 export const accordion = () => (
@@ -52,15 +58,14 @@ export const accordion = () => (
       </p>
     </AccordionItem>
     <AccordionItem title="Section 3 title">
-      <Button>This is a button.</Button>
+      <p>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
+        veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
+        commodo consequat.
+      </p>
     </AccordionItem>
-    <AccordionItem
-      title={
-        <span>
-          Section 4 title (<em>the title can be a node</em>)
-        </span>
-      }
-      {...props}>
+    <AccordionItem title="Section 4 title">
       <p>
         Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
         tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
@@ -71,11 +76,11 @@ export const accordion = () => (
   </Accordion>
 );
 
-export const skeleton = () => (
-  <div style={{ width: '500px' }}>
-    <AccordionSkeleton open count={4} />
-  </div>
-);
+export const skeleton = () => <AccordionSkeleton open count={4} />;
+
+skeleton.story = {
+  decorators: [(story) => <div style={{ width: '500px' }}>{story()}</div>],
+};
 
 const props = {
   onClick: action('onClick'),
