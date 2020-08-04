@@ -1,16 +1,9 @@
-/**
- * @license
- *
- * Copyright IBM Corp. 2019
+/*
+ * Copyright IBM Corp. 2016, 2020
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
- */
-
-/**
- * @param {object} config Plugin configuration.
- * @returns {Plugin} A Flatpickr plugin to put adjust the position of calendar dropdown.
- */
+*/
 export default (config) => (fp) => {
   /**
    * Adjusts the floating meun position after Flatpicker sets it.

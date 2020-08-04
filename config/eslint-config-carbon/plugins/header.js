@@ -21,4 +21,17 @@ module.exports = {
 `,
     ],
   },
+  overrides: [
+    {
+      files: [
+        '**/packages/components/demo/**/*.js',
+        '**/fixtures/**/*.js',
+        '**/__fixtures__/**/*.js',
+        '**/__testfixtures__/**/*.js',
+      ],
+      rules: {
+        'header/header': 0,
+      },
+    },
+  ],
 };

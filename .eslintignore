@@ -14,7 +14,7 @@ packages/*/examples/*
 packages/components/demo/*.css
 packages/components/demo/*.map
 packages/components/demo/*.js
-packages/components/demo/js/prism.js
+packages/components/demo/js/**/*.js
 packages/components/demo/hot
 !packages/components/demo/index.js
 packages/components/dist

@@ -1,21 +1,9 @@
-/**
- * Copyright IBM Corp. 2019, 2019
+/*
+ * Copyright IBM Corp. 2016, 2020
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
- */
-
-/**
- * @typedef Profiler
- * @property {Function} start - start a run for measuring the metric
- * @property {Function} stop - stop a run and report the results
- */
-
-/**
- * Create a profiler to measure metrics and collect averages over time
- * @param {string} metric - the name of the metric to measure
- * @returns {Profiler}
- */
+*/
 export function createProfiler(metric) {
   let total = 0;
   let runs = 0;

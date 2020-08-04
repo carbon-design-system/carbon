@@ -1,35 +1,9 @@
-/**
- * Copyright IBM Corp. 2016, 2018
+/*
+ * Copyright IBM Corp. 2016, 2020
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
- */
-
-/**
- * @typedef Key
- * @property key {Array<string>|string}
- * @property which {number}
- * @property keyCode {number}
- */
-
-/**
- * Check to see if at least one key code matches the key code of the
- * given event.
- *
- * @example
- * import * as keys from '../keys';
- * import { matches } from '../match';
- *
- * function handleOnKeyDown(event) {
- *   if (matches(event, [keys.Enter, keys.Space]) {
- *     // ...
- *   }
- * }
- *
- * @param {Event} event
- * @param {Array<Key>} keysToMatch
- * @returns {boolean}
- */
+*/
 export function matches(event, keysToMatch) {
   for (let i = 0; i < keysToMatch.length; i++) {
     if (match(event, keysToMatch[i])) {

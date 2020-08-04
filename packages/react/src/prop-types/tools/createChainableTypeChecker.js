@@ -1,14 +1,9 @@
-/**
- * Copyright IBM Corp. 2016, 2018
+/*
+ * Copyright IBM Corp. 2016, 2020
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
- */
-
-/**
- * `createChainableTypeChecker` is used inside of our custom prop validators to
- * add in chaining `isRequired` on a given prop validator.
- */
+*/
 const createChainableTypeChecker = (validate) => {
   // `checkType` is borrowed heavily from the `prop-types` package
   const checkType = (isRequired, props, propName, componentName, location) => {
