@@ -565,9 +565,9 @@
       min-height: 3rem;
     }
 
-    .#{$prefix}--parent-row td {
-      padding: 1rem;
-    }
+    // .#{$prefix}--parent-row td {
+    //   padding: 1rem;
+    // }
 
     &:not(.#{$prefix}--data-table--compact):not(.#{$prefix}--data-table--tall):not(.#{$prefix}--data-table--short)
       td:not(.#{$prefix}--table-column-menu):not(.#{$prefix}--table-column-checkbox) {
@@ -610,7 +610,7 @@
     }
 
     th:empty {
-      max-width: rem(48px);
+      max-width: 2.25rem;
     }
 
     td.#{$prefix}--table-column-menu {
@@ -662,6 +662,15 @@
     // Tall
     &.#{$prefix}--data-table--tall tr:not(.#{$prefix}--expandable-row) {
       min-height: rem(64px);
+    }
+
+    // Expansion overrides
+    &.#{$prefix}--data-table--compact tr td.#{$prefix}--table-expand {
+      padding-top: rem(4px);
+    }
+
+    &.#{$prefix}--data-table--short tr td.#{$prefix}--table-expand {
+      padding-top: rem(8px);
     }
 
     .#{$prefix}--table-header-label {
