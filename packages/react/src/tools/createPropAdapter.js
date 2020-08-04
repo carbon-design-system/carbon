@@ -1,9 +1,9 @@
-/*
+/**
  * Copyright IBM Corp. 2016, 2020
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
-*/
+ */
 function createPropAdapter(spec) {
   // if props aren't passed in we should default the prop to empty object
   return (input = {}) => {

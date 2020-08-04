@@ -1,9 +1,9 @@
-/*
+/**
  * Copyright IBM Corp. 2016, 2020
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
-*/
+ */
 
 import { getAttributes } from '@carbon/icon-helpers';
 import PropTypes from 'prop-types';
