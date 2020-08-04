@@ -27,6 +27,7 @@
     width: 100%;
     // 196px from design kit
     max-width: rem(196px);
+    border-right: $button-separator;
   }
 
   .#{$prefix}--btn--secondary.#{$prefix}--btn--disabled

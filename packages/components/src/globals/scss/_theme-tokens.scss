@@ -150,6 +150,11 @@ $button-outline-offset: -5px !default;
 /// @deprecated
 $button-outline: 1px solid $ibm-color__white-0 !default;
 
+/// @type Value
+/// @access public
+/// @group button
+$button-separator: 1px solid $gray-20;
+
 // Accordion
 
 /// @type Value
