@@ -295,12 +295,17 @@
 
   .#{$prefix}--modal-footer {
     display: flex;
+    flex-direction: column;
 
     grid-row: -1/-1;
     grid-column: 1/-1;
     justify-content: flex-end;
     height: 4rem;
     margin-top: auto;
+
+    @include carbon--breakpoint(md) {
+      flex-direction: row;
+    }
 
     button.#{$prefix}--btn {
       flex: 0 1 50%;
@@ -309,6 +314,16 @@
       margin: 0;
       padding-top: $spacing-05;
       padding-bottom: $spacing-07;
+      border-bottom: $button-separator;
+
+      @include carbon--breakpoint(md) {
+        border-right: $button-separator;
+        border-bottom: 0;
+      }
+
+      &:last-of-type {
+        border: 0;
+      }
     }
   }
 
