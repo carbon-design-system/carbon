@@ -6,6 +6,7 @@
  */
 
 import React from 'react';
+import classNames from 'classnames';
 import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 import { withKnobs, boolean, select, text } from '@storybook/addon-knobs';
@@ -109,6 +110,7 @@ const props = {
         'Icon description (iconDescription)',
         'Button icon'
       ),
+      stacked: boolean('Stack buttons vertically (stacked)', false),
       onClick: action('onClick'),
       onFocus: action('onFocus'),
     };
@@ -197,9 +199,12 @@ storiesOf('Button', module)
   .add(
     'Sets of Buttons',
     () => {
-      const setProps = props.set();
+      const { stacked, ...setProps } = props.set();
+      const buttonSetClasses = classNames(`${prefix}--btn-set`, {
+        [`${prefix}--btn-set--stacked`]: stacked,
+      });
       return (
-        <div className={`${prefix}--btn-set`}>
+        <div className={buttonSetClasses}>
           <Button kind="secondary" {...setProps}>
             Secondary button
           </Button>
