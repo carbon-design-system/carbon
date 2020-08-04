@@ -31,6 +31,7 @@ exports[`DataTable.TableBatchActions should render 1`] = `
           disabled={false}
           kind="primary"
           onClick={[MockFunction]}
+          size="default"
           tabIndex={-1}
           type="button"
         >
@@ -81,6 +82,7 @@ exports[`DataTable.TableBatchActions should render 2`] = `
           disabled={false}
           kind="primary"
           onClick={[MockFunction]}
+          size="default"
           tabIndex={0}
           type="button"
         >
