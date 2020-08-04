@@ -38,3 +38,6 @@ packages/components/node_modules
 
 # React
 **/storybook-static/**
+
+# Generated folders
+**/generated/**
