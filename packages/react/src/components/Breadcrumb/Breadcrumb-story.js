@@ -11,6 +11,7 @@ import React from 'react';
 import { action } from '@storybook/addon-actions';
 import { withKnobs, boolean } from '@storybook/addon-knobs';
 import { Breadcrumb, BreadcrumbItem, BreadcrumbSkeleton } from '../Breadcrumb';
+import mdx from './Breadcrumb.mdx';
 
 export default {
   title: 'Breadcrumb',
@@ -20,6 +21,11 @@ export default {
     BreadcrumbSkeleton,
   },
   decorators: [withKnobs],
+  parameters: {
+    docs: {
+      page: mdx,
+    },
+  },
 };
 
 export const breadcrumb = () => (
