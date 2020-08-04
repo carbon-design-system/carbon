@@ -2278,6 +2278,7 @@ Generate a media query for the maximum width of the given styles
 - **Group**: [@carbon/layout](#carbonlayout)
 - **Used by**:
   - [carbon--breakpoint-between [mixin]](#carbon--breakpoint-between-mixin)
+  - [pagination [mixin]](#pagination-mixin)
   - [carbon-side-nav [mixin]](#carbon-side-nav-mixin)
 
 ### ✅carbon--breakpoint-between [mixin]
@@ -3766,9 +3767,9 @@ $spacing-05: $carbon--spacing-05;
   - [data-table-v2-action [mixin]](#data-table-v2-action-mixin)
   - [data-table-core [mixin]](#data-table-core-mixin)
   - [data-table-expandable [mixin]](#data-table-expandable-mixin)
-  - [data-table-sort [mixin]](#data-table-sort-mixin)
   - [modal [mixin]](#modal-mixin)
   - [pagination [mixin]](#pagination-mixin)
+  - [search [mixin]](#search-mixin)
   - [select [mixin]](#select-mixin)
   - [tabs [mixin]](#tabs-mixin)
   - [carbon-switcher [mixin]](#carbon-switcher-mixin)
@@ -3809,6 +3810,7 @@ $spacing-07: $carbon--spacing-07;
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
   - [modal [mixin]](#modal-mixin)
+  - [search [mixin]](#search-mixin)
   - [select [mixin]](#select-mixin)
   - [carbon-switcher [mixin]](#carbon-switcher-mixin)
 
@@ -3829,6 +3831,7 @@ $spacing-08: $carbon--spacing-08;
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
   - [dropdown [mixin]](#dropdown-mixin)
+  - [search [mixin]](#search-mixin)
 
 ### ✅spacing-09 [variable]
 
@@ -3848,6 +3851,7 @@ $spacing-09: $carbon--spacing-09;
   - [carbon--theme [mixin]](#carbon--theme-mixin)
   - [data-table-v2-action [mixin]](#data-table-v2-action-mixin)
   - [modal [mixin]](#modal-mixin)
+  - [search [mixin]](#search-mixin)
   - [select [mixin]](#select-mixin)
   - [tabs [mixin]](#tabs-mixin)
   - [carbon-side-nav [mixin]](#carbon-side-nav-mixin)
@@ -15533,6 +15537,7 @@ Data table action styles
     height: 100%;
     padding-right: $spacing-06;
     padding-left: $spacing-06;
+    overflow-x: auto;
     background-color: $interactive-01;
     transform: translate3d(0, 48px, 0);
     transition: transform $duration--fast-02 motion(standard, productive), clip-path
@@ -15555,9 +15560,6 @@ Data table action styles
 
   //btns container
   .#{$prefix}--action-list {
-    position: absolute;
-    top: 0;
-    right: 0;
     display: flex;
   }
 
@@ -15633,8 +15635,6 @@ Data table action styles
 
   // items selected text
   .#{$prefix}--batch-summary {
-    position: absolute;
-    left: 0;
     display: flex;
     align-items: center;
     margin-left: $spacing-05;
@@ -15810,9 +15810,11 @@ Data table core styles
   // Container
   //----------------------------------------------------------------------------
   .#{$prefix}--data-table-container {
-    min-width: rem(500px);
     // Allow space for focus styles
     padding-top: $spacing-01;
+  }
+
+  .#{$prefix}--data-table-content {
     overflow-x: auto;
   }
 
@@ -16874,6 +16876,8 @@ Data table sort styles
   .#{$prefix}--data-table--sort th .#{$prefix}--table-sort__flex {
     display: flex;
     align-items: center;
+    justify-content: space-between;
+    width: 100%;
     height: 100%;
     min-height: 3rem;
   }
@@ -16923,7 +16927,7 @@ Data table sort styles
   .#{$prefix}--table-sort__icon-unsorted {
     width: rem(20px);
     min-width: $layout-01;
-    margin-right: $spacing-05;
+    margin-right: $spacing-03;
     margin-left: $spacing-03;
     opacity: 0;
     fill: $ui-05;
@@ -16952,7 +16956,7 @@ Data table sort styles
   .#{$prefix}--table-sort__icon {
     width: rem(20px);
     min-width: $layout-01;
-    margin-right: $spacing-05;
+    margin-right: $spacing-03;
     margin-left: $spacing-03;
     transform: rotate(0);
     opacity: 1;
@@ -17001,7 +17005,6 @@ Data table sort styles
   - [text-01 [variable]](#text-01-variable)
   - [ui-03 [variable]](#ui-03-variable)
   - [layout-01 [variable]](#layout-01-variable)
-  - [spacing-05 [variable]](#spacing-05-variable)
   - [spacing-03 [variable]](#spacing-03-variable)
   - [ui-05 [variable]](#ui-05-variable)
 
@@ -21084,6 +21087,19 @@ Pagination styles
     @include carbon--breakpoint('md') {
       overflow: initial;
     }
+
+    // mobile friendly pagination
+    @include carbon--breakpoint-down('md') {
+      .#{$prefix}--pagination__left > *,
+      .#{$prefix}--pagination__right > * {
+        display: none;
+      }
+
+      .#{$prefix}--pagination__items-count,
+      .#{$prefix}--pagination__control-buttons {
+        display: initial;
+      }
+    }
   }
 
   .#{$prefix}--pagination .#{$prefix}--select {
@@ -21228,6 +21244,7 @@ Pagination styles
 - **Group**: [pagination](#pagination)
 - **Requires**:
   - [carbon--breakpoint [mixin]](#carbon--breakpoint-mixin)
+  - [carbon--breakpoint-down [mixin]](#carbon--breakpoint-down-mixin)
   - [prefix [variable]](#prefix-variable)
   - [ui-01 [variable]](#ui-01-variable)
   - [ui-03 [variable]](#ui-03-variable)
@@ -22176,7 +22193,7 @@ Search styles
 
   .#{$prefix}--search-input {
     @include reset;
-    @include type-style('body-short-02');
+    @include type-style('body-short-01');
     @include focus-outline('reset');
 
     order: 1;
@@ -22225,42 +22242,44 @@ Search styles
     background: $field-02;
   }
 
+  // Small styles
   .#{$prefix}--search--sm .#{$prefix}--search-input {
-    @include type-style('body-short-01');
-
     height: rem(32px);
+    // 8px padding on either side of icon + 16px icon (32px)
+    padding: 0 $spacing-07;
   }
 
-  .#{$prefix}--search--lg .#{$prefix}--search-input {
-    @include type-style('body-short-02');
+  .#{$prefix}--search--sm .#{$prefix}--search-magnifier {
+    left: rem(8px);
+  }
 
+  // Large styles
+  .#{$prefix}--search--lg .#{$prefix}--search-input {
     height: rem(40px);
+    // 12px padding on either side of icon + 16px icon (40px)
+    padding: 0 $spacing-08;
+  }
+
+  .#{$prefix}--search--lg .#{$prefix}--search-magnifier {
+    left: rem(12px);
   }
 
   .#{$prefix}--search--xl .#{$prefix}--search-input {
-    @include type-style('body-short-02');
-
     height: rem(48px);
-    padding: 0 rem(64px) 0 rem(48px);
+    // 16px padding on either side of icon + 16px icon (48px)
+    padding: 0 $spacing-09;
   }
 
   .#{$prefix}--search-magnifier {
     position: absolute;
     top: 50%;
-    left: 0.75rem;
+    left: $spacing-05;
     z-index: 2;
     width: rem(16px);
     height: rem(16px);
     transform: translateY(-50%);
     pointer-events: none;
     fill: $icon-02;
-  }
-
-  .#{$prefix}--search--xl .#{$prefix}--search-magnifier {
-    left: rem(24px);
-    width: rem(20px);
-    height: rem(20px);
-    transform: translate(-50%, -50%);
   }
 
   .#{$prefix}--search-close {
@@ -22406,6 +22425,10 @@ Search styles
   - [ui-04 [variable]](#ui-04-variable)
   - [text-05 [variable]](#text-05-variable)
   - [field-02 [variable]](#field-02-variable)
+  - [spacing-07 [variable]](#spacing-07-variable)
+  - [spacing-08 [variable]](#spacing-08-variable)
+  - [spacing-09 [variable]](#spacing-09-variable)
+  - [spacing-05 [variable]](#spacing-05-variable)
   - [icon-02 [variable]](#icon-02-variable)
   - [hover-field [variable]](#hover-field-variable)
   - [carbon--spacing-01 [variable]](#carbon--spacing-01-variable)
@@ -24288,6 +24311,10 @@ Tile styles
 
   .#{$prefix}--tile-input {
     @include hidden;
+  }
+
+  .#{$prefix}--tile-input:focus + .#{$prefix}--tile {
+    @include focus-outline('outline');
   }
 }
 ```
