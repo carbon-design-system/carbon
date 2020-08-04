@@ -609,7 +609,7 @@
       max-width: rem(64px);
     }
 
-    th:empty {
+    th:empty:not(.#{$prefix}--table-expand) {
       max-width: 2.25rem;
     }
 
