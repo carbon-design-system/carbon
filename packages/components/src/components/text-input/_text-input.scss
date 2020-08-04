@@ -242,6 +242,23 @@
     background: $field-02;
   }
 
+  .#{$prefix}--form--fluid
+    .#{$prefix}--text-input__field-wrapper[data-invalid]
+    > .#{$prefix}--text-input--invalid {
+    @include focus-outline('reset');
+  }
+
+  .#{$prefix}--form--fluid
+    .#{$prefix}--text-input__field-wrapper[data-invalid]:not(:focus) {
+    @include focus-outline('invalid');
+  }
+
+  .#{$prefix}--form--fluid
+    .#{$prefix}--text-input__field-wrapper[data-invalid]
+    > .#{$prefix}--text-input--invalid:focus {
+    @include focus-outline('outline');
+  }
+
   //-----------------------------
   // Inline Text Input
   //-----------------------------

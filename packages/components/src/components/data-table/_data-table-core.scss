@@ -18,9 +18,11 @@
   // Container
   //----------------------------------------------------------------------------
   .#{$prefix}--data-table-container {
-    min-width: rem(500px);
     // Allow space for focus styles
     padding-top: $spacing-01;
+  }
+
+  .#{$prefix}--data-table-content {
     overflow-x: auto;
   }
 

@@ -157,9 +157,9 @@ export default class TimePicker extends Component {
         className,
         {
           [`${prefix}--text-input--light`]: light,
-          [`${prefix}--text-input--invalid`]: invalid,
         }
       ),
+
       onChange: (evt) => {
         if (!other.disabled) {
           this.setState({
@@ -195,6 +195,7 @@ export default class TimePicker extends Component {
     const timePickerClasses = classNames({
       [`${prefix}--time-picker`]: true,
       [`${prefix}--time-picker--light`]: light,
+      [`${prefix}--time-picker--invalid`]: invalid,
       [className]: className,
     });
 

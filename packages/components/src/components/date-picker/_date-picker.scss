@@ -40,19 +40,6 @@
     position: relative;
     display: flex;
     align-items: center;
-
-    ~ .#{$prefix}--form-requirement {
-      display: block;
-      max-height: rem(200px);
-      margin-top: $carbon--spacing-02;
-      overflow: visible;
-      color: $text-error;
-      font-weight: 400;
-
-      &::before {
-        display: none;
-      }
-    }
   }
 
   .#{$prefix}--date-picker.#{$prefix}--date-picker--simple {
@@ -91,11 +78,6 @@
     &:focus,
     &.#{$prefix}--focused {
       @include focus-outline('outline');
-    }
-
-    &[data-invalid],
-    &[data-invalid]:focus {
-      @include focus-outline('invalid');
     }
 
     &:disabled {
