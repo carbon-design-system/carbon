@@ -319,7 +319,6 @@ class NumberInput extends Component {
 
     const buttonProps = {
       disabled,
-      type: 'button',
     };
 
     const inputWrapperProps = {};
@@ -386,6 +385,7 @@ class NumberInput extends Component {
                   {helper}
                   <div className={`${prefix}--number__input-wrapper`}>
                     <button
+                      type="button"
                       className={`${prefix}--number__control-btn down-icon`}
                       {...buttonProps}
                       onClick={(evt) => this.handleArrowClick(evt, 'down')}
@@ -403,6 +403,7 @@ class NumberInput extends Component {
                       ref={mergeRefs(ref, this._handleInputRef)}
                     />
                     <button
+                      type="button"
                       className={`${prefix}--number__control-btn up-icon`}
                       {...buttonProps}
                       onClick={(evt) => this.handleArrowClick(evt, 'up')}
@@ -435,6 +436,7 @@ class NumberInput extends Component {
                   )}
                   <div className={`${prefix}--number__controls`}>
                     <button
+                      type="button"
                       className={`${prefix}--number__control-btn up-icon`}
                       {...buttonProps}
                       onClick={(evt) => this.handleArrowClick(evt, 'up')}
@@ -445,6 +447,7 @@ class NumberInput extends Component {
                       <CaretUpGlyph className="up-icon" />
                     </button>
                     <button
+                      type="button"
                       className={`${prefix}--number__control-btn down-icon`}
                       {...buttonProps}
                       onClick={(evt) => this.handleArrowClick(evt, 'down')}

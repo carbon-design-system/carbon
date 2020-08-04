@@ -45,7 +45,9 @@ storiesOf('useAnnouncer', module)
               onChange={onAnnouncementChange}
             />
           </div>
-          <button onClick={() => announce(mode, announcement)}>Announce</button>
+          <button type="button" onClick={() => announce(mode, announcement)}>
+            Announce
+          </button>
         </>
       );
     }
@@ -59,7 +61,11 @@ storiesOf('useAnnouncer', module)
         setCount(count + 1);
         announce(`Polite message ${count}`);
       }
-      return <button onClick={onClick}>Send polite alert</button>;
+      return (
+        <button type="button" onClick={onClick}>
+          Send polite alert
+        </button>
+      );
     }
     return <DemoComponent />;
   })
@@ -71,7 +77,11 @@ storiesOf('useAnnouncer', module)
         setCount(count + 1);
         announce(`Assertive message ${count}`);
       }
-      return <button onClick={onClick}>Send assertive alert</button>;
+      return (
+        <button type="button" onClick={onClick}>
+          Send assertive alert
+        </button>
+      );
     }
     return <DemoComponent />;
   })
@@ -92,7 +102,11 @@ storiesOf('useAnnouncer', module)
         setCount(count + 1);
         announce('assertive', `Assertive message ${count}`);
       }
-      return <button onClick={onClick}>Send assertive alert</button>;
+      return (
+        <button type="button" onClick={onClick}>
+          Send assertive alert
+        </button>
+      );
     }
 
     function Polite() {
@@ -102,7 +116,11 @@ storiesOf('useAnnouncer', module)
         setCount(count + 1);
         announce('polite', `Polite message ${count}`);
       }
-      return <button onClick={onClick}>Send polite alert</button>;
+      return (
+        <button type="button" onClick={onClick}>
+          Send polite alert
+        </button>
+      );
     }
 
     return <DemoComponent />;

@@ -74,6 +74,7 @@ const TooltipDefinition = ({
       onMouseEnter={composeEventHandlers([onMouseEnter, handleMouseEnter])}
       onMouseLeave={composeEventHandlers([onMouseLeave, handleMouseLeave])}>
       <button
+        type="button"
         className={tooltipTriggerClasses}
         aria-describedby={tooltipId}
         onFocus={composeEventHandlers([onFocus, handleFocus])}>
