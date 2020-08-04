@@ -9,7 +9,11 @@
 
 module.exports = {
   parser: 'babel-eslint',
-  extends: ['eslint:recommended', require.resolve('./plugins/jsdoc')],
+  extends: [
+    'eslint:recommended',
+    require.resolve('./plugins/jsdoc'),
+    require.resolve('./plugins/header'),
+  ],
   rules: {
     // Handle cases where we are destructuring but may not be using the initial
     // variables
@@ -31,5 +35,10 @@ module.exports = {
   },
   globals: {
     __DEV__: true,
+
+    // Sketch globals
+    NSString: true,
+    NSUTF8StringEncoding: true,
+    MSSVGImporter: true,
   },
 };
