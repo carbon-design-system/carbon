@@ -15,8 +15,6 @@ import ButtonSkeleton from '../Button/Button.Skeleton';
 import ButtonSet from '../ButtonSet';
 import mdx from './Button.mdx';
 
-const { prefix } = settings;
-
 const icons = {
   None: 'None',
   'Add (Add16 from `@carbon/icons-react`)': 'Add16',

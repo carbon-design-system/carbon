@@ -24,6 +24,8 @@ exports[`DataTable.TableBatchAction should render 1`] = `
     }
     size="default"
     tabIndex={0}
+    tooltipAlignment="center"
+    tooltipPosition="top"
     type="button"
   >
     <button

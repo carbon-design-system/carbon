@@ -30,6 +30,8 @@ exports[`ModalWrapper should render 1`] = `
       onClick={[Function]}
       size="default"
       tabIndex={0}
+      tooltipAlignment="center"
+      tooltipPosition="top"
       type="button"
     >
       <button
@@ -161,6 +163,8 @@ exports[`ModalWrapper should render 1`] = `
                 onClick={[Function]}
                 size="default"
                 tabIndex={0}
+                tooltipAlignment="center"
+                tooltipPosition="top"
                 type="button"
               >
                 <button
@@ -179,6 +183,8 @@ exports[`ModalWrapper should render 1`] = `
                 onClick={[Function]}
                 size="default"
                 tabIndex={0}
+                tooltipAlignment="center"
+                tooltipPosition="top"
                 type="button"
               >
                 <button

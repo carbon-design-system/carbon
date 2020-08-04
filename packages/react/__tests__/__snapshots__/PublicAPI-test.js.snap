@@ -102,6 +102,8 @@ Map {
       "kind": "primary",
       "size": "default",
       "tabIndex": 0,
+      "tooltipAlignment": "center",
+      "tooltipPosition": "top",
       "type": "button",
     },
     "displayName": "Button",
