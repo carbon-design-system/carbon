@@ -23,11 +23,23 @@
     display: flex;
   }
 
+  .#{$prefix}--btn-set--stacked {
+    flex-direction: column;
+  }
+
   .#{$prefix}--btn-set > .#{$prefix}--btn {
     width: 100%;
     // 196px from design kit
     max-width: rem(196px);
     border-right: $button-separator;
+
+    &:last-of-type {
+      border-right: 0;
+    }
+  }
+
+  .#{$prefix}--btn-set--stacked > .#{$prefix}--btn {
+    border-bottom: $button-separator;
 
     &:last-of-type {
       border-right: 0;
