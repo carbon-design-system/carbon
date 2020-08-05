@@ -64,7 +64,8 @@
 
   tr.#{$prefix}--parent-row.#{$prefix}--expandable-row + tr[data-child-row] td {
     border-bottom: 1px solid $ui-03;
-    transition: all $duration--fast-02 motion(standard, productive);
+    transition: padding-bottom $duration--fast-02 motion(standard, productive),
+      transform $duration--fast-02 motion(standard, productive);
   }
 
   tr.#{$prefix}--parent-row.#{$prefix}--expandable-row
@@ -254,7 +255,7 @@
     tr.#{$prefix}--parent-row.#{$prefix}--expandable-row
     + tr[data-child-row]
     td {
-    transition: all $duration--moderate-01 motion(standard, productive),
+    transition: transform $duration--moderate-01 motion(standard, productive),
       border-bottom $duration--moderate-01 motion(standard, productive),
       border-top $duration--moderate-01 motion(standard, productive);
   }
