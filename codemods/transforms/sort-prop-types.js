@@ -7,11 +7,13 @@
 
 'use strict';
 
+const defaultOptions = {
+  quote: 'single',
+  trailingComma: true,
+};
+
 function transform(fileInfo, api, options) {
-  const printOptions = options.printOptions || {
-    quote: 'single',
-    trailingComma: true,
-  };
+  const printOptions = options.printOptions || defaultOptions;
   const j = api.jscodeshift;
   const root = j(fileInfo.source);
 
@@ -31,7 +33,6 @@ function transform(fileInfo, api, options) {
             return 1;
           }
           return -1;
-          return getPropName(a).localeCompare(getPropName(b));
         }
 
         if (a.type === 'SpreadElement' && b.type === 'SpreadElement') {
@@ -65,20 +66,20 @@ function transform(fileInfo, api, options) {
     });
 
   function getPropName(node) {
-    switch (node.type) {
-      case 'SpreadElement':
-        return node.argument.name;
-      case 'Property':
-        if (node.key.type === 'Identifier') {
-          return node.key.name;
-        }
-        if (node.key.type === 'Literal') {
-          return node.key.value;
-        }
-        console.log(node);
-      default:
-        throw new Error(`Unknown node of type: ${node.type}`);
+    if (node.type === 'SpreadElement') {
+      return node.argument.name;
     }
+
+    if (node.type === 'Property') {
+      if (node.key.type === 'Identifier') {
+        return node.key.name;
+      }
+      if (node.key.type === 'Literal') {
+        return node.key.value;
+      }
+    }
+
+    throw new Error(`Unknown node of type: ${node.type}`);
   }
 
   return root.toSource(printOptions);
