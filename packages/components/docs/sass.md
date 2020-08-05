@@ -7888,6 +7888,7 @@ $hover-ui: if(
   - [snippet [mixin]](#snippet-mixin)
   - [content-switcher [mixin]](#content-switcher-mixin)
   - [data-table-v2-action [mixin]](#data-table-v2-action-mixin)
+  - [data-table-core [mixin]](#data-table-core-mixin)
   - [data-table-expandable [mixin]](#data-table-expandable-mixin)
   - [dropdown [mixin]](#dropdown-mixin)
   - [listbox [mixin]](#listbox-mixin)
@@ -16336,13 +16337,79 @@ Data table core styles
       will-change: transform;
     }
 
-    tr {
+    tr.#{$prefix}--parent-row.#{$prefix}--expandable-row {
       height: auto;
-      min-height: rem(48px);
+      min-height: 3rem;
+    }
+
+    tr.#{$prefix}--expandable-row:not(.#{$prefix}--parent-row) {
+      height: auto;
+    }
+
+    .#{$prefix}--table-expand {
+      max-width: rem(48px);
+    }
+
+    thead .#{$prefix}--table-expand {
+      align-items: center;
+    }
+
+    .#{$prefix}--parent-row {
+      min-height: 3rem;
+    }
+
+    // .#{$prefix}--parent-row td {
+    //   padding: 1rem;
+    // }
+
+    &:not(.#{$prefix}--data-table--compact):not(.#{$prefix}--data-table--tall):not(.#{$prefix}--data-table--short)
+      td:not(.#{$prefix}--table-column-menu):not(.#{$prefix}--table-column-checkbox) {
+      padding-top: rem(14px);
+    }
+
+    // Taken from L125 _data-table-expandable
+    // Used to hide white line when parent row is hovered when child is expanded
+    tr.#{$prefix}--parent-row.#{$prefix}--expandable-row:hover
+      + tr[data-child-row]
+      td {
+      border-top: 1px solid $hover-ui;
+    }
+
+    tr.#{$prefix}--expandable-row:last-of-type {
+      overflow: hidden;
     }
 
     tr.#{$prefix}--data-table--selected:first-of-type td {
       border-top: none;
+    }
+
+    // Selectable fix
+    thead th.#{$prefix}--table-column-checkbox,
+    tbody tr td.#{$prefix}--table-column-checkbox {
+      align-items: center;
+      width: rem(36px);
+      min-width: rem(36px);
+    }
+
+    &.#{$prefix}--data-table--tall thead th.#{$prefix}--table-column-checkbox,
+    &.#{$prefix}--data-table--tall td.#{$prefix}--table-column-checkbox {
+      align-items: flex-start;
+    }
+
+    // Overflow fix
+    /* When using sticky header, with a selection element in the first column, we need to set the last item to a fixed width to match the table body. We only want this to happen when the last table header does not have any text */
+    th.#{$prefix}--table-column-checkbox ~ th:last-of-type:empty {
+      max-width: rem(64px);
+    }
+
+    th:empty:not(.#{$prefix}--table-expand) {
+      max-width: 2.25rem;
+    }
+
+    td.#{$prefix}--table-column-menu {
+      align-items: center;
+      height: auto;
+      padding-top: 0;
     }
 
     //hides webkit scrollbar
@@ -16369,9 +16436,73 @@ Data table core styles
       min-width: 0;
     }
 
+    &.#{$prefix}--data-table--compact tr:not(.#{$prefix}--expandable-row),
+    &.#{$prefix}--data-table--short tr:not(.#{$prefix}--expandable-row),
+    &.#{$prefix}--data-table--tall tr:not(.#{$prefix}--expandable-row) {
+      height: auto;
+    }
+
+    // Compact
+    &.#{$prefix}--data-table--compact tr:not(.#{$prefix}--expandable-row) {
+      min-height: rem(24px);
+    }
+
+    // Short
+    &.#{$prefix}--data-table--short tr:not(.#{$prefix}--expandable-row) {
+      min-height: rem(32px);
+    }
+
+    // Tall
+    &.#{$prefix}--data-table--tall tr:not(.#{$prefix}--expandable-row) {
+      min-height: rem(64px);
+    }
+
+    // Expansion overrides
+    &.#{$prefix}--data-table--compact tr td.#{$prefix}--table-expand {
+      padding-top: rem(4px);
+    }
+
+    &.#{$prefix}--data-table--short tr td.#{$prefix}--table-expand {
+      padding-top: rem(8px);
+    }
+
     .#{$prefix}--table-header-label {
-      max-width: calc(100% - 10px);
       @include text-overflow;
+
+      max-width: calc(100% - 10px);
+      // Needed to reduce 1px jump when toggling between variations
+      padding-top: rem(15px);
+      padding-bottom: 1rem;
+      overflow-y: hidden;
+    }
+
+    &.#{$prefix}--data-table--compact th .#{$prefix}--table-header-label {
+      padding-top: rem(3px);
+      padding-bottom: 0;
+    }
+
+    &.#{$prefix}--data-table--short th .#{$prefix}--table-header-label {
+      padding-top: rem(8px);
+      padding-bottom: 0;
+    }
+
+    &.#{$prefix}--data-table--tall th .#{$prefix}--table-header-label {
+      padding-top: 1rem;
+    }
+
+    &.#{$prefix}--data-table--tall th.#{$prefix}--table-expand {
+      display: flex;
+      align-items: flex-start;
+    }
+
+    // With dynamic content overrides
+    &.#{$prefix}--data-table--compact
+      tr.#{$prefix}--parent-row
+      .#{$prefix}--table-column-checkbox,
+    &.#{$prefix}--data-table--short
+      tr.#{$prefix}--parent-row
+      .#{$prefix}--table-column-checkbox {
+      align-items: flex-start;
     }
   }
 
@@ -16413,6 +16544,7 @@ Data table core styles
   - [hover-selected-ui [variable]](#hover-selected-ui-variable)
   - [selected-ui [variable]](#selected-ui-variable)
   - [active-ui [variable]](#active-ui-variable)
+  - [hover-ui [variable]](#hover-ui-variable)
 
 ### ❌data-table-expandable [mixin]
 
@@ -16474,7 +16606,8 @@ Data table expandable styles
 
   tr.#{$prefix}--parent-row.#{$prefix}--expandable-row + tr[data-child-row] td {
     border-bottom: 1px solid $ui-03;
-    transition: all $duration--fast-02 motion(standard, productive);
+    transition: padding-bottom $duration--fast-02 motion(standard, productive), transform
+        $duration--fast-02 motion(standard, productive);
   }
 
   tr.#{$prefix}--parent-row.#{$prefix}--expandable-row
@@ -16664,7 +16797,7 @@ Data table expandable styles
     tr.#{$prefix}--parent-row.#{$prefix}--expandable-row
     + tr[data-child-row]
     td {
-    transition: all $duration--moderate-01 motion(standard, productive), border-bottom
+    transition: transform $duration--moderate-01 motion(standard, productive), border-bottom
         $duration--moderate-01 motion(standard, productive),
       border-top $duration--moderate-01 motion(standard, productive);
   }
