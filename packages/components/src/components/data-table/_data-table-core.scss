@@ -701,6 +701,16 @@
       display: flex;
       align-items: flex-start;
     }
+
+    // With dynamic content overrides
+    &.#{$prefix}--data-table--compact
+      tr.#{$prefix}--parent-row
+      .#{$prefix}--table-column-checkbox,
+    &.#{$prefix}--data-table--short
+      tr.#{$prefix}--parent-row
+      .#{$prefix}--table-column-checkbox {
+      align-items: flex-start;
+    }
   }
 
   @include sticky-header($max-width: 100%);
