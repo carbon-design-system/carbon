@@ -97,6 +97,8 @@ export default class Tabs extends React.Component {
   };
 
   tablist = React.createRef();
+  leftOverflowNavButton = React.createRef();
+  rightOverflowNavButton = React.createRef();
   // width of the overflow buttons
   OVERFLOW_BUTTON_OFFSET = 40;
 
@@ -254,14 +256,28 @@ export default class Tabs extends React.Component {
 
   overflowNavInterval = null;
 
-  handleOverflowNavClick = (_, { direction, multiplier = 25 }) => {
+  handleOverflowNavClick = (_, { direction, multiplier = 15 }) => {
     // account for overflow button appearing and causing tablist width change
-    const { scrollLeft } = this.tablist?.current;
+    const { clientWidth, scrollLeft, scrollWidth } = this.tablist?.current;
     if (direction === 1 && !scrollLeft) {
       this.tablist.current.scrollLeft += this.OVERFLOW_BUTTON_OFFSET;
     }
 
     this.tablist.current.scrollLeft += direction * multiplier;
+
+    const leftEdgeReached =
+      direction === -1 && scrollLeft < this.OVERFLOW_BUTTON_OFFSET;
+    const rightEdgeReached =
+      direction === 1 &&
+      scrollLeft + clientWidth >= scrollWidth - this.OVERFLOW_BUTTON_OFFSET;
+    if (leftEdgeReached || rightEdgeReached) {
+      if (leftEdgeReached) {
+        this.rightOverflowNavButton?.current?.focus();
+      }
+      if (rightEdgeReached) {
+        this.leftOverflowNavButton?.current?.focus();
+      }
+    }
   };
 
   handleOverflowNavMouseDown = (_, { direction }) => {
@@ -269,12 +285,13 @@ export default class Tabs extends React.Component {
       const { clientWidth, scrollLeft, scrollWidth } = this.tablist?.current;
 
       // clear interval if scroll reaches left or right edge
-      if (
-        (direction === 1 && scrollLeft + clientWidth >= scrollWidth) ||
-        (direction === -1 && !scrollLeft)
-      ) {
+      const leftEdgeReached =
+        direction === -1 && scrollLeft < this.OVERFLOW_BUTTON_OFFSET;
+      const rightEdgeReached =
+        direction === 1 &&
+        scrollLeft + clientWidth >= scrollWidth - this.OVERFLOW_BUTTON_OFFSET;
+      if (leftEdgeReached || rightEdgeReached) {
         clearInterval(this.overflowNavInterval);
-        this.getTabAt(this.state.selected)?.tabAnchor.focus();
       }
 
       // account for overflow button appearing and causing tablist width change
@@ -284,7 +301,6 @@ export default class Tabs extends React.Component {
 
   handleOverflowNavMouseUp = () => {
     clearInterval(this.overflowNavInterval);
-    this.getTabAt(this.state.selected)?.tabAnchor.focus();
   };
 
   render() {
@@ -383,7 +399,8 @@ export default class Tabs extends React.Component {
             onMouseDown={(_) =>
               this.handleOverflowNavMouseDown(_, { direction: -1 })
             }
-            onMouseUp={this.handleOverflowNavMouseUp}>
+            onMouseUp={this.handleOverflowNavMouseUp}
+            ref={this.leftOverflowNavButton}>
             <ChevronLeft16 />
           </button>
           {!leftOverflowNavButtonHidden && (
@@ -401,7 +418,8 @@ export default class Tabs extends React.Component {
             onMouseDown={(_) =>
               this.handleOverflowNavMouseDown(_, { direction: 1 })
             }
-            onMouseUp={this.handleOverflowNavMouseUp}>
+            onMouseUp={this.handleOverflowNavMouseUp}
+            ref={this.rightOverflowNavButton}>
             <ChevronRight16 />
           </button>
         </div>
