@@ -60,13 +60,13 @@ export default function TreeNode({
   const toggleClasses = classNames(`${prefix}--tree-parent-node__toggle-icon`, {
     [`${prefix}--tree-parent-node__toggle-icon--expanded`]: expanded,
   });
-  const handleToggleClick = (event) => {
+  function handleToggleClick(event) {
     if (onToggle) {
       onToggle(event, { id, isExpanded: !expanded, label, value });
     }
     setExpanded(!expanded);
-  };
-  const handleClick = (event) => {
+  }
+  function handleClick(event) {
     event.stopPropagation();
     if (!disabled) {
       if (onTreeSelect) {
@@ -79,8 +79,8 @@ export default function TreeNode({
         rest.onClick(event);
       }
     }
-  };
-  const handleKeyDown = (event) => {
+  }
+  function handleKeyDown(event) {
     if (matches(event, [keys.ArrowLeft, keys.ArrowRight, keys.Enter])) {
       event.stopPropagation();
     }
@@ -124,7 +124,7 @@ export default function TreeNode({
     if (rest.onKeyDown) {
       rest.onKeyDown(event);
     }
-  };
+  }
 
   useEffect(() => {
     /**

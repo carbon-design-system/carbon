@@ -34,7 +34,7 @@ export default function TreeView({
   const treeWalker = useRef(treeRootRef?.current);
   const [selected, setSelected] = useState(preselected);
   const [active, setActive] = useState(prespecifiedActive);
-  const handleTreeSelect = (event, node = {}) => {
+  function handleTreeSelect(event, node = {}) {
     const { id: nodeId } = node;
     if (multiselect && (event.metaKey || event.ctrlKey)) {
       if (!selected.includes(nodeId)) {
@@ -49,7 +49,7 @@ export default function TreeView({
     if (onSelect) {
       onSelect(event, node);
     }
-  };
+  }
   let focusTarget = false;
   const nodesWithProps = React.Children.map(children, (node) => {
     const sharedNodeProps = {
@@ -68,7 +68,7 @@ export default function TreeView({
     }
   });
 
-  const handleKeyDown = (event) => {
+  function handleKeyDown(event) {
     event.stopPropagation();
     if (matches(event, [keys.ArrowUp, keys.ArrowDown])) {
       event.preventDefault();
@@ -94,7 +94,7 @@ export default function TreeView({
     if (rest.onKeyDown) {
       rest.onKeyDown(event);
     }
-  };
+  }
 
   useEffect(() => {
     treeWalker.current =
