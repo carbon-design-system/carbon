@@ -39,9 +39,29 @@ const DRAG_STOP_EVENT_TYPES = new Set(['mouseup', 'touchend', 'touchcancel']);
 export default class Slider extends PureComponent {
   static propTypes = {
     /**
+     * The `ariaLabel` for the `<input>`.
+     */
+    ariaLabelInput: PropTypes.string,
+
+    /**
+     * The child nodes.
+     */
+    children: PropTypes.node,
+
+    /**
      * The CSS class name for the slider.
      */
     className: PropTypes.string,
+
+    /**
+     * `true` to disable this slider.
+     */
+    disabled: PropTypes.bool,
+
+    /**
+     * The callback to format the label associated with the minimum/maximum value.
+     */
+    formatLabel: PropTypes.func,
 
     /**
      * `true` to hide the number input box.
@@ -54,29 +74,24 @@ export default class Slider extends PureComponent {
     id: PropTypes.string,
 
     /**
-     * The callback to get notified of change in value.
+     * The `type` attribute of the `<input>`.
      */
-    onChange: PropTypes.func,
+    inputType: PropTypes.string,
 
     /**
-     * The callback to get notified of value on handle release.
+     * `true` to specify if the control is invalid.
      */
-    onRelease: PropTypes.func,
+    invalid: PropTypes.bool,
 
     /**
-     * The value.
+     * The label for the slider.
      */
-    value: PropTypes.number.isRequired,
+    labelText: PropTypes.node,
 
     /**
-     * The minimum value.
+     * `true` to use the light version.
      */
-    min: PropTypes.number.isRequired,
-
-    /**
-     * The label associated with the minimum value.
-     */
-    minLabel: PropTypes.string,
+    light: PropTypes.bool,
 
     /**
      * The maximum value.
@@ -89,14 +104,34 @@ export default class Slider extends PureComponent {
     maxLabel: PropTypes.string,
 
     /**
-     * The callback to format the label associated with the minimum/maximum value.
+     * The minimum value.
      */
-    formatLabel: PropTypes.func,
+    min: PropTypes.number.isRequired,
 
     /**
-     * The label for the slider.
+     * The label associated with the minimum value.
      */
-    labelText: PropTypes.node,
+    minLabel: PropTypes.string,
+
+    /**
+     * The `name` attribute of the `<input>`.
+     */
+    name: PropTypes.string,
+
+    /**
+     * The callback to get notified of change in value.
+     */
+    onChange: PropTypes.func,
+
+    /**
+     * The callback to get notified of value on handle release.
+     */
+    onRelease: PropTypes.func,
+
+    /**
+     * `true` to specify if the control is required.
+     */
+    required: PropTypes.bool,
 
     /**
      * A value determining how much the value should increase/decrease by moving the thumb by mouse.
@@ -119,44 +154,9 @@ export default class Slider extends PureComponent {
     stepMultiplier: PropTypes.number,
 
     /**
-     * The child nodes.
+     * The value.
      */
-    children: PropTypes.node,
-
-    /**
-     * `true` to disable this slider.
-     */
-    disabled: PropTypes.bool,
-
-    /**
-     * The `name` attribute of the `<input>`.
-     */
-    name: PropTypes.string,
-
-    /**
-     * The `type` attribute of the `<input>`.
-     */
-    inputType: PropTypes.string,
-
-    /**
-     * The `ariaLabel` for the `<input>`.
-     */
-    ariaLabelInput: PropTypes.string,
-
-    /**
-     * `true` to use the light version.
-     */
-    light: PropTypes.bool,
-
-    /**
-     * `true` to specify if the control is required.
-     */
-    required: PropTypes.bool,
-
-    /**
-     * `true` to specify if the control is invalid.
-     */
-    invalid: PropTypes.bool,
+    value: PropTypes.number.isRequired,
   };
 
   static defaultProps = {

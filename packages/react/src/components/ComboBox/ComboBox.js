@@ -72,9 +72,21 @@ export default class ComboBox extends React.Component {
     className: PropTypes.string,
 
     /**
+     * Specify the direction of the combobox dropdown. Can be either top or bottom.
+     */
+    direction: PropTypes.oneOf(['top', 'bottom']),
+
+    /**
      * Specify if the control should be disabled, or not
      */
     disabled: PropTypes.bool,
+
+    /**
+     * Additional props passed to Downshift
+     */
+    downshiftProps: PropTypes.shape(Downshift.propTypes),
+
+    helperText: PropTypes.string,
 
     /**
      * Specify a custom `id` for the input
@@ -91,45 +103,6 @@ export default class ComboBox extends React.Component {
     ]),
 
     /**
-     * We try to stay as generic as possible here to allow individuals to pass
-     * in a collection of whatever kind of data structure they prefer
-     */
-    items: PropTypes.array.isRequired,
-
-    /**
-     * Helper function passed to downshift that allows the library to render a
-     * given item to a string label. By default, it extracts the `label` field
-     * from a given item to serve as the item label in the list
-     */
-    itemToString: PropTypes.func,
-
-    /**
-     * Optional function to render items as custom components instead of strings.
-     * Defaults to null and is overriden by a getter
-     */
-    itemToElement: PropTypes.func,
-
-    /**
-     * `onChange` is a utility for this controlled component to communicate to a
-     * consuming component when a specific dropdown item is selected.
-     * @param {{ selectedItem }}
-     */
-    onChange: PropTypes.func.isRequired,
-
-    /**
-     * Used to provide a placeholder text node before a user enters any input.
-     * This is only present if the control has no items selected
-     */
-    placeholder: PropTypes.string.isRequired,
-
-    /**
-     * Specify your own filtering logic by passing in a `shouldFilterItem`
-     * function that takes in the current input and an item and passes back
-     * whether or not the item should be filtered.
-     */
-    shouldFilterItem: PropTypes.func,
-
-    /**
      * Specify if the currently selected value is invalid.
      */
     invalid: PropTypes.bool,
@@ -140,25 +113,35 @@ export default class ComboBox extends React.Component {
     invalidText: PropTypes.string,
 
     /**
-     * For full control of the selection
+     * Optional function to render items as custom components instead of strings.
+     * Defaults to null and is overriden by a getter
      */
-    selectedItem: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
+    itemToElement: PropTypes.func,
 
     /**
-     * Specify a custom translation function that takes in a message identifier
-     * and returns the localized string for the message
+     * Helper function passed to downshift that allows the library to render a
+     * given item to a string label. By default, it extracts the `label` field
+     * from a given item to serve as the item label in the list
      */
-    translateWithId: PropTypes.func,
+    itemToString: PropTypes.func,
 
     /**
-     * Currently supports either the default type, or an inline variant
+     * We try to stay as generic as possible here to allow individuals to pass
+     * in a collection of whatever kind of data structure they prefer
      */
-    type: ListBoxPropTypes.ListBoxType,
+    items: PropTypes.array.isRequired,
 
     /**
-     * Specify the size of the ListBox. Currently supports either `sm`, `lg` or `xl` as an option.
+     * should use "light theme" (white background)?
      */
-    size: ListBoxPropTypes.ListBoxSize,
+    light: PropTypes.bool,
+
+    /**
+     * `onChange` is a utility for this controlled component to communicate to a
+     * consuming component when a specific dropdown item is selected.
+     * @param {{ selectedItem }}
+     */
+    onChange: PropTypes.func.isRequired,
 
     /**
      * Callback function to notify consumer when the text input changes.
@@ -168,22 +151,39 @@ export default class ComboBox extends React.Component {
     onInputChange: PropTypes.func,
 
     /**
-     * should use "light theme" (white background)?
+     * Used to provide a placeholder text node before a user enters any input.
+     * This is only present if the control has no items selected
      */
-    light: PropTypes.bool,
+    placeholder: PropTypes.string.isRequired,
 
     /**
-     * Additional props passed to Downshift
+     * For full control of the selection
      */
-    downshiftProps: PropTypes.shape(Downshift.propTypes),
+    selectedItem: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
 
     /**
-     * Specify the direction of the combobox dropdown. Can be either top or bottom.
+     * Specify your own filtering logic by passing in a `shouldFilterItem`
+     * function that takes in the current input and an item and passes back
+     * whether or not the item should be filtered.
      */
-    direction: PropTypes.oneOf(['top', 'bottom']),
+    shouldFilterItem: PropTypes.func,
+
+    /**
+     * Specify the size of the ListBox. Currently supports either `sm`, `lg` or `xl` as an option.
+     */
+    size: ListBoxPropTypes.ListBoxSize,
 
     titleText: PropTypes.string,
-    helperText: PropTypes.string,
+
+    /**
+     * Specify a custom translation function that takes in a message identifier
+     * and returns the localized string for the message
+     */
+    translateWithId: PropTypes.func,
+    /**
+     * Currently supports either the default type, or an inline variant
+     */
+    type: ListBoxPropTypes.ListBoxType,
   };
 
   static defaultProps = {

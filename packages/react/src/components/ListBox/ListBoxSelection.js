@@ -82,28 +82,21 @@ const defaultTranslations = {
 
 ListBoxSelection.propTypes = {
   /**
-   * Specify whether or not the clear selection element should be disabled
-   */
-  disabled: PropTypes.bool,
-
-  /**
    * Specify a function to be invoked when a user interacts with the clear
    * selection element.
    */
   clearSelection: PropTypes.func.isRequired,
 
   /**
-   * Specify an optional `selectionCount` value that will be used to determine
-   * whether the selection should display a badge or a single clear icon.
+   * Specify whether or not the clear selection element should be disabled
    */
-  selectionCount: PropTypes.number,
+  disabled: PropTypes.bool,
 
   /**
-   * i18n hook used to provide the appropriate description for the given menu
-   * icon. This function takes in an id defined in `translationIds` and should
-   * return a string message for that given message id.
+   * Specify an optional `onClearSelection` handler that is called when the underlying
+   * element is cleared
    */
-  translateWithId: PropTypes.func.isRequired,
+  onClearSelection: PropTypes.func,
 
   /**
    * Specify an optional `onClick` handler that is called when the underlying
@@ -118,10 +111,17 @@ ListBoxSelection.propTypes = {
   onKeyDown: PropTypes.func,
 
   /**
-   * Specify an optional `onClearSelection` handler that is called when the underlying
-   * element is cleared
+   * Specify an optional `selectionCount` value that will be used to determine
+   * whether the selection should display a badge or a single clear icon.
    */
-  onClearSelection: PropTypes.func,
+  selectionCount: PropTypes.number,
+
+  /**
+   * i18n hook used to provide the appropriate description for the given menu
+   * icon. This function takes in an id defined in `translationIds` and should
+   * return a string message for that given message id.
+   */
+  translateWithId: PropTypes.func.isRequired,
 };
 
 ListBoxSelection.defaultProps = {

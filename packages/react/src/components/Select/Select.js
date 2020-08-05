@@ -133,26 +133,9 @@ Select.propTypes = {
   className: PropTypes.string,
 
   /**
-   * Specify a custom `id` for the `<select>`
+   * Optionally provide the default value of the `<select>`
    */
-  id: PropTypes.string.isRequired,
-
-  /**
-   * Specify whether you want the inline version of this control
-   */
-  inline: PropTypes.bool,
-
-  /**
-   * Provide label text to be read by screen readers when interacting with the
-   * control
-   */
-  labelText: PropTypes.node,
-
-  /**
-   * Provide an optional `onChange` hook that is called each time the value of
-   * the underlying <input> changes
-   */
-  onChange: PropTypes.func,
+  defaultValue: PropTypes.any,
 
   /**
    * Specify whether the control is disabled
@@ -160,9 +143,14 @@ Select.propTypes = {
   disabled: PropTypes.bool,
 
   /**
-   * Optionally provide the default value of the `<select>`
+   * Provide text that is used alongside the control label for additional help
    */
-  defaultValue: PropTypes.any,
+  helperText: PropTypes.node,
+
+  /**
+   * Specify whether the label should be hidden, or not
+   */
+  hideLabel: PropTypes.bool,
 
   /**
    * Provide a description for the twistie icon that can be read by screen readers
@@ -174,9 +162,14 @@ Select.propTypes = {
   ),
 
   /**
-   * Specify whether the label should be hidden, or not
+   * Specify a custom `id` for the `<select>`
    */
-  hideLabel: PropTypes.bool,
+  id: PropTypes.string.isRequired,
+
+  /**
+   * Specify whether you want the inline version of this control
+   */
+  inline: PropTypes.bool,
 
   /**
    * Specify if the currently value is invalid.
@@ -189,9 +182,10 @@ Select.propTypes = {
   invalidText: PropTypes.string,
 
   /**
-   * Provide text that is used alongside the control label for additional help
+   * Provide label text to be read by screen readers when interacting with the
+   * control
    */
-  helperText: PropTypes.node,
+  labelText: PropTypes.node,
 
   /**
    * Specify whether you want the light version of this control
@@ -203,6 +197,12 @@ Select.propTypes = {
    * select since Pagination renders one for us.
    */
   noLabel: PropTypes.bool,
+
+  /**
+   * Provide an optional `onChange` hook that is called each time the value of
+   * the underlying <input> changes
+   */
+  onChange: PropTypes.func,
 
   /**
    * Specify the size of the Select Input. Currently supports either `sm` or `xl` as an option.

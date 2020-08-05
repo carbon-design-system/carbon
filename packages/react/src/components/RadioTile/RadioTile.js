@@ -98,16 +98,6 @@ RadioTile.propTypes = {
   defaultChecked: PropTypes.bool,
 
   /**
-   * The ID of the `<input>`.
-   */
-  id: PropTypes.string,
-
-  /**
-   * The `name` of the `<input>`.
-   */
-  name: PropTypes.string,
-
-  /**
    * The description of the tile checkmark icon.
    */
   iconDescription: deprecate(
@@ -117,14 +107,24 @@ RadioTile.propTypes = {
   ),
 
   /**
+   * The ID of the `<input>`.
+   */
+  id: PropTypes.string,
+
+  /**
+   * `true` to use the light version.
+   */
+  light: PropTypes.bool,
+
+  /**
+   * The `name` of the `<input>`.
+   */
+  name: PropTypes.string,
+
+  /**
    * The handler of the massaged `change` event on the `<input>`.
    */
   onChange: PropTypes.func,
-
-  /**
-   * The `value` of the `<input>`.
-   */
-  value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
 
   /**
    * Specify the tab index of the wrapper element
@@ -132,9 +132,9 @@ RadioTile.propTypes = {
   tabIndex: PropTypes.number,
 
   /**
-   * `true` to use the light version.
+   * The `value` of the `<input>`.
    */
-  light: PropTypes.bool,
+  value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
 };
 
 RadioTile.defaultProps = {

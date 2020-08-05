@@ -76,25 +76,25 @@ const SkeletonText = ({
 
 SkeletonText.propTypes = {
   /**
-   * will generate multiple lines of text
+   * Specify an optional className to be applied to the container node
    */
-  paragraph: PropTypes.bool,
-  /**
-   * the number of lines in a paragraph
-   */
-  lineCount: PropTypes.number,
-  /**
-   * width (in px or %) of single line of text or max-width of paragraph lines
-   */
-  width: PropTypes.string,
+  className: PropTypes.string,
   /**
    * generates skeleton text at a larger size
    */
   heading: PropTypes.bool,
   /**
-   * Specify an optional className to be applied to the container node
+   * the number of lines in a paragraph
    */
-  className: PropTypes.string,
+  lineCount: PropTypes.number,
+  /**
+   * will generate multiple lines of text
+   */
+  paragraph: PropTypes.bool,
+  /**
+   * width (in px or %) of single line of text or max-width of paragraph lines
+   */
+  width: PropTypes.string,
 };
 
 SkeletonText.defaultProps = {
