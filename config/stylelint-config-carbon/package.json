@@ -2,7 +2,7 @@
   "name": "stylelint-config-carbon",
   "private": true,
   "description": "Stylelint configuration for the Carbon Design System",
-  "version": "0.4.0-rc.0",
+  "version": "0.4.0",
   "license": "Apache-2.0",
   "main": "index.js",
   "repository": "https://github.com/carbon-design-system/carbon/tree/master/config/stylelint-config-carbon",
