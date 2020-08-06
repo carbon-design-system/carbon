@@ -5,10 +5,10 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import UnstableTreeView from './TreeView';
-import UnstableTreeNode from './TreeNode';
+import TreeView from './TreeView';
+import TreeNode from './TreeNode';
 
-UnstableTreeView.TreeNode = UnstableTreeNode;
+TreeView.TreeNode = TreeNode;
 
-export { UnstableTreeNode as TreeNode };
-export default UnstableTreeView;
+export { TreeNode };
+export default TreeView;
