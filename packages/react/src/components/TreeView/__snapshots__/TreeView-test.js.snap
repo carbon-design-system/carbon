@@ -118,6 +118,7 @@ exports[`TreeView should render 1`] = `
             className="bx--tree-parent-node__toggle"
             onClick={[Function]}
             tabIndex={-1}
+            type="button"
           >
             <ForwardRef(CaretDown16)
               className="bx--tree-parent-node__toggle-icon bx--tree-parent-node__toggle-icon--expanded"
@@ -251,6 +252,7 @@ exports[`TreeView should render 1`] = `
                   className="bx--tree-parent-node__toggle"
                   onClick={[Function]}
                   tabIndex={-1}
+                  type="button"
                 >
                   <ForwardRef(CaretDown16)
                     className="bx--tree-parent-node__toggle-icon bx--tree-parent-node__toggle-icon--expanded"
@@ -530,6 +532,7 @@ exports[`TreeView should render with icons 1`] = `
             className="bx--tree-parent-node__toggle"
             onClick={[Function]}
             tabIndex={-1}
+            type="button"
           >
             <ForwardRef(CaretDown16)
               className="bx--tree-parent-node__toggle-icon bx--tree-parent-node__toggle-icon--expanded"
@@ -774,6 +777,7 @@ exports[`TreeView should render with icons 1`] = `
                   className="bx--tree-parent-node__toggle"
                   onClick={[Function]}
                   tabIndex={-1}
+                  type="button"
                 >
                   <ForwardRef(CaretDown16)
                     className="bx--tree-parent-node__toggle-icon bx--tree-parent-node__toggle-icon--expanded"
