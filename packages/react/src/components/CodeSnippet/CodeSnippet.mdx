@@ -1,0 +1,49 @@
+import { Story, Props, Source, Preview } from '@storybook/addon-docs/blocks'
+import { withKnobs, boolean, select, text } from '@storybook/addon-knobs'
+import * as stories from './CodeSnippet-story.js'
+import CodeSnippet from '../CodeSnippet'
+
+<!-- How do I get <Props> to work?
+ -->
+# CodeSnippet
+
+## Overview
+Code snippets are strings or small blocks of reusable code that can be copied and inserted in a code file.
+
+<Preview>
+	<CodeSnippet>
+		import * as stories from './CodeSnippet-story.js'
+	</CodeSnippet>
+</Preview>
+
+There are three different types of code snippets to help cater to varied line length use cases—inline, single line, and multi-line.
+
+## Inline
+A block of text used inline with setences or paragraphs
+
+<Preview>
+	<CodeSnippet type="inline">'@storybook/ad1don-docs/blocks'</CodeSnippet>
+</Preview>
+
+## Single line
+A single line of code.
+
+<Preview>
+	<CodeSnippet>
+		import * as stories from './CodeSnippet-story.js'
+	</CodeSnippet>
+</Preview>
+
+## Multi line
+Multiple lines of code with the ability to show more or less strings.
+
+<Preview>
+	<CodeSnippet type="multi">
+		import * as stories from './CodeSnippet-story.js'
+		import CodeSnippet from '../CodeSnippet'
+	</CodeSnippet>	
+</Preview>
+
+## Component API
+
+<Props sort="asc" />
