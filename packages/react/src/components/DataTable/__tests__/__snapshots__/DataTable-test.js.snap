@@ -2446,6 +2446,7 @@ exports[`DataTable should render 1`] = `
                         open={false}
                         tabIndex={0}
                         title="Settings"
+                        type="button"
                       >
                         <ForwardRef(Settings16)
                           aria-label="Settings"
@@ -3444,6 +3445,7 @@ exports[`DataTable sticky header should render 1`] = `
                         open={false}
                         tabIndex={0}
                         title="Settings"
+                        type="button"
                       >
                         <ForwardRef(Settings16)
                           aria-label="Settings"

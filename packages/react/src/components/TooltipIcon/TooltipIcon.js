@@ -53,6 +53,7 @@ const TooltipIcon = ({
   return (
     <button
       {...rest}
+      type="button"
       className={tooltipTriggerClasses}
       aria-describedby={tooltipId}
       onMouseEnter={composeEventHandlers([onMouseEnter, handleMouseEnter])}
