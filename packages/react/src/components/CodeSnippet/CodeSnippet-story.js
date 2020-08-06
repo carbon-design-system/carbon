@@ -10,6 +10,7 @@ import { action } from '@storybook/addon-actions';
 import { withKnobs, boolean, text, select } from '@storybook/addon-knobs';
 import CodeSnippet from '../CodeSnippet';
 import CodeSnippetSkeleton from './CodeSnippet.Skeleton';
+import mdx from './CodeSnippet.mdx';
 
 const props = () => ({
   type: select('Type', {
@@ -49,7 +50,13 @@ const lightPropMessage = (
 
 export default {
   title: 'CodeSnippet',
+  component: CodeSnippet,
   decorators: [withKnobs],
+  parameters: {
+    docs: {
+      page: mdx,
+    },
+  },
 };
 
 export const codeSnippet = () => (
