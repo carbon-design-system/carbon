@@ -1,7 +1,7 @@
 {
   "name": "@carbon/cli",
   "description": "Task automation for working with the Carbon Design System",
-  "version": "10.13.0-rc.0",
+  "version": "10.13.0",
   "license": "Apache-2.0",
   "bin": {
     "carbon-cli": "./bin/carbon-cli.js"
@@ -30,7 +30,7 @@
     "fs-extra": "^8.0.1",
     "inquirer": "^6.4.1",
     "prettier": "^2.0.5",
-    "prettier-config-carbon": "^0.3.0-rc.0",
+    "prettier-config-carbon": "^0.3.0",
     "progress-estimator": "^0.2.2",
     "remark": "^10.0.1",
     "yargs": "^15.1.0"
