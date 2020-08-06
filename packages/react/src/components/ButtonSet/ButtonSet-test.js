@@ -19,36 +19,31 @@ describe('ButtonSet', () => {
     wrapper = shallow(<ButtonSet className="extra-class" />);
   });
 
-  describe('Renders as expected', () => {
-    describe('renders children as expected', () => {
-      it('empty set', () => {
-        expect(wrapper.find('.child').length).toBe(0);
-      });
+  it('should render empty set as expected', () => {
+    expect(wrapper.find('.child').length).toBe(0);
+  });
 
-      it('nonempty set', () => {
-        wrapper = shallow(
-          <ButtonSet>
-            <div className="test-child" />
-            <div className="test-child" />
-          </ButtonSet>
-        );
-        expect(wrapper.find('.test-child').length).toBe(2);
-      });
-    });
-    it('renders wrapper as expected', () => {
-      expect(wrapper.length).toBe(1);
-    });
+  it('should render nonempty set as expected', () => {
+    wrapper = shallow(
+      <ButtonSet>
+        <div className="test-child" />
+        <div className="test-child" />
+      </ButtonSet>
+    );
+    expect(wrapper.find('.test-child').length).toBe(2);
+  });
 
-    describe('has the expected classes', () => {
-      it('horizontal set', () => {
-        expect(wrapper.hasClass(`${prefix}--btn-set`)).toEqual(true);
-      });
+  it('should render wrapper as expected', () => {
+    expect(wrapper.length).toBe(1);
+  });
 
-      it('vertical set', () => {
-        wrapper.setProps({ stacked: true });
-        expect(wrapper.hasClass(`${prefix}--btn-set`)).toEqual(true);
-        expect(wrapper.hasClass(`${prefix}--btn-set--stacked`)).toEqual(true);
-      });
-    });
+  it('should have the expected classes in a horizontal set', () => {
+    expect(wrapper.hasClass(`${prefix}--btn-set`)).toEqual(true);
+  });
+
+  it('should have the expected classes in a vertical set', () => {
+    wrapper.setProps({ stacked: true });
+    expect(wrapper.hasClass(`${prefix}--btn-set`)).toEqual(true);
+    expect(wrapper.hasClass(`${prefix}--btn-set--stacked`)).toEqual(true);
   });
 });
