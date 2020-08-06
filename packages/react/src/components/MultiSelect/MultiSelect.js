@@ -195,6 +195,7 @@ const MultiSelect = React.forwardRef(function MultiSelect(
           <WarningFilled16 className={`${prefix}--list-box__invalid-icon`} />
         )}
         <button
+          type="button"
           ref={ref}
           className={`${prefix}--list-box__field`}
           disabled={disabled}

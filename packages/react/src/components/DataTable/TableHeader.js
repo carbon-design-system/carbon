@@ -70,7 +70,9 @@ const TableHeader = React.forwardRef(function TableHeader(
         scope={scope}
         colSpan={colSpan}
         ref={ref}>
-        <div className={`${prefix}--table-header-label`}>{children}</div>
+        {children ? (
+          <div className={`${prefix}--table-header-label`}>{children}</div>
+        ) : null}
       </th>
     );
   }
@@ -91,7 +93,7 @@ const TableHeader = React.forwardRef(function TableHeader(
       colSpan={colSpan}
       ref={ref}
       scope={scope}>
-      <button className={className} onClick={onClick} {...rest}>
+      <button type="button" className={className} onClick={onClick} {...rest}>
         <span className={`${prefix}--table-sort__flex`}>
           <div className={`${prefix}--table-header-label`}>{children}</div>
           <Arrow

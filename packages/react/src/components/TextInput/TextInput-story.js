@@ -40,8 +40,12 @@ const ControlledPasswordInputApp = React.forwardRef(
           ref={ref}
           {...props}
         />
-        <button onClick={() => setType('text')}>Show password</button>
-        <button onClick={() => setType('password')}>Hide password</button>
+        <button type="button" onClick={() => setType('text')}>
+          Show password
+        </button>
+        <button type="button" onClick={() => setType('password')}>
+          Hide password
+        </button>
       </>
     );
   }

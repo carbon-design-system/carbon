@@ -67,6 +67,7 @@ const Tag = ({
         {children !== null && children !== undefined ? children : TYPES[type]}
       </span>
       <button
+        type="button"
         className={`${prefix}--tag__close-icon`}
         onClick={handleClose}
         disabled={disabled}

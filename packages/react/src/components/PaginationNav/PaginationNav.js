@@ -100,6 +100,7 @@ function PaginationItem({
   return (
     <li className={`${prefix}--pagination-nav__list-item`}>
       <button
+        type="button"
         className={classnames(`${prefix}--pagination-nav__page`, {
           [`${prefix}--pagination-nav__page--active`]: isActive,
         })}

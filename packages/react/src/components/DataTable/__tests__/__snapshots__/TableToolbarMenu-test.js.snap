@@ -63,6 +63,7 @@ exports[`DataTable.TableToolbarMenu should render 1`] = `
           open={false}
           tabIndex={0}
           title="Add"
+          type="button"
         >
           <ForwardRef(Download16)
             aria-label="Add"

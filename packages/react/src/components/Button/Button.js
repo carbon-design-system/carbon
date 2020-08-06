@@ -205,6 +205,7 @@ Button.defaultProps = {
   type: 'button',
   disabled: false,
   kind: 'primary',
+  size: 'default',
 };
 
 export default Button;

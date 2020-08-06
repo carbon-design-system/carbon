@@ -58,7 +58,9 @@ storiesOf('Slider', module)
     const [val, setVal] = useState(87);
     return (
       <>
-        <button onClick={() => setVal(Math.round(Math.random() * 100))}>
+        <button
+          type="button"
+          onClick={() => setVal(Math.round(Math.random() * 100))}>
           randomize value
         </button>
         <Slider

@@ -42,6 +42,7 @@ const TableExpandRow = ({
         data-previous-value={previousValue}
         headers={expandHeader}>
         <button
+          type="button"
           className={`${prefix}--table-expand__button`}
           onClick={onExpand}
           title={expandIconDescription}
