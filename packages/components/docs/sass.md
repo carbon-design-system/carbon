@@ -8248,6 +8248,7 @@ $disabled-03: if(
   - [button [mixin]](#button-mixin)
   - [button-base [mixin]](#button-base-mixin)
   - [content-switcher [mixin]](#content-switcher-mixin)
+  - [data-table-v2-action [mixin]](#data-table-v2-action-mixin)
   - [tabs [mixin]](#tabs-mixin)
 
 ### ✅highlight [variable]
@@ -15570,6 +15571,10 @@ Data table action styles
     color: $text-04;
   }
 
+  .#{$prefix}--action-list .#{$prefix}--btn:disabled {
+    color: $disabled-03;
+  }
+
   .#{$prefix}--action-list .#{$prefix}--btn .#{$prefix}--btn__icon {
     position: static;
     margin-left: $spacing-03;
@@ -15795,6 +15800,7 @@ Data table action styles
   - [spacing-06 [variable]](#spacing-06-variable)
   - [interactive-01 [variable]](#interactive-01-variable)
   - [text-04 [variable]](#text-04-variable)
+  - [disabled-03 [variable]](#disabled-03-variable)
   - [spacing-03 [variable]](#spacing-03-variable)
   - [icon-03 [variable]](#icon-03-variable)
 
