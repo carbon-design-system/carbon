@@ -26,6 +26,7 @@ module.exports = {
   },
   rules: {
     // react
+    'react/button-has-type': 'error',
     'react/jsx-uses-vars': 1,
     'react/jsx-uses-react': 1,
     'react/no-find-dom-node': 1,

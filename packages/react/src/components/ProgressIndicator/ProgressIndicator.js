@@ -104,6 +104,7 @@ export function ProgressStep({
   return (
     <li className={classes}>
       <button
+        type="button"
         className={classnames(`${prefix}--progress-step-button`, {
           [`${prefix}--progress-step-button--unclickable`]: !onClick || current,
         })}
