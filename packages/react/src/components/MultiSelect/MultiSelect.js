@@ -362,6 +362,12 @@ MultiSelect.propTypes = {
    * Specify the direction of the multiselect dropdown. Can be either top or bottom.
    */
   direction: PropTypes.oneOf(['top', 'bottom']),
+
+  /**
+   * Provide text to be used in a `<label>` element that is tied to the
+   * multiselect via ARIA attributes.
+   */
+  titleText: PropTypes.string,
 };
 
 MultiSelect.defaultProps = {
