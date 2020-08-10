@@ -31,19 +31,15 @@
     width: 100%;
     // 196px from design kit
     max-width: rem(196px);
-    box-shadow: rem(-1px) 0 0 0 $button-separator;
 
-    &:first-of-type {
-      box-shadow: none;
+    &:not(:first-of-type):not(:focus) {
+      box-shadow: rem(-1px) 0 0 0 $button-separator;
     }
   }
 
-  .#{$prefix}--btn-set--stacked .#{$prefix}--btn {
+  .#{$prefix}--btn-set--stacked
+    .#{$prefix}--btn:not(:first-of-type):not(:focus) {
     box-shadow: 0 rem(-1px) 0 0 $button-separator;
-
-    &:first-of-type {
-      box-shadow: none;
-    }
   }
 
   .#{$prefix}--btn-set .#{$prefix}--btn.#{$prefix}--btn--disabled {
