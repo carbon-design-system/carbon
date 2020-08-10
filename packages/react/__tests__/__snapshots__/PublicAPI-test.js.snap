@@ -6451,7 +6451,7 @@ Map {
       },
     },
   },
-  "PageSelector" => Object {
+  "unstable_PageSelector" => Object {
     "defaultProps": Object {
       "className": null,
       "id": 1,
@@ -6487,7 +6487,7 @@ Map {
       },
     },
   },
-  "Unstable_Pagination" => Object {
+  "unstable_Pagination" => Object {
     "defaultProps": Object {
       "backwardText": "Previous page",
       "children": undefined,

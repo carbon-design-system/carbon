@@ -169,6 +169,6 @@ export * from './components/UIShell';
 
 // experimental
 export {
-  PageSelector,
-  Unstable_Pagination,
-} from './components/Pagination/Unstable_Pagination';
+  PageSelector as unstable_PageSelector,
+  Pagination as unstable_Pagination,
+} from './components/Pagination/experimental';
