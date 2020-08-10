@@ -100,6 +100,12 @@ const props = () => ({
 });
 
 storiesOf('MultiSelect', module)
+  .addParameters({
+    component: MultiSelect,
+    subcomponents: {
+      'MultiSelect.Filterable': MultiSelect.Filterable,
+    },
+  })
   .addDecorator(withKnobs)
   .add(
     'default',

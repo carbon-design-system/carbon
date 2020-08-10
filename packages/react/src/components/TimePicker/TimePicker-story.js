@@ -26,7 +26,6 @@ const props = {
     ),
     disabled: boolean('Disabled (disabled in <TimePicker>)', false),
     light: boolean('Light variant (light in <TimePicker>)', false),
-    hideLabel: boolean('No label (hideLabel in <TimePicker>)', false),
     labelText: text('Label text (labelText in <TimePicker>)', 'Select a time'),
     invalid: boolean(
       'Show form validation UI (invalid in <TimePicker>)',
@@ -55,6 +54,13 @@ const props = {
 };
 
 storiesOf('TimePicker', module)
+  .addParameters({
+    component: TimePicker,
+    subcomponents: {
+      TimePickerSelect,
+      SelectItem,
+    },
+  })
   .addDecorator(withKnobs)
   .add(
     'Default',

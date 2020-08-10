@@ -138,6 +138,7 @@ export default class ToolbarSearch extends Component {
             }}
           />
           <button
+            type="button"
             className={`${prefix}--toolbar-search__btn`}
             title={labelText}
             onClick={this.expandSearch}>

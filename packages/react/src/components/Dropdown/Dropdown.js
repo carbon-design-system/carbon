@@ -47,6 +47,7 @@ const Dropdown = React.forwardRef(function Dropdown(
     initialSelectedItem,
     selectedItem: controlledSelectedItem,
     downshiftProps,
+    ...other
   },
   ref
 ) {
@@ -118,7 +119,7 @@ const Dropdown = React.forwardRef(function Dropdown(
   }
 
   return (
-    <div className={wrapperClasses}>
+    <div className={wrapperClasses} {...other}>
       {titleText && (
         <label className={titleClasses} {...getLabelProps()}>
           {titleText}
@@ -137,6 +138,7 @@ const Dropdown = React.forwardRef(function Dropdown(
           <WarningFilled16 className={`${prefix}--list-box__invalid-icon`} />
         )}
         <button
+          type="button"
           ref={ref}
           className={`${prefix}--list-box__field`}
           disabled={disabled}

@@ -79,6 +79,18 @@ const props = {
 };
 
 storiesOf('Tile', module)
+  .addParameters({
+    component: Tile,
+    subcomponents: {
+      ClickableTile,
+      SelectableTile,
+      ExpandableTile,
+      RadioTile,
+      TileGroup,
+      TileAboveTheFoldContent,
+      TileBelowTheFoldContent,
+    },
+  })
   .addDecorator(withKnobs)
   .add(
     'Default',

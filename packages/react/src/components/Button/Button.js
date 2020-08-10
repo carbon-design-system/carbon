@@ -96,6 +96,7 @@ const Button = React.forwardRef(function Button(
   );
 });
 
+Button.displayName = 'Button';
 Button.propTypes = {
   /**
    * Specify the content of your Button
@@ -204,6 +205,7 @@ Button.defaultProps = {
   type: 'button',
   disabled: false,
   kind: 'primary',
+  size: 'default',
 };
 
 export default Button;

@@ -26,9 +26,9 @@
   //----------------------------------------------------------------------------
   // default styles
   .#{$prefix}--expandable-row--hidden td {
-    border-top: 0;
     width: auto;
     padding: $spacing-05;
+    border-top: 0;
   }
 
   //child row hidden
@@ -43,8 +43,8 @@
     td {
     padding-top: 0;
     padding-bottom: 0;
-    border: 0;
     background-color: $hover-ui;
+    border: 0;
     transition: padding $duration--moderate-01 motion(standard, productive),
       background-color $duration--moderate-01 motion(standard, productive);
   }
@@ -53,8 +53,8 @@
     + tr[data-child-row]
     td
     .#{$prefix}--child-row-inner-container {
-    overflow: hidden;
     max-height: 0;
+    overflow: hidden;
   }
 
   //child row visible
@@ -63,8 +63,9 @@
   }
 
   tr.#{$prefix}--parent-row.#{$prefix}--expandable-row + tr[data-child-row] td {
-    transition: all $duration--fast-02 motion(standard, productive);
     border-bottom: 1px solid $ui-03;
+    transition: padding-bottom $duration--fast-02 motion(standard, productive),
+      transform $duration--fast-02 motion(standard, productive);
   }
 
   tr.#{$prefix}--parent-row.#{$prefix}--expandable-row
@@ -111,10 +112,10 @@
 
   // hovering on expanded parent
   tr.#{$prefix}--parent-row.#{$prefix}--expandable-row:hover td {
+    color: $text-01;
     background-color: $hover-ui;
     border-top: 1px solid $ui-03;
     border-bottom: 1px solid $ui-03;
-    color: $text-01;
   }
 
   tr.#{$prefix}--parent-row.#{$prefix}--expandable-row:hover td:first-of-type {
@@ -126,8 +127,8 @@
   tr.#{$prefix}--parent-row.#{$prefix}--expandable-row:hover
     + tr[data-child-row]
     td {
-    background-color: $hover-ui;
     color: $text-01;
+    background-color: $hover-ui;
     border-bottom: 1px solid $ui-03;
   }
 
@@ -142,10 +143,10 @@
   }
 
   tr.#{$prefix}--expandable-row--hover td {
-    background-color: $hover-ui;
-    border-bottom: 1px solid $ui-03;
-    border-top: 1px solid $ui-03;
     color: $text-01;
+    background-color: $hover-ui;
+    border-top: 1px solid $ui-03;
+    border-bottom: 1px solid $ui-03;
   }
 
   tr.#{$prefix}--parent-row.#{$prefix}--expandable-row.#{$prefix}--expandable-row--hover
@@ -201,9 +202,9 @@
   }
 
   .#{$prefix}--table-expand__svg {
-    fill: $ui-05;
     transform: rotate(90deg);
     transition: transform $duration--moderate-01 motion(standard, productive);
+    fill: $ui-05;
   }
 
   // fix expanded parent separating border length
@@ -211,12 +212,12 @@
     td.#{$prefix}--table-expand
     + td::after {
     position: absolute;
-    content: '';
-    left: 0;
     bottom: rem(-1px);
-    height: rem(1px);
+    left: 0;
     width: rem(8px);
+    height: rem(1px);
     background: $ui-03;
+    content: '';
   }
 
   tr.#{$prefix}--parent-row.#{$prefix}--expandable-row:hover
@@ -245,8 +246,8 @@
   .#{$prefix}--data-table--zebra tbody tr[data-parent-row]:nth-child(4n + 1) td,
   .#{$prefix}--data-table--zebra tbody tr[data-child-row]:nth-child(4n + 2) td {
     background-color: $data-table-zebra-color;
-    border-bottom: 1px solid $data-table-zebra-color;
     border-top: 1px solid $data-table-zebra-color;
+    border-bottom: 1px solid $data-table-zebra-color;
   }
 
   .#{$prefix}--data-table--zebra tr.#{$prefix}--parent-row td,
@@ -254,7 +255,7 @@
     tr.#{$prefix}--parent-row.#{$prefix}--expandable-row
     + tr[data-child-row]
     td {
-    transition: all $duration--moderate-01 motion(standard, productive),
+    transition: transform $duration--moderate-01 motion(standard, productive),
       border-bottom $duration--moderate-01 motion(standard, productive),
       border-top $duration--moderate-01 motion(standard, productive);
   }
@@ -267,16 +268,16 @@
     td,
   .#{$prefix}--data-table--zebra tbody tr[data-child-row]:hover td {
     background-color: $hover-field;
-    border-bottom: 1px solid $hover-field;
     border-top: 1px solid $hover-field;
+    border-bottom: 1px solid $hover-field;
   }
 
   .#{$prefix}--data-table--zebra
     tr.#{$prefix}--parent-row.#{$prefix}--expandable-row.#{$prefix}--expandable-row--hover
     td {
     background: $hover-ui;
-    border-bottom: 1px solid $hover-field;
     border-top: 1px solid $hover-field;
+    border-bottom: 1px solid $hover-field;
   }
 
   //----------------------------------------------------------------------------
@@ -291,8 +292,8 @@
   }
 
   tr.#{$prefix}--parent-row.#{$prefix}--data-table--selected td {
-    background: $selected-ui;
     color: $text-01;
+    background: $selected-ui;
     border-bottom: 1px solid transparent;
     box-shadow: 0 1px $active-ui;
   }
@@ -343,16 +344,16 @@
     td {
     color: $text-01;
     background-color: $hover-ui;
+    border-top: 1px solid $active-ui;
     border-bottom: 1px solid $ui-03;
     box-shadow: 0 1px $active-ui;
-    border-top: 1px solid $active-ui;
   }
 
   tr.#{$prefix}--parent-row.#{$prefix}--data-table--selected.#{$prefix}--expandable-row
     + tr[data-child-row]:last-of-type
     td {
-    box-shadow: inset 0 -1px $active-ui;
     padding-bottom: rem(24px);
+    box-shadow: inset 0 -1px $active-ui;
   }
 
   // Child row expanded hover

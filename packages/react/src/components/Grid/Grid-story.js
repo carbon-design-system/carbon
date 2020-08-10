@@ -3,8 +3,13 @@ import React from 'react';
 import { Grid, Row, Column } from './';
 
 export default {
-  decorators: [(storyFn) => <div id="templates">{storyFn()}</div>],
   title: 'Grid',
+  component: Grid,
+  subcomponents: {
+    Row,
+    Column,
+  },
+  decorators: [(storyFn) => <div id="templates">{storyFn()}</div>],
 };
 
 function DemoContent({ children }) {
@@ -108,6 +113,72 @@ export const condensedColumns = () => (
       </Column>
     </Row>
     <Row condensed>
+      <Column>
+        <DemoContent>1/4</DemoContent>
+      </Column>
+      <Column>
+        <DemoContent>1/4</DemoContent>
+      </Column>
+      <Column>
+        <DemoContent>1/4</DemoContent>
+      </Column>
+      <Column>
+        <DemoContent>1/4</DemoContent>
+      </Column>
+    </Row>
+    <Row>
+      <Column>
+        <DemoContent>1/4</DemoContent>
+      </Column>
+      <Column>
+        <DemoContent>1/4</DemoContent>
+      </Column>
+      <Column>
+        <DemoContent>1/4</DemoContent>
+      </Column>
+      <Column>
+        <DemoContent>1/4</DemoContent>
+      </Column>
+    </Row>
+  </Grid>
+);
+
+export const narrow = () => (
+  <Grid narrow>
+    <Row>
+      <Column>
+        <DemoContent>1/4</DemoContent>
+      </Column>
+      <Column>
+        <DemoContent>1/4</DemoContent>
+      </Column>
+      <Column>
+        <DemoContent>1/4</DemoContent>
+      </Column>
+      <Column>
+        <DemoContent>1/4</DemoContent>
+      </Column>
+    </Row>
+  </Grid>
+);
+
+export const narrowColumns = () => (
+  <Grid>
+    <Row>
+      <Column>
+        <DemoContent>1/4</DemoContent>
+      </Column>
+      <Column>
+        <DemoContent>1/4</DemoContent>
+      </Column>
+      <Column>
+        <DemoContent>1/4</DemoContent>
+      </Column>
+      <Column>
+        <DemoContent>1/4</DemoContent>
+      </Column>
+    </Row>
+    <Row narrow>
       <Column>
         <DemoContent>1/4</DemoContent>
       </Column>

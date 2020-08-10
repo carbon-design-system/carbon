@@ -75,6 +75,13 @@ const props = {
 };
 
 storiesOf('DatePicker', module)
+  .addParameters({
+    component: DatePicker,
+    subcomponents: {
+      DatePickerInput,
+      DatePickerSkeleton,
+    },
+  })
   .addDecorator(withKnobs)
   .add(
     'simple',
@@ -199,7 +206,9 @@ storiesOf('DatePicker', module)
                 id="date-picker-input-id"
               />
             </DatePicker>
-            <button onClick={() => setState({ date: '01/01/2011' })}>
+            <button
+              type="button"
+              onClick={() => setState({ date: '01/01/2011' })}>
               Click me to set to 01/01/2011
             </button>
           </>

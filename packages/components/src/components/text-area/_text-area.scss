@@ -25,18 +25,18 @@
     @include type-style('body-long-01');
     @include focus-outline('reset');
 
-    background-color: $field-01;
     width: 100%;
-    height: 100%;
     min-width: 10rem;
+    height: 100%;
     min-height: rem(40px);
     padding: rem(11px) $carbon--spacing-05;
     color: $text-01;
-    resize: vertical;
+    background-color: $field-01;
     border: none;
     border-bottom: 1px solid $ui-04;
     transition: background-color $duration--fast-01 motion(standard, productive),
       outline $duration--fast-01 motion(standard, productive);
+    resize: vertical;
   }
 
   .#{$prefix}--text-area:focus,
@@ -47,8 +47,6 @@
   .#{$prefix}--text-area::placeholder {
     @include placeholder-colors;
     @include type-style('body-long-01');
-
-    opacity: 1;
   }
 
   .#{$prefix}--text-area--light {
@@ -67,8 +65,8 @@
 
   .#{$prefix}--text-area__invalid-icon {
     position: absolute;
-    right: $carbon--spacing-05;
     top: $carbon--spacing-04;
+    right: $carbon--spacing-05;
     fill: $support-01;
   }
 
@@ -76,11 +74,11 @@
   // Disabled
   //-----------------------------
   .#{$prefix}--text-area:disabled {
-    cursor: not-allowed;
-    outline: none;
+    color: $disabled-02;
     background-color: $disabled-background-color;
     border-bottom: 1px solid transparent;
-    color: $disabled-02;
+    outline: none;
+    cursor: not-allowed;
   }
 
   .#{$prefix}--text-area:disabled::placeholder {

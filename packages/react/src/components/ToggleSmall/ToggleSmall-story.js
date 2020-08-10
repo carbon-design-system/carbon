@@ -28,6 +28,12 @@ const toggleProps = () => ({
 });
 
 storiesOf('ToggleSmall', module)
+  .addParameters({
+    component: ToggleSmall,
+    subcomponents: {
+      ToggleSmallSkeleton,
+    },
+  })
   .addDecorator(withKnobs)
   .add(
     'toggled',

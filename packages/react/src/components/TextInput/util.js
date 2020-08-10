@@ -4,7 +4,18 @@ const invalidProps = ({ invalid, errorId }) => ({
   'aria-describedby': errorId,
 });
 
-export const textInputProps = ({ invalid, sharedTextInputProps, errorId }) => ({
+const warnProps = ({ warnId }) => ({
+  'aria-describedby': warnId,
+});
+
+export const textInputProps = ({
+  invalid,
+  sharedTextInputProps,
+  errorId,
+  warn,
+  warnId,
+}) => ({
   ...sharedTextInputProps,
   ...(invalid ? invalidProps({ invalid, errorId }) : {}),
+  ...(!invalid && warn ? warnProps({ warnId }) : {}),
 });

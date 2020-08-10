@@ -29,23 +29,37 @@ $css--helpers: true;
     @include reset;
     @include type-style('body-short-01');
 
-    width: 100%;
-    overflow-x: auto;
-    background-color: $ui-01;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    border-top: 1px solid $ui-03;
+
+    width: 100%;
     min-height: rem(48px);
+    overflow-x: auto;
+    background-color: $ui-01;
+    border-top: 1px solid $ui-03;
 
     @include carbon--breakpoint('md') {
       overflow: initial;
     }
+
+    // mobile friendly pagination
+    @include carbon--breakpoint-down('md') {
+      .#{$prefix}--pagination__left > *,
+      .#{$prefix}--pagination__right > * {
+        display: none;
+      }
+
+      .#{$prefix}--pagination__items-count,
+      .#{$prefix}--pagination__control-buttons {
+        display: initial;
+      }
+    }
   }
 
   .#{$prefix}--pagination .#{$prefix}--select {
-    height: 100%;
     align-items: center;
+    height: 100%;
   }
 
   .#{$prefix}--pagination .#{$prefix}--select-input--inline__wrapper {
@@ -86,8 +100,8 @@ $css--helpers: true;
   .#{$prefix}--pagination__left,
   .#{$prefix}--pagination__right {
     display: flex;
-    height: rem(48px);
     align-items: center;
+    height: rem(48px);
   }
 
   .#{$prefix}--pagination__left > .#{$prefix}--form-item,
@@ -128,19 +142,20 @@ $css--helpers: true;
   .#{$prefix}--btn--ghost.#{$prefix}--pagination__button {
     @include reset;
 
-    border: none;
-    background: none;
-    cursor: pointer;
-    height: 100%;
-    width: $carbon--spacing-09;
-    margin: 0;
-    border-left: 1px solid $ui-03;
     display: flex;
-    justify-content: center;
     align-items: center;
-    fill: $ui-05;
+    justify-content: center;
+    width: $carbon--spacing-09;
+    height: 100%;
+    margin: 0;
+    background: none;
+
+    border: none;
+    border-left: 1px solid $ui-03;
+    cursor: pointer;
     transition: outline $duration--fast-02 motion(standard, productive),
       background-color $duration--fast-02 motion(standard, productive);
+    fill: $ui-05;
   }
 
   .#{$prefix}--pagination__button:focus,
@@ -157,18 +172,18 @@ $css--helpers: true;
 
   .#{$prefix}--pagination__button--no-index,
   .#{$prefix}--btn--ghost.#{$prefix}--pagination__button--no-index {
-    fill: $disabled-02;
     cursor: not-allowed;
+    fill: $disabled-02;
   }
 
   .#{$prefix}--pagination__button:disabled:hover,
   .#{$prefix}--pagination__button--no-index:hover,
   .#{$prefix}--btn--ghost:disabled:hover.#{$prefix}--pagination__button,
   .#{$prefix}--btn--ghost:hover.#{$prefix}--pagination__button--no-index {
-    cursor: not-allowed;
-    fill: $disabled-02;
     background: $ui-01;
     border-color: $ui-03;
+    cursor: not-allowed;
+    fill: $disabled-02;
   }
 
   // Skeleton state

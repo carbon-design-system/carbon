@@ -28,14 +28,15 @@
   .#{$prefix}--table-sort {
     @include button-reset(false);
 
-    font: inherit;
-    line-height: 1;
     display: flex;
     align-items: center;
     justify-content: space-between;
     width: 100%;
-    color: $text-01;
     min-height: 100%;
+    color: $text-01;
+
+    font: inherit;
+    line-height: 1;
     background-color: $ui-03;
     transition: background-color $duration--fast-01 motion(entrance, productive),
       outline $duration--fast-01 motion(entrance, productive);
@@ -61,7 +62,40 @@
   .#{$prefix}--data-table--sort th .#{$prefix}--table-sort__flex {
     display: flex;
     align-items: center;
+    justify-content: space-between;
+    width: 100%;
     height: 100%;
+    min-height: 3rem;
+  }
+
+  .#{$prefix}--data-table--sort:not(.#{$prefix}--data-table--compact):not(.#{$prefix}--data-table--short):not(.#{$prefix}--data-table--tall)
+    th
+    .#{$prefix}--table-sort__flex {
+    /* IE11 workaround for align-items: center and min-height
+        https://github.com/philipwalton/flexbugs/issues/231 */
+    @media screen and (-ms-high-contrast: active),
+      screen and (-ms-high-contrast: none) {
+      height: 2.99rem;
+    }
+  }
+
+  .#{$prefix}--data-table--compact.#{$prefix}--data-table--sort
+    th
+    .#{$prefix}--table-sort__flex {
+    min-height: 1.5rem;
+  }
+
+  .#{$prefix}--data-table--short.#{$prefix}--data-table--sort
+    th
+    .#{$prefix}--table-sort__flex {
+    min-height: 2rem;
+  }
+
+  .#{$prefix}--data-table--tall.#{$prefix}--data-table--sort
+    th
+    .#{$prefix}--table-sort__flex {
+    align-items: flex-start;
+    min-height: 4rem;
   }
 
   // -------------------------------------
@@ -77,12 +111,16 @@
   }
 
   .#{$prefix}--table-sort__icon-unsorted {
+    width: rem(20px);
+    min-width: $layout-01;
+    margin-right: $spacing-03;
     margin-left: $spacing-03;
-    margin-right: $spacing-05;
     opacity: 0;
     fill: $ui-05;
-    width: auto;
-    min-width: $layout-01;
+  }
+
+  .#{$prefix}--table-sort.#{$prefix}--table-sort--active {
+    background: $data-table-column-hover;
   }
 
   // active icons
@@ -102,14 +140,14 @@
   }
 
   .#{$prefix}--table-sort__icon {
+    width: rem(20px);
+    min-width: $layout-01;
+    margin-right: $spacing-03;
     margin-left: $spacing-03;
-    margin-right: $spacing-05;
-    transition: transform $transition--base $carbon--standard-easing;
     transform: rotate(0);
     opacity: 1;
+    transition: transform $transition--base $carbon--standard-easing;
     fill: $ui-05;
-    width: auto;
-    min-width: $layout-01;
   }
 
   //----------------------------------------------------------------------------
@@ -135,12 +173,6 @@
     .#{$prefix}--table-sort {
     display: inline-block;
     height: rem(64px);
-  }
-
-  .#{$prefix}--data-table--tall.#{$prefix}--data-table--sort
-    th
-    .#{$prefix}--table-sort__flex {
-    align-items: flex-start;
   }
 
   .#{$prefix}--data-table--tall .#{$prefix}--table-sort__icon-unsorted,

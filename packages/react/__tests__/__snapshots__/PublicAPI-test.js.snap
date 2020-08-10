@@ -100,9 +100,11 @@ Map {
     "defaultProps": Object {
       "disabled": false,
       "kind": "primary",
+      "size": "default",
       "tabIndex": 0,
       "type": "button",
     },
+    "displayName": "Button",
     "propTypes": Object {
       "as": Object {
         "args": Array [
@@ -284,6 +286,9 @@ Map {
       },
       "feedback": Object {
         "type": "string",
+      },
+      "hideCopyButton": Object {
+        "type": "bool",
       },
       "light": Object {
         "type": "bool",
@@ -2717,6 +2722,9 @@ Map {
       "fullWidth": Object {
         "type": "bool",
       },
+      "narrow": Object {
+        "type": "bool",
+      },
     },
   },
   "Row" => Object {
@@ -2741,6 +2749,9 @@ Map {
         "type": "string",
       },
       "condensed": Object {
+        "type": "bool",
+      },
+      "narrow": Object {
         "type": "bool",
       },
     },
@@ -3072,6 +3083,9 @@ Map {
       "selectorPrimaryFocus": "[data-modal-primary-focus]",
     },
     "propTypes": Object {
+      "alert": Object {
+        "type": "bool",
+      },
       "aria-label": [Function],
       "children": Object {
         "type": "node",
@@ -4120,6 +4134,31 @@ Map {
       },
     },
   },
+  "PaginationNav" => Object {
+    "propTypes": Object {
+      "className": Object {
+        "type": "string",
+      },
+      "itemsShown": Object {
+        "type": "number",
+      },
+      "loop": Object {
+        "type": "bool",
+      },
+      "onChange": Object {
+        "type": "func",
+      },
+      "page": Object {
+        "type": "number",
+      },
+      "totalItems": Object {
+        "type": "number",
+      },
+      "translateWithId": Object {
+        "type": "func",
+      },
+    },
+  },
   "PrimaryButton" => Object {},
   "ProgressIndicator" => Object {
     "defaultProps": Object {
@@ -4516,6 +4555,9 @@ Map {
     "propTypes": Object {
       "className": Object {
         "type": "string",
+      },
+      "disabled": Object {
+        "type": "bool",
       },
       "index": Object {
         "type": "number",
@@ -5283,6 +5325,8 @@ Map {
       "onChange": [Function],
       "onClick": [Function],
       "type": "text",
+      "warn": false,
+      "warnText": "",
     },
     "propTypes": Object {
       "className": Object {
@@ -5363,6 +5407,12 @@ Map {
           ],
         ],
         "type": "oneOfType",
+      },
+      "warn": Object {
+        "type": "bool",
+      },
+      "warnText": Object {
+        "type": "string",
       },
     },
     "render": [Function],

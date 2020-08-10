@@ -19,12 +19,12 @@
 /// @group tile
 @mixin tile {
   .#{$prefix}--tile {
+    position: relative;
     display: block;
     min-width: 8rem;
     min-height: 4rem;
-    background-color: $ui-01;
-    position: relative;
     padding: $carbon--spacing-05;
+    background-color: $ui-01;
     outline: 2px solid transparent;
     outline-offset: -2px;
 
@@ -40,8 +40,8 @@
   .#{$prefix}--tile--clickable,
   .#{$prefix}--tile--selectable,
   .#{$prefix}--tile--expandable {
-    transition: $duration--moderate-01 motion(standard, productive);
     cursor: pointer;
+    transition: $duration--moderate-01 motion(standard, productive);
 
     &:hover {
       background: $hover-ui;
@@ -82,15 +82,15 @@
   .#{$prefix}--tile__checkmark,
   .#{$prefix}--tile__chevron {
     position: absolute;
-    transition: $duration--fast-02 motion(standard, productive);
-    border: none;
     background: transparent;
+    border: none;
+    transition: $duration--fast-02 motion(standard, productive);
   }
 
   .#{$prefix}--tile__checkmark {
-    height: 1rem;
     top: 1rem;
     right: 1rem;
+    height: 1rem;
     opacity: 0;
 
     svg {
@@ -105,8 +105,8 @@
 
   .#{$prefix}--tile__chevron {
     position: absolute;
-    bottom: 0.5rem;
     right: 0.5rem;
+    bottom: 0.5rem;
     height: 1rem;
 
     svg {
@@ -126,11 +126,11 @@
 
   .#{$prefix}--tile--expandable {
     width: 100%;
+    overflow: hidden;
     color: inherit;
     font-size: inherit;
     text-align: left;
     border: 0;
-    overflow: hidden;
     transition: max-height $duration--moderate-01 motion(standard, productive);
   }
 
@@ -185,6 +185,10 @@
 
   .#{$prefix}--tile-input {
     @include hidden;
+  }
+
+  .#{$prefix}--tile-input:focus + .#{$prefix}--tile {
+    @include focus-outline('outline');
   }
 }
 

@@ -23,14 +23,15 @@ $css--helpers: true;
     @include reset;
     @include carbon--type-style('body-short-01');
 
-    width: 100%;
-    background-color: $ui-01;
     display: flex;
     align-items: center;
     justify-content: space-between;
+
+    width: 100%;
+    height: rem(48px);
+    background-color: $ui-01;
     border-top: 1px solid $ui-03;
     border-bottom: 1px solid transparent;
-    height: rem(48px);
   }
 
   .#{$prefix}--unstable-pagination__text {
@@ -45,8 +46,8 @@ $css--helpers: true;
   .#{$prefix}--unstable-pagination__left,
   .#{$prefix}--unstable-pagination__right {
     display: flex;
-    height: 100%;
     align-items: center;
+    height: 100%;
   }
 
   .#{$prefix}--unstable-pagination__left {
@@ -72,26 +73,27 @@ $css--helpers: true;
   .#{$prefix}--unstable-pagination__button {
     @include reset;
 
-    border: none;
-    border-left: 1px solid $ui-03;
-    background: none;
-    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     height: 100%;
     margin: 0;
     padding: 0 rem(14px);
-    display: flex;
-    justify-content: center;
-    align-items: center;
     color: $ui-05;
-    fill: $ui-05;
+    background: none;
+
+    border: none;
+    border-left: 1px solid $ui-03;
+    cursor: pointer;
     transition: outline $duration--fast-02 motion(standard, productive),
       background-color $duration--fast-02 motion(standard, productive);
+    fill: $ui-05;
   }
 
   // Unset height/width set by icon-only button:
   .#{$prefix}--unstable-pagination__button .#{$prefix}--btn__icon {
-    height: initial;
     width: initial;
+    height: initial;
   }
 
   .#{$prefix}--unstable-pagination__button.#{$prefix}--btn--icon-only.#{$prefix}--tooltip__trigger:focus {
@@ -99,13 +101,13 @@ $css--helpers: true;
   }
 
   .#{$prefix}--unstable-pagination__button:hover {
-    background: $hover-ui;
     color: $ui-05;
+    background: $hover-ui;
   }
 
   .#{$prefix}--unstable-pagination__button--no-index {
-    fill: $disabled-02;
     cursor: not-allowed;
+    fill: $disabled-02;
   }
 
   .#{$prefix}--unstable-pagination__button.#{$prefix}--btn:disabled {
@@ -115,15 +117,15 @@ $css--helpers: true;
 
   .#{$prefix}--unstable-pagination__button:disabled:hover,
   .#{$prefix}--unstable-pagination__button--no-index:hover {
+    background: transparent;
     cursor: not-allowed;
     fill: $disabled-02;
-    background: transparent;
   }
 
   .#{$prefix}--unstable-pagination__page-selector,
   .#{$prefix}--unstable-pagination__page-sizer {
-    height: 100%;
     align-items: center;
+    height: 100%;
   }
 
   .#{$prefix}--unstable-pagination__page-selector
@@ -141,12 +143,12 @@ $css--helpers: true;
     width: auto;
     min-width: auto;
     height: 100%;
-    padding: 0 $carbon--spacing-08 0 $carbon--spacing-05;
     margin-right: -0.65rem;
+    padding: 0 $carbon--spacing-08 0 $carbon--spacing-05;
 
     @include carbon--breakpoint('md') {
-      padding-right: carbon--mini-units(4.5);
       margin-right: 0;
+      padding-right: carbon--mini-units(4.5);
     }
   }
 

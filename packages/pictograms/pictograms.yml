@@ -1956,11 +1956,19 @@
     - hybrid
     - cloud
     - services
+- name: ibm--cloud
+  friendly_name: IBM Cloud
+  aliases:
+    - ibm cloud
 - name: ibm--ix
   friendly_name: IBM iX®
   aliases:
     - IBM iX®
     - IBM
+- name: ibm--watson
+  friendly_name: IBM Watson
+  aliases:
+    - ibm watson
 - name: ibm--z
   friendly_name: IBM Z®
   aliases:
@@ -3261,17 +3269,13 @@
     - soft ice cream
     - ice cream
     - food
-    - null
-    - name: softlayer--enablement
-      friendly_name: Softlayer enablement
-      aliases:
-        - softlayer enablement
-        - enablement
-        - softlayer
-        - cloud
 - name: softlayer--enablement
-  friendly_name: softlayer--enablement
-  aliases: []
+  friendly_name: Softlayer enablement
+  aliases:
+    - softlayer enablement
+    - enablement
+    - softlayer
+    - cloud
 - name: solar--field
   friendly_name: Solar field
   aliases:

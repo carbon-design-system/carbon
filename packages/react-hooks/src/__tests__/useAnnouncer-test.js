@@ -55,7 +55,10 @@ describe('useAnnouncer', () => {
     function Component({ mode, message, testId }) {
       const announce = useAnnouncer();
       return (
-        <button data-test-id={testId} onClick={() => announce(mode, message)}>
+        <button
+          type="button"
+          data-test-id={testId}
+          onClick={() => announce(mode, message)}>
           Announce
         </button>
       );

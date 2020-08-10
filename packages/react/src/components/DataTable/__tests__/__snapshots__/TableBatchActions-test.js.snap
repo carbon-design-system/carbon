@@ -11,15 +11,27 @@ exports[`DataTable.TableBatchActions should render 1`] = `
   <div
     className="bx--batch-actions custom-class"
   >
+    <div
+      className="bx--batch-summary"
+    >
+      <p
+        className="bx--batch-summary__para"
+      >
+        <span>
+          10 items selected
+        </span>
+      </p>
+    </div>
     <TableActionList>
       <div
         className="bx--action-list"
       >
-        <ForwardRef(Button)
+        <Button
           className="bx--batch-summary__cancel"
           disabled={false}
           kind="primary"
           onClick={[MockFunction]}
+          size="default"
           tabIndex={-1}
           type="button"
         >
@@ -32,20 +44,9 @@ exports[`DataTable.TableBatchActions should render 1`] = `
           >
             Cancel
           </button>
-        </ForwardRef(Button)>
+        </Button>
       </div>
     </TableActionList>
-    <div
-      className="bx--batch-summary"
-    >
-      <p
-        className="bx--batch-summary__para"
-      >
-        <span>
-          10 items selected
-        </span>
-      </p>
-    </div>
   </div>
 </TableBatchActions>
 `;
@@ -61,15 +62,27 @@ exports[`DataTable.TableBatchActions should render 2`] = `
   <div
     className="bx--batch-actions bx--batch-actions--active custom-class"
   >
+    <div
+      className="bx--batch-summary"
+    >
+      <p
+        className="bx--batch-summary__para"
+      >
+        <span>
+          10 items selected
+        </span>
+      </p>
+    </div>
     <TableActionList>
       <div
         className="bx--action-list"
       >
-        <ForwardRef(Button)
+        <Button
           className="bx--batch-summary__cancel"
           disabled={false}
           kind="primary"
           onClick={[MockFunction]}
+          size="default"
           tabIndex={0}
           type="button"
         >
@@ -82,20 +95,9 @@ exports[`DataTable.TableBatchActions should render 2`] = `
           >
             Cancel
           </button>
-        </ForwardRef(Button)>
+        </Button>
       </div>
     </TableActionList>
-    <div
-      className="bx--batch-summary"
-    >
-      <p
-        className="bx--batch-summary__para"
-      >
-        <span>
-          10 items selected
-        </span>
-      </p>
-    </div>
   </div>
 </TableBatchActions>
 `;

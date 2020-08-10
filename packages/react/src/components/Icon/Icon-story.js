@@ -65,6 +65,9 @@ const propsSkeleton2 = {
 };
 
 storiesOf('Icon', module)
+  .addParameters({
+    component: Icon,
+  })
   .addDecorator(withKnobs)
   .add(
     'Default',

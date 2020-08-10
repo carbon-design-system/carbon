@@ -40,8 +40,12 @@ const ControlledPasswordInputApp = React.forwardRef(
           ref={ref}
           {...props}
         />
-        <button onClick={() => setType('text')}>Show password</button>
-        <button onClick={() => setType('password')}>Hide password</button>
+        <button type="button" onClick={() => setType('text')}>
+          Show password
+        </button>
+        <button type="button" onClick={() => setType('password')}>
+          Hide password
+        </button>
       </>
     );
   }
@@ -65,6 +69,11 @@ const props = {
     invalidText: text(
       'Form validation UI content (invalidText)',
       'A valid value is required'
+    ),
+    warn: boolean('Show warning state (warn)', false),
+    warnText: text(
+      'Warning state text (warnText)',
+      'This will overwrite your current settings'
     ),
     helperText: text('Helper text (helperText)', 'Optional help text'),
     inline: boolean('Inline variant (inline)', false),
@@ -96,6 +105,13 @@ const props = {
 TextInput.displayName = 'TextInput';
 
 storiesOf('TextInput', module)
+  .addParameters({
+    component: TextInput,
+    subcomponents: {
+      TextInputSkeleton,
+      'TextInput.ControlledPasswordInput': TextInput.ControlledPasswordInput,
+    },
+  })
   .addDecorator(withKnobs)
   .add(
     'Default',

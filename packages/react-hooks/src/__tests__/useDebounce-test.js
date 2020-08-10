@@ -25,7 +25,9 @@ describe('useDebounce', () => {
       [debouncedValue] = useDebounce(count, 100);
 
       return (
-        <button onClick={() => updateCount(count + 1)}>{debouncedValue}</button>
+        <button type="button" onClick={() => updateCount(count + 1)}>
+          {debouncedValue}
+        </button>
       );
     }
 
@@ -53,7 +55,9 @@ describe('useDebounce', () => {
       [debouncedValue] = useDebounce(count, 100);
 
       return (
-        <button onClick={() => updateCount(count + 1)}>{debouncedValue}</button>
+        <button type="button" onClick={() => updateCount(count + 1)}>
+          {debouncedValue}
+        </button>
       );
     }
 
@@ -90,7 +94,9 @@ describe('useDebounce', () => {
       });
 
       return (
-        <button onClick={() => updateCount(count + 1)}>{debouncedValue}</button>
+        <button type="button" onClick={() => updateCount(count + 1)}>
+          {debouncedValue}
+        </button>
       );
     }
 

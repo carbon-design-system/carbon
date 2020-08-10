@@ -12,6 +12,12 @@ import ListItem from '../ListItem';
 import UnorderedList from '../UnorderedList';
 
 storiesOf('UnorderedList', module)
+  .addParameters({
+    component: UnorderedList,
+    subcomponents: {
+      ListItem,
+    },
+  })
   .add(
     'default',
     () => (

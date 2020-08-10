@@ -32,8 +32,8 @@
 @mixin text-overflow($width: false) {
   display: block;
   overflow-x: hidden;
-  text-overflow: ellipsis;
   white-space: nowrap;
+  text-overflow: ellipsis;
 
   // apply a width if width parameter exists
   @if ($width) {
@@ -47,6 +47,7 @@
 /// @group global-helpers
 @mixin placeholder-colors {
   color: $text-03;
+  opacity: 1;
 }
 
 /// Adds box shadow
@@ -68,8 +69,8 @@
   }
 
   @if ($type == 'blurred') {
-    box-shadow: 0 0 0 3px $focus;
     outline: 1px solid transparent;
+    box-shadow: 0 0 0 3px $focus;
   }
 
   @if ($type == 'outline') {
@@ -78,8 +79,8 @@
   }
 
   @if ($type == 'outline-compat') {
-    border: 2px solid $focus;
     box-sizing: border-box;
+    border: 2px solid $focus;
   }
 
   @if ($type == 'invalid') {
@@ -102,8 +103,8 @@
 /// @group global-helpers
 @mixin rotate($deg, $speed, $origin: center) {
   transform: rotate($deg);
-  transition: transform $speed;
   transform-origin: $origin;
+  transition: transform $speed;
 }
 
 /// Adds styles to hide content
@@ -113,13 +114,13 @@
   position: absolute;
   width: 1px;
   height: 1px;
-  padding: 0;
   margin: -1px;
+  padding: 0;
   overflow: hidden;
-  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
   border: 0;
   visibility: inherit;
-  white-space: nowrap;
+  clip: rect(0, 0, 0, 0);
 }
 
 /// Resets button styles
@@ -131,11 +132,11 @@
   @include reset;
 
   display: inline-block;
-  background: none;
-  appearance: none;
-  border: 0;
   padding: 0;
+  background: none;
+  border: 0;
   cursor: pointer;
+  appearance: none;
 
   @if ($width == true) {
     width: 100%;
@@ -152,11 +153,11 @@
 /// @group global-helpers
 @mixin skeleton {
   position: relative;
-  border: none;
   padding: 0;
+  background: $skeleton-01;
+  border: none;
   box-shadow: none;
   pointer-events: none;
-  background: $skeleton-01;
 
   &:hover,
   &:focus,
@@ -167,14 +168,14 @@
   }
 
   &::before {
-    content: '';
-    width: 0%;
-    height: 100%;
     position: absolute;
     top: 0;
     left: 0;
+    width: 0%;
+    height: 100%;
     background: $skeleton-02;
     animation: 3000ms ease-in-out skeleton infinite;
+    content: '';
 
     @media (prefers-reduced-motion: reduce) {
       animation: none;
@@ -185,51 +186,51 @@
 @include exports('skeleton') {
   @keyframes skeleton {
     0% {
-      width: 0%;
-      left: 0;
       right: auto;
+      left: 0;
+      width: 0%;
       opacity: 0.3;
     }
     20% {
-      width: 100%;
-      left: 0;
       right: auto;
+      left: 0;
+      width: 100%;
       opacity: 1;
     }
     28% {
-      width: 100%;
-      left: auto;
       right: 0;
+      left: auto;
+      width: 100%;
     }
     51% {
-      width: 0%;
-      left: auto;
       right: 0;
+      left: auto;
+      width: 0%;
     }
     58% {
-      width: 0%;
-      left: auto;
       right: 0;
+      left: auto;
+      width: 0%;
     }
     82% {
-      width: 100%;
-      left: auto;
       right: 0;
+      left: auto;
+      width: 100%;
     }
     83% {
-      width: 100%;
-      left: 0;
       right: auto;
+      left: 0;
+      width: 100%;
     }
     96% {
-      width: 0%;
-      left: 0;
       right: auto;
+      left: 0;
+      width: 0%;
     }
     100% {
-      width: 0%;
-      left: 0;
       right: auto;
+      left: 0;
+      width: 0%;
       opacity: 0.3;
     }
   }

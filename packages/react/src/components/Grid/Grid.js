@@ -15,6 +15,7 @@ const { prefix } = settings;
 function Grid({
   as: BaseComponent = 'div',
   condensed = false,
+  narrow = false,
   fullWidth = false,
   className: containerClassName,
   children,
@@ -23,6 +24,7 @@ function Grid({
   const className = cx(containerClassName, {
     [`${prefix}--grid`]: true,
     [`${prefix}--grid--condensed`]: condensed,
+    [`${prefix}--grid--narrow`]: narrow,
     [`${prefix}--grid--full-width`]: fullWidth,
   });
 
@@ -44,6 +46,12 @@ Grid.propTypes = {
    * Rows have 2px of margin between them to match gutter.
    */
   condensed: PropTypes.bool,
+
+  /**
+   * Container hangs 16px into the gutter. Useful for
+   * typographic alignment with and without containers.
+   */
+  narrow: PropTypes.bool,
 
   /**
    * Remove the default max width that the grid has set

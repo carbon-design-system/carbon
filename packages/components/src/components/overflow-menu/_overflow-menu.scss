@@ -11,6 +11,7 @@
 
 @import '../../globals/scss/vars';
 @import '../../globals/scss/helper-mixins';
+@import '../../globals/scss/css--helpers';
 @import '../../globals/scss/css--reset';
 @import '../../globals/scss/layout';
 @import '../../globals/scss/typography';
@@ -27,11 +28,11 @@
     @include focus-outline('reset');
 
     position: relative;
-    width: rem(32px);
-    height: rem(32px);
     display: flex;
     align-items: center;
     justify-content: center;
+    width: rem(32px);
+    height: rem(32px);
     cursor: pointer;
     transition: outline $duration--fast-02 motion(entrance, productive),
       background-color $duration--fast-02 motion(entrance, productive);
@@ -70,8 +71,8 @@
   }
 
   .#{$prefix}--overflow-menu__icon {
-    height: rem(16px);
     width: rem(16px);
+    height: rem(16px);
     fill: $icon-01;
   }
 
@@ -79,24 +80,24 @@
     @include reset;
     @include box-shadow;
 
+    position: absolute;
+    top: 32px;
+    left: 0;
+    z-index: z('floating');
     display: none;
     flex-direction: column;
     align-items: flex-start;
-    position: absolute;
-    z-index: z('floating');
-    background-color: $field-01;
     width: rem(160px);
     list-style: none;
-    top: 32px;
-    left: 0;
+    background-color: $field-01;
 
     &::after {
-      content: '';
       position: absolute;
       display: block;
       background-color: $field-01;
       transition: background-color $duration--fast-02
         motion(entrance, productive);
+      content: '';
     }
   }
 
@@ -130,23 +131,23 @@
   }
 
   .#{$prefix}--overflow-menu-options[data-floating-menu-direction='left']::after {
-    right: rem(-6px);
     top: 0;
-    height: rem(32px);
+    right: rem(-6px);
     width: rem(6px);
+    height: rem(32px);
   }
 
   .#{$prefix}--overflow-menu-options[data-floating-menu-direction='right']::after {
     top: 0;
     left: rem(-6px);
-    height: rem(32px);
     width: rem(6px);
+    height: rem(32px);
   }
 
   .#{$prefix}--overflow-menu--flip.#{$prefix}--overflow-menu-options[data-floating-menu-direction='top']::after,
   .#{$prefix}--overflow-menu--flip.#{$prefix}--overflow-menu-options[data-floating-menu-direction='bottom']::after {
-    left: auto;
     right: 0;
+    left: auto;
   }
 
   .#{$prefix}--overflow-menu--flip.#{$prefix}--overflow-menu-options[data-floating-menu-direction='left']::after,
@@ -167,11 +168,11 @@
     @include reset;
 
     display: flex;
-    background-color: transparent;
     align-items: center;
     width: 100%;
     height: rem(40px);
     padding: 0;
+    background-color: transparent;
     transition: background-color $duration--fast-02 motion(entrance, productive);
   }
 
@@ -184,28 +185,29 @@
   }
 
   a.#{$prefix}--overflow-menu-options__btn::before {
-    content: '';
+    display: inline-block;
     height: 100%;
     vertical-align: middle;
-    display: inline-block;
+    content: '';
   }
 
   .#{$prefix}--overflow-menu-options__btn {
     @include type-style('body-short-01');
     @include focus-outline('reset');
 
-    font-weight: 400;
-    width: 100%;
-    height: 100%;
-    border: none;
     display: inline-flex;
     align-items: center;
-    background-color: transparent;
-    text-align: left;
-    padding: 0 $carbon--spacing-05;
-    cursor: pointer;
-    color: $text-02;
+    width: 100%;
     max-width: 11.25rem;
+    height: 100%;
+    padding: 0 $carbon--spacing-05;
+    color: $text-02;
+
+    font-weight: 400;
+    text-align: left;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
     transition: outline $duration--fast-02 motion(entrance, productive),
       background-color $duration--fast-02 motion(entrance, productive),
       color $duration--fast-02 motion(entrance, productive);
@@ -232,8 +234,8 @@
   }
 
   .#{$prefix}--overflow-menu-options__option-content {
-    white-space: nowrap;
     overflow: hidden;
+    white-space: nowrap;
     text-overflow: ellipsis;
   }
 

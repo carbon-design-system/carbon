@@ -40,6 +40,12 @@ const props = () => ({
 });
 
 storiesOf('Slider', module)
+  .addParameters({
+    component: Slider,
+    subcomponents: {
+      SliderSkeleton,
+    },
+  })
   .addDecorator(withKnobs)
   .add('default', () => <Slider required id="slider" {...props()} />, {
     info: {
@@ -52,7 +58,9 @@ storiesOf('Slider', module)
     const [val, setVal] = useState(87);
     return (
       <>
-        <button onClick={() => setVal(Math.round(Math.random() * 100))}>
+        <button
+          type="button"
+          onClick={() => setVal(Math.round(Math.random() * 100))}>
           randomize value
         </button>
         <Slider

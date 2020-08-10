@@ -35,6 +35,7 @@ const TableExpandHeader = ({
       {...rest}>
       {!enableExpando ? null : (
         <button
+          type="button"
           className={`${prefix}--table-expand__button`}
           onClick={onExpand}
           title={expandIconDescription}

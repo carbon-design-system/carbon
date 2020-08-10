@@ -33,6 +33,12 @@ const radioProps = () => ({
 });
 
 storiesOf('RadioButton', module)
+  .addParameters({
+    component: RadioButton,
+    subcomponents: {
+      RadioButtonSkeleton,
+    },
+  })
   .addDecorator(withKnobs)
   .add('Default', () => <RadioButton id="radio-1" {...radioProps()} />, {
     info: {

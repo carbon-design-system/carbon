@@ -46,15 +46,6 @@ const TableBatchActions = ({
 
   return (
     <div {...rest} className={batchActionsClasses}>
-      <TableActionList>
-        {children}
-        <Button
-          className={`${prefix}--batch-summary__cancel`}
-          tabIndex={shouldShowBatchActions ? 0 : -1}
-          onClick={onCancel}>
-          {t('carbon.table.batch.cancel')}
-        </Button>
-      </TableActionList>
       <div className={`${prefix}--batch-summary`}>
         <p className={`${prefix}--batch-summary__para`}>
           <span>
@@ -64,6 +55,15 @@ const TableBatchActions = ({
           </span>
         </p>
       </div>
+      <TableActionList>
+        {children}
+        <Button
+          className={`${prefix}--batch-summary__cancel`}
+          tabIndex={shouldShowBatchActions ? 0 : -1}
+          onClick={onCancel}>
+          {t('carbon.table.batch.cancel')}
+        </Button>
+      </TableActionList>
     </div>
   );
 };

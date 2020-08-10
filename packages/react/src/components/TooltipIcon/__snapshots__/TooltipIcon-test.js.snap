@@ -12,6 +12,7 @@ exports[`TooltipIcon should allow the user to specify the direction 1`] = `
     className="bx--tooltip__trigger bx--tooltip--a11y custom-class bx--tooltip--top bx--tooltip--align-center"
     onFocus={[Function]}
     onMouseEnter={[Function]}
+    type="button"
   >
     <span
       className="bx--assistive-text"
@@ -36,6 +37,7 @@ exports[`TooltipIcon should render 1`] = `
     className="bx--tooltip__trigger bx--tooltip--a11y custom-class bx--tooltip--bottom bx--tooltip--align-center"
     onFocus={[Function]}
     onMouseEnter={[Function]}
+    type="button"
   >
     <span
       className="bx--assistive-text"
