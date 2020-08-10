@@ -102,6 +102,7 @@ const props = {
       onFocus: action('onFocus'),
     };
   },
+<<<<<<< HEAD
   set: () => {
     const iconToUse = iconMap[select('Icon (icon)', icons, 'none')];
     return {
@@ -118,15 +119,9 @@ const props = {
       onFocus: action('onFocus'),
     };
   },
+=======
+>>>>>>> docs(button): remove extra stories, add playground
 };
-
-Button.displayName = 'Button';
-
-const CustomLink = ({ children, href, ...other }) => (
-  <a href={href} {...other}>
-    {children}
-  </a>
-);
 
 export default {
   title: 'Button',
@@ -143,7 +138,32 @@ export default {
 };
 
 export const _Default = () => {
+  return <Button>Button</Button>;
+};
+
+_Default.story = {
+  name: 'Button',
+};
+
+export const Secondary = () => {
+  return <Button kind="secondary">Button</Button>;
+};
+
+export const Tertiary = () => {
+  return <Button kind="tertiary">Button</Button>;
+};
+
+export const Danger = () => {
+  return <Button kind="danger">Button</Button>;
+};
+
+export const Ghost = () => {
+  return <Button kind="ghost">Button</Button>;
+};
+
+export const Playground = () => {
   const regularProps = props.regular();
+  const iconOnly = props.iconOnly();
   return (
     <div
       style={{
@@ -151,106 +171,23 @@ export const _Default = () => {
         alignItems: 'center',
         flexWrap: 'wrap',
       }}>
-      <Button {...regularProps} className="some-class">
-        Button
-      </Button>
+      <Button {...regularProps}>Button</Button>
       &nbsp;
-      <Button {...regularProps} href="#" className="some-class">
-        Link
-      </Button>
-      &nbsp;
-      <Button {...regularProps} as="p" href="#" className="some-class">
-        Element
-      </Button>
-      &nbsp;
-      <Button {...regularProps} as={CustomLink} href="#" className="some-class">
-        Custom component
-      </Button>
+      <Button hasIconOnly {...iconOnly}></Button>
     </div>
   );
-};
-
-_Default.story = {
-  parameters: {
-    info: {
-      text: `
-        Buttons are used to initialize an action, either in the background or
-        foreground of an experience.
-
-        There are several kinds of buttons.
-
-        Primary buttons should be used for the principle call to action
-        on the page.
-
-        Secondary buttons should be used for secondary actions on each page.
-
-        Danger buttons should be used for a negative action (such as Delete) on the page.
-
-        Modify the behavior of the button by changing its event properties.
-
-        Field buttons may be use directly next to an input element, to visually align their heights.
-
-        Small buttons may be used when there is not enough space for a
-        regular sized button. This issue is most found in tables. Small button should have three words
-        or less.
-
-        When words are not enough, icons can be used in buttons to better communicate what the button does. Icons are
-        always paired with text.
-      `,
-    },
-  },
 };
 
 export const IconButton = () => <Button {...props.iconOnly()} hasIconOnly />;
 
 IconButton.story = {
-  name: 'Icon button',
-};
-
-export const SetOfButtons = () => {
-  const setProps = props.set();
-  return (
-    <div className={`${prefix}--btn-set`}>
-      <Button kind="secondary" {...setProps}>
-        Secondary button
-      </Button>
-      <Button kind="primary" {...setProps}>
-        Primary button
-      </Button>
-    </div>
-  );
-};
-
-SetOfButtons.story = {
-  name: 'Set of buttons',
-
-  parameters: {
-    info: {
-      text: `
-        When an action required by the user has more than one option, always use a a negative action button (secondary) paired with a positive action button (primary) in that order. Negative action buttons will be on the left. Positive action buttons should be on the right. When these two types buttons are paired in the correct order, they will automatically space themselves apart.
-      `,
-    },
-  },
+  name: 'Icon Button',
 };
 
 export const Skeleton = () => (
   <div>
     <ButtonSkeleton />
     &nbsp;
-    <ButtonSkeleton href="#" />
-    &nbsp;
-    <ButtonSkeleton size="small" />
+    <ButtonSkeleton small />
   </div>
 );
-
-Skeleton.story = {
-  name: 'Skeleton',
-
-  parameters: {
-    info: {
-      text: `
-        Placeholder skeleton state to use when content is loading.
-      `,
-    },
-  },
-};
