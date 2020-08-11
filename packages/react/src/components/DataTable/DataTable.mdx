@@ -1,78 +1,62 @@
-# `DataTable` component
+import { Story, Props, Source, Preview } from '@storybook/addon-docs/blocks';
 
-> A set of table primitives to help teams build clear, flexible, and WAI-ARIA
-> compliant Tables in React
+# DataTable
 
-## Table of Contents
+## Overview
 
-<!-- To run doctoc, type `npx doctoc README.md` in this directory! -->
+You can implement a data table in your project by importing the `DataTable`
+component and using it along with any associated table components that you need.
 
-<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<Preview>
+  <Story id="datatable--usage" />
+</Preview>
 
-<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+If you don't need the behavior of `DataTable`, or would like to implement your
+own behavior, you can also each of the table components exported by Carbon to
+construct your own table.
 
-- [Installation](#installation)
-- [Usage](#usage)
-- [Props](#props)
-  - [`rows`](#rows)
-  - [`headers`](#headers)
-  - [`sortRow`](#sortrow)
-  - [`filterRows`](#filterrows)
-  - [`locale`](#locale)
-- [Render Prop Function](#render-prop-function)
-  - [Prop Getters](#prop-getters)
-  - [Actions](#actions)
-  - [State](#state)
-  - [Props](#props-1)
-- [Use-cases](#use-cases)
-  - [Sorting](#sorting)
-    - [Programmatic sorting](#programmatic-sorting)
-    - [Custom sorting](#custom-sorting)
-  - [Expansion](#expansion)
-    - [Programmatic expansion](#programmatic-expansion)
-  - [Selection](#selection)
-    - [Programmatic selection](#programmatic-selection)
-  - [Filtering](#filtering)
-  - [Batch Actions](#batch-actions)
-- [Attribution](#attribution)
+<Preview>
+  <Story id="datatable--table-example" />
+</Preview>
 
-<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+The `DataTable` component follows the
+[`render` prop pattern](https://reactjs.org/docs/render-props.html) to provide
+the functionality needed for a data table. As a result, in order to integrate
+functionality like sorting, filtering, or row expansion in your table you will
+need to use `DataTable` and make sure everything connects for your desired
+functionality.
 
-## Installation
+| Component     | HTML      |
+| ------------- | --------- |
+| `Table`       | `<table>` |
+| `TableHead`   | `<thead>` |
+| `TableHeader` | `<th>`    |
+| `TableBody`   | `<tbody>` |
+| `TableRow`    | `<tr>`    |
+| `TableCell`   | `<td>`    |
 
-This component comes with any installation of the `carbon-components-react`
-package on NPM. You can install this package by running the following in your
-terminal:
+## Reference
 
-```bash
-npm i carbon-components carbon-components-react carbon-icons --save
-# Or, with yarn
-yarn add carbon-components carbon-components-react carbon-icons
-```
+## Feedback
+
+Help us improve this component by providing feedback, asking questions, and
+leaving any other comments on
+[GitHub](https://github.com/carbon-design-system/carbon/edit/master/packages/react/src/components/DataTable/DataTable.mdx).
 
 ## Usage
 
-You can include `DataTable` and its components by doing the following in your
-project:
+You can include `DataTable` and related Table components by writing the
+following in your project:
 
 ```js
-import { DataTable } from 'carbon-components-react';
-```
-
-The default export for `DataTable` also includes properties for all the `Table*`
-components that you will also want to use in your application. You can access
-them by doing either of the following:
-
-```js
-import { DataTable } from 'carbon-components-react';
-// De-structure `DataTable` directly to get local references
-const { Table, TableHead, TableHeader, TableBody, TableCell } = DataTable;
-
-// Or use them in your React projects by doing
-<DataTable.Table />
-<DataTable.TableHead />
-<DataTable.TableHeader />
-// ...
+import {
+  DataTable,
+  Table,
+  TableHead,
+  TableHeader,
+  TableBody,
+  TableCell,
+} from 'carbon-components-react';
 ```
 
 The `DataTable` component itself follows the `render` prop pattern, meaning that
@@ -759,8 +743,6 @@ The import aspects of this example are:
 - We are reading the `selectedItems` from the `render` prop function in our
   Batch Action click handlers
 
-## Attribution
+## References
 
-This `README.md` file is adapted from the
-[Downshift `README.md`](https://github.com/paypal/downshift/blob/master/README.md)
-file.
+## Feedback

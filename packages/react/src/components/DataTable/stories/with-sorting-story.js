@@ -17,12 +17,25 @@ import DataTable, {
 } from '../../DataTable';
 import { initialRows, headers } from './shared';
 
-const SortingStory = (props) => (
+export default {
+  title: 'DataTable/Sorting',
+  component: DataTable,
+  subcomponents: {
+    Table,
+    TableBody,
+    TableCell,
+    TableContainer,
+    TableHead,
+    TableHeader,
+    TableRow,
+  },
+};
+
+export const Usage = () => (
   <DataTable
     rows={initialRows}
     headers={headers}
     isSortable={true}
-    {...props}
     render={({
       rows,
       headers,
@@ -62,4 +75,7 @@ const SortingStory = (props) => (
   />
 );
 
-export default SortingStory;
+// const SortingStory = (props) => (
+// );
+
+// export default SortingStory;
