@@ -33,12 +33,6 @@ CopyButton.propTypes = {
   className: PropTypes.string,
 
   /**
-   * Provide a description for the icon representing the copy action that can
-   * be read by screen readers
-   */
-  iconDescription: PropTypes.string,
-
-  /**
    * Specify the string that is displayed when the button is clicked and the
    * content is copied
    */
@@ -48,6 +42,12 @@ CopyButton.propTypes = {
    * Specify the time it takes for the feedback message to timeout
    */
   feedbackTimeout: PropTypes.number,
+
+  /**
+   * Provide a description for the icon representing the copy action that can
+   * be read by screen readers
+   */
+  iconDescription: PropTypes.string,
 
   /**
    * Specify an optional `onClick` handler that is called when the underlying

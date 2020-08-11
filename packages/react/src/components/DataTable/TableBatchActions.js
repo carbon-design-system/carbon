@@ -75,6 +75,12 @@ TableBatchActions.propTypes = {
   className: PropTypes.string,
 
   /**
+   * Hook required to listen for when the user initiates a cancel request
+   * through this comopnent
+   */
+  onCancel: PropTypes.func.isRequired,
+
+  /**
    * Boolean specifier for whether or not the batch action bar should be
    * displayed
    */
@@ -85,12 +91,6 @@ TableBatchActions.propTypes = {
    * This number is used to derive the selection message
    */
   totalSelected: PropTypes.number.isRequired,
-
-  /**
-   * Hook required to listen for when the user initiates a cancel request
-   * through this comopnent
-   */
-  onCancel: PropTypes.func.isRequired,
 
   /**
    * Supply a method to translate internal strings with your i18n tool of

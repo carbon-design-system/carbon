@@ -15,9 +15,9 @@ const { forEach } = Array.prototype;
 class ComponentExample extends Component {
   static propTypes = {
     /**
-     * The source code.
+     * The slug of the CodePen link.
      */
-    htmlFile: PropTypes.string,
+    codepenSlug: PropTypes.string,
 
     /**
      * The component name.
@@ -25,14 +25,14 @@ class ComponentExample extends Component {
     component: PropTypes.string,
 
     /**
-     * The component variant name.
-     */
-    variant: PropTypes.string,
-
-    /**
      * `true` to hide "view full render" link.
      */
     hideViewFullRender: PropTypes.bool,
+
+    /**
+     * The source code.
+     */
+    htmlFile: PropTypes.string,
 
     /**
      * `true` to use a link (only) for the live demo.
@@ -45,14 +45,14 @@ class ComponentExample extends Component {
     useIframe: PropTypes.bool,
 
     /**
-     * The slug of the CodePen link.
-     */
-    codepenSlug: PropTypes.string,
-
-    /**
      * `true` to use static full render page.
      */
     useStaticFullRenderPage: PropTypes.bool,
+
+    /**
+     * The component variant name.
+     */
+    variant: PropTypes.string,
   };
 
   /**

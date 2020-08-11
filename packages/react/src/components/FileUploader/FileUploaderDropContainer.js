@@ -133,9 +133,19 @@ function FileUploaderDropContainer({
 
 FileUploaderDropContainer.propTypes = {
   /**
+   * Specify the types of files that this input should be able to receive
+   */
+  accept: PropTypes.arrayOf(PropTypes.string),
+
+  /**
    * Provide a custom className to be applied to the container node
    */
   className: PropTypes.string,
+
+  /**
+   * Specify whether file input is disabled
+   */
+  disabled: PropTypes.bool,
 
   /**
    * Provide a unique id for the underlying <input> node
@@ -159,36 +169,26 @@ FileUploaderDropContainer.propTypes = {
   name: PropTypes.string,
 
   /**
-   * Provide an accessibility role for the <FileUploaderButton>
-   */
-  role: PropTypes.string,
-
-  /**
-   * Provide a custom tabIndex value for the <FileUploaderButton>
-   */
-  tabIndex: PropTypes.number,
-
-  /**
-   * Specify whether file input is disabled
-   */
-  disabled: PropTypes.bool,
-
-  /**
-   * Specify the types of files that this input should be able to receive
-   */
-  accept: PropTypes.arrayOf(PropTypes.string),
-
-  /**
    * Event handler that is called after files are added to the uploader
    * The event handler signature looks like `onAddFiles(evt, { addedFiles })`
    */
   onAddFiles: PropTypes.func,
 
   /**
+   * Provide an accessibility role for the <FileUploaderButton>
+   */
+  role: PropTypes.string,
+
+  /**
    * Specify the size of the uploaded items, from a list of available
    * sizes. For `default` size, this prop can remain unspecified.
    */
   size: PropTypes.oneOf(['default', 'field', 'small']),
+
+  /**
+   * Provide a custom tabIndex value for the <FileUploaderButton>
+   */
+  tabIndex: PropTypes.number,
 };
 
 FileUploaderDropContainer.defaultProps = {

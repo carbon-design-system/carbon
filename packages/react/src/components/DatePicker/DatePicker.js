@@ -117,6 +117,11 @@ const carbonFlatpickrMonthSelectPlugin = (config) => (fp) => {
 export default class DatePicker extends Component {
   static propTypes = {
     /**
+     * The DOM element the Flatpicker should be inserted into. `<body>` by default.
+     */
+    appendTo: PropTypes.object,
+
+    /**
      * The child nodes.
      */
     children: PropTypes.node,
@@ -127,14 +132,9 @@ export default class DatePicker extends Component {
     className: PropTypes.string,
 
     /**
-     * `true` to use the short version.
+     * The date format.
      */
-    short: PropTypes.bool,
-
-    /**
-     * `true` to use the light version.
-     */
-    light: PropTypes.bool,
+    dateFormat: PropTypes.string,
 
     /**
      * The type of the date picker:
@@ -146,9 +146,9 @@ export default class DatePicker extends Component {
     datePickerType: PropTypes.oneOf(['simple', 'single', 'range']),
 
     /**
-     * The date format.
+     * `true` to use the light version.
      */
-    dateFormat: PropTypes.string,
+    light: PropTypes.bool,
 
     /**
      *  The language locale used to format the days of the week, months, and numbers.
@@ -258,6 +258,31 @@ export default class DatePicker extends Component {
     ]),
 
     /**
+     * The maximum date that a user can pick to.
+     */
+    maxDate: PropTypes.string,
+
+    /**
+     * The minimum date that a user can start picking from.
+     */
+    minDate: PropTypes.string,
+
+    /**
+     * The `change` event handler.
+     */
+    onChange: PropTypes.func,
+
+    /**
+     * The `close` event handler.
+     */
+    onClose: PropTypes.func,
+
+    /**
+     * `true` to use the short version.
+     */
+    short: PropTypes.bool,
+
+    /**
      * The value of the date value provided to flatpickr, could
      * be a date, a date number, a date string, an array of dates.
      */
@@ -273,31 +298,6 @@ export default class DatePicker extends Component {
       PropTypes.object,
       PropTypes.number,
     ]),
-
-    /**
-     * The DOM element the Flatpicker should be inserted into. `<body>` by default.
-     */
-    appendTo: PropTypes.object,
-
-    /**
-     * The `change` event handler.
-     */
-    onChange: PropTypes.func,
-
-    /**
-     * The `close` event handler.
-     */
-    onClose: PropTypes.func,
-
-    /**
-     * The minimum date that a user can start picking from.
-     */
-    minDate: PropTypes.string,
-
-    /**
-     * The maximum date that a user can pick to.
-     */
-    maxDate: PropTypes.string,
   };
 
   static defaultProps = {

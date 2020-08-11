@@ -38,12 +38,6 @@ ListBoxField.propTypes = {
   'aria-haspopup': PropTypes.oneOfType([PropTypes.string, PropTypes.bool]),
 
   /**
-   * The role for the component, should be set by `getToggleButtonProps` coming
-   * from Downshift
-   */
-  role: PropTypes.string,
-
-  /**
    * Provide the contents of your ListBoxField
    */
   children: PropTypes.node,
@@ -52,6 +46,12 @@ ListBoxField.propTypes = {
    * Specify if the parent <ListBox> is disabled
    */
   disabled: PropTypes.bool,
+
+  /**
+   * The role for the component, should be set by `getToggleButtonProps` coming
+   * from Downshift
+   */
+  role: PropTypes.string,
 
   /**
    * Optional prop to specify the tabIndex of the <ListBox> trigger button

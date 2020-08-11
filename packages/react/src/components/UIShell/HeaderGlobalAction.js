@@ -73,15 +73,15 @@ HeaderGlobalAction.propTypes = {
   className: PropTypes.string,
 
   /**
+   * Specify whether the action is currently active
+   */
+  isActive: PropTypes.bool,
+
+  /**
    * Optionally provide an onClick handler that is called when the underlying
    * button fires it's onclick event
    */
   onClick: PropTypes.func,
-
-  /**
-   * Specify whether the action is currently active
-   */
-  isActive: PropTypes.bool,
 };
 
 HeaderGlobalAction.displayName = 'HeaderGlobalAction';

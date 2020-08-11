@@ -45,23 +45,23 @@ class InlineCheckbox extends React.Component {
     name: PropTypes.string.isRequired,
 
     /**
+     * Provide an optional hook that is called each time the input is updated
+     */
+    onChange: PropTypes.func,
+
+    /**
      * Provide a handler that is invoked when a user clicks on the control
      */
     onClick: PropTypes.func,
-
     /**
      * Provide a handler that is invoked on the key down event for the control
      */
     onKeyDown: PropTypes.func,
+
     /**
      * Provide an optional tooltip for the InlineCheckbox
      */
     title: PropTypes.string,
-
-    /**
-     * Provide an optional hook that is called each time the input is updated
-     */
-    onChange: PropTypes.func,
   };
 
   static defaultProps = {

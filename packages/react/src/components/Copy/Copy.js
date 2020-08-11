@@ -101,16 +101,16 @@ Copy.propTypes = {
   feedbackTimeout: PropTypes.number,
 
   /**
-   * Specify an optional `onClick` handler that is called when the underlying
-   * <button> is clicked
-   */
-  onClick: PropTypes.func,
-
-  /**
    * Specify an optional `onAnimationEnd` handler that is called when the underlying
    * animation ends
    */
   onAnimationEnd: PropTypes.func,
+
+  /**
+   * Specify an optional `onClick` handler that is called when the underlying
+   * <button> is clicked
+   */
+  onClick: PropTypes.func,
 };
 
 Copy.defaultProps = {

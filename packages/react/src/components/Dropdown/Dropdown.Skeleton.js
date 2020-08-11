@@ -32,14 +32,14 @@ const DropdownSkeleton = ({ inline, className, ...rest }) => {
 
 DropdownSkeleton.propTypes = {
   /**
-   * Specify whether you want the inline version of this control
-   */
-  inline: PropTypes.bool,
-
-  /**
    * Specify an optional className to add.
    */
   className: PropTypes.string,
+
+  /**
+   * Specify whether you want the inline version of this control
+   */
+  inline: PropTypes.bool,
 };
 
 DropdownSkeleton.defaultProps = {
