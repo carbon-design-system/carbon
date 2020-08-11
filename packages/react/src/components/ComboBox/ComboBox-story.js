@@ -6,7 +6,6 @@
  */
 
 import React from 'react';
-import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 import { withKnobs, boolean, select, text } from '@storybook/addon-knobs';
 import ComboBox from '../ComboBox';
@@ -14,8 +13,7 @@ import ComboBox from '../ComboBox';
 const items = [
   {
     id: 'option-0',
-    text:
-      'An example option that is really long to show what should be done to handle long text',
+    text: 'An example option that is really long to show what should be done to handle long text',
   },
   {
     id: 'option-1',
@@ -65,25 +63,25 @@ const props = () => ({
   onChange: action('onChange'),
 });
 
-storiesOf('ComboBox', module)
-  .addParameters({
+export default {
+  title: 'ComboBox',
+  decorators: [withKnobs],
+
+  parameters: {
     component: ComboBox,
-  })
-  .addDecorator(withKnobs)
-  .add(
-    'Default',
-    () => (
-      <div style={{ width: 300 }}>
-        <ComboBox
-          items={items}
-          itemToString={(item) => (item ? item.text : '')}
-          {...props()}
-        />
-      </div>
-    ),
-    {
-      info: {
-        text: 'ComboBox',
-      },
-    }
-  );
+  },
+};
+
+export const Default = () => (
+  <div style={{ width: 300 }}>
+    <ComboBox items={items} itemToString={(item) => (item ? item.text : '')} {...props()} />
+  </div>
+);
+
+Default.story = {
+  parameters: {
+    info: {
+      text: 'ComboBox',
+    },
+  },
+};

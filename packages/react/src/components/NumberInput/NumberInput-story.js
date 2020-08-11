@@ -6,17 +6,9 @@
  */
 
 import React from 'react';
-import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 
-import {
-  withKnobs,
-  boolean,
-  number,
-  text,
-  object,
-  select,
-} from '@storybook/addon-knobs';
+import { withKnobs, boolean, number, text, object, select } from '@storybook/addon-knobs';
 import NumberInput from '../NumberInput';
 import NumberInputSkeleton from '../NumberInput/NumberInput.Skeleton';
 
@@ -40,10 +32,7 @@ const props = () => ({
   readOnly: boolean('Read only (readOnly)', false),
   invalid: boolean('Show form validation UI (invalid)', false),
   isMobile: boolean('Mobile variant', false),
-  invalidText: text(
-    'Form validation UI content (invalidText)',
-    'Number is not valid'
-  ),
+  invalidText: text('Form validation UI content (invalidText)', 'Number is not valid'),
   helperText: text('Helper text (helperText)', 'Optional helper text.'),
   light: boolean('Light variant (light)', false),
   onChange: action('onChange'),
@@ -58,51 +47,54 @@ const props = () => ({
   ),
 });
 
-storiesOf('NumberInput', module)
-  .addParameters({
+export default {
+  title: 'NumberInput',
+  decorators: [withKnobs],
+
+  parameters: {
     component: NumberInput,
+
     subcomponents: {
       NumberInputSkeleton,
     },
-  })
-  .addDecorator(withKnobs)
-  .add(
-    'Default',
-    () => {
-      const { numberInputArrowTranslationIds, ...rest } = props();
-      return (
-        <NumberInput
-          translateWithId={(id) => numberInputArrowTranslationIds[id]}
-          {...rest}
-        />
-      );
+  },
+};
+
+export const Default = () => {
+  const { numberInputArrowTranslationIds, ...rest } = props();
+  return <NumberInput translateWithId={(id) => numberInputArrowTranslationIds[id]} {...rest} />;
+};
+
+Default.story = {
+  parameters: {
+    info: {
+      text: `
+          Number inputs are similar to text fields, but contain controls used to increase or decrease an incremental value.
+          The Number Input component can be passed a starting value, a min, a max, and the step.
+        `,
     },
-    {
-      info: {
-        text: `
-            Number inputs are similar to text fields, but contain controls used to increase or decrease an incremental value.
-            The Number Input component can be passed a starting value, a min, a max, and the step.
-          `,
-      },
-    }
-  )
-  .add(
-    'skeleton',
-    () => (
-      <div
-        aria-label="loading number input"
-        aria-live="assertive"
-        role="status"
-        tabIndex="0" // eslint-disable-line jsx-a11y/no-noninteractive-tabindex
-      >
-        <NumberInputSkeleton />
-      </div>
-    ),
-    {
-      info: {
-        text: `
-            Placeholder skeleton state to use when content is loading.
-          `,
-      },
-    }
-  );
+  },
+};
+
+export const Skeleton = () => (
+  <div
+    aria-label="loading number input"
+    aria-live="assertive"
+    role="status"
+    tabIndex="0" // eslint-disable-line jsx-a11y/no-noninteractive-tabindex
+  >
+    <NumberInputSkeleton />
+  </div>
+);
+
+Skeleton.story = {
+  name: 'skeleton',
+
+  parameters: {
+    info: {
+      text: `
+          Placeholder skeleton state to use when content is loading.
+        `,
+    },
+  },
+};

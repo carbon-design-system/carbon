@@ -6,7 +6,6 @@
  */
 
 import React, { useState } from 'react';
-import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 
 import { withKnobs, boolean, number, text } from '@storybook/addon-knobs';
@@ -17,10 +16,7 @@ import { sliderValuePropSync } from '../../internal/FeatureFlags';
 const props = () => ({
   name: text('Form item name (name)', ''),
   inputType: text('The form element type (inputType)', 'number'),
-  ariaLabelInput: text(
-    'The ARIA label for the <input> (ariaLabelInput)',
-    'Label for slider value'
-  ),
+  ariaLabelInput: text('The ARIA label for the <input> (ariaLabelInput)', 'Label for slider value'),
   disabled: boolean('Disabled (disabled)', false),
   light: boolean('Light variant (light)', false),
   hideTextInput: boolean('Without text input (hideTextInput)', false),
@@ -28,10 +24,7 @@ const props = () => ({
   min: number('The minimum value (min)', 0),
   max: number('The maximum value (max)', 100),
   step: number('The step (step)', 1),
-  stepMultiplier: number(
-    'The step factor for Shift+arrow keys (stepMultiplier)',
-    5
-  ),
+  stepMultiplier: number('The step factor for Shift+arrow keys (stepMultiplier)', 5),
   labelText: text('Label text (labelText)', 'Slider Label'),
   minLabel: text('Label for minimum value (minLabel)', ''),
   maxLabel: text('Label for maximum value (maxLabel)', ''),
@@ -39,58 +32,70 @@ const props = () => ({
   onRelease: action('onRelease'),
 });
 
-storiesOf('Slider', module)
-  .addParameters({
+export default {
+  title: 'Slider',
+  decorators: [withKnobs],
+
+  parameters: {
     component: Slider,
+
     subcomponents: {
       SliderSkeleton,
     },
-  })
-  .addDecorator(withKnobs)
-  .add('default', () => <Slider required id="slider" {...props()} />, {
+  },
+};
+
+export const Default = () => <Slider required id="slider" {...props()} />;
+
+Default.story = {
+  name: 'default',
+
+  parameters: {
     info: {
       text: `
-            Sliders provide a visual indication of adjustable content, where the user can move the handle along a horizontal track to increase or decrease the value.
-          `,
+              Sliders provide a visual indication of adjustable content, where the user can move the handle along a horizontal track to increase or decrease the value.
+            `,
     },
-  })
-  .add('controlled slider', () => {
-    const [val, setVal] = useState(87);
-    return (
-      <>
-        <button
-          type="button"
-          onClick={() => setVal(Math.round(Math.random() * 100))}>
-          randomize value
-        </button>
-        <Slider
-          max={100}
-          min={0}
-          value={val}
-          onChange={({ value }) => setVal(value)}
-        />
-        <h1>{val}</h1>
-      </>
-    );
-  })
-  .add(
-    'skeleton',
-    () => (
-      <div
-        style={{ marginTop: '2rem' }}
-        aria-label="loading slider"
-        aria-live="assertive"
-        role="status"
-        tabIndex="0" // eslint-disable-line jsx-a11y/no-noninteractive-tabindex
-      >
-        <SliderSkeleton />
-      </div>
-    ),
-    {
-      info: {
-        text: `
-            Placeholder skeleton state to use when content is loading.
-          `,
-      },
-    }
+  },
+};
+
+export const ControlledSlider = () => {
+  const [val, setVal] = useState(87);
+  return (
+    <>
+      <button type="button" onClick={() => setVal(Math.round(Math.random() * 100))}>
+        randomize value
+      </button>
+      <Slider max={100} min={0} value={val} onChange={({ value }) => setVal(value)} />
+      <h1>{val}</h1>
+    </>
   );
+};
+
+ControlledSlider.story = {
+  name: 'controlled slider',
+};
+
+export const Skeleton = () => (
+  <div
+    style={{ marginTop: '2rem' }}
+    aria-label="loading slider"
+    aria-live="assertive"
+    role="status"
+    tabIndex="0" // eslint-disable-line jsx-a11y/no-noninteractive-tabindex
+  >
+    <SliderSkeleton />
+  </div>
+);
+
+Skeleton.story = {
+  name: 'skeleton',
+
+  parameters: {
+    info: {
+      text: `
+          Placeholder skeleton state to use when content is loading.
+        `,
+    },
+  },
+};

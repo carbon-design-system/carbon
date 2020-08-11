@@ -7,7 +7,6 @@
 
 import React from 'react';
 import { iconAdd, iconAddSolid, iconAddOutline } from 'carbon-icons';
-import { storiesOf } from '@storybook/react';
 import { withKnobs, select, text } from '@storybook/addon-knobs';
 import Icon from '../Icon';
 import IconSkeleton from '../Icon/Icon.Skeleton';
@@ -25,11 +24,7 @@ const iconMap = {
 };
 
 const props = () => {
-  const selectedIcon = select(
-    'The icon (icon (regular)/name (legacy))',
-    icons,
-    'iconAdd'
-  );
+  const selectedIcon = select('The icon (icon (regular)/name (legacy))', icons, 'iconAdd');
   return {
     style: {
       margin: '50px',
@@ -64,39 +59,44 @@ const propsSkeleton2 = {
   },
 };
 
-storiesOf('Icon', module)
-  .addParameters({
+export default {
+  title: 'Icon',
+  decorators: [withKnobs],
+
+  parameters: {
     component: Icon,
-  })
-  .addDecorator(withKnobs)
-  .add(
-    'Default',
-    () => (
-      <div>
-        <Icon {...props()} />
-      </div>
-    ),
-    {
-      info: {
-        text: `
-            Icons are used in the product to present common actions and commands. Modify the fill property to change the color of the icon. The name property defines which icon to display. For accessibility, provide a context-rich description with the description prop. For a full list of icon names, see https://www.carbondesignsystem.com/guidelines/iconography/library
-          `,
-      },
-    }
-  )
-  .add(
-    'Skeleton',
-    () => (
-      <div>
-        <IconSkeleton {...propsSkeleton} />
-        <IconSkeleton {...propsSkeleton2} />
-      </div>
-    ),
-    {
-      info: {
-        text: `
-            Icons are used in the product to present common actions and commands. Modify the fill property to change the color of the icon. The name property defines which icon to display. For accessibility, provide a context-rich description with the description prop. For a full list of icon names, see https://www.carbondesignsystem.com/guidelines/iconography/library
-          `,
-      },
-    }
-  );
+  },
+};
+
+export const Default = () => (
+  <div>
+    <Icon {...props()} />
+  </div>
+);
+
+Default.story = {
+  parameters: {
+    info: {
+      text: `
+          Icons are used in the product to present common actions and commands. Modify the fill property to change the color of the icon. The name property defines which icon to display. For accessibility, provide a context-rich description with the description prop. For a full list of icon names, see https://www.carbondesignsystem.com/guidelines/iconography/library
+        `,
+    },
+  },
+};
+
+export const Skeleton = () => (
+  <div>
+    <IconSkeleton {...propsSkeleton} />
+    <IconSkeleton {...propsSkeleton2} />
+  </div>
+);
+
+Skeleton.story = {
+  parameters: {
+    info: {
+      text: `
+          Icons are used in the product to present common actions and commands. Modify the fill property to change the color of the icon. The name property defines which icon to display. For accessibility, provide a context-rich description with the description prop. For a full list of icon names, see https://www.carbondesignsystem.com/guidelines/iconography/library
+        `,
+    },
+  },
+};

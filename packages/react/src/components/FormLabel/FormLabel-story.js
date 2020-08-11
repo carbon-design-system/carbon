@@ -6,7 +6,6 @@
  */
 
 import React from 'react';
-import { storiesOf } from '@storybook/react';
 
 import FormLabel from './FormLabel';
 import Tooltip from '../Tooltip';
@@ -15,27 +14,36 @@ const additionalProps = {
   className: 'some-class',
 };
 
-storiesOf('FormLabel', module)
-  .addParameters({
+export default {
+  title: 'FormLabel',
+
+  parameters: {
     component: FormLabel,
-  })
-  .add('Default', () => <FormLabel {...additionalProps}>Label</FormLabel>, {
+  },
+};
+
+export const Default = () => <FormLabel {...additionalProps}>Label</FormLabel>;
+
+Default.story = {
+  parameters: {
     info: {
       text: 'Form label.',
     },
-  })
-  .add(
-    'With tooltip',
-    () => (
-      <FormLabel {...additionalProps}>
-        <Tooltip triggerText="Label">
-          This is the content of the tooltip.
-        </Tooltip>
-      </FormLabel>
-    ),
-    {
-      info: {
-        text: 'Form label with tooltip.',
-      },
-    }
-  );
+  },
+};
+
+export const WithTooltip = () => (
+  <FormLabel {...additionalProps}>
+    <Tooltip triggerText="Label">This is the content of the tooltip.</Tooltip>
+  </FormLabel>
+);
+
+WithTooltip.story = {
+  name: 'With tooltip',
+
+  parameters: {
+    info: {
+      text: 'Form label with tooltip.',
+    },
+  },
+};

@@ -6,7 +6,6 @@
  */
 
 import React from 'react';
-import { storiesOf } from '@storybook/react';
 
 import { withKnobs, select, text } from '@storybook/addon-knobs';
 import TooltipDefinition from '../TooltipDefinition';
@@ -23,41 +22,40 @@ const alignments = {
 };
 
 const props = () => ({
-  triggerClassName: text(
-    'Trigger element CSS class name (triggerClassName)',
-    ''
-  ),
+  triggerClassName: text('Trigger element CSS class name (triggerClassName)', ''),
   direction: select('Tooltip direction (direction)', directions, 'bottom'),
-  align: select(
-    'Tooltip alignment to trigger button (align)',
-    alignments,
-    'start'
-  ),
+  align: select('Tooltip alignment to trigger button (align)', alignments, 'start'),
   tooltipText: text(
     'Tooltip content (tooltipText)',
     'Brief description of the dotted, underlined word above.'
   ),
 });
 
-storiesOf('TooltipDefinition', module)
-  .addParameters({
+export default {
+  title: 'TooltipDefinition',
+  decorators: [withKnobs],
+
+  parameters: {
     component: TooltipDefinition,
-  })
-  .addDecorator(withKnobs)
-  .add(
-    'default',
-    () => (
-      <div style={{ marginTop: '2rem' }}>
-        <TooltipDefinition {...props()}>Definition Tooltip</TooltipDefinition>
-      </div>
-    ),
-    {
-      info: {
-        text: `
-          Definition tooltip is for regular use case of tooltip, e.g. giving the user more text information about something, like defining a word.
-          This works better than the interactive tooltip in regular use cases because the info icon used in interactive tooltip can be repetitive when it’s shown several times on a page.
-          Definition tooltip does not use any JavaScript. If there are actions a user can take in the tooltip (e.g. a link or a button), use interactive tooltip.
-        `,
-      },
-    }
-  );
+  },
+};
+
+export const Default = () => (
+  <div style={{ marginTop: '2rem' }}>
+    <TooltipDefinition {...props()}>Definition Tooltip</TooltipDefinition>
+  </div>
+);
+
+Default.story = {
+  name: 'default',
+
+  parameters: {
+    info: {
+      text: `
+        Definition tooltip is for regular use case of tooltip, e.g. giving the user more text information about something, like defining a word.
+        This works better than the interactive tooltip in regular use cases because the info icon used in interactive tooltip can be repetitive when it’s shown several times on a page.
+        Definition tooltip does not use any JavaScript. If there are actions a user can take in the tooltip (e.g. a link or a button), use interactive tooltip.
+      `,
+    },
+  },
+};

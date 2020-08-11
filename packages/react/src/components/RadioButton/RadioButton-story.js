@@ -6,7 +6,6 @@
  */
 
 import React from 'react';
-import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 
 import { withKnobs, boolean, select, text } from '@storybook/addon-knobs';
@@ -23,45 +22,53 @@ const radioProps = () => ({
   name: text('Form item name (name)', 'test'),
   value: text('Value (value)', 'standard'),
   labelText: text('Label text (labelText)', 'Standard Radio Button'),
-  labelPosition: select(
-    'Label position (labelPosition)',
-    labelPositions,
-    'right'
-  ),
+  labelPosition: select('Label position (labelPosition)', labelPositions, 'right'),
   disabled: boolean('Disabled (disabled)', false),
   onChange: action('onChange'),
 });
 
-storiesOf('RadioButton', module)
-  .addParameters({
+export default {
+  title: 'RadioButton',
+  decorators: [withKnobs],
+
+  parameters: {
     component: RadioButton,
+
     subcomponents: {
       RadioButtonSkeleton,
     },
-  })
-  .addDecorator(withKnobs)
-  .add('Default', () => <RadioButton id="radio-1" {...radioProps()} />, {
+  },
+};
+
+export const Default = () => <RadioButton id="radio-1" {...radioProps()} />;
+
+Default.story = {
+  parameters: {
     info: {
       text: `
-            Radio buttons are used when a list of two or more options are mutually exclusive,
-            meaning the user must select only one option. The example below shows how the Radio Button component
-            can be used as an uncontrolled component that is initially checked by setting the defaultChecked property
-            to true. To use the component in a controlled way, set the checked property instead.
-          `,
+              Radio buttons are used when a list of two or more options are mutually exclusive,
+              meaning the user must select only one option. The example below shows how the Radio Button component
+              can be used as an uncontrolled component that is initially checked by setting the defaultChecked property
+              to true. To use the component in a controlled way, set the checked property instead.
+            `,
     },
-  })
-  .add(
-    'skeleton',
-    () => (
-      <div>
-        <RadioButtonSkeleton />
-      </div>
-    ),
-    {
-      info: {
-        text: `
-            Placeholder skeleton state to use when content is loading.
-          `,
-      },
-    }
-  );
+  },
+};
+
+export const Skeleton = () => (
+  <div>
+    <RadioButtonSkeleton />
+  </div>
+);
+
+Skeleton.story = {
+  name: 'skeleton',
+
+  parameters: {
+    info: {
+      text: `
+          Placeholder skeleton state to use when content is loading.
+        `,
+    },
+  },
+};

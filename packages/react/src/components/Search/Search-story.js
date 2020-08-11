@@ -8,7 +8,6 @@
 /* eslint-disable no-console */
 
 import React from 'react';
-import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 
 import { withKnobs, boolean, select, text } from '@storybook/addon-knobs';
@@ -38,56 +37,71 @@ const props = () => ({
   onChange: action('onChange'),
 });
 
-storiesOf('Search', module)
-  .addParameters({
+export default {
+  title: 'Search',
+  decorators: [withKnobs],
+
+  parameters: {
     component: Search,
+
     subcomponents: {
       SearchSkeleton,
       SearchFilterButton,
       SearchLayoutButton,
     },
-  })
-  .addDecorator(withKnobs)
-  .add('Default', () => <Search {...props()} id="search-1" />, {
+  },
+};
+
+export const Default = () => <Search {...props()} id="search-1" />;
+
+Default.story = {
+  parameters: {
     info: {
       text: `
-            Search enables users to specify a word or a phrase to find particular relevant pieces of content
-            without the use of navigation. Search can be used as the primary means of discovering content,
-            or as a filter to aid the user in finding content.
-          `,
+              Search enables users to specify a word or a phrase to find particular relevant pieces of content
+              without the use of navigation. Search can be used as the primary means of discovering content,
+              or as a filter to aid the user in finding content.
+            `,
     },
-  })
-  .add(
-    '[Deprecated] custom buttons',
-    () => (
-      <div style={{ display: 'flex' }}>
-        <Search {...props()} id="search-1" />
-        <SearchFilterButton onClick={action('onClick')} />
-        <SearchLayoutButton onClick={action('onClick')} />
-      </div>
-    ),
-    {
-      info: {
-        text: `
-            You can control what set of buttons you want.
-          `,
-      },
-    }
-  )
-  .add(
-    'skeleton',
-    () => (
-      <div style={{ width: '200px' }}>
-        <SearchSkeleton />
-        &nbsp;
-        <SearchSkeleton small />
-      </div>
-    ),
-    {
-      info: {
-        text: `
-            Placeholder skeleton state to use when content is loading.
-          `,
-      },
-    }
-  );
+  },
+};
+
+export const DeprecatedCustomButtons = () => (
+  <div style={{ display: 'flex' }}>
+    <Search {...props()} id="search-1" />
+    <SearchFilterButton onClick={action('onClick')} />
+    <SearchLayoutButton onClick={action('onClick')} />
+  </div>
+);
+
+DeprecatedCustomButtons.story = {
+  name: '[Deprecated] custom buttons',
+
+  parameters: {
+    info: {
+      text: `
+          You can control what set of buttons you want.
+        `,
+    },
+  },
+};
+
+export const Skeleton = () => (
+  <div style={{ width: '200px' }}>
+    <SearchSkeleton />
+    &nbsp;
+    <SearchSkeleton small />
+  </div>
+);
+
+Skeleton.story = {
+  name: 'skeleton',
+
+  parameters: {
+    info: {
+      text: `
+          Placeholder skeleton state to use when content is loading.
+        `,
+    },
+  },
+};
