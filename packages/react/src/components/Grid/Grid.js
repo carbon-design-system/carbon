@@ -42,21 +42,9 @@ Grid.propTypes = {
   as: PropTypes.oneOfType([PropTypes.string, PropTypes.elementType]),
 
   /**
-   * Collapse the gutter to 2px. Useful for fluid layouts.
-   * Rows have 2px of margin between them to match gutter.
+   * Pass in content that will be rendered within the `Grid`
    */
-  condensed: PropTypes.bool,
-
-  /**
-   * Container hangs 16px into the gutter. Useful for
-   * typographic alignment with and without containers.
-   */
-  narrow: PropTypes.bool,
-
-  /**
-   * Remove the default max width that the grid has set
-   */
-  fullWidth: PropTypes.bool,
+  children: PropTypes.node,
 
   /**
    * Specify a custom className to be applied to the `Grid`
@@ -64,9 +52,21 @@ Grid.propTypes = {
   className: PropTypes.string,
 
   /**
-   * Pass in content that will be rendered within the `Grid`
+   * Collapse the gutter to 2px. Useful for fluid layouts.
+   * Rows have 2px of margin between them to match gutter.
    */
-  children: PropTypes.node,
+  condensed: PropTypes.bool,
+
+  /**
+   * Remove the default max width that the grid has set
+   */
+  fullWidth: PropTypes.bool,
+
+  /**
+   * Container hangs 16px into the gutter. Useful for
+   * typographic alignment with and without containers.
+   */
+  narrow: PropTypes.bool,
 };
 
 export default Grid;

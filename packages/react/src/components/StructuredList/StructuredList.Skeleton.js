@@ -53,11 +53,6 @@ const StructuredListSkeleton = ({ rowCount, border, className, ...rest }) => {
 
 StructuredListSkeleton.propTypes = {
   /**
-   * number of table rows
-   */
-  rowCount: PropTypes.number,
-
-  /**
    * Specify whether a border should be added to your StructuredListSkeleton
    */
   border: PropTypes.bool,
@@ -66,6 +61,11 @@ StructuredListSkeleton.propTypes = {
    * Specify an optional className to add.
    */
   className: PropTypes.string,
+
+  /**
+   * number of table rows
+   */
+  rowCount: PropTypes.number,
 };
 
 StructuredListSkeleton.defaultProps = {

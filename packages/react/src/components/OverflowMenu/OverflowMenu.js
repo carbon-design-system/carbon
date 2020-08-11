@@ -97,19 +97,9 @@ class OverflowMenu extends Component {
 
   static propTypes = {
     /**
-     * `true` if the menu should be open.
+     * The ARIA label.
      */
-    open: PropTypes.bool,
-
-    /**
-     * The menu direction.
-     */
-    direction: PropTypes.oneOf([DIRECTION_TOP, DIRECTION_BOTTOM]),
-
-    /**
-     * `true` if the menu alignment should be flipped.
-     */
-    flipped: PropTypes.bool,
+    ariaLabel: PropTypes.string,
 
     /**
      * The child nodes.
@@ -122,9 +112,24 @@ class OverflowMenu extends Component {
     className: PropTypes.string,
 
     /**
-     * The `tabindex` attribute.
+     * The menu direction.
      */
-    tabIndex: PropTypes.number,
+    direction: PropTypes.oneOf([DIRECTION_TOP, DIRECTION_BOTTOM]),
+
+    /**
+     * `true` if the menu alignment should be flipped.
+     */
+    flipped: PropTypes.bool,
+
+    /**
+     * The CSS class for the icon.
+     */
+    iconClass: PropTypes.string,
+
+    /**
+     * The icon description.
+     */
+    iconDescription: PropTypes.string.isRequired,
 
     /**
      * The element ID.
@@ -132,29 +137,10 @@ class OverflowMenu extends Component {
     id: PropTypes.string,
 
     /**
-     * The ARIA label.
+     * `true` to use the light version. For use on $ui-01 backgrounds only.
+     * Don't use this to make OverflowMenu background color same as container background color.
      */
-    ariaLabel: PropTypes.string,
-
-    /**
-     * The event handler for the `click` event.
-     */
-    onClick: PropTypes.func,
-
-    /**
-     * The event handler for the `focus` event.
-     */
-    onFocus: PropTypes.func,
-
-    /**
-     * The event handler for the `keydown` event.
-     */
-    onKeyDown: PropTypes.func,
-
-    /**
-     * The icon description.
-     */
-    iconDescription: PropTypes.string.isRequired,
+    light: PropTypes.bool,
 
     /**
      * The adjustment in position applied to the floating menu.
@@ -179,14 +165,14 @@ class OverflowMenu extends Component {
     ]),
 
     /**
-     * The CSS class for the icon.
+     * The class to apply to the menu options
      */
-    iconClass: PropTypes.string,
+    menuOptionsClass: PropTypes.string,
 
     /**
-     * Function called to override icon rendering.
+     * The event handler for the `click` event.
      */
-    renderIcon: PropTypes.oneOfType([PropTypes.func, PropTypes.object]),
+    onClick: PropTypes.func,
 
     /**
      * Function called when menu is closed
@@ -194,9 +180,14 @@ class OverflowMenu extends Component {
     onClose: PropTypes.func,
 
     /**
-     * The class to apply to the menu options
+     * The event handler for the `focus` event.
      */
-    menuOptionsClass: PropTypes.string,
+    onFocus: PropTypes.func,
+
+    /**
+     * The event handler for the `keydown` event.
+     */
+    onKeyDown: PropTypes.func,
 
     /**
      * Function called when menu is closed
@@ -204,16 +195,25 @@ class OverflowMenu extends Component {
     onOpen: PropTypes.func,
 
     /**
-     * `true` to use the light version. For use on $ui-01 backgrounds only.
-     * Don't use this to make OverflowMenu background color same as container background color.
+     * `true` if the menu should be open.
      */
-    light: PropTypes.bool,
+    open: PropTypes.bool,
+
+    /**
+     * Function called to override icon rendering.
+     */
+    renderIcon: PropTypes.oneOfType([PropTypes.func, PropTypes.object]),
 
     /**
      * Specify a CSS selector that matches the DOM element that should
      * be focused when the OverflowMenu opens
      */
     selectorPrimaryFocus: PropTypes.string,
+
+    /**
+     * The `tabindex` attribute.
+     */
+    tabIndex: PropTypes.number,
   };
 
   static defaultProps = {

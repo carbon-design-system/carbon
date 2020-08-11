@@ -63,16 +63,16 @@ ToolbarItem.propTypes = {
   children: PropTypes.node,
 
   /**
-   * Specify the type of the ToolbarItem. The `search` type will render a
-   * `ToolbarSearch` component
-   */
-  type: PropTypes.string,
-
-  /**
    * Specify the placeholder text for the ToolbarSearch component. Useful if
    * `type` is set to 'search'
    */
   placeHolderText: PropTypes.string,
+
+  /**
+   * Specify the type of the ToolbarItem. The `search` type will render a
+   * `ToolbarSearch` component
+   */
+  type: PropTypes.string,
 };
 
 ToolbarItem.defaultProps = {

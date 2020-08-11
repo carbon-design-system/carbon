@@ -16,14 +16,43 @@ const { prefix } = settings;
 export default class DatePickerInput extends Component {
   static propTypes = {
     /**
-     * Specify an id that unique identifies the <input>
+     * The type of the date picker:
+     *
+     * * `simple` - Without calendar dropdown.
+     * * `single` - With calendar dropdown and single date.
+     * * `range` - With calendar dropdown and a date range.
      */
-    id: PropTypes.string.isRequired,
+    datePickerType: PropTypes.oneOf(['simple', 'single', 'range']),
+
+    /**
+     * Specify whether or not the input should be disabled
+     */
+    disabled: PropTypes.bool,
+
+    /**
+     * Specify if the label should be hidden
+     */
+    hideLabel: PropTypes.bool,
 
     /**
      * The description of the calendar icon.
      */
     iconDescription: PropTypes.string,
+
+    /**
+     * Specify an id that unique identifies the <input>
+     */
+    id: PropTypes.string.isRequired,
+
+    /**
+     * Specify whether or not the input should be invalid
+     */
+    invalid: PropTypes.bool,
+
+    /**
+     * Specify the text to be rendered when the input is invalid
+     */
+    invalidText: PropTypes.string,
 
     /**
      * Provide the text that will be read by a screen reader when visiting this
@@ -32,9 +61,20 @@ export default class DatePickerInput extends Component {
     labelText: PropTypes.node.isRequired,
 
     /**
-     * Specify the size of the Date Picker Input. Currently supports either `sm` or `xl` as an option.
+     * Specify an `onChange` handler that is called whenever a change in the
+     * input field has occurred
      */
-    size: PropTypes.oneOf(['sm', 'xl']),
+    onChange: PropTypes.func,
+
+    /**
+     * Provide a function to be called when the input field is clicked
+     */
+    onClick: PropTypes.func,
+
+    /**
+     * Provide a function to be called when the input field is clicked
+     */
+    openCalendar: PropTypes.func,
 
     /**
      * Provide a regular expression that the input value must match
@@ -53,59 +93,19 @@ export default class DatePickerInput extends Component {
     },
 
     /**
-     * Specify the type of the <input>
-     */
-    type: PropTypes.string,
-
-    /**
-     * Specify whether or not the input should be disabled
-     */
-    disabled: PropTypes.bool,
-
-    /**
-     * Specify whether or not the input should be invalid
-     */
-    invalid: PropTypes.bool,
-
-    /**
-     * Specify the text to be rendered when the input is invalid
-     */
-    invalidText: PropTypes.string,
-
-    /**
-     * Specify if the label should be hidden
-     */
-    hideLabel: PropTypes.bool,
-
-    /**
      * Specify the placeholder text
      */
     placeholder: PropTypes.string,
 
     /**
-     * The type of the date picker:
-     *
-     * * `simple` - Without calendar dropdown.
-     * * `single` - With calendar dropdown and single date.
-     * * `range` - With calendar dropdown and a date range.
+     * Specify the size of the Date Picker Input. Currently supports either `sm` or `xl` as an option.
      */
-    datePickerType: PropTypes.oneOf(['simple', 'single', 'range']),
+    size: PropTypes.oneOf(['sm', 'xl']),
 
     /**
-     * Provide a function to be called when the input field is clicked
+     * Specify the type of the <input>
      */
-    onClick: PropTypes.func,
-
-    /**
-     * Provide a function to be called when the input field is clicked
-     */
-    openCalendar: PropTypes.func,
-
-    /**
-     * Specify an `onChange` handler that is called whenever a change in the
-     * input field has occurred
-     */
-    onChange: PropTypes.func,
+    type: PropTypes.string,
   };
 
   static defaultProps = {

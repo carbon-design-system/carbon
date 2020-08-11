@@ -1,0 +1,19 @@
+{
+  "name": "@carbon/codemods",
+  "private": true,
+  "description": "Codemods for the Carbon monorepo",
+  "version": "0.0.0",
+  "license": "Apache-2.0",
+  "repository": "https://github.com/carbon-design-system/carbon/tree/master/codemods",
+  "bugs": "https://github.com/carbon-design-system/carbon/issues",
+  "keywords": [
+    "ibm",
+    "carbon",
+    "carbon-design-system",
+    "components",
+    "react"
+  ],
+  "dependencies": {
+    "jscodeshift": "^0.10.0"
+  }
+}

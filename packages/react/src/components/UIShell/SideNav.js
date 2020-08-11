@@ -144,29 +144,19 @@ SideNav.defaultProps = {
 
 SideNav.propTypes = {
   /**
-   * If `true`, the SideNav will be expanded, otherwise it will be collapsed.
-   * Using this prop causes SideNav to become a controled component.
-   */
-  expanded: PropTypes.bool,
-
-  /**
-   * If `true`, the SideNav will be open on initial render.
-   */
-  defaultExpanded: PropTypes.bool,
-
-  /**
-   * An optional listener that is called when an event that would cause
-   * toggling the SideNav occurs.
-   *
-   * @param {object} event
-   * @param {boolean} value
-   */
-  onToggle: PropTypes.func,
-
-  /**
    * Required props for accessibility label on the underlying menu
    */
   ...AriaLabelPropType,
+
+  /**
+   * Specify whether focus and blur listeners are added. They are by default.
+   */
+  addFocusListeners: PropTypes.bool,
+
+  /**
+   * Specify whether mouse entry/exit listeners are added. They are by default.
+   */
+  addMouseListeners: PropTypes.bool,
 
   /**
    * Optionally provide a custom class to apply to the underlying <li> node
@@ -174,22 +164,20 @@ SideNav.propTypes = {
   className: PropTypes.string,
 
   /**
-   * Provide a custom function for translating all message ids within this
-   * component. This function will take in two arguments: the mesasge Id and the
-   * state of the component. From this, you should return a string representing
-   * the label you want displayed or read by screen readers.
+   * If `true`, the SideNav will be open on initial render.
    */
-  translateById: PropTypes.func,
+  defaultExpanded: PropTypes.bool,
+
+  /**
+   * If `true`, the SideNav will be expanded, otherwise it will be collapsed.
+   * Using this prop causes SideNav to become a controled component.
+   */
+  expanded: PropTypes.bool,
 
   /**
    * Optionally provide a custom class to apply to the underlying <li> node
    */
   isChildOfHeader: PropTypes.bool,
-
-  /**
-   * Optional prop to display the side nav rail.
-   */
-  isRail: PropTypes.bool,
 
   /**
    * Specify if sideNav is standalone
@@ -202,14 +190,26 @@ SideNav.propTypes = {
   isPersistent: PropTypes.bool,
 
   /**
-   * Specify whether focus and blur listeners are added. They are by default.
+   * Optional prop to display the side nav rail.
    */
-  addFocusListeners: PropTypes.bool,
+  isRail: PropTypes.bool,
 
   /**
-   * Specify whether mouse entry/exit listeners are added. They are by default.
+   * An optional listener that is called when an event that would cause
+   * toggling the SideNav occurs.
+   *
+   * @param {object} event
+   * @param {boolean} value
    */
-  addMouseListeners: PropTypes.bool,
+  onToggle: PropTypes.func,
+
+  /**
+   * Provide a custom function for translating all message ids within this
+   * component. This function will take in two arguments: the mesasge Id and the
+   * state of the component. From this, you should return a string representing
+   * the label you want displayed or read by screen readers.
+   */
+  translateById: PropTypes.func,
 };
 
 export default SideNav;

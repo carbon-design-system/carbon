@@ -80,19 +80,14 @@ const DataTableSkeleton = ({
 
 DataTableSkeleton.propTypes = {
   /**
-   * Specify the number of rows that you want to render in the skeleton state
+   * Specify an optional className to add.
    */
-  rowCount: PropTypes.number,
+  className: PropTypes.string,
 
   /**
    * Specify the number of columns that you want to render in the skeleton state
    */
   columnCount: PropTypes.number,
-
-  /**
-   * Optionally specify whether you want the DataTable to be zebra striped
-   */
-  zebra: PropTypes.bool,
 
   /**
    * Optionally specify whether you want the Skeleton to be rendered as a
@@ -111,9 +106,9 @@ DataTableSkeleton.propTypes = {
   ]),
 
   /**
-   * Specify an optional className to add.
+   * Specify the number of rows that you want to render in the skeleton state
    */
-  className: PropTypes.string,
+  rowCount: PropTypes.number,
 
   /**
    * Specify if the table header should be rendered as part of the skeleton.
@@ -124,6 +119,11 @@ DataTableSkeleton.propTypes = {
    * Specify if the table toolbar should be rendered as part of the skeleton.
    */
   showToolbar: PropTypes.bool,
+
+  /**
+   * Optionally specify whether you want the DataTable to be zebra striped
+   */
+  zebra: PropTypes.bool,
 };
 
 DataTableSkeleton.defaultProps = {
