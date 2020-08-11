@@ -35,12 +35,6 @@ export default class Tabs extends React.Component {
     hidden: PropTypes.bool,
 
     /**
-     * Provide a description that is read out when a user visits the caret icon
-     * for the dropdown menu of items
-     */
-    iconDescription: PropTypes.string.isRequired,
-
-    /**
      * Specify whether or not to use the light component variant
      */
     light: PropTypes.bool,
@@ -65,19 +59,25 @@ export default class Tabs extends React.Component {
     onSelectionChange: PropTypes.func,
 
     /**
+     * By default, this value is "navigation". You can also provide an alternate
+     * role if it makes sense from the accessibility-side
+     */
+    role: PropTypes.string.isRequired,
+
+    /**
      * Optionally provide an index for the currently selected <Tab>
      */
     selected: PropTypes.number,
 
     /**
+     * Choose whether or not to automatically change selection on focus
+     */
+    selectionMode: PropTypes.oneOf(['automatic', 'manual']),
+
+    /**
      * Provide a className that is applied to the <TabContent> components
      */
     tabContentClassName: PropTypes.string,
-
-    /**
-     * Provide a string that represents the `href` for the triggered <Tab>
-     */
-    triggerHref: PropTypes.string.isRequired,
 
     /**
      * Provide the type of Tab
@@ -394,6 +394,7 @@ export default class Tabs extends React.Component {
           role={role}
           onScroll={this.handleScroll}>
           <button
+            type="button"
             className={classes.leftOverflowButtonClasses}
             onClick={(_) => this.handleOverflowNavClick(_, { direction: -1 })}
             onMouseDown={(_) =>
@@ -413,6 +414,7 @@ export default class Tabs extends React.Component {
             <div className={`${prefix}--tabs__overflow-indicator--right`} />
           )}
           <button
+            type="button"
             className={classes.rightOverflowButtonClasses}
             onClick={(_) => this.handleOverflowNavClick(_, { direction: 1 })}
             onMouseDown={(_) =>
