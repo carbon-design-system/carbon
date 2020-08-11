@@ -9,9 +9,10 @@
   },
   "workspaces": {
     "packages": [
-      "packages/*",
       "actions/*",
-      "config/*"
+      "codemods",
+      "config/*",
+      "packages/*"
     ],
     "nohoist": []
   },
@@ -22,7 +23,7 @@
     "doctoc": "doctoc --title '## Table of Contents'",
     "format": "prettier --write '**/*.{js,md,scss,ts}' '!**/{build,es,lib,storybook,ts,umd}/**'",
     "format:diff": "prettier --list-different '**/*.{js,md,scss,ts}' '!**/{build,es,lib,storybook,ts,umd}/**' '!packages/components/**'",
-    "lint": "eslint packages actions",
+    "lint": "eslint actions config codemods packages",
     "lint:docs": "alex 'docs/**/*.md' -q",
     "lint:styles": "stylelint '**/*.{css,scss}' --report-needless-disables --report-invalid-scope-disables",
     "sync": "carbon-cli sync",

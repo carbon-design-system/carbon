@@ -60,11 +60,6 @@ const DatePickerSkeleton = ({ range, id, className, ...rest }) => {
 
 DatePickerSkeleton.propTypes = {
   /**
-   * Specify whether the skeleton should be of range date picker.
-   */
-  range: PropTypes.bool,
-
-  /**
    * Specify an optional className to add.
    */
   className: PropTypes.string,
@@ -73,6 +68,11 @@ DatePickerSkeleton.propTypes = {
    * Specify the id to add.
    */
   id: PropTypes.string,
+
+  /**
+   * Specify whether the skeleton should be of range date picker.
+   */
+  range: PropTypes.bool,
 };
 
 export default DatePickerSkeleton;

@@ -22,9 +22,46 @@ export default class Search extends Component {
     className: PropTypes.string,
 
     /**
-     * Optional prop to specify the type of the `<input>`
+     * Specify a label to be read by screen readers on the "close" button
      */
-    type: PropTypes.string,
+    closeButtonLabelText: PropTypes.string,
+
+    /**
+     * Optionally provide the default value of the <input>
+     */
+    defaultValue: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+
+    /**
+     * Specify a custom `id` for the input
+     */
+    id: PropTypes.string,
+
+    /**
+     * Provide the label text for the Search icon
+     */
+    labelText: PropTypes.node.isRequired,
+
+    /**
+     * Specify light version or default version of this control
+     */
+    light: PropTypes.bool,
+
+    /**
+     * Optional callback called when the search value changes.
+     */
+    onChange: PropTypes.func,
+
+    /**
+     * Provide an optional placeholder text for the Search.
+     * Note: if the label and placeholder differ,
+     * VoiceOver on Mac will read both
+     */
+    placeHolderText: PropTypes.string,
+
+    /**
+     * Specify the search size
+     */
+    size: PropTypes.oneOf(['sm', 'lg', 'xl']),
 
     /**
      * Specify whether the Search should be a small variant
@@ -39,51 +76,14 @@ export default class Search extends Component {
     ),
 
     /**
-     * Specify the search size
+     * Optional prop to specify the type of the `<input>`
      */
-    size: PropTypes.oneOf(['sm', 'lg', 'xl']),
-
-    /**
-     * Provide an optional placeholder text for the Search.
-     * Note: if the label and placeholder differ,
-     * VoiceOver on Mac will read both
-     */
-    placeHolderText: PropTypes.string,
-
-    /**
-     * Provide the label text for the Search icon
-     */
-    labelText: PropTypes.node.isRequired,
-
-    /**
-     * Specify light version or default version of this control
-     */
-    light: PropTypes.bool,
-
-    /**
-     * Specify a custom `id` for the input
-     */
-    id: PropTypes.string,
-
-    /**
-     * Specify a label to be read by screen readers on the "close" button
-     */
-    closeButtonLabelText: PropTypes.string,
+    type: PropTypes.string,
 
     /**
      * Specify the value of the <input>
      */
     value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-
-    /**
-     * Optionally provide the default value of the <input>
-     */
-    defaultValue: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-
-    /**
-     * Optional callback called when the search value changes.
-     */
-    onChange: PropTypes.func,
   };
 
   static defaultProps = {

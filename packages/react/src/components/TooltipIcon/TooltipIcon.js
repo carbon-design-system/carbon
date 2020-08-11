@@ -68,6 +68,12 @@ const TooltipIcon = ({
 
 TooltipIcon.propTypes = {
   /**
+   * Specify the alignment (to the trigger button) of the tooltip.
+   * Can be one of: start, center, or end.
+   */
+  align: PropTypes.oneOf(['start', 'center', 'end']),
+
+  /**
    * Specify an icon as children that will be used as the tooltip trigger. This
    * can be an icon from our Icon component, or a custom SVG element.
    */
@@ -84,22 +90,10 @@ TooltipIcon.propTypes = {
   direction: PropTypes.oneOf(['top', 'right', 'left', 'bottom']),
 
   /**
-   * Specify the alignment (to the trigger button) of the tooltip.
-   * Can be one of: start, center, or end.
-   */
-  align: PropTypes.oneOf(['start', 'center', 'end']),
-
-  /**
    * Optionally specify a custom id for the tooltip. If one is not provided, we
    * generate a unique id for you.
    */
   id: PropTypes.string,
-
-  /**
-   * Provide the ARIA label for the tooltip.
-   * TODO: rename this prop (will be a breaking change)
-   */
-  tooltipText: PropTypes.string.isRequired,
 
   /**
    * The event handler for the `focus` event.
@@ -110,6 +104,12 @@ TooltipIcon.propTypes = {
    * The event handler for the `mouseenter` event.
    */
   onMouseEnter: PropTypes.func,
+
+  /**
+   * Provide the ARIA label for the tooltip.
+   * TODO: rename this prop (will be a breaking change)
+   */
+  tooltipText: PropTypes.string.isRequired,
 };
 
 TooltipIcon.defaultProps = {

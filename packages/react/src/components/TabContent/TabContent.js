@@ -31,6 +31,11 @@ const TabContent = (props) => {
 
 TabContent.propTypes = {
   /**
+   * Pass in content to render inside of the TabContent
+   */
+  children: PropTypes.node,
+
+  /**
    * Provide a className for the tab content container
    */
   className: PropTypes.string,
@@ -39,11 +44,6 @@ TabContent.propTypes = {
    * Specify whether the TabContent is selected
    */
   selected: PropTypes.bool,
-
-  /**
-   * Pass in content to render inside of the TabContent
-   */
-  children: PropTypes.node,
 };
 
 TabContent.defaultProps = {

@@ -88,31 +88,6 @@ class Tooltip extends Component {
 
   static propTypes = {
     /**
-     * The ID of the trigger button.
-     */
-    triggerId: PropTypes.string,
-
-    /**
-     * The ID of the tooltip content.
-     */
-    tooltipId: PropTypes.string,
-
-    /**
-     * The ID of the tooltip body content.
-     */
-    tooltipBodyId: PropTypes.string,
-
-    /**
-     * Optional starting value for uncontrolled state
-     */
-    defaultOpen: PropTypes.bool,
-
-    /**
-     * Open/closed state.
-     */
-    open: PropTypes.bool,
-
-    /**
      * Contents to put into the tooltip.
      */
     children: PropTypes.node,
@@ -123,9 +98,9 @@ class Tooltip extends Component {
     className: PropTypes.string,
 
     /**
-     * The CSS class names of the trigger UI.
+     * Optional starting value for uncontrolled state
      */
-    triggerClassName: PropTypes.string,
+    defaultOpen: PropTypes.bool,
 
     /**
      * Where to put the tooltip, relative to the trigger UI.
@@ -133,10 +108,9 @@ class Tooltip extends Component {
     direction: PropTypes.oneOf(['bottom', 'top', 'left', 'right']),
 
     /**
-     * Specify a CSS selector that matches the DOM element that should
-     * be focused when the Tooltip opens
+     * The name of the default tooltip icon.
      */
-    selectorPrimaryFocus: PropTypes.string,
+    iconName: PropTypes.string,
 
     /**
      * The adjustment of the tooltip position.
@@ -148,6 +122,21 @@ class Tooltip extends Component {
       }),
       PropTypes.func,
     ]),
+
+    /**
+     * * the signature of the event handler will be:
+     * * `onChange(event, { open })` where:
+     *   * `event` is the (React) raw event
+     *   * `open` is the new value
+     */
+    onChange: !useControlledStateWithValue
+      ? PropTypes.func
+      : requiredIfValueExists(PropTypes.func),
+
+    /**
+     * Open/closed state.
+     */
+    open: PropTypes.bool,
 
     /**
      * The callback function to optionally render the icon element.
@@ -165,14 +154,40 @@ class Tooltip extends Component {
     },
 
     /**
+     * Specify a CSS selector that matches the DOM element that should
+     * be focused when the Tooltip opens
+     */
+    selectorPrimaryFocus: PropTypes.string,
+
+    /**
      * `true` to show the default tooltip icon.
      */
     showIcon: PropTypes.bool,
 
     /**
-     * The name of the default tooltip icon.
+     * Optional prop to specify the tabIndex of the Tooltip
      */
-    iconName: PropTypes.string,
+    tabIndex: PropTypes.number,
+
+    /**
+     * The ID of the tooltip body content.
+     */
+    tooltipBodyId: PropTypes.string,
+
+    /**
+     * The ID of the tooltip content.
+     */
+    tooltipId: PropTypes.string,
+
+    /**
+     * The CSS class names of the trigger UI.
+     */
+    triggerClassName: PropTypes.string,
+
+    /**
+     * The ID of the trigger button.
+     */
+    triggerId: PropTypes.string,
 
     ...isRequiredOneOf({
       /**
@@ -184,21 +199,6 @@ class Tooltip extends Component {
        */
       iconDescription: PropTypes.string,
     }),
-
-    /**
-     * Optional prop to specify the tabIndex of the Tooltip
-     */
-    tabIndex: PropTypes.number,
-
-    /**
-     * * the signature of the event handler will be:
-     * * `onChange(event, { open })` where:
-     *   * `event` is the (React) raw event
-     *   * `open` is the new value
-     */
-    onChange: !useControlledStateWithValue
-      ? PropTypes.func
-      : requiredIfValueExists(PropTypes.func),
   };
 
   static defaultProps = {

@@ -1223,6 +1223,17 @@
   aliases:
     - download
     - download 01
+- name: download--01
+  friendly_name: Download 01
+  aliases:
+    - download
+    - download 01
+- name: download--02
+  friendly_name: Download 02
+  aliases:
+    - download alt
+    - download 02
+    - download
 - name: download--alt
   friendly_name: Download 02
   aliases:
@@ -1390,6 +1401,22 @@
   friendly_name: Export 01
   aliases:
     - export 01
+    - export
+    - send
+    - ship
+    - transmit
+- name: export--01
+  friendly_name: Export 01
+  aliases:
+    - export 01
+    - export
+    - send
+    - ship
+    - tranmit
+- name: export--02
+  friendly_name: Export 02
+  aliases:
+    - export 02
     - export
     - send
     - ship
@@ -2200,6 +2227,12 @@
     - London
     - cities
     - city
+- name: love
+  friendly_name: Love
+  aliases:
+    - love
+    - like
+    - heart
 - name: lungs
   friendly_name: Lungs
   aliases:
@@ -3833,6 +3866,16 @@
   friendly_name: Upload 01
   aliases:
     - upload 01
+    - upload
+- name: upload--01
+  friendly_name: Upload 01
+  aliases:
+    - upload 01
+    - upload
+- name: upload--02
+  friendly_name: Upload 02
+  aliases:
+    - upload 02
     - upload
 - name: upload--alt
   friendly_name: Upload 02

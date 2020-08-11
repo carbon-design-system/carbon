@@ -38,11 +38,6 @@ class HeaderMenu extends React.Component {
     focusRef: PropTypes.func,
 
     /**
-     * Optionally provide a tabIndex for the underlying menu button
-     */
-    tabIndex: PropTypes.number,
-
-    /**
      * Provide a label for the link text
      */
     menuLinkName: PropTypes.string.isRequired,
@@ -51,6 +46,11 @@ class HeaderMenu extends React.Component {
      * Optional component to render instead of string
      */
     renderMenuContent: PropTypes.func,
+
+    /**
+     * Optionally provide a tabIndex for the underlying menu button
+     */
+    tabIndex: PropTypes.number,
   };
 
   static defaultProps = {

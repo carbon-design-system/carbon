@@ -29,6 +29,11 @@ Accordion.defaultProps = {
 
 Accordion.propTypes = {
   /**
+   * Specify the alignment of the accordion heading title and chevron.
+   */
+  align: PropTypes.oneOf(['start', 'end']),
+
+  /**
    * Pass in the children that will be rendered within the Accordion
    */
   children: PropTypes.node,
@@ -37,11 +42,6 @@ Accordion.propTypes = {
    * Specify an optional className to be applied to the container node
    */
   className: PropTypes.string,
-
-  /**
-   * Specify the alignment of the accordion heading title and chevron.
-   */
-  align: PropTypes.oneOf(['start', 'end']),
 };
 
 export default Accordion;

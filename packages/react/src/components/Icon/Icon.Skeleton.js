@@ -25,14 +25,14 @@ const IconSkeleton = ({ style, className, ...rest }) => {
 
 IconSkeleton.propTypes = {
   /**
-   * The CSS styles.
-   */
-  style: PropTypes.object,
-
-  /**
    * Specify an optional className to add.
    */
   className: PropTypes.string,
+
+  /**
+   * The CSS styles.
+   */
+  style: PropTypes.object,
 };
 
 export default IconSkeleton;

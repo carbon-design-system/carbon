@@ -45,19 +45,9 @@ function AccordionSkeleton({ align, open, count, className, ...rest }) {
 
 AccordionSkeleton.propTypes = {
   /**
-   * `false` to not display the first item opened
+   * Specify the alignment of the accordion heading title and chevron.
    */
-  open: PropTypes.bool,
-
-  /**
-   * Set number of items to render
-   */
-  count: PropTypes.number,
-
-  /**
-   * Set unique identifier to generate unique item keys
-   */
-  uid: deprecate(PropTypes.any),
+  align: PropTypes.oneOf(['start', 'end']),
 
   /**
    * Specify an optional className to add.
@@ -65,9 +55,19 @@ AccordionSkeleton.propTypes = {
   className: PropTypes.string,
 
   /**
-   * Specify the alignment of the accordion heading title and chevron.
+   * Set number of items to render
    */
-  align: PropTypes.oneOf(['start', 'end']),
+  count: PropTypes.number,
+
+  /**
+   * `false` to not display the first item opened
+   */
+  open: PropTypes.bool,
+
+  /**
+   * Set unique identifier to generate unique item keys
+   */
+  uid: deprecate(PropTypes.any),
 };
 
 AccordionSkeleton.defaultProps = {

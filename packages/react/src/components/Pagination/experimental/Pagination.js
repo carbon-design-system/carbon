@@ -16,7 +16,7 @@ import SelectItem from '../../SelectItem';
 
 const { prefix } = settings;
 
-function Unstable_Pagination({
+function Pagination({
   backwardText,
   children,
   className,
@@ -166,26 +166,7 @@ function Unstable_Pagination({
   );
 }
 
-Unstable_Pagination.defaultProps = {
-  backwardText: 'Previous page',
-  className: null,
-  children: undefined,
-  disabled: false,
-  forwardText: 'Next page',
-  id: 1,
-  itemsPerPageText: 'Items per page:',
-  itemRangeText: (min, max, total) => `${min}–${max} of ${total} items`,
-  itemText: (min, max) => `${min}–${max} items`,
-  initialPage: 1,
-  pageRangeText: (current, total) => `${current} of ${total} pages`,
-  pageSize: 10,
-  pageSizes: undefined,
-  pageText: (page) => `page ${page}`,
-  pagesUnknown: false,
-  totalItems: undefined,
-};
-
-Unstable_Pagination.propTypes = {
+Pagination.propTypes = {
   /**
    * The description for the backward icon.
    */
@@ -215,9 +196,9 @@ Unstable_Pagination.propTypes = {
   id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
 
   /**
-   * The translatable text indicating the number of items per page.
+   * The initial active page when the component is first mounted.
    */
-  itemsPerPageText: PropTypes.string,
+  initialPage: PropTypes.number,
 
   /**
    * The function returning a translatable text showing where the current page is,
@@ -231,9 +212,9 @@ Unstable_Pagination.propTypes = {
   itemText: PropTypes.func,
 
   /**
-   * The initial active page when the component is first mounted.
+   * The translatable text indicating the number of items per page.
    */
-  initialPage: PropTypes.number,
+  itemsPerPageText: PropTypes.string,
 
   /**
    * The function returning a translatable text showing where the current page is,
@@ -270,4 +251,23 @@ Unstable_Pagination.propTypes = {
   totalItems: PropTypes.number,
 };
 
-export default Unstable_Pagination;
+Pagination.defaultProps = {
+  backwardText: 'Previous page',
+  className: null,
+  children: undefined,
+  disabled: false,
+  forwardText: 'Next page',
+  id: 1,
+  itemsPerPageText: 'Items per page:',
+  itemRangeText: (min, max, total) => `${min}–${max} of ${total} items`,
+  itemText: (min, max) => `${min}–${max} items`,
+  initialPage: 1,
+  pageRangeText: (current, total) => `${current} of ${total} pages`,
+  pageSize: 10,
+  pageSizes: undefined,
+  pageText: (page) => `page ${page}`,
+  pagesUnknown: false,
+  totalItems: undefined,
+};
+
+export default Pagination;
