@@ -195,6 +195,7 @@ const MultiSelect = React.forwardRef(function MultiSelect(
           <WarningFilled16 className={`${prefix}--list-box__invalid-icon`} />
         )}
         <button
+          type="button"
           ref={ref}
           className={`${prefix}--list-box__field`}
           disabled={disabled}
@@ -346,6 +347,12 @@ MultiSelect.propTypes = {
    * Specify the size of the ListBox. Currently supports either `sm`, `lg` or `xl` as an option.
    */
   size: ListBoxPropTypes.ListBoxSize,
+
+  /**
+   * Provide text to be used in a `<label>` element that is tied to the
+   * multiselect via ARIA attributes.
+   */
+  titleText: PropTypes.string,
 
   /**
    * Callback function for translating ListBoxMenuIcon SVG title

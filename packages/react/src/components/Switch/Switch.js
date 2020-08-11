@@ -49,6 +49,7 @@ const Switch = React.forwardRef(function Switch(props, tabRef) {
 
   return (
     <button
+      type="button"
       ref={tabRef}
       role="tab"
       tabIndex={selected ? '0' : '-1'}

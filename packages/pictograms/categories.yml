@@ -7,12 +7,16 @@ categories:
       - delete
       - do--not
       - download
+      - download--01
+      - download--02
       - download--alt
       - embed
       - export
+      - export--01
+      - export--02
       - export--alt
-      - heart
       - launch
+      - love
       - maximize
       - minimize
       - paper--clip
@@ -23,6 +27,8 @@ categories:
       - reset
       - trash
       - upload
+      - upload--01
+      - upload--02
       - upload--alt
   - name: Blockchain
     members:

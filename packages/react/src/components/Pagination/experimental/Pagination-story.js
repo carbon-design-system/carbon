@@ -15,9 +15,10 @@ import {
   text,
   withKnobs,
 } from '@storybook/addon-knobs';
-
-import Unstable_Pagination from './Pagination';
-import PageSelector from './PageSelector';
+import {
+  unstable_PageSelector as PageSelector,
+  unstable_Pagination as Pagination,
+} from '../../../';
 
 const props = () => ({
   disabled: boolean('Disable backward/forward buttons (disabled)', false),
@@ -38,13 +39,13 @@ const props = () => ({
   onChange: action('onChange'),
 });
 
-storiesOf('UNSTABLE Pagination', module)
+storiesOf('unstable_Pagination', module)
   .addDecorator(withKnobs)
   .addDecorator((story) => <div style={{ width: '800px' }}>{story()}</div>)
   .add(
     'with a page selector',
     () => (
-      <Unstable_Pagination
+      <Pagination
         {...props()}
         totalItems={350}
         pageSizes={array('Choices of `pageSize` (pageSizes)', [10, 20, 30])}>
@@ -56,26 +57,26 @@ storiesOf('UNSTABLE Pagination', module)
             totalPages={totalPages}
           />
         )}
-      </Unstable_Pagination>
+      </Pagination>
     ),
     {
       info: {
-        propTables: [Unstable_Pagination, PageSelector],
+        propTables: [Pagination, PageSelector],
         text: `
             🚨 This component is *experimental* and may change. 🚨
-            \`Unstable_Pagination\` accepts a render prop \`children\`.
+            \`Pagination\` accepts a render prop \`children\`.
             This example wraps the \`children\` (\`PageSelector\`) in a function, allowing it to pass information back to the parent component.
             \`\`\`jsx
-            {/** 
-              * Provide \`totalItems\` to \`Unstable_Pagination\` when using the \`PageSelector\` child.
-              * \`Unstable_Pagination\` uses \`totalItems\` to calculate \`totalPages\`.
+            {/**
+              * Provide \`totalItems\` to \`Pagination\` when using the \`PageSelector\` child.
+              * \`Pagination\` uses \`totalItems\` to calculate \`totalPages\`.
               * And then, \`PageSelector\` uses the calculated \`totalPages\` to accurately display page options.
               */}
-            <Unstable_Pagination
+            <Pagination
               totalItems={350}
               pageSizes={[10, 15, 20, 25]}
             >
-              {/** 
+              {/**
                 * Below, \`children\` is a render prop, wrapped in a function.
                 * - \`currentPage\` is used to display the current page.
                 * - \`onSetPage\` is used to update the current page state in the parent component.
@@ -89,7 +90,7 @@ storiesOf('UNSTABLE Pagination', module)
                   totalPages={totalPages}
                 />
               )}
-            </Unstable_Pagination>
+            </Pagination>
             \`\`\`
           `,
       },
@@ -97,12 +98,12 @@ storiesOf('UNSTABLE Pagination', module)
   )
   .add(
     'with no sizer, child input, or child selector',
-    () => <Unstable_Pagination {...props()} totalItems={350} />,
+    () => <Pagination {...props()} totalItems={350} />,
     {
       info: {
         text: `
           🚨 This component is *experimental* and may change. 🚨
-          Without \`children\`, \`Unstable_Pagination\` renders without a page selector. 
+          Without \`children\`, \`Pagination\` renders without a page selector.
         `,
       },
     }

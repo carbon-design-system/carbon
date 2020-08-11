@@ -40,6 +40,7 @@ exports[`DataTable.TableExpandRow should render 1`] = `
                     aria-label="Aria label"
                     className="bx--table-expand__button"
                     onClick={[MockFunction]}
+                    type="button"
                   >
                     <ForwardRef(ChevronRight16)
                       className="bx--table-expand__svg"

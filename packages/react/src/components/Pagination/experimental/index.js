@@ -5,5 +5,5 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-export Unstable_Pagination from './Pagination';
+export Pagination from './Pagination';
 export PageSelector from './PageSelector';
