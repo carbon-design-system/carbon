@@ -6474,356 +6474,6 @@ Map {
       },
     },
   },
-  "PageSelector" => Object {
-    "defaultProps": Object {
-      "className": null,
-      "id": 1,
-      "labelText": "Current page number",
-    },
-    "propTypes": Object {
-      "className": Object {
-        "type": "string",
-      },
-      "currentPage": Object {
-        "isRequired": true,
-        "type": "number",
-      },
-      "id": Object {
-        "args": Array [
-          Array [
-            Object {
-              "type": "string",
-            },
-            Object {
-              "type": "number",
-            },
-          ],
-        ],
-        "type": "oneOfType",
-      },
-      "labelText": Object {
-        "type": "string",
-      },
-      "totalPages": Object {
-        "isRequired": true,
-        "type": "number",
-      },
-    },
-  },
-  "Unstable_Pagination" => Object {
-    "defaultProps": Object {
-      "backwardText": "Previous page",
-      "children": undefined,
-      "className": null,
-      "disabled": false,
-      "forwardText": "Next page",
-      "id": 1,
-      "initialPage": 1,
-      "itemRangeText": [Function],
-      "itemText": [Function],
-      "itemsPerPageText": "Items per page:",
-      "pageRangeText": [Function],
-      "pageSize": 10,
-      "pageSizes": undefined,
-      "pageText": [Function],
-      "pagesUnknown": false,
-      "totalItems": undefined,
-    },
-    "propTypes": Object {
-      "backwardText": Object {
-        "type": "string",
-      },
-      "children": Object {
-        "args": Array [
-          Array [
-            Object {
-              "type": "node",
-            },
-            Object {
-              "type": "func",
-            },
-          ],
-        ],
-        "type": "oneOfType",
-      },
-      "className": Object {
-        "type": "string",
-      },
-      "disabled": Object {
-        "type": "bool",
-      },
-      "forwardText": Object {
-        "type": "string",
-      },
-      "id": Object {
-        "args": Array [
-          Array [
-            Object {
-              "type": "string",
-            },
-            Object {
-              "type": "number",
-            },
-          ],
-        ],
-        "type": "oneOfType",
-      },
-      "initialPage": Object {
-        "type": "number",
-      },
-      "itemRangeText": Object {
-        "type": "func",
-      },
-      "itemText": Object {
-        "type": "func",
-      },
-      "itemsPerPageText": Object {
-        "type": "string",
-      },
-      "pageRangeText": Object {
-        "type": "func",
-      },
-      "pageSize": Object {
-        "type": "number",
-      },
-      "pageSizes": Object {
-        "args": Array [
-          Object {
-            "type": "number",
-          },
-        ],
-        "type": "arrayOf",
-      },
-      "pageText": Object {
-        "type": "func",
-      },
-      "pagesUnknown": Object {
-        "type": "bool",
-      },
-      "totalItems": Object {
-        "type": "number",
-      },
-    },
-  },
-  "Unstable_TreeView" => Object {
-    "TreeNode": Object {
-      "propTypes": Object {
-        "active": Object {
-          "args": Array [
-            Array [
-              Object {
-                "type": "string",
-              },
-              Object {
-                "type": "number",
-              },
-            ],
-          ],
-          "type": "oneOfType",
-        },
-        "children": Object {
-          "type": "node",
-        },
-        "className": Object {
-          "type": "string",
-        },
-        "depth": Object {
-          "type": "number",
-        },
-        "disabled": Object {
-          "type": "bool",
-        },
-        "isExpanded": Object {
-          "type": "bool",
-        },
-        "label": Object {
-          "type": "node",
-        },
-        "onSelect": Object {
-          "type": "func",
-        },
-        "onToggle": Object {
-          "type": "func",
-        },
-        "onTreeSelect": Object {
-          "type": "func",
-        },
-        "renderIcon": Object {
-          "args": Array [
-            Array [
-              Object {
-                "type": "func",
-              },
-              Object {
-                "type": "object",
-              },
-            ],
-          ],
-          "type": "oneOfType",
-        },
-        "selected": Object {
-          "args": Array [
-            Object {
-              "args": Array [
-                Array [
-                  Object {
-                    "type": "string",
-                  },
-                  Object {
-                    "type": "number",
-                  },
-                ],
-              ],
-              "type": "oneOfType",
-            },
-          ],
-          "type": "arrayOf",
-        },
-        "value": Object {
-          "type": "string",
-        },
-      },
-    },
-    "propTypes": Object {
-      "active": Object {
-        "args": Array [
-          Array [
-            Object {
-              "type": "string",
-            },
-            Object {
-              "type": "number",
-            },
-          ],
-        ],
-        "type": "oneOfType",
-      },
-      "children": Object {
-        "type": "node",
-      },
-      "className": Object {
-        "type": "string",
-      },
-      "hideLabel": Object {
-        "type": "bool",
-      },
-      "label": Object {
-        "isRequired": true,
-        "type": "string",
-      },
-      "multiselect": Object {
-        "type": "bool",
-      },
-      "onSelect": Object {
-        "type": "func",
-      },
-      "selected": Object {
-        "args": Array [
-          Object {
-            "args": Array [
-              Array [
-                Object {
-                  "type": "string",
-                },
-                Object {
-                  "type": "number",
-                },
-              ],
-            ],
-            "type": "oneOfType",
-          },
-        ],
-        "type": "arrayOf",
-      },
-      "size": Object {
-        "args": Array [
-          Array [
-            "default",
-            "compact",
-          ],
-        ],
-        "type": "oneOf",
-      },
-    },
-  },
-  "TreeNode" => Object {
-    "propTypes": Object {
-      "active": Object {
-        "args": Array [
-          Array [
-            Object {
-              "type": "string",
-            },
-            Object {
-              "type": "number",
-            },
-          ],
-        ],
-        "type": "oneOfType",
-      },
-      "children": Object {
-        "type": "node",
-      },
-      "className": Object {
-        "type": "string",
-      },
-      "depth": Object {
-        "type": "number",
-      },
-      "disabled": Object {
-        "type": "bool",
-      },
-      "isExpanded": Object {
-        "type": "bool",
-      },
-      "label": Object {
-        "type": "node",
-      },
-      "onSelect": Object {
-        "type": "func",
-      },
-      "onToggle": Object {
-        "type": "func",
-      },
-      "onTreeSelect": Object {
-        "type": "func",
-      },
-      "renderIcon": Object {
-        "args": Array [
-          Array [
-            Object {
-              "type": "func",
-            },
-            Object {
-              "type": "object",
-            },
-          ],
-        ],
-        "type": "oneOfType",
-      },
-      "selected": Object {
-        "args": Array [
-          Object {
-            "args": Array [
-              Array [
-                Object {
-                  "type": "string",
-                },
-                Object {
-                  "type": "number",
-                },
-              ],
-            ],
-            "type": "oneOfType",
-          },
-        ],
-        "type": "arrayOf",
-      },
-      "value": Object {
-        "type": "string",
-      },
-    },
-  },
   "Content" => Object {
     "defaultProps": Object {
       "tagName": "main",
@@ -7446,6 +7096,225 @@ Map {
       },
       "totalItems": Object {
         "type": "number",
+      },
+    },
+  },
+  "unstable_TreeView" => Object {
+    "TreeNode": Object {
+      "propTypes": Object {
+        "active": Object {
+          "args": Array [
+            Array [
+              Object {
+                "type": "string",
+              },
+              Object {
+                "type": "number",
+              },
+            ],
+          ],
+          "type": "oneOfType",
+        },
+        "children": Object {
+          "type": "node",
+        },
+        "className": Object {
+          "type": "string",
+        },
+        "depth": Object {
+          "type": "number",
+        },
+        "disabled": Object {
+          "type": "bool",
+        },
+        "isExpanded": Object {
+          "type": "bool",
+        },
+        "label": Object {
+          "type": "node",
+        },
+        "onSelect": Object {
+          "type": "func",
+        },
+        "onToggle": Object {
+          "type": "func",
+        },
+        "onTreeSelect": Object {
+          "type": "func",
+        },
+        "renderIcon": Object {
+          "args": Array [
+            Array [
+              Object {
+                "type": "func",
+              },
+              Object {
+                "type": "object",
+              },
+            ],
+          ],
+          "type": "oneOfType",
+        },
+        "selected": Object {
+          "args": Array [
+            Object {
+              "args": Array [
+                Array [
+                  Object {
+                    "type": "string",
+                  },
+                  Object {
+                    "type": "number",
+                  },
+                ],
+              ],
+              "type": "oneOfType",
+            },
+          ],
+          "type": "arrayOf",
+        },
+        "value": Object {
+          "type": "string",
+        },
+      },
+    },
+    "propTypes": Object {
+      "active": Object {
+        "args": Array [
+          Array [
+            Object {
+              "type": "string",
+            },
+            Object {
+              "type": "number",
+            },
+          ],
+        ],
+        "type": "oneOfType",
+      },
+      "children": Object {
+        "type": "node",
+      },
+      "className": Object {
+        "type": "string",
+      },
+      "hideLabel": Object {
+        "type": "bool",
+      },
+      "label": Object {
+        "isRequired": true,
+        "type": "string",
+      },
+      "multiselect": Object {
+        "type": "bool",
+      },
+      "onSelect": Object {
+        "type": "func",
+      },
+      "selected": Object {
+        "args": Array [
+          Object {
+            "args": Array [
+              Array [
+                Object {
+                  "type": "string",
+                },
+                Object {
+                  "type": "number",
+                },
+              ],
+            ],
+            "type": "oneOfType",
+          },
+        ],
+        "type": "arrayOf",
+      },
+      "size": Object {
+        "args": Array [
+          Array [
+            "default",
+            "compact",
+          ],
+        ],
+        "type": "oneOf",
+      },
+    },
+  },
+  "unstable_TreeNode" => Object {
+    "propTypes": Object {
+      "active": Object {
+        "args": Array [
+          Array [
+            Object {
+              "type": "string",
+            },
+            Object {
+              "type": "number",
+            },
+          ],
+        ],
+        "type": "oneOfType",
+      },
+      "children": Object {
+        "type": "node",
+      },
+      "className": Object {
+        "type": "string",
+      },
+      "depth": Object {
+        "type": "number",
+      },
+      "disabled": Object {
+        "type": "bool",
+      },
+      "isExpanded": Object {
+        "type": "bool",
+      },
+      "label": Object {
+        "type": "node",
+      },
+      "onSelect": Object {
+        "type": "func",
+      },
+      "onToggle": Object {
+        "type": "func",
+      },
+      "onTreeSelect": Object {
+        "type": "func",
+      },
+      "renderIcon": Object {
+        "args": Array [
+          Array [
+            Object {
+              "type": "func",
+            },
+            Object {
+              "type": "object",
+            },
+          ],
+        ],
+        "type": "oneOfType",
+      },
+      "selected": Object {
+        "args": Array [
+          Object {
+            "args": Array [
+              Array [
+                Object {
+                  "type": "string",
+                },
+                Object {
+                  "type": "number",
+                },
+              ],
+            ],
+            "type": "oneOfType",
+          },
+        ],
+        "type": "arrayOf",
+      },
+      "value": Object {
+        "type": "string",
       },
     },
   },
