@@ -196,9 +196,9 @@ Pagination.propTypes = {
   id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
 
   /**
-   * The translatable text indicating the number of items per page.
+   * The initial active page when the component is first mounted.
    */
-  itemsPerPageText: PropTypes.string,
+  initialPage: PropTypes.number,
 
   /**
    * The function returning a translatable text showing where the current page is,
@@ -212,9 +212,9 @@ Pagination.propTypes = {
   itemText: PropTypes.func,
 
   /**
-   * The initial active page when the component is first mounted.
+   * The translatable text indicating the number of items per page.
    */
-  initialPage: PropTypes.number,
+  itemsPerPageText: PropTypes.string,
 
   /**
    * The function returning a translatable text showing where the current page is,

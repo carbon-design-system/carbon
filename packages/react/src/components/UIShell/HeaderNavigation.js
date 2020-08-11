@@ -21,15 +21,15 @@ export default class HeaderNavigation extends React.Component {
     ...AriaLabelPropType,
 
     /**
-     * Optionally provide a custom class to apply to the underlying <nav> node
-     */
-    className: PropTypes.string,
-
-    /**
      * Provide valid children of HeaderNavigation, for example `HeaderMenuItem`
      * or `HeaderMenu`
      */
     children: PropTypes.node,
+
+    /**
+     * Optionally provide a custom class to apply to the underlying <nav> node
+     */
+    className: PropTypes.string,
   };
 
   constructor(props) {

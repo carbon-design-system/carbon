@@ -19,9 +19,14 @@ const { prefix } = settings;
 export default class FileUploader extends React.Component {
   static propTypes = {
     /**
-     * Provide a description for the complete/close icon that can be read by screen readers
+     * Specify the types of files that this input should be able to receive
      */
-    iconDescription: PropTypes.string,
+    accept: PropTypes.arrayOf(PropTypes.string),
+
+    /**
+     * Specify the type of the <FileUploaderButton>
+     */
+    buttonKind: PropTypes.oneOf(ButtonKinds),
 
     /**
      * Provide the label text to be read by screen readers when interacting with
@@ -30,15 +35,20 @@ export default class FileUploader extends React.Component {
     buttonLabel: PropTypes.string,
 
     /**
-     * Specify the type of the <FileUploaderButton>
+     * Provide a custom className to be applied to the container node
      */
-    buttonKind: PropTypes.oneOf(ButtonKinds),
+    className: PropTypes.string,
 
     /**
      * Specify the status of the File Upload
      */
     filenameStatus: PropTypes.oneOf(['edit', 'complete', 'uploading'])
       .isRequired,
+
+    /**
+     * Provide a description for the complete/close icon that can be read by screen readers
+     */
+    iconDescription: PropTypes.string,
 
     /**
      * Specify the description text of this <FileUploader>
@@ -67,26 +77,16 @@ export default class FileUploader extends React.Component {
     onChange: PropTypes.func,
 
     /**
-     * Provide an optional `onDelete` hook that is called when an uploaded item
-     * is removed
-     */
-    onDelete: PropTypes.func,
-
-    /**
      * Provide an optional `onClick` hook that is called each time the
      * FileUploader is clicked
      */
     onClick: PropTypes.func,
 
     /**
-     * Provide a custom className to be applied to the container node
+     * Provide an optional `onDelete` hook that is called when an uploaded item
+     * is removed
      */
-    className: PropTypes.string,
-
-    /**
-     * Specify the types of files that this input should be able to receive
-     */
-    accept: PropTypes.arrayOf(PropTypes.string),
+    onDelete: PropTypes.func,
 
     /**
      * Specify the size of the FileUploaderButton, from a list of available

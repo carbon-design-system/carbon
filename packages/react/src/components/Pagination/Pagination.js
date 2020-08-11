@@ -47,10 +47,9 @@ export default class Pagination extends Component {
     className: PropTypes.string,
 
     /**
-     * The function returning a translatable text showing where the current page is,
-     * in a manner of the range of items.
+     * `true` if the backward/forward buttons, as well as the page select elements,  should be disabled.
      */
-    itemRangeText: PropTypes.func,
+    disabled: PropTypes.bool,
 
     /**
      * The description for the forward icon.
@@ -62,10 +61,17 @@ export default class Pagination extends Component {
      */
     id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
 
+    // TODO: remove when v9 is deprecated
     /**
-     * The translatable text indicating the number of items per page.
+     * `true` if the current page should be the last page.
      */
-    itemsPerPageText: PropTypes.string,
+    isLastPage: PropTypes.bool,
+
+    /**
+     * The function returning a translatable text showing where the current page is,
+     * in a manner of the range of items.
+     */
+    itemRangeText: PropTypes.func,
 
     /**
      * A variant of `itemRangeText`, used if the total number of items is unknown.
@@ -73,9 +79,27 @@ export default class Pagination extends Component {
     itemText: PropTypes.func,
 
     /**
+     * The translatable text indicating the number of items per page.
+     */
+    itemsPerPageText: PropTypes.string,
+
+    /**
      * The callback function called when the current page changes.
      */
     onChange: PropTypes.func,
+
+    /**
+     * The current page.
+     */
+    page: PropTypes.number,
+
+    /**
+     * Deprecated; `true` if the select box to change the page should be disabled.
+     */
+    pageInputDisabled: deprecate(
+      PropTypes.bool,
+      `The prop \`pageInputDisabled\` for Pagination has been deprecated, as the feature of \`pageInputDisabled\` has been combined with the general \`disabled\` prop.`
+    ),
 
     pageNumberText: PropTypes.string,
 
@@ -85,9 +109,9 @@ export default class Pagination extends Component {
     pageRangeText: PropTypes.func,
 
     /**
-     * The translatable text showing the current page.
+     * The number dictating how many items a page contains.
      */
-    pageText: PropTypes.func,
+    pageSize: PropTypes.number,
 
     /**
      * The choices for `pageSize`.
@@ -95,43 +119,19 @@ export default class Pagination extends Component {
     pageSizes: PropTypes.arrayOf(PropTypes.number).isRequired,
 
     /**
-     * The total number of items.
+     * The translatable text showing the current page.
      */
-    totalItems: PropTypes.number,
-
-    /**
-     * `true` if the backward/forward buttons, as well as the page select elements,  should be disabled.
-     */
-    disabled: PropTypes.bool,
-
-    /**
-     * The current page.
-     */
-    page: PropTypes.number,
-
-    /**
-     * The number dictating how many items a page contains.
-     */
-    pageSize: PropTypes.number,
+    pageText: PropTypes.func,
 
     /**
      * `true` if the total number of items is unknown.
      */
     pagesUnknown: PropTypes.bool,
 
-    // TODO: remove when v9 is deprecated
     /**
-     * `true` if the current page should be the last page.
+     * The total number of items.
      */
-    isLastPage: PropTypes.bool,
-
-    /**
-     * Deprecated; `true` if the select box to change the page should be disabled.
-     */
-    pageInputDisabled: deprecate(
-      PropTypes.bool,
-      `The prop \`pageInputDisabled\` for Pagination has been deprecated, as the feature of \`pageInputDisabled\` has been combined with the general \`disabled\` prop.`
-    ),
+    totalItems: PropTypes.number,
   };
 
   static defaultProps = {

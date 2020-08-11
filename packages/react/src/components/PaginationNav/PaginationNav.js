@@ -362,14 +362,14 @@ DirectionButton.propTypes = {
   direction: PropTypes.oneOf(['forward', 'backward']),
 
   /**
-   * The label shown in the button's tooltip.
-   */
-  label: PropTypes.string,
-
-  /**
    * Whether or not the button should be disabled.
    */
   disabled: PropTypes.bool,
+
+  /**
+   * The label shown in the button's tooltip.
+   */
+  label: PropTypes.string,
 
   /**
    * The callback function called when the button is clicked.
@@ -378,11 +378,6 @@ DirectionButton.propTypes = {
 };
 
 PaginationItem.propTypes = {
-  /**
-   * The page number this item represents.
-   */
-  page: PropTypes.number,
-
   /**
    * Whether or not this is the currently active page.
    */
@@ -394,6 +389,11 @@ PaginationItem.propTypes = {
   onClick: PropTypes.func,
 
   /**
+   * The page number this item represents.
+   */
+  page: PropTypes.number,
+
+  /**
    * Specify a custom translation function that takes in a message identifier
    * and returns the localized string for the message
    */
@@ -402,14 +402,14 @@ PaginationItem.propTypes = {
 
 PaginationOverflow.propTypes = {
   /**
-   * From which index on this overflow should start displaying pages.
-   */
-  fromIndex: PropTypes.number,
-
-  /**
    * How many items to display in this overflow.
    */
   count: PropTypes.number,
+
+  /**
+   * From which index on this overflow should start displaying pages.
+   */
+  fromIndex: PropTypes.number,
 
   /**
    * The callback function called when the user selects a page from the overflow.
@@ -430,19 +430,19 @@ PaginationNav.propTypes = {
   className: PropTypes.string,
 
   /**
-   * The callback function called when the current page changes.
-   */
-  onChange: PropTypes.func,
-
-  /**
-   * The total number of items.
-   */
-  totalItems: PropTypes.number,
-
-  /**
    * The number of items to be shown.
    */
   itemsShown: PropTypes.number,
+
+  /**
+   * Whether user should be able to loop through the items when reaching first / last.
+   */
+  loop: PropTypes.bool,
+
+  /**
+   * The callback function called when the current page changes.
+   */
+  onChange: PropTypes.func,
 
   /**
    * The current page.
@@ -450,9 +450,9 @@ PaginationNav.propTypes = {
   page: PropTypes.number,
 
   /**
-   * Whether user should be able to loop through the items when reaching first / last.
+   * The total number of items.
    */
-  loop: PropTypes.bool,
+  totalItems: PropTypes.number,
 
   /**
    * Specify a custom translation function that takes in a message identifier
