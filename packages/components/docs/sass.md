@@ -22861,6 +22861,7 @@ Slider styles
     @include type-style('code-02');
 
     color: $text-01;
+    white-space: nowrap;
 
     &:last-of-type {
       margin-right: $carbon--spacing-05;
