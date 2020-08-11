@@ -10,6 +10,7 @@ import { action } from '@storybook/addon-actions';
 import { withKnobs, boolean, select } from '@storybook/addon-knobs';
 import ContentSwitcher from '../ContentSwitcher';
 import Switch from '../Switch';
+import mdx from './ContentSwitcher.mdx';
 
 const selectionModes = {
   'Change selection automatically upon focus (automatic)': 'automatic',
@@ -41,6 +42,9 @@ export default {
 
     subcomponents: {
       Switch,
+    },
+    docs: {
+      page: mdx,
     },
   },
 };
