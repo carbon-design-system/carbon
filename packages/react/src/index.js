@@ -165,10 +165,39 @@ export ToggleSkeleton from './components/Toggle/Toggle.Skeleton';
 export ToggleSmallSkeleton from './components/ToggleSmall/ToggleSmall.Skeleton';
 export IconSkeleton from './components/Icon/Icon.Skeleton';
 export DatePickerSkeleton from './components/DatePicker/DatePicker.Skeleton';
-export * from './components/UIShell';
-
-// experimental
 export {
-  PageSelector,
-  Unstable_Pagination,
-} from './components/Pagination/Unstable_Pagination';
+  Content,
+  Header,
+  HeaderContainer,
+  HeaderGlobalAction,
+  HeaderGlobalBar,
+  HeaderMenu,
+  HeaderMenuButton,
+  HeaderMenuItem,
+  HeaderName,
+  HeaderNavigation,
+  HeaderPanel,
+  HeaderSideNavItems,
+  Switcher,
+  SwitcherItem,
+  SwitcherDivider,
+  SkipToContent,
+  SideNav,
+  SideNavDetails,
+  SideNavFooter,
+  SideNavHeader,
+  SideNavIcon,
+  SideNavItem,
+  SideNavItems,
+  SideNavLink,
+  SideNavLinkText,
+  SideNavMenu,
+  SideNavMenuItem,
+  SideNavSwitcher,
+} from './components/UIShell';
+
+// Experimental
+export {
+  PageSelector as unstable_PageSelector,
+  Pagination as unstable_Pagination,
+} from './components/Pagination/experimental';
