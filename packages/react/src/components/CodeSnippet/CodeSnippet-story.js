@@ -12,21 +12,29 @@ import CodeSnippet from '../CodeSnippet';
 import CodeSnippetSkeleton from './CodeSnippet.Skeleton';
 import mdx from './CodeSnippet.mdx';
 
-const props = () => ({
-  type: select('Type', {
-    inline: 'inline',
-    'single line': 'single',
-    'multiple line': 'multi',
-  }),
-  light: boolean('Light variant', false),
-  feedback: text('Feedback text', 'Copied to clipboard'),
-  showMoreText: text('Text for "show more" button', 'Show more'),
-  showLessText: text('Text for "show less" button', 'Show less'),
-  hideCopyButton: boolean('Hide copy button', false),
-  onClick: action('onClick'),
-  copyButtonDescription: text('Copy button title', 'Copy code snippet'),
-  ariaLabel: text('ARIA label', 'Container label'),
-});
+export default {
+  title: 'CodeSnippet',
+  component: CodeSnippet,
+  decorators: [withKnobs],
+  parameters: {
+    docs: {
+      page: mdx,
+    },
+  },
+};
+
+export const codeSnippet = () => (
+  <CodeSnippet type="inline" feedback="Copied to clipboard">
+    {'node -v'}
+  </CodeSnippet>
+);
+
+export const skeleton = () => (
+  <div style={{ width: '800px' }}>
+    <CodeSnippetSkeleton type="single" style={{ marginBottom: 8 }} />
+    <CodeSnippetSkeleton type="multi" />
+  </div>
+);
 
 const lightPropMessage = (
   <small style={{ display: 'block', paddingBottom: '1rem' }}>
@@ -48,35 +56,21 @@ const lightPropMessage = (
   </small>
 );
 
-export default {
-  title: 'CodeSnippet',
-  component: CodeSnippet,
-  decorators: [withKnobs],
-  parameters: {
-    docs: {
-      page: mdx,
-    },
-  },
-};
-
-export const codeSnippet = () => (
-  <CodeSnippet type="inline" feedback="Copied to clipboard">
-    {'node -v'}
-  </CodeSnippet>
-);
-
-codeSnippet.story = {
-  name: 'default',
-  parameters: {
-    info: {
-      text: `
-      Code snippets are small blocks of reusable code that can be inserted in a code file.
-
-      The Inline style is for code used within a block of text.
-    `,
-    },
-  },
-};
+const props = () => ({
+  type: select('Type', {
+    inline: 'inline',
+    'single line': 'single',
+    'multiple line': 'multi',
+  }),
+  light: boolean('Light variant', false),
+  feedback: text('Feedback text', 'Copied to clipboard'),
+  showMoreText: text('Text for "show more" button', 'Show more'),
+  showLessText: text('Text for "show less" button', 'Show less'),
+  hideCopyButton: boolean('Hide copy button', false),
+  onClick: action('onClick'),
+  copyButtonDescription: text('Copy button title', 'Copy code snippet'),
+  ariaLabel: text('ARIA label', 'Container label'),
+});
 
 export const playground = () => (
   <div className={props().light ? 'bx--tile' : ''} style={{ width: '800px' }}>
@@ -92,25 +86,3 @@ export const playground = () => (
     </CodeSnippet>
   </div>
 );
-
-playground.story = {
-  name: 'playground',
-};
-
-export const Skeleton = () => (
-  <div style={{ width: '800px' }}>
-    <CodeSnippetSkeleton type="single" style={{ marginBottom: 8 }} />
-    <CodeSnippetSkeleton type="multi" />
-  </div>
-);
-
-Skeleton.story = {
-  name: 'skeleton',
-  parameters: {
-    info: {
-      text: `
-        Placeholder skeleton state to use when content is loading.
-      `,
-    },
-  },
-};

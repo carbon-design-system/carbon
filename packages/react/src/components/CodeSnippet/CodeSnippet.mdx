@@ -7,41 +7,28 @@ import CodeSnippet from '../CodeSnippet'
  -->
 # CodeSnippet
 
+## Table of Contents
+
+- [Overview](#overview)
+- [Skeleton state](#skeleton-state)
+- [Component API](#component-api)
+- [Feedback](#feedback)
+
 ## Overview
 Code snippets are strings or small blocks of reusable code that can be copied and inserted in a code file.
 
 <Preview>
-	<CodeSnippet>
-		import * as stories from './CodeSnippet-story.js'
-	</CodeSnippet>
+	<Story id="codesnippet--code-snippet" />
 </Preview>
 
-There are three different types of code snippets to help cater to varied line length use cases—inline, single line, and multi-line.
+## Skeleton state
 
-## Inline
-A block of text used inline with setences or paragraphs
-
-<Preview>
-	<CodeSnippet type="inline">'@storybook/ad1don-docs/blocks'</CodeSnippet>
-</Preview>
-
-## Single line
-A single line of code.
+You can use the `CodeSnippetSkeleton` component to render a skeleton variant of an
+code snippet. This is useful to display while content in your code snippet is being
+fetched from an external resource like an API.
 
 <Preview>
-	<CodeSnippet>
-		import * as stories from './CodeSnippet-story.js'
-	</CodeSnippet>
-</Preview>
-
-## Multi line
-Multiple lines of code with the ability to show more or less strings.
-
-<Preview>
-	<CodeSnippet type="multi">
-		import * as stories from './CodeSnippet-story.js'
-		import CodeSnippet from '../CodeSnippet'
-	</CodeSnippet>	
+	<Story id="codesnippet--skeleton" />
 </Preview>
 
 ## Component API
