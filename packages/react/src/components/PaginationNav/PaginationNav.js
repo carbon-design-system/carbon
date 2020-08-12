@@ -172,16 +172,19 @@ function PaginationOverflow({
   return null;
 }
 
-export default function PaginationNav({
-  className,
-  onChange = () => {},
-  totalItems,
-  itemsShown = 10,
-  page = 0,
-  loop = false,
-  translateWithId: t = translateWithId,
-  ...rest
-}) {
+const PaginationNav = React.forwardRef(function PaginationNav(
+  {
+    className,
+    onChange = () => {},
+    totalItems,
+    itemsShown = 10,
+    page = 0,
+    loop = false,
+    translateWithId: t = translateWithId,
+    ...rest
+  },
+  ref
+) {
   const [currentPage, setCurrentPage] = useState(page);
   const [itemsThatFit, setItemsThatFit] = useState(
     itemsShown >= 4 ? itemsShown : 4
@@ -266,7 +269,7 @@ export default function PaginationNav({
   const startOffset = itemsThatFit <= 4 && currentPage > 1 ? 0 : 1;
 
   return (
-    <nav className={classNames} {...rest} aria-label="pagination">
+    <nav className={classNames} ref={ref} {...rest} aria-label="pagination">
       <ul className={`${prefix}--pagination-nav__list`}>
         <DirectionButton
           direction="backward"
@@ -353,7 +356,7 @@ export default function PaginationNav({
       </div>
     </nav>
   );
-}
+});
 
 DirectionButton.propTypes = {
   /**
@@ -460,3 +463,5 @@ PaginationNav.propTypes = {
    */
   translateWithId: PropTypes.func,
 };
+
+export default PaginationNav;
