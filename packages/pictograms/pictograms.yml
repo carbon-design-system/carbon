@@ -451,7 +451,7 @@
     - science
     - biology
 - name: chart--3D
-  friendly_name: chart--3D
+  friendly_name: Chart 3D
   aliases:
     - chart
     - chart
@@ -460,7 +460,7 @@
     - analytics
     - data analytics
 - name: chart--area
-  friendly_name: chart--area
+  friendly_name: Chart area
   aliases:
     - chart area
     - chart
@@ -480,7 +480,7 @@
     - analytics
     - data analytics
 - name: chart--bubble
-  friendly_name: bubble--chart
+  friendly_name: Chart bubble
   aliases:
     - chart bubble
     - chart
@@ -500,7 +500,7 @@
     - analytics
     - data analytics
 - name: chart--candlestick
-  friendly_name: candlestick--chart
+  friendly_name: Chart candlestick
   aliases:
     - chart
     - candlestick
@@ -519,7 +519,7 @@
     - analytics
     - data analytics
 - name: chart--error-bar
-  friendly_name: chart--error-bar
+  friendly_name: Chart error bar
   aliases:
     - chart error bar
     - chart error
@@ -529,7 +529,7 @@
     - analytics
     - data analytics
 - name: chart--evaluation
-  friendly_name: chart--evaluation
+  friendly_name: Chart evaluation
   aliases:
     - chart evaluation
     - chart
@@ -542,7 +542,7 @@
     - study
     - analyze
 - name: chart--high-low
-  friendly_name: chart--high-low
+  friendly_name: Chart high low
   aliases:
     - chart high low
     - chart
@@ -552,7 +552,7 @@
     - analytics
     - data analytics
 - name: chart--histogram
-  friendly_name: chart--histogram
+  friendly_name: Chart histogram
   aliases:
     - chart histogram
     - chart
@@ -572,7 +572,7 @@
     - analytics
     - data analytics
 - name: chart--multi-line
-  friendly_name: chart--multi-line
+  friendly_name: Chart multi line
   aliases:
     - chart multi line
     - chart
@@ -593,7 +593,7 @@
     - analytics
     - data analytics
 - name: chart--parallel
-  friendly_name: chart--parallel
+  friendly_name: Chart parallel
   aliases:
     - chart parallel
     - chart
@@ -613,7 +613,7 @@
     - analytics
     - data analytics
 - name: chart--radar
-  friendly_name: chart--radar
+  friendly_name: Chart radar
   aliases:
     - chart radar
     - chart
@@ -623,7 +623,7 @@
     - analytics
     - data analytics
 - name: chart--river
-  friendly_name: chart--river
+  friendly_name: Chart river
   aliases:
     - chart river
     - chart
@@ -665,7 +665,7 @@
     - analytics
     - data analytics
 - name: chart--t-SNE
-  friendly_name: chart--t-SNE
+  friendly_name: Chart t-SNE
   aliases:
     - chart t-SNE
     - chart
@@ -704,7 +704,7 @@
     - debit
     - chip
 - name: circle-packing
-  friendly_name: circle-packing
+  friendly_name: Circle packing
   aliases:
     - circle packing
     - chart
@@ -1912,7 +1912,7 @@
     - data analytics
     - analytics
 - name: heat-map--02
-  friendly_name: heat-map--02
+  friendly_name: Heat map 02
   aliases:
     - heat map 02
     - heat
@@ -2833,7 +2833,7 @@
     - security
     - people
 - name: population-diagram
-  friendly_name: population-diagram
+  friendly_name: Population diagram
   aliases:
     - population diagram
     - population
@@ -2929,7 +2929,7 @@
     - strategy
     - approach
 - name: q-q-plot
-  friendly_name: q-q-plot
+  friendly_name: Q-Q plot
   aliases:
     - q q plot
     - qq plot
@@ -3013,7 +3013,7 @@
     - watson
     - AI
 - name: relationship-diagram
-  friendly_name: relationship-diagram
+  friendly_name: Relationship diagram
   aliases:
     - relationship diagram
     - relationship
@@ -3170,7 +3170,7 @@
     - weight
     - healthcare
 - name: scatter-matrix
-  friendly_name: scatter-matrix
+  friendly_name: Scatter matrix
   aliases:
     - scatter matrix
     - scatter
@@ -3813,7 +3813,7 @@
     - garbage
     - dustbin
 - name: tree--diagram
-  friendly_name: tree--diagram
+  friendly_name: Tree diagram
   aliases:
     - tree diagram
     - tree
@@ -3822,7 +3822,7 @@
     - analytics
     - data analytics
 - name: tree--map
-  friendly_name: tree--map
+  friendly_name: Tree map
   aliases:
     - tree map
     - tree
@@ -4106,7 +4106,7 @@
     - wireless
     - home
 - name: word-cloud
-  friendly_name: word-cloud
+  friendly_name: Word cloud
   aliases:
     - word cloud
     - word
