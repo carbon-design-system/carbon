@@ -44,6 +44,11 @@ const props = () => ({
     'Form validation UI content (invalidText)',
     'Number is not valid'
   ),
+  warn: boolean('Show warning state (warn)', false),
+  warnText: text(
+    'Warning state text (warnText)',
+    'A high threshold may impact performance'
+  ),
   helperText: text('Helper text (helperText)', 'Optional helper text.'),
   light: boolean('Light variant (light)', false),
   onChange: action('onChange'),

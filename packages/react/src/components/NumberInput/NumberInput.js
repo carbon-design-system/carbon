@@ -11,6 +11,7 @@ import classNames from 'classnames';
 import { settings } from 'carbon-components';
 import {
   WarningFilled16,
+  WarningAltFilled16,
   CaretDownGlyph,
   CaretUpGlyph,
 } from '@carbon/icons-react';
@@ -143,6 +144,14 @@ class NumberInput extends Component {
      * Specify the value of the input
      */
     value: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
+    /**
+     * Specify whether the control is currently in warning state
+     */
+    warn: PropTypes.bool,
+    /**
+     * Provide the text that is displayed when the control is in warning state
+     */
+    warnText: PropTypes.string,
   };
 
   static defaultProps = {
@@ -152,6 +161,8 @@ class NumberInput extends Component {
     step: 1,
     invalid: false,
     invalidText: 'Provide invalidText',
+    warn: false,
+    warnText: '',
     ariaLabel: 'Numeric input field with increment and decrement buttons',
     helperText: '',
     light: false,
@@ -278,6 +289,8 @@ class NumberInput extends Component {
       readOnly,
       invalid,
       invalidText,
+      warn,
+      warnText,
       helperText,
       ariaLabel,
       light,
@@ -351,6 +364,14 @@ class NumberInput extends Component {
       error = (
         <div className={`${prefix}--form-requirement`} id={errorId}>
           {invalidText}
+        </div>
+      );
+    } else if (warn) {
+      inputWrapperProps['data-warn'] = true;
+      errorId = `${id}-error-id`;
+      error = (
+        <div className={`${prefix}--form-requirement`} id={errorId}>
+          {warnText}
         </div>
       );
     }
@@ -434,6 +455,11 @@ class NumberInput extends Component {
                   {isInputInvalid && (
                     <WarningFilled16 className={`${prefix}--number__invalid`} />
                   )}
+                  {!isInputInvalid && warn && (
+                    <WarningAltFilled16
+                      className={`${prefix}--number__invalid ${prefix}--number__invalid--warning`}
+                    />
+                  )}
                   <div className={`${prefix}--number__controls`}>
                     <button
                       type="button"
@@ -459,7 +485,7 @@ class NumberInput extends Component {
                     </button>
                   </div>
                 </div>
-                {isInputInvalid ? null : helper}
+                {error ? null : helper}
               </>
             );
           })()}
