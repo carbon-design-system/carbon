@@ -1,0 +1,33 @@
+{
+  "name": "@carbon/accessibility-react",
+  "private": true,
+  "version": "0.0.0",
+  "license": "Apache-2.0",
+  "main": "lib/index.js",
+  "module": "es/index.js",
+  "repository": "https://github.com/carbon-design-system/carbon/tree/master/packages/accessibility-react",
+  "bugs": "https://github.com/carbon-design-system/carbon/issues",
+  "keywords": [
+    "ibm",
+    "carbon",
+    "carbon-design-system",
+    "components",
+    "react"
+  ],
+  "scripts": {
+    "build": "",
+    "build:storybook": "yarn build-storybook",
+    "clean": "rimraf es lib storybook-static",
+    "develop": "start-storybook",
+    "watch": ""
+  },
+  "peerDependencies": {},
+  "dependencies": {},
+  "devDependencies": {
+    "@storybook/addon-essentials": "^6.0.4",
+    "@storybook/preset-create-react-app": "^3.1.4",
+    "@storybook/preset-scss": "^1.0.2",
+    "@storybook/react": "^6.0.4",
+    "sass": "^1.26.10"
+  }
+}
