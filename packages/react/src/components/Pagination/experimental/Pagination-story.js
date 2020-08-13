@@ -7,7 +7,13 @@
 
 import React from 'react';
 import { action } from '@storybook/addon-actions';
-import { array, boolean, number, text, withKnobs } from '@storybook/addon-knobs';
+import {
+  array,
+  boolean,
+  number,
+  text,
+  withKnobs,
+} from '@storybook/addon-knobs';
 import {
   unstable_PageSelector as PageSelector,
   unstable_Pagination as Pagination,
@@ -16,24 +22,35 @@ import {
 const props = () => ({
   disabled: boolean('Disable backward/forward buttons (disabled)', false),
   pagesUnknown: boolean('Total number of items unknown (pagesUnknown)', false),
-  backwardText: text('The description for the backward icon (backwardText)', 'Previous page'),
-  forwardText: text('The description for the forward icon (forwardText)', 'Next page'),
+  backwardText: text(
+    'The description for the backward icon (backwardText)',
+    'Previous page'
+  ),
+  forwardText: text(
+    'The description for the forward icon (forwardText)',
+    'Next page'
+  ),
   pageSize: number('Number of items per page (pageSize)', 10),
-  itemsPerPageText: text('Label for `pageSizes` select UI (itemsPerPageText)', 'Items per page:'),
+  itemsPerPageText: text(
+    'Label for `pageSizes` select UI (itemsPerPageText)',
+    'Items per page:'
+  ),
   onChange: action('onChange'),
 });
 
 export default {
   title: 'unstable_Pagination',
-  decorators: [withKnobs, (story) => <div style={{ width: '800px' }}>{story()}</div>],
+  decorators: [
+    withKnobs,
+    (story) => <div style={{ width: '800px' }}>{story()}</div>,
+  ],
 };
 
 export const WithAPageSelector = () => (
   <Pagination
     {...props()}
     totalItems={350}
-    pageSizes={array('Choices of `pageSize` (pageSizes)', [10, 20, 30])}
-  >
+    pageSizes={array('Choices of `pageSize` (pageSizes)', [10, 20, 30])}>
     {({ currentPage, onSetPage, totalPages }) => (
       <PageSelector
         currentPage={currentPage}
@@ -88,7 +105,8 @@ export const WithNoSizerChildInputOrChildSelector = () => (
   <Pagination {...props()} totalItems={350} />
 );
 
-WithNoSizerChildInputOrChildSelector.storyName = 'with no sizer, child input, or child selector';
+WithNoSizerChildInputOrChildSelector.storyName =
+  'with no sizer, child input, or child selector';
 
 WithNoSizerChildInputOrChildSelector.parameters = {
   info: {
