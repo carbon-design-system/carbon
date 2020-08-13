@@ -4154,6 +4154,7 @@ Map {
     },
   },
   "PaginationNav" => Object {
+    "$$typeof": Symbol(react.forward_ref),
     "propTypes": Object {
       "className": Object {
         "type": "string",
@@ -4177,6 +4178,7 @@ Map {
         "type": "func",
       },
     },
+    "render": [Function],
   },
   "PrimaryButton" => Object {},
   "ProgressIndicator" => Object {
