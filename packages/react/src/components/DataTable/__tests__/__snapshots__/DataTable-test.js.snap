@@ -1891,6 +1891,8 @@ exports[`DataTable should render 1`] = `
                   onClick={[MockFunction]}
                   size="small"
                   tabIndex={0}
+                  tooltipAlignment="center"
+                  tooltipPosition="top"
                   type="button"
                 >
                   Add new
@@ -2053,6 +2055,8 @@ exports[`DataTable should render 1`] = `
                       }
                       size="default"
                       tabIndex={0}
+                      tooltipAlignment="center"
+                      tooltipPosition="top"
                       type="button"
                     >
                       <button
@@ -2123,6 +2127,8 @@ exports[`DataTable should render 1`] = `
                       }
                       size="default"
                       tabIndex={0}
+                      tooltipAlignment="center"
+                      tooltipPosition="top"
                       type="button"
                     >
                       <button
@@ -2193,6 +2199,8 @@ exports[`DataTable should render 1`] = `
                       }
                       size="default"
                       tabIndex={0}
+                      tooltipAlignment="center"
+                      tooltipPosition="top"
                       type="button"
                     >
                       <button
@@ -2249,6 +2257,8 @@ exports[`DataTable should render 1`] = `
                     onClick={[Function]}
                     size="default"
                     tabIndex={-1}
+                    tooltipAlignment="center"
+                    tooltipPosition="top"
                     type="button"
                   >
                     <button
@@ -2505,6 +2515,8 @@ exports[`DataTable should render 1`] = `
                 onClick={[MockFunction]}
                 size="small"
                 tabIndex={0}
+                tooltipAlignment="center"
+                tooltipPosition="top"
                 type="button"
               >
                 <button
@@ -2887,6 +2899,8 @@ exports[`DataTable sticky header should render 1`] = `
                   onClick={[MockFunction]}
                   size="small"
                   tabIndex={0}
+                  tooltipAlignment="center"
+                  tooltipPosition="top"
                   type="button"
                 >
                   Add new
@@ -3052,6 +3066,8 @@ exports[`DataTable sticky header should render 1`] = `
                       }
                       size="default"
                       tabIndex={0}
+                      tooltipAlignment="center"
+                      tooltipPosition="top"
                       type="button"
                     >
                       <button
@@ -3122,6 +3138,8 @@ exports[`DataTable sticky header should render 1`] = `
                       }
                       size="default"
                       tabIndex={0}
+                      tooltipAlignment="center"
+                      tooltipPosition="top"
                       type="button"
                     >
                       <button
@@ -3192,6 +3210,8 @@ exports[`DataTable sticky header should render 1`] = `
                       }
                       size="default"
                       tabIndex={0}
+                      tooltipAlignment="center"
+                      tooltipPosition="top"
                       type="button"
                     >
                       <button
@@ -3248,6 +3268,8 @@ exports[`DataTable sticky header should render 1`] = `
                     onClick={[Function]}
                     size="default"
                     tabIndex={-1}
+                    tooltipAlignment="center"
+                    tooltipPosition="top"
                     type="button"
                   >
                     <button
@@ -3504,6 +3526,8 @@ exports[`DataTable sticky header should render 1`] = `
                 onClick={[MockFunction]}
                 size="small"
                 tabIndex={0}
+                tooltipAlignment="center"
+                tooltipPosition="top"
                 type="button"
               >
                 <button

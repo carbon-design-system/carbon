@@ -1,5 +1,3 @@
-<!-- alex disable failures -->
-
 # Carbon core support and maintenance
 
 <!-- prettier-ignore-start -->
