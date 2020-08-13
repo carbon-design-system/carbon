@@ -1,0 +1,14 @@
+import { Meta, Story, Canvas } from '@storybook/addon-docs/blocks';
+import VisuallyHidden from '../VisuallyHidden';
+import { Button } from 'carbon-components-react';
+
+<Meta title="Components/Visually Hidden" />
+
+<Canvas>
+  <Story name="default">
+    <Button type="button">
+      <VisuallyHidden>Submit Flower Shop Support Query</VisuallyHidden>
+      <span aria-hidden>🥀</span>
+    </Button>
+  </Story>
+</Canvas>

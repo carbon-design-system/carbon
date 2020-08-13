@@ -18,16 +18,21 @@
     "build": "",
     "build:storybook": "yarn build-storybook",
     "clean": "rimraf es lib storybook-static",
-    "develop": "start-storybook",
+    "develop": "start-storybook -p 3000",
     "watch": ""
   },
-  "peerDependencies": {},
+  "peerDependencies": {
+    "carbon-components": "^10.17.0"
+  },
   "dependencies": {},
   "devDependencies": {
+    "@carbon/icons-react": "^10.15.0",
     "@storybook/addon-essentials": "^6.0.4",
     "@storybook/preset-create-react-app": "^3.1.4",
-    "@storybook/preset-scss": "^1.0.2",
     "@storybook/react": "^6.0.4",
+    "carbon-components": "^10.17.0",
+    "carbon-components-react": "^7.17.0",
+    "react-scripts": "^3.4.3",
     "sass": "^1.26.10"
   }
 }
