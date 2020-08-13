@@ -99,6 +99,8 @@ const colors = [
 
   'hoverLightUI',
 
+  'buttonSeparator',
+
   'skeleton01',
   'skeleton02',
 
@@ -233,6 +235,7 @@ export const unstable__meta = {
         'hoverField',
         'decorative01',
         'hoverLightUI',
+        'buttonSeparator',
       ],
     },
   ],

@@ -9,13 +9,11 @@ import React from 'react';
 import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 import { withKnobs, boolean, select, text } from '@storybook/addon-knobs';
-import { settings } from 'carbon-components';
 import { iconAddSolid, iconSearch } from 'carbon-icons';
 import { Add16, AddFilled16, Search16 } from '@carbon/icons-react';
 import Button from '../Button';
 import ButtonSkeleton from '../Button/Button.Skeleton';
-
-const { prefix } = settings;
+import ButtonSet from '../ButtonSet';
 
 const icons = {
   None: 'None',
@@ -109,6 +107,7 @@ const props = {
         'Icon description (iconDescription)',
         'Button icon'
       ),
+      stacked: boolean('Stack buttons vertically (stacked)', false),
       onClick: action('onClick'),
       onFocus: action('onFocus'),
     };
@@ -197,22 +196,22 @@ storiesOf('Button', module)
   .add(
     'Sets of Buttons',
     () => {
-      const setProps = props.set();
+      const { stacked, ...buttonProps } = props.set();
       return (
-        <div className={`${prefix}--btn-set`}>
-          <Button kind="secondary" {...setProps}>
+        <ButtonSet stacked={stacked}>
+          <Button kind="secondary" {...buttonProps}>
             Secondary button
           </Button>
-          <Button kind="primary" {...setProps}>
+          <Button kind="primary" {...buttonProps}>
             Primary button
           </Button>
-        </div>
+        </ButtonSet>
       );
     },
     {
       info: {
         text: `
-          When an action required by the user has more than one option, always use a a negative action button (secondary) paired with a positive action button (primary) in that order. Negative action buttons will be on the left. Positive action buttons should be on the right. When these two types buttons are paired in the correct order, they will automatically space themselves apart.
+          When an action required by the user has more than one option, always use a negative action button (secondary) paired with a positive action button (primary) in that order. Negative action buttons will be on the left. Positive action buttons should be on the right. When these two types buttons are paired in the correct order, they will automatically space themselves apart.
         `,
       },
     }

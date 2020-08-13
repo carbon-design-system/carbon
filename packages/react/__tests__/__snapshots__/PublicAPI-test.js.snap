@@ -216,6 +216,22 @@ Map {
     },
     "render": [Function],
   },
+  "ButtonSet" => Object {
+    "$$typeof": Symbol(react.forward_ref),
+    "displayName": "ButtonSet",
+    "propTypes": Object {
+      "children": Object {
+        "type": "node",
+      },
+      "className": Object {
+        "type": "string",
+      },
+      "stacked": Object {
+        "type": "bool",
+      },
+    },
+    "render": [Function],
+  },
   "Checkbox" => Object {
     "$$typeof": Symbol(react.forward_ref),
     "defaultProps": Object {
