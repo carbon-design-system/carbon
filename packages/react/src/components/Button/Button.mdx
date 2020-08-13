@@ -2,6 +2,7 @@ import { Story, Props, Source, Preview } from '@storybook/addon-docs/blocks';
 import { withKnobs, boolean, select, text } from '@storybook/addon-knobs';
 import * as stories from './Button-story.js';
 import Button from '../Button';
+import ButtonSet from '../ButtonSet';
 import { Add16, Delete16 } from '@carbon/icons-react';
 
 # Button
@@ -43,6 +44,19 @@ buttons.
 
 <Preview>
   <Story id="button--icon-button" />
+</Preview>
+
+## Set of Buttons
+
+You can wrap two `Button` elements in a `ButtonSet` when an action required by
+the user has more than one option. Always use a negative action button
+(secondary) paired with a positive action button (primary) in that order.
+Negative action buttons will be on the left. Positive action buttons should be
+on the right. When these two types buttons are paired in the correct order, they
+will automatically space themselves apart.
+
+<Preview>
+  <Story id="button--set-of-buttons" />
 </Preview>
 
 ## Skeleton state
@@ -259,6 +273,23 @@ a position and will render the tooltip accordingly. Accepted options are `top`,
 <Button hasIconOnly renderIcon={Add16} iconDescription="Add" tooltipPosition="right"/>
 <Button hasIconOnly renderIcon={Add16} iconDescription="Add" tooltipPosition="bottom"/>
 <Button hasIconOnly renderIcon={Add16} iconDescription="Add" tooltipPosition="left" />
+```
+
+### ButtonSet `stacked`
+
+By passing in `stacked` to the `ButtonSet` component, you can arrange your two
+`Button` elements vertically
+
+<ButtonSet stacked>
+  <Button kind="secondary">Secondary button</Button>
+  <Button kind="primary">Primary button</Button>
+</ButtonSet>
+
+```jsx
+<ButtonSet stacked>
+  <Button kind="secondary">Secondary button</Button>
+  <Button kind="primary">Primary button</Button>
+</ButtonSet>
 ```
 
 ## References

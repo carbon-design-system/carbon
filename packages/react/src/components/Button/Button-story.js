@@ -102,7 +102,6 @@ const props = {
       onFocus: action('onFocus'),
     };
   },
-<<<<<<< HEAD
   set: () => {
     const iconToUse = iconMap[select('Icon (icon)', icons, 'none')];
     return {
@@ -119,8 +118,6 @@ const props = {
       onFocus: action('onFocus'),
     };
   },
-=======
->>>>>>> docs(button): remove extra stories, add playground
 };
 
 export default {
@@ -129,6 +126,7 @@ export default {
   parameters: {
     component: Button,
     subcomponents: {
+      ButtonSet,
       ButtonSkeleton,
     },
     docs: {
@@ -164,17 +162,33 @@ export const Ghost = () => {
 export const Playground = () => {
   const regularProps = props.regular();
   const iconOnly = props.iconOnly();
+  const { stacked, ...buttonProps } = props.set();
   return (
-    <div
-      style={{
-        display: 'flex',
-        alignItems: 'center',
-        flexWrap: 'wrap',
-      }}>
-      <Button {...regularProps}>Button</Button>
-      &nbsp;
-      <Button hasIconOnly {...iconOnly}></Button>
-    </div>
+    <>
+      <div
+        style={{
+          display: 'flex',
+          alignItems: 'center',
+          flexWrap: 'wrap',
+        }}>
+        <Button {...regularProps}>Button</Button>
+        &nbsp;
+        <Button hasIconOnly {...iconOnly}></Button>
+      </div>
+      <div
+        style={{
+          marginTop: '1rem',
+        }}>
+        <ButtonSet stacked={stacked}>
+          <Button kind="secondary" {...buttonProps}>
+            Secondary button
+          </Button>
+          <Button kind="primary" {...buttonProps}>
+            Primary button
+          </Button>
+        </ButtonSet>
+      </div>
+    </>
   );
 };
 
@@ -182,6 +196,15 @@ export const IconButton = () => <Button {...props.iconOnly()} hasIconOnly />;
 
 IconButton.story = {
   name: 'Icon Button',
+};
+
+export const SetOfButtons = () => {
+  return (
+    <ButtonSet>
+      <Button kind="secondary">Secondary button</Button>
+      <Button kind="primary">Primary button</Button>
+    </ButtonSet>
+  );
 };
 
 export const Skeleton = () => (
