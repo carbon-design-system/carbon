@@ -114,11 +114,6 @@ Button.propTypes = {
   children: PropTypes.node,
 
   /**
-   * Specify the content of your Button
-   */
-  children: PropTypes.node,
-
-  /**
    * Specify an optional className to be added to your Button
    */
   className: PropTypes.string,
