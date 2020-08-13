@@ -23,7 +23,6 @@ async function check(args, env) {
   const tasks = [
     'yarn format:diff',
     'yarn lint --quiet',
-    'yarn lint:docs',
     'yarn lint:styles',
     `yarn bundler check --ignore '**/@(node_modules|examples|components|react|fixtures)/**' 'packages/**/*.scss'`,
     `cross-env BABEL_ENV=test yarn test --ci --maxWorkers 2 --reporters=default --reporters=jest-junit`,

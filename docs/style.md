@@ -1,5 +1,3 @@
-<!-- alex disable hooks -->
-
 <!--
 Inspired by Uber's Go Style Guide:
 https://github.com/uber-go/guide/blob/85bf203f4371a8ae9e5e9a4d52ea77b17ca04ae6/style.md
