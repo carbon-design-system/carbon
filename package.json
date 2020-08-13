@@ -24,7 +24,6 @@
     "format": "prettier --write '**/*.{js,md,scss,ts}' '!**/{build,es,lib,storybook,ts,umd}/**'",
     "format:diff": "prettier --list-different '**/*.{js,md,scss,ts}' '!**/{build,es,lib,storybook,ts,umd}/**' '!packages/components/**'",
     "lint": "eslint actions config codemods packages",
-    "lint:docs": "alex 'docs/**/*.md' -q",
     "lint:styles": "stylelint '**/*.{css,scss}' --report-needless-disables --report-invalid-scope-disables",
     "sync": "carbon-cli sync",
     "test": "cross-env BABEL_ENV=test jest",
@@ -48,7 +47,6 @@
     "@commitlint/cli": "^8.3.5",
     "@commitlint/config-conventional": "^8.3.4",
     "@ibma/aat": "https://able.ibm.com/tools/dist/ibma-aat-2.0.6.tgz",
-    "alex": "^8.0.0",
     "axe-core": "^3.3.2",
     "babel-jest": "^26.0.1",
     "cross-env": "^5.2.0",
@@ -129,7 +127,6 @@
       "git add"
     ],
     "!(*sass).md": [
-      "alex",
       "prettier --write",
       "git add"
     ]
