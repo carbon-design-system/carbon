@@ -13879,8 +13879,12 @@ Button styles
     // 196px from design kit
     max-width: rem(196px);
 
-    &:not(:first-of-type):not(:focus) {
+    &:not(:focus) {
       box-shadow: rem(-1px) 0 0 0 $button-separator;
+    }
+
+    &:first-of-type:not(:focus) {
+      box-shadow: inherit;
     }
   }
 
@@ -13888,9 +13892,12 @@ Button styles
     box-shadow: inherit;
   }
 
-  .#{$prefix}--btn-set--stacked
-    .#{$prefix}--btn:not(:first-of-type):not(:focus) {
+  .#{$prefix}--btn-set--stacked .#{$prefix}--btn:not(:focus) {
     box-shadow: 0 rem(-1px) 0 0 $button-separator;
+  }
+
+  .#{$prefix}--btn-set--stacked .#{$prefix}--btn:first-of-type:not(:focus) {
+    box-shadow: inherit;
   }
 
   .#{$prefix}--btn-set .#{$prefix}--btn.#{$prefix}--btn--disabled {
