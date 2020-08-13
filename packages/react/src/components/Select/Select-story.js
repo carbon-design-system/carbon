@@ -82,16 +82,14 @@ export const Default = () => {
   );
 };
 
-Default.story = {
-  parameters: {
-    info: {
-      text: `
-          Select displays a list below its title when selected. They are used primarily in forms,
-          where a user chooses one option from a list. Once the user selects an item, the dropdown will
-          disappear and the field will reflect the user's choice. Create Select Item components for each
-          option in the list. The example below shows an enabled Select component with three items.
-        `,
-    },
+Default.parameters = {
+  info: {
+    text: `
+        Select displays a list below its title when selected. They are used primarily in forms,
+        where a user chooses one option from a list. Once the user selects an item, the dropdown will
+        disappear and the field will reflect the user's choice. Create Select Item components for each
+        option in the list. The example below shows an enabled Select component with three items.
+      `,
   },
 };
 
@@ -107,14 +105,12 @@ export const Skeleton = () => (
   </div>
 );
 
-Skeleton.story = {
-  name: 'skeleton',
+Skeleton.storyName = 'skeleton';
 
-  parameters: {
-    info: {
-      text: `
-          Placeholder skeleton state to use when content is loading.
-        `,
-    },
+Skeleton.parameters = {
+  info: {
+    text: `
+        Placeholder skeleton state to use when content is loading.
+      `,
   },
 };

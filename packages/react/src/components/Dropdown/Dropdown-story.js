@@ -101,13 +101,11 @@ export const Default = () => (
   </div>
 );
 
-Default.story = {
-  name: 'default',
+Default.storyName = 'default';
 
-  parameters: {
-    info: {
-      text: 'Dropdown',
-    },
+Default.parameters = {
+  info: {
+    text: 'Dropdown',
   },
 };
 
@@ -123,13 +121,11 @@ export const Inline = () => (
   </div>
 );
 
-Inline.story = {
-  name: 'inline',
+Inline.storyName = 'inline';
 
-  parameters: {
-    info: {
-      text: 'Dropdown',
-    },
+Inline.parameters = {
+  info: {
+    text: 'Dropdown',
   },
 };
 
@@ -139,13 +135,11 @@ export const ItemsAsStrings = () => (
   </div>
 );
 
-ItemsAsStrings.story = {
-  name: 'items as strings',
+ItemsAsStrings.storyName = 'items as strings';
 
-  parameters: {
-    info: {
-      text: 'Rendering an array of strings as `items`',
-    },
+ItemsAsStrings.parameters = {
+  info: {
+    text: 'Rendering an array of strings as `items`',
   },
 };
 
@@ -167,15 +161,13 @@ export const FullyControlled = () => (
   </WithState>
 );
 
-FullyControlled.story = {
-  name: 'fully controlled',
+FullyControlled.storyName = 'fully controlled';
 
-  parameters: {
-    info: {
-      text: `
-          Sometimes you want to control everything.
-        `,
-    },
+FullyControlled.parameters = {
+  info: {
+    text: `
+        Sometimes you want to control everything.
+      `,
   },
 };
 
@@ -187,14 +179,12 @@ export const Skeleton = () => (
   </div>
 );
 
-Skeleton.story = {
-  name: 'skeleton',
+Skeleton.storyName = 'skeleton';
 
-  parameters: {
-    info: {
-      text: `
-          Placeholder skeleton state to use when content is loading.
-        `,
-    },
+Skeleton.parameters = {
+  info: {
+    text: `
+        Placeholder skeleton state to use when content is loading.
+      `,
   },
 };

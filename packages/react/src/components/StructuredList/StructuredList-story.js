@@ -70,13 +70,11 @@ export const Simple = () => (
   </StructuredListWrapper>
 );
 
-Simple.story = {
-  parameters: {
-    info: {
-      text: `
-          Structured Lists group content that is similar or related, such as terms or definitions.
-        `,
-    },
+Simple.parameters = {
+  info: {
+    text: `
+        Structured Lists group content that is similar or related, such as terms or definitions.
+      `,
   },
 };
 
@@ -126,13 +124,11 @@ export const Selection = () => {
   );
 };
 
-Selection.story = {
-  parameters: {
-    info: {
-      text: `
-      Structured Lists with selection allow a row of list content to be selected.
-    `,
-    },
+Selection.parameters = {
+  info: {
+    text: `
+    Structured Lists with selection allow a row of list content to be selected.
+  `,
   },
 };
 
@@ -143,14 +139,12 @@ export const Skeleton = () => (
   </div>
 );
 
-Skeleton.story = {
-  name: 'skeleton',
+Skeleton.storyName = 'skeleton';
 
-  parameters: {
-    info: {
-      text: `
-          Placeholder skeleton state to use when content is loading.
-        `,
-    },
+Skeleton.parameters = {
+  info: {
+    text: `
+        Placeholder skeleton state to use when content is loading.
+      `,
   },
 };

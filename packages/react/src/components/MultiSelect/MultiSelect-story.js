@@ -130,15 +130,13 @@ export const Default = withReadme(readme, () => {
   );
 });
 
-Default.story = {
-  name: 'default',
+Default.storyName = 'default';
 
-  parameters: {
-    info: {
-      text: `
-          MultiSelect
-        `,
-    },
+Default.parameters = {
+  info: {
+    text: `
+        MultiSelect
+      `,
   },
 };
 
@@ -163,15 +161,13 @@ export const WithInitialSelectedItems = withReadme(readme, () => {
   );
 });
 
-WithInitialSelectedItems.story = {
-  name: 'with initial selected items',
+WithInitialSelectedItems.storyName = 'with initial selected items';
 
-  parameters: {
-    info: {
-      text: `
-          Provide a set of items to initially select in the control
-        `,
-    },
+WithInitialSelectedItems.parameters = {
+  info: {
+    text: `
+        Provide a set of items to initially select in the control
+      `,
   },
 };
 
@@ -196,14 +192,12 @@ export const _Filterable = withReadme(readme, () => {
   );
 });
 
-_Filterable.story = {
-  name: 'filterable',
+_Filterable.storyName = 'filterable';
 
-  parameters: {
-    info: {
-      text: `
-          When a list contains more than 25 items, use \`MultiSelect.Filterable\` to help find options from the list.
-        `,
-    },
+_Filterable.parameters = {
+  info: {
+    text: `
+        When a list contains more than 25 items, use \`MultiSelect.Filterable\` to help find options from the list.
+      `,
   },
 };

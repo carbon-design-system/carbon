@@ -96,13 +96,11 @@ export const Simple = () => (
   </DatePicker>
 );
 
-Simple.story = {
-  name: 'simple',
+Simple.storyName = 'simple';
 
-  parameters: {
-    info: {
-      text: 'A simple Date Picker consists of an input field and no calendar.',
-    },
+Simple.parameters = {
+  info: {
+    text: 'A simple Date Picker consists of an input field and no calendar.',
   },
 };
 
@@ -118,15 +116,13 @@ export const SingleWithCalendar = () => (
   </DatePicker>
 );
 
-SingleWithCalendar.story = {
-  name: 'single with calendar',
+SingleWithCalendar.storyName = 'single with calendar';
 
-  parameters: {
-    info: {
-      text: `
-          A single Date Picker consists of an input field and a calendar.
-        `,
-    },
+SingleWithCalendar.parameters = {
+  info: {
+    text: `
+        A single Date Picker consists of an input field and a calendar.
+      `,
   },
 };
 
@@ -152,15 +148,13 @@ export const RangeWithCalendar = () => {
   );
 };
 
-RangeWithCalendar.story = {
-  name: 'range with calendar',
+RangeWithCalendar.storyName = 'range with calendar';
 
-  parameters: {
-    info: {
-      text: `
-          A range Date Picker consists of two input fields and a calendar.
-        `,
-    },
+RangeWithCalendar.parameters = {
+  info: {
+    text: `
+        A range Date Picker consists of two input fields and a calendar.
+      `,
   },
 };
 
@@ -179,15 +173,14 @@ export const RangeWithCalendarAndMinMaxDates = () => {
   );
 };
 
-RangeWithCalendarAndMinMaxDates.story = {
-  name: 'range with calendar and min/max dates',
+RangeWithCalendarAndMinMaxDates.storyName =
+  'range with calendar and min/max dates';
 
-  parameters: {
-    info: {
-      text: `
-          A range Date Picker consists of two input fields and a calendar, and optionally, the minDate and maxDate fields.
-        `,
-    },
+RangeWithCalendarAndMinMaxDates.parameters = {
+  info: {
+    text: `
+        A range Date Picker consists of two input fields and a calendar, and optionally, the minDate and maxDate fields.
+      `,
   },
 };
 
@@ -218,29 +211,25 @@ export const FullyControlled = () => (
   </WithState>
 );
 
-FullyControlled.story = {
-  name: 'fully controlled',
+FullyControlled.storyName = 'fully controlled';
 
-  parameters: {
-    info: {
-      text: `
-          If your application needs to control the value of the date picker and
-          be notified of any changes.
-        `,
-    },
+FullyControlled.parameters = {
+  info: {
+    text: `
+        If your application needs to control the value of the date picker and
+        be notified of any changes.
+      `,
   },
 };
 
 export const Skeleton = () => <DatePickerSkeleton range />;
 
-Skeleton.story = {
-  name: 'skeleton',
+Skeleton.storyName = 'skeleton';
 
-  parameters: {
-    info: {
-      text: `
-              Placeholder skeleton state to use when content is loading.
-              `,
-    },
+Skeleton.parameters = {
+  info: {
+    text: `
+            Placeholder skeleton state to use when content is loading.
+            `,
   },
 };

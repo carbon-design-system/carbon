@@ -48,18 +48,16 @@ export const Checked = () => {
   );
 };
 
-Checked.story = {
-  name: 'checked',
+Checked.storyName = 'checked';
 
-  parameters: {
-    info: {
-      text: `
-      Checkboxes are used when there is a list of options and the user may select multiple options, including all or none.
-      The example below shows how the Checkbox component can be used as an uncontrolled component that is initially checked
-      by setting the defaultChecked property to true. To use the component in a controlled way, you should set the
-      checked property instead.
-    `,
-    },
+Checked.parameters = {
+  info: {
+    text: `
+    Checkboxes are used when there is a list of options and the user may select multiple options, including all or none.
+    The example below shows how the Checkbox component can be used as an uncontrolled component that is initially checked
+    by setting the defaultChecked property to true. To use the component in a controlled way, you should set the
+    checked property instead.
+  `,
   },
 };
 
@@ -74,17 +72,15 @@ export const Unchecked = () => {
   );
 };
 
-Unchecked.story = {
-  name: 'unchecked',
+Unchecked.storyName = 'unchecked';
 
-  parameters: {
-    info: {
-      text: `
-        Checkboxes are used when there is a list of options and the user may select multiple options, including all or none.
-        The example below shows how the Checkbox component can be used as an uncontrolled component that is initially
-        unchecked. To use the component in a controlled way, you should set the checked property instead.
-      `,
-    },
+Unchecked.parameters = {
+  info: {
+    text: `
+      Checkboxes are used when there is a list of options and the user may select multiple options, including all or none.
+      The example below shows how the Checkbox component can be used as an uncontrolled component that is initially
+      unchecked. To use the component in a controlled way, you should set the checked property instead.
+    `,
   },
 };
 
@@ -99,14 +95,12 @@ export const Skeleton = () => (
   </div>
 );
 
-Skeleton.story = {
-  name: 'skeleton',
+Skeleton.storyName = 'skeleton';
 
-  parameters: {
-    info: {
-      text: `
-        Placeholder skeleton state to use when content is loading.
-      `,
-    },
+Skeleton.parameters = {
+  info: {
+    text: `
+      Placeholder skeleton state to use when content is loading.
+    `,
   },
 };

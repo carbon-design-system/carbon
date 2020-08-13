@@ -88,12 +88,10 @@ export const Default = () => (
   </Toolbar>
 );
 
-Default.story = {
-  parameters: {
-    info: {
-      text: `
-        Toolbar stuff
-      `,
-    },
+Default.parameters = {
+  info: {
+    text: `
+      Toolbar stuff
+    `,
   },
 };

@@ -80,14 +80,12 @@ export const Default = () => {
   );
 };
 
-Default.story = {
-  parameters: {
-    info: {
-      text: `
-          Number inputs are similar to text fields, but contain controls used to increase or decrease an incremental value.
-          The Number Input component can be passed a starting value, a min, a max, and the step.
-        `,
-    },
+Default.parameters = {
+  info: {
+    text: `
+        Number inputs are similar to text fields, but contain controls used to increase or decrease an incremental value.
+        The Number Input component can be passed a starting value, a min, a max, and the step.
+      `,
   },
 };
 
@@ -102,14 +100,12 @@ export const Skeleton = () => (
   </div>
 );
 
-Skeleton.story = {
-  name: 'skeleton',
+Skeleton.storyName = 'skeleton';
 
-  parameters: {
-    info: {
-      text: `
-          Placeholder skeleton state to use when content is loading.
-        `,
-    },
+Skeleton.parameters = {
+  info: {
+    text: `
+        Placeholder skeleton state to use when content is loading.
+      `,
   },
 };

@@ -173,14 +173,12 @@ export const _Default = () => {
   );
 };
 
-_Default.story = {
-  parameters: {
-    info: {
-      text: `
-          Modals communicate information via a secondary window and allow the user to maintain the context of a particular task.
-          Use the Modal Wrapper component to encapsulate your Modal within a button.
-        `,
-    },
+_Default.parameters = {
+  info: {
+    text: `
+        Modals communicate information via a secondary window and allow the user to maintain the context of a particular task.
+        Use the Modal Wrapper component to encapsulate your Modal within a button.
+      `,
   },
 };
 
@@ -189,16 +187,14 @@ export const TitleOnly = () => {
   return <Modal {...rest} size={size || undefined}></Modal>;
 };
 
-TitleOnly.story = {
-  name: 'Title only',
+TitleOnly.storyName = 'Title only';
 
-  parameters: {
-    info: {
-      text: `
-        In "small" and "xs" modals size, the title is allowed to span multiple lines and be used for the main message.
-        It should be less than 3 lines of text. If more room is required then use the standard body copy format.
-      `,
-    },
+TitleOnly.parameters = {
+  info: {
+    text: `
+      In "small" and "xs" modals size, the title is allowed to span multiple lines and be used for the main message.
+      It should be less than 3 lines of text. If more room is required then use the standard body copy format.
+    `,
   },
 };
 
@@ -225,12 +221,10 @@ export const TrapFocus = () => {
   );
 };
 
-TrapFocus.story = {
-  parameters: {
-    info: {
-      text: `
-          Specify a selector for the primary element to focus when opening a modal.
-        `,
-    },
+TrapFocus.parameters = {
+  info: {
+    text: `
+        Specify a selector for the primary element to focus when opening a modal.
+      `,
   },
 };

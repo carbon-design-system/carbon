@@ -247,16 +247,14 @@ export const Default = () => (
   </Form>
 );
 
-Default.story = {
-  parameters: {
-    info: {
-      text: `
-          Forms are widely used to collect user input.
+Default.parameters = {
+  info: {
+    text: `
+        Forms are widely used to collect user input.
 
-          Form can have any number of react components enclosed within FormGroup component. FormGroup component
-          is a wrapper for legend and fieldset component.
+        Form can have any number of react components enclosed within FormGroup component. FormGroup component
+        is a wrapper for legend and fieldset component.
 
-        `,
-    },
+      `,
   },
 };

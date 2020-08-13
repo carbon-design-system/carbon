@@ -83,10 +83,8 @@ export const Default = () => (
   </div>
 );
 
-Default.story = {
-  parameters: {
-    info: {
-      text: 'ComboBox',
-    },
+Default.parameters = {
+  info: {
+    text: 'ComboBox',
   },
 };

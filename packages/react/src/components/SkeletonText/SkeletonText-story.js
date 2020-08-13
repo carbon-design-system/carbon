@@ -43,12 +43,10 @@ export const Default = () => (
   </div>
 );
 
-Default.story = {
-  parameters: {
-    info: {
-      text: `
-          Skeleton states are used as a progressive loading state while the user waits for content to load.
-        `,
-    },
+Default.parameters = {
+  info: {
+    text: `
+        Skeleton states are used as a progressive loading state while the user waits for content to load.
+      `,
   },
 };

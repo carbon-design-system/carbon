@@ -54,15 +54,13 @@ export default {
 
 export const Default = () => <Search {...props()} id="search-1" />;
 
-Default.story = {
-  parameters: {
-    info: {
-      text: `
-              Search enables users to specify a word or a phrase to find particular relevant pieces of content
-              without the use of navigation. Search can be used as the primary means of discovering content,
-              or as a filter to aid the user in finding content.
-            `,
-    },
+Default.parameters = {
+  info: {
+    text: `
+            Search enables users to specify a word or a phrase to find particular relevant pieces of content
+            without the use of navigation. Search can be used as the primary means of discovering content,
+            or as a filter to aid the user in finding content.
+          `,
   },
 };
 
@@ -74,15 +72,13 @@ export const DeprecatedCustomButtons = () => (
   </div>
 );
 
-DeprecatedCustomButtons.story = {
-  name: '[Deprecated] custom buttons',
+DeprecatedCustomButtons.storyName = '[Deprecated] custom buttons';
 
-  parameters: {
-    info: {
-      text: `
-          You can control what set of buttons you want.
-        `,
-    },
+DeprecatedCustomButtons.parameters = {
+  info: {
+    text: `
+        You can control what set of buttons you want.
+      `,
   },
 };
 
@@ -94,14 +90,12 @@ export const Skeleton = () => (
   </div>
 );
 
-Skeleton.story = {
-  name: 'skeleton',
+Skeleton.storyName = 'skeleton';
 
-  parameters: {
-    info: {
-      text: `
-          Placeholder skeleton state to use when content is loading.
-        `,
-    },
+Skeleton.parameters = {
+  info: {
+    text: `
+        Placeholder skeleton state to use when content is loading.
+      `,
   },
 };

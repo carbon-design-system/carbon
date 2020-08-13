@@ -35,13 +35,11 @@ export default {
 
 export const Default = () => <Link {...props()}>Link</Link>;
 
-Default.story = {
-  parameters: {
-    info: {
-      text: `
-              Links are typically used as a means of navigation either within the application, to a place outside, or to a resource.
-              For anything else, especially things that change data, you should be using a button.
-            `,
-    },
+Default.parameters = {
+  info: {
+    text: `
+            Links are typically used as a means of navigation either within the application, to a place outside, or to a resource.
+            For anything else, especially things that change data, you should be using a button.
+          `,
   },
 };

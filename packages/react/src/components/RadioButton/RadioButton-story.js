@@ -46,16 +46,14 @@ export default {
 
 export const Default = () => <RadioButton id="radio-1" {...radioProps()} />;
 
-Default.story = {
-  parameters: {
-    info: {
-      text: `
-              Radio buttons are used when a list of two or more options are mutually exclusive,
-              meaning the user must select only one option. The example below shows how the Radio Button component
-              can be used as an uncontrolled component that is initially checked by setting the defaultChecked property
-              to true. To use the component in a controlled way, set the checked property instead.
-            `,
-    },
+Default.parameters = {
+  info: {
+    text: `
+            Radio buttons are used when a list of two or more options are mutually exclusive,
+            meaning the user must select only one option. The example below shows how the Radio Button component
+            can be used as an uncontrolled component that is initially checked by setting the defaultChecked property
+            to true. To use the component in a controlled way, set the checked property instead.
+          `,
   },
 };
 
@@ -65,14 +63,12 @@ export const Skeleton = () => (
   </div>
 );
 
-Skeleton.story = {
-  name: 'skeleton',
+Skeleton.storyName = 'skeleton';
 
-  parameters: {
-    info: {
-      text: `
-          Placeholder skeleton state to use when content is loading.
-        `,
-    },
+Skeleton.parameters = {
+  info: {
+    text: `
+        Placeholder skeleton state to use when content is loading.
+      `,
   },
 };

@@ -47,14 +47,12 @@ export default {
 
 export const Default = () => <TextArea {...TextAreaProps()} />;
 
-Default.story = {
-  parameters: {
-    info: {
-      text: `
-              Text areas enable the user to interact with and input data. A text area is used when you
-              anticipate the user to input more than 1 sentence.
-            `,
-    },
+Default.parameters = {
+  info: {
+    text: `
+            Text areas enable the user to interact with and input data. A text area is used when you
+            anticipate the user to input more than 1 sentence.
+          `,
   },
 };
 
@@ -69,14 +67,12 @@ export const Skeleton = () => (
   </div>
 );
 
-Skeleton.story = {
-  name: 'skeleton',
+Skeleton.storyName = 'skeleton';
 
-  parameters: {
-    info: {
-      text: `
-          Placeholder skeleton state to use when content is loading.
-        `,
-    },
+Skeleton.parameters = {
+  info: {
+    text: `
+        Placeholder skeleton state to use when content is loading.
+      `,
   },
 };

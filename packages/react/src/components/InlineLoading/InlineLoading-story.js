@@ -43,16 +43,14 @@ export default {
 
 export const _InlineLoading = () => <InlineLoading {...props()} />;
 
-_InlineLoading.story = {
-  name: 'Inline loading',
+_InlineLoading.storyName = 'Inline loading';
 
-  parameters: {
-    info: {
-      text: `
-              Inline Loading spinners are used when creating, updating, or deleting an item.
-              They help notify users that their change is underway, with different states for 'loading' and 'success'.
-            `,
-    },
+_InlineLoading.parameters = {
+  info: {
+    text: `
+            Inline Loading spinners are used when creating, updating, or deleting an item.
+            They help notify users that their change is underway, with different states for 'loading' and 'success'.
+          `,
   },
 };
 
@@ -121,16 +119,14 @@ export const UxExample = () => {
   );
 };
 
-UxExample.story = {
-  name: 'UX example',
+UxExample.storyName = 'UX example';
 
-  parameters: {
-    info: {
-      text: `
-          This is a full example of how to levarage the <InlineLoading /> component to create a nice user experience when submitting a form.
+UxExample.parameters = {
+  info: {
+    text: `
+        This is a full example of how to levarage the <InlineLoading /> component to create a nice user experience when submitting a form.
 
-          For the full source code of this example, check out the 'story' panel below.
-        `,
-    },
+        For the full source code of this example, check out the 'story' panel below.
+      `,
   },
 };

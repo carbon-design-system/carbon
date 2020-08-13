@@ -167,14 +167,12 @@ export const Default = () => (
   </Tabs>
 );
 
-Default.story = {
-  parameters: {
-    info: {
-      text: `
-          Tabs are used to quickly navigate between views within the same context. Create individual
-          Tab components for each item in the Tabs list.
-        `,
-    },
+Default.parameters = {
+  info: {
+    text: `
+        Tabs are used to quickly navigate between views within the same context. Create individual
+        Tab components for each item in the Tabs list.
+      `,
   },
 };
 
@@ -218,27 +216,23 @@ export const Container = () => (
   </Tabs>
 );
 
-Container.story = {
-  parameters: {
-    info: {
-      text: `
-          Tabs are used to quickly navigate between views within the same context. Create individual
-          Tab components for each item in the Tabs list.
-        `,
-    },
+Container.parameters = {
+  info: {
+    text: `
+        Tabs are used to quickly navigate between views within the same context. Create individual
+        Tab components for each item in the Tabs list.
+      `,
   },
 };
 
 export const Skeleton = () => <TabsSkeleton />;
 
-Skeleton.story = {
-  name: 'skeleton',
+Skeleton.storyName = 'skeleton';
 
-  parameters: {
-    info: {
-      text: `
-              Placeholder skeleton state to use when content is loading.
-            `,
-    },
+Skeleton.parameters = {
+  info: {
+    text: `
+            Placeholder skeleton state to use when content is loading.
+          `,
   },
 };

@@ -218,9 +218,7 @@ export const HeaderBaseWNavigation = withReadme(readme, () => (
   />
 ));
 
-HeaderBaseWNavigation.story = {
-  name: 'Header Base w/ Navigation',
-};
+HeaderBaseWNavigation.storyName = 'Header Base w/ Navigation';
 
 export const HeaderBaseWActions = withReadme(readme, () => (
   <Header aria-label="IBM Platform Name">
@@ -245,9 +243,7 @@ export const HeaderBaseWActions = withReadme(readme, () => (
   </Header>
 ));
 
-HeaderBaseWActions.story = {
-  name: 'Header Base w/ Actions',
-};
+HeaderBaseWActions.storyName = 'Header Base w/ Actions';
 
 export const HeaderBaseWSkipToContent = withReadme(readme, () => (
   <>
@@ -278,9 +274,7 @@ export const HeaderBaseWSkipToContent = withReadme(readme, () => (
   </>
 ));
 
-HeaderBaseWSkipToContent.story = {
-  name: 'Header Base w/ SkipToContent',
-};
+HeaderBaseWSkipToContent.storyName = 'Header Base w/ SkipToContent';
 
 export const HeaderBaseWNavigationAndActions = withReadme(readme, () => (
   <HeaderContainer
@@ -344,9 +338,8 @@ export const HeaderBaseWNavigationAndActions = withReadme(readme, () => (
   />
 ));
 
-HeaderBaseWNavigationAndActions.story = {
-  name: 'Header Base w/ Navigation and Actions',
-};
+HeaderBaseWNavigationAndActions.storyName =
+  'Header Base w/ Navigation and Actions';
 
 export const HeaderBaseWNavigationActionsAndSideNav = withReadme(readme, () => (
   <HeaderContainer
@@ -452,9 +445,8 @@ export const HeaderBaseWNavigationActionsAndSideNav = withReadme(readme, () => (
   />
 ));
 
-HeaderBaseWNavigationActionsAndSideNav.story = {
-  name: 'Header Base w/ Navigation, Actions and SideNav',
-};
+HeaderBaseWNavigationActionsAndSideNav.storyName =
+  'Header Base w/ Navigation, Actions and SideNav';
 
 export const HeaderBaseWSideNav = withReadme(readme, () => (
   <HeaderContainer
@@ -523,9 +515,7 @@ export const HeaderBaseWSideNav = withReadme(readme, () => (
   />
 ));
 
-HeaderBaseWSideNav.story = {
-  name: 'Header Base w/ SideNav',
-};
+HeaderBaseWSideNav.storyName = 'Header Base w/ SideNav';
 
 export const HeaderBaseWActionsAndRightPanel = withReadme(readme, () => (
   <Header aria-label="IBM Platform Name">
@@ -552,9 +542,8 @@ export const HeaderBaseWActionsAndRightPanel = withReadme(readme, () => (
   </Header>
 ));
 
-HeaderBaseWActionsAndRightPanel.story = {
-  name: 'Header Base w/ Actions and Right Panel',
-};
+HeaderBaseWActionsAndRightPanel.storyName =
+  'Header Base w/ Actions and Right Panel';
 
 export const HeaderBaseWActionsAndSwitcher = withReadme(readme, () => (
   <Header aria-label="IBM Platform Name">
@@ -604,9 +593,7 @@ export const HeaderBaseWActionsAndSwitcher = withReadme(readme, () => (
   </Header>
 ));
 
-HeaderBaseWActionsAndSwitcher.story = {
-  name: 'Header Base w/ Actions and Switcher',
-};
+HeaderBaseWActionsAndSwitcher.storyName = 'Header Base w/ Actions and Switcher';
 
 export const FixedSideNav = withReadme(readme, () => (
   <>
@@ -657,9 +644,7 @@ export const FixedSideNav = withReadme(readme, () => (
   </>
 ));
 
-FixedSideNav.story = {
-  name: 'Fixed SideNav',
-};
+FixedSideNav.storyName = 'Fixed SideNav';
 
 export const FixedSideNavWIcons = withReadme(readme, () => (
   <>
@@ -698,9 +683,7 @@ export const FixedSideNavWIcons = withReadme(readme, () => (
   </>
 ));
 
-FixedSideNavWIcons.story = {
-  name: 'Fixed SideNav w/ Icons',
-};
+FixedSideNavWIcons.storyName = 'Fixed SideNav w/ Icons';
 
 export const SideNavRail = withReadme(readme, () => (
   <>
@@ -735,9 +718,7 @@ export const SideNavRail = withReadme(readme, () => (
   </>
 ));
 
-SideNavRail.story = {
-  name: 'SideNav Rail',
-};
+SideNavRail.storyName = 'SideNav Rail';
 
 export const SideNavRailWHeader = withReadme(readme, () => (
   <HeaderContainer
@@ -834,9 +815,7 @@ export const SideNavRailWHeader = withReadme(readme, () => (
   />
 ));
 
-SideNavRailWHeader.story = {
-  name: 'SideNav Rail w/Header',
-};
+SideNavRailWHeader.storyName = 'SideNav Rail w/Header';
 
 export const SideNavWLargeSideNavItems = withReadme(readme, () => (
   <>
@@ -867,6 +846,4 @@ export const SideNavWLargeSideNavItems = withReadme(readme, () => (
   </>
 ));
 
-SideNavWLargeSideNavItems.story = {
-  name: 'SideNav w/ large side nav items',
-};
+SideNavWLargeSideNavItems.storyName = 'SideNav w/ large side nav items';

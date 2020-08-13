@@ -56,15 +56,13 @@ export const _Default = () => (
   </Tag>
 );
 
-_Default.story = {
-  parameters: {
-    info: {
-      text: `
-          Tags are used for items that need to be labeled, categorized, or organized using keywords that describe them.
-          The example below shows how the Tag component can be used. Each type has a default message describing the type,
-          but a custom message can also be applied.
-        `,
-    },
+_Default.parameters = {
+  info: {
+    text: `
+        Tags are used for items that need to be labeled, categorized, or organized using keywords that describe them.
+        The example below shows how the Tag component can be used. Each type has a default message describing the type,
+        but a custom message can also be applied.
+      `,
   },
 };
 
@@ -74,15 +72,13 @@ export const Filter = () => (
   </Tag>
 );
 
-Filter.story = {
-  parameters: {
-    info: {
-      text: `
-          Tags are used for items that need to be labeled, categorized, or organized using keywords that describe them.
-          The example below shows how the Tag component can be used. Each type has a default message describing the type,
-          but a custom message can also be applied.
-        `,
-    },
+Filter.parameters = {
+  info: {
+    text: `
+        Tags are used for items that need to be labeled, categorized, or organized using keywords that describe them.
+        The example below shows how the Tag component can be used. Each type has a default message describing the type,
+        but a custom message can also be applied.
+      `,
   },
 };
 
@@ -92,14 +88,12 @@ export const Skeleton = () => (
   </div>
 );
 
-Skeleton.story = {
-  name: 'skeleton',
+Skeleton.storyName = 'skeleton';
 
-  parameters: {
-    info: {
-      text: `
-        Placeholder skeleton state to use when content is loading.
-        `,
-    },
+Skeleton.parameters = {
+  info: {
+    text: `
+      Placeholder skeleton state to use when content is loading.
+      `,
   },
 };

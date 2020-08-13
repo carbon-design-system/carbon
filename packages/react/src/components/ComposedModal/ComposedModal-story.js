@@ -167,19 +167,17 @@ export const UsingHeaderFooterProps = () => {
   );
 };
 
-UsingHeaderFooterProps.story = {
-  name: 'Using Header / Footer Props',
+UsingHeaderFooterProps.storyName = 'Using Header / Footer Props';
 
-  parameters: {
-    info: {
-      text: `
-          Composed Modal allows you to create your own modal with just the parts you need. The ComposedModal element provides the state management for open/close, as well as passes the ModalHeader a prop to close the modal (with the close button).
+UsingHeaderFooterProps.parameters = {
+  info: {
+    text: `
+        Composed Modal allows you to create your own modal with just the parts you need. The ComposedModal element provides the state management for open/close, as well as passes the ModalHeader a prop to close the modal (with the close button).
 
-          The interior components - ModalHeader / ModalBody / ModalFooter - are all container elements that will render any children you add in, wrapped in the appropriate CSS classes.
+        The interior components - ModalHeader / ModalBody / ModalFooter - are all container elements that will render any children you add in, wrapped in the appropriate CSS classes.
 
-          The Modal Header / Modal Footer come with some built in props to let you accelerate towards standard Carbon modal UI. If there are customizations you need to do, see the next example of just using the interior components as containers.
-        `,
-    },
+        The Modal Header / Modal Footer come with some built in props to let you accelerate towards standard Carbon modal UI. If there are customizations you need to do, see the next example of just using the interior components as containers.
+      `,
   },
 };
 
@@ -210,15 +208,13 @@ export const UsingChildNodes = () => {
   );
 };
 
-UsingChildNodes.story = {
-  name: 'Using child nodes',
+UsingChildNodes.storyName = 'Using child nodes';
 
-  parameters: {
-    info: {
-      text: `
-          Alternatively, you can just use the Modal components as wrapper elements and figure the children out yourself. We do suggest for the header you utilize the built in props for label and title though, for the footer it's mostly a composed element so creating the two buttons yourself (using the Button component) is probably the most straight-forward pattern.
-        `,
-    },
+UsingChildNodes.parameters = {
+  info: {
+    text: `
+        Alternatively, you can just use the Modal components as wrapper elements and figure the children out yourself. We do suggest for the header you utilize the built in props for label and title though, for the footer it's mostly a composed element so creating the two buttons yourself (using the Button component) is probably the most straight-forward pattern.
+      `,
   },
 };
 
@@ -233,16 +229,14 @@ export const TitleOnly = () => {
   );
 };
 
-TitleOnly.story = {
-  name: 'Title only',
+TitleOnly.storyName = 'Title only';
 
-  parameters: {
-    info: {
-      text: `
-        In "small" and "xs" modals size, the title is allowed to span multiple lines and be used for the main message.
-        It should be less than 3 lines of text. If more room is required then use the standard body copy format.
-      `,
-    },
+TitleOnly.parameters = {
+  info: {
+    text: `
+      In "small" and "xs" modals size, the title is allowed to span multiple lines and be used for the main message.
+      It should be less than 3 lines of text. If more room is required then use the standard body copy format.
+    `,
   },
 };
 
@@ -283,14 +277,12 @@ export const ExampleUsageWithTriggerButton = () => {
   return <ComposedModalExample />;
 };
 
-ExampleUsageWithTriggerButton.story = {
-  name: 'Example usage with trigger button',
+ExampleUsageWithTriggerButton.storyName = 'Example usage with trigger button';
 
-  parameters: {
-    info: {
-      text: `
-          An example ComposedModal with a trigger button
-        `,
-    },
+ExampleUsageWithTriggerButton.parameters = {
+  info: {
+    text: `
+        An example ComposedModal with a trigger button
+      `,
   },
 };

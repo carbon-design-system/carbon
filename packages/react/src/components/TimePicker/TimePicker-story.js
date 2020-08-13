@@ -82,12 +82,10 @@ export const Default = () => {
   );
 };
 
-Default.story = {
-  parameters: {
-    info: {
-      text: `
-          The time picker allow users to select a time.
-        `,
-    },
+Default.parameters = {
+  info: {
+    text: `
+        The time picker allow users to select a time.
+      `,
   },
 };

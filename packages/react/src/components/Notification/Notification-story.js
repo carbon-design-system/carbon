@@ -72,6 +72,4 @@ export const Inline = () => (
   />
 );
 
-Inline.story = {
-  name: 'inline',
-};
+Inline.storyName = 'inline';

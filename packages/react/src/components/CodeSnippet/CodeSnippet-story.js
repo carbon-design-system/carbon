@@ -94,17 +94,15 @@ export const Inline = () => (
   </div>
 );
 
-Inline.story = {
-  name: 'inline',
+Inline.storyName = 'inline';
 
-  parameters: {
-    info: {
-      text: `
-      Code snippets are small blocks of reusable code that can be inserted in a code file.
+Inline.parameters = {
+  info: {
+    text: `
+    Code snippets are small blocks of reusable code that can be inserted in a code file.
 
-      The Inline style is for code used within a block of text.
-    `,
-    },
+    The Inline style is for code used within a block of text.
+  `,
   },
 };
 
@@ -119,17 +117,15 @@ export const SingleLine = () => (
   </div>
 );
 
-SingleLine.story = {
-  name: 'single line',
+SingleLine.storyName = 'single line';
 
-  parameters: {
-    info: {
-      text: `
-        Code snippets are small blocks of reusable code that can be inserted in a code file.
+SingleLine.parameters = {
+  info: {
+    text: `
+      Code snippets are small blocks of reusable code that can be inserted in a code file.
 
-        The Code style is for larger, multi-line code snippets.
-      `,
-    },
+      The Code style is for larger, multi-line code snippets.
+    `,
   },
 };
 
@@ -179,17 +175,15 @@ padding-right: padding(xs);
   );
 };
 
-MultiLine.story = {
-  name: 'multi line',
+MultiLine.storyName = 'multi line';
 
-  parameters: {
-    info: {
-      text: `
-        Code snippets are small blocks of reusable code that can be inserted in a code file.
+MultiLine.parameters = {
+  info: {
+    text: `
+      Code snippets are small blocks of reusable code that can be inserted in a code file.
 
-        The Terminal style is for single-line .
-      `,
-    },
+      The Terminal style is for single-line .
+    `,
   },
 };
 
@@ -200,14 +194,12 @@ export const Skeleton = () => (
   </div>
 );
 
-Skeleton.story = {
-  name: 'skeleton',
+Skeleton.storyName = 'skeleton';
 
-  parameters: {
-    info: {
-      text: `
-        Placeholder skeleton state to use when content is loading.
-      `,
-    },
+Skeleton.parameters = {
+  info: {
+    text: `
+      Placeholder skeleton state to use when content is loading.
+    `,
   },
 };

@@ -78,9 +78,9 @@ export const accordion = () => (
 
 export const skeleton = () => <AccordionSkeleton open count={4} />;
 
-skeleton.story = {
-  decorators: [(story) => <div style={{ width: '500px' }}>{story()}</div>],
-};
+skeleton.decorators = [
+  (story) => <div style={{ width: '500px' }}>{story()}</div>,
+];
 
 const props = {
   onClick: action('onClick'),

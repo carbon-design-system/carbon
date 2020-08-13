@@ -39,14 +39,12 @@ export default {
 
 export const _PaginationNav = () => <PaginationNav {...props()} />;
 
-_PaginationNav.story = {
-  name: 'PaginationNav',
+_PaginationNav.storyName = 'PaginationNav';
 
-  parameters: {
-    info: {
-      text: `
-          Pagination Nav is a group of pagination buttons.
-            `,
-    },
+_PaginationNav.parameters = {
+  info: {
+    text: `
+        Pagination Nav is a group of pagination buttons.
+          `,
   },
 };

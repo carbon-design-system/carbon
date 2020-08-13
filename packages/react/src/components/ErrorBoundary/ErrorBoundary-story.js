@@ -53,9 +53,7 @@ export const Default = () => {
   return <DemoComponent />;
 };
 
-Default.story = {
-  name: 'default',
-};
+Default.storyName = 'default';
 
 export const WithCustomContext = () => {
   function DemoComponent() {
@@ -92,6 +90,4 @@ export const WithCustomContext = () => {
   return <DemoComponent />;
 };
 
-WithCustomContext.story = {
-  name: 'with custom context',
-};
+WithCustomContext.storyName = 'with custom context';

@@ -24,11 +24,9 @@ export default {
 
 export const Default = () => <FormLabel {...additionalProps}>Label</FormLabel>;
 
-Default.story = {
-  parameters: {
-    info: {
-      text: 'Form label.',
-    },
+Default.parameters = {
+  info: {
+    text: 'Form label.',
   },
 };
 
@@ -38,12 +36,10 @@ export const WithTooltip = () => (
   </FormLabel>
 );
 
-WithTooltip.story = {
-  name: 'With tooltip',
+WithTooltip.storyName = 'With tooltip';
 
-  parameters: {
-    info: {
-      text: 'Form label with tooltip.',
-    },
+WithTooltip.parameters = {
+  info: {
+    text: 'Form label with tooltip.',
   },
 };

@@ -57,16 +57,14 @@ export const Default = () => (
   </div>
 );
 
-Default.story = {
-  parameters: {
-    info: {
-      text: `
-      Skeleton states are used as a progressive loading state while the user waits for content to load.
+Default.parameters = {
+  info: {
+    text: `
+    Skeleton states are used as a progressive loading state while the user waits for content to load.
 
-      By taking a height and/or width property, this component can be used when you know the exact dimensions of the incoming content, such as an image.
+    By taking a height and/or width property, this component can be used when you know the exact dimensions of the incoming content, such as an image.
 
-      However, for performance reasons, it's recommended to create a class in your stylesheet to set the dimensions.
-    `,
-    },
+    However, for performance reasons, it's recommended to create a class in your stylesheet to set the dimensions.
+  `,
   },
 };

@@ -134,17 +134,15 @@ export const DefaultBottom = () => (
   </div>
 );
 
-DefaultBottom.story = {
-  name: 'default (bottom)',
+DefaultBottom.storyName = 'default (bottom)';
 
-  parameters: {
-    info: {
-      text: `
-          Interactive tooltip should be used if there are actions a user can take in the tooltip (e.g. a link or a button).
-          For more regular use case, e.g. giving the user more text information about something, use definition tooltip or icon tooltip.
-          By default, the tooltip will render above the element. The example below shows the default scenario.
-        `,
-    },
+DefaultBottom.parameters = {
+  info: {
+    text: `
+        Interactive tooltip should be used if there are actions a user can take in the tooltip (e.g. a link or a button).
+        For more regular use case, e.g. giving the user more text information about something, use definition tooltip or icon tooltip.
+        By default, the tooltip will render above the element. The example below shows the default scenario.
+      `,
   },
 };
 
@@ -166,17 +164,15 @@ export const NoIcon = () => (
   </div>
 );
 
-NoIcon.story = {
-  name: 'no icon',
+NoIcon.storyName = 'no icon';
 
-  parameters: {
-    info: {
-      text: `
-          Interactive tooltip should be used if there are actions a user can take in the tooltip (e.g. a link or a button).
-          For more regular use case, e.g. giving the user more text information about something, use definition tooltip or icon tooltip.
-          By default, the tooltip will render with an information Icon. The example below shows the option to exclude the Icon.
-        `,
-    },
+NoIcon.parameters = {
+  info: {
+    text: `
+        Interactive tooltip should be used if there are actions a user can take in the tooltip (e.g. a link or a button).
+        For more regular use case, e.g. giving the user more text information about something, use definition tooltip or icon tooltip.
+        By default, the tooltip will render with an information Icon. The example below shows the option to exclude the Icon.
+      `,
   },
 };
 
@@ -198,17 +194,15 @@ export const RenderCustomIcon = () => (
   </div>
 );
 
-RenderCustomIcon.story = {
-  name: 'render custom icon',
+RenderCustomIcon.storyName = 'render custom icon';
 
-  parameters: {
-    info: {
-      text: `
-          Interactive tooltip should be used if there are actions a user can take in the tooltip (e.g. a link or a button).
-          For more regular use case, e.g. giving the user more text information about something, use definition tooltip or icon tooltip.
-          By default, the tooltip will render with an information Icon. The example below shows the option to exclude the Icon.
-        `,
-    },
+RenderCustomIcon.parameters = {
+  info: {
+    text: `
+        Interactive tooltip should be used if there are actions a user can take in the tooltip (e.g. a link or a button).
+        For more regular use case, e.g. giving the user more text information about something, use definition tooltip or icon tooltip.
+        By default, the tooltip will render with an information Icon. The example below shows the option to exclude the Icon.
+      `,
   },
 };
 
@@ -230,22 +224,18 @@ export const OnlyCustomIcon = () => (
   </div>
 );
 
-OnlyCustomIcon.story = {
-  name: 'only custom icon',
+OnlyCustomIcon.storyName = 'only custom icon';
 
-  parameters: {
-    info: {
-      text: `
-          Interactive tooltip should be used if there are actions a user can take in the tooltip (e.g. a link or a button).
-          For more regular use case, e.g. giving the user more text information about something, use definition tooltip or icon tooltip.
-          By default, the tooltip will render with an information Icon. The example below shows the option to exclude the Icon.
-        `,
-    },
+OnlyCustomIcon.parameters = {
+  info: {
+    text: `
+        Interactive tooltip should be used if there are actions a user can take in the tooltip (e.g. a link or a button).
+        For more regular use case, e.g. giving the user more text information about something, use definition tooltip or icon tooltip.
+        By default, the tooltip will render with an information Icon. The example below shows the option to exclude the Icon.
+      `,
   },
 };
 
 export const UncontrolledTooltip = () => <UncontrolledTooltipExample />;
 
-UncontrolledTooltip.story = {
-  name: 'uncontrolled tooltip',
-};
+UncontrolledTooltip.storyName = 'uncontrolled tooltip';

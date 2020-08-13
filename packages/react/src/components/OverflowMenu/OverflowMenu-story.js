@@ -80,16 +80,14 @@ export const Basic = withReadme(OverflowREADME, () => (
   </OverflowMenu>
 ));
 
-Basic.story = {
-  name: 'basic',
+Basic.storyName = 'basic';
 
-  parameters: {
-    info: {
-      text: `
-          Overflow Menu is used when additional options are available to the user and there is a space constraint.
-          Create Overflow Menu Item components for each option on the menu.
-        `,
-    },
+Basic.parameters = {
+  info: {
+    text: `
+        Overflow Menu is used when additional options are available to the user and there is a space constraint.
+        Create Overflow Menu Item components for each option on the menu.
+      `,
   },
 };
 
@@ -136,18 +134,16 @@ export const WithLinks = withReadme(OverflowREADME, () => (
   </OverflowMenu>
 ));
 
-WithLinks.story = {
-  name: 'with links',
+WithLinks.storyName = 'with links';
 
-  parameters: {
-    info: {
-      text: `
-          Overflow Menu is used when additional options are available to the user and there is a space constraint.
-          Create Overflow Menu Item components for each option on the menu.
+WithLinks.parameters = {
+  info: {
+    text: `
+        Overflow Menu is used when additional options are available to the user and there is a space constraint.
+        Create Overflow Menu Item components for each option on the menu.
 
-          When given \`href\` props, menu items render as <a> tags to facilitate usability.
-        `,
-    },
+        When given \`href\` props, menu items render as <a> tags to facilitate usability.
+      `,
   },
 };
 
@@ -177,14 +173,12 @@ export const CustomTrigger = withReadme(OverflowREADME, () => (
   </OverflowMenu>
 ));
 
-CustomTrigger.story = {
-  name: 'custom trigger',
+CustomTrigger.storyName = 'custom trigger';
 
-  parameters: {
-    info: {
-      text: `
-          Sometimes you just want to render something other than an icon
-        `,
-    },
+CustomTrigger.parameters = {
+  info: {
+    text: `
+        Sometimes you just want to render something other than an icon
+      `,
   },
 };

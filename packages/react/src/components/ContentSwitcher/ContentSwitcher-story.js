@@ -56,14 +56,12 @@ export const Default = () => {
   );
 };
 
-Default.story = {
-  parameters: {
-    info: {
-      text: `
-          The Content Switcher component manipulates the content shown following an exclusive or “either/or” pattern.
-          Create Switch components for each section in the content switcher.
-        `,
-    },
+Default.parameters = {
+  info: {
+    text: `
+        The Content Switcher component manipulates the content shown following an exclusive or “either/or” pattern.
+        Create Switch components for each section in the content switcher.
+      `,
   },
 };
 
@@ -78,12 +76,10 @@ export const Selected = () => {
   );
 };
 
-Selected.story = {
-  parameters: {
-    info: {
-      text: `
-           Render the Content Switcher with a different section automatically selected
-         `,
-    },
+Selected.parameters = {
+  info: {
+    text: `
+         Render the Content Switcher with a different section automatically selected
+       `,
   },
 };

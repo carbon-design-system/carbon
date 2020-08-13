@@ -101,13 +101,11 @@ export const Default = () => {
   return <Tile {...regularProps}>Default tile</Tile>;
 };
 
-Default.story = {
-  parameters: {
-    info: {
-      text: `
-          Default tile without any interactions
-        `,
-    },
+Default.parameters = {
+  info: {
+    text: `
+        Default tile without any interactions
+      `,
   },
 };
 
@@ -116,13 +114,11 @@ export const Clickable = () => {
   return <ClickableTile {...clickableProps}>Clickable Tile</ClickableTile>;
 };
 
-Clickable.story = {
-  parameters: {
-    info: {
-      text: `
-          Clickable tile
-        `,
-    },
+Clickable.parameters = {
+  info: {
+    text: `
+        Clickable tile
+      `,
   },
 };
 
@@ -143,17 +139,15 @@ export const MultiSelect = () => {
   );
 };
 
-MultiSelect.story = {
-  name: 'Multi-select',
+MultiSelect.storyName = 'Multi-select';
 
-  parameters: {
-    info: {
-      text: `
-          Selectable tile
+MultiSelect.parameters = {
+  info: {
+    text: `
+        Selectable tile
 
-          Use this to select multiple tiles.
-        `,
-    },
+        Use this to select multiple tiles.
+      `,
   },
 };
 
@@ -177,21 +171,19 @@ export const Radio = () => {
   );
 };
 
-Radio.story = {
-  parameters: {
-    info: {
-      text: `
-           The example below shows a Tile Group component with a default selected Tile.
-           Although you can set the checked prop on the Tile, when using the RadioTile component
-           as a child of the Tile Group, either set the defaultSelected or valueSelected which will
-           automatically set the selected prop on the corresponding RadioTile component.
+Radio.parameters = {
+  info: {
+    text: `
+         The example below shows a Tile Group component with a default selected Tile.
+         Although you can set the checked prop on the Tile, when using the RadioTile component
+         as a child of the Tile Group, either set the defaultSelected or valueSelected which will
+         automatically set the selected prop on the corresponding RadioTile component.
 
-           Use defaultSelected when you want a tile to be selected initially, but don't need to set it
-           at a later time. If you do need to set it dynamically at a later time, then use the valueSelected property instead.
+         Use defaultSelected when you want a tile to be selected initially, but don't need to set it
+         at a later time. If you do need to set it dynamically at a later time, then use the valueSelected property instead.
 
-           Use this to select one tile at a time.
-        `,
-    },
+         Use this to select one tile at a time.
+      `,
   },
 };
 
@@ -206,12 +198,10 @@ export const Expandable = () => (
   </ExpandableTile>
 );
 
-Expandable.story = {
-  parameters: {
-    info: {
-      text: `
-          Expandable tile
-        `,
-    },
+Expandable.parameters = {
+  info: {
+    text: `
+        Expandable tile
+      `,
   },
 };

@@ -91,18 +91,16 @@ export const Default = () => {
   );
 };
 
-Default.story = {
-  parameters: {
-    info: {
-      text: `
-          The example below shows a Radio Button Group component with a default selected Radio Button.
-          Although you can set the checked prop on the Radio Button, when using the Radio Button component
-          as a child of the Radio Button Group, either set the defaultSelected or valueSelected which will
-          automatically set the selected prop on the corresponding Radio Button component.
+Default.parameters = {
+  info: {
+    text: `
+        The example below shows a Radio Button Group component with a default selected Radio Button.
+        Although you can set the checked prop on the Radio Button, when using the Radio Button component
+        as a child of the Radio Button Group, either set the defaultSelected or valueSelected which will
+        automatically set the selected prop on the corresponding Radio Button component.
 
-          Use defaultSelected when you want a radio button to be selected initially, but don't need to set it
-          at a later time. If you do need to set it dynamically at a later time, then use the valueSelected property instead.
-        `,
-    },
+        Use defaultSelected when you want a radio button to be selected initially, but don't need to set it
+        at a later time. If you do need to set it dynamically at a later time, then use the valueSelected property instead.
+      `,
   },
 };
