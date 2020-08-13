@@ -6,7 +6,6 @@
  */
 
 import React from 'react';
-import { storiesOf } from '@storybook/react';
 import { action, decorateAction } from '@storybook/addon-actions';
 
 import { withKnobs, boolean, select, text } from '@storybook/addon-knobs';
@@ -74,160 +73,174 @@ const props = {
   }),
 };
 
-storiesOf('DatePicker', module)
-  .addParameters({
+export default {
+  title: 'DatePicker',
+  decorators: [withKnobs],
+
+  parameters: {
     component: DatePicker,
+
     subcomponents: {
       DatePickerInput,
       DatePickerSkeleton,
     },
-  })
-  .addDecorator(withKnobs)
-  .add(
-    'simple',
-    () => (
-      <DatePicker
-        {...props.datePicker()}
-        short={boolean('Use shorter width (short in <DatePicker>)', false)}
-        datePickerType="simple">
-        <DatePickerInput {...props.datePickerInput()} />
-      </DatePicker>
-    ),
-    {
-      info: {
-        text:
-          'A simple Date Picker consists of an input field and no calendar.',
-      },
-    }
-  )
-  .add(
-    'single with calendar',
-    () => (
-      <DatePicker
-        {...props.datePicker()}
-        datePickerType="single"
-        dateFormat={text(
-          'The date format (dateFormat in <DatePicker>)',
-          'm/d/Y'
-        )}>
-        <DatePickerInput
-          openCalendar={() => console.log('click')}
-          {...props.datePickerInput()}
-        />
-      </DatePicker>
-    ),
-    {
-      info: {
-        text: `
-            A single Date Picker consists of an input field and a calendar.
-          `,
-      },
-    }
-  )
-  .add(
-    'range with calendar',
-    () => {
-      const datePickerInputProps = props.datePickerInput();
-      return (
-        <DatePicker
-          {...props.datePicker()}
-          datePickerType="range"
-          dateFormat={text(
-            'The date format (dateFormat in <DatePicker>)',
-            'm/d/Y'
-          )}>
-          <DatePickerInput
-            {...datePickerInputProps}
-            id="date-picker-input-id-start"
-          />
-          <DatePickerInput
-            {...datePickerInputProps}
-            id="date-picker-input-id-end"
-          />
-        </DatePicker>
-      );
+  },
+};
+
+export const Simple = () => (
+  <DatePicker
+    {...props.datePicker()}
+    short={boolean('Use shorter width (short in <DatePicker>)', false)}
+    datePickerType="simple">
+    <DatePickerInput {...props.datePickerInput()} />
+  </DatePicker>
+);
+
+Simple.story = {
+  name: 'simple',
+
+  parameters: {
+    info: {
+      text: 'A simple Date Picker consists of an input field and no calendar.',
     },
-    {
-      info: {
-        text: `
-            A range Date Picker consists of two input fields and a calendar.
-          `,
-      },
-    }
-  )
-  .add(
-    'range with calendar and min/max dates',
-    () => {
-      const datePickerInputProps = props.datePickerInput();
-      return (
-        <DatePicker
-          {...props.datePicker()}
-          minDate="1/10/2020"
-          maxDate="1/20/2020"
-          datePickerType="range"
-          dateFormat="m/d/Y">
-          <DatePickerInput
-            {...datePickerInputProps}
-            id="date-picker-input-id"
-          />
-          <DatePickerInput
-            {...datePickerInputProps}
-            id="date-picker-input-id-2"
-          />
-        </DatePicker>
-      );
-    },
-    {
-      info: {
-        text: `
-            A range Date Picker consists of two input fields and a calendar, and optionally, the minDate and maxDate fields.
-          `,
-      },
-    }
-  )
-  .add(
-    'fully controlled',
-    () => (
-      <WithState initialState={{ date: '' }}>
-        {({ state, setState }) => (
-          <>
-            <DatePicker
-              datePickerType="single"
-              dateFormat="m/d/Y"
-              value={state.date}
-              onChange={(eventOrDates) => {
-                const value = eventOrDates.target
-                  ? eventOrDates.target.value
-                  : eventOrDates[0];
-                setState({ date: value });
-              }}>
-              <DatePickerInput
-                {...props.datePickerInput()}
-                id="date-picker-input-id"
-              />
-            </DatePicker>
-            <button
-              type="button"
-              onClick={() => setState({ date: '01/01/2011' })}>
-              Click me to set to 01/01/2011
-            </button>
-          </>
-        )}
-      </WithState>
-    ),
-    {
-      info: {
-        text: `
-            If your application needs to control the value of the date picker and
-            be notified of any changes.
-          `,
-      },
-    }
-  )
-  .add('skeleton', () => <DatePickerSkeleton range />, {
+  },
+};
+
+export const SingleWithCalendar = () => (
+  <DatePicker
+    {...props.datePicker()}
+    datePickerType="single"
+    dateFormat={text('The date format (dateFormat in <DatePicker>)', 'm/d/Y')}>
+    <DatePickerInput
+      openCalendar={() => console.log('click')}
+      {...props.datePickerInput()}
+    />
+  </DatePicker>
+);
+
+SingleWithCalendar.story = {
+  name: 'single with calendar',
+
+  parameters: {
     info: {
       text: `
-            Placeholder skeleton state to use when content is loading.
-            `,
+          A single Date Picker consists of an input field and a calendar.
+        `,
     },
-  });
+  },
+};
+
+export const RangeWithCalendar = () => {
+  const datePickerInputProps = props.datePickerInput();
+  return (
+    <DatePicker
+      {...props.datePicker()}
+      datePickerType="range"
+      dateFormat={text(
+        'The date format (dateFormat in <DatePicker>)',
+        'm/d/Y'
+      )}>
+      <DatePickerInput
+        {...datePickerInputProps}
+        id="date-picker-input-id-start"
+      />
+      <DatePickerInput
+        {...datePickerInputProps}
+        id="date-picker-input-id-end"
+      />
+    </DatePicker>
+  );
+};
+
+RangeWithCalendar.story = {
+  name: 'range with calendar',
+
+  parameters: {
+    info: {
+      text: `
+          A range Date Picker consists of two input fields and a calendar.
+        `,
+    },
+  },
+};
+
+export const RangeWithCalendarAndMinMaxDates = () => {
+  const datePickerInputProps = props.datePickerInput();
+  return (
+    <DatePicker
+      {...props.datePicker()}
+      minDate="1/10/2020"
+      maxDate="1/20/2020"
+      datePickerType="range"
+      dateFormat="m/d/Y">
+      <DatePickerInput {...datePickerInputProps} id="date-picker-input-id" />
+      <DatePickerInput {...datePickerInputProps} id="date-picker-input-id-2" />
+    </DatePicker>
+  );
+};
+
+RangeWithCalendarAndMinMaxDates.story = {
+  name: 'range with calendar and min/max dates',
+
+  parameters: {
+    info: {
+      text: `
+          A range Date Picker consists of two input fields and a calendar, and optionally, the minDate and maxDate fields.
+        `,
+    },
+  },
+};
+
+export const FullyControlled = () => (
+  <WithState initialState={{ date: '' }}>
+    {({ state, setState }) => (
+      <>
+        <DatePicker
+          datePickerType="single"
+          dateFormat="m/d/Y"
+          value={state.date}
+          onChange={(eventOrDates) => {
+            const value = eventOrDates.target
+              ? eventOrDates.target.value
+              : eventOrDates[0];
+            setState({ date: value });
+          }}>
+          <DatePickerInput
+            {...props.datePickerInput()}
+            id="date-picker-input-id"
+          />
+        </DatePicker>
+        <button type="button" onClick={() => setState({ date: '01/01/2011' })}>
+          Click me to set to 01/01/2011
+        </button>
+      </>
+    )}
+  </WithState>
+);
+
+FullyControlled.story = {
+  name: 'fully controlled',
+
+  parameters: {
+    info: {
+      text: `
+          If your application needs to control the value of the date picker and
+          be notified of any changes.
+        `,
+    },
+  },
+};
+
+export const Skeleton = () => <DatePickerSkeleton range />;
+
+Skeleton.story = {
+  name: 'skeleton',
+
+  parameters: {
+    info: {
+      text: `
+              Placeholder skeleton state to use when content is loading.
+              `,
+    },
+  },
+};
