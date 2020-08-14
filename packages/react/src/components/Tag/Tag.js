@@ -67,6 +67,7 @@ const Tag = ({
         {children !== null && children !== undefined ? children : TYPES[type]}
       </span>
       <button
+        type="button"
         className={`${prefix}--tag__close-icon`}
         onClick={handleClose}
         disabled={disabled}
@@ -97,11 +98,6 @@ Tag.propTypes = {
   className: PropTypes.string,
 
   /**
-   * Specify the type of the <Tag>
-   */
-  type: PropTypes.oneOf(Object.keys(TYPES)),
-
-  /**
    * Specify if the <Tag> is disabled
    */
   disabled: PropTypes.bool,
@@ -112,9 +108,9 @@ Tag.propTypes = {
   filter: PropTypes.bool,
 
   /**
-   * Text to show on clear filters
+   * Specify the id for the tag.
    */
-  title: PropTypes.string,
+  id: PropTypes.string,
 
   /**
    * Click handler for filter tag close button.
@@ -122,9 +118,14 @@ Tag.propTypes = {
   onClose: PropTypes.func,
 
   /**
-   * Specify the id for the tag.
+   * Text to show on clear filters
    */
-  id: PropTypes.string,
+  title: PropTypes.string,
+
+  /**
+   * Specify the type of the <Tag>
+   */
+  type: PropTypes.oneOf(Object.keys(TYPES)),
 };
 
 export const types = Object.keys(TYPES);

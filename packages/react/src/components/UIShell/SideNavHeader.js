@@ -31,16 +31,14 @@ const SideNavHeader = ({
 
 SideNavHeader.propTypes = {
   /**
+   * The child nodes to be rendered
+   */
+  children: PropTypes.node,
+
+  /**
    * Provide an optional class to be applied to the containing node
    */
   className: PropTypes.string,
-
-  /**
-   * Provide an icon to render in the header of the side navigation. Should be
-   * a React class.
-   */
-  renderIcon: PropTypes.oneOfType([PropTypes.func, PropTypes.object])
-    .isRequired,
 
   /**
    * Property to indicate if the side nav container is open (or not). Use to
@@ -49,9 +47,11 @@ SideNavHeader.propTypes = {
   isSideNavExpanded: PropTypes.bool,
 
   /**
-   * The child nodes to be rendered
+   * Provide an icon to render in the header of the side navigation. Should be
+   * a React class.
    */
-  children: PropTypes.node,
+  renderIcon: PropTypes.oneOfType([PropTypes.func, PropTypes.object])
+    .isRequired,
 };
 
 export default SideNavHeader;

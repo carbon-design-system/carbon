@@ -6,7 +6,6 @@
  */
 
 import React from 'react';
-import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 
 import { withKnobs, boolean, number } from '@storybook/addon-knobs';
@@ -26,13 +25,26 @@ const props = () => ({
   onChange: action('onChange'),
 });
 
-storiesOf('PaginationNav', module)
-  .addDecorator(withKnobs)
-  .addDecorator((story) => <div style={{ width: '800px' }}>{story()}</div>)
-  .add('PaginationNav', () => <PaginationNav {...props()} />, {
-    info: {
-      text: `
+export default {
+  title: 'PaginationNav',
+  decorators: [
+    withKnobs,
+    (story) => <div style={{ width: '800px' }}>{story()}</div>,
+  ],
+
+  parameters: {
+    component: PaginationNav,
+  },
+};
+
+export const _PaginationNav = () => <PaginationNav {...props()} />;
+
+_PaginationNav.storyName = 'PaginationNav';
+
+_PaginationNav.parameters = {
+  info: {
+    text: `
         Pagination Nav is a group of pagination buttons.
           `,
-    },
-  });
+  },
+};

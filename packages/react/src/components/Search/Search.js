@@ -8,7 +8,7 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import classNames from 'classnames';
-import { Search16, Close16, Close20 } from '@carbon/icons-react';
+import { Search16, Close16 } from '@carbon/icons-react';
 import { settings } from 'carbon-components';
 import deprecate from '../../prop-types/deprecate';
 
@@ -22,9 +22,46 @@ export default class Search extends Component {
     className: PropTypes.string,
 
     /**
-     * Optional prop to specify the type of the `<input>`
+     * Specify a label to be read by screen readers on the "close" button
      */
-    type: PropTypes.string,
+    closeButtonLabelText: PropTypes.string,
+
+    /**
+     * Optionally provide the default value of the <input>
+     */
+    defaultValue: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+
+    /**
+     * Specify a custom `id` for the input
+     */
+    id: PropTypes.string,
+
+    /**
+     * Provide the label text for the Search icon
+     */
+    labelText: PropTypes.node.isRequired,
+
+    /**
+     * Specify light version or default version of this control
+     */
+    light: PropTypes.bool,
+
+    /**
+     * Optional callback called when the search value changes.
+     */
+    onChange: PropTypes.func,
+
+    /**
+     * Provide an optional placeholder text for the Search.
+     * Note: if the label and placeholder differ,
+     * VoiceOver on Mac will read both
+     */
+    placeHolderText: PropTypes.string,
+
+    /**
+     * Specify the search size
+     */
+    size: PropTypes.oneOf(['sm', 'lg', 'xl']),
 
     /**
      * Specify whether the Search should be a small variant
@@ -39,51 +76,14 @@ export default class Search extends Component {
     ),
 
     /**
-     * Specify the search size
+     * Optional prop to specify the type of the `<input>`
      */
-    size: PropTypes.oneOf(['sm', 'lg', 'xl']),
-
-    /**
-     * Provide an optional placeholder text for the Search.
-     * Note: if the label and placeholder differ,
-     * VoiceOver on Mac will read both
-     */
-    placeHolderText: PropTypes.string,
-
-    /**
-     * Provide the label text for the Search icon
-     */
-    labelText: PropTypes.node.isRequired,
-
-    /**
-     * Specify light version or default version of this control
-     */
-    light: PropTypes.bool,
-
-    /**
-     * Specify a custom `id` for the input
-     */
-    id: PropTypes.string,
-
-    /**
-     * Specify a label to be read by screen readers on the "close" button
-     */
-    closeButtonLabelText: PropTypes.string,
+    type: PropTypes.string,
 
     /**
      * Specify the value of the <input>
      */
     value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-
-    /**
-     * Optionally provide the default value of the <input>
-     */
-    defaultValue: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-
-    /**
-     * Optional callback called when the search value changes.
-     */
-    onChange: PropTypes.func,
   };
 
   static defaultProps = {
@@ -162,8 +162,6 @@ export default class Search extends Component {
       [`${prefix}--search-close--hidden`]: !hasContent,
     });
 
-    const CloseIconX = size === 'xl' ? Close20 : Close16;
-
     const searchId = `${id}-search`;
 
     return (
@@ -190,7 +188,7 @@ export default class Search extends Component {
           onClick={this.clearInput}
           type="button"
           aria-label={closeButtonLabelText}>
-          <CloseIconX />
+          <Close16 />
         </button>
       </div>
     );

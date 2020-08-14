@@ -6,7 +6,6 @@
  */
 
 import React from 'react';
-import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 import { withKnobs, text, boolean } from '@storybook/addon-knobs';
 import ToggleSmall from '../ToggleSmall';
@@ -27,51 +26,68 @@ const toggleProps = () => ({
   onToggle: action('onToggle'),
 });
 
-storiesOf('ToggleSmall', module)
-  .addDecorator(withKnobs)
-  .add(
-    'toggled',
-    () => (
-      <ToggleSmall
-        defaultToggled
-        {...toggleProps()}
-        className="some-class"
-        id="toggle-1"
-      />
-    ),
-    {
-      info: {
-        text: `
-            Toggles are controls that are used to quickly switch between two possible states. The example below shows
-            an uncontrolled Toggle component. To use the Toggle component as a controlled component, set the toggled property.
-            Setting the toggled property will allow you to change the value dynamically, whereas setting the defaultToggled
-            prop will only set the value initially. This example has defaultToggled set to true. Small toggles may be used
-            when there is not enough space for a regular sized toggle. This issue is most commonly found in tables.
-          `,
-      },
-    }
-  )
-  .add(
-    'untoggled',
-    () => (
-      <ToggleSmall {...toggleProps()} className="some-class" id="toggle-1" />
-    ),
-    {
-      info: {
-        text: `
-            Toggles are controls that are used to quickly switch between two possible states. The example below shows
-            an uncontrolled Toggle component. To use the Toggle component as a controlled component, set the toggled property.
-            Setting the toggled property will allow you to change the value dynamically, whereas setting the defaultToggled
-            prop will only set the value initially. Small toggles may be used when there is not enough space for a regular sized toggle. This issue is most
-            commonly found in tables.
-          `,
-      },
-    }
-  )
-  .add('skeleton', () => <ToggleSmallSkeleton {...a11yprops()} />, {
-    info: {
-      text: `
+export default {
+  title: 'ToggleSmall',
+  decorators: [withKnobs],
+
+  parameters: {
+    component: ToggleSmall,
+
+    subcomponents: {
+      ToggleSmallSkeleton,
+    },
+  },
+};
+
+export const Toggled = () => (
+  <ToggleSmall
+    defaultToggled
+    {...toggleProps()}
+    className="some-class"
+    id="toggle-1"
+  />
+);
+
+Toggled.storyName = 'toggled';
+
+Toggled.parameters = {
+  info: {
+    text: `
+        Toggles are controls that are used to quickly switch between two possible states. The example below shows
+        an uncontrolled Toggle component. To use the Toggle component as a controlled component, set the toggled property.
+        Setting the toggled property will allow you to change the value dynamically, whereas setting the defaultToggled
+        prop will only set the value initially. This example has defaultToggled set to true. Small toggles may be used
+        when there is not enough space for a regular sized toggle. This issue is most commonly found in tables.
+      `,
+  },
+};
+
+export const Untoggled = () => (
+  <ToggleSmall {...toggleProps()} className="some-class" id="toggle-1" />
+);
+
+Untoggled.storyName = 'untoggled';
+
+Untoggled.parameters = {
+  info: {
+    text: `
+        Toggles are controls that are used to quickly switch between two possible states. The example below shows
+        an uncontrolled Toggle component. To use the Toggle component as a controlled component, set the toggled property.
+        Setting the toggled property will allow you to change the value dynamically, whereas setting the defaultToggled
+        prop will only set the value initially. Small toggles may be used when there is not enough space for a regular sized toggle. This issue is most
+        commonly found in tables.
+      `,
+  },
+};
+
+export const Skeleton = () => <ToggleSmallSkeleton {...a11yprops()} />;
+
+Skeleton.storyName = 'skeleton';
+
+Skeleton.parameters = {
+  info: {
+    text: `
             Placeholder skeleton state to use when content is loading.
           `,
-    },
-  });
+  },
+};

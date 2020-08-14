@@ -6,16 +6,14 @@
  */
 
 import React from 'react';
-import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 import { withKnobs, boolean, select, text } from '@storybook/addon-knobs';
-import { settings } from 'carbon-components';
 import { iconAddSolid, iconSearch } from 'carbon-icons';
 import { Add16, AddFilled16, Search16 } from '@carbon/icons-react';
 import Button from '../Button';
 import ButtonSkeleton from '../Button/Button.Skeleton';
-
-const { prefix } = settings;
+import ButtonSet from '../ButtonSet';
+import mdx from './Button.mdx';
 
 const icons = {
   None: 'None',
@@ -64,7 +62,13 @@ const props = {
     };
   },
   iconOnly: () => {
-    const iconToUse = iconMap[select('Icon (icon)', icons, 'Add16')];
+    let iconToUse;
+
+    if (iconMap[select('Icon (icon)', icons, 'Add16')] == undefined) {
+      iconToUse = Add16;
+    } else {
+      iconToUse = iconMap[select('Icon (icon)', icons, 'Add16')];
+    }
     return {
       className: 'some-class',
       kind: select(
@@ -109,124 +113,104 @@ const props = {
         'Icon description (iconDescription)',
         'Button icon'
       ),
+      stacked: boolean('Stack buttons vertically (stacked)', false),
       onClick: action('onClick'),
       onFocus: action('onFocus'),
     };
   },
 };
 
-Button.displayName = 'Button';
-
-const CustomLink = ({ children, href, ...other }) => (
-  <a href={href} {...other}>
-    {children}
-  </a>
-);
-
-storiesOf('Buttons', module)
-  .addDecorator(withKnobs)
-  .add(
-    'Default',
-    () => {
-      const regularProps = props.regular();
-      return (
-        <div
-          style={{
-            display: 'flex',
-            alignItems: 'center',
-            flexWrap: 'wrap',
-          }}>
-          <Button {...regularProps} className="some-class">
-            Button
-          </Button>
-          &nbsp;
-          <Button {...regularProps} href="#" className="some-class">
-            Link
-          </Button>
-          &nbsp;
-          <Button {...regularProps} as="p" href="#" className="some-class">
-            Element
-          </Button>
-          &nbsp;
-          <Button
-            {...regularProps}
-            as={CustomLink}
-            href="#"
-            className="some-class">
-            Custom component
-          </Button>
-        </div>
-      );
+export default {
+  title: 'Button',
+  decorators: [withKnobs],
+  parameters: {
+    component: Button,
+    subcomponents: {
+      ButtonSet,
+      ButtonSkeleton,
     },
-    {
-      info: {
-        text: `
-          Buttons are used to initialize an action, either in the background or
-          foreground of an experience.
+    docs: {
+      page: mdx,
+    },
+  },
+};
 
-          There are several kinds of buttons.
+export const _Default = () => {
+  return <Button>Button</Button>;
+};
 
-          Primary buttons should be used for the principle call to action
-          on the page.
+_Default.story = {
+  name: 'Button',
+};
 
-          Secondary buttons should be used for secondary actions on each page.
+export const Secondary = () => {
+  return <Button kind="secondary">Button</Button>;
+};
 
-          Danger buttons should be used for a negative action (such as Delete) on the page.
+export const Tertiary = () => {
+  return <Button kind="tertiary">Button</Button>;
+};
 
-          Modify the behavior of the button by changing its event properties.
+export const Danger = () => {
+  return <Button kind="danger">Button</Button>;
+};
 
-          Field buttons may be use directly next to an input element, to visually align their heights.
+export const Ghost = () => {
+  return <Button kind="ghost">Button</Button>;
+};
 
-          Small buttons may be used when there is not enough space for a
-          regular sized button. This issue is most found in tables. Small button should have three words
-          or less.
-
-          When words are not enough, icons can be used in buttons to better communicate what the button does. Icons are
-          always paired with text.
-        `,
-      },
-    }
-  )
-  .add('Icon-only buttons', () => <Button {...props.iconOnly()} hasIconOnly />)
-  .add(
-    'Sets of Buttons',
-    () => {
-      const setProps = props.set();
-      return (
-        <div className={`${prefix}--btn-set`}>
-          <Button kind="secondary" {...setProps}>
+export const Playground = () => {
+  const regularProps = props.regular();
+  const iconOnly = props.iconOnly();
+  const { stacked, ...buttonProps } = props.set();
+  return (
+    <>
+      <div
+        style={{
+          display: 'flex',
+          alignItems: 'center',
+          flexWrap: 'wrap',
+        }}>
+        <Button {...regularProps}>Button</Button>
+        &nbsp;
+        <Button hasIconOnly {...iconOnly}></Button>
+      </div>
+      <div
+        style={{
+          marginTop: '1rem',
+        }}>
+        <ButtonSet stacked={stacked}>
+          <Button kind="secondary" {...buttonProps}>
             Secondary button
           </Button>
-          <Button kind="primary" {...setProps}>
+          <Button kind="primary" {...buttonProps}>
             Primary button
           </Button>
-        </div>
-      );
-    },
-    {
-      info: {
-        text: `
-          When an action required by the user has more than one option, always use a a negative action button (secondary) paired with a positive action button (primary) in that order. Negative action buttons will be on the left. Positive action buttons should be on the right. When these two types buttons are paired in the correct order, they will automatically space themselves apart.
-        `,
-      },
-    }
-  )
-  .add(
-    'skeleton',
-    () => (
-      <div>
-        <ButtonSkeleton />
-        &nbsp;
-        <ButtonSkeleton href="#" />
-        &nbsp;
-        <ButtonSkeleton size="small" />
+        </ButtonSet>
       </div>
-    ),
-    {
-      info: {
-        text: `
-          Placeholder skeleton state to use when content is loading.
-        `,
-      },
-    }
+    </>
   );
+};
+
+export const IconButton = () => <Button {...props.iconOnly()} hasIconOnly />;
+
+IconButton.story = {
+  name: 'Icon Button',
+};
+
+export const SetOfButtons = () => {
+  return (
+    <ButtonSet>
+      <Button kind="secondary">Secondary button</Button>
+      <Button kind="primary">Primary button</Button>
+    </ButtonSet>
+  );
+};
+
+export const Skeleton = () => (
+  <div>
+    <ButtonSkeleton />
+    &nbsp;
+    <ButtonSkeleton small />
+  </div>
+);

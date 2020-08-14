@@ -104,6 +104,16 @@ function FileUploaderButton({
 
 FileUploaderButton.propTypes = {
   /**
+   * Specify the types of files that this input should be able to receive
+   */
+  accept: PropTypes.arrayOf(PropTypes.string),
+
+  /**
+   * Specify the type of underlying button
+   */
+  buttonKind: PropTypes.oneOf(ButtonKinds),
+
+  /**
    * Provide a custom className to be applied to the container node
    */
   className: PropTypes.string,
@@ -113,6 +123,11 @@ FileUploaderButton.propTypes = {
    * label
    */
   disableLabelChanges: PropTypes.bool,
+
+  /**
+   * Specify whether file input is disabled
+   */
+  disabled: PropTypes.bool,
 
   /**
    * Provide a unique id for the underlying <input> node
@@ -159,30 +174,15 @@ FileUploaderButton.propTypes = {
   role: PropTypes.string,
 
   /**
-   * Provide a custom tabIndex value for the <FileUploaderButton>
-   */
-  tabIndex: PropTypes.number,
-
-  /**
-   * Specify the type of underlying button
-   */
-  buttonKind: PropTypes.oneOf(ButtonKinds),
-
-  /**
-   * Specify the types of files that this input should be able to receive
-   */
-  accept: PropTypes.arrayOf(PropTypes.string),
-
-  /**
-   * Specify whether file input is disabled
-   */
-  disabled: PropTypes.bool,
-
-  /**
    * Specify the size of the button, from a list of available sizes.
    * For `default` buttons, this prop can remain unspecified.
    */
   size: PropTypes.oneOf(['default', 'field', 'small']),
+
+  /**
+   * Provide a custom tabIndex value for the <FileUploaderButton>
+   */
+  tabIndex: PropTypes.number,
 };
 
 export default FileUploaderButton;

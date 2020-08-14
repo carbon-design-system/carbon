@@ -28,12 +28,12 @@ const SkipToContent = ({
 };
 
 SkipToContent.propTypes = {
-  className: PropTypes.string,
-
   /**
    * Provide text to display in the SkipToContent `a` tag
    */
   children: PropTypes.string.isRequired,
+
+  className: PropTypes.string,
 
   /**
    * Provide the `href` to the id of the element on your package that is the

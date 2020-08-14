@@ -31,14 +31,14 @@ const Content = ({
 
 Content.propTypes = {
   /**
-   * Optionally provide a custom class name that is applied to the container
-   */
-  className: PropTypes.string,
-
-  /**
    * Provide children nodes to be rendered in the content container
    */
   children: PropTypes.node,
+
+  /**
+   * Optionally provide a custom class name that is applied to the container
+   */
+  className: PropTypes.string,
 
   /**
    * Optionally specify the tag of the content node. Defaults to `main`

@@ -30,6 +30,7 @@ function CodeSnippet({
   light,
   showMoreText,
   showLessText,
+  hideCopyButton,
   ...rest
 }) {
   const [expandedCode, setExpandedCode] = useState(false);
@@ -52,11 +53,20 @@ function CodeSnippet({
     [`${prefix}--snippet--${type}`]: type,
     [`${prefix}--snippet--expand`]: expandedCode,
     [`${prefix}--snippet--light`]: light,
+    [`${prefix}--snippet--no-copy`]: hideCopyButton,
   });
 
   const expandCodeBtnText = expandedCode ? showLessText : showMoreText;
 
   if (type === 'inline') {
+    if (hideCopyButton) {
+      return (
+        <span className={codeSnippetClasses}>
+          <code id={uid}>{children}</code>
+        </span>
+      );
+    }
+
     return (
       <Copy
         {...rest}
@@ -81,11 +91,13 @@ function CodeSnippet({
           <pre ref={codeContentRef}>{children}</pre>
         </code>
       </div>
-      <CopyButton
-        onClick={onClick}
-        feedback={feedback}
-        iconDescription={copyButtonDescription}
-      />
+      {!hideCopyButton && (
+        <CopyButton
+          onClick={onClick}
+          feedback={feedback}
+          iconDescription={copyButtonDescription}
+        />
+      )}
       {shouldShowMoreLessBtn && (
         <Button
           kind="ghost"
@@ -109,14 +121,10 @@ function CodeSnippet({
 
 CodeSnippet.propTypes = {
   /**
-   * Provide the type of Code Snippet
+   * Specify a label to be read by screen readers on the containing <textbox>
+   * node
    */
-  type: PropTypes.oneOf(['single', 'inline', 'multi']),
-
-  /**
-   * Specify an optional className to be applied to the container node
-   */
-  className: PropTypes.string,
+  ariaLabel: PropTypes.string,
 
   /**
    * Provide the content of your CodeSnippet as a string
@@ -124,20 +132,14 @@ CodeSnippet.propTypes = {
   children: PropTypes.string,
 
   /**
-   * Specify the string displayed when the snippet is copied
+   * Specify an optional className to be applied to the container node
    */
-  feedback: PropTypes.string,
+  className: PropTypes.string,
 
   /**
    * Specify the description for the Copy Button
    */
   copyButtonDescription: PropTypes.string,
-
-  /**
-   * An optional handler to listen to the `onClick` even fired by the Copy
-   * Button
-   */
-  onClick: PropTypes.func,
 
   /**
    * Specify a label to be read by screen readers on the containing <textbox>
@@ -146,16 +148,26 @@ CodeSnippet.propTypes = {
   copyLabel: PropTypes.string,
 
   /**
-   * Specify a label to be read by screen readers on the containing <textbox>
-   * node
+   * Specify the string displayed when the snippet is copied
    */
-  ariaLabel: PropTypes.string,
+  feedback: PropTypes.string,
 
   /**
-   * Specify a string that is displayed when the Code Snippet text is more
-   * than 15 lines
+   * Specify whether or not a copy button should be used/rendered.
    */
-  showMoreText: PropTypes.string,
+  hideCopyButton: PropTypes.bool,
+
+  /**
+   * Specify whether you are using the light variant of the Code Snippet,
+   * typically used for inline snippet to display an alternate color
+   */
+  light: PropTypes.bool,
+
+  /**
+   * An optional handler to listen to the `onClick` even fired by the Copy
+   * Button
+   */
+  onClick: PropTypes.func,
 
   /**
    * Specify a string that is displayed when the Code Snippet has been
@@ -164,10 +176,15 @@ CodeSnippet.propTypes = {
   showLessText: PropTypes.string,
 
   /**
-   * Specify whether you are using the light variant of the Code Snippet,
-   * typically used for inline snippet to display an alternate color
+   * Specify a string that is displayed when the Code Snippet text is more
+   * than 15 lines
    */
-  light: PropTypes.bool,
+  showMoreText: PropTypes.string,
+
+  /**
+   * Provide the type of Code Snippet
+   */
+  type: PropTypes.oneOf(['single', 'inline', 'multi']),
 };
 
 CodeSnippet.defaultProps = {

@@ -6,7 +6,6 @@
  */
 
 import React from 'react';
-import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 
 import { withKnobs, number, text } from '@storybook/addon-knobs';
@@ -25,11 +24,20 @@ const props = () => ({
   onClick: action('onClick'),
 });
 
-storiesOf('CopyButton', module)
-  .addDecorator(withKnobs)
-  .add('Default', () => <CopyButton {...props()} />, {
-    info: {
-      text:
-        'The copy button can be used when the user needs to copy information, such as a code snippet, to their clipboard.',
-    },
-  });
+export default {
+  title: 'CopyButton',
+  decorators: [withKnobs],
+
+  parameters: {
+    component: CopyButton,
+  },
+};
+
+export const Default = () => <CopyButton {...props()} />;
+
+Default.parameters = {
+  info: {
+    text:
+      'The copy button can be used when the user needs to copy information, such as a code snippet, to their clipboard.',
+  },
+};

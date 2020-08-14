@@ -22,13 +22,16 @@ exports[`ModalWrapper should render 1`] = `
     onKeyDown={[Function]}
     role="presentation"
   >
-    <ForwardRef(Button)
+    <Button
       className="btn-trigger"
       disabled={false}
       iconDescription="Provide icon description if icon is used"
       kind="primary"
       onClick={[Function]}
+      size="default"
       tabIndex={0}
+      tooltipAlignment="center"
+      tooltipPosition="top"
       type="button"
     >
       <button
@@ -40,7 +43,7 @@ exports[`ModalWrapper should render 1`] = `
       >
         Test Modal
       </button>
-    </ForwardRef(Button)>
+    </Button>
     <Modal
       aria-label="test modal"
       hasScrollingContent={false}
@@ -148,44 +151,54 @@ exports[`ModalWrapper should render 1`] = `
               Text
             </p>
           </div>
-          <div
+          <ButtonSet
             className="bx--modal-footer"
           >
-            <ForwardRef(Button)
-              disabled={false}
-              kind="secondary"
-              onClick={[Function]}
-              tabIndex={0}
-              type="button"
+            <div
+              className="bx--modal-footer bx--btn-set"
             >
-              <button
-                className="bx--btn bx--btn--secondary"
+              <Button
                 disabled={false}
+                kind="secondary"
                 onClick={[Function]}
+                size="default"
                 tabIndex={0}
+                tooltipAlignment="center"
+                tooltipPosition="top"
                 type="button"
               >
-                Cancel
-              </button>
-            </ForwardRef(Button)>
-            <ForwardRef(Button)
-              disabled={false}
-              kind="primary"
-              onClick={[Function]}
-              tabIndex={0}
-              type="button"
-            >
-              <button
-                className="bx--btn bx--btn--primary"
+                <button
+                  className="bx--btn bx--btn--secondary"
+                  disabled={false}
+                  onClick={[Function]}
+                  tabIndex={0}
+                  type="button"
+                >
+                  Cancel
+                </button>
+              </Button>
+              <Button
                 disabled={false}
+                kind="primary"
                 onClick={[Function]}
+                size="default"
                 tabIndex={0}
+                tooltipAlignment="center"
+                tooltipPosition="top"
                 type="button"
               >
-                Save
-              </button>
-            </ForwardRef(Button)>
-          </div>
+                <button
+                  className="bx--btn bx--btn--primary"
+                  disabled={false}
+                  onClick={[Function]}
+                  tabIndex={0}
+                  type="button"
+                >
+                  Save
+                </button>
+              </Button>
+            </div>
+          </ButtonSet>
         </div>
         <span
           className="bx--visually-hidden"

@@ -27,53 +27,19 @@ export default class TimePicker extends Component {
     className: PropTypes.string,
 
     /**
+     * Specify whether the <input> should be disabled
+     */
+    disabled: PropTypes.bool,
+
+    /**
+     * Specify whether you want the underlying label to be visually hidden
+     */
+    hideLabel: PropTypes.bool,
+
+    /**
      * Specify a custom `id` for the <input>
      */
     id: PropTypes.string.isRequired,
-
-    /**
-     * Provide the text that will be read by a screen reader when visiting this
-     * control
-     */
-    labelText: PropTypes.node,
-
-    /**
-     * Optionally provide an `onClick` handler that is called whenever the
-     * <input> is clicked
-     */
-    onClick: PropTypes.func,
-
-    /**
-     * Optionally provide an `onChange` handler that is called whenever <input>
-     * is updated
-     */
-    onChange: PropTypes.func,
-
-    /**
-     * Optionally provide an `onBlur` handler that is called whenever the
-     * <input> loses focus
-     */
-    onBlur: PropTypes.func,
-
-    /**
-     * Specify the type of the <input>
-     */
-    type: PropTypes.string,
-
-    /**
-     * Specify the regular expression working as the pattern of the time string in <input>
-     */
-    pattern: PropTypes.string,
-
-    /**
-     * Specify the placeholder attribute for the <input>
-     */
-    placeholder: PropTypes.string,
-
-    /**
-     * Specify the maximum length of the time string in <input>
-     */
-    maxLength: PropTypes.number,
 
     /**
      * Specify whether the control is currently invalid
@@ -86,24 +52,58 @@ export default class TimePicker extends Component {
     invalidText: PropTypes.string,
 
     /**
-     * Specify whether you want the underlying label to be visually hidden
+     * Provide the text that will be read by a screen reader when visiting this
+     * control
      */
-    hideLabel: PropTypes.bool,
-
-    /**
-     * Specify whether the <input> should be disabled
-     */
-    disabled: PropTypes.bool,
-
-    /**
-     * Specify the value of the <input>
-     */
-    value: PropTypes.string,
+    labelText: PropTypes.node,
 
     /**
      * `true` to use the light version.
      */
     light: PropTypes.bool,
+
+    /**
+     * Specify the maximum length of the time string in <input>
+     */
+    maxLength: PropTypes.number,
+
+    /**
+     * Optionally provide an `onBlur` handler that is called whenever the
+     * <input> loses focus
+     */
+    onBlur: PropTypes.func,
+
+    /**
+     * Optionally provide an `onChange` handler that is called whenever <input>
+     * is updated
+     */
+    onChange: PropTypes.func,
+
+    /**
+     * Optionally provide an `onClick` handler that is called whenever the
+     * <input> is clicked
+     */
+    onClick: PropTypes.func,
+
+    /**
+     * Specify the regular expression working as the pattern of the time string in <input>
+     */
+    pattern: PropTypes.string,
+
+    /**
+     * Specify the placeholder attribute for the <input>
+     */
+    placeholder: PropTypes.string,
+
+    /**
+     * Specify the type of the <input>
+     */
+    type: PropTypes.string,
+
+    /**
+     * Specify the value of the <input>
+     */
+    value: PropTypes.string,
   };
 
   static defaultProps = {
@@ -157,9 +157,9 @@ export default class TimePicker extends Component {
         className,
         {
           [`${prefix}--text-input--light`]: light,
-          [`${prefix}--text-input--invalid`]: invalid,
         }
       ),
+
       onChange: (evt) => {
         if (!other.disabled) {
           this.setState({
@@ -195,6 +195,7 @@ export default class TimePicker extends Component {
     const timePickerClasses = classNames({
       [`${prefix}--time-picker`]: true,
       [`${prefix}--time-picker--light`]: light,
+      [`${prefix}--time-picker--invalid`]: invalid,
       [className]: className,
     });
 

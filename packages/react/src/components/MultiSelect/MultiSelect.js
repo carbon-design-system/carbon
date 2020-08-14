@@ -195,6 +195,7 @@ const MultiSelect = React.forwardRef(function MultiSelect(
           <WarningFilled16 className={`${prefix}--list-box__invalid-icon`} />
         )}
         <button
+          type="button"
           ref={ref}
           className={`${prefix}--list-box__field`}
           disabled={disabled}
@@ -258,9 +259,19 @@ MultiSelect.propTypes = {
   ...sortingPropTypes,
 
   /**
+   * Specify the direction of the multiselect dropdown. Can be either top or bottom.
+   */
+  direction: PropTypes.oneOf(['top', 'bottom']),
+
+  /**
    * Disable the control
    */
   disabled: PropTypes.bool,
+
+  /**
+   * Additional props passed to Downshift
+   */
+  downshiftProps: PropTypes.shape(Downshift.propTypes),
 
   /**
    * Specify a custom `id`
@@ -268,16 +279,20 @@ MultiSelect.propTypes = {
   id: PropTypes.string.isRequired,
 
   /**
-   * We try to stay as generic as possible here to allow individuals to pass
-   * in a collection of whatever kind of data structure they prefer
-   */
-  items: PropTypes.array.isRequired,
-
-  /**
    * Allow users to pass in arbitrary items from their collection that are
    * pre-selected
    */
   initialSelectedItems: PropTypes.array,
+
+  /**
+   * Is the current selection invalid?
+   */
+  invalid: PropTypes.bool,
+
+  /**
+   * If invalid, what is the error?
+   */
+  invalidText: PropTypes.string,
 
   /**
    * Helper function passed to downshift that allows the library to render a
@@ -287,10 +302,21 @@ MultiSelect.propTypes = {
   itemToString: PropTypes.func,
 
   /**
+   * We try to stay as generic as possible here to allow individuals to pass
+   * in a collection of whatever kind of data structure they prefer
+   */
+  items: PropTypes.array.isRequired,
+
+  /**
    * Generic `label` that will be used as the textual representation of what
    * this field is for
    */
   label: PropTypes.node.isRequired,
+
+  /**
+   * `true` to use the light version.
+   */
+  light: PropTypes.bool,
 
   /**
    * Specify the locale of the control. Used for the default `compareItems`
@@ -305,44 +331,9 @@ MultiSelect.propTypes = {
   onChange: PropTypes.func,
 
   /**
-   * Specify 'inline' to create an inline multi-select.
-   */
-  type: PropTypes.oneOf(['default', 'inline']),
-
-  /**
-   * Specify the size of the ListBox. Currently supports either `sm`, `lg` or `xl` as an option.
-   */
-  size: ListBoxPropTypes.ListBoxSize,
-
-  /**
-   * Specify title to show title on hover
-   */
-  useTitleInItem: PropTypes.bool,
-
-  /**
-   * `true` to use the light version.
-   */
-  light: PropTypes.bool,
-
-  /**
-   * Is the current selection invalid?
-   */
-  invalid: PropTypes.bool,
-
-  /**
-   * If invalid, what is the error?
-   */
-  invalidText: PropTypes.string,
-
-  /**
    * Initialize the component with an open(`true`)/closed(`false`) menu.
    */
   open: PropTypes.bool,
-
-  /**
-   * Callback function for translating ListBoxMenuIcon SVG title
-   */
-  translateWithId: PropTypes.func,
 
   /**
    * Specify feedback (mode) of the selection.
@@ -353,14 +344,30 @@ MultiSelect.propTypes = {
   selectionFeedback: PropTypes.oneOf(['top', 'fixed', 'top-after-reopen']),
 
   /**
-   * Additional props passed to Downshift
+   * Specify the size of the ListBox. Currently supports either `sm`, `lg` or `xl` as an option.
    */
-  downshiftProps: PropTypes.shape(Downshift.propTypes),
+  size: ListBoxPropTypes.ListBoxSize,
 
   /**
-   * Specify the direction of the multiselect dropdown. Can be either top or bottom.
+   * Provide text to be used in a `<label>` element that is tied to the
+   * multiselect via ARIA attributes.
    */
-  direction: PropTypes.oneOf(['top', 'bottom']),
+  titleText: PropTypes.string,
+
+  /**
+   * Callback function for translating ListBoxMenuIcon SVG title
+   */
+  translateWithId: PropTypes.func,
+
+  /**
+   * Specify 'inline' to create an inline multi-select.
+   */
+  type: PropTypes.oneOf(['default', 'inline']),
+
+  /**
+   * Specify title to show title on hover
+   */
+  useTitleInItem: PropTypes.bool,
 };
 
 MultiSelect.defaultProps = {

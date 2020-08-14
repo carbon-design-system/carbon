@@ -1,14 +1,28 @@
-/**
- * Copyright IBM Corp. 2016, 2018
- *
- * This source code is licensed under the Apache-2.0 license found in the
- * LICENSE file in the root directory of this source tree.
- */
-
-import { storiesOf } from '@storybook/react';
 import { withKnobs, boolean, select } from '@storybook/addon-knobs';
 import { withReadme } from 'storybook-readme';
 import readme from './README.md';
+import DataTable, {
+  Table,
+  TableActionList,
+  TableBatchAction,
+  TableBatchActions,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableExpandHeader,
+  TableExpandRow,
+  TableExpandedRow,
+  TableHead,
+  TableHeader,
+  TableRow,
+  TableSelectAll,
+  TableSelectRow,
+  TableToolbar,
+  TableToolbarAction,
+  TableToolbarContent,
+  TableToolbarSearch,
+  TableToolbarMenu,
+} from '../DataTable';
 
 const readmeURL = 'https://bit.ly/2Z9PGsC';
 
@@ -22,210 +36,253 @@ const props = () => ({
   stickyHeader: boolean('Sticky header (experimental)', false),
 });
 
-storiesOf('DataTable', module)
-  .addDecorator(withKnobs)
-  .add(
-    'default',
-    withReadme(readme, () => require('./stories/default').default(props())),
-    {
-      info: {
-        /* eslint-disable no-useless-escape */
-        text: `
-          Data Tables are used to represent a collection of resources, displaying a
-          subset of their fields in columns, or headers. The \`DataTable\` component
-          that we export from Carbon requires two props to be passed in: \`rows\`
-          and \`headers\`.
-          You can find more detailed information surrounding usage of this component
-          at the following url: ${readmeURL}
-        `,
-        /* eslint-enable no-useless-escape */
-      },
-    }
-  )
-  .add(
-    'with toolbar',
-    withReadme(readme, () =>
-      require('./stories/with-toolbar').default(props())
-    ),
-    {
-      info: {
-        text: `
-        DataTable with action menu and filtering.
+export default {
+  title: 'DataTable',
+  decorators: [withKnobs],
 
-        You can find more detailed information surrounding usage of this component
-        at the following url: ${readmeURL}
-      `,
-      },
-    }
-  )
-  .add(
-    'with sorting',
-    withReadme(readme, () =>
-      require('./stories/with-sorting').default(props())
-    ),
-    {
-      info: {
-        text: `
-        DataTable with sorting
+  parameters: {
+    component: DataTable,
 
-        You can find more detailed information surrounding usage of this component
-        at the following url: ${readmeURL}
-      `,
-      },
-    }
-  )
-  .add(
-    'with selection',
-    withReadme(readme, () =>
-      require('./stories/with-selection').default(props())
-    ),
-    {
-      info: {
-        text: `
-        DataTable with selection
+    subcomponents: {
+      Table,
+      TableActionList,
+      TableBatchAction,
+      TableBatchActions,
+      TableBody,
+      TableCell,
+      TableContainer,
+      TableExpandHeader,
+      TableExpandRow,
+      TableExpandedRow,
+      TableHead,
+      TableHeader,
+      TableRow,
+      TableSelectAll,
+      TableSelectRow,
+      TableToolbar,
+      TableToolbarAction,
+      TableToolbarContent,
+      TableToolbarSearch,
+      TableToolbarMenu,
+    },
+  },
+};
 
-        You can find more detailed information surrounding usage of this component
-        at the following url: ${readmeURL}
-      `,
-      },
-    }
-  )
-  .add(
-    'with radio button selection',
-    withReadme(readme, () =>
-      require('./stories/with-selection--radio').default(props())
-    ),
-    {
-      info: {
-        text: `
-        DataTable with radio button selection
+export const Default = withReadme(readme, () =>
+  require('./stories/default').default(props())
+);
 
-        You can find more detailed information surrounding usage of this component
-        at the following url: ${readmeURL}
-      `,
-      },
-    }
-  )
-  .add(
-    'with expansion',
-    withReadme(readme, () =>
-      require('./stories/with-expansion').default(props())
-    ),
-    {
-      info: {
-        text: `
-          DataTable with expansion
+Default.storyName = 'default';
 
-          You can find more detailed information surrounding usage of this component
-          at the following url: ${readmeURL}
-        `,
-      },
-    }
-  )
-  .add(
-    'with batch expansion',
-    withReadme(readme, () =>
-      require('./stories/with-batch-expansion').default(props())
-    ),
-    {
-      info: {
-        text: `
-          DataTable with batch expansion
+Default.parameters = {
+  info: {
+    /* eslint-disable no-useless-escape */
+    text: `
+      Data Tables are used to represent a collection of resources, displaying a
+      subset of their fields in columns, or headers. The \`DataTable\` component
+      that we export from Carbon requires two props to be passed in: \`rows\`
+      and \`headers\`.
+      You can find more detailed information surrounding usage of this component
+      at the following url: ${readmeURL}
+    `,
+    /* eslint-enable no-useless-escape */
+  },
+};
 
-          You can find more detailed information surrounding usage of this component
-          at the following url: ${readmeURL}
-        `,
-      },
-    }
-  )
-  .add(
-    'with batch actions',
-    withReadme(readme, () =>
-      require('./stories/with-batch-actions').default(props())
-    ),
-    {
-      info: {
-        text: `
-          Uses <TableToolbar> alongside <TableBatchActions> and <TableBatchAction>
-          to create the toolbar and placeholder for where the batch action menu will
-          be displayed.
+export const WithToolbar = withReadme(readme, () =>
+  require('./stories/with-toolbar').default(props())
+);
 
-          You can use the \`getBatchActionProps\` prop getter on the
-          <TableBatchActions> component to have it wire up the ghost menu for you.
+WithToolbar.storyName = 'with toolbar';
 
-          Individual <TableBatchAction> components take in any kind of event handler
-          prop that you would expect to use, like \`onClick\`. You can use these
-          alongside the \`selectedRows\` property in your \`render\` prop function
-          to pass along this info to your batch action handler.
+WithToolbar.parameters = {
+  info: {
+    text: `
+    DataTable with action menu and filtering.
 
-          You can find more detailed information surrounding usage of this component
-          at the following url: ${readmeURL}
-        `,
-      },
-    }
-  )
-  .add(
-    'with dynamic content',
-    withReadme(readme, () =>
-      require('./stories/with-dynamic-content').default(props())
-    ),
-    {
-      info: {
-        text: `
-        Showcases DataTable behavior when rows are added to the component,
-        and when cell data changes dynamically.
-      `,
-      },
-    }
-  )
-  .add(
-    'with boolean column',
-    withReadme(readme, () =>
-      require('./stories/with-boolean-column').default(props())
-    ),
-    {
-      info: {
-        text: `
-        DataTable with toolbar and filtering with column has boolean value.
-      `,
-      },
-    }
-  )
-  .add(
-    'with options',
-    withReadme(readme, () =>
-      require('./stories/with-options').default(props())
-    ),
-    {
-      info: {
-        text: `
-        DataTable with options like disabled, isSelected, isExpanded etc.
+    You can find more detailed information surrounding usage of this component
+    at the following url: ${readmeURL}
+  `,
+  },
+};
 
-        You can find more detailed information surrounding usage of this component
-        at the following url: ${readmeURL}
-      `,
-      },
-    }
-  )
-  .add(
-    'with overflow menu',
-    withReadme(readme, () =>
-      require('./stories/with-overflow-menu').default({
-        ...props(),
-        overflowMenuOnHover: boolean(
-          'Show overflow menu on hover (overflowMenuOnHover)',
-          false
-        ),
-      })
-    ),
-    {
-      info: {
-        text: `
-      DataTable with Overflow menus added.
+export const WithSorting = withReadme(readme, () =>
+  require('./stories/with-sorting').default(props())
+);
+
+WithSorting.storyName = 'with sorting';
+
+WithSorting.parameters = {
+  info: {
+    text: `
+    DataTable with sorting
+
+    You can find more detailed information surrounding usage of this component
+    at the following url: ${readmeURL}
+  `,
+  },
+};
+
+export const WithSelection = withReadme(readme, () =>
+  require('./stories/with-selection').default(props())
+);
+
+WithSelection.storyName = 'with selection';
+
+WithSelection.parameters = {
+  info: {
+    text: `
+    DataTable with selection
+
+    You can find more detailed information surrounding usage of this component
+    at the following url: ${readmeURL}
+  `,
+  },
+};
+
+export const WithRadioButtonSelection = withReadme(readme, () =>
+  require('./stories/with-selection--radio').default(props())
+);
+
+WithRadioButtonSelection.storyName = 'with radio button selection';
+
+WithRadioButtonSelection.parameters = {
+  info: {
+    text: `
+    DataTable with radio button selection
+
+    You can find more detailed information surrounding usage of this component
+    at the following url: ${readmeURL}
+  `,
+  },
+};
+
+export const WithExpansion = withReadme(readme, () =>
+  require('./stories/with-expansion').default(props())
+);
+
+WithExpansion.storyName = 'with expansion';
+
+WithExpansion.parameters = {
+  info: {
+    text: `
+      DataTable with expansion
 
       You can find more detailed information surrounding usage of this component
       at the following url: ${readmeURL}
     `,
-      },
-    }
-  );
+  },
+};
+
+export const WithBatchExpansion = withReadme(readme, () =>
+  require('./stories/with-batch-expansion').default(props())
+);
+
+WithBatchExpansion.storyName = 'with batch expansion';
+
+WithBatchExpansion.parameters = {
+  info: {
+    text: `
+      DataTable with batch expansion
+
+      You can find more detailed information surrounding usage of this component
+      at the following url: ${readmeURL}
+    `,
+  },
+};
+
+export const WithBatchActions = withReadme(readme, () =>
+  require('./stories/with-batch-actions').default(props())
+);
+
+WithBatchActions.storyName = 'with batch actions';
+
+WithBatchActions.parameters = {
+  info: {
+    text: `
+      Uses <TableToolbar> alongside <TableBatchActions> and <TableBatchAction>
+      to create the toolbar and placeholder for where the batch action menu will
+      be displayed.
+
+      You can use the \`getBatchActionProps\` prop getter on the
+      <TableBatchActions> component to have it wire up the ghost menu for you.
+
+      Individual <TableBatchAction> components take in any kind of event handler
+      prop that you would expect to use, like \`onClick\`. You can use these
+      alongside the \`selectedRows\` property in your \`render\` prop function
+      to pass along this info to your batch action handler.
+
+      You can find more detailed information surrounding usage of this component
+      at the following url: ${readmeURL}
+    `,
+  },
+};
+
+export const WithDynamicContent = withReadme(readme, () =>
+  require('./stories/with-dynamic-content').default(props())
+);
+
+WithDynamicContent.storyName = 'with dynamic content';
+
+WithDynamicContent.parameters = {
+  info: {
+    text: `
+    Showcases DataTable behavior when rows are added to the component,
+    and when cell data changes dynamically.
+  `,
+  },
+};
+
+export const WithBooleanColumn = withReadme(readme, () =>
+  require('./stories/with-boolean-column').default(props())
+);
+
+WithBooleanColumn.storyName = 'with boolean column';
+
+WithBooleanColumn.parameters = {
+  info: {
+    text: `
+    DataTable with toolbar and filtering with column has boolean value.
+  `,
+  },
+};
+
+export const WithOptions = withReadme(readme, () =>
+  require('./stories/with-options').default(props())
+);
+
+WithOptions.storyName = 'with options';
+
+WithOptions.parameters = {
+  info: {
+    text: `
+    DataTable with options like disabled, isSelected, isExpanded etc.
+
+    You can find more detailed information surrounding usage of this component
+    at the following url: ${readmeURL}
+  `,
+  },
+};
+
+export const WithOverflowMenu = withReadme(readme, () =>
+  require('./stories/with-overflow-menu').default({
+    ...props(),
+    overflowMenuOnHover: boolean(
+      'Show overflow menu on hover (overflowMenuOnHover)',
+      false
+    ),
+  })
+);
+
+WithOverflowMenu.storyName = 'with overflow menu';
+
+WithOverflowMenu.parameters = {
+  info: {
+    text: `
+  DataTable with Overflow menus added.
+
+  You can find more detailed information surrounding usage of this component
+  at the following url: ${readmeURL}
+`,
+  },
+};

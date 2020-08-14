@@ -52,14 +52,14 @@ const CodePage = ({
 
 CodePage.propTypes = {
   /**
-   * The component data.
-   */
-  metadata: PropTypes.shape().isRequired,
-
-  /**
    * `true` to hide "full render" link.
    */
   hideViewFullRender: PropTypes.bool,
+
+  /**
+   * The component data.
+   */
+  metadata: PropTypes.shape().isRequired,
 
   /**
    * `true` to use static full render page.

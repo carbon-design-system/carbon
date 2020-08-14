@@ -11,7 +11,7 @@ exports[`DataTable.TableBatchAction should render 1`] = `
     }
   }
 >
-  <ForwardRef(Button)
+  <Button
     className="custom-class"
     disabled={false}
     iconDescription="test"
@@ -22,7 +22,10 @@ exports[`DataTable.TableBatchAction should render 1`] = `
         "render": [Function],
       }
     }
+    size="default"
     tabIndex={0}
+    tooltipAlignment="center"
+    tooltipPosition="top"
     type="button"
   >
     <button
@@ -72,6 +75,6 @@ exports[`DataTable.TableBatchAction should render 1`] = `
         </Icon>
       </ForwardRef(AddFilled16)>
     </button>
-  </ForwardRef(Button)>
+  </Button>
 </TableBatchAction>
 `;

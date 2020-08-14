@@ -62,13 +62,13 @@ HeaderMenuButton.propTypes = {
    */
   className: PropTypes.string,
 
+  isActive: PropTypes.bool,
+
   /**
    * Optionally provide an onClick handler that is called when the underlying
    * button fires it's onclick event
    */
   onClick: PropTypes.func,
-
-  isActive: PropTypes.bool,
 };
 
 export default HeaderMenuButton;

@@ -57,6 +57,11 @@ Filename.propTypes = {
   iconDescription: PropTypes.string,
 
   /**
+   * Specify if the file is invalid
+   */
+  invalid: PropTypes.bool,
+
+  /**
    * Status of the file upload
    */
   status: PropTypes.oneOf(['edit', 'complete', 'uploading']),
@@ -65,11 +70,6 @@ Filename.propTypes = {
    * Provide a custom tabIndex value for the <Filename>
    */
   tabIndex: PropTypes.string,
-
-  /**
-   * Specify if the file is invalid
-   */
-  invalid: PropTypes.bool,
 };
 
 Filename.defaultProps = {

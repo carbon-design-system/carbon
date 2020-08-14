@@ -26,11 +26,13 @@ module.exports = {
   },
   rules: {
     // react
+    'react/button-has-type': 'error',
     'react/jsx-uses-vars': 1,
     'react/jsx-uses-react': 1,
     'react/no-find-dom-node': 1,
     'react/jsx-no-useless-fragment': 2,
     'react/no-typos': 2,
+    'react/sort-prop-types': 2,
 
     // react-hooks
     'react-hooks/rules-of-hooks': 2,

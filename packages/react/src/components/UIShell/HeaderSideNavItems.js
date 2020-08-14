@@ -29,6 +29,11 @@ const HeaderSideNavItems = ({
 
 HeaderSideNavItems.propTypes = {
   /**
+   * The child nodes to be rendered
+   */
+  children: PropTypes.node,
+
+  /**
    * Optionally provide a custom class name that is applied to the underlying
    * button
    */
@@ -39,11 +44,6 @@ HeaderSideNavItems.propTypes = {
    * between original sidenav items and header menu items. False by default.
    */
   hasDivider: PropTypes.bool,
-
-  /**
-   * The child nodes to be rendered
-   */
-  children: PropTypes.node,
 };
 
 HeaderSideNavItems.defaultProps = {

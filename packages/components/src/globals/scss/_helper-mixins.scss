@@ -47,6 +47,7 @@
 /// @group global-helpers
 @mixin placeholder-colors {
   color: $text-03;
+  opacity: 1;
 }
 
 /// Adds box shadow

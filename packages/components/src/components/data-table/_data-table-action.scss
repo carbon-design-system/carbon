@@ -367,6 +367,7 @@
     height: 100%;
     padding-right: $spacing-06;
     padding-left: $spacing-06;
+    overflow-x: auto;
     background-color: $interactive-01;
     transform: translate3d(0, 48px, 0);
     transition: transform $duration--fast-02 motion(standard, productive),
@@ -389,9 +390,6 @@
 
   //btns container
   .#{$prefix}--action-list {
-    position: absolute;
-    top: 0;
-    right: 0;
     display: flex;
   }
 
@@ -399,6 +397,10 @@
     min-width: 0;
     padding: $button-padding-ghost;
     color: $text-04;
+  }
+
+  .#{$prefix}--action-list .#{$prefix}--btn:disabled {
+    color: $disabled-03;
   }
 
   .#{$prefix}--action-list .#{$prefix}--btn .#{$prefix}--btn__icon {
@@ -467,8 +469,6 @@
 
   // items selected text
   .#{$prefix}--batch-summary {
-    position: absolute;
-    left: 0;
     display: flex;
     align-items: center;
     margin-left: $spacing-05;

@@ -12,11 +12,6 @@ import {
 class SideNav extends Component {
   static propTypes = {
     /**
-     * The array of component data.
-     */
-    items: PropTypes.arrayOf(PropTypes.shape()).isRequired,
-
-    /**
      * The ID of the selected component.
      */
     activeItemId: PropTypes.string,
@@ -25,6 +20,11 @@ class SideNav extends Component {
      * The CSS class names.
      */
     className: PropTypes.string,
+
+    /**
+     * The array of component data.
+     */
+    items: PropTypes.arrayOf(PropTypes.shape()).isRequired,
 
     /**
      * The handler for the `click` event for changing selection.

@@ -74,6 +74,7 @@ const TooltipDefinition = ({
       onMouseEnter={composeEventHandlers([onMouseEnter, handleMouseEnter])}
       onMouseLeave={composeEventHandlers([onMouseLeave, handleMouseLeave])}>
       <button
+        type="button"
         className={tooltipTriggerClasses}
         aria-describedby={tooltipId}
         onFocus={composeEventHandlers([onFocus, handleFocus])}>
@@ -91,6 +92,12 @@ const TooltipDefinition = ({
 
 TooltipDefinition.propTypes = {
   /**
+   * Specify the alignment (to the trigger button) of the tooltip.
+   * Can be one of: start, center, or end.
+   */
+  align: PropTypes.oneOf(['start', 'center', 'end']),
+
+  /**
    * Specify the tooltip trigger text that is rendered to the UI for the user to
    * interact with in order to display the tooltip.
    */
@@ -102,32 +109,15 @@ TooltipDefinition.propTypes = {
   className: PropTypes.string,
 
   /**
-   * The CSS class name of the trigger element
-   */
-  triggerClassName: PropTypes.string,
-
-  /**
    * Specify the direction of the tooltip. Can be either top or bottom.
    */
   direction: PropTypes.oneOf(['top', 'bottom']),
-
-  /**
-   * Specify the alignment (to the trigger button) of the tooltip.
-   * Can be one of: start, center, or end.
-   */
-  align: PropTypes.oneOf(['start', 'center', 'end']),
 
   /**
    * Optionally specify a custom id for the tooltip. If one is not provided, we
    * generate a unique id for you.
    */
   id: PropTypes.string,
-
-  /**
-   * Provide the text that will be displayed in the tooltip when it is rendered.
-   * TODO: rename this prop (will be a breaking change)
-   */
-  tooltipText: PropTypes.node.isRequired,
 
   /**
    * The event handler for the `focus` event.
@@ -143,6 +133,17 @@ TooltipDefinition.propTypes = {
    * The event handler for the `mouseleave` event.
    */
   onMouseLeave: PropTypes.func,
+
+  /**
+   * Provide the text that will be displayed in the tooltip when it is rendered.
+   * TODO: rename this prop (will be a breaking change)
+   */
+  tooltipText: PropTypes.node.isRequired,
+
+  /**
+   * The CSS class name of the trigger element
+   */
+  triggerClassName: PropTypes.string,
 };
 
 TooltipDefinition.defaultProps = {

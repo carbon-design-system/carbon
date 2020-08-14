@@ -6,7 +6,6 @@
  */
 
 import React from 'react';
-import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 
 import { withKnobs, boolean, number, text } from '@storybook/addon-knobs';
@@ -26,7 +25,6 @@ const props = {
     ),
     disabled: boolean('Disabled (disabled in <TimePicker>)', false),
     light: boolean('Light variant (light in <TimePicker>)', false),
-    hideLabel: boolean('No label (hideLabel in <TimePicker>)', false),
     labelText: text('Label text (labelText in <TimePicker>)', 'Select a time'),
     invalid: boolean(
       'Show form validation UI (invalid in <TimePicker>)',
@@ -54,30 +52,40 @@ const props = {
   }),
 };
 
-storiesOf('TimePicker', module)
-  .addDecorator(withKnobs)
-  .add(
-    'Default',
-    () => {
-      const selectProps = props.select();
-      return (
-        <TimePicker id="time-picker" {...props.timepicker()}>
-          <TimePickerSelect id="time-picker-select-1" {...selectProps}>
-            <SelectItem value="AM" text="AM" />
-            <SelectItem value="PM" text="PM" />
-          </TimePickerSelect>
-          <TimePickerSelect id="time-picker-select-2" {...selectProps}>
-            <SelectItem value="Time zone 1" text="Time zone 1" />
-            <SelectItem value="Time zone 2" text="Time zone 2" />
-          </TimePickerSelect>
-        </TimePicker>
-      );
+export default {
+  title: 'TimePicker',
+  decorators: [withKnobs],
+
+  parameters: {
+    component: TimePicker,
+
+    subcomponents: {
+      TimePickerSelect,
+      SelectItem,
     },
-    {
-      info: {
-        text: `
-            The time picker allow users to select a time.
-          `,
-      },
-    }
+  },
+};
+
+export const Default = () => {
+  const selectProps = props.select();
+  return (
+    <TimePicker id="time-picker" {...props.timepicker()}>
+      <TimePickerSelect id="time-picker-select-1" {...selectProps}>
+        <SelectItem value="AM" text="AM" />
+        <SelectItem value="PM" text="PM" />
+      </TimePickerSelect>
+      <TimePickerSelect id="time-picker-select-2" {...selectProps}>
+        <SelectItem value="Time zone 1" text="Time zone 1" />
+        <SelectItem value="Time zone 2" text="Time zone 2" />
+      </TimePickerSelect>
+    </TimePicker>
   );
+};
+
+Default.parameters = {
+  info: {
+    text: `
+        The time picker allow users to select a time.
+      `,
+  },
+};

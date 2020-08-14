@@ -196,6 +196,7 @@
   - [✅highlight [variable]](#highlight-variable)
   - [✅decorative-01 [variable]](#decorative-01-variable)
   - [✅hover-light-ui [variable]](#hover-light-ui-variable)
+  - [✅button-separator [variable]](#button-separator-variable)
   - [✅skeleton-01 [variable]](#skeleton-01-variable)
   - [✅skeleton-02 [variable]](#skeleton-02-variable)
   - [✅⚠️brand-01 [variable]](#brand-01-variable)
@@ -2278,6 +2279,7 @@ Generate a media query for the maximum width of the given styles
 - **Group**: [@carbon/layout](#carbonlayout)
 - **Used by**:
   - [carbon--breakpoint-between [mixin]](#carbon--breakpoint-between-mixin)
+  - [pagination [mixin]](#pagination-mixin)
   - [carbon-side-nav [mixin]](#carbon-side-nav-mixin)
 
 ### ✅carbon--breakpoint-between [mixin]
@@ -3383,10 +3385,8 @@ $carbon--spacing-02: 0.25rem;
   - `spacing-02`
 - **Used by**:
   - [checkbox [mixin]](#checkbox-mixin)
-  - [date-picker [mixin]](#date-picker-mixin)
   - [form [mixin]](#form-mixin)
   - [inline-notifications [mixin]](#inline-notifications-mixin)
-  - [number-input [mixin]](#number-input-mixin)
   - [pseudo-underline [mixin]](#pseudo-underline-mixin)
   - [tags [mixin]](#tags-mixin)
   - [tooltip [mixin]](#tooltip-mixin)
@@ -3768,9 +3768,9 @@ $spacing-05: $carbon--spacing-05;
   - [data-table-v2-action [mixin]](#data-table-v2-action-mixin)
   - [data-table-core [mixin]](#data-table-core-mixin)
   - [data-table-expandable [mixin]](#data-table-expandable-mixin)
-  - [data-table-sort [mixin]](#data-table-sort-mixin)
   - [modal [mixin]](#modal-mixin)
   - [pagination [mixin]](#pagination-mixin)
+  - [search [mixin]](#search-mixin)
   - [select [mixin]](#select-mixin)
   - [tabs [mixin]](#tabs-mixin)
   - [carbon-switcher [mixin]](#carbon-switcher-mixin)
@@ -3811,6 +3811,7 @@ $spacing-07: $carbon--spacing-07;
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
   - [modal [mixin]](#modal-mixin)
+  - [search [mixin]](#search-mixin)
   - [select [mixin]](#select-mixin)
   - [carbon-switcher [mixin]](#carbon-switcher-mixin)
 
@@ -3831,6 +3832,7 @@ $spacing-08: $carbon--spacing-08;
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
   - [dropdown [mixin]](#dropdown-mixin)
+  - [search [mixin]](#search-mixin)
 
 ### ✅spacing-09 [variable]
 
@@ -3850,6 +3852,7 @@ $spacing-09: $carbon--spacing-09;
   - [carbon--theme [mixin]](#carbon--theme-mixin)
   - [data-table-v2-action [mixin]](#data-table-v2-action-mixin)
   - [modal [mixin]](#modal-mixin)
+  - [search [mixin]](#search-mixin)
   - [select [mixin]](#select-mixin)
   - [tabs [mixin]](#tabs-mixin)
   - [carbon-side-nav [mixin]](#carbon-side-nav-mixin)
@@ -4225,6 +4228,7 @@ Define theme variables from a map of tokens
   $highlight: map-get($theme, 'highlight') !global;
   $decorative-01: map-get($theme, 'decorative-01') !global;
   $hover-light-ui: map-get($theme, 'hover-light-ui') !global;
+  $button-separator: map-get($theme, 'button-separator') !global;
   $skeleton-01: map-get($theme, 'skeleton-01') !global;
   $skeleton-02: map-get($theme, 'skeleton-02') !global;
   $brand-01: map-get($theme, 'brand-01') !global;
@@ -4536,6 +4540,10 @@ Define theme variables from a map of tokens
     $hover-light-ui: var(
       --#{$custom-property-prefix}-hover-light-ui,
       map-get($theme, 'hover-light-ui')
+    ) !global;
+    $button-separator: var(
+      --#{$custom-property-prefix}-button-separator,
+      map-get($theme, 'button-separator')
     ) !global;
     $skeleton-01: var(
       --#{$custom-property-prefix}-skeleton-01,
@@ -5227,6 +5235,19 @@ Define theme variables from a map of tokens
       @include custom-property(
         'hover-light-ui',
         map-get($theme, 'hover-light-ui')
+      );
+    }
+
+    @if should-emit(
+      $theme,
+      $parent-carbon-theme,
+      'button-separator',
+      $emit-difference
+    )
+    {
+      @include custom-property(
+        'button-separator',
+        map-get($theme, 'button-separator')
       );
     }
 
@@ -6013,6 +6034,7 @@ Define theme variables from a map of tokens
   - [highlight [variable]](#highlight-variable)
   - [decorative-01 [variable]](#decorative-01-variable)
   - [hover-light-ui [variable]](#hover-light-ui-variable)
+  - [button-separator [variable]](#button-separator-variable)
   - [skeleton-01 [variable]](#skeleton-01-variable)
   - [skeleton-02 [variable]](#skeleton-02-variable)
   - [brand-01 [variable]](#brand-01-variable)
@@ -6169,6 +6191,7 @@ $carbon--theme--g90: map-merge(
     highlight: #0043ce,
     decorative-01: #6f6f6f,
     hover-light-ui: #6f6f6f,
+    button-separator: #161616,
     skeleton-01: #353535,
     skeleton-02: #525252,
     brand-02: #6f6f6f,
@@ -6244,6 +6267,7 @@ $carbon--theme--g100: map-merge(
     highlight: #002d9c,
     decorative-01: #525252,
     hover-light-ui: #525252,
+    button-separator: #161616,
     skeleton-01: #353535,
     skeleton-02: #393939,
     brand-02: #6f6f6f,
@@ -6410,6 +6434,7 @@ $carbon--theme: (
   highlight: if(global-variable-exists('highlight'), $highlight, map-get($carbon--theme--white, 'highlight')),
   decorative-01: if(global-variable-exists('decorative-01'), $decorative-01, map-get($carbon--theme--white, 'decorative-01')),
   hover-light-ui: if(global-variable-exists('hover-light-ui'), $hover-light-ui, map-get($carbon--theme--white, 'hover-light-ui')),
+  button-separator: if(global-variable-exists('button-separator'), $button-separator, map-get($carbon--theme--white, 'button-separator')),
   skeleton-01: if(global-variable-exists('skeleton-01'), $skeleton-01, map-get($carbon--theme--white, 'skeleton-01')),
   skeleton-02: if(global-variable-exists('skeleton-02'), $skeleton-02, map-get($carbon--theme--white, 'skeleton-02')),
   brand-01: if(global-variable-exists('brand-01'), $brand-01, map-get($carbon--theme--white, 'brand-01')),
@@ -6998,7 +7023,6 @@ $text-05: if(
 - **Type**: `{undefined}`
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
-  - [combo-box [mixin]](#combo-box-mixin)
   - [date-picker [mixin]](#date-picker-mixin)
   - [search [mixin]](#search-mixin)
   - [time-picker [mixin]](#time-picker-mixin)
@@ -7025,11 +7049,9 @@ $text-error: if(
 - **Type**: `{undefined}`
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
-  - [date-picker [mixin]](#date-picker-mixin)
   - [dropdown [mixin]](#dropdown-mixin)
   - [file-uploader [mixin]](#file-uploader-mixin)
   - [form [mixin]](#form-mixin)
-  - [number-input [mixin]](#number-input-mixin)
 
 ### ✅icon-01 [variable]
 
@@ -7889,6 +7911,7 @@ $hover-ui: if(
   - [snippet [mixin]](#snippet-mixin)
   - [content-switcher [mixin]](#content-switcher-mixin)
   - [data-table-v2-action [mixin]](#data-table-v2-action-mixin)
+  - [data-table-core [mixin]](#data-table-core-mixin)
   - [data-table-expandable [mixin]](#data-table-expandable-mixin)
   - [dropdown [mixin]](#dropdown-mixin)
   - [listbox [mixin]](#listbox-mixin)
@@ -8202,7 +8225,6 @@ $disabled-02: if(
   - [button-base [mixin]](#button-base-mixin)
   - [button-theme [mixin]](#button-theme-mixin)
   - [checkbox [mixin]](#checkbox-mixin)
-  - [combo-box [mixin]](#combo-box-mixin)
   - [content-switcher [mixin]](#content-switcher-mixin)
   - [date-picker [mixin]](#date-picker-mixin)
   - [dropdown [mixin]](#dropdown-mixin)
@@ -8249,6 +8271,7 @@ $disabled-03: if(
   - [button [mixin]](#button-mixin)
   - [button-base [mixin]](#button-base-mixin)
   - [content-switcher [mixin]](#content-switcher-mixin)
+  - [data-table-v2-action [mixin]](#data-table-v2-action-mixin)
   - [tabs [mixin]](#tabs-mixin)
 
 ### ✅highlight [variable]
@@ -8326,6 +8349,30 @@ $hover-light-ui: if(
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
   - [content-switcher [mixin]](#content-switcher-mixin)
+
+### ✅button-separator [variable]
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$button-separator: if(
+  global-variable-exists('carbon--theme') and map-has-key(
+      $carbon--theme,
+      'button-separator'
+    ),
+  map-get($carbon--theme, 'button-separator'),
+  #e0e0e0
+);
+```
+
+</details>
+
+- **Group**: [@carbon/themes](#carbonthemes)
+- **Type**: `{undefined}`
+- **Used by**:
+  - [carbon--theme [mixin]](#carbon--theme-mixin)
+  - [button [mixin]](#button-mixin)
 
 ### ✅skeleton-01 [variable]
 
@@ -13823,17 +13870,50 @@ Button styles
     display: flex;
   }
 
-  .#{$prefix}--btn-set > .#{$prefix}--btn {
+  .#{$prefix}--btn-set--stacked {
+    flex-direction: column;
+  }
+
+  .#{$prefix}--btn-set .#{$prefix}--btn {
     width: 100%;
     // 196px from design kit
     max-width: rem(196px);
+
+    &:not(:focus) {
+      box-shadow: rem(-1px) 0 0 0 $button-separator;
+    }
+
+    &:first-of-type:not(:focus) {
+      box-shadow: inherit;
+    }
   }
 
-  .#{$prefix}--btn--secondary.#{$prefix}--btn--disabled
-    + .#{$prefix}--btn--primary.#{$prefix}--btn--disabled,
-  .#{$prefix}--btn--tertiary.#{$prefix}--btn--disabled
-    + .#{$prefix}--btn--danger.#{$prefix}--btn--disabled {
+  .#{$prefix}--btn-set .#{$prefix}--btn:focus + .#{$prefix}--btn {
+    box-shadow: inherit;
+  }
+
+  .#{$prefix}--btn-set--stacked .#{$prefix}--btn:not(:focus) {
+    box-shadow: 0 rem(-1px) 0 0 $button-separator;
+  }
+
+  .#{$prefix}--btn-set--stacked .#{$prefix}--btn:first-of-type:not(:focus) {
+    box-shadow: inherit;
+  }
+
+  .#{$prefix}--btn-set .#{$prefix}--btn.#{$prefix}--btn--disabled {
     box-shadow: rem(-1px) 0 0 0 $disabled-03;
+
+    &:first-of-type {
+      box-shadow: none;
+    }
+  }
+
+  .#{$prefix}--btn-set--stacked .#{$prefix}--btn.#{$prefix}--btn--disabled {
+    box-shadow: 0 rem(-1px) 0 0 $disabled-03;
+
+    &:first-of-type {
+      box-shadow: none;
+    }
   }
 
   .#{$prefix}--btn {
@@ -14091,6 +14171,7 @@ Button styles
   - [button-base [mixin]](#button-base-mixin)
   - [button-theme [mixin]](#button-theme-mixin)
   - [prefix [variable]](#prefix-variable)
+  - [button-separator [variable]](#button-separator-variable)
   - [disabled-03 [variable]](#disabled-03-variable)
   - [interactive-01 [variable]](#interactive-01-variable)
   - [text-04 [variable]](#text-04-variable)
@@ -14527,6 +14608,15 @@ Code snippet styles
     padding: 0 $spacing-03;
   }
 
+  .#{$prefix}--snippet--inline.#{$prefix}--snippet--no-copy {
+    display: inline-block;
+
+    &:hover {
+      background-color: $ui-01;
+      cursor: auto;
+    }
+  }
+
   // Single Line Snippet
   .#{$prefix}--snippet--single {
     @include bx--snippet;
@@ -14534,8 +14624,15 @@ Code snippet styles
     min-width: rem(320px);
     max-width: rem(760px);
     height: $carbon--spacing-08;
-    padding: 0 $carbon--spacing-08 0 0;
-    border: none;
+    padding-right: $carbon--spacing-08;
+  }
+
+  .#{$prefix}--snippet--single.#{$prefix}--snippet--no-copy {
+    padding: 0;
+
+    &::after {
+      right: $carbon--spacing-05;
+    }
   }
 
   .#{$prefix}--snippet--single .#{$prefix}--snippet-container {
@@ -14577,7 +14674,6 @@ Code snippet styles
     min-width: rem(320px);
     max-width: 100%;
     padding: $carbon--spacing-05;
-    border: none;
   }
 
   //closed snippet container
@@ -14602,6 +14698,12 @@ Code snippet styles
     padding-right: $carbon--spacing-08;
     padding-bottom: rem(24px);
     overflow-x: scroll;
+  }
+
+  .#{$prefix}--snippet--multi.#{$prefix}--snippet--no-copy
+    .#{$prefix}--snippet-container
+    pre {
+    padding-right: 0;
   }
 
   // expanded pre
@@ -14911,7 +15013,6 @@ Code snippet base styles
   width: 100%;
   max-width: rem(600px);
   background: $snippet-background-color;
-  border: 1px solid $snippet-border-color;
 }
 ```
 
@@ -14932,18 +15033,8 @@ Combo box styles
 
 ```scss
 @mixin combo-box() {
-  .#{$prefix}--combo-box .#{$prefix}--text-input {
-    &::placeholder {
-      color: $text-05;
-    }
-
-    &[disabled]::placeholder {
-      color: $disabled-02;
-    }
-
-    &::-ms-clear {
-      display: none;
-    }
+  .#{$prefix}--combo-box .#{$prefix}--text-input::-ms-clear {
+    display: none;
   }
 
   .#{$prefix}--combo-box.#{$prefix}--list-box--expanded
@@ -14966,8 +15057,6 @@ Combo box styles
 - **Group**: [combo-box](#combo-box)
 - **Requires**:
   - [prefix [variable]](#prefix-variable)
-  - [text-05 [variable]](#text-05-variable)
-  - [disabled-02 [variable]](#disabled-02-variable)
   - [ui-03 [variable]](#ui-03-variable)
 
 ## content-switcher
@@ -15531,6 +15620,7 @@ Data table action styles
     height: 100%;
     padding-right: $spacing-06;
     padding-left: $spacing-06;
+    overflow-x: auto;
     background-color: $interactive-01;
     transform: translate3d(0, 48px, 0);
     transition: transform $duration--fast-02 motion(standard, productive), clip-path
@@ -15553,9 +15643,6 @@ Data table action styles
 
   //btns container
   .#{$prefix}--action-list {
-    position: absolute;
-    top: 0;
-    right: 0;
     display: flex;
   }
 
@@ -15563,6 +15650,10 @@ Data table action styles
     min-width: 0;
     padding: $button-padding-ghost;
     color: $text-04;
+  }
+
+  .#{$prefix}--action-list .#{$prefix}--btn:disabled {
+    color: $disabled-03;
   }
 
   .#{$prefix}--action-list .#{$prefix}--btn .#{$prefix}--btn__icon {
@@ -15631,8 +15722,6 @@ Data table action styles
 
   // items selected text
   .#{$prefix}--batch-summary {
-    position: absolute;
-    left: 0;
     display: flex;
     align-items: center;
     margin-left: $spacing-05;
@@ -15792,6 +15881,7 @@ Data table action styles
   - [spacing-06 [variable]](#spacing-06-variable)
   - [interactive-01 [variable]](#interactive-01-variable)
   - [text-04 [variable]](#text-04-variable)
+  - [disabled-03 [variable]](#disabled-03-variable)
   - [spacing-03 [variable]](#spacing-03-variable)
   - [icon-03 [variable]](#icon-03-variable)
 
@@ -15808,9 +15898,11 @@ Data table core styles
   // Container
   //----------------------------------------------------------------------------
   .#{$prefix}--data-table-container {
-    min-width: rem(500px);
     // Allow space for focus styles
     padding-top: $spacing-01;
+  }
+
+  .#{$prefix}--data-table-content {
     overflow-x: auto;
   }
 
@@ -16332,13 +16424,79 @@ Data table core styles
       will-change: transform;
     }
 
-    tr {
+    tr.#{$prefix}--parent-row.#{$prefix}--expandable-row {
       height: auto;
-      min-height: rem(48px);
+      min-height: 3rem;
+    }
+
+    tr.#{$prefix}--expandable-row:not(.#{$prefix}--parent-row) {
+      height: auto;
+    }
+
+    .#{$prefix}--table-expand {
+      max-width: rem(48px);
+    }
+
+    thead .#{$prefix}--table-expand {
+      align-items: center;
+    }
+
+    .#{$prefix}--parent-row {
+      min-height: 3rem;
+    }
+
+    // .#{$prefix}--parent-row td {
+    //   padding: 1rem;
+    // }
+
+    &:not(.#{$prefix}--data-table--compact):not(.#{$prefix}--data-table--tall):not(.#{$prefix}--data-table--short)
+      td:not(.#{$prefix}--table-column-menu):not(.#{$prefix}--table-column-checkbox) {
+      padding-top: rem(14px);
+    }
+
+    // Taken from L125 _data-table-expandable
+    // Used to hide white line when parent row is hovered when child is expanded
+    tr.#{$prefix}--parent-row.#{$prefix}--expandable-row:hover
+      + tr[data-child-row]
+      td {
+      border-top: 1px solid $hover-ui;
+    }
+
+    tr.#{$prefix}--expandable-row:last-of-type {
+      overflow: hidden;
     }
 
     tr.#{$prefix}--data-table--selected:first-of-type td {
       border-top: none;
+    }
+
+    // Selectable fix
+    thead th.#{$prefix}--table-column-checkbox,
+    tbody tr td.#{$prefix}--table-column-checkbox {
+      align-items: center;
+      width: rem(36px);
+      min-width: rem(36px);
+    }
+
+    &.#{$prefix}--data-table--tall thead th.#{$prefix}--table-column-checkbox,
+    &.#{$prefix}--data-table--tall td.#{$prefix}--table-column-checkbox {
+      align-items: flex-start;
+    }
+
+    // Overflow fix
+    /* When using sticky header, with a selection element in the first column, we need to set the last item to a fixed width to match the table body. We only want this to happen when the last table header does not have any text */
+    th.#{$prefix}--table-column-checkbox ~ th:last-of-type:empty {
+      max-width: rem(64px);
+    }
+
+    th:empty:not(.#{$prefix}--table-expand) {
+      max-width: 2.25rem;
+    }
+
+    td.#{$prefix}--table-column-menu {
+      align-items: center;
+      height: auto;
+      padding-top: 0;
     }
 
     //hides webkit scrollbar
@@ -16365,9 +16523,73 @@ Data table core styles
       min-width: 0;
     }
 
+    &.#{$prefix}--data-table--compact tr:not(.#{$prefix}--expandable-row),
+    &.#{$prefix}--data-table--short tr:not(.#{$prefix}--expandable-row),
+    &.#{$prefix}--data-table--tall tr:not(.#{$prefix}--expandable-row) {
+      height: auto;
+    }
+
+    // Compact
+    &.#{$prefix}--data-table--compact tr:not(.#{$prefix}--expandable-row) {
+      min-height: rem(24px);
+    }
+
+    // Short
+    &.#{$prefix}--data-table--short tr:not(.#{$prefix}--expandable-row) {
+      min-height: rem(32px);
+    }
+
+    // Tall
+    &.#{$prefix}--data-table--tall tr:not(.#{$prefix}--expandable-row) {
+      min-height: rem(64px);
+    }
+
+    // Expansion overrides
+    &.#{$prefix}--data-table--compact tr td.#{$prefix}--table-expand {
+      padding-top: rem(4px);
+    }
+
+    &.#{$prefix}--data-table--short tr td.#{$prefix}--table-expand {
+      padding-top: rem(8px);
+    }
+
     .#{$prefix}--table-header-label {
-      max-width: calc(100% - 10px);
       @include text-overflow;
+
+      max-width: calc(100% - 10px);
+      // Needed to reduce 1px jump when toggling between variations
+      padding-top: rem(15px);
+      padding-bottom: 1rem;
+      overflow-y: hidden;
+    }
+
+    &.#{$prefix}--data-table--compact th .#{$prefix}--table-header-label {
+      padding-top: rem(3px);
+      padding-bottom: 0;
+    }
+
+    &.#{$prefix}--data-table--short th .#{$prefix}--table-header-label {
+      padding-top: rem(8px);
+      padding-bottom: 0;
+    }
+
+    &.#{$prefix}--data-table--tall th .#{$prefix}--table-header-label {
+      padding-top: 1rem;
+    }
+
+    &.#{$prefix}--data-table--tall th.#{$prefix}--table-expand {
+      display: flex;
+      align-items: flex-start;
+    }
+
+    // With dynamic content overrides
+    &.#{$prefix}--data-table--compact
+      tr.#{$prefix}--parent-row
+      .#{$prefix}--table-column-checkbox,
+    &.#{$prefix}--data-table--short
+      tr.#{$prefix}--parent-row
+      .#{$prefix}--table-column-checkbox {
+      align-items: flex-start;
     }
   }
 
@@ -16409,6 +16631,7 @@ Data table core styles
   - [hover-selected-ui [variable]](#hover-selected-ui-variable)
   - [selected-ui [variable]](#selected-ui-variable)
   - [active-ui [variable]](#active-ui-variable)
+  - [hover-ui [variable]](#hover-ui-variable)
 
 ### ❌data-table-expandable [mixin]
 
@@ -16470,7 +16693,8 @@ Data table expandable styles
 
   tr.#{$prefix}--parent-row.#{$prefix}--expandable-row + tr[data-child-row] td {
     border-bottom: 1px solid $ui-03;
-    transition: all $duration--fast-02 motion(standard, productive);
+    transition: padding-bottom $duration--fast-02 motion(standard, productive), transform
+        $duration--fast-02 motion(standard, productive);
   }
 
   tr.#{$prefix}--parent-row.#{$prefix}--expandable-row
@@ -16660,7 +16884,7 @@ Data table expandable styles
     tr.#{$prefix}--parent-row.#{$prefix}--expandable-row
     + tr[data-child-row]
     td {
-    transition: all $duration--moderate-01 motion(standard, productive), border-bottom
+    transition: transform $duration--moderate-01 motion(standard, productive), border-bottom
         $duration--moderate-01 motion(standard, productive),
       border-top $duration--moderate-01 motion(standard, productive);
   }
@@ -16872,7 +17096,40 @@ Data table sort styles
   .#{$prefix}--data-table--sort th .#{$prefix}--table-sort__flex {
     display: flex;
     align-items: center;
+    justify-content: space-between;
+    width: 100%;
     height: 100%;
+    min-height: 3rem;
+  }
+
+  .#{$prefix}--data-table--sort:not(.#{$prefix}--data-table--compact):not(.#{$prefix}--data-table--short):not(.#{$prefix}--data-table--tall)
+    th
+    .#{$prefix}--table-sort__flex {
+    /* IE11 workaround for align-items: center and min-height
+        https://github.com/philipwalton/flexbugs/issues/231 */
+    @media screen and (-ms-high-contrast: active),
+      screen and (-ms-high-contrast: none) {
+      height: 2.99rem;
+    }
+  }
+
+  .#{$prefix}--data-table--compact.#{$prefix}--data-table--sort
+    th
+    .#{$prefix}--table-sort__flex {
+    min-height: 1.5rem;
+  }
+
+  .#{$prefix}--data-table--short.#{$prefix}--data-table--sort
+    th
+    .#{$prefix}--table-sort__flex {
+    min-height: 2rem;
+  }
+
+  .#{$prefix}--data-table--tall.#{$prefix}--data-table--sort
+    th
+    .#{$prefix}--table-sort__flex {
+    align-items: flex-start;
+    min-height: 4rem;
   }
 
   // -------------------------------------
@@ -16888,9 +17145,9 @@ Data table sort styles
   }
 
   .#{$prefix}--table-sort__icon-unsorted {
-    width: auto;
+    width: rem(20px);
     min-width: $layout-01;
-    margin-right: $spacing-05;
+    margin-right: $spacing-03;
     margin-left: $spacing-03;
     opacity: 0;
     fill: $ui-05;
@@ -16917,9 +17174,9 @@ Data table sort styles
   }
 
   .#{$prefix}--table-sort__icon {
-    width: auto;
+    width: rem(20px);
     min-width: $layout-01;
-    margin-right: $spacing-05;
+    margin-right: $spacing-03;
     margin-left: $spacing-03;
     transform: rotate(0);
     opacity: 1;
@@ -16952,12 +17209,6 @@ Data table sort styles
     height: rem(64px);
   }
 
-  .#{$prefix}--data-table--tall.#{$prefix}--data-table--sort
-    th
-    .#{$prefix}--table-sort__flex {
-    align-items: flex-start;
-  }
-
   .#{$prefix}--data-table--tall .#{$prefix}--table-sort__icon-unsorted,
   .#{$prefix}--data-table--tall .#{$prefix}--table-sort__icon {
     margin-top: rem(13px);
@@ -16974,7 +17225,6 @@ Data table sort styles
   - [text-01 [variable]](#text-01-variable)
   - [ui-03 [variable]](#ui-03-variable)
   - [layout-01 [variable]](#layout-01-variable)
-  - [spacing-05 [variable]](#spacing-05-variable)
   - [spacing-03 [variable]](#spacing-03-variable)
   - [ui-05 [variable]](#ui-05-variable)
 
@@ -17012,19 +17262,6 @@ Date picker styles
     position: relative;
     display: flex;
     align-items: center;
-
-    ~ .#{$prefix}--form-requirement {
-      display: block;
-      max-height: rem(200px);
-      margin-top: $carbon--spacing-02;
-      overflow: visible;
-      color: $text-error;
-      font-weight: 400;
-
-      &::before {
-        display: none;
-      }
-    }
   }
 
   .#{$prefix}--date-picker.#{$prefix}--date-picker--simple {
@@ -17063,11 +17300,6 @@ Date picker styles
     &:focus,
     &.#{$prefix}--focused {
       @include focus-outline('outline');
-    }
-
-    &[data-invalid],
-    &[data-invalid]:focus {
-      @include focus-outline('invalid');
     }
 
     &:disabled {
@@ -17157,8 +17389,6 @@ Date picker styles
 - **Requires**:
   - [prefix [variable]](#prefix-variable)
   - [field-02 [variable]](#field-02-variable)
-  - [carbon--spacing-02 [variable]](#carbon--spacing-02-variable)
-  - [text-error [variable]](#text-error-variable)
   - [carbon--spacing-05 [variable]](#carbon--spacing-05-variable)
   - [text-01 [variable]](#text-01-variable)
   - [field-01 [variable]](#field-01-variable)
@@ -18023,17 +18253,23 @@ Form styles
     font-family: carbon--font-family('mono');
   }
 
-  input[data-invalid],
-  .#{$prefix}--text-input__field-wrapper[data-invalid],
+  input[data-invalid]:not(:focus),
+  .#{$prefix}--number[data-invalid] input[type='number']:not(:focus),
+  .#{$prefix}--text-input__field-wrapper[data-invalid]
+    > .#{$prefix}--text-input--invalid:not(:focus),
   .#{$prefix}--text-area__wrapper[data-invalid]
-    > .#{$prefix}--text-area--invalid,
-  .#{$prefix}--select-input__wrapper[data-invalid],
-  .#{$prefix}--list-box[data-invalid],
-  .#{$prefix}--combo-box[data-invalid] .#{$prefix}--text-input {
+    > .#{$prefix}--text-area--invalid:not(:focus),
+  .#{$prefix}--select-input__wrapper[data-invalid]
+    .#{$prefix}--select-input:not(:focus),
+  .#{$prefix}--list-box[data-invalid]:not(:focus),
+  .#{$prefix}--combo-box[data-invalid] .#{$prefix}--text-input:not(:focus) {
     @include focus-outline('invalid');
   }
 
   input[data-invalid],
+  .#{$prefix}--number[data-invalid] .#{$prefix}--number__input-wrapper,
+  .#{$prefix}--date-picker-input__wrapper,
+  .#{$prefix}--time-picker--invalid,
   .#{$prefix}--text-input__field-wrapper[data-invalid],
   .#{$prefix}--text-input--warn,
   .#{$prefix}--text-area__wrapper[data-invalid],
@@ -18043,10 +18279,15 @@ Form styles
     ~ .#{$prefix}--form-requirement {
       display: block;
       max-height: rem(200px);
+      overflow: visible;
+      font-weight: 400;
     }
   }
 
   input[data-invalid],
+  .#{$prefix}--number[data-invalid] .#{$prefix}--number__input-wrapper,
+  .#{$prefix}--date-picker-input__wrapper,
+  .#{$prefix}--time-picker--invalid,
   .#{$prefix}--text-input__field-wrapper[data-invalid],
   .#{$prefix}--text-area__wrapper[data-invalid],
   .#{$prefix}--select-input__wrapper[data-invalid],
@@ -20519,17 +20760,6 @@ Number input styles
     position: relative;
     display: flex;
     align-items: center;
-
-    ~ .#{$prefix}--form-requirement {
-      margin-top: $carbon--spacing-02;
-      overflow: visible;
-      color: $text-error;
-      font-weight: 400;
-
-      &::before {
-        display: none;
-      }
-    }
   }
 
   .#{$prefix}--number__controls {
@@ -20590,17 +20820,6 @@ Number input styles
 
   .#{$prefix}--number--readonly .#{$prefix}--number__control-btn {
     display: none;
-  }
-
-  .#{$prefix}--number[data-invalid] {
-    .#{$prefix}--form-requirement {
-      display: inline-block;
-      max-height: rem(200px);
-    }
-
-    input[type='number'] {
-      @include focus-outline('invalid');
-    }
   }
 
   .#{$prefix}--number__invalid {
@@ -20740,8 +20959,6 @@ Number input styles
   - [text-01 [variable]](#text-01-variable)
   - [field-01 [variable]](#field-01-variable)
   - [ui-04 [variable]](#ui-04-variable)
-  - [carbon--spacing-02 [variable]](#carbon--spacing-02-variable)
-  - [text-error [variable]](#text-error-variable)
   - [icon-01 [variable]](#icon-01-variable)
   - [support-01 [variable]](#support-01-variable)
   - [field-02 [variable]](#field-02-variable)
@@ -21090,6 +21307,19 @@ Pagination styles
     @include carbon--breakpoint('md') {
       overflow: initial;
     }
+
+    // mobile friendly pagination
+    @include carbon--breakpoint-down('md') {
+      .#{$prefix}--pagination__left > *,
+      .#{$prefix}--pagination__right > * {
+        display: none;
+      }
+
+      .#{$prefix}--pagination__items-count,
+      .#{$prefix}--pagination__control-buttons {
+        display: initial;
+      }
+    }
   }
 
   .#{$prefix}--pagination .#{$prefix}--select {
@@ -21234,6 +21464,7 @@ Pagination styles
 - **Group**: [pagination](#pagination)
 - **Requires**:
   - [carbon--breakpoint [mixin]](#carbon--breakpoint-mixin)
+  - [carbon--breakpoint-down [mixin]](#carbon--breakpoint-down-mixin)
   - [prefix [variable]](#prefix-variable)
   - [ui-01 [variable]](#ui-01-variable)
   - [ui-03 [variable]](#ui-03-variable)
@@ -22182,7 +22413,7 @@ Search styles
 
   .#{$prefix}--search-input {
     @include reset;
-    @include type-style('body-short-02');
+    @include type-style('body-short-01');
     @include focus-outline('reset');
 
     order: 1;
@@ -22231,42 +22462,44 @@ Search styles
     background: $field-02;
   }
 
+  // Small styles
   .#{$prefix}--search--sm .#{$prefix}--search-input {
-    @include type-style('body-short-01');
-
     height: rem(32px);
+    // 8px padding on either side of icon + 16px icon (32px)
+    padding: 0 $spacing-07;
   }
 
-  .#{$prefix}--search--lg .#{$prefix}--search-input {
-    @include type-style('body-short-02');
+  .#{$prefix}--search--sm .#{$prefix}--search-magnifier {
+    left: rem(8px);
+  }
 
+  // Large styles
+  .#{$prefix}--search--lg .#{$prefix}--search-input {
     height: rem(40px);
+    // 12px padding on either side of icon + 16px icon (40px)
+    padding: 0 $spacing-08;
+  }
+
+  .#{$prefix}--search--lg .#{$prefix}--search-magnifier {
+    left: rem(12px);
   }
 
   .#{$prefix}--search--xl .#{$prefix}--search-input {
-    @include type-style('body-short-02');
-
     height: rem(48px);
-    padding: 0 rem(64px) 0 rem(48px);
+    // 16px padding on either side of icon + 16px icon (48px)
+    padding: 0 $spacing-09;
   }
 
   .#{$prefix}--search-magnifier {
     position: absolute;
     top: 50%;
-    left: 0.75rem;
+    left: $spacing-05;
     z-index: 2;
     width: rem(16px);
     height: rem(16px);
     transform: translateY(-50%);
     pointer-events: none;
     fill: $icon-02;
-  }
-
-  .#{$prefix}--search--xl .#{$prefix}--search-magnifier {
-    left: rem(24px);
-    width: rem(20px);
-    height: rem(20px);
-    transform: translate(-50%, -50%);
   }
 
   .#{$prefix}--search-close {
@@ -22307,6 +22540,10 @@ Search styles
       vertical-align: middle;
       fill: currentColor;
     }
+  }
+
+  .#{$prefix}--search-close svg {
+    fill: inherit;
   }
 
   .#{$prefix}--search-close,
@@ -22408,6 +22645,10 @@ Search styles
   - [ui-04 [variable]](#ui-04-variable)
   - [text-05 [variable]](#text-05-variable)
   - [field-02 [variable]](#field-02-variable)
+  - [spacing-07 [variable]](#spacing-07-variable)
+  - [spacing-08 [variable]](#spacing-08-variable)
+  - [spacing-09 [variable]](#spacing-09-variable)
+  - [spacing-05 [variable]](#spacing-05-variable)
   - [icon-02 [variable]](#icon-02-variable)
   - [hover-field [variable]](#hover-field-variable)
   - [carbon--spacing-01 [variable]](#carbon--spacing-01-variable)
@@ -22515,18 +22756,6 @@ Select styles
 
   .#{$prefix}--select-input__wrapper[data-invalid] .#{$prefix}--select-input {
     padding-right: carbon--mini-units(10);
-  }
-
-  .#{$prefix}--select-input__wrapper[data-invalid] .#{$prefix}--select-input,
-  .#{$prefix}--select-input__wrapper[data-invalid]
-    .#{$prefix}--select-input:focus {
-    @include focus-outline('invalid');
-  }
-
-  .#{$prefix}--form-requirement {
-    display: block;
-    overflow: visible;
-    font-weight: 400;
   }
 
   .#{$prefix}--select-input:disabled ~ .#{$prefix}--select__arrow {
@@ -22713,6 +22942,7 @@ Slider styles
     @include type-style('code-02');
 
     color: $text-01;
+    white-space: nowrap;
 
     &:last-of-type {
       margin-right: $carbon--spacing-05;
@@ -23736,8 +23966,6 @@ Text area styles
   .#{$prefix}--text-area::placeholder {
     @include placeholder-colors;
     @include type-style('body-long-01');
-
-    opacity: 1;
   }
 
   .#{$prefix}--text-area--light {
@@ -24041,6 +24269,23 @@ Text input styles
     background: $field-02;
   }
 
+  .#{$prefix}--form--fluid
+    .#{$prefix}--text-input__field-wrapper[data-invalid]
+    > .#{$prefix}--text-input--invalid {
+    @include focus-outline('reset');
+  }
+
+  .#{$prefix}--form--fluid
+    .#{$prefix}--text-input__field-wrapper[data-invalid]:not(:focus) {
+    @include focus-outline('invalid');
+  }
+
+  .#{$prefix}--form--fluid
+    .#{$prefix}--text-input__field-wrapper[data-invalid]
+    > .#{$prefix}--text-input--invalid:focus {
+    @include focus-outline('outline');
+  }
+
   //-----------------------------
   // Inline Text Input
   //-----------------------------
@@ -24288,6 +24533,10 @@ Tile styles
   .#{$prefix}--tile-input {
     @include hidden;
   }
+
+  .#{$prefix}--tile-input:focus + .#{$prefix}--tile {
+    @include focus-outline('outline');
+  }
 }
 ```
 
@@ -24319,10 +24568,6 @@ Time picker styles
   .#{$prefix}--time-picker {
     display: flex;
     align-items: flex-end;
-  }
-
-  .#{$prefix}--time-picker[data-invalid] .#{$prefix}--time-picker__input-field {
-    @include focus-outline('invalid');
   }
 
   .#{$prefix}--time-picker__select {

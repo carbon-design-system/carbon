@@ -36,25 +36,25 @@ export default class TileGroup extends React.Component {
     defaultSelected: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
 
     /**
-     * Specify the name of the underlying <input> nodes
-     */
-    name: PropTypes.string.isRequired,
-
-    /**
      * Specify whether the group is disabled
      */
     disabled: PropTypes.bool,
+
+    /**
+     * Provide an optional legend for this group
+     */
+    legend: PropTypes.string,
+
+    /**
+     * Specify the name of the underlying <input> nodes
+     */
+    name: PropTypes.string.isRequired,
 
     /**
      * Provide an optional `onChange` hook that is called whenever the value of
      * the group changes
      */
     onChange: PropTypes.func,
-
-    /**
-     * Provide an optional legend for this group
-     */
-    legend: PropTypes.string,
 
     /**
      * Specify the value that is currently selected in the group
