@@ -248,7 +248,7 @@ function renderTree({ nodes, withIcons = false }) {
 }
 
 export default {
-  title: 'TreeView',
+  title: 'unstable_TreeView',
   decorators: [withKnobs],
   parameters: { component: TreeView },
 };
