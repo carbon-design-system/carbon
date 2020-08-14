@@ -114,7 +114,7 @@ exports[`TreeView should render 1`] = `
         <div
           className="bx--tree-node__label"
         >
-          <button
+          <span
             className="bx--tree-parent-node__toggle"
             onClick={[Function]}
             tabIndex={-1}
@@ -149,7 +149,7 @@ exports[`TreeView should render 1`] = `
                 </svg>
               </Icon>
             </ForwardRef(CaretDown16)>
-          </button>
+          </span>
           <span
             className="bx--tree-node__label__details"
           >
@@ -248,7 +248,7 @@ exports[`TreeView should render 1`] = `
               <div
                 className="bx--tree-node__label"
               >
-                <button
+                <span
                   className="bx--tree-parent-node__toggle"
                   onClick={[Function]}
                   tabIndex={-1}
@@ -283,7 +283,7 @@ exports[`TreeView should render 1`] = `
                       </svg>
                     </Icon>
                   </ForwardRef(CaretDown16)>
-                </button>
+                </span>
                 <span
                   className="bx--tree-node__label__details"
                 >
@@ -528,7 +528,7 @@ exports[`TreeView should render with icons 1`] = `
         <div
           className="bx--tree-node__label"
         >
-          <button
+          <span
             className="bx--tree-parent-node__toggle"
             onClick={[Function]}
             tabIndex={-1}
@@ -563,7 +563,7 @@ exports[`TreeView should render with icons 1`] = `
                 </svg>
               </Icon>
             </ForwardRef(CaretDown16)>
-          </button>
+          </span>
           <span
             className="bx--tree-node__label__details"
           >
@@ -773,7 +773,7 @@ exports[`TreeView should render with icons 1`] = `
               <div
                 className="bx--tree-node__label"
               >
-                <button
+                <span
                   className="bx--tree-parent-node__toggle"
                   onClick={[Function]}
                   tabIndex={-1}
@@ -808,7 +808,7 @@ exports[`TreeView should render with icons 1`] = `
                       </svg>
                     </Icon>
                   </ForwardRef(CaretDown16)>
-                </button>
+                </span>
                 <span
                   className="bx--tree-node__label__details"
                 >
