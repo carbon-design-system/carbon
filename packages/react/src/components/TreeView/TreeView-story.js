@@ -15,6 +15,7 @@ import {
   text,
   withKnobs,
 } from '@storybook/addon-knobs';
+import { InlineNotification } from '../Notification';
 import TreeView, { TreeNode } from '../TreeView';
 
 const sizes = {
@@ -253,7 +254,14 @@ export default {
 };
 
 export const Default = () => (
-  <TreeView {...props()}>{renderTree({ nodes })}</TreeView>
+  <>
+    <InlineNotification
+      kind="info"
+      title="Experimental component"
+      subtitle="An accessibility review of this component is in progress"
+    />
+    <TreeView {...props()}>{renderTree({ nodes })}</TreeView>
+  </>
 );
 
 Default.storyName = 'default';
@@ -264,7 +272,14 @@ Default.parameters = {
 };
 
 export const WithIcons = () => (
-  <TreeView {...props()}>{renderTree({ nodes, withIcons: true })}</TreeView>
+  <>
+    <InlineNotification
+      kind="info"
+      title="Experimental component"
+      subtitle="An accessibility review of this component is in progress"
+    />
+    <TreeView {...props()}>{renderTree({ nodes, withIcons: true })}</TreeView>
+  </>
 );
 
 WithIcons.storyName = 'with icons';
