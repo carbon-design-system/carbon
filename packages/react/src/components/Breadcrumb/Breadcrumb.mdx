@@ -1,4 +1,4 @@
-import { Story, Preview, Props } from '@storybook/addon-docs/blocks';
+import { Story, Canvas, ArgsTable } from '@storybook/addon-docs/blocks';
 import { Breadcrumb, BreadcrumbItem, BreadcrumbSkeleton } from '../Breadcrumb';
 
 # Breadcrumb
@@ -24,9 +24,9 @@ You can build a breadcrumb using a combination of the `Breadcrumb` and
 `BreadcrumbItem` components as `children` and each `BreadcrumbItem` is
 responsible for displaying the page links in the hierarchy.
 
-<Preview>
+<Canvas>
   <Story id="breadcrumb--breadcrumb" />
-</Preview>
+</Canvas>
 
 ## Skeleton state
 
@@ -34,13 +34,13 @@ You can use the `BreadcrumbSkeleton` component to render a skeleton variant of a
 breadcrumb. This is useful to display while content in your breadcrumb is being
 fetched from an external resource like an API.
 
-<Preview>
+<Canvas>
   <Story id="breadcrumb--skeleton" />
-</Preview>
+</Canvas>
 
 ## Component API
 
-<Props />
+<ArgsTable />
 
 ### Breadcrumb noTrailingSlash
 

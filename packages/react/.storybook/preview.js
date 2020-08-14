@@ -6,20 +6,9 @@
  */
 
 import React from 'react';
-import { addDecorator, addParameters } from '@storybook/react';
-import addons from '@storybook/addons';
-import { themes } from '@storybook/theming';
-import { configureActions } from '@storybook/addon-actions';
-import {
-  CARBON_CURRENT_THEME,
-  CARBON_TYPE_TOKEN,
-} from './addon-carbon-theme/shared';
 import Container from './Container';
-import PackageInfo from './../package.json';
 
-const customPropertyPrefix = 'cds';
-
-addParameters({
+export const parameters = {
   options: {
     /**
      * We sort our stories by default alphabetically, however there are specific
@@ -88,39 +77,7 @@ addParameters({
       // two ids
       return idA.localeCompare(idB);
     },
-    theme: {
-      ...themes.light,
-      brandTitle: `Carbon Components React v${PackageInfo.version}`,
-      brandUrl:
-        'https://github.com/carbon-design-system/carbon/tree/master/packages/react',
-    },
   },
-});
+};
 
-configureActions({
-  depth: 3,
-  limit: 10,
-});
-
-addDecorator((story) => <Container story={story} />);
-
-addons.getChannel().on(CARBON_CURRENT_THEME, (theme) => {
-  document.documentElement.setAttribute('storybook-carbon-theme', theme);
-});
-
-addons.getChannel().on(CARBON_TYPE_TOKEN, ({ tokenName, tokenValue }) => {
-  const root = document.documentElement;
-  const [fontSize, lineHeight] = tokenValue.split('-');
-  const rem = (px) =>
-    `${
-      px / parseFloat(getComputedStyle(document.documentElement).fontSize)
-    }rem`;
-  root.style.setProperty(
-    `--${customPropertyPrefix}-${tokenName}-font-size`,
-    rem(fontSize)
-  );
-  root.style.setProperty(
-    `--${customPropertyPrefix}-${tokenName}-line-height`,
-    rem(lineHeight)
-  );
-});
+export const decorators = [(story) => <Container story={story} />];

@@ -139,9 +139,7 @@ export const _Default = () => {
   return <Button>Button</Button>;
 };
 
-_Default.story = {
-  name: 'Button',
-};
+_Default.storyName = 'Button';
 
 export const Secondary = () => {
   return <Button kind="secondary">Button</Button>;
@@ -194,9 +192,7 @@ export const Playground = () => {
 
 export const IconButton = () => <Button {...props.iconOnly()} hasIconOnly />;
 
-IconButton.story = {
-  name: 'Icon Button',
-};
+IconButton.storyName = 'Icon Button';
 
 export const SetOfButtons = () => {
   return (
