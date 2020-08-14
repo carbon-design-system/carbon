@@ -6,7 +6,6 @@
  */
 
 import React from 'react';
-import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 
 import { withKnobs, boolean, number, text } from '@storybook/addon-knobs';
@@ -53,37 +52,40 @@ const props = {
   }),
 };
 
-storiesOf('TimePicker', module)
-  .addParameters({
+export default {
+  title: 'TimePicker',
+  decorators: [withKnobs],
+
+  parameters: {
     component: TimePicker,
+
     subcomponents: {
       TimePickerSelect,
       SelectItem,
     },
-  })
-  .addDecorator(withKnobs)
-  .add(
-    'Default',
-    () => {
-      const selectProps = props.select();
-      return (
-        <TimePicker id="time-picker" {...props.timepicker()}>
-          <TimePickerSelect id="time-picker-select-1" {...selectProps}>
-            <SelectItem value="AM" text="AM" />
-            <SelectItem value="PM" text="PM" />
-          </TimePickerSelect>
-          <TimePickerSelect id="time-picker-select-2" {...selectProps}>
-            <SelectItem value="Time zone 1" text="Time zone 1" />
-            <SelectItem value="Time zone 2" text="Time zone 2" />
-          </TimePickerSelect>
-        </TimePicker>
-      );
-    },
-    {
-      info: {
-        text: `
-            The time picker allow users to select a time.
-          `,
-      },
-    }
+  },
+};
+
+export const Default = () => {
+  const selectProps = props.select();
+  return (
+    <TimePicker id="time-picker" {...props.timepicker()}>
+      <TimePickerSelect id="time-picker-select-1" {...selectProps}>
+        <SelectItem value="AM" text="AM" />
+        <SelectItem value="PM" text="PM" />
+      </TimePickerSelect>
+      <TimePickerSelect id="time-picker-select-2" {...selectProps}>
+        <SelectItem value="Time zone 1" text="Time zone 1" />
+        <SelectItem value="Time zone 2" text="Time zone 2" />
+      </TimePickerSelect>
+    </TimePicker>
   );
+};
+
+Default.parameters = {
+  info: {
+    text: `
+        The time picker allow users to select a time.
+      `,
+  },
+};

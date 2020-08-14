@@ -6,7 +6,6 @@
  */
 
 import React from 'react';
-import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 import { withKnobs, boolean, select } from '@storybook/addon-knobs';
 import ContentSwitcher from '../ContentSwitcher';
@@ -33,52 +32,54 @@ const props = {
   }),
 };
 
-storiesOf('ContentSwitcher', module)
-  .addParameters({
+export default {
+  title: 'ContentSwitcher',
+  decorators: [withKnobs],
+
+  parameters: {
     component: ContentSwitcher,
+
     subcomponents: {
       Switch,
     },
-  })
-  .addDecorator(withKnobs)
-  .add(
-    'Default',
-    () => {
-      const switchProps = props.switch();
-      return (
-        <ContentSwitcher {...props.contentSwitcher()}>
-          <Switch name="one" text="First section" {...switchProps} />
-          <Switch name="two" text="Second section" {...switchProps} />
-          <Switch name="three" text="Third section" {...switchProps} />
-        </ContentSwitcher>
-      );
-    },
-    {
-      info: {
-        text: `
-            The Content Switcher component manipulates the content shown following an exclusive or “either/or” pattern.
-            Create Switch components for each section in the content switcher.
-          `,
-      },
-    }
-  )
-  .add(
-    'Selected',
-    () => {
-      const switchProps = props.switch();
-      return (
-        <ContentSwitcher {...props.contentSwitcher()} selectedIndex={1}>
-          <Switch name="one" text="First section" {...switchProps} />
-          <Switch name="two" text="Second section" {...switchProps} />
-          <Switch name="three" text="Third section" {...switchProps} />
-        </ContentSwitcher>
-      );
-    },
-    {
-      info: {
-        text: `
-             Render the Content Switcher with a different section automatically selected
-           `,
-      },
-    }
+  },
+};
+
+export const Default = () => {
+  const switchProps = props.switch();
+  return (
+    <ContentSwitcher {...props.contentSwitcher()}>
+      <Switch name="one" text="First section" {...switchProps} />
+      <Switch name="two" text="Second section" {...switchProps} />
+      <Switch name="three" text="Third section" {...switchProps} />
+    </ContentSwitcher>
   );
+};
+
+Default.parameters = {
+  info: {
+    text: `
+        The Content Switcher component manipulates the content shown following an exclusive or “either/or” pattern.
+        Create Switch components for each section in the content switcher.
+      `,
+  },
+};
+
+export const Selected = () => {
+  const switchProps = props.switch();
+  return (
+    <ContentSwitcher {...props.contentSwitcher()} selectedIndex={1}>
+      <Switch name="one" text="First section" {...switchProps} />
+      <Switch name="two" text="Second section" {...switchProps} />
+      <Switch name="three" text="Third section" {...switchProps} />
+    </ContentSwitcher>
+  );
+};
+
+Selected.parameters = {
+  info: {
+    text: `
+         Render the Content Switcher with a different section automatically selected
+       `,
+  },
+};
