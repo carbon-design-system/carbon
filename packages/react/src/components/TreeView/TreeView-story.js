@@ -6,7 +6,6 @@
  */
 
 import React from 'react';
-import { storiesOf } from '@storybook/react';
 import { Document16, Folder16 } from '@carbon/icons-react';
 import { action } from '@storybook/addon-actions';
 import {
@@ -247,11 +246,25 @@ function renderTree({ nodes, withIcons = false }) {
   ));
 }
 
-storiesOf('TreeView', module)
-  .addDecorator(withKnobs)
-  .add('default', () => (
-    <TreeView {...props()}>{renderTree({ nodes })}</TreeView>
-  ))
-  .add('with icons', () => (
-    <TreeView {...props()}>{renderTree({ nodes, withIcons: true })}</TreeView>
-  ));
+export default {
+  title: 'TreeView',
+  decorators: [withKnobs],
+  parameters: { component: TreeView },
+};
+
+export const Default = () => (
+  <TreeView {...props()}>{renderTree({ nodes })}</TreeView>
+);
+
+Default.storyName = 'default';
+Default.parameters = {
+  info: {
+    text: ``,
+  },
+};
+
+export const WithIcons = () => (
+  <TreeView {...props()}>{renderTree({ nodes, withIcons: true })}</TreeView>
+);
+
+WithIcons.storyName = 'with icons';
