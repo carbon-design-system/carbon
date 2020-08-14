@@ -105,130 +105,129 @@ const TabContentRenderedOnlyWhenSelected = ({
 export default {
   title: 'Tabs',
   decorators: [withKnobs],
-
   parameters: {
     component: Tabs,
-
     subcomponents: {
       Tab,
       TabsSkeleton,
     },
-  })
-  .addDecorator(withKnobs)
-  .add(
-    'Default',
-    () => (
-      <div className={props.tabs().light ? 'tabs-story-wrapper--light' : null}>
-        <Tabs {...props.tabs()}>
-          <Tab id="tab-1" {...props.tab()} label="Tab label 1">
-            <div className="some-content">
-              <p>Content for first tab goes here.</p>
-            </div>
-          </Tab>
-          <Tab id="tab-2" {...props.tab()} label="Tab label 2">
-            <div className="some-content">
-              <p>Content for second tab goes here.</p>
-            </div>
-          </Tab>
-          <Tab id="tab-3" {...props.tab()} label="Tab label 3" disabled>
-            <div className="some-content">
-              <p>Content for third tab goes here.</p>
-            </div>
-          </Tab>
-          <Tab
-            id="tab-4"
-            {...props.tab()}
-            label="Tab label 4 shows truncation"
-            title="Tab label 4 shows truncation"
-            renderContent={TabContentRenderedOnlyWhenSelected}>
-            <div className="some-content">
-              <p>Content for fourth tab goes here.</p>
-              <p>
-                This example uses the&nbsp;
-                <CodeSnippet type="inline">renderContent</CodeSnippet> prop to
-                re-render content when the tab is selected.
-              </p>
-              <CodeSnippetExample />
-            </div>
-          </Tab>
-          <Tab
-            id="tab-5"
-            {...props.tab()}
-            label={<CustomLabel text="Custom Label" />}>
-            <div className="some-content">
-              <p>Content for fifth tab goes here.</p>
-            </div>
-          </Tab>
-        </Tabs>
-      </div>
-    ),
-    {
-      info: {
-        text: `
-            Tabs are used to quickly navigate between views within the same context. Create individual
-            Tab components for each item in the Tabs list.
-          `,
-      },
-    }
-  )
-  .add(
-    'Container',
-    () => (
-      <div
-        className={
-          props.tabs().light ? 'container-tabs-story-wrapper--light' : null
-        }>
-        <Tabs type="container" {...props.tabs()}>
-          <Tab id="tab-1" {...props.tab()} label="Tab label 1">
-            <div className="some-content">
-              <p>Content for first tab goes here.</p>
-            </div>
-          </Tab>
-          <Tab id="tab-2" {...props.tab()} label="Tab label 2">
-            <div className="some-content">
-              <p>Content for second tab goes here.</p>
-            </div>
-          </Tab>
-          <Tab
-            id="tab-3"
-            {...props.tab()}
-            label="Tab label 3 renders content only when selected"
-            title="Tab label 3 renders content only when selected"
-            renderContent={TabContentRenderedOnlyWhenSelected}>
-            <div className="some-content">
-              <p>Content for third tab goes here.</p>
-              <p>
-                This example uses the&nbsp;
-                <CodeSnippet type="inline">renderContent</CodeSnippet> prop to
-                re-render content when the tab is selected.
-              </p>
-              <CodeSnippetExample />
-            </div>
-          </Tab>
-          <Tab
-            id="tab-4"
-            {...props.tab()}
-            label={<CustomLabel text="Custom Label" />}>
-            <div className="some-content">
-              <p>Content for fourth tab goes here.</p>
-              <TextInput light id="sample-input" labelText="Text Input Label" />
-            </div>
-          </Tab>
-        </Tabs>
-      </div>
-    ),
-    {
-      info: {
-        text: `
-            Tabs are used to quickly navigate between views within the same context. Create individual
-            Tab components for each item in the Tabs list.
-          `,
-      },
-    }
-  )
-  .add('skeleton', () => <TabsSkeleton />, {
-    info: {
-      text: `
+  },
+};
+
+export const Default = () => (
+  <div className={props.tabs().light ? 'tabs-story-wrapper--light' : null}>
+    <Tabs {...props.tabs()}>
+      <Tab id="tab-1" {...props.tab()} label="Tab label 1">
+        <div className="some-content">
+          <p>Content for first tab goes here.</p>
+        </div>
+      </Tab>
+      <Tab id="tab-2" {...props.tab()} label="Tab label 2">
+        <div className="some-content">
+          <p>Content for second tab goes here.</p>
+        </div>
+      </Tab>
+      <Tab id="tab-3" {...props.tab()} label="Tab label 3" disabled>
+        <div className="some-content">
+          <p>Content for third tab goes here.</p>
+        </div>
+      </Tab>
+      <Tab
+        id="tab-4"
+        {...props.tab()}
+        label="Tab label 4 shows truncation"
+        title="Tab label 4 shows truncation"
+        renderContent={TabContentRenderedOnlyWhenSelected}>
+        <div className="some-content">
+          <p>Content for fourth tab goes here.</p>
+          <p>
+            This example uses the&nbsp;
+            <CodeSnippet type="inline">renderContent</CodeSnippet> prop to
+            re-render content when the tab is selected.
+          </p>
+          <CodeSnippetExample />
+        </div>
+      </Tab>
+      <Tab
+        id="tab-5"
+        {...props.tab()}
+        label={<CustomLabel text="Custom Label" />}>
+        <div className="some-content">
+          <p>Content for fifth tab goes here.</p>
+        </div>
+      </Tab>
+    </Tabs>
+  </div>
+);
+
+Default.parameters = {
+  info: {
+    text: `
+        Tabs are used to quickly navigate between views within the same context. Create individual
+        Tab components for each item in the Tabs list.
+      `,
+  },
+};
+
+export const Container = () => (
+  <div
+    className={
+      props.tabs().light ? 'container-tabs-story-wrapper--light' : null
+    }>
+    <Tabs type="container" {...props.tabs()}>
+      <Tab id="tab-1" {...props.tab()} label="Tab label 1">
+        <div className="some-content">
+          <p>Content for first tab goes here.</p>
+        </div>
+      </Tab>
+      <Tab id="tab-2" {...props.tab()} label="Tab label 2">
+        <div className="some-content">
+          <p>Content for second tab goes here.</p>
+        </div>
+      </Tab>
+      <Tab
+        id="tab-3"
+        {...props.tab()}
+        label="Tab label 3 renders content only when selected"
+        title="Tab label 3 renders content only when selected"
+        renderContent={TabContentRenderedOnlyWhenSelected}>
+        <div className="some-content">
+          <p>Content for third tab goes here.</p>
+          <p>
+            This example uses the&nbsp;
+            <CodeSnippet type="inline">renderContent</CodeSnippet> prop to
+            re-render content when the tab is selected.
+          </p>
+          <CodeSnippetExample />
+        </div>
+      </Tab>
+      <Tab
+        id="tab-4"
+        {...props.tab()}
+        label={<CustomLabel text="Custom Label" />}>
+        <div className="some-content">
+          <p>Content for fourth tab goes here.</p>
+          <TextInput light id="sample-input" labelText="Text Input Label" />
+        </div>
+      </Tab>
+    </Tabs>
+  </div>
+);
+
+Container.parameters = {
+  info: {
+    text: `
+        Tabs are used to quickly navigate between views within the same context. Create individual
+        Tab components for each item in the Tabs list.
+      `,
+  },
+};
+
+export const Skeleton = () => <TabsSkeleton />;
+Skeleton.storyName = 'skeleton';
+Skeleton.parameters = {
+  info: {
+    text: `
             Placeholder skeleton state to use when content is loading.
           `,
   },
