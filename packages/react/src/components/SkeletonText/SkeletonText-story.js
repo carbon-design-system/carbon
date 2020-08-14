@@ -8,7 +8,6 @@
 /* eslint-disable no-console */
 
 import React from 'react';
-import { storiesOf } from '@storybook/react';
 
 import { withKnobs, boolean, number, select } from '@storybook/addon-knobs';
 import SkeletonText from '../SkeletonText';
@@ -29,23 +28,25 @@ const props = () => ({
   ),
 });
 
-storiesOf('SkeletonText', module)
-  .addParameters({
+export default {
+  title: 'SkeletonText',
+  decorators: [withKnobs],
+
+  parameters: {
     component: SkeletonText,
-  })
-  .addDecorator(withKnobs)
-  .add(
-    'Default',
-    () => (
-      <div style={{ width: '300px' }}>
-        <SkeletonText {...props()} />
-      </div>
-    ),
-    {
-      info: {
-        text: `
-            Skeleton states are used as a progressive loading state while the user waits for content to load.
-          `,
-      },
-    }
-  );
+  },
+};
+
+export const Default = () => (
+  <div style={{ width: '300px' }}>
+    <SkeletonText {...props()} />
+  </div>
+);
+
+Default.parameters = {
+  info: {
+    text: `
+        Skeleton states are used as a progressive loading state while the user waits for content to load.
+      `,
+  },
+};

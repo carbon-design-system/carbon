@@ -6,7 +6,6 @@
  */
 
 import React from 'react';
-import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 import { withKnobs, boolean, text } from '@storybook/addon-knobs';
 import CodeSnippet from '../CodeSnippet';
@@ -73,126 +72,134 @@ const lightPropMessage = (
   </small>
 );
 
-storiesOf('CodeSnippet', module)
-  .addParameters({
+export default {
+  title: 'CodeSnippet',
+  decorators: [withKnobs],
+
+  parameters: {
     component: CodeSnippet,
+
     subcomponents: {
       CodeSnippetSkeleton,
     },
-  })
-  .addDecorator(withKnobs)
-  .add(
-    'inline',
-    () => (
-      <div className={props.inline().light ? 'bx--tile' : ''}>
-        {props.inline().light && lightPropMessage}
-        <CodeSnippet type="inline" {...props.inline()}>
-          {'node -v'}
-        </CodeSnippet>
-      </div>
-    ),
-    {
-      info: {
-        text: `
-        Code snippets are small blocks of reusable code that can be inserted in a code file.
+  },
+};
 
-        The Inline style is for code used within a block of text.
-      `,
-      },
-    }
-  )
-  .add(
-    'single line',
-    () => (
-      <div className={props.single().light ? 'bx--tile' : ''}>
-        {props.single().light && lightPropMessage}
-        <CodeSnippet type="single" {...props.single()}>
-          {
-            'node -v Lorem ipsum dolor sit amet, consectetur adipisicing elit. Blanditiis, veritatis voluptate id incidunt molestiae officia possimus, quasi itaque alias, architecto hic, dicta fugit? Debitis delectus quidem explicabo vitae fuga laboriosam!'
-          }
-        </CodeSnippet>
-      </div>
-    ),
-    {
-      info: {
-        text: `
-          Code snippets are small blocks of reusable code that can be inserted in a code file.
+export const Inline = () => (
+  <div className={props.inline().light ? 'bx--tile' : ''}>
+    {props.inline().light && lightPropMessage}
+    <CodeSnippet type="inline" {...props.inline()}>
+      {'node -v'}
+    </CodeSnippet>
+  </div>
+);
 
-          The Code style is for larger, multi-line code snippets.
-        `,
-      },
-    }
-  )
-  .add(
-    'multi line',
-    () => {
-      const multilineProps = props.multiline();
-      return (
-        <div
-          className={multilineProps.light ? 'bx--tile' : ''}
-          style={{ width: '800px' }}>
-          {multilineProps.light && lightPropMessage}
-          <CodeSnippet type="multi" {...multilineProps}>
-            {`@mixin grid-container {
-  width: 100%;
-  padding-right: padding(mobile);
-  padding-left: padding(mobile);
+Inline.storyName = 'inline';
 
-  @include breakpoint(bp--xs--major) {
-    padding-right: padding(xs);
-    padding-left: padding(xs);
-  }
+Inline.parameters = {
+  info: {
+    text: `
+    Code snippets are small blocks of reusable code that can be inserted in a code file.
+
+    The Inline style is for code used within a block of text.
+  `,
+  },
+};
+
+export const SingleLine = () => (
+  <div className={props.single().light ? 'bx--tile' : ''}>
+    {props.single().light && lightPropMessage}
+    <CodeSnippet type="single" {...props.single()}>
+      {
+        'node -v Lorem ipsum dolor sit amet, consectetur adipisicing elit. Blanditiis, veritatis voluptate id incidunt molestiae officia possimus, quasi itaque alias, architecto hic, dicta fugit? Debitis delectus quidem explicabo vitae fuga laboriosam!'
+      }
+    </CodeSnippet>
+  </div>
+);
+
+SingleLine.storyName = 'single line';
+
+SingleLine.parameters = {
+  info: {
+    text: `
+      Code snippets are small blocks of reusable code that can be inserted in a code file.
+
+      The Code style is for larger, multi-line code snippets.
+    `,
+  },
+};
+
+export const MultiLine = () => {
+  const multilineProps = props.multiline();
+  return (
+    <div
+      className={multilineProps.light ? 'bx--tile' : ''}
+      style={{ width: '800px' }}>
+      {multilineProps.light && lightPropMessage}
+      <CodeSnippet type="multi" {...multilineProps}>
+        {`@mixin grid-container {
+width: 100%;
+padding-right: padding(mobile);
+padding-left: padding(mobile);
+
+@include breakpoint(bp--xs--major) {
+padding-right: padding(xs);
+padding-left: padding(xs);
+}
 }
 
 $z-indexes: (
-  modal : 9000,
-  overlay : 8000,
-  dropdown : 7000,
-  header : 6000,
-  footer : 5000,
-  hidden : - 1,
-  overflowHidden: - 1,
-  floating: 10000
+modal : 9000,
+overlay : 8000,
+dropdown : 7000,
+header : 6000,
+footer : 5000,
+hidden : - 1,
+overflowHidden: - 1,
+floating: 10000
 );`}
-          </CodeSnippet>
-          <br />
-          <CodeSnippet type="multi" {...multilineProps}>
-            {`@mixin grid-container {
-  width: 100%;
-  padding-right: padding(mobile);
-  padding-left: padding(mobile);
+      </CodeSnippet>
+      <br />
+      <CodeSnippet type="multi" {...multilineProps}>
+        {`@mixin grid-container {
+width: 100%;
+padding-right: padding(mobile);
+padding-left: padding(mobile);
 
-  @include breakpoint(bp--xs--major) {
-    padding-right: padding(xs);
-  }
+@include breakpoint(bp--xs--major) {
+padding-right: padding(xs);
+}
 }`}
-          </CodeSnippet>
-        </div>
-      );
-    },
-    {
-      info: {
-        text: `
-          Code snippets are small blocks of reusable code that can be inserted in a code file.
-
-          The Terminal style is for single-line .
-        `,
-      },
-    }
-  )
-  .add(
-    'skeleton',
-    () => (
-      <div style={{ width: '800px' }}>
-        <CodeSnippetSkeleton type="single" style={{ marginBottom: 8 }} />
-        <CodeSnippetSkeleton type="multi" />
-      </div>
-    ),
-    {
-      info: {
-        text: `
-          Placeholder skeleton state to use when content is loading.
-        `,
-      },
-    }
+      </CodeSnippet>
+    </div>
   );
+};
+
+MultiLine.storyName = 'multi line';
+
+MultiLine.parameters = {
+  info: {
+    text: `
+      Code snippets are small blocks of reusable code that can be inserted in a code file.
+
+      The Terminal style is for single-line .
+    `,
+  },
+};
+
+export const Skeleton = () => (
+  <div style={{ width: '800px' }}>
+    <CodeSnippetSkeleton type="single" style={{ marginBottom: 8 }} />
+    <CodeSnippetSkeleton type="multi" />
+  </div>
+);
+
+Skeleton.storyName = 'skeleton';
+
+Skeleton.parameters = {
+  info: {
+    text: `
+      Placeholder skeleton state to use when content is loading.
+    `,
+  },
+};
