@@ -184,14 +184,15 @@ export default function TreeNode({
   return (
     <li {...treeNodeProps} aria-expanded={expanded}>
       <div className={`${prefix}--tree-node__label`} ref={currentNodeLabel}>
-        <button
+        {/* eslint-disable-next-line jsx-a11y/click-events-have-key-events, jsx-a11y/no-static-element-interactions */}
+        <span
           className={`${prefix}--tree-parent-node__toggle`}
           disabled={disabled}
           onClick={handleToggleClick}
           tabIndex={-1}
           type="button">
           <CaretDown16 className={toggleClasses} />
-        </button>
+        </span>
         <span className={`${prefix}--tree-node__label__details`}>
           {Icon && <Icon className={`${prefix}--tree-node__icon`} />}
           {label}
