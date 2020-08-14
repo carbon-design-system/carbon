@@ -6,7 +6,6 @@
  */
 
 import React from 'react';
-import { storiesOf } from '@storybook/react';
 import { Filter16 } from '@carbon/icons-react';
 import { withKnobs, select, text } from '@storybook/addon-knobs';
 import TooltipIcon from '../TooltipIcon';
@@ -30,25 +29,29 @@ const props = () => ({
   tooltipText: text('Tooltip content (tooltipText)', 'Filter'),
 });
 
-storiesOf('TooltipIcon', module)
-  .addParameters({
+export default {
+  title: 'TooltipIcon',
+  decorators: [withKnobs],
+
+  parameters: {
     component: TooltipIcon,
-  })
-  .addDecorator(withKnobs)
-  .add(
-    'default',
-    () => (
-      <TooltipIcon {...props()}>
-        <Filter16 />
-      </TooltipIcon>
-    ),
-    {
-      info: {
-        text: `
-          Icon tooltip is for short single line of text describing an icon.
-          Icon tooltip does not use any JavaScript. No label should be added to this variation.
-          If there are actions a user can take in the tooltip (e.g. a link or a button), use interactive tooltip.
-        `,
-      },
-    }
-  );
+  },
+};
+
+export const Default = () => (
+  <TooltipIcon {...props()}>
+    <Filter16 />
+  </TooltipIcon>
+);
+
+Default.storyName = 'default';
+
+Default.parameters = {
+  info: {
+    text: `
+      Icon tooltip is for short single line of text describing an icon.
+      Icon tooltip does not use any JavaScript. No label should be added to this variation.
+      If there are actions a user can take in the tooltip (e.g. a link or a button), use interactive tooltip.
+    `,
+  },
+};

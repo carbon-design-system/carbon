@@ -8,6 +8,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import Button from '../Button';
+import ButtonSet from '../ButtonSet';
 import classNames from 'classnames';
 import { settings } from 'carbon-components';
 import { Close20 } from '@carbon/icons-react';
@@ -575,7 +576,7 @@ export class ModalFooter extends Component {
     });
 
     return (
-      <div className={footerClass} {...other}>
+      <ButtonSet className={footerClass} {...other}>
         {secondaryButtonText && (
           <Button
             className={secondaryClass}
@@ -597,7 +598,7 @@ export class ModalFooter extends Component {
         )}
 
         {children}
-      </div>
+      </ButtonSet>
     );
   }
 }
