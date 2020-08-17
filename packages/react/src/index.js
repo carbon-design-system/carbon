@@ -9,6 +9,7 @@ export Accordion from './components/Accordion';
 export AccordionItem from './components/AccordionItem';
 export { Breadcrumb, BreadcrumbItem } from './components/Breadcrumb';
 export Button from './components/Button';
+export ButtonSet from './components/ButtonSet';
 export Checkbox from './components/Checkbox';
 export CodeSnippet from './components/CodeSnippet';
 export ComboBox from './components/ComboBox';

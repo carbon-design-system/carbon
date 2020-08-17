@@ -21,4 +21,10 @@ deprecated:
       The upload pictogram has been deprecated in favor of upload--01
   - name: upload--alt
     reason:
-      The upload--alt pictogram has been deprecated in favor of upload--02      
+      The upload--alt pictogram has been deprecated in favor of upload--02
+  - name: video
+    reason:
+      The video pictogram has been deprecated in favor of video--01
+  - name: video--alt
+    reason:
+      The video--alt pictogram has been deprecated in favor of video--02      

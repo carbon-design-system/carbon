@@ -22,6 +22,7 @@ describe('Carbon Components React', () => {
         "BreadcrumbItem",
         "BreadcrumbSkeleton",
         "Button",
+        "ButtonSet",
         "ButtonSkeleton",
         "Checkbox",
         "CheckboxSkeleton",
