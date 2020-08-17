@@ -371,13 +371,13 @@
     @include skeleton;
 
     width: rem(75px);
-    height: rem(12px);
   }
 
   .#{$prefix}--tabs.#{$prefix}--skeleton .#{$prefix}--tabs-trigger {
     @include skeleton;
 
-    width: rem(100px);
+    width: rem(75px);
+    margin-right: rem(1px);
   }
 
   .#{$prefix}--tabs.#{$prefix}--skeleton .#{$prefix}--tabs-trigger svg {
