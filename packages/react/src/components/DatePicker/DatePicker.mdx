@@ -1,0 +1,77 @@
+import { Story, Props, Source, Preview } from '@storybook/addon-docs/blocks';
+import DatePicker from '../DatePicker';
+import DatePickerInput from '../DatePickerInput';
+
+# Date Picker
+
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+
+- [Overview](#overview)
+- [Component API](#component-api)
+  - [DatePicker `className`](#datepicker-classname)
+- [References](#references)
+- [Feedback](#feedback)
+
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+
+## Overview
+
+Date pickers allow users to select a single or a range of dates. Pickers are
+used to display past, present, or future dates. The kind of date (exact,
+approximate, memorable) you are requesting from the user will determine which
+picker is best to use. Each picker’s format can be customized depending on
+location or need.
+
+### Simple DatePicker
+
+The simple date input provides the user with only a text field in which they can
+manually input a date. It allows dates to be entered without adding unnecessary
+interactions that come with the calendar menu or a dropdown.
+
+<Preview>
+  <Story id="datepicker--simple" />
+</Preview>
+
+### Range Datepicker
+
+Calendar pickers default to showing today’s date when opened and only one month
+is shown at a time. Calendar pickers allow users to navigate through months and
+years, however they work best when used for recent or near future dates.
+
+<Preview>
+  <Story id="datepicker--single" />
+  <Story id="datepicker--range" />
+</Preview>
+
+### Skeleton state
+
+You can use the `DatePickerSkeleton` component to render a skeleton variant of a
+`DatePicker`. This is useful to display while an initial date range in your
+`DatePicker` is being fetched from an external resource like an API.
+
+<Preview>
+  <Story id="datepicker--skeleton" />
+</Preview>
+
+## Component API
+
+<Props />
+
+### DatePicker `className`
+
+The className prop passed into `DatePicker` will be forwarded along to the
+underlying wrapper `div.bx--content-switcher` element. This is useful for
+specifying a custom class name for layout.
+
+```jsx
+<DatePicker className="some-class">...</DatePicker>
+```
+
+## References
+
+## Feedback
+
+Help us improve this component by providing feedback, asking questions, and
+leaving any other comments on
+[GitHub](https://github.com/carbon-design-system/carbon/edit/master/packages/react/src/components/DatePicker/DatePicker.mdx).
