@@ -61,14 +61,6 @@ export default {
 
 export const _Pagination = () => <Pagination {...props()} />;
 
-_Pagination.parameters = {
-  info: {
-    text: `
-            The pagination component is used to switch through multiple pages of items, when only a maximum number of items can be displayed per page. Can be used in combination with other components like DataTable.
-          `,
-  },
-};
-
 export const MultiplePaginationComponents = () => {
   return (
     <div>
@@ -79,9 +71,3 @@ export const MultiplePaginationComponents = () => {
 };
 
 MultiplePaginationComponents.storyName = 'Multiple Pagination components';
-
-MultiplePaginationComponents.parameters = {
-  info: {
-    text: `Showcasing unique ids for each pagination component`,
-  },
-};

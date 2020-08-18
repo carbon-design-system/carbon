@@ -49,13 +49,3 @@ export const Default = () => (
 );
 
 Default.storyName = 'default';
-
-Default.parameters = {
-  info: {
-    text: `
-      Icon tooltip is for short single line of text describing an icon.
-      Icon tooltip does not use any JavaScript. No label should be added to this variation.
-      If there are actions a user can take in the tooltip (e.g. a link or a button), use interactive tooltip.
-    `,
-  },
-};

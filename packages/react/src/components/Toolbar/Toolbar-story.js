@@ -87,11 +87,3 @@ export const Default = () => (
     </ToolbarItem>
   </Toolbar>
 );
-
-Default.parameters = {
-  info: {
-    text: `
-      Toolbar stuff
-    `,
-  },
-};

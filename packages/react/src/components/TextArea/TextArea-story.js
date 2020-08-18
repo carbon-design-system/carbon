@@ -50,15 +50,6 @@ export default {
 
 export const Default = () => <TextArea {...TextAreaProps()} />;
 
-Default.parameters = {
-  info: {
-    text: `
-            Text areas enable the user to interact with and input data. A text area is used when you
-            anticipate the user to input more than 1 sentence.
-          `,
-  },
-};
-
 export const Skeleton = () => (
   <div
     aria-label="loading text area"
@@ -71,11 +62,3 @@ export const Skeleton = () => (
 );
 
 Skeleton.storyName = 'skeleton';
-
-Skeleton.parameters = {
-  info: {
-    text: `
-        Placeholder skeleton state to use when content is loading.
-      `,
-  },
-};

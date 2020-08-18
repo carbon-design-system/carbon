@@ -127,17 +127,6 @@ export const Default = () => (
   />
 );
 
-Default.parameters = {
-  info: {
-    text: `
-        Text fields enable the user to interact with and input data. A single line
-        field is used when the input anticipated by the user is a single line of
-        text as opposed to a paragraph.
-        The default type is 'text' and its value can be either 'string' or 'number'.
-      `,
-  },
-};
-
 export const Fluid = () => (
   <FluidForm>
     <TextInput
@@ -146,17 +135,6 @@ export const Fluid = () => (
     />
   </FluidForm>
 );
-
-Fluid.parameters = {
-  info: {
-    text: `
-        Text fields enable the user to interact with and input data. A single line
-        field is used when the input anticipated by the user is a single line of
-        text as opposed to a paragraph.
-        The default type is 'text' and its value can be either 'string' or 'number'.
-      `,
-  },
-};
 
 export const TogglePasswordVisibility = () => {
   return (
@@ -168,14 +146,6 @@ export const TogglePasswordVisibility = () => {
 };
 
 TogglePasswordVisibility.storyName = 'Toggle password visibility';
-
-TogglePasswordVisibility.parameters = {
-  info: {
-    text: `
-      Text field with password visibility toggle.
-    `,
-  },
-};
 
 export const FullyControlledTogglePasswordVisibility = () => {
   ControlledPasswordInputApp.__docgenInfo = {
@@ -196,14 +166,6 @@ export const FullyControlledTogglePasswordVisibility = () => {
 FullyControlledTogglePasswordVisibility.storyName =
   'Fully controlled toggle password visibility';
 
-FullyControlledTogglePasswordVisibility.parameters = {
-  info: {
-    text: `
-    Fully controlled text field with password visibility toggle.
-  `,
-  },
-};
-
 export const Skeleton = () => (
   <div
     aria-label="loading text input"
@@ -218,11 +180,3 @@ export const Skeleton = () => (
 );
 
 Skeleton.storyName = 'skeleton';
-
-Skeleton.parameters = {
-  info: {
-    text: `
-        Placeholder skeleton state to use when content is loading.
-        `,
-  },
-};

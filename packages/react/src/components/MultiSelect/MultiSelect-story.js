@@ -135,14 +135,6 @@ export const Default = withReadme(readme, () => {
 
 Default.storyName = 'default';
 
-Default.parameters = {
-  info: {
-    text: `
-        MultiSelect
-      `,
-  },
-};
-
 export const WithInitialSelectedItems = withReadme(readme, () => {
   const {
     listBoxMenuIconTranslationIds,
@@ -166,14 +158,6 @@ export const WithInitialSelectedItems = withReadme(readme, () => {
 
 WithInitialSelectedItems.storyName = 'with initial selected items';
 
-WithInitialSelectedItems.parameters = {
-  info: {
-    text: `
-        Provide a set of items to initially select in the control
-      `,
-  },
-};
-
 export const _Filterable = withReadme(readme, () => {
   const {
     listBoxMenuIconTranslationIds,
@@ -196,11 +180,3 @@ export const _Filterable = withReadme(readme, () => {
 });
 
 _Filterable.storyName = 'filterable';
-
-_Filterable.parameters = {
-  info: {
-    text: `
-        When a list contains more than 25 items, use \`MultiSelect.Filterable\` to help find options from the list.
-      `,
-  },
-};

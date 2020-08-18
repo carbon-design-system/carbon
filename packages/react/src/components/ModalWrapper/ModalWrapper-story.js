@@ -192,16 +192,6 @@ export const TransactionalPassiveModal = () => (
 
 TransactionalPassiveModal.storyName = 'transactional/passive modal';
 
-TransactionalPassiveModal.parameters = {
-  info: {
-    text: `
-        Transactional modals are used to validate user decisions or to gain secondary confirmation from the user.
-        Passive modal notifications should only appear if there is an action the user needs to address immediately.
-        Passive modal notifications are persistent on screen.
-      `,
-  },
-};
-
 export const InputModal = () => (
   <ModalWrapper
     id="input-modal"
@@ -255,13 +245,3 @@ export const InputModal = () => (
 );
 
 InputModal.storyName = 'input modal';
-
-InputModal.parameters = {
-  info: {
-    text: `
-        Input modals are used to follow up with previous user input. These modals should include areas
-        for input that the user can interact with, such as forms, dropdowns, selectors, and links. The example
-        below shows a Modal Wrapper component with various input components.
-      `,
-  },
-};

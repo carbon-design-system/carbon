@@ -84,11 +84,3 @@ export const Default = () => {
     </TimePicker>
   );
 };
-
-Default.parameters = {
-  info: {
-    text: `
-        The time picker allow users to select a time.
-      `,
-  },
-};

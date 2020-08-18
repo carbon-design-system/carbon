@@ -58,14 +58,6 @@ export const Default = () => <Slider required id="slider" {...props()} />;
 
 Default.storyName = 'default';
 
-Default.parameters = {
-  info: {
-    text: `
-            Sliders provide a visual indication of adjustable content, where the user can move the handle along a horizontal track to increase or decrease the value.
-          `,
-  },
-};
-
 export const ControlledSlider = () => {
   const [val, setVal] = useState(87);
   return (
@@ -101,11 +93,3 @@ export const Skeleton = () => (
 );
 
 Skeleton.storyName = 'skeleton';
-
-Skeleton.parameters = {
-  info: {
-    text: `
-        Placeholder skeleton state to use when content is loading.
-      `,
-  },
-};

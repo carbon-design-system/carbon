@@ -47,13 +47,3 @@ export const Default = () => (
 );
 
 Default.storyName = 'default';
-
-Default.parameters = {
-  info: {
-    text: `
-        Skeleton states are used as a progressive loading state while the user waits for content to load.
-
-        This example shows a skeleton state for a data table.
-      `,
-  },
-};

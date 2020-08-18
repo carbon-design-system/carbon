@@ -28,12 +28,6 @@ export const Default = () => (
 
 Default.storyName = 'default';
 
-Default.parameters = {
-  info: {
-    text: `Lists consist of related content grouped together and organized vertically. Ordered lists are used to present content in a numbered list.`,
-  },
-};
-
 export const Nested = () => (
   <OrderedList>
     <ListItem>
@@ -55,9 +49,3 @@ export const Nested = () => (
 );
 
 Nested.storyName = 'nested';
-
-Nested.parameters = {
-  info: {
-    text: `Lists consist of related content grouped together and organized vertically. Ordered lists are used to present content in a numbered list.`,
-  },
-};

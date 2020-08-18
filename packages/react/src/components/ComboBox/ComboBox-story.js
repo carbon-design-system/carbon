@@ -87,9 +87,3 @@ export const Default = () => (
     />
   </div>
 );
-
-Default.parameters = {
-  info: {
-    text: 'ComboBox',
-  },
-};
