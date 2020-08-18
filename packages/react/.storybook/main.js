@@ -16,6 +16,6 @@ module.exports = {
     '@storybook/addon-links',
     '@storybook/addon-docs',
     'storybook-readme/register',
-    require.resolve('./addon-carbon-theme/register'),
+    './addon-carbon-theme/register',
   ],
 };
