@@ -66,7 +66,6 @@ export default function TreeView({
       } = event;
       if (treeRootRef?.current?.contains(currentFocusedNode)) {
         prevFocusedNode.tabIndex = -1;
-        currentFocusedNode.tabIndex = 0;
       }
     }
     if (event.type === 'focus') {
@@ -75,12 +74,10 @@ export default function TreeView({
         relatedTarget: prevFocusedNode,
         target: currentFocusedNode,
       } = event;
-      if (treeRootRef?.current?.contains(currentFocusedNode)) {
-        if (prevFocusedNode) {
-          prevFocusedNode.tabIndex = -1;
-        }
-        currentFocusedNode.tabIndex = 0;
+      if (treeRootRef?.current?.contains(prevFocusedNode)) {
+        prevFocusedNode.tabIndex = -1;
       }
+      currentFocusedNode.tabIndex = 0;
     }
   }
   let focusTarget = false;
