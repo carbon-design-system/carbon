@@ -29,6 +29,27 @@ export const codeSnippet = () => (
   </CodeSnippet>
 );
 
+export const inline = () => (
+  <CodeSnippet type="inline" feedback="Copied to clipboard">
+    {'node -v'}
+  </CodeSnippet>
+);
+
+export const multiline = () => (
+  <CodeSnippet type="multi" feedback="Copied to clipboard">
+    {`@mixin grid-container {
+     width: 100%;
+     padding-right: padding(mobile);
+     padding-left: padding(mobile);`}
+  </CodeSnippet>
+);
+
+export const singleline = () => (
+  <CodeSnippet type="single" feedback="Copied to clipboard">
+    {'node -v'}
+  </CodeSnippet>
+);
+
 export const skeleton = () => (
   <div style={{ width: '800px' }}>
     <CodeSnippetSkeleton type="single" style={{ marginBottom: 8 }} />
