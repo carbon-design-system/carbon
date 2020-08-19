@@ -206,8 +206,7 @@ export default function TreeNode({
         <span
           className={`${prefix}--tree-parent-node__toggle`}
           disabled={disabled}
-          onClick={handleToggleClick}
-          tabIndex={-1}>
+          onClick={handleToggleClick}>
           <CaretDown16 className={toggleClasses} />
         </span>
         <span className={`${prefix}--tree-node__label__details`}>
