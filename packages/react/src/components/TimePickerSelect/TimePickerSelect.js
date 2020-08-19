@@ -27,29 +27,14 @@ export default class TimePickerSelect extends Component {
     className: PropTypes.string,
 
     /**
-     * Specify a custom `id` for the `<select>`
-     */
-    id: PropTypes.string.isRequired,
-
-    /**
-     * Specify whether you want the inline version of this control
-     */
-    inline: PropTypes.bool,
-
-    /**
-     * Specify whether the control is disabled
-     */
-    disabled: PropTypes.bool,
-
-    /**
      * Optionally provide the default value of the `<select>`
      */
     defaultValue: PropTypes.any,
 
     /**
-     * Provide a description for the twistie icon that can be read by screen readers
+     * Specify whether the control is disabled
      */
-    iconDescription: PropTypes.string.isRequired,
+    disabled: PropTypes.bool,
 
     /**
      * Specify whether the label should be hidden, or not
@@ -59,6 +44,21 @@ export default class TimePickerSelect extends Component {
       'The `hideLabel` prop for `TimePickerSelect` is no longer needed and has ' +
         'been deprecated. It will be removed in the next major release.'
     ),
+
+    /**
+     * Provide a description for the twistie icon that can be read by screen readers
+     */
+    iconDescription: PropTypes.string.isRequired,
+
+    /**
+     * Specify a custom `id` for the `<select>`
+     */
+    id: PropTypes.string.isRequired,
+
+    /**
+     * Specify whether you want the inline version of this control
+     */
+    inline: PropTypes.bool,
 
     /**
      * Provide label text to be read by screen readers when interacting with the

@@ -89,17 +89,6 @@ ListBox.propTypes = {
   disabled: PropTypes.bool.isRequired,
 
   /**
-   * Specify the "type" of the ListBox. Currently supports either `default` or
-   * `inline` as an option.
-   */
-  type: ListBoxType.isRequired,
-
-  /**
-   * Specify the size of the ListBox. Currently supports either `sm` or `xl` as an option.
-   */
-  size: ListBoxSize,
-
-  /**
    * Specify whether the control is currently invalid
    */
   invalid: PropTypes.bool,
@@ -110,14 +99,25 @@ ListBox.propTypes = {
   invalidText: PropTypes.string,
 
   /**
+   * Specify if the control should render open
+   */
+  isOpen: PropTypes.bool,
+
+  /**
    * Specify if the control should use the light variant
    */
   light: PropTypes.bool,
 
   /**
-   * Specify if the control should render open
+   * Specify the size of the ListBox. Currently supports either `sm` or `xl` as an option.
    */
-  isOpen: PropTypes.bool,
+  size: ListBoxSize,
+
+  /**
+   * Specify the "type" of the ListBox. Currently supports either `default` or
+   * `inline` as an option.
+   */
+  type: ListBoxType.isRequired,
 };
 
 ListBox.defaultProps = {

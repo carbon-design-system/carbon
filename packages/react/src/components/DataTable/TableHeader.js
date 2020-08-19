@@ -122,14 +122,14 @@ const TableHeader = React.forwardRef(function TableHeader(
 
 TableHeader.propTypes = {
   /**
-   * Specify an optional className to be applied to the container node
-   */
-  className: PropTypes.string,
-
-  /**
    * Pass in children that will be embedded in the table header label
    */
   children: PropTypes.node,
+
+  /**
+   * Specify an optional className to be applied to the container node
+   */
+  className: PropTypes.string,
 
   /**
    * Specify `colSpan` as a non-negative integer value to indicate how
@@ -138,15 +138,15 @@ TableHeader.propTypes = {
   colSpan: PropTypes.number,
 
   /**
-   * Specify whether this header is one through which a user can sort the table
-   */
-  isSortable: PropTypes.bool,
-
-  /**
    * Specify whether this header is the header by which a table is being sorted
    * by
    */
   isSortHeader: PropTypes.bool,
+
+  /**
+   * Specify whether this header is one through which a user can sort the table
+   */
+  isSortable: PropTypes.bool,
 
   /**
    * Hook that is invoked when the header is clicked

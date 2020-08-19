@@ -78,6 +78,7 @@
   - [✅highlight [variable]](#highlight-variable)
   - [✅decorative-01 [variable]](#decorative-01-variable)
   - [✅hover-light-ui [variable]](#hover-light-ui-variable)
+  - [✅button-separator [variable]](#button-separator-variable)
   - [✅skeleton-01 [variable]](#skeleton-01-variable)
   - [✅skeleton-02 [variable]](#skeleton-02-variable)
   - [✅⚠️brand-01 [variable]](#brand-01-variable)
@@ -284,6 +285,7 @@ Define theme variables from a map of tokens
   $highlight: map-get($theme, 'highlight') !global;
   $decorative-01: map-get($theme, 'decorative-01') !global;
   $hover-light-ui: map-get($theme, 'hover-light-ui') !global;
+  $button-separator: map-get($theme, 'button-separator') !global;
   $skeleton-01: map-get($theme, 'skeleton-01') !global;
   $skeleton-02: map-get($theme, 'skeleton-02') !global;
   $brand-01: map-get($theme, 'brand-01') !global;
@@ -595,6 +597,10 @@ Define theme variables from a map of tokens
     $hover-light-ui: var(
       --#{$custom-property-prefix}-hover-light-ui,
       map-get($theme, 'hover-light-ui')
+    ) !global;
+    $button-separator: var(
+      --#{$custom-property-prefix}-button-separator,
+      map-get($theme, 'button-separator')
     ) !global;
     $skeleton-01: var(
       --#{$custom-property-prefix}-skeleton-01,
@@ -1286,6 +1292,19 @@ Define theme variables from a map of tokens
       @include custom-property(
         'hover-light-ui',
         map-get($theme, 'hover-light-ui')
+      );
+    }
+
+    @if should-emit(
+      $theme,
+      $parent-carbon-theme,
+      'button-separator',
+      $emit-difference
+    )
+    {
+      @include custom-property(
+        'button-separator',
+        map-get($theme, 'button-separator')
       );
     }
 
@@ -2072,6 +2091,7 @@ Define theme variables from a map of tokens
   - [highlight [variable]](#highlight-variable)
   - [decorative-01 [variable]](#decorative-01-variable)
   - [hover-light-ui [variable]](#hover-light-ui-variable)
+  - [button-separator [variable]](#button-separator-variable)
   - [skeleton-01 [variable]](#skeleton-01-variable)
   - [skeleton-02 [variable]](#skeleton-02-variable)
   - [brand-01 [variable]](#brand-01-variable)
@@ -2228,6 +2248,7 @@ $carbon--theme--g90: map-merge(
     highlight: #0043ce,
     decorative-01: #6f6f6f,
     hover-light-ui: #6f6f6f,
+    button-separator: #161616,
     skeleton-01: #353535,
     skeleton-02: #525252,
     brand-02: #6f6f6f,
@@ -2303,6 +2324,7 @@ $carbon--theme--g100: map-merge(
     highlight: #002d9c,
     decorative-01: #525252,
     hover-light-ui: #525252,
+    button-separator: #161616,
     skeleton-01: #353535,
     skeleton-02: #393939,
     brand-02: #6f6f6f,
@@ -2469,6 +2491,7 @@ $carbon--theme: (
   highlight: if(global-variable-exists('highlight'), $highlight, map-get($carbon--theme--white, 'highlight')),
   decorative-01: if(global-variable-exists('decorative-01'), $decorative-01, map-get($carbon--theme--white, 'decorative-01')),
   hover-light-ui: if(global-variable-exists('hover-light-ui'), $hover-light-ui, map-get($carbon--theme--white, 'hover-light-ui')),
+  button-separator: if(global-variable-exists('button-separator'), $button-separator, map-get($carbon--theme--white, 'button-separator')),
   skeleton-01: if(global-variable-exists('skeleton-01'), $skeleton-01, map-get($carbon--theme--white, 'skeleton-01')),
   skeleton-02: if(global-variable-exists('skeleton-02'), $skeleton-02, map-get($carbon--theme--white, 'skeleton-02')),
   brand-01: if(global-variable-exists('brand-01'), $brand-01, map-get($carbon--theme--white, 'brand-01')),
@@ -4030,6 +4053,29 @@ $hover-light-ui: if(
     ),
   map-get($carbon--theme, 'hover-light-ui'),
   #e5e5e5
+);
+```
+
+</details>
+
+- **Group**: [@carbon/themes](#carbonthemes)
+- **Type**: `{undefined}`
+- **Used by**:
+  - [carbon--theme [mixin]](#carbon--theme-mixin)
+
+### ✅button-separator [variable]
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$button-separator: if(
+  global-variable-exists('carbon--theme') and map-has-key(
+      $carbon--theme,
+      'button-separator'
+    ),
+  map-get($carbon--theme, 'button-separator'),
+  #e0e0e0
 );
 ```
 

@@ -40,15 +40,10 @@ export default class Tabs extends React.Component {
     hidden: PropTypes.bool,
 
     /**
-     * By default, this value is "navigation". You can also provide an alternate
-     * role if it makes sense from the accessibility-side
+     * Provide a description that is read out when a user visits the caret icon
+     * for the dropdown menu of items
      */
-    role: PropTypes.string.isRequired,
-
-    /**
-     * Provide the type of Tab
-     */
-    type: PropTypes.oneOf(['default', 'container']),
+    iconDescription: PropTypes.string.isRequired,
 
     /**
      * Optionally provide an `onClick` handler that is invoked when a <Tab> is
@@ -70,9 +65,10 @@ export default class Tabs extends React.Component {
     onSelectionChange: PropTypes.func,
 
     /**
-     * Provide a string that represents the `href` for the triggered <Tab>
+     * By default, this value is "navigation". You can also provide an alternate
+     * role if it makes sense from the accessibility-side
      */
-    triggerHref: PropTypes.string.isRequired,
+    role: PropTypes.string.isRequired,
 
     /**
      * Optionally provide an index for the currently selected <Tab>
@@ -80,10 +76,9 @@ export default class Tabs extends React.Component {
     selected: PropTypes.number,
 
     /**
-     * Provide a description that is read out when a user visits the caret icon
-     * for the dropdown menu of items
+     * Choose whether or not to automatically change selection on focus
      */
-    iconDescription: PropTypes.string.isRequired,
+    selectionMode: PropTypes.oneOf(['automatic', 'manual']),
 
     /**
      * Provide a className that is applied to the <TabContent> components
@@ -91,9 +86,14 @@ export default class Tabs extends React.Component {
     tabContentClassName: PropTypes.string,
 
     /**
-     * Choose whether or not to automatically change selection on focus
+     * Provide a string that represents the `href` for the triggered <Tab>
      */
-    selectionMode: PropTypes.oneOf(['automatic', 'manual']),
+    triggerHref: PropTypes.string.isRequired,
+
+    /**
+     * Provide the type of Tab
+     */
+    type: PropTypes.oneOf(['default', 'container']),
   };
 
   static defaultProps = {

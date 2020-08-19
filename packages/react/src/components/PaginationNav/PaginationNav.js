@@ -172,16 +172,19 @@ function PaginationOverflow({
   return null;
 }
 
-export default function PaginationNav({
-  className,
-  onChange = () => {},
-  totalItems,
-  itemsShown = 10,
-  page = 0,
-  loop = false,
-  translateWithId: t = translateWithId,
-  ...rest
-}) {
+const PaginationNav = React.forwardRef(function PaginationNav(
+  {
+    className,
+    onChange = () => {},
+    totalItems,
+    itemsShown = 10,
+    page = 0,
+    loop = false,
+    translateWithId: t = translateWithId,
+    ...rest
+  },
+  ref
+) {
   const [currentPage, setCurrentPage] = useState(page);
   const [itemsThatFit, setItemsThatFit] = useState(
     itemsShown >= 4 ? itemsShown : 4
@@ -266,7 +269,7 @@ export default function PaginationNav({
   const startOffset = itemsThatFit <= 4 && currentPage > 1 ? 0 : 1;
 
   return (
-    <nav className={classNames} {...rest} aria-label="pagination">
+    <nav className={classNames} ref={ref} {...rest} aria-label="pagination">
       <ul className={`${prefix}--pagination-nav__list`}>
         <DirectionButton
           direction="backward"
@@ -353,7 +356,7 @@ export default function PaginationNav({
       </div>
     </nav>
   );
-}
+});
 
 DirectionButton.propTypes = {
   /**
@@ -362,14 +365,14 @@ DirectionButton.propTypes = {
   direction: PropTypes.oneOf(['forward', 'backward']),
 
   /**
-   * The label shown in the button's tooltip.
-   */
-  label: PropTypes.string,
-
-  /**
    * Whether or not the button should be disabled.
    */
   disabled: PropTypes.bool,
+
+  /**
+   * The label shown in the button's tooltip.
+   */
+  label: PropTypes.string,
 
   /**
    * The callback function called when the button is clicked.
@@ -378,11 +381,6 @@ DirectionButton.propTypes = {
 };
 
 PaginationItem.propTypes = {
-  /**
-   * The page number this item represents.
-   */
-  page: PropTypes.number,
-
   /**
    * Whether or not this is the currently active page.
    */
@@ -394,6 +392,11 @@ PaginationItem.propTypes = {
   onClick: PropTypes.func,
 
   /**
+   * The page number this item represents.
+   */
+  page: PropTypes.number,
+
+  /**
    * Specify a custom translation function that takes in a message identifier
    * and returns the localized string for the message
    */
@@ -402,14 +405,14 @@ PaginationItem.propTypes = {
 
 PaginationOverflow.propTypes = {
   /**
-   * From which index on this overflow should start displaying pages.
-   */
-  fromIndex: PropTypes.number,
-
-  /**
    * How many items to display in this overflow.
    */
   count: PropTypes.number,
+
+  /**
+   * From which index on this overflow should start displaying pages.
+   */
+  fromIndex: PropTypes.number,
 
   /**
    * The callback function called when the user selects a page from the overflow.
@@ -430,24 +433,9 @@ PaginationNav.propTypes = {
   className: PropTypes.string,
 
   /**
-   * The callback function called when the current page changes.
-   */
-  onChange: PropTypes.func,
-
-  /**
-   * The total number of items.
-   */
-  totalItems: PropTypes.number,
-
-  /**
    * The number of items to be shown.
    */
   itemsShown: PropTypes.number,
-
-  /**
-   * The current page.
-   */
-  page: PropTypes.number,
 
   /**
    * Whether user should be able to loop through the items when reaching first / last.
@@ -455,8 +443,25 @@ PaginationNav.propTypes = {
   loop: PropTypes.bool,
 
   /**
+   * The callback function called when the current page changes.
+   */
+  onChange: PropTypes.func,
+
+  /**
+   * The current page.
+   */
+  page: PropTypes.number,
+
+  /**
+   * The total number of items.
+   */
+  totalItems: PropTypes.number,
+
+  /**
    * Specify a custom translation function that takes in a message identifier
    * and returns the localized string for the message
    */
   translateWithId: PropTypes.func,
 };
+
+export default PaginationNav;

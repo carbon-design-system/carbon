@@ -55,19 +55,10 @@ const translateWithId = (id) => defaultTranslations[id];
 export default class DataTable extends React.Component {
   static propTypes = {
     /**
-     * The `rows` prop is where you provide us with a list of all the rows that
-     * you want to render in the table. The only hard requirement is that this
-     * is an array of objects, and that each object has a unique `id` field
-     * available on it.
+     * Optional hook to manually control filtering of the rows from the
+     * TableToolbarSearch component
      */
-    rows: PropTypes.arrayOf(
-      PropTypes.shape({
-        id: PropTypes.string.isRequired,
-        disabled: PropTypes.bool,
-        isSelected: PropTypes.bool,
-        isExpanded: PropTypes.bool,
-      })
-    ).isRequired,
+    filterRows: PropTypes.func,
 
     /**
      * The `headers` prop represents the order in which the headers should
@@ -83,20 +74,60 @@ export default class DataTable extends React.Component {
     ).isRequired,
 
     /**
-     * Optional hook to manually control sorting of the rows.
+     * Specify whether the table should be able to be sorted by its headers
      */
-    sortRow: PropTypes.func,
-
-    /**
-     * Optional hook to manually control filtering of the rows from the
-     * TableToolbarSearch component
-     */
-    filterRows: PropTypes.func,
+    isSortable: PropTypes.bool,
 
     /**
      * Provide a string for the current locale
      */
     locale: PropTypes.string,
+
+    /**
+     * Specify whether the overflow menu (if it exists) should be shown always, or only on hover
+     */
+    overflowMenuOnHover: PropTypes.bool,
+
+    /**
+     * Specify whether the control should be a radio button or inline checkbox
+     */
+    radio: PropTypes.bool,
+
+    /**
+     * The `rows` prop is where you provide us with a list of all the rows that
+     * you want to render in the table. The only hard requirement is that this
+     * is an array of objects, and that each object has a unique `id` field
+     * available on it.
+     */
+    rows: PropTypes.arrayOf(
+      PropTypes.shape({
+        id: PropTypes.string.isRequired,
+        disabled: PropTypes.bool,
+        isSelected: PropTypes.bool,
+        isExpanded: PropTypes.bool,
+      })
+    ).isRequired,
+
+    /**
+     * `false` If true, will remove the table border
+     */
+    shouldShowBorder: PropTypes.bool,
+
+    /**
+     * `normal` Change the row height of table
+     */
+    size: PropTypes.oneOf(['compact', 'short', 'normal', 'tall']),
+
+    /**
+     * Optional hook to manually control sorting of the rows.
+     */
+    sortRow: PropTypes.func,
+
+    /**
+     * Specify whether the header should be sticky.
+     * Still experimental: may not work with every combination of table props
+     */
+    stickyHeader: PropTypes.bool,
 
     /**
      * Optional method that takes in a message id and returns an
@@ -106,45 +137,14 @@ export default class DataTable extends React.Component {
     translateWithId: PropTypes.func,
 
     /**
-     * `normal` Change the row height of table
-     */
-    size: PropTypes.oneOf(['compact', 'short', 'normal', 'tall']),
-
-    /**
-     * Specify whether the control should be a radio button or inline checkbox
-     */
-    radio: PropTypes.bool,
-
-    /**
-     * Specify whether the header should be sticky.
-     * Still experimental: may not work with every combination of table props
-     */
-    stickyHeader: PropTypes.bool,
-
-    /**
-     * Specify whether the table should be able to be sorted by its headers
-     */
-    isSortable: PropTypes.bool,
-
-    /**
-     * Specify whether the overflow menu (if it exists) should be shown always, or only on hover
-     */
-    overflowMenuOnHover: PropTypes.bool,
-
-    /**
-     * `true` to add useZebraStyles striping.
-     */
-    useZebraStyles: PropTypes.bool,
-
-    /**
      * `false` If true, will use a width of 'auto' instead of 100%
      */
     useStaticWidth: PropTypes.bool,
 
     /**
-     * `false` If true, will remove the table border
+     * `true` to add useZebraStyles striping.
      */
-    shouldShowBorder: PropTypes.bool,
+    useZebraStyles: PropTypes.bool,
   };
 
   static defaultProps = {

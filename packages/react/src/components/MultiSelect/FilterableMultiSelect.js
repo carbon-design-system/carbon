@@ -28,7 +28,6 @@ const getInstanceId = setupGetInstanceId();
 
 export default class FilterableMultiSelect extends React.Component {
   static propTypes = {
-    ...sortingPropTypes,
     /**
      * 'aria-label' of the ListBox component.
      */
@@ -40,61 +39,20 @@ export default class FilterableMultiSelect extends React.Component {
     disabled: PropTypes.bool,
 
     /**
+     * Additional props passed to Downshift
+     */
+    downshiftProps: PropTypes.shape(Downshift.propTypes),
+
+    /**
      * Specify a custom `id`
      */
     id: PropTypes.string.isRequired,
-
-    /**
-     * We try to stay as generic as possible here to allow individuals to pass
-     * in a collection of whatever kind of data structure they prefer
-     */
-    items: PropTypes.array.isRequired,
 
     /**
      * Allow users to pass in arbitrary items from their collection that are
      * pre-selected
      */
     initialSelectedItems: PropTypes.array,
-
-    /**
-     * Helper function passed to downshift that allows the library to render a
-     * given item to a string label. By default, it extracts the `label` field
-     * from a given item to serve as the item label in the list.
-     */
-    itemToString: PropTypes.func,
-
-    /**
-     * Specify the locale of the control. Used for the default `compareItems`
-     * used for sorting the list of items in the control.
-     */
-    locale: PropTypes.string,
-
-    /**
-     * Specify the size of the ListBox. Currently supports either `sm`, `lg` or `xl` as an option.
-     */
-    size: ListBoxPropTypes.ListBoxSize,
-
-    /**
-     * `onChange` is a utility for this controlled component to communicate to a
-     * consuming component what kind of internal state changes are occuring.
-     */
-    onChange: PropTypes.func,
-
-    /**
-     * Generic `placeholder` that will be used as the textual representation of
-     * what this field is for
-     */
-    placeholder: PropTypes.string.isRequired,
-
-    /**
-     * Specify title to show title on hover
-     */
-    useTitleInItem: PropTypes.bool,
-
-    /**
-     * `true` to use the light version.
-     */
-    light: PropTypes.bool,
 
     /**
      * Is the current selection invalid?
@@ -107,9 +65,45 @@ export default class FilterableMultiSelect extends React.Component {
     invalidText: PropTypes.string,
 
     /**
+     * Helper function passed to downshift that allows the library to render a
+     * given item to a string label. By default, it extracts the `label` field
+     * from a given item to serve as the item label in the list.
+     */
+    itemToString: PropTypes.func,
+
+    /**
+     * We try to stay as generic as possible here to allow individuals to pass
+     * in a collection of whatever kind of data structure they prefer
+     */
+    items: PropTypes.array.isRequired,
+
+    /**
+     * `true` to use the light version.
+     */
+    light: PropTypes.bool,
+
+    /**
+     * Specify the locale of the control. Used for the default `compareItems`
+     * used for sorting the list of items in the control.
+     */
+    locale: PropTypes.string,
+
+    /**
+     * `onChange` is a utility for this controlled component to communicate to a
+     * consuming component what kind of internal state changes are occuring.
+     */
+    onChange: PropTypes.func,
+
+    /**
      * Initialize the component with an open(`true`)/closed(`false`) menu.
      */
     open: PropTypes.bool,
+
+    /**
+     * Generic `placeholder` that will be used as the textual representation of
+     * what this field is for
+     */
+    placeholder: PropTypes.string.isRequired,
 
     /**
      * Specify feedback (mode) of the selection.
@@ -120,14 +114,21 @@ export default class FilterableMultiSelect extends React.Component {
     selectionFeedback: PropTypes.oneOf(['top', 'fixed', 'top-after-reopen']),
 
     /**
+     * Specify the size of the ListBox. Currently supports either `sm`, `lg` or `xl` as an option.
+     */
+    size: ListBoxPropTypes.ListBoxSize,
+
+    ...sortingPropTypes,
+
+    /**
      * Callback function for translating ListBoxMenuIcon SVG title
      */
     translateWithId: PropTypes.func,
 
     /**
-     * Additional props passed to Downshift
+     * Specify title to show title on hover
      */
-    downshiftProps: PropTypes.shape(Downshift.propTypes),
+    useTitleInItem: PropTypes.bool,
   };
 
   static getDerivedStateFromProps({ open }, state) {

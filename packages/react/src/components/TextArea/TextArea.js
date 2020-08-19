@@ -127,15 +127,40 @@ TextArea.propTypes = {
   disabled: PropTypes.bool,
 
   /**
+   * Provide text that is used alongside the control label for additional help
+   */
+  helperText: PropTypes.node,
+
+  /**
+   * Specify whether you want the underlying label to be visually hidden
+   */
+  hideLabel: PropTypes.bool,
+
+  /**
    * Provide a unique identifier for the control
    */
   id: PropTypes.string,
+
+  /**
+   * Specify whether the control is currently invalid
+   */
+  invalid: PropTypes.bool,
+
+  /**
+   * Provide the text that is displayed when the control is in an invalid state
+   */
+  invalidText: PropTypes.string,
 
   /**
    * Provide the text that will be read by a screen reader when visiting this
    * control
    */
   labelText: PropTypes.node.isRequired,
+
+  /**
+   * Specify whether you want the light version of this control
+   */
+  light: PropTypes.bool,
 
   /**
    * Optionally provide an `onChange` handler that is called whenever <textarea>
@@ -163,31 +188,6 @@ TextArea.propTypes = {
    * Provide the current value of the <textarea>
    */
   value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-
-  /**
-   * Specify whether the control is currently invalid
-   */
-  invalid: PropTypes.bool,
-
-  /**
-   * Provide the text that is displayed when the control is in an invalid state
-   */
-  invalidText: PropTypes.string,
-
-  /**
-   * Provide text that is used alongside the control label for additional help
-   */
-  helperText: PropTypes.node,
-
-  /**
-   * Specify whether you want the underlying label to be visually hidden
-   */
-  hideLabel: PropTypes.bool,
-
-  /**
-   * Specify whether you want the light version of this control
-   */
-  light: PropTypes.bool,
 };
 
 TextArea.defaultProps = {
