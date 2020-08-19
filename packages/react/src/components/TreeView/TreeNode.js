@@ -23,6 +23,7 @@ export default function TreeNode({
   disabled,
   isExpanded,
   label,
+  onNodeFocusEvent,
   onSelect: onNodeSelect,
   onToggle,
   onTreeSelect,
@@ -66,14 +67,6 @@ export default function TreeNode({
     }
     setExpanded(!expanded);
   }
-  function handleBlur(event) {
-    if (rest.onBlur) {
-      rest.onBlur(event);
-    }
-    if (currentNode && currentNode.current) {
-      currentNode.current.tabIndex = -1;
-    }
-  }
   function handleClick(event) {
     event.stopPropagation();
     if (!disabled) {
@@ -86,14 +79,6 @@ export default function TreeNode({
       if (rest.onClick) {
         rest.onClick(event);
       }
-    }
-  }
-  function handleFocus(event) {
-    if (rest.onFocus) {
-      rest.onFocus(event);
-    }
-    if (currentNode && currentNode.current) {
-      currentNode.current.tabIndex = 0;
     }
   }
   function handleKeyDown(event) {
@@ -141,6 +126,15 @@ export default function TreeNode({
       rest.onKeyDown(event);
     }
   }
+  function handleFocusEvent(event) {
+    if (event.type === 'blur' && rest.onBlur) {
+      rest.onBlur(event);
+    }
+    if (event.type === 'focus' && rest.onFocus) {
+      rest.onFocus(event);
+    }
+    onNodeFocusEvent && onNodeFocusEvent(event);
+  }
 
   useEffect(() => {
     /**
@@ -181,9 +175,9 @@ export default function TreeNode({
     ['aria-disabled']: disabled,
     className: treeNodeClasses,
     id,
-    onBlur: handleBlur,
+    onBlur: handleFocusEvent,
     onClick: handleClick,
-    onFocus: handleFocus,
+    onFocus: handleFocusEvent,
     onKeyDown: handleKeyDown,
     ref: currentNode,
     role: 'treeitem',
@@ -258,6 +252,11 @@ TreeNode.propTypes = {
    * Rendered label for the TreeNode
    */
   label: PropTypes.node,
+
+  /**
+   * Callback function for when the node receives or loses focus
+   */
+  onNodeFocusEvent: PropTypes.func,
 
   /**
    * Callback function for when the node is selected

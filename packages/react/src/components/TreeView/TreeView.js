@@ -58,11 +58,37 @@ export default function TreeView({
       onSelect(event, node);
     }
   }
+  function handleFocusEvent(event) {
+    if (event.type === 'blur') {
+      const {
+        relatedTarget: currentFocusedNode,
+        target: prevFocusedNode,
+      } = event;
+      if (treeRootRef?.current?.contains(currentFocusedNode)) {
+        prevFocusedNode.tabIndex = -1;
+        currentFocusedNode.tabIndex = 0;
+      }
+    }
+    if (event.type === 'focus') {
+      resetNodeTabIndices();
+      const {
+        relatedTarget: prevFocusedNode,
+        target: currentFocusedNode,
+      } = event;
+      if (treeRootRef?.current?.contains(currentFocusedNode)) {
+        if (prevFocusedNode) {
+          prevFocusedNode.tabIndex = -1;
+        }
+        currentFocusedNode.tabIndex = 0;
+      }
+    }
+  }
   let focusTarget = false;
   const nodesWithProps = React.Children.map(children, (node) => {
     const sharedNodeProps = {
       active,
       depth: 0,
+      onNodeFocusEvent: handleFocusEvent,
       onTreeSelect: handleTreeSelect,
       selected,
       tabIndex: (!node.props.disabled && -1) || null,
