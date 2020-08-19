@@ -360,3 +360,4 @@ export const WithCheckmarkColumns = () => {
       )}
     </DataTable>
   );
+};
