@@ -200,7 +200,7 @@ export default function TreeNode({
     );
   }
   return (
-    <li {...treeNodeProps} aria-expanded={expanded}>
+    <li {...treeNodeProps} aria-expanded={!!expanded}>
       <div className={`${prefix}--tree-node__label`} ref={currentNodeLabel}>
         {/* eslint-disable-next-line jsx-a11y/click-events-have-key-events, jsx-a11y/no-static-element-interactions */}
         <span
