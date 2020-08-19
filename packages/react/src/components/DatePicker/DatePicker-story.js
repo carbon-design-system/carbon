@@ -87,12 +87,6 @@ export const Simple = () => (
 
 Simple.storyName = 'simple';
 
-Simple.parameters = {
-  info: {
-    text: 'A simple Date Picker consists of an input field and no calendar.',
-  },
-};
-
 export const Single = () => (
   <DatePicker datePickerType="single">
     <DatePickerInput placeholder="mm/dd/yyyy" />
@@ -100,14 +94,6 @@ export const Single = () => (
 );
 
 Single.storyName = 'single with calendar';
-
-Single.parameters = {
-  info: {
-    text: `
-        A single Date Picker consists of an input field and a calendar.
-      `,
-  },
-};
 
 export const Range = () => {
   return (
@@ -126,92 +112,12 @@ export const Range = () => {
 
 Range.storyName = 'range with calendar';
 
-Range.parameters = {
-  info: {
-    text: `
-        A range Date Picker consists of two input fields and a calendar.
-      `,
-  },
-};
-
 export const DatePickerPlayground = () => (
   <DatePicker {...props.datePicker()} datePickerType="single">
     <DatePickerInput {...props.datePickerInput()} />
   </DatePicker>
 );
 
-// export const RangeWithCalendarAndMinMaxDates = () => {
-//   const datePickerInputProps = props.datePickerInput();
-//   return (
-//     <DatePicker
-//       {...props.datePicker()}
-//       minDate="1/10/2020"
-//       maxDate="1/20/2020"
-//       datePickerType="range"
-//       dateFormat="m/d/Y">
-//       <DatePickerInput {...datePickerInputProps} id="date-picker-input-id" />
-//       <DatePickerInput {...datePickerInputProps} id="date-picker-input-id-2" />
-//     </DatePicker>
-//   );
-// };
-
-// RangeWithCalendarAndMinMaxDates.storyName =
-//   'range with calendar and min/max dates';
-
-// RangeWithCalendarAndMinMaxDates.parameters = {
-//   info: {
-//     text: `
-//         A range Date Picker consists of two input fields and a calendar, and optionally, the minDate and maxDate fields.
-//       `,
-//   },
-// };
-
-// export const FullyControlled = () => (
-//   <WithState initialState={{ date: '' }}>
-//     {({ state, setState }) => (
-//       <>
-//         <DatePicker
-//           datePickerType="single"
-//           dateFormat="m/d/Y"
-//           value={state.date}
-//           onChange={(eventOrDates) => {
-//             const value = eventOrDates.target
-//               ? eventOrDates.target.value
-//               : eventOrDates[0];
-//             setState({ date: value });
-//           }}>
-//           <DatePickerInput
-//             {...props.datePickerInput()}
-//             id="date-picker-input-id"
-//           />
-//         </DatePicker>
-//         <button type="button" onClick={() => setState({ date: '01/01/2011' })}>
-//           Click me to set to 01/01/2011
-//         </button>
-//       </>
-//     )}
-//   </WithState>
-// );
-
-// FullyControlled.storyName = 'fully controlled';
-
-// FullyControlled.parameters = {
-//   info: {
-//     text: `
-//         If your application needs to control the value of the date picker and
-//         be notified of any changes.
-//       `,
-//   },
-// };
-
 export const Skeleton = () => <DatePickerSkeleton range />;
 
 Skeleton.storyName = 'skeleton';
-
-// Skeleton.parameters = {
-//   info: {
-//     text: `
-//             Placeholder skeleton state to use when content is loading.
-//             `,
-//   },
-// };

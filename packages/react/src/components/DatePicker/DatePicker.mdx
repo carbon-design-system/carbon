@@ -8,8 +8,18 @@ import DatePickerInput from '../DatePickerInput';
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 
 - [Overview](#overview)
+  - [Simple DatePicker](#simple-datepicker)
+  - [Range Datepicker](#range-datepicker)
+  - [Skeleton state](#skeleton-state)
 - [Component API](#component-api)
+  - [DatePicker `appendTo`](#datepicker-appendto)
   - [DatePicker `className`](#datepicker-classname)
+  - [DatePicker `dateFormat`](#datepicker-dateformat)
+  - [DatePicker `datePickerType`](#datepicker-datepickertype)
+  - [DatePicker `light`](#datepicker-light)
+  - [DatePicker `locale`](#datepicker-locale)
+  - [DatePicker `maxDate`](#datepicker-maxdate)
+  - [DatePicker `minDate`](#datepicker-mindate)
 - [References](#references)
 - [Feedback](#feedback)
 
@@ -58,14 +68,158 @@ You can use the `DatePickerSkeleton` component to render a skeleton variant of a
 
 <Props />
 
+### DatePicker `appendTo`
+
+By default, the `DatePicker` menu will be appended to the end of the `body`
+element. If you would like to attach it to a different node, you can specify a
+DOM element with the `appendTo` prop.
+
+```jsx
+const node = document.querySelector('#my-node');
+
+<DatePicker appendTo={node}>...</DatePicker>;
+```
+
 ### DatePicker `className`
 
 The className prop passed into `DatePicker` will be forwarded along to the
-underlying wrapper `div.bx--content-switcher` element. This is useful for
-specifying a custom class name for layout.
+underlying wrapper `div.bx--date-picker` element. This is useful for specifying
+a custom class name for layout.
 
 ```jsx
 <DatePicker className="some-class">...</DatePicker>
+```
+
+### DatePicker `dateFormat`
+
+You can use the `dateFormat` prop to change how the selected date is displayed
+in the input. For a complete list of supported date formatting tokens, please
+see the Flatpickr
+[documentation](https://flatpickr.js.org/formatting/#date-formatting-tokens)
+
+<DatePicker datePickerType="single" dateFormat="Y-m-d">
+  <DatePickerInput placeholder="yyyy-mm-dd" />
+</DatePicker>
+
+```jsx
+<DatePicker datePickerType="single" dateFormat="Y-m-d">
+  <DatePickerInput placeholder="mm/dd/yyyy" />
+</DatePicker>
+```
+
+### DatePicker `datePickerType`
+
+There are three supported variations of `DatePicker` in Carbon.
+
+- `simple` will render a simple text input _without_ a calendar dropdown.
+- `single` will render a a single text input _with_ a calendar dropdown.
+- `range` will indicate that multiple `DatePicker` inputs will be rendered. Two
+  `DatePickerInput` will need to be provided as children.
+
+```jsx
+<DatePicker datePickerType="range">
+  <DatePickerInput placeholder="Start" />
+  <DatePickerInput placeholder="End" />
+</DatePicker>
+```
+
+### DatePicker `light`
+
+In certain circumstances, a `DatePicker` will exist on a container element with
+the same background color. To improve contrast, you can use the `light` property
+to toggle the light variant of the `DatePicker`.
+
+```jsx
+<DatePicker light>...</DatePicker>
+```
+
+### DatePicker `locale`
+
+The `locale` prop can be used to help with internationalization. For best
+results, combine with the `dateFormat` prop. We pass this under the hood to the
+FlatPickr instance. A complete list of valid locales can be found in the
+[component API](#component-api) section
+
+<DatePicker locale="no" dateFormat="d/m/Y" datePickerType="single">
+  <DatePickerInput placeholder="dd/mm/yyyy" />
+</DatePicker>
+
+```jsx
+// Load Norwegian text with the proper date format
+<DatePicker locale="no" dateFormat="d/m/Y" datePickerType="single">
+  <DatePickerInput placeholder="dd/mm/yyyy" />
+</DatePicker>
+```
+
+### DatePicker `maxDate`
+
+Limits the date selection to any date before the date specified. The string
+format depends on the `locale` specified. For example, the top example below is
+using the default US date format, and the one below it is using the same format
+as the `locale` prop example. One is setting it as September 1st, and the other
+is setting it as January 9th.
+
+<DatePicker maxDate="09/01/2020" datePickerType="single">
+  <DatePickerInput placeholder="dd/mm/yyyy" />
+</DatePicker>
+<br />
+<DatePicker
+  maxDate="09/01/2020"
+  datePickerType="single"
+  locale="no"
+  dateFormat="d/m/Y">
+  <DatePickerInput placeholder="mm/dd/yyyy" />
+</DatePicker>
+
+```jsx
+<DatePicker maxDate="09/01/2020">
+  <DatePickerInput placeholder="mm/dd/yyyy" />
+</DatePicker>
+
+<DatePicker
+  maxDate="09/01/2020"
+  datePickerType="single"
+  locale="no"
+  dateFormat="d/m/Y">
+  <DatePickerInput placeholder="mm/dd/yyyy" />
+</DatePicker>;
+```
+
+### DatePicker `minDate`
+
+Works similarly to the `maxDate` prop. [See above](#datepicker-maxdate).
+
+<DatePicker maxDate="09/01/2020" datePickerType="single" value="07/15/1988">
+  <DatePickerInput placeholder="dd/mm/yyyy" />
+</DatePicker>
+
+### DatePicker `value`
+
+By default `DatePicker` will set the current date as its value. If you'd like to
+start this at a different date, you can pass in a date string or date object.
+
+<DatePicker maxDate="09/01/2020" datePickerType="single" value="07/15/1988">
+  <DatePickerInput placeholder="dd/mm/yyyy" />
+</DatePicker>
+<br />
+<DatePicker
+  maxDate="09/01/2020"
+  datePickerType="single"
+  value={new Date().setDate(-10)}>
+  <DatePickerInput placeholder="dd/mm/yyyy" />
+</DatePicker>
+
+```jsx
+<DatePicker maxDate="09/01/2020" datePickerType="single" value="07/15/1988">
+  <DatePickerInput placeholder="dd/mm/yyyy" />
+</DatePicker>
+
+<DatePicker
+  maxDate="09/01/2020"
+  datePickerType="single"
+  value={new Date().setDate(-10)}>
+  <DatePickerInput placeholder="dd/mm/yyyy" />
+</DatePicker>
 ```
 
 ## References
