@@ -34,6 +34,14 @@ export default function TreeView({
   const treeWalker = useRef(treeRootRef?.current);
   const [selected, setSelected] = useState(preselected);
   const [active, setActive] = useState(prespecifiedActive);
+  function resetNodeTabIndices() {
+    Array.prototype.forEach.call(
+      treeRootRef?.current?.querySelectorAll('[tabIndex="0"]') ?? [],
+      (item) => {
+        item.tabIndex = -1;
+      }
+    );
+  }
   function handleTreeSelect(event, node = {}) {
     const { id: nodeId } = node;
     if (multiselect && (event.metaKey || event.ctrlKey)) {
@@ -82,12 +90,7 @@ export default function TreeView({
       nextFocusNode = treeWalker.current.nextNode();
     }
     if (nextFocusNode && nextFocusNode !== event.target) {
-      Array.prototype.forEach.call(
-        treeRootRef?.current?.querySelectorAll('[tabIndex="0"]') ?? [],
-        (item) => {
-          item.tabIndex = -1;
-        }
-      );
+      resetNodeTabIndices();
       nextFocusNode.tabIndex = 0;
       nextFocusNode.focus();
     }
