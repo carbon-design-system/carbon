@@ -7133,6 +7133,9 @@ Map {
         "label": Object {
           "type": "node",
         },
+        "onNodeFocusEvent": Object {
+          "type": "func",
+        },
         "onSelect": Object {
           "type": "func",
         },
@@ -7272,6 +7275,9 @@ Map {
       },
       "label": Object {
         "type": "node",
+      },
+      "onNodeFocusEvent": Object {
+        "type": "func",
       },
       "onSelect": Object {
         "type": "func",

@@ -30,6 +30,7 @@ exports[`TreeView should render 1`] = `
       id="1"
       key=".0"
       label="1"
+      onNodeFocusEvent={[Function]}
       onTreeSelect={[Function]}
       selected={
         Array [
@@ -62,6 +63,7 @@ exports[`TreeView should render 1`] = `
       id="2"
       key=".1"
       label="2"
+      onNodeFocusEvent={[Function]}
       onSelect={[MockFunction]}
       onTreeSelect={[Function]}
       selected={
@@ -96,6 +98,7 @@ exports[`TreeView should render 1`] = `
       isExpanded={true}
       key=".2"
       label="5"
+      onNodeFocusEvent={[Function]}
       onTreeSelect={[Function]}
       selected={
         Array [
@@ -373,6 +376,7 @@ exports[`TreeView should render with icons 1`] = `
       id="1"
       key=".0"
       label="1"
+      onNodeFocusEvent={[Function]}
       onTreeSelect={[Function]}
       renderIcon={
         Object {
@@ -443,6 +447,7 @@ exports[`TreeView should render with icons 1`] = `
       id="2"
       key=".1"
       label="2"
+      onNodeFocusEvent={[Function]}
       onTreeSelect={[Function]}
       renderIcon={
         Object {
@@ -514,6 +519,7 @@ exports[`TreeView should render with icons 1`] = `
       isExpanded={true}
       key=".2"
       label="5"
+      onNodeFocusEvent={[Function]}
       onTreeSelect={[Function]}
       renderIcon={
         Object {
