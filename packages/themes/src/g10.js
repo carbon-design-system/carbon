@@ -130,6 +130,8 @@ export const decorative01 = gray20;
 
 export const hoverLightUI = '#e5e5e5';
 
+export const buttonSeparator = '#e0e0e0';
+
 export const skeleton01 = '#e5e5e5';
 export const skeleton02 = gray30;
 

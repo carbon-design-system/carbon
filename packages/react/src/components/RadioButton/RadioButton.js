@@ -37,20 +37,14 @@ class RadioButton extends React.Component {
     disabled: PropTypes.bool,
 
     /**
-     * Provide a unique id for the underlying <input> node
-     */
-    id: PropTypes.string,
-
-    /**
-     * Provide label text to be read by screen readers when interacting with the
-     * control
-     */
-    labelText: PropTypes.node.isRequired,
-
-    /**
      * Specify whether the label should be hidden, or not
      */
     hideLabel: PropTypes.bool,
+
+    /**
+     * Provide a unique id for the underlying <input> node
+     */
+    id: PropTypes.string,
 
     /**
      * Provide where label text should be placed
@@ -59,20 +53,26 @@ class RadioButton extends React.Component {
     labelPosition: PropTypes.oneOf(['top', 'right', 'bottom', 'left']),
 
     /**
+     * Provide label text to be read by screen readers when interacting with the
+     * control
+     */
+    labelText: PropTypes.node.isRequired,
+
+    /**
      * Provide a name for the underlying <input> node
      */
     name: PropTypes.string,
-
-    /**
-     * Provide a handler that is invoked when a user clicks on the control
-     */
-    onClick: PropTypes.func,
 
     /**
      * Provide an optional `onChange` hook that is called each time the value of
      * the underlying <input> changes
      */
     onChange: PropTypes.func,
+
+    /**
+     * Provide a handler that is invoked when a user clicks on the control
+     */
+    onClick: PropTypes.func,
 
     /**
      * Specify the value of the <RadioButton>

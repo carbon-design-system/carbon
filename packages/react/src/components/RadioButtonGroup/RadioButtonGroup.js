@@ -34,9 +34,9 @@ export default class RadioButtonGroup extends React.Component {
     defaultSelected: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
 
     /**
-     * Provide where radio buttons should be placed
+     * Specify whether the group is disabled
      */
-    orientation: PropTypes.oneOf(['horizontal', 'vertical']),
+    disabled: PropTypes.bool,
 
     /**
      * Provide where label text should be placed
@@ -49,15 +49,15 @@ export default class RadioButtonGroup extends React.Component {
     name: PropTypes.string.isRequired,
 
     /**
-     * Specify whether the group is disabled
-     */
-    disabled: PropTypes.bool,
-
-    /**
      * Provide an optional `onChange` hook that is called whenever the value of
      * the group changes
      */
     onChange: PropTypes.func,
+
+    /**
+     * Provide where radio buttons should be placed
+     */
+    orientation: PropTypes.oneOf(['horizontal', 'vertical']),
 
     /**
      * Specify the value that is currently selected in the group

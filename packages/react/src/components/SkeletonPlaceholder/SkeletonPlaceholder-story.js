@@ -8,7 +8,6 @@
 /* eslint-disable no-console */
 
 import React from 'react';
-import { storiesOf } from '@storybook/react';
 
 import { withKnobs, select } from '@storybook/addon-knobs';
 import SkeletonPlaceholder from '../SkeletonPlaceholder';
@@ -23,47 +22,49 @@ const props = () => ({
   className: select('Classes with different sizes', classNames),
 });
 
-storiesOf('SkeletonPlaceholder', module)
-  .addParameters({
+export default {
+  title: 'SkeletonPlaceholder',
+  decorators: [withKnobs],
+
+  parameters: {
     component: SkeletonPlaceholder,
-  })
-  .addDecorator(withKnobs)
-  .add(
-    'Default',
-    () => (
-      <div style={{ height: '250px', width: '250px' }}>
-        <style
-          dangerouslySetInnerHTML={{
-            __html: `
-          .my--skeleton__placeholder--small {
-            height: 100px;
-            width: 100px;
-          }
+  },
+};
 
-          .my--skeleton__placeholder--medium {
-            height: 150px;
-            width: 150px;
-          }
+export const Default = () => (
+  <div style={{ height: '250px', width: '250px' }}>
+    <style
+      dangerouslySetInnerHTML={{
+        __html: `
+      .my--skeleton__placeholder--small {
+        height: 100px;
+        width: 100px;
+      }
 
-          .my--skeleton__placeholder--large {
-            height: 250px;
-            width: 250px;
-          }
-        `,
-          }}
-        />
-        <SkeletonPlaceholder {...props()} />
-      </div>
-    ),
-    {
-      info: {
-        text: `
-        Skeleton states are used as a progressive loading state while the user waits for content to load.
+      .my--skeleton__placeholder--medium {
+        height: 150px;
+        width: 150px;
+      }
 
-        By taking a height and/or width property, this component can be used when you know the exact dimensions of the incoming content, such as an image.
+      .my--skeleton__placeholder--large {
+        height: 250px;
+        width: 250px;
+      }
+    `,
+      }}
+    />
+    <SkeletonPlaceholder {...props()} />
+  </div>
+);
 
-        However, for performance reasons, it's recommended to create a class in your stylesheet to set the dimensions.
-      `,
-      },
-    }
-  );
+Default.parameters = {
+  info: {
+    text: `
+    Skeleton states are used as a progressive loading state while the user waits for content to load.
+
+    By taking a height and/or width property, this component can be used when you know the exact dimensions of the incoming content, such as an image.
+
+    However, for performance reasons, it's recommended to create a class in your stylesheet to set the dimensions.
+  `,
+  },
+};

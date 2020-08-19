@@ -45,11 +45,6 @@ FormGroup.propTypes = {
   children: PropTypes.node,
 
   /**
-   * Provide the text to be rendered inside of the fieldset <legend>
-   */
-  legendText: PropTypes.string.isRequired,
-
-  /**
    * Provide a custom className to be applied to the containing <fieldset> node
    */
   className: PropTypes.string,
@@ -58,6 +53,11 @@ FormGroup.propTypes = {
    * Specify whether the <FormGroup> is invalid
    */
   invalid: PropTypes.bool,
+
+  /**
+   * Provide the text to be rendered inside of the fieldset <legend>
+   */
+  legendText: PropTypes.node.isRequired,
 
   /**
    * Specify whether the message should be displayed in the <FormGroup>

@@ -30,19 +30,14 @@ export default class ToolbarSearch extends Component {
     className: PropTypes.string,
 
     /**
-     * The `type` of the `<input>`.
+     * The ID of the `<input>`.
      */
-    type: PropTypes.string,
+    id: PropTypes.string,
 
     /**
-     * `true` to use the small version of the UI.
+     * The ID of the `<label>`.
      */
-    small: PropTypes.bool,
-
-    /**
-     * The placeholder text of the `<input>`.
-     */
-    placeHolderText: PropTypes.string,
+    labelId: PropTypes.string,
 
     /**
      * The text in the `<label>`.
@@ -50,9 +45,9 @@ export default class ToolbarSearch extends Component {
     labelText: PropTypes.node,
 
     /**
-     * The ID of the `<input>`.
+     * The placeholder text of the `<input>`.
      */
-    id: PropTypes.string,
+    placeHolderText: PropTypes.string,
 
     /**
      * Optional prop to specify the role of the ToolbarSearch
@@ -60,9 +55,14 @@ export default class ToolbarSearch extends Component {
     role: PropTypes.string,
 
     /**
-     * The ID of the `<label>`.
+     * `true` to use the small version of the UI.
      */
-    labelId: PropTypes.string,
+    small: PropTypes.bool,
+
+    /**
+     * The `type` of the `<input>`.
+     */
+    type: PropTypes.string,
   };
 
   static defaultProps = {
@@ -138,6 +138,7 @@ export default class ToolbarSearch extends Component {
             }}
           />
           <button
+            type="button"
             className={`${prefix}--toolbar-search__btn`}
             title={labelText}
             onClick={this.expandSearch}>

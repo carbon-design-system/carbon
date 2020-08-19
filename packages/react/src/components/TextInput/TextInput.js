@@ -181,15 +181,45 @@ TextInput.propTypes = {
   disabled: PropTypes.bool,
 
   /**
+   * Provide text that is used alongside the control label for additional help
+   */
+  helperText: PropTypes.node,
+
+  /**
+   * Specify whether you want the underlying label to be visually hidden
+   */
+  hideLabel: PropTypes.bool,
+
+  /**
    * Specify a custom `id` for the <input>
    */
   id: PropTypes.string.isRequired,
+
+  /**
+   * `true` to use the inline version.
+   */
+  inline: PropTypes.bool,
+
+  /**
+   * Specify whether the control is currently invalid
+   */
+  invalid: PropTypes.bool,
+
+  /**
+   * Provide the text that is displayed when the control is in an invalid state
+   */
+  invalidText: PropTypes.string,
 
   /**
    * Provide the text that will be read by a screen reader when visiting this
    * control
    */
   labelText: PropTypes.node.isRequired,
+
+  /**
+   * `true` to use the light version.
+   */
+  light: PropTypes.bool,
 
   /**
    * Optionally provide an `onChange` handler that is called whenever <input>
@@ -224,43 +254,13 @@ TextInput.propTypes = {
   value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
 
   /**
-   * Specify whether you want the underlying label to be visually hidden
-   */
-  hideLabel: PropTypes.bool,
-
-  /**
-   * Specify whether the control is currently invalid
-   */
-  invalid: PropTypes.bool,
-
-  /**
-   * Provide the text that is displayed when the control is in an invalid state
-   */
-  invalidText: PropTypes.string,
-
-  /**
    * Specify whether the control is currently in warning state
    */
   warn: PropTypes.bool,
-
   /**
    * Provide the text that is displayed when the control is in warning state
    */
   warnText: PropTypes.string,
-
-  /**
-   * Provide text that is used alongside the control label for additional help
-   */
-  helperText: PropTypes.node,
-
-  /**
-   * `true` to use the light version.
-   */
-  light: PropTypes.bool,
-  /**
-   * `true` to use the inline version.
-   */
-  inline: PropTypes.bool,
 };
 
 TextInput.defaultProps = {

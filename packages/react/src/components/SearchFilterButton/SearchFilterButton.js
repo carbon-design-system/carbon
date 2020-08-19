@@ -43,14 +43,14 @@ const SearchFilterButton = ({ labelText, iconDescription, ...other }) => {
 
 SearchFilterButton.propTypes = {
   /**
-   * The a11y label text.
-   */
-  labelText: PropTypes.string,
-
-  /**
    * The icon description.
    */
   iconDescription: PropTypes.string,
+
+  /**
+   * The a11y label text.
+   */
+  labelText: PropTypes.string,
 };
 
 SearchFilterButton.defaultProps = {

@@ -104,6 +104,7 @@ export function ProgressStep({
   return (
     <li className={classes}>
       <button
+        type="button"
         className={classnames(`${prefix}--progress-step-button`, {
           [`${prefix}--progress-step-button--unclickable`]: !onClick || current,
         })}
@@ -136,24 +137,9 @@ export function ProgressStep({
 
 ProgressStep.propTypes = {
   /**
-   * Index of the current step within the ProgressIndicator
-   */
-  index: PropTypes.number,
-
-  /**
-   * Provide the label for the <ProgressStep>
-   */
-  label: PropTypes.node.isRequired,
-
-  /**
    * Provide an optional className to be applied to the containing <li> node
    */
   className: PropTypes.string,
-
-  /**
-   * Specify whether the step is the current step
-   */
-  current: PropTypes.bool,
 
   /**
    * Specify whether the step has been completed
@@ -161,9 +147,24 @@ ProgressStep.propTypes = {
   complete: PropTypes.bool,
 
   /**
+   * Specify whether the step is the current step
+   */
+  current: PropTypes.bool,
+
+  /**
    * Provide a description for the <ProgressStep>
    */
   description: PropTypes.string,
+
+  /**
+   * Specify whether the step is disabled
+   */
+  disabled: PropTypes.bool,
+
+  /**
+   * Index of the current step within the ProgressIndicator
+   */
+  index: PropTypes.number,
 
   /**
    * Specify whether the step is invalid
@@ -171,9 +172,19 @@ ProgressStep.propTypes = {
   invalid: PropTypes.bool,
 
   /**
-   * Provide an optional secondary label
+   * Provide the label for the <ProgressStep>
    */
-  secondaryLabel: PropTypes.string,
+  label: PropTypes.node.isRequired,
+
+  /**
+   * A callback called if the step is clicked or the enter key is pressed
+   */
+  onClick: PropTypes.func,
+
+  /**
+   * Provide the props that describe a progress step tooltip
+   */
+  overflowTooltipProps: PropTypes.object,
 
   /*
    * An optional parameter to allow for overflow content to be rendered in a
@@ -182,24 +193,14 @@ ProgressStep.propTypes = {
   renderLabel: PropTypes.func,
 
   /**
-   * Provide the props that describe a progress step tooltip
+   * Provide an optional secondary label
    */
-  overflowTooltipProps: PropTypes.object,
-
-  /**
-   * Specify whether the step is disabled
-   */
-  disabled: PropTypes.bool,
+  secondaryLabel: PropTypes.string,
 
   /**
    * The ID of the tooltip content.
    */
   tooltipId: PropTypes.string,
-
-  /**
-   * A callback called if the step is clicked or the enter key is pressed
-   */
-  onClick: PropTypes.func,
 
   /**
    * Optional method that takes in a message id and returns an
@@ -239,13 +240,13 @@ export class ProgressIndicator extends Component {
     onChange: PropTypes.func,
 
     /**
-     * Determines whether or not the ProgressIndicator should be rendered vertically.
-     */
-    vertical: PropTypes.bool,
-    /**
      * Specify whether the progress steps should be split equally in size in the div
      */
     spaceEqually: PropTypes.bool,
+    /**
+     * Determines whether or not the ProgressIndicator should be rendered vertically.
+     */
+    vertical: PropTypes.bool,
   };
 
   static defaultProps = {

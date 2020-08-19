@@ -42,6 +42,7 @@ const TableExpandRow = ({
         data-previous-value={previousValue}
         headers={expandHeader}>
         <button
+          type="button"
           className={`${prefix}--table-expand__button`}
           onClick={onExpand}
           title={expandIconDescription}
@@ -63,8 +64,18 @@ TableExpandRow.propTypes = {
    * focused
    */
   ariaLabel: PropTypes.string.isRequired,
-  className: PropTypes.string,
   children: PropTypes.node,
+  className: PropTypes.string,
+  /**
+   * The id of the matching th node in the table head. Addresses a11y concerns outlined here: https://www.ibm.com/able/guidelines/ci162/info_and_relationships.html and https://www.w3.org/TR/WCAG20-TECHS/H43
+   */
+  expandHeader: PropTypes.string,
+
+  /**
+   * The description of the chevron right icon, to be put in its SVG `<title>` element.
+   */
+  expandIconDescription: PropTypes.string,
+
   /**
    * Specify whether this row is expanded or not. This helps coordinate data
    * attributes so that `TableExpandRow` and `TableExapndedRow` work together
@@ -80,16 +91,6 @@ TableExpandRow.propTypes = {
    * Hook for when a listener initiates a request to expand the given row
    */
   onExpand: PropTypes.func.isRequired,
-
-  /**
-   * The description of the chevron right icon, to be put in its SVG `<title>` element.
-   */
-  expandIconDescription: PropTypes.string,
-
-  /**
-   * The id of the matching th node in the table head. Addresses a11y concerns outlined here: https://www.ibm.com/able/guidelines/ci162/info_and_relationships.html and https://www.w3.org/TR/WCAG20-TECHS/H43
-   */
-  expandHeader: PropTypes.string,
 };
 
 TableExpandRow.defaultProps = {

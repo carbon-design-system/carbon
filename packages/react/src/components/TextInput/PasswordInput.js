@@ -150,15 +150,45 @@ PasswordInput.propTypes = {
   disabled: PropTypes.bool,
 
   /**
+   * Provide text that is used alongside the control label for additional help
+   */
+  helperText: PropTypes.node,
+
+  /**
+   * Specify whether or not the underlying label is visually hidden
+   */
+  hideLabel: PropTypes.bool,
+
+  /**
+   * "Hide password" tooltip text on password visibility toggle
+   */
+  hidePasswordLabel: PropTypes.string,
+
+  /**
    * Provide a unique identifier for the input field
    */
   id: PropTypes.string.isRequired,
+
+  /**
+   * Specify whether the control is currently invalid
+   */
+  invalid: PropTypes.bool,
+
+  /**
+   * Provide the text that is displayed when the control is in an invalid state
+   */
+  invalidText: PropTypes.string,
 
   /**
    * Provide the text that will be read by a screen reader when visiting this
    * control
    */
   labelText: PropTypes.node.isRequired,
+
+  /**
+   * Specify light version or default version of this control
+   */
+  light: PropTypes.bool,
 
   /**
    * Optionally provide an `onChange` handler that is called whenever <input>
@@ -178,53 +208,6 @@ PasswordInput.propTypes = {
   placeholder: PropTypes.string,
 
   /**
-   * Provide the current value of the <input>
-   */
-  value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-
-  /**
-   * Specify whether or not the underlying label is visually hidden
-   */
-  hideLabel: PropTypes.bool,
-
-  /**
-   * Specify whether the control is currently invalid
-   */
-  invalid: PropTypes.bool,
-
-  /**
-   * Provide the text that is displayed when the control is in an invalid state
-   */
-  invalidText: PropTypes.string,
-
-  /**
-   * Provide text that is used alongside the control label for additional help
-   */
-  helperText: PropTypes.node,
-
-  /**
-   * Specify light version or default version of this control
-   */
-  light: PropTypes.bool,
-
-  /**
-   * Specify the direction of the tooltip for icon-only buttons.
-   * Can be either top, right, bottom, or left.
-   */
-  tooltipPosition: PropTypes.oneOf(['top', 'right', 'bottom', 'left']),
-
-  /**
-   * Specify the alignment of the tooltip to the icon-only button.
-   * Can be one of: start, center, or end.
-   */
-  tooltipAlignment: PropTypes.oneOf(['start', 'center', 'end']),
-
-  /**
-   * "Hide password" tooltip text on password visibility toggle
-   */
-  hidePasswordLabel: PropTypes.string,
-
-  /**
    * "Show password" tooltip text on password visibility toggle
    */
   showPasswordLabel: PropTypes.string,
@@ -233,6 +216,23 @@ PasswordInput.propTypes = {
    * Specify the size of the Text Input. Currently supports either `small` or `large` as an option. If omitted, defaults to standard size
    */
   size: PropTypes.string,
+
+  /**
+   * Specify the alignment of the tooltip to the icon-only button.
+   * Can be one of: start, center, or end.
+   */
+  tooltipAlignment: PropTypes.oneOf(['start', 'center', 'end']),
+
+  /**
+   * Specify the direction of the tooltip for icon-only buttons.
+   * Can be either top, right, bottom, or left.
+   */
+  tooltipPosition: PropTypes.oneOf(['top', 'right', 'bottom', 'left']),
+
+  /**
+   * Provide the current value of the <input>
+   */
+  value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
 };
 
 PasswordInput.defaultProps = {

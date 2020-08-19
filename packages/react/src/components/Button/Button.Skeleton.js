@@ -33,9 +33,9 @@ const ButtonSkeleton = ({ className, small, href, ...rest }) => {
 
 ButtonSkeleton.propTypes = {
   /**
-   * Specify whether the Button should be a small variant
+   * Specify an optional className to add.
    */
-  small: PropTypes.bool,
+  className: PropTypes.string,
 
   /**
    * Optionally specify an href for your Button to become an <a> element
@@ -43,9 +43,9 @@ ButtonSkeleton.propTypes = {
   href: PropTypes.string,
 
   /**
-   * Specify an optional className to add.
+   * Specify whether the Button should be a small variant
    */
-  className: PropTypes.string,
+  small: PropTypes.bool,
 };
 
 ButtonSkeleton.defaultProps = {

@@ -6,7 +6,6 @@
  */
 
 import React from 'react';
-import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 import { withKnobs, boolean, select, text } from '@storybook/addon-knobs';
 import Dropdown from '../Dropdown';
@@ -78,109 +77,114 @@ const props = () => ({
   ),
 });
 
-storiesOf('Dropdown', module)
-  .addParameters({
+export default {
+  title: 'Dropdown',
+  decorators: [withKnobs],
+
+  parameters: {
     component: Dropdown,
+
     subcomponents: {
       DropdownSkeleton,
     },
-  })
-  .addDecorator(withKnobs)
-  .add(
-    'default',
-    () => (
+  },
+};
+
+export const Default = () => (
+  <div style={{ width: 300 }}>
+    <Dropdown
+      {...props()}
+      items={items}
+      itemToString={(item) => (item ? item.text : '')}
+      onChange={action('onChange')}
+    />
+  </div>
+);
+
+Default.storyName = 'default';
+
+Default.parameters = {
+  info: {
+    text: 'Dropdown',
+  },
+};
+
+export const Inline = () => (
+  <div style={{ width: 600 }}>
+    <Dropdown
+      {...props()}
+      type="inline"
+      items={items}
+      itemToString={(item) => (item ? item.text : '')}
+      onChange={action('onChange')}
+    />
+  </div>
+);
+
+Inline.storyName = 'inline';
+
+Inline.parameters = {
+  info: {
+    text: 'Dropdown',
+  },
+};
+
+export const ItemsAsStrings = () => (
+  <div style={props.inline ? { width: 500 } : { width: 300 }}>
+    <Dropdown {...props()} items={stringItems} onChange={action('onChange')} />
+  </div>
+);
+
+ItemsAsStrings.storyName = 'items as strings';
+
+ItemsAsStrings.parameters = {
+  info: {
+    text: 'Rendering an array of strings as `items`',
+  },
+};
+
+export const FullyControlled = () => (
+  <WithState initialState={{ selectedItem: items[0] }}>
+    {({ state, setState }) => (
       <div style={{ width: 300 }}>
         <Dropdown
           {...props()}
           items={items}
           itemToString={(item) => (item ? item.text : '')}
-          onChange={action('onChange')}
+          onChange={({ selectedItem }) =>
+            setTimeout(() => setState({ selectedItem }), 1000)
+          }
+          selectedItem={state.selectedItem}
         />
       </div>
-    ),
-    {
-      info: {
-        text: 'Dropdown',
-      },
-    }
-  )
-  .add(
-    'inline',
-    () => (
-      <div style={{ width: 600 }}>
-        <Dropdown
-          {...props()}
-          type="inline"
-          items={items}
-          itemToString={(item) => (item ? item.text : '')}
-          onChange={action('onChange')}
-        />
-      </div>
-    ),
-    {
-      info: {
-        text: 'Dropdown',
-      },
-    }
-  )
-  .add(
-    'items as strings',
-    () => (
-      <div style={props.inline ? { width: 500 } : { width: 300 }}>
-        <Dropdown
-          {...props()}
-          items={stringItems}
-          onChange={action('onChange')}
-        />
-      </div>
-    ),
-    {
-      info: {
-        text: 'Rendering an array of strings as `items`',
-      },
-    }
-  )
-  .add(
-    'fully controlled',
-    () => (
-      <WithState initialState={{ selectedItem: items[0] }}>
-        {({ state, setState }) => (
-          <div style={{ width: 300 }}>
-            <Dropdown
-              {...props()}
-              items={items}
-              itemToString={(item) => (item ? item.text : '')}
-              onChange={({ selectedItem }) =>
-                setTimeout(() => setState({ selectedItem }), 1000)
-              }
-              selectedItem={state.selectedItem}
-            />
-          </div>
-        )}
-      </WithState>
-    ),
-    {
-      info: {
-        text: `
-            Sometimes you want to control everything.
-          `,
-      },
-    }
-  )
-  .add(
-    'skeleton',
-    () => (
-      <div style={{ width: 300 }}>
-        <DropdownSkeleton />
-        &nbsp;
-        <DropdownSkeleton inline />
-      </div>
-    ),
-    {
-      info: {
-        text: `
-            Placeholder skeleton state to use when content is loading.
-          `,
-      },
-    }
-  );
+    )}
+  </WithState>
+);
+
+FullyControlled.storyName = 'fully controlled';
+
+FullyControlled.parameters = {
+  info: {
+    text: `
+        Sometimes you want to control everything.
+      `,
+  },
+};
+
+export const Skeleton = () => (
+  <div style={{ width: 300 }}>
+    <DropdownSkeleton />
+    &nbsp;
+    <DropdownSkeleton inline />
+  </div>
+);
+
+Skeleton.storyName = 'skeleton';
+
+Skeleton.parameters = {
+  info: {
+    text: `
+        Placeholder skeleton state to use when content is loading.
+      `,
+  },
+};

@@ -72,6 +72,7 @@ exports[`Dropdown should render 1`] = `
           id="downshift-0-toggle-button"
           onClick={[Function]}
           onKeyDown={[Function]}
+          type="button"
         >
           <span
             className="bx--list-box__label"
@@ -221,6 +222,7 @@ exports[`Dropdown should render custom item components 1`] = `
           id="downshift-6-toggle-button"
           onClick={[Function]}
           onKeyDown={[Function]}
+          type="button"
         >
           <span
             className="bx--list-box__label"
@@ -528,6 +530,7 @@ exports[`Dropdown should render with strings as items 1`] = `
           id="downshift-4-toggle-button"
           onClick={[Function]}
           onKeyDown={[Function]}
+          type="button"
         >
           <span
             className="bx--list-box__label"

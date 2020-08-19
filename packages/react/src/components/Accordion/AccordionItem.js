@@ -15,7 +15,7 @@ import { useId } from '../../internal/useId';
 import deprecate from '../../prop-types/deprecate.js';
 
 const { prefix } = settings;
-const defaultRenderExpando = (props) => <button {...props} />;
+const defaultRenderExpando = (props) => <button type="button" {...props} />;
 
 function AccordionItem({
   children,
@@ -101,17 +101,6 @@ AccordionItem.propTypes = {
   className: PropTypes.string,
 
   /**
-   * The accordion title.
-   */
-  title: PropTypes.node,
-
-  /**
-   * The callback function to render the expando button.
-   * Can be a React component class.
-   */
-  renderExpando: PropTypes.func,
-
-  /**
    * The description of the expando icon.
    */
   iconDescription: deprecate(
@@ -123,11 +112,6 @@ AccordionItem.propTypes = {
   ),
 
   /**
-   * `true` to open the expando.
-   */
-  open: PropTypes.bool,
-
-  /**
    * The handler of the massaged `click` event.
    */
   onClick: PropTypes.func,
@@ -136,6 +120,22 @@ AccordionItem.propTypes = {
    * The handler of the massaged `click` event on the heading.
    */
   onHeadingClick: PropTypes.func,
+
+  /**
+   * `true` to open the expando.
+   */
+  open: PropTypes.bool,
+
+  /**
+   * The callback function to render the expando button.
+   * Can be a React component class.
+   */
+  renderExpando: PropTypes.func,
+
+  /**
+   * The accordion title.
+   */
+  title: PropTypes.node,
 };
 
 export default AccordionItem;

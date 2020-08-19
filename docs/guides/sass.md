@@ -1,5 +1,3 @@
-<!-- alex disable color -->
-
 # Sass
 
 <!-- prettier-ignore-start -->

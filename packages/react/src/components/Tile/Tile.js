@@ -73,22 +73,6 @@ export class ClickableTile extends Component {
     className: PropTypes.string,
 
     /**
-     * The href for the link.
-     */
-    href: PropTypes.string,
-
-    /**
-     * The rel property for the link.
-     */
-    rel: PropTypes.string,
-
-    /**
-     * `true` to use the light version. For use on $ui-01 backgrounds only.
-     * Don't use this to make tile background color same as container background color.
-     */
-    light: PropTypes.bool,
-
-    /**
      * Specify the function to run when the ClickableTile is clicked
      */
     handleClick: PropTypes.func,
@@ -97,6 +81,22 @@ export class ClickableTile extends Component {
      * Specify the function to run when the ClickableTile is interacted with via a keyboard
      */
     handleKeyDown: PropTypes.func,
+
+    /**
+     * The href for the link.
+     */
+    href: PropTypes.string,
+
+    /**
+     * `true` to use the light version. For use on $ui-01 backgrounds only.
+     * Don't use this to make tile background color same as container background color.
+     */
+    light: PropTypes.bool,
+
+    /**
+     * The rel property for the link.
+     */
+    rel: PropTypes.string,
   };
 
   static defaultProps = {
@@ -197,34 +197,14 @@ export class SelectableTile extends Component {
     className: PropTypes.string,
 
     /**
-     * `true` to select this tile.
+     * Specify the function to run when the SelectableTile is clicked
      */
-    selected: PropTypes.bool,
+    handleClick: PropTypes.func,
 
     /**
-     * The ID of the `<input>`.
+     * Specify the function to run when the SelectableTile is interacted with via a keyboard
      */
-    id: PropTypes.string,
-
-    /**
-     * The value of the `<input>`.
-     */
-    value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
-
-    /**
-     * The `name` of the `<input>`.
-     */
-    name: PropTypes.string,
-
-    /**
-     * The `title` of the `<input>`.
-     */
-    title: PropTypes.string,
-
-    /**
-     * The empty handler of the `<input>`.
-     */
-    onChange: PropTypes.func,
+    handleKeyDown: PropTypes.func,
 
     /**
      * The description of the checkmark icon.
@@ -236,9 +216,9 @@ export class SelectableTile extends Component {
     ),
 
     /**
-     * Specify the tab index of the wrapper element
+     * The ID of the `<input>`.
      */
-    tabIndex: PropTypes.number,
+    id: PropTypes.string,
 
     /**
      * `true` to use the light version. For use on $ui-01 backgrounds only.
@@ -247,14 +227,34 @@ export class SelectableTile extends Component {
     light: PropTypes.bool,
 
     /**
-     * Specify the function to run when the SelectableTile is clicked
+     * The `name` of the `<input>`.
      */
-    handleClick: PropTypes.func,
+    name: PropTypes.string,
 
     /**
-     * Specify the function to run when the SelectableTile is interacted with via a keyboard
+     * The empty handler of the `<input>`.
      */
-    handleKeyDown: PropTypes.func,
+    onChange: PropTypes.func,
+
+    /**
+     * `true` to select this tile.
+     */
+    selected: PropTypes.bool,
+
+    /**
+     * Specify the tab index of the wrapper element
+     */
+    tabIndex: PropTypes.number,
+
+    /**
+     * The `title` of the `<input>`.
+     */
+    title: PropTypes.string,
+
+    /**
+     * The value of the `<input>`.
+     */
+    value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
   };
 
   static defaultProps = {
@@ -398,6 +398,22 @@ export class ExpandableTile extends Component {
     expanded: PropTypes.bool,
 
     /**
+     * Specify the function to run when the ExpandableTile is clicked
+     */
+    handleClick: PropTypes.func,
+
+    /**
+     * An ID that can be provided to aria-labelledby
+     */
+    id: PropTypes.string,
+
+    /**
+     * `true` to use the light version. For use on $ui-01 backgrounds only.
+     * Don't use this to make tile background color same as container background color.
+     */
+    light: PropTypes.bool,
+
+    /**
      * optional handler to decide whether to ignore a click. returns false if click should be ignored
      */
     onBeforeClick: PropTypes.func,
@@ -416,22 +432,6 @@ export class ExpandableTile extends Component {
      * The description of the "expanded" icon that can be read by screen readers.
      */
     tileExpandedIconText: PropTypes.string,
-
-    /**
-     * An ID that can be provided to aria-labelledby
-     */
-    id: PropTypes.string,
-
-    /**
-     * `true` to use the light version. For use on $ui-01 backgrounds only.
-     * Don't use this to make tile background color same as container background color.
-     */
-    light: PropTypes.bool,
-
-    /**
-     * Specify the function to run when the ExpandableTile is clicked
-     */
-    handleClick: PropTypes.func,
   };
 
   static defaultProps = {
@@ -576,6 +576,7 @@ export class ExpandableTile extends Component {
     return (
       // eslint-disable-next-line jsx-a11y/click-events-have-key-events,jsx-a11y/no-static-element-interactions
       <button
+        type="button"
         ref={(tile) => {
           this.tile = tile;
         }}

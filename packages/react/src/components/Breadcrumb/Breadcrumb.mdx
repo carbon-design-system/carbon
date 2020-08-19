@@ -1,0 +1,63 @@
+import { Story, Preview, Props } from '@storybook/addon-docs/blocks';
+import { Breadcrumb, BreadcrumbItem, BreadcrumbSkeleton } from '../Breadcrumb';
+
+# Breadcrumb
+
+## Table of Contents
+
+- [Overview](#overview)
+- [Skeleton state](#skeleton-state)
+- [Component API](#component-api)
+- [References](#references)
+- [Feedback](#feedback)
+
+## Overview
+
+You can build a breadcrumb using a combination of the `Breadcrumb` and `BreadcrumbItem` components. The `Breadcrumb` component accepts a list of `BreadcrumbItem` components as `children` and each `BreadcrumbItem` is responsible for displaying the page links in the hierarchy.
+
+<Preview>
+  <Story id="breadcrumb--breadcrumb" />
+</Preview>
+
+## Skeleton state
+
+You can use the `BreadcrumbSkeleton` component to render a skeleton variant of a breadcrumb. This is useful to display while content in your breadcrumb is being fetched from an external resource like an API.
+
+<Preview>
+  <Story id="breadcrumb--skeleton" />
+</Preview>
+
+## Component API
+
+<Props />
+
+### Breadcrumb noTrailingSlash
+
+You can use the `noTrailingSlash` prop to omit the slash from the end of the current page.
+
+```jsx
+<Breadcrumb noTrailingSlash>
+  <BreadcrumbItem href="#">Breadcrumb 1</BreadcrumbItem>
+  <BreadcrumbItem href="#">Breadcrumb 2</BreadcrumbItem>
+  <BreadcrumbItem href="#">Breadcrumb 3</BreadcrumbItem>
+</Breadcrumb>
+```
+
+### BreadcrumbItem isCurrentPage
+
+You can use the `isCurrentPage` prop on a `BreadcrumbItem` to represent the current page.
+
+```jsx
+<Breadcrumb>
+  <BreadcrumbItem href="#">Breadcrumb 1</BreadcrumbItem>
+  <BreadcrumbItem href="#">Breadcrumb 2</BreadcrumbItem>
+  <BreadcrumbItem href="#" isCurrentPage>
+    Breadcrumb 3
+  </BreadcrumbItem>
+</Breadcrumb>
+```
+
+## Feedback
+
+Help us improve this component by providing feedback through, asking questions on Slack,or updating this file on GitHub
+[GitHub](https://github.com/carbon-design-system/carbon/edit/master/packages/react/src/components/Breadcrumb/Breadcrumb.mdx).
