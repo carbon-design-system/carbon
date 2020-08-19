@@ -66,6 +66,14 @@ export default function TreeNode({
     }
     setExpanded(!expanded);
   }
+  function handleBlur(event) {
+    if (rest.onBlur) {
+      rest.onBlur(event);
+    }
+    if (currentNode && currentNode.current) {
+      currentNode.current.tabIndex = -1;
+    }
+  }
   function handleClick(event) {
     event.stopPropagation();
     if (!disabled) {
@@ -78,6 +86,14 @@ export default function TreeNode({
       if (rest.onClick) {
         rest.onClick(event);
       }
+    }
+  }
+  function handleFocus(event) {
+    if (rest.onFocus) {
+      rest.onFocus(event);
+    }
+    if (currentNode && currentNode.current) {
+      currentNode.current.tabIndex = 0;
     }
   }
   function handleKeyDown(event) {
@@ -165,7 +181,9 @@ export default function TreeNode({
     ['aria-disabled']: disabled,
     className: treeNodeClasses,
     id,
+    onBlur: handleBlur,
     onClick: handleClick,
+    onFocus: handleFocus,
     onKeyDown: handleKeyDown,
     ref: currentNode,
     role: 'treeitem',
