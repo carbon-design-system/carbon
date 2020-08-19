@@ -18,4 +18,5 @@ module.exports = {
     'storybook-readme/register',
     './addon-carbon-theme/register',
   ],
+  typescript: { reactDocgen: 'none' },
 };
