@@ -57,6 +57,12 @@ export const skeleton = () => (
   </div>
 );
 
+export const light = () => (
+  <CodeSnippet type="inline" light="true" feedback="Copied to clipboard">
+    {'node -v'}
+  </CodeSnippet>
+);
+
 const lightPropMessage = (
   <small style={{ display: 'block', paddingBottom: '1rem' }}>
     The snippet container should never be the same color as the page background.
