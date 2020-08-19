@@ -15,7 +15,8 @@ import DataTable, {
   TableHeader,
   TableRow,
 } from '../../DataTable';
-import { initialRows, headers } from './shared';
+import { rows, headers } from './shared';
+import mdx from '../DataTable.mdx';
 
 export default {
   title: 'DataTable/Sorting',
@@ -29,32 +30,22 @@ export default {
     TableHeader,
     TableRow,
   },
+  parameters: {
+    docs: {
+      page: mdx,
+    },
+  },
 };
 
 export const Usage = () => (
-  <DataTable
-    rows={initialRows}
-    headers={headers}
-    isSortable={true}
-    render={({
-      rows,
-      headers,
-      getHeaderProps,
-      getRowProps,
-      getTableProps,
-      getTableContainerProps,
-    }) => (
-      <TableContainer
-        title="DataTable"
-        description="With sorting"
-        {...getTableContainerProps()}>
+  <DataTable rows={rows} headers={headers} isSortable>
+    {({ rows, headers, getHeaderProps, getRowProps, getTableProps }) => (
+      <TableContainer title="DataTable" description="With sorting">
         <Table {...getTableProps()}>
           <TableHead>
             <TableRow>
               {headers.map((header, i) => (
-                <TableHeader
-                  key={i}
-                  {...getHeaderProps({ header, isSortable: true })}>
+                <TableHeader {...getHeaderProps({ header })}>
                   {header.header}
                 </TableHeader>
               ))}
@@ -62,7 +53,7 @@ export const Usage = () => (
           </TableHead>
           <TableBody>
             {rows.map((row, i) => (
-              <TableRow key={i} {...getRowProps({ row })}>
+              <TableRow {...getRowProps({ row })}>
                 {row.cells.map((cell) => (
                   <TableCell key={cell.id}>{cell.value}</TableCell>
                 ))}
@@ -72,10 +63,5 @@ export const Usage = () => (
         </Table>
       </TableContainer>
     )}
-  />
+  </DataTable>
 );
-
-// const SortingStory = (props) => (
-// );
-
-// export default SortingStory;

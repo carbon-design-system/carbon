@@ -1,5 +1,19 @@
+/**
+ * Copyright IBM Corp. 2016, 2020
+ *
+ * This source code is licensed under the Apache-2.0 license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+import './stories/datatable-story.scss';
+
+import { action } from '@storybook/addon-actions';
 import { withKnobs, boolean, select } from '@storybook/addon-knobs';
 import React from 'react';
+import Button from '../Button';
+import Checkbox from '../Checkbox';
+import OverflowMenu from '../OverflowMenu';
+import OverflowMenuItem from '../OverflowMenuItem';
 import {
   default as DataTable,
   TableContainer,
@@ -9,23 +23,27 @@ import {
   TableHeader,
   TableBody,
   TableCell,
+  TableToolbar,
+  TableToolbarAction,
+  TableToolbarContent,
+  TableToolbarSearch,
+  TableToolbarMenu,
 } from '../DataTable';
 import mdx from './DataTable.mdx';
 import { headers, rows } from './stories/shared';
 
-const props = () => ({
-  useZebraStyles: boolean('Zebra row styles (useZebraStyles)', false),
-  size: select(
-    'Row height (size)',
-    { compact: 'compact', short: 'short', tall: 'tall', none: null },
-    null
-  ),
-  stickyHeader: boolean('Sticky header (experimental)', false),
-});
-
 export default {
   title: 'DataTable',
-  decorators: [withKnobs],
+  component: DataTable,
+  subcomponents: {
+    TableContainer,
+    Table,
+    TableHead,
+    TableRow,
+    TableHeader,
+    TableBody,
+    TableCell,
+  },
   parameters: {
     docs: {
       page: mdx,
@@ -34,24 +52,32 @@ export default {
 };
 
 export const Usage = () => (
-  <DataTable
-    rows={rows}
-    headers={headers}
-    render={({ rows, headers, getHeaderProps }) => (
-      <TableContainer title="DataTable">
-        <Table>
+  <DataTable rows={rows} headers={headers}>
+    {({
+      rows,
+      headers,
+      getHeaderProps,
+      getRowProps,
+      getTableProps,
+      getTableContainerProps,
+    }) => (
+      <TableContainer
+        title="DataTable"
+        description="Usage example"
+        {...getTableContainerProps()}>
+        <Table {...getTableProps()} isSortable>
           <TableHead>
             <TableRow>
-              {headers.map((header) => (
-                <TableHeader key={header.key} {...getHeaderProps({ header })}>
+              {headers.map((header, i) => (
+                <TableHeader key={i} {...getHeaderProps({ header })} isSortable>
                   {header.header}
                 </TableHeader>
               ))}
             </TableRow>
           </TableHead>
           <TableBody>
-            {rows.map((row) => (
-              <TableRow key={row.id}>
+            {rows.map((row, i) => (
+              <TableRow key={i} {...getRowProps({ row })}>
                 {row.cells.map((cell) => (
                   <TableCell key={cell.id}>{cell.value}</TableCell>
                 ))}
@@ -61,10 +87,10 @@ export const Usage = () => (
         </Table>
       </TableContainer>
     )}
-  />
+  </DataTable>
 );
 
-export const TableExample = () => {
+export const BasicTable = () => {
   const rows = [
     {
       id: 'load-balancer-1',
@@ -111,100 +137,227 @@ export const TableExample = () => {
   );
 };
 
-TableExample.story = {
-  name: 'Table',
+export const WithOverflowMenu = () => (
+  <DataTable rows={rows} headers={headers}>
+    {({
+      rows,
+      headers,
+      getHeaderProps,
+      getRowProps,
+      getSelectionProps,
+      getTableProps,
+    }) => (
+      <TableContainer title="DataTable" description="With overflow menu">
+        <Table {...getTableProps()}>
+          <TableHead>
+            <TableRow>
+              {headers.map((header, i) => (
+                <TableHeader key={i} {...getHeaderProps({ header })}>
+                  {header.header}
+                </TableHeader>
+              ))}
+              <TableHeader />
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {rows.map((row, i) => (
+              <TableRow key={i} {...getRowProps({ row })}>
+                {row.cells.map((cell) => (
+                  <TableCell key={cell.id}>{cell.value}</TableCell>
+                ))}
+                <TableCell className="bx--table-column-menu">
+                  <OverflowMenu flipped>
+                    <OverflowMenuItem>Action 1</OverflowMenuItem>
+                    <OverflowMenuItem>Action 2</OverflowMenuItem>
+                    <OverflowMenuItem>Action 3</OverflowMenuItem>
+                  </OverflowMenu>
+                </TableCell>
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
+      </TableContainer>
+    )}
+  </DataTable>
+);
+
+export const WithToolbar = () => (
+  <DataTable rows={rows} headers={headers}>
+    {({
+      rows,
+      headers,
+      getHeaderProps,
+      getRowProps,
+      getTableProps,
+      getToolbarProps,
+      onInputChange,
+      getTableContainerProps,
+    }) => (
+      <TableContainer
+        title="DataTable"
+        description="With toolbar"
+        {...getTableContainerProps()}>
+        <TableToolbar {...getToolbarProps()} aria-label="data table toolbar">
+          <TableToolbarContent>
+            <TableToolbarSearch onChange={onInputChange} />
+            <TableToolbarMenu>
+              <TableToolbarAction
+                onClick={action('Action 1 Click')}
+                primaryFocus>
+                Action 1
+              </TableToolbarAction>
+              <TableToolbarAction onClick={action('Action 2 Click')}>
+                Action 2
+              </TableToolbarAction>
+              <TableToolbarAction onClick={action('Action 3 Click')}>
+                Action 3
+              </TableToolbarAction>
+            </TableToolbarMenu>
+            <Button onClick={action('Button click')}>Primary Button</Button>
+          </TableToolbarContent>
+        </TableToolbar>
+        <Table {...getTableProps()}>
+          <TableHead>
+            <TableRow>
+              {headers.map((header, i) => (
+                <TableHeader key={i} {...getHeaderProps({ header })}>
+                  {header.header}
+                </TableHeader>
+              ))}
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {rows.map((row, i) => (
+              <TableRow key={i} {...getRowProps({ row })}>
+                {row.cells.map((cell) => (
+                  <TableCell key={cell.id}>{cell.value}</TableCell>
+                ))}
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
+      </TableContainer>
+    )}
+  </DataTable>
+);
+
+export const WithCheckmarkColumns = () => {
+  const rows = [
+    {
+      id: 'a',
+      name: 'Load Balancer 3',
+      protocol: 'HTTP',
+      port: 3000,
+      rule: 'Round robin',
+      attached_groups: 'Kevin’s VM Groups',
+      status: 'Disabled',
+      enabled: true,
+    },
+    {
+      id: 'b',
+      name: 'Load Balancer 1',
+      protocol: 'HTTP',
+      port: 443,
+      rule: 'Round robin',
+      attached_groups: 'Maureen’s VM Groups',
+      status: 'Starting',
+      enabled: true,
+    },
+    {
+      id: 'c',
+      name: 'Load Balancer 2',
+      protocol: 'HTTP',
+      port: 80,
+      rule: 'DNS delegation',
+      attached_groups: 'Andrew’s VM Groups',
+      status: 'Active',
+      enabled: false,
+    },
+  ];
+
+  const headers = [
+    {
+      key: 'name',
+      header: 'Name',
+    },
+    {
+      key: 'protocol',
+      header: 'Protocol',
+    },
+    {
+      key: 'port',
+      header: 'Port',
+    },
+    {
+      key: 'rule',
+      header: 'Rule',
+    },
+    {
+      key: 'attached_groups',
+      header: 'Attached Groups',
+    },
+    {
+      key: 'status',
+      header: 'Status',
+    },
+    {
+      key: 'enabled',
+      header: 'Enabled',
+    },
+  ];
+
+  return (
+    <DataTable rows={rows} headers={headers}>
+      {({
+        rows,
+        headers,
+        getHeaderProps,
+        getRowProps,
+        getTableProps,
+        getTableContainerProps,
+      }) => (
+        <TableContainer
+          title="DataTable"
+          description="With boolean column"
+          {...getTableContainerProps()}>
+          <Table {...getTableProps()}>
+            <TableHead>
+              <TableRow>
+                {headers.map((header, i) => (
+                  <TableHeader key={i} {...getHeaderProps({ header })}>
+                    {header.header}
+                  </TableHeader>
+                ))}
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              {rows.map((row, i) => (
+                <TableRow key={i} {...getRowProps({ row })}>
+                  {row.cells.map((cell) => {
+                    if (cell.info.header === 'enabled') {
+                      return (
+                        <TableCell
+                          key={cell.id}
+                          id={cell.id}
+                          className={`la-${cell.info.header}`}>
+                          <Checkbox
+                            id={'check-' + cell.id}
+                            checked={cell.value}
+                            hideLabel
+                            labelText="checkbox"
+                          />
+                        </TableCell>
+                      );
+                    } else {
+                      return <TableCell key={cell.id}>{cell.value}</TableCell>;
+                    }
+                  })}
+                </TableRow>
+              ))}
+            </TableBody>
+          </Table>
+        </TableContainer>
+      )}
+    </DataTable>
+  );
 };
-
-// // export const Default = withReadme(readme, () =>
-// // require('./stories/default').default(props())
-// // );
-
-// // Default.story = {
-// // name: 'default',
-// // };
-
-// // export const WithToolbar = withReadme(readme, () =>
-// // require('./stories/with-toolbar').default(props())
-// // );
-
-// // WithToolbar.story = {
-// // name: 'with toolbar',
-// // };
-
-// // export const WithSelection = withReadme(readme, () =>
-// // require('./stories/with-selection').default(props())
-// // );
-
-// // WithSelection.story = {
-// // name: 'with selection',
-// // };
-
-// // export const WithRadioButtonSelection = withReadme(readme, () =>
-// // require('./stories/with-selection--radio').default(props())
-// // );
-
-// // WithRadioButtonSelection.story = {
-// // name: 'with radio button selection',
-// // };
-
-// // export const WithExpansion = withReadme(readme, () =>
-// // require('./stories/with-expansion').default(props())
-// // );
-
-// // WithExpansion.story = {
-// // name: 'with expansion',
-// // };
-
-// // export const WithBatchExpansion = withReadme(readme, () =>
-// // require('./stories/with-batch-expansion').default(props())
-// // );
-
-// // WithBatchExpansion.story = {
-// // name: 'with batch expansion',
-// // };
-
-// // export const WithBatchActions = withReadme(readme, () =>
-// // require('./stories/with-batch-actions').default(props())
-// // );
-
-// // WithBatchActions.story = {
-// // name: 'with batch actions',
-// // };
-
-// // export const WithDynamicContent = withReadme(readme, () =>
-// // require('./stories/with-dynamic-content').default(props())
-// // );
-
-// // WithDynamicContent.story = {
-// // name: 'with dynamic content',
-// // };
-
-// // export const WithBooleanColumn = withReadme(readme, () =>
-// // require('./stories/with-boolean-column').default(props())
-// // );
-
-// // WithBooleanColumn.story = {
-// // name: 'with boolean column',
-// // };
-
-// // export const WithOptions = withReadme(readme, () =>
-// // require('./stories/with-options').default(props())
-// // );
-
-// // WithOptions.story = {
-// // name: 'with options',
-// // };
-
-// // export const WithOverflowMenu = withReadme(readme, () =>
-// // require('./stories/with-overflow-menu').default({
-// // ...props(),
-// // overflowMenuOnHover: boolean(
-// // 'Show overflow menu on hover (overflowMenuOnHover)',
-// // false
-// // ),
-// // })
-// // );
-
-// // WithOverflowMenu.story = {
-// // name: 'with overflow menu',
-// // };
