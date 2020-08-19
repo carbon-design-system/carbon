@@ -15643,6 +15643,8 @@ Data table action styles
 
   //btns container
   .#{$prefix}--action-list {
+    position: absolute;
+    right: 0;
     display: flex;
   }
 
@@ -15722,6 +15724,8 @@ Data table action styles
 
   // items selected text
   .#{$prefix}--batch-summary {
+    position: absolute;
+    left: 0;
     display: flex;
     align-items: center;
     margin-left: $spacing-05;
