@@ -15643,6 +15643,8 @@ Data table action styles
 
   //btns container
   .#{$prefix}--action-list {
+    position: absolute;
+    right: 0;
     display: flex;
   }
 
@@ -15722,6 +15724,8 @@ Data table action styles
 
   // items selected text
   .#{$prefix}--batch-summary {
+    position: absolute;
+    left: 0;
     display: flex;
     align-items: center;
     margin-left: $spacing-05;
@@ -24183,7 +24187,8 @@ Text input styles
     color: $disabled-02;
     background-color: $disabled-01;
     border-bottom: 1px solid transparent;
-
+    // Needed to fix disabled text in Safari #6673
+    -webkit-text-fill-color: currentColor;
     cursor: not-allowed;
   }
 

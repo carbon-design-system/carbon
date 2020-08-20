@@ -10,6 +10,7 @@ import { action } from '@storybook/addon-actions';
 import { withKnobs, boolean, select } from '@storybook/addon-knobs';
 import ContentSwitcher from '../ContentSwitcher';
 import Switch from '../Switch';
+import mdx from './ContentSwitcher.mdx';
 
 const selectionModes = {
   'Change selection automatically upon focus (automatic)': 'automatic',
@@ -19,6 +20,7 @@ const selectionModes = {
 const props = {
   contentSwitcher: () => ({
     light: boolean('Light variant (light)', false),
+    selectedIndex: select('Selected index (selectedIndex)', [0, 1, 2], 0),
     selectionMode: select(
       'Selection mode (selectionMode)',
       selectionModes,
@@ -42,10 +44,23 @@ export default {
     subcomponents: {
       Switch,
     },
+    docs: {
+      page: mdx,
+    },
   },
 };
 
-export const Default = () => {
+export const Default = () => (
+  <ContentSwitcher onChange={() => {}}>
+    <Switch name="one" text="First section" />
+    <Switch name="two" text="Second section" />
+    <Switch name="three" text="Third section" />
+  </ContentSwitcher>
+);
+
+Default.story = { name: 'Content Switcher' };
+
+export const ContentSwitcherPlayground = () => {
   const switchProps = props.switch();
   return (
     <ContentSwitcher {...props.contentSwitcher()}>
@@ -54,32 +69,4 @@ export const Default = () => {
       <Switch name="three" text="Third section" {...switchProps} />
     </ContentSwitcher>
   );
-};
-
-Default.parameters = {
-  info: {
-    text: `
-        The Content Switcher component manipulates the content shown following an exclusive or “either/or” pattern.
-        Create Switch components for each section in the content switcher.
-      `,
-  },
-};
-
-export const Selected = () => {
-  const switchProps = props.switch();
-  return (
-    <ContentSwitcher {...props.contentSwitcher()} selectedIndex={1}>
-      <Switch name="one" text="First section" {...switchProps} />
-      <Switch name="two" text="Second section" {...switchProps} />
-      <Switch name="three" text="Third section" {...switchProps} />
-    </ContentSwitcher>
-  );
-};
-
-Selected.parameters = {
-  info: {
-    text: `
-         Render the Content Switcher with a different section automatically selected
-       `,
-  },
 };
