@@ -31,7 +31,8 @@ Date pickers allow users to select a single or a range of dates. Pickers are
 used to display past, present, or future dates. The kind of date (exact,
 approximate, memorable) you are requesting from the user will determine which
 picker is best to use. Each picker’s format can be customized depending on
-location or need.
+location or need. The `DatePicker` component expects a `DatePickerInput` as a
+child.
 
 ### Simple DatePicker
 
@@ -223,6 +224,13 @@ start this at a different date, you can pass in a date string or date object.
 ```
 
 ## References
+
+- The `DatePicker` component utilizes Flatpickr under the hood. We will pass any
+  extra options down to the FlatPickr instance. For a full list of options,
+  please see the [Flatpickr docs](https://flatpickr.js.org/options/)
+- The `DatePickerInput` takes in similar props to the `TextInput` component,
+  such as `size` and `placeholder`. For more information on these props, check
+  out the `TextInput` page.
 
 ## Feedback
 

@@ -81,7 +81,7 @@ export default {
 
 export const Simple = () => (
   <DatePicker datePickerType="simple">
-    <DatePickerInput placeholder="mm/dd/yyyy" />
+    <DatePickerInput placeholder="mm/dd/yyyy" labelText="Date Picker label" />
   </DatePicker>
 );
 
@@ -89,7 +89,7 @@ Simple.storyName = 'simple';
 
 export const Single = () => (
   <DatePicker datePickerType="single">
-    <DatePickerInput placeholder="mm/dd/yyyy" />
+    <DatePickerInput placeholder="mm/dd/yyyy" labelText="Date Picker label" />
   </DatePicker>
 );
 
@@ -101,10 +101,12 @@ export const Range = () => {
       <DatePickerInput
         id="date-picker-input-id-start"
         placeholder="mm/dd/yyyy"
+        labelText="Start date"
       />
       <DatePickerInput
         id="date-picker-input-id-finish"
         placeholder="mm/dd/yyyy"
+        labelText="End date"
       />
     </DatePicker>
   );
