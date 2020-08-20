@@ -24187,7 +24187,8 @@ Text input styles
     color: $disabled-02;
     background-color: $disabled-01;
     border-bottom: 1px solid transparent;
-
+    // Needed to fix disabled text in Safari #6673
+    -webkit-text-fill-color: currentColor;
     cursor: not-allowed;
   }
 

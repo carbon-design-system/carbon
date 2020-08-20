@@ -2680,7 +2680,7 @@ Map {
       },
       "legendText": Object {
         "isRequired": true,
-        "type": "string",
+        "type": "node",
       },
       "message": Object {
         "type": "bool",
