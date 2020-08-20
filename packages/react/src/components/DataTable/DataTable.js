@@ -648,6 +648,7 @@ export default class DataTable extends React.Component {
             headers,
             cellsById,
             inputValue: filterInputValue,
+            getCellId,
           })
         : rowIds;
     const renderProps = {
