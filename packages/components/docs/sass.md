@@ -15643,6 +15643,8 @@ Data table action styles
 
   //btns container
   .#{$prefix}--action-list {
+    position: absolute;
+    right: 0;
     display: flex;
   }
 
@@ -15722,6 +15724,8 @@ Data table action styles
 
   // items selected text
   .#{$prefix}--batch-summary {
+    position: absolute;
+    left: 0;
     display: flex;
     align-items: center;
     margin-left: $spacing-05;
@@ -19914,6 +19918,16 @@ Modal styles
     ~ .#{$prefix}--modal-content--overflow-indicator {
     width: calc(100% - 4px);
     margin: 0 2px 2px;
+  }
+
+  @media screen and (-ms-high-contrast: active) {
+    .#{$prefix}--modal-scroll-content > *:last-child {
+      padding-bottom: 0;
+    }
+
+    .#{$prefix}--modal-content--overflow-indicator {
+      display: none;
+    }
   }
 
   .#{$prefix}--modal-footer {
@@ -24183,7 +24197,8 @@ Text input styles
     color: $disabled-02;
     background-color: $disabled-01;
     border-bottom: 1px solid transparent;
-
+    // Needed to fix disabled text in Safari #6673
+    -webkit-text-fill-color: currentColor;
     cursor: not-allowed;
   }
 
