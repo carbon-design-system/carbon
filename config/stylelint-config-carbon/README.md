@@ -1,6 +1,6 @@
 # stylelint-config-carbon
 
-> Stylelint configuration for the Carbon Design System
+> Stylelint configuration for Carbon
 
 ## Getting started
 
