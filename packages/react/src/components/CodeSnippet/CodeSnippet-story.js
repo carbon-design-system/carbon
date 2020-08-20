@@ -23,12 +23,6 @@ export default {
   },
 };
 
-export const codeSnippet = () => (
-  <CodeSnippet type="inline" feedback="Copied to clipboard">
-    {'node -v'}
-  </CodeSnippet>
-);
-
 export const inline = () => (
   <CodeSnippet type="inline" feedback="Copied to clipboard">
     {'node -v'}
@@ -55,12 +49,6 @@ export const skeleton = () => (
     <CodeSnippetSkeleton type="single" style={{ marginBottom: 8 }} />
     <CodeSnippetSkeleton type="multi" />
   </div>
-);
-
-export const light = () => (
-  <CodeSnippet type="inline" light="true" feedback="Copied to clipboard">
-    {'node -v'}
-  </CodeSnippet>
 );
 
 const lightPropMessage = (
