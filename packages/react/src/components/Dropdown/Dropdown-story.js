@@ -11,6 +11,7 @@ import { withKnobs, boolean, select, text } from '@storybook/addon-knobs';
 import Dropdown from '../Dropdown';
 import DropdownSkeleton from './Dropdown.Skeleton';
 import WithState from '../../tools/withState';
+import mdx from './Dropdown.mdx';
 
 const items = [
   {
@@ -87,6 +88,9 @@ export default {
     subcomponents: {
       DropdownSkeleton,
     },
+    docs: {
+      page: mdx,
+    },
   },
 };
 
@@ -102,12 +106,6 @@ export const Default = () => (
 );
 
 Default.storyName = 'default';
-
-Default.parameters = {
-  info: {
-    text: 'Dropdown',
-  },
-};
 
 export const Inline = () => (
   <div style={{ width: 600 }}>
