@@ -196,6 +196,7 @@ export default function TreeNode({
   return (
     <li {...treeNodeProps} aria-expanded={!!expanded}>
       <div className={`${prefix}--tree-node__label`} ref={currentNodeLabel}>
+        {/* https://github.com/carbon-design-system/carbon/pull/6008#issuecomment-675738670 */}
         {/* eslint-disable-next-line jsx-a11y/click-events-have-key-events, jsx-a11y/no-static-element-interactions */}
         <span
           className={`${prefix}--tree-parent-node__toggle`}
