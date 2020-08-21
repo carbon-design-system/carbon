@@ -230,11 +230,6 @@ Dropdown.propTypes = {
   ]),
 
   /**
-   * Specify whether you want the inline version of this control
-   */
-  inline: PropTypes.bool,
-
-  /**
    * Specify if the currently selected value is invalid.
    */
   invalid: PropTypes.bool,
