@@ -151,58 +151,58 @@ export default class DatePicker extends Component {
     light: PropTypes.bool,
 
     /**
-     *  The language locale used to format the days of the week, months, and numbers.
-     *
-     * * `ar` - Arabic
-     * * `at` - Austria
-     * * `be` - Belarusian
-     * * `bg` - Bulgarian
-     * * `bn` - Bangla
-     * * `cat` - Catalan
-     * * `cs` - Czech
-     * * `cy` - Welsh
-     * * `da` - Danish
-     * * `de` - German
-     * * `en` - English
-     * * `eo` - Esperanto
-     * * `es` - Spanish
-     * * `et` - Estonian
-     * * `fa` - Persian
-     * * `fi` - Finnish
-     * * `fr` - French
-     * * `gr` - Greek
-     * * `he` - Hebrew
-     * * `hi` - Hindi
-     * * `hr` - Croatian
-     * * `hu` - Hungarian
-     * * `id` - Indonesian
-     * * `it` - Italian
-     * * `ja` - Japanese
-     * * `ko` - Korean
-     * * `lt` - Lithuanian
-     * * `lv` - Latvian
-     * * `mk` - Macedonian
-     * * `mn` - Mongolian
-     * * `ms` - Malaysian
-     * * `my` - Burmese
-     * * `nl` - Dutch
-     * * `no` - Norwegian
-     * * `pa` - Punjabi
-     * * `pl` - Polish
-     * * `pt` - Portuguese
-     * * `ro` - Romanian
-     * * `si` - Sinhala
-     * * `sk` - Slovak
-     * * `sl` - Slovenian
-     * * `sq` - Albanian
-     * * `sr` - Serbian
-     * * `sv` - Swedish
-     * * `th` - Thai
-     * * `tr` - Turkish
-     * * `uk` - Ukrainian
-     * * `vn` - Vietnamese
-     * * `zh` - Mandarin
-     */
+                    *  The language locale used to format the days of the week, months, and numbers. The full list of supported locales can be found here https://github.com/flatpickr/flatpickr/tree/master/src/l10n
+                    *
+                    * `ar` - Arabic
+                     `at` - Austria
+                     `be` - Belarusian
+                     `bg` - Bulgarian
+                     `bn` - Bangla
+                     `cat` - Catalan
+                     `cs` - Czech
+                     `cy` - Welsh
+                     `da` - Danish
+                     `de` - German
+                     `en` - English
+                     `eo` - Esperanto
+                     `es` - Spanish
+                     `et` - Estonian
+                     `fa` - Persian
+                     `fi` - Finnish
+                     `fr` - French
+                     `gr` - Greek
+                     `he` - Hebrew
+                     `hi` - Hindi
+                     `hr` - Croatian
+                     `hu` - Hungarian
+                     `id` - Indonesian
+                     `it` - Italian
+                     `ja` - Japanese
+                     `ko` - Korean
+                     `lt` - Lithuanian
+                     `lv` - Latvian
+                     `mk` - Macedonian
+                     `mn` - Mongolian
+                     `ms` - Malaysian
+                     `my` - Burmese
+                     `nl` - Dutch
+                     `no` - Norwegian
+                     `pa` - Punjabi
+                     `pl` - Polish
+                     `pt` - Portuguese
+                     `ro` - Romanian
+                     `si` - Sinhala
+                     `sk` - Slovak
+                     `sl` - Slovenian
+                     `sq` - Albanian
+                     `sr` - Serbian
+                     `sv` - Swedish
+                     `th` - Thai
+                     `tr` - Turkish
+                     `uk` - Ukrainian
+                     `vn` - Vietnamese
+                     `zh` - Mandarin
+                    */
     locale: PropTypes.oneOf([
       'ar',
       'at',
@@ -336,7 +336,9 @@ export default class DatePicker extends Component {
           maxDate: maxDate,
           plugins: [
             datePickerType === 'range'
-              ? new carbonFlatpickrRangePlugin({ input: this.toInputField })
+              ? new carbonFlatpickrRangePlugin({
+                  input: this.toInputField,
+                })
               : () => {},
             appendTo
               ? carbonFlatpickrAppendToPlugin({
