@@ -293,6 +293,16 @@
     margin: 0 2px 2px;
   }
 
+  @media screen and (-ms-high-contrast: active) {
+    .#{$prefix}--modal-scroll-content > *:last-child {
+      padding-bottom: 0;
+    }
+
+    .#{$prefix}--modal-content--overflow-indicator {
+      display: none;
+    }
+  }
+
   .#{$prefix}--modal-footer {
     display: flex;
 

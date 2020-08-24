@@ -133,7 +133,7 @@
   },
   "eslintConfig": {
     "extends": [
-      "eslint-config-carbon"
+      "carbon"
     ]
   },
   "stylelint": {
