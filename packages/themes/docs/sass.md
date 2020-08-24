@@ -4276,7 +4276,7 @@ $caption-01: if(
   (
     font-size: 0.75rem,
     font-weight: 400,
-    line-height: 1rem,
+    line-height: 1,
     letter-spacing: 0.32px,
   )
 );
@@ -4304,7 +4304,7 @@ $label-01: if(
   (
     font-size: 0.75rem,
     font-weight: 400,
-    line-height: 1rem,
+    line-height: 1,
     letter-spacing: 0.32px,
   )
 );
@@ -4331,7 +4331,7 @@ $helper-text-01: if(
   map-get($carbon--theme, 'helper-text-01'),
   (
     font-size: 0.75rem,
-    line-height: 1rem,
+    line-height: 1,
     letter-spacing: 0.32px,
   )
 );
@@ -4359,7 +4359,7 @@ $body-short-01: if(
   (
     font-size: 0.875rem,
     font-weight: 400,
-    line-height: 1.125rem,
+    line-height: 1.125,
     letter-spacing: 0.16px,
   )
 );
@@ -4387,7 +4387,7 @@ $body-long-01: if(
   (
     font-size: 0.875rem,
     font-weight: 400,
-    line-height: 1.25rem,
+    line-height: 1.25,
     letter-spacing: 0.16px,
   )
 );
@@ -4415,7 +4415,7 @@ $body-short-02: if(
   (
     font-size: 1rem,
     font-weight: 400,
-    line-height: 1.375rem,
+    line-height: 1.375,
     letter-spacing: 0,
   )
 );
@@ -4443,7 +4443,7 @@ $body-long-02: if(
   (
     font-size: 1rem,
     font-weight: 400,
-    line-height: 1.5rem,
+    line-height: 1.5,
     letter-spacing: 0,
   )
 );
@@ -4472,7 +4472,7 @@ $code-01: if(
     font-family: unquote("'IBM Plex Mono', 'Menlo', 'DejaVu Sans Mono', 'Bitstream Vera Sans Mono', Courier, monospace"),
     font-size: 0.75rem,
     font-weight: 400,
-    line-height: 1rem,
+    line-height: 1,
     letter-spacing: 0.32px,
   )
 );
@@ -4501,7 +4501,7 @@ $code-02: if(
     font-family: unquote("'IBM Plex Mono', 'Menlo', 'DejaVu Sans Mono', 'Bitstream Vera Sans Mono', Courier, monospace"),
     font-size: 0.875rem,
     font-weight: 400,
-    line-height: 1.25rem,
+    line-height: 1.25,
     letter-spacing: 0.32px,
   )
 );
@@ -4529,7 +4529,7 @@ $heading-01: if(
   (
     font-size: 0.875rem,
     font-weight: 600,
-    line-height: 1.125rem,
+    line-height: 1.125,
     letter-spacing: 0.16px,
   )
 );
@@ -4557,7 +4557,7 @@ $productive-heading-01: if(
   (
     font-size: 0.875rem,
     font-weight: 600,
-    line-height: 1.125rem,
+    line-height: 1.125,
     letter-spacing: 0.16px,
   )
 );
@@ -4585,7 +4585,7 @@ $heading-02: if(
   (
     font-size: 1rem,
     font-weight: 600,
-    line-height: 1.375rem,
+    line-height: 1.375,
     letter-spacing: 0,
   )
 );
@@ -4613,7 +4613,7 @@ $productive-heading-02: if(
   (
     font-size: 1rem,
     font-weight: 600,
-    line-height: 1.375rem,
+    line-height: 1.375,
     letter-spacing: 0,
   )
 );
@@ -4641,7 +4641,7 @@ $productive-heading-03: if(
   (
     font-size: 1.25rem,
     font-weight: 400,
-    line-height: 1.75rem,
+    line-height: 1.75,
     letter-spacing: 0,
   )
 );
@@ -4669,7 +4669,7 @@ $productive-heading-04: if(
   (
     font-size: 1.75rem,
     font-weight: 400,
-    line-height: 2.25rem,
+    line-height: 2.25,
     letter-spacing: 0,
   )
 );
@@ -4697,7 +4697,7 @@ $productive-heading-05: if(
   (
     font-size: 2rem,
     font-weight: 400,
-    line-height: 2.5rem,
+    line-height: 2.5,
     letter-spacing: 0,
   )
 );
@@ -4725,7 +4725,7 @@ $productive-heading-06: if(
   (
     font-size: 2.625rem,
     font-weight: 300,
-    line-height: 3.125rem,
+    line-height: 3.125,
     letter-spacing: 0,
   )
 );
@@ -4753,7 +4753,7 @@ $productive-heading-07: if(
   (
     font-size: 3.375rem,
     font-weight: 300,
-    line-height: 4rem,
+    line-height: 4,
     letter-spacing: 0,
   )
 );
@@ -4781,7 +4781,7 @@ $expressive-heading-01: if(
   (
     font-size: 0.875rem,
     font-weight: 600,
-    line-height: 1.25rem,
+    line-height: 1.25,
     letter-spacing: 0.16px,
   )
 );
@@ -4809,7 +4809,7 @@ $expressive-heading-02: if(
   (
     font-size: 1rem,
     font-weight: 600,
-    line-height: 1.5rem,
+    line-height: 1.5,
     letter-spacing: 0,
   )
 );
@@ -4935,7 +4935,7 @@ $expressive-heading-05: if(
       max: (
         font-size: 3.75rem,
         font-weight: 300,
-        line-height: 4.375rem,
+        line-height: 4.375,
         letter-spacing: 0,
       ),
     ),
