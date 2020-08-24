@@ -57,7 +57,7 @@ FormGroup.propTypes = {
   /**
    * Provide the text to be rendered inside of the fieldset <legend>
    */
-  legendText: PropTypes.string.isRequired,
+  legendText: PropTypes.node.isRequired,
 
   /**
    * Specify whether the message should be displayed in the <FormGroup>

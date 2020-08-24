@@ -40,7 +40,7 @@ export default class DatePickerInput extends Component {
     iconDescription: PropTypes.string,
 
     /**
-     * Specify an id that unique identifies the <input>
+     * Specify an id that uniquely identifies the `<input>`
      */
     id: PropTypes.string.isRequired,
 
@@ -103,7 +103,7 @@ export default class DatePickerInput extends Component {
     size: PropTypes.oneOf(['sm', 'xl']),
 
     /**
-     * Specify the type of the <input>
+     * Specify the type of the `<input>`
      */
     type: PropTypes.string,
   };
