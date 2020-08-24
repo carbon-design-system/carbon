@@ -224,7 +224,7 @@ describe('Pagination', () => {
         const pager = mount(<Pagination pageSizes={[5, 10]} totalItems={0} />);
         const labels = pager.find(`.${prefix}--pagination__text`);
         expect(labels.at(1).text()).toBe('0–0 of 0 items');
-        expect(labels.at(2).text()).toBe('of 1 pages');
+        expect(labels.at(2).text()).toBe('of 1 page');
       });
 
       it('should have two buttons for navigation', () => {
