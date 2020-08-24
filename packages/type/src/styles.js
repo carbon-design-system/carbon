@@ -13,48 +13,48 @@ import { scale } from './scale';
 export const caption01 = {
   fontSize: rem(scale[0]),
   fontWeight: fontWeights.regular,
-  lineHeight: rem(16),
+  lineHeight: 1,
   letterSpacing: px(0.32),
 };
 
 export const label01 = {
   fontSize: rem(scale[0]),
   fontWeight: fontWeights.regular,
-  lineHeight: rem(16),
+  lineHeight: 1,
   letterSpacing: px(0.32),
 };
 
 export const helperText01 = {
   fontSize: rem(scale[0]),
-  lineHeight: rem(16),
+  lineHeight: 1,
   letterSpacing: px(0.32),
 };
 
 export const bodyShort01 = {
   fontSize: rem(scale[1]),
   fontWeight: fontWeights.regular,
-  lineHeight: rem(18),
+  lineHeight: 1.125,
   letterSpacing: px(0.16),
 };
 
 export const bodyLong01 = {
   fontSize: rem(scale[1]),
   fontWeight: fontWeights.regular,
-  lineHeight: rem(20),
+  lineHeight: 1.25,
   letterSpacing: px(0.16),
 };
 
 export const bodyShort02 = {
   fontSize: rem(scale[2]),
   fontWeight: fontWeights.regular,
-  lineHeight: rem(22),
+  lineHeight: 1.375,
   letterSpacing: 0,
 };
 
 export const bodyLong02 = {
   fontSize: rem(scale[2]),
   fontWeight: fontWeights.regular,
-  lineHeight: rem(24),
+  lineHeight: 1.5,
   letterSpacing: 0,
 };
 
@@ -62,7 +62,7 @@ export const code01 = {
   fontFamily: fontFamilies.mono,
   fontSize: rem(scale[0]),
   fontWeight: fontWeights.regular,
-  lineHeight: rem(16),
+  lineHeight: 1,
   letterSpacing: px(0.32),
 };
 
@@ -70,14 +70,14 @@ export const code02 = {
   fontFamily: fontFamilies.mono,
   fontSize: rem(scale[1]),
   fontWeight: fontWeights.regular,
-  lineHeight: rem(20),
+  lineHeight: 1.25,
   letterSpacing: px(0.32),
 };
 
 export const heading01 = {
   fontSize: rem(scale[1]),
   fontWeight: fontWeights.semibold,
-  lineHeight: rem(18),
+  lineHeight: 1.125,
   letterSpacing: px(0.16),
 };
 
@@ -86,7 +86,7 @@ export const productiveHeading01 = heading01;
 export const heading02 = {
   fontSize: rem(scale[2]),
   fontWeight: fontWeights.semibold,
-  lineHeight: rem(22),
+  lineHeight: 1.375,
   letterSpacing: 0,
 };
 
@@ -95,46 +95,46 @@ export const productiveHeading02 = heading02;
 export const productiveHeading03 = {
   fontSize: rem(scale[4]),
   fontWeight: fontWeights.regular,
-  lineHeight: rem(28),
+  lineHeight: 1.75,
   letterSpacing: 0,
 };
 
 export const productiveHeading04 = {
   fontSize: rem(scale[6]),
   fontWeight: fontWeights.regular,
-  lineHeight: rem(36),
+  lineHeight: 2.25,
   letterSpacing: 0,
 };
 
 export const productiveHeading05 = {
   fontSize: rem(scale[7]),
   fontWeight: fontWeights.regular,
-  lineHeight: rem(40),
+  lineHeight: 2.5,
   letterSpacing: 0,
 };
 
 export const productiveHeading06 = {
   fontSize: rem(scale[9]),
   fontWeight: fontWeights.light,
-  lineHeight: rem(50),
+  lineHeight: 3.125,
   letterSpacing: 0,
 };
 
 export const productiveHeading07 = {
   fontSize: rem(scale[11]),
   fontWeight: fontWeights.light,
-  lineHeight: rem(64),
+  lineHeight: 4,
   letterSpacing: 0,
 };
 
 export const expressiveHeading01 = {
   ...heading01,
-  lineHeight: rem(20),
+  lineHeight: 1.25,
 };
 
 export const expressiveHeading02 = {
   ...heading02,
-  lineHeight: rem(24),
+  lineHeight: 1.5,
 };
 
 export const expressiveHeading03 = {
@@ -196,7 +196,7 @@ export const expressiveHeading05 = {
     max: {
       fontSize: rem(scale[12]),
       fontWeight: fontWeights.light,
-      lineHeight: rem(70),
+      lineHeight: 4.375,
       letterSpacing: 0,
     },
   },
