@@ -12,6 +12,7 @@ import { withKnobs, boolean, select, text } from '@storybook/addon-knobs';
 import Modal from '../Modal';
 import TextInput from '../TextInput';
 import { settings } from 'carbon-components';
+import mdx from './Modal.mdx';
 
 const { prefix } = settings;
 
@@ -105,6 +106,9 @@ export default {
 
   parameters: {
     component: Modal,
+    docs: {
+      page: mdx,
+    },
   },
 };
 
