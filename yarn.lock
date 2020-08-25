@@ -19634,11 +19634,6 @@ preserve@^0.2.0:
   resolved "https://registry.yarnpkg.com/preserve/-/preserve-0.2.0.tgz#815ed1f6ebc65926f865b310c0713bcb3315ce4b"
   integrity sha1-gV7R9uvGWSb4ZbMQwHE7yzMVzks=
 
-prettier-config-carbon@^0.2.0:
-  version "0.2.0"
-  resolved "https://registry.yarnpkg.com/prettier-config-carbon/-/prettier-config-carbon-0.2.0.tgz#d75333c17f3b04fc1bb66aa49857f00d19502e3a"
-  integrity sha512-R1hb/IjlVKLNuLs3IKuGQj0RFUqIZP/8f1A2TSZVWlq35RfhoPrGg/y/UwJLB/24sQq7b9htbZe3/eZizyNMDA==
-
 prettier-linter-helpers@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/prettier-linter-helpers/-/prettier-linter-helpers-1.0.0.tgz#d23d41fe1375646de2d0104d3454a3008802cf7b"
