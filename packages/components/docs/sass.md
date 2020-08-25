@@ -433,6 +433,8 @@
   - [❌⚠️tooltip--definition--legacy [mixin]](#tooltip--definition--legacy-mixin)
   - [❌⚠️tooltip--icon--legacy [mixin]](#tooltip--icon--legacy-mixin)
   - [❌tooltip [mixin]](#tooltip-mixin)
+- [treeview](#treeview)
+  - [❌treeview [mixin]](#treeview-mixin)
 - [ui-shell](#ui-shell)
   - [❌carbon-content [mixin]](#carbon-content-mixin)
   - [✅mini-units [function]](#mini-units-function)
@@ -1868,6 +1870,7 @@ $prefix: 'bx';
   - [tooltip--definition--legacy [mixin]](#tooltip--definition--legacy-mixin)
   - [tooltip--icon--legacy [mixin]](#tooltip--icon--legacy-mixin)
   - [tooltip [mixin]](#tooltip-mixin)
+  - [treeview [mixin]](#treeview-mixin)
   - [carbon-content [mixin]](#carbon-content-mixin)
   - [carbon-header-panel [mixin]](#carbon-header-panel-mixin)
   - [carbon-header [mixin]](#carbon-header-mixin)
@@ -3725,6 +3728,7 @@ $spacing-03: $carbon--spacing-03;
   - [select [mixin]](#select-mixin)
   - [tabs [mixin]](#tabs-mixin)
   - [tooltip [mixin]](#tooltip-mixin)
+  - [treeview [mixin]](#treeview-mixin)
   - [carbon-switcher [mixin]](#carbon-switcher-mixin)
 
 ### ✅spacing-04 [variable]
@@ -3773,6 +3777,7 @@ $spacing-05: $carbon--spacing-05;
   - [search [mixin]](#search-mixin)
   - [select [mixin]](#select-mixin)
   - [tabs [mixin]](#tabs-mixin)
+  - [treeview [mixin]](#treeview-mixin)
   - [carbon-switcher [mixin]](#carbon-switcher-mixin)
 
 ### ✅spacing-06 [variable]
@@ -3813,6 +3818,7 @@ $spacing-07: $carbon--spacing-07;
   - [modal [mixin]](#modal-mixin)
   - [search [mixin]](#search-mixin)
   - [select [mixin]](#select-mixin)
+  - [treeview [mixin]](#treeview-mixin)
   - [carbon-switcher [mixin]](#carbon-switcher-mixin)
 
 ### ✅spacing-08 [variable]
@@ -3833,6 +3839,7 @@ $spacing-08: $carbon--spacing-08;
   - [carbon--theme [mixin]](#carbon--theme-mixin)
   - [dropdown [mixin]](#dropdown-mixin)
   - [search [mixin]](#search-mixin)
+  - [treeview [mixin]](#treeview-mixin)
 
 ### ✅spacing-09 [variable]
 
@@ -6545,6 +6552,7 @@ $interactive-01: if(
   - [pseudo-underline [mixin]](#pseudo-underline-mixin)
   - [progress-indicator [mixin]](#progress-indicator-mixin)
   - [tooltip--definition--legacy [mixin]](#tooltip--definition--legacy-mixin)
+  - [treeview [mixin]](#treeview-mixin)
 
 ### ✅interactive-02 [variable]
 
@@ -6701,6 +6709,7 @@ $ui-01: if(
   - [slider [mixin]](#slider-mixin)
   - [tabs [mixin]](#tabs-mixin)
   - [tile [mixin]](#tile-mixin)
+  - [treeview [mixin]](#treeview-mixin)
 
 ### ✅ui-02 [variable]
 
@@ -6906,6 +6915,7 @@ $text-01: if(
   - [text-input [mixin]](#text-input-mixin)
   - [tile [mixin]](#tile-mixin)
   - [tooltip--definition--legacy [mixin]](#tooltip--definition--legacy-mixin)
+  - [treeview [mixin]](#treeview-mixin)
 
 ### ✅text-02 [variable]
 
@@ -6947,6 +6957,7 @@ $text-02: if(
   - [toggle [mixin]](#toggle-mixin)
   - [toolbar [mixin]](#toolbar-mixin)
   - [tooltip [mixin]](#tooltip-mixin)
+  - [treeview [mixin]](#treeview-mixin)
 
 ### ✅text-03 [variable]
 
@@ -7088,6 +7099,7 @@ $icon-01: if(
   - [overflow-menu [mixin]](#overflow-menu-mixin)
   - [radio-button [mixin]](#radio-button-mixin)
   - [search [mixin]](#search-mixin)
+  - [treeview [mixin]](#treeview-mixin)
 
 ### ✅icon-02 [variable]
 
@@ -7924,6 +7936,7 @@ $hover-ui: if(
   - [tabs [mixin]](#tabs-mixin)
   - [tile [mixin]](#tile-mixin)
   - [time-picker [mixin]](#time-picker-mixin)
+  - [treeview [mixin]](#treeview-mixin)
 
 ### ✅active-ui [variable]
 
@@ -7984,6 +7997,7 @@ $selected-ui: if(
   - [dropdown [mixin]](#dropdown-mixin)
   - [listbox [mixin]](#listbox-mixin)
   - [search [mixin]](#search-mixin)
+  - [treeview [mixin]](#treeview-mixin)
 
 ### ✅selected-light-ui [variable]
 
@@ -8036,6 +8050,7 @@ $hover-selected-ui: if(
   - [data-table-core [mixin]](#data-table-core-mixin)
   - [data-table-expandable [mixin]](#data-table-expandable-mixin)
   - [tabs [mixin]](#tabs-mixin)
+  - [treeview [mixin]](#treeview-mixin)
 
 ### ✅inverse-hover-ui [variable]
 
@@ -8195,6 +8210,7 @@ $disabled-01: if(
   - [tags [mixin]](#tags-mixin)
   - [text-input [mixin]](#text-input-mixin)
   - [toggle [mixin]](#toggle-mixin)
+  - [treeview [mixin]](#treeview-mixin)
 
 ### ✅disabled-02 [variable]
 
@@ -8243,6 +8259,7 @@ $disabled-02: if(
   - [text-input [mixin]](#text-input-mixin)
   - [time-picker [mixin]](#time-picker-mixin)
   - [toggle [mixin]](#toggle-mixin)
+  - [treeview [mixin]](#treeview-mixin)
 
 ### ✅disabled-03 [variable]
 
@@ -25961,6 +25978,165 @@ Tooltip styles
   - [inverse-link [variable]](#inverse-link-variable)
   - [spacing-03 [variable]](#spacing-03-variable)
   - [interactive-04 [variable]](#interactive-04-variable)
+
+## treeview
+
+### ❌treeview [mixin]
+
+Treeview styles
+
+<details>
+<summary>Source code</summary>
+
+```scss
+@mixin treeview() {
+  .#{$prefix}--tree {
+    overflow: hidden;
+
+    .#{$prefix}--tree-node {
+      padding-left: $spacing-05;
+      color: $text-02;
+      background-color: $ui-01;
+
+      &:focus {
+        outline: none;
+      }
+    }
+
+    .#{$prefix}--tree-node:focus > .#{$prefix}--tree-node__label {
+      @include focus-outline('outline');
+    }
+
+    .#{$prefix}--tree-node--disabled {
+      color: $disabled-02;
+      background-color: $disabled-01;
+      pointer-events: none;
+    }
+
+    .#{$prefix}--tree-node--disabled .#{$prefix}--tree-node__label:hover {
+      background-color: $disabled-01;
+    }
+
+    .#{$prefix}--tree-node--disabled .#{$prefix}--tree-parent-node__toggle-icon,
+    .#{$prefix}--tree-node--disabled .#{$prefix}--tree-node__icon {
+      fill: $disabled-02;
+    }
+
+    .#{$prefix}--tree-node--disabled
+      .#{$prefix}--tree-parent-node__toggle-icon:hover {
+      cursor: default;
+    }
+
+    .#{$prefix}--tree-node__label {
+      display: flex;
+      flex: 1;
+      align-items: center;
+      min-height: rem(32px);
+
+      &:hover {
+        background-color: $hover-ui;
+      }
+    }
+
+    .#{$prefix}--tree-leaf-node {
+      display: flex;
+      padding-left: $spacing-08;
+    }
+
+    .#{$prefix}--tree-leaf-node.#{$prefix}--tree-node--with-icon {
+      padding-left: $spacing-07;
+    }
+
+    .#{$prefix}--tree-node__label__details {
+      display: flex;
+      align-items: center;
+    }
+
+    .#{$prefix}--tree-node--with-icon .#{$prefix}--tree-parent-node__toggle {
+      margin-right: 0;
+    }
+
+    .#{$prefix}--tree-parent-node__toggle {
+      width: rem(16px);
+      height: rem(16px);
+      margin-right: $spacing-03;
+      padding: 0;
+      background-color: transparent;
+      border: 0;
+
+      &:hover {
+        cursor: pointer;
+      }
+
+      &:focus {
+        outline: none;
+      }
+    }
+
+    .#{$prefix}--tree-parent-node__toggle-icon {
+      transform: rotate(-90deg);
+      transition: all $duration--fast-02 motion(standard, productive);
+      fill: $icon-01;
+    }
+
+    .#{$prefix}--tree-parent-node__toggle-icon--expanded {
+      transform: rotate(0);
+    }
+
+    .#{$prefix}--tree-node__icon {
+      margin-right: $spacing-03;
+      fill: $icon-01;
+    }
+
+    .#{$prefix}--tree-node--selected > .#{$prefix}--tree-node__label {
+      color: $text-01;
+      background-color: $selected-ui;
+
+      &:hover {
+        background-color: $hover-selected-ui;
+      }
+    }
+
+    .#{$prefix}--tree-node--active > .#{$prefix}--tree-node__label {
+      position: relative;
+
+      &::before {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: rem(4px);
+        height: 100%;
+        background-color: $interactive-01;
+        content: '';
+      }
+    }
+  }
+
+  .#{$prefix}--tree--compact .#{$prefix}--tree-node__label {
+    min-height: rem(24px);
+  }
+}
+```
+
+</details>
+
+- **Group**: [treeview](#treeview)
+- **Requires**:
+  - [prefix [variable]](#prefix-variable)
+  - [spacing-05 [variable]](#spacing-05-variable)
+  - [text-02 [variable]](#text-02-variable)
+  - [ui-01 [variable]](#ui-01-variable)
+  - [disabled-02 [variable]](#disabled-02-variable)
+  - [disabled-01 [variable]](#disabled-01-variable)
+  - [hover-ui [variable]](#hover-ui-variable)
+  - [spacing-08 [variable]](#spacing-08-variable)
+  - [spacing-07 [variable]](#spacing-07-variable)
+  - [spacing-03 [variable]](#spacing-03-variable)
+  - [icon-01 [variable]](#icon-01-variable)
+  - [text-01 [variable]](#text-01-variable)
+  - [selected-ui [variable]](#selected-ui-variable)
+  - [hover-selected-ui [variable]](#hover-selected-ui-variable)
+  - [interactive-01 [variable]](#interactive-01-variable)
 
 ## ui-shell
 
