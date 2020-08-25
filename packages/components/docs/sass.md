@@ -26057,11 +26057,8 @@ Treeview styles
     }
 
     .#{$prefix}--tree-parent-node__toggle {
-      width: rem(16px);
-      height: rem(16px);
       margin-right: $spacing-03;
       padding: 0;
-      background-color: transparent;
       border: 0;
 
       &:hover {
