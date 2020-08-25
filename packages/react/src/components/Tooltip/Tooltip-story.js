@@ -7,7 +7,13 @@
 
 import React, { useState } from 'react';
 import { settings } from 'carbon-components';
-import { withKnobs, select, text, number } from '@storybook/addon-knobs';
+import {
+  withKnobs,
+  select,
+  text,
+  number,
+  boolean,
+} from '@storybook/addon-knobs';
 import Tooltip from '../Tooltip';
 import Button from '../Button';
 import { OverflowMenuVertical16 } from '@carbon/icons-react';
@@ -23,6 +29,7 @@ const directions = {
 const props = {
   withIcon: () => ({
     direction: select('Tooltip direction (direction)', directions, 'bottom'),
+    focusTrap: boolean('Focus trap (focusTrap)', true),
     triggerText: text('Trigger text (triggerText)', 'Tooltip label'),
     tabIndex: number('Tab index (tabIndex in <Tooltip>)', 0),
     selectorPrimaryFocus: text(
@@ -33,6 +40,7 @@ const props = {
   withoutIcon: () => ({
     showIcon: false,
     direction: select('Tooltip direction (direction)', directions, 'bottom'),
+    focusTrap: boolean('Focus trap (focusTrap)', true),
     triggerText: text('Trigger text (triggerText)', 'Tooltip label'),
     tabIndex: number('Tab index (tabIndex in <Tooltip>)', 0),
     selectorPrimaryFocus: text(
@@ -43,6 +51,7 @@ const props = {
   customIcon: () => ({
     showIcon: true,
     direction: select('Tooltip direction (direction)', directions, 'bottom'),
+    focusTrap: boolean('Focus trap (focusTrap)', true),
     triggerText: text('Trigger text (triggerText)', 'Tooltip label'),
     tabIndex: number('Tab index (tabIndex in <Tooltip>)', 0),
     selectorPrimaryFocus: text(
@@ -61,6 +70,7 @@ const props = {
   customIconOnly: () => ({
     showIcon: true,
     direction: select('Tooltip direction (direction)', directions, 'bottom'),
+    focusTrap: boolean('Focus trap (focusTrap)', true),
     iconDescription: 'Helpful Information',
     tabIndex: number('Tab index (tabIndex in <Tooltip>)', 0),
     selectorPrimaryFocus: text(
@@ -96,6 +106,7 @@ function UncontrolledTooltipExample() {
       </Button>
       <div style={{ padding: '15px', margin: '4px 20px' }}>
         <Tooltip
+          focusTrap={false}
           triggerText={<div>My text wrapped with tooltip</div>}
           open={value}
           showIcon={false}>
