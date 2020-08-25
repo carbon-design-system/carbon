@@ -12,13 +12,12 @@ import { settings } from 'carbon-components';
 
 const { prefix } = settings;
 
-const DropdownSkeleton = ({ inline, className, ...rest }) => {
+const DropdownSkeleton = ({ className, ...rest }) => {
   const wrapperClasses = cx(className, {
     [`${prefix}--skeleton`]: true,
     [`${prefix}--dropdown-v2`]: true,
     [`${prefix}--list-box`]: true,
     [`${prefix}--form-item`]: true,
-    [`${prefix}--list-box--inline`]: inline,
   });
 
   return (
@@ -35,15 +34,6 @@ DropdownSkeleton.propTypes = {
    * Specify an optional className to add.
    */
   className: PropTypes.string,
-
-  /**
-   * Specify whether you want the inline version of this control
-   */
-  inline: PropTypes.bool,
-};
-
-DropdownSkeleton.defaultProps = {
-  inline: false,
 };
 
 export default DropdownSkeleton;
