@@ -110,7 +110,17 @@ function UncontrolledTooltipExample() {
           triggerText={<div>My text wrapped with tooltip</div>}
           open={value}
           showIcon={false}>
-          Some text
+          <p id="tooltip-body">
+            This is some tooltip text. This box shows the maximum amount of text
+            that should appear inside. If more room is needed please use a modal
+            instead.
+          </p>
+          <div className={`${prefix}--tooltip__footer`}>
+            <a href="/" className={`${prefix}--link`}>
+              Learn More
+            </a>
+            <Button size="small">Create</Button>
+          </div>
         </Tooltip>
       </div>
     </>
