@@ -86,6 +86,10 @@ export default class ComboBox extends React.Component {
      */
     downshiftProps: PropTypes.shape(Downshift.propTypes),
 
+    /**
+     * Provide helper text that is used alongside the control label for
+     * additional help
+     */
     helperText: PropTypes.string,
 
     /**
@@ -173,6 +177,10 @@ export default class ComboBox extends React.Component {
      */
     size: ListBoxPropTypes.ListBoxSize,
 
+    /**
+     * Provide text to be used in a `<label>` element that is tied to the
+     * combobox via ARIA attributes.
+     */
     titleText: PropTypes.string,
 
     /**
@@ -180,6 +188,7 @@ export default class ComboBox extends React.Component {
      * and returns the localized string for the message
      */
     translateWithId: PropTypes.func,
+
     /**
      * Currently supports either the default type, or an inline variant
      */
