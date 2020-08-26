@@ -10,7 +10,7 @@ export default {
     Row,
     Column,
   },
-  decorators: [storyFn => <div id="templates">{storyFn()}</div>],
+  decorators: [(storyFn) => <div id="templates">{storyFn()}</div>],
   parameters: {
     docs: {
       page: mdx,
