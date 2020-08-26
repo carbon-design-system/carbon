@@ -8,7 +8,6 @@
 import './stories/datatable-story.scss';
 
 import { action } from '@storybook/addon-actions';
-import { withKnobs, boolean, select } from '@storybook/addon-knobs';
 import React from 'react';
 import Button from '../Button';
 import Checkbox from '../Checkbox';
@@ -68,16 +67,19 @@ export const Usage = () => (
         <Table {...getTableProps()} isSortable>
           <TableHead>
             <TableRow>
-              {headers.map((header, i) => (
-                <TableHeader key={i} {...getHeaderProps({ header })} isSortable>
+              {headers.map((header) => (
+                <TableHeader
+                  key={header.key}
+                  {...getHeaderProps({ header })}
+                  isSortable>
                   {header.header}
                 </TableHeader>
               ))}
             </TableRow>
           </TableHead>
           <TableBody>
-            {rows.map((row, i) => (
-              <TableRow key={i} {...getRowProps({ row })}>
+            {rows.map((row) => (
+              <TableRow key={row.id} {...getRowProps({ row })}>
                 {row.cells.map((cell) => (
                   <TableCell key={cell.id}>{cell.value}</TableCell>
                 ))}
@@ -139,20 +141,13 @@ export const BasicTable = () => {
 
 export const WithOverflowMenu = () => (
   <DataTable rows={rows} headers={headers}>
-    {({
-      rows,
-      headers,
-      getHeaderProps,
-      getRowProps,
-      getSelectionProps,
-      getTableProps,
-    }) => (
+    {({ rows, headers, getHeaderProps, getRowProps, getTableProps }) => (
       <TableContainer title="DataTable" description="With overflow menu">
         <Table {...getTableProps()}>
           <TableHead>
             <TableRow>
-              {headers.map((header, i) => (
-                <TableHeader key={i} {...getHeaderProps({ header })}>
+              {headers.map((header) => (
+                <TableHeader key={header.key} {...getHeaderProps({ header })}>
                   {header.header}
                 </TableHeader>
               ))}
@@ -160,8 +155,8 @@ export const WithOverflowMenu = () => (
             </TableRow>
           </TableHead>
           <TableBody>
-            {rows.map((row, i) => (
-              <TableRow key={i} {...getRowProps({ row })}>
+            {rows.map((row) => (
+              <TableRow key={row.id} {...getRowProps({ row })}>
                 {row.cells.map((cell) => (
                   <TableCell key={cell.id}>{cell.value}</TableCell>
                 ))}
@@ -219,16 +214,16 @@ export const WithToolbar = () => (
         <Table {...getTableProps()}>
           <TableHead>
             <TableRow>
-              {headers.map((header, i) => (
-                <TableHeader key={i} {...getHeaderProps({ header })}>
+              {headers.map((header) => (
+                <TableHeader key={header.key} {...getHeaderProps({ header })}>
                   {header.header}
                 </TableHeader>
               ))}
             </TableRow>
           </TableHead>
           <TableBody>
-            {rows.map((row, i) => (
-              <TableRow key={i} {...getRowProps({ row })}>
+            {rows.map((row) => (
+              <TableRow key={row.id} {...getRowProps({ row })}>
                 {row.cells.map((cell) => (
                   <TableCell key={cell.id}>{cell.value}</TableCell>
                 ))}
@@ -323,16 +318,16 @@ export const WithCheckmarkColumns = () => {
           <Table {...getTableProps()}>
             <TableHead>
               <TableRow>
-                {headers.map((header, i) => (
-                  <TableHeader key={i} {...getHeaderProps({ header })}>
+                {headers.map((header) => (
+                  <TableHeader key={header.key} {...getHeaderProps({ header })}>
                     {header.header}
                   </TableHeader>
                 ))}
               </TableRow>
             </TableHead>
             <TableBody>
-              {rows.map((row, i) => (
-                <TableRow key={i} {...getRowProps({ row })}>
+              {rows.map((row) => (
+                <TableRow key={row.id} {...getRowProps({ row })}>
                   {row.cells.map((cell) => {
                     if (cell.info.header === 'enabled') {
                       return (

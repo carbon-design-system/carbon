@@ -83,16 +83,16 @@ export const Usage = () => (
         <Table {...getTableProps()}>
           <TableHead>
             <TableRow>
-              {headers.map((header, i) => (
-                <TableHeader {...getHeaderProps({ header })}>
+              {headers.map((header) => (
+                <TableHeader key={header.key} {...getHeaderProps({ header })}>
                   {header.header}
                 </TableHeader>
               ))}
             </TableRow>
           </TableHead>
           <TableBody>
-            {rows.map((row, i) => (
-              <TableRow {...getRowProps({ row })}>
+            {rows.map((row) => (
+              <TableRow key={row.id} {...getRowProps({ row })}>
                 {row.cells.map((cell) => (
                   <TableCell key={cell.id}>{cell.value}</TableCell>
                 ))}
