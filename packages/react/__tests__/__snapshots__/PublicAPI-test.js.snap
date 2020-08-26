@@ -2236,9 +2236,7 @@ Map {
         ],
         "type": "oneOfType",
       },
-      "inline": Object {
-        "type": "bool",
-      },
+      "inline": [Function],
       "invalid": Object {
         "type": "bool",
       },
@@ -6277,16 +6275,11 @@ Map {
     },
   },
   "DropdownSkeleton" => Object {
-    "defaultProps": Object {
-      "inline": false,
-    },
     "propTypes": Object {
       "className": Object {
         "type": "string",
       },
-      "inline": Object {
-        "type": "bool",
-      },
+      "inline": [Function],
     },
   },
   "FileUploaderSkeleton" => Object {
