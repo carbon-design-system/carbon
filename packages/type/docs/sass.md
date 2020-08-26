@@ -2273,7 +2273,7 @@ $carbon--font-display: auto;
 $caption-01: (
   font-size: carbon--type-scale(1),
   font-weight: carbon--font-weight('regular'),
-  line-height: 1.33,
+  line-height: 1.34,
   letter-spacing: 0.32px,
 );
 ```
@@ -2292,7 +2292,7 @@ $caption-01: (
 $label-01: (
   font-size: carbon--type-scale(1),
   font-weight: carbon--font-weight('regular'),
-  line-height: 1.33,
+  line-height: 1.34,
   letter-spacing: 0.32px,
 );
 ```
@@ -2310,7 +2310,7 @@ $label-01: (
 ```scss
 $helper-text-01: (
   font-size: carbon--type-scale(1),
-  line-height: 1.33,
+  line-height: 1.34,
   letter-spacing: 0.32px,
 );
 ```
@@ -2406,7 +2406,7 @@ $code-01: (
   font-family: carbon--font-family('mono'),
   font-size: carbon--type-scale(1),
   font-weight: carbon--font-weight('regular'),
-  line-height: 1.33,
+  line-height: 1.34,
   letter-spacing: 0.32px,
 );
 ```

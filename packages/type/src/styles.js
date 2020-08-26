@@ -13,20 +13,20 @@ import { scale } from './scale';
 export const caption01 = {
   fontSize: rem(scale[0]),
   fontWeight: fontWeights.regular,
-  lineHeight: 1.33,
+  lineHeight: 1.34,
   letterSpacing: px(0.32),
 };
 
 export const label01 = {
   fontSize: rem(scale[0]),
   fontWeight: fontWeights.regular,
-  lineHeight: 1.33,
+  lineHeight: 1.34,
   letterSpacing: px(0.32),
 };
 
 export const helperText01 = {
   fontSize: rem(scale[0]),
-  lineHeight: 1.33,
+  lineHeight: 1.34,
   letterSpacing: px(0.32),
 };
 
@@ -62,7 +62,7 @@ export const code01 = {
   fontFamily: fontFamilies.mono,
   fontSize: rem(scale[0]),
   fontWeight: fontWeights.regular,
-  lineHeight: 1.33,
+  lineHeight: 1.34,
   letterSpacing: px(0.32),
 };
 
