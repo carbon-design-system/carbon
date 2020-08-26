@@ -140,7 +140,8 @@ export default class Pagination extends Component {
     forwardText: 'Next page',
     itemsPerPageText: 'Items per page:',
     pageNumberText: 'Page Number',
-    pageRangeText: (current, total) => `of ${total} pages`,
+    pageRangeText: (current, total) =>
+      `of ${total} ${total === 1 ? 'page' : 'pages'}`,
     disabled: false,
     page: 1,
     pagesUnknown: false,
