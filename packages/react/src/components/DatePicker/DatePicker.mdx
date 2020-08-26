@@ -99,7 +99,11 @@ see the Flatpickr
 [documentation](https://flatpickr.js.org/formatting/#date-formatting-tokens)
 
 <DatePicker datePickerType="single" dateFormat="Y-m-d">
-  <DatePickerInput placeholder="yyyy-mm-dd" />
+  <DatePickerInput
+    placeholder="yyyy-mm-dd"
+    id="date-picker-1"
+    labelText="Date format example"
+  />
 </DatePicker>
 
 ```jsx
@@ -142,7 +146,11 @@ FlatPickr instance. A complete list of valid locales can be found in the
 [component API](#component-api) section
 
 <DatePicker locale="no" dateFormat="d/m/Y" datePickerType="single">
-  <DatePickerInput placeholder="dd/mm/yyyy" />
+  <DatePickerInput
+    placeholder="dd/mm/yyyy"
+    id="date-picker-2"
+    labelText="Locale example"
+  />
 </DatePicker>
 
 ```jsx
@@ -161,7 +169,11 @@ as the `locale` prop example. One is setting it as September 1st, and the other
 is setting it as January 9th.
 
 <DatePicker maxDate="09/01/2020" datePickerType="single">
-  <DatePickerInput placeholder="dd/mm/yyyy" />
+  <DatePickerInput
+    placeholder="dd/mm/yyyy"
+    id="date-picker-3"
+    labelText="US format"
+  />
 </DatePicker>
 <br />
 <DatePicker
@@ -169,7 +181,11 @@ is setting it as January 9th.
   datePickerType="single"
   locale="no"
   dateFormat="d/m/Y">
-  <DatePickerInput placeholder="mm/dd/yyyy" />
+  <DatePickerInput
+    placeholder="mm/dd/yyyy"
+    id="date-picker-4"
+    labelText="European format"
+  />
 </DatePicker>
 
 ```jsx
@@ -191,7 +207,11 @@ is setting it as January 9th.
 Works similarly to the `maxDate` prop. [See above](#datepicker-maxdate).
 
 <DatePicker maxDate="09/01/2020" datePickerType="single" value="07/15/1988">
-  <DatePickerInput placeholder="dd/mm/yyyy" />
+  <DatePickerInput
+    placeholder="dd/mm/yyyy"
+    id="date-picker-5"
+    labelText="minDate example"
+  />
 </DatePicker>
 
 ### DatePicker `value`
@@ -200,14 +220,22 @@ By default `DatePicker` will set the current date as its value. If you'd like to
 start this at a different date, you can pass in a date string or date object.
 
 <DatePicker maxDate="09/01/2020" datePickerType="single" value="07/15/1988">
-  <DatePickerInput placeholder="dd/mm/yyyy" />
+  <DatePickerInput
+    placeholder="dd/mm/yyyy"
+    id="date-picker-6"
+    labelText="Value as string example"
+  />
 </DatePicker>
 <br />
 <DatePicker
   maxDate="09/01/2020"
   datePickerType="single"
   value={new Date().setDate(-10)}>
-  <DatePickerInput placeholder="dd/mm/yyyy" />
+  <DatePickerInput
+    placeholder="dd/mm/yyyy"
+    id="date-picker-7"
+    labelText="Value as object example"
+  />
 </DatePicker>
 
 ```jsx
