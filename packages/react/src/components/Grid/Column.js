@@ -119,10 +119,11 @@ function getClassNameForBreakpoints(breakpoints) {
 
   for (let i = 0; i < breakpoints.length; i++) {
     const breakpoint = breakpoints[i];
-    if (!breakpoint) {
+    if (breakpoint === undefined || breakpoint === null) {
       continue;
     }
 
+    console.log(breakpoint);
     const name = breakpointNames[i];
 
     // If our breakpoint is a boolean, the user has specified that the column
