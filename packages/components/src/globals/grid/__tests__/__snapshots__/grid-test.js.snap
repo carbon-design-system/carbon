@@ -4,25 +4,25 @@ exports[`_grid.scss should generate grid code when the grid feature flag is on 1
 "h1 {
   font-size: 2.625rem;
   font-weight: 300;
-  line-height: 3.125;
+  line-height: 1.19;
   letter-spacing: 0; }
 
 h2 {
   font-size: 2rem;
   font-weight: 400;
-  line-height: 2.5;
+  line-height: 1.25;
   letter-spacing: 0; }
 
 h3 {
   font-size: 1.75rem;
   font-weight: 400;
-  line-height: 2.25;
+  line-height: 1.29;
   letter-spacing: 0; }
 
 h4 {
   font-size: 1.25rem;
   font-weight: 400;
-  line-height: 1.75;
+  line-height: 1.4;
   letter-spacing: 0; }
 
 h5 {
@@ -34,7 +34,7 @@ h5 {
 h6 {
   font-size: 0.875rem;
   font-weight: 600;
-  line-height: 1.125;
+  line-height: 1.29;
   letter-spacing: 0.16px; }
 
 p {
