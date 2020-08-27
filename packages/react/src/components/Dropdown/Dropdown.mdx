@@ -1,4 +1,4 @@
-import { Story, Props, Source, Preview } from '@storybook/addon-docs/blocks';
+import { Story, ArgsTable, Source, Canvas } from '@storybook/addon-docs/blocks';
 import Dropdown from '../Dropdown';
 import DropdownSkeleton from './Dropdown.Skeleton';
 
@@ -41,18 +41,18 @@ Dropdowns present a list of options from which a user can select one option, or
 several. A selected option can represent a value in a form, or can be used as an
 action to filter or sort existing content.
 
-<Preview>
+<Canvas>
   <Story id="dropdown--default" />
-</Preview>
+</Canvas>
 
 ### Inline dropdown
 
 You can place a `Dropdown` inline with other content by using the `inline`
 variant
 
-<Preview>
+<Canvas>
   <Story id="dropdown--inline" />
-</Preview>
+</Canvas>
 
 ### Skeleton state
 
@@ -60,13 +60,13 @@ You can use the `DropdownSkeleton` component to render a skeleton variant of a
 `Dropdown`. This is useful to display on initial page load or when data needs to
 be fetched from an external API.
 
-<Preview>
+<Canvas>
   <Story id="dropdown--skeleton" />
-</Preview>
+</Canvas>
 
 ## Component API
 
-<Props />
+<ArgsTable />
 
 ### Dropdown `direction`
 
