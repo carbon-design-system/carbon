@@ -4725,7 +4725,7 @@ $productive-heading-06: if(
   (
     font-size: 2.625rem,
     font-weight: 300,
-    line-height: 1.19,
+    line-height: 1.199,
     letter-spacing: 0,
   )
 );

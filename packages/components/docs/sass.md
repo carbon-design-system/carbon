@@ -9035,7 +9035,7 @@ $productive-heading-06: if(
   (
     font-size: 2.625rem,
     font-weight: 300,
-    line-height: 1.19,
+    line-height: 1.199,
     letter-spacing: 0,
   )
 );
@@ -12760,7 +12760,8 @@ $productive-heading-05: (
 $productive-heading-06: (
   font-size: carbon--type-scale(8),
   font-weight: carbon--font-weight('light'),
-  line-height: 1.19,
+  // Extra digit needed for precision in Chrome
+  line-height: 1.199,
   letter-spacing: 0,
 );
 ```
