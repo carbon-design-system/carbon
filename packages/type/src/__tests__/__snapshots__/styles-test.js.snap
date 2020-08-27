@@ -195,7 +195,7 @@ letter-spacing: 0;"
 exports[`styles productiveHeading06 should be printable 1`] = `
 "font-size: 2.625rem;
 font-weight: 300;
-line-height: 1.19;
+line-height: 1.199;
 letter-spacing: 0;"
 `;
 

@@ -116,7 +116,7 @@ export const productiveHeading05 = {
 export const productiveHeading06 = {
   fontSize: rem(scale[9]),
   fontWeight: fontWeights.light,
-  lineHeight: 1.19,
+  lineHeight: 1.199,
   letterSpacing: 0,
 };
 
