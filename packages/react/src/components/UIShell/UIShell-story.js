@@ -66,10 +66,8 @@ const StoryContent = ({ useResponsiveOffset = true }) => {
     <div className="bx--grid">
       <div className="bx--row">
         <div className={classNameFirstColumn}>
-          <h2 style={{ fontWeight: '800', margin: '30px 0', fontSize: '20px' }}>
-            Purpose and function
-          </h2>
-          <p style={{ lineHeight: '20px' }}>
+          <h2 style={{ margin: '0 0 30px' }}>Purpose and function</h2>
+          <p>
             The shell is perhaps the most crucial piece of any UI built with
             <a href="www.carbondesignsystem.com"> Carbon</a>. It contains the
             shared navigation framework for the entire design system and ties
@@ -94,19 +92,15 @@ const StoryContent = ({ useResponsiveOffset = true }) => {
             these parts of the Mac UI. For example, the app switcher portion of
             the shell can be compared to the dock in MacOS.
           </p>
-          <h2 style={{ fontWeight: '800', margin: '30px 0', fontSize: '20px' }}>
-            Header responsive behavior
-          </h2>
-          <p style={{ lineHeight: '20px' }}>
+          <h2 style={{ margin: '30px 0' }}>Header responsive behavior</h2>
+          <p>
             As a header scales down to fit smaller screen sizes, headers with
             persistent side nav menus should have the side nav collapse into
             “hamburger” menu. See the example to better understand responsive
             behavior of the header.
           </p>
-          <h2 style={{ fontWeight: '800', margin: '30px 0', fontSize: '20px' }}>
-            Secondary navigation
-          </h2>
-          <p style={{ lineHeight: '20px' }}>
+          <h2 style={{ margin: '30px 0' }}>Secondary navigation</h2>
+          <p>
             The side-nav contains secondary navigation and fits below the
             header. It can be configured to be either fixed-width or flexible,
             with only one level of nested items allowed. Both links and category

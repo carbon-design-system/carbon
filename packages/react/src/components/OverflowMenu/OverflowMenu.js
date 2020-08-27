@@ -255,7 +255,7 @@ class OverflowMenu extends Component {
 
   componentDidUpdate(_, prevState) {
     const { onClose } = this.props;
-    if (!this.state.open && prevState.isOpen) {
+    if (!this.state.open && prevState.open) {
       onClose();
     }
   }
