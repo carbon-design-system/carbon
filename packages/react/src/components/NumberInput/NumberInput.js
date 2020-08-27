@@ -355,11 +355,16 @@ class NumberInput extends Component {
       );
     }
 
+    const helperTextClasses = classNames(`${prefix}--form__helper-text`, {
+      [`${prefix}--form__helper-text--disabled`]: disabled,
+    });
+
     const helper = helperText ? (
-      <div className={`${prefix}--form__helper-text`}>{helperText}</div>
+      <div className={helperTextClasses}>{helperText}</div>
     ) : null;
 
     const labelClasses = classNames(`${prefix}--label`, {
+      [`${prefix}--label--disabled`]: disabled,
       [`${prefix}--visually-hidden`]: hideLabel,
     });
 
