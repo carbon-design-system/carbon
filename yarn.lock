@@ -3455,10 +3455,10 @@
     percy-client "^3.0.0"
     slugify "^1.1.0"
 
-"@percy/storybook@^3.3.0":
-  version "3.3.0"
-  resolved "https://registry.yarnpkg.com/@percy/storybook/-/storybook-3.3.0.tgz#7ebdf2a0f6e09924b82045a755a2e2fbc6704581"
-  integrity sha512-xo6wIZUhrR07K5iTjTRUK0jXWhIYsP4yjUNjqNVwsuYS+aDD+1ZGd+2ZI0IrfTcllUkA6MUgtP1qMRhpx9hZ6g==
+"@percy/storybook@^3.3.1":
+  version "3.3.1"
+  resolved "https://registry.yarnpkg.com/@percy/storybook/-/storybook-3.3.1.tgz#59c1747644aab29a0f6ac9b773f555b6992a7d68"
+  integrity sha512-xhRR+BAQMSr2NlOmIFOqdy+kHx6a2RGBZ2/+7rhqhpyHzjWCATaKG/gU3b7qxHz9Jdk9KYVdyMtgHrndtAazgw==
   dependencies:
     "@percy/react-percy-api-client" "^0.4.6"
     babel-runtime "^6.26.0"
