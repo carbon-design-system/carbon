@@ -1,0 +1,147 @@
+//
+// Copyright IBM Corp. 2016, 2018
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+//-----------------------------
+// Treeview
+//-----------------------------
+
+@import '../../globals/scss/vars';
+@import '../../globals/scss/vendor/@carbon/elements/scss/import-once/import-once';
+@import '../../globals/scss/helper-mixins';
+@import '../../globals/scss/typography';
+
+/// Treeview styles
+/// @access private
+/// @group treeview
+@mixin treeview {
+  .#{$prefix}--tree {
+    overflow: hidden;
+
+    .#{$prefix}--tree-node {
+      padding-left: $spacing-05;
+      color: $text-02;
+      background-color: $ui-01;
+
+      &:focus {
+        outline: none;
+      }
+    }
+
+    .#{$prefix}--tree-node:focus > .#{$prefix}--tree-node__label {
+      @include focus-outline('outline');
+    }
+
+    .#{$prefix}--tree-node--disabled {
+      color: $disabled-02;
+      background-color: $disabled-01;
+      pointer-events: none;
+    }
+
+    .#{$prefix}--tree-node--disabled .#{$prefix}--tree-node__label:hover {
+      background-color: $disabled-01;
+    }
+
+    .#{$prefix}--tree-node--disabled .#{$prefix}--tree-parent-node__toggle-icon,
+    .#{$prefix}--tree-node--disabled .#{$prefix}--tree-node__icon {
+      fill: $disabled-02;
+    }
+
+    .#{$prefix}--tree-node--disabled
+      .#{$prefix}--tree-parent-node__toggle-icon:hover {
+      cursor: default;
+    }
+
+    .#{$prefix}--tree-node__label {
+      display: flex;
+      flex: 1;
+      align-items: center;
+      min-height: rem(32px);
+
+      &:hover {
+        background-color: $hover-ui;
+      }
+    }
+
+    .#{$prefix}--tree-leaf-node {
+      display: flex;
+      padding-left: $spacing-08;
+    }
+
+    .#{$prefix}--tree-leaf-node.#{$prefix}--tree-node--with-icon {
+      padding-left: $spacing-07;
+    }
+
+    .#{$prefix}--tree-node__label__details {
+      display: flex;
+      align-items: center;
+    }
+
+    .#{$prefix}--tree-node--with-icon .#{$prefix}--tree-parent-node__toggle {
+      margin-right: 0;
+    }
+
+    .#{$prefix}--tree-parent-node__toggle {
+      margin-right: $spacing-03;
+      padding: 0;
+      border: 0;
+
+      &:hover {
+        cursor: pointer;
+      }
+
+      &:focus {
+        outline: none;
+      }
+    }
+
+    .#{$prefix}--tree-parent-node__toggle-icon {
+      transform: rotate(-90deg);
+      transition: all $duration--fast-02 motion(standard, productive);
+      fill: $icon-01;
+    }
+
+    .#{$prefix}--tree-parent-node__toggle-icon--expanded {
+      transform: rotate(0);
+    }
+
+    .#{$prefix}--tree-node__icon {
+      margin-right: $spacing-03;
+      fill: $icon-01;
+    }
+
+    .#{$prefix}--tree-node--selected > .#{$prefix}--tree-node__label {
+      color: $text-01;
+      background-color: $selected-ui;
+
+      &:hover {
+        background-color: $hover-selected-ui;
+      }
+    }
+
+    .#{$prefix}--tree-node--active > .#{$prefix}--tree-node__label {
+      position: relative;
+
+      &::before {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: rem(4px);
+        height: 100%;
+        background-color: $interactive-01;
+        content: '';
+      }
+    }
+  }
+
+  .#{$prefix}--tree--compact .#{$prefix}--tree-node__label {
+    min-height: rem(24px);
+  }
+}
+
+@include exports('treeview') {
+  @include treeview;
+}
