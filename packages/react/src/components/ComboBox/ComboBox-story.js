@@ -62,6 +62,7 @@ const props = () => ({
   size: select('Field size (size)', sizes, undefined) || undefined,
   direction: select('Dropdown direction (direction)', directions, 'bottom'),
   onChange: action('onChange'),
+  onToggleClick: action('onClick'),
 });
 
 export default {
