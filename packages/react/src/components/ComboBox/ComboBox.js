@@ -86,6 +86,10 @@ export default class ComboBox extends React.Component {
      */
     downshiftProps: PropTypes.shape(Downshift.propTypes),
 
+    /**
+     * Provide helper text that is used alongside the control label for
+     * additional help
+     */
     helperText: PropTypes.string,
 
     /**
@@ -151,6 +155,12 @@ export default class ComboBox extends React.Component {
     onInputChange: PropTypes.func,
 
     /**
+     * Callback function that fires when the combobox menu toggle is clicked
+     * @param {MouseEvent} event
+     */
+    onToggleClick: PropTypes.func,
+
+    /**
      * Used to provide a placeholder text node before a user enters any input.
      * This is only present if the control has no items selected
      */
@@ -173,6 +183,10 @@ export default class ComboBox extends React.Component {
      */
     size: ListBoxPropTypes.ListBoxSize,
 
+    /**
+     * Provide text to be used in a `<label>` element that is tied to the
+     * combobox via ARIA attributes.
+     */
     titleText: PropTypes.string,
 
     /**
@@ -180,6 +194,7 @@ export default class ComboBox extends React.Component {
      * and returns the localized string for the message
      */
     translateWithId: PropTypes.func,
+
     /**
      * Currently supports either the default type, or an inline variant
      */
@@ -280,6 +295,10 @@ export default class ComboBox extends React.Component {
   };
 
   onToggleClick = (isOpen) => (event) => {
+    if (this.props.onToggleClick) {
+      this.props.onToggleClick(event);
+    }
+
     if (event.target === this.textInput.current && isOpen) {
       event.preventDownshiftDefault = true;
       event.persist();
@@ -309,6 +328,7 @@ export default class ComboBox extends React.Component {
       shouldFilterItem, // eslint-disable-line no-unused-vars
       onChange, // eslint-disable-line no-unused-vars
       onInputChange, // eslint-disable-line no-unused-vars
+      onToggleClick, // eslint-disable-line no-unused-vars
       downshiftProps,
       direction,
       ...rest

@@ -531,6 +531,9 @@ Map {
       "onInputChange": Object {
         "type": "func",
       },
+      "onToggleClick": Object {
+        "type": "func",
+      },
       "placeholder": Object {
         "isRequired": true,
         "type": "string",
