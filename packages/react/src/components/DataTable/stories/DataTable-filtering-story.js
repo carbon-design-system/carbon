@@ -5,8 +5,8 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React from 'react';
 import { action } from '@storybook/addon-actions';
+import React from 'react';
 import Button from '../../Button';
 import DataTable, {
   Table,
@@ -17,35 +17,52 @@ import DataTable, {
   TableHeader,
   TableRow,
   TableToolbar,
-  TableToolbarAction,
   TableToolbarContent,
   TableToolbarSearch,
   TableToolbarMenu,
-} from '..';
+  TableToolbarAction,
+} from '../../DataTable';
+import { rows, headers } from './shared';
+import mdx from '../DataTable.mdx';
 
-import { initialRows, headers } from './shared';
+export default {
+  title: 'DataTable/Filtering',
+  component: DataTable,
+  subcomponents: {
+    TableToolbar,
+    TableToolbarContent,
+    TableToolbarSearch,
+    TableToolbarMenu,
+    TableToolbarAction,
+    Table,
+    TableBody,
+    TableCell,
+    TableContainer,
+    TableHead,
+    TableHeader,
+    TableRow,
+  },
+  parameters: {
+    docs: {
+      page: mdx,
+    },
+  },
+};
 
-const ToolbarStory = (props) => (
-  <DataTable
-    rows={initialRows}
-    headers={headers}
-    {...props}
-    render={({
+export const Usage = () => (
+  <DataTable rows={rows} headers={headers}>
+    {({
       rows,
       headers,
       getHeaderProps,
       getRowProps,
       getTableProps,
-      getToolbarProps,
       onInputChange,
-      getTableContainerProps,
     }) => (
-      <TableContainer
-        title="DataTable"
-        description="With toolbar"
-        {...getTableContainerProps()}>
-        <TableToolbar {...getToolbarProps()} aria-label="data table toolbar">
+      <TableContainer title="DataTable" description="With filtering">
+        <TableToolbar>
           <TableToolbarContent>
+            {/* pass in `onInputChange` change here to make filtering work */}
             <TableToolbarSearch onChange={onInputChange} />
             <TableToolbarMenu>
               <TableToolbarAction
@@ -60,22 +77,22 @@ const ToolbarStory = (props) => (
                 Action 3
               </TableToolbarAction>
             </TableToolbarMenu>
-            <Button onClick={action('ButtonCLick')}>Primary Button</Button>
+            <Button onClick={action('Button click')}>Primary Button</Button>
           </TableToolbarContent>
         </TableToolbar>
         <Table {...getTableProps()}>
           <TableHead>
             <TableRow>
-              {headers.map((header, i) => (
-                <TableHeader key={i} {...getHeaderProps({ header })}>
+              {headers.map((header) => (
+                <TableHeader key={header.key} {...getHeaderProps({ header })}>
                   {header.header}
                 </TableHeader>
               ))}
             </TableRow>
           </TableHead>
           <TableBody>
-            {rows.map((row, i) => (
-              <TableRow key={i} {...getRowProps({ row })}>
+            {rows.map((row) => (
+              <TableRow key={row.id} {...getRowProps({ row })}>
                 {row.cells.map((cell) => (
                   <TableCell key={cell.id}>{cell.value}</TableCell>
                 ))}
@@ -85,7 +102,5 @@ const ToolbarStory = (props) => (
         </Table>
       </TableContainer>
     )}
-  />
+  </DataTable>
 );
-
-export default ToolbarStory;

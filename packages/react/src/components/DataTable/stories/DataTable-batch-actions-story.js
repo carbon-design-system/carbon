@@ -33,14 +33,38 @@ import DataTable, {
   TableToolbarMenu,
 } from '../../DataTable';
 
-import { batchActionClick, initialRows, headers } from './shared';
+import { batchActionClick, rows, headers } from './shared';
+import mdx from '../DataTable.mdx';
 
-const TableBatchActionsStory = (props) => (
-  <DataTable
-    rows={initialRows}
-    headers={headers}
-    {...props}
-    render={({
+export default {
+  title: 'DataTable/Batch Actions',
+  component: DataTable,
+  subcomponents: {
+    TableBatchAction,
+    TableBatchActions,
+    TableToolbar,
+    TableToolbarAction,
+    TableToolbarContent,
+    TableToolbarSearch,
+    TableToolbarMenu,
+    Table,
+    TableBody,
+    TableCell,
+    TableContainer,
+    TableHead,
+    TableHeader,
+    TableRow,
+  },
+  parameters: {
+    docs: {
+      page: mdx,
+    },
+  },
+};
+
+export const Usage = () => (
+  <DataTable rows={rows} headers={headers}>
+    {({
       rows,
       headers,
       getHeaderProps,
@@ -129,7 +153,5 @@ const TableBatchActionsStory = (props) => (
         </Table>
       </TableContainer>
     )}
-  />
+  </DataTable>
 );
-
-export default TableBatchActionsStory;
