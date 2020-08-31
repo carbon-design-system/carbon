@@ -147,7 +147,7 @@ export default class Pagination extends Component {
     pagesUnknown: false,
     isLastPage: false,
     itemText: (min, max) => `${min}–${max} items`,
-    pageText: page => `page ${page}`,
+    pageText: (page) => `page ${page}`,
   };
 
   static getDerivedStateFromProps({ pageSizes, page, pageSize }, state) {
@@ -175,17 +175,17 @@ export default class Pagination extends Component {
         };
   }
 
-  handleSizeChange = evt => {
+  handleSizeChange = (evt) => {
     const pageSize = Number(evt.target.value);
     this.setState({ pageSize, page: 1 });
     this.props.onChange({ page: 1, pageSize });
   };
 
-  handlePageChange = evt => {
+  handlePageChange = (evt) => {
     this.setState({ page: evt.target.value });
   };
 
-  handlePageInputChange = evt => {
+  handlePageInputChange = (evt) => {
     const page = Number(evt.target.value);
     if (
       page > 0 &&
@@ -212,7 +212,7 @@ export default class Pagination extends Component {
     this.props.onChange({ page, pageSize: this.state.pageSize });
   };
 
-  renderSelectItems = total => {
+  renderSelectItems = (total) => {
     let counter = 1;
     let itemArr = [];
     while (counter <= total) {
@@ -288,7 +288,7 @@ export default class Pagination extends Component {
             onChange={this.handleSizeChange}
             disabled={pageInputDisabled || disabled}
             value={statePageSize}>
-            {pageSizes.map(size => (
+            {pageSizes.map((size) => (
               <SelectItem key={size} value={size} text={String(size)} />
             ))}
           </Select>

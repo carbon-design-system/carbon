@@ -36,7 +36,7 @@ export default function TreeNode({
   const [expanded, setExpanded] = useState(isExpanded);
   const currentNode = useRef(null);
   const currentNodeLabel = useRef(null);
-  const nodesWithProps = React.Children.map(children, node => {
+  const nodesWithProps = React.Children.map(children, (node) => {
     if (React.isValidElement(node)) {
       return React.cloneElement(node, {
         active,
@@ -86,7 +86,7 @@ export default function TreeNode({
       event.stopPropagation();
     }
     if (match(event, keys.ArrowLeft)) {
-      const findParentTreeNode = node => {
+      const findParentTreeNode = (node) => {
         if (node.classList.contains(`${prefix}--tree-parent-node`)) {
           return node;
         }

@@ -37,7 +37,7 @@ export default function TreeView({
   function resetNodeTabIndices() {
     Array.prototype.forEach.call(
       treeRootRef?.current?.querySelectorAll('[tabIndex="0"]') ?? [],
-      item => {
+      (item) => {
         item.tabIndex = -1;
       }
     );
@@ -48,7 +48,7 @@ export default function TreeView({
       if (!selected.includes(nodeId)) {
         setSelected(selected.concat(nodeId));
       } else {
-        setSelected(selected.filter(selectedId => selectedId !== nodeId));
+        setSelected(selected.filter((selectedId) => selectedId !== nodeId));
       }
     } else {
       setSelected([nodeId]);
@@ -81,7 +81,7 @@ export default function TreeView({
     }
   }
   let focusTarget = false;
-  const nodesWithProps = React.Children.map(children, node => {
+  const nodesWithProps = React.Children.map(children, (node) => {
     const sharedNodeProps = {
       active,
       depth: 0,
@@ -126,7 +126,7 @@ export default function TreeView({
     treeWalker.current =
       treeWalker.current ??
       document.createTreeWalker(treeRootRef?.current, NodeFilter.SHOW_ELEMENT, {
-        acceptNode: function(node) {
+        acceptNode: function (node) {
           if (node.classList.contains(`${prefix}--tree-node--disabled`)) {
             return NodeFilter.FILTER_REJECT;
           }
