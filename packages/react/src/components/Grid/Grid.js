@@ -52,8 +52,8 @@ Grid.propTypes = {
   className: PropTypes.string,
 
   /**
-   * Collapse the gutter to 2px. Useful for fluid layouts.
-   * Rows have 2px of margin between them to match gutter.
+   * Collapse the gutter to 1px. Useful for fluid layouts.
+   * Rows have 1px of margin between them to match gutter.
    */
   condensed: PropTypes.bool,
 

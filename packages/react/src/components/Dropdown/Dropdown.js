@@ -13,6 +13,7 @@ import PropTypes from 'prop-types';
 import { Checkmark16, WarningFilled16 } from '@carbon/icons-react';
 import ListBox, { PropTypes as ListBoxPropTypes } from '../ListBox';
 import { mapDownshiftProps } from '../../tools/createPropAdapter';
+import deprecate from '../../prop-types/deprecate';
 
 const { prefix } = settings;
 
@@ -232,7 +233,11 @@ Dropdown.propTypes = {
   /**
    * Specify whether you want the inline version of this control
    */
-  inline: PropTypes.bool,
+  inline: deprecate(
+    PropTypes.bool,
+    `The \`inline\` prop has been deprecated and will
+    be removed in the next major release. To specify the inline variant of Dropdown, please use the \`type\` prop.`
+  ),
 
   /**
    * Specify if the currently selected value is invalid.
