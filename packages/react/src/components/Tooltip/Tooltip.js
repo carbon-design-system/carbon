@@ -231,7 +231,8 @@ class Tooltip extends Component {
    * @private
    */
   _tooltipId =
-    this.props.id || `__carbon-tooltip_${Math.random().toString(36).substr(2)}`;
+    this.props.tooltipId ||
+    `__carbon-tooltip_${Math.random().toString(36).substr(2)}`;
 
   /**
    * Internal flag for tracking whether or not focusing on the tooltip trigger
