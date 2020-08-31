@@ -2407,7 +2407,6 @@ Generate a media query for a given breakpoint
   - [toast-notifications [mixin]](#toast-notifications-mixin)
   - [pagination [mixin]](#pagination-mixin)
   - [unstable_pagination [mixin]](#unstable_pagination-mixin)
-  - [tabs [mixin]](#tabs-mixin)
   - [carbon-header [mixin]](#carbon-header-mixin)
 
 ### ✅carbon--container-01 [variable]
@@ -3424,6 +3423,7 @@ $carbon--spacing-03: 0.5rem;
   - [radio-button [mixin]](#radio-button-mixin)
   - [select [mixin]](#select-mixin)
   - [padding-th [mixin]](#padding-th-mixin)
+  - [tabs [mixin]](#tabs-mixin)
   - [tags [mixin]](#tags-mixin)
   - [toggle [mixin]](#toggle-mixin)
   - [tooltip--definition--legacy [mixin]](#tooltip--definition--legacy-mixin)
@@ -3564,6 +3564,7 @@ $carbon--spacing-08: 2.5rem;
   - [inline-notifications [mixin]](#inline-notifications-mixin)
   - [unstable_pagination [mixin]](#unstable_pagination-mixin)
   - [search [mixin]](#search-mixin)
+  - [tabs [mixin]](#tabs-mixin)
   - [text-area [mixin]](#text-area-mixin)
   - [text-input [mixin]](#text-input-mixin)
 
@@ -3590,6 +3591,7 @@ $carbon--spacing-09: 3rem;
   - [modal [mixin]](#modal-mixin)
   - [inline-notifications [mixin]](#inline-notifications-mixin)
   - [pagination [mixin]](#pagination-mixin)
+  - [tabs [mixin]](#tabs-mixin)
   - [tile [mixin]](#tile-mixin)
 
 ### ✅carbon--spacing-10 [variable]
@@ -3861,7 +3863,6 @@ $spacing-09: $carbon--spacing-09;
   - [modal [mixin]](#modal-mixin)
   - [search [mixin]](#search-mixin)
   - [select [mixin]](#select-mixin)
-  - [tabs [mixin]](#tabs-mixin)
   - [carbon-side-nav [mixin]](#carbon-side-nav-mixin)
 
 ### ✅spacing-10 [variable]
@@ -6667,6 +6668,7 @@ $ui-background: if(
 - **Type**: `{undefined}`
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
+  - [tabs [mixin]](#tabs-mixin)
   - [tooltip [mixin]](#tooltip-mixin)
 
 ### ✅ui-01 [variable]
@@ -6861,7 +6863,6 @@ $ui-05: if(
   - [progress-indicator [mixin]](#progress-indicator-mixin)
   - [select [mixin]](#select-mixin)
   - [slider [mixin]](#slider-mixin)
-  - [tabs [mixin]](#tabs-mixin)
   - [tile [mixin]](#tile-mixin)
 
 ### ✅text-01 [variable]
@@ -7099,6 +7100,7 @@ $icon-01: if(
   - [overflow-menu [mixin]](#overflow-menu-mixin)
   - [radio-button [mixin]](#radio-button-mixin)
   - [search [mixin]](#search-mixin)
+  - [tabs [mixin]](#tabs-mixin)
   - [treeview [mixin]](#treeview-mixin)
 
 ### ✅icon-02 [variable]
@@ -7251,7 +7253,6 @@ $field-01: if(
   - [overflow-menu [mixin]](#overflow-menu-mixin)
   - [search [mixin]](#search-mixin)
   - [select [mixin]](#select-mixin)
-  - [tabs [mixin]](#tabs-mixin)
   - [text-area [mixin]](#text-area-mixin)
   - [text-input [mixin]](#text-input-mixin)
 
@@ -7287,7 +7288,6 @@ $field-02: if(
   - [overflow-menu [mixin]](#overflow-menu-mixin)
   - [search [mixin]](#search-mixin)
   - [select [mixin]](#select-mixin)
-  - [tabs [mixin]](#tabs-mixin)
   - [text-area [mixin]](#text-area-mixin)
   - [text-input [mixin]](#text-input-mixin)
   - [time-picker [mixin]](#time-picker-mixin)
@@ -7933,7 +7933,6 @@ $hover-ui: if(
   - [pagination [mixin]](#pagination-mixin)
   - [unstable_pagination [mixin]](#unstable_pagination-mixin)
   - [select [mixin]](#select-mixin)
-  - [tabs [mixin]](#tabs-mixin)
   - [tile [mixin]](#tile-mixin)
   - [time-picker [mixin]](#time-picker-mixin)
   - [treeview [mixin]](#treeview-mixin)
@@ -8586,7 +8585,7 @@ $caption-01: if(
   (
     font-size: 0.75rem,
     font-weight: 400,
-    line-height: 1rem,
+    line-height: 1.34,
     letter-spacing: 0.32px,
   )
 );
@@ -8614,7 +8613,7 @@ $label-01: if(
   (
     font-size: 0.75rem,
     font-weight: 400,
-    line-height: 1rem,
+    line-height: 1.34,
     letter-spacing: 0.32px,
   )
 );
@@ -8641,7 +8640,7 @@ $helper-text-01: if(
   map-get($carbon--theme, 'helper-text-01'),
   (
     font-size: 0.75rem,
-    line-height: 1rem,
+    line-height: 1.34,
     letter-spacing: 0.32px,
   )
 );
@@ -8669,7 +8668,7 @@ $body-short-01: if(
   (
     font-size: 0.875rem,
     font-weight: 400,
-    line-height: 1.125rem,
+    line-height: 1.29,
     letter-spacing: 0.16px,
   )
 );
@@ -8697,7 +8696,7 @@ $body-long-01: if(
   (
     font-size: 0.875rem,
     font-weight: 400,
-    line-height: 1.25rem,
+    line-height: 1.43,
     letter-spacing: 0.16px,
   )
 );
@@ -8725,7 +8724,7 @@ $body-short-02: if(
   (
     font-size: 1rem,
     font-weight: 400,
-    line-height: 1.375rem,
+    line-height: 1.375,
     letter-spacing: 0,
   )
 );
@@ -8753,7 +8752,7 @@ $body-long-02: if(
   (
     font-size: 1rem,
     font-weight: 400,
-    line-height: 1.5rem,
+    line-height: 1.5,
     letter-spacing: 0,
   )
 );
@@ -8782,7 +8781,7 @@ $code-01: if(
     font-family: unquote("'IBM Plex Mono', 'Menlo', 'DejaVu Sans Mono', 'Bitstream Vera Sans Mono', Courier, monospace"),
     font-size: 0.75rem,
     font-weight: 400,
-    line-height: 1rem,
+    line-height: 1.34,
     letter-spacing: 0.32px,
   )
 );
@@ -8811,7 +8810,7 @@ $code-02: if(
     font-family: unquote("'IBM Plex Mono', 'Menlo', 'DejaVu Sans Mono', 'Bitstream Vera Sans Mono', Courier, monospace"),
     font-size: 0.875rem,
     font-weight: 400,
-    line-height: 1.25rem,
+    line-height: 1.43,
     letter-spacing: 0.32px,
   )
 );
@@ -8839,7 +8838,7 @@ $heading-01: if(
   (
     font-size: 0.875rem,
     font-weight: 600,
-    line-height: 1.125rem,
+    line-height: 1.29,
     letter-spacing: 0.16px,
   )
 );
@@ -8867,7 +8866,7 @@ $productive-heading-01: if(
   (
     font-size: 0.875rem,
     font-weight: 600,
-    line-height: 1.125rem,
+    line-height: 1.29,
     letter-spacing: 0.16px,
   )
 );
@@ -8895,7 +8894,7 @@ $heading-02: if(
   (
     font-size: 1rem,
     font-weight: 600,
-    line-height: 1.375rem,
+    line-height: 1.375,
     letter-spacing: 0,
   )
 );
@@ -8923,7 +8922,7 @@ $productive-heading-02: if(
   (
     font-size: 1rem,
     font-weight: 600,
-    line-height: 1.375rem,
+    line-height: 1.375,
     letter-spacing: 0,
   )
 );
@@ -8951,7 +8950,7 @@ $productive-heading-03: if(
   (
     font-size: 1.25rem,
     font-weight: 400,
-    line-height: 1.75rem,
+    line-height: 1.4,
     letter-spacing: 0,
   )
 );
@@ -8979,7 +8978,7 @@ $productive-heading-04: if(
   (
     font-size: 1.75rem,
     font-weight: 400,
-    line-height: 2.25rem,
+    line-height: 1.29,
     letter-spacing: 0,
   )
 );
@@ -9007,7 +9006,7 @@ $productive-heading-05: if(
   (
     font-size: 2rem,
     font-weight: 400,
-    line-height: 2.5rem,
+    line-height: 1.25,
     letter-spacing: 0,
   )
 );
@@ -9035,7 +9034,7 @@ $productive-heading-06: if(
   (
     font-size: 2.625rem,
     font-weight: 300,
-    line-height: 3.125rem,
+    line-height: 1.199,
     letter-spacing: 0,
   )
 );
@@ -9063,7 +9062,7 @@ $productive-heading-07: if(
   (
     font-size: 3.375rem,
     font-weight: 300,
-    line-height: 4rem,
+    line-height: 1.19,
     letter-spacing: 0,
   )
 );
@@ -9091,7 +9090,7 @@ $expressive-heading-01: if(
   (
     font-size: 0.875rem,
     font-weight: 600,
-    line-height: 1.25rem,
+    line-height: 1.25,
     letter-spacing: 0.16px,
   )
 );
@@ -9119,7 +9118,7 @@ $expressive-heading-02: if(
   (
     font-size: 1rem,
     font-weight: 600,
-    line-height: 1.5rem,
+    line-height: 1.5,
     letter-spacing: 0,
   )
 );
@@ -9147,12 +9146,12 @@ $expressive-heading-03: if(
   (
     font-size: 1.25rem,
     font-weight: 400,
-    line-height: 140%,
+    line-height: 1.4,
     letter-spacing: 0,
     breakpoints: (
       xlg: (
         font-size: 1.25rem,
-        line-height: 125%,
+        line-height: 1.25,
       ),
       max: (
         font-size: 1.5rem,
@@ -9184,12 +9183,12 @@ $expressive-heading-04: if(
   (
     font-size: 1.75rem,
     font-weight: 400,
-    line-height: 129%,
+    line-height: 1.29,
     letter-spacing: 0,
     breakpoints: (
       xlg: (
         font-size: 1.75rem,
-        line-height: 125%,
+        line-height: 1.25,
       ),
       max: (
         font-size: 2rem,
@@ -9221,31 +9220,30 @@ $expressive-heading-05: if(
   (
     font-size: 2rem,
     font-weight: 400,
-    line-height: 125%,
+    line-height: 1.25,
     letter-spacing: 0,
     breakpoints: (
       md: (
         font-size: 2.25rem,
         font-weight: 300,
-        line-height: 122%,
+        line-height: 1.22,
         letter-spacing: 0,
       ),
       lg: (
         font-size: 2.625rem,
         font-weight: 300,
-        line-height: 119%,
+        line-height: 1.19,
         letter-spacing: 0,
       ),
       xlg: (
         font-size: 3rem,
         font-weight: 300,
-        line-height: 117%,
+        line-height: 1.17,
         letter-spacing: 0,
       ),
       max: (
         font-size: 3.75rem,
         font-weight: 300,
-        line-height: 4.375rem,
         letter-spacing: 0,
       ),
     ),
@@ -9275,31 +9273,30 @@ $expressive-heading-06: if(
   (
     font-size: 2rem,
     font-weight: 600,
-    line-height: 125%,
+    line-height: 1.25,
     letter-spacing: 0,
     breakpoints: (
       md: (
         font-size: 2.25rem,
         font-weight: 600,
-        line-height: 122%,
+        line-height: 1.22,
         letter-spacing: 0,
       ),
       lg: (
         font-size: 2.625rem,
         font-weight: 600,
-        line-height: 119%,
+        line-height: 1.19,
         letter-spacing: 0,
       ),
       xlg: (
         font-size: 3rem,
         font-weight: 600,
-        line-height: 117%,
+        line-height: 1.17,
         letter-spacing: 0,
       ),
       max: (
         font-size: 3.75rem,
         font-weight: 600,
-        line-height: 4.375rem,
         letter-spacing: 0,
       ),
     ),
@@ -9329,15 +9326,15 @@ $expressive-paragraph-01: if(
   (
     font-size: 1.5rem,
     font-weight: 300,
-    line-height: 125%,
+    line-height: 1.25,
     letter-spacing: 0,
     lg: (
       font-size: 1.75rem,
-      line-height: 129%,
+      line-height: 1.29,
     ),
     max: (
       font-size: 2rem,
-      line-height: 125%,
+      line-height: 1.25,
     ),
   )
 );
@@ -9365,7 +9362,7 @@ $quotation-01: if(
   (
     font-size: 1.25rem,
     font-weight: 400,
-    line-height: 130%,
+    line-height: 1.3,
     letter-spacing: 0,
     breakpoints: (
       md: (
@@ -9376,19 +9373,19 @@ $quotation-01: if(
       lg: (
         font-size: 1.5rem,
         font-weight: 400,
-        line-height: 125%,
+        line-height: 1.25,
         letter-spacing: 0,
       ),
       xlg: (
         font-size: 1.75rem,
         font-weight: 400,
-        line-height: 129%,
+        line-height: 1.29,
         letter-spacing: 0,
       ),
       max: (
         font-size: 2rem,
         font-weight: 400,
-        line-height: 125%,
+        line-height: 1.25,
         letter-spacing: 0,
       ),
     ),
@@ -9418,20 +9415,20 @@ $quotation-02: if(
   (
     font-size: 2rem,
     font-weight: 300,
-    line-height: 125%,
+    line-height: 1.25,
     letter-spacing: 0,
     breakpoints: (
       md: (
         font-size: 2.25rem,
-        line-height: 122%,
+        line-height: 1.22,
       ),
       lg: (
         font-size: 2.625rem,
-        line-height: 119%,
+        line-height: 1.19,
       ),
       xlg: (
         font-size: 3rem,
-        line-height: 117%,
+        line-height: 1.17,
       ),
       max: (
         font-size: 3.75rem,
@@ -9463,7 +9460,7 @@ $display-01: if(
   (
     font-size: 2.625rem,
     font-weight: 300,
-    line-height: 119%,
+    line-height: 1.19,
     letter-spacing: 0,
     breakpoints: (
       md: (
@@ -9474,11 +9471,11 @@ $display-01: if(
       ),
       xlg: (
         font-size: 3.75rem,
-        line-height: 117%,
+        line-height: 1.17,
       ),
       max: (
         font-size: 4.75rem,
-        line-height: 113%,
+        line-height: 1.13,
       ),
     ),
   )
@@ -9507,7 +9504,7 @@ $display-02: if(
   (
     font-size: 2.625rem,
     font-weight: 600,
-    line-height: 119%,
+    line-height: 1.19,
     letter-spacing: 0,
     breakpoints: (
       md: (
@@ -9518,11 +9515,11 @@ $display-02: if(
       ),
       xlg: (
         font-size: 3.75rem,
-        line-height: 116%,
+        line-height: 1.16,
       ),
       max: (
         font-size: 4.75rem,
-        line-height: 113%,
+        line-height: 1.13,
       ),
     ),
   )
@@ -9551,25 +9548,25 @@ $display-03: if(
   (
     font-size: 2.625rem,
     font-weight: 300,
-    line-height: 119%,
+    line-height: 1.19,
     letter-spacing: 0,
     breakpoints: (
       md: (
         font-size: 4.25rem,
-        line-height: 115%,
+        line-height: 1.15,
       ),
       lg: (
         font-size: 5.75rem,
-        line-height: 111%,
+        line-height: 1.11,
         letter-spacing: -0.64px,
       ),
       xlg: (
         font-size: 7.625rem,
-        line-height: 107%,
+        line-height: 1.07,
       ),
       max: (
         font-size: 9.75rem,
-        line-height: 105%,
+        line-height: 1.05,
         letter-spacing: -0.96px,
       ),
     ),
@@ -9599,26 +9596,26 @@ $display-04: if(
   (
     font-size: 2.625rem,
     font-weight: 600,
-    line-height: 119%,
+    line-height: 1.19,
     letter-spacing: 0,
     breakpoints: (
       md: (
         font-size: 4.25rem,
-        line-height: 115%,
+        line-height: 1.15,
       ),
       lg: (
         font-size: 5.75rem,
-        line-height: 111%,
+        line-height: 1.11,
         letter-spacing: -0.64px,
       ),
       xlg: (
         font-size: 7.625rem,
-        line-height: 107%,
+        line-height: 1.07,
         letter-spacing: -0.64px,
       ),
       max: (
         font-size: 9.75rem,
-        line-height: 105%,
+        line-height: 1.05,
         letter-spacing: -0.96px,
       ),
     ),
@@ -11886,7 +11883,7 @@ Compute the type size for the given type scale step
 
 ### ✅carbon--type-scale [variable]
 
-Type scole follows a custom formula for determining each step size and supports
+Type scale follows a custom formula for determining each step size and supports
 sizes from 12px to 92px
 
 <details>
@@ -11907,7 +11904,7 @@ $carbon--type-scale: ();
 
 ### ✅carbon--type-scale [function]
 
-Get the value of a specific step in the typescale
+Get the value of a specific step in the type scale
 
 <details>
 <summary>Source code</summary>
@@ -12467,7 +12464,7 @@ $carbon--font-display: auto;
 $caption-01: (
   font-size: carbon--type-scale(1),
   font-weight: carbon--font-weight('regular'),
-  line-height: carbon--rem(16px),
+  line-height: 1.34,
   letter-spacing: 0.32px,
 );
 ```
@@ -12486,7 +12483,7 @@ $caption-01: (
 $label-01: (
   font-size: carbon--type-scale(1),
   font-weight: carbon--font-weight('regular'),
-  line-height: carbon--rem(16px),
+  line-height: 1.34,
   letter-spacing: 0.32px,
 );
 ```
@@ -12504,7 +12501,7 @@ $label-01: (
 ```scss
 $helper-text-01: (
   font-size: carbon--type-scale(1),
-  line-height: carbon--rem(16px),
+  line-height: 1.34,
   letter-spacing: 0.32px,
 );
 ```
@@ -12523,7 +12520,7 @@ $helper-text-01: (
 $body-short-01: (
   font-size: carbon--type-scale(2),
   font-weight: carbon--font-weight('regular'),
-  line-height: carbon--em(18px),
+  line-height: 1.29,
   letter-spacing: 0.16px,
 );
 ```
@@ -12542,7 +12539,7 @@ $body-short-01: (
 $body-long-01: (
   font-size: carbon--type-scale(2),
   font-weight: carbon--font-weight('regular'),
-  line-height: carbon--em(20px),
+  line-height: 1.43,
   letter-spacing: 0.16px,
 );
 ```
@@ -12561,7 +12558,7 @@ $body-long-01: (
 $body-short-02: (
   font-size: carbon--type-scale(3),
   font-weight: carbon--font-weight('regular'),
-  line-height: carbon--em(22px),
+  line-height: 1.375,
   letter-spacing: 0,
 );
 ```
@@ -12580,7 +12577,7 @@ $body-short-02: (
 $body-long-02: (
   font-size: carbon--type-scale(3),
   font-weight: carbon--font-weight('regular'),
-  line-height: carbon--em(24px),
+  line-height: 1.5,
   letter-spacing: 0,
 );
 ```
@@ -12600,7 +12597,7 @@ $code-01: (
   font-family: carbon--font-family('mono'),
   font-size: carbon--type-scale(1),
   font-weight: carbon--font-weight('regular'),
-  line-height: carbon--rem(16px),
+  line-height: 1.34,
   letter-spacing: 0.32px,
 );
 ```
@@ -12620,7 +12617,7 @@ $code-02: (
   font-family: carbon--font-family('mono'),
   font-size: carbon--type-scale(2),
   font-weight: carbon--font-weight('regular'),
-  line-height: carbon--rem(20px),
+  line-height: 1.43,
   letter-spacing: 0.32px,
 );
 ```
@@ -12639,7 +12636,7 @@ $code-02: (
 $heading-01: (
   font-size: carbon--type-scale(2),
   font-weight: carbon--font-weight('semibold'),
-  line-height: carbon--rem(18px),
+  line-height: 1.29,
   letter-spacing: 0.16px,
 );
 ```
@@ -12672,7 +12669,7 @@ $productive-heading-01: $heading-01;
 $heading-02: (
   font-size: carbon--type-scale(3),
   font-weight: carbon--font-weight('semibold'),
-  line-height: carbon--rem(22px),
+  line-height: 1.375,
   letter-spacing: 0,
 );
 ```
@@ -12705,7 +12702,7 @@ $productive-heading-02: $heading-02;
 $productive-heading-03: (
   font-size: carbon--type-scale(5),
   font-weight: carbon--font-weight('regular'),
-  line-height: carbon--rem(28px),
+  line-height: 1.4,
   letter-spacing: 0,
 );
 ```
@@ -12724,7 +12721,7 @@ $productive-heading-03: (
 $productive-heading-04: (
   font-size: carbon--type-scale(7),
   font-weight: carbon--font-weight('regular'),
-  line-height: carbon--rem(36px),
+  line-height: 1.29,
   letter-spacing: 0,
 );
 ```
@@ -12743,7 +12740,7 @@ $productive-heading-04: (
 $productive-heading-05: (
   font-size: carbon--type-scale(8),
   font-weight: carbon--font-weight('regular'),
-  line-height: carbon--rem(40px),
+  line-height: 1.25,
   letter-spacing: 0,
 );
 ```
@@ -12762,7 +12759,8 @@ $productive-heading-05: (
 $productive-heading-06: (
   font-size: carbon--type-scale(8),
   font-weight: carbon--font-weight('light'),
-  line-height: carbon--rem(50px),
+  // Extra digit needed for precision in Chrome
+  line-height: 1.199,
   letter-spacing: 0,
 );
 ```
@@ -12781,7 +12779,7 @@ $productive-heading-06: (
 $productive-heading-07: (
   font-size: carbon--type-scale(10),
   font-weight: carbon--font-weight('light'),
-  line-height: carbon--rem(64px),
+  line-height: 1.19,
   letter-spacing: 0,
 );
 ```
@@ -12800,7 +12798,7 @@ $productive-heading-07: (
 $expressive-heading-01: map-merge(
   $heading-01,
   (
-    line-height: carbon--rem(20px),
+    line-height: 1.25,
   )
 );
 ```
@@ -12819,7 +12817,7 @@ $expressive-heading-01: map-merge(
 $expressive-heading-02: map-merge(
   $heading-02,
   (
-    line-height: carbon--rem(24px),
+    line-height: 1.5,
   )
 );
 ```
@@ -12838,12 +12836,12 @@ $expressive-heading-02: map-merge(
 $expressive-heading-03: (
   font-size: carbon--type-scale(5),
   font-weight: carbon--font-weight('regular'),
-  line-height: 140%,
+  line-height: 1.4,
   letter-spacing: 0,
   breakpoints: (
     xlg: (
       font-size: carbon--type-scale(5),
-      line-height: 125%,
+      line-height: 1.25,
     ),
     max: (
       font-size: carbon--type-scale(6),
@@ -12866,12 +12864,12 @@ $expressive-heading-03: (
 $expressive-heading-04: (
   font-size: carbon--type-scale(7),
   font-weight: carbon--font-weight('regular'),
-  line-height: 129%,
+  line-height: 1.29,
   letter-spacing: 0,
   breakpoints: (
     xlg: (
       font-size: carbon--type-scale(7),
-      line-height: 125%,
+      line-height: 1.25,
     ),
     max: (
       font-size: carbon--type-scale(8),
@@ -12894,25 +12892,24 @@ $expressive-heading-04: (
 $expressive-heading-05: (
   font-size: carbon--type-scale(8),
   font-weight: carbon--font-weight('regular'),
-  line-height: 125%,
+  line-height: 1.25,
   letter-spacing: 0,
   breakpoints: (
     md: (
       font-size: carbon--type-scale(9),
       font-weight: carbon--font-weight('light'),
-      line-height: 122%,
+      line-height: 1.22,
     ),
     lg: (
       font-size: carbon--type-scale(10),
-      line-height: 119%,
+      line-height: 1.19,
     ),
     xlg: (
       font-size: carbon--type-scale(11),
-      line-height: 117%,
+      line-height: 1.17,
     ),
     max: (
       font-size: carbon--type-scale(13),
-      line-height: carbon--rem(70px),
     ),
   ),
 );
@@ -12932,24 +12929,23 @@ $expressive-heading-05: (
 $expressive-heading-06: (
   font-size: carbon--type-scale(8),
   font-weight: carbon--font-weight('semibold'),
-  line-height: 125%,
+  line-height: 1.25,
   letter-spacing: 0,
   breakpoints: (
     md: (
       font-size: carbon--type-scale(9),
-      line-height: 122%,
+      line-height: 1.22,
     ),
     lg: (
       font-size: carbon--type-scale(10),
-      line-height: 119%,
+      line-height: 1.19,
     ),
     xlg: (
       font-size: carbon--type-scale(11),
-      line-height: 117%,
+      line-height: 1.17,
     ),
     max: (
       font-size: carbon--type-scale(13),
-      line-height: carbon--rem(70px),
     ),
   ),
 );
@@ -12969,16 +12965,16 @@ $expressive-heading-06: (
 $expressive-paragraph-01: (
   font-size: carbon--type-scale(6),
   font-weight: carbon--font-weight('light'),
-  line-height: 125%,
+  line-height: 1.25,
   letter-spacing: 0,
   breakpoints: (
     lg: (
       font-size: carbon--type-scale(7),
-      line-height: 129%,
+      line-height: 1.29,
     ),
     max: (
       font-size: carbon--type-scale(8),
-      line-height: 125%,
+      line-height: 1.25,
     ),
   ),
 );
@@ -12998,7 +12994,7 @@ $expressive-paragraph-01: (
 $quotation-01: (
   font-size: carbon--type-scale(5),
   font-weight: carbon--font-weight('regular'),
-  line-height: 130%,
+  line-height: 1.3,
   letter-spacing: 0,
   breakpoints: (
     md: (
@@ -13006,15 +13002,15 @@ $quotation-01: (
     ),
     lg: (
       font-size: carbon--type-scale(6),
-      line-height: 125%,
+      line-height: 1.25,
     ),
     xlg: (
       font-size: carbon--type-scale(7),
-      line-height: 129%,
+      line-height: 1.29,
     ),
     max: (
       font-size: carbon--type-scale(8),
-      line-height: 125%,
+      line-height: 1.25,
     ),
   ),
 );
@@ -13034,20 +13030,20 @@ $quotation-01: (
 $quotation-02: (
   font-size: carbon--type-scale(8),
   font-weight: carbon--font-weight('light'),
-  line-height: 125%,
+  line-height: 1.25,
   letter-spacing: 0,
   breakpoints: (
     md: (
       font-size: carbon--type-scale(9),
-      line-height: 122%,
+      line-height: 1.22,
     ),
     lg: (
       font-size: carbon--type-scale(10),
-      line-height: 119%,
+      line-height: 1.19,
     ),
     xlg: (
       font-size: carbon--type-scale(11),
-      line-height: 117%,
+      line-height: 1.17,
     ),
     max: (
       font-size: carbon--type-scale(13),
@@ -13070,7 +13066,7 @@ $quotation-02: (
 $display-01: (
   font-size: carbon--type-scale(10),
   font-weight: carbon--font-weight('light'),
-  line-height: 119%,
+  line-height: 1.19,
   letter-spacing: 0,
   breakpoints: (
     md: (
@@ -13081,11 +13077,11 @@ $display-01: (
     ),
     xlg: (
       font-size: carbon--type-scale(13),
-      line-height: 117%,
+      line-height: 1.17,
     ),
     max: (
       font-size: carbon--type-scale(15),
-      line-height: 113%,
+      line-height: 1.13,
     ),
   ),
 );
@@ -13105,7 +13101,7 @@ $display-01: (
 $display-02: (
   font-size: carbon--type-scale(10),
   font-weight: carbon--font-weight('semibold'),
-  line-height: 119%,
+  line-height: 1.19,
   letter-spacing: 0,
   breakpoints: (
     md: (
@@ -13116,11 +13112,11 @@ $display-02: (
     ),
     xlg: (
       font-size: carbon--type-scale(13),
-      line-height: 116%,
+      line-height: 1.16,
     ),
     max: (
       font-size: carbon--type-scale(15),
-      line-height: 113%,
+      line-height: 1.13,
     ),
   ),
 );
@@ -13140,26 +13136,26 @@ $display-02: (
 $display-03: (
   font-size: carbon--type-scale(10),
   font-weight: carbon--font-weight('light'),
-  line-height: 119%,
+  line-height: 1.19,
   letter-spacing: 0,
   breakpoints: (
     md: (
       font-size: carbon--type-scale(14),
-      line-height: 115%,
+      line-height: 1.15,
     ),
     lg: (
       font-size: carbon--type-scale(17),
-      line-height: 111%,
+      line-height: 1.11,
       letter-spacing: -0.64px,
     ),
     xlg: (
       font-size: carbon--type-scale(20),
-      line-height: 107%,
+      line-height: 1.07,
       letter-spacing: -0.64px,
     ),
     max: (
       font-size: carbon--type-scale(23),
-      line-height: 105%,
+      line-height: 1.05,
       letter-spacing: -0.96px,
     ),
   ),
@@ -13180,26 +13176,26 @@ $display-03: (
 $display-04: (
   font-size: carbon--type-scale(10),
   font-weight: carbon--font-weight('semibold'),
-  line-height: 119%,
+  line-height: 1.19,
   letter-spacing: 0,
   breakpoints: (
     md: (
       font-size: carbon--type-scale(14),
-      line-height: 115%,
+      line-height: 1.15,
     ),
     lg: (
       font-size: carbon--type-scale(17),
-      line-height: 111%,
+      line-height: 1.11,
       letter-spacing: -0.64px,
     ),
     xlg: (
       font-size: carbon--type-scale(20),
-      line-height: 107%,
+      line-height: 1.07,
       letter-spacing: -0.64px,
     ),
     max: (
       font-size: carbon--type-scale(23),
-      line-height: 105%,
+      line-height: 1.05,
       letter-spacing: -0.96px,
     ),
   ),
@@ -20863,6 +20859,13 @@ Number input styles
     background-color: $field-02;
   }
 
+  .#{$prefix}--number--light input[type='number']:disabled,
+  .#{$prefix}--number--light
+    .#{$prefix}--number--readonly
+    input[type='number'] {
+    background-color: $field-02;
+  }
+
   .#{$prefix}--number--mobile {
     width: auto;
     min-width: rem(144px);
@@ -23285,126 +23288,131 @@ Tabs styles
     @include reset;
     @include type-style('body-short-01');
 
-    position: relative;
+    display: flex;
     width: 100%;
     height: auto;
+    min-height: rem(40px);
     color: $text-01;
-    @include carbon--breakpoint(md) {
-      min-height: rem(40px);
-      background: none;
-    }
   }
 
   .#{$prefix}--tabs--container {
-    @include carbon--breakpoint(md) {
-      min-height: rem(48px);
-    }
+    min-height: rem(48px);
   }
 
-  .#{$prefix}--tabs-trigger {
+  .#{$prefix}--tabs__nav {
     display: flex;
-    align-items: center;
-    justify-content: space-between;
-    height: rem(40px);
-    padding: 0 $spacing-09 0 $spacing-05;
-    color: $text-01;
-    background-color: $field-01;
-    border-bottom: 1px solid $ui-04;
-    outline: 2px solid transparent;
-    cursor: pointer;
-    @include carbon--breakpoint(md) {
+    flex-direction: row;
+    width: auto;
+    max-width: 100%;
+    margin: 0;
+    padding: 0;
+    overflow: auto hidden;
+    list-style: none;
+    transition: max-height $duration--fast-01 motion(standard, productive);
+
+    // hide scrollbars
+    scrollbar-width: none;
+
+    &::-webkit-scrollbar {
       display: none;
     }
   }
 
-  .#{$prefix}--tabs-trigger:focus,
-  .#{$prefix}--tabs-trigger:active {
-    @include focus-outline('outline');
+  //-----------------------------
+  // Overflow Nav Buttons
+  //-----------------------------
+  .#{$prefix}--tabs__overflow-indicator--left,
+  .#{$prefix}--tabs__overflow-indicator--right {
+    z-index: 1;
+    flex: 1 0 auto;
+    width: $carbon--spacing-03;
   }
 
-  .#{$prefix}--tabs-trigger svg {
-    position: absolute;
-    right: $spacing-05;
-    transition: transform $duration--fast-01 motion(standard, productive);
-    fill: $ui-05;
+  .#{$prefix}--tabs__overflow-indicator--left {
+    margin-right: -$carbon--spacing-03;
+    background-image: linear-gradient(to left, transparent, $ui-background);
   }
 
-  .#{$prefix}--tabs-trigger--open:focus,
-  .#{$prefix}--tabs-trigger--open:active {
-    @include focus-outline('reset');
-
-    transition: outline $duration--fast-01 motion(standard, productive);
+  .#{$prefix}--tabs__overflow-indicator--right {
+    margin-left: -$carbon--spacing-03;
+    background-image: linear-gradient(to right, transparent, $ui-background);
   }
 
-  .#{$prefix}--tabs-trigger--open {
-    background: $ui-03;
+  .#{$prefix}--tabs--light .#{$prefix}--tabs__overflow-indicator--left {
+    background-image: linear-gradient(to left, transparent, $ui-01);
   }
 
-  .#{$prefix}--tabs-trigger--open svg {
-    @include rotate(-180deg, $duration--fast-01, 50% 45%);
+  .#{$prefix}--tabs--light .#{$prefix}--tabs__overflow-indicator--right {
+    background-image: linear-gradient(to right, transparent, $ui-01);
   }
 
-  // There is only a difference in tab color when in mobile/dropdown view
-  .#{$prefix}--tabs--light.#{$prefix}--tabs-trigger {
-    background-color: $field-02;
+  .#{$prefix}--tabs--container .#{$prefix}--tabs__overflow-indicator--left {
+    background-image: linear-gradient(to left, transparent, $ui-03);
   }
 
-  .#{$prefix}--tabs-trigger-text {
-    padding-top: 2px;
-    overflow: hidden;
-    color: $text-01;
-    font-weight: 400;
-    white-space: nowrap;
-    text-decoration: none;
-    text-overflow: ellipsis;
+  .#{$prefix}--tabs--container .#{$prefix}--tabs__overflow-indicator--right {
+    background-image: linear-gradient(to right, transparent, $ui-03);
   }
 
-  .#{$prefix}--tabs-trigger-text:hover {
-    color: $text-01;
+  // Safari-only media query
+  // won't appear correctly with CSS custom properties
+  // see: code snippet and modal overflow indicators
+  @media not all and (min-resolution: 0.001dpcm) {
+    @supports (-webkit-appearance: none) and (stroke-color: transparent) {
+      .#{$prefix}--tabs__overflow-indicator--left {
+        margin-right: -$carbon--spacing-05;
+        background-image: linear-gradient(
+          to left,
+          rgba($ui-background, 0),
+          $ui-background
+        );
+      }
+
+      .#{$prefix}--tabs__overflow-indicator--right {
+        margin-left: -$carbon--spacing-05;
+        background-image: linear-gradient(
+          to right,
+          rgba($ui-background, 0),
+          $ui-background
+        );
+      }
+
+      .#{$prefix}--tabs--container .#{$prefix}--tabs__overflow-indicator--left {
+        background-image: linear-gradient(to left, rgba($ui-03, 0), $ui-03);
+      }
+      .#{$prefix}--tabs--container
+        .#{$prefix}--tabs__overflow-indicator--right {
+        background-image: linear-gradient(to right, rgba($ui-03, 0), $ui-03);
+      }
+    }
   }
 
-  .#{$prefix}--tabs-trigger-text:focus {
-    outline: none;
-  }
+  .#{$prefix}--tab--overflow-nav-button {
+    @include button-reset;
 
-  .#{$prefix}--tabs__nav {
-    @include box-shadow;
-
-    position: absolute;
-    z-index: z('dropdown');
     display: flex;
-    flex-direction: column;
-    width: 100%;
-    max-height: 600px;
+    flex-shrink: 0;
+    align-items: center;
+    justify-content: center;
+    width: $carbon--spacing-08;
 
-    margin: 0;
-    padding: 0;
-    list-style: none;
-    background: $ui-01;
-    transition: max-height $duration--fast-01 motion(standard, productive);
-
-    @include carbon--breakpoint(md) {
-      z-index: auto;
-      flex-direction: row;
-      width: auto;
-      background: none;
-      box-shadow: none;
-      transition: inherit;
+    &:focus {
+      @include focus-outline('outline');
     }
   }
 
-  .#{$prefix}--tabs__nav--hidden {
-    max-height: 0;
-    overflow: hidden;
-    transition: max-height $duration--fast-01 motion(standard, productive);
+  .#{$prefix}--tab--overflow-nav-button--hidden {
+    display: none;
+  }
 
-    @include carbon--breakpoint(md) {
-      display: flex;
-      max-width: 100%;
-      max-height: none;
-      overflow-x: auto;
-      transition: inherit;
-    }
+  .#{$prefix}--tabs--container .#{$prefix}--tab--overflow-nav-button {
+    width: $carbon--spacing-09;
+    margin: 0;
+    background-color: $ui-03;
+  }
+
+  .#{$prefix}--tab--overflow-nav-button svg {
+    fill: $icon-01;
   }
 
   //-----------------------------
@@ -23414,38 +23422,34 @@ Tabs styles
     @include reset;
 
     display: flex;
-    width: 100%;
-    height: rem(40px);
     padding: 0;
-    background-color: $ui-01;
     cursor: pointer;
     transition: background-color $duration--fast-01 motion(standard, productive);
+  }
 
-    @include carbon--breakpoint(md) {
-      height: auto;
-      background: transparent;
-
-      + .#{$prefix}--tabs__nav-item {
-        margin-left: rem(1px);
-      }
-    }
+  .#{$prefix}--tabs__nav-item + .#{$prefix}--tabs__nav-item {
+    margin-left: rem(1px);
   }
 
   .#{$prefix}--tabs--container .#{$prefix}--tabs__nav-item {
-    @include carbon--breakpoint(md) {
-      background-color: $ui-03;
+    background-color: $ui-03;
+  }
 
-      + .#{$prefix}--tabs__nav-item {
-        margin-left: 0;
-        // Draws the border without affecting the inner-content
-        box-shadow: -1px 0 0 0 $ui-04;
-      }
+  .#{$prefix}--tabs--container
+    .#{$prefix}--tabs__nav-item
+    + .#{$prefix}--tabs__nav-item {
+    margin-left: 0;
+    // Draws the border without affecting the inner-content
+    box-shadow: rem(-1px) 0 0 0 $ui-04;
+  }
 
-      + .#{$prefix}--tabs__nav-item.#{$prefix}--tabs__nav-item--selected,
-      &.#{$prefix}--tabs__nav-item--selected + .#{$prefix}--tabs__nav-item {
-        box-shadow: none;
-      }
-    }
+  .#{$prefix}--tabs--container
+    .#{$prefix}--tabs__nav-item
+    + .#{$prefix}--tabs__nav-item.#{$prefix}--tabs__nav-item--selected,
+  .#{$prefix}--tabs--container
+    .#{$prefix}--tabs__nav-item.#{$prefix}--tabs__nav-item--selected
+    + .#{$prefix}--tabs__nav-item {
+    box-shadow: none;
   }
 
   .#{$prefix}--tabs__nav-item .#{$prefix}--tabs__nav-link {
@@ -23457,30 +23461,8 @@ Tabs styles
   //-----------------------------
   // Item Hover
   //-----------------------------
-  .#{$prefix}--tabs__nav-item:hover:not(.#{$prefix}--tabs__nav-item--selected) {
-    @include carbon--breakpoint(md) {
-      background: transparent;
-    }
-  }
-
-  .#{$prefix}--tabs__nav-item:hover:not(.#{$prefix}--tabs__nav-item--disabled) {
-    background-color: $hover-ui;
-    box-shadow: 0 -1px 0 $hover-ui;
-
-    @include carbon--breakpoint(md) {
-      background-color: transparent;
-
-      + .#{$prefix}--tabs__nav-item {
-        box-shadow: none;
-      }
-    }
-  }
-
-  .#{$prefix}--tabs--container
-    .#{$prefix}--tabs__nav-item:hover:not(.#{$prefix}--tabs__nav-item--disabled) {
-    @include carbon--breakpoint(md) {
-      background-color: $hover-selected-ui;
-    }
+  .#{$prefix}--tabs--container .#{$prefix}--tabs__nav-item:hover {
+    background-color: $hover-selected-ui;
   }
 
   //---------------------------------------------
@@ -23488,6 +23470,7 @@ Tabs styles
   //---------------------------------------------
   .#{$prefix}--tabs__nav-item--disabled,
   .#{$prefix}--tabs__nav-item--disabled:hover {
+    background-color: transparent;
     outline: none;
     cursor: not-allowed;
   }
@@ -23496,138 +23479,94 @@ Tabs styles
     .#{$prefix}--tabs__nav-item.#{$prefix}--tabs__nav-item--disabled,
   .#{$prefix}--tabs--container
     .#{$prefix}--tabs__nav-item.#{$prefix}--tabs__nav-item--disabled:hover {
-    @include carbon--breakpoint(md) {
-      background-color: $disabled-02;
-    }
-  }
-
-  .#{$prefix}--tabs--container
-    .#{$prefix}--tabs__nav-item--disabled
-    .#{$prefix}--tabs__nav-link {
-    @include carbon--breakpoint(md) {
-      color: $disabled-03;
-      border-bottom: none;
-    }
+    background-color: $disabled-02;
   }
 
   //-----------------------------
   // Item Selected
   //-----------------------------
-  .#{$prefix}--tabs__nav-item--selected:not(.#{$prefix}--tabs__nav-item--disabled) {
-    display: none;
-    border: none;
+  .#{$prefix}--tabs__nav-item--selected {
     transition: color $duration--fast-01 motion(standard, productive);
+  }
 
-    @include carbon--breakpoint(md) {
-      display: flex;
-      .#{$prefix}--tabs__nav-link,
-      .#{$prefix}--tabs__nav-link:focus,
-      .#{$prefix}--tabs__nav-link:active {
-        @include type-style('productive-heading-01');
+  .#{$prefix}--tabs__nav-item--selected .#{$prefix}--tabs__nav-link,
+  .#{$prefix}--tabs__nav-item--selected .#{$prefix}--tabs__nav-link:focus,
+  .#{$prefix}--tabs__nav-item--selected .#{$prefix}--tabs__nav-link:active {
+    @include type-style('productive-heading-01');
 
-        color: $text-01;
-        border-bottom: 2px solid $interactive-04;
-      }
+    color: $text-01;
+    border-bottom: 2px solid $interactive-04;
+  }
+
+  .#{$prefix}--tabs--container .#{$prefix}--tabs__nav-item--selected,
+  .#{$prefix}--tabs--container .#{$prefix}--tabs__nav-item--selected:hover {
+    background-color: $ui-01;
+
+    .#{$prefix}--tabs__nav-link:focus,
+    .#{$prefix}--tabs__nav-link:active {
+      box-shadow: none;
     }
   }
 
   .#{$prefix}--tabs--container
-    .#{$prefix}--tabs__nav-item--selected:not(.#{$prefix}--tabs__nav-item--disabled),
-  .#{$prefix}--tabs--container
-    .#{$prefix}--tabs__nav-item--selected:hover:not(.#{$prefix}--tabs__nav-item--disabled) {
-    @include carbon--breakpoint(md) {
-      background-color: $ui-01;
+    .#{$prefix}--tabs__nav-item--selected
+    .#{$prefix}--tabs__nav-link {
+    // height - vertical padding
+    line-height: calc(#{rem(48px)} - (#{$spacing-03} * 2));
+    // Draws the border without affecting the inner-content
+    box-shadow: inset 0 2px 0 0 $interactive-04;
+  }
 
-      .#{$prefix}--tabs__nav-link {
-        padding: $spacing-03 $spacing-05;
-        // height - vertical padding
-        // Draws the border without affecting the inner-content
-        line-height: calc(#{rem(48px)} - (#{$spacing-03} * 2));
-        border-bottom: none;
-        box-shadow: inset 0 2px 0 0 $interactive-04;
-      }
-
-      .#{$prefix}--tabs__nav-link:focus,
-      .#{$prefix}--tabs__nav-link:active {
-        box-shadow: none;
-      }
-    }
+  .#{$prefix}--tabs--light.#{$prefix}--tabs--container
+    .#{$prefix}--tabs__nav-item--selected,
+  .#{$prefix}--tabs--light.#{$prefix}--tabs--container
+    .#{$prefix}--tabs__nav-item--selected:hover {
+    background-color: $ui-background;
   }
 
   //-----------------------------
   // Link
   //-----------------------------
-  a.#{$prefix}--tabs__nav-link {
+  .#{$prefix}--tabs__nav-link {
     @include focus-outline('reset');
 
-    display: inline-block;
-    width: calc(100% - 32px);
-    height: rem(40px);
-    margin: 0 $spacing-05;
-    padding: $spacing-04 0;
+    width: rem(160px);
+    padding: $spacing-04 $spacing-05 $spacing-03;
     overflow: hidden;
     color: $text-02;
-    font-weight: 400;
-    line-height: 1rem;
     white-space: nowrap;
     text-decoration: none;
     text-overflow: ellipsis;
-    border-bottom: 1px solid $ui-03;
+    border-bottom: $tab-underline-color;
     transition: border $duration--fast-01 motion(standard, productive), outline
         $duration--fast-01 motion(standard, productive);
 
     &:focus,
     &:active {
       @include focus-outline('outline');
-
-      width: 100%;
-      margin: 0;
-      padding-left: 16px;
-    }
-
-    @include carbon--breakpoint(md) {
-      width: rem(160px);
-      margin: 0;
-      padding: $spacing-04 $spacing-05 $spacing-03;
-      line-height: inherit;
-      border-bottom: $tab-underline-color;
-
-      &:focus,
-      &:active {
-        width: rem(160px);
-        border-bottom: 2px;
-      }
     }
   }
 
-  .#{$prefix}--tabs--container a.#{$prefix}--tabs__nav-link {
-    @include carbon--breakpoint(md) {
-      height: rem(48px);
-      padding: $spacing-03 $spacing-05;
-      // Height - vertical padding
-      line-height: calc(#{rem(48px)} - (#{$spacing-03} * 2));
-      border-bottom: none;
-    }
+  .#{$prefix}--tabs--container .#{$prefix}--tabs__nav-link {
+    height: rem(48px);
+    padding: $spacing-03 $spacing-05;
+    // height - vertical padding
+    line-height: calc(#{rem(48px)} - (#{$spacing-03} * 2));
+    border-bottom: 0;
   }
 
   //-----------------------------
   //  Link Hover
   //-----------------------------
-  .#{$prefix}--tabs__nav-item:hover:not(.#{$prefix}--tabs__nav-item--selected):not(.#{$prefix}--tabs__nav-item--disabled)
-    .#{$prefix}--tabs__nav-link {
+  .#{$prefix}--tabs__nav-item:hover .#{$prefix}--tabs__nav-link {
     color: $text-01;
-    @include carbon--breakpoint(md) {
-      color: $text-01;
-      border-bottom: $tab-underline-color-hover;
-    }
+    border-bottom: $tab-underline-color-hover;
   }
 
   .#{$prefix}--tabs--container
-    .#{$prefix}--tabs__nav-item:hover:not(.#{$prefix}--tabs__nav-item--selected):not(.#{$prefix}--tabs__nav-item--disabled)
+    .#{$prefix}--tabs__nav-item
     .#{$prefix}--tabs__nav-link {
-    @include carbon--breakpoint(md) {
-      border-bottom: none;
-    }
+    border-bottom: none;
   }
 
   //-----------------------------
@@ -23636,28 +23575,47 @@ Tabs styles
   .#{$prefix}--tabs__nav-item--disabled .#{$prefix}--tabs__nav-link {
     color: $tab-text-disabled;
     border-bottom: $tab-underline-disabled;
-    pointer-events: none;
   }
 
   .#{$prefix}--tabs__nav-item--disabled:hover .#{$prefix}--tabs__nav-link {
+    color: $tab-text-disabled;
     border-bottom: $tab-underline-disabled;
-    cursor: no-drop;
+    cursor: not-allowed;
+    pointer-events: none;
   }
 
   .#{$prefix}--tabs__nav-item--disabled .#{$prefix}--tabs__nav-link:focus,
-  .#{$prefix}--tabs__nav-item--disabled a.#{$prefix}--tabs__nav-link:active {
+  .#{$prefix}--tabs__nav-item--disabled .#{$prefix}--tabs__nav-link:active {
     border-bottom: $tab-underline-disabled;
     outline: none;
   }
 
-  //-----------------------------
-  //  Link Focus
-  //-----------------------------
-  .#{$prefix}--tabs__nav-item:not(.#{$prefix}--tabs__nav-item--selected):not(.#{$prefix}--tabs__nav-item--disabled):not(.#{$prefix}--tabs__nav-item--selected)
+  .#{$prefix}--tabs--light
+    .#{$prefix}--tabs__nav-item--disabled
+    .#{$prefix}--tabs__nav-link {
+    border-bottom-color: $ui-03;
+  }
+
+  .#{$prefix}--tabs--light
+    .#{$prefix}--tabs__nav-item--disabled:hover
+    .#{$prefix}--tabs__nav-link {
+    border-bottom-color: $ui-03;
+  }
+
+  .#{$prefix}--tabs--light
+    .#{$prefix}--tabs__nav-item--disabled
     .#{$prefix}--tabs__nav-link:focus,
-  .#{$prefix}--tabs__nav-item:not(.#{$prefix}--tabs__nav-item--selected):not(.#{$prefix}--tabs__nav-item--disabled):not(.#{$prefix}--tabs__nav-item--selected)
-    a.#{$prefix}--tabs__nav-link:active {
-    color: $text-02;
+  .#{$prefix}--tabs--light
+    .#{$prefix}--tabs__nav-item--disabled
+    .#{$prefix}--tabs__nav-link:active {
+    border-bottom-color: $ui-03;
+  }
+
+  .#{$prefix}--tabs--container
+    .#{$prefix}--tabs__nav-item--disabled
+    .#{$prefix}--tabs__nav-link {
+    color: $disabled-03;
+    border-bottom: none;
   }
 
   //-----------------------------
@@ -23679,13 +23637,13 @@ Tabs styles
     @include skeleton;
 
     width: rem(75px);
-    height: rem(12px);
   }
 
   .#{$prefix}--tabs.#{$prefix}--skeleton .#{$prefix}--tabs-trigger {
     @include skeleton;
 
-    width: rem(100px);
+    width: rem(75px);
+    margin-right: rem(1px);
   }
 
   .#{$prefix}--tabs.#{$prefix}--skeleton .#{$prefix}--tabs-trigger svg {
@@ -23698,26 +23656,25 @@ Tabs styles
 
 - **Group**: [tabs](#tabs)
 - **Requires**:
-  - [carbon--breakpoint [mixin]](#carbon--breakpoint-mixin)
   - [prefix [variable]](#prefix-variable)
   - [text-01 [variable]](#text-01-variable)
-  - [spacing-09 [variable]](#spacing-09-variable)
-  - [spacing-05 [variable]](#spacing-05-variable)
-  - [field-01 [variable]](#field-01-variable)
-  - [ui-04 [variable]](#ui-04-variable)
-  - [ui-05 [variable]](#ui-05-variable)
-  - [ui-03 [variable]](#ui-03-variable)
-  - [field-02 [variable]](#field-02-variable)
+  - [carbon--spacing-03 [variable]](#carbon--spacing-03-variable)
+  - [ui-background [variable]](#ui-background-variable)
   - [ui-01 [variable]](#ui-01-variable)
-  - [hover-ui [variable]](#hover-ui-variable)
+  - [ui-03 [variable]](#ui-03-variable)
+  - [carbon--spacing-05 [variable]](#carbon--spacing-05-variable)
+  - [carbon--spacing-08 [variable]](#carbon--spacing-08-variable)
+  - [carbon--spacing-09 [variable]](#carbon--spacing-09-variable)
+  - [icon-01 [variable]](#icon-01-variable)
+  - [ui-04 [variable]](#ui-04-variable)
   - [hover-selected-ui [variable]](#hover-selected-ui-variable)
   - [disabled-02 [variable]](#disabled-02-variable)
-  - [disabled-03 [variable]](#disabled-03-variable)
   - [interactive-04 [variable]](#interactive-04-variable)
   - [spacing-03 [variable]](#spacing-03-variable)
   - [spacing-04 [variable]](#spacing-04-variable)
+  - [spacing-05 [variable]](#spacing-05-variable)
   - [text-02 [variable]](#text-02-variable)
-  - [carbon--spacing-05 [variable]](#carbon--spacing-05-variable)
+  - [disabled-03 [variable]](#disabled-03-variable)
 
 ## tag
 

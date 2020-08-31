@@ -10,7 +10,7 @@ import { action } from '@storybook/addon-actions';
 import { withKnobs, boolean, select, text } from '@storybook/addon-knobs';
 import Dropdown from '../Dropdown';
 import DropdownSkeleton from './Dropdown.Skeleton';
-import WithState from '../../tools/withState';
+import mdx from './Dropdown.mdx';
 
 const items = [
   {
@@ -40,15 +40,6 @@ const items = [
   },
 ];
 
-const stringItems = [
-  'Option 1',
-  'Option 2',
-  'Option 3',
-  'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Vitae, aliquam. Blanditiis quia nemo enim voluptatibus quos ducimus porro molestiae nesciunt error cumque quaerat, tempore vero unde eum aperiam eligendi repellendus.',
-  'Option 5',
-  'Option 6',
-];
-
 const sizes = {
   'Extra large size (xl)': 'xl',
   'Default size': undefined,
@@ -68,7 +59,7 @@ const props = () => ({
   ariaLabel: text('Aria Label (ariaLabel)', 'Dropdown'),
   disabled: boolean('Disabled (disabled)', false),
   light: boolean('Light variant (light)', false),
-  titleText: text('Title (titleText)', 'This is a dropdown title.'),
+  titleText: text('Title (titleText)', 'Dropdown label'),
   helperText: text('Helper text (helperText)', 'This is some helper text.'),
   invalid: boolean('Show form validation UI (invalid)', false),
   invalidText: text(
@@ -87,13 +78,19 @@ export default {
     subcomponents: {
       DropdownSkeleton,
     },
+    docs: {
+      page: mdx,
+    },
   },
 };
 
 export const Default = () => (
   <div style={{ width: 300 }}>
     <Dropdown
-      {...props()}
+      id="default"
+      titleText="Dropdown label"
+      helperText="This is some helper text"
+      label="Dropdown menu options"
       items={items}
       itemToString={(item) => (item ? item.text : '')}
       onChange={action('onChange')}
@@ -101,18 +98,12 @@ export const Default = () => (
   </div>
 );
 
-Default.storyName = 'default';
-
-Default.parameters = {
-  info: {
-    text: 'Dropdown',
-  },
-};
-
 export const Inline = () => (
   <div style={{ width: 600 }}>
     <Dropdown
-      {...props()}
+      id="inline"
+      titleText="Inline dropdown label"
+      label="Dropdown menu options"
       type="inline"
       items={items}
       itemToString={(item) => (item ? item.text : '')}
@@ -121,70 +112,20 @@ export const Inline = () => (
   </div>
 );
 
-Inline.storyName = 'inline';
-
-Inline.parameters = {
-  info: {
-    text: 'Dropdown',
-  },
-};
-
-export const ItemsAsStrings = () => (
-  <div style={props.inline ? { width: 500 } : { width: 300 }}>
-    <Dropdown {...props()} items={stringItems} onChange={action('onChange')} />
-  </div>
-);
-
-ItemsAsStrings.storyName = 'items as strings';
-
-ItemsAsStrings.parameters = {
-  info: {
-    text: 'Rendering an array of strings as `items`',
-  },
-};
-
-export const FullyControlled = () => (
-  <WithState initialState={{ selectedItem: items[0] }}>
-    {({ state, setState }) => (
-      <div style={{ width: 300 }}>
-        <Dropdown
-          {...props()}
-          items={items}
-          itemToString={(item) => (item ? item.text : '')}
-          onChange={({ selectedItem }) =>
-            setTimeout(() => setState({ selectedItem }), 1000)
-          }
-          selectedItem={state.selectedItem}
-        />
-      </div>
-    )}
-  </WithState>
-);
-
-FullyControlled.storyName = 'fully controlled';
-
-FullyControlled.parameters = {
-  info: {
-    text: `
-        Sometimes you want to control everything.
-      `,
-  },
+export const Playground = () => {
+  return (
+    <div style={{ width: 300 }}>
+      <Dropdown
+        {...props()}
+        items={items}
+        itemToString={(item) => (item ? item.text : '')}
+      />
+    </div>
+  );
 };
 
 export const Skeleton = () => (
   <div style={{ width: 300 }}>
     <DropdownSkeleton />
-    &nbsp;
-    <DropdownSkeleton inline />
   </div>
 );
-
-Skeleton.storyName = 'skeleton';
-
-Skeleton.parameters = {
-  info: {
-    text: `
-        Placeholder skeleton state to use when content is loading.
-      `,
-  },
-};
