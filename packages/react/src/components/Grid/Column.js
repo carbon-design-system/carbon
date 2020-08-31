@@ -119,7 +119,7 @@ function getClassNameForBreakpoints(breakpoints) {
 
   for (let i = 0; i < breakpoints.length; i++) {
     const breakpoint = breakpoints[i];
-    if (!breakpoint) {
+    if (breakpoint === undefined || breakpoint === null) {
       continue;
     }
 
