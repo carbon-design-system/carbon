@@ -20,6 +20,7 @@ import DataTable, {
   TableHeader,
   TableRow,
 } from '../../../DataTable';
+import Dropdown from '../../../Dropdown';
 import { rows, headers } from '../shared';
 import mdx from '../../DataTable.mdx';
 
@@ -82,7 +83,12 @@ export const Usage = () => (
                   colSpan={headers.length + 1}
                   className="demo-expanded-td">
                   <h6>Expandable row content</h6>
-                  <div>Description here</div>
+                  <Dropdown
+                    ariaLabel="Dropdown"
+                    label="Choose an option"
+                    items={['Option 1', 'Option 2', ' Option 3']}
+                    titleText="Dropdown Options"
+                  />
                 </TableExpandedRow>
               </React.Fragment>
             ))}

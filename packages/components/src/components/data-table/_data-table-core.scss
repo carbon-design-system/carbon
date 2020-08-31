@@ -24,6 +24,10 @@
 
   .#{$prefix}--data-table-content {
     overflow-x: auto;
+
+    @include carbon--breakpoint(md) {
+      overflow: visible;
+    }
   }
 
   //----------------------------------------------------------------------------
