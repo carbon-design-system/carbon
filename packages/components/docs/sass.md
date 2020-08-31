@@ -20859,6 +20859,13 @@ Number input styles
     background-color: $field-02;
   }
 
+  .#{$prefix}--number--light input[type='number']:disabled,
+  .#{$prefix}--number--light
+    .#{$prefix}--number--readonly
+    input[type='number'] {
+    background-color: $field-02;
+  }
+
   .#{$prefix}--number--mobile {
     width: auto;
     min-width: rem(144px);
