@@ -68,5 +68,5 @@ export const selectorFocusable = `
   a[href], area[href], input:not([disabled]),
   button:not([disabled]),select:not([disabled]),
   textarea:not([disabled]),
-  iframe, object, embed, *[tabindex], *[contenteditable=true]
+  iframe, object, embed, *[tabindex]:not([disabled]), *[contenteditable=true]
 `;
