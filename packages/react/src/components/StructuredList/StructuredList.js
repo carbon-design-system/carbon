@@ -65,9 +65,9 @@ export class StructuredListWrapper extends Component {
     });
 
     return (
-      <section className={classes} {...other} aria-label={ariaLabel}>
+      <div className={classes} {...other} aria-label={ariaLabel}>
         {children}
-      </section>
+      </div>
     );
   }
 }
