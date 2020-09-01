@@ -292,7 +292,7 @@ class Tooltip extends Component {
 
   /**
    * Handles `focus`/`blur` event.
-   * @param {string} state `over` to show the tooltip, `out` to hide the tooltip.
+   * @param {string} state `mouseover` to show the tooltip, `mouseout` to hide the tooltip.
    * @param {Element} [evt] For handing `mouseout` event, indicates where the mouse pointer is gone.
    */
   _handleFocus = (state, evt) => {
@@ -305,11 +305,11 @@ class Tooltip extends Component {
       this._tooltipDismissed = false;
     } else if (hover && state === 'mouseout') {
       this._handleUserInputOpenClose(evt, { open: false });
-    } else {
+    } else if (!hover) {
       // Note: SVGElement in IE11 does not have `.contains()`
       const { current: triggerEl } = this._triggerRef;
-      const shouldPreventClose = !hover;
-      relatedTarget &&
+      const shouldPreventClose =
+        relatedTarget &&
         ((triggerEl && triggerEl?.contains(relatedTarget)) ||
           (this._tooltipEl && this._tooltipEl.contains(relatedTarget)));
       if (!shouldPreventClose) {

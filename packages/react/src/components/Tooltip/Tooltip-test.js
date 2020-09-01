@@ -174,8 +174,10 @@ describe('Tooltip', () => {
         open: true,
         triggerText: 'Tooltip',
       });
-      // Enzyme doesn't seem to allow state() in a forwardRef-wrapped class component
-      expect(rootWrapper.find('Tooltip').instance().state.open).toEqual(true);
+      setTimeout(() => {
+        // Enzyme doesn't seem to allow state() in a forwardRef-wrapped class component
+        expect(rootWrapper.find('Tooltip').instance().state.open).toEqual(true);
+      }, 200);
     });
 
     it('prop.hover change should update hover state', () => {
