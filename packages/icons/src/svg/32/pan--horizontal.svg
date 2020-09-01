@@ -6,6 +6,6 @@
       }
     </style>
   </defs>
-  <path d="M4,2H2V28a2,2,0,0,0,2,2H30V28H4V25H26V17H4V13H18V5H4ZM24,19v4H4V19ZM16,7v4H4V7Z"/>
+  <polygon points="24 10 22.586 11.414 26.172 15 5.828 15 9.414 11.414 8 10 2 16 8 22 9.414 20.586 5.828 17 26.172 17 22.586 20.586 24 22 30 16 24 10"/>
   <rect id="_Transparent_Rectangle_" data-name="&lt;Transparent Rectangle&gt;" class="cls-1" width="32" height="32"/>
 </svg>
