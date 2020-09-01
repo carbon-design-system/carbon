@@ -178,6 +178,19 @@ describe('Tooltip', () => {
       expect(rootWrapper.find('Tooltip').instance().state.open).toEqual(true);
     });
 
+    it('prop.hover change should update hover state', () => {
+      const rootWrapper = mount(<Tooltip hover={true} triggerText="Tooltip" />);
+      // Enzyme doesn't seem to allow state() in a forwardRef-wrapped class component
+      expect(rootWrapper.find('Tooltip').instance().state.open).toBeFalsy();
+      rootWrapper.find('Tooltip').simulate('mouseover');
+      setTimeout(() => {
+        // Enzyme doesn't seem to allow state() in a forwardRef-wrapped class component
+        expect(rootWrapper.find('Tooltip').instance().state.open).toEqual(true);
+      }, 200);
+      rootWrapper.find('Tooltip').simulate('mouseout');
+      expect(rootWrapper.find('Tooltip').instance().state.open).toBeFalsy();
+    });
+
     it('should avoid change the open state upon setting props, unless there the value actually changes', () => {
       const rootWrapper = mount(<Tooltip />);
       rootWrapper.setProps({ open: true });

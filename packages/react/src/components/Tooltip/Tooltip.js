@@ -9,6 +9,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { isForwardRef } from 'react-is';
 import debounce from 'lodash.debounce';
+import omit from 'lodash.omit';
 import classNames from 'classnames';
 import { Information16 as Information } from '@carbon/icons-react';
 import { settings } from 'carbon-components';
@@ -108,6 +109,11 @@ class Tooltip extends Component {
     direction: PropTypes.oneOf(['bottom', 'top', 'left', 'right']),
 
     /**
+     * Show the tooltip on hover.
+     */
+    hover: PropTypes.bool,
+
+    /**
      * The name of the default tooltip icon.
      */
     iconName: PropTypes.string,
@@ -203,11 +209,12 @@ class Tooltip extends Component {
 
   static defaultProps = {
     direction: DIRECTION_BOTTOM,
+    hover: false,
+    menuOffset: getMenuOffset,
     renderIcon: Information,
+    selectorPrimaryFocus: '[data-tooltip-primary-focus]',
     showIcon: true,
     triggerText: null,
-    menuOffset: getMenuOffset,
-    selectorPrimaryFocus: '[data-tooltip-primary-focus]',
   };
 
   /**
@@ -290,16 +297,19 @@ class Tooltip extends Component {
    */
   _handleFocus = (state, evt) => {
     const { relatedTarget } = evt;
-    if (state === 'over') {
+    const { hover } = this.props;
+    if (hover && (state === 'over' || state === 'mouseover')) {
       if (!this._tooltipDismissed) {
         this._handleUserInputOpenClose(evt, { open: true });
       }
       this._tooltipDismissed = false;
+    } else if (hover && state === 'mouseout') {
+      this._handleUserInputOpenClose(evt, { open: false });
     } else {
       // Note: SVGElement in IE11 does not have `.contains()`
       const { current: triggerEl } = this._triggerRef;
-      const shouldPreventClose =
-        relatedTarget &&
+      const shouldPreventClose = !hover;
+      relatedTarget &&
         ((triggerEl && triggerEl?.contains(relatedTarget)) ||
           (this._tooltipEl && this._tooltipEl.contains(relatedTarget)));
       if (!shouldPreventClose) {
@@ -329,13 +339,16 @@ class Tooltip extends Component {
   handleMouse = (evt) => {
     evt.persist();
     const state = {
-      focus: 'over',
       blur: 'out',
       click: 'click',
+      focus: 'over',
+      mouseover: 'mouseover',
+      mouseout: 'mouseout',
     }[evt.type];
+    const { hover } = this.props;
     const hadContextMenu = this._hasContextMenu;
     this._hasContextMenu = evt.type === 'contextmenu';
-    if (state === 'click') {
+    if (!hover && state === 'click') {
       evt.stopPropagation();
       evt.preventDefault();
       const shouldOpen = this.isControlled
@@ -406,6 +419,11 @@ class Tooltip extends Component {
       selectorPrimaryFocus, // eslint-disable-line
       ...other
     } = this.props;
+
+    // Prevent hover prop from being passed down to FloatingMenu
+    const cleanProps = {
+      ...omit(other, ['hover']),
+    };
 
     const { open } = this.isControlled ? this.props : this.state;
 
@@ -485,7 +503,7 @@ class Tooltip extends Component {
             <div
               id={this._tooltipId}
               className={tooltipClasses}
-              {...other}
+              {...cleanProps}
               data-floating-menu-direction={direction}
               onMouseOver={this.handleMouse}
               onMouseOut={this.handleMouse}
