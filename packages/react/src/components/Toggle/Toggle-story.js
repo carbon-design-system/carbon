@@ -11,13 +11,11 @@ import { withKnobs, text, boolean } from '@storybook/addon-knobs';
 import Toggle from '../Toggle';
 import ToggleSkeleton from '../Toggle/Toggle.Skeleton';
 
-const a11yProps = () => ({
-  labelText: text('Label toggle input control (labelText)', ''),
-  ['aria-label']: text('ARIA label of the toggle (aria-label)', ''),
-});
-
 const toggleProps = () => ({
-  ...a11yProps(),
+  labelText: text(
+    'Label toggle input control (labelText)',
+    'Toggle element label'
+  ),
   className: 'some-class',
   labelA: text('Label for untoggled state (labelA)', 'Off'),
   labelB: text('Label for toggled state (labelB)', 'On'),
@@ -78,7 +76,7 @@ Untoggled.parameters = {
   },
 };
 
-export const Skeleton = () => <ToggleSkeleton {...a11yProps()} />;
+export const Skeleton = () => <ToggleSkeleton {...toggleProps()} />;
 
 Skeleton.storyName = 'skeleton';
 
