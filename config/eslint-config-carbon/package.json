@@ -8,6 +8,7 @@
   "bugs": "https://github.com/carbon-design-system/carbon/issues",
   "files": [
     "plugins",
+    "base.js",
     "index.js",
     "react.js",
     "vanilla.js"
