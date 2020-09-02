@@ -107,17 +107,17 @@ TextArea.displayName = 'TextArea';
 TextArea.propTypes = {
   /**
    * Provide a custom className that is applied directly to the underlying
-   * <textarea> node
+   * `<textarea>` node
    */
   className: PropTypes.string,
 
   /**
-   * Specify the `cols` attribute for the underlying <textarea> node
+   * Specify the `cols` attribute for the underlying `<textarea>` node
    */
   cols: PropTypes.number,
 
   /**
-   * Optionally provide the default value of the <textarea>
+   * Optionally provide the default value of the `<textarea>`
    */
   defaultValue: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
 
@@ -163,29 +163,29 @@ TextArea.propTypes = {
   light: PropTypes.bool,
 
   /**
-   * Optionally provide an `onChange` handler that is called whenever <textarea>
+   * Optionally provide an `onChange` handler that is called whenever `<textarea>`
    * is updated
    */
   onChange: PropTypes.func,
 
   /**
    * Optionally provide an `onClick` handler that is called whenever the
-   * <textarea> is clicked
+   * `<textarea>` is clicked
    */
   onClick: PropTypes.func,
 
   /**
-   * Specify the placeholder attribute for the <textarea>
+   * Specify the placeholder attribute for the `<textarea>`
    */
   placeholder: PropTypes.string,
 
   /**
-   * Specify the rows attribute for the <textarea>
+   * Specify the rows attribute for the `<textarea>`
    */
   rows: PropTypes.number,
 
   /**
-   * Provide the current value of the <textarea>
+   * Provide the current value of the `<textarea>`
    */
   value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
 };

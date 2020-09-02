@@ -91,7 +91,7 @@ export default class Tab extends React.Component {
     selected: PropTypes.bool.isRequired,
 
     /**
-     * Specify the tab index of the <a> node
+     * Specify the tab index of the `<a>` node
      */
     tabIndex: PropTypes.number.isRequired,
   };
