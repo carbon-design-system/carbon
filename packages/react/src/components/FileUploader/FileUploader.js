@@ -66,7 +66,7 @@ export default class FileUploader extends React.Component {
     multiple: PropTypes.bool,
 
     /**
-     * Provide a name for the underlying <input> node
+     * Provide a name for the underlying `<input>` node
      */
     name: PropTypes.string,
 

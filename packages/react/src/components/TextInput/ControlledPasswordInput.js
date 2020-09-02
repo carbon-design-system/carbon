@@ -138,12 +138,12 @@ const ControlledPasswordInput = React.forwardRef(
 ControlledPasswordInput.propTypes = {
   /**
    * Provide a custom className that is applied directly to the underlying
-   * <input> node
+   * `<input>` node
    */
   className: PropTypes.string,
 
   /**
-   * Optionally provide the default value of the <input>
+   * Optionally provide the default value of the `<input>`
    */
   defaultValue: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
 
@@ -189,19 +189,19 @@ ControlledPasswordInput.propTypes = {
   light: PropTypes.bool,
 
   /**
-   * Optionally provide an `onChange` handler that is called whenever <input>
+   * Optionally provide an `onChange` handler that is called whenever `<input>`
    * is updated
    */
   onChange: PropTypes.func,
 
   /**
    * Optionally provide an `onClick` handler that is called whenever the
-   * <input> is clicked
+   * `<input>` is clicked
    */
   onClick: PropTypes.func,
 
   /**
-   * Specify the placeholder attribute for the <input>
+   * Specify the placeholder attribute for the `<input>`
    */
   placeholder: PropTypes.string,
 
@@ -223,7 +223,7 @@ ControlledPasswordInput.propTypes = {
   tooltipPosition: PropTypes.oneOf(['top', 'right', 'bottom', 'left']),
 
   /**
-   * Provide the current value of the <input>
+   * Provide the current value of the `<input>`
    */
   value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
 };
