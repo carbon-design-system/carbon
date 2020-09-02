@@ -19998,6 +19998,10 @@ Modal styles
   .#{$prefix}--body--with-modal-open {
     overflow: hidden;
   }
+
+  .#{$prefix}--body--with-modal-open .#{$prefix}--tooltip {
+    z-index: z('modal');
+  }
 }
 ```
 
