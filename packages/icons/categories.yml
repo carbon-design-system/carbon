@@ -673,7 +673,7 @@ categories:
           - chart--histogram
           - chart--line
           - chart--line--data
-          - chart--line--smooth
+          - chart--line-smooth
           - chart--marimekko
           - chart--multi-line
           - chart--multitype
