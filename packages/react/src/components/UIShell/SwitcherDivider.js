@@ -22,7 +22,7 @@ const SwitcherDivider = ({ className: customClassName, ...other }) => {
 
 SwitcherDivider.propTypes = {
   /**
-   * Optionally provide a custom class to apply to the underlying <li> node
+   * Optionally provide a custom class to apply to the underlying `<li>` node
    */
   className: PropTypes.string,
 };
