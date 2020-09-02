@@ -44,7 +44,7 @@ export default class RadioButtonGroup extends React.Component {
     labelPosition: PropTypes.oneOf(['left', 'right']),
 
     /**
-     * Specify the name of the underlying <input> nodes
+     * Specify the name of the underlying `<input>` nodes
      */
     name: PropTypes.string.isRequired,
 

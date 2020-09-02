@@ -166,17 +166,17 @@ TextInput.PasswordInput = PasswordInput;
 TextInput.ControlledPasswordInput = ControlledPasswordInput;
 TextInput.propTypes = {
   /**
-   * Specify an optional className to be applied to the <input> node
+   * Specify an optional className to be applied to the `<input>` node
    */
   className: PropTypes.string,
 
   /**
-   * Optionally provide the default value of the <input>
+   * Optionally provide the default value of the `<input>`
    */
   defaultValue: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
 
   /**
-   * Specify whether the <input> should be disabled
+   * Specify whether the `<input>` should be disabled
    */
   disabled: PropTypes.bool,
 
@@ -191,7 +191,7 @@ TextInput.propTypes = {
   hideLabel: PropTypes.bool,
 
   /**
-   * Specify a custom `id` for the <input>
+   * Specify a custom `id` for the `<input>`
    */
   id: PropTypes.string.isRequired,
 
@@ -222,19 +222,19 @@ TextInput.propTypes = {
   light: PropTypes.bool,
 
   /**
-   * Optionally provide an `onChange` handler that is called whenever <input>
+   * Optionally provide an `onChange` handler that is called whenever `<input>`
    * is updated
    */
   onChange: PropTypes.func,
 
   /**
    * Optionally provide an `onClick` handler that is called whenever the
-   * <input> is clicked
+   * `<input>` is clicked
    */
   onClick: PropTypes.func,
 
   /**
-   * Specify the placeholder attribute for the <input>
+   * Specify the placeholder attribute for the `<input>`
    */
   placeholder: PropTypes.string,
 
@@ -244,12 +244,12 @@ TextInput.propTypes = {
   size: PropTypes.oneOf(['sm', 'xl']),
 
   /**
-   * Specify the type of the <input>
+   * Specify the type of the `<input>`
    */
   type: PropTypes.string,
 
   /**
-   * Specify the value of the <input>
+   * Specify the value of the `<input>`
    */
   value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
 

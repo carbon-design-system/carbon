@@ -46,7 +46,7 @@ export default class TileGroup extends React.Component {
     legend: PropTypes.string,
 
     /**
-     * Specify the name of the underlying <input> nodes
+     * Specify the name of the underlying `<input>` nodes
      */
     name: PropTypes.string.isRequired,
 

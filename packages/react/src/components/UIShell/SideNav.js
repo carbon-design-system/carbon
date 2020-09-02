@@ -159,7 +159,7 @@ SideNav.propTypes = {
   addMouseListeners: PropTypes.bool,
 
   /**
-   * Optionally provide a custom class to apply to the underlying <li> node
+   * Optionally provide a custom class to apply to the underlying `<li>` node
    */
   className: PropTypes.string,
 
@@ -175,7 +175,7 @@ SideNav.propTypes = {
   expanded: PropTypes.bool,
 
   /**
-   * Optionally provide a custom class to apply to the underlying <li> node
+   * Optionally provide a custom class to apply to the underlying `<li>` node
    */
   isChildOfHeader: PropTypes.bool,
 

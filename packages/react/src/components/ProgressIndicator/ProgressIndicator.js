@@ -137,7 +137,7 @@ export function ProgressStep({
 
 ProgressStep.propTypes = {
   /**
-   * Provide an optional className to be applied to the containing <li> node
+   * Provide an optional className to be applied to the containing `<li>` node
    */
   className: PropTypes.string,
 
