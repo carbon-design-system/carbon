@@ -27,7 +27,7 @@ export default class Search extends Component {
     closeButtonLabelText: PropTypes.string,
 
     /**
-     * Optionally provide the default value of the <input>
+     * Optionally provide the default value of the `<input>`
      */
     defaultValue: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
 
@@ -81,7 +81,7 @@ export default class Search extends Component {
     type: PropTypes.string,
 
     /**
-     * Specify the value of the <input>
+     * Specify the value of the `<input>`
      */
     value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   };
