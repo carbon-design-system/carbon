@@ -34,7 +34,6 @@ jobs:
             -a 'https://cloud.ibm.com' \
             --apikey "$CLOUD_API_KEY" \
             -r 'us-south'
-           
           ibmcloud target -o 'carbon-design-system' -s 'production'
       - name: Install IBM Cloud plugins
         run: |
