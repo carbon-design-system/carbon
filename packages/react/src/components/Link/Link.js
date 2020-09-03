@@ -41,7 +41,7 @@ Link.propTypes = {
   children: PropTypes.node,
 
   /**
-   * Provide a custom className to be applied to the containing <a> node
+   * Provide a custom className to be applied to the containing `<a>` node
    */
   className: PropTypes.string,
 
@@ -51,7 +51,7 @@ Link.propTypes = {
   disabled: PropTypes.bool,
 
   /**
-   * Provide the `href` attribute for the <a> node
+   * Provide the `href` attribute for the `<a>` node
    */
   href: PropTypes.string,
 

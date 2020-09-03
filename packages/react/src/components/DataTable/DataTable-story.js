@@ -1,288 +1,358 @@
-import { withKnobs, boolean, select } from '@storybook/addon-knobs';
-import { withReadme } from 'storybook-readme';
-import readme from './README.md';
-import DataTable, {
+/**
+ * Copyright IBM Corp. 2016, 2020
+ *
+ * This source code is licensed under the Apache-2.0 license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+import './stories/datatable-story.scss';
+
+import { action } from '@storybook/addon-actions';
+import React from 'react';
+import Button from '../Button';
+import Checkbox from '../Checkbox';
+import OverflowMenu from '../OverflowMenu';
+import OverflowMenuItem from '../OverflowMenuItem';
+import {
+  default as DataTable,
+  TableContainer,
   Table,
-  TableActionList,
-  TableBatchAction,
-  TableBatchActions,
+  TableHead,
+  TableRow,
+  TableHeader,
   TableBody,
   TableCell,
-  TableContainer,
-  TableExpandHeader,
-  TableExpandRow,
-  TableExpandedRow,
-  TableHead,
-  TableHeader,
-  TableRow,
-  TableSelectAll,
-  TableSelectRow,
   TableToolbar,
   TableToolbarAction,
   TableToolbarContent,
   TableToolbarSearch,
   TableToolbarMenu,
 } from '../DataTable';
-
-const readmeURL = 'https://bit.ly/2Z9PGsC';
-
-const props = () => ({
-  useZebraStyles: boolean('Zebra row styles (useZebraStyles)', false),
-  size: select(
-    'Row height (size)',
-    { compact: 'compact', short: 'short', tall: 'tall', none: null },
-    null
-  ),
-  stickyHeader: boolean('Sticky header (experimental)', false),
-});
+import mdx from './DataTable.mdx';
+import { headers, rows } from './stories/shared';
 
 export default {
   title: 'DataTable',
-  decorators: [withKnobs],
-
+  component: DataTable,
+  subcomponents: {
+    TableContainer,
+    Table,
+    TableHead,
+    TableRow,
+    TableHeader,
+    TableBody,
+    TableCell,
+  },
   parameters: {
-    component: DataTable,
-
-    subcomponents: {
-      Table,
-      TableActionList,
-      TableBatchAction,
-      TableBatchActions,
-      TableBody,
-      TableCell,
-      TableContainer,
-      TableExpandHeader,
-      TableExpandRow,
-      TableExpandedRow,
-      TableHead,
-      TableHeader,
-      TableRow,
-      TableSelectAll,
-      TableSelectRow,
-      TableToolbar,
-      TableToolbarAction,
-      TableToolbarContent,
-      TableToolbarSearch,
-      TableToolbarMenu,
+    docs: {
+      page: mdx,
     },
   },
 };
 
-export const Default = withReadme(readme, () =>
-  require('./stories/default').default(props())
+export const Usage = () => (
+  <DataTable rows={rows} headers={headers}>
+    {({
+      rows,
+      headers,
+      getHeaderProps,
+      getRowProps,
+      getTableProps,
+      getTableContainerProps,
+    }) => (
+      <TableContainer
+        title="DataTable"
+        description="Usage example"
+        {...getTableContainerProps()}>
+        <Table {...getTableProps()} isSortable>
+          <TableHead>
+            <TableRow>
+              {headers.map((header) => (
+                <TableHeader
+                  key={header.key}
+                  {...getHeaderProps({ header })}
+                  isSortable>
+                  {header.header}
+                </TableHeader>
+              ))}
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {rows.map((row) => (
+              <TableRow key={row.id} {...getRowProps({ row })}>
+                {row.cells.map((cell) => (
+                  <TableCell key={cell.id}>{cell.value}</TableCell>
+                ))}
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
+      </TableContainer>
+    )}
+  </DataTable>
 );
 
-Default.storyName = 'default';
+export const BasicTable = () => {
+  const rows = [
+    {
+      id: 'load-balancer-1',
+      name: 'Load Balancer 1',
+      rule: 'Round robin',
+      Status: 'Starting',
+    },
+    {
+      id: 'load-balancer-2',
+      name: 'Load Balancer 2',
+      rule: 'DNS delegation',
+      status: 'Active',
+    },
+    {
+      id: 'load-balancer-3',
+      name: 'Load Balancer 3',
+      rule: 'Round robin',
+      status: 'Disabled',
+    },
+  ];
+  const headers = ['Name', 'Rule', 'Status'];
 
-Default.parameters = {
-  info: {
-    /* eslint-disable no-useless-escape */
-    text: `
-      Data Tables are used to represent a collection of resources, displaying a
-      subset of their fields in columns, or headers. The \`DataTable\` component
-      that we export from Carbon requires two props to be passed in: \`rows\`
-      and \`headers\`.
-      You can find more detailed information surrounding usage of this component
-      at the following url: ${readmeURL}
-    `,
-    /* eslint-enable no-useless-escape */
-  },
+  return (
+    <Table>
+      <TableHead>
+        <TableRow>
+          {headers.map((header) => (
+            <TableHeader key={header}>{header}</TableHeader>
+          ))}
+        </TableRow>
+      </TableHead>
+      <TableBody>
+        {rows.map((row) => (
+          <TableRow key={row.id}>
+            {Object.keys(row)
+              .filter((key) => key !== 'id')
+              .map((key) => {
+                return <TableCell key={key}>{row[key]}</TableCell>;
+              })}
+          </TableRow>
+        ))}
+      </TableBody>
+    </Table>
+  );
 };
 
-export const WithToolbar = withReadme(readme, () =>
-  require('./stories/with-toolbar').default(props())
+export const WithOverflowMenu = () => (
+  <DataTable rows={rows} headers={headers}>
+    {({ rows, headers, getHeaderProps, getRowProps, getTableProps }) => (
+      <TableContainer title="DataTable" description="With overflow menu">
+        <Table {...getTableProps()}>
+          <TableHead>
+            <TableRow>
+              {headers.map((header) => (
+                <TableHeader key={header.key} {...getHeaderProps({ header })}>
+                  {header.header}
+                </TableHeader>
+              ))}
+              <TableHeader />
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {rows.map((row) => (
+              <TableRow key={row.id} {...getRowProps({ row })}>
+                {row.cells.map((cell) => (
+                  <TableCell key={cell.id}>{cell.value}</TableCell>
+                ))}
+                <TableCell className="bx--table-column-menu">
+                  <OverflowMenu flipped>
+                    <OverflowMenuItem>Action 1</OverflowMenuItem>
+                    <OverflowMenuItem>Action 2</OverflowMenuItem>
+                    <OverflowMenuItem>Action 3</OverflowMenuItem>
+                  </OverflowMenu>
+                </TableCell>
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
+      </TableContainer>
+    )}
+  </DataTable>
 );
 
-WithToolbar.storyName = 'with toolbar';
-
-WithToolbar.parameters = {
-  info: {
-    text: `
-    DataTable with action menu and filtering.
-
-    You can find more detailed information surrounding usage of this component
-    at the following url: ${readmeURL}
-  `,
-  },
-};
-
-export const WithSorting = withReadme(readme, () =>
-  require('./stories/with-sorting').default(props())
+export const WithToolbar = () => (
+  <DataTable rows={rows} headers={headers}>
+    {({
+      rows,
+      headers,
+      getHeaderProps,
+      getRowProps,
+      getTableProps,
+      getToolbarProps,
+      onInputChange,
+      getTableContainerProps,
+    }) => (
+      <TableContainer
+        title="DataTable"
+        description="With toolbar"
+        {...getTableContainerProps()}>
+        <TableToolbar {...getToolbarProps()} aria-label="data table toolbar">
+          <TableToolbarContent>
+            <TableToolbarSearch onChange={onInputChange} />
+            <TableToolbarMenu>
+              <TableToolbarAction
+                onClick={action('Action 1 Click')}
+                primaryFocus>
+                Action 1
+              </TableToolbarAction>
+              <TableToolbarAction onClick={action('Action 2 Click')}>
+                Action 2
+              </TableToolbarAction>
+              <TableToolbarAction onClick={action('Action 3 Click')}>
+                Action 3
+              </TableToolbarAction>
+            </TableToolbarMenu>
+            <Button onClick={action('Button click')}>Primary Button</Button>
+          </TableToolbarContent>
+        </TableToolbar>
+        <Table {...getTableProps()}>
+          <TableHead>
+            <TableRow>
+              {headers.map((header) => (
+                <TableHeader key={header.key} {...getHeaderProps({ header })}>
+                  {header.header}
+                </TableHeader>
+              ))}
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {rows.map((row) => (
+              <TableRow key={row.id} {...getRowProps({ row })}>
+                {row.cells.map((cell) => (
+                  <TableCell key={cell.id}>{cell.value}</TableCell>
+                ))}
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
+      </TableContainer>
+    )}
+  </DataTable>
 );
 
-WithSorting.storyName = 'with sorting';
+export const WithCheckmarkColumns = () => {
+  const rows = [
+    {
+      id: 'a',
+      name: 'Load Balancer 3',
+      protocol: 'HTTP',
+      port: 3000,
+      rule: 'Round robin',
+      attached_groups: 'Kevin’s VM Groups',
+      status: 'Disabled',
+      enabled: true,
+    },
+    {
+      id: 'b',
+      name: 'Load Balancer 1',
+      protocol: 'HTTP',
+      port: 443,
+      rule: 'Round robin',
+      attached_groups: 'Maureen’s VM Groups',
+      status: 'Starting',
+      enabled: true,
+    },
+    {
+      id: 'c',
+      name: 'Load Balancer 2',
+      protocol: 'HTTP',
+      port: 80,
+      rule: 'DNS delegation',
+      attached_groups: 'Andrew’s VM Groups',
+      status: 'Active',
+      enabled: false,
+    },
+  ];
 
-WithSorting.parameters = {
-  info: {
-    text: `
-    DataTable with sorting
+  const headers = [
+    {
+      key: 'name',
+      header: 'Name',
+    },
+    {
+      key: 'protocol',
+      header: 'Protocol',
+    },
+    {
+      key: 'port',
+      header: 'Port',
+    },
+    {
+      key: 'rule',
+      header: 'Rule',
+    },
+    {
+      key: 'attached_groups',
+      header: 'Attached Groups',
+    },
+    {
+      key: 'status',
+      header: 'Status',
+    },
+    {
+      key: 'enabled',
+      header: 'Enabled',
+    },
+  ];
 
-    You can find more detailed information surrounding usage of this component
-    at the following url: ${readmeURL}
-  `,
-  },
-};
-
-export const WithSelection = withReadme(readme, () =>
-  require('./stories/with-selection').default(props())
-);
-
-WithSelection.storyName = 'with selection';
-
-WithSelection.parameters = {
-  info: {
-    text: `
-    DataTable with selection
-
-    You can find more detailed information surrounding usage of this component
-    at the following url: ${readmeURL}
-  `,
-  },
-};
-
-export const WithRadioButtonSelection = withReadme(readme, () =>
-  require('./stories/with-selection--radio').default(props())
-);
-
-WithRadioButtonSelection.storyName = 'with radio button selection';
-
-WithRadioButtonSelection.parameters = {
-  info: {
-    text: `
-    DataTable with radio button selection
-
-    You can find more detailed information surrounding usage of this component
-    at the following url: ${readmeURL}
-  `,
-  },
-};
-
-export const WithExpansion = withReadme(readme, () =>
-  require('./stories/with-expansion').default(props())
-);
-
-WithExpansion.storyName = 'with expansion';
-
-WithExpansion.parameters = {
-  info: {
-    text: `
-      DataTable with expansion
-
-      You can find more detailed information surrounding usage of this component
-      at the following url: ${readmeURL}
-    `,
-  },
-};
-
-export const WithBatchExpansion = withReadme(readme, () =>
-  require('./stories/with-batch-expansion').default(props())
-);
-
-WithBatchExpansion.storyName = 'with batch expansion';
-
-WithBatchExpansion.parameters = {
-  info: {
-    text: `
-      DataTable with batch expansion
-
-      You can find more detailed information surrounding usage of this component
-      at the following url: ${readmeURL}
-    `,
-  },
-};
-
-export const WithBatchActions = withReadme(readme, () =>
-  require('./stories/with-batch-actions').default(props())
-);
-
-WithBatchActions.storyName = 'with batch actions';
-
-WithBatchActions.parameters = {
-  info: {
-    text: `
-      Uses <TableToolbar> alongside <TableBatchActions> and <TableBatchAction>
-      to create the toolbar and placeholder for where the batch action menu will
-      be displayed.
-
-      You can use the \`getBatchActionProps\` prop getter on the
-      <TableBatchActions> component to have it wire up the ghost menu for you.
-
-      Individual <TableBatchAction> components take in any kind of event handler
-      prop that you would expect to use, like \`onClick\`. You can use these
-      alongside the \`selectedRows\` property in your \`render\` prop function
-      to pass along this info to your batch action handler.
-
-      You can find more detailed information surrounding usage of this component
-      at the following url: ${readmeURL}
-    `,
-  },
-};
-
-export const WithDynamicContent = withReadme(readme, () =>
-  require('./stories/with-dynamic-content').default(props())
-);
-
-WithDynamicContent.storyName = 'with dynamic content';
-
-WithDynamicContent.parameters = {
-  info: {
-    text: `
-    Showcases DataTable behavior when rows are added to the component,
-    and when cell data changes dynamically.
-  `,
-  },
-};
-
-export const WithBooleanColumn = withReadme(readme, () =>
-  require('./stories/with-boolean-column').default(props())
-);
-
-WithBooleanColumn.storyName = 'with boolean column';
-
-WithBooleanColumn.parameters = {
-  info: {
-    text: `
-    DataTable with toolbar and filtering with column has boolean value.
-  `,
-  },
-};
-
-export const WithOptions = withReadme(readme, () =>
-  require('./stories/with-options').default(props())
-);
-
-WithOptions.storyName = 'with options';
-
-WithOptions.parameters = {
-  info: {
-    text: `
-    DataTable with options like disabled, isSelected, isExpanded etc.
-
-    You can find more detailed information surrounding usage of this component
-    at the following url: ${readmeURL}
-  `,
-  },
-};
-
-export const WithOverflowMenu = withReadme(readme, () =>
-  require('./stories/with-overflow-menu').default({
-    ...props(),
-    overflowMenuOnHover: boolean(
-      'Show overflow menu on hover (overflowMenuOnHover)',
-      false
-    ),
-  })
-);
-
-WithOverflowMenu.storyName = 'with overflow menu';
-
-WithOverflowMenu.parameters = {
-  info: {
-    text: `
-  DataTable with Overflow menus added.
-
-  You can find more detailed information surrounding usage of this component
-  at the following url: ${readmeURL}
-`,
-  },
+  return (
+    <DataTable rows={rows} headers={headers}>
+      {({
+        rows,
+        headers,
+        getHeaderProps,
+        getRowProps,
+        getTableProps,
+        getTableContainerProps,
+      }) => (
+        <TableContainer
+          title="DataTable"
+          description="With boolean column"
+          {...getTableContainerProps()}>
+          <Table {...getTableProps()}>
+            <TableHead>
+              <TableRow>
+                {headers.map((header) => (
+                  <TableHeader key={header.key} {...getHeaderProps({ header })}>
+                    {header.header}
+                  </TableHeader>
+                ))}
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              {rows.map((row) => (
+                <TableRow key={row.id} {...getRowProps({ row })}>
+                  {row.cells.map((cell) => {
+                    if (cell.info.header === 'enabled') {
+                      return (
+                        <TableCell
+                          key={cell.id}
+                          id={cell.id}
+                          className={`la-${cell.info.header}`}>
+                          <Checkbox
+                            id={'check-' + cell.id}
+                            checked={cell.value}
+                            hideLabel
+                            labelText="checkbox"
+                          />
+                        </TableCell>
+                      );
+                    } else {
+                      return <TableCell key={cell.id}>{cell.value}</TableCell>;
+                    }
+                  })}
+                </TableRow>
+              ))}
+            </TableBody>
+          </Table>
+        </TableContainer>
+      )}
+    </DataTable>
+  );
 };

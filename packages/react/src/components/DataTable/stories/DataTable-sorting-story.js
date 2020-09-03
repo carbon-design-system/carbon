@@ -15,41 +15,45 @@ import DataTable, {
   TableHeader,
   TableRow,
 } from '../../DataTable';
-import { initialRows, headers } from './shared';
+import { rows, headers } from './shared';
+import mdx from '../DataTable.mdx';
 
-const SortingStory = (props) => (
-  <DataTable
-    rows={initialRows}
-    headers={headers}
-    isSortable={true}
-    {...props}
-    render={({
-      rows,
-      headers,
-      getHeaderProps,
-      getRowProps,
-      getTableProps,
-      getTableContainerProps,
-    }) => (
-      <TableContainer
-        title="DataTable"
-        description="With sorting"
-        {...getTableContainerProps()}>
+export default {
+  title: 'DataTable/Sorting',
+  component: DataTable,
+  subcomponents: {
+    Table,
+    TableBody,
+    TableCell,
+    TableContainer,
+    TableHead,
+    TableHeader,
+    TableRow,
+  },
+  parameters: {
+    docs: {
+      page: mdx,
+    },
+  },
+};
+
+export const Usage = () => (
+  <DataTable rows={rows} headers={headers} isSortable>
+    {({ rows, headers, getHeaderProps, getRowProps, getTableProps }) => (
+      <TableContainer title="DataTable" description="With sorting">
         <Table {...getTableProps()}>
           <TableHead>
             <TableRow>
-              {headers.map((header, i) => (
-                <TableHeader
-                  key={i}
-                  {...getHeaderProps({ header, isSortable: true })}>
+              {headers.map((header) => (
+                <TableHeader key={header.key} {...getHeaderProps({ header })}>
                   {header.header}
                 </TableHeader>
               ))}
             </TableRow>
           </TableHead>
           <TableBody>
-            {rows.map((row, i) => (
-              <TableRow key={i} {...getRowProps({ row })}>
+            {rows.map((row) => (
+              <TableRow key={row.id} {...getRowProps({ row })}>
                 {row.cells.map((cell) => (
                   <TableCell key={cell.id}>{cell.value}</TableCell>
                 ))}
@@ -59,7 +63,5 @@ const SortingStory = (props) => (
         </Table>
       </TableContainer>
     )}
-  />
+  </DataTable>
 );
-
-export default SortingStory;

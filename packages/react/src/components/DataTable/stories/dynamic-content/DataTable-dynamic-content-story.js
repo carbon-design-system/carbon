@@ -5,13 +5,14 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+import './story.scss';
+
 import React from 'react';
 import {
   Delete16 as Delete,
   Save16 as Save,
   Download16 as Download,
 } from '@carbon/icons-react';
-
 import DataTable, {
   Table,
   TableBatchAction,
@@ -32,11 +33,14 @@ import DataTable, {
   TableToolbarContent,
   TableToolbarSearch,
   TableToolbarMenu,
-} from '../../DataTable';
-import { batchActionClick, initialRows, headers } from './shared';
-import './with-dynamic-content-story.scss';
+} from '../../../DataTable';
+import { batchActionClick, initialRows, headers } from '../shared';
 
-const DynamicContentStory = (props) => {
+export default {
+  title: 'DataTable/Development',
+};
+
+export const Example = (props) => {
   const insertInRandomPosition = (array, element) => {
     const index = Math.floor(Math.random() * (array.length + 1));
     return [...array.slice(0, index), element, ...array.slice(index)];
@@ -194,5 +198,3 @@ const DynamicContentStory = (props) => {
   }
   return <DynamicRows {...props} />;
 };
-
-export default DynamicContentStory;

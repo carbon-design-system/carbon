@@ -30,7 +30,7 @@ UnorderedList.propTypes = {
   children: PropTypes.node,
 
   /**
-   * Specify an optional className to be applied to the underlying <ul> node
+   * Specify an optional className to be applied to the underlying `<ul>` node
    */
   className: PropTypes.string,
 
