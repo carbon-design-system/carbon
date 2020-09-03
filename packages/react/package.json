@@ -1,7 +1,7 @@
 {
   "name": "carbon-components-react",
   "description": "The Carbon Design System is IBM’s open-source design system for products and experiences.",
-  "version": "7.19.0-rc.0",
+  "version": "7.19.0",
   "license": "Apache-2.0",
   "main": "lib/index.js",
   "module": "es/index.js",
@@ -39,7 +39,7 @@
     "react-dom": "^16.8.6"
   },
   "dependencies": {
-    "@carbon/icons-react": "^10.17.0-rc.0",
+    "@carbon/icons-react": "^10.17.0",
     "classnames": "2.2.6",
     "downshift": "5.2.1",
     "flatpickr": "4.6.1",
@@ -66,7 +66,7 @@
     "@babel/plugin-transform-object-assign": "^7.7.4",
     "@babel/preset-env": "^7.10.0",
     "@babel/preset-react": "^7.10.0",
-    "@carbon/test-utils": "^10.11.0-rc.0",
+    "@carbon/test-utils": "^10.11.0",
     "@percy/storybook": "^3.3.1",
     "@storybook/addon-actions": "^5.3.19",
     "@storybook/addon-docs": "^5.3.19",
@@ -84,7 +84,7 @@
     "babel-plugin-react-docgen": "^4.0.0",
     "babel-plugin-transform-inline-environment-variables": "^0.4.0",
     "browserslist-config-carbon": "^10.5.0",
-    "carbon-components": "^10.19.0-rc.0",
+    "carbon-components": "^10.19.0",
     "carbon-icons": "^7.0.5",
     "chalk": "^2.3.0",
     "cli-table": "^0.3.0",
