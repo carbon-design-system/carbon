@@ -315,6 +315,7 @@ export default class FilterableMultiSelect extends React.Component {
     ) : null;
     const inputClasses = cx(`${prefix}--text-input`, {
       [`${prefix}--text-input--empty`]: !this.state.inputValue,
+      [`${prefix}--text-input--light`]: light,
     });
     const input = (
       <Selection
