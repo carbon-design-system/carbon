@@ -25,7 +25,7 @@ You can use `stylelint-config-carbon` in your project by extending it in your
 
 ```json
 {
-  "extends": ["carbon"]
+  "extends": ["stylelint-config-carbon"]
 }
 ```
 
