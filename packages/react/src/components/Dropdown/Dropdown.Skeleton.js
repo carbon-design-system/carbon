@@ -9,6 +9,7 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import cx from 'classnames';
 import { settings } from 'carbon-components';
+import deprecate from '../../prop-types/deprecate';
 
 const { prefix } = settings;
 
@@ -39,11 +40,11 @@ DropdownSkeleton.propTypes = {
   /**
    * Specify whether you want the inline version of this control
    */
-  inline: PropTypes.bool,
-};
-
-DropdownSkeleton.defaultProps = {
-  inline: false,
+  inline: deprecate(
+    PropTypes.bool,
+    `The \`inline\` prop has been deprecated and will
+    be removed in the next major release. To specify the inline variant of Dropdown, please use the \`type\` prop.`
+  ),
 };
 
 export default DropdownSkeleton;

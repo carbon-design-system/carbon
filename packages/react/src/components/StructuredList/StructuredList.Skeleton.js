@@ -31,7 +31,7 @@ const StructuredListSkeleton = ({ rowCount, border, className, ...rest }) => {
   }
 
   return (
-    <section className={StructuredListSkeletonClasses} {...rest}>
+    <div className={StructuredListSkeletonClasses} {...rest}>
       <div className={`${prefix}--structured-list-thead`}>
         <div
           className={`${prefix}--structured-list-row ${prefix}--structured-list-row--header-row`}>
@@ -47,7 +47,7 @@ const StructuredListSkeleton = ({ rowCount, border, className, ...rest }) => {
         </div>
       </div>
       <div className={`${prefix}--structured-list-tbody`}>{rows}</div>
-    </section>
+    </div>
   );
 };
 

@@ -38,7 +38,7 @@ ButtonSkeleton.propTypes = {
   className: PropTypes.string,
 
   /**
-   * Optionally specify an href for your Button to become an <a> element
+   * Optionally specify an href for your Button to become an `<a>` element
    */
   href: PropTypes.string,
 

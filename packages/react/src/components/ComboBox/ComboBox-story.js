@@ -6,7 +6,6 @@
  */
 
 import React from 'react';
-import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 import { withKnobs, boolean, select, text } from '@storybook/addon-knobs';
 import ComboBox from '../ComboBox';
@@ -63,27 +62,30 @@ const props = () => ({
   size: select('Field size (size)', sizes, undefined) || undefined,
   direction: select('Dropdown direction (direction)', directions, 'bottom'),
   onChange: action('onChange'),
+  onToggleClick: action('onClick'),
 });
 
-storiesOf('ComboBox', module)
-  .addParameters({
+export default {
+  title: 'ComboBox',
+  decorators: [withKnobs],
+
+  parameters: {
     component: ComboBox,
-  })
-  .addDecorator(withKnobs)
-  .add(
-    'Default',
-    () => (
-      <div style={{ width: 300 }}>
-        <ComboBox
-          items={items}
-          itemToString={(item) => (item ? item.text : '')}
-          {...props()}
-        />
-      </div>
-    ),
-    {
-      info: {
-        text: 'ComboBox',
-      },
-    }
-  );
+  },
+};
+
+export const Default = () => (
+  <div style={{ width: 300 }}>
+    <ComboBox
+      items={items}
+      itemToString={(item) => (item ? item.text : '')}
+      {...props()}
+    />
+  </div>
+);
+
+Default.parameters = {
+  info: {
+    text: 'ComboBox',
+  },
+};

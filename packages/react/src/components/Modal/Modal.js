@@ -12,6 +12,7 @@ import { settings } from 'carbon-components';
 import { Close20 } from '@carbon/icons-react';
 import toggleClass from '../../tools/toggleClass';
 import Button from '../Button';
+import ButtonSet from '../ButtonSet';
 import deprecate from '../../prop-types/deprecate';
 import requiredIfGivenPropIsTruthy from '../../prop-types/requiredIfGivenPropIsTruthy';
 import wrapFocus, {
@@ -419,7 +420,7 @@ export default class Modal extends Component {
           <div className={`${prefix}--modal-content--overflow-indicator`} />
         )}
         {!passiveModal && (
-          <div className={`${prefix}--modal-footer`}>
+          <ButtonSet className={`${prefix}--modal-footer`}>
             <Button kind="secondary" onClick={onSecondaryButtonClick}>
               {secondaryButtonText}
             </Button>
@@ -430,7 +431,7 @@ export default class Modal extends Component {
               ref={this.button}>
               {primaryButtonText}
             </Button>
-          </div>
+          </ButtonSet>
         )}
       </div>
     );

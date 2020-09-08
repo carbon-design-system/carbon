@@ -129,7 +129,7 @@ Button.propTypes = {
   hasIconOnly: PropTypes.bool,
 
   /**
-   * Optionally specify an href for your Button to become an <a> element
+   * Optionally specify an href for your Button to become an `<a>` element
    */
   href: PropTypes.string,
 
@@ -206,6 +206,8 @@ Button.defaultProps = {
   disabled: false,
   kind: 'primary',
   size: 'default',
+  tooltipAlignment: 'center',
+  tooltipPosition: 'top',
 };
 
 export default Button;

@@ -13,3 +13,16 @@ $css--reset: false;
   min-height: 320px;
   background-color: $ui-01;
 }
+
+.bx--tabs--container.bx--tabs--light ~ div {
+  background-color: $ui-background;
+}
+
+.tabs-story-wrapper--light {
+  background-color: $ui-01;
+}
+
+.container-tabs-story-wrapper--light {
+  padding: 2rem 1rem;
+  background-color: $ui-01;
+}
