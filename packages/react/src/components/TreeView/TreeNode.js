@@ -59,7 +59,8 @@ export default function TreeNode({
     [`${prefix}--tree-parent-node`]: children,
   });
   const toggleClasses = classNames(`${prefix}--tree-parent-node__toggle-icon`, {
-    [`${prefix}--tree-parent-node__toggle-icon--expanded`]: expanded,
+    [`${prefix}--tree-parent-node__toggle-icon--expanded`]:
+      isExpanded === undefined ? expanded : isExpanded,
   });
   function handleToggleClick(event) {
     if (onToggle) {
@@ -194,7 +195,9 @@ export default function TreeNode({
     );
   }
   return (
-    <li {...treeNodeProps} aria-expanded={!!expanded}>
+    <li
+      {...treeNodeProps}
+      aria-expanded={isExpanded === undefined ? !!expanded : isExpanded}>
       <div className={`${prefix}--tree-node__label`} ref={currentNodeLabel}>
         {/* https://github.com/carbon-design-system/carbon/pull/6008#issuecomment-675738670 */}
         {/* eslint-disable-next-line jsx-a11y/click-events-have-key-events, jsx-a11y/no-static-element-interactions */}
@@ -209,11 +212,13 @@ export default function TreeNode({
           {label}
         </span>
       </div>
-      {expanded && (
-        <ul role="group" className={`${prefix}--tree-node__children`}>
-          {nodesWithProps}
-        </ul>
-      )}
+      {isExpanded === undefined
+        ? expanded
+        : isExpanded && (
+            <ul role="group" className={`${prefix}--tree-node__children`}>
+              {nodesWithProps}
+            </ul>
+          )}
     </li>
   );
 }
