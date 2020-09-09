@@ -127,12 +127,14 @@ export default function checkRule(
     const tokenizedValue = tokenizeValue(decl.value);
 
     if (tokenizedValue && tokenizedValue.error) {
-      // eslint-disable-next-line no-console
-      console.warn(
-        `Unexpected syntax in decl: ${JSON.stringify(
-          decl
-        )}. \n\n HELP. If you see this message PLEASE copy the contents of the message above and raise a github issue. Thankyou in advance for helping us to improve the tool.`
-      );
+      if (!__DEV__) {
+        // eslint-disable-next-line no-console
+        console.warn(
+          `Unexpected syntax in decl: ${JSON.stringify(
+            decl
+          )}. \n\n HELP. If you see this message PLEASE copy the contents of the message above and raise a github issue. Thankyou in advance for helping us to improve the tool.`
+        );
+      }
     } else {
       if (isVariable(decl.prop)) {
         // add to variable declarations

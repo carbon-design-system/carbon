@@ -3,6 +3,10 @@
 import _ from 'lodash';
 import stylelint from 'stylelint';
 
+if (global.__DEV__ === undefined) {
+  global.__DEV__ = false;
+}
+
 global.testRule = (rule, schema) => {
   expect.extend({
     toHaveMessage(testCase) {
@@ -22,8 +26,9 @@ global.testRule = (rule, schema) => {
 
   // eslint-disable-next-line jest/valid-describe
   describe(`${schema.ruleName}`, () => {
+    const src = __DEV__ ? './packages/stylelint-carbon-use/src' : './src';
     const stylelintConfig = {
-      plugins: ['./src'],
+      plugins: [src],
       rules: {
         [schema.ruleName]: schema.config,
       },

@@ -6,10 +6,12 @@ export default function isValidOption(option) {
 
   for (const opt of arrOpts) {
     if (!getPropSpec(opt)) {
-      // eslint-disable-next-line no-console
-      console.warn(
-        `Invalid option supplied, expect regular expression or string. "${opt}"`
-      );
+      if (!__DEV__) {
+        // eslint-disable-next-line no-console
+        console.warn(
+          `Invalid option supplied, expect regular expression or string. "${opt}"`
+        );
+      }
 
       return false;
     }
