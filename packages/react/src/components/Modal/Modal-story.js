@@ -116,7 +116,7 @@ export default {
   },
 };
 
-export const _Default = () => {
+export const Default = () => {
   const { size, ...rest } = props();
   return (
     <Modal {...rest} size={size || undefined}>
@@ -181,7 +181,7 @@ export const _Default = () => {
   );
 };
 
-_Default.parameters = {
+Default.parameters = {
   info: {
     text: `
         Modals communicate information via a secondary window and allow the user to maintain the context of a particular task.
