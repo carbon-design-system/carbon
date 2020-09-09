@@ -33,7 +33,7 @@
     min-width: rem(32px);
     // restricts size of contained elements
     max-width: 100%;
-    min-height: 1.8rem;
+    min-height: 1.5rem;
     margin: $carbon--spacing-02;
     padding: $carbon--spacing-02 $carbon--spacing-03;
     word-break: break-word;
@@ -158,10 +158,10 @@
 
   .#{$prefix}--tag__close-icon {
     flex-shrink: 0;
-    width: rem(20px);
-    height: rem(20px);
+    width: rem(16px);
+    height: rem(16px);
     margin: 0 0 0 rem(4px);
-    padding: rem(2px);
+    padding: 0;
     color: currentColor;
     background-color: transparent;
     border: 0;
