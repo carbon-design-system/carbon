@@ -14710,7 +14710,7 @@ Code snippet styles
   .#{$prefix}--snippet--multi .#{$prefix}--snippet-container pre {
     padding-right: $carbon--spacing-08;
     padding-bottom: rem(24px);
-    overflow-x: scroll;
+    overflow-x: auto;
   }
 
   .#{$prefix}--snippet--multi.#{$prefix}--snippet--no-copy
