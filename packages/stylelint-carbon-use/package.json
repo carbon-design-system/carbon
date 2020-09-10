@@ -1,18 +1,13 @@
 {
   "name": "stylelint-carbon-use",
   "description": "A stylelint plugin to support the use of carbon component tokens.",
-  "version": "0.1.0",
+  "version": "0.0.0",
   "license": "Apache-2.0",
-  "main": "dist/index.js",
+  "main": "lib/index.js",
   "repository": "https://github.com/carbon-design-system/carbon/tree/master/packages/stylelint-carbon-use",
   "bugs": "https://github.com/carbon-design-system/carbon/issues",
-  "engines": {
-    "node": ">=10"
-  },
   "files": [
-    "dist",
-    "docs",
-    "src/**/README.md",
+    "lib",
     "!**/__tests__"
   ],
   "keywords": [
@@ -30,8 +25,8 @@
     "access": "public"
   },
   "scripts": {
-    "build": "babel src --out-dir dist",
-    "clean": "rimraf dist"
+    "build": "babel src --out-dir lib",
+    "clean": "rimraf lib"
   },
   "peerDependencies": {},
   "dependencies": {
@@ -47,7 +42,22 @@
     "postcss-value-parser": "^4.0.3"
   },
   "devDependencies": {
+    "@babel/cli": "^7.11.6",
+    "@babel/core": "^7.11.6",
+    "@babel/preset-env": "^7.11.5",
     "rimraf": "^3.0.2",
     "stylelint": "^13.3.2"
+  },
+  "babel": {
+    "presets": [
+      [
+        "@babel/preset-env",
+        {
+          "targets": {
+            "node": "12"
+          }
+        }
+      ]
+    ]
   }
 }
