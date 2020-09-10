@@ -215,7 +215,6 @@ export default class DatePicker extends Component {
       'da',
       'de',
       'en',
-      'en',
       'eo',
       'es',
       'et',
