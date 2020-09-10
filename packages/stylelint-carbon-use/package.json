@@ -1,24 +1,47 @@
 {
   "name": "stylelint-carbon-use",
-  "version": "0.1.0",
   "description": "A stylelint plugin to support the use of carbon component tokens.",
+  "version": "0.1.0",
+  "license": "Apache-2.0",
+  "main": "dist/index.js",
+  "repository": "https://github.com/carbon-design-system/carbon/tree/master/packages/stylelint-carbon-use",
+  "bugs": "https://github.com/carbon-design-system/carbon/issues",
+  "engines": {
+    "node": ">=10"
+  },
+  "files": [
+    "dist",
+    "docs",
+    "src/**/README.md",
+    "!**/__tests__"
+  ],
   "keywords": [
     "stylelint",
     "stylelint-plugin",
     "css",
     "carbon",
-    "scss"
+    "scss",
+    "ibm",
+    "carbon-design-system",
+    "components",
+    "react"
   ],
-  "author": "Lee Chase <lee.chase@uk.ibm.com>",
-  "license": "Apache-2.0",
-  "babel": {
-    "presets": [
-      "@babel/env"
-    ]
+  "publishConfig": {
+    "access": "public"
   },
-  "bugs": {
-    "url": "https://github.com/kristerkari/stylelint-scss/issues"
+  "scripts": {
+    "prebuild": "rimraf dist",
+    "build": "babel src --out-dir dist",
+    "prepublishOnly": "npm run build",
+    "release": "npmpub",
+    "jest": "jest",
+    "test": "npm run jest -- --coverage",
+    "watch": "npm run jest -- --watch",
+    "test-rule": "npm run jest",
+    "test-util": "npm run jest",
+    "generate-contributors-list": "githubcontrib --owner lee-chase --repo stylelint-scss --cols 6 --sortOrder desc --filter greenkeeper[bot],dependabot[bot] --showlogin true --imagesize 80 --format html"
   },
+  "peerDependencies": {},
   "dependencies": {
     "@carbon/colors": "^10.13.0",
     "@carbon/motion": "^10.9.0",
@@ -44,20 +67,10 @@
     "rimraf": "^3.0.2",
     "stylelint": "^13.3.2"
   },
-  "peerDependencies": {},
-  "engines": {
-    "node": ">=10"
-  },
-  "files": [
-    "dist",
-    "docs",
-    "src/**/README.md",
-    "!**/__tests__"
-  ],
-  "main": "dist/index.js",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/lee-chase/carbon-use.git"
+  "babel": {
+    "presets": [
+      "@babel/env"
+    ]
   },
   "jest": {
     "clearMocks": true,
@@ -90,16 +103,5 @@
       "^.+\\.jsx?$": "./babel-jest.js"
     }
   },
-  "scripts": {
-    "prebuild": "rimraf dist",
-    "build": "babel src --out-dir dist",
-    "prepublishOnly": "npm run build",
-    "release": "npmpub",
-    "jest": "jest",
-    "test": "npm run jest -- --coverage",
-    "watch": "npm run jest -- --watch",
-    "test-rule": "npm run jest",
-    "test-util": "npm run jest",
-    "generate-contributors-list": "githubcontrib --owner lee-chase --repo stylelint-scss --cols 6 --sortOrder desc --filter greenkeeper[bot],dependabot[bot] --showlogin true --imagesize 80 --format html"
-  }
+  "author": "Lee Chase <lee.chase@uk.ibm.com>"
 }
