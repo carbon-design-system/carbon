@@ -23858,10 +23858,10 @@ Tag styles
 
   .#{$prefix}--tag__close-icon {
     flex-shrink: 0;
-    width: rem(20px);
-    height: rem(20px);
+    width: rem(16px);
+    height: rem(16px);
     margin: 0 0 0 rem(4px);
-    padding: rem(2px);
+    padding: 0;
     color: currentColor;
     background-color: transparent;
     border: 0;
