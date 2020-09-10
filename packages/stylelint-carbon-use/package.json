@@ -41,7 +41,6 @@
     "eslint-config-prettier": "^6.11.0",
     "eslint-config-stylelint": "^11.1.0",
     "github-contributors-list": "^1.2.4",
-    "husky": "^4.2.5",
     "jest": "^25.3.0",
     "jest-cli": "^25.3.0",
     "lint-staged": "^10.1.3",
