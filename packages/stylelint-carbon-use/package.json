@@ -47,51 +47,9 @@
     "postcss-value-parser": "^4.0.3"
   },
   "devDependencies": {
-    "@babel/cli": "^7.8.4",
-    "@babel/core": "^7.9.0",
-    "@babel/preset-env": "^7.9.5",
-    "babel-plugin-istanbul": "^6.0.0",
-    "babel-preset-jest": "^25.3.0",
     "jest": "^25.3.0",
     "jest-cli": "^25.3.0",
-    "prettier": "^2.0.0",
     "rimraf": "^3.0.2",
     "stylelint": "^13.3.2"
-  },
-  "babel": {
-    "presets": [
-      "@babel/env"
-    ]
-  },
-  "jest": {
-    "clearMocks": true,
-    "collectCoverage": false,
-    "collectCoverageFrom": [
-      "src/**/*.js"
-    ],
-    "coverageDirectory": "./.coverage/",
-    "coverageReporters": [
-      "lcov",
-      "text"
-    ],
-    "coverageThreshold": {
-      "global": {
-        "branches": 75,
-        "functions": 75,
-        "lines": 75,
-        "statements": 75
-      }
-    },
-    "setupFiles": [
-      "./jest-setup.js"
-    ],
-    "testEnvironment": "node",
-    "roots": [
-      "src"
-    ],
-    "testRegex": ".*\\.test\\.js$|src/.*/__tests__/.*\\.js$",
-    "transform": {
-      "^.+\\.jsx?$": "./babel-jest.js"
-    }
   }
 }

@@ -152,6 +152,9 @@
       "json",
       "node"
     ],
+    "projects": [
+      "<rootDir>/packages/stylelint-carbon-use"
+    ],
     "reporters": [
       "default",
       "jest-junit"
