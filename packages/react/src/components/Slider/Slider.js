@@ -497,6 +497,7 @@ export default class Slider extends PureComponent {
       disabled,
       name,
       light,
+      invalid,
       ...other
     } = this.props;
 
@@ -552,6 +553,7 @@ export default class Slider extends PureComponent {
             onKeyDown={this.onKeyDown}
             role="presentation"
             tabIndex={-1}
+            data-invalid={invalid || null}
             {...other}>
             <div
               className={`${prefix}--slider__thumb`}
@@ -591,6 +593,8 @@ export default class Slider extends PureComponent {
             max={max}
             step={step}
             onChange={this.onChange}
+            data-invalid={invalid || null}
+            aria-invalid={invalid || null}
           />
         </div>
       </div>
