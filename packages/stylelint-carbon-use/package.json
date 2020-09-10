@@ -37,13 +37,8 @@
     "@babel/preset-env": "^7.9.5",
     "babel-plugin-istanbul": "^6.0.0",
     "babel-preset-jest": "^25.3.0",
-    "eslint": "^6.8.0",
-    "eslint-config-prettier": "^6.11.0",
-    "eslint-config-stylelint": "^11.1.0",
-    "github-contributors-list": "^1.2.4",
     "jest": "^25.3.0",
     "jest-cli": "^25.3.0",
-    "lint-staged": "^10.1.3",
     "npmpub": "^5.0.0",
     "prettier": "^2.0.0",
     "rimraf": "^3.0.2",
@@ -52,53 +47,6 @@
   "peerDependencies": {},
   "engines": {
     "node": ">=10"
-  },
-  "eslintConfig": {
-    "extends": [
-      "eslint:recommended",
-      "stylelint",
-      "prettier"
-    ],
-    "parserOptions": {
-      "sourceType": "module",
-      "ecmaVersion": 6
-    },
-    "env": {
-      "es6": true,
-      "jest": true,
-      "node": true
-    },
-    "globals": {
-      "testRule": true,
-      "testConfig": true
-    },
-    "rules": {
-      "eqeqeq": "error",
-      "no-use-before-define": [
-        "error",
-        "nofunc"
-      ],
-      "sort-requires/sort-requires": "error",
-      "strict": [
-        "error",
-        "global"
-      ],
-      "arrow-spacing": "error",
-      "no-var": "error",
-      "object-shorthand": "error",
-      "prefer-const": "error",
-      "template-curly-spacing": "error",
-      "node/no-unsupported-features/es-syntax": [
-        "error",
-        {
-          "version": ">=8.0.0",
-          "ignores": [
-            "modules"
-          ]
-        }
-      ],
-      "eslint-comments/no-unlimited-disable": "warn"
-    }
   },
   "files": [
     "dist",
@@ -145,10 +93,7 @@
   "scripts": {
     "prebuild": "rimraf dist",
     "build": "babel src --out-dir dist",
-    "lint": "eslint src --ignore-path .gitignore",
-    "prettify": "prettier --write \"src/**/*.js\"",
     "prepublishOnly": "npm run build",
-    "pretest": "npm run lint",
     "release": "npmpub",
     "jest": "jest",
     "test": "npm run jest -- --coverage",
@@ -156,15 +101,5 @@
     "test-rule": "npm run jest",
     "test-util": "npm run jest",
     "generate-contributors-list": "githubcontrib --owner lee-chase --repo stylelint-scss --cols 6 --sortOrder desc --filter greenkeeper[bot],dependabot[bot] --showlogin true --imagesize 80 --format html"
-  },
-  "lint-staged": {
-    "**/*.{js,json}": [
-      "prettier --write"
-    ]
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged"
-    }
   }
 }
