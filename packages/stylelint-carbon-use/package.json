@@ -47,8 +47,6 @@
     "postcss-value-parser": "^4.0.3"
   },
   "devDependencies": {
-    "jest": "^25.3.0",
-    "jest-cli": "^25.3.0",
     "rimraf": "^3.0.2",
     "stylelint": "^13.3.2"
   }
