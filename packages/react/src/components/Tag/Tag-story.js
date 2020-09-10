@@ -9,7 +9,7 @@ import React from 'react';
 import { withKnobs, select, text, boolean } from '@storybook/addon-knobs';
 import Tag, { types as typesList } from '../Tag';
 import TagSkeleton from '../Tag/Tag.Skeleton';
-import { action } from '@storybook/addon-actions/dist/preview';
+import { action } from '@storybook/addon-actions';
 import mdx from './Tag.mdx';
 
 const props = {

@@ -1,4 +1,4 @@
-import { Story, Preview, Props } from '@storybook/addon-docs/blocks';
+import { Story, Canvas, ArgsTable } from '@storybook/addon-docs/blocks';
 import { Checkbox, CheckboxSkeleton } from '../Checkbox';
 
 # Checkbox
@@ -21,9 +21,9 @@ import { Checkbox, CheckboxSkeleton } from '../Checkbox';
 You can build a checkbox using the `Checkbox` in combination with a `<fieldset>`
 element to group controls and `<legend>` element for the label.
 
-<Preview>
+<Canvas>
   <Story id="checkbox--checkbox" />
-</Preview>
+</Canvas>
 
 ### Controlled example
 
@@ -42,13 +42,13 @@ You can use the `CheckboxSkeleton` component to render a skeleton variant of a
 checkbox. This is useful to display while content in your checkbox is being
 fetched from an external resource like an API.
 
-<Preview>
+<Canvas>
   <Story id="checkbox--skeleton" />
-</Preview>
+</Canvas>
 
 ## Component API
 
-<Props />
+<ArgsTable />
 
 ### Checkbox defaultChecked
 

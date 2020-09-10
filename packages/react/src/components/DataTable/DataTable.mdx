@@ -1,4 +1,4 @@
-import { Story, Props, Source, Preview } from '@storybook/addon-docs/blocks';
+import { Story, ArgsTable, Source, Canvas } from '@storybook/addon-docs/blocks';
 
 # DataTable
 
@@ -8,9 +8,9 @@ import { Story, Props, Source, Preview } from '@storybook/addon-docs/blocks';
 &nbsp;|&nbsp;
 [Accessibility](https://www.carbondesignsystem.com/components/data-table/accessibility)
 
-<Preview>
+<Canvas>
   <Story id="datatable--usage" />
-</Preview>
+</Canvas>
 
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
@@ -141,9 +141,9 @@ into your render prop, visit the [render props](#render-props) section.
 In order to sort the rows in your data table, you will need to pass in the
 `isSortable` prop to the `DataTable` component.
 
-<Preview>
+<Canvas>
   <Story id="datatable-sorting--usage" />
-</Preview>
+</Canvas>
 
 Optionally, you can pass in `isSortable` to each `TableHeader` that you want to
 be sorted, or not sorted. This is useful if you only want to enable sorting on
@@ -194,9 +194,9 @@ function customSortRow(cellA, cellB, { sortDirection, sortStates, locale }) {
 The `DataTable` components supports row-level expansion when combined with the
 `TableExpandHeader`, `TableExpandRow`, and `TableExpandedRow` components.
 
-<Preview>
+<Canvas>
   <Story id="datatable-expansion--usage" />
-</Preview>
+</Canvas>
 
 _Note: press "Show code" above to view a code snippet of this example_
 
@@ -217,9 +217,9 @@ row id as a single argument.
 The `DataTable` component supports row selection when used with the
 `TableSelectAll` and `TableSelectRow` components.
 
-<Preview>
+<Canvas>
   <Story id="datatable-selection--usage" />
-</Preview>
+</Canvas>
 
 _Note: press "Show code" above to view a code snippet of this example_
 
@@ -253,9 +253,9 @@ the `TableToolbarSearch` component. Any input entered through
 By default `filterRows` is provided through our default implementation. However,
 you can provide your own method if needed.
 
-<Preview>
+<Canvas>
   <Story id="datatable-filtering--usage" />
-</Preview>
+</Canvas>
 
 In order to integrate filtering into your data table, you will need to provide
 the `onInputChange` function provided to you from `DataTable`'s render prop and
@@ -276,15 +276,15 @@ the following components:
 - `TableSelectAll`
 - `TableSelectRow`
 
-<Preview>
+<Canvas>
   <Story id="datatable-batch-actions--usage" />
-</Preview>
+</Canvas>
 
 _Note: press "Show code" above to view a code snippet of this example_
 
 ## Props
 
-<Props />
+<ArgsTable />
 
 ### Render props
 

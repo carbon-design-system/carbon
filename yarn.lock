@@ -2575,13 +2575,6 @@
     "@carbon/icon-helpers" "0.0.1-beta.5"
     prop-types "^15.6.2"
 
-"@carbon/icons-react@^10.17.0":
-  version "10.17.0"
-  resolved "https://registry.yarnpkg.com/@carbon/icons-react/-/icons-react-10.17.0.tgz#17c0450f2280680e6e6c778f68613723c55f8f39"
-  integrity sha512-XAz8RZW+na2ZAGLrw+ojYtI+RwyiGTnmAM0H+TWeG451hZHJ84CnU34G608h9eThndgFgAYYPr4ariFlaXdgZA==
-  dependencies:
-    "@carbon/icon-helpers" "^10.9.0"
-
 "@chromaui/localtunnel@1.10.1":
   version "1.10.1"
   resolved "https://registry.yarnpkg.com/@chromaui/localtunnel/-/localtunnel-1.10.1.tgz#34da7dab7055a16b1b9034a9eb7e3054ebec4b98"
@@ -8818,15 +8811,6 @@ carbon-components-react@^6.0.0:
     react-is "^16.8.2"
     warning "^3.0.0"
     window-or-global "^1.0.1"
-
-carbon-components@^10.19.0:
-  version "10.19.0"
-  resolved "https://registry.yarnpkg.com/carbon-components/-/carbon-components-10.19.0.tgz#276924da9d8ba792d6f4c3964b77e26d1ee7619d"
-  integrity sha512-lQ3L9VyR8nYq+YkSBfH+b10TfTRrE7oamAaxcoKr2m2M0Mi6tW5jxZlxq86kIJxjdgY2LnzApP7rlra+Yq16fg==
-  dependencies:
-    flatpickr "4.6.1"
-    lodash.debounce "^4.0.8"
-    warning "^3.0.0"
 
 carbon-components@^9.0.0:
   version "9.91.5"

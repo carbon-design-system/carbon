@@ -1,4 +1,4 @@
-import { Story, Preview, Props } from '@storybook/addon-docs/blocks';
+import { Story, Canvas, ArgsTable } from '@storybook/addon-docs/blocks';
 
 # Grid
 
@@ -39,9 +39,9 @@ build a variety of layouts. You can import these components from
 import { Grid, Row, Column } from 'carbon-components-react';
 ```
 
-<Preview>
+<Canvas>
   <Story id="grid--responsive-grid" />
-</Preview>
+</Canvas>
 
 ## Overview
 
@@ -89,9 +89,9 @@ You can pair up multiple breakpoint props to specify how many columns the
 we will use the `sm`, `md`, and `lg` prop to specify how many columns the
 `Column` components should span at the small, medium, and large breakpoints.
 
-<Preview>
+<Canvas>
   <Story id="grid--responsive-grid" />
-</Preview>
+</Canvas>
 
 ## Grid modes
 
@@ -109,27 +109,27 @@ to mix-and-match certain grid modes to achieve a particular layout.
 
 ### Wide grid
 
-<Preview>
+<Canvas>
   <Story id="grid--responsive-grid" />
-</Preview>
+</Canvas>
 
 ### Narrow grid
 
-<Preview>
+<Canvas>
   <Story id="grid--narrow" />
-</Preview>
+</Canvas>
 
 ### Condensed grid
 
-<Preview>
+<Canvas>
   <Story id="grid--condensed" />
-</Preview>
+</Canvas>
 
 ### Mix-and-match
 
-<Preview>
+<Canvas>
   <Story id="grid--mixed-grid-modes" />
-</Preview>
+</Canvas>
 
 ## Auto columns
 
@@ -147,9 +147,9 @@ For example, if you have on `Column` component it would span 100%, two `Column`
 components would span 50% each, four `Column` components would span 25% each,
 and so on.
 
-<Preview>
+<Canvas>
   <Story id="grid--auto-columns" />
-</Preview>
+</Canvas>
 
 ## Offset columns
 
@@ -168,13 +168,13 @@ breakpoint. At the medium breakpoint, it will be offset by two columns.
 <Column sm={2} md={{ span: 4, offset: 2 }} />
 ```
 
-<Preview>
+<Canvas>
   <Story id="grid--offset" />
-</Preview>
+</Canvas>
 
 ## Component API
 
-<Props />
+<ArgsTable />
 
 ### Using the `as` prop
 
