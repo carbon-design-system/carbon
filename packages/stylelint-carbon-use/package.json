@@ -30,16 +30,8 @@
     "access": "public"
   },
   "scripts": {
-    "prebuild": "rimraf dist",
     "build": "babel src --out-dir dist",
-    "prepublishOnly": "npm run build",
-    "release": "npmpub",
-    "jest": "jest",
-    "test": "npm run jest -- --coverage",
-    "watch": "npm run jest -- --watch",
-    "test-rule": "npm run jest",
-    "test-util": "npm run jest",
-    "generate-contributors-list": "githubcontrib --owner lee-chase --repo stylelint-scss --cols 6 --sortOrder desc --filter greenkeeper[bot],dependabot[bot] --showlogin true --imagesize 80 --format html"
+    "clean": "rimraf dist"
   },
   "peerDependencies": {},
   "dependencies": {
@@ -62,7 +54,6 @@
     "babel-preset-jest": "^25.3.0",
     "jest": "^25.3.0",
     "jest-cli": "^25.3.0",
-    "npmpub": "^5.0.0",
     "prettier": "^2.0.0",
     "rimraf": "^3.0.2",
     "stylelint": "^13.3.2"
@@ -102,6 +93,5 @@
     "transform": {
       "^.+\\.jsx?$": "./babel-jest.js"
     }
-  },
-  "author": "Lee Chase <lee.chase@uk.ibm.com>"
+  }
 }
