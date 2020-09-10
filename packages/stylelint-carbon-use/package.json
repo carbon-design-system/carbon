@@ -20,10 +20,10 @@
     "url": "https://github.com/kristerkari/stylelint-scss/issues"
   },
   "dependencies": {
-    "@carbon/colors": "^10.9.2",
+    "@carbon/colors": "^10.13.0",
     "@carbon/motion": "^10.9.0",
-    "@carbon/themes": "^10.11.0",
-    "carbon-components": "^10.15.0",
+    "@carbon/themes": "^10.18.0",
+    "carbon-components": "^10.19.0",
     "postcss": "^7.0.27",
     "postcss-media-query-parser": "^0.2.3",
     "postcss-resolve-nested-selector": "^0.1.1",
