@@ -327,11 +327,11 @@ class OverflowMenu extends Component {
     }
   };
 
-  closeMenu = (cb) => {
+  closeMenu = (onCloseMenu) => {
     this.setState({ open: false }, () => {
       // Optional callback to be executed after the state as been set to close
-      if (cb) {
-        cb();
+      if (onCloseMenu) {
+        onCloseMenu();
       }
       this.props.onClose();
     });
