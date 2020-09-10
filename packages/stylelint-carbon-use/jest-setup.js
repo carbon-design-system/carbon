@@ -1,5 +1,3 @@
-'use strict'; // eslint-disable-line strict
-
 import _ from 'lodash';
 import stylelint from 'stylelint';
 

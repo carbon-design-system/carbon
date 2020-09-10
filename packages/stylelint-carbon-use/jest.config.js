@@ -8,6 +8,22 @@
 'use strict';
 
 module.exports = {
-  setupFiles: ['./jest-setup.js'],
+  setupFiles: ['../../tasks/jest/setup.js', './jest-setup.js'],
   testEnvironment: 'node',
+  testMatch: ['<rootDir>/**/__tests__/**/*.js?(x)'],
+  testPathIgnorePatterns: [
+    '/cjs/',
+    '/dist/',
+    '/es/',
+    '/lib/',
+    '/build/',
+    'e2e',
+    'examples',
+    '/umd/',
+  ],
+  transform: {
+    '^.+\\.(js|jsx)$': '../../tasks/jest/jsTransform.js',
+    '^.+\\.css$': '../../tasks/jest/cssTransform.js',
+    '^(?!.*\\.(js|jsx|css|json)$)': '../../tasks/jest/fileTransform.js',
+  },
 };
