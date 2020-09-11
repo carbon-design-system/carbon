@@ -1,10 +1,10 @@
 {
-  "name": "stylelint-carbon-use",
+  "name": "stylelint-plugin-carbon-tokens",
   "description": "A stylelint plugin to support the use of carbon component tokens.",
   "version": "0.0.0",
   "license": "Apache-2.0",
   "main": "lib/index.js",
-  "repository": "https://github.com/carbon-design-system/carbon/tree/master/packages/stylelint-carbon-use",
+  "repository": "https://github.com/carbon-design-system/carbon/tree/master/packages/stylelint-plugin-carbon-tokens",
   "bugs": "https://github.com/carbon-design-system/carbon/issues",
   "files": [
     "lib",

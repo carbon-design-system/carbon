@@ -10,7 +10,7 @@
 global.__DEV__ = true;
 
 // adds testRule - call after global.__DEV__ is set
-require('../../packages/stylelint-carbon-use/jest-setup.js');
+require('../../packages/stylelint-plugin-carbon-tokens/jest-setup.js');
 
 jest.setTimeout(20000);
 

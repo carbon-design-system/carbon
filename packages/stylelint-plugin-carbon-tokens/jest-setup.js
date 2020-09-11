@@ -26,7 +26,9 @@ global.testRule = (rule, schema) => {
   });
 
   describe(`${schema.ruleName}`, () => {
-    const src = __DEV__ ? './packages/stylelint-carbon-use/src' : './src';
+    const src = __DEV__
+      ? './packages/stylelint-plugin-carbon-tokens/src'
+      : './src';
     const stylelintConfig = {
       plugins: [src],
       rules: {

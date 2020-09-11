@@ -1,21 +1,21 @@
-# stylelint-carbon-use
+# stylelint-plugin-carbon-tokens
 
 > A stylelint plugin to support the use of carbon component tokens.
 
 ## Getting started
 
-To install `stylelint-carbon-use` in your project, you will need to run the
-following command using [npm](https://www.npmjs.com/):
+To install `stylelint-plugin-carbon-tokens` in your project, you will need to
+run the following command using [npm](https://www.npmjs.com/):
 
 ```bash
-npm install -S stylelint-carbon-use
+npm install -S stylelint-plugin-carbon-tokens
 ```
 
 If you prefer [Yarn](https://yarnpkg.com/en/), use the following command
 instead:
 
 ```bash
-yarn add stylelint-carbon-use
+yarn add stylelint-plugin-carbon-tokens
 ```
 
 ## Usage
@@ -53,17 +53,17 @@ disable the linter. E.g. // stylelint-disable-next-line
 
 ```bash
 # NOT YET DEPLOYED TO NPM
-# npm install @carbon/stylelint-carbon-use
-npm install git+https://git@github.com/lee-chase/carbon-use.git
+# npm install @carbon/stylelint-plugin-carbon-tokens
+npm install --dev stylelint-plugin-carbon-tokens
 ```
 
 ```bash
 # NOT YET DEPLOYED TO NPM
-# yarn add @carbon/stylelint-carbon-use
-yarn add git+https://git@github.com/lee-chase/carbon-use.git
+# yarn add @carbon/stylelint-plugin-carbon-tokens
+yarn add -D stylelint-plugin-carbon-tokens
 ```
 
-### Usage
+### Typical Usage
 
 Add it to your stylelint config `plugins` array.
 
@@ -71,7 +71,7 @@ Add it to your stylelint config `plugins` array.
 module.exports = {
   // stylelint.js
   // ...
-  plugins: ['stylelint-carbon-use'],
+  plugins: ['stylelint-plugin-carbon-tokens'],
   //...
 };
 ```
