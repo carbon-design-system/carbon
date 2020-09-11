@@ -124,7 +124,7 @@ letter-spacing: 0;"
 exports[`styles expressiveParagraph01 should be printable 1`] = `
 "font-size: 1.5rem;
 font-weight: 300;
-line-height: 1.25;
+line-height: 1.3;
 letter-spacing: 0;
 lg: [object Object];
 max: [object Object];"
