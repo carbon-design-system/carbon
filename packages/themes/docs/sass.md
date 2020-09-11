@@ -4846,6 +4846,7 @@ $expressive-heading-03: if(
       ),
       max: (
         font-size: 1.5rem,
+        line-height: 1.3,
       ),
     ),
   )
@@ -5017,7 +5018,7 @@ $expressive-paragraph-01: if(
   (
     font-size: 1.5rem,
     font-weight: 300,
-    line-height: 1.25,
+    line-height: 1.3,
     letter-spacing: 0,
     lg: (
       font-size: 1.75rem,
@@ -5064,7 +5065,7 @@ $quotation-01: if(
       lg: (
         font-size: 1.5rem,
         font-weight: 400,
-        line-height: 1.25,
+        line-height: 1.3,
         letter-spacing: 0,
       ),
       xlg: (
