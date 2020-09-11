@@ -607,6 +607,9 @@ Map {
       "open": Object {
         "type": "bool",
       },
+      "preventCloseOnClickOutside": Object {
+        "type": "bool",
+      },
       "selectorPrimaryFocus": Object {
         "type": "string",
       },
@@ -3193,6 +3196,7 @@ Map {
     "defaultProps": Object {
       "disabled": false,
       "onKeyDown": [Function],
+      "preventCloseOnClickOutside": false,
       "primaryButtonText": "Save",
       "secondaryButtonText": "Cancel",
       "selectorPrimaryFocus": "[data-modal-primary-focus]",
@@ -3237,6 +3241,9 @@ Map {
         "type": "func",
       },
       "passiveModal": Object {
+        "type": "bool",
+      },
+      "preventCloseOnClickOutside": Object {
         "type": "bool",
       },
       "primaryButtonText": Object {

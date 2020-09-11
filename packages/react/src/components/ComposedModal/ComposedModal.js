@@ -71,6 +71,8 @@ export default class ComposedModal extends Component {
      */
     open: PropTypes.bool,
 
+    preventCloseOnClickOutside: PropTypes.bool,
+
     /**
      * Specify a CSS selector that matches the DOM element that should be
      * focused when the Modal opens
@@ -108,6 +110,12 @@ export default class ComposedModal extends Component {
   };
 
   handleClick = (evt) => {
+    if (
+      !this.innerModal.current.contains(evt.target) &&
+      this.props.preventCloseOnClickOutside
+    ) {
+      return;
+    }
     if (
       this.innerModal.current &&
       !this.innerModal.current.contains(evt.target)
