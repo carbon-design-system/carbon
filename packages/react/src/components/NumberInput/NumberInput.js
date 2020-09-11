@@ -367,7 +367,6 @@ class NumberInput extends Component {
         </div>
       );
     } else if (warn) {
-      inputWrapperProps['data-warn'] = true;
       errorId = `${id}-error-id`;
       error = (
         <div className={`${prefix}--form-requirement`} id={errorId}>
@@ -394,6 +393,10 @@ class NumberInput extends Component {
       t('increment.number'),
       t('decrement.number'),
     ];
+
+    const wrapperClasses = classNames(`${prefix}--number__input-wrapper`, {
+      [`${prefix}--number__input-wrapper--warning`]: !isInputInvalid && warn,
+    });
 
     return (
       <div className={`${prefix}--form-item`}>
@@ -441,7 +444,7 @@ class NumberInput extends Component {
             return (
               <>
                 {labelText}
-                <div className={`${prefix}--number__input-wrapper`}>
+                <div className={wrapperClasses}>
                   <input
                     data-invalid={isInputInvalid}
                     aria-invalid={isInputInvalid}
