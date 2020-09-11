@@ -1,6 +1,6 @@
 # stylelint-config-carbon
 
-> Stylelint configuration for the Carbon Design System
+> Stylelint configuration for Carbon
 
 ## Getting started
 
@@ -25,7 +25,7 @@ You can use `stylelint-config-carbon` in your project by extending it in your
 
 ```json
 {
-  "extends": ["carbon"]
+  "extends": ["stylelint-config-carbon"]
 }
 ```
 

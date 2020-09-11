@@ -30,7 +30,7 @@ class Toggle extends React.Component {
     defaultToggled: PropTypes.bool,
 
     /**
-     * Provide an id that unique represents the underlying <input>
+     * Provide an id that unique represents the underlying `<input>`
      */
     id: PropTypes.string.isRequired,
 

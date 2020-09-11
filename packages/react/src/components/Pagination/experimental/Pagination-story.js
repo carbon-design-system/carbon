@@ -6,7 +6,6 @@
  */
 
 import React from 'react';
-import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 import {
   array,
@@ -39,72 +38,81 @@ const props = () => ({
   onChange: action('onChange'),
 });
 
-storiesOf('unstable_Pagination', module)
-  .addDecorator(withKnobs)
-  .addDecorator((story) => <div style={{ width: '800px' }}>{story()}</div>)
-  .add(
-    'with a page selector',
-    () => (
-      <Pagination
-        {...props()}
-        totalItems={350}
-        pageSizes={array('Choices of `pageSize` (pageSizes)', [10, 20, 30])}>
-        {({ currentPage, onSetPage, totalPages }) => (
-          <PageSelector
-            currentPage={currentPage}
-            id="select-1"
-            onChange={(event) => onSetPage(event.target.value)}
-            totalPages={totalPages}
-          />
-        )}
-      </Pagination>
-    ),
-    {
-      info: {
-        propTables: [Pagination, PageSelector],
-        text: `
-            🚨 This component is *experimental* and may change. 🚨
-            \`Pagination\` accepts a render prop \`children\`.
-            This example wraps the \`children\` (\`PageSelector\`) in a function, allowing it to pass information back to the parent component.
-            \`\`\`jsx
-            {/**
-              * Provide \`totalItems\` to \`Pagination\` when using the \`PageSelector\` child.
-              * \`Pagination\` uses \`totalItems\` to calculate \`totalPages\`.
-              * And then, \`PageSelector\` uses the calculated \`totalPages\` to accurately display page options.
-              */}
-            <Pagination
-              totalItems={350}
-              pageSizes={[10, 15, 20, 25]}
-            >
-              {/**
-                * Below, \`children\` is a render prop, wrapped in a function.
-                * - \`currentPage\` is used to display the current page.
-                * - \`onSetPage\` is used to update the current page state in the parent component.
-                * - \`totalPages\` is calculated using the \`totalItems\` value provided to the parent component, and then is displayed below.
-                */}
-              {({ currentPage, onSetPage, totalPages }) => (
-                <PageSelector
-                  currentPage={currentPage}
-                  id="select-1"
-                  onChange={event => onSetPage(event.target.value)}
-                  totalPages={totalPages}
-                />
-              )}
-            </Pagination>
-            \`\`\`
-          `,
-      },
-    }
-  )
-  .add(
-    'with no sizer, child input, or child selector',
-    () => <Pagination {...props()} totalItems={350} />,
-    {
-      info: {
-        text: `
-          🚨 This component is *experimental* and may change. 🚨
-          Without \`children\`, \`Pagination\` renders without a page selector.
-        `,
-      },
-    }
-  );
+export default {
+  title: 'unstable_Pagination',
+  decorators: [
+    withKnobs,
+    (story) => <div style={{ width: '800px' }}>{story()}</div>,
+  ],
+};
+
+export const WithAPageSelector = () => (
+  <Pagination
+    {...props()}
+    totalItems={350}
+    pageSizes={array('Choices of `pageSize` (pageSizes)', [10, 20, 30])}>
+    {({ currentPage, onSetPage, totalPages }) => (
+      <PageSelector
+        currentPage={currentPage}
+        id="select-1"
+        onChange={(event) => onSetPage(event.target.value)}
+        totalPages={totalPages}
+      />
+    )}
+  </Pagination>
+);
+
+WithAPageSelector.storyName = 'with a page selector';
+
+WithAPageSelector.parameters = {
+  info: {
+    propTables: [Pagination, PageSelector],
+    text: `
+        🚨 This component is *experimental* and may change. 🚨
+        \`Pagination\` accepts a render prop \`children\`.
+        This example wraps the \`children\` (\`PageSelector\`) in a function, allowing it to pass information back to the parent component.
+        \`\`\`jsx
+        {/**
+          * Provide \`totalItems\` to \`Pagination\` when using the \`PageSelector\` child.
+          * \`Pagination\` uses \`totalItems\` to calculate \`totalPages\`.
+          * And then, \`PageSelector\` uses the calculated \`totalPages\` to accurately display page options.
+          */}
+        <Pagination
+          totalItems={350}
+          pageSizes={[10, 15, 20, 25]}
+        >
+          {/**
+            * Below, \`children\` is a render prop, wrapped in a function.
+            * - \`currentPage\` is used to display the current page.
+            * - \`onSetPage\` is used to update the current page state in the parent component.
+            * - \`totalPages\` is calculated using the \`totalItems\` value provided to the parent component, and then is displayed below.
+            */}
+          {({ currentPage, onSetPage, totalPages }) => (
+            <PageSelector
+              currentPage={currentPage}
+              id="select-1"
+              onChange={event => onSetPage(event.target.value)}
+              totalPages={totalPages}
+            />
+          )}
+        </Pagination>
+        \`\`\`
+      `,
+  },
+};
+
+export const WithNoSizerChildInputOrChildSelector = () => (
+  <Pagination {...props()} totalItems={350} />
+);
+
+WithNoSizerChildInputOrChildSelector.storyName =
+  'with no sizer, child input, or child selector';
+
+WithNoSizerChildInputOrChildSelector.parameters = {
+  info: {
+    text: `
+      🚨 This component is *experimental* and may change. 🚨
+      Without \`children\`, \`Pagination\` renders without a page selector.
+    `,
+  },
+};

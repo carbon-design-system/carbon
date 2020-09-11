@@ -148,7 +148,7 @@ FileUploaderDropContainer.propTypes = {
   disabled: PropTypes.bool,
 
   /**
-   * Provide a unique id for the underlying <input> node
+   * Provide a unique id for the underlying `<input>` node
    */
   id: PropTypes.string,
 
@@ -164,7 +164,7 @@ FileUploaderDropContainer.propTypes = {
   multiple: PropTypes.bool,
 
   /**
-   * Provide a name for the underlying <input> node
+   * Provide a name for the underlying `<input>` node
    */
   name: PropTypes.string,
 
