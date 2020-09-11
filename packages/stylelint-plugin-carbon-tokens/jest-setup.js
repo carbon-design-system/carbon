@@ -26,9 +26,12 @@ global.testRule = (rule, schema) => {
   });
 
   describe(`${schema.ruleName}`, () => {
-    const src = __DEV__
-      ? './packages/stylelint-plugin-carbon-tokens/src'
-      : './src';
+    const cwd = process.cwd();
+    const src =
+      cwd.indexOf('stylelint-plugin-carbon-tokens') > -1
+        ? './src'
+        : './packages/stylelint-plugin-carbon-tokens/src';
+
     const stylelintConfig = {
       plugins: [src],
       rules: {
