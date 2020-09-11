@@ -176,10 +176,12 @@
     "whatwg-fetch": "^3.0.0"
   },
   "sideEffects": [
+    "css/**/*.css",
     "es/bundle.js",
     "es/globals/js/boot.js",
     "es/globals/js/watch.js",
     "scripts/*",
+    "scss/**/*.scss",
     "umd/bundle.js",
     "umd/globals/js/boot.js",
     "umd/globals/js/watch.js"
