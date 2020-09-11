@@ -53,7 +53,7 @@ module.exports = {
 
     // Custom property
     // Specify a pattern for custom properties.
-    'custom-property-pattern': 'ibm-.+',
+    'custom-property-pattern': OFF,
 
     // Property
     // Specify a blacklist of disallowed properties.
