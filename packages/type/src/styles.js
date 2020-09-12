@@ -149,6 +149,7 @@ export const expressiveHeading03 = {
     },
     max: {
       fontSize: rem(scale[5]),
+      lineHeight: 1.3,
     },
   },
 };
@@ -236,7 +237,7 @@ export const expressiveHeading06 = {
 export const expressiveParagraph01 = {
   fontSize: rem(scale[5]),
   fontWeight: fontWeights.light,
-  lineHeight: 1.25,
+  lineHeight: 1.3,
   letterSpacing: 0,
   lg: {
     fontSize: rem(scale[6]),
@@ -262,7 +263,7 @@ export const quotation01 = {
     lg: {
       fontSize: rem(scale[5]),
       fontWeight: fontWeights.regular,
-      lineHeight: 1.25,
+      lineHeight: 1.3,
       letterSpacing: 0,
     },
     xlg: {
