@@ -32,8 +32,8 @@
   "dependencies": {
     "@carbon/colors": "^10.13.0",
     "@carbon/motion": "^10.9.0",
-    "@carbon/themes": "^10.18.0",
-    "carbon-components": "^10.19.0",
+    "@carbon/themes": "^10.19.0-rc.0",
+    "carbon-components": "^10.20.0-rc.0",
     "postcss": "^7.0.27",
     "postcss-media-query-parser": "^0.2.3",
     "postcss-resolve-nested-selector": "^0.1.1",
