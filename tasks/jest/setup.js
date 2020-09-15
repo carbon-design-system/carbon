@@ -9,6 +9,9 @@
 
 global.__DEV__ = true;
 
+// adds testRule - call after global.__DEV__ is set
+require('../../packages/stylelint-plugin-carbon-tokens/jest-setup.js');
+
 jest.setTimeout(20000);
 
 global.requestAnimationFrame = function requestAnimationFrame(callback) {
