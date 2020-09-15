@@ -12,11 +12,11 @@ import { getCarbonFilePath } from '../../../utils';
 
 const spacingTokens = [];
 
-const fileName = getCarbonFilePath('layout', '_spacing.scss');
-const scssFromFile = fs.readFileSync(fileName, 'utf8');
+const filename = getCarbonFilePath('layout', '_spacing.scss');
+const scssFromFile = fs.readFileSync(filename, 'utf8');
 
 const result = postcss().process(`${scssFromFile}`, {
-  from: `${fileName}`,
+  from: `${filename}`,
   syntax: scss,
   stringifier: scss.stringify,
 });

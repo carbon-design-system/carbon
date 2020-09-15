@@ -15,11 +15,11 @@ const ibmColorsMixin = 'ibm--colors()';
 let carbonColorTokens = [];
 let ibmColorTokens = []; // deprecated
 
-const fileName = getCarbonFilePath('colors', 'mixins.scss');
-const scssFromFile = fs.readFileSync(fileName, 'utf8');
+const filename = getCarbonFilePath('colors', 'mixins.scss');
+const scssFromFile = fs.readFileSync(filename, 'utf8');
 
 const result = postcss().process(`${scssFromFile}`, {
-  from: `${fileName}`,
+  from: `${filename}`,
   syntax: scss,
   stringifier: scss.stringify,
 });

@@ -12,12 +12,12 @@ import { getCarbonFilePath } from '../../../utils';
 
 const motionTokens = [];
 
-const fileName = getCarbonFilePath('motion', '_motion.scss');
+const filename = getCarbonFilePath('motion', '_motion.scss');
 
-const scssFromFile = fs.readFileSync(fileName, 'utf8');
+const scssFromFile = fs.readFileSync(filename, 'utf8');
 
 const result = postcss().process(`${scssFromFile}`, {
-  from: `${fileName}`,
+  from: `${filename}`,
   syntax: scss,
   stringifier: scss.stringify,
 });
