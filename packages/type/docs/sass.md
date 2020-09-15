@@ -2654,7 +2654,7 @@ $expressive-heading-03: (
     ),
     max: (
       font-size: carbon--type-scale(6),
-      line-height: 1.3,
+      line-height: 1.334,
     ),
   ),
 );
@@ -2775,7 +2775,7 @@ $expressive-heading-06: (
 $expressive-paragraph-01: (
   font-size: carbon--type-scale(6),
   font-weight: carbon--font-weight('light'),
-  line-height: 1.3,
+  line-height: 1.334,
   letter-spacing: 0,
   breakpoints: (
     lg: (
@@ -2812,7 +2812,7 @@ $quotation-01: (
     ),
     lg: (
       font-size: carbon--type-scale(6),
-      line-height: 1.3,
+      line-height: 1.334,
     ),
     xlg: (
       font-size: carbon--type-scale(7),
