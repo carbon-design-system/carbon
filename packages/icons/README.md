@@ -24,7 +24,7 @@ Icons in Carbon are provided through a variety of packages, often specific for
 the framework that will use them. Currently, we support the following packages
 for various frameworks:
 
-- [Angular](../icons-angular)
+- [Angular](https://github.com/carbon-design-system/carbon-icons-angular)
 - [React](../icons-react)
 - [Vue](../icons-vue)
 
