@@ -1,7 +1,7 @@
 # Layout Token Use
 
-This rule is intended enforce use of Carbon theme tokens, functions, mixins and
-CSS classes as defined.
+This rule is intended to enforce the use of Carbon theme tokens, functions,
+mixins and CSS classes as defined.
 
 - [https://www.carbondesignsystem.com/guidelines/layout/overview](https://www.carbondesignsystem.com/guidelines/layout/overview)
 

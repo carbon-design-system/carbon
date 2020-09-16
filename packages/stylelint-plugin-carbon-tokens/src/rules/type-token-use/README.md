@@ -1,7 +1,7 @@
 # Type Token Use
 
-This rule is intended enforce use of Carbon type tokens, functions, mixins and
-CSS classes as defined.
+This rule is intended to enforce the use of Carbon type tokens, functions,
+mixins and CSS classes as defined.
 [https://www.carbondesignsystem.com/guidelines/typography/overview/](https://www.carbondesignsystem.com/guidelines/typography/overview/)
 
 It optionally allows use of carbon--font-weight function.
