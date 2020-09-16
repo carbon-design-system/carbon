@@ -37,20 +37,18 @@ class Toggle extends React.Component {
     /**
      * Specify the label for the "off" position
      */
-    labelA: PropTypes.string.isRequired,
+    labelA: PropTypes.node.isRequired,
 
     /**
      * Specify the label for the "on" position
      */
-    labelB: PropTypes.string.isRequired,
+    labelB: PropTypes.node.isRequired,
 
     /**
      * Provide the text that will be read by a screen reader when visiting this
      * control
-     * `aria-label` is always required but will be null if `labelText` is also
-     * provided
      */
-    labelText: PropTypes.string,
+    labelText: PropTypes.node,
     /**
      * Provide an optional hook that is called when the control is changed
      */
@@ -130,7 +128,9 @@ class Toggle extends React.Component {
         <label
           className={`${prefix}--toggle-input__label`}
           htmlFor={id}
-          aria-label={labelText ? null : this.props['aria-label']}>
+          aria-label={
+            typeof labelText === 'string' ? null : this.props['aria-label']
+          }>
           {labelText}
           <span className={`${prefix}--toggle__switch`}>
             <span className={`${prefix}--toggle__text--off`} aria-hidden="true">
