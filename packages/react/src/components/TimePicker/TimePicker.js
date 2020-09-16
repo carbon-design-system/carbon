@@ -27,7 +27,7 @@ export default class TimePicker extends Component {
     className: PropTypes.string,
 
     /**
-     * Specify whether the <input> should be disabled
+     * Specify whether the `<input>` should be disabled
      */
     disabled: PropTypes.bool,
 
@@ -37,7 +37,7 @@ export default class TimePicker extends Component {
     hideLabel: PropTypes.bool,
 
     /**
-     * Specify a custom `id` for the <input>
+     * Specify a custom `id` for the `<input>`
      */
     id: PropTypes.string.isRequired,
 
@@ -63,45 +63,45 @@ export default class TimePicker extends Component {
     light: PropTypes.bool,
 
     /**
-     * Specify the maximum length of the time string in <input>
+     * Specify the maximum length of the time string in `<input>`
      */
     maxLength: PropTypes.number,
 
     /**
      * Optionally provide an `onBlur` handler that is called whenever the
-     * <input> loses focus
+     * `<input>` loses focus
      */
     onBlur: PropTypes.func,
 
     /**
-     * Optionally provide an `onChange` handler that is called whenever <input>
+     * Optionally provide an `onChange` handler that is called whenever `<input>`
      * is updated
      */
     onChange: PropTypes.func,
 
     /**
      * Optionally provide an `onClick` handler that is called whenever the
-     * <input> is clicked
+     * `<input>` is clicked
      */
     onClick: PropTypes.func,
 
     /**
-     * Specify the regular expression working as the pattern of the time string in <input>
+     * Specify the regular expression working as the pattern of the time string in `<input>`
      */
     pattern: PropTypes.string,
 
     /**
-     * Specify the placeholder attribute for the <input>
+     * Specify the placeholder attribute for the `<input>`
      */
     placeholder: PropTypes.string,
 
     /**
-     * Specify the type of the <input>
+     * Specify the type of the `<input>`
      */
     type: PropTypes.string,
 
     /**
-     * Specify the value of the <input>
+     * Specify the value of the `<input>`
      */
     value: PropTypes.string,
   };

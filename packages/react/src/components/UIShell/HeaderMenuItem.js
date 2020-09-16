@@ -60,7 +60,7 @@ HeaderMenuItem.propTypes = {
   children: PropTypes.node.isRequired,
 
   /**
-   * Optionally provide a custom class to apply to the underlying <li> node
+   * Optionally provide a custom class to apply to the underlying `<li>` node
    */
   className: PropTypes.string,
 
@@ -70,8 +70,8 @@ HeaderMenuItem.propTypes = {
   isCurrentPage: PropTypes.bool,
 
   /**
-   * Optionally supply a role for the underlying <li> node. Useful for resetting
-   * <ul> semantics for menus.
+   * Optionally supply a role for the underlying `<li>` node. Useful for resetting
+   * `<ul>` semantics for menus.
    */
   role: PropTypes.string,
 };

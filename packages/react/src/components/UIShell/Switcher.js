@@ -49,7 +49,7 @@ Switcher.propTypes = {
   children: PropTypes.node.isRequired,
 
   /**
-   * Optionally provide a custom class to apply to the underlying <ul> node
+   * Optionally provide a custom class to apply to the underlying `<ul>` node
    */
   className: PropTypes.string,
 };

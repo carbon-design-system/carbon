@@ -1,0 +1,11 @@
+<svg id="icon" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: none;
+      }
+    </style>
+  </defs>
+  <polygon points="24 10 22.586 11.414 26.172 15 5.828 15 9.414 11.414 8 10 2 16 8 22 9.414 20.586 5.828 17 26.172 17 22.586 20.586 24 22 30 16 24 10"/>
+  <rect id="_Transparent_Rectangle_" data-name="&lt;Transparent Rectangle&gt;" class="cls-1" width="32" height="32"/>
+</svg>

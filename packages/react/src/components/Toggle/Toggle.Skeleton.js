@@ -21,7 +21,7 @@ export default class ToggleSkeleton extends React.Component {
      */
     className: PropTypes.string,
     /**
-     * Provide an id that unique represents the underlying <input>
+     * Provide an id that unique represents the underlying `<input>`
      */
     id: PropTypes.string,
 

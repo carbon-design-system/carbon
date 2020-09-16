@@ -80,12 +80,12 @@ export default function Copy({
 
 Copy.propTypes = {
   /**
-   * Pass in content to be rendred in the underlying <button>
+   * Pass in content to be rendred in the underlying `<button>`
    */
   children: PropTypes.node,
 
   /**
-   * Specify an optional className to be applied to the underlying <button>
+   * Specify an optional className to be applied to the underlying `<button>`
    */
   className: PropTypes.string,
 
@@ -108,7 +108,7 @@ Copy.propTypes = {
 
   /**
    * Specify an optional `onClick` handler that is called when the underlying
-   * <button> is clicked
+   * `<button>` is clicked
    */
   onClick: PropTypes.func,
 };
