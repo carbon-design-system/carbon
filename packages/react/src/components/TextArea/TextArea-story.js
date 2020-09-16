@@ -11,6 +11,7 @@ import { action } from '@storybook/addon-actions';
 import { withKnobs, boolean, number, text } from '@storybook/addon-knobs';
 import TextArea from '../TextArea';
 import TextAreaSkeleton from '../TextArea/TextArea.Skeleton';
+import mdx from './TextArea.mdx';
 
 const TextAreaProps = () => ({
   className: 'some-class',
@@ -38,7 +39,9 @@ export default {
 
   parameters: {
     component: TextArea,
-
+    docs: {
+      page: mdx,
+    },
     subcomponents: {
       TextAreaSkeleton,
     },

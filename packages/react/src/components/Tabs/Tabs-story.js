@@ -22,6 +22,7 @@ import Tabs from '../Tabs';
 import Tab from '../Tab';
 import TextInput from '../TextInput';
 import TabsSkeleton from '../Tabs/Tabs.Skeleton';
+import mdx from './Tabs.mdx';
 
 const selectionModes = {
   'Change selection automatically upon focus (automatic)': 'automatic',
@@ -107,6 +108,9 @@ export default {
   decorators: [withKnobs],
   parameters: {
     component: Tabs,
+    docs: {
+      page: mdx,
+    },
     subcomponents: {
       Tab,
       TabsSkeleton,

@@ -12,6 +12,7 @@ import { withReadme } from 'storybook-readme';
 import OverflowMenu from '../OverflowMenu';
 import OverflowMenuItem from '../OverflowMenuItem';
 import OverflowREADME from './README.md';
+import mdx from './OverflowMenu.mdx';
 
 const directions = {
   'Bottom of the trigger button (bottom)': 'bottom',
@@ -54,6 +55,9 @@ export default {
 
   parameters: {
     component: OverflowMenu,
+    docs: {
+      page: mdx,
+    },
 
     subcomponents: {
       OverflowMenuItem,
