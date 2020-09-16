@@ -9,7 +9,6 @@ import React from 'react';
 import { action } from '@storybook/addon-actions';
 import { withKnobs, text, boolean } from '@storybook/addon-knobs';
 import Toggle from '../Toggle';
-import ToggleSkeleton from '../Toggle/Toggle.Skeleton';
 
 const toggleProps = () => ({
   labelText: text(
@@ -31,9 +30,7 @@ export default {
   parameters: {
     component: Toggle,
 
-    subcomponents: {
-      ToggleSkeleton,
-    },
+    subcomponents: {},
   },
 };
 
@@ -73,17 +70,5 @@ Untoggled.parameters = {
         Setting the toggled property will allow you to change the value dynamically, whereas setting the defaultToggled
         prop will only set the value initially. This example has defaultToggled set to false.
       `,
-  },
-};
-
-export const Skeleton = () => <ToggleSkeleton {...toggleProps()} />;
-
-Skeleton.storyName = 'skeleton';
-
-Skeleton.parameters = {
-  info: {
-    text: `
-            Placeholder skeleton state to use when content is loading.
-          `,
   },
 };
