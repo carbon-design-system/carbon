@@ -306,7 +306,13 @@ class OverflowMenu extends Component {
 
     // Close the overflow menu on escape
     if (keyCodeMatches(evt, [keys.Escape])) {
-      this.closeMenu();
+      let wasOpen = this.state.open;
+      this.closeMenu(() => {
+        if (wasOpen) {
+          this.focusMenuEl();
+        }
+      });
+
       // Stop the esc keypress from bubbling out and closing something it shouldn't
       evt.stopPropagation();
     }
@@ -321,11 +327,11 @@ class OverflowMenu extends Component {
     }
   };
 
-  closeMenu = () => {
-    let wasOpen = this.state.open;
+  closeMenu = (onCloseMenu) => {
     this.setState({ open: false }, () => {
-      if (wasOpen) {
-        this.focusMenuEl();
+      // Optional callback to be executed after the state as been set to close
+      if (onCloseMenu) {
+        onCloseMenu();
       }
       this.props.onClose();
     });
