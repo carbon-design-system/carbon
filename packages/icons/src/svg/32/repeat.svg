@@ -1,1 +1,12 @@
-<svg id="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><defs><style>.cls-1{fill:none;}</style></defs><title>repeat</title><path d="M26,6H5.83L9.41,2.41,8,1,2,7l6,6,1.41-1.41L5.83,8H26v7h2V8A2,2,0,0,0,26,6Z"/><path d="M22.59,20.41,26.17,24H6V17H4v7a2,2,0,0,0,2,2H26.17l-3.58,3.59L24,31l6-6-6-6Z"/><rect id="_Transparent_Rectangle_" data-name="&lt;Transparent Rectangle&gt;" class="cls-1" width="32" height="32"/></svg>
+<svg id="icon" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: none;
+      }
+    </style>
+  </defs>
+  <path d="M6,6H26.1719l-3.586-3.5859L24,1l6,6-6,6-1.4141-1.4141L26.1719,8H6v7H4V8A2.0024,2.0024,0,0,1,6,6Z"/>
+  <path d="M9.4141,20.4141,5.8281,24H26V17h2v7a2.0024,2.0024,0,0,1-2,2H5.8281L9.414,29.5859,8,31,2,25l6-6Z"/>
+  <rect id="_Transparent_Rectangle_" data-name="&lt;Transparent Rectangle&gt;" class="cls-1" width="32" height="32"/>
+</svg>
