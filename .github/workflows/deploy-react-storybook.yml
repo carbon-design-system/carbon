@@ -31,15 +31,15 @@ jobs:
           CLOUD_API_KEY: ${{ secrets.CLOUD_API_KEY}}
         run: |
           ibmcloud login \
-          -a 'https://cloud.ibm.com' \
-          -u 'apikey' \
-          -p "$CLOUD_API_KEY" \
-          -o 'carbon-design-system' \
-          -s 'production' \
-          -r 'us-south'
+            -a 'https://cloud.ibm.com' \
+            --apikey "$CLOUD_API_KEY" \
+            -r 'us-south'
+          ibmcloud target -o 'carbon-design-system' -s 'production'
       - name: Install IBM Cloud plugins
         run: |
-          ibmcloud cf install
+          # We use v6.50.0 as v6.51.0 and v6.52.0 have a bug where we are unable to set
+          # the CF API
+          ibmcloud cf install -v 6.50.0
           ibmcloud cf add-plugin-repo CF-Community https://plugins.cloudfoundry.org
           ibmcloud cf install-plugin blue-green-deploy -f -r CF-Community
       - name: Deploy React storybook

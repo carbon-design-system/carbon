@@ -26,6 +26,7 @@ export default class ModalWrapper extends React.Component {
     modalText: PropTypes.string,
     onKeyDown: PropTypes.func,
     passiveModal: PropTypes.bool,
+    preventCloseOnClickOutside: PropTypes.bool,
     primaryButtonText: PropTypes.string,
     renderTriggerButtonIcon: PropTypes.oneOfType([
       PropTypes.func,
@@ -46,11 +47,14 @@ export default class ModalWrapper extends React.Component {
     triggerButtonIconDescription: 'Provide icon description if icon is used',
     triggerButtonKind: 'primary',
     disabled: false,
+    preventCloseOnClickOutside: false,
     selectorPrimaryFocus: '[data-modal-primary-focus]',
     onKeyDown: () => {},
   };
 
   triggerButton = React.createRef();
+  modal = React.createRef();
+
   state = {
     isOpen: false,
   };
@@ -61,8 +65,18 @@ export default class ModalWrapper extends React.Component {
     });
   };
 
-  handleClose = () => {
-    this.setState({ isOpen: false }, () => this.triggerButton.current.focus());
+  handleClose = (evt) => {
+    if (
+      evt &&
+      !this.modal.current.innerModal.current.contains(evt.target) &&
+      this.props.preventCloseOnClickOutside
+    ) {
+      return;
+    } else {
+      this.setState({ isOpen: false }, () =>
+        this.triggerButton.current.focus()
+      );
+    }
   };
 
   handleOnRequestSubmit = () => {
@@ -88,6 +102,7 @@ export default class ModalWrapper extends React.Component {
       handleSubmit, // eslint-disable-line no-unused-vars
       shouldCloseAfterSubmit, // eslint-disable-line no-unused-vars
       selectorPrimaryFocus,
+      preventCloseOnClickOutside, // eslint-disable-line no-unused-vars
       ...other
     } = this.props;
 
@@ -118,7 +133,9 @@ export default class ModalWrapper extends React.Component {
           ref={this.triggerButton}>
           {buttonTriggerText}
         </Button>
-        <Modal {...props}>{children}</Modal>
+        <Modal ref={this.modal} {...props}>
+          {children}
+        </Modal>
       </div>
     );
   }
