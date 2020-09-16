@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React from 'react';
+import React, { useState } from 'react';
 import { Document16, Folder16 } from '@carbon/icons-react';
 import { action } from '@storybook/addon-actions';
 import {
@@ -233,16 +233,17 @@ const nodes = [
   },
 ];
 
-function renderTree({ nodes, withIcons = false }) {
+function renderTree({ nodes, expanded, withIcons = false }) {
   if (!nodes) {
     return;
   }
-  return nodes.map(({ children, renderIcon, ...nodeProps }) => (
+  return nodes.map(({ children, renderIcon, isExpanded, ...nodeProps }) => (
     <TreeNode
       key={nodeProps.id}
       renderIcon={withIcons ? renderIcon : null}
+      isExpanded={expanded ?? isExpanded}
       {...nodeProps}>
-      {renderTree({ nodes: children, withIcons })}
+      {renderTree({ nodes: children, expanded, withIcons })}
     </TreeNode>
   ));
 }
@@ -283,3 +284,25 @@ export const WithIcons = () => (
 );
 
 WithIcons.storyName = 'with icons';
+
+export const WithControlledExpansion = () => {
+  const [expanded, setExpanded] = useState(undefined);
+  return (
+    <>
+      <InlineNotification
+        kind="info"
+        title="Experimental component"
+        subtitle="An accessibility review of this component is in progress"
+      />
+      <div style={{ marginBottom: '1rem' }}>
+        <button type="button" onClick={() => setExpanded(true)}>
+          expand all
+        </button>
+        <button type="button" onClick={() => setExpanded(false)}>
+          collapse all
+        </button>
+      </div>
+      <TreeView {...props()}>{renderTree({ nodes, expanded })}</TreeView>
+    </>
+  );
+};
