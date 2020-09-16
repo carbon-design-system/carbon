@@ -23,7 +23,7 @@ const isValidAcceptValues = isValidOption;
 const isValidIncludeProps = isValidOption;
 
 const defaultOptions = {
-  // include standard motion properites
+  // include standard motion properties
   includeProps: [
     'transition<2>', // only permitted definition order fails otherwise
     'transition-duration',

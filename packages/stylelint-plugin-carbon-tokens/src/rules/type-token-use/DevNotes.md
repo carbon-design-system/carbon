@@ -51,7 +51,7 @@ Alternatively there are declarative options
 
 - .bx--type-<type-style> to select styles for the given type situation
 
-In addition the floowing settings are available
+In addition the following settings are available
 
 - .bx--type-mono
 - .bx--type-sans

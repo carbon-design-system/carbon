@@ -23,7 +23,7 @@ const isValidAcceptValues = isValidOption;
 const isValidIncludeProps = isValidOption;
 
 const defaultOptions = {
-  // include standard color properites
+  // include standard color properties
   includeProps: [
     '/color$/',
     '/shadow$/<-1>',

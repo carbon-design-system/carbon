@@ -16,7 +16,7 @@ By default it accepts undefined SCSS and CSS variables.
 
 ```js
 const defaultOptions = {
-  // include standard color properites
+  // include standard color properties
   includeProps: ['/color$/', '/shadow$/<-1>', 'border<-1>', 'outline<-1>'],
   // Accept transparent, common reset values and 0 on its own
   acceptValues: ['/transparent|inherit|initial/', '/^0$/'],

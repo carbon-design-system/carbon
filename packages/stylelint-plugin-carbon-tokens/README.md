@@ -8,7 +8,7 @@ To install `stylelint-plugin-carbon-tokens` in your project, you will need to
 run the following command using [npm](https://www.npmjs.com/):
 
 ```bash
-npm install -S stylelint-plugin-carbon-tokens
+npm install -D stylelint-plugin-carbon-tokens
 ```
 
 If you prefer [Yarn](https://yarnpkg.com/en/), use the following command
@@ -22,7 +22,7 @@ yarn add stylelint-plugin-carbon-tokens
 
 This project is intended to help users identify cases where tokens, functions
 and mixins defined as part of various projects relating to the Carbon Design
-System are used. [www.carbondesignsystem.com]
+System are used. See [www.carbondesignsystem.com]([www.carbondesignsystem.com])
 
 It consists of a stylelint plugin and depends on various Carbon Design System
 packages for loading settings.
@@ -30,14 +30,14 @@ packages for loading settings.
 It includes, but may not be limited to, linting for @carbon/themes,
 @carbon/colors, @carbon/layout, @carbon/type and @carbon/motion.
 
-Not incluced, as they're not used through SCSS, are Carbon Icons, Grid and any
+Not included, as they're not used through SCSS, are Carbon Icons, Grid and any
 other DOM related checks..
 
 ### Please be helpful
 
-Before we start this project is a work in progress which deliberately outputs
-warnings when it comes accross a syntax that has not yet been catered for. If
-you see one of these warnings please raise an issue so that it can be addressed.
+Before we start, this project is a work in progress which deliberately outputs
+warnings when it comes across syntax that has not yet been catered for. If you
+see one of these warnings please raise an issue so that it can be addressed.
 
 ### Stylelint
 
@@ -138,7 +138,7 @@ modules.exports = {
 
 NOTE: By default rules accept SCSS and CSS variables not defined in the current
 file prior to their use. Set acceptUndefinedVariables to false to disable this
-behaviour.
+behavior.
 
 ### Advanced options
 
@@ -166,7 +166,7 @@ values acceptable to the linter.
 
 #### includeProps Range
 
-Can innclude a range value expressed inside greater than and less than signs.
+Can include a range value expressed inside greater than and less than signs.
 
 e.g. `["/prop-a$/<-1>", "/prop-b$/<1 -2>"]`
 
@@ -193,7 +193,7 @@ box-shadow.
 
 #### includeProps specific values
 
-For some props e.g. transform we are only intereste in values that match a
+For some props e.g. transform we are only interested in values that match a
 certain criteria.
 
 This is specified as part of the includedProp inside \[].

@@ -1,6 +1,6 @@
 # Motion Token Use
 
-This rule is intended enfoce use of Carbon theme tokens, functions, mixins and
+This rule is intended enforce use of Carbon theme tokens, functions, mixins and
 CSS classes as defined.
 
 - [https://www.carbondesignsystem.com/guidelines/motion/overview](https://www.carbondesignsystem.com/guidelines/motion/overview)
@@ -13,7 +13,7 @@ NOTE: Transition and animation shorthand must conform to expected order
 
 ```js
 const defaultOptions = {
-  // include standard motion properites
+  // include standard motion properties
   includeProps: [
     'transition<2>', // only permitted definition order fails otherwise
     'transition-duration',

@@ -25,9 +25,9 @@ Files
     - carbon--breakpoint
   - \_mini-unit
     - \$carbon--mini-unit-size
-    - carbon--mini-untis
+    - carbon--mini-units
   - \_spacing
-    - generated from src/tokesn.js spacing01 =>
+    - generated from src/tokens.js spacing01 =>
       $spacing-01 & $carbon--spacing-01
 - src/index.js exports
   - unstable tokens
