@@ -90,14 +90,19 @@
   sizes:
     - 32
 - name: 3D-print-mesh
-  friendly_name: 3D-print-mesh
-  aliases: []
+  friendly_name: 3D print mesh
+  aliases:
+    - Watson
+    - IBM Watson
+    - Watson Health
+    - 3D print mesh
+    - health
   sizes:
     - 32
 - name: 3D-software
   friendly_name: 3D software
   aliases:
-    - 3D-software
+    - 3D software
     - cube
     - health
     - cube plus
@@ -278,7 +283,7 @@
   sizes:
     - 32
 - name: ai-results
-  friendly_name: ai-results
+  friendly_name: AI results
   aliases:
     - ai
     - results
@@ -521,10 +526,12 @@
   sizes:
     - 32
 - name: analytics--reference
-  friendly_name: analytics--reference
+  friendly_name: Analytics reference
   aliases:
     - analytics reference
     - data
+    - citation
+    - source
   sizes:
     - 32
 - name: angle
@@ -615,7 +622,7 @@
   sizes:
     - 32
 - name: app-connectivity
-  friendly_name: app-connectivity
+  friendly_name: App connectivity
   aliases:
     - data
     - app
@@ -949,7 +956,9 @@
     - 32
 - name: automatic
   friendly_name: automatic
-  aliases: []
+  aliases:
+    - auto
+    - automatic
   sizes:
     - 32
 - name: awake
@@ -1206,7 +1215,7 @@
   sizes:
     - 32
 - name: bookmark--filled
-  friendly_name: bookmark--filled
+  friendly_name: Bookmark filled
   aliases:
     - bookmark filled
     - operations
@@ -1232,9 +1241,9 @@
   sizes:
     - 32
 - name: box-plot
-  friendly_name: box-plot
+  friendly_name: Box plot
   aliases:
-    - box-plot
+    - box plot
     - boxplot
     - data
     - statistics
@@ -1263,7 +1272,7 @@
   sizes:
     - 32
 - name: brush-freehand
-  friendly_name: brush-freehand
+  friendly_name: Brush freehand
   aliases:
     - watson health
     - watson
@@ -1273,7 +1282,7 @@
   sizes:
     - 32
 - name: brush-polygon
-  friendly_name: brush-polygon
+  friendly_name: Brush polygon
   aliases:
     - watson health
     - watson
@@ -1425,12 +1434,24 @@
   sizes:
     - 32
 - name: calendar--heat-map
-  friendly_name: calendar--heat-map
-  aliases: []
+  friendly_name: Calendar heat map
+  aliases: 
+    - heat map
+    - date
+    - schedule
+    - day
+    - time
+    - month
+    - year
+    - scheduler
+    - agenda
+    - docket
+    - timetable
+    - calendar
   sizes:
     - 32
 - name: calendar--settings
-  friendly_name: calendar--settings
+  friendly_name: Calendar settings
   aliases:
     - date
     - schedule
@@ -1443,7 +1464,6 @@
     - docket
     - timetable
     - calendar settings
-    - calendar--settings
   sizes:
     - 32
 - name: calibrate
@@ -1794,17 +1814,17 @@
   sizes:
     - 32
 - name: center--circle
-  friendly_name: center--circle
+  friendly_name: Center circle
   aliases:
-    - center--circle
+    - center circle
     - crosshairs
     - circle
   sizes:
     - 32
 - name: center--square
-  friendly_name: center--square
+  friendly_name: Center square
   aliases:
-    - center--square
+    - center square
     - cross
     - square
   sizes:
@@ -1867,7 +1887,7 @@
     - power
     - gas pump
 - name: chart--3D
-  friendly_name: chart--3D
+  friendly_name: Chart 3D
   aliases:
     - chart 3D
     - 3D chart
@@ -1876,7 +1896,7 @@
   sizes:
     - 32
 - name: chart--area
-  friendly_name: chart--area
+  friendly_name: Chart area
   aliases:
     - chart area
     - graph
@@ -1885,13 +1905,21 @@
   sizes:
     - 32
 - name: chart--area-smooth
-  friendly_name: chart--area-smooth
-  aliases: []
+  friendly_name: Chart area smooth
+  aliases:
+    - chart area smooth
+    - graph
+    - chart
+    - data
   sizes:
     - 32
 - name: chart--area-stepper
-  friendly_name: chart--area-stepper
-  aliases: []
+  friendly_name: Chart area stepper
+  aliases:
+    - chart area stepper
+    - graph
+    - chart
+    - data
   sizes:
     - 32
 - name: chart--bar
@@ -1905,23 +1933,43 @@
     - bar chart
     - chart
 - name: chart--bar-floating
-  friendly_name: chart--bar-floating
-  aliases: []
+  friendly_name: Chart bar floating
+  aliases:
+    - chart bar floating
+    - graph
+    - bar chart
+    - chart
+    - data
   sizes:
     - 32
 - name: chart--bar-overlay
-  friendly_name: chart--bar-overlay
-  aliases: []
+  friendly_name: Chart bar overlay
+  aliases:
+    - chart bar overlay
+    - graph
+    - bar chart
+    - chart
+    - data
   sizes:
     - 32
 - name: chart--bar-stacked
-  friendly_name: chart--bar-stacked
-  aliases: []
+  friendly_name: Chart bar stacked
+  aliases:
+    - chart bar stacked
+    - graph
+    - bar chart
+    - chart
+    - data
   sizes:
     - 32
 - name: chart--bar-target
-  friendly_name: chart--bar-target
-  aliases: []
+  friendly_name: Chart bar target
+  aliases:
+    - chart bar target
+    - graph
+    - bar chart
+    - chart
+    - data
   sizes:
     - 32
 - name: chart--bubble
@@ -1935,14 +1983,19 @@
     - bubble chart
     - chart
 - name: chart--bullet
-  friendly_name: chart--bullet
-  aliases: []
+  friendly_name: Chart bullet
+  aliases:
+    - graph
+    - bar
+    - data
+    - bullet chart
+    - chart
   sizes:
     - 32
 - name: chart--candlestick
-  friendly_name: chart--candlestick
+  friendly_name: Chart candlestick
   aliases:
-    - chart--candlestick
+    - chart candlestick
     - candlestick chart
     - chart
     - graph
@@ -2267,7 +2320,7 @@
   sizes:
     - 32
 - name: chart--sunburst
-  friendly_name: chart sunburst
+  friendly_name: Chart sunburst
   aliases:
     - chart sunburst
     - sunburst chart
@@ -3093,7 +3146,7 @@
   sizes:
     - 32
 - name: content-view
-  friendly_name: content-view
+  friendly_name: Content view
   aliases:
     - content
     - view
@@ -3101,7 +3154,7 @@
   sizes:
     - 32
 - name: contour-finding
-  friendly_name: contour-finding
+  friendly_name: Contour finding
   aliases:
     - watson health
     - watson
@@ -5752,7 +5805,7 @@
     - cursor
     - hole filling
     - health
-    - digital imaging›
+    - digital imaging
   sizes:
     - 32
 - name: home
@@ -6955,8 +7008,16 @@
   sizes:
     - 32
 - name: logo--keybase
-  friendly_name: logo--keybase
-  aliases: []
+  friendly_name: Logo keybase
+  aliases:
+    - brand
+    - emblem
+    - logotype
+    - symbol
+    - id
+    - avatar
+    - tag
+    - identification
   sizes:
     - 32
 - name: logo--linkedin
@@ -7031,6 +7092,13 @@
     - programming
     - language
     - logotype
+    - brand
+    - emblem
+    - symbol
+    - id
+    - avatar
+    - tag
+    - identification
   sizes:
     - 32
 - name: logo--quora
@@ -8324,8 +8392,10 @@
     - figure
     - alphanumeric
 - name: object-storage
-  friendly_name: object-storage
-  aliases: []
+  friendly_name: Object storage
+  aliases:
+    - object
+    - storage
   sizes:
     - 32
 - name: omega
@@ -9208,7 +9278,7 @@
   sizes:
     - 32
 - name: qq-plot
-  friendly_name: qq-plot
+  friendly_name: QQ plot
   aliases:
     - chart
     - data
@@ -9218,7 +9288,7 @@
 - name: qr-code
   friendly_name: QR code
   aliases:
-    - qr-code
+    - qr code
   sizes:
     - 32
 - name: quadrant-plot
