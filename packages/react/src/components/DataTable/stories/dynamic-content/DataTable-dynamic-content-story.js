@@ -34,7 +34,7 @@ import DataTable, {
   TableToolbarSearch,
   TableToolbarMenu,
 } from '../../../DataTable';
-import { batchActionClick, initialRows, headers } from '../shared';
+import { batchActionClick, rows, headers } from '../shared';
 
 export default {
   title: 'DataTable/Development',
@@ -48,7 +48,7 @@ export const Example = (props) => {
 
   class DynamicRows extends React.Component {
     state = {
-      rows: initialRows,
+      rows,
       headers: headers,
       id: 0,
     };
