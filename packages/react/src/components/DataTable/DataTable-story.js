@@ -9,6 +9,7 @@ import './stories/datatable-story.scss';
 
 import { action } from '@storybook/addon-actions';
 import React from 'react';
+import { withKnobs, boolean, select } from '@storybook/addon-knobs';
 import Button from '../Button';
 import Checkbox from '../Checkbox';
 import OverflowMenu from '../OverflowMenu';
@@ -31,6 +32,16 @@ import {
 import mdx from './DataTable.mdx';
 import { headers, rows } from './stories/shared';
 
+const props = () => ({
+  useZebraStyles: boolean('Zebra row styles (useZebraStyles)', false),
+  size: select(
+    'Row height (size)',
+    { compact: 'compact', short: 'short', tall: 'tall', none: null },
+    null
+  ),
+  stickyHeader: boolean('Sticky header (experimental)', false),
+});
+
 export default {
   title: 'DataTable',
   component: DataTable,
@@ -43,6 +54,7 @@ export default {
     TableBody,
     TableCell,
   },
+  decorators: [withKnobs],
   parameters: {
     docs: {
       page: mdx,
@@ -356,3 +368,45 @@ export const WithCheckmarkColumns = () => {
     </DataTable>
   );
 };
+
+export const Playground = () => (
+  <DataTable
+    rows={rows}
+    headers={headers}
+    {...props()}
+    render={({
+      rows,
+      headers,
+      getHeaderProps,
+      getRowProps,
+      getTableProps,
+      getTableContainerProps,
+    }) => (
+      <TableContainer
+        title="DataTable"
+        description="With default options"
+        {...getTableContainerProps()}>
+        <Table {...getTableProps()}>
+          <TableHead>
+            <TableRow>
+              {headers.map((header, i) => (
+                <TableHeader key={i} {...getHeaderProps({ header })}>
+                  {header.header}
+                </TableHeader>
+              ))}
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {rows.map((row, i) => (
+              <TableRow key={i} {...getRowProps({ row })}>
+                {row.cells.map((cell) => (
+                  <TableCell key={cell.id}>{cell.value}</TableCell>
+                ))}
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
+      </TableContainer>
+    )}
+  />
+);
