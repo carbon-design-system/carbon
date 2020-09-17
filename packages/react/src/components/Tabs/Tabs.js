@@ -161,6 +161,32 @@ export default class Tabs extends React.Component {
     window.removeEventListener('resize', this._debouncedHandleWindowResize);
   }
 
+  componentDidUpdate() {
+    // compare current tablist properties to current state
+    const {
+      clientWidth: tablistClientWidth,
+      scrollLeft: tablistScrollLeft,
+      scrollWidth: tablistScrollWidth,
+    } = this.tablist.current;
+    const {
+      tablistClientWidth: currentStateClientWidth,
+      tablistScrollLeft: currentStateScrollLeft,
+      tablistScrollWidth: currentStateScrollWidth,
+    } = this.state;
+    if (
+      tablistClientWidth !== currentStateClientWidth ||
+      tablistScrollLeft !== currentStateScrollLeft ||
+      tablistScrollWidth !== currentStateScrollWidth
+    ) {
+      this.setState({
+        horizontalOverflow: tablistScrollWidth > tablistClientWidth,
+        tablistClientWidth,
+        tablistScrollLeft,
+        tablistScrollWidth,
+      });
+    }
+  }
+
   getEnabledTabs = () =>
     React.Children.toArray(this.props.children).reduce(
       (enabledTabs, tab, index) =>

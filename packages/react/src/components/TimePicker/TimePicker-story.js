@@ -12,6 +12,7 @@ import { withKnobs, boolean, number, text } from '@storybook/addon-knobs';
 import TimePicker from '../TimePicker';
 import TimePickerSelect from '../TimePickerSelect';
 import SelectItem from '../SelectItem';
+import mdx from './TimePicker.mdx';
 
 const props = {
   timepicker: () => ({
@@ -58,7 +59,9 @@ export default {
 
   parameters: {
     component: TimePicker,
-
+    docs: {
+      page: mdx,
+    },
     subcomponents: {
       TimePickerSelect,
       SelectItem,

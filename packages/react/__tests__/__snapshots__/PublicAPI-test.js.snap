@@ -5839,14 +5839,14 @@ Map {
       },
       "labelA": Object {
         "isRequired": true,
-        "type": "string",
+        "type": "node",
       },
       "labelB": Object {
         "isRequired": true,
-        "type": "string",
+        "type": "node",
       },
       "labelText": Object {
-        "type": "string",
+        "type": "node",
       },
       "onChange": Object {
         "type": "func",
@@ -5883,14 +5883,14 @@ Map {
       },
       "labelA": Object {
         "isRequired": true,
-        "type": "string",
+        "type": "node",
       },
       "labelB": Object {
         "isRequired": true,
-        "type": "string",
+        "type": "node",
       },
       "labelText": Object {
-        "type": "string",
+        "type": "node",
       },
       "onChange": Object {
         "type": "func",

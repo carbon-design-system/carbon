@@ -18,6 +18,7 @@ import {
 } from '@storybook/addon-knobs';
 import NumberInput from '../NumberInput';
 import NumberInputSkeleton from '../NumberInput/NumberInput.Skeleton';
+import mdx from './NumberInput.mdx';
 
 const sizes = {
   'Extra large size (xl)': 'xl',
@@ -63,6 +64,9 @@ export default {
 
   parameters: {
     component: NumberInput,
+    docs: {
+      page: mdx,
+    },
 
     subcomponents: {
       NumberInputSkeleton,
@@ -78,15 +82,6 @@ export const Default = () => {
       {...rest}
     />
   );
-};
-
-Default.parameters = {
-  info: {
-    text: `
-        Number inputs are similar to text fields, but contain controls used to increase or decrease an incremental value.
-        The Number Input component can be passed a starting value, a min, a max, and the step.
-      `,
-  },
 };
 
 export const Skeleton = () => (

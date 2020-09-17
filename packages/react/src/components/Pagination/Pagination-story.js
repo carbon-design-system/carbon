@@ -16,6 +16,7 @@ import {
   text,
 } from '@storybook/addon-knobs';
 import Pagination from '../Pagination';
+import mdx from './Pagination.mdx';
 
 const props = () => ({
   disabled: boolean('Disable page inputs (disabled)', false),
@@ -52,6 +53,9 @@ export default {
 
   parameters: {
     component: Pagination,
+    docs: {
+      page: mdx,
+    },
   },
 };
 
