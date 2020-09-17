@@ -13,6 +13,7 @@ import Select from '../Select';
 import SelectItem from '../SelectItem';
 import SelectItemGroup from '../SelectItemGroup';
 import SelectSkeleton from '../Select/Select.Skeleton';
+import mdx from './Select.mdx';
 
 const sizes = {
   'Extra large size (xl)': 'xl',
@@ -51,6 +52,9 @@ export default {
 
   parameters: {
     component: Select,
+    docs: {
+      page: mdx,
+    },
 
     subcomponents: {
       SelectItem,

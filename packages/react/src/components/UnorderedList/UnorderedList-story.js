@@ -9,13 +9,16 @@ import React from 'react';
 
 import ListItem from '../ListItem';
 import UnorderedList from '../UnorderedList';
+import mdx from './UnorderedList.mdx';
 
 export default {
   title: 'UnorderedList',
 
   parameters: {
     component: UnorderedList,
-
+    docs: {
+      page: mdx,
+    },
     subcomponents: {
       ListItem,
     },

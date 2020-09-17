@@ -12,6 +12,7 @@ import { ProgressIndicator, ProgressStep } from '../ProgressIndicator';
 import ProgressIndicatorSkeleton from '../ProgressIndicator/ProgressIndicator.Skeleton';
 import Tooltip from '../Tooltip';
 import { settings } from 'carbon-components';
+import mdx from './ProgressIndicator.mdx';
 
 const { prefix } = settings;
 
@@ -21,6 +22,9 @@ export default {
 
   parameters: {
     component: ProgressIndicator,
+    docs: {
+      page: mdx,
+    },
 
     subcomponents: {
       ProgressStep,
