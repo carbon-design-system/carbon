@@ -287,7 +287,7 @@
   sizes:
     - 32
 - name: ai-results--high
-  friendly_name: ai-results--high
+  friendly_name: AI results high
   aliases:
     - ai
     - results
@@ -297,7 +297,7 @@
   sizes:
     - 32
 - name: ai-results--low
-  friendly_name: ai-results--low
+  friendly_name: AI results low
   aliases:
     - ai
     - results
@@ -307,7 +307,7 @@
   sizes:
     - 32
 - name: ai-results--medium
-  friendly_name: ai-results--medium
+  friendly_name: AI results medium
   aliases:
     - ai
     - results
@@ -317,7 +317,7 @@
   sizes:
     - 32
 - name: ai-results--urgent
-  friendly_name: ai-results--urgent
+  friendly_name: AI results urgent
   aliases:
     - ai
     - results
@@ -327,7 +327,7 @@
   sizes:
     - 32
 - name: ai-results--very-high
-  friendly_name: ai-results--very-high
+  friendly_name: AI results very high
   aliases:
     - ai
     - results
@@ -337,7 +337,7 @@
   sizes:
     - 32
 - name: ai-status
-  friendly_name: ai-status
+  friendly_name: AI status
   aliases:
     - ai
     - status
@@ -346,7 +346,7 @@
   sizes:
     - 32
 - name: ai-status--complete
-  friendly_name: ai-status--complete
+  friendly_name: AI status complete
   aliases:
     - ai
     - status complete
@@ -355,7 +355,7 @@
   sizes:
     - 32
 - name: ai-status--failed
-  friendly_name: ai-status--failed
+  friendly_name: AI status failed
   aliases:
     - ai
     - status failed
@@ -364,7 +364,7 @@
   sizes:
     - 32
 - name: ai-status--in-progress
-  friendly_name: ai-status--in-progress
+  friendly_name: AI status in progress
   aliases:
     - ai
     - status in progress
@@ -373,7 +373,7 @@
   sizes:
     - 32
 - name: ai-status--queued
-  friendly_name: ai-status--queued
+  friendly_name: AI status queued
   aliases:
     - ai
     - status queued
@@ -382,7 +382,7 @@
   sizes:
     - 32
 - name: ai-status--rejected
-  friendly_name: ai-status--rejected
+  friendly_name: AI status rejected
   aliases:
     - ai
     - status rejected
