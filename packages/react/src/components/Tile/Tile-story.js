@@ -25,6 +25,7 @@ import {
 } from '../Tile';
 import TileGroup from '../TileGroup';
 import RadioTile from '../RadioTile';
+import mdx from './Tile.mdx';
 
 const radioValues = {
   None: '',
@@ -83,7 +84,9 @@ export default {
 
   parameters: {
     component: Tile,
-
+    docs: {
+      page: mdx,
+    },
     subcomponents: {
       ClickableTile,
       SelectableTile,

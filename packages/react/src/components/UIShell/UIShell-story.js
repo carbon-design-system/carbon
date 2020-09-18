@@ -41,6 +41,7 @@ import {
   SwitcherItem,
   SwitcherDivider,
 } from '../UIShell';
+import mdx from './UIShell.mdx';
 
 SideNav.displayName = 'SideNav';
 SideNavMenu.displayName = 'SideNavMenu';
@@ -132,6 +133,9 @@ export default {
   title: 'UI Shell',
 
   parameters: {
+    docs: {
+      page: mdx,
+    },
     subcomponents: {
       Content,
       Header,

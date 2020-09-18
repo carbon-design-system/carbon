@@ -3,6 +3,12 @@ import { Breadcrumb, BreadcrumbItem, BreadcrumbSkeleton } from '../Breadcrumb';
 
 # Breadcrumb
 
+[Source code](https://github.com/carbon-design-system/carbon/tree/master/packages/react/src/components/Breadcrumb)
+&nbsp;|&nbsp;
+[Usage guidelines](https://www.carbondesignsystem.com/components/breadcrumb/usage)
+&nbsp;|&nbsp;
+[Accessibility](https://www.carbondesignsystem.com/components/breadcrumb/accessibility)
+
 ## Table of Contents
 
 - [Overview](#overview)
@@ -13,7 +19,10 @@ import { Breadcrumb, BreadcrumbItem, BreadcrumbSkeleton } from '../Breadcrumb';
 
 ## Overview
 
-You can build a breadcrumb using a combination of the `Breadcrumb` and `BreadcrumbItem` components. The `Breadcrumb` component accepts a list of `BreadcrumbItem` components as `children` and each `BreadcrumbItem` is responsible for displaying the page links in the hierarchy.
+You can build a breadcrumb using a combination of the `Breadcrumb` and
+`BreadcrumbItem` components. The `Breadcrumb` component accepts a list of
+`BreadcrumbItem` components as `children` and each `BreadcrumbItem` is
+responsible for displaying the page links in the hierarchy.
 
 <Preview>
   <Story id="breadcrumb--breadcrumb" />
@@ -21,7 +30,9 @@ You can build a breadcrumb using a combination of the `Breadcrumb` and `Breadcru
 
 ## Skeleton state
 
-You can use the `BreadcrumbSkeleton` component to render a skeleton variant of a breadcrumb. This is useful to display while content in your breadcrumb is being fetched from an external resource like an API.
+You can use the `BreadcrumbSkeleton` component to render a skeleton variant of a
+breadcrumb. This is useful to display while content in your breadcrumb is being
+fetched from an external resource like an API.
 
 <Preview>
   <Story id="breadcrumb--skeleton" />
@@ -33,7 +44,8 @@ You can use the `BreadcrumbSkeleton` component to render a skeleton variant of a
 
 ### Breadcrumb noTrailingSlash
 
-You can use the `noTrailingSlash` prop to omit the slash from the end of the current page.
+You can use the `noTrailingSlash` prop to omit the slash from the end of the
+current page.
 
 ```jsx
 <Breadcrumb noTrailingSlash>
@@ -45,7 +57,8 @@ You can use the `noTrailingSlash` prop to omit the slash from the end of the cur
 
 ### BreadcrumbItem isCurrentPage
 
-You can use the `isCurrentPage` prop on a `BreadcrumbItem` to represent the current page.
+You can use the `isCurrentPage` prop on a `BreadcrumbItem` to represent the
+current page.
 
 ```jsx
 <Breadcrumb>
@@ -59,5 +72,6 @@ You can use the `isCurrentPage` prop on a `BreadcrumbItem` to represent the curr
 
 ## Feedback
 
-Help us improve this component by providing feedback through, asking questions on Slack,or updating this file on GitHub
+Help us improve this component by providing feedback, asking questions on Slack,
+or updating this file on
 [GitHub](https://github.com/carbon-design-system/carbon/edit/master/packages/react/src/components/Breadcrumb/Breadcrumb.mdx).

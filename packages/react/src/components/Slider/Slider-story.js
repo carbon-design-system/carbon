@@ -12,6 +12,7 @@ import { withKnobs, boolean, number, text } from '@storybook/addon-knobs';
 import Slider from '../Slider';
 import SliderSkeleton from '../Slider/Slider.Skeleton';
 import { sliderValuePropSync } from '../../internal/FeatureFlags';
+import mdx from './Slider.mdx';
 
 const props = () => ({
   name: text('Form item name (name)', ''),
@@ -44,7 +45,9 @@ export default {
 
   parameters: {
     component: Slider,
-
+    docs: {
+      page: mdx,
+    },
     subcomponents: {
       SliderSkeleton,
     },

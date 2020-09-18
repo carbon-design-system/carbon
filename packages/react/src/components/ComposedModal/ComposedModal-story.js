@@ -5,16 +5,18 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React from 'react';
+import React, { useState } from 'react';
+import ReactDOM from 'react-dom';
 import { action } from '@storybook/addon-actions';
 import { withKnobs, boolean, select, text } from '@storybook/addon-knobs';
+import { settings } from 'carbon-components';
 import ComposedModal, {
   ModalHeader,
   ModalBody,
   ModalFooter,
 } from '../ComposedModal';
 import Button from '../Button';
-import { settings } from 'carbon-components';
+import mdx from './ComposedModal.mdx';
 
 const { prefix } = settings;
 
@@ -28,6 +30,19 @@ const sizes = {
 const props = {
   composedModal: ({ titleOnly } = {}) => ({
     open: boolean('Open (open in <ComposedModal>)', true),
+    onKeyDown: action('onKeyDown'),
+    danger: boolean('Danger mode (danger)', false),
+    selectorPrimaryFocus: text(
+      'Primary focus element selector (selectorPrimaryFocus)',
+      '[data-modal-primary-focus]'
+    ),
+    size: select('Size (size)', sizes, titleOnly ? 'sm' : ''),
+    preventCloseOnClickOutside: boolean(
+      'Prevent closing on click outside of modal (preventCloseOnClickOutside)',
+      false
+    ),
+  }),
+  composedModalWithLauncher: ({ titleOnly } = {}) => ({
     onKeyDown: action('onKeyDown'),
     danger: boolean('Danger mode (danger)', false),
     selectorPrimaryFocus: text(
@@ -51,6 +66,10 @@ const props = {
       'Close'
     ),
     buttonOnClick: action('buttonOnClick'),
+    preventCloseOnClickOutside: boolean(
+      'Prevent closing on click outside of modal (preventCloseOnClickOutside)',
+      false
+    ),
   }),
   modalBody: () => ({
     hasScrollingContent: boolean(
@@ -132,23 +151,45 @@ const scrollingContent = (
   </>
 );
 
+/**
+ * Simple state manager for modals.
+ */
+const ModalStateManager = ({
+  renderLauncher: LauncherContent,
+  children: ModalContent,
+}) => {
+  const [open, setOpen] = useState(false);
+  return (
+    <>
+      {!ModalContent || typeof document === 'undefined'
+        ? null
+        : ReactDOM.createPortal(
+            <ModalContent open={open} setOpen={setOpen} />,
+            document.body
+          )}
+      {LauncherContent && <LauncherContent open={open} setOpen={setOpen} />}
+    </>
+  );
+};
+
 export default {
   title: 'ComposedModal',
   decorators: [withKnobs],
-
   parameters: {
     component: ComposedModal,
-
     subcomponents: {
       ModalHeader,
       ModalBody,
       ModalFooter,
     },
+    docs: {
+      page: mdx,
+    },
   },
 };
 
 export const UsingHeaderFooterProps = () => {
-  const { size, ...rest } = props.composedModal();
+  const { size, ...rest } = props.composedModalWithLauncher();
   const { hasScrollingContent, ...bodyProps } = props.modalBody();
   return (
     <ComposedModal {...rest} danger={true} size={size || undefined}>
@@ -240,46 +281,40 @@ TitleOnly.parameters = {
   },
 };
 
-export const ExampleUsageWithTriggerButton = () => {
-  class ComposedModalExample extends React.Component {
-    state = { open: false };
-    toggleModal = (open) => this.setState({ open });
-    render() {
-      const { open } = this.state;
-      const { size, ...rest } = props.composedModal();
-      const { hasScrollingContent, ...bodyProps } = props.modalBody();
-      return (
-        <>
-          <Button onClick={() => this.toggleModal(true)}>
-            Launch composed modal
-          </Button>
-          <ComposedModal
-            {...rest}
-            open={open}
-            size={size || undefined}
-            onClose={() => this.toggleModal(false)}>
-            <ModalHeader {...props.modalHeader()} />
-            <ModalBody
-              {...bodyProps}
-              aria-label={hasScrollingContent ? 'Modal content' : undefined}>
-              <p className={`${prefix}--modal-content__text`}>
-                Please see ModalWrapper for more examples and demo of the
-                functionality.
-              </p>
-              {hasScrollingContent && scrollingContent}
-            </ModalBody>
-            <ModalFooter {...props.modalFooter()} />
-          </ComposedModal>
-        </>
-      );
-    }
-  }
-  return <ComposedModalExample />;
+export const WithTriggerButton = () => {
+  const { size, ...rest } = props.composedModalWithLauncher();
+  const { hasScrollingContent, ...bodyProps } = props.modalBody();
+  return (
+    <ModalStateManager
+      renderLauncher={({ setOpen }) => (
+        <Button onClick={() => setOpen(true)}>Launch composed modal</Button>
+      )}>
+      {({ open, setOpen }) => (
+        <ComposedModal
+          {...rest}
+          open={open}
+          size={size || undefined}
+          onClose={() => setOpen(false)}>
+          <ModalHeader {...props.modalHeader()} />
+          <ModalBody
+            {...bodyProps}
+            aria-label={hasScrollingContent ? 'Modal content' : undefined}>
+            <p className={`${prefix}--modal-content__text`}>
+              Please see ModalWrapper for more examples and demo of the
+              functionality.
+            </p>
+            {hasScrollingContent && scrollingContent}
+          </ModalBody>
+          <ModalFooter {...props.modalFooter()} />
+        </ComposedModal>
+      )}
+    </ModalStateManager>
+  );
 };
 
-ExampleUsageWithTriggerButton.storyName = 'Example usage with trigger button';
+WithTriggerButton.storyName = 'Example usage with trigger button';
 
-ExampleUsageWithTriggerButton.parameters = {
+WithTriggerButton.parameters = {
   info: {
     text: `
         An example ComposedModal with a trigger button
