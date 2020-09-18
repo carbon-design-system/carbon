@@ -20,6 +20,42 @@ and is typically used when there are a large amount of options to choose from.
   <Story id="combobox--combobox" />
 </Preview>
 
+## Disabled
+
+A disabled comobobox is available but should not be used as the sole means of
+conveying information. For example, if the user must complete a previous form
+input before moving on to the combobox, make sure to make that clear to the user
+via an error state on the previous form element in adition to disabling the next
+element.
+
+<Preview>
+  <Story id="combobox--disabled" />
+</Preview>
+
+## Light
+
+The light prop should never be used against a light background. The form element
+must have proper contrast against the pages background.
+
+<Preview>
+  <Story id="combobox--light" />
+</Preview>
+
+## Combobox `downshiftProps`
+
+Our `Combobox` component utilizes [Downshift](https://www.downshift-js.com/)
+under the hood to help provide complex yet accessible custom dropdown
+components. We provide access to the built in Downshift features with this prop.
+For more information, checkout the Downshift prop
+[documentation](https://www.downshift-js.com/downshift#props-used-in-examples)
+
+## Placeholders and Labeling
+
+The placeholder is not a replacement for a label under any circumstances
+including space restraints. Placeholders should be used to provide additive
+information regarding the format of the input. In all cases a label is required
+_in addition to_ a placeholder.
+
 ## Component API
 
 <Props sort="asc" />

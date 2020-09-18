@@ -96,3 +96,29 @@ export const Playground = () => (
     />
   </div>
 );
+
+export const disabled = () => (
+  <div style={{ width: 300 }}>
+    <ComboBox
+      disabled
+      items={items}
+      itemToString={(item) => (item ? item.text : '')}
+      placeholder="Filter..."
+      titleText="ComboBox title"
+      helperText="Combobox helper text"
+    />
+  </div>
+);
+
+export const light = () => (
+  <div style={{ width: 300 }}>
+    <ComboBox
+      light
+      items={items}
+      itemToString={(item) => (item ? item.text : '')}
+      placeholder="Filter..."
+      titleText="ComboBox title"
+      helperText="Combobox helper text"
+    />
+  </div>
+);
