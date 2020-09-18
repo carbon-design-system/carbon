@@ -7,7 +7,7 @@
 
 import { action } from '@storybook/addon-actions';
 
-export const initialRows = [
+export const rows = [
   {
     id: 'a',
     name: 'Load Balancer 3',

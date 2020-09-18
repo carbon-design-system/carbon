@@ -531,6 +531,9 @@ Map {
       "onInputChange": Object {
         "type": "func",
       },
+      "onToggleClick": Object {
+        "type": "func",
+      },
       "placeholder": Object {
         "isRequired": true,
         "type": "string",
@@ -602,6 +605,9 @@ Map {
         "type": "func",
       },
       "open": Object {
+        "type": "bool",
+      },
+      "preventCloseOnClickOutside": Object {
         "type": "bool",
       },
       "selectorPrimaryFocus": Object {
@@ -2003,7 +2009,6 @@ Map {
             "da",
             "de",
             "en",
-            "en",
             "eo",
             "es",
             "et",
@@ -3191,6 +3196,7 @@ Map {
     "defaultProps": Object {
       "disabled": false,
       "onKeyDown": [Function],
+      "preventCloseOnClickOutside": false,
       "primaryButtonText": "Save",
       "secondaryButtonText": "Cancel",
       "selectorPrimaryFocus": "[data-modal-primary-focus]",
@@ -3235,6 +3241,9 @@ Map {
         "type": "func",
       },
       "passiveModal": Object {
+        "type": "bool",
+      },
+      "preventCloseOnClickOutside": Object {
         "type": "bool",
       },
       "primaryButtonText": Object {
@@ -4919,18 +4928,12 @@ Map {
   },
   "Tabs" => Object {
     "defaultProps": Object {
-      "ariaLabel": "listbox",
-      "iconDescription": "show menu options",
       "role": "navigation",
       "selected": 0,
       "selectionMode": "automatic",
-      "triggerHref": "#",
       "type": "default",
     },
     "propTypes": Object {
-      "ariaLabel": Object {
-        "type": "string",
-      },
       "children": Object {
         "type": "node",
       },
@@ -4940,9 +4943,8 @@ Map {
       "hidden": Object {
         "type": "bool",
       },
-      "iconDescription": Object {
-        "isRequired": true,
-        "type": "string",
+      "light": Object {
+        "type": "bool",
       },
       "onClick": Object {
         "type": "func",
@@ -4970,10 +4972,6 @@ Map {
         "type": "oneOf",
       },
       "tabContentClassName": Object {
-        "type": "string",
-      },
-      "triggerHref": Object {
-        "isRequired": true,
         "type": "string",
       },
       "type": Object {
@@ -5841,14 +5839,14 @@ Map {
       },
       "labelA": Object {
         "isRequired": true,
-        "type": "string",
+        "type": "node",
       },
       "labelB": Object {
         "isRequired": true,
-        "type": "string",
+        "type": "node",
       },
       "labelText": Object {
-        "type": "string",
+        "type": "node",
       },
       "onChange": Object {
         "type": "func",
@@ -5885,14 +5883,14 @@ Map {
       },
       "labelA": Object {
         "isRequired": true,
-        "type": "string",
+        "type": "node",
       },
       "labelB": Object {
         "isRequired": true,
-        "type": "string",
+        "type": "node",
       },
       "labelText": Object {
-        "type": "string",
+        "type": "node",
       },
       "onChange": Object {
         "type": "func",

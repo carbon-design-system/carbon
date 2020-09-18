@@ -75,6 +75,10 @@ const props = () => {
       'Close after submit (shouldCloseAfterSubmit)',
       true
     ),
+    preventCloseOnClickOutside: boolean(
+      'Prevent closing on click outside of modal (preventCloseOnClickOutside)',
+      false
+    ),
     focusTrap: boolean('Trap focus (focusTrap)', false),
     onBlur: action('onBlur'),
     onClick: action('onClick'),

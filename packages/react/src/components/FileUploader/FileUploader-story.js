@@ -22,6 +22,7 @@ import FileUploader, { FileUploaderButton } from '../FileUploader';
 import FileUploaderSkeleton from '../FileUploader/FileUploader.Skeleton';
 import FileUploaderItem from './FileUploaderItem';
 import FileUploaderDropContainer from './FileUploaderDropContainer';
+import mdx from './FileUploader.mdx';
 
 const { prefix } = settings;
 const buttonKinds = {
@@ -143,6 +144,9 @@ export default {
 
   parameters: {
     component: FileUploader,
+    docs: {
+      page: mdx,
+    },
 
     subcomponents: {
       FileUploaderButton,

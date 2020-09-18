@@ -11,6 +11,7 @@ import React from 'react';
 
 import { withKnobs, boolean, number, select } from '@storybook/addon-knobs';
 import SkeletonText from '../SkeletonText';
+import mdx from './SkeletonText.mdx';
 
 const widths = {
   '100%': '100%',
@@ -34,6 +35,9 @@ export default {
 
   parameters: {
     component: SkeletonText,
+    docs: {
+      page: mdx,
+    },
   },
 };
 

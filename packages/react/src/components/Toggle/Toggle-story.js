@@ -10,6 +10,7 @@ import { action } from '@storybook/addon-actions';
 import { withKnobs, text, boolean } from '@storybook/addon-knobs';
 import Toggle from '../Toggle';
 import ToggleSkeleton from '../Toggle/Toggle.Skeleton';
+import mdx from './Toggle.mdx';
 
 const a11yProps = () => ({
   labelText: text('Label toggle input control (labelText)', ''),
@@ -32,7 +33,9 @@ export default {
 
   parameters: {
     component: Toggle,
-
+    docs: {
+      page: mdx,
+    },
     subcomponents: {
       ToggleSkeleton,
     },

@@ -63,7 +63,7 @@ SwitcherItem.propTypes = {
   children: PropTypes.node.isRequired,
 
   /**
-   * Optionally provide a custom class to apply to the underlying <li> node
+   * Optionally provide a custom class to apply to the underlying `<li>` node
    */
   className: PropTypes.string,
 };

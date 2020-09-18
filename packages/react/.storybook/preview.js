@@ -40,12 +40,14 @@ addParameters({
       // To story the stories, we first build up a list of matches based on
       // keywords. Each keyword has a specific weight that will be used to
       // determine order later on.
-      const UNKNOWN_KEYWORD = 2;
+      const UNKNOWN_KEYWORD = 3;
       const keywords = new Map([
         ['default', 1],
-        ['playground', 3],
-        ['deprecated', 4],
-        ['unstable', 5],
+        ['usage', 2],
+        ['playground', 4],
+        ['development', 5],
+        ['deprecated', 6],
+        ['unstable', 7],
       ]);
       const matches = new Map();
 

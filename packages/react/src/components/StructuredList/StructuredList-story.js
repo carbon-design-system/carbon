@@ -17,6 +17,7 @@ import {
 } from '../StructuredList';
 import StructuredListSkeleton from '../StructuredList/StructuredList.Skeleton';
 import { settings } from 'carbon-components';
+import mdx from './StructuredList.mdx';
 
 const { prefix } = settings;
 
@@ -25,7 +26,9 @@ export default {
 
   parameters: {
     component: StructuredListWrapper,
-
+    docs: {
+      page: mdx,
+    },
     subcomponents: {
       StructuredListHead,
       StructuredListBody,
