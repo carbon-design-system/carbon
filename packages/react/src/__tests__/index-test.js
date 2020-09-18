@@ -194,6 +194,7 @@ describe('Carbon Components React', () => {
         "UnorderedList",
         "unstable_PageSelector",
         "unstable_Pagination",
+        "unstable_Tabs",
         "unstable_TreeNode",
         "unstable_TreeView",
       ]

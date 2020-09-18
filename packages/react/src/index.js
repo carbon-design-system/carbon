@@ -202,6 +202,7 @@ export {
   PageSelector as unstable_PageSelector,
   Pagination as unstable_Pagination,
 } from './components/Pagination/experimental';
+export unstable_Tabs from './components/Tabs/experimental';
 export unstable_TreeView, {
   TreeNode as unstable_TreeNode,
 } from './components/TreeView';

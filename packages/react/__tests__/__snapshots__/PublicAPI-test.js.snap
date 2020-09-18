@@ -7105,6 +7105,65 @@ Map {
       },
     },
   },
+  "unstable_Tabs" => Object {
+    "defaultProps": Object {
+      "role": "navigation",
+      "selected": 0,
+      "selectionMode": "automatic",
+      "type": "default",
+    },
+    "propTypes": Object {
+      "children": Object {
+        "type": "node",
+      },
+      "className": Object {
+        "type": "string",
+      },
+      "hidden": Object {
+        "type": "bool",
+      },
+      "light": Object {
+        "type": "bool",
+      },
+      "onClick": Object {
+        "type": "func",
+      },
+      "onKeyDown": Object {
+        "type": "func",
+      },
+      "onSelectionChange": Object {
+        "type": "func",
+      },
+      "role": Object {
+        "isRequired": true,
+        "type": "string",
+      },
+      "selected": Object {
+        "type": "number",
+      },
+      "selectionMode": Object {
+        "args": Array [
+          Array [
+            "automatic",
+            "manual",
+          ],
+        ],
+        "type": "oneOf",
+      },
+      "tabContentClassName": Object {
+        "type": "string",
+      },
+      "type": Object {
+        "args": Array [
+          Array [
+            "default",
+            "container",
+          ],
+        ],
+        "type": "oneOf",
+      },
+    },
+  },
   "unstable_TreeView" => Object {
     "TreeNode": Object {
       "propTypes": Object {
