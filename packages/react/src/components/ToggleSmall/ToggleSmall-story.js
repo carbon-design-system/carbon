@@ -9,7 +9,6 @@ import React from 'react';
 import { action } from '@storybook/addon-actions';
 import { withKnobs, text, boolean } from '@storybook/addon-knobs';
 import ToggleSmall from '../ToggleSmall';
-import ToggleSmallSkeleton from '../ToggleSmall/ToggleSmall.Skeleton';
 
 const toggleProps = () => ({
   labelText: text(
@@ -31,9 +30,7 @@ export default {
   parameters: {
     component: ToggleSmall,
 
-    subcomponents: {
-      ToggleSmallSkeleton,
-    },
+    subcomponents: {},
   },
 };
 
@@ -75,17 +72,5 @@ Untoggled.parameters = {
         prop will only set the value initially. Small toggles may be used when there is not enough space for a regular sized toggle. This issue is most
         commonly found in tables.
       `,
-  },
-};
-
-export const Skeleton = () => <ToggleSmallSkeleton {...toggleProps()} />;
-
-Skeleton.storyName = 'skeleton';
-
-Skeleton.parameters = {
-  info: {
-    text: `
-            Placeholder skeleton state to use when content is loading.
-          `,
   },
 };
