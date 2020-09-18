@@ -53,7 +53,7 @@ describe('Tabs', () => {
       });
 
       it('renders expected classes on wrapping <div> by default', () => {
-        expect(wrapper.find('div').first().hasClass(`${prefix}--tabs`)).toBe(
+        expect(wrapper.find('div').at(1).hasClass(`${prefix}--tabs`)).toBe(
           true
         );
       });
@@ -67,7 +67,7 @@ describe('Tabs', () => {
             </Tabs>
           )
             .find('div')
-            .first()
+            .at(1)
             .hasClass(`${prefix}--tabs--container`)
         ).toBe(true);
       });

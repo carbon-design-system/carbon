@@ -295,7 +295,7 @@ export default class Tabs extends React.Component {
     const selectedLabel = selectedTab ? selectedTab.props.label : '';
 
     return (
-      <>
+      <div className={`${prefix}--tabs--stable`}>
         <div {...other} className={classes.tabs} role={role}>
           <div
             role="listbox"
@@ -320,7 +320,7 @@ export default class Tabs extends React.Component {
           </ul>
         </div>
         {tabContentWithProps}
-      </>
+      </div>
     );
   }
 }
