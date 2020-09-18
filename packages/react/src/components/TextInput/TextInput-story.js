@@ -11,6 +11,7 @@ import { withKnobs, boolean, select, text } from '@storybook/addon-knobs';
 import TextInput from '../TextInput';
 import TextInputSkeleton from '../TextInput/TextInput.Skeleton';
 import FluidForm from '../FluidForm/FluidForm';
+import mdx from './TextInput.mdx';
 
 const types = {
   None: '',
@@ -109,7 +110,9 @@ export default {
 
   parameters: {
     component: TextInput,
-
+    docs: {
+      page: mdx,
+    },
     subcomponents: {
       TextInputSkeleton,
       'TextInput.ControlledPasswordInput': TextInput.ControlledPasswordInput,

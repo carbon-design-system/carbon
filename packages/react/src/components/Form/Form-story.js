@@ -23,6 +23,7 @@ import SelectItem from '../SelectItem';
 import TextArea from '../TextArea';
 import TextInput from '../TextInput';
 import Toggle from '../Toggle';
+import mdx from './Form.mdx';
 
 const additionalProps = {
   className: 'some-class',
@@ -139,6 +140,9 @@ export default {
 
   parameters: {
     component: Form,
+    docs: {
+      page: mdx,
+    },
 
     subcomponents: {
       FormGroup,

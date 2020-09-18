@@ -11,6 +11,7 @@ import { withKnobs, select, text, number } from '@storybook/addon-knobs';
 import Tooltip from '../Tooltip';
 import Button from '../Button';
 import { OverflowMenuVertical16 } from '@carbon/icons-react';
+import mdx from './Tooltip.mdx';
 
 const { prefix } = settings;
 const directions = {
@@ -111,6 +112,9 @@ export default {
 
   parameters: {
     component: Tooltip,
+    docs: {
+      page: mdx,
+    },
   },
 };
 

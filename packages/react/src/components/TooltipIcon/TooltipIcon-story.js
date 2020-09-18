@@ -9,6 +9,7 @@ import React from 'react';
 import { Filter16 } from '@carbon/icons-react';
 import { withKnobs, select, text } from '@storybook/addon-knobs';
 import TooltipIcon from '../TooltipIcon';
+import mdx from './TooltipIcon.mdx';
 
 const directions = {
   'Top (top)': 'top',
@@ -35,6 +36,9 @@ export default {
 
   parameters: {
     component: TooltipIcon,
+    docs: {
+      page: mdx,
+    },
   },
 };
 
