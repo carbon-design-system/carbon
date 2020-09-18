@@ -1,7 +1,35 @@
 import { Story, Props } from '@storybook/addon-docs/blocks';
 import ComposedModal from '../ComposedModal';
+import { InlineNotification } from '../Notification';
 
 # ComposedModal
+
+[Source code](https://github.com/carbon-design-system/carbon/tree/master/packages/react/src/components/ComposedModal)
+&nbsp;|&nbsp;
+[Usage guidelines](https://www.carbondesignsystem.com/components/modal/usage)
+&nbsp;|&nbsp;
+[Accessibility](https://www.carbondesignsystem.com/components/modal/accessibility)
+
+## Table of Contents
+
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+
+- [Overview](#overview)
+- [Component API](#component-api)
+- [Opening/closing modal](#openingclosing-modal)
+- [Modal sizes](#modal-sizes)
+  - [Alignment](#alignment)
+  - [Overflow content](#overflow-content)
+- [Modal button variants](#modal-button-variants)
+- [Using modal title as message](#using-modal-title-as-message)
+- [Focus management](#focus-management)
+  - [Setting `data-modal-primary-focus` attribute to the target element](#setting-data-modal-primary-focus-attribute-to-the-target-element)
+  - [Specifying a query selector to the target element](#specifying-a-query-selector-to-the-target-element)
+- [References](#references)
+- [Feedback](#feedback)
+
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
 ## Overview
 
@@ -23,7 +51,7 @@ For both modal variants, you can open/close the modal by changing the `open`
 prop. For example, you can implement a launcher button with a React state and a
 `<Button>` that changes the state:
 
-```javascript
+```jsx
 function ModalStateManager() {
   const [open, setOpen] = useState(false);
   return (
@@ -46,7 +74,7 @@ function ModalStateManager() {
 
 You can create an abstract version of such state manager, as shown below.
 
-```javascript
+```jsx
 const ModalStateManager = ({
   renderLauncher: LauncherContent,
   children: ModalContent,
@@ -69,11 +97,13 @@ const ModalStateManager = ({
 `<ModalWrapper>` is a modal state manager implementation which ships out of the
 box with Carbon.
 
-<InlineNotification kind="warning">
-  <code>{`<Modal>`}</code>/<code>{`<ComposedModal>`}</code> has to be put at the
+<InlineNotification
+  kind="warning"
+  title="Warning"
+  subtitle="`Modal` and `ComposedModal` have to be put at the
   top level in a React tree. The easiest way to ensure that is using React
-  portal as shown in above example.
-</InlineNotification>
+  portal as shown in above example."
+/>
 
 ## Modal sizes
 
@@ -81,7 +111,7 @@ There are four responsive
 [modal sizes](https://www.carbondesignsystem.com/components/modal/usage/#modal-sizes):
 `xs`, `small`, default, and `large`. You can set it via the `size` prop.
 
-```javascript
+```jsx
 <ComposedModal size="lg">
   <ModalHeader />
   <ModalBody>
@@ -96,7 +126,7 @@ There are four responsive
 </ComposedModal>
 ```
 
-#### Alignment
+### Alignment
 
 Depending on the modal size of your choice and the viewport size,
 `<Modal>`/`<ComposedModal>` adds 20% padding at the right of the modal body
@@ -105,7 +135,7 @@ form elements. You can set `hasForm` prop to `<Modal>`/`<ModalBody>` to remove
 the padding, and use `bx--modal-content__regular-content` class to apply the 20%
 padding to non-form contents, as shown below.
 
-```javascript
+```jsx
 <ComposedModal>
   <ModalHeader />
   <ModalBody hasForm>
@@ -121,7 +151,7 @@ padding to non-form contents, as shown below.
 </ComposedModal>
 ```
 
-#### Overflow content
+### Overflow content
 
 In cases where the largest modal size cannot fit your modal body content in,
 Carbon design specifies to have a "visual fade" look at the end of the modal
@@ -129,7 +159,7 @@ body area to indicate there is additional content out of view. You can set
 `hasScrollingContent` prop to `<Modal>`/`<ModalBody>` to do that, as shown
 below.
 
-```javascript
+```jsx
 <ComposedModal size="large">
   <ModalHeader />
   <ModalBody hasScrollingContent>
@@ -150,7 +180,7 @@ table shows the supported patterns.
 | Two buttons                                                                                          | Use `<Modal>` without `passiveModal` prop |
 | Two buttons with danger button                                                                       | Use `danger` prop in `<Modal>`            |
 
-```javascript
+```jsx
 <Modal danger>
   <ModalHeader />
   <p className="bx--modal-content__text">The modal body content</p>
@@ -167,21 +197,22 @@ With `<ComposedModal>`, you can control the buttons with the following code.
 | Three buttons                                                                                        | Put three buttons as children of `<ModalFooter>`, instead of using `primaryButtonText` or `secondaryButtonText`. Using this option requires style adjustment defined in application-level CSS for `<ModalFooter>`, e.g. `.bx--modal-footer { padding: 25%; }`. |
 | Two buttons with danger button                                                                       | Set `danger` prop in `<ModalFooter>` (like below)                                                                                                                                                                                                              |
 
-```javascript
+```jsx
 <ComposedModal>
   ...
   <ModalFooter danger primaryButtonText="OK" secondaryButtonText="Cancel" />
 </ComposedModal>
 ```
 
-<InlineNotification kind="warning">
-  As the instruction for the three buttons implies, <code>{`<ModalFooter>`}</code>
-  is flexible on the buttons as you render <code>{`<Button>`}</code> s by yourself,
+<InlineNotification
+  kind="warning"
+  title="Warning"
+  subtitle="As the instruction for the three buttons implies, <ModalFooter>
+  is flexible on the buttons as you render <Button>'s by yourself,
   as shown below. In this case, the application code needs to take care of running
-  actions upon clicking those buttons, e.g. closing the modal:
-</InlineNotification>
+  actions upon clicking those buttons, e.g. closing the modal"></InlineNotification>
 
-```javascript
+```jsx
 <ComposedModal>
   ...
   <ModalFooter>
@@ -211,7 +242,7 @@ clarity to an otherwise repetitive title and body message.
 
 To use this pattern with `<Modal>`, you can omit the `children` prop.
 
-```javascript
+```jsx
 const modalHeadding =
   'Are you sure you want to add the "Speech to Text" service ' +
   'to the node-test app?';
@@ -225,7 +256,7 @@ const modalHeadding =
 
 To use this pattern with `<ComposedModal>`, you can omit `<ModalBody>`.
 
-```javascript
+```jsx
 <ComposedModal>
   <ModalHeader label="Modla label">
     <h1>
@@ -256,11 +287,11 @@ to `<Modal>`/`<ComposedModal>`.
 Also for both modal variants, you can set the DOM element that gets focus when
 the modal gets open, by either of the following ways:
 
-#### Setting `data-modal-primary-focus` attribute to the target element
+### Setting `data-modal-primary-focus` attribute to the target element
 
 <br />
 
-```javascript
+```jsx
 <ComposedModal>
   <ModalBody hasForm>
     <TextInput data-modal-primary-focus labelText="Enter something" />
@@ -268,11 +299,11 @@ the modal gets open, by either of the following ways:
 </ComposedModal>
 ```
 
-#### Specifying a query selector to the target element
+### Specifying a query selector to the target element
 
 <br />
 
-```javascript
+```jsx
 {
   /* `.bx--text-input` selects the `<input>` in `<TextInput>` */
 }
@@ -291,6 +322,6 @@ on the Carbon Design System website.
 
 ## Feedback
 
-Help us improve this component by providing feedback through, asking questions
-on Slack,or updating this file on
+Help us improve this component by providing feedback, asking questions on Slack,
+or updating this file on
 [GitHub](https://github.com/carbon-design-system/carbon/edit/master/packages/react/src/components/Modal/Modal.mdx).

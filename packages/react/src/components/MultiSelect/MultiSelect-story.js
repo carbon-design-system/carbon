@@ -17,6 +17,7 @@ import {
 import { withReadme } from 'storybook-readme';
 import readme from './README.md';
 import MultiSelect from '../MultiSelect';
+import mdx from './MultiSelect.mdx';
 
 const items = [
   {
@@ -104,7 +105,9 @@ export default {
 
   parameters: {
     component: MultiSelect,
-
+    docs: {
+      page: mdx,
+    },
     subcomponents: {
       'MultiSelect.Filterable': MultiSelect.Filterable,
     },

@@ -29,7 +29,6 @@ export default {
 
   parameters: {
     component: Toggle,
-
     subcomponents: {},
   },
 };

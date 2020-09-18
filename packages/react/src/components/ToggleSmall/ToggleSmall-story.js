@@ -29,7 +29,6 @@ export default {
 
   parameters: {
     component: ToggleSmall,
-
     subcomponents: {},
   },
 };

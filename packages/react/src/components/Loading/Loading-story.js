@@ -8,6 +8,7 @@
 import React from 'react';
 import { withKnobs, boolean, text } from '@storybook/addon-knobs';
 import Loading from '../Loading';
+import mdx from './Loading.mdx';
 
 const props = () => ({
   active: boolean('Active (active)', true),
@@ -22,6 +23,9 @@ export default {
 
   parameters: {
     component: Loading,
+    docs: {
+      page: mdx,
+    },
   },
 };
 
