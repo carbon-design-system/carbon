@@ -4932,12 +4932,18 @@ Map {
   },
   "Tabs" => Object {
     "defaultProps": Object {
+      "ariaLabel": "listbox",
+      "iconDescription": "show menu options",
       "role": "navigation",
       "selected": 0,
       "selectionMode": "automatic",
+      "triggerHref": "#",
       "type": "default",
     },
     "propTypes": Object {
+      "ariaLabel": Object {
+        "type": "string",
+      },
       "children": Object {
         "type": "node",
       },
@@ -4947,8 +4953,9 @@ Map {
       "hidden": Object {
         "type": "bool",
       },
-      "light": Object {
-        "type": "bool",
+      "iconDescription": Object {
+        "isRequired": true,
+        "type": "string",
       },
       "onClick": Object {
         "type": "func",
@@ -4976,6 +4983,10 @@ Map {
         "type": "oneOf",
       },
       "tabContentClassName": Object {
+        "type": "string",
+      },
+      "triggerHref": Object {
+        "isRequired": true,
         "type": "string",
       },
       "type": Object {
