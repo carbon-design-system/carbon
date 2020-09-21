@@ -56,6 +56,23 @@ function ExampleDropContainerApp(props) {
       );
       return;
     }
+    // file type validation
+    if (fileToUpload.invalidFileType) {
+      const updatedFile = {
+        ...fileToUpload,
+        status: 'edit',
+        iconDescription: 'Delete file',
+        invalid: true,
+        errorSubject: 'Invalid file type',
+        errorBody: `"${fileToUpload.name}" does not have a valid file type.`,
+      };
+      setFiles((files) =>
+        files.map((file) =>
+          file.uuid === fileToUpload.uuid ? updatedFile : file
+        )
+      );
+      return;
+    }
     try {
       const response = await fetch(
         'https://www.mocky.io/v2/5185415ba171ea3a00704eed?mocky-delay=1000ms',
