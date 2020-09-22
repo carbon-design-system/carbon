@@ -137,6 +137,16 @@
     height: 100%;
     pointer-events: none;
     fill: $ui-05;
+
+    // Windows HCM Fix
+    @media screen and (-ms-high-contrast: active) {
+      // `GrayText` is a CSS2 system color to help improve colors in HCM
+      fill: ButtonText;
+
+      path {
+        fill: ButtonText;
+      }
+    }
   }
 
   .#{$prefix}--select-input__wrapper[data-invalid]
