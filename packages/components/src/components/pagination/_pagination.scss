@@ -158,7 +158,6 @@ $css--helpers: true;
     fill: $ui-05;
 
     @media screen and (-ms-high-contrast: active) {
-      // `ButtonText` is a CSS2 system color to help improve colors in HCM
       border: 1px solid transparent;
     }
   }
