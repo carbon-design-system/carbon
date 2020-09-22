@@ -50,15 +50,15 @@ export default class ToggleSkeleton extends React.Component {
         />
 
         <label
-          aria-label={labelText ? null : this.props['aria-label']}
-          className={`${prefix}--toggle__label ${prefix}--skeleton`}
-          htmlFor={id}>
-          {labelText && (
-            <span className={`${prefix}--toggle__label-text`}>{labelText}</span>
-          )}
-          <span className={`${prefix}--toggle__text--left`} />
-          <span className={`${prefix}--toggle__appearance`} />
-          <span className={`${prefix}--toggle__text--right`} />
+          className={`${prefix}--toggle-input__label`}
+          htmlFor={id}
+          aria-label={labelText ? null : this.props['aria-label']}>
+          {labelText}
+          <span className={`${prefix}--toggle__switch`}>
+            <span className={`${prefix}--toggle__text--left`} />
+            <span className={`${prefix}--toggle__appearance`} />
+            <span className={`${prefix}--toggle__text--right`} />
+          </span>
         </label>
       </div>
     );
