@@ -11,6 +11,7 @@ import React from 'react';
 import { action } from '@storybook/addon-actions';
 import { withKnobs, text, boolean } from '@storybook/addon-knobs';
 import Link from '../Link';
+import mdx from './Link.mdx';
 
 const props = () => ({
   className: 'some-class',
@@ -30,6 +31,9 @@ export default {
 
   parameters: {
     component: Link,
+    docs: {
+      page: mdx,
+    },
   },
 };
 

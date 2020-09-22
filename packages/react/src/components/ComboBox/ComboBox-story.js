@@ -9,6 +9,7 @@ import React from 'react';
 import { action } from '@storybook/addon-actions';
 import { withKnobs, boolean, select, text } from '@storybook/addon-knobs';
 import ComboBox from '../ComboBox';
+import mdx from './ComboBox.mdx';
 
 const items = [
   {
@@ -71,6 +72,9 @@ export default {
 
   parameters: {
     component: ComboBox,
+    docs: {
+      page: mdx,
+    },
   },
 };
 

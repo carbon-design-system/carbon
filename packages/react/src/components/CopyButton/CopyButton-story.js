@@ -10,6 +10,7 @@ import { action } from '@storybook/addon-actions';
 
 import { withKnobs, number, text } from '@storybook/addon-knobs';
 import CopyButton from '../CopyButton';
+import mdx from './CopyButton.mdx';
 
 const props = () => ({
   feedback: text('The text shown upon clicking (feedback)', 'Copied!'),
@@ -30,6 +31,9 @@ export default {
 
   parameters: {
     component: CopyButton,
+    docs: {
+      page: mdx,
+    },
   },
 };
 

@@ -10,6 +10,7 @@ import { action } from '@storybook/addon-actions';
 import { withKnobs, number, select, text } from '@storybook/addon-knobs';
 import Button from '../Button';
 import InlineLoading from '../InlineLoading';
+import mdx from './InlineLoading.mdx';
 
 const props = () => ({
   status: select(
@@ -38,6 +39,9 @@ export default {
 
   parameters: {
     component: InlineLoading,
+    docs: {
+      page: mdx,
+    },
   },
 };
 

@@ -205,6 +205,12 @@
     transform: rotate(90deg);
     transition: transform $duration--moderate-01 motion(standard, productive);
     fill: $ui-05;
+
+    // Windows HCM fix
+    @media screen and (-ms-high-contrast: active) {
+      // `ButtonText` is a CSS2 system color to help improve colors in HCM
+      fill: ButtonText;
+    }
   }
 
   // fix expanded parent separating border length

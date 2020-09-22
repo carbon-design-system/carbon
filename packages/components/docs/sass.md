@@ -16853,6 +16853,12 @@ Data table expandable styles
     transform: rotate(90deg);
     transition: transform $duration--moderate-01 motion(standard, productive);
     fill: $ui-05;
+
+    // Windows HCM fix
+    @media screen and (-ms-high-contrast: active) {
+      // `ButtonText` is a CSS2 system color to help improve colors in HCM
+      fill: ButtonText;
+    }
   }
 
   // fix expanded parent separating border length
@@ -17201,6 +17207,15 @@ Data table sort styles
     opacity: 1;
     transition: transform $transition--base $carbon--standard-easing;
     fill: $ui-05;
+  }
+
+  // Windows HCM fix
+  .#{$prefix}--table-sort__icon,
+  .#{$prefix}--table-sort__icon-unsorted {
+    @media screen and (-ms-high-contrast: active) {
+      // `ButtonText` is a CSS2 system color to help improve colors in HCM
+      fill: ButtonText;
+    }
   }
 
   //----------------------------------------------------------------------------
@@ -21071,6 +21086,12 @@ Overflow menu styles
     width: rem(16px);
     height: rem(16px);
     fill: $icon-01;
+
+    // Windows HCM fix
+    @media screen and (-ms-high-contrast: active) {
+      // `ButtonText` is a CSS2 system color to help improve colors in HCM
+      fill: ButtonText;
+    }
   }
 
   .#{$prefix}--overflow-menu-options {
@@ -22540,6 +22561,12 @@ Search styles
     transform: translateY(-50%);
     pointer-events: none;
     fill: $icon-02;
+
+    // Windows HCM fix
+    @media screen and (-ms-high-contrast: active) {
+      // `ButtonText` is a CSS2 system color to help improve colors in HCM
+      fill: ButtonText;
+    }
   }
 
   .#{$prefix}--search-close {

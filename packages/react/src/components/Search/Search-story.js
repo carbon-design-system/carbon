@@ -15,6 +15,7 @@ import Search from '../Search';
 import SearchSkeleton from '../Search/Search.Skeleton';
 import SearchFilterButton from '../SearchFilterButton';
 import SearchLayoutButton from '../SearchLayoutButton';
+import mdx from './Search.mdx';
 
 const sizes = {
   'Regular size (xl)': 'xl',
@@ -43,6 +44,9 @@ export default {
 
   parameters: {
     component: Search,
+    docs: {
+      page: mdx,
+    },
 
     subcomponents: {
       SearchSkeleton,
