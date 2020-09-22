@@ -120,8 +120,9 @@
     pointer-events: none;
     fill: $icon-02;
 
-    // Windows HCM fix
-    @media screen and (-ms-high-contrast: active) {
+    // Windows, Firefox HCM Fix
+    @media screen and (-ms-high-contrast: active),
+      screen and (prefers-contrast) {
       // `ButtonText` is a CSS2 system color to help improve colors in HCM
       fill: ButtonText;
     }
@@ -170,6 +171,12 @@
 
   .#{$prefix}--search-close svg {
     fill: inherit;
+
+    // Firefox HCM Fix
+    @media screen and (prefers-contrast) {
+      // `ButtonText` is a CSS2 system color to help improve colors in HCM
+      fill: ButtonText;
+    }
   }
 
   .#{$prefix}--search-close,
