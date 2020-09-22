@@ -157,7 +157,9 @@ $css--helpers: true;
       background-color $duration--fast-02 motion(standard, productive);
     fill: $ui-05;
 
-    @media screen and (-ms-high-contrast: active) {
+    // Windows, Firefox HCM Fix
+    @media screen and (-ms-high-contrast: active),
+      screen and (prefers-contrast) {
       // `ButtonText` is a CSS2 system color to help improve colors in HCM
       border: 1px solid transparent;
     }
