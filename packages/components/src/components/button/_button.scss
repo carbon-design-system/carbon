@@ -250,6 +250,16 @@
   .#{$prefix}--btn.#{$prefix}--btn--icon-only.#{$prefix}--btn--ghost:hover
     .#{$prefix}--btn__icon {
     fill: $icon-01;
+
+    // Windows HCM Fix
+    @media screen and (-ms-high-contrast: active) {
+      // `ButtonText` is a CSS2 system color to help improve colors in HCM
+      fill: ButtonText;
+
+      path {
+        fill: ButtonText;
+      }
+    }
   }
 
   .#{$prefix}--btn--ghost.#{$prefix}--btn--icon-only
@@ -267,6 +277,16 @@
   .#{$prefix}--btn.#{$prefix}--btn--icon-only.#{$prefix}--btn--ghost[disabled]:hover
     .#{$prefix}--btn__icon {
     fill: $disabled-02;
+
+    // Windows HCM Fix
+    @media screen and (-ms-high-contrast: active) {
+      // `GrayText` is a CSS2 system color to help improve colors in HCM
+      fill: GrayText;
+
+      path {
+        fill: GrayText;
+      }
+    }
   }
 
   .#{$prefix}--btn--ghost.#{$prefix}--btn--icon-only[disabled] {
