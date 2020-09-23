@@ -29,7 +29,6 @@ const directions = {
 const props = {
   withIcon: () => ({
     direction: select('Tooltip direction (direction)', directions, 'bottom'),
-    focusTrap: boolean('Focus trap (focusTrap)', true),
     triggerText: text('Trigger text (triggerText)', 'Tooltip label'),
     tabIndex: number('Tab index (tabIndex in <Tooltip>)', 0),
     selectorPrimaryFocus: text(
@@ -40,7 +39,6 @@ const props = {
   withoutIcon: () => ({
     showIcon: false,
     direction: select('Tooltip direction (direction)', directions, 'bottom'),
-    focusTrap: boolean('Focus trap (focusTrap)', true),
     triggerText: text('Trigger text (triggerText)', 'Tooltip label'),
     tabIndex: number('Tab index (tabIndex in <Tooltip>)', 0),
     selectorPrimaryFocus: text(
@@ -51,7 +49,6 @@ const props = {
   customIcon: () => ({
     showIcon: true,
     direction: select('Tooltip direction (direction)', directions, 'bottom'),
-    focusTrap: boolean('Focus trap (focusTrap)', true),
     triggerText: text('Trigger text (triggerText)', 'Tooltip label'),
     tabIndex: number('Tab index (tabIndex in <Tooltip>)', 0),
     selectorPrimaryFocus: text(
@@ -70,7 +67,6 @@ const props = {
   customIconOnly: () => ({
     showIcon: true,
     direction: select('Tooltip direction (direction)', directions, 'bottom'),
-    focusTrap: boolean('Focus trap (focusTrap)', true),
     iconDescription: 'Helpful Information',
     tabIndex: number('Tab index (tabIndex in <Tooltip>)', 0),
     selectorPrimaryFocus: text(
@@ -106,10 +102,12 @@ function UncontrolledTooltipExample() {
       </Button>
       <div style={{ padding: '15px', margin: '4px 20px' }}>
         <Tooltip
-          focusTrap={false}
+          {...{
+            ...props.withoutIcon(),
+            focusTrap: boolean('Focus trap (focusTrap)', true),
+          }}
           triggerText={<div>My text wrapped with tooltip</div>}
-          open={value}
-          showIcon={false}>
+          open={value}>
           <p id="tooltip-body">
             This is some tooltip text. This box shows the maximum amount of text
             that should appear inside. If more room is needed please use a modal
