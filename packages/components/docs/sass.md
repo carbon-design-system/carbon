@@ -18041,6 +18041,7 @@ File uploader styles
     }
 
     .#{$prefix}--form-requirement {
+      display: block;
       grid-column: 1 / -1;
       max-height: none;
       margin: 0;
@@ -18104,6 +18105,11 @@ File uploader styles
     @include type-style('label-01');
 
     padding: 0 $carbon--spacing-05;
+  }
+
+  .#{$prefix}--file__selected-file--invalid
+    .#{$prefix}--form-requirement__title {
+    color: $text-error;
   }
 
   .#{$prefix}--file__selected-file--invalid
