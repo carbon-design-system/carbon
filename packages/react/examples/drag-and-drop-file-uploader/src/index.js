@@ -24,10 +24,10 @@ const { prefix } = settings;
 
 function ExampleDropContainerApp(props) {
   const [files, setFiles] = useState([]);
-  const handleDrop = e => {
+  const handleDrop = (e) => {
     e.preventDefault();
   };
-  const handleDragover = e => {
+  const handleDragover = (e) => {
     e.preventDefault();
   };
   useEffect(() => {
@@ -38,7 +38,7 @@ function ExampleDropContainerApp(props) {
       document.removeEventListener('dragover', handleDragover);
     };
   }, []);
-  const uploadFile = async fileToUpload => {
+  const uploadFile = async (fileToUpload) => {
     // file size validation
     if (fileToUpload.filesize > 512000) {
       const updatedFile = {
@@ -49,8 +49,25 @@ function ExampleDropContainerApp(props) {
         errorSubject: 'File size exceeds limit',
         errorBody: '500kb max file size. Select a new file and try again.',
       };
-      setFiles(files =>
-        files.map(file =>
+      setFiles((files) =>
+        files.map((file) =>
+          file.uuid === fileToUpload.uuid ? updatedFile : file
+        )
+      );
+      return;
+    }
+    // file type validation
+    if (fileToUpload.invalidFileType) {
+      const updatedFile = {
+        ...fileToUpload,
+        status: 'edit',
+        iconDescription: 'Delete file',
+        invalid: true,
+        errorSubject: 'Invalid file type',
+        errorBody: `"${fileToUpload.name}" does not have a valid file type.`,
+      };
+      setFiles((files) =>
+        files.map((file) =>
           file.uuid === fileToUpload.uuid ? updatedFile : file
         )
       );
@@ -73,8 +90,8 @@ function ExampleDropContainerApp(props) {
         status: 'complete',
         iconDescription: 'Upload complete',
       };
-      setFiles(files =>
-        files.map(file =>
+      setFiles((files) =>
+        files.map((file) =>
           file.uuid === fileToUpload.uuid ? updatedFile : file
         )
       );
@@ -86,8 +103,8 @@ function ExampleDropContainerApp(props) {
           status: 'edit',
           iconDescription: 'Remove file',
         };
-        setFiles(files =>
-          files.map(file =>
+        setFiles((files) =>
+          files.map((file) =>
             file.uuid === fileToUpload.uuid ? updatedFile : file
           )
         );
@@ -99,8 +116,8 @@ function ExampleDropContainerApp(props) {
         iconDescription: 'Upload failed',
         invalid: true,
       };
-      setFiles(files =>
-        files.map(file =>
+      setFiles((files) =>
+        files.map((file) =>
           file.uuid === fileToUpload.uuid ? updatedFile : file
         )
       );
@@ -110,7 +127,7 @@ function ExampleDropContainerApp(props) {
   const onAddFiles = useCallback(
     (evt, { addedFiles }) => {
       evt.stopPropagation();
-      const newFiles = addedFiles.map(file => ({
+      const newFiles = addedFiles.map((file) => ({
         uuid: uid(),
         name: file.name,
         filesize: file.size,

@@ -7453,6 +7453,7 @@ $support-03: if(
   - [carbon--theme [mixin]](#carbon--theme-mixin)
   - [inline-notifications [mixin]](#inline-notifications-mixin)
   - [toast-notifications [mixin]](#toast-notifications-mixin)
+  - [number-input [mixin]](#number-input-mixin)
   - [text-input [mixin]](#text-input-mixin)
 
 ### ✅support-04 [variable]
@@ -16853,6 +16854,12 @@ Data table expandable styles
     transform: rotate(90deg);
     transition: transform $duration--moderate-01 motion(standard, productive);
     fill: $ui-05;
+
+    // Windows HCM fix
+    @media screen and (-ms-high-contrast: active) {
+      // `ButtonText` is a CSS2 system color to help improve colors in HCM
+      fill: ButtonText;
+    }
   }
 
   // fix expanded parent separating border length
@@ -17201,6 +17208,15 @@ Data table sort styles
     opacity: 1;
     transition: transform $transition--base $carbon--standard-easing;
     fill: $ui-05;
+  }
+
+  // Windows HCM fix
+  .#{$prefix}--table-sort__icon,
+  .#{$prefix}--table-sort__icon-unsorted {
+    @media screen and (-ms-high-contrast: active) {
+      // `ButtonText` is a CSS2 system color to help improve colors in HCM
+      fill: ButtonText;
+    }
   }
 
   //----------------------------------------------------------------------------
@@ -18287,10 +18303,11 @@ Form styles
 
   input[data-invalid],
   .#{$prefix}--number[data-invalid] .#{$prefix}--number__input-wrapper,
+  .#{$prefix}--number__input-wrapper--warning,
   .#{$prefix}--date-picker-input__wrapper,
   .#{$prefix}--time-picker--invalid,
   .#{$prefix}--text-input__field-wrapper[data-invalid],
-  .#{$prefix}--text-input--warn,
+  .#{$prefix}--text-input__field-wrapper--warning > .#{$prefix}--text-input,
   .#{$prefix}--text-area__wrapper[data-invalid],
   .#{$prefix}--select-input__wrapper[data-invalid],
   .#{$prefix}--time-picker[data-invalid],
@@ -18319,7 +18336,7 @@ Form styles
 
   //Fluid Form
   .#{$prefix}--form--fluid .#{$prefix}--text-input__field-wrapper[data-invalid],
-  .#{$prefix}--form--fluid .#{$prefix}--text-input__field-wrapper[data-warn] {
+  .#{$prefix}--form--fluid .#{$prefix}--text-input__field-wrapper--warning {
     display: block;
   }
 
@@ -20861,6 +20878,15 @@ Number input styles
     fill: $support-01;
   }
 
+  .#{$prefix}--number__invalid--warning {
+    fill: $support-03;
+  }
+
+  .#{$prefix}--number__invalid--warning path[data-icon-path='inner-path'] {
+    opacity: 1;
+    fill: $carbon__black-100;
+  }
+
   .#{$prefix}--number--light input[type='number'] {
     background-color: $field-02;
   }
@@ -21001,6 +21027,7 @@ Number input styles
   - [ui-04 [variable]](#ui-04-variable)
   - [icon-01 [variable]](#icon-01-variable)
   - [support-01 [variable]](#support-01-variable)
+  - [support-03 [variable]](#support-03-variable)
   - [field-02 [variable]](#field-02-variable)
   - [ui-01 [variable]](#ui-01-variable)
   - [hover-ui [variable]](#hover-ui-variable)
@@ -21071,6 +21098,12 @@ Overflow menu styles
     width: rem(16px);
     height: rem(16px);
     fill: $icon-01;
+
+    // Windows HCM fix
+    @media screen and (-ms-high-contrast: active) {
+      // `ButtonText` is a CSS2 system color to help improve colors in HCM
+      fill: ButtonText;
+    }
   }
 
   .#{$prefix}--overflow-menu-options {
@@ -22540,6 +22573,12 @@ Search styles
     transform: translateY(-50%);
     pointer-events: none;
     fill: $icon-02;
+
+    // Windows HCM fix
+    @media screen and (-ms-high-contrast: active) {
+      // `ButtonText` is a CSS2 system color to help improve colors in HCM
+      fill: ButtonText;
+    }
   }
 
   .#{$prefix}--search-close {
