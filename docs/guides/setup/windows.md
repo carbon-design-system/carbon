@@ -21,7 +21,7 @@ but can be unexpected.
 6. Install nvm via their install and update script
    [found here](https://github.com/nvm-sh/nvm#install--update-script)
 7. Source your newly NVMed .bashrc `source ~/.bashrc`
-8. Install Node 12 `nvm install 12`
+8. Install latest LTS Node release `nvm install --lts`
 9. Install Python 2 `sudo apt install python2-minimal`
 10. Install Yarn by running:
     - `curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -`
