@@ -74,6 +74,12 @@
     width: rem(16px);
     height: rem(16px);
     fill: $icon-01;
+
+    // Windows HCM fix
+    @media screen and (-ms-high-contrast: active) {
+      // `ButtonText` is a CSS2 system color to help improve colors in HCM
+      fill: ButtonText;
+    }
   }
 
   .#{$prefix}--overflow-menu-options {

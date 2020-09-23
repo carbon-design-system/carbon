@@ -49,6 +49,24 @@ const ExampleDropContainerApp = (props) => {
       return;
     }
 
+    // file type validation
+    if (fileToUpload.invalidFileType) {
+      const updatedFile = {
+        ...fileToUpload,
+        status: 'edit',
+        iconDescription: 'Delete file',
+        invalid: true,
+        errorSubject: 'Invalid file type',
+        errorBody: `"${fileToUpload.name}" does not have a valid file type.`,
+      };
+      setFiles((files) =>
+        files.map((file) =>
+          file.uuid === fileToUpload.uuid ? updatedFile : file
+        )
+      );
+      return;
+    }
+
     // simulate network request time
     const rand = Math.random() * 1000;
     setTimeout(() => {
@@ -87,6 +105,7 @@ const ExampleDropContainerApp = (props) => {
         filesize: file.size,
         status: 'uploading',
         iconDescription: 'Uploading',
+        invalidFileType: file.invalidFileType,
       }));
       // eslint-disable-next-line react/prop-types
       if (props.multiple) {
