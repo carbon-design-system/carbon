@@ -57,6 +57,7 @@ exports[`ModalWrapper should render 1`] = `
       onRequestSubmit={[Function]}
       open={false}
       passiveModal={false}
+      preventCloseOnClickOutside={false}
       primaryButtonDisabled={false}
       primaryButtonText="Save"
       secondaryButtonText="Cancel"

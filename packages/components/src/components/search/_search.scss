@@ -119,6 +119,12 @@
     transform: translateY(-50%);
     pointer-events: none;
     fill: $icon-02;
+
+    // Windows HCM fix
+    @media screen and (-ms-high-contrast: active) {
+      // `ButtonText` is a CSS2 system color to help improve colors in HCM
+      fill: ButtonText;
+    }
   }
 
   .#{$prefix}--search-close {
