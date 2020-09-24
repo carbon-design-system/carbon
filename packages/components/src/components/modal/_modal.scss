@@ -353,6 +353,13 @@
     width: rem(20px);
     height: rem(20px);
     fill: $icon-01;
+
+    // Windows, Firefox HCM Fix
+    @media screen and (-ms-high-contrast: active),
+      screen and (prefers-contrast) {
+      // `ButtonText` is a CSS2 system color to help improve colors in HCM
+      fill: ButtonText;
+    }
   }
 
   .#{$prefix}--body--with-modal-open {
