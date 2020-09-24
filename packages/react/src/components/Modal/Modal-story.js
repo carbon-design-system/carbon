@@ -63,6 +63,10 @@ const props = () => ({
   onRequestClose: action('onRequestClose'),
   onRequestSubmit: action('onRequestSubmit'),
   onSecondarySubmit: action('onSecondarySubmit'),
+  preventCloseOnClickOutside: boolean(
+    'Prevent closing on click outside of modal (preventCloseOnClickOutside)',
+    false
+  ),
 });
 
 const titleOnlyProps = () => {

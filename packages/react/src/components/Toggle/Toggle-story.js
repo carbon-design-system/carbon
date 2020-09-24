@@ -9,16 +9,12 @@ import React from 'react';
 import { action } from '@storybook/addon-actions';
 import { withKnobs, text, boolean } from '@storybook/addon-knobs';
 import Toggle from '../Toggle';
-import ToggleSkeleton from '../Toggle/Toggle.Skeleton';
-import mdx from './Toggle.mdx';
-
-const a11yProps = () => ({
-  labelText: text('Label toggle input control (labelText)', ''),
-  ['aria-label']: text('ARIA label of the toggle (aria-label)', ''),
-});
 
 const toggleProps = () => ({
-  ...a11yProps(),
+  labelText: text(
+    'Label toggle input control (labelText)',
+    'Toggle element label'
+  ),
   className: 'some-class',
   labelA: text('Label for untoggled state (labelA)', 'Off'),
   labelB: text('Label for toggled state (labelB)', 'On'),
@@ -33,12 +29,7 @@ export default {
 
   parameters: {
     component: Toggle,
-    docs: {
-      page: mdx,
-    },
-    subcomponents: {
-      ToggleSkeleton,
-    },
+    subcomponents: {},
   },
 };
 
@@ -78,17 +69,5 @@ Untoggled.parameters = {
         Setting the toggled property will allow you to change the value dynamically, whereas setting the defaultToggled
         prop will only set the value initially. This example has defaultToggled set to false.
       `,
-  },
-};
-
-export const Skeleton = () => <ToggleSkeleton {...a11yProps()} />;
-
-Skeleton.storyName = 'skeleton';
-
-Skeleton.parameters = {
-  info: {
-    text: `
-            Placeholder skeleton state to use when content is loading.
-          `,
   },
 };
