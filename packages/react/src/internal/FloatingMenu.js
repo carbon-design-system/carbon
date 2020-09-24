@@ -343,7 +343,9 @@ class FloatingMenu extends React.Component {
       tabbableNode || // First sequentially focusable node
       focusableNode || // First programmatic focusable node
       menuBody;
-    focusTarget.focus();
+    if (this.props.focusTrap) {
+      focusTarget.focus();
+    }
     if (focusTarget === menuBody && __DEV__) {
       warning(
         focusableNode === null,
