@@ -554,7 +554,7 @@ Define color variables
   $ibm-color__magenta-30: #ffafd2 !default !global;
   $ibm-color__magenta-40: #ff7eb6 !default !global;
   $ibm-color__magenta-50: #ee5396 !default !global;
-  $ibm-color__magenta-60: #d12771 !default !global;
+  $ibm-color__magenta-60: #d02670 !default !global;
   $ibm-color__magenta-70: #9f1853 !default !global;
   $ibm-color__magenta-80: #740937 !default !global;
   $ibm-color__magenta-90: #510224 !default !global;
@@ -595,7 +595,7 @@ Define color variables
   $ibm-color__warm-gray-30: #cac5c4 !default !global;
   $ibm-color__warm-gray-40: #ada8a8 !default !global;
   $ibm-color__warm-gray-50: #8f8b8b !default !global;
-  $ibm-color__warm-gray-60: #736f6f !default !global;
+  $ibm-color__warm-gray-60: #726e6e !default !global;
   $ibm-color__warm-gray-70: #565151 !default !global;
   $ibm-color__warm-gray-80: #3c3838 !default !global;
   $ibm-color__warm-gray-90: #272525 !default !global;
@@ -685,7 +685,7 @@ Define color variables
       30: #ffafd2,
       40: #ff7eb6,
       50: #ee5396,
-      60: #d12771,
+      60: #d02670,
       70: #9f1853,
       80: #740937,
       90: #510224,
@@ -736,7 +736,7 @@ Define color variables
       30: #cac5c4,
       40: #ada8a8,
       50: #8f8b8b,
-      60: #736f6f,
+      60: #726e6e,
       70: #565151,
       80: #3c3838,
       90: #272525,
@@ -748,7 +748,7 @@ Define color variables
       30: #cac5c4,
       40: #ada8a8,
       50: #8f8b8b,
-      60: #736f6f,
+      60: #726e6e,
       70: #565151,
       80: #3c3838,
       90: #272525,
@@ -835,7 +835,7 @@ Define color variables
   $carbon--magenta-30: #ffafd2 !default !global;
   $carbon--magenta-40: #ff7eb6 !default !global;
   $carbon--magenta-50: #ee5396 !default !global;
-  $carbon--magenta-60: #d12771 !default !global;
+  $carbon--magenta-60: #d02670 !default !global;
   $carbon--magenta-70: #9f1853 !default !global;
   $carbon--magenta-80: #740937 !default !global;
   $carbon--magenta-90: #510224 !default !global;
@@ -876,7 +876,7 @@ Define color variables
   $carbon--warm-gray-30: #cac5c4 !default !global;
   $carbon--warm-gray-40: #ada8a8 !default !global;
   $carbon--warm-gray-50: #8f8b8b !default !global;
-  $carbon--warm-gray-60: #736f6f !default !global;
+  $carbon--warm-gray-60: #726e6e !default !global;
   $carbon--warm-gray-70: #565151 !default !global;
   $carbon--warm-gray-80: #3c3838 !default !global;
   $carbon--warm-gray-90: #272525 !default !global;
@@ -940,7 +940,7 @@ Define color variables
   $magenta-30: #ffafd2 !default !global;
   $magenta-40: #ff7eb6 !default !global;
   $magenta-50: #ee5396 !default !global;
-  $magenta-60: #d12771 !default !global;
+  $magenta-60: #d02670 !default !global;
   $magenta-70: #9f1853 !default !global;
   $magenta-80: #740937 !default !global;
   $magenta-90: #510224 !default !global;
@@ -981,7 +981,7 @@ Define color variables
   $warm-gray-30: #cac5c4 !default !global;
   $warm-gray-40: #ada8a8 !default !global;
   $warm-gray-50: #8f8b8b !default !global;
-  $warm-gray-60: #736f6f !default !global;
+  $warm-gray-60: #726e6e !default !global;
   $warm-gray-70: #565151 !default !global;
   $warm-gray-80: #3c3838 !default !global;
   $warm-gray-90: #272525 !default !global;
@@ -1071,7 +1071,7 @@ Define color variables
       30: #ffafd2,
       40: #ff7eb6,
       50: #ee5396,
-      60: #d12771,
+      60: #d02670,
       70: #9f1853,
       80: #740937,
       90: #510224,
@@ -1122,7 +1122,7 @@ Define color variables
       30: #cac5c4,
       40: #ada8a8,
       50: #8f8b8b,
-      60: #736f6f,
+      60: #726e6e,
       70: #565151,
       80: #3c3838,
       90: #272525,
@@ -1134,7 +1134,7 @@ Define color variables
       30: #cac5c4,
       40: #ada8a8,
       50: #8f8b8b,
-      60: #736f6f,
+      60: #726e6e,
       70: #565151,
       80: #3c3838,
       90: #272525,
