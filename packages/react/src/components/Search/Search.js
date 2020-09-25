@@ -32,6 +32,11 @@ export default class Search extends Component {
     defaultValue: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
 
     /**
+     * Specify whether the `<input>` should be disabled
+     */
+    disabled: PropTypes.bool,
+
+    /**
      * Specify a custom `id` for the input
      */
     id: PropTypes.string,
@@ -145,6 +150,7 @@ export default class Search extends Component {
       small,
       size = !small ? 'xl' : 'sm',
       light,
+      disabled,
       ...other
     } = this.props;
 
@@ -175,6 +181,7 @@ export default class Search extends Component {
           autoComplete="off"
           {...other}
           type={type}
+          disabled={disabled}
           className={`${prefix}--search-input`}
           id={id}
           placeholder={placeHolderText}
