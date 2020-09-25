@@ -106,7 +106,7 @@ There are four responsive
 
 ### Alignment
 
-Depending on the modal size of your choice and the viewport size,
+Depending on the size prop of your modal and the viewport,
 `<Modal>`/`<ComposedModal>` adds 20% padding at the right of the modal body
 content. Carbon design specifies that such 20% padding shouldn't be applied to
 form elements. You can set `hasForm` prop to `<Modal>`/`<ModalBody>` to remove
@@ -131,8 +131,8 @@ padding to non-form contents, as shown below.
 
 ### Overflow content
 
-In cases where the largest modal size cannot fit your modal body content in,
-Carbon design specifies to have a "visual fade" look at the end of the modal
+In cases where even the largest modal size does not fit all of the modal
+content, Carbon design specifies having a "visual fade" at the end of the modal
 body area to indicate there is additional content out of view. You can set
 `hasScrollingContent` prop to `<Modal>`/`<ModalBody>` to do that, as shown
 below.
@@ -220,7 +220,7 @@ clarity to an otherwise repetitive title and body message.
 To use this pattern with `<Modal>`, you can omit the `children` prop.
 
 ```jsx
-const modalHeadding =
+const modalHeading =
   'Are you sure you want to add the "Speech to Text" service ' +
   'to the node-test app?';
 ...
@@ -235,7 +235,7 @@ To use this pattern with `<ComposedModal>`, you can omit `<ModalBody>`.
 
 ```jsx
 <ComposedModal>
-  <ModalHeader label="Modla label">
+  <ModalHeader label="Modal label">
     <h1>
       Are you sure you want to add the "Speech to Text" service to the node-test
       app?
@@ -248,15 +248,15 @@ To use this pattern with `<ComposedModal>`, you can omit `<ModalBody>`.
 ## Focus management
 
 For both modal variants, once the modal is open, keyboard focus will be
-restricted inside modal. This means:
+restricted inside the modal. This means:
 
 - If you press `Tab` at the last keyboard-focusable element in modal, the first
   keyboard-focusable element in modal will get focus.
 - If you press `Shift-Tab` at the first keyboard-focusable element in the modal,
   the last keyboard-focusable element in the modal will get focus.
 
-We take extra step here to ensure such behavior works with floating menus, given
-floating menu is placed outside of modal in DOM. If you use any non-Carbon
+We take an extra step here to ensure such behavior works with floating menus,
+given floating menu is placed outside of modal in DOM. If you use any non-Carbon
 floating menus in your application, set
 `selectorsFloatingMenus={['.bx--overflow-menu-options', '.bx--tooltip', '.flatpickr-calendar', '.your-floating-menu-foo', '.your-floating-menu-bar']}`
 to `<Modal>`/`<ComposedModal>`.
@@ -300,5 +300,5 @@ on the Carbon Design System website.
 ## Feedback
 
 Help us improve this component by providing feedback through, asking questions
-on Slack,or updating this file on GitHub
+on Slack,or updating this file on
 [GitHub](https://github.com/carbon-design-system/carbon/edit/master/packages/react/src/components/Modal/Modal.mdx).
