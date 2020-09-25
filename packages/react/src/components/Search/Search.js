@@ -160,6 +160,7 @@ export default class Search extends Component {
       [`${prefix}--search`]: true,
       [`${prefix}--search--${size}`]: size,
       [`${prefix}--search--light`]: light,
+      [`${prefix}--search--disabled`]: disabled,
       [className]: className,
     });
 
