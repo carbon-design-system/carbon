@@ -31,7 +31,7 @@ For both modal variants, you can open/close the modal by changing the `open`
 prop. For example, you can implement a launcher button with a React state and a
 `<Button>` that changes the state:
 
-```javascript
+```jsx
 function ModalStateManager() {
   const [open, setOpen] = useState(false);
   return (
@@ -54,7 +54,7 @@ function ModalStateManager() {
 
 You can create an abstract version of such state manager, as shown below.
 
-```javascript
+```jsx
 const ModalStateManager = ({
   renderLauncher: LauncherContent,
   children: ModalContent,
@@ -89,7 +89,7 @@ There are four responsive
 [modal sizes](https://www.carbondesignsystem.com/components/modal/usage/#modal-sizes):
 `xs`, `small`, default, and `large`. You can set it via the `size` prop.
 
-```javascript
+```jsx
 <ComposedModal size="lg">
   <ModalHeader />
   <ModalBody>
@@ -113,7 +113,7 @@ form elements. You can set `hasForm` prop to `<Modal>`/`<ModalBody>` to remove
 the padding, and use `bx--modal-content__regular-content` class to apply the 20%
 padding to non-form contents, as shown below.
 
-```javascript
+```jsx
 <ComposedModal>
   <ModalHeader />
   <ModalBody hasForm>
@@ -137,7 +137,7 @@ body area to indicate there is additional content out of view. You can set
 `hasScrollingContent` prop to `<Modal>`/`<ModalBody>` to do that, as shown
 below.
 
-```javascript
+```jsx
 <ComposedModal size="large">
   <ModalHeader />
   <ModalBody hasScrollingContent>
@@ -158,7 +158,7 @@ table shows the supported patterns.
 | Two buttons                                                                                          | Use `<Modal>` without `passiveModal` prop |
 | Two buttons with danger button                                                                       | Use `danger` prop in `<Modal>`            |
 
-```javascript
+```jsx
 <Modal danger>
   <ModalHeader />
   <p className="bx--modal-content__text">The modal body content</p>
@@ -175,7 +175,7 @@ With `<ComposedModal>`, you can control the buttons with the following code.
 | Three buttons                                                                                        | Put three buttons as children of `<ModalFooter>`, instead of using `primaryButtonText` or `secondaryButtonText`. Using this option requires style adjustment defined in application-level CSS for `<ModalFooter>`, e.g. `.bx--modal-footer { padding: 25%; }`. |
 | Two buttons with danger button                                                                       | Set `danger` prop in `<ModalFooter>` (like below)                                                                                                                                                                                                              |
 
-```javascript
+```jsx
 <ComposedModal>
   ...
   <ModalFooter danger primaryButtonText="OK" secondaryButtonText="Cancel" />
@@ -189,7 +189,7 @@ With `<ComposedModal>`, you can control the buttons with the following code.
   actions upon clicking those buttons, e.g. closing the modal:
 </InlineNotification>
 
-```javascript
+```jsx
 <ComposedModal>
   ...
   <ModalFooter>
@@ -219,7 +219,7 @@ clarity to an otherwise repetitive title and body message.
 
 To use this pattern with `<Modal>`, you can omit the `children` prop.
 
-```javascript
+```jsx
 const modalHeadding =
   'Are you sure you want to add the "Speech to Text" service ' +
   'to the node-test app?';
@@ -233,7 +233,7 @@ const modalHeadding =
 
 To use this pattern with `<ComposedModal>`, you can omit `<ModalBody>`.
 
-```javascript
+```jsx
 <ComposedModal>
   <ModalHeader label="Modla label">
     <h1>
@@ -268,7 +268,7 @@ the modal gets open, by either of the following ways:
 
 <br />
 
-```javascript
+```jsx
 <ComposedModal>
   <ModalBody hasForm>
     <TextInput data-modal-primary-focus labelText="Enter something" />
@@ -280,7 +280,7 @@ the modal gets open, by either of the following ways:
 
 <br />
 
-```javascript
+```jsx
 {
   /* `.bx--text-input` selects the `<input>` in `<TextInput>` */
 }
