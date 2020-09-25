@@ -96,8 +96,7 @@
     }
 
     &::placeholder {
-      color: $text-05;
-      opacity: 1;
+      @include placeholder-colors;
     }
   }
 
