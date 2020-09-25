@@ -193,6 +193,7 @@ export default class Search extends Component {
         />
         <button
           className={clearClasses}
+          disabled={disabled}
           onClick={this.clearInput}
           type="button"
           aria-label={closeButtonLabelText}>
