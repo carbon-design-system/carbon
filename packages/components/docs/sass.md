@@ -14272,7 +14272,10 @@ Button base styles
   border-radius: $button-border-radius;
   outline: none;
   cursor: pointer;
-  transition: all $duration--fast-01 motion(entrance, productive);
+  transition: background $duration--fast-01 motion(entrance, productive), box-shadow
+      $duration--fast-01 motion(entrance, productive),
+    border-color $duration--fast-01 motion(entrance, productive), outline
+      $duration--fast-01 motion(entrance, productive);
 
   &:disabled,
   &:hover:disabled,
