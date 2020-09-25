@@ -73,7 +73,7 @@
     }
   }
 
-  .#{$prefix}--search-input[disabled] ~ .#{$prefix}--search-magnifier {
+  .#{$prefix}--search--disabled .#{$prefix}--search-magnifier {
     fill: $disabled;
   }
 
