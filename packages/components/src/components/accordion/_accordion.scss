@@ -84,6 +84,13 @@
     transform: rotate(90deg);
     transition: all $duration--fast-02 motion(standard, productive);
     fill: $ui-05;
+
+    // Windows, Firefox HCM Fix
+    @media screen and (-ms-high-contrast: active),
+      screen and (prefers-contrast) {
+      // `ButtonText` is a CSS2 system color to help improve colors in HCM
+      fill: ButtonText;
+    }
   }
 
   .#{$prefix}--accordion__title {
@@ -160,6 +167,13 @@
       /* rtl:ignore */
       transform: rotate(-90deg);
       fill: $ui-05;
+
+      // Windows, Firefox HCM Fix
+      @media screen and (-ms-high-contrast: active),
+        screen and (prefers-contrast) {
+        // `ButtonText` is a CSS2 system color to help improve colors in HCM
+        fill: ButtonText;
+      }
     }
   }
 

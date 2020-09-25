@@ -1,12 +1,16 @@
 import React from 'react';
 import OrderedList from '../OrderedList';
 import ListItem from '../ListItem';
+import mdx from './OrderedList.mdx';
 
 export default {
   title: 'OrderedList',
 
   parameters: {
     component: OrderedList,
+    docs: {
+      page: mdx,
+    },
 
     subcomponents: {
       ListItem,

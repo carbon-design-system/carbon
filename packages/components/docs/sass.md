@@ -7453,6 +7453,7 @@ $support-03: if(
   - [carbon--theme [mixin]](#carbon--theme-mixin)
   - [inline-notifications [mixin]](#inline-notifications-mixin)
   - [toast-notifications [mixin]](#toast-notifications-mixin)
+  - [number-input [mixin]](#number-input-mixin)
   - [text-input [mixin]](#text-input-mixin)
 
 ### ✅support-04 [variable]
@@ -13645,6 +13646,13 @@ Accordion styles
     transform: rotate(90deg);
     transition: all $duration--fast-02 motion(standard, productive);
     fill: $ui-05;
+
+    // Windows, Firefox HCM Fix
+    @media screen and (-ms-high-contrast: active),
+      screen and (prefers-contrast) {
+      // `ButtonText` is a CSS2 system color to help improve colors in HCM
+      fill: ButtonText;
+    }
   }
 
   .#{$prefix}--accordion__title {
@@ -13720,6 +13728,13 @@ Accordion styles
       /* rtl:ignore */
       transform: rotate(-90deg);
       fill: $ui-05;
+
+      // Windows, Firefox HCM Fix
+      @media screen and (-ms-high-contrast: active),
+        screen and (prefers-contrast) {
+        // `ButtonText` is a CSS2 system color to help improve colors in HCM
+        fill: ButtonText;
+      }
     }
   }
 
@@ -14112,6 +14127,15 @@ Button styles
   .#{$prefix}--btn.#{$prefix}--btn--icon-only.#{$prefix}--btn--ghost:hover
     .#{$prefix}--btn__icon {
     fill: $icon-01;
+
+    // Windows, Firefox HCM Fix
+    @media screen and (-ms-high-contrast: active),
+      screen and (prefers-contrast) {
+      // `ButtonText` is a CSS2 system color to help improve colors in HCM
+      path {
+        fill: ButtonText;
+      }
+    }
   }
 
   .#{$prefix}--btn--ghost.#{$prefix}--btn--icon-only
@@ -14129,6 +14153,15 @@ Button styles
   .#{$prefix}--btn.#{$prefix}--btn--icon-only.#{$prefix}--btn--ghost[disabled]:hover
     .#{$prefix}--btn__icon {
     fill: $disabled-02;
+
+    // Windows, Firefox HCM Fix
+    @media screen and (-ms-high-contrast: active),
+      screen and (prefers-contrast) {
+      // `GrayText` is a CSS2 system color to help improve colors in HCM
+      path {
+        fill: GrayText;
+      }
+    }
   }
 
   .#{$prefix}--btn--ghost.#{$prefix}--btn--icon-only[disabled] {
@@ -14239,7 +14272,10 @@ Button base styles
   border-radius: $button-border-radius;
   outline: none;
   cursor: pointer;
-  transition: all $duration--fast-01 motion(entrance, productive);
+  transition: background $duration--fast-01 motion(entrance, productive), box-shadow
+      $duration--fast-01 motion(entrance, productive),
+    border-color $duration--fast-01 motion(entrance, productive), outline
+      $duration--fast-01 motion(entrance, productive);
 
   &:disabled,
   &:hover:disabled,
@@ -14483,6 +14519,14 @@ Checkbox styles
   .#{$prefix}--checkbox-label[data-contained-checkbox-state='mixed'].#{$prefix}--checkbox-label__focus::before {
     // Must use box-shadow for appearance of multiple borders with rounded corners.
     box-shadow: 0 0 0 2px $inverse-01, 0 0 0 4px $focus;
+
+    // Windows, Firefox HCM Fix
+    @media screen and (-ms-high-contrast: active),
+      screen and (prefers-contrast) {
+      // `highlightText` is a CSS2 system color to help improve colors in HCM
+      outline: 1px solid highlightText;
+      outline-offset: 2px;
+    }
   }
 
   //----------------------------------------------
@@ -16853,6 +16897,13 @@ Data table expandable styles
     transform: rotate(90deg);
     transition: transform $duration--moderate-01 motion(standard, productive);
     fill: $ui-05;
+
+    // Windows, Firefox HCM Fix
+    @media screen and (-ms-high-contrast: active),
+      screen and (prefers-contrast) {
+      // `ButtonText` is a CSS2 system color to help improve colors in HCM
+      fill: ButtonText;
+    }
   }
 
   // fix expanded parent separating border length
@@ -17203,6 +17254,16 @@ Data table sort styles
     fill: $ui-05;
   }
 
+  // Windows, Firefox HCM Fix
+  .#{$prefix}--table-sort__icon,
+  .#{$prefix}--table-sort__icon-unsorted {
+    @media screen and (-ms-high-contrast: active),
+      screen and (prefers-contrast) {
+      // `ButtonText` is a CSS2 system color to help improve colors in HCM
+      fill: ButtonText;
+    }
+  }
+
   //----------------------------------------------------------------------------
   // Compact, Short, Tall Sortable
   //----------------------------------------------------------------------------
@@ -17477,6 +17538,12 @@ Dropdown styles
 
     padding: 0 rem(48px) 0 rem(16px);
     text-align: left;
+
+    // Windows, Firefox HCM Fix
+    @media screen and (-ms-high-contrast: active),
+      screen and (prefers-contrast) {
+      border: 1px solid transparent;
+    }
   }
 
   .#{$prefix}--dropdown--xl {
@@ -18025,6 +18092,7 @@ File uploader styles
     }
 
     .#{$prefix}--form-requirement {
+      display: block;
       grid-column: 1 / -1;
       max-height: none;
       margin: 0;
@@ -18088,6 +18156,11 @@ File uploader styles
     @include type-style('label-01');
 
     padding: 0 $carbon--spacing-05;
+  }
+
+  .#{$prefix}--file__selected-file--invalid
+    .#{$prefix}--form-requirement__title {
+    color: $text-error;
   }
 
   .#{$prefix}--file__selected-file--invalid
@@ -18287,10 +18360,11 @@ Form styles
 
   input[data-invalid],
   .#{$prefix}--number[data-invalid] .#{$prefix}--number__input-wrapper,
+  .#{$prefix}--number__input-wrapper--warning,
   .#{$prefix}--date-picker-input__wrapper,
   .#{$prefix}--time-picker--invalid,
   .#{$prefix}--text-input__field-wrapper[data-invalid],
-  .#{$prefix}--text-input--warn,
+  .#{$prefix}--text-input__field-wrapper--warning > .#{$prefix}--text-input,
   .#{$prefix}--text-area__wrapper[data-invalid],
   .#{$prefix}--select-input__wrapper[data-invalid],
   .#{$prefix}--time-picker[data-invalid],
@@ -18319,7 +18393,7 @@ Form styles
 
   //Fluid Form
   .#{$prefix}--form--fluid .#{$prefix}--text-input__field-wrapper[data-invalid],
-  .#{$prefix}--form--fluid .#{$prefix}--text-input__field-wrapper[data-warn] {
+  .#{$prefix}--form--fluid .#{$prefix}--text-input__field-wrapper--warning {
     display: block;
   }
 
@@ -18873,6 +18947,13 @@ List box styles
 
   .#{$prefix}--list-box--disabled .#{$prefix}--list-box__menu-icon > svg {
     fill: $disabled-02;
+
+    // Windows, Firefox HCM Fix
+    @media screen and (-ms-high-contrast: active),
+      screen and (prefers-contrast) {
+      // `GrayText` is a CSS2 system color to help improve colors in HCM
+      fill: GrayText;
+    }
   }
 
   .#{$prefix}--list-box--disabled,
@@ -19057,6 +19138,13 @@ List box styles
   .#{$prefix}--list-box__menu-icon > svg {
     height: 100%;
     fill: $icon-01;
+
+    // Windows, Firefox HCM Fix
+    @media screen and (-ms-high-contrast: active),
+      screen and (prefers-contrast) {
+      // `ButtonText` is a CSS2 system color to help improve colors in HCM
+      fill: ButtonText;
+    }
   }
 
   .#{$prefix}--list-box__menu-icon--open {
@@ -19086,6 +19174,13 @@ List box styles
 
   .#{$prefix}--list-box__selection > svg {
     fill: $icon-02;
+
+    // Windows, Firefox HCM Fix
+    @media screen and (-ms-high-contrast: active),
+      screen and (prefers-contrast) {
+      // `ButtonText` is a CSS2 system color to help improve colors in HCM
+      fill: ButtonText;
+    }
   }
 
   .#{$prefix}--list-box--disabled .#{$prefix}--list-box__selection:focus {
@@ -19125,6 +19220,13 @@ List box styles
       background-color: $hover-secondary;
       border-radius: 50%;
     }
+
+    // Windows, Firefox HCM Fix
+    @media screen and (-ms-high-contrast: active),
+      screen and (prefers-contrast) {
+      // `ButtonText` is a CSS2 system color to help improve colors in HCM
+      fill: ButtonText;
+    }
   }
 
   .#{$prefix}--list-box--disabled
@@ -19134,6 +19236,13 @@ List box styles
 
     &:hover {
       background-color: initial;
+    }
+
+    // Windows, Firefox HCM Fix
+    @media screen and (-ms-high-contrast: active),
+      screen and (prefers-contrast) {
+      // `GrayText` is a CSS2 system color to help improve colors in HCM
+      fill: GrayText;
     }
   }
 
@@ -19995,6 +20104,13 @@ Modal styles
     width: rem(20px);
     height: rem(20px);
     fill: $icon-01;
+
+    // Windows, Firefox HCM Fix
+    @media screen and (-ms-high-contrast: active),
+      screen and (prefers-contrast) {
+      // `ButtonText` is a CSS2 system color to help improve colors in HCM
+      fill: ButtonText;
+    }
   }
 
   .#{$prefix}--body--with-modal-open {
@@ -20861,6 +20977,15 @@ Number input styles
     fill: $support-01;
   }
 
+  .#{$prefix}--number__invalid--warning {
+    fill: $support-03;
+  }
+
+  .#{$prefix}--number__invalid--warning path[data-icon-path='inner-path'] {
+    opacity: 1;
+    fill: $carbon__black-100;
+  }
+
   .#{$prefix}--number--light input[type='number'] {
     background-color: $field-02;
   }
@@ -21001,6 +21126,7 @@ Number input styles
   - [ui-04 [variable]](#ui-04-variable)
   - [icon-01 [variable]](#icon-01-variable)
   - [support-01 [variable]](#support-01-variable)
+  - [support-03 [variable]](#support-03-variable)
   - [field-02 [variable]](#field-02-variable)
   - [ui-01 [variable]](#ui-01-variable)
   - [hover-ui [variable]](#hover-ui-variable)
@@ -21071,6 +21197,13 @@ Overflow menu styles
     width: rem(16px);
     height: rem(16px);
     fill: $icon-01;
+
+    // Windows, Firefox HCM Fix
+    @media screen and (-ms-high-contrast: active),
+      screen and (prefers-contrast) {
+      // `ButtonText` is a CSS2 system color to help improve colors in HCM
+      fill: ButtonText;
+    }
   }
 
   .#{$prefix}--overflow-menu-options {
@@ -21461,6 +21594,13 @@ Pagination styles
     transition: outline $duration--fast-02 motion(standard, productive), background-color
         $duration--fast-02 motion(standard, productive);
     fill: $ui-05;
+
+    // Windows, Firefox HCM Fix
+    @media screen and (-ms-high-contrast: active),
+      screen and (prefers-contrast) {
+      // `ButtonText` is a CSS2 system color to help improve colors in HCM
+      border: 1px solid transparent;
+    }
   }
 
   .#{$prefix}--pagination__button:focus,
@@ -22334,7 +22474,13 @@ Radio button styles
       // Allow the selected button to be seen in Windows HCM for IE/Edge
       @media screen and (-ms-high-contrast: active) {
         // Utilize a system color variable to accomodate any user HCM theme
-        background-color: windowText;
+        background-color: WindowText;
+      }
+
+      // Firefox only HCM solution
+      @media screen and (prefers-contrast) {
+        // Utilize a system color variable to accomodate any user HCM theme
+        border: 2px solid WindowText;
       }
     }
   }
@@ -22540,6 +22686,13 @@ Search styles
     transform: translateY(-50%);
     pointer-events: none;
     fill: $icon-02;
+
+    // Windows, Firefox HCM Fix
+    @media screen and (-ms-high-contrast: active),
+      screen and (prefers-contrast) {
+      // `ButtonText` is a CSS2 system color to help improve colors in HCM
+      fill: ButtonText;
+    }
   }
 
   .#{$prefix}--search-close {
@@ -22584,6 +22737,12 @@ Search styles
 
   .#{$prefix}--search-close svg {
     fill: inherit;
+
+    // Firefox HCM Fix
+    @media screen and (prefers-contrast) {
+      // `ButtonText` is a CSS2 system color to help improve colors in HCM
+      fill: ButtonText;
+    }
   }
 
   .#{$prefix}--search-close,
@@ -22824,6 +22983,15 @@ Select styles
     height: 100%;
     pointer-events: none;
     fill: $ui-05;
+
+    // Windows, Firefox HCM Fix
+    @media screen and (-ms-high-contrast: active),
+      screen and (prefers-contrast) {
+      // `ButtonText` is a CSS2 system color to help improve colors in HCM
+      path {
+        fill: ButtonText;
+      }
+    }
   }
 
   .#{$prefix}--select-input__wrapper[data-invalid]
@@ -22996,6 +23164,13 @@ Slider styles
     background: $ui-03;
     transform: translate(0%, -50%);
     cursor: pointer;
+
+    // Windows, Firefox HCM Fix
+    @media screen and (-ms-high-contrast: active),
+      screen and (prefers-contrast) {
+      // `ButtonText` is a CSS2 system color to help improve colors in HCM
+      border: 1px solid transparent;
+    }
   }
 
   .#{$prefix}--slider__track:before {
@@ -23019,6 +23194,13 @@ Slider styles
     transform-origin: left;
     transition: background $duration--fast-02 motion(standard, productive);
     pointer-events: none;
+
+    // Windows, Firefox HCM Fix
+    @media screen and (-ms-high-contrast: active),
+      screen and (prefers-contrast) {
+      // `ButtonText` is a CSS2 system color to help improve colors in HCM
+      border: 1px solid transparent;
+    }
   }
 
   .#{$prefix}--slider__thumb {
@@ -23052,6 +23234,13 @@ Slider styles
     &:active {
       box-shadow: inset 0 0 0 2px $interactive-04;
       transform: translate(-50%, -50%) scale(1.4286);
+    }
+
+    // Windows, Firefox HCM Fix
+    @media screen and (-ms-high-contrast: active),
+      screen and (prefers-contrast) {
+      // `ButtonText` is a CSS2 system color to help improve colors in HCM
+      outline: 1px solid ButtonText;
     }
   }
 

@@ -13,6 +13,7 @@ import {
   InlineNotification,
   NotificationActionButton,
 } from '../Notification';
+import mdx from './Notification.mdx';
 
 const kinds = {
   'Error (error)': 'error',
@@ -45,6 +46,9 @@ export default {
   decorators: [withKnobs],
 
   parameters: {
+    docs: {
+      page: mdx,
+    },
     subcomponents: {
       ToastNotification,
       InlineNotification,

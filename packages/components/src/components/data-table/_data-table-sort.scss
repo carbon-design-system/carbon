@@ -150,6 +150,16 @@
     fill: $ui-05;
   }
 
+  // Windows, Firefox HCM Fix
+  .#{$prefix}--table-sort__icon,
+  .#{$prefix}--table-sort__icon-unsorted {
+    @media screen and (-ms-high-contrast: active),
+      screen and (prefers-contrast) {
+      // `ButtonText` is a CSS2 system color to help improve colors in HCM
+      fill: ButtonText;
+    }
+  }
+
   //----------------------------------------------------------------------------
   // Compact, Short, Tall Sortable
   //----------------------------------------------------------------------------

@@ -3,6 +3,12 @@ import { Checkbox, CheckboxSkeleton } from '../Checkbox';
 
 # Checkbox
 
+[Source code](https://github.com/carbon-design-system/carbon/tree/master/packages/react/src/components/Checkbox)
+&nbsp;|&nbsp;
+[Usage guidelines](https://www.carbondesignsystem.com/components/checkbox/usage)
+&nbsp;|&nbsp;
+[Accessibility](https://www.carbondesignsystem.com/components/checkbox/accessibility)
+
 ## Table of Contents
 
 - [Overview](#overview)
@@ -12,7 +18,8 @@ import { Checkbox, CheckboxSkeleton } from '../Checkbox';
 
 ## Overview
 
-You can build a checkbox using the `Checkbox` in combination with a `<fieldset>` element to group controls and `<legend>` element for the label.
+You can build a checkbox using the `Checkbox` in combination with a `<fieldset>`
+element to group controls and `<legend>` element for the label.
 
 <Preview>
   <Story id="checkbox--checkbox" />
@@ -25,13 +32,15 @@ You can also use a controlled checkbox component driven by state:
 ```jsx
 function ExampleComponent() {
   const [isChecked, setIsChecked] = useState(false);
-  return <Checkbox checked={isChecked} onChange={setIsChecked} />
+  return <Checkbox checked={isChecked} onChange={setIsChecked} />;
 }
 ```
 
 ## Skeleton state
 
-You can use the `CheckboxSkeleton` component to render a skeleton variant of a checkbox. This is useful to display while content in your checkbox is being fetched from an external resource like an API.
+You can use the `CheckboxSkeleton` component to render a skeleton variant of a
+checkbox. This is useful to display while content in your checkbox is being
+fetched from an external resource like an API.
 
 <Preview>
   <Story id="checkbox--skeleton" />
@@ -43,7 +52,8 @@ You can use the `CheckboxSkeleton` component to render a skeleton variant of a c
 
 ### Checkbox defaultChecked
 
-You can use the `defaultChecked` prop to specify weather a checkbox is checked by default or not on page load.  
+You can use the `defaultChecked` prop to specify weather a checkbox is checked
+by default or not on page load.
 
 ```jsx
 <Checkbox defaultChecked labelText={`Checkbox label`} id="checkbox-label-1" />
@@ -52,7 +62,8 @@ You can use the `defaultChecked` prop to specify weather a checkbox is checked b
 
 ### Checkbox id
 
-The `id` should be used to provide each checkbox input with a unique id and is a required prop.
+The `id` should be used to provide each checkbox input with a unique id and is a
+required prop.
 
 ```jsx
 <Checkbox labelText={`Checkbox label`} id="checkbox-label-1" />
@@ -61,7 +72,8 @@ The `id` should be used to provide each checkbox input with a unique id and is a
 
 ### Checkbox labelText
 
-The `labelText` should be used to provide a label that describes the checkbox input that is being exposed to the user and is a required prop.
+The `labelText` should be used to provide a label that describes the checkbox
+input that is being exposed to the user and is a required prop.
 
 ```jsx
 <Checkbox labelText={`Checkbox label`} id="checkbox-label-1" />
@@ -70,7 +82,9 @@ The `labelText` should be used to provide a label that describes the checkbox in
 
 ### Checkbox onChange
 
-You can use the `onChange` prop to pass in a custom function for event handling. This prop recieves three arguements: a boolean, the checkbox id, and the dom event.
+You can use the `onChange` prop to pass in a custom function for event handling.
+This prop recieves three arguements: a boolean, the checkbox id, and the dom
+event.
 
 ```jsx
 <Checkbox onChange={()=>{}} labelText={`Checkbox label`} id="checkbox-label-1" />
@@ -79,5 +93,6 @@ You can use the `onChange` prop to pass in a custom function for event handling.
 
 ## Feedback
 
-Help us improve this component by providing feedback through, asking questions on Slack,or updating this file on GitHub
+Help us improve this component by providing feedback, asking questions on Slack,
+or updating this file on
 [GitHub](https://github.com/carbon-design-system/carbon/edit/master/packages/react/src/components/Checkbox/Checkbox.mdx).

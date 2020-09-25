@@ -153,6 +153,15 @@
     fill: $support-01;
   }
 
+  .#{$prefix}--number__invalid--warning {
+    fill: $support-03;
+  }
+
+  .#{$prefix}--number__invalid--warning path[data-icon-path='inner-path'] {
+    opacity: 1;
+    fill: $carbon__black-100;
+  }
+
   .#{$prefix}--number--light input[type='number'] {
     background-color: $field-02;
   }

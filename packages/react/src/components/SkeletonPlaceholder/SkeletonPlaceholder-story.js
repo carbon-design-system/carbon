@@ -11,6 +11,7 @@ import React from 'react';
 
 import { withKnobs, select } from '@storybook/addon-knobs';
 import SkeletonPlaceholder from '../SkeletonPlaceholder';
+import mdx from './SkeletonPlaceholder.mdx';
 
 const classNames = {
   'my--skeleton__placeholder--small': 'my--skeleton__placeholder--small',
@@ -28,6 +29,9 @@ export default {
 
   parameters: {
     component: SkeletonPlaceholder,
+    docs: {
+      page: mdx,
+    },
   },
 };
 
