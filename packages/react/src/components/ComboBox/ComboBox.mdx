@@ -9,6 +9,13 @@ import ComboBox from '../ComboBox';
 
 - [Overview](#overview)
 - [Component API](#component-api)
+- [Disabled](#disabled)
+- [Light](#light)
+- [downshiftProps](#combobox-downshiftprops)
+- [Placeholder and labeling](#placeholders-and-labeling)
+- [initialSelectedItem](#initialselecteditem)
+- [itemToElement](#itemtoelement)
+- [itemToString](#itemtostring)
 - [Feedback](#feedback)
 
 ## Overview
@@ -19,6 +26,10 @@ and is typically used when there are a large amount of options to choose from.
 <Preview>
   <Story id="combobox--combobox" />
 </Preview>
+
+## Component API
+
+<Props sort="asc" />
 
 ## Disabled
 
@@ -108,10 +119,6 @@ If the `items` array is not an array of strings, you'll need to use
   itemToString={(item) => (item ? item.text : '')}
 />
 ```
-
-## Component API
-
-<Props sort="asc" />
 
 ## Feedback
 
