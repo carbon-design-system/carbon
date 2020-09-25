@@ -50,14 +50,20 @@
 
   // IE media query
   @media all and (-ms-high-contrast: none), (-ms-high-contrast: active) {
-    width: rem(208px);
+    width: auto;
   }
   // Edge 12-15 and Edge 16 feature queries
   @supports (-ms-accelerator: true) {
-    width: rem(208px);
+    width: auto;
   }
   @supports (-ms-ime-align: auto) {
-    width: rem(208px);
+    width: auto;
+  }
+
+  // Windows HCM Fix
+  @media screen and (-ms-high-contrast: active) {
+    // `GrayText` is a CSS2 system color to help improve colors in HCM
+    border: 1px solid transparent;
   }
 }
 

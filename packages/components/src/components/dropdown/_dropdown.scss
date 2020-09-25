@@ -70,6 +70,12 @@
 
     padding: 0 rem(48px) 0 rem(16px);
     text-align: left;
+
+    // Windows, Firefox HCM Fix
+    @media screen and (-ms-high-contrast: active),
+      screen and (prefers-contrast) {
+      border: 1px solid transparent;
+    }
   }
 
   .#{$prefix}--dropdown--xl {
