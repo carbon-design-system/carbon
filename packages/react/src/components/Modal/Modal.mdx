@@ -100,7 +100,7 @@ const ModalStateManager = ({
 `<ModalWrapper>` is a modal state manager implementation which ships out of the
 box with Carbon.
 
-<InlineNotification kind="warning">
+<InlineNotification title="Warning" kind="warning">
   <code>{`<Modal>`}</code>/<code>{`<ComposedModal>`}</code> has to be put at the
   top level in a React tree. The easiest way to ensure that is using React
   portal as shown in above example.
@@ -205,7 +205,7 @@ With `<ComposedModal>`, you can control the buttons with the following code.
 </ComposedModal>
 ```
 
-<InlineNotification kind="warning">
+<InlineNotification title="Warning" kind="warning">
   As the instruction for the three buttons implies, <code>{`<ModalFooter>`}</code>
   is flexible on the buttons as you render <code>{`<Button>`}</code> s by yourself,
   as shown below. In this case, the application code needs to take care of running
