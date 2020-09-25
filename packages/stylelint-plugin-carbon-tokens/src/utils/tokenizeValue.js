@@ -33,7 +33,7 @@ const getTokenList = (inStr) => {
   // or numeric with or without units
   // ((-{0,1}[0-9.]+)([\w%]*))
   // or scss var with optional - prefix
-  // |(-{0,1}\$[\w-]+)
+  // |(-{0,1}(#{)*\$[\w-]+}*)
   // or css var or literal at least 2 if with - to prevent match with operator could be function with opening (
   // |(([\w-#]{2,}|\w*)
   // or ( or ) or ,
@@ -42,7 +42,7 @@ const getTokenList = (inStr) => {
   // |([^\w$ (),#])
   // or space
   // |( )*
-  const tokenRegex = /('[^']*')|("[^"]*")|((-{0,1}[0-9.]+)([\w%]*))|(-{0,1}\$[\w-]+)|(([\w-#]{2,}|\w+)(\(*))|(\()|(\))|(,)|([^\w\n (),#])|( )/g;
+  const tokenRegex = /('[^']*')|("[^"]*")|((-{0,1}[0-9.]+)([\w%]*))|(-{0,1}(#{)*\$[\w-]+}*)|(([\w-#]{2,})(\(*))|(\()|(\))|(,)|([^\w$\n (),#])|( )/g;
 
   // TODO: While the above regex is technically entertaining swap out for a simple character walk and state engine.
 
@@ -52,13 +52,13 @@ const getTokenList = (inStr) => {
   const RP_NUM = 4;
   const RP_UNIT = 5;
   const RP_SCSS_VAR = 6;
-  const RP_LITERAL = 8;
-  const RP_FUNCTION = 9;
-  const RP_LEFT_BR = 10;
-  const RP_RIGHT_BR = 11;
-  const RP_COMMA = 12;
-  const RP_OPERATOR = 13;
-  const RP_SPACE = 14;
+  const RP_LITERAL = 9;
+  const RP_FUNCTION = 10;
+  const RP_LEFT_BR = 11;
+  const RP_RIGHT_BR = 12;
+  const RP_COMMA = 13;
+  const RP_OPERATOR = 14;
+  const RP_SPACE = 15;
 
   let token = tokenRegex.exec(inStr);
   const results = [];

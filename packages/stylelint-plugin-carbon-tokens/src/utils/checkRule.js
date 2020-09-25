@@ -65,7 +65,9 @@ export default function checkRule(
           message = messages.rejectedVariable(
             decl.prop,
             item.raw,
-            testResult.variableValue
+            testResult.variableValue === undefined
+              ? 'an unknown, undefined or unrecognized value'
+              : testResult.variableValue
           );
         } else {
           message = messages.rejected(decl.prop, decl.value);
