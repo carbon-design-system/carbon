@@ -37,7 +37,7 @@ const props = {
       'Form validation UI content (invalidText in <Select>)',
       'A valid value is required'
     ),
-    labelText: text('Label text (helperText)', 'Select'),
+    labelText: text('Label text (labelText)', 'Select'),
     helperText: text('Helper text (helperText)', 'Optional helper text.'),
     onChange: action('onChange'),
   }),

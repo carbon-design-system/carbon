@@ -398,9 +398,9 @@ export default class FilterableMultiSelect extends React.Component {
                       aria-controls={`${id}__menu`}
                       aria-autocomplete="list"
                       ref={(el) => (this.inputNode = el)}
+                      id={`${id}-input`}
                       {...getInputProps({
                         disabled,
-                        id,
                         placeholder,
                         onKeyDown: this.handleOnInputKeyDown,
                       })}
@@ -423,7 +423,7 @@ export default class FilterableMultiSelect extends React.Component {
                   </ListBox.Field>
                   {isOpen && (
                     <ListBox.Menu
-                      role="group"
+                      role="listbox"
                       aria-label={ariaLabel}
                       id={`${id}-menu`}>
                       {sortItems(
