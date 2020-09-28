@@ -90,13 +90,10 @@ function createSVGArtboards(
   return icons
     .filter((icon) => !icon.deprecated)
     .flatMap((icon) => {
-      const defaultAsset = icon.assets.find((asset) => asset.size === 32);
-
       X_OFFSET = 0;
 
       const artboards = sizes.map((size) => {
-        const asset =
-          icon.assets.find((asset) => asset.size === size) || defaultAsset;
+        const asset = icon.assets.find((asset) => asset.size === 32);
         const svgString = NSString.stringWithString(asset.source);
         const svgData = svgString.dataUsingEncoding(NSUTF8StringEncoding);
         const svgImporter = MSSVGImporter.svgImporter();

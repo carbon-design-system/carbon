@@ -7035,9 +7035,6 @@ $text-05: if(
 - **Type**: `{undefined}`
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
-  - [date-picker [mixin]](#date-picker-mixin)
-  - [search [mixin]](#search-mixin)
-  - [time-picker [mixin]](#time-picker-mixin)
 
 ### ✅text-error [variable]
 
@@ -17398,8 +17395,7 @@ Date picker styles
     }
 
     &::placeholder {
-      color: $text-05;
-      opacity: 1;
+      @include placeholder-colors;
     }
   }
 
@@ -17474,7 +17470,6 @@ Date picker styles
   - [field-01 [variable]](#field-01-variable)
   - [ui-04 [variable]](#ui-04-variable)
   - [disabled-02 [variable]](#disabled-02-variable)
-  - [text-05 [variable]](#text-05-variable)
   - [icon-01 [variable]](#icon-01-variable)
   - [carbon--spacing-09 [variable]](#carbon--spacing-09-variable)
 
@@ -22619,8 +22614,7 @@ Search styles
     }
 
     &::placeholder {
-      color: $text-05;
-      font-weight: 400;
+      @include placeholder-colors;
     }
 
     &::-ms-clear {
@@ -22636,7 +22630,6 @@ Search styles
 
     &::placeholder {
       color: $disabled;
-      font-weight: 400;
     }
   }
 
@@ -22842,7 +22835,6 @@ Search styles
   - [text-01 [variable]](#text-01-variable)
   - [field-01 [variable]](#field-01-variable)
   - [ui-04 [variable]](#ui-04-variable)
-  - [text-05 [variable]](#text-05-variable)
   - [field-02 [variable]](#field-02-variable)
   - [spacing-07 [variable]](#spacing-07-variable)
   - [spacing-08 [variable]](#spacing-08-variable)
@@ -24787,7 +24779,7 @@ Time picker styles
         $duration--fast-01 motion(standard, productive);
 
     &::placeholder {
-      color: $text-05;
+      @include placeholder-colors;
     }
   }
 
@@ -24815,7 +24807,6 @@ Time picker styles
 - **Requires**:
   - [prefix [variable]](#prefix-variable)
   - [carbon--spacing-01 [variable]](#carbon--spacing-01-variable)
-  - [text-05 [variable]](#text-05-variable)
   - [field-02 [variable]](#field-02-variable)
   - [hover-ui [variable]](#hover-ui-variable)
   - [disabled-02 [variable]](#disabled-02-variable)
