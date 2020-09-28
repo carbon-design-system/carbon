@@ -52,8 +52,7 @@
     }
 
     &::placeholder {
-      color: $text-05;
-      font-weight: 400;
+      @include placeholder-colors;
     }
 
     &::-ms-clear {
@@ -69,7 +68,6 @@
 
     &::placeholder {
       color: $disabled;
-      font-weight: 400;
     }
   }
 
