@@ -150,9 +150,12 @@
     padding-right: rem(2px);
     cursor: pointer;
 
-    &:focus,
     &:hover {
       outline: none;
+    }
+
+    &:focus {
+      @include focus-outline('outline');
     }
   }
 
