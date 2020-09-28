@@ -172,6 +172,13 @@ $list-box-menu-width: rem(300px);
 
   .#{$prefix}--list-box--disabled .#{$prefix}--list-box__menu-icon > svg {
     fill: $disabled-02;
+
+    // Windows, Firefox HCM Fix
+    @media screen and (-ms-high-contrast: active),
+      screen and (prefers-contrast) {
+      // `GrayText` is a CSS2 system color to help improve colors in HCM
+      fill: GrayText;
+    }
   }
 
   .#{$prefix}--list-box--disabled,
@@ -356,6 +363,13 @@ $list-box-menu-width: rem(300px);
   .#{$prefix}--list-box__menu-icon > svg {
     height: 100%;
     fill: $icon-01;
+
+    // Windows, Firefox HCM Fix
+    @media screen and (-ms-high-contrast: active),
+      screen and (prefers-contrast) {
+      // `ButtonText` is a CSS2 system color to help improve colors in HCM
+      fill: ButtonText;
+    }
   }
 
   .#{$prefix}--list-box__menu-icon--open {
@@ -385,6 +399,13 @@ $list-box-menu-width: rem(300px);
 
   .#{$prefix}--list-box__selection > svg {
     fill: $icon-02;
+
+    // Windows, Firefox HCM Fix
+    @media screen and (-ms-high-contrast: active),
+      screen and (prefers-contrast) {
+      // `ButtonText` is a CSS2 system color to help improve colors in HCM
+      fill: ButtonText;
+    }
   }
 
   .#{$prefix}--list-box--disabled .#{$prefix}--list-box__selection:focus {
@@ -424,6 +445,13 @@ $list-box-menu-width: rem(300px);
       background-color: $hover-secondary;
       border-radius: 50%;
     }
+
+    // Windows, Firefox HCM Fix
+    @media screen and (-ms-high-contrast: active),
+      screen and (prefers-contrast) {
+      // `ButtonText` is a CSS2 system color to help improve colors in HCM
+      fill: ButtonText;
+    }
   }
 
   .#{$prefix}--list-box--disabled
@@ -433,6 +461,13 @@ $list-box-menu-width: rem(300px);
 
     &:hover {
       background-color: initial;
+    }
+
+    // Windows, Firefox HCM Fix
+    @media screen and (-ms-high-contrast: active),
+      screen and (prefers-contrast) {
+      // `GrayText` is a CSS2 system color to help improve colors in HCM
+      fill: GrayText;
     }
   }
 

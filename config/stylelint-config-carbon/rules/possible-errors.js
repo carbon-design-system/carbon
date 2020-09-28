@@ -47,7 +47,12 @@ module.exports = {
     'selector-type-no-unknown': true,
 
     // Media feature
-    'media-feature-name-no-unknown': true,
+    'media-feature-name-no-unknown': [
+      true,
+      {
+        ignoreMediaFeatureNames: ['prefers-contrast'],
+      },
+    ],
 
     // At-rule
     'at-rule-no-unknown': OFF,
