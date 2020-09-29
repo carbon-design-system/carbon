@@ -11,10 +11,16 @@ import { TOKEN_TYPES } from './tokenizeValue';
 const checkTokens = function (variable, ruleInfo) {
   const result = { accepted: false, done: false };
 
+  // cope with variables wrapped in #{}
+  const _variable =
+    variable.startsWith('#{') && variable.endsWith('}')
+      ? variable.substr(2, variable.length - 3)
+      : variable;
+
   for (const tokenSet of ruleInfo.tokens) {
     const tokenSpecs = tokenSet.values;
 
-    if (tokenSpecs.includes(variable)) {
+    if (tokenSpecs.includes(_variable)) {
       result.source = tokenSet.source;
       result.accepted = tokenSet.accept;
       result.done = true; // all tests completed
@@ -23,6 +29,59 @@ const checkTokens = function (variable, ruleInfo) {
   }
 
   return result;
+};
+
+const checkProportionalMath = (mathItems, ruleInfo) => {
+  let otherItem;
+
+  if (
+    mathItems[0].type === TOKEN_TYPES.NUMERIC_LITERAL &&
+    ['vw', 'vh', '%'].indexOf(mathItems[0].units) > -1
+  ) {
+    otherItem = mathItems[2];
+  } else if (
+    mathItems[2].type === TOKEN_TYPES.NUMERIC_LITERAL &&
+    ['vw', 'vh', '%'].indexOf(mathItems[2].units) > -1
+  ) {
+    otherItem = mathItems[0];
+  }
+
+  if (otherItem !== undefined) {
+    if (['+', '-'].indexOf(mathItems[1].value) > -1) {
+      // is plus or minus
+      return checkTokens(otherItem.raw, ruleInfo);
+    }
+  }
+
+  return {};
+};
+
+const checkNegation = (mathItems, ruleInfo) => {
+  let otherItem;
+  let numeric;
+
+  if (
+    mathItems[0].type === TOKEN_TYPES.NUMERIC_LITERAL &&
+    mathItems[0].units === ''
+  ) {
+    numeric = mathItems[0];
+    otherItem = mathItems[2];
+  } else if (
+    mathItems[2].type === TOKEN_TYPES.NUMERIC_LITERAL &&
+    mathItems[2].units === ''
+  ) {
+    numeric = mathItems[2];
+    otherItem = mathItems[0];
+  }
+
+  if (otherItem !== undefined) {
+    if (['*', '/'].indexOf(mathItems[1].value) > -1 && numeric.raw === '-1') {
+      // is times or divide by -1
+      return checkTokens(otherItem.raw, ruleInfo);
+    }
+  }
+
+  return {};
 };
 
 const testItemInner = function (item, ruleInfo) {
@@ -90,15 +149,10 @@ const testItemInner = function (item, ruleInfo) {
                 // allow proportional + or - checkTokens
                 const mathItems = paramItems[pos].items;
 
-                if (
-                  mathItems[0].type === TOKEN_TYPES.NUMERIC_LITERAL &&
-                  ['vw', 'vh', '%'].indexOf(mathItems[0].units) > -1
-                ) {
-                  // does start with a proportional value
-                  if (['+', '-'].indexOf(mathItems[1].value) > -1) {
-                    // is plus or minus
-                    tokenResult = checkTokens(mathItems[2].raw, ruleInfo);
-                  }
+                tokenResult = checkProportionalMath(mathItems, ruleInfo);
+
+                if (!tokenResult.accepted) {
+                  tokenResult = checkNegation(mathItems, ruleInfo);
                 }
               } else {
                 tokenResult = checkTokens(paramItems[pos].raw, ruleInfo);
@@ -124,10 +178,16 @@ const testItemInner = function (item, ruleInfo) {
         break;
       }
     }
+  } else if (item.type === TOKEN_TYPES.MATH) {
+    const tokenResult = checkNegation(item.items, ruleInfo);
+
+    result.source = tokenResult.source;
+    result.accepted = tokenResult.accepted;
+    result.done = tokenResult.done;
   } else if (_item.type === TOKEN_TYPES.SCSS_VAR) {
     const tokenResult = checkTokens(_item.value, ruleInfo);
 
-    result.soruce = tokenResult.source;
+    result.source = tokenResult.source;
     result.accepted = tokenResult.accepted;
     result.done = tokenResult.done;
   }
