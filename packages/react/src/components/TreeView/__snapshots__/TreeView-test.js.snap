@@ -41,6 +41,7 @@ exports[`TreeView should render 1`] = `
       value="1"
     >
       <li
+        aria-current={null}
         aria-selected={true}
         className="bx--tree-node bx--tree-node--selected bx--tree-leaf-node"
         id="1"
@@ -75,6 +76,7 @@ exports[`TreeView should render 1`] = `
       value="2"
     >
       <li
+        aria-current={null}
         aria-selected={false}
         className="bx--tree-node bx--tree-leaf-node"
         id="2"
@@ -109,6 +111,7 @@ exports[`TreeView should render 1`] = `
       value="5"
     >
       <li
+        aria-current={null}
         aria-expanded={true}
         aria-selected={false}
         className="bx--tree-node bx--tree-parent-node"
@@ -182,6 +185,7 @@ exports[`TreeView should render 1`] = `
             value="5-1"
           >
             <li
+              aria-current={null}
               aria-selected={false}
               className="bx--tree-node bx--tree-leaf-node"
               id="5-1"
@@ -214,6 +218,7 @@ exports[`TreeView should render 1`] = `
             value="5-2"
           >
             <li
+              aria-current={null}
               aria-selected={false}
               className="bx--tree-node bx--tree-leaf-node"
               id="5-2"
@@ -247,6 +252,7 @@ exports[`TreeView should render 1`] = `
             value="5-3"
           >
             <li
+              aria-current={null}
               aria-expanded={true}
               aria-selected={false}
               className="bx--tree-node bx--tree-parent-node"
@@ -320,6 +326,7 @@ exports[`TreeView should render 1`] = `
                   value="5-4"
                 >
                   <li
+                    aria-current={null}
                     aria-selected={false}
                     className="bx--tree-node bx--tree-leaf-node"
                     id="5-4"
@@ -393,6 +400,7 @@ exports[`TreeView should render with icons 1`] = `
       value="1"
     >
       <li
+        aria-current={null}
         aria-selected={true}
         className="bx--tree-node bx--tree-node--selected bx--tree-node--with-icon bx--tree-leaf-node"
         id="1"
@@ -464,6 +472,7 @@ exports[`TreeView should render with icons 1`] = `
       value="2"
     >
       <li
+        aria-current={null}
         aria-selected={false}
         className="bx--tree-node bx--tree-node--with-icon bx--tree-leaf-node"
         id="2"
@@ -536,6 +545,7 @@ exports[`TreeView should render with icons 1`] = `
       value="5"
     >
       <li
+        aria-current={null}
         aria-expanded={true}
         aria-selected={false}
         className="bx--tree-node bx--tree-node--with-icon bx--tree-parent-node"
@@ -644,6 +654,7 @@ exports[`TreeView should render with icons 1`] = `
             value="5-1"
           >
             <li
+              aria-current={null}
               aria-selected={false}
               className="bx--tree-node bx--tree-node--with-icon bx--tree-leaf-node"
               id="5-1"
@@ -714,6 +725,7 @@ exports[`TreeView should render with icons 1`] = `
             value="5-2"
           >
             <li
+              aria-current={null}
               aria-selected={false}
               className="bx--tree-node bx--tree-node--with-icon bx--tree-leaf-node"
               id="5-2"
@@ -785,6 +797,7 @@ exports[`TreeView should render with icons 1`] = `
             value="5-3"
           >
             <li
+              aria-current={null}
               aria-expanded={true}
               aria-selected={false}
               className="bx--tree-node bx--tree-node--with-icon bx--tree-parent-node"
@@ -893,6 +906,7 @@ exports[`TreeView should render with icons 1`] = `
                   value="5-4"
                 >
                   <li
+                    aria-current={null}
                     aria-selected={false}
                     className="bx--tree-node bx--tree-node--with-icon bx--tree-leaf-node"
                     id="5-4"
