@@ -109,7 +109,10 @@ class InlineCheckbox extends React.Component {
     const inputProps = {
       id,
       name,
-      onClick,
+      onClick: (evt) => {
+        evt.persist();
+        onClick(evt);
+      },
       onChange: (evt) => {
         onChange(evt.target.checked, id, evt);
       },
