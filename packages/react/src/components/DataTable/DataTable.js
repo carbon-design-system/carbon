@@ -564,7 +564,7 @@ export default class DataTable extends React.Component {
         const idxSet = [...new Set([...selectedRowIds, ...idxRange])];
         if (alreadySelected) {
           idxSet.forEach((id) => {
-            rowsById[id].isSelected = !idxSet.includes(id);
+            rowsById[id].isSelected = !idxRange.includes(id);
           });
         } else {
           idxSet.forEach((id) => {
