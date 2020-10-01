@@ -27,9 +27,13 @@ describe('Tabs', () => {
       );
 
       it('renders [role="navigation"] props on wrapping <div> by default', () => {
-        expect(wrapper.find(`.${prefix}--tabs`).props().role).toEqual(
-          'navigation'
-        );
+        expect(
+          wrapper
+            // TODO: uncomment and replace in next major version
+            // .find(`.${prefix}--tabs`).props().role
+            .find(`.${prefix}--tabs--scrollable .${prefix}--tabs--scrollable`)
+            .props().role
+        ).toEqual('navigation');
       });
 
       it('renders [role="tablist"] props on <ul> by default', () => {
@@ -37,15 +41,19 @@ describe('Tabs', () => {
       });
 
       it('renders extra classes on wrapping <div> via className prop', () => {
-        expect(wrapper.find(`.${prefix}--tabs`).hasClass('extra-class')).toBe(
-          true
-        );
+        expect(
+          wrapper
+            // TODO: uncomment and replace in next major version
+            // .find(`.${prefix}--tabs`).hasClass('extra-class')
+            .find(`.${prefix}--tabs--scrollable .${prefix}--tabs--scrollable`)
+            .hasClass('extra-class')
+        ).toBe(true);
       });
 
       it('renders expected classes on wrapping <div> by default', () => {
-        expect(wrapper.find('div').first().hasClass(`${prefix}--tabs`)).toBe(
-          true
-        );
+        expect(
+          wrapper.find('div').first().hasClass(`${prefix}--tabs--scrollable`)
+        ).toBe(true);
       });
 
       it('supports container variant', () => {
@@ -57,14 +65,21 @@ describe('Tabs', () => {
             </Tabs>
           )
             .find('div')
-            .first()
-            .hasClass(`${prefix}--tabs--container`)
+            // TODO: uncomment and replace .at() in next major version
+            // .first()
+            .at(1)
+            .hasClass(`${prefix}--tabs--scrollable--container`)
         ).toBe(true);
       });
 
       it('has no selectionMode prop', () => {
         expect(
-          'selectionMode' in wrapper.find(`.${prefix}--tabs`).props()
+          'selectionMode' in
+            wrapper
+              // TODO: uncomment in next major version
+              // .find(`.${prefix}--tabs`)
+              .find(`.${prefix}--tabs--scrollable .${prefix}--tabs--scrollable`)
+              .props()
         ).toBe(false);
       });
     });

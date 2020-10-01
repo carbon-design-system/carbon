@@ -397,11 +397,23 @@ export default class Tabs extends React.Component {
       this.state.tablistScrollLeft + this.state.tablistClientWidth ===
         this.state.tablistScrollWidth;
     const classes = {
-      tabs: classNames(`${prefix}--tabs`, className, {
-        [`${prefix}--tabs--container`]: type === 'container',
-        [`${prefix}--tabs--light`]: light,
-      }),
-      tablist: classNames(`${prefix}--tabs__nav`),
+      // TODO: remove scrollable from classnames in next major release and uncomment classnames that don't contain scrollable
+      tabs: classNames(
+        className,
+        // `${prefix}--tabs`,
+        `${prefix}--tabs--scrollable`,
+        {
+          // [`${prefix}--tabs--container`]: type === 'container',
+          [`${prefix}--tabs--scrollable--container`]: type === 'container',
+          // [`${prefix}--tabs--light`]: light,
+          [`${prefix}--tabs--scrollable--light`]: light,
+        }
+      ),
+      // TODO: remove scrollable from classnames in next major release and uncomment classnames that don't contain scrollable
+      tablist: classNames(
+        // `${prefix}--tabs__nav`,
+        `${prefix}--tabs--scrollable__nav`
+      ),
       leftOverflowButtonClasses: classNames({
         [`${prefix}--tab--overflow-nav-button`]: this.state.horizontalOverflow,
         [`${prefix}--tab--overflow-nav-button--hidden`]: leftOverflowNavButtonHidden,
@@ -413,7 +425,8 @@ export default class Tabs extends React.Component {
     };
 
     return (
-      <>
+      // TODO: remove classname and revert div to React Fragment after next major release
+      <div className={`${prefix}--tabs--scrollable`}>
         <div
           {...other}
           className={classes.tabs}
@@ -452,7 +465,7 @@ export default class Tabs extends React.Component {
           </button>
         </div>
         {tabContentWithProps}
-      </>
+      </div>
     );
   }
 }
