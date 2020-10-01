@@ -164,7 +164,8 @@ export default function TreeView({
         className={treeClasses}
         onKeyDown={handleKeyDown}
         ref={treeRootRef}
-        role="tree">
+        role="tree"
+        aria-multiselectable={multiselect}>
         {nodesWithProps}
       </ul>
     </>
