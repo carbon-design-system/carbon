@@ -22,6 +22,14 @@
     height: rem(40px);
   }
 
+  .#{$prefix}--content-switcher--sm {
+    height: rem(32px);
+  }
+
+  .#{$prefix}--content-switcher--xl {
+    height: rem(48px);
+  }
+
   .#{$prefix}--content-switcher--disabled {
     cursor: not-allowed;
   }
