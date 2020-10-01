@@ -39,7 +39,7 @@ describe('memory', () => {
     await expect(
       adapter.read('/', 'test')
     ).rejects.toThrowErrorMatchingInlineSnapshot(
-      `"Unable to find extension \`test\` at filepath: /test"`
+      `"Unable to find extension \`test\` at filepath: \\\\test"`
     );
   });
 });

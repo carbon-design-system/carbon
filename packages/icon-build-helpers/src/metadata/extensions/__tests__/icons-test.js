@@ -48,10 +48,10 @@ describe('icons', () => {
         extensions: [extension],
       })
     ).rejects.toThrowErrorMatchingInlineSnapshot(`
-"Expected the icon \`a\` to be defined in the data metadata file. Found matches for this asset in the following locations:
+            "Expected the icon \`a\` to be defined in the data metadata file. Found matches for this asset in the following locations:
 
-/svg/a.svg"
-`);
+            \\\\svg\\\\a.svg"
+          `);
   });
 
   it('should throw an error if an icon is in metadata that is not in the registry', async () => {
@@ -113,9 +113,9 @@ describe('icons', () => {
         extensions: [extension],
       })
     ).rejects.toThrowErrorMatchingInlineSnapshot(`
-"Expected the entry \`a\` to have size \`32\` defined. This asset exists at:
-/svg/32/a.svg"
-`);
+            "Expected the entry \`a\` to have size \`32\` defined. This asset exists at:
+            \\\\svg\\\\32\\\\a.svg"
+          `);
   });
 
   it('should throw an error if there is size in metadata not in the registry', async () => {
