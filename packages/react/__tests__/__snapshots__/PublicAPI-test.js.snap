@@ -749,6 +749,7 @@ Map {
   },
   "ContentSwitcher" => Object {
     "defaultProps": Object {
+      "onChange": [Function],
       "selectedIndex": 0,
       "selectionMode": "automatic",
     },
