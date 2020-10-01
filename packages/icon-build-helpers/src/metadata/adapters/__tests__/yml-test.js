@@ -48,7 +48,7 @@ describe('yml', () => {
     await expect(
       adapter.read('/', 'test')
     ).rejects.toThrowErrorMatchingInlineSnapshot(
-      `"Unable to find extension \`test\` at filepath: \\\\test.yml. Either create the file or update the extension to be computed."`
+      `"Unable to find extension \`test\` at filepath: /test.yml. Either create the file or update the extension to be computed."`
     );
   });
 

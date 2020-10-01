@@ -4148,35 +4148,12 @@ Map {
       },
       "pageSizes": Object {
         "args": Array [
-          Array [
-            Object {
-              "args": Array [
-                Object {
-                  "type": "number",
-                },
-              ],
-              "type": "arrayOf",
-            },
-            Object {
-              "args": Array [
-                Object {
-                  "args": Array [
-                    Object {
-                      "text": undefined,
-                      "value": Object {
-                        "type": "number",
-                      },
-                    },
-                  ],
-                  "type": "shape",
-                },
-              ],
-              "type": "arrayOf",
-            },
-          ],
+          Object {
+            "type": "number",
+          },
         ],
         "isRequired": true,
-        "type": "oneOfType",
+        "type": "arrayOf",
       },
       "pageText": Object {
         "type": "func",

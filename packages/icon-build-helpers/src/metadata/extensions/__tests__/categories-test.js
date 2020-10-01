@@ -56,9 +56,9 @@ describe('categories', () => {
         extensions: [extension],
       })
     ).rejects.toThrowErrorMatchingInlineSnapshot(`
-            "Expected the following icon to have category information: \`icon-without-category\`. This icon has assets in the following locations:
-            \\\\svg\\\\icon-without-category.svg"
-          `);
+"Expected the following icon to have category information: \`icon-without-category\`. This icon has assets in the following locations:
+/svg/icon-without-category.svg"
+`);
   });
 
   it('should throw an error if an icon is in the registry but has no subcategory information', async () => {
@@ -91,9 +91,9 @@ describe('categories', () => {
         extensions: [extension],
       })
     ).rejects.toThrowErrorMatchingInlineSnapshot(`
-            "Expected the following icon to have category information: \`icon-without-category\`. This icon has assets in the following locations:
-            \\\\svg\\\\icon-without-category.svg"
-          `);
+"Expected the following icon to have category information: \`icon-without-category\`. This icon has assets in the following locations:
+/svg/icon-without-category.svg"
+`);
   });
 
   it('should throw an error if an icon has category information but is not in the registry', async () => {
