@@ -21,6 +21,7 @@ exports[`TreeView should render 1`] = `
   <ul
     aria-label={null}
     aria-labelledby="id1__label"
+    aria-multiselectable={null}
     className="bx--tree"
     onKeyDown={[Function]}
     role="tree"
@@ -374,6 +375,7 @@ exports[`TreeView should render with icons 1`] = `
   <ul
     aria-label={null}
     aria-labelledby="id3__label"
+    aria-multiselectable={null}
     className="bx--tree"
     onKeyDown={[Function]}
     role="tree"
