@@ -48,7 +48,8 @@
 
     &:focus {
       z-index: 3;
-      box-shadow: inset 0 0 0 2px $focus;
+      border-color: $focus;
+      box-shadow: inset 0 0 0 2px $focus, inset 0 0 0 3px $ui-01;
     }
 
     &:hover {
