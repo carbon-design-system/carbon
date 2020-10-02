@@ -24,7 +24,7 @@ export default class Tabs extends React.Component {
     children: PropTypes.node,
 
     /**
-     * Provide a className that is applied to the root <nav> component for the
+     * Provide a className that is applied to the root <div> component for the
      * <Tabs>
      */
     className: PropTypes.string,
