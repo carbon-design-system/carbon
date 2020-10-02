@@ -22,131 +22,126 @@
     @include reset;
     @include type-style('body-short-01');
 
-    display: flex;
+    position: relative;
     width: 100%;
     height: auto;
-    min-height: rem(40px);
     color: $text-01;
+    @include carbon--breakpoint(md) {
+      min-height: rem(40px);
+      background: none;
+    }
   }
 
   .#{$prefix}--tabs--container {
-    min-height: rem(48px);
+    @include carbon--breakpoint(md) {
+      min-height: rem(48px);
+    }
   }
 
-  .#{$prefix}--tabs__nav {
+  .#{$prefix}--tabs-trigger {
     display: flex;
-    flex-direction: row;
-    width: auto;
-    max-width: 100%;
-    margin: 0;
-    padding: 0;
-    overflow: auto hidden;
-    list-style: none;
-    transition: max-height $duration--fast-01 motion(standard, productive);
-
-    // hide scrollbars
-    scrollbar-width: none;
-
-    &::-webkit-scrollbar {
+    align-items: center;
+    justify-content: space-between;
+    height: rem(40px);
+    padding: 0 $spacing-09 0 $spacing-05;
+    color: $text-01;
+    background-color: $field-01;
+    border-bottom: 1px solid $ui-04;
+    outline: 2px solid transparent;
+    cursor: pointer;
+    @include carbon--breakpoint(md) {
       display: none;
     }
   }
 
-  //-----------------------------
-  // Overflow Nav Buttons
-  //-----------------------------
-  .#{$prefix}--tabs__overflow-indicator--left,
-  .#{$prefix}--tabs__overflow-indicator--right {
-    z-index: 1;
-    flex: 1 0 auto;
-    width: $carbon--spacing-03;
+  .#{$prefix}--tabs-trigger:focus,
+  .#{$prefix}--tabs-trigger:active {
+    @include focus-outline('outline');
   }
 
-  .#{$prefix}--tabs__overflow-indicator--left {
-    margin-right: -$carbon--spacing-03;
-    background-image: linear-gradient(to left, transparent, $ui-background);
+  .#{$prefix}--tabs-trigger svg {
+    position: absolute;
+    right: $spacing-05;
+    transition: transform $duration--fast-01 motion(standard, productive);
+    fill: $ui-05;
   }
 
-  .#{$prefix}--tabs__overflow-indicator--right {
-    margin-left: -$carbon--spacing-03;
-    background-image: linear-gradient(to right, transparent, $ui-background);
+  .#{$prefix}--tabs-trigger--open:focus,
+  .#{$prefix}--tabs-trigger--open:active {
+    @include focus-outline('reset');
+
+    transition: outline $duration--fast-01 motion(standard, productive);
   }
 
-  .#{$prefix}--tabs--light .#{$prefix}--tabs__overflow-indicator--left {
-    background-image: linear-gradient(to left, transparent, $ui-01);
+  .#{$prefix}--tabs-trigger--open {
+    background: $ui-03;
   }
 
-  .#{$prefix}--tabs--light .#{$prefix}--tabs__overflow-indicator--right {
-    background-image: linear-gradient(to right, transparent, $ui-01);
+  .#{$prefix}--tabs-trigger--open svg {
+    @include rotate(-180deg, $duration--fast-01, 50% 45%);
   }
 
-  .#{$prefix}--tabs--container .#{$prefix}--tabs__overflow-indicator--left {
-    background-image: linear-gradient(to left, transparent, $ui-03);
+  // There is only a difference in tab color when in mobile/dropdown view
+  .#{$prefix}--tabs--light.#{$prefix}--tabs-trigger {
+    background-color: $field-02;
   }
 
-  .#{$prefix}--tabs--container .#{$prefix}--tabs__overflow-indicator--right {
-    background-image: linear-gradient(to right, transparent, $ui-03);
+  .#{$prefix}--tabs-trigger-text {
+    padding-top: 2px;
+    overflow: hidden;
+    color: $text-01;
+    font-weight: 400;
+    white-space: nowrap;
+    text-decoration: none;
+    text-overflow: ellipsis;
   }
 
-  // Safari-only media query
-  // won't appear correctly with CSS custom properties
-  // see: code snippet and modal overflow indicators
-  @media not all and (min-resolution: 0.001dpcm) {
-    @supports (-webkit-appearance: none) and (stroke-color: transparent) {
-      .#{$prefix}--tabs__overflow-indicator--left {
-        margin-right: -$carbon--spacing-05;
-        background-image: linear-gradient(
-          to left,
-          rgba($ui-background, 0),
-          $ui-background
-        );
-      }
-
-      .#{$prefix}--tabs__overflow-indicator--right {
-        margin-left: -$carbon--spacing-05;
-        background-image: linear-gradient(
-          to right,
-          rgba($ui-background, 0),
-          $ui-background
-        );
-      }
-
-      .#{$prefix}--tabs--container .#{$prefix}--tabs__overflow-indicator--left {
-        background-image: linear-gradient(to left, rgba($ui-03, 0), $ui-03);
-      }
-      .#{$prefix}--tabs--container
-        .#{$prefix}--tabs__overflow-indicator--right {
-        background-image: linear-gradient(to right, rgba($ui-03, 0), $ui-03);
-      }
-    }
+  .#{$prefix}--tabs-trigger-text:hover {
+    color: $text-01;
   }
 
-  .#{$prefix}--tab--overflow-nav-button {
-    @include button-reset;
+  .#{$prefix}--tabs-trigger-text:focus {
+    outline: none;
+  }
 
+  .#{$prefix}--tabs__nav {
+    @include box-shadow;
+
+    position: absolute;
+    z-index: z('dropdown');
     display: flex;
-    flex-shrink: 0;
-    align-items: center;
-    justify-content: center;
-    width: $carbon--spacing-08;
+    flex-direction: column;
+    width: 100%;
+    max-height: 600px;
 
-    &:focus {
-      @include focus-outline('outline');
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    background: $ui-01;
+    transition: max-height $duration--fast-01 motion(standard, productive);
+
+    @include carbon--breakpoint(md) {
+      z-index: auto;
+      flex-direction: row;
+      width: auto;
+      background: none;
+      box-shadow: none;
+      transition: inherit;
     }
   }
 
-  .#{$prefix}--tab--overflow-nav-button--hidden {
-    display: none;
-  }
+  .#{$prefix}--tabs__nav--hidden {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height $duration--fast-01 motion(standard, productive);
 
-  .#{$prefix}--tabs--container .#{$prefix}--tab--overflow-nav-button {
-    width: $carbon--spacing-09;
-    margin: 0;
-    background-color: $ui-03;
-  }
-
-  .#{$prefix}--tab--overflow-nav-button svg {
-    fill: $icon-01;
+    @include carbon--breakpoint(md) {
+      display: flex;
+      max-width: 100%;
+      max-height: none;
+      overflow-x: auto;
+      transition: inherit;
+    }
   }
 
   //-----------------------------
@@ -156,34 +151,38 @@
     @include reset;
 
     display: flex;
+    width: 100%;
+    height: rem(40px);
     padding: 0;
+    background-color: $ui-01;
     cursor: pointer;
     transition: background-color $duration--fast-01 motion(standard, productive);
-  }
 
-  .#{$prefix}--tabs__nav-item + .#{$prefix}--tabs__nav-item {
-    margin-left: rem(1px);
+    @include carbon--breakpoint(md) {
+      height: auto;
+      background: transparent;
+
+      + .#{$prefix}--tabs__nav-item {
+        margin-left: rem(1px);
+      }
+    }
   }
 
   .#{$prefix}--tabs--container .#{$prefix}--tabs__nav-item {
-    background-color: $ui-03;
-  }
+    @include carbon--breakpoint(md) {
+      background-color: $ui-03;
 
-  .#{$prefix}--tabs--container
-    .#{$prefix}--tabs__nav-item
-    + .#{$prefix}--tabs__nav-item {
-    margin-left: 0;
-    // Draws the border without affecting the inner-content
-    box-shadow: rem(-1px) 0 0 0 $ui-04;
-  }
+      + .#{$prefix}--tabs__nav-item {
+        margin-left: 0;
+        // Draws the border without affecting the inner-content
+        box-shadow: -1px 0 0 0 $ui-04;
+      }
 
-  .#{$prefix}--tabs--container
-    .#{$prefix}--tabs__nav-item
-    + .#{$prefix}--tabs__nav-item.#{$prefix}--tabs__nav-item--selected,
-  .#{$prefix}--tabs--container
-    .#{$prefix}--tabs__nav-item.#{$prefix}--tabs__nav-item--selected
-    + .#{$prefix}--tabs__nav-item {
-    box-shadow: none;
+      + .#{$prefix}--tabs__nav-item.#{$prefix}--tabs__nav-item--selected,
+      &.#{$prefix}--tabs__nav-item--selected + .#{$prefix}--tabs__nav-item {
+        box-shadow: none;
+      }
+    }
   }
 
   .#{$prefix}--tabs__nav-item .#{$prefix}--tabs__nav-link {
@@ -195,8 +194,30 @@
   //-----------------------------
   // Item Hover
   //-----------------------------
-  .#{$prefix}--tabs--container .#{$prefix}--tabs__nav-item:hover {
-    background-color: $hover-selected-ui;
+  .#{$prefix}--tabs__nav-item:hover:not(.#{$prefix}--tabs__nav-item--selected) {
+    @include carbon--breakpoint(md) {
+      background: transparent;
+    }
+  }
+
+  .#{$prefix}--tabs__nav-item:hover:not(.#{$prefix}--tabs__nav-item--disabled) {
+    background-color: $hover-ui;
+    box-shadow: 0 -1px 0 $hover-ui;
+
+    @include carbon--breakpoint(md) {
+      background-color: transparent;
+
+      + .#{$prefix}--tabs__nav-item {
+        box-shadow: none;
+      }
+    }
+  }
+
+  .#{$prefix}--tabs--container
+    .#{$prefix}--tabs__nav-item:hover:not(.#{$prefix}--tabs__nav-item--disabled) {
+    @include carbon--breakpoint(md) {
+      background-color: $hover-selected-ui;
+    }
   }
 
   //---------------------------------------------
@@ -204,7 +225,6 @@
   //---------------------------------------------
   .#{$prefix}--tabs__nav-item--disabled,
   .#{$prefix}--tabs__nav-item--disabled:hover {
-    background-color: transparent;
     outline: none;
     cursor: not-allowed;
   }
@@ -213,94 +233,138 @@
     .#{$prefix}--tabs__nav-item.#{$prefix}--tabs__nav-item--disabled,
   .#{$prefix}--tabs--container
     .#{$prefix}--tabs__nav-item.#{$prefix}--tabs__nav-item--disabled:hover {
-    background-color: $disabled-02;
+    @include carbon--breakpoint(md) {
+      background-color: $disabled-02;
+    }
+  }
+
+  .#{$prefix}--tabs--container
+    .#{$prefix}--tabs__nav-item--disabled
+    .#{$prefix}--tabs__nav-link {
+    @include carbon--breakpoint(md) {
+      color: $disabled-03;
+      border-bottom: none;
+    }
   }
 
   //-----------------------------
   // Item Selected
   //-----------------------------
-  .#{$prefix}--tabs__nav-item--selected {
+  .#{$prefix}--tabs__nav-item--selected:not(.#{$prefix}--tabs__nav-item--disabled) {
+    display: none;
+    border: none;
     transition: color $duration--fast-01 motion(standard, productive);
-  }
 
-  .#{$prefix}--tabs__nav-item--selected .#{$prefix}--tabs__nav-link,
-  .#{$prefix}--tabs__nav-item--selected .#{$prefix}--tabs__nav-link:focus,
-  .#{$prefix}--tabs__nav-item--selected .#{$prefix}--tabs__nav-link:active {
-    @include type-style('productive-heading-01');
+    @include carbon--breakpoint(md) {
+      display: flex;
+      .#{$prefix}--tabs__nav-link,
+      .#{$prefix}--tabs__nav-link:focus,
+      .#{$prefix}--tabs__nav-link:active {
+        @include type-style('productive-heading-01');
 
-    color: $text-01;
-    border-bottom: 2px solid $interactive-04;
-  }
-
-  .#{$prefix}--tabs--container .#{$prefix}--tabs__nav-item--selected,
-  .#{$prefix}--tabs--container .#{$prefix}--tabs__nav-item--selected:hover {
-    background-color: $ui-01;
-
-    .#{$prefix}--tabs__nav-link:focus,
-    .#{$prefix}--tabs__nav-link:active {
-      box-shadow: none;
+        color: $text-01;
+        border-bottom: 2px solid $interactive-04;
+      }
     }
   }
 
   .#{$prefix}--tabs--container
-    .#{$prefix}--tabs__nav-item--selected
-    .#{$prefix}--tabs__nav-link {
-    // height - vertical padding
-    line-height: calc(#{rem(48px)} - (#{$spacing-03} * 2));
-    // Draws the border without affecting the inner-content
-    box-shadow: inset 0 2px 0 0 $interactive-04;
-  }
+    .#{$prefix}--tabs__nav-item--selected:not(.#{$prefix}--tabs__nav-item--disabled),
+  .#{$prefix}--tabs--container
+    .#{$prefix}--tabs__nav-item--selected:hover:not(.#{$prefix}--tabs__nav-item--disabled) {
+    @include carbon--breakpoint(md) {
+      background-color: $ui-01;
 
-  .#{$prefix}--tabs--light.#{$prefix}--tabs--container
-    .#{$prefix}--tabs__nav-item--selected,
-  .#{$prefix}--tabs--light.#{$prefix}--tabs--container
-    .#{$prefix}--tabs__nav-item--selected:hover {
-    background-color: $ui-background;
+      .#{$prefix}--tabs__nav-link {
+        padding: $spacing-03 $spacing-05;
+        // height - vertical padding
+        // Draws the border without affecting the inner-content
+        line-height: calc(#{rem(48px)} - (#{$spacing-03} * 2));
+        border-bottom: none;
+        box-shadow: inset 0 2px 0 0 $interactive-04;
+      }
+
+      .#{$prefix}--tabs__nav-link:focus,
+      .#{$prefix}--tabs__nav-link:active {
+        box-shadow: none;
+      }
+    }
   }
 
   //-----------------------------
   // Link
   //-----------------------------
-  .#{$prefix}--tabs__nav-link {
+  a.#{$prefix}--tabs__nav-link {
     @include focus-outline('reset');
 
-    width: rem(160px);
-    padding: $spacing-04 $spacing-05 $spacing-03;
+    display: inline-block;
+    width: calc(100% - 32px);
+    height: rem(40px);
+    margin: 0 $spacing-05;
+    padding: $spacing-04 0;
     overflow: hidden;
     color: $text-02;
+    font-weight: 400;
+    line-height: 1rem;
     white-space: nowrap;
     text-decoration: none;
     text-overflow: ellipsis;
-    border-bottom: $tab-underline-color;
+    border-bottom: 1px solid $ui-03;
     transition: border $duration--fast-01 motion(standard, productive),
       outline $duration--fast-01 motion(standard, productive);
 
     &:focus,
     &:active {
       @include focus-outline('outline');
+
+      width: 100%;
+      margin: 0;
+      padding-left: 16px;
+    }
+
+    @include carbon--breakpoint(md) {
+      width: rem(160px);
+      margin: 0;
+      padding: $spacing-04 $spacing-05 $spacing-03;
+      line-height: inherit;
+      border-bottom: $tab-underline-color;
+
+      &:focus,
+      &:active {
+        width: rem(160px);
+        border-bottom: 2px;
+      }
     }
   }
 
-  .#{$prefix}--tabs--container .#{$prefix}--tabs__nav-link {
-    height: rem(48px);
-    padding: $spacing-03 $spacing-05;
-    // height - vertical padding
-    line-height: calc(#{rem(48px)} - (#{$spacing-03} * 2));
-    border-bottom: 0;
+  .#{$prefix}--tabs--container a.#{$prefix}--tabs__nav-link {
+    @include carbon--breakpoint(md) {
+      height: rem(48px);
+      padding: $spacing-03 $spacing-05;
+      // Height - vertical padding
+      line-height: calc(#{rem(48px)} - (#{$spacing-03} * 2));
+      border-bottom: none;
+    }
   }
 
   //-----------------------------
   //  Link Hover
   //-----------------------------
-  .#{$prefix}--tabs__nav-item:hover .#{$prefix}--tabs__nav-link {
+  .#{$prefix}--tabs__nav-item:hover:not(.#{$prefix}--tabs__nav-item--selected):not(.#{$prefix}--tabs__nav-item--disabled)
+    .#{$prefix}--tabs__nav-link {
     color: $text-01;
-    border-bottom: $tab-underline-color-hover;
+    @include carbon--breakpoint(md) {
+      color: $text-01;
+      border-bottom: $tab-underline-color-hover;
+    }
   }
 
   .#{$prefix}--tabs--container
-    .#{$prefix}--tabs__nav-item
+    .#{$prefix}--tabs__nav-item:hover:not(.#{$prefix}--tabs__nav-item--selected):not(.#{$prefix}--tabs__nav-item--disabled)
     .#{$prefix}--tabs__nav-link {
-    border-bottom: none;
+    @include carbon--breakpoint(md) {
+      border-bottom: none;
+    }
   }
 
   //-----------------------------
@@ -309,47 +373,28 @@
   .#{$prefix}--tabs__nav-item--disabled .#{$prefix}--tabs__nav-link {
     color: $tab-text-disabled;
     border-bottom: $tab-underline-disabled;
-  }
-
-  .#{$prefix}--tabs__nav-item--disabled:hover .#{$prefix}--tabs__nav-link {
-    color: $tab-text-disabled;
-    border-bottom: $tab-underline-disabled;
-    cursor: not-allowed;
     pointer-events: none;
   }
 
+  .#{$prefix}--tabs__nav-item--disabled:hover .#{$prefix}--tabs__nav-link {
+    border-bottom: $tab-underline-disabled;
+    cursor: no-drop;
+  }
+
   .#{$prefix}--tabs__nav-item--disabled .#{$prefix}--tabs__nav-link:focus,
-  .#{$prefix}--tabs__nav-item--disabled .#{$prefix}--tabs__nav-link:active {
+  .#{$prefix}--tabs__nav-item--disabled a.#{$prefix}--tabs__nav-link:active {
     border-bottom: $tab-underline-disabled;
     outline: none;
   }
 
-  .#{$prefix}--tabs--light
-    .#{$prefix}--tabs__nav-item--disabled
-    .#{$prefix}--tabs__nav-link {
-    border-bottom-color: $ui-03;
-  }
-
-  .#{$prefix}--tabs--light
-    .#{$prefix}--tabs__nav-item--disabled:hover
-    .#{$prefix}--tabs__nav-link {
-    border-bottom-color: $ui-03;
-  }
-
-  .#{$prefix}--tabs--light
-    .#{$prefix}--tabs__nav-item--disabled
+  //-----------------------------
+  //  Link Focus
+  //-----------------------------
+  .#{$prefix}--tabs__nav-item:not(.#{$prefix}--tabs__nav-item--selected):not(.#{$prefix}--tabs__nav-item--disabled):not(.#{$prefix}--tabs__nav-item--selected)
     .#{$prefix}--tabs__nav-link:focus,
-  .#{$prefix}--tabs--light
-    .#{$prefix}--tabs__nav-item--disabled
-    .#{$prefix}--tabs__nav-link:active {
-    border-bottom-color: $ui-03;
-  }
-
-  .#{$prefix}--tabs--container
-    .#{$prefix}--tabs__nav-item--disabled
-    .#{$prefix}--tabs__nav-link {
-    color: $disabled-03;
-    border-bottom: none;
+  .#{$prefix}--tabs__nav-item:not(.#{$prefix}--tabs__nav-item--selected):not(.#{$prefix}--tabs__nav-item--disabled):not(.#{$prefix}--tabs__nav-item--selected)
+    a.#{$prefix}--tabs__nav-link:active {
+    color: $text-02;
   }
 
   //-----------------------------
@@ -371,17 +416,409 @@
     @include skeleton;
 
     width: rem(75px);
+    height: rem(12px);
   }
 
   .#{$prefix}--tabs.#{$prefix}--skeleton .#{$prefix}--tabs-trigger {
     @include skeleton;
 
-    width: rem(75px);
-    margin-right: rem(1px);
+    width: rem(100px);
   }
 
   .#{$prefix}--tabs.#{$prefix}--skeleton .#{$prefix}--tabs-trigger svg {
     @include hidden;
+  }
+
+  // TODO: remove namespace and suffix in next major release
+  .#{$prefix}--tabs--scrollable {
+    .#{$prefix}--tabs--scrollable {
+      @include reset;
+      @include type-style('body-short-01');
+
+      display: flex;
+      width: 100%;
+      height: auto;
+      min-height: rem(40px);
+      color: $text-01;
+    }
+
+    .#{$prefix}--tabs--scrollable--container {
+      min-height: rem(48px);
+    }
+
+    .#{$prefix}--tabs--scrollable__nav {
+      display: flex;
+      flex-direction: row;
+      width: auto;
+      max-width: 100%;
+      margin: 0;
+      padding: 0;
+      overflow: auto hidden;
+      list-style: none;
+      transition: max-height $duration--fast-01 motion(standard, productive);
+
+      // hide scrollbars
+      scrollbar-width: none;
+
+      &::-webkit-scrollbar {
+        display: none;
+      }
+    }
+
+    //-----------------------------
+    // Overflow Nav Buttons
+    //-----------------------------
+    .#{$prefix}--tabs__overflow-indicator--left,
+    .#{$prefix}--tabs__overflow-indicator--right {
+      z-index: 1;
+      flex: 1 0 auto;
+      width: $carbon--spacing-03;
+    }
+
+    .#{$prefix}--tabs__overflow-indicator--left {
+      margin-right: -$carbon--spacing-03;
+      background-image: linear-gradient(to left, transparent, $ui-background);
+    }
+
+    .#{$prefix}--tabs__overflow-indicator--right {
+      margin-left: -$carbon--spacing-03;
+      background-image: linear-gradient(to right, transparent, $ui-background);
+    }
+
+    .#{$prefix}--tabs--scrollable--light
+      .#{$prefix}--tabs__overflow-indicator--left {
+      background-image: linear-gradient(to left, transparent, $ui-01);
+    }
+
+    .#{$prefix}--tabs--scrollable--light
+      .#{$prefix}--tabs__overflow-indicator--right {
+      background-image: linear-gradient(to right, transparent, $ui-01);
+    }
+
+    .#{$prefix}--tabs--scrollable--container
+      .#{$prefix}--tabs__overflow-indicator--left {
+      background-image: linear-gradient(to left, transparent, $ui-03);
+    }
+
+    .#{$prefix}--tabs--scrollable--container
+      .#{$prefix}--tabs__overflow-indicator--right {
+      background-image: linear-gradient(to right, transparent, $ui-03);
+    }
+
+    // Safari-only media query
+    // won't appear correctly with CSS custom properties
+    // see: code snippet and modal overflow indicators
+    @media not all and (min-resolution: 0.001dpcm) {
+      @supports (-webkit-appearance: none) and (stroke-color: transparent) {
+        .#{$prefix}--tabs__overflow-indicator--left {
+          margin-right: -$carbon--spacing-05;
+          background-image: linear-gradient(
+            to left,
+            rgba($ui-background, 0),
+            $ui-background
+          );
+        }
+
+        .#{$prefix}--tabs__overflow-indicator--right {
+          margin-left: -$carbon--spacing-05;
+          background-image: linear-gradient(
+            to right,
+            rgba($ui-background, 0),
+            $ui-background
+          );
+        }
+
+        .#{$prefix}--tabs--scrollable--container
+          .#{$prefix}--tabs__overflow-indicator--left {
+          background-image: linear-gradient(to left, rgba($ui-03, 0), $ui-03);
+        }
+        .#{$prefix}--tabs--scrollable--container
+          .#{$prefix}--tabs__overflow-indicator--right {
+          background-image: linear-gradient(to right, rgba($ui-03, 0), $ui-03);
+        }
+      }
+    }
+
+    .#{$prefix}--tab--overflow-nav-button {
+      @include button-reset;
+
+      display: flex;
+      flex-shrink: 0;
+      align-items: center;
+      justify-content: center;
+      width: $carbon--spacing-08;
+
+      &:focus {
+        @include focus-outline('outline');
+      }
+    }
+
+    .#{$prefix}--tab--overflow-nav-button--hidden {
+      display: none;
+    }
+
+    .#{$prefix}--tabs--scrollable--container
+      .#{$prefix}--tab--overflow-nav-button {
+      width: $carbon--spacing-09;
+      margin: 0;
+      background-color: $ui-03;
+    }
+
+    .#{$prefix}--tab--overflow-nav-button svg {
+      fill: $icon-01;
+    }
+
+    //-----------------------------
+    // Item
+    //-----------------------------
+    .#{$prefix}--tabs--scrollable__nav-item {
+      @include reset;
+
+      display: flex;
+      padding: 0;
+      cursor: pointer;
+      transition: background-color $duration--fast-01
+        motion(standard, productive);
+    }
+
+    .#{$prefix}--tabs--scrollable__nav-item
+      + .#{$prefix}--tabs--scrollable__nav-item {
+      margin-left: rem(1px);
+    }
+
+    .#{$prefix}--tabs--scrollable--container
+      .#{$prefix}--tabs--scrollable__nav-item {
+      background-color: $ui-03;
+    }
+
+    .#{$prefix}--tabs--scrollable--container
+      .#{$prefix}--tabs--scrollable__nav-item
+      + .#{$prefix}--tabs--scrollable__nav-item {
+      margin-left: 0;
+      // Draws the border without affecting the inner-content
+      box-shadow: rem(-1px) 0 0 0 $ui-04;
+    }
+
+    .#{$prefix}--tabs--scrollable--container
+      .#{$prefix}--tabs--scrollable__nav-item
+      + .#{$prefix}--tabs--scrollable__nav-item.#{$prefix}--tabs--scrollable__nav-item--selected,
+    .#{$prefix}--tabs--scrollable--container
+      .#{$prefix}--tabs--scrollable__nav-item.#{$prefix}--tabs--scrollable__nav-item--selected
+      + .#{$prefix}--tabs--scrollable__nav-item {
+      box-shadow: none;
+    }
+
+    .#{$prefix}--tabs--scrollable__nav-item
+      .#{$prefix}--tabs--scrollable__nav-link {
+      transition: color $duration--fast-01 motion(standard, productive),
+        border-bottom-color $duration--fast-01 motion(standard, productive),
+        outline $duration--fast-01 motion(standard, productive);
+    }
+
+    //-----------------------------
+    // Item Hover
+    //-----------------------------
+    .#{$prefix}--tabs--scrollable--container
+      .#{$prefix}--tabs--scrollable__nav-item:hover {
+      background-color: $hover-selected-ui;
+    }
+
+    //---------------------------------------------
+    // Item Disabled
+    //---------------------------------------------
+    .#{$prefix}--tabs--scrollable__nav-item--disabled,
+    .#{$prefix}--tabs--scrollable__nav-item--disabled:hover {
+      background-color: transparent;
+      outline: none;
+      cursor: not-allowed;
+    }
+
+    .#{$prefix}--tabs--scrollable--container
+      .#{$prefix}--tabs--scrollable__nav-item.#{$prefix}--tabs--scrollable__nav-item--disabled,
+    .#{$prefix}--tabs--scrollable--container
+      .#{$prefix}--tabs--scrollable__nav-item.#{$prefix}--tabs--scrollable__nav-item--disabled:hover {
+      background-color: $disabled-02;
+    }
+
+    //-----------------------------
+    // Item Selected
+    //-----------------------------
+    .#{$prefix}--tabs--scrollable__nav-item--selected {
+      transition: color $duration--fast-01 motion(standard, productive);
+    }
+
+    .#{$prefix}--tabs--scrollable__nav-item--selected
+      .#{$prefix}--tabs--scrollable__nav-link,
+    .#{$prefix}--tabs--scrollable__nav-item--selected
+      .#{$prefix}--tabs--scrollable__nav-link:focus,
+    .#{$prefix}--tabs--scrollable__nav-item--selected
+      .#{$prefix}--tabs--scrollable__nav-link:active {
+      @include type-style('productive-heading-01');
+
+      color: $text-01;
+      border-bottom: 2px solid $interactive-04;
+    }
+
+    .#{$prefix}--tabs--scrollable--container
+      .#{$prefix}--tabs--scrollable__nav-item--selected,
+    .#{$prefix}--tabs--scrollable--container
+      .#{$prefix}--tabs--scrollable__nav-item--selected:hover {
+      background-color: $ui-01;
+
+      .#{$prefix}--tabs--scrollable__nav-link:focus,
+      .#{$prefix}--tabs--scrollable__nav-link:active {
+        box-shadow: none;
+      }
+    }
+
+    .#{$prefix}--tabs--scrollable--container
+      .#{$prefix}--tabs--scrollable__nav-item--selected
+      .#{$prefix}--tabs--scrollable__nav-link {
+      // height - vertical padding
+      line-height: calc(#{rem(48px)} - (#{$spacing-03} * 2));
+      // Draws the border without affecting the inner-content
+      box-shadow: inset 0 2px 0 0 $interactive-04;
+    }
+
+    .#{$prefix}--tabs--scrollable--light.#{$prefix}--tabs--scrollable--container
+      .#{$prefix}--tabs--scrollable__nav-item--selected,
+    .#{$prefix}--tabs--scrollable--light.#{$prefix}--tabs--scrollable--container
+      .#{$prefix}--tabs--scrollable__nav-item--selected:hover {
+      background-color: $ui-background;
+    }
+
+    //-----------------------------
+    // Link
+    //-----------------------------
+    .#{$prefix}--tabs--scrollable__nav-link {
+      @include focus-outline('reset');
+
+      width: rem(160px);
+      padding: $spacing-04 $spacing-05 $spacing-03;
+      overflow: hidden;
+      color: $text-02;
+      white-space: nowrap;
+      text-decoration: none;
+      text-overflow: ellipsis;
+      border-bottom: $tab-underline-color;
+      transition: border $duration--fast-01 motion(standard, productive),
+        outline $duration--fast-01 motion(standard, productive);
+
+      &:focus,
+      &:active {
+        @include focus-outline('outline');
+      }
+    }
+
+    .#{$prefix}--tabs--scrollable--container
+      .#{$prefix}--tabs--scrollable__nav-link {
+      height: rem(48px);
+      padding: $spacing-03 $spacing-05;
+      // height - vertical padding
+      line-height: calc(#{rem(48px)} - (#{$spacing-03} * 2));
+      border-bottom: 0;
+    }
+
+    //-----------------------------
+    //  Link Hover
+    //-----------------------------
+    .#{$prefix}--tabs--scrollable__nav-item:hover
+      .#{$prefix}--tabs--scrollable__nav-link {
+      color: $text-01;
+      border-bottom: $tab-underline-color-hover;
+    }
+
+    .#{$prefix}--tabs--scrollable--container
+      .#{$prefix}--tabs--scrollable__nav-item
+      .#{$prefix}--tabs--scrollable__nav-link {
+      border-bottom: none;
+    }
+
+    //-----------------------------
+    //  Link Disabled
+    //-----------------------------
+    .#{$prefix}--tabs--scrollable__nav-item--disabled
+      .#{$prefix}--tabs--scrollable__nav-link {
+      color: $tab-text-disabled;
+      border-bottom: $tab-underline-disabled;
+    }
+
+    .#{$prefix}--tabs--scrollable__nav-item--disabled:hover
+      .#{$prefix}--tabs--scrollable__nav-link {
+      color: $tab-text-disabled;
+      border-bottom: $tab-underline-disabled;
+      cursor: not-allowed;
+      pointer-events: none;
+    }
+
+    .#{$prefix}--tabs--scrollable__nav-item--disabled
+      .#{$prefix}--tabs--scrollable__nav-link:focus,
+    .#{$prefix}--tabs--scrollable__nav-item--disabled
+      .#{$prefix}--tabs--scrollable__nav-link:active {
+      border-bottom: $tab-underline-disabled;
+      outline: none;
+    }
+
+    .#{$prefix}--tabs--scrollable--light
+      .#{$prefix}--tabs--scrollable__nav-item--disabled
+      .#{$prefix}--tabs--scrollable__nav-link {
+      border-bottom-color: $ui-03;
+    }
+
+    .#{$prefix}--tabs--scrollable--light
+      .#{$prefix}--tabs--scrollable__nav-item--disabled:hover
+      .#{$prefix}--tabs--scrollable__nav-link {
+      border-bottom-color: $ui-03;
+    }
+
+    .#{$prefix}--tabs--scrollable--light
+      .#{$prefix}--tabs--scrollable__nav-item--disabled
+      .#{$prefix}--tabs--scrollable__nav-link:focus,
+    .#{$prefix}--tabs--scrollable--light
+      .#{$prefix}--tabs--scrollable__nav-item--disabled
+      .#{$prefix}--tabs--scrollable__nav-link:active {
+      border-bottom-color: $ui-03;
+    }
+
+    .#{$prefix}--tabs--scrollable--container
+      .#{$prefix}--tabs--scrollable__nav-item--disabled
+      .#{$prefix}--tabs--scrollable__nav-link {
+      color: $disabled-03;
+      border-bottom: none;
+    }
+
+    //-----------------------------
+    //  Tab Content Container
+    //-----------------------------
+    .#{$prefix}--tab-content {
+      padding: $carbon--spacing-05;
+    }
+
+    //-----------------------------
+    // Skeleton state
+    //-----------------------------
+    .#{$prefix}--tabs.#{$prefix}--skeleton {
+      cursor: default;
+      pointer-events: none;
+    }
+
+    .#{$prefix}--tabs.#{$prefix}--skeleton
+      .#{$prefix}--tabs--scrollable__nav-link {
+      @include skeleton;
+
+      width: rem(75px);
+    }
+
+    .#{$prefix}--tabs.#{$prefix}--skeleton .#{$prefix}--tabs-trigger {
+      @include skeleton;
+
+      width: rem(75px);
+      margin-right: rem(1px);
+    }
+
+    .#{$prefix}--tabs.#{$prefix}--skeleton .#{$prefix}--tabs-trigger svg {
+      @include hidden;
+    }
   }
 }
 

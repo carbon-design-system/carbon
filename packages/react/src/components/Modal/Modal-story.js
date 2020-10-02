@@ -5,11 +5,12 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React from 'react';
+import React, { useState } from 'react';
+import ReactDOM from 'react-dom';
 import { action } from '@storybook/addon-actions';
-
 import { withKnobs, boolean, select, text } from '@storybook/addon-knobs';
 import Modal from '../Modal';
+import Button from '../Button';
 import TextInput from '../TextInput';
 import { settings } from 'carbon-components';
 import mdx from './Modal.mdx';
@@ -104,10 +105,71 @@ const titleOnlyProps = () => {
   };
 };
 
+const withStateManagerProps = () => ({
+  className: 'some-class',
+  passiveModal: boolean('Without footer (passiveModal)', false),
+  danger: boolean('Danger mode (danger)', false),
+  alert: boolean('Alert mode (alert)', false),
+  shouldSubmitOnEnter: boolean(
+    'Enter key to submit (shouldSubmitOnEnter)',
+    false
+  ),
+  hasScrollingContent: boolean(
+    'Modal contains scrollable content (hasScrollingContent)',
+    false
+  ),
+  modalHeading: text('Modal heading (modalHeading)', 'Modal heading'),
+  modalLabel: text('Optional label (modalLabel)', 'Label'),
+  modalAriaLabel: text(
+    'ARIA label, used only if modalLabel not provided (modalAriaLabel)',
+    'A label to be read by screen readers on the modal root node'
+  ),
+  primaryButtonText: text(
+    'Primary button text (primaryButtonText)',
+    'Primary Button'
+  ),
+  secondaryButtonText: text(
+    'Secondary button text (secondaryButtonText)',
+    'Secondary Button'
+  ),
+  selectorPrimaryFocus: text(
+    'Primary focus element selector (selectorPrimaryFocus)',
+    '[data-modal-primary-focus]'
+  ),
+  size: select('Size (size)', sizes),
+  iconDescription: text('Close icon description (iconDescription)', 'Close'),
+  onBlur: action('onBlur'),
+  onClick: action('onClick'),
+  onFocus: action('onFocus'),
+  onRequestClose: action('onRequestClose'),
+  onRequestSubmit: action('onRequestSubmit'),
+  onSecondarySubmit: action('onSecondarySubmit'),
+});
+
+/**
+ * Simple state manager for modals.
+ */
+const ModalStateManager = ({
+  renderLauncher: LauncherContent,
+  children: ModalContent,
+}) => {
+  const [open, setOpen] = useState(false);
+  return (
+    <>
+      {!ModalContent || typeof document === 'undefined'
+        ? null
+        : ReactDOM.createPortal(
+            <ModalContent open={open} setOpen={setOpen} />,
+            document.body
+          )}
+      {LauncherContent && <LauncherContent open={open} setOpen={setOpen} />}
+    </>
+  );
+};
+
 export default {
   title: 'Modal',
   decorators: [withKnobs],
-
   parameters: {
     component: Modal,
     docs: {
@@ -116,7 +178,7 @@ export default {
   },
 };
 
-export const _Default = () => {
+export const Default = () => {
   const { size, ...rest } = props();
   return (
     <Modal {...rest} size={size || undefined}>
@@ -181,13 +243,97 @@ export const _Default = () => {
   );
 };
 
-_Default.parameters = {
+Default.parameters = {
   info: {
     text: `
         Modals communicate information via a secondary window and allow the user to maintain the context of a particular task.
         Use the Modal Wrapper component to encapsulate your Modal within a button.
       `,
   },
+};
+
+export const WithStateManager = () => {
+  const { size, ...rest } = withStateManagerProps();
+  return (
+    <ModalStateManager
+      renderLauncher={({ setOpen }) => (
+        <Button onClick={() => setOpen(true)}>Launch modal</Button>
+      )}>
+      {({ open, setOpen }) => (
+        <Modal
+          {...rest}
+          size={size || undefined}
+          open={open}
+          onRequestClose={() => setOpen(false)}>
+          <p className={`${prefix}--modal-content__text`}>
+            Please see ModalWrapper for more examples and demo of the
+            functionality.
+          </p>
+          {rest.hasScrollingContent && (
+            <>
+              <p>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean
+                id accumsan augue. Phasellus consequat augue vitae tellus
+                tincidunt posuere. Curabitur justo urna, consectetur vel elit
+                iaculis, ultrices condimentum risus. Nulla facilisi. Etiam
+                venenatis molestie tellus. Quisque consectetur non risus eu
+                rutrum.{' '}
+              </p>
+              <p>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean
+                id accumsan augue. Phasellus consequat augue vitae tellus
+                tincidunt posuere. Curabitur justo urna, consectetur vel elit
+                iaculis, ultrices condimentum risus. Nulla facilisi. Etiam
+                venenatis molestie tellus. Quisque consectetur non risus eu
+                rutrum.{' '}
+              </p>
+              <p>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean
+                id accumsan augue. Phasellus consequat augue vitae tellus
+                tincidunt posuere. Curabitur justo urna, consectetur vel elit
+                iaculis, ultrices condimentum risus. Nulla facilisi. Etiam
+                venenatis molestie tellus. Quisque consectetur non risus eu
+                rutrum.{' '}
+              </p>
+              <h3>Lorem ipsum</h3>
+              <p>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean
+                id accumsan augue. Phasellus consequat augue vitae tellus
+                tincidunt posuere. Curabitur justo urna, consectetur vel elit
+                iaculis, ultrices condimentum risus. Nulla facilisi. Etiam
+                venenatis molestie tellus. Quisque consectetur non risus eu
+                rutrum.{' '}
+              </p>
+              <p>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean
+                id accumsan augue. Phasellus consequat augue vitae tellus
+                tincidunt posuere. Curabitur justo urna, consectetur vel elit
+                iaculis, ultrices condimentum risus. Nulla facilisi. Etiam
+                venenatis molestie tellus. Quisque consectetur non risus eu
+                rutrum.{' '}
+              </p>
+              <p>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean
+                id accumsan augue. Phasellus consequat augue vitae tellus
+                tincidunt posuere. Curabitur justo urna, consectetur vel elit
+                iaculis, ultrices condimentum risus. Nulla facilisi. Etiam
+                venenatis molestie tellus. Quisque consectetur non risus eu
+                rutrum.{' '}
+              </p>
+              <p>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean
+                id accumsan augue. Phasellus consequat augue vitae tellus
+                tincidunt posuere. Curabitur justo urna, consectetur vel elit
+                iaculis, ultrices condimentum risus. Nulla facilisi. Etiam
+                venenatis molestie tellus. Quisque consectetur non risus eu
+                rutrum.{' '}
+              </p>
+            </>
+          )}
+        </Modal>
+      )}
+    </ModalStateManager>
+  );
 };
 
 export const TitleOnly = () => {

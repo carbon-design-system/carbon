@@ -57,7 +57,7 @@
       background-color $duration--fast-01 motion(standard, productive);
 
     &::placeholder {
-      color: $text-05;
+      @include placeholder-colors;
     }
   }
 
