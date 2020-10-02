@@ -4932,7 +4932,6 @@ Map {
   },
   "Tabs" => Object {
     "defaultProps": Object {
-      "role": "navigation",
       "selected": 0,
       "selectionMode": "automatic",
       "type": "default",
@@ -4958,10 +4957,6 @@ Map {
       },
       "onSelectionChange": Object {
         "type": "func",
-      },
-      "role": Object {
-        "isRequired": true,
-        "type": "string",
       },
       "selected": Object {
         "type": "number",
