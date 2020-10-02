@@ -171,6 +171,7 @@ export default function TreeNode({
 
   const treeNodeProps = {
     ...rest,
+    ['aria-current']: isActive || null,
     ['aria-selected']: disabled ? null : isSelected,
     ['aria-disabled']: disabled,
     className: treeNodeClasses,
