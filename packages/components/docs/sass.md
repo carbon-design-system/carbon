@@ -15165,7 +15165,8 @@ Content switcher styles
 
     &:focus {
       z-index: 3;
-      box-shadow: inset 0 0 0 2px $focus;
+      border-color: $focus;
+      box-shadow: inset 0 0 0 2px $focus, inset 0 0 0 3px $ui-01;
     }
 
     &:hover {
@@ -22639,10 +22640,6 @@ Search styles
     }
   }
 
-  .#{$prefix}--search-input[disabled] ~ .#{$prefix}--search-magnifier {
-    fill: $disabled;
-  }
-
   .#{$prefix}--search--light .#{$prefix}--search-input {
     background: $field-02;
   }
@@ -22776,6 +22773,24 @@ Search styles
 
       background-color: $selected-ui;
     }
+  }
+
+  .#{$prefix}--search--disabled .#{$prefix}--search-close {
+    outline: none;
+    cursor: not-allowed;
+
+    &:hover {
+      background-color: transparent;
+      border-bottom-color: transparent;
+    }
+
+    &:hover::before {
+      background-color: transparent;
+    }
+  }
+
+  .#{$prefix}--search--disabled svg {
+    fill: $disabled;
   }
 
   .#{$prefix}--search-close:focus,
@@ -26924,6 +26939,13 @@ UI shell header
   .#{$prefix}--header__action:focus {
     border-color: $shell-header-focus;
     outline: none;
+
+    // Windows, Firefox HCM Fix
+    @media screen and (-ms-high-contrast: active),
+      screen and (prefers-contrast) {
+      outline: 3px solid transparent;
+      outline-offset: -3px;
+    }
   }
 
   .#{$prefix}--header__action:active {
@@ -27056,6 +27078,13 @@ UI shell header
     color: $shell-header-text-01;
     border-color: $shell-header-focus;
     outline: none;
+
+    // Windows, Firefox HCM Fix
+    @media screen and (-ms-high-contrast: active),
+      screen and (prefers-contrast) {
+      outline: 3px solid transparent;
+      outline-offset: -3px;
+    }
   }
 
   a.#{$prefix}--header__menu-item:hover > svg,
@@ -28039,6 +28068,13 @@ UI shell side nav
 
   .#{$prefix}--side-nav__submenu:focus {
     @include focus-outline('outline');
+
+    // Windows, Firefox HCM Fix
+    @media screen and (-ms-high-contrast: active),
+      screen and (prefers-contrast) {
+      outline: 3px solid transparent;
+      outline-offset: -3px;
+    }
   }
 
   .#{$prefix}--side-nav__submenu-title {
@@ -28170,6 +28206,13 @@ UI shell side nav
   a.#{$prefix}--side-nav__link:focus,
   .#{$prefix}--side-nav a.#{$prefix}--header__menu-item:focus {
     @include focus-outline('outline');
+
+    // Windows, Firefox HCM Fix
+    @media screen and (-ms-high-contrast: active),
+      screen and (prefers-contrast) {
+      outline: 3px solid transparent;
+      outline-offset: -3px;
+    }
   }
 
   a.#{$prefix}--side-nav__link[aria-current='page'],
@@ -28215,6 +28258,12 @@ UI shell side nav
     width: mini-units(2);
     height: mini-units(2);
     fill: $shell-side-nav-icon-01;
+
+    @media screen and (-ms-high-contrast: active),
+      screen and (prefers-contrast) {
+      // `ButtonText` is a CSS2 system color to help improve colors in HCM
+      fill: ButtonText;
+    }
   }
 
   .#{$prefix}--side-nav__icon > svg.#{$prefix}--side-nav-collapse-icon {
@@ -28327,6 +28376,13 @@ UI shell side nav
     .#{$prefix}--header__menu-arrow,
   .#{$prefix}--side-nav .#{$prefix}--header__menu-arrow {
     fill: $shell-side-nav-text-01;
+
+    // Windows, Firefox HCM Fix
+    @media screen and (-ms-high-contrast: active),
+      screen and (prefers-contrast) {
+      // `ButtonText` is a CSS2 system color to help improve colors in HCM
+      fill: ButtonText;
+    }
   }
 }
 ```
