@@ -25712,7 +25712,7 @@ Toggle styles
   .#{$prefix}--toggle-input--small:disabled:checked
     + .#{$prefix}--toggle-input__label
     .#{$prefix}--toggle__check {
-    fill: $disabled-02;
+    fill: $disabled-01;
   }
 
   //----------------------------------------------
