@@ -29,6 +29,33 @@ export const inline = () => (
   </CodeSnippet>
 );
 
+export const longline = () => (
+  <div className="bx--tile">
+    <CodeSnippet {...props()} type="multi" feedback="Copied to clipboard">
+      {`this is a very long line of code or whatever that will hopefully eventually wrap once the option for wrapping is enabled or will otherwise have a scroll bar this is a very long line of code or whatever that will hopefully eventually wrap once the option for wrapping is enabled or will otherwise have a scroll bar
+
+thisisasecondlinethatisverylongbuthasnospacestoseehowitbehavesinthissituationwillitwrapanywaythisiswhatweneedotseeherethisisasecondlinethatisverylongbuthasnospacestoseehowitbehavesinthissituationwillitwrapanywaythisiswhatweneedotseehere
+
+And then some more lines to see the expand
+Is there something else we need to test
+Maybe or maybe not
+And then some more lines to see the expand
+Is there something else we need to test
+Maybe or maybe not
+And then some more lines to see the expand
+Is there something else we need to test
+Maybe or maybe not
+And then some more lines to see the expand
+Is there something else we need to test
+Maybe or maybe not
+And then some more lines to see the expand
+Is there something else we need to test
+Maybe or maybe not
+    `}
+    </CodeSnippet>
+  </div>
+);
+
 export const multiline = () => (
   <CodeSnippet type="multi" feedback="Copied to clipboard">
     {`@mixin grid-container {
@@ -85,6 +112,7 @@ const props = () => ({
   onClick: action('onClick'),
   copyButtonDescription: text('Copy button title', 'Copy code snippet'),
   ariaLabel: text('ARIA label', 'Container label'),
+  wrapText: boolean('Wrap text', true),
 });
 
 export const playground = () => (
