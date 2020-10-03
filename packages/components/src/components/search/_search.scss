@@ -71,10 +71,6 @@
     }
   }
 
-  .#{$prefix}--search-input[disabled] ~ .#{$prefix}--search-magnifier {
-    fill: $disabled;
-  }
-
   .#{$prefix}--search--light .#{$prefix}--search-input {
     background: $field-02;
   }
@@ -209,6 +205,24 @@
 
       background-color: $selected-ui;
     }
+  }
+
+  .#{$prefix}--search--disabled .#{$prefix}--search-close {
+    outline: none;
+    cursor: not-allowed;
+
+    &:hover {
+      background-color: transparent;
+      border-bottom-color: transparent;
+    }
+
+    &:hover::before {
+      background-color: transparent;
+    }
+  }
+
+  .#{$prefix}--search--disabled svg {
+    fill: $disabled;
   }
 
   .#{$prefix}--search-close:focus,
