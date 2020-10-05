@@ -526,7 +526,6 @@ class OverflowMenu extends Component {
       onKeyDown: this.handleKeyDown,
       className: overflowMenuIconClasses,
       'aria-label': iconDescription,
-      focusable: 'false', // Prevent `<svg>` in trigger icon from getting focus for IE11
     };
 
     return (
