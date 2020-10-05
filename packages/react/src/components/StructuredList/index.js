@@ -6,4 +6,9 @@
  */
 
 export * from './StructuredList.Skeleton';
-export * from './StructuredList';
+export { default as StructuredListBody } from './StructuredListBody';
+export { default as StructuredListCell } from './StructuredListCell';
+export { default as StructuredListHead } from './StructuredListHead';
+export { default as StructuredListInput } from './StructuredListInput';
+export { default as StructuredListRow } from './StructuredListRow';
+export { default as StructuredListWrapper } from './StructuredListWrapper';
