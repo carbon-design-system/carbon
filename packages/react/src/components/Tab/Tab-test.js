@@ -22,9 +22,11 @@ describe('Tab', () => {
     });
 
     it('renders <a> with expected className', () => {
-      expect(wrapper.find('a').hasClass(`${prefix}--tabs__nav-link`)).toBe(
-        true
-      );
+      expect(
+        // TODO: uncomment and replace assertion in next major version
+        // wrapper.find('a').hasClass(`${prefix}--tabs__nav-link`)
+        wrapper.find('a').hasClass(`${prefix}--tabs--scrollable__nav-link`)
+      ).toBe(true);
     });
 
     it('renders <li> with [role="tab"]', () => {

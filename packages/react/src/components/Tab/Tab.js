@@ -126,14 +126,25 @@ export default class Tab extends React.Component {
       ...other
     } = this.props;
 
-    const classes = classNames(className, `${prefix}--tabs__nav-item`, {
-      [`${prefix}--tabs__nav-item--disabled`]: disabled,
-      [`${prefix}--tabs__nav-item--selected`]: selected,
-    });
+    const classes = classNames(
+      className,
+      // TODO: remove scrollable in next major release
+      // `${prefix}--tabs__nav-item`,
+      `${prefix}--tabs--scrollable__nav-item`,
+      {
+        [`${prefix}--tabs__nav-item--disabled`]: disabled,
+        [`${prefix}--tabs__nav-item--selected`]: selected,
+        // TODO: remove scrollable in next major release
+        [`${prefix}--tabs--scrollable__nav-item--disabled`]: disabled,
+        [`${prefix}--tabs--scrollable__nav-item--selected`]: selected,
+      }
+    );
 
     const anchorProps = {
       id,
-      className: `${prefix}--tabs__nav-link`,
+      // TODO: remove scrollable in next major release
+      // className:  `${prefix}--tabs__nav-link`,
+      className: `${prefix}--tabs--scrollable__nav-link`,
       href,
       tabIndex: !disabled ? tabIndex : -1,
       ref: (e) => {
