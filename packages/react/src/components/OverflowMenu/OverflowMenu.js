@@ -209,11 +209,6 @@ class OverflowMenu extends Component {
      * be focused when the OverflowMenu opens
      */
     selectorPrimaryFocus: PropTypes.string,
-
-    /**
-     * The `tabindex` attribute.
-     */
-    tabIndex: PropTypes.number,
   };
 
   static defaultProps = {
@@ -227,7 +222,6 @@ class OverflowMenu extends Component {
     onKeyDown: () => {},
     onClose: () => {},
     onOpen: () => {},
-    tabIndex: 0,
     menuOffset: getMenuOffset,
     menuOffsetFlip: getMenuOffset,
     light: false,
@@ -443,7 +437,6 @@ class OverflowMenu extends Component {
   render() {
     const {
       id,
-      tabIndex,
       ariaLabel,
       children,
       iconDescription,
@@ -548,7 +541,6 @@ class OverflowMenu extends Component {
           onClick={this.handleClick}
           aria-label={ariaLabel}
           id={id}
-          tabIndex={tabIndex}
           ref={mergeRefs(this._triggerRef, ref)}>
           <IconElement {...iconProps}>
             {iconDescription && <title>{iconDescription}</title>}
