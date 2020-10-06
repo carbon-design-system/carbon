@@ -26,16 +26,6 @@ describe('Tabs', () => {
         </Tabs>
       );
 
-      it('renders [role="navigation"] props on wrapping <div> by default', () => {
-        expect(
-          wrapper
-            // TODO: uncomment and replace in next major version
-            // .find(`.${prefix}--tabs`).props().role
-            .find(`.${prefix}--tabs--scrollable .${prefix}--tabs--scrollable`)
-            .props().role
-        ).toEqual('navigation');
-      });
-
       it('renders [role="tablist"] props on <ul> by default', () => {
         expect(wrapper.find('ul').props().role).toEqual('tablist');
       });
