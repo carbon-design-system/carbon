@@ -285,6 +285,7 @@ Map {
       "showLessText": "Show less",
       "showMoreText": "Show more",
       "type": "single",
+      "wrapText": false,
     },
     "propTypes": Object {
       "ariaLabel": Object {
@@ -329,6 +330,9 @@ Map {
           ],
         ],
         "type": "oneOf",
+      },
+      "wrapText": Object {
+        "type": "bool",
       },
     },
   },
