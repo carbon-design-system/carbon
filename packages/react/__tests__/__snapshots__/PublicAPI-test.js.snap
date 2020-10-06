@@ -749,6 +749,7 @@ Map {
   },
   "ContentSwitcher" => Object {
     "defaultProps": Object {
+      "onChange": [Function],
       "selectedIndex": 0,
       "selectionMode": "automatic",
     },
@@ -4369,6 +4370,9 @@ Map {
           ],
         ],
         "type": "oneOfType",
+      },
+      "disabled": Object {
+        "type": "bool",
       },
       "id": Object {
         "type": "string",

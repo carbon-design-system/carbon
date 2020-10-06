@@ -27,6 +27,7 @@ const props = () => ({
   className: 'some-class',
   size: select('Size (size)', sizes, 'xl'),
   light: boolean('Light variant (light)', false),
+  disabled: boolean('Disabled (disabled)', false),
   name: text('Form item name (name)', ''),
   defaultValue: text('Default value (defaultValue)', ''),
   labelText: text('Label text (labelText)', 'Search'),
