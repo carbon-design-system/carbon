@@ -10,6 +10,7 @@ import React from 'react';
 import classNames from 'classnames';
 import { settings } from 'carbon-components';
 import TabContent from '../TabContent';
+import deprecate from '../../prop-types/deprecate.js';
 
 const { prefix } = settings;
 
@@ -72,7 +73,7 @@ export default class Tab extends React.Component {
      * Useful for using Tab along with react-router or other client
      * side router libraries.
      **/
-    renderAnchor: PropTypes.func,
+    renderAnchor: deprecate(PropTypes.func),
 
     /*
      * An optional parameter to allow overriding the content rendering.
@@ -121,7 +122,8 @@ export default class Tab extends React.Component {
       tabIndex,
       onClick,
       onKeyDown,
-      renderAnchor,
+      // TODO: rename renderAnchor to renderButton in next major version
+      renderAnchor: renderButton,
       renderContent, // eslint-disable-line no-unused-vars
       ...other
     } = this.props;
@@ -140,7 +142,7 @@ export default class Tab extends React.Component {
       }
     );
 
-    const anchorProps = {
+    const buttonProps = {
       ['aria-selected']: selected,
       ['aria-disabled']: disabled,
       ['aria-controls']: `${id}__panel`,
@@ -175,10 +177,12 @@ export default class Tab extends React.Component {
           onKeyDown(evt);
         }}
         role="presentation">
-        {renderAnchor ? (
-          renderAnchor(anchorProps)
+        {renderButton ? (
+          renderButton(buttonProps)
         ) : (
-          <a {...anchorProps}>{label}</a>
+          <button type="button" {...buttonProps}>
+            {label}
+          </button>
         )}
       </li>
     );
