@@ -222,7 +222,7 @@ export default class Tabs extends React.Component {
       event.type === 'click'
     ) {
       const currentScrollLeft = this.state.tablistScrollLeft;
-      tab?.tabAnchor?.scrollIntoView({ inline: 'nearest' });
+      tab?.tabAnchor?.scrollIntoView(false);
       const newScrollLeft = this.tablist.current.scrollLeft;
       if (newScrollLeft > currentScrollLeft) {
         this.tablist.current.scrollLeft += this.OVERFLOW_BUTTON_OFFSET;
