@@ -171,7 +171,7 @@ export default class Tab extends React.Component {
           handleTabKeyDown(index, evt);
           onKeyDown(evt);
         }}
-        role="tab"
+        role="presentation"
         aria-selected={selected}
         aria-disabled={disabled}
         aria-controls={`${id}__panel`}>
