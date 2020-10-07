@@ -29,8 +29,8 @@ describe('Tab', () => {
       ).toBe(true);
     });
 
-    it('renders <li> with [role="tab"]', () => {
-      expect(wrapper.props().role).toEqual('tab');
+    it('renders <li> with [role="presentation"]', () => {
+      expect(wrapper.props().role).toEqual('presentation');
     });
 
     it('renders <a> with tabindex set to 0', () => {
