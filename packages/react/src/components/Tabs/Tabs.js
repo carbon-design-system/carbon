@@ -24,7 +24,7 @@ export default class Tabs extends React.Component {
     children: PropTypes.node,
 
     /**
-     * Provide a className that is applied to the root <nav> component for the
+     * Provide a className that is applied to the root <div> component for the
      * <Tabs>
      */
     className: PropTypes.string,
@@ -59,12 +59,6 @@ export default class Tabs extends React.Component {
     onSelectionChange: PropTypes.func,
 
     /**
-     * By default, this value is "navigation". You can also provide an alternate
-     * role if it makes sense from the accessibility-side
-     */
-    role: PropTypes.string.isRequired,
-
-    /**
      * Optionally provide an index for the currently selected <Tab>
      */
     selected: PropTypes.number,
@@ -86,7 +80,6 @@ export default class Tabs extends React.Component {
   };
 
   static defaultProps = {
-    role: 'navigation',
     type: 'default',
     selected: 0,
     selectionMode: 'automatic',
@@ -332,7 +325,6 @@ export default class Tabs extends React.Component {
   render() {
     const {
       className,
-      role,
       type,
       light,
       onSelectionChange,
@@ -427,11 +419,7 @@ export default class Tabs extends React.Component {
     return (
       // TODO: remove classname and revert div to React Fragment after next major release
       <div className={`${prefix}--tabs--scrollable`}>
-        <div
-          {...other}
-          className={classes.tabs}
-          role={role}
-          onScroll={this.handleScroll}>
+        <div {...other} className={classes.tabs} onScroll={this.handleScroll}>
           <button
             type="button"
             className={classes.leftOverflowButtonClasses}
