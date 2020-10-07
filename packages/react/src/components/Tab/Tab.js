@@ -141,6 +141,9 @@ export default class Tab extends React.Component {
     );
 
     const anchorProps = {
+      ['aria-selected']: selected,
+      ['aria-disabled']: disabled,
+      ['aria-controls']: `${id}__panel`,
       id,
       // TODO: remove scrollable in next major release
       // className:  `${prefix}--tabs__nav-link`,
@@ -171,10 +174,7 @@ export default class Tab extends React.Component {
           handleTabKeyDown(index, evt);
           onKeyDown(evt);
         }}
-        role="presentation"
-        aria-selected={selected}
-        aria-disabled={disabled}
-        aria-controls={`${id}__panel`}>
+        role="presentation">
         {renderAnchor ? (
           renderAnchor(anchorProps)
         ) : (
