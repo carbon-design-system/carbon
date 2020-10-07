@@ -4970,9 +4970,7 @@ Map {
         "isRequired": true,
         "type": "func",
       },
-      "renderAnchor": Object {
-        "type": "func",
-      },
+      "renderAnchor": [Function],
       "renderContent": Object {
         "type": "func",
       },
