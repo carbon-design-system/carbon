@@ -513,6 +513,7 @@ class OverflowMenu extends Component {
 
     const wrappedMenuBody = (
       <FloatingMenu
+        focusTrap
         triggerRef={this._triggerRef}
         menuDirection={direction}
         menuOffset={flipped ? menuOffsetFlip : menuOffset}

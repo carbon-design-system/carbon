@@ -14755,6 +14755,11 @@ Code snippet styles
     transition: max-height $duration--moderate-01 motion(standard, productive);
   }
 
+  .#{$prefix}--snippet--multi.#{$prefix}--snippet--wraptext pre {
+    white-space: pre-wrap;
+    word-wrap: break-word;
+  }
+
   // closed pre
   .#{$prefix}--snippet--multi .#{$prefix}--snippet-container pre {
     padding-right: $carbon--spacing-08;
