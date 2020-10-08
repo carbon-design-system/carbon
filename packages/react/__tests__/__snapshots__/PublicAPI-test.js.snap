@@ -22,6 +22,9 @@ Map {
       "className": Object {
         "type": "string",
       },
+      "disabled": Object {
+        "type": "bool",
+      },
     },
   },
   "AccordionItem" => Object {
@@ -31,6 +34,9 @@ Map {
       },
       "className": Object {
         "type": "string",
+      },
+      "disabled": Object {
+        "type": "bool",
       },
       "iconDescription": [Function],
       "onClick": Object {
