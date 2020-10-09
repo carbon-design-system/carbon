@@ -3052,6 +3052,15 @@ Map {
       "inline": Object {
         "type": "bool",
       },
+      "size": Object {
+        "args": Array [
+          Array [
+            "12px",
+            "16px",
+          ],
+        ],
+        "type": "oneOf",
+      },
       "visited": Object {
         "type": "bool",
       },

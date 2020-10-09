@@ -18659,6 +18659,14 @@ Link styles
   .#{$prefix}--link--disabled.#{$prefix}--link--inline {
     text-decoration: underline;
   }
+
+  .#{$prefix}--link--12px {
+    font-size: 12px;
+  }
+  
+  .#{$prefix}--link--16px {
+    font-size: 16px;
+  }
 }
 ```
 

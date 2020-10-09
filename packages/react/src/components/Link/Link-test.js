@@ -41,5 +41,9 @@ describe('Link', () => {
       link.setProps({ inline: true });
       expect(link.hasClass(`${prefix}--link--inline`)).toEqual(true);
     });
+    it('should add support for different link sizes', () => {
+      link.setProps({ size: '16px' });
+      expect(link.hasClass(`${prefix}--link--16px`)).toEqual(true);
+    });
   });
 });
