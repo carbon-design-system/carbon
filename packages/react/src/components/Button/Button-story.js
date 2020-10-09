@@ -192,7 +192,9 @@ export const Playground = () => {
   );
 };
 
-export const IconButton = () => <Button {...props.iconOnly()} hasIconOnly />;
+export const IconButton = () => (
+  <Button renderIcon={Add16} iconDescription="Icon Description" hasIconOnly />
+);
 
 IconButton.story = {
   name: 'Icon Button',
