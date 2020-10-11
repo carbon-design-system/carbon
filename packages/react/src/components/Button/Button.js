@@ -38,6 +38,8 @@ const Button = React.forwardRef(function Button(
     [`${prefix}--btn`]: true,
     [`${prefix}--btn--field`]: size === 'field',
     [`${prefix}--btn--sm`]: size === 'small' || small,
+    [`${prefix}--btn--lg`]: size === 'large',
+    [`${prefix}--btn--xl`]: size === 'xl',
     [`${prefix}--btn--${kind}`]: kind,
     [`${prefix}--btn--disabled`]: disabled,
     [`${prefix}--btn--icon-only`]: hasIconOnly,
@@ -166,7 +168,7 @@ Button.propTypes = {
    * Specify the size of the button, from a list of available sizes.
    * For `default` buttons, this prop can remain unspecified.
    */
-  size: PropTypes.oneOf(['default', 'field', 'small']),
+  size: PropTypes.oneOf(['default', 'field', 'small', 'large', 'xl']),
 
   /**
    * Deprecated in v10 in favor of `size`.

@@ -104,3 +104,10 @@
     fill: $icon-color;
   }
 }
+
+@mixin button-padding-large {
+  align-items: baseline;
+  padding-top: rem(12px);
+  padding-right: rem(64px);
+  padding-left: rem(12px);
+}

@@ -321,6 +321,16 @@
     padding: $button-padding-sm;
   }
 
+  .#{$prefix}--btn--xl {
+    min-height: rem(80px);
+    @include button-padding-large;
+  }
+
+  .#{$prefix}--btn--lg {
+    min-height: rem(64px);
+    @include button-padding-large;
+  }
+
   .#{$prefix}--btn--field {
     min-height: rem(40px);
     padding: $button-padding-field;
