@@ -176,6 +176,8 @@ Map {
             "default",
             "field",
             "small",
+            "large",
+            "xl",
           ],
         ],
         "type": "oneOf",
