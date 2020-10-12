@@ -42,6 +42,8 @@ const sizes = {
   Default: 'default',
   Field: 'field',
   Small: 'small',
+  Large: 'large',
+  XL: 'xl',
 };
 
 const props = {
