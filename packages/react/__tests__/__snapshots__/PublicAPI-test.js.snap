@@ -4949,10 +4949,7 @@ Map {
       "handleTabKeyDown": Object {
         "type": "func",
       },
-      "href": Object {
-        "isRequired": true,
-        "type": "string",
-      },
+      "href": [Function],
       "id": Object {
         "type": "string",
       },
