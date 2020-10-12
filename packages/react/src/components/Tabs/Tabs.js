@@ -402,7 +402,6 @@ export default class Tabs extends React.Component {
         <TabContent
           id={tabId && `${tabId}__panel`}
           className={tabContentClassName}
-          aria-hidden={!selected}
           hidden={!selected}
           selected={selected}
           aria-labelledby={tabId}>
