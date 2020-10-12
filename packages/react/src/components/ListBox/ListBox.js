@@ -37,12 +37,16 @@ const ListBox = React.forwardRef(function ListBox(
     size,
     invalid,
     invalidText,
+    warn,
+    warnText,
     light,
     isOpen,
     ...rest
   },
   ref
 ) {
+  const showWarning = !invalid && warn;
+
   const className = cx({
     [containerClassName]: !!containerClassName,
     [`${prefix}--list-box`]: true,
@@ -51,6 +55,7 @@ const ListBox = React.forwardRef(function ListBox(
     [`${prefix}--list-box--disabled`]: disabled,
     [`${prefix}--list-box--light`]: light,
     [`${prefix}--list-box--expanded`]: isOpen,
+    [`${prefix}--list-box--warning`]: showWarning,
   });
   return (
     <>
@@ -66,6 +71,9 @@ const ListBox = React.forwardRef(function ListBox(
       </div>
       {invalid ? (
         <div className={`${prefix}--form-requirement`}>{invalidText}</div>
+      ) : null}
+      {showWarning ? (
+        <div className={`${prefix}--form-requirement`}>{warnText}</div>
       ) : null}
     </>
   );
@@ -118,6 +126,16 @@ ListBox.propTypes = {
    * `inline` as an option.
    */
   type: ListBoxType.isRequired,
+
+  /**
+   * Specify whether the control is currently in warning state
+   */
+  warn: PropTypes.bool,
+
+  /**
+   * Provide the text that is displayed when the control is in warning state
+   */
+  warnText: PropTypes.string,
 };
 
 ListBox.defaultProps = {
