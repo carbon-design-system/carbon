@@ -54,6 +54,7 @@ const Dropdown = React.forwardRef(function Dropdown(
     initialSelectedItem,
     selectedItem: controlledSelectedItem,
     downshiftProps,
+    isOptional,
     ...other
   },
   ref
@@ -265,6 +266,11 @@ Dropdown.propTypes = {
   invalidText: PropTypes.string,
 
   /**
+   * Specify whether the dropdown value can be reverted to its initial value after being changed.
+   */
+  isOptional: PropTypes.bool,
+
+  /**
    * Function to render items as custom components instead of strings.
    * Defaults to null and is overriden by a getter
    */
@@ -346,6 +352,7 @@ Dropdown.defaultProps = {
   titleText: '',
   helperText: '',
   direction: 'bottom',
+  isOptional: false,
 };
 
 export default Dropdown;
