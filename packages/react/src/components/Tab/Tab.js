@@ -92,7 +92,7 @@ export default class Tab extends React.Component {
     selected: PropTypes.bool.isRequired,
 
     /**
-     * Specify the tab index of the `<a>` node
+     * Specify the tab index of the `<button>` node
      */
     tabIndex: PropTypes.number.isRequired,
   };
@@ -160,7 +160,6 @@ export default class Tab extends React.Component {
     return (
       <li
         {...other}
-        tabIndex={-1}
         className={classes}
         onClick={(evt) => {
           if (disabled) {
