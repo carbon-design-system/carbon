@@ -46,11 +46,6 @@ describe('Tab', () => {
       expect(wrapper.find('button').props().children).toEqual('firstTab');
     });
 
-    it('sets new href value when passed in via props', () => {
-      wrapper.setProps({ href: '#other-content' });
-      expect(wrapper.find('button').props().href).toEqual('#other-content');
-    });
-
     it(`should not have [className="${prefix}--tabs__nav-item--selected"] by default`, () => {
       expect(wrapper.hasClass(`${prefix}--tabs__nav-item--selected`)).toBe(
         false
