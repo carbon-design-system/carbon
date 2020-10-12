@@ -28,6 +28,7 @@ const Link = ({
     [`${prefix}--link--visited`]: visited,
     [`${prefix}--link--${size}`]: size,
   });
+  console.log(classNames);
   const Tag = disabled ? 'p' : 'a';
   return (
     <Tag href={disabled ? null : href} className={classNames} {...other}>
@@ -63,9 +64,9 @@ Link.propTypes = {
   inline: PropTypes.bool,
 
   /**
-   * Specify the size of the Link. Currently supports either `12px` or `16px` as an option.
+   * Specify the size of the Link. Currently supports either `sm` or `lg` as an option.
    */
-  size: PropTypes.oneOf(['12px', '16px']),
+  size: PropTypes.oneOf(['sm', 'lg']),
 
   /**
    * Specify whether you want the link to receive visited styles after the link has been clicked

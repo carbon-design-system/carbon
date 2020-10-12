@@ -18660,12 +18660,12 @@ Link styles
     text-decoration: underline;
   }
 
-  .#{$prefix}--link--12px {
-    font-size: 12px;
+  .#{$prefix}--link--sm {
+    font-size: rem(12px);
   }
-  
-  .#{$prefix}--link--16px {
-    font-size: 16px;
+
+  .#{$prefix}--link--lg {
+    font-size: rem(16px);
   }
 }
 ```

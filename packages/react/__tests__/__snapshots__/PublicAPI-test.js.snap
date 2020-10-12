@@ -3055,8 +3055,8 @@ Map {
       "size": Object {
         "args": Array [
           Array [
-            "12px",
-            "16px",
+            "sm",
+            "lg",
           ],
         ],
         "type": "oneOf",

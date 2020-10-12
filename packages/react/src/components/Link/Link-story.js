@@ -23,7 +23,11 @@ const props = () => ({
     handler(evt);
   })(action('onClick')),
   disabled: boolean('Disabled', false),
-  size: select('Link size', { Default: '', '12px': '12px', '16px': '16px' }),
+  size: select('Link size', {
+    Default: undefined,
+    'Small (sm)': 'sm',
+    'Large (lg)': 'lg',
+  }),
 });
 
 export default {
