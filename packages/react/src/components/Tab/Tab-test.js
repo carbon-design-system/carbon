@@ -33,16 +33,16 @@ describe('Tab', () => {
       expect(wrapper.props().role).toEqual('presentation');
     });
 
-    it('renders <a> with tabindex set to 0', () => {
+    it('renders <button> with tabindex set to 0', () => {
       expect(wrapper.find('button').props().tabIndex).toEqual(0);
     });
 
-    it('sets tabIndex on <a> if one is passed via props', () => {
+    it('sets tabIndex on <button> if one is passed via props', () => {
       wrapper.setProps({ tabIndex: 2 });
       expect(wrapper.find('button').props().tabIndex).toEqual(2);
     });
 
-    it('uses label to set children on <a> when passed via props', () => {
+    it('uses label to set children on <button> when passed via props', () => {
       expect(wrapper.find('button').props().children).toEqual('firstTab');
     });
 
