@@ -161,6 +161,7 @@ export default function TreeView({
         {...rest}
         aria-label={hideLabel ? label : null}
         aria-labelledby={!hideLabel ? labelId : null}
+        aria-multiselectable={multiselect || null}
         className={treeClasses}
         onKeyDown={handleKeyDown}
         ref={treeRootRef}

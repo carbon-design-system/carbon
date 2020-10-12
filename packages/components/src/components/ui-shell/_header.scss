@@ -66,6 +66,13 @@
   .#{$prefix}--header__action:focus {
     border-color: $shell-header-focus;
     outline: none;
+
+    // Windows, Firefox HCM Fix
+    @media screen and (-ms-high-contrast: active),
+      screen and (prefers-contrast) {
+      outline: 3px solid transparent;
+      outline-offset: -3px;
+    }
   }
 
   .#{$prefix}--header__action:active {
@@ -198,6 +205,13 @@
     color: $shell-header-text-01;
     border-color: $shell-header-focus;
     outline: none;
+
+    // Windows, Firefox HCM Fix
+    @media screen and (-ms-high-contrast: active),
+      screen and (prefers-contrast) {
+      outline: 3px solid transparent;
+      outline-offset: -3px;
+    }
   }
 
   a.#{$prefix}--header__menu-item:hover > svg,
