@@ -179,7 +179,7 @@ export default class Tab extends React.Component {
         {renderButton ? (
           renderButton(buttonProps)
         ) : (
-          <button type="button" {...buttonProps}>
+          <button type="button" role="tab" {...buttonProps}>
             {label}
           </button>
         )}
