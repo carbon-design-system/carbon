@@ -7453,6 +7453,7 @@ $support-03: if(
 - **Type**: `{undefined}`
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
+  - [listbox [mixin]](#listbox-mixin)
   - [inline-notifications [mixin]](#inline-notifications-mixin)
   - [toast-notifications [mixin]](#toast-notifications-mixin)
   - [number-input [mixin]](#number-input-mixin)
@@ -18375,7 +18376,8 @@ Form styles
   .#{$prefix}--text-area__wrapper[data-invalid],
   .#{$prefix}--select-input__wrapper[data-invalid],
   .#{$prefix}--time-picker[data-invalid],
-  .#{$prefix}--list-box[data-invalid] {
+  .#{$prefix}--list-box[data-invalid],
+  .#{$prefix}--list-box--warning {
     ~ .#{$prefix}--form-requirement {
       display: block;
       max-height: rem(200px);
@@ -18903,7 +18905,19 @@ List box styles
     fill: $support-01;
   }
 
-  .#{$prefix}--list-box[data-invalid] .#{$prefix}--list-box__field {
+  .#{$prefix}--list-box__invalid-icon--warning {
+    fill: $support-03;
+  }
+
+  .#{$prefix}--list-box__invalid-icon--warning
+    path[data-icon-path='inner-path'] {
+    opacity: 1;
+    fill: $carbon__black-100;
+  }
+
+  .#{$prefix}--list-box[data-invalid] .#{$prefix}--list-box__field,
+  .#{$prefix}--list-box.#{$prefix}--list-box--warning
+    .#{$prefix}--list-box__field {
     padding-right: carbon--mini-units(8);
     border-bottom: 0;
   }
@@ -19552,6 +19566,7 @@ List box styles
   - [field-02 [variable]](#field-02-variable)
   - [carbon--spacing-08 [variable]](#carbon--spacing-08-variable)
   - [support-01 [variable]](#support-01-variable)
+  - [support-03 [variable]](#support-03-variable)
   - [decorative-01 [variable]](#decorative-01-variable)
   - [disabled-02 [variable]](#disabled-02-variable)
   - [carbon--spacing-09 [variable]](#carbon--spacing-09-variable)

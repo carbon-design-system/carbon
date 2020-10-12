@@ -27,8 +27,13 @@ const Link = ({
     [`${prefix}--link--visited`]: visited,
   });
   const Tag = disabled ? 'p' : 'a';
+  const rel = other.target === '_blank' ? 'noopener' : null;
   return (
-    <Tag href={disabled ? null : href} className={classNames} {...other}>
+    <Tag
+      href={disabled ? null : href}
+      className={classNames}
+      rel={rel}
+      {...other}>
       {children}
     </Tag>
   );
