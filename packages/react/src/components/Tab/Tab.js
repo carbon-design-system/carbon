@@ -41,7 +41,7 @@ export default class Tab extends React.Component {
     /**
      * Provide a string that represents the `href` of the Tab
      */
-    href: PropTypes.string.isRequired,
+    href: deprecate(PropTypes.string),
 
     /**
      * The element ID for the top-level element.
