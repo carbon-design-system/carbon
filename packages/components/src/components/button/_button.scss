@@ -322,13 +322,15 @@
   }
 
   .#{$prefix}--btn--xl {
-    min-height: rem(80px);
     @include button-padding-large;
+
+    min-height: rem(80px);
   }
 
   .#{$prefix}--btn--lg {
-    min-height: rem(64px);
     @include button-padding-large;
+
+    min-height: rem(64px);
   }
 
   .#{$prefix}--btn--field {
