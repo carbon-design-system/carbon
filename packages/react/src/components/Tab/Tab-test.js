@@ -21,7 +21,7 @@ describe('Tab', () => {
       expect(wrapper.hasClass('extra-class')).toBe(true);
     });
 
-    it('renders <buttton> with expected className', () => {
+    it('renders <button> with expected className', () => {
       expect(
         // TODO: uncomment and replace assertion in next major version
         // wrapper.find('button').hasClass(`${prefix}--tabs__nav-link`)
