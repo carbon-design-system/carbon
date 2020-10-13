@@ -117,6 +117,12 @@ const carbonFlatpickrMonthSelectPlugin = (config) => (fp) => {
 export default class DatePicker extends Component {
   static propTypes = {
     /**
+     * flatpickr prop passthrough. Allows the user to enter a date directly
+     * into the input field
+     */
+    allowInput: PropTypes.bool,
+
+    /**
      * The DOM element the Flatpicker should be inserted into. `<body>` by default.
      */
     appendTo: PropTypes.object,
@@ -258,6 +264,7 @@ export default class DatePicker extends Component {
 
   componentDidMount() {
     const {
+      allowInput,
       appendTo,
       datePickerType,
       dateFormat,
@@ -278,7 +285,7 @@ export default class DatePicker extends Component {
           disableMobile: true,
           defaultDate: value,
           mode: datePickerType,
-          allowInput: true,
+          allowInput: allowInput ?? true,
           dateFormat: dateFormat,
           locale: l10n[locale],
           minDate: minDate,
