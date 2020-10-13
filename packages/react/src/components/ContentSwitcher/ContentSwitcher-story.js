@@ -17,6 +17,12 @@ const selectionModes = {
   'Change selection on explicit gesture (manual)': 'manual',
 };
 
+const sizes = {
+  'Extra large size (xl)': 'xl',
+  'Default size': undefined,
+  'Small size (sm)': 'sm',
+};
+
 const props = {
   contentSwitcher: () => ({
     light: boolean('Light variant (light)', false),
@@ -26,6 +32,7 @@ const props = {
       selectionModes,
       'automatic'
     ),
+    size: select('Field size (size)', sizes, undefined) || undefined,
     onChange: action('onChange'),
   }),
   switch: () => ({

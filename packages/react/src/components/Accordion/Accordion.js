@@ -12,13 +12,23 @@ import React from 'react';
 
 const { prefix } = settings;
 
-function Accordion({ align, children, className: customClassName, ...rest }) {
+function Accordion({
+  align,
+  children,
+  className: customClassName,
+  disabled,
+  ...rest
+}) {
   const className = cx(`${prefix}--accordion`, customClassName, {
     [`${prefix}--accordion--${align}`]: align,
   });
   return (
     <ul className={className} {...rest}>
-      {children}
+      {disabled
+        ? React.Children.toArray(children).map((child) => {
+            return React.cloneElement(child, { disabled });
+          })
+        : children}
     </ul>
   );
 }
@@ -42,6 +52,11 @@ Accordion.propTypes = {
    * Specify an optional className to be applied to the container node
    */
   className: PropTypes.string,
+
+  /**
+   * Specify whether an individual AccordionItem should be disabled
+   */
+  disabled: PropTypes.bool,
 };
 
 export default Accordion;
