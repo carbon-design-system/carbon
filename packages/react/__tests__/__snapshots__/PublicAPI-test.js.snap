@@ -789,6 +789,15 @@ Map {
         ],
         "type": "oneOf",
       },
+      "size": Object {
+        "args": Array [
+          Array [
+            "sm",
+            "xl",
+          ],
+        ],
+        "type": "oneOf",
+      },
     },
   },
   "Copy" => Object {
