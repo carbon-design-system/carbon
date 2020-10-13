@@ -65,6 +65,7 @@ export default class ContentSwitcher extends React.Component {
   static defaultProps = {
     selectedIndex: 0,
     selectionMode: 'automatic',
+    onChange: () => {},
   };
 
   static getDerivedStateFromProps({ selectedIndex }, state) {

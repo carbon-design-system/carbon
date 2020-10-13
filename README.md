@@ -76,6 +76,16 @@ or help us improve the project documentation. If you're interested, definitely
 check out our [Contributing Guide](/.github/CONTRIBUTING.md) and our
 [Developer Guide](./docs/developer-handbook.md)! 👀
 
+## Contributors
+
+<!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
+<!-- prettier-ignore -->
+<!-- ALL-CONTRIBUTORS-LIST:END -->
+
+This project follows the
+[all-contributors](https://github.com/kentcdodds/all-contributors)
+specification. Contributions of any kind welcome!
+
 ## 📝 License
 
 Licensed under the [Apache 2.0 License](/LICENSE).

@@ -89,6 +89,7 @@ const props = {
 
 export const playground = () => (
   <Accordion
+    disabled={boolean('Disable entire Accordion (disabled)', false)}
     align={select(
       'Accordion heading alignment (align)',
       ['start', 'end'],
@@ -113,7 +114,10 @@ export const playground = () => (
         commodo consequat.
       </p>
     </AccordionItem>
-    <AccordionItem title="Section 3 title" {...props}>
+    <AccordionItem
+      title="Section 3 title"
+      {...props}
+      disabled={boolean('Disable Section 3 (disabled)', true)}>
       <Button>This is a button.</Button>
     </AccordionItem>
     <AccordionItem

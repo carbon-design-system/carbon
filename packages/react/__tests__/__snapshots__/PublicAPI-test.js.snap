@@ -22,6 +22,9 @@ Map {
       "className": Object {
         "type": "string",
       },
+      "disabled": Object {
+        "type": "bool",
+      },
     },
   },
   "AccordionItem" => Object {
@@ -31,6 +34,9 @@ Map {
       },
       "className": Object {
         "type": "string",
+      },
+      "disabled": Object {
+        "type": "bool",
       },
       "iconDescription": [Function],
       "onClick": Object {
@@ -285,6 +291,7 @@ Map {
       "showLessText": "Show less",
       "showMoreText": "Show more",
       "type": "single",
+      "wrapText": false,
     },
     "propTypes": Object {
       "ariaLabel": Object {
@@ -329,6 +336,9 @@ Map {
           ],
         ],
         "type": "oneOf",
+      },
+      "wrapText": Object {
+        "type": "bool",
       },
     },
   },
@@ -749,6 +759,7 @@ Map {
   },
   "ContentSwitcher" => Object {
     "defaultProps": Object {
+      "onChange": [Function],
       "selectedIndex": 0,
       "selectionMode": "automatic",
     },
@@ -2323,6 +2334,12 @@ Map {
           ],
         ],
         "type": "oneOf",
+      },
+      "warn": Object {
+        "type": "bool",
+      },
+      "warnText": Object {
+        "type": "string",
       },
     },
     "render": [Function],
@@ -4379,6 +4396,9 @@ Map {
         ],
         "type": "oneOfType",
       },
+      "disabled": Object {
+        "type": "bool",
+      },
       "id": Object {
         "type": "string",
       },
@@ -4941,7 +4961,6 @@ Map {
   },
   "Tabs" => Object {
     "defaultProps": Object {
-      "role": "navigation",
       "selected": 0,
       "selectionMode": "automatic",
       "type": "default",
@@ -4967,10 +4986,6 @@ Map {
       },
       "onSelectionChange": Object {
         "type": "func",
-      },
-      "role": Object {
-        "isRequired": true,
-        "type": "string",
       },
       "selected": Object {
         "type": "number",

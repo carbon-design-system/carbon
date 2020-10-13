@@ -19,27 +19,38 @@ describe('Link', () => {
         A simple link
       </Link>
     );
+
     it('should use the appropriate link class', () => {
       expect(link.name()).toEqual('a');
       expect(link.hasClass(`${prefix}--link`)).toEqual(true);
     });
+
     it('should inherit the href property', () => {
       expect(link.props().href).toEqual('www.google.com');
     });
+
     it('should include child content', () => {
       expect(link.text()).toEqual('A simple link');
     });
+
     it('should all for custom classes to be applied', () => {
       expect(link.hasClass('some-class')).toEqual(true);
     });
+
     it('should support disabled link', () => {
       link.setProps({ disabled: true });
       expect(link.name()).toEqual('p');
       expect(link.hasClass(`${prefix}--link--disabled`)).toEqual(true);
     });
+
     it('should support inline link', () => {
       link.setProps({ inline: true });
       expect(link.hasClass(`${prefix}--link--inline`)).toEqual(true);
+    });
+
+    it('should add rel="noopener" automatically if target="_blank"', () => {
+      link.setProps({ target: '_blank' });
+      expect(link.props().rel).toEqual('noopener');
     });
   });
 });

@@ -198,9 +198,10 @@ export const UsingHeaderFooterProps = () => {
         {...bodyProps}
         aria-label={hasScrollingContent ? 'Modal content' : undefined}>
         <p className={`${prefix}--modal-content__text`}>
-          Please see ModalWrapper for more examples and demo of the
-          functionality.
+          Please see the &quot;With Trigger Button&quot; storybook example for a
+          demo of this functionality.
         </p>
+        <br />
         {hasScrollingContent && scrollingContent}
       </ModalBody>
       <ModalFooter {...props.modalFooter()} />
@@ -234,9 +235,10 @@ export const UsingChildNodes = () => {
         {...bodyProps}
         aria-label={hasScrollingContent ? 'Modal content' : undefined}>
         <p>
-          Please see ModalWrapper for more examples and demo of the
-          functionality.
+          Please see the &quot;With Trigger Button&quot; storybook example for a
+          demo of this functionality.
         </p>
+        <br />
         {hasScrollingContent && scrollingContent}
       </ModalBody>
       <ModalFooter>
@@ -299,10 +301,6 @@ export const WithTriggerButton = () => {
           <ModalBody
             {...bodyProps}
             aria-label={hasScrollingContent ? 'Modal content' : undefined}>
-            <p className={`${prefix}--modal-content__text`}>
-              Please see ModalWrapper for more examples and demo of the
-              functionality.
-            </p>
             {hasScrollingContent && scrollingContent}
           </ModalBody>
           <ModalFooter {...props.modalFooter()} />
