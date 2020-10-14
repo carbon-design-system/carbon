@@ -9,27 +9,20 @@ import {
   CARBON_CURRENT_THEME,
   CARBON_THEME_PARAM,
   WITH_CARBON_THEME,
-  mergeParams,
 } from './shared';
-import { CarbonThemeDecorator } from './decorators/vue';
 
-const wrapper = (getStory, context, { parameters }) => {
+const Wrapper = (getStory, context, { parameters }) => {
   const channel = addons.getChannel();
-  channel.emit(CARBON_CURRENT_THEME);
+
+  const setCarbonTheme = (theme) => {
+    document.documentElement.setAttribute('storybook-carbon-theme', theme);
+  };
 
   return {
-    components: { CarbonThemeDecorator },
-    template: `<CarbonThemeDecorator :themes="themes" :value="value"><story/></CarbonThemeDecorator>`,
-    data() {
-      return {
-        value: '',
-        themes: [],
-      };
-    },
+    template: `<story/>`,
     mounted() {
-      const options = mergeParams(parameters);
-      this.value = options.theme;
-      this.themes = options.themes;
+      channel.on(CARBON_CURRENT_THEME, setCarbonTheme);
+      setCarbonTheme(parameters.value);
     },
   };
 };
@@ -37,5 +30,5 @@ const wrapper = (getStory, context, { parameters }) => {
 export const withCarbonTheme = makeDecorator({
   name: WITH_CARBON_THEME,
   parameterName: CARBON_THEME_PARAM,
-  wrapper,
+  wrapper: Wrapper,
 });
