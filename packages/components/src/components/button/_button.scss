@@ -321,26 +321,16 @@
     padding: $button-padding-sm;
   }
 
-  .#{$prefix}--btn--xl {
+  .#{$prefix}--btn--xl:not(.#{$prefix}--btn--icon-only) {
     @include button-padding-large;
 
     min-height: rem(80px);
   }
 
-  .#{$prefix}--btn--icon-only.#{$prefix}--btn--xl .#{$prefix}--btn__icon {
-    width: rem(27px);
-    height: rem(27px);
-  }
-
-  .#{$prefix}--btn--lg {
+  .#{$prefix}--btn--lg:not(.#{$prefix}--btn--icon-only) {
     @include button-padding-large;
 
     min-height: rem(64px);
-  }
-
-  .#{$prefix}--btn--icon-only.#{$prefix}--btn--lg .#{$prefix}--btn__icon {
-    width: rem(21px);
-    height: rem(21px);
   }
 
   .#{$prefix}--btn--field {
