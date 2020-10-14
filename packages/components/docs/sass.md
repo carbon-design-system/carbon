@@ -6132,6 +6132,7 @@ $carbon--theme--g10: map-merge(
     field-01: #ffffff,
     field-02: #f4f4f4,
     disabled-01: #ffffff,
+    highlight: #edf5ff,
   )
 );
 ```
@@ -15170,6 +15171,14 @@ Content switcher styles
     justify-content: space-evenly;
     width: 100%;
     height: rem(40px);
+  }
+
+  .#{$prefix}--content-switcher--sm {
+    height: rem(32px);
+  }
+
+  .#{$prefix}--content-switcher--xl {
+    height: rem(48px);
   }
 
   .#{$prefix}--content-switcher--disabled {
