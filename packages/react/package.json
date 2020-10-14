@@ -40,6 +40,7 @@
   },
   "dependencies": {
     "@carbon/icons-react": "^10.19.0",
+    "@carbon/storybook-addon-theme": "./packages/storybook-addon-carbon-theme",
     "classnames": "2.2.6",
     "downshift": "5.2.1",
     "flatpickr": "4.6.1",

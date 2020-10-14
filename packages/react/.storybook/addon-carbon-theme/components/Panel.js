@@ -8,7 +8,7 @@
 import React, { useCallback, useState } from 'react';
 import PropTypes from 'prop-types';
 import { Form } from '@storybook/components';
-import { CARBON_CURRENT_THEME, CARBON_TYPE_TOKEN } from '../shared';
+import { CARBON_TYPE_TOKEN } from '../shared';
 
 const typeTokenPairings = [
   '12-16',
@@ -34,61 +34,6 @@ const typeTokenDefaults = {
   'productive-heading-02': '16-22',
   'productive-heading-03': '20-26',
   'productive-heading-04': '28-36',
-};
-
-/**
- * Storybook add-on panel for Carbon theme switcher.
- */
-export const CarbonThemesPanel = ({ api, active }) => {
-  const [currentTheme, setCurrentTheme] = useState('white');
-  const handleChange = useCallback(
-    (event) => {
-      const { value } = event.target;
-      setCurrentTheme(value);
-      api.getChannel().emit(CARBON_CURRENT_THEME, value);
-    },
-    [api]
-  );
-  return (
-    active && (
-      <Form>
-        <Form.Field label="Select Carbon theme:">
-          <Form.Select
-            name="carbon-theme"
-            value={currentTheme}
-            onChange={handleChange}
-            size="flex">
-            <option key="white" value="white">
-              white
-            </option>
-            <option key="g10" value="g10">
-              g10
-            </option>
-            <option key="g90" value="g90">
-              g90
-            </option>
-            <option key="g100" value="g100">
-              g100
-            </option>
-          </Form.Select>
-        </Form.Field>
-      </Form>
-    )
-  );
-};
-
-CarbonThemesPanel.propTypes = {
-  /**
-   * The Storybook API object.
-   */
-  api: PropTypes.shape({
-    getChannel: PropTypes.func,
-  }).isRequired,
-
-  /**
-   * `true` if this Storybook add-on panel is active.
-   */
-  active: PropTypes.bool.isRequired,
 };
 
 /**
