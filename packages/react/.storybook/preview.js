@@ -18,9 +18,6 @@ import PackageInfo from './../package.json';
 const customPropertyPrefix = 'cds';
 
 addParameters({
-  carbonTheme: {
-    theme: 'g10',
-  },
   options: {
     /**
      * We sort our stories by default alphabetically, however there are specific
