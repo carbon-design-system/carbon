@@ -3,6 +3,11 @@
 This addon for storybook allows you to change the theme used with Carbon
 Components!
 
+## Supports
+
+- React
+- Vue
+
 ## Install
 
 ```sh
