@@ -789,6 +789,15 @@ Map {
         ],
         "type": "oneOf",
       },
+      "size": Object {
+        "args": Array [
+          Array [
+            "sm",
+            "xl",
+          ],
+        ],
+        "type": "oneOf",
+      },
     },
   },
   "Copy" => Object {
@@ -1981,6 +1990,9 @@ Map {
       "short": false,
     },
     "propTypes": Object {
+      "allowInput": Object {
+        "type": "bool",
+      },
       "appendTo": Object {
         "type": "object",
       },
