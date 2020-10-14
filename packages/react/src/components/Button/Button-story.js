@@ -41,9 +41,9 @@ const kinds = {
 const sizes = {
   Default: 'default',
   Field: 'field',
-  Small: 'small',
-  Large: 'large',
-  XL: 'xl',
+  'Small (sm)': 'small',
+  'Large (lg)': 'lg',
+  'Extra large size (xl)': 'xl',
 };
 
 const props = {

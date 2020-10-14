@@ -37,8 +37,8 @@ const Button = React.forwardRef(function Button(
   const buttonClasses = classNames(className, {
     [`${prefix}--btn`]: true,
     [`${prefix}--btn--field`]: size === 'field',
-    [`${prefix}--btn--sm`]: size === 'small' || small,
-    [`${prefix}--btn--lg`]: size === 'large',
+    [`${prefix}--btn--sm`]: size === 'small' || size === 'sm' || small,
+    [`${prefix}--btn--lg`]: size === 'lg',
     [`${prefix}--btn--xl`]: size === 'xl',
     [`${prefix}--btn--${kind}`]: kind,
     [`${prefix}--btn--disabled`]: disabled,
@@ -168,7 +168,7 @@ Button.propTypes = {
    * Specify the size of the button, from a list of available sizes.
    * For `default` buttons, this prop can remain unspecified.
    */
-  size: PropTypes.oneOf(['default', 'field', 'small', 'large', 'xl']),
+  size: PropTypes.oneOf(['default', 'field', 'small', 'sm', 'lg', 'xl']),
 
   /**
    * Deprecated in v10 in favor of `size`.
@@ -176,7 +176,7 @@ Button.propTypes = {
    */
   small: deprecate(
     PropTypes.bool,
-    `\nThe prop \`small\` for Button has been deprecated in favor of \`size\`. Please use \`size="small"\` instead.`
+    `\nThe prop \`small\` for Button has been deprecated in favor of \`size\`. Please use \`size="sm"\` instead.`
   ),
 
   /**

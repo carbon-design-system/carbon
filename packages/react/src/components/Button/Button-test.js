@@ -212,7 +212,7 @@ describe('Ghost Button', () => {
 
 describe('Large Button', () => {
   describe('Renders as expected', () => {
-    const wrapper = shallow(<Button size="large" className="extra-class" />);
+    const wrapper = shallow(<Button size="lg" className="extra-class" />);
 
     it('has the expected classes', () => {
       expect(wrapper.hasClass(`${prefix}--btn--lg`)).toEqual(true);
