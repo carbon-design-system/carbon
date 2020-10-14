@@ -6132,6 +6132,7 @@ $carbon--theme--g10: map-merge(
     field-01: #ffffff,
     field-02: #f4f4f4,
     disabled-01: #ffffff,
+    highlight: #edf5ff,
   )
 );
 ```
@@ -8208,6 +8209,7 @@ $disabled-01: if(
 - **Type**: `{undefined}`
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
+  - [accordion [mixin]](#accordion-mixin)
   - [content-switcher [mixin]](#content-switcher-mixin)
   - [file-uploader [mixin]](#file-uploader-mixin)
   - [slider [mixin]](#slider-mixin)
@@ -8241,6 +8243,7 @@ $disabled-02: if(
 - **Type**: `{undefined}`
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
+  - [accordion [mixin]](#accordion-mixin)
   - [button [mixin]](#button-mixin)
   - [button-base [mixin]](#button-base-mixin)
   - [button-theme [mixin]](#button-theme-mixin)
@@ -13638,6 +13641,29 @@ Accordion styles
     }
   }
 
+  // Disabled styles
+  .#{$prefix}--accordion__heading[disabled] {
+    color: $disabled-02;
+    cursor: not-allowed;
+  }
+
+  .#{$prefix}--accordion__heading[disabled] .#{$prefix}--accordion__arrow {
+    fill: $disabled-02;
+  }
+
+  .#{$prefix}--accordion__heading[disabled]:hover::before {
+    background-color: transparent;
+  }
+
+  .#{$prefix}--accordion__item--disabled,
+  .#{$prefix}--accordion__item--disabled ~ * {
+    border-top: 1px solid $disabled-01;
+  }
+
+  li.#{$prefix}--accordion__item--disabled:last-of-type {
+    border-bottom: 1px solid $disabled-01;
+  }
+
   .#{$prefix}--accordion__arrow {
     @include focus-outline('reset');
     // Without flex basis and flex shrink being set here, our icon width can go
@@ -13795,6 +13821,8 @@ Accordion styles
   - [ui-03 [variable]](#ui-03-variable)
   - [text-01 [variable]](#text-01-variable)
   - [hover-ui [variable]](#hover-ui-variable)
+  - [disabled-02 [variable]](#disabled-02-variable)
+  - [disabled-01 [variable]](#disabled-01-variable)
   - [ui-05 [variable]](#ui-05-variable)
   - [carbon--spacing-05 [variable]](#carbon--spacing-05-variable)
   - [carbon--spacing-09 [variable]](#carbon--spacing-09-variable)
@@ -14093,6 +14121,13 @@ Button styles
 
   .#{$prefix}--btn.#{$prefix}--btn--icon-only.#{$prefix}--tooltip__trigger:focus {
     border-color: $focus;
+
+    // Windows, Firefox HCM Fix
+    @media screen and (-ms-high-contrast: active),
+      screen and (prefers-contrast) {
+      outline: 3px solid transparent;
+      outline-offset: -3px;
+    }
   }
 
   .#{$prefix}--btn.#{$prefix}--btn--icon-only.#{$prefix}--tooltip__trigger:focus
@@ -15143,6 +15178,14 @@ Content switcher styles
     justify-content: space-evenly;
     width: 100%;
     height: rem(40px);
+  }
+
+  .#{$prefix}--content-switcher--sm {
+    height: rem(32px);
+  }
+
+  .#{$prefix}--content-switcher--xl {
+    height: rem(48px);
   }
 
   .#{$prefix}--content-switcher--disabled {
@@ -22960,6 +23003,13 @@ Select styles
       @include focus-outline('outline');
 
       color: $text-01;
+
+      // Windows, Firefox HCM Fix
+      @media screen and (-ms-high-contrast: active),
+        screen and (prefers-contrast) {
+        outline: 3px solid transparent;
+        outline-offset: -3px;
+      }
     }
 
     &:disabled,

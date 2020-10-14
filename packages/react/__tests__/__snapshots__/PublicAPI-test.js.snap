@@ -22,6 +22,9 @@ Map {
       "className": Object {
         "type": "string",
       },
+      "disabled": Object {
+        "type": "bool",
+      },
     },
   },
   "AccordionItem" => Object {
@@ -31,6 +34,9 @@ Map {
       },
       "className": Object {
         "type": "string",
+      },
+      "disabled": Object {
+        "type": "bool",
       },
       "iconDescription": [Function],
       "onClick": Object {
@@ -779,6 +785,15 @@ Map {
           Array [
             "automatic",
             "manual",
+          ],
+        ],
+        "type": "oneOf",
+      },
+      "size": Object {
+        "args": Array [
+          Array [
+            "sm",
+            "xl",
           ],
         ],
         "type": "oneOf",
@@ -1975,6 +1990,9 @@ Map {
       "short": false,
     },
     "propTypes": Object {
+      "allowInput": Object {
+        "type": "bool",
+      },
       "appendTo": Object {
         "type": "object",
       },
