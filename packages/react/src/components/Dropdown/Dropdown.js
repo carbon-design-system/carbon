@@ -10,7 +10,11 @@ import { useSelect } from 'downshift';
 import { settings } from 'carbon-components';
 import cx from 'classnames';
 import PropTypes from 'prop-types';
-import { Checkmark16, WarningFilled16 } from '@carbon/icons-react';
+import {
+  Checkmark16,
+  WarningAltFilled16,
+  WarningFilled16,
+} from '@carbon/icons-react';
 import ListBox, { PropTypes as ListBoxPropTypes } from '../ListBox';
 import { mapDownshiftProps } from '../../tools/createPropAdapter';
 import deprecate from '../../prop-types/deprecate';
@@ -45,6 +49,8 @@ const Dropdown = React.forwardRef(function Dropdown(
     light,
     invalid,
     invalidText,
+    warn,
+    warnText,
     initialSelectedItem,
     selectedItem: controlledSelectedItem,
     downshiftProps,
@@ -76,9 +82,11 @@ const Dropdown = React.forwardRef(function Dropdown(
     selectedItem,
   } = useSelect(selectProps);
   const inline = type === 'inline';
+  const showWarning = !invalid && warn;
 
   const className = cx(`${prefix}--dropdown`, containerClassName, {
     [`${prefix}--dropdown--invalid`]: invalid,
+    [`${prefix}--dropdown--warning`]: showWarning,
     [`${prefix}--dropdown--open`]: isOpen,
     [`${prefix}--dropdown--inline`]: inline,
     [`${prefix}--dropdown--disabled`]: disabled,
@@ -132,11 +140,18 @@ const Dropdown = React.forwardRef(function Dropdown(
         className={className}
         invalid={invalid}
         invalidText={invalidText}
+        warn={warn}
+        warnText={warnText}
         light={light}
         isOpen={isOpen}
         id={id}>
         {invalid && (
           <WarningFilled16 className={`${prefix}--list-box__invalid-icon`} />
+        )}
+        {showWarning && (
+          <WarningAltFilled16
+            className={`${prefix}--list-box__invalid-icon ${prefix}--list-box__invalid-icon--warning`}
+          />
         )}
         <button
           type="button"
@@ -178,7 +193,7 @@ const Dropdown = React.forwardRef(function Dropdown(
             })}
         </ListBox.Menu>
       </ListBox>
-      {!inline && !invalid && helper}
+      {!inline && !invalid && !warn && helper}
     </div>
   );
 });
@@ -310,6 +325,16 @@ Dropdown.propTypes = {
    * The dropdown type, `default` or `inline`
    */
   type: ListBoxPropTypes.ListBoxType,
+
+  /**
+   * Specify whether the control is currently in warning state
+   */
+  warn: PropTypes.bool,
+
+  /**
+   * Provide the text that is displayed when the control is in warning state
+   */
+  warnText: PropTypes.string,
 };
 
 Dropdown.defaultProps = {

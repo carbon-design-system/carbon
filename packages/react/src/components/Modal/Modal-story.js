@@ -183,8 +183,10 @@ export const Default = () => {
   return (
     <Modal {...rest} size={size || undefined}>
       <p className={`${prefix}--modal-content__text`}>
-        Please see ModalWrapper for more examples and demo of the functionality.
+        Please see the &quot;With State Manager&quot; storybook example for a
+        demo of this functionality.
       </p>
+      <br />
       {rest.hasScrollingContent && (
         <>
           <p>
@@ -265,10 +267,6 @@ export const WithStateManager = () => {
           size={size || undefined}
           open={open}
           onRequestClose={() => setOpen(false)}>
-          <p className={`${prefix}--modal-content__text`}>
-            Please see ModalWrapper for more examples and demo of the
-            functionality.
-          </p>
           {rest.hasScrollingContent && (
             <>
               <p>
