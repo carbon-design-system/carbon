@@ -81,6 +81,13 @@
       @include focus-outline('outline');
 
       color: $text-01;
+
+      // Windows, Firefox HCM Fix
+      @media screen and (-ms-high-contrast: active),
+        screen and (prefers-contrast) {
+        outline: 3px solid transparent;
+        outline-offset: -3px;
+      }
     }
 
     &:disabled,
