@@ -4979,10 +4979,7 @@ Map {
         "isRequired": true,
         "type": "bool",
       },
-      "tabIndex": Object {
-        "isRequired": true,
-        "type": "number",
-      },
+      "tabIndex": [Function],
     },
   },
   "TabContent" => Object {
