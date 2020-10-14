@@ -18706,11 +18706,11 @@ Link styles
   }
 
   .#{$prefix}--link--sm {
-    font-size: rem(12px);
+    @include type-style('helper-text-01');
   }
 
   .#{$prefix}--link--lg {
-    font-size: rem(16px);
+    @include type-style('body-long-02');
   }
 }
 ```
