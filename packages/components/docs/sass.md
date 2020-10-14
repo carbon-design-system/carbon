@@ -6132,6 +6132,7 @@ $carbon--theme--g10: map-merge(
     field-01: #ffffff,
     field-02: #f4f4f4,
     disabled-01: #ffffff,
+    highlight: #edf5ff,
   )
 );
 ```
@@ -14120,6 +14121,13 @@ Button styles
 
   .#{$prefix}--btn.#{$prefix}--btn--icon-only.#{$prefix}--tooltip__trigger:focus {
     border-color: $focus;
+
+    // Windows, Firefox HCM Fix
+    @media screen and (-ms-high-contrast: active),
+      screen and (prefers-contrast) {
+      outline: 3px solid transparent;
+      outline-offset: -3px;
+    }
   }
 
   .#{$prefix}--btn.#{$prefix}--btn--icon-only.#{$prefix}--tooltip__trigger:focus
@@ -15170,6 +15178,14 @@ Content switcher styles
     justify-content: space-evenly;
     width: 100%;
     height: rem(40px);
+  }
+
+  .#{$prefix}--content-switcher--sm {
+    height: rem(32px);
+  }
+
+  .#{$prefix}--content-switcher--xl {
+    height: rem(48px);
   }
 
   .#{$prefix}--content-switcher--disabled {
@@ -17852,7 +17868,6 @@ Dropdown styles
 
   .#{$prefix}--dropdown--disabled {
     border-bottom-color: transparent;
-    cursor: not-allowed;
 
     &:hover {
       background-color: $field-01;
@@ -17877,6 +17892,11 @@ Dropdown styles
     &.#{$prefix}--dropdown--light:hover {
       background-color: $field-02;
     }
+  }
+
+  .#{$prefix}--dropdown--disabled .#{$prefix}--list-box__field,
+  .#{$prefix}--dropdown--disabled .#{$prefix}--list-box__menu-icon {
+    cursor: not-allowed;
   }
 
   .#{$prefix}--dropdown--auto-width {
@@ -22987,6 +23007,13 @@ Select styles
       @include focus-outline('outline');
 
       color: $text-01;
+
+      // Windows, Firefox HCM Fix
+      @media screen and (-ms-high-contrast: active),
+        screen and (prefers-contrast) {
+        outline: 3px solid transparent;
+        outline-offset: -3px;
+      }
     }
 
     &:disabled,
