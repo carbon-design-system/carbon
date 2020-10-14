@@ -95,6 +95,7 @@ const TabContentRenderedOnlyWhenSelected = ({
     <div
       {...other}
       className={classNames(className, `${prefix}--tab-content`)}
+      role="tabpanel"
       selected={selected}>
       {children}
     </div>
