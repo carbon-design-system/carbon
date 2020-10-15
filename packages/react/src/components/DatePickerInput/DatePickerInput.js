@@ -13,6 +13,26 @@ import { Calendar16 } from '@carbon/icons-react';
 
 const { prefix } = settings;
 
+const formatPlaceholder = (placeholder, locale) => {
+  if (placeholder !== undefined) return placeholder;
+  if (!locale) return null;
+  switch (locale) {
+    case 'de':
+    case 'ru':
+      return 'MM.DD.YYYY';
+    case 'it':
+    case 'fr':
+    case 'pt':
+      return 'DD/MM/YYYY';
+    case 'zh':
+    case 'zh-tw':
+    case 'zh-cn':
+    case 'ja':
+      return 'YYYY/MM/DD';
+    default:
+      return 'MM/DD/YYYY';
+  }
+};
 export default class DatePickerInput extends Component {
   static propTypes = {
     /**
@@ -59,6 +79,64 @@ export default class DatePickerInput extends Component {
      * control
      */
     labelText: PropTypes.node.isRequired,
+
+    /**
+     *  The language locale used to format the days of the week, months, and numbers. The full list of supported locales can be found here https://github.com/flatpickr/flatpickr/tree/master/src/l10n
+     */
+    locale: PropTypes.oneOf([
+      'ar', // Arabic
+      'at', // Austria
+      'be', // Belarusian
+      'bg', // Bulgarian
+      'bn', // Bangla
+      'cat', // Catalan
+      'cs', // Czech
+      'cy', // Welsh
+      'da', // Danish
+      'de', // German
+      'en', // English
+      'eo', // Esperanto
+      'es', // Spanish
+      'et', // Estonian
+      'fa', // Persian
+      'fi', // Finnish
+      'fr', // French
+      'gr', // Greek
+      'he', // Hebrew
+      'hi', // Hindi
+      'hr', // Croatian
+      'hu', // Hungarian
+      'id', // Indonesian
+      'it', // Italian
+      'ja', // Japanese
+      'ko', // Korean
+      'lt', // Lithuanian
+      'lv', // Latvian
+      'mk', // Macedonian
+      'mn', // Mongolian
+      'ms', // Malaysian
+      'my', // Burmese
+      'nl', // Dutch
+      'no', // Norwegian
+      'pa', // Punjabi
+      'pl', // Polish
+      'pt', // Portuguese
+      'ro', // Romanian
+      'ru', // Russian
+      'si', // Sinhala
+      'sk', // Slovak
+      'sl', // Slovenian
+      'sq', // Albanian
+      'sr', // Serbian
+      'sv', // Swedish
+      'th', // Thai
+      'tr', // Turkish
+      'uk', // Ukrainian
+      'vn', // Vietnamese
+      'zh', // Mandarin
+      'zh-cn', // Mandarin alternate
+      'zh-tw', // Taiwanese Mandarin
+    ]),
 
     /**
      * Specify an `onChange` handler that is called whenever a change in the
@@ -128,6 +206,7 @@ export default class DatePickerInput extends Component {
       onChange,
       onClick,
       placeholder,
+      locale,
       type,
       datePickerType,
       pattern,
@@ -149,7 +228,7 @@ export default class DatePickerInput extends Component {
           onClick(evt);
         }
       },
-      placeholder,
+      placeholder: formatPlaceholder(placeholder, locale),
       type,
       pattern,
     };

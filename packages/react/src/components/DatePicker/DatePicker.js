@@ -29,6 +29,38 @@ l10n.en.weekdays.shorthand.forEach((day, index) => {
   }
 });
 
+// Handle how flatpickr wants to see locale
+const formatLocale = (locale) => {
+  switch (locale) {
+    case 'zh-tw':
+      return 'zh_tw';
+    case 'zh-cn':
+      return 'zh';
+    default:
+      return locale;
+  }
+};
+
+const formatDate = (dateFormat, locale) => {
+  if (dateFormat !== undefined) return dateFormat;
+  if (!locale) return 'm/d/Y';
+  switch (locale) {
+    case 'de':
+    case 'ru':
+      return 'm.d.Y';
+    case 'it':
+    case 'fr':
+    case 'pt':
+      return 'd/m/Y';
+    case 'zh':
+    case 'zh_tw':
+    case 'ja':
+      return 'Y/m/d';
+    default:
+      return 'm/d/Y';
+  }
+};
+
 const forEach = Array.prototype.forEach;
 
 /**
@@ -210,6 +242,8 @@ export default class DatePicker extends Component {
       'uk', // Ukrainian
       'vn', // Vietnamese
       'zh', // Mandarin
+      'zh-cn', // Mandarin alternate
+      'zh-tw', // Taiwanese Mandarin
     ]),
 
     /**
@@ -258,7 +292,6 @@ export default class DatePicker extends Component {
   static defaultProps = {
     short: false,
     light: false,
-    dateFormat: 'm/d/Y',
     locale: 'en',
   };
 
@@ -286,8 +319,8 @@ export default class DatePicker extends Component {
           defaultDate: value,
           mode: datePickerType,
           allowInput: allowInput ?? true,
-          dateFormat: dateFormat,
-          locale: l10n[locale],
+          dateFormat: formatDate(dateFormat, formatLocale(locale)),
+          locale: l10n[formatLocale(locale)],
           minDate: minDate,
           maxDate: maxDate,
           plugins: [
@@ -546,6 +579,7 @@ export default class DatePicker extends Component {
           datePickerType,
           ref: this.assignInputFieldRef,
           openCalendar: this.openCalendar,
+          locale,
         });
       }
       if (
@@ -556,16 +590,19 @@ export default class DatePicker extends Component {
           datePickerType,
           ref: this.assignToInputFieldRef,
           openCalendar: this.openCalendar,
+          locale,
         });
       }
       if (index === 0) {
         return React.cloneElement(child, {
           ref: this.assignInputFieldRef,
+          locale,
         });
       }
       if (index === 1) {
         return React.cloneElement(child, {
           ref: this.assignToInputFieldRef,
+          locale,
         });
       }
     });
