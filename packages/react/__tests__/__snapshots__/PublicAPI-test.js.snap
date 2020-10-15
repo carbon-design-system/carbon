@@ -1999,6 +1999,9 @@ Map {
       "short": false,
     },
     "propTypes": Object {
+      "allowInput": Object {
+        "type": "bool",
+      },
       "appendTo": Object {
         "type": "object",
       },
@@ -3550,6 +3553,12 @@ Map {
         "useTitleInItem": Object {
           "type": "bool",
         },
+        "warn": Object {
+          "type": "bool",
+        },
+        "warnText": Object {
+          "type": "string",
+        },
       },
     },
     "defaultProps": Object {
@@ -3783,6 +3792,12 @@ Map {
       },
       "useTitleInItem": Object {
         "type": "bool",
+      },
+      "warn": Object {
+        "type": "bool",
+      },
+      "warnText": Object {
+        "type": "string",
       },
     },
     "render": [Function],

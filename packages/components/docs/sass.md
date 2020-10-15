@@ -6132,6 +6132,7 @@ $carbon--theme--g10: map-merge(
     field-01: #ffffff,
     field-02: #f4f4f4,
     disabled-01: #ffffff,
+    highlight: #edf5ff,
   )
 );
 ```
@@ -14120,6 +14121,13 @@ Button styles
 
   .#{$prefix}--btn.#{$prefix}--btn--icon-only.#{$prefix}--tooltip__trigger:focus {
     border-color: $focus;
+
+    // Windows, Firefox HCM Fix
+    @media screen and (-ms-high-contrast: active),
+      screen and (prefers-contrast) {
+      outline: 3px solid transparent;
+      outline-offset: -3px;
+    }
   }
 
   .#{$prefix}--btn.#{$prefix}--btn--icon-only.#{$prefix}--tooltip__trigger:focus
@@ -15140,7 +15148,11 @@ Combo box styles
   .#{$prefix}--combo-box .#{$prefix}--list-box__field,
   .#{$prefix}--combo-box.#{$prefix}--list-box[data-invalid]
     .#{$prefix}--list-box__field,
+  .#{$prefix}--combo-box.#{$prefix}--list-box--warning
+    .#{$prefix}--list-box__field,
   .#{$prefix}--combo-box.#{$prefix}--list-box--disabled.#{$prefix}--list-box[data-invalid]
+    .#{$prefix}--list-box__field,
+  .#{$prefix}--combo-box.#{$prefix}--list-box--disabled.#{$prefix}--list-box--warning
     .#{$prefix}--list-box__field {
     padding: 0;
   }
@@ -15170,6 +15182,14 @@ Content switcher styles
     justify-content: space-evenly;
     width: 100%;
     height: rem(40px);
+  }
+
+  .#{$prefix}--content-switcher--sm {
+    height: rem(32px);
+  }
+
+  .#{$prefix}--content-switcher--xl {
+    height: rem(48px);
   }
 
   .#{$prefix}--content-switcher--disabled {
@@ -17852,7 +17872,6 @@ Dropdown styles
 
   .#{$prefix}--dropdown--disabled {
     border-bottom-color: transparent;
-    cursor: not-allowed;
 
     &:hover {
       background-color: $field-01;
@@ -17877,6 +17896,11 @@ Dropdown styles
     &.#{$prefix}--dropdown--light:hover {
       background-color: $field-02;
     }
+  }
+
+  .#{$prefix}--dropdown--disabled .#{$prefix}--list-box__field,
+  .#{$prefix}--dropdown--disabled .#{$prefix}--list-box__menu-icon {
+    cursor: not-allowed;
   }
 
   .#{$prefix}--dropdown--auto-width {
@@ -18399,6 +18423,7 @@ Form styles
   .#{$prefix}--date-picker-input__wrapper,
   .#{$prefix}--time-picker--invalid,
   .#{$prefix}--text-input__field-wrapper[data-invalid],
+  .#{$prefix}--text-input__field-wrapper--warning,
   .#{$prefix}--text-input__field-wrapper--warning > .#{$prefix}--text-input,
   .#{$prefix}--text-area__wrapper[data-invalid],
   .#{$prefix}--select-input__wrapper[data-invalid],
@@ -19127,12 +19152,19 @@ List box styles
   // invalid && populated input field
   .#{$prefix}--list-box[data-invalid]
     .#{$prefix}--list-box__field
+    .#{$prefix}--text-input,
+  .#{$prefix}--list-box--warning
+    .#{$prefix}--list-box__field
     .#{$prefix}--text-input {
     // to account for clear input button outline
     padding-right: rem(98px);
   }
 
   .#{$prefix}--list-box[data-invalid]
+    .#{$prefix}--list-box__field
+    .#{$prefix}--text-input
+    + .#{$prefix}--list-box__invalid-icon,
+  .#{$prefix}--list-box--warning
     .#{$prefix}--list-box__field
     .#{$prefix}--text-input
     + .#{$prefix}--list-box__invalid-icon {
@@ -19148,11 +19180,18 @@ List box styles
   // invalid && empty input field
   .#{$prefix}--list-box[data-invalid]
     .#{$prefix}--list-box__field
+    .#{$prefix}--text-input--empty,
+  .#{$prefix}--list-box--warning
+    .#{$prefix}--list-box__field
     .#{$prefix}--text-input--empty {
     padding-right: carbon--mini-units(9);
   }
 
   .#{$prefix}--list-box[data-invalid]
+    .#{$prefix}--list-box__field
+    .#{$prefix}--text-input--empty
+    + .#{$prefix}--list-box__invalid-icon,
+  .#{$prefix}--list-box--warning
     .#{$prefix}--list-box__field
     .#{$prefix}--text-input--empty
     + .#{$prefix}--list-box__invalid-icon {
@@ -22987,6 +23026,13 @@ Select styles
       @include focus-outline('outline');
 
       color: $text-01;
+
+      // Windows, Firefox HCM Fix
+      @media screen and (-ms-high-contrast: active),
+        screen and (prefers-contrast) {
+        outline: 3px solid transparent;
+        outline-offset: -3px;
+      }
     }
 
     &:disabled,
