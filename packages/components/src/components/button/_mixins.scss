@@ -107,7 +107,7 @@
 
 @mixin button-padding-large {
   align-items: baseline;
-  padding-top: rem(12px);
-  padding-right: rem(64px);
-  padding-left: rem(12px);
+  padding-top: $spacing-04;
+  padding-right: $layout-05;
+  padding-left: $spacing-04;
 }
