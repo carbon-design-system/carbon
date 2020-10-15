@@ -25,6 +25,15 @@ Map {
       "disabled": Object {
         "type": "bool",
       },
+      "size": Object {
+        "args": Array [
+          Array [
+            "sm",
+            "xl",
+          ],
+        ],
+        "type": "oneOf",
+      },
     },
   },
   "AccordionItem" => Object {
@@ -3547,6 +3556,12 @@ Map {
         "useTitleInItem": Object {
           "type": "bool",
         },
+        "warn": Object {
+          "type": "bool",
+        },
+        "warnText": Object {
+          "type": "string",
+        },
       },
     },
     "defaultProps": Object {
@@ -3780,6 +3795,12 @@ Map {
       },
       "useTitleInItem": Object {
         "type": "bool",
+      },
+      "warn": Object {
+        "type": "bool",
+      },
+      "warnText": Object {
+        "type": "string",
       },
     },
     "render": [Function],
