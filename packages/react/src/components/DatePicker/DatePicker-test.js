@@ -53,7 +53,7 @@ describe('DatePicker', () => {
     });
 
     it('should add the date format as expected', () => {
-      expect(wrapper.props().dateFormat).toEqual('m/d/Y');
+      expect(wrapper.props().dateFormat).toEqual(undefined);
       wrapper.setProps({ dateFormat: 'd/m/Y' });
       expect(wrapper.props().dateFormat).toEqual('d/m/Y');
     });
