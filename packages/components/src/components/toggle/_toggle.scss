@@ -292,6 +292,13 @@
         background-color $duration--fast-01 motion(exit, productive);
       content: '';
       will-change: box-shadow;
+
+      // Windows, Firefox HCM Fix
+      @media screen and (-ms-high-contrast: active),
+        screen and (prefers-contrast) {
+        // `ButtonText` is a CSS2 system color to help improve colors in HCM
+        border: 1px solid ButtonText;
+      }
     }
 
     // Toggle circle
@@ -307,6 +314,13 @@
       border-radius: 50%;
       transition: transform $duration--fast-01 motion(exit, productive);
       content: '';
+
+      // Windows, Firefox HCM Fix
+      @media screen and (-ms-high-contrast: active),
+        screen and (prefers-contrast) {
+        // `ButtonText` is a CSS2 system color to help improve colors in HCM
+        border: 3px solid ButtonText;
+      }
     }
 
     .#{$prefix}--toggle-input__label & {
