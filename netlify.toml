@@ -1,2 +1,2 @@
 [build.environment]
-  YARN_FLAGS = ""
+  YARN_FLAGS = "--immutable"
