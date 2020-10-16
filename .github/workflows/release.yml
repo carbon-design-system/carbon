@@ -20,7 +20,7 @@ jobs:
           registry-url: 'https://registry.npmjs.org'
 
       - name: Install dependencies
-        run: yarn install --offline
+        run: yarn install --immutable --immutable-cache --check-cache
 
       - name: Build project
         run: yarn build
