@@ -328,7 +328,11 @@ export default class Tabs extends React.Component {
     }
   };
 
-  handleOverflowNavMouseDown = (_, { direction }) => {
+  handleOverflowNavMouseDown = (event, { direction }) => {
+    // disregard mouse buttons aside from LMB
+    if (event.buttons !== 1) {
+      return;
+    }
     this.overflowNavInterval = setInterval(() => {
       const { clientWidth, scrollLeft, scrollWidth } = this.tablist?.current;
 
@@ -343,7 +347,7 @@ export default class Tabs extends React.Component {
       }
 
       // account for overflow button appearing and causing tablist width change
-      this.handleOverflowNavClick(_, { direction });
+      this.handleOverflowNavClick(event, { direction });
     });
   };
 
@@ -451,8 +455,8 @@ export default class Tabs extends React.Component {
             type="button"
             className={classes.leftOverflowButtonClasses}
             onClick={(_) => this.handleOverflowNavClick(_, { direction: -1 })}
-            onMouseDown={(_) =>
-              this.handleOverflowNavMouseDown(_, { direction: -1 })
+            onMouseDown={(event) =>
+              this.handleOverflowNavMouseDown(event, { direction: -1 })
             }
             onMouseUp={this.handleOverflowNavMouseUp}
             ref={this.leftOverflowNavButton}>
@@ -471,8 +475,8 @@ export default class Tabs extends React.Component {
             type="button"
             className={classes.rightOverflowButtonClasses}
             onClick={(_) => this.handleOverflowNavClick(_, { direction: 1 })}
-            onMouseDown={(_) =>
-              this.handleOverflowNavMouseDown(_, { direction: 1 })
+            onMouseDown={(event) =>
+              this.handleOverflowNavMouseDown(event, { direction: 1 })
             }
             onMouseUp={this.handleOverflowNavMouseUp}
             ref={this.rightOverflowNavButton}>
