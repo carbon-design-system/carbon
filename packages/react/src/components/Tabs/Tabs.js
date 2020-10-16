@@ -452,14 +452,16 @@ export default class Tabs extends React.Component {
       <>
         <div {...other} className={classes.tabs} onScroll={this.handleScroll}>
           <button
-            type="button"
+            aria-hidden="true"
             className={classes.leftOverflowButtonClasses}
             onClick={(_) => this.handleOverflowNavClick(_, { direction: -1 })}
             onMouseDown={(event) =>
               this.handleOverflowNavMouseDown(event, { direction: -1 })
             }
             onMouseUp={this.handleOverflowNavMouseUp}
-            ref={this.leftOverflowNavButton}>
+            ref={this.leftOverflowNavButton}
+            tabIndex="-1"
+            type="button">
             <ChevronLeft16 />
           </button>
           {!leftOverflowNavButtonHidden && (
@@ -472,14 +474,16 @@ export default class Tabs extends React.Component {
             <div className={`${prefix}--tabs__overflow-indicator--right`} />
           )}
           <button
-            type="button"
+            aria-hidden="true"
             className={classes.rightOverflowButtonClasses}
             onClick={(_) => this.handleOverflowNavClick(_, { direction: 1 })}
             onMouseDown={(event) =>
               this.handleOverflowNavMouseDown(event, { direction: 1 })
             }
             onMouseUp={this.handleOverflowNavMouseUp}
-            ref={this.rightOverflowNavButton}>
+            ref={this.rightOverflowNavButton}
+            tabIndex="-1"
+            type="button">
             <ChevronRight16 />
           </button>
         </div>
