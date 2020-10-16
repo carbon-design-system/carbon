@@ -72,6 +72,16 @@
     }
   }
 
+  // Size styles
+  .#{$prefix}--accordion--xl .#{$prefix}--accordion__heading {
+    min-height: rem(48px);
+  }
+
+  .#{$prefix}--accordion--sm .#{$prefix}--accordion__heading {
+    min-height: rem(32px);
+    padding: rem(5px) 0;
+  }
+
   // Disabled styles
   .#{$prefix}--accordion__heading[disabled] {
     color: $disabled-02;
