@@ -32,5 +32,14 @@ module.exports = {
         displayType: 'Ordered',
       },
     },
+    {
+      name: 'ordered-native',
+      label: 'Ordered native',
+      context: {
+        tag: 'ol',
+        type: 'ordered_native',
+        displayType: 'Ordered',
+      },
+    },
   ],
 };
