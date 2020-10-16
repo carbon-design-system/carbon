@@ -10078,6 +10078,7 @@ __metadata:
     jest-junit: ^10.0.0
     lerna: ^3.20.2
     lint-staged: ^9.5.0
+    node-gyp: ^7.1.1
     prettier: ^2.1.0
     react: ^16.8.6
     react-dom: ^16.8.6
@@ -23654,7 +23655,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"node-gyp@npm:latest":
+"node-gyp@npm:^7.1.1, node-gyp@npm:latest":
   version: 7.1.1
   resolution: "node-gyp@npm:7.1.1"
   dependencies:
