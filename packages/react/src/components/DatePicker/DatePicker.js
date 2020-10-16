@@ -41,24 +41,41 @@ const formatLocale = (locale) => {
   }
 };
 
+const upperSubLocale = (locale) => {
+  const splitLocale = locale.split(/[\s-_]+/);
+  if (splitLocale[1]) {
+    splitLocale[1] = splitLocale[1].toUpperCase();
+    return splitLocale.join('-');
+  }
+  return splitLocale[0];
+};
+
 const formatDate = (dateFormat, locale) => {
   if (dateFormat !== undefined) return dateFormat;
   if (!locale) return 'm/d/Y';
-  switch (locale) {
-    case 'de':
-    case 'ru':
-      return 'm.d.Y';
-    case 'it':
-    case 'fr':
-    case 'pt':
-      return 'd/m/Y';
-    case 'zh':
-    case 'zh_tw':
-    case 'ja':
-      return 'Y/m/d';
-    default:
-      return 'm/d/Y';
+  let formatObj;
+  try {
+    formatObj = new Intl.DateTimeFormat(upperSubLocale(locale)).formatToParts(
+      new Date()
+    );
+  } catch (err) {
+    console.log(err);
+    formatObj = new Intl.DateTimeFormat('en').formatToParts(new Date());
   }
+  return formatObj
+    .map((obj) => {
+      switch (obj.type) {
+        case 'day':
+          return 'd';
+        case 'month':
+          return 'm';
+        case 'year':
+          return 'Y';
+        default:
+          return obj.value;
+      }
+    })
+    .join('');
 };
 
 const forEach = Array.prototype.forEach;

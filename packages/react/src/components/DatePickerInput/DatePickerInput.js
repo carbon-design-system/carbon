@@ -13,25 +13,41 @@ import { Calendar16 } from '@carbon/icons-react';
 
 const { prefix } = settings;
 
+const upperSubLocale = (locale) => {
+  const splitLocale = locale.split(/[\s-_]+/);
+  if (splitLocale[1]) {
+    splitLocale[1] = splitLocale[1].toUpperCase();
+    return splitLocale.join('-');
+  }
+  return splitLocale[0];
+};
+
 const formatPlaceholder = (placeholder, locale) => {
   if (placeholder !== undefined) return placeholder;
   if (!locale) return null;
-  switch (locale) {
-    case 'de':
-    case 'ru':
-      return 'MM.DD.YYYY';
-    case 'it':
-    case 'fr':
-    case 'pt':
-      return 'DD/MM/YYYY';
-    case 'zh':
-    case 'zh-tw':
-    case 'zh-cn':
-    case 'ja':
-      return 'YYYY/MM/DD';
-    default:
-      return 'MM/DD/YYYY';
+  let formatObj;
+  try {
+    formatObj = new Intl.DateTimeFormat(upperSubLocale(locale)).formatToParts(
+      new Date()
+    );
+  } catch (err) {
+    console.log(err);
+    formatObj = new Intl.DateTimeFormat('en').formatToParts(new Date());
   }
+  return formatObj
+    .map((obj) => {
+      switch (obj.type) {
+        case 'day':
+          return 'dd';
+        case 'month':
+          return 'mm';
+        case 'year':
+          return 'yyyy';
+        default:
+          return obj.value;
+      }
+    })
+    .join('');
 };
 export default class DatePickerInput extends Component {
   static propTypes = {
