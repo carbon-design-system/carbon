@@ -409,7 +409,7 @@ class OverflowMenu extends Component {
         menuBody.ownerDocument,
         focusinEventName,
         (event) => {
-          const { target } = event;
+          const target = ClickListener.getEventTarget(event);
           const { current: triggerEl } = this._triggerRef;
           if (typeof target.matches === 'function') {
             if (
