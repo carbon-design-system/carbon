@@ -67,6 +67,16 @@ const Dropdown = React.forwardRef(function Dropdown(
     onSelectedItemChange,
   });
 
+  // prepend optional default value to items array
+  if (isOptional && items.length) {
+    const defaultOption = label || 'Select';
+    if (items[0] !== defaultOption && items[0].text !== defaultOption) {
+      typeof items[0] === 'object'
+        ? items.unshift({ text: defaultOption })
+        : items.unshift(defaultOption);
+    }
+  }
+
   // only set selectedItem if the prop is defined. Setting if it is undefined
   // will overwrite default selected items from useSelect
   if (controlledSelectedItem !== undefined) {
