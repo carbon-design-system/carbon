@@ -13,9 +13,6 @@ jest.setTimeout(20000);
 
 global.requestAnimationFrame = function requestAnimationFrame(callback) {
   setTimeout(callback, 0);
-  // TODO: replace with async version
-  // setTimeout(callback);
-  // callback();
 };
 
 const enzyme = jest.requireActual('enzyme');
