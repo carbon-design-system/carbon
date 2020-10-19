@@ -74,6 +74,69 @@
     }
   }
 
+  // Overflow Menu overrides
+  .#{$prefix}--breadcrumb-item .#{$prefix}--overflow-menu {
+    position: relative;
+    width: rem(20px);
+    height: rem(20px);
+
+    &:focus {
+      outline: 1px solid $focus;
+    }
+
+    &:hover {
+      background: transparent;
+    }
+
+    // Used to mimic link underline
+    &::after {
+      position: absolute;
+      top: calc(100% - 3px);
+      width: 1rem;
+      height: 1px;
+      background: $hover-primary-text;
+      opacity: 0;
+      transition: opacity $duration--fast-01 motion(standard, productive);
+      content: '';
+    }
+  }
+
+  .#{$prefix}--breadcrumb-item .#{$prefix}--overflow-menu:hover::after {
+    opacity: 1;
+  }
+
+  .#{$prefix}--breadcrumb-item
+    .#{$prefix}--overflow-menu.#{$prefix}--overflow-menu--open {
+    background: transparent;
+    box-shadow: none;
+  }
+
+  .#{$prefix}--breadcrumb-item .#{$prefix}--overflow-menu__icon {
+    position: relative;
+    margin-top: rem(8px);
+    transform: rotate(90deg);
+    fill: $link-01;
+  }
+
+  .#{$prefix}--breadcrumb-item
+    .#{$prefix}--overflow-menu:hover
+    .#{$prefix}--overflow-menu__icon {
+    fill: $hover-primary-text;
+  }
+
+  $caret-size: rem(6.875px);
+  .#{$prefix}--breadcrumb-menu-options.#{$prefix}--overflow-menu-options::after {
+    top: calc(#{$caret-size * (-1)});
+    left: rem(13px);
+    width: 0;
+    height: 0;
+    margin: 0 auto;
+    background: transparent;
+    border-right: $caret-size solid transparent;
+    border-bottom: $caret-size solid $field-01;
+    border-left: $caret-size solid transparent;
+  }
+
   // Skeleton State
   .#{$prefix}--breadcrumb.#{$prefix}--skeleton .#{$prefix}--link {
     @include skeleton;

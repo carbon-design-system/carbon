@@ -33,6 +33,21 @@ const BreadcrumbItem = React.forwardRef(function BreadcrumbItem(
     [customClassName]: !!customClassName,
   });
 
+  if (
+    children.type &&
+    children.type.displayName !== undefined &&
+    children.type.displayName === 'OverflowMenu'
+  ) {
+    return (
+      <li className={className} {...rest}>
+        {React.cloneElement(children, {
+          menuOptionsClass: `${prefix}--breadcrumb-menu-options`,
+          menuOffset: { top: 10, left: 60 },
+        })}
+      </li>
+    );
+  }
+
   if (typeof children === 'string' && href) {
     return (
       <li className={className} ref={ref} {...rest}>
