@@ -1,9 +1,15 @@
-<?xml version="1.0" encoding="iso-8859-1"?>
-<!-- Generator: Adobe Illustrator 24.1.2, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 24.3.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
 <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-	 viewBox="0 0 48 48" style="enable-background:new 0 0 48 48;" xml:space="preserve">
+	 viewBox="0 0 32 32" style="enable-background:new 0 0 32 32;" xml:space="preserve">
+<style type="text/css">
+	.st0{fill:none;}
+</style>
 <g id="upload--01">
-	<path style="fill:none;stroke:#000000;stroke-width:0.72;stroke-linejoin:round;stroke-miterlimit:10;" d="M9,17V9h30v8"/>
-	<path style="fill:none;stroke:#000000;stroke-width:0.72;stroke-miterlimit:10;" d="M18,23l6-6l6,6 M24,39V17"/>
+	<g id="upload_1_">
+		<path d="M31.4,9h-0.7V1.4H1.4V9H0.6V1c0-0.2,0.2-0.4,0.4-0.4h30c0.2,0,0.4,0.2,0.4,0.4V9z"/>
+		<polygon points="16.4,31 15.6,31 15.6,9.9 10.3,15.3 9.7,14.7 16,8.5 22.3,14.7 21.7,15.3 16.4,9.9 		"/>
+	</g>
 </g>
+<rect id="_Transparent_Rectangle" class="st0" width="32" height="32"/>
 </svg>
