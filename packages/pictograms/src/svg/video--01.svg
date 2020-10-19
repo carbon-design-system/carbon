@@ -1,9 +1,10 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="iso-8859-1"?>
 <!-- Generator: Adobe Illustrator 24.1.2, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
 <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-	 viewBox="0 0 48 48" style="enable-background:new 0 0 48 48;" xml:space="preserve">
-<style type="text/css">
-	.st0{fill:none;stroke:#000000;stroke-width:0.72;stroke-linejoin:round;stroke-miterlimit:10;}
-</style>
-<path id="video--01" class="st0" d="M31,35H9V13h22v7l8-4.6v17.3L31,28V35z"/>
+	 viewBox="0 0 32 32" style="enable-background:new 0 0 32 32;" xml:space="preserve">
+<path id="video--01" d="M23,27.4H1c-0.2,0-0.4-0.2-0.4-0.4V5c0-0.2,0.2-0.4,0.4-0.4h22c0.2,0,0.4,0.2,0.4,0.4v6.4L30.8,7
+	c0.1,0,0.3,0,0.4,0c0.1,0.1,0.2,0.2,0.2,0.3v17.3c0,0.1-0.1,0.2-0.2,0.3c-0.1,0.1-0.2,0.1-0.4,0l-7.5-4.4V27
+	C23.4,27.2,23.2,27.4,23,27.4z M1.4,26.6h21.3V20c0-0.1,0.1-0.2,0.2-0.3c0.1-0.1,0.2-0.1,0.4,0l7.5,4.4V8l-7.5,4.3
+	c-0.1,0.1-0.2,0.1-0.4,0c-0.1-0.1-0.2-0.2-0.2-0.3V5.4H1.4V26.6z"/>
+<rect id="_Transparent_Rectangle" style="fill:none;" width="32" height="32"/>
 </svg>

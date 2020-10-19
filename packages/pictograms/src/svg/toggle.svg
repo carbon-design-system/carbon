@@ -1,13 +1,12 @@
 <?xml version="1.0" encoding="iso-8859-1"?>
-<!-- Generator: Adobe Illustrator 22.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
-<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-	 viewBox="0 0 48 48" style="enable-background:new 0 0 48 48;" xml:space="preserve">
-<g id="toggle">
-	<path id="toggle_1_" style="fill:none;stroke:#000000;stroke-width:0.72;stroke-linecap:round;stroke-miterlimit:10;" d="M33,21H15
-		c-3.3,0-6-2.7-6-6v0c0-3.3,2.7-6,6-6h18c3.3,0,6,2.7,6,6v0C39,18.3,36.3,21,33,21z M39,33L39,33c0-3.3-2.7-6-6-6H15
-		c-3.3,0-6,2.7-6,6v0c0,3.3,2.7,6,6,6h18C36.3,39,39,36.3,39,33z M15,12c-1.657,0-3,1.343-3,3s1.343,3,3,3s3-1.343,3-3
-		S16.657,12,15,12z M33,30c-1.657,0-3,1.343-3,3c0,1.657,1.343,3,3,3c1.657,0,3-1.343,3-3C36,31.343,34.657,30,33,30z"/>
-</g>
-<g id="Layer_1">
-</g>
+<!-- Generator: Adobe Illustrator 24.1.2, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 32 32" style="enable-background:new 0 0 32 32;" xml:space="preserve">
+<path id="toggle" d="M25,31.4H7c-3.5,0-6.4-2.9-6.4-6.4s2.9-6.4,6.4-6.4h18c3.5,0,6.4,2.9,6.4,6.4S28.5,31.4,25,31.4z M7,19.4
+	c-3.1,0-5.6,2.5-5.6,5.6s2.5,5.6,5.6,5.6h18c3.1,0,5.6-2.5,5.6-5.6s-2.5-5.6-5.6-5.6H7z M25,28.4c-1.9,0-3.4-1.5-3.4-3.4
+	s1.5-3.4,3.4-3.4s3.4,1.5,3.4,3.4S26.9,28.4,25,28.4z M25,22.4c-1.5,0-2.6,1.2-2.6,2.6s1.2,2.6,2.6,2.6s2.6-1.2,2.6-2.6
+	S26.5,22.4,25,22.4z M25,13.4H7c-3.5,0-6.4-2.9-6.4-6.4S3.5,0.6,7,0.6h18c3.5,0,6.4,2.9,6.4,6.4S28.5,13.4,25,13.4z M7,1.4
+	C3.9,1.4,1.4,3.9,1.4,7s2.5,5.6,5.6,5.6h18c3.1,0,5.6-2.5,5.6-5.6S28.1,1.4,25,1.4H7z M7,10.4c-1.9,0-3.4-1.5-3.4-3.4S5.1,3.6,7,3.6
+	s3.4,1.5,3.4,3.4S8.9,10.4,7,10.4z M7,4.4C5.5,4.4,4.4,5.5,4.4,7S5.5,9.6,7,9.6S9.6,8.5,9.6,7S8.5,4.4,7,4.4z"/>
+<rect id="_Transparent_Rectangle" style="fill:none;" width="32" height="32"/>
 </svg>
