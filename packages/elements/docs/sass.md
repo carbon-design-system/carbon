@@ -170,7 +170,7 @@
   - [✅inverse-support-03 [variable]](#inverse-support-03-variable)
   - [✅inverse-support-04 [variable]](#inverse-support-04-variable)
   - [✅overlay-01 [variable]](#overlay-01-variable)
-  - [✅danger [variable]](#danger-variable)
+  - [✅danger-01 [variable]](#danger-01-variable)
   - [✅focus [variable]](#focus-variable)
   - [✅inverse-focus-ui [variable]](#inverse-focus-ui-variable)
   - [✅hover-primary [variable]](#hover-primary-variable)
@@ -3823,7 +3823,7 @@ Define theme variables from a map of tokens
   $inverse-support-03: map-get($theme, 'inverse-support-03') !global;
   $inverse-support-04: map-get($theme, 'inverse-support-04') !global;
   $overlay-01: map-get($theme, 'overlay-01') !global;
-  $danger: map-get($theme, 'danger') !global;
+  $danger-01: map-get($theme, 'danger-01') !global;
   $focus: map-get($theme, 'focus') !global;
   $inverse-focus-ui: map-get($theme, 'inverse-focus-ui') !global;
   $hover-primary: map-get($theme, 'hover-primary') !global;
@@ -4058,9 +4058,9 @@ Define theme variables from a map of tokens
       --#{$custom-property-prefix}-overlay-01,
       map-get($theme, 'overlay-01')
     ) !global;
-    $danger: var(
-      --#{$custom-property-prefix}-danger,
-      map-get($theme, 'danger')
+    $danger-01: var(
+      --#{$custom-property-prefix}-danger-01,
+      map-get($theme, 'danger-01')
     ) !global;
     $focus: var(
       --#{$custom-property-prefix}-focus,
@@ -4589,8 +4589,9 @@ Define theme variables from a map of tokens
       @include custom-property('overlay-01', map-get($theme, 'overlay-01'));
     }
 
-    @if should-emit($theme, $parent-carbon-theme, 'danger', $emit-difference) {
-      @include custom-property('danger', map-get($theme, 'danger'));
+    @if should-emit($theme, $parent-carbon-theme, 'danger-01', $emit-difference)
+    {
+      @include custom-property('danger-01', map-get($theme, 'danger-01'));
     }
 
     @if should-emit($theme, $parent-carbon-theme, 'focus', $emit-difference) {
@@ -5629,7 +5630,7 @@ Define theme variables from a map of tokens
   - [inverse-support-03 [variable]](#inverse-support-03-variable)
   - [inverse-support-04 [variable]](#inverse-support-04-variable)
   - [overlay-01 [variable]](#overlay-01-variable)
-  - [danger [variable]](#danger-variable)
+  - [danger-01 [variable]](#danger-01-variable)
   - [focus [variable]](#focus-variable)
   - [inverse-focus-ui [variable]](#inverse-focus-ui-variable)
   - [hover-primary [variable]](#hover-primary-variable)
@@ -6030,7 +6031,7 @@ $carbon--theme: (
   inverse-support-03: if(global-variable-exists('inverse-support-03'), $inverse-support-03, map-get($carbon--theme--white, 'inverse-support-03')),
   inverse-support-04: if(global-variable-exists('inverse-support-04'), $inverse-support-04, map-get($carbon--theme--white, 'inverse-support-04')),
   overlay-01: if(global-variable-exists('overlay-01'), $overlay-01, map-get($carbon--theme--white, 'overlay-01')),
-  danger: if(global-variable-exists('danger'), $danger, map-get($carbon--theme--white, 'danger')),
+  danger-01: if(global-variable-exists('danger-01'), $danger-01, map-get($carbon--theme--white, 'danger-01')),
   focus: if(global-variable-exists('focus'), $focus, map-get($carbon--theme--white, 'focus')),
   inverse-focus-ui: if(global-variable-exists('inverse-focus-ui'), $inverse-focus-ui, map-get($carbon--theme--white, 'inverse-focus-ui')),
   hover-primary: if(global-variable-exists('hover-primary'), $hover-primary, map-get($carbon--theme--white, 'hover-primary')),
@@ -6985,18 +6986,18 @@ $overlay-01: if(
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
 
-### ✅danger [variable]
+### ✅danger-01 [variable]
 
 <details>
 <summary>Source code</summary>
 
 ```scss
-$danger: if(
+$danger-01: if(
   global-variable-exists('carbon--theme') and map-has-key(
       $carbon--theme,
-      'danger'
+      'danger-01'
     ),
-  map-get($carbon--theme, 'danger'),
+  map-get($carbon--theme, 'danger-01'),
   #da1e28
 );
 ```
