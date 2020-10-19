@@ -117,6 +117,12 @@ const carbonFlatpickrMonthSelectPlugin = (config) => (fp) => {
 export default class DatePicker extends Component {
   static propTypes = {
     /**
+     * flatpickr prop passthrough. Allows the user to enter a date directly
+     * into the input field
+     */
+    allowInput: PropTypes.bool,
+
+    /**
      * The DOM element the Flatpicker should be inserted into. `<body>` by default.
      */
     appendTo: PropTypes.object,
@@ -151,109 +157,59 @@ export default class DatePicker extends Component {
     light: PropTypes.bool,
 
     /**
-                    *  The language locale used to format the days of the week, months, and numbers. The full list of supported locales can be found here https://github.com/flatpickr/flatpickr/tree/master/src/l10n
-                    *
-                    * `ar` - Arabic
-                     `at` - Austria
-                     `be` - Belarusian
-                     `bg` - Bulgarian
-                     `bn` - Bangla
-                     `cat` - Catalan
-                     `cs` - Czech
-                     `cy` - Welsh
-                     `da` - Danish
-                     `de` - German
-                     `en` - English
-                     `eo` - Esperanto
-                     `es` - Spanish
-                     `et` - Estonian
-                     `fa` - Persian
-                     `fi` - Finnish
-                     `fr` - French
-                     `gr` - Greek
-                     `he` - Hebrew
-                     `hi` - Hindi
-                     `hr` - Croatian
-                     `hu` - Hungarian
-                     `id` - Indonesian
-                     `it` - Italian
-                     `ja` - Japanese
-                     `ko` - Korean
-                     `lt` - Lithuanian
-                     `lv` - Latvian
-                     `mk` - Macedonian
-                     `mn` - Mongolian
-                     `ms` - Malaysian
-                     `my` - Burmese
-                     `nl` - Dutch
-                     `no` - Norwegian
-                     `pa` - Punjabi
-                     `pl` - Polish
-                     `pt` - Portuguese
-                     `ro` - Romanian
-                     `si` - Sinhala
-                     `sk` - Slovak
-                     `sl` - Slovenian
-                     `sq` - Albanian
-                     `sr` - Serbian
-                     `sv` - Swedish
-                     `th` - Thai
-                     `tr` - Turkish
-                     `uk` - Ukrainian
-                     `vn` - Vietnamese
-                     `zh` - Mandarin
-                    */
+     *  The language locale used to format the days of the week, months, and numbers. The full list of supported locales can be found here https://github.com/flatpickr/flatpickr/tree/master/src/l10n
+     */
     locale: PropTypes.oneOf([
-      'ar',
-      'at',
-      'be',
-      'bg',
-      'bn',
-      'cat',
-      'cs',
-      'cy',
-      'da',
-      'de',
-      'en',
-      'eo',
-      'es',
-      'et',
-      'fa',
-      'fi',
-      'fr',
-      'gr',
-      'he',
-      'hi',
-      'hr',
-      'hu',
-      'id',
-      'it',
-      'ja',
-      'ko',
-      'lt',
-      'lv',
-      'mk',
-      'mn',
-      'ms',
-      'my',
-      'nl',
-      'no',
-      'pa',
-      'pl',
-      'pt',
-      'ro',
-      'ru',
-      'si',
-      'sk',
-      'sl',
-      'sq',
-      'sr',
-      'sv',
-      'th',
-      'tr',
-      'uk',
-      'vn',
-      'zh',
+      'ar', // Arabic
+      'at', // Austria
+      'be', // Belarusian
+      'bg', // Bulgarian
+      'bn', // Bangla
+      'cat', // Catalan
+      'cs', // Czech
+      'cy', // Welsh
+      'da', // Danish
+      'de', // German
+      'en', // English
+      'eo', // Esperanto
+      'es', // Spanish
+      'et', // Estonian
+      'fa', // Persian
+      'fi', // Finnish
+      'fr', // French
+      'gr', // Greek
+      'he', // Hebrew
+      'hi', // Hindi
+      'hr', // Croatian
+      'hu', // Hungarian
+      'id', // Indonesian
+      'it', // Italian
+      'ja', // Japanese
+      'ko', // Korean
+      'lt', // Lithuanian
+      'lv', // Latvian
+      'mk', // Macedonian
+      'mn', // Mongolian
+      'ms', // Malaysian
+      'my', // Burmese
+      'nl', // Dutch
+      'no', // Norwegian
+      'pa', // Punjabi
+      'pl', // Polish
+      'pt', // Portuguese
+      'ro', // Romanian
+      'ru', // Russian
+      'si', // Sinhala
+      'sk', // Slovak
+      'sl', // Slovenian
+      'sq', // Albanian
+      'sr', // Serbian
+      'sv', // Swedish
+      'th', // Thai
+      'tr', // Turkish
+      'uk', // Ukrainian
+      'vn', // Vietnamese
+      'zh', // Mandarin
     ]),
 
     /**
@@ -308,6 +264,7 @@ export default class DatePicker extends Component {
 
   componentDidMount() {
     const {
+      allowInput,
       appendTo,
       datePickerType,
       dateFormat,
@@ -328,7 +285,7 @@ export default class DatePicker extends Component {
           disableMobile: true,
           defaultDate: value,
           mode: datePickerType,
-          allowInput: true,
+          allowInput: allowInput ?? true,
           dateFormat: dateFormat,
           locale: l10n[locale],
           minDate: minDate,

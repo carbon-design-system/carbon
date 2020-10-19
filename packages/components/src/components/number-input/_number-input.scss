@@ -99,6 +99,13 @@
     align-items: center;
     justify-content: center;
     transform: translateY(-50%);
+
+    // Windows, Firefox HCM Fix
+    @media screen and (-ms-high-contrast: active),
+      screen and (prefers-contrast) {
+      outline: 1px solid transparent;
+      outline-offset: -1px;
+    }
   }
 
   .#{$prefix}--number__control-btn {

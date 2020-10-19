@@ -1,6 +1,7 @@
 name: Deploy React storybook to IBM Cloud
 
 on:
+  workflow_dispatch:
   push:
     tags:
       # Matches tags that have the shape `vX.Y.Z`. Reference:
@@ -37,9 +38,7 @@ jobs:
           ibmcloud target -o 'carbon-design-system' -s 'production'
       - name: Install IBM Cloud plugins
         run: |
-          # We use v6.50.0 as v6.51.0 and v6.52.0 have a bug where we are unable to set
-          # the CF API
-          ibmcloud cf install -v 6.50.0
+          ibmcloud cf install
           ibmcloud cf add-plugin-repo CF-Community https://plugins.cloudfoundry.org
           ibmcloud cf install-plugin blue-green-deploy -f -r CF-Community
       - name: Deploy React storybook
