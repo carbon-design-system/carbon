@@ -344,7 +344,7 @@
     - bridge
     - city
     - cities
-- name: box-plot
+- name: box--plot
   friendly_name: Box plot
   aliases:
     - box
@@ -735,7 +735,7 @@
     - chip debit
     - debit
     - chip
-- name: circle-packing
+- name: circle--packing
   friendly_name: Circle packing
   aliases:
     - circle packing
@@ -1952,7 +1952,16 @@
     - chart
     - data analytics
     - analytics
-- name: heat-map--02
+- name: heat--map--01
+  friendly_name: Heat map 01
+  aliases:
+    - heat map 01
+    - heat map
+    - heat
+    - chart
+    - data analytics
+    - analytics
+- name: heat--map--02
   friendly_name: Heat map 02
   aliases:
     - heat map 02
@@ -2374,7 +2383,7 @@
     - mas
     - code
     - software
-- name: math-curve
+- name: math--curve
   friendly_name: Math curve
   aliases:
     - math curve
@@ -2941,7 +2950,7 @@
     - enforcement
     - security
     - people
-- name: population-diagram
+- name: population--diagram
   friendly_name: Population diagram
   aliases:
     - population diagram
@@ -3148,7 +3157,7 @@
     - relationship
     - watson
     - AI
-- name: relationship-diagram
+- name: relationship--diagram
   friendly_name: Relationship diagram
   aliases:
     - relationship diagram
@@ -3305,7 +3314,7 @@
     - scale
     - weight
     - healthcare
-- name: scatter-matrix
+- name: scatter--matrix
   friendly_name: Scatter matrix
   aliases:
     - scatter matrix
@@ -4260,7 +4269,7 @@
     - modem
     - wireless
     - home
-- name: word-cloud
+- name: word--cloud
   friendly_name: Word cloud
   aliases:
     - word cloud

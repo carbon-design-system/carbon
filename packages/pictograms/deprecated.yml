@@ -37,3 +37,6 @@ deprecated:
       nyc--manhattan--02
   - name: sao-paulo--expanded--base
     reason: The sao-paulo--expanded--base pictogram has been deprecated
+  - name: heat--map
+    reason:
+      The heat--map pictogram has been deprecated in favor of heat--map--01
