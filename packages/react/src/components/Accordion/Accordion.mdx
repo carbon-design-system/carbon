@@ -47,6 +47,40 @@ fetched from an external resource like an API.
   <Story id="accordion--skeleton" />
 </Preview>
 
+## Performance
+
+When rendering pages with a lot of content, you may run into a situation where
+mounting and unmounting component trees in your application needs to be
+optimized.
+
+In general, you will rarely run into this situation with components like
+`Accordion`. However, in cases where you may run into this you can use the
+`deferComponentRender` utility that is provided on the `AccordionItem` component
+to defer rendering. This technique was inspired by a solution outlined by the
+team that built
+[Twitter Lite](https://medium.com/@paularmstrong/twitter-lite-and-high-performance-react-progressive-web-apps-at-scale-d28a00e780a3)
+when they ran into a similar problem.
+
+The `deferComponentRender` utility is a
+[Higher-Order Component](https://reactjs.org/docs/higher-order-components.html),
+meaning that it is a function that takes in a component and returns a new one.
+
+In our case, `deferComponentRender` will take in `AccordionItem` and return a
+`DeferredAccordionItem` which will defer rendering of its content.
+
+```js
+import { AccordionItem, deferComponentRender } from 'carbon-components-react';
+
+const DeferredAccordionItem = deferComponentRender(AccordionItem);
+```
+
+You can then use `DeferredAccordionItem` in place of `AccordionItem` where
+appropriate.
+
+<Preview>
+  <Story id="accordion--defer-content" />
+</Preview>
+
 ## Component API
 
 <Props />

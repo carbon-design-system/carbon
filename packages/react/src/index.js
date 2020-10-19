@@ -197,6 +197,9 @@ export {
   SideNavSwitcher,
 } from './components/UIShell';
 
+// Tools or utilities
+export { deferComponentRender } from './tools/deferComponentRender';
+
 // Experimental
 export {
   PageSelector as unstable_PageSelector,

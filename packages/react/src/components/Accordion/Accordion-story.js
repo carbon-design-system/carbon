@@ -22,6 +22,7 @@ import {
   AccordionSkeleton,
 } from '../Accordion';
 import Button from '../Button';
+import { deferComponentRender } from '../../tools/deferComponentRender';
 import mdx from './Accordion.mdx';
 
 export default {
@@ -81,6 +82,27 @@ export const skeleton = () => <AccordionSkeleton open count={4} />;
 skeleton.decorators = [
   (story) => <div style={{ width: '500px' }}>{story()}</div>,
 ];
+
+export const deferContent = () => {
+  const DeferredAccordionItem = deferComponentRender(AccordionItem);
+
+  function Story() {
+    return (
+      <Accordion>
+        <DeferredAccordionItem title="Section 1">
+          Deferred render
+        </DeferredAccordionItem>
+        <DeferredAccordionItem title="Section 2">
+          Deferred render
+        </DeferredAccordionItem>
+        <AccordionItem title="Section 3">Default render</AccordionItem>
+        <AccordionItem title="Section 4">Default render</AccordionItem>
+      </Accordion>
+    );
+  }
+
+  return <Story />;
+};
 
 const props = {
   onClick: action('onClick'),

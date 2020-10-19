@@ -7011,6 +7011,7 @@ Map {
     },
     "render": [Function],
   },
+  "deferComponentRender" => Object {},
   "unstable_PageSelector" => Object {
     "defaultProps": Object {
       "className": null,
