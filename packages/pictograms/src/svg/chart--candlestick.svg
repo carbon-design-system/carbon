@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="iso-8859-1"?>
-<!-- Generator: Adobe Illustrator 22.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
-<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-	 viewBox="0 0 48 48" style="enable-background:new 0 0 48 48;" xml:space="preserve">
-<g id="candlestick_chart">
-	
-		<path id="candlestick_chart_1_" style="fill:none;stroke:#000000;stroke-width:0.72;stroke-linejoin:round;stroke-miterlimit:10;" d="
-		M39,39H9V9 M17,19h-4v8h4V19z M15,27v6 M15,13v6 M26,17h-4v6h4V17z M24,23v6 M24,11v6 M35,21h-4v12h4V21z M33,33v3 M33,18v3"/>
-</g>
-<g id="Layer_1">
-</g>
+<!-- Generator: Adobe Illustrator 24.1.2, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 32 32" style="enable-background:new 0 0 32 32;" xml:space="preserve">
+<path id="chart--candlestick_1_" d="M31,31.4H1c-0.2,0-0.4-0.2-0.4-0.4V1h0.7v29.6H31V31.4z M25.4,28h-0.7v-2.6H23
+	c-0.2,0-0.4-0.2-0.4-0.4V13c0-0.2,0.2-0.4,0.4-0.4h1.6V10h0.7v2.6H27c0.2,0,0.4,0.2,0.4,0.4v12c0,0.2-0.2,0.4-0.4,0.4h-1.6V28z
+	 M23.4,24.6h3.3V13.4h-3.3V24.6z M7.4,25H6.6v-5.6H5c-0.2,0-0.4-0.2-0.4-0.4v-8c0-0.2,0.2-0.4,0.4-0.4h1.6V5h0.7v5.6H9
+	c0.2,0,0.4,0.2,0.4,0.4v8c0,0.2-0.2,0.4-0.4,0.4H7.4V25z M5.4,18.6h3.3v-7.3H5.4V18.6z M16.4,21h-0.7v-5.6H14
+	c-0.2,0-0.4-0.2-0.4-0.4V9c0-0.2,0.2-0.4,0.4-0.4h1.6V3h0.7v5.6H18c0.2,0,0.4,0.2,0.4,0.4v6c0,0.2-0.2,0.4-0.4,0.4h-1.6V21z
+	 M14.4,14.6h3.3V9.4h-3.3C14.4,9.4,14.4,14.6,14.4,14.6z"/>
+<rect id="_Transparent_Rectangle" style="fill:none;" width="32" height="32"/>
 </svg>

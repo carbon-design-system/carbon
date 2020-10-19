@@ -1,13 +1,12 @@
 <?xml version="1.0" encoding="iso-8859-1"?>
-<!-- Generator: Adobe Illustrator 22.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
-<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-	 viewBox="0 0 48 48" style="enable-background:new 0 0 48 48;" xml:space="preserve">
-<g id="error_bar_chart">
-	
-		<path id="error_bar_chart_1_" style="fill:none;stroke:#000000;stroke-width:0.72;stroke-linejoin:round;stroke-miterlimit:10;" d="
-		M39,39H9V9 M33,15v10 M36,39V20h-6v19 M30,15h6 M30,25h6 M24,22v8 M27,39V26h-6v13 M21,22h6 M21,30h6 M15,29v6 M18,39v-7h-6v7
-		 M12,29h6 M12,35h6"/>
-</g>
-<g id="Layer_1">
-</g>
+<!-- Generator: Adobe Illustrator 24.1.2, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 32 32" style="enable-background:new 0 0 32 32;" xml:space="preserve">
+<path id="chart--error-bar_1_" d="M31,31.4H1c-0.2,0-0.4-0.2-0.4-0.4V1h0.7v29.6h2.3V24c0-0.2,0.2-0.4,0.4-0.4h2.6v-2.3H4v-0.7h6
+	v0.7H7.4v2.3H10c0.2,0,0.4,0.2,0.4,0.4v6.6h2.3V18c0-0.2,0.2-0.4,0.4-0.4h2.6v-3.3H13v-0.7h6v0.7h-2.6v3.3H19c0.2,0,0.4,0.2,0.4,0.4
+	v12.6h2.3V12c0-0.2,0.2-0.4,0.4-0.4h2.6V7.4H22V6.6h6v0.7h-2.6v4.3H28c0.2,0,0.4,0.2,0.4,0.4v18.6H31V31.4z M22.4,30.6h5.3V17.4
+	h-5.3C22.4,17.4,22.4,30.6,22.4,30.6z M13.4,30.6h5.3v-8.3h-5.3C13.4,22.4,13.4,30.6,13.4,30.6z M4.4,30.6h5.3v-3.3H4.4V30.6z
+	 M7.4,26.6h2.3v-2.3H7.4V26.6z M4.4,26.6h2.3v-2.3H4.4V26.6z M16.4,21.6h2.3v-3.3h-2.3V21.6z M13.4,21.6h2.3v-3.3h-2.3V21.6z
+	 M25.4,16.6h2.3v-4.3h-2.3V16.6z M22.4,16.6h2.3v-4.3h-2.3V16.6z"/>
+<rect id="_Transparent_Rectangle" style="fill:none;" width="32" height="32"/>
 </svg>

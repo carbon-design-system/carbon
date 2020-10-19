@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="iso-8859-1"?>
-<!-- Generator: Adobe Illustrator 22.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
-<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-	 viewBox="0 0 48 48" style="enable-background:new 0 0 48 48;" xml:space="preserve">
-<g id="radar_chart">
-	<path id="radar_chart_1_" style="fill:none;stroke:#000000;stroke-width:0.72;stroke-linejoin:round;stroke-miterlimit:10;" d="
-		M24,9l15,13l-5,17H14L9,22L24,9z M17,24v11l11-4l6-7.5L24,13L17,24z M24,9v17 M14,39l10-13 M34,39L24,26 M9,22l15,4 M24,26l15-4"/>
-</g>
-<g id="Layer_1">
-</g>
+<!-- Generator: Adobe Illustrator 24.1.2, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 32 32" style="enable-background:new 0 0 32 32;" xml:space="preserve">
+<path id="chart--radar_1_" d="M26,31.4H6c-0.2,0-0.3-0.1-0.3-0.3l-5-17c0-0.1,0-0.3,0.1-0.4l15-13c0.1-0.1,0.3-0.1,0.5,0l15,13
+	c0.1,0.1,0.1,0.2,0.1,0.4l-5,17C26.3,31.3,26.2,31.4,26,31.4z M6.7,30.6h18.5l-5.5-7.2L9.3,27.3L6.7,30.6z M20.4,23.1l5.5,7.1
+	l4.6-15.7l-4.1,1.1c0,0,0,0.1-0.1,0.1L20.4,23.1z M1.5,14.5l4.6,15.7L8.6,27V16.4L1.5,14.5z M16,18.6l-5.9,7.6l9.1-3.3L16,18.6z
+	 M9.4,16.6V26l6-7.8L9.4,16.6z M16.6,18.2l3.3,4.3l5.3-6.6L16.6,18.2z M16.4,5.9v11.6l8.8-2.4L16.4,5.9z M9.5,15.9l6.1,1.6V6.2
+	L9.5,15.9z M1.7,13.8l7,1.9l6.9-10.8V1.8L1.7,13.8z M16.4,4.9L26,15l4.3-1.1l-13.9-12V4.9z"/>
+<rect id="_Transparent_Rectangle" style="fill:none;" width="32" height="32"/>
 </svg>

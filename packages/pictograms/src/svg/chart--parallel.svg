@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="iso-8859-1"?>
-<!-- Generator: Adobe Illustrator 22.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
-<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-	 viewBox="0 0 48 48" style="enable-background:new 0 0 48 48;" xml:space="preserve">
-<g id="parallel_chart">
-	<path id="parellel_chart" style="fill:none;stroke:#000000;stroke-width:0.72;stroke-linejoin:round;stroke-miterlimit:10;" d="
-		M9,9v30 M39,26l-10,9l-10-8L9,37 M9,26l10-8l10,10l10-11 M9,16l10-4l10,4l10-5 M19,9v30 M29,9v30 M39,39V9"/>
-</g>
-<g id="Layer_1">
-</g>
+<!-- Generator: Adobe Illustrator 24.1.2, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 32 32" style="enable-background:new 0 0 32 32;" xml:space="preserve">
+<path id="chart--parallel_1_" d="M31.4,31h-0.7V18.8l-9.3,8.4V31h-0.7v-3.8l-9.3-7.4V31h-0.7V19.9l-9.3,9.3V31H0.6V1h0.7v6.5
+	l9.3-3.7V1h0.7v2.8l9.3,3.7V1h0.7v6.4l9.3-4.6V1h0.7L31.4,31L31.4,31z M1.4,18.2v10l9.3-9.3v-8.1L1.4,18.2z M11.4,18.8l9.3,7.4v-6.1
+	l-9.3-9.3C11.4,10.8,11.4,18.8,11.4,18.8z M21.4,20.1v6.1l9.3-8.4V9.9L21.4,20.1z M11.4,9.9l9.3,9.3v-11l-9.3-3.7
+	C11.4,4.5,11.4,9.9,11.4,9.9z M21.4,8.2V19l9.3-10.2V3.6L21.4,8.2z M1.4,8.2v9l9.3-7.4V4.5L1.4,8.2z"/>
+<rect id="_Transparent_Rectangle" style="fill:none;" width="32" height="32"/>
 </svg>

@@ -1,16 +1,12 @@
 <?xml version="1.0" encoding="iso-8859-1"?>
 <!-- Generator: Adobe Illustrator 24.1.2, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
-<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-	 viewBox="0 0 48 48" style="enable-background:new 0 0 48 48;" xml:space="preserve">
-<g id="code--syntax">
-	<g id="code--syntax_1_">
-		<path d="M36.831,11.5c0,0.276-0.224,0.5-0.5,0.5s-0.5-0.224-0.5-0.5c0-0.276,0.224-0.5,0.5-0.5S36.831,11.224,36.831,11.5z
-			 M34.331,11c-0.276,0-0.5,0.224-0.5,0.5c0,0.276,0.224,0.5,0.5,0.5s0.5-0.224,0.5-0.5C34.831,11.224,34.607,11,34.331,11z
-			 M32.331,11c-0.276,0-0.5,0.224-0.5,0.5c0,0.276,0.224,0.5,0.5,0.5s0.5-0.224,0.5-0.5C32.831,11.224,32.607,11,32.331,11z"/>
-		<path style="fill:none;stroke:#000000;stroke-width:0.72;stroke-linejoin:round;stroke-miterlimit:10;" d="M38.831,38h-30V10h30
-			V38z M8.831,13h30 M29,29l4-4l-4-4 M19,21l-4,4l4,4 M21,32l6-14"/>
-	</g>
-</g>
-<g id="Layer_1">
-</g>
+<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 32 32" style="enable-background:new 0 0 32 32;" xml:space="preserve">
+<path id="code--syntax_2_" d="M29,3.5C29,3.8,28.8,4,28.5,4S28,3.8,28,3.5S28.2,3,28.5,3S29,3.2,29,3.5z M26.5,3
+	C26.2,3,26,3.2,26,3.5S26.2,4,26.5,4S27,3.8,27,3.5S26.8,3,26.5,3z M24.5,3C24.2,3,24,3.2,24,3.5S24.2,4,24.5,4S25,3.8,25,3.5
+	S24.8,3,24.5,3z M31,30.4H1c-0.2,0-0.4-0.2-0.4-0.4V2c0-0.2,0.2-0.4,0.4-0.4h30c0.2,0,0.4,0.2,0.4,0.4v28
+	C31.4,30.2,31.2,30.4,31,30.4z M1.4,29.6h29.3V5.4H1.4V29.6z M1.4,4.6h29.3V2.4H1.4V4.6z M13.5,24.1l-0.7-0.3l6-14l0.7,0.3
+	L13.5,24.1z M21.4,21.3l-0.5-0.5l3.7-3.7l-3.7-3.7l0.5-0.5l4,4c0.1,0.1,0.1,0.4,0,0.5L21.4,21.3z M10.9,21.3l-4-4
+	c-0.1-0.1-0.1-0.4,0-0.5l4-4l0.5,0.5L7.7,17l3.7,3.7L10.9,21.3z"/>
+<rect id="_Transparent_Rectangle" style="fill:none;" width="32" height="32"/>
 </svg>

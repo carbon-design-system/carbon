@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="iso-8859-1"?>
-<!-- Generator: Adobe Illustrator 22.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
-<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-	 viewBox="0 0 48 48" style="enable-background:new 0 0 48 48;" xml:space="preserve">
-<g id="analyze">
-	<path id="analyze_1_" style="fill:none;stroke:#000000;stroke-width:0.72;stroke-linejoin:round;stroke-miterlimit:10;" d="M24,29
-		v10H14l-5-5V19l4.997-0.004 M24,9c-5.52,0-10,4.48-10,10s4.48,10,10,10c2.76,0,5.26-1.12,7.07-2.93S34,21.76,34,19
-		C34,13.48,29.52,9,24,9z M39,34l-7.933-7.933 M14,39v-5H9 M17.267,21.726l2.733-4.73l1.227,3.77l2.77-4.77l2.23,4.77l3.773-6.27"/>
-</g>
-<g id="Layer_1">
-</g>
+<!-- Generator: Adobe Illustrator 24.1.2, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 32 32" style="enable-background:new 0 0 32 32;" xml:space="preserve">
+<path id="analyze_1_" d="M16,31.4H6c-0.1,0-0.2,0-0.3-0.1l-5-5c-0.1-0.1-0.1-0.2-0.1-0.3V11c0-0.2,0.2-0.4,0.4-0.4h4.6
+	c0.2-5.5,4.8-10,10.4-10c5.7,0,10.4,4.6,10.4,10.4c0,2.6-1,5.1-2.8,7.1l7.7,7.7l-0.5,0.5l-7.7-7.7c-1.8,1.7-4.2,2.7-6.7,2.8V31
+	C16.4,31.2,16.2,31.4,16,31.4z M6.4,30.6h9.3v-9.3c-5.4-0.2-9.8-4.6-10-10H1.4v14.3H6c0.2,0,0.4,0.2,0.4,0.4V30.6z M1.9,26.4
+	l3.8,3.8v-3.8H1.9z M16,1.4c-5.3,0-9.6,4.3-9.6,9.6s4.3,9.6,9.6,9.6c2.6,0,5-1,6.8-2.8s2.8-4.2,2.8-6.8C25.6,5.7,21.3,1.4,16,1.4z
+	 M9.6,13.9L9,13.5l2.7-4.7c0.1-0.1,0.2-0.2,0.3-0.2s0.3,0.1,0.3,0.2l1,3l2.4-4.1c0.1-0.1,0.2-0.2,0.3-0.2c0.1,0,0.3,0.1,0.3,0.2
+	l1.9,4.2l3.4-5.7l0.6,0.4L18.5,13c-0.1,0.1-0.2,0.2-0.3,0.2c-0.1,0-0.3-0.1-0.3-0.2L16,8.8L13.5,13c-0.1,0.1-0.2,0.2-0.4,0.2
+	c-0.1,0-0.3-0.1-0.3-0.2l-1-3L9.6,13.9z"/>
+<rect id="_Transparent_Rectangle" style="fill:none;" width="32" height="32"/>
 </svg>

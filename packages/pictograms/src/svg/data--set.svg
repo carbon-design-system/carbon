@@ -1,11 +1,15 @@
 <?xml version="1.0" encoding="iso-8859-1"?>
 <!-- Generator: Adobe Illustrator 24.1.2, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
-<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-	 viewBox="0 0 48 48" style="enable-background:new 0 0 48 48;" xml:space="preserve">
-<g id="data--set">
-	<path id="data--set_1_" style="fill:none;stroke:#000000;stroke-width:0.72;stroke-linejoin:round;stroke-miterlimit:10;" d="M12,9
-		h18l6,6v24H12V9z M30,9v6h6 M33,19H15v16h18V19z M15,23h18 M15,31h18 M15,27h18 M21,19v16 M27,19v16"/>
-</g>
-<g id="Layer_1">
-</g>
+<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 32 32" style="enable-background:new 0 0 32 32;" xml:space="preserve">
+<path id="data--set_1_" d="M28,31.4H4c-0.2,0-0.4-0.2-0.4-0.4V1c0-0.2,0.2-0.4,0.4-0.4h18c0.1,0,0.2,0,0.3,0.1l6,6
+	c0.1,0.1,0.1,0.2,0.1,0.3v24C28.4,31.2,28.2,31.4,28,31.4z M4.4,30.6h23.3V7.4H22c-0.2,0-0.4-0.2-0.4-0.4V1.4H4.4V30.6z M22.4,6.6
+	h4.8l-4.8-4.8C22.4,1.8,22.4,6.6,22.4,6.6z M25,27.4H7c-0.2,0-0.4-0.2-0.4-0.4V11c0-0.2,0.2-0.4,0.4-0.4h18c0.2,0,0.4,0.2,0.4,0.4
+	v16C25.4,27.2,25.2,27.4,25,27.4z M19.4,26.6h5.3v-3.3h-5.3C19.4,23.3,19.4,26.6,19.4,26.6z M13.4,26.6h5.3v-3.3h-5.3
+	C13.4,23.4,13.4,26.6,13.4,26.6z M7.4,26.6h5.3v-3.3H7.4V26.6z M19.4,22.6h5.3v-3.3h-5.3C19.4,19.3,19.4,22.6,19.4,22.6z M13.4,22.6
+	h5.3v-3.3h-5.3C13.4,19.4,13.4,22.6,13.4,22.6z M7.4,22.6h5.3v-3.3H7.4V22.6z M19.4,18.6h5.3v-3.3h-5.3
+	C19.4,15.3,19.4,18.6,19.4,18.6z M13.4,18.6h5.3v-3.3h-5.3C13.4,15.4,13.4,18.6,13.4,18.6z M7.4,18.6h5.3v-3.3H7.4V18.6z M19.4,14.6
+	h5.3v-3.3h-5.3C19.4,11.3,19.4,14.6,19.4,14.6z M13.4,14.6h5.3v-3.3h-5.3C13.4,11.4,13.4,14.6,13.4,14.6z M7.4,14.6h5.3v-3.3H7.4
+	V14.6z"/>
+<rect id="_Transparent_Rectangle" style="fill:none;" width="32" height="32"/>
 </svg>

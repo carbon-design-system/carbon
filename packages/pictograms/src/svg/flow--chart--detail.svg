@@ -1,14 +1,15 @@
 <?xml version="1.0" encoding="iso-8859-1"?>
-<!-- Generator: Adobe Illustrator 22.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
-<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-	 viewBox="0 0 48 48" style="enable-background:new 0 0 48 48;" xml:space="preserve">
-<g id="flow_chart_detail">
-	
-		<path id="flow_chart_detail_1_" style="fill:none;stroke:#000000;stroke-width:0.72;stroke-linejoin:round;stroke-miterlimit:10;" d="
-		M39,19.999h-8 M39,22.999h-8.414 M39,13.999h-9.779 M39,16.999h-8.414 M20,9C13.925,9,9,13.925,9,20s4.925,11,11,11s11-4.925,11-11
-		S26.075,9,20,9z M38.984,39L27.769,27.784 M14,20h5 M26.32,11.001H24v3v3h6.58 M9.42,23.001H14v-3v-3H9.42 M30.58,23.001H24v3v3
-		h2.32 M24,14h-5v12h5"/>
-</g>
-<g id="Layer_1">
-</g>
+<!-- Generator: Adobe Illustrator 24.1.2, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 32 32" style="enable-background:new 0 0 32 32;" xml:space="preserve">
+<path id="flow--chart--detail_1_" d="M30.7,31.3l-11-11c-2,1.9-4.8,3.1-7.8,3.1C5.7,23.4,0.6,18.3,0.6,12S5.7,0.6,12,0.6
+	c3.9,0,7.4,2,9.4,5H31v0.7h-9.1c0.4,0.7,0.7,1.5,1,2.3H31v0.7h-8c0.2,0.7,0.3,1.5,0.3,2.3H31v0.7h-7.6c0,0.8-0.1,1.5-0.3,2.3h8v0.7
+	H23c-0.5,1.7-1.4,3.2-2.6,4.4l11,11L30.7,31.3z M1.9,15.4c1.4,4.2,5.4,7.3,10.1,7.3c1.8,0,3.6-0.5,5.1-1.3H16
+	c-0.2,0-0.4-0.2-0.4-0.4v-2.6H11c-0.2,0-0.4-0.2-0.4-0.4v-5.6H6.4V15c0,0.2-0.2,0.4-0.4,0.4H1.9z M16.4,20.6h1.8
+	c1.8-1.3,3.2-3.1,3.9-5.3h-5.7L16.4,20.6L16.4,20.6z M11.4,17.6h4.3V15c0-0.2,0.2-0.4,0.4-0.4h6.3c0.2-0.8,0.3-1.7,0.3-2.6
+	c0-0.9-0.1-1.8-0.3-2.6H16c-0.2,0-0.4-0.2-0.4-0.4V6.4h-4.3C11.4,6.4,11.4,17.6,11.4,17.6z M1.7,14.6h3.9V9.4H1.7
+	c-0.2,0.8-0.3,1.7-0.3,2.6C1.4,12.9,1.5,13.8,1.7,14.6z M6.4,11.6h4.3V6c0-0.2,0.2-0.4,0.4-0.4h4.6V3c0-0.2,0.2-0.4,0.4-0.4h1.1
+	c-1.5-0.8-3.2-1.3-5.1-1.3C7.4,1.3,3.4,4.4,2,8.6h4c0.2,0,0.4,0.2,0.4,0.4V11.6L6.4,11.6z M16.4,8.6h5.7c-0.7-2.1-2.1-4-3.9-5.3
+	h-1.8V8.6L16.4,8.6z"/>
+<rect id="_Transparent_Rectangle" style="fill:none;" width="32" height="32"/>
 </svg>
