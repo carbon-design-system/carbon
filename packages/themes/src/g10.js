@@ -89,6 +89,7 @@ export const inverseSupport04 = blue50;
 export const overlay01 = rgba(gray100, 0.5);
 
 export const danger01 = red60;
+export const danger02 = red60;
 
 // Interaction states
 export const focus = blue60;
