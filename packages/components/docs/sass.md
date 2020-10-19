@@ -14382,6 +14382,13 @@ Button variant styles
     border-color: $focus;
     box-shadow: inset 0 0 0 $button-outline-width $focus, inset 0 0 0
         $button-border-width $ui-02;
+
+    // Windows, Firefox HCM Fix
+    @media screen and (-ms-high-contrast: active),
+      screen and (prefers-contrast) {
+      outline: 3px solid transparent;
+      outline-offset: -3px;
+    }
   }
 
   &:disabled:hover,
@@ -21021,6 +21028,13 @@ Number input styles
     align-items: center;
     justify-content: center;
     transform: translateY(-50%);
+
+    // Windows, Firefox HCM Fix
+    @media screen and (-ms-high-contrast: active),
+      screen and (prefers-contrast) {
+      outline: 1px solid transparent;
+      outline-offset: -1px;
+    }
   }
 
   .#{$prefix}--number__control-btn {
@@ -25682,6 +25696,13 @@ Toggle styles
           $duration--fast-01 motion(exit, productive);
       content: '';
       will-change: box-shadow;
+
+      // Windows, Firefox HCM Fix
+      @media screen and (-ms-high-contrast: active),
+        screen and (prefers-contrast) {
+        // `ButtonText` is a CSS2 system color to help improve colors in HCM
+        border: 1px solid ButtonText;
+      }
     }
 
     // Toggle circle
@@ -25697,6 +25718,13 @@ Toggle styles
       border-radius: 50%;
       transition: transform $duration--fast-01 motion(exit, productive);
       content: '';
+
+      // Windows, Firefox HCM Fix
+      @media screen and (-ms-high-contrast: active),
+        screen and (prefers-contrast) {
+        // `ButtonText` is a CSS2 system color to help improve colors in HCM
+        border: 3px solid ButtonText;
+      }
     }
 
     .#{$prefix}--toggle-input__label & {
