@@ -1182,7 +1182,7 @@
     - dna
     - life science
     - genetic
-- name: do--not
+- name: do-not
   friendly_name: Do not
   aliases:
     - do not
