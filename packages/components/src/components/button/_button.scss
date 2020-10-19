@@ -310,7 +310,7 @@
 
   .#{$prefix}--btn--danger {
     @include button-theme(
-      $danger,
+      $danger-01,
       transparent,
       $text-04,
       $hover-danger,

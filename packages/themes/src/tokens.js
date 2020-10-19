@@ -58,7 +58,7 @@ const colors = [
 
   'overlay01',
 
-  'danger',
+  'danger01',
 
   // Interactive states
   'focus',
@@ -171,7 +171,7 @@ export const unstable__meta = {
         'brand01',
         'brand02',
         'brand03',
-        'danger',
+        'danger01',
         'ui01',
         'ui02',
         'ui03',
