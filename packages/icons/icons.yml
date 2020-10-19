@@ -1435,7 +1435,7 @@
     - 32
 - name: calendar--heat-map
   friendly_name: Calendar heat map
-  aliases: 
+  aliases:
     - heat map
     - date
     - schedule
@@ -6510,6 +6510,9 @@
     - new window
     - window
     - expand
+    - link
+    - external link
+    - outbound
   sizes:
     - 16
     - 32
