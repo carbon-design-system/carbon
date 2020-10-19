@@ -34,3 +34,19 @@ deprecated:
     reason: The upload pictogram has been deprecated in favor of upload--01
   - name: upload--alt
     reason: The upload--alt pictogram has been deprecated in favor of upload--02
+  - name: berlin--brandenburg
+    reason:
+      The berlin--brandenburg pictogram has been deprecated in favor of
+      berlin--brandenburg-gate
+  - name: london--expanded--base
+    reason: The london--expanded--base pictogram has been deprecated
+  - name: nyc--manhattan
+    reason:
+      The nyc--manhattan pictogram has been deprecated in favor of
+      nyc--manhattan--01
+  - name: nyc--manhattan--alt
+    reason:
+      The nyc--manhattan--alt pictogram has been deprecated in favor of
+      nyc--manhattan--02
+  - name: sao-paulo--expanded--base
+    reason: The sao-paulo--expanded--base pictogram has been deprecated

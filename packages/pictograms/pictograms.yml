@@ -251,6 +251,13 @@
     - india
     - cities
     - city
+- name: barcelona
+  friendly_name: Barcelona
+  aliases:
+    - barcelona
+    - spain
+    - cities
+    - city
 - name: bee
   friendly_name: Bee
   aliases:
@@ -282,7 +289,7 @@
     - Brandenburg
     - city
     - cities
-- name: berlin--brandenburg--gate
+- name: berlin--brandenburg-gate
   friendly_name: Berlin Brandenburg Gate
   aliases:
     - Berlin Brandenburg gate
@@ -328,6 +335,15 @@
     - block
     - chain
     - blockchain
+- name: boston--zakim-bridge
+  friendly_name: Boston Zakim Bridge
+  aliases:
+    - Boston Zakim Bridge
+    - Boston
+    - Zakim
+    - bridge
+    - city
+    - cities
 - name: box-plot
   friendly_name: Box plot
   aliases:
@@ -372,6 +388,16 @@
     - beverage
     - hospitality
     - food
+- name: cairo--giza-plateau
+  friendly_name: Cairo Giza Plateau
+  aliases:
+    - Cairo Giza Plateau
+    - Cairo
+    - Egypt
+    - Giza
+    - Plateau
+    - city
+    - cities
 - name: calendar
   friendly_name: Calendar
   aliases:
@@ -685,6 +711,12 @@
     - food
     - fruit
     - snack
+- name: chicago
+  friendly_name: Chicago
+  aliases:
+    - Chicago
+    - city
+    - cities
 - name: chip--circuit
   friendly_name: Chip circuit
   aliases:
@@ -1239,7 +1271,7 @@
   aliases:
     - download 02
     - download
-- name: dubai--palm--islands
+- name: dubai--palm-islands
   friendly_name: Dubai Palm Islands
   aliases:
     - Dubai palm islands
@@ -1846,6 +1878,15 @@
     - sky
     - precipitation
     - forecast
+- name: hamburg--philharmone
+  friendly_name: Hamburg Philharmone
+  aliases:
+    - Hamburg Philharmone
+    - Hamburg
+    - Germany
+    - Philharmone
+    - city
+    - cities
 - name: handicap
   friendly_name: Handicap
   aliases:
@@ -2212,7 +2253,7 @@
     - london
     - city
     - cities
-- name: london--big--ben
+- name: london--big-ben
   friendly_name: London Big Ben
   aliases:
     - london big ben
@@ -2375,14 +2416,14 @@
     - time
     - dashboard
     - instrument
-- name: mexico-city--angel--of--independence
+- name: mexico-city--angel-of-independence
   friendly_name: Mexico City Angel of Independence
   aliases:
     - Mexico City Angel of Independence
     - statue
     - city
     - cities
-- name: mexico-city--museo--soumaya
+- name: mexico-city--museo-soumaya
   friendly_name: Mexico City Museo Soumaya
   aliases:
     - Mexico City Museo Soumaya
@@ -2400,7 +2441,7 @@
     - microscope
     - life science
     - research
-- name: milan--duomo--di--milano
+- name: milan--duomo-di-milano
   friendly_name: Milan Duomo di Milano
   aliases:
     - church
@@ -2621,6 +2662,24 @@
     - Manhattan
     - city
     - cities
+- name: nyc--manhattan--01
+  friendly_name: NYC Manhattan 01
+  aliases:
+    - NYC Manhattan 01
+    - NYC Manhattan
+    - NYC
+    - Manhattan
+    - city
+    - cities
+- name: nyc--manhattan--02
+  friendly_name: NYC Manhattan 02
+  aliases:
+    - NYC Manhattan alt
+    - NYC Manhattan
+    - NYC
+    - Manhattan
+    - city
+    - cities
 - name: nyc--manhattan--alt
   friendly_name: NYC Manhattan 02
   aliases:
@@ -2628,6 +2687,16 @@
     - NYC Manhattan
     - NYC
     - Manhattan
+    - city
+    - cities
+- name: nyc--statue-of-liberty
+  friendly_name: NYC Statue of Liberty
+  aliases:
+    - NYC Statue of Liberty
+    - NYC
+    - Statue
+    - of
+    - Liberty
     - city
     - cities
 - name: office
@@ -2680,6 +2749,46 @@
     - clip
     - attachment
     - attach
+- name: paris--arc-de-triomphe
+  friendly_name: Paris Arc de Triomphe
+  aliases:
+    - Paris Arc de Triomphe
+    - Paris
+    - France
+    - Arc
+    - de
+    - Triomphe
+    - city
+    - cities
+- name: paris--louvre
+  friendly_name: Paris Louvre
+  aliases:
+    - Paris Louvre
+    - Paris
+    - France
+    - Louvre
+    - city
+    - cities
+- name: paris--notre-dame
+  friendly_name: Paris Notre Dame
+  aliases:
+    - Paris Notre Dame
+    - Paris
+    - France
+    - Notre
+    - Dame
+    - city
+    - cities
+- name: paris--pompidou-center
+  friendly_name: Paris Pompidou Center
+  aliases:
+    - Paris Pompidou Center
+    - Paris
+    - France
+    - Pompidou
+    - Center
+    - city
+    - cities
 - name: parliament
   friendly_name: Parliament
   aliases:
@@ -2848,6 +2957,26 @@
     - industry
     - electricity
     - tower
+- name: prague
+  friendly_name: Prague
+  aliases:
+    - Prague
+    - Czech Republic
+    - Czechia
+    - city
+    - cities
+- name: prague--charles-bridge-tower
+  friendly_name: Prague Charles Bridge Tower
+  aliases:
+    - Prague Charles Bridge Tower
+    - Prague
+    - Czech Republic
+    - Czechia
+    - Charles
+    - Bridge
+    - Tower
+    - city
+    - cities
 - name: pregnant
   friendly_name: Pregnant
   aliases:
@@ -2973,6 +3102,13 @@
     - rainy
     - precipitation
     - weather
+- name: raleigh-nc
+  friendly_name: Raleigh NC
+  aliases:
+    - Raleigh NC
+    - Raleigh
+    - city
+    - cities
 - name: rank
   friendly_name: Rank
   aliases:
@@ -3407,6 +3543,13 @@
     - healthcare
     - medicine
     - medical
+- name: stockholm
+  friendly_name: Stockholm
+  aliases:
+    - Stockholm
+    - Sweden
+    - city
+    - cities
 - name: strategy
   friendly_name: Strategy
   aliases:
@@ -3577,7 +3720,7 @@
     - teammates
     - team
     - people
-- name: tel--aviv
+- name: tel-aviv
   friendly_name: Tel Aviv
   aliases:
     - Tel Aviv
@@ -3659,7 +3802,7 @@
   aliases:
     - toggle
     - controls
-- name: tokyo--cherry--blossom
+- name: tokyo--cherry-blossom
   friendly_name: Tokyo cherry blossom
   aliases:
     - Tokyo cherry blossom
