@@ -48,17 +48,13 @@ export const breadcrumbWithOverflowMenu = () => (
     <BreadcrumbItem href="#">Breadcrumb 2</BreadcrumbItem>
     <BreadcrumbItem>
       <OverflowMenu>
-        <OverflowMenuItem itemText="Option 1" id="two" />
-        <OverflowMenuItem
-          itemText="Option 2 is an example of a really long string and how we recommend handling this"
-          requireTitle
-        />
-        <OverflowMenuItem itemText="Option 3" />
-        <OverflowMenuItem itemText="Option 4" />
-        <OverflowMenuItem itemText="Danger option" hasDivider isDelete />
+        <OverflowMenuItem itemText="Breadcrumb 3" />
+        <OverflowMenuItem itemText="Breadcrumb 4" />
+        <OverflowMenuItem itemText="Breadcrumb 5" />
+        <OverflowMenuItem itemText="Breadcrumb 6" />
       </OverflowMenu>
     </BreadcrumbItem>
-    <BreadcrumbItem href="#">Breadcrumb 3</BreadcrumbItem>
+    <BreadcrumbItem href="#">Breadcrumb 7</BreadcrumbItem>
   </Breadcrumb>
 );
 
