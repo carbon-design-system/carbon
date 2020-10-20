@@ -688,9 +688,9 @@ categories:
       - train
   - name: Watson
     members:
-      - alchemy--language--alphabet--a--expanded
       - alchemy--data--news
       - alchemy--language
+      - alchemy--language--alphabet--a--expanded
       - alchemy--vision
       - analyzes--data
       - concept--expansion
@@ -707,6 +707,7 @@ categories:
       - language--02
       - language--03
       - language--04
+      - language--05
       - language--translation
       - language--translation--alphabet--a--expanded
       - natural--language--classifier
@@ -724,7 +725,7 @@ categories:
       - vision
       - visual--insights
       - visual--recognition
-      - watson--avatar
+      - watson--logo
   - name: Weather
     members:
       - cloudy
