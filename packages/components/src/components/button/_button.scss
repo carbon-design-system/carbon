@@ -18,57 +18,6 @@
 /// @access private
 /// @group button
 @mixin button {
-  // button set styles
-  .#{$prefix}--btn-set {
-    display: flex;
-  }
-
-  .#{$prefix}--btn-set--stacked {
-    flex-direction: column;
-  }
-
-  .#{$prefix}--btn-set .#{$prefix}--btn {
-    width: 100%;
-    // 196px from design kit
-    max-width: rem(196px);
-
-    &:not(:focus) {
-      box-shadow: rem(-1px) 0 0 0 $button-separator;
-    }
-
-    &:first-of-type:not(:focus) {
-      box-shadow: inherit;
-    }
-  }
-
-  .#{$prefix}--btn-set .#{$prefix}--btn:focus + .#{$prefix}--btn {
-    box-shadow: inherit;
-  }
-
-  .#{$prefix}--btn-set--stacked .#{$prefix}--btn:not(:focus) {
-    box-shadow: 0 rem(-1px) 0 0 $button-separator;
-  }
-
-  .#{$prefix}--btn-set--stacked .#{$prefix}--btn:first-of-type:not(:focus) {
-    box-shadow: inherit;
-  }
-
-  .#{$prefix}--btn-set .#{$prefix}--btn.#{$prefix}--btn--disabled {
-    box-shadow: rem(-1px) 0 0 0 $disabled-03;
-
-    &:first-of-type {
-      box-shadow: none;
-    }
-  }
-
-  .#{$prefix}--btn-set--stacked .#{$prefix}--btn.#{$prefix}--btn--disabled {
-    box-shadow: 0 rem(-1px) 0 0 $disabled-03;
-
-    &:first-of-type {
-      box-shadow: none;
-    }
-  }
-
   .#{$prefix}--btn {
     @include button-base;
   }
@@ -130,6 +79,7 @@
     }
 
     &:active {
+      background-color: $active-tertiary;
       border-color: transparent;
     }
 
@@ -139,7 +89,7 @@
     &.#{$prefix}--btn--disabled,
     &.#{$prefix}--btn--disabled:hover,
     &.#{$prefix}--btn--disabled:focus {
-      color: $disabled;
+      color: $disabled-03;
       background: transparent;
       outline: none;
     }
@@ -177,7 +127,7 @@
     &.#{$prefix}--btn--disabled,
     &.#{$prefix}--btn--disabled:hover,
     &.#{$prefix}--btn--disabled:focus {
-      color: $disabled;
+      color: $disabled-03;
       background: transparent;
       border-color: transparent;
       outline: none;
@@ -221,9 +171,20 @@
     }
   }
 
+  .#{$prefix}--btn.#{$prefix}--btn--icon-only.#{$prefix}--tooltip__trigger:active:not([disabled]) {
+    border-color: transparent;
+  }
+
   .#{$prefix}--btn.#{$prefix}--btn--icon-only.#{$prefix}--tooltip__trigger:focus
     svg {
     outline-color: transparent;
+  }
+
+  .#{$prefix}--btn.#{$prefix}--btn--icon-only.#{$prefix}--tooltip__trigger[disabled]:hover,
+  .#{$prefix}--btn.#{$prefix}--btn--icon-only.#{$prefix}--tooltip__trigger[disabled]:focus,
+  .#{$prefix}--btn.#{$prefix}--btn--icon-only.#{$prefix}--tooltip__trigger[disabled]:active {
+    cursor: not-allowed;
+    fill: $disabled-03;
   }
 
   .#{$prefix}--btn--icon-only--top {
@@ -282,7 +243,7 @@
     .#{$prefix}--btn__icon,
   .#{$prefix}--btn.#{$prefix}--btn--icon-only.#{$prefix}--btn--ghost[disabled]:hover
     .#{$prefix}--btn__icon {
-    fill: $disabled-02;
+    fill: $disabled-03;
 
     // Windows, Firefox HCM Fix
     @media screen and (-ms-high-contrast: active),
@@ -338,6 +299,57 @@
     @include skeleton;
 
     width: rem(150px);
+  }
+
+  // button set styles
+  .#{$prefix}--btn-set {
+    display: flex;
+  }
+
+  .#{$prefix}--btn-set--stacked {
+    flex-direction: column;
+  }
+
+  .#{$prefix}--btn-set .#{$prefix}--btn {
+    width: 100%;
+    // 196px from design kit
+    max-width: rem(196px);
+
+    &:not(:focus) {
+      box-shadow: rem(-1px) 0 0 0 $button-separator;
+    }
+
+    &:first-of-type:not(:focus) {
+      box-shadow: inherit;
+    }
+  }
+
+  .#{$prefix}--btn-set .#{$prefix}--btn:focus + .#{$prefix}--btn {
+    box-shadow: inherit;
+  }
+
+  .#{$prefix}--btn-set--stacked .#{$prefix}--btn:not(:focus) {
+    box-shadow: 0 rem(-1px) 0 0 $button-separator;
+  }
+
+  .#{$prefix}--btn-set--stacked .#{$prefix}--btn:first-of-type:not(:focus) {
+    box-shadow: inherit;
+  }
+
+  .#{$prefix}--btn-set .#{$prefix}--btn.#{$prefix}--btn--disabled {
+    box-shadow: rem(-1px) 0 0 0 $disabled-03;
+
+    &:first-of-type {
+      box-shadow: none;
+    }
+  }
+
+  .#{$prefix}--btn-set--stacked .#{$prefix}--btn.#{$prefix}--btn--disabled {
+    box-shadow: 0 rem(-1px) 0 0 $disabled-03;
+
+    &:first-of-type {
+      box-shadow: none;
+    }
   }
 }
 
