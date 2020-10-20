@@ -570,15 +570,53 @@ categories:
       - trousers
   - name: Security
     members:
+      - advanced--fraud--protection
+      - advanced--threats
+      - anonymous--users
+      - application--security
+      - assets
+      - bug--virus--malware
+      - build--leadership--and--culture
+      - collaboration
+      - continuous--security
+      - data--security
+      - detect--and--stop--advancing--threats
+      - digital--id
+      - digital--trust
+      - endpoint--protection
       - firewall
+      - get--ahead--of--risk--and--compliance
+      - govern--users--and--identities
+      - high--risk--users
+      - identity--trust--assessment
       - lock
+      - lock--01
+      - lock--02
       - lock--alt
       - locked--network
+      - locked--network--01
+      - locked--network--02
       - locked--network--alt
+      - master--threat--hunting
+      - network--protection
+      - protect--critical--assets
+      - secure--hybrid--cloud
       - secure--profile
       - security
+      - security--as--a--service
+      - security--hygiene
+      - security--intelligence
       - security--shield
+      - strategy--and--risk
+      - threat--management
+      - tool--overload
+      - trusted--user
+      - unauthorized--user--access
+      - under--utilized--security
+      - unify--endpoint--management
       - unlock
+      - unlock--01
+      - unlock--02
       - unlock--alt
   - name: Status
     members:

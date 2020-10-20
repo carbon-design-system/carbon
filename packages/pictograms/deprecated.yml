@@ -65,3 +65,19 @@ deprecated:
   - name: transform
     reason:
       The transform pictogram has been deprecated in favor of transform--02
+  - name: lock
+    reason: The lock pictogram has been deprecated in favor of lock--01
+  - name: lock--alt
+    reason: The lock--alt pictogram has been deprecated in favor of lock--02
+  - name: locked--network
+    reason:
+      The locked--network pictogram has been deprecated in favor of
+      locked--network--01
+  - name: locked--network--alt
+    reason:
+      The locked--network--alt pictogram has been deprecated in favor of
+      locked--network--02
+  - name: unlock
+    reason: The unlock pictogram has been deprecated in favor of unlock--01
+  - name: unlock--alt
+    reason: The unlock--alt pictogram has been deprecated in favor of unlock--02
