@@ -327,15 +327,20 @@ categories:
       - commercial--financing--01
       - commercial--financing--02
       - finance--strategy
+      - financial--consultant
+      - financial--gain
       - financial--networks
+      - financial--news
       - global--analytics
       - global--assets-and-recovery--01
       - global--assets-and-recovery--02
       - global--currency
       - global--exchange
+      - global--finance--euro
       - global--finance--network
-      - global--markets--bar
+      - global--finance--sterling
       - global--markets
+      - global--markets--bar
       - global--security
       - global--strategy
       - optimize--cash-flow--01
@@ -574,11 +579,6 @@ categories:
       - warning--alt
   - name: Strategy
     members:
-      - financial--consultant
-      - financial--gain
-      - financial--news
-      - global--finance--euro
-      - global--finance--sterling
       - innovate
       - presentation
       - presenter
