@@ -504,6 +504,9 @@ categories:
       - networking--06
       - private--network
       - private--network--01
+      - private--network--02
+      - private--network--03
+      - private--network--04
       - private--network--alt
       - private--network--alt--01
       - reset--hybrid--cloud
@@ -512,6 +515,7 @@ categories:
       - transactional--blockchain
       - transactional--trust
       - transform
+      - transform--02
   - name: People
     members:
       - advocate

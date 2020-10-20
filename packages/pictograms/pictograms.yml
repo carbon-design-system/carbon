@@ -3054,9 +3054,30 @@
     - private
     - network
 - name: private--network--01
+  friendly_name: Private network 01
+  aliases:
+    - private network 01
+    - private network
+    - private
+    - network
+- name: private--network--02
   friendly_name: Private network 02
   aliases:
     - private network 02
+    - private network
+    - private
+    - network
+- name: private--network--03
+  friendly_name: Private network 03
+  aliases:
+    - private network 03
+    - private network
+    - private
+    - network
+- name: private--network--04
+  friendly_name: Private network 04
+  aliases:
+    - private network 04
     - private network
     - private
     - network
@@ -3977,6 +3998,13 @@
     - transform
     - iot
     - internet of things
+- name: transform--02
+  friendly_name: Transform 02
+  aliases:
+    - transform 02
+    - transform
+    - networking
+    - network
 - name: transparency--01
   friendly_name: Transparency 01
   aliases:
