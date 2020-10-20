@@ -410,7 +410,6 @@ categories:
       - steel
       - telecom
       - tractor
-      - weather
       - weather--01
       - wheat
       - wind--power
@@ -753,4 +752,5 @@ categories:
       - temperature--low
       - tornado
       - weather
+      - weather--02
       - windy

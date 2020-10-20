@@ -97,3 +97,5 @@ deprecated:
   - name: ibm--watson
     reason:
       The ibm--watson pictogram has been deprecated in favor of watson--logo
+  - name: weather
+    reason: The weather pictogram has been deprecated in favor of weather--02

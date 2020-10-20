@@ -4060,6 +4060,12 @@
   aliases:
     - time
     - clock
+- name: time--lapse
+  friendly_name: Time lapse
+  aliases:
+    - time lapse
+    - lapse
+    - time
 - name: time--plot
   friendly_name: Time plot
   aliases:
@@ -4067,12 +4073,6 @@
     - data analytics
     - data
     - analytics
-- name: time--lapse
-  friendly_name: Time lapse
-  aliases:
-    - time lapse
-    - lapse
-    - time
 - name: toggle
   friendly_name: Toggle
   aliases:
@@ -4548,6 +4548,11 @@
   friendly_name: Weather 01
   aliases:
     - weather 01
+    - weather
+- name: weather--02
+  friendly_name: Weather 02
+  aliases:
+    - weather 02
     - weather
 - name: web--developer
   friendly_name: Web developer
