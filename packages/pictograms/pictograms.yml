@@ -4223,6 +4223,11 @@
   friendly_name: Weather
   aliases:
     - weather
+- name: weather--01
+  friendly_name: Weather 01
+  aliases:
+    - weather 01
+    - weather
 - name: web--developer
   friendly_name: Web developer
   aliases:
