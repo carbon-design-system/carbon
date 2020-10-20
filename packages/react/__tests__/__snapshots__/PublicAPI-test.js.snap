@@ -2214,6 +2214,7 @@ Map {
       "direction": "bottom",
       "disabled": false,
       "helperText": "",
+      "isOptional": false,
       "itemToElement": null,
       "itemToString": [Function],
       "light": false,
@@ -2279,6 +2280,9 @@ Map {
       },
       "invalidText": Object {
         "type": "string",
+      },
+      "isOptional": Object {
+        "type": "bool",
       },
       "itemToElement": Object {
         "type": "func",
