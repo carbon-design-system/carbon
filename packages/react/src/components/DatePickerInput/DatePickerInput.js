@@ -31,9 +31,14 @@ const formatPlaceholder = (placeholder, locale) => {
       new Date()
     );
   } catch (err) {
-    console.log(err);
-    formatObj = new Intl.DateTimeFormat('en').formatToParts(new Date());
+    try {
+      console.log(err);
+      formatObj = new Intl.DateTimeFormat('en').formatToParts(new Date());
+    } catch (err) {
+      return null;
+    }
   }
+
   return formatObj
     .map((obj) => {
       switch (obj.type) {
