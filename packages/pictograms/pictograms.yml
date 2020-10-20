@@ -1421,7 +1421,7 @@
   aliases:
     - escalator up
     - escalator
-- name: europe-africa
+- name: europe--africa
   friendly_name: Europe Africa
   aliases:
     - europe
