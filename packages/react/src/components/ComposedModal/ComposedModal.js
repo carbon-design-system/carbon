@@ -150,11 +150,14 @@ export default class ComposedModal extends Component {
     } else if (prevState.open && !this.state.open) {
       this.beingOpen = false;
     }
-    toggleClass(
-      document.body,
-      `${prefix}--body--with-modal-open`,
-      this.state.open
-    );
+
+    if (prevState.open !== this.state.open) {
+      toggleClass(
+        document.body,
+        `${prefix}--body--with-modal-open`,
+        this.state.open
+      );
+    }
   }
 
   focusButton = (focusContainerElement) => {
