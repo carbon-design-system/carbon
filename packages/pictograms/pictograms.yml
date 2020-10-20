@@ -1148,13 +1148,13 @@
     - truck
     - delivery
     - manufacturing
-- name: design--and--development--01
+- name: design-and-development--01
   friendly_name: Design and development 01
   aliases:
     - design and development 01
     - design
     - development
-- name: design--and--development--02
+- name: design-and-development--02
   friendly_name: Design and development 02
   aliases:
     - design and development 02
@@ -1537,6 +1537,13 @@
     - plumbing
 - name: feedback
   friendly_name: Feedback
+  aliases:
+    - feedback
+    - response
+    - iterate
+    - results
+- name: feedback--01
+  friendly_name: Feedback 01
   aliases:
     - feedback
     - response
