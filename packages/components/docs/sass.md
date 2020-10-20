@@ -8213,6 +8213,7 @@ $disabled-01: if(
   - [file-uploader [mixin]](#file-uploader-mixin)
   - [slider [mixin]](#slider-mixin)
   - [tags [mixin]](#tags-mixin)
+  - [text-area [mixin]](#text-area-mixin)
   - [text-input [mixin]](#text-input-mixin)
   - [toggle [mixin]](#toggle-mixin)
   - [treeview [mixin]](#treeview-mixin)
@@ -24744,7 +24745,7 @@ Text area styles
   //-----------------------------
   .#{$prefix}--text-area:disabled {
     color: $disabled-02;
-    background-color: $disabled-background-color;
+    background-color: $disabled-01;
     border-bottom: 1px solid transparent;
     outline: none;
     cursor: not-allowed;
@@ -24785,6 +24786,7 @@ Text area styles
   - [carbon--spacing-04 [variable]](#carbon--spacing-04-variable)
   - [support-01 [variable]](#support-01-variable)
   - [disabled-02 [variable]](#disabled-02-variable)
+  - [disabled-01 [variable]](#disabled-01-variable)
 
 ## text-input
 
