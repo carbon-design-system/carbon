@@ -50,11 +50,9 @@ export const breadcrumbWithOverflowMenu = () => (
       <OverflowMenu>
         <OverflowMenuItem itemText="Breadcrumb 3" />
         <OverflowMenuItem itemText="Breadcrumb 4" />
-        <OverflowMenuItem itemText="Breadcrumb 5" />
-        <OverflowMenuItem itemText="Breadcrumb 6" />
       </OverflowMenu>
     </BreadcrumbItem>
-    <BreadcrumbItem href="#">Breadcrumb 7</BreadcrumbItem>
+    <BreadcrumbItem href="#">Breadcrumb 5</BreadcrumbItem>
   </Breadcrumb>
 );
 

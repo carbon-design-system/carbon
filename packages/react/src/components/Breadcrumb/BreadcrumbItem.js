@@ -42,7 +42,7 @@ const BreadcrumbItem = React.forwardRef(function BreadcrumbItem(
       <li className={className} {...rest}>
         {React.cloneElement(children, {
           menuOptionsClass: `${prefix}--breadcrumb-menu-options`,
-          menuOffset: { top: 10, left: 60 },
+          menuOffset: { top: 10, left: 59 },
         })}
       </li>
     );

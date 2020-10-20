@@ -92,7 +92,7 @@
     &::after {
       position: absolute;
       top: calc(100% - 3px);
-      width: 1rem;
+      width: rem(12px);
       height: 1px;
       background: $hover-primary-text;
       opacity: 0;
@@ -124,10 +124,10 @@
     fill: $hover-primary-text;
   }
 
-  $caret-size: rem(6.875px);
+  $caret-size: rem(7px);
   .#{$prefix}--breadcrumb-menu-options.#{$prefix}--overflow-menu-options::after {
-    top: calc(#{$caret-size * (-1)});
-    left: rem(13px);
+    top: -$caret-size;
+    left: $caret-size * 2;
     width: 0;
     height: 0;
     margin: 0 auto;
