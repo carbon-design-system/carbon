@@ -1956,10 +1956,9 @@
     - headphones
     - electronics
 - name: heart
-  friendly_name: Love
+  friendly_name: heart
   aliases:
     - heart
-    - love
     - like
 - name: heart--health
   friendly_name: Heart health
@@ -2528,7 +2527,7 @@
   aliases:
     - monitored item on conveyor
     - conveyor
-- name: mortar--and--pestle
+- name: mortar-and-pestle
   friendly_name: Mortar and pestle
   aliases:
     - mortar and pestle
