@@ -59,12 +59,8 @@ const formatDate = (dateFormat, locale) => {
       new Date()
     );
   } catch (err) {
-    try {
-      console.log(err);
-      formatObj = new Intl.DateTimeFormat('en').formatToParts(new Date());
-    } catch (err) {
-      return 'm/d/Y';
-    }
+    console.log(err);
+    return 'm/d/Y';
   }
   return formatObj
     .map((obj) => {
