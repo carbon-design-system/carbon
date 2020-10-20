@@ -155,6 +155,14 @@ export const Danger = () => {
   return <Button kind="danger">Button</Button>;
 };
 
+export const DangerTertiary = () => {
+  return <Button kind="danger-tertiary">Button</Button>;
+};
+
+export const DangerGhost = () => {
+  return <Button kind="danger-ghost">Button</Button>;
+};
+
 export const Ghost = () => {
   return <Button kind="ghost">Button</Button>;
 };
