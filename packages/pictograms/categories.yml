@@ -622,6 +622,8 @@ categories:
     members:
       - question
       - warning
+      - warning--01
+      - warning--02
       - warning--alt
   - name: Strategy
     members:

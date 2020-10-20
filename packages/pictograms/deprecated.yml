@@ -81,3 +81,8 @@ deprecated:
     reason: The unlock pictogram has been deprecated in favor of unlock--01
   - name: unlock--alt
     reason: The unlock--alt pictogram has been deprecated in favor of unlock--02
+  - name: warning
+    reason: The warning pictogram has been deprecated in favor of warning--01
+  - name: warning--alt
+    reason:
+      The warning--alt pictogram has been deprecated in favor of warning--02
