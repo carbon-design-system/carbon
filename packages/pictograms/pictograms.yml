@@ -379,9 +379,10 @@
     - transportation
     - travel
 - name: cafe
-  friendly_name: Cafe
+  friendly_name: Café
   aliases:
     - cafe
+    - café
     - coffee
     - tea
     - cup
