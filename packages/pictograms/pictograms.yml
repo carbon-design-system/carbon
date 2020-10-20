@@ -4061,7 +4061,7 @@
     - data analytics
     - data
     - analytics
-- name: time-lapse
+- name: time--lapse
   friendly_name: Time lapse
   aliases:
     - time lapse

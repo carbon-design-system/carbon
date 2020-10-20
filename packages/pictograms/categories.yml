@@ -672,7 +672,7 @@ categories:
       - meter
       - speedometer
       - time
-      - time-lapse
+      - time--lapse
   - name: Transportation
     members:
       - airplane
