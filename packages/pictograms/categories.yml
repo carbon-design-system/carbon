@@ -379,10 +379,13 @@ categories:
       - bee
       - enterprise--design--thinking
       - enterprise--design--thinking--alt
+      - enterprise--design--thinking--01
+      - enterprise--design--thinking--02
       - eye
       - ibm--ix
       - ibm--z
       - progress
+      - world--community--grid
   - name: Industry
     members:
       - agriculture

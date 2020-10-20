@@ -1371,6 +1371,22 @@
     - design thinking
     - design
     - EDT
+- name: enterprise--design--thinking--01
+  friendly_name: Enterprise design thinking 01
+  aliases:
+    - enterprise design thinking 01
+    - enterprise design thinking
+    - design thinking
+    - design
+    - EDT
+- name: enterprise--design--thinking--02
+  friendly_name: Enterprise design thinking 02
+  aliases:
+    - enterprise design thinking 02
+    - enterprise design thinking
+    - design thinking
+    - design
+    - EDT
 - name: enterprise--design--thinking--alt
   friendly_name: Enterprise design thinking 02
   aliases:
@@ -3157,13 +3173,6 @@
   aliases:
     - refresh
     - update
-- name: relationship--extraction
-  friendly_name: Relationship extraction
-  aliases:
-    - relationship extraction
-    - relationship
-    - watson
-    - AI
 - name: relationship--diagram
   friendly_name: Relationship diagram
   aliases:
@@ -3173,6 +3182,13 @@
     - data
     - analytics
     - chart
+- name: relationship--extraction
+  friendly_name: Relationship extraction
+  aliases:
+    - relationship extraction
+    - relationship
+    - watson
+    - AI
 - name: renew
   friendly_name: Renew
   aliases:
@@ -4285,6 +4301,13 @@
     - data analytics
     - data
     - analytics
+- name: world--community--grid
+  friendly_name: World Community Grid
+  aliases:
+    - World Community Grid
+    - world
+    - community
+    - grid
 - name: wrecking--ball
   friendly_name: Wrecking ball
   aliases:
