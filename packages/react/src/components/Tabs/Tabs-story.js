@@ -35,7 +35,6 @@ const props = {
     className: 'some-class',
     light: boolean('Light variant (light)', false),
     selected: number('The index of the selected tab (selected in <Tabs>)', 1),
-    role: text('ARIA role (role in <Tabs>)', 'navigation'),
     // Disabling action logger for `<Tabs onClick onKeyDown>` for now given it seems to be significantly slowing down Storybook
     // onClick: action('onClick'),
     // onKeyDown: action('onKeyDown'),
@@ -53,7 +52,6 @@ const props = {
   tab: () => ({
     disabled: boolean('Disabled (disabled in <Tab>)', false),
     href: text('The href for tab (href in <Tab>)', '#'),
-    role: text('ARIA role (role in <Tab>)', 'presentation'),
     tabIndex: number('Tab index (tabIndex in <Tab>)', 0),
     onClick: action('onClick'),
     onKeyDown: action('onKeyDown'),

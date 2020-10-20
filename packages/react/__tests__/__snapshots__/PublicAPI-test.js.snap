@@ -22,6 +22,18 @@ Map {
       "className": Object {
         "type": "string",
       },
+      "disabled": Object {
+        "type": "bool",
+      },
+      "size": Object {
+        "args": Array [
+          Array [
+            "sm",
+            "xl",
+          ],
+        ],
+        "type": "oneOf",
+      },
     },
   },
   "AccordionItem" => Object {
@@ -31,6 +43,9 @@ Map {
       },
       "className": Object {
         "type": "string",
+      },
+      "disabled": Object {
+        "type": "bool",
       },
       "iconDescription": [Function],
       "onClick": Object {
@@ -285,6 +300,7 @@ Map {
       "showLessText": "Show less",
       "showMoreText": "Show more",
       "type": "single",
+      "wrapText": false,
     },
     "propTypes": Object {
       "ariaLabel": Object {
@@ -329,6 +345,9 @@ Map {
           ],
         ],
         "type": "oneOf",
+      },
+      "wrapText": Object {
+        "type": "bool",
       },
     },
   },
@@ -749,6 +768,7 @@ Map {
   },
   "ContentSwitcher" => Object {
     "defaultProps": Object {
+      "onChange": [Function],
       "selectedIndex": 0,
       "selectionMode": "automatic",
     },
@@ -774,6 +794,15 @@ Map {
           Array [
             "automatic",
             "manual",
+          ],
+        ],
+        "type": "oneOf",
+      },
+      "size": Object {
+        "args": Array [
+          Array [
+            "sm",
+            "xl",
           ],
         ],
         "type": "oneOf",
@@ -1970,6 +1999,9 @@ Map {
       "short": false,
     },
     "propTypes": Object {
+      "allowInput": Object {
+        "type": "bool",
+      },
       "appendTo": Object {
         "type": "object",
       },
@@ -2314,6 +2346,12 @@ Map {
           ],
         ],
         "type": "oneOf",
+      },
+      "warn": Object {
+        "type": "bool",
+      },
+      "warnText": Object {
+        "type": "string",
       },
     },
     "render": [Function],
@@ -3515,6 +3553,12 @@ Map {
         "useTitleInItem": Object {
           "type": "bool",
         },
+        "warn": Object {
+          "type": "bool",
+        },
+        "warnText": Object {
+          "type": "string",
+        },
       },
     },
     "defaultProps": Object {
@@ -3748,6 +3792,12 @@ Map {
       },
       "useTitleInItem": Object {
         "type": "bool",
+      },
+      "warn": Object {
+        "type": "bool",
+      },
+      "warnText": Object {
+        "type": "string",
       },
     },
     "render": [Function],
@@ -4935,7 +4985,6 @@ Map {
   },
   "Tabs" => Object {
     "defaultProps": Object {
-      "role": "navigation",
       "selected": 0,
       "selectionMode": "automatic",
       "type": "default",
@@ -4961,10 +5010,6 @@ Map {
       },
       "onSelectionChange": Object {
         "type": "func",
-      },
-      "role": Object {
-        "isRequired": true,
-        "type": "string",
       },
       "selected": Object {
         "type": "number",

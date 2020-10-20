@@ -87,8 +87,18 @@ const props = {
   onHeadingClick: action('onHeadingClick'),
 };
 
+const sizes = {
+  'Extra large size (xl)': 'xl',
+  'Default size': undefined,
+  'Small size (sm)': 'sm',
+};
+
 export const playground = () => (
   <Accordion
+    disabled={boolean('Disable entire Accordion (disabled)', false)}
+    size={
+      select('Accordion heading size (size)', sizes, undefined) || undefined
+    }
     align={select(
       'Accordion heading alignment (align)',
       ['start', 'end'],
@@ -113,7 +123,10 @@ export const playground = () => (
         commodo consequat.
       </p>
     </AccordionItem>
-    <AccordionItem title="Section 3 title" {...props}>
+    <AccordionItem
+      title="Section 3 title"
+      {...props}
+      disabled={boolean('Disable Section 3 (disabled)', true)}>
       <Button>This is a button.</Button>
     </AccordionItem>
     <AccordionItem

@@ -31,6 +31,7 @@ function CodeSnippet({
   showMoreText,
   showLessText,
   hideCopyButton,
+  wrapText,
   ...rest
 }) {
   const [expandedCode, setExpandedCode] = useState(false);
@@ -54,6 +55,7 @@ function CodeSnippet({
     [`${prefix}--snippet--expand`]: expandedCode,
     [`${prefix}--snippet--light`]: light,
     [`${prefix}--snippet--no-copy`]: hideCopyButton,
+    [`${prefix}--snippet--wraptext`]: wrapText,
   });
 
   const expandCodeBtnText = expandedCode ? showLessText : showMoreText;
@@ -185,12 +187,18 @@ CodeSnippet.propTypes = {
    * Provide the type of Code Snippet
    */
   type: PropTypes.oneOf(['single', 'inline', 'multi']),
+
+  /**
+   * Specify whether or not to wrap the text.
+   */
+  wrapText: PropTypes.bool,
 };
 
 CodeSnippet.defaultProps = {
   type: 'single',
   showMoreText: 'Show more',
   showLessText: 'Show less',
+  wrapText: false,
 };
 
 export default CodeSnippet;
