@@ -2439,7 +2439,6 @@ exports[`DataTable should render 1`] = `
                       }
                     }
                     selectorPrimaryFocus="[data-overflow-menu-primary-focus]"
-                    tabIndex={0}
                     title="Settings"
                   >
                     <ClickListener
@@ -2454,14 +2453,12 @@ exports[`DataTable should render 1`] = `
                         onClose={[Function]}
                         onKeyDown={[Function]}
                         open={false}
-                        tabIndex={0}
                         title="Settings"
                         type="button"
                       >
                         <ForwardRef(Settings16)
                           aria-label="Settings"
                           className="bx--overflow-menu__icon"
-                          focusable="false"
                           onClick={[Function]}
                           onKeyDown={[Function]}
                         >
@@ -2469,7 +2466,6 @@ exports[`DataTable should render 1`] = `
                             aria-label="Settings"
                             className="bx--overflow-menu__icon"
                             fill="currentColor"
-                            focusable="false"
                             height={16}
                             onClick={[Function]}
                             onKeyDown={[Function]}
@@ -3450,7 +3446,6 @@ exports[`DataTable sticky header should render 1`] = `
                       }
                     }
                     selectorPrimaryFocus="[data-overflow-menu-primary-focus]"
-                    tabIndex={0}
                     title="Settings"
                   >
                     <ClickListener
@@ -3465,14 +3460,12 @@ exports[`DataTable sticky header should render 1`] = `
                         onClose={[Function]}
                         onKeyDown={[Function]}
                         open={false}
-                        tabIndex={0}
                         title="Settings"
                         type="button"
                       >
                         <ForwardRef(Settings16)
                           aria-label="Settings"
                           className="bx--overflow-menu__icon"
-                          focusable="false"
                           onClick={[Function]}
                           onKeyDown={[Function]}
                         >
@@ -3480,7 +3473,6 @@ exports[`DataTable sticky header should render 1`] = `
                             aria-label="Settings"
                             className="bx--overflow-menu__icon"
                             fill="currentColor"
-                            focusable="false"
                             height={16}
                             onClick={[Function]}
                             onKeyDown={[Function]}
