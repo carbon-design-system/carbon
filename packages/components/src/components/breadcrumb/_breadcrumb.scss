@@ -113,8 +113,7 @@
 
   .#{$prefix}--breadcrumb-item .#{$prefix}--overflow-menu__icon {
     position: relative;
-    margin-top: rem(8px);
-    transform: rotate(90deg);
+    transform: translateY(4px);
     fill: $link-01;
   }
 
