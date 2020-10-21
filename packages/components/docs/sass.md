@@ -21270,6 +21270,13 @@ Overflow menu styles
 
     &:focus {
       @include focus-outline('outline');
+
+      // Windows, Firefox HCM Fix
+      @media screen and (-ms-high-contrast: active),
+        screen and (prefers-contrast) {
+        outline: 3px solid transparent;
+        outline-offset: -3px;
+      }
     }
 
     &:hover {
@@ -21455,6 +21462,13 @@ Overflow menu styles
 
     &:focus {
       @include focus-outline('outline');
+
+      // Windows, Firefox HCM Fix
+      @media screen and (-ms-high-contrast: active),
+        screen and (prefers-contrast) {
+        outline: 3px solid transparent;
+        outline-offset: -3px;
+      }
     }
 
     &::-moz-focus-inner {
@@ -25395,6 +25409,18 @@ Time picker styles
       border-bottom: 1px solid transparent;
       cursor: not-allowed;
     }
+  }
+
+  .#{$prefix}--time-picker--sm .#{$prefix}--select-input,
+  .#{$prefix}--time-picker--sm .#{$prefix}--time-picker__input-field {
+    height: rem(32px);
+    max-height: rem(32px);
+  }
+
+  .#{$prefix}--time-picker--xl .#{$prefix}--select-input,
+  .#{$prefix}--time-picker--xl .#{$prefix}--time-picker__input-field {
+    height: rem(48px);
+    max-height: rem(48px);
   }
 }
 ```
