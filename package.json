@@ -7,12 +7,14 @@
   "engines": {
     "node": "12.x"
   },
-  "workspaces": [
-    "actions/*",
-    "codemods",
-    "config/*",
-    "packages/*"
-  ],
+  "workspaces": {
+    "packages": [
+      "actions/*",
+      "codemods",
+      "config/*",
+      "packages/*"
+    ]
+  },
   "scripts": {
     "build": "lerna run build --stream --prefix --npm-client yarn",
     "ci-check": "carbon-cli ci-check",
