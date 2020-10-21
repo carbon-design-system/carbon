@@ -6671,6 +6671,7 @@ $ui-background: if(
 - **Type**: `{undefined}`
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
+  - [button-theme [mixin]](#button-theme-mixin)
   - [tabs [mixin]](#tabs-mixin)
   - [tooltip [mixin]](#tooltip-mixin)
 
@@ -6740,7 +6741,6 @@ $ui-02: if(
 - **Type**: `{undefined}`
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
-  - [button-theme [mixin]](#button-theme-mixin)
   - [snippet [mixin]](#snippet-mixin)
   - [content-switcher [mixin]](#content-switcher-mixin)
   - [number-input [mixin]](#number-input-mixin)
@@ -6817,7 +6817,6 @@ $ui-04: if(
 - **Type**: `{undefined}`
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
-  - [button-theme [mixin]](#button-theme-mixin)
   - [date-picker [mixin]](#date-picker-mixin)
   - [dropdown [mixin]](#dropdown-mixin)
   - [file-uploader [mixin]](#file-uploader-mixin)
@@ -8214,6 +8213,7 @@ $disabled-01: if(
   - [file-uploader [mixin]](#file-uploader-mixin)
   - [slider [mixin]](#slider-mixin)
   - [tags [mixin]](#tags-mixin)
+  - [text-area [mixin]](#text-area-mixin)
   - [text-input [mixin]](#text-input-mixin)
   - [toggle [mixin]](#toggle-mixin)
   - [treeview [mixin]](#treeview-mixin)
@@ -8244,9 +8244,7 @@ $disabled-02: if(
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
   - [accordion [mixin]](#accordion-mixin)
-  - [button [mixin]](#button-mixin)
   - [button-base [mixin]](#button-base-mixin)
-  - [button-theme [mixin]](#button-theme-mixin)
   - [checkbox [mixin]](#checkbox-mixin)
   - [content-switcher [mixin]](#content-switcher-mixin)
   - [date-picker [mixin]](#date-picker-mixin)
@@ -13937,57 +13935,6 @@ Button styles
 
 ```scss
 @mixin button() {
-  // button set styles
-  .#{$prefix}--btn-set {
-    display: flex;
-  }
-
-  .#{$prefix}--btn-set--stacked {
-    flex-direction: column;
-  }
-
-  .#{$prefix}--btn-set .#{$prefix}--btn {
-    width: 100%;
-    // 196px from design kit
-    max-width: rem(196px);
-
-    &:not(:focus) {
-      box-shadow: rem(-1px) 0 0 0 $button-separator;
-    }
-
-    &:first-of-type:not(:focus) {
-      box-shadow: inherit;
-    }
-  }
-
-  .#{$prefix}--btn-set .#{$prefix}--btn:focus + .#{$prefix}--btn {
-    box-shadow: inherit;
-  }
-
-  .#{$prefix}--btn-set--stacked .#{$prefix}--btn:not(:focus) {
-    box-shadow: 0 rem(-1px) 0 0 $button-separator;
-  }
-
-  .#{$prefix}--btn-set--stacked .#{$prefix}--btn:first-of-type:not(:focus) {
-    box-shadow: inherit;
-  }
-
-  .#{$prefix}--btn-set .#{$prefix}--btn.#{$prefix}--btn--disabled {
-    box-shadow: rem(-1px) 0 0 0 $disabled-03;
-
-    &:first-of-type {
-      box-shadow: none;
-    }
-  }
-
-  .#{$prefix}--btn-set--stacked .#{$prefix}--btn.#{$prefix}--btn--disabled {
-    box-shadow: 0 rem(-1px) 0 0 $disabled-03;
-
-    &:first-of-type {
-      box-shadow: none;
-    }
-  }
-
   .#{$prefix}--btn {
     @include button-base;
   }
@@ -14049,6 +13996,7 @@ Button styles
     }
 
     &:active {
+      background-color: $active-tertiary;
       border-color: transparent;
     }
 
@@ -14058,7 +14006,7 @@ Button styles
     &.#{$prefix}--btn--disabled,
     &.#{$prefix}--btn--disabled:hover,
     &.#{$prefix}--btn--disabled:focus {
-      color: $disabled;
+      color: $disabled-03;
       background: transparent;
       outline: none;
     }
@@ -14096,7 +14044,7 @@ Button styles
     &.#{$prefix}--btn--disabled,
     &.#{$prefix}--btn--disabled:hover,
     &.#{$prefix}--btn--disabled:focus {
-      color: $disabled;
+      color: $disabled-03;
       background: transparent;
       border-color: transparent;
       outline: none;
@@ -14140,9 +14088,20 @@ Button styles
     }
   }
 
+  .#{$prefix}--btn.#{$prefix}--btn--icon-only.#{$prefix}--tooltip__trigger:active:not([disabled]) {
+    border-color: transparent;
+  }
+
   .#{$prefix}--btn.#{$prefix}--btn--icon-only.#{$prefix}--tooltip__trigger:focus
     svg {
     outline-color: transparent;
+  }
+
+  .#{$prefix}--btn.#{$prefix}--btn--icon-only.#{$prefix}--tooltip__trigger[disabled]:hover,
+  .#{$prefix}--btn.#{$prefix}--btn--icon-only.#{$prefix}--tooltip__trigger[disabled]:focus,
+  .#{$prefix}--btn.#{$prefix}--btn--icon-only.#{$prefix}--tooltip__trigger[disabled]:active {
+    cursor: not-allowed;
+    fill: $disabled-03;
   }
 
   .#{$prefix}--btn--icon-only--top {
@@ -14201,7 +14160,7 @@ Button styles
     .#{$prefix}--btn__icon,
   .#{$prefix}--btn.#{$prefix}--btn--icon-only.#{$prefix}--btn--ghost[disabled]:hover
     .#{$prefix}--btn__icon {
-    fill: $disabled-02;
+    fill: $disabled-03;
 
     // Windows, Firefox HCM Fix
     @media screen and (-ms-high-contrast: active),
@@ -14258,6 +14217,57 @@ Button styles
 
     width: rem(150px);
   }
+
+  // button set styles
+  .#{$prefix}--btn-set {
+    display: flex;
+  }
+
+  .#{$prefix}--btn-set--stacked {
+    flex-direction: column;
+  }
+
+  .#{$prefix}--btn-set .#{$prefix}--btn {
+    width: 100%;
+    // 196px from design kit
+    max-width: rem(196px);
+
+    &:not(:focus) {
+      box-shadow: rem(-1px) 0 0 0 $button-separator;
+    }
+
+    &:first-of-type:not(:focus) {
+      box-shadow: inherit;
+    }
+  }
+
+  .#{$prefix}--btn-set .#{$prefix}--btn:focus + .#{$prefix}--btn {
+    box-shadow: inherit;
+  }
+
+  .#{$prefix}--btn-set--stacked .#{$prefix}--btn:not(:focus) {
+    box-shadow: 0 rem(-1px) 0 0 $button-separator;
+  }
+
+  .#{$prefix}--btn-set--stacked .#{$prefix}--btn:first-of-type:not(:focus) {
+    box-shadow: inherit;
+  }
+
+  .#{$prefix}--btn-set .#{$prefix}--btn.#{$prefix}--btn--disabled {
+    box-shadow: rem(-1px) 0 0 0 $disabled-03;
+
+    &:first-of-type {
+      box-shadow: none;
+    }
+  }
+
+  .#{$prefix}--btn-set--stacked .#{$prefix}--btn.#{$prefix}--btn--disabled {
+    box-shadow: 0 rem(-1px) 0 0 $disabled-03;
+
+    &:first-of-type {
+      box-shadow: none;
+    }
+  }
 }
 ```
 
@@ -14268,8 +14278,6 @@ Button styles
   - [button-base [mixin]](#button-base-mixin)
   - [button-theme [mixin]](#button-theme-mixin)
   - [prefix [variable]](#prefix-variable)
-  - [button-separator [variable]](#button-separator-variable)
-  - [disabled-03 [variable]](#disabled-03-variable)
   - [interactive-01 [variable]](#interactive-01-variable)
   - [text-04 [variable]](#text-04-variable)
   - [hover-primary [variable]](#hover-primary-variable)
@@ -14281,6 +14289,7 @@ Button styles
   - [hover-tertiary [variable]](#hover-tertiary-variable)
   - [active-tertiary [variable]](#active-tertiary-variable)
   - [inverse-01 [variable]](#inverse-01-variable)
+  - [disabled-03 [variable]](#disabled-03-variable)
   - [link-01 [variable]](#link-01-variable)
   - [hover-ui [variable]](#hover-ui-variable)
   - [active-ui [variable]](#active-ui-variable)
@@ -14288,10 +14297,10 @@ Button styles
   - [hover-primary-text [variable]](#hover-primary-text-variable)
   - [icon-01 [variable]](#icon-01-variable)
   - [focus [variable]](#focus-variable)
-  - [disabled-02 [variable]](#disabled-02-variable)
   - [danger [variable]](#danger-variable)
   - [hover-danger [variable]](#hover-danger-variable)
   - [active-danger [variable]](#active-danger-variable)
+  - [button-separator [variable]](#button-separator-variable)
 
 ### ❌button-base [mixin]
 
@@ -14381,7 +14390,7 @@ Button variant styles
   &:focus {
     border-color: $focus;
     box-shadow: inset 0 0 0 $button-outline-width $focus, inset 0 0 0
-        $button-border-width $ui-02;
+        $button-border-width $ui-background;
 
     // Windows, Firefox HCM Fix
     @media screen and (-ms-high-contrast: active),
@@ -14389,17 +14398,6 @@ Button variant styles
       outline: 3px solid transparent;
       outline-offset: -3px;
     }
-  }
-
-  &:disabled:hover,
-  &:disabled:focus,
-  &:hover.#{$prefix}--btn--disabled,
-  &:focus.#{$prefix}--btn--disabled {
-    color: $ui-04;
-    text-decoration: none;
-    background-color: $disabled-02;
-    border-color: $disabled-02;
-    box-shadow: none;
   }
 
   &:active {
@@ -14418,10 +14416,8 @@ Button variant styles
 - **Group**: [button](#button)
 - **Requires**:
   - [focus [variable]](#focus-variable)
-  - [ui-02 [variable]](#ui-02-variable)
+  - [ui-background [variable]](#ui-background-variable)
   - [prefix [variable]](#prefix-variable)
-  - [ui-04 [variable]](#ui-04-variable)
-  - [disabled-02 [variable]](#disabled-02-variable)
 - **Used by**:
   - [button [mixin]](#button-mixin)
 
@@ -24749,7 +24745,7 @@ Text area styles
   //-----------------------------
   .#{$prefix}--text-area:disabled {
     color: $disabled-02;
-    background-color: $disabled-background-color;
+    background-color: $disabled-01;
     border-bottom: 1px solid transparent;
     outline: none;
     cursor: not-allowed;
@@ -24790,6 +24786,7 @@ Text area styles
   - [carbon--spacing-04 [variable]](#carbon--spacing-04-variable)
   - [support-01 [variable]](#support-01-variable)
   - [disabled-02 [variable]](#disabled-02-variable)
+  - [disabled-01 [variable]](#disabled-01-variable)
 
 ## text-input
 
@@ -25398,6 +25395,18 @@ Time picker styles
       border-bottom: 1px solid transparent;
       cursor: not-allowed;
     }
+  }
+
+  .#{$prefix}--time-picker--sm .#{$prefix}--select-input,
+  .#{$prefix}--time-picker--sm .#{$prefix}--time-picker__input-field {
+    height: rem(32px);
+    max-height: rem(32px);
+  }
+
+  .#{$prefix}--time-picker--xl .#{$prefix}--select-input,
+  .#{$prefix}--time-picker--xl .#{$prefix}--time-picker__input-field {
+    height: rem(48px);
+    max-height: rem(48px);
   }
 }
 ```

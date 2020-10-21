@@ -43,7 +43,7 @@ assets, in addition to exporting the following assets:
   library!
 
 If you're curious about `@carbon/icons` and want to learn more, definitely check
-out our [Icon documentation](/docs/icons.md)!
+out our [Icon documentation](/docs/guides/icons.md)!
 
 ### Philosophy
 
