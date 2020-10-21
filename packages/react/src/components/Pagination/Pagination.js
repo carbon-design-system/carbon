@@ -20,14 +20,25 @@ const { prefix } = settings;
 
 let instanceId = 0;
 
+const mapPageSizesToObject = (sizes) => {
+  return typeof sizes[0] === 'object' && sizes[0] !== null
+    ? sizes
+    : sizes.map((size) => ({ text: size, value: size }));
+};
+
 export default class Pagination extends Component {
   constructor(props) {
     super(props);
-    const { pageSizes, page, pageSize } = this.props;
+    const { pageSizes: _pageSizes, page, pageSize } = this.props;
+
+    const pageSizes = mapPageSizesToObject(_pageSizes);
+
     this.state = {
       page: page,
       pageSize:
-        pageSize && pageSizes.includes(pageSize) ? pageSize : pageSizes[0],
+        pageSize && pageSizes.some((sizeObj) => pageSize === sizeObj.value)
+          ? pageSize
+          : pageSizes[0].value,
       prevPageSizes: pageSizes,
       prevPage: page,
       prevPageSize: pageSize,
@@ -116,7 +127,15 @@ export default class Pagination extends Component {
     /**
      * The choices for `pageSize`.
      */
-    pageSizes: PropTypes.arrayOf(PropTypes.number).isRequired,
+    pageSizes: PropTypes.oneOfType([
+      PropTypes.arrayOf(PropTypes.number),
+      PropTypes.arrayOf(
+        PropTypes.shape({
+          text: PropTypes.text,
+          value: PropTypes.number,
+        })
+      ),
+    ]).isRequired,
 
     /**
      * The translatable text showing the current page.
@@ -150,7 +169,10 @@ export default class Pagination extends Component {
     pageText: (page) => `page ${page}`,
   };
 
-  static getDerivedStateFromProps({ pageSizes, page, pageSize }, state) {
+  static getDerivedStateFromProps(
+    { pageSizes: _pageSizes, page, pageSize },
+    state
+  ) {
     const {
       prevPageSizes,
       prevPage,
@@ -158,9 +180,17 @@ export default class Pagination extends Component {
       page: currentPage,
       pageSize: currentPageSize,
     } = state;
-    const pageSizesChanged = !equals(pageSizes, prevPageSizes);
-    if (pageSizesChanged && !pageSizes.includes(pageSize)) {
-      pageSize = pageSizes[0];
+
+    const pageSizes = mapPageSizesToObject(_pageSizes);
+    const pageSizesValues = pageSizes.map((sizeObj) => sizeObj.value);
+    const prevPageSizesValues = prevPageSizes.map((sizeObj) => sizeObj.value);
+
+    const pageSizesChanged = !equals(pageSizesValues, prevPageSizesValues);
+    if (
+      pageSizesChanged &&
+      !pageSizes.some((sizeObj) => pageSize === sizeObj.value)
+    ) {
+      pageSize = pageSizes[0].value;
     }
     const pageChanged = page !== prevPage;
     const pageSizeChanged = pageSize !== prevPageSize;
@@ -234,7 +264,7 @@ export default class Pagination extends Component {
       itemRangeText,
       pageRangeText,
       pageSize, // eslint-disable-line no-unused-vars
-      pageSizes,
+      pageSizes: _pageSizes,
       itemText,
       pageText,
       pageNumberText, // eslint-disable-line no-unused-vars
@@ -269,6 +299,8 @@ export default class Pagination extends Component {
       }
     );
     const selectItems = this.renderSelectItems(totalPages);
+    const pageSizes = mapPageSizesToObject(_pageSizes);
+
     return (
       <div className={classNames} {...other}>
         <div className={`${prefix}--pagination__left`}>
@@ -288,8 +320,12 @@ export default class Pagination extends Component {
             onChange={this.handleSizeChange}
             disabled={pageInputDisabled || disabled}
             value={statePageSize}>
-            {pageSizes.map((size) => (
-              <SelectItem key={size} value={size} text={String(size)} />
+            {pageSizes.map((sizeObj) => (
+              <SelectItem
+                key={sizeObj.value}
+                value={sizeObj.value}
+                text={String(sizeObj.text)}
+              />
             ))}
           </Select>
           <span
