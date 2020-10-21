@@ -91,7 +91,7 @@
     // Used to mimic link underline
     &::after {
       position: absolute;
-      top: calc(100% - 3px);
+      bottom: 2px;
       width: rem(12px);
       height: 1px;
       background: $hover-primary-text;
@@ -122,6 +122,10 @@
     .#{$prefix}--overflow-menu:hover
     .#{$prefix}--overflow-menu__icon {
     fill: $hover-primary-text;
+  }
+
+  .#{$prefix}--breadcrumb-menu-options:focus {
+    outline: none;
   }
 
   $caret-size: rem(7px);
