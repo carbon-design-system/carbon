@@ -55,11 +55,17 @@ export default class ContentSwitcher extends React.Component {
      * Choose whether or not to automatically change selection on focus
      */
     selectionMode: PropTypes.oneOf(['automatic', 'manual']),
+
+    /**
+     * Specify the size of the Content Switcher. Currently supports either `sm` or `xl` as an option.
+     */
+    size: PropTypes.oneOf(['sm', 'xl']),
   };
 
   static defaultProps = {
     selectedIndex: 0,
     selectionMode: 'automatic',
+    onChange: () => {},
   };
 
   static getDerivedStateFromProps({ selectedIndex }, state) {
@@ -117,11 +123,13 @@ export default class ContentSwitcher extends React.Component {
       light,
       selectedIndex, // eslint-disable-line no-unused-vars
       selectionMode, // eslint-disable-line no-unused-vars
+      size,
       ...other
     } = this.props;
 
     const classes = classNames(`${prefix}--content-switcher`, className, {
       [`${prefix}--content-switcher--light`]: light,
+      [`${prefix}--content-switcher--${size}`]: size,
     });
 
     return (

@@ -82,6 +82,11 @@ const props = () => ({
     'Form validation UI content (invalidText)',
     'Invalid Selection'
   ),
+  warn: boolean('Show warning state (warn)', false),
+  warnText: text(
+    'Warning state text (warnText)',
+    'Selecting more items may increase processing time'
+  ),
   onChange: action('onChange'),
   listBoxMenuIconTranslationIds: object(
     'Listbox menu icon translation IDs (for translateWithId callback)',

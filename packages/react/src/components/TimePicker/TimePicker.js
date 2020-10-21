@@ -96,6 +96,12 @@ export default class TimePicker extends Component {
     placeholder: PropTypes.string,
 
     /**
+     * Specify the size of the Time Picker. Currently supports either `sm` or
+     * `xl` as an option.
+     */
+    size: PropTypes.oneOf(['sm', 'xl']),
+
+    /**
      * Specify the type of the `<input>`
      */
     type: PropTypes.string,
@@ -147,6 +153,7 @@ export default class TimePicker extends Component {
       invalid,
       hideLabel,
       light,
+      size,
       ...other
     } = this.props;
 
@@ -196,6 +203,7 @@ export default class TimePicker extends Component {
       [`${prefix}--time-picker`]: true,
       [`${prefix}--time-picker--light`]: light,
       [`${prefix}--time-picker--invalid`]: invalid,
+      [`${prefix}--time-picker--${size}`]: size,
       [className]: className,
     });
 

@@ -66,6 +66,11 @@ const props = () => ({
     'Form validation UI content (invalidText)',
     'A valid value is required'
   ),
+  warn: boolean('Show warning state (warn)', false),
+  warnText: text(
+    'Warning state text (warnText)',
+    'This mode may perform worse on older machines'
+  ),
 });
 
 export default {

@@ -22,6 +22,14 @@
     height: rem(40px);
   }
 
+  .#{$prefix}--content-switcher--sm {
+    height: rem(32px);
+  }
+
+  .#{$prefix}--content-switcher--xl {
+    height: rem(48px);
+  }
+
   .#{$prefix}--content-switcher--disabled {
     cursor: not-allowed;
   }
@@ -48,7 +56,8 @@
 
     &:focus {
       z-index: 3;
-      box-shadow: inset 0 0 0 2px $focus;
+      border-color: $focus;
+      box-shadow: inset 0 0 0 2px $focus, inset 0 0 0 3px $ui-01;
     }
 
     &:hover {
