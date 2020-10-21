@@ -25396,6 +25396,18 @@ Time picker styles
       cursor: not-allowed;
     }
   }
+
+  .#{$prefix}--time-picker--sm .#{$prefix}--select-input,
+  .#{$prefix}--time-picker--sm .#{$prefix}--time-picker__input-field {
+    height: rem(32px);
+    max-height: rem(32px);
+  }
+
+  .#{$prefix}--time-picker--xl .#{$prefix}--select-input,
+  .#{$prefix}--time-picker--xl .#{$prefix}--time-picker__input-field {
+    height: rem(48px);
+    max-height: rem(48px);
+  }
 }
 ```
 

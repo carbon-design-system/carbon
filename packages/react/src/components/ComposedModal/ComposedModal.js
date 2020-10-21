@@ -220,6 +220,7 @@ export default class ComposedModal extends Component {
       containerClassName,
       children,
       danger,
+      preventCloseOnClickOutside, // eslint-disable-line
       selectorPrimaryFocus, // eslint-disable-line
       size,
       ...other
@@ -371,6 +372,7 @@ export class ModalHeader extends Component {
       iconDescription,
       closeModal, // eslint-disable-line
       buttonOnClick, // eslint-disable-line
+      preventCloseOnClickOutside, // eslint-disable-line
       ...other
     } = this.props;
 
@@ -421,7 +423,14 @@ export class ModalHeader extends Component {
 }
 
 export function ModalBody(props) {
-  const { className, children, hasForm, hasScrollingContent, ...other } = props;
+  const {
+    className,
+    children,
+    hasForm,
+    hasScrollingContent,
+    preventCloseOnClickOutside, // eslint-disable-line
+    ...other
+  } = props;
   const contentClass = classNames({
     [`${prefix}--modal-content`]: true,
     [`${prefix}--modal-content--with-form`]: hasForm,
