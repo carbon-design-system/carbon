@@ -467,7 +467,11 @@ export default class Tabs extends React.Component {
           {!leftOverflowNavButtonHidden && (
             <div className={`${prefix}--tabs__overflow-indicator--left`} />
           )}
-          <ul role="tablist" className={classes.tablist} ref={this.tablist}>
+          <ul
+            role="tablist"
+            tabIndex={-1}
+            className={classes.tablist}
+            ref={this.tablist}>
             {tabsWithProps}
           </ul>
           {!rightOverflowNavButtonHidden && (
