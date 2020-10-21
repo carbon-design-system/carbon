@@ -417,8 +417,7 @@ export default class Tabs extends React.Component {
     };
 
     return (
-      // TODO: remove classname and revert div to React Fragment after next major release
-      <div className={`${prefix}--tabs--scrollable`}>
+      <>
         <div {...other} className={classes.tabs} onScroll={this.handleScroll}>
           <button
             type="button"
@@ -453,7 +452,7 @@ export default class Tabs extends React.Component {
           </button>
         </div>
         {tabContentWithProps}
-      </div>
+      </>
     );
   }
 }
