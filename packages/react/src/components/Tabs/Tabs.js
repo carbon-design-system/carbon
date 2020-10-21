@@ -151,7 +151,7 @@ export default class Tabs extends React.Component {
       clientWidth: tablistClientWidth,
       scrollLeft: tablistScrollLeft,
       scrollWidth: tablistScrollWidth,
-    } = this.tablist.current;
+    } = this.tablist?.current || {};
     const tab = this.getTabAt(this.state.selected);
     const horizontalOverflow = tablistScrollWidth > tablistClientWidth;
 
