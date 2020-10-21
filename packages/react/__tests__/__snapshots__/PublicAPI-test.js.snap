@@ -25,6 +25,15 @@ Map {
       "disabled": Object {
         "type": "bool",
       },
+      "size": Object {
+        "args": Array [
+          Array [
+            "sm",
+            "xl",
+          ],
+        ],
+        "type": "oneOf",
+      },
     },
   },
   "AccordionItem" => Object {
@@ -785,6 +794,15 @@ Map {
           Array [
             "automatic",
             "manual",
+          ],
+        ],
+        "type": "oneOf",
+      },
+      "size": Object {
+        "args": Array [
+          Array [
+            "sm",
+            "xl",
           ],
         ],
         "type": "oneOf",
@@ -1981,6 +1999,9 @@ Map {
       "short": false,
     },
     "propTypes": Object {
+      "allowInput": Object {
+        "type": "bool",
+      },
       "appendTo": Object {
         "type": "object",
       },
@@ -3532,6 +3553,12 @@ Map {
         "useTitleInItem": Object {
           "type": "bool",
         },
+        "warn": Object {
+          "type": "bool",
+        },
+        "warnText": Object {
+          "type": "string",
+        },
       },
     },
     "defaultProps": Object {
@@ -3765,6 +3792,12 @@ Map {
       },
       "useTitleInItem": Object {
         "type": "bool",
+      },
+      "warn": Object {
+        "type": "bool",
+      },
+      "warnText": Object {
+        "type": "string",
       },
     },
     "render": [Function],
@@ -4165,12 +4198,35 @@ Map {
       },
       "pageSizes": Object {
         "args": Array [
-          Object {
-            "type": "number",
-          },
+          Array [
+            Object {
+              "args": Array [
+                Object {
+                  "type": "number",
+                },
+              ],
+              "type": "arrayOf",
+            },
+            Object {
+              "args": Array [
+                Object {
+                  "args": Array [
+                    Object {
+                      "text": undefined,
+                      "value": Object {
+                        "type": "number",
+                      },
+                    },
+                  ],
+                  "type": "shape",
+                },
+              ],
+              "type": "arrayOf",
+            },
+          ],
         ],
         "isRequired": true,
-        "type": "arrayOf",
+        "type": "oneOfType",
       },
       "pageText": Object {
         "type": "func",
@@ -5786,6 +5842,15 @@ Map {
       },
       "placeholder": Object {
         "type": "string",
+      },
+      "size": Object {
+        "args": Array [
+          Array [
+            "sm",
+            "xl",
+          ],
+        ],
+        "type": "oneOf",
       },
       "type": Object {
         "type": "string",
