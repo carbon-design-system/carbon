@@ -24064,16 +24064,14 @@ Tabs styles
 
   // TODO: remove namespace and suffix in next major release
   .#{$prefix}--tabs--scrollable {
-    .#{$prefix}--tabs--scrollable {
-      @include reset;
-      @include type-style('body-short-01');
+    @include reset;
+    @include type-style('body-short-01');
 
-      display: flex;
-      width: 100%;
-      height: auto;
-      min-height: rem(40px);
-      color: $text-01;
-    }
+    display: flex;
+    width: 100%;
+    height: auto;
+    min-height: rem(40px);
+    color: $text-01;
 
     .#{$prefix}--tabs--scrollable--container {
       min-height: rem(48px);
@@ -26475,6 +26473,13 @@ Tooltip styles
 
   .#{$prefix}--tooltip__trigger svg {
     fill: $icon-02;
+
+    // Windows, Firefox HCM Fix
+    @media screen and (-ms-high-contrast: active),
+      screen and (prefers-contrast) {
+      // `ButtonText` is a CSS2 system color to help improve colors in HCM
+      fill: ButtonText;
+    }
   }
 
   .#{$prefix}--tooltip__trigger:not(.#{$prefix}--btn--icon-only) {
@@ -26516,6 +26521,13 @@ Tooltip styles
     word-wrap: break-word;
     background: $inverse-02;
     border-radius: rem(2px);
+
+    // Windows, Firefox HCM Fix
+    @media screen and (-ms-high-contrast: active),
+      screen and (prefers-contrast) {
+      // `ButtonText` is a CSS2 system color to help improve colors in HCM
+      border: 1px solid transparent;
+    }
 
     // @todo this can be deprecated in v11 since focus should always be on the content container not the tooltip
     &:focus {
@@ -26695,6 +26707,13 @@ Tooltip styles
     &:focus {
       svg {
         fill: $icon-02;
+
+        // Windows, Firefox HCM Fix
+        @media screen and (-ms-high-contrast: active),
+          screen and (prefers-contrast) {
+          // `ButtonText` is a CSS2 system color to help improve colors in HCM
+          fill: ButtonText;
+        }
       }
     }
   }
