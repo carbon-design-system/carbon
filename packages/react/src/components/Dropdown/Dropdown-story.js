@@ -71,6 +71,7 @@ const props = () => ({
     'Warning state text (warnText)',
     'This mode may perform worse on older machines'
   ),
+  isOptional: boolean('Optional (isOptional)', false),
 });
 
 export default {
@@ -99,6 +100,21 @@ export const Default = () => (
       items={items}
       itemToString={(item) => (item ? item.text : '')}
       onChange={action('onChange')}
+    />
+  </div>
+);
+
+export const Optional = () => (
+  <div style={{ width: 300 }}>
+    <Dropdown
+      id="default"
+      titleText="Dropdown label"
+      helperText="This is some helper text"
+      label="Select an option"
+      items={items}
+      itemToString={(item) => (item ? item.text : '')}
+      onChange={action('onChange')}
+      isOptional
     />
   </div>
 );
