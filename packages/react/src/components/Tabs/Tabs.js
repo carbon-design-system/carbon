@@ -145,6 +145,29 @@ export default class Tabs extends React.Component {
 
     this._handleWindowResize();
     window.addEventListener('resize', this._debouncedHandleWindowResize);
+
+    // scroll selected tab into view on mount
+    const {
+      clientWidth: tablistClientWidth,
+      scrollLeft: tablistScrollLeft,
+      scrollWidth: tablistScrollWidth,
+    } = this.tablist?.current || {};
+    const tab = this.getTabAt(this.state.selected);
+    const horizontalOverflow = tablistScrollWidth > tablistClientWidth;
+
+    if (horizontalOverflow) {
+      const leftOverflowNavButtonHidden =
+        tab?.tabAnchor?.getBoundingClientRect().right <
+        tab?.tabAnchor?.offsetParent.getBoundingClientRect().right;
+      const rightOverflowNavButtonHidden =
+        tablistScrollLeft + tablistClientWidth === tablistScrollWidth;
+      tab?.tabAnchor?.scrollIntoView({ block: 'nearest', inline: 'nearest' });
+
+      // account for overflow buttons in scroll position on mount
+      if (!leftOverflowNavButtonHidden && !rightOverflowNavButtonHidden) {
+        this.tablist.current.scrollLeft += this.OVERFLOW_BUTTON_OFFSET * 2;
+      }
+    }
   }
 
   componentWillUnmount() {
@@ -154,7 +177,7 @@ export default class Tabs extends React.Component {
     window.removeEventListener('resize', this._debouncedHandleWindowResize);
   }
 
-  componentDidUpdate() {
+  componentDidUpdate(_, prevState) {
     // compare current tablist properties to current state
     const {
       clientWidth: tablistClientWidth,
@@ -165,7 +188,9 @@ export default class Tabs extends React.Component {
       tablistClientWidth: currentStateClientWidth,
       tablistScrollLeft: currentStateScrollLeft,
       tablistScrollWidth: currentStateScrollWidth,
+      selected,
     } = this.state;
+
     if (
       tablistClientWidth !== currentStateClientWidth ||
       tablistScrollLeft !== currentStateScrollLeft ||
@@ -177,6 +202,10 @@ export default class Tabs extends React.Component {
         tablistScrollLeft,
         tablistScrollWidth,
       });
+    }
+
+    if (prevState.selected !== selected) {
+      this.getTabAt(selected)?.tabAnchor?.scrollIntoView(false);
     }
   }
 
