@@ -32,19 +32,4 @@ describe('ListBoxField', () => {
     const wrapper = mount(<ListBox.Field id="test-listbox" disabled />);
     expect(wrapper.children().prop('tabIndex')).toBe(-1);
   });
-
-  it('should set `aria-owns` based when expanded', () => {
-    const wrapper = mount(
-      <ListBox.Field id="test-listbox" aria-expanded>
-        <ListBox.Selection clearSelection={jest.fn()} />
-      </ListBox.Field>
-    );
-    expect(wrapper.find('div[aria-expanded]').props()['aria-owns']).toBe(
-      'test-listbox__menu'
-    );
-    expect(wrapper.find('div[aria-expanded]').props()['aria-controls']).toBe(
-      'test-listbox__menu'
-    );
-    expect(wrapper).toMatchSnapshot();
-  });
 });

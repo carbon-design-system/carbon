@@ -9,7 +9,7 @@ import cx from 'classnames';
 import React, { useState } from 'react';
 import ReactDOM from 'react-dom';
 import * as colors from '@carbon/colors';
-import { themes, formatTokenName } from '@carbon/themes';
+import { themes, formatTokenName, unstable__meta as meta } from '@carbon/themes';
 
 const mountNode = document.getElementById('root');
 function render(element) {
@@ -23,7 +23,8 @@ const colorNameLookup = Object.keys(colors).reduce(
   }),
   {}
 );
-const tokens = Object.keys(themes[Object.keys(themes)[0]]);
+
+const tokens = meta.colors.flatMap(color => color.tokens);
 
 function App() {
   return (

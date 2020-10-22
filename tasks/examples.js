@@ -46,8 +46,8 @@ async function main() {
 
   const packages = await Promise.all(
     packageNames
-      .filter(name => PACKAGES_TO_BUILD.has(name))
-      .map(async name => {
+      .filter((name) => PACKAGES_TO_BUILD.has(name))
+      .map(async (name) => {
         // Verify that each file that we read from the packages directory is
         // actually a folder. Typically used to catch `.DS_store` files that
         // accidentally appear when opening with MacOS Finder
@@ -68,13 +68,13 @@ async function main() {
           return descriptor;
         }
 
-        const examples = (await fs.readdir(examplesDir)).filter(example => {
+        const examples = (await fs.readdir(examplesDir)).filter((example) => {
           return example !== '.yarnrc' && !IGNORE_EXAMPLE_DIRS.has(example);
         });
 
         return {
           ...descriptor,
-          examples: examples.map(name => ({
+          examples: examples.map((name) => ({
             filepath: path.join(examplesDir, name),
             name,
           })),
@@ -83,11 +83,11 @@ async function main() {
   );
 
   const packagesWithExamples = packages.filter(
-    pkg => Array.isArray(pkg.examples) && pkg.examples.length !== 0
+    (pkg) => Array.isArray(pkg.examples) && pkg.examples.length !== 0
   );
 
   await Promise.all(
-    packagesWithExamples.map(async pkg => {
+    packagesWithExamples.map(async (pkg) => {
       reporter.info(`Building examples in package \`${pkg.name}\``);
 
       const { examples, filepath, name } = pkg;
@@ -96,7 +96,7 @@ async function main() {
       await fs.ensureDir(packageDir);
 
       await Promise.all(
-        examples.map(async example => {
+        examples.map(async (example) => {
           reporter.info(
             `Building example \`${example.name}\` in package \`${pkg.name}\``
           );
@@ -188,6 +188,7 @@ async function main() {
   );
 }
 
-main().catch(error => {
+main().catch((error) => {
   console.log(error);
+  process.exit(1);
 });

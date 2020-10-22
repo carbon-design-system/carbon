@@ -18,14 +18,8 @@
 /// @access private
 /// @group combo-box
 @mixin combo-box {
-  .#{$prefix}--combo-box .#{$prefix}--text-input {
-    &::placeholder {
-      color: $text-05;
-    }
-
-    &[disabled]::placeholder {
-      color: $disabled-02;
-    }
+  .#{$prefix}--combo-box .#{$prefix}--text-input::-ms-clear {
+    display: none;
   }
 
   .#{$prefix}--combo-box.#{$prefix}--list-box--expanded
@@ -36,7 +30,11 @@
   .#{$prefix}--combo-box .#{$prefix}--list-box__field,
   .#{$prefix}--combo-box.#{$prefix}--list-box[data-invalid]
     .#{$prefix}--list-box__field,
+  .#{$prefix}--combo-box.#{$prefix}--list-box--warning
+    .#{$prefix}--list-box__field,
   .#{$prefix}--combo-box.#{$prefix}--list-box--disabled.#{$prefix}--list-box[data-invalid]
+    .#{$prefix}--list-box__field,
+  .#{$prefix}--combo-box.#{$prefix}--list-box--disabled.#{$prefix}--list-box--warning
     .#{$prefix}--list-box__field {
     padding: 0;
   }

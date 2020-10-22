@@ -19,7 +19,7 @@ describe('Filename', () => {
   describe.skip('automated accessibility tests', () => {
     it.each(statuses)(
       'should have no axe violations with status %s',
-      async status => {
+      async (status) => {
         const { container } = render(
           <Filename iconDescription="test description" status={status} />
         );
@@ -29,7 +29,7 @@ describe('Filename', () => {
 
     it.each(statuses)(
       'should have no DAP violations with status %s',
-      async status => {
+      async (status) => {
         const { container } = render(
           <Filename iconDescription="test description" status={status} />
         );

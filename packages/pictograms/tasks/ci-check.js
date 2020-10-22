@@ -25,7 +25,7 @@ async function check() {
   });
 }
 
-check().catch(error => {
+check().catch((error) => {
   console.log(error);
   process.exit(1);
 });

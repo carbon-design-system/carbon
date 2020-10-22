@@ -8,7 +8,7 @@ import { adjustLightness } from './tools';
 
 import {
   // Blue
-  blue20,
+  blue10,
   blue40,
   blue60,
   blue70,
@@ -56,7 +56,7 @@ export const ui04 = gray50;
 export const ui05 = gray100;
 
 export const text01 = gray100;
-export const text02 = gray80;
+export const text02 = gray70;
 export const text03 = gray40;
 export const text04 = white;
 export const text05 = gray60;
@@ -124,9 +124,13 @@ export const disabled01 = white;
 export const disabled02 = gray30;
 export const disabled03 = gray50;
 
-export const highlight = blue20;
+export const highlight = blue10;
 
 export const decorative01 = gray20;
+
+export const hoverLightUI = '#e5e5e5';
+
+export const buttonSeparator = '#e0e0e0';
 
 export const skeleton01 = '#e5e5e5';
 export const skeleton02 = gray30;

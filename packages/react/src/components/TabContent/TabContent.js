@@ -12,7 +12,7 @@ import { settings } from 'carbon-components';
 
 const { prefix } = settings;
 
-const TabContent = props => {
+const TabContent = (props) => {
   const { className, selected, children, ...other } = props;
   const tabContentClasses = classNames(`${prefix}--tab-content`, {
     [className]: className,
@@ -23,13 +23,19 @@ const TabContent = props => {
       {...other}
       className={tabContentClasses}
       selected={selected}
-      hidden={!selected}>
+      hidden={!selected}
+      aria-live="polite">
       {children}
     </div>
   );
 };
 
 TabContent.propTypes = {
+  /**
+   * Pass in content to render inside of the TabContent
+   */
+  children: PropTypes.node,
+
   /**
    * Provide a className for the tab content container
    */
@@ -39,11 +45,6 @@ TabContent.propTypes = {
    * Specify whether the TabContent is selected
    */
   selected: PropTypes.bool,
-
-  /**
-   * Pass in content to render inside of the TabContent
-   */
-  children: PropTypes.node,
 };
 
 TabContent.defaultProps = {

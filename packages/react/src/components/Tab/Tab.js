@@ -16,14 +16,14 @@ const { prefix } = settings;
 export default class Tab extends React.Component {
   static propTypes = {
     /**
-     * The element ID for the top-level element.
-     */
-    id: PropTypes.string,
-
-    /**
      * Specify an optional className to be added to your Tab
      */
     className: PropTypes.string,
+
+    /**
+     * Whether your Tab is disabled.
+     */
+    disabled: PropTypes.bool,
 
     /**
      * A handler that is invoked when a user clicks on the control.
@@ -38,14 +38,14 @@ export default class Tab extends React.Component {
     handleTabKeyDown: PropTypes.func,
 
     /**
-     * Whether your Tab is disabled.
-     */
-    disabled: PropTypes.bool,
-
-    /**
      * Provide a string that represents the `href` of the Tab
      */
     href: PropTypes.string.isRequired,
+
+    /**
+     * The element ID for the top-level element.
+     */
+    id: PropTypes.string,
 
     /**
      * The index of your Tab in your Tabs. Reserved for usage in Tabs
@@ -58,11 +58,6 @@ export default class Tab extends React.Component {
     label: PropTypes.node,
 
     /**
-     * Provide an accessibility role for your Tab
-     */
-    role: PropTypes.string.isRequired,
-
-    /**
      * Provide a handler that is invoked when a user clicks on the control
      */
     onClick: PropTypes.func.isRequired,
@@ -71,17 +66,6 @@ export default class Tab extends React.Component {
      * Provide a handler that is invoked on the key down event for the control
      */
     onKeyDown: PropTypes.func.isRequired,
-
-    /**
-     * Whether your Tab is selected.
-     * Reserved for usage in Tabs
-     */
-    selected: PropTypes.bool.isRequired,
-
-    /**
-     * Specify the tab index of the <a> node
-     */
-    tabIndex: PropTypes.number.isRequired,
 
     /*
      * An optional parameter to allow overriding the anchor rendering.
@@ -94,6 +78,22 @@ export default class Tab extends React.Component {
      * An optional parameter to allow overriding the content rendering.
      **/
     renderContent: PropTypes.func,
+
+    /**
+     * Provide an accessibility role for your Tab
+     */
+    role: PropTypes.string.isRequired,
+
+    /**
+     * Whether your Tab is selected.
+     * Reserved for usage in Tabs
+     */
+    selected: PropTypes.bool.isRequired,
+
+    /**
+     * Specify the tab index of the `<a>` node
+     */
+    tabIndex: PropTypes.number.isRequired,
   };
 
   static defaultProps = {
@@ -126,17 +126,28 @@ export default class Tab extends React.Component {
       ...other
     } = this.props;
 
-    const classes = classNames(className, `${prefix}--tabs__nav-item`, {
-      [`${prefix}--tabs__nav-item--disabled`]: disabled,
-      [`${prefix}--tabs__nav-item--selected`]: selected,
-    });
+    const classes = classNames(
+      className,
+      // TODO: remove scrollable in next major release
+      // `${prefix}--tabs__nav-item`,
+      `${prefix}--tabs--scrollable__nav-item`,
+      {
+        [`${prefix}--tabs__nav-item--disabled`]: disabled,
+        [`${prefix}--tabs__nav-item--selected`]: selected,
+        // TODO: remove scrollable in next major release
+        [`${prefix}--tabs--scrollable__nav-item--disabled`]: disabled,
+        [`${prefix}--tabs--scrollable__nav-item--selected`]: selected,
+      }
+    );
 
     const anchorProps = {
       id,
-      className: `${prefix}--tabs__nav-link`,
+      // TODO: remove scrollable in next major release
+      // className:  `${prefix}--tabs__nav-link`,
+      className: `${prefix}--tabs--scrollable__nav-link`,
       href,
       tabIndex: !disabled ? tabIndex : -1,
-      ref: e => {
+      ref: (e) => {
         this.tabAnchor = e;
       },
     };
@@ -146,14 +157,14 @@ export default class Tab extends React.Component {
         {...other}
         tabIndex={-1}
         className={classes}
-        onClick={evt => {
+        onClick={(evt) => {
           if (disabled) {
             return;
           }
           handleTabClick(index, evt);
           onClick(evt);
         }}
-        onKeyDown={evt => {
+        onKeyDown={(evt) => {
           if (disabled) {
             return;
           }

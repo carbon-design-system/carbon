@@ -29,14 +29,14 @@ const SearchSkeleton = ({ small, className, ...rest }) => {
 
 SearchSkeleton.propTypes = {
   /**
-   * Specify whether the Search should be a small variant
-   */
-  small: PropTypes.bool,
-
-  /**
    * Specify an optional className to add.
    */
   className: PropTypes.string,
+
+  /**
+   * Specify whether the Search should be a small variant
+   */
+  small: PropTypes.bool,
 };
 
 SearchSkeleton.defaultProps = {

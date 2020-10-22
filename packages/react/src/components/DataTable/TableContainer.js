@@ -44,17 +44,22 @@ const TableContainer = ({
 };
 
 TableContainer.propTypes = {
-  className: PropTypes.string,
   children: PropTypes.node,
-  /**
-   * Provide a title for the Table
-   */
-  title: PropTypes.node,
-
+  className: PropTypes.string,
   /**
    * Optional description text for the Table
    */
   description: PropTypes.node,
+
+  /**
+   * Specify whether the table should have a sticky header
+   */
+  stickyHeader: PropTypes.bool,
+
+  /**
+   * Provide a title for the Table
+   */
+  title: PropTypes.node,
 };
 
 export default TableContainer;

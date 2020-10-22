@@ -30,12 +30,12 @@ const icons = () => {
           Joi.string().valid('glyph'),
           Joi.number().valid([16, 20, 24, 32])
         ),
-        aliases: Joi.array(),
+        aliases: Joi.array().items(Joi.string()),
       })
     ),
 
     extend(metadata, data, registry) {
-      metadata.icons = data.map(icon => {
+      metadata.icons = data.map((icon) => {
         return {
           name: icon.name,
           friendlyName: icon.friendly_name,
@@ -69,9 +69,11 @@ const icons = () => {
       // 2. No extra data are defined in the metadata that aren't in the source
       //    directory
       for (const item of registry.values()) {
-        const metadata = data.find(icon => icon.name === item.id);
+        const metadata = data.find((icon) => icon.name === item.id);
         if (!metadata) {
-          const filepaths = item.assets.map(asset => asset.filepath).join('\n');
+          const filepaths = item.assets
+            .map((asset) => asset.filepath)
+            .join('\n');
           throw new Error(
             `Expected the icon \`${item.id}\` to be defined in the data ` +
               `metadata file. Found matches for this asset in the following ` +
@@ -82,7 +84,7 @@ const icons = () => {
 
         // Verify that all the size information from the
         for (const size of metadata.sizes) {
-          const match = item.assets.find(asset => {
+          const match = item.assets.find((asset) => {
             if (size === 'glyph') {
               return asset.size === undefined;
             }
@@ -98,7 +100,7 @@ const icons = () => {
         }
 
         for (const asset of item.assets) {
-          const match = metadata.sizes.find(size => {
+          const match = metadata.sizes.find((size) => {
             if (asset.size === undefined) {
               return size === 'glyph';
             }

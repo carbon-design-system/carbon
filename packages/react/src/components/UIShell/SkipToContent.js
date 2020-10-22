@@ -33,6 +33,8 @@ SkipToContent.propTypes = {
    */
   children: PropTypes.string.isRequired,
 
+  className: PropTypes.string,
+
   /**
    * Provide the `href` to the id of the element on your package that is the
    * main content.

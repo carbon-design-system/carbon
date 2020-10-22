@@ -13,29 +13,32 @@ import { ButtonKinds } from '../../prop-types/types';
 
 export default class ModalWrapper extends React.Component {
   static propTypes = {
-    status: PropTypes.string,
-    handleOpen: PropTypes.func,
-    children: PropTypes.node,
-    id: PropTypes.string,
-    buttonTriggerText: PropTypes.node,
     buttonTriggerClassName: PropTypes.string,
-    modalLabel: PropTypes.string,
-    modalHeading: PropTypes.string,
-    modalText: PropTypes.string,
-    passiveModal: PropTypes.bool,
-    withHeader: PropTypes.bool,
-    modalBeforeContent: PropTypes.bool,
-    primaryButtonText: PropTypes.string,
-    secondaryButtonText: PropTypes.string,
-    handleSubmit: PropTypes.func,
+    buttonTriggerText: PropTypes.node,
+    children: PropTypes.node,
     disabled: PropTypes.bool,
+    handleOpen: PropTypes.func,
+    handleSubmit: PropTypes.func,
+    id: PropTypes.string,
+    modalBeforeContent: PropTypes.bool,
+    modalHeading: PropTypes.string,
+    modalLabel: PropTypes.string,
+    modalText: PropTypes.string,
+    onKeyDown: PropTypes.func,
+    passiveModal: PropTypes.bool,
+    preventCloseOnClickOutside: PropTypes.bool,
+    primaryButtonText: PropTypes.string,
     renderTriggerButtonIcon: PropTypes.oneOfType([
       PropTypes.func,
       PropTypes.object,
     ]),
+    secondaryButtonText: PropTypes.string,
+    selectorPrimaryFocus: PropTypes.string,
+    shouldCloseAfterSubmit: PropTypes.bool,
+    status: PropTypes.string,
     triggerButtonIconDescription: PropTypes.string,
     triggerButtonKind: PropTypes.oneOf(ButtonKinds),
-    shouldCloseAfterSubmit: PropTypes.bool,
+    withHeader: PropTypes.bool,
   };
 
   static defaultProps = {
@@ -44,11 +47,14 @@ export default class ModalWrapper extends React.Component {
     triggerButtonIconDescription: 'Provide icon description if icon is used',
     triggerButtonKind: 'primary',
     disabled: false,
+    preventCloseOnClickOutside: false,
     selectorPrimaryFocus: '[data-modal-primary-focus]',
     onKeyDown: () => {},
   };
 
   triggerButton = React.createRef();
+  modal = React.createRef();
+
   state = {
     isOpen: false,
   };
@@ -59,8 +65,18 @@ export default class ModalWrapper extends React.Component {
     });
   };
 
-  handleClose = () => {
-    this.setState({ isOpen: false }, () => this.triggerButton.current.focus());
+  handleClose = (evt) => {
+    if (
+      evt &&
+      !this.modal.current.innerModal.current.contains(evt.target) &&
+      this.props.preventCloseOnClickOutside
+    ) {
+      return;
+    } else {
+      this.setState({ isOpen: false }, () =>
+        this.triggerButton.current.focus()
+      );
+    }
   };
 
   handleOnRequestSubmit = () => {
@@ -86,6 +102,7 @@ export default class ModalWrapper extends React.Component {
       handleSubmit, // eslint-disable-line no-unused-vars
       shouldCloseAfterSubmit, // eslint-disable-line no-unused-vars
       selectorPrimaryFocus,
+      preventCloseOnClickOutside, // eslint-disable-line no-unused-vars
       ...other
     } = this.props;
 
@@ -100,7 +117,7 @@ export default class ModalWrapper extends React.Component {
     return (
       <div
         role="presentation"
-        onKeyDown={evt => {
+        onKeyDown={(evt) => {
           if (evt.which === 27) {
             this.handleClose();
             onKeyDown(evt);
@@ -116,7 +133,9 @@ export default class ModalWrapper extends React.Component {
           ref={this.triggerButton}>
           {buttonTriggerText}
         </Button>
-        <Modal {...props}>{children}</Modal>
+        <Modal ref={this.modal} {...props}>
+          {children}
+        </Modal>
       </div>
     );
   }

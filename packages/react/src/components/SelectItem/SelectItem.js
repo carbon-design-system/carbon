@@ -32,11 +32,6 @@ const SelectItem = ({ className, value, disabled, hidden, text, ...other }) => {
 
 SelectItem.propTypes = {
   /**
-   * Specify the value of the <SelectItem>
-   */
-  value: PropTypes.any.isRequired,
-
-  /**
    * Specify an optional className to be applied to the node
    */
   className: PropTypes.string,
@@ -55,6 +50,11 @@ SelectItem.propTypes = {
    * Provide the contents of your <SelectItem>
    */
   text: PropTypes.string.isRequired,
+
+  /**
+   * Specify the value of the <SelectItem>
+   */
+  value: PropTypes.any.isRequired,
 };
 
 SelectItem.defaultProps = {

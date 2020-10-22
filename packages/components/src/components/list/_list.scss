@@ -29,21 +29,10 @@
 
   .#{$prefix}--list__item {
     color: $text-01;
-    margin-bottom: $carbon--spacing-02;
   }
 
   .#{$prefix}--list--nested {
-    margin-top: $carbon--spacing-02;
     margin-left: $carbon--spacing-06;
-  }
-
-  .#{$prefix}--list--nested > .#{$prefix}--list__item {
-    margin-top: 0;
-    margin-bottom: 0;
-  }
-
-  .#{$prefix}--list--nested .#{$prefix}--list--nested {
-    margin-top: 0;
   }
 
   .#{$prefix}--list--ordered:not(.#{$prefix}--list--nested) {
@@ -57,10 +46,10 @@
 
   .#{$prefix}--list--ordered:not(.#{$prefix}--list--nested)
     > .#{$prefix}--list__item::before {
-    content: counter(item) '.';
-    counter-increment: item;
     position: absolute;
     left: rem(-24px);
+    content: counter(item) '.';
+    counter-increment: item;
   }
 
   .#{$prefix}--list--ordered.#{$prefix}--list--nested {
@@ -73,14 +62,17 @@
     &::before {
       position: absolute;
       left: -$carbon--spacing-05;
-      content: '\002013'; // – en dash
+      // – en dash
+      content: '\002013';
     }
   }
 
   .#{$prefix}--list--unordered.#{$prefix}--list--nested
     > .#{$prefix}--list__item::before {
-    left: -$carbon--spacing-04; // offset to account for smaller ▪ vs –
-    content: '\0025AA'; // ▪ square
+    // offset to account for smaller ▪ vs –
+    left: -$carbon--spacing-04;
+    // ▪ square
+    content: '\0025AA';
   }
 }
 

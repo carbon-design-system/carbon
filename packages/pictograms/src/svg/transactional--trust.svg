@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!-- Generator: Adobe Illustrator 24.1.2, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 48 48" style="enable-background:new 0 0 48 48;" xml:space="preserve">
+<g id="transactional--trust">
+	<g id="transactional--trust_1_">
+		<path style="fill:none;stroke:#000000;stroke-width:0.72;stroke-miterlimit:10;" d="M10.248,30C9.445,28.163,9,26.133,9,24
+			c0-8.284,6.716-15,15-15c4.907,0,9.263,2.356,12,5.999"/>
+		<path style="fill:none;stroke:#000000;stroke-width:0.72;stroke-miterlimit:10;" d="M37.752,18C38.555,19.837,39,21.867,39,24
+			c0,8.284-6.716,15-15,15c-4.907,0-9.263-2.356-12-5.999"/>
+		<polyline style="fill:none;stroke:#000000;stroke-width:0.72;stroke-miterlimit:10;" points="36,11 36,15 32,15 		"/>
+		<polyline style="fill:none;stroke:#000000;stroke-width:0.72;stroke-miterlimit:10;" points="12,37 12,33 16,33 		"/>
+		<line style="fill:none;stroke:#000000;stroke-width:0.72;stroke-miterlimit:10;" x1="9" y1="24" x2="39" y2="24"/>
+		<path id="XMLID_3_" style="fill:none;stroke:#000000;stroke-width:0.72;stroke-linejoin:round;stroke-miterlimit:10;" d="M13.5,24
+			v-1.746c0-1.89,1.312-3.473,3.074-3.891c-0.798-0.355-1.355-1.153-1.355-2.083c0-1.259,1.021-2.28,2.28-2.28s2.28,1.021,2.28,2.28
+			c0,0.93-0.557,1.728-1.355,2.083c1.763,0.418,3.075,2.001,3.075,3.891V24"/>
+		<path id="XMLID_1_" style="fill:none;stroke:#000000;stroke-width:0.72;stroke-linejoin:round;stroke-miterlimit:10;" d="M26.5,39
+			v-3.746c0-1.89,1.312-3.473,3.074-3.891c-0.798-0.355-1.355-1.153-1.355-2.083c0-1.259,1.021-2.28,2.28-2.28s2.28,1.021,2.28,2.28
+			c0,0.93-0.557,1.728-1.355,2.083c1.604,0.38,2.834,1.725,3.043,3.388"/>
+		
+			<line style="fill:none;stroke:#000000;stroke-width:0.72;stroke-linejoin:round;stroke-miterlimit:10;" x1="24" y1="9" x2="24" y2="21"/>
+		
+			<line style="fill:none;stroke:#000000;stroke-width:0.72;stroke-linejoin:round;stroke-miterlimit:10;" x1="24" y1="27" x2="24" y2="39"/>
+	</g>
+</g>
+<g id="Layer_1">
+</g>
+</svg>

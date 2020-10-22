@@ -23,21 +23,21 @@
   .#{$prefix}--inline-notification {
     @include reset;
 
+    position: relative;
     display: flex;
     flex-wrap: wrap;
-    position: relative;
-    height: auto;
-    min-height: rem(48px);
+    width: 100%;
     min-width: rem(288px);
     max-width: rem(288px);
-    width: 100%;
-    color: $inverse-01;
+    height: auto;
+    min-height: rem(48px);
     margin-top: $carbon--spacing-05;
     margin-bottom: $carbon--spacing-05;
+    color: $inverse-01;
 
     @include carbon--breakpoint(md) {
-      max-width: rem(608px);
       flex-wrap: nowrap;
+      max-width: rem(608px);
     }
 
     @include carbon--breakpoint(lg) {
@@ -76,17 +76,17 @@
     color: map-get($carbon--theme--white, 'text-01');
 
     &::before {
-      content: '';
-      pointer-events: none;
       position: absolute;
       top: 0;
       left: 0;
+      box-sizing: border-box;
       width: 100%;
       height: 100%;
-      box-sizing: border-box;
-      filter: opacity(0.4);
       border-style: solid;
       border-width: 1px 1px 1px 0;
+      filter: opacity(0.4);
+      content: '';
+      pointer-events: none;
     }
   }
 
@@ -100,7 +100,7 @@
       $notification-error-background-color
     );
 
-    &:before {
+    &::before {
       border-color: $support-01;
     }
   }
@@ -115,37 +115,41 @@
       $notification-success-background-color
     );
 
-    &:before {
+    &::before {
       border-color: $support-02;
     }
   }
 
-  .#{$prefix}--inline-notification--info {
+  .#{$prefix}--inline-notification--info,
+  .#{$prefix}--inline-notification--info-square {
     @include notification--experimental($inverse-support-04, $inverse-02);
   }
 
-  .#{$prefix}--inline-notification--low-contrast.#{$prefix}--inline-notification--info {
+  .#{$prefix}--inline-notification--low-contrast.#{$prefix}--inline-notification--info,
+  .#{$prefix}--inline-notification--low-contrast.#{$prefix}--inline-notification--info-square {
     @include notification--experimental(
       $support-04,
       $notification-info-background-color
     );
 
-    &:before {
+    &::before {
       border-color: $support-04;
     }
   }
 
-  .#{$prefix}--inline-notification--warning {
+  .#{$prefix}--inline-notification--warning,
+  .#{$prefix}--inline-notification--warning-alt {
     @include notification--experimental($inverse-support-03, $inverse-02);
   }
 
-  .#{$prefix}--inline-notification--low-contrast.#{$prefix}--inline-notification--warning {
+  .#{$prefix}--inline-notification--low-contrast.#{$prefix}--inline-notification--warning,
+  .#{$prefix}--inline-notification--low-contrast.#{$prefix}--inline-notification--warning-alt {
     @include notification--experimental(
       $support-03,
       $notification-warning-background-color
     );
 
-    &:before {
+    &::before {
       border-color: $support-03;
     }
   }
@@ -153,8 +157,8 @@
   .#{$prefix}--inline-notification--warning
     .#{$prefix}--inline-notification__icon
     path[opacity='0'] {
-    fill: $carbon__black-100;
     opacity: 1;
+    fill: $carbon__black-100;
   }
 
   .#{$prefix}--inline-notification__details {
@@ -169,8 +173,8 @@
 
   .#{$prefix}--inline-notification__icon {
     flex-shrink: 0;
-    margin-right: $carbon--spacing-05;
     margin-top: rem(14px);
+    margin-right: $carbon--spacing-05;
   }
 
   .#{$prefix}--inline-notification__text-wrapper {
@@ -181,11 +185,13 @@
 
   .#{$prefix}--inline-notification__title {
     @include type-style('productive-heading-01');
+
     margin: 0 $carbon--spacing-02 0 0;
   }
 
   .#{$prefix}--inline-notification__subtitle {
     @include type-style('body-short-01');
+
     word-break: break-word;
   }
 
@@ -193,27 +199,40 @@
     height: rem(32px);
     margin-bottom: $carbon--spacing-03;
     margin-left: $carbon--spacing-08;
+    color: $inverse-link;
 
     @include carbon--breakpoint(md) {
       margin: $carbon--spacing-03 0;
     }
+  }
 
-    &,
-    &:hover,
-    &:focus,
-    &:active {
-      color: $inverse-link;
-    }
+  .#{$prefix}--inline-notification--low-contrast
+    .#{$prefix}--inline-notification__action-button.#{$prefix}--btn--ghost {
+    color: $link-01;
+  }
 
-    &:focus {
-      border-color: transparent;
-      outline: 2px solid $inverse-focus-ui;
-      outline-offset: -2px;
-    }
+  .#{$prefix}--inline-notification__action-button.#{$prefix}--btn--ghost:active,
+  .#{$prefix}--inline-notification__action-button.#{$prefix}--btn--ghost:hover {
+    background-color: $inverse-hover-ui;
+  }
 
-    &:hover {
-      background-color: $inverse-hover-ui;
-    }
+  .#{$prefix}--inline-notification--low-contrast
+    .#{$prefix}--inline-notification__action-button.#{$prefix}--btn--ghost:active,
+  .#{$prefix}--inline-notification--low-contrast
+    .#{$prefix}--inline-notification__action-button.#{$prefix}--btn--ghost:hover {
+    background-color: $carbon--white-0;
+  }
+
+  .#{$prefix}--inline-notification__action-button.#{$prefix}--btn--ghost:focus {
+    border-color: transparent;
+    outline: 2px solid $inverse-focus-ui;
+    outline-offset: -2px;
+    box-shadow: none;
+  }
+
+  .#{$prefix}--inline-notification--low-contrast
+    .#{$prefix}--inline-notification__action-button.#{$prefix}--btn--ghost:focus {
+    outline-color: $focus;
   }
 
   .#{$prefix}--inline-notification--hide-close-button
@@ -223,21 +242,22 @@
 
   .#{$prefix}--inline-notification__close-button {
     @include focus-outline('reset');
+
     position: absolute;
     top: 0;
     right: 0;
     display: flex;
     flex-direction: column;
-    justify-content: center;
     align-items: center;
-    background: transparent;
-    border: none;
-    cursor: pointer;
-    padding: 0;
-    height: rem(48px);
+    justify-content: center;
     width: rem(48px);
     min-width: rem(48px);
     max-width: rem(48px);
+    height: rem(48px);
+    padding: 0;
+    background: transparent;
+    border: none;
+    cursor: pointer;
     transition: outline $duration--fast-02 motion(standard, productive),
       background-color $duration--fast-02 motion(standard, productive);
 
@@ -256,27 +276,27 @@
   }
 
   .#{$prefix}--inline-notification--low-contrast
-    .#{$prefix}--inline-notification__close-button {
+    .#{$prefix}--inline-notification__close-button:focus {
     @include focus-outline('outline');
   }
 
-  .#{$prefix}--inline-notification--low-contrast {
+  .#{$prefix}--inline-notification--low-contrast
     .#{$prefix}--inline-notification__close-button
-      .#{$prefix}--inline-notification__close-icon {
-      fill: map-get($carbon--theme--white, 'text-01');
+    .#{$prefix}--inline-notification__close-icon {
+    fill: map-get($carbon--theme--white, 'text-01');
+  }
+
+  .#{$prefix}--inline-notification--low-contrast
+    .#{$prefix}--inline-notification__action-button {
+    color: $interactive-01;
+
+    &:active {
+      color: $interactive-01;
     }
 
-    .#{$prefix}--inline-notification__action-button {
-      color: $carbon--blue-60;
-
-      &:active {
-        color: $carbon--blue-80;
-      }
-
-      &:active,
-      &:hover {
-        background-color: $carbon--white-0;
-      }
+    &:active,
+    &:hover {
+      background-color: $carbon--white-0;
     }
   }
 }

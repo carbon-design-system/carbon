@@ -7,22 +7,38 @@ categories:
       - delete
       - do--not
       - download
+      - download--01
+      - download--02
       - download--alt
       - embed
       - export
+      - export--01
+      - export--02
       - export--alt
-      - heart
       - launch
+      - love
       - maximize
       - minimize
       - paper--clip
+      - player--flow
       - refresh
       - renew
       - repeat
       - reset
       - trash
       - upload
+      - upload--01
+      - upload--02
       - upload--alt
+  - name: Blockchain
+    members:
+      - connected--ecosystem
+      - consumer--engagement--food--journey
+      - supply--chain--optimization--01
+      - supply--chain--optimization--02
+      - transparency--01
+      - transparency--02
+      - trust
   - name: Building Structure
     members:
       - alarm
@@ -33,6 +49,7 @@ categories:
       - escalator--up
       - fire--alarm
       - fire--extinguisher
+      - id--badge
       - office
       - stairs--plan--view
   - name: Cities
@@ -127,6 +144,7 @@ categories:
       - global--technology--services
       - hybrid--cloud
       - hybrid--cloud--services
+      - ibm--cloud
       - java
       - javascript
       - list--bullet
@@ -134,6 +152,7 @@ categories:
       - marketplace
       - mas
       - mqa
+      - planning--analytics
       - saas--enablement
       - single--sign-on
       - softlayer--enablement
@@ -144,6 +163,8 @@ categories:
       - slider
       - toggle
       - video
+      - video--01
+      - video--02
       - video--alt
       - video--chat
       - video--play
@@ -159,18 +180,26 @@ categories:
       - chart--bubble
       - chart--bubble--line
       - chart--candlestick
+      - chart--custom
       - chart--error-bar
       - chart--evaluation
       - chart--high-low
       - chart--histogram
       - chart--line
       - chart--multi-line
+      - chart--multi-type
       - chart--parallel
+      - chart--pie
       - chart--radar
       - chart--river
       - chart--scatterplot
+      - chart--stepper
+      - chart--sunburst
       - chart--t-SNE
       - circle-packing
+      - code--syntax
+      - data--set
+      - employee--insights
       - flow--chart
       - flow--chart--detail
       - heat--map
@@ -181,8 +210,11 @@ categories:
       - rank
       - relationship-diagram
       - report
+      - sample--file
       - scatter-matrix
       - secure--data
+      - stem--leaf--plot
+      - time--plot
       - tree--diagram
       - tree--map
       - user--analytics
@@ -204,15 +236,18 @@ categories:
       - design--and--development--01
       - design--and--development--02
       - feedback
+      - hills
       - idea
       - ideate
       - path
       - pattern
       - user--insights
+      - user--interface
       - web--developer
       - windows
   - name: Device Interaction
     members:
+      - add--device
       - augmented--reality
       - mobile--add
       - mobile--chat
@@ -229,6 +264,10 @@ categories:
     members:
       - college
       - education
+      - feedback--02
+      - goals
+      - growth
+      - insights
       - university
   - name: Electronics
     members:
@@ -255,24 +294,53 @@ categories:
       - police
   - name: File
     members:
+      - add--document
+      - contract
+      - document--security
       - duplicate--file
       - envelope
       - file--backup
       - file--transfer
       - folder
       - rich--text--format
+  - name: Finance
+    members:
+      - client--financing--01
+      - client--financing--02
+      - commercial--financing--01
+      - commercial--financing--02
+      - finance--strategy
+      - financial--networks
+      - global--analytics
+      - global--assets-and-recovery--01
+      - global--assets-and-recovery--02
+      - global--currency
+      - global--exchange
+      - global--finance--network
+      - global--markets--bar
+      - global--markets
+      - global--security
+      - global--strategy
+      - optimize--cash-flow--01
+      - optimize--cash-flow--02
   - name: Healthcare
     members:
       - care
       - doctor
+      - first--aid
       - heart--health
       - hospital
       - medical
       - medical--charts
       - medical--staff
+      - mri
+      - mri--patient
       - pill--bottle--01
       - pills
+      - pregnant
       - stethoscope
+      - x-ray--01
+      - x-ray--02
   - name: Home
     members:
       - door--handle
@@ -297,7 +365,14 @@ categories:
     members:
       - agriculture
       - bulldozer
+      - cargo--crane
+      - cargo--ship
+      - cheese
       - farm
+      - farm--01
+      - farm--02
+      - farmer--01
+      - farmer--02
       - oil--pump
       - oil--rig
       - power
@@ -305,6 +380,8 @@ categories:
       - refinery
       - satellite
       - satellite--dish
+      - solar--field
+      - solar--panel
       - steel
       - telecom
       - tractor
@@ -332,6 +409,7 @@ categories:
   - name: Life Science
     members:
       - cell
+      - coronavirus
       - dna
       - erlenmeyer--flask
       - heart
@@ -341,18 +419,25 @@ categories:
       - microscope
       - mortar--and--pestle
       - petri--culture
+      - research
       - test--tubes
       - virus
   - name: Lifestyle
     members:
       - apple
+      - backpack
+      - blender
       - cafe
       - cherries
       - dining
       - hard--ice--cream
+      - flower--01
+      - flower--02
       - perfume
+      - racetrack
       - scale
       - soft--ice--cream
+      - sports
       - stationary--bicycle
       - tennis
       - yoga--01
@@ -377,8 +462,12 @@ categories:
       - tools
   - name: Networking
     members:
+      - automation--decision
+      - distribution--ledger
       - global--network
       - integration
+      - inspect--data
+      - global--partner
       - network
       - network--services
       - networking--01
@@ -386,6 +475,7 @@ categories:
       - networking--03
       - networking--04
       - networking--05
+      - networking--06
       - private--network
       - private--network--01
       - private--network--alt
@@ -393,10 +483,13 @@ categories:
       - reset--hybrid--cloud
       - reset--settings
       - support--services
+      - transactional--blockchain
+      - transactional--trust
       - transform
   - name: People
     members:
       - advocate
+      - design-thinking-team
       - expand--user
       - face--dissatisfied
       - face--neutral
@@ -420,19 +513,31 @@ categories:
       - person--08
       - person--09
       - renew--team
+      - team--alignment
+      - teammates
+      - user
+      - user--profile
       - user--search
   - name: Retail
     members:
       - bag
+      - clothes--rack--01
+      - clothes--rack--02
       - coat--hanger
       - credit--card
       - customer--service
+      - gift
       - price
+      - qr-code
       - receipt
+      - shirt
       - shop
       - shopping--cart
       - sneaker
+      - socks
       - tags
+      - t-shirt
+      - trousers
   - name: Security
     members:
       - firewall
@@ -466,8 +571,34 @@ categories:
       - strategy--move
       - strategy--play
       - streamline
+      - summit
       - target
       - target--area
+  - name: Supply Chain
+    members:
+      - connected--nodes--to--the--cloud
+      - managing--contractual--flow
+      - managing--items
+      - monitored--item--on--conveyor
+      - movement--in--overlapping--networks
+      - movement--of--goods--01
+      - movement--of--goods--02
+      - movement--of--goods--03
+      - movement--of--items
+      - process
+  - name: Systems DevOps
+    members:
+      - developer-z-os
+      - systems-devops--analyze
+      - systems-devops--build
+      - systems-devops--cicd-pipeline
+      - systems-devops--code
+      - systems-devops--deploy
+      - systems-devops--monitor
+      - systems-devops--plan
+      - systems-devops--provision
+      - systems-devops--release
+      - systems-devops--test
   - name: Time
     members:
       - calendar
@@ -483,6 +614,7 @@ categories:
       - automobile
       - bicycle
       - bus
+      - electric--car
       - electric--charge
       - engine
       - fuel
@@ -503,6 +635,7 @@ categories:
       - deliver--insights
       - dialogue
       - document--conversion
+      - ibm--watson
       - knows--dark--data
       - language
       - language--01
@@ -512,6 +645,7 @@ categories:
       - language--translation
       - language--translation--alphabet--a--expanded
       - natural--language--classifier
+      - natural--language--understanding
       - personality--insights
       - question--and--answer
       - relationship--extraction

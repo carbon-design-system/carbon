@@ -5,8 +5,6 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { getCellId } from './cells';
-
 /**
  * Default implemention of how we filter rows internally. The idea behind this
  * implementation is to use the given list of row ids and headers to get the
@@ -20,8 +18,14 @@ import { getCellId } from './cells';
  * @param {string} config.inputValue the current input value in the Table Search
  * @returns {Array<string>} rowIds
  */
-export const defaultFilterRows = ({ rowIds, headers, cellsById, inputValue }) =>
-  rowIds.filter(rowId =>
+export const defaultFilterRows = ({
+  rowIds,
+  headers,
+  cellsById,
+  inputValue,
+  getCellId,
+}) =>
+  rowIds.filter((rowId) =>
     headers.some(({ key }) => {
       const id = getCellId(rowId, key);
       if (typeof cellsById[id].value === 'boolean') return false;

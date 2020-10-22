@@ -275,7 +275,7 @@ const sections = [
     id: 'condensed-grid',
     name: 'Condensed grid',
     description:
-      'A condensed grid collapses the gutter to 2px. Useful for fluid layouts. Rows have 2px of margin between them to match gutter.',
+      'A condensed grid collapses the gutter to 1px. Useful for fluid layouts. Rows have 1px of margin between them to match gutter.',
     examples: [
       {
         name: 'Default usage',
@@ -379,6 +379,141 @@ const sections = [
               </div>
             </div>
             <div className="bx--row bx--row--condensed">
+              <div className="bx--col">
+                <div className="outside">
+                  <div className="inside">1/4</div>
+                </div>
+              </div>
+              <div className="bx--col">
+                <div className="outside">
+                  <div className="inside">1/4</div>
+                </div>
+              </div>
+              <div className="bx--col">
+                <div className="outside">
+                  <div className="inside">1/4</div>
+                </div>
+              </div>
+              <div className="bx--col">
+                <div className="outside">
+                  <div className="inside">1/4</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        ),
+      },
+    ],
+  },
+  ,
+  {
+    id: 'narrow-grid',
+    name: 'Narrow grid',
+    description:
+      'A narrow grid allows the container to hang 16px into the gutter on one side',
+    examples: [
+      {
+        name: 'Default usage',
+        content: () => (
+          <div className="bx--grid bx--grid--narrow">
+            <div className="bx--row">
+              <div className="bx--col">
+                <div className="outside">
+                  <div className="inside">1/4</div>
+                </div>
+              </div>
+              <div className="bx--col">
+                <div className="outside">
+                  <div className="inside">1/4</div>
+                </div>
+              </div>
+              <div className="bx--col">
+                <div className="outside">
+                  <div className="inside">1/4</div>
+                </div>
+              </div>
+              <div className="bx--col">
+                <div className="outside">
+                  <div className="inside">1/4</div>
+                </div>
+              </div>
+            </div>
+            <div className="bx--row">
+              <div className="bx--col">
+                <div className="outside">
+                  <div className="inside">1/4</div>
+                </div>
+              </div>
+              <div className="bx--col">
+                <div className="outside">
+                  <div className="inside">1/4</div>
+                </div>
+              </div>
+              <div className="bx--col">
+                <div className="outside">
+                  <div className="inside">1/4</div>
+                </div>
+              </div>
+              <div className="bx--col">
+                <div className="outside">
+                  <div className="inside">1/4</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        ),
+      },
+      {
+        name: 'Mixed row content',
+        description:
+          'Use a helper class to specify a single row as narrow.',
+        content: () => (
+          <div className="bx--grid">
+            <div className="bx--row">
+              <div className="bx--col">
+                <div className="outside">
+                  <div className="inside">1/4</div>
+                </div>
+              </div>
+              <div className="bx--col">
+                <div className="outside">
+                  <div className="inside">1/4</div>
+                </div>
+              </div>
+              <div className="bx--col">
+                <div className="outside">
+                  <div className="inside">1/4</div>
+                </div>
+              </div>
+              <div className="bx--col">
+                <div className="outside">
+                  <div className="inside">1/4</div>
+                </div>
+              </div>
+            </div>
+            <div className="bx--row bx--row--narrow">
+              <div className="bx--col">
+                <div className="outside">
+                  <div className="inside">1/4</div>
+                </div>
+              </div>
+              <div className="bx--col">
+                <div className="outside">
+                  <div className="inside">1/4</div>
+                </div>
+              </div>
+              <div className="bx--col">
+                <div className="outside">
+                  <div className="inside">1/4</div>
+                </div>
+              </div>
+              <div className="bx--col">
+                <div className="outside">
+                  <div className="inside">1/4</div>
+                </div>
+              </div>
+            </div>
+            <div className="bx--row bx--row--narrow">
               <div className="bx--col">
                 <div className="outside">
                   <div className="inside">1/4</div>
@@ -646,8 +781,7 @@ const sections = [
   {
     id: 'aspect-ratio',
     name: 'Aspect ratio',
-    description:
-      `When designing fluid layouts, sometimes it is helpful for an asset or card to be a specific aspect ratio. We offer several classes for specifying aspect ratio for given content.`,
+    description: `When designing fluid layouts, sometimes it is helpful for an asset or card to be a specific aspect ratio. We offer several classes for specifying aspect ratio for given content.`,
     examples: [
       {
         name: '2:1',
@@ -846,22 +980,30 @@ const sections = [
             <div className="bx--row">
               <div className="bx--col">
                 <div className="outside">
-                  <div className="inside bx--aspect-ratio bx--aspect-ratio--1x2">1</div>
+                  <div className="inside bx--aspect-ratio bx--aspect-ratio--1x2">
+                    1
+                  </div>
                 </div>
               </div>
               <div className="bx--col">
                 <div className="outside">
-                  <div className="inside bx--aspect-ratio bx--aspect-ratio--1x2">1</div>
+                  <div className="inside bx--aspect-ratio bx--aspect-ratio--1x2">
+                    1
+                  </div>
                 </div>
               </div>
               <div className="bx--col">
                 <div className="outside">
-                  <div className="inside bx--aspect-ratio bx--aspect-ratio--1x2">1</div>
+                  <div className="inside bx--aspect-ratio bx--aspect-ratio--1x2">
+                    1
+                  </div>
                 </div>
               </div>
               <div className="bx--col">
                 <div className="outside">
-                  <div className="inside bx--aspect-ratio bx--aspect-ratio--1x2">1</div>
+                  <div className="inside bx--aspect-ratio bx--aspect-ratio--1x2">
+                    1
+                  </div>
                 </div>
               </div>
             </div>
@@ -876,29 +1018,38 @@ const sections = [
               <div className="bx--col bx--aspect-ratio bx--aspect-ratio--2x1">
                 <div className="outside">
                   <div className="inside">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis aliquam tempus rutrum. Morbi consequat, mi quis pharetra eleifend, ipsum arcu porta arcu, malesuada egestas sapien enim ac nisi. Maecenas ipsum nibh, viverra viverra feugiat quis, convallis pulvinar nisi. Fusce eget erat in nulla vestibulum posuere id eu augue. Aliquam eget nulla volutpat, suscipit leo quis, vulputate risus. Cras orci arcu, aliquet ac eleifend placerat, interdum id augue. Morbi mollis urna sed euismod condimentum. Nulla ut mauris ex. Pellentesque id volutpat arcu. In ligula est, varius at facilisis eu, blandit ornare turpis. Nullam consequat venenatis magna sed sodales. Nam ornare nibh augue, non suscipit quam feugiat ut. Vivamus mollis libero mauris, vel venenatis justo feugiat sed. Ut consectetur nunc condimentum egestas vestibulum. Integer metus metus, elementum at magna vel, cursus commodo urna.
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                    Duis aliquam tempus rutrum. Morbi consequat, mi quis
+                    pharetra eleifend, ipsum arcu porta arcu, malesuada egestas
+                    sapien enim ac nisi. Maecenas ipsum nibh, viverra viverra
+                    feugiat quis, convallis pulvinar nisi. Fusce eget erat in
+                    nulla vestibulum posuere id eu augue. Aliquam eget nulla
+                    volutpat, suscipit leo quis, vulputate risus. Cras orci
+                    arcu, aliquet ac eleifend placerat, interdum id augue. Morbi
+                    mollis urna sed euismod condimentum. Nulla ut mauris ex.
+                    Pellentesque id volutpat arcu. In ligula est, varius at
+                    facilisis eu, blandit ornare turpis. Nullam consequat
+                    venenatis magna sed sodales. Nam ornare nibh augue, non
+                    suscipit quam feugiat ut. Vivamus mollis libero mauris, vel
+                    venenatis justo feugiat sed. Ut consectetur nunc condimentum
+                    egestas vestibulum. Integer metus metus, elementum at magna
+                    vel, cursus commodo urna.
                   </div>
                 </div>
               </div>
               <div className="bx--col bx--aspect-ratio bx--aspect-ratio--2x1">
                 <div className="outside">
-                  <div className="inside">
-                    1
-                  </div>
+                  <div className="inside">1</div>
                 </div>
               </div>
               <div className="bx--col bx--aspect-ratio bx--aspect-ratio--2x1">
                 <div className="outside">
-                  <div className="inside">
-                    1
-                  </div>
+                  <div className="inside">1</div>
                 </div>
               </div>
               <div className="bx--col bx--aspect-ratio bx--aspect-ratio--2x1">
                 <div className="outside">
-                  <div className="inside">
-                    1
-                  </div>
+                  <div className="inside">1</div>
                 </div>
               </div>
             </div>

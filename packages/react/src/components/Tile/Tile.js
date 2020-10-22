@@ -73,20 +73,30 @@ export class ClickableTile extends Component {
     className: PropTypes.string,
 
     /**
+     * Specify the function to run when the ClickableTile is clicked
+     */
+    handleClick: PropTypes.func,
+
+    /**
+     * Specify the function to run when the ClickableTile is interacted with via a keyboard
+     */
+    handleKeyDown: PropTypes.func,
+
+    /**
      * The href for the link.
      */
     href: PropTypes.string,
-
-    /**
-     * The rel property for the link.
-     */
-    rel: PropTypes.string,
 
     /**
      * `true` to use the light version. For use on $ui-01 backgrounds only.
      * Don't use this to make tile background color same as container background color.
      */
     light: PropTypes.bool,
+
+    /**
+     * The rel property for the link.
+     */
+    rel: PropTypes.string,
   };
 
   static defaultProps = {
@@ -96,7 +106,7 @@ export class ClickableTile extends Component {
     light: false,
   };
 
-  handleClick = evt => {
+  handleClick = (evt) => {
     evt.persist();
     this.setState(
       {
@@ -108,7 +118,7 @@ export class ClickableTile extends Component {
     );
   };
 
-  handleKeyDown = evt => {
+  handleKeyDown = (evt) => {
     evt.persist();
     if (matches(evt, [keys.Enter, keys.Space])) {
       this.setState(
@@ -124,6 +134,7 @@ export class ClickableTile extends Component {
     }
   };
 
+  // eslint-disable-next-line react/prop-types
   static getDerivedStateFromProps({ clicked }, state) {
     const { prevClicked } = state;
     return prevClicked === clicked
@@ -186,34 +197,14 @@ export class SelectableTile extends Component {
     className: PropTypes.string,
 
     /**
-     * `true` to select this tile.
+     * Specify the function to run when the SelectableTile is clicked
      */
-    selected: PropTypes.bool,
+    handleClick: PropTypes.func,
 
     /**
-     * The ID of the `<input>`.
+     * Specify the function to run when the SelectableTile is interacted with via a keyboard
      */
-    id: PropTypes.string,
-
-    /**
-     * The value of the `<input>`.
-     */
-    value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
-
-    /**
-     * The `name` of the `<input>`.
-     */
-    name: PropTypes.string,
-
-    /**
-     * The `title` of the `<input>`.
-     */
-    title: PropTypes.string,
-
-    /**
-     * The empty handler of the `<input>`.
-     */
-    onChange: PropTypes.func,
+    handleKeyDown: PropTypes.func,
 
     /**
      * The description of the checkmark icon.
@@ -225,15 +216,45 @@ export class SelectableTile extends Component {
     ),
 
     /**
-     * Specify the tab index of the wrapper element
+     * The ID of the `<input>`.
      */
-    tabIndex: PropTypes.number,
+    id: PropTypes.string,
 
     /**
      * `true` to use the light version. For use on $ui-01 backgrounds only.
      * Don't use this to make tile background color same as container background color.
      */
     light: PropTypes.bool,
+
+    /**
+     * The `name` of the `<input>`.
+     */
+    name: PropTypes.string,
+
+    /**
+     * The empty handler of the `<input>`.
+     */
+    onChange: PropTypes.func,
+
+    /**
+     * `true` to select this tile.
+     */
+    selected: PropTypes.bool,
+
+    /**
+     * Specify the tab index of the wrapper element
+     */
+    tabIndex: PropTypes.number,
+
+    /**
+     * The `title` of the `<input>`.
+     */
+    title: PropTypes.string,
+
+    /**
+     * The value of the `<input>`.
+     */
+    value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
   };
 
   static defaultProps = {
@@ -257,7 +278,7 @@ export class SelectableTile extends Component {
         };
   }
 
-  handleClick = evt => {
+  handleClick = (evt) => {
     evt.preventDefault();
     evt.persist();
     this.setState(
@@ -271,7 +292,7 @@ export class SelectableTile extends Component {
     );
   };
 
-  handleKeyDown = evt => {
+  handleKeyDown = (evt) => {
     evt.persist();
     if (matches(evt, [keys.Enter, keys.Space])) {
       evt.preventDefault();
@@ -289,7 +310,7 @@ export class SelectableTile extends Component {
     }
   };
 
-  handleOnChange = event => {
+  handleOnChange = (event) => {
     this.setState({ selected: event.target.checked });
     this.props.onChange(event);
   };
@@ -326,7 +347,7 @@ export class SelectableTile extends Component {
     return (
       <>
         <input
-          ref={input => {
+          ref={(input) => {
             this.input = input;
           }}
           tabIndex={-1}
@@ -339,6 +360,7 @@ export class SelectableTile extends Component {
           title={title}
           checked={this.state.selected}
         />
+        {/* eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions */}
         <label
           htmlFor={id}
           className={classes}
@@ -376,6 +398,22 @@ export class ExpandableTile extends Component {
     expanded: PropTypes.bool,
 
     /**
+     * Specify the function to run when the ExpandableTile is clicked
+     */
+    handleClick: PropTypes.func,
+
+    /**
+     * An ID that can be provided to aria-labelledby
+     */
+    id: PropTypes.string,
+
+    /**
+     * `true` to use the light version. For use on $ui-01 backgrounds only.
+     * Don't use this to make tile background color same as container background color.
+     */
+    light: PropTypes.bool,
+
+    /**
      * optional handler to decide whether to ignore a click. returns false if click should be ignored
      */
     onBeforeClick: PropTypes.func,
@@ -394,17 +432,6 @@ export class ExpandableTile extends Component {
      * The description of the "expanded" icon that can be read by screen readers.
      */
     tileExpandedIconText: PropTypes.string,
-
-    /**
-     * An ID that can be provided to aria-labelledby
-     */
-    id: PropTypes.string,
-
-    /**
-     * `true` to use the light version. For use on $ui-01 backgrounds only.
-     * Don't use this to make tile background color same as container background color.
-     */
-    light: PropTypes.bool,
   };
 
   static defaultProps = {
@@ -420,6 +447,7 @@ export class ExpandableTile extends Component {
   };
 
   static getDerivedStateFromProps(
+    // eslint-disable-next-line react/prop-types
     { expanded, tileMaxHeight, tilePadding },
     state
   ) {
@@ -449,30 +477,35 @@ export class ExpandableTile extends Component {
   }
 
   componentDidMount = () => {
-    const getStyle = window.getComputedStyle(this.tile, null);
+    if (this.tile) {
+      const getStyle = window.getComputedStyle(this.tile, null);
 
-    if (this.aboveTheFold) {
+      if (this.aboveTheFold) {
+        this.setState({
+          tileMaxHeight: this.aboveTheFold.getBoundingClientRect().height,
+          tilePadding:
+            parseInt(getStyle.getPropertyValue('padding-top'), 10) +
+            parseInt(getStyle.getPropertyValue('padding-bottom'), 10),
+        });
+      }
+    }
+  };
+
+  componentDidUpdate = (prevProps) => {
+    if (prevProps.expanded !== this.props.expanded) this.setMaxHeight();
+  };
+
+  setMaxHeight = () => {
+    if (this.state.expanded ? this.tileContent : this.aboveTheFold) {
       this.setState({
-        tileMaxHeight: this.aboveTheFold.getBoundingClientRect().height,
-        tilePadding:
-          parseInt(getStyle.getPropertyValue('padding-top'), 10) +
-          parseInt(getStyle.getPropertyValue('padding-bottom'), 10),
+        tileMaxHeight: this.state.expanded
+          ? this.tileContent.getBoundingClientRect().height
+          : this.aboveTheFold.getBoundingClientRect().height,
       });
     }
   };
 
-  componentDidUpdate = prevProps => {
-    if (prevProps.expanded !== this.props.expanded) this.setMaxHeight();
-  };
-
-  setMaxHeight = () =>
-    this.setState({
-      tileMaxHeight: this.state.expanded
-        ? this.tileContent.getBoundingClientRect().height
-        : this.aboveTheFold.getBoundingClientRect().height,
-    });
-
-  handleClick = evt => {
+  handleClick = (evt) => {
     if (!this.props.onBeforeClick(evt)) return;
     evt.persist();
     this.setState(
@@ -486,7 +519,7 @@ export class ExpandableTile extends Component {
     );
   };
 
-  handleKeyDown = evt => {
+  handleKeyDown = (evt) => {
     if (matches(evt, [keys.Enter, keys.Space])) {
       evt.persist();
       this.setState(
@@ -543,7 +576,8 @@ export class ExpandableTile extends Component {
     return (
       // eslint-disable-next-line jsx-a11y/click-events-have-key-events,jsx-a11y/no-static-element-interactions
       <button
-        ref={tile => {
+        type="button"
+        ref={(tile) => {
           this.tile = tile;
         }}
         style={tileStyle}
@@ -554,11 +588,11 @@ export class ExpandableTile extends Component {
         onClick={this.handleClick}
         tabIndex={tabIndex}>
         <div
-          ref={tileContent => {
+          ref={(tileContent) => {
             this.tileContent = tileContent;
           }}>
           <div
-            ref={aboveTheFold => {
+            ref={(aboveTheFold) => {
               this.aboveTheFold = aboveTheFold;
             }}
             className={`${prefix}--tile-content`}>

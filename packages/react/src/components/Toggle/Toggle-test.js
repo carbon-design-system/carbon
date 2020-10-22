@@ -7,8 +7,7 @@
 
 import React from 'react';
 import Toggle from '../Toggle';
-import ToggleSkeleton from '../Toggle/Toggle.Skeleton';
-import { mount, shallow } from 'enzyme';
+import { mount } from 'enzyme';
 import { settings } from 'carbon-components';
 
 const { prefix } = settings;
@@ -86,7 +85,7 @@ describe('Toggle', () => {
       wrapper.find('input').simulate('change');
 
       expect(
-        onChange.mock.calls.map(call =>
+        onChange.mock.calls.map((call) =>
           call.map((arg, i) => (i > 0 ? arg : arg.target))
         )
       ).toEqual([[inputElement]]);
@@ -108,20 +107,6 @@ describe('Toggle', () => {
       expect(call[0]).toEqual(true);
       expect(call[1]).toEqual(id);
       expect(call[2].target).toBe(inputElement);
-    });
-  });
-});
-
-describe('ToggleSkeleton', () => {
-  describe('Renders as expected', () => {
-    const wrapper = shallow(<ToggleSkeleton />);
-    const input = wrapper.find('input');
-    const toggleLabel = wrapper.find(`.${prefix}--toggle__label`);
-
-    it('Has the expected classes', () => {
-      expect(input.hasClass(`${prefix}--skeleton`)).toEqual(true);
-      expect(input.hasClass(`${prefix}--toggle`)).toEqual(true);
-      expect(toggleLabel.hasClass(`${prefix}--skeleton`)).toEqual(true);
     });
   });
 });

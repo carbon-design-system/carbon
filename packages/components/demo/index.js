@@ -21,12 +21,12 @@ if (typeof module !== 'undefined' && module.hot) {
     }
     // Releases component instances of (old) component classes that have been replaced with new ones by HMR
     Object.keys(components)
-      .map(key => components[key])
-      .filter(component => typeof component.init === 'function')
-      .forEach(Clz => {
+      .map((key) => components[key])
+      .filter((component) => typeof component.init === 'function')
+      .forEach((Clz) => {
         forEach.call(
           document.body.querySelectorAll(Clz.options.selectorInit),
-          element => {
+          (element) => {
             const instance = Clz.components.get(element);
             if (instance) {
               instance.release();

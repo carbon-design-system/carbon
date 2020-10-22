@@ -12,6 +12,8 @@ import ReactDOM from 'react-dom';
 import window from 'window-or-global';
 import { settings } from 'carbon-components';
 import OptimizedResize from './OptimizedResize';
+import { selectorFocusable, selectorTabbable } from './keyboard/navigation';
+import wrapFocus from './wrapFocus';
 
 const { prefix } = settings;
 
@@ -150,9 +152,14 @@ class FloatingMenu extends React.Component {
     children: PropTypes.object,
 
     /**
-     * The query selector indicating where the floating menu body should be placed.
+     * `true` if the menu alignment should be flipped.
      */
-    target: PropTypes.func,
+    flipped: PropTypes.bool,
+
+    /**
+     * Enable or disable focus trap behavior
+     */
+    focusTrap: PropTypes.bool,
 
     /**
      * Where to put the tooltip, relative to the trigger button.
@@ -176,11 +183,6 @@ class FloatingMenu extends React.Component {
     ]),
 
     /**
-     * The additional styles to put to the floating menu.
-     */
-    styles: PropTypes.object,
-
-    /**
      * The callback called when the menu body has been mounted to/will be unmounted from the DOM.
      */
     menuRef: PropTypes.func,
@@ -189,6 +191,32 @@ class FloatingMenu extends React.Component {
      * The callback called when the menu body has been mounted and positioned.
      */
     onPlace: PropTypes.func,
+
+    /**
+     * Specify a CSS selector that matches the DOM element that should
+     * be focused when the Modal opens
+     */
+    selectorPrimaryFocus: PropTypes.string,
+
+    /**
+     * The additional styles to put to the floating menu.
+     */
+    styles: PropTypes.object,
+
+    /**
+     * The query selector indicating where the floating menu body should be placed.
+     */
+    target: PropTypes.func,
+
+    /**
+     * The element ref of the tooltip's trigger button.
+     */
+    triggerRef: PropTypes.oneOfType([
+      PropTypes.func,
+      PropTypes.shape({
+        current: PropTypes.any,
+      }),
+    ]),
   };
 
   static defaultProps = {
@@ -224,6 +252,12 @@ class FloatingMenu extends React.Component {
    * @private
    */
   _menuBody = null;
+
+  /**
+   * Focus sentinel refs for focus trap behavior
+   */
+  startSentinel = React.createRef();
+  endSentinel = React.createRef();
 
   /**
    * Calculates the position in the viewport of floating menu,
@@ -293,17 +327,45 @@ class FloatingMenu extends React.Component {
       this._updateMenuSize();
     });
   }
+  /**
+   * Set focus on floating menu content after menu placement.
+   * @param {Element} menuBody The DOM element of the menu body.
+   * @private
+   */
+  _focusMenuContent = (menuBody) => {
+    const primaryFocusNode = menuBody.querySelector(
+      this.props.selectorPrimaryFocus || null
+    );
+    const tabbableNode = menuBody.querySelector(selectorTabbable);
+    const focusableNode = menuBody.querySelector(selectorFocusable);
+    const focusTarget =
+      primaryFocusNode || // User defined focusable node
+      tabbableNode || // First sequentially focusable node
+      focusableNode || // First programmatic focusable node
+      menuBody;
+    if (this.props.focusTrap) {
+      focusTarget.focus();
+    }
+    if (focusTarget === menuBody && __DEV__) {
+      warning(
+        focusableNode === null,
+        'Floating Menus must have at least a programmatically focusable child. ' +
+          'This can be accomplished by adding tabIndex="-1" to the content element.'
+      );
+    }
+  };
 
   componentDidUpdate(prevProps) {
     this._updateMenuSize(prevProps);
     const { onPlace } = this.props;
-    if (
-      this._placeInProgress &&
-      this.state.floatingPosition &&
-      typeof onPlace === 'function'
-    ) {
-      onPlace(this._menuBody);
-      this._placeInProgress = false;
+    if (this._placeInProgress && this.state.floatingPosition) {
+      if (this._menuBody && !this._menuBody.contains(document.activeElement)) {
+        this._focusMenuContent(this._menuBody);
+      }
+      if (typeof onPlace === 'function') {
+        onPlace(this._menuBody);
+        this._placeInProgress = false;
+      }
     }
   }
 
@@ -311,7 +373,7 @@ class FloatingMenu extends React.Component {
    * A callback for called when menu body is mounted or unmounted.
    * @param {Element} menuBody The menu body being mounted. `null` if the menu body is being unmounted.
    */
-  _menuRef = menuBody => {
+  _menuRef = (menuBody) => {
     const { menuRef } = this.props;
     this._placeInProgress = !!menuBody;
     menuRef && menuRef((this._menuBody = menuBody));
@@ -351,11 +413,34 @@ class FloatingMenu extends React.Component {
     });
   };
 
+  /**
+   * Blur handler for when focus wrap behavior is enabled
+   * @param {Event} event
+   * @param {Element} event.target previously focused node
+   * @param {Element} event.relatedTarget current focused node
+   */
+  handleBlur = ({
+    target: oldActiveNode,
+    relatedTarget: currentActiveNode,
+  }) => {
+    if (currentActiveNode && oldActiveNode) {
+      const { current: startSentinelNode } = this.startSentinel;
+      const { current: endSentinelNode } = this.endSentinel;
+      wrapFocus({
+        bodyNode: this._menuBody,
+        startSentinelNode,
+        endSentinelNode,
+        currentActiveNode,
+        oldActiveNode,
+      });
+    }
+  };
+
   render() {
     if (typeof document !== 'undefined') {
-      const { target } = this.props;
+      const { focusTrap, target } = this.props;
       return ReactDOM.createPortal(
-        <>
+        <div onBlur={focusTrap ? this.handleBlur : null}>
           {/* Non-translatable: Focus management code makes this `<span>` not actually read by screen readers */}
           <span
             ref={this.startSentinel}
@@ -373,7 +458,7 @@ class FloatingMenu extends React.Component {
             className={`${prefix}--visually-hidden`}>
             Focus sentinel
           </span>
-        </>,
+        </div>,
         !target ? document.body : target()
       );
     }

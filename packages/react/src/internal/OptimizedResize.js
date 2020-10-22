@@ -14,7 +14,7 @@ const OptimizedResize = (function optimizedResize() {
 
   // run the actual callbacks
   function runCallbacks() {
-    callbacks.forEach(callback => {
+    callbacks.forEach((callback) => {
       callback();
     });
 
@@ -41,7 +41,7 @@ const OptimizedResize = (function optimizedResize() {
 
   return {
     // public method to add additional callback
-    add: callback => {
+    add: (callback) => {
       if (!callbacks.length) {
         window.addEventListener('resize', resize);
       }

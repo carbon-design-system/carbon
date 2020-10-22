@@ -125,7 +125,7 @@ describe('ToastNotification', () => {
     it('interpolates matching className based on kind prop', () => {
       const kinds = ['error', 'info', 'success', 'warning'];
 
-      kinds.forEach(kind => {
+      kinds.forEach((kind) => {
         toast.setProps({ kind });
         expect(
           toast.hasClass(`${prefix}--toast-notification--${kind}`)
@@ -143,7 +143,10 @@ describe('ToastNotification', () => {
     });
 
     it('can render any node for the subtitle and caption', () => {
-      toast.setProps({ subtitle: <button />, caption: <button /> });
+      toast.setProps({
+        subtitle: <button type="button" />,
+        caption: <button type="button" />,
+      });
       expect(toast.length).toEqual(1);
     });
   });
@@ -236,7 +239,7 @@ describe('InlineNotification', () => {
     it('interpolates matching className based on kind prop', () => {
       const kinds = ['error', 'info', 'success', 'warning'];
 
-      kinds.forEach(kind => {
+      kinds.forEach((kind) => {
         inline.setProps({ kind });
         expect(
           inline.find(`.${prefix}--inline-notification--${kind}`).exists()
@@ -254,7 +257,7 @@ describe('InlineNotification', () => {
     });
 
     it('can render any node for the subtitle', () => {
-      inline.setProps({ subtitle: <button /> });
+      inline.setProps({ subtitle: <button type="button" /> });
       expect(inline.length).toEqual(1);
     });
   });

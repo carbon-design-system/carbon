@@ -23,8 +23,8 @@
   .#{$prefix}--switcher {
     display: flex;
     flex-direction: column;
-    justify-content: center;
     align-items: center;
+    justify-content: center;
     color: $shell-panel-text-01;
   }
 
@@ -48,15 +48,16 @@
 
   .#{$prefix}--switcher__item-link {
     @include carbon--type-style('productive-heading-01');
+
     display: block;
     height: $spacing-07;
-    text-decoration: none;
     padding: rem(6px) $spacing-05;
     color: $shell-panel-text-01;
+    text-decoration: none;
 
     &:hover:not(.#{$prefix}--switcher__item-link--selected) {
-      background: $shell-panel-bg-02;
       color: $shell-panel-text-02;
+      background: $shell-panel-bg-02;
       cursor: pointer;
     }
 
@@ -66,14 +67,14 @@
     }
 
     &:active {
-      background: $shell-panel-bg-03;
       color: $shell-panel-text-02;
+      background: $shell-panel-bg-03;
     }
   }
 
   .#{$prefix}--switcher__item-link--selected {
-    background: $shell-panel-bg-04;
     color: $shell-panel-text-02;
+    background: $shell-panel-bg-04;
   }
 }
 

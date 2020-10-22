@@ -6,12 +6,12 @@
 }
 
 // grid styles
-#root .outside {
+.bx--grid .outside {
   min-height: 80px;
   height: 100%;
 }
 
-#root .inside {
+.bx--grid .inside {
   min-height: 80px;
   height: 100%;
 }
@@ -57,4 +57,15 @@
 #templates .bx--grid--condensed .inside,
 #templates .bx--row--condensed .inside {
   background: none;
+}
+
+#templates .bx--grid--narrow .inside,
+#templates .bx--row--narrow .inside {
+  background-color: $teal-10;
+}
+
+#templates .bx--grid--narrow [class*='col'],
+#templates .bx--row--narrow [class*='col'] {
+  background-color: $teal-20;
+  outline: 1px dashed $teal-40;
 }

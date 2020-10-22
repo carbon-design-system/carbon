@@ -1,5 +1,3 @@
-<!-- alex disable hooks -->
-
 <!--
 Inspired by Uber's Go Style Guide:
 https://github.com/uber-go/guide/blob/85bf203f4371a8ae9e5e9a4d52ea77b17ca04ae6/style.md
@@ -66,8 +64,11 @@ row before the </tbody></table> line.
 - [React](#react)
   - [Guidelines](#guidelines)
     - [Writing a component](#writing-a-component)
+    - [Translating a component](#translating-a-component)
+      - [Working with messages that depend on state](#working-with-messages-that-depend-on-state)
   - [Style](#style-1)
     - [Naming event handlers](#naming-event-handlers)
+    - [Naming experimental code](#naming-experimental-code)
 - [Sass](#sass)
   - [Guidelines](#guidelines-1)
     - [Author component styles using mixins](#author-component-styles-using-mixins)
@@ -220,6 +221,100 @@ _Note: not every component will mirror the structure above. Some will need to
 incorporate `useEffect`, some will not. You can think of the outline above as
 slots that you can fill if you need this functionality in a component._
 
+#### Translating a component
+
+Certain components will need to expose a way for the caller to pass in
+translated strings. For a wide variety of components, this should be done
+through props. However, if there are situations where props don't make sense or
+the data that needs to be translated depends on state or is nested you will need
+to use the following strategy to translate a component.
+
+For component translation, you will need to define a map of translation ids and
+their corresponding default values, along with a default `translateWithId` prop.
+For example:
+
+```js
+const translationIds = {
+  'carbon.component-name.field': 'Default value',
+  'carbon.component-name.other-field': 'Other value',
+};
+
+function translateWithId(messageId) {
+  return translationIds[messageId];
+}
+
+function MyComponent({ translateWithId: t = translateWithId }) {
+  return (
+    <>
+      <span>t('carbon.component-name.field')</span>
+      <span>t('carbon.component-name.other-field')</span>
+    </>
+  );
+}
+```
+
+The `id`s used in `translationIds` should be consistent between major versions.
+Changing one will represent a breaking change for the component.
+
+These translation message `id`s should be specified in the component
+documentation page.
+
+##### Working with messages that depend on state
+
+If it seems like your translation requires state in order to be translated
+correctly, consider creating specific message ids for each state value.
+
+For example, when working with something that can be sorted in ascending or
+descending order you could create two message ids and choose, based on state,
+which one to use.
+
+```jsx
+function MyComponent({ translateWithId: t = translateWithId }) {
+  const [sortDirection, setSortDirection] = useState('ASC');
+
+  function onClick() {
+    if (sortDirection === 'ASC') {
+      setSortDirection('DESC');
+    } else {
+      setSortDirection('ASC');
+    }
+  }
+
+  return (
+    <>
+      <span>
+        {sortDirection === 'ASC'
+          ? t('carbon.component-name.sort.ascending')
+          : t('carbon.component-name.sort.descending')}
+      </span>
+      <button onClick={onClick}>t('carbon.component-name.toggle-sort')</button>
+    </>
+  );
+}
+```
+
+If the message depends on a state value, for example a count, then you should
+pass along this information as a state argument to `translateWithId`.
+
+```jsx
+function MyComponent({ translateWithId: t = translateWithId }) {
+  const [count, updateCount] = useState(0);
+  const translationState = {
+    count,
+  };
+
+  return (
+    <>
+      <span>The current count is:
+      {t('carbon.component-name.display-count'), translationState}</span>
+      <button onClick={() => updateCount(count + 1)}>
+        {t('carbon.component-name.increment-count')}</span>
+      </button>
+    </>
+  );
+}
+```
+
 ### Style
 
 #### Naming event handlers
@@ -281,6 +376,48 @@ When writing event handlers, we prefer using the exact name, `onClick` to a
 shorthand. If that name is already being used in a given scope, which often
 happens if the component supports a prop `onClick`, then we prefer to specify
 the function as `handleOnClick`.
+
+#### Naming experimental code
+
+The team occasionally will author code, or accept contributions, that is
+considered experimental or unstable. The goal for this code is to ship it as
+unstable for sponsor groups to leverage. During this time, the team can get
+feedback around what is working and what does not work so that changes can be
+made before an official release.
+
+For experimental or unstable code, we use the `unstable_` prefix. For example:
+
+```js
+// An unstable method
+function unstable_layout() {
+  // ...
+}
+
+// An unstable variable
+const unstable_meta = {
+  // ...
+};
+
+// An unstable component will retain its name, specifically for things like
+// the rules of hooks plugin which depend on the correct casing of the name
+function Pagination(props) {
+  // ...
+}
+
+// However, when we export the component we will export it with the `unstable_`
+// prefix. (Similar to React.unstable_Suspense, React.unstable_Profiler)
+export { default as unstable_Pagination } from './components/Pagination';
+```
+
+For teams using these features, they will need to import the functionality by
+using the `unstable_` prefix. For example:
+
+```jsx
+import { unstable_Pagination as Pagination } from 'carbon-components-react';
+```
+
+This code should be treated as experimental and will break between release
+versions for the package that it is being imported from.
 
 ## Sass
 

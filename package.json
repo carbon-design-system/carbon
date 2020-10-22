@@ -5,12 +5,14 @@
   "repository": "git@github.com:carbon-design-system/carbon.git",
   "license": "Apache-2.0",
   "engines": {
-    "node": "12.x"
+    "node": ">=12.x"
   },
   "workspaces": {
     "packages": [
-      "packages/*",
-      "actions/*"
+      "actions/*",
+      "codemods",
+      "config/*",
+      "packages/*"
     ],
     "nohoist": []
   },
@@ -21,9 +23,8 @@
     "doctoc": "doctoc --title '## Table of Contents'",
     "format": "prettier --write '**/*.{js,md,scss,ts}' '!**/{build,es,lib,storybook,ts,umd}/**'",
     "format:diff": "prettier --list-different '**/*.{js,md,scss,ts}' '!**/{build,es,lib,storybook,ts,umd}/**' '!packages/components/**'",
-    "lint": "eslint packages actions",
-    "lint:docs": "alex 'docs/**/*.md' -q",
-    "lint:styles": "stylelint '**/*.{css,scss}' --config ./packages/stylelint-config-elements",
+    "lint": "eslint actions config codemods packages",
+    "lint:styles": "stylelint '**/*.{css,scss}' --report-needless-disables --report-invalid-scope-disables",
     "sync": "carbon-cli sync",
     "test": "cross-env BABEL_ENV=test jest",
     "test:e2e": "cross-env BABEL_ENV=test jest --testPathPattern=e2e --testPathIgnorePatterns='examples,/packages/components/,/packages/react/'"
@@ -35,21 +36,19 @@
     "react-test-renderer": "~16.9.0"
   },
   "devDependencies": {
-    "@babel/core": "^7.4.4",
+    "@babel/core": "^7.10.0",
     "@babel/plugin-proposal-class-properties": "^7.7.4",
     "@babel/plugin-proposal-export-default-from": "^7.7.4",
     "@babel/plugin-proposal-export-namespace-from": "^7.7.4",
-    "@babel/plugin-transform-runtime": "^7.7.6",
-    "@babel/preset-env": "^7.7.7",
-    "@babel/preset-react": "^7.7.4",
-    "@babel/runtime": "^7.7.7",
-    "@carbon/cli": "10.9.0",
+    "@babel/plugin-transform-runtime": "^7.10.0",
+    "@babel/preset-env": "^7.10.0",
+    "@babel/preset-react": "^7.10.0",
+    "@babel/runtime": "^7.10.0",
     "@commitlint/cli": "^8.3.5",
     "@commitlint/config-conventional": "^8.3.4",
     "@ibma/aat": "https://able.ibm.com/tools/dist/ibma-aat-2.0.6.tgz",
-    "alex": "^8.0.0",
     "axe-core": "^3.3.2",
-    "babel-jest": "^24.9.0",
+    "babel-jest": "^26.0.1",
     "cross-env": "^5.2.0",
     "cross-spawn": "^6.0.5",
     "doctoc": "^1.4.0",
@@ -57,20 +56,19 @@
     "enzyme-adapter-react-16": "^1.14.0",
     "enzyme-to-json": "^3.3.5",
     "eslint": "^6.8.0",
-    "eslint-config-carbon": "10.6.0",
     "fs-extra": "^8.1.0",
     "glob": "^7.1.4",
     "husky": "^4.0.10",
-    "jest": "^25.1.0",
-    "jest-circus": "^24.9.0",
+    "jest": "^26.0.1",
+    "jest-circus": "^26.0.1",
     "jest-junit": "^10.0.0",
     "lerna": "^3.20.2",
     "lint-staged": "^9.5.0",
-    "prettier": "^1.19.1",
+    "prettier": "^2.1.0",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
     "rimraf": "^3.0.0",
-    "stylelint": "^13.0.0"
+    "stylelint": "^13.6.0"
   },
   "husky": {
     "hooks": {
@@ -111,7 +109,8 @@
           "perf",
           "refactor",
           "revert",
-          "test"
+          "test",
+          "style"
         ]
       ]
     }
@@ -122,31 +121,24 @@
       "eslint",
       "git add"
     ],
-    "packages/components/**/*.scss": [
+    "**/*.scss": [
       "prettier --write",
+      "stylelint --report-needless-disables --report-invalid-scope-disables --allow-empty-input",
       "git add"
     ],
     "!(*sass).md": [
-      "alex",
       "prettier --write",
       "git add"
     ]
   },
   "eslintConfig": {
     "extends": [
-      "eslint-config-carbon"
+      "carbon"
     ]
-  },
-  "prettier": {
-    "jsxBracketSameLine": true,
-    "printWidth": 80,
-    "singleQuote": true,
-    "trailingComma": "es5",
-    "proseWrap": "always"
   },
   "stylelint": {
     "extends": [
-      "./packages/stylelint-config-elements"
+      "./config/stylelint-config-carbon"
     ]
   },
   "jest": {

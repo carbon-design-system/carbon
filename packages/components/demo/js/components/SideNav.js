@@ -12,11 +12,6 @@ import {
 class SideNav extends Component {
   static propTypes = {
     /**
-     * The array of component data.
-     */
-    items: PropTypes.arrayOf(PropTypes.shape()).isRequired,
-
-    /**
      * The ID of the selected component.
      */
     activeItemId: PropTypes.string,
@@ -27,12 +22,17 @@ class SideNav extends Component {
     className: PropTypes.string,
 
     /**
+     * The array of component data.
+     */
+    items: PropTypes.arrayOf(PropTypes.shape()).isRequired,
+
+    /**
      * The handler for the `click` event for changing selection.
      */
     onItemClick: PropTypes.func,
   };
 
-  handleItemClick = evt => {
+  handleItemClick = (evt) => {
     const { onItemClick = () => {} } = this.props;
     onItemClick(evt);
     evt.preventDefault();
@@ -44,8 +44,8 @@ class SideNav extends Component {
       <UIShellSideNav className={className}>
         <SideNavItems>
           {items
-            .filter(item => !item.isHidden)
-            .map(item => {
+            .filter((item) => !item.isHidden)
+            .map((item) => {
               const { id, name, label } = item;
               return (
                 <SideNavLink

@@ -5,35 +5,38 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React, { useState } from 'react';
-import { storiesOf } from '@storybook/react';
+import React from 'react';
 import { action } from '@storybook/addon-actions';
-import { withKnobs, boolean, select, text } from '@storybook/addon-knobs';
+import { boolean, select, text } from '@storybook/addon-knobs';
 import ComboBox from '../ComboBox';
-import Button from '../Button';
+import mdx from './ComboBox.mdx';
 
 const items = [
   {
     id: 'option-0',
-    text: 'Option 1',
+    text:
+      'An example option that is really long to show what should be done to handle long text',
   },
   {
     id: 'option-1',
-    text: 'Option 2',
+    text: 'Option 1',
   },
   {
     id: 'option-2',
+    text: 'Option 2',
+  },
+  {
+    id: 'option-3',
     text: 'Option 3',
     selected: true,
   },
   {
-    id: 'option-3',
+    id: 'option-4',
     text: 'Option 4',
   },
   {
-    id: 'option-4',
-    text:
-      'An example option that is really long to show what should be done to handle long text',
+    id: 'option-5',
+    text: 'Option 5',
   },
 ];
 
@@ -48,6 +51,28 @@ const directions = {
   'Top ': 'top',
 };
 
+export default {
+  title: 'ComboBox',
+  component: ComboBox,
+  parameters: {
+    docs: {
+      page: mdx,
+    },
+  },
+};
+
+export const combobox = () => (
+  <div style={{ width: 300 }}>
+    <ComboBox
+      items={items}
+      itemToString={(item) => (item ? item.text : '')}
+      placeholder="Filter..."
+      titleText="ComboBox title"
+      helperText="Combobox helper text"
+    />
+  </div>
+);
+
 const props = () => ({
   id: text('Combobox ID (id)', 'carbon-combobox-example'),
   placeholder: text('Placeholder text (placeholder)', 'Filter...'),
@@ -60,67 +85,41 @@ const props = () => ({
   size: select('Field size (size)', sizes, undefined) || undefined,
   direction: select('Dropdown direction (direction)', directions, 'bottom'),
   onChange: action('onChange'),
+  onToggleClick: action('onClick'),
 });
 
-const ControlledComboBoxApp = props => {
-  const [selectedItem, setSelectedItem] = useState(items[0]);
-  let uid = items.length;
-  return (
-    <>
-      <ComboBox
-        {...props}
-        items={items}
-        itemToString={item => (item ? item.text : '')}
-        onChange={({ selectedItem }) => setSelectedItem(selectedItem)}
-        initialSelectedItem={items[0]}
-        selectedItem={selectedItem}
-      />
-      <Button
-        style={{ marginTop: '1rem' }}
-        onClick={() => {
-          items.push({
-            id: `id-${uid++}`,
-            text: `Option ${uid}`,
-          });
-          setSelectedItem(items[items.length - 1]);
-        }}>
-        Add new item
-      </Button>
-    </>
-  );
-};
-ControlledComboBoxApp.__docgenInfo = {
-  ...ComboBox.__docgenInfo,
-  props: {
-    ...ComboBox.__docgenInfo.props,
-  },
-};
+export const Playground = () => (
+  <div style={{ width: 300 }}>
+    <ComboBox
+      items={items}
+      itemToString={(item) => (item ? item.text : '')}
+      {...props()}
+    />
+  </div>
+);
 
-storiesOf('ComboBox', module)
-  .addDecorator(withKnobs)
-  .add(
-    'Default',
-    () => (
-      <div style={{ width: 300 }}>
-        <ComboBox
-          items={items}
-          itemToString={item => (item ? item.text : '')}
-          {...props()}
-        />
-      </div>
-    ),
-    {
-      info: {
-        text: 'ComboBox',
-      },
-    }
-  )
-  .add(
-    'application-level control for selection',
-    () => <ControlledComboBoxApp {...props()} />,
-    {
-      info: {
-        text: `Controlled ComboBox example application`,
-      },
-    }
-  );
+export const disabled = () => (
+  <div style={{ width: 300 }}>
+    <ComboBox
+      disabled
+      items={items}
+      itemToString={(item) => (item ? item.text : '')}
+      placeholder="Filter..."
+      titleText="ComboBox title"
+      helperText="Combobox helper text"
+    />
+  </div>
+);
+
+export const light = () => (
+  <div style={{ width: 300 }}>
+    <ComboBox
+      light
+      items={items}
+      itemToString={(item) => (item ? item.text : '')}
+      placeholder="Filter..."
+      titleText="ComboBox title"
+      helperText="Combobox helper text"
+    />
+  </div>
+);

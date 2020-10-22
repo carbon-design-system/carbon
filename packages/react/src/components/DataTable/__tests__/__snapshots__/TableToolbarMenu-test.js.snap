@@ -45,7 +45,7 @@ exports[`DataTable.TableToolbarMenu should render 1`] = `
           "render": [Function],
         }
       }
-      tabIndex={0}
+      selectorPrimaryFocus="[data-overflow-menu-primary-focus]"
       title="Add"
     >
       <ClickListener
@@ -60,20 +60,19 @@ exports[`DataTable.TableToolbarMenu should render 1`] = `
           onClose={[Function]}
           onKeyDown={[Function]}
           open={false}
-          tabIndex={0}
           title="Add"
+          type="button"
         >
           <ForwardRef(Download16)
             aria-label="Add"
             className="bx--overflow-menu__icon"
-            focusable="false"
             onClick={[Function]}
             onKeyDown={[Function]}
           >
             <Icon
               aria-label="Add"
               className="bx--overflow-menu__icon"
-              focusable="false"
+              fill="currentColor"
               height={16}
               onClick={[Function]}
               onKeyDown={[Function]}
@@ -85,6 +84,7 @@ exports[`DataTable.TableToolbarMenu should render 1`] = `
               <svg
                 aria-label="Add"
                 className="bx--overflow-menu__icon"
+                fill="currentColor"
                 focusable="false"
                 height={16}
                 onClick={[Function]}

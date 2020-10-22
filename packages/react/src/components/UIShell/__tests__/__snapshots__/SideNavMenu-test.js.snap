@@ -8,7 +8,6 @@ exports[`SideNavMenu should render 1`] = `
         Array [
           <button
             aria-expanded="false"
-            aria-haspopup="true"
             class="bx--side-nav__submenu"
             type="button"
           >
@@ -29,6 +28,7 @@ exports[`SideNavMenu should render 1`] = `
             >
               <svg
                 aria-hidden="true"
+                fill="currentColor"
                 focusable="false"
                 height="20"
                 preserveAspectRatio="xMidYMid meet"
@@ -65,7 +65,6 @@ exports[`SideNavMenu should render 1`] = `
   >
     <button
       aria-expanded={false}
-      aria-haspopup="true"
       className="bx--side-nav__submenu"
       onClick={[Function]}
       type="button"
@@ -97,6 +96,7 @@ exports[`SideNavMenu should render 1`] = `
         >
           <ForwardRef(ChevronDown20)>
             <Icon
+              fill="currentColor"
               height={20}
               preserveAspectRatio="xMidYMid meet"
               viewBox="0 0 32 32"
@@ -105,6 +105,7 @@ exports[`SideNavMenu should render 1`] = `
             >
               <svg
                 aria-hidden={true}
+                fill="currentColor"
                 focusable="false"
                 height={20}
                 preserveAspectRatio="xMidYMid meet"

@@ -1,0 +1,29 @@
+{
+  "name": "carbon-components-react-example-fully-customized-data-table",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Sample project for creating fully customized state management of carbon-components-react data table",
+  "dependencies": {
+    "carbon-components": "latest",
+    "carbon-components-react": "latest",
+    "carbon-icons": "latest",
+    "lodash-es": "^4.17.0",
+    "node-sass": "^4.14.1",
+    "prop-types": "^15.7.0",
+    "react": "^16.10.2",
+    "react-dom": "^16.10.2",
+    "react-scripts": "^3.2.0",
+    "use-debounce": "^3.3.0"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
+  },
+  "browserslist": [
+    "last 1 version",
+    "Firefox ESR",
+    "ie >= 11"
+  ]
+}

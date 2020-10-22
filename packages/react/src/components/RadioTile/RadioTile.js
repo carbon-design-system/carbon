@@ -61,14 +61,12 @@ function RadioTile({
         name={name}
         value={value}
         className={`${prefix}--tile-input`}
+        tabIndex={tabIndex}
         onChange={handleOnChange}
+        onKeyDown={handleOnKeyDown}
         id={inputId}
       />
-      <label
-        htmlFor={inputId}
-        className={classes}
-        tabIndex={tabIndex}
-        onKeyDown={handleOnKeyDown}>
+      <label htmlFor={inputId} className={classes}>
         <span className={`${prefix}--tile__checkmark`}>
           <CheckmarkFilled />
         </span>
@@ -85,6 +83,11 @@ RadioTile.propTypes = {
   checked: PropTypes.bool,
 
   /**
+   * The tile content.
+   */
+  children: PropTypes.node,
+
+  /**
    * The CSS class names.
    */
   className: PropTypes.string,
@@ -93,16 +96,6 @@ RadioTile.propTypes = {
    * `true` if the `<input>` should be checked at initialization.
    */
   defaultChecked: PropTypes.bool,
-
-  /**
-   * The ID of the `<input>`.
-   */
-  id: PropTypes.string,
-
-  /**
-   * The `name` of the `<input>`.
-   */
-  name: PropTypes.string,
 
   /**
    * The description of the tile checkmark icon.
@@ -114,14 +107,24 @@ RadioTile.propTypes = {
   ),
 
   /**
+   * The ID of the `<input>`.
+   */
+  id: PropTypes.string,
+
+  /**
+   * `true` to use the light version.
+   */
+  light: PropTypes.bool,
+
+  /**
+   * The `name` of the `<input>`.
+   */
+  name: PropTypes.string,
+
+  /**
    * The handler of the massaged `change` event on the `<input>`.
    */
   onChange: PropTypes.func,
-
-  /**
-   * The `value` of the `<input>`.
-   */
-  value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
 
   /**
    * Specify the tab index of the wrapper element
@@ -129,9 +132,9 @@ RadioTile.propTypes = {
   tabIndex: PropTypes.number,
 
   /**
-   * `true` to use the light version.
+   * The `value` of the `<input>`.
    */
-  light: PropTypes.bool,
+  value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
 };
 
 RadioTile.defaultProps = {

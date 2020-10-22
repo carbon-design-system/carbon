@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!-- Generator: Adobe Illustrator 24.1.2, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 48 48" style="enable-background:new 0 0 48 48;" xml:space="preserve">
+<g id="transactional--blockchain">
+	<g id="transactional--blockchain_1_">
+		<polyline style="fill:none;stroke:#000000;stroke-width:0.72;stroke-miterlimit:10;" points="32,33 29,36 32,39 		"/>
+		<polyline style="fill:none;stroke:#000000;stroke-width:0.72;stroke-linejoin:round;stroke-miterlimit:10;" points="9,26 9,12 
+			19,12 		"/>
+		<polyline style="fill:none;stroke:#000000;stroke-width:0.72;stroke-miterlimit:10;" points="16,15 19,12 16,9 		"/>
+		<polyline style="fill:none;stroke:#000000;stroke-width:0.72;stroke-linejoin:round;stroke-miterlimit:10;" points="29,36 39,36 
+			39,22 		"/>
+		<line style="fill:none;stroke:#000000;stroke-width:0.72;stroke-miterlimit:10;" x1="31" y1="12" x2="37" y2="12"/>
+		<line style="fill:none;stroke:#000000;stroke-width:0.72;stroke-miterlimit:10;" x1="31" y1="14" x2="37" y2="14"/>
+		<line style="fill:none;stroke:#000000;stroke-width:0.72;stroke-miterlimit:10;" x1="31" y1="16" x2="35" y2="16"/>
+		<line style="fill:none;stroke:#000000;stroke-width:0.72;stroke-miterlimit:10;" x1="11" y1="32" x2="17" y2="32"/>
+		<line style="fill:none;stroke:#000000;stroke-width:0.72;stroke-miterlimit:10;" x1="11" y1="34" x2="17" y2="34"/>
+		<line style="fill:none;stroke:#000000;stroke-width:0.72;stroke-miterlimit:10;" x1="11" y1="36" x2="15" y2="36"/>
+		
+			<line style="fill:none;stroke:#000000;stroke-width:0.72;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;" x1="24" y1="23" x2="24" y2="25"/>
+		<circle cx="24" cy="23" r="1"/>
+		<g id="lock_1_">
+			<path style="fill:none;stroke:#000000;stroke-width:0.72;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;" d="
+				M26.5,19v-2.5c0-1.381-1.119-2.5-2.5-2.5s-2.5,1.119-2.5,2.5V19"/>
+		</g>
+		
+			<rect x="9" y="29" style="fill:none;stroke:#000000;stroke-width:0.72;stroke-linejoin:round;stroke-miterlimit:10;" width="10" height="10"/>
+		
+			<rect x="19" y="19" style="fill:none;stroke:#000000;stroke-width:0.72;stroke-linejoin:round;stroke-miterlimit:10;" width="10" height="10"/>
+		
+			<rect x="29" y="9" style="fill:none;stroke:#000000;stroke-width:0.72;stroke-linejoin:round;stroke-miterlimit:10;" width="10" height="10"/>
+	</g>
+</g>
+<g id="Layer_1">
+</g>
+</svg>

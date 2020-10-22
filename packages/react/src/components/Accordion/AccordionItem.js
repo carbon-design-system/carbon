@@ -15,16 +15,17 @@ import { useId } from '../../internal/useId';
 import deprecate from '../../prop-types/deprecate.js';
 
 const { prefix } = settings;
-const defaultRenderExpando = props => <button {...props} />;
+const defaultRenderExpando = (props) => <button type="button" {...props} />;
 
 function AccordionItem({
   children,
   className: customClassName,
-  iconDescription,
+  iconDescription, // eslint-disable-line
   open = false,
   onHeadingClick,
   renderExpando: Expando = defaultRenderExpando,
   title = 'title',
+  disabled,
   ...rest
 }) {
   const [isOpen, setIsOpen] = useState(open);
@@ -35,6 +36,7 @@ function AccordionItem({
     [`${prefix}--accordion__item`]: true,
     [`${prefix}--accordion__item--active`]: isOpen,
     [`${prefix}--accordion__item--${animation}`]: animation,
+    [`${prefix}--accordion__item--disabled`]: disabled,
     [customClassName]: !!customClassName,
   });
 
@@ -73,12 +75,12 @@ function AccordionItem({
   return (
     <li className={className} {...rest} onAnimationEnd={handleAnimationEnd}>
       <Expando
+        disabled={disabled}
         aria-controls={id}
         aria-expanded={isOpen}
         className={`${prefix}--accordion__heading`}
         onClick={onClick}
         onKeyDown={onKeyDown}
-        title={title || iconDescription}
         type="button">
         <ChevronRight16 className={`${prefix}--accordion__arrow`} />
         <div className={`${prefix}--accordion__title`}>{title}</div>
@@ -102,15 +104,9 @@ AccordionItem.propTypes = {
   className: PropTypes.string,
 
   /**
-   * The accordion title.
+   * Specify whether an individual AccordionItem should be disabled
    */
-  title: PropTypes.node,
-
-  /**
-   * The callback function to render the expando button.
-   * Can be a React component class.
-   */
-  renderExpando: PropTypes.func,
+  disabled: PropTypes.bool,
 
   /**
    * The description of the expando icon.
@@ -124,11 +120,6 @@ AccordionItem.propTypes = {
   ),
 
   /**
-   * `true` to open the expando.
-   */
-  open: PropTypes.bool,
-
-  /**
    * The handler of the massaged `click` event.
    */
   onClick: PropTypes.func,
@@ -137,6 +128,22 @@ AccordionItem.propTypes = {
    * The handler of the massaged `click` event on the heading.
    */
   onHeadingClick: PropTypes.func,
+
+  /**
+   * `true` to open the expando.
+   */
+  open: PropTypes.bool,
+
+  /**
+   * The callback function to render the expando button.
+   * Can be a React component class.
+   */
+  renderExpando: PropTypes.func,
+
+  /**
+   * The accordion title.
+   */
+  title: PropTypes.node,
 };
 
 export default AccordionItem;

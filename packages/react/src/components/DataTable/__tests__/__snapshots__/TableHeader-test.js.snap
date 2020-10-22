@@ -5,36 +5,40 @@ exports[`DataTable.TableHeader should have an active and ascending class if sort
   isSortable={false}
   overflowMenuOnHover={true}
 >
-  <table
-    className="bx--data-table bx--data-table--no-border"
+  <div
+    className="bx--data-table-content"
   >
-    <TableHead>
-      <thead>
-        <TableRow>
-          <tr>
-            <TableHeader
-              isSortHeader={true}
-              isSortable={false}
-              onClick={[MockFunction]}
-              scope="col"
-              sortDirection="ASC"
-              translateWithId={[Function]}
-            >
-              <th
+    <table
+      className="bx--data-table bx--data-table--no-border"
+    >
+      <TableHead>
+        <thead>
+          <TableRow>
+            <tr>
+              <TableHeader
+                isSortHeader={true}
+                isSortable={false}
+                onClick={[MockFunction]}
                 scope="col"
+                sortDirection="ASC"
+                translateWithId={[Function]}
               >
-                <span
-                  className="bx--table-header-label"
+                <th
+                  scope="col"
                 >
-                  Header
-                </span>
-              </th>
-            </TableHeader>
-          </tr>
-        </TableRow>
-      </thead>
-    </TableHead>
-  </table>
+                  <div
+                    className="bx--table-header-label"
+                  >
+                    Header
+                  </div>
+                </th>
+              </TableHeader>
+            </tr>
+          </TableRow>
+        </thead>
+      </TableHead>
+    </table>
+  </div>
 </Table>
 `;
 
@@ -43,36 +47,40 @@ exports[`DataTable.TableHeader should have an active class if it is the sort hea
   isSortable={false}
   overflowMenuOnHover={true}
 >
-  <table
-    className="bx--data-table bx--data-table--no-border"
+  <div
+    className="bx--data-table-content"
   >
-    <TableHead>
-      <thead>
-        <TableRow>
-          <tr>
-            <TableHeader
-              isSortHeader={true}
-              isSortable={false}
-              onClick={[MockFunction]}
-              scope="col"
-              sortDirection="NONE"
-              translateWithId={[Function]}
-            >
-              <th
+    <table
+      className="bx--data-table bx--data-table--no-border"
+    >
+      <TableHead>
+        <thead>
+          <TableRow>
+            <tr>
+              <TableHeader
+                isSortHeader={true}
+                isSortable={false}
+                onClick={[MockFunction]}
                 scope="col"
+                sortDirection="NONE"
+                translateWithId={[Function]}
               >
-                <span
-                  className="bx--table-header-label"
+                <th
+                  scope="col"
                 >
-                  Header
-                </span>
-              </th>
-            </TableHeader>
-          </tr>
-        </TableRow>
-      </thead>
-    </TableHead>
-  </table>
+                  <div
+                    className="bx--table-header-label"
+                  >
+                    Header
+                  </div>
+                </th>
+              </TableHeader>
+            </tr>
+          </TableRow>
+        </thead>
+      </TableHead>
+    </table>
+  </div>
 </Table>
 `;
 
@@ -81,36 +89,40 @@ exports[`DataTable.TableHeader should render 1`] = `
   isSortable={false}
   overflowMenuOnHover={true}
 >
-  <table
-    className="bx--data-table bx--data-table--no-border"
+  <div
+    className="bx--data-table-content"
   >
-    <TableHead>
-      <thead>
-        <TableRow>
-          <tr>
-            <TableHeader
-              isSortHeader={false}
-              isSortable={false}
-              onClick={[MockFunction]}
-              scope="col"
-              sortDirection="NONE"
-              translateWithId={[Function]}
-            >
-              <th
+    <table
+      className="bx--data-table bx--data-table--no-border"
+    >
+      <TableHead>
+        <thead>
+          <TableRow>
+            <tr>
+              <TableHeader
+                isSortHeader={false}
+                isSortable={false}
+                onClick={[MockFunction]}
                 scope="col"
+                sortDirection="NONE"
+                translateWithId={[Function]}
               >
-                <span
-                  className="bx--table-header-label"
+                <th
+                  scope="col"
                 >
-                  Header
-                </span>
-              </th>
-            </TableHeader>
-          </tr>
-        </TableRow>
-      </thead>
-    </TableHead>
-  </table>
+                  <div
+                    className="bx--table-header-label"
+                  >
+                    Header
+                  </div>
+                </th>
+              </TableHeader>
+            </tr>
+          </TableRow>
+        </thead>
+      </TableHead>
+    </table>
+  </div>
 </Table>
 `;
 
@@ -119,35 +131,39 @@ exports[`DataTable.TableHeader should render 2`] = `
   isSortable={false}
   overflowMenuOnHover={true}
 >
-  <table
-    className="bx--data-table bx--data-table--no-border"
+  <div
+    className="bx--data-table-content"
   >
-    <TableHead>
-      <thead>
-        <TableRow>
-          <tr>
-            <TableHeader
-              isSortHeader={true}
-              isSortable={false}
-              onClick={[MockFunction]}
-              scope="col"
-              sortDirection="NONE"
-              translateWithId={[Function]}
-            >
-              <th
+    <table
+      className="bx--data-table bx--data-table--no-border"
+    >
+      <TableHead>
+        <thead>
+          <TableRow>
+            <tr>
+              <TableHeader
+                isSortHeader={true}
+                isSortable={false}
+                onClick={[MockFunction]}
                 scope="col"
+                sortDirection="NONE"
+                translateWithId={[Function]}
               >
-                <span
-                  className="bx--table-header-label"
+                <th
+                  scope="col"
                 >
-                  Header
-                </span>
-              </th>
-            </TableHeader>
-          </tr>
-        </TableRow>
-      </thead>
-    </TableHead>
-  </table>
+                  <div
+                    className="bx--table-header-label"
+                  >
+                    Header
+                  </div>
+                </th>
+              </TableHeader>
+            </tr>
+          </TableRow>
+        </thead>
+      </TableHead>
+    </table>
+  </div>
 </Table>
 `;

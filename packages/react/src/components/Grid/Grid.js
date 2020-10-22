@@ -15,6 +15,7 @@ const { prefix } = settings;
 function Grid({
   as: BaseComponent = 'div',
   condensed = false,
+  narrow = false,
   fullWidth = false,
   className: containerClassName,
   children,
@@ -23,6 +24,7 @@ function Grid({
   const className = cx(containerClassName, {
     [`${prefix}--grid`]: true,
     [`${prefix}--grid--condensed`]: condensed,
+    [`${prefix}--grid--narrow`]: narrow,
     [`${prefix}--grid--full-width`]: fullWidth,
   });
 
@@ -40,8 +42,18 @@ Grid.propTypes = {
   as: PropTypes.oneOfType([PropTypes.string, PropTypes.elementType]),
 
   /**
-   * Collapse the gutter to 2px. Useful for fluid layouts.
-   * Rows have 2px of margin between them to match gutter.
+   * Pass in content that will be rendered within the `Grid`
+   */
+  children: PropTypes.node,
+
+  /**
+   * Specify a custom className to be applied to the `Grid`
+   */
+  className: PropTypes.string,
+
+  /**
+   * Collapse the gutter to 1px. Useful for fluid layouts.
+   * Rows have 1px of margin between them to match gutter.
    */
   condensed: PropTypes.bool,
 
@@ -51,14 +63,10 @@ Grid.propTypes = {
   fullWidth: PropTypes.bool,
 
   /**
-   * Specify a custom className to be applied to the `Grid`
+   * Container hangs 16px into the gutter. Useful for
+   * typographic alignment with and without containers.
    */
-  className: PropTypes.string,
-
-  /**
-   * Pass in content that will be rendered within the `Grid`
-   */
-  children: PropTypes.node,
+  narrow: PropTypes.bool,
 };
 
 export default Grid;

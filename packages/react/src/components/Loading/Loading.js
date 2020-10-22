@@ -75,11 +75,6 @@ function Loading({
 
 Loading.propTypes = {
   /**
-   * Provide an `id` to uniquely identify the label
-   */
-  id: PropTypes.string,
-
-  /**
    * Specify whether you want the loading indicator to be spinning or not
    */
   active: PropTypes.bool,
@@ -90,9 +85,14 @@ Loading.propTypes = {
   className: PropTypes.string,
 
   /**
-   * Specify whether you want the loader to be applied with an overlay
+   * Specify an description that would be used to best describe the loading state
    */
-  withOverlay: PropTypes.bool,
+  description: PropTypes.string,
+
+  /**
+   * Provide an `id` to uniquely identify the label
+   */
+  id: PropTypes.string,
 
   /**
    * Specify whether you would like the small variant of <Loading>
@@ -100,9 +100,9 @@ Loading.propTypes = {
   small: PropTypes.bool,
 
   /**
-   * Specify an description that would be used to best describe the loading state
+   * Specify whether you want the loader to be applied with an overlay
    */
-  description: PropTypes.string,
+  withOverlay: PropTypes.bool,
 };
 
 Loading.defaultProps = {

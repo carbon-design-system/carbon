@@ -81,7 +81,7 @@ const SideNav = React.forwardRef(function SideNav(props, ref) {
 
   // if a rail, pass the expansion state as a prop, so children can update themselves to match
   if (isRail) {
-    childrenToRender = React.Children.map(children, child => {
+    childrenToRender = React.Children.map(children, (child) => {
       // if we are controlled, check for if we have hovered over or the expanded state, else just use the expanded state (uncontrolled)
       let currentExpansionState = controlled
         ? expandedViaHoverState || expanded
@@ -95,8 +95,16 @@ const SideNav = React.forwardRef(function SideNav(props, ref) {
   let eventHandlers = {};
 
   if (addFocusListeners) {
-    eventHandlers.onFocus = event => handleToggle(event, true);
-    eventHandlers.onBlur = event => handleToggle(event, false);
+    eventHandlers.onFocus = (event) => {
+      if (!event.currentTarget.contains(event.relatedTarget)) {
+        handleToggle(event, true);
+      }
+    };
+    eventHandlers.onBlur = (event) => {
+      if (!event.currentTarget.contains(event.relatedTarget)) {
+        handleToggle(event, false);
+      }
+    };
   }
 
   if (addMouseListeners && isRail) {
@@ -119,7 +127,7 @@ const SideNav = React.forwardRef(function SideNav(props, ref) {
 });
 
 SideNav.defaultProps = {
-  translateById: id => {
+  translateById: (id) => {
     const translations = {
       'carbon.sidenav.state.open': 'Close',
       'carbon.sidenav.state.closed': 'Open',
@@ -136,10 +144,24 @@ SideNav.defaultProps = {
 
 SideNav.propTypes = {
   /**
-   * If `true`, the SideNav will be expanded, otherwise it will be collapsed.
-   * Using this prop causes SideNav to become a controled component.
+   * Required props for accessibility label on the underlying menu
    */
-  expanded: PropTypes.bool,
+  ...AriaLabelPropType,
+
+  /**
+   * Specify whether focus and blur listeners are added. They are by default.
+   */
+  addFocusListeners: PropTypes.bool,
+
+  /**
+   * Specify whether mouse entry/exit listeners are added. They are by default.
+   */
+  addMouseListeners: PropTypes.bool,
+
+  /**
+   * Optionally provide a custom class to apply to the underlying `<li>` node
+   */
+  className: PropTypes.string,
 
   /**
    * If `true`, the SideNav will be open on initial render.
@@ -147,41 +169,15 @@ SideNav.propTypes = {
   defaultExpanded: PropTypes.bool,
 
   /**
-   * An optional listener that is called when an event that would cause
-   * toggling the SideNav occurs.
-   *
-   * @param {object} event
-   * @param {boolean} value
+   * If `true`, the SideNav will be expanded, otherwise it will be collapsed.
+   * Using this prop causes SideNav to become a controled component.
    */
-  onToggle: PropTypes.func,
+  expanded: PropTypes.bool,
 
   /**
-   * Required props for accessibility label on the underlying menu
-   */
-  ...AriaLabelPropType,
-
-  /**
-   * Optionally provide a custom class to apply to the underlying <li> node
-   */
-  className: PropTypes.string,
-
-  /**
-   * Provide a custom function for translating all message ids within this
-   * component. This function will take in two arguments: the mesasge Id and the
-   * state of the component. From this, you should return a string representing
-   * the label you want displayed or read by screen readers.
-   */
-  translateById: PropTypes.func,
-
-  /**
-   * Optionally provide a custom class to apply to the underlying <li> node
+   * Optionally provide a custom class to apply to the underlying `<li>` node
    */
   isChildOfHeader: PropTypes.bool,
-
-  /**
-   * Optional prop to display the side nav rail.
-   */
-  isRail: PropTypes.bool,
 
   /**
    * Specify if sideNav is standalone
@@ -194,14 +190,26 @@ SideNav.propTypes = {
   isPersistent: PropTypes.bool,
 
   /**
-   * Specify whether focus and blur listeners are added. They are by default.
+   * Optional prop to display the side nav rail.
    */
-  addFocusListeners: PropTypes.bool,
+  isRail: PropTypes.bool,
 
   /**
-   * Specify whether mouse entry/exit listeners are added. They are by default.
+   * An optional listener that is called when an event that would cause
+   * toggling the SideNav occurs.
+   *
+   * @param {object} event
+   * @param {boolean} value
    */
-  addMouseListeners: PropTypes.bool,
+  onToggle: PropTypes.func,
+
+  /**
+   * Provide a custom function for translating all message ids within this
+   * component. This function will take in two arguments: the mesasge Id and the
+   * state of the component. From this, you should return a string representing
+   * the label you want displayed or read by screen readers.
+   */
+  translateById: PropTypes.func,
 };
 
 export default SideNav;

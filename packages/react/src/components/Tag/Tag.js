@@ -45,9 +45,11 @@ const Tag = ({
     [`${prefix}--tag--filter`]: filter,
     [`${prefix}--tag--${type}`]: type,
   });
-  const handleClose = event => {
-    event.stopPropagation();
-    onClose(event);
+  const handleClose = (event) => {
+    if (onClose) {
+      event.stopPropagation();
+      onClose(event);
+    }
   };
   return filter ? (
     <div
@@ -58,20 +60,27 @@ const Tag = ({
           : `Clear filter ${children}`
       }
       id={tagId}
-      disabled={disabled}
       {...other}>
-      <span className={`${prefix}--tag__label`}>
+      <span
+        className={`${prefix}--tag__label`}
+        title={typeof children === 'string' ? children : null}>
         {children !== null && children !== undefined ? children : TYPES[type]}
       </span>
       <button
+        type="button"
         className={`${prefix}--tag__close-icon`}
         onClick={handleClose}
-        aria-labelledby={tagId}>
+        disabled={disabled}
+        aria-labelledby={tagId}
+        title={title}>
         <Close16 />
       </button>
     </div>
   ) : (
-    <span className={tagClasses} {...other}>
+    <span
+      className={tagClasses}
+      title={typeof children === 'string' ? children : null}
+      {...other}>
       {children !== null && children !== undefined ? children : TYPES[type]}
     </span>
   );
@@ -89,11 +98,6 @@ Tag.propTypes = {
   className: PropTypes.string,
 
   /**
-   * Specify the type of the <Tag>
-   */
-  type: PropTypes.oneOf(Object.keys(TYPES)),
-
-  /**
    * Specify if the <Tag> is disabled
    */
   disabled: PropTypes.bool,
@@ -104,14 +108,24 @@ Tag.propTypes = {
   filter: PropTypes.bool,
 
   /**
-   * Text to show on clear filters
+   * Specify the id for the tag.
    */
-  title: PropTypes.string,
+  id: PropTypes.string,
 
   /**
    * Click handler for filter tag close button.
    */
   onClose: PropTypes.func,
+
+  /**
+   * Text to show on clear filters
+   */
+  title: PropTypes.string,
+
+  /**
+   * Specify the type of the <Tag>
+   */
+  type: PropTypes.oneOf(Object.keys(TYPES)),
 };
 
 export const types = Object.keys(TYPES);

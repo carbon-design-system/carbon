@@ -14,7 +14,7 @@ import handles from '../../globals/js/mixins/handles';
 import eventMatches from '../../globals/js/misc/event-matches';
 import on from '../../globals/js/misc/on';
 
-const toArray = arrayLike => Array.prototype.slice.call(arrayLike);
+const toArray = (arrayLike) => Array.prototype.slice.call(arrayLike);
 
 class DataTable extends mixin(
   createComponent,
@@ -61,7 +61,7 @@ class DataTable extends mixin(
     this.manage(on(this.element, 'mouseout', this._expandableHoverToggle));
 
     this.manage(
-      on(this.element, 'click', evt => {
+      on(this.element, 'click', (evt) => {
         const eventElement = eventMatches(evt, this.options.eventTrigger);
         const searchContainer = this.element.querySelector(
           this.options.selectorToolbarSearchContainer
@@ -130,10 +130,10 @@ class DataTable extends mixin(
     }
   }
 
-  _sortToggle = detail => {
+  _sortToggle = (detail) => {
     const { element, previousValue } = detail;
 
-    toArray(this.tableHeaders).forEach(header => {
+    toArray(this.tableHeaders).forEach((header) => {
       const sortEl = header.querySelector(this.options.selectorTableSort);
 
       if (sortEl !== null && sortEl !== element) {
@@ -157,7 +157,7 @@ class DataTable extends mixin(
     }
   };
 
-  _selectToggle = detail => {
+  _selectToggle = (detail) => {
     const { element } = detail;
     const { checked } = element;
 
@@ -182,7 +182,7 @@ class DataTable extends mixin(
 
     this.state.checkboxCount = checked ? inputs.length - 1 : 0;
 
-    inputs.forEach(item => {
+    inputs.forEach((item) => {
       item.checked = checked;
 
       const row = item.parentNode.parentNode;
@@ -208,11 +208,11 @@ class DataTable extends mixin(
       this.element.querySelectorAll(this.options.selectorTableSelected)
     );
 
-    row.forEach(item => {
+    row.forEach((item) => {
       item.classList.remove(this.options.classTableSelected);
     });
 
-    inputs.forEach(item => {
+    inputs.forEach((item) => {
       item.checked = false;
     });
 
@@ -224,9 +224,9 @@ class DataTable extends mixin(
     }
   };
 
-  _actionBarToggle = toggleOn => {
+  _actionBarToggle = (toggleOn) => {
     let handleTransitionEnd;
-    const transition = evt => {
+    const transition = (evt) => {
       if (handleTransitionEnd) {
         handleTransitionEnd = this.unmanage(handleTransitionEnd).release();
       }
@@ -288,12 +288,12 @@ class DataTable extends mixin(
     const expandCells = this.element.querySelectorAll(
       this.options.selectorExpandCells
     );
-    Array.prototype.forEach.call(expandCells, cell => {
+    Array.prototype.forEach.call(expandCells, (cell) => {
       this._rowExpandToggle({ element: cell, forceExpand: shouldExpand });
     });
   };
 
-  _expandableHoverToggle = evt => {
+  _expandableHoverToggle = (evt) => {
     const element = eventMatches(evt, this.options.selectorChildRow);
     if (element) {
       element.previousElementSibling.classList.toggle(
@@ -318,7 +318,7 @@ class DataTable extends mixin(
     });
   };
 
-  _keydownHandler = evt => {
+  _keydownHandler = (evt) => {
     const searchContainer = this.element.querySelector(
       this.options.selectorToolbarSearchContainer
     );
@@ -359,13 +359,13 @@ class DataTable extends mixin(
     // check if this is a refresh or the first time
     if (this.parentRows.length > 0) {
       const diffParentRows = newParentRows.filter(
-        newRow => !this.parentRows.some(oldRow => oldRow === newRow)
+        (newRow) => !this.parentRows.some((oldRow) => oldRow === newRow)
       );
 
       // check if there are expandable rows
       if (newExpandableRows.length > 0) {
         const diffExpandableRows = diffParentRows.map(
-          newRow => newRow.nextElementSibling
+          (newRow) => newRow.nextElementSibling
         );
         const mergedExpandableRows = [
           ...toArray(this.expandableRows),

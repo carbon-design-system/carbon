@@ -27,8 +27,13 @@ const Link = ({
     [`${prefix}--link--visited`]: visited,
   });
   const Tag = disabled ? 'p' : 'a';
+  const rel = other.target === '_blank' ? 'noopener' : null;
   return (
-    <Tag href={disabled ? null : href} className={classNames} {...other}>
+    <Tag
+      href={disabled ? null : href}
+      className={classNames}
+      rel={rel}
+      {...other}>
       {children}
     </Tag>
   );
@@ -41,19 +46,19 @@ Link.propTypes = {
   children: PropTypes.node,
 
   /**
-   * Provide a custom className to be applied to the containing <a> node
+   * Provide a custom className to be applied to the containing `<a>` node
    */
   className: PropTypes.string,
-
-  /**
-   * Provide the `href` attribute for the <a> node
-   */
-  href: PropTypes.string,
 
   /**
    * Specify if the control should be disabled, or not
    */
   disabled: PropTypes.bool,
+
+  /**
+   * Provide the `href` attribute for the `<a>` node
+   */
+  href: PropTypes.string,
 
   /**
    * Specify whether you want the inline version of this control

@@ -12,7 +12,7 @@ import handles from '../../globals/js/mixins/handles';
 import on from '../../globals/js/misc/on';
 import settings from '../../globals/js/settings';
 
-const toArray = arrayLike => Array.prototype.slice.call(arrayLike);
+const toArray = (arrayLike) => Array.prototype.slice.call(arrayLike);
 
 class HeaderNav extends mixin(createComponent, initComponentBySearch, handles) {
   /**
@@ -54,12 +54,12 @@ class HeaderNav extends mixin(createComponent, initComponentBySearch, handles) {
    * Moves the focus up/down.
    * @param {number} direction The direction of navigating.
    */
-  navigate = direction => {
+  navigate = (direction) => {
     const items = toArray(
       this.element.querySelectorAll(this.options.selectorSubmenuLink)
     );
     const start = this.getCurrentNavigation();
-    const getNextItem = old => {
+    const getNextItem = (old) => {
       const handleUnderflow = (index, length) =>
         index + (index >= 0 ? 0 : length);
       const handleOverflow = (index, length) =>
@@ -78,7 +78,7 @@ class HeaderNav extends mixin(createComponent, initComponentBySearch, handles) {
    * Handles keydown event.
    * @param {Event} event The event triggering this method.
    */
-  _handleKeyDown = event => {
+  _handleKeyDown = (event) => {
     const keyCodes = {
       37: this.constructor.NAVIGATE.BACKWARD, // left arrow
       39: this.constructor.NAVIGATE.FORWARD, // right arrow

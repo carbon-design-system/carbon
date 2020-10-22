@@ -15,9 +15,9 @@ const { forEach } = Array.prototype;
 class ComponentExample extends Component {
   static propTypes = {
     /**
-     * The source code.
+     * The slug of the CodePen link.
      */
-    htmlFile: PropTypes.string,
+    codepenSlug: PropTypes.string,
 
     /**
      * The component name.
@@ -25,14 +25,14 @@ class ComponentExample extends Component {
     component: PropTypes.string,
 
     /**
-     * The component variant name.
-     */
-    variant: PropTypes.string,
-
-    /**
      * `true` to hide "view full render" link.
      */
     hideViewFullRender: PropTypes.bool,
+
+    /**
+     * The source code.
+     */
+    htmlFile: PropTypes.string,
 
     /**
      * `true` to use a link (only) for the live demo.
@@ -45,14 +45,14 @@ class ComponentExample extends Component {
     useIframe: PropTypes.bool,
 
     /**
-     * The slug of the CodePen link.
-     */
-    codepenSlug: PropTypes.string,
-
-    /**
      * `true` to use static full render page.
      */
     useStaticFullRenderPage: PropTypes.bool,
+
+    /**
+     * The component variant name.
+     */
+    variant: PropTypes.string,
   };
 
   /**
@@ -66,6 +66,7 @@ class ComponentExample extends Component {
     this._instantiateComponents();
   }
 
+  // eslint-disable-next-line react/no-deprecated
   componentWillUpdate({ component, htmlFile }) {
     const { component: prevComponent, htmlFile: prevHtmlFile } = this.props;
     if (prevComponent !== component || prevHtmlFile !== htmlFile) {
@@ -88,7 +89,7 @@ class ComponentExample extends Component {
    * Instantiate/release Carbon components as the container for the live demo HTML code is mounted/unmounted.
    * @param {HTMLElement} container The container where the live demo HTML code should be put into.
    */
-  _setContainer = container => {
+  _setContainer = (container) => {
     this._container = container;
   };
 
@@ -99,11 +100,11 @@ class ComponentExample extends Component {
     const container = this._container;
     if (container) {
       const componentClasses = Object.keys(components)
-        .map(key => components[key])
-        .filter(Clz => typeof Clz.init === 'function');
+        .map((key) => components[key])
+        .filter((Clz) => typeof Clz.init === 'function');
       componentClasses
-        .filter(Clz => !Clz.forLazyInit)
-        .forEach(Clz => {
+        .filter((Clz) => !Clz.forLazyInit)
+        .forEach((Clz) => {
           Clz.init(container);
         });
     }
@@ -116,12 +117,12 @@ class ComponentExample extends Component {
     const container = this._container;
     if (container) {
       Object.keys(components)
-        .map(key => components[key])
-        .filter(Clz => typeof Clz.init === 'function')
-        .forEach(Clz => {
+        .map((key) => components[key])
+        .filter((Clz) => typeof Clz.init === 'function')
+        .forEach((Clz) => {
           forEach.call(
             container.querySelectorAll(Clz.options.selectorInit),
-            element => {
+            (element) => {
               const instance = Clz.components.get(element);
               if (instance) {
                 instance.release();

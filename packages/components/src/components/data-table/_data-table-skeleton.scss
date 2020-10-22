@@ -12,21 +12,24 @@
 @include exports('data-table-skeleton') {
   .#{$prefix}--data-table.#{$prefix}--skeleton {
     th {
+      padding-left: 1rem;
       vertical-align: middle;
     }
 
     th span,
     td span {
       @include skeleton;
+
+      display: block;
+
       width: rem(64px);
       height: rem(16px);
-      display: block;
     }
 
     tr:hover {
       td {
-        border-color: $ui-03;
         background: transparent;
+        border-color: $ui-03;
 
         &:first-of-type,
         &:last-of-type {
@@ -51,6 +54,7 @@
   .#{$prefix}--data-table-container.#{$prefix}--skeleton
     .#{$prefix}--data-table-header__title {
     @include skeleton;
+
     width: rem(120px);
     height: rem(24px);
   }
@@ -58,8 +62,10 @@
   .#{$prefix}--data-table-container.#{$prefix}--skeleton
     .#{$prefix}--data-table-header__description {
     @include skeleton;
-    margin-top: $spacing-03;
+
     width: rem(160px);
     height: rem(16px);
+
+    margin-top: $spacing-03;
   }
 }

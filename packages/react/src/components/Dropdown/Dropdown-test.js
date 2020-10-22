@@ -59,7 +59,7 @@ describe('Dropdown', () => {
   it('should render custom item components', () => {
     const wrapper = mount(<Dropdown {...mockProps} />);
     wrapper.setProps({
-      itemToElement: item => <div className="mock-item">{item.label}</div>,
+      itemToElement: (item) => <div className="mock-item">{item.label}</div>,
     });
     openMenu(wrapper);
     expect(wrapper).toMatchSnapshot();
@@ -71,7 +71,7 @@ describe('Dropdown', () => {
 
     beforeEach(() => {
       wrapper = mount(<Dropdown titleText="Email Input" {...mockProps} />);
-      renderedLabel = wrapper.find('span[className="bx--label"]');
+      renderedLabel = wrapper.find('label[className="bx--label"]');
     });
 
     it('renders a title', () => {

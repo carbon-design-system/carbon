@@ -50,19 +50,14 @@ SideNavLink.propTypes = {
   ...LinkPropTypes,
 
   /**
-   * Provide an optional class to be applied to the containing node
-   */
-  className: PropTypes.string,
-
-  /**
-   * Provide an icon to render in the side navigation link. Should be a React class.
-   */
-  renderIcon: PropTypes.oneOfType([PropTypes.func, PropTypes.object]),
-
-  /**
    * Specify the text content for the link
    */
   children: PropTypes.node.isRequired,
+
+  /**
+   * Provide an optional class to be applied to the containing node
+   */
+  className: PropTypes.string,
 
   /**
    * Property to indicate if the side nav container is open (or not). Use to
@@ -74,6 +69,11 @@ SideNavLink.propTypes = {
    * Specify if this is a large variation of the SideNavLink
    */
   large: PropTypes.bool,
+
+  /**
+   * Provide an icon to render in the side navigation link. Should be a React class.
+   */
+  renderIcon: PropTypes.oneOfType([PropTypes.func, PropTypes.object]),
 };
 
 SideNavLink.defaultProps = {
@@ -81,7 +81,7 @@ SideNavLink.defaultProps = {
   large: false,
 };
 
-export const createCustomSideNavLink = element => props => {
+export const createCustomSideNavLink = (element) => (props) => {
   return <SideNavLink element={element} {...props} />;
 };
 

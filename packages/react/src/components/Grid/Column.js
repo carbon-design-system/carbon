@@ -51,20 +51,14 @@ Column.propTypes = {
   as: PropTypes.oneOfType([PropTypes.string, PropTypes.elementType]),
 
   /**
-   * Specify column span for the `sm` breakpoint (Default breakpoint up to 672px)
-   * This breakpoint supports 4 columns by default.
-   *
-   * @see https://www.carbondesignsystem.com/guidelines/layout#breakpoints
+   * Pass in content that will be rendered within the `Column`
    */
-  sm: spanPropType,
+  children: PropTypes.node,
 
   /**
-   * Specify column span for the `md` breakpoint (Default breakpoint up to 1056px)
-   * This breakpoint supports 8 columns by default.
-   *
-   * @see https://www.carbondesignsystem.com/guidelines/layout#breakpoints
+   * Specify a custom className to be applied to the `Column`
    */
-  md: spanPropType,
+  className: PropTypes.string,
 
   /**
    * Specify column span for the `lg` breakpoint (Default breakpoint up to 1312px)
@@ -75,14 +69,6 @@ Column.propTypes = {
   lg: spanPropType,
 
   /**
-   * Specify column span for the `xlg` breakpoint (Default breakpoint up to
-   * 1584px) This breakpoint supports 16 columns by default.
-   *
-   * @see https://www.carbondesignsystem.com/guidelines/layout#breakpoints
-   */
-  xlg: spanPropType,
-
-  /**
    * Specify column span for the `max` breakpoint. This breakpoint supports 16
    * columns by default.
    *
@@ -91,14 +77,28 @@ Column.propTypes = {
   max: spanPropType,
 
   /**
-   * Specify a custom className to be applied to the `Column`
+   * Specify column span for the `md` breakpoint (Default breakpoint up to 1056px)
+   * This breakpoint supports 8 columns by default.
+   *
+   * @see https://www.carbondesignsystem.com/guidelines/layout#breakpoints
    */
-  className: PropTypes.string,
+  md: spanPropType,
 
   /**
-   * Pass in content that will be rendered within the `Column`
+   * Specify column span for the `sm` breakpoint (Default breakpoint up to 672px)
+   * This breakpoint supports 4 columns by default.
+   *
+   * @see https://www.carbondesignsystem.com/guidelines/layout#breakpoints
    */
-  children: PropTypes.node,
+  sm: spanPropType,
+
+  /**
+   * Specify column span for the `xlg` breakpoint (Default breakpoint up to
+   * 1584px) This breakpoint supports 16 columns by default.
+   *
+   * @see https://www.carbondesignsystem.com/guidelines/layout#breakpoints
+   */
+  xlg: spanPropType,
 };
 
 const breakpointNames = ['sm', 'md', 'lg', 'xlg', 'max'];
@@ -119,7 +119,7 @@ function getClassNameForBreakpoints(breakpoints) {
 
   for (let i = 0; i < breakpoints.length; i++) {
     const breakpoint = breakpoints[i];
-    if (!breakpoint) {
+    if (breakpoint === undefined || breakpoint === null) {
       continue;
     }
 

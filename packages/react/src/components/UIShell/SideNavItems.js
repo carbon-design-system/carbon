@@ -18,7 +18,7 @@ const SideNavItems = ({
   isSideNavExpanded,
 }) => {
   const className = cx([`${prefix}--side-nav__items`], customClassName);
-  const childrenWithExpandedState = React.Children.map(children, child => {
+  const childrenWithExpandedState = React.Children.map(children, (child) => {
     if (React.isValidElement(child)) {
       return React.cloneElement(child, { isSideNavExpanded });
     }
@@ -28,15 +28,15 @@ const SideNavItems = ({
 
 SideNavItems.propTypes = {
   /**
-   * Provide an optional class to be applied to the containing node
-   */
-  className: PropTypes.string,
-
-  /**
    * Provide a single icon as the child to `SideNavIcon` to render in the
    * container
    */
   children: PropTypes.node.isRequired,
+
+  /**
+   * Provide an optional class to be applied to the containing node
+   */
+  className: PropTypes.string,
 
   /**
    * Property to indicate if the side nav container is open (or not). Use to

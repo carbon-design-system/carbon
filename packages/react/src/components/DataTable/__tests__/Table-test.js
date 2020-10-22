@@ -20,8 +20,8 @@ describe('DataTable.Table', () => {
 
   it('should support disable zebra stripe', () => {
     const wrapper = shallow(<Table zebra={false} />);
-    expect(wrapper.hasClass(`${prefix}--data-table`)).toBe(true);
-    expect(wrapper.hasClass(`${prefix}--data-table--zebra`)).toBe(false);
+    const table = wrapper.find(`.${prefix}--data-table`);
+    expect(table.hasClass(`${prefix}--data-table--zebra`)).toBe(false);
   });
 
   it('should support enable sticky header', () => {

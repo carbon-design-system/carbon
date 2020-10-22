@@ -16,7 +16,7 @@ import {
 } from './shared';
 
 if (process.env.CARBON_REACT_STORYBOOK_USE_CUSTOM_PROPERTIES === 'true') {
-  addons.register(CARBON_THEMES_ADDON_ID, api => {
+  addons.register(CARBON_THEMES_ADDON_ID, (api) => {
     addons.addPanel(CARBON_THEME_PANEL_ID, {
       title: 'Carbon theme',
       render: ({ active, key }) => (
@@ -25,7 +25,7 @@ if (process.env.CARBON_REACT_STORYBOOK_USE_CUSTOM_PROPERTIES === 'true') {
     });
   });
 
-  addons.register(CARBON_TYPE_ADDON_ID, api => {
+  addons.register(CARBON_TYPE_ADDON_ID, (api) => {
     addons.addPanel(CARBON_TYPE_PANEL_ID, {
       title: 'Carbon type',
       render: ({ active, key }) => (

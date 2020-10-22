@@ -7,7 +7,7 @@
 
 import { action } from '@storybook/addon-actions';
 
-export const initialRows = [
+export const rows = [
   {
     id: 'a',
     name: 'Load Balancer 3',
@@ -91,5 +91,5 @@ export const headers = [
   },
 ];
 
-export const batchActionClick = selectedRows => () =>
+export const batchActionClick = (selectedRows) => () =>
   action('batch action click')(selectedRows);

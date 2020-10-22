@@ -41,12 +41,12 @@ const Checkbox = React.forwardRef(function Checkbox(
       <input
         {...other}
         type="checkbox"
-        onChange={evt => {
+        onChange={(evt) => {
           onChange(evt.target.checked, id, evt);
         }}
         className={`${prefix}--checkbox`}
         id={id}
-        ref={el => {
+        ref={(el) => {
           if (el) {
             el.indeterminate = indeterminate;
           }
@@ -71,19 +71,14 @@ Checkbox.propTypes = {
   checked: PropTypes.bool,
 
   /**
-   * Specify whether the underlying input should be checked by default
-   */
-  defaultChecked: PropTypes.bool,
-
-  /**
-   * Specify whether the Checkbox is in an indeterminate state
-   */
-  indeterminate: PropTypes.bool,
-
-  /**
    * Specify an optional className to be applied to the <label> node
    */
   className: PropTypes.string,
+
+  /**
+   * Specify whether the underlying input should be checked by default
+   */
+  defaultChecked: PropTypes.bool,
 
   /**
    * Specify whether the Checkbox should be disabled
@@ -91,20 +86,25 @@ Checkbox.propTypes = {
   disabled: PropTypes.bool,
 
   /**
+   * Specify whether the label should be hidden, or not
+   */
+  hideLabel: PropTypes.bool,
+
+  /**
    * Provide an `id` to uniquely identify the Checkbox input
    */
   id: PropTypes.string.isRequired,
+
+  /**
+   * Specify whether the Checkbox is in an indeterminate state
+   */
+  indeterminate: PropTypes.bool,
 
   /**
    * Provide a label to provide a description of the Checkbox input that you are
    * exposing to the user
    */
   labelText: PropTypes.node.isRequired,
-
-  /**
-   * Specify whether the label should be hidden, or not
-   */
-  hideLabel: PropTypes.bool,
 
   /**
    * Receives three arguments: true/false, the checkbox's id, and the dom event.

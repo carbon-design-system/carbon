@@ -17,14 +17,14 @@
     box-sizing: border-box;
     margin: 0;
     padding: 0;
-    border: 0;
     font-size: 100%;
     font-family: inherit;
     vertical-align: baseline;
+    border: 0;
 
     *,
-    *:before,
-    *:after {
+    *::before,
+    *::after {
       box-sizing: inherit;
     }
   }
@@ -116,10 +116,10 @@
     video {
       margin: 0;
       padding: 0;
-      border: 0;
-      font-size: 100%;
       font: inherit;
+      font-size: 100%;
       vertical-align: baseline;
+      border: 0;
     }
 
     // Chrome 62 fix
@@ -127,8 +127,8 @@
     select,
     input,
     textarea {
-      border-radius: 0;
       font-family: inherit;
+      border-radius: 0;
     }
 
     input[type='text']::-ms-clear {
@@ -173,12 +173,11 @@
       quotes: none;
     }
 
-    blockquote:before,
-    blockquote:after,
-    q:before,
-    q:after {
+    blockquote::before,
+    blockquote::after,
+    q::before,
+    q::after {
       content: '';
-      content: none;
     }
 
     table {

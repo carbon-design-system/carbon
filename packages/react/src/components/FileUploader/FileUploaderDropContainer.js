@@ -43,23 +43,28 @@ function FileUploaderDropContainer({
    * @param {Event} event - Event object, used to get the list of files added
    */
   function validateFiles(event) {
-    if (event.type === 'drop') {
-      const transferredFiles = [...event.dataTransfer.files];
-      if (!accept.length) {
-        return transferredFiles;
-      }
-      const acceptedTypes = new Set(accept);
-      return transferredFiles.filter(({ name, type: mimeType = '' }) => {
-        const fileExtensionRegExp = new RegExp(/\.[0-9a-z]+$/, 'i');
-        const hasFileExtension = fileExtensionRegExp.test(name);
-        if (!hasFileExtension) {
-          return false;
-        }
-        const [fileExtension] = name.match(fileExtensionRegExp);
-        return acceptedTypes.has(mimeType) || acceptedTypes.has(fileExtension);
-      });
+    const transferredFiles =
+      event.type === 'drop'
+        ? [...event.dataTransfer.files]
+        : [...event.target.files];
+    if (!accept.length) {
+      return transferredFiles;
     }
-    return [...event.target.files];
+    const acceptedTypes = new Set(accept);
+    return transferredFiles.reduce((acc, curr) => {
+      const { name, type: mimeType = '' } = curr;
+      const fileExtensionRegExp = new RegExp(/\.[0-9a-z]+$/, 'i');
+      const hasFileExtension = fileExtensionRegExp.test(name);
+      if (!hasFileExtension) {
+        return acc;
+      }
+      const [fileExtension] = name.match(fileExtensionRegExp);
+      if (acceptedTypes.has(mimeType) || acceptedTypes.has(fileExtension)) {
+        return acc.concat([curr]);
+      }
+      curr.invalidFileType = true;
+      return acc.concat([curr]);
+    }, []);
   }
 
   function handleChange(event) {
@@ -70,7 +75,7 @@ function FileUploaderDropContainer({
   return (
     <div
       className={`${prefix}--file`}
-      onDragOver={evt => {
+      onDragOver={(evt) => {
         evt.stopPropagation();
         evt.preventDefault();
         if (disabled) {
@@ -79,7 +84,7 @@ function FileUploaderDropContainer({
         setActive(true);
         evt.dataTransfer.dropEffect = 'copy';
       }}
-      onDragLeave={evt => {
+      onDragLeave={(evt) => {
         evt.stopPropagation();
         evt.preventDefault();
         if (disabled) {
@@ -88,7 +93,7 @@ function FileUploaderDropContainer({
         setActive(false);
         evt.dataTransfer.dropEffect = 'move';
       }}
-      onDrop={evt => {
+      onDrop={(evt) => {
         evt.stopPropagation();
         evt.preventDefault();
         if (disabled) {
@@ -97,11 +102,12 @@ function FileUploaderDropContainer({
         setActive(false);
         handleChange(evt);
       }}>
+      {/* eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions */}
       <label
         className={labelClasses}
         htmlFor={uid}
         tabIndex={tabIndex || 0}
-        onKeyDown={evt => {
+        onKeyDown={(evt) => {
           if (matches(evt, [keys.Enter, keys.Space])) {
             inputRef.current.click();
           }
@@ -120,7 +126,7 @@ function FileUploaderDropContainer({
             name={name}
             multiple={multiple}
             onChange={handleChange}
-            onClick={evt => {
+            onClick={(evt) => {
               evt.target.value = null;
             }}
           />
@@ -132,12 +138,22 @@ function FileUploaderDropContainer({
 
 FileUploaderDropContainer.propTypes = {
   /**
+   * Specify the types of files that this input should be able to receive
+   */
+  accept: PropTypes.arrayOf(PropTypes.string),
+
+  /**
    * Provide a custom className to be applied to the container node
    */
   className: PropTypes.string,
 
   /**
-   * Provide a unique id for the underlying <input> node
+   * Specify whether file input is disabled
+   */
+  disabled: PropTypes.bool,
+
+  /**
+   * Provide a unique id for the underlying `<input>` node
    */
   id: PropTypes.string,
 
@@ -153,9 +169,15 @@ FileUploaderDropContainer.propTypes = {
   multiple: PropTypes.bool,
 
   /**
-   * Provide a name for the underlying <input> node
+   * Provide a name for the underlying `<input>` node
    */
   name: PropTypes.string,
+
+  /**
+   * Event handler that is called after files are added to the uploader
+   * The event handler signature looks like `onAddFiles(evt, { addedFiles })`
+   */
+  onAddFiles: PropTypes.func,
 
   /**
    * Provide an accessibility role for the <FileUploaderButton>
@@ -163,25 +185,15 @@ FileUploaderDropContainer.propTypes = {
   role: PropTypes.string,
 
   /**
+   * Specify the size of the uploaded items, from a list of available
+   * sizes. For `default` size, this prop can remain unspecified.
+   */
+  size: PropTypes.oneOf(['default', 'field', 'small']),
+
+  /**
    * Provide a custom tabIndex value for the <FileUploaderButton>
    */
   tabIndex: PropTypes.number,
-
-  /**
-   * Specify whether file input is disabled
-   */
-  disabled: PropTypes.bool,
-
-  /**
-   * Specify the types of files that this input should be able to receive
-   */
-  accept: PropTypes.arrayOf(PropTypes.string),
-
-  /**
-   * Event handler that is called after files are added to the uploader
-   * The event handler signature looks like `onAddFiles(evt, { addedFiles })`
-   */
-  onAddFiles: PropTypes.func,
 };
 
 FileUploaderDropContainer.defaultProps = {

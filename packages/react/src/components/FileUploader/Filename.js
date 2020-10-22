@@ -57,6 +57,11 @@ Filename.propTypes = {
   iconDescription: PropTypes.string,
 
   /**
+   * Specify if the file is invalid
+   */
+  invalid: PropTypes.bool,
+
+  /**
    * Status of the file upload
    */
   status: PropTypes.oneOf(['edit', 'complete', 'uploading']),

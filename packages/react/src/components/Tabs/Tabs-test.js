@@ -6,7 +6,6 @@
  */
 
 import React from 'react';
-import { ChevronDown16 } from '@carbon/icons-react';
 import { settings } from 'carbon-components';
 import { shallow, mount } from 'enzyme';
 import Tabs from '../Tabs';
@@ -15,16 +14,7 @@ import TabsSkeleton from '../Tabs/Tabs.Skeleton';
 
 const { prefix } = settings;
 
-window.matchMedia = jest.fn().mockImplementation(query => ({
-  matches: true,
-  media: query,
-  onchange: null,
-  addListener: jest.fn(), // deprecated
-  removeListener: jest.fn(), // deprecated
-  addEventListener: jest.fn(),
-  removeEventListener: jest.fn(),
-  dispatchEvent: jest.fn(),
-}));
+Element.prototype.scrollIntoView = jest.fn();
 
 describe('Tabs', () => {
   describe('renders as expected', () => {
@@ -36,28 +26,23 @@ describe('Tabs', () => {
         </Tabs>
       );
 
-      it('renders [role="navigation"] props on wrapping <div> by default', () => {
-        expect(wrapper.find(`.${prefix}--tabs`).props().role).toEqual(
-          'navigation'
-        );
-      });
-
       it('renders [role="tablist"] props on <ul> by default', () => {
         expect(wrapper.find('ul').props().role).toEqual('tablist');
       });
 
       it('renders extra classes on wrapping <div> via className prop', () => {
-        expect(wrapper.find(`.${prefix}--tabs`).hasClass('extra-class')).toBe(
-          true
-        );
+        expect(
+          wrapper
+            // TODO: uncomment and replace in next major version
+            // .find(`.${prefix}--tabs`).hasClass('extra-class')
+            .find(`.${prefix}--tabs--scrollable`)
+            .hasClass('extra-class')
+        ).toBe(true);
       });
 
       it('renders expected classes on wrapping <div> by default', () => {
         expect(
-          wrapper
-            .find('div')
-            .first()
-            .hasClass(`${prefix}--tabs`)
+          wrapper.find('div').first().hasClass(`${prefix}--tabs--scrollable`)
         ).toBe(true);
       });
 
@@ -71,44 +56,19 @@ describe('Tabs', () => {
           )
             .find('div')
             .first()
-            .hasClass(`${prefix}--tabs--container`)
+            .hasClass(`${prefix}--tabs--scrollable--container`)
         ).toBe(true);
       });
 
       it('has no selectionMode prop', () => {
         expect(
-          'selectionMode' in wrapper.find(`.${prefix}--tabs`).props()
+          'selectionMode' in
+            wrapper
+              // TODO: uncomment in next major version
+              // .find(`.${prefix}--tabs`)
+              .find(`.${prefix}--tabs--scrollable`)
+              .props()
         ).toBe(false);
-      });
-    });
-
-    describe('Trigger (<div>)', () => {
-      const wrapper = shallow(
-        <Tabs className="extra-class">
-          <Tab label="firstTab">content1</Tab>
-          <Tab label="lastTab">content2</Tab>
-        </Tabs>
-      );
-
-      const trigger = wrapper.find(`div.${prefix}--tabs-trigger`);
-      const tablist = wrapper.find('ul');
-
-      it('renders default className for trigger', () => {
-        expect(trigger.hasClass(`${prefix}--tabs-trigger`)).toBe(true);
-      });
-
-      it('renders hidden className by default', () => {
-        expect(tablist.hasClass(`${prefix}--tabs__nav--hidden`)).toBe(true);
-      });
-
-      it('renders default className for triggerText', () => {
-        expect(trigger.find('a').hasClass(`${prefix}--tabs-trigger-text`)).toBe(
-          true
-        );
-      });
-
-      it('renders <Icon>', () => {
-        expect(trigger.find(ChevronDown16).length).toBe(1);
       });
     });
 
@@ -164,56 +124,17 @@ describe('Tabs', () => {
     });
 
     it('renders hidden props with boolean value', () => {
-      const hiddenProp = wrapper
-        .find('TabContent')
-        .first()
-        .props().hidden;
+      const hiddenProp = wrapper.find('TabContent').first().props().hidden;
       expect(typeof hiddenProp).toBe('boolean');
     });
 
     it('renders selected props with boolean value', () => {
-      const selectedProp = wrapper
-        .find('TabContent')
-        .first()
-        .props().hidden;
+      const selectedProp = wrapper.find('TabContent').first().props().hidden;
       expect(typeof selectedProp).toBe('boolean');
     });
   });
 
   describe('events', () => {
-    describe('click', () => {
-      const wrapper = mount(
-        <Tabs>
-          <Tab label="firstTab" className="firstTab">
-            content1
-          </Tab>
-          <Tab label="lastTab" className="lastTab">
-            content2
-          </Tab>
-        </Tabs>
-      );
-
-      describe('state: dropdownHidden', () => {
-        it('toggles dropdownHidden state after trigger is clicked', () => {
-          const trigger = wrapper.find(`.${prefix}--tabs-trigger`);
-
-          trigger.simulate('click');
-          expect(wrapper.state().dropdownHidden).toEqual(false);
-          trigger.simulate('click');
-          expect(wrapper.state().dropdownHidden).toEqual(true);
-        });
-
-        it('toggles hidden state after trigger-text is clicked', () => {
-          const triggerText = wrapper.find(`.${prefix}--tabs-trigger-text`);
-
-          triggerText.simulate('click');
-          expect(wrapper.state().dropdownHidden).toEqual(false);
-          triggerText.simulate('click');
-          expect(wrapper.state().dropdownHidden).toEqual(true);
-        });
-      });
-    });
-
     describe('keydown', () => {
       const leftKey = 37;
       const rightKey = 39;
@@ -350,12 +271,6 @@ describe('Tabs', () => {
       </Tabs>
     );
 
-    describe('dropdownHidden', () => {
-      it('should be true', () => {
-        expect(wrapper.state().dropdownHidden).toEqual(true);
-      });
-    });
-
     describe('selected', () => {
       it('should be 0', () => {
         expect(wrapper.state().selected).toEqual(0);
@@ -422,10 +337,7 @@ describe('selection change', () => {
   );
 
   it('updates selected state when selected prop changes', () => {
-    wrapper
-      .find('.secondTab')
-      .last()
-      .simulate('click');
+    wrapper.find('.secondTab').last().simulate('click');
     expect(wrapper.props().onSelectionChange).toHaveBeenCalledWith(1);
   });
 });

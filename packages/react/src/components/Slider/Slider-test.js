@@ -15,13 +15,14 @@ import { settings } from 'carbon-components';
 
 jest.mock('lodash.throttle');
 
-throttle.mockImplementation(fn => Object.assign(fn, { throttled: true }));
+throttle.mockImplementation((fn) => Object.assign(fn, { throttled: true }));
 
 const { prefix } = settings;
 describe('Slider', () => {
-  describe('Renders as expected', () => {
-    const id = 'slider';
-    const wrapper = mount(
+  const id = 'slider';
+  let wrapper;
+  beforeEach(() => {
+    wrapper = mount(
       <Slider
         id={id}
         className="extra-class"
@@ -31,7 +32,9 @@ describe('Slider', () => {
         step={1}
       />
     );
+  });
 
+  describe('Renders as expected', () => {
     it('renders children as expected', () => {
       expect(wrapper.find(`.${prefix}--text-input`).length).toBe(1);
     });
@@ -54,6 +57,14 @@ describe('Slider', () => {
     it('can set value via props', () => {
       wrapper.setProps({ value: 55 });
       expect(wrapper.props().value).toEqual(55);
+    });
+
+    it('should change the value upon change in props', () => {
+      wrapper.setProps({ value: 1 });
+      wrapper.setState({ value: 1 });
+      wrapper.update();
+      wrapper.setProps({ value: 2 });
+      expect(wrapper.state().value).toEqual(2);
     });
 
     it('should accurately position slider on mount', () => {
@@ -87,16 +98,10 @@ describe('Slider', () => {
         <Slider min={0} minLabel="min" max={100} maxLabel="max" value={0} />
       );
       expect(
-        wrapper
-          .find(`.${prefix}--slider__range-label`)
-          .first()
-          .text()
+        wrapper.find(`.${prefix}--slider__range-label`).first().text()
       ).toBe('0min');
       expect(
-        wrapper
-          .find(`.${prefix}--slider__range-label`)
-          .last()
-          .text()
+        wrapper.find(`.${prefix}--slider__range-label`).last().text()
       ).toBe('100max');
     });
 
@@ -112,16 +117,10 @@ describe('Slider', () => {
         />
       );
       expect(
-        wrapper
-          .find(`.${prefix}--slider__range-label`)
-          .first()
-          .text()
+        wrapper.find(`.${prefix}--slider__range-label`).first().text()
       ).toBe('0-min');
       expect(
-        wrapper
-          .find(`.${prefix}--slider__range-label`)
-          .last()
-          .text()
+        wrapper.find(`.${prefix}--slider__range-label`).last().text()
       ).toBe('100-max');
     });
   });

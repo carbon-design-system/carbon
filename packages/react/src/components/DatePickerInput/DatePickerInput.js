@@ -16,14 +16,43 @@ const { prefix } = settings;
 export default class DatePickerInput extends Component {
   static propTypes = {
     /**
-     * Specify an id that unique identifies the <input>
+     * The type of the date picker:
+     *
+     * * `simple` - Without calendar dropdown.
+     * * `single` - With calendar dropdown and single date.
+     * * `range` - With calendar dropdown and a date range.
      */
-    id: PropTypes.string.isRequired,
+    datePickerType: PropTypes.oneOf(['simple', 'single', 'range']),
+
+    /**
+     * Specify whether or not the input should be disabled
+     */
+    disabled: PropTypes.bool,
+
+    /**
+     * Specify if the label should be hidden
+     */
+    hideLabel: PropTypes.bool,
 
     /**
      * The description of the calendar icon.
      */
     iconDescription: PropTypes.string,
+
+    /**
+     * Specify an id that uniquely identifies the `<input>`
+     */
+    id: PropTypes.string.isRequired,
+
+    /**
+     * Specify whether or not the input should be invalid
+     */
+    invalid: PropTypes.bool,
+
+    /**
+     * Specify the text to be rendered when the input is invalid
+     */
+    invalidText: PropTypes.string,
 
     /**
      * Provide the text that will be read by a screen reader when visiting this
@@ -32,9 +61,20 @@ export default class DatePickerInput extends Component {
     labelText: PropTypes.node.isRequired,
 
     /**
-     * Specify the size of the Date Picker Input. Currently supports either `sm` or `xl` as an option.
+     * Specify an `onChange` handler that is called whenever a change in the
+     * input field has occurred
      */
-    size: PropTypes.oneOf(['sm', 'xl']),
+    onChange: PropTypes.func,
+
+    /**
+     * Provide a function to be called when the input field is clicked
+     */
+    onClick: PropTypes.func,
+
+    /**
+     * Provide a function to be called when the input field is clicked
+     */
+    openCalendar: PropTypes.func,
 
     /**
      * Provide a regular expression that the input value must match
@@ -53,30 +93,19 @@ export default class DatePickerInput extends Component {
     },
 
     /**
-     * Specify the type of the <input>
+     * Specify the placeholder text
+     */
+    placeholder: PropTypes.string,
+
+    /**
+     * Specify the size of the Date Picker Input. Currently supports either `sm` or `xl` as an option.
+     */
+    size: PropTypes.oneOf(['sm', 'xl']),
+
+    /**
+     * Specify the type of the `<input>`
      */
     type: PropTypes.string,
-
-    /**
-     * Specify whether or not the input should be disabled
-     */
-    disabled: PropTypes.bool,
-
-    /**
-     * Specify whether or not the input should be invalid
-     */
-    invalid: PropTypes.bool,
-
-    /**
-     * Provide a function to be called when the input field is clicked
-     */
-    onClick: PropTypes.func,
-
-    /**
-     * Specify an `onChange` handler that is called whenever a change in the
-     * input field has occurred
-     */
-    onChange: PropTypes.func,
   };
 
   static defaultProps = {
@@ -110,12 +139,12 @@ export default class DatePickerInput extends Component {
 
     const datePickerInputProps = {
       id,
-      onChange: evt => {
+      onChange: (evt) => {
         if (!disabled) {
           onChange(evt);
         }
       },
-      onClick: evt => {
+      onClick: (evt) => {
         if (!disabled) {
           onClick(evt);
         }
@@ -168,7 +197,7 @@ export default class DatePickerInput extends Component {
         {...other}
         {...datePickerInputProps}
         disabled={disabled}
-        ref={input => {
+        ref={(input) => {
           this.input = input;
         }}
         data-invalid
@@ -176,7 +205,7 @@ export default class DatePickerInput extends Component {
       />
     ) : (
       <input
-        ref={input => {
+        ref={(input) => {
           this.input = input;
         }}
         {...other}

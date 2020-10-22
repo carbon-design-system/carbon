@@ -26,10 +26,10 @@ async function run(packageName, from, to, options) {
   }
 
   const packageMigrations = supportedPackages.get(packageName);
-  const migrationsForVersion = find(packageMigrations, versionMigration => {
+  const migrationsForVersion = find(packageMigrations, (versionMigration) => {
     return versionMigration.version === to;
   });
-  const migration = migrationsForVersion.from.find(migration => {
+  const migration = migrationsForVersion.from.find((migration) => {
     return semver.intersects(migration.version, from);
   });
 
@@ -69,17 +69,17 @@ async function runInDirectory(options) {
     peerDependencies = {},
   } = packageJson;
   const packageDependencies = [
-    ...Object.keys(dependencies).map(name => ({
+    ...Object.keys(dependencies).map((name) => ({
       name,
       version: dependencies[name],
       type: 'dependencies',
     })),
-    ...Object.keys(devDependencies).map(name => ({
+    ...Object.keys(devDependencies).map((name) => ({
       name,
       version: devDependencies[name],
       type: 'devDependencies',
     })),
-    ...Object.keys(peerDependencies).map(name => ({
+    ...Object.keys(peerDependencies).map((name) => ({
       name,
       version: peerDependencies[name],
       type: 'peerDependencies',
@@ -91,7 +91,7 @@ async function runInDirectory(options) {
       }
       return acc.concat(pkg);
     }, [])
-    .filter(pkg => supportedPackages.has(pkg.name));
+    .filter((pkg) => supportedPackages.has(pkg.name));
 
   if (packageDependencies.length === 0) {
     reporter.info(
@@ -101,7 +101,7 @@ async function runInDirectory(options) {
     process.exit(1);
   }
 
-  const questions = packageDependencies.map(dependency => {
+  const questions = packageDependencies.map((dependency) => {
     const { name, version } = dependency;
     const supportedVersions = supportedPackages.get(name);
 
@@ -110,10 +110,10 @@ async function runInDirectory(options) {
       type: 'list',
       message: `Choose which version you would like to migrate to for ${name}`,
       choices: [...supportedVersions]
-        .filter(supportedVersion => {
+        .filter((supportedVersion) => {
           return semver.gt(supportedVersion.version, version);
         })
-        .map(supportedVersion => ({
+        .map((supportedVersion) => ({
           name: supportedVersion.version,
         })),
     };
@@ -124,7 +124,7 @@ async function runInDirectory(options) {
 
   for (const name of Object.keys(answers)) {
     const dependency = packageDependencies.find(
-      dependency => dependency.name === name
+      (dependency) => dependency.name === name
     );
     const to = answers[name];
 

@@ -78,7 +78,7 @@ class SideNav extends mixin(createComponent, initComponentBySearch, handles) {
     );
   }
 
-  _handleClick = evt => {
+  _handleClick = (evt) => {
     const matchesToggle = eventMatches(evt, this.options.selectorSideNavToggle);
     const matchesNavSubmenu = eventMatches(
       evt,
@@ -110,7 +110,7 @@ class SideNav extends mixin(createComponent, initComponentBySearch, handles) {
         ...this.element.querySelectorAll(
           this.options.selectorSideNavLinkCurrent
         ),
-      ].forEach(el => {
+      ].forEach((el) => {
         el.classList.remove(
           this.options.classSideNavItemActive,
           this.options.classSideNavLinkCurrent

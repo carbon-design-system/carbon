@@ -17,14 +17,9 @@ const { prefix } = settings;
 export class StructuredListWrapper extends Component {
   static propTypes = {
     /**
-     * Provide the contents of your StructuredListWrapper
+     * Specify a label to be read by screen readers on the container node
      */
-    children: PropTypes.node,
-
-    /**
-     * Specify an optional className to be applied to the container node
-     */
-    className: PropTypes.string,
+    ariaLabel: PropTypes.string,
 
     /**
      * Specify whether a border should be added to your StructuredListWrapper
@@ -35,14 +30,19 @@ export class StructuredListWrapper extends Component {
     ),
 
     /**
+     * Provide the contents of your StructuredListWrapper
+     */
+    children: PropTypes.node,
+
+    /**
+     * Specify an optional className to be applied to the container node
+     */
+    className: PropTypes.string,
+
+    /**
      * Specify whether your StructuredListWrapper should have selections
      */
     selection: PropTypes.bool,
-
-    /**
-     * Specify a label to be read by screen readers on the container node
-     */
-    ariaLabel: PropTypes.string,
   };
 
   static defaultProps = {
@@ -65,9 +65,9 @@ export class StructuredListWrapper extends Component {
     });
 
     return (
-      <section className={classes} {...other} aria-label={ariaLabel}>
+      <div className={classes} {...other} aria-label={ariaLabel}>
         {children}
-      </section>
+      </div>
     );
   }
 }
@@ -107,14 +107,14 @@ export class StructuredListInput extends Component {
     className: PropTypes.string,
 
     /**
+     * Specify whether the underlying input should be checked by default
+     */
+    defaultChecked: PropTypes.bool,
+
+    /**
      * Specify a custom `id` for the input
      */
     id: PropTypes.string,
-
-    /**
-     * Specify the value of the input
-     */
-    value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
 
     /**
      * Provide a `name` for the input
@@ -122,19 +122,19 @@ export class StructuredListInput extends Component {
     name: PropTypes.string,
 
     /**
+     * Provide an optional hook that is called each time the input is updated
+     */
+    onChange: PropTypes.func,
+
+    /**
      * Provide a `title` for the input
      */
     title: PropTypes.string,
 
     /**
-     * Specify whether the underlying input should be checked by default
+     * Specify the value of the input
      */
-    defaultChecked: PropTypes.bool,
-
-    /**
-     * Provide an optional hook that is called each time the input is updated
-     */
-    onChange: PropTypes.func,
+    value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
   };
 
   static defaultProps = {
@@ -189,15 +189,15 @@ export class StructuredListRow extends Component {
     label: PropTypes.bool,
 
     /**
-     * Specify the tab index of the container node, if `<label>` is in use
-     */
-    tabIndex: PropTypes.number,
-
-    /**
      * Provide a handler that is invoked on the key down event for the control,
      * if `<label>` is in use
      */
     onKeyDown: PropTypes.func,
+
+    /**
+     * Specify the tab index of the container node, if `<label>` is in use
+     */
+    tabIndex: PropTypes.number,
   };
 
   static defaultProps = {
@@ -223,6 +223,7 @@ export class StructuredListRow extends Component {
     });
 
     return label ? (
+      // eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions
       <label
         {...other}
         tabIndex={tabIndex}

@@ -8,10 +8,7 @@
 import './styles.scss';
 import './polyfills';
 
-import { settings } from 'carbon-components';
 import React, { useEffect } from 'react';
-
-const { prefix } = settings;
 
 function Container({ story }) {
   useEffect(() => {
@@ -20,7 +17,11 @@ function Container({ story }) {
       document.documentElement.dir = 'rtl';
     }
     return () => {
-      document.documentElement.dir = originalDirection;
+      if (originalDirection) {
+        document.documentElement.dir = originalDirection;
+      } else {
+        document.documentElement.removeAttribute('dir');
+      }
     };
   }, []);
 
@@ -35,7 +36,9 @@ function Container({ story }) {
           flexDirection: 'column',
           alignItems: 'center',
         }}>
-        {story()}
+        <div style={{ position: 'relative', width: '100%', zIndex: 0 }}>
+          {story()}
+        </div>
       </div>
     </React.StrictMode>
   );

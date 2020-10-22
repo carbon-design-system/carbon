@@ -27,6 +27,11 @@ const TableToolbar = ({ children, size, ...rest }) => {
 
 TableToolbar.propTypes = {
   /**
+   * Required props for the accessibility label of the TableToolbar
+   */
+  ...AriaLabelPropType,
+
+  /**
    * Pass in the children that will be rendered inside the TableToolbar
    */
   children: PropTypes.node,
@@ -35,11 +40,6 @@ TableToolbar.propTypes = {
    * `normal` Change the row height of table
    */
   size: PropTypes.oneOf(['small', 'normal']),
-
-  /**
-   * Required props for the accessibility label of the TableToolbar
-   */
-  ...AriaLabelPropType,
 };
 
 TableToolbar.defaultProps = {

@@ -28,7 +28,7 @@ export default class TextInput extends mixin(
   constructor(element, options) {
     super(element, options);
     this.manage(
-      on(this.element, 'click', event => {
+      on(this.element, 'click', (event) => {
         const toggleVisibilityButton = eventMatches(
           event,
           this.options.selectorPasswordVisibilityButton

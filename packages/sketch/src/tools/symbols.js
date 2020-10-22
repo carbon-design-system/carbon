@@ -17,7 +17,7 @@ import { SymbolMaster } from 'sketch/dom';
  * @returns {SketchSymbol}
  */
 export function syncSymbol(symbols, sharedLayerStyles, name, config) {
-  const symbol = symbols.find(symbol => symbol.name === name);
+  const symbol = symbols.find((symbol) => symbol.name === name);
 
   if (!symbol) {
     return new SymbolMaster({
@@ -26,7 +26,7 @@ export function syncSymbol(symbols, sharedLayerStyles, name, config) {
     });
   }
 
-  Object.keys(config).forEach(key => {
+  Object.keys(config).forEach((key) => {
     if (key === 'layers') {
       syncSymbolLayers(sharedLayerStyles, symbol, config);
     } else {
@@ -60,10 +60,10 @@ function syncSymbolLayers(sharedLayerStyles, original, proposed) {
   //
   // If nothing is shared between original and proposed, then the layers in
   // proposed will be used.
-  original.layers = proposed.layers.map(proposedLayer => {
+  original.layers = proposed.layers.map((proposedLayer) => {
     // We often name nested layers that can be overridden.
     const { name } = proposedLayer;
-    const originalLayer = original.layers.find(layer => {
+    const originalLayer = original.layers.find((layer) => {
       return layer.name === name;
     });
 
@@ -84,7 +84,7 @@ function syncSymbolLayers(sharedLayerStyles, original, proposed) {
 
       // If our original layer has a shared style, we'll update it to match
       if (originalLayer.sharedStyleId) {
-        const sharedStyle = sharedLayerStyles.find(sharedStyle => {
+        const sharedStyle = sharedLayerStyles.find((sharedStyle) => {
           return originalLayer.sharedStyleId === sharedStyle.id;
         });
 

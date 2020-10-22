@@ -41,7 +41,7 @@ const TooltipIcon = ({
   const handleFocus = () => setAllowTooltipVisibility(true);
   const handleMouseEnter = () => setAllowTooltipVisibility(true);
   useEffect(() => {
-    const handleEscKeyDown = event => {
+    const handleEscKeyDown = (event) => {
       if (matches(event, [keys.Escape])) {
         setAllowTooltipVisibility(false);
       }
@@ -53,6 +53,7 @@ const TooltipIcon = ({
   return (
     <button
       {...rest}
+      type="button"
       className={tooltipTriggerClasses}
       aria-describedby={tooltipId}
       onMouseEnter={composeEventHandlers([onMouseEnter, handleMouseEnter])}
@@ -67,10 +68,21 @@ const TooltipIcon = ({
 
 TooltipIcon.propTypes = {
   /**
+   * Specify the alignment (to the trigger button) of the tooltip.
+   * Can be one of: start, center, or end.
+   */
+  align: PropTypes.oneOf(['start', 'center', 'end']),
+
+  /**
    * Specify an icon as children that will be used as the tooltip trigger. This
    * can be an icon from our Icon component, or a custom SVG element.
    */
   children: PropTypes.node.isRequired,
+
+  /**
+   * Specify an optional className to be applied to the trigger node
+   */
+  className: PropTypes.string,
 
   /**
    * Specify the direction of the tooltip. Can be either top or bottom.
@@ -78,16 +90,20 @@ TooltipIcon.propTypes = {
   direction: PropTypes.oneOf(['top', 'right', 'left', 'bottom']),
 
   /**
-   * Specify the alignment (to the trigger button) of the tooltip.
-   * Can be one of: start, center, or end.
-   */
-  align: PropTypes.oneOf(['start', 'center', 'end']),
-
-  /**
    * Optionally specify a custom id for the tooltip. If one is not provided, we
    * generate a unique id for you.
    */
   id: PropTypes.string,
+
+  /**
+   * The event handler for the `focus` event.
+   */
+  onFocus: PropTypes.func,
+
+  /**
+   * The event handler for the `mouseenter` event.
+   */
+  onMouseEnter: PropTypes.func,
 
   /**
    * Provide the ARIA label for the tooltip.

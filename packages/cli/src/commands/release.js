@@ -32,7 +32,7 @@ const types = [
 // Filter supported commit types per release bump
 const typesByReleaseBump = {
   minor: types,
-  patch: types.filter(type => type !== 'feat'),
+  patch: types.filter((type) => type !== 'feat'),
 };
 
 const logger = createLogger('release');
@@ -183,7 +183,7 @@ async function cherryPickCommitsFrom(commitRange, bump) {
 
     commits.push(result);
   }
-  const commitsToCherryPick = commits.filter(commit => {
+  const commitsToCherryPick = commits.filter((commit) => {
     return (
       typesByReleaseBump[bump].includes(commit.info.type) ||
       commit.info.type === 'manual'

@@ -17,8 +17,8 @@ const CodePage = ({
   const useSingleVariant = !metadata.isCollection && subItems.length <= 1;
   /* eslint-disable react/no-danger */
   const componentContent = subItems
-    .filter(item => !item.isHidden)
-    .map(item => (
+    .filter((item) => !item.isHidden)
+    .map((item) => (
       <div key={item.id} className="component-variation">
         {!useSingleVariant && (
           <h2 className="component-variation__name">{item.label}</h2>
@@ -52,14 +52,14 @@ const CodePage = ({
 
 CodePage.propTypes = {
   /**
-   * The component data.
-   */
-  metadata: PropTypes.shape().isRequired,
-
-  /**
    * `true` to hide "full render" link.
    */
   hideViewFullRender: PropTypes.bool,
+
+  /**
+   * The component data.
+   */
+  metadata: PropTypes.shape().isRequired,
 
   /**
    * `true` to use static full render page.

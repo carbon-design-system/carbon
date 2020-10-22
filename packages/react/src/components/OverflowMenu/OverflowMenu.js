@@ -97,19 +97,9 @@ class OverflowMenu extends Component {
 
   static propTypes = {
     /**
-     * `true` if the menu should be open.
+     * The ARIA label.
      */
-    open: PropTypes.bool,
-
-    /**
-     * The menu direction.
-     */
-    direction: PropTypes.oneOf([DIRECTION_TOP, DIRECTION_BOTTOM]),
-
-    /**
-     * `true` if the menu alignment should be flipped.
-     */
-    flipped: PropTypes.bool,
+    ariaLabel: PropTypes.string,
 
     /**
      * The child nodes.
@@ -122,9 +112,24 @@ class OverflowMenu extends Component {
     className: PropTypes.string,
 
     /**
-     * The `tabindex` attribute.
+     * The menu direction.
      */
-    tabIndex: PropTypes.number,
+    direction: PropTypes.oneOf([DIRECTION_TOP, DIRECTION_BOTTOM]),
+
+    /**
+     * `true` if the menu alignment should be flipped.
+     */
+    flipped: PropTypes.bool,
+
+    /**
+     * The CSS class for the icon.
+     */
+    iconClass: PropTypes.string,
+
+    /**
+     * The icon description.
+     */
+    iconDescription: PropTypes.string.isRequired,
 
     /**
      * The element ID.
@@ -132,29 +137,10 @@ class OverflowMenu extends Component {
     id: PropTypes.string,
 
     /**
-     * The ARIA label.
+     * `true` to use the light version. For use on $ui-01 backgrounds only.
+     * Don't use this to make OverflowMenu background color same as container background color.
      */
-    ariaLabel: PropTypes.string,
-
-    /**
-     * The event handler for the `click` event.
-     */
-    onClick: PropTypes.func,
-
-    /**
-     * The event handler for the `focus` event.
-     */
-    onFocus: PropTypes.func,
-
-    /**
-     * The event handler for the `keydown` event.
-     */
-    onKeyDown: PropTypes.func,
-
-    /**
-     * The icon description.
-     */
-    iconDescription: PropTypes.string.isRequired,
+    light: PropTypes.bool,
 
     /**
      * The adjustment in position applied to the floating menu.
@@ -179,14 +165,14 @@ class OverflowMenu extends Component {
     ]),
 
     /**
-     * The CSS class for the icon.
+     * The class to apply to the menu options
      */
-    iconClass: PropTypes.string,
+    menuOptionsClass: PropTypes.string,
 
     /**
-     * Function called to override icon rendering.
+     * The event handler for the `click` event.
      */
-    renderIcon: PropTypes.oneOfType([PropTypes.func, PropTypes.object]),
+    onClick: PropTypes.func,
 
     /**
      * Function called when menu is closed
@@ -194,9 +180,14 @@ class OverflowMenu extends Component {
     onClose: PropTypes.func,
 
     /**
-     * The class to apply to the menu options
+     * The event handler for the `focus` event.
      */
-    menuOptionsClass: PropTypes.string,
+    onFocus: PropTypes.func,
+
+    /**
+     * The event handler for the `keydown` event.
+     */
+    onKeyDown: PropTypes.func,
 
     /**
      * Function called when menu is closed
@@ -204,10 +195,20 @@ class OverflowMenu extends Component {
     onOpen: PropTypes.func,
 
     /**
-     * `true` to use the light version. For use on $ui-01 backgrounds only.
-     * Don't use this to make OverflowMenu background color same as container background color.
+     * `true` if the menu should be open.
      */
-    light: PropTypes.bool,
+    open: PropTypes.bool,
+
+    /**
+     * Function called to override icon rendering.
+     */
+    renderIcon: PropTypes.oneOfType([PropTypes.func, PropTypes.object]),
+
+    /**
+     * Specify a CSS selector that matches the DOM element that should
+     * be focused when the OverflowMenu opens
+     */
+    selectorPrimaryFocus: PropTypes.string,
   };
 
   static defaultProps = {
@@ -221,10 +222,10 @@ class OverflowMenu extends Component {
     onKeyDown: () => {},
     onClose: () => {},
     onOpen: () => {},
-    tabIndex: 0,
     menuOffset: getMenuOffset,
     menuOffsetFlip: getMenuOffset,
     light: false,
+    selectorPrimaryFocus: '[data-overflow-menu-primary-focus]',
   };
 
   /**
@@ -246,29 +247,9 @@ class OverflowMenu extends Component {
    */
   _triggerRef = React.createRef();
 
-  getPrimaryFocusableElement = () => {
-    const { current: triggerEl } = this._triggerRef;
-    if (triggerEl) {
-      const primaryFocusPropEl = triggerEl.querySelector(
-        '[data-floating-menu-primary-focus]'
-      );
-      if (primaryFocusPropEl) {
-        return primaryFocusPropEl;
-      }
-    }
-    const firstItem = this.overflowMenuItem0;
-    if (
-      firstItem &&
-      firstItem.overflowMenuItem &&
-      firstItem.overflowMenuItem.current
-    ) {
-      return firstItem.overflowMenuItem.current;
-    }
-  };
-
-  componentDidUpdate() {
+  componentDidUpdate(_, prevState) {
     const { onClose } = this.props;
-    if (!this.state.open) {
+    if (!this.state.open && prevState.open) {
       onClose();
     }
   }
@@ -290,21 +271,21 @@ class OverflowMenu extends Component {
     }
   }
 
-  handleClick = evt => {
+  handleClick = (evt) => {
     if (!this._menuBody || !this._menuBody.contains(evt.target)) {
       this.setState({ open: !this.state.open });
       this.props.onClick(evt);
     }
   };
 
-  handleKeyDown = evt => {
+  handleKeyDown = (evt) => {
     if (keyCodeMatches(evt, [keys.ArrowDown])) {
       this.setState({ open: !this.state.open });
       this.props.onClick(evt);
     }
   };
 
-  handleKeyPress = evt => {
+  handleKeyPress = (evt) => {
     if (
       this.state.open &&
       keyCodeMatches(evt, [
@@ -319,13 +300,19 @@ class OverflowMenu extends Component {
 
     // Close the overflow menu on escape
     if (keyCodeMatches(evt, [keys.Escape])) {
-      this.closeMenu();
+      let wasOpen = this.state.open;
+      this.closeMenu(() => {
+        if (wasOpen) {
+          this.focusMenuEl();
+        }
+      });
+
       // Stop the esc keypress from bubbling out and closing something it shouldn't
       evt.stopPropagation();
     }
   };
 
-  handleClickOutside = evt => {
+  handleClickOutside = (evt) => {
     if (
       this.state.open &&
       (!this._menuBody || !this._menuBody.contains(evt.target))
@@ -334,11 +321,11 @@ class OverflowMenu extends Component {
     }
   };
 
-  closeMenu = () => {
-    let wasOpen = this.state.open;
+  closeMenu = (onCloseMenu) => {
     this.setState({ open: false }, () => {
-      if (wasOpen) {
-        this.focusMenuEl();
+      // Optional callback to be executed after the state as been set to close
+      if (onCloseMenu) {
+        onCloseMenu();
       }
       this.props.onClose();
     });
@@ -351,23 +338,40 @@ class OverflowMenu extends Component {
     }
   };
 
-  handleOverflowMenuItemFocus = index => {
-    const i = (() => {
-      switch (index) {
+  /**
+   * Focuses the next enabled overflow menu item given the currently focused
+   * item index and direction to move
+   * @param {object} params
+   * @param {number} params.currentIndex - the index of the currently focused
+   * overflow menu item in the list of overflow menu items
+   * @param {number} params.direction - number denoting the direction to move
+   * focus (1 for forwards, -1 for backwards)
+   */
+  handleOverflowMenuItemFocus = ({ currentIndex, direction }) => {
+    const enabledIndices = React.Children.toArray(this.props.children).reduce(
+      (acc, curr, i) => {
+        if (!curr.props.disabled) {
+          acc.push(i);
+        }
+        return acc;
+      },
+      []
+    );
+    const nextValidIndex = (() => {
+      const nextIndex = enabledIndices.indexOf(currentIndex) + direction;
+      switch (enabledIndices.indexOf(currentIndex) + direction) {
         case -1:
-          return React.Children.count(this.props.children) - 1;
-        case React.Children.count(this.props.children):
+          return enabledIndices.length - 1;
+        case enabledIndices.length:
           return 0;
         default:
-          return index;
+          return nextIndex;
       }
     })();
-    const { overflowMenuItem } =
-      this[`overflowMenuItem${i}`] ||
-      React.Children.toArray(this.props.children)[i];
-    if (overflowMenuItem && overflowMenuItem.current) {
-      overflowMenuItem.current.focus();
-    }
+    const { overflowMenuItem } = this[
+      `overflowMenuItem${enabledIndices[nextValidIndex]}`
+    ];
+    overflowMenuItem?.current?.focus();
   };
 
   /**
@@ -376,7 +380,7 @@ class OverflowMenu extends Component {
    * @param {Element} menuBody The DOM element of the menu body.
    * @private
    */
-  _bindMenuBody = menuBody => {
+  _bindMenuBody = (menuBody) => {
     if (!menuBody) {
       this._menuBody = menuBody;
     }
@@ -390,29 +394,27 @@ class OverflowMenu extends Component {
    * @param {Element} menuBody The DOM element of the menu body.
    * @private
    */
-  _handlePlace = menuBody => {
+  _handlePlace = (menuBody) => {
     if (menuBody) {
       this._menuBody = menuBody;
-      const primaryFocus =
-        menuBody.querySelector('[data-floating-menu-primary-focus]') ||
-        menuBody;
-      primaryFocus.focus();
       const hasFocusin = 'onfocusin' in window;
       const focusinEventName = hasFocusin ? 'focusin' : 'focus';
       this._hFocusIn = on(
         menuBody.ownerDocument,
         focusinEventName,
-        event => {
+        (event) => {
           const { target } = event;
           const { current: triggerEl } = this._triggerRef;
-          if (
-            !menuBody.contains(target) &&
-            triggerEl &&
-            !target.matches(
-              `.${prefix}--overflow-menu,.${prefix}--overflow-menu-options`
-            )
-          ) {
-            this.closeMenu();
+          if (typeof target.matches === 'function') {
+            if (
+              !menuBody.contains(target) &&
+              triggerEl &&
+              !target.matches(
+                `.${prefix}--overflow-menu,.${prefix}--overflow-menu-options`
+              )
+            ) {
+              this.closeMenu();
+            }
           }
         },
         !hasFocusin
@@ -435,7 +437,6 @@ class OverflowMenu extends Component {
   render() {
     const {
       id,
-      tabIndex,
       ariaLabel,
       children,
       iconDescription,
@@ -446,7 +447,9 @@ class OverflowMenu extends Component {
       iconClass,
       onClick, // eslint-disable-line
       onOpen, // eslint-disable-line
+      selectorPrimaryFocus = '[data-floating-menu-primary-focus]', // eslint-disable-line
       renderIcon: IconElement,
+      // eslint-disable-next-line react/prop-types
       innerRef: ref,
       menuOptionsClass,
       light,
@@ -484,7 +487,7 @@ class OverflowMenu extends Component {
         React.cloneElement(child, {
           closeMenu: this.closeMenu,
           handleOverflowMenuItemFocus: this.handleOverflowMenuItemFocus,
-          ref: e => {
+          ref: (e) => {
             this[`overflowMenuItem${index}`] = e;
           },
           index,
@@ -503,13 +506,15 @@ class OverflowMenu extends Component {
 
     const wrappedMenuBody = (
       <FloatingMenu
+        focusTrap
         triggerRef={this._triggerRef}
         menuDirection={direction}
         menuOffset={flipped ? menuOffsetFlip : menuOffset}
         menuRef={this._bindMenuBody}
         flipped={this.props.flipped}
         target={this._getTarget}
-        onPlace={this._handlePlace}>
+        onPlace={this._handlePlace}
+        selectorPrimaryFocus={this.props.selectorPrimaryFocus}>
         {React.cloneElement(menuBody, {
           'data-floating-menu-direction': direction,
         })}
@@ -521,13 +526,13 @@ class OverflowMenu extends Component {
       onKeyDown: this.handleKeyDown,
       className: overflowMenuIconClasses,
       'aria-label': iconDescription,
-      focusable: 'false', // Prevent `<svg>` in trigger icon from getting focus for IE11
     };
 
     return (
       <ClickListener onClickOutside={this.handleClickOutside}>
         <button
           {...other}
+          type="button"
           aria-haspopup
           aria-expanded={this.state.open}
           className={overflowMenuClasses}
@@ -535,7 +540,6 @@ class OverflowMenu extends Component {
           onClick={this.handleClick}
           aria-label={ariaLabel}
           id={id}
-          tabIndex={tabIndex}
           ref={mergeRefs(this._triggerRef, ref)}>
           <IconElement {...iconProps}>
             {iconDescription && <title>{iconDescription}</title>}

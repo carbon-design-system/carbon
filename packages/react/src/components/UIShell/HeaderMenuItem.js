@@ -54,26 +54,26 @@ HeaderMenuItem.propTypes = {
   ...LinkPropTypes,
 
   /**
-   * Optionally provide a custom class to apply to the underlying <li> node
-   */
-  className: PropTypes.string,
-
-  /**
    * Pass in children that are either a string or can be read as a string by
    * screen readers
    */
   children: PropTypes.node.isRequired,
 
   /**
-   * Optionally supply a role for the underlying <li> node. Useful for resetting
-   * <ul> semantics for menus.
+   * Optionally provide a custom class to apply to the underlying `<li>` node
    */
-  role: PropTypes.string,
+  className: PropTypes.string,
 
   /**
    * Applies selected styles to the item if a user sets this to true and aria-current !== 'page'.
    */
   isCurrentPage: PropTypes.bool,
+
+  /**
+   * Optionally supply a role for the underlying `<li>` node. Useful for resetting
+   * `<ul>` semantics for menus.
+   */
+  role: PropTypes.string,
 };
 
 export default HeaderMenuItem;

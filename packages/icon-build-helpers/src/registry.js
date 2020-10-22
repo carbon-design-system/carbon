@@ -68,7 +68,7 @@ async function create(directory) {
       .filter(Boolean);
 
     // Our namespace is generated from every directory that is not a size
-    const namespace = directories.filter(directory => isNaN(directory));
+    const namespace = directories.filter((directory) => isNaN(directory));
     const asset = {
       id: path.basename(filepath, '.svg'),
       filepath,
@@ -76,7 +76,7 @@ async function create(directory) {
     };
 
     // Our size folder is generated from the first directory that is a number
-    const sizeFolderName = directories.find(directory => !isNaN(directory));
+    const sizeFolderName = directories.find((directory) => !isNaN(directory));
     if (sizeFolderName) {
       asset.size = parseInt(sizeFolderName, 10);
     }
@@ -134,10 +134,10 @@ const denylist = new Set(['.DS_Store']);
 async function getFilepathsFromDirectory(directory) {
   const files = await fs.readdir(directory);
   return files
-    .filter(name => {
+    .filter((name) => {
       return !denylist.has(name);
     })
-    .map(filename => {
+    .map((filename) => {
       return path.join(directory, filename);
     });
 }

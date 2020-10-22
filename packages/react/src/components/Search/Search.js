@@ -8,7 +8,7 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import classNames from 'classnames';
-import { Search16, Close16, Close20 } from '@carbon/icons-react';
+import { Search16, Close16 } from '@carbon/icons-react';
 import { settings } from 'carbon-components';
 import deprecate from '../../prop-types/deprecate';
 
@@ -22,9 +22,51 @@ export default class Search extends Component {
     className: PropTypes.string,
 
     /**
-     * Optional prop to specify the type of the `<input>`
+     * Specify a label to be read by screen readers on the "close" button
      */
-    type: PropTypes.string,
+    closeButtonLabelText: PropTypes.string,
+
+    /**
+     * Optionally provide the default value of the `<input>`
+     */
+    defaultValue: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+
+    /**
+     * Specify whether the `<input>` should be disabled
+     */
+    disabled: PropTypes.bool,
+
+    /**
+     * Specify a custom `id` for the input
+     */
+    id: PropTypes.string,
+
+    /**
+     * Provide the label text for the Search icon
+     */
+    labelText: PropTypes.node.isRequired,
+
+    /**
+     * Specify light version or default version of this control
+     */
+    light: PropTypes.bool,
+
+    /**
+     * Optional callback called when the search value changes.
+     */
+    onChange: PropTypes.func,
+
+    /**
+     * Provide an optional placeholder text for the Search.
+     * Note: if the label and placeholder differ,
+     * VoiceOver on Mac will read both
+     */
+    placeHolderText: PropTypes.string,
+
+    /**
+     * Specify the search size
+     */
+    size: PropTypes.oneOf(['sm', 'lg', 'xl']),
 
     /**
      * Specify whether the Search should be a small variant
@@ -39,46 +81,14 @@ export default class Search extends Component {
     ),
 
     /**
-     * Specify the search size
+     * Optional prop to specify the type of the `<input>`
      */
-    size: PropTypes.oneOf(['sm', 'lg', 'xl']),
+    type: PropTypes.string,
 
     /**
-     * Provide an optional placeholder text for the Search.
-     * Note: if the label and placeholder differ,
-     * VoiceOver on Mac will read both
-     */
-    placeHolderText: PropTypes.string,
-
-    /**
-     * Provide an optional label text for the Search icon
-     */
-    labelText: PropTypes.node.isRequired,
-
-    /**
-     * Specify light version or default version of this control
-     */
-    light: PropTypes.bool,
-
-    /**
-     * Specify a custom `id` for the input
-     */
-    id: PropTypes.string,
-
-    /**
-     * Specify a label to be read by screen readers on the "close" button
-     */
-    closeButtonLabelText: PropTypes.string,
-
-    /**
-     * Specify the value of the <input>
+     * Specify the value of the `<input>`
      */
     value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-
-    /**
-     * Optionally provide the default value of the <input>
-     */
-    defaultValue: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   };
 
   static defaultProps = {
@@ -103,7 +113,7 @@ export default class Search extends Component {
         };
   }
 
-  clearInput = evt => {
+  clearInput = (evt) => {
     if (!this.props.value) {
       this.input.value = '';
       this.props.onChange(evt);
@@ -119,7 +129,7 @@ export default class Search extends Component {
     this.setState({ hasContent: false }, () => this.input.focus());
   };
 
-  handleChange = evt => {
+  handleChange = (evt) => {
     this.setState({
       hasContent: evt.target.value !== '',
     });
@@ -133,15 +143,14 @@ export default class Search extends Component {
       type,
       id = (this._inputId =
         this._inputId ||
-        `search__input__id_${Math.random()
-          .toString(36)
-          .substr(2)}`),
+        `search__input__id_${Math.random().toString(36).substr(2)}`),
       placeHolderText,
       labelText,
       closeButtonLabelText,
       small,
       size = !small ? 'xl' : 'sm',
       light,
+      disabled,
       ...other
     } = this.props;
 
@@ -151,6 +160,7 @@ export default class Search extends Component {
       [`${prefix}--search`]: true,
       [`${prefix}--search--${size}`]: size,
       [`${prefix}--search--light`]: light,
+      [`${prefix}--search--disabled`]: disabled,
       [className]: className,
     });
 
@@ -158,8 +168,6 @@ export default class Search extends Component {
       [`${prefix}--search-close`]: true,
       [`${prefix}--search-close--hidden`]: !hasContent,
     });
-
-    const CloseIconX = size === 'xl' ? Close20 : Close16;
 
     const searchId = `${id}-search`;
 
@@ -174,20 +182,22 @@ export default class Search extends Component {
           autoComplete="off"
           {...other}
           type={type}
+          disabled={disabled}
           className={`${prefix}--search-input`}
           id={id}
           placeholder={placeHolderText}
           onChange={this.handleChange}
-          ref={input => {
+          ref={(input) => {
             this.input = input;
           }}
         />
         <button
           className={clearClasses}
+          disabled={disabled}
           onClick={this.clearInput}
           type="button"
           aria-label={closeButtonLabelText}>
-          <CloseIconX />
+          <Close16 />
         </button>
       </div>
     );
