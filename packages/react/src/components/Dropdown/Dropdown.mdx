@@ -30,6 +30,7 @@ import DropdownSkeleton from './Dropdown.Skeleton';
   - [Dropdown `size`](#dropdown-size)
   - [Dropdown `titleText`](#dropdown-titletext)
   - [Dropdown `type`](#dropdown-type)
+  - [Dropdown `isOptional`](#dropdown-isoptional)
 - [References](#references)
 - [Feedback](#feedback)
 
@@ -288,6 +289,24 @@ that, pass in `type="inline"` to the `Dropdown`
   items={['Option 1', 'Option 2', 'Option 3']}
   label="Inline"
   type="inline"
+/>
+```
+
+### Dropdown `isOptional`
+
+In cases where an option should be able to be deselected once a selection is made, the `isOptional` prop will append `label`'s content to `items` and render it as the first value in the `Dropdown`.
+
+<Dropdown
+  items={['Option 1', 'Option 2', 'Option 3']}
+  label="Select an option"
+  isOptional
+/>
+
+```jsx
+<Dropdown
+  items={['Option 1', 'Option 2', 'Option 3']}
+  label="Select an option"
+  isOptional
 />
 ```
 
