@@ -431,16 +431,14 @@
 
   // TODO: remove namespace and suffix in next major release
   .#{$prefix}--tabs--scrollable {
-    .#{$prefix}--tabs--scrollable {
-      @include reset;
-      @include type-style('body-short-01');
+    @include reset;
+    @include type-style('body-short-01');
 
-      display: flex;
-      width: 100%;
-      height: auto;
-      min-height: rem(40px);
-      color: $text-01;
-    }
+    display: flex;
+    width: 100%;
+    height: auto;
+    min-height: rem(40px);
+    color: $text-01;
 
     .#{$prefix}--tabs--scrollable--container {
       min-height: rem(48px);

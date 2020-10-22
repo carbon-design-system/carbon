@@ -80,6 +80,7 @@ const props = {
           'Secondary button (secondary)': 'secondary',
           'Tertiary button (tertiary)': 'tertiary',
           'Ghost button (ghost)': 'ghost',
+          'Danger button (danger)': 'danger',
         },
         'primary'
       ),
