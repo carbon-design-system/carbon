@@ -251,7 +251,7 @@ export default class Tabs extends React.Component {
       event.type === 'click'
     ) {
       const currentScrollLeft = this.state.tablistScrollLeft;
-      tab?.tabAnchor?.scrollIntoView(false);
+      tab?.tabAnchor?.scrollIntoView({ block: 'nearest', inline: 'nearest' });
       const newScrollLeft = this.tablist.current.scrollLeft;
       if (newScrollLeft > currentScrollLeft) {
         this.tablist.current.scrollLeft += this.OVERFLOW_BUTTON_OFFSET;
@@ -446,8 +446,7 @@ export default class Tabs extends React.Component {
     };
 
     return (
-      // TODO: remove classname and revert div to React Fragment after next major release
-      <div className={`${prefix}--tabs--scrollable`}>
+      <>
         <div {...other} className={classes.tabs} onScroll={this.handleScroll}>
           <button
             type="button"
@@ -482,7 +481,7 @@ export default class Tabs extends React.Component {
           </button>
         </div>
         {tabContentWithProps}
-      </div>
+      </>
     );
   }
 }
