@@ -28,7 +28,7 @@
     list-style: none;
   }
 
-  .#{$prefix}--list--ordered_native {
+  .#{$prefix}--list--ordered--native {
     list-style: decimal;
   }
 
@@ -58,7 +58,7 @@
   }
 
   .#{$prefix}--list--ordered.#{$prefix}--list--nested,
-  .#{$prefix}--list--native.#{$prefix}--list--nested {
+  .#{$prefix}--list--ordered--native.#{$prefix}--list--nested {
     list-style-type: lower-latin;
   }
 
