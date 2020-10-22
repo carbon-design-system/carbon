@@ -37,7 +37,7 @@ module.exports = {
       label: 'Ordered native',
       context: {
         tag: 'ol',
-        type: 'ordered_native',
+        type: 'ordered--native',
         displayType: 'Ordered',
       },
     },
