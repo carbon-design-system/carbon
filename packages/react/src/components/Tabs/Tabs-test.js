@@ -35,7 +35,7 @@ describe('Tabs', () => {
           wrapper
             // TODO: uncomment and replace in next major version
             // .find(`.${prefix}--tabs`).hasClass('extra-class')
-            .find(`.${prefix}--tabs--scrollable .${prefix}--tabs--scrollable`)
+            .find(`.${prefix}--tabs--scrollable`)
             .hasClass('extra-class')
         ).toBe(true);
       });
@@ -55,9 +55,7 @@ describe('Tabs', () => {
             </Tabs>
           )
             .find('div')
-            // TODO: uncomment and replace .at() in next major version
-            // .first()
-            .at(1)
+            .first()
             .hasClass(`${prefix}--tabs--scrollable--container`)
         ).toBe(true);
       });
@@ -68,7 +66,7 @@ describe('Tabs', () => {
             wrapper
               // TODO: uncomment in next major version
               // .find(`.${prefix}--tabs`)
-              .find(`.${prefix}--tabs--scrollable .${prefix}--tabs--scrollable`)
+              .find(`.${prefix}--tabs--scrollable`)
               .props()
         ).toBe(false);
       });
