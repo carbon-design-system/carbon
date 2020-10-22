@@ -113,7 +113,7 @@ export default class TileGroup extends React.Component {
 
   renderLegend = (legend) => {
     if (legend) {
-      return <legend>{legend}</legend>;
+      return <legend className={`${prefix}--label`}>{legend}</legend>;
     }
   };
 

@@ -8,11 +8,23 @@
 import React from 'react';
 import { action } from '@storybook/addon-actions';
 
-import { withKnobs, boolean, number, text } from '@storybook/addon-knobs';
+import {
+  withKnobs,
+  boolean,
+  number,
+  select,
+  text,
+} from '@storybook/addon-knobs';
 import TimePicker from '../TimePicker';
 import TimePickerSelect from '../TimePickerSelect';
 import SelectItem from '../SelectItem';
 import mdx from './TimePicker.mdx';
+
+const sizes = {
+  'Extra large size (xl)': 'xl',
+  'Default size': undefined,
+  'Small size (sm)': 'sm',
+};
 
 const props = {
   timepicker: () => ({
@@ -36,6 +48,7 @@ const props = {
       'A valid value is required'
     ),
     maxLength: number('Maximum length (maxLength in <TimePicker>)', 5),
+    size: select('Field size (size)', sizes, undefined) || undefined,
     onClick: action('onClick'),
     onChange: action('onChange'),
     onBlur: action('onBlur'),
@@ -56,7 +69,6 @@ const props = {
 export default {
   title: 'TimePicker',
   decorators: [withKnobs],
-
   parameters: {
     component: TimePicker,
     docs: {

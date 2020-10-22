@@ -50,6 +50,10 @@ const props = {
       '[data-modal-primary-focus]'
     ),
     size: select('Size (size)', sizes, titleOnly ? 'sm' : ''),
+    preventCloseOnClickOutside: boolean(
+      'Prevent closing on click outside of modal (preventCloseOnClickOutside)',
+      false
+    ),
   }),
   modalHeader: ({ titleOnly } = {}) => ({
     label: text('Optional Label (label in <ModalHeader>)', 'Optional Label'),
