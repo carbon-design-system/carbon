@@ -19146,10 +19146,22 @@ List box styles
     vertical-align: top;
     outline: none;
     cursor: pointer;
+
+    @media screen and (-ms-high-contrast: active),
+      screen and (prefers-contrast) {
+      // `ButtonText` is a CSS2 system color to help improve colors in HCM
+      border: 1px solid ButtonText;
+    }
   }
 
   .#{$prefix}--list-box__field:focus {
     @include focus-outline('outline');
+
+    @media screen and (-ms-high-contrast: active),
+      screen and (prefers-contrast) {
+      // `ButtonText` is a CSS2 system color to help improve colors in HCM
+      border: 2px solid ButtonText;
+    }
   }
 
   .#{$prefix}--list-box__field[disabled] {
@@ -19307,6 +19319,12 @@ List box styles
     background-color: $inverse-02;
     border-radius: rem(12px);
     transform: none;
+
+    // Windows, Firefox HCM Fix
+    @media screen and (-ms-high-contrast: active),
+      screen and (prefers-contrast) {
+      border: 1px solid transparent;
+    }
   }
 
   .#{$prefix}--list-box__selection--multi > svg {
@@ -19484,6 +19502,13 @@ List box styles
       margin: 0;
       padding: rem(11px) rem(16px);
       border-color: transparent;
+
+      // Windows, Firefox HCM Fix
+      @media screen and (-ms-high-contrast: active),
+        screen and (prefers-contrast) {
+        outline: 3px solid transparent;
+        outline-offset: -3px;
+      }
     }
 
     &:hover {
@@ -19526,6 +19551,13 @@ List box styles
     color: $text-01;
     background-color: $hover-ui;
     border-color: transparent;
+
+    // Windows, Firefox HCM Fix
+    @media screen and (-ms-high-contrast: active),
+      screen and (prefers-contrast) {
+      outline: 3px solid transparent;
+      outline-offset: -3px;
+    }
   }
 
   .#{$prefix}--list-box__menu-item--highlighted
@@ -20300,6 +20332,13 @@ Multi select styles
       right: auto;
       left: $carbon--spacing-03;
     }
+  }
+
+  .#{$prefix}--multi-select--filterable.#{$prefix}--multi-select--inline,
+  .#{$prefix}--multi-select--filterable.#{$prefix}--multi-select--inline
+    .#{$prefix}--text-input {
+    background-color: transparent;
+    border-bottom: 0;
   }
 
   .#{$prefix}--multi-select--selected .#{$prefix}--text-input {
@@ -21270,6 +21309,13 @@ Overflow menu styles
 
     &:focus {
       @include focus-outline('outline');
+
+      // Windows, Firefox HCM Fix
+      @media screen and (-ms-high-contrast: active),
+        screen and (prefers-contrast) {
+        outline: 3px solid transparent;
+        outline-offset: -3px;
+      }
     }
 
     &:hover {
@@ -21455,6 +21501,13 @@ Overflow menu styles
 
     &:focus {
       @include focus-outline('outline');
+
+      // Windows, Firefox HCM Fix
+      @media screen and (-ms-high-contrast: active),
+        screen and (prefers-contrast) {
+        outline: 3px solid transparent;
+        outline-offset: -3px;
+      }
     }
 
     &::-moz-focus-inner {
@@ -24018,16 +24071,14 @@ Tabs styles
 
   // TODO: remove namespace and suffix in next major release
   .#{$prefix}--tabs--scrollable {
-    .#{$prefix}--tabs--scrollable {
-      @include reset;
-      @include type-style('body-short-01');
+    @include reset;
+    @include type-style('body-short-01');
 
-      display: flex;
-      width: 100%;
-      height: auto;
-      min-height: rem(40px);
-      color: $text-01;
-    }
+    display: flex;
+    width: 100%;
+    height: auto;
+    min-height: rem(40px);
+    color: $text-01;
 
     .#{$prefix}--tabs--scrollable--container {
       min-height: rem(48px);
@@ -25396,6 +25447,18 @@ Time picker styles
       cursor: not-allowed;
     }
   }
+
+  .#{$prefix}--time-picker--sm .#{$prefix}--select-input,
+  .#{$prefix}--time-picker--sm .#{$prefix}--time-picker__input-field {
+    height: rem(32px);
+    max-height: rem(32px);
+  }
+
+  .#{$prefix}--time-picker--xl .#{$prefix}--select-input,
+  .#{$prefix}--time-picker--xl .#{$prefix}--time-picker__input-field {
+    height: rem(48px);
+    max-height: rem(48px);
+  }
 }
 ```
 
@@ -26417,6 +26480,13 @@ Tooltip styles
 
   .#{$prefix}--tooltip__trigger svg {
     fill: $icon-02;
+
+    // Windows, Firefox HCM Fix
+    @media screen and (-ms-high-contrast: active),
+      screen and (prefers-contrast) {
+      // `ButtonText` is a CSS2 system color to help improve colors in HCM
+      fill: ButtonText;
+    }
   }
 
   .#{$prefix}--tooltip__trigger:not(.#{$prefix}--btn--icon-only) {
@@ -26458,6 +26528,13 @@ Tooltip styles
     word-wrap: break-word;
     background: $inverse-02;
     border-radius: rem(2px);
+
+    // Windows, Firefox HCM Fix
+    @media screen and (-ms-high-contrast: active),
+      screen and (prefers-contrast) {
+      // `ButtonText` is a CSS2 system color to help improve colors in HCM
+      border: 1px solid transparent;
+    }
 
     // @todo this can be deprecated in v11 since focus should always be on the content container not the tooltip
     &:focus {
@@ -26637,6 +26714,13 @@ Tooltip styles
     &:focus {
       svg {
         fill: $icon-02;
+
+        // Windows, Firefox HCM Fix
+        @media screen and (-ms-high-contrast: active),
+          screen and (prefers-contrast) {
+          // `ButtonText` is a CSS2 system color to help improve colors in HCM
+          fill: ButtonText;
+        }
       }
     }
   }
