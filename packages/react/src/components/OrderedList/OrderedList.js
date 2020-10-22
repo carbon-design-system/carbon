@@ -16,7 +16,7 @@ const OrderedList = ({ children, className, nested, native, ...other }) => {
   const classNames = classnames(
     {
       [`${prefix}--list--ordered`]: !native,
-      [`${prefix}--list--ordered_native`]: native,
+      [`${prefix}--list--ordered--native`]: native,
       [`${prefix}--list--nested`]: nested,
     },
     className
