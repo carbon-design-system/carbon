@@ -21,7 +21,7 @@
   .#{$prefix}--list--nested,
   .#{$prefix}--list--unordered,
   .#{$prefix}--list--ordered,
-  .#{$prefix}--list--ordered_native {
+  .#{$prefix}--list--ordered--native {
     @include reset;
     @include type-style('body-short-01');
 
