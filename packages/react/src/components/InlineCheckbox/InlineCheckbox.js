@@ -122,6 +122,10 @@ class InlineCheckbox extends React.Component {
       ref: mergeRefs(ref, this.handleRef),
       checked: false,
       disabled,
+      readOnly: true,
+      onClick: (evt) => {
+        evt.stopPropagation();
+      },
     };
 
     // firefox workaround. shift clicking checkboxes is unsupported
@@ -140,19 +144,18 @@ class InlineCheckbox extends React.Component {
     }
 
     return (
-      <>
+      <div role="presentation" onClick={onClickHandler}>
         <input {...inputProps} />
         {
-          /* eslint-disable jsx-a11y/label-has-for,jsx-a11y/label-has-associated-control,jsx-a11y/click-events-have-key-events,jsx-a11y/no-noninteractive-element-interactions */
+          /* eslint-disable jsx-a11y/label-has-for,jsx-a11y/label-has-associated-control */
           <label
             htmlFor={id}
             className={`${prefix}--checkbox-label`}
             aria-label={ariaLabel}
             title={title}
-            onClick={onClickHandler}
           />
         }
-      </>
+      </div>
     );
   }
 }
