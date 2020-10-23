@@ -6,7 +6,11 @@
  */
 import { useEffect, useState } from 'react';
 import addons, { makeDecorator } from '@storybook/addons';
-import { CARBON_CURRENT_THEME, CARBON_THEME_PARAM, WITH_CARBON_THEME } from './shared';
+import {
+  CARBON_CURRENT_THEME,
+  CARBON_THEME_PARAM,
+  WITH_CARBON_THEME,
+} from './shared';
 
 const Wrapper = (getStory, context, parameters) => {
   const channel = addons.getChannel();
@@ -32,5 +36,5 @@ const Wrapper = (getStory, context, parameters) => {
 export const withCarbonTheme = makeDecorator({
   name: WITH_CARBON_THEME,
   parameterName: CARBON_THEME_PARAM,
-  wrapper: Wrapper
+  wrapper: Wrapper,
 });

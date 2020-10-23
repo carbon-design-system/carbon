@@ -21,7 +21,7 @@ const defaultOptions = {
 };
 
 export const mergeParams = (params) => {
-  const options = { themes: [], ...params};
+  const options = { themes: [], ...params };
 
   if (options.themes.length) {
     // filter to params.themes
