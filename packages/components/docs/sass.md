@@ -18753,11 +18753,16 @@ List styles
 @mixin lists() {
   .#{$prefix}--list--nested,
   .#{$prefix}--list--unordered,
-  .#{$prefix}--list--ordered {
+  .#{$prefix}--list--ordered,
+  .#{$prefix}--list--ordered--native {
     @include reset;
     @include type-style('body-short-01');
 
     list-style: none;
+  }
+
+  .#{$prefix}--list--ordered--native {
+    list-style: decimal;
   }
 
   .#{$prefix}--list__item {
@@ -18785,7 +18790,8 @@ List styles
     counter-increment: item;
   }
 
-  .#{$prefix}--list--ordered.#{$prefix}--list--nested {
+  .#{$prefix}--list--ordered.#{$prefix}--list--nested,
+  .#{$prefix}--list--ordered--native.#{$prefix}--list--nested {
     list-style-type: lower-latin;
   }
 
