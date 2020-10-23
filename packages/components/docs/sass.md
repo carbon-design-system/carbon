@@ -18753,11 +18753,16 @@ List styles
 @mixin lists() {
   .#{$prefix}--list--nested,
   .#{$prefix}--list--unordered,
-  .#{$prefix}--list--ordered {
+  .#{$prefix}--list--ordered,
+  .#{$prefix}--list--ordered--native {
     @include reset;
     @include type-style('body-short-01');
 
     list-style: none;
+  }
+
+  .#{$prefix}--list--ordered--native {
+    list-style: decimal;
   }
 
   .#{$prefix}--list__item {
@@ -18785,7 +18790,8 @@ List styles
     counter-increment: item;
   }
 
-  .#{$prefix}--list--ordered.#{$prefix}--list--nested {
+  .#{$prefix}--list--ordered.#{$prefix}--list--nested,
+  .#{$prefix}--list--ordered--native.#{$prefix}--list--nested {
     list-style-type: lower-latin;
   }
 
@@ -24328,13 +24334,16 @@ Tabs styles
     // Link
     //-----------------------------
     .#{$prefix}--tabs--scrollable__nav-link {
+      @include button-reset($width: false);
       @include focus-outline('reset');
+      @include type-style('body-short-01');
 
       width: rem(160px);
       padding: $spacing-04 $spacing-05 $spacing-03;
       overflow: hidden;
       color: $text-02;
       white-space: nowrap;
+      text-align: left;
       text-decoration: none;
       text-overflow: ellipsis;
       border-bottom: $tab-underline-color;
@@ -27177,7 +27186,9 @@ UI shell header
   }
 
   .#{$prefix}--header__menu-toggle {
-    display: block;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 
   .#{$prefix}--header__menu-toggle__hidden {
@@ -27217,6 +27228,11 @@ UI shell header
   a.#{$prefix}--header__name,
   a.#{$prefix}--header__name:hover {
     color: $shell-header-text-01;
+  }
+
+  .#{$prefix}--header__menu-toggle:not(.#{$prefix}--header__menu-toggle__hidden)
+    ~ .#{$prefix}--header__name {
+    padding-left: rem(8px);
   }
 
   //--------------------------------------------------------------------------
