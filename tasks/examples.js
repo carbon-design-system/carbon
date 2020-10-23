@@ -105,24 +105,30 @@ async function main() {
       const packageJsonPath = path.join(example.filepath, 'package.json');
       const packageJson = await fs.readJson(packageJsonPath);
 
+      console.log('ENSURE DIR');
       await fs.ensureDir(exampleDir);
 
+      console.log('BUILD');
       if (packageJson.scripts.build) {
         spawn.sync('yarn', ['install'], {
-          stdio: 'ignore',
+          // stdio: 'ignore',
+          stdio: 'inherit',
           cwd: example.filepath,
         });
         spawn.sync('yarn', ['build'], {
-          stdio: 'ignore',
+          // stdio: 'ignore',
+          stdio: 'inherit',
           cwd: example.filepath,
         });
       }
 
+      console.log('COPY');
       if (await fs.pathExists(exampleBuildDir)) {
         await fs.copy(exampleBuildDir, exampleDir);
         continue;
       }
 
+      console.log('COPY v2');
       await fs.copy(example.filepath, exampleDir, {
         filter(src, dest) {
           const relativePath = path.relative(example.filepath, src);
@@ -135,6 +141,7 @@ async function main() {
           return true;
         },
       });
+
       reporter.success(
         `Built example \`${example.name}\` in package \`${pkg.name}\``
       );
