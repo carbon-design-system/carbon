@@ -24334,13 +24334,16 @@ Tabs styles
     // Link
     //-----------------------------
     .#{$prefix}--tabs--scrollable__nav-link {
+      @include button-reset($width: false);
       @include focus-outline('reset');
+      @include type-style('body-short-01');
 
       width: rem(160px);
       padding: $spacing-04 $spacing-05 $spacing-03;
       overflow: hidden;
       color: $text-02;
       white-space: nowrap;
+      text-align: left;
       text-decoration: none;
       text-overflow: ellipsis;
       border-bottom: $tab-underline-color;
