@@ -65,6 +65,33 @@ Map {
       },
     },
   },
+  "AspectRatio" => Object {
+    "propTypes": Object {
+      "as": Object {
+        "type": "elementType",
+      },
+      "children": Object {
+        "type": "node",
+      },
+      "className": Object {
+        "type": "string",
+      },
+      "ratio": Object {
+        "args": Array [
+          Array [
+            "16x9",
+            "9x16",
+            "2x1",
+            "1x2",
+            "4x3",
+            "3x4",
+            "1x1",
+          ],
+        ],
+        "type": "oneOf",
+      },
+    },
+  },
   "Breadcrumb" => Object {
     "propTypes": Object {
       "aria-label": Object {
