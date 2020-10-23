@@ -205,7 +205,10 @@ export default class Tabs extends React.Component {
     }
 
     if (prevState.selected !== selected) {
-      this.getTabAt(selected)?.tabAnchor?.scrollIntoView(false);
+      this.getTabAt(selected)?.tabAnchor?.scrollIntoView({
+        block: 'nearest',
+        inline: 'nearest',
+      });
     }
   }
 
