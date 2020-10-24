@@ -14406,11 +14406,10 @@ Button styles
   - [hover-primary-text [variable]](#hover-primary-text-variable)
   - [icon-01 [variable]](#icon-01-variable)
   - [focus [variable]](#focus-variable)
-  - [disabled-02 [variable]](#disabled-02-variable)
   - [danger-01 [variable]](#danger-01-variable)
-  - [danger-02 [variable]](#danger-02-variable)
   - [hover-danger [variable]](#hover-danger-variable)
   - [active-danger [variable]](#active-danger-variable)
+  - [danger-02 [variable]](#danger-02-variable)
   - [button-separator [variable]](#button-separator-variable)
 
 ### ❌button-base [mixin]
