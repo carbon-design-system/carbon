@@ -24,7 +24,7 @@
     "watch": "yarn clean && rollup -c -w"
   },
   "peerDependencies": {
-    "react": "^16.9.0"
+    "react": "^16.9.0 || ^17.0.1"
   },
   "devDependencies": {
     "@babel/core": "^7.10.0",
