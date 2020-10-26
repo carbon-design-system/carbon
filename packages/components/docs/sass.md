@@ -6854,7 +6854,6 @@ $ui-05: if(
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
   - [accordion [mixin]](#accordion-mixin)
-  - [checkbox [mixin]](#checkbox-mixin)
   - [content-switcher [mixin]](#content-switcher-mixin)
   - [data-table-expandable [mixin]](#data-table-expandable-mixin)
   - [data-table-sort [mixin]](#data-table-sort-mixin)
@@ -7090,6 +7089,7 @@ $icon-01: if(
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
   - [button [mixin]](#button-mixin)
+  - [checkbox [mixin]](#checkbox-mixin)
   - [snippet [mixin]](#snippet-mixin)
   - [data-table-v2-action [mixin]](#data-table-v2-action-mixin)
   - [date-picker [mixin]](#date-picker-mixin)
@@ -14505,7 +14505,7 @@ Checkbox styles
 
     // Checkboxes with a background color look visually off against a parent container.
     background-color: transparent;
-    border: 1px solid $ui-05;
+    border: 1px solid $icon-01;
     border-radius: 1px;
     content: '';
   }
@@ -14535,8 +14535,8 @@ Checkbox styles
   .#{$prefix}--checkbox:indeterminate + .#{$prefix}--checkbox-label::before,
   .#{$prefix}--checkbox-label[data-contained-checkbox-state='true']::before,
   .#{$prefix}--checkbox-label[data-contained-checkbox-state='mixed']::before {
-    background-color: $ui-05;
-    border-color: $ui-05;
+    background-color: $icon-01;
+    border-color: $icon-01;
     border-width: 1px;
   }
 
@@ -14627,7 +14627,7 @@ Checkbox styles
   - [prefix [variable]](#prefix-variable)
   - [carbon--spacing-02 [variable]](#carbon--spacing-02-variable)
   - [carbon--spacing-01 [variable]](#carbon--spacing-01-variable)
-  - [ui-05 [variable]](#ui-05-variable)
+  - [icon-01 [variable]](#icon-01-variable)
   - [inverse-01 [variable]](#inverse-01-variable)
   - [focus [variable]](#focus-variable)
   - [disabled-02 [variable]](#disabled-02-variable)
