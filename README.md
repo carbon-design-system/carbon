@@ -79,7 +79,16 @@ check out our [Contributing Guide](/.github/CONTRIBUTING.md) and our
 ## Contributors
 
 <!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
-<!-- prettier-ignore -->
+<!-- prettier-ignore-start -->
+<!-- markdownlint-disable -->
+<table>
+  <tr>
+    <td align="center"><a href="http://tjegan.dev"><img src="https://avatars1.githubusercontent.com/u/11928039?v=4" width="100px;" alt=""/><br /><sub><b>TJ Egan</b></sub></a></td>
+  </tr>
+</table>
+
+<!-- markdownlint-enable -->
+<!-- prettier-ignore-end -->
 <!-- ALL-CONTRIBUTORS-LIST:END -->
 
 This project follows the
