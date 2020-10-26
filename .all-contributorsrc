@@ -7,6 +7,20 @@
   "contributorsSortAlphabetically": false,
   "badgeTemplate": "[![All Contributors](https://img.shields.io/badge/all_contributors-<%= contributors.length %>-orange.svg?style=flat-square)](#contributors)",
   "contributorTemplate": "<a href=\"<%= contributor.profile %>\"><img src=\"<%= contributor.avatar_url %>\" width=\"<%= options.imageSize %>px;\" alt=\"\"/><br /><sub><b><%= contributor.name %></b></sub></a>",
-  "skipCi": "true",
-  "contributors": []
+  "skipCi": true,
+  "contributors": [
+    {
+      "login": "joshblack",
+      "name": "Josh Black",
+      "avatar_url": "https://avatars1.githubusercontent.com/u/3901764?v=4",
+      "profile": "https://github.com/joshblack",
+      "contributions": [
+        "code"
+      ]
+    }
+  ],
+  "projectName": "carbon",
+  "projectOwner": "carbon-design-system",
+  "repoType": "github",
+  "repoHost": "https://github.com"
 }
