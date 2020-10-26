@@ -18710,7 +18710,7 @@ Link styles
   }
 
   .#{$prefix}--link--lg {
-    @include type-style('body-long-02');
+    @include type-style('body-short-02');
   }
 }
 ```
