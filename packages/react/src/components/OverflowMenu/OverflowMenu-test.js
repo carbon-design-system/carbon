@@ -72,17 +72,6 @@ describe('OverflowMenu', () => {
       ).toEqual('uniqueId');
     });
 
-    it('should apply a tabindex to the menu', () => {
-      const defaultMenu = mount(
-        <OverflowMenu>
-          <div>Child</div>
-        </OverflowMenu>
-      ).childAt(0);
-      // Enzyme doesn't seem to allow props() in a forwardRef-wrapped class component
-      expect(defaultMenu.find('OverflowMenu').instance().props.tabIndex).toBe(
-        0
-      );
-    });
     it('should specify light version as expected', () => {
       rootWrapper.setProps({ light: true });
       expect(rootWrapper.props().light).toEqual(true);

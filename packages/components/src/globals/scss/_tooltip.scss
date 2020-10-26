@@ -60,9 +60,8 @@
     width: auto;
   }
 
-  // Windows HCM Fix
-  @media screen and (-ms-high-contrast: active) {
-    // `GrayText` is a CSS2 system color to help improve colors in HCM
+  // Windows, Firefox HCM Fix
+  @media screen and (-ms-high-contrast: active), screen and (prefers-contrast) {
     border: 1px solid transparent;
   }
 }
@@ -201,6 +200,12 @@
   &.#{$prefix}--tooltip--hidden.#{$prefix}--tooltip--a11y::before {
     opacity: 0;
     animation: none;
+  }
+
+  &.#{$prefix}--btn--disabled.#{$prefix}--tooltip--a11y::before,
+  &.#{$prefix}--btn--disabled.#{$prefix}--tooltip--a11y::after,
+  &.#{$prefix}--btn--disabled .#{$prefix}--assistive-text {
+    display: none;
   }
 }
 
