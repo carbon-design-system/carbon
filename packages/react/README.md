@@ -6,6 +6,9 @@
 
 ### Getting Started
 
+**You are new to React or to the carbon ecosystem?** Read this short tutorial to get started: [https://medium.com/carbondesign/up-running-with-carbon-react-in-less-than-5-minutes-25d43cca059e](https://medium.com/carbondesign/up-running-with-carbon-react-in-less-than-5-minutes-25d43cca059e)
+
+**You are already familiar with React?**
 Run the following command using [npm](https://www.npmjs.com/):
 
 ```bash
