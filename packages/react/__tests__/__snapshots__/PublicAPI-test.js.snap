@@ -4038,6 +4038,7 @@ Map {
   },
   "OrderedList" => Object {
     "defaultProps": Object {
+      "native": false,
       "nested": false,
     },
     "propTypes": Object {
@@ -4046,6 +4047,9 @@ Map {
       },
       "className": Object {
         "type": "string",
+      },
+      "native": Object {
+        "type": "bool",
       },
       "nested": Object {
         "type": "bool",
@@ -4952,10 +4956,7 @@ Map {
       "handleTabKeyDown": Object {
         "type": "func",
       },
-      "href": Object {
-        "isRequired": true,
-        "type": "string",
-      },
+      "href": [Function],
       "id": Object {
         "type": "string",
       },
@@ -4973,9 +4974,7 @@ Map {
         "isRequired": true,
         "type": "func",
       },
-      "renderAnchor": Object {
-        "type": "func",
-      },
+      "renderAnchor": [Function],
       "renderContent": Object {
         "type": "func",
       },
@@ -4987,10 +4986,7 @@ Map {
         "isRequired": true,
         "type": "bool",
       },
-      "tabIndex": Object {
-        "isRequired": true,
-        "type": "number",
-      },
+      "tabIndex": [Function],
     },
   },
   "TabContent" => Object {
