@@ -134,6 +134,47 @@
         "doc",
         "review"
       ]
+    },
+    {
+      "login": "aagonzales",
+      "name": "Anna Gonzales",
+      "avatar_url": "https://avatars3.githubusercontent.com/u/11670886?v=4",
+      "profile": "https://github.com/aagonzales",
+      "contributions": [
+        "design",
+        "review"
+      ]
+    },
+    {
+      "login": "jillianhowarth",
+      "name": "jillianhowarth",
+      "avatar_url": "https://avatars0.githubusercontent.com/u/20690344?v=4",
+      "profile": "https://github.com/jillianhowarth",
+      "contributions": [
+        "content",
+        "design",
+        "review"
+      ]
+    },
+    {
+      "login": "laurenmrice",
+      "name": "Lauren Rice",
+      "avatar_url": "https://avatars3.githubusercontent.com/u/43969356?v=4",
+      "profile": "https://github.com/laurenmrice",
+      "contributions": [
+        "design",
+        "review"
+      ]
+    },
+    {
+      "login": "johnbister",
+      "name": "johnbister",
+      "avatar_url": "https://avatars3.githubusercontent.com/u/70543333?v=4",
+      "profile": "https://github.com/johnbister",
+      "contributions": [
+        "design",
+        "review"
+      ]
     }
   ],
   "commitConvention": "none"
