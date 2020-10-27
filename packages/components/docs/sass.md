@@ -18848,6 +18848,14 @@ Link styles
   .#{$prefix}--link--disabled.#{$prefix}--link--inline {
     text-decoration: underline;
   }
+
+  .#{$prefix}--link--sm {
+    @include type-style('helper-text-01');
+  }
+
+  .#{$prefix}--link--lg {
+    @include type-style('body-short-02');
+  }
 }
 ```
 
