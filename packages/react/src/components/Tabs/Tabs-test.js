@@ -35,7 +35,7 @@ describe('Tabs', () => {
           wrapper
             // TODO: uncomment and replace in next major version
             // .find(`.${prefix}--tabs`).hasClass('extra-class')
-            .find(`.${prefix}--tabs--scrollable .${prefix}--tabs--scrollable`)
+            .find(`.${prefix}--tabs--scrollable`)
             .hasClass('extra-class')
         ).toBe(true);
       });
@@ -55,9 +55,7 @@ describe('Tabs', () => {
             </Tabs>
           )
             .find('div')
-            // TODO: uncomment and replace .at() in next major version
-            // .first()
-            .at(1)
+            .first()
             .hasClass(`${prefix}--tabs--scrollable--container`)
         ).toBe(true);
       });
@@ -68,7 +66,7 @@ describe('Tabs', () => {
             wrapper
               // TODO: uncomment in next major version
               // .find(`.${prefix}--tabs`)
-              .find(`.${prefix}--tabs--scrollable .${prefix}--tabs--scrollable`)
+              .find(`.${prefix}--tabs--scrollable`)
               .props()
         ).toBe(false);
       });
@@ -146,10 +144,10 @@ describe('Tabs', () => {
       let wrapper;
       let firstTab;
       let lastTab;
-      let anchorInFirstTab;
-      let anchorInLastTab;
-      let spyFocusAnchorInFirstTab;
-      let spyFocusAnchorInLastTab;
+      let buttonInFirstTab;
+      let buttonInLastTab;
+      let spyFocusButtonInFirstTab;
+      let spyFocusButtonInLastTab;
 
       describe('state: selected', () => {
         beforeEach(() => {
@@ -165,29 +163,29 @@ describe('Tabs', () => {
           );
           firstTab = wrapper.find('.firstTab').last();
           lastTab = wrapper.find('.lastTab').last();
-          anchorInFirstTab = firstTab.find('a').getDOMNode();
-          anchorInLastTab = lastTab.find('a').getDOMNode();
+          buttonInFirstTab = firstTab.find('button').getDOMNode();
+          buttonInLastTab = lastTab.find('button').getDOMNode();
         });
 
         it('updates selected state when pressing arrow keys', () => {
-          spyFocusAnchorInFirstTab = jest.spyOn(anchorInFirstTab, 'focus');
-          spyFocusAnchorInLastTab = jest.spyOn(anchorInLastTab, 'focus');
+          spyFocusButtonInFirstTab = jest.spyOn(buttonInFirstTab, 'focus');
+          spyFocusButtonInLastTab = jest.spyOn(buttonInLastTab, 'focus');
           firstTab.simulate('keydown', { which: rightKey });
-          expect(spyFocusAnchorInLastTab).toHaveBeenCalled();
+          expect(spyFocusButtonInLastTab).toHaveBeenCalled();
           lastTab.simulate('keydown', { which: leftKey });
-          expect(spyFocusAnchorInFirstTab).toHaveBeenCalled();
+          expect(spyFocusButtonInFirstTab).toHaveBeenCalled();
         });
 
         it('loops focus and selected state from lastTab to firstTab', () => {
-          spyFocusAnchorInFirstTab = jest.spyOn(anchorInFirstTab, 'focus');
+          spyFocusButtonInFirstTab = jest.spyOn(buttonInFirstTab, 'focus');
           lastTab.simulate('keydown', { which: rightKey });
-          expect(spyFocusAnchorInFirstTab).toHaveBeenCalled();
+          expect(spyFocusButtonInFirstTab).toHaveBeenCalled();
         });
 
         it('loops focus and selected state from firstTab to lastTab', () => {
-          spyFocusAnchorInLastTab = jest.spyOn(anchorInLastTab, 'focus');
+          spyFocusButtonInLastTab = jest.spyOn(buttonInLastTab, 'focus');
           firstTab.simulate('keydown', { which: leftKey });
-          expect(spyFocusAnchorInLastTab).toHaveBeenCalled();
+          expect(spyFocusButtonInLastTab).toHaveBeenCalled();
         });
 
         it('updates selected state when pressing space or enter key', () => {
@@ -215,29 +213,29 @@ describe('Tabs', () => {
           );
           firstTab = wrapper.find('.firstTab').last();
           lastTab = wrapper.find('.lastTab').last();
-          anchorInFirstTab = firstTab.find('a').getDOMNode();
-          anchorInLastTab = lastTab.find('a').getDOMNode();
+          buttonInFirstTab = firstTab.find('button').getDOMNode();
+          buttonInLastTab = lastTab.find('button').getDOMNode();
         });
         it('updates selected state when pressing arrow keys', () => {
-          spyFocusAnchorInFirstTab = jest.spyOn(anchorInFirstTab, 'focus');
-          spyFocusAnchorInLastTab = jest.spyOn(anchorInLastTab, 'focus');
+          spyFocusButtonInFirstTab = jest.spyOn(buttonInFirstTab, 'focus');
+          spyFocusButtonInLastTab = jest.spyOn(buttonInLastTab, 'focus');
           firstTab.simulate('keydown', { which: rightKey });
-          expect(spyFocusAnchorInLastTab).toHaveBeenCalled();
+          expect(spyFocusButtonInLastTab).toHaveBeenCalled();
           lastTab.simulate('keydown', { which: leftKey });
-          expect(spyFocusAnchorInFirstTab).toHaveBeenCalled();
+          expect(spyFocusButtonInFirstTab).toHaveBeenCalled();
         });
 
         it('loops focus and selected state from lastTab to firstTab', () => {
-          spyFocusAnchorInFirstTab = jest.spyOn(anchorInFirstTab, 'focus');
+          spyFocusButtonInFirstTab = jest.spyOn(buttonInFirstTab, 'focus');
           wrapper.setState({ selected: 2 });
           lastTab.simulate('keydown', { which: rightKey });
-          expect(spyFocusAnchorInFirstTab).toHaveBeenCalled();
+          expect(spyFocusButtonInFirstTab).toHaveBeenCalled();
         });
 
         it('loops focus and selected state from firstTab to lastTab', () => {
-          spyFocusAnchorInLastTab = jest.spyOn(anchorInLastTab, 'focus');
+          spyFocusButtonInLastTab = jest.spyOn(buttonInLastTab, 'focus');
           firstTab.simulate('keydown', { which: leftKey });
-          expect(spyFocusAnchorInLastTab).toHaveBeenCalled();
+          expect(spyFocusButtonInLastTab).toHaveBeenCalled();
         });
 
         it('updates selected state when pressing space or enter key', () => {
@@ -249,13 +247,13 @@ describe('Tabs', () => {
       });
 
       afterEach(() => {
-        if (spyFocusAnchorInLastTab) {
-          spyFocusAnchorInLastTab.mockRestore();
-          spyFocusAnchorInLastTab = null;
+        if (spyFocusButtonInLastTab) {
+          spyFocusButtonInLastTab.mockRestore();
+          spyFocusButtonInLastTab = null;
         }
-        if (spyFocusAnchorInFirstTab) {
-          spyFocusAnchorInFirstTab.mockRestore();
-          spyFocusAnchorInFirstTab = null;
+        if (spyFocusButtonInFirstTab) {
+          spyFocusButtonInFirstTab.mockRestore();
+          spyFocusButtonInFirstTab = null;
         }
       });
     });

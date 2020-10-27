@@ -6870,7 +6870,6 @@ $ui-05: if(
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
   - [accordion [mixin]](#accordion-mixin)
-  - [checkbox [mixin]](#checkbox-mixin)
   - [content-switcher [mixin]](#content-switcher-mixin)
   - [data-table-expandable [mixin]](#data-table-expandable-mixin)
   - [data-table-sort [mixin]](#data-table-sort-mixin)
@@ -7106,6 +7105,7 @@ $icon-01: if(
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
   - [button [mixin]](#button-mixin)
+  - [checkbox [mixin]](#checkbox-mixin)
   - [snippet [mixin]](#snippet-mixin)
   - [data-table-v2-action [mixin]](#data-table-v2-action-mixin)
   - [date-picker [mixin]](#date-picker-mixin)
@@ -14615,7 +14615,7 @@ Checkbox styles
 
     // Checkboxes with a background color look visually off against a parent container.
     background-color: transparent;
-    border: 1px solid $ui-05;
+    border: 1px solid $icon-01;
     border-radius: 1px;
     content: '';
   }
@@ -14645,8 +14645,8 @@ Checkbox styles
   .#{$prefix}--checkbox:indeterminate + .#{$prefix}--checkbox-label::before,
   .#{$prefix}--checkbox-label[data-contained-checkbox-state='true']::before,
   .#{$prefix}--checkbox-label[data-contained-checkbox-state='mixed']::before {
-    background-color: $ui-05;
-    border-color: $ui-05;
+    background-color: $icon-01;
+    border-color: $icon-01;
     border-width: 1px;
   }
 
@@ -14737,7 +14737,7 @@ Checkbox styles
   - [prefix [variable]](#prefix-variable)
   - [carbon--spacing-02 [variable]](#carbon--spacing-02-variable)
   - [carbon--spacing-01 [variable]](#carbon--spacing-01-variable)
-  - [ui-05 [variable]](#ui-05-variable)
+  - [icon-01 [variable]](#icon-01-variable)
   - [inverse-01 [variable]](#inverse-01-variable)
   - [focus [variable]](#focus-variable)
   - [disabled-02 [variable]](#disabled-02-variable)
@@ -18863,11 +18863,16 @@ List styles
 @mixin lists() {
   .#{$prefix}--list--nested,
   .#{$prefix}--list--unordered,
-  .#{$prefix}--list--ordered {
+  .#{$prefix}--list--ordered,
+  .#{$prefix}--list--ordered--native {
     @include reset;
     @include type-style('body-short-01');
 
     list-style: none;
+  }
+
+  .#{$prefix}--list--ordered--native {
+    list-style: decimal;
   }
 
   .#{$prefix}--list__item {
@@ -18895,7 +18900,8 @@ List styles
     counter-increment: item;
   }
 
-  .#{$prefix}--list--ordered.#{$prefix}--list--nested {
+  .#{$prefix}--list--ordered.#{$prefix}--list--nested,
+  .#{$prefix}--list--ordered--native.#{$prefix}--list--nested {
     list-style-type: lower-latin;
   }
 
@@ -19256,10 +19262,22 @@ List box styles
     vertical-align: top;
     outline: none;
     cursor: pointer;
+
+    @media screen and (-ms-high-contrast: active),
+      screen and (prefers-contrast) {
+      // `ButtonText` is a CSS2 system color to help improve colors in HCM
+      border: 1px solid ButtonText;
+    }
   }
 
   .#{$prefix}--list-box__field:focus {
     @include focus-outline('outline');
+
+    @media screen and (-ms-high-contrast: active),
+      screen and (prefers-contrast) {
+      // `ButtonText` is a CSS2 system color to help improve colors in HCM
+      border: 2px solid ButtonText;
+    }
   }
 
   .#{$prefix}--list-box__field[disabled] {
@@ -19417,6 +19435,12 @@ List box styles
     background-color: $inverse-02;
     border-radius: rem(12px);
     transform: none;
+
+    // Windows, Firefox HCM Fix
+    @media screen and (-ms-high-contrast: active),
+      screen and (prefers-contrast) {
+      border: 1px solid transparent;
+    }
   }
 
   .#{$prefix}--list-box__selection--multi > svg {
@@ -19594,6 +19618,13 @@ List box styles
       margin: 0;
       padding: rem(11px) rem(16px);
       border-color: transparent;
+
+      // Windows, Firefox HCM Fix
+      @media screen and (-ms-high-contrast: active),
+        screen and (prefers-contrast) {
+        outline: 3px solid transparent;
+        outline-offset: -3px;
+      }
     }
 
     &:hover {
@@ -19636,6 +19667,13 @@ List box styles
     color: $text-01;
     background-color: $hover-ui;
     border-color: transparent;
+
+    // Windows, Firefox HCM Fix
+    @media screen and (-ms-high-contrast: active),
+      screen and (prefers-contrast) {
+      outline: 3px solid transparent;
+      outline-offset: -3px;
+    }
   }
 
   .#{$prefix}--list-box__menu-item--highlighted
@@ -20410,6 +20448,13 @@ Multi select styles
       right: auto;
       left: $carbon--spacing-03;
     }
+  }
+
+  .#{$prefix}--multi-select--filterable.#{$prefix}--multi-select--inline,
+  .#{$prefix}--multi-select--filterable.#{$prefix}--multi-select--inline
+    .#{$prefix}--text-input {
+    background-color: transparent;
+    border-bottom: 0;
   }
 
   .#{$prefix}--multi-select--selected .#{$prefix}--text-input {
@@ -21380,6 +21425,13 @@ Overflow menu styles
 
     &:focus {
       @include focus-outline('outline');
+
+      // Windows, Firefox HCM Fix
+      @media screen and (-ms-high-contrast: active),
+        screen and (prefers-contrast) {
+        outline: 3px solid transparent;
+        outline-offset: -3px;
+      }
     }
 
     &:hover {
@@ -21565,6 +21617,13 @@ Overflow menu styles
 
     &:focus {
       @include focus-outline('outline');
+
+      // Windows, Firefox HCM Fix
+      @media screen and (-ms-high-contrast: active),
+        screen and (prefers-contrast) {
+        outline: 3px solid transparent;
+        outline-offset: -3px;
+      }
     }
 
     &::-moz-focus-inner {
@@ -24128,16 +24187,14 @@ Tabs styles
 
   // TODO: remove namespace and suffix in next major release
   .#{$prefix}--tabs--scrollable {
-    .#{$prefix}--tabs--scrollable {
-      @include reset;
-      @include type-style('body-short-01');
+    @include reset;
+    @include type-style('body-short-01');
 
-      display: flex;
-      width: 100%;
-      height: auto;
-      min-height: rem(40px);
-      color: $text-01;
-    }
+    display: flex;
+    width: 100%;
+    height: auto;
+    min-height: rem(40px);
+    color: $text-01;
 
     .#{$prefix}--tabs--scrollable--container {
       min-height: rem(48px);
@@ -24387,13 +24444,16 @@ Tabs styles
     // Link
     //-----------------------------
     .#{$prefix}--tabs--scrollable__nav-link {
+      @include button-reset($width: false);
       @include focus-outline('reset');
+      @include type-style('body-short-01');
 
       width: rem(160px);
       padding: $spacing-04 $spacing-05 $spacing-03;
       overflow: hidden;
       color: $text-02;
       white-space: nowrap;
+      text-align: left;
       text-decoration: none;
       text-overflow: ellipsis;
       border-bottom: $tab-underline-color;
@@ -25506,6 +25566,18 @@ Time picker styles
       cursor: not-allowed;
     }
   }
+
+  .#{$prefix}--time-picker--sm .#{$prefix}--select-input,
+  .#{$prefix}--time-picker--sm .#{$prefix}--time-picker__input-field {
+    height: rem(32px);
+    max-height: rem(32px);
+  }
+
+  .#{$prefix}--time-picker--xl .#{$prefix}--select-input,
+  .#{$prefix}--time-picker--xl .#{$prefix}--time-picker__input-field {
+    height: rem(48px);
+    max-height: rem(48px);
+  }
 }
 ```
 
@@ -26527,6 +26599,13 @@ Tooltip styles
 
   .#{$prefix}--tooltip__trigger svg {
     fill: $icon-02;
+
+    // Windows, Firefox HCM Fix
+    @media screen and (-ms-high-contrast: active),
+      screen and (prefers-contrast) {
+      // `ButtonText` is a CSS2 system color to help improve colors in HCM
+      fill: ButtonText;
+    }
   }
 
   .#{$prefix}--tooltip__trigger:not(.#{$prefix}--btn--icon-only) {
@@ -26568,6 +26647,13 @@ Tooltip styles
     word-wrap: break-word;
     background: $inverse-02;
     border-radius: rem(2px);
+
+    // Windows, Firefox HCM Fix
+    @media screen and (-ms-high-contrast: active),
+      screen and (prefers-contrast) {
+      // `ButtonText` is a CSS2 system color to help improve colors in HCM
+      border: 1px solid transparent;
+    }
 
     // @todo this can be deprecated in v11 since focus should always be on the content container not the tooltip
     &:focus {
@@ -26747,6 +26833,13 @@ Tooltip styles
     &:focus {
       svg {
         fill: $icon-02;
+
+        // Windows, Firefox HCM Fix
+        @media screen and (-ms-high-contrast: active),
+          screen and (prefers-contrast) {
+          // `ButtonText` is a CSS2 system color to help improve colors in HCM
+          fill: ButtonText;
+        }
       }
     }
   }
@@ -27203,7 +27296,9 @@ UI shell header
   }
 
   .#{$prefix}--header__menu-toggle {
-    display: block;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 
   .#{$prefix}--header__menu-toggle__hidden {
@@ -27243,6 +27338,11 @@ UI shell header
   a.#{$prefix}--header__name,
   a.#{$prefix}--header__name:hover {
     color: $shell-header-text-01;
+  }
+
+  .#{$prefix}--header__menu-toggle:not(.#{$prefix}--header__menu-toggle__hidden)
+    ~ .#{$prefix}--header__name {
+    padding-left: rem(8px);
   }
 
   //--------------------------------------------------------------------------

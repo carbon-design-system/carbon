@@ -4035,6 +4035,7 @@ Map {
   },
   "OrderedList" => Object {
     "defaultProps": Object {
+      "native": false,
       "nested": false,
     },
     "propTypes": Object {
@@ -4043,6 +4044,9 @@ Map {
       },
       "className": Object {
         "type": "string",
+      },
+      "native": Object {
+        "type": "bool",
       },
       "nested": Object {
         "type": "bool",
@@ -4198,12 +4202,35 @@ Map {
       },
       "pageSizes": Object {
         "args": Array [
-          Object {
-            "type": "number",
-          },
+          Array [
+            Object {
+              "args": Array [
+                Object {
+                  "type": "number",
+                },
+              ],
+              "type": "arrayOf",
+            },
+            Object {
+              "args": Array [
+                Object {
+                  "args": Array [
+                    Object {
+                      "text": undefined,
+                      "value": Object {
+                        "type": "number",
+                      },
+                    },
+                  ],
+                  "type": "shape",
+                },
+              ],
+              "type": "arrayOf",
+            },
+          ],
         ],
         "isRequired": true,
-        "type": "arrayOf",
+        "type": "oneOfType",
       },
       "pageText": Object {
         "type": "func",
@@ -4926,10 +4953,7 @@ Map {
       "handleTabKeyDown": Object {
         "type": "func",
       },
-      "href": Object {
-        "isRequired": true,
-        "type": "string",
-      },
+      "href": [Function],
       "id": Object {
         "type": "string",
       },
@@ -4947,9 +4971,7 @@ Map {
         "isRequired": true,
         "type": "func",
       },
-      "renderAnchor": Object {
-        "type": "func",
-      },
+      "renderAnchor": [Function],
       "renderContent": Object {
         "type": "func",
       },
@@ -4961,10 +4983,7 @@ Map {
         "isRequired": true,
         "type": "bool",
       },
-      "tabIndex": Object {
-        "isRequired": true,
-        "type": "number",
-      },
+      "tabIndex": [Function],
     },
   },
   "TabContent" => Object {
@@ -5819,6 +5838,15 @@ Map {
       },
       "placeholder": Object {
         "type": "string",
+      },
+      "size": Object {
+        "args": Array [
+          Array [
+            "sm",
+            "xl",
+          ],
+        ],
+        "type": "oneOf",
       },
       "type": Object {
         "type": "string",
