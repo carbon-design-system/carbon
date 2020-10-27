@@ -21417,8 +21417,8 @@ Overflow menu styles
     display: flex;
     align-items: center;
     justify-content: center;
-    width: rem(32px);
-    height: rem(32px);
+    width: rem(40px);
+    height: rem(40px);
     cursor: pointer;
     transition: outline $duration--fast-02 motion(entrance, productive), background-color
         $duration--fast-02 motion(entrance, productive);
@@ -21437,6 +21437,16 @@ Overflow menu styles
     &:hover {
       background-color: $hover-ui;
     }
+  }
+
+  .#{$prefix}--overflow-menu--sm {
+    width: rem(32px);
+    height: rem(32px);
+  }
+
+  .#{$prefix}--overflow-menu--xl {
+    width: rem(48px);
+    height: rem(48px);
   }
 
   // Overwrite Icon Tooltip focus styles
@@ -21518,14 +21528,14 @@ Overflow menu styles
   .#{$prefix}--overflow-menu-options[data-floating-menu-direction='bottom']::after {
     top: rem(-3px);
     left: 0;
-    width: rem(32px);
+    width: rem(40px);
     height: rem(3px);
   }
 
   .#{$prefix}--overflow-menu-options[data-floating-menu-direction='top']::after {
     bottom: rem(-8px);
     left: 0;
-    width: rem(32px);
+    width: rem(40px);
     height: rem(8px);
   }
 
@@ -21533,14 +21543,36 @@ Overflow menu styles
     top: 0;
     right: rem(-6px);
     width: rem(6px);
-    height: rem(32px);
+    height: rem(40px);
   }
 
   .#{$prefix}--overflow-menu-options[data-floating-menu-direction='right']::after {
     top: 0;
     left: rem(-6px);
     width: rem(6px);
-    height: rem(32px);
+    height: rem(40px);
+  }
+
+  .#{$prefix}--overflow-menu-options--sm.#{$prefix}--overflow-menu-options {
+    &[data-floating-menu-direction='bottom']::after,
+    &[data-floating-menu-direction='top']::after {
+      width: rem(32px);
+    }
+    &[data-floating-menu-direction='left']::after,
+    &[data-floating-menu-direction='right']::after {
+      height: rem(32px);
+    }
+  }
+
+  .#{$prefix}--overflow-menu-options--xl.#{$prefix}--overflow-menu-options {
+    &[data-floating-menu-direction='bottom']::after,
+    &[data-floating-menu-direction='top']::after {
+      width: rem(48px);
+    }
+    &[data-floating-menu-direction='left']::after,
+    &[data-floating-menu-direction='right']::after {
+      height: rem(48px);
+    }
   }
 
   .#{$prefix}--overflow-menu--flip.#{$prefix}--overflow-menu-options[data-floating-menu-direction='top']::after,
@@ -21573,6 +21605,16 @@ Overflow menu styles
     padding: 0;
     background-color: transparent;
     transition: background-color $duration--fast-02 motion(entrance, productive);
+  }
+
+  .#{$prefix}--overflow-menu-options--sm
+    .#{$prefix}--overflow-menu-options__option {
+    height: rem(32px);
+  }
+
+  .#{$prefix}--overflow-menu-options--xl
+    .#{$prefix}--overflow-menu-options__option {
+    height: rem(48px);
   }
 
   .#{$prefix}--overflow-menu--divider {

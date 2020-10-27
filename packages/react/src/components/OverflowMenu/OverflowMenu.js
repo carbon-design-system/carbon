@@ -209,6 +209,12 @@ class OverflowMenu extends Component {
      * be focused when the OverflowMenu opens
      */
     selectorPrimaryFocus: PropTypes.string,
+
+    /**
+     * Specify the size of the OverflowMenu. Currently supports either `sm` or
+     * `xl` as an option.
+     */
+    size: PropTypes.oneOf(['sm', 'xl']),
   };
 
   static defaultProps = {
@@ -453,6 +459,7 @@ class OverflowMenu extends Component {
       innerRef: ref,
       menuOptionsClass,
       light,
+      size,
       ...other
     } = this.props;
 
@@ -464,6 +471,7 @@ class OverflowMenu extends Component {
       {
         [`${prefix}--overflow-menu--open`]: open,
         [`${prefix}--overflow-menu--light`]: light,
+        [`${prefix}--overflow-menu--${size}`]: size,
       }
     );
 
@@ -474,6 +482,7 @@ class OverflowMenu extends Component {
         [`${prefix}--overflow-menu--flip`]: this.props.flipped,
         [`${prefix}--overflow-menu-options--open`]: open,
         [`${prefix}--overflow-menu-options--light`]: light,
+        [`${prefix}--overflow-menu-options--${size}`]: size,
       }
     );
 
