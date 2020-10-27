@@ -14315,6 +14315,18 @@ Button styles
     padding: $button-padding-sm;
   }
 
+  .#{$prefix}--btn--xl:not(.#{$prefix}--btn--icon-only) {
+    @include button-padding-large;
+
+    min-height: rem(80px);
+  }
+
+  .#{$prefix}--btn--lg:not(.#{$prefix}--btn--icon-only) {
+    @include button-padding-large;
+
+    min-height: rem(64px);
+  }
+
   .#{$prefix}--btn--field {
     min-height: rem(40px);
     padding: $button-padding-field;
