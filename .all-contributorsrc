@@ -1,4 +1,8 @@
 {
+  "projectName": "carbon",
+  "projectOwner": "carbon-design-system",
+  "repoType": "github",
+  "repoHost": "https://github.com",
   "files": [
     "README.md"
   ],
@@ -6,7 +10,172 @@
   "contributorsPerLine": 7,
   "contributorsSortAlphabetically": false,
   "badgeTemplate": "[![All Contributors](https://img.shields.io/badge/all_contributors-<%= contributors.length %>-orange.svg?style=flat-square)](#contributors)",
-  "contributorTemplate": "<a href=\"<%= contributor.profile %>\"><img src=\"<%= contributor.avatar_url %>\" width=\"<%= options.imageSize %>px;\" alt=\"\"/><br /><sub><b><%= contributor.name %></b></sub></a>",
-  "skipCi": "true",
-  "contributors": []
+  "skipCi": "false",
+  "contributors": [
+    {
+      "login": "tw15egan",
+      "name": "TJ Egan",
+      "avatar_url": "https://avatars1.githubusercontent.com/u/11928039?v=4",
+      "profile": "https://github.com/tw15egan",
+      "contributions": [
+        "code",
+        "doc",
+        "infra",
+        "review"
+      ]
+    },
+    {
+      "login": "joshblack",
+      "name": "Josh Black",
+      "avatar_url": "https://avatars1.githubusercontent.com/u/3901764?v=4",
+      "profile": "https://github.com/joshblack",
+      "contributions": [
+        "code",
+        "doc",
+        "infra",
+        "review"
+      ]
+    },
+    {
+      "login": "aledavila",
+      "name": "Alessandra Davila",
+      "avatar_url": "https://avatars2.githubusercontent.com/u/12533409?v=4",
+      "profile": "https://github.com/aledavila",
+      "contributions": [
+        "code",
+        "doc",
+        "review"
+      ]
+    },
+    {
+      "login": "dakahn",
+      "name": "DAK",
+      "avatar_url": "https://avatars3.githubusercontent.com/u/40970507?v=4",
+      "profile": "https://dakahn.netlify.com/",
+      "contributions": [
+        "code",
+        "doc",
+        "review"
+      ]
+    },
+    {
+      "login": "andreancardona",
+      "name": "Andrea N. Cardona",
+      "avatar_url": "https://avatars2.githubusercontent.com/u/32720851?v=4",
+      "profile": "https://www.linkedin.com/in/andrea-cardona-b647594b/",
+      "contributions": [
+        "code",
+        "doc",
+        "review"
+      ]
+    },
+    {
+      "login": "emyarod",
+      "name": "emyarod",
+      "avatar_url": "https://avatars3.githubusercontent.com/u/8265238?v=4",
+      "profile": "https://github.com/emyarod",
+      "contributions": [
+        "code",
+        "doc",
+        "review"
+      ]
+    },
+    {
+      "login": "jnm2377",
+      "name": "Josefina Mancilla",
+      "avatar_url": "https://avatars0.githubusercontent.com/u/32556167?v=4",
+      "profile": "https://github.com/jnm2377",
+      "contributions": [
+        "code",
+        "doc",
+        "review"
+      ]
+    },
+    {
+      "login": "vpicone",
+      "name": "Vince Picone",
+      "avatar_url": "https://avatars1.githubusercontent.com/u/4078018?v=4",
+      "profile": "https://www.vincepic.one/",
+      "contributions": [
+        "code",
+        "doc",
+        "review"
+      ]
+    },
+    {
+      "login": "rjhenriquez",
+      "name": "Ricardo Henriquez",
+      "avatar_url": "https://avatars0.githubusercontent.com/u/4718579?v=4",
+      "profile": "http://turpialcreative/",
+      "contributions": [
+        "code",
+        "doc",
+        "review"
+      ]
+    },
+    {
+      "login": "sstrubberg",
+      "name": "Scott Strubberg",
+      "avatar_url": "https://avatars2.githubusercontent.com/u/15822070?v=4",
+      "profile": "https://github.com/sstrubberg",
+      "contributions": [
+        "code",
+        "doc",
+        "review"
+      ]
+    },
+    {
+      "login": "alisonjoseph",
+      "name": "Alison Joseph",
+      "avatar_url": "https://avatars0.githubusercontent.com/u/2753488?v=4",
+      "profile": "https://github.com/alisonjoseph",
+      "contributions": [
+        "code",
+        "doc",
+        "review"
+      ]
+    },
+    {
+      "login": "aagonzales",
+      "name": "Anna Gonzales",
+      "avatar_url": "https://avatars3.githubusercontent.com/u/11670886?v=4",
+      "profile": "https://github.com/aagonzales",
+      "contributions": [
+        "design",
+        "review"
+      ]
+    },
+    {
+      "login": "jillianhowarth",
+      "name": "jillianhowarth",
+      "avatar_url": "https://avatars0.githubusercontent.com/u/20690344?v=4",
+      "profile": "https://github.com/jillianhowarth",
+      "contributions": [
+        "content",
+        "design",
+        "review"
+      ]
+    },
+    {
+      "login": "laurenmrice",
+      "name": "Lauren Rice",
+      "avatar_url": "https://avatars3.githubusercontent.com/u/43969356?v=4",
+      "profile": "https://github.com/laurenmrice",
+      "contributions": [
+        "design",
+        "review"
+      ]
+    },
+    {
+      "login": "johnbister",
+      "name": "johnbister",
+      "avatar_url": "https://avatars3.githubusercontent.com/u/70543333?v=4",
+      "profile": "https://github.com/johnbister",
+      "contributions": [
+        "design",
+        "review"
+      ]
+    }
+  ],
+  "commitConvention": "none"
 }
