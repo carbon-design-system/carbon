@@ -153,7 +153,15 @@ export const Tertiary = () => {
 };
 
 export const Danger = () => {
-  return <Button kind="danger">Button</Button>;
+  return (
+    <>
+      <Button kind="danger">Button</Button>
+      &nbsp;
+      <Button kind="danger-tertiary">Tertiary Danger Button</Button>
+      &nbsp;
+      <Button kind="danger-ghost">Ghost Danger Button</Button>
+    </>
+  );
 };
 
 export const Ghost = () => {
