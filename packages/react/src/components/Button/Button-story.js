@@ -157,9 +157,9 @@ export const Danger = () => {
     <>
       <Button kind="danger">Button</Button>
       &nbsp;
-      <Button kind="danger-tertiary">Button</Button>
+      <Button kind="danger-tertiary">Tertiary Danger Button</Button>
       &nbsp;
-      <Button kind="danger-ghost">Button</Button>
+      <Button kind="danger-ghost">Ghost Danger Button</Button>
     </>
   );
 };
