@@ -3088,6 +3088,15 @@ Map {
       "inline": Object {
         "type": "bool",
       },
+      "size": Object {
+        "args": Array [
+          Array [
+            "sm",
+            "lg",
+          ],
+        ],
+        "type": "oneOf",
+      },
       "visited": Object {
         "type": "bool",
       },

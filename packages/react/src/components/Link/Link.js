@@ -19,13 +19,16 @@ const Link = ({
   disabled,
   inline,
   visited,
+  size,
   ...other
 }) => {
   const classNames = classnames(`${prefix}--link`, className, {
     [`${prefix}--link--disabled`]: disabled,
     [`${prefix}--link--inline`]: inline,
     [`${prefix}--link--visited`]: visited,
+    [`${prefix}--link--${size}`]: size,
   });
+
   const Tag = disabled ? 'p' : 'a';
   const rel = other.target === '_blank' ? 'noopener' : null;
   return (
@@ -64,6 +67,11 @@ Link.propTypes = {
    * Specify whether you want the inline version of this control
    */
   inline: PropTypes.bool,
+
+  /**
+   * Specify the size of the Link. Currently supports either `sm` or `lg` as an option.
+   */
+  size: PropTypes.oneOf(['sm', 'lg']),
 
   /**
    * Specify whether you want the link to receive visited styles after the link has been clicked
