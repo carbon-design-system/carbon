@@ -88,7 +88,8 @@ export const inverseSupport04 = blue50;
 
 export const overlay01 = rgba(gray100, 0.5);
 
-export const danger = red60;
+export const danger01 = red60;
+export const danger02 = red60;
 
 // Interaction states
 export const focus = blue60;
@@ -113,7 +114,7 @@ export const inverseHoverUI = '#4c4c4c';
 
 export const hoverSelectedUI = '#cacaca';
 
-export const hoverDanger = adjustLightness(danger, -8);
+export const hoverDanger = adjustLightness(danger01, -8);
 export const activeDanger = red80;
 
 export const hoverRow = '#e5e5e5';
