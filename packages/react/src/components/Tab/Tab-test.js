@@ -21,38 +21,29 @@ describe('Tab', () => {
       expect(wrapper.hasClass('extra-class')).toBe(true);
     });
 
-    it('renders <a> with expected className', () => {
+    it('renders <button> with expected className', () => {
       expect(
         // TODO: uncomment and replace assertion in next major version
-        // wrapper.find('a').hasClass(`${prefix}--tabs__nav-link`)
-        wrapper.find('a').hasClass(`${prefix}--tabs--scrollable__nav-link`)
+        // wrapper.find('button').hasClass(`${prefix}--tabs__nav-link`)
+        wrapper.find('button').hasClass(`${prefix}--tabs--scrollable__nav-link`)
       ).toBe(true);
     });
 
-    it('renders <li> with [role="tab"]', () => {
-      expect(wrapper.props().role).toEqual('tab');
+    it('renders <li> with [role="presentation"]', () => {
+      expect(wrapper.props().role).toEqual('presentation');
     });
 
-    it('renders <a> with tabindex set to 0', () => {
-      expect(wrapper.find('a').props().tabIndex).toEqual(0);
+    it('renders <button> with tabindex set to 0', () => {
+      expect(wrapper.find('button').props().tabIndex).toEqual(0);
     });
 
-    it('sets tabIndex on <a> if one is passed via props', () => {
+    it('sets tabIndex on <button> if one is passed via props', () => {
       wrapper.setProps({ tabIndex: 2 });
-      expect(wrapper.find('a').props().tabIndex).toEqual(2);
+      expect(wrapper.find('button').props().tabIndex).toEqual(2);
     });
 
-    it('uses label to set children on <a> when passed via props', () => {
-      expect(wrapper.find('a').props().children).toEqual('firstTab');
-    });
-
-    it('sets href as # by default', () => {
-      expect(wrapper.find('a').props().href).toEqual('#');
-    });
-
-    it('sets new href value when passed in via props', () => {
-      wrapper.setProps({ href: '#other-content' });
-      expect(wrapper.find('a').props().href).toEqual('#other-content');
+    it('uses label to set children on <button> when passed via props', () => {
+      expect(wrapper.find('button').props().children).toEqual('firstTab');
     });
 
     it(`should not have [className="${prefix}--tabs__nav-item--selected"] by default`, () => {

@@ -210,6 +210,34 @@ describe('Ghost Button', () => {
   });
 });
 
+describe('Large Button', () => {
+  describe('Renders as expected', () => {
+    const wrapper = shallow(<Button size="lg" className="extra-class" />);
+
+    it('has the expected classes', () => {
+      expect(wrapper.hasClass(`${prefix}--btn--lg`)).toEqual(true);
+    });
+
+    it('should add extra classes that are passed via className', () => {
+      expect(wrapper.hasClass('extra-class')).toEqual(true);
+    });
+  });
+});
+
+describe('xl Button', () => {
+  describe('Renders as expected', () => {
+    const wrapper = shallow(<Button size="xl" className="extra-class" />);
+
+    it('has the expected classes', () => {
+      expect(wrapper.hasClass(`${prefix}--btn--xl`)).toEqual(true);
+    });
+
+    it('should add extra classes that are passed via className', () => {
+      expect(wrapper.hasClass('extra-class')).toEqual(true);
+    });
+  });
+});
+
 describe('Small Button', () => {
   describe('Renders as expected', () => {
     const wrapper = shallow(<Button size="small" className="extra-class" />);
@@ -245,6 +273,22 @@ describe('DangerButton', () => {
 
     it('should add extra classes that are passed via className', () => {
       expect(wrapper.hasClass('extra-class')).toEqual(true);
+    });
+  });
+
+  describe('Renders tertiary variation as expected', () => {
+    const wrapper = shallow(<Button kind="danger-tertiary" />);
+
+    it('has the expected classes', () => {
+      expect(wrapper.hasClass(`${prefix}--btn--danger-tertiary`)).toEqual(true);
+    });
+  });
+
+  describe('Renders ghost variation as expected', () => {
+    const wrapper = shallow(<Button kind="danger-ghost" />);
+
+    it('has the expected classes', () => {
+      expect(wrapper.hasClass(`${prefix}--btn--danger-ghost`)).toEqual(true);
     });
   });
 });

@@ -170,7 +170,8 @@
   - [✅inverse-support-03 [variable]](#inverse-support-03-variable)
   - [✅inverse-support-04 [variable]](#inverse-support-04-variable)
   - [✅overlay-01 [variable]](#overlay-01-variable)
-  - [✅danger [variable]](#danger-variable)
+  - [✅danger-01 [variable]](#danger-01-variable)
+  - [✅danger-02 [variable]](#danger-02-variable)
   - [✅focus [variable]](#focus-variable)
   - [✅inverse-focus-ui [variable]](#inverse-focus-ui-variable)
   - [✅hover-primary [variable]](#hover-primary-variable)
@@ -4212,7 +4213,8 @@ Define theme variables from a map of tokens
   $inverse-support-03: map-get($theme, 'inverse-support-03') !global;
   $inverse-support-04: map-get($theme, 'inverse-support-04') !global;
   $overlay-01: map-get($theme, 'overlay-01') !global;
-  $danger: map-get($theme, 'danger') !global;
+  $danger-01: map-get($theme, 'danger-01') !global;
+  $danger-02: map-get($theme, 'danger-02') !global;
   $focus: map-get($theme, 'focus') !global;
   $inverse-focus-ui: map-get($theme, 'inverse-focus-ui') !global;
   $hover-primary: map-get($theme, 'hover-primary') !global;
@@ -4447,9 +4449,13 @@ Define theme variables from a map of tokens
       --#{$custom-property-prefix}-overlay-01,
       map-get($theme, 'overlay-01')
     ) !global;
-    $danger: var(
-      --#{$custom-property-prefix}-danger,
-      map-get($theme, 'danger')
+    $danger-01: var(
+      --#{$custom-property-prefix}-danger-01,
+      map-get($theme, 'danger-01')
+    ) !global;
+    $danger-02: var(
+      --#{$custom-property-prefix}-danger-02,
+      map-get($theme, 'danger-02')
     ) !global;
     $focus: var(
       --#{$custom-property-prefix}-focus,
@@ -4978,8 +4984,14 @@ Define theme variables from a map of tokens
       @include custom-property('overlay-01', map-get($theme, 'overlay-01'));
     }
 
-    @if should-emit($theme, $parent-carbon-theme, 'danger', $emit-difference) {
-      @include custom-property('danger', map-get($theme, 'danger'));
+    @if should-emit($theme, $parent-carbon-theme, 'danger-01', $emit-difference)
+    {
+      @include custom-property('danger-01', map-get($theme, 'danger-01'));
+    }
+
+    @if should-emit($theme, $parent-carbon-theme, 'danger-02', $emit-difference)
+    {
+      @include custom-property('danger-02', map-get($theme, 'danger-02'));
     }
 
     @if should-emit($theme, $parent-carbon-theme, 'focus', $emit-difference) {
@@ -6018,7 +6030,8 @@ Define theme variables from a map of tokens
   - [inverse-support-03 [variable]](#inverse-support-03-variable)
   - [inverse-support-04 [variable]](#inverse-support-04-variable)
   - [overlay-01 [variable]](#overlay-01-variable)
-  - [danger [variable]](#danger-variable)
+  - [danger-01 [variable]](#danger-01-variable)
+  - [danger-02 [variable]](#danger-02-variable)
   - [focus [variable]](#focus-variable)
   - [inverse-focus-ui [variable]](#inverse-focus-ui-variable)
   - [hover-primary [variable]](#hover-primary-variable)
@@ -6181,6 +6194,7 @@ $carbon--theme--g90: map-merge(
     inverse-support-02: #24a148,
     inverse-support-04: #0f62fe,
     overlay-01: rgba(22, 22, 22, 0.7),
+    danger-02: #ff8389,
     focus: #ffffff,
     inverse-focus-ui: #0f62fe,
     hover-primary-text: #a6c8ff,
@@ -6258,6 +6272,7 @@ $carbon--theme--g100: map-merge(
     inverse-support-02: #24a148,
     inverse-support-04: #0f62fe,
     overlay-01: rgba(22, 22, 22, 0.7),
+    danger-02: #fa4d56,
     focus: #ffffff,
     inverse-focus-ui: #0f62fe,
     hover-primary-text: #a6c8ff,
@@ -6419,7 +6434,8 @@ $carbon--theme: (
   inverse-support-03: if(global-variable-exists('inverse-support-03'), $inverse-support-03, map-get($carbon--theme--white, 'inverse-support-03')),
   inverse-support-04: if(global-variable-exists('inverse-support-04'), $inverse-support-04, map-get($carbon--theme--white, 'inverse-support-04')),
   overlay-01: if(global-variable-exists('overlay-01'), $overlay-01, map-get($carbon--theme--white, 'overlay-01')),
-  danger: if(global-variable-exists('danger'), $danger, map-get($carbon--theme--white, 'danger')),
+  danger-01: if(global-variable-exists('danger-01'), $danger-01, map-get($carbon--theme--white, 'danger-01')),
+  danger-02: if(global-variable-exists('danger-02'), $danger-02, map-get($carbon--theme--white, 'danger-02')),
   focus: if(global-variable-exists('focus'), $focus, map-get($carbon--theme--white, 'focus')),
   inverse-focus-ui: if(global-variable-exists('inverse-focus-ui'), $inverse-focus-ui, map-get($carbon--theme--white, 'inverse-focus-ui')),
   hover-primary: if(global-variable-exists('hover-primary'), $hover-primary, map-get($carbon--theme--white, 'hover-primary')),
@@ -6854,7 +6870,6 @@ $ui-05: if(
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
   - [accordion [mixin]](#accordion-mixin)
-  - [checkbox [mixin]](#checkbox-mixin)
   - [content-switcher [mixin]](#content-switcher-mixin)
   - [data-table-expandable [mixin]](#data-table-expandable-mixin)
   - [data-table-sort [mixin]](#data-table-sort-mixin)
@@ -7090,6 +7105,7 @@ $icon-01: if(
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
   - [button [mixin]](#button-mixin)
+  - [checkbox [mixin]](#checkbox-mixin)
   - [snippet [mixin]](#snippet-mixin)
   - [data-table-v2-action [mixin]](#data-table-v2-action-mixin)
   - [date-picker [mixin]](#date-picker-mixin)
@@ -7623,18 +7639,42 @@ $overlay-01: if(
   - [modal [mixin]](#modal-mixin)
   - [carbon-side-nav [mixin]](#carbon-side-nav-mixin)
 
-### ✅danger [variable]
+### ✅danger-01 [variable]
 
 <details>
 <summary>Source code</summary>
 
 ```scss
-$danger: if(
+$danger-01: if(
   global-variable-exists('carbon--theme') and map-has-key(
       $carbon--theme,
-      'danger'
+      'danger-01'
     ),
-  map-get($carbon--theme, 'danger'),
+  map-get($carbon--theme, 'danger-01'),
+  #da1e28
+);
+```
+
+</details>
+
+- **Group**: [@carbon/themes](#carbonthemes)
+- **Type**: `{undefined}`
+- **Used by**:
+  - [carbon--theme [mixin]](#carbon--theme-mixin)
+  - [button [mixin]](#button-mixin)
+
+### ✅danger-02 [variable]
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$danger-02: if(
+  global-variable-exists('carbon--theme') and map-has-key(
+      $carbon--theme,
+      'danger-02'
+    ),
+  map-get($carbon--theme, 'danger-02'),
   #da1e28
 );
 ```
@@ -14188,7 +14228,7 @@ Button styles
 
   .#{$prefix}--btn--danger {
     @include button-theme(
-      $danger,
+      $danger-01,
       transparent,
       $text-04,
       $hover-danger,
@@ -14199,11 +14239,92 @@ Button styles
     &:hover {
       color: $text-04;
     }
+
+    &-tertiary {
+      @include button-theme(
+        transparent,
+        $danger-02,
+        $danger-02,
+        $hover-danger,
+        currentColor,
+        $active-danger
+      );
+
+      &:hover {
+        color: $text-04;
+        border-color: $hover-danger;
+      }
+
+      &:focus {
+        color: $text-04;
+        background-color: $danger-01;
+      }
+
+      &:active {
+        color: $text-04;
+        border-color: $active-danger;
+      }
+    }
+
+    &-ghost {
+      @include button-theme(
+        transparent,
+        transparent,
+        $danger-02,
+        $hover-danger,
+        currentColor,
+        $active-danger
+      );
+
+      padding: $button-padding-ghost;
+
+      .#{$prefix}--btn__icon {
+        position: static;
+        margin-left: $carbon--spacing-03;
+      }
+
+      &:hover,
+      &:active {
+        color: $text-04;
+      }
+
+      &:disabled,
+      &:hover:disabled,
+      &:focus:disabled,
+      &.#{$prefix}--btn--disabled,
+      &.#{$prefix}--btn--disabled:hover,
+      &.#{$prefix}--btn--disabled:focus {
+        color: $disabled;
+        background: transparent;
+        border-color: transparent;
+        outline: none;
+      }
+
+      &.#{$prefix}--btn--sm {
+        padding: $button-padding-ghost-sm;
+      }
+
+      &.#{$prefix}--btn--field {
+        padding: $button-padding-ghost-field;
+      }
+    }
   }
 
   .#{$prefix}--btn--sm {
     min-height: rem(32px);
     padding: $button-padding-sm;
+  }
+
+  .#{$prefix}--btn--xl:not(.#{$prefix}--btn--icon-only) {
+    @include button-padding-large;
+
+    min-height: rem(80px);
+  }
+
+  .#{$prefix}--btn--lg:not(.#{$prefix}--btn--icon-only) {
+    @include button-padding-large;
+
+    min-height: rem(64px);
   }
 
   .#{$prefix}--btn--field {
@@ -14297,9 +14418,10 @@ Button styles
   - [hover-primary-text [variable]](#hover-primary-text-variable)
   - [icon-01 [variable]](#icon-01-variable)
   - [focus [variable]](#focus-variable)
-  - [danger [variable]](#danger-variable)
+  - [danger-01 [variable]](#danger-01-variable)
   - [hover-danger [variable]](#hover-danger-variable)
   - [active-danger [variable]](#active-danger-variable)
+  - [danger-02 [variable]](#danger-02-variable)
   - [button-separator [variable]](#button-separator-variable)
 
 ### ❌button-base [mixin]
@@ -14505,7 +14627,7 @@ Checkbox styles
 
     // Checkboxes with a background color look visually off against a parent container.
     background-color: transparent;
-    border: 1px solid $ui-05;
+    border: 1px solid $icon-01;
     border-radius: 1px;
     content: '';
   }
@@ -14535,8 +14657,8 @@ Checkbox styles
   .#{$prefix}--checkbox:indeterminate + .#{$prefix}--checkbox-label::before,
   .#{$prefix}--checkbox-label[data-contained-checkbox-state='true']::before,
   .#{$prefix}--checkbox-label[data-contained-checkbox-state='mixed']::before {
-    background-color: $ui-05;
-    border-color: $ui-05;
+    background-color: $icon-01;
+    border-color: $icon-01;
     border-width: 1px;
   }
 
@@ -14627,7 +14749,7 @@ Checkbox styles
   - [prefix [variable]](#prefix-variable)
   - [carbon--spacing-02 [variable]](#carbon--spacing-02-variable)
   - [carbon--spacing-01 [variable]](#carbon--spacing-01-variable)
-  - [ui-05 [variable]](#ui-05-variable)
+  - [icon-01 [variable]](#icon-01-variable)
   - [inverse-01 [variable]](#inverse-01-variable)
   - [focus [variable]](#focus-variable)
   - [disabled-02 [variable]](#disabled-02-variable)
@@ -18726,6 +18848,14 @@ Link styles
   .#{$prefix}--link--disabled.#{$prefix}--link--inline {
     text-decoration: underline;
   }
+
+  .#{$prefix}--link--sm {
+    @include type-style('helper-text-01');
+  }
+
+  .#{$prefix}--link--lg {
+    @include type-style('body-short-02');
+  }
 }
 ```
 
@@ -18753,11 +18883,16 @@ List styles
 @mixin lists() {
   .#{$prefix}--list--nested,
   .#{$prefix}--list--unordered,
-  .#{$prefix}--list--ordered {
+  .#{$prefix}--list--ordered,
+  .#{$prefix}--list--ordered--native {
     @include reset;
     @include type-style('body-short-01');
 
     list-style: none;
+  }
+
+  .#{$prefix}--list--ordered--native {
+    list-style: decimal;
   }
 
   .#{$prefix}--list__item {
@@ -18785,7 +18920,8 @@ List styles
     counter-increment: item;
   }
 
-  .#{$prefix}--list--ordered.#{$prefix}--list--nested {
+  .#{$prefix}--list--ordered.#{$prefix}--list--nested,
+  .#{$prefix}--list--ordered--native.#{$prefix}--list--nested {
     list-style-type: lower-latin;
   }
 
@@ -19146,10 +19282,22 @@ List box styles
     vertical-align: top;
     outline: none;
     cursor: pointer;
+
+    @media screen and (-ms-high-contrast: active),
+      screen and (prefers-contrast) {
+      // `ButtonText` is a CSS2 system color to help improve colors in HCM
+      border: 1px solid ButtonText;
+    }
   }
 
   .#{$prefix}--list-box__field:focus {
     @include focus-outline('outline');
+
+    @media screen and (-ms-high-contrast: active),
+      screen and (prefers-contrast) {
+      // `ButtonText` is a CSS2 system color to help improve colors in HCM
+      border: 2px solid ButtonText;
+    }
   }
 
   .#{$prefix}--list-box__field[disabled] {
@@ -19307,6 +19455,12 @@ List box styles
     background-color: $inverse-02;
     border-radius: rem(12px);
     transform: none;
+
+    // Windows, Firefox HCM Fix
+    @media screen and (-ms-high-contrast: active),
+      screen and (prefers-contrast) {
+      border: 1px solid transparent;
+    }
   }
 
   .#{$prefix}--list-box__selection--multi > svg {
@@ -19484,6 +19638,13 @@ List box styles
       margin: 0;
       padding: rem(11px) rem(16px);
       border-color: transparent;
+
+      // Windows, Firefox HCM Fix
+      @media screen and (-ms-high-contrast: active),
+        screen and (prefers-contrast) {
+        outline: 3px solid transparent;
+        outline-offset: -3px;
+      }
     }
 
     &:hover {
@@ -19526,6 +19687,13 @@ List box styles
     color: $text-01;
     background-color: $hover-ui;
     border-color: transparent;
+
+    // Windows, Firefox HCM Fix
+    @media screen and (-ms-high-contrast: active),
+      screen and (prefers-contrast) {
+      outline: 3px solid transparent;
+      outline-offset: -3px;
+    }
   }
 
   .#{$prefix}--list-box__menu-item--highlighted
@@ -20300,6 +20468,13 @@ Multi select styles
       right: auto;
       left: $carbon--spacing-03;
     }
+  }
+
+  .#{$prefix}--multi-select--filterable.#{$prefix}--multi-select--inline,
+  .#{$prefix}--multi-select--filterable.#{$prefix}--multi-select--inline
+    .#{$prefix}--text-input {
+    background-color: transparent;
+    border-bottom: 0;
   }
 
   .#{$prefix}--multi-select--selected .#{$prefix}--text-input {
@@ -21262,19 +21437,36 @@ Overflow menu styles
     display: flex;
     align-items: center;
     justify-content: center;
-    width: rem(32px);
-    height: rem(32px);
+    width: rem(40px);
+    height: rem(40px);
     cursor: pointer;
     transition: outline $duration--fast-02 motion(entrance, productive), background-color
         $duration--fast-02 motion(entrance, productive);
 
     &:focus {
       @include focus-outline('outline');
+
+      // Windows, Firefox HCM Fix
+      @media screen and (-ms-high-contrast: active),
+        screen and (prefers-contrast) {
+        outline: 3px solid transparent;
+        outline-offset: -3px;
+      }
     }
 
     &:hover {
       background-color: $hover-ui;
     }
+  }
+
+  .#{$prefix}--overflow-menu--sm {
+    width: rem(32px);
+    height: rem(32px);
+  }
+
+  .#{$prefix}--overflow-menu--xl {
+    width: rem(48px);
+    height: rem(48px);
   }
 
   // Overwrite Icon Tooltip focus styles
@@ -21356,14 +21548,14 @@ Overflow menu styles
   .#{$prefix}--overflow-menu-options[data-floating-menu-direction='bottom']::after {
     top: rem(-3px);
     left: 0;
-    width: rem(32px);
+    width: rem(40px);
     height: rem(3px);
   }
 
   .#{$prefix}--overflow-menu-options[data-floating-menu-direction='top']::after {
     bottom: rem(-8px);
     left: 0;
-    width: rem(32px);
+    width: rem(40px);
     height: rem(8px);
   }
 
@@ -21371,14 +21563,36 @@ Overflow menu styles
     top: 0;
     right: rem(-6px);
     width: rem(6px);
-    height: rem(32px);
+    height: rem(40px);
   }
 
   .#{$prefix}--overflow-menu-options[data-floating-menu-direction='right']::after {
     top: 0;
     left: rem(-6px);
     width: rem(6px);
-    height: rem(32px);
+    height: rem(40px);
+  }
+
+  .#{$prefix}--overflow-menu-options--sm.#{$prefix}--overflow-menu-options {
+    &[data-floating-menu-direction='bottom']::after,
+    &[data-floating-menu-direction='top']::after {
+      width: rem(32px);
+    }
+    &[data-floating-menu-direction='left']::after,
+    &[data-floating-menu-direction='right']::after {
+      height: rem(32px);
+    }
+  }
+
+  .#{$prefix}--overflow-menu-options--xl.#{$prefix}--overflow-menu-options {
+    &[data-floating-menu-direction='bottom']::after,
+    &[data-floating-menu-direction='top']::after {
+      width: rem(48px);
+    }
+    &[data-floating-menu-direction='left']::after,
+    &[data-floating-menu-direction='right']::after {
+      height: rem(48px);
+    }
   }
 
   .#{$prefix}--overflow-menu--flip.#{$prefix}--overflow-menu-options[data-floating-menu-direction='top']::after,
@@ -21411,6 +21625,16 @@ Overflow menu styles
     padding: 0;
     background-color: transparent;
     transition: background-color $duration--fast-02 motion(entrance, productive);
+  }
+
+  .#{$prefix}--overflow-menu-options--sm
+    .#{$prefix}--overflow-menu-options__option {
+    height: rem(32px);
+  }
+
+  .#{$prefix}--overflow-menu-options--xl
+    .#{$prefix}--overflow-menu-options__option {
+    height: rem(48px);
   }
 
   .#{$prefix}--overflow-menu--divider {
@@ -21455,6 +21679,13 @@ Overflow menu styles
 
     &:focus {
       @include focus-outline('outline');
+
+      // Windows, Firefox HCM Fix
+      @media screen and (-ms-high-contrast: active),
+        screen and (prefers-contrast) {
+        outline: 3px solid transparent;
+        outline-offset: -3px;
+      }
     }
 
     &::-moz-focus-inner {
@@ -24018,16 +24249,14 @@ Tabs styles
 
   // TODO: remove namespace and suffix in next major release
   .#{$prefix}--tabs--scrollable {
-    .#{$prefix}--tabs--scrollable {
-      @include reset;
-      @include type-style('body-short-01');
+    @include reset;
+    @include type-style('body-short-01');
 
-      display: flex;
-      width: 100%;
-      height: auto;
-      min-height: rem(40px);
-      color: $text-01;
-    }
+    display: flex;
+    width: 100%;
+    height: auto;
+    min-height: rem(40px);
+    color: $text-01;
 
     .#{$prefix}--tabs--scrollable--container {
       min-height: rem(48px);
@@ -24277,13 +24506,16 @@ Tabs styles
     // Link
     //-----------------------------
     .#{$prefix}--tabs--scrollable__nav-link {
+      @include button-reset($width: false);
       @include focus-outline('reset');
+      @include type-style('body-short-01');
 
       width: rem(160px);
       padding: $spacing-04 $spacing-05 $spacing-03;
       overflow: hidden;
       color: $text-02;
       white-space: nowrap;
+      text-align: left;
       text-decoration: none;
       text-overflow: ellipsis;
       border-bottom: $tab-underline-color;
@@ -26429,6 +26661,13 @@ Tooltip styles
 
   .#{$prefix}--tooltip__trigger svg {
     fill: $icon-02;
+
+    // Windows, Firefox HCM Fix
+    @media screen and (-ms-high-contrast: active),
+      screen and (prefers-contrast) {
+      // `ButtonText` is a CSS2 system color to help improve colors in HCM
+      fill: ButtonText;
+    }
   }
 
   .#{$prefix}--tooltip__trigger:not(.#{$prefix}--btn--icon-only) {
@@ -26470,6 +26709,13 @@ Tooltip styles
     word-wrap: break-word;
     background: $inverse-02;
     border-radius: rem(2px);
+
+    // Windows, Firefox HCM Fix
+    @media screen and (-ms-high-contrast: active),
+      screen and (prefers-contrast) {
+      // `ButtonText` is a CSS2 system color to help improve colors in HCM
+      border: 1px solid transparent;
+    }
 
     // @todo this can be deprecated in v11 since focus should always be on the content container not the tooltip
     &:focus {
@@ -26649,6 +26895,13 @@ Tooltip styles
     &:focus {
       svg {
         fill: $icon-02;
+
+        // Windows, Firefox HCM Fix
+        @media screen and (-ms-high-contrast: active),
+          screen and (prefers-contrast) {
+          // `ButtonText` is a CSS2 system color to help improve colors in HCM
+          fill: ButtonText;
+        }
       }
     }
   }
@@ -27105,7 +27358,9 @@ UI shell header
   }
 
   .#{$prefix}--header__menu-toggle {
-    display: block;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 
   .#{$prefix}--header__menu-toggle__hidden {
@@ -27145,6 +27400,11 @@ UI shell header
   a.#{$prefix}--header__name,
   a.#{$prefix}--header__name:hover {
     color: $shell-header-text-01;
+  }
+
+  .#{$prefix}--header__menu-toggle:not(.#{$prefix}--header__menu-toggle__hidden)
+    ~ .#{$prefix}--header__name {
+    padding-left: rem(8px);
   }
 
   //--------------------------------------------------------------------------
