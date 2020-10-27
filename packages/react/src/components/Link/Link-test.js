@@ -47,7 +47,10 @@ describe('Link', () => {
       link.setProps({ inline: true });
       expect(link.hasClass(`${prefix}--link--inline`)).toEqual(true);
     });
-
+    it('should add support for different link sizes', () => {
+      link.setProps({ size: 'lg' });
+      expect(link.hasClass(`${prefix}--link--lg`)).toEqual(true);
+    });
     it('should add rel="noopener" automatically if target="_blank"', () => {
       link.setProps({ target: '_blank' });
       expect(link.props().rel).toEqual('noopener');
