@@ -18,7 +18,11 @@ const directions = {
   'Bottom of the trigger button (bottom)': 'bottom',
   'Top of the trigger button (top)': 'top',
 };
-
+const sizes = {
+  'Extra large size (xl)': 'xl',
+  'Default size': undefined,
+  'Small size (sm)': 'sm',
+};
 const props = {
   menu: () => ({
     direction: select('Menu direction (direction)', directions, 'bottom'),
@@ -30,6 +34,7 @@ const props = {
       'Primary focus element selector (selectorPrimaryFocus)',
       ''
     ),
+    size: select('Size (size)', sizes, undefined) || undefined,
     onClick: action('onClick'),
     onFocus: action('onFocus'),
     onKeyDown: action('onKeyDown'),

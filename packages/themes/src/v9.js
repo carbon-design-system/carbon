@@ -52,7 +52,8 @@ export const inverseSupport04 = '#5aaafa';
 
 export const overlay01 = 'rgba(223, 227, 230, 0.5)';
 
-export const danger = red60;
+export const danger01 = red60;
+export const danger02 = red60;
 
 // Interaction states
 export const focus = '#3d70b2';
