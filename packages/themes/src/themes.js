@@ -25,21 +25,26 @@ export { g10, g90, g100, white, v9 };
 export function determineCurrentTheme(domNode, cssVariablePrefix) {
   const testDiv = document.createElement('div');
   testDiv.setAttribute('visibility', 'hidden');
+  // use the ui-01 css variable to figure out which theme is currently in use
   testDiv.style.color = `var(--${
     cssVariablePrefix ? `${cssVariablePrefix}-` : ''
   }ui-01)`;
+  // add a temporary child div so that I can check the css variables color
   domNode.appendChild(testDiv);
   const ui01ValueString = getComputedStyle(testDiv).getPropertyValue('color');
+  domNode.removeChild(testDiv);
+
   if (!ui01ValueString || ui01ValueString === '') {
     return null; // cannot determine current theme
   }
-  domNode.removeChild(testDiv);
-  const ui01Value = rgbToHex(ui01ValueString);
-  if (!ui01Value || ui01Value === '#000000') {
+
+  const ui01Hex = rgbToHex(ui01ValueString);
+  if (!ui01Hex || ui01Hex === '#000000') {
     return null; // cannot determine current theme
   }
 
-  switch (ui01Value.toLowerCase()) {
+  // Check the hex color of ui01 to determine the appropriate theme
+  switch (ui01Hex) {
     case '#f4f4f4':
       return white;
     case '#ffffff':
