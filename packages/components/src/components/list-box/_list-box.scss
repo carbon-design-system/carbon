@@ -515,7 +515,6 @@ $list-box-menu-width: rem(300px);
     }
   }
 
-  .#{$prefix}--list-box__selection--multi:focus,
   .#{$prefix}--list-box__selection--multi:hover {
     outline: none;
   }
