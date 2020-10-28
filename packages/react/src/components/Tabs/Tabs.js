@@ -307,7 +307,7 @@ export default class Tabs extends React.Component {
 
   overflowNavInterval = null;
 
-  handleOverflowNavClick = (_, { direction, multiplier = 15 }) => {
+  handleOverflowNavClick = (_, { direction, multiplier = 10 }) => {
     // account for overflow button appearing and causing tablist width change
     const { clientWidth, scrollLeft, scrollWidth } = this.tablist?.current;
     if (direction === 1 && !scrollLeft) {
