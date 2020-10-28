@@ -13704,7 +13704,7 @@ Accordion styles
   }
 
   .#{$prefix}--accordion__item--disabled,
-  .#{$prefix}--accordion__item--disabled ~ * {
+  .#{$prefix}--accordion__item--disabled + .#{$prefix}--accordion__item {
     border-top: 1px solid $disabled-01;
   }
 
