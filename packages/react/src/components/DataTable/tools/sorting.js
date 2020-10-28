@@ -6,7 +6,7 @@
  */
 
 import { getCellId } from './cells';
-import { sortStates } from '../state/sorting';
+import { sortStates } from '../state/sortStates';
 
 /**
  * Compare two primitives to determine which comes first. Initially, this method
