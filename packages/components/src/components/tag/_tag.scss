@@ -133,7 +133,9 @@
   .#{$prefix}--tag--filter.#{$prefix}--tag--disabled {
     @include tag-theme($disabled-01, $disabled-02);
 
-    pointer-events: none;
+    &:hover {
+      cursor: not-allowed;
+    }
   }
 
   .#{$prefix}--tag__label {
