@@ -13704,7 +13704,7 @@ Accordion styles
   }
 
   .#{$prefix}--accordion__item--disabled,
-  .#{$prefix}--accordion__item--disabled ~ * {
+  .#{$prefix}--accordion__item--disabled + .#{$prefix}--accordion__item {
     border-top: 1px solid $disabled-01;
   }
 
@@ -18847,6 +18847,14 @@ Link styles
 
   .#{$prefix}--link--disabled.#{$prefix}--link--inline {
     text-decoration: underline;
+  }
+
+  .#{$prefix}--link--sm {
+    @include type-style('helper-text-01');
+  }
+
+  .#{$prefix}--link--lg {
+    @include type-style('body-short-02');
   }
 }
 ```
