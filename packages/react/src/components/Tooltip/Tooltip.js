@@ -204,6 +204,11 @@ class Tooltip extends Component {
        */
       iconDescription: PropTypes.string,
     }),
+
+    /**
+     * Prevents focus on an element after the tooltip dismissed
+     */
+    preventFocusAfterDismiss: PropTypes.bool,
   };
 
   static defaultProps = {
@@ -246,9 +251,19 @@ class Tooltip extends Component {
    */
   _tooltipDismissed = false;
 
+  /**
+   * The focused element before tooltip
+   * @type {Element}
+   * @private
+   */
+  _previousActiveElement = null;
+
   componentDidMount() {
     if (!this._debouncedHandleFocus) {
-      this._debouncedHandleFocus = debounce(this._handleFocus, 200);
+      this._debouncedHandleFocus = debounce(
+        this._handleFocus,
+        this.props.preventFocusAfterDismiss ? 0 : 200
+      );
     }
 
     document.addEventListener('keydown', this.handleEscKeyPress, false);
@@ -288,6 +303,7 @@ class Tooltip extends Component {
       }
       if (!open && tooltipBody && tooltipBody.id === this._tooltipId) {
         this._tooltipDismissed = true;
+        this._previousActiveElement = document.activeElement;
         this._triggerRef?.current.focus();
       }
     });
@@ -299,6 +315,9 @@ class Tooltip extends Component {
    * @param {Element} [evt] For handing `mouseout` event, indicates where the mouse pointer is gone.
    */
   _handleFocus = (state, evt) => {
+    if (this.props.preventFocusAfterDismiss && this._tooltipDismissed) {
+      this._previousActiveElement.focus();
+    }
     const { relatedTarget } = evt;
     if (state === 'over') {
       if (!this._tooltipDismissed) {
