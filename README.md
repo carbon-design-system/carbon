@@ -166,6 +166,7 @@ check out our [Contributing Guide](/.github/CONTRIBUTING.md) and our
 
 <!-- markdownlint-enable -->
 <!-- prettier-ignore-end -->
+
 <!-- ALL-CONTRIBUTORS-LIST:END -->
 
 This project follows the
