@@ -302,7 +302,7 @@ categories:
           - not-sent--filled
           - operations--field
           - operations--record
-          - overlays
+          - overlay
           - package
           - pan--horizontal
           - pan--vertical
@@ -473,7 +473,7 @@ categories:
           - inventory-management
           - keep-dry
           - money
-          - moster
+          - monster
           - noodle-bowl
           - purchase
           - receipt
