@@ -8251,6 +8251,7 @@ $disabled-01: if(
   - [accordion [mixin]](#accordion-mixin)
   - [content-switcher [mixin]](#content-switcher-mixin)
   - [file-uploader [mixin]](#file-uploader-mixin)
+  - [listbox [mixin]](#listbox-mixin)
   - [slider [mixin]](#slider-mixin)
   - [tags [mixin]](#tags-mixin)
   - [text-area [mixin]](#text-area-mixin)
@@ -19417,6 +19418,10 @@ List box styles
 
     &:focus {
       @include focus-outline('outline');
+
+      &:hover {
+        @include focus-outline('outline');
+      }
     }
   }
 
@@ -19483,13 +19488,15 @@ List box styles
     }
   }
 
-  .#{$prefix}--list-box--disabled
-    .#{$prefix}--list-box__selection--multi
-    > svg {
-    fill: $disabled-02;
+  .#{$prefix}--list-box--disabled .#{$prefix}--list-box__selection--multi {
+    @include tag-theme($disabled-02, $disabled-01);
 
-    &:hover {
-      background-color: initial;
+    > svg {
+      fill: $disabled-01;
+
+      &:hover {
+        background-color: initial;
+      }
     }
 
     // Windows, Firefox HCM Fix
@@ -19500,7 +19507,6 @@ List box styles
     }
   }
 
-  .#{$prefix}--list-box__selection--multi:focus,
   .#{$prefix}--list-box__selection--multi:hover {
     outline: none;
   }
@@ -19802,6 +19808,7 @@ List box styles
 
 - **Group**: [list-box](#list-box)
 - **Requires**:
+  - [tag-theme [mixin]](#tag-theme-mixin)
   - [carbon--mini-units [function]](#carbon--mini-units-function)
   - [prefix [variable]](#prefix-variable)
   - [list-box-width [variable]](#list-box-width-variable)
@@ -19825,6 +19832,7 @@ List box styles
   - [inverse-01 [variable]](#inverse-01-variable)
   - [inverse-02 [variable]](#inverse-02-variable)
   - [hover-secondary [variable]](#hover-secondary-variable)
+  - [disabled-01 [variable]](#disabled-01-variable)
   - [ui-01 [variable]](#ui-01-variable)
   - [text-02 [variable]](#text-02-variable)
   - [selected-ui [variable]](#selected-ui-variable)
@@ -24697,6 +24705,7 @@ Tabs styles
 - **Requires**:
   - [prefix [variable]](#prefix-variable)
 - **Used by**:
+  - [listbox [mixin]](#listbox-mixin)
   - [tags [mixin]](#tags-mixin)
 
 ### ❌tags [mixin]
@@ -24841,7 +24850,6 @@ Tag styles
     padding-right: rem(2px);
     cursor: pointer;
 
-    &:focus,
     &:hover {
       outline: none;
     }
