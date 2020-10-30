@@ -100,3 +100,10 @@
     fill: $icon-color;
   }
 }
+
+@mixin button-padding-large {
+  align-items: baseline;
+  padding-top: $spacing-05;
+  padding-right: $layout-05;
+  padding-left: $spacing-05;
+}
