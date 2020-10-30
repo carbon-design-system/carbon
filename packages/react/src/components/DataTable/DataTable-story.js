@@ -349,7 +349,6 @@ export const WithCheckmarkColumns = () => {
                           className={`la-${cell.info.header}`}>
                           <Checkbox
                             id={'check-' + cell.id}
-                            checked={cell.value}
                             hideLabel
                             labelText="checkbox"
                           />
