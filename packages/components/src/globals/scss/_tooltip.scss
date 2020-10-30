@@ -138,6 +138,7 @@
     color: inherit;
     // overwrite default nowrap behavior
     white-space: normal;
+    word-break: break-word;
     // In order to pass AAT, opacity must be set to 1 in the default state
     // On focus/hover use a keyframe animation to mimic transition
     opacity: 1;
