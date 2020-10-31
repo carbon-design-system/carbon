@@ -68,7 +68,6 @@ export default function Copy({
         (!children && (animation ? feedback : other['aria-label'])) || null
       }>
       {children}
-      {animation ? feedback : other['aria-label']}
       <span
         aria-hidden="true"
         className={`${prefix}--assistive-text ${prefix}--copy-btn__feedback`}>
