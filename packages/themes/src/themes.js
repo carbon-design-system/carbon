@@ -45,13 +45,13 @@ export function determineCurrentTheme(domNode, cssVariablePrefix) {
 
   // Check the hex color of ui01 to determine the appropriate theme
   switch (ui01Hex) {
-    case '#f4f4f4':
+    case white.ui01:
       return white;
-    case '#ffffff':
+    case g10.ui01:
       return g10;
-    case '#393939':
+    case g90.ui01:
       return g90;
-    case '#262626':
+    case g100.ui01:
       return g100;
     default:
       return v9;
