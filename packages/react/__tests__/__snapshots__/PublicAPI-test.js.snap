@@ -5663,7 +5663,9 @@ Map {
       "onBeforeClick": [Function],
       "tabIndex": 0,
       "tileCollapsedIconText": "Interact to expand Tile",
+      "tileCollapsedLabel": null,
       "tileExpandedIconText": "Interact to collapse Tile",
+      "tileExpandedLabel": null,
       "tileMaxHeight": 0,
       "tilePadding": 0,
     },
@@ -5695,7 +5697,13 @@ Map {
       "tileCollapsedIconText": Object {
         "type": "string",
       },
+      "tileCollapsedLabel": Object {
+        "type": "string",
+      },
       "tileExpandedIconText": Object {
+        "type": "string",
+      },
+      "tileExpandedLabel": Object {
         "type": "string",
       },
     },

@@ -114,9 +114,13 @@
     position: absolute;
     right: 0.5rem;
     bottom: 0.5rem;
+    display: flex;
+    flex-direction: row;
+    align-items: flex-end;
     height: 1rem;
 
     svg {
+      margin-left: $carbon--spacing-03;
       transform-origin: center;
       transition: $duration--fast-02 motion(standard, productive);
       fill: $ui-05;
