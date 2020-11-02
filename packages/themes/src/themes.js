@@ -22,7 +22,7 @@ export { g10, g90, g100, white, v9 };
  * @param {string} cssVariablePrefix the prefix of the carbon css variables that was set at mixin time
  * @returns {object} object with current theme tokens, null if we can't determine the current theme
  */
-export function determineCurrentTheme(domNode, cssVariablePrefix) {
+export function getCurrentTheme(domNode, cssVariablePrefix) {
   const testDiv = document.createElement('div');
   testDiv.setAttribute('visibility', 'hidden');
   // use the ui-01 css variable to figure out which theme is currently in use

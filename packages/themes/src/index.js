@@ -9,14 +9,6 @@
 export * from './white';
 
 import { tokens, formatTokenName, unstable__meta } from './tokens';
-import {
-  determineCurrentTheme,
-  themes,
-  g10,
-  g90,
-  g100,
-  white,
-  v9,
-} from './themes';
+import { getCurrentTheme, themes, g10, g90, g100, white, v9 } from './themes';
 export { tokens, formatTokenName, unstable__meta };
-export { determineCurrentTheme, themes, g10, g90, g100, white, v9 };
+export { getCurrentTheme, themes, g10, g90, g100, white, v9 };
