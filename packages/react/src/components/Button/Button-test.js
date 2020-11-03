@@ -251,7 +251,7 @@ describe('Small Button', () => {
     });
   });
   describe('deprecated prop `small`', () => {
-    const wrapper = shallow(<Button small className="extra-class" />);
+    const wrapper = shallow(<Button size="sm" className="extra-class" />);
 
     it('has the expected classes for small', () => {
       expect(wrapper.hasClass(`${prefix}--btn--sm`)).toEqual(true);
