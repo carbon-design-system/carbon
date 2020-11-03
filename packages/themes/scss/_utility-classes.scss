@@ -1,0 +1,121 @@
+$theme-class-map: (
+  'ui-background': (
+    'var': $ui-background,
+    'props': ('background')
+  ),
+  'interactive-01': (
+    'var': $interactive-01,
+    'props': ('background', 'color', 'fill')
+  ),
+  'interactive-02': (
+    'var': $interactive-02,
+    'props': ('background', 'color')
+  ),
+  'interactive-03': (
+    'var': $interactive-03,
+    'props': ('background', 'color')
+  ),
+  'interactive-04': (
+    'var': $interactive-04,
+    'props': ('background', 'color')
+  ),
+  'danger': (
+    'var': $danger,
+    'props': ('background', 'color')
+  ),
+  'ui-01': (
+    'var': $ui-01,
+    'props': ('background')
+  ),
+  'ui-02': (
+    'var': $ui-02,
+    'props': ('background')
+  ),
+  'ui-03': (
+    'var': $ui-03,
+    'props': ('background', 'border-color')
+  ),
+  'ui-04': (
+    'var': $ui-04,
+    'props': ('background', 'border-color')
+  ),
+  'ui-05': (
+    'var': $ui-05,
+    'props': ('background', 'border-color')
+  ),
+  'text-01': (
+    'var': $text-01,
+    'props': ('color')
+  ),
+  'text-02': (
+    'var': $text-02,
+    'props': ('color')
+  ),
+  'text-03': (
+    'var': $text-03,
+    'props': ('color')
+  ),
+  'text-04': (
+    'var': $text-04,
+    'props': ('color')
+  ),
+  'text-05': (
+    'var': $text-05,
+    'props': ('color')
+  ),
+  'text-error': (
+    'var': $text-error,
+    'props': ('color')
+  ),
+  'link-01': (
+    'var': $link-01,
+    'props': ('color')
+  ),
+  'field-01': (
+    'var': $field-01,
+    'props': ('background')
+  ),
+  'field-02': (
+    'var': $field-02,
+    'props': ('background')
+  ),
+  'inverse-link': (
+    'var': $inverse-link,
+    'props': ('color')
+  ),
+  'inverse-01': (
+    'var': $inverse-01,
+    'props': ('color')
+  ),
+  'inverse-02': (
+    'var': $inverse-02,
+    'props': ('background', 'color')
+  ),
+  'support-01': (
+    'var': $support-01,
+    'props': ('background', 'color', 'fill', 'border-color')
+  ),
+  'support-02': (
+    'var': $support-02,
+    'props': ('background', 'color', 'fill', 'border-color')
+  ),
+  'support-03': (
+    'var': $support-03,
+    'props': ('background', 'color', 'fill', 'border-color')
+  ),
+  'support-04': (
+    'var': $support-04,
+    'props': ('background', 'color', 'fill', 'border-color')
+  )
+);
+
+// Theme mixin
+@mixin themeClassMaker() {
+  @each $label, $map in $theme-class-map {
+    @each $attr in map-get($map, props) {
+      .#{$attr}--#{$label} {
+        #{$attr} : #{map-get($map, var)};
+      }
+    }
+  }
+}
