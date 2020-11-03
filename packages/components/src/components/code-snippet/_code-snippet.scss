@@ -417,6 +417,11 @@
     }
   }
 
+  .#{$prefix}--snippet--multi .#{$prefix}--copy-btn {
+    top: $carbon--spacing-03;
+    right: $carbon--spacing-03;
+  }
+
   .#{$prefix}--snippet--multi
     .#{$prefix}--snippet-button
     .#{$prefix}--btn--copy__feedback {
