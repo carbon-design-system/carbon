@@ -72,7 +72,7 @@ export const singleline = () => (
 );
 
 export const skeleton = () => (
-  <div style={{ width: '800px' }}>
+  <div>
     <CodeSnippetSkeleton type="single" style={{ marginBottom: 8 }} />
     <CodeSnippetSkeleton type="multi" />
   </div>
@@ -116,7 +116,7 @@ const props = () => ({
 });
 
 export const playground = () => (
-  <div className={props().light ? 'bx--tile' : ''} style={{ width: '800px' }}>
+  <div className={props().light ? 'bx--tile' : ''}>
     {props().light && lightPropMessage}
     <CodeSnippet {...props()}>
       {props().type === 'multi'
