@@ -170,7 +170,8 @@
   - [✅inverse-support-03 [variable]](#inverse-support-03-variable)
   - [✅inverse-support-04 [variable]](#inverse-support-04-variable)
   - [✅overlay-01 [variable]](#overlay-01-variable)
-  - [✅danger [variable]](#danger-variable)
+  - [✅danger-01 [variable]](#danger-01-variable)
+  - [✅danger-02 [variable]](#danger-02-variable)
   - [✅focus [variable]](#focus-variable)
   - [✅inverse-focus-ui [variable]](#inverse-focus-ui-variable)
   - [✅hover-primary [variable]](#hover-primary-variable)
@@ -204,6 +205,7 @@
   - [✅⚠️brand-03 [variable]](#brand-03-variable)
   - [✅⚠️active-01 [variable]](#active-01-variable)
   - [✅⚠️hover-field [variable]](#hover-field-variable)
+  - [✅danger [variable]](#danger-variable)
   - [✅caption-01 [variable]](#caption-01-variable)
   - [✅label-01 [variable]](#label-01-variable)
   - [✅helper-text-01 [variable]](#helper-text-01-variable)
@@ -4212,7 +4214,8 @@ Define theme variables from a map of tokens
   $inverse-support-03: map-get($theme, 'inverse-support-03') !global;
   $inverse-support-04: map-get($theme, 'inverse-support-04') !global;
   $overlay-01: map-get($theme, 'overlay-01') !global;
-  $danger: map-get($theme, 'danger') !global;
+  $danger-01: map-get($theme, 'danger-01') !global;
+  $danger-02: map-get($theme, 'danger-02') !global;
   $focus: map-get($theme, 'focus') !global;
   $inverse-focus-ui: map-get($theme, 'inverse-focus-ui') !global;
   $hover-primary: map-get($theme, 'hover-primary') !global;
@@ -4246,6 +4249,7 @@ Define theme variables from a map of tokens
   $brand-03: map-get($theme, 'brand-03') !global;
   $active-01: map-get($theme, 'active-01') !global;
   $hover-field: map-get($theme, 'hover-field') !global;
+  $danger: map-get($theme, 'danger') !global;
   $caption-01: map-get($theme, 'caption-01') !global;
   $label-01: map-get($theme, 'label-01') !global;
   $helper-text-01: map-get($theme, 'helper-text-01') !global;
@@ -4447,9 +4451,13 @@ Define theme variables from a map of tokens
       --#{$custom-property-prefix}-overlay-01,
       map-get($theme, 'overlay-01')
     ) !global;
-    $danger: var(
-      --#{$custom-property-prefix}-danger,
-      map-get($theme, 'danger')
+    $danger-01: var(
+      --#{$custom-property-prefix}-danger-01,
+      map-get($theme, 'danger-01')
+    ) !global;
+    $danger-02: var(
+      --#{$custom-property-prefix}-danger-02,
+      map-get($theme, 'danger-02')
     ) !global;
     $focus: var(
       --#{$custom-property-prefix}-focus,
@@ -4582,6 +4590,10 @@ Define theme variables from a map of tokens
     $hover-field: var(
       --#{$custom-property-prefix}-hover-field,
       map-get($theme, 'hover-field')
+    ) !global;
+    $danger: var(
+      --#{$custom-property-prefix}-danger,
+      map-get($theme, 'danger')
     ) !global;
     $spacing-01: var(
       --#{$custom-property-prefix}-spacing-01,
@@ -4978,8 +4990,14 @@ Define theme variables from a map of tokens
       @include custom-property('overlay-01', map-get($theme, 'overlay-01'));
     }
 
-    @if should-emit($theme, $parent-carbon-theme, 'danger', $emit-difference) {
-      @include custom-property('danger', map-get($theme, 'danger'));
+    @if should-emit($theme, $parent-carbon-theme, 'danger-01', $emit-difference)
+    {
+      @include custom-property('danger-01', map-get($theme, 'danger-01'));
+    }
+
+    @if should-emit($theme, $parent-carbon-theme, 'danger-02', $emit-difference)
+    {
+      @include custom-property('danger-02', map-get($theme, 'danger-02'));
     }
 
     @if should-emit($theme, $parent-carbon-theme, 'focus', $emit-difference) {
@@ -5309,6 +5327,10 @@ Define theme variables from a map of tokens
     )
     {
       @include custom-property('hover-field', map-get($theme, 'hover-field'));
+    }
+
+    @if should-emit($theme, $parent-carbon-theme, 'danger', $emit-difference) {
+      @include custom-property('danger', map-get($theme, 'danger'));
     }
 
     @if should-emit(
@@ -6018,7 +6040,8 @@ Define theme variables from a map of tokens
   - [inverse-support-03 [variable]](#inverse-support-03-variable)
   - [inverse-support-04 [variable]](#inverse-support-04-variable)
   - [overlay-01 [variable]](#overlay-01-variable)
-  - [danger [variable]](#danger-variable)
+  - [danger-01 [variable]](#danger-01-variable)
+  - [danger-02 [variable]](#danger-02-variable)
   - [focus [variable]](#focus-variable)
   - [inverse-focus-ui [variable]](#inverse-focus-ui-variable)
   - [hover-primary [variable]](#hover-primary-variable)
@@ -6052,6 +6075,7 @@ Define theme variables from a map of tokens
   - [brand-03 [variable]](#brand-03-variable)
   - [active-01 [variable]](#active-01-variable)
   - [hover-field [variable]](#hover-field-variable)
+  - [danger [variable]](#danger-variable)
   - [caption-01 [variable]](#caption-01-variable)
   - [label-01 [variable]](#label-01-variable)
   - [helper-text-01 [variable]](#helper-text-01-variable)
@@ -6181,6 +6205,7 @@ $carbon--theme--g90: map-merge(
     inverse-support-02: #24a148,
     inverse-support-04: #0f62fe,
     overlay-01: rgba(22, 22, 22, 0.7),
+    danger-02: #ff8389,
     focus: #ffffff,
     inverse-focus-ui: #0f62fe,
     hover-primary-text: #a6c8ff,
@@ -6258,6 +6283,7 @@ $carbon--theme--g100: map-merge(
     inverse-support-02: #24a148,
     inverse-support-04: #0f62fe,
     overlay-01: rgba(22, 22, 22, 0.7),
+    danger-02: #fa4d56,
     focus: #ffffff,
     inverse-focus-ui: #0f62fe,
     hover-primary-text: #a6c8ff,
@@ -6419,7 +6445,8 @@ $carbon--theme: (
   inverse-support-03: if(global-variable-exists('inverse-support-03'), $inverse-support-03, map-get($carbon--theme--white, 'inverse-support-03')),
   inverse-support-04: if(global-variable-exists('inverse-support-04'), $inverse-support-04, map-get($carbon--theme--white, 'inverse-support-04')),
   overlay-01: if(global-variable-exists('overlay-01'), $overlay-01, map-get($carbon--theme--white, 'overlay-01')),
-  danger: if(global-variable-exists('danger'), $danger, map-get($carbon--theme--white, 'danger')),
+  danger-01: if(global-variable-exists('danger-01'), $danger-01, map-get($carbon--theme--white, 'danger-01')),
+  danger-02: if(global-variable-exists('danger-02'), $danger-02, map-get($carbon--theme--white, 'danger-02')),
   focus: if(global-variable-exists('focus'), $focus, map-get($carbon--theme--white, 'focus')),
   inverse-focus-ui: if(global-variable-exists('inverse-focus-ui'), $inverse-focus-ui, map-get($carbon--theme--white, 'inverse-focus-ui')),
   hover-primary: if(global-variable-exists('hover-primary'), $hover-primary, map-get($carbon--theme--white, 'hover-primary')),
@@ -6453,6 +6480,7 @@ $carbon--theme: (
   brand-03: if(global-variable-exists('brand-03'), $brand-03, map-get($carbon--theme--white, 'brand-03')),
   active-01: if(global-variable-exists('active-01'), $active-01, map-get($carbon--theme--white, 'active-01')),
   hover-field: if(global-variable-exists('hover-field'), $hover-field, map-get($carbon--theme--white, 'hover-field')),
+  danger: if(global-variable-exists('danger'), $danger, map-get($carbon--theme--white, 'danger')),
   caption-01: if(global-variable-exists('caption-01'), $caption-01, map-get($carbon--theme--white, 'caption-01')),
   label-01: if(global-variable-exists('label-01'), $label-01, map-get($carbon--theme--white, 'label-01')),
   helper-text-01: if(global-variable-exists('helper-text-01'), $helper-text-01, map-get($carbon--theme--white, 'helper-text-01')),
@@ -6854,7 +6882,6 @@ $ui-05: if(
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
   - [accordion [mixin]](#accordion-mixin)
-  - [checkbox [mixin]](#checkbox-mixin)
   - [content-switcher [mixin]](#content-switcher-mixin)
   - [data-table-expandable [mixin]](#data-table-expandable-mixin)
   - [data-table-sort [mixin]](#data-table-sort-mixin)
@@ -7090,6 +7117,7 @@ $icon-01: if(
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
   - [button [mixin]](#button-mixin)
+  - [checkbox [mixin]](#checkbox-mixin)
   - [snippet [mixin]](#snippet-mixin)
   - [data-table-v2-action [mixin]](#data-table-v2-action-mixin)
   - [date-picker [mixin]](#date-picker-mixin)
@@ -7623,18 +7651,42 @@ $overlay-01: if(
   - [modal [mixin]](#modal-mixin)
   - [carbon-side-nav [mixin]](#carbon-side-nav-mixin)
 
-### ✅danger [variable]
+### ✅danger-01 [variable]
 
 <details>
 <summary>Source code</summary>
 
 ```scss
-$danger: if(
+$danger-01: if(
   global-variable-exists('carbon--theme') and map-has-key(
       $carbon--theme,
-      'danger'
+      'danger-01'
     ),
-  map-get($carbon--theme, 'danger'),
+  map-get($carbon--theme, 'danger-01'),
+  #da1e28
+);
+```
+
+</details>
+
+- **Group**: [@carbon/themes](#carbonthemes)
+- **Type**: `{undefined}`
+- **Used by**:
+  - [carbon--theme [mixin]](#carbon--theme-mixin)
+  - [button [mixin]](#button-mixin)
+
+### ✅danger-02 [variable]
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$danger-02: if(
+  global-variable-exists('carbon--theme') and map-has-key(
+      $carbon--theme,
+      'danger-02'
+    ),
+  map-get($carbon--theme, 'danger-02'),
   #da1e28
 );
 ```
@@ -8211,6 +8263,7 @@ $disabled-01: if(
   - [accordion [mixin]](#accordion-mixin)
   - [content-switcher [mixin]](#content-switcher-mixin)
   - [file-uploader [mixin]](#file-uploader-mixin)
+  - [listbox [mixin]](#listbox-mixin)
   - [slider [mixin]](#slider-mixin)
   - [tags [mixin]](#tags-mixin)
   - [text-area [mixin]](#text-area-mixin)
@@ -8575,6 +8628,29 @@ $hover-field: if(
   - [data-table-expandable [mixin]](#data-table-expandable-mixin)
   - [search [mixin]](#search-mixin)
 - **Deprecated**: This may not be available in future releases
+
+### ✅danger [variable]
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$danger: if(
+  global-variable-exists('carbon--theme') and map-has-key(
+      $carbon--theme,
+      'danger'
+    ),
+  map-get($carbon--theme, 'danger'),
+  #da1e28
+);
+```
+
+</details>
+
+- **Group**: [@carbon/themes](#carbonthemes)
+- **Type**: `{undefined}`
+- **Used by**:
+  - [carbon--theme [mixin]](#carbon--theme-mixin)
 
 ### ✅caption-01 [variable]
 
@@ -13664,7 +13740,7 @@ Accordion styles
   }
 
   .#{$prefix}--accordion__item--disabled,
-  .#{$prefix}--accordion__item--disabled ~ * {
+  .#{$prefix}--accordion__item--disabled + .#{$prefix}--accordion__item {
     border-top: 1px solid $disabled-01;
   }
 
@@ -14188,7 +14264,7 @@ Button styles
 
   .#{$prefix}--btn--danger {
     @include button-theme(
-      $danger,
+      $danger-01,
       transparent,
       $text-04,
       $hover-danger,
@@ -14199,11 +14275,92 @@ Button styles
     &:hover {
       color: $text-04;
     }
+
+    &-tertiary {
+      @include button-theme(
+        transparent,
+        $danger-02,
+        $danger-02,
+        $hover-danger,
+        currentColor,
+        $active-danger
+      );
+
+      &:hover {
+        color: $text-04;
+        border-color: $hover-danger;
+      }
+
+      &:focus {
+        color: $text-04;
+        background-color: $danger-01;
+      }
+
+      &:active {
+        color: $text-04;
+        border-color: $active-danger;
+      }
+    }
+
+    &-ghost {
+      @include button-theme(
+        transparent,
+        transparent,
+        $danger-02,
+        $hover-danger,
+        currentColor,
+        $active-danger
+      );
+
+      padding: $button-padding-ghost;
+
+      .#{$prefix}--btn__icon {
+        position: static;
+        margin-left: $carbon--spacing-03;
+      }
+
+      &:hover,
+      &:active {
+        color: $text-04;
+      }
+
+      &:disabled,
+      &:hover:disabled,
+      &:focus:disabled,
+      &.#{$prefix}--btn--disabled,
+      &.#{$prefix}--btn--disabled:hover,
+      &.#{$prefix}--btn--disabled:focus {
+        color: $disabled;
+        background: transparent;
+        border-color: transparent;
+        outline: none;
+      }
+
+      &.#{$prefix}--btn--sm {
+        padding: $button-padding-ghost-sm;
+      }
+
+      &.#{$prefix}--btn--field {
+        padding: $button-padding-ghost-field;
+      }
+    }
   }
 
   .#{$prefix}--btn--sm {
     min-height: rem(32px);
     padding: $button-padding-sm;
+  }
+
+  .#{$prefix}--btn--xl:not(.#{$prefix}--btn--icon-only) {
+    @include button-padding-large;
+
+    min-height: rem(80px);
+  }
+
+  .#{$prefix}--btn--lg:not(.#{$prefix}--btn--icon-only) {
+    @include button-padding-large;
+
+    min-height: rem(64px);
   }
 
   .#{$prefix}--btn--field {
@@ -14297,9 +14454,10 @@ Button styles
   - [hover-primary-text [variable]](#hover-primary-text-variable)
   - [icon-01 [variable]](#icon-01-variable)
   - [focus [variable]](#focus-variable)
-  - [danger [variable]](#danger-variable)
+  - [danger-01 [variable]](#danger-01-variable)
   - [hover-danger [variable]](#hover-danger-variable)
   - [active-danger [variable]](#active-danger-variable)
+  - [danger-02 [variable]](#danger-02-variable)
   - [button-separator [variable]](#button-separator-variable)
 
 ### ❌button-base [mixin]
@@ -14505,7 +14663,7 @@ Checkbox styles
 
     // Checkboxes with a background color look visually off against a parent container.
     background-color: transparent;
-    border: 1px solid $ui-05;
+    border: 1px solid $icon-01;
     border-radius: 1px;
     content: '';
   }
@@ -14535,8 +14693,8 @@ Checkbox styles
   .#{$prefix}--checkbox:indeterminate + .#{$prefix}--checkbox-label::before,
   .#{$prefix}--checkbox-label[data-contained-checkbox-state='true']::before,
   .#{$prefix}--checkbox-label[data-contained-checkbox-state='mixed']::before {
-    background-color: $ui-05;
-    border-color: $ui-05;
+    background-color: $icon-01;
+    border-color: $icon-01;
     border-width: 1px;
   }
 
@@ -14627,7 +14785,7 @@ Checkbox styles
   - [prefix [variable]](#prefix-variable)
   - [carbon--spacing-02 [variable]](#carbon--spacing-02-variable)
   - [carbon--spacing-01 [variable]](#carbon--spacing-01-variable)
-  - [ui-05 [variable]](#ui-05-variable)
+  - [icon-01 [variable]](#icon-01-variable)
   - [inverse-01 [variable]](#inverse-01-variable)
   - [focus [variable]](#focus-variable)
   - [disabled-02 [variable]](#disabled-02-variable)
@@ -18726,6 +18884,14 @@ Link styles
   .#{$prefix}--link--disabled.#{$prefix}--link--inline {
     text-decoration: underline;
   }
+
+  .#{$prefix}--link--sm {
+    @include type-style('helper-text-01');
+  }
+
+  .#{$prefix}--link--lg {
+    @include type-style('body-short-02');
+  }
 }
 ```
 
@@ -18753,11 +18919,16 @@ List styles
 @mixin lists() {
   .#{$prefix}--list--nested,
   .#{$prefix}--list--unordered,
-  .#{$prefix}--list--ordered {
+  .#{$prefix}--list--ordered,
+  .#{$prefix}--list--ordered--native {
     @include reset;
     @include type-style('body-short-01');
 
     list-style: none;
+  }
+
+  .#{$prefix}--list--ordered--native {
+    list-style: decimal;
   }
 
   .#{$prefix}--list__item {
@@ -18785,7 +18956,8 @@ List styles
     counter-increment: item;
   }
 
-  .#{$prefix}--list--ordered.#{$prefix}--list--nested {
+  .#{$prefix}--list--ordered.#{$prefix}--list--nested,
+  .#{$prefix}--list--ordered--native.#{$prefix}--list--nested {
     list-style-type: lower-latin;
   }
 
@@ -19281,6 +19453,10 @@ List box styles
 
     &:focus {
       @include focus-outline('outline');
+
+      &:hover {
+        @include focus-outline('outline');
+      }
     }
   }
 
@@ -19347,13 +19523,15 @@ List box styles
     }
   }
 
-  .#{$prefix}--list-box--disabled
-    .#{$prefix}--list-box__selection--multi
-    > svg {
-    fill: $disabled-02;
+  .#{$prefix}--list-box--disabled .#{$prefix}--list-box__selection--multi {
+    @include tag-theme($disabled-02, $disabled-01);
 
-    &:hover {
-      background-color: initial;
+    > svg {
+      fill: $disabled-01;
+
+      &:hover {
+        background-color: initial;
+      }
     }
 
     // Windows, Firefox HCM Fix
@@ -19364,7 +19542,6 @@ List box styles
     }
   }
 
-  .#{$prefix}--list-box__selection--multi:focus,
   .#{$prefix}--list-box__selection--multi:hover {
     outline: none;
   }
@@ -19666,6 +19843,7 @@ List box styles
 
 - **Group**: [list-box](#list-box)
 - **Requires**:
+  - [tag-theme [mixin]](#tag-theme-mixin)
   - [carbon--mini-units [function]](#carbon--mini-units-function)
   - [prefix [variable]](#prefix-variable)
   - [list-box-width [variable]](#list-box-width-variable)
@@ -19689,6 +19867,7 @@ List box styles
   - [inverse-01 [variable]](#inverse-01-variable)
   - [inverse-02 [variable]](#inverse-02-variable)
   - [hover-secondary [variable]](#hover-secondary-variable)
+  - [disabled-01 [variable]](#disabled-01-variable)
   - [ui-01 [variable]](#ui-01-variable)
   - [text-02 [variable]](#text-02-variable)
   - [selected-ui [variable]](#selected-ui-variable)
@@ -20332,6 +20511,13 @@ Multi select styles
       right: auto;
       left: $carbon--spacing-03;
     }
+  }
+
+  .#{$prefix}--multi-select--filterable.#{$prefix}--multi-select--inline,
+  .#{$prefix}--multi-select--filterable.#{$prefix}--multi-select--inline
+    .#{$prefix}--text-input {
+    background-color: transparent;
+    border-bottom: 0;
   }
 
   .#{$prefix}--multi-select--selected .#{$prefix}--text-input {
@@ -21294,8 +21480,8 @@ Overflow menu styles
     display: flex;
     align-items: center;
     justify-content: center;
-    width: rem(32px);
-    height: rem(32px);
+    width: rem(40px);
+    height: rem(40px);
     cursor: pointer;
     transition: outline $duration--fast-02 motion(entrance, productive), background-color
         $duration--fast-02 motion(entrance, productive);
@@ -21314,6 +21500,16 @@ Overflow menu styles
     &:hover {
       background-color: $hover-ui;
     }
+  }
+
+  .#{$prefix}--overflow-menu--sm {
+    width: rem(32px);
+    height: rem(32px);
+  }
+
+  .#{$prefix}--overflow-menu--xl {
+    width: rem(48px);
+    height: rem(48px);
   }
 
   // Overwrite Icon Tooltip focus styles
@@ -21395,14 +21591,14 @@ Overflow menu styles
   .#{$prefix}--overflow-menu-options[data-floating-menu-direction='bottom']::after {
     top: rem(-3px);
     left: 0;
-    width: rem(32px);
+    width: rem(40px);
     height: rem(3px);
   }
 
   .#{$prefix}--overflow-menu-options[data-floating-menu-direction='top']::after {
     bottom: rem(-8px);
     left: 0;
-    width: rem(32px);
+    width: rem(40px);
     height: rem(8px);
   }
 
@@ -21410,14 +21606,36 @@ Overflow menu styles
     top: 0;
     right: rem(-6px);
     width: rem(6px);
-    height: rem(32px);
+    height: rem(40px);
   }
 
   .#{$prefix}--overflow-menu-options[data-floating-menu-direction='right']::after {
     top: 0;
     left: rem(-6px);
     width: rem(6px);
-    height: rem(32px);
+    height: rem(40px);
+  }
+
+  .#{$prefix}--overflow-menu-options--sm.#{$prefix}--overflow-menu-options {
+    &[data-floating-menu-direction='bottom']::after,
+    &[data-floating-menu-direction='top']::after {
+      width: rem(32px);
+    }
+    &[data-floating-menu-direction='left']::after,
+    &[data-floating-menu-direction='right']::after {
+      height: rem(32px);
+    }
+  }
+
+  .#{$prefix}--overflow-menu-options--xl.#{$prefix}--overflow-menu-options {
+    &[data-floating-menu-direction='bottom']::after,
+    &[data-floating-menu-direction='top']::after {
+      width: rem(48px);
+    }
+    &[data-floating-menu-direction='left']::after,
+    &[data-floating-menu-direction='right']::after {
+      height: rem(48px);
+    }
   }
 
   .#{$prefix}--overflow-menu--flip.#{$prefix}--overflow-menu-options[data-floating-menu-direction='top']::after,
@@ -21450,6 +21668,16 @@ Overflow menu styles
     padding: 0;
     background-color: transparent;
     transition: background-color $duration--fast-02 motion(entrance, productive);
+  }
+
+  .#{$prefix}--overflow-menu-options--sm
+    .#{$prefix}--overflow-menu-options__option {
+    height: rem(32px);
+  }
+
+  .#{$prefix}--overflow-menu-options--xl
+    .#{$prefix}--overflow-menu-options__option {
+    height: rem(48px);
   }
 
   .#{$prefix}--overflow-menu--divider {
@@ -24073,7 +24301,7 @@ Tabs styles
     min-height: rem(40px);
     color: $text-01;
 
-    .#{$prefix}--tabs--scrollable--container {
+    &.#{$prefix}--tabs--scrollable--container {
       min-height: rem(48px);
     }
 
@@ -24126,12 +24354,12 @@ Tabs styles
       background-image: linear-gradient(to right, transparent, $ui-01);
     }
 
-    .#{$prefix}--tabs--scrollable--container
+    &.#{$prefix}--tabs--scrollable--container
       .#{$prefix}--tabs__overflow-indicator--left {
       background-image: linear-gradient(to left, transparent, $ui-03);
     }
 
-    .#{$prefix}--tabs--scrollable--container
+    &.#{$prefix}--tabs--scrollable--container
       .#{$prefix}--tabs__overflow-indicator--right {
       background-image: linear-gradient(to right, transparent, $ui-03);
     }
@@ -24159,11 +24387,12 @@ Tabs styles
           );
         }
 
-        .#{$prefix}--tabs--scrollable--container
+        &.#{$prefix}--tabs--scrollable--container
           .#{$prefix}--tabs__overflow-indicator--left {
           background-image: linear-gradient(to left, rgba($ui-03, 0), $ui-03);
         }
-        .#{$prefix}--tabs--scrollable--container
+
+        &.#{$prefix}--tabs--scrollable--container
           .#{$prefix}--tabs__overflow-indicator--right {
           background-image: linear-gradient(to right, rgba($ui-03, 0), $ui-03);
         }
@@ -24188,7 +24417,7 @@ Tabs styles
       display: none;
     }
 
-    .#{$prefix}--tabs--scrollable--container
+    &.#{$prefix}--tabs--scrollable--container
       .#{$prefix}--tab--overflow-nav-button {
       width: $carbon--spacing-09;
       margin: 0;
@@ -24216,12 +24445,12 @@ Tabs styles
       margin-left: rem(1px);
     }
 
-    .#{$prefix}--tabs--scrollable--container
+    &.#{$prefix}--tabs--scrollable--container
       .#{$prefix}--tabs--scrollable__nav-item {
       background-color: $ui-03;
     }
 
-    .#{$prefix}--tabs--scrollable--container
+    &.#{$prefix}--tabs--scrollable--container
       .#{$prefix}--tabs--scrollable__nav-item
       + .#{$prefix}--tabs--scrollable__nav-item {
       margin-left: 0;
@@ -24229,10 +24458,10 @@ Tabs styles
       box-shadow: rem(-1px) 0 0 0 $ui-04;
     }
 
-    .#{$prefix}--tabs--scrollable--container
+    &.#{$prefix}--tabs--scrollable--container
       .#{$prefix}--tabs--scrollable__nav-item
       + .#{$prefix}--tabs--scrollable__nav-item.#{$prefix}--tabs--scrollable__nav-item--selected,
-    .#{$prefix}--tabs--scrollable--container
+    &.#{$prefix}--tabs--scrollable--container
       .#{$prefix}--tabs--scrollable__nav-item.#{$prefix}--tabs--scrollable__nav-item--selected
       + .#{$prefix}--tabs--scrollable__nav-item {
       box-shadow: none;
@@ -24248,7 +24477,7 @@ Tabs styles
     //-----------------------------
     // Item Hover
     //-----------------------------
-    .#{$prefix}--tabs--scrollable--container
+    &.#{$prefix}--tabs--scrollable--container
       .#{$prefix}--tabs--scrollable__nav-item:hover {
       background-color: $hover-selected-ui;
     }
@@ -24263,9 +24492,9 @@ Tabs styles
       cursor: not-allowed;
     }
 
-    .#{$prefix}--tabs--scrollable--container
+    &.#{$prefix}--tabs--scrollable--container
       .#{$prefix}--tabs--scrollable__nav-item.#{$prefix}--tabs--scrollable__nav-item--disabled,
-    .#{$prefix}--tabs--scrollable--container
+    &.#{$prefix}--tabs--scrollable--container
       .#{$prefix}--tabs--scrollable__nav-item.#{$prefix}--tabs--scrollable__nav-item--disabled:hover {
       background-color: $disabled-02;
     }
@@ -24289,9 +24518,9 @@ Tabs styles
       border-bottom: 2px solid $interactive-04;
     }
 
-    .#{$prefix}--tabs--scrollable--container
+    &.#{$prefix}--tabs--scrollable--container
       .#{$prefix}--tabs--scrollable__nav-item--selected,
-    .#{$prefix}--tabs--scrollable--container
+    &.#{$prefix}--tabs--scrollable--container
       .#{$prefix}--tabs--scrollable__nav-item--selected:hover {
       background-color: $ui-01;
 
@@ -24301,7 +24530,7 @@ Tabs styles
       }
     }
 
-    .#{$prefix}--tabs--scrollable--container
+    &.#{$prefix}--tabs--scrollable--container
       .#{$prefix}--tabs--scrollable__nav-item--selected
       .#{$prefix}--tabs--scrollable__nav-link {
       // height - vertical padding
@@ -24310,9 +24539,9 @@ Tabs styles
       box-shadow: inset 0 2px 0 0 $interactive-04;
     }
 
-    .#{$prefix}--tabs--scrollable--light.#{$prefix}--tabs--scrollable--container
+    &.#{$prefix}--tabs--scrollable--light.#{$prefix}--tabs--scrollable--container
       .#{$prefix}--tabs--scrollable__nav-item--selected,
-    .#{$prefix}--tabs--scrollable--light.#{$prefix}--tabs--scrollable--container
+    &.#{$prefix}--tabs--scrollable--light.#{$prefix}--tabs--scrollable--container
       .#{$prefix}--tabs--scrollable__nav-item--selected:hover {
       background-color: $ui-background;
     }
@@ -24321,13 +24550,16 @@ Tabs styles
     // Link
     //-----------------------------
     .#{$prefix}--tabs--scrollable__nav-link {
+      @include button-reset($width: false);
       @include focus-outline('reset');
+      @include type-style('body-short-01');
 
       width: rem(160px);
       padding: $spacing-04 $spacing-05 $spacing-03;
       overflow: hidden;
       color: $text-02;
       white-space: nowrap;
+      text-align: left;
       text-decoration: none;
       text-overflow: ellipsis;
       border-bottom: $tab-underline-color;
@@ -24340,7 +24572,7 @@ Tabs styles
       }
     }
 
-    .#{$prefix}--tabs--scrollable--container
+    &.#{$prefix}--tabs--scrollable--container
       .#{$prefix}--tabs--scrollable__nav-link {
       height: rem(48px);
       padding: $spacing-03 $spacing-05;
@@ -24358,7 +24590,7 @@ Tabs styles
       border-bottom: $tab-underline-color-hover;
     }
 
-    .#{$prefix}--tabs--scrollable--container
+    &.#{$prefix}--tabs--scrollable--container
       .#{$prefix}--tabs--scrollable__nav-item
       .#{$prefix}--tabs--scrollable__nav-link {
       border-bottom: none;
@@ -24410,7 +24642,7 @@ Tabs styles
       border-bottom-color: $ui-03;
     }
 
-    .#{$prefix}--tabs--scrollable--container
+    &.#{$prefix}--tabs--scrollable--container
       .#{$prefix}--tabs--scrollable__nav-item--disabled
       .#{$prefix}--tabs--scrollable__nav-link {
       color: $disabled-03;
@@ -24509,6 +24741,7 @@ Tabs styles
 - **Requires**:
   - [prefix [variable]](#prefix-variable)
 - **Used by**:
+  - [listbox [mixin]](#listbox-mixin)
   - [tags [mixin]](#tags-mixin)
 
 ### ❌tags [mixin]
@@ -24653,7 +24886,6 @@ Tag styles
     padding-right: rem(2px);
     cursor: pointer;
 
-    &:focus,
     &:hover {
       outline: none;
     }
@@ -27170,7 +27402,9 @@ UI shell header
   }
 
   .#{$prefix}--header__menu-toggle {
-    display: block;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 
   .#{$prefix}--header__menu-toggle__hidden {
@@ -27210,6 +27444,11 @@ UI shell header
   a.#{$prefix}--header__name,
   a.#{$prefix}--header__name:hover {
     color: $shell-header-text-01;
+  }
+
+  .#{$prefix}--header__menu-toggle:not(.#{$prefix}--header__menu-toggle__hidden)
+    ~ .#{$prefix}--header__name {
+    padding-left: rem(8px);
   }
 
   //--------------------------------------------------------------------------

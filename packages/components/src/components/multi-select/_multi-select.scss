@@ -64,6 +64,13 @@
     }
   }
 
+  .#{$prefix}--multi-select--filterable.#{$prefix}--multi-select--inline,
+  .#{$prefix}--multi-select--filterable.#{$prefix}--multi-select--inline
+    .#{$prefix}--text-input {
+    background-color: transparent;
+    border-bottom: 0;
+  }
+
   .#{$prefix}--multi-select--selected .#{$prefix}--text-input {
     // this value will need to change based on the number of digits in
     // the number of items selected

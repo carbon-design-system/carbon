@@ -58,7 +58,8 @@ const colors = [
 
   'overlay01',
 
-  'danger',
+  'danger01',
+  'danger02',
 
   // Interactive states
   'focus',
@@ -110,6 +111,7 @@ const colors = [
   'brand03',
   'active01',
   'hoverField',
+  'danger',
 ];
 
 const numbers = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'];
@@ -172,6 +174,8 @@ export const unstable__meta = {
         'brand02',
         'brand03',
         'danger',
+        'danger01',
+        'danger02',
         'ui01',
         'ui02',
         'ui03',
@@ -239,5 +243,5 @@ export const unstable__meta = {
       ],
     },
   ],
-  deprecated: ['brand01', 'brand02', 'brand03', 'active01'],
+  deprecated: ['brand01', 'brand02', 'brand03', 'active01', 'danger'],
 };
