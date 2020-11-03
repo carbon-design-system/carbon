@@ -93,7 +93,7 @@ export default class Tab extends React.Component {
     /**
      * Specify the tab index of the `<button>` node
      */
-    tabIndex: deprecate(PropTypes.number),
+    tabIndex: PropTypes.number,
   };
 
   static defaultProps = {
