@@ -205,6 +205,7 @@
   - [✅⚠️brand-03 [variable]](#brand-03-variable)
   - [✅⚠️active-01 [variable]](#active-01-variable)
   - [✅⚠️hover-field [variable]](#hover-field-variable)
+  - [✅danger [variable]](#danger-variable)
   - [✅caption-01 [variable]](#caption-01-variable)
   - [✅label-01 [variable]](#label-01-variable)
   - [✅helper-text-01 [variable]](#helper-text-01-variable)
@@ -4248,6 +4249,7 @@ Define theme variables from a map of tokens
   $brand-03: map-get($theme, 'brand-03') !global;
   $active-01: map-get($theme, 'active-01') !global;
   $hover-field: map-get($theme, 'hover-field') !global;
+  $danger: map-get($theme, 'danger') !global;
   $caption-01: map-get($theme, 'caption-01') !global;
   $label-01: map-get($theme, 'label-01') !global;
   $helper-text-01: map-get($theme, 'helper-text-01') !global;
@@ -4588,6 +4590,10 @@ Define theme variables from a map of tokens
     $hover-field: var(
       --#{$custom-property-prefix}-hover-field,
       map-get($theme, 'hover-field')
+    ) !global;
+    $danger: var(
+      --#{$custom-property-prefix}-danger,
+      map-get($theme, 'danger')
     ) !global;
     $spacing-01: var(
       --#{$custom-property-prefix}-spacing-01,
@@ -5321,6 +5327,10 @@ Define theme variables from a map of tokens
     )
     {
       @include custom-property('hover-field', map-get($theme, 'hover-field'));
+    }
+
+    @if should-emit($theme, $parent-carbon-theme, 'danger', $emit-difference) {
+      @include custom-property('danger', map-get($theme, 'danger'));
     }
 
     @if should-emit(
@@ -6065,6 +6075,7 @@ Define theme variables from a map of tokens
   - [brand-03 [variable]](#brand-03-variable)
   - [active-01 [variable]](#active-01-variable)
   - [hover-field [variable]](#hover-field-variable)
+  - [danger [variable]](#danger-variable)
   - [caption-01 [variable]](#caption-01-variable)
   - [label-01 [variable]](#label-01-variable)
   - [helper-text-01 [variable]](#helper-text-01-variable)
@@ -6469,6 +6480,7 @@ $carbon--theme: (
   brand-03: if(global-variable-exists('brand-03'), $brand-03, map-get($carbon--theme--white, 'brand-03')),
   active-01: if(global-variable-exists('active-01'), $active-01, map-get($carbon--theme--white, 'active-01')),
   hover-field: if(global-variable-exists('hover-field'), $hover-field, map-get($carbon--theme--white, 'hover-field')),
+  danger: if(global-variable-exists('danger'), $danger, map-get($carbon--theme--white, 'danger')),
   caption-01: if(global-variable-exists('caption-01'), $caption-01, map-get($carbon--theme--white, 'caption-01')),
   label-01: if(global-variable-exists('label-01'), $label-01, map-get($carbon--theme--white, 'label-01')),
   helper-text-01: if(global-variable-exists('helper-text-01'), $helper-text-01, map-get($carbon--theme--white, 'helper-text-01')),
@@ -8251,6 +8263,7 @@ $disabled-01: if(
   - [accordion [mixin]](#accordion-mixin)
   - [content-switcher [mixin]](#content-switcher-mixin)
   - [file-uploader [mixin]](#file-uploader-mixin)
+  - [listbox [mixin]](#listbox-mixin)
   - [slider [mixin]](#slider-mixin)
   - [tags [mixin]](#tags-mixin)
   - [text-area [mixin]](#text-area-mixin)
@@ -8615,6 +8628,29 @@ $hover-field: if(
   - [data-table-expandable [mixin]](#data-table-expandable-mixin)
   - [search [mixin]](#search-mixin)
 - **Deprecated**: This may not be available in future releases
+
+### ✅danger [variable]
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$danger: if(
+  global-variable-exists('carbon--theme') and map-has-key(
+      $carbon--theme,
+      'danger'
+    ),
+  map-get($carbon--theme, 'danger'),
+  #da1e28
+);
+```
+
+</details>
+
+- **Group**: [@carbon/themes](#carbonthemes)
+- **Type**: `{undefined}`
+- **Used by**:
+  - [carbon--theme [mixin]](#carbon--theme-mixin)
 
 ### ✅caption-01 [variable]
 
@@ -13704,7 +13740,7 @@ Accordion styles
   }
 
   .#{$prefix}--accordion__item--disabled,
-  .#{$prefix}--accordion__item--disabled ~ * {
+  .#{$prefix}--accordion__item--disabled + .#{$prefix}--accordion__item {
     border-top: 1px solid $disabled-01;
   }
 
@@ -19417,6 +19453,10 @@ List box styles
 
     &:focus {
       @include focus-outline('outline');
+
+      &:hover {
+        @include focus-outline('outline');
+      }
     }
   }
 
@@ -19483,13 +19523,15 @@ List box styles
     }
   }
 
-  .#{$prefix}--list-box--disabled
-    .#{$prefix}--list-box__selection--multi
-    > svg {
-    fill: $disabled-02;
+  .#{$prefix}--list-box--disabled .#{$prefix}--list-box__selection--multi {
+    @include tag-theme($disabled-02, $disabled-01);
 
-    &:hover {
-      background-color: initial;
+    > svg {
+      fill: $disabled-01;
+
+      &:hover {
+        background-color: initial;
+      }
     }
 
     // Windows, Firefox HCM Fix
@@ -19500,7 +19542,6 @@ List box styles
     }
   }
 
-  .#{$prefix}--list-box__selection--multi:focus,
   .#{$prefix}--list-box__selection--multi:hover {
     outline: none;
   }
@@ -19802,6 +19843,7 @@ List box styles
 
 - **Group**: [list-box](#list-box)
 - **Requires**:
+  - [tag-theme [mixin]](#tag-theme-mixin)
   - [carbon--mini-units [function]](#carbon--mini-units-function)
   - [prefix [variable]](#prefix-variable)
   - [list-box-width [variable]](#list-box-width-variable)
@@ -19825,6 +19867,7 @@ List box styles
   - [inverse-01 [variable]](#inverse-01-variable)
   - [inverse-02 [variable]](#inverse-02-variable)
   - [hover-secondary [variable]](#hover-secondary-variable)
+  - [disabled-01 [variable]](#disabled-01-variable)
   - [ui-01 [variable]](#ui-01-variable)
   - [text-02 [variable]](#text-02-variable)
   - [selected-ui [variable]](#selected-ui-variable)
@@ -24258,7 +24301,7 @@ Tabs styles
     min-height: rem(40px);
     color: $text-01;
 
-    .#{$prefix}--tabs--scrollable--container {
+    &.#{$prefix}--tabs--scrollable--container {
       min-height: rem(48px);
     }
 
@@ -24311,12 +24354,12 @@ Tabs styles
       background-image: linear-gradient(to right, transparent, $ui-01);
     }
 
-    .#{$prefix}--tabs--scrollable--container
+    &.#{$prefix}--tabs--scrollable--container
       .#{$prefix}--tabs__overflow-indicator--left {
       background-image: linear-gradient(to left, transparent, $ui-03);
     }
 
-    .#{$prefix}--tabs--scrollable--container
+    &.#{$prefix}--tabs--scrollable--container
       .#{$prefix}--tabs__overflow-indicator--right {
       background-image: linear-gradient(to right, transparent, $ui-03);
     }
@@ -24344,11 +24387,12 @@ Tabs styles
           );
         }
 
-        .#{$prefix}--tabs--scrollable--container
+        &.#{$prefix}--tabs--scrollable--container
           .#{$prefix}--tabs__overflow-indicator--left {
           background-image: linear-gradient(to left, rgba($ui-03, 0), $ui-03);
         }
-        .#{$prefix}--tabs--scrollable--container
+
+        &.#{$prefix}--tabs--scrollable--container
           .#{$prefix}--tabs__overflow-indicator--right {
           background-image: linear-gradient(to right, rgba($ui-03, 0), $ui-03);
         }
@@ -24373,7 +24417,7 @@ Tabs styles
       display: none;
     }
 
-    .#{$prefix}--tabs--scrollable--container
+    &.#{$prefix}--tabs--scrollable--container
       .#{$prefix}--tab--overflow-nav-button {
       width: $carbon--spacing-09;
       margin: 0;
@@ -24401,12 +24445,12 @@ Tabs styles
       margin-left: rem(1px);
     }
 
-    .#{$prefix}--tabs--scrollable--container
+    &.#{$prefix}--tabs--scrollable--container
       .#{$prefix}--tabs--scrollable__nav-item {
       background-color: $ui-03;
     }
 
-    .#{$prefix}--tabs--scrollable--container
+    &.#{$prefix}--tabs--scrollable--container
       .#{$prefix}--tabs--scrollable__nav-item
       + .#{$prefix}--tabs--scrollable__nav-item {
       margin-left: 0;
@@ -24414,10 +24458,10 @@ Tabs styles
       box-shadow: rem(-1px) 0 0 0 $ui-04;
     }
 
-    .#{$prefix}--tabs--scrollable--container
+    &.#{$prefix}--tabs--scrollable--container
       .#{$prefix}--tabs--scrollable__nav-item
       + .#{$prefix}--tabs--scrollable__nav-item.#{$prefix}--tabs--scrollable__nav-item--selected,
-    .#{$prefix}--tabs--scrollable--container
+    &.#{$prefix}--tabs--scrollable--container
       .#{$prefix}--tabs--scrollable__nav-item.#{$prefix}--tabs--scrollable__nav-item--selected
       + .#{$prefix}--tabs--scrollable__nav-item {
       box-shadow: none;
@@ -24433,7 +24477,7 @@ Tabs styles
     //-----------------------------
     // Item Hover
     //-----------------------------
-    .#{$prefix}--tabs--scrollable--container
+    &.#{$prefix}--tabs--scrollable--container
       .#{$prefix}--tabs--scrollable__nav-item:hover {
       background-color: $hover-selected-ui;
     }
@@ -24448,9 +24492,9 @@ Tabs styles
       cursor: not-allowed;
     }
 
-    .#{$prefix}--tabs--scrollable--container
+    &.#{$prefix}--tabs--scrollable--container
       .#{$prefix}--tabs--scrollable__nav-item.#{$prefix}--tabs--scrollable__nav-item--disabled,
-    .#{$prefix}--tabs--scrollable--container
+    &.#{$prefix}--tabs--scrollable--container
       .#{$prefix}--tabs--scrollable__nav-item.#{$prefix}--tabs--scrollable__nav-item--disabled:hover {
       background-color: $disabled-02;
     }
@@ -24474,9 +24518,9 @@ Tabs styles
       border-bottom: 2px solid $interactive-04;
     }
 
-    .#{$prefix}--tabs--scrollable--container
+    &.#{$prefix}--tabs--scrollable--container
       .#{$prefix}--tabs--scrollable__nav-item--selected,
-    .#{$prefix}--tabs--scrollable--container
+    &.#{$prefix}--tabs--scrollable--container
       .#{$prefix}--tabs--scrollable__nav-item--selected:hover {
       background-color: $ui-01;
 
@@ -24486,7 +24530,7 @@ Tabs styles
       }
     }
 
-    .#{$prefix}--tabs--scrollable--container
+    &.#{$prefix}--tabs--scrollable--container
       .#{$prefix}--tabs--scrollable__nav-item--selected
       .#{$prefix}--tabs--scrollable__nav-link {
       // height - vertical padding
@@ -24495,9 +24539,9 @@ Tabs styles
       box-shadow: inset 0 2px 0 0 $interactive-04;
     }
 
-    .#{$prefix}--tabs--scrollable--light.#{$prefix}--tabs--scrollable--container
+    &.#{$prefix}--tabs--scrollable--light.#{$prefix}--tabs--scrollable--container
       .#{$prefix}--tabs--scrollable__nav-item--selected,
-    .#{$prefix}--tabs--scrollable--light.#{$prefix}--tabs--scrollable--container
+    &.#{$prefix}--tabs--scrollable--light.#{$prefix}--tabs--scrollable--container
       .#{$prefix}--tabs--scrollable__nav-item--selected:hover {
       background-color: $ui-background;
     }
@@ -24528,7 +24572,7 @@ Tabs styles
       }
     }
 
-    .#{$prefix}--tabs--scrollable--container
+    &.#{$prefix}--tabs--scrollable--container
       .#{$prefix}--tabs--scrollable__nav-link {
       height: rem(48px);
       padding: $spacing-03 $spacing-05;
@@ -24546,7 +24590,7 @@ Tabs styles
       border-bottom: $tab-underline-color-hover;
     }
 
-    .#{$prefix}--tabs--scrollable--container
+    &.#{$prefix}--tabs--scrollable--container
       .#{$prefix}--tabs--scrollable__nav-item
       .#{$prefix}--tabs--scrollable__nav-link {
       border-bottom: none;
@@ -24598,7 +24642,7 @@ Tabs styles
       border-bottom-color: $ui-03;
     }
 
-    .#{$prefix}--tabs--scrollable--container
+    &.#{$prefix}--tabs--scrollable--container
       .#{$prefix}--tabs--scrollable__nav-item--disabled
       .#{$prefix}--tabs--scrollable__nav-link {
       color: $disabled-03;
@@ -24697,6 +24741,7 @@ Tabs styles
 - **Requires**:
   - [prefix [variable]](#prefix-variable)
 - **Used by**:
+  - [listbox [mixin]](#listbox-mixin)
   - [tags [mixin]](#tags-mixin)
 
 ### ❌tags [mixin]
@@ -24841,7 +24886,6 @@ Tag styles
     padding-right: rem(2px);
     cursor: pointer;
 
-    &:focus,
     &:hover {
       outline: none;
     }

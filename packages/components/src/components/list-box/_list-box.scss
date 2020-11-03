@@ -15,6 +15,7 @@
 @import '../../globals/scss/layout';
 @import '../../globals/scss/vendor/@carbon/elements/scss/import-once/import-once';
 @import '../../globals/scss/css--reset';
+@import '../tag/mixins';
 
 /// @type Number
 /// @access private
@@ -432,6 +433,10 @@ $list-box-menu-width: rem(300px);
 
     &:focus {
       @include focus-outline('outline');
+
+      &:hover {
+        @include focus-outline('outline');
+      }
     }
   }
 
@@ -498,13 +503,15 @@ $list-box-menu-width: rem(300px);
     }
   }
 
-  .#{$prefix}--list-box--disabled
-    .#{$prefix}--list-box__selection--multi
-    > svg {
-    fill: $disabled-02;
+  .#{$prefix}--list-box--disabled .#{$prefix}--list-box__selection--multi {
+    @include tag-theme($disabled-02, $disabled-01);
 
-    &:hover {
-      background-color: initial;
+    > svg {
+      fill: $disabled-01;
+
+      &:hover {
+        background-color: initial;
+      }
     }
 
     // Windows, Firefox HCM Fix
@@ -515,7 +522,6 @@ $list-box-menu-width: rem(300px);
     }
   }
 
-  .#{$prefix}--list-box__selection--multi:focus,
   .#{$prefix}--list-box__selection--multi:hover {
     outline: none;
   }
