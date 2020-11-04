@@ -14276,7 +14276,9 @@ Button styles
       color: $text-04;
     }
 
-    &-tertiary {
+    // TODO: deprecate single dash tertiary
+    &-tertiary,
+    &--tertiary {
       @include button-theme(
         transparent,
         $danger-02,
@@ -14302,7 +14304,9 @@ Button styles
       }
     }
 
-    &-ghost {
+    // TODO: deprecate single dash ghost
+    &-ghost,
+    &--ghost {
       @include button-theme(
         transparent,
         transparent,
