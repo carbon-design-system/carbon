@@ -32,9 +32,6 @@ describe('DangerButton', () => {
     it('Has kind="danger"', () => {
       expect(wrapper.props().kind).toEqual('danger');
     });
-    it('Has small property', () => {
-      expect(wrapper.props().small).toEqual(true);
-    });
     it('Should add extra classes that are passed via className', () => {
       expect(wrapper.hasClass('extra-class')).toEqual(true);
     });

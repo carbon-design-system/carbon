@@ -32,9 +32,6 @@ describe('PrimaryButton', () => {
     it('Has the expected kind set to "primary"', () => {
       expect(wrapper.props().kind).toEqual('primary');
     });
-    it('Has the expected small property set to true', () => {
-      expect(wrapper.props().small).toEqual(true);
-    });
     it('Should add extra classes that are passed via className', () => {
       expect(wrapper.hasClass('extra-class')).toEqual(true);
     });
