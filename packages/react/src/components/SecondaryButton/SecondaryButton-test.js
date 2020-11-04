@@ -16,7 +16,7 @@ const { prefix } = settings;
 describe('SecondaryButton', () => {
   describe('Renders as expected', () => {
     const wrapper = shallow(
-      <SecondaryButton small className="extra-class">
+      <SecondaryButton size="sm" className="extra-class">
         <div className="child">Test</div>
         <div className="child">Test</div>
       </SecondaryButton>

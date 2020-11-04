@@ -16,7 +16,7 @@ const { prefix } = settings;
 describe('DangerButton', () => {
   describe('Renders as expected', () => {
     const wrapper = shallow(
-      <DangerButton small className="extra-class">
+      <DangerButton size="sm" className="extra-class">
         <div className="child">Test</div>
         <div className="child">Test</div>
       </DangerButton>
