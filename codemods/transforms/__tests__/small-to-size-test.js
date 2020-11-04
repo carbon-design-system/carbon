@@ -9,4 +9,4 @@
 
 const { defineTest } = require('jscodeshift/dist/testUtils');
 
-defineTest(__dirname, 'button-size-prop');
+defineTest(__dirname, 'small-to-size-prop');

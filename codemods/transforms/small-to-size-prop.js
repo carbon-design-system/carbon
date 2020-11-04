@@ -39,14 +39,15 @@ function transform(fileInfo, api, options) {
       });
   }
 
-  const buttons = [
+  const components = [
     'Button',
     'DangerButton',
     'PrimaryButton',
     'SecondaryButton',
+    'Search',
   ];
-  for (const button of buttons) {
-    replacePropForComponent(button);
+  for (const component of components) {
+    replacePropForComponent(component);
   }
 
   return root.toSource(printOptions);
