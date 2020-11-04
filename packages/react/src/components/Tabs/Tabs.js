@@ -279,9 +279,23 @@ export default class Tabs extends React.Component {
       if (matches(evt, [keys.Enter, keys.Space])) {
         this.selectTabAt(evt, { index, onSelectionChange });
       }
-      const nextIndex = this.getNextIndex(index, this.getDirection(evt));
+
+      const nextIndex = (() => {
+        if (matches(evt, [keys.ArrowLeft, keys.ArrowRight])) {
+          return this.getNextIndex(index, this.getDirection(evt));
+        }
+        if (match(evt, keys.Home)) {
+          return 0;
+        }
+        if (match(evt, keys.End)) {
+          return this.getEnabledTabs().pop();
+        }
+      })();
       const tab = this.getTabAt(nextIndex);
-      if (matches(evt, [keys.ArrowLeft, keys.ArrowRight])) {
+
+      if (
+        matches(evt, [keys.ArrowLeft, keys.ArrowRight, keys.Home, keys.End])
+      ) {
         evt.preventDefault();
         if (this.props.selectionMode !== 'manual') {
           this.selectTabAt(evt, { index: nextIndex, onSelectionChange });
