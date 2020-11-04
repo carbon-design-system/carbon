@@ -8,8 +8,10 @@
 export const ButtonKinds = [
   'primary',
   'secondary',
+  'tertiary',
   'danger',
+  'danger-tertiary',
+  'danger-ghost',
   'ghost',
   'danger--primary',
-  'tertiary',
 ];
