@@ -619,6 +619,15 @@
       "contributions": [
         "doc"
       ]
+    },
+    {
+      "login": "asfordmatt",
+      "name": "Matt Chapman",
+      "avatar_url": "https://avatars2.githubusercontent.com/u/14233261?v=4",
+      "profile": "https://github.com/asfordmatt",
+      "contributions": [
+        "code"
+      ]
     }
   ],
   "commitConvention": "none"
