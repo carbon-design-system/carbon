@@ -135,7 +135,7 @@ class NumberInput extends Component {
     /**
      * Specify how much the valus should increase/decrease upon clicking on up/down button
      */
-    step: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
+    step: PropTypes.oneOfType([PropTypes.number, PropTypes.oneOf(['any'])]),
     /**
      * Provide custom text for the component for each translation id
      */
