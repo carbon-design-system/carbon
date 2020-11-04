@@ -244,7 +244,7 @@ class NumberInput extends Component {
         ? (min !== undefined && value > min) || min === undefined
         : (max !== undefined && value < max) || max === undefined;
 
-    if (!disabled && conditional && typeof step !== 'string') {
+    if (!disabled && conditional && step !== 'any') {
       value = direction === 'down' ? value - step : value + step;
       value = capMax(max, capMin(min, value));
       evt.persist();
@@ -413,7 +413,7 @@ class NumberInput extends Component {
                   {labelText}
                   {helper}
                   <div className={`${prefix}--number__input-wrapper`}>
-                    {typeof step !== 'string' && (
+                    {step !== 'any' && (
                       <button
                         type="button"
                         className={`${prefix}--number__control-btn down-icon`}
@@ -433,7 +433,7 @@ class NumberInput extends Component {
                       {...props}
                       ref={mergeRefs(ref, this._handleInputRef)}
                     />
-                    {typeof step !== 'string' && (
+                    {step !== 'any' && (
                       <button
                         type="button"
                         className={`${prefix}--number__control-btn up-icon`}
@@ -472,7 +472,7 @@ class NumberInput extends Component {
                       className={`${prefix}--number__invalid ${prefix}--number__invalid--warning`}
                     />
                   )}
-                  {typeof step !== 'string' && (
+                  {step !== 'any' && (
                     <div className={`${prefix}--number__controls`}>
                       <button
                         type="button"
