@@ -6986,6 +6986,7 @@ Map {
     },
   },
   "SideNavLink" => Object {
+    "$$typeof": Symbol(react.forward_ref),
     "defaultProps": Object {
       "element": "a",
       "large": false,
@@ -7021,6 +7022,7 @@ Map {
         "type": "oneOfType",
       },
     },
+    "render": [Function],
   },
   "SideNavLinkText" => Object {
     "propTypes": Object {
