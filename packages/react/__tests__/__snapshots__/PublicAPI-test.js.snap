@@ -5905,7 +5905,6 @@ Map {
   "TimePickerSelect" => Object {
     "defaultProps": Object {
       "disabled": false,
-      "hideLabel": true,
       "iconDescription": "open list of options",
       "inline": true,
     },

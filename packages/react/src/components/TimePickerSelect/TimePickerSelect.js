@@ -71,7 +71,6 @@ export default class TimePickerSelect extends Component {
     disabled: false,
     inline: true,
     iconDescription: 'open list of options',
-    hideLabel: true,
   };
 
   render() {
@@ -81,7 +80,7 @@ export default class TimePickerSelect extends Component {
       children,
       iconDescription,
       className,
-      hideLabel,
+      hideLabel = true,
       labelText,
       inline, // eslint-disable-line
       ...other
