@@ -19,23 +19,35 @@ function transform(fileInfo, api, options) {
 
   const sizeProp = j.jsxAttribute(j.jsxIdentifier('size'), j.literal('sm'));
 
-  root
-    .find(j.JSXOpeningElement, {
-      name: {
-        name: 'Button',
-      },
-    })
-    .forEach((openingElement) => {
-      j(openingElement)
-        .find(j.JSXAttribute, {
-          name: {
-            name: 'small',
-          },
-        })
-        .forEach((path) => {
-          j(path).replaceWith(sizeProp);
-        });
-    });
+  function replacePropForComponent(name) {
+    root
+      .find(j.JSXOpeningElement, {
+        name: {
+          name,
+        },
+      })
+      .forEach((openingElement) => {
+        j(openingElement)
+          .find(j.JSXAttribute, {
+            name: {
+              name: 'small',
+            },
+          })
+          .forEach((path) => {
+            j(path).replaceWith(sizeProp);
+          });
+      });
+  }
+
+  const buttons = [
+    'Button',
+    'DangerButton',
+    'PrimaryButton',
+    'SecondaryButton',
+  ];
+  for (const button of buttons) {
+    replacePropForComponent(button);
+  }
 
   return root.toSource(printOptions);
 }
