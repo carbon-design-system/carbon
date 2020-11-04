@@ -106,6 +106,19 @@ for layout.
 </Accordion>
 ```
 
+### AccordionItem onHeadingClick
+
+You can use the `onHeadingClick` prop to determine the state of the
+`AccordionItem` when it is clicked. it will return
+
+```jsx
+<Accordion>
+  <AccordionItem onHeadingClick={(evt) => console.log(evt.isOpen)}>
+    Panel A
+  </AccordionItem>
+</Accordion>
+```
+
 ### AccordionItem title
 
 You can use the `title` prop to specify the accordion item's heading. The
