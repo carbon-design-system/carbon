@@ -6404,6 +6404,15 @@ Map {
         "type": "string",
       },
       "inline": [Function],
+      "size": Object {
+        "args": Array [
+          Array [
+            "sm",
+            "xl",
+          ],
+        ],
+        "type": "oneOf",
+      },
     },
   },
   "FileUploaderSkeleton" => Object {
