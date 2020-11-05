@@ -11,6 +11,7 @@ import classNames from 'classnames';
 import { Search16, Close16 } from '@carbon/icons-react';
 import { settings } from 'carbon-components';
 import { composeEventHandlers } from '../../tools/events';
+import { keys, match } from '../../internal/keyboard';
 import deprecate from '../../prop-types/deprecate';
 
 const { prefix } = settings;
@@ -56,6 +57,11 @@ export default class Search extends Component {
      * Optional callback called when the search value changes.
      */
     onChange: PropTypes.func,
+
+    /**
+     * Provide a handler that is invoked on the key down event for the input
+     */
+    onKeyDown: PropTypes.func,
 
     /**
      * Provide an optional placeholder text for the Search.
@@ -138,6 +144,12 @@ export default class Search extends Component {
     this.props.onChange(evt);
   };
 
+  handleKeyDown = (evt) => {
+    if (match(evt, keys.Escape)) {
+      this.clearInput(evt);
+    }
+  };
+
   render() {
     const {
       className,
@@ -153,6 +165,7 @@ export default class Search extends Component {
       light,
       disabled,
       onChange,
+      onKeyDown,
       ...other
     } = this.props;
 
@@ -189,6 +202,7 @@ export default class Search extends Component {
           id={id}
           placeholder={placeHolderText}
           onChange={composeEventHandlers([onChange, this.handleChange])}
+          onKeyDown={composeEventHandlers([onKeyDown, this.handleKeyDown])}
           ref={(input) => {
             this.input = input;
           }}
