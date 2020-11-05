@@ -100,8 +100,6 @@ export default class Tab extends React.Component {
   static defaultProps = {
     role: 'presentation',
     label: 'provide a label',
-    tabIndex: 0,
-    href: '#',
     selected: false,
     renderContent: TabContent,
     onClick: () => {},
