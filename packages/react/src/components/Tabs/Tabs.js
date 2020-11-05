@@ -12,6 +12,7 @@ import { settings } from 'carbon-components';
 import { ChevronLeft16, ChevronRight16 } from '@carbon/icons-react';
 import debounce from 'lodash.debounce';
 import { keys, match, matches } from '../../internal/keyboard';
+import TabContent from '../TabContent';
 
 const { prefix } = settings;
 
@@ -416,18 +417,18 @@ export default class Tabs extends React.Component {
         id: tabId,
         children,
         selected,
-        renderContent: TabContent,
+        renderContent: Content = TabContent,
       } = tab.props;
 
       return (
-        <TabContent
+        <Content
           id={tabId && `${tabId}__panel`}
           className={tabContentClassName}
           hidden={!selected}
           selected={selected}
           aria-labelledby={tabId}>
           {children}
-        </TabContent>
+        </Content>
       );
     });
 

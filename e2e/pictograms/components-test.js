@@ -21,6 +21,14 @@ describe('@carbon/pictograms', () => {
   let metadata;
 
   beforeAll(async () => {
+    const mock = jest.spyOn(console, 'error').mockImplementation((error) => {
+      if (
+        error !== 'Error: infinite loop while processing mergePaths plugin.'
+      ) {
+        throw error;
+      }
+    });
+
     metadata = await Metadata.load({
       input: {
         svg: path.join(PICTOGRAMS_PACKAGE_DIR, 'src/svg'),
@@ -33,6 +41,8 @@ describe('@carbon/pictograms', () => {
         [Metadata.extensions.output, { target: 'pictograms' }],
       ],
     });
+
+    mock.mockRestore();
   });
 
   it('should export each SVG asset', async () => {
