@@ -4,12 +4,11 @@
 > [Carbon Components](https://github.com/carbon-design-system/carbon/tree/master/packages/components)
 > built with [React](https://reactjs.org/).
 
-**New to React or Carbon?**
+If you're new to React.js or Carbon, check out our
+[guide](https://medium.com/carbondesign/up-running-with-carbon-react-in-less-than-5-minutes-25d43cca059e)
+to help get you up and running.
 
-Read this short guide to get started:
-[https://medium.com/carbondesign/up-running-with-carbon-react-in-less-than-5-minutes-25d43cca059e](https://medium.com/carbondesign/up-running-with-carbon-react-in-less-than-5-minutes-25d43cca059e)
-
-## Getting Started
+## Getting started
 
 To install `carbon-components-react` in your project, you will need to run the
 following command using [npm](https://www.npmjs.com/):
