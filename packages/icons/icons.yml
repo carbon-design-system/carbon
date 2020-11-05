@@ -218,22 +218,57 @@
     - 32
 - name: accumulation--ice
   friendly_name: accumulation--ice
-  aliases: []
+  aliases: 
+    - gauge
+    - measurement
+    - quantity
+    - accumulation
+    - ice
+    - weather
+    - record
+    - measure
+    - precipitation
   sizes:
     - 32
 - name: accumulation--precipitation
   friendly_name: accumulation--precipitation
-  aliases: []
+  aliases: 
+    - gauge
+    - measurement
+    - quantity
+    - accumulation
+    - precipitation
+    - weather
+    - record
+    - measure
   sizes:
     - 32
 - name: accumulation--rain
   friendly_name: accumulation--rain
-  aliases: []
+  aliases: 
+    - gauge
+    - measurement
+    - quantity
+    - accumulation
+    - precipitation
+    - weather
+    - record
+    - measure
+    - rain
   sizes:
     - 32
 - name: accumulation--snow
   friendly_name: accumulation--snow
-  aliases: []
+  aliases: 
+    - gauge
+    - measurement
+    - quantity
+    - accumulation
+    - precipitation
+    - weather
+    - record
+    - measure
+    - snow
   sizes:
     - 32
 - name: activity
@@ -304,7 +339,15 @@
     - 32
 - name: agriculture-analytics
   friendly_name: agriculture-analytics
-  aliases: []
+  aliases: 
+    - agriculture
+    - analytics
+    - farming
+    - food
+    - production
+    - analysis
+    - charts
+    - record
   sizes:
     - 32
 - name: ai-results
@@ -422,37 +465,81 @@
     - 32
 - name: airline--digital-gate
   friendly_name: airline--digital-gate
-  aliases: []
+  aliases: 
+    - airline
+    - gate
+    - boarding 
+    - customer service
+    - representative
+    - agent
+    - attendant
   sizes:
     - 32
 - name: airline--manage-gates
   friendly_name: airline--manage-gates
-  aliases: []
+  aliases:
+    - airline
+    - gate
+    - manage 
+    - customer service
+    - representative
+    - agent
+    - boarding
+    - attendant
   sizes:
     - 32
 - name: airline--passenger-care
   friendly_name: airline--passenger-care
-  aliases: []
+  aliases: 
+    - airline
+    - customer service
+    - representative
+    - agent
+    - flight
+    - attendant
   sizes:
     - 32
 - name: airline--rapid-board
   friendly_name: airline--rapid-board
-  aliases: []
+  aliases: 
+    - airline
+    - gate
+    - manage 
+    - customer service
+    - representative
+    - agent
+    - board
+    - attendant
   sizes:
     - 32
 - name: airport--01
   friendly_name: airport--01
-  aliases: []
+  aliases: 
+  - airport
+  - transportation
+  - airline
+  - plane
   sizes:
     - 32
 - name: airport--02
   friendly_name: airport--02
-  aliases: []
+  aliases: 
+  - airport
+  - transportation
+  - airline
+  - plane
   sizes:
     - 32
 - name: airport-location
   friendly_name: airport-location
-  aliases: []
+  aliases: 
+  - airport
+  - transportation
+  - airline
+  - plane
+  - navigation
+  - map
+  - wayfinding
   sizes:
     - 32
 - name: alarm
@@ -507,8 +594,8 @@
     - align horizontal center
     - formatting
     - horizontal formatting
-    - horizontal formatting
     - center formatting
+    - horizontal center align
 - name: align--horizontal-left
   friendly_name: Align horizontal left
   sizes:
@@ -521,7 +608,7 @@
     - left alignment
     - formatting
     - left formatting
-    - horizontal left
+    - horizontal left align
 - name: align--horizontal-right
   friendly_name: Align horizontal right
   sizes:
@@ -534,7 +621,7 @@
     - right alignment
     - formatting
     - right formatting
-    - horizontal right
+    - horizontal right align
 - name: align--vertical-bottom
   friendly_name: Align vertical bottom
   sizes:
@@ -547,7 +634,7 @@
     - vertical alignment
     - formatting
     - bottom formatting
-    - vertical bottom
+    - vertical bottom align
 - name: align--vertical-center
   friendly_name: Align vertical center
   sizes:
@@ -560,7 +647,7 @@
     - vertical alignment
     - formatting
     - center formatting
-    - vertical center
+    - vertical center align
 - name: align--vertical-top
   friendly_name: Align vertical top
   sizes:
@@ -572,50 +659,113 @@
     - align vertical top
     - formatting
     - top formatting
-    - vertical top
+    - vertical top align
 - name: align-box--bottom-center
-  friendly_name: align-box--bottom-center
-  aliases: []
+  friendly_name: Align box bottom center
+  aliases: 
+    - align
+    - alignment
+    - align bottom
+    - align bottom center
+    - formatting
+    - bottom formatting
+    - center align
   sizes:
     - 32
 - name: align-box--bottom-left
-  friendly_name: align-box--bottom-left
-  aliases: []
+  friendly_name: Align box bottom left
+  aliases: 
+    - align
+    - alignment
+    - align bottom
+    - align bottom left
+    - formatting
+    - bottom formatting
+    - left align
   sizes:
     - 32
 - name: align-box--bottom-right
-  friendly_name: align-box--bottom-right
-  aliases: []
+  friendly_name: Align box bottom right
+  aliases: 
+    - align
+    - alignment
+    - align bottom
+    - align bottom right
+    - formatting
+    - bottom formatting
+    - right align
   sizes:
     - 32
 - name: align-box--middle-center
-  friendly_name: align-box--middle-center
-  aliases: []
+  friendly_name: Align box middle center
+  aliases: 
+    - align
+    - alignment
+    - align middle
+    - align middle center
+    - formatting
+    - center formatting
+    - center align
   sizes:
     - 32
 - name: align-box--middle-left
-  friendly_name: align-box--middle-left
-  aliases: []
+  friendly_name: Align box middle left
+  aliases: 
+    - align
+    - alignment
+    - align middle
+    - align middle left
+    - formatting
+    - middle formatting
+    - left align
   sizes:
     - 32
 - name: align-box--middle-right
-  friendly_name: align-box--middle-right
-  aliases: []
+  friendly_name: Align box middle right
+  aliases:  
+    - align
+    - alignment
+    - align middle
+    - align middle right
+    - formatting
+    - middle formatting
+    - right align
   sizes:
     - 32
 - name: align-box--top-center
-  friendly_name: align-box--top-center
-  aliases: []
+  friendly_name: Align box top center
+  aliases: 
+    - align
+    - alignment
+    - align top
+    - align top center
+    - formatting
+    - top formatting
+    - center align
   sizes:
     - 32
 - name: align-box--top-left
-  friendly_name: align-box--top-left
-  aliases: []
+  friendly_name: Align box top left
+  aliases: 
+    - align
+    - alignment
+    - align top
+    - align top left
+    - formatting
+    - top formatting
+    - left align
   sizes:
     - 32
 - name: align-box--top-right
-  friendly_name: align-box--top-right
-  aliases: []
+  friendly_name: Align box top right
+  aliases: 
+    - align
+    - alignment
+    - align top
+    - align top right
+    - formatting
+    - top formatting
+    - right align
   sizes:
     - 32
 - name: analytics
@@ -797,12 +947,23 @@
     - 32
 - name: area
   friendly_name: area
-  aliases: []
+  aliases: 
+    - area
+    - boundary
+    - field
+    - range
+    - space
   sizes:
     - 32
 - name: area--custom
   friendly_name: area--custom
-  aliases: []
+  aliases: 
+    - area
+    - custom
+    - boundary
+    - field
+    - range
+    - space
   sizes:
     - 32
 - name: arrival
@@ -1117,7 +1278,12 @@
     - 32
 - name: baggage-claim
   friendly_name: baggage-claim
-  aliases: []
+  aliases: 
+  - baggage
+  - claim
+  - suitcase
+  - travel
+  - airport
   sizes:
     - 32
 - name: bar
@@ -1159,7 +1325,10 @@
     - 32
 - name: bat
   friendly_name: bat
-  aliases: []
+  aliases: 
+  - bat
+  - mammal
+  - animal
   sizes:
     - 32
 - name: battery--charging
@@ -1252,7 +1421,13 @@
     - 32
 - name: bee-bat
   friendly_name: bee-bat
-  aliases: []
+  aliases: 
+    - ibm
+    - fly
+    - bee
+    - bat
+    - IBM
+    - IBM bee bat
   sizes:
     - 32
 - name: bicycle
@@ -1337,7 +1512,10 @@
     - wireless communication
 - name: book
   friendly_name: book
-  aliases: []
+  aliases: 
+    - book
+    - read
+    - document
   sizes:
     - 32
 - name: bookmark
@@ -1358,37 +1536,59 @@
     - 32
 - name: boolean
   friendly_name: boolean
-  aliases: []
+  aliases: 
+    - boolean
+    - search
+    - parameter
+    - data
   sizes:
     - 32
 - name: border--bottom
-  friendly_name: border--bottom
-  aliases: []
+  friendly_name: Border bottom
+  aliases: 
+    - border
+    - bottom
+    - formatting
   sizes:
     - 32
 - name: border--full
-  friendly_name: border--full
-  aliases: []
+  friendly_name: Border full
+  aliases: 
+    - border
+    - full
+    - formatting
   sizes:
     - 32
 - name: border--left
-  friendly_name: border--left
-  aliases: []
+  friendly_name: Border left
+  aliases: 
+    - border
+    - left
+    - formatting
   sizes:
     - 32
 - name: border--none
-  friendly_name: border--none
-  aliases: []
+  friendly_name: Border none
+  aliases: 
+    - border
+    - none
+    - formatting
   sizes:
     - 32
 - name: border--right
-  friendly_name: border--right
-  aliases: []
+  friendly_name: Border right
+  aliases: 
+    - border
+    - right
+    - formatting
   sizes:
     - 32
 - name: border--top
-  friendly_name: border--top
-  aliases: []
+  friendly_name: Border top
+  aliases: 
+    - border
+    - top
+    - formatting
   sizes:
     - 32
 - name: bot
@@ -1442,8 +1642,14 @@
   sizes:
     - 32
 - name: bring-to-front
-  friendly_name: bring-to-front
-  aliases: []
+  friendly_name: Bring to front
+  aliases: 
+    - bring
+    - front
+    - formatting
+    - group
+    - layer
+    - order
   sizes:
     - 32
 - name: brush-freehand
@@ -1531,7 +1737,11 @@
     - 32
 - name: buoy
   friendly_name: buoy
-  aliases: []
+  aliases: 
+    - weather
+    - buoy
+    - forecast
+    - marker
   sizes:
     - 32
 - name: bus
@@ -1545,18 +1755,41 @@
   sizes:
     - 32
 - name: cabin-care
-  friendly_name: cabin-care
-  aliases: []
+  friendly_name: Cabin care
+  aliases: 
+  - cabin
+  - care
+  - transportation
+  - airline
+  - flight
+  - customer service
+  - attendant
   sizes:
     - 32
 - name: cabin-care--alert
-  friendly_name: cabin-care--alert
-  aliases: []
+  friendly_name: Cabin care alert
+  aliases: 
+  - cabin
+  - care
+  - transportation
+  - airline
+  - flight
+  - customer service
+  - alert
+  - call button
+  - attendant
   sizes:
     - 32
 - name: cabin-care--alt
-  friendly_name: cabin-care--alt
-  aliases: []
+  friendly_name: Cabin care alt
+  aliases: 
+  - cabin
+  - care
+  - transportation
+  - airline
+  - flight
+  - customer service
+  - attendant
   sizes:
     - 32
 - name: CAD
@@ -1662,8 +1895,21 @@
   sizes:
     - 32
 - name: calendar--tools
-  friendly_name: calendar--tools
-  aliases: []
+  friendly_name: Calendar tools
+  aliases: 
+    - date
+    - schedule
+    - day
+    - time
+    - month
+    - year
+    - scheduler
+    - agenda
+    - docket
+    - timetable
+    - calendar settings
+    - tools
+    - maintenance
   sizes:
     - 32
 - name: calibrate
@@ -2030,8 +2276,10 @@
   sizes:
     - 32
 - name: center-to-fit
-  friendly_name: center-to-fit
-  aliases: []
+  friendly_name: Center to fit
+  aliases: 
+    - center
+    - fit
   sizes:
     - 32
 - name: certificate
@@ -10961,8 +11209,14 @@
     - letter
     - email
 - name: send-to-back
-  friendly_name: send-to-back
-  aliases: []
+  friendly_name: Send to back
+  aliases: 
+    - send
+    - back
+    - formatting
+    - group
+    - layer
+    - order
   sizes:
     - 32
 - name: service-desk
