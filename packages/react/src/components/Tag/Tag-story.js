@@ -6,11 +6,11 @@
  */
 
 import React from 'react';
-import { storiesOf } from '@storybook/react';
 import { withKnobs, select, text, boolean } from '@storybook/addon-knobs';
 import Tag, { types as typesList } from '../Tag';
 import TagSkeleton from '../Tag/Tag.Skeleton';
 import { action } from '@storybook/addon-actions/dist/preview';
+import mdx from './Tag.mdx';
 
 const props = {
   regular: () => ({
@@ -38,54 +38,65 @@ const props = {
   },
 };
 
-storiesOf('Tag', module)
-  .addDecorator(withKnobs)
-  .add(
-    'Default',
-    () => (
-      <Tag className="some-class" {...props.regular()}>
-        {text('Content (children)', 'This is a tag')}
-      </Tag>
-    ),
-    {
-      info: {
-        text: `
-            Tags are used for items that need to be labeled, categorized, or organized using keywords that describe them.
-            The example below shows how the Tag component can be used. Each type has a default message describing the type,
-            but a custom message can also be applied.
-          `,
-      },
-    }
-  )
-  .add(
-    'Filter',
-    () => (
-      <Tag className="some-class" {...props.filter()} filter>
-        {text('Content (children)', 'This is a tag')}
-      </Tag>
-    ),
-    {
-      info: {
-        text: `
-            Tags are used for items that need to be labeled, categorized, or organized using keywords that describe them.
-            The example below shows how the Tag component can be used. Each type has a default message describing the type,
-            but a custom message can also be applied.
-          `,
-      },
-    }
-  )
-  .add(
-    'skeleton',
-    () => (
-      <div>
-        <TagSkeleton />
-      </div>
-    ),
-    {
-      info: {
-        text: `
-          Placeholder skeleton state to use when content is loading.
-          `,
-      },
-    }
-  );
+export default {
+  title: 'Tag',
+  decorators: [withKnobs],
+
+  parameters: {
+    component: Tag,
+    docs: {
+      page: mdx,
+    },
+    subcomponents: {
+      TagSkeleton,
+    },
+  },
+};
+
+export const _Default = () => (
+  <Tag className="some-class" {...props.regular()}>
+    {text('Content (children)', 'This is a tag')}
+  </Tag>
+);
+
+_Default.parameters = {
+  info: {
+    text: `
+        Tags are used for items that need to be labeled, categorized, or organized using keywords that describe them.
+        The example below shows how the Tag component can be used. Each type has a default message describing the type,
+        but a custom message can also be applied.
+      `,
+  },
+};
+
+export const Filter = () => (
+  <Tag className="some-class" {...props.filter()} filter>
+    {text('Content (children)', 'This is a tag')}
+  </Tag>
+);
+
+Filter.parameters = {
+  info: {
+    text: `
+        Tags are used for items that need to be labeled, categorized, or organized using keywords that describe them.
+        The example below shows how the Tag component can be used. Each type has a default message describing the type,
+        but a custom message can also be applied.
+      `,
+  },
+};
+
+export const Skeleton = () => (
+  <div>
+    <TagSkeleton />
+  </div>
+);
+
+Skeleton.storyName = 'skeleton';
+
+Skeleton.parameters = {
+  info: {
+    text: `
+      Placeholder skeleton state to use when content is loading.
+      `,
+  },
+};

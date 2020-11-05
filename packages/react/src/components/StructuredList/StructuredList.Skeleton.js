@@ -31,7 +31,7 @@ const StructuredListSkeleton = ({ rowCount, border, className, ...rest }) => {
   }
 
   return (
-    <section className={StructuredListSkeletonClasses} {...rest}>
+    <div className={StructuredListSkeletonClasses} {...rest}>
       <div className={`${prefix}--structured-list-thead`}>
         <div
           className={`${prefix}--structured-list-row ${prefix}--structured-list-row--header-row`}>
@@ -47,16 +47,11 @@ const StructuredListSkeleton = ({ rowCount, border, className, ...rest }) => {
         </div>
       </div>
       <div className={`${prefix}--structured-list-tbody`}>{rows}</div>
-    </section>
+    </div>
   );
 };
 
 StructuredListSkeleton.propTypes = {
-  /**
-   * number of table rows
-   */
-  rowCount: PropTypes.number,
-
   /**
    * Specify whether a border should be added to your StructuredListSkeleton
    */
@@ -66,6 +61,11 @@ StructuredListSkeleton.propTypes = {
    * Specify an optional className to add.
    */
   className: PropTypes.string,
+
+  /**
+   * number of table rows
+   */
+  rowCount: PropTypes.number,
 };
 
 StructuredListSkeleton.defaultProps = {

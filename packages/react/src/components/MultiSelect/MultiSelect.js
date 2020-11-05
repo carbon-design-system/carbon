@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { WarningFilled16 } from '@carbon/icons-react';
+import { WarningFilled16, WarningAltFilled16 } from '@carbon/icons-react';
 import { settings } from 'carbon-components';
 import cx from 'classnames';
 import Downshift, { useSelect } from 'downshift';
@@ -18,6 +18,7 @@ import { defaultItemToString } from './tools/itemToString';
 import { defaultSortItems, defaultCompareItems } from './tools/sorting';
 import { useSelection } from '../../internal/Selection';
 import setupGetInstanceId from '../../tools/setupGetInstanceId';
+import { mapDownshiftProps } from '../../tools/createPropAdapter';
 
 const { prefix } = settings;
 const noop = () => {};
@@ -33,31 +34,36 @@ const {
   ToggleButtonClick,
 } = useSelect.stateChangeTypes;
 
-function MultiSelect({
-  className: containerClassName,
-  id,
-  items,
-  itemToString,
-  titleText,
-  helperText,
-  label,
-  type,
-  size,
-  disabled,
-  initialSelectedItems,
-  sortItems,
-  compareItems,
-  light,
-  invalid,
-  invalidText,
-  useTitleInItem,
-  translateWithId,
-  downshiftProps,
-  open,
-  selectionFeedback,
-  onChange,
-  direction,
-}) {
+const MultiSelect = React.forwardRef(function MultiSelect(
+  {
+    className: containerClassName,
+    id,
+    items,
+    itemToString,
+    titleText,
+    helperText,
+    label,
+    type,
+    size,
+    disabled,
+    initialSelectedItems,
+    sortItems,
+    compareItems,
+    light,
+    invalid,
+    invalidText,
+    warn,
+    warnText,
+    useTitleInItem,
+    translateWithId,
+    downshiftProps,
+    open,
+    selectionFeedback,
+    onChange,
+    direction,
+  },
+  ref
+) {
   const { current: multiSelectInstanceId } = useRef(getInstanceId());
   const [highlightedIndex, setHighlightedIndex] = useState(null);
   const [isOpen, setIsOpen] = useState(open);
@@ -79,15 +85,17 @@ function MultiSelect({
     getMenuProps,
     getItemProps,
     selectedItem: selectedItems,
-  } = useSelect({
-    ...downshiftProps,
-    highlightedIndex,
-    isOpen,
-    itemToString,
-    onStateChange,
-    selectedItem: controlledSelectedItems,
-    items,
-  });
+  } = useSelect(
+    mapDownshiftProps({
+      ...downshiftProps,
+      highlightedIndex,
+      isOpen,
+      itemToString,
+      onStateChange,
+      selectedItem: controlledSelectedItems,
+      items,
+    })
+  );
 
   /**
    * programmatically control this `open` prop
@@ -98,6 +106,8 @@ function MultiSelect({
   }
 
   const inline = type === 'inline';
+  const showWarning = !invalid && warn;
+
   const wrapperClasses = cx(
     `${prefix}--multi-select__wrapper`,
     `${prefix}--list-box__wrapper`,
@@ -114,7 +124,6 @@ function MultiSelect({
   const helperId = !helperText
     ? undefined
     : `multiselect-helper-text-${multiSelectInstanceId}`;
-  const labelId = `multiselect-label-${multiSelectInstanceId}`;
   const fieldLabelId = `multiselect-field-label-${multiSelectInstanceId}`;
   const helperClasses = cx(`${prefix}--form__helper-text`, {
     [`${prefix}--form__helper-text--disabled`]: disabled,
@@ -122,6 +131,7 @@ function MultiSelect({
 
   const className = cx(`${prefix}--multi-select`, containerClassName, {
     [`${prefix}--multi-select--invalid`]: invalid,
+    [`${prefix}--multi-select--warning`]: showWarning,
     [`${prefix}--multi-select--inline`]: inline,
     [`${prefix}--multi-select--selected`]:
       selectedItems && selectedItems.length > 0,
@@ -172,12 +182,11 @@ function MultiSelect({
   return (
     <div className={wrapperClasses}>
       {titleText && (
-        <label id={labelId} className={titleClasses} {...getLabelProps()}>
+        <label className={titleClasses} {...getLabelProps()}>
           {titleText}
         </label>
       )}
       <ListBox
-        id={id}
         type={type}
         size={size}
         className={className}
@@ -185,12 +194,21 @@ function MultiSelect({
         light={light}
         invalid={invalid}
         invalidText={invalidText}
-        isOpen={isOpen}>
+        warn={warn}
+        warnText={warnText}
+        isOpen={isOpen}
+        id={id}>
         {invalid && (
           <WarningFilled16 className={`${prefix}--list-box__invalid-icon`} />
         )}
+        {showWarning && (
+          <WarningAltFilled16
+            className={`${prefix}--list-box__invalid-icon ${prefix}--list-box__invalid-icon--warning`}
+          />
+        )}
         <button
-          id={id}
+          type="button"
+          ref={ref}
           className={`${prefix}--list-box__field`}
           disabled={disabled}
           aria-disabled={disabled}
@@ -220,7 +238,6 @@ function MultiSelect({
                   .length > 0;
               return (
                 <ListBox.MenuItem
-                  aria-selected={isChecked}
                   key={itemProps.id}
                   isActive={isChecked}
                   isHighlighted={highlightedIndex === index}
@@ -240,17 +257,23 @@ function MultiSelect({
             })}
         </ListBox.Menu>
       </ListBox>
-      {!inline && !invalid && helperText && (
+      {!inline && !invalid && !warn && helperText && (
         <div id={helperId} className={helperClasses}>
           {helperText}
         </div>
       )}
     </div>
   );
-}
+});
 
+MultiSelect.displayName = 'MultiSelect';
 MultiSelect.propTypes = {
   ...sortingPropTypes,
+
+  /**
+   * Specify the direction of the multiselect dropdown. Can be either top or bottom.
+   */
+  direction: PropTypes.oneOf(['top', 'bottom']),
 
   /**
    * Disable the control
@@ -258,21 +281,30 @@ MultiSelect.propTypes = {
   disabled: PropTypes.bool,
 
   /**
+   * Additional props passed to Downshift
+   */
+  downshiftProps: PropTypes.shape(Downshift.propTypes),
+
+  /**
    * Specify a custom `id`
    */
   id: PropTypes.string.isRequired,
-
-  /**
-   * We try to stay as generic as possible here to allow individuals to pass
-   * in a collection of whatever kind of data structure they prefer
-   */
-  items: PropTypes.array.isRequired,
 
   /**
    * Allow users to pass in arbitrary items from their collection that are
    * pre-selected
    */
   initialSelectedItems: PropTypes.array,
+
+  /**
+   * Is the current selection invalid?
+   */
+  invalid: PropTypes.bool,
+
+  /**
+   * If invalid, what is the error?
+   */
+  invalidText: PropTypes.string,
 
   /**
    * Helper function passed to downshift that allows the library to render a
@@ -282,10 +314,21 @@ MultiSelect.propTypes = {
   itemToString: PropTypes.func,
 
   /**
+   * We try to stay as generic as possible here to allow individuals to pass
+   * in a collection of whatever kind of data structure they prefer
+   */
+  items: PropTypes.array.isRequired,
+
+  /**
    * Generic `label` that will be used as the textual representation of what
    * this field is for
    */
   label: PropTypes.node.isRequired,
+
+  /**
+   * `true` to use the light version.
+   */
+  light: PropTypes.bool,
 
   /**
    * Specify the locale of the control. Used for the default `compareItems`
@@ -300,44 +343,9 @@ MultiSelect.propTypes = {
   onChange: PropTypes.func,
 
   /**
-   * Specify 'inline' to create an inline multi-select.
-   */
-  type: PropTypes.oneOf(['default', 'inline']),
-
-  /**
-   * Specify the size of the ListBox. Currently supports either `sm`, `lg` or `xl` as an option.
-   */
-  size: ListBoxPropTypes.ListBoxSize,
-
-  /**
-   * Specify title to show title on hover
-   */
-  useTitleInItem: PropTypes.bool,
-
-  /**
-   * `true` to use the light version.
-   */
-  light: PropTypes.bool,
-
-  /**
-   * Is the current selection invalid?
-   */
-  invalid: PropTypes.bool,
-
-  /**
-   * If invalid, what is the error?
-   */
-  invalidText: PropTypes.string,
-
-  /**
    * Initialize the component with an open(`true`)/closed(`false`) menu.
    */
   open: PropTypes.bool,
-
-  /**
-   * Callback function for translating ListBoxMenuIcon SVG title
-   */
-  translateWithId: PropTypes.func,
 
   /**
    * Specify feedback (mode) of the selection.
@@ -348,14 +356,40 @@ MultiSelect.propTypes = {
   selectionFeedback: PropTypes.oneOf(['top', 'fixed', 'top-after-reopen']),
 
   /**
-   * Additional props passed to Downshift
+   * Specify the size of the ListBox. Currently supports either `sm`, `lg` or `xl` as an option.
    */
-  downshiftProps: PropTypes.shape(Downshift.propTypes),
+  size: ListBoxPropTypes.ListBoxSize,
 
   /**
-   * Specify the direction of the multiselect dropdown. Can be either top or bottom.
+   * Provide text to be used in a `<label>` element that is tied to the
+   * multiselect via ARIA attributes.
    */
-  direction: PropTypes.oneOf(['top', 'bottom']),
+  titleText: PropTypes.string,
+
+  /**
+   * Callback function for translating ListBoxMenuIcon SVG title
+   */
+  translateWithId: PropTypes.func,
+
+  /**
+   * Specify 'inline' to create an inline multi-select.
+   */
+  type: PropTypes.oneOf(['default', 'inline']),
+
+  /**
+   * Specify title to show title on hover
+   */
+  useTitleInItem: PropTypes.bool,
+
+  /**
+   * Specify whether the control is currently in warning state
+   */
+  warn: PropTypes.bool,
+
+  /**
+   * Provide the text that is displayed when the control is in warning state
+   */
+  warnText: PropTypes.string,
 };
 
 MultiSelect.defaultProps = {

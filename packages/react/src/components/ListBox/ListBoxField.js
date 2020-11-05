@@ -11,41 +11,47 @@ import PropTypes from 'prop-types';
 
 const { prefix } = settings;
 
-export const translationIds = {}; // No longer used, left export for backward-compatibility
+// No longer used, left export for backward-compatibility
+export const translationIds = {};
 
 /**
  * `ListBoxField` is responsible for creating the containing node for valid
  * elements inside of a field. It also provides a11y-related attributes like
  * `role` to make sure a user can focus the given field.
  */
-const ListBoxField = ({ children, id, disabled, tabIndex, ...rest }) => (
-  <div
-    role={rest['aria-expanded'] ? 'combobox' : rest.role || 'combobox'}
-    aria-owns={(rest['aria-expanded'] && `${id}__menu`) || null}
-    aria-controls={(rest['aria-expanded'] && `${id}__menu`) || null}
-    aria-haspopup="listbox"
-    className={`${prefix}--list-box__field`}
-    tabIndex={(!disabled && tabIndex) || -1}
-    {...rest}>
-    {children}
-  </div>
-);
+function ListBoxField({ children, disabled, tabIndex, ...rest }) {
+  return (
+    <div
+      className={`${prefix}--list-box__field`}
+      tabIndex={(!disabled && tabIndex) || -1}
+      {...rest}>
+      {children}
+    </div>
+  );
+}
 
 ListBoxField.propTypes = {
+  /**
+   * Typically set by `getToggleButtonProps`, this should specify whether the
+   * field has a popup.
+   */
+  'aria-haspopup': PropTypes.oneOfType([PropTypes.string, PropTypes.bool]),
+
   /**
    * Provide the contents of your ListBoxField
    */
   children: PropTypes.node,
 
   /**
-   * Specify a custom `id`
-   */
-  id: PropTypes.string.isRequired,
-
-  /**
    * Specify if the parent <ListBox> is disabled
    */
   disabled: PropTypes.bool,
+
+  /**
+   * The role for the component, should be set by `getToggleButtonProps` coming
+   * from Downshift
+   */
+  role: PropTypes.string,
 
   /**
    * Optional prop to specify the tabIndex of the <ListBox> trigger button

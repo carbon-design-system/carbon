@@ -10,6 +10,7 @@ import React from 'react';
 import isEqual from 'lodash.isequal';
 import getDerivedStateFromProps from './state/getDerivedStateFromProps';
 import { getNextSortState } from './state/sorting';
+import { getCellId } from './tools/cells';
 import denormalize from './tools/denormalize';
 import { composeEventHandlers } from '../../tools/events';
 import { defaultFilterRows } from './tools/filter';
@@ -55,19 +56,10 @@ const translateWithId = (id) => defaultTranslations[id];
 export default class DataTable extends React.Component {
   static propTypes = {
     /**
-     * The `rows` prop is where you provide us with a list of all the rows that
-     * you want to render in the table. The only hard requirement is that this
-     * is an array of objects, and that each object has a unique `id` field
-     * available on it.
+     * Optional hook to manually control filtering of the rows from the
+     * TableToolbarSearch component
      */
-    rows: PropTypes.arrayOf(
-      PropTypes.shape({
-        id: PropTypes.string.isRequired,
-        disabled: PropTypes.bool,
-        isSelected: PropTypes.bool,
-        isExpanded: PropTypes.bool,
-      })
-    ).isRequired,
+    filterRows: PropTypes.func,
 
     /**
      * The `headers` prop represents the order in which the headers should
@@ -83,20 +75,60 @@ export default class DataTable extends React.Component {
     ).isRequired,
 
     /**
-     * Optional hook to manually control sorting of the rows.
+     * Specify whether the table should be able to be sorted by its headers
      */
-    sortRow: PropTypes.func,
-
-    /**
-     * Optional hook to manually control filtering of the rows from the
-     * TableToolbarSearch component
-     */
-    filterRows: PropTypes.func,
+    isSortable: PropTypes.bool,
 
     /**
      * Provide a string for the current locale
      */
     locale: PropTypes.string,
+
+    /**
+     * Specify whether the overflow menu (if it exists) should be shown always, or only on hover
+     */
+    overflowMenuOnHover: PropTypes.bool,
+
+    /**
+     * Specify whether the control should be a radio button or inline checkbox
+     */
+    radio: PropTypes.bool,
+
+    /**
+     * The `rows` prop is where you provide us with a list of all the rows that
+     * you want to render in the table. The only hard requirement is that this
+     * is an array of objects, and that each object has a unique `id` field
+     * available on it.
+     */
+    rows: PropTypes.arrayOf(
+      PropTypes.shape({
+        id: PropTypes.string.isRequired,
+        disabled: PropTypes.bool,
+        isSelected: PropTypes.bool,
+        isExpanded: PropTypes.bool,
+      })
+    ).isRequired,
+
+    /**
+     * `false` If true, will remove the table border
+     */
+    shouldShowBorder: PropTypes.bool,
+
+    /**
+     * `normal` Change the row height of table
+     */
+    size: PropTypes.oneOf(['compact', 'short', 'normal', 'tall']),
+
+    /**
+     * Optional hook to manually control sorting of the rows.
+     */
+    sortRow: PropTypes.func,
+
+    /**
+     * Specify whether the header should be sticky.
+     * Still experimental: may not work with every combination of table props
+     */
+    stickyHeader: PropTypes.bool,
 
     /**
      * Optional method that takes in a message id and returns an
@@ -106,30 +138,14 @@ export default class DataTable extends React.Component {
     translateWithId: PropTypes.func,
 
     /**
-     * `normal` Change the row height of table
+     * `false` If true, will use a width of 'auto' instead of 100%
      */
-    size: PropTypes.oneOf(['compact', 'short', 'normal', 'tall']),
+    useStaticWidth: PropTypes.bool,
 
     /**
-     * Specify whether the control should be a radio button or inline checkbox
+     * `true` to add useZebraStyles striping.
      */
-    radio: PropTypes.bool,
-
-    /**
-     * Specify whether the header should be sticky.
-     * Still experimental: may not work with every combination of table props
-     */
-    stickyHeader: PropTypes.bool,
-
-    /**
-     * Specify whether the table should be able to be sorted by its headers
-     */
-    isSortable: PropTypes.bool,
-
-    /**
-     * Specify whether the overflow menu (if it exists) should be shown always, or only on hover
-     */
-    overflowMenuOnHover: PropTypes.bool,
+    useZebraStyles: PropTypes.bool,
   };
 
   static defaultProps = {
@@ -152,25 +168,29 @@ export default class DataTable extends React.Component {
     this.instanceId = getInstanceId();
   }
 
-  UNSAFE_componentWillReceiveProps(nextProps) {
+  componentDidUpdate(prevProps) {
+    if (prevProps === this.props) {
+      return;
+    }
+
+    const prevRowIds = prevProps.rows.map((row) => row.id);
     const rowIds = this.props.rows.map((row) => row.id);
-    const nextRowIds = nextProps.rows.map((row) => row.id);
 
-    if (!isEqual(rowIds, nextRowIds)) {
-      this.setState((state) => getDerivedStateFromProps(nextProps, state));
+    if (!isEqual(prevRowIds, rowIds)) {
+      this.setState((state) => getDerivedStateFromProps(this.props, state));
       return;
     }
 
+    const prevHeaders = prevProps.headers.map((header) => header.key);
     const headers = this.props.headers.map((header) => header.key);
-    const nextHeaders = nextProps.headers.map((header) => header.key);
 
-    if (!isEqual(headers, nextHeaders)) {
-      this.setState((state) => getDerivedStateFromProps(nextProps, state));
+    if (!isEqual(prevHeaders, headers)) {
+      this.setState((state) => getDerivedStateFromProps(this.props, state));
       return;
     }
 
-    if (!isEqual(this.props.rows, nextProps.rows)) {
-      this.setState((state) => getDerivedStateFromProps(nextProps, state));
+    if (!isEqual(prevProps.rows, this.props.rows)) {
+      this.setState((state) => getDerivedStateFromProps(this.props, state));
       return;
     }
   }
@@ -235,7 +255,9 @@ export default class DataTable extends React.Component {
       onExpand: composeEventHandlers([
         this.handleOnExpandAll,
         onClick
-          ? this.handleOnExpandHeaderClick(onClick, { isExpanded })
+          ? this.handleOnExpandHeaderClick(onClick, {
+              isExpanded,
+            })
           : null,
       ]),
     };
@@ -331,6 +353,7 @@ export default class DataTable extends React.Component {
       checked || indeterminate
         ? translationKeys.unselectAll
         : translationKeys.selectAll;
+
     return {
       ...rest,
       ariaLabel: t(translationKey),
@@ -417,6 +440,7 @@ export default class DataTable extends React.Component {
             headers: this.props.headers,
             cellsById: this.state.cellsById,
             inputValue: this.state.filterInputValue,
+            getCellId,
           })
         : this.state.rowIds;
     if (filteredRowIds.length == 0) {
@@ -614,6 +638,7 @@ export default class DataTable extends React.Component {
   };
 
   render() {
+    // eslint-disable-next-line react/prop-types
     const { children, filterRows, headers, render } = this.props;
     const { filterInputValue, rowIds, rowsById, cellsById } = this.state;
     const filteredRowIds =
@@ -623,6 +648,7 @@ export default class DataTable extends React.Component {
             headers,
             cellsById,
             inputValue: filterInputValue,
+            getCellId,
           })
         : rowIds;
     const renderProps = {

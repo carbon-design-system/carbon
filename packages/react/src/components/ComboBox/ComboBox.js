@@ -14,6 +14,7 @@ import { Checkmark16, WarningFilled16 } from '@carbon/icons-react';
 import ListBox, { PropTypes as ListBoxPropTypes } from '../ListBox';
 import { match, keys } from '../../internal/keyboard';
 import setupGetInstanceId from '../../tools/setupGetInstanceId';
+import { mapDownshiftProps } from '../../tools/createPropAdapter';
 
 const { prefix } = settings;
 
@@ -71,9 +72,25 @@ export default class ComboBox extends React.Component {
     className: PropTypes.string,
 
     /**
+     * Specify the direction of the combobox dropdown. Can be either top or bottom.
+     */
+    direction: PropTypes.oneOf(['top', 'bottom']),
+
+    /**
      * Specify if the control should be disabled, or not
      */
     disabled: PropTypes.bool,
+
+    /**
+     * Additional props passed to Downshift
+     */
+    downshiftProps: PropTypes.shape(Downshift.propTypes),
+
+    /**
+     * Provide helper text that is used alongside the control label for
+     * additional help
+     */
+    helperText: PropTypes.string,
 
     /**
      * Specify a custom `id` for the input
@@ -90,45 +107,6 @@ export default class ComboBox extends React.Component {
     ]),
 
     /**
-     * We try to stay as generic as possible here to allow individuals to pass
-     * in a collection of whatever kind of data structure they prefer
-     */
-    items: PropTypes.array.isRequired,
-
-    /**
-     * Helper function passed to downshift that allows the library to render a
-     * given item to a string label. By default, it extracts the `label` field
-     * from a given item to serve as the item label in the list
-     */
-    itemToString: PropTypes.func,
-
-    /**
-     * Optional function to render items as custom components instead of strings.
-     * Defaults to null and is overriden by a getter
-     */
-    itemToElement: PropTypes.func,
-
-    /**
-     * `onChange` is a utility for this controlled component to communicate to a
-     * consuming component when a specific dropdown item is selected.
-     * @param {{ selectedItem }}
-     */
-    onChange: PropTypes.func.isRequired,
-
-    /**
-     * Used to provide a placeholder text node before a user enters any input.
-     * This is only present if the control has no items selected
-     */
-    placeholder: PropTypes.string.isRequired,
-
-    /**
-     * Specify your own filtering logic by passing in a `shouldFilterItem`
-     * function that takes in the current input and an item and passes back
-     * whether or not the item should be filtered.
-     */
-    shouldFilterItem: PropTypes.func,
-
-    /**
      * Specify if the currently selected value is invalid.
      */
     invalid: PropTypes.bool,
@@ -139,9 +117,77 @@ export default class ComboBox extends React.Component {
     invalidText: PropTypes.string,
 
     /**
+     * Optional function to render items as custom components instead of strings.
+     * Defaults to null and is overriden by a getter
+     */
+    itemToElement: PropTypes.func,
+
+    /**
+     * Helper function passed to downshift that allows the library to render a
+     * given item to a string label. By default, it extracts the `label` field
+     * from a given item to serve as the item label in the list
+     */
+    itemToString: PropTypes.func,
+
+    /**
+     * We try to stay as generic as possible here to allow individuals to pass
+     * in a collection of whatever kind of data structure they prefer
+     */
+    items: PropTypes.array.isRequired,
+
+    /**
+     * should use "light theme" (white background)?
+     */
+    light: PropTypes.bool,
+
+    /**
+     * `onChange` is a utility for this controlled component to communicate to a
+     * consuming component when a specific dropdown item is selected.
+     * @param {{ selectedItem }}
+     */
+    onChange: PropTypes.func.isRequired,
+
+    /**
+     * Callback function to notify consumer when the text input changes.
+     * This provides support to change available items based on the text.
+     * @param {string} inputText
+     */
+    onInputChange: PropTypes.func,
+
+    /**
+     * Callback function that fires when the combobox menu toggle is clicked
+     * @param {MouseEvent} event
+     */
+    onToggleClick: PropTypes.func,
+
+    /**
+     * Used to provide a placeholder text node before a user enters any input.
+     * This is only present if the control has no items selected
+     */
+    placeholder: PropTypes.string.isRequired,
+
+    /**
      * For full control of the selection
      */
     selectedItem: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
+
+    /**
+     * Specify your own filtering logic by passing in a `shouldFilterItem`
+     * function that takes in the current input and an item and passes back
+     * whether or not the item should be filtered.
+     */
+    shouldFilterItem: PropTypes.func,
+
+    /**
+     * Specify the size of the ListBox. Currently supports either `sm`, `lg` or `xl` as an option.
+     */
+    size: ListBoxPropTypes.ListBoxSize,
+
+    /**
+     * Provide text to be used in a `<label>` element that is tied to the
+     * combobox via ARIA attributes.
+     */
+    titleText: PropTypes.string,
 
     /**
      * Specify a custom translation function that takes in a message identifier
@@ -153,33 +199,6 @@ export default class ComboBox extends React.Component {
      * Currently supports either the default type, or an inline variant
      */
     type: ListBoxPropTypes.ListBoxType,
-
-    /**
-     * Specify the size of the ListBox. Currently supports either `sm`, `lg` or `xl` as an option.
-     */
-    size: ListBoxPropTypes.ListBoxSize,
-
-    /**
-     * Callback function to notify consumer when the text input changes.
-     * This provides support to change available items based on the text.
-     * @param {string} inputText
-     */
-    onInputChange: PropTypes.func,
-
-    /**
-     * should use "light theme" (white background)?
-     */
-    light: PropTypes.bool,
-
-    /**
-     * Additional props passed to Downshift
-     */
-    downshiftProps: PropTypes.shape(Downshift.propTypes),
-
-    /**
-     * Specify the direction of the combobox dropdown. Can be either top or bottom.
-     */
-    direction: PropTypes.oneOf(['top', 'bottom']),
   };
 
   static defaultProps = {
@@ -276,6 +295,10 @@ export default class ComboBox extends React.Component {
   };
 
   onToggleClick = (isOpen) => (event) => {
+    if (this.props.onToggleClick) {
+      this.props.onToggleClick(event);
+    }
+
     if (event.target === this.textInput.current && isOpen) {
       event.preventDownshiftDefault = true;
       event.persist();
@@ -305,6 +328,7 @@ export default class ComboBox extends React.Component {
       shouldFilterItem, // eslint-disable-line no-unused-vars
       onChange, // eslint-disable-line no-unused-vars
       onInputChange, // eslint-disable-line no-unused-vars
+      onToggleClick, // eslint-disable-line no-unused-vars
       downshiftProps,
       direction,
       ...rest
@@ -330,13 +354,14 @@ export default class ComboBox extends React.Component {
     const ItemToElement = itemToElement;
     return (
       <Downshift
-        {...downshiftProps}
+        {...mapDownshiftProps(downshiftProps)}
         onChange={this.handleOnChange}
         onInputValueChange={this.handleOnInputValueChange}
         onStateChange={this.handleOnStateChange}
         inputValue={this.state.inputValue || ''}
         itemToString={itemToString}
-        defaultSelectedItem={initialSelectedItem}
+        initialSelectedItem={initialSelectedItem}
+        inputId={id}
         selectedItem={selectedItem}>
         {({
           getToggleButtonProps,
@@ -367,7 +392,6 @@ export default class ComboBox extends React.Component {
               light={light}
               size={size}>
               <ListBox.Field
-                id={id}
                 {...getToggleButtonProps({
                   disabled,
                   onClick: this.onToggleClick(isOpen),
@@ -413,9 +437,7 @@ export default class ComboBox extends React.Component {
                 />
               </ListBox.Field>
               {isOpen && (
-                <ListBox.Menu
-                  id={id}
-                  {...getMenuProps({ 'aria-label': ariaLabel })}>
+                <ListBox.Menu {...getMenuProps({ 'aria-label': ariaLabel })}>
                   {this.filterItems(items, itemToString, inputValue).map(
                     (item, index) => {
                       const itemProps = getItemProps({ item, index });

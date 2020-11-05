@@ -6,19 +6,20 @@
 //
 
 @import 'helper-classes';
+@import './vendor/@carbon/elements/scss/layout/layout';
 
 /// @access private
 /// @type Map
 /// @group global-layout
 $z-indexes: (
   modal: 9000,
-  overlay: 8000,
-  dropdown: 9100,
-  header: 6000,
+  overlay: 6000,
+  dropdown: 6000,
+  header: 8000,
   footer: 5000,
   hidden: - 1,
   overflowHidden: - 1,
-  floating: 10000,
+  floating: 6000,
 );
 
 /// @access public

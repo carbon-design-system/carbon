@@ -35,6 +35,7 @@ const TableExpandHeader = ({
       {...rest}>
       {!enableExpando ? null : (
         <button
+          type="button"
           className={`${prefix}--table-expand__button`}
           onClick={onExpand}
           title={expandIconDescription}
@@ -51,14 +52,24 @@ const TableExpandHeader = ({
 };
 
 TableExpandHeader.propTypes = {
-  className: PropTypes.string,
-  children: PropTypes.node,
-
   /**
    * Specify the string read by a voice reader when the expand trigger is
    * focused
    */
   ariaLabel: requiredIfGivenPropIsTruthy('enableExpando', PropTypes.string),
+  children: PropTypes.node,
+
+  className: PropTypes.string,
+
+  /**
+   * Specify whether an expand all button should be displayed
+   */
+  enableExpando: PropTypes.bool,
+
+  /**
+   * The description of the chevron right icon, to be put in its SVG `<title>` element.
+   */
+  expandIconDescription: PropTypes.string,
 
   /**
    * Specify whether this row is expanded or not. This helps coordinate data
@@ -70,11 +81,6 @@ TableExpandHeader.propTypes = {
    * Hook for when a listener initiates a request to expand the given row
    */
   onExpand: requiredIfGivenPropIsTruthy('enableExpando', PropTypes.func),
-
-  /**
-   * The description of the chevron right icon, to be put in its SVG `<title>` element.
-   */
-  expandIconDescription: PropTypes.string,
 };
 
 export default TableExpandHeader;

@@ -81,7 +81,7 @@ export function svgShapes(svgData) {
             key: `circle${index}`,
           };
 
-          return <circle {...circleProps} />;
+          return <circle key={index} {...circleProps} />;
         });
       } else if (svgProp === 'paths') {
         return data.map((path, index) => (
@@ -159,11 +159,6 @@ Icon.propTypes = {
   className: PropTypes.string,
 
   /**
-   * The icon title.
-   */
-  iconTitle: PropTypes.string,
-
-  /**
    * The icon description.
    */
   description: PropTypes.string.isRequired,
@@ -194,6 +189,21 @@ Icon.propTypes = {
   }),
 
   /**
+   * The `ref` callback for the icon.
+   */
+  iconRef: PropTypes.func,
+
+  /**
+   * The icon title.
+   */
+  iconTitle: PropTypes.string,
+
+  /**
+   * The name of the icon.
+   */
+  name: PropTypes.string,
+
+  /**
    * The `role` attribute.
    */
   role: PropTypes.string,
@@ -212,11 +222,6 @@ Icon.propTypes = {
    * The `<svg>` `width` attribute.
    */
   width: PropTypes.string,
-
-  /**
-   * The `ref` callback for the icon.
-   */
-  iconRef: PropTypes.func,
 };
 
 Icon.defaultProps = {

@@ -23,24 +23,24 @@
 @mixin pseudo-underline() {
   &:not(.#{$prefix}--pagination-nav__page--direction) {
     &::after {
-      background-color: $interactive-01;
-      bottom: 0;
-      content: '';
-      display: block;
-      height: $carbon--spacing-02;
-      left: 50%;
       position: absolute;
+      bottom: 0;
+      left: 50%;
+      display: block;
+      width: 0;
+      height: $carbon--spacing-02;
+      background-color: $interactive-01;
       opacity: 0;
       transition: width $duration--fast-02 motion(standard, productive);
-      width: 0;
+      content: '';
     }
   }
 
   .#{$prefix}--pagination-nav__page--active + &::after,
   &.#{$prefix}--pagination-nav__page--active::after {
-    left: calc(50% - #{$carbon--spacing-05/2});
-    opacity: 1;
+    left: calc(50% - #{$carbon--spacing-05 / 2});
     width: $carbon--spacing-05;
+    opacity: 1;
   }
 }
 
@@ -74,12 +74,13 @@
   .#{$prefix}--pagination-nav {
     @include reset;
     @include type-style('body-short-01');
+
     line-height: 0;
   }
 
   .#{$prefix}--pagination-nav__list {
-    align-items: center;
     display: flex;
+    align-items: center;
     list-style: none;
   }
 
@@ -98,24 +99,25 @@
   .#{$prefix}--pagination-nav__page {
     @include type-style('body-short-01');
     @include button-reset($width: false);
-    border-radius: 0;
-    color: $text-color;
+
+    position: relative;
     display: block;
+    min-width: $button-min-width;
+    padding: $button-padding;
+    color: $text-color;
     font-weight: $font-weight;
     line-height: 1;
-    min-width: $button-min-width;
-    outline: 0;
-    padding: $button-padding;
-    position: relative;
     text-align: center;
     text-decoration: none;
-    transition: background-color, color;
-    transition: $duration--fast-02 motion(standard, productive);
+    border-radius: 0;
+    outline: 0;
+    transition: background-color $duration--fast-02 motion(standard, productive),
+      color $duration--fast-02 motion(standard, productive);
     user-select: none;
 
     &:hover {
-      background-color: $background-color-hover;
       color: $text-color;
+      background-color: $background-color-hover;
     }
 
     &:focus {
@@ -124,8 +126,8 @@
 
     &:disabled,
     &.#{$prefix}--pagination-nav__page--disabled {
-      background: none;
       color: rgba($text-color, 0.5);
+      background: none;
       outline: none;
       pointer-events: none;
     }
@@ -133,25 +135,24 @@
     @include pseudo-underline();
 
     &.#{$prefix}--pagination-nav__page--active {
-      background-color: $background-color-active;
       color: $text-color-active;
       font-weight: 600;
-      outline: none;
+      background-color: $background-color-active;
     }
 
     .#{$prefix}--pagination-nav__icon {
-      fill: currentColor;
       pointer-events: none;
+      fill: currentColor;
     }
   }
 
   .#{$prefix}--pagination-nav__page--direction {
-    align-items: center;
     display: flex;
-    height: $button-direction-size;
+    align-items: center;
     justify-content: center;
-    line-height: 0;
     width: $button-direction-size;
+    height: $button-direction-size;
+    line-height: 0;
   }
 
   .#{$prefix}--pagination-nav__select {
@@ -159,9 +160,9 @@
   }
 
   .#{$prefix}--pagination-nav__page--select {
-    appearance: none;
     max-height: $button-min-width;
     text-indent: calc(50% - 4.5px);
+    appearance: none;
     // Override some Firefox user-agent styles
     @-moz-document url-prefix() {
       text-indent: 0;
@@ -169,11 +170,11 @@
   }
 
   .#{$prefix}--pagination-nav__select-icon-wrapper {
-    height: 100%;
-    pointer-events: none;
     position: absolute;
     top: 0;
     width: 100%;
+    height: 100%;
+    pointer-events: none;
 
     @include pseudo-underline();
 
@@ -185,10 +186,10 @@
   }
 
   .#{$prefix}--pagination-nav__select-icon {
-    left: calc(50% - #{$select-icon-top-position/2});
-    pointer-events: none;
     position: absolute;
-    top: calc(50% - #{$select-icon-top-position/2});
+    top: calc(50% - #{$select-icon-top-position / 2});
+    left: calc(50% - #{$select-icon-top-position / 2});
+    pointer-events: none;
   }
 
   .#{$prefix}--pagination-nav__accessibility-label {

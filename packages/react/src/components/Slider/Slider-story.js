@@ -6,13 +6,13 @@
  */
 
 import React, { useState } from 'react';
-import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 
 import { withKnobs, boolean, number, text } from '@storybook/addon-knobs';
 import Slider from '../Slider';
 import SliderSkeleton from '../Slider/Slider.Skeleton';
 import { sliderValuePropSync } from '../../internal/FeatureFlags';
+import mdx from './Slider.mdx';
 
 const props = () => ({
   name: text('Form item name (name)', ''),
@@ -39,50 +39,73 @@ const props = () => ({
   onRelease: action('onRelease'),
 });
 
-storiesOf('Slider', module)
-  .addDecorator(withKnobs)
-  .add('default', () => <Slider id="slider" {...props()} />, {
-    info: {
-      text: `
+export default {
+  title: 'Slider',
+  decorators: [withKnobs],
+
+  parameters: {
+    component: Slider,
+    docs: {
+      page: mdx,
+    },
+    subcomponents: {
+      SliderSkeleton,
+    },
+  },
+};
+
+export const Default = () => <Slider required id="slider" {...props()} />;
+
+Default.storyName = 'default';
+
+Default.parameters = {
+  info: {
+    text: `
             Sliders provide a visual indication of adjustable content, where the user can move the handle along a horizontal track to increase or decrease the value.
           `,
-    },
-  })
-  .add('controlled slider', () => {
-    const [val, setVal] = useState(87);
-    return (
-      <>
-        <button onClick={() => setVal(Math.round(Math.random() * 100))}>
-          randomize value
-        </button>
-        <Slider
-          max={100}
-          min={0}
-          value={val}
-          onChange={({ value }) => setVal(value)}
-        />
-        <h1>{val}</h1>
-      </>
-    );
-  })
-  .add(
-    'skeleton',
-    () => (
-      <div
-        style={{ marginTop: '2rem' }}
-        aria-label="loading slider"
-        aria-live="assertive"
-        role="status"
-        tabindex="0" // eslint-disable-line jsx-a11y/no-noninteractive-tabindex
-      >
-        <SliderSkeleton />
-      </div>
-    ),
-    {
-      info: {
-        text: `
-            Placeholder skeleton state to use when content is loading.
-          `,
-      },
-    }
+  },
+};
+
+export const ControlledSlider = () => {
+  const [val, setVal] = useState(87);
+  return (
+    <>
+      <button
+        type="button"
+        onClick={() => setVal(Math.round(Math.random() * 100))}>
+        randomize value
+      </button>
+      <Slider
+        max={100}
+        min={0}
+        value={val}
+        onChange={({ value }) => setVal(value)}
+      />
+      <h1>{val}</h1>
+    </>
   );
+};
+
+ControlledSlider.storyName = 'controlled slider';
+
+export const Skeleton = () => (
+  <div
+    style={{ marginTop: '2rem' }}
+    aria-label="loading slider"
+    aria-live="assertive"
+    role="status"
+    tabIndex="0" // eslint-disable-line jsx-a11y/no-noninteractive-tabindex
+  >
+    <SliderSkeleton />
+  </div>
+);
+
+Skeleton.storyName = 'skeleton';
+
+Skeleton.parameters = {
+  info: {
+    text: `
+        Placeholder skeleton state to use when content is loading.
+      `,
+  },
+};

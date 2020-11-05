@@ -25,6 +25,7 @@ const TextArea = React.forwardRef(function TextArea(
     invalidText,
     helperText,
     light,
+    placeholder,
     ...other
   },
   ref
@@ -66,7 +67,7 @@ const TextArea = React.forwardRef(function TextArea(
   const errorId = id + '-error-msg';
 
   const error = invalid ? (
-    <div className={`${prefix}--form-requirement`} id={errorId}>
+    <div role="alert" className={`${prefix}--form-requirement`} id={errorId}>
       {invalidText}
     </div>
   ) : null;
@@ -80,6 +81,8 @@ const TextArea = React.forwardRef(function TextArea(
     <textarea
       {...other}
       {...textareaProps}
+      placeholder={placeholder || null}
+      aria-placeholder={placeholder || null} // for JAWS support
       className={textareaClasses}
       aria-invalid={invalid || null}
       aria-describedby={invalid ? errorId : null}
@@ -107,17 +110,17 @@ TextArea.displayName = 'TextArea';
 TextArea.propTypes = {
   /**
    * Provide a custom className that is applied directly to the underlying
-   * <textarea> node
+   * `<textarea>` node
    */
   className: PropTypes.string,
 
   /**
-   * Specify the `cols` attribute for the underlying <textarea> node
+   * Specify the `cols` attribute for the underlying `<textarea>` node
    */
   cols: PropTypes.number,
 
   /**
-   * Optionally provide the default value of the <textarea>
+   * Optionally provide the default value of the `<textarea>`
    */
   defaultValue: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
 
@@ -125,54 +128,6 @@ TextArea.propTypes = {
    * Specify whether the control is disabled
    */
   disabled: PropTypes.bool,
-
-  /**
-   * Provide a unique identifier for the control
-   */
-  id: PropTypes.string,
-
-  /**
-   * Provide the text that will be read by a screen reader when visiting this
-   * control
-   */
-  labelText: PropTypes.node.isRequired,
-
-  /**
-   * Optionally provide an `onChange` handler that is called whenever <textarea>
-   * is updated
-   */
-  onChange: PropTypes.func,
-
-  /**
-   * Optionally provide an `onClick` handler that is called whenever the
-   * <textarea> is clicked
-   */
-  onClick: PropTypes.func,
-
-  /**
-   * Specify the placeholder attribute for the <textarea>
-   */
-  placeholder: PropTypes.string,
-
-  /**
-   * Specify the rows attribute for the <textarea>
-   */
-  rows: PropTypes.number,
-
-  /**
-   * Provide the current value of the <textarea>
-   */
-  value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-
-  /**
-   * Specify whether the control is currently invalid
-   */
-  invalid: PropTypes.bool,
-
-  /**
-   * Provide the text that is displayed when the control is in an invalid state
-   */
-  invalidText: PropTypes.string,
 
   /**
    * Provide text that is used alongside the control label for additional help
@@ -185,9 +140,57 @@ TextArea.propTypes = {
   hideLabel: PropTypes.bool,
 
   /**
+   * Provide a unique identifier for the control
+   */
+  id: PropTypes.string,
+
+  /**
+   * Specify whether the control is currently invalid
+   */
+  invalid: PropTypes.bool,
+
+  /**
+   * Provide the text that is displayed when the control is in an invalid state
+   */
+  invalidText: PropTypes.string,
+
+  /**
+   * Provide the text that will be read by a screen reader when visiting this
+   * control
+   */
+  labelText: PropTypes.node.isRequired,
+
+  /**
    * Specify whether you want the light version of this control
    */
   light: PropTypes.bool,
+
+  /**
+   * Optionally provide an `onChange` handler that is called whenever `<textarea>`
+   * is updated
+   */
+  onChange: PropTypes.func,
+
+  /**
+   * Optionally provide an `onClick` handler that is called whenever the
+   * `<textarea>` is clicked
+   */
+  onClick: PropTypes.func,
+
+  /**
+   * Specify the placeholder attribute for the `<textarea>`
+   */
+  placeholder: PropTypes.string,
+
+  /**
+   * Specify the rows attribute for the `<textarea>`
+   */
+  rows: PropTypes.number,
+
+  /**
+   * Provide the current value of the `<textarea>`
+   */
+  value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
 };
 
 TextArea.defaultProps = {

@@ -14,8 +14,14 @@ const { prefix } = settings;
 
 export default class ToggleSmallSkeleton extends React.Component {
   static propTypes = {
+    ['aria-label']: PropTypes.string.isRequired,
+
     /**
-     * Provide an id that unique represents the underlying <input>
+     * Specify an optional className to add to the form item wrapper.
+     */
+    className: PropTypes.string,
+    /**
+     * Provide an id that unique represents the underlying `<input>`
      */
     id: PropTypes.string,
 
@@ -26,12 +32,6 @@ export default class ToggleSmallSkeleton extends React.Component {
      * provided
      */
     labelText: PropTypes.string,
-    ['aria-label']: PropTypes.string.isRequired,
-
-    /**
-     * Specify an optional className to add to the form item wrapper.
-     */
-    className: PropTypes.string,
   };
 
   static defaultProps = {

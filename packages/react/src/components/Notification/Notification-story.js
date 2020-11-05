@@ -6,7 +6,6 @@
  */
 
 import React from 'react';
-import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 import { withKnobs, boolean, select, text } from '@storybook/addon-knobs';
 import {
@@ -14,6 +13,7 @@ import {
   InlineNotification,
   NotificationActionButton,
 } from '../Notification';
+import mdx from './Notification.mdx';
 
 const kinds = {
   'Error (error)': 'error',
@@ -41,23 +41,39 @@ const notificationProps = () => ({
   onCloseButtonClick: action('onCloseButtonClick'),
 });
 
-storiesOf('Notifications', module)
-  .addDecorator(withKnobs)
-  .add('Toast', () => (
-    <ToastNotification
-      {...notificationProps()}
-      caption={text('Caption (caption)', '00:00:00 AM')}
-      style={{ minWidth: '30rem', marginBottom: '.5rem' }}
-    />
-  ))
-  .add('inline', () => (
-    <InlineNotification
-      {...notificationProps()}
-      actions={
-        <NotificationActionButton
-          onClick={action('NotificationActionButton onClick')}>
-          {text('Action (NotificationActionButton > children)', 'Action')}
-        </NotificationActionButton>
-      }
-    />
-  ));
+export default {
+  title: 'Notifications',
+  decorators: [withKnobs],
+
+  parameters: {
+    docs: {
+      page: mdx,
+    },
+    subcomponents: {
+      ToastNotification,
+      InlineNotification,
+    },
+  },
+};
+
+export const Toast = () => (
+  <ToastNotification
+    {...notificationProps()}
+    caption={text('Caption (caption)', '00:00:00 AM')}
+    style={{ minWidth: '30rem', marginBottom: '.5rem' }}
+  />
+);
+
+export const Inline = () => (
+  <InlineNotification
+    {...notificationProps()}
+    actions={
+      <NotificationActionButton
+        onClick={action('NotificationActionButton onClick')}>
+        {text('Action (NotificationActionButton > children)', 'Action')}
+      </NotificationActionButton>
+    }
+  />
+);
+
+Inline.storyName = 'inline';

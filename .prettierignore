@@ -48,3 +48,6 @@ packages/components/docs/js
 
 # Yarn
 **/.yarn/**
+
+# Generated files
+**/generated/**

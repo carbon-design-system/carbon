@@ -8,6 +8,7 @@
 'use strict';
 
 const Joi = require('joi');
+const { reporter } = require('@carbon/cli-reporter');
 
 /**
  * Validate the given icons and extension metadata against the asset registry
@@ -21,9 +22,18 @@ const Joi = require('joi');
 function validate(registry, extensions = []) {
   for (const extension of extensions) {
     if (extension.schema) {
-      const { error } = Joi.validate(extension.data, extension.schema);
+      const { error, value } = Joi.validate(extension.data, extension.schema);
       if (error) {
-        throw new Error(error.annotate());
+        const failedAssets = error.details.map(({ path, message }) => ({
+          index: path[0],
+          message,
+        }));
+        reporter.error(`Unable to validate the ${extension.name} extension:`);
+        failedAssets.forEach((asset) => {
+          reporter.error(`Error: ${asset.message}`);
+          reporter.info(JSON.stringify(value[asset.index], null, 2));
+        });
+        process.exit(1);
       }
     }
 

@@ -1,5 +1,3 @@
-<!-- alex disable failure -->
-
 # Accessibility
 
 <!-- prettier-ignore-start -->
@@ -152,14 +150,10 @@ component with the necessary keyboard functionality.
 
 ### Screen magnifier testing🔎
 
-<!-- alex disable his -->
-
 (Credit to Frederick Creemers
 [excellent article](https://dev.to/_bigblind/how-to-make-your-website-accessible-to-people-who-use-a-screen-magnifier)
 talking about his experience as a visually impaired screen magnification user on
 the web.)
-
-<!-- alex enable his -->
 
 A user with a screen magnifier views web content on a component by component
 basis through a 2x, 4x, or 8x (etc) zoomed in box. Two things become very

@@ -36,9 +36,11 @@ export const Table = ({
     [`${prefix}--data-table--visible-overflow-menu`]: !overflowMenuOnHover,
   });
   const table = (
-    <table {...other} className={componentClass}>
-      {children}
-    </table>
+    <div className={`${prefix}--data-table-content`}>
+      <table {...other} className={componentClass}>
+        {children}
+      </table>
+    </div>
   );
   return stickyHeader ? (
     <section className={`${prefix}--data-table_inner-container`}>
@@ -50,27 +52,12 @@ export const Table = ({
 };
 
 Table.propTypes = {
+  /**
+   * Pass in the children that will be rendered within the Table
+   */
+  children: PropTypes.node,
+
   className: PropTypes.string,
-
-  /**
-   * `true` to add useZebraStyles striping.
-   */
-  useZebraStyles: PropTypes.bool,
-
-  /**
-   * `normal` Change the row height of table
-   */
-  size: PropTypes.oneOf(['compact', 'short', 'normal', 'tall']),
-
-  /**
-   * `false` If true, will use a width of 'auto' instead of 100%
-   */
-  useStaticWidth: PropTypes.bool,
-
-  /**
-   * `false` If true, will remove the table border
-   */
-  shouldShowBorder: PropTypes.bool,
 
   /**
    * `false` If true, will apply sorting styles
@@ -78,14 +65,34 @@ Table.propTypes = {
   isSortable: PropTypes.bool,
 
   /**
+   * Specify whether the overflow menu (if it exists) should be shown always, or only on hover
+   */
+  overflowMenuOnHover: PropTypes.bool,
+
+  /**
+   * `false` If true, will remove the table border
+   */
+  shouldShowBorder: PropTypes.bool,
+
+  /**
+   * `normal` Change the row height of table
+   */
+  size: PropTypes.oneOf(['compact', 'short', 'normal', 'tall']),
+
+  /**
    * `false` If true, will keep the header sticky (only data rows will scroll)
    */
   stickyHeader: PropTypes.bool,
 
   /**
-   * Specify whether the overflow menu (if it exists) should be shown always, or only on hover
+   * `false` If true, will use a width of 'auto' instead of 100%
    */
-  overflowMenuOnHover: PropTypes.bool,
+  useStaticWidth: PropTypes.bool,
+
+  /**
+   * `true` to add useZebraStyles striping.
+   */
+  useZebraStyles: PropTypes.bool,
 };
 
 Table.defaultProps = {

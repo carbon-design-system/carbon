@@ -9,11 +9,6 @@ $css--font-face: true;
 $css--reset: true;
 $prefix: 'bx';
 
-// IMPORTANT: Demo-purpose only code.
-// This import path should _not_ be used outside our source tree
-// as `demo` directory is _not_ shipped in our NPM package.
-@import '~carbon-components/demo/scss/expressive-theme';
-
 // IMPORTANT: This import path should _not_ be used outside our source tree
 // as `src` directory is _not_ meant to be shipped in our NPM package.
 // Use e.g. `@import '~carbon-components/scss/globals/scss/styles.scss'` instead.
@@ -65,6 +60,7 @@ $prefix: 'bx';
 @import '~carbon-components/src/components/tooltip/tooltip';
 @import '~carbon-components/src/components/tabs/tabs';
 @import '~carbon-components/src/components/tag/tag';
+@import '~carbon-components/src/components/treeview/treeview';
 @import '~carbon-components/src/components/pagination/pagination';
 @import '~carbon-components/src/components/pagination/unstable_pagination';
 @import '~carbon-components/src/components/accordion/accordion';
@@ -103,4 +99,8 @@ $prefix: 'bx';
       @include emit-component-tokens($tag-colors);
     }
   }
+}
+
+.sbdocs-li {
+  list-style: circle;
 }

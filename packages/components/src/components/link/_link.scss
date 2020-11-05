@@ -24,6 +24,7 @@
   .#{$prefix}--link {
     @include reset;
     @include type-style('body-short-01');
+
     color: $link-01;
     text-decoration: none;
     outline: none;
@@ -58,11 +59,12 @@
   .#{$prefix}--link--disabled:hover {
     @include reset;
     @include type-style('body-short-01');
+
     display: inline;
     color: $disabled-02;
     font-weight: 400;
-    cursor: not-allowed;
     text-decoration: none;
+    cursor: not-allowed;
   }
 
   .#{$prefix}--link.#{$prefix}--link--visited:visited {
@@ -88,6 +90,14 @@
 
   .#{$prefix}--link--disabled.#{$prefix}--link--inline {
     text-decoration: underline;
+  }
+
+  .#{$prefix}--link--sm {
+    @include type-style('helper-text-01');
+  }
+
+  .#{$prefix}--link--lg {
+    @include type-style('body-short-02');
   }
 }
 

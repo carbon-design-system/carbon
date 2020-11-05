@@ -12,6 +12,7 @@ import { settings } from 'carbon-components';
 import { Close20 } from '@carbon/icons-react';
 import toggleClass from '../../tools/toggleClass';
 import Button from '../Button';
+import ButtonSet from '../ButtonSet';
 import deprecate from '../../prop-types/deprecate';
 import requiredIfGivenPropIsTruthy from '../../prop-types/requiredIfGivenPropIsTruthy';
 import wrapFocus, {
@@ -25,6 +26,20 @@ const getInstanceId = setupGetInstanceId();
 export default class Modal extends Component {
   static propTypes = {
     /**
+     * Specify whether the Modal is displaying an alert, error or warning
+     * Should go hand in hand with the danger prop.
+     */
+    alert: PropTypes.bool,
+
+    /**
+     * Required props for the accessibility label of the header
+     */
+    ['aria-label']: requiredIfGivenPropIsTruthy(
+      'hasScrollingContent',
+      PropTypes.string
+    ),
+
+    /**
      * Provide the contents of your Modal
      */
     children: PropTypes.node,
@@ -35,9 +50,18 @@ export default class Modal extends Component {
     className: PropTypes.string,
 
     /**
-     * Specify whether the modal should be button-less
+     * Specify whether the Modal is for dangerous actions
      */
-    passiveModal: PropTypes.bool,
+    danger: PropTypes.bool,
+
+    /**
+     * Deprecated; Used for advanced focus-wrapping feature using 3rd party library,
+     * but it's now achieved without a 3rd party library.
+     */
+    focusTrap: deprecate(
+      PropTypes.bool,
+      `\nThe prop \`focusTrap\` for Modal has been deprecated, as the feature of \`focusTrap\` runs by default.`
+    ),
 
     /**
      * Provide whether the modal content has a form element.
@@ -46,15 +70,24 @@ export default class Modal extends Component {
     hasForm: PropTypes.bool,
 
     /**
-     * Specify a handler for closing modal.
-     * The handler should care of closing modal, e.g. changing `open` prop.
+     * Specify whether the modal contains scrolling content
      */
-    onRequestClose: PropTypes.func,
+    hasScrollingContent: PropTypes.bool,
+
+    /**
+     * Provide a description for "close" icon that can be read by screen readers
+     */
+    iconDescription: PropTypes.string,
 
     /**
      * Specify the DOM element ID of the top-level node.
      */
     id: PropTypes.string,
+
+    /**
+     * Specify a label to be read by screen readers on the modal root node
+     */
+    modalAriaLabel: PropTypes.string,
 
     /**
      * Specify the content of the modal header title.
@@ -67,24 +100,15 @@ export default class Modal extends Component {
     modalLabel: PropTypes.node,
 
     /**
-     * Specify a label to be read by screen readers on the modal root node
+     * Specify a handler for keypresses.
      */
-    modalAriaLabel: PropTypes.string,
+    onKeyDown: PropTypes.func,
 
     /**
-     * Specify the text for the secondary button
+     * Specify a handler for closing modal.
+     * The handler should care of closing modal, e.g. changing `open` prop.
      */
-    secondaryButtonText: PropTypes.node,
-
-    /**
-     * Specify the text for the primary button
-     */
-    primaryButtonText: PropTypes.node,
-
-    /**
-     * Specify whether the Modal is currently open
-     */
-    open: PropTypes.bool,
+    onRequestClose: PropTypes.func,
 
     /**
      * Specify a handler for "submitting" modal.
@@ -93,14 +117,25 @@ export default class Modal extends Component {
     onRequestSubmit: PropTypes.func,
 
     /**
-     * Specify a handler for keypresses.
+     * Specify a handler for the secondary button.
+     * Useful if separate handler from `onRequestClose` is desirable
      */
-    onKeyDown: PropTypes.func,
+    onSecondarySubmit: PropTypes.func,
 
     /**
-     * Provide a description for "close" icon that can be read by screen readers
+     * Specify whether the Modal is currently open
      */
-    iconDescription: PropTypes.string,
+    open: PropTypes.bool,
+
+    /**
+     * Specify whether the modal should be button-less
+     */
+    passiveModal: PropTypes.bool,
+
+    /**
+     * Prevent closing on click outside of modal
+     */
+    preventCloseOnClickOutside: PropTypes.bool,
 
     /**
      * Specify whether the Button should be disabled, or not
@@ -108,26 +143,14 @@ export default class Modal extends Component {
     primaryButtonDisabled: PropTypes.bool,
 
     /**
-     * Specify a handler for the secondary button.
-     * Useful if separate handler from `onRequestClose` is desirable
+     * Specify the text for the primary button
      */
-    onSecondarySubmit: PropTypes.func,
+    primaryButtonText: PropTypes.node,
 
     /**
-     * Specify whether the Modal is for dangerous actions
+     * Specify the text for the secondary button
      */
-    danger: PropTypes.bool,
-
-    /**
-     * Specify if Enter key should be used as "submit" action
-     */
-    shouldSubmitOnEnter: PropTypes.bool,
-
-    /**
-     * Specify CSS selectors that match DOM elements working as floating menus.
-     * Focusing on those elements won't trigger "focus-wrap" behavior
-     */
-    selectorsFloatingMenus: PropTypes.arrayOf(PropTypes.string),
+    secondaryButtonText: PropTypes.node,
 
     /**
      * Specify a CSS selector that matches the DOM element that should
@@ -136,31 +159,20 @@ export default class Modal extends Component {
     selectorPrimaryFocus: PropTypes.string,
 
     /**
+     * Specify CSS selectors that match DOM elements working as floating menus.
+     * Focusing on those elements won't trigger "focus-wrap" behavior
+     */
+    selectorsFloatingMenus: PropTypes.arrayOf(PropTypes.string),
+
+    /**
+     * Specify if Enter key should be used as "submit" action
+     */
+    shouldSubmitOnEnter: PropTypes.bool,
+
+    /**
      * Specify the size variant.
      */
     size: PropTypes.oneOf(['xs', 'sm', 'lg']),
-
-    /**
-     * Deprecated; Used for advanced focus-wrapping feature using 3rd party library,
-     * but it's now achieved without a 3rd party library.
-     */
-    focusTrap: deprecate(
-      PropTypes.bool,
-      `\nThe prop \`focusTrap\` for Modal has been deprecated, as the feature of \`focusTrap\` runs by default.`
-    ),
-
-    /**
-     * Specify whether the modal contains scrolling content
-     */
-    hasScrollingContent: PropTypes.bool,
-
-    /**
-     * Required props for the accessibility label of the header
-     */
-    ['aria-label']: requiredIfGivenPropIsTruthy(
-      'hasScrollingContent',
-      PropTypes.string
-    ),
   };
 
   static defaultProps = {
@@ -172,6 +184,7 @@ export default class Modal extends Component {
     iconDescription: 'Close',
     modalHeading: '',
     modalLabel: '',
+    preventCloseOnClickOutside: false,
     selectorPrimaryFocus: '[data-modal-primary-focus]',
     hasScrollingContent: false,
   };
@@ -184,6 +197,7 @@ export default class Modal extends Component {
   modalInstanceId = `modal-${getInstanceId()}`;
   modalLabelId = `${prefix}--modal-header__label--${this.modalInstanceId}`;
   modalHeadingId = `${prefix}--modal-header__heading--${this.modalInstanceId}`;
+  modalBodyId = `${prefix}--modal-body--${this.modalInstanceId}`;
 
   handleKeyDown = (evt) => {
     if (this.props.open) {
@@ -203,7 +217,8 @@ export default class Modal extends Component {
       !elementOrParentIsFloatingMenu(
         evt.target,
         this.props.selectorsFloatingMenus
-      )
+      ) &&
+      !this.props.preventCloseOnClickOutside
     ) {
       this.props.onRequestClose(evt);
     }
@@ -215,11 +230,11 @@ export default class Modal extends Component {
   }) => {
     const { open, selectorsFloatingMenus } = this.props;
     if (open && currentActiveNode && oldActiveNode) {
-      const { current: modalNode } = this.innerModal;
+      const { current: bodyNode } = this.innerModal;
       const { current: startTrapNode } = this.startTrap;
       const { current: endTrapNode } = this.endTrap;
       wrapFocus({
-        modalNode,
+        bodyNode,
         startTrapNode,
         endTrapNode,
         currentActiveNode,
@@ -307,11 +322,13 @@ export default class Modal extends Component {
       iconDescription,
       primaryButtonDisabled,
       danger,
+      alert,
       selectorPrimaryFocus, // eslint-disable-line
       selectorsFloatingMenus, // eslint-disable-line
       shouldSubmitOnEnter, // eslint-disable-line
       size,
       hasScrollingContent,
+      preventCloseOnClickOutside, // eslint-disable-line
       ...other
     } = this.props;
 
@@ -366,10 +383,20 @@ export default class Modal extends Component {
         }
       : {};
 
+    const alertDialogProps = {};
+    if (alert && passiveModal) {
+      alertDialogProps.role = 'alert';
+    }
+    if (alert && !passiveModal) {
+      alertDialogProps.role = 'alertdialog';
+      alertDialogProps['aria-describedby'] = this.modalBodyId;
+    }
+
     const modalBody = (
       <div
         ref={this.innerModal}
         role="dialog"
+        {...alertDialogProps}
         className={containerClasses}
         aria-label={ariaLabel}
         aria-modal="true"
@@ -391,6 +418,7 @@ export default class Modal extends Component {
           {!passiveModal && modalButton}
         </div>
         <div
+          id={this.modalBodyId}
           className={contentClasses}
           {...hasScrollingContentProps}
           aria-labelledby={getAriaLabelledBy}>
@@ -400,7 +428,7 @@ export default class Modal extends Component {
           <div className={`${prefix}--modal-content--overflow-indicator`} />
         )}
         {!passiveModal && (
-          <div className={`${prefix}--modal-footer`}>
+          <ButtonSet className={`${prefix}--modal-footer`}>
             <Button kind="secondary" onClick={onSecondaryButtonClick}>
               {secondaryButtonText}
             </Button>
@@ -411,7 +439,7 @@ export default class Modal extends Component {
               ref={this.button}>
               {primaryButtonText}
             </Button>
-          </div>
+          </ButtonSet>
         )}
       </div>
     );

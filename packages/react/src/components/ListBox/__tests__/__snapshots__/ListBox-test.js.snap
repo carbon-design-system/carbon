@@ -17,11 +17,8 @@ exports[`ListBox should render 1`] = `
       id="test-listbox"
     >
       <div
-        aria-controls={null}
-        aria-haspopup="listbox"
-        aria-owns={null}
         className="bx--list-box__field"
-        role="combobox"
+        id="test-listbox"
         tabIndex={-1}
       />
     </ListBoxField>

@@ -1,0 +1,969 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`TreeView should render 1`] = `
+<TreeView
+  label="Tree view"
+  onSelect={[MockFunction]}
+  selected={
+    Array [
+      "1",
+    ]
+  }
+>
+  <TreeLabel>
+    <label
+      className="bx--label"
+      id="id1__label"
+    >
+      Tree view
+    </label>
+  </TreeLabel>
+  <ul
+    aria-label={null}
+    aria-labelledby="id1__label"
+    aria-multiselectable={null}
+    className="bx--tree"
+    onKeyDown={[Function]}
+    role="tree"
+  >
+    <TreeNode
+      depth={0}
+      id="1"
+      key=".0"
+      label="1"
+      onNodeFocusEvent={[Function]}
+      onTreeSelect={[Function]}
+      selected={
+        Array [
+          "1",
+        ]
+      }
+      tabIndex={0}
+      value="1"
+    >
+      <li
+        aria-current={null}
+        aria-selected={true}
+        className="bx--tree-node bx--tree-node--selected bx--tree-leaf-node"
+        id="1"
+        onBlur={[Function]}
+        onClick={[Function]}
+        onFocus={[Function]}
+        onKeyDown={[Function]}
+        role="treeitem"
+        tabIndex={0}
+      >
+        <div
+          className="bx--tree-node__label"
+        >
+          1
+        </div>
+      </li>
+    </TreeNode>
+    <TreeNode
+      depth={0}
+      id="2"
+      key=".1"
+      label="2"
+      onNodeFocusEvent={[Function]}
+      onSelect={[MockFunction]}
+      onTreeSelect={[Function]}
+      selected={
+        Array [
+          "1",
+        ]
+      }
+      tabIndex={-1}
+      value="2"
+    >
+      <li
+        aria-current={null}
+        aria-selected={false}
+        className="bx--tree-node bx--tree-leaf-node"
+        id="2"
+        onBlur={[Function]}
+        onClick={[Function]}
+        onFocus={[Function]}
+        onKeyDown={[Function]}
+        role="treeitem"
+        tabIndex={-1}
+      >
+        <div
+          className="bx--tree-node__label"
+        >
+          2
+        </div>
+      </li>
+    </TreeNode>
+    <TreeNode
+      depth={0}
+      id="5"
+      isExpanded={true}
+      key=".2"
+      label="5"
+      onNodeFocusEvent={[Function]}
+      onTreeSelect={[Function]}
+      selected={
+        Array [
+          "1",
+        ]
+      }
+      tabIndex={-1}
+      value="5"
+    >
+      <li
+        aria-current={null}
+        aria-expanded={true}
+        aria-selected={false}
+        className="bx--tree-node bx--tree-parent-node"
+        id="5"
+        onBlur={[Function]}
+        onClick={[Function]}
+        onFocus={[Function]}
+        onKeyDown={[Function]}
+        role="treeitem"
+        tabIndex={-1}
+      >
+        <div
+          className="bx--tree-node__label"
+        >
+          <span
+            className="bx--tree-parent-node__toggle"
+            onClick={[Function]}
+          >
+            <ForwardRef(CaretDown16)
+              className="bx--tree-parent-node__toggle-icon bx--tree-parent-node__toggle-icon--expanded"
+            >
+              <Icon
+                className="bx--tree-parent-node__toggle-icon bx--tree-parent-node__toggle-icon--expanded"
+                fill="currentColor"
+                height={16}
+                preserveAspectRatio="xMidYMid meet"
+                viewBox="0 0 32 32"
+                width={16}
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <svg
+                  aria-hidden={true}
+                  className="bx--tree-parent-node__toggle-icon bx--tree-parent-node__toggle-icon--expanded"
+                  fill="currentColor"
+                  focusable="false"
+                  height={16}
+                  preserveAspectRatio="xMidYMid meet"
+                  viewBox="0 0 32 32"
+                  width={16}
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M24 12L16 22 8 12z"
+                  />
+                </svg>
+              </Icon>
+            </ForwardRef(CaretDown16)>
+          </span>
+          <span
+            className="bx--tree-node__label__details"
+          >
+            5
+          </span>
+        </div>
+        <ul
+          className="bx--tree-node__children"
+          role="group"
+        >
+          <TreeNode
+            depth={1}
+            id="5-1"
+            key=".0"
+            label="5-1"
+            onTreeSelect={[Function]}
+            selected={
+              Array [
+                "1",
+              ]
+            }
+            tabIndex={-1}
+            value="5-1"
+          >
+            <li
+              aria-current={null}
+              aria-selected={false}
+              className="bx--tree-node bx--tree-leaf-node"
+              id="5-1"
+              onBlur={[Function]}
+              onClick={[Function]}
+              onFocus={[Function]}
+              onKeyDown={[Function]}
+              role="treeitem"
+              tabIndex={-1}
+            >
+              <div
+                className="bx--tree-node__label"
+              >
+                5-1
+              </div>
+            </li>
+          </TreeNode>
+          <TreeNode
+            depth={1}
+            id="5-2"
+            key=".1"
+            label="5-2"
+            onTreeSelect={[Function]}
+            selected={
+              Array [
+                "1",
+              ]
+            }
+            tabIndex={-1}
+            value="5-2"
+          >
+            <li
+              aria-current={null}
+              aria-selected={false}
+              className="bx--tree-node bx--tree-leaf-node"
+              id="5-2"
+              onBlur={[Function]}
+              onClick={[Function]}
+              onFocus={[Function]}
+              onKeyDown={[Function]}
+              role="treeitem"
+              tabIndex={-1}
+            >
+              <div
+                className="bx--tree-node__label"
+              >
+                5-2
+              </div>
+            </li>
+          </TreeNode>
+          <TreeNode
+            depth={1}
+            id="5-3"
+            isExpanded={true}
+            key=".2"
+            label="5-3"
+            onTreeSelect={[Function]}
+            selected={
+              Array [
+                "1",
+              ]
+            }
+            tabIndex={-1}
+            value="5-3"
+          >
+            <li
+              aria-current={null}
+              aria-expanded={true}
+              aria-selected={false}
+              className="bx--tree-node bx--tree-parent-node"
+              id="5-3"
+              onBlur={[Function]}
+              onClick={[Function]}
+              onFocus={[Function]}
+              onKeyDown={[Function]}
+              role="treeitem"
+              tabIndex={-1}
+            >
+              <div
+                className="bx--tree-node__label"
+              >
+                <span
+                  className="bx--tree-parent-node__toggle"
+                  onClick={[Function]}
+                >
+                  <ForwardRef(CaretDown16)
+                    className="bx--tree-parent-node__toggle-icon bx--tree-parent-node__toggle-icon--expanded"
+                  >
+                    <Icon
+                      className="bx--tree-parent-node__toggle-icon bx--tree-parent-node__toggle-icon--expanded"
+                      fill="currentColor"
+                      height={16}
+                      preserveAspectRatio="xMidYMid meet"
+                      viewBox="0 0 32 32"
+                      width={16}
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <svg
+                        aria-hidden={true}
+                        className="bx--tree-parent-node__toggle-icon bx--tree-parent-node__toggle-icon--expanded"
+                        fill="currentColor"
+                        focusable="false"
+                        height={16}
+                        preserveAspectRatio="xMidYMid meet"
+                        viewBox="0 0 32 32"
+                        width={16}
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          d="M24 12L16 22 8 12z"
+                        />
+                      </svg>
+                    </Icon>
+                  </ForwardRef(CaretDown16)>
+                </span>
+                <span
+                  className="bx--tree-node__label__details"
+                >
+                  5-3
+                </span>
+              </div>
+              <ul
+                className="bx--tree-node__children"
+                role="group"
+              >
+                <TreeNode
+                  depth={2}
+                  id="5-4"
+                  key=".0"
+                  label="5-4"
+                  onTreeSelect={[Function]}
+                  selected={
+                    Array [
+                      "1",
+                    ]
+                  }
+                  tabIndex={-1}
+                  value="5-4"
+                >
+                  <li
+                    aria-current={null}
+                    aria-selected={false}
+                    className="bx--tree-node bx--tree-leaf-node"
+                    id="5-4"
+                    onBlur={[Function]}
+                    onClick={[Function]}
+                    onFocus={[Function]}
+                    onKeyDown={[Function]}
+                    role="treeitem"
+                    tabIndex={-1}
+                  >
+                    <div
+                      className="bx--tree-node__label"
+                    >
+                      5-4
+                    </div>
+                  </li>
+                </TreeNode>
+              </ul>
+            </li>
+          </TreeNode>
+        </ul>
+      </li>
+    </TreeNode>
+  </ul>
+</TreeView>
+`;
+
+exports[`TreeView should render with icons 1`] = `
+<TreeView
+  label="Tree view"
+  selected={
+    Array [
+      "1",
+    ]
+  }
+>
+  <TreeLabel>
+    <label
+      className="bx--label"
+      id="id3__label"
+    >
+      Tree view
+    </label>
+  </TreeLabel>
+  <ul
+    aria-label={null}
+    aria-labelledby="id3__label"
+    aria-multiselectable={null}
+    className="bx--tree"
+    onKeyDown={[Function]}
+    role="tree"
+  >
+    <TreeNode
+      depth={0}
+      id="1"
+      key=".0"
+      label="1"
+      onNodeFocusEvent={[Function]}
+      onTreeSelect={[Function]}
+      renderIcon={
+        Object {
+          "$$typeof": Symbol(react.forward_ref),
+          "render": [Function],
+        }
+      }
+      selected={
+        Array [
+          "1",
+        ]
+      }
+      tabIndex={0}
+      value="1"
+    >
+      <li
+        aria-current={null}
+        aria-selected={true}
+        className="bx--tree-node bx--tree-node--selected bx--tree-node--with-icon bx--tree-leaf-node"
+        id="1"
+        onBlur={[Function]}
+        onClick={[Function]}
+        onFocus={[Function]}
+        onKeyDown={[Function]}
+        role="treeitem"
+        tabIndex={0}
+      >
+        <div
+          className="bx--tree-node__label"
+        >
+          <ForwardRef(Document16)
+            className="bx--tree-node__icon"
+          >
+            <Icon
+              className="bx--tree-node__icon"
+              fill="currentColor"
+              height={16}
+              preserveAspectRatio="xMidYMid meet"
+              viewBox="0 0 32 32"
+              width={16}
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <svg
+                aria-hidden={true}
+                className="bx--tree-node__icon"
+                fill="currentColor"
+                focusable="false"
+                height={16}
+                preserveAspectRatio="xMidYMid meet"
+                viewBox="0 0 32 32"
+                width={16}
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M25.7,9.3l-7-7C18.5,2.1,18.3,2,18,2H8C6.9,2,6,2.9,6,4v24c0,1.1,0.9,2,2,2h16c1.1,0,2-0.9,2-2V10C26,9.7,25.9,9.5,25.7,9.3	z M18,4.4l5.6,5.6H18V4.4z M24,28H8V4h8v6c0,1.1,0.9,2,2,2h6V28z"
+                />
+                <path
+                  d="M10 22H22V24H10zM10 16H22V18H10z"
+                />
+              </svg>
+            </Icon>
+          </ForwardRef(Document16)>
+          1
+        </div>
+      </li>
+    </TreeNode>
+    <TreeNode
+      depth={0}
+      id="2"
+      key=".1"
+      label="2"
+      onNodeFocusEvent={[Function]}
+      onTreeSelect={[Function]}
+      renderIcon={
+        Object {
+          "$$typeof": Symbol(react.forward_ref),
+          "render": [Function],
+        }
+      }
+      selected={
+        Array [
+          "1",
+        ]
+      }
+      tabIndex={-1}
+      value="2"
+    >
+      <li
+        aria-current={null}
+        aria-selected={false}
+        className="bx--tree-node bx--tree-node--with-icon bx--tree-leaf-node"
+        id="2"
+        onBlur={[Function]}
+        onClick={[Function]}
+        onFocus={[Function]}
+        onKeyDown={[Function]}
+        role="treeitem"
+        tabIndex={-1}
+      >
+        <div
+          className="bx--tree-node__label"
+        >
+          <ForwardRef(Document16)
+            className="bx--tree-node__icon"
+          >
+            <Icon
+              className="bx--tree-node__icon"
+              fill="currentColor"
+              height={16}
+              preserveAspectRatio="xMidYMid meet"
+              viewBox="0 0 32 32"
+              width={16}
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <svg
+                aria-hidden={true}
+                className="bx--tree-node__icon"
+                fill="currentColor"
+                focusable="false"
+                height={16}
+                preserveAspectRatio="xMidYMid meet"
+                viewBox="0 0 32 32"
+                width={16}
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M25.7,9.3l-7-7C18.5,2.1,18.3,2,18,2H8C6.9,2,6,2.9,6,4v24c0,1.1,0.9,2,2,2h16c1.1,0,2-0.9,2-2V10C26,9.7,25.9,9.5,25.7,9.3	z M18,4.4l5.6,5.6H18V4.4z M24,28H8V4h8v6c0,1.1,0.9,2,2,2h6V28z"
+                />
+                <path
+                  d="M10 22H22V24H10zM10 16H22V18H10z"
+                />
+              </svg>
+            </Icon>
+          </ForwardRef(Document16)>
+          2
+        </div>
+      </li>
+    </TreeNode>
+    <TreeNode
+      depth={0}
+      id="5"
+      isExpanded={true}
+      key=".2"
+      label="5"
+      onNodeFocusEvent={[Function]}
+      onTreeSelect={[Function]}
+      renderIcon={
+        Object {
+          "$$typeof": Symbol(react.forward_ref),
+          "render": [Function],
+        }
+      }
+      selected={
+        Array [
+          "1",
+        ]
+      }
+      tabIndex={-1}
+      value="5"
+    >
+      <li
+        aria-current={null}
+        aria-expanded={true}
+        aria-selected={false}
+        className="bx--tree-node bx--tree-node--with-icon bx--tree-parent-node"
+        id="5"
+        onBlur={[Function]}
+        onClick={[Function]}
+        onFocus={[Function]}
+        onKeyDown={[Function]}
+        role="treeitem"
+        tabIndex={-1}
+      >
+        <div
+          className="bx--tree-node__label"
+        >
+          <span
+            className="bx--tree-parent-node__toggle"
+            onClick={[Function]}
+          >
+            <ForwardRef(CaretDown16)
+              className="bx--tree-parent-node__toggle-icon bx--tree-parent-node__toggle-icon--expanded"
+            >
+              <Icon
+                className="bx--tree-parent-node__toggle-icon bx--tree-parent-node__toggle-icon--expanded"
+                fill="currentColor"
+                height={16}
+                preserveAspectRatio="xMidYMid meet"
+                viewBox="0 0 32 32"
+                width={16}
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <svg
+                  aria-hidden={true}
+                  className="bx--tree-parent-node__toggle-icon bx--tree-parent-node__toggle-icon--expanded"
+                  fill="currentColor"
+                  focusable="false"
+                  height={16}
+                  preserveAspectRatio="xMidYMid meet"
+                  viewBox="0 0 32 32"
+                  width={16}
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M24 12L16 22 8 12z"
+                  />
+                </svg>
+              </Icon>
+            </ForwardRef(CaretDown16)>
+          </span>
+          <span
+            className="bx--tree-node__label__details"
+          >
+            <ForwardRef(Folder16)
+              className="bx--tree-node__icon"
+            >
+              <Icon
+                className="bx--tree-node__icon"
+                fill="currentColor"
+                height={16}
+                preserveAspectRatio="xMidYMid meet"
+                viewBox="0 0 32 32"
+                width={16}
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <svg
+                  aria-hidden={true}
+                  className="bx--tree-node__icon"
+                  fill="currentColor"
+                  focusable="false"
+                  height={16}
+                  preserveAspectRatio="xMidYMid meet"
+                  viewBox="0 0 32 32"
+                  width={16}
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M11.17,6l3.42,3.41.58.59H28V26H4V6h7.17m0-2H4A2,2,0,0,0,2,6V26a2,2,0,0,0,2,2H28a2,2,0,0,0,2-2V10a2,2,0,0,0-2-2H16L12.59,4.59A2,2,0,0,0,11.17,4Z"
+                  />
+                </svg>
+              </Icon>
+            </ForwardRef(Folder16)>
+            5
+          </span>
+        </div>
+        <ul
+          className="bx--tree-node__children"
+          role="group"
+        >
+          <TreeNode
+            depth={1}
+            id="5-1"
+            key=".0"
+            label="5-1"
+            onTreeSelect={[Function]}
+            renderIcon={
+              Object {
+                "$$typeof": Symbol(react.forward_ref),
+                "render": [Function],
+              }
+            }
+            selected={
+              Array [
+                "1",
+              ]
+            }
+            tabIndex={-1}
+            value="5-1"
+          >
+            <li
+              aria-current={null}
+              aria-selected={false}
+              className="bx--tree-node bx--tree-node--with-icon bx--tree-leaf-node"
+              id="5-1"
+              onBlur={[Function]}
+              onClick={[Function]}
+              onFocus={[Function]}
+              onKeyDown={[Function]}
+              role="treeitem"
+              tabIndex={-1}
+            >
+              <div
+                className="bx--tree-node__label"
+              >
+                <ForwardRef(Document16)
+                  className="bx--tree-node__icon"
+                >
+                  <Icon
+                    className="bx--tree-node__icon"
+                    fill="currentColor"
+                    height={16}
+                    preserveAspectRatio="xMidYMid meet"
+                    viewBox="0 0 32 32"
+                    width={16}
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <svg
+                      aria-hidden={true}
+                      className="bx--tree-node__icon"
+                      fill="currentColor"
+                      focusable="false"
+                      height={16}
+                      preserveAspectRatio="xMidYMid meet"
+                      viewBox="0 0 32 32"
+                      width={16}
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        d="M25.7,9.3l-7-7C18.5,2.1,18.3,2,18,2H8C6.9,2,6,2.9,6,4v24c0,1.1,0.9,2,2,2h16c1.1,0,2-0.9,2-2V10C26,9.7,25.9,9.5,25.7,9.3	z M18,4.4l5.6,5.6H18V4.4z M24,28H8V4h8v6c0,1.1,0.9,2,2,2h6V28z"
+                      />
+                      <path
+                        d="M10 22H22V24H10zM10 16H22V18H10z"
+                      />
+                    </svg>
+                  </Icon>
+                </ForwardRef(Document16)>
+                5-1
+              </div>
+            </li>
+          </TreeNode>
+          <TreeNode
+            depth={1}
+            id="5-2"
+            key=".1"
+            label="5-2"
+            onTreeSelect={[Function]}
+            renderIcon={
+              Object {
+                "$$typeof": Symbol(react.forward_ref),
+                "render": [Function],
+              }
+            }
+            selected={
+              Array [
+                "1",
+              ]
+            }
+            tabIndex={-1}
+            value="5-2"
+          >
+            <li
+              aria-current={null}
+              aria-selected={false}
+              className="bx--tree-node bx--tree-node--with-icon bx--tree-leaf-node"
+              id="5-2"
+              onBlur={[Function]}
+              onClick={[Function]}
+              onFocus={[Function]}
+              onKeyDown={[Function]}
+              role="treeitem"
+              tabIndex={-1}
+            >
+              <div
+                className="bx--tree-node__label"
+              >
+                <ForwardRef(Document16)
+                  className="bx--tree-node__icon"
+                >
+                  <Icon
+                    className="bx--tree-node__icon"
+                    fill="currentColor"
+                    height={16}
+                    preserveAspectRatio="xMidYMid meet"
+                    viewBox="0 0 32 32"
+                    width={16}
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <svg
+                      aria-hidden={true}
+                      className="bx--tree-node__icon"
+                      fill="currentColor"
+                      focusable="false"
+                      height={16}
+                      preserveAspectRatio="xMidYMid meet"
+                      viewBox="0 0 32 32"
+                      width={16}
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        d="M25.7,9.3l-7-7C18.5,2.1,18.3,2,18,2H8C6.9,2,6,2.9,6,4v24c0,1.1,0.9,2,2,2h16c1.1,0,2-0.9,2-2V10C26,9.7,25.9,9.5,25.7,9.3	z M18,4.4l5.6,5.6H18V4.4z M24,28H8V4h8v6c0,1.1,0.9,2,2,2h6V28z"
+                      />
+                      <path
+                        d="M10 22H22V24H10zM10 16H22V18H10z"
+                      />
+                    </svg>
+                  </Icon>
+                </ForwardRef(Document16)>
+                5-2
+              </div>
+            </li>
+          </TreeNode>
+          <TreeNode
+            depth={1}
+            id="5-3"
+            isExpanded={true}
+            key=".2"
+            label="5-3"
+            onTreeSelect={[Function]}
+            renderIcon={
+              Object {
+                "$$typeof": Symbol(react.forward_ref),
+                "render": [Function],
+              }
+            }
+            selected={
+              Array [
+                "1",
+              ]
+            }
+            tabIndex={-1}
+            value="5-3"
+          >
+            <li
+              aria-current={null}
+              aria-expanded={true}
+              aria-selected={false}
+              className="bx--tree-node bx--tree-node--with-icon bx--tree-parent-node"
+              id="5-3"
+              onBlur={[Function]}
+              onClick={[Function]}
+              onFocus={[Function]}
+              onKeyDown={[Function]}
+              role="treeitem"
+              tabIndex={-1}
+            >
+              <div
+                className="bx--tree-node__label"
+              >
+                <span
+                  className="bx--tree-parent-node__toggle"
+                  onClick={[Function]}
+                >
+                  <ForwardRef(CaretDown16)
+                    className="bx--tree-parent-node__toggle-icon bx--tree-parent-node__toggle-icon--expanded"
+                  >
+                    <Icon
+                      className="bx--tree-parent-node__toggle-icon bx--tree-parent-node__toggle-icon--expanded"
+                      fill="currentColor"
+                      height={16}
+                      preserveAspectRatio="xMidYMid meet"
+                      viewBox="0 0 32 32"
+                      width={16}
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <svg
+                        aria-hidden={true}
+                        className="bx--tree-parent-node__toggle-icon bx--tree-parent-node__toggle-icon--expanded"
+                        fill="currentColor"
+                        focusable="false"
+                        height={16}
+                        preserveAspectRatio="xMidYMid meet"
+                        viewBox="0 0 32 32"
+                        width={16}
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          d="M24 12L16 22 8 12z"
+                        />
+                      </svg>
+                    </Icon>
+                  </ForwardRef(CaretDown16)>
+                </span>
+                <span
+                  className="bx--tree-node__label__details"
+                >
+                  <ForwardRef(Folder16)
+                    className="bx--tree-node__icon"
+                  >
+                    <Icon
+                      className="bx--tree-node__icon"
+                      fill="currentColor"
+                      height={16}
+                      preserveAspectRatio="xMidYMid meet"
+                      viewBox="0 0 32 32"
+                      width={16}
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <svg
+                        aria-hidden={true}
+                        className="bx--tree-node__icon"
+                        fill="currentColor"
+                        focusable="false"
+                        height={16}
+                        preserveAspectRatio="xMidYMid meet"
+                        viewBox="0 0 32 32"
+                        width={16}
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          d="M11.17,6l3.42,3.41.58.59H28V26H4V6h7.17m0-2H4A2,2,0,0,0,2,6V26a2,2,0,0,0,2,2H28a2,2,0,0,0,2-2V10a2,2,0,0,0-2-2H16L12.59,4.59A2,2,0,0,0,11.17,4Z"
+                        />
+                      </svg>
+                    </Icon>
+                  </ForwardRef(Folder16)>
+                  5-3
+                </span>
+              </div>
+              <ul
+                className="bx--tree-node__children"
+                role="group"
+              >
+                <TreeNode
+                  depth={2}
+                  id="5-4"
+                  key=".0"
+                  label="5-4"
+                  onTreeSelect={[Function]}
+                  renderIcon={
+                    Object {
+                      "$$typeof": Symbol(react.forward_ref),
+                      "render": [Function],
+                    }
+                  }
+                  selected={
+                    Array [
+                      "1",
+                    ]
+                  }
+                  tabIndex={-1}
+                  value="5-4"
+                >
+                  <li
+                    aria-current={null}
+                    aria-selected={false}
+                    className="bx--tree-node bx--tree-node--with-icon bx--tree-leaf-node"
+                    id="5-4"
+                    onBlur={[Function]}
+                    onClick={[Function]}
+                    onFocus={[Function]}
+                    onKeyDown={[Function]}
+                    role="treeitem"
+                    tabIndex={-1}
+                  >
+                    <div
+                      className="bx--tree-node__label"
+                    >
+                      <ForwardRef(Document16)
+                        className="bx--tree-node__icon"
+                      >
+                        <Icon
+                          className="bx--tree-node__icon"
+                          fill="currentColor"
+                          height={16}
+                          preserveAspectRatio="xMidYMid meet"
+                          viewBox="0 0 32 32"
+                          width={16}
+                          xmlns="http://www.w3.org/2000/svg"
+                        >
+                          <svg
+                            aria-hidden={true}
+                            className="bx--tree-node__icon"
+                            fill="currentColor"
+                            focusable="false"
+                            height={16}
+                            preserveAspectRatio="xMidYMid meet"
+                            viewBox="0 0 32 32"
+                            width={16}
+                            xmlns="http://www.w3.org/2000/svg"
+                          >
+                            <path
+                              d="M25.7,9.3l-7-7C18.5,2.1,18.3,2,18,2H8C6.9,2,6,2.9,6,4v24c0,1.1,0.9,2,2,2h16c1.1,0,2-0.9,2-2V10C26,9.7,25.9,9.5,25.7,9.3	z M18,4.4l5.6,5.6H18V4.4z M24,28H8V4h8v6c0,1.1,0.9,2,2,2h6V28z"
+                            />
+                            <path
+                              d="M10 22H22V24H10zM10 16H22V18H10z"
+                            />
+                          </svg>
+                        </Icon>
+                      </ForwardRef(Document16)>
+                      5-4
+                    </div>
+                  </li>
+                </TreeNode>
+              </ul>
+            </li>
+          </TreeNode>
+        </ul>
+      </li>
+    </TreeNode>
+  </ul>
+</TreeView>
+`;

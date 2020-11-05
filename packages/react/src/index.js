@@ -7,8 +7,10 @@
 
 export Accordion from './components/Accordion';
 export AccordionItem from './components/AccordionItem';
+export { AspectRatio } from './components/AspectRatio';
 export { Breadcrumb, BreadcrumbItem } from './components/Breadcrumb';
 export Button from './components/Button';
+export ButtonSet from './components/ButtonSet';
 export Checkbox from './components/Checkbox';
 export CodeSnippet from './components/CodeSnippet';
 export ComboBox from './components/ComboBox';
@@ -83,6 +85,7 @@ export OrderedList from './components/OrderedList';
 export OverflowMenu from './components/OverflowMenu';
 export OverflowMenuItem from './components/OverflowMenuItem';
 export Pagination from './components/Pagination';
+export PaginationNav from './components/PaginationNav';
 export PrimaryButton from './components/PrimaryButton';
 export {
   ProgressIndicator,
@@ -164,10 +167,42 @@ export ToggleSkeleton from './components/Toggle/Toggle.Skeleton';
 export ToggleSmallSkeleton from './components/ToggleSmall/ToggleSmall.Skeleton';
 export IconSkeleton from './components/Icon/Icon.Skeleton';
 export DatePickerSkeleton from './components/DatePicker/DatePicker.Skeleton';
-export * from './components/UIShell';
-
-// experimental
 export {
-  PageSelector,
-  Unstable_Pagination,
-} from './components/Pagination/Unstable_Pagination';
+  Content,
+  Header,
+  HeaderContainer,
+  HeaderGlobalAction,
+  HeaderGlobalBar,
+  HeaderMenu,
+  HeaderMenuButton,
+  HeaderMenuItem,
+  HeaderName,
+  HeaderNavigation,
+  HeaderPanel,
+  HeaderSideNavItems,
+  Switcher,
+  SwitcherItem,
+  SwitcherDivider,
+  SkipToContent,
+  SideNav,
+  SideNavDetails,
+  SideNavFooter,
+  SideNavHeader,
+  SideNavIcon,
+  SideNavItem,
+  SideNavItems,
+  SideNavLink,
+  SideNavLinkText,
+  SideNavMenu,
+  SideNavMenuItem,
+  SideNavSwitcher,
+} from './components/UIShell';
+
+// Experimental
+export {
+  PageSelector as unstable_PageSelector,
+  Pagination as unstable_Pagination,
+} from './components/Pagination/experimental';
+export unstable_TreeView, {
+  TreeNode as unstable_TreeNode,
+} from './components/TreeView';

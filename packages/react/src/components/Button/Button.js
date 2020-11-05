@@ -37,7 +37,9 @@ const Button = React.forwardRef(function Button(
   const buttonClasses = classNames(className, {
     [`${prefix}--btn`]: true,
     [`${prefix}--btn--field`]: size === 'field',
-    [`${prefix}--btn--sm`]: size === 'small' || small,
+    [`${prefix}--btn--sm`]: size === 'small' || size === 'sm' || small,
+    [`${prefix}--btn--lg`]: size === 'lg',
+    [`${prefix}--btn--xl`]: size === 'xl',
     [`${prefix}--btn--${kind}`]: kind,
     [`${prefix}--btn--disabled`]: disabled,
     [`${prefix}--btn--icon-only`]: hasIconOnly,
@@ -96,12 +98,8 @@ const Button = React.forwardRef(function Button(
   );
 });
 
+Button.displayName = 'Button';
 Button.propTypes = {
-  /**
-   * Specify the content of your Button
-   */
-  children: PropTypes.node,
-
   /**
    * Specify how the button itself should be rendered.
    * Make sure to apply all props to the root node and render children appropriately
@@ -111,6 +109,11 @@ Button.propTypes = {
     PropTypes.string,
     PropTypes.elementType,
   ]),
+
+  /**
+   * Specify the content of your Button
+   */
+  children: PropTypes.node,
 
   /**
    * Specify an optional className to be added to your Button
@@ -123,50 +126,14 @@ Button.propTypes = {
   disabled: PropTypes.bool,
 
   /**
-   * Specify the size of the button, from a list of available sizes.
-   * For `default` buttons, this prop can remain unspecified.
+   * Specify if the button is an icon-only button
    */
-  size: PropTypes.oneOf(['default', 'field', 'small']),
+  hasIconOnly: PropTypes.bool,
 
   /**
-   * Deprecated in v10 in favor of `size`.
-   * Specify whether the Button should be a small variant
-   */
-  small: deprecate(
-    PropTypes.bool,
-    `\nThe prop \`small\` for Button has been deprecated in favor of \`size\`. Please use \`size="small"\` instead.`
-  ),
-
-  /**
-   * Specify the kind of Button you want to create
-   */
-  kind: PropTypes.oneOf(ButtonKinds).isRequired,
-
-  /**
-   * Optionally specify an href for your Button to become an <a> element
+   * Optionally specify an href for your Button to become an `<a>` element
    */
   href: PropTypes.string,
-
-  /**
-   * Optional prop to specify the tabIndex of the Button
-   */
-  tabIndex: PropTypes.number,
-
-  /**
-   * Optional prop to specify the type of the Button
-   */
-  type: PropTypes.oneOf(['button', 'reset', 'submit']),
-
-  /**
-   * Optional prop to specify the role of the Button
-   */
-  role: PropTypes.string,
-
-  /**
-   * Optional prop to allow overriding the icon rendering.
-   * Can be a React component class
-   */
-  renderIcon: PropTypes.oneOfType([PropTypes.func, PropTypes.object]),
 
   /**
    * If specifying the `renderIcon` prop, provide a description for that icon that can
@@ -182,9 +149,46 @@ Button.propTypes = {
   },
 
   /**
-   * Specify if the button is an icon-only button
+   * Specify the kind of Button you want to create
    */
-  hasIconOnly: PropTypes.bool,
+  kind: PropTypes.oneOf(ButtonKinds).isRequired,
+
+  /**
+   * Optional prop to allow overriding the icon rendering.
+   * Can be a React component class
+   */
+  renderIcon: PropTypes.oneOfType([PropTypes.func, PropTypes.object]),
+
+  /**
+   * Optional prop to specify the role of the Button
+   */
+  role: PropTypes.string,
+
+  /**
+   * Specify the size of the button, from a list of available sizes.
+   * For `default` buttons, this prop can remain unspecified.
+   */
+  size: PropTypes.oneOf(['default', 'field', 'small', 'sm', 'lg', 'xl']),
+
+  /**
+   * Deprecated in v10 in favor of `size`.
+   * Specify whether the Button should be a small variant
+   */
+  small: deprecate(
+    PropTypes.bool,
+    `\nThe prop \`small\` for Button has been deprecated in favor of \`size\`. Please use \`size="sm"\` instead.`
+  ),
+
+  /**
+   * Optional prop to specify the tabIndex of the Button
+   */
+  tabIndex: PropTypes.number,
+
+  /**
+   * Specify the alignment of the tooltip to the icon-only button.
+   * Can be one of: start, center, or end.
+   */
+  tooltipAlignment: PropTypes.oneOf(['start', 'center', 'end']),
 
   /**
    * Specify the direction of the tooltip for icon-only buttons.
@@ -193,10 +197,9 @@ Button.propTypes = {
   tooltipPosition: PropTypes.oneOf(['top', 'right', 'bottom', 'left']),
 
   /**
-   * Specify the alignment of the tooltip to the icon-only button.
-   * Can be one of: start, center, or end.
+   * Optional prop to specify the type of the Button
    */
-  tooltipAlignment: PropTypes.oneOf(['start', 'center', 'end']),
+  type: PropTypes.oneOf(['button', 'reset', 'submit']),
 };
 
 Button.defaultProps = {
@@ -204,6 +207,9 @@ Button.defaultProps = {
   type: 'button',
   disabled: false,
   kind: 'primary',
+  size: 'default',
+  tooltipAlignment: 'center',
+  tooltipPosition: 'top',
 };
 
 export default Button;

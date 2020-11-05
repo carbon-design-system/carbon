@@ -63,22 +63,23 @@ ToolbarItem.propTypes = {
   children: PropTypes.node,
 
   /**
-   * Specify the type of the ToolbarItem. The `search` type will render a
-   * `ToolbarSearch` component
-   */
-  type: PropTypes.string,
-
-  /**
    * Specify the placeholder text for the ToolbarSearch component. Useful if
    * `type` is set to 'search'
    */
   placeHolderText: PropTypes.string,
+
+  /**
+   * Specify the type of the ToolbarItem. The `search` type will render a
+   * `ToolbarSearch` component
+   */
+  type: PropTypes.string,
 };
 
 ToolbarItem.defaultProps = {
   placeHolderText: 'Provide placeHolderText',
 };
 
+// eslint-disable-next-line react/display-name
 export const ToolbarTitle = React.forwardRef(({ title }, ref) => (
   <li ref={ref} className={`${prefix}--toolbar-menu__title`}>
     {title}
@@ -92,6 +93,7 @@ ToolbarTitle.propTypes = {
   title: PropTypes.string,
 };
 
+// eslint-disable-next-line react/display-name
 export const ToolbarOption = React.forwardRef(({ children }, ref) => (
   <li ref={ref} className={`${prefix}--toolbar-menu__option`}>
     {children}
@@ -105,6 +107,7 @@ ToolbarOption.propTypes = {
   children: PropTypes.node,
 };
 
+// eslint-disable-next-line react/display-name
 export const ToolbarDivider = React.forwardRef((props, ref) => (
   <hr ref={ref} className={`${prefix}--toolbar-menu__divider`} />
 ));

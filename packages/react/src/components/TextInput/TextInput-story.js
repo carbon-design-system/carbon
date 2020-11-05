@@ -6,12 +6,12 @@
  */
 
 import React, { useState } from 'react';
-import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 import { withKnobs, boolean, select, text } from '@storybook/addon-knobs';
 import TextInput from '../TextInput';
 import TextInputSkeleton from '../TextInput/TextInput.Skeleton';
 import FluidForm from '../FluidForm/FluidForm';
+import mdx from './TextInput.mdx';
 
 const types = {
   None: '',
@@ -40,8 +40,12 @@ const ControlledPasswordInputApp = React.forwardRef(
           ref={ref}
           {...props}
         />
-        <button onClick={() => setType('text')}>Show password</button>
-        <button onClick={() => setType('password')}>Hide password</button>
+        <button type="button" onClick={() => setType('text')}>
+          Show password
+        </button>
+        <button type="button" onClick={() => setType('password')}>
+          Hide password
+        </button>
       </>
     );
   }
@@ -56,7 +60,7 @@ const props = {
       'This is not a default value'
     ),
     size: select('Field size (size)', sizes, undefined) || undefined,
-    labelText: text('Label text (labelText)', 'Text Input label'),
+    labelText: text('Label text (labelText)', 'Text input label'),
     placeholder: text('Placeholder text (placeholder)', 'Placeholder text'),
     light: boolean('Light variant (light)', false),
     disabled: boolean('Disabled (disabled)', false),
@@ -66,7 +70,13 @@ const props = {
       'Form validation UI content (invalidText)',
       'A valid value is required'
     ),
-    helperText: text('Helper text (helperText)', 'Optional helper text.'),
+    warn: boolean('Show warning state (warn)', false),
+    warnText: text(
+      'Warning state text (warnText)',
+      'This will overwrite your current settings'
+    ),
+    helperText: text('Helper text (helperText)', 'Optional help text'),
+    inline: boolean('Inline variant (inline)', false),
     onClick: action('onClick'),
     onChange: action('onChange'),
   }),
@@ -94,110 +104,125 @@ const props = {
 
 TextInput.displayName = 'TextInput';
 
-storiesOf('TextInput', module)
-  .addDecorator(withKnobs)
-  .add(
-    'Default',
-    () => (
-      <TextInput
-        type={select('Form control type (type)', types, 'text')}
-        {...props.TextInputProps()}
-      />
-    ),
-    {
-      info: {
-        text: `
-            Text fields enable the user to interact with and input data. A single line
-            field is used when the input anticipated by the user is a single line of
-            text as opposed to a paragraph.
-            The default type is 'text' and its value can be either 'string' or 'number'.
-          `,
-      },
-    }
-  )
-  .add(
-    'Fluid',
-    () => (
-      <FluidForm>
-        <TextInput
-          type={select('Form control type (type)', types, 'text')}
-          {...props.TextInputProps()}
-        />
-      </FluidForm>
-    ),
-    {
-      info: {
-        text: `
-            Text fields enable the user to interact with and input data. A single line
-            field is used when the input anticipated by the user is a single line of
-            text as opposed to a paragraph.
-            The default type is 'text' and its value can be either 'string' or 'number'.
-          `,
-      },
-    }
-  )
-  .add(
-    'Toggle password visibility',
-    () => {
-      return (
-        <TextInput.PasswordInput
-          {...props.TextInputProps()}
-          {...props.PasswordInputProps()}
-        />
-      );
-    },
-    {
-      info: {
-        text: `
-          Text field with password visibility toggle.
-        `,
-      },
-    }
-  )
-  .add(
-    'Fully controlled toggle password visibility',
-    () => {
-      ControlledPasswordInputApp.__docgenInfo = {
-        ...TextInput.PasswordInput.__docgenInfo,
-        props: {
-          ...TextInput.PasswordInput.__docgenInfo.props,
-        },
-      };
+export default {
+  title: 'TextInput',
+  decorators: [withKnobs],
 
-      return (
-        <ControlledPasswordInputApp
-          {...props.TextInputProps()}
-          {...props.PasswordInputProps()}
-        />
-      );
+  parameters: {
+    component: TextInput,
+    docs: {
+      page: mdx,
     },
-    {
-      info: {
-        text: `
-        Fully controlled text field with password visibility toggle.
+    subcomponents: {
+      TextInputSkeleton,
+      'TextInput.ControlledPasswordInput': TextInput.ControlledPasswordInput,
+    },
+  },
+};
+
+export const Default = () => (
+  <TextInput
+    type={select('Form control type (type)', types, 'text')}
+    {...props.TextInputProps()}
+  />
+);
+
+Default.parameters = {
+  info: {
+    text: `
+        Text fields enable the user to interact with and input data. A single line
+        field is used when the input anticipated by the user is a single line of
+        text as opposed to a paragraph.
+        The default type is 'text' and its value can be either 'string' or 'number'.
       `,
-      },
-    }
-  )
-  .add(
-    'skeleton',
-    () => (
-      <div
-        aria-label="loading text input"
-        aria-live="assertive"
-        role="status"
-        tabindex="0" // eslint-disable-line jsx-a11y/no-noninteractive-tabindex
-      >
-        <TextInputSkeleton />
-        <br />
-        <TextInputSkeleton hideLabel />
-      </div>
-    ),
-    {
-      info: {
-        text: `
-            Placeholder skeleton state to use when content is loading.
-            `,
-      },
-    }
+  },
+};
+
+export const Fluid = () => (
+  <FluidForm>
+    <TextInput
+      type={select('Form control type (type)', types, 'text')}
+      {...props.TextInputProps()}
+    />
+  </FluidForm>
+);
+
+Fluid.parameters = {
+  info: {
+    text: `
+        Text fields enable the user to interact with and input data. A single line
+        field is used when the input anticipated by the user is a single line of
+        text as opposed to a paragraph.
+        The default type is 'text' and its value can be either 'string' or 'number'.
+      `,
+  },
+};
+
+export const TogglePasswordVisibility = () => {
+  return (
+    <TextInput.PasswordInput
+      {...props.TextInputProps()}
+      {...props.PasswordInputProps()}
+    />
   );
+};
+
+TogglePasswordVisibility.storyName = 'Toggle password visibility';
+
+TogglePasswordVisibility.parameters = {
+  info: {
+    text: `
+      Text field with password visibility toggle.
+    `,
+  },
+};
+
+export const FullyControlledTogglePasswordVisibility = () => {
+  ControlledPasswordInputApp.__docgenInfo = {
+    ...TextInput.PasswordInput.__docgenInfo,
+    props: {
+      ...TextInput.PasswordInput.__docgenInfo.props,
+    },
+  };
+
+  return (
+    <ControlledPasswordInputApp
+      {...props.TextInputProps()}
+      {...props.PasswordInputProps()}
+    />
+  );
+};
+
+FullyControlledTogglePasswordVisibility.storyName =
+  'Fully controlled toggle password visibility';
+
+FullyControlledTogglePasswordVisibility.parameters = {
+  info: {
+    text: `
+    Fully controlled text field with password visibility toggle.
+  `,
+  },
+};
+
+export const Skeleton = () => (
+  <div
+    aria-label="loading text input"
+    aria-live="assertive"
+    role="status"
+    tabIndex="0" // eslint-disable-line jsx-a11y/no-noninteractive-tabindex
+  >
+    <TextInputSkeleton />
+    <br />
+    <TextInputSkeleton hideLabel />
+  </div>
+);
+
+Skeleton.storyName = 'skeleton';
+
+Skeleton.parameters = {
+  info: {
+    text: `
+        Placeholder skeleton state to use when content is loading.
+        `,
+  },
+};

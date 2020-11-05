@@ -121,8 +121,8 @@ describe('DataTable', () => {
             <Table {...getTableProps()}>
               <TableHead>
                 <TableRow>
-                  {headers.map((header) => (
-                    <TableHeader {...getHeaderProps({ header })}>
+                  {headers.map((header, i) => (
+                    <TableHeader key={i} {...getHeaderProps({ header })}>
                       {header.header}
                     </TableHeader>
                   ))}
@@ -254,8 +254,8 @@ describe('DataTable', () => {
                 <TableHead>
                   <TableRow>
                     <TableSelectAll {...getSelectionProps()} />
-                    {headers.map((header) => (
-                      <TableHeader {...getHeaderProps({ header })}>
+                    {headers.map((header, i) => (
+                      <TableHeader key={i} {...getHeaderProps({ header })}>
                         {header.header}
                       </TableHeader>
                     ))}
@@ -409,8 +409,8 @@ describe('DataTable', () => {
                 <TableHead>
                   <TableRow>
                     <TableSelectAll {...getSelectionProps()} />
-                    {headers.map((header) => (
-                      <TableHeader {...getHeaderProps({ header })}>
+                    {headers.map((header, i) => (
+                      <TableHeader key={i} {...getHeaderProps({ header })}>
                         {header.header}
                       </TableHeader>
                     ))}
@@ -555,8 +555,8 @@ describe('DataTable', () => {
               <Table>
                 <TableHead>
                   <TableRow>
-                    {headers.map((header) => (
-                      <TableHeader {...getHeaderProps({ header })}>
+                    {headers.map((header, i) => (
+                      <TableHeader key={i} {...getHeaderProps({ header })}>
                         {header.header}
                       </TableHeader>
                     ))}
@@ -651,7 +651,7 @@ describe('DataTable', () => {
     });
   });
 
-  describe('componentWillReceiveProps', () => {
+  describe('componentDidUpdate', () => {
     let mockProps;
 
     beforeEach(() => {
@@ -707,8 +707,8 @@ describe('DataTable', () => {
                   <TableRow>
                     <TableExpandHeader {...getExpandHeaderProps()} />
                     <TableSelectAll {...getSelectionProps()} />
-                    {headers.map((header) => (
-                      <TableHeader {...getHeaderProps({ header })}>
+                    {headers.map((header, i) => (
+                      <TableHeader key={i} {...getHeaderProps({ header })}>
                         {header.header}
                       </TableHeader>
                     ))}
@@ -756,7 +756,7 @@ describe('DataTable', () => {
 
       wrapper.setProps({ rows: nextRows });
 
-      const nextArgs = mockProps.render.mock.calls[1][0];
+      const nextArgs = getLastCallFor(mockProps.render)[0];
       expect(nextArgs.rows.length).toBe(nextRows.length);
       expect(nextArgs.rows.map((row) => row.id)).toEqual(['b', 'a', 'c', 'd']);
     });
@@ -783,7 +783,7 @@ describe('DataTable', () => {
 
       wrapper.setProps(nextProps);
 
-      const nextArgs = mockProps.render.mock.calls[1][0];
+      const nextArgs = getLastCallFor(mockProps.render)[0];
       expect(nextArgs.headers).toEqual(nextProps.headers);
     });
 
@@ -802,6 +802,7 @@ describe('DataTable', () => {
       ];
 
       wrapper.setProps({ rows: nextRows });
+      wrapper.update();
 
       expect(getSelectAll(wrapper).prop('checked')).toBe(false);
       const { getBatchActionProps, selectedRows } = getLastCallFor(
@@ -843,7 +844,7 @@ describe('DataTable', () => {
 
       wrapper.setProps({ rows: nextRows });
 
-      const nextArgs = mockProps.render.mock.calls[1][0];
+      const nextArgs = getLastCallFor(mockProps.render)[0];
       expect(nextArgs.rows.map((row) => row.id)).toEqual(['c', 'a', 'b']);
     });
 
@@ -862,7 +863,7 @@ describe('DataTable', () => {
 
       wrapper.setProps({ rows: nextRows });
 
-      const nextArgs = mockProps.render.mock.calls[1][0];
+      const nextArgs = getLastCallFor(mockProps.render)[0];
       expect(nextArgs.rows.map((row) => row.cells[0].value)).toEqual([
         'Field 2:A!',
         'Field 1:A!',

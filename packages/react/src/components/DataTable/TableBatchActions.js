@@ -46,15 +46,6 @@ const TableBatchActions = ({
 
   return (
     <div {...rest} className={batchActionsClasses}>
-      <TableActionList>
-        {children}
-        <Button
-          className={`${prefix}--batch-summary__cancel`}
-          tabIndex={shouldShowBatchActions ? 0 : -1}
-          onClick={onCancel}>
-          {t('carbon.table.batch.cancel')}
-        </Button>
-      </TableActionList>
       <div className={`${prefix}--batch-summary`}>
         <p className={`${prefix}--batch-summary__para`}>
           <span>
@@ -64,6 +55,15 @@ const TableBatchActions = ({
           </span>
         </p>
       </div>
+      <TableActionList>
+        {children}
+        <Button
+          className={`${prefix}--batch-summary__cancel`}
+          tabIndex={shouldShowBatchActions ? 0 : -1}
+          onClick={onCancel}>
+          {t('carbon.table.batch.cancel')}
+        </Button>
+      </TableActionList>
     </div>
   );
 };
@@ -73,6 +73,12 @@ TableBatchActions.translationKeys = Object.keys(translationKeys);
 TableBatchActions.propTypes = {
   children: PropTypes.node,
   className: PropTypes.string,
+
+  /**
+   * Hook required to listen for when the user initiates a cancel request
+   * through this comopnent
+   */
+  onCancel: PropTypes.func.isRequired,
 
   /**
    * Boolean specifier for whether or not the batch action bar should be
@@ -85,12 +91,6 @@ TableBatchActions.propTypes = {
    * This number is used to derive the selection message
    */
   totalSelected: PropTypes.number.isRequired,
-
-  /**
-   * Hook required to listen for when the user initiates a cancel request
-   * through this comopnent
-   */
-  onCancel: PropTypes.func.isRequired,
 
   /**
    * Supply a method to translate internal strings with your i18n tool of

@@ -48,14 +48,14 @@ export function NotificationActionButton({
 
 NotificationActionButton.propTypes = {
   /**
-   * Specify an optional className to be applied to the notification action button
-   */
-  className: PropTypes.string,
-
-  /**
    * Specify the content of the notification action button.
    */
   children: PropTypes.node,
+
+  /**
+   * Specify an optional className to be applied to the notification action button
+   */
+  className: PropTypes.string,
 
   /**
    * Optionally specify a click handler for the notification action button.
@@ -81,6 +81,7 @@ export function NotificationButton({
   });
 
   return (
+    // eslint-disable-next-line react/button-has-type
     <button
       {...rest}
       type={type}
@@ -96,30 +97,19 @@ export function NotificationButton({
 
 NotificationButton.propTypes = {
   /**
-   * Specify an optional className to be applied to the notification button
-   */
-  className: PropTypes.string,
-
-  /**
    * Specify a label to be read by screen readers on the notification button
    */
   ariaLabel: PropTypes.string,
 
   /**
-   * Optional prop to specify the type of the Button
+   * Specify an optional className to be applied to the notification button
    */
-  type: PropTypes.string,
+  className: PropTypes.string,
 
   /**
    * Provide a description for "close" icon that can be read by screen readers
    */
   iconDescription: PropTypes.string,
-
-  /**
-   * Optional prop to allow overriding the icon rendering.
-   * Can be a React component class
-   */
-  renderIcon: PropTypes.oneOfType([PropTypes.func, PropTypes.object]),
 
   /**
    * Specify an optional icon for the Button through a string,
@@ -131,6 +121,17 @@ NotificationButton.propTypes = {
    * Specify the notification type
    */
   notificationType: PropTypes.oneOf(['toast', 'inline']),
+
+  /**
+   * Optional prop to allow overriding the icon rendering.
+   * Can be a React component class
+   */
+  renderIcon: PropTypes.oneOfType([PropTypes.func, PropTypes.object]),
+
+  /**
+   * Optional prop to specify the type of the Button
+   */
+  type: PropTypes.string,
 };
 
 NotificationButton.defaultProps = {
@@ -179,25 +180,25 @@ export function NotificationTextDetails({
 
 NotificationTextDetails.propTypes = {
   /**
+   * Specify the caption
+   */
+  caption: PropTypes.node,
+  /**
    * Pass in the children that will be rendered in NotificationTextDetails
    */
   children: PropTypes.node,
   /**
-   * Specify the title
+   * Specify the notification type
    */
-  title: PropTypes.string,
+  notificationType: PropTypes.oneOf(['toast', 'inline']),
   /**
    * Specify the sub-title
    */
   subtitle: PropTypes.node,
   /**
-   * Specify the caption
+   * Specify the title
    */
-  caption: PropTypes.node,
-  /**
-   * Specify the notification type
-   */
-  notificationType: PropTypes.oneOf(['toast', 'inline']),
+  title: PropTypes.string,
 };
 
 NotificationTextDetails.defaultProps = {
@@ -229,7 +230,7 @@ function NotificationIcon({ iconDescription, kind, notificationType }) {
 }
 
 NotificationIcon.propTypes = {
-  notificationType: PropTypes.oneOf(['inline', 'toast']).isRequired,
+  iconDescription: PropTypes.string.isRequired,
   kind: PropTypes.oneOf([
     'error',
     'success',
@@ -238,7 +239,7 @@ NotificationIcon.propTypes = {
     'info',
     'info-square',
   ]).isRequired,
-  iconDescription: PropTypes.string.isRequired,
+  notificationType: PropTypes.oneOf(['inline', 'toast']).isRequired,
 };
 
 export function ToastNotification({
@@ -316,6 +317,11 @@ export function ToastNotification({
 
 ToastNotification.propTypes = {
   /**
+   * Specify the caption
+   */
+  caption: PropTypes.node,
+
+  /**
    * Pass in the children that will be rendered within the ToastNotification
    */
   children: PropTypes.node,
@@ -324,6 +330,16 @@ ToastNotification.propTypes = {
    * Specify an optional className to be applied to the notification box
    */
   className: PropTypes.string,
+
+  /**
+   * Specify the close button should be disabled, or not
+   */
+  hideCloseButton: PropTypes.bool,
+
+  /**
+   * Provide a description for "close" icon that can be read by screen readers
+   */
+  iconDescription: PropTypes.string,
 
   /**
    * Specify what state the notification represents
@@ -343,14 +359,15 @@ ToastNotification.propTypes = {
   lowContrast: PropTypes.bool,
 
   /**
-   * Specify the title
+   * By default, this value is "toast". You can also provide an alternate type
+   * if it makes sense for the underlying `<NotificationTextDetails>` and `<NotificationButton>`
    */
-  title: PropTypes.string.isRequired,
+  notificationType: PropTypes.string,
 
   /**
-   * Specify the sub-title
+   * Provide a function that is called when menu is closed
    */
-  subtitle: PropTypes.node,
+  onCloseButtonClick: PropTypes.func,
 
   /**
    * By default, this value is "alert". You can also provide an alternate
@@ -359,40 +376,24 @@ ToastNotification.propTypes = {
   role: PropTypes.string.isRequired,
 
   /**
-   * Specify the caption
-   */
-  caption: PropTypes.node,
-
-  /**
-   * Provide a function that is called when menu is closed
-   */
-  onCloseButtonClick: PropTypes.func,
-
-  /**
-   * Provide a description for "close" icon that can be read by screen readers
-   */
-  iconDescription: PropTypes.string,
-
-  /**
    * Provide a description for "status" icon that can be read by screen readers
    */
   statusIconDescription: PropTypes.string,
 
   /**
-   * By default, this value is "toast". You can also provide an alternate type
-   * if it makes sense for the underlying `<NotificationTextDetails>` and `<NotificationButton>`
+   * Specify the sub-title
    */
-  notificationType: PropTypes.string,
-
-  /**
-   * Specify the close button should be disabled, or not
-   */
-  hideCloseButton: PropTypes.bool,
+  subtitle: PropTypes.node,
 
   /**
    * Specify an optional duration the notification should be closed in
    */
   timeout: PropTypes.number,
+
+  /**
+   * Specify the title
+   */
+  title: PropTypes.string.isRequired,
 };
 
 ToastNotification.defaultProps = {
@@ -484,6 +485,16 @@ InlineNotification.propTypes = {
   className: PropTypes.string,
 
   /**
+   * Specify the close button should be disabled, or not
+   */
+  hideCloseButton: PropTypes.bool,
+
+  /**
+   * Provide a description for "close" icon that can be read by screen readers
+   */
+  iconDescription: PropTypes.string,
+
+  /**
    * Specify what state the notification represents
    */
   kind: PropTypes.oneOf([
@@ -501,14 +512,15 @@ InlineNotification.propTypes = {
   lowContrast: PropTypes.bool,
 
   /**
-   * Specify the title
+   * By default, this value is "inline". You can also provide an alternate type
+   * if it makes sense for the underlying `<NotificationTextDetails>` and `<NotificationButton>`
    */
-  title: PropTypes.string.isRequired,
+  notificationType: PropTypes.string,
 
   /**
-   * Specify the sub-title
+   * Provide a function that is called when menu is closed
    */
-  subtitle: PropTypes.node,
+  onCloseButtonClick: PropTypes.func,
 
   /**
    * By default, this value is "alert". You can also provide an alternate
@@ -517,30 +529,19 @@ InlineNotification.propTypes = {
   role: PropTypes.string.isRequired,
 
   /**
-   * Provide a function that is called when menu is closed
-   */
-  onCloseButtonClick: PropTypes.func,
-
-  /**
-   * Provide a description for "close" icon that can be read by screen readers
-   */
-  iconDescription: PropTypes.string,
-
-  /**
    * Provide a description for "status" icon that can be read by screen readers
    */
   statusIconDescription: PropTypes.string,
 
   /**
-   * By default, this value is "inline". You can also provide an alternate type
-   * if it makes sense for the underlying `<NotificationTextDetails>` and `<NotificationButton>`
+   * Specify the sub-title
    */
-  notificationType: PropTypes.string,
+  subtitle: PropTypes.node,
 
   /**
-   * Specify the close button should be disabled, or not
+   * Specify the title
    */
-  hideCloseButton: PropTypes.bool,
+  title: PropTypes.string.isRequired,
 };
 
 InlineNotification.defaultProps = {

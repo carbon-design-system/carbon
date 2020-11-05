@@ -17,6 +17,8 @@ const getInstanceId = setupGetInstanceId();
 
 class Toggle extends React.Component {
   static propTypes = {
+    ['aria-label']: PropTypes.string.isRequired,
+
     /**
      * Specify a custom className to apply to the form-item node
      */
@@ -28,38 +30,39 @@ class Toggle extends React.Component {
     defaultToggled: PropTypes.bool,
 
     /**
+     * Provide an id that unique represents the underlying `<input>`
+     */
+    id: PropTypes.string.isRequired,
+
+    /**
+     * Specify the label for the "off" position
+     */
+    labelA: PropTypes.node.isRequired,
+
+    /**
+     * Specify the label for the "on" position
+     */
+    labelB: PropTypes.node.isRequired,
+
+    /**
+     * Provide the text that will be read by a screen reader when visiting this
+     * control
+     */
+    labelText: PropTypes.node,
+    /**
+     * Provide an optional hook that is called when the control is changed
+     */
+    onChange: PropTypes.func,
+
+    /**
      * Provide an optional hook that is called when the control is toggled
      */
     onToggle: PropTypes.func,
 
     /**
-     * Provide an id that unique represents the underlying <input>
-     */
-    id: PropTypes.string.isRequired,
-
-    /**
      * Specify whether the control is toggled
      */
     toggled: PropTypes.bool,
-
-    /**
-     * Provide the text that will be read by a screen reader when visiting this
-     * control
-     * `aria-label` is always required but will be null if `labelText` is also
-     * provided
-     */
-    labelText: PropTypes.string,
-    ['aria-label']: PropTypes.string.isRequired,
-
-    /**
-     * Specify the label for the "off" position
-     */
-    labelA: PropTypes.string.isRequired,
-
-    /**
-     * Specify the label for the "on" position
-     */
-    labelB: PropTypes.string.isRequired,
   };
 
   static defaultProps = {
@@ -125,7 +128,9 @@ class Toggle extends React.Component {
         <label
           className={`${prefix}--toggle-input__label`}
           htmlFor={id}
-          aria-label={labelText ? null : this.props['aria-label']}>
+          aria-label={
+            typeof labelText === 'string' ? null : this.props['aria-label']
+          }>
           {labelText}
           <span className={`${prefix}--toggle__switch`}>
             <span className={`${prefix}--toggle__text--off`} aria-hidden="true">

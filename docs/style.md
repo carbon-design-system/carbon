@@ -1,5 +1,3 @@
-<!-- alex disable hooks -->
-
 <!--
 Inspired by Uber's Go Style Guide:
 https://github.com/uber-go/guide/blob/85bf203f4371a8ae9e5e9a4d52ea77b17ca04ae6/style.md
@@ -390,11 +388,6 @@ made before an official release.
 For experimental or unstable code, we use the `unstable_` prefix. For example:
 
 ```js
-// An unstable component
-function unstable_Pagination(props) {
-  // ...
-}
-
 // An unstable method
 function unstable_layout() {
   // ...
@@ -404,6 +397,16 @@ function unstable_layout() {
 const unstable_meta = {
   // ...
 };
+
+// An unstable component will retain its name, specifically for things like
+// the rules of hooks plugin which depend on the correct casing of the name
+function Pagination(props) {
+  // ...
+}
+
+// However, when we export the component we will export it with the `unstable_`
+// prefix. (Similar to React.unstable_Suspense, React.unstable_Profiler)
+export { default as unstable_Pagination } from './components/Pagination';
 ```
 
 For teams using these features, they will need to import the functionality by
@@ -415,28 +418,6 @@ import { unstable_Pagination as Pagination } from 'carbon-components-react';
 
 This code should be treated as experimental and will break between release
 versions for the package that it is being imported from.
-
-<table>
-<thead><tr><th>Unpreferred</th><th>Preferred</th></tr></thead>
-<tbody>
-<tr><td>
-
-```jsx
-function Unstable_MyComponent() {
-  // ...
-}
-```
-
-</td><td>
-
-```jsx
-function unstable_MyComponent() {
-  // ...
-}
-```
-
-</td></tr>
-</tbody></table>
 
 ## Sass
 

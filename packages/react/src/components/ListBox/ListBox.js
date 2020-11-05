@@ -37,12 +37,16 @@ const ListBox = React.forwardRef(function ListBox(
     size,
     invalid,
     invalidText,
+    warn,
+    warnText,
     light,
     isOpen,
     ...rest
   },
   ref
 ) {
+  const showWarning = !invalid && warn;
+
   const className = cx({
     [containerClassName]: !!containerClassName,
     [`${prefix}--list-box`]: true,
@@ -51,9 +55,11 @@ const ListBox = React.forwardRef(function ListBox(
     [`${prefix}--list-box--disabled`]: disabled,
     [`${prefix}--list-box--light`]: light,
     [`${prefix}--list-box--expanded`]: isOpen,
+    [`${prefix}--list-box--warning`]: showWarning,
   });
   return (
     <>
+      {/* eslint-disable-next-line jsx-a11y/no-static-element-interactions */}
       <div
         {...rest}
         className={className}
@@ -65,6 +71,9 @@ const ListBox = React.forwardRef(function ListBox(
       </div>
       {invalid ? (
         <div className={`${prefix}--form-requirement`}>{invalidText}</div>
+      ) : null}
+      {showWarning ? (
+        <div className={`${prefix}--form-requirement`}>{warnText}</div>
       ) : null}
     </>
   );
@@ -88,15 +97,45 @@ ListBox.propTypes = {
   disabled: PropTypes.bool.isRequired,
 
   /**
+   * Specify whether the control is currently invalid
+   */
+  invalid: PropTypes.bool,
+
+  /**
+   * Specify the text to be displayed when the control is invalid
+   */
+  invalidText: PropTypes.string,
+
+  /**
+   * Specify if the control should render open
+   */
+  isOpen: PropTypes.bool,
+
+  /**
+   * Specify if the control should use the light variant
+   */
+  light: PropTypes.bool,
+
+  /**
+   * Specify the size of the ListBox. Currently supports either `sm` or `xl` as an option.
+   */
+  size: ListBoxSize,
+
+  /**
    * Specify the "type" of the ListBox. Currently supports either `default` or
    * `inline` as an option.
    */
   type: ListBoxType.isRequired,
 
   /**
-   * Specify the size of the ListBox. Currently supports either `sm` or `xl` as an option.
+   * Specify whether the control is currently in warning state
    */
-  size: ListBoxSize,
+  warn: PropTypes.bool,
+
+  /**
+   * Provide the text that is displayed when the control is in warning state
+   */
+  warnText: PropTypes.string,
 };
 
 ListBox.defaultProps = {

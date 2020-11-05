@@ -37,7 +37,11 @@ const ToggleSmall = ({
   } else {
     checkedProps.defaultChecked = defaultToggled;
   }
-  const ariaLabel = labelText || other['aria-label'] || other.ariaLabel || null;
+  const ariaLabel =
+    (typeof labelText === 'string' && labelText) ||
+    other['aria-label'] ||
+    other.ariaLabel ||
+    null;
 
   return (
     <div className={wrapperClasses}>
@@ -89,6 +93,8 @@ const ToggleSmall = ({
 };
 
 ToggleSmall.propTypes = {
+  ['aria-label']: PropTypes.string.isRequired,
+
   /**
    * The CSS class for the toggle
    */
@@ -100,35 +106,38 @@ ToggleSmall.propTypes = {
   defaultToggled: PropTypes.bool,
 
   /**
-   * The event handler for the `onChange` event.
-   */
-  onToggle: PropTypes.func,
-
-  /**
    * The `id` attribute for the toggle
    */
   id: PropTypes.string.isRequired,
 
   /**
-   * `true` to make it toggled on
-   */
-  toggled: PropTypes.bool,
-
-  /**
-   * The `aria-label` attribute for the toggle
-   */
-  labelText: PropTypes.string,
-  ['aria-label']: PropTypes.string.isRequired,
-
-  /**
    * Specify the label for the "off" position
    */
-  labelA: PropTypes.string.isRequired,
+  labelA: PropTypes.node.isRequired,
 
   /**
    * Specify the label for the "on" position
    */
-  labelB: PropTypes.string.isRequired,
+  labelB: PropTypes.node.isRequired,
+
+  /**
+   * The `aria-label` attribute for the toggle
+   */
+  labelText: PropTypes.node,
+  /**
+   * Provide an optional hook that is called when the control is changed
+   */
+  onChange: PropTypes.func,
+
+  /**
+   * The event handler for the `onChange` event.
+   */
+  onToggle: PropTypes.func,
+
+  /**
+   * `true` to make it toggled on
+   */
+  toggled: PropTypes.bool,
 };
 
 ToggleSmall.defaultProps = {

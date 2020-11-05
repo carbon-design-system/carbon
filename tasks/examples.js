@@ -21,6 +21,7 @@ const PACKAGES_TO_BUILD = new Set([
   'icons',
   'layout',
   'motion',
+  'pictograms',
   'themes',
   'type',
 ]);
@@ -190,4 +191,5 @@ async function main() {
 
 main().catch((error) => {
   console.log(error);
+  process.exit(1);
 });

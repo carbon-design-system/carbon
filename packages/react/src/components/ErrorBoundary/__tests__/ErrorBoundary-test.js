@@ -93,7 +93,10 @@ describe('ErrorBoundary', () => {
 
       return (
         <ErrorBoundaryContext.Provider value={{ log: jest.fn() }}>
-          <button ref={(element) => (button = element)} onClick={onClick}>
+          <button
+            type="button"
+            ref={(element) => (button = element)}
+            onClick={onClick}>
             Toggle
           </button>
           <ErrorBoundary fallback={<MockFallback />}>

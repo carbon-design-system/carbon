@@ -19,17 +19,24 @@
 /// @group tile
 @mixin tile {
   .#{$prefix}--tile {
+    position: relative;
     display: block;
     min-width: 8rem;
     min-height: 4rem;
-    background-color: $ui-01;
-    position: relative;
     padding: $carbon--spacing-05;
+    background-color: $ui-01;
     outline: 2px solid transparent;
     outline-offset: -2px;
 
     &:focus {
       @include focus-outline('outline');
+
+      // Windows, Firefox HCM Fix
+      @media screen and (-ms-high-contrast: active),
+        screen and (prefers-contrast) {
+        outline: 3px solid transparent;
+        outline-offset: -3px;
+      }
     }
   }
 
@@ -40,8 +47,8 @@
   .#{$prefix}--tile--clickable,
   .#{$prefix}--tile--selectable,
   .#{$prefix}--tile--expandable {
-    transition: $duration--moderate-01 motion(standard, productive);
     cursor: pointer;
+    transition: $duration--moderate-01 motion(standard, productive);
 
     &:hover {
       background: $hover-ui;
@@ -50,18 +57,15 @@
 
   .#{$prefix}--tile--clickable,
   .#{$prefix}--tile--expandable {
+    &:focus {
+      @include focus-outline('outline');
+    }
+
     &:hover,
     &:focus {
       .#{$prefix}--tile__checkmark {
         opacity: 1;
       }
-    }
-  }
-
-  .#{$prefix}--tile--clickable,
-  .#{$prefix}--tile--expandable {
-    &:focus {
-      @include focus-outline('outline');
     }
   }
 
@@ -73,6 +77,7 @@
   .#{$prefix}--tile--clickable {
     @include reset;
     @include type-style('body-short-01');
+
     color: $text-01;
     text-decoration: none;
   }
@@ -84,15 +89,15 @@
   .#{$prefix}--tile__checkmark,
   .#{$prefix}--tile__chevron {
     position: absolute;
-    transition: $duration--fast-02 motion(standard, productive);
-    border: none;
     background: transparent;
+    border: none;
+    transition: $duration--fast-02 motion(standard, productive);
   }
 
   .#{$prefix}--tile__checkmark {
-    height: 1rem;
     top: 1rem;
     right: 1rem;
+    height: 1rem;
     opacity: 0;
 
     svg {
@@ -107,14 +112,21 @@
 
   .#{$prefix}--tile__chevron {
     position: absolute;
-    bottom: 0.5rem;
     right: 0.5rem;
+    bottom: 0.5rem;
     height: 1rem;
 
     svg {
       transform-origin: center;
       transition: $duration--fast-02 motion(standard, productive);
       fill: $ui-05;
+
+      // Windows, Firefox HCM Fix
+      @media screen and (-ms-high-contrast: active),
+        screen and (prefers-contrast) {
+        // `ButtonText` is a CSS2 system color to help improve colors in HCM
+        fill: ButtonText;
+      }
     }
 
     &:hover {
@@ -128,14 +140,11 @@
 
   .#{$prefix}--tile--expandable {
     width: 100%;
+    overflow: hidden;
     color: inherit;
     font-size: inherit;
     text-align: left;
     border: 0;
-  }
-
-  .#{$prefix}--tile--expandable {
-    overflow: hidden;
     transition: max-height $duration--moderate-01 motion(standard, productive);
   }
 
@@ -181,6 +190,13 @@
     > .#{$prefix}--tile__checkmark
     svg {
     fill: $ui-05;
+
+    // Windows, Firefox HCM Fix
+    @media screen and (-ms-high-contrast: active),
+      screen and (prefers-contrast) {
+      // `ButtonText` is a CSS2 system color to help improve colors in HCM
+      fill: ButtonText;
+    }
   }
 
   .#{$prefix}--tile-content {
@@ -190,6 +206,10 @@
 
   .#{$prefix}--tile-input {
     @include hidden;
+  }
+
+  .#{$prefix}--tile-input:focus + .#{$prefix}--tile {
+    @include focus-outline('outline');
   }
 }
 

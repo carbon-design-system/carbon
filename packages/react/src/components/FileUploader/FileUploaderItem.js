@@ -9,7 +9,7 @@ import { settings } from 'carbon-components';
 import cx from 'classnames';
 import PropTypes from 'prop-types';
 import React, { useRef } from 'react';
-import { Filename } from './';
+import Filename from './Filename';
 import { keys, matches } from '../../internal/keyboard';
 import uid from '../../tools/uniqueId';
 
@@ -73,19 +73,14 @@ function FileUploaderItem({
 
 FileUploaderItem.propTypes = {
   /**
-   * Unique identifier for the file object
+   * Error message body for an invalid file upload
    */
-  uuid: PropTypes.string,
+  errorBody: PropTypes.string,
 
   /**
-   * Name of the uploaded file
+   * Error message subject for an invalid file upload
    */
-  name: PropTypes.string,
-
-  /**
-   * Status of the file upload
-   */
-  status: PropTypes.oneOf(['uploading', 'edit', 'complete']),
+  errorSubject: PropTypes.string,
 
   /**
    * Description of status icon (displayed in native tooltip)
@@ -98,20 +93,31 @@ FileUploaderItem.propTypes = {
   invalid: PropTypes.bool,
 
   /**
+   * Name of the uploaded file
+   */
+  name: PropTypes.string,
+
+  /**
    * Event handler that is called after removing a file from the file uploader
    * The event handler signature looks like `onDelete(evt, { uuid })`
    */
   onDelete: PropTypes.func,
 
   /**
-   * Error message subject for an invalid file upload
+   * Specify the size of the uploaded items, from a list of available
+   * sizes. For `default` size, this prop can remain unspecified.
    */
-  errorSubject: PropTypes.string,
+  size: PropTypes.oneOf(['default', 'field', 'small']),
 
   /**
-   * Error message body for an invalid file upload
+   * Status of the file upload
    */
-  errorBody: PropTypes.string,
+  status: PropTypes.oneOf(['uploading', 'edit', 'complete']),
+
+  /**
+   * Unique identifier for the file object
+   */
+  uuid: PropTypes.string,
 };
 
 FileUploaderItem.defaultProps = {

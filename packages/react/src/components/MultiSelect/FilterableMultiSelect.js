@@ -11,7 +11,7 @@ import React from 'react';
 import Downshift from 'downshift';
 import isEqual from 'lodash.isequal';
 import { settings } from 'carbon-components';
-import { WarningFilled16 } from '@carbon/icons-react';
+import { WarningFilled16, WarningAltFilled16 } from '@carbon/icons-react';
 import ListBox, { PropTypes as ListBoxPropTypes } from '../ListBox';
 import Checkbox from '../Checkbox';
 import Selection from '../../internal/Selection';
@@ -20,6 +20,7 @@ import { defaultItemToString } from './tools/itemToString';
 import { defaultSortItems, defaultCompareItems } from './tools/sorting';
 import { defaultFilterItems } from '../ComboBox/tools/filter';
 import setupGetInstanceId from '../../tools/setupGetInstanceId';
+import { mapDownshiftProps } from '../../tools/createPropAdapter';
 
 const { prefix } = settings;
 
@@ -27,7 +28,6 @@ const getInstanceId = setupGetInstanceId();
 
 export default class FilterableMultiSelect extends React.Component {
   static propTypes = {
-    ...sortingPropTypes,
     /**
      * 'aria-label' of the ListBox component.
      */
@@ -39,61 +39,20 @@ export default class FilterableMultiSelect extends React.Component {
     disabled: PropTypes.bool,
 
     /**
+     * Additional props passed to Downshift
+     */
+    downshiftProps: PropTypes.shape(Downshift.propTypes),
+
+    /**
      * Specify a custom `id`
      */
     id: PropTypes.string.isRequired,
-
-    /**
-     * We try to stay as generic as possible here to allow individuals to pass
-     * in a collection of whatever kind of data structure they prefer
-     */
-    items: PropTypes.array.isRequired,
 
     /**
      * Allow users to pass in arbitrary items from their collection that are
      * pre-selected
      */
     initialSelectedItems: PropTypes.array,
-
-    /**
-     * Helper function passed to downshift that allows the library to render a
-     * given item to a string label. By default, it extracts the `label` field
-     * from a given item to serve as the item label in the list.
-     */
-    itemToString: PropTypes.func,
-
-    /**
-     * Specify the locale of the control. Used for the default `compareItems`
-     * used for sorting the list of items in the control.
-     */
-    locale: PropTypes.string,
-
-    /**
-     * Specify the size of the ListBox. Currently supports either `sm`, `lg` or `xl` as an option.
-     */
-    size: ListBoxPropTypes.ListBoxSize,
-
-    /**
-     * `onChange` is a utility for this controlled component to communicate to a
-     * consuming component what kind of internal state changes are occuring.
-     */
-    onChange: PropTypes.func,
-
-    /**
-     * Generic `placeholder` that will be used as the textual representation of
-     * what this field is for
-     */
-    placeholder: PropTypes.string.isRequired,
-
-    /**
-     * Specify title to show title on hover
-     */
-    useTitleInItem: PropTypes.bool,
-
-    /**
-     * `true` to use the light version.
-     */
-    light: PropTypes.bool,
 
     /**
      * Is the current selection invalid?
@@ -106,9 +65,45 @@ export default class FilterableMultiSelect extends React.Component {
     invalidText: PropTypes.string,
 
     /**
+     * Helper function passed to downshift that allows the library to render a
+     * given item to a string label. By default, it extracts the `label` field
+     * from a given item to serve as the item label in the list.
+     */
+    itemToString: PropTypes.func,
+
+    /**
+     * We try to stay as generic as possible here to allow individuals to pass
+     * in a collection of whatever kind of data structure they prefer
+     */
+    items: PropTypes.array.isRequired,
+
+    /**
+     * `true` to use the light version.
+     */
+    light: PropTypes.bool,
+
+    /**
+     * Specify the locale of the control. Used for the default `compareItems`
+     * used for sorting the list of items in the control.
+     */
+    locale: PropTypes.string,
+
+    /**
+     * `onChange` is a utility for this controlled component to communicate to a
+     * consuming component what kind of internal state changes are occuring.
+     */
+    onChange: PropTypes.func,
+
+    /**
      * Initialize the component with an open(`true`)/closed(`false`) menu.
      */
     open: PropTypes.bool,
+
+    /**
+     * Generic `placeholder` that will be used as the textual representation of
+     * what this field is for
+     */
+    placeholder: PropTypes.string.isRequired,
 
     /**
      * Specify feedback (mode) of the selection.
@@ -119,14 +114,31 @@ export default class FilterableMultiSelect extends React.Component {
     selectionFeedback: PropTypes.oneOf(['top', 'fixed', 'top-after-reopen']),
 
     /**
+     * Specify the size of the ListBox. Currently supports either `sm`, `lg` or `xl` as an option.
+     */
+    size: ListBoxPropTypes.ListBoxSize,
+
+    ...sortingPropTypes,
+
+    /**
      * Callback function for translating ListBoxMenuIcon SVG title
      */
     translateWithId: PropTypes.func,
 
     /**
-     * Additional props passed to Downshift
+     * Specify title to show title on hover
      */
-    downshiftProps: PropTypes.shape(Downshift.propTypes),
+    useTitleInItem: PropTypes.bool,
+
+    /**
+     * Specify whether the control is currently in warning state
+     */
+    warn: PropTypes.bool,
+
+    /**
+     * Provide the text that is displayed when the control is in warning state
+     */
+    warnText: PropTypes.string,
   };
 
   static getDerivedStateFromProps({ open }, state) {
@@ -275,11 +287,15 @@ export default class FilterableMultiSelect extends React.Component {
       light,
       invalid,
       invalidText,
+      warn,
+      warnText,
       useTitleInItem,
       translateWithId,
       downshiftProps,
     } = this.props;
     const inline = type === 'inline';
+    const showWarning = !invalid && warn;
+
     const wrapperClasses = cx(
       `${prefix}--multi-select__wrapper`,
       `${prefix}--list-box__wrapper`,
@@ -313,6 +329,7 @@ export default class FilterableMultiSelect extends React.Component {
     ) : null;
     const inputClasses = cx(`${prefix}--text-input`, {
       [`${prefix}--text-input--empty`]: !this.state.inputValue,
+      [`${prefix}--text-input--light`]: light,
     });
     const input = (
       <Selection
@@ -321,7 +338,7 @@ export default class FilterableMultiSelect extends React.Component {
         initialSelectedItems={initialSelectedItems}
         render={({ selectedItems, onItemChange, clearSelection }) => (
           <Downshift
-            {...downshiftProps}
+            {...mapDownshiftProps(downshiftProps)}
             highlightedIndex={highlightedIndex}
             id={id}
             isOpen={isOpen}
@@ -373,6 +390,8 @@ export default class FilterableMultiSelect extends React.Component {
                   light={light}
                   invalid={invalid}
                   invalidText={invalidText}
+                  warn={warn}
+                  warnText={warnText}
                   isOpen={isOpen}
                   size={size}
                   {...getRootProps()}>
@@ -395,9 +414,9 @@ export default class FilterableMultiSelect extends React.Component {
                       aria-controls={`${id}__menu`}
                       aria-autocomplete="list"
                       ref={(el) => (this.inputNode = el)}
+                      id={`${id}-input`}
                       {...getInputProps({
                         disabled,
-                        id,
                         placeholder,
                         onKeyDown: this.handleOnInputKeyDown,
                       })}
@@ -405,6 +424,11 @@ export default class FilterableMultiSelect extends React.Component {
                     {invalid && (
                       <WarningFilled16
                         className={`${prefix}--list-box__invalid-icon`}
+                      />
+                    )}
+                    {showWarning && (
+                      <WarningAltFilled16
+                        className={`${prefix}--list-box__invalid-icon ${prefix}--list-box__invalid-icon--warning`}
                       />
                     )}
                     {inputValue && isOpen && (
@@ -420,7 +444,7 @@ export default class FilterableMultiSelect extends React.Component {
                   </ListBox.Field>
                   {isOpen && (
                     <ListBox.Menu
-                      role="group"
+                      role="listbox"
                       aria-label={ariaLabel}
                       id={`${id}-menu`}>
                       {sortItems(
@@ -475,7 +499,7 @@ export default class FilterableMultiSelect extends React.Component {
       <div className={wrapperClasses}>
         {title}
         {input}
-        {!inline && !invalid ? helper : null}
+        {!inline && !invalid && !warn ? helper : null}
       </div>
     );
   }

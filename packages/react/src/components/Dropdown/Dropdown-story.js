@@ -6,12 +6,11 @@
  */
 
 import React from 'react';
-import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 import { withKnobs, boolean, select, text } from '@storybook/addon-knobs';
 import Dropdown from '../Dropdown';
 import DropdownSkeleton from './Dropdown.Skeleton';
-import WithState from '../../tools/withState';
+import mdx from './Dropdown.mdx';
 
 const items = [
   {
@@ -41,15 +40,6 @@ const items = [
   },
 ];
 
-const stringItems = [
-  'Option 1',
-  'Option 2',
-  'Option 3',
-  'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Vitae, aliquam. Blanditiis quia nemo enim voluptatibus quos ducimus porro molestiae nesciunt error cumque quaerat, tempore vero unde eum aperiam eligendi repellendus.',
-  'Option 5',
-  'Option 6',
-];
-
 const sizes = {
   'Extra large size (xl)': 'xl',
   'Default size': undefined,
@@ -69,112 +59,78 @@ const props = () => ({
   ariaLabel: text('Aria Label (ariaLabel)', 'Dropdown'),
   disabled: boolean('Disabled (disabled)', false),
   light: boolean('Light variant (light)', false),
-  titleText: text('Title (titleText)', 'This is a dropdown title.'),
+  titleText: text('Title (titleText)', 'Dropdown label'),
   helperText: text('Helper text (helperText)', 'This is some helper text.'),
   invalid: boolean('Show form validation UI (invalid)', false),
   invalidText: text(
     'Form validation UI content (invalidText)',
     'A valid value is required'
   ),
+  warn: boolean('Show warning state (warn)', false),
+  warnText: text(
+    'Warning state text (warnText)',
+    'This mode may perform worse on older machines'
+  ),
 });
 
-storiesOf('Dropdown', module)
-  .addDecorator(withKnobs)
-  .add(
-    'default',
-    () => (
-      <div style={{ width: 300 }}>
-        <Dropdown
-          {...props()}
-          items={items}
-          itemToString={(item) => (item ? item.text : '')}
-          onChange={action('onChange')}
-        />
-      </div>
-    ),
-    {
-      info: {
-        text: 'Dropdown',
-      },
-    }
-  )
-  .add(
-    'inline',
-    () => (
-      <div style={{ width: 600 }}>
-        <Dropdown
-          {...props()}
-          type="inline"
-          items={items}
-          itemToString={(item) => (item ? item.text : '')}
-          onChange={action('onChange')}
-        />
-      </div>
-    ),
-    {
-      info: {
-        text: 'Dropdown',
-      },
-    }
-  )
-  .add(
-    'items as strings',
-    () => (
-      <div style={props.inline ? { width: 500 } : { width: 300 }}>
-        <Dropdown
-          {...props()}
-          items={stringItems}
-          onChange={action('onChange')}
-        />
-      </div>
-    ),
-    {
-      info: {
-        text: 'Rendering an array of strings as `items`',
-      },
-    }
-  )
-  .add(
-    'fully controlled',
-    () => (
-      <WithState initialState={{ selectedItem: items[0] }}>
-        {({ state, setState }) => (
-          <div style={{ width: 300 }}>
-            <Dropdown
-              {...props()}
-              items={items}
-              itemToString={(item) => (item ? item.text : '')}
-              onChange={({ selectedItem }) =>
-                setTimeout(() => setState({ selectedItem }), 1000)
-              }
-              selectedItem={state.selectedItem}
-            />
-          </div>
-        )}
-      </WithState>
-    ),
-    {
-      info: {
-        text: `
-            Sometimes you want to control everything.
-          `,
-      },
-    }
-  )
-  .add(
-    'skeleton',
-    () => (
-      <div style={{ width: 300 }}>
-        <DropdownSkeleton />
-        &nbsp;
-        <DropdownSkeleton inline />
-      </div>
-    ),
-    {
-      info: {
-        text: `
-            Placeholder skeleton state to use when content is loading.
-          `,
-      },
-    }
+export default {
+  title: 'Dropdown',
+  decorators: [withKnobs],
+
+  parameters: {
+    component: Dropdown,
+
+    subcomponents: {
+      DropdownSkeleton,
+    },
+    docs: {
+      page: mdx,
+    },
+  },
+};
+
+export const Default = () => (
+  <div style={{ width: 300 }}>
+    <Dropdown
+      id="default"
+      titleText="Dropdown label"
+      helperText="This is some helper text"
+      label="Dropdown menu options"
+      items={items}
+      itemToString={(item) => (item ? item.text : '')}
+      onChange={action('onChange')}
+    />
+  </div>
+);
+
+export const Inline = () => (
+  <div style={{ width: 600 }}>
+    <Dropdown
+      id="inline"
+      titleText="Inline dropdown label"
+      label="Dropdown menu options"
+      type="inline"
+      items={items}
+      itemToString={(item) => (item ? item.text : '')}
+      onChange={action('onChange')}
+    />
+  </div>
+);
+
+export const Playground = () => {
+  return (
+    <div style={{ width: 300 }}>
+      <Dropdown
+        {...props()}
+        items={items}
+        itemToString={(item) => (item ? item.text : '')}
+      />
+    </div>
   );
+};
+
+export const Skeleton = () => (
+  <div style={{ width: 300 }}>
+    <DropdownSkeleton />
+  </div>
+);

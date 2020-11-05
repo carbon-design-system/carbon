@@ -16,16 +16,19 @@ import SideNavLinkText from './SideNavLinkText';
 
 const { prefix } = settings;
 
-const SideNavLink = ({
-  className: customClassName,
-  children,
-  renderIcon: IconElement,
-  isActive,
-  large,
-  // eslint-disable-next-line no-unused-vars
-  isSideNavExpanded,
-  ...rest
-}) => {
+const SideNavLink = React.forwardRef(function SideNavLink(
+  {
+    className: customClassName,
+    children,
+    renderIcon: IconElement,
+    isActive,
+    large,
+    // eslint-disable-next-line no-unused-vars
+    isSideNavExpanded,
+    ...rest
+  },
+  ref
+) {
   const className = cx({
     [`${prefix}--side-nav__link`]: true,
     [`${prefix}--side-nav__link--current`]: isActive,
@@ -34,7 +37,7 @@ const SideNavLink = ({
 
   return (
     <SideNavItem large={large}>
-      <Link {...rest} className={className}>
+      <Link {...rest} className={className} ref={ref}>
         {IconElement && (
           <SideNavIcon small>
             <IconElement />
@@ -44,25 +47,20 @@ const SideNavLink = ({
       </Link>
     </SideNavItem>
   );
-};
+});
 
 SideNavLink.propTypes = {
   ...LinkPropTypes,
 
   /**
-   * Provide an optional class to be applied to the containing node
-   */
-  className: PropTypes.string,
-
-  /**
-   * Provide an icon to render in the side navigation link. Should be a React class.
-   */
-  renderIcon: PropTypes.oneOfType([PropTypes.func, PropTypes.object]),
-
-  /**
    * Specify the text content for the link
    */
   children: PropTypes.node.isRequired,
+
+  /**
+   * Provide an optional class to be applied to the containing node
+   */
+  className: PropTypes.string,
 
   /**
    * Property to indicate if the side nav container is open (or not). Use to
@@ -74,6 +72,11 @@ SideNavLink.propTypes = {
    * Specify if this is a large variation of the SideNavLink
    */
   large: PropTypes.bool,
+
+  /**
+   * Provide an icon to render in the side navigation link. Should be a React class.
+   */
+  renderIcon: PropTypes.oneOfType([PropTypes.func, PropTypes.object]),
 };
 
 SideNavLink.defaultProps = {

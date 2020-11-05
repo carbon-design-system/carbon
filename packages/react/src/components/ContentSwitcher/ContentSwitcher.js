@@ -36,6 +36,11 @@ export default class ContentSwitcher extends React.Component {
     className: PropTypes.string,
 
     /**
+     * `true` to use the light variant.
+     */
+    light: PropTypes.bool,
+
+    /**
      * Specify an `onChange` handler that is called whenever the ContentSwitcher
      * changes which item is selected
      */
@@ -50,11 +55,17 @@ export default class ContentSwitcher extends React.Component {
      * Choose whether or not to automatically change selection on focus
      */
     selectionMode: PropTypes.oneOf(['automatic', 'manual']),
+
+    /**
+     * Specify the size of the Content Switcher. Currently supports either `sm` or `xl` as an option.
+     */
+    size: PropTypes.oneOf(['sm', 'xl']),
   };
 
   static defaultProps = {
     selectedIndex: 0,
     selectionMode: 'automatic',
+    onChange: () => {},
   };
 
   static getDerivedStateFromProps({ selectedIndex }, state) {
@@ -103,14 +114,12 @@ export default class ContentSwitcher extends React.Component {
           }
         );
       }
-    } else {
-      if (selectedIndex !== index) {
-        this.setState({ selectedIndex: index }, () => {
-          const switchRef = this._switchRefs[index];
-          switchRef && switchRef.focus();
-          this.props.onChange(data);
-        });
-      }
+    } else if (selectedIndex !== index) {
+      this.setState({ selectedIndex: index }, () => {
+        const switchRef = this._switchRefs[index];
+        switchRef && switchRef.focus();
+        this.props.onChange(data);
+      });
     }
   };
 
@@ -118,12 +127,17 @@ export default class ContentSwitcher extends React.Component {
     const {
       children,
       className,
+      light,
       selectedIndex, // eslint-disable-line no-unused-vars
       selectionMode, // eslint-disable-line no-unused-vars
+      size,
       ...other
     } = this.props;
 
-    const classes = classNames(`${prefix}--content-switcher`, className);
+    const classes = classNames(`${prefix}--content-switcher`, className, {
+      [`${prefix}--content-switcher--light`]: light,
+      [`${prefix}--content-switcher--${size}`]: size,
+    });
 
     return (
       <div {...other} className={classes} role="tablist">

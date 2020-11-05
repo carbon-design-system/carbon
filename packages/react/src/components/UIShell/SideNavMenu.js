@@ -17,10 +17,12 @@ const { prefix } = settings;
 
 export class SideNavMenu extends React.Component {
   static propTypes = {
-    /**
-     * Provide an optional class to be applied to the containing node
-     */
-    className: PropTypes.string,
+    buttonRef: PropTypes.oneOfType([
+      PropTypes.func,
+      PropTypes.shape({
+        current: PropTypes.any,
+      }),
+    ]),
 
     /**
      * Provide <SideNavMenuItem>'s inside of the `SideNavMenu`
@@ -28,9 +30,15 @@ export class SideNavMenu extends React.Component {
     children: PropTypes.node,
 
     /**
-     * Pass in a custom icon to render next to the `SideNavMenu` title
+     * Provide an optional class to be applied to the containing node
      */
-    renderIcon: PropTypes.oneOfType([PropTypes.func, PropTypes.object]),
+    className: PropTypes.string,
+
+    /**
+     * Specify whether the menu should default to expanded. By default, it will
+     * be closed.
+     */
+    defaultExpanded: PropTypes.bool,
 
     /**
      * Specify whether the `SideNavMenu` is "active". `SideNavMenu` should be
@@ -38,17 +46,6 @@ export class SideNavMenu extends React.Component {
      * page.
      */
     isActive: PropTypes.bool,
-
-    /**
-     * Provide the text for the overall menu name
-     */
-    title: PropTypes.string.isRequired,
-
-    /**
-     * Specify whether the menu should default to expanded. By default, it will
-     * be closed.
-     */
-    defaultExpanded: PropTypes.bool,
 
     /**
      * Property to indicate if the side nav container is open (or not). Use to
@@ -60,6 +57,16 @@ export class SideNavMenu extends React.Component {
      * Specify if this is a large variation of the SideNavMenu
      */
     large: PropTypes.bool,
+
+    /**
+     * Pass in a custom icon to render next to the `SideNavMenu` title
+     */
+    renderIcon: PropTypes.oneOfType([PropTypes.func, PropTypes.object]),
+
+    /**
+     * Provide the text for the overall menu name
+     */
+    title: PropTypes.string.isRequired,
   };
 
   static defaultProps = {
@@ -148,7 +155,6 @@ export class SideNavMenu extends React.Component {
       // eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions
       <li className={className} onKeyDown={this.handleKeyDown}>
         <button
-          aria-haspopup="true"
           aria-expanded={isExpanded}
           className={`${prefix}--side-nav__submenu`}
           onClick={this.handleToggleExpand}

@@ -82,15 +82,33 @@ const defaultTranslations = {
 
 ListBoxSelection.propTypes = {
   /**
+   * Specify a function to be invoked when a user interacts with the clear
+   * selection element.
+   */
+  clearSelection: PropTypes.func.isRequired,
+
+  /**
    * Specify whether or not the clear selection element should be disabled
    */
   disabled: PropTypes.bool,
 
   /**
-   * Specify a function to be invoked when a user interacts with the clear
-   * selection element.
+   * Specify an optional `onClearSelection` handler that is called when the underlying
+   * element is cleared
    */
-  clearSelection: PropTypes.func.isRequired,
+  onClearSelection: PropTypes.func,
+
+  /**
+   * Specify an optional `onClick` handler that is called when the underlying
+   * clear selection element is clicked
+   */
+  onClick: PropTypes.func,
+
+  /**
+   * Specify an optional `onKeyDown` handler that is called when the underlying
+   * clear selection element fires a keydown event
+   */
+  onKeyDown: PropTypes.func,
 
   /**
    * Specify an optional `selectionCount` value that will be used to determine
@@ -104,18 +122,6 @@ ListBoxSelection.propTypes = {
    * return a string message for that given message id.
    */
   translateWithId: PropTypes.func.isRequired,
-
-  /**
-   * Specify an optional `onClick` handler that is called when the underlying
-   * clear selection element is clicked
-   */
-  onClick: PropTypes.func,
-
-  /**
-   * Specify an optional `onKeyDown` handler that is called when the underlying
-   * clear selection element fires a keydown event
-   */
-  onKeyDown: PropTypes.func,
 };
 
 ListBoxSelection.defaultProps = {

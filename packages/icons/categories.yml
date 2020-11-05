@@ -3,11 +3,15 @@ categories:
     subcategories:
       - name: Controls
         members:
+          - center-to-fit
           - dashboard
+          - dashboard--reference
           - fit-to-screen
           - forward--10
           - forward--30
           - forward--5
+          - next--filled
+          - next--outline
           - open-panel--bottom
           - open-panel--filled--bottom
           - open-panel--filled--left
@@ -26,6 +30,8 @@ categories:
           - play--outline
           - play--outline--filled
           - power
+          - previous--filled
+          - previous--outline
           - recording
           - recording--filled
           - recording--filled--alt
@@ -33,13 +39,22 @@ categories:
           - rewind--30
           - rewind--5
           - settings
+          - settings--check
           - settings--adjust
           - shrink-screen
           - shrink-screen--filled
           - skip--back
           - skip--back--filled
+          - skip--back--outline
+          - skip--back--outline--filled
+          - skip--back--outline--solid
+          - skip--back--solid--filled
           - skip--forward
           - skip--forward--filled
+          - skip--forward--outline
+          - skip--forward--outline--filled
+          - skip--forward--outline--solid
+          - skip--forward--solid--filled
           - stop
           - stop--filled
           - stop--filled--alt
@@ -55,6 +70,15 @@ categories:
           - volume--up--filled
       - name: Formatting
         members:
+          - align-box--bottom-center
+          - align-box--bottom-left
+          - align-box--bottom-right
+          - align-box--middle-center
+          - align-box--middle-left
+          - align-box--middle-right
+          - align-box--top-center
+          - align-box--top-left
+          - align-box--top-right
           - align--horizontal-center
           - align--horizontal-left
           - align--horizontal-right
@@ -62,9 +86,18 @@ categories:
           - align--vertical-center
           - align--vertical-top
           - attachment
+          - border--bottom
+          - border--full
+          - border--left
+          - border--none
+          - border--right
+          - border--top
           - brightness-contrast
+          - bring-to-front
           - color-palette
           - color-switch
+          - column--delete
+          - column--insert
           - contrast
           - corner
           - crop
@@ -85,7 +118,9 @@ categories:
           - eyedropper
           - gradient
           - image
+          - image--reference
           - language
+          - lasso
           - link
           - list--boxes
           - list--bulleted
@@ -97,10 +132,14 @@ categories:
           - opacity
           - paint-brush
           - paint-brush--alt
+          - page-break
+          - page-number
           - paragraph
           - percentage
           - percentage--filled
           - quotes
+          - reflect--horizontal
+          - reflect--vertical
           - rotate--clockwise
           - rotate--clockwise--alt
           - rotate--clockwise--alt--filled
@@ -109,7 +148,12 @@ categories:
           - rotate--counterclockwise--alt
           - rotate--counterclockwise--alt--filled
           - rotate--counterclockwise--filled
+          - row--delete
+          - row--insert
           - save
+          - select--01
+          - select--02
+          - send-to-back
           - spell-check
           - spray-paint
           - text--align--center
@@ -121,6 +165,7 @@ categories:
           - text--color
           - text--creation
           - text--fill
+          - text--footnote
           - text--highlight
           - text--indent
           - text--indent--less
@@ -187,11 +232,15 @@ categories:
       - name: Operations
         members:
           - add-comment
+          - area
+          - area--custom
           - arrow-shift-down
           - arrows
           - arrows--horizontal
           - arrows--vertical
+          - automatic
           - bookmark
+          - bookmark--filled
           - branch
           - caret--sort
           - caret--sort--down
@@ -223,13 +272,19 @@ categories:
           - fade
           - filter
           - filter--edit
+          - filter--remove
+          - filter--reset
           - flag
+          - flag--filled
           - fork
+          - function-math
           - image--search
           - insert
           - insert--page
+          - intersect
           - jump-link
           - launch
+          - layers
           - login
           - logout
           - loop
@@ -247,8 +302,15 @@ categories:
           - not-sent--filled
           - operations--field
           - operations--record
+          - overlay
           - package
+          - pan--horizontal
+          - pan--vertical
+          - pause-future
+          - pause-past
           - pin
+          - pin--filled
+          - query
           - recently-viewed
           - recommend
           - redo
@@ -278,6 +340,8 @@ categories:
           - translate
           - undo
           - upgrade
+          - view-next
+          - workspace--import
           - x-axis
           - y-axis
           - z-axis
@@ -385,17 +449,31 @@ categories:
           - apple
           - account
           - basketball
+          - bat
+          - bee-bat
           - building
           - corn
+          - currency--baht
+          - currency--dollar
+          - currency--euro
+          - currency--lira
+          - currency--pound
+          - currency--rupee
+          - currency--shekel
+          - currency--won
+          - currency--yen
           - enterprise
           - finance
           - fish
           - fish--multiple
+          - fragile
           - fruit-bowl
           - gift
           - industry
           - inventory-management
+          - keep-dry
           - money
+          - monster
           - noodle-bowl
           - purchase
           - receipt
@@ -404,11 +482,14 @@ categories:
           - shopping--catalog
           - soccer
           - sprout
+          - stack-limitation
           - store
           - strawberry
           - tennis
           - tennis-ball
+          - this-side-up
           - tree
+          - two-person-lift
           - wallet
           - wheat
           - wireless-checkout
@@ -421,18 +502,36 @@ categories:
           - 3D-curve--manual
           - 3D-iCa
           - 3D-MPR-Toggle
+          - 3D-print-mesh
           - 3rd-party-connected
           - 3D-software
+          - ai-results
+          - ai-results--high
+          - ai-results--low
+          - ai-results--medium
+          - ai-results--urgent
+          - ai-results--very-high
+          - ai-status
+          - ai-status--complete
+          - ai-status--failed
+          - ai-status--in-progress
+          - ai-status--queued
+          - ai-status--rejected
           - angle
           - annotation-visibility
           - arrow--annotation
           - auto-scroll
+          - brush-freehand
+          - brush-polygon
           - cd--archive
           - cd--create-archive
           - cd--create-exchange
           - chemistry
+          - chemistry--reference
           - circle-measurement
           - cobb-angle
+          - contour-finding
+          - coronavirus
           - cross-reference
           - cut-in-half
           - denominate
@@ -441,6 +540,9 @@ categories:
           - dna
           - download-study
           - edge-enhancement
+          - edge-enhancement--01
+          - edge-enhancement--02
+          - edge-enhancement--03
           - erase--3D
           - exam-mode
           - fusion-blender
@@ -481,6 +583,7 @@ categories:
           - smoothing
           - smoothing--cursor
           - spine-label
+          - split--discard
           - stacked-move
           - stacked-scrolling--1
           - stacked-scrolling--2
@@ -488,12 +591,14 @@ categories:
           - study--next
           - study--previous
           - study--skip
+          - sub-volume
           - threshold
           - thumbnail-preview
           - text-annotation-toggle
           - window--auto
           - window--base
           - window--overlay
+          - window--preset
           - zoom-pan
       - name: Research
         members:
@@ -582,17 +687,33 @@ categories:
         members:
           - activity
           - analytics
+          - analytics--reference
           - app-connectivity
           - archive
           - blockchain
+          - boolean
           - box-plot
+          - calendar--heat-map
           - character-patterns
           - chart--3D
           - chart--area
+          - chart--area-smooth
+          - chart--area-stepper
+          - chart--average
           - chart--bar
+          - chart--bar-floating
+          - chart--bar-overlay
+          - chart--bar-stacked
+          - chart--bar-target
           - chart--bubble
+          - chart--bullet
           - chart--candlestick
           - chart--cluster-bar
+          - chart--column
+          - chart--column-floating
+          - chart--column-target
+          - chart--combo
+          - chart--combo-stacked
           - chart--custom
           - chart--error-bar
           - chart--error-bar--alt
@@ -601,27 +722,40 @@ categories:
           - chart--histogram
           - chart--line
           - chart--line--data
+          - chart--line-smooth
+          - chart--marimekko
+          - chart--maximum
+          - chart--minimum
           - chart--multi-line
+          - chart--multitype
           - chart--network
           - chart--parallel
           - chart--pie
+          - chart--point
           - chart--population
           - chart--radar
+          - chart--radial
           - chart--relationship
           - chart--ring
           - chart--river
           - chart--rose
           - chart--scatter
           - chart--stacked
+          - chart--stepper
+          - chart--sunburst
           - chart--treemap
           - chart--t-sne
           - chart--venn-diagram
+          - chart--waterfall
           - circle-packing
           - circle--filled
           - classifier--language
+          - cloud--data-ops
+          - cloud-satellite
           - concept
           - container-software
           - covariate
+          - cross-tab
           - data--1
           - data--2
           - data--base
@@ -634,54 +768,70 @@ categories:
           - data--structured
           - data--unstructured
           - data-class
+          - data-collection
+          - data-player
           - data-refinery
+          - data-refinery--reference
           - data-share
           - data-table
+          - data-table--reference
           - data-vis--1
           - data-vis--2
           - data-vis--3
           - data-vis--4
           - datastore
+          - decision-tree
           - diagram
+          - diagram--reference
           - document-sentiment
           - double-integer
+          - driver-analysis
           - factor
           - flow
           - flow--connection
           - flow--data
           - flow--stream
+          - flow--stream--reference
           - graphical-data-flow
           - hashtag
           - heat-map
           - heat-map--02
           - heat-map--03
+          - heat-map--stocks
           - hybrid-networking
           - improve-relevance
-          - in-progress
           - interactions
           - increase-level
           - join--inner
           - join--left
           - join--outer
           - join--right
+          - linux
+          - linux--alt
           - managed-solutions
           - math-curve
           - model-builder
+          - model-builder--reference
+          - name-space
           - network--1
           - network--2
           - network--3
+          - network--3--reference
           - network--4
           - nominal
+          - object-storage
           - ordinal
           - parent-child
           - phrase-sentiment
           - presentation-file
           - qq-plot
+          - quadrant-plot
           - query-queue
           - report
           - report--data
           - row--collapse
           - row--expand
+          - sankey-diagram
           - scatter-matrix
           - schematics
           - share-knowledge
@@ -690,8 +840,10 @@ categories:
           - skill-level--basic
           - skill-level--intermediate
           - stem-leaf-plot
+          - storage-request
           - string-integer
           - string-text
+          - summary--KPI
           - sys-provision
           - table
           - table--split
@@ -700,6 +852,7 @@ categories:
           - text-link--analysis
           - text-mining
           - text-mining--applier
+          - time-plot
           - tree-view
           - tree-view--alt
           - type-pattern
@@ -721,6 +874,7 @@ categories:
           - app
           - application
           - badge
+          - book
           - CAD
           - catalog
           - categories
@@ -738,10 +892,13 @@ categories:
           - closed-caption--filled
           - cloud-foundry--1
           - cloud-foundry--2
+          - content-view
           - copy
           - copy--file
+          - copy--link
           - course
           - CSV
+          - cube-view
           - DOC
           - document
           - document--add
@@ -752,13 +909,17 @@ categories:
           - document--pdf
           - document--subtract
           - document--tasks
+          - document--unknown
           - document--view
+          - document--word-processor
+          - document--word-processor--reference
           - download
           - DVR
           - export
           - folder
           - folder--add
           - folder--details
+          - folder--details--reference
           - folder--off
           - folder--shared
           - folders
@@ -768,15 +929,26 @@ categories:
           - HD
           - HD--filled
           - HDR
+          - HTML
+          - HTML--reference
           - HTTP
           - ISO
           - ISO--filled
           - ISO--outline
           - JPG
           - JSON
+          - JSON--reference
           - legend
+          - license
+          - license--draft
+          - license--global
+          - license--maintenance
+          - license--maintenance-draft
+          - license--third-party
+          - license--third-party-draft
           - list--dropdown
           - model
+          - model--alt
           - model--reference
           - MOV
           - MP3
@@ -785,11 +957,13 @@ categories:
           - MPG2
           - music
           - no-ticket
+          - non-certified
           - notebook
           - notebook--reference
           - panel-expansion
           - paste
           - PDF
+          - PDF--reference
           - playlist
           - PNG
           - policy
@@ -801,7 +975,9 @@ categories:
           - rule
           - scale
           - script
+          - script--reference
           - SDK
+          - security
           - SQL
           - star--review
           - SVG
@@ -813,22 +989,36 @@ categories:
           - TIF
           - TSV
           - TXT
+          - TXT--reference
           - upload
+          - websheet
           - WMV
           - workspace
           - XLS
           - XML
           - ZIP
+          - ZIP--reference
       - name: Status
         members:
           - checkmark
           - checkmark--filled
+          - checkmark--filled--error
+          - checkmark--filled--warning
           - checkmark--outline
+          - checkmark--outline--error
+          - checkmark--outline--warning
           - error
           - error--filled
           - error--outline
           - help
           - help--filled
+          - in-progress
+          - in-progress--error
+          - in-progress--warning
+          - incomplete
+          - incomplete--cancel
+          - incomplete--error
+          - incomplete--warning
           - information
           - information--filled
           - information--square
@@ -836,6 +1026,9 @@ categories:
           - misuse
           - misuse--alt
           - misuse--outline
+          - pending
+          - pending--filled
+          - queued
           - undefined
           - undefined--filled
           - unknown
@@ -846,6 +1039,7 @@ categories:
           - warning--alt-inverted
           - warning--alt-inverted--filled
           - warning--filled
+          - warning--other
           - warning-square
           - warning-square--filled
   - name: Person
@@ -881,6 +1075,7 @@ categories:
           - face--dissatisfied--filled
           - face--dizzy
           - face--dizzy--filled
+          - face--mask
           - face--neutral
           - face--neutral--filled
           - face--pending
@@ -889,11 +1084,14 @@ categories:
           - face--satisfied--filled
           - face--wink
           - face--wink--filled
+          - gender--female
+          - gender--male
           - group
           - identification
           - partnership
           - person
           - person--favorite
+          - transgender
           - user
           - user--activity
           - user--admin
@@ -925,6 +1123,7 @@ categories:
           - alarm--subtract
           - calendar
           - calendar--settings
+          - calendar--tools
           - event
           - event--schedule
           - hourglass
@@ -935,10 +1134,21 @@ categories:
           - timer
       - name: Travel
         members:
+          - airline--digital-gate
+          - airline--manage-gates
+          - airline--passenger-care
+          - airline--rapid-board
+          - airport--01
+          - airport--02
+          - airport-location
           - arrival
+          - baggage-claim
           - bar
           - bicycle
           - bus
+          - cabin-care
+          - cabin-care--alert
+          - cabin-care--alt
           - cafe
           - campsite
           - car
@@ -946,6 +1156,10 @@ categories:
           - charging-station
           - charging-station--filled
           - compass
+          - construction
+          - crossroads
+          - crowd-report
+          - crowd-report--filled
           - cyclist
           - delivery-truck
           - departure
@@ -985,6 +1199,9 @@ categories:
           - earth--southeast-asia--filled
           - fire
           - flagging-taxi
+          - flight--international
+          - flight--roster
+          - flight--schedule
           - gas-station
           - globe
           - harbor
@@ -994,17 +1211,49 @@ categories:
           - hospital-bed
           - hotel
           - location
+          - location--company
+          - location--company--filled
+          - location--hazard
+          - location--hazard--filled
+          - location--heart
+          - location--heart--filled
+          - location--person
+          - location--person--filled
+          - location--star
+          - location--star--filled
           - map
+          - map-boundary
           - milestone
           - monument
           - mountain
+          - navaid--civil
+          - navaid--dme
+          - navaid--helipad
+          - navaid--military
+          - navaid--military-civil
+          - navaid--ndb
+          - navaid--ndb-dme
+          - navaid--private
+          - navaid--seaplane
+          - navaid--tacan
+          - navaid--vhfor
+          - navaid--vor
+          - navaid--vordme
+          - navaid--vortac
+          - palm-tree
+          - passenger--drinks
+          - passenger--plus
           - pedestrian
           - pedestrian-child
           - picnic-area
           - plane
+          - plane--private
+          - plane--sea
           - police
           - restaurant
           - restaurant--fine
+          - road
+          - road--weather
           - scooter
           - scooter--front
           - service-desk
@@ -1012,7 +1261,16 @@ categories:
           - swim
           - taxi
           - theater
+          - traffic--event
+          - traffic--flow
+          - traffic--flow-incident
+          - traffic--incident
+          - traffic--weather-incident
+          - traffic-cone
           - train
+          - train--heart
+          - train--ticket
+          - train--time
           - tram
           - van
           - worship
@@ -1021,36 +1279,66 @@ categories:
           - worship--muslim
       - name: Weather
         members:
+          - accumulation--ice
+          - accumulation--precipitation
+          - accumulation--rain
+          - accumulation--snow
+          - agriculture-analytics
+          - buoy
           - cloud
           - cloud--lightning
           - cloud--rain
           - cloud--snow
+          - cloud-ceiling
           - cloudy
+          - crop-growth
+          - crop-health
           - dew-point
           - dew-point--filled
+          - drought
+          - earthquake
+          - flood
+          - flood--warning
           - fog
+          - forecast--hail
+          - forecast--hail-30
+          - forecast--lightning
+          - forecast--lightning-30
           - hail
           - haze
           - haze--night
           - humidity
           - humidity--alt
           - hurricane
+          - ice--accretion
           - lightning
+          - marine-warning
           - mixed-rain-hail
           - moon
           - mostly-cloudy
           - mostly-cloudy--night
           - not-available
+          - observed--hail
+          - observed--lightning
+          - outlook-severe
           - partly-cloudy
           - partly-cloudy--night
+          - pest
           - pressure
           - pressure--filled
+          - radar--enhanced
+          - radar--weather
           - rain
           - rain--drizzle
           - rain--heavy
           - rain--scattered
           - rain--scattered--night
           - rain-drop
+          - ref-evapotranspiration
+          - sailboat--coastal
+          - sailboat--offshore
+          - satellite--radar
+          - satellite--weather
           - sleet
           - smoke
           - snow
@@ -1058,27 +1346,57 @@ categories:
           - snow--heavy
           - snow--scattered
           - snow--scattered--night
+          - snow-density
           - snowflake
+          - soil-moisture
+          - soil-moisture--field
+          - soil-moisture--global
+          - soil-temperature
+          - soil-temperature--field
+          - soil-temperature--global
+          - stay-inside
+          - storm-tracker
           - sun
           - sunny
           - sunrise
           - sunset
           - temperature
+          - temperature--feels-like
           - temperature--frigid
           - temperature--hot
+          - temperature--inversion
+          - temperature--max
+          - temperature--min
+          - temperature--water
           - thunderstorm
           - thunderstorm--scattered
           - thunderstorm--scattered--night
           - thunderstorm--severe
           - thunderstorm--strong
+          - tides
           - tornado
+          - tornado-warning
           - tropical-storm
+          - tropical-storm--model-tracks
+          - tropical-storm--tracks
+          - tropical-warning
           - uv-index
+          - uv-index--alt
           - uv-index--filled
+          - wave-direction
+          - wave-height
+          - wave-period
+          - weather-front--cold
+          - weather-front--stationary
+          - weather-front--warm
+          - weather-station
+          - wind-gusts
+          - wind-stream
           - windy
           - windy--dust
           - windy--snow
           - windy--strong
+          - winter-warning
           - wintry-mix
   - name: Tools
     subcategories:
@@ -1111,10 +1429,17 @@ categories:
           - cloud--download
           - cloud--upload
           - code
+          - code--reference
           - connection-signal
           - debug
+          - deployment-pattern
+          - deployment-policy
           - development
           - devices
+          - edge-cluster
+          - edge-device
+          - edge-node
+          - edge-service
           - email
           - email--new
           - fetch-upload
@@ -1132,11 +1457,13 @@ categories:
           - keyboard
           - laptop
           - logo--jupyter
+          - logo--keybase
           - logo--openshift
           - logo--python
           - logo--r-script
           - logo--vmware
           - machine-learning
+          - machine-learning-model
           - mail--all
           - mail--reply
           - mobile
@@ -1145,6 +1472,7 @@ categories:
           - mobile--check
           - mobile--download
           - mobile--landscape
+          - outage
           - password
           - plug
           - plug--filled
@@ -1153,7 +1481,9 @@ categories:
           - radio
           - rocket
           - rss
+          - satellite
           - share
+          - signal-strength
           - tablet
           - tablet--landscape
           - terminal
@@ -1176,11 +1506,15 @@ categories:
           - meter--alt
           - microscope
           - portfolio
+          - radar
           - ruler
           - ruler--alt
+          - scales
+          - scales--tipped
           - scalpel
           - stamp
           - stethoscope
           - tool-box
           - tools
+          - tools--alt
           - umbrella

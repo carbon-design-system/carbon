@@ -23,19 +23,16 @@ export default class OverflowMenuItem extends React.Component {
     className: PropTypes.string,
 
     /**
-     * The CSS class name to be placed on the wrapper list item element
+     * A callback to tell the parent menu component that the menu should be closed.
      */
-    wrapperClassName: PropTypes.string,
+    closeMenu: PropTypes.func,
 
     /**
-     * The text in the menu item.
+     * `true` to make this menu item disabled.
      */
-    itemText: PropTypes.node.isRequired,
+    disabled: PropTypes.bool,
 
-    /**
-     * If given, overflow item will render as a link with the given href
-     */
-    href: PropTypes.string,
+    handleOverflowMenuItemFocus: PropTypes.func,
 
     /**
      * `true` to make this menu item a divider.
@@ -43,15 +40,20 @@ export default class OverflowMenuItem extends React.Component {
     hasDivider: PropTypes.bool,
 
     /**
+     * If given, overflow item will render as a link with the given href
+     */
+    href: PropTypes.string,
+
+    index: PropTypes.number,
+
+    /**
      * `true` to make this menu item a "danger button".
      */
     isDelete: PropTypes.bool,
-
     /**
-     * `true` to make this menu item disabled.
+     * The text in the menu item.
      */
-    disabled: PropTypes.bool,
-
+    itemText: PropTypes.node.isRequired,
     /**
      * event handlers
      */
@@ -62,13 +64,10 @@ export default class OverflowMenuItem extends React.Component {
     onKeyUp: PropTypes.func,
     onMouseDown: PropTypes.func,
     onMouseEnter: PropTypes.func,
-    onMouseLeave: PropTypes.func,
-    onMouseUp: PropTypes.func,
 
-    /**
-     * A callback to tell the parent menu component that the menu should be closed.
-     */
-    closeMenu: PropTypes.func,
+    onMouseLeave: PropTypes.func,
+
+    onMouseUp: PropTypes.func,
 
     /**
      * `true` if this menu item should get focus when the menu gets open.
@@ -80,11 +79,14 @@ export default class OverflowMenuItem extends React.Component {
         'be removed in the next major release of `carbon-components-react`. ' +
         'Opt for `selectorPrimaryFocus` in `<OverflowMenu>` instead'
     ),
-
     /**
      * `true` if this menu item has long text and requires a browser tooltip
      */
     requireTitle: PropTypes.bool,
+    /**
+     * The CSS class name to be placed on the wrapper list item element
+     */
+    wrapperClassName: PropTypes.string,
   };
 
   static defaultProps = {
@@ -130,8 +132,10 @@ export default class OverflowMenuItem extends React.Component {
       isDelete,
       disabled,
       closeMenu,
-      onClick, // eslint-disable-line
-      handleOverflowMenuItemFocus, // eslint-disable-line
+      // eslint-disable-next-line no-unused-vars
+      onClick,
+      // eslint-disable-next-line no-unused-vars
+      handleOverflowMenuItemFocus,
       onKeyDown,
       primaryFocus,
       wrapperClassName,
@@ -177,7 +181,9 @@ export default class OverflowMenuItem extends React.Component {
       <li className={overflowMenuItemClasses} role="menuitem">
         <TagToUse
           {...other}
-          {...{ 'data-floating-menu-primary-focus': primaryFocus || null }}
+          {...{
+            'data-floating-menu-primary-focus': primaryFocus || null,
+          }}
           href={href}
           className={overflowMenuBtnClasses}
           disabled={disabled}
