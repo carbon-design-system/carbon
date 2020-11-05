@@ -115,7 +115,7 @@ You can use the `onHeadingClick` prop to determine the state of the
 
 ```jsx
 <Accordion>
-  <AccordionItem onHeadingClick={(evt) => console.log(evt.isOpen)}>
+  <AccordionItem onHeadingClick={({ isOpen }) => console.log(isOpen)}>
     Panel A
   </AccordionItem>
 </Accordion>
