@@ -16,16 +16,19 @@ import SideNavLinkText from './SideNavLinkText';
 
 const { prefix } = settings;
 
-const SideNavLink = ({
-  className: customClassName,
-  children,
-  renderIcon: IconElement,
-  isActive,
-  large,
-  // eslint-disable-next-line no-unused-vars
-  isSideNavExpanded,
-  ...rest
-}) => {
+const SideNavLink = React.forwardRef(function SideNavLink(
+  {
+    className: customClassName,
+    children,
+    renderIcon: IconElement,
+    isActive,
+    large,
+    // eslint-disable-next-line no-unused-vars
+    isSideNavExpanded,
+    ...rest
+  },
+  ref
+) {
   const className = cx({
     [`${prefix}--side-nav__link`]: true,
     [`${prefix}--side-nav__link--current`]: isActive,
@@ -34,7 +37,7 @@ const SideNavLink = ({
 
   return (
     <SideNavItem large={large}>
-      <Link {...rest} className={className}>
+      <Link {...rest} className={className} ref={ref}>
         {IconElement && (
           <SideNavIcon small>
             <IconElement />
@@ -44,7 +47,7 @@ const SideNavLink = ({
       </Link>
     </SideNavItem>
   );
-};
+});
 
 SideNavLink.propTypes = {
   ...LinkPropTypes,

@@ -59,8 +59,8 @@ user interacts with it.
 
 Icon buttons allow users to take actions, and make choices, with a single tap.
 Icon buttons can take the form of any of the seven types (Primary, Secondary,
-Tertiary, Danger, Danger tertiary, Danger ghost and Ghost) but most commonly will be styled as primary or ghost
-buttons.
+Tertiary, Danger, Danger tertiary, Danger ghost and Ghost) but most commonly
+will be styled as primary or ghost buttons.
 
 <Preview>
   <Story id="button--icon-button" />
@@ -162,24 +162,25 @@ button is interacted with.
 ### Button `kind`
 
 Carbon has seven types of buttons, `primary`, `secondary`, `tertiary`, `ghost`,
-`danger`, `danger-tertiary`, and `danger-ghost`. If no `kind` is specified, a `primary` button will be rendered.
-For more information on when to use each variant, check out the
+`danger`, `danger--tertiary`, and `danger--ghost`. If no `kind` is specified, a
+`primary` button will be rendered. For more information on when to use each
+variant, check out the
 [design documentation](https://www.carbondesignsystem.com/components/button/usage#overview)
 
 <Button>Primary</Button> <Button kind="secondary">Secondary</Button> <Button kind="tertiary">
   Tertiary{' '}
-</Button> <Button kind="danger">Danger</Button> <Button kind="danger-tertiary">Danger Tertiary</Button> 
-<Button kind="danger-ghost">Danger Ghost</Button> <Button kind="ghost">
-  Ghost
+</Button> <Button kind="danger">Danger</Button> <Button kind="danger--tertiary">
+  Danger Tertiary
 </Button>
+<Button kind="danger--ghost">Danger Ghost</Button> <Button kind="ghost">Ghost</Button>
 
 ```jsx
 <Button>Primary</Button>
 <Button kind="secondary">Secondary</Button>
 <Button kind="tertiary">Tertiary</Button>
 <Button kind="danger">Danger</Button>
-<Button kind="danger-tertiary">Danger Tertiary</Button>
-<Button kind="danger-ghost">Danger Ghost</Button>
+<Button kind="danger--tertiary">Danger Tertiary</Button>
+<Button kind="danger--ghost">Danger Ghost</Button>
 <Button kind="ghost">Ghost</Button>
 ```
 

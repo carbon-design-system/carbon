@@ -14276,7 +14276,9 @@ Button styles
       color: $text-04;
     }
 
-    &-tertiary {
+    // TODO: deprecate single dash tertiary
+    &-tertiary,
+    &--tertiary {
       @include button-theme(
         transparent,
         $danger-02,
@@ -14302,7 +14304,9 @@ Button styles
       }
     }
 
-    &-ghost {
+    // TODO: deprecate single dash ghost
+    &-ghost,
+    &--ghost {
       @include button-theme(
         transparent,
         transparent,
@@ -24301,7 +24305,7 @@ Tabs styles
     min-height: rem(40px);
     color: $text-01;
 
-    .#{$prefix}--tabs--scrollable--container {
+    &.#{$prefix}--tabs--scrollable--container {
       min-height: rem(48px);
     }
 
@@ -24354,12 +24358,12 @@ Tabs styles
       background-image: linear-gradient(to right, transparent, $ui-01);
     }
 
-    .#{$prefix}--tabs--scrollable--container
+    &.#{$prefix}--tabs--scrollable--container
       .#{$prefix}--tabs__overflow-indicator--left {
       background-image: linear-gradient(to left, transparent, $ui-03);
     }
 
-    .#{$prefix}--tabs--scrollable--container
+    &.#{$prefix}--tabs--scrollable--container
       .#{$prefix}--tabs__overflow-indicator--right {
       background-image: linear-gradient(to right, transparent, $ui-03);
     }
@@ -24387,11 +24391,12 @@ Tabs styles
           );
         }
 
-        .#{$prefix}--tabs--scrollable--container
+        &.#{$prefix}--tabs--scrollable--container
           .#{$prefix}--tabs__overflow-indicator--left {
           background-image: linear-gradient(to left, rgba($ui-03, 0), $ui-03);
         }
-        .#{$prefix}--tabs--scrollable--container
+
+        &.#{$prefix}--tabs--scrollable--container
           .#{$prefix}--tabs__overflow-indicator--right {
           background-image: linear-gradient(to right, rgba($ui-03, 0), $ui-03);
         }
@@ -24416,7 +24421,7 @@ Tabs styles
       display: none;
     }
 
-    .#{$prefix}--tabs--scrollable--container
+    &.#{$prefix}--tabs--scrollable--container
       .#{$prefix}--tab--overflow-nav-button {
       width: $carbon--spacing-09;
       margin: 0;
@@ -24444,12 +24449,12 @@ Tabs styles
       margin-left: rem(1px);
     }
 
-    .#{$prefix}--tabs--scrollable--container
+    &.#{$prefix}--tabs--scrollable--container
       .#{$prefix}--tabs--scrollable__nav-item {
       background-color: $ui-03;
     }
 
-    .#{$prefix}--tabs--scrollable--container
+    &.#{$prefix}--tabs--scrollable--container
       .#{$prefix}--tabs--scrollable__nav-item
       + .#{$prefix}--tabs--scrollable__nav-item {
       margin-left: 0;
@@ -24457,10 +24462,10 @@ Tabs styles
       box-shadow: rem(-1px) 0 0 0 $ui-04;
     }
 
-    .#{$prefix}--tabs--scrollable--container
+    &.#{$prefix}--tabs--scrollable--container
       .#{$prefix}--tabs--scrollable__nav-item
       + .#{$prefix}--tabs--scrollable__nav-item.#{$prefix}--tabs--scrollable__nav-item--selected,
-    .#{$prefix}--tabs--scrollable--container
+    &.#{$prefix}--tabs--scrollable--container
       .#{$prefix}--tabs--scrollable__nav-item.#{$prefix}--tabs--scrollable__nav-item--selected
       + .#{$prefix}--tabs--scrollable__nav-item {
       box-shadow: none;
@@ -24476,7 +24481,7 @@ Tabs styles
     //-----------------------------
     // Item Hover
     //-----------------------------
-    .#{$prefix}--tabs--scrollable--container
+    &.#{$prefix}--tabs--scrollable--container
       .#{$prefix}--tabs--scrollable__nav-item:hover {
       background-color: $hover-selected-ui;
     }
@@ -24491,9 +24496,9 @@ Tabs styles
       cursor: not-allowed;
     }
 
-    .#{$prefix}--tabs--scrollable--container
+    &.#{$prefix}--tabs--scrollable--container
       .#{$prefix}--tabs--scrollable__nav-item.#{$prefix}--tabs--scrollable__nav-item--disabled,
-    .#{$prefix}--tabs--scrollable--container
+    &.#{$prefix}--tabs--scrollable--container
       .#{$prefix}--tabs--scrollable__nav-item.#{$prefix}--tabs--scrollable__nav-item--disabled:hover {
       background-color: $disabled-02;
     }
@@ -24517,9 +24522,9 @@ Tabs styles
       border-bottom: 2px solid $interactive-04;
     }
 
-    .#{$prefix}--tabs--scrollable--container
+    &.#{$prefix}--tabs--scrollable--container
       .#{$prefix}--tabs--scrollable__nav-item--selected,
-    .#{$prefix}--tabs--scrollable--container
+    &.#{$prefix}--tabs--scrollable--container
       .#{$prefix}--tabs--scrollable__nav-item--selected:hover {
       background-color: $ui-01;
 
@@ -24529,7 +24534,7 @@ Tabs styles
       }
     }
 
-    .#{$prefix}--tabs--scrollable--container
+    &.#{$prefix}--tabs--scrollable--container
       .#{$prefix}--tabs--scrollable__nav-item--selected
       .#{$prefix}--tabs--scrollable__nav-link {
       // height - vertical padding
@@ -24538,9 +24543,9 @@ Tabs styles
       box-shadow: inset 0 2px 0 0 $interactive-04;
     }
 
-    .#{$prefix}--tabs--scrollable--light.#{$prefix}--tabs--scrollable--container
+    &.#{$prefix}--tabs--scrollable--light.#{$prefix}--tabs--scrollable--container
       .#{$prefix}--tabs--scrollable__nav-item--selected,
-    .#{$prefix}--tabs--scrollable--light.#{$prefix}--tabs--scrollable--container
+    &.#{$prefix}--tabs--scrollable--light.#{$prefix}--tabs--scrollable--container
       .#{$prefix}--tabs--scrollable__nav-item--selected:hover {
       background-color: $ui-background;
     }
@@ -24571,7 +24576,7 @@ Tabs styles
       }
     }
 
-    .#{$prefix}--tabs--scrollable--container
+    &.#{$prefix}--tabs--scrollable--container
       .#{$prefix}--tabs--scrollable__nav-link {
       height: rem(48px);
       padding: $spacing-03 $spacing-05;
@@ -24589,7 +24594,7 @@ Tabs styles
       border-bottom: $tab-underline-color-hover;
     }
 
-    .#{$prefix}--tabs--scrollable--container
+    &.#{$prefix}--tabs--scrollable--container
       .#{$prefix}--tabs--scrollable__nav-item
       .#{$prefix}--tabs--scrollable__nav-link {
       border-bottom: none;
@@ -24641,7 +24646,7 @@ Tabs styles
       border-bottom-color: $ui-03;
     }
 
-    .#{$prefix}--tabs--scrollable--container
+    &.#{$prefix}--tabs--scrollable--container
       .#{$prefix}--tabs--scrollable__nav-item--disabled
       .#{$prefix}--tabs--scrollable__nav-link {
       color: $disabled-03;
