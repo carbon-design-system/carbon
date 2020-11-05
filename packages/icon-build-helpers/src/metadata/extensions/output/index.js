@@ -154,9 +154,8 @@ async function createDescriptor(name, data, size, original) {
       descriptor.attrs.height = height;
     }
   } else {
-    const [width, height] = info.attrs.viewBox.split(' ').slice(2);
-    descriptor.attrs.width = width;
-    descriptor.attrs.height = height;
+    descriptor.attrs.width = 64;
+    descriptor.attrs.height = 64;
   }
 
   return descriptor;
