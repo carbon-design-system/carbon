@@ -4981,14 +4981,11 @@ Map {
   },
   "Tab" => Object {
     "defaultProps": Object {
-      "href": "#",
       "label": "provide a label",
       "onClick": [Function],
       "onKeyDown": [Function],
-      "renderContent": [Function],
       "role": "presentation",
       "selected": false,
-      "tabIndex": 0,
     },
     "propTypes": Object {
       "className": Object {
@@ -5033,7 +5030,9 @@ Map {
         "isRequired": true,
         "type": "bool",
       },
-      "tabIndex": [Function],
+      "tabIndex": Object {
+        "type": "number",
+      },
     },
   },
   "TabContent" => Object {
@@ -6407,6 +6406,15 @@ Map {
         "type": "string",
       },
       "inline": [Function],
+      "size": Object {
+        "args": Array [
+          Array [
+            "sm",
+            "xl",
+          ],
+        ],
+        "type": "oneOf",
+      },
     },
   },
   "FileUploaderSkeleton" => Object {
