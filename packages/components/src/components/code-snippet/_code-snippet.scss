@@ -447,6 +447,57 @@
     left: 50%;
   }
 
+  // overflow indicator
+  .#{$prefix}--snippet__overflow-indicator--left,
+  .#{$prefix}--snippet__overflow-indicator--right {
+    z-index: 1;
+    flex: 1 0 auto;
+    width: $carbon--spacing-03;
+  }
+
+  .#{$prefix}--snippet__overflow-indicator--left {
+    margin-right: -$carbon--spacing-03;
+    background-image: linear-gradient(to left, transparent, $ui-background);
+  }
+
+  .#{$prefix}--snippet__overflow-indicator--right {
+    margin-left: -$carbon--spacing-03;
+    background-image: linear-gradient(to right, transparent, $ui-background);
+  }
+
+  .#{$prefix}--snippet--light .#{$prefix}--snippet__overflow-indicator--left {
+    background-image: linear-gradient(to left, transparent, $ui-01);
+  }
+
+  .#{$prefix}--snippet--light .#{$prefix}--snippet__overflow-indicator--right {
+    background-image: linear-gradient(to right, transparent, $ui-01);
+  }
+
+  // Safari-only media query
+  // won't appear correctly with CSS custom properties
+  // see: tabs, code snippet, and modal overflow indicators
+  @media not all and (min-resolution: 0.001dpcm) {
+    @supports (-webkit-appearance: none) and (stroke-color: transparent) {
+      .#{$prefix}--snippet__overflow-indicator--left {
+        margin-right: -$carbon--spacing-05;
+        background-image: linear-gradient(
+          to left,
+          rgba($ui-background, 0),
+          $ui-background
+        );
+      }
+
+      .#{$prefix}--snippet__overflow-indicator--right {
+        margin-left: -$carbon--spacing-05;
+        background-image: linear-gradient(
+          to right,
+          rgba($ui-background, 0),
+          $ui-background
+        );
+      }
+    }
+  }
+
   #{$prefix}--snippet--multi.#{$prefix}--skeleton {
     height: rem(98px);
   }
