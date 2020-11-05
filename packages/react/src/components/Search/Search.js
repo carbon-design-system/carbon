@@ -10,6 +10,7 @@ import React, { Component } from 'react';
 import classNames from 'classnames';
 import { Search16, Close16 } from '@carbon/icons-react';
 import { settings } from 'carbon-components';
+import { composeEventHandlers } from '../../tools/events';
 import deprecate from '../../prop-types/deprecate';
 
 const { prefix } = settings;
@@ -151,6 +152,7 @@ export default class Search extends Component {
       size = !small ? 'xl' : 'sm',
       light,
       disabled,
+      onChange,
       ...other
     } = this.props;
 
@@ -186,7 +188,7 @@ export default class Search extends Component {
           className={`${prefix}--search-input`}
           id={id}
           placeholder={placeHolderText}
-          onChange={this.handleChange}
+          onChange={composeEventHandlers([onChange, this.handleChange])}
           ref={(input) => {
             this.input = input;
           }}
