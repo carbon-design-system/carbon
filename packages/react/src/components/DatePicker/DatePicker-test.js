@@ -18,8 +18,16 @@ describe('DatePicker', () => {
   describe('Renders as expected', () => {
     const wrapper = mount(
       <DatePicker onChange={() => {}} className="extra-class">
-        <div className="test-child" />
-        <div className="test-child" />
+        <DatePickerInput
+          id="date-picker-input-id-start"
+          placeholder="mm/dd/yyyy"
+          labelText="Start date"
+        />
+        <DatePickerInput
+          id="date-picker-input-id-finish"
+          placeholder="mm/dd/yyyy"
+          labelText="End date"
+        />
       </DatePicker>
     );
     const datepicker = wrapper.childAt(0);
@@ -72,7 +80,11 @@ describe('DatePicker', () => {
   describe('Simple date picker', () => {
     const wrapper = mount(
       <DatePicker datePickerType="simple" className="extra-class">
-        <div className="test-child" />
+        <DatePickerInput
+          placeholder="mm/dd/yyyy"
+          labelText="Date Picker label"
+          id="date-picker-single"
+        />
       </DatePicker>
     );
     const datepicker = wrapper.childAt(0);
@@ -100,14 +112,14 @@ describe('DatePicker', () => {
         onChange={() => {}}
         datePickerType="single"
         className="extra-class">
-        <div className="test-child">
-          <input type="text" className={`${prefix}--date-picker__input`} />
-        </div>
+        <DatePickerInput
+          placeholder="mm/dd/yyyy"
+          labelText="Date Picker label"
+          id="date-picker-single"
+        />
       </DatePicker>
     );
     const datepicker = wrapper.childAt(0);
-    const input = wrapper.find(`.${prefix}--date-picker__input`);
-    const icon = wrapper.find('svg');
 
     it('has the single date picker class', () => {
       expect(
@@ -133,10 +145,6 @@ describe('DatePicker', () => {
       expect(wrapper.props().value).toEqual(undefined);
       wrapper.setProps({ value: '11/08/2017' });
       expect(wrapper.props().value).toEqual('11/08/2017');
-    });
-
-    it('should not render an icon', () => {
-      expect(icon.length).toEqual(0);
     });
   });
 
@@ -178,20 +186,16 @@ describe('DatePicker', () => {
         onChange={() => {}}
         datePickerType="range"
         className="extra-class">
-        <div className="test-child">
-          <input
-            type="text"
-            className={`${prefix}--date-picker__input`}
-            id="input-from"
-          />
-        </div>
-        <div className="test-child">
-          <input
-            type="text"
-            className={`${prefix}--date-picker__input`}
-            id="input-to"
-          />
-        </div>
+        <DatePickerInput
+          id="date-picker-input-id-start"
+          placeholder="mm/dd/yyyy"
+          labelText="Start date"
+        />
+        <DatePickerInput
+          id="date-picker-input-id-finish"
+          placeholder="mm/dd/yyyy"
+          labelText="End date"
+        />
       </DatePicker>
     );
     const datepicker = wrapper.childAt(0);
@@ -230,20 +234,16 @@ describe('DatePicker', () => {
         datePickerType="range"
         className="extra-class"
         locale="es">
-        <div className="test-child">
-          <input
-            type="text"
-            className={`${prefix}--date-picker__input`}
-            id="input-from"
-          />
-        </div>
-        <div className="test-child">
-          <input
-            type="text"
-            className={`${prefix}--date-picker__input`}
-            id="input-to"
-          />
-        </div>
+        <DatePickerInput
+          id="date-picker-input-id-start"
+          placeholder="mm/dd/yyyy"
+          labelText="Start date"
+        />
+        <DatePickerInput
+          id="date-picker-input-id-finish"
+          placeholder="mm/dd/yyyy"
+          labelText="End date"
+        />
       </DatePicker>
     );
 
@@ -252,20 +252,16 @@ describe('DatePicker', () => {
         onChange={() => {}}
         datePickerType="range"
         className="extra-class">
-        <div className="test-child">
-          <input
-            type="text"
-            className={`${prefix}--date-picker__input`}
-            id="input-from"
-          />
-        </div>
-        <div className="test-child">
-          <input
-            type="text"
-            className={`${prefix}--date-picker__input`}
-            id="input-to"
-          />
-        </div>
+        <DatePickerInput
+          id="date-picker-input-id-start"
+          placeholder="mm/dd/yyyy"
+          labelText="Start date"
+        />
+        <DatePickerInput
+          id="date-picker-input-id-finish"
+          placeholder="mm/dd/yyyy"
+          labelText="End date"
+        />
       </DatePicker>
     );
 
@@ -301,20 +297,16 @@ describe('DatePicker', () => {
           datePickerType="range"
           className="extra-class"
           locale="es">
-          <div className="test-child">
-            <input
-              type="text"
-              className={`${prefix}--date-picker__input`}
-              id="input-from"
-            />
-          </div>
-          <div className="test-child">
-            <input
-              type="text"
-              className={`${prefix}--date-picker__input`}
-              id="input-to"
-            />
-          </div>
+          <DatePickerInput
+            id="date-picker-input-id-start"
+            placeholder="mm/dd/yyyy"
+            labelText="Start date"
+          />
+          <DatePickerInput
+            id="date-picker-input-id-finish"
+            placeholder="mm/dd/yyyy"
+            labelText="End date"
+          />
         </DatePicker>
       );
       expect(wrapper.find('DatePicker')).toBeDefined();
@@ -340,20 +332,16 @@ describe('DatePicker', () => {
         className="extra-class"
         minDate="01/01/2018"
         maxDate="01/30/2018">
-        <div className="test-child">
-          <input
-            type="text"
-            className={`${prefix}--date-picker__input`}
-            id="input-from"
-          />
-        </div>
-        <div className="test-child">
-          <input
-            type="text"
-            className={`${prefix}--date-picker__input`}
-            id="input-to"
-          />
-        </div>
+        <DatePickerInput
+          id="date-picker-input-id-start"
+          placeholder="mm/dd/yyyy"
+          labelText="Start date"
+        />
+        <DatePickerInput
+          id="date-picker-input-id-finish"
+          placeholder="mm/dd/yyyy"
+          labelText="End date"
+        />
       </DatePicker>
     );
 

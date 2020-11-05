@@ -19,6 +19,14 @@ describe('@carbon/icons-vue', () => {
   let metadata;
 
   beforeAll(async () => {
+    const mock = jest.spyOn(console, 'error').mockImplementation((error) => {
+      if (
+        error !== 'Error: infinite loop while processing mergePaths plugin.'
+      ) {
+        throw error;
+      }
+    });
+
     metadata = await Metadata.load({
       input: {
         svg: path.join(ICONS_PACKAGE_DIR, 'src/svg'),
@@ -31,6 +39,8 @@ describe('@carbon/icons-vue', () => {
         Metadata.extensions.output,
       ],
     });
+
+    mock.mockRestore();
   });
 
   it('should export each SVG asset', async () => {
