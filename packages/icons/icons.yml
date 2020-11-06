@@ -14709,7 +14709,7 @@
   aliases:
     - wintry-mix
     - precipitation
-    - forecase
+    - forecast
   sizes:
     - 32
 - name: wireless-checkout
