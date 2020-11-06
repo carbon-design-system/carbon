@@ -106,14 +106,33 @@ $theme-class-map: (
   'support-04': (
     'var': $support-04,
     'props': ('background', 'color', 'fill', 'border-color')
+  ),
+  'focus': (
+    'var': $focus,
+    'props': ('background', 'color', 'fill', 'border-color'),
+    'psuedo': 'focus'
+  ),
+  'hover-primary': (
+    'var': $hover-primary,
+    'props': ('background', 'border-color'),
+    'psuedo': 'hover'
+  ),
+  'hover-primary-text': (
+    'var': $hover-primary-text,
+    'props': ('color', 'fill'),
+    'psuedo': 'hover'
   )
 );
 
 // Theme mixin
 @mixin themeClassMaker() {
   @each $label, $map in $theme-class-map {
+    $pseudo: null;
+    @if (map-get($map, psuedo)) {
+        $pseudo: ':' + map-get($map, psuedo);
+    }
     @each $attr in map-get($map, props) {
-      .#{$attr}--#{$label} {
+      .#{$attr}--#{$label}#{$pseudo} {
         #{$attr} : #{map-get($map, var)};
       }
     }
