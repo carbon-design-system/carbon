@@ -190,7 +190,7 @@ class OverflowMenu extends Component {
     onKeyDown: PropTypes.func,
 
     /**
-     * Function called when menu is closed
+     * Function called when menu is opened
      */
     onOpen: PropTypes.func,
 

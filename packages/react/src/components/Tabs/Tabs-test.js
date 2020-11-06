@@ -140,6 +140,8 @@ describe('Tabs', () => {
       const rightKey = 39;
       const spaceKey = 32;
       const enterKey = 13;
+      const homeKey = 36;
+      const endKey = 35;
 
       let wrapper;
       let firstTab;
@@ -173,6 +175,15 @@ describe('Tabs', () => {
           firstTab.simulate('keydown', { which: rightKey });
           expect(spyFocusButtonInLastTab).toHaveBeenCalled();
           lastTab.simulate('keydown', { which: leftKey });
+          expect(spyFocusButtonInFirstTab).toHaveBeenCalled();
+        });
+
+        it('updates selected state when pressing Home and End keys', () => {
+          spyFocusButtonInFirstTab = jest.spyOn(buttonInFirstTab, 'focus');
+          spyFocusButtonInLastTab = jest.spyOn(buttonInLastTab, 'focus');
+          firstTab.simulate('keydown', { which: endKey });
+          expect(spyFocusButtonInLastTab).toHaveBeenCalled();
+          lastTab.simulate('keydown', { which: homeKey });
           expect(spyFocusButtonInFirstTab).toHaveBeenCalled();
         });
 
@@ -222,6 +233,15 @@ describe('Tabs', () => {
           firstTab.simulate('keydown', { which: rightKey });
           expect(spyFocusButtonInLastTab).toHaveBeenCalled();
           lastTab.simulate('keydown', { which: leftKey });
+          expect(spyFocusButtonInFirstTab).toHaveBeenCalled();
+        });
+
+        it('updates selected state when pressing Home and End keys', () => {
+          spyFocusButtonInFirstTab = jest.spyOn(buttonInFirstTab, 'focus');
+          spyFocusButtonInLastTab = jest.spyOn(buttonInLastTab, 'focus');
+          firstTab.simulate('keydown', { which: endKey });
+          expect(spyFocusButtonInLastTab).toHaveBeenCalled();
+          lastTab.simulate('keydown', { which: homeKey });
           expect(spyFocusButtonInFirstTab).toHaveBeenCalled();
         });
 

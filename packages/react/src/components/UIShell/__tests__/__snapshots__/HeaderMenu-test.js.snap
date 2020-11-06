@@ -1,13 +1,60 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`HeaderMenu should render 1`] = `
-<HeaderMenu>
+<HeaderMenu
+  aria-label="Accessibility label"
+  className="custom-class"
+  menuLinkName="test"
+  tabIndex={-1}
+>
   <HeaderMenu
-    focusRef={null}
+    aria-label="Accessibility label"
+    className="custom-class"
+    focusRef={
+      [MockFunction] {
+        "calls": Array [
+          Array [
+            <a
+              aria-expanded="false"
+              aria-haspopup="menu"
+              aria-label="Accessibility label"
+              class="bx--header__menu-item bx--header__menu-title"
+              href="#"
+              tabindex="0"
+            >
+              test
+              <svg
+                aria-hidden="true"
+                class="bx--header__menu-arrow"
+                fill="currentColor"
+                focusable="false"
+                height="16"
+                preserveAspectRatio="xMidYMid meet"
+                viewBox="0 0 16 16"
+                width="16"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M8 11L3 6 3.7 5.3 8 9.6 12.3 5.3 13 6z"
+                />
+              </svg>
+            </a>,
+          ],
+        ],
+        "results": Array [
+          Object {
+            "type": "return",
+            "value": undefined,
+          },
+        ],
+      }
+    }
+    menuLinkName="test"
     renderMenuContent={[Function]}
+    tabIndex={-1}
   >
     <li
-      className="bx--header__submenu"
+      className="bx--header__submenu custom-class"
       onBlur={[Function]}
       onClick={[Function]}
       onKeyDown={[Function]}
@@ -15,11 +62,13 @@ exports[`HeaderMenu should render 1`] = `
       <a
         aria-expanded={false}
         aria-haspopup="menu"
+        aria-label="Accessibility label"
         className="bx--header__menu-item bx--header__menu-title"
         href="#"
         onKeyDown={[Function]}
         tabIndex={0}
       >
+        test
         <defaultRenderMenuContent>
           <ForwardRef(ChevronDown16)
             className="bx--header__menu-arrow"
@@ -53,6 +102,7 @@ exports[`HeaderMenu should render 1`] = `
         </defaultRenderMenuContent>
       </a>
       <ul
+        aria-label="Accessibility label"
         className="bx--header__menu"
       >
         <ForwardRef(HeaderMenuItem)
