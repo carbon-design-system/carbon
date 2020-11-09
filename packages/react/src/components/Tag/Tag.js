@@ -32,7 +32,6 @@ const TYPES = {
 const Tag = ({
   children,
   className,
-  icon,
   id,
   type,
   filter,
@@ -82,7 +81,7 @@ const Tag = ({
         <Close16 />
       </button>
     </div>
-  ) : icon ? (
+  ) : customIcon ? (
     <div
       className={tagClasses}
       aria-label={

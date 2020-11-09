@@ -64,6 +64,11 @@ describe('Tag', () => {
     expect(tag.text()).toEqual('New Version!');
   });
 
+  it('should allow for a custom icon', () => {
+    const tag = shallow(<Tag type="red" customIcon='Add16'>This is a tag</Tag>)
+    expect(tag.childAt(0).hasClass('bx--tag__custom-icon'));
+  })
+
   it('should support extra class names', () => {
     const tag = shallow(<Tag type="red" className="extra-class" />);
     expect(tag.hasClass('extra-class')).toEqual(true);
