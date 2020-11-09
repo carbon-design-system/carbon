@@ -36,6 +36,14 @@ const props = {
       onClose: action('onClose'),
     };
   },
+  icon() {
+    return {
+      ...this.regular(),
+      onClick: action('onClick'),
+      onClose: action('onClose'),
+      customIcon: text('Custom Icon', 'Tag')
+    }
+  }
 };
 
 export default {
@@ -71,6 +79,22 @@ _Default.parameters = {
 
 export const Filter = () => (
   <Tag className="some-class" {...props.filter()} filter>
+    {text('Content (children)', 'This is a tag')}
+  </Tag>
+);
+
+Filter.parameters = {
+  info: {
+    text: `
+        Tags are used for items that need to be labeled, categorized, or organized using keywords that describe them.
+        The example below shows how the Tag component can be used. Each type has a default message describing the type,
+        but a custom message can also be applied.
+      `,
+  },
+};
+
+export const CustomIcon = () => (
+  <Tag className="some-class" {...props.icon()} icon>
     {text('Content (children)', 'This is a tag')}
   </Tag>
 );

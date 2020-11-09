@@ -9,7 +9,8 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import classNames from 'classnames';
 import { settings } from 'carbon-components';
-import { Close16 } from '@carbon/icons-react';
+import * as Icons from '@carbon/icons-react';
+import { Close16 }from '@carbon/icons-react';
 import setupGetInstanceId from '../../tools/setupGetInstanceId';
 
 const { prefix } = settings;
@@ -31,9 +32,11 @@ const TYPES = {
 const Tag = ({
   children,
   className,
+  icon,
   id,
   type,
   filter,
+  customIcon,
   title,
   disabled,
   onClose,
@@ -50,7 +53,10 @@ const Tag = ({
       event.stopPropagation();
       onClose(event);
     }
-  };
+  }
+  
+  var CustomIcon = Icons[customIcon + "16"] || Icons['Tag16'];
+
   return filter ? (
     <div
       className={tagClasses}
@@ -76,6 +82,26 @@ const Tag = ({
         <Close16 />
       </button>
     </div>
+  ) : icon ? (
+    <div
+      className={tagClasses}
+      aria-label={
+        title !== undefined
+          ? `${title} ${children}`
+          : `Clear filter ${children}`
+      }
+      id={tagId}
+      {...other}>
+        <button
+          className={`${prefix}--tag__custom-icon`}>
+          <CustomIcon />
+        </button>
+      <span
+        className={`${prefix}--tag__label`}
+        title={typeof children === 'string' ? children : null}>
+        {children !== null && children !== undefined ? children : TYPES[type]}
+      </span>
+    </div>
   ) : (
     <span
       className={tagClasses}
@@ -96,6 +122,11 @@ Tag.propTypes = {
    * Provide a custom className that is applied to the containing <span>
    */
   className: PropTypes.string,
+
+  /**
+   * Provide a cusotm Icon name to be applied before the text content
+   */
+  customIcon: PropTypes.string,
 
   /**
    * Specify if the <Tag> is disabled
