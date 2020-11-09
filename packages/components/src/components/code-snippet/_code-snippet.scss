@@ -370,7 +370,7 @@
   .#{$prefix}--snippet.#{$prefix}--snippet--light
     .#{$prefix}--snippet-btn--expand:hover,
   .#{$prefix}--snippet.#{$prefix}--snippet--light .#{$prefix}--copy-btn:hover {
-    background-color: $hover-ui-light;
+    background-color: $hover-light-ui;
   }
 
   .#{$prefix}--snippet.#{$prefix}--snippet--light.#{$prefix}--snippet--single::after,
