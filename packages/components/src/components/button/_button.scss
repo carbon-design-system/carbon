@@ -156,6 +156,7 @@
     fill: $icon-01;
   }
 
+  .#{$prefix}--btn.#{$prefix}--btn--icon-only.#{$prefix}--btn--ghost:focus svg,
   .#{$prefix}--btn.#{$prefix}--btn--icon-only.#{$prefix}--btn--ghost:hover svg {
     fill: $icon-01;
   }
