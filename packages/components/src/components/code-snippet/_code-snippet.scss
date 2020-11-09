@@ -459,20 +459,20 @@
 
   .#{$prefix}--snippet__overflow-indicator--left {
     margin-right: -$carbon--spacing-03;
-    background-image: linear-gradient(to left, transparent, $ui-background);
+    background-image: linear-gradient(to left, transparent, $field-01);
   }
 
   .#{$prefix}--snippet__overflow-indicator--right {
     margin-left: -$carbon--spacing-03;
-    background-image: linear-gradient(to right, transparent, $ui-background);
+    background-image: linear-gradient(to right, transparent, $field-01);
   }
 
   .#{$prefix}--snippet--light .#{$prefix}--snippet__overflow-indicator--left {
-    background-image: linear-gradient(to left, transparent, $ui-01);
+    background-image: linear-gradient(to left, transparent, $field-02);
   }
 
   .#{$prefix}--snippet--light .#{$prefix}--snippet__overflow-indicator--right {
-    background-image: linear-gradient(to right, transparent, $ui-01);
+    background-image: linear-gradient(to right, transparent, $field-02);
   }
 
   // Safari-only media query
@@ -484,8 +484,8 @@
         margin-right: -$carbon--spacing-05;
         background-image: linear-gradient(
           to left,
-          rgba($ui-background, 0),
-          $ui-background
+          rgba($field-01, 0),
+          $field-01
         );
       }
 
@@ -493,8 +493,8 @@
         margin-left: -$carbon--spacing-05;
         background-image: linear-gradient(
           to right,
-          rgba($ui-background, 0),
-          $ui-background
+          rgba($field-01, 0),
+          $field-01
         );
       }
     }
