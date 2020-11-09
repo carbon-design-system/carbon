@@ -454,16 +454,16 @@
   .#{$prefix}--snippet__overflow-indicator--right {
     z-index: 1;
     flex: 1 0 auto;
-    width: $carbon--spacing-03;
+    width: $carbon--spacing-05;
   }
 
   .#{$prefix}--snippet__overflow-indicator--left {
-    margin-right: -$carbon--spacing-03;
+    margin-right: -$carbon--spacing-05;
     background-image: linear-gradient(to left, transparent, $field-01);
   }
 
   .#{$prefix}--snippet__overflow-indicator--right {
-    margin-left: -$carbon--spacing-03;
+    margin-left: -$carbon--spacing-05;
     background-image: linear-gradient(to right, transparent, $field-01);
   }
 
