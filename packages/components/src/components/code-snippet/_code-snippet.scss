@@ -373,6 +373,15 @@
     background-color: $hover-light-ui;
   }
 
+  .#{$prefix}--snippet.#{$prefix}--snippet--light.#{$prefix}--snippet--inline:active,
+  .#{$prefix}--snippet.#{$prefix}--snippet--light
+    .#{$prefix}--snippet-button:active,
+  .#{$prefix}--snippet.#{$prefix}--snippet--light
+    .#{$prefix}--snippet-btn--expand:active,
+  .#{$prefix}--snippet.#{$prefix}--snippet--light .#{$prefix}--copy-btn:active {
+    background-color: $copy-active;
+  }
+
   .#{$prefix}--snippet.#{$prefix}--snippet--light.#{$prefix}--snippet--single::after,
   .#{$prefix}--snippet.#{$prefix}--snippet--light.#{$prefix}--snippet--multi
     .#{$prefix}--snippet-container
