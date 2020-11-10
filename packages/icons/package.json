@@ -5,11 +5,7 @@
   "license": "Apache-2.0",
   "main": "lib/index.js",
   "module": "es/index.js",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/carbon-design-system/carbon.git",
-    "directory": "packages/icons"
-  },
+  "repository": "https://github.com/carbon-design-system/carbon/tree/master/packages/icons",
   "bugs": "https://github.com/carbon-design-system/carbon/issues",
   "files": [
     "es",

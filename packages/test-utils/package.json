@@ -3,11 +3,7 @@
   "private": true,
   "version": "10.12.0",
   "license": "Apache-2.0",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/carbon-design-system/carbon.git",
-    "directory": "packages/test-utils"
-  },
+  "repository": "https://github.com/carbon-design-system/carbon/tree/master/packages/test-utils",
   "bugs": "https://github.com/carbon-design-system/carbon/issues",
   "keywords": [
     "ibm",

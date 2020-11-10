@@ -5,11 +5,7 @@
   "license": "Apache-2.0",
   "main": "umd/index.js",
   "module": "es/index.js",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/carbon-design-system/carbon.git",
-    "directory": "packages/components"
-  },
+  "repository": "https://github.com/carbon-design-system/carbon/tree/master/packages/components",
   "bugs": "https://github.com/carbon-design-system/carbon/issues",
   "homepage": "https://www.carbondesignsystem.com/",
   "engines": {

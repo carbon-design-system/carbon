@@ -6,11 +6,7 @@
   "bin": {
     "bundler": "./bin/bundler.js"
   },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/carbon-design-system/carbon.git",
-    "directory": "packages/bundler"
-  },
+  "repository": "https://github.com/carbon-design-system/carbon/tree/master/packages/bundler",
   "bugs": "https://github.com/carbon-design-system/carbon/issues",
   "keywords": [
     "ibm",
