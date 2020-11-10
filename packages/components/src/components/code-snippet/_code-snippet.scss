@@ -469,12 +469,11 @@
   }
 
   // Safari-only media query
-  // won't appear correctly with CSS custom properties
+  // since fades won't appear correctly with CSS custom properties
   // see: tabs, code snippet, and modal overflow indicators
   @media not all and (min-resolution: 0.001dpcm) {
     @supports (-webkit-appearance: none) and (stroke-color: transparent) {
       .#{$prefix}--snippet__overflow-indicator--left {
-        margin-right: -$carbon--spacing-05;
         background-image: linear-gradient(
           to left,
           rgba($field-01, 0),
@@ -483,7 +482,6 @@
       }
 
       .#{$prefix}--snippet__overflow-indicator--right {
-        margin-left: -$carbon--spacing-05;
         background-image: linear-gradient(
           to right,
           rgba($field-01, 0),
