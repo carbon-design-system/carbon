@@ -5,7 +5,11 @@
   "version": "0.11.0",
   "license": "Apache-2.0",
   "main": "src/index.js",
-  "repository": "https://github.com/carbon-design-system/carbon/tree/master/packages/icon-build-helpers",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/carbon-design-system/carbon.git",
+    "directory": "packages/icon-build-helpers"
+  },
   "bugs": "https://github.com/carbon-design-system/carbon/issues",
   "keywords": [
     "ibm",
