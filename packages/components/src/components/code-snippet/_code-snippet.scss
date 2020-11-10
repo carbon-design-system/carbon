@@ -360,7 +360,7 @@
   .#{$prefix}--snippet.#{$prefix}--snippet--light
     .#{$prefix}--snippet-btn--expand,
   .#{$prefix}--snippet.#{$prefix}--snippet--light .#{$prefix}--copy-btn {
-    background-color: $ui-02;
+    background-color: $field-02;
   }
 
   .#{$prefix}--snippet.#{$prefix}--snippet--light.#{$prefix}--snippet--inline:hover,
@@ -386,7 +386,7 @@
     .#{$prefix}--snippet-container
     pre::after {
     // Safari interprets `transparent` differently, so make color token value transparent instead:
-    background-image: linear-gradient(to right, rgba($ui-02, 0), $ui-02);
+    background-image: linear-gradient(to right, rgba($field-02, 0), $field-02);
   }
 
   // Skeleton State
