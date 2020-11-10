@@ -27,12 +27,15 @@
     display: flex;
     flex-direction: column;
     align-items: flex-start;
+    width: 100%;
   }
 
   .#{$prefix}--select-input__wrapper {
     position: relative;
     display: flex;
     align-items: center;
+    width: 100%;
+    max-width: rem(448px);
   }
 
   .#{$prefix}--select-input {
@@ -40,7 +43,7 @@
     @include focus-outline('reset');
 
     display: block;
-    width: rem(224px);
+    width: 100%;
     min-width: rem(128px);
     max-width: rem(448px);
 
