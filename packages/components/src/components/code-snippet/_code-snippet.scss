@@ -304,12 +304,11 @@
     @include carbon--font-family('sans');
 
     position: absolute;
-    right: $spacing-03;
+    right: 0;
     bottom: $spacing-03;
     display: inline-flex;
     align-items: center;
-    padding: $spacing-03;
-    padding-left: $carbon--spacing-05;
+    padding: $spacing-03 $spacing-05;
     color: $text-01;
     background-color: $field-01;
     border: 0;
