@@ -435,7 +435,6 @@ export default class Modal extends Component {
             <Button
               kind={danger ? 'danger' : 'primary'}
               disabled={primaryButtonDisabled}
-              tabIndex={primaryButtonDisabled ? -1 : 0}
               onClick={onRequestSubmit}
               ref={this.button}>
               {primaryButtonText}
