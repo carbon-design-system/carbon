@@ -1,0 +1,256 @@
+//
+// Copyright IBM Corp. 2018, 2018
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+@use 'sass:list';
+@use 'sass:map';
+@use 'defaults';
+
+// A "plugin" is a property and it can be configured to emit across different
+// "variants"
+
+$plugin-defaults: (
+  fill: (
+    'responsive',
+    'hover',
+    'focus',
+  ),
+  stroke: (
+    'responsive',
+    'hover',
+    'focus',
+  ),
+  stroke-width: (
+    'responsive',
+    'hover',
+    'focus',
+  ),
+  accessibility: (
+    'responsive',
+    'hover',
+    'focus',
+    'active',
+  ),
+  flex: (
+    'responsive',
+  ),
+  // aspect-ratio: (),
+);
+
+$breakpoints: () !default;
+$plugins: () !default;
+$variants: () !default;
+// $theme: () !default;
+
+// Nested support?
+$colors: () !default;
+$spacing: () !default;
+
+@function em($px) {
+  @return ($px / 16px) * 1em;
+}
+
+$breakpoints: (
+  sm: em(320px),
+  md: em(672px),
+  lg: em(1056px),
+  xlg: em(1312px),
+  max: em(1584px),
+);
+
+@function get-config() {
+  $-theme: (
+    colors: $colors,
+    spacing: $spacing,
+  );
+
+  $-plugins: ();
+  @if list.length($plugins) > 0 {
+    @each $plugin, $enabled in $plugins {
+      @if $enabled == true {
+        $-plugins: map.set(
+          $-plugins,
+          $plugin,
+          map.get($plugin-defaults, $plugin)
+        );
+      } @else if $enabled == false {
+      } @else {
+        @debug 'here';
+      }
+    }
+    $-plugins: $plugins;
+  } @else {
+    $-plugins: $plugin-defaults;
+  }
+
+  @return (theme: $-theme, plugins: $-plugins);
+}
+
+$config: get-config();
+
+// @mixin breakpoint($name) {
+// @media screen and (min-width: #{map.get($breakpoints, $name)}) {
+// @content;
+// }
+// }
+
+// @function theme($token) {
+// @return map.get($theme, $token);
+// }
+
+// @if list.length($colors) > 0 {
+// @each $name, $value in $colors {
+// .bg-#{$name} {
+// background-color: $value;
+// }
+
+// .text-#{$name} {
+// text-color: $value;
+// }
+
+// .border-#{$name} {
+// border-color: $value;
+// }
+// }
+// }
+
+// @if list.length($spacing) > 0 {
+// @each $step, $value in $spacing {
+// .mt-#{$step} {
+// margin-top: $value;
+// }
+
+// .mr-#{$step} {
+// margin-right: $value;
+// }
+
+// .mb-#{$step} {
+// margin-bottom: $value;
+// }
+
+// .ml-#{$step} {
+// margin-left: $value;
+// }
+
+// .mv-#{$step} {
+// margin-top: $value;
+// margin-bottom: $value;
+// }
+
+// .mh-#{$step} {
+// margin-left: $value;
+// margin-right: $value;
+// }
+
+// .pt-#{$step} {
+// padding-top: $value;
+// }
+
+// .pr-#{$step} {
+// padding-right: $value;
+// }
+
+// .pb-#{$step} {
+// padding-bottom: $value;
+// }
+
+// .pl-#{$step} {
+// padding-left: $value;
+// }
+
+// .pv-#{$step} {
+// padding-top: $value;
+// padding-bottom: $value;
+// }
+
+// .ph-#{$step} {
+// padding-left: $value;
+// padding-right: $value;
+// }
+// }
+// }
+
+// $breakpoint-rules: (
+// defaults: (),
+// );
+// @each $key, $value in $breakpoints {
+// $breakpoint-rules: map.set($breakpoint-rules, $key, ());
+// }
+
+// $to-emit: (
+// sm: (),
+// md: (),
+// lg: (),
+// xlg: (),
+// max: (),
+// );
+
+// @if list.length($flex) > 0 {
+// $breakpoint-rules: map.deep-merge(
+// $breakpoint-rules,
+// (
+// defaults: (
+// (
+// declaration: 'flex-none',
+// property: 'flex',
+// value: 'none',
+// ),
+// ),
+// )
+// );
+// }
+
+// @mixin emit-declaration($rule) {
+// $declaration: map.get($rule, declaration);
+// $property: map.get($rule, property);
+// $value: map.get($rule, value);
+
+// .#{$declaration} {
+// #{$property}: #{$value};
+// }
+// }
+
+// @each $key, $declarations in $breakpoint-rules {
+// @if $key == 'defaults' {
+// @each $declaration in $declarations {
+// @include emit-declaration($declaration);
+// }
+// } @else {
+// }
+// }
+
+// @each $breakpoint, $values in $to-emit {
+// @include breakpoint($breakpoint) {
+// @each $spec in $values {
+// @include emit-declaration($spec);
+// }
+// }
+// }
+
+// @if true {
+// .sr-only {
+// position: absolute;
+// width: 1px;
+// height: 1px;
+// padding: 0;
+// margin: -1px;
+// overflow: hidden;
+// clip: rect(0, 0, 0, 0);
+// white-space: nowrap;
+// border-width: 0;
+// }
+
+// .not-sr-only {
+// position: static;
+// width: auto;
+// height: auto;
+// padding: 0;
+// margin: 0;
+// overflow: visible;
+// clip: auto;
+// white-space: normal;
+// }
+// }

@@ -1,0 +1,8 @@
+{
+  "name": "@carbon/utility-css",
+  "private": true,
+  "version": "0.0.0",
+  "dependencies": {
+    "@carbon/themes": "10.22.1"
+  }
+}
