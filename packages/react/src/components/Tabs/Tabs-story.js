@@ -51,7 +51,6 @@ const props = {
   }),
   tab: () => ({
     disabled: boolean('Disabled (disabled in <Tab>)', false),
-    tabIndex: number('Tab index (tabIndex in <Tab>)', 0),
     onClick: action('onClick'),
     onKeyDown: action('onKeyDown'),
   }),
