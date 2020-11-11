@@ -208,11 +208,11 @@ const MultiSelect = React.forwardRef(function MultiSelect(
         )}
         <button
           type="button"
-          ref={ref}
           className={`${prefix}--list-box__field`}
           disabled={disabled}
           aria-disabled={disabled}
-          {...getToggleButtonProps()}>
+          {...getToggleButtonProps()}
+          ref={ref}>
           {selectedItems.length > 0 && (
             <ListBox.Selection
               clearSelection={!disabled ? clearSelection : noop}

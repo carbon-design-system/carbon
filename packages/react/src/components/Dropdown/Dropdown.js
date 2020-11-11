@@ -155,11 +155,11 @@ const Dropdown = React.forwardRef(function Dropdown(
         )}
         <button
           type="button"
-          ref={ref}
           className={`${prefix}--list-box__field`}
           disabled={disabled}
           aria-disabled={disabled}
-          {...getToggleButtonProps()}>
+          {...getToggleButtonProps()}
+          ref={ref}>
           <span className={`${prefix}--list-box__label`}>
             {selectedItem ? itemToString(selectedItem) : label}
           </span>
