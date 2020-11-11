@@ -594,7 +594,6 @@ categories:
       - question
       - warning--01
       - warning--02
-      - warning--alt
   - name: Strategy
     members:
       - innovate

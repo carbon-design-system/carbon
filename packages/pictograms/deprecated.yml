@@ -1,7 +1,4 @@
 deprecated:
-  - name: warning--alt
-    reason:
-      The warning--alt pictogram has been deprecated in favor of warning--02
   - name: alchemy--language--alphabet--a--expanded
     reason:
       The alchemy--language--alphabet--a--expanded pictogram has been deprecated

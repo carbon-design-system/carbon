@@ -4302,13 +4302,6 @@
     - warning
     - alert
     - status
-- name: warning--alt
-  friendly_name: Warning 02
-  aliases:
-    - warning 02
-    - warning
-    - alert
-    - status
 - name: washer
   friendly_name: Washer
   aliases:
