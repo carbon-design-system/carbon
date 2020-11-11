@@ -1,6 +1,4 @@
 deprecated:
-  - name: upload
-    reason: The upload pictogram has been deprecated in favor of upload--01
   - name: upload--alt
     reason: The upload--alt pictogram has been deprecated in favor of upload--02
   - name: video

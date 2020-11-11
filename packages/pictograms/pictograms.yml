@@ -4312,11 +4312,6 @@
     - unlock 02
     - unlock
     - security
-- name: upload
-  friendly_name: Upload 01
-  aliases:
-    - upload 01
-    - upload
 - name: upload--01
   friendly_name: Upload 01
   aliases:
