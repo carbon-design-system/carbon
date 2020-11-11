@@ -8,6 +8,7 @@
 import React from 'react';
 import Tag from '../Tag';
 import TagSkeleton from '../Tag/Tag.Skeleton';
+import { Add16 } from '@carbon/icons-react';
 import { shallow } from 'enzyme';
 import { settings } from 'carbon-components';
 import { render, cleanup } from '@carbon/test-utils/react';
@@ -65,9 +66,13 @@ describe('Tag', () => {
   });
 
   it('should allow for a custom icon', () => {
-    const tag = shallow(<Tag type="red" renderIcon={Add16}>This is a tag</Tag>)
+    const tag = shallow(
+      <Tag type="red" renderIcon={Add16}>
+        This is a tag
+      </Tag>
+    );
     expect(tag.childAt(0).hasClass('bx--tag__custom-icon'));
-  })
+  });
 
   it('should support extra class names', () => {
     const tag = shallow(<Tag type="red" className="extra-class" />);

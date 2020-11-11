@@ -15,15 +15,15 @@ import mdx from './Tag.mdx';
 
 const icons = {
   'Carbon (Carbon16 from `@carbon/icons-react`)': 'Carbon16',
-  'Compass (Compass16 from `@carbon/icons-react`)' : 'Compass16',
-  'Tag (Tag16 from `@carbon/icons-react`)' : 'Tag16'
-}
+  'Compass (Compass16 from `@carbon/icons-react`)': 'Compass16',
+  'Tag (Tag16 from `@carbon/icons-react`)': 'Tag16',
+};
 
 const iconMap = {
   Carbon16,
   Compass16,
   Tag16,
-}
+};
 
 const props = {
   regular: () => ({
@@ -56,8 +56,8 @@ const props = {
       onClick: action('onClick'),
       onClose: action('onClose'),
       renderIcon: iconToUse,
-    }
-  }
+    };
+  },
 };
 
 export default {

@@ -51,8 +51,8 @@ const Tag = ({
       event.stopPropagation();
       onClose(event);
     }
-  }
-  
+  };
+
   return filter ? (
     <div
       className={tagClasses}
@@ -88,10 +88,9 @@ const Tag = ({
       }
       id={tagId}
       {...other}>
-        <button
-          className={`${prefix}--tag__custom-icon`}>
-          <CustomIconElement />
-        </button>
+      <button type="button" className={`${prefix}--tag__custom-icon`}>
+        <CustomIconElement />
+      </button>
       <span
         className={`${prefix}--tag__label`}
         title={typeof children === 'string' ? children : null}>
@@ -139,7 +138,7 @@ Tag.propTypes = {
    */
   onClose: PropTypes.func,
 
-    /**
+  /**
    * Optional prop to render a custom icon.
    * Can be a React component class
    */
