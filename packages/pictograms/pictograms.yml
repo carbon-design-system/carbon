@@ -1441,14 +1441,6 @@
   aliases:
     - engine
     - motor
-- name: enterprise--design--thinking
-  friendly_name: Enterprise design thinking 01
-  aliases:
-    - enterprise design thinking 01
-    - enterprise design thinking
-    - design thinking
-    - design
-    - EDT
 - name: enterprise--design--thinking--01
   friendly_name: Enterprise design thinking 01
   aliases:
