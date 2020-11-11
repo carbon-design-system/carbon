@@ -4175,12 +4175,6 @@
     - unlock 02
     - unlock
     - security
-- name: unlock--alt
-  friendly_name: Unlock 02
-  aliases:
-    - unlock 02
-    - unlock
-    - security
 - name: upload--01
   friendly_name: Upload 01
   aliases:

@@ -589,7 +589,6 @@ categories:
       - unify--endpoint--management
       - unlock--01
       - unlock--02
-      - unlock--alt
   - name: Status
     members:
       - question
