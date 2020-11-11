@@ -7,6 +7,7 @@
 
 import React from 'react';
 import { withKnobs, select, text, boolean } from '@storybook/addon-knobs';
+import { Tag16, Compass16 } from '@carbon/icons-react';
 import Tag, { types as typesList } from '../Tag';
 import TagSkeleton from '../Tag/Tag.Skeleton';
 import { action } from '@storybook/addon-actions/dist/preview';
@@ -41,7 +42,7 @@ const props = {
       ...this.regular(),
       onClick: action('onClick'),
       onClose: action('onClose'),
-      customIcon: text('Custom Icon', 'Tag')
+      renderIcon: Tag16
     }
   }
 };
@@ -94,7 +95,7 @@ Filter.parameters = {
 };
 
 export const CustomIcon = () => (
-  <Tag className="some-class" {...props.icon()} icon>
+  <Tag className="some-class" {...props.icon()} hasCustomIcon>
     {text('Content (children)', 'This is a tag')}
   </Tag>
 );

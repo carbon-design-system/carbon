@@ -176,12 +176,11 @@
     flex-shrink: 0;
     width: rem(16px);
     height: rem(16px);
-    margin: 0 rem(8px) 0 rem(4px);
+    margin-right: rem(4px);
     padding: 0;
     color: currentColor;
     background-color: transparent;
     border: 0;
-    border-radius: 50%;
     outline: none;
 
     svg {

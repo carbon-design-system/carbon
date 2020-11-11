@@ -9,7 +9,6 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import classNames from 'classnames';
 import { settings } from 'carbon-components';
-import * as Icons from '@carbon/icons-react';
 import { Close16 }from '@carbon/icons-react';
 import setupGetInstanceId from '../../tools/setupGetInstanceId';
 
@@ -35,7 +34,8 @@ const Tag = ({
   id,
   type,
   filter,
-  customIcon,
+  hasCustomIcon,
+  renderIcon: CustomIconElement,
   title,
   disabled,
   onClose,
@@ -54,8 +54,6 @@ const Tag = ({
     }
   }
   
-  var CustomIcon = Icons[customIcon + "16"] || Icons['Tag16'];
-
   return filter ? (
     <div
       className={tagClasses}
@@ -81,7 +79,7 @@ const Tag = ({
         <Close16 />
       </button>
     </div>
-  ) : customIcon ? (
+  ) : hasCustomIcon ? (
     <div
       className={tagClasses}
       aria-label={
@@ -93,7 +91,7 @@ const Tag = ({
       {...other}>
         <button
           className={`${prefix}--tag__custom-icon`}>
-          <CustomIcon />
+          <CustomIconElement />
         </button>
       <span
         className={`${prefix}--tag__label`}
@@ -123,11 +121,6 @@ Tag.propTypes = {
   className: PropTypes.string,
 
   /**
-   * Provide a cusotm Icon name to be applied before the text content
-   */
-  customIcon: PropTypes.string,
-
-  /**
    * Specify if the <Tag> is disabled
    */
   disabled: PropTypes.bool,
@@ -143,9 +136,20 @@ Tag.propTypes = {
   id: PropTypes.string,
 
   /**
+   * Specify if custom icon will be rendered
+   */
+  hasIconOnly: PropTypes.bool,
+
+  /**
    * Click handler for filter tag close button.
    */
   onClose: PropTypes.func,
+
+    /**
+   * Optional prop to allow overriding the icon rendering.
+   * Can be a React component class
+   */
+  renderIcon: PropTypes.oneOfType([PropTypes.func, PropTypes.object]),
 
   /**
    * Text to show on clear filters
