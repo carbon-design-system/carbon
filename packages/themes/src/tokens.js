@@ -76,11 +76,12 @@ const colors = [
   'activeTertiary',
 
   'hoverUI',
+  'hoverLightUI',
+  'hoverSelectedUI',
   'activeUI',
 
   'selectedUI',
   'selectedLightUI',
-  'hoverSelectedUI',
   'inverseHoverUI',
 
   'hoverDanger',
@@ -97,8 +98,6 @@ const colors = [
   'highlight',
 
   'decorative01',
-
-  'hoverLightUI',
 
   'buttonSeparator',
 
@@ -217,6 +216,7 @@ export const unstable__meta = {
         'hoverSecondary',
         'hoverTertiary',
         'hoverUI',
+        'hoverLightUI',
         'hoverSelectedUI',
         'hoverDanger',
         'hoverRow',
@@ -238,7 +238,6 @@ export const unstable__meta = {
         'active01',
         'hoverField',
         'decorative01',
-        'hoverLightUI',
         'buttonSeparator',
       ],
     },

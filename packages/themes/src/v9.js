@@ -71,6 +71,7 @@ export const hoverTertiary = '#5a6872';
 export const activeTertiary = '#414f59';
 
 export const hoverUI = '#EEF4FC';
+export const hoverLightUI = '#EEF4FC';
 export const activeUI = '#DFEAFA';
 export const selectedUI = '#EEF4FC';
 export const selectedLightUI = '#EEF4FC';
@@ -92,8 +93,6 @@ export const disabled03 = '#cdd1d4';
 export const highlight = '#f4f7fb';
 
 export const decorative01 = '#EEF4FC';
-
-export const hoverLightUI = '#EEF4FC';
 
 export const buttonSeparator = '#e0e0e0';
 
