@@ -65,7 +65,7 @@ describe('Tag', () => {
   });
 
   it('should allow for a custom icon', () => {
-    const tag = shallow(<Tag type="red" customIcon='Add16'>This is a tag</Tag>)
+    const tag = shallow(<Tag type="red" renderIcon={Add16}>This is a tag</Tag>)
     expect(tag.childAt(0).hasClass('bx--tag__custom-icon'));
   })
 
