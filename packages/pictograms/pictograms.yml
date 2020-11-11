@@ -2341,13 +2341,6 @@
     - locked
     - network
     - security
-- name: locked--network--alt
-  friendly_name: Locked Network 02
-  aliases:
-    - locked network 02
-    - locked network
-    - network
-    - security
 - name: london
   friendly_name: London
   aliases:

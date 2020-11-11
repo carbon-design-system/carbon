@@ -570,7 +570,6 @@ categories:
       - lock--02
       - locked--network--01
       - locked--network--02
-      - locked--network--alt
       - master--threat--hunting
       - network--protection
       - protect--critical--assets
