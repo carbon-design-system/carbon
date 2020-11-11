@@ -1619,12 +1619,6 @@
   aliases:
     - factory
     - manufacturing
-- name: farm
-  friendly_name: Farm
-  aliases:
-    - farm
-    - rural
-    - landscape
 - name: farm--01
   friendly_name: Farm 01
   aliases:
