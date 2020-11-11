@@ -1,7 +1,4 @@
 deprecated:
-  - name: heat--map
-    reason:
-      The heat--map pictogram has been deprecated in favor of heat--map--01
   - name: feedback
     reason: The feedback pictogram has been deprecated in favor of feedback--01
   - name: enterprise--design--thinking

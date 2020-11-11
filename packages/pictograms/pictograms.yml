@@ -2038,15 +2038,6 @@
   aliases:
     - heart health
     - heart
-- name: heat--map
-  friendly_name: Heat map 01
-  aliases:
-    - heat map 01
-    - heat map
-    - heat
-    - chart
-    - data analytics
-    - analytics
 - name: heat--map--01
   friendly_name: Heat map 01
   aliases:
