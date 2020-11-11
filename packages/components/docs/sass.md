@@ -26819,7 +26819,9 @@ Tooltip styles
         outline-offset: 2px;
       }
 
-      &:active {
+      &:active,
+      &:active:visited,
+      &:active:visited:hover {
         color: $inverse-01;
       }
 
