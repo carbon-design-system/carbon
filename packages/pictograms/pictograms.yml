@@ -2831,15 +2831,6 @@
     - Manhattan
     - city
     - cities
-- name: nyc--manhattan--alt
-  friendly_name: NYC Manhattan 02
-  aliases:
-    - NYC Manhattan alt
-    - NYC Manhattan
-    - NYC
-    - Manhattan
-    - city
-    - cities
 - name: nyc--statue-of-liberty
   friendly_name: NYC Statue of Liberty
   aliases:
