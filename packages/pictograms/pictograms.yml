@@ -313,15 +313,6 @@
     - tower
     - city
     - cities
-- name: berlin--brandenburg
-  friendly_name: Berlin Brandenburg
-  aliases:
-    - Berlin Brandenburg
-    - Berlin
-    - Germany
-    - Brandenburg
-    - city
-    - cities
 - name: berlin--brandenburg-gate
   friendly_name: Berlin Brandenburg Gate
   aliases:

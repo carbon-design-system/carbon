@@ -1,8 +1,4 @@
 deprecated:
-  - name: berlin--brandenburg
-    reason:
-      The berlin--brandenburg pictogram has been deprecated in favor of
-      berlin--brandenburg-gate
   - name: london--expanded--base
     reason: The london--expanded--base pictogram has been deprecated
   - name: nyc--manhattan
