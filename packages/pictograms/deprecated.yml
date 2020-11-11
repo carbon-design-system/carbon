@@ -1,6 +1,4 @@
 deprecated:
-  - name: lock--alt
-    reason: The lock--alt pictogram has been deprecated in favor of lock--02
   - name: locked--network
     reason:
       The locked--network pictogram has been deprecated in favor of
