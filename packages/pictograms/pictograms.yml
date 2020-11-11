@@ -3124,13 +3124,6 @@
     - electronics
     - office equipment
     - office
-- name: private--network
-  friendly_name: Private network 01
-  aliases:
-    - private network 01
-    - private network
-    - private
-    - network
 - name: private--network--01
   friendly_name: Private network 01
   aliases:
