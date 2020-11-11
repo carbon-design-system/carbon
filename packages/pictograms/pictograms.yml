@@ -4386,12 +4386,6 @@
     - video 02
     - video
     - controls
-- name: video--alt
-  friendly_name: Video 02
-  aliases:
-    - video 02
-    - video
-    - controls
 - name: video--chat
   friendly_name: Video chat
   aliases:
