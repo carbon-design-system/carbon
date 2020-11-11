@@ -2813,15 +2813,6 @@
     - Brooklyn
     - city
     - cities
-- name: nyc--manhattan
-  friendly_name: NYC Manhattan 01
-  aliases:
-    - NYC Manhattan 01
-    - NYC Manhattan
-    - NYC
-    - Manhattan
-    - city
-    - cities
 - name: nyc--manhattan--01
   friendly_name: NYC Manhattan 01
   aliases:

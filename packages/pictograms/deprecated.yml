@@ -1,8 +1,4 @@
 deprecated:
-  - name: nyc--manhattan
-    reason:
-      The nyc--manhattan pictogram has been deprecated in favor of
-      nyc--manhattan--01
   - name: nyc--manhattan--alt
     reason:
       The nyc--manhattan--alt pictogram has been deprecated in favor of
