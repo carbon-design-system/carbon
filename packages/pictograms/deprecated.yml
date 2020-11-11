@@ -1,6 +1,4 @@
 deprecated:
-  - name: warning
-    reason: The warning pictogram has been deprecated in favor of warning--01
   - name: warning--alt
     reason:
       The warning--alt pictogram has been deprecated in favor of warning--02

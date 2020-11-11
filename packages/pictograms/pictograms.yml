@@ -4288,13 +4288,6 @@
     - recognition
     - watson
     - AI
-- name: warning
-  friendly_name: Warning 01
-  aliases:
-    - warning 01
-    - warning
-    - alert
-    - status
 - name: warning--01
   friendly_name: Warning 01
   aliases:
