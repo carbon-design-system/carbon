@@ -140,7 +140,7 @@ Tag.propTypes = {
   onClose: PropTypes.func,
 
     /**
-   * Optional prop to allow overriding the icon rendering.
+   * Optional prop to render a custom icon.
    * Can be a React component class
    */
   renderIcon: PropTypes.oneOfType([PropTypes.func, PropTypes.object]),
