@@ -1457,14 +1457,6 @@
     - design thinking
     - design
     - EDT
-- name: enterprise--design--thinking--alt
-  friendly_name: Enterprise design thinking 02
-  aliases:
-    - enterprise design thinking 02
-    - enterprise design thinking
-    - design thinking
-    - design
-    - EDT
 - name: envelope
   friendly_name: Envelope
   aliases:
