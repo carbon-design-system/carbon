@@ -2267,13 +2267,6 @@
     - language
     - translation
     - watson
-- name: language--translation--alphabet--a--expanded
-  friendly_name: Language translation alphabet a expanded
-  aliases:
-    - language translation alphabet a expanded
-    - language
-    - translation
-    - watson
 - name: launch
   friendly_name: Launch
   aliases:

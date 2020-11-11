@@ -1,8 +1,4 @@
 deprecated:
-  - name: language--translation--alphabet--a--expanded
-    reason:
-      The language--translation--alphabet--a--expanded pictogram has been
-      deprecated
   - name: speech--alphabet--a--expanded
     reason: The speech--alphabet--a--expanded pictogram has been deprecated
   - name: ibm--watson
