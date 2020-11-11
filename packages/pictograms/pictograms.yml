@@ -1548,14 +1548,6 @@
     - send
     - ship
     - transmit
-- name: export--alt
-  friendly_name: Export 02
-  aliases:
-    - export 02
-    - export
-    - send
-    - ship
-    - transmit
 - name: eye
   friendly_name: Eye
   aliases:
