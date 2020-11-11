@@ -79,7 +79,7 @@ const colors = [
   'hoverLightUI',
   'hoverSelectedUI',
   'activeUI',
-
+  'activeLightUI',
   'selectedUI',
   'selectedLightUI',
   'inverseHoverUI',
@@ -224,6 +224,7 @@ export const unstable__meta = {
         'activeSecondary',
         'activeTertiary',
         'activeUI',
+        'activeLightUI',
         'activeDanger',
         'selectedUI',
         'selectedLightUI',
