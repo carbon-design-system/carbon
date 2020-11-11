@@ -1607,13 +1607,6 @@
     - water
     - spigot
     - plumbing
-- name: feedback
-  friendly_name: Feedback
-  aliases:
-    - feedback
-    - response
-    - iterate
-    - results
 - name: feedback--01
   friendly_name: Feedback 01
   aliases:

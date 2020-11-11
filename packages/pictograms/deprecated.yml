@@ -1,6 +1,4 @@
 deprecated:
-  - name: feedback
-    reason: The feedback pictogram has been deprecated in favor of feedback--01
   - name: enterprise--design--thinking
     reason:
       The enterprise--design--thinking pictogram has been deprecated in favor of
