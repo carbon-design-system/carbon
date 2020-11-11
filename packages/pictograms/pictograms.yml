@@ -2413,13 +2413,6 @@
     - big ben
     - cities
     - city
-- name: london--expanded--base
-  friendly_name: London expanded base
-  aliases:
-    - London expanded base
-    - London
-    - cities
-    - city
 - name: love
   friendly_name: Love
   aliases:

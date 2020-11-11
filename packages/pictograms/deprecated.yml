@@ -1,6 +1,4 @@
 deprecated:
-  - name: london--expanded--base
-    reason: The london--expanded--base pictogram has been deprecated
   - name: nyc--manhattan
     reason:
       The nyc--manhattan pictogram has been deprecated in favor of
