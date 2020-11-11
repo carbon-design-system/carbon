@@ -1,6 +1,4 @@
 deprecated:
-  - name: video
-    reason: The video pictogram has been deprecated in favor of video--01
   - name: video--alt
     reason: The video--alt pictogram has been deprecated in favor of video--02
   - name: berlin--brandenburg

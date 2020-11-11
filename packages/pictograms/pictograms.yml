@@ -4374,12 +4374,6 @@
     - vancouver
     - city
     - cities
-- name: video
-  friendly_name: Video 01
-  aliases:
-    - video 01
-    - video
-    - controls
 - name: video--01
   friendly_name: Video 01
   aliases:
