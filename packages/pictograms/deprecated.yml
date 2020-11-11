@@ -1,6 +1,4 @@
 deprecated:
-  - name: unlock
-    reason: The unlock pictogram has been deprecated in favor of unlock--01
   - name: unlock--alt
     reason: The unlock--alt pictogram has been deprecated in favor of unlock--02
   - name: warning

@@ -4163,12 +4163,6 @@
     - university
     - education
     - college
-- name: unlock
-  friendly_name: Unlock 01
-  aliases:
-    - unlock 01
-    - unlock
-    - security
 - name: unlock--01
   friendly_name: Unlock 01
   aliases:
