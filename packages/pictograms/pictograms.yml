@@ -3452,12 +3452,6 @@
     - Sao Paulo
     - city
     - cities
-- name: sao-paulo--expanded--base
-  friendly_name: Sao Paulo expanded base
-  aliases:
-    - Sao Paulo
-    - city
-    - cities
 - name: satellite
   friendly_name: Satellite
   aliases:
