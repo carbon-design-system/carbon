@@ -1,6 +1,4 @@
 deprecated:
-  - name: language
-    reason: The language pictogram has been deprecated in favor of language--01
   - name: language--translation--alphabet--a--expanded
     reason:
       The language--translation--alphabet--a--expanded pictogram has been

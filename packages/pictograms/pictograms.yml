@@ -2230,12 +2230,6 @@
     - data
     - watson
     - AI
-- name: language
-  friendly_name: Language 01
-  aliases:
-    - language 01
-    - language
-    - watson
 - name: language--01
   friendly_name: Language 01
   aliases:
