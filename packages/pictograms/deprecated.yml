@@ -1,7 +1,4 @@
 deprecated:
-  - name: download--alt
-    reason:
-      The download--alt pictogram has been deprecated in favor of download--02
   - name: export
     reason: The export pictogram has been deprecated in favor of export--01
   - name: export--alt

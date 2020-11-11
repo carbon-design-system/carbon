@@ -1351,11 +1351,6 @@
     - download alt
     - download 02
     - download
-- name: download--alt
-  friendly_name: Download 02
-  aliases:
-    - download 02
-    - download
 - name: dubai--palm-islands
   friendly_name: Dubai Palm Islands
   aliases:
