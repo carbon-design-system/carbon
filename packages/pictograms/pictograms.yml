@@ -2315,12 +2315,6 @@
   friendly_name: Location
   aliases:
     - location
-- name: lock
-  friendly_name: Lock 01
-  aliases:
-    - lock 01
-    - lock
-    - security
 - name: lock--01
   friendly_name: Lock 01
   aliases:
