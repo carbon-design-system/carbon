@@ -108,7 +108,7 @@ Filter.parameters = {
 };
 
 export const CustomIcon = () => (
-  <Tag className="some-class" {...props.icon()} hasCustomIcon>
+  <Tag className="some-class" {...props.icon()}>
     {text('Content (children)', 'This is a tag')}
   </Tag>
 );

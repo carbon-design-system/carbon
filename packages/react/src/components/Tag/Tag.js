@@ -34,7 +34,6 @@ const Tag = ({
   id,
   type,
   filter,
-  hasCustomIcon,
   renderIcon: CustomIconElement,
   title,
   disabled,
@@ -79,7 +78,7 @@ const Tag = ({
         <Close16 />
       </button>
     </div>
-  ) : hasCustomIcon ? (
+  ) : CustomIconElement ? (
     <div
       className={tagClasses}
       aria-label={
@@ -134,11 +133,6 @@ Tag.propTypes = {
    * Specify the id for the tag.
    */
   id: PropTypes.string,
-
-  /**
-   * Specify if custom icon will be rendered
-   */
-  hasIconOnly: PropTypes.bool,
 
   /**
    * Click handler for filter tag close button.
