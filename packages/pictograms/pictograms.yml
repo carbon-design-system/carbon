@@ -1340,11 +1340,6 @@
     - door handle
     - door knob
     - lockset
-- name: download
-  friendly_name: Download 01
-  aliases:
-    - download
-    - download 01
 - name: download--01
   friendly_name: Download 01
   aliases:
