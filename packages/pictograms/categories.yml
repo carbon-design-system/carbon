@@ -568,7 +568,6 @@ categories:
       - identity--trust--assessment
       - lock--01
       - lock--02
-      - locked--network
       - locked--network--01
       - locked--network--02
       - locked--network--alt

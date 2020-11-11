@@ -1,8 +1,4 @@
 deprecated:
-  - name: locked--network
-    reason:
-      The locked--network pictogram has been deprecated in favor of
-      locked--network--01
   - name: locked--network--alt
     reason:
       The locked--network--alt pictogram has been deprecated in favor of

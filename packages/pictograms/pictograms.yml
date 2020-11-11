@@ -2327,13 +2327,6 @@
     - lock 02
     - lock
     - security
-- name: locked--network
-  friendly_name: Locked Network 01
-  aliases:
-    - locked network 01
-    - locked network
-    - network
-    - security
 - name: locked--network--01
   friendly_name: Locked Network 01
   aliases:
