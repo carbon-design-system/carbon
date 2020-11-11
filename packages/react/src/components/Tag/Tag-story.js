@@ -7,11 +7,23 @@
 
 import React from 'react';
 import { withKnobs, select, text, boolean } from '@storybook/addon-knobs';
-import { Tag16 } from '@carbon/icons-react';
+import { Carbon16, Compass16, Tag16 } from '@carbon/icons-react';
 import Tag, { types as typesList } from '../Tag';
 import TagSkeleton from '../Tag/Tag.Skeleton';
 import { action } from '@storybook/addon-actions/dist/preview';
 import mdx from './Tag.mdx';
+
+const icons = {
+  'Carbon (Carbon16 from `@carbon/icons-react`)': 'Carbon16',
+  'Compass (Compass16 from `@carbon/icons-react`)' : 'Compass16',
+  'Tag (Tag16 from `@carbon/icons-react`)' : 'Tag16'
+}
+
+const iconMap = {
+  Carbon16,
+  Compass16,
+  Tag16,
+}
 
 const props = {
   regular: () => ({
@@ -38,11 +50,12 @@ const props = {
     };
   },
   icon() {
+    let iconToUse = iconMap[select('Icon (icon)', icons, 'Tag16')];
     return {
       ...this.regular(),
       onClick: action('onClick'),
       onClose: action('onClose'),
-      renderIcon: Tag16
+      renderIcon: iconToUse,
     }
   }
 };
