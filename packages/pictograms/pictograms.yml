@@ -1532,14 +1532,6 @@
     - expand vert
     - expand
     - vertical
-- name: export
-  friendly_name: Export 01
-  aliases:
-    - export 01
-    - export
-    - send
-    - ship
-    - transmit
 - name: export--01
   friendly_name: Export 01
   aliases:

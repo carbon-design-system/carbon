@@ -1,6 +1,4 @@
 deprecated:
-  - name: export
-    reason: The export pictogram has been deprecated in favor of export--01
   - name: export--alt
     reason: The export--alt pictogram has been deprecated in favor of export--02
   - name: upload
