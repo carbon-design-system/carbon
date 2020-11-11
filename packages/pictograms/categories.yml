@@ -683,7 +683,6 @@ categories:
       - relationship--extraction
       - retrieve--and--rank
       - speech
-      - speech--alphabet--a--expanded
       - speech--to--text
       - text--to--speech
       - tone--analyzer

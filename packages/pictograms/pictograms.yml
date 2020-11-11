@@ -3570,13 +3570,6 @@
     - speech
     - watson
     - AI
-- name: speech--alphabet--a--expanded
-  friendly_name: Speech alphabet a expanded
-  aliases:
-    - speech alphabet a expanded
-    - speech
-    - watson
-    - AI
 - name: speech--to--text
   friendly_name: Speech to text
   aliases:

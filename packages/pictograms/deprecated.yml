@@ -1,6 +1,4 @@
 deprecated:
-  - name: speech--alphabet--a--expanded
-    reason: The speech--alphabet--a--expanded pictogram has been deprecated
   - name: ibm--watson
     reason:
       The ibm--watson pictogram has been deprecated in favor of watson--logo
