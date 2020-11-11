@@ -94,12 +94,6 @@
     - Alchemy
     - language
     - text
-- name: alchemy--language--alphabet--a--expanded
-  friendly_name: Alchemy language alphabet a expanded
-  aliases:
-    - Alchemy language alphabet a expanded
-    - language
-    - alphabet
 - name: alchemy--vision
   friendly_name: AlchemyVision®
   aliases:

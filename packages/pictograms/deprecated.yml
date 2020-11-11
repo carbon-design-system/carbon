@@ -1,7 +1,4 @@
 deprecated:
-  - name: alchemy--language--alphabet--a--expanded
-    reason:
-      The alchemy--language--alphabet--a--expanded pictogram has been deprecated
   - name: language
     reason: The language pictogram has been deprecated in favor of language--01
   - name: language--translation--alphabet--a--expanded
