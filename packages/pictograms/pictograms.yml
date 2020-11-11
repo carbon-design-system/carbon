@@ -3152,13 +3152,6 @@
     - private network
     - private
     - network
-- name: private--network--alt--01
-  friendly_name: Private network 04
-  aliases:
-    - private network 04
-    - private network
-    - private
-    - network
 - name: process
   friendly_name: Process
   aliases:
