@@ -35,7 +35,7 @@
     display: inline;
     padding: 0;
     color: $text-01;
-    background-color: $ui-01;
+    background-color: $field-01;
     border: 2px solid transparent;
     border-radius: 4px;
     cursor: pointer;
@@ -98,7 +98,7 @@
     display: inline-block;
 
     &:hover {
-      background-color: $ui-01;
+      background-color: $field-01;
       cursor: auto;
     }
   }
@@ -149,7 +149,7 @@
     width: rem(16px);
     height: 100%;
     // Safari interprets `transparent` differently, so make color token value transparent instead:
-    background-image: linear-gradient(to right, rgba($ui-01, 0), $ui-01);
+    background-image: linear-gradient(to right, rgba($field-01, 0), $field-01);
     content: '';
   }
 
@@ -211,7 +211,7 @@
     width: rem(16px);
     height: 100%;
     // Safari interprets `transparent` differently, so make color token value transparent instead:
-    background-image: linear-gradient(to right, rgba($ui-01, 0), $ui-01);
+    background-image: linear-gradient(to right, rgba($field-01, 0), $field-01);
     content: '';
   }
 
@@ -240,7 +240,7 @@
     height: $carbon--spacing-08;
     padding: 0;
     overflow: visible;
-    background-color: $ui-01;
+    background-color: $field-01;
     border: none;
     outline: none;
     cursor: pointer;
