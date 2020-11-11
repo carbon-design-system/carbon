@@ -4322,11 +4322,6 @@
   aliases:
     - upload 02
     - upload
-- name: upload--alt
-  friendly_name: Upload 02
-  aliases:
-    - upload 02
-    - upload
 - name: user
   friendly_name: User
   aliases:
