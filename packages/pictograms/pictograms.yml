@@ -2107,10 +2107,6 @@
   aliases:
     - IBM iX®
     - IBM
-- name: ibm--watson
-  friendly_name: IBM Watson
-  aliases:
-    - ibm watson
 - name: ibm--z
   friendly_name: IBM Z®
   aliases:
