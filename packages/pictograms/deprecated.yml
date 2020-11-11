@@ -1,8 +1,4 @@
 deprecated:
-  - name: private--network--alt
-    reason:
-      The private--network--alt pictogram has been deprecated in favor of
-      private--network--03
   - name: private--network--alt--01
     reason:
       The private--network--alt pictogram has been deprecated in favor of
