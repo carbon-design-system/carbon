@@ -492,7 +492,6 @@ categories:
       - support--services
       - transactional--blockchain
       - transactional--trust
-      - transform
       - transform--02
   - name: People
     members:

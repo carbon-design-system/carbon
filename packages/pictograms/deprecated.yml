@@ -1,7 +1,4 @@
 deprecated:
-  - name: transform
-    reason:
-      The transform pictogram has been deprecated in favor of transform--02
   - name: lock
     reason: The lock pictogram has been deprecated in favor of lock--01
   - name: lock--alt

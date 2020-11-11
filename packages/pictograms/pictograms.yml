@@ -4090,12 +4090,6 @@
   friendly_name: Transactional trust
   aliases:
     - transactional trust
-- name: transform
-  friendly_name: Transform
-  aliases:
-    - transform
-    - networking
-    - network
 - name: transform--01
   friendly_name: Transform 01
   aliases:
