@@ -181,12 +181,12 @@ describe('Dropdown', () => {
 
 describe('DropdownSkeleton', () => {
   describe('Renders as expected', () => {
-    const wrapper = shallow(<DropdownSkeleton inline />);
+    const wrapper = shallow(<DropdownSkeleton size="sm" />);
 
     it('Has the expected classes', () => {
       expect(wrapper.hasClass(`${prefix}--skeleton`)).toEqual(true);
       expect(wrapper.hasClass(`${prefix}--dropdown-v2`)).toEqual(true);
-      expect(wrapper.hasClass(`${prefix}--list-box--inline`)).toEqual(true);
+      expect(wrapper.hasClass(`${prefix}--list-box--sm`)).toEqual(true);
     });
   });
 });

@@ -5,16 +5,25 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React from 'react';
-import Tab from '../Tab';
-import { shallow, mount } from 'enzyme';
 import { settings } from 'carbon-components';
 
 const { prefix } = settings;
 
 describe('Tab', () => {
   describe('renders as expected', () => {
-    const wrapper = shallow(<Tab label="firstTab" />);
+    let React;
+    let mount;
+    let Tab;
+    let wrapper;
+
+    beforeEach(() => {
+      jest.isolateModules(() => {
+        React = require('react');
+        mount = require('enzyme').mount;
+        Tab = require('../Tab').default;
+        wrapper = mount(<Tab label="firstTab" />);
+      });
+    });
 
     it('adds extra classes that are passed via className', () => {
       wrapper.setProps({ className: 'extra-class' });
@@ -35,11 +44,6 @@ describe('Tab', () => {
 
     it('renders <button> with tabindex set to 0', () => {
       expect(wrapper.find('button').props().tabIndex).toEqual(0);
-    });
-
-    it('sets tabIndex on <button> if one is passed via props', () => {
-      wrapper.setProps({ tabIndex: 2 });
-      expect(wrapper.find('button').props().tabIndex).toEqual(2);
     });
 
     it('uses label to set children on <button> when passed via props', () => {
@@ -63,17 +67,35 @@ describe('Tab', () => {
 
     it(`adds [className="${prefix}--tabs__nav-item--selected"] when selected prop is true`, () => {
       wrapper.setProps({ selected: true });
-      expect(wrapper.hasClass(`${prefix}--tabs__nav-item--selected`)).toBe(
-        true
-      );
+      expect(
+        wrapper.children().hasClass(`${prefix}--tabs__nav-item--selected`)
+      ).toBe(true);
     });
   });
 
   describe('events', () => {
+    let React;
+    let mount;
+    let Tab;
+
+    beforeEach(() => {
+      jest.isolateModules(() => {
+        React = require('react');
+        mount = require('enzyme').mount;
+        Tab = require('../Tab').default;
+      });
+    });
+
     describe('click', () => {
-      const onClick = jest.fn();
-      const handleTabClick = jest.fn();
-      const wrapper = shallow(<Tab label="firstTab" />);
+      let wrapper;
+      let onClick;
+      let handleTabClick;
+
+      beforeEach(() => {
+        wrapper = mount(<Tab label="firstTab" />);
+        onClick = jest.fn();
+        handleTabClick = jest.fn();
+      });
 
       it('invokes handleTabClick from onClick prop', () => {
         wrapper.setProps({ handleTabClick });
@@ -89,10 +111,21 @@ describe('Tab', () => {
     });
 
     describe('keydown', () => {
-      const onKeyDown = jest.fn();
-      const handleTabKeyDown = jest.fn();
-      const wrapper = shallow(<Tab label="firstTab" />);
-      wrapper.setProps({ onKeyDown, handleTabKeyDown });
+      let onKeyDown;
+      let handleTabKeyDown;
+      let wrapper;
+
+      beforeEach(() => {
+        onKeyDown = jest.fn();
+        handleTabKeyDown = jest.fn();
+        wrapper = mount(
+          <Tab
+            label="firstTab"
+            onKeyDown={onKeyDown}
+            handleTabKeyDown={handleTabKeyDown}
+          />
+        );
+      });
 
       it('invokes onKeyDown when a function is passed to onKeyDown prop', () => {
         wrapper.simulate('keyDown', { which: 38 });
@@ -106,18 +139,42 @@ describe('Tab', () => {
     });
   });
 
-  describe('custom render label', () => {
-    const wrapper = mount(
-      <Tab
-        renderAnchor={() => (
-          <a id="custom-label" href="#other-content">
-            Content
-          </a>
-        )}
-      />
-    );
-    expect(wrapper.find('#custom-label').props().href).toEqual(
-      '#other-content'
-    );
+  describe('deprecated', () => {
+    let React;
+    let mount;
+    let Tab;
+
+    beforeEach(() => {
+      jest.isolateModules(() => {
+        jest.mock('../../prop-types/deprecate', () => {
+          return jest.fn().mockImplementation(() => jest.fn());
+        });
+
+        React = require('react');
+        mount = require('enzyme').mount;
+        Tab = require('../Tab').default;
+      });
+    });
+
+    test('custom render label', () => {
+      const wrapper = mount(
+        <Tab
+          renderAnchor={() => (
+            <a id="custom-label" href="#other-content">
+              Content
+            </a>
+          )}
+        />
+      );
+      expect(wrapper.find('#custom-label').props().href).toEqual(
+        '#other-content'
+      );
+    });
+
+    it('sets tabIndex on <button> if one is passed via props', () => {
+      // eslint-disable-next-line jsx-a11y/tabindex-no-positive
+      const wrapper = mount(<Tab label="firstTab" tabIndex={2} />);
+      expect(wrapper.find('button').props().tabIndex).toEqual(2);
+    });
   });
 });

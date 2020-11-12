@@ -5,18 +5,9 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+import { sortStates } from './sortStates';
+export { sortStates };
 import { sortRows } from '../tools/sorting';
-
-/**
- * We currently support the following sorting states for DataTable headers,
- * namely: `NONE` for no sorting being applied, and then `DESC` and `ASC` for
- * the corresponding direction of the sorting order.
- */
-export const sortStates = {
-  NONE: 'NONE',
-  DESC: 'DESC',
-  ASC: 'ASC',
-};
 
 // Our initialSortState should be `NONE`, unless a consumer has specified a
 // different initialSortState

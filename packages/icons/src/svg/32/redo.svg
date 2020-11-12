@@ -1,14 +1,11 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!-- Generator: Adobe Illustrator 18.1.1, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
-<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-	 width="32px" height="32px" viewBox="0 0 32 32" style="enable-background:new 0 0 32 32;" xml:space="preserve">
-<style type="text/css">
-	.st0{}
-	.st1{fill:#F9E4C2;}
-	.st2{fill:#C1D7FB;}
-  .cls-1{fill:none;}
-</style>
-<path id="_x33_2_px_4_" d="M9,15c-2.5,0-4,1.5-4,4c0,2.5,1.5,4,4,4h5v2H9c-3.5,0-6-2.5-6-6c0-3.5,2.5-6,6-6h16.2l-4-4l1.4-1.5L29,14
-	l-6.4,6.4L21.2,19l4-4H9z"/>
+<svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: none;
+      }
+    </style>
+  </defs>
+  <path d="M12,10H24.1851L20.5977,6.4141,22,5,28,11,22,17l-1.4023-1.4146L24.1821,12H12a6,6,0,0,0,0,12h8v2H12a8,8,0,0,1,0-16Z" transform="translate(0 0)"/>
   <rect id="_Transparent_Rectangle_" data-name="&lt;Transparent Rectangle&gt;" class="cls-1" width="32" height="32"/>
 </svg>
