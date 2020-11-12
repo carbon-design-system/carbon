@@ -94,6 +94,10 @@
       background-color: $hover-ui;
     }
 
+    &:active {
+      background-color: $active-ui;
+    }
+
     &::before {
       @include tooltip--caret;
 
