@@ -133,7 +133,6 @@
     display: flex;
     align-items: center;
     height: 100%;
-    margin-right: $carbon--spacing-05;
     padding-left: $carbon--spacing-05;
     overflow-x: auto;
 
@@ -449,10 +448,6 @@
     width: $carbon--spacing-05;
   }
 
-  .#{$prefix}--snippet--single .#{$prefix}--snippet__overflow-indicator--right {
-    margin-left: -$carbon--spacing-07;
-  }
-
   .#{$prefix}--snippet__overflow-indicator--left {
     margin-right: -$carbon--spacing-05;
     background-image: linear-gradient(to left, transparent, $field-01);
@@ -461,6 +456,21 @@
   .#{$prefix}--snippet__overflow-indicator--right {
     margin-left: -$carbon--spacing-05;
     background-image: linear-gradient(to right, transparent, $field-01);
+  }
+
+  .#{$prefix}--snippet--single .#{$prefix}--snippet__overflow-indicator--right,
+  .#{$prefix}--snippet--single .#{$prefix}--snippet__overflow-indicator--left {
+    position: absolute;
+    width: $carbon--spacing-07;
+    height: calc(100% - #{$carbon--spacing-02});
+  }
+
+  .#{$prefix}--snippet--single .#{$prefix}--snippet__overflow-indicator--right {
+    right: calc(#{$carbon--spacing-08} + #{rem(2px)});
+  }
+
+  .#{$prefix}--snippet--single .#{$prefix}--snippet__overflow-indicator--left {
+    left: rem(2px);
   }
 
   .#{$prefix}--snippet--light .#{$prefix}--snippet__overflow-indicator--left {
