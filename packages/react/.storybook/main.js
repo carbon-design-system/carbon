@@ -19,7 +19,7 @@ const addons = [
 ];
 
 if (process.env.CARBON_REACT_STORYBOOK_USE_CUSTOM_PROPERTIES === 'true') {
-  addons.push('@carbon/storybook-addon-theme');
+  addons.push('@carbon/storybook-addon-theme/register');
 }
 
 module.exports = {
