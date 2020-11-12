@@ -51,9 +51,9 @@ const Tag = ({
       event.stopPropagation();
       onClose(event);
     }
-  }
+  };
 
-  if(filter) {
+  if (filter) {
     return (
       <div
         className={tagClasses}
@@ -80,7 +80,9 @@ const Tag = ({
         </button>
       </div>
     );
-  } else if(CustomIconElement) {
+  }
+
+  if (CustomIconElement) {
     return (
       <div
         className={tagClasses}
@@ -91,8 +93,7 @@ const Tag = ({
         }
         id={tagId}
         {...other}>
-        <button
-          className={`${prefix}--tag__custom-icon`}>
+        <button className={`${prefix}--tag__custom-icon`}>
           <CustomIconElement />
         </button>
         <span
@@ -102,16 +103,16 @@ const Tag = ({
         </span>
       </div>
     );
-  } else {
-    return (
-      <span
-        className={tagClasses}
-        title={typeof children === 'string' ? children : null}
-        {...other}>
-        {children !== null && children !== undefined ? children : TYPES[type]}
-      </span>
-    );
   }
+
+  return (
+    <span
+      className={tagClasses}
+      title={typeof children === 'string' ? children : null}
+      {...other}>
+      {children !== null && children !== undefined ? children : TYPES[type]}
+    </span>
+  );
 };
 
 Tag.propTypes = {

@@ -54,9 +54,9 @@ const props = {
       ...this.regular(),
       onClick: action('onClick'),
       onClose: action('onClose'),
-      renderIcon: iconMap[select('Icon (icon)', icons, 'Tag16')]
-    }
-  }
+      renderIcon: iconMap[select('Icon (icon)', icons, 'Tag16')],
+    };
+  },
 };
 
 export default {
