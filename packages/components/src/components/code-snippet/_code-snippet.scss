@@ -378,7 +378,7 @@
   .#{$prefix}--snippet.#{$prefix}--snippet--light
     .#{$prefix}--snippet-btn--expand:active,
   .#{$prefix}--snippet.#{$prefix}--snippet--light .#{$prefix}--copy-btn:active {
-    background-color: $copy-active;
+    background-color: $active-light-ui;
   }
 
   .#{$prefix}--snippet.#{$prefix}--snippet--light.#{$prefix}--snippet--single::after,
