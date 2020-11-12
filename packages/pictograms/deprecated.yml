@@ -1,30 +1,101 @@
 deprecated:
   - name: farm
     reason: The farm pictogram has been deprecated in favor of farm--01
-  - name: watson--avatar
-    reason:
-      The watson--avatar pictogram has been deprecated in favor of ibm--watson
   - name: download
-    reason:
-      The download pictogram has been deprecated in favor of download--01      
+    reason: The download pictogram has been deprecated in favor of download--01
   - name: download--alt
     reason:
       The download--alt pictogram has been deprecated in favor of download--02
-  - name: watson--avatar
-    reason:
-      The export pictogram has been deprecated in favor of export--01
+  - name: export
+    reason: The export pictogram has been deprecated in favor of export--01
   - name: export--alt
-    reason:
-      The export--alt pictogram has been deprecated in favor of export--02
+    reason: The export--alt pictogram has been deprecated in favor of export--02
   - name: upload
-    reason:
-      The upload pictogram has been deprecated in favor of upload--01
+    reason: The upload pictogram has been deprecated in favor of upload--01
   - name: upload--alt
-    reason:
-      The upload--alt pictogram has been deprecated in favor of upload--02
+    reason: The upload--alt pictogram has been deprecated in favor of upload--02
   - name: video
-    reason:
-      The video pictogram has been deprecated in favor of video--01
+    reason: The video pictogram has been deprecated in favor of video--01
   - name: video--alt
+    reason: The video--alt pictogram has been deprecated in favor of video--02
+  - name: berlin--brandenburg
     reason:
-      The video--alt pictogram has been deprecated in favor of video--02      
+      The berlin--brandenburg pictogram has been deprecated in favor of
+      berlin--brandenburg-gate
+  - name: london--expanded--base
+    reason: The london--expanded--base pictogram has been deprecated
+  - name: nyc--manhattan
+    reason:
+      The nyc--manhattan pictogram has been deprecated in favor of
+      nyc--manhattan--01
+  - name: nyc--manhattan--alt
+    reason:
+      The nyc--manhattan--alt pictogram has been deprecated in favor of
+      nyc--manhattan--02
+  - name: sao-paulo--expanded--base
+    reason: The sao-paulo--expanded--base pictogram has been deprecated
+  - name: heat--map
+    reason:
+      The heat--map pictogram has been deprecated in favor of heat--map--01
+  - name: feedback
+    reason: The feedback pictogram has been deprecated in favor of feedback--01
+  - name: enterprise--design--thinking
+    reason:
+      The enterprise--design--thinking pictogram has been deprecated in favor of
+      enterprise--design--thinking--01
+  - name: enterprise--design--thinking--alt
+    reason:
+      The enterprise--design--thinking--alt pictogram has been deprecated in
+      favor of enterprise--design--thinking--02
+  - name: private--network
+    reason:
+      The private--network pictogram has been deprecated in favor of
+      private--network--01
+  - name: private--network--alt
+    reason:
+      The private--network--alt pictogram has been deprecated in favor of
+      private--network--03
+  - name: private--network--alt--01
+    reason:
+      The private--network--alt pictogram has been deprecated in favor of
+      private--network--04
+  - name: transform
+    reason:
+      The transform pictogram has been deprecated in favor of transform--02
+  - name: lock
+    reason: The lock pictogram has been deprecated in favor of lock--01
+  - name: lock--alt
+    reason: The lock--alt pictogram has been deprecated in favor of lock--02
+  - name: locked--network
+    reason:
+      The locked--network pictogram has been deprecated in favor of
+      locked--network--01
+  - name: locked--network--alt
+    reason:
+      The locked--network--alt pictogram has been deprecated in favor of
+      locked--network--02
+  - name: unlock
+    reason: The unlock pictogram has been deprecated in favor of unlock--01
+  - name: unlock--alt
+    reason: The unlock--alt pictogram has been deprecated in favor of unlock--02
+  - name: warning
+    reason: The warning pictogram has been deprecated in favor of warning--01
+  - name: warning--alt
+    reason:
+      The warning--alt pictogram has been deprecated in favor of warning--02
+  - name: alchemy--language--alphabet--a--expanded
+    reason:
+      The alchemy--language--alphabet--a--expanded pictogram has been deprecated
+  - name: language
+    reason: The language pictogram has been deprecated in favor of language--01
+  - name: language--translation--alphabet--a--expanded
+    reason:
+      The language--translation--alphabet--a--expanded pictogram has been
+      deprecated
+  - name: speech--alphabet--a--expanded
+    reason: The speech--alphabet--a--expanded pictogram has been deprecated
+  - name: ibm--watson
+    reason:
+      The ibm--watson pictogram has been deprecated in favor of watson--logo
+  - name: weather
+    reason: The weather pictogram has been deprecated in favor of weather--02
