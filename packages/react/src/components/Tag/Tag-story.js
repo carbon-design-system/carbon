@@ -50,12 +50,11 @@ const props = {
     };
   },
   icon() {
-    let iconToUse = iconMap[select('Icon (icon)', icons, 'Tag16')];
     return {
       ...this.regular(),
       onClick: action('onClick'),
       onClose: action('onClose'),
-      renderIcon: iconToUse,
+      renderIcon: iconMap[select('Icon (icon)', icons, 'Tag16')]
     }
   }
 };

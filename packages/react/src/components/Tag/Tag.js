@@ -52,60 +52,66 @@ const Tag = ({
       onClose(event);
     }
   }
-  
-  return filter ? (
-    <div
-      className={tagClasses}
-      aria-label={
-        title !== undefined
-          ? `${title} ${children}`
-          : `Clear filter ${children}`
-      }
-      id={tagId}
-      {...other}>
-      <span
-        className={`${prefix}--tag__label`}
-        title={typeof children === 'string' ? children : null}>
-        {children !== null && children !== undefined ? children : TYPES[type]}
-      </span>
-      <button
-        type="button"
-        className={`${prefix}--tag__close-icon`}
-        onClick={handleClose}
-        disabled={disabled}
-        aria-labelledby={tagId}
-        title={title}>
-        <Close16 />
-      </button>
-    </div>
-  ) : CustomIconElement ? (
-    <div
-      className={tagClasses}
-      aria-label={
-        title !== undefined
-          ? `${title} ${children}`
-          : `Clear filter ${children}`
-      }
-      id={tagId}
-      {...other}>
+
+  if(filter) {
+    return (
+      <div
+        className={tagClasses}
+        aria-label={
+          title !== undefined
+            ? `${title} ${children}`
+            : `Clear filter ${children}`
+        }
+        id={tagId}
+        {...other}>
+        <span
+          className={`${prefix}--tag__label`}
+          title={typeof children === 'string' ? children : null}>
+          {children !== null && children !== undefined ? children : TYPES[type]}
+        </span>
+        <button
+          type="button"
+          className={`${prefix}--tag__close-icon`}
+          onClick={handleClose}
+          disabled={disabled}
+          aria-labelledby={tagId}
+          title={title}>
+          <Close16 />
+        </button>
+      </div>
+    );
+  } else if(CustomIconElement) {
+    return (
+      <div
+        className={tagClasses}
+        aria-label={
+          title !== undefined
+            ? `${title} ${children}`
+            : `Clear filter ${children}`
+        }
+        id={tagId}
+        {...other}>
         <button
           className={`${prefix}--tag__custom-icon`}>
           <CustomIconElement />
         </button>
+        <span
+          className={`${prefix}--tag__label`}
+          title={typeof children === 'string' ? children : null}>
+          {children !== null && children !== undefined ? children : TYPES[type]}
+        </span>
+      </div>
+    );
+  } else {
+    return (
       <span
-        className={`${prefix}--tag__label`}
-        title={typeof children === 'string' ? children : null}>
+        className={tagClasses}
+        title={typeof children === 'string' ? children : null}
+        {...other}>
         {children !== null && children !== undefined ? children : TYPES[type]}
       </span>
-    </div>
-  ) : (
-    <span
-      className={tagClasses}
-      title={typeof children === 'string' ? children : null}
-      {...other}>
-      {children !== null && children !== undefined ? children : TYPES[type]}
-    </span>
-  );
+    );
+  }
 };
 
 Tag.propTypes = {
