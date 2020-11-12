@@ -6036,7 +6036,7 @@
   sizes:
     - 32
 - name: forecast--hail
-  friendly_name: forecast--hail
+  friendly_name: Forecast hail
   aliases:
     - weather
     - forecast
@@ -6046,7 +6046,7 @@
   sizes:
     - 32
 - name: forecast--hail-30
-  friendly_name: forecast--hail-30
+  friendly_name: Forecast hail 30
   aliases: 
     - weather
     - forecast
@@ -6056,7 +6056,7 @@
   sizes:
     - 32
 - name: forecast--lightning
-  friendly_name: forecast--lightning
+  friendly_name: Forecast lightning
   aliases: 
    - forecast
    - lightning
@@ -6064,7 +6064,7 @@
   sizes:
     - 32
 - name: forecast--lightning-30
-  friendly_name: forecast--lightning-30
+  friendly_name: Forecast lightning 30
   aliases: 
    - forecast
    - lightning
@@ -6755,7 +6755,7 @@
   sizes:
     - 32
 - name: ice--accretion
-  friendly_name: ice--accretion
+  friendly_name: Ice accretion
   aliases: 
     - ice
     - accretion
@@ -7618,7 +7618,7 @@
   sizes:
     - 32
 - name: license--third-party-draft
-  friendly_name: license third-party draft
+  friendly_name: License third-party draft
   aliases: 
     - license
     - third-party
@@ -8887,7 +8887,7 @@
   sizes:
     - 32
 - name: monster
-  friendly_name: monster
+  friendly_name: Monster
   aliases: 
     - monster
     - commerce
@@ -12266,6 +12266,7 @@
 - name: soil-temperature--global
   friendly_name: Soil temperature global
   aliases: 
+    - global
     - soil
     - temperature
     - agriculture
@@ -12905,6 +12906,8 @@
     - hot
     - cold
     - inversion
+    - temperature
+    - forecast
   sizes:
     - 32
 - name: temperature--max
@@ -12917,6 +12920,8 @@
     - hot
     - cold
     - max
+    - temperature
+    - forecast
   sizes:
     - 32
 - name: temperature--min
@@ -12929,6 +12934,8 @@
     - hot
     - cold
     - min
+    - temperature
+    - forecast
   sizes:
     - 32
 - name: temperature--water
@@ -12941,6 +12948,8 @@
     - hot
     - cold
     - water
+    - temperature
+    - forecast
   sizes:
     - 32
 - name: template
@@ -13535,6 +13544,13 @@
     - travel
     - incident
     - transportation
+    - traffic cone
+    - traffic
+    - cone
+    - travel
+    - transportation
+    - roadwork
+    - construction
   sizes:
     - 32
 - name: train
@@ -14284,6 +14300,7 @@
 - name: view-next
   friendly_name: View next
   aliases: 
+    - view
     - view next
     - next
     - operations
