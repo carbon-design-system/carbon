@@ -466,10 +466,18 @@
   }
 
   .#{$prefix}--snippet--single .#{$prefix}--snippet__overflow-indicator--right {
+    right: $carbon--spacing-08;
+  }
+
+  .#{$prefix}--snippet--single
+    .#{$prefix}--snippet-container:focus
+    ~ .#{$prefix}--snippet__overflow-indicator--right {
     right: calc(#{$carbon--spacing-08} + #{rem(2px)});
   }
 
-  .#{$prefix}--snippet--single .#{$prefix}--snippet__overflow-indicator--left {
+  .#{$prefix}--snippet--single
+    .#{$prefix}--snippet-container:focus
+    + .#{$prefix}--snippet__overflow-indicator--left {
     left: rem(2px);
   }
 

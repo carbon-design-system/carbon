@@ -142,9 +142,6 @@ function CodeSnippet({
 
   return (
     <div {...rest} className={codeSnippetClasses}>
-      {hasLeftOverflow && (
-        <div className={`${prefix}--snippet__overflow-indicator--left`} />
-      )}
       <div
         ref={codeContainerRef}
         role={type === 'single' ? 'textbox' : null}
@@ -160,6 +157,13 @@ function CodeSnippet({
           </pre>
         </code>
       </div>
+      {/**
+       * left overflow indicator must come after the snippet due to z-index and
+       * snippet focus border overlap
+       */}
+      {hasLeftOverflow && (
+        <div className={`${prefix}--snippet__overflow-indicator--left`} />
+      )}
       {hasRightOverflow && (
         <div className={`${prefix}--snippet__overflow-indicator--right`} />
       )}
