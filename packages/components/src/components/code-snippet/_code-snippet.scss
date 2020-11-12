@@ -103,6 +103,11 @@
     }
   }
 
+  .#{$prefix}--snippet--light.#{$prefix}--snippet--inline.#{$prefix}--snippet--no-copy:hover {
+    background-color: $field-02;
+    cursor: auto;
+  }
+
   // Single Line Snippet
   .#{$prefix}--snippet--single {
     @include bx--snippet;
