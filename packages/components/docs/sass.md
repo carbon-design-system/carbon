@@ -562,6 +562,8 @@ Define color variables
   $ibm-color__magenta-90: #510224 !default !global;
   $ibm-color__magenta-100: #2a0a18 !default !global;
   $ibm-color__orange-40: #ff832b !default !global;
+  $ibm-color__orange-60: #ba4e00 !default !global;
+  $ibm-color__orange-70: #8a3800 !default !global;
   $ibm-color__purple-10: #f6f2ff !default !global;
   $ibm-color__purple-20: #e8daff !default !global;
   $ibm-color__purple-30: #d4bbff !default !global;
@@ -605,6 +607,8 @@ Define color variables
   $ibm-color__white-0: #ffffff !default !global;
   $ibm-color__yellow-20: #fdd13a !default !global;
   $ibm-color__yellow-30: #f1c21b !default !global;
+  $ibm-color__yellow-40: #d2a106 !default !global;
+  $ibm-color__yellow-50: #b28600 !default !global;
   $ibm-color-map: (
     'black': (
       100: #000000,
@@ -695,6 +699,8 @@ Define color variables
     ),
     'orange': (
       40: #ff832b,
+      60: #ba4e00,
+      70: #8a3800,
     ),
     'purple': (
       10: #f6f2ff,
@@ -762,6 +768,8 @@ Define color variables
     'yellow': (
       20: #fdd13a,
       30: #f1c21b,
+      40: #d2a106,
+      50: #b28600,
     ),
   ) !default !global;
 }
@@ -843,6 +851,8 @@ Define color variables
   $carbon--magenta-90: #510224 !default !global;
   $carbon--magenta-100: #2a0a18 !default !global;
   $carbon--orange-40: #ff832b !default !global;
+  $carbon--orange-60: #ba4e00 !default !global;
+  $carbon--orange-70: #8a3800 !default !global;
   $carbon--purple-10: #f6f2ff !default !global;
   $carbon--purple-20: #e8daff !default !global;
   $carbon--purple-30: #d4bbff !default !global;
@@ -886,6 +896,8 @@ Define color variables
   $carbon--white-0: #ffffff !default !global;
   $carbon--yellow-20: #fdd13a !default !global;
   $carbon--yellow-30: #f1c21b !default !global;
+  $carbon--yellow-40: #d2a106 !default !global;
+  $carbon--yellow-50: #b28600 !default !global;
   $black-100: #000000 !default !global;
   $blue-10: #edf5ff !default !global;
   $blue-20: #d0e2ff !default !global;
@@ -948,6 +960,8 @@ Define color variables
   $magenta-90: #510224 !default !global;
   $magenta-100: #2a0a18 !default !global;
   $orange-40: #ff832b !default !global;
+  $orange-60: #ba4e00 !default !global;
+  $orange-70: #8a3800 !default !global;
   $purple-10: #f6f2ff !default !global;
   $purple-20: #e8daff !default !global;
   $purple-30: #d4bbff !default !global;
@@ -991,6 +1005,8 @@ Define color variables
   $white-0: #ffffff !default !global;
   $yellow-20: #fdd13a !default !global;
   $yellow-30: #f1c21b !default !global;
+  $yellow-40: #d2a106 !default !global;
+  $yellow-50: #b28600 !default !global;
   $carbon--colors: (
     'black': (
       100: #000000,
@@ -1081,6 +1097,8 @@ Define color variables
     ),
     'orange': (
       40: #ff832b,
+      60: #ba4e00,
+      70: #8a3800,
     ),
     'purple': (
       10: #f6f2ff,
@@ -1148,6 +1166,8 @@ Define color variables
     'yellow': (
       20: #fdd13a,
       30: #f1c21b,
+      40: #d2a106,
+      50: #b28600,
     ),
   ) !default !global;
 }
@@ -14143,12 +14163,18 @@ Button styles
     &:focus svg {
       fill: currentColor;
     }
+
+    &.#{$prefix}--btn--disabled.#{$prefix}--tooltip--a11y::before,
+    &.#{$prefix}--btn--disabled.#{$prefix}--tooltip--a11y::after,
+    &.#{$prefix}--btn--disabled .#{$prefix}--assistive-text {
+      margin: -1px;
+      overflow: hidden;
+      opacity: 0;
+      clip: rect(0, 0, 0, 0);
+    }
   }
 
-  .#{$prefix}--btn.#{$prefix}--btn--icon-only.#{$prefix}--btn--ghost:focus svg {
-    fill: $icon-01;
-  }
-
+  .#{$prefix}--btn.#{$prefix}--btn--icon-only.#{$prefix}--btn--ghost:focus svg,
   .#{$prefix}--btn.#{$prefix}--btn--icon-only.#{$prefix}--btn--ghost:hover svg {
     fill: $icon-01;
   }
@@ -14276,7 +14302,9 @@ Button styles
       color: $text-04;
     }
 
-    &-tertiary {
+    // TODO: deprecate single dash tertiary
+    &-tertiary,
+    &--tertiary {
       @include button-theme(
         transparent,
         $danger-02,
@@ -14302,7 +14330,9 @@ Button styles
       }
     }
 
-    &-ghost {
+    // TODO: deprecate single dash ghost
+    &-ghost,
+    &--ghost {
       @include button-theme(
         transparent,
         transparent,
@@ -24301,7 +24331,7 @@ Tabs styles
     min-height: rem(40px);
     color: $text-01;
 
-    .#{$prefix}--tabs--scrollable--container {
+    &.#{$prefix}--tabs--scrollable--container {
       min-height: rem(48px);
     }
 
@@ -24354,12 +24384,12 @@ Tabs styles
       background-image: linear-gradient(to right, transparent, $ui-01);
     }
 
-    .#{$prefix}--tabs--scrollable--container
+    &.#{$prefix}--tabs--scrollable--container
       .#{$prefix}--tabs__overflow-indicator--left {
       background-image: linear-gradient(to left, transparent, $ui-03);
     }
 
-    .#{$prefix}--tabs--scrollable--container
+    &.#{$prefix}--tabs--scrollable--container
       .#{$prefix}--tabs__overflow-indicator--right {
       background-image: linear-gradient(to right, transparent, $ui-03);
     }
@@ -24387,11 +24417,12 @@ Tabs styles
           );
         }
 
-        .#{$prefix}--tabs--scrollable--container
+        &.#{$prefix}--tabs--scrollable--container
           .#{$prefix}--tabs__overflow-indicator--left {
           background-image: linear-gradient(to left, rgba($ui-03, 0), $ui-03);
         }
-        .#{$prefix}--tabs--scrollable--container
+
+        &.#{$prefix}--tabs--scrollable--container
           .#{$prefix}--tabs__overflow-indicator--right {
           background-image: linear-gradient(to right, rgba($ui-03, 0), $ui-03);
         }
@@ -24416,7 +24447,7 @@ Tabs styles
       display: none;
     }
 
-    .#{$prefix}--tabs--scrollable--container
+    &.#{$prefix}--tabs--scrollable--container
       .#{$prefix}--tab--overflow-nav-button {
       width: $carbon--spacing-09;
       margin: 0;
@@ -24444,12 +24475,12 @@ Tabs styles
       margin-left: rem(1px);
     }
 
-    .#{$prefix}--tabs--scrollable--container
+    &.#{$prefix}--tabs--scrollable--container
       .#{$prefix}--tabs--scrollable__nav-item {
       background-color: $ui-03;
     }
 
-    .#{$prefix}--tabs--scrollable--container
+    &.#{$prefix}--tabs--scrollable--container
       .#{$prefix}--tabs--scrollable__nav-item
       + .#{$prefix}--tabs--scrollable__nav-item {
       margin-left: 0;
@@ -24457,10 +24488,10 @@ Tabs styles
       box-shadow: rem(-1px) 0 0 0 $ui-04;
     }
 
-    .#{$prefix}--tabs--scrollable--container
+    &.#{$prefix}--tabs--scrollable--container
       .#{$prefix}--tabs--scrollable__nav-item
       + .#{$prefix}--tabs--scrollable__nav-item.#{$prefix}--tabs--scrollable__nav-item--selected,
-    .#{$prefix}--tabs--scrollable--container
+    &.#{$prefix}--tabs--scrollable--container
       .#{$prefix}--tabs--scrollable__nav-item.#{$prefix}--tabs--scrollable__nav-item--selected
       + .#{$prefix}--tabs--scrollable__nav-item {
       box-shadow: none;
@@ -24476,7 +24507,7 @@ Tabs styles
     //-----------------------------
     // Item Hover
     //-----------------------------
-    .#{$prefix}--tabs--scrollable--container
+    &.#{$prefix}--tabs--scrollable--container
       .#{$prefix}--tabs--scrollable__nav-item:hover {
       background-color: $hover-selected-ui;
     }
@@ -24491,9 +24522,9 @@ Tabs styles
       cursor: not-allowed;
     }
 
-    .#{$prefix}--tabs--scrollable--container
+    &.#{$prefix}--tabs--scrollable--container
       .#{$prefix}--tabs--scrollable__nav-item.#{$prefix}--tabs--scrollable__nav-item--disabled,
-    .#{$prefix}--tabs--scrollable--container
+    &.#{$prefix}--tabs--scrollable--container
       .#{$prefix}--tabs--scrollable__nav-item.#{$prefix}--tabs--scrollable__nav-item--disabled:hover {
       background-color: $disabled-02;
     }
@@ -24517,9 +24548,9 @@ Tabs styles
       border-bottom: 2px solid $interactive-04;
     }
 
-    .#{$prefix}--tabs--scrollable--container
+    &.#{$prefix}--tabs--scrollable--container
       .#{$prefix}--tabs--scrollable__nav-item--selected,
-    .#{$prefix}--tabs--scrollable--container
+    &.#{$prefix}--tabs--scrollable--container
       .#{$prefix}--tabs--scrollable__nav-item--selected:hover {
       background-color: $ui-01;
 
@@ -24529,7 +24560,7 @@ Tabs styles
       }
     }
 
-    .#{$prefix}--tabs--scrollable--container
+    &.#{$prefix}--tabs--scrollable--container
       .#{$prefix}--tabs--scrollable__nav-item--selected
       .#{$prefix}--tabs--scrollable__nav-link {
       // height - vertical padding
@@ -24538,9 +24569,9 @@ Tabs styles
       box-shadow: inset 0 2px 0 0 $interactive-04;
     }
 
-    .#{$prefix}--tabs--scrollable--light.#{$prefix}--tabs--scrollable--container
+    &.#{$prefix}--tabs--scrollable--light.#{$prefix}--tabs--scrollable--container
       .#{$prefix}--tabs--scrollable__nav-item--selected,
-    .#{$prefix}--tabs--scrollable--light.#{$prefix}--tabs--scrollable--container
+    &.#{$prefix}--tabs--scrollable--light.#{$prefix}--tabs--scrollable--container
       .#{$prefix}--tabs--scrollable__nav-item--selected:hover {
       background-color: $ui-background;
     }
@@ -24571,7 +24602,7 @@ Tabs styles
       }
     }
 
-    .#{$prefix}--tabs--scrollable--container
+    &.#{$prefix}--tabs--scrollable--container
       .#{$prefix}--tabs--scrollable__nav-link {
       height: rem(48px);
       padding: $spacing-03 $spacing-05;
@@ -24589,7 +24620,7 @@ Tabs styles
       border-bottom: $tab-underline-color-hover;
     }
 
-    .#{$prefix}--tabs--scrollable--container
+    &.#{$prefix}--tabs--scrollable--container
       .#{$prefix}--tabs--scrollable__nav-item
       .#{$prefix}--tabs--scrollable__nav-link {
       border-bottom: none;
@@ -24641,7 +24672,7 @@ Tabs styles
       border-bottom-color: $ui-03;
     }
 
-    .#{$prefix}--tabs--scrollable--container
+    &.#{$prefix}--tabs--scrollable--container
       .#{$prefix}--tabs--scrollable__nav-item--disabled
       .#{$prefix}--tabs--scrollable__nav-link {
       color: $disabled-03;
@@ -26788,7 +26819,9 @@ Tooltip styles
         outline-offset: 2px;
       }
 
-      &:active {
+      &:active,
+      &:active:visited,
+      &:active:visited:hover {
         color: $inverse-01;
       }
 

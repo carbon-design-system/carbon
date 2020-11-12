@@ -1,12 +1,16 @@
 <?xml version="1.0" encoding="iso-8859-1"?>
-<!-- Generator: Adobe Illustrator 22.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
-<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-	 viewBox="0 0 48 48" style="enable-background:new 0 0 48 48;" xml:space="preserve">
-<g id="chip_circuit">
-	<path id="chip_circuit_1_" style="fill:none;stroke:#000000;stroke-width:0.8509;stroke-linejoin:round;stroke-miterlimit:10;" d="
-		M35,35H13V13h22V35z M29,19H19v10h10V19z M32,11V9 M28,11V9 M24,11V9 M16,11V9 M20,11V9 M32,39v-2 M28,39v-2 M24,39v-2 M16,39v-2
-		 M20,39v-2 M11,16H9 M11,20H9 M11,24H9 M11,32H9 M11,28H9 M39,16h-2 M39,20h-2 M39,24h-2 M39,32h-2 M39,28h-2"/>
-</g>
-<g id="Layer_1">
-</g>
+<!-- Generator: Adobe Illustrator 24.1.2, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 32 32" style="enable-background:new 0 0 32 32;" xml:space="preserve">
+<path id="chip--circuit_1_" d="M24.426,31h-0.852v-2h0.852V31z M20.426,31h-0.852v-2h0.852V31z M16.425,31h-0.851v-2h0.851V31z
+	 M12.425,31h-0.851v-2h0.851V31z M8.425,31h-0.85v-2h0.851L8.425,31L8.425,31z M27,27.426H5c-0.235,0-0.425-0.19-0.425-0.426V5
+	c0-0.235,0.19-0.425,0.425-0.425h22c0.235,0,0.426,0.19,0.426,0.425v22C27.426,27.235,27.235,27.426,27,27.426z M5.425,26.574
+	h21.149V5.426H5.425V26.574z M31,24.426h-2v-0.852h2V24.426z M3,24.426H1v-0.852h2V24.426z M21,21.426H11
+	c-0.235,0-0.425-0.19-0.425-0.426V11c0-0.235,0.19-0.425,0.425-0.425h10c0.235,0,0.426,0.19,0.426,0.425v10
+	C21.426,21.235,21.235,21.426,21,21.426z M11.425,20.574h9.149v-9.149h-9.149C11.425,11.425,11.425,20.574,11.425,20.574z
+	 M31,20.426h-2v-0.852h2V20.426z M3,20.426H1v-0.852h2V20.426z M31,16.425h-2v-0.851h2V16.425z M3,16.425H1v-0.851h2V16.425z
+	 M31,12.425h-2v-0.851h2V12.425z M3,12.425H1v-0.851h2V12.425z M31,8.425h-2v-0.85h2V8.425z M3,8.425H1v-0.85h2V8.425z M24.426,3
+	h-0.852V1h0.852V3z M20.426,3h-0.852V1h0.852V3z M16.425,3h-0.851V1h0.851V3z M12.425,3h-0.851V1h0.851V3z M8.425,3h-0.85V1h0.851
+	L8.425,3L8.425,3z"/>
+<rect id="_Transparent_Rectangle" style="fill:none;" width="32" height="32"/>
 </svg>

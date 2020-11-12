@@ -156,4 +156,74 @@ describe('ContentSwitcher', () => {
       expect(secondChild.props().selected).toEqual(true);
     });
   });
+
+  describe('onChange', () => {
+    it('should call `onChange` with the newly selected switch data when using a keyboard', () => {
+      const onChange = jest.fn();
+      const wrapper = mount(
+        <ContentSwitcher onChange={onChange}>
+          <Switch name="first" text="first" />
+          <Switch name="second" text="second" />
+          <Switch name="third" text="third" />
+        </ContentSwitcher>
+      );
+
+      wrapper.find({ name: 'first' }).simulate('keydown', {
+        key: 'ArrowRight',
+      });
+      expect(onChange).toHaveBeenCalledTimes(1);
+      expect(onChange).toHaveBeenLastCalledWith({
+        index: 1,
+        name: 'second',
+        text: 'second',
+        key: 'ArrowRight',
+      });
+
+      wrapper.find({ name: 'second' }).simulate('keydown', {
+        key: 'ArrowRight',
+      });
+      expect(onChange).toHaveBeenLastCalledWith({
+        index: 2,
+        name: 'third',
+        text: 'third',
+        key: 'ArrowRight',
+      });
+
+      wrapper.find({ name: 'third' }).simulate('keydown', {
+        key: 'ArrowRight',
+      });
+      expect(onChange).toHaveBeenLastCalledWith({
+        index: 0,
+        name: 'first',
+        text: 'first',
+        key: 'ArrowRight',
+      });
+    });
+
+    it('should call `onChange` with the newly selected switch data when using a mouse', () => {
+      const onChange = jest.fn();
+      const wrapper = mount(
+        <ContentSwitcher onChange={onChange}>
+          <Switch name="first" text="first" />
+          <Switch name="second" text="second" />
+          <Switch name="third" text="third" />
+        </ContentSwitcher>
+      );
+
+      wrapper.find({ name: 'second' }).simulate('click');
+      expect(onChange).toHaveBeenCalledTimes(1);
+      expect(onChange).toHaveBeenLastCalledWith({
+        index: 1,
+        name: 'second',
+        text: 'second',
+      });
+
+      wrapper.find({ name: 'third' }).simulate('click');
+      expect(onChange).toHaveBeenLastCalledWith({
+        index: 2,
+        name: 'third',
+        text: 'third',
+      });
+    });
+  });
 });

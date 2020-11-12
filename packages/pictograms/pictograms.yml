@@ -19,6 +19,21 @@
     - new
     - additional
     - add
+- name: advanced--fraud--protection
+  friendly_name: Advanced Fraud Protection
+  aliases:
+    - advanced fraud protection
+    - advanced
+    - fraud
+    - protection
+    - security
+- name: advanced--threats
+  friendly_name: Advanced Threats
+  aliases:
+    - advanced threats
+    - advanced
+    - threats
+    - security
 - name: advocate
   friendly_name: Advocate
   aliases:
@@ -140,6 +155,13 @@
     - group
     - review
     - study
+- name: anonymous--users
+  friendly_name: Anonymous Users
+  aliases:
+    - anonymous users
+    - anonymous
+    - users
+    - security
 - name: apartment
   friendly_name: Apartment
   aliases:
@@ -178,6 +200,12 @@
     - app
     - program
     - software
+- name: application--security
+  friendly_name: Application Security
+  aliases:
+    - application security
+    - application
+    - security
 - name: archive
   friendly_name: Archive
   aliases:
@@ -195,6 +223,11 @@
     - Australia
     - globe
     - continent
+- name: assets
+  friendly_name: Assets
+  aliases:
+    - assets
+    - security
 - name: augmented--reality
   friendly_name: Augmented reality
   aliases:
@@ -251,6 +284,13 @@
     - india
     - cities
     - city
+- name: barcelona
+  friendly_name: Barcelona
+  aliases:
+    - barcelona
+    - spain
+    - cities
+    - city
 - name: bee
   friendly_name: Bee
   aliases:
@@ -282,7 +322,7 @@
     - Brandenburg
     - city
     - cities
-- name: berlin--brandenburg--gate
+- name: berlin--brandenburg-gate
   friendly_name: Berlin Brandenburg Gate
   aliases:
     - Berlin Brandenburg gate
@@ -328,7 +368,16 @@
     - block
     - chain
     - blockchain
-- name: box-plot
+- name: boston--zakim-bridge
+  friendly_name: Boston Zakim Bridge
+  aliases:
+    - Boston Zakim Bridge
+    - Boston
+    - Zakim
+    - bridge
+    - city
+    - cities
+- name: box--plot
   friendly_name: Box plot
   aliases:
     - box
@@ -337,12 +386,28 @@
     - data analytics
     - analytics
     - data
+- name: bug--virus--malware
+  friendly_name: Bug Virus Malware
+  aliases:
+    - bug virus malware
+    - bug
+    - virus
+    - malware
+    - security
 - name: build
   friendly_name: Build
   aliases:
     - build
     - iot
     - internet of things
+- name: build--leadership--and--culture
+  friendly_name: Build Leadership and Culture
+  aliases:
+    - build leadership and culture
+    - build
+    - leadership
+    - culture
+    - security
 - name: building
   friendly_name: Building
   aliases:
@@ -363,15 +428,26 @@
     - transportation
     - travel
 - name: cafe
-  friendly_name: Cafe
+  friendly_name: Café
   aliases:
     - cafe
+    - café
     - coffee
     - tea
     - cup
     - beverage
     - hospitality
     - food
+- name: cairo--giza-plateau
+  friendly_name: Cairo Giza Plateau
+  aliases:
+    - Cairo Giza Plateau
+    - Cairo
+    - Egypt
+    - Giza
+    - Plateau
+    - city
+    - cities
 - name: calendar
   friendly_name: Calendar
   aliases:
@@ -685,6 +761,12 @@
     - food
     - fruit
     - snack
+- name: chicago
+  friendly_name: Chicago
+  aliases:
+    - Chicago
+    - city
+    - cities
 - name: chip--circuit
   friendly_name: Chip circuit
   aliases:
@@ -703,7 +785,7 @@
     - chip debit
     - debit
     - chip
-- name: circle-packing
+- name: circle--packing
   friendly_name: Circle packing
   aliases:
     - circle packing
@@ -942,6 +1024,11 @@
     - cognos analytics
     - cognos
     - analytics
+- name: collaboration
+  friendly_name: Collaboration
+  aliases:
+    - collaboration
+    - security
 - name: college
   friendly_name: College
   aliases:
@@ -1017,6 +1104,12 @@
     - blockchain
     - food
     - supply chain
+- name: continuous--security
+  friendly_name: Continuous Security
+  aliases:
+    - continuous security
+    - continuous
+    - security
 - name: contract
   friendly_name: Contract
   aliases:
@@ -1086,6 +1179,12 @@
     - processing
     - storage
     - data storage
+- name: data--security
+  friendly_name: Data Security
+  aliases:
+    - data security
+    - data
+    - security
 - name: data--set
   friendly_name: Data set
   aliases:
@@ -1116,13 +1215,13 @@
     - truck
     - delivery
     - manufacturing
-- name: design--and--development--01
+- name: design-and-development--01
   friendly_name: Design and development 01
   aliases:
     - design and development 01
     - design
     - development
-- name: design--and--development--02
+- name: design-and-development--02
   friendly_name: Design and development 02
   aliases:
     - design and development 02
@@ -1143,6 +1242,15 @@
     - desktop
     - computer
     - PC
+- name: detect--and--stop--advancing--threats
+  friendly_name: Detect and Stop Advancing Threats
+  aliases:
+    - detect and stop advancing threats
+    - detect
+    - stop
+    - advancing
+    - threats
+    - security
 - name: developer-z-os
   friendly_name: Developer z/OS®
   aliases:
@@ -1163,6 +1271,20 @@
   aliases:
     - digital
     - cloud
+- name: digital--id
+  friendly_name: Digital Id
+  aliases:
+    - digital id
+    - digital
+    - id
+    - security
+- name: digital--trust
+  friendly_name: Digital Trust
+  aliases:
+    - digital trust
+    - digital
+    - trust
+    - security
 - name: dining
   friendly_name: Dining
   aliases:
@@ -1182,7 +1304,7 @@
     - dna
     - life science
     - genetic
-- name: do--not
+- name: do-not
   friendly_name: Do not
   aliases:
     - do not
@@ -1239,7 +1361,7 @@
   aliases:
     - download 02
     - download
-- name: dubai--palm--islands
+- name: dubai--palm-islands
   friendly_name: Dubai Palm Islands
   aliases:
     - Dubai palm islands
@@ -1326,6 +1448,13 @@
   friendly_name: Employee insights
   aliases:
     - employee insights
+- name: endpoint--protection
+  friendly_name: Endpoint Protection
+  aliases:
+    - endpoint protection
+    - endpoint
+    - protection
+    - security
 - name: engine
   friendly_name: Engine
   aliases:
@@ -1335,6 +1464,22 @@
   friendly_name: Enterprise design thinking 01
   aliases:
     - enterprise design thinking 01
+    - enterprise design thinking
+    - design thinking
+    - design
+    - EDT
+- name: enterprise--design--thinking--01
+  friendly_name: Enterprise design thinking 01
+  aliases:
+    - enterprise design thinking 01
+    - enterprise design thinking
+    - design thinking
+    - design
+    - EDT
+- name: enterprise--design--thinking--02
+  friendly_name: Enterprise design thinking 02
+  aliases:
+    - enterprise design thinking 02
     - enterprise design thinking
     - design thinking
     - design
@@ -1372,7 +1517,7 @@
   aliases:
     - escalator up
     - escalator
-- name: europe-africa
+- name: europe--africa
   friendly_name: Europe Africa
   aliases:
     - europe
@@ -1505,6 +1650,13 @@
     - plumbing
 - name: feedback
   friendly_name: Feedback
+  aliases:
+    - feedback
+    - response
+    - iterate
+    - results
+- name: feedback--01
+  friendly_name: Feedback 01
   aliases:
     - feedback
     - response
@@ -1661,6 +1813,15 @@
     - gear
     - settings
     - machinery
+- name: get--ahead--of--risk--and--compliance
+  friendly_name: Get Ahead Of Risk and Compliance
+  aliases:
+    - get ahead of risk and compliance
+    - get
+    - ahead
+    - risk
+    - compliance
+    - security
 - name: gift
   friendly_name: Gift
   aliases:
@@ -1809,6 +1970,14 @@
     - target
     - goals
     - checkpoint
+- name: govern--users--and--identities
+  friendly_name: Govern Users and Identities
+  aliases:
+    - govern users and identities
+    - govern
+    - users
+    - identities
+    - security
 - name: group
   friendly_name: Group
   aliases:
@@ -1846,6 +2015,15 @@
     - sky
     - precipitation
     - forecast
+- name: hamburg--philharmone
+  friendly_name: Hamburg Philharmone
+  aliases:
+    - Hamburg Philharmone
+    - Hamburg
+    - Germany
+    - Philharmone
+    - city
+    - cities
 - name: handicap
   friendly_name: Handicap
   aliases:
@@ -1892,10 +2070,9 @@
     - headphones
     - electronics
 - name: heart
-  friendly_name: Love
+  friendly_name: heart
   aliases:
     - heart
-    - love
     - like
 - name: heart--health
   friendly_name: Heart health
@@ -1911,7 +2088,16 @@
     - chart
     - data analytics
     - analytics
-- name: heat-map--02
+- name: heat--map--01
+  friendly_name: Heat map 01
+  aliases:
+    - heat map 01
+    - heat map
+    - heat
+    - chart
+    - data analytics
+    - analytics
+- name: heat--map--02
   friendly_name: Heat map 02
   aliases:
     - heat map 02
@@ -1926,6 +2112,14 @@
     - greeting
     - gesture
     - people
+- name: high--risk--users
+  friendly_name: High Risk Users
+  aliases:
+    - high risk users
+    - high
+    - risk
+    - users
+    - security
 - name: hills
   friendly_name: Hills
   aliases:
@@ -2021,6 +2215,14 @@
     - design
     - development
     - design and development
+- name: identity--trust--assessment
+  friendly_name: Identity Trust Assessment
+  aliases:
+    - identity trust assessment
+    - identity
+    - trust
+    - assessment
+    - security
 - name: innovate
   friendly_name: Innovate
   aliases:
@@ -2114,24 +2316,30 @@
     - language
     - watson
 - name: language--01
+  friendly_name: Language 01
+  aliases:
+    - language 01
+    - language
+    - watson
+- name: language--02
   friendly_name: Language 02
   aliases:
     - language 02
     - language
     - watson
-- name: language--02
+- name: language--03
   friendly_name: Language 03
   aliases:
     - language 03
     - language
     - watson
-- name: language--03
+- name: language--04
   friendly_name: Language 04
   aliases:
     - language 04
     - language
     - watson
-- name: language--04
+- name: language--05
   friendly_name: Language 05
   aliases:
     - language 05
@@ -2186,6 +2394,18 @@
     - lock 01
     - lock
     - security
+- name: lock--01
+  friendly_name: Lock 01
+  aliases:
+    - lock 01
+    - lock
+    - security
+- name: lock--02
+  friendly_name: Lock 02
+  aliases:
+    - lock 02
+    - lock
+    - security
 - name: lock--alt
   friendly_name: Lock 02
   aliases:
@@ -2197,6 +2417,20 @@
   aliases:
     - locked network 01
     - locked network
+    - network
+    - security
+- name: locked--network--01
+  friendly_name: Locked Network 01
+  aliases:
+    - locked network 01
+    - locked network
+    - network
+    - security
+- name: locked--network--02
+  friendly_name: Locked Network 02
+  aliases:
+    - locked network 02
+    - locked
     - network
     - security
 - name: locked--network--alt
@@ -2212,7 +2446,7 @@
     - london
     - city
     - cities
-- name: london--big--ben
+- name: london--big-ben
   friendly_name: London Big Ben
   aliases:
     - london big ben
@@ -2333,7 +2567,15 @@
     - mas
     - code
     - software
-- name: math-curve
+- name: master--threat--hunting
+  friendly_name: Master Threat Hunting
+  aliases:
+    - master threat hunting
+    - master
+    - threat
+    - hunting
+    - security
+- name: math--curve
   friendly_name: Math curve
   aliases:
     - math curve
@@ -2375,14 +2617,14 @@
     - time
     - dashboard
     - instrument
-- name: mexico-city--angel--of--independence
+- name: mexico-city--angel-of-independence
   friendly_name: Mexico City Angel of Independence
   aliases:
     - Mexico City Angel of Independence
     - statue
     - city
     - cities
-- name: mexico-city--museo--soumaya
+- name: mexico-city--museo-soumaya
   friendly_name: Mexico City Museo Soumaya
   aliases:
     - Mexico City Museo Soumaya
@@ -2400,7 +2642,7 @@
     - microscope
     - life science
     - research
-- name: milan--duomo--di--milano
+- name: milan--duomo-di-milano
   friendly_name: Milan Duomo di Milano
   aliases:
     - church
@@ -2455,7 +2697,7 @@
   aliases:
     - monitored item on conveyor
     - conveyor
-- name: mortar--and--pestle
+- name: mortar-and-pestle
   friendly_name: Mortar and pestle
   aliases:
     - mortar and pestle
@@ -2545,6 +2787,13 @@
     - network
     - networking
     - connect
+- name: network--protection
+  friendly_name: Network Protection
+  aliases:
+    - network protection
+    - network
+    - protection
+    - security
 - name: network--services
   friendly_name: Network services
   aliases:
@@ -2621,6 +2870,24 @@
     - Manhattan
     - city
     - cities
+- name: nyc--manhattan--01
+  friendly_name: NYC Manhattan 01
+  aliases:
+    - NYC Manhattan 01
+    - NYC Manhattan
+    - NYC
+    - Manhattan
+    - city
+    - cities
+- name: nyc--manhattan--02
+  friendly_name: NYC Manhattan 02
+  aliases:
+    - NYC Manhattan alt
+    - NYC Manhattan
+    - NYC
+    - Manhattan
+    - city
+    - cities
 - name: nyc--manhattan--alt
   friendly_name: NYC Manhattan 02
   aliases:
@@ -2628,6 +2895,16 @@
     - NYC Manhattan
     - NYC
     - Manhattan
+    - city
+    - cities
+- name: nyc--statue-of-liberty
+  friendly_name: NYC Statue of Liberty
+  aliases:
+    - NYC Statue of Liberty
+    - NYC
+    - Statue
+    - of
+    - Liberty
     - city
     - cities
 - name: office
@@ -2680,6 +2957,46 @@
     - clip
     - attachment
     - attach
+- name: paris--arc-de-triomphe
+  friendly_name: Paris Arc de Triomphe
+  aliases:
+    - Paris Arc de Triomphe
+    - Paris
+    - France
+    - Arc
+    - de
+    - Triomphe
+    - city
+    - cities
+- name: paris--louvre
+  friendly_name: Paris Louvre
+  aliases:
+    - Paris Louvre
+    - Paris
+    - France
+    - Louvre
+    - city
+    - cities
+- name: paris--notre-dame
+  friendly_name: Paris Notre Dame
+  aliases:
+    - Paris Notre Dame
+    - Paris
+    - France
+    - Notre
+    - Dame
+    - city
+    - cities
+- name: paris--pompidou-center
+  friendly_name: Paris Pompidou Center
+  aliases:
+    - Paris Pompidou Center
+    - Paris
+    - France
+    - Pompidou
+    - Center
+    - city
+    - cities
 - name: parliament
   friendly_name: Parliament
   aliases:
@@ -2832,7 +3149,7 @@
     - enforcement
     - security
     - people
-- name: population-diagram
+- name: population--diagram
   friendly_name: Population diagram
   aliases:
     - population diagram
@@ -2848,6 +3165,26 @@
     - industry
     - electricity
     - tower
+- name: prague
+  friendly_name: Prague
+  aliases:
+    - Prague
+    - Czech Republic
+    - Czechia
+    - city
+    - cities
+- name: prague--charles-bridge-tower
+  friendly_name: Prague Charles Bridge Tower
+  aliases:
+    - Prague Charles Bridge Tower
+    - Prague
+    - Czech Republic
+    - Czechia
+    - Charles
+    - Bridge
+    - Tower
+    - city
+    - cities
 - name: pregnant
   friendly_name: Pregnant
   aliases:
@@ -2893,9 +3230,30 @@
     - private
     - network
 - name: private--network--01
+  friendly_name: Private network 01
+  aliases:
+    - private network 01
+    - private network
+    - private
+    - network
+- name: private--network--02
   friendly_name: Private network 02
   aliases:
     - private network 02
+    - private network
+    - private
+    - network
+- name: private--network--03
+  friendly_name: Private network 03
+  aliases:
+    - private network 03
+    - private network
+    - private
+    - network
+- name: private--network--04
+  friendly_name: Private network 04
+  aliases:
+    - private network 04
     - private network
     - private
     - network
@@ -2922,6 +3280,14 @@
   aliases:
     - progress
     - IBM
+- name: protect--critical--assets
+  friendly_name: Protect Critical Assets
+  aliases:
+    - protect critical assets
+    - protect
+    - critical
+    - assets
+    - security
 - name: puzzle
   friendly_name: Puzzle
   aliases:
@@ -2973,6 +3339,13 @@
     - rainy
     - precipitation
     - weather
+- name: raleigh-nc
+  friendly_name: Raleigh NC
+  aliases:
+    - Raleigh NC
+    - Raleigh
+    - city
+    - cities
 - name: rank
   friendly_name: Rank
   aliases:
@@ -3005,14 +3378,7 @@
   aliases:
     - refresh
     - update
-- name: relationship--extraction
-  friendly_name: Relationship extraction
-  aliases:
-    - relationship extraction
-    - relationship
-    - watson
-    - AI
-- name: relationship-diagram
+- name: relationship--diagram
   friendly_name: Relationship diagram
   aliases:
     - relationship diagram
@@ -3021,6 +3387,13 @@
     - data
     - analytics
     - chart
+- name: relationship--extraction
+  friendly_name: Relationship extraction
+  aliases:
+    - relationship extraction
+    - relationship
+    - watson
+    - AI
 - name: renew
   friendly_name: Renew
   aliases:
@@ -3169,7 +3542,7 @@
     - scale
     - weight
     - healthcare
-- name: scatter-matrix
+- name: scatter--matrix
   friendly_name: Scatter matrix
   aliases:
     - scatter matrix
@@ -3193,6 +3566,14 @@
     - data
     - data analytics
     - analytics
+- name: secure--hybrid--cloud
+  friendly_name: Secure Hybrid Cloud
+  aliases:
+    - secure hybrid cloud
+    - secure
+    - hybrid
+    - cloud
+    - security
 - name: secure--profile
   friendly_name: Secure profile
   aliases:
@@ -3204,6 +3585,24 @@
   aliases:
     - security
     - shield
+- name: security--as--a--service
+  friendly_name: Security as a Service
+  aliases:
+    - security as a service
+    - security
+    - service
+- name: security--hygiene
+  friendly_name: Security Hygiene
+  aliases:
+    - security hygiene
+    - security
+    - hygiene
+- name: security--intelligence
+  friendly_name: Security Intelligence
+  aliases:
+    - security intelligence
+    - security
+    - intelligence
 - name: security--shield
   friendly_name: Security shield
   aliases:
@@ -3407,11 +3806,24 @@
     - healthcare
     - medicine
     - medical
+- name: stockholm
+  friendly_name: Stockholm
+  aliases:
+    - Stockholm
+    - Sweden
+    - city
+    - cities
 - name: strategy
   friendly_name: Strategy
   aliases:
     - strategy
     - business
+- name: strategy--and--risk
+  friendly_name: Strategy and Risk
+  aliases:
+    - strategy and risk
+    - strategy
+    - risk
 - name: strategy--direct
   friendly_name: Strategy direct
   aliases:
@@ -3577,7 +3989,7 @@
     - teammates
     - team
     - people
-- name: tel--aviv
+- name: tel-aviv
   friendly_name: Tel Aviv
   aliases:
     - Tel Aviv
@@ -3636,11 +4048,24 @@
     - speech
     - watson
     - AI
+- name: threat--management
+  friendly_name: Threat Management
+  aliases:
+    - threat management
+    - threat
+    - management
+    - security
 - name: time
   friendly_name: Time
   aliases:
     - time
     - clock
+- name: time--lapse
+  friendly_name: Time lapse
+  aliases:
+    - time lapse
+    - lapse
+    - time
 - name: time--plot
   friendly_name: Time plot
   aliases:
@@ -3648,18 +4073,12 @@
     - data analytics
     - data
     - analytics
-- name: time-lapse
-  friendly_name: Time lapse
-  aliases:
-    - time lapse
-    - lapse
-    - time
 - name: toggle
   friendly_name: Toggle
   aliases:
     - toggle
     - controls
-- name: tokyo--cherry--blossom
+- name: tokyo--cherry-blossom
   friendly_name: Tokyo cherry blossom
   aliases:
     - Tokyo cherry blossom
@@ -3693,6 +4112,13 @@
     - tone analyzer
     - watson
     - AI
+- name: tool--overload
+  friendly_name: Tool Overload
+  aliases:
+    - tool overload
+    - tool
+    - overload
+    - security
 - name: tools
   friendly_name: Tools
   aliases:
@@ -3795,6 +4221,20 @@
     - transform
     - networking
     - network
+- name: transform--01
+  friendly_name: Transform 01
+  aliases:
+    - transform 01
+    - transform
+    - iot
+    - internet of things
+- name: transform--02
+  friendly_name: Transform 02
+  aliases:
+    - transform 02
+    - transform
+    - networking
+    - network
 - name: transparency--01
   friendly_name: Transparency 01
   aliases:
@@ -3844,6 +4284,36 @@
   aliases:
     - trust
     - blockchain
+- name: trusted--user
+  friendly_name: Trusted User
+  aliases:
+    - trusted user
+    - trusted
+    - user
+    - security
+- name: unauthorized--user--access
+  friendly_name: Unauthorized User Access
+  aliases:
+    - unauthorized user access
+    - unauthorized
+    - user
+    - access
+    - security
+- name: under--utilized--security
+  friendly_name: Under Utilized Security
+  aliases:
+    - under utilized security
+    - under
+    - utilized
+    - security
+- name: unify--endpoint--management
+  friendly_name: Unify Endpoint Management
+  aliases:
+    - unify endpoint management
+    - unify
+    - endpoint
+    - management
+    - security
 - name: university
   friendly_name: University
   aliases:
@@ -3854,6 +4324,18 @@
   friendly_name: Unlock 01
   aliases:
     - unlock 01
+    - unlock
+    - security
+- name: unlock--01
+  friendly_name: Unlock 01
+  aliases:
+    - unlock 01
+    - unlock
+    - security
+- name: unlock--02
+  friendly_name: Unlock 02
+  aliases:
+    - unlock 02
     - unlock
     - security
 - name: unlock--alt
@@ -4004,6 +4486,20 @@
     - warning
     - alert
     - status
+- name: warning--01
+  friendly_name: Warning 01
+  aliases:
+    - warning 01
+    - warning
+    - alert
+    - status
+- name: warning--02
+  friendly_name: Warning 02
+  aliases:
+    - warning 02
+    - warning
+    - alert
+    - status
 - name: warning--alt
   friendly_name: Warning 02
   aliases:
@@ -4037,7 +4533,7 @@
     - monument
     - cities
     - city
-- name: watson--avatar
+- name: watson--logo
   friendly_name: Watson logo
   aliases:
     - Watson logo
@@ -4047,6 +4543,16 @@
 - name: weather
   friendly_name: Weather
   aliases:
+    - weather
+- name: weather--01
+  friendly_name: Weather 01
+  aliases:
+    - weather 01
+    - weather
+- name: weather--02
+  friendly_name: Weather 02
+  aliases:
+    - weather 02
     - weather
 - name: web--developer
   friendly_name: Web developer
@@ -4117,7 +4623,7 @@
     - modem
     - wireless
     - home
-- name: word-cloud
+- name: word--cloud
   friendly_name: Word cloud
   aliases:
     - word cloud
@@ -4126,6 +4632,13 @@
     - data analytics
     - data
     - analytics
+- name: world--community--grid
+  friendly_name: World Community Grid
+  aliases:
+    - World Community Grid
+    - world
+    - community
+    - grid
 - name: wrecking--ball
   friendly_name: Wrecking ball
   aliases:

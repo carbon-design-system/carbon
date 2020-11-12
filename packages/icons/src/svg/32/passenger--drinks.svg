@@ -1,0 +1,14 @@
+<svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: none;
+      }
+    </style>
+  </defs>
+  <path d="M30,4V2H22V4a3.9906,3.9906,0,0,0,3,3.8586V11H23v2h6V11H27V7.8586A3.9906,3.9906,0,0,0,30,4Z" transform="translate(0 0)"/>
+  <path d="M10.5,9A3.5,3.5,0,1,1,14,5.5,3.5042,3.5042,0,0,1,10.5,9Zm0-5A1.5,1.5,0,1,0,12,5.5,1.5017,1.5017,0,0,0,10.5,4Z" transform="translate(0 0)"/>
+  <path d="M22.4746,31.313,19.3408,24H12.2393A4.0073,4.0073,0,0,1,8.373,21.0293l-1.6337-6.126a3.8987,3.8987,0,0,1,7.5341-2.0092L15.1016,16H21v2H13.5645l-1.2227-4.5908a1.9,1.9,0,0,0-3.6709.979l1.6338,6.1255A2.0052,2.0052,0,0,0,12.2393,22h8.42l3.6543,8.5254Z" transform="translate(0 0)"/>
+  <path d="M18,28H7.7683a2.0025,2.0025,0,0,1-1.9326-1.4849L2.0337,12.2576l1.9326-.5152L7.7683,26H18Z" transform="translate(0 0)"/>
+  <rect id="_Transparent_Rectangle_" data-name="&lt;Transparent Rectangle&gt;" class="cls-1" width="32" height="32"/>
+</svg>
