@@ -99,11 +99,15 @@ const lightPropMessage = (
 );
 
 const props = () => ({
-  type: select('Type', {
-    inline: 'inline',
-    'single line': 'single',
-    'multiple line': 'multi',
-  }),
+  type: select(
+    'Type',
+    {
+      inline: 'inline',
+      'single line': 'single',
+      'multiple line': 'multi',
+    },
+    'inline'
+  ),
   light: boolean('Light variant', false),
   feedback: text('Feedback text', 'Copied to clipboard'),
   showMoreText: text('Text for "show more" button', 'Show more'),
