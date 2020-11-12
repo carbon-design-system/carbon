@@ -173,7 +173,7 @@ export const WithOverflowMenu = () => (
                   <TableCell key={cell.id}>{cell.value}</TableCell>
                 ))}
                 <TableCell className="bx--table-column-menu">
-                  <OverflowMenu flipped>
+                  <OverflowMenu light flipped>
                     <OverflowMenuItem>Action 1</OverflowMenuItem>
                     <OverflowMenuItem>Action 2</OverflowMenuItem>
                     <OverflowMenuItem>Action 3</OverflowMenuItem>
