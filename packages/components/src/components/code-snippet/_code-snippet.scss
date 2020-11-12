@@ -161,6 +161,7 @@
   //closed snippet container
   .#{$prefix}--snippet--multi .#{$prefix}--snippet-container {
     position: relative;
+    order: 1;
     min-height: rem(56px);
     max-height: rem(238px);
     overflow: hidden;
@@ -449,11 +450,13 @@
   }
 
   .#{$prefix}--snippet__overflow-indicator--left {
+    order: 0;
     margin-right: -$carbon--spacing-05;
     background-image: linear-gradient(to left, transparent, $field-01);
   }
 
   .#{$prefix}--snippet__overflow-indicator--right {
+    order: 2;
     margin-left: -$carbon--spacing-05;
     background-image: linear-gradient(to right, transparent, $field-01);
   }
