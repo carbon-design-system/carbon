@@ -355,34 +355,29 @@
   }
 
   // Light version
-  .#{$prefix}--snippet.#{$prefix}--snippet--light,
-  .#{$prefix}--snippet.#{$prefix}--snippet--light .#{$prefix}--snippet-button,
-  .#{$prefix}--snippet.#{$prefix}--snippet--light
-    .#{$prefix}--snippet-btn--expand,
-  .#{$prefix}--snippet.#{$prefix}--snippet--light .#{$prefix}--copy-btn {
+  .#{$prefix}--snippet--light,
+  .#{$prefix}--snippet--light .#{$prefix}--snippet-button,
+  .#{$prefix}--snippet--light .#{$prefix}--snippet-btn--expand,
+  .#{$prefix}--snippet--light .#{$prefix}--copy-btn {
     background-color: $field-02;
   }
 
-  .#{$prefix}--snippet.#{$prefix}--snippet--light.#{$prefix}--snippet--inline:hover,
-  .#{$prefix}--snippet.#{$prefix}--snippet--light
-    .#{$prefix}--snippet-button:hover,
-  .#{$prefix}--snippet.#{$prefix}--snippet--light
-    .#{$prefix}--snippet-btn--expand:hover,
-  .#{$prefix}--snippet.#{$prefix}--snippet--light .#{$prefix}--copy-btn:hover {
+  .#{$prefix}--snippet--light.#{$prefix}--snippet--inline:hover,
+  .#{$prefix}--snippet--light .#{$prefix}--snippet-button:hover,
+  .#{$prefix}--snippet--light .#{$prefix}--snippet-btn--expand:hover,
+  .#{$prefix}--snippet--light .#{$prefix}--copy-btn:hover {
     background-color: $hover-light-ui;
   }
 
-  .#{$prefix}--snippet.#{$prefix}--snippet--light.#{$prefix}--snippet--inline:active,
-  .#{$prefix}--snippet.#{$prefix}--snippet--light
-    .#{$prefix}--snippet-button:active,
-  .#{$prefix}--snippet.#{$prefix}--snippet--light
-    .#{$prefix}--snippet-btn--expand:active,
-  .#{$prefix}--snippet.#{$prefix}--snippet--light .#{$prefix}--copy-btn:active {
+  .#{$prefix}--snippet--light.#{$prefix}--snippet--inline:active,
+  .#{$prefix}--snippet--light .#{$prefix}--snippet-button:active,
+  .#{$prefix}--snippet--light .#{$prefix}--snippet-btn--expand:active,
+  .#{$prefix}--snippet--light .#{$prefix}--copy-btn:active {
     background-color: $active-light-ui;
   }
 
-  .#{$prefix}--snippet.#{$prefix}--snippet--light.#{$prefix}--snippet--single::after,
-  .#{$prefix}--snippet.#{$prefix}--snippet--light.#{$prefix}--snippet--multi
+  .#{$prefix}--snippet--light.#{$prefix}--snippet--single::after,
+  .#{$prefix}--snippet--light.#{$prefix}--snippet--multi
     .#{$prefix}--snippet-container
     pre::after {
     // Safari interprets `transparent` differently, so make color token value transparent instead:
