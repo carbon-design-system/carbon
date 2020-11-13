@@ -88,6 +88,7 @@ const props = () => ({
     'Selecting more items may increase processing time'
   ),
   onChange: action('onChange'),
+  onMenuChange: action('onMenuChange'),
   listBoxMenuIconTranslationIds: object(
     'Listbox menu icon translation IDs (for translateWithId callback)',
     {
