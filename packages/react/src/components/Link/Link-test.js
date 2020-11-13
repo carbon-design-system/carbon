@@ -64,7 +64,7 @@ describe('Link', () => {
     });
   });
 
-  describe('passes automated automated verification testing', () => {
+  describe('automated verification testing', () => {
     it('should have no Axe violations', async () => {
       render(
         <Link href="/" className="some-class">
