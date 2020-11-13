@@ -3611,6 +3611,7 @@ $carbon--spacing-09: 3rem;
   - `spacing-09`
 - **Used by**:
   - [accordion [mixin]](#accordion-mixin)
+  - [data-table-expandable [mixin]](#data-table-expandable-mixin)
   - [date-picker [mixin]](#date-picker-mixin)
   - [file-uploader [mixin]](#file-uploader-mixin)
   - [listbox [mixin]](#listbox-mixin)
@@ -17148,9 +17149,11 @@ Data table expandable styles
   }
 
   tr.#{$prefix}--parent-row.#{$prefix}--expandable-row + tr[data-child-row] td {
+    padding-left: $carbon--spacing-09;
     border-bottom: 1px solid $ui-03;
     transition: padding-bottom $duration--fast-02 motion(standard, productive), transform
-        $duration--fast-02 motion(standard, productive);
+        $duration--fast-02 motion(standard, productive),
+      background-color $duration--fast-02 motion(standard, productive);
   }
 
   tr.#{$prefix}--parent-row.#{$prefix}--expandable-row
@@ -17279,11 +17282,11 @@ Data table expandable styles
   }
 
   .#{$prefix}--table-expand__button:focus {
-    outline: 1px solid transparent;
+    outline: none;
   }
 
   .#{$prefix}--table-expand__button:focus .#{$prefix}--table-expand__svg {
-    box-shadow: inset 0 0 0 1px $focus;
+    box-shadow: inset 0 0 0 2px $focus;
   }
 
   .#{$prefix}--table-expand__svg {
@@ -17468,6 +17471,7 @@ Data table expandable styles
   - [ui-03 [variable]](#ui-03-variable)
   - [spacing-05 [variable]](#spacing-05-variable)
   - [hover-ui [variable]](#hover-ui-variable)
+  - [carbon--spacing-09 [variable]](#carbon--spacing-09-variable)
   - [text-01 [variable]](#text-01-variable)
   - [focus [variable]](#focus-variable)
   - [ui-05 [variable]](#ui-05-variable)
