@@ -151,7 +151,26 @@ yarn test
 For more extensive testing information, see our
 [developer handbook](https://github.com/carbon-design-system/carbon/blob/master/docs/developer-handbook.md#common-tasks)
 
-### 7. Make a pull request
+### 7. Add yourself to the contributor list
+
+We want to make sure everyone is recognized for their contributions to Carbon!
+To add yourself to the `all-contributors` table in the README, you'll need to
+run the following commands from the root of the repo:
+
+```sh
+# Add new contributor <username>, who made a contribution of type <contribution>
+all-contributors add <username> <contribution>
+# Example:
+all-contributors add tw15egan code,doc
+```
+
+Then, you'll need to generate the updated `all-contibutors` table by running
+
+```sh
+all-contributors generate
+```
+
+### 8. Make a pull request
 
 **Note:** Before you make a pull request,
 [search](https://github.com/IBM/carbon-components/issues) the issues to see if a

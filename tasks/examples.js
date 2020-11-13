@@ -21,6 +21,7 @@ const PACKAGES_TO_BUILD = new Set([
   'icons',
   'layout',
   'motion',
+  'pictograms',
   'themes',
   'type',
 ]);

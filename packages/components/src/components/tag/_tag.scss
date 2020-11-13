@@ -150,7 +150,6 @@
     padding-right: rem(2px);
     cursor: pointer;
 
-    &:focus,
     &:hover {
       outline: none;
     }
@@ -181,6 +180,10 @@
     border-radius: 50%;
     outline: none;
     box-shadow: inset 0 0 0 2px $focus;
+  }
+
+  .#{$prefix}--tag--high-contrast .#{$prefix}--tag__close-icon:focus {
+    box-shadow: inset 0 0 0 2px $inverse-focus-ui;
   }
 
   .#{$prefix}--tag--filter.#{$prefix}--tag--disabled

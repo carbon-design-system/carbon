@@ -40,7 +40,7 @@ const consoleMethods = ['error', 'warn', process.env.CI && 'log'].filter(
 
 for (const methodName of consoleMethods) {
   const unexpectedConsoleCallStacks = [];
-  const newMethod = function (format, ...args) {
+  const patchedConsoleMethod = function (format, ...args) {
     const stack = new Error().stack;
     unexpectedConsoleCallStacks.push([
       stack.substr(stack.indexOf('\n') + 1),
@@ -48,31 +48,38 @@ for (const methodName of consoleMethods) {
     ]);
   };
 
-  console[methodName] = newMethod;
+  console[methodName] = patchedConsoleMethod;
 
   global.beforeEach(() => {
+    if (unexpectedConsoleCallStacks.length > 0) {
+      formatConsoleCallStack(unexpectedConsoleCallStacks, methodName);
+    }
     unexpectedConsoleCallStacks.length = 0;
   });
 
   global.afterEach(() => {
-    if (console[methodName] !== newMethod) {
+    if (console[methodName] !== patchedConsoleMethod) {
       throw new Error(`Test did not restore a mock for console.${methodName}`);
     }
 
     if (unexpectedConsoleCallStacks.length > 0) {
-      const messages = unexpectedConsoleCallStacks.map(
-        ([stack, message]) =>
-          `${message}\n` +
-          `${stack
-            .split('\n')
-            .map((line) => chalk.gray(line))
-            .join('\n')}`
-      );
-      const message = `Expected test not to call ${chalk.bold(
-        `console.${methodName}()`
-      )}`;
-
-      throw new Error(`${message}\n\n${messages.join('\n\n')}`);
+      formatConsoleCallStack(unexpectedConsoleCallStacks, methodName);
     }
   });
+}
+
+function formatConsoleCallStack(unexpectedConsoleCallStacks, methodName) {
+  const messages = unexpectedConsoleCallStacks.map(
+    ([stack, message]) =>
+      `${message}\n` +
+      `${stack
+        .split('\n')
+        .map((line) => chalk.gray(line))
+        .join('\n')}`
+  );
+  const message = `Expected test not to call ${chalk.bold(
+    `console.${methodName}()`
+  )}`;
+
+  throw new Error(`${message}\n\n${messages.join('\n\n')}`);
 }
