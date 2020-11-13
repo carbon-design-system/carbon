@@ -53,8 +53,7 @@ const Tag = ({
     }
   };
 
-  if (filter) {
-    return (
+  return filter ? (
       <div
         className={tagClasses}
         aria-label={
@@ -79,39 +78,23 @@ const Tag = ({
           <Close16 />
         </button>
       </div>
-    );
-  }
-
-  if (CustomIconElement) {
-    return (
+    ): (
       <div
-        className={tagClasses}
-        aria-label={
-          title !== undefined
-            ? `${title} ${children}`
-            : `Clear filter ${children}`
-        }
-        id={tagId}
-        {...other}>
-        <button className={`${prefix}--tag__custom-icon`}>
-          <CustomIconElement />
-        </button>
-        <span
-          className={`${prefix}--tag__label`}
-          title={typeof children === 'string' ? children : null}>
-          {children !== null && children !== undefined ? children : TYPES[type]}
-        </span>
-      </div>
-    );
-  }
-
-  return (
-    <span
       className={tagClasses}
-      title={typeof children === 'string' ? children : null}
+      id={tagId}
       {...other}>
-      {children !== null && children !== undefined ? children : TYPES[type]}
-    </span>
+      { CustomIconElement ? 
+      <div className={`${prefix}--tag__custom-icon`}>
+        <CustomIconElement />
+      </div>
+      : ''
+      }
+      <span
+        title={typeof children === 'string' ? children : null}
+        {...other}>
+        {children !== null && children !== undefined ? children : TYPES[type]}
+      </span>
+    </div>
   );
 };
 
