@@ -1,4 +1,4 @@
-import aChecker from 'accessibility-checker';
+const aChecker = require('accessibility-checker');
 
 ('use strict');
 
