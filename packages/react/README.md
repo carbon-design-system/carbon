@@ -14,14 +14,14 @@ To install `carbon-components-react` in your project, you will need to run the
 following command using [npm](https://www.npmjs.com/):
 
 ```bash
-npm install -S carbon-components carbon-components-react carbon-ison
+npm install -S carbon-components carbon-components-react carbon-icons
 ```
 
 If you prefer [Yarn](https://yarnpkg.com/en/), use the following command
 instead:
 
 ```bash
-yarn add carbon-components carbon-components-react carbon-ison
+yarn add carbon-components carbon-components-react carbon-icons
 ```
 
 If you want to try out `carbon-components-react`, you can also use
@@ -31,14 +31,6 @@ If you want to try out `carbon-components-react`, you can also use
 
 ## Usage
 
-You can view available components that you can bring into your project over on
-our [Storybook](https://react.carbondesignsystem.com) or our
-[Website](https://www.carbondesignsystem.com/components/overview).
-
-With storybook, each component will have documentation and prop information to
-help you with importing and using the component. For example, to use a `Button`
-component you will import it from `carbon-components-react`:
-
 ```js
 import { Button } from 'carbon-components-react';
 
@@ -47,7 +39,7 @@ function MyComponent() {
 }
 ```
 
-For more information about each component, check-out our
+For more information about each component, check out our
 [Storybook](https://react.carbondesignsystem.com). For guides on getting
 started, head on over to our
 [Website](https://www.carbondesignsystem.com/get-started/develop/react) or check
