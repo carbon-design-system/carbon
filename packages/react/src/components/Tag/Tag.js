@@ -54,44 +54,40 @@ const Tag = ({
   };
 
   return filter ? (
-      <div
-        className={tagClasses}
-        aria-label={
-          title !== undefined
-            ? `${title} ${children}`
-            : `Clear filter ${children}`
-        }
-        id={tagId}
-        {...other}>
-        <span
-          className={`${prefix}--tag__label`}
-          title={typeof children === 'string' ? children : null}>
-          {children !== null && children !== undefined ? children : TYPES[type]}
-        </span>
-        <button
-          type="button"
-          className={`${prefix}--tag__close-icon`}
-          onClick={handleClose}
-          disabled={disabled}
-          aria-labelledby={tagId}
-          title={title}>
-          <Close16 />
-        </button>
-      </div>
-    ): (
-      <div
+    <div
       className={tagClasses}
+      aria-label={
+        title !== undefined
+          ? `${title} ${children}`
+          : `Clear filter ${children}`
+      }
       id={tagId}
       {...other}>
-      { CustomIconElement ? 
-      <div className={`${prefix}--tag__custom-icon`}>
-        <CustomIconElement />
-      </div>
-      : ''
-      }
       <span
-        title={typeof children === 'string' ? children : null}
-        {...other}>
+        className={`${prefix}--tag__label`}
+        title={typeof children === 'string' ? children : null}>
+        {children !== null && children !== undefined ? children : TYPES[type]}
+      </span>
+      <button
+        type="button"
+        className={`${prefix}--tag__close-icon`}
+        onClick={handleClose}
+        disabled={disabled}
+        aria-labelledby={tagId}
+        title={title}>
+        <Close16 />
+      </button>
+    </div>
+  ) : (
+    <div className={tagClasses} id={tagId} {...other}>
+      {CustomIconElement ? (
+        <div className={`${prefix}--tag__custom-icon`}>
+          <CustomIconElement />
+        </div>
+      ) : (
+        ''
+      )}
+      <span title={typeof children === 'string' ? children : null} {...other}>
         {children !== null && children !== undefined ? children : TYPES[type]}
       </span>
     </div>
