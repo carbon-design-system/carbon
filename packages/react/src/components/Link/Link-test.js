@@ -90,7 +90,7 @@ describe('Link', () => {
     });
   });
 
-  describe('should be keyboard accessible', () => {
+  describe('keyboard support', () => {
     it('should recieve keyboard focus', () => {
       render(
         <Link href="/" className="some-class">
