@@ -67,7 +67,7 @@ export default {
 export const Default = () => {
   const groupProps = props.group();
   return (
-    <div style={{ width: 300 }}>
+    <div style={{ width: 400 }}>
       <Select {...props.select()} id="select-1" defaultValue="placeholder-item">
         <SelectItem
           disabled
