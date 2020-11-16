@@ -6,7 +6,11 @@
   "bin": {
     "carbon-cli": "./bin/carbon-cli.js"
   },
-  "repository": "https://github.com/carbon-design-system/carbon/tree/master/packages/cli",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/carbon-design-system/carbon.git",
+    "directory": "packages/cli"
+  },
   "bugs": "https://github.com/carbon-design-system/carbon/issues",
   "keywords": [
     "ibm",
