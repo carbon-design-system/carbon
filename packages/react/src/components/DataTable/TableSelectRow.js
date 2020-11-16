@@ -19,6 +19,7 @@ const TableSelectRow = ({
   id,
   name,
   onSelect,
+  onChange,
   disabled,
   radio,
   className,
@@ -27,6 +28,7 @@ const TableSelectRow = ({
     id,
     name,
     onClick: onSelect,
+    onChange: onChange,
     checked,
     disabled,
   };
