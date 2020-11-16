@@ -205,5 +205,6 @@
       "/storybook/",
       "/results/"
     ]
-  }
+  },
+  "dependencies": {}
 }
