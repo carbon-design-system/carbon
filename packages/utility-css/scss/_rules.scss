@@ -1,0 +1,77 @@
+//
+// Copyright IBM Corp. 2018, 2018
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+@use 'sass:map';
+@use 'sass:meta';
+@use 'sass:list';
+@use 'breakpoint';
+
+@function add($declarations, $keys, $rules...) {
+  @each $key in $keys {
+    $values: map.get($declarations, $key);
+
+    @each $rule in $rules {
+      @if $key != defaults {
+        $rule: map.set(
+          $rule,
+          declaration,
+          '#{$key}\\:#{map.get($rule, declaration)}'
+        );
+      }
+      $values: list.append($values, $rule);
+    }
+
+    $declarations: map.set($declarations, $key, $values);
+  }
+
+  @return $declarations;
+}
+
+@mixin rule($rule) {
+  $declaration: map.get($rule, declaration);
+  $properties: map.get($rule, properties);
+
+  .#{$declaration} {
+    @each $property, $value in $properties {
+      #{$property}: #{$value};
+    }
+  }
+}
+
+@mixin run($config) {
+  $breakpoints: map.get(map.get($config, theme), breakpoints);
+  $rules: (
+    defaults: (),
+  );
+  @each $key, $value in $breakpoints {
+    $rules: map.set($rules, $key, ());
+  }
+
+  @each $plugin in map.get($config, plugins) {
+    $enabled: map.get($plugin, enabled);
+    @if $enabled == true {
+      $options: map.get($plugin, options);
+      $run: map.get($plugin, run);
+
+      $rules: meta.call($run, map.get($config, theme), $rules, $options);
+    }
+  }
+
+  @each $key, $value in $rules {
+    @if $key == defaults {
+      @each $rule in $value {
+        @include rule($rule);
+      }
+    } @else {
+      @include breakpoint.breakpoint($breakpoints, $key) {
+        @each $rule in $value {
+          @include rule($rule);
+        }
+      }
+    }
+  }
+}

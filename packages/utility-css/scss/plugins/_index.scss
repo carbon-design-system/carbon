@@ -1,0 +1,92 @@
+//
+// Copyright IBM Corp. 2018, 2018
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+@use 'sass:list';
+@use 'sass:map';
+@use 'sass:meta';
+
+@use 'accessibility';
+@use 'background';
+@use 'fill';
+@use 'margin';
+@use 'padding';
+@use 'stroke';
+@use 'text-color';
+
+$plugin-names: (
+  accessibility,
+  background,
+  fill,
+  margin,
+  padding,
+  stroke,
+  text-color
+);
+
+@function load($plugin-config) {
+  $plugins: ();
+
+  @each $name in $plugin-names {
+    $plugin: load-plugin($plugin-config, $name);
+    $plugins: list.append($plugins, $plugin);
+  }
+
+  @return $plugins;
+}
+
+@function load-plugin($plugin-config, $name) {
+  $variables: meta.module-variables($name);
+  $enabled: is-enabled(
+    $plugin-config,
+    $name,
+    map.get($variables, 'default-enabled')
+  );
+  $options: load-options(
+    $plugin-config,
+    $name,
+    map.get($variables, 'default-options')
+  );
+  $plugin: (
+    enabled: $enabled,
+    run:
+      meta.get-function(
+        $module: $name,
+        $name: 'plugin',
+      ),
+    options: $options,
+  );
+  @return $plugin;
+}
+
+@function is-enabled($plugin-config, $name, $fallback: true) {
+  @if map.has-key($plugin-config, $name) {
+    $value: map.get($plugin-config, $name);
+    @if meta.type-of($value) == bool {
+      @return $value;
+    } @else if meta.type-of($value) == map {
+      @each $value in map.values($value) {
+        @if $value == true {
+          @return true;
+        }
+      }
+      @return false;
+    }
+  }
+  @return $fallback;
+}
+
+@function load-options($plugin-config, $name, $fallback: ()) {
+  @if map.has-key($plugin-config, $name) {
+    $value: map.get($plugin-config, $name);
+    @if meta.type-of($value) != map {
+      @return $fallback;
+    }
+    @return map.merge($fallback, $value);
+  }
+
+  @return $fallback;
+}

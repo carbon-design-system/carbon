@@ -4,3 +4,72 @@
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
 //
+
+@use '@carbon/themes/scss/themes';
+@use 'sass:meta';
+
+$breakpoints: (
+  sm: 20em,
+  md: 42em,
+  lg: 66em,
+  xlg: 82em,
+  max: 99em,
+);
+
+$colors: (
+  ui-background: themes.$ui-background,
+  interactive-01: themes.$interactive-01,
+  interactive-02: themes.$interactive-02,
+  interactive-03: themes.$interactive-03,
+  interactive-04: themes.$interactive-04,
+  danger: themes.$danger,
+  ui-01: themes.$ui-01,
+  ui-02: themes.$ui-02,
+  ui-03: themes.$ui-03,
+  ui-04: themes.$ui-04,
+  ui-05: themes.$ui-05,
+  button-separator: themes.$button-separator,
+  decorative-01: themes.$decorative-01,
+  text-01: themes.$text-01,
+  text-02: themes.$text-02,
+  text-03: themes.$text-03,
+  text-04: themes.$text-04,
+  text-05: themes.$text-05,
+  text-error: themes.$text-error,
+  link-01: themes.$link-01,
+  inverse-link: themes.$inverse-link,
+  icon-01: themes.$icon-01,
+  icon-02: themes.$icon-02,
+  icon-03: themes.$icon-03,
+  field-01: themes.$field-01,
+  field-02: themes.$field-02,
+  inverse-01: themes.$inverse-01,
+  inverse-02: themes.$inverse-02,
+  support-01: themes.$support-01,
+  support-02: themes.$support-02,
+  support-03: themes.$support-03,
+  support-04: themes.$support-04,
+  inverse-support-01: themes.$inverse-support-01,
+  inverse-support-02: themes.$inverse-support-02,
+  inverse-support-03: themes.$inverse-support-03,
+  inverse-support-04: themes.$inverse-support-04,
+  overlay-01: themes.$overlay-01,
+  white: #ffffff,
+  black: #000000,
+);
+
+$spacing: (
+  0: 0,
+  1: themes.$spacing-01,
+  2: themes.$spacing-02,
+  3: themes.$spacing-03,
+  4: themes.$spacing-04,
+  5: themes.$spacing-05,
+  6: themes.$spacing-06,
+  7: themes.$spacing-07,
+  8: themes.$spacing-08,
+  9: themes.$spacing-09,
+  10: themes.$spacing-10,
+  11: themes.$spacing-11,
+  12: themes.$spacing-12,
+);

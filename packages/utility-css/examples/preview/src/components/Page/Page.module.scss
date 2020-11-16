@@ -1,0 +1,21 @@
+.layout {
+  display: grid;
+  grid-template-rows: 3rem 1fr;
+  grid-template-columns: 15rem 1fr;
+  grid-template-areas:
+    'header header'
+    'aside content';
+  height: 100%;
+}
+
+.header {
+  grid-area: header;
+}
+
+.aside {
+  grid-area: aside;
+}
+
+.content {
+  grid-area: content;
+}

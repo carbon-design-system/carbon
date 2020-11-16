@@ -1,0 +1,49 @@
+//
+// Copyright IBM Corp. 2018, 2018
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+@use 'sass:map';
+@use '../rules';
+@use '../pseudo-class';
+
+$default-enabled: true;
+$default-options: (
+  active: false,
+  hover: false,
+  focus: false,
+  disabled: false,
+  responsive: false,
+);
+
+@function plugin($theme, $rules, $options) {
+  $keys: ();
+
+  @if map.get($options, responsive) == true {
+    $keys: map.keys($rules);
+  } @else {
+    $keys: (defaults);
+  }
+
+  $rule: (
+    declaration: 'fill-current',
+    properties: (
+      fill: currentColor,
+    ),
+  );
+  $rules: rules.add($rules, $keys, $rule);
+
+  @if map.get($options, hover) == true {
+    $rules: rules.add($rules, $keys, pseudo-class.hover($rule));
+  }
+  @if map.get($options, focus) == true {
+    $rules: rules.add($rules, $keys, pseudo-class.focus($rule));
+  }
+  @if map.get($options, active) == true {
+    $rules: rules.add($rules, $keys, pseudo-class.active($rule));
+  }
+
+  @return $rules;
+}

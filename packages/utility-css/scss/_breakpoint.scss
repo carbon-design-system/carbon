@@ -1,0 +1,33 @@
+//
+// Copyright IBM Corp. 2018, 2018
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+@use 'sass:map';
+
+@function next($breakpoints, $breakpoint) {
+  $width: map.get($breakpoints, $breakpoint);
+
+  @each $key, $value in $breakpoints {
+    @if map.get($breakpoints, $key) > $width {
+      @return $key;
+    }
+  }
+
+  @return $breakpoint;
+}
+
+@mixin breakpoint($breakpoints, $name) {
+  @if $name == sm {
+    $max-width: map.get($breakpoints, next($breakpoints, $name));
+    @media screen and (max-width: #{$max-width}) {
+      @content;
+    }
+  } @else {
+    @media screen and (min-width: #{map.get($breakpoints, $name)}) {
+      @content;
+    }
+  }
+}

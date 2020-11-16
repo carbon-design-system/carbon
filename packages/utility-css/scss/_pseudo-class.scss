@@ -1,0 +1,58 @@
+//
+// Copyright IBM Corp. 2018, 2018
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+@use 'sass:map';
+
+@function hover($rule) {
+  $declaration: map.get($rule, declaration);
+  @return map.merge(
+    $rule,
+    (
+      declaration: 'hover\\:#{$declaration}:hover',
+    )
+  );
+}
+
+@function focus($rule) {
+  $declaration: map.get($rule, declaration);
+  @return map.merge(
+    $rule,
+    (
+      declaration: 'focus\\:#{$declaration}:focus',
+    )
+  );
+}
+
+@function active($rule) {
+  $declaration: map.get($rule, declaration);
+  @return map.merge(
+    $rule,
+    (
+      declaration: 'active\\:#{$declaration}:active',
+    )
+  );
+}
+
+@function disabled($rule) {
+  $declaration: map.get($rule, declaration);
+  @return map.merge(
+    $rule,
+    (
+      declaration: 'disabled\\:#{$declaration}:disabled',
+    )
+  );
+}
+
+@function visited($rule) {
+  $declaration: map.get($rule, declaration);
+  @return map.merge(
+    $rule,
+    (
+      declaration: 'visited\\:#{$declaration}:visited',
+    )
+  );
+}

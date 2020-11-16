@@ -1,0 +1,76 @@
+//
+// Copyright IBM Corp. 2018, 2018
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+@use 'sass:map';
+@use 'sass:list';
+@use '../rules';
+
+$default-enabled: true;
+$default-options: (
+  responsive: false,
+);
+
+@function plugin($theme, $rules, $options) {
+  $keys: (defaults);
+
+  @if map.get($options, responsive) == true {
+    $keys: list.join($keys, map.keys($rules));
+  }
+
+  @each $step, $value in map.get($theme, spacing) {
+    $rules: rules.add(
+      $rules,
+      $keys,
+      (
+        declaration: 'pt-#{$step}',
+        properties: (
+          padding-top: $value,
+        ),
+      ),
+      (
+        declaration: 'pr-#{$step}',
+        properties: (
+          padding-right: $value,
+        ),
+      ),
+      (
+        declaration: 'pb-#{$step}',
+        properties: (
+          padding-bottom: $value,
+        ),
+      ),
+      (
+        declaration: 'pl-#{$step}',
+        properties: (
+          padding-left: $value,
+        ),
+      ),
+      (
+        declaration: 'ph-#{$step}',
+        properties: (
+          padding-left: $value,
+          padding-right: $value,
+        ),
+      ),
+      (
+        declaration: 'pv-#{$step}',
+        properties: (
+          padding-top: $value,
+          padding-bottom: $value,
+        ),
+      ),
+      (
+        declaration: 'p-#{$step}',
+        properties: (
+          padding: $value,
+        ),
+      )
+    );
+  }
+
+  @return $rules;
+}
