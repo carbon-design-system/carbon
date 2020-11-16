@@ -16,6 +16,7 @@ module.exports = {
     '@storybook/addon-docs',
     '@storybook/addon-notes/register',
     'storybook-readme/register',
+    'storybook-addon-rtl/register',
     require.resolve('./addon-carbon-theme/register'),
   ],
   stories: ['../src/**/*-story.js', '../src/**/*.stories.mdx'],

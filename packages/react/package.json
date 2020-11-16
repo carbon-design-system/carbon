@@ -120,6 +120,7 @@
     "rollup-plugin-terser": "^4.0.0",
     "rtlcss": "^2.4.0",
     "sass-loader": "^8.0.2",
+    "storybook-addon-rtl": "^0.2.2",
     "storybook-readme": "^5.0.8",
     "string-replace-loader": "^2.1.0",
     "terser-webpack-plugin": "^2.3.2",

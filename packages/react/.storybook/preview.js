@@ -6,10 +6,11 @@
  */
 
 import React from 'react';
-import { addDecorator, addParameters } from '@storybook/react';
+import { addDecorator, addParameters, configure } from '@storybook/react';
 import addons from '@storybook/addons';
 import { themes } from '@storybook/theming';
 import { configureActions } from '@storybook/addon-actions';
+import { initializeRTL } from 'storybook-addon-rtl';
 import {
   CARBON_CURRENT_THEME,
   CARBON_TYPE_TOKEN,
@@ -101,6 +102,8 @@ configureActions({
   depth: 3,
   limit: 10,
 });
+
+initializeRTL();
 
 addDecorator((story) => <Container story={story} />);
 
