@@ -32,13 +32,13 @@ $default-options: (
     (
       declaration: 'text-transparent',
       properties: (
-        text-color: transparent,
+        color: transparent,
       ),
     ),
     (
       declaration: 'text-current',
       properties: (
-        text-color: currentColor,
+        color: currentColor,
       ),
     )
   );
