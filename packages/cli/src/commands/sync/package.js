@@ -73,7 +73,7 @@ function run({ packagePaths }) {
         packageJson.repository = {
           type: 'git',
           url: 'https://github.com/carbon-design-system/carbon.git',
-          directory: `${packageFolder}`,
+          directory: packageFolder,
         };
         packageJson.bugs =
           'https://github.com/carbon-design-system/carbon/issues';
