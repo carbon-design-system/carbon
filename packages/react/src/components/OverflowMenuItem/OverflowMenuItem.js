@@ -50,10 +50,12 @@ export default class OverflowMenuItem extends React.Component {
      * `true` to make this menu item a "danger button".
      */
     isDelete: PropTypes.bool,
+
     /**
      * The text in the menu item.
      */
     itemText: PropTypes.node.isRequired,
+
     /**
      * event handlers
      */
@@ -64,9 +66,7 @@ export default class OverflowMenuItem extends React.Component {
     onKeyUp: PropTypes.func,
     onMouseDown: PropTypes.func,
     onMouseEnter: PropTypes.func,
-
     onMouseLeave: PropTypes.func,
-
     onMouseUp: PropTypes.func,
 
     /**
@@ -79,10 +79,17 @@ export default class OverflowMenuItem extends React.Component {
         'be removed in the next major release of `carbon-components-react`. ' +
         'Opt for `selectorPrimaryFocus` in `<OverflowMenu>` instead'
     ),
+
     /**
      * `true` if this menu item has long text and requires a browser tooltip
      */
     requireTitle: PropTypes.bool,
+
+    /**
+     * Specify a title for the OverflowMenuItem
+     */
+    title: PropTypes.string,
+
     /**
      * The CSS class name to be placed on the wrapper list item element
      */
@@ -141,6 +148,7 @@ export default class OverflowMenuItem extends React.Component {
       wrapperClassName,
       requireTitle,
       index,
+      title,
       ...other
     } = this.props;
 
@@ -193,7 +201,7 @@ export default class OverflowMenuItem extends React.Component {
             onKeyDown(evt);
           }}
           ref={this.overflowMenuItem}
-          title={requireTitle ? itemText : null}
+          title={requireTitle ? title || itemText : null}
           tabIndex="-1"
           index={index}>
           {OverflowMenuItemContent}

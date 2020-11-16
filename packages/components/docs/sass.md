@@ -3411,6 +3411,7 @@ $carbon--spacing-02: 0.25rem;
   - `spacing-02`
 - **Used by**:
   - [checkbox [mixin]](#checkbox-mixin)
+  - [snippet [mixin]](#snippet-mixin)
   - [form [mixin]](#form-mixin)
   - [inline-notifications [mixin]](#inline-notifications-mixin)
   - [pseudo-underline [mixin]](#pseudo-underline-mixin)
@@ -3610,6 +3611,7 @@ $carbon--spacing-09: 3rem;
   - `spacing-09`
 - **Used by**:
   - [accordion [mixin]](#accordion-mixin)
+  - [data-table-expandable [mixin]](#data-table-expandable-mixin)
   - [date-picker [mixin]](#date-picker-mixin)
   - [file-uploader [mixin]](#file-uploader-mixin)
   - [listbox [mixin]](#listbox-mixin)
@@ -14974,6 +14976,8 @@ Code snippet styles
   .#{$prefix}--snippet--single {
     @include bx--snippet;
 
+    display: flex;
+    align-items: center;
     min-width: rem(320px);
     max-width: rem(760px);
     height: $carbon--spacing-08;
@@ -14995,7 +14999,6 @@ Code snippet styles
     height: 100%;
     padding-left: $carbon--spacing-05;
     overflow-x: auto;
-    border-right: solid $carbon--spacing-05 transparent;
 
     &:focus {
       @include focus-outline('outline');
@@ -15009,21 +15012,11 @@ Code snippet styles
     white-space: nowrap;
   }
 
-  .#{$prefix}--snippet--single::after {
-    position: absolute;
-    top: 0;
-    right: rem(56px);
-    width: rem(16px);
-    height: 100%;
-    // Safari interprets `transparent` differently, so make color token value transparent instead:
-    background-image: linear-gradient(to right, rgba($field-01, 0), $field-01);
-    content: '';
-  }
-
   // Multi Line Snippet
   .#{$prefix}--snippet--multi {
     @include bx--snippet;
 
+    display: flex;
     min-width: rem(320px);
     max-width: 100%;
     padding: $carbon--spacing-05;
@@ -15032,6 +15025,7 @@ Code snippet styles
   //closed snippet container
   .#{$prefix}--snippet--multi .#{$prefix}--snippet-container {
     position: relative;
+    order: 1;
     min-height: rem(56px);
     max-height: rem(238px);
     overflow: hidden;
@@ -15160,6 +15154,7 @@ Code snippet styles
     position: absolute;
     top: 0;
     right: 0;
+    z-index: 10;
 
     // Override inherited rule in code snippet
     @include carbon--font-family('sans');
@@ -15173,6 +15168,7 @@ Code snippet styles
     position: absolute;
     right: 0;
     bottom: $spacing-03;
+    z-index: 10;
     display: inline-flex;
     align-items: center;
     padding: $spacing-03 $spacing-05;
@@ -15309,6 +15305,80 @@ Code snippet styles
     left: 50%;
   }
 
+  // overflow indicator
+  .#{$prefix}--snippet__overflow-indicator--left,
+  .#{$prefix}--snippet__overflow-indicator--right {
+    z-index: 1;
+    flex: 1 0 auto;
+    width: $carbon--spacing-05;
+  }
+
+  .#{$prefix}--snippet__overflow-indicator--left {
+    order: 0;
+    margin-right: -$carbon--spacing-05;
+    background-image: linear-gradient(to left, transparent, $field-01);
+  }
+
+  .#{$prefix}--snippet__overflow-indicator--right {
+    order: 2;
+    margin-left: -$carbon--spacing-05;
+    background-image: linear-gradient(to right, transparent, $field-01);
+  }
+
+  .#{$prefix}--snippet--single .#{$prefix}--snippet__overflow-indicator--right,
+  .#{$prefix}--snippet--single .#{$prefix}--snippet__overflow-indicator--left {
+    position: absolute;
+    width: $carbon--spacing-07;
+    height: calc(100% - #{$carbon--spacing-02});
+  }
+
+  .#{$prefix}--snippet--single .#{$prefix}--snippet__overflow-indicator--right {
+    right: $carbon--spacing-08;
+  }
+
+  .#{$prefix}--snippet--single
+    .#{$prefix}--snippet-container:focus
+    ~ .#{$prefix}--snippet__overflow-indicator--right {
+    right: calc(#{$carbon--spacing-08} + #{rem(2px)});
+  }
+
+  .#{$prefix}--snippet--single
+    .#{$prefix}--snippet-container:focus
+    + .#{$prefix}--snippet__overflow-indicator--left {
+    left: rem(2px);
+  }
+
+  .#{$prefix}--snippet--light .#{$prefix}--snippet__overflow-indicator--left {
+    background-image: linear-gradient(to left, transparent, $field-02);
+  }
+
+  .#{$prefix}--snippet--light .#{$prefix}--snippet__overflow-indicator--right {
+    background-image: linear-gradient(to right, transparent, $field-02);
+  }
+
+  // Safari-only media query
+  // since fades won't appear correctly with CSS custom properties
+  // see: tabs, code snippet, and modal overflow indicators
+  @media not all and (min-resolution: 0.001dpcm) {
+    @supports (-webkit-appearance: none) and (stroke-color: transparent) {
+      .#{$prefix}--snippet__overflow-indicator--left {
+        background-image: linear-gradient(
+          to left,
+          rgba($field-01, 0),
+          $field-01
+        );
+      }
+
+      .#{$prefix}--snippet__overflow-indicator--right {
+        background-image: linear-gradient(
+          to right,
+          rgba($field-01, 0),
+          $field-01
+        );
+      }
+    }
+  }
+
   #{$prefix}--snippet--multi.#{$prefix}--skeleton {
     height: rem(98px);
   }
@@ -15367,6 +15437,7 @@ Code snippet styles
   - [hover-light-ui [variable]](#hover-light-ui-variable)
   - [active-light-ui [variable]](#active-light-ui-variable)
   - [carbon--spacing-03 [variable]](#carbon--spacing-03-variable)
+  - [carbon--spacing-02 [variable]](#carbon--spacing-02-variable)
 
 ### ❌bx--snippet [mixin]
 
@@ -17078,9 +17149,11 @@ Data table expandable styles
   }
 
   tr.#{$prefix}--parent-row.#{$prefix}--expandable-row + tr[data-child-row] td {
+    padding-left: $carbon--spacing-09;
     border-bottom: 1px solid $ui-03;
     transition: padding-bottom $duration--fast-02 motion(standard, productive), transform
-        $duration--fast-02 motion(standard, productive);
+        $duration--fast-02 motion(standard, productive),
+      background-color $duration--fast-02 motion(standard, productive);
   }
 
   tr.#{$prefix}--parent-row.#{$prefix}--expandable-row
@@ -17209,11 +17282,11 @@ Data table expandable styles
   }
 
   .#{$prefix}--table-expand__button:focus {
-    outline: 1px solid transparent;
+    outline: none;
   }
 
   .#{$prefix}--table-expand__button:focus .#{$prefix}--table-expand__svg {
-    box-shadow: inset 0 0 0 1px $focus;
+    box-shadow: inset 0 0 0 2px $focus;
   }
 
   .#{$prefix}--table-expand__svg {
@@ -17398,6 +17471,7 @@ Data table expandable styles
   - [ui-03 [variable]](#ui-03-variable)
   - [spacing-05 [variable]](#spacing-05-variable)
   - [hover-ui [variable]](#hover-ui-variable)
+  - [carbon--spacing-09 [variable]](#carbon--spacing-09-variable)
   - [text-01 [variable]](#text-01-variable)
   - [focus [variable]](#focus-variable)
   - [ui-05 [variable]](#ui-05-variable)
