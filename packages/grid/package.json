@@ -3,7 +3,11 @@
   "description": "Grid for digital and software products using the Carbon Design System",
   "version": "10.16.0",
   "license": "Apache-2.0",
-  "repository": "https://github.com/carbon-design-system/carbon/tree/master/packages/grid",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/carbon-design-system/carbon.git",
+    "directory": "packages/grid"
+  },
   "bugs": "https://github.com/carbon-design-system/carbon/issues",
   "files": [
     "css",
