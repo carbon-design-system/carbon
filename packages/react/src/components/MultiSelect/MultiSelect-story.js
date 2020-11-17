@@ -244,7 +244,10 @@ export const WithChangeOnClose = withReadme(readme, () => {
         key={active}
         disabled={!active}
         initialSelectedItems={selItems}
-        onMenuChange={setHasFocus}
+        onMenuChange={(e) => {
+          multiSelectProps.onMenuChange(e);
+          setHasFocus(e);
+        }}
         onChange={(e) => {
           setSelItems(e.selectedItems);
         }}
