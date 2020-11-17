@@ -1,11 +1,15 @@
 {
   "name": "@carbon/icons-react",
   "description": "React components for icons in digital and software products using the Carbon Design System",
-  "version": "10.21.0-rc.0",
+  "version": "10.21.0",
   "license": "Apache-2.0",
   "main": "lib/index.js",
   "module": "es/index.js",
-  "repository": "https://github.com/carbon-design-system/carbon/tree/master/packages/icons-react",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/carbon-design-system/carbon.git",
+    "directory": "packages/icons-react"
+  },
   "bugs": "https://github.com/carbon-design-system/carbon/issues",
   "files": [
     "es",
@@ -33,7 +37,7 @@
   },
   "devDependencies": {
     "@carbon/icon-build-helpers": "^0.11.0",
-    "@carbon/icons": "^10.21.0-rc.0"
+    "@carbon/icons": "^10.21.0"
   },
   "sideEffects": false
 }

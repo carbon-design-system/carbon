@@ -2,9 +2,13 @@
   "name": "@carbon/sketch",
   "private": true,
   "description": "Tooling for generating a sketch plugin to bring code to design",
-  "version": "10.22.0-rc.0",
+  "version": "10.22.0",
   "license": "Apache-2.0",
-  "repository": "https://github.com/carbon-design-system/carbon/tree/master/packages/sketch",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/carbon-design-system/carbon.git",
+    "directory": "packages/sketch"
+  },
   "bugs": "https://github.com/carbon-design-system/carbon/issues",
   "keywords": [
     "ibm",
@@ -25,10 +29,10 @@
   },
   "dependencies": {
     "@babel/polyfill": "^7.8.7",
-    "@carbon/colors": "^10.16.0-rc.0",
+    "@carbon/colors": "^10.16.0",
     "@carbon/icon-helpers": "^10.9.0",
-    "@carbon/icons": "^10.21.0-rc.0",
-    "@carbon/themes": "^10.23.0-rc.0",
+    "@carbon/icons": "^10.21.0",
+    "@carbon/themes": "^10.23.0",
     "@carbon/type": "^10.17.0",
     "@skpm/builder": "^0.7.0",
     "color-string": "^1.5.3",

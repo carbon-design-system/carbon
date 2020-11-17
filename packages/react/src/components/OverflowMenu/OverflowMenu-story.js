@@ -77,11 +77,13 @@ export const Basic = withReadme(OverflowREADME, () => (
       {...props.menuItem()}
       itemText="Option 2 is an example of a really long string and how we recommend handling this"
       requireTitle
+      title="Custom tooltip title"
     />
     <OverflowMenuItem {...props.menuItem()} itemText="Option 3" />
     <OverflowMenuItem {...props.menuItem()} itemText="Option 4" />
     <OverflowMenuItem
       {...props.menuItem()}
+      requireTitle
       itemText="Danger option"
       hasDivider
       isDelete
