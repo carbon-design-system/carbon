@@ -207,7 +207,7 @@ export const WithToolbar = () => (
         <TableToolbar {...getToolbarProps()} aria-label="data table toolbar">
           <TableToolbarContent>
             <TableToolbarSearch onChange={onInputChange} />
-            <TableToolbarMenu>
+            <TableToolbarMenu light>
               <TableToolbarAction
                 onClick={action('Action 1 Click')}
                 primaryFocus>
