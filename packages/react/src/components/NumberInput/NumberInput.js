@@ -170,7 +170,7 @@ class NumberInput extends Component {
     translateWithId: (id) => defaultTranslations[id],
   };
 
-  static getDerivedStateFromProps({ min, max, value = 0 }, state) {
+  static getDerivedStateFromProps({ min, max, value }, state) {
     const { prevValue } = state;
 
     if (useControlledStateWithValue && value === '' && prevValue !== '') {
