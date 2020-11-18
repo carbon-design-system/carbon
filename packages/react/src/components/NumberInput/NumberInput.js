@@ -504,6 +504,7 @@ class NumberInput extends Component {
   }
 }
 
+export { NumberInput };
 export default (() => {
   const forwardRef = (props, ref) => <NumberInput {...props} innerRef={ref} />;
   forwardRef.displayName = 'NumberInput';

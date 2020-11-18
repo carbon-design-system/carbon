@@ -521,6 +521,7 @@ class Tooltip extends Component {
   }
 }
 
+export { Tooltip };
 export default (() => {
   const forwardRef = (props, ref) => <Tooltip {...props} innerRef={ref} />;
   forwardRef.displayName = 'Tooltip';

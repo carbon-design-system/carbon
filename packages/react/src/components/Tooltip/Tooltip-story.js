@@ -15,6 +15,7 @@ import {
   boolean,
 } from '@storybook/addon-knobs';
 import Tooltip from '../Tooltip';
+import { Tooltip as OGTooltip } from './Tooltip';
 import Button from '../Button';
 import { OverflowMenuVertical16 } from '@carbon/icons-react';
 import mdx from './Tooltip.mdx';
@@ -127,10 +128,10 @@ function UncontrolledTooltipExample() {
 
 export default {
   title: 'Tooltip',
+  component: OGTooltip,
   decorators: [withKnobs],
 
   parameters: {
-    component: Tooltip,
     docs: {
       page: mdx,
     },
