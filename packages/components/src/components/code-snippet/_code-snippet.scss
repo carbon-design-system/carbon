@@ -127,7 +127,6 @@
     // Windows, Firefox HCM Fix
     @media screen and (-ms-high-contrast: active),
       screen and (prefers-contrast) {
-      // `ButtonText` is a CSS2 system color to help improve colors in HCM
       outline: 2px solid transparent;
     }
   }
