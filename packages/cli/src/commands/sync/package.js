@@ -9,9 +9,6 @@
 
 const fs = require('fs-extra');
 
-const REPO_URL_BASE =
-  'https://github.com/carbon-design-system/carbon/tree/master';
-
 // This is our default set of keywords to include in each `package.json` packageJson
 const DEFAULT_KEYWORDS = [
   'ibm',
@@ -73,7 +70,11 @@ function run({ packagePaths }) {
   return Promise.all(
     packagePaths.map(
       async ({ packageJsonPath, packageJson, packageFolder }) => {
-        packageJson.repository = `${REPO_URL_BASE}/${packageFolder}`;
+        packageJson.repository = {
+          type: 'git',
+          url: 'https://github.com/carbon-design-system/carbon.git',
+          directory: packageFolder,
+        };
         packageJson.bugs =
           'https://github.com/carbon-design-system/carbon/issues';
         packageJson.license = 'Apache-2.0';
