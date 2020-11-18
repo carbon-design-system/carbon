@@ -300,6 +300,7 @@ class NumberInput extends Component {
       translateWithId: t,
       isMobile,
       size,
+      defaultValue, // eslint-disable-line
       ...other
     } = this.props;
 
