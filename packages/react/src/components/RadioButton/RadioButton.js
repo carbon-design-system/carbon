@@ -140,6 +140,7 @@ class RadioButton extends React.Component {
   }
 }
 
+export { RadioButton };
 export default (() => {
   const forwardRef = (props, ref) => <RadioButton {...props} innerRef={ref} />;
   forwardRef.displayName = 'RadioButton';
