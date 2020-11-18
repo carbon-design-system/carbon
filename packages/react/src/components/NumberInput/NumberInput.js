@@ -204,7 +204,10 @@ class NumberInput extends Component {
       this.state = {};
       return;
     }
-    let value = useControlledStateWithValue ? props.defaultValue : props.value;
+    let value =
+      useControlledStateWithValue || typeof props.defaultValue !== 'undefined'
+        ? props.defaultValue
+        : props.value;
     value = value === undefined ? 0 : value;
     if (props.min || props.min === 0) {
       value = Math.max(props.min, value);
