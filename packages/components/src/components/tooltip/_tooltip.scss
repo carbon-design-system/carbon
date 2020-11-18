@@ -368,7 +368,6 @@
   }
 
   .#{$prefix}--tooltip {
-    // @include box-shadow;
     @include reset;
 
     position: absolute;
@@ -380,7 +379,6 @@
     padding: $carbon--spacing-05;
     color: $inverse-01;
     word-wrap: break-word;
-    // background: $inverse-02;
     border-radius: rem(2px);
 
     // Windows, Firefox HCM Fix
