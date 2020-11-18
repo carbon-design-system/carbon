@@ -7,9 +7,9 @@
 
 const chalk = require('chalk');
 const util = require('util');
-const toHaveNoAxeViolations = require('./matchers/toHaveNoAxeViolations');
-const toHaveNoDAPViolations = require('./matchers/toHaveNoDAPViolations');
-const toHaveNoACViolations = require('./matchers/toHaveNoACViolations');
+const toHaveNoAxeViolations = require('../matchers/toHaveNoAxeViolations');
+const toHaveNoDAPViolations = require('../matchers/toHaveNoDAPViolations');
+const toHaveNoACViolations = require('../matchers/toHaveNoACViolations');
 
 // We can extend `expect` using custom matchers as defined by:
 // https://jest-bot.github.io/jest/docs/expect.html#expectextendmatchers
@@ -45,7 +45,7 @@ const consoleMethods = ['error', 'warn', process.env.CI && 'log'].filter(
 
 for (const methodName of consoleMethods) {
   const unexpectedConsoleCallStacks = [];
-  const patchedConsoleMethod = function (format, ...args) {
+  const patchedConsoleMethod = function(format, ...args) {
     const stack = new Error().stack;
     unexpectedConsoleCallStacks.push([
       stack.substr(stack.indexOf('\n') + 1),
@@ -79,7 +79,7 @@ function formatConsoleCallStack(unexpectedConsoleCallStacks, methodName) {
       `${message}\n` +
       `${stack
         .split('\n')
-        .map((line) => chalk.gray(line))
+        .map(line => chalk.gray(line))
         .join('\n')}`
   );
   const message = `Expected test not to call ${chalk.bold(
