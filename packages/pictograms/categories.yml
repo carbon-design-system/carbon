@@ -5,7 +5,7 @@ categories:
       - cloud--upload
       - crop
       - delete
-      - do--not
+      - do-not
       - download
       - download--01
       - download--02
@@ -59,37 +59,52 @@ categories:
       - amsterdam--windmill
       - austin
       - bangalore
+      - barcelona
       #    - basel
       - beijing--municipal
       - beijing--tower
-      - berlin--brandenburg--gate
-      - berlin--brandenburg #DEPRECATED: use berlin--brandenburg--gate instead
+      - berlin--brandenburg
+      - berlin--brandenburg-gate
       - berlin--cathedral
       - berlin--tower
+      - boston--zakim-bridge
+      - cairo--giza-plateau
+      - chicago
       - copenhagen--planetarium
       - copenhagen--snekkja
-      - dubai--palm--islands
+      - dubai--palm-islands
       - dubai--skyscraper
       - dublin--brewery
       - dublin--castle
+      - hamburg--philharmone
       - london
-      - london--big--ben
+      - london--big-ben
       - london--expanded--base
       - madrid--cathedral
       - madrid--skyscrapers
       - madrid--statue
       - melbourne
-      - mexico-city--angel--of--independence
-      - mexico-city--museo--soumaya
-      - milan--duomo--di--milano
+      - mexico-city--angel-of-independence
+      - mexico-city--museo-soumaya
+      - milan--duomo-di-milano
       - milan--skyscrapers
       - moscow
       - munich
       - nice
       - nyc--brooklyn
       - nyc--manhattan
+      - nyc--manhattan--01
+      - nyc--manhattan--02
       - nyc--manhattan--alt
+      - nyc--statue-of-liberty
+      - paris--arc-de-triomphe
+      - paris--louvre
+      - paris--notre-dame
+      - paris--pompidou-center
+      - prague
+      - prague--charles-bridge-tower
       #    - portland
+      - raleigh-nc
       - rome
       - san-francisco
       - san-francisco--fog
@@ -98,9 +113,9 @@ categories:
       - seattle
       #    - shanghai
       - singapore
-      #    - stockholm
-      - tel--aviv
-      - tokyo--cherry--blossom
+      - stockholm
+      - tel-aviv
+      - tokyo--cherry-blossom
       - tokyo--gates
       - tokyo--temple
       - tokyo--volcano
@@ -173,7 +188,7 @@ categories:
     members:
       - analyze
       - blockchain
-      - box-plot
+      - box--plot
       - chart--3D
       - chart--area
       - chart--bar
@@ -196,29 +211,30 @@ categories:
       - chart--stepper
       - chart--sunburst
       - chart--t-SNE
-      - circle-packing
+      - circle--packing
       - code--syntax
       - data--set
       - employee--insights
       - flow--chart
       - flow--chart--detail
       - heat--map
-      - heat-map--02
-      - math-curve
-      - population-diagram
+      - heat--map--01
+      - heat--map--02
+      - math--curve
+      - population--diagram
       - q-q-plot
       - rank
-      - relationship-diagram
+      - relationship--diagram
       - report
       - sample--file
-      - scatter-matrix
+      - scatter--matrix
       - secure--data
       - stem--leaf--plot
       - time--plot
       - tree--diagram
       - tree--map
       - user--analytics
-      - word-cloud
+      - word--cloud
   - name: Data Storage
     members:
       - archive
@@ -233,9 +249,10 @@ categories:
     members:
       - app--developer
       - application
-      - design--and--development--01
-      - design--and--development--02
+      - design-and-development--01
+      - design-and-development--02
       - feedback
+      - feedback--01
       - hills
       - idea
       - ideate
@@ -310,15 +327,20 @@ categories:
       - commercial--financing--01
       - commercial--financing--02
       - finance--strategy
+      - financial--consultant
+      - financial--gain
       - financial--networks
+      - financial--news
       - global--analytics
       - global--assets-and-recovery--01
       - global--assets-and-recovery--02
       - global--currency
       - global--exchange
+      - global--finance--euro
       - global--finance--network
-      - global--markets--bar
+      - global--finance--sterling
       - global--markets
+      - global--markets--bar
       - global--security
       - global--strategy
       - optimize--cash-flow--01
@@ -357,10 +379,13 @@ categories:
       - bee
       - enterprise--design--thinking
       - enterprise--design--thinking--alt
+      - enterprise--design--thinking--01
+      - enterprise--design--thinking--02
       - eye
       - ibm--ix
       - ibm--z
       - progress
+      - world--community--grid
   - name: Industry
     members:
       - agriculture
@@ -385,7 +410,7 @@ categories:
       - steel
       - telecom
       - tractor
-      - weather
+      - weather--01
       - wheat
       - wind--power
       - wine
@@ -396,7 +421,7 @@ categories:
       - connect
       - iot--munich
       - solve
-      - transform
+      - transform--01
   - name: Learning
     members:
       - intelligence
@@ -417,7 +442,7 @@ categories:
       - magnify
       - microorganisms
       - microscope
-      - mortar--and--pestle
+      - mortar-and-pestle
       - petri--culture
       - research
       - test--tubes
@@ -448,7 +473,7 @@ categories:
     members:
       - americas
       - asia--australia
-      - europe-africa
+      - europe--africa
       - globe
       - globe--locations
       - location
@@ -478,6 +503,9 @@ categories:
       - networking--06
       - private--network
       - private--network--01
+      - private--network--02
+      - private--network--03
+      - private--network--04
       - private--network--alt
       - private--network--alt--01
       - reset--hybrid--cloud
@@ -486,6 +514,7 @@ categories:
       - transactional--blockchain
       - transactional--trust
       - transform
+      - transform--02
   - name: People
     members:
       - advocate
@@ -540,28 +569,63 @@ categories:
       - trousers
   - name: Security
     members:
+      - advanced--fraud--protection
+      - advanced--threats
+      - anonymous--users
+      - application--security
+      - assets
+      - bug--virus--malware
+      - build--leadership--and--culture
+      - collaboration
+      - continuous--security
+      - data--security
+      - detect--and--stop--advancing--threats
+      - digital--id
+      - digital--trust
+      - endpoint--protection
       - firewall
+      - get--ahead--of--risk--and--compliance
+      - govern--users--and--identities
+      - high--risk--users
+      - identity--trust--assessment
       - lock
+      - lock--01
+      - lock--02
       - lock--alt
       - locked--network
+      - locked--network--01
+      - locked--network--02
       - locked--network--alt
+      - master--threat--hunting
+      - network--protection
+      - protect--critical--assets
+      - secure--hybrid--cloud
       - secure--profile
       - security
+      - security--as--a--service
+      - security--hygiene
+      - security--intelligence
       - security--shield
+      - strategy--and--risk
+      - threat--management
+      - tool--overload
+      - trusted--user
+      - unauthorized--user--access
+      - under--utilized--security
+      - unify--endpoint--management
       - unlock
+      - unlock--01
+      - unlock--02
       - unlock--alt
   - name: Status
     members:
       - question
       - warning
+      - warning--01
+      - warning--02
       - warning--alt
   - name: Strategy
     members:
-      - financial--consultant
-      - financial--gain
-      - financial--news
-      - global--finance--euro
-      - global--finance--sterling
       - innovate
       - presentation
       - presenter
@@ -607,7 +671,7 @@ categories:
       - meter
       - speedometer
       - time
-      - time-lapse
+      - time--lapse
   - name: Transportation
     members:
       - airplane
@@ -623,9 +687,9 @@ categories:
       - train
   - name: Watson
     members:
-      - alchemy--language--alphabet--a--expanded
       - alchemy--data--news
       - alchemy--language
+      - alchemy--language--alphabet--a--expanded
       - alchemy--vision
       - analyzes--data
       - concept--expansion
@@ -642,6 +706,7 @@ categories:
       - language--02
       - language--03
       - language--04
+      - language--05
       - language--translation
       - language--translation--alphabet--a--expanded
       - natural--language--classifier
@@ -659,7 +724,7 @@ categories:
       - vision
       - visual--insights
       - visual--recognition
-      - watson--avatar
+      - watson--logo
   - name: Weather
     members:
       - cloudy
@@ -687,4 +752,5 @@ categories:
       - temperature--low
       - tornado
       - weather
+      - weather--02
       - windy

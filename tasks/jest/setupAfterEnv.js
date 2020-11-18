@@ -9,6 +9,7 @@ const chalk = require('chalk');
 const util = require('util');
 const toHaveNoAxeViolations = require('./matchers/toHaveNoAxeViolations');
 const toHaveNoDAPViolations = require('./matchers/toHaveNoDAPViolations');
+const toHaveNoACViolations = require('./matchers/toHaveNoACViolations');
 
 // We can extend `expect` using custom matchers as defined by:
 // https://jest-bot.github.io/jest/docs/expect.html#expectextendmatchers
@@ -21,7 +22,11 @@ const toHaveNoDAPViolations = require('./matchers/toHaveNoDAPViolations');
 //
 // For more information, check out the docs here:
 // https://jestjs.io/docs/en/configuration.html#setupfilesafterenv-array
-expect.extend({ toHaveNoAxeViolations, toHaveNoDAPViolations });
+expect.extend({
+  toHaveNoAxeViolations,
+  toHaveNoDAPViolations,
+  toHaveNoACViolations,
+});
 
 // Have our test suite throw an error if one of the below console methods are
 // called when we are not expecting them. This is often helpful for React
