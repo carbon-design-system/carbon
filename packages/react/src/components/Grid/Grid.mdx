@@ -187,7 +187,7 @@ a `section`. Simililarly, we use the `as` prop on `Column` to change it from a
 `div` to an `article`.
 
 ```jsx
-import { Grid, Row, Column } from 'carbon-components'react;
+import { Grid, Row, Column } from 'carbon-components-react';
 
 function MyComponent() {
   return (
@@ -207,7 +207,7 @@ You can also provide a custom component to the `as` prop. This custom component
 should accept all props passed to it, like a class name for the column.
 
 ```jsx
-import { Grid, Row, Column } from 'carbon-components'react;
+import { Grid, Row, Column } from 'carbon-components-react';
 
 function Article({ children, ...rest }) {
   return <article {...rest}>{children}</article>;

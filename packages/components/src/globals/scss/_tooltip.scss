@@ -202,12 +202,6 @@
     opacity: 0;
     animation: none;
   }
-
-  &.#{$prefix}--btn--disabled.#{$prefix}--tooltip--a11y::before,
-  &.#{$prefix}--btn--disabled.#{$prefix}--tooltip--a11y::after,
-  &.#{$prefix}--btn--disabled .#{$prefix}--assistive-text {
-    display: none;
-  }
 }
 
 // Tooltip

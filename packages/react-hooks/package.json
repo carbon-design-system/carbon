@@ -1,11 +1,15 @@
 {
   "name": "@carbon/react-hooks",
   "private": true,
-  "version": "10.18.0-rc.0",
+  "version": "10.18.0",
   "license": "Apache-2.0",
   "main": "lib/index.js",
   "module": "es/index.js",
-  "repository": "https://github.com/carbon-design-system/carbon/tree/master/packages/react-hooks",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/carbon-design-system/carbon.git",
+    "directory": "packages/react-hooks"
+  },
   "bugs": "https://github.com/carbon-design-system/carbon/issues",
   "keywords": [
     "ibm",
@@ -39,7 +43,7 @@
     "autoprefixer": "^9.7.4",
     "babel-loader": "^8.1.0",
     "browserslist-config-carbon": "^10.5.0",
-    "carbon-components": "^10.24.0-rc.0",
+    "carbon-components": "^10.24.0",
     "css-loader": "^3.4.2",
     "node-sass": "^4.13.1",
     "postcss-loader": "^3.0.0",

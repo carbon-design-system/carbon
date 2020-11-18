@@ -81,15 +81,15 @@
   }
 
   .#{$prefix}--data-table tbody tr:hover {
-    background: $hover-field;
+    background: $hover-ui;
   }
 
   .#{$prefix}--data-table tbody tr:hover td,
   .#{$prefix}--data-table tbody tr:hover th {
     color: $text-01;
-    background: $hover-field;
-    border-top: 1px solid $hover-field;
-    border-bottom: 1px solid $hover-field;
+    background: $hover-ui;
+    border-top: 1px solid $hover-ui;
+    border-bottom: 1px solid $hover-ui;
   }
 
   .#{$prefix}--data-table th,
@@ -212,7 +212,7 @@
   .#{$prefix}--data-table--selected .#{$prefix}--overflow-menu,
   .#{$prefix}--data-table--selected .#{$prefix}--overflow-menu__trigger {
     &:hover {
-      background-color: $hover-field;
+      background-color: $hover-ui;
     }
   }
 
@@ -237,14 +237,14 @@
 
   .#{$prefix}--data-table--zebra
     tbody
-    tr:not(.#{$prefix}--parent-row):nth-child(even)
+    tr:not(.#{$prefix}--parent-row):nth-child(odd)
     td {
     border-bottom: 1px solid $ui-01;
   }
 
   .#{$prefix}--data-table--zebra
     tbody
-    tr:not(.#{$prefix}--parent-row):nth-child(odd)
+    tr:not(.#{$prefix}--parent-row):nth-child(even)
     td {
     background-color: $data-table-zebra-color;
     border-top: 1px solid $data-table-zebra-color;
@@ -255,9 +255,9 @@
     tbody
     tr:not(.#{$prefix}--parent-row):hover
     td {
-    background-color: $hover-field;
-    border-top: 1px solid $hover-field;
-    border-bottom: 1px solid $hover-field;
+    background-color: $hover-ui;
+    border-top: 1px solid $hover-ui;
+    border-bottom: 1px solid $hover-ui;
   }
 
   //----------------------------------------------------------------------------
