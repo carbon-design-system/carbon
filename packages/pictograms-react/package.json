@@ -32,8 +32,12 @@
     "build": "yarn clean && node tasks/build.js",
     "clean": "rimraf es lib umd"
   },
+  "peerDependencies": {
+    "react": ">=16"
+  },
   "dependencies": {
-    "@carbon/icon-helpers": "^10.9.0"
+    "@carbon/icon-helpers": "^10.9.0",
+    "prop-types": "^15.7.2"
   },
   "devDependencies": {
     "@carbon/icon-build-helpers": "^0.11.0",
