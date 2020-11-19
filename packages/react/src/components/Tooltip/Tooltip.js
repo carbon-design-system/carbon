@@ -244,6 +244,7 @@ class Tooltip extends Component {
    * @private
    */
   _tooltipId =
+    this.props.id ||
     this.props.tooltipId ||
     `__carbon-tooltip_${Math.random().toString(36).substr(2)}`;
 
@@ -506,9 +507,9 @@ class Tooltip extends Component {
               this._tooltipEl = node;
             }}>
             <div
-              id={this._tooltipId}
               className={tooltipClasses}
               {...other}
+              id={this._tooltipId}
               data-floating-menu-direction={direction}
               onMouseOver={this.handleMouse}
               onMouseOut={this.handleMouse}
