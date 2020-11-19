@@ -6,18 +6,30 @@
  */
 
 import React from 'react';
-import SearchFilterButton from '../SearchFilterButton';
 import { mount } from 'enzyme';
 import { Filter16 } from '@carbon/icons-react';
 import { settings } from 'carbon-components';
 
 const { prefix } = settings;
 
-describe('SearchFilterButton', () => {
-  const wrapper = mount(<SearchFilterButton labelText="testlabel" />);
+describe('[Deprecated] SearchFilterButton', () => {
+  let SearchFilterButton;
+  let wrapper;
+
+  beforeEach(() => {
+    jest.mock('warning', () => {
+      return jest.fn();
+    });
+    SearchFilterButton = require('../SearchFilterButton').default;
+    wrapper = mount(<SearchFilterButton labelText="testlabel" />);
+  });
 
   describe('buttons', () => {
-    const btn = wrapper.find('button');
+    let btn;
+
+    beforeEach(() => {
+      btn = wrapper.find('button');
+    });
 
     it('should have type="button"', () => {
       const type = btn.instance().getAttribute('type');

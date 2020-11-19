@@ -69,7 +69,7 @@ describe('Loading', () => {
   });
 
   describe('Success state should render properly', () => {
-    const wrapper = mount(<InlineLoading success />);
+    const wrapper = mount(<InlineLoading status="finished" />);
 
     it('should render the success animation', () => {
       expect(
@@ -85,7 +85,7 @@ describe('Loading', () => {
     it('should call the onSuccess function after a delay', (done) => {
       mount(
         <InlineLoading
-          success
+          status="finished"
           onSuccess={() => {
             done();
           }}

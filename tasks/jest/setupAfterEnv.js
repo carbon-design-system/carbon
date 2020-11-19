@@ -9,6 +9,7 @@ const chalk = require('chalk');
 const util = require('util');
 const toHaveNoAxeViolations = require('./matchers/toHaveNoAxeViolations');
 const toHaveNoDAPViolations = require('./matchers/toHaveNoDAPViolations');
+const toHaveNoACViolations = require('./matchers/toHaveNoACViolations');
 
 // We can extend `expect` using custom matchers as defined by:
 // https://jest-bot.github.io/jest/docs/expect.html#expectextendmatchers
@@ -21,7 +22,11 @@ const toHaveNoDAPViolations = require('./matchers/toHaveNoDAPViolations');
 //
 // For more information, check out the docs here:
 // https://jestjs.io/docs/en/configuration.html#setupfilesafterenv-array
-expect.extend({ toHaveNoAxeViolations, toHaveNoDAPViolations });
+expect.extend({
+  toHaveNoAxeViolations,
+  toHaveNoDAPViolations,
+  toHaveNoACViolations,
+});
 
 // Have our test suite throw an error if one of the below console methods are
 // called when we are not expecting them. This is often helpful for React
@@ -40,7 +45,7 @@ const consoleMethods = ['error', 'warn', process.env.CI && 'log'].filter(
 
 for (const methodName of consoleMethods) {
   const unexpectedConsoleCallStacks = [];
-  const newMethod = function (format, ...args) {
+  const patchedConsoleMethod = function (format, ...args) {
     const stack = new Error().stack;
     unexpectedConsoleCallStacks.push([
       stack.substr(stack.indexOf('\n') + 1),
@@ -48,31 +53,38 @@ for (const methodName of consoleMethods) {
     ]);
   };
 
-  console[methodName] = newMethod;
+  console[methodName] = patchedConsoleMethod;
 
   global.beforeEach(() => {
+    if (unexpectedConsoleCallStacks.length > 0) {
+      formatConsoleCallStack(unexpectedConsoleCallStacks, methodName);
+    }
     unexpectedConsoleCallStacks.length = 0;
   });
 
   global.afterEach(() => {
-    if (console[methodName] !== newMethod) {
+    if (console[methodName] !== patchedConsoleMethod) {
       throw new Error(`Test did not restore a mock for console.${methodName}`);
     }
 
     if (unexpectedConsoleCallStacks.length > 0) {
-      const messages = unexpectedConsoleCallStacks.map(
-        ([stack, message]) =>
-          `${message}\n` +
-          `${stack
-            .split('\n')
-            .map((line) => chalk.gray(line))
-            .join('\n')}`
-      );
-      const message = `Expected test not to call ${chalk.bold(
-        `console.${methodName}()`
-      )}`;
-
-      throw new Error(`${message}\n\n${messages.join('\n\n')}`);
+      formatConsoleCallStack(unexpectedConsoleCallStacks, methodName);
     }
   });
+}
+
+function formatConsoleCallStack(unexpectedConsoleCallStacks, methodName) {
+  const messages = unexpectedConsoleCallStacks.map(
+    ([stack, message]) =>
+      `${message}\n` +
+      `${stack
+        .split('\n')
+        .map((line) => chalk.gray(line))
+        .join('\n')}`
+  );
+  const message = `Expected test not to call ${chalk.bold(
+    `console.${methodName}()`
+  )}`;
+
+  throw new Error(`${message}\n\n${messages.join('\n\n')}`);
 }

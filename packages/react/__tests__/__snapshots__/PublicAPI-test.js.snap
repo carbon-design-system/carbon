@@ -190,6 +190,8 @@ Map {
             "danger",
             "ghost",
             "danger--primary",
+            "danger--ghost",
+            "danger--tertiary",
             "tertiary",
           ],
         ],
@@ -2450,6 +2452,8 @@ Map {
             "danger",
             "ghost",
             "danger--primary",
+            "danger--ghost",
+            "danger--tertiary",
             "tertiary",
           ],
         ],
@@ -2554,6 +2558,8 @@ Map {
             "danger",
             "ghost",
             "danger--primary",
+            "danger--ghost",
+            "danger--tertiary",
             "tertiary",
           ],
         ],
@@ -3366,6 +3372,8 @@ Map {
             "danger",
             "ghost",
             "danger--primary",
+            "danger--ghost",
+            "danger--tertiary",
             "tertiary",
           ],
         ],
@@ -4165,6 +4173,9 @@ Map {
       "requireTitle": Object {
         "type": "bool",
       },
+      "title": Object {
+        "type": "string",
+      },
       "wrapperClassName": Object {
         "type": "string",
       },
@@ -4500,6 +4511,9 @@ Map {
         "type": "bool",
       },
       "onChange": Object {
+        "type": "func",
+      },
+      "onKeyDown": Object {
         "type": "func",
       },
       "placeHolderText": Object {
@@ -4970,14 +4984,11 @@ Map {
   },
   "Tab" => Object {
     "defaultProps": Object {
-      "href": "#",
       "label": "provide a label",
       "onClick": [Function],
       "onKeyDown": [Function],
-      "renderContent": [Function],
       "role": "presentation",
       "selected": false,
-      "tabIndex": 0,
     },
     "propTypes": Object {
       "className": Object {
@@ -5022,7 +5033,9 @@ Map {
         "isRequired": true,
         "type": "bool",
       },
-      "tabIndex": [Function],
+      "tabIndex": Object {
+        "type": "number",
+      },
     },
   },
   "TabContent" => Object {
@@ -5898,7 +5911,6 @@ Map {
   "TimePickerSelect" => Object {
     "defaultProps": Object {
       "disabled": false,
-      "hideLabel": true,
       "iconDescription": "open list of options",
       "inline": true,
     },
@@ -6397,6 +6409,15 @@ Map {
         "type": "string",
       },
       "inline": [Function],
+      "size": Object {
+        "args": Array [
+          Array [
+            "sm",
+            "xl",
+          ],
+        ],
+        "type": "oneOf",
+      },
     },
   },
   "FileUploaderSkeleton" => Object {

@@ -77,6 +77,7 @@ exports[`DataTable.TableToolbarSearch should render 1`] = `
           className="bx--search-input"
           id="custom-id"
           onChange={[Function]}
+          onKeyDown={[Function]}
           placeholder="Filter table"
           role="searchbox"
           tabIndex="-1"

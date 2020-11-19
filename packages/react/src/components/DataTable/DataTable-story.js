@@ -173,7 +173,7 @@ export const WithOverflowMenu = () => (
                   <TableCell key={cell.id}>{cell.value}</TableCell>
                 ))}
                 <TableCell className="bx--table-column-menu">
-                  <OverflowMenu flipped>
+                  <OverflowMenu light flipped>
                     <OverflowMenuItem>Action 1</OverflowMenuItem>
                     <OverflowMenuItem>Action 2</OverflowMenuItem>
                     <OverflowMenuItem>Action 3</OverflowMenuItem>
@@ -207,7 +207,7 @@ export const WithToolbar = () => (
         <TableToolbar {...getToolbarProps()} aria-label="data table toolbar">
           <TableToolbarContent>
             <TableToolbarSearch onChange={onInputChange} />
-            <TableToolbarMenu>
+            <TableToolbarMenu light>
               <TableToolbarAction
                 onClick={action('Action 1 Click')}
                 primaryFocus>
