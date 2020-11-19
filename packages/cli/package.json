@@ -1,7 +1,7 @@
 {
   "name": "@carbon/cli",
   "description": "Task automation for working with the Carbon Design System",
-  "version": "10.15.0",
+  "version": "10.16.0-rc.0",
   "license": "Apache-2.0",
   "bin": {
     "carbon-cli": "./bin/carbon-cli.js"
@@ -23,7 +23,7 @@
     "access": "public"
   },
   "dependencies": {
-    "@carbon/cli-reporter": "^10.3.0",
+    "@carbon/cli-reporter": "^10.4.0-rc.0",
     "@octokit/plugin-retry": "^2.2.0",
     "@octokit/plugin-throttling": "^2.6.0",
     "@octokit/rest": "^16.28.1",
@@ -34,7 +34,7 @@
     "fs-extra": "^8.0.1",
     "inquirer": "^6.4.1",
     "prettier": "^2.1.0",
-    "prettier-config-carbon": "^0.4.0",
+    "prettier-config-carbon": "^0.5.0-rc.0",
     "progress-estimator": "^0.2.2",
     "remark": "^10.0.1",
     "yargs": "^15.1.0"
