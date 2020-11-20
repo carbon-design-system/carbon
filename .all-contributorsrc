@@ -628,6 +628,15 @@
       "contributions": [
         "code"
       ]
+    },
+    {
+      "login": "jpbyrne",
+      "name": "Jonathan Byrne",
+      "avatar_url": "https://avatars0.githubusercontent.com/u/2652501?v=4",
+      "profile": "https://github.com/jpbyrne",
+      "contributions": [
+        "bug"
+      ]
     }
   ],
   "commitConvention": "none"
