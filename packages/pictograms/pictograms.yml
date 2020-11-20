@@ -3018,14 +3018,6 @@
     - industry
     - electricity
     - tower
-- name: prague
-  friendly_name: Prague
-  aliases:
-    - Prague
-    - Czech Republic
-    - Czechia
-    - city
-    - cities
 - name: prague--charles-bridge-tower
   friendly_name: Prague Charles Bridge Tower
   aliases:
