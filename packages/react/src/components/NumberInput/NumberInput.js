@@ -170,7 +170,7 @@ class NumberInput extends Component {
     translateWithId: (id) => defaultTranslations[id],
   };
 
-  static getDerivedStateFromProps({ min, max, value = 0 }, state) {
+  static getDerivedStateFromProps({ min, max, value }, state) {
     const { prevValue } = state;
 
     if (useControlledStateWithValue && value === '' && prevValue !== '') {
@@ -204,7 +204,10 @@ class NumberInput extends Component {
       this.state = {};
       return;
     }
-    let value = useControlledStateWithValue ? props.defaultValue : props.value;
+    let value =
+      useControlledStateWithValue || typeof props.defaultValue !== 'undefined'
+        ? props.defaultValue
+        : props.value;
     value = value === undefined ? 0 : value;
     if (props.min || props.min === 0) {
       value = Math.max(props.min, value);
@@ -300,6 +303,7 @@ class NumberInput extends Component {
       translateWithId: t,
       isMobile,
       size,
+      defaultValue, // eslint-disable-line
       ...other
     } = this.props;
 
