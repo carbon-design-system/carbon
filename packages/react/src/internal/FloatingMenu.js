@@ -61,10 +61,8 @@ export const DIRECTION_BOTTOM = 'bottom';
 const hasChangeInOffset = (oldMenuOffset = {}, menuOffset = {}) => {
   if (typeof oldMenuOffset !== typeof menuOffset) {
     return true;
-  } else if (
-    Object(menuOffset) === menuOffset &&
-    typeof menuOffset !== 'function'
-  ) {
+  }
+  if (Object(menuOffset) === menuOffset && typeof menuOffset !== 'function') {
     return (
       oldMenuOffset.top !== menuOffset.top ||
       oldMenuOffset.left !== menuOffset.left
