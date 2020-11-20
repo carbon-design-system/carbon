@@ -66,6 +66,10 @@
 @mixin focus-outline($type: 'border') {
   @if ($type == 'border') {
     outline: 1px solid $focus;
+
+    @media screen and (prefers-contrast) {
+      outline-style: dotted;
+    }
   }
 
   @if ($type == 'blurred') {
@@ -76,16 +80,28 @@
   @if ($type == 'outline') {
     outline: 2px solid $focus;
     outline-offset: -2px;
+
+    @media screen and (prefers-contrast) {
+      outline-style: dotted;
+    }
   }
 
   @if ($type == 'outline-compat') {
     box-sizing: border-box;
     border: 2px solid $focus;
+
+    @media screen and (prefers-contrast) {
+      border-style: dotted;
+    }
   }
 
   @if ($type == 'invalid') {
     outline: 2px solid $support-01;
     outline-offset: -2px;
+
+    @media screen and (prefers-contrast) {
+      outline-style: dotted;
+    }
   }
 
   @if ($type == 'reset') {
