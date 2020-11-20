@@ -94,12 +94,6 @@
     - Alchemy
     - language
     - text
-- name: alchemy--language--alphabet--a--expanded
-  friendly_name: Alchemy language alphabet a expanded
-  aliases:
-    - Alchemy language alphabet a expanded
-    - language
-    - alphabet
 - name: alchemy--vision
   friendly_name: AlchemyVision®
   aliases:
@@ -311,15 +305,6 @@
     - Beijing
     - China
     - tower
-    - city
-    - cities
-- name: berlin--brandenburg
-  friendly_name: Berlin Brandenburg
-  aliases:
-    - Berlin Brandenburg
-    - Berlin
-    - Germany
-    - Brandenburg
     - city
     - cities
 - name: berlin--brandenburg-gate
@@ -1340,11 +1325,6 @@
     - door handle
     - door knob
     - lockset
-- name: download
-  friendly_name: Download 01
-  aliases:
-    - download
-    - download 01
 - name: download--01
   friendly_name: Download 01
   aliases:
@@ -1354,11 +1334,6 @@
   friendly_name: Download 02
   aliases:
     - download alt
-    - download 02
-    - download
-- name: download--alt
-  friendly_name: Download 02
-  aliases:
     - download 02
     - download
 - name: dubai--palm-islands
@@ -1460,14 +1435,6 @@
   aliases:
     - engine
     - motor
-- name: enterprise--design--thinking
-  friendly_name: Enterprise design thinking 01
-  aliases:
-    - enterprise design thinking 01
-    - enterprise design thinking
-    - design thinking
-    - design
-    - EDT
 - name: enterprise--design--thinking--01
   friendly_name: Enterprise design thinking 01
   aliases:
@@ -1477,14 +1444,6 @@
     - design
     - EDT
 - name: enterprise--design--thinking--02
-  friendly_name: Enterprise design thinking 02
-  aliases:
-    - enterprise design thinking 02
-    - enterprise design thinking
-    - design thinking
-    - design
-    - EDT
-- name: enterprise--design--thinking--alt
   friendly_name: Enterprise design thinking 02
   aliases:
     - enterprise design thinking 02
@@ -1542,14 +1501,6 @@
     - expand vert
     - expand
     - vertical
-- name: export
-  friendly_name: Export 01
-  aliases:
-    - export 01
-    - export
-    - send
-    - ship
-    - transmit
 - name: export--01
   friendly_name: Export 01
   aliases:
@@ -1559,14 +1510,6 @@
     - ship
     - tranmit
 - name: export--02
-  friendly_name: Export 02
-  aliases:
-    - export 02
-    - export
-    - send
-    - ship
-    - transmit
-- name: export--alt
   friendly_name: Export 02
   aliases:
     - export 02
@@ -1619,12 +1562,6 @@
   aliases:
     - factory
     - manufacturing
-- name: farm
-  friendly_name: Farm
-  aliases:
-    - farm
-    - rural
-    - landscape
 - name: farm--01
   friendly_name: Farm 01
   aliases:
@@ -1648,13 +1585,6 @@
     - water
     - spigot
     - plumbing
-- name: feedback
-  friendly_name: Feedback
-  aliases:
-    - feedback
-    - response
-    - iterate
-    - results
 - name: feedback--01
   friendly_name: Feedback 01
   aliases:
@@ -2079,15 +2009,6 @@
   aliases:
     - heart health
     - heart
-- name: heat--map
-  friendly_name: Heat map 01
-  aliases:
-    - heat map 01
-    - heat map
-    - heat
-    - chart
-    - data analytics
-    - analytics
 - name: heat--map--01
   friendly_name: Heat map 01
   aliases:
@@ -2186,10 +2107,6 @@
   aliases:
     - IBM iX®
     - IBM
-- name: ibm--watson
-  friendly_name: IBM Watson
-  aliases:
-    - ibm watson
 - name: ibm--z
   friendly_name: IBM Z®
   aliases:
@@ -2309,12 +2226,6 @@
     - data
     - watson
     - AI
-- name: language
-  friendly_name: Language 01
-  aliases:
-    - language 01
-    - language
-    - watson
 - name: language--01
   friendly_name: Language 01
   aliases:
@@ -2352,13 +2263,6 @@
     - language
     - translation
     - watson
-- name: language--translation--alphabet--a--expanded
-  friendly_name: Language translation alphabet a expanded
-  aliases:
-    - language translation alphabet a expanded
-    - language
-    - translation
-    - watson
 - name: launch
   friendly_name: Launch
   aliases:
@@ -2388,12 +2292,6 @@
   friendly_name: Location
   aliases:
     - location
-- name: lock
-  friendly_name: Lock 01
-  aliases:
-    - lock 01
-    - lock
-    - security
 - name: lock--01
   friendly_name: Lock 01
   aliases:
@@ -2405,19 +2303,6 @@
   aliases:
     - lock 02
     - lock
-    - security
-- name: lock--alt
-  friendly_name: Lock 02
-  aliases:
-    - lock 02
-    - lock
-    - security
-- name: locked--network
-  friendly_name: Locked Network 01
-  aliases:
-    - locked network 01
-    - locked network
-    - network
     - security
 - name: locked--network--01
   friendly_name: Locked Network 01
@@ -2433,13 +2318,6 @@
     - locked
     - network
     - security
-- name: locked--network--alt
-  friendly_name: Locked Network 02
-  aliases:
-    - locked network 02
-    - locked network
-    - network
-    - security
 - name: london
   friendly_name: London
   aliases:
@@ -2452,13 +2330,6 @@
     - london big ben
     - london
     - big ben
-    - cities
-    - city
-- name: london--expanded--base
-  friendly_name: London expanded base
-  aliases:
-    - London expanded base
-    - London
     - cities
     - city
 - name: love
@@ -2861,15 +2732,6 @@
     - Brooklyn
     - city
     - cities
-- name: nyc--manhattan
-  friendly_name: NYC Manhattan 01
-  aliases:
-    - NYC Manhattan 01
-    - NYC Manhattan
-    - NYC
-    - Manhattan
-    - city
-    - cities
 - name: nyc--manhattan--01
   friendly_name: NYC Manhattan 01
   aliases:
@@ -2880,15 +2742,6 @@
     - city
     - cities
 - name: nyc--manhattan--02
-  friendly_name: NYC Manhattan 02
-  aliases:
-    - NYC Manhattan alt
-    - NYC Manhattan
-    - NYC
-    - Manhattan
-    - city
-    - cities
-- name: nyc--manhattan--alt
   friendly_name: NYC Manhattan 02
   aliases:
     - NYC Manhattan alt
@@ -3165,14 +3018,6 @@
     - industry
     - electricity
     - tower
-- name: prague
-  friendly_name: Prague
-  aliases:
-    - Prague
-    - Czech Republic
-    - Czechia
-    - city
-    - cities
 - name: prague--charles-bridge-tower
   friendly_name: Prague Charles Bridge Tower
   aliases:
@@ -3222,13 +3067,6 @@
     - electronics
     - office equipment
     - office
-- name: private--network
-  friendly_name: Private network 01
-  aliases:
-    - private network 01
-    - private network
-    - private
-    - network
 - name: private--network--01
   friendly_name: Private network 01
   aliases:
@@ -3251,20 +3089,6 @@
     - private
     - network
 - name: private--network--04
-  friendly_name: Private network 04
-  aliases:
-    - private network 04
-    - private network
-    - private
-    - network
-- name: private--network--alt
-  friendly_name: Private network 03
-  aliases:
-    - private network 03
-    - private network
-    - private
-    - network
-- name: private--network--alt--01
   friendly_name: Private network 04
   aliases:
     - private network 04
@@ -3518,12 +3342,6 @@
     - Sao Paulo
     - city
     - cities
-- name: sao-paulo--expanded--base
-  friendly_name: Sao Paulo expanded base
-  aliases:
-    - Sao Paulo
-    - city
-    - cities
 - name: satellite
   friendly_name: Satellite
   aliases:
@@ -3737,13 +3555,6 @@
 - name: speech
   friendly_name: Speech
   aliases:
-    - speech
-    - watson
-    - AI
-- name: speech--alphabet--a--expanded
-  friendly_name: Speech alphabet a expanded
-  aliases:
-    - speech alphabet a expanded
     - speech
     - watson
     - AI
@@ -4215,12 +4026,6 @@
   friendly_name: Transactional trust
   aliases:
     - transactional trust
-- name: transform
-  friendly_name: Transform
-  aliases:
-    - transform
-    - networking
-    - network
 - name: transform--01
   friendly_name: Transform 01
   aliases:
@@ -4320,12 +4125,6 @@
     - university
     - education
     - college
-- name: unlock
-  friendly_name: Unlock 01
-  aliases:
-    - unlock 01
-    - unlock
-    - security
 - name: unlock--01
   friendly_name: Unlock 01
   aliases:
@@ -4338,28 +4137,12 @@
     - unlock 02
     - unlock
     - security
-- name: unlock--alt
-  friendly_name: Unlock 02
-  aliases:
-    - unlock 02
-    - unlock
-    - security
-- name: upload
-  friendly_name: Upload 01
-  aliases:
-    - upload 01
-    - upload
 - name: upload--01
   friendly_name: Upload 01
   aliases:
     - upload 01
     - upload
 - name: upload--02
-  friendly_name: Upload 02
-  aliases:
-    - upload 02
-    - upload
-- name: upload--alt
   friendly_name: Upload 02
   aliases:
     - upload 02
@@ -4416,12 +4199,6 @@
     - vancouver
     - city
     - cities
-- name: video
-  friendly_name: Video 01
-  aliases:
-    - video 01
-    - video
-    - controls
 - name: video--01
   friendly_name: Video 01
   aliases:
@@ -4429,12 +4206,6 @@
     - video
     - controls
 - name: video--02
-  friendly_name: Video 02
-  aliases:
-    - video 02
-    - video
-    - controls
-- name: video--alt
   friendly_name: Video 02
   aliases:
     - video 02
@@ -4479,13 +4250,6 @@
     - recognition
     - watson
     - AI
-- name: warning
-  friendly_name: Warning 01
-  aliases:
-    - warning 01
-    - warning
-    - alert
-    - status
 - name: warning--01
   friendly_name: Warning 01
   aliases:
@@ -4494,13 +4258,6 @@
     - alert
     - status
 - name: warning--02
-  friendly_name: Warning 02
-  aliases:
-    - warning 02
-    - warning
-    - alert
-    - status
-- name: warning--alt
   friendly_name: Warning 02
   aliases:
     - warning 02
@@ -4543,16 +4300,6 @@
 - name: weather
   friendly_name: Weather
   aliases:
-    - weather
-- name: weather--01
-  friendly_name: Weather 01
-  aliases:
-    - weather 01
-    - weather
-- name: weather--02
-  friendly_name: Weather 02
-  aliases:
-    - weather 02
     - weather
 - name: web--developer
   friendly_name: Web developer
