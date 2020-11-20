@@ -2,6 +2,22 @@
   "name": "jest-config-carbon",
   "private": true,
   "description": "Jest configuration and preset for Carbon",
+  "version": "0.0.0",
+  "license": "Apache-2.0",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/carbon-design-system/carbon.git",
+    "directory": "config/jest-config-carbon"
+  },
+  "bugs": "https://github.com/carbon-design-system/carbon/issues",
+  "keywords": [
+    "ibm",
+    "carbon",
+    "carbon-design-system",
+    "components",
+    "react"
+  ],
   "dependencies": {
     "@babel/core": "^7.10.0",
     "@babel/plugin-proposal-class-properties": "^7.7.4",
@@ -20,21 +36,5 @@
     "enzyme-adapter-react-16": "^1.14.0",
     "enzyme-to-json": "^3.3.5",
     "jest-circus": "^26.0.1"
-  },
-  "version": "0.0.0",
-  "license": "Apache-2.0",
-  "main": "index.js",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/carbon-design-system/carbon.git",
-    "directory": "config/jest-config-carbon"
-  },
-  "bugs": "https://github.com/carbon-design-system/carbon/issues",
-  "keywords": [
-    "ibm",
-    "carbon",
-    "carbon-design-system",
-    "components",
-    "react"
-  ]
+  }
 }
