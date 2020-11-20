@@ -82,6 +82,11 @@ TableSelectRow.propTypes = {
   name: PropTypes.string.isRequired,
 
   /**
+   * Provide an optional hook that is called each time the input is updated
+   */
+  onChange: PropTypes.func,
+
+  /**
    * Provide a handler to listen to when a user initiates a selection request
    */
   onSelect: PropTypes.func.isRequired,
