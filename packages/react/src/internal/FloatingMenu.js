@@ -88,8 +88,8 @@ const getFloatingPosition = ({
   refPosition = {},
   offset = {},
   direction = DIRECTION_BOTTOM,
-  scrollX = 0,
-  scrollY = 0,
+  scrollX: pageXOffset = 0,
+  scrollY: pageYOffset = 0,
   container,
 }) => {
   const {
@@ -98,17 +98,12 @@ const getFloatingPosition = ({
     right: refRight = 0,
     bottom: refBottom = 0,
   } = refPosition;
-  const relativeDiff =
-    container.position !== 'static'
-      ? {
-          top: container.rect.top,
-          left: container.rect.left,
-        }
-      : {
-          top: 0,
-          left: 0,
-        };
-
+  const scrollX = container.position === 'sticky' ? 0 : pageXOffset;
+  const scrollY = container.position === 'sticky' ? 0 : pageYOffset;
+  const relativeDiff = {
+    top: container.position !== 'static' ? container.rect.top : 0,
+    left: container.position !== 'static' ? container.rect.left : 0,
+  };
   const { width, height } = menuSize;
   const { top = 0, left = 0 } = offset;
   const refCenterHorizontal = (refLeft + refRight) / 2;
