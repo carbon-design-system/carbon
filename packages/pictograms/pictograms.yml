@@ -4297,15 +4297,9 @@
     - logo
     - watson
     - avatar
-- name: weather--01
-  friendly_name: Weather 01
+- name: weather
+  friendly_name: Weather
   aliases:
-    - weather 01
-    - weather
-- name: weather--02
-  friendly_name: Weather 02
-  aliases:
-    - weather 02
     - weather
 - name: web--developer
   friendly_name: Web developer

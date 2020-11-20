@@ -391,7 +391,6 @@ categories:
       - steel
       - telecom
       - tractor
-      - weather--01
       - wheat
       - wind--power
       - wine
@@ -715,5 +714,5 @@ categories:
       - temperature--high
       - temperature--low
       - tornado
-      - weather--02
+      - weather
       - windy
