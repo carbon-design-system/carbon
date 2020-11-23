@@ -22074,23 +22074,9 @@ Pagination styles
 
 ```scss
 @mixin pagination() {
-  .#{$prefix}--data-table-container + .#{$prefix}--pagination {
-    border-top: 0;
-  }
-
   .#{$prefix}--pagination {
     @include reset;
     @include type-style('body-short-01');
-
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-
-    width: 100%;
-    min-height: rem(48px);
-    overflow-x: auto;
-    background-color: $ui-01;
-    border-top: 1px solid $ui-03;
 
     @include carbon--breakpoint('md') {
       overflow: initial;
@@ -22108,46 +22094,64 @@ Pagination styles
         display: initial;
       }
     }
-  }
 
-  .#{$prefix}--pagination .#{$prefix}--select {
-    align-items: center;
-    height: 100%;
-  }
-
-  .#{$prefix}--pagination .#{$prefix}--select-input--inline__wrapper {
     display: flex;
-    height: 100%;
-  }
+    align-items: center;
+    justify-content: space-between;
 
-  .#{$prefix}--pagination .#{$prefix}--select-input {
-    @include type-style('body-short-01');
+    width: 100%;
+    min-height: rem(48px);
+    overflow-x: auto;
+    background-color: $ui-01;
+    border-top: 1px solid $ui-03;
 
-    width: auto;
-    min-width: auto;
-    height: rem(48px);
-    padding: 0 2.25rem 0 $spacing-05;
-  }
+    .#{$prefix}--data-table-container + & {
+      border-top: 0;
+    }
 
-  .#{$prefix}--pagination .#{$prefix}--select-input:hover {
-    background: $hover-ui;
-  }
+    .#{$prefix}--pagination__control-buttons {
+      flex-shrink: 0;
+    }
 
-  .#{$prefix}--pagination .#{$prefix}--select__arrow {
-    top: 50%;
-    transform: translate(-0.5rem, -50%);
-  }
+    .#{$prefix}--select {
+      align-items: center;
+      height: 100%;
+    }
 
-  .#{$prefix}--pagination
-    .#{$prefix}--select__item-count
     .#{$prefix}--select-input {
-    border-right: $spacing-4xs solid $ui-03;
-  }
+      @include type-style('body-short-01');
 
-  .#{$prefix}--pagination
-    .#{$prefix}--select__page-number
-    .#{$prefix}--select-input {
-    border-left: 1px solid $ui-03;
+      width: auto;
+      min-width: auto;
+      height: rem(48px);
+      padding: 0 2.25rem 0 $spacing-05;
+
+      &:hover {
+        background: $hover-ui;
+      }
+
+      &--inline__wrapper {
+        display: flex;
+        height: 100%;
+      }
+    }
+
+    .#{$prefix}--select__arrow {
+      top: 50%;
+      transform: translate(-0.5rem, -50%);
+    }
+
+    .#{$prefix}--select__item-count {
+      .#{$prefix}--select-input {
+        border-right: $spacing-4xs solid $ui-03;
+      }
+    }
+
+    .#{$prefix}--select__page-number {
+      .#{$prefix}--select-input {
+        border-left: 1px solid $ui-03;
+      }
+    }
   }
 
   .#{$prefix}--pagination__left,
@@ -22155,40 +22159,44 @@ Pagination styles
     display: flex;
     align-items: center;
     height: rem(48px);
-  }
 
-  .#{$prefix}--pagination__left > .#{$prefix}--form-item,
-  .#{$prefix}--pagination__right > .#{$prefix}--form-item {
-    height: 100%;
-  }
+    > .#{$prefix}--form-item {
+      height: 100%;
+    }
 
-  .#{$prefix}--pagination__left .#{$prefix}--pagination__text,
-  .#{$prefix}--pagination__right .#{$prefix}--pagination__text {
-    white-space: nowrap;
-  }
-
-  .#{$prefix}--pagination__left .#{$prefix}--pagination__text {
-    margin-right: rem(1px);
-  }
-
-  .#{$prefix}--pagination__right .#{$prefix}--pagination__text {
-    margin-right: 1rem;
-    margin-left: rem(1px);
-  }
-
-  .#{$prefix}--pagination__left {
-    padding: 0 $carbon--spacing-05;
+    .#{$prefix}--pagination__text {
+      white-space: nowrap;
+    }
   }
 
   .#{$prefix}--pagination__text {
     @include carbon--breakpoint('md') {
       display: inline-block;
     }
+
+    margin-left: $carbon--spacing-05;
+    overflow: hidden;
+    color: $text-02;
+    text-overflow: ellipsis;
+
+    .#{$prefix}--pagination__left & {
+      margin-right: rem(1px);
+    }
+
+    .#{$prefix}--pagination__right & {
+      margin-right: 1rem;
+      margin-left: rem(1px);
+    }
+
+    // Skeleton state
+    .#{$prefix}--pagination.#{$prefix}--skeleton & {
+      margin-right: 1rem;
+      margin-bottom: 0;
+    }
   }
 
-  span.#{$prefix}--pagination__text {
-    margin-left: $carbon--spacing-05;
-    color: $text-02;
+  .#{$prefix}--pagination__left {
+    padding: 0 $carbon--spacing-05;
   }
 
   .#{$prefix}--pagination__button,
@@ -22244,12 +22252,6 @@ Pagination styles
     border-color: $ui-03;
     cursor: not-allowed;
     fill: $disabled-02;
-  }
-
-  // Skeleton state
-  .#{$prefix}--pagination.#{$prefix}--skeleton .#{$prefix}--skeleton__text {
-    margin-right: 1rem;
-    margin-bottom: 0;
   }
 }
 ```
