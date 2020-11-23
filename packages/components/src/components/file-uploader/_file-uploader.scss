@@ -158,6 +158,12 @@
       white-space: nowrap;
       text-overflow: ellipsis;
     }
+
+    // Windows, Firefox HCM Fix
+    @media screen and (-ms-high-contrast: active),
+      screen and (prefers-contrast) {
+      outline: 2px solid transparent;
+    }
   }
 
   .#{$prefix}--file__selected-file--field {
@@ -278,6 +284,13 @@
 
   .#{$prefix}--file__state-container .#{$prefix}--file-close svg path {
     fill: $icon-01;
+
+    // Windows, Firefox HCM Fix
+    @media screen and (-ms-high-contrast: active),
+      screen and (prefers-contrast) {
+      // `ButtonText` is a CSS2 system color to help improve colors in HCM
+      fill: ButtonText;
+    }
   }
 
   .#{$prefix}--file__state-container .#{$prefix}--inline-loading__animation {

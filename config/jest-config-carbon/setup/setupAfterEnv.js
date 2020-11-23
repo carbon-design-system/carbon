@@ -7,9 +7,9 @@
 
 const chalk = require('chalk');
 const util = require('util');
-const toHaveNoAxeViolations = require('./matchers/toHaveNoAxeViolations');
-const toHaveNoDAPViolations = require('./matchers/toHaveNoDAPViolations');
-const toHaveNoACViolations = require('./matchers/toHaveNoACViolations');
+const toHaveNoAxeViolations = require('../matchers/toHaveNoAxeViolations');
+const toHaveNoDAPViolations = require('../matchers/toHaveNoDAPViolations');
+const toHaveNoACViolations = require('../matchers/toHaveNoACViolations');
 
 // We can extend `expect` using custom matchers as defined by:
 // https://jest-bot.github.io/jest/docs/expect.html#expectextendmatchers
