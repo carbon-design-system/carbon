@@ -10,6 +10,7 @@ import { action } from '@storybook/addon-actions';
 import { withKnobs, boolean, select, text } from '@storybook/addon-knobs';
 import { withReadme } from 'storybook-readme';
 import OverflowMenu from '../OverflowMenu';
+import { OverflowMenu as OGOverflowMenu } from './OverflowMenu';
 import OverflowMenuItem from '../OverflowMenuItem';
 import OverflowREADME from './README.md';
 import mdx from './OverflowMenu.mdx';
@@ -57,15 +58,14 @@ OverflowMenu.displayName = 'OverflowMenu';
 export default {
   title: 'OverflowMenu',
   decorators: [withKnobs],
+  component: OGOverflowMenu,
+  subcomponents: {
+    OverflowMenuItem,
+  },
 
   parameters: {
-    component: OverflowMenu,
     docs: {
       page: mdx,
-    },
-
-    subcomponents: {
-      OverflowMenuItem,
     },
   },
 };

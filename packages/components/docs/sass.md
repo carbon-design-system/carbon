@@ -14915,6 +14915,11 @@ Code snippet styles
     &:focus {
       border: 2px solid $focus;
       outline: none;
+
+      // Firefox HCM fix
+      @media screen and (prefers-contrast) {
+        border-style: dotted;
+      }
     }
 
     &::before {
@@ -14982,6 +14987,12 @@ Code snippet styles
     max-width: rem(760px);
     height: $carbon--spacing-08;
     padding-right: $carbon--spacing-08;
+
+    // Windows, Firefox HCM Fix
+    @media screen and (-ms-high-contrast: active),
+      screen and (prefers-contrast) {
+      outline: 2px solid transparent;
+    }
   }
 
   .#{$prefix}--snippet--single.#{$prefix}--snippet--no-copy {
@@ -15020,6 +15031,12 @@ Code snippet styles
     min-width: rem(320px);
     max-width: 100%;
     padding: $carbon--spacing-05;
+
+    // Windows, Firefox HCM Fix
+    @media screen and (-ms-high-contrast: active),
+      screen and (prefers-contrast) {
+      outline: 2px solid transparent;
+    }
   }
 
   //closed snippet container
@@ -15086,6 +15103,13 @@ Code snippet styles
     height: rem(16px);
     transition: all $duration--fast-01 motion(standard, productive);
     fill: $icon-01;
+
+    // Windows, Firefox HCM Fix
+    @media screen and (-ms-high-contrast: active),
+      screen and (prefers-contrast) {
+      // `ButtonText` is a CSS2 system color to help improve colors in HCM
+      fill: ButtonText;
+    }
   }
 
   .#{$prefix}--snippet-button {
@@ -17287,6 +17311,12 @@ Data table expandable styles
 
   .#{$prefix}--table-expand__button:focus .#{$prefix}--table-expand__svg {
     box-shadow: inset 0 0 0 2px $focus;
+
+    // Windows, Firefox HCM Fix
+    @media screen and (-ms-high-contrast: active),
+      screen and (prefers-contrast) {
+      outline: 2px solid transparent;
+    }
   }
 
   .#{$prefix}--table-expand__svg {
@@ -17817,6 +17847,13 @@ Date picker styles
     transform: translateY(-50%);
     cursor: pointer;
     fill: $icon-01;
+
+    // Windows, Firefox HCM Fix
+    @media screen and (-ms-high-contrast: active),
+      screen and (prefers-contrast) {
+      // `ButtonText` is a CSS2 system color to help improve colors in HCM
+      fill: ButtonText;
+    }
   }
 
   .#{$prefix}--date-picker__icon ~ .#{$prefix}--date-picker__input {
@@ -18516,6 +18553,12 @@ File uploader styles
       white-space: nowrap;
       text-overflow: ellipsis;
     }
+
+    // Windows, Firefox HCM Fix
+    @media screen and (-ms-high-contrast: active),
+      screen and (prefers-contrast) {
+      outline: 2px solid transparent;
+    }
   }
 
   .#{$prefix}--file__selected-file--field {
@@ -18636,6 +18679,13 @@ File uploader styles
 
   .#{$prefix}--file__state-container .#{$prefix}--file-close svg path {
     fill: $icon-01;
+
+    // Windows, Firefox HCM Fix
+    @media screen and (-ms-high-contrast: active),
+      screen and (prefers-contrast) {
+      // `ButtonText` is a CSS2 system color to help improve colors in HCM
+      fill: ButtonText;
+    }
   }
 
   .#{$prefix}--file__state-container .#{$prefix}--inline-loading__animation {
@@ -19498,10 +19548,9 @@ List box styles
   .#{$prefix}--list-box__field:focus {
     @include focus-outline('outline');
 
-    @media screen and (-ms-high-contrast: active),
-      screen and (prefers-contrast) {
-      // `ButtonText` is a CSS2 system color to help improve colors in HCM
-      border: 2px solid ButtonText;
+    // Firefox HCM fix
+    @media screen and (prefers-contrast) {
+      border-style: dotted;
     }
   }
 
@@ -20554,6 +20603,14 @@ Modal styles
     }
   }
 
+  .#{$prefix}--modal-footer button.#{$prefix}--btn:focus {
+    // Firefox HCM Fix
+    @media screen and (prefers-contrast) {
+      border: none;
+      outline-style: dotted;
+    }
+  }
+
   .#{$prefix}--modal-close {
     position: absolute;
     top: 0;
@@ -20574,6 +20631,11 @@ Modal styles
     &:focus {
       border-color: $focus;
       outline: none;
+
+      // Firefox HCM Fix
+      @media screen and (prefers-contrast) {
+        border-style: dotted;
+      }
     }
   }
 
@@ -20928,6 +20990,12 @@ Inline notification styles
     outline: 2px solid $inverse-focus-ui;
     outline-offset: -2px;
     box-shadow: none;
+
+    // Firefox HCM Fix
+    @media screen and (prefers-contrast) {
+      border-style: dotted;
+      outline-style: dotted;
+    }
   }
 
   .#{$prefix}--inline-notification--low-contrast
@@ -20964,6 +21032,11 @@ Inline notification styles
     &:focus {
       outline: 2px solid $inverse-focus-ui;
       outline-offset: -2px;
+
+      // Firefox HCM fix
+      @media screen and (prefers-contrast) {
+        outline-style: dotted;
+      }
     }
 
     .#{$prefix}--inline-notification__close-icon {
@@ -21238,6 +21311,11 @@ Toast notification styles
     &:focus {
       outline: 2px solid $inverse-focus-ui;
       outline-offset: -2px;
+
+      // Firefox HCM fix
+      @media screen and (prefers-contrast) {
+        outline-style: dotted;
+      }
     }
 
     .#{$prefix}--toast-notification__close-icon {
@@ -21657,13 +21735,6 @@ Overflow menu styles
 
     &:focus {
       @include focus-outline('outline');
-
-      // Windows, Firefox HCM Fix
-      @media screen and (-ms-high-contrast: active),
-        screen and (prefers-contrast) {
-        outline: 3px solid transparent;
-        outline-offset: -3px;
-      }
     }
 
     &:hover {
@@ -21891,13 +21962,6 @@ Overflow menu styles
 
     &:focus {
       @include focus-outline('outline');
-
-      // Windows, Firefox HCM Fix
-      @media screen and (-ms-high-contrast: active),
-        screen and (prefers-contrast) {
-        outline: 3px solid transparent;
-        outline-offset: -3px;
-      }
     }
 
     &::-moz-focus-inner {
@@ -22010,23 +22074,9 @@ Pagination styles
 
 ```scss
 @mixin pagination() {
-  .#{$prefix}--data-table-container + .#{$prefix}--pagination {
-    border-top: 0;
-  }
-
   .#{$prefix}--pagination {
     @include reset;
     @include type-style('body-short-01');
-
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-
-    width: 100%;
-    min-height: rem(48px);
-    overflow-x: auto;
-    background-color: $ui-01;
-    border-top: 1px solid $ui-03;
 
     @include carbon--breakpoint('md') {
       overflow: initial;
@@ -22044,46 +22094,64 @@ Pagination styles
         display: initial;
       }
     }
-  }
 
-  .#{$prefix}--pagination .#{$prefix}--select {
-    align-items: center;
-    height: 100%;
-  }
-
-  .#{$prefix}--pagination .#{$prefix}--select-input--inline__wrapper {
     display: flex;
-    height: 100%;
-  }
+    align-items: center;
+    justify-content: space-between;
 
-  .#{$prefix}--pagination .#{$prefix}--select-input {
-    @include type-style('body-short-01');
+    width: 100%;
+    min-height: rem(48px);
+    overflow-x: auto;
+    background-color: $ui-01;
+    border-top: 1px solid $ui-03;
 
-    width: auto;
-    min-width: auto;
-    height: rem(48px);
-    padding: 0 2.25rem 0 $spacing-05;
-  }
+    .#{$prefix}--data-table-container + & {
+      border-top: 0;
+    }
 
-  .#{$prefix}--pagination .#{$prefix}--select-input:hover {
-    background: $hover-ui;
-  }
+    .#{$prefix}--pagination__control-buttons {
+      flex-shrink: 0;
+    }
 
-  .#{$prefix}--pagination .#{$prefix}--select__arrow {
-    top: 50%;
-    transform: translate(-0.5rem, -50%);
-  }
+    .#{$prefix}--select {
+      align-items: center;
+      height: 100%;
+    }
 
-  .#{$prefix}--pagination
-    .#{$prefix}--select__item-count
     .#{$prefix}--select-input {
-    border-right: $spacing-4xs solid $ui-03;
-  }
+      @include type-style('body-short-01');
 
-  .#{$prefix}--pagination
-    .#{$prefix}--select__page-number
-    .#{$prefix}--select-input {
-    border-left: 1px solid $ui-03;
+      width: auto;
+      min-width: auto;
+      height: rem(48px);
+      padding: 0 2.25rem 0 $spacing-05;
+
+      &:hover {
+        background: $hover-ui;
+      }
+
+      &--inline__wrapper {
+        display: flex;
+        height: 100%;
+      }
+    }
+
+    .#{$prefix}--select__arrow {
+      top: 50%;
+      transform: translate(-0.5rem, -50%);
+    }
+
+    .#{$prefix}--select__item-count {
+      .#{$prefix}--select-input {
+        border-right: $spacing-4xs solid $ui-03;
+      }
+    }
+
+    .#{$prefix}--select__page-number {
+      .#{$prefix}--select-input {
+        border-left: 1px solid $ui-03;
+      }
+    }
   }
 
   .#{$prefix}--pagination__left,
@@ -22091,40 +22159,44 @@ Pagination styles
     display: flex;
     align-items: center;
     height: rem(48px);
-  }
 
-  .#{$prefix}--pagination__left > .#{$prefix}--form-item,
-  .#{$prefix}--pagination__right > .#{$prefix}--form-item {
-    height: 100%;
-  }
+    > .#{$prefix}--form-item {
+      height: 100%;
+    }
 
-  .#{$prefix}--pagination__left .#{$prefix}--pagination__text,
-  .#{$prefix}--pagination__right .#{$prefix}--pagination__text {
-    white-space: nowrap;
-  }
-
-  .#{$prefix}--pagination__left .#{$prefix}--pagination__text {
-    margin-right: rem(1px);
-  }
-
-  .#{$prefix}--pagination__right .#{$prefix}--pagination__text {
-    margin-right: 1rem;
-    margin-left: rem(1px);
-  }
-
-  .#{$prefix}--pagination__left {
-    padding: 0 $carbon--spacing-05;
+    .#{$prefix}--pagination__text {
+      white-space: nowrap;
+    }
   }
 
   .#{$prefix}--pagination__text {
     @include carbon--breakpoint('md') {
       display: inline-block;
     }
+
+    margin-left: $carbon--spacing-05;
+    overflow: hidden;
+    color: $text-02;
+    text-overflow: ellipsis;
+
+    .#{$prefix}--pagination__left & {
+      margin-right: rem(1px);
+    }
+
+    .#{$prefix}--pagination__right & {
+      margin-right: 1rem;
+      margin-left: rem(1px);
+    }
+
+    // Skeleton state
+    .#{$prefix}--pagination.#{$prefix}--skeleton & {
+      margin-right: 1rem;
+      margin-bottom: 0;
+    }
   }
 
-  span.#{$prefix}--pagination__text {
-    margin-left: $carbon--spacing-05;
-    color: $text-02;
+  .#{$prefix}--pagination__left {
+    padding: 0 $carbon--spacing-05;
   }
 
   .#{$prefix}--pagination__button,
@@ -22180,12 +22252,6 @@ Pagination styles
     border-color: $ui-03;
     cursor: not-allowed;
     fill: $disabled-02;
-  }
-
-  // Skeleton state
-  .#{$prefix}--pagination.#{$prefix}--skeleton .#{$prefix}--skeleton__text {
-    margin-right: 1rem;
-    margin-bottom: 0;
   }
 }
 ```
@@ -23489,13 +23555,6 @@ Select styles
       @include focus-outline('outline');
 
       color: $text-01;
-
-      // Windows, Firefox HCM Fix
-      @media screen and (-ms-high-contrast: active),
-        screen and (prefers-contrast) {
-        outline: 3px solid transparent;
-        outline-offset: -3px;
-      }
     }
 
     &:disabled,
@@ -23798,6 +23857,11 @@ Slider styles
       box-shadow: inset 0 0 0 2px $interactive-04, inset 0 0 0 3px $ui-01;
       // 20px / 14px = 1.4286
       transform: translate(-50%, -50%) scale(1.4286);
+
+      // Firefox HCM Fix
+      @media screen and (prefers-contrast) {
+        outline-style: dotted;
+      }
     }
 
     &:active {
@@ -25085,6 +25149,13 @@ Tag styles
     border-radius: 50%;
     outline: none;
     box-shadow: inset 0 0 0 2px $focus;
+
+    // Windows, Firefox HCM Fix
+    @media screen and (-ms-high-contrast: active),
+      screen and (prefers-contrast) {
+      // `ButtonText` is a CSS2 system color to help improve colors in HCM
+      outline: 1px solid ButtonText;
+    }
   }
 
   .#{$prefix}--tag--high-contrast .#{$prefix}--tag__close-icon:focus {
@@ -25580,13 +25651,6 @@ Tile styles
 
     &:focus {
       @include focus-outline('outline');
-
-      // Windows, Firefox HCM Fix
-      @media screen and (-ms-high-contrast: active),
-        screen and (prefers-contrast) {
-        outline: 3px solid transparent;
-        outline-offset: -3px;
-      }
     }
   }
 
@@ -26241,6 +26305,13 @@ Toggle styles
     + .#{$prefix}--toggle-input__label
     > .#{$prefix}--toggle__switch::before {
     box-shadow: 0 0 0 1px $ui-02, 0 0 0 3px $focus;
+
+    // Windows, Firefox HCM Fix
+    @media screen and (-ms-high-contrast: active),
+      screen and (prefers-contrast) {
+      // `ButtonText` is a CSS2 system color to help improve colors in HCM
+      outline: 1px solid ButtonText;
+    }
   }
 
   //----------------------------------------------
@@ -27553,11 +27624,9 @@ UI shell header
     border-color: $shell-header-focus;
     outline: none;
 
-    // Windows, Firefox HCM Fix
-    @media screen and (-ms-high-contrast: active),
-      screen and (prefers-contrast) {
-      outline: 3px solid transparent;
-      outline-offset: -3px;
+    // Firefox HCM Fix
+    @media screen and (prefers-contrast) {
+      border-style: dotted;
     }
   }
 
@@ -27611,6 +27680,13 @@ UI shell header
 
   a.#{$prefix}--header__name:focus {
     border-color: $shell-header-focus;
+
+    // Windows, Firefox HCM Fix
+    @media screen and (-ms-high-contrast: active),
+      screen and (prefers-contrast) {
+      // `ButtonText` is a CSS2 system color to help improve colors in HCM
+      border-style: dotted;
+    }
   }
 
   .#{$prefix}--header__name--prefix {
@@ -27702,8 +27778,7 @@ UI shell header
     // Windows, Firefox HCM Fix
     @media screen and (-ms-high-contrast: active),
       screen and (prefers-contrast) {
-      outline: 3px solid transparent;
-      outline-offset: -3px;
+      border-style: dotted;
     }
   }
 
@@ -28688,13 +28763,6 @@ UI shell side nav
 
   .#{$prefix}--side-nav__submenu:focus {
     @include focus-outline('outline');
-
-    // Windows, Firefox HCM Fix
-    @media screen and (-ms-high-contrast: active),
-      screen and (prefers-contrast) {
-      outline: 3px solid transparent;
-      outline-offset: -3px;
-    }
   }
 
   .#{$prefix}--side-nav__submenu-title {
@@ -28826,13 +28894,6 @@ UI shell side nav
   a.#{$prefix}--side-nav__link:focus,
   .#{$prefix}--side-nav a.#{$prefix}--header__menu-item:focus {
     @include focus-outline('outline');
-
-    // Windows, Firefox HCM Fix
-    @media screen and (-ms-high-contrast: active),
-      screen and (prefers-contrast) {
-      outline: 3px solid transparent;
-      outline-offset: -3px;
-    }
   }
 
   a.#{$prefix}--side-nav__link[aria-current='page'],

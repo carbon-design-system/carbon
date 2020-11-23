@@ -155,6 +155,24 @@ describe('NumberInput', () => {
           );
         const getNumberInput = (wrapper) => wrapper.find('input');
 
+        it('should correctly set defaultValue on uncontrolled input', () => {
+          const wrapper = mount(
+            <NumberInput
+              min={-1}
+              max={100}
+              defaultValue={10}
+              id="test"
+              label="Number Input"
+              className="extra-class"
+            />
+          );
+          const numberInput = getNumberInput(wrapper);
+          expect(wrapper.find('NumberInput').instance().state.value).toEqual(
+            10
+          );
+          expect(numberInput.prop('value')).toEqual(10);
+        });
+
         it('should set value as expected when value > min', () => {
           const wrapper = getWrapper(-1, 100, 0);
           const numberInput = getNumberInput(wrapper);
