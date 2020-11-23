@@ -74,6 +74,16 @@
     @include carbon--type-style('body-long-02');
   }
 
+  a {
+    @if global-variable-exists($carbon--theme) and
+      map-has-key($carbon--theme, 'link-01')
+    {
+      color: map-get($carbon--theme, 'link-01');
+    } @else {
+      color: #0062ff;
+    }
+  }
+
   em {
     font-style: italic;
   }
