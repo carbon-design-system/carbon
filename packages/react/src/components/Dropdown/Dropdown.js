@@ -59,21 +59,27 @@ const Dropdown = React.forwardRef(function Dropdown(
   },
   ref
 ) {
+  // create deep copy of items to prevent mutation
+  const clonedItems = JSON.parse(JSON.stringify(items));
+
   const selectProps = mapDownshiftProps({
     ...downshiftProps,
-    items,
+    items: clonedItems,
     itemToString,
     initialSelectedItem,
     onSelectedItemChange,
   });
 
   // prepend optional default value to items array
-  if (isOptional && items.length) {
+  if (isOptional && clonedItems.length) {
     const defaultOption = label || 'Select';
-    if (items[0] !== defaultOption && items[0].text !== defaultOption) {
-      typeof items[0] === 'object'
-        ? items.unshift({ text: defaultOption })
-        : items.unshift(defaultOption);
+    if (
+      clonedItems[0] !== defaultOption &&
+      clonedItems[0].text !== defaultOption
+    ) {
+      typeof clonedItems[0] === 'object'
+        ? clonedItems.unshift({ text: defaultOption })
+        : clonedItems.unshift(defaultOption);
     }
   }
 
@@ -178,15 +184,18 @@ const Dropdown = React.forwardRef(function Dropdown(
         </button>
         <ListBox.Menu {...getMenuProps()}>
           {isOpen &&
-            items.map((item, index) => {
+            clonedItems.map((item, index) => {
               const itemProps = getItemProps({ item, index });
+              const itemIsSelected = selectedItem
+                ? (selectedItem.text && selectedItem.text === item.text) ||
+                  selectedItem === item
+                : false;
+
               return (
                 <ListBox.MenuItem
                   key={itemProps.id}
-                  isActive={selectedItem === item}
-                  isHighlighted={
-                    highlightedIndex === index || selectedItem === item
-                  }
+                  isActive={itemIsSelected}
+                  isHighlighted={highlightedIndex === index || itemIsSelected}
                   title={itemToElement ? item.text : itemToString(item)}
                   {...itemProps}>
                   {itemToElement ? (
@@ -194,7 +203,7 @@ const Dropdown = React.forwardRef(function Dropdown(
                   ) : (
                     itemToString(item)
                   )}
-                  {selectedItem === item && (
+                  {itemIsSelected && (
                     <Checkmark16
                       className={`${prefix}--list-box__menu-item__selected-icon`}
                     />
