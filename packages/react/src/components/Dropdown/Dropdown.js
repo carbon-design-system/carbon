@@ -18,6 +18,7 @@ import {
 import ListBox, { PropTypes as ListBoxPropTypes } from '../ListBox';
 import { mapDownshiftProps } from '../../tools/createPropAdapter';
 import deprecate from '../../prop-types/deprecate';
+import mergeRefs from 'react-merge-refs';
 
 const { prefix } = settings;
 
@@ -127,6 +128,9 @@ const Dropdown = React.forwardRef(function Dropdown(
     }
   }
 
+  const toggleButtonProps = getToggleButtonProps();
+  toggleButtonProps.ref = mergeRefs([toggleButtonProps.ref, ref]);
+
   return (
     <div className={wrapperClasses} {...other}>
       {titleText && (
@@ -158,8 +162,7 @@ const Dropdown = React.forwardRef(function Dropdown(
           className={`${prefix}--list-box__field`}
           disabled={disabled}
           aria-disabled={disabled}
-          {...getToggleButtonProps()}
-          ref={ref}>
+          {...toggleButtonProps}>
           <span className={`${prefix}--list-box__label`}>
             {selectedItem ? itemToString(selectedItem) : label}
           </span>
