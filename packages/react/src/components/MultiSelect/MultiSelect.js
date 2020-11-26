@@ -19,6 +19,7 @@ import { defaultSortItems, defaultCompareItems } from './tools/sorting';
 import { useSelection } from '../../internal/Selection';
 import setupGetInstanceId from '../../tools/setupGetInstanceId';
 import { mapDownshiftProps } from '../../tools/createPropAdapter';
+import mergeRefs from 'react-merge-refs';
 
 const { prefix } = settings;
 const noop = () => {};
@@ -179,6 +180,9 @@ const MultiSelect = React.forwardRef(function MultiSelect(
     }
   }
 
+  const toggleButtonProps = getToggleButtonProps();
+  toggleButtonProps.ref = mergeRefs([toggleButtonProps.ref, ref]);
+
   return (
     <div className={wrapperClasses}>
       {titleText && (
@@ -211,8 +215,7 @@ const MultiSelect = React.forwardRef(function MultiSelect(
           className={`${prefix}--list-box__field`}
           disabled={disabled}
           aria-disabled={disabled}
-          {...getToggleButtonProps()}
-          ref={ref}>
+          {...toggleButtonProps}>
           {selectedItems.length > 0 && (
             <ListBox.Selection
               clearSelection={!disabled ? clearSelection : noop}
