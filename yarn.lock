@@ -20446,8 +20446,8 @@ react-docgen@^5.0.0:
 
 react-dom@^16.6.0, react-dom@^16.8.3, react-dom@^16.8.6, react-dom@^16.9.0, react-dom@~16.9.0:
   version "16.9.0"
-  resolved "https://registry.yarnpkg.com/react-dom/-/react-dom-16.9.0.tgz#5e65527a5e26f22ae3701131bcccaee9fb0d3962"
-  integrity sha512-YFT2rxO9hM70ewk9jq0y6sQk8cL02xm4+IzYBz75CQGlClQQ1Bxq0nhHF6OtSbit+AIahujJgb/CPRibFkMNJQ==
+  resolved "https://na.artifactory.swg-devops.com/artifactory/api/npm/wcp-wdp-npm-virtual/react-dom/-/react-dom-16.9.0.tgz?dl=https%3A%2F%2Fregistry.npmjs.org%2Freact-dom%2F-%2Freact-dom-16.9.0.tgz#5e65527a5e26f22ae3701131bcccaee9fb0d3962"
+  integrity sha1-XmVSel4m8irjcBExvMyu6fsNOWI=
   dependencies:
     loose-envify "^1.1.0"
     object-assign "^4.1.1"
@@ -20534,13 +20534,18 @@ react-inspector@^4.0.0:
 
 react-is@^16.12.0, react-is@^16.13.1, react-is@^16.7.0, react-is@^16.8.1, react-is@^16.8.2, react-is@^16.8.4, react-is@^16.8.6, react-is@^16.9.0, react-is@~16.9.0:
   version "16.9.0"
-  resolved "https://registry.yarnpkg.com/react-is/-/react-is-16.9.0.tgz#21ca9561399aad0ff1a7701c01683e8ca981edcb"
-  integrity sha512-tJBzzzIgnnRfEm046qRcURvwQnZVXmuCbscxUO5RWrGTXpon2d4c8mI0D8WE6ydVIm29JiLB6+RslkIvym9Rjw==
+  resolved "https://na.artifactory.swg-devops.com/artifactory/api/npm/wcp-wdp-npm-virtual/react-is/-/react-is-16.9.0.tgz?dl=https%3A%2F%2Fregistry.npmjs.org%2Freact-is%2F-%2Freact-is-16.9.0.tgz#21ca9561399aad0ff1a7701c01683e8ca981edcb"
+  integrity sha1-IcqVYTmarQ/xp3AcAWg+jKmB7cs=
 
 react-lifecycles-compat@^3.0.4:
   version "3.0.4"
   resolved "https://registry.yarnpkg.com/react-lifecycles-compat/-/react-lifecycles-compat-3.0.4.tgz#4f1a273afdfc8f3488a8c516bfda78f872352362"
   integrity sha512-fBASbA6LnOU9dOU2eW7aQ8xmYBSXUIWr+UmF9b1efZBazGNO+rcXT/icdKnYm2pTwcRylVUYwW7H1PHfLekVzA==
+
+react-merge-refs@^1.1.0:
+  version "1.1.0"
+  resolved "https://na.artifactory.swg-devops.com/artifactory/api/npm/wcp-wdp-npm-virtual/react-merge-refs/-/react-merge-refs-1.1.0.tgz?dl=https%3A%2F%2Fregistry.npmjs.org%2Freact-merge-refs%2F-%2Freact-merge-refs-1.1.0.tgz#73d88b892c6c68cbb7a66e0800faa374f4c38b06"
+  integrity sha1-c9iLiSxsaMu3pm4IAPqjdPTDiwY=
 
 react-popper-tooltip@^2.8.3:
   version "2.10.1"
@@ -20600,8 +20605,8 @@ react-syntax-highlighter@^11.0.2:
 
 react-test-renderer@^16.0.0-0, react-test-renderer@^16.8.6, react-test-renderer@~16.9.0:
   version "16.9.0"
-  resolved "https://registry.yarnpkg.com/react-test-renderer/-/react-test-renderer-16.9.0.tgz#7ed657a374af47af88f66f33a3ef99c9610c8ae9"
-  integrity sha512-R62stB73qZyhrJo7wmCW9jgl/07ai+YzvouvCXIJLBkRlRqLx4j9RqcLEAfNfU3OxTGucqR2Whmn3/Aad6L3hQ==
+  resolved "https://na.artifactory.swg-devops.com/artifactory/api/npm/wcp-wdp-npm-virtual/react-test-renderer/-/react-test-renderer-16.9.0.tgz?dl=https%3A%2F%2Fregistry.npmjs.org%2Freact-test-renderer%2F-%2Freact-test-renderer-16.9.0.tgz#7ed657a374af47af88f66f33a3ef99c9610c8ae9"
+  integrity sha1-ftZXo3SvR6+I9m8zo++ZyWEMiuk=
   dependencies:
     object-assign "^4.1.1"
     prop-types "^15.6.2"
@@ -20628,8 +20633,8 @@ react-transition-group@^2.2.1:
 
 react@^16.6.0, react@^16.8.3, react@^16.8.6, react@^16.9.0, react@~16.9.0:
   version "16.9.0"
-  resolved "https://registry.yarnpkg.com/react/-/react-16.9.0.tgz#40ba2f9af13bc1a38d75dbf2f4359a5185c4f7aa"
-  integrity sha512-+7LQnFBwkiw+BobzOF6N//BdoNw0ouwmSJTEm9cglOOmsg/TMiFHZLe2sEoN5M7LgJTj9oHH0gxklfnQe66S1w==
+  resolved "https://na.artifactory.swg-devops.com/artifactory/api/npm/wcp-wdp-npm-virtual/react/-/react-16.9.0.tgz?dl=https%3A%2F%2Fregistry.npmjs.org%2Freact%2F-%2Freact-16.9.0.tgz#40ba2f9af13bc1a38d75dbf2f4359a5185c4f7aa"
+  integrity sha1-QLovmvE7waONddvy9DWaUYXE96o=
   dependencies:
     loose-envify "^1.1.0"
     object-assign "^4.1.1"
