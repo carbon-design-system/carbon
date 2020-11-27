@@ -10,7 +10,7 @@ import PropTypes from 'prop-types';
 import { Checkmark16 } from '@carbon/icons-react';
 import ContextMenuOption from './ContextMenuOption';
 
-function SelectableContextMenuOption({ label, initialChecked, indented }) {
+function SelectableContextMenuOption({ label, initialChecked }) {
   const [checked, setChecked] = useState(initialChecked);
 
   return (
@@ -19,7 +19,7 @@ function SelectableContextMenuOption({ label, initialChecked, indented }) {
       aria-checked={checked}
       renderIcon={checked ? Checkmark16 : null}
       label={label}
-      indented={indented}
+      indented
       onClick={() => {
         setChecked(!checked);
       }}
@@ -28,12 +28,6 @@ function SelectableContextMenuOption({ label, initialChecked, indented }) {
 }
 
 SelectableContextMenuOption.propTypes = {
-  /**
-   * Whether the content should be indented (for example because it's in a group with options that have icons).
-   * Is automatically set by ContextMenu
-   */
-  indented: PropTypes.bool,
-
   /**
    * Whether the option should be checked by default
    */
