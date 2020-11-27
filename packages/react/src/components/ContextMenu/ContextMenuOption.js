@@ -9,9 +9,21 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
 import { settings } from 'carbon-components';
+import { CaretRight16 } from '@carbon/icons-react';
 import ContextMenu from './ContextMenu';
 
 const { prefix } = settings;
+
+function ContextMenuOptionContent({ label, info }) {
+  return (
+    <button className={`${prefix}--context-menu-option__content`} type="button">
+      <span className={`${prefix}--context-menu-option__label`} title={label}>
+        {label}
+      </span>
+      <div className={`${prefix}--context-menu-option__info`}>{info}</div>
+    </button>
+  );
+}
 
 function ContextMenuOption({ label, children }) {
   const subOptions = React.Children.map(children, (node) => {
@@ -26,17 +38,27 @@ function ContextMenuOption({ label, children }) {
     <li className={classes}>
       {subOptions ? (
         <>
-          <div className={`${prefix}--context-menu-option__content`}>
-            {label}
-          </div>
+          <ContextMenuOptionContent label={label} info={<CaretRight16 />} />
           <ContextMenu>{subOptions}</ContextMenu>
         </>
       ) : (
-        <div className={`${prefix}--context-menu-option__content`}>{label}</div>
+        <ContextMenuOptionContent label={label} />
       )}
     </li>
   );
 }
+
+ContextMenuOptionContent.propTypes = {
+  /**
+   * Additional information such as shortcut or caret
+   */
+  info: PropTypes.node,
+
+  /**
+   * Rendered label for the ContextMenuOptionContent
+   */
+  label: PropTypes.node.isRequired,
+};
 
 ContextMenuOption.propTypes = {
   /**

@@ -18,7 +18,7 @@ export default {
 
 export const _ContextMenu = () => (
   <ContextMenu open>
-    <ContextMenuOption label="Share with">
+    <ContextMenuOption label="Share with someone or noone depending on your liking">
       <ContextMenuOption label="None" />
       <ContextMenuOption label="Product team" />
       <ContextMenuOption label="Organization" />
