@@ -7,8 +7,10 @@
 
 import ContextMenu from './ContextMenu';
 import ContextMenuOption from './ContextMenuOption';
+import ContextMenuDivider from './ContextMenuDivider';
 
 ContextMenu.ContextMenuOption = ContextMenuOption;
+ContextMenu.ContextMenuDivider = ContextMenuDivider;
 
-export { ContextMenuOption };
+export { ContextMenuOption, ContextMenuDivider };
 export default ContextMenu;

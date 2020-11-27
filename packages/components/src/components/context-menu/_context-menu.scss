@@ -100,6 +100,13 @@
     align-items: center;
     margin-right: $spacing-03;
   }
+
+  .#{$prefix}--context-menu-divider {
+    width: 100%;
+    height: 1px;
+    margin: $spacing-02 0;
+    background-color: $ui-03;
+  }
 }
 
 @include exports('context-menu') {
