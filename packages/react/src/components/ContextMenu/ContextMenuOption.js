@@ -14,9 +14,13 @@ import ContextMenu from './ContextMenu';
 
 const { prefix } = settings;
 
-function ContextMenuOptionContent({ label, info }) {
+function ContextMenuOptionContent({ label, info, disabled }) {
+  const classes = classnames(`${prefix}--context-menu-option__content`, {
+    [`${prefix}--context-menu-option__content--disabled`]: disabled,
+  });
+
   return (
-    <button className={`${prefix}--context-menu-option__content`} type="button">
+    <button className={classes} type="button" disabled={disabled}>
       <span className={`${prefix}--context-menu-option__label`} title={label}>
         {label}
       </span>
@@ -25,7 +29,7 @@ function ContextMenuOptionContent({ label, info }) {
   );
 }
 
-function ContextMenuOption({ label, children }) {
+function ContextMenuOption({ label, children, disabled }) {
   const subOptions = React.Children.map(children, (node) => {
     if (React.isValidElement(node)) {
       return React.cloneElement(node);
@@ -42,13 +46,18 @@ function ContextMenuOption({ label, children }) {
           <ContextMenu>{subOptions}</ContextMenu>
         </>
       ) : (
-        <ContextMenuOptionContent label={label} />
+        <ContextMenuOptionContent label={label} disabled={disabled} />
       )}
     </li>
   );
 }
 
 ContextMenuOptionContent.propTypes = {
+  /**
+   * Whether this option is disabled
+   */
+  disabled: PropTypes.bool,
+
   /**
    * Additional information such as shortcut or caret
    */
@@ -65,6 +74,11 @@ ContextMenuOption.propTypes = {
    * Specify the children of the ContextMenuOption
    */
   children: PropTypes.node,
+
+  /**
+   * Specify whether this ContextMenuOption is disabled
+   */
+  disabled: PropTypes.bool,
 
   /**
    * Rendered label for the ContextMenuOption

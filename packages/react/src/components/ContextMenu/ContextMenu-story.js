@@ -26,7 +26,7 @@ export const _ContextMenu = () => (
     <ContextMenuOption label="Cut" />
     <ContextMenuOption label="Copy" />
     <ContextMenuOption label="Copy path" />
-    <ContextMenuOption label="Paste" />
+    <ContextMenuOption label="Paste" disabled />
     <ContextMenuOption label="Duplicate" />
     <ContextMenuOption label="Rename" />
     <ContextMenuOption label="Delete" />

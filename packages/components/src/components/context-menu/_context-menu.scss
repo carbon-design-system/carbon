@@ -63,6 +63,15 @@
     }
   }
 
+  .#{$prefix}--context-menu-option__content--disabled {
+    cursor: not-allowed;
+  }
+
+  .#{$prefix}--context-menu-option__content--disabled
+    .#{$prefix}--context-menu-option__label {
+    color: $disabled-02;
+  }
+
   .#{$prefix}--context-menu-option__label {
     @include type-style('body-short-01');
 
