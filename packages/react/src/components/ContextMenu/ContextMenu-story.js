@@ -18,18 +18,18 @@ export default {
 
 export const _ContextMenu = () => (
   <ContextMenu open>
-    <ContextMenuOption label="Share with someone or noone depending on your liking">
+    <ContextMenuOption label="Share with">
       <ContextMenuOption label="None" />
       <ContextMenuOption label="Product team" />
       <ContextMenuOption label="Organization" />
     </ContextMenuOption>
-    <ContextMenuOption label="Cut" />
-    <ContextMenuOption label="Copy" />
-    <ContextMenuOption label="Copy path" />
-    <ContextMenuOption label="Paste" disabled />
+    <ContextMenuOption label="Cut" shortcut="⌘X" />
+    <ContextMenuOption label="Copy" shortcut="⌘C" />
+    <ContextMenuOption label="Copy path" shortcut="⌥⌘C" />
+    <ContextMenuOption label="Paste" shortcut="⌘V" disabled />
     <ContextMenuOption label="Duplicate" />
-    <ContextMenuOption label="Rename" />
-    <ContextMenuOption label="Delete" />
+    <ContextMenuOption label="Rename" shortcut="↩︎" />
+    <ContextMenuOption label="Delete" shortcut="⌘⌫" />
   </ContextMenu>
 );
 

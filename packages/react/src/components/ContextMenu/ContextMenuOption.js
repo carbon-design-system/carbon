@@ -29,7 +29,7 @@ function ContextMenuOptionContent({ label, info, disabled }) {
   );
 }
 
-function ContextMenuOption({ label, children, disabled }) {
+function ContextMenuOption({ label, children, disabled, shortcut }) {
   const subOptions = React.Children.map(children, (node) => {
     if (React.isValidElement(node)) {
       return React.cloneElement(node);
@@ -46,7 +46,11 @@ function ContextMenuOption({ label, children, disabled }) {
           <ContextMenu>{subOptions}</ContextMenu>
         </>
       ) : (
-        <ContextMenuOptionContent label={label} disabled={disabled} />
+        <ContextMenuOptionContent
+          label={label}
+          disabled={disabled}
+          info={shortcut}
+        />
       )}
     </li>
   );
@@ -84,6 +88,11 @@ ContextMenuOption.propTypes = {
    * Rendered label for the ContextMenuOption
    */
   label: PropTypes.node.isRequired,
+
+  /**
+   * Rendered shortcut for the ContextMenuOption
+   */
+  shortcut: PropTypes.node,
 };
 
 export default ContextMenuOption;
