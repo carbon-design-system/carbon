@@ -1,0 +1,39 @@
+//
+// Copyright IBM Corp. 2020
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+@import '../../globals/scss/vars';
+@import '../../globals/scss/vendor/@carbon/elements/scss/import-once/import-once';
+@import '../../globals/scss/helper-mixins';
+
+/// Context Menu styles
+/// @access private
+/// @group context-menu
+@mixin context-menu {
+  .#{$prefix}--context-menu {
+    @include box-shadow;
+
+    width: 13rem;
+    padding: $spacing-02 0;
+    background-color: $ui-01;
+  }
+
+  .#{$prefix}--context-menu-option {
+    display: flex;
+    align-items: center;
+    height: $spacing-07;
+    padding: 0 $spacing-05;
+    background-color: $ui-01;
+
+    &:hover {
+      background-color: $hover-ui;
+    }
+  }
+}
+
+@include exports('context-menu') {
+  @include context-menu;
+}

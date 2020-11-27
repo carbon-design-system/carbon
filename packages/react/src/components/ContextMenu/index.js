@@ -5,4 +5,10 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-export default from './ContextMenu';
+import ContextMenu from './ContextMenu';
+import ContextMenuOption from './ContextMenuOption';
+
+ContextMenu.ContextMenuOption = ContextMenuOption;
+
+export { ContextMenuOption };
+export default ContextMenu;

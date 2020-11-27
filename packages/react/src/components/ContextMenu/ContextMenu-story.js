@@ -7,15 +7,26 @@
 
 import React from 'react';
 
-import ContextMenu from '../ContextMenu';
+import ContextMenu, { ContextMenuOption } from '../ContextMenu';
 
 export default {
   title: 'ContextMenu',
   parameters: {
-    ContextMenu,
+    component: ContextMenu,
   },
 };
 
-export const _ContextMenu = () => <ContextMenu />;
+export const _ContextMenu = () => (
+  <ContextMenu>
+    <ContextMenuOption label="Share with" />
+    <ContextMenuOption label="Cut" />
+    <ContextMenuOption label="Copy" />
+    <ContextMenuOption label="Copy path" />
+    <ContextMenuOption label="Paste" />
+    <ContextMenuOption label="Duplicate" />
+    <ContextMenuOption label="Rename" />
+    <ContextMenuOption label="Delete" />
+  </ContextMenu>
+);
 
 _ContextMenu.storyName = 'ContextMenu';
