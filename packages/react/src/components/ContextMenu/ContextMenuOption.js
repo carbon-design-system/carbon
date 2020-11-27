@@ -47,6 +47,7 @@ function ContextMenuOption({
   shortcut,
   renderIcon,
   indented,
+  ...rest
 }) {
   const subOptions = React.Children.map(children, (node) => {
     if (React.isValidElement(node)) {
@@ -57,7 +58,7 @@ function ContextMenuOption({
   const classes = classnames(`${prefix}--context-menu-option`);
 
   return (
-    <li className={classes}>
+    <li {...rest} className={classes}>
       {subOptions ? (
         <>
           <ContextMenuOptionContent

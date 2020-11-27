@@ -8,9 +8,11 @@
 import ContextMenu from './ContextMenu';
 import ContextMenuOption from './ContextMenuOption';
 import ContextMenuDivider from './ContextMenuDivider';
+import SelectableContextMenuOption from './SelectableContextMenuOption';
 
 ContextMenu.ContextMenuOption = ContextMenuOption;
 ContextMenu.ContextMenuDivider = ContextMenuDivider;
+ContextMenu.SelectableContextMenuOption = SelectableContextMenuOption;
 
-export { ContextMenuOption, ContextMenuDivider };
+export { ContextMenuOption, ContextMenuDivider, SelectableContextMenuOption };
 export default ContextMenu;

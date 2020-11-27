@@ -11,6 +11,7 @@ import { FolderShared16, Edit16, TrashCan16 } from '@carbon/icons-react';
 import ContextMenu, {
   ContextMenuOption,
   ContextMenuDivider,
+  SelectableContextMenuOption,
 } from '../ContextMenu';
 
 export default {
@@ -33,6 +34,8 @@ export const _ContextMenu = () => (
     <ContextMenuOption label="Copy path" shortcut="⌥⌘C" />
     <ContextMenuOption label="Paste" shortcut="⌘V" disabled />
     <ContextMenuOption label="Duplicate" />
+    <ContextMenuDivider />
+    <SelectableContextMenuOption label="Publish" initialChecked />
     <ContextMenuDivider />
     <ContextMenuOption label="Rename" shortcut="↩︎" renderIcon={Edit16} />
     <ContextMenuOption label="Delete" shortcut="⌘⌫" renderIcon={TrashCan16} />
