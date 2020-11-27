@@ -24,6 +24,7 @@ export ContextMenu, {
   ContextMenuOption,
   ContextMenuDivider,
   SelectableContextMenuOption,
+  ContextMenuRadioGroup,
 } from './components/ContextMenu';
 export Copy from './components/Copy';
 export CopyButton from './components/CopyButton';

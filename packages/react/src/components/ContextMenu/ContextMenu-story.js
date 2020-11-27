@@ -13,6 +13,7 @@ import ContextMenu, {
   ContextMenuDivider,
   SelectableContextMenuOption,
 } from '../ContextMenu';
+import ContextMenuRadioGroup from './ContextMenuRadioGroup';
 
 export default {
   title: 'ContextMenu',
@@ -24,9 +25,9 @@ export default {
 export const _ContextMenu = () => (
   <ContextMenu open>
     <ContextMenuOption label="Share with" renderIcon={FolderShared16}>
-      <ContextMenuOption label="None" />
-      <ContextMenuOption label="Product team" />
-      <ContextMenuOption label="Organization" />
+      <ContextMenuRadioGroup
+        items={['None', 'Product team', 'Organization', 'Company']}
+      />
     </ContextMenuOption>
     <ContextMenuDivider />
     <ContextMenuOption label="Cut" shortcut="⌘X" />

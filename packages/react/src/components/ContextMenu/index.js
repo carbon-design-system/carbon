@@ -9,10 +9,17 @@ import ContextMenu from './ContextMenu';
 import ContextMenuOption from './ContextMenuOption';
 import ContextMenuDivider from './ContextMenuDivider';
 import SelectableContextMenuOption from './SelectableContextMenuOption';
+import ContextMenuRadioGroup from './ContextMenuRadioGroup';
 
 ContextMenu.ContextMenuOption = ContextMenuOption;
 ContextMenu.ContextMenuDivider = ContextMenuDivider;
 ContextMenu.SelectableContextMenuOption = SelectableContextMenuOption;
+ContextMenu.ContextMenuRadioGroup = ContextMenuRadioGroup;
 
-export { ContextMenuOption, ContextMenuDivider, SelectableContextMenuOption };
+export {
+  ContextMenuOption,
+  ContextMenuDivider,
+  SelectableContextMenuOption,
+  ContextMenuRadioGroup,
+};
 export default ContextMenu;
