@@ -14,13 +14,24 @@ import ContextMenu from './ContextMenu';
 
 const { prefix } = settings;
 
-function ContextMenuOptionContent({ label, info, disabled }) {
+function ContextMenuOptionContent({
+  label,
+  info,
+  disabled,
+  icon: Icon,
+  indented,
+}) {
   const classes = classnames(`${prefix}--context-menu-option__content`, {
     [`${prefix}--context-menu-option__content--disabled`]: disabled,
   });
 
   return (
     <button className={classes} type="button" disabled={disabled}>
+      {indented && (
+        <div className={`${prefix}--context-menu-option__icon`}>
+          {Icon && <Icon />}
+        </div>
+      )}
       <span className={`${prefix}--context-menu-option__label`} title={label}>
         {label}
       </span>
@@ -29,7 +40,14 @@ function ContextMenuOptionContent({ label, info, disabled }) {
   );
 }
 
-function ContextMenuOption({ label, children, disabled, shortcut }) {
+function ContextMenuOption({
+  label,
+  children,
+  disabled,
+  shortcut,
+  renderIcon,
+  indented,
+}) {
   const subOptions = React.Children.map(children, (node) => {
     if (React.isValidElement(node)) {
       return React.cloneElement(node);
@@ -42,14 +60,21 @@ function ContextMenuOption({ label, children, disabled, shortcut }) {
     <li className={classes}>
       {subOptions ? (
         <>
-          <ContextMenuOptionContent label={label} info={<CaretRight16 />} />
+          <ContextMenuOptionContent
+            label={label}
+            icon={renderIcon}
+            info={<CaretRight16 />}
+            indented={indented}
+          />
           <ContextMenu>{subOptions}</ContextMenu>
         </>
       ) : (
         <ContextMenuOptionContent
           label={label}
           disabled={disabled}
+          icon={renderIcon}
           info={shortcut}
+          indented={indented}
         />
       )}
     </li>
@@ -61,6 +86,16 @@ ContextMenuOptionContent.propTypes = {
    * Whether this option is disabled
    */
   disabled: PropTypes.bool,
+
+  /**
+   * Icon that is displayed in front of the option
+   */
+  icon: PropTypes.oneOfType([PropTypes.func, PropTypes.object]),
+
+  /**
+   * Whether the content should be indented
+   */
+  indented: PropTypes.bool,
 
   /**
    * Additional information such as shortcut or caret
@@ -85,9 +120,21 @@ ContextMenuOption.propTypes = {
   disabled: PropTypes.bool,
 
   /**
+   * Whether the content should be indented (for example because it's in a group with options that have icons).
+   * Is automatically set by ContextMenu
+   */
+  indented: PropTypes.bool,
+
+  /**
    * Rendered label for the ContextMenuOption
    */
   label: PropTypes.node.isRequired,
+
+  /**
+   * Rendered icon for the ContextMenuOption.
+   * Can be a React component class
+   */
+  renderIcon: PropTypes.oneOfType([PropTypes.func, PropTypes.object]),
 
   /**
    * Rendered shortcut for the ContextMenuOption

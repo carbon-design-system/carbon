@@ -72,19 +72,33 @@
     color: $disabled-02;
   }
 
+  .#{$prefix}--context-menu-option__content--indented
+    .#{$prefix}--context-menu-option__label {
+    margin-left: $spacing-05;
+  }
+
   .#{$prefix}--context-menu-option__label {
     @include type-style('body-short-01');
 
+    flex-grow: 1;
     // add top/bottom padding to make sure letters are not cut off by hidden overflow
     padding: $spacing-02 0;
     overflow: hidden;
     color: $text-01;
     white-space: nowrap;
+    text-align: start;
     text-overflow: ellipsis;
   }
 
   .#{$prefix}--context-menu-option__info {
     margin-left: $spacing-05;
+  }
+
+  .#{$prefix}--context-menu-option__icon {
+    display: flex;
+    flex: 0 0 1rem;
+    align-items: center;
+    margin-right: $spacing-03;
   }
 }
 

@@ -16,9 +16,13 @@ const ContextMenu = React.forwardRef(function ContextMenu(
   { children, open },
   ref
 ) {
+  const someNodesHaveIcons = children.some((node) => node.props.renderIcon);
+
   const options = React.Children.map(children, (node) => {
     if (React.isValidElement(node)) {
-      return React.cloneElement(node);
+      return React.cloneElement(node, {
+        indented: someNodesHaveIcons,
+      });
     }
   });
 
