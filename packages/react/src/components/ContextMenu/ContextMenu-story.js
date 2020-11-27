@@ -17,8 +17,12 @@ export default {
 };
 
 export const _ContextMenu = () => (
-  <ContextMenu>
-    <ContextMenuOption label="Share with" />
+  <ContextMenu open>
+    <ContextMenuOption label="Share with">
+      <ContextMenuOption label="None" />
+      <ContextMenuOption label="Product team" />
+      <ContextMenuOption label="Organization" />
+    </ContextMenuOption>
     <ContextMenuOption label="Cut" />
     <ContextMenuOption label="Copy" />
     <ContextMenuOption label="Copy path" />

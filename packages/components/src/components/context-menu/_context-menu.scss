@@ -16,21 +16,42 @@
   .#{$prefix}--context-menu {
     @include box-shadow;
 
+    display: none;
     width: 13rem;
     padding: $spacing-02 0;
     background-color: $ui-01;
   }
 
+  .#{$prefix}--context-menu--open {
+    display: block;
+  }
+
   .#{$prefix}--context-menu-option {
-    display: flex;
-    align-items: center;
+    position: relative;
     height: $spacing-07;
-    padding: 0 $spacing-05;
     background-color: $ui-01;
 
     &:hover {
       background-color: $hover-ui;
     }
+  }
+
+  .#{$prefix}--context-menu-option > .#{$prefix}--context-menu {
+    position: absolute;
+    top: -$spacing-02;
+    left: 100%;
+    z-index: 1;
+  }
+
+  .#{$prefix}--context-menu-option:hover > .#{$prefix}--context-menu {
+    display: block;
+  }
+
+  .#{$prefix}--context-menu-option__content {
+    display: flex;
+    align-items: center;
+    height: 100%;
+    padding: 0 $spacing-05;
   }
 }
 
