@@ -45,7 +45,8 @@
     z-index: 1;
   }
 
-  .#{$prefix}--context-menu-option:hover > .#{$prefix}--context-menu {
+  .#{$prefix}--context-menu-option:hover > .#{$prefix}--context-menu,
+  .#{$prefix}--context-menu-option:focus-within > .#{$prefix}--context-menu {
     display: block;
   }
 

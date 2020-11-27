@@ -27,6 +27,7 @@ export const _ContextMenu = () => (
     <ContextMenuOption label="Share with" renderIcon={FolderShared16}>
       <ContextMenuRadioGroup
         items={['None', 'Product team', 'Organization', 'Company']}
+        initialSelectedItem="Product team"
       />
     </ContextMenuOption>
     <ContextMenuDivider />

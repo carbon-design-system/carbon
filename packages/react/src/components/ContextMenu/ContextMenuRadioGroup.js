@@ -10,8 +10,8 @@ import PropTypes from 'prop-types';
 import { Checkmark16 } from '@carbon/icons-react';
 import ContextMenuOption from './ContextMenuOption';
 
-function ContextMenuRadioGroup({ items, label }) {
-  const [selected, setSelected] = useState('');
+function ContextMenuRadioGroup({ items, initialSelectedItem, label }) {
+  const [selected, setSelected] = useState(initialSelectedItem);
 
   const options = items.map((option, i) => {
     const isSelected = selected === option;
@@ -39,6 +39,11 @@ function ContextMenuRadioGroup({ items, label }) {
 }
 
 ContextMenuRadioGroup.propTypes = {
+  /**
+   * Whether the option should be checked by default
+   */
+  initialSelectedItem: PropTypes.string,
+
   /**
    * Array of the radio options
    */
