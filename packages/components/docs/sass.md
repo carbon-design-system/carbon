@@ -14143,6 +14143,7 @@ Button styles
     }
 
     &:active {
+      color: $text-04;
       background-color: $active-tertiary;
       border-color: transparent;
     }
