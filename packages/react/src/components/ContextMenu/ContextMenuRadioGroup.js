@@ -7,8 +7,11 @@
 
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
+import { settings } from 'carbon-components';
 import { Checkmark16 } from '@carbon/icons-react';
 import ContextMenuOption from './ContextMenuOption';
+
+const { prefix } = settings;
 
 function ContextMenuRadioGroup({ items, initialSelectedItem, label }) {
   const [selected, setSelected] = useState(initialSelectedItem);
@@ -32,7 +35,10 @@ function ContextMenuRadioGroup({ items, initialSelectedItem, label }) {
   });
 
   return (
-    <div role="radiogroup" aria-label={label}>
+    <div
+      className={`${prefix}--context-menu-radio-group`}
+      role="radiogroup"
+      aria-label={label}>
       {options}
     </div>
   );

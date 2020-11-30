@@ -26,7 +26,7 @@ function ContextMenuOptionContent({
   });
 
   return (
-    <button className={classes} type="button" disabled={disabled}>
+    <button className={classes} type="button" disabled={disabled} tabIndex={-1}>
       {indented && (
         <div className={`${prefix}--context-menu-option__icon`}>
           {Icon && <Icon />}
@@ -55,7 +55,9 @@ function ContextMenuOption({
     }
   });
 
-  const classes = classnames(`${prefix}--context-menu-option`);
+  const classes = classnames(`${prefix}--context-menu-option`, {
+    [`${prefix}--context-menu-option--disabled`]: disabled,
+  });
 
   return (
     <li {...rest} className={classes}>

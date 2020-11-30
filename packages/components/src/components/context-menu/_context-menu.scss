@@ -33,7 +33,8 @@
     background-color: $ui-01;
     transition: background-color $duration--fast-01 motion(standard, productive);
 
-    &:hover {
+    &:hover,
+    &:focus-within {
       background-color: $hover-ui;
     }
   }
