@@ -17,6 +17,7 @@
   .#{$prefix}--context-menu {
     @include box-shadow;
 
+    z-index: z('modal');
     display: none;
     width: 13rem;
     padding: $spacing-02 0;

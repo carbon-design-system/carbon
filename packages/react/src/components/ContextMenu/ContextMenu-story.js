@@ -7,13 +7,14 @@
 
 import React, { useEffect, useState } from 'react';
 import { FolderShared16, Edit16, TrashCan16 } from '@carbon/icons-react';
+import { InlineNotification } from '../Notification';
 
 import ContextMenu, {
   ContextMenuOption,
   ContextMenuDivider,
   SelectableContextMenuOption,
+  ContextMenuRadioGroup,
 } from '../ContextMenu';
-import ContextMenuRadioGroup from './ContextMenuRadioGroup';
 
 export default {
   title: 'ContextMenu',
@@ -44,32 +45,45 @@ export const _ContextMenu = () => {
   });
 
   return (
-    <ContextMenu
-      open={open}
-      x={position[0]}
-      y={position[1]}
-      onClose={() => {
-        setOpen(false);
-      }}>
-      <ContextMenuOption label="Share with" renderIcon={FolderShared16}>
-        <ContextMenuRadioGroup
-          label="Share with"
-          items={['None', 'Product team', 'Organization', 'Company']}
-          initialSelectedItem="Product team"
+    <>
+      <InlineNotification
+        kind="info"
+        title="Context menu"
+        subtitle="Right-click anywhere on this page to access a demo of this component"
+        lowContrast
+        hideCloseButton
+      />
+      <ContextMenu
+        open={open}
+        x={position[0]}
+        y={position[1]}
+        onClose={() => {
+          setOpen(false);
+        }}>
+        <ContextMenuOption label="Share with" renderIcon={FolderShared16}>
+          <ContextMenuRadioGroup
+            label="Share with"
+            items={['None', 'Product team', 'Organization', 'Company']}
+            initialSelectedItem="Product team"
+          />
+        </ContextMenuOption>
+        <ContextMenuDivider />
+        <ContextMenuOption label="Cut" shortcut="⌘X" />
+        <ContextMenuOption label="Copy" shortcut="⌘C" />
+        <ContextMenuOption label="Copy path" shortcut="⌥⌘C" />
+        <ContextMenuOption label="Paste" shortcut="⌘V" disabled />
+        <ContextMenuOption label="Duplicate" />
+        <ContextMenuDivider />
+        <SelectableContextMenuOption label="Publish" initialChecked />
+        <ContextMenuDivider />
+        <ContextMenuOption label="Rename" shortcut="↩︎" renderIcon={Edit16} />
+        <ContextMenuOption
+          label="Delete"
+          shortcut="⌘⌫"
+          renderIcon={TrashCan16}
         />
-      </ContextMenuOption>
-      <ContextMenuDivider />
-      <ContextMenuOption label="Cut" shortcut="⌘X" />
-      <ContextMenuOption label="Copy" shortcut="⌘C" />
-      <ContextMenuOption label="Copy path" shortcut="⌥⌘C" />
-      <ContextMenuOption label="Paste" shortcut="⌘V" disabled />
-      <ContextMenuOption label="Duplicate" />
-      <ContextMenuDivider />
-      <SelectableContextMenuOption label="Publish" initialChecked />
-      <ContextMenuDivider />
-      <ContextMenuOption label="Rename" shortcut="↩︎" renderIcon={Edit16} />
-      <ContextMenuOption label="Delete" shortcut="⌘⌫" renderIcon={TrashCan16} />
-    </ContextMenu>
+      </ContextMenu>
+    </>
   );
 };
 
