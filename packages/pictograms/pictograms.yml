@@ -4291,11 +4291,12 @@
     - cities
     - city
 - name: watson--logo
-  friendly_name: Watson logo
+  friendly_name: IBM Watson
   aliases:
     - Watson logo
     - logo
     - watson
+    - ibm watson
     - avatar
 - name: weather
   friendly_name: Weather
