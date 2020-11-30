@@ -98,8 +98,8 @@ const getFloatingPosition = ({
     right: refRight = 0,
     bottom: refBottom = 0,
   } = refPosition;
-  const scrollX = container.position === 'sticky' ? 0 : pageXOffset;
-  const scrollY = container.position === 'sticky' ? 0 : pageYOffset;
+  const scrollX = container.position !== 'static' ? 0 : pageXOffset;
+  const scrollY = container.position !== 'static' ? 0 : pageYOffset;
   const relativeDiff = {
     top: container.position !== 'static' ? container.rect.top : 0,
     left: container.position !== 'static' ? container.rect.left : 0,
