@@ -9,7 +9,9 @@ import React from 'react';
 import classnames from 'classnames';
 import PropTypes from 'prop-types';
 import { settings } from 'carbon-components';
+
 import SelectableContextMenuOption from './SelectableContextMenuOption';
+import ContextMenuRadioGroup from './ContextMenuRadioGroup';
 
 const { prefix } = settings;
 
@@ -18,7 +20,10 @@ const ContextMenu = React.forwardRef(function ContextMenu(
   ref
 ) {
   const someNodesHaveIcons = children.some(
-    (node) => node.props.renderIcon || node.type === SelectableContextMenuOption
+    (node) =>
+      node.props.renderIcon ||
+      node.type === SelectableContextMenuOption ||
+      node.type === ContextMenuRadioGroup
   );
 
   const options = React.Children.map(children, (node) => {
