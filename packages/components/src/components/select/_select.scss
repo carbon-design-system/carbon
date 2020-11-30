@@ -35,7 +35,6 @@
     display: flex;
     align-items: center;
     width: 100%;
-    max-width: rem(448px);
   }
 
   .#{$prefix}--select-input {
@@ -44,9 +43,6 @@
 
     display: block;
     width: 100%;
-    min-width: rem(128px);
-    max-width: rem(448px);
-
     height: rem(40px);
     padding: 0 $spacing-09 0 $spacing-05;
     color: $text-01;
