@@ -2000,7 +2000,7 @@
     - headphones
     - electronics
 - name: heart
-  friendly_name: heart
+  friendly_name: Heart
   aliases:
     - heart
     - like
