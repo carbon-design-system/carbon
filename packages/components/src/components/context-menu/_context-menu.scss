@@ -43,7 +43,7 @@
 
   .#{$prefix}--context-menu-option > .#{$prefix}--context-menu {
     position: absolute;
-    top: -$spacing-02;
+    top: calc(#{$spacing-02} * -1);
     left: 100%;
     z-index: 1;
   }
@@ -76,7 +76,11 @@
   }
 
   .#{$prefix}--context-menu-option__content--disabled
-    .#{$prefix}--context-menu-option__label {
+    .#{$prefix}--context-menu-option__label,
+  .#{$prefix}--context-menu-option__content--disabled
+    .#{$prefix}--context-menu-option__info,
+  .#{$prefix}--context-menu-option__content--disabled
+    .#{$prefix}--context-menu-option__icon {
     color: $disabled-02;
   }
 
@@ -100,6 +104,7 @@
 
   .#{$prefix}--context-menu-option__info {
     margin-left: $spacing-05;
+    color: $icon-01;
   }
 
   .#{$prefix}--context-menu-option__icon {
@@ -107,6 +112,7 @@
     flex: 0 0 1rem;
     align-items: center;
     margin-right: $spacing-03;
+    color: $icon-01;
   }
 
   .#{$prefix}--context-menu-divider {
