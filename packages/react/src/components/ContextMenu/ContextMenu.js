@@ -10,6 +10,7 @@ import classnames from 'classnames';
 import PropTypes from 'prop-types';
 import { settings } from 'carbon-components';
 import { keys, match } from '../../internal/keyboard';
+import ClickListener from '../../internal/ClickListener';
 
 import SelectableContextMenuOption from './SelectableContextMenuOption';
 import ContextMenuRadioGroup from './ContextMenuRadioGroup';
@@ -24,32 +25,31 @@ const ContextMenu = function ContextMenu({
   level = 1,
   x = 0,
   y = 0,
+  onClose = () => {},
   ...rest
 }) {
   const rootRef = useRef(null);
   const [shouldReverse, setShouldReverse] = useState(false);
+  const isRootMenu = open !== undefined;
 
   function resetFocus() {
     Array.from(
-      rootRef?.current?.querySelectorAll('[tabindex="0"]') ?? []
+      rootRef?.current?.element.querySelectorAll('[tabindex="0"]') ?? []
     ).forEach((node) => {
       node.tabIndex = -1;
     });
   }
 
-  function focusNode(node, focus = true) {
+  function focusNode(node) {
     if (node) {
       resetFocus();
       node.tabIndex = 0;
-
-      if (focus) {
-        node.focus();
-      }
+      node.focus();
     }
   }
 
   function getValidNodes(list) {
-    const nodes = Array.from(list.childNodes ?? []).reduce((acc, child) => {
+    const nodes = Array.from(list?.childNodes ?? []).reduce((acc, child) => {
       if (child.tagName === 'LI') {
         return [...acc, child];
       }
@@ -100,6 +100,10 @@ const ContextMenu = function ContextMenu({
   function handleKeyDown(event) {
     event.stopPropagation();
 
+    if (match(event, keys.Escape)) {
+      onClose();
+    }
+
     const currentNode = event.target.parentNode;
     let nodeToFocus;
 
@@ -120,8 +124,12 @@ const ContextMenu = function ContextMenu({
     }
   }
 
+  function handleClickOutside() {
+    onClose();
+  }
+
   function willFit() {
-    if (rootRef?.current) {
+    if (rootRef?.current?.element) {
       const bodyWidth = document.body.clientWidth;
 
       const reverseMap = [...Array(level)].reduce(
@@ -151,10 +159,10 @@ const ContextMenu = function ContextMenu({
   }
 
   useEffect(() => {
-    const topLevelNodes = getValidNodes(rootRef?.current);
+    const topLevelNodes = getValidNodes(rootRef?.current?.element);
 
     if (topLevelNodes && topLevelNodes.length > 0) {
-      focusNode(topLevelNodes[0].firstChild, false);
+      focusNode(topLevelNodes[0].firstChild);
     }
 
     setShouldReverse(!willFit());
@@ -183,15 +191,16 @@ const ContextMenu = function ContextMenu({
   });
 
   return (
-    <ul
-      ref={rootRef}
-      className={classes}
-      onKeyDown={handleKeyDown}
-      data-level={level}
-      style={open ? { left: `${x}px`, top: `${y}px` } : null}
-      role="menu">
-      {options}
-    </ul>
+    <ClickListener onClickOutside={handleClickOutside} ref={rootRef}>
+      <ul
+        className={classes}
+        onKeyDown={handleKeyDown}
+        data-level={level}
+        style={isRootMenu ? { left: `${x}px`, top: `${y}px` } : null}
+        role="menu">
+        {options}
+      </ul>
+    </ClickListener>
   );
 };
 
@@ -205,6 +214,11 @@ ContextMenu.propTypes = {
    * Internal: keeps track of the nesting level of the menu
    */
   level: PropTypes.number,
+
+  /**
+   * Function called when the menu is closed
+   */
+  onClose: PropTypes.func,
 
   /**
    * Specify whether the ContextMenu is currently open

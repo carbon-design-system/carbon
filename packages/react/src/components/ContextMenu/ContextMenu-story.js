@@ -23,7 +23,7 @@ export default {
 };
 
 export const _ContextMenu = () => {
-  const [open, setOpen] = useState(true);
+  const [open, setOpen] = useState(false);
   const [position, setPosition] = useState([0, 0]);
 
   function openContextMenu(e) {
@@ -44,7 +44,13 @@ export const _ContextMenu = () => {
   });
 
   return (
-    <ContextMenu open={open} x={position[0]} y={position[1]}>
+    <ContextMenu
+      open={open}
+      x={position[0]}
+      y={position[1]}
+      onClose={() => {
+        setOpen(false);
+      }}>
       <ContextMenuOption label="Share with" renderIcon={FolderShared16}>
         <ContextMenuRadioGroup
           label="Share with"
