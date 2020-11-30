@@ -3742,7 +3742,7 @@
   aliases:
     - systems devops deploy
 - name: systems-devops--monitor
-  friendly_name: Systems DevOps nonitor
+  friendly_name: Systems DevOps monitor
   aliases:
     - systems devops monitor
 - name: systems-devops--plan
