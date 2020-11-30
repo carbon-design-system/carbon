@@ -479,6 +479,7 @@ export default class Tabs extends React.Component {
         <div {...other} className={classes.tabs} onScroll={this.handleScroll}>
           <button
             aria-hidden="true"
+            aria-label="Scroll left"
             className={classes.leftOverflowButtonClasses}
             onClick={(_) => this.handleOverflowNavClick(_, { direction: -1 })}
             onMouseDown={(event) =>
@@ -505,6 +506,7 @@ export default class Tabs extends React.Component {
           )}
           <button
             aria-hidden="true"
+            aria-label="Scroll right"
             className={classes.rightOverflowButtonClasses}
             onClick={(_) => this.handleOverflowNavClick(_, { direction: 1 })}
             onMouseDown={(event) =>
