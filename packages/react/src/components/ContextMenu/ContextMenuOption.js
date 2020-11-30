@@ -47,6 +47,8 @@ function ContextMenuOption({
   shortcut,
   renderIcon,
   indented,
+  level,
+  menuX,
   ...rest
 }) {
   const subOptions = React.Children.map(children, (node) => {
@@ -60,7 +62,7 @@ function ContextMenuOption({
   });
 
   return (
-    <li {...rest} className={classes}>
+    <li {...rest} className={classes} role="menuitem">
       {subOptions ? (
         <>
           <ContextMenuOptionContent
@@ -69,7 +71,9 @@ function ContextMenuOption({
             info={<CaretRight16 />}
             indented={indented}
           />
-          <ContextMenu>{subOptions}</ContextMenu>
+          <ContextMenu level={level + 1} x={menuX}>
+            {subOptions}
+          </ContextMenu>
         </>
       ) : (
         <ContextMenuOptionContent
@@ -109,6 +113,11 @@ ContextMenuOptionContent.propTypes = {
    * Rendered label for the ContextMenuOptionContent
    */
   label: PropTypes.node.isRequired,
+
+  /**
+   * Which nested level this option is located in.
+   */
+  level: PropTypes.number,
 };
 
 ContextMenuOption.propTypes = {
@@ -132,6 +141,18 @@ ContextMenuOption.propTypes = {
    * Rendered label for the ContextMenuOption
    */
   label: PropTypes.node.isRequired,
+
+  /**
+   * Which nested level this option is located in.
+   * Is automatically set by ContextMenu
+   */
+  level: PropTypes.number,
+
+  /**
+   * The x position of the root menu.
+   * Is automatically set by ContextMenu
+   */
+  menuX: PropTypes.number,
 
   /**
    * Rendered icon for the ContextMenuOption.

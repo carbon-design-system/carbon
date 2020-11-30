@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import classnames from 'classnames';
 import PropTypes from 'prop-types';
 import { settings } from 'carbon-components';
@@ -16,8 +16,18 @@ import ContextMenuRadioGroup from './ContextMenuRadioGroup';
 
 const { prefix } = settings;
 
-const ContextMenu = function ContextMenu({ children, open, ...rest }) {
+const contextMenuWidth = 208; // in px
+
+const ContextMenu = function ContextMenu({
+  children,
+  open,
+  level = 1,
+  x = 0,
+  y = 0,
+  ...rest
+}) {
   const rootRef = useRef(null);
+  const [shouldReverse, setShouldReverse] = useState(false);
 
   function resetFocus() {
     Array.from(
@@ -27,11 +37,14 @@ const ContextMenu = function ContextMenu({ children, open, ...rest }) {
     });
   }
 
-  function focusNode(node) {
+  function focusNode(node, focus = true) {
     if (node) {
       resetFocus();
       node.tabIndex = 0;
-      node.focus();
+
+      if (focus) {
+        node.focus();
+      }
     }
   }
 
@@ -107,16 +120,47 @@ const ContextMenu = function ContextMenu({ children, open, ...rest }) {
     }
   }
 
+  function willFit() {
+    if (rootRef?.current) {
+      const bodyWidth = document.body.clientWidth;
+
+      const reverseMap = [...Array(level)].reduce(
+        (acc) => {
+          const endX = acc.lastX + contextMenuWidth * acc.direction;
+          const fits =
+            acc.direction === 1 ? endX < bodyWidth : endX > contextMenuWidth;
+
+          const newDirection = fits ? acc.direction : acc.direction * -1;
+          const newLastX = fits
+            ? endX
+            : acc.lastX + contextMenuWidth * newDirection;
+
+          return {
+            direction: newDirection,
+            lastX: newLastX,
+            map: [...acc.map, newDirection === 1],
+          };
+        },
+        { direction: 1, lastX: x, map: [] }
+      );
+
+      return reverseMap.map[level - 1];
+    }
+
+    return true;
+  }
+
   useEffect(() => {
     const topLevelNodes = getValidNodes(rootRef?.current);
 
     if (topLevelNodes && topLevelNodes.length > 0) {
-      focusNode(topLevelNodes[0].firstChild);
+      focusNode(topLevelNodes[0].firstChild, false);
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [open]);
 
-  const someNodesHaveIcons = children.some(
+    setShouldReverse(!willFit());
+  }, [open, x, y]); // eslint-disable-line react-hooks/exhaustive-deps
+
+  const someNodesHaveIcons = React.Children.toArray(children).some(
     (node) =>
       node.props.renderIcon ||
       node.type === SelectableContextMenuOption ||
@@ -127,17 +171,25 @@ const ContextMenu = function ContextMenu({ children, open, ...rest }) {
     if (React.isValidElement(node)) {
       return React.cloneElement(node, {
         indented: someNodesHaveIcons,
+        level: level,
+        menuX: x,
       });
     }
   });
 
   const classes = classnames(`${prefix}--context-menu`, {
     [`${prefix}--context-menu--open`]: open,
+    [`${prefix}--context-menu--reverse`]: shouldReverse,
   });
 
   return (
-    // eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions
-    <ul ref={rootRef} className={classes} onKeyDown={handleKeyDown}>
+    <ul
+      ref={rootRef}
+      className={classes}
+      onKeyDown={handleKeyDown}
+      data-level={level}
+      style={open ? { left: `${x}px`, top: `${y}px` } : null}
+      role="menu">
       {options}
     </ul>
   );
@@ -150,9 +202,24 @@ ContextMenu.propTypes = {
   children: PropTypes.node,
 
   /**
+   * Internal: keeps track of the nesting level of the menu
+   */
+  level: PropTypes.number,
+
+  /**
    * Specify whether the ContextMenu is currently open
    */
   open: PropTypes.bool,
+
+  /**
+   * Specify the x position where this menu is rendered
+   */
+  x: PropTypes.number,
+
+  /**
+   * Specify the y position where this menu is rendered
+   */
+  y: PropTypes.number,
 };
 
 export default ContextMenu;

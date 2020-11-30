@@ -24,6 +24,7 @@
   }
 
   .#{$prefix}--context-menu--open {
+    position: fixed;
     display: block;
   }
 
@@ -44,6 +45,10 @@
     top: -$spacing-02;
     left: 100%;
     z-index: 1;
+  }
+
+  .#{$prefix}--context-menu-option > .#{$prefix}--context-menu--reverse {
+    left: -100%;
   }
 
   .#{$prefix}--context-menu-option:hover > .#{$prefix}--context-menu,
