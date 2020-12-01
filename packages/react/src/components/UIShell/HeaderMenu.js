@@ -46,6 +46,11 @@ class HeaderMenu extends React.Component {
      * Optional component to render instead of string
      */
     renderMenuContent: PropTypes.func,
+    /**
+     * Optionally supply a role for the underlying `<li>` node. Useful for resetting
+     * `<ul>` semantics for menus.
+     */
+    role: PropTypes.string,
 
     /**
      * Optionally provide a tabIndex for the underlying menu button
@@ -173,6 +178,7 @@ class HeaderMenu extends React.Component {
       children,
       renderMenuContent: MenuContent,
       menuLinkName,
+      role,
     } = this.props;
     const accessibilityLabel = {
       'aria-label': ariaLabel,
@@ -188,6 +194,7 @@ class HeaderMenu extends React.Component {
     // - href can be set to javascript:void(0), ideally this will be a button
     return (
       <li // eslint-disable-line jsx-a11y/mouse-events-have-key-events,jsx-a11y/no-noninteractive-element-interactions
+        role={role}
         className={className}
         onKeyDown={this.handleMenuClose}
         onClick={this.handleOnClick}
