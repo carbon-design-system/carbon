@@ -18,7 +18,7 @@ import { sortStates } from './state/sorting';
 const { prefix } = settings;
 
 const translationKeys = {
-  buttonDescription: 'carbon.table.header.button.description',
+  buttonDescription: 'carbon.table.header.icon.description',
 };
 
 const translateWithId = (
@@ -89,7 +89,7 @@ const TableHeader = React.forwardRef(function TableHeader(
   });
   const ariaSort = !isSortHeader ? 'none' : sortDirections[sortDirection];
   const uniqueId = Math.random();
-  const sortDescription = t('carbon.table.header.button.description', {
+  const sortDescription = t('carbon.table.header.icon.description', {
     header: children,
     sortDirection,
     isSortHeader,
