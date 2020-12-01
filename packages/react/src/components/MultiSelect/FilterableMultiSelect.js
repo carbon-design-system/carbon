@@ -203,7 +203,6 @@ export default class FilterableMultiSelect extends React.Component {
     this.setState({
       inputValue: '',
     });
-    if (this.state.isOpen) this.handleOnMenuChange(false);
   };
 
   handleOnStateChange = (changes, downshift) => {
