@@ -75,7 +75,6 @@ describe('HeaderMenu', () => {
     });
     const headerMenu = wrapper.childAt(0);
     const headerMenuText = headerMenu.find(`li`).prop('role');
-    console.log(headerMenuText);
 
     expect(headerMenuText).toMatch('menuitem');
   });
