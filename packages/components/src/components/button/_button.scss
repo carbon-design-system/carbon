@@ -278,7 +278,7 @@
 
   .#{$prefix}--btn--danger {
     @include button-theme(
-      $danger-01,
+      $support-01,
       transparent,
       $text-04,
       $hover-danger,
@@ -295,8 +295,8 @@
     &--tertiary {
       @include button-theme(
         transparent,
-        $danger-02,
-        $danger-02,
+        $support-01,
+        $support-01,
         $hover-danger,
         currentColor,
         $active-danger
@@ -309,7 +309,7 @@
 
       &:focus {
         color: $text-04;
-        background-color: $danger-01;
+        background-color: $support-01;
       }
 
       &:active {
@@ -324,7 +324,7 @@
       @include button-theme(
         transparent,
         transparent,
-        $danger-02,
+        $support-01,
         $hover-danger,
         currentColor,
         $active-danger

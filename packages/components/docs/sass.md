@@ -7461,6 +7461,7 @@ $support-01: if(
 - **Type**: `{undefined}`
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
+  - [button [mixin]](#button-mixin)
   - [dropdown [mixin]](#dropdown-mixin)
   - [file-uploader [mixin]](#file-uploader-mixin)
   - [inline-loading [mixin]](#inline-loading-mixin)
@@ -7719,7 +7720,6 @@ $danger-01: if(
 - **Type**: `{undefined}`
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
-  - [button [mixin]](#button-mixin)
 
 ### ✅danger-02 [variable]
 
@@ -7743,7 +7743,6 @@ $danger-02: if(
 - **Type**: `{undefined}`
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
-  - [button [mixin]](#button-mixin)
 
 ### ✅focus [variable]
 
@@ -14342,7 +14341,7 @@ Button styles
 
   .#{$prefix}--btn--danger {
     @include button-theme(
-      $danger-01,
+      $support-01,
       transparent,
       $text-04,
       $hover-danger,
@@ -14359,8 +14358,8 @@ Button styles
     &--tertiary {
       @include button-theme(
         transparent,
-        $danger-02,
-        $danger-02,
+        $support-01,
+        $support-01,
         $hover-danger,
         currentColor,
         $active-danger
@@ -14373,7 +14372,7 @@ Button styles
 
       &:focus {
         color: $text-04;
-        background-color: $danger-01;
+        background-color: $support-01;
       }
 
       &:active {
@@ -14388,7 +14387,7 @@ Button styles
       @include button-theme(
         transparent,
         transparent,
-        $danger-02,
+        $support-01,
         $hover-danger,
         currentColor,
         $active-danger
@@ -14536,10 +14535,9 @@ Button styles
   - [hover-primary-text [variable]](#hover-primary-text-variable)
   - [icon-01 [variable]](#icon-01-variable)
   - [focus [variable]](#focus-variable)
-  - [danger-01 [variable]](#danger-01-variable)
+  - [support-01 [variable]](#support-01-variable)
   - [hover-danger [variable]](#hover-danger-variable)
   - [active-danger [variable]](#active-danger-variable)
-  - [danger-02 [variable]](#danger-02-variable)
   - [button-separator [variable]](#button-separator-variable)
 
 ### ❌button-base [mixin]
