@@ -5994,6 +5994,14 @@ Map {
       "onToggle": Object {
         "type": "func",
       },
+      "size": Object {
+        "args": Array [
+          Array [
+            "sm",
+          ],
+        ],
+        "type": "oneOf",
+      },
       "toggled": Object {
         "type": "bool",
       },
