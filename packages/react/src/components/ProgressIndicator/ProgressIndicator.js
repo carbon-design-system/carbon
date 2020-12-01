@@ -285,7 +285,7 @@ export class ProgressIndicator extends Component {
       }
       if (index > this.state.currentIndex) {
         return React.cloneElement(child, {
-          complete: false,
+          complete: child.props.complete || false,
           index,
           onClick,
         });
