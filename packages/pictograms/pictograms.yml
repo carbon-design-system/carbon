@@ -2000,7 +2000,7 @@
     - headphones
     - electronics
 - name: heart
-  friendly_name: heart
+  friendly_name: Heart
   aliases:
     - heart
     - like
@@ -3742,7 +3742,7 @@
   aliases:
     - systems devops deploy
 - name: systems-devops--monitor
-  friendly_name: Systems DevOps nonitor
+  friendly_name: Systems DevOps monitor
   aliases:
     - systems devops monitor
 - name: systems-devops--plan
@@ -4291,11 +4291,12 @@
     - cities
     - city
 - name: watson--logo
-  friendly_name: Watson logo
+  friendly_name: IBM Watson
   aliases:
     - Watson logo
     - logo
     - watson
+    - ibm watson
     - avatar
 - name: weather
   friendly_name: Weather

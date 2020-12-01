@@ -19,6 +19,7 @@ const TableSelectRow = ({
   id,
   name,
   onSelect,
+  onChange,
   disabled,
   radio,
   className,
@@ -27,6 +28,7 @@ const TableSelectRow = ({
     id,
     name,
     onClick: onSelect,
+    onChange,
     checked,
     disabled,
   };
@@ -78,6 +80,11 @@ TableSelectRow.propTypes = {
    * Provide a `name` for the underlying input control
    */
   name: PropTypes.string.isRequired,
+
+  /**
+   * Provide an optional hook that is called each time the input is updated
+   */
+  onChange: PropTypes.func,
 
   /**
    * Provide a handler to listen to when a user initiates a selection request
