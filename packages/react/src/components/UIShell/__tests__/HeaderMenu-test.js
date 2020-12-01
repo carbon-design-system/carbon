@@ -22,6 +22,7 @@ describe('HeaderMenu', () => {
       'aria-label': 'Accessibility label',
       className: 'custom-class',
       menuLinkName: 'test',
+      role: 'menuitem',
       // We use `ref` instead of `focusRef` becase `HeaderMenu` forwards the ref
       // to the underlying menu button
       ref: jest.fn(),
@@ -66,6 +67,17 @@ describe('HeaderMenu', () => {
       .prop('aria-label');
 
     expect(headerMenuText).toMatch('Accessibility label');
+  });
+
+  it('should render role', () => {
+    const wrapper = mount(<HeaderMenu {...mockProps}></HeaderMenu>, {
+      attachTo: mountNode,
+    });
+    const headerMenu = wrapper.childAt(0);
+    const headerMenuText = headerMenu.find(`li`).prop('role');
+    console.log(headerMenuText);
+
+    expect(headerMenuText).toMatch('menuitem');
   });
 
   it('should render content prop', () => {

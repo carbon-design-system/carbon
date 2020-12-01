@@ -5,6 +5,7 @@ exports[`HeaderMenu should render 1`] = `
   aria-label="Accessibility label"
   className="custom-class"
   menuLinkName="test"
+  role="menuitem"
   tabIndex={-1}
 >
   <HeaderMenu
@@ -51,6 +52,7 @@ exports[`HeaderMenu should render 1`] = `
     }
     menuLinkName="test"
     renderMenuContent={[Function]}
+    role="menuitem"
     tabIndex={-1}
   >
     <li
@@ -58,6 +60,7 @@ exports[`HeaderMenu should render 1`] = `
       onBlur={[Function]}
       onClick={[Function]}
       onKeyDown={[Function]}
+      role="menuitem"
     >
       <a
         aria-expanded={false}
