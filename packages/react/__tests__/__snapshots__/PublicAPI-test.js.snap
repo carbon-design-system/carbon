@@ -109,6 +109,8 @@ Map {
     },
   },
   "BreadcrumbItem" => Object {
+    "$$typeof": Symbol(react.forward_ref),
+    "displayName": "BreadcrumbItem",
     "propTypes": Object {
       "aria-current": Object {
         "args": Array [
@@ -136,6 +138,7 @@ Map {
         "type": "bool",
       },
     },
+    "render": [Function],
   },
   "Button" => Object {
     "$$typeof": Symbol(react.forward_ref),
