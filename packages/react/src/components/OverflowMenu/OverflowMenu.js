@@ -560,6 +560,7 @@ class OverflowMenu extends Component {
   }
 }
 
+export { OverflowMenu };
 export default (() => {
   const forwardRef = (props, ref) => <OverflowMenu {...props} innerRef={ref} />;
   forwardRef.displayName = 'OverflowMenu';
