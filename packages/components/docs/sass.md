@@ -3806,6 +3806,7 @@ $spacing-05: $carbon--spacing-05;
   - [search [mixin]](#search-mixin)
   - [select [mixin]](#select-mixin)
   - [tabs [mixin]](#tabs-mixin)
+  - [tooltip [mixin]](#tooltip-mixin)
   - [treeview [mixin]](#treeview-mixin)
   - [carbon-switcher [mixin]](#carbon-switcher-mixin)
 
@@ -26985,7 +26986,6 @@ Tooltip styles
   }
 
   .#{$prefix}--tooltip {
-    @include box-shadow;
     @include reset;
 
     position: absolute;
@@ -26997,7 +26997,6 @@ Tooltip styles
     padding: $carbon--spacing-05;
     color: $inverse-01;
     word-wrap: break-word;
-    background: $inverse-02;
     border-radius: rem(2px);
 
     // Windows, Firefox HCM Fix
@@ -27046,6 +27045,11 @@ Tooltip styles
       }
     }
 
+    .#{$prefix}--tooltip__content {
+      background-color: $inverse-02;
+      box-shadow: 0 0 0 $spacing-05 $inverse-02, 0 2px 6px $spacing-05 rgba(0, 0, 0, 0.2);
+    }
+
     // Tooltips need to be click focusable but not sequentially focusable so the user can click within
     // the tooltip and not have it close. Because the element is not actionable it does not need
     // to have a visible focus indicator (OK'd by IBMa)
@@ -27065,6 +27069,44 @@ Tooltip styles
       border-bottom: $caret-size solid $inverse-02;
       border-left: $caret-size solid transparent;
       content: '';
+    }
+
+    &.#{$prefix}--tooltip--top.#{$prefix}--tooltip--align-start,
+    &.#{$prefix}--tooltip--bottom.#{$prefix}--tooltip--align-start {
+      .#{$prefix}--tooltip__content {
+        transform: translate(50%, 0);
+      }
+    }
+
+    &.#{$prefix}--tooltip--top.#{$prefix}--tooltip--align-end,
+    &.#{$prefix}--tooltip--bottom.#{$prefix}--tooltip--align-end {
+      .#{$prefix}--tooltip__content {
+        transform: translate(-50%, 0);
+      }
+    }
+
+    &.#{$prefix}--tooltip--left.#{$prefix}--tooltip--align-start {
+      .#{$prefix}--tooltip__content {
+        transform: translate(0, calc(9px + 50% - #{$spacing-05}));
+      }
+    }
+
+    &.#{$prefix}--tooltip--right.#{$prefix}--tooltip--align-start {
+      .#{$prefix}--tooltip__content {
+        transform: translate(0, calc(-3px + 50% - #{$spacing-05}));
+      }
+    }
+
+    &.#{$prefix}--tooltip--left.#{$prefix}--tooltip--align-end {
+      .#{$prefix}--tooltip__content {
+        transform: translate(0, calc(9px - 50% + #{$spacing-05}));
+      }
+    }
+
+    &.#{$prefix}--tooltip--right.#{$prefix}--tooltip--align-end {
+      .#{$prefix}--tooltip__content {
+        transform: translate(0, calc(-3px - 50% + #{$spacing-05}));
+      }
     }
 
     .#{$prefix}--tooltip__footer {
@@ -27288,6 +27330,7 @@ Tooltip styles
   - [carbon--spacing-07 [variable]](#carbon--spacing-07-variable)
   - [inverse-focus-ui [variable]](#inverse-focus-ui-variable)
   - [inverse-link [variable]](#inverse-link-variable)
+  - [spacing-05 [variable]](#spacing-05-variable)
   - [spacing-03 [variable]](#spacing-03-variable)
   - [interactive-04 [variable]](#interactive-04-variable)
 
