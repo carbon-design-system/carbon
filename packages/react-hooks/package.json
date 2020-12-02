@@ -1,7 +1,7 @@
 {
   "name": "@carbon/react-hooks",
   "private": true,
-  "version": "10.19.0-rc.2",
+  "version": "10.19.0-rc.3",
   "license": "Apache-2.0",
   "main": "lib/index.js",
   "module": "es/index.js",
