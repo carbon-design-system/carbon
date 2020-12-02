@@ -17,11 +17,12 @@ import {
 } from '@carbon/icons-react';
 import ListBox, { PropTypes as ListBoxPropTypes } from '../ListBox';
 import { mapDownshiftProps } from '../../tools/createPropAdapter';
+import mergeRefs from '../../tools/mergeRefs';
 import deprecate from '../../prop-types/deprecate';
 
 const { prefix } = settings;
 
-const defaultItemToString = item => {
+const defaultItemToString = (item) => {
   if (typeof item === 'string') {
     return item;
   }
@@ -116,7 +117,7 @@ const Dropdown = React.forwardRef(function Dropdown(
 
   // needs to be Capitalized for react to render it correctly
   const ItemToElement = itemToElement;
-
+  const toggleButtonProps = getToggleButtonProps();
   const helper = helperText ? (
     <div className={helperClasses}>{helperText}</div>
   ) : null;
@@ -158,8 +159,8 @@ const Dropdown = React.forwardRef(function Dropdown(
           className={`${prefix}--list-box__field`}
           disabled={disabled}
           aria-disabled={disabled}
-          {...getToggleButtonProps()}
-          ref={ref}>
+          {...toggleButtonProps}
+          ref={mergeRefs(toggleButtonProps.ref, ref)}>
           <span className={`${prefix}--list-box__label`}>
             {selectedItem ? itemToString(selectedItem) : label}
           </span>

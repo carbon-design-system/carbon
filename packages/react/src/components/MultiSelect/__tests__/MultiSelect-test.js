@@ -7,7 +7,7 @@
 
 import { getByText, isElementVisible } from '@carbon/test-utils/dom';
 import { pressEnter, pressSpace, pressTab } from '@carbon/test-utils/keyboard';
-import { render, cleanup } from '@carbon/test-utils/react';
+import { cleanup, render } from '@testing-library/react';
 import React from 'react';
 import { act, Simulate } from 'react-dom/test-utils';
 import MultiSelect from '../';
@@ -399,6 +399,14 @@ describe('MultiSelect', () => {
 
       // the first option in the list to the the former third option in the list
       expect(optionsArray[0].title).toBe('Item 2');
+    });
+
+    it('should accept a `ref` for the underlying button element', () => {
+      const ref = React.createRef();
+      const items = generateItems(4, generateGenericItem);
+      const label = 'test-label';
+      render(<MultiSelect id="test" label={label} items={items} ref={ref} />);
+      expect(ref.current.getAttribute('aria-haspopup')).toBe('listbox');
     });
   });
 });
