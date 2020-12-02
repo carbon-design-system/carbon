@@ -27074,38 +27074,38 @@ Tooltip styles
     &.#{$prefix}--tooltip--top.#{$prefix}--tooltip--align-start,
     &.#{$prefix}--tooltip--bottom.#{$prefix}--tooltip--align-start {
       .#{$prefix}--tooltip__content {
-        transform: translate(50%, 0);
+        transform: translate(calc(50% - 6px), 0);
       }
     }
 
     &.#{$prefix}--tooltip--top.#{$prefix}--tooltip--align-end,
     &.#{$prefix}--tooltip--bottom.#{$prefix}--tooltip--align-end {
       .#{$prefix}--tooltip__content {
-        transform: translate(-50%, 0);
+        transform: translate(calc(6px - 50%), 0);
       }
     }
 
     &.#{$prefix}--tooltip--left.#{$prefix}--tooltip--align-start {
       .#{$prefix}--tooltip__content {
-        transform: translate(0, calc(9px + 50% - #{$spacing-05}));
+        transform: translate(0, calc(9px + 50% - #{$spacing-03}));
       }
     }
 
     &.#{$prefix}--tooltip--right.#{$prefix}--tooltip--align-start {
       .#{$prefix}--tooltip__content {
-        transform: translate(0, calc(-3px + 50% - #{$spacing-05}));
+        transform: translate(0, calc(-3px + 50% - #{$spacing-03}));
       }
     }
 
     &.#{$prefix}--tooltip--left.#{$prefix}--tooltip--align-end {
       .#{$prefix}--tooltip__content {
-        transform: translate(0, calc(9px - 50% + #{$spacing-05}));
+        transform: translate(0, calc(9px - 50% + #{$spacing-03}));
       }
     }
 
     &.#{$prefix}--tooltip--right.#{$prefix}--tooltip--align-end {
       .#{$prefix}--tooltip__content {
-        transform: translate(0, calc(-3px - 50% + #{$spacing-05}));
+        transform: translate(0, calc(-3px - 50% + #{$spacing-03}));
       }
     }
 
