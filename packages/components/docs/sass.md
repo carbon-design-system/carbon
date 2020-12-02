@@ -14144,6 +14144,7 @@ Button styles
     }
 
     &:active {
+      color: $inverse-01;
       background-color: $active-tertiary;
       border-color: transparent;
     }
@@ -23502,12 +23503,14 @@ Select styles
     display: flex;
     flex-direction: column;
     align-items: flex-start;
+    width: 100%;
   }
 
   .#{$prefix}--select-input__wrapper {
     position: relative;
     display: flex;
     align-items: center;
+    width: 100%;
   }
 
   .#{$prefix}--select-input {
@@ -23515,10 +23518,7 @@ Select styles
     @include focus-outline('reset');
 
     display: block;
-    width: rem(224px);
-    min-width: rem(128px);
-    max-width: rem(448px);
-
+    width: 100%;
     height: rem(40px);
     padding: 0 $spacing-09 0 $spacing-05;
     color: $text-01;
@@ -23679,6 +23679,7 @@ Select styles
   }
 
   .#{$prefix}--select--inline .#{$prefix}--select-input {
+    width: auto;
     padding-right: $spacing-07;
     padding-left: $carbon--spacing-03;
     color: $text-01;
