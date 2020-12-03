@@ -269,6 +269,7 @@ export default class DatePicker extends Component {
       datePickerType,
       dateFormat,
       locale,
+      inline
       minDate,
       maxDate,
       value,
@@ -288,6 +289,7 @@ export default class DatePicker extends Component {
           allowInput: allowInput ?? true,
           dateFormat: dateFormat,
           locale: l10n[locale],
+          inline: inline === "true",
           minDate: minDate,
           maxDate: maxDate,
           plugins: [
