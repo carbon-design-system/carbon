@@ -368,7 +368,6 @@
   }
 
   .#{$prefix}--tooltip {
-    @include box-shadow;
     @include reset;
 
     position: absolute;
@@ -380,7 +379,6 @@
     padding: $carbon--spacing-05;
     color: $inverse-01;
     word-wrap: break-word;
-    background: $inverse-02;
     border-radius: rem(2px);
 
     // Windows, Firefox HCM Fix
@@ -429,6 +427,12 @@
       }
     }
 
+    .#{$prefix}--tooltip__content {
+      background-color: $inverse-02;
+      box-shadow: 0 0 0 $spacing-05 $inverse-02,
+        0 2px 6px $spacing-05 rgba(0, 0, 0, 0.2);
+    }
+
     // Tooltips need to be click focusable but not sequentially focusable so the user can click within
     // the tooltip and not have it close. Because the element is not actionable it does not need
     // to have a visible focus indicator (OK'd by IBMa)
@@ -448,6 +452,44 @@
       border-bottom: $caret-size solid $inverse-02;
       border-left: $caret-size solid transparent;
       content: '';
+    }
+
+    &.#{$prefix}--tooltip--top.#{$prefix}--tooltip--align-start,
+    &.#{$prefix}--tooltip--bottom.#{$prefix}--tooltip--align-start {
+      .#{$prefix}--tooltip__content {
+        transform: translate(calc(50% - 6px), 0);
+      }
+    }
+
+    &.#{$prefix}--tooltip--top.#{$prefix}--tooltip--align-end,
+    &.#{$prefix}--tooltip--bottom.#{$prefix}--tooltip--align-end {
+      .#{$prefix}--tooltip__content {
+        transform: translate(calc(6px - 50%), 0);
+      }
+    }
+
+    &.#{$prefix}--tooltip--left.#{$prefix}--tooltip--align-start {
+      .#{$prefix}--tooltip__content {
+        transform: translate(0, calc(9px + 50% - #{$spacing-03}));
+      }
+    }
+
+    &.#{$prefix}--tooltip--right.#{$prefix}--tooltip--align-start {
+      .#{$prefix}--tooltip__content {
+        transform: translate(0, calc(-3px + 50% - #{$spacing-03}));
+      }
+    }
+
+    &.#{$prefix}--tooltip--left.#{$prefix}--tooltip--align-end {
+      .#{$prefix}--tooltip__content {
+        transform: translate(0, calc(9px - 50% + #{$spacing-03}));
+      }
+    }
+
+    &.#{$prefix}--tooltip--right.#{$prefix}--tooltip--align-end {
+      .#{$prefix}--tooltip__content {
+        transform: translate(0, calc(-3px - 50% + #{$spacing-03}));
+      }
     }
 
     .#{$prefix}--tooltip__footer {

@@ -88,6 +88,12 @@ class Tooltip extends Component {
 
   static propTypes = {
     /**
+     * Specify the alignment (to the trigger button) of the tooltip.
+     * Can be one of: start, center, or end.
+     */
+    align: PropTypes.oneOf(['start', 'center', 'end']),
+
+    /**
      * Contents to put into the tooltip.
      */
     children: PropTypes.node,
@@ -207,6 +213,7 @@ class Tooltip extends Component {
   };
 
   static defaultProps = {
+    align: 'center',
     direction: DIRECTION_BOTTOM,
     focusTrap: true,
     renderIcon: Information,
@@ -405,6 +412,7 @@ class Tooltip extends Component {
       className,
       triggerClassName,
       direction,
+      align,
       focusTrap,
       triggerText,
       showIcon,
@@ -422,7 +430,11 @@ class Tooltip extends Component {
 
     const tooltipClasses = classNames(
       `${prefix}--tooltip`,
-      { [`${prefix}--tooltip--shown`]: open },
+      {
+        [`${prefix}--tooltip--shown`]: open,
+        [`${prefix}--tooltip--${direction}`]: direction,
+        [`${prefix}--tooltip--align-${align}`]: align,
+      },
       className
     );
 
