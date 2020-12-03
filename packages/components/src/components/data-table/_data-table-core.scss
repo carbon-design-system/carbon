@@ -99,6 +99,8 @@
   }
 
   .#{$prefix}--data-table th {
+    padding-right: $spacing-05;
+    padding-left: $spacing-05;
     color: $text-01;
     background-color: $ui-03;
   }
@@ -110,8 +112,6 @@
   }
 
   .#{$prefix}--data-table .#{$prefix}--table-header-label {
-    padding-right: $spacing-05;
-    padding-left: $spacing-05;
     text-align: left;
   }
 
