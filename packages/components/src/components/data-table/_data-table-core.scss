@@ -98,11 +98,6 @@
     vertical-align: middle;
   }
 
-  .#{$prefix}--data-table td {
-    padding-right: $spacing-05;
-    padding-left: $spacing-05;
-  }
-
   .#{$prefix}--data-table th {
     color: $text-01;
     background-color: $ui-03;
