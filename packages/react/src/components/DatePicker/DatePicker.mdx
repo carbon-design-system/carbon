@@ -24,6 +24,7 @@ import DatePickerInput from '../DatePickerInput';
   - [DatePicker `className`](#datepicker-classname)
   - [DatePicker `dateFormat`](#datepicker-dateformat)
   - [DatePicker `datePickerType`](#datepicker-datepickertype)
+  - [DatePicker `inline`](#datepicker-inline)
   - [DatePicker `light`](#datepicker-light)
   - [DatePicker `locale`](#datepicker-locale)
   - [DatePicker `maxDate`](#datepicker-maxdate)
@@ -134,6 +135,17 @@ There are three supported variations of `DatePicker` in Carbon.
   <DatePickerInput placeholder="Start" />
   <DatePickerInput placeholder="End" />
 </DatePicker>
+```
+
+
+### DatePicker `inline`
+
+Thie `inline` prop will always display the calander picker. For correct
+rendering it is best to also supply the `appendTo` prop of the location where
+the calander picker should be rendered. 
+
+```jsx
+<DatePicker inline="true" appendTo={node}>...</DatePicker>
 ```
 
 ### DatePicker `light`
