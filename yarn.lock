@@ -1905,10 +1905,10 @@
     "@carbon/icon-helpers" "0.0.1-beta.5"
     prop-types "^15.6.2"
 
-"@carbon/telemetry@^0.0.0-alpha.4":
-  version "0.0.0-alpha.4"
-  resolved "https://registry.yarnpkg.com/@carbon/telemetry/-/telemetry-0.0.0-alpha.4.tgz#5d6576438ffe784b724f894ee22d5c288b60856e"
-  integrity sha512-14WdimwL20lROMgHID2AUogpPUSR9POV0/6SXnQfYN7yOpMggRkvjkZH/dHwXGZ4KAznsTuWEAA4LdZVpwi+Xw==
+"@carbon/telemetry@^0.0.0-alpha.5":
+  version "0.0.0-alpha.5"
+  resolved "https://registry.yarnpkg.com/@carbon/telemetry/-/telemetry-0.0.0-alpha.5.tgz#8438dba069d4b3ad3404673d39c8ab0470de4391"
+  integrity sha512-sazKVtQdCG2xoNdAFxi4Ye9c1v/UQHTZmFCPSjfFtgrFlXFZjx3VhtSf5cPXF8u79aFy96urxyaql3PrpzrEeQ==
   dependencies:
     "@babel/parser" "^7.12.5"
     "@babel/traverse" "^7.12.5"
