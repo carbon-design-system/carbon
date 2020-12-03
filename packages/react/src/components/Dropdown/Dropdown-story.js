@@ -90,7 +90,7 @@ export default {
 };
 
 export const Default = () => (
-  <div style={{ width: 300 }}>
+  <div style={{ width: 400 }}>
     <Dropdown
       id="default"
       titleText="Dropdown label"

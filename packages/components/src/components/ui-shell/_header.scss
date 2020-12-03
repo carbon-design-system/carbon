@@ -67,11 +67,9 @@
     border-color: $shell-header-focus;
     outline: none;
 
-    // Windows, Firefox HCM Fix
-    @media screen and (-ms-high-contrast: active),
-      screen and (prefers-contrast) {
-      outline: 3px solid transparent;
-      outline-offset: -3px;
+    // Firefox HCM Fix
+    @media screen and (prefers-contrast) {
+      border-style: dotted;
     }
   }
 
@@ -125,6 +123,13 @@
 
   a.#{$prefix}--header__name:focus {
     border-color: $shell-header-focus;
+
+    // Windows, Firefox HCM Fix
+    @media screen and (-ms-high-contrast: active),
+      screen and (prefers-contrast) {
+      // `ButtonText` is a CSS2 system color to help improve colors in HCM
+      border-style: dotted;
+    }
   }
 
   .#{$prefix}--header__name--prefix {
@@ -216,8 +221,7 @@
     // Windows, Firefox HCM Fix
     @media screen and (-ms-high-contrast: active),
       screen and (prefers-contrast) {
-      outline: 3px solid transparent;
-      outline-offset: -3px;
+      border-style: dotted;
     }
   }
 
