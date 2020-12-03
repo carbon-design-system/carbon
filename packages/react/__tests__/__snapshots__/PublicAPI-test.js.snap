@@ -1250,6 +1250,9 @@ Map {
           "isRequired": true,
           "type": "string",
         },
+        "onChange": Object {
+          "type": "func",
+        },
         "onSelect": Object {
           "isRequired": true,
           "type": "func",
@@ -1869,6 +1872,9 @@ Map {
       "name": Object {
         "isRequired": true,
         "type": "string",
+      },
+      "onChange": Object {
+        "type": "func",
       },
       "onSelect": Object {
         "isRequired": true,
