@@ -11,7 +11,6 @@ const { paramCase } = require('change-case');
 const fs = require('fs-extra');
 const { prompt } = require('enquirer');
 const path = require('path');
-const template = require('lodash.template');
 const { loadTemplates } = require('../component');
 const { createLogger } = require('../logger');
 

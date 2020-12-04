@@ -17,7 +17,6 @@ const chalk = require('chalk');
  */
 function createLogger(command) {
   const timers = [];
-  let start;
   let indentLevel = 0;
 
   /**

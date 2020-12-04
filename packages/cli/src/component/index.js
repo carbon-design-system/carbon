@@ -31,7 +31,7 @@ async function loadTemplates() {
 
   const templates = {};
 
-  for (const { extension, name, filepath } of files) {
+  for (const { name, filepath } of files) {
     const contents = await fs.readFile(filepath, 'utf8');
     const compile = template(contents);
     templates[name] = {
