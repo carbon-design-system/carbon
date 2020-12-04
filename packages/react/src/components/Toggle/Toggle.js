@@ -60,6 +60,11 @@ class Toggle extends React.Component {
     onToggle: PropTypes.func,
 
     /**
+     * Specify the size of the Toggle. Currently only supports 'sm'
+     */
+    size: PropTypes.oneOf(['sm']),
+
+    /**
      * Specify whether the control is toggled
      */
     toggled: PropTypes.bool,
@@ -85,12 +90,17 @@ class Toggle extends React.Component {
       labelText,
       labelA,
       labelB,
+      size,
       ...other
     } = this.props;
 
     let input;
     const wrapperClasses = classNames(`${prefix}--form-item`, {
       [className]: className,
+    });
+
+    const toggleClasses = classNames(`${prefix}--toggle-input`, {
+      [`${prefix}--toggle-input--small`]: size,
     });
 
     const checkedProps = {};
@@ -109,7 +119,7 @@ class Toggle extends React.Component {
           aria-label={null}
           type="checkbox"
           id={id}
-          className={`${prefix}--toggle-input`}
+          className={toggleClasses}
           onChange={(evt) => {
             onChange && onChange(evt);
             onToggle(input.checked, id, evt);
@@ -133,12 +143,29 @@ class Toggle extends React.Component {
           }>
           {labelText}
           <span className={`${prefix}--toggle__switch`}>
-            <span className={`${prefix}--toggle__text--off`} aria-hidden="true">
-              {labelA}
-            </span>
-            <span className={`${prefix}--toggle__text--on`} aria-hidden="true">
-              {labelB}
-            </span>
+            {size && (
+              <svg
+                className={`${prefix}--toggle__check`}
+                width="6px"
+                height="5px"
+                viewBox="0 0 6 5">
+                <path d="M2.2 2.7L5 0 6 1 2.2 5 0 2.7 1 1.5z" />
+              </svg>
+            )}
+            {!size && (
+              <>
+                <span
+                  className={`${prefix}--toggle__text--off`}
+                  aria-hidden="true">
+                  {labelA}
+                </span>
+                <span
+                  className={`${prefix}--toggle__text--on`}
+                  aria-hidden="true">
+                  {labelB}
+                </span>
+              </>
+            )}
           </span>
         </label>
       </div>
