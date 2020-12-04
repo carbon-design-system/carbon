@@ -628,6 +628,15 @@
       "contributions": [
         "code"
       ]
+    },
+    {
+      "login": "munkurious",
+      "name": "Boston Cartwright",
+      "avatar_url": "https://avatars0.githubusercontent.com/u/2187109?v=4",
+      "profile": "https://github.com/munkurious",
+      "contributions": [
+        "code"
+      ]
     }
   ],
   "commitConvention": "none"

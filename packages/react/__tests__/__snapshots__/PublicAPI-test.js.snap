@@ -3576,6 +3576,9 @@ Map {
         "onChange": Object {
           "type": "func",
         },
+        "onMenuChange": Object {
+          "type": "func",
+        },
         "open": Object {
           "type": "bool",
         },
