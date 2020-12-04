@@ -177,7 +177,6 @@ function CodeSnippet({
       {shouldShowMoreLessBtn && (
         <Button
           kind="ghost"
-          size="small"
           className={`${prefix}--snippet-btn--expand`}
           onClick={() => setExpandedCode(!expandedCode)}>
           <span className={`${prefix}--snippet-btn--text`}>
