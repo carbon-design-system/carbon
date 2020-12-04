@@ -10,8 +10,11 @@ import React from 'react';
 import classNames from 'classnames';
 import { settings } from 'carbon-components';
 import { keys, match } from '../../internal/keyboard';
+import warning from 'warning';
 
 const { prefix } = settings;
+
+let didWarnAboutDeprecation = false;
 
 const ToggleSmall = ({
   className,
@@ -25,6 +28,14 @@ const ToggleSmall = ({
   labelB,
   ...other
 }) => {
+  if (__DEV__) {
+    warning(
+      didWarnAboutDeprecation,
+      '`<ToggleSmall>` has been deprecated in favor of `<Toggle size="sm" />` and will be removed in the next major release of `carbon-components-react`'
+    );
+    didWarnAboutDeprecation = true;
+  }
+
   let input;
   const wrapperClasses = classNames(`${prefix}--form-item`, {
     [className]: className,

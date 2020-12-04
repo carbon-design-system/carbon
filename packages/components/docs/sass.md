@@ -14710,8 +14710,8 @@ Checkbox styles
     position: relative;
     display: flex;
     min-height: rem(24px);
+    padding-top: rem(3px);
     padding-left: rem(20px);
-    line-height: 1.5rem;
     cursor: pointer;
     user-select: none;
   }
