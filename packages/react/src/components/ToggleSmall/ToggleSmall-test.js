@@ -21,15 +21,6 @@ describe('ToggleSmall', () => {
     });
 
     ToggleSmall = require('../ToggleSmall').default;
-
-    // const wrapper = mount(
-    //   <ToggleSmall
-    //     id="toggle-1"
-    //     aria-label="test label"
-    //     labelA="Off"
-    //     labelB="On"
-    //   />
-    // );
   });
 
   describe('Renders as expected', () => {
