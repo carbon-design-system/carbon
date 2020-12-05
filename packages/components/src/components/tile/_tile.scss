@@ -112,8 +112,8 @@
 
   .#{$prefix}--tile__chevron {
     position: absolute;
-    right: 0.5rem;
-    bottom: 0.5rem;
+    right: $carbon--spacing-05;
+    bottom: $carbon--spacing-05;
     display: flex;
     flex-direction: row;
     align-items: flex-end;
