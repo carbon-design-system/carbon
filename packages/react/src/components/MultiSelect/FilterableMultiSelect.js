@@ -95,6 +95,12 @@ export default class FilterableMultiSelect extends React.Component {
     onChange: PropTypes.func,
 
     /**
+     * `onMenuChange` is a utility for this controlled component to communicate to a
+     * consuming component that the menu was opened(`true`)/closed(`false`).
+     */
+    onMenuChange: PropTypes.func,
+
+    /**
      * Initialize the component with an open(`true`)/closed(`false`) menu.
      */
     open: PropTypes.bool,
@@ -184,15 +190,17 @@ export default class FilterableMultiSelect extends React.Component {
     }
   };
 
-  handleOnToggleMenu = () => {
+  handleOnMenuChange = (isOpen) => {
     this.setState((state) => ({
-      isOpen: !state.isOpen,
+      isOpen: isOpen ?? !state.isOpen,
     }));
+    if (this.props.onMenuChange) {
+      this.props.onMenuChange(isOpen);
+    }
   };
 
   handleOnOuterClick = () => {
     this.setState({
-      isOpen: false,
       inputValue: '',
     });
   };
@@ -211,32 +219,30 @@ export default class FilterableMultiSelect extends React.Component {
       case Downshift.stateChangeTypes.keyDownArrowDown:
         this.setState({
           highlightedIndex: changes.highlightedIndex,
-          isOpen: true,
         });
+        if (!this.state.isOpen) this.handleOnMenuChange(true);
         break;
       case Downshift.stateChangeTypes.keyDownEscape:
       case Downshift.stateChangeTypes.mouseUp:
-        this.setState({ isOpen: false });
+        if (this.state.isOpen) this.handleOnMenuChange(false);
         break;
       // Opt-in to some cases where we should be toggling the menu based on
       // a given key press or mouse handler
       // Reference: https://github.com/paypal/downshift/issues/206
       case Downshift.stateChangeTypes.clickButton:
-      case Downshift.stateChangeTypes.keyDownSpaceButton:
-        this.setState(() => {
-          let nextIsOpen = changes.isOpen || false;
-          if (changes.isOpen === false) {
-            // If Downshift is trying to close the menu, but we know the input
-            // is the active element in thedocument, then keep the menu open
-            if (this.inputNode === document.activeElement) {
-              nextIsOpen = true;
-            }
+      case Downshift.stateChangeTypes.keyDownSpaceButton: {
+        let nextIsOpen = changes.isOpen || false;
+        if (changes.isOpen === false) {
+          // If Downshift is trying to close the menu, but we know the input
+          // is the active element in the document, then keep the menu open
+          if (this.inputNode === document.activeElement) {
+            nextIsOpen = true;
           }
-          return {
-            isOpen: nextIsOpen,
-          };
-        });
+        }
+        if (this.state.isOpen !== nextIsOpen)
+          this.handleOnMenuChange(nextIsOpen);
         break;
+      }
     }
   };
 
@@ -245,7 +251,7 @@ export default class FilterableMultiSelect extends React.Component {
   };
 
   handleOnInputValueChange = (inputValue, { type }) => {
-    if (type === Downshift.stateChangeTypes.changeInput)
+    if (type === Downshift.stateChangeTypes.changeInput) {
       this.setState(() => {
         if (Array.isArray(inputValue)) {
           return {
@@ -254,9 +260,11 @@ export default class FilterableMultiSelect extends React.Component {
         }
         return {
           inputValue: inputValue || '',
-          isOpen: Boolean(inputValue) || this.state.isOpen,
         };
       });
+      if (Boolean(inputValue) !== this.state.isOpen)
+        this.handleOnMenuChange(Boolean(inputValue));
+    }
   };
 
   clearInputValue = (event) => {
