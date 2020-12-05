@@ -38,3 +38,6 @@ packages/components/node_modules
 
 # React
 **/storybook-static/**
+
+# Templates
+packages/cli/src/component/templates/**
