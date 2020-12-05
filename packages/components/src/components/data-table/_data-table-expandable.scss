@@ -63,9 +63,11 @@
   }
 
   tr.#{$prefix}--parent-row.#{$prefix}--expandable-row + tr[data-child-row] td {
+    padding-left: $carbon--spacing-09;
     border-bottom: 1px solid $ui-03;
     transition: padding-bottom $duration--fast-02 motion(standard, productive),
-      transform $duration--fast-02 motion(standard, productive);
+      transform $duration--fast-02 motion(standard, productive),
+      background-color $duration--fast-02 motion(standard, productive);
   }
 
   tr.#{$prefix}--parent-row.#{$prefix}--expandable-row
@@ -194,11 +196,17 @@
   }
 
   .#{$prefix}--table-expand__button:focus {
-    outline: 1px solid transparent;
+    outline: none;
   }
 
   .#{$prefix}--table-expand__button:focus .#{$prefix}--table-expand__svg {
-    box-shadow: inset 0 0 0 1px $focus;
+    box-shadow: inset 0 0 0 2px $focus;
+
+    // Windows, Firefox HCM Fix
+    @media screen and (-ms-high-contrast: active),
+      screen and (prefers-contrast) {
+      outline: 2px solid transparent;
+    }
   }
 
   .#{$prefix}--table-expand__svg {

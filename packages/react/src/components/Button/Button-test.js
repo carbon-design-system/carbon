@@ -251,7 +251,7 @@ describe('Small Button', () => {
     });
   });
   describe('deprecated prop `small`', () => {
-    const wrapper = shallow(<Button small className="extra-class" />);
+    const wrapper = shallow(<Button size="sm" className="extra-class" />);
 
     it('has the expected classes for small', () => {
       expect(wrapper.hasClass(`${prefix}--btn--sm`)).toEqual(true);
@@ -277,18 +277,20 @@ describe('DangerButton', () => {
   });
 
   describe('Renders tertiary variation as expected', () => {
-    const wrapper = shallow(<Button kind="danger-tertiary" />);
+    const wrapper = shallow(<Button kind="danger--tertiary" />);
 
     it('has the expected classes', () => {
-      expect(wrapper.hasClass(`${prefix}--btn--danger-tertiary`)).toEqual(true);
+      expect(wrapper.hasClass(`${prefix}--btn--danger--tertiary`)).toEqual(
+        true
+      );
     });
   });
 
   describe('Renders ghost variation as expected', () => {
-    const wrapper = shallow(<Button kind="danger-ghost" />);
+    const wrapper = shallow(<Button kind="danger--ghost" />);
 
     it('has the expected classes', () => {
-      expect(wrapper.hasClass(`${prefix}--btn--danger-ghost`)).toEqual(true);
+      expect(wrapper.hasClass(`${prefix}--btn--danger--ghost`)).toEqual(true);
     });
   });
 });

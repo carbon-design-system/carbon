@@ -182,10 +182,12 @@
   - [✅hover-tertiary [variable]](#hover-tertiary-variable)
   - [✅active-tertiary [variable]](#active-tertiary-variable)
   - [✅hover-ui [variable]](#hover-ui-variable)
+  - [✅hover-light-ui [variable]](#hover-light-ui-variable)
+  - [✅hover-selected-ui [variable]](#hover-selected-ui-variable)
   - [✅active-ui [variable]](#active-ui-variable)
+  - [✅active-light-ui [variable]](#active-light-ui-variable)
   - [✅selected-ui [variable]](#selected-ui-variable)
   - [✅selected-light-ui [variable]](#selected-light-ui-variable)
-  - [✅hover-selected-ui [variable]](#hover-selected-ui-variable)
   - [✅inverse-hover-ui [variable]](#inverse-hover-ui-variable)
   - [✅hover-danger [variable]](#hover-danger-variable)
   - [✅active-danger [variable]](#active-danger-variable)
@@ -196,7 +198,6 @@
   - [✅disabled-03 [variable]](#disabled-03-variable)
   - [✅highlight [variable]](#highlight-variable)
   - [✅decorative-01 [variable]](#decorative-01-variable)
-  - [✅hover-light-ui [variable]](#hover-light-ui-variable)
   - [✅button-separator [variable]](#button-separator-variable)
   - [✅skeleton-01 [variable]](#skeleton-01-variable)
   - [✅skeleton-02 [variable]](#skeleton-02-variable)
@@ -562,6 +563,8 @@ Define color variables
   $ibm-color__magenta-90: #510224 !default !global;
   $ibm-color__magenta-100: #2a0a18 !default !global;
   $ibm-color__orange-40: #ff832b !default !global;
+  $ibm-color__orange-60: #ba4e00 !default !global;
+  $ibm-color__orange-70: #8a3800 !default !global;
   $ibm-color__purple-10: #f6f2ff !default !global;
   $ibm-color__purple-20: #e8daff !default !global;
   $ibm-color__purple-30: #d4bbff !default !global;
@@ -605,6 +608,8 @@ Define color variables
   $ibm-color__white-0: #ffffff !default !global;
   $ibm-color__yellow-20: #fdd13a !default !global;
   $ibm-color__yellow-30: #f1c21b !default !global;
+  $ibm-color__yellow-40: #d2a106 !default !global;
+  $ibm-color__yellow-50: #b28600 !default !global;
   $ibm-color-map: (
     'black': (
       100: #000000,
@@ -695,6 +700,8 @@ Define color variables
     ),
     'orange': (
       40: #ff832b,
+      60: #ba4e00,
+      70: #8a3800,
     ),
     'purple': (
       10: #f6f2ff,
@@ -762,6 +769,8 @@ Define color variables
     'yellow': (
       20: #fdd13a,
       30: #f1c21b,
+      40: #d2a106,
+      50: #b28600,
     ),
   ) !default !global;
 }
@@ -843,6 +852,8 @@ Define color variables
   $carbon--magenta-90: #510224 !default !global;
   $carbon--magenta-100: #2a0a18 !default !global;
   $carbon--orange-40: #ff832b !default !global;
+  $carbon--orange-60: #ba4e00 !default !global;
+  $carbon--orange-70: #8a3800 !default !global;
   $carbon--purple-10: #f6f2ff !default !global;
   $carbon--purple-20: #e8daff !default !global;
   $carbon--purple-30: #d4bbff !default !global;
@@ -886,6 +897,8 @@ Define color variables
   $carbon--white-0: #ffffff !default !global;
   $carbon--yellow-20: #fdd13a !default !global;
   $carbon--yellow-30: #f1c21b !default !global;
+  $carbon--yellow-40: #d2a106 !default !global;
+  $carbon--yellow-50: #b28600 !default !global;
   $black-100: #000000 !default !global;
   $blue-10: #edf5ff !default !global;
   $blue-20: #d0e2ff !default !global;
@@ -948,6 +961,8 @@ Define color variables
   $magenta-90: #510224 !default !global;
   $magenta-100: #2a0a18 !default !global;
   $orange-40: #ff832b !default !global;
+  $orange-60: #ba4e00 !default !global;
+  $orange-70: #8a3800 !default !global;
   $purple-10: #f6f2ff !default !global;
   $purple-20: #e8daff !default !global;
   $purple-30: #d4bbff !default !global;
@@ -991,6 +1006,8 @@ Define color variables
   $white-0: #ffffff !default !global;
   $yellow-20: #fdd13a !default !global;
   $yellow-30: #f1c21b !default !global;
+  $yellow-40: #d2a106 !default !global;
+  $yellow-50: #b28600 !default !global;
   $carbon--colors: (
     'black': (
       100: #000000,
@@ -1081,6 +1098,8 @@ Define color variables
     ),
     'orange': (
       40: #ff832b,
+      60: #ba4e00,
+      70: #8a3800,
     ),
     'purple': (
       10: #f6f2ff,
@@ -1148,6 +1167,8 @@ Define color variables
     'yellow': (
       20: #fdd13a,
       30: #f1c21b,
+      40: #d2a106,
+      50: #b28600,
     ),
   ) !default !global;
 }
@@ -3390,6 +3411,7 @@ $carbon--spacing-02: 0.25rem;
   - `spacing-02`
 - **Used by**:
   - [checkbox [mixin]](#checkbox-mixin)
+  - [snippet [mixin]](#snippet-mixin)
   - [form [mixin]](#form-mixin)
   - [inline-notifications [mixin]](#inline-notifications-mixin)
   - [pseudo-underline [mixin]](#pseudo-underline-mixin)
@@ -3415,6 +3437,7 @@ $carbon--spacing-03: 0.5rem;
   - [accordion [mixin]](#accordion-mixin)
   - [breadcrumb [mixin]](#breadcrumb-mixin)
   - [button [mixin]](#button-mixin)
+  - [snippet [mixin]](#snippet-mixin)
   - [content-switcher [mixin]](#content-switcher-mixin)
   - [file-uploader [mixin]](#file-uploader-mixin)
   - [form [mixin]](#form-mixin)
@@ -3588,6 +3611,7 @@ $carbon--spacing-09: 3rem;
   - `spacing-09`
 - **Used by**:
   - [accordion [mixin]](#accordion-mixin)
+  - [data-table-expandable [mixin]](#data-table-expandable-mixin)
   - [date-picker [mixin]](#date-picker-mixin)
   - [file-uploader [mixin]](#file-uploader-mixin)
   - [listbox [mixin]](#listbox-mixin)
@@ -3782,6 +3806,7 @@ $spacing-05: $carbon--spacing-05;
   - [search [mixin]](#search-mixin)
   - [select [mixin]](#select-mixin)
   - [tabs [mixin]](#tabs-mixin)
+  - [tooltip [mixin]](#tooltip-mixin)
   - [treeview [mixin]](#treeview-mixin)
   - [carbon-switcher [mixin]](#carbon-switcher-mixin)
 
@@ -4226,10 +4251,12 @@ Define theme variables from a map of tokens
   $hover-tertiary: map-get($theme, 'hover-tertiary') !global;
   $active-tertiary: map-get($theme, 'active-tertiary') !global;
   $hover-ui: map-get($theme, 'hover-ui') !global;
+  $hover-light-ui: map-get($theme, 'hover-light-ui') !global;
+  $hover-selected-ui: map-get($theme, 'hover-selected-ui') !global;
   $active-ui: map-get($theme, 'active-ui') !global;
+  $active-light-ui: map-get($theme, 'active-light-ui') !global;
   $selected-ui: map-get($theme, 'selected-ui') !global;
   $selected-light-ui: map-get($theme, 'selected-light-ui') !global;
-  $hover-selected-ui: map-get($theme, 'hover-selected-ui') !global;
   $inverse-hover-ui: map-get($theme, 'inverse-hover-ui') !global;
   $hover-danger: map-get($theme, 'hover-danger') !global;
   $active-danger: map-get($theme, 'active-danger') !global;
@@ -4240,7 +4267,6 @@ Define theme variables from a map of tokens
   $disabled-03: map-get($theme, 'disabled-03') !global;
   $highlight: map-get($theme, 'highlight') !global;
   $decorative-01: map-get($theme, 'decorative-01') !global;
-  $hover-light-ui: map-get($theme, 'hover-light-ui') !global;
   $button-separator: map-get($theme, 'button-separator') !global;
   $skeleton-01: map-get($theme, 'skeleton-01') !global;
   $skeleton-02: map-get($theme, 'skeleton-02') !global;
@@ -4499,9 +4525,21 @@ Define theme variables from a map of tokens
       --#{$custom-property-prefix}-hover-ui,
       map-get($theme, 'hover-ui')
     ) !global;
+    $hover-light-ui: var(
+      --#{$custom-property-prefix}-hover-light-ui,
+      map-get($theme, 'hover-light-ui')
+    ) !global;
+    $hover-selected-ui: var(
+      --#{$custom-property-prefix}-hover-selected-ui,
+      map-get($theme, 'hover-selected-ui')
+    ) !global;
     $active-ui: var(
       --#{$custom-property-prefix}-active-ui,
       map-get($theme, 'active-ui')
+    ) !global;
+    $active-light-ui: var(
+      --#{$custom-property-prefix}-active-light-ui,
+      map-get($theme, 'active-light-ui')
     ) !global;
     $selected-ui: var(
       --#{$custom-property-prefix}-selected-ui,
@@ -4510,10 +4548,6 @@ Define theme variables from a map of tokens
     $selected-light-ui: var(
       --#{$custom-property-prefix}-selected-light-ui,
       map-get($theme, 'selected-light-ui')
-    ) !global;
-    $hover-selected-ui: var(
-      --#{$custom-property-prefix}-hover-selected-ui,
-      map-get($theme, 'hover-selected-ui')
     ) !global;
     $inverse-hover-ui: var(
       --#{$custom-property-prefix}-inverse-hover-ui,
@@ -4554,10 +4588,6 @@ Define theme variables from a map of tokens
     $decorative-01: var(
       --#{$custom-property-prefix}-decorative-01,
       map-get($theme, 'decorative-01')
-    ) !global;
-    $hover-light-ui: var(
-      --#{$custom-property-prefix}-hover-light-ui,
-      map-get($theme, 'hover-light-ui')
     ) !global;
     $button-separator: var(
       --#{$custom-property-prefix}-button-separator,
@@ -5113,9 +5143,48 @@ Define theme variables from a map of tokens
       @include custom-property('hover-ui', map-get($theme, 'hover-ui'));
     }
 
+    @if should-emit(
+      $theme,
+      $parent-carbon-theme,
+      'hover-light-ui',
+      $emit-difference
+    )
+    {
+      @include custom-property(
+        'hover-light-ui',
+        map-get($theme, 'hover-light-ui')
+      );
+    }
+
+    @if should-emit(
+      $theme,
+      $parent-carbon-theme,
+      'hover-selected-ui',
+      $emit-difference
+    )
+    {
+      @include custom-property(
+        'hover-selected-ui',
+        map-get($theme, 'hover-selected-ui')
+      );
+    }
+
     @if should-emit($theme, $parent-carbon-theme, 'active-ui', $emit-difference)
     {
       @include custom-property('active-ui', map-get($theme, 'active-ui'));
+    }
+
+    @if should-emit(
+      $theme,
+      $parent-carbon-theme,
+      'active-light-ui',
+      $emit-difference
+    )
+    {
+      @include custom-property(
+        'active-light-ui',
+        map-get($theme, 'active-light-ui')
+      );
     }
 
     @if should-emit(
@@ -5138,19 +5207,6 @@ Define theme variables from a map of tokens
       @include custom-property(
         'selected-light-ui',
         map-get($theme, 'selected-light-ui')
-      );
-    }
-
-    @if should-emit(
-      $theme,
-      $parent-carbon-theme,
-      'hover-selected-ui',
-      $emit-difference
-    )
-    {
-      @include custom-property(
-        'hover-selected-ui',
-        map-get($theme, 'hover-selected-ui')
       );
     }
 
@@ -5250,19 +5306,6 @@ Define theme variables from a map of tokens
       @include custom-property(
         'decorative-01',
         map-get($theme, 'decorative-01')
-      );
-    }
-
-    @if should-emit(
-      $theme,
-      $parent-carbon-theme,
-      'hover-light-ui',
-      $emit-difference
-    )
-    {
-      @include custom-property(
-        'hover-light-ui',
-        map-get($theme, 'hover-light-ui')
       );
     }
 
@@ -6052,10 +6095,12 @@ Define theme variables from a map of tokens
   - [hover-tertiary [variable]](#hover-tertiary-variable)
   - [active-tertiary [variable]](#active-tertiary-variable)
   - [hover-ui [variable]](#hover-ui-variable)
+  - [hover-light-ui [variable]](#hover-light-ui-variable)
+  - [hover-selected-ui [variable]](#hover-selected-ui-variable)
   - [active-ui [variable]](#active-ui-variable)
+  - [active-light-ui [variable]](#active-light-ui-variable)
   - [selected-ui [variable]](#selected-ui-variable)
   - [selected-light-ui [variable]](#selected-light-ui-variable)
-  - [hover-selected-ui [variable]](#hover-selected-ui-variable)
   - [inverse-hover-ui [variable]](#inverse-hover-ui-variable)
   - [hover-danger [variable]](#hover-danger-variable)
   - [active-danger [variable]](#active-danger-variable)
@@ -6066,7 +6111,6 @@ Define theme variables from a map of tokens
   - [disabled-03 [variable]](#disabled-03-variable)
   - [highlight [variable]](#highlight-variable)
   - [decorative-01 [variable]](#decorative-01-variable)
-  - [hover-light-ui [variable]](#hover-light-ui-variable)
   - [button-separator [variable]](#button-separator-variable)
   - [skeleton-01 [variable]](#skeleton-01-variable)
   - [skeleton-02 [variable]](#skeleton-02-variable)
@@ -6214,7 +6258,9 @@ $carbon--theme--g90: map-merge(
     hover-tertiary: #f4f4f4,
     active-tertiary: #c6c6c6,
     hover-ui: #4c4c4c,
+    hover-light-ui: #656565,
     active-ui: #6f6f6f,
+    active-light-ui: #8d8d8d,
     selected-ui: #525252,
     selected-light-ui: #6f6f6f,
     inverse-hover-ui: #e5e5e5,
@@ -6226,7 +6272,6 @@ $carbon--theme--g90: map-merge(
     disabled-03: #a8a8a8,
     highlight: #0043ce,
     decorative-01: #6f6f6f,
-    hover-light-ui: #6f6f6f,
     button-separator: #161616,
     skeleton-01: #353535,
     skeleton-02: #525252,
@@ -6292,7 +6337,9 @@ $carbon--theme--g100: map-merge(
     hover-tertiary: #f4f4f4,
     active-tertiary: #c6c6c6,
     hover-ui: #353535,
+    hover-light-ui: #4c4c4c,
     active-ui: #525252,
+    active-light-ui: #6f6f6f,
     selected-ui: #393939,
     selected-light-ui: #525252,
     inverse-hover-ui: #e5e5e5,
@@ -6303,7 +6350,6 @@ $carbon--theme--g100: map-merge(
     disabled-02: #525252,
     highlight: #002d9c,
     decorative-01: #525252,
-    hover-light-ui: #525252,
     button-separator: #161616,
     skeleton-01: #353535,
     skeleton-02: #393939,
@@ -6372,7 +6418,9 @@ $carbon--theme--v9: map-merge(
     hover-tertiary: #5a6872,
     active-tertiary: #414f59,
     hover-ui: #eef4fc,
+    hover-light-ui: #eef4fc,
     active-ui: #dfeafa,
+    active-light-ui: #dfeafa,
     selected-ui: #eef4fc,
     selected-light-ui: #eef4fc,
     hover-selected-ui: #dfeafa,
@@ -6385,7 +6433,6 @@ $carbon--theme--v9: map-merge(
     disabled-03: #cdd1d4,
     highlight: #f4f7fb,
     decorative-01: #eef4fc,
-    hover-light-ui: #eef4fc,
     skeleton-01: rgba(61, 112, 178, 0.1),
     skeleton-02: rgba(61, 112, 178, 0.1),
     brand-01: #3d70b2,
@@ -6457,10 +6504,12 @@ $carbon--theme: (
   hover-tertiary: if(global-variable-exists('hover-tertiary'), $hover-tertiary, map-get($carbon--theme--white, 'hover-tertiary')),
   active-tertiary: if(global-variable-exists('active-tertiary'), $active-tertiary, map-get($carbon--theme--white, 'active-tertiary')),
   hover-ui: if(global-variable-exists('hover-ui'), $hover-ui, map-get($carbon--theme--white, 'hover-ui')),
+  hover-light-ui: if(global-variable-exists('hover-light-ui'), $hover-light-ui, map-get($carbon--theme--white, 'hover-light-ui')),
+  hover-selected-ui: if(global-variable-exists('hover-selected-ui'), $hover-selected-ui, map-get($carbon--theme--white, 'hover-selected-ui')),
   active-ui: if(global-variable-exists('active-ui'), $active-ui, map-get($carbon--theme--white, 'active-ui')),
+  active-light-ui: if(global-variable-exists('active-light-ui'), $active-light-ui, map-get($carbon--theme--white, 'active-light-ui')),
   selected-ui: if(global-variable-exists('selected-ui'), $selected-ui, map-get($carbon--theme--white, 'selected-ui')),
   selected-light-ui: if(global-variable-exists('selected-light-ui'), $selected-light-ui, map-get($carbon--theme--white, 'selected-light-ui')),
-  hover-selected-ui: if(global-variable-exists('hover-selected-ui'), $hover-selected-ui, map-get($carbon--theme--white, 'hover-selected-ui')),
   inverse-hover-ui: if(global-variable-exists('inverse-hover-ui'), $inverse-hover-ui, map-get($carbon--theme--white, 'inverse-hover-ui')),
   hover-danger: if(global-variable-exists('hover-danger'), $hover-danger, map-get($carbon--theme--white, 'hover-danger')),
   active-danger: if(global-variable-exists('active-danger'), $active-danger, map-get($carbon--theme--white, 'active-danger')),
@@ -6471,7 +6520,6 @@ $carbon--theme: (
   disabled-03: if(global-variable-exists('disabled-03'), $disabled-03, map-get($carbon--theme--white, 'disabled-03')),
   highlight: if(global-variable-exists('highlight'), $highlight, map-get($carbon--theme--white, 'highlight')),
   decorative-01: if(global-variable-exists('decorative-01'), $decorative-01, map-get($carbon--theme--white, 'decorative-01')),
-  hover-light-ui: if(global-variable-exists('hover-light-ui'), $hover-light-ui, map-get($carbon--theme--white, 'hover-light-ui')),
   button-separator: if(global-variable-exists('button-separator'), $button-separator, map-get($carbon--theme--white, 'button-separator')),
   skeleton-01: if(global-variable-exists('skeleton-01'), $skeleton-01, map-get($carbon--theme--white, 'skeleton-01')),
   skeleton-02: if(global-variable-exists('skeleton-02'), $skeleton-02, map-get($carbon--theme--white, 'skeleton-02')),
@@ -6727,7 +6775,6 @@ $ui-01: if(
 - **Type**: `{undefined}`
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
-  - [snippet [mixin]](#snippet-mixin)
   - [content-switcher [mixin]](#content-switcher-mixin)
   - [data-table-v2-action [mixin]](#data-table-v2-action-mixin)
   - [data-table-core [mixin]](#data-table-core-mixin)
@@ -6769,7 +6816,6 @@ $ui-02: if(
 - **Type**: `{undefined}`
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
-  - [snippet [mixin]](#snippet-mixin)
   - [content-switcher [mixin]](#content-switcher-mixin)
   - [number-input [mixin]](#number-input-mixin)
   - [tile [mixin]](#tile-mixin)
@@ -7309,6 +7355,7 @@ $field-02: if(
 - **Type**: `{undefined}`
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
+  - [snippet [mixin]](#snippet-mixin)
   - [date-picker [mixin]](#date-picker-mixin)
   - [dropdown [mixin]](#dropdown-mixin)
   - [listbox [mixin]](#listbox-mixin)
@@ -7415,6 +7462,7 @@ $support-01: if(
 - **Type**: `{undefined}`
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
+  - [date-picker [mixin]](#date-picker-mixin)
   - [dropdown [mixin]](#dropdown-mixin)
   - [file-uploader [mixin]](#file-uploader-mixin)
   - [inline-loading [mixin]](#inline-loading-mixin)
@@ -7481,6 +7529,7 @@ $support-03: if(
 - **Type**: `{undefined}`
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
+  - [date-picker [mixin]](#date-picker-mixin)
   - [listbox [mixin]](#listbox-mixin)
   - [inline-notifications [mixin]](#inline-notifications-mixin)
   - [toast-notifications [mixin]](#toast-notifications-mixin)
@@ -7761,6 +7810,7 @@ $inverse-focus-ui: if(
   - [carbon--theme [mixin]](#carbon--theme-mixin)
   - [inline-notifications [mixin]](#inline-notifications-mixin)
   - [toast-notifications [mixin]](#toast-notifications-mixin)
+  - [tags [mixin]](#tags-mixin)
   - [tooltip [mixin]](#tooltip-mixin)
 
 ### ✅hover-primary [variable]
@@ -7994,6 +8044,60 @@ $hover-ui: if(
   - [time-picker [mixin]](#time-picker-mixin)
   - [treeview [mixin]](#treeview-mixin)
 
+### ✅hover-light-ui [variable]
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$hover-light-ui: if(
+  global-variable-exists('carbon--theme') and map-has-key(
+      $carbon--theme,
+      'hover-light-ui'
+    ),
+  map-get($carbon--theme, 'hover-light-ui'),
+  #e5e5e5
+);
+```
+
+</details>
+
+- **Group**: [@carbon/themes](#carbonthemes)
+- **Type**: `{undefined}`
+- **Used by**:
+  - [carbon--theme [mixin]](#carbon--theme-mixin)
+  - [snippet [mixin]](#snippet-mixin)
+  - [content-switcher [mixin]](#content-switcher-mixin)
+
+### ✅hover-selected-ui [variable]
+
+Data table selected row hover
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$hover-selected-ui: if(
+  global-variable-exists('carbon--theme') and map-has-key(
+      $carbon--theme,
+      'hover-selected-ui'
+    ),
+  map-get($carbon--theme, 'hover-selected-ui'),
+  #cacaca
+);
+```
+
+</details>
+
+- **Group**: [@carbon/themes](#carbonthemes)
+- **Type**: `{undefined}`
+- **Used by**:
+  - [carbon--theme [mixin]](#carbon--theme-mixin)
+  - [data-table-core [mixin]](#data-table-core-mixin)
+  - [data-table-expandable [mixin]](#data-table-expandable-mixin)
+  - [tabs [mixin]](#tabs-mixin)
+  - [treeview [mixin]](#treeview-mixin)
+
 ### ✅active-ui [variable]
 
 `$ui-01` active; `$ui-02` active
@@ -8023,6 +8127,30 @@ $active-ui: if(
   - [button [mixin]](#button-mixin)
   - [data-table-core [mixin]](#data-table-core-mixin)
   - [data-table-expandable [mixin]](#data-table-expandable-mixin)
+
+### ✅active-light-ui [variable]
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$active-light-ui: if(
+  global-variable-exists('carbon--theme') and map-has-key(
+      $carbon--theme,
+      'active-light-ui'
+    ),
+  map-get($carbon--theme, 'active-light-ui'),
+  #c6c6c6
+);
+```
+
+</details>
+
+- **Group**: [@carbon/themes](#carbonthemes)
+- **Type**: `{undefined}`
+- **Used by**:
+  - [carbon--theme [mixin]](#carbon--theme-mixin)
+  - [snippet [mixin]](#snippet-mixin)
 
 ### ✅selected-ui [variable]
 
@@ -8078,35 +8206,6 @@ $selected-light-ui: if(
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
   - [listbox [mixin]](#listbox-mixin)
-
-### ✅hover-selected-ui [variable]
-
-Data table selected row hover
-
-<details>
-<summary>Source code</summary>
-
-```scss
-$hover-selected-ui: if(
-  global-variable-exists('carbon--theme') and map-has-key(
-      $carbon--theme,
-      'hover-selected-ui'
-    ),
-  map-get($carbon--theme, 'hover-selected-ui'),
-  #cacaca
-);
-```
-
-</details>
-
-- **Group**: [@carbon/themes](#carbonthemes)
-- **Type**: `{undefined}`
-- **Used by**:
-  - [carbon--theme [mixin]](#carbon--theme-mixin)
-  - [data-table-core [mixin]](#data-table-core-mixin)
-  - [data-table-expandable [mixin]](#data-table-expandable-mixin)
-  - [tabs [mixin]](#tabs-mixin)
-  - [treeview [mixin]](#treeview-mixin)
 
 ### ✅inverse-hover-ui [variable]
 
@@ -8401,30 +8500,6 @@ $decorative-01: if(
   - [listbox [mixin]](#listbox-mixin)
   - [overflow-menu [mixin]](#overflow-menu-mixin)
 
-### ✅hover-light-ui [variable]
-
-<details>
-<summary>Source code</summary>
-
-```scss
-$hover-light-ui: if(
-  global-variable-exists('carbon--theme') and map-has-key(
-      $carbon--theme,
-      'hover-light-ui'
-    ),
-  map-get($carbon--theme, 'hover-light-ui'),
-  #e5e5e5
-);
-```
-
-</details>
-
-- **Group**: [@carbon/themes](#carbonthemes)
-- **Type**: `{undefined}`
-- **Used by**:
-  - [carbon--theme [mixin]](#carbon--theme-mixin)
-  - [content-switcher [mixin]](#content-switcher-mixin)
-
 ### ✅button-separator [variable]
 
 <details>
@@ -8624,7 +8699,6 @@ $hover-field: if(
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
   - [data-table-v2-action [mixin]](#data-table-v2-action-mixin)
-  - [data-table-core [mixin]](#data-table-core-mixin)
   - [data-table-expandable [mixin]](#data-table-expandable-mixin)
   - [search [mixin]](#search-mixin)
 - **Deprecated**: This may not be available in future releases
@@ -14072,6 +14146,7 @@ Button styles
     }
 
     &:active {
+      color: $inverse-01;
       background-color: $active-tertiary;
       border-color: transparent;
     }
@@ -14143,12 +14218,18 @@ Button styles
     &:focus svg {
       fill: currentColor;
     }
+
+    &.#{$prefix}--btn--disabled.#{$prefix}--tooltip--a11y::before,
+    &.#{$prefix}--btn--disabled.#{$prefix}--tooltip--a11y::after,
+    &.#{$prefix}--btn--disabled .#{$prefix}--assistive-text {
+      margin: -1px;
+      overflow: hidden;
+      opacity: 0;
+      clip: rect(0, 0, 0, 0);
+    }
   }
 
-  .#{$prefix}--btn.#{$prefix}--btn--icon-only.#{$prefix}--btn--ghost:focus svg {
-    fill: $icon-01;
-  }
-
+  .#{$prefix}--btn.#{$prefix}--btn--icon-only.#{$prefix}--btn--ghost:focus svg,
   .#{$prefix}--btn.#{$prefix}--btn--icon-only.#{$prefix}--btn--ghost:hover svg {
     fill: $icon-01;
   }
@@ -14276,7 +14357,9 @@ Button styles
       color: $text-04;
     }
 
-    &-tertiary {
+    // TODO: deprecate single dash tertiary
+    &-tertiary,
+    &--tertiary {
       @include button-theme(
         transparent,
         $danger-02,
@@ -14302,7 +14385,9 @@ Button styles
       }
     }
 
-    &-ghost {
+    // TODO: deprecate single dash ghost
+    &-ghost,
+    &--ghost {
       @include button-theme(
         transparent,
         transparent,
@@ -14627,8 +14712,8 @@ Checkbox styles
     position: relative;
     display: flex;
     min-height: rem(24px);
+    padding-top: rem(3px);
     padding-left: rem(20px);
-    line-height: 1.5rem;
     cursor: pointer;
     user-select: none;
   }
@@ -14818,7 +14903,7 @@ Code snippet styles
     display: inline;
     padding: 0;
     color: $text-01;
-    background-color: $ui-01;
+    background-color: $field-01;
     border: 2px solid transparent;
     border-radius: 4px;
     cursor: pointer;
@@ -14834,6 +14919,11 @@ Code snippet styles
     &:focus {
       border: 2px solid $focus;
       outline: none;
+
+      // Firefox HCM fix
+      @media screen and (prefers-contrast) {
+        border-style: dotted;
+      }
     }
 
     &::before {
@@ -14881,19 +14971,32 @@ Code snippet styles
     display: inline-block;
 
     &:hover {
-      background-color: $ui-01;
+      background-color: $field-01;
       cursor: auto;
     }
+  }
+
+  .#{$prefix}--snippet--light.#{$prefix}--snippet--inline.#{$prefix}--snippet--no-copy:hover {
+    background-color: $field-02;
+    cursor: auto;
   }
 
   // Single Line Snippet
   .#{$prefix}--snippet--single {
     @include bx--snippet;
 
+    display: flex;
+    align-items: center;
     min-width: rem(320px);
     max-width: rem(760px);
     height: $carbon--spacing-08;
     padding-right: $carbon--spacing-08;
+
+    // Windows, Firefox HCM Fix
+    @media screen and (-ms-high-contrast: active),
+      screen and (prefers-contrast) {
+      outline: 2px solid transparent;
+    }
   }
 
   .#{$prefix}--snippet--single.#{$prefix}--snippet--no-copy {
@@ -14911,7 +15014,6 @@ Code snippet styles
     height: 100%;
     padding-left: $carbon--spacing-05;
     overflow-x: auto;
-    border-right: solid $carbon--spacing-05 transparent;
 
     &:focus {
       @include focus-outline('outline');
@@ -14925,29 +15027,26 @@ Code snippet styles
     white-space: nowrap;
   }
 
-  .#{$prefix}--snippet--single::after {
-    position: absolute;
-    top: 0;
-    right: rem(56px);
-    width: rem(16px);
-    height: 100%;
-    // Safari interprets `transparent` differently, so make color token value transparent instead:
-    background-image: linear-gradient(to right, rgba($ui-01, 0), $ui-01);
-    content: '';
-  }
-
   // Multi Line Snippet
   .#{$prefix}--snippet--multi {
     @include bx--snippet;
 
+    display: flex;
     min-width: rem(320px);
     max-width: 100%;
     padding: $carbon--spacing-05;
+
+    // Windows, Firefox HCM Fix
+    @media screen and (-ms-high-contrast: active),
+      screen and (prefers-contrast) {
+      outline: 2px solid transparent;
+    }
   }
 
   //closed snippet container
   .#{$prefix}--snippet--multi .#{$prefix}--snippet-container {
     position: relative;
+    order: 1;
     min-height: rem(56px);
     max-height: rem(238px);
     overflow: hidden;
@@ -14994,7 +15093,7 @@ Code snippet styles
     width: rem(16px);
     height: 100%;
     // Safari interprets `transparent` differently, so make color token value transparent instead:
-    background-image: linear-gradient(to right, rgba($ui-01, 0), $ui-01);
+    background-image: linear-gradient(to right, rgba($field-01, 0), $field-01);
     content: '';
   }
 
@@ -15008,6 +15107,13 @@ Code snippet styles
     height: rem(16px);
     transition: all $duration--fast-01 motion(standard, productive);
     fill: $icon-01;
+
+    // Windows, Firefox HCM Fix
+    @media screen and (-ms-high-contrast: active),
+      screen and (prefers-contrast) {
+      // `ButtonText` is a CSS2 system color to help improve colors in HCM
+      fill: ButtonText;
+    }
   }
 
   .#{$prefix}--snippet-button {
@@ -15023,7 +15129,7 @@ Code snippet styles
     height: $carbon--spacing-08;
     padding: 0;
     overflow: visible;
-    background-color: $ui-01;
+    background-color: $field-01;
     border: none;
     outline: none;
     cursor: pointer;
@@ -15076,6 +15182,7 @@ Code snippet styles
     position: absolute;
     top: 0;
     right: 0;
+    z-index: 10;
 
     // Override inherited rule in code snippet
     @include carbon--font-family('sans');
@@ -15087,12 +15194,12 @@ Code snippet styles
     @include carbon--font-family('sans');
 
     position: absolute;
-    right: $spacing-03;
+    right: 0;
     bottom: $spacing-03;
+    z-index: 10;
     display: inline-flex;
     align-items: center;
-    padding: $spacing-03;
-    padding-left: $carbon--spacing-05;
+    padding: $spacing-03 $spacing-05;
     color: $text-01;
     background-color: $field-01;
     border: 0;
@@ -15139,29 +15246,33 @@ Code snippet styles
   }
 
   // Light version
-  .#{$prefix}--snippet.#{$prefix}--snippet--light,
-  .#{$prefix}--snippet.#{$prefix}--snippet--light .#{$prefix}--snippet-button,
-  .#{$prefix}--snippet.#{$prefix}--snippet--light
-    .#{$prefix}--snippet-btn--expand,
-  .#{$prefix}--snippet.#{$prefix}--snippet--light .#{$prefix}--copy-btn {
-    background-color: $ui-02;
+  .#{$prefix}--snippet--light,
+  .#{$prefix}--snippet--light .#{$prefix}--snippet-button,
+  .#{$prefix}--snippet--light .#{$prefix}--snippet-btn--expand,
+  .#{$prefix}--snippet--light .#{$prefix}--copy-btn {
+    background-color: $field-02;
   }
 
-  .#{$prefix}--snippet.#{$prefix}--snippet--light.#{$prefix}--snippet--inline:hover,
-  .#{$prefix}--snippet.#{$prefix}--snippet--light
-    .#{$prefix}--snippet-button:hover,
-  .#{$prefix}--snippet.#{$prefix}--snippet--light
-    .#{$prefix}--snippet-btn--expand:hover,
-  .#{$prefix}--snippet.#{$prefix}--snippet--light .#{$prefix}--copy-btn:hover {
-    background-color: $hover-ui-light;
+  .#{$prefix}--snippet--light.#{$prefix}--snippet--inline:hover,
+  .#{$prefix}--snippet--light .#{$prefix}--snippet-button:hover,
+  .#{$prefix}--snippet--light .#{$prefix}--snippet-btn--expand:hover,
+  .#{$prefix}--snippet--light .#{$prefix}--copy-btn:hover {
+    background-color: $hover-light-ui;
   }
 
-  .#{$prefix}--snippet.#{$prefix}--snippet--light.#{$prefix}--snippet--single::after,
-  .#{$prefix}--snippet.#{$prefix}--snippet--light.#{$prefix}--snippet--multi
+  .#{$prefix}--snippet--light.#{$prefix}--snippet--inline:active,
+  .#{$prefix}--snippet--light .#{$prefix}--snippet-button:active,
+  .#{$prefix}--snippet--light .#{$prefix}--snippet-btn--expand:active,
+  .#{$prefix}--snippet--light .#{$prefix}--copy-btn:active {
+    background-color: $active-light-ui;
+  }
+
+  .#{$prefix}--snippet--light.#{$prefix}--snippet--single::after,
+  .#{$prefix}--snippet--light.#{$prefix}--snippet--multi
     .#{$prefix}--snippet-container
     pre::after {
     // Safari interprets `transparent` differently, so make color token value transparent instead:
-    background-image: linear-gradient(to right, rgba($ui-02, 0), $ui-02);
+    background-image: linear-gradient(to right, rgba($field-02, 0), $field-02);
   }
 
   // Skeleton State
@@ -15200,6 +15311,13 @@ Code snippet styles
     }
   }
 
+  .#{$prefix}--snippet--multi .#{$prefix}--copy-btn {
+    top: $carbon--spacing-03;
+    right: $carbon--spacing-03;
+    width: $carbon--spacing-07;
+    height: $carbon--spacing-07;
+  }
+
   .#{$prefix}--snippet--multi
     .#{$prefix}--snippet-button
     .#{$prefix}--btn--copy__feedback {
@@ -15213,6 +15331,80 @@ Code snippet styles
     top: calc(100% - #{rem(4px)});
     right: auto;
     left: 50%;
+  }
+
+  // overflow indicator
+  .#{$prefix}--snippet__overflow-indicator--left,
+  .#{$prefix}--snippet__overflow-indicator--right {
+    z-index: 1;
+    flex: 1 0 auto;
+    width: $carbon--spacing-05;
+  }
+
+  .#{$prefix}--snippet__overflow-indicator--left {
+    order: 0;
+    margin-right: -$carbon--spacing-05;
+    background-image: linear-gradient(to left, transparent, $field-01);
+  }
+
+  .#{$prefix}--snippet__overflow-indicator--right {
+    order: 2;
+    margin-left: -$carbon--spacing-05;
+    background-image: linear-gradient(to right, transparent, $field-01);
+  }
+
+  .#{$prefix}--snippet--single .#{$prefix}--snippet__overflow-indicator--right,
+  .#{$prefix}--snippet--single .#{$prefix}--snippet__overflow-indicator--left {
+    position: absolute;
+    width: $carbon--spacing-07;
+    height: calc(100% - #{$carbon--spacing-02});
+  }
+
+  .#{$prefix}--snippet--single .#{$prefix}--snippet__overflow-indicator--right {
+    right: $carbon--spacing-08;
+  }
+
+  .#{$prefix}--snippet--single
+    .#{$prefix}--snippet-container:focus
+    ~ .#{$prefix}--snippet__overflow-indicator--right {
+    right: calc(#{$carbon--spacing-08} + #{rem(2px)});
+  }
+
+  .#{$prefix}--snippet--single
+    .#{$prefix}--snippet-container:focus
+    + .#{$prefix}--snippet__overflow-indicator--left {
+    left: rem(2px);
+  }
+
+  .#{$prefix}--snippet--light .#{$prefix}--snippet__overflow-indicator--left {
+    background-image: linear-gradient(to left, transparent, $field-02);
+  }
+
+  .#{$prefix}--snippet--light .#{$prefix}--snippet__overflow-indicator--right {
+    background-image: linear-gradient(to right, transparent, $field-02);
+  }
+
+  // Safari-only media query
+  // since fades won't appear correctly with CSS custom properties
+  // see: tabs, code snippet, and modal overflow indicators
+  @media not all and (min-resolution: 0.001dpcm) {
+    @supports (-webkit-appearance: none) and (stroke-color: transparent) {
+      .#{$prefix}--snippet__overflow-indicator--left {
+        background-image: linear-gradient(
+          to left,
+          rgba($field-01, 0),
+          $field-01
+        );
+      }
+
+      .#{$prefix}--snippet__overflow-indicator--right {
+        background-image: linear-gradient(
+          to right,
+          rgba($field-01, 0),
+          $field-01
+        );
+      }
+    }
   }
 
   #{$prefix}--snippet--multi.#{$prefix}--skeleton {
@@ -15259,18 +15451,21 @@ Code snippet styles
   - [carbon--font-family [mixin]](#carbon--font-family-mixin)
   - [prefix [variable]](#prefix-variable)
   - [text-01 [variable]](#text-01-variable)
-  - [ui-01 [variable]](#ui-01-variable)
+  - [field-01 [variable]](#field-01-variable)
   - [ui-03 [variable]](#ui-03-variable)
   - [focus [variable]](#focus-variable)
   - [spacing-03 [variable]](#spacing-03-variable)
+  - [field-02 [variable]](#field-02-variable)
   - [carbon--spacing-08 [variable]](#carbon--spacing-08-variable)
   - [carbon--spacing-05 [variable]](#carbon--spacing-05-variable)
   - [spacing-05 [variable]](#spacing-05-variable)
   - [icon-01 [variable]](#icon-01-variable)
   - [carbon--spacing-07 [variable]](#carbon--spacing-07-variable)
   - [hover-ui [variable]](#hover-ui-variable)
-  - [field-01 [variable]](#field-01-variable)
-  - [ui-02 [variable]](#ui-02-variable)
+  - [hover-light-ui [variable]](#hover-light-ui-variable)
+  - [active-light-ui [variable]](#active-light-ui-variable)
+  - [carbon--spacing-03 [variable]](#carbon--spacing-03-variable)
+  - [carbon--spacing-02 [variable]](#carbon--spacing-02-variable)
 
 ### ❌bx--snippet [mixin]
 
@@ -15286,7 +15481,7 @@ Code snippet base styles
   position: relative;
   width: 100%;
   max-width: rem(600px);
-  background: $snippet-background-color;
+  background-color: $snippet-background-color;
 }
 ```
 
@@ -16252,15 +16447,15 @@ Data table core styles
   }
 
   .#{$prefix}--data-table tbody tr:hover {
-    background: $hover-field;
+    background: $hover-ui;
   }
 
   .#{$prefix}--data-table tbody tr:hover td,
   .#{$prefix}--data-table tbody tr:hover th {
     color: $text-01;
-    background: $hover-field;
-    border-top: 1px solid $hover-field;
-    border-bottom: 1px solid $hover-field;
+    background: $hover-ui;
+    border-top: 1px solid $hover-ui;
+    border-bottom: 1px solid $hover-ui;
   }
 
   .#{$prefix}--data-table th,
@@ -16383,7 +16578,7 @@ Data table core styles
   .#{$prefix}--data-table--selected .#{$prefix}--overflow-menu,
   .#{$prefix}--data-table--selected .#{$prefix}--overflow-menu__trigger {
     &:hover {
-      background-color: $hover-field;
+      background-color: $hover-ui;
     }
   }
 
@@ -16408,14 +16603,14 @@ Data table core styles
 
   .#{$prefix}--data-table--zebra
     tbody
-    tr:not(.#{$prefix}--parent-row):nth-child(even)
+    tr:not(.#{$prefix}--parent-row):nth-child(odd)
     td {
     border-bottom: 1px solid $ui-01;
   }
 
   .#{$prefix}--data-table--zebra
     tbody
-    tr:not(.#{$prefix}--parent-row):nth-child(odd)
+    tr:not(.#{$prefix}--parent-row):nth-child(even)
     td {
     background-color: $data-table-zebra-color;
     border-top: 1px solid $data-table-zebra-color;
@@ -16426,9 +16621,9 @@ Data table core styles
     tbody
     tr:not(.#{$prefix}--parent-row):hover
     td {
-    background-color: $hover-field;
-    border-top: 1px solid $hover-field;
-    border-bottom: 1px solid $hover-field;
+    background-color: $hover-ui;
+    border-top: 1px solid $hover-ui;
+    border-bottom: 1px solid $hover-ui;
   }
 
   //----------------------------------------------------------------------------
@@ -16916,13 +17111,12 @@ Data table core styles
   - [text-02 [variable]](#text-02-variable)
   - [ui-03 [variable]](#ui-03-variable)
   - [layout-04 [variable]](#layout-04-variable)
-  - [hover-field [variable]](#hover-field-variable)
+  - [hover-ui [variable]](#hover-ui-variable)
   - [spacing-04 [variable]](#spacing-04-variable)
   - [spacing-03 [variable]](#spacing-03-variable)
   - [hover-selected-ui [variable]](#hover-selected-ui-variable)
   - [selected-ui [variable]](#selected-ui-variable)
   - [active-ui [variable]](#active-ui-variable)
-  - [hover-ui [variable]](#hover-ui-variable)
 
 ### ❌data-table-expandable [mixin]
 
@@ -16983,9 +17177,11 @@ Data table expandable styles
   }
 
   tr.#{$prefix}--parent-row.#{$prefix}--expandable-row + tr[data-child-row] td {
+    padding-left: $carbon--spacing-09;
     border-bottom: 1px solid $ui-03;
     transition: padding-bottom $duration--fast-02 motion(standard, productive), transform
-        $duration--fast-02 motion(standard, productive);
+        $duration--fast-02 motion(standard, productive),
+      background-color $duration--fast-02 motion(standard, productive);
   }
 
   tr.#{$prefix}--parent-row.#{$prefix}--expandable-row
@@ -17114,11 +17310,17 @@ Data table expandable styles
   }
 
   .#{$prefix}--table-expand__button:focus {
-    outline: 1px solid transparent;
+    outline: none;
   }
 
   .#{$prefix}--table-expand__button:focus .#{$prefix}--table-expand__svg {
-    box-shadow: inset 0 0 0 1px $focus;
+    box-shadow: inset 0 0 0 2px $focus;
+
+    // Windows, Firefox HCM Fix
+    @media screen and (-ms-high-contrast: active),
+      screen and (prefers-contrast) {
+      outline: 2px solid transparent;
+    }
   }
 
   .#{$prefix}--table-expand__svg {
@@ -17303,6 +17505,7 @@ Data table expandable styles
   - [ui-03 [variable]](#ui-03-variable)
   - [spacing-05 [variable]](#spacing-05-variable)
   - [hover-ui [variable]](#hover-ui-variable)
+  - [carbon--spacing-09 [variable]](#carbon--spacing-09-variable)
   - [text-01 [variable]](#text-01-variable)
   - [focus [variable]](#focus-variable)
   - [ui-05 [variable]](#ui-05-variable)
@@ -17572,9 +17775,19 @@ Date picker styles
     align-items: center;
   }
 
-  .#{$prefix}--date-picker.#{$prefix}--date-picker--simple {
-    .#{$prefix}--date-picker__input {
-      width: rem(120px);
+  .#{$prefix}--date-picker.#{$prefix}--date-picker--simple
+    .#{$prefix}--date-picker__input,
+  .#{$prefix}--date-picker.#{$prefix}--date-picker--simple .#{$prefix}--label {
+    width: rem(120px);
+  }
+
+  .#{$prefix}--date-picker.#{$prefix}--date-picker--simple
+    .#{$prefix}--date-picker-input__wrapper--invalid,
+  .#{$prefix}--date-picker.#{$prefix}--date-picker--simple
+    .#{$prefix}--date-picker-input__wrapper--warn {
+    .#{$prefix}--date-picker__input,
+    ~ .#{$prefix}--form-requirement {
+      width: rem(152px);
     }
   }
 
@@ -17596,7 +17809,6 @@ Date picker styles
 
     position: relative;
     display: block;
-    min-width: rem(144px);
     height: rem(40px);
     padding: 0 $carbon--spacing-05;
     color: $text-01;
@@ -17648,6 +17860,31 @@ Date picker styles
     transform: translateY(-50%);
     cursor: pointer;
     fill: $icon-01;
+
+    // Windows, Firefox HCM Fix
+    @media screen and (-ms-high-contrast: active),
+      screen and (prefers-contrast) {
+      // `ButtonText` is a CSS2 system color to help improve colors in HCM
+      fill: ButtonText;
+    }
+  }
+
+  .#{$prefix}--date-picker__icon--invalid,
+  .#{$prefix}--date-picker__icon--warn {
+    cursor: auto;
+  }
+
+  .#{$prefix}--date-picker__icon--warn {
+    fill: $support-03;
+  }
+
+  .#{$prefix}--date-picker__icon--warn path:first-of-type {
+    opacity: 1;
+    fill: $carbon__black-100;
+  }
+
+  .#{$prefix}--date-picker__icon--invalid {
+    fill: $support-01;
   }
 
   .#{$prefix}--date-picker__icon ~ .#{$prefix}--date-picker__input {
@@ -17702,6 +17939,8 @@ Date picker styles
   - [ui-04 [variable]](#ui-04-variable)
   - [disabled-02 [variable]](#disabled-02-variable)
   - [icon-01 [variable]](#icon-01-variable)
+  - [support-03 [variable]](#support-03-variable)
+  - [support-01 [variable]](#support-01-variable)
   - [carbon--spacing-09 [variable]](#carbon--spacing-09-variable)
 
 ## dropdown
@@ -18347,6 +18586,12 @@ File uploader styles
       white-space: nowrap;
       text-overflow: ellipsis;
     }
+
+    // Windows, Firefox HCM Fix
+    @media screen and (-ms-high-contrast: active),
+      screen and (prefers-contrast) {
+      outline: 2px solid transparent;
+    }
   }
 
   .#{$prefix}--file__selected-file--field {
@@ -18467,6 +18712,13 @@ File uploader styles
 
   .#{$prefix}--file__state-container .#{$prefix}--file-close svg path {
     fill: $icon-01;
+
+    // Windows, Firefox HCM Fix
+    @media screen and (-ms-high-contrast: active),
+      screen and (prefers-contrast) {
+      // `ButtonText` is a CSS2 system color to help improve colors in HCM
+      fill: ButtonText;
+    }
   }
 
   .#{$prefix}--file__state-container .#{$prefix}--inline-loading__animation {
@@ -18591,7 +18843,8 @@ Form styles
   input[data-invalid],
   .#{$prefix}--number[data-invalid] .#{$prefix}--number__input-wrapper,
   .#{$prefix}--number__input-wrapper--warning,
-  .#{$prefix}--date-picker-input__wrapper,
+  .#{$prefix}--date-picker-input__wrapper--warn,
+  .#{$prefix}--date-picker-input__wrapper--invalid,
   .#{$prefix}--time-picker--invalid,
   .#{$prefix}--text-input__field-wrapper[data-invalid],
   .#{$prefix}--text-input__field-wrapper--warning,
@@ -18611,7 +18864,7 @@ Form styles
 
   input[data-invalid],
   .#{$prefix}--number[data-invalid] .#{$prefix}--number__input-wrapper,
-  .#{$prefix}--date-picker-input__wrapper,
+  .#{$prefix}--date-picker-input__wrapper--invalid,
   .#{$prefix}--time-picker--invalid,
   .#{$prefix}--text-input__field-wrapper[data-invalid],
   .#{$prefix}--text-area__wrapper[data-invalid],
@@ -19329,10 +19582,9 @@ List box styles
   .#{$prefix}--list-box__field:focus {
     @include focus-outline('outline');
 
-    @media screen and (-ms-high-contrast: active),
-      screen and (prefers-contrast) {
-      // `ButtonText` is a CSS2 system color to help improve colors in HCM
-      border: 2px solid ButtonText;
+    // Firefox HCM fix
+    @media screen and (prefers-contrast) {
+      border-style: dotted;
     }
   }
 
@@ -20385,6 +20637,14 @@ Modal styles
     }
   }
 
+  .#{$prefix}--modal-footer button.#{$prefix}--btn:focus {
+    // Firefox HCM Fix
+    @media screen and (prefers-contrast) {
+      border: none;
+      outline-style: dotted;
+    }
+  }
+
   .#{$prefix}--modal-close {
     position: absolute;
     top: 0;
@@ -20405,6 +20665,11 @@ Modal styles
     &:focus {
       border-color: $focus;
       outline: none;
+
+      // Firefox HCM Fix
+      @media screen and (prefers-contrast) {
+        border-style: dotted;
+      }
     }
   }
 
@@ -20759,6 +21024,12 @@ Inline notification styles
     outline: 2px solid $inverse-focus-ui;
     outline-offset: -2px;
     box-shadow: none;
+
+    // Firefox HCM Fix
+    @media screen and (prefers-contrast) {
+      border-style: dotted;
+      outline-style: dotted;
+    }
   }
 
   .#{$prefix}--inline-notification--low-contrast
@@ -20795,6 +21066,11 @@ Inline notification styles
     &:focus {
       outline: 2px solid $inverse-focus-ui;
       outline-offset: -2px;
+
+      // Firefox HCM fix
+      @media screen and (prefers-contrast) {
+        outline-style: dotted;
+      }
     }
 
     .#{$prefix}--inline-notification__close-icon {
@@ -21069,6 +21345,11 @@ Toast notification styles
     &:focus {
       outline: 2px solid $inverse-focus-ui;
       outline-offset: -2px;
+
+      // Firefox HCM fix
+      @media screen and (prefers-contrast) {
+        outline-style: dotted;
+      }
     }
 
     .#{$prefix}--toast-notification__close-icon {
@@ -21307,7 +21588,7 @@ Number input styles
     fill: $support-03;
   }
 
-  .#{$prefix}--number__invalid--warning path[data-icon-path='inner-path'] {
+  .#{$prefix}--number__invalid--warning path:first-of-type {
     opacity: 1;
     fill: $carbon__black-100;
   }
@@ -21488,13 +21769,6 @@ Overflow menu styles
 
     &:focus {
       @include focus-outline('outline');
-
-      // Windows, Firefox HCM Fix
-      @media screen and (-ms-high-contrast: active),
-        screen and (prefers-contrast) {
-        outline: 3px solid transparent;
-        outline-offset: -3px;
-      }
     }
 
     &:hover {
@@ -21722,13 +21996,6 @@ Overflow menu styles
 
     &:focus {
       @include focus-outline('outline');
-
-      // Windows, Firefox HCM Fix
-      @media screen and (-ms-high-contrast: active),
-        screen and (prefers-contrast) {
-        outline: 3px solid transparent;
-        outline-offset: -3px;
-      }
     }
 
     &::-moz-focus-inner {
@@ -21841,23 +22108,9 @@ Pagination styles
 
 ```scss
 @mixin pagination() {
-  .#{$prefix}--data-table-container + .#{$prefix}--pagination {
-    border-top: 0;
-  }
-
   .#{$prefix}--pagination {
     @include reset;
     @include type-style('body-short-01');
-
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-
-    width: 100%;
-    min-height: rem(48px);
-    overflow-x: auto;
-    background-color: $ui-01;
-    border-top: 1px solid $ui-03;
 
     @include carbon--breakpoint('md') {
       overflow: initial;
@@ -21875,46 +22128,64 @@ Pagination styles
         display: initial;
       }
     }
-  }
 
-  .#{$prefix}--pagination .#{$prefix}--select {
-    align-items: center;
-    height: 100%;
-  }
-
-  .#{$prefix}--pagination .#{$prefix}--select-input--inline__wrapper {
     display: flex;
-    height: 100%;
-  }
+    align-items: center;
+    justify-content: space-between;
 
-  .#{$prefix}--pagination .#{$prefix}--select-input {
-    @include type-style('body-short-01');
+    width: 100%;
+    min-height: rem(48px);
+    overflow-x: auto;
+    background-color: $ui-01;
+    border-top: 1px solid $ui-03;
 
-    width: auto;
-    min-width: auto;
-    height: rem(48px);
-    padding: 0 2.25rem 0 $spacing-05;
-  }
+    .#{$prefix}--data-table-container + & {
+      border-top: 0;
+    }
 
-  .#{$prefix}--pagination .#{$prefix}--select-input:hover {
-    background: $hover-ui;
-  }
+    .#{$prefix}--pagination__control-buttons {
+      flex-shrink: 0;
+    }
 
-  .#{$prefix}--pagination .#{$prefix}--select__arrow {
-    top: 50%;
-    transform: translate(-0.5rem, -50%);
-  }
+    .#{$prefix}--select {
+      align-items: center;
+      height: 100%;
+    }
 
-  .#{$prefix}--pagination
-    .#{$prefix}--select__item-count
     .#{$prefix}--select-input {
-    border-right: $spacing-4xs solid $ui-03;
-  }
+      @include type-style('body-short-01');
 
-  .#{$prefix}--pagination
-    .#{$prefix}--select__page-number
-    .#{$prefix}--select-input {
-    border-left: 1px solid $ui-03;
+      width: auto;
+      min-width: auto;
+      height: rem(48px);
+      padding: 0 2.25rem 0 $spacing-05;
+
+      &:hover {
+        background: $hover-ui;
+      }
+
+      &--inline__wrapper {
+        display: flex;
+        height: 100%;
+      }
+    }
+
+    .#{$prefix}--select__arrow {
+      top: 50%;
+      transform: translate(-0.5rem, -50%);
+    }
+
+    .#{$prefix}--select__item-count {
+      .#{$prefix}--select-input {
+        border-right: $spacing-4xs solid $ui-03;
+      }
+    }
+
+    .#{$prefix}--select__page-number {
+      .#{$prefix}--select-input {
+        border-left: 1px solid $ui-03;
+      }
+    }
   }
 
   .#{$prefix}--pagination__left,
@@ -21922,40 +22193,44 @@ Pagination styles
     display: flex;
     align-items: center;
     height: rem(48px);
-  }
 
-  .#{$prefix}--pagination__left > .#{$prefix}--form-item,
-  .#{$prefix}--pagination__right > .#{$prefix}--form-item {
-    height: 100%;
-  }
+    > .#{$prefix}--form-item {
+      height: 100%;
+    }
 
-  .#{$prefix}--pagination__left .#{$prefix}--pagination__text,
-  .#{$prefix}--pagination__right .#{$prefix}--pagination__text {
-    white-space: nowrap;
-  }
-
-  .#{$prefix}--pagination__left .#{$prefix}--pagination__text {
-    margin-right: rem(1px);
-  }
-
-  .#{$prefix}--pagination__right .#{$prefix}--pagination__text {
-    margin-right: 1rem;
-    margin-left: rem(1px);
-  }
-
-  .#{$prefix}--pagination__left {
-    padding: 0 $carbon--spacing-05;
+    .#{$prefix}--pagination__text {
+      white-space: nowrap;
+    }
   }
 
   .#{$prefix}--pagination__text {
     @include carbon--breakpoint('md') {
       display: inline-block;
     }
+
+    margin-left: $carbon--spacing-05;
+    overflow: hidden;
+    color: $text-02;
+    text-overflow: ellipsis;
+
+    .#{$prefix}--pagination__left & {
+      margin-right: rem(1px);
+    }
+
+    .#{$prefix}--pagination__right & {
+      margin-right: 1rem;
+      margin-left: rem(1px);
+    }
+
+    // Skeleton state
+    .#{$prefix}--pagination.#{$prefix}--skeleton & {
+      margin-right: 1rem;
+      margin-bottom: 0;
+    }
   }
 
-  span.#{$prefix}--pagination__text {
-    margin-left: $carbon--spacing-05;
-    color: $text-02;
+  .#{$prefix}--pagination__left {
+    padding: 0 $carbon--spacing-05;
   }
 
   .#{$prefix}--pagination__button,
@@ -22011,12 +22286,6 @@ Pagination styles
     border-color: $ui-03;
     cursor: not-allowed;
     fill: $disabled-02;
-  }
-
-  // Skeleton state
-  .#{$prefix}--pagination.#{$prefix}--skeleton .#{$prefix}--skeleton__text {
-    margin-right: 1rem;
-    margin-bottom: 0;
   }
 }
 ```
@@ -22829,7 +23098,7 @@ Radio button styles
     flex-shrink: 0;
     width: rem(18px);
     height: rem(18px);
-    margin-right: $carbon--spacing-03;
+    margin: 2px $carbon--spacing-03 2px $carbon--spacing-03;
     background-color: transparent;
     border: $radio-border-width solid $icon-01;
     border-radius: 50%;
@@ -23266,12 +23535,14 @@ Select styles
     display: flex;
     flex-direction: column;
     align-items: flex-start;
+    width: 100%;
   }
 
   .#{$prefix}--select-input__wrapper {
     position: relative;
     display: flex;
     align-items: center;
+    width: 100%;
   }
 
   .#{$prefix}--select-input {
@@ -23279,10 +23550,7 @@ Select styles
     @include focus-outline('reset');
 
     display: block;
-    width: rem(224px);
-    min-width: rem(128px);
-    max-width: rem(448px);
-
+    width: 100%;
     height: rem(40px);
     padding: 0 $spacing-09 0 $spacing-05;
     color: $text-01;
@@ -23320,13 +23588,6 @@ Select styles
       @include focus-outline('outline');
 
       color: $text-01;
-
-      // Windows, Firefox HCM Fix
-      @media screen and (-ms-high-contrast: active),
-        screen and (prefers-contrast) {
-        outline: 3px solid transparent;
-        outline-offset: -3px;
-      }
     }
 
     &:disabled,
@@ -23450,6 +23711,7 @@ Select styles
   }
 
   .#{$prefix}--select--inline .#{$prefix}--select-input {
+    width: auto;
     padding-right: $spacing-07;
     padding-left: $carbon--spacing-03;
     color: $text-01;
@@ -23629,6 +23891,11 @@ Slider styles
       box-shadow: inset 0 0 0 2px $interactive-04, inset 0 0 0 3px $ui-01;
       // 20px / 14px = 1.4286
       transform: translate(-50%, -50%) scale(1.4286);
+
+      // Firefox HCM Fix
+      @media screen and (prefers-contrast) {
+        outline-style: dotted;
+      }
     }
 
     &:active {
@@ -24916,6 +25183,17 @@ Tag styles
     border-radius: 50%;
     outline: none;
     box-shadow: inset 0 0 0 2px $focus;
+
+    // Windows, Firefox HCM Fix
+    @media screen and (-ms-high-contrast: active),
+      screen and (prefers-contrast) {
+      // `ButtonText` is a CSS2 system color to help improve colors in HCM
+      outline: 1px solid ButtonText;
+    }
+  }
+
+  .#{$prefix}--tag--high-contrast .#{$prefix}--tag__close-icon:focus {
+    box-shadow: inset 0 0 0 2px $inverse-focus-ui;
   }
 
   .#{$prefix}--tag--filter.#{$prefix}--tag--disabled
@@ -24952,6 +25230,7 @@ Tag styles
   - [disabled-01 [variable]](#disabled-01-variable)
   - [disabled-02 [variable]](#disabled-02-variable)
   - [focus [variable]](#focus-variable)
+  - [inverse-focus-ui [variable]](#inverse-focus-ui-variable)
   - [ui-03 [variable]](#ui-03-variable)
   - [text-01 [variable]](#text-01-variable)
 
@@ -25141,7 +25420,7 @@ Text input styles
     .#{$prefix}--text-input__invalid-icon--warning {
       fill: $support-03;
 
-      path[data-icon-path='inner-path'] {
+      path:first-of-type {
         opacity: 1;
         fill: $carbon__black-100;
       }
@@ -25406,13 +25685,6 @@ Tile styles
 
     &:focus {
       @include focus-outline('outline');
-
-      // Windows, Firefox HCM Fix
-      @media screen and (-ms-high-contrast: active),
-        screen and (prefers-contrast) {
-        outline: 3px solid transparent;
-        outline-offset: -3px;
-      }
     }
   }
 
@@ -26067,6 +26339,13 @@ Toggle styles
     + .#{$prefix}--toggle-input__label
     > .#{$prefix}--toggle__switch::before {
     box-shadow: 0 0 0 1px $ui-02, 0 0 0 3px $focus;
+
+    // Windows, Firefox HCM Fix
+    @media screen and (-ms-high-contrast: active),
+      screen and (prefers-contrast) {
+      // `ButtonText` is a CSS2 system color to help improve colors in HCM
+      outline: 1px solid ButtonText;
+    }
   }
 
   //----------------------------------------------
@@ -26739,7 +27018,6 @@ Tooltip styles
   }
 
   .#{$prefix}--tooltip {
-    @include box-shadow;
     @include reset;
 
     position: absolute;
@@ -26751,7 +27029,6 @@ Tooltip styles
     padding: $carbon--spacing-05;
     color: $inverse-01;
     word-wrap: break-word;
-    background: $inverse-02;
     border-radius: rem(2px);
 
     // Windows, Firefox HCM Fix
@@ -26789,13 +27066,20 @@ Tooltip styles
         outline-offset: 2px;
       }
 
-      &:active {
+      &:active,
+      &:active:visited,
+      &:active:visited:hover {
         color: $inverse-01;
       }
 
       &:visited {
         color: $inverse-link;
       }
+    }
+
+    .#{$prefix}--tooltip__content {
+      background-color: $inverse-02;
+      box-shadow: 0 0 0 $spacing-05 $inverse-02, 0 2px 6px $spacing-05 rgba(0, 0, 0, 0.2);
     }
 
     // Tooltips need to be click focusable but not sequentially focusable so the user can click within
@@ -26817,6 +27101,44 @@ Tooltip styles
       border-bottom: $caret-size solid $inverse-02;
       border-left: $caret-size solid transparent;
       content: '';
+    }
+
+    &.#{$prefix}--tooltip--top.#{$prefix}--tooltip--align-start,
+    &.#{$prefix}--tooltip--bottom.#{$prefix}--tooltip--align-start {
+      .#{$prefix}--tooltip__content {
+        transform: translate(calc(50% - 6px), 0);
+      }
+    }
+
+    &.#{$prefix}--tooltip--top.#{$prefix}--tooltip--align-end,
+    &.#{$prefix}--tooltip--bottom.#{$prefix}--tooltip--align-end {
+      .#{$prefix}--tooltip__content {
+        transform: translate(calc(6px - 50%), 0);
+      }
+    }
+
+    &.#{$prefix}--tooltip--left.#{$prefix}--tooltip--align-start {
+      .#{$prefix}--tooltip__content {
+        transform: translate(0, calc(9px + 50% - #{$spacing-03}));
+      }
+    }
+
+    &.#{$prefix}--tooltip--right.#{$prefix}--tooltip--align-start {
+      .#{$prefix}--tooltip__content {
+        transform: translate(0, calc(-3px + 50% - #{$spacing-03}));
+      }
+    }
+
+    &.#{$prefix}--tooltip--left.#{$prefix}--tooltip--align-end {
+      .#{$prefix}--tooltip__content {
+        transform: translate(0, calc(9px - 50% + #{$spacing-03}));
+      }
+    }
+
+    &.#{$prefix}--tooltip--right.#{$prefix}--tooltip--align-end {
+      .#{$prefix}--tooltip__content {
+        transform: translate(0, calc(-3px - 50% + #{$spacing-03}));
+      }
     }
 
     .#{$prefix}--tooltip__footer {
@@ -27040,6 +27362,7 @@ Tooltip styles
   - [carbon--spacing-07 [variable]](#carbon--spacing-07-variable)
   - [inverse-focus-ui [variable]](#inverse-focus-ui-variable)
   - [inverse-link [variable]](#inverse-link-variable)
+  - [spacing-05 [variable]](#spacing-05-variable)
   - [spacing-03 [variable]](#spacing-03-variable)
   - [interactive-04 [variable]](#interactive-04-variable)
 
@@ -27377,11 +27700,9 @@ UI shell header
     border-color: $shell-header-focus;
     outline: none;
 
-    // Windows, Firefox HCM Fix
-    @media screen and (-ms-high-contrast: active),
-      screen and (prefers-contrast) {
-      outline: 3px solid transparent;
-      outline-offset: -3px;
+    // Firefox HCM Fix
+    @media screen and (prefers-contrast) {
+      border-style: dotted;
     }
   }
 
@@ -27435,6 +27756,13 @@ UI shell header
 
   a.#{$prefix}--header__name:focus {
     border-color: $shell-header-focus;
+
+    // Windows, Firefox HCM Fix
+    @media screen and (-ms-high-contrast: active),
+      screen and (prefers-contrast) {
+      // `ButtonText` is a CSS2 system color to help improve colors in HCM
+      border-style: dotted;
+    }
   }
 
   .#{$prefix}--header__name--prefix {
@@ -27526,8 +27854,7 @@ UI shell header
     // Windows, Firefox HCM Fix
     @media screen and (-ms-high-contrast: active),
       screen and (prefers-contrast) {
-      outline: 3px solid transparent;
-      outline-offset: -3px;
+      border-style: dotted;
     }
   }
 
@@ -28512,13 +28839,6 @@ UI shell side nav
 
   .#{$prefix}--side-nav__submenu:focus {
     @include focus-outline('outline');
-
-    // Windows, Firefox HCM Fix
-    @media screen and (-ms-high-contrast: active),
-      screen and (prefers-contrast) {
-      outline: 3px solid transparent;
-      outline-offset: -3px;
-    }
   }
 
   .#{$prefix}--side-nav__submenu-title {
@@ -28650,13 +28970,6 @@ UI shell side nav
   a.#{$prefix}--side-nav__link:focus,
   .#{$prefix}--side-nav a.#{$prefix}--header__menu-item:focus {
     @include focus-outline('outline');
-
-    // Windows, Firefox HCM Fix
-    @media screen and (-ms-high-contrast: active),
-      screen and (prefers-contrast) {
-      outline: 3px solid transparent;
-      outline-offset: -3px;
-    }
   }
 
   a.#{$prefix}--side-nav__link[aria-current='page'],

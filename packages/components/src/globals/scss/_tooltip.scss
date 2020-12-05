@@ -138,6 +138,7 @@
     color: inherit;
     // overwrite default nowrap behavior
     white-space: normal;
+    word-break: break-word;
     // In order to pass AAT, opacity must be set to 1 in the default state
     // On focus/hover use a keyframe animation to mimic transition
     opacity: 1;
@@ -200,12 +201,6 @@
   &.#{$prefix}--tooltip--hidden.#{$prefix}--tooltip--a11y::before {
     opacity: 0;
     animation: none;
-  }
-
-  &.#{$prefix}--btn--disabled.#{$prefix}--tooltip--a11y::before,
-  &.#{$prefix}--btn--disabled.#{$prefix}--tooltip--a11y::after,
-  &.#{$prefix}--btn--disabled .#{$prefix}--assistive-text {
-    display: none;
   }
 }
 

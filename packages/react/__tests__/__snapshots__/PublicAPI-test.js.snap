@@ -93,6 +93,8 @@ Map {
     },
   },
   "Breadcrumb" => Object {
+    "$$typeof": Symbol(react.forward_ref),
+    "displayName": "Breadcrumb",
     "propTypes": Object {
       "aria-label": Object {
         "type": "string",
@@ -107,8 +109,11 @@ Map {
         "type": "bool",
       },
     },
+    "render": [Function],
   },
   "BreadcrumbItem" => Object {
+    "$$typeof": Symbol(react.forward_ref),
+    "displayName": "BreadcrumbItem",
     "propTypes": Object {
       "aria-current": Object {
         "args": Array [
@@ -136,6 +141,7 @@ Map {
         "type": "bool",
       },
     },
+    "render": [Function],
   },
   "Button" => Object {
     "$$typeof": Symbol(react.forward_ref),
@@ -190,6 +196,8 @@ Map {
             "danger",
             "ghost",
             "danger--primary",
+            "danger--ghost",
+            "danger--tertiary",
             "tertiary",
           ],
         ],
@@ -1248,6 +1256,9 @@ Map {
           "isRequired": true,
           "type": "string",
         },
+        "onChange": Object {
+          "type": "func",
+        },
         "onSelect": Object {
           "isRequired": true,
           "type": "func",
@@ -1868,6 +1879,9 @@ Map {
         "isRequired": true,
         "type": "string",
       },
+      "onChange": Object {
+        "type": "func",
+      },
       "onSelect": Object {
         "isRequired": true,
         "type": "func",
@@ -2236,6 +2250,12 @@ Map {
       "type": Object {
         "type": "string",
       },
+      "warn": Object {
+        "type": "bool",
+      },
+      "warnText": Object {
+        "type": "string",
+      },
     },
   },
   "Dropdown" => Object {
@@ -2450,6 +2470,8 @@ Map {
             "danger",
             "ghost",
             "danger--primary",
+            "danger--ghost",
+            "danger--tertiary",
             "tertiary",
           ],
         ],
@@ -2554,6 +2576,8 @@ Map {
             "danger",
             "ghost",
             "danger--primary",
+            "danger--ghost",
+            "danger--tertiary",
             "tertiary",
           ],
         ],
@@ -3366,6 +3390,8 @@ Map {
             "danger",
             "ghost",
             "danger--primary",
+            "danger--ghost",
+            "danger--tertiary",
             "tertiary",
           ],
         ],
@@ -3554,6 +3580,9 @@ Map {
           "type": "string",
         },
         "onChange": Object {
+          "type": "func",
+        },
+        "onMenuChange": Object {
           "type": "func",
         },
         "open": Object {
@@ -3786,6 +3815,9 @@ Map {
         "type": "string",
       },
       "onChange": Object {
+        "type": "func",
+      },
+      "onMenuChange": Object {
         "type": "func",
       },
       "open": Object {
@@ -4165,6 +4197,9 @@ Map {
       "requireTitle": Object {
         "type": "bool",
       },
+      "title": Object {
+        "type": "string",
+      },
       "wrapperClassName": Object {
         "type": "string",
       },
@@ -4500,6 +4535,9 @@ Map {
         "type": "bool",
       },
       "onChange": Object {
+        "type": "func",
+      },
+      "onKeyDown": Object {
         "type": "func",
       },
       "placeHolderText": Object {
@@ -4970,14 +5008,11 @@ Map {
   },
   "Tab" => Object {
     "defaultProps": Object {
-      "href": "#",
       "label": "provide a label",
       "onClick": [Function],
       "onKeyDown": [Function],
-      "renderContent": [Function],
       "role": "presentation",
       "selected": false,
-      "tabIndex": 0,
     },
     "propTypes": Object {
       "className": Object {
@@ -5022,7 +5057,9 @@ Map {
         "isRequired": true,
         "type": "bool",
       },
-      "tabIndex": [Function],
+      "tabIndex": Object {
+        "type": "number",
+      },
     },
   },
   "TabContent" => Object {
@@ -5904,7 +5941,6 @@ Map {
   "TimePickerSelect" => Object {
     "defaultProps": Object {
       "disabled": false,
-      "hideLabel": true,
       "iconDescription": "open list of options",
       "inline": true,
     },
@@ -5978,6 +6014,14 @@ Map {
       },
       "onToggle": Object {
         "type": "func",
+      },
+      "size": Object {
+        "args": Array [
+          Array [
+            "sm",
+          ],
+        ],
+        "type": "oneOf",
       },
       "toggled": Object {
         "type": "bool",
@@ -6403,6 +6447,15 @@ Map {
         "type": "string",
       },
       "inline": [Function],
+      "size": Object {
+        "args": Array [
+          Array [
+            "sm",
+            "xl",
+          ],
+        ],
+        "type": "oneOf",
+      },
     },
   },
   "FileUploaderSkeleton" => Object {
@@ -6992,6 +7045,7 @@ Map {
     },
   },
   "SideNavLink" => Object {
+    "$$typeof": Symbol(react.forward_ref),
     "defaultProps": Object {
       "element": "a",
       "large": false,
@@ -7027,6 +7081,7 @@ Map {
         "type": "oneOfType",
       },
     },
+    "render": [Function],
   },
   "SideNavLinkText" => Object {
     "propTypes": Object {

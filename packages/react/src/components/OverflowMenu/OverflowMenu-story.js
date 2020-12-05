@@ -10,6 +10,7 @@ import { action } from '@storybook/addon-actions';
 import { withKnobs, boolean, select, text } from '@storybook/addon-knobs';
 import { withReadme } from 'storybook-readme';
 import OverflowMenu from '../OverflowMenu';
+import { OverflowMenu as OGOverflowMenu } from './OverflowMenu';
 import OverflowMenuItem from '../OverflowMenuItem';
 import OverflowREADME from './README.md';
 import mdx from './OverflowMenu.mdx';
@@ -57,15 +58,14 @@ OverflowMenu.displayName = 'OverflowMenu';
 export default {
   title: 'OverflowMenu',
   decorators: [withKnobs],
+  component: OGOverflowMenu,
+  subcomponents: {
+    OverflowMenuItem,
+  },
 
   parameters: {
-    component: OverflowMenu,
     docs: {
       page: mdx,
-    },
-
-    subcomponents: {
-      OverflowMenuItem,
     },
   },
 };
@@ -77,11 +77,13 @@ export const Basic = withReadme(OverflowREADME, () => (
       {...props.menuItem()}
       itemText="Option 2 is an example of a really long string and how we recommend handling this"
       requireTitle
+      title="Custom tooltip title"
     />
     <OverflowMenuItem {...props.menuItem()} itemText="Option 3" />
     <OverflowMenuItem {...props.menuItem()} itemText="Option 4" />
     <OverflowMenuItem
       {...props.menuItem()}
+      requireTitle
       itemText="Danger option"
       hasDivider
       isDelete
