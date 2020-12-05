@@ -452,9 +452,7 @@ export class ExpandableTile extends Component {
     onBeforeClick: () => true,
     handleClick: () => {},
     tileCollapsedIconText: 'Interact to expand Tile',
-    tileCollapsedLabel: null,
     tileExpandedIconText: 'Interact to collapse Tile',
-    tileExpandedLabel: null,
     light: false,
   };
 
