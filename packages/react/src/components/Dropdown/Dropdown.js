@@ -62,6 +62,15 @@ const Dropdown = React.forwardRef(function Dropdown(
   // create deep copy of items to prevent mutation
   const clonedItems = JSON.parse(JSON.stringify(items));
 
+  // create default option
+  let defaultOption;
+  if (isOptional && label && clonedItems.length) {
+    defaultOption =
+      typeof clonedItems[0] === 'object'
+        ? { text: `[${label}]` }
+        : `[${label}]`;
+  }
+
   const selectProps = mapDownshiftProps({
     ...downshiftProps,
     items: clonedItems,
@@ -70,16 +79,13 @@ const Dropdown = React.forwardRef(function Dropdown(
     onSelectedItemChange,
   });
 
-  // prepend optional default value to items array if the label prop is defined
-  if (isOptional && label && clonedItems.length) {
-    const defaultOption = label;
+  // prepend default option to items array if the label prop is defined
+  if (defaultOption) {
     if (
       clonedItems[0] !== defaultOption &&
       clonedItems[0].text !== defaultOption
     ) {
-      typeof clonedItems[0] === 'object'
-        ? clonedItems.unshift({ text: defaultOption })
-        : clonedItems.unshift(defaultOption);
+      clonedItems.unshift(defaultOption);
     }
   }
 
