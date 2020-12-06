@@ -69,6 +69,9 @@ const Dropdown = React.forwardRef(function Dropdown(
       typeof clonedItems[0] === 'object'
         ? { text: `[${label}]` }
         : `[${label}]`;
+    if (!initialSelectedItem) {
+      initialSelectedItem = defaultOption;
+    }
   }
 
   const selectProps = mapDownshiftProps({
