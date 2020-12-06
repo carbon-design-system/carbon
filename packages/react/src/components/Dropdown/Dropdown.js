@@ -70,9 +70,9 @@ const Dropdown = React.forwardRef(function Dropdown(
     onSelectedItemChange,
   });
 
-  // prepend optional default value to items array
-  if (isOptional && clonedItems.length) {
-    const defaultOption = label || 'Select';
+  // prepend optional default value to items array if the label prop is defined
+  if (isOptional && label && clonedItems.length) {
+    const defaultOption = label;
     if (
       clonedItems[0] !== defaultOption &&
       clonedItems[0].text !== defaultOption
