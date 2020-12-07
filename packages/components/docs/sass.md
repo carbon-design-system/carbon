@@ -7462,6 +7462,7 @@ $support-01: if(
 - **Type**: `{undefined}`
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
+  - [date-picker [mixin]](#date-picker-mixin)
   - [dropdown [mixin]](#dropdown-mixin)
   - [file-uploader [mixin]](#file-uploader-mixin)
   - [inline-loading [mixin]](#inline-loading-mixin)
@@ -7528,6 +7529,7 @@ $support-03: if(
 - **Type**: `{undefined}`
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
+  - [date-picker [mixin]](#date-picker-mixin)
   - [listbox [mixin]](#listbox-mixin)
   - [inline-notifications [mixin]](#inline-notifications-mixin)
   - [toast-notifications [mixin]](#toast-notifications-mixin)
@@ -15193,7 +15195,7 @@ Code snippet styles
 
     position: absolute;
     right: 0;
-    bottom: $spacing-03;
+    bottom: 0;
     z-index: 10;
     display: inline-flex;
     align-items: center;
@@ -15246,21 +15248,23 @@ Code snippet styles
   // Light version
   .#{$prefix}--snippet--light,
   .#{$prefix}--snippet--light .#{$prefix}--snippet-button,
-  .#{$prefix}--snippet--light .#{$prefix}--snippet-btn--expand,
+  .#{$prefix}--snippet--light .#{$prefix}--btn.#{$prefix}--snippet-btn--expand,
   .#{$prefix}--snippet--light .#{$prefix}--copy-btn {
     background-color: $field-02;
   }
 
   .#{$prefix}--snippet--light.#{$prefix}--snippet--inline:hover,
   .#{$prefix}--snippet--light .#{$prefix}--snippet-button:hover,
-  .#{$prefix}--snippet--light .#{$prefix}--snippet-btn--expand:hover,
+  .#{$prefix}--snippet--light
+    .#{$prefix}--btn.#{$prefix}--snippet-btn--expand:hover,
   .#{$prefix}--snippet--light .#{$prefix}--copy-btn:hover {
     background-color: $hover-light-ui;
   }
 
   .#{$prefix}--snippet--light.#{$prefix}--snippet--inline:active,
   .#{$prefix}--snippet--light .#{$prefix}--snippet-button:active,
-  .#{$prefix}--snippet--light .#{$prefix}--snippet-btn--expand:active,
+  .#{$prefix}--snippet--light
+    .#{$prefix}--btn.#{$prefix}--snippet-btn--expand:active,
   .#{$prefix}--snippet--light .#{$prefix}--copy-btn:active {
     background-color: $active-light-ui;
   }
@@ -17773,9 +17777,19 @@ Date picker styles
     align-items: center;
   }
 
-  .#{$prefix}--date-picker.#{$prefix}--date-picker--simple {
-    .#{$prefix}--date-picker__input {
-      width: rem(120px);
+  .#{$prefix}--date-picker.#{$prefix}--date-picker--simple
+    .#{$prefix}--date-picker__input,
+  .#{$prefix}--date-picker.#{$prefix}--date-picker--simple .#{$prefix}--label {
+    width: rem(120px);
+  }
+
+  .#{$prefix}--date-picker.#{$prefix}--date-picker--simple
+    .#{$prefix}--date-picker-input__wrapper--invalid,
+  .#{$prefix}--date-picker.#{$prefix}--date-picker--simple
+    .#{$prefix}--date-picker-input__wrapper--warn {
+    .#{$prefix}--date-picker__input,
+    ~ .#{$prefix}--form-requirement {
+      width: rem(152px);
     }
   }
 
@@ -17797,7 +17811,6 @@ Date picker styles
 
     position: relative;
     display: block;
-    min-width: rem(144px);
     height: rem(40px);
     padding: 0 $carbon--spacing-05;
     color: $text-01;
@@ -17858,6 +17871,24 @@ Date picker styles
     }
   }
 
+  .#{$prefix}--date-picker__icon--invalid,
+  .#{$prefix}--date-picker__icon--warn {
+    cursor: auto;
+  }
+
+  .#{$prefix}--date-picker__icon--warn {
+    fill: $support-03;
+  }
+
+  .#{$prefix}--date-picker__icon--warn path:first-of-type {
+    opacity: 1;
+    fill: $carbon__black-100;
+  }
+
+  .#{$prefix}--date-picker__icon--invalid {
+    fill: $support-01;
+  }
+
   .#{$prefix}--date-picker__icon ~ .#{$prefix}--date-picker__input {
     padding-right: $carbon--spacing-09;
   }
@@ -17910,6 +17941,8 @@ Date picker styles
   - [ui-04 [variable]](#ui-04-variable)
   - [disabled-02 [variable]](#disabled-02-variable)
   - [icon-01 [variable]](#icon-01-variable)
+  - [support-03 [variable]](#support-03-variable)
+  - [support-01 [variable]](#support-01-variable)
   - [carbon--spacing-09 [variable]](#carbon--spacing-09-variable)
 
 ## dropdown
@@ -18812,7 +18845,8 @@ Form styles
   input[data-invalid],
   .#{$prefix}--number[data-invalid] .#{$prefix}--number__input-wrapper,
   .#{$prefix}--number__input-wrapper--warning,
-  .#{$prefix}--date-picker-input__wrapper,
+  .#{$prefix}--date-picker-input__wrapper--warn,
+  .#{$prefix}--date-picker-input__wrapper--invalid,
   .#{$prefix}--time-picker--invalid,
   .#{$prefix}--text-input__field-wrapper[data-invalid],
   .#{$prefix}--text-input__field-wrapper--warning,
@@ -18832,7 +18866,7 @@ Form styles
 
   input[data-invalid],
   .#{$prefix}--number[data-invalid] .#{$prefix}--number__input-wrapper,
-  .#{$prefix}--date-picker-input__wrapper,
+  .#{$prefix}--date-picker-input__wrapper--invalid,
   .#{$prefix}--time-picker--invalid,
   .#{$prefix}--text-input__field-wrapper[data-invalid],
   .#{$prefix}--text-area__wrapper[data-invalid],
@@ -21556,7 +21590,7 @@ Number input styles
     fill: $support-03;
   }
 
-  .#{$prefix}--number__invalid--warning path[data-icon-path='inner-path'] {
+  .#{$prefix}--number__invalid--warning path:first-of-type {
     opacity: 1;
     fill: $carbon__black-100;
   }
@@ -25388,7 +25422,7 @@ Text input styles
     .#{$prefix}--text-input__invalid-icon--warning {
       fill: $support-03;
 
-      path[data-icon-path='inner-path'] {
+      path:first-of-type {
         opacity: 1;
         fill: $carbon__black-100;
       }
