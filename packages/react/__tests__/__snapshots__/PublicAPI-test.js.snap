@@ -2250,6 +2250,12 @@ Map {
       "type": Object {
         "type": "string",
       },
+      "warn": Object {
+        "type": "bool",
+      },
+      "warnText": Object {
+        "type": "string",
+      },
     },
   },
   "Dropdown" => Object {
