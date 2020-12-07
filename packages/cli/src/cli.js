@@ -25,7 +25,9 @@ async function main({ argv }) {
           console.error(error.stderr);
           process.exit(1);
         }
-        throw error;
+        console.error(error);
+        process.exit(1);
+        return;
       }
       console.log(message);
       console.log(yargs.help());
