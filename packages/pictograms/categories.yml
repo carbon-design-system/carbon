@@ -6,15 +6,11 @@ categories:
       - crop
       - delete
       - do-not
-      - download
       - download--01
       - download--02
-      - download--alt
       - embed
-      - export
       - export--01
       - export--02
-      - export--alt
       - launch
       - love
       - maximize
@@ -26,10 +22,8 @@ categories:
       - repeat
       - reset
       - trash
-      - upload
       - upload--01
       - upload--02
-      - upload--alt
   - name: Blockchain
     members:
       - connected--ecosystem
@@ -63,7 +57,6 @@ categories:
       #    - basel
       - beijing--municipal
       - beijing--tower
-      - berlin--brandenburg
       - berlin--brandenburg-gate
       - berlin--cathedral
       - berlin--tower
@@ -79,7 +72,6 @@ categories:
       - hamburg--philharmone
       - london
       - london--big-ben
-      - london--expanded--base
       - madrid--cathedral
       - madrid--skyscrapers
       - madrid--statue
@@ -92,16 +84,13 @@ categories:
       - munich
       - nice
       - nyc--brooklyn
-      - nyc--manhattan
       - nyc--manhattan--01
       - nyc--manhattan--02
-      - nyc--manhattan--alt
       - nyc--statue-of-liberty
       - paris--arc-de-triomphe
       - paris--louvre
       - paris--notre-dame
       - paris--pompidou-center
-      - prague
       - prague--charles-bridge-tower
       #    - portland
       - raleigh-nc
@@ -109,7 +98,6 @@ categories:
       - san-francisco
       - san-francisco--fog
       - sao-paulo
-      - sao-paulo--expanded--base
       - seattle
       #    - shanghai
       - singapore
@@ -177,10 +165,8 @@ categories:
       - podcast
       - slider
       - toggle
-      - video
       - video--01
       - video--02
-      - video--alt
       - video--chat
       - video--play
       - webcast
@@ -217,7 +203,6 @@ categories:
       - employee--insights
       - flow--chart
       - flow--chart--detail
-      - heat--map
       - heat--map--01
       - heat--map--02
       - math--curve
@@ -251,7 +236,6 @@ categories:
       - application
       - design-and-development--01
       - design-and-development--02
-      - feedback
       - feedback--01
       - hills
       - idea
@@ -377,8 +361,6 @@ categories:
   - name: IBM
     members:
       - bee
-      - enterprise--design--thinking
-      - enterprise--design--thinking--alt
       - enterprise--design--thinking--01
       - enterprise--design--thinking--02
       - eye
@@ -393,7 +375,6 @@ categories:
       - cargo--crane
       - cargo--ship
       - cheese
-      - farm
       - farm--01
       - farm--02
       - farmer--01
@@ -410,7 +391,6 @@ categories:
       - steel
       - telecom
       - tractor
-      - weather--01
       - wheat
       - wind--power
       - wine
@@ -501,19 +481,15 @@ categories:
       - networking--04
       - networking--05
       - networking--06
-      - private--network
       - private--network--01
       - private--network--02
       - private--network--03
       - private--network--04
-      - private--network--alt
-      - private--network--alt--01
       - reset--hybrid--cloud
       - reset--settings
       - support--services
       - transactional--blockchain
       - transactional--trust
-      - transform
       - transform--02
   - name: People
     members:
@@ -588,14 +564,10 @@ categories:
       - govern--users--and--identities
       - high--risk--users
       - identity--trust--assessment
-      - lock
       - lock--01
       - lock--02
-      - lock--alt
-      - locked--network
       - locked--network--01
       - locked--network--02
-      - locked--network--alt
       - master--threat--hunting
       - network--protection
       - protect--critical--assets
@@ -613,17 +585,13 @@ categories:
       - unauthorized--user--access
       - under--utilized--security
       - unify--endpoint--management
-      - unlock
       - unlock--01
       - unlock--02
-      - unlock--alt
   - name: Status
     members:
       - question
-      - warning
       - warning--01
       - warning--02
-      - warning--alt
   - name: Strategy
     members:
       - innovate
@@ -689,7 +657,6 @@ categories:
     members:
       - alchemy--data--news
       - alchemy--language
-      - alchemy--language--alphabet--a--expanded
       - alchemy--vision
       - analyzes--data
       - concept--expansion
@@ -699,16 +666,13 @@ categories:
       - deliver--insights
       - dialogue
       - document--conversion
-      - ibm--watson
       - knows--dark--data
-      - language
       - language--01
       - language--02
       - language--03
       - language--04
       - language--05
       - language--translation
-      - language--translation--alphabet--a--expanded
       - natural--language--classifier
       - natural--language--understanding
       - personality--insights
@@ -716,7 +680,6 @@ categories:
       - relationship--extraction
       - retrieve--and--rank
       - speech
-      - speech--alphabet--a--expanded
       - speech--to--text
       - text--to--speech
       - tone--analyzer
@@ -752,5 +715,4 @@ categories:
       - temperature--low
       - tornado
       - weather
-      - weather--02
       - windy

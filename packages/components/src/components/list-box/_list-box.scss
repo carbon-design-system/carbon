@@ -309,10 +309,9 @@ $list-box-menu-width: rem(300px);
   .#{$prefix}--list-box__field:focus {
     @include focus-outline('outline');
 
-    @media screen and (-ms-high-contrast: active),
-      screen and (prefers-contrast) {
-      // `ButtonText` is a CSS2 system color to help improve colors in HCM
-      border: 2px solid ButtonText;
+    // Firefox HCM fix
+    @media screen and (prefers-contrast) {
+      border-style: dotted;
     }
   }
 

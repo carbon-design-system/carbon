@@ -60,6 +60,7 @@ const MultiSelect = React.forwardRef(function MultiSelect(
     open,
     selectionFeedback,
     onChange,
+    onMenuChange,
     direction,
   },
   ref
@@ -98,10 +99,18 @@ const MultiSelect = React.forwardRef(function MultiSelect(
   );
 
   /**
+   * wrapper function to forward changes to consumer
+   */
+  const setIsOpenWrapper = (open) => {
+    setIsOpen(open);
+    if (onMenuChange) onMenuChange(open);
+  };
+
+  /**
    * programmatically control this `open` prop
    */
   if (prevOpenProp !== open) {
-    setIsOpen(open);
+    setIsOpenWrapper(open);
     setPrevOpenProp(open);
   }
 
@@ -169,11 +178,11 @@ const MultiSelect = React.forwardRef(function MultiSelect(
         break;
       case MenuBlur:
       case MenuKeyDownEscape:
-        setIsOpen(false);
+        setIsOpenWrapper(false);
         setHighlightedIndex(changes.highlightedIndex);
         break;
       case ToggleButtonClick:
-        setIsOpen(changes.isOpen || false);
+        setIsOpenWrapper(changes.isOpen || false);
         setHighlightedIndex(changes.highlightedIndex);
         break;
     }
@@ -341,6 +350,12 @@ MultiSelect.propTypes = {
    * consuming component what kind of internal state changes are occuring.
    */
   onChange: PropTypes.func,
+
+  /**
+   * `onMenuChange` is a utility for this controlled component to communicate to a
+   * consuming component that the menu was opend(`true`)/closed(`false`).
+   */
+  onMenuChange: PropTypes.func,
 
   /**
    * Initialize the component with an open(`true`)/closed(`false`) menu.
