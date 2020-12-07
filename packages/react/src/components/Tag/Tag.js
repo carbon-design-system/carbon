@@ -87,7 +87,7 @@ const Tag = ({
       ) : (
         ''
       )}
-      <span title={typeof children === 'string' ? children : null} {...other}>
+      <span title={typeof children === 'string' ? children : null}>
         {children !== null && children !== undefined ? children : TYPES[type]}
       </span>
     </div>
