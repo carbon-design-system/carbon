@@ -1,28 +1,27 @@
 {
-  "name": "@carbon/cli-reporter",
-  "description": "Reporter for CLI-based tools in the Carbon Design System",
-  "version": "10.4.0",
+  "name": "storybook-preset-carbon",
+  "private": true,
+  "version": "0.0.0",
   "license": "Apache-2.0",
   "main": "index.js",
   "repository": {
     "type": "git",
     "url": "https://github.com/carbon-design-system/carbon.git",
-    "directory": "packages/cli-reporter"
+    "directory": "config/storybook-preset-carbon"
   },
   "bugs": "https://github.com/carbon-design-system/carbon/issues",
   "keywords": [
     "ibm",
-    "elements",
     "carbon",
-    "carbon-elements",
     "carbon-design-system",
     "components",
     "react"
   ],
-  "publishConfig": {
-    "access": "public"
-  },
   "dependencies": {
-    "chalk": "^2.4.1"
+    "@storybook/addon-knobs": "^5.3.19",
+    "@storybook/addon-storysource": "^5.3.19",
+    "@storybook/addon-actions": "^5.3.19",
+    "@storybook/addon-docs": "^5.3.19",
+    "@storybook/addon-links": "^5.3.19"
   }
 }

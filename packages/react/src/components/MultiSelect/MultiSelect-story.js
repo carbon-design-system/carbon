@@ -197,6 +197,9 @@ export const _Filterable = withReadme(readme, () => {
         placeholder={defaultPlaceholder}
         translateWithId={(id) => listBoxMenuIconTranslationIds[id]}
         selectionFeedback={selectionFeedback}
+        onMenuChange={(e) => {
+          multiSelectProps.onMenuChange(e);
+        }}
       />
     </div>
   );
