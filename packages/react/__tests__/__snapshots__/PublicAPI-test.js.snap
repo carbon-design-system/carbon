@@ -2250,6 +2250,12 @@ Map {
       "type": Object {
         "type": "string",
       },
+      "warn": Object {
+        "type": "bool",
+      },
+      "warnText": Object {
+        "type": "string",
+      },
     },
   },
   "Dropdown" => Object {
@@ -3574,6 +3580,9 @@ Map {
           "type": "string",
         },
         "onChange": Object {
+          "type": "func",
+        },
+        "onMenuChange": Object {
           "type": "func",
         },
         "open": Object {
