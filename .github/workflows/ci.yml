@@ -20,6 +20,8 @@ jobs:
       - name: Build project
         run: yarn build
       - name: Run Continuous Integration checks
+        env:
+          DISPLAY: '0:0'
         run: |
           yarn ci-check
           yarn lerna run ci-check
