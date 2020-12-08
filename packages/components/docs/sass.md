@@ -20579,10 +20579,6 @@ Modal styles
     &:focus {
       @include focus-outline('outline');
     }
-
-    > * {
-      @include type-style('body-long-01');
-    }
   }
 
   // Required so overflow-indicator disappears at end of content
