@@ -61,8 +61,13 @@ function ContextMenuOption({
     [`${prefix}--context-menu-option--disabled`]: disabled,
   });
 
+  const allowedRoles = ['radio', 'checkbox'];
+  const role = rest.role && allowedRoles.includes(rest.role)
+    ? rest.role
+    : 'menuitem';
+
   return (
-    <li {...rest} className={classes} role="menuitem">
+    <li {...rest} className={classes} role={role}>
       {subOptions ? (
         <>
           <ContextMenuOptionContent
