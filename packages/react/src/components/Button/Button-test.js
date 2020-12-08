@@ -413,7 +413,7 @@ describe('Button accessibility', () => {
   it('should have no Axe violations', async () => {
     render(<Button>Button Label</Button>);
 
-    await expect(screen.getByText('Button Label')).toHaveNoAxeViolations();
+    await expect(screen.getByRole('button')).toHaveNoAxeViolations();
   });
 
   it('should have no Accessibility Checker violations', async () => {
@@ -423,9 +423,7 @@ describe('Button accessibility', () => {
       </main>
     );
 
-    await expect(screen.getByText('Button Label')).toHaveNoACViolations(
-      'Button'
-    );
+    await expect(screen.getByRole('button')).toHaveNoACViolations('Button');
   });
 
   it('is keyboard accessible', () => {
@@ -436,12 +434,12 @@ describe('Button accessibility', () => {
 
   it('should have an accessible label', () => {
     render(<Button>Button Label</Button>);
-    expect(screen.getByText('Button Label'));
+    expect(() => screen.getByText('Button Label')).not.toThrow();
   });
 
   it('should have the role of button', () => {
     render(<Button>Button Label</Button>);
-    expect(screen.getByRole('button'));
+    expect(() => screen.getByRole('button')).not.toThrow();
   });
 
   it('is not keyboard accessible when disabled', () => {
