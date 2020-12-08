@@ -197,7 +197,7 @@ describe('CheckboxSkeleton', () => {
 describe('Checkbox accessibility', () => {
   afterEach(cleanup);
 
-  it('should have no Axe violationk', async () => {
+  it('should have no Axe violations', async () => {
     render(<Checkbox labelText="Checkbox label" id="test_id" />);
     await expect(
       screen.getByLabelText('Checkbox label')
