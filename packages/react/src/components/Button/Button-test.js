@@ -12,6 +12,9 @@ import Link from '../Link';
 import ButtonSkeleton from '../Button/Button.Skeleton';
 import { shallow, mount } from 'enzyme';
 import { settings } from 'carbon-components';
+import { cleanup, render, screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
+import '@testing-library/jest-dom';
 
 const { prefix } = settings;
 
@@ -390,5 +393,42 @@ describe('Small ButtonSkeleton', () => {
       expect(wrapper.hasClass(`${prefix}--btn--sm`)).toEqual(true);
       expect(wrapper.hasClass(`${prefix}--skeleton`)).toEqual(true);
     });
+  });
+});
+
+describe('Small ButtonSkeleton', () => {
+  describe('Renders as expected', () => {
+    const wrapper = shallow(<ButtonSkeleton small />);
+
+    it('has the expected classes for small', () => {
+      expect(wrapper.hasClass(`${prefix}--btn--sm`)).toEqual(true);
+      expect(wrapper.hasClass(`${prefix}--skeleton`)).toEqual(true);
+    });
+  });
+});
+
+describe.only('Button accessibility', () => {
+  afterEach(cleanup);
+
+  it('is keyboard accessible', () => {
+    render(<Button>Button Label</Button>);
+    userEvent.tab();
+    expect(screen.getByText('Button Label')).toHaveFocus();
+  });
+
+  it('should have an accessible label', () => {
+    render(<Button>Button Label</Button>);
+    expect(screen.getByText('Button Label'));
+  });
+
+  it('should have the role of button', () => {
+    render(<Button>Button Label</Button>);
+    expect(screen.getByRole('button'));
+  });
+
+  it('is not keyboard accessible when disabled', () => {
+    render(<Button disabled>Button Label</Button>);
+    userEvent.tab();
+    expect(document.body).toHaveFocus();
   });
 });
