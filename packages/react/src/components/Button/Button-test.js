@@ -407,8 +407,26 @@ describe('Small ButtonSkeleton', () => {
   });
 });
 
-describe.only('Button accessibility', () => {
+describe('Button accessibility', () => {
   afterEach(cleanup);
+
+  it('should have no Axe violations', async () => {
+    render(<Button>Button Label</Button>);
+
+    await expect(screen.getByText('Button Label')).toHaveNoAxeViolations();
+  });
+
+  it('should have no Accessibility Checker violations', async () => {
+    render(
+      <main>
+        <Button>Button Label</Button>
+      </main>
+    );
+
+    await expect(screen.getByText('Button Label')).toHaveNoACViolations(
+      'Button'
+    );
+  });
 
   it('is keyboard accessible', () => {
     render(<Button>Button Label</Button>);
