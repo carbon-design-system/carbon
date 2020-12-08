@@ -13,7 +13,12 @@ import ContextMenuOption from './ContextMenuOption';
 
 const { prefix } = settings;
 
-function ContextMenuRadioGroup({ items, initialSelectedItem, label, onChange = () => {} }) {
+function ContextMenuRadioGroup({
+  items,
+  initialSelectedItem,
+  label,
+  onChange = () => {},
+}) {
   const [selected, setSelected] = useState(initialSelectedItem);
 
   function handleClick(option) {

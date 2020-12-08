@@ -70,15 +70,46 @@ export const _ContextMenu = () => {
           />
         </ContextMenuOption>
         <ContextMenuDivider />
-        <ContextMenuOption label="Cut" shortcut="⌘X" shortcutText="command x" onClick={action('onClick')} />
-        <ContextMenuOption label="Copy" shortcut="⌘C" shortcutText="command c" onClick={action('onClick')} />
-        <ContextMenuOption label="Copy path" shortcut="⌥⌘C" shortcutText="option command c" onClick={action('onClick')} />
-        <ContextMenuOption label="Paste" shortcut="⌘V" shortcutText="command v" disabled onClick={action('onClick')} />
+        <ContextMenuOption
+          label="Cut"
+          shortcut="⌘X"
+          shortcutText="command x"
+          onClick={action('onClick')}
+        />
+        <ContextMenuOption
+          label="Copy"
+          shortcut="⌘C"
+          shortcutText="command c"
+          onClick={action('onClick')}
+        />
+        <ContextMenuOption
+          label="Copy path"
+          shortcut="⌥⌘C"
+          shortcutText="option command c"
+          onClick={action('onClick')}
+        />
+        <ContextMenuOption
+          label="Paste"
+          shortcut="⌘V"
+          shortcutText="command v"
+          disabled
+          onClick={action('onClick')}
+        />
         <ContextMenuOption label="Duplicate" onClick={action('onClick')} />
         <ContextMenuDivider />
-        <ContextMenuSelectableOption label="Publish" initialChecked onChange={action('onChange')} />
+        <ContextMenuSelectableOption
+          label="Publish"
+          initialChecked
+          onChange={action('onChange')}
+        />
         <ContextMenuDivider />
-        <ContextMenuOption label="Rename" shortcut="↩︎" shortcutText="enter" renderIcon={Edit16} onClick={action('onClick')} />
+        <ContextMenuOption
+          label="Rename"
+          shortcut="↩︎"
+          shortcutText="enter"
+          renderIcon={Edit16}
+          onClick={action('onClick')}
+        />
         <ContextMenuOption
           label="Delete"
           shortcut="⌘⌫"

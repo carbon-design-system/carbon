@@ -27,7 +27,12 @@ function ContextMenuOptionContent({
   });
 
   return (
-    <button {...rest} className={classes} type="button" disabled={disabled} tabIndex={-1}>
+    <button
+      {...rest}
+      className={classes}
+      type="button"
+      disabled={disabled}
+      tabIndex={-1}>
       {indented && (
         <div className={`${prefix}--context-menu-option__icon`}>
           {Icon && <Icon />}
@@ -64,16 +69,19 @@ function ContextMenuOption({
   });
 
   const allowedRoles = ['radio', 'checkbox'];
-  const role = rest.role && allowedRoles.includes(rest.role)
-    ? rest.role
-    : 'menuitem';
+  const role =
+    rest.role && allowedRoles.includes(rest.role) ? rest.role : 'menuitem';
 
-  const ariaLabel = shortcut && shortcutText
-    ? `${label}, ${shortcutText}`
-    : label;
+  const ariaLabel =
+    shortcut && shortcutText ? `${label}, ${shortcutText}` : label;
 
   return (
-    <li {...rest} className={classes} role={role} aria-label={ariaLabel} aria-disabled={!subOptions && disabled}>
+    <li
+      {...rest}
+      className={classes}
+      role={role}
+      aria-label={ariaLabel}
+      aria-disabled={!subOptions && disabled}>
       {subOptions ? (
         <>
           <ContextMenuOptionContent

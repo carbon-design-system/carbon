@@ -10,7 +10,11 @@ import PropTypes from 'prop-types';
 import { Checkmark16 } from '@carbon/icons-react';
 import ContextMenuOption from './ContextMenuOption';
 
-function ContextMenuSelectableOption({ label, initialChecked, onChange = () => {}, }) {
+function ContextMenuSelectableOption({
+  label,
+  initialChecked,
+  onChange = () => {},
+}) {
   const [checked, setChecked] = useState(initialChecked);
 
   function handleClick() {
