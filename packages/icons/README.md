@@ -27,6 +27,7 @@ for various frameworks:
 - [Angular](https://github.com/carbon-design-system/carbon-icons-angular)
 - [React](../icons-react)
 - [Vue](../icons-vue)
+- [Svelte](https://github.com/IBM/carbon-icons-svelte)
 
 We also support using icons in Vanilla JavaScript.
 
