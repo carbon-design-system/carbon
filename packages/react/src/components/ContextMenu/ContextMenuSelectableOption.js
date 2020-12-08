@@ -10,8 +10,13 @@ import PropTypes from 'prop-types';
 import { Checkmark16 } from '@carbon/icons-react';
 import ContextMenuOption from './ContextMenuOption';
 
-function ContextMenuSelectableOption({ label, initialChecked }) {
+function ContextMenuSelectableOption({ label, initialChecked, onChange = () => {}, }) {
   const [checked, setChecked] = useState(initialChecked);
+
+  function handleClick() {
+    setChecked(!checked);
+    onChange(!checked);
+  }
 
   return (
     <ContextMenuOption
@@ -20,9 +25,7 @@ function ContextMenuSelectableOption({ label, initialChecked }) {
       renderIcon={checked ? Checkmark16 : null}
       label={label}
       indented
-      onClick={() => {
-        setChecked(!checked);
-      }}
+      onClick={handleClick}
     />
   );
 }
@@ -37,6 +40,11 @@ ContextMenuSelectableOption.propTypes = {
    * Rendered label for the ContextMenuOptionContent
    */
   label: PropTypes.node.isRequired,
+
+  /**
+   * Callback function when selection the has been changed
+   */
+  onChange: PropTypes.func,
 };
 
 export default ContextMenuSelectableOption;

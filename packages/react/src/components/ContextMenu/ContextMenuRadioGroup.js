@@ -13,8 +13,13 @@ import ContextMenuOption from './ContextMenuOption';
 
 const { prefix } = settings;
 
-function ContextMenuRadioGroup({ items, initialSelectedItem, label }) {
+function ContextMenuRadioGroup({ items, initialSelectedItem, label, onChange = () => {} }) {
   const [selected, setSelected] = useState(initialSelectedItem);
+
+  function handleClick(option) {
+    setSelected(option);
+    onChange(option);
+  }
 
   const options = items.map((option, i) => {
     const isSelected = selected === option;
@@ -28,7 +33,7 @@ function ContextMenuRadioGroup({ items, initialSelectedItem, label }) {
         label={option}
         indented
         onClick={() => {
-          setSelected(option);
+          handleClick(option);
         }}
       />
     );
@@ -59,6 +64,11 @@ ContextMenuRadioGroup.propTypes = {
    * The radio group label
    */
   label: PropTypes.string.isRequired,
+
+  /**
+   * Callback function when selection the has been changed
+   */
+  onChange: PropTypes.func,
 };
 
 export default ContextMenuRadioGroup;
