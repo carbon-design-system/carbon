@@ -217,11 +217,11 @@ describe('Checkbox accessibility', () => {
 
   it('should have an accessible label', () => {
     render(<Checkbox labelText="Checkbox label" id="test_id" />);
-    expect(screen.getByText('Checkbox label'));
+    expect(() => screen.getByText('Checkbox label')).not.toThrow();
   });
 
   it('should have an appropriate role', () => {
     render(<Checkbox labelText="Checkbox label" id="test_id" />);
-    expect(screen.getByRole('checkbox'));
+    expect(() => screen.getByRole('checkbox')).not.toThrow();
   });
 });
