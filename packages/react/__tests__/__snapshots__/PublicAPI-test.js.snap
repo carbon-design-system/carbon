@@ -5046,6 +5046,9 @@ Map {
         "type": "func",
       },
       "renderAnchor": [Function],
+      "renderButton": Object {
+        "type": "func",
+      },
       "renderContent": Object {
         "type": "func",
       },
