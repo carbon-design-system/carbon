@@ -51,3 +51,6 @@ packages/components/docs/js
 
 # Generated files
 **/generated/**
+
+# Templates
+**/*.template.*
