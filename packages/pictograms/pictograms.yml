@@ -260,6 +260,13 @@
     - vehicle
     - travel
     - transportation
+- name: baby--bottle
+  friendly_name: Baby bottle
+  aliases:
+    - baby bottle
+    - bottle
+    - nursing
+    - baby formula
 - name: backpack
   friendly_name: Backpack
   aliases:
@@ -1307,6 +1314,14 @@
     - physician
     - medic
     - provider
+- name: doctor-patient
+  friendly_name: Doctor-patient
+  aliases:
+    - doctor visit
+    - doctor-patient relationship
+    - doctor and patient
+    - doctor appointment
+    - medical appointment
 - name: document--conversion
   friendly_name: Document conversion
   aliases:
@@ -1336,6 +1351,14 @@
     - download alt
     - download 02
     - download
+- name: dropper
+  friendly_name: Dropper
+  aliases:
+    - dropper
+    - eyedropper
+    - medication
+    - liquid
+    - testing
 - name: dubai--palm-islands
   friendly_name: Dubai Palm Islands
   aliases:
@@ -2075,6 +2098,11 @@
     - hospital
     - healthcare
     - clinic
+- name: hpi
+  friendly_name: HPI
+  aliases:
+    - hpi
+    - healtcare performance improvement
 - name: humid
   friendly_name: Humid
   aliases:
@@ -3035,6 +3063,16 @@
   aliases:
     - pregnant
     - pregnancy
+- name: prescription
+  friendly_name: Prescription
+  aliases:
+    - prescription
+    - prescription pad
+    - RX pad
+    - RX
+    - drug
+    - drug prescription
+    - medication
 - name: presentation
   friendly_name: Presentation
   aliases:
@@ -3506,6 +3544,20 @@
     - snow
     - precipitation
     - weather
+- name: social--work--01
+  friendly_name: Social work 01
+  aliases:
+    - social work 01
+    - social work
+    - health and human services
+    - community service
+- name: social--work--02
+  friendly_name: Social work 02
+  aliases:
+    - social work 02
+    - social work
+    - health and human services
+    - community service
 - name: socks
   friendly_name: Socks
   aliases:
@@ -3812,6 +3864,25 @@
     - telecom
     - industry
     - cellular
+- name: telemedicine
+  friendly_name: Telemedicine
+  aliases:
+    - telemedicine
+    - web MD
+    - online doctor
+    - web doctor visit
+    - hospital visit
+    - checkup
+- name: telemedicine--mobile
+  friendly_name: Telemedicine-mobile
+  aliases:
+    - telemedicine
+    - telemedicine mobile
+    - web MD
+    - online doctor
+    - web doctor visit
+    - hospital visit
+    - checkup
 - name: telephone
   friendly_name: Telephone
   aliases:
