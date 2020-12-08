@@ -20,13 +20,14 @@ function ContextMenuOptionContent({
   disabled,
   icon: Icon,
   indented,
+  ...rest
 }) {
   const classes = classnames(`${prefix}--context-menu-option__content`, {
     [`${prefix}--context-menu-option__content--disabled`]: disabled,
   });
 
   return (
-    <button className={classes} type="button" disabled={disabled} tabIndex={-1}>
+    <button {...rest} className={classes} type="button" disabled={disabled} tabIndex={-1}>
       {indented && (
         <div className={`${prefix}--context-menu-option__icon`}>
           {Icon && <Icon />}
@@ -45,6 +46,7 @@ function ContextMenuOption({
   children,
   disabled,
   shortcut,
+  shortcutText,
   renderIcon,
   indented,
   level,
@@ -66,8 +68,12 @@ function ContextMenuOption({
     ? rest.role
     : 'menuitem';
 
+  const ariaLabel = shortcut && shortcutText
+    ? `${label}, ${shortcutText}`
+    : label;
+
   return (
-    <li {...rest} className={classes} role={role}>
+    <li {...rest} className={classes} role={role} aria-label={ariaLabel} aria-disabled={!subOptions && disabled}>
       {subOptions ? (
         <>
           <ContextMenuOptionContent
@@ -75,6 +81,7 @@ function ContextMenuOption({
             icon={renderIcon}
             info={<CaretRight16 />}
             indented={indented}
+            aria-haspopup
           />
           <ContextMenu level={level + 1} x={menuX}>
             {subOptions}
@@ -169,6 +176,11 @@ ContextMenuOption.propTypes = {
    * Rendered shortcut for the ContextMenuOption
    */
   shortcut: PropTypes.node,
+
+  /**
+   * The text-only representation of the shortcut read to screen readers
+   */
+  shortcutText: PropTypes.string,
 };
 
 export default ContextMenuOption;

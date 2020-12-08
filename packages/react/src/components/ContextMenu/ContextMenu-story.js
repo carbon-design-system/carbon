@@ -68,18 +68,19 @@ export const _ContextMenu = () => {
           />
         </ContextMenuOption>
         <ContextMenuDivider />
-        <ContextMenuOption label="Cut" shortcut="⌘X" />
-        <ContextMenuOption label="Copy" shortcut="⌘C" />
-        <ContextMenuOption label="Copy path" shortcut="⌥⌘C" />
-        <ContextMenuOption label="Paste" shortcut="⌘V" disabled />
+        <ContextMenuOption label="Cut" shortcut="⌘X" shortcutText="command x" />
+        <ContextMenuOption label="Copy" shortcut="⌘C" shortcutText="command c" />
+        <ContextMenuOption label="Copy path" shortcut="⌥⌘C" shortcutText="option command c" />
+        <ContextMenuOption label="Paste" shortcut="⌘V" shortcutText="command v" disabled />
         <ContextMenuOption label="Duplicate" />
         <ContextMenuDivider />
         <ContextMenuSelectableOption label="Publish" initialChecked />
         <ContextMenuDivider />
-        <ContextMenuOption label="Rename" shortcut="↩︎" renderIcon={Edit16} />
+        <ContextMenuOption label="Rename" shortcut="↩︎" shortcutText="enter" renderIcon={Edit16} />
         <ContextMenuOption
           label="Delete"
           shortcut="⌘⌫"
+          shortcutText="command backspace"
           renderIcon={TrashCan16}
         />
       </ContextMenu>
