@@ -23,7 +23,7 @@ export ContentSwitcher from './components/ContentSwitcher';
 export ContextMenu, {
   ContextMenuOption,
   ContextMenuDivider,
-  SelectableContextMenuOption,
+  ContextMenuSelectableOption,
   ContextMenuRadioGroup,
 } from './components/ContextMenu';
 export Copy from './components/Copy';

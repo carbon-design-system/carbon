@@ -12,7 +12,7 @@ import { InlineNotification } from '../Notification';
 import ContextMenu, {
   ContextMenuOption,
   ContextMenuDivider,
-  SelectableContextMenuOption,
+  ContextMenuSelectableOption,
   ContextMenuRadioGroup,
 } from '../ContextMenu';
 
@@ -74,7 +74,7 @@ export const _ContextMenu = () => {
         <ContextMenuOption label="Paste" shortcut="⌘V" disabled />
         <ContextMenuOption label="Duplicate" />
         <ContextMenuDivider />
-        <SelectableContextMenuOption label="Publish" initialChecked />
+        <ContextMenuSelectableOption label="Publish" initialChecked />
         <ContextMenuDivider />
         <ContextMenuOption label="Rename" shortcut="↩︎" renderIcon={Edit16} />
         <ContextMenuOption

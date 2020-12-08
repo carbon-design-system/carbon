@@ -12,7 +12,7 @@ import { settings } from 'carbon-components';
 import { keys, match } from '../../internal/keyboard';
 import ClickListener from '../../internal/ClickListener';
 
-import SelectableContextMenuOption from './SelectableContextMenuOption';
+import ContextMenuSelectableOption from './ContextMenuSelectableOption';
 import ContextMenuRadioGroup from './ContextMenuRadioGroup';
 
 const { prefix } = settings;
@@ -171,7 +171,7 @@ const ContextMenu = function ContextMenu({
   const someNodesHaveIcons = React.Children.toArray(children).some(
     (node) =>
       node.props.renderIcon ||
-      node.type === SelectableContextMenuOption ||
+      node.type === ContextMenuSelectableOption ||
       node.type === ContextMenuRadioGroup
   );
 
