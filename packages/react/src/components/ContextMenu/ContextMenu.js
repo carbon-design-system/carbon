@@ -124,6 +124,10 @@ const ContextMenu = function ContextMenu({
     }
   }
 
+  function handleClick() {
+    onClose();
+  }
+
   function handleClickOutside() {
     onClose();
   }
@@ -195,6 +199,7 @@ const ContextMenu = function ContextMenu({
       <ul
         className={classes}
         onKeyDown={handleKeyDown}
+        onClick={handleClick}
         data-level={level}
         style={isRootMenu ? { left: `${x}px`, top: `${y}px` } : null}
         role="menu">
