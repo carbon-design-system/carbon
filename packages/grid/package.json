@@ -1,7 +1,7 @@
 {
   "name": "@carbon/grid",
   "description": "Grid for digital and software products using the Carbon Design System",
-  "version": "10.17.0-rc.0",
+  "version": "10.17.0",
   "license": "Apache-2.0",
   "repository": {
     "type": "git",
@@ -31,11 +31,11 @@
     "clean": "rimraf scss/_inlined scss/vendor"
   },
   "dependencies": {
-    "@carbon/import-once": "^10.4.0-rc.0",
-    "@carbon/layout": "^10.15.0-rc.0"
+    "@carbon/import-once": "^10.4.0",
+    "@carbon/layout": "^10.15.0"
   },
   "devDependencies": {
-    "@carbon/bundler": "^10.10.0-rc.0",
+    "@carbon/bundler": "^10.10.0",
     "rimraf": "^3.0.0"
   },
   "eyeglass": {

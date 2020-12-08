@@ -3806,6 +3806,7 @@ $spacing-05: $carbon--spacing-05;
   - [search [mixin]](#search-mixin)
   - [select [mixin]](#select-mixin)
   - [tabs [mixin]](#tabs-mixin)
+  - [tooltip [mixin]](#tooltip-mixin)
   - [treeview [mixin]](#treeview-mixin)
   - [carbon-switcher [mixin]](#carbon-switcher-mixin)
 
@@ -7461,6 +7462,7 @@ $support-01: if(
 - **Type**: `{undefined}`
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
+  - [date-picker [mixin]](#date-picker-mixin)
   - [dropdown [mixin]](#dropdown-mixin)
   - [file-uploader [mixin]](#file-uploader-mixin)
   - [inline-loading [mixin]](#inline-loading-mixin)
@@ -7527,6 +7529,7 @@ $support-03: if(
 - **Type**: `{undefined}`
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
+  - [date-picker [mixin]](#date-picker-mixin)
   - [listbox [mixin]](#listbox-mixin)
   - [inline-notifications [mixin]](#inline-notifications-mixin)
   - [toast-notifications [mixin]](#toast-notifications-mixin)
@@ -14143,6 +14146,7 @@ Button styles
     }
 
     &:active {
+      color: $inverse-01;
       background-color: $active-tertiary;
       border-color: transparent;
     }
@@ -14708,8 +14712,8 @@ Checkbox styles
     position: relative;
     display: flex;
     min-height: rem(24px);
+    padding-top: rem(3px);
     padding-left: rem(20px);
-    line-height: 1.5rem;
     cursor: pointer;
     user-select: none;
   }
@@ -15191,7 +15195,7 @@ Code snippet styles
 
     position: absolute;
     right: 0;
-    bottom: $spacing-03;
+    bottom: 0;
     z-index: 10;
     display: inline-flex;
     align-items: center;
@@ -15244,21 +15248,23 @@ Code snippet styles
   // Light version
   .#{$prefix}--snippet--light,
   .#{$prefix}--snippet--light .#{$prefix}--snippet-button,
-  .#{$prefix}--snippet--light .#{$prefix}--snippet-btn--expand,
+  .#{$prefix}--snippet--light .#{$prefix}--btn.#{$prefix}--snippet-btn--expand,
   .#{$prefix}--snippet--light .#{$prefix}--copy-btn {
     background-color: $field-02;
   }
 
   .#{$prefix}--snippet--light.#{$prefix}--snippet--inline:hover,
   .#{$prefix}--snippet--light .#{$prefix}--snippet-button:hover,
-  .#{$prefix}--snippet--light .#{$prefix}--snippet-btn--expand:hover,
+  .#{$prefix}--snippet--light
+    .#{$prefix}--btn.#{$prefix}--snippet-btn--expand:hover,
   .#{$prefix}--snippet--light .#{$prefix}--copy-btn:hover {
     background-color: $hover-light-ui;
   }
 
   .#{$prefix}--snippet--light.#{$prefix}--snippet--inline:active,
   .#{$prefix}--snippet--light .#{$prefix}--snippet-button:active,
-  .#{$prefix}--snippet--light .#{$prefix}--snippet-btn--expand:active,
+  .#{$prefix}--snippet--light
+    .#{$prefix}--btn.#{$prefix}--snippet-btn--expand:active,
   .#{$prefix}--snippet--light .#{$prefix}--copy-btn:active {
     background-color: $active-light-ui;
   }
@@ -17771,9 +17777,19 @@ Date picker styles
     align-items: center;
   }
 
-  .#{$prefix}--date-picker.#{$prefix}--date-picker--simple {
-    .#{$prefix}--date-picker__input {
-      width: rem(120px);
+  .#{$prefix}--date-picker.#{$prefix}--date-picker--simple
+    .#{$prefix}--date-picker__input,
+  .#{$prefix}--date-picker.#{$prefix}--date-picker--simple .#{$prefix}--label {
+    width: rem(120px);
+  }
+
+  .#{$prefix}--date-picker.#{$prefix}--date-picker--simple
+    .#{$prefix}--date-picker-input__wrapper--invalid,
+  .#{$prefix}--date-picker.#{$prefix}--date-picker--simple
+    .#{$prefix}--date-picker-input__wrapper--warn {
+    .#{$prefix}--date-picker__input,
+    ~ .#{$prefix}--form-requirement {
+      width: rem(152px);
     }
   }
 
@@ -17795,7 +17811,6 @@ Date picker styles
 
     position: relative;
     display: block;
-    min-width: rem(144px);
     height: rem(40px);
     padding: 0 $carbon--spacing-05;
     color: $text-01;
@@ -17856,6 +17871,24 @@ Date picker styles
     }
   }
 
+  .#{$prefix}--date-picker__icon--invalid,
+  .#{$prefix}--date-picker__icon--warn {
+    cursor: auto;
+  }
+
+  .#{$prefix}--date-picker__icon--warn {
+    fill: $support-03;
+  }
+
+  .#{$prefix}--date-picker__icon--warn path:first-of-type {
+    opacity: 1;
+    fill: $carbon__black-100;
+  }
+
+  .#{$prefix}--date-picker__icon--invalid {
+    fill: $support-01;
+  }
+
   .#{$prefix}--date-picker__icon ~ .#{$prefix}--date-picker__input {
     padding-right: $carbon--spacing-09;
   }
@@ -17908,6 +17941,8 @@ Date picker styles
   - [ui-04 [variable]](#ui-04-variable)
   - [disabled-02 [variable]](#disabled-02-variable)
   - [icon-01 [variable]](#icon-01-variable)
+  - [support-03 [variable]](#support-03-variable)
+  - [support-01 [variable]](#support-01-variable)
   - [carbon--spacing-09 [variable]](#carbon--spacing-09-variable)
 
 ## dropdown
@@ -18810,7 +18845,8 @@ Form styles
   input[data-invalid],
   .#{$prefix}--number[data-invalid] .#{$prefix}--number__input-wrapper,
   .#{$prefix}--number__input-wrapper--warning,
-  .#{$prefix}--date-picker-input__wrapper,
+  .#{$prefix}--date-picker-input__wrapper--warn,
+  .#{$prefix}--date-picker-input__wrapper--invalid,
   .#{$prefix}--time-picker--invalid,
   .#{$prefix}--text-input__field-wrapper[data-invalid],
   .#{$prefix}--text-input__field-wrapper--warning,
@@ -18830,7 +18866,7 @@ Form styles
 
   input[data-invalid],
   .#{$prefix}--number[data-invalid] .#{$prefix}--number__input-wrapper,
-  .#{$prefix}--date-picker-input__wrapper,
+  .#{$prefix}--date-picker-input__wrapper--invalid,
   .#{$prefix}--time-picker--invalid,
   .#{$prefix}--text-input__field-wrapper[data-invalid],
   .#{$prefix}--text-area__wrapper[data-invalid],
@@ -21554,7 +21590,7 @@ Number input styles
     fill: $support-03;
   }
 
-  .#{$prefix}--number__invalid--warning path[data-icon-path='inner-path'] {
+  .#{$prefix}--number__invalid--warning path:first-of-type {
     opacity: 1;
     fill: $carbon__black-100;
   }
@@ -23501,12 +23537,14 @@ Select styles
     display: flex;
     flex-direction: column;
     align-items: flex-start;
+    width: 100%;
   }
 
   .#{$prefix}--select-input__wrapper {
     position: relative;
     display: flex;
     align-items: center;
+    width: 100%;
   }
 
   .#{$prefix}--select-input {
@@ -23514,10 +23552,7 @@ Select styles
     @include focus-outline('reset');
 
     display: block;
-    width: rem(224px);
-    min-width: rem(128px);
-    max-width: rem(448px);
-
+    width: 100%;
     height: rem(40px);
     padding: 0 $spacing-09 0 $spacing-05;
     color: $text-01;
@@ -23678,6 +23713,7 @@ Select styles
   }
 
   .#{$prefix}--select--inline .#{$prefix}--select-input {
+    width: auto;
     padding-right: $spacing-07;
     padding-left: $carbon--spacing-03;
     color: $text-01;
@@ -25386,7 +25422,7 @@ Text input styles
     .#{$prefix}--text-input__invalid-icon--warning {
       fill: $support-03;
 
-      path[data-icon-path='inner-path'] {
+      path:first-of-type {
         opacity: 1;
         fill: $carbon__black-100;
       }
@@ -26984,7 +27020,6 @@ Tooltip styles
   }
 
   .#{$prefix}--tooltip {
-    @include box-shadow;
     @include reset;
 
     position: absolute;
@@ -26996,7 +27031,6 @@ Tooltip styles
     padding: $carbon--spacing-05;
     color: $inverse-01;
     word-wrap: break-word;
-    background: $inverse-02;
     border-radius: rem(2px);
 
     // Windows, Firefox HCM Fix
@@ -27045,6 +27079,11 @@ Tooltip styles
       }
     }
 
+    .#{$prefix}--tooltip__content {
+      background-color: $inverse-02;
+      box-shadow: 0 0 0 $spacing-05 $inverse-02, 0 2px 6px $spacing-05 rgba(0, 0, 0, 0.2);
+    }
+
     // Tooltips need to be click focusable but not sequentially focusable so the user can click within
     // the tooltip and not have it close. Because the element is not actionable it does not need
     // to have a visible focus indicator (OK'd by IBMa)
@@ -27064,6 +27103,44 @@ Tooltip styles
       border-bottom: $caret-size solid $inverse-02;
       border-left: $caret-size solid transparent;
       content: '';
+    }
+
+    &.#{$prefix}--tooltip--top.#{$prefix}--tooltip--align-start,
+    &.#{$prefix}--tooltip--bottom.#{$prefix}--tooltip--align-start {
+      .#{$prefix}--tooltip__content {
+        transform: translate(calc(50% - 6px), 0);
+      }
+    }
+
+    &.#{$prefix}--tooltip--top.#{$prefix}--tooltip--align-end,
+    &.#{$prefix}--tooltip--bottom.#{$prefix}--tooltip--align-end {
+      .#{$prefix}--tooltip__content {
+        transform: translate(calc(6px - 50%), 0);
+      }
+    }
+
+    &.#{$prefix}--tooltip--left.#{$prefix}--tooltip--align-start {
+      .#{$prefix}--tooltip__content {
+        transform: translate(0, calc(9px + 50% - #{$spacing-03}));
+      }
+    }
+
+    &.#{$prefix}--tooltip--right.#{$prefix}--tooltip--align-start {
+      .#{$prefix}--tooltip__content {
+        transform: translate(0, calc(-3px + 50% - #{$spacing-03}));
+      }
+    }
+
+    &.#{$prefix}--tooltip--left.#{$prefix}--tooltip--align-end {
+      .#{$prefix}--tooltip__content {
+        transform: translate(0, calc(9px - 50% + #{$spacing-03}));
+      }
+    }
+
+    &.#{$prefix}--tooltip--right.#{$prefix}--tooltip--align-end {
+      .#{$prefix}--tooltip__content {
+        transform: translate(0, calc(-3px - 50% + #{$spacing-03}));
+      }
     }
 
     .#{$prefix}--tooltip__footer {
@@ -27287,6 +27364,7 @@ Tooltip styles
   - [carbon--spacing-07 [variable]](#carbon--spacing-07-variable)
   - [inverse-focus-ui [variable]](#inverse-focus-ui-variable)
   - [inverse-link [variable]](#inverse-link-variable)
+  - [spacing-05 [variable]](#spacing-05-variable)
   - [spacing-03 [variable]](#spacing-03-variable)
   - [interactive-04 [variable]](#interactive-04-variable)
 
