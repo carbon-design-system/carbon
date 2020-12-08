@@ -93,6 +93,8 @@ Map {
     },
   },
   "Breadcrumb" => Object {
+    "$$typeof": Symbol(react.forward_ref),
+    "displayName": "Breadcrumb",
     "propTypes": Object {
       "aria-label": Object {
         "type": "string",
@@ -107,8 +109,11 @@ Map {
         "type": "bool",
       },
     },
+    "render": [Function],
   },
   "BreadcrumbItem" => Object {
+    "$$typeof": Symbol(react.forward_ref),
+    "displayName": "BreadcrumbItem",
     "propTypes": Object {
       "aria-current": Object {
         "args": Array [
@@ -136,6 +141,7 @@ Map {
         "type": "bool",
       },
     },
+    "render": [Function],
   },
   "Button" => Object {
     "$$typeof": Symbol(react.forward_ref),
@@ -2244,6 +2250,12 @@ Map {
       "type": Object {
         "type": "string",
       },
+      "warn": Object {
+        "type": "bool",
+      },
+      "warnText": Object {
+        "type": "string",
+      },
     },
   },
   "Dropdown" => Object {
@@ -3568,6 +3580,9 @@ Map {
           "type": "string",
         },
         "onChange": Object {
+          "type": "func",
+        },
+        "onMenuChange": Object {
           "type": "func",
         },
         "open": Object {
@@ -5065,6 +5080,7 @@ Map {
   },
   "Tabs" => Object {
     "defaultProps": Object {
+      "scrollIntoView": true,
       "selected": 0,
       "selectionMode": "automatic",
       "type": "default",
@@ -5090,6 +5106,9 @@ Map {
       },
       "onSelectionChange": Object {
         "type": "func",
+      },
+      "scrollIntoView": Object {
+        "type": "bool",
       },
       "selected": Object {
         "type": "number",
@@ -5993,6 +6012,14 @@ Map {
       },
       "onToggle": Object {
         "type": "func",
+      },
+      "size": Object {
+        "args": Array [
+          Array [
+            "sm",
+          ],
+        ],
+        "type": "oneOf",
       },
       "toggled": Object {
         "type": "bool",
