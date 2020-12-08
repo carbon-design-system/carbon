@@ -199,12 +199,18 @@ describe('Checkbox accessibility', () => {
 
   it('should have no Axe violationk', async () => {
     render(<Checkbox labelText="Checkbox label" id="test_id" />);
-    await expect(screen.getByText('Checkbox label')).toHaveNoAxeViolations();
+    await expect(
+      screen.getByLabelText('Checkbox label')
+    ).toHaveNoAxeViolations();
   });
 
   it('should have no Accessibility Checker violations', async () => {
-    render(<Checkbox labelText="Checkbox label" id="test_id" />);
-    await expect(screen.getByText('Checkbox label')).toHaveNoACViolations(
+    render(
+      <main>
+        <Checkbox labelText="Checkbox label" id="test_id" />
+      </main>
+    );
+    await expect(screen.getByLabelText('Checkbox label')).toHaveNoACViolations(
       'Checkbox'
     );
   });
