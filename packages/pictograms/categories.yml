@@ -331,11 +331,15 @@ categories:
       - optimize--cash-flow--02
   - name: Healthcare
     members:
+      - baby--bottle
       - care
       - doctor
+      - doctor-patient
+      - dropper
       - first--aid
       - heart--health
       - hospital
+      - hpi
       - medical
       - medical--charts
       - medical--staff
@@ -344,7 +348,12 @@ categories:
       - pill--bottle--01
       - pills
       - pregnant
+      - prescription
       - stethoscope
+      - social--work--01
+      - social--work--02
+      - telemedicine
+      - telemedicine--mobile
       - x-ray--01
       - x-ray--02
   - name: Home
