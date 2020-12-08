@@ -12,7 +12,7 @@ component can carry out the following steps:
 
 ## Screen reader
 
-Each screen reader should be tested when paired with it's preferred browser.
+Each screen reader should be tested when paired with its preferred browser.
 
 ### VoiceOver on Safari
 
