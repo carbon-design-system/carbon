@@ -1,4 +1,4 @@
-name: CI Test
+name: ci-test
 
 on:
   push:
@@ -9,7 +9,7 @@ on:
       - master
 
 jobs:
-  build:
+  ci-check:
     runs-on: macos-latest
     steps:
       - uses: actions/checkout@v2
@@ -17,24 +17,36 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: '14.x'
+      - name: Restore node_modules
+        uses: actions/cache@v2
+        with:
+          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
+          path: |
+            node_modules
+            **/node_modules
       - name: Install dependencies
         # Make sure that we have at least one install that uses --check-cache
         # since we receive PRs from external contributors
         run: yarn install --immutable --immutable-cache --check-cache
       - name: Build project
         run: yarn build
-      - name: Upload build artifacts
-        uses: actions/upload-artifact@v2
-        with:
-          name: build-artifacts
-          retention-days: 1
-          if-no-files-found: error
-          path: |
-            packages/*/es/**
-            packages/*/lib/**
-            packages/*/umd/**
-            packages/*/scss/**
-            packages/icons/svg/**
+      - name: Lint JavaScript files
+        run: yarn lint --quiet
+      - name: Run bundler checks for Sass files
+        run: |
+          yarn bundler check --ignore '**/@(node_modules|examples|components|react|fixtures)/**' 'packages/**/*.scss'
+      - name: Test JavaScript files
+        env:
+          BABEL_ENV: test
+        run: |
+          yarn test --ci --maxWorkers 2 --reporters=default --reporters=jest-junit
+      - name: Test E2E tests
+        env:
+          BABEL_ENV: test
+        run: |
+          yarn test:e2e --ci --maxWorkers 2 --reporters=default --reporters=jest-junit
+      - name: Run CI Checks for packages
+        run: yarn lerna run ci-check
 
   format:
     name: 'format:diff'
@@ -45,23 +57,17 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: '14.x'
+      - name: Restore node_modules
+        uses: actions/cache@v2
+        with:
+          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
+          path: |
+            node_modules
+            **/node_modules
       - name: Install dependencies
         run: yarn install --immutable --immutable-cache
       - name: Check if files have been formatted
         run: yarn format:diff
-
-  lint:
-    runs-on: macos-latest
-    steps:
-      - uses: actions/checkout@v2
-      - name: Use Node.js 14.x
-        uses: actions/setup-node@v1
-        with:
-          node-version: '14.x'
-      - name: Install dependencies
-        run: yarn install --immutable --immutable-cache
-      - name: Lint JavaScript files
-        run: yarn lint --quiet
 
   lint-styles:
     name: 'lint:styles'
@@ -72,50 +78,14 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: '14.x'
+      - name: Restore node_modules
+        uses: actions/cache@v2
+        with:
+          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
+          path: |
+            node_modules
+            **/node_modules
       - name: Install dependencies
         run: yarn install --immutable --immutable-cache
       - name: Lint Sass and CSS files
         run: yarn lint:styles
-
-  test:
-    runs-on: macos-latest
-    needs: build
-    steps:
-      - uses: actions/checkout@v2
-      - name: Use Node.js 14.x
-        uses: actions/setup-node@v1
-        with:
-          node-version: '14.x'
-      - name: Install dependencies
-        run: yarn install --immutable --immutable-cache
-      - name: Download build artifacts
-        uses: actions/download-artifact@v2
-        with:
-          name: build-artifacts
-      - name: Test JavaScript files
-        env:
-          BABEL_ENV: test
-        run: |
-          yarn test --ci --maxWorkers 2 --reporters=default --reporters=jest-junit
-
-  test-e2e:
-    name: 'test:e2e'
-    needs: build
-    runs-on: macos-latest
-    steps:
-      - uses: actions/checkout@v2
-      - name: Use Node.js 14.x
-        uses: actions/setup-node@v1
-        with:
-          node-version: '14.x'
-      - name: Install dependencies
-        run: yarn install --immutable --immutable-cache
-      - name: Download build artifacts
-        uses: actions/download-artifact@v2
-        with:
-          name: build-artifacts
-      - name: Test E2E tests
-        env:
-          BABEL_ENV: test
-        run: |
-          yarn test:e2e --ci --maxWorkers 2 --reporters=default --reporters=jest-junit
