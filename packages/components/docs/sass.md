@@ -14987,7 +14987,6 @@ Code snippet styles
 
     display: flex;
     align-items: center;
-    min-width: rem(320px);
     max-width: rem(760px);
     height: $carbon--spacing-08;
     padding-right: $carbon--spacing-08;
@@ -15032,7 +15031,6 @@ Code snippet styles
     @include bx--snippet;
 
     display: flex;
-    min-width: rem(320px);
     max-width: 100%;
     padding: $carbon--spacing-05;
 
