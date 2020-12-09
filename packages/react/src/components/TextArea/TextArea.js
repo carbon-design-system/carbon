@@ -82,7 +82,6 @@ const TextArea = React.forwardRef(function TextArea(
       {...other}
       {...textareaProps}
       placeholder={placeholder || null}
-      aria-placeholder={placeholder || null} // for JAWS support
       className={textareaClasses}
       aria-invalid={invalid || null}
       aria-describedby={invalid ? errorId : null}
