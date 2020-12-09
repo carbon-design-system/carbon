@@ -323,7 +323,10 @@ class Tooltip extends Component {
    * @param {Element} [evt] For handing `mouseout` event, indicates where the mouse pointer is gone.
    */
   _handleFocus = (state, evt) => {
-    const { relatedTarget } = evt;
+    const { currentTarget, relatedTarget } = evt;
+    if (currentTarget !== relatedTarget) {
+      this._tooltipDismissed = false;
+    }
     if (state === 'over') {
       if (!this._tooltipDismissed) {
         this._handleUserInputOpenClose(evt, { open: true });
