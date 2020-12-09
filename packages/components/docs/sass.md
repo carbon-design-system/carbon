@@ -20579,10 +20579,6 @@ Modal styles
     &:focus {
       @include focus-outline('outline');
     }
-
-    > * {
-      @include type-style('body-long-01');
-    }
   }
 
   // Required so overflow-indicator disappears at end of content
@@ -25448,6 +25444,13 @@ Text input styles
 
       svg {
         fill: $icon-02;
+
+        // Windows, Firefox HCM Fix
+        @media screen and (-ms-high-contrast: active),
+          screen and (prefers-contrast) {
+          // `ButtonText` is a CSS2 system color to help improve colors in HCM
+          fill: ButtonText;
+        }
       }
     }
 
