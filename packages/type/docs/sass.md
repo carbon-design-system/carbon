@@ -819,7 +819,13 @@ Include default type styles
   }
 
   a {
-    color: #0062ff;
+    @if global-variable-exists('carbon--theme') and
+      map-has-key($carbon--theme, 'link-01')
+    {
+      color: map-get($carbon--theme, 'link-01');
+    } @else {
+      color: #0062fe;
+    }
   }
 
   em {
