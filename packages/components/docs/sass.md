@@ -15195,7 +15195,7 @@ Code snippet styles
 
     position: absolute;
     right: 0;
-    bottom: $spacing-03;
+    bottom: 0;
     z-index: 10;
     display: inline-flex;
     align-items: center;
@@ -15248,21 +15248,23 @@ Code snippet styles
   // Light version
   .#{$prefix}--snippet--light,
   .#{$prefix}--snippet--light .#{$prefix}--snippet-button,
-  .#{$prefix}--snippet--light .#{$prefix}--snippet-btn--expand,
+  .#{$prefix}--snippet--light .#{$prefix}--btn.#{$prefix}--snippet-btn--expand,
   .#{$prefix}--snippet--light .#{$prefix}--copy-btn {
     background-color: $field-02;
   }
 
   .#{$prefix}--snippet--light.#{$prefix}--snippet--inline:hover,
   .#{$prefix}--snippet--light .#{$prefix}--snippet-button:hover,
-  .#{$prefix}--snippet--light .#{$prefix}--snippet-btn--expand:hover,
+  .#{$prefix}--snippet--light
+    .#{$prefix}--btn.#{$prefix}--snippet-btn--expand:hover,
   .#{$prefix}--snippet--light .#{$prefix}--copy-btn:hover {
     background-color: $hover-light-ui;
   }
 
   .#{$prefix}--snippet--light.#{$prefix}--snippet--inline:active,
   .#{$prefix}--snippet--light .#{$prefix}--snippet-button:active,
-  .#{$prefix}--snippet--light .#{$prefix}--snippet-btn--expand:active,
+  .#{$prefix}--snippet--light
+    .#{$prefix}--btn.#{$prefix}--snippet-btn--expand:active,
   .#{$prefix}--snippet--light .#{$prefix}--copy-btn:active {
     background-color: $active-light-ui;
   }
@@ -20577,10 +20579,6 @@ Modal styles
     &:focus {
       @include focus-outline('outline');
     }
-
-    > * {
-      @include type-style('body-long-01');
-    }
   }
 
   // Required so overflow-indicator disappears at end of content
@@ -25446,6 +25444,13 @@ Text input styles
 
       svg {
         fill: $icon-02;
+
+        // Windows, Firefox HCM Fix
+        @media screen and (-ms-high-contrast: active),
+          screen and (prefers-contrast) {
+          // `ButtonText` is a CSS2 system color to help improve colors in HCM
+          fill: ButtonText;
+        }
       }
     }
 
