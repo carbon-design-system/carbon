@@ -2250,6 +2250,12 @@ Map {
       "type": Object {
         "type": "string",
       },
+      "warn": Object {
+        "type": "bool",
+      },
+      "warnText": Object {
+        "type": "string",
+      },
     },
   },
   "Dropdown" => Object {
@@ -5040,6 +5046,9 @@ Map {
         "type": "func",
       },
       "renderAnchor": [Function],
+      "renderButton": Object {
+        "type": "func",
+      },
       "renderContent": Object {
         "type": "func",
       },
@@ -5074,6 +5083,7 @@ Map {
   },
   "Tabs" => Object {
     "defaultProps": Object {
+      "scrollIntoView": true,
       "selected": 0,
       "selectionMode": "automatic",
       "type": "default",
@@ -5099,6 +5109,9 @@ Map {
       },
       "onSelectionChange": Object {
         "type": "func",
+      },
+      "scrollIntoView": Object {
+        "type": "bool",
       },
       "selected": Object {
         "type": "number",
