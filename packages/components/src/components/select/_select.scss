@@ -85,8 +85,8 @@
     &:disabled,
     &:hover:disabled {
       color: $disabled-02;
-      background-color: $disabled-background-color;
-      border-bottom-color: $disabled-background-color;
+      background-color: $disabled-01;
+      border-bottom-color: $disabled-01;
       cursor: not-allowed;
     }
   }
@@ -124,7 +124,7 @@
     &:disabled,
     &:hover:disabled {
       color: $disabled-02;
-      background-color: $disabled-background-color;
+      background-color: $disabled-01;
       cursor: not-allowed;
     }
   }
@@ -213,7 +213,7 @@
 
   .#{$prefix}--select--inline .#{$prefix}--select-input[disabled],
   .#{$prefix}--select--inline .#{$prefix}--select-input[disabled]:hover {
-    background-color: $disabled-background-color;
+    background-color: $disabled-01;
   }
 
   .#{$prefix}--select--inline .#{$prefix}--select__arrow {
