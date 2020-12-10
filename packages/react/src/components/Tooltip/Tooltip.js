@@ -371,7 +371,15 @@ class Tooltip extends Component {
       click: 'click',
     }[evt.type];
     const hadContextMenu = this._hasContextMenu;
-    this._hasContextMenu = evt.type === 'contextmenu';
+    if (evt.type === 'click' || evt.type === 'contextmenu') {
+      this._hasContextMenu = evt.type === 'contextmenu';
+    }
+
+    if (this._hasContextMenu) {
+      this._handleUserInputOpenClose(evt, { open: false });
+      return;
+    }
+
     if (state === 'click') {
       evt.stopPropagation();
       evt.preventDefault();
@@ -470,6 +478,7 @@ class Tooltip extends Component {
       role: 'button',
       tabIndex: tabIndex,
       onClick: this.handleMouse,
+      onContextMenu: this.handleMouse,
       onKeyDown: this.handleKeyPress,
       onMouseOver: this.handleMouse,
       onMouseOut: this.handleMouse,
