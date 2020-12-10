@@ -3806,7 +3806,6 @@ $spacing-05: $carbon--spacing-05;
   - [search [mixin]](#search-mixin)
   - [select [mixin]](#select-mixin)
   - [tabs [mixin]](#tabs-mixin)
-  - [tooltip [mixin]](#tooltip-mixin)
   - [treeview [mixin]](#treeview-mixin)
   - [carbon-switcher [mixin]](#carbon-switcher-mixin)
 
@@ -22118,26 +22117,13 @@ Pagination styles
 
 ```scss
 @mixin pagination() {
+  .#{$prefix}--data-table-container + .#{$prefix}--pagination {
+    border-top: 0;
+  }
+
   .#{$prefix}--pagination {
     @include reset;
     @include type-style('body-short-01');
-
-    @include carbon--breakpoint('md') {
-      overflow: initial;
-    }
-
-    // mobile friendly pagination
-    @include carbon--breakpoint-down('md') {
-      .#{$prefix}--pagination__left > *,
-      .#{$prefix}--pagination__right > * {
-        display: none;
-      }
-
-      .#{$prefix}--pagination__items-count,
-      .#{$prefix}--pagination__control-buttons {
-        display: initial;
-      }
-    }
 
     display: flex;
     align-items: center;
@@ -22149,53 +22135,69 @@ Pagination styles
     background-color: $ui-01;
     border-top: 1px solid $ui-03;
 
-    .#{$prefix}--data-table-container + & {
-      border-top: 0;
-    }
+    @include carbon--breakpoint('md') {
+      overflow: initial;
 
-    .#{$prefix}--pagination__control-buttons {
-      flex-shrink: 0;
-    }
-
-    .#{$prefix}--select {
-      align-items: center;
-      height: 100%;
-    }
-
-    .#{$prefix}--select-input {
-      @include type-style('body-short-01');
-
-      width: auto;
-      min-width: auto;
-      height: rem(48px);
-      padding: 0 2.25rem 0 $spacing-05;
-
-      &:hover {
-        background: $hover-ui;
-      }
-
-      &--inline__wrapper {
+      .#{$prefix}--pagination__control-buttons {
         display: flex;
-        height: 100%;
       }
     }
 
-    .#{$prefix}--select__arrow {
-      top: 50%;
-      transform: translate(-0.5rem, -50%);
-    }
+    // mobile friendly pagination
+    @include carbon--breakpoint-down('md') {
+      .#{$prefix}--pagination__left > *,
+      .#{$prefix}--pagination__right > * {
+        display: none;
+      }
 
-    .#{$prefix}--select__item-count {
-      .#{$prefix}--select-input {
-        border-right: $spacing-4xs solid $ui-03;
+      .#{$prefix}--pagination__items-count {
+        display: initial;
+      }
+
+      .#{$prefix}--pagination__control-buttons {
+        display: flex;
       }
     }
+  }
 
-    .#{$prefix}--select__page-number {
-      .#{$prefix}--select-input {
-        border-left: 1px solid $ui-03;
-      }
-    }
+  .#{$prefix}--pagination .#{$prefix}--select {
+    align-items: center;
+    height: 100%;
+  }
+
+  .#{$prefix}--pagination .#{$prefix}--select-input--inline__wrapper {
+    display: flex;
+    height: 100%;
+  }
+
+  .#{$prefix}--pagination .#{$prefix}--select-input {
+    @include type-style('body-short-01');
+
+    width: auto;
+    min-width: auto;
+    height: rem(48px);
+    padding: 0 2.25rem 0 $spacing-05;
+  }
+
+  .#{$prefix}--pagination .#{$prefix}--select-input:hover {
+    background: $hover-ui;
+  }
+
+  .#{$prefix}--pagination .#{$prefix}--select__arrow {
+    top: 50%;
+    transform: translate(-0.5rem, -50%);
+  }
+
+  .#{$prefix}--pagination
+    .#{$prefix}--select__item-count
+    .#{$prefix}--select-input {
+    border-right: $spacing-4xs solid $ui-03;
+  }
+
+  .#{$prefix}--pagination
+    .#{$prefix}--select__page-number
+    .#{$prefix}--select-input {
+    border-left: 1px solid $ui-03;
   }
 
   .#{$prefix}--pagination__left,
@@ -22203,13 +22205,32 @@ Pagination styles
     display: flex;
     align-items: center;
     height: rem(48px);
+  }
 
-    > .#{$prefix}--form-item {
-      height: 100%;
-    }
+  .#{$prefix}--pagination__left > .#{$prefix}--form-item,
+  .#{$prefix}--pagination__right > .#{$prefix}--form-item {
+    height: 100%;
+  }
 
-    .#{$prefix}--pagination__text {
-      white-space: nowrap;
+  .#{$prefix}--pagination__left .#{$prefix}--pagination__text,
+  .#{$prefix}--pagination__right .#{$prefix}--pagination__text {
+    white-space: nowrap;
+  }
+
+  .#{$prefix}--pagination__left .#{$prefix}--pagination__text {
+    margin-right: rem(1px);
+  }
+
+  .#{$prefix}--pagination__right .#{$prefix}--pagination__text {
+    margin-right: 1rem;
+    margin-left: rem(1px);
+  }
+
+  .#{$prefix}--pagination__left {
+    padding: 0 $carbon--spacing-05 0 0;
+
+    @include carbon--breakpoint('md') {
+      padding: 0 $carbon--spacing-05;
     }
   }
 
@@ -22217,30 +22238,11 @@ Pagination styles
     @include carbon--breakpoint('md') {
       display: inline-block;
     }
-
-    margin-left: $carbon--spacing-05;
-    overflow: hidden;
-    color: $text-02;
-    text-overflow: ellipsis;
-
-    .#{$prefix}--pagination__left & {
-      margin-right: rem(1px);
-    }
-
-    .#{$prefix}--pagination__right & {
-      margin-right: 1rem;
-      margin-left: rem(1px);
-    }
-
-    // Skeleton state
-    .#{$prefix}--pagination.#{$prefix}--skeleton & {
-      margin-right: 1rem;
-      margin-bottom: 0;
-    }
   }
 
-  .#{$prefix}--pagination__left {
-    padding: 0 $carbon--spacing-05;
+  span.#{$prefix}--pagination__text {
+    margin-left: $carbon--spacing-05;
+    color: $text-02;
   }
 
   .#{$prefix}--pagination__button,
@@ -22296,6 +22298,12 @@ Pagination styles
     border-color: $ui-03;
     cursor: not-allowed;
     fill: $disabled-02;
+  }
+
+  // Skeleton state
+  .#{$prefix}--pagination.#{$prefix}--skeleton .#{$prefix}--skeleton__text {
+    margin-right: 1rem;
+    margin-bottom: 0;
   }
 }
 ```
@@ -27037,6 +27045,7 @@ Tooltip styles
   }
 
   .#{$prefix}--tooltip {
+    @include box-shadow;
     @include reset;
 
     position: absolute;
@@ -27048,6 +27057,7 @@ Tooltip styles
     padding: $carbon--spacing-05;
     color: $inverse-01;
     word-wrap: break-word;
+    background: $inverse-02;
     border-radius: rem(2px);
 
     // Windows, Firefox HCM Fix
@@ -27061,6 +27071,58 @@ Tooltip styles
     &:focus {
       outline: 0;
       box-shadow: inset 0 0 0 1px $inverse-02, inset 0 0 0 2px $ui-background;
+    }
+
+    &.#{$prefix}--tooltip--top.#{$prefix}--tooltip--align-start,
+    &.#{$prefix}--tooltip--bottom.#{$prefix}--tooltip--align-start {
+      transform: translate(calc(50% - 22px), 0);
+
+      .#{$prefix}--tooltip__caret {
+        margin-left: 15px;
+      }
+    }
+
+    &.#{$prefix}--tooltip--top.#{$prefix}--tooltip--align-end,
+    &.#{$prefix}--tooltip--bottom.#{$prefix}--tooltip--align-end {
+      transform: translate(calc(22px - 50%), 0);
+
+      .#{$prefix}--tooltip__caret {
+        margin-right: 15px;
+      }
+    }
+
+    &.#{$prefix}--tooltip--left.#{$prefix}--tooltip--align-start {
+      transform: translate(0, calc(-15px + 50%));
+
+      .#{$prefix}--tooltip__caret {
+        top: 14px;
+      }
+    }
+
+    &.#{$prefix}--tooltip--left.#{$prefix}--tooltip--align-end {
+      transform: translate(0, calc(31px - 50%));
+
+      .#{$prefix}--tooltip__caret {
+        top: initial;
+        bottom: 25px;
+      }
+    }
+
+    &.#{$prefix}--tooltip--right.#{$prefix}--tooltip--align-start {
+      transform: translate(0, calc(-26px + 50%));
+
+      .#{$prefix}--tooltip__caret {
+        top: 26px;
+      }
+    }
+
+    &.#{$prefix}--tooltip--right.#{$prefix}--tooltip--align-end {
+      transform: translate(0, calc(20px - 50%));
+
+      .#{$prefix}--tooltip__caret {
+        top: initial;
+        bottom: 12px;
+      }
     }
 
     p {
@@ -27096,11 +27158,6 @@ Tooltip styles
       }
     }
 
-    .#{$prefix}--tooltip__content {
-      background-color: $inverse-02;
-      box-shadow: 0 0 0 $spacing-05 $inverse-02, 0 2px 6px $spacing-05 rgba(0, 0, 0, 0.2);
-    }
-
     // Tooltips need to be click focusable but not sequentially focusable so the user can click within
     // the tooltip and not have it close. Because the element is not actionable it does not need
     // to have a visible focus indicator (OK'd by IBMa)
@@ -27120,44 +27177,6 @@ Tooltip styles
       border-bottom: $caret-size solid $inverse-02;
       border-left: $caret-size solid transparent;
       content: '';
-    }
-
-    &.#{$prefix}--tooltip--top.#{$prefix}--tooltip--align-start,
-    &.#{$prefix}--tooltip--bottom.#{$prefix}--tooltip--align-start {
-      .#{$prefix}--tooltip__content {
-        transform: translate(calc(50% - 6px), 0);
-      }
-    }
-
-    &.#{$prefix}--tooltip--top.#{$prefix}--tooltip--align-end,
-    &.#{$prefix}--tooltip--bottom.#{$prefix}--tooltip--align-end {
-      .#{$prefix}--tooltip__content {
-        transform: translate(calc(6px - 50%), 0);
-      }
-    }
-
-    &.#{$prefix}--tooltip--left.#{$prefix}--tooltip--align-start {
-      .#{$prefix}--tooltip__content {
-        transform: translate(0, calc(9px + 50% - #{$spacing-03}));
-      }
-    }
-
-    &.#{$prefix}--tooltip--right.#{$prefix}--tooltip--align-start {
-      .#{$prefix}--tooltip__content {
-        transform: translate(0, calc(-3px + 50% - #{$spacing-03}));
-      }
-    }
-
-    &.#{$prefix}--tooltip--left.#{$prefix}--tooltip--align-end {
-      .#{$prefix}--tooltip__content {
-        transform: translate(0, calc(9px - 50% + #{$spacing-03}));
-      }
-    }
-
-    &.#{$prefix}--tooltip--right.#{$prefix}--tooltip--align-end {
-      .#{$prefix}--tooltip__content {
-        transform: translate(0, calc(-3px - 50% + #{$spacing-03}));
-      }
     }
 
     .#{$prefix}--tooltip__footer {
@@ -27381,7 +27400,6 @@ Tooltip styles
   - [carbon--spacing-07 [variable]](#carbon--spacing-07-variable)
   - [inverse-focus-ui [variable]](#inverse-focus-ui-variable)
   - [inverse-link [variable]](#inverse-link-variable)
-  - [spacing-05 [variable]](#spacing-05-variable)
   - [spacing-03 [variable]](#spacing-03-variable)
   - [interactive-04 [variable]](#interactive-04-variable)
 
