@@ -63,15 +63,19 @@ const Dropdown = React.forwardRef(function Dropdown(
   // create deep copy of items to prevent mutation
   const clonedItems = JSON.parse(JSON.stringify(items));
 
-  // create default option
+  // create default option and prepend to items array
   let defaultOption;
   if (isOptional && label && clonedItems.length) {
     defaultOption =
       typeof clonedItems[0] === 'object'
         ? { text: `[${label}]` }
         : `[${label}]`;
-    if (!initialSelectedItem) {
-      initialSelectedItem = defaultOption;
+
+    if (
+      clonedItems[0] !== defaultOption &&
+      clonedItems[0].text !== defaultOption
+    ) {
+      clonedItems.unshift(defaultOption);
     }
   }
 
@@ -83,23 +87,13 @@ const Dropdown = React.forwardRef(function Dropdown(
     onSelectedItemChange,
   });
 
-  // prepend default option to items array if the label prop is defined
-  if (defaultOption) {
-    if (
-      clonedItems[0] !== defaultOption &&
-      clonedItems[0].text !== defaultOption
-    ) {
-      clonedItems.unshift(defaultOption);
-    }
-  }
-
   // only set selectedItem if the prop is defined. Setting if it is undefined
   // will overwrite default selected items from useSelect
   if (controlledSelectedItem !== undefined) {
     selectProps.selectedItem = controlledSelectedItem;
   }
 
-  const {
+  let {
     isOpen,
     getToggleButtonProps,
     getLabelProps,
@@ -110,6 +104,10 @@ const Dropdown = React.forwardRef(function Dropdown(
   } = useSelect(selectProps);
   const inline = type === 'inline';
   const showWarning = !invalid && warn;
+
+  if (defaultOption && !initialSelectedItem && !selectedItem) {
+    selectedItem = defaultOption;
+  }
 
   const className = cx(`${prefix}--dropdown`, containerClassName, {
     [`${prefix}--dropdown--invalid`]: invalid,
