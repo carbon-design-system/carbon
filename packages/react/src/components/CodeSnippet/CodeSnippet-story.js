@@ -30,9 +30,8 @@ export const inline = () => (
 );
 
 export const multiline = () => (
-  <div style={{ width: '50%' }}>
-    <CodeSnippet {...props()} type="multi" feedback="Copied to clipboard">
-      {`  "scripts": {
+  <CodeSnippet {...props()} type="multi" feedback="Copied to clipboard">
+    {`  "scripts": {
     "build": "lerna run build --stream --prefix --npm-client yarn",
     "ci-check": "carbon-cli ci-check",
     "clean": "lerna run clean && lerna clean --yes && rimraf node_modules",
@@ -61,8 +60,7 @@ export const multiline = () => (
     "@babel/preset-react": "^7.10.0",
     "@babel/runtime": "^7.10.0",
     "@commitlint/cli": "^8.3.5",`}
-    </CodeSnippet>
-  </div>
+  </CodeSnippet>
 );
 
 export const singleline = () => (
