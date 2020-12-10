@@ -6206,6 +6206,7 @@ $carbon--theme: (
 - **Type**: `Map`
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
+  - [carbon--default-type [mixin]](#carbon--default-type-mixin)
 
 ### ✅interactive-01 [variable]
 
@@ -10404,7 +10405,13 @@ Include default type styles
   }
 
   a {
-    color: #0062ff;
+    @if global-variable-exists('carbon--theme') and
+      map-has-key($carbon--theme, 'link-01')
+    {
+      color: map-get($carbon--theme, 'link-01');
+    } @else {
+      color: #0062fe;
+    }
   }
 
   em {
@@ -10418,6 +10425,7 @@ Include default type styles
 - **Group**: [@carbon/type](#carbontype)
 - **Requires**:
   - [carbon--type-style [mixin]](#carbon--type-style-mixin)
+  - [carbon--theme [variable]](#carbon--theme-variable)
 
 ### ✅carbon--font-face-sans-condensed [mixin]
 

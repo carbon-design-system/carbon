@@ -30,13 +30,15 @@
   },
   "scripts": {
     "build": "yarn clean && node tasks/build.js",
-    "clean": "rimraf es lib umd"
+    "clean": "rimraf es lib umd",
+    "postinstall": "carbon-telemetry collect --install"
   },
   "peerDependencies": {
     "react": ">=16"
   },
   "dependencies": {
     "@carbon/icon-helpers": "^10.10.0",
+    "@carbon/telemetry": "^0.0.0-alpha.5",
     "prop-types": "^15.7.2"
   },
   "devDependencies": {
