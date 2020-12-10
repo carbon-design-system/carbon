@@ -387,12 +387,8 @@ class Tooltip extends Component {
         ? !this.props.open
         : !this.state.open;
       this._handleUserInputOpenClose(evt, { open: shouldOpen });
-    } else if (
-      state &&
-      (state !== 'out' || !hadContextMenu) &&
-      this._debouncedHandleFocus
-    ) {
-      this._debouncedHandleFocus(state, evt);
+    } else if (state && (state !== 'out' || !hadContextMenu)) {
+      this?._debouncedHandleFocus(state, evt);
     }
   };
 
