@@ -117,7 +117,6 @@
   height: rem(40px);
   display: flex;
   align-items: center;
-  margin-bottom: $carbon--spacing-02;
   background-color: transparent;
   color: $text-01;
   line-height: 1;
@@ -270,6 +269,11 @@
   &:hover::after {
     border-bottom-color: $interactive-01;
     border-top-color: $interactive-01;
+  }
+
+  &:active::after {
+    border-bottom-color: $interactive-04;
+    border-top-color: $interactive-04;
   }
 }
 

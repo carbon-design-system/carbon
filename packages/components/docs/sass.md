@@ -6064,7 +6064,6 @@ $spacing-05: $carbon--spacing-05;
   - [search [mixin]](#search-mixin)
   - [select [mixin]](#select-mixin)
   - [tabs [mixin]](#tabs-mixin)
-  - [tooltip [mixin]](#tooltip-mixin)
   - [treeview [mixin]](#treeview-mixin)
   - [carbon-switcher [mixin]](#carbon-switcher-mixin)
 
@@ -8857,6 +8856,7 @@ $carbon--theme: (
 - **Type**: `Map`
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
+  - [carbon--default-type [mixin]](#carbon--default-type-mixin)
 
 ### ✅interactive-01 [variable]
 
@@ -9720,6 +9720,7 @@ $support-01: if(
 - **Type**: `{undefined}`
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
+  - [date-picker [mixin]](#date-picker-mixin)
   - [dropdown [mixin]](#dropdown-mixin)
   - [file-uploader [mixin]](#file-uploader-mixin)
   - [inline-loading [mixin]](#inline-loading-mixin)
@@ -9786,6 +9787,7 @@ $support-03: if(
 - **Type**: `{undefined}`
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
+  - [date-picker [mixin]](#date-picker-mixin)
   - [listbox [mixin]](#listbox-mixin)
   - [inline-notifications [mixin]](#inline-notifications-mixin)
   - [toast-notifications [mixin]](#toast-notifications-mixin)
@@ -10617,8 +10619,12 @@ $disabled-01: if(
   - [carbon--theme [mixin]](#carbon--theme-mixin)
   - [accordion [mixin]](#accordion-mixin)
   - [content-switcher [mixin]](#content-switcher-mixin)
+  - [date-picker [mixin]](#date-picker-mixin)
   - [file-uploader [mixin]](#file-uploader-mixin)
   - [listbox [mixin]](#listbox-mixin)
+  - [number-input [mixin]](#number-input-mixin)
+  - [search [mixin]](#search-mixin)
+  - [select [mixin]](#select-mixin)
   - [slider [mixin]](#slider-mixin)
   - [tags [mixin]](#tags-mixin)
   - [text-area [mixin]](#text-area-mixin)
@@ -13423,7 +13429,13 @@ Include default type styles
   }
 
   a {
-    color: #0062ff;
+    @if global-variable-exists('carbon--theme') and
+      map-has-key($carbon--theme, 'link-01')
+    {
+      color: map-get($carbon--theme, 'link-01');
+    } @else {
+      color: #0062fe;
+    }
   }
 
   em {
@@ -13437,6 +13449,7 @@ Include default type styles
 - **Group**: [@carbon/type](#carbontype)
 - **Requires**:
   - [carbon--type-style [mixin]](#carbon--type-style-mixin)
+  - [carbon--theme [variable]](#carbon--theme-variable)
 
 ### ✅carbon--font-face-sans-condensed [mixin]
 
@@ -17243,7 +17256,6 @@ Code snippet styles
 
     display: flex;
     align-items: center;
-    min-width: rem(320px);
     max-width: rem(760px);
     height: $carbon--spacing-08;
     padding-right: $carbon--spacing-08;
@@ -17288,7 +17300,6 @@ Code snippet styles
     @include bx--snippet;
 
     display: flex;
-    min-width: rem(320px);
     max-width: 100%;
     padding: $carbon--spacing-05;
 
@@ -17451,7 +17462,7 @@ Code snippet styles
 
     position: absolute;
     right: 0;
-    bottom: $spacing-03;
+    bottom: 0;
     z-index: 10;
     display: inline-flex;
     align-items: center;
@@ -17504,21 +17515,23 @@ Code snippet styles
   // Light version
   .#{$prefix}--snippet--light,
   .#{$prefix}--snippet--light .#{$prefix}--snippet-button,
-  .#{$prefix}--snippet--light .#{$prefix}--snippet-btn--expand,
+  .#{$prefix}--snippet--light .#{$prefix}--btn.#{$prefix}--snippet-btn--expand,
   .#{$prefix}--snippet--light .#{$prefix}--copy-btn {
     background-color: $field-02;
   }
 
   .#{$prefix}--snippet--light.#{$prefix}--snippet--inline:hover,
   .#{$prefix}--snippet--light .#{$prefix}--snippet-button:hover,
-  .#{$prefix}--snippet--light .#{$prefix}--snippet-btn--expand:hover,
+  .#{$prefix}--snippet--light
+    .#{$prefix}--btn.#{$prefix}--snippet-btn--expand:hover,
   .#{$prefix}--snippet--light .#{$prefix}--copy-btn:hover {
     background-color: $hover-light-ui;
   }
 
   .#{$prefix}--snippet--light.#{$prefix}--snippet--inline:active,
   .#{$prefix}--snippet--light .#{$prefix}--snippet-button:active,
-  .#{$prefix}--snippet--light .#{$prefix}--snippet-btn--expand:active,
+  .#{$prefix}--snippet--light
+    .#{$prefix}--btn.#{$prefix}--snippet-btn--expand:active,
   .#{$prefix}--snippet--light .#{$prefix}--copy-btn:active {
     background-color: $active-light-ui;
   }
@@ -20031,9 +20044,19 @@ Date picker styles
     align-items: center;
   }
 
-  .#{$prefix}--date-picker.#{$prefix}--date-picker--simple {
-    .#{$prefix}--date-picker__input {
-      width: rem(120px);
+  .#{$prefix}--date-picker.#{$prefix}--date-picker--simple
+    .#{$prefix}--date-picker__input,
+  .#{$prefix}--date-picker.#{$prefix}--date-picker--simple .#{$prefix}--label {
+    width: rem(120px);
+  }
+
+  .#{$prefix}--date-picker.#{$prefix}--date-picker--simple
+    .#{$prefix}--date-picker-input__wrapper--invalid,
+  .#{$prefix}--date-picker.#{$prefix}--date-picker--simple
+    .#{$prefix}--date-picker-input__wrapper--warn {
+    .#{$prefix}--date-picker__input,
+    ~ .#{$prefix}--form-requirement {
+      width: rem(152px);
     }
   }
 
@@ -20055,7 +20078,6 @@ Date picker styles
 
     position: relative;
     display: block;
-    min-width: rem(144px);
     height: rem(40px);
     padding: 0 $carbon--spacing-05;
     color: $text-01;
@@ -20071,7 +20093,7 @@ Date picker styles
 
     &:disabled {
       color: $disabled-02;
-      background-color: $disabled-background-color;
+      background-color: $disabled-01;
       border-bottom: 1px solid transparent;
       cursor: not-allowed;
     }
@@ -20114,6 +20136,24 @@ Date picker styles
       // `ButtonText` is a CSS2 system color to help improve colors in HCM
       fill: ButtonText;
     }
+  }
+
+  .#{$prefix}--date-picker__icon--invalid,
+  .#{$prefix}--date-picker__icon--warn {
+    cursor: auto;
+  }
+
+  .#{$prefix}--date-picker__icon--warn {
+    fill: $support-03;
+  }
+
+  .#{$prefix}--date-picker__icon--warn path:first-of-type {
+    opacity: 1;
+    fill: $carbon__black-100;
+  }
+
+  .#{$prefix}--date-picker__icon--invalid {
+    fill: $support-01;
   }
 
   .#{$prefix}--date-picker__icon ~ .#{$prefix}--date-picker__input {
@@ -20167,7 +20207,10 @@ Date picker styles
   - [field-01 [variable]](#field-01-variable)
   - [ui-04 [variable]](#ui-04-variable)
   - [disabled-02 [variable]](#disabled-02-variable)
+  - [disabled-01 [variable]](#disabled-01-variable)
   - [icon-01 [variable]](#icon-01-variable)
+  - [support-03 [variable]](#support-03-variable)
+  - [support-01 [variable]](#support-01-variable)
   - [carbon--spacing-09 [variable]](#carbon--spacing-09-variable)
 
 ## dropdown
@@ -21070,7 +21113,8 @@ Form styles
   input[data-invalid],
   .#{$prefix}--number[data-invalid] .#{$prefix}--number__input-wrapper,
   .#{$prefix}--number__input-wrapper--warning,
-  .#{$prefix}--date-picker-input__wrapper,
+  .#{$prefix}--date-picker-input__wrapper--warn,
+  .#{$prefix}--date-picker-input__wrapper--invalid,
   .#{$prefix}--time-picker--invalid,
   .#{$prefix}--text-input__field-wrapper[data-invalid],
   .#{$prefix}--text-input__field-wrapper--warning,
@@ -21090,7 +21134,7 @@ Form styles
 
   input[data-invalid],
   .#{$prefix}--number[data-invalid] .#{$prefix}--number__input-wrapper,
-  .#{$prefix}--date-picker-input__wrapper,
+  .#{$prefix}--date-picker-input__wrapper--invalid,
   .#{$prefix}--time-picker--invalid,
   .#{$prefix}--text-input__field-wrapper[data-invalid],
   .#{$prefix}--text-area__wrapper[data-invalid],
@@ -22803,10 +22847,6 @@ Modal styles
     &:focus {
       @include focus-outline('outline');
     }
-
-    > * {
-      @include type-style('body-long-01');
-    }
   }
 
   // Required so overflow-indicator disappears at end of content
@@ -23726,7 +23766,7 @@ Number input styles
   .#{$prefix}--number input[type='number']:disabled,
   .#{$prefix}--number--readonly input[type='number'] {
     color: $disabled;
-    background-color: $disabled-background-color;
+    background-color: $disabled-01;
     border-bottom-color: transparent;
     cursor: not-allowed;
   }
@@ -23814,7 +23854,7 @@ Number input styles
     fill: $support-03;
   }
 
-  .#{$prefix}--number__invalid--warning path[data-icon-path='inner-path'] {
+  .#{$prefix}--number__invalid--warning path:first-of-type {
     opacity: 1;
     fill: $carbon__black-100;
   }
@@ -23957,6 +23997,7 @@ Number input styles
   - [text-01 [variable]](#text-01-variable)
   - [field-01 [variable]](#field-01-variable)
   - [ui-04 [variable]](#ui-04-variable)
+  - [disabled-01 [variable]](#disabled-01-variable)
   - [icon-01 [variable]](#icon-01-variable)
   - [support-01 [variable]](#support-01-variable)
   - [support-03 [variable]](#support-03-variable)
@@ -24334,26 +24375,13 @@ Pagination styles
 
 ```scss
 @mixin pagination() {
+  .#{$prefix}--data-table-container + .#{$prefix}--pagination {
+    border-top: 0;
+  }
+
   .#{$prefix}--pagination {
     @include reset;
     @include type-style('body-short-01');
-
-    @include carbon--breakpoint('md') {
-      overflow: initial;
-    }
-
-    // mobile friendly pagination
-    @include carbon--breakpoint-down('md') {
-      .#{$prefix}--pagination__left > *,
-      .#{$prefix}--pagination__right > * {
-        display: none;
-      }
-
-      .#{$prefix}--pagination__items-count,
-      .#{$prefix}--pagination__control-buttons {
-        display: initial;
-      }
-    }
 
     display: flex;
     align-items: center;
@@ -24365,53 +24393,69 @@ Pagination styles
     background-color: $ui-01;
     border-top: 1px solid $ui-03;
 
-    .#{$prefix}--data-table-container + & {
-      border-top: 0;
-    }
+    @include carbon--breakpoint('md') {
+      overflow: initial;
 
-    .#{$prefix}--pagination__control-buttons {
-      flex-shrink: 0;
-    }
-
-    .#{$prefix}--select {
-      align-items: center;
-      height: 100%;
-    }
-
-    .#{$prefix}--select-input {
-      @include type-style('body-short-01');
-
-      width: auto;
-      min-width: auto;
-      height: rem(48px);
-      padding: 0 2.25rem 0 $spacing-05;
-
-      &:hover {
-        background: $hover-ui;
-      }
-
-      &--inline__wrapper {
+      .#{$prefix}--pagination__control-buttons {
         display: flex;
-        height: 100%;
       }
     }
 
-    .#{$prefix}--select__arrow {
-      top: 50%;
-      transform: translate(-0.5rem, -50%);
-    }
+    // mobile friendly pagination
+    @include carbon--breakpoint-down('md') {
+      .#{$prefix}--pagination__left > *,
+      .#{$prefix}--pagination__right > * {
+        display: none;
+      }
 
-    .#{$prefix}--select__item-count {
-      .#{$prefix}--select-input {
-        border-right: $spacing-4xs solid $ui-03;
+      .#{$prefix}--pagination__items-count {
+        display: initial;
+      }
+
+      .#{$prefix}--pagination__control-buttons {
+        display: flex;
       }
     }
+  }
 
-    .#{$prefix}--select__page-number {
-      .#{$prefix}--select-input {
-        border-left: 1px solid $ui-03;
-      }
-    }
+  .#{$prefix}--pagination .#{$prefix}--select {
+    align-items: center;
+    height: 100%;
+  }
+
+  .#{$prefix}--pagination .#{$prefix}--select-input--inline__wrapper {
+    display: flex;
+    height: 100%;
+  }
+
+  .#{$prefix}--pagination .#{$prefix}--select-input {
+    @include type-style('body-short-01');
+
+    width: auto;
+    min-width: auto;
+    height: rem(48px);
+    padding: 0 2.25rem 0 $spacing-05;
+  }
+
+  .#{$prefix}--pagination .#{$prefix}--select-input:hover {
+    background: $hover-ui;
+  }
+
+  .#{$prefix}--pagination .#{$prefix}--select__arrow {
+    top: 50%;
+    transform: translate(-0.5rem, -50%);
+  }
+
+  .#{$prefix}--pagination
+    .#{$prefix}--select__item-count
+    .#{$prefix}--select-input {
+    border-right: $spacing-4xs solid $ui-03;
+  }
+
+  .#{$prefix}--pagination
+    .#{$prefix}--select__page-number
+    .#{$prefix}--select-input {
+    border-left: 1px solid $ui-03;
   }
 
   .#{$prefix}--pagination__left,
@@ -24419,13 +24463,32 @@ Pagination styles
     display: flex;
     align-items: center;
     height: rem(48px);
+  }
 
-    > .#{$prefix}--form-item {
-      height: 100%;
-    }
+  .#{$prefix}--pagination__left > .#{$prefix}--form-item,
+  .#{$prefix}--pagination__right > .#{$prefix}--form-item {
+    height: 100%;
+  }
 
-    .#{$prefix}--pagination__text {
-      white-space: nowrap;
+  .#{$prefix}--pagination__left .#{$prefix}--pagination__text,
+  .#{$prefix}--pagination__right .#{$prefix}--pagination__text {
+    white-space: nowrap;
+  }
+
+  .#{$prefix}--pagination__left .#{$prefix}--pagination__text {
+    margin-right: rem(1px);
+  }
+
+  .#{$prefix}--pagination__right .#{$prefix}--pagination__text {
+    margin-right: 1rem;
+    margin-left: rem(1px);
+  }
+
+  .#{$prefix}--pagination__left {
+    padding: 0 $carbon--spacing-05 0 0;
+
+    @include carbon--breakpoint('md') {
+      padding: 0 $carbon--spacing-05;
     }
   }
 
@@ -24433,30 +24496,11 @@ Pagination styles
     @include carbon--breakpoint('md') {
       display: inline-block;
     }
-
-    margin-left: $carbon--spacing-05;
-    overflow: hidden;
-    color: $text-02;
-    text-overflow: ellipsis;
-
-    .#{$prefix}--pagination__left & {
-      margin-right: rem(1px);
-    }
-
-    .#{$prefix}--pagination__right & {
-      margin-right: 1rem;
-      margin-left: rem(1px);
-    }
-
-    // Skeleton state
-    .#{$prefix}--pagination.#{$prefix}--skeleton & {
-      margin-right: 1rem;
-      margin-bottom: 0;
-    }
   }
 
-  .#{$prefix}--pagination__left {
-    padding: 0 $carbon--spacing-05;
+  span.#{$prefix}--pagination__text {
+    margin-left: $carbon--spacing-05;
+    color: $text-02;
   }
 
   .#{$prefix}--pagination__button,
@@ -24512,6 +24556,12 @@ Pagination styles
     border-color: $ui-03;
     cursor: not-allowed;
     fill: $disabled-02;
+  }
+
+  // Skeleton state
+  .#{$prefix}--pagination.#{$prefix}--skeleton .#{$prefix}--skeleton__text {
+    margin-right: 1rem;
+    margin-bottom: 0;
   }
 }
 ```
@@ -25506,7 +25556,7 @@ Search styles
 
   .#{$prefix}--search-input[disabled] {
     color: $disabled;
-    background-color: $disabled-background-color;
+    background-color: $disabled-01;
     border-bottom: 1px solid transparent;
     cursor: not-allowed;
 
@@ -25731,6 +25781,7 @@ Search styles
   - [text-01 [variable]](#text-01-variable)
   - [field-01 [variable]](#field-01-variable)
   - [ui-04 [variable]](#ui-04-variable)
+  - [disabled-01 [variable]](#disabled-01-variable)
   - [field-02 [variable]](#field-02-variable)
   - [spacing-07 [variable]](#spacing-07-variable)
   - [spacing-08 [variable]](#spacing-08-variable)
@@ -25819,8 +25870,8 @@ Select styles
     &:disabled,
     &:hover:disabled {
       color: $disabled-02;
-      background-color: $disabled-background-color;
-      border-bottom-color: $disabled-background-color;
+      background-color: $disabled-01;
+      border-bottom-color: $disabled-01;
       cursor: not-allowed;
     }
   }
@@ -25858,7 +25909,7 @@ Select styles
     &:disabled,
     &:hover:disabled {
       color: $disabled-02;
-      background-color: $disabled-background-color;
+      background-color: $disabled-01;
       cursor: not-allowed;
     }
   }
@@ -25947,7 +25998,7 @@ Select styles
 
   .#{$prefix}--select--inline .#{$prefix}--select-input[disabled],
   .#{$prefix}--select--inline .#{$prefix}--select-input[disabled]:hover {
-    background-color: $disabled-background-color;
+    background-color: $disabled-01;
   }
 
   .#{$prefix}--select--inline .#{$prefix}--select__arrow {
@@ -26001,6 +26052,7 @@ Select styles
   - [ui-04 [variable]](#ui-04-variable)
   - [hover-ui [variable]](#hover-ui-variable)
   - [disabled-02 [variable]](#disabled-02-variable)
+  - [disabled-01 [variable]](#disabled-01-variable)
   - [field-02 [variable]](#field-02-variable)
   - [ui-05 [variable]](#ui-05-variable)
   - [support-01 [variable]](#support-01-variable)
@@ -27646,7 +27698,7 @@ Text input styles
     .#{$prefix}--text-input__invalid-icon--warning {
       fill: $support-03;
 
-      path[data-icon-path='inner-path'] {
+      path:first-of-type {
         opacity: 1;
         fill: $carbon__black-100;
       }
@@ -27672,6 +27724,13 @@ Text input styles
 
       svg {
         fill: $icon-02;
+
+        // Windows, Firefox HCM Fix
+        @media screen and (-ms-high-contrast: active),
+          screen and (prefers-contrast) {
+          // `ButtonText` is a CSS2 system color to help improve colors in HCM
+          fill: ButtonText;
+        }
       }
     }
 
@@ -29244,6 +29303,7 @@ Tooltip styles
   }
 
   .#{$prefix}--tooltip {
+    @include box-shadow;
     @include reset;
 
     position: absolute;
@@ -29255,6 +29315,7 @@ Tooltip styles
     padding: $carbon--spacing-05;
     color: $inverse-01;
     word-wrap: break-word;
+    background: $inverse-02;
     border-radius: rem(2px);
 
     // Windows, Firefox HCM Fix
@@ -29268,6 +29329,58 @@ Tooltip styles
     &:focus {
       outline: 0;
       box-shadow: inset 0 0 0 1px $inverse-02, inset 0 0 0 2px $ui-background;
+    }
+
+    &.#{$prefix}--tooltip--top.#{$prefix}--tooltip--align-start,
+    &.#{$prefix}--tooltip--bottom.#{$prefix}--tooltip--align-start {
+      transform: translate(calc(50% - 22px), 0);
+
+      .#{$prefix}--tooltip__caret {
+        margin-left: 15px;
+      }
+    }
+
+    &.#{$prefix}--tooltip--top.#{$prefix}--tooltip--align-end,
+    &.#{$prefix}--tooltip--bottom.#{$prefix}--tooltip--align-end {
+      transform: translate(calc(22px - 50%), 0);
+
+      .#{$prefix}--tooltip__caret {
+        margin-right: 15px;
+      }
+    }
+
+    &.#{$prefix}--tooltip--left.#{$prefix}--tooltip--align-start {
+      transform: translate(0, calc(-15px + 50%));
+
+      .#{$prefix}--tooltip__caret {
+        top: 14px;
+      }
+    }
+
+    &.#{$prefix}--tooltip--left.#{$prefix}--tooltip--align-end {
+      transform: translate(0, calc(31px - 50%));
+
+      .#{$prefix}--tooltip__caret {
+        top: initial;
+        bottom: 25px;
+      }
+    }
+
+    &.#{$prefix}--tooltip--right.#{$prefix}--tooltip--align-start {
+      transform: translate(0, calc(-26px + 50%));
+
+      .#{$prefix}--tooltip__caret {
+        top: 26px;
+      }
+    }
+
+    &.#{$prefix}--tooltip--right.#{$prefix}--tooltip--align-end {
+      transform: translate(0, calc(20px - 50%));
+
+      .#{$prefix}--tooltip__caret {
+        top: initial;
+        bottom: 12px;
+      }
     }
 
     p {
@@ -29303,11 +29416,6 @@ Tooltip styles
       }
     }
 
-    .#{$prefix}--tooltip__content {
-      background-color: $inverse-02;
-      box-shadow: 0 0 0 $spacing-05 $inverse-02, 0 2px 6px $spacing-05 rgba(0, 0, 0, 0.2);
-    }
-
     // Tooltips need to be click focusable but not sequentially focusable so the user can click within
     // the tooltip and not have it close. Because the element is not actionable it does not need
     // to have a visible focus indicator (OK'd by IBMa)
@@ -29327,44 +29435,6 @@ Tooltip styles
       border-bottom: $caret-size solid $inverse-02;
       border-left: $caret-size solid transparent;
       content: '';
-    }
-
-    &.#{$prefix}--tooltip--top.#{$prefix}--tooltip--align-start,
-    &.#{$prefix}--tooltip--bottom.#{$prefix}--tooltip--align-start {
-      .#{$prefix}--tooltip__content {
-        transform: translate(calc(50% - 6px), 0);
-      }
-    }
-
-    &.#{$prefix}--tooltip--top.#{$prefix}--tooltip--align-end,
-    &.#{$prefix}--tooltip--bottom.#{$prefix}--tooltip--align-end {
-      .#{$prefix}--tooltip__content {
-        transform: translate(calc(6px - 50%), 0);
-      }
-    }
-
-    &.#{$prefix}--tooltip--left.#{$prefix}--tooltip--align-start {
-      .#{$prefix}--tooltip__content {
-        transform: translate(0, calc(9px + 50% - #{$spacing-03}));
-      }
-    }
-
-    &.#{$prefix}--tooltip--right.#{$prefix}--tooltip--align-start {
-      .#{$prefix}--tooltip__content {
-        transform: translate(0, calc(-3px + 50% - #{$spacing-03}));
-      }
-    }
-
-    &.#{$prefix}--tooltip--left.#{$prefix}--tooltip--align-end {
-      .#{$prefix}--tooltip__content {
-        transform: translate(0, calc(9px - 50% + #{$spacing-03}));
-      }
-    }
-
-    &.#{$prefix}--tooltip--right.#{$prefix}--tooltip--align-end {
-      .#{$prefix}--tooltip__content {
-        transform: translate(0, calc(-3px - 50% + #{$spacing-03}));
-      }
     }
 
     .#{$prefix}--tooltip__footer {
@@ -29588,7 +29658,6 @@ Tooltip styles
   - [carbon--spacing-07 [variable]](#carbon--spacing-07-variable)
   - [inverse-focus-ui [variable]](#inverse-focus-ui-variable)
   - [inverse-link [variable]](#inverse-link-variable)
-  - [spacing-05 [variable]](#spacing-05-variable)
   - [spacing-03 [variable]](#spacing-03-variable)
   - [interactive-04 [variable]](#interactive-04-variable)
 
