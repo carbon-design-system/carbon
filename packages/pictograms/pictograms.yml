@@ -3339,6 +3339,13 @@
   aliases:
     - robotics
     - manufacturing
+- name: rock-on
+  friendly_name: I love you / Rock-on
+  aliases:
+    - I love you
+    - Rock on
+    - ILY
+    - love
 - name: rome
   friendly_name: Rome
   aliases:
