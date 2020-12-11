@@ -3058,6 +3058,24 @@
     - Tower
     - city
     - cities
+- name: prague--dancing-house--01
+  friendly_name: Prague Dancing House 01
+  aliases:
+    - Prague Dancing House
+    - Prague
+    - Czech Republic
+    - Czechia
+    - city
+    - cities
+- name: prague--dancing-house--02
+  friendly_name: Prague Dancing House 02
+  aliases:
+    - Prague Dancing House
+    - Prague
+    - Czech Republic
+    - Czechia
+    - city
+    - cities
 - name: pregnant
   friendly_name: Pregnant
   aliases:
