@@ -18,15 +18,20 @@
     @include box-shadow;
 
     z-index: z('modal');
-    display: none;
+    // display: block;
     width: 13rem;
     padding: $spacing-02 0;
     background-color: $ui-01;
+    visibility: hidden;
+  }
+
+  .#{$prefix}--context-menu--root {
+    position: fixed;
   }
 
   .#{$prefix}--context-menu--open {
-    position: fixed;
-    display: block;
+    // display: block;
+    visibility: visible;
 
     &:focus {
       @include focus-outline('border');
@@ -38,11 +43,12 @@
     height: $spacing-07;
     background-color: $ui-01;
     transition: background-color $duration--fast-01 motion(standard, productive);
+  }
 
-    &:hover,
-    &:focus-within {
-      background-color: $hover-ui;
-    }
+  .#{$prefix}--context-menu-option--active,
+  .#{$prefix}--context-menu-option:hover,
+  .#{$prefix}--context-menu-option:focus-within {
+    background-color: $hover-ui;
   }
 
   .#{$prefix}--context-menu-option > .#{$prefix}--context-menu {
@@ -54,11 +60,6 @@
 
   .#{$prefix}--context-menu-option > .#{$prefix}--context-menu--reverse {
     left: -100%;
-  }
-
-  .#{$prefix}--context-menu-option:hover > .#{$prefix}--context-menu,
-  .#{$prefix}--context-menu-option:focus-within > .#{$prefix}--context-menu {
-    display: block;
   }
 
   .#{$prefix}--context-menu-option__content {

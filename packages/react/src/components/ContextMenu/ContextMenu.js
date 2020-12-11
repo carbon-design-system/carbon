@@ -12,6 +12,15 @@ import { settings } from 'carbon-components';
 import { keys, match } from '../../internal/keyboard';
 import ClickListener from '../../internal/ClickListener';
 
+import {
+  getValidNodes,
+  resetFocus,
+  focusNode as focusNodeUtil,
+  getNextNode,
+  getFirstSubNode,
+  getParentNode,
+} from './_utils';
+
 import ContextMenuSelectableOption from './ContextMenuSelectableOption';
 import ContextMenuRadioGroup from './ContextMenuRadioGroup';
 
@@ -30,77 +39,22 @@ const ContextMenu = function ContextMenu({
 }) {
   const rootRef = useRef(null);
   const [shouldReverse, setShouldReverse] = useState(false);
-  const isRootMenu = open !== undefined;
-
-  function resetFocus() {
-    Array.from(
-      rootRef?.current?.element.querySelectorAll('[tabindex="0"]') ?? []
-    ).forEach((node) => {
-      node.tabIndex = -1;
-    });
-  }
+  const isRootMenu = level === 1;
 
   function focusNode(node) {
     if (node) {
-      resetFocus();
-      node.tabIndex = 0;
-      node.focus();
+      resetFocus(rootRef?.current?.element);
+      focusNodeUtil(node);
     }
-  }
-
-  function getValidNodes(list) {
-    const nodes = Array.from(list?.childNodes ?? []).reduce((acc, child) => {
-      if (child.tagName === 'LI') {
-        return [...acc, child];
-      }
-
-      if (child.classList.contains(`${prefix}--context-menu-radio-group`)) {
-        return [...acc, ...child.childNodes];
-      }
-
-      return acc;
-    }, []);
-
-    return nodes.filter((node) =>
-      node.matches(
-        `li.${prefix}--context-menu-option:not(.${prefix}--context-menu-option--disabled)`
-      )
-    );
-  }
-
-  function getNextNode(current, direction) {
-    const nodes = getValidNodes(current.parentNode);
-    const currentIndex = nodes.indexOf(current);
-
-    const nextNode = nodes[currentIndex + direction];
-
-    return nextNode?.firstChild || null;
-  }
-
-  function getFirstSubNode(node) {
-    const submenu = node.querySelector(`ul.${prefix}--context-menu`);
-
-    if (submenu) {
-      const subnodes = getValidNodes(submenu);
-
-      return subnodes[0]?.firstChild || null;
-    }
-
-    return null;
-  }
-
-  function getParentNode(node) {
-    const parentNode = node.parentNode.closest(
-      `li.${prefix}--context-menu-option`
-    );
-
-    return parentNode?.firstChild || null;
   }
 
   function handleKeyDown(event) {
     event.stopPropagation();
 
-    if (match(event, keys.Escape)) {
+    if (
+      match(event, keys.Escape) ||
+      (!isRootMenu && match(event, keys.ArrowLeft))
+    ) {
       onClose();
     }
 
@@ -115,6 +69,7 @@ const ContextMenu = function ContextMenu({
         nodeToFocus = getNextNode(currentNode, 1);
       } else if (match(event, keys.ArrowRight)) {
         nodeToFocus = getFirstSubNode(currentNode);
+        console.log(nodeToFocus);
       } else if (match(event, keys.ArrowLeft)) {
         nodeToFocus = getParentNode(currentNode);
       }
@@ -175,7 +130,9 @@ const ContextMenu = function ContextMenu({
 
   useEffect(() => {
     if (open) {
-      rootRef?.current?.element?.focus();
+      if (isRootMenu) {
+        rootRef?.current?.element?.focus();
+      }
     }
 
     setShouldReverse(!willFit());
@@ -201,6 +158,7 @@ const ContextMenu = function ContextMenu({
   const classes = classnames(`${prefix}--context-menu`, {
     [`${prefix}--context-menu--open`]: open,
     [`${prefix}--context-menu--reverse`]: shouldReverse,
+    [`${prefix}--context-menu--root`]: isRootMenu,
   });
 
   return (

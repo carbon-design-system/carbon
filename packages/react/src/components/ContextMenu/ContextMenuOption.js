@@ -5,14 +5,20 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
 import { settings } from 'carbon-components';
 import { CaretRight16 } from '@carbon/icons-react';
+import { keys, match } from '../../internal/keyboard';
+
+import { getFirstSubNode, focusNode } from './_utils';
+
 import ContextMenu from './ContextMenu';
 
 const { prefix } = settings;
+
+const hoverIntentDelay = 150; // in ms
 
 function ContextMenuOptionContent({
   label,
@@ -58,14 +64,54 @@ function ContextMenuOption({
   menuX,
   ...rest
 }) {
+  const [submenuOpen, setSubmenuOpen] = useState(false);
+  const [submenuOpenedByKeyboard, setSubmenuOpenedByKeyboard] = useState(false);
+  const rootRef = useRef(null);
+  const hoverIntentTimeout = useRef(null);
+
   const subOptions = React.Children.map(children, (node) => {
     if (React.isValidElement(node)) {
       return React.cloneElement(node);
     }
   });
 
+  function openSubmenu(openedByKeyboard = false) {
+    setSubmenuOpenedByKeyboard(openedByKeyboard);
+    setSubmenuOpen(true);
+  }
+
+  function handleKeyDown(event) {
+    if (match(event, keys.ArrowRight)) {
+      openSubmenu(true);
+    }
+  }
+
+  function handleMouseEnter() {
+    hoverIntentTimeout.current = setTimeout(openSubmenu, hoverIntentDelay);
+  }
+
+  function handleMouseLeave(event) {
+    clearTimeout(hoverIntentTimeout?.current);
+
+    if (
+      submenuOpen &&
+      rootRef?.current?.parentNode.contains(event.relatedTarget)
+    ) {
+      setSubmenuOpen(false);
+    }
+  }
+
+  useEffect(() => {
+    if (subOptions && submenuOpenedByKeyboard) {
+      const firstSubnode = getFirstSubNode(rootRef?.current);
+      focusNode(firstSubnode);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [submenuOpen]);
+
   const classes = classnames(`${prefix}--context-menu-option`, {
     [`${prefix}--context-menu-option--disabled`]: disabled,
+    [`${prefix}--context-menu-option--active`]: subOptions && submenuOpen,
   });
 
   const allowedRoles = ['radio', 'checkbox'];
@@ -76,12 +122,18 @@ function ContextMenuOption({
     shortcut && shortcutText ? `${label}, ${shortcutText}` : label;
 
   return (
+    // role is either radio, checkbox, or menuitem which are all interactive
+    // eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions
     <li
       {...rest}
+      ref={rootRef}
       className={classes}
       role={role}
       aria-label={ariaLabel}
-      aria-disabled={!subOptions && disabled}>
+      aria-disabled={!subOptions && disabled}
+      onKeyDown={subOptions ? handleKeyDown : null}
+      onMouseEnter={subOptions ? handleMouseEnter : null}
+      onMouseLeave={subOptions ? handleMouseLeave : null}>
       {subOptions ? (
         <>
           <ContextMenuOptionContent
@@ -91,7 +143,13 @@ function ContextMenuOption({
             indented={indented}
             aria-haspopup
           />
-          <ContextMenu level={level + 1} x={menuX}>
+          <ContextMenu
+            level={level + 1}
+            x={menuX}
+            open={submenuOpen}
+            onClose={() => {
+              setSubmenuOpen(false);
+            }}>
             {subOptions}
           </ContextMenu>
         </>
