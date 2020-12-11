@@ -27,6 +27,10 @@
   .#{$prefix}--context-menu--open {
     position: fixed;
     display: block;
+
+    &:focus {
+      @include focus-outline('border');
+    }
   }
 
   .#{$prefix}--context-menu-option {

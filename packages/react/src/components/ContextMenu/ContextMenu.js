@@ -104,17 +104,28 @@ const ContextMenu = function ContextMenu({
       onClose();
     }
 
-    const currentNode = event.target.parentNode;
     let nodeToFocus;
 
-    if (match(event, keys.ArrowUp)) {
-      nodeToFocus = getNextNode(currentNode, -1);
-    } else if (match(event, keys.ArrowDown)) {
-      nodeToFocus = getNextNode(currentNode, 1);
-    } else if (match(event, keys.ArrowRight)) {
-      nodeToFocus = getFirstSubNode(currentNode);
-    } else if (match(event, keys.ArrowLeft)) {
-      nodeToFocus = getParentNode(currentNode);
+    if (event.target.tagName === 'BUTTON') {
+      const currentNode = event.target.parentNode;
+
+      if (match(event, keys.ArrowUp)) {
+        nodeToFocus = getNextNode(currentNode, -1);
+      } else if (match(event, keys.ArrowDown)) {
+        nodeToFocus = getNextNode(currentNode, 1);
+      } else if (match(event, keys.ArrowRight)) {
+        nodeToFocus = getFirstSubNode(currentNode);
+      } else if (match(event, keys.ArrowLeft)) {
+        nodeToFocus = getParentNode(currentNode);
+      }
+    } else if (event.target.tagName === 'UL') {
+      const validNodes = getValidNodes(event.target);
+
+      if (validNodes.length > 0 && match(event, keys.ArrowUp)) {
+        nodeToFocus = validNodes[validNodes.length - 1].firstChild;
+      } else if (validNodes.length > 0 && match(event, keys.ArrowDown)) {
+        nodeToFocus = validNodes[0].firstChild;
+      }
     }
 
     focusNode(nodeToFocus);
@@ -163,10 +174,8 @@ const ContextMenu = function ContextMenu({
   }
 
   useEffect(() => {
-    const topLevelNodes = getValidNodes(rootRef?.current?.element);
-
-    if (topLevelNodes && topLevelNodes.length > 0) {
-      focusNode(topLevelNodes[0].firstChild);
+    if (open) {
+      rootRef?.current?.element?.focus();
     }
 
     setShouldReverse(!willFit());
@@ -202,7 +211,8 @@ const ContextMenu = function ContextMenu({
         onClick={handleClick}
         data-level={level}
         style={isRootMenu ? { left: `${x}px`, top: `${y}px` } : null}
-        role="menu">
+        role="menu"
+        tabIndex={-1}>
         {options}
       </ul>
     </ClickListener>
