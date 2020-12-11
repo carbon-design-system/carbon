@@ -56,6 +56,19 @@
     color: $text-01;
   }
 
+  .#{$prefix}--multi-select--filterable .#{$prefix}--text-input {
+    padding-left: $spacing-03;
+  }
+
+  .#{$prefix}--multi-select--filterable:hover .#{$prefix}--text-input {
+    background-color: $hover-ui;
+  }
+
+  .#{$prefix}--multi-select--filterable.#{$prefix}--list-box--disabled:hover
+    .#{$prefix}--text-input {
+    background-color: $field-01;
+  }
+
   .#{$prefix}--multi-select--filterable {
     .#{$prefix}--list-box__selection--multi {
       margin: 0 0 0 $spacing-05;
