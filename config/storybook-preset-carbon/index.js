@@ -7,6 +7,20 @@
 
 'use strict';
 
+const path = require('path');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const customProperties = require('postcss-custom-properties');
+const rtlcss = require('rtlcss');
+
+const {
+  CARBON_REACT_STORYBOOK_USE_CUSTOM_PROPERTIES = 'false',
+  CARBON_REACT_STORYBOOK_USE_RTL,
+  NODE_ENV = 'development',
+} = process.env;
+
+const useExternalCss = NODE_ENV === 'production';
+const useRtl = CARBON_REACT_STORYBOOK_USE_RTL === 'true';
+
 module.exports = {
   addons: [
     '@storybook/addon-knobs',
@@ -16,16 +30,81 @@ module.exports = {
     '@storybook/addon-notes/register',
     'storybook-readme/register',
 
-    // Phase 1: port over add-ons from packages/react/.storybook
-    // Phase 2: port over webpack config for Sass
     // Phase 3: port over custom panels/add-ons
   ],
 
-  // We get the current config and we return the new webpack config
   webpack(config) {
-    // Configure sass
-    // sass-loader
-    // css-loader, style-loader, postcss-loader, ...
+    const sassLoader = {
+      loader: 'sass-loader',
+      options: {
+        prependData() {
+          return `
+            $feature-flags: (
+              ui-shell: true,
+              enable-css-custom-properties: ${CARBON_REACT_STORYBOOK_USE_CUSTOM_PROPERTIES},
+            );
+          `;
+        },
+        sassOptions: {
+          includePaths: [path.resolve(__dirname, '..', 'node_modules')],
+        },
+        sourceMap: true,
+      },
+    };
+
+    const fastSassLoader = {
+      loader: 'fast-sass-loader',
+      options: {
+        data: `
+          $feature-flags: (
+            ui-shell: true,
+            enable-css-custom-properties: ${CARBON_REACT_STORYBOOK_USE_CUSTOM_PROPERTIES},
+          );
+        `,
+      },
+    };
+
+    config.module.rules.push({
+      test: /\.scss$/,
+      sideEffects: true,
+      use: [
+        {
+          loader: useExternalCss ? MiniCssExtractPlugin.loader : 'style-loader',
+        },
+        {
+          loader: 'css-loader',
+          options: {
+            importLoaders: 2,
+            sourceMap: true,
+          },
+        },
+        {
+          loader: 'postcss-loader',
+          options: {
+            plugins: () => {
+              const autoPrefixer = require('autoprefixer')({
+                overrideBrowserslist: ['last 1 version', 'ie >= 11'],
+              });
+              return [
+                customProperties(),
+                autoPrefixer,
+                ...(useRtl ? [rtlcss] : []),
+              ];
+            },
+            sourceMap: true,
+          },
+        },
+        NODE_ENV === 'production' ? sassLoader : fastSassLoader,
+      ],
+    });
+
+    if (useExternalCss) {
+      config.plugins.push(
+        new MiniCssExtractPlugin({
+          filename: '[name].[contenthash].css',
+        })
+      );
+    }
 
     return config;
   },
