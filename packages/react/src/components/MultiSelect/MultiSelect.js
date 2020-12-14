@@ -316,7 +316,7 @@ MultiSelect.propTypes = {
   /**
    * If invalid, what is the error?
    */
-  invalidText: PropTypes.string,
+  invalidText: PropTypes.node,
 
   /**
    * Helper function passed to downshift that allows the library to render a
@@ -407,7 +407,7 @@ MultiSelect.propTypes = {
   /**
    * Provide the text that is displayed when the control is in warning state
    */
-  warnText: PropTypes.string,
+  warnText: PropTypes.node,
 };
 
 MultiSelect.defaultProps = {
