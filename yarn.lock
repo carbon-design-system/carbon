@@ -31804,6 +31804,8 @@ resolve@1.1.x:
     "@storybook/react": ^5.3.19
     "@storybook/source-loader": ^5.3.19
     storybook-readme: ^5.0.8
+  peerDependencies:
+    "@storybook/react": ^5.3.19
   languageName: unknown
   linkType: soft
 
