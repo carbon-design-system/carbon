@@ -7,8 +7,16 @@
 
 'use strict';
 
+// Install:
+// @storybook/addon-storysource
+// @storybook/source-loader
+
+// Addon
+// Add storysource to this config, remove from carbon's
+
 module.exports = {
   addons: [
+    '@storybook/addon-storysource',
     '@storybook/addon-knobs',
     '@storybook/addon-actions',
     '@storybook/addon-links',
@@ -26,6 +34,25 @@ module.exports = {
     // Configure sass
     // sass-loader
     // css-loader, style-loader, postcss-loader, ...
+    config.module.rules.push({
+      test: /-story\.jsx?$/,
+      loaders: [
+        {
+          loader: require.resolve('@storybook/source-loader'),
+          options: {
+            prettierConfig: {
+              parser: 'babylon',
+              printWidth: 80,
+              tabWidth: 2,
+              bracketSpacing: true,
+              trailingComma: 'es5',
+              singleQuote: true,
+            },
+          },
+        },
+      ],
+      enforce: 'pre',
+    });
 
     return config;
   },

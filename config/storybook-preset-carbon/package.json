@@ -17,6 +17,9 @@
     "components",
     "react"
   ],
+  "peerDependencies": {
+    "@storybook/react": "^5.3.19"
+  },
   "dependencies": {
     "@storybook/addon-actions": "^5.3.19",
     "@storybook/addon-docs": "^5.3.19",
@@ -25,7 +28,10 @@
     "@storybook/addon-notes": "^5.3.19",
     "@storybook/addon-storysource": "^5.3.19",
     "@storybook/addons": "^5.3.19",
-    "@storybook/react": "^5.3.19",
+    "@storybook/source-loader": "^5.3.19",
     "storybook-readme": "^5.0.8"
+  },
+  "devDependencies": {
+    "@storybook/react": "^5.3.19"
   }
 }

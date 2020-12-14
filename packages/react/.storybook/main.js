@@ -9,8 +9,6 @@
 
 module.exports = {
   addons: [
-    '@storybook/addon-storysource',
-
     'storybook-preset-carbon',
     require.resolve('./addon-carbon-theme/register'),
   ],
