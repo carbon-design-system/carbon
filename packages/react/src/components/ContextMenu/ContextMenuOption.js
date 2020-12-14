@@ -12,7 +12,7 @@ import { settings } from 'carbon-components';
 import { CaretRight16 } from '@carbon/icons-react';
 import { keys, match } from '../../internal/keyboard';
 
-import { getFirstSubNode, focusNode } from './_utils';
+import { getFirstSubNode, focusNode, getParentMenu } from './_utils';
 
 import ContextMenu from './ContextMenu';
 
@@ -61,7 +61,6 @@ function ContextMenuOption({
   renderIcon,
   indented,
   level,
-  menuX,
   ...rest
 }) {
   const [submenuOpen, setSubmenuOpen] = useState(false);
@@ -90,15 +89,28 @@ function ContextMenuOption({
     hoverIntentTimeout.current = setTimeout(openSubmenu, hoverIntentDelay);
   }
 
-  function handleMouseLeave(event) {
+  function handleMouseLeave() {
     clearTimeout(hoverIntentTimeout?.current);
 
-    if (
-      submenuOpen &&
-      rootRef?.current?.parentNode.contains(event.relatedTarget)
-    ) {
-      setSubmenuOpen(false);
+    setSubmenuOpen(false);
+  }
+
+  function getSubmenuPosition() {
+    const pos = [0, 0];
+
+    if (subOptions) {
+      const parentMenu = getParentMenu(rootRef?.current);
+
+      if (parentMenu) {
+        const { x, width } = parentMenu.getBoundingClientRect();
+        const { y } = rootRef.current.getBoundingClientRect();
+
+        pos[0] = x + width;
+        pos[1] = y;
+      }
     }
+
+    return pos;
   }
 
   useEffect(() => {
@@ -120,6 +132,8 @@ function ContextMenuOption({
 
   const ariaLabel =
     shortcut && shortcutText ? `${label}, ${shortcutText}` : label;
+
+  const submenuPosition = getSubmenuPosition();
 
   return (
     // role is either radio, checkbox, or menuitem which are all interactive
@@ -145,11 +159,12 @@ function ContextMenuOption({
           />
           <ContextMenu
             level={level + 1}
-            x={menuX}
             open={submenuOpen}
             onClose={() => {
               setSubmenuOpen(false);
-            }}>
+            }}
+            x={submenuPosition[0]}
+            y={submenuPosition[1]}>
             {subOptions}
           </ContextMenu>
         </>
@@ -225,12 +240,6 @@ ContextMenuOption.propTypes = {
    * Is automatically set by ContextMenu
    */
   level: PropTypes.number,
-
-  /**
-   * The x position of the root menu.
-   * Is automatically set by ContextMenu
-   */
-  menuX: PropTypes.number,
 
   /**
    * Rendered icon for the ContextMenuOption.

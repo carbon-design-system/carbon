@@ -867,9 +867,6 @@ Map {
         "level": Object {
           "type": "number",
         },
-        "menuX": Object {
-          "type": "number",
-        },
         "renderIcon": Object {
           "args": Array [
             Array [
@@ -965,9 +962,6 @@ Map {
         "type": "node",
       },
       "level": Object {
-        "type": "number",
-      },
-      "menuX": Object {
         "type": "number",
       },
       "renderIcon": Object {

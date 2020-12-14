@@ -59,9 +59,23 @@ export function getFirstSubNode(node) {
 }
 
 export function getParentNode(node) {
-  const parentNode = node.parentNode.closest(
-    `li.${prefix}--context-menu-option`
-  );
+  if (node) {
+    const parentNode = node.parentNode.closest(
+      `li.${prefix}--context-menu-option`
+    );
 
-  return parentNode?.firstChild || null;
+    return parentNode?.firstChild || null;
+  }
+
+  return null;
+}
+
+export function getParentMenu(el) {
+  if (el) {
+    const parentMenu = el.parentNode.closest(`ul.${prefix}--context-menu`);
+
+    return parentMenu || null;
+  }
+
+  return null;
 }

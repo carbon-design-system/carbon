@@ -46,7 +46,7 @@ export const _ContextMenu = () => {
   });
 
   return (
-    <>
+    <div style={{ height: 'calc(100vh - 6.25rem)' }}>
       <InlineNotification
         kind="info"
         title="Context menu"
@@ -118,7 +118,7 @@ export const _ContextMenu = () => {
           onClick={action('onClick')}
         />
       </ContextMenu>
-    </>
+    </div>
   );
 };
 
