@@ -13,6 +13,8 @@ module.exports = {
     '@storybook/addon-actions',
     '@storybook/addon-links',
     '@storybook/addon-docs',
+    '@storybook/addon-notes/register',
+    'storybook-readme/register',
 
     // Phase 1: port over add-ons from packages/react/.storybook
     // Phase 2: port over webpack config for Sass
