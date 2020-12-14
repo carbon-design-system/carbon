@@ -20837,12 +20837,6 @@ File uploader styles
       margin: 0;
     }
 
-    .#{$prefix}--loading {
-      width: rem(32px);
-      height: rem(32px);
-      margin-right: -$carbon--spacing-03;
-    }
-
     .#{$prefix}--inline-loading__animation .#{$prefix}--loading {
       // Vanilla markup has `.bx--inline-loading__animation` which is used for `margin-right` adjustment
       margin-right: 0;
@@ -22421,7 +22415,7 @@ Loading styles
   }
 
   .#{$prefix}--loading__svg circle {
-    stroke-width: 8;
+    stroke-width: 10;
     stroke-linecap: butt;
     stroke-dasharray: 240;
   }
@@ -22440,10 +22434,11 @@ Loading styles
   }
 
   .#{$prefix}--loading--small {
-    width: 2rem;
-    height: 2rem;
+    width: rem(16px);
+    height: rem(16px);
+
     circle {
-      stroke-width: 12;
+      stroke-width: 16;
     }
   }
 
@@ -22453,7 +22448,7 @@ Loading styles
 
   .#{$prefix}--loading__background {
     stroke: $ui-03;
-    stroke-dashoffset: 0;
+    stroke-dashoffset: -22;
   }
 
   .#{$prefix}--loading-overlay {
@@ -22553,7 +22548,7 @@ Loading styles
 <summary>Source code</summary>
 
 ```scss
-$loading__gap: 40;
+$loading__gap: 16;
 ```
 
 </details>
@@ -22569,7 +22564,7 @@ $loading__gap: 40;
 <summary>Source code</summary>
 
 ```scss
-$loading--small__gap: 99;
+$loading--small__gap: 25;
 ```
 
 </details>
@@ -22586,7 +22581,7 @@ $loading--small__gap: 99;
 <summary>Source code</summary>
 
 ```scss
-$loading__size: 10.5rem;
+$loading__size: 5.5rem;
 ```
 
 </details>
