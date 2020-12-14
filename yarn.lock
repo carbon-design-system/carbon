@@ -2979,6 +2979,14 @@ __metadata:
   languageName: unknown
   linkType: soft
 
+"@carbon/utility-css@workspace:packages/utility-css":
+  version: 0.0.0-use.local
+  resolution: "@carbon/utility-css@workspace:packages/utility-css"
+  dependencies:
+    "@carbon/themes": ^10.24.0
+  languageName: unknown
+  linkType: soft
+
 "@chromaui/localtunnel@npm:1.10.1":
   version: 1.10.1
   resolution: "@chromaui/localtunnel@npm:1.10.1"

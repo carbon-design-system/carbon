@@ -3,6 +3,6 @@
   "private": true,
   "version": "0.0.0",
   "dependencies": {
-    "@carbon/themes": "10.22.1"
+    "@carbon/themes": "^10.24.0"
   }
 }
