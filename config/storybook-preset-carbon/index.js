@@ -7,13 +7,6 @@
 
 'use strict';
 
-// Install:
-// @storybook/addon-storysource
-// @storybook/source-loader
-
-// Addon
-// Add storysource to this config, remove from carbon's
-
 module.exports = {
   addons: [
     '@storybook/addon-storysource',
@@ -24,12 +17,10 @@ module.exports = {
     '@storybook/addon-notes/register',
     'storybook-readme/register',
 
-    // Phase 1: port over add-ons from packages/react/.storybook
     // Phase 2: port over webpack config for Sass
     // Phase 3: port over custom panels/add-ons
   ],
 
-  // We get the current config and we return the new webpack config
   webpack(config) {
     // Configure sass
     // sass-loader
