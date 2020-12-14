@@ -2773,6 +2773,18 @@
     - Brooklyn
     - city
     - cities
+- name: nyc--chrysler-building
+  friendly_name: NYC Chrysler Building
+  aliases:
+    - NYC Chrysler Building
+    - New York City
+    - NYC
+    - landmark
+    - building
+    - skyscraper
+    - city
+    - cities
+    - architecture
 - name: nyc--manhattan--01
   friendly_name: NYC Manhattan 01
   aliases:
@@ -2801,6 +2813,18 @@
     - Liberty
     - city
     - cities
+- name: nyc--world-trade-center
+  friendly_name: NYC World Trade Center
+  aliases:
+    - NYC World Trade Center
+    - New York City
+    - NYC
+    - landmark
+    - building
+    - skyscraper
+    - city
+    - cities
+    - architecture
 - name: office
   friendly_name: Office
   aliases:
