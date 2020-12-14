@@ -262,10 +262,6 @@
     &:focus {
       @include focus-outline('outline');
     }
-
-    > * {
-      @include type-style('body-long-01');
-    }
   }
 
   // Required so overflow-indicator disappears at end of content
@@ -322,6 +318,14 @@
     }
   }
 
+  .#{$prefix}--modal-footer button.#{$prefix}--btn:focus {
+    // Firefox HCM Fix
+    @media screen and (prefers-contrast) {
+      border: none;
+      outline-style: dotted;
+    }
+  }
+
   .#{$prefix}--modal-close {
     position: absolute;
     top: 0;
@@ -342,6 +346,11 @@
     &:focus {
       border-color: $focus;
       outline: none;
+
+      // Firefox HCM Fix
+      @media screen and (prefers-contrast) {
+        border-style: dotted;
+      }
     }
   }
 

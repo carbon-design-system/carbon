@@ -3,6 +3,7 @@
 **/examples/**
 **/vendor/**
 **/_inlined/**
+**/coverage/**
 
 # Generated SCSS directories and files
 **/packages/colors/**/*.scss

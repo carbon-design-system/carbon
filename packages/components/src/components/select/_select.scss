@@ -27,12 +27,14 @@
     display: flex;
     flex-direction: column;
     align-items: flex-start;
+    width: 100%;
   }
 
   .#{$prefix}--select-input__wrapper {
     position: relative;
     display: flex;
     align-items: center;
+    width: 100%;
   }
 
   .#{$prefix}--select-input {
@@ -40,10 +42,7 @@
     @include focus-outline('reset');
 
     display: block;
-    width: rem(224px);
-    min-width: rem(128px);
-    max-width: rem(448px);
-
+    width: 100%;
     height: rem(40px);
     padding: 0 $spacing-09 0 $spacing-05;
     color: $text-01;
@@ -81,20 +80,13 @@
       @include focus-outline('outline');
 
       color: $text-01;
-
-      // Windows, Firefox HCM Fix
-      @media screen and (-ms-high-contrast: active),
-        screen and (prefers-contrast) {
-        outline: 3px solid transparent;
-        outline-offset: -3px;
-      }
     }
 
     &:disabled,
     &:hover:disabled {
       color: $disabled-02;
-      background-color: $disabled-background-color;
-      border-bottom-color: $disabled-background-color;
+      background-color: $disabled-01;
+      border-bottom-color: $disabled-01;
       cursor: not-allowed;
     }
   }
@@ -132,7 +124,7 @@
     &:disabled,
     &:hover:disabled {
       color: $disabled-02;
-      background-color: $disabled-background-color;
+      background-color: $disabled-01;
       cursor: not-allowed;
     }
   }
@@ -211,6 +203,7 @@
   }
 
   .#{$prefix}--select--inline .#{$prefix}--select-input {
+    width: auto;
     padding-right: $spacing-07;
     padding-left: $carbon--spacing-03;
     color: $text-01;
@@ -220,7 +213,7 @@
 
   .#{$prefix}--select--inline .#{$prefix}--select-input[disabled],
   .#{$prefix}--select--inline .#{$prefix}--select-input[disabled]:hover {
-    background-color: $disabled-background-color;
+    background-color: $disabled-01;
   }
 
   .#{$prefix}--select--inline .#{$prefix}--select__arrow {
