@@ -263,7 +263,7 @@ Dropdown.propTypes = {
   /**
    * Message which is displayed if the value is invalid.
    */
-  invalidText: PropTypes.string,
+  invalidText: PropTypes.node,
 
   /**
    * Function to render items as custom components instead of strings.
@@ -335,7 +335,7 @@ Dropdown.propTypes = {
   /**
    * Provide the text that is displayed when the control is in warning state
    */
-  warnText: PropTypes.string,
+  warnText: PropTypes.node,
 };
 
 Dropdown.defaultProps = {
