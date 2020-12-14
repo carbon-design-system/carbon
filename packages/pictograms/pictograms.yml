@@ -1055,6 +1055,13 @@
     - concept
     - insights
     - watson
+- name: condition--builder
+  friendly_name: Condition builder
+  aliases: 
+    - condition builder
+    - if
+    - condition
+    - code
 - name: connect
   friendly_name: Connect
   aliases:
@@ -1638,6 +1645,12 @@
     - file
     - transfer
     - move
+- name: filter--variable
+  friendly_name: Filter variable
+  aliases:
+    - filter variable
+    - variable
+    - define variable
 - name: finance--strategy
   friendly_name: Finance strategy
   aliases:
@@ -3082,6 +3095,24 @@
     - Tower
     - city
     - cities
+- name: prague--dancing-house--01
+  friendly_name: Prague Dancing House 01
+  aliases:
+    - Prague Dancing House
+    - Prague
+    - Czech Republic
+    - Czechia
+    - city
+    - cities
+- name: prague--dancing-house--02
+  friendly_name: Prague Dancing House 02
+  aliases:
+    - Prague Dancing House
+    - Prague
+    - Czech Republic
+    - Czechia
+    - city
+    - cities
 - name: pregnant
   friendly_name: Pregnant
   aliases:
@@ -3232,6 +3263,12 @@
     - Raleigh
     - city
     - cities
+- name: random--samples
+  friendly_name: Random samples
+  aliases: 
+    - random samples
+    - random
+    - dice
 - name: rank
   friendly_name: Rank
   aliases:
@@ -3363,6 +3400,13 @@
   aliases:
     - robotics
     - manufacturing
+- name: rock-on
+  friendly_name: I love you / Rock-on
+  aliases:
+    - I love you
+    - Rock on
+    - ILY
+    - love
 - name: rome
   friendly_name: Rome
   aliases:
@@ -3430,6 +3474,7 @@
     - matrix
     - chart
     - data analytics
+    - data visualization
     - data
     - analytics
 - name: seattle
@@ -3446,6 +3491,7 @@
     - data
     - data analytics
     - analytics
+    - security
 - name: secure--hybrid--cloud
   friendly_name: Secure Hybrid Cloud
   aliases:
@@ -3484,10 +3530,18 @@
     - security
     - intelligence
 - name: security--shield
-  friendly_name: Security shield
+  friendly_name: IBM Security™
   aliases:
+    - IBM
     - security
     - shield
+- name: select--range
+  friendly_name: Select range
+  aliases:
+    - select range
+    - select
+    - range
+    - multiline select
 - name: server--rack
   friendly_name: Server rack
   aliases:
