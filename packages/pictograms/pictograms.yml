@@ -3450,6 +3450,7 @@
     - matrix
     - chart
     - data analytics
+    - data visualization
     - data
     - analytics
 - name: seattle
@@ -3466,6 +3467,7 @@
     - data
     - data analytics
     - analytics
+    - security
 - name: secure--hybrid--cloud
   friendly_name: Secure Hybrid Cloud
   aliases:
@@ -3504,8 +3506,9 @@
     - security
     - intelligence
 - name: security--shield
-  friendly_name: Security shield
+  friendly_name: IBM Security™
   aliases:
+    - IBM
     - security
     - shield
 - name: select--range
