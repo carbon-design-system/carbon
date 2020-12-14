@@ -62,7 +62,7 @@ export default class FilterableMultiSelect extends React.Component {
     /**
      * If invalid, what is the error?
      */
-    invalidText: PropTypes.string,
+    invalidText: PropTypes.node,
 
     /**
      * Helper function passed to downshift that allows the library to render a
@@ -144,7 +144,7 @@ export default class FilterableMultiSelect extends React.Component {
     /**
      * Provide the text that is displayed when the control is in warning state
      */
-    warnText: PropTypes.string,
+    warnText: PropTypes.node,
   };
 
   static getDerivedStateFromProps({ open }, state) {

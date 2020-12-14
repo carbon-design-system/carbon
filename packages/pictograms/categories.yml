@@ -92,6 +92,8 @@ categories:
       - paris--notre-dame
       - paris--pompidou-center
       - prague--charles-bridge-tower
+      - prague--dancing-house--01
+      - prague--dancing-house--02
       #    - portland
       - raleigh-nc
       - rome
@@ -135,6 +137,7 @@ categories:
       - cloud--strategy
       - cloud--tutorials
       - cloud--vmware
+      - condition--builder
       - cognos--analytics
       - construct
       - devops
@@ -142,6 +145,7 @@ categories:
       - docker
       - expand--horz
       - expand--vert
+      - filter--variable
       - free--trial
       - global--business--services
       - global--technology--services
@@ -156,7 +160,9 @@ categories:
       - mas
       - mqa
       - planning--analytics
+      - random--samples
       - saas--enablement
+      - select--range
       - single--sign-on
       - softlayer--enablement
   - name: Controls
@@ -449,6 +455,7 @@ categories:
       - flower--02
       - perfume
       - racetrack
+      - rock-on
       - scale
       - soft--ice--cream
       - sports
