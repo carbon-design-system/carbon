@@ -137,6 +137,7 @@ categories:
       - cloud--strategy
       - cloud--tutorials
       - cloud--vmware
+      - condition--builder
       - cognos--analytics
       - construct
       - devops
@@ -144,6 +145,7 @@ categories:
       - docker
       - expand--horz
       - expand--vert
+      - filter--variable
       - free--trial
       - global--business--services
       - global--technology--services
@@ -158,7 +160,9 @@ categories:
       - mas
       - mqa
       - planning--analytics
+      - random--samples
       - saas--enablement
+      - select--range
       - single--sign-on
       - softlayer--enablement
   - name: Controls
