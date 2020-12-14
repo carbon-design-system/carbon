@@ -1055,6 +1055,13 @@
     - concept
     - insights
     - watson
+- name: condition--builder
+  friendly_name: Condition builder
+  aliases: 
+    - condition builder
+    - if
+    - condition
+    - code
 - name: connect
   friendly_name: Connect
   aliases:
@@ -1638,6 +1645,12 @@
     - file
     - transfer
     - move
+- name: filter--variable
+  friendly_name: Filter variable
+  aliases:
+    - filter variable
+    - variable
+    - define variable
 - name: finance--strategy
   friendly_name: Finance strategy
   aliases:
@@ -3226,6 +3239,12 @@
     - Raleigh
     - city
     - cities
+- name: random--samples
+  friendly_name: Random samples
+  aliases: 
+    - random samples
+    - random
+    - dice
 - name: rank
   friendly_name: Rank
   aliases:
@@ -3489,6 +3508,13 @@
   aliases:
     - security
     - shield
+- name: select--range
+  friendly_name: Select range
+  aliases:
+    - select range
+    - select
+    - range
+    - multiline select
 - name: server--rack
   friendly_name: Server rack
   aliases:
