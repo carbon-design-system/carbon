@@ -332,7 +332,7 @@ class Tooltip extends Component {
         this._handleUserInputOpenClose(evt, { open: true });
       }
       this._tooltipDismissed = false;
-    } else {
+    } else if (state !== 'out') {
       // Note: SVGElement in IE11 does not have `.contains()`
       const { current: triggerEl } = this._triggerRef;
       const shouldPreventClose =
