@@ -188,8 +188,6 @@ function createSVGArtboards(
           });
         }
 
-        shape.style.borders = [];
-
         for (const layer of transparent) {
           layer.remove();
         }
