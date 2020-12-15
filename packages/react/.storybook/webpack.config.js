@@ -74,26 +74,6 @@ module.exports = ({ config, mode }) => {
     },
   });
 
-  config.module.rules.push({
-    test: /-story\.jsx?$/,
-    loaders: [
-      {
-        loader: require.resolve('@storybook/source-loader'),
-        options: {
-          prettierConfig: {
-            parser: 'babylon',
-            printWidth: 80,
-            tabWidth: 2,
-            bracketSpacing: true,
-            trailingComma: 'es5',
-            singleQuote: true,
-          },
-        },
-      },
-    ],
-    enforce: 'pre',
-  });
-
   const sassLoader = {
     loader: 'sass-loader',
     options: {
