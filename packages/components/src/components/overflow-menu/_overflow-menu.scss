@@ -306,7 +306,7 @@
   .#{$prefix}--overflow-menu-options__option--danger
     .#{$prefix}--overflow-menu-options__btn:focus {
     color: $text-04;
-    background-color: $danger;
+    background-color: $danger-01;
 
     svg {
       fill: currentColor;
