@@ -145,7 +145,7 @@ function ExampleDropContainerApp(props) {
     [files, props.multiple]
   );
   const handleFileUploaderItemClick = useCallback(
-    (evt, { uuid: clickedUuid }) =>
+    (_, { uuid: clickedUuid }) =>
       setFiles(files.filter(({ uuid }) => clickedUuid !== uuid)),
     [files]
   );
