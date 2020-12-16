@@ -163,7 +163,7 @@ $list-box-menu-width: rem(300px);
 
   // Disabled state for `list-box`
   .#{$prefix}--list-box--disabled:hover {
-    background-color: $field-01;
+    background-color: $disabled-01;
   }
 
   .#{$prefix}--list-box--light.#{$prefix}--list-box--disabled {
@@ -173,6 +173,7 @@ $list-box-menu-width: rem(300px);
   .#{$prefix}--list-box--disabled,
   .#{$prefix}--list-box--disabled .#{$prefix}--list-box__field,
   .#{$prefix}--list-box--disabled .#{$prefix}--list-box__field:focus {
+    background-color: $disabled-01;
     border-bottom-color: transparent;
     outline: none;
   }

@@ -21702,7 +21702,7 @@ List box styles
 
   // Disabled state for `list-box`
   .#{$prefix}--list-box--disabled:hover {
-    background-color: $field-01;
+    background-color: $disabled-01;
   }
 
   .#{$prefix}--list-box--light.#{$prefix}--list-box--disabled {
@@ -21712,6 +21712,7 @@ List box styles
   .#{$prefix}--list-box--disabled,
   .#{$prefix}--list-box--disabled .#{$prefix}--list-box__field,
   .#{$prefix}--list-box--disabled .#{$prefix}--list-box__field:focus {
+    background-color: $disabled-01;
     border-bottom-color: transparent;
     outline: none;
   }
@@ -22375,6 +22376,7 @@ List box styles
   - [support-01 [variable]](#support-01-variable)
   - [support-03 [variable]](#support-03-variable)
   - [decorative-01 [variable]](#decorative-01-variable)
+  - [disabled-01 [variable]](#disabled-01-variable)
   - [disabled-02 [variable]](#disabled-02-variable)
   - [carbon--spacing-09 [variable]](#carbon--spacing-09-variable)
   - [carbon--spacing-03 [variable]](#carbon--spacing-03-variable)
@@ -22385,7 +22387,6 @@ List box styles
   - [inverse-01 [variable]](#inverse-01-variable)
   - [inverse-02 [variable]](#inverse-02-variable)
   - [hover-secondary [variable]](#hover-secondary-variable)
-  - [disabled-01 [variable]](#disabled-01-variable)
   - [ui-01 [variable]](#ui-01-variable)
   - [text-02 [variable]](#text-02-variable)
   - [selected-ui [variable]](#selected-ui-variable)
