@@ -74,10 +74,10 @@ const props = {
       ''
     );
     return {
-      labelTitle: text('The label title (labelTitle)', 'Upload'),
+      labelTitle: text('The label title (labelTitle)', 'Upload file'),
       labelDescription: text(
         'The label description (labelDescription)',
-        'only .jpg files at 500mb or less'
+        'Max file size is 500mb. Only .jpg files are supported.'
       ),
       buttonLabel: text('The button label (buttonLabel)', 'Add files'),
       buttonKind: buttonKind || 'primary',

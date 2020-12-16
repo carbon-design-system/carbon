@@ -126,9 +126,9 @@ const ExampleDropContainerApp = (props) => {
   );
   return (
     <FormItem>
-      <strong className={`${prefix}--file--label`}>Account photo</strong>
+      <strong className={`${prefix}--file--label`}>Upload files</strong>
       <p className={`${prefix}--label-description`}>
-        Only .jpg and .png files. 500kb max file size
+        Max file size is 500kb. Supported file types are .jpg and .png.
       </p>
       <FileUploaderDropContainer {...props} onAddFiles={onAddFiles} />
       <div className={`${prefix}--file-container`} style={{ width: '100%' }}>
