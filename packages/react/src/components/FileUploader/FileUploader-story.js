@@ -157,20 +157,6 @@ export default {
   },
 };
 
-export const _FileUploaderButton = () => (
-  <FileUploaderButton {...props.fileUploaderButton()} />
-);
-
-_FileUploaderButton.storyName = 'FileUploaderButton';
-
-_FileUploaderButton.parameters = {
-  info: {
-    text: `
-        The FileUploaderButton can be used as a standalone component if you do not need the extra UI that comes with FileUploader. The FileUploaderButton is used in FileUploader.
-      `,
-  },
-};
-
 export const _FileUploader = () => {
   return (
     <div className={`${prefix}--file__container`}>
