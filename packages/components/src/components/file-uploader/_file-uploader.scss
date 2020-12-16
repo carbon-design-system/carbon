@@ -263,8 +263,10 @@
 
   .#{$prefix}--file__state-container .#{$prefix}--file-close {
     display: flex;
-    width: $carbon--spacing-05;
-    height: $carbon--spacing-05;
+    align-items: center;
+    justify-content: center;
+    width: $carbon--spacing-06;
+    height: $carbon--spacing-06;
     padding: 0;
     background-color: transparent;
     border: none;
@@ -272,7 +274,7 @@
     fill: $icon-01;
 
     &:focus {
-      @include focus-outline('border');
+      @include focus-outline('outline');
     }
   }
 
