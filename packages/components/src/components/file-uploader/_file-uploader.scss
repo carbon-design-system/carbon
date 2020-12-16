@@ -36,6 +36,10 @@
     color: $text-01;
   }
 
+  .#{$prefix}--file--label--disabled {
+    color: $disabled-02;
+  }
+
   .#{$prefix}--file-input {
     @include hidden;
   }
@@ -100,6 +104,10 @@
 
     margin-bottom: $carbon--spacing-05;
     color: $text-02;
+  }
+
+  .#{$prefix}--label-description--disabled {
+    color: $disabled-02;
   }
 
   // For backwards compatibility
