@@ -25,7 +25,7 @@ export default {
 
 const props = () => ({
   type: select(
-    'Type',
+    'Type (type)',
     {
       inline: 'inline',
       'single line': 'single',
@@ -34,15 +34,15 @@ const props = () => ({
     'inline'
   ),
   disabled: boolean('Disabled (disabled)', false),
-  light: boolean('Light variant', false),
+  light: boolean('Light variant (light)', false),
   feedback: text('Feedback text', 'Copied to clipboard'),
   showMoreText: text('Text for "show more" button', 'Show more'),
   showLessText: text('Text for "show less" button', 'Show less'),
-  hideCopyButton: boolean('Hide copy button', false),
+  hideCopyButton: boolean('Hide copy button (hideCopyButton)', false),
   onClick: action('onClick'),
   copyButtonDescription: text('Copy button title', 'Copy code snippet'),
   ariaLabel: text('ARIA label', 'Container label'),
-  wrapText: boolean('Wrap text', true),
+  wrapText: boolean('Wrap text (wrapText)', true),
 });
 
 export const inline = () => (
