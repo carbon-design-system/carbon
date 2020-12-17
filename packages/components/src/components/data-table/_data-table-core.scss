@@ -292,8 +292,26 @@
 
   .#{$prefix}--data-table thead th.#{$prefix}--table-expand,
   .#{$prefix}--data-table tbody td.#{$prefix}--table-expand {
-    // 16px padding left + 16px checkbox width
+    width: rem(48px);
+    height: rem(48px);
+  }
+
+  .#{$prefix}--data-table--compact thead th.#{$prefix}--table-expand,
+  .#{$prefix}--data-table--compact tbody td.#{$prefix}--table-expand {
+    width: rem(24px);
+    height: rem(24px);
+  }
+
+  .#{$prefix}--data-table--short thead th.#{$prefix}--table-expand,
+  .#{$prefix}--data-table--short tbody td.#{$prefix}--table-expand {
     width: rem(32px);
+    height: rem(32px);
+  }
+
+  .#{$prefix}--data-table--tall thead th.#{$prefix}--table-expand,
+  .#{$prefix}--data-table--tall tbody td.#{$prefix}--table-expand {
+    width: rem(64px);
+    height: rem(64px);
   }
 
   .#{$prefix}--data-table--tall .#{$prefix}--table-column-checkbox {
