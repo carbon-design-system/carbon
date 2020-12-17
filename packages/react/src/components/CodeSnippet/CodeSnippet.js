@@ -147,7 +147,7 @@ function CodeSnippet({
       <div
         ref={codeContainerRef}
         role={type === 'single' ? 'textbox' : null}
-        tabIndex={type === 'single' ? 0 : null}
+        tabIndex={type === 'single' && !disabled ? 0 : null}
         className={`${prefix}--snippet-container`}
         aria-label={ariaLabel || copyLabel || 'code-snippet'}
         onScroll={(type === 'single' && handleScroll) || null}>
