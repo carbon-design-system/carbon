@@ -128,7 +128,7 @@
     display: grid;
     grid-auto-rows: auto;
     grid-template-columns: 1fr auto;
-    gap: rem(14px) $carbon--spacing-05;
+    gap: rem(12px) $carbon--spacing-05;
     align-items: center;
     max-width: rem(320px);
     min-height: $carbon--spacing-09;
@@ -169,12 +169,12 @@
   }
 
   .#{$prefix}--file__selected-file--field {
-    gap: rem(11px) $carbon--spacing-05;
+    gap: $carbon--spacing-03 $carbon--spacing-05;
     min-height: rem(40px);
   }
 
   .#{$prefix}--file__selected-file--sm {
-    gap: rem(7px) $carbon--spacing-05;
+    gap: $carbon--spacing-02 $carbon--spacing-05;
     min-height: rem(32px);
   }
 
@@ -191,15 +191,15 @@
   .#{$prefix}--file__selected-file--invalid {
     @include focus-outline('invalid');
 
-    padding: $carbon--spacing-05 0;
+    padding: rem(12px) 0;
   }
 
   .#{$prefix}--file__selected-file--invalid.#{$prefix}--file__selected-file--sm {
-    padding: rem(7px) 0;
+    padding: $carbon--spacing-02 0;
   }
 
   .#{$prefix}--file__selected-file--invalid.#{$prefix}--file__selected-file--field {
-    padding: rem(11px) 0;
+    padding: $carbon--spacing-03 0;
   }
 
   .#{$prefix}--file__selected-file--invalid .#{$prefix}--form-requirement {
