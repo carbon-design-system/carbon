@@ -23,6 +23,27 @@
     @include reset;
   }
 
+  .#{$prefix}--snippet--disabled,
+  .#{$prefix}--snippet--disabled
+    .#{$prefix}--btn.#{$prefix}--snippet-btn--expand {
+    color: $disabled-02;
+    background-color: $disabled-01;
+  }
+
+  .#{$prefix}--snippet--disabled .#{$prefix}--snippet-btn--expand:hover,
+  .#{$prefix}--snippet--disabled .#{$prefix}--copy-btn:hover {
+    color: $disabled-02;
+    background-color: $disabled-01;
+    cursor: not-allowed;
+  }
+
+  .#{$prefix}--snippet--disabled .#{$prefix}--snippet__icon,
+  .#{$prefix}--snippet--disabled
+    .#{$prefix}--snippet-btn--expand
+    .#{$prefix}--icon-chevron--down {
+    fill: $disabled-02;
+  }
+
   .#{$prefix}--snippet code {
     @include type-style('code-01');
   }
@@ -319,7 +340,7 @@
   }
 
   // Show more / less button
-  button.#{$prefix}--btn.#{$prefix}--snippet-btn--expand {
+  .#{$prefix}--snippet-btn--expand {
     @include type-style('body-short-01');
     @include carbon--font-family('sans');
 
@@ -335,8 +356,7 @@
     border: 0;
   }
 
-  button.#{$prefix}--btn.#{$prefix}--snippet-btn--expand
-    .#{$prefix}--snippet-btn--text {
+  .#{$prefix}--snippet-btn--expand .#{$prefix}--snippet-btn--text {
     position: relative;
     top: rem(-1px);
   }
@@ -346,14 +366,13 @@
   }
 
   .#{$prefix}--snippet-btn--expand .#{$prefix}--icon-chevron--down {
-    margin-bottom: rem(1px);
     margin-left: $spacing-03;
     transform: rotate(0deg);
     transition: $duration--moderate-01 motion(standard, productive);
     fill: $text-01;
   }
 
-  button.#{$prefix}--btn.#{$prefix}--snippet-btn--expand:hover {
+  .#{$prefix}--snippet-btn--expand:hover {
     color: $text-01;
     background: $hover-ui;
   }
