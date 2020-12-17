@@ -33,6 +33,7 @@ const props = () => ({
     },
     'inline'
   ),
+  disabled: boolean('Disabled (disabled)', false),
   light: boolean('Light variant', false),
   feedback: text('Feedback text', 'Copied to clipboard'),
   showMoreText: text('Text for "show more" button', 'Show more'),
