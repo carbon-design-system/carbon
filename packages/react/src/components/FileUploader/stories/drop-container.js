@@ -12,6 +12,7 @@ import FileUploaderItem from '../FileUploaderItem';
 import FileUploaderDropContainer from '../FileUploaderDropContainer';
 import FormItem from '../../FormItem';
 import uid from '../../../tools/uniqueId';
+import '../FileUploader-story.scss';
 
 const { prefix } = settings;
 

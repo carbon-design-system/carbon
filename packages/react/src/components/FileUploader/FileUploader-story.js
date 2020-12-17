@@ -23,6 +23,7 @@ import FileUploaderSkeleton from '../FileUploader/FileUploader.Skeleton';
 import FileUploaderItem from './FileUploaderItem';
 import FileUploaderDropContainer from './FileUploaderDropContainer';
 import mdx from './FileUploader.mdx';
+import './FileUploader-story.scss';
 
 const { prefix } = settings;
 const buttonKinds = {
