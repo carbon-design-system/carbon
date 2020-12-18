@@ -100,6 +100,7 @@ describe('PasswordInput', () => {
 
       it('should set password visibility toggle text as expected', () => {
         const { hidePasswordLabel, showPasswordLabel } = wrapper.props();
+        wrapper.setProps({ disabled: false });
         expect(
           wrapper.find('.bx--text-input--password__visibility__toggle').text()
         ).toEqual(showPasswordLabel);
