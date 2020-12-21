@@ -2,17 +2,15 @@
 
 const { execSync } = require('child_process');
 const { inInstall } = require('in-publish');
-const path = require('path');
 const fs = require('fs');
 const mapValues = require('lodash/mapValues');
+const which = require('npm-which')(__dirname);
 
 if (inInstall()) {
   process.exit(0);
 }
 
-const babelPath = path
-  .resolve(__dirname, '../node_modules/.bin/babel')
-  .replace(/ /g, '\\ ');
+const babelPath = which.sync('babel');
 
 const exec = (command, extraEnv) =>
   execSync(command, {

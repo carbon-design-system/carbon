@@ -150,7 +150,6 @@
     padding-right: rem(2px);
     cursor: pointer;
 
-    &:focus,
     &:hover {
       outline: none;
     }
@@ -181,6 +180,17 @@
     border-radius: 50%;
     outline: none;
     box-shadow: inset 0 0 0 2px $focus;
+
+    // Windows, Firefox HCM Fix
+    @media screen and (-ms-high-contrast: active),
+      screen and (prefers-contrast) {
+      // `ButtonText` is a CSS2 system color to help improve colors in HCM
+      outline: 1px solid ButtonText;
+    }
+  }
+
+  .#{$prefix}--tag--high-contrast .#{$prefix}--tag__close-icon:focus {
+    box-shadow: inset 0 0 0 2px $inverse-focus-ui;
   }
 
   .#{$prefix}--tag--filter.#{$prefix}--tag--disabled

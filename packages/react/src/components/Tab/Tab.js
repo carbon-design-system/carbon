@@ -9,8 +9,7 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import classNames from 'classnames';
 import { settings } from 'carbon-components';
-import TabContent from '../TabContent';
-import deprecate from '../../prop-types/deprecate.js';
+import deprecate from '../../prop-types/deprecate';
 
 const { prefix } = settings;
 
@@ -74,6 +73,7 @@ export default class Tab extends React.Component {
      * side router libraries.
      **/
     renderAnchor: deprecate(PropTypes.func),
+    renderButton: PropTypes.func,
 
     /*
      * An optional parameter to allow overriding the content rendering.
@@ -94,16 +94,13 @@ export default class Tab extends React.Component {
     /**
      * Specify the tab index of the `<button>` node
      */
-    tabIndex: deprecate(PropTypes.number),
+    tabIndex: PropTypes.number,
   };
 
   static defaultProps = {
     role: 'presentation',
     label: 'provide a label',
-    tabIndex: 0,
-    href: '#',
     selected: false,
-    renderContent: TabContent,
     onClick: () => {},
     onKeyDown: () => {},
   };
@@ -115,15 +112,16 @@ export default class Tab extends React.Component {
       handleTabClick,
       handleTabKeyDown,
       disabled,
-      href,
+      href = '#',
       index,
       label,
       selected,
-      tabIndex,
+      tabIndex = 0,
       onClick,
       onKeyDown,
       // TODO: rename renderAnchor to renderButton in next major version
-      renderAnchor: renderButton,
+      renderAnchor,
+      renderButton,
       renderContent, // eslint-disable-line no-unused-vars
       ...other
     } = this.props;
@@ -157,6 +155,8 @@ export default class Tab extends React.Component {
       },
     };
 
+    const renderElement = renderButton || renderAnchor;
+
     return (
       <li
         {...other}
@@ -165,19 +165,23 @@ export default class Tab extends React.Component {
           if (disabled) {
             return;
           }
-          handleTabClick(index, evt);
+          if (handleTabClick) {
+            handleTabClick(index, evt);
+          }
           onClick(evt);
         }}
         onKeyDown={(evt) => {
           if (disabled) {
             return;
           }
-          handleTabKeyDown(index, evt);
+          if (handleTabKeyDown) {
+            handleTabKeyDown(index, evt);
+          }
           onKeyDown(evt);
         }}
         role="presentation">
-        {renderButton ? (
-          renderButton(buttonProps)
+        {renderElement ? (
+          renderElement(buttonProps)
         ) : (
           <button type="button" role="tab" {...buttonProps}>
             {label}

@@ -92,6 +92,7 @@ export default class ContentSwitcher extends React.Component {
 
     if (matches(data, [keys.ArrowRight, keys.ArrowLeft])) {
       const nextIndex = getNextIndex(key, index, this.props.children.length);
+      const children = React.Children.toArray(this.props.children);
       if (selectionMode === 'manual') {
         const switchRef = this._switchRefs[nextIndex];
         switchRef && switchRef.focus();
@@ -101,9 +102,15 @@ export default class ContentSwitcher extends React.Component {
             selectedIndex: nextIndex,
           },
           () => {
-            const switchRef = this._switchRefs[nextIndex];
+            const child = children[this.state.selectedIndex];
+            const switchRef = this._switchRefs[this.state.selectedIndex];
             switchRef && switchRef.focus();
-            this.props.onChange(data);
+            this.props.onChange({
+              ...data,
+              index: this.state.selectedIndex,
+              name: child.props.name,
+              text: child.props.text,
+            });
           }
         );
       }

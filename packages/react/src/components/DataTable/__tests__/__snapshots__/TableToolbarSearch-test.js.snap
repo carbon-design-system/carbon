@@ -18,7 +18,6 @@ exports[`DataTable.TableToolbarSearch should render 1`] = `
     tabIndex="0"
   >
     <Search
-      aria-hidden={true}
       className="custom-class"
       closeButtonLabelText="Clear search input"
       id="custom-id"
@@ -72,11 +71,11 @@ exports[`DataTable.TableToolbarSearch should render 1`] = `
           Filter table
         </label>
         <input
-          aria-hidden={true}
           autoComplete="off"
           className="bx--search-input"
           id="custom-id"
           onChange={[Function]}
+          onKeyDown={[Function]}
           placeholder="Filter table"
           role="searchbox"
           tabIndex="-1"

@@ -15,6 +15,7 @@ import {
   boolean,
 } from '@storybook/addon-knobs';
 import Tooltip from '../Tooltip';
+import { Tooltip as OGTooltip } from './Tooltip';
 import Button from '../Button';
 import { OverflowMenuVertical16 } from '@carbon/icons-react';
 import mdx from './Tooltip.mdx';
@@ -26,8 +27,15 @@ const directions = {
   'Top (top)': 'top',
   'Right (right)': 'right',
 };
+const alignments = {
+  'Start (start)': 'start',
+  'Center (center)': 'center',
+  'End (end)': 'end',
+};
+
 const props = {
   withIcon: () => ({
+    align: select('Tooltip alignment (align)', alignments, 'center'),
     direction: select('Tooltip direction (direction)', directions, 'bottom'),
     triggerText: text('Trigger text (triggerText)', 'Tooltip label'),
     tabIndex: number('Tab index (tabIndex in <Tooltip>)', 0),
@@ -38,6 +46,7 @@ const props = {
   }),
   withoutIcon: () => ({
     showIcon: false,
+    align: select('Tooltip alignment (align)', alignments, 'center'),
     direction: select('Tooltip direction (direction)', directions, 'bottom'),
     triggerText: text('Trigger text (triggerText)', 'Tooltip label'),
     tabIndex: number('Tab index (tabIndex in <Tooltip>)', 0),
@@ -48,6 +57,7 @@ const props = {
   }),
   customIcon: () => ({
     showIcon: true,
+    align: select('Tooltip alignment (align)', alignments, 'center'),
     direction: select('Tooltip direction (direction)', directions, 'bottom'),
     triggerText: text('Trigger text (triggerText)', 'Tooltip label'),
     tabIndex: number('Tab index (tabIndex in <Tooltip>)', 0),
@@ -66,6 +76,7 @@ const props = {
   }),
   customIconOnly: () => ({
     showIcon: true,
+    align: select('Tooltip alignment (align)', alignments, 'center'),
     direction: select('Tooltip direction (direction)', directions, 'bottom'),
     iconDescription: 'Helpful Information',
     tabIndex: number('Tab index (tabIndex in <Tooltip>)', 0),
@@ -127,10 +138,10 @@ function UncontrolledTooltipExample() {
 
 export default {
   title: 'Tooltip',
+  component: OGTooltip,
   decorators: [withKnobs],
 
   parameters: {
-    component: Tooltip,
     docs: {
       page: mdx,
     },

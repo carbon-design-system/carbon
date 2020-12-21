@@ -5,6 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+import { cleanup, render } from '@testing-library/react';
 import React from 'react';
 import { mount, shallow } from 'enzyme';
 import {
@@ -177,16 +178,26 @@ describe('Dropdown', () => {
       );
     });
   });
+
+  describe('Component API', () => {
+    afterEach(cleanup);
+
+    it('should accept a `ref` for the underlying button element', () => {
+      const ref = React.createRef();
+      render(<Dropdown {...mockProps} ref={ref} />);
+      expect(ref.current.getAttribute('aria-haspopup')).toBe('listbox');
+    });
+  });
 });
 
 describe('DropdownSkeleton', () => {
   describe('Renders as expected', () => {
-    const wrapper = shallow(<DropdownSkeleton inline />);
+    const wrapper = shallow(<DropdownSkeleton size="sm" />);
 
     it('Has the expected classes', () => {
       expect(wrapper.hasClass(`${prefix}--skeleton`)).toEqual(true);
       expect(wrapper.hasClass(`${prefix}--dropdown-v2`)).toEqual(true);
-      expect(wrapper.hasClass(`${prefix}--list-box--inline`)).toEqual(true);
+      expect(wrapper.hasClass(`${prefix}--list-box--sm`)).toEqual(true);
     });
   });
 });

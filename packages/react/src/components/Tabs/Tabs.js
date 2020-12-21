@@ -12,6 +12,7 @@ import { settings } from 'carbon-components';
 import { ChevronLeft16, ChevronRight16 } from '@carbon/icons-react';
 import debounce from 'lodash.debounce';
 import { keys, match, matches } from '../../internal/keyboard';
+import TabContent from '../TabContent';
 
 const { prefix } = settings;
 
@@ -59,6 +60,12 @@ export default class Tabs extends React.Component {
     onSelectionChange: PropTypes.func,
 
     /**
+     * Choose whether or not to automatically scroll to newly selected tabs
+     * on component rerender
+     */
+    scrollIntoView: PropTypes.bool,
+
+    /**
      * Optionally provide an index for the currently selected <Tab>
      */
     selected: PropTypes.number,
@@ -81,6 +88,7 @@ export default class Tabs extends React.Component {
 
   static defaultProps = {
     type: 'default',
+    scrollIntoView: true,
     selected: 0,
     selectionMode: 'automatic',
   };
@@ -204,7 +212,7 @@ export default class Tabs extends React.Component {
       });
     }
 
-    if (prevState.selected !== selected) {
+    if (this.props.scrollIntoView && prevState.selected !== selected) {
       this.getTabAt(selected)?.tabAnchor?.scrollIntoView({
         block: 'nearest',
         inline: 'nearest',
@@ -279,9 +287,23 @@ export default class Tabs extends React.Component {
       if (matches(evt, [keys.Enter, keys.Space])) {
         this.selectTabAt(evt, { index, onSelectionChange });
       }
-      const nextIndex = this.getNextIndex(index, this.getDirection(evt));
+
+      const nextIndex = (() => {
+        if (matches(evt, [keys.ArrowLeft, keys.ArrowRight])) {
+          return this.getNextIndex(index, this.getDirection(evt));
+        }
+        if (match(evt, keys.Home)) {
+          return 0;
+        }
+        if (match(evt, keys.End)) {
+          return this.getEnabledTabs().pop();
+        }
+      })();
       const tab = this.getTabAt(nextIndex);
-      if (matches(evt, [keys.ArrowLeft, keys.ArrowRight])) {
+
+      if (
+        matches(evt, [keys.ArrowLeft, keys.ArrowRight, keys.Home, keys.End])
+      ) {
         evt.preventDefault();
         if (this.props.selectionMode !== 'manual') {
           this.selectTabAt(evt, { index: nextIndex, onSelectionChange });
@@ -307,7 +329,7 @@ export default class Tabs extends React.Component {
 
   overflowNavInterval = null;
 
-  handleOverflowNavClick = (_, { direction, multiplier = 15 }) => {
+  handleOverflowNavClick = (_, { direction, multiplier = 10 }) => {
     // account for overflow button appearing and causing tablist width change
     const { clientWidth, scrollLeft, scrollWidth } = this.tablist?.current;
     if (direction === 1 && !scrollLeft) {
@@ -364,6 +386,7 @@ export default class Tabs extends React.Component {
       type,
       light,
       onSelectionChange,
+      scrollIntoView, // eslint-disable-line no-unused-vars
       selectionMode, // eslint-disable-line no-unused-vars
       tabContentClassName,
       ...other
@@ -402,18 +425,18 @@ export default class Tabs extends React.Component {
         id: tabId,
         children,
         selected,
-        renderContent: TabContent,
+        renderContent: Content = TabContent,
       } = tab.props;
 
       return (
-        <TabContent
+        <Content
           id={tabId && `${tabId}__panel`}
           className={tabContentClassName}
           hidden={!selected}
           selected={selected}
           aria-labelledby={tabId}>
           {children}
-        </TabContent>
+        </Content>
       );
     });
 

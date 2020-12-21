@@ -6,9 +6,10 @@
  */
 
 import PropTypes from 'prop-types';
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect, useCallback } from 'react';
 import classNames from 'classnames';
 import useResizeObserver from 'use-resize-observer/polyfilled';
+import debounce from 'lodash.debounce';
 import { ChevronDown16 } from '@carbon/icons-react';
 import { settings } from 'carbon-components';
 import Copy from '../Copy';
@@ -38,19 +39,76 @@ function CodeSnippet({
   const [shouldShowMoreLessBtn, setShouldShowMoreLessBtn] = useState(false);
   const { current: uid } = useRef(getUniqueId());
   const codeContentRef = useRef();
+  const codeContainerRef = useRef();
+  const [hasLeftOverflow, setHasLeftOverflow] = useState(false);
+  const [hasRightOverflow, setHasRightOverflow] = useState(false);
+  const getCodeRef = useCallback(() => {
+    if (type === 'single') {
+      return codeContainerRef;
+    }
+    if (type === 'multi') {
+      return codeContentRef;
+    }
+  }, [type]);
+
+  const getCodeRefDimensions = useCallback(() => {
+    const {
+      clientWidth: codeClientWidth,
+      scrollLeft: codeScrollLeft,
+      scrollWidth: codeScrollWidth,
+    } = getCodeRef().current;
+
+    return {
+      horizontalOverflow: codeScrollWidth > codeClientWidth,
+      codeClientWidth,
+      codeScrollWidth,
+      codeScrollLeft,
+    };
+  }, [getCodeRef]);
+
+  const handleScroll = useCallback(() => {
+    if (
+      type === 'inline' ||
+      (type === 'single' && !codeContainerRef?.current) ||
+      (type === 'multi' && !codeContentRef?.current)
+    ) {
+      return;
+    }
+
+    const {
+      horizontalOverflow,
+      codeClientWidth,
+      codeScrollWidth,
+      codeScrollLeft,
+    } = getCodeRefDimensions();
+
+    setHasLeftOverflow(horizontalOverflow && !!codeScrollLeft);
+    setHasRightOverflow(
+      horizontalOverflow && codeScrollLeft + codeClientWidth !== codeScrollWidth
+    );
+  }, [type, getCodeRefDimensions]);
 
   useResizeObserver({
-    ref: codeContentRef,
+    ref: getCodeRef(),
     onResize: () => {
-      if (codeContentRef.current) {
+      if (codeContentRef?.current && type === 'multi') {
         const { height } = codeContentRef.current.getBoundingClientRect();
-        setShouldShowMoreLessBtn(type === 'multi' && height > 255);
+        setShouldShowMoreLessBtn(height > 255);
+      }
+      if (
+        (codeContentRef?.current && type === 'multi') ||
+        (codeContainerRef?.current && type === 'single')
+      ) {
+        debounce(handleScroll, 200);
       }
     },
   });
 
-  const codeSnippetClasses = classNames(className, {
-    [`${prefix}--snippet`]: true,
+  useEffect(() => {
+    handleScroll();
+  }, [handleScroll]);
+
+  const codeSnippetClasses = classNames(className, `${prefix}--snippet`, {
     [`${prefix}--snippet--${type}`]: type,
     [`${prefix}--snippet--expand`]: expandedCode,
     [`${prefix}--snippet--light`]: light,
@@ -85,14 +143,30 @@ function CodeSnippet({
   return (
     <div {...rest} className={codeSnippetClasses}>
       <div
+        ref={codeContainerRef}
         role={type === 'single' ? 'textbox' : null}
         tabIndex={type === 'single' ? 0 : null}
         className={`${prefix}--snippet-container`}
-        aria-label={ariaLabel || copyLabel || 'code-snippet'}>
+        aria-label={ariaLabel || copyLabel || 'code-snippet'}
+        onScroll={(type === 'single' && handleScroll) || null}>
         <code>
-          <pre ref={codeContentRef}>{children}</pre>
+          <pre
+            ref={codeContentRef}
+            onScroll={(type === 'multi' && handleScroll) || null}>
+            {children}
+          </pre>
         </code>
       </div>
+      {/**
+       * left overflow indicator must come after the snippet due to z-index and
+       * snippet focus border overlap
+       */}
+      {hasLeftOverflow && (
+        <div className={`${prefix}--snippet__overflow-indicator--left`} />
+      )}
+      {hasRightOverflow && (
+        <div className={`${prefix}--snippet__overflow-indicator--right`} />
+      )}
       {!hideCopyButton && (
         <CopyButton
           onClick={onClick}
@@ -103,7 +177,7 @@ function CodeSnippet({
       {shouldShowMoreLessBtn && (
         <Button
           kind="ghost"
-          size="small"
+          size="field"
           className={`${prefix}--snippet-btn--expand`}
           onClick={() => setExpandedCode(!expandedCode)}>
           <span className={`${prefix}--snippet-btn--text`}>

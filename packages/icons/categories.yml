@@ -134,6 +134,8 @@ categories:
           - page-number
           - paint-brush
           - paint-brush--alt
+          - page-break
+          - page-number
           - paragraph
           - percentage
           - percentage--filled
@@ -1311,6 +1313,7 @@ categories:
           - humidity
           - humidity--alt
           - hurricane
+          - ice--accretion
           - lightning
           - marine-warning
           - mixed-rain-hail

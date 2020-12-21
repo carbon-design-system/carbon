@@ -1,9 +1,13 @@
 {
   "name": "@carbon/test-utils",
   "private": true,
-  "version": "10.11.0",
+  "version": "10.13.0",
   "license": "Apache-2.0",
-  "repository": "https://github.com/carbon-design-system/carbon/tree/master/packages/test-utils",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/carbon-design-system/carbon.git",
+    "directory": "packages/test-utils"
+  },
   "bugs": "https://github.com/carbon-design-system/carbon/issues",
   "keywords": [
     "ibm",
@@ -19,7 +23,7 @@
   },
   "peerDependencies": {
     "node-sass": "^4.13.1",
-    "react-dom": "^16.9.0"
+    "react-dom": "^16.9.0 || ^17.0.1"
   },
   "dependencies": {
     "prettier": "^2.1.0",

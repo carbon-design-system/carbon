@@ -9,10 +9,16 @@ import React from 'react';
 import Link from '../Link';
 import { shallow } from 'enzyme';
 import { settings } from 'carbon-components';
+import { cleanup, render, screen } from '@testing-library/react';
+import '@testing-library/jest-dom';
+import userEvent from '@testing-library/user-event';
+import { describe, document } from 'window-or-global';
 
 const { prefix } = settings;
 
 describe('Link', () => {
+  afterEach(cleanup);
+
   describe('Renders as expected', () => {
     const link = shallow(
       <Link href="www.google.com" className="some-class">
@@ -47,10 +53,64 @@ describe('Link', () => {
       link.setProps({ inline: true });
       expect(link.hasClass(`${prefix}--link--inline`)).toEqual(true);
     });
-
+    it('should add support for different link sizes', () => {
+      link.setProps({ size: 'lg' });
+      expect(link.hasClass(`${prefix}--link--lg`)).toEqual(true);
+    });
     it('should add rel="noopener" automatically if target="_blank"', () => {
       link.setProps({ target: '_blank' });
       expect(link.props().rel).toEqual('noopener');
+    });
+  });
+
+  describe('automated verification testing', () => {
+    it('should have no Axe violations', async () => {
+      render(
+        <Link href="/" className="some-class">
+          A simple link
+        </Link>
+      );
+
+      await expect(screen.getByText('A simple link')).toHaveNoAxeViolations();
+    });
+
+    it('should have no Accessibility Checker violations', async () => {
+      render(
+        <main>
+          <Link href="/" className="some-class">
+            A simple link
+          </Link>
+        </main>
+      );
+
+      await expect(screen.getByText('A simple link')).toHaveNoACViolations(
+        'Link'
+      );
+    });
+  });
+
+  describe('keyboard support', () => {
+    it('should recieve keyboard focus', () => {
+      render(
+        <Link href="/" className="some-class">
+          A simple link
+        </Link>
+      );
+
+      expect(document.body).toHaveFocus();
+      userEvent.tab();
+      expect(screen.getByText('A simple link')).toHaveFocus();
+    });
+
+    it('should not receive keyboard focus when disabled', () => {
+      render(
+        <Link href="/" disabled className="some-class">
+          A simple link
+        </Link>
+      );
+      expect(document.body).toHaveFocus();
+      userEvent.tab();
+      expect(document.body).toHaveFocus();
     });
   });
 });

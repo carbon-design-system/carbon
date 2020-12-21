@@ -30,9 +30,8 @@ export const inline = () => (
 );
 
 export const multiline = () => (
-  <div style={{ width: '50%' }}>
-    <CodeSnippet {...props()} type="multi" feedback="Copied to clipboard">
-      {`  "scripts": {
+  <CodeSnippet {...props()} type="multi" feedback="Copied to clipboard">
+    {`  "scripts": {
     "build": "lerna run build --stream --prefix --npm-client yarn",
     "ci-check": "carbon-cli ci-check",
     "clean": "lerna run clean && lerna clean --yes && rimraf node_modules",
@@ -61,18 +60,18 @@ export const multiline = () => (
     "@babel/preset-react": "^7.10.0",
     "@babel/runtime": "^7.10.0",
     "@commitlint/cli": "^8.3.5",`}
-    </CodeSnippet>
-  </div>
+  </CodeSnippet>
 );
 
 export const singleline = () => (
   <CodeSnippet type="single" feedback="Copied to clipboard">
-    {'node -v'}
+    yarn add carbon-components@latest carbon-components-react@latest
+    @carbon/icons-react@latest carbon-icons@latest
   </CodeSnippet>
 );
 
 export const skeleton = () => (
-  <div style={{ width: '800px' }}>
+  <div>
     <CodeSnippetSkeleton type="single" style={{ marginBottom: 8 }} />
     <CodeSnippetSkeleton type="multi" />
   </div>
@@ -99,11 +98,15 @@ const lightPropMessage = (
 );
 
 const props = () => ({
-  type: select('Type', {
-    inline: 'inline',
-    'single line': 'single',
-    'multiple line': 'multi',
-  }),
+  type: select(
+    'Type',
+    {
+      inline: 'inline',
+      'single line': 'single',
+      'multiple line': 'multi',
+    },
+    'inline'
+  ),
   light: boolean('Light variant', false),
   feedback: text('Feedback text', 'Copied to clipboard'),
   showMoreText: text('Text for "show more" button', 'Show more'),
@@ -116,7 +119,7 @@ const props = () => ({
 });
 
 export const playground = () => (
-  <div className={props().light ? 'bx--tile' : ''} style={{ width: '800px' }}>
+  <div className={props().light ? 'bx--tile' : ''}>
     {props().light && lightPropMessage}
     <CodeSnippet {...props()}>
       {props().type === 'multi'

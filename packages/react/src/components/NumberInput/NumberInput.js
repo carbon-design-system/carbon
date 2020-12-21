@@ -85,7 +85,7 @@ class NumberInput extends Component {
     /**
      * Message which is displayed if the value is invalid.
      */
-    invalidText: PropTypes.string,
+    invalidText: PropTypes.node,
     /**
      * `true` to use the mobile variant.
      */
@@ -151,7 +151,7 @@ class NumberInput extends Component {
     /**
      * Provide the text that is displayed when the control is in warning state
      */
-    warnText: PropTypes.string,
+    warnText: PropTypes.node,
   };
 
   static defaultProps = {
@@ -170,7 +170,7 @@ class NumberInput extends Component {
     translateWithId: (id) => defaultTranslations[id],
   };
 
-  static getDerivedStateFromProps({ min, max, value = 0 }, state) {
+  static getDerivedStateFromProps({ min, max, value }, state) {
     const { prevValue } = state;
 
     if (useControlledStateWithValue && value === '' && prevValue !== '') {
@@ -204,7 +204,10 @@ class NumberInput extends Component {
       this.state = {};
       return;
     }
-    let value = useControlledStateWithValue ? props.defaultValue : props.value;
+    let value =
+      useControlledStateWithValue || typeof props.defaultValue !== 'undefined'
+        ? props.defaultValue
+        : props.value;
     value = value === undefined ? 0 : value;
     if (props.min || props.min === 0) {
       value = Math.max(props.min, value);
@@ -300,6 +303,7 @@ class NumberInput extends Component {
       translateWithId: t,
       isMobile,
       size,
+      defaultValue, // eslint-disable-line
       ...other
     } = this.props;
 
@@ -504,6 +508,7 @@ class NumberInput extends Component {
   }
 }
 
+export { NumberInput };
 export default (() => {
   const forwardRef = (props, ref) => <NumberInput {...props} innerRef={ref} />;
   forwardRef.displayName = 'NumberInput';

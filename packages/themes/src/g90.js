@@ -89,7 +89,8 @@ export const inverseSupport04 = blue60;
 
 export const overlay01 = rgba(gray100, 0.7);
 
-export const danger = red60;
+export const danger01 = red60;
+export const danger02 = red40;
 
 // Interaction states
 export const focus = white;
@@ -107,14 +108,16 @@ export const hoverTertiary = gray10;
 export const activeTertiary = gray30;
 
 export const hoverUI = '#4c4c4c';
+export const hoverLightUI = '#656565';
 export const activeUI = gray60;
+export const activeLightUI = gray50;
 export const selectedUI = gray70;
 export const selectedLightUI = gray60;
 export const inverseHoverUI = '#e5e5e5';
 
 export const hoverSelectedUI = '#656565';
 
-export const hoverDanger = adjustLightness(danger, -8);
+export const hoverDanger = adjustLightness(danger01, -8);
 export const activeDanger = red80;
 
 export const hoverRow = '#4c4c4c';
@@ -128,8 +131,6 @@ export const disabled03 = gray40;
 export const highlight = blue70;
 
 export const decorative01 = gray60;
-
-export const hoverLightUI = '#6f6f6f';
 
 export const buttonSeparator = '#161616';
 
@@ -213,3 +214,4 @@ export const brand02 = interactive02;
 export const brand03 = interactive03;
 export const active01 = activeUI;
 export const hoverField = hoverUI;
+export const danger = danger01;
