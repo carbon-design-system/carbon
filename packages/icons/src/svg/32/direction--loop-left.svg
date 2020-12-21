@@ -6,6 +6,7 @@
       }
     </style>
   </defs>
-  <path d="M26.5859,19.5859,22,24.1719V12A8,8,0,0,0,6,12V28H8V12a6,6,0,0,1,12,0V24.1719l-4.5859-4.586L14,21l7,7,7-7Z"/>
+  <rect x="16" y="20" width="2" height="8"/>
+  <path d="M23,4a7.0078,7.0078,0,0,0-7,7v3h2V11a5,5,0,1,1,5,5H5.8281l4.586-4.5859L9,10,2,17l7,7,1.4141-1.4141L5.8281,18H23A7,7,0,0,0,23,4Z"/>
   <rect id="_Transparent_Rectangle_" data-name="&lt;Transparent Rectangle&gt;" class="cls-1" width="32" height="32"/>
 </svg>
