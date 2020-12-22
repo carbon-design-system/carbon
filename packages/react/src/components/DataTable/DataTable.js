@@ -41,7 +41,7 @@ const defaultTranslations = {
   [translationKeys.unselectRow]: 'Unselect row',
 };
 
-const translateWithId = (id) => defaultTranslations[id];
+const defaultTranslateWithId = (id) => defaultTranslations[id];
 
 /**
  * Data Tables are used to represent a collection of resources, displaying a
@@ -154,7 +154,7 @@ export default class DataTable extends React.Component {
     locale: 'en',
     size: 'normal',
     overflowMenuOnHover: true,
-    translateWithId,
+    translateWithId: defaultTranslateWithId,
   };
 
   static translationKeys = Object.values(translationKeys);
@@ -248,7 +248,7 @@ export default class DataTable extends React.Component {
       : translationKeys.expandAll;
     return {
       ...rest,
-      ariaLabel: t(translationKey),
+      ariaLabel: t(translationKey, undefined, defaultTranslateWithId),
       isExpanded,
       // Compose the event handlers so we don't overwrite a consumer's `onClick`
       // handler
@@ -305,7 +305,7 @@ export default class DataTable extends React.Component {
       // handler
       onExpand: composeEventHandlers([this.handleOnExpandRow(row.id), onClick]),
       isExpanded: row.isExpanded,
-      ariaLabel: t(translationKey),
+      ariaLabel: t(translationKey, undefined, defaultTranslateWithId),
       isSelected: row.isSelected,
       disabled: row.disabled,
     };
@@ -336,7 +336,7 @@ export default class DataTable extends React.Component {
         ]),
         id: `${this.getTablePrefix()}__select-row-${row.id}`,
         name: `select-row-${row.id}`,
-        ariaLabel: t(translationKey),
+        ariaLabel: t(translationKey, undefined, defaultTranslateWithId),
         disabled: row.disabled,
         radio: this.props.radio || null,
       };
@@ -356,7 +356,7 @@ export default class DataTable extends React.Component {
 
     return {
       ...rest,
-      ariaLabel: t(translationKey),
+      ariaLabel: t(translationKey, undefined, defaultTranslateWithId),
       checked,
       id: `${this.getTablePrefix()}__select-all`,
       indeterminate,

@@ -54,7 +54,9 @@ const ListBoxSelection = ({
       }
     }
   };
-  const description = selectionCount ? t('clear.all') : t('clear.selection');
+  const description = selectionCount
+    ? t('clear.all', undefined, defaultTranslateById)
+    : t('clear.selection', undefined, defaultTranslateById);
   return (
     <div
       role="button"
@@ -79,6 +81,8 @@ const defaultTranslations = {
   [translationIds['clear.all']]: 'Clear all selected items',
   [translationIds['clear.selection']]: 'Clear selected item',
 };
+
+const defaultTranslateById = (id) => defaultTranslations[id];
 
 ListBoxSelection.propTypes = {
   /**
@@ -125,7 +129,7 @@ ListBoxSelection.propTypes = {
 };
 
 ListBoxSelection.defaultProps = {
-  translateWithId: (id) => defaultTranslations[id],
+  translateWithId: defaultTranslateById,
 };
 
 export default ListBoxSelection;

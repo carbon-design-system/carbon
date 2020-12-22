@@ -21,7 +21,7 @@ const translationKeys = {
   buttonDescription: 'carbon.table.header.icon.description',
 };
 
-const translateWithId = (
+const defaultTranslateWithId = (
   key,
   { header, sortDirection, isSortHeader, sortStates }
 ) => {
@@ -89,12 +89,16 @@ const TableHeader = React.forwardRef(function TableHeader(
   });
   const ariaSort = !isSortHeader ? 'none' : sortDirections[sortDirection];
   const uniqueId = Math.random();
-  const sortDescription = t('carbon.table.header.icon.description', {
-    header: children,
-    sortDirection,
-    isSortHeader,
-    sortStates,
-  });
+  const sortDescription = t(
+    'carbon.table.header.icon.description',
+    {
+      header: children,
+      sortDirection,
+      isSortHeader,
+      sortStates,
+    },
+    defaultTranslateWithId
+  );
 
   return (
     <th
@@ -179,7 +183,7 @@ TableHeader.propTypes = {
 TableHeader.defaultProps = {
   isSortable: false,
   scope: 'col',
-  translateWithId,
+  translateWithId: defaultTranslateWithId,
 };
 
 TableHeader.translationKeys = Object.values(translationKeys);

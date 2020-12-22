@@ -87,18 +87,22 @@ export function ProgressStep({
     );
   };
 
-  let message = t('carbon.progress-step.incomplete');
+  let message = t(
+    'carbon.progress-step.incomplete',
+    undefined,
+    translateWithId
+  );
 
   if (current) {
-    message = t('carbon.progress-step.current');
+    message = t('carbon.progress-step.current', undefined, translateWithId);
   }
 
   if (complete) {
-    message = t('carbon.progress-step.complete');
+    message = t('carbon.progress-step.complete', undefined, translateWithId);
   }
 
   if (invalid) {
-    message = t('carbon.progress-step.invalid');
+    message = t('carbon.progress-step.invalid', undefined, translateWithId);
   }
 
   return (

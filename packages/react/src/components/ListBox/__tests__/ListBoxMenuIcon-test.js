@@ -20,13 +20,21 @@ describe('ListBoxMenuIcon', () => {
   it('should call `translateWithId` to determine the description', () => {
     const translateWithId = jest.fn(() => 'message');
     mount(<ListBox.MenuIcon isOpen={true} translateWithId={translateWithId} />);
-    expect(translateWithId).toHaveBeenCalledWith('close.menu');
+    expect(translateWithId).toHaveBeenCalledWith(
+      'close.menu',
+      undefined,
+      ListBox.MenuIcon.defaultProps.translateWithId
+    );
 
     translateWithId.mockClear();
 
     mount(
       <ListBox.MenuIcon isOpen={false} translateWithId={translateWithId} />
     );
-    expect(translateWithId).toHaveBeenCalledWith('open.menu');
+    expect(translateWithId).toHaveBeenCalledWith(
+      'open.menu',
+      undefined,
+      ListBox.MenuIcon.defaultProps.translateWithId
+    );
   });
 });

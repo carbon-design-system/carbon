@@ -15,6 +15,14 @@ import { AriaLabelPropType } from '../../prop-types/AriaPropTypes';
 
 const { prefix } = settings;
 
+const defaultTranslateById = (id) => {
+  const translations = {
+    'carbon.sidenav.state.open': 'Close',
+    'carbon.sidenav.state.closed': 'Open',
+  };
+  return translations[id];
+};
+
 const SideNav = React.forwardRef(function SideNav(props, ref) {
   const {
     expanded: expandedProp,
@@ -59,8 +67,8 @@ const SideNav = React.forwardRef(function SideNav(props, ref) {
 
   // TO-DO: comment back in when footer is added for rails
   // const assistiveText = expanded
-  //   ? t('carbon.sidenav.state.open')
-  //   : t('carbon.sidenav.state.closed');
+  //   ? t('carbon.sidenav.state.open', undefined, defaultTranslateById);
+  //   : t('carbon.sidenav.state.closed', undefined, defaultTranslateById);
 
   const className = cx({
     [`${prefix}--side-nav`]: true,
@@ -127,13 +135,7 @@ const SideNav = React.forwardRef(function SideNav(props, ref) {
 });
 
 SideNav.defaultProps = {
-  translateById: (id) => {
-    const translations = {
-      'carbon.sidenav.state.open': 'Close',
-      'carbon.sidenav.state.closed': 'Open',
-    };
-    return translations[id];
-  },
+  translateById: defaultTranslateById,
   defaultExpanded: false,
   isChildOfHeader: true,
   isFixedNav: false,

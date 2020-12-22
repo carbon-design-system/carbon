@@ -95,7 +95,7 @@ function PaginationItem({
   onClick,
   translateWithId: t = translateWithId,
 }) {
-  const itemLabel = t('carbon.pagination-nav.item');
+  const itemLabel = t('carbon.pagination-nav.item', undefined, translateWithId);
 
   return (
     <li className={`${prefix}--pagination-nav__list-item`}>

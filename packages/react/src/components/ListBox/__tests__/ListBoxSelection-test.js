@@ -30,12 +30,20 @@ describe('ListBoxSelection', () => {
 
   it('should call `translateWithId` with the id strings needed to translate', () => {
     mount(<ListBox.Selection {...mockProps} />);
-    expect(mockProps.translateWithId).toHaveBeenCalledWith('clear.selection');
+    expect(mockProps.translateWithId).toHaveBeenCalledWith(
+      'clear.selection',
+      undefined,
+      ListBox.Selection.defaultProps.translateWithId
+    );
 
     mockProps.translateWithId.mockClear();
 
     mount(<ListBox.Selection {...mockProps} selectionCount={3} />);
-    expect(mockProps.translateWithId).toHaveBeenCalledWith('clear.all');
+    expect(mockProps.translateWithId).toHaveBeenCalledWith(
+      'clear.all',
+      undefined,
+      ListBox.Selection.defaultProps.translateWithId
+    );
   });
 
   it('should call clearSelection when clicked', () => {

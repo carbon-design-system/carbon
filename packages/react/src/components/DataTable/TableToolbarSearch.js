@@ -19,7 +19,7 @@ const translationKeys = {
   'carbon.table.toolbar.search.label': 'Filter table',
   'carbon.table.toolbar.search.placeholder': 'Filter table',
 };
-const translateWithId = (id) => {
+const defaultTranslateWithId = (id) => {
   return translationKeys[id];
 };
 const TableToolbarSearch = ({
@@ -118,9 +118,21 @@ const TableToolbarSearch = ({
         className={className}
         value={value}
         id={typeof id !== 'undefined' ? id : uniqueId.toString()}
-        labelText={labelText || t('carbon.table.toolbar.search.label')}
+        labelText={
+          labelText ||
+          t(
+            'carbon.table.toolbar.search.label',
+            undefined,
+            defaultTranslateWithId
+          )
+        }
         placeHolderText={
-          placeHolderText || t('carbon.table.toolbar.search.placeholder')
+          placeHolderText ||
+          t(
+            'carbon.table.toolbar.search.placeholder',
+            undefined,
+            defaultTranslateWithId
+          )
         }
         onChange={onChange}
         {...rest}
@@ -204,7 +216,7 @@ TableToolbarSearch.propTypes = {
 
 TableToolbarSearch.defaultProps = {
   tabIndex: '0',
-  translateWithId,
+  translateWithId: defaultTranslateWithId,
   persistent: false,
 };
 

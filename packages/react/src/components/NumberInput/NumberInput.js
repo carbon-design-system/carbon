@@ -31,6 +31,8 @@ const defaultTranslations = {
   [translationIds['decrement.number']]: 'Decrement number',
 };
 
+const defaultTranslateById = (id) => defaultTranslations[id];
+
 const capMin = (min, value) =>
   isNaN(min) || (!min && min !== 0) || isNaN(value) || (!value && value !== 0)
     ? value
@@ -167,7 +169,7 @@ class NumberInput extends Component {
     helperText: '',
     light: false,
     allowEmpty: false,
-    translateWithId: (id) => defaultTranslations[id],
+    translateWithId: defaultTranslateById,
   };
 
   static getDerivedStateFromProps({ min, max, value }, state) {
@@ -399,8 +401,8 @@ class NumberInput extends Component {
     ) : null;
 
     const [incrementNumLabel, decrementNumLabel] = [
-      t('increment.number'),
-      t('decrement.number'),
+      t('increment.number', undefined, defaultTranslateById),
+      t('decrement.number', undefined, defaultTranslateById),
     ];
 
     const wrapperClasses = classNames(`${prefix}--number__input-wrapper`, {

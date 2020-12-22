@@ -23,6 +23,8 @@ const defaultTranslations = {
   [translationIds['open.menu']]: 'Open menu',
 };
 
+const defaultTranslateById = (id) => defaultTranslations[id];
+
 /**
  * `ListBoxMenuIcon` is used to orient the icon up or down depending on the
  * state of the menu for a given `ListBox`
@@ -31,7 +33,9 @@ const ListBoxMenuIcon = ({ isOpen, translateWithId: t }) => {
   const className = cx(`${prefix}--list-box__menu-icon`, {
     [`${prefix}--list-box__menu-icon--open`]: isOpen,
   });
-  const description = isOpen ? t('close.menu') : t('open.menu');
+  const description = isOpen
+    ? t('close.menu', undefined, defaultTranslateById)
+    : t('open.menu', undefined, defaultTranslateById);
   return (
     <div className={className}>
       <ChevronDown16 name="chevron--down" aria-label={description}>
@@ -57,7 +61,7 @@ ListBoxMenuIcon.propTypes = {
 };
 
 ListBoxMenuIcon.defaultProps = {
-  translateWithId: (id) => defaultTranslations[id],
+  translateWithId: defaultTranslateById,
 };
 
 export default ListBoxMenuIcon;

@@ -20,7 +20,7 @@ const translationKeys = {
   'carbon.table.batch.item.selected': 'item selected',
 };
 
-const translateWithId = (id, state) => {
+const defaultTranslateWithId = (id, state) => {
   if (id === 'carbon.table.batch.cancel') {
     return translationKeys[id];
   }
@@ -50,8 +50,16 @@ const TableBatchActions = ({
         <p className={`${prefix}--batch-summary__para`}>
           <span>
             {totalSelected > 1
-              ? t('carbon.table.batch.items.selected', { totalSelected })
-              : t('carbon.table.batch.item.selected', { totalSelected })}
+              ? t(
+                  'carbon.table.batch.items.selected',
+                  { totalSelected },
+                  defaultTranslateWithId
+                )
+              : t(
+                  'carbon.table.batch.item.selected',
+                  { totalSelected },
+                  defaultTranslateWithId
+                )}
           </span>
         </p>
       </div>
@@ -101,7 +109,7 @@ TableBatchActions.propTypes = {
 };
 
 TableBatchActions.defaultProps = {
-  translateWithId,
+  translateWithId: defaultTranslateWithId,
 };
 
 export default TableBatchActions;
