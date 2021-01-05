@@ -793,7 +793,7 @@ categories:
           - chart--violin-plot
           - chart--waterfall
           - chart--win-loss
-          - chloropleth-map
+          - choropleth-map
           - circle-packing
           - circle--filled
           - classifier--language
