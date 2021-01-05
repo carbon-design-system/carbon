@@ -23,6 +23,7 @@ import FileUploaderSkeleton from '../FileUploader/FileUploader.Skeleton';
 import FileUploaderItem from './FileUploaderItem';
 import FileUploaderDropContainer from './FileUploaderDropContainer';
 import mdx from './FileUploader.mdx';
+import './FileUploader-story.scss';
 
 const { prefix } = settings;
 const buttonKinds = {
@@ -74,12 +75,12 @@ const props = {
       ''
     );
     return {
-      labelTitle: text('The label title (labelTitle)', 'Upload'),
+      labelTitle: text('The label title (labelTitle)', 'Upload files'),
       labelDescription: text(
         'The label description (labelDescription)',
-        'only .jpg files at 500mb or less'
+        'Max file size is 500mb. Only .jpg files are supported.'
       ),
-      buttonLabel: text('The button label (buttonLabel)', 'Add files'),
+      buttonLabel: text('The button label (buttonLabel)', 'Add file'),
       buttonKind: buttonKind || 'primary',
       size: select('Button size (size)', sizes, 'default'),
       filenameStatus: select(
@@ -154,20 +155,6 @@ export default {
       FileUploaderItem,
       FileUploaderDropContainer,
     },
-  },
-};
-
-export const _FileUploaderButton = () => (
-  <FileUploaderButton {...props.fileUploaderButton()} />
-);
-
-_FileUploaderButton.storyName = 'FileUploaderButton';
-
-_FileUploaderButton.parameters = {
-  info: {
-    text: `
-        The FileUploaderButton can be used as a standalone component if you do not need the extra UI that comes with FileUploader. The FileUploaderButton is used in FileUploader.
-      `,
   },
 };
 
