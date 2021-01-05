@@ -35,7 +35,9 @@ function FileUploaderItem({
   });
   return (
     <span className={classes} {...other}>
-      <p className={`${prefix}--file-filename`}>{name}</p>
+      <p className={`${prefix}--file-filename`} title={name}>
+        {name}
+      </p>
       <span className={`${prefix}--file__state-container`}>
         <Filename
           iconDescription={iconDescription}
