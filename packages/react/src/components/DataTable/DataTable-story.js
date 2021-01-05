@@ -208,9 +208,7 @@ export const WithToolbar = () => (
           <TableToolbarContent>
             <TableToolbarSearch onChange={onInputChange} />
             <TableToolbarMenu light>
-              <TableToolbarAction
-                onClick={action('Action 1 Click')}
-                primaryFocus>
+              <TableToolbarAction onClick={action('Action 1 Click')}>
                 Action 1
               </TableToolbarAction>
               <TableToolbarAction onClick={action('Action 2 Click')}>
