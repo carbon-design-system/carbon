@@ -108,6 +108,8 @@ categories:
           - distribute--vertical-bottom
           - distribute--vertical-center
           - distribute--vertical-top
+          - document--horizontal
+          - document--vertical
           - dot-mark
           - draw
           - drop-photo
@@ -121,6 +123,7 @@ categories:
           - image--reference
           - language
           - lasso
+          - lasso--polygon
           - link
           - list--boxes
           - list--bulleted
@@ -135,6 +138,8 @@ categories:
           - page-break
           - page-number
           - paragraph
+          - pen
+          - pen--fountain
           - percentage
           - percentage--filled
           - quotes
@@ -154,11 +159,17 @@ categories:
           - select--01
           - select--02
           - send-to-back
+          - shape--except
+          - shape--exclude
+          - shape--intersect
+          - shape--join
+          - shape--unite
           - spell-check
           - spray-paint
           - text--align--center
           - text--align--left
           - text--align--justify
+          - text--align--mixed
           - text--align--right
           - text--all-caps
           - text--bold
@@ -227,7 +238,9 @@ categories:
           - switcher
           - up-to-top
           - zoom--in
+          - zoom--in-area
           - zoom--out
+          - zoom--out-area
           - zoom--reset
       - name: Operations
         members:
@@ -258,6 +271,7 @@ categories:
           - clean
           - collapse-all
           - collapse-categories
+          - commit
           - compare
           - connect
           - delete
@@ -265,10 +279,14 @@ categories:
           - deploy-rules
           - drag--horizontal
           - drag--vertical
+          - drill-back
+          - drill-down
+          - drill-through
           - edit-filter
           - exit
           - expand-all
           - expand-categories
+          - explore
           - fade
           - filter
           - filter--edit
@@ -281,6 +299,7 @@ categories:
           - image--search
           - insert
           - insert--page
+          - insert-syntax
           - intersect
           - jump-link
           - launch
@@ -318,6 +337,7 @@ categories:
           - repeat
           - repeat--one
           - reply
+          - reply--all
           - request-quote
           - reset
           - reset--alt
@@ -338,6 +358,7 @@ categories:
           - tag--edit
           - tag--group
           - translate
+          - transpose
           - undo
           - upgrade
           - view-next
@@ -362,6 +383,7 @@ categories:
           - column
           - favorite
           - favorite--filled
+          - favorite--half
           - flash
           - flash--filled
           - flash--off
@@ -382,8 +404,16 @@ categories:
           - notification--off--filled
           - phone
           - phone--filled
+          - phone--block
+          - phone--block--filled
+          - phone--incoming
+          - phone--incoming--filled
           - phone--off
           - phone--off--filled
+          - phone--outgoing
+          - phone--outgoing--filled
+          - phone--voice
+          - phone--voice--filled
           - radio-button
           - radio-button--checked
           - row
@@ -462,6 +492,8 @@ categories:
           - currency--shekel
           - currency--won
           - currency--yen
+          - delivery--parcel
+          - delivery
           - enterprise
           - finance
           - fish
@@ -475,10 +507,17 @@ categories:
           - money
           - monster
           - noodle-bowl
+          - piggy-bank
           - purchase
           - receipt
           - shopping--bag
           - shopping--cart
+          - shopping--cart--arrow-down
+          - shopping--cart--arrow-up
+          - shopping--cart--clear
+          - shopping--cart--error
+          - shopping--cart--minus
+          - shopping--cart--plus
           - shopping--catalog
           - soccer
           - sprout
@@ -693,6 +732,8 @@ categories:
           - blockchain
           - boolean
           - box-plot
+          - calculation
+          - calculation--alt
           - calendar--heat-map
           - character-patterns
           - chart--3D
@@ -706,6 +747,7 @@ categories:
           - chart--bar-stacked
           - chart--bar-target
           - chart--bubble
+          - chart--bubble-packed
           - chart--bullet
           - chart--candlestick
           - chart--cluster-bar
@@ -726,6 +768,7 @@ categories:
           - chart--marimekko
           - chart--maximum
           - chart--minimum
+          - chart--median
           - chart--multi-line
           - chart--multitype
           - chart--network
@@ -740,18 +783,23 @@ categories:
           - chart--river
           - chart--rose
           - chart--scatter
+          - chart--spiral
           - chart--stacked
           - chart--stepper
           - chart--sunburst
           - chart--treemap
           - chart--t-sne
           - chart--venn-diagram
+          - chart--violin-plot
           - chart--waterfall
+          - chart--win-loss
+          - choropleth-map
           - circle-packing
           - circle--filled
           - classifier--language
           - cloud--data-ops
           - cloud-satellite
+          - column-dependency
           - concept
           - container-software
           - covariate
@@ -763,10 +811,13 @@ categories:
           - data--check
           - data--connected
           - data--error
+          - data--format
           - data--reference
           - data--set
           - data--structured
           - data--unstructured
+          - data--view
+          - data-bin
           - data-class
           - data-collection
           - data-player
@@ -790,6 +841,7 @@ categories:
           - flow
           - flow--connection
           - flow--data
+          - flow--modeler
           - flow--stream
           - flow--stream--reference
           - graphical-data-flow
@@ -802,6 +854,7 @@ categories:
           - improve-relevance
           - interactions
           - increase-level
+          - join--full
           - join--inner
           - join--left
           - join--outer
@@ -824,6 +877,8 @@ categories:
           - parent-child
           - phrase-sentiment
           - presentation-file
+          - progress-bar
+          - progress-bar--round
           - qq-plot
           - quadrant-plot
           - query-queue
@@ -832,6 +887,7 @@ categories:
           - row--collapse
           - row--expand
           - sankey-diagram
+          - sankey-diagram--alt
           - scatter-matrix
           - schematics
           - share-knowledge
@@ -840,12 +896,14 @@ categories:
           - skill-level--basic
           - skill-level--intermediate
           - stem-leaf-plot
+          - storage-pool
           - storage-request
           - string-integer
           - string-text
           - summary--KPI
           - sys-provision
           - table
+          - table--built
           - table--split
           - term
           - text-link
@@ -898,6 +956,7 @@ categories:
           - copy--link
           - course
           - CSV
+          - cube
           - cube-view
           - DOC
           - document
@@ -920,6 +979,7 @@ categories:
           - folder--add
           - folder--details
           - folder--details--reference
+          - folder--move-to
           - folder--off
           - folder--shared
           - folders
@@ -956,6 +1016,8 @@ categories:
           - MPEG
           - MPG2
           - music
+          - music--add
+          - music--remove
           - no-ticket
           - non-certified
           - notebook
@@ -1039,6 +1101,8 @@ categories:
           - warning--alt-inverted
           - warning--alt-inverted--filled
           - warning--filled
+          - warning--hex
+          - warning--hex--filled
           - warning--other
           - warning-square
           - warning-square--filled
@@ -1169,6 +1233,12 @@ categories:
           - direction--bear-right--02--filled
           - direction--curve
           - direction--curve--filled
+          - direction--fork
+          - direction--fork--filled
+          - direction--loop-left
+          - direction--loop-left--filled
+          - direction--loop-right
+          - direction--loop-right--filled
           - direction--merge
           - direction--merge--filled
           - direction--right--01
@@ -1203,6 +1273,7 @@ categories:
           - flight--roster
           - flight--schedule
           - gas-station
+          - gas-station--filled
           - globe
           - harbor
           - helicopter
@@ -1245,6 +1316,7 @@ categories:
           - passenger--plus
           - pedestrian
           - pedestrian-child
+          - pedestrian--family
           - picnic-area
           - plane
           - plane--private
@@ -1258,6 +1330,8 @@ categories:
           - scooter--front
           - service-desk
           - shuttle
+          - stop-sign
+          - stop-sign--filled
           - swim
           - taxi
           - theater
@@ -1315,6 +1389,8 @@ categories:
           - marine-warning
           - mixed-rain-hail
           - moon
+          - moonrise
+          - moonset
           - mostly-cloudy
           - mostly-cloudy--night
           - not-available
@@ -1380,6 +1456,7 @@ categories:
           - tropical-storm--model-tracks
           - tropical-storm--tracks
           - tropical-warning
+          - tsunami
           - uv-index
           - uv-index--alt
           - uv-index--filled
@@ -1407,6 +1484,7 @@ categories:
           - at
           - audio-console
           - augmented-reality
+          - barcode
           - battery--charging
           - battery--empty
           - battery--full
@@ -1429,8 +1507,10 @@ categories:
           - cloud--download
           - cloud--upload
           - code
+          - code--hide
           - code--reference
           - connection-signal
+          - connection-signal--off
           - debug
           - deployment-pattern
           - deployment-policy
@@ -1442,6 +1522,7 @@ categories:
           - edge-service
           - email
           - email--new
+          - equalizer
           - fetch-upload
           - fetch-upload--cloud
           - fingerprint-recognition
@@ -1456,6 +1537,7 @@ categories:
           - iot--platform
           - keyboard
           - laptop
+          - location--current
           - logo--jupyter
           - logo--keybase
           - logo--openshift
