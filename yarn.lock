@@ -3510,20 +3510,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@ibma/aat@https://able.ibm.com/tools/dist/ibma-aat-2.0.6.tgz":
-  version: 2.0.6
-  resolution: "@ibma/aat@https://able.ibm.com/tools/dist/ibma-aat-2.0.6.tgz"
-  dependencies:
-    chromedriver: ^78.0.1
-    deep-diff: ^0.3.4
-    js-yaml: ^3.13.1
-    puppeteer: ^2.0.0
-  bin:
-    aat: ./bin/aat.js
-  checksum: 97048d4e001d976cf26d82d0f022f67cba02235033cbead38333fd8a67c34f517bc2c457585d90e4a85e9633c0baee4382461ddaf54e34db6235d20f0bc303d2
-  languageName: node
-  linkType: hard
-
 "@icons/material@npm:^0.2.4":
   version: 0.2.4
   resolution: "@icons/material@npm:0.2.4"
@@ -10782,21 +10768,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"chromedriver@npm:^78.0.1":
-  version: 78.0.1
-  resolution: "chromedriver@npm:78.0.1"
-  dependencies:
-    del: ^4.1.1
-    extract-zip: ^1.6.7
-    mkdirp: ^0.5.1
-    request: ^2.88.0
-    tcp-port-used: ^1.0.1
-  bin:
-    chromedriver: ./bin/chromedriver
-  checksum: 6ba46362862785de4a5f27dc66857d03aaca8de8bad03160c2e7a1e881f9c2d6303148bb84c758f57ed4e303deb48c3311be67697465b4c8b46ea643805ccbcd
-  languageName: node
-  linkType: hard
-
 "chromedriver@npm:^83.0.0":
   version: 83.0.1
   resolution: "chromedriver@npm:83.0.1"
@@ -12938,21 +12909,6 @@ __metadata:
     pify: ^3.0.0
     rimraf: ^2.2.8
   checksum: 88112a09f91b3e44d0f830ab603c1a91e30c00ddd1e910beb40c8ff73e81605b3f0f745ecdd1e8d73aff733567736e56e742ef6a4401a0134461fb3ef2e8bb10
-  languageName: node
-  linkType: hard
-
-"del@npm:^4.1.1":
-  version: 4.1.1
-  resolution: "del@npm:4.1.1"
-  dependencies:
-    "@types/glob": ^7.1.1
-    globby: ^6.1.0
-    is-path-cwd: ^2.0.0
-    is-path-in-cwd: ^2.0.0
-    p-map: ^2.0.0
-    pify: ^4.0.1
-    rimraf: ^2.6.3
-  checksum: 87eecb2af52e794f8d9c8d200a31e0032cec8c255f08a97ef28be771bf561f16023746f2329d7b436e0a1fe09abafe80a25b2546131aa809cbd9a6bf49220cf3
   languageName: node
   linkType: hard
 
@@ -19491,7 +19447,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"is-path-cwd@npm:^2.0.0, is-path-cwd@npm:^2.2.0":
+"is-path-cwd@npm:^2.2.0":
   version: 2.2.0
   resolution: "is-path-cwd@npm:2.2.0"
   checksum: 900f6e81445b9979705952189d7dbada79dbe6d77be3b5fc95aed3dc1cc9d77de5b286db2d525942a72a717c81aa549509b76705883415fb655183dfefce9541
@@ -19507,30 +19463,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"is-path-in-cwd@npm:^2.0.0":
-  version: 2.1.0
-  resolution: "is-path-in-cwd@npm:2.1.0"
-  dependencies:
-    is-path-inside: ^2.1.0
-  checksum: d814427f4e8757e960031bf9cf202f764a688a7d6be3bc8889335e5dc112e88731fda95556b8b6c7dc030358f4e6385e27ac9af95d0406411fc5271a94abef86
-  languageName: node
-  linkType: hard
-
 "is-path-inside@npm:^1.0.0":
   version: 1.0.1
   resolution: "is-path-inside@npm:1.0.1"
   dependencies:
     path-is-inside: ^1.0.1
   checksum: 7ccbc0bedfb98d07191f9a6c839f78ffb102c24fb77f58ecca52fec13d618d15b7bd52d6335637a80c8830bc4864849adda8fd4107755a96747d690336190beb
-  languageName: node
-  linkType: hard
-
-"is-path-inside@npm:^2.1.0":
-  version: 2.1.0
-  resolution: "is-path-inside@npm:2.1.0"
-  dependencies:
-    path-is-inside: ^1.0.2
-  checksum: e289fc4ec6df457600bac34068b7c564bf17eee703888d9eea2b0a363a0ac67bb5864e715ba428904dd683287154cab0f7f9536d7e4c23e3410c5cc024a5839b
   languageName: node
   linkType: hard
 
@@ -20191,7 +20129,6 @@ __metadata:
     "@babel/preset-env": ^7.10.0
     "@babel/preset-react": ^7.10.0
     "@babel/runtime": ^7.10.0
-    "@ibma/aat": "https://able.ibm.com/tools/dist/ibma-aat-2.0.6.tgz"
     accessibility-checker: ^3.1.1
     axe-core: ^3.3.2
     babel-jest: ^26.0.1
@@ -25948,7 +25885,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"path-is-inside@npm:^1.0.1, path-is-inside@npm:^1.0.2":
+"path-is-inside@npm:^1.0.1":
   version: 1.0.2
   resolution: "path-is-inside@npm:1.0.2"
   checksum: 9c1841199d18398ee5f6d79f57eaa57f8eb85743353ea97c6d933423f246f044575a10c1847c638c36440b050aef82665b9cb4fc60950866cd239f3d51835ef4
@@ -27630,22 +27567,6 @@ __metadata:
     rimraf: ^2.6.1
     ws: ^6.1.0
   checksum: 34c6ed5829325a11a9dfbf63c422dec057680bd36b640f610cabbcb105fb3b02510ef844fa99883a461e971b68b3e542e786a3d2dea5414b805ebeea3e8f14fe
-  languageName: node
-  linkType: hard
-
-"puppeteer@npm:^2.0.0":
-  version: 2.0.0
-  resolution: "puppeteer@npm:2.0.0"
-  dependencies:
-    debug: ^4.1.0
-    extract-zip: ^1.6.6
-    https-proxy-agent: ^3.0.0
-    mime: ^2.0.3
-    progress: ^2.0.1
-    proxy-from-env: ^1.0.0
-    rimraf: ^2.6.1
-    ws: ^6.1.0
-  checksum: b3fef727c22c62f34e52492da75aa3a3627084617f5015eb33f7aa2f0e50c352b9c554deb42ebbc235540cd5561095effa6be26fcebb125cdca9ef6164a37912
   languageName: node
   linkType: hard
 
