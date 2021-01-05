@@ -962,10 +962,6 @@
   friendly_name: Cloud Pak for Applications
   aliases:
     - Cloud Pak for Applications
-- name: cloud-pak--for-automation
-  friendly_name: Cloud Pak for Automation
-  aliases:
-    - Cloud Pak for Automation
 - name: cloud-pak--for-data
   friendly_name: Cloud Pak for Data
   aliases:
@@ -1089,7 +1085,7 @@
     - watson
 - name: condition--builder
   friendly_name: Condition builder
-  aliases: 
+  aliases:
     - condition builder
     - if
     - condition
@@ -3297,7 +3293,7 @@
     - cities
 - name: random--samples
   friendly_name: Random samples
-  aliases: 
+  aliases:
     - random samples
     - random
     - dice
