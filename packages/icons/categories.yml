@@ -493,7 +493,7 @@ categories:
           - currency--won
           - currency--yen
           - delivery--parcel
-          - delivery--truck
+          - delivery
           - enterprise
           - finance
           - fish

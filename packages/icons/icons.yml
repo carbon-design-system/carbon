@@ -4416,8 +4416,8 @@
   aliases: []
   sizes:
     - 32
-- name: delivery--truck
-  friendly_name: delivery--truck
+- name: delivery
+  friendly_name: delivery
   aliases: []
   sizes:
     - 32
