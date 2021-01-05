@@ -329,6 +329,7 @@ export default class DatePicker extends Component {
           onValueUpdate: onHook,
         });
         this.addKeyboardEvents(this.cal);
+        this.addRoleAttributeToDialog();
       }
     }
   }
@@ -383,6 +384,22 @@ export default class DatePicker extends Component {
       this.cal.selectedDates.length > 0
     ) {
       this.cal.clear();
+    }
+  };
+
+  /**
+   * Flatpickr's calendar dialog is not rendered in a landmark causing an
+   * error with IBM Equal Access Accessibility Checker so we add an aria
+   * role to the container div.
+   */
+  addRoleAttributeToDialog = () => {
+    if (this.inputField) {
+      this.cal.calendarContainer.setAttribute('role', 'region');
+      // IBM EAAC requires an aria-label on a role='region'
+      this.cal.calendarContainer.setAttribute(
+        'aria-label',
+        'calendar-container'
+      );
     }
   };
 
