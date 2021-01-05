@@ -10623,7 +10623,6 @@ $disabled-01: if(
   - [accordion [mixin]](#accordion-mixin)
   - [content-switcher [mixin]](#content-switcher-mixin)
   - [date-picker [mixin]](#date-picker-mixin)
-  - [dropdown [mixin]](#dropdown-mixin)
   - [listbox [mixin]](#listbox-mixin)
   - [number-input [mixin]](#number-input-mixin)
   - [search [mixin]](#search-mixin)
@@ -20554,7 +20553,6 @@ Dropdown styles
   }
 
   .#{$prefix}--dropdown--disabled {
-    background-color: $disabled-01;
     border-bottom-color: transparent;
 
     &:hover {
@@ -20705,7 +20703,6 @@ Dropdown styles
   - [selected-ui [variable]](#selected-ui-variable)
   - [text-02 [variable]](#text-02-variable)
   - [decorative-01 [variable]](#decorative-01-variable)
-  - [disabled-01 [variable]](#disabled-01-variable)
   - [disabled-02 [variable]](#disabled-02-variable)
   - [carbon--spacing-07 [variable]](#carbon--spacing-07-variable)
   - [carbon--spacing-04 [variable]](#carbon--spacing-04-variable)
