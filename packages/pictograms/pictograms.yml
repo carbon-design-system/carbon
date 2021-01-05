@@ -963,6 +963,34 @@
     - cloud vmware
     - cloud
     - vmware
+- name: cloud-pak--family
+  friendly_name: Cloud Pak Family
+  aliases:
+    - Cloud Pak Family
+- name: cloud-pak--for-applications
+  friendly_name: Cloud Pak for Applications
+  aliases:
+    - Cloud Pak for Applications
+- name: cloud-pak--for-data
+  friendly_name: Cloud Pak for Data
+  aliases:
+    - Cloud Pak for Data
+- name: cloud-pak--for-integration
+  friendly_name: Cloud Pak for Integration
+  aliases:
+    - Cloud Pak for Integration
+- name: cloud-pak--for-multicloud-management
+  friendly_name: Cloud Pak for Multicloud Management
+  aliases:
+    - Cloud Pak for Multicloud Management
+- name: cloud-pak--for-security
+  friendly_name: Cloud Pak for Security
+  aliases:
+    - Cloud Pak for Security
+- name: cloud-pak--system
+  friendly_name: Cloud Pak System
+  aliases:
+    - Cloud Pak System
 - name: cloudy
   friendly_name: Cloudy
   aliases:
@@ -1067,7 +1095,7 @@
     - watson
 - name: condition--builder
   friendly_name: Condition builder
-  aliases: 
+  aliases:
     - condition builder
     - if
     - condition
@@ -3375,7 +3403,7 @@
     - cities
 - name: random--samples
   friendly_name: Random samples
-  aliases: 
+  aliases:
     - random samples
     - random
     - dice
