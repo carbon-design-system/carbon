@@ -348,7 +348,6 @@
   }
 
   .#{$prefix}--dropdown--disabled {
-    background-color: $disabled-01;
     border-bottom-color: transparent;
 
     &:hover {
