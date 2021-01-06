@@ -38,7 +38,7 @@
   },
   "dependencies": {
     "@carbon/icon-helpers": "^10.11.0-rc.0",
-    "@carbon/telemetry": "^0.0.0-alpha.5",
+    "@carbon/telemetry": "0.0.0-alpha.6",
     "prop-types": "^15.7.2"
   },
   "devDependencies": {
