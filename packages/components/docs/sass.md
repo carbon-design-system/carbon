@@ -5669,6 +5669,7 @@ $carbon--spacing-02: 0.25rem;
 - **Used by**:
   - [checkbox [mixin]](#checkbox-mixin)
   - [snippet [mixin]](#snippet-mixin)
+  - [file-uploader [mixin]](#file-uploader-mixin)
   - [form [mixin]](#form-mixin)
   - [inline-notifications [mixin]](#inline-notifications-mixin)
   - [pseudo-underline [mixin]](#pseudo-underline-mixin)
@@ -10622,8 +10623,6 @@ $disabled-01: if(
   - [accordion [mixin]](#accordion-mixin)
   - [content-switcher [mixin]](#content-switcher-mixin)
   - [date-picker [mixin]](#date-picker-mixin)
-  - [dropdown [mixin]](#dropdown-mixin)
-  - [file-uploader [mixin]](#file-uploader-mixin)
   - [listbox [mixin]](#listbox-mixin)
   - [number-input [mixin]](#number-input-mixin)
   - [search [mixin]](#search-mixin)
@@ -20554,7 +20553,6 @@ Dropdown styles
   }
 
   .#{$prefix}--dropdown--disabled {
-    background-color: $disabled-01;
     border-bottom-color: transparent;
 
     &:hover {
@@ -20705,7 +20703,6 @@ Dropdown styles
   - [selected-ui [variable]](#selected-ui-variable)
   - [text-02 [variable]](#text-02-variable)
   - [decorative-01 [variable]](#decorative-01-variable)
-  - [disabled-01 [variable]](#disabled-01-variable)
   - [disabled-02 [variable]](#disabled-02-variable)
   - [carbon--spacing-07 [variable]](#carbon--spacing-07-variable)
   - [carbon--spacing-04 [variable]](#carbon--spacing-04-variable)
@@ -20737,6 +20734,10 @@ File uploader styles
 
     margin-bottom: $carbon--spacing-03;
     color: $text-01;
+  }
+
+  .#{$prefix}--file--label--disabled {
+    color: $disabled-02;
   }
 
   .#{$prefix}--file-input {
@@ -20794,7 +20795,7 @@ File uploader styles
   }
 
   .#{$prefix}--file-browse-btn--disabled .#{$prefix}--file__drop-container {
-    border: 1px dashed $disabled-01;
+    border: 1px dashed $disabled-02;
   }
 
   .#{$prefix}--label-description {
@@ -20803,6 +20804,10 @@ File uploader styles
 
     margin-bottom: $carbon--spacing-05;
     color: $text-02;
+  }
+
+  .#{$prefix}--label-description--disabled {
+    color: $disabled-02;
   }
 
   // For backwards compatibility
@@ -20822,8 +20827,8 @@ File uploader styles
   .#{$prefix}--file__selected-file {
     display: grid;
     grid-auto-rows: auto;
-    grid-gap: $carbon--spacing-05;
     grid-template-columns: 1fr auto;
+    gap: rem(12px) $carbon--spacing-05;
     align-items: center;
     max-width: rem(320px);
     min-height: $carbon--spacing-09;
@@ -20864,10 +20869,12 @@ File uploader styles
   }
 
   .#{$prefix}--file__selected-file--field {
+    gap: $carbon--spacing-03 $carbon--spacing-05;
     min-height: rem(40px);
   }
 
   .#{$prefix}--file__selected-file--sm {
+    gap: $carbon--spacing-02 $carbon--spacing-05;
     min-height: rem(32px);
   }
 
@@ -20878,19 +20885,36 @@ File uploader styles
     max-width: rem(320px);
     margin-bottom: $carbon--spacing-03;
     background-color: $field-01;
-
     outline-width: 1px;
   }
 
   .#{$prefix}--file__selected-file--invalid {
     @include focus-outline('invalid');
 
-    padding: $carbon--spacing-05 0;
+    padding: rem(12px) 0;
+  }
+
+  .#{$prefix}--file__selected-file--invalid.#{$prefix}--file__selected-file--sm {
+    padding: $carbon--spacing-02 0;
+  }
+
+  .#{$prefix}--file__selected-file--invalid.#{$prefix}--file__selected-file--field {
+    padding: $carbon--spacing-03 0;
   }
 
   .#{$prefix}--file__selected-file--invalid .#{$prefix}--form-requirement {
     padding-top: $carbon--spacing-05;
     border-top: 1px solid $ui-03;
+  }
+
+  .#{$prefix}--file__selected-file--invalid.#{$prefix}--file__selected-file--sm
+    .#{$prefix}--form-requirement {
+    padding-top: rem(7px);
+  }
+
+  .#{$prefix}--file__selected-file--invalid.#{$prefix}--file__selected-file--field
+    .#{$prefix}--form-requirement {
+    padding-top: rem(11px);
   }
 
   .#{$prefix}--file__selected-file--invalid
@@ -20933,6 +20957,7 @@ File uploader styles
 
   .#{$prefix}--file__state-container {
     display: flex;
+    align-items: center;
     justify-content: center;
     min-width: 1.5rem;
     padding-right: $carbon--spacing-05;
@@ -20960,14 +20985,15 @@ File uploader styles
   .#{$prefix}--file__state-container .#{$prefix}--file-invalid {
     width: $carbon--spacing-05;
     height: $carbon--spacing-05;
-    margin-right: $carbon--spacing-03;
     fill: $support-01;
   }
 
   .#{$prefix}--file__state-container .#{$prefix}--file-close {
     display: flex;
-    width: $carbon--spacing-05;
-    height: $carbon--spacing-05;
+    align-items: center;
+    justify-content: center;
+    width: $carbon--spacing-06;
+    height: $carbon--spacing-06;
     padding: 0;
     background-color: transparent;
     border: none;
@@ -20975,7 +21001,7 @@ File uploader styles
     fill: $icon-01;
 
     &:focus {
-      @include focus-outline('border');
+      @include focus-outline('outline');
     }
   }
 
@@ -21020,15 +21046,15 @@ File uploader styles
   - [carbon--spacing-03 [variable]](#carbon--spacing-03-variable)
   - [support-01 [variable]](#support-01-variable)
   - [text-01 [variable]](#text-01-variable)
+  - [disabled-02 [variable]](#disabled-02-variable)
   - [link-01 [variable]](#link-01-variable)
   - [interactive-03 [variable]](#interactive-03-variable)
-  - [disabled-02 [variable]](#disabled-02-variable)
-  - [disabled-01 [variable]](#disabled-01-variable)
   - [carbon--spacing-05 [variable]](#carbon--spacing-05-variable)
   - [text-02 [variable]](#text-02-variable)
   - [carbon--spacing-06 [variable]](#carbon--spacing-06-variable)
   - [carbon--spacing-09 [variable]](#carbon--spacing-09-variable)
   - [field-01 [variable]](#field-01-variable)
+  - [carbon--spacing-02 [variable]](#carbon--spacing-02-variable)
   - [ui-03 [variable]](#ui-03-variable)
   - [text-error [variable]](#text-error-variable)
   - [ui-05 [variable]](#ui-05-variable)
