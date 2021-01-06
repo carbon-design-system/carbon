@@ -2848,7 +2848,7 @@ __metadata:
     "@carbon/icon-build-helpers": ^0.13.0-rc.0
     "@carbon/icon-helpers": ^10.11.0-rc.0
     "@carbon/pictograms": ^11.1.0-rc.0
-    "@carbon/telemetry": ^0.0.0-alpha.5
+    "@carbon/telemetry": 0.0.0-alpha.6
     prop-types: ^15.7.2
   peerDependencies:
     react: ">=16"
@@ -2890,9 +2890,9 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@carbon/telemetry@npm:^0.0.0-alpha.5":
-  version: 0.0.0-alpha.5
-  resolution: "@carbon/telemetry@npm:0.0.0-alpha.5"
+"@carbon/telemetry@npm:0.0.0-alpha.6":
+  version: 0.0.0-alpha.6
+  resolution: "@carbon/telemetry@npm:0.0.0-alpha.6"
   dependencies:
     "@babel/parser": ^7.12.5
     "@babel/traverse": ^7.12.5
@@ -2906,7 +2906,7 @@ __metadata:
     yargs: ^16.1.1
   bin:
     carbon-telemetry: bin/carbon-telemetry.js
-  checksum: a72b74d37efff08c087fa861ea77d99061e53d387658852d0dbf95cae86b97f3ce237244bb404d7793a22f92557ac3ceb41086406d281b76edd95034fa668824
+  checksum: 4d31a35b55b080cf703cab1df2c6bcbf97cd619dd43f1181280b7645e7f60a7f143c8fb128b1e406bd7daf1a0ca13d345b2ab9011273bbbbf3ecab5e74328b90
   languageName: node
   linkType: hard
 
