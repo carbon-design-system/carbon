@@ -18,6 +18,10 @@
 /// @access private
 /// @group multi-select
 @mixin multiselect {
+  .#{$prefix}--multi-select .#{$prefix}--tag {
+    margin: 0 $carbon--spacing-03 0 0;
+  }
+
   .#{$prefix}--multi-select .#{$prefix}--list-box__menu {
     min-width: auto;
   }
