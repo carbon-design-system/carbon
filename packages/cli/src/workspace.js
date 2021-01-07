@@ -54,9 +54,9 @@ async function getPackages() {
     '--json',
   ]);
   return JSON.parse(
-     // Clean-up output by stripping out `yarn` information related to the	
-    // command and how long it took to run	
-    lernaListOutput.split('\n').slice(2, -1).join('\n')	
+    // Clean-up output by stripping out `yarn` information related to the
+    // command and how long it took to run
+    lernaListOutput.split('\n').slice(2, -1).join('\n')
   ).filter((pkg) => !pkg.private);
 }
 
