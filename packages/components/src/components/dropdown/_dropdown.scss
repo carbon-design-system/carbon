@@ -140,6 +140,10 @@
 
   .#{$prefix}--dropdown--light {
     background-color: $field-02;
+
+    &:hover {
+      background-color: $hover-light-ui;
+    }
   }
 
   .#{$prefix}--dropdown--up .#{$prefix}--dropdown-list {

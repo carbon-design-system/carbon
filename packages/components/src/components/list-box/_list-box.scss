@@ -147,6 +147,10 @@ $list-box-menu-width: rem(300px);
   // Light variation for 'list-box'
   .#{$prefix}--list-box--light {
     background-color: $field-02;
+
+    &:hover {
+      background-color: $hover-light-ui;
+    }
   }
 
   .#{$prefix}--list-box--light .#{$prefix}--list-box__menu {
