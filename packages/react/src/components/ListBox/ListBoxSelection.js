@@ -87,7 +87,7 @@ const ListBoxSelection = ({
       tabIndex={disabled ? -1 : 0}
       onClick={handleOnClick}
       onKeyDown={handleOnKeyDown}
-      aria-label="Clear Selection"
+      aria-label={description}
       title={description}>
       {selectionCount}
       <Close16 />
