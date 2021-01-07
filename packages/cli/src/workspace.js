@@ -56,8 +56,7 @@ async function getPackages() {
   return JSON.parse(
     // Clean-up output by stripping out `yarn` information related to the
     // command and how long it took to run
-    lernaListOutput
-  ).filter((pkg) => !pkg.private);
+  lernaListOutput.split('\n').slice(2, -1).join('\n')
 }
 
 module.exports = {
