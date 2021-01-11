@@ -30,6 +30,10 @@ module.exports = {
     '@storybook/addon-docs',
     '@storybook/addon-notes/register',
     'storybook-readme/register',
+    "@storybook/addon-links",
+    "@storybook/addon-essentials",
+    "@storybook/preset-create-react-app",
+    "./carbon-theme-addon/src/preset.js"
 
     // Phase 3: port over custom panels/add-ons
   ],

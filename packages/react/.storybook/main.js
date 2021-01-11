@@ -10,7 +10,7 @@
 module.exports = {
   addons: [
     'storybook-preset-carbon',
-    require.resolve('./addon-carbon-theme/register'),
+    // require.resolve('./addon-carbon-theme/register'),
   ],
   stories: ['../src/**/*-story.js', '../src/**/*.stories.mdx'],
 };
