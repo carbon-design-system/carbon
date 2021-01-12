@@ -28,12 +28,12 @@ describe('Filename', () => {
     );
 
     it.each(statuses)(
-      'should have no DAP violations with status %s',
+      'should have no AC violations with status %s',
       async (status) => {
         const { container } = render(
           <Filename iconDescription="test description" status={status} />
         );
-        await expect(container).toHaveNoDAPViolations(`Filename-${status}`);
+        await expect(container).toHaveNoACViolations(`Filename-${status}`);
       }
     );
   });
