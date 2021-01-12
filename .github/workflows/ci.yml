@@ -25,7 +25,7 @@ jobs:
           node-version: '14.x'
       - name: Install dependencies
         run: yarn install --immutable --immutable-cache
-      - name: Check formatting of JavaScript files
+      - name: Check formatting of project files
         run: yarn format:diff
 
   lint:
