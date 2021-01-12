@@ -128,25 +128,50 @@ function createIconComponent(moduleName, descriptor) {
   const attrsAsString = Object.keys(attrs)
     .map((attr) => `${attr}: "${attrs[attr]}"`)
     .join(',');
+
   const source = `${BANNER}
+import { h } from 'vue';
 import { getAttributes } from '@carbon/icon-helpers';
-export default {
+
+const common = {
   name: '${moduleName}',
-  functional: true,
   // We use title as the prop name as it is not a valid attribute for an SVG
   // HTML element
   props: ['title'],
+};
+
+const getSvgAttrs = (title, componentAttrs) => {
+  return getAttributes({
+    ${attrsAsString},
+    preserveAspectRatio: 'xMidYMid meet',
+    xmlns: 'http://www.w3.org/2000/svg',
+    // Special case here, we need to coordinate that we are using title,
+    // potentially, to get the right focus attributes
+    title,
+    ...componentAttrs
+  });
+};
+
+const component = h ? {
+  // Vue 3 component
+  ...common,
+  setup(props, { attrs }) {
+    return () => h(
+      'svg',
+      getSvgAttrs(props.title, attrs),
+      [
+        props.title && h('title', props.title),
+        ${content.map(convertToVue3).join(', ')},
+      ]
+    );
+  },
+} : {
+  // Vue 2 component
+  ...common,
+  functional: true,
   render(createElement, context) {
     const { children, data, listeners, props } = context;
-    const attrs = getAttributes({
-      ${attrsAsString},
-      preserveAspectRatio: 'xMidYMid meet',
-      xmlns: 'http://www.w3.org/2000/svg',
-      // Special case here, we need to coordinate that we are using title,
-      // potentially, to get the right focus attributes
-      title: props.title,
-      ...data.attrs
-    });
+    const attrs = getSvgAttrs(props.title, data.attrs);
     const svgData = {
       attrs,
       on: listeners,
@@ -166,23 +191,36 @@ export default {
     svgData.style = { ...data.staticStyle, ...data.style };
     return createElement('svg', svgData, [
       props.title && createElement('title', null, props.title),
-      ${content.map(convertToVue).join(', ')},
+      ${content.map(convertToVue2).join(', ')},
       children,
     ]);
   },
-};`;
+};
+
+export default component;
+`;
 
   return source;
 }
 
 /**
- * Convert the given node to a Vue string source
+ * Convert the given node to a Vue 2 string source
  * @param {object} node
  * @returns {string}
  */
-function convertToVue(node) {
+function convertToVue2(node) {
   const { elem, attrs } = node;
   return `createElement('${elem}', { attrs: ${JSON.stringify(attrs)} })`;
+}
+
+/**
+ * Convert the given node to a Vue 3 string source
+ * @param {object} node
+ * @returns {string}
+ */
+function convertToVue3(node) {
+  const { elem, attrs } = node;
+  return `h('${elem}', ${JSON.stringify(attrs)})`;
 }
 
 module.exports = builder;
