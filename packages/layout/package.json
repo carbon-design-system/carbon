@@ -26,7 +26,7 @@
   },
   "scripts": {
     "build": "yarn clean && bundler bundle src/index.js --name CarbonLayout && node tasks/build.js && bundler sassdoc \"scss/**/*.scss\"",
-    "clean": "rimraf es lib umd scss/generated"
+    "clean": "rimraf es lib umd scss/generated scss/modules/generated"
   },
   "devDependencies": {
     "@carbon/bundler": "^10.11.0",
