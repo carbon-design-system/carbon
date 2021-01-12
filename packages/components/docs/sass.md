@@ -18735,12 +18735,9 @@ Data table core styles
     vertical-align: middle;
   }
 
-  .#{$prefix}--data-table td {
+  .#{$prefix}--data-table th {
     padding-right: $spacing-05;
     padding-left: $spacing-05;
-  }
-
-  .#{$prefix}--data-table th {
     color: $text-01;
     background-color: $ui-03;
   }
@@ -18752,8 +18749,6 @@ Data table core styles
   }
 
   .#{$prefix}--data-table .#{$prefix}--table-header-label {
-    padding-right: $spacing-05;
-    padding-left: $spacing-05;
     text-align: left;
   }
 
@@ -18920,22 +18915,40 @@ Data table core styles
   .#{$prefix}--data-table thead th.#{$prefix}--table-expand,
   .#{$prefix}--data-table tbody td.#{$prefix}--table-expand {
     min-width: 0;
-    // spacing between checkbox / chevron and next cell should be 16px / 1rem
-    // adjacent cell has 16px / 1rem padding-left though, hence the removal of padding-right here
-    padding-right: 0;
-    padding-left: $spacing-05;
   }
 
   .#{$prefix}--data-table thead th.#{$prefix}--table-column-checkbox,
   .#{$prefix}--data-table tbody td.#{$prefix}--table-column-checkbox {
     // 16px padding left + 20px checkbox width
-    width: rem(36px);
+    width: rem(16px);
+    // spacing between checkbox / chevron and next cell should be 16px / 1rem
+    // adjacent cell has 16px / 1rem padding-left though, hence the removal of padding-right here
+    padding-right: $spacing-05;
+    padding-left: $spacing-05;
   }
 
   .#{$prefix}--data-table thead th.#{$prefix}--table-expand,
   .#{$prefix}--data-table tbody td.#{$prefix}--table-expand {
-    // 16px padding left + 16px checkbox width
+    width: rem(48px);
+    height: rem(48px);
+  }
+
+  .#{$prefix}--data-table--compact thead th.#{$prefix}--table-expand,
+  .#{$prefix}--data-table--compact tbody td.#{$prefix}--table-expand {
+    width: rem(24px);
+    height: rem(24px);
+  }
+
+  .#{$prefix}--data-table--short thead th.#{$prefix}--table-expand,
+  .#{$prefix}--data-table--short tbody td.#{$prefix}--table-expand {
     width: rem(32px);
+    height: rem(32px);
+  }
+
+  .#{$prefix}--data-table--tall thead th.#{$prefix}--table-expand,
+  .#{$prefix}--data-table--tall tbody td.#{$prefix}--table-expand {
+    width: rem(64px);
+    height: rem(64px);
   }
 
   .#{$prefix}--data-table--tall .#{$prefix}--table-column-checkbox {
@@ -19546,20 +19559,26 @@ Data table expandable styles
   // Expand icon column
   //----------------------------------------------------------------------------
   .#{$prefix}--data-table td.#{$prefix}--table-expand {
-    width: 2.5rem;
-    min-width: 2.5rem;
     border-bottom: 1px solid $ui-03;
   }
 
-  .#{$prefix}--data-table td.#{$prefix}--table-expand,
-  th.#{$prefix}--table-expand {
-    padding: 0 $spacing-05;
+  .#{$prefix}--data-table th.#{$prefix}--table-expand + th,
+  .#{$prefix}--data-table td.#{$prefix}--table-expand + td {
+    padding-left: 0;
   }
 
-  .#{$prefix}--data-table--tall td.#{$prefix}--table-expand,
-  .#{$prefix}--data-table--tall th.#{$prefix}--table-expand {
-    padding-top: rem(16px);
-    padding-bottom: rem(16px);
+  .#{$prefix}--data-table
+    th.#{$prefix}--table-expand
+    + .#{$prefix}--table-column-checkbox,
+  .#{$prefix}--data-table
+    td.#{$prefix}--table-expand
+    + .#{$prefix}--table-column-checkbox {
+    padding-right: 0;
+  }
+
+  .#{$prefix}--data-table td.#{$prefix}--table-expand,
+  .#{$prefix}--data-table th.#{$prefix}--table-expand {
+    padding: 0;
   }
 
   .#{$prefix}--data-table
@@ -19576,17 +19595,21 @@ Data table expandable styles
   .#{$prefix}--table-expand__button {
     @include button-reset('false');
 
-    height: rem(16px);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    // Account for the border in `.bx--table-expand`
+    height: calc(100% + 1px);
     vertical-align: inherit;
   }
 
   .#{$prefix}--table-expand__button:focus {
     outline: none;
+    box-shadow: inset 0 0 0 2px $focus;
   }
 
   .#{$prefix}--table-expand__button:focus .#{$prefix}--table-expand__svg {
-    box-shadow: inset 0 0 0 2px $focus;
-
     // Windows, Firefox HCM Fix
     @media screen and (-ms-high-contrast: active),
       screen and (prefers-contrast) {
@@ -19605,6 +19628,11 @@ Data table expandable styles
       // `ButtonText` is a CSS2 system color to help improve colors in HCM
       fill: ButtonText;
     }
+  }
+
+  .#{$prefix}--data-table--tall .#{$prefix}--table-expand__button {
+    padding-top: rem(16px);
+    padding-bottom: rem(24px);
   }
 
   // fix expanded parent separating border length
