@@ -21447,10 +21447,6 @@ Link styles
   .#{$prefix}--link.#{$prefix}--link--inline {
     text-decoration: underline;
 
-    &:hover {
-      color: $hover-primary-text;
-    }
-
     &:focus,
     &:visited {
       text-decoration: none;
