@@ -12,6 +12,9 @@ import Link from '../Link';
 import ButtonSkeleton from '../Button/Button.Skeleton';
 import { shallow, mount } from 'enzyme';
 import { settings } from 'carbon-components';
+import { cleanup, render, screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
+import '@testing-library/jest-dom';
 
 const { prefix } = settings;
 
@@ -390,5 +393,58 @@ describe('Small ButtonSkeleton', () => {
       expect(wrapper.hasClass(`${prefix}--btn--sm`)).toEqual(true);
       expect(wrapper.hasClass(`${prefix}--skeleton`)).toEqual(true);
     });
+  });
+});
+
+describe('Small ButtonSkeleton', () => {
+  describe('Renders as expected', () => {
+    const wrapper = shallow(<ButtonSkeleton small />);
+
+    it('has the expected classes for small', () => {
+      expect(wrapper.hasClass(`${prefix}--btn--sm`)).toEqual(true);
+      expect(wrapper.hasClass(`${prefix}--skeleton`)).toEqual(true);
+    });
+  });
+});
+
+describe('Button accessibility', () => {
+  afterEach(cleanup);
+
+  it('should have no Axe violations', async () => {
+    render(<Button>Button Label</Button>);
+
+    await expect(screen.getByRole('button')).toHaveNoAxeViolations();
+  });
+
+  it('should have no Accessibility Checker violations', async () => {
+    render(
+      <main>
+        <Button>Button Label</Button>
+      </main>
+    );
+
+    await expect(screen.getByRole('button')).toHaveNoACViolations('Button');
+  });
+
+  it('is keyboard accessible', () => {
+    render(<Button>Button Label</Button>);
+    userEvent.tab();
+    expect(screen.getByText('Button Label')).toHaveFocus();
+  });
+
+  it('should have an accessible label', () => {
+    render(<Button>Button Label</Button>);
+    expect(() => screen.getByText('Button Label')).not.toThrow();
+  });
+
+  it('should have the role of button', () => {
+    render(<Button>Button Label</Button>);
+    expect(() => screen.getByRole('button')).not.toThrow();
+  });
+
+  it('is not keyboard accessible when disabled', () => {
+    render(<Button disabled>Button Label</Button>);
+    userEvent.tab();
+    expect(document.body).toHaveFocus();
   });
 });
