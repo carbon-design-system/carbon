@@ -23,13 +23,13 @@ describe('Tag', () => {
       await expect(container).toHaveNoAxeViolations();
     });
 
-    it('should have no DAP violations', async () => {
+    it('should have no AC violations', async () => {
       const { container } = render(
         <main>
           <Tag type="red">This is not a tag</Tag>
         </main>
       );
-      await expect(container).toHaveNoDAPViolations('Tag');
+      await expect(container).toHaveNoACViolations('Tag');
     });
   });
 
