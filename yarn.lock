@@ -1701,6 +1701,8 @@ __metadata:
     "@babel/preset-react": ^7.10.0
     "@carbon/cli-reporter": ^10.4.0
     "@carbon/icon-helpers": ^10.11.0
+    "@rollup/plugin-babel": ^5.2.2
+    "@rollup/plugin-replace": ^2.3.4
     browserslist-config-carbon: ^10.6.0
     change-case: ^4.1.1
     core-js: ^3.6.5
@@ -1714,10 +1716,8 @@ __metadata:
     react: ^16.6.0
     react-dom: ^16.6.0
     rimraf: ^3.0.0
-    rollup: ^1.15.1
-    rollup-plugin-babel: ^4.4.0
-    rollup-plugin-replace: ^2.2.0
-    rollup-plugin-strip-banner: ^0.2.0
+    rollup: ^2.36.1
+    rollup-plugin-strip-banner: ^2.0.0
     svgo: ^1.1.1
   languageName: unknown
   linkType: soft
@@ -3890,6 +3890,48 @@ __metadata:
     react: 15.x || 16.x || 16.4.0-alpha.0911da3
     react-dom: 15.x || 16.x || 16.4.0-alpha.0911da3
   checksum: 03b4d81e81a590a23aabcfbfa05c5f2ea346d3a14049b46e1221f17a76660b2c042011bfdc855dc09d72a2d869ed2ddbade829ecb81ff60248c7403efd70b429
+  languageName: node
+  linkType: hard
+
+"@rollup/plugin-babel@npm:^5.2.2":
+  version: 5.2.2
+  resolution: "@rollup/plugin-babel@npm:5.2.2"
+  dependencies:
+    "@babel/helper-module-imports": ^7.10.4
+    "@rollup/pluginutils": ^3.1.0
+  peerDependencies:
+    "@babel/core": ^7.0.0
+    "@types/babel__core": ^7.1.9
+    rollup: ^1.20.0||^2.0.0
+  peerDependenciesMeta:
+    "@types/babel__core":
+      optional: true
+  checksum: 757fdcdcb135e2f2fd7198c101100a97668471c74f9581f35b29c13f773a0e2dc1a94ed684b97a5e450ac7dc91502c18f5575de2079bc2579dacf7939f55efc0
+  languageName: node
+  linkType: hard
+
+"@rollup/plugin-replace@npm:^2.3.4":
+  version: 2.3.4
+  resolution: "@rollup/plugin-replace@npm:2.3.4"
+  dependencies:
+    "@rollup/pluginutils": ^3.1.0
+    magic-string: ^0.25.7
+  peerDependencies:
+    rollup: ^1.20.0 || ^2.0.0
+  checksum: 97ae11600a959b7668105d9e28801319f9158b01a1d9dbf4f910136491463d8798c1bb1d62e47bf04d5ff08c9c5b3f333aa39ccad57a4e5531d8edaa38ffd74e
+  languageName: node
+  linkType: hard
+
+"@rollup/pluginutils@npm:^3.1.0":
+  version: 3.1.0
+  resolution: "@rollup/pluginutils@npm:3.1.0"
+  dependencies:
+    "@types/estree": 0.0.39
+    estree-walker: ^1.0.1
+    picomatch: ^2.2.2
+  peerDependencies:
+    rollup: ^1.20.0||^2.0.0
+  checksum: 45da6411e045d1b034242a8144f4a5e8c02ff1b68a2e0857807f5bb4b091c416f2015e075057f0f0dec200e7b35efe6ed4e301b43e365cedea09192f01a6839b
   languageName: node
   linkType: hard
 
@@ -13478,17 +13520,17 @@ __metadata:
   languageName: node
   linkType: hard
 
-"estree-walker@npm:^0.3.0":
-  version: 0.3.1
-  resolution: "estree-walker@npm:0.3.1"
-  checksum: 20a1a9833ef81e4d39ec3ed04c7d47a2f618e41c330d639d6bc4544b3355c230e32e8b65ebd587e953f03259348efbd9886cb8b3a10b7add6762e7fbec80d804
-  languageName: node
-  linkType: hard
-
 "estree-walker@npm:^0.6.0, estree-walker@npm:^0.6.1":
   version: 0.6.1
   resolution: "estree-walker@npm:0.6.1"
   checksum: a63b94b841fcda2d79ff8e313b4ea8439b3364094ba66547289814bd7da4399a54cd33849b23504d239266430f219a142627071201a9fb6eb488bd025575f8fc
+  languageName: node
+  linkType: hard
+
+"estree-walker@npm:^1.0.1":
+  version: 1.0.1
+  resolution: "estree-walker@npm:1.0.1"
+  checksum: 85e7cee763e9125a7d8a947b3a06a8b9282873936df220dd0d791d9b3315e45e40ab096b43ba71bdc99140c11a6d23fdcf686642dc119a7b2d6181004fdb24d2
   languageName: node
   linkType: hard
 
@@ -21231,15 +21273,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"magic-string@npm:0.19.1":
-  version: 0.19.1
-  resolution: "magic-string@npm:0.19.1"
-  dependencies:
-    vlq: ^0.2.1
-  checksum: eabaf9b175907e024d36eea0ac0687e73f5477e570e3bf37bf243e5e91e96560bceb557015aa7aacd2f456e3eec19fd890b3f8800d5f8a2013819f4c804d5bd0
-  languageName: node
-  linkType: hard
-
 "magic-string@npm:0.25.4":
   version: 0.25.4
   resolution: "magic-string@npm:0.25.4"
@@ -21249,7 +21282,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"magic-string@npm:0.25.7, magic-string@npm:^0.25.2":
+"magic-string@npm:0.25.7, magic-string@npm:^0.25.2, magic-string@npm:^0.25.7":
   version: 0.25.7
   resolution: "magic-string@npm:0.25.7"
   dependencies:
@@ -21857,7 +21890,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"micromatch@npm:^2.1.5, micromatch@npm:^2.3.11, micromatch@npm:^2.3.7":
+"micromatch@npm:^2.1.5, micromatch@npm:^2.3.7":
   version: 2.3.11
   resolution: "micromatch@npm:2.3.11"
   dependencies:
@@ -24338,6 +24371,13 @@ __metadata:
   version: 2.2.1
   resolution: "picomatch@npm:2.2.1"
   checksum: c926fe6cb118643bbd4eb44125afbfa02fcd3f6ff3ba85db201874678a46ab2dad589c8db654474cc131df356af36a6afd4fb3c8878ca26bae5190c232b838a5
+  languageName: node
+  linkType: hard
+
+"picomatch@npm:^2.2.2":
+  version: 2.2.2
+  resolution: "picomatch@npm:2.2.2"
+  checksum: 20fa75e0a58b39d83425b3db68744d5f6f361fd4fd66ec7745d884036d502abba0d553a637703af79939b844164b13e60eea339ccb043d7fbd74c3da2592b864
   languageName: node
   linkType: hard
 
@@ -27791,17 +27831,6 @@ resolve@1.1.x:
   languageName: node
   linkType: hard
 
-"rollup-plugin-strip-banner@npm:^0.2.0":
-  version: 0.2.0
-  resolution: "rollup-plugin-strip-banner@npm:0.2.0"
-  dependencies:
-    extract-banner: 0.1.2
-    magic-string: 0.19.1
-    rollup-pluginutils: 2.0.1
-  checksum: ba6dab339b576b3c237af2b05131b07483fa83ad19cd904c1d99ec2d7562af63ce53505429331529908ff520aad9004d1e8d1a1dee9b123ebb96db550c467184
-  languageName: node
-  linkType: hard
-
 "rollup-plugin-strip-banner@npm:^1.0.0":
   version: 1.0.0
   resolution: "rollup-plugin-strip-banner@npm:1.0.0"
@@ -27844,16 +27873,6 @@ resolve@1.1.x:
   version: 1.0.1
   resolution: "rollup-plugin-virtual@npm:1.0.1"
   checksum: 888b338a0ebd02ca60c3ed23e92af5cdd76134fe7cdff818ee384fdf53342c6f6ea55f9969b8eaf5e82c021440bb013d6533d17440576b5df2945ee6c8827c63
-  languageName: node
-  linkType: hard
-
-"rollup-pluginutils@npm:2.0.1":
-  version: 2.0.1
-  resolution: "rollup-pluginutils@npm:2.0.1"
-  dependencies:
-    estree-walker: ^0.3.0
-    micromatch: ^2.3.11
-  checksum: 40f9e1af99944199752ad6438f763d37fa2efd4fc8063dc48ccd812f48b469cd2b8418e895b4d9c43ed48675213806c88958a382430a7b6ce845018cc44b4a9c
   languageName: node
   linkType: hard
 
@@ -27902,6 +27921,20 @@ resolve@1.1.x:
   bin:
     rollup: dist/bin/rollup
   checksum: eee94f1c8354d01850cbea390d9de043a6835d49491b59592d3bc597c6dd37d0e03ca57d54b62c8eb24295a1755bd3849c29f0406abfde30deafa63c3a479ac8
+  languageName: node
+  linkType: hard
+
+"rollup@npm:^2.36.1":
+  version: 2.36.1
+  resolution: "rollup@npm:2.36.1"
+  dependencies:
+    fsevents: ~2.1.2
+  dependenciesMeta:
+    fsevents:
+      optional: true
+  bin:
+    rollup: dist/bin/rollup
+  checksum: bb48730bf382d6439012a1504a8ca2f676657b472e9fbf72f726701c3091325229e1501c75088f4feebf6c9eb54cfc01353a11b50d3b0b9fa23764aaf5fca38c
   languageName: node
   linkType: hard
 
@@ -32975,13 +33008,6 @@ resolve@1.1.x:
     remove-trailing-separator: ^1.0.1
     replace-ext: ^1.0.0
   checksum: a8c27638aafd77078d210e7ff0eff5724ec39cca1c5e8997b9c39024023e65037bcb4f775fd7903d8099a4d32b135950f937174a945619082c3ce704e66cd0a0
-  languageName: node
-  linkType: hard
-
-"vlq@npm:^0.2.1":
-  version: 0.2.3
-  resolution: "vlq@npm:0.2.3"
-  checksum: 48055a9675a8f58c7e78f02707d0e9daa25a7eacbe49d2b215bf35c05eca6399d4ad645c51a512d05c0acd138fb4c003a0e3534a71338f0f2f634a3746d2f03f
   languageName: node
   linkType: hard
 
