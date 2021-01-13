@@ -27,7 +27,7 @@
     "access": "public"
   },
   "scripts": {
-    "build": "yarn clean && bundler sassdoc \"scss/*.scss\" && bundler inline && bundler check \"scss/*.scss\"",
+    "build": "yarn clean && bundler sassdoc \"scss/*.scss\" && bundler inline && carbon-cli check \"scss/*.scss\"",
     "clean": "rimraf scss/_inlined scss/vendor"
   },
   "dependencies": {
@@ -36,6 +36,7 @@
   },
   "devDependencies": {
     "@carbon/bundler": "^10.11.0",
+    "@carbon/cli": "^10.17.0",
     "rimraf": "^3.0.0"
   },
   "eyeglass": {
