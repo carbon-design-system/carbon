@@ -38,7 +38,8 @@
     "prepublishOnly": "yarn build"
   },
   "devDependencies": {
-    "@carbon/icon-build-helpers": "^0.13.0"
+    "@carbon/icon-build-helpers": "^0.13.0",
+    "rimraf": "^3.0.2"
   },
   "gitHead": "bb04f2f061de0bda6e457a07a67cf624db375808"
 }
