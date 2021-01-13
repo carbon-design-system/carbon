@@ -1612,12 +1612,14 @@ __metadata:
     fast-glob: ^3.2.2
     fs-extra: ^8.0.1
     inquirer: ^6.4.1
+    klaw-sync: ^6.0.0
     lodash.template: ^4.5.0
     markdown-toc: ^1.2.0
     prettier: ^2.2.1
     prettier-config-carbon: ^0.5.0
     progress-estimator: ^0.2.2
     remark: ^10.0.1
+    replace-in-file: ^6.1.0
     sass: ^1.32.4
     sassdoc: ^2.7.3
     yargs: ^15.1.0
@@ -27515,6 +27517,19 @@ __metadata:
   bin:
     replace-in-file: ./bin/cli.js
   checksum: d8762d25661c321b1a15dcf9c30188f8a80c88a72042cdfdcfedcb97be137041374493d2f3057f2a3a2824a2cfff500e200c451c6b1b855bacd18976ee0af008
+  languageName: node
+  linkType: hard
+
+"replace-in-file@npm:^6.1.0":
+  version: 6.1.0
+  resolution: "replace-in-file@npm:6.1.0"
+  dependencies:
+    chalk: ^4.0.0
+    glob: ^7.1.6
+    yargs: ^15.3.1
+  bin:
+    replace-in-file: bin/cli.js
+  checksum: 94b48806e6eebc614aa6ab8082152a151b611125f2c565692d5b6b677a483f76ed4a0dafbc39a2c4243bb009571bdcfad1cc33a3da1bdc247866d8b9c03cabaa
   languageName: node
   linkType: hard
 

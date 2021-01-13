@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2018, 2018
+ * Copyright IBM Corp. 2019, 2019
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -11,29 +11,34 @@ const fs = require('fs-extra');
 const klaw = require('klaw-sync');
 const os = require('os');
 const path = require('path');
-const isWin = process.platform === 'win32';
 const replace = require('replace-in-file');
-const { reporter } = require('@carbon/cli-reporter');
+const { createLogger } = require('../logger');
 
+const logger = createLogger('inline');
+const isWin = process.platform === 'win32';
 const tmpDir = os.tmpdir();
 
-async function inline(options, info) {
-  const { cwd } = info;
+async function inline({ output }) {
+  logger.start('inline');
+
+  const cwd = process.cwd();
   const packageJsonPath = path.join(cwd, 'package.json');
-  const sourceFolder = path.join(cwd, options.output);
-  const inlineFolder = path.join(cwd, options.output, '_inlined');
-  const vendorFolder = path.join(cwd, options.output, 'vendor');
+  const sourceFolder = path.join(cwd, output);
+  const inlineFolder = path.join(cwd, output, '_inlined');
+  const vendorFolder = path.join(cwd, output, 'vendor');
 
   await Promise.all([fs.remove(inlineFolder), fs.remove(vendorFolder)]);
 
-  reporter.info('Inlining sass dependencies');
+  logger.info('Inlining sass dependencies');
+
   await inlineSassDependencies(
     packageJsonPath,
     sourceFolder,
     vendorFolder,
     cwd
   );
-  reporter.success('Done');
+
+  logger.stop();
 }
 
 async function inlineSassDependencies(
@@ -55,7 +60,7 @@ async function inlineSassDependencies(
   const inlinedDependencies = (
     await Promise.all(
       allPossibleDependencies.map(async (dependency) => {
-        const modules = await findSassModule(dependency, cwd);
+        const modules = findSassModule(dependency, cwd);
         if (modules) {
           const [scssFolder] = modules;
           const dependencyOutputFolder = path.join(vendorFolder, dependency);
@@ -144,4 +149,18 @@ function findSassModule(packageName, cwd) {
   return false;
 }
 
-module.exports = inline;
+module.exports = {
+  command: 'inline',
+  desc: 'inline sass dependencies from package.json in a target folder',
+  builder(yargs) {
+    yargs.options({
+      o: {
+        alias: 'output',
+        describe: 'the directory to output inlined sass dependencies',
+        type: 'string',
+        default: 'scss',
+      },
+    });
+  },
+  handler: inline,
+};

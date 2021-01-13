@@ -10,7 +10,6 @@
 const program = require('commander');
 const packageJson = require('../package.json');
 const bundle = require('./commands/bundle');
-const inline = require('./commands/inline');
 
 async function bundler({ argv, cwd: getWorkingDirectory }) {
   const cwd = getWorkingDirectory();
@@ -20,22 +19,6 @@ async function bundler({ argv, cwd: getWorkingDirectory }) {
     .name(packageJson.name)
     .version(packageJson.version)
     .usage('<command> [options]');
-
-  program
-    .command('inline')
-    .description(
-      'inline sass dependencies from package.json in a target folder'
-    )
-    .option(
-      '-o, --output <dir>',
-      'the directory to output inlined sass dependencies',
-      'scss'
-    )
-    .action((cmd) =>
-      inline(cleanArgs(cmd), {
-        cwd,
-      })
-    );
 
   program
     .command('bundle <entrypoint>')
