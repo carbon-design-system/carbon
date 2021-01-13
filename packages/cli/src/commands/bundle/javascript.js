@@ -7,14 +7,13 @@
 
 'use strict';
 
+const { babel } = require('@rollup/plugin-babel');
+const commonjs = require('@rollup/plugin-commonjs');
+const { nodeResolve } = require('@rollup/plugin-node-resolve');
 const { pascalCase } = require('change-case');
 const fs = require('fs-extra');
 const path = require('path');
 const { rollup } = require('rollup');
-const babel = require('rollup-plugin-babel');
-const commonjs = require('rollup-plugin-commonjs');
-const nodeResolve = require('rollup-plugin-node-resolve');
-const findPackageFolder = require('../tools/findPackageFolder');
 
 async function bundle(entrypoint, options) {
   const globals = options.globals ? formatGlobals(options.globals) : {};
@@ -65,14 +64,11 @@ async function bundle(entrypoint, options) {
             },
           ],
         ],
+        babelHelpers: 'bundled',
       }),
-      nodeResolve({
-        jsnext: true,
-        main: true,
-        module: true,
-      }),
+      nodeResolve(),
       commonjs({
-        include: ['node_modules/**'],
+        include: [/node_modules/],
         extensions: ['.js'],
       }),
     ],
@@ -80,7 +76,11 @@ async function bundle(entrypoint, options) {
 
   await Promise.all(
     jsEntryPoints.map(({ format, file }) => {
-      const outputOptions = { format, file };
+      const outputOptions = {
+        format,
+        file,
+        exports: 'auto',
+      };
 
       if (format === 'umd') {
         outputOptions.name = name;
@@ -122,6 +122,21 @@ function formatDependenciesIntoGlobals(dependencies) {
       [key]: pascalCase(parts.join(' ')),
     };
   }, {});
+}
+
+async function findPackageFolder(entrypoint) {
+  let packageFolder = entrypoint;
+
+  while (packageFolder !== '/' && path.dirname(packageFolder) !== '/') {
+    packageFolder = path.dirname(packageFolder);
+    const packageJsonPath = path.join(packageFolder, 'package.json');
+
+    if (await fs.pathExists(packageJsonPath)) {
+      break;
+    }
+  }
+
+  return packageFolder;
 }
 
 module.exports = bundle;
