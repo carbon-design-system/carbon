@@ -7,17 +7,61 @@
 
 'use strict';
 
-async function sassdoc({ glob, ignore, json, output }) {
-  console.log('Options:');
-  console.log('Glob', glob);
-  console.log('Ignore', ignore);
-  console.log('JSON', json);
-  console.log('output', output);
+const glob = require('fast-glob');
+const fs = require('fs-extra');
+const path = require('path');
+const { createLogger } = require('../logger');
+const { createJson, createMarkdown } = require('./sassdoc/tools');
+
+const logger = createLogger('sassdoc');
+
+async function sassdoc({
+  glob: pattern,
+  ignore = [],
+  json = false,
+  output = 'docs',
+} = {}) {
+  logger.start('sassdoc');
+
+  const cwd = process.cwd();
+  const DOCS_DIR = path.resolve(cwd, output);
+  const JSON_FILE = path.resolve(DOCS_DIR, 'sass.json');
+  const MARKDOWN_FILE = path.resolve(DOCS_DIR, 'sass.md');
+  const files = await glob(pattern, {
+    cwd,
+    ignore,
+  });
+
+  logger.info(
+    `Creating sassdoc for pattern: '${pattern}', ignoring: '${ignore}'`
+  );
+
+  if (json) {
+    try {
+      const jsonFile = await createJson(files);
+      await fs.ensureDir(DOCS_DIR);
+      await fs.writeFile(JSON_FILE, JSON.stringify(jsonFile, null, 2));
+    } catch (error) {
+      logger.info(`Sassdoc error: ${error}`);
+      process.exit(1);
+    }
+  } else {
+    try {
+      const markdownFile = await createMarkdown(files);
+      await fs.ensureDir(DOCS_DIR);
+      await fs.writeFile(MARKDOWN_FILE, markdownFile);
+    } catch (error) {
+      logger.info(`Sassdoc error: ${error}`);
+      process.exit(1);
+    }
+  }
+
+  logger.stop();
 }
 
 module.exports = {
   command: 'sassdoc <glob>',
-  desc: '',
+  desc: 'generate sassdoc as markdown',
   builder(yargs) {
     yargs.positional('glob', {
       type: 'string',

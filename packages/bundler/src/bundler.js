@@ -10,10 +10,7 @@
 const program = require('commander');
 const packageJson = require('../package.json');
 const bundle = require('./commands/bundle');
-const check = require('./commands/check');
 const inline = require('./commands/inline');
-const measure = require('./commands/measure');
-const sassdoc = require('./commands/sassdoc');
 
 async function bundler({ argv, cwd: getWorkingDirectory }) {
   const cwd = getWorkingDirectory();
@@ -23,34 +20,6 @@ async function bundler({ argv, cwd: getWorkingDirectory }) {
     .name(packageJson.name)
     .version(packageJson.version)
     .usage('<command> [options]');
-
-  program
-    .command('check <glob>')
-    .description('check that each file can be compiled')
-    .option('-i, --ignore <glob>', 'pass in a glob of files to ignore')
-    .option('-l, --list', 'list all the files that were compiled')
-    .action((pattern, cmd) =>
-      check(pattern, {
-        cwd,
-        list: cmd.list || false,
-        ignore: cmd.ignore || [],
-      })
-    );
-
-  program
-    .command('sassdoc <glob>')
-    .description('generate sassdoc as markdown')
-    .option('-i, --ignore <glob>', 'pass in a glob of files to ignore')
-    .option('-j, --json', 'output as json file')
-    .option('-o, --output <dir>', 'specify the directory to output the files')
-    .action((pattern, cmd) =>
-      sassdoc(pattern, {
-        cwd,
-        ignore: cmd.ignore || [],
-        json: cmd.json || false,
-        output: cmd.output || 'docs',
-      })
-    );
 
   program
     .command('inline')
@@ -65,19 +34,6 @@ async function bundler({ argv, cwd: getWorkingDirectory }) {
     .action((cmd) =>
       inline(cleanArgs(cmd), {
         cwd,
-      })
-    );
-
-  program
-    .command('measure <glob>')
-    .description('measure the compiled size of your package(s)')
-    .option('-i, --ignore <glob>', 'pass in a glob of files to ignore')
-    .option('-o, --output <path>', 'specify the output path of your report')
-    .action((pattern, cmd) =>
-      measure(pattern, {
-        cwd,
-        ignore: cmd.ignore,
-        output: cmd.output,
       })
     );
 
