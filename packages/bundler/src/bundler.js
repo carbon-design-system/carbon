@@ -48,21 +48,6 @@ async function bundler({ argv, cwd: getWorkingDirectory }) {
       })
     );
 
-  program
-    .command('bundle:scss <entrypoint>')
-    .description('bundle the given .scss entrypoint')
-    .option('-n, --name <name>', 'name the output file')
-    .option(
-      '-o, --output <dir>',
-      'specify the directory to output the files',
-      'css'
-    )
-    .action((entrypoint, cmd) =>
-      bundle(entrypoint, cleanArgs(cmd), {
-        cwd,
-      })
-    );
-
   program.parse(argv);
 }
 
