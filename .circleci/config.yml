@@ -18,7 +18,7 @@ jobs:
           command: yarn install --immutable --immutable-cache --check-cache
       - run:
           name: Build packages
-          command: yarn build
+          command: NODE_OPTIONS=--max_old_space_size=8192 yarn build
       - run:
           name: Run Continuous Integration checks
           command: |
