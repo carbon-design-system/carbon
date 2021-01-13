@@ -55,7 +55,7 @@
     "clean": "gulp clean",
     "ci-check": "sh ./tools/ci-check.sh",
     "dev": "gulp serve",
-    "docs": "bundler sassdoc \"scss{/components,/globals/grid,/globals/scss/vendor/@carbon/elements}/**/*.scss\" -i \"scss/globals/scss/vendor/@carbon/elements/**/{_inlined,vendor}/**\"",
+    "docs": "carbon-cli sassdoc \"scss{/components,/globals/grid,/globals/scss/vendor/@carbon/elements}/**/*.scss\" -i \"scss/globals/scss/vendor/@carbon/elements/**/{_inlined,vendor}/**\"",
     "format:check": "prettier --check \"**/*.{css,js,md,scss}\"",
     "prebuild": "gulp clean",
     "prepublishOnly": "yarn build",

@@ -1798,6 +1798,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@carbon/icons@workspace:packages/icons"
   dependencies:
+    "@carbon/cli": ^10.17.0
     "@carbon/icon-build-helpers": ^0.13.0
   languageName: unknown
   linkType: soft
@@ -1826,6 +1827,7 @@ __metadata:
   resolution: "@carbon/motion@workspace:packages/motion"
   dependencies:
     "@carbon/bundler": ^10.11.0
+    "@carbon/cli": ^10.17.0
     rimraf: ^3.0.0
   languageName: unknown
   linkType: soft

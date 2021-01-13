@@ -27,7 +27,7 @@
     "access": "public"
   },
   "scripts": {
-    "build": "yarn clean && bundler sassdoc \"scss/*.scss\" && bundler inline && carbon-cli check \"scss/*.scss\"",
+    "build": "yarn clean && carbon-cli sassdoc \"scss/*.scss\" && bundler inline && carbon-cli check \"scss/*.scss\"",
     "clean": "rimraf scss/_inlined scss/vendor"
   },
   "dependencies": {
