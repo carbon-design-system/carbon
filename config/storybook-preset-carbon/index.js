@@ -30,12 +30,10 @@ module.exports = {
     '@storybook/addon-notes/register',
     'storybook-readme/register',
     "@storybook/addon-links",
-    "@storybook/addon-essentials",
-    "@storybook/preset-create-react-app",
     require.resolve('./carbon-theme-addon/src/preset.js')
   ],
 
-  webpack(config) {
+  webpack: async (config) => {
     const sassLoader = {
       loader: 'sass-loader',
       options: {
@@ -66,6 +64,12 @@ module.exports = {
       },
     };
 
+    config.module.rules.push({
+      loader: 'babel-loader',
+      test: /\.js$|jsx/,
+      exclude: /node_modules/
+    });
+  
     config.module.rules.push({
       test: /-story\.jsx?$/,
       loaders: [
@@ -131,3 +135,23 @@ module.exports = {
     return config;
   },
 };
+
+
+// module.exports = {
+//   entry: "./src/app.js",
+//   output: {
+//       path: path.join(dirname, 'public'),
+//       filename: 'bundle.js'
+//   },
+//   module:{
+//       rules:[{
+//           loader: 'babel-loader',
+//           test: '/.(js|jsx)$/',
+//           exclude: /node_modules/
+//       }]
+//   },
+//   devtool: 'cheap-module-eval-source-map',
+//   devServer: {
+//       contentBase: path.join(dirname, 'public')
+//   }
+// }
