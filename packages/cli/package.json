@@ -35,7 +35,7 @@
     "fs-extra": "^8.0.1",
     "inquirer": "^6.4.1",
     "lodash.template": "^4.5.0",
-    "prettier": "^2.1.0",
+    "prettier": "^2.2.1",
     "prettier-config-carbon": "^0.5.0",
     "progress-estimator": "^0.2.2",
     "remark": "^10.0.1",

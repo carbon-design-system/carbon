@@ -1613,7 +1613,7 @@ __metadata:
     fs-extra: ^8.0.1
     inquirer: ^6.4.1
     lodash.template: ^4.5.0
-    prettier: ^2.1.0
+    prettier: ^2.2.1
     prettier-config-carbon: ^0.5.0
     progress-estimator: ^0.2.2
     remark: ^10.0.1
@@ -1709,7 +1709,7 @@ __metadata:
     js-yaml: ^3.12.1
     klaw-sync: ^6.0.0
     memfs: ^3.0.4
-    prettier: ^2.1.0
+    prettier: ^2.2.1
     prop-types: ^15.6.2
     react: ^16.6.0
     react-dom: ^16.6.0
@@ -1781,7 +1781,7 @@ __metadata:
     "@carbon/icon-helpers": ^10.11.0
     "@carbon/icons": ^10.23.0
     fs-extra: ^8.1.0
-    prettier: ^2.1.0
+    prettier: ^2.2.1
     rimraf: ^3.0.0
     rollup: ^1.15.1
     vue: ^2.6.8
@@ -1851,7 +1851,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@carbon/scss-generator@workspace:packages/scss-generator"
   dependencies:
-    prettier: ^2.1.0
+    prettier: ^2.2.1
   languageName: unknown
   linkType: soft
 
@@ -1898,7 +1898,7 @@ __metadata:
   resolution: "@carbon/test-utils@workspace:packages/test-utils"
   dependencies:
     node-sass: ^4.13.1
-    prettier: ^2.1.0
+    prettier: ^2.2.1
     react-dom: ^16.9.0
     resolve: ^1.12.0
     tabbable: ^4.0.0
@@ -9142,7 +9142,7 @@ __metadata:
     lerna: ^3.20.2
     lint-staged: ^9.5.0
     node-gyp: ^7.1.2
-    prettier: ^2.1.0
+    prettier: ^2.2.1
     react: ^16.8.6
     react-dom: ^16.8.6
     rimraf: ^3.0.0
@@ -25202,7 +25202,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "prettier-config-carbon@workspace:config/prettier-config-carbon"
   dependencies:
-    prettier: ^2.1.0
+    prettier: ^2.2.1
   peerDependencies:
     prettier: ^2.1.0
   languageName: unknown
@@ -25226,12 +25226,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"prettier@npm:^2.1.0":
-  version: 2.1.0
-  resolution: "prettier@npm:2.1.0"
+"prettier@npm:^2.2.1":
+  version: 2.2.1
+  resolution: "prettier@npm:2.2.1"
   bin:
     prettier: bin-prettier.js
-  checksum: f955d380d2892284c28bbfe32b1601cfcd7a24d8b310832937773b9e733f624e38ff70cbafee80e9553bdb3c55783d019163667bf9a69df4e6f7c2acdcf54c06
+  checksum: 92c6c9f4b87eba1f28466edee57dd18c80d00b858edda77d46d1950d20e6e302b68ee255fc91133ba931e63c4577b5ae30da194d9626a8f3c0177778b91bf056
   languageName: node
   linkType: hard
 
