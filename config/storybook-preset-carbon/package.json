@@ -33,6 +33,10 @@
     "storybook-readme": "^5.0.8"
   },
   "devDependencies": {
+    "@storybook/preset-create-react-app": "^3.1.5",
     "@storybook/react": "^5.3.19"
+  },
+  "scripts": {
+      "build": "babel ./src --out-dir ./dist"
   }
 }
