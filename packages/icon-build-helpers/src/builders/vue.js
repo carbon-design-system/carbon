@@ -164,7 +164,7 @@ const component = h ? {
       getSvgAttrs(props.title, attrs),
       [
         props.title && h('title', props.title),
-        ${content.map(convertToVue3).join(', ')},
+        ${content.map(convertToVue(3)).join(', ')},
       ]
     );
   },
@@ -194,7 +194,7 @@ const component = h ? {
     svgData.style = { ...data.staticStyle, ...data.style };
     return createElement('svg', svgData, [
       props.title && createElement('title', null, props.title),
-      ${content.map(convertToVue2).join(', ')},
+      ${content.map(convertToVue(2)).join(', ')},
       children,
     ]);
   },
@@ -207,23 +207,17 @@ export default component;
 }
 
 /**
- * Convert the given node to a Vue 2 string source
- * @param {object} node
- * @returns {string}
+ * Returns a function that will create a version appropriate Vue source string from a node
+ * @param {number} version
+ * @returns {Function}
  */
-function convertToVue2(node) {
-  const { elem, attrs } = node;
-  return `createElement('${elem}', { attrs: ${JSON.stringify(attrs)} })`;
-}
-
-/**
- * Convert the given node to a Vue 3 string source
- * @param {object} node
- * @returns {string}
- */
-function convertToVue3(node) {
-  const { elem, attrs } = node;
-  return `h('${elem}', ${JSON.stringify(attrs)})`;
+function convertToVue(version) {
+  return (node) => {
+    const { elem, attrs } = node;
+    return version < 3
+      ? `createElement('${elem}', { attrs: ${JSON.stringify(attrs)} })`
+      : `h('${elem}', ${JSON.stringify(attrs)})`;
+  };
 }
 
 module.exports = builder;
