@@ -25965,7 +25965,7 @@ Select styles
     &:disabled,
     &:hover:disabled {
       color: $disabled-02;
-      background-color: $disabled-01;
+      background-color: $field-02;
       cursor: not-allowed;
     }
   }
