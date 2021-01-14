@@ -91,7 +91,7 @@ async function main() {
     packagesWithExamples.map(async (pkg) => {
       reporter.info(`Building examples in package \`${pkg.name}\``);
 
-      const { examples, filepath, name } = pkg;
+      const { examples, name } = pkg;
       const packageDir = path.join(BUILD_DIR, name, 'examples');
 
       await fs.ensureDir(packageDir);
@@ -120,13 +120,18 @@ async function main() {
             });
           }
 
+          console.log(example.name, exampleBuildDir);
+
           if (await fs.pathExists(exampleBuildDir)) {
+            console.log('build dir path exists');
             await fs.copy(exampleBuildDir, exampleDir);
             return;
           }
 
+          console.log('build dir does not exist');
+
           await fs.copy(example.filepath, exampleDir, {
-            filter(src, dest) {
+            filter(src) {
               const relativePath = path.relative(example.filepath, src);
               if (relativePath.includes('node_modules')) {
                 return false;
