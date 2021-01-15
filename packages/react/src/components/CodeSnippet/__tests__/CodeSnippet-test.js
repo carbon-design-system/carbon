@@ -88,7 +88,7 @@ describe('Code Snippet', () => {
       expect(wrapper.find(Button).length).toBe(0);
     });
 
-    it('when more then 15 rows', () => {
+    it.skip('when more then 15 rows', () => {
       wrapper.setProps({
         children: '1\n2\n3\n4\n5\n6\n7\n8\n9\n10\n11\n12\n13\n14\n15\n16',
       });
