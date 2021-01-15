@@ -35,12 +35,14 @@ export function syncSharedStyle(
 
   // If none exists, we can create one from scratch
   if (!sharedStyle) {
-    return SharedStyle.fromStyle({
+    const generatedSharedStyle = SharedStyle.fromStyle({
       name,
       style,
       styleType,
       document,
     });
+    generatedSharedStyle.style.borders = [];
+    return generatedSharedStyle;
   }
 
   // Otherwise, we'll go and update values of the sharedStyle with the given

@@ -1870,7 +1870,6 @@ exports[`DataTable should render 1`] = `
                 >
                   <TableToolbarAction
                     onClick={[MockFunction]}
-                    primaryFocus={true}
                   >
                     Action 1
                   </TableToolbarAction>
@@ -2873,7 +2872,6 @@ exports[`DataTable sticky header should render 1`] = `
                 >
                   <TableToolbarAction
                     onClick={[MockFunction]}
-                    primaryFocus={true}
                   >
                     Action 1
                   </TableToolbarAction>

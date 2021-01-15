@@ -23,9 +23,9 @@ describe('Loading', () => {
       await expect(container).toHaveNoAxeViolations();
     });
 
-    it('should have no DAP violations', async () => {
+    it('should have no AC violations', async () => {
       const { container } = render(<Loading />);
-      await expect(container).toHaveNoDAPViolations('Loading');
+      await expect(container).toHaveNoACViolations('Loading');
     });
   });
 

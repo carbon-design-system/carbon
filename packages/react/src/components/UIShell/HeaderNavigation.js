@@ -66,10 +66,7 @@ export default class HeaderNavigation extends React.Component {
 
     return (
       <nav {...rest} {...accessibilityLabel} className={className}>
-        <ul
-          {...accessibilityLabel}
-          className={`${prefix}--header__menu-bar`}
-          role="menubar">
+        <ul {...accessibilityLabel} className={`${prefix}--header__menu-bar`}>
           {React.Children.map(children, this._renderNavItem)}
         </ul>
       </nav>

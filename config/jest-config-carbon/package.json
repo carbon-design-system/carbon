@@ -27,7 +27,6 @@
     "@babel/preset-env": "^7.10.0",
     "@babel/preset-react": "^7.10.0",
     "@babel/runtime": "^7.10.0",
-    "@ibma/aat": "https://able.ibm.com/tools/dist/ibma-aat-2.0.6.tgz",
     "accessibility-checker": "^3.1.1",
     "axe-core": "^3.3.2",
     "babel-jest": "^26.0.1",
