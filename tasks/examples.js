@@ -122,15 +122,15 @@ async function main() {
         });
       }
 
-      console.log(example.name, exampleBuildDir);
+      console.log(pkg.name, example.name, exampleBuildDir);
 
       if (await fs.pathExists(exampleBuildDir)) {
-        console.log('build dir path exists');
+        console.log(pkg.name, example.name, 'build dir path exists');
         await fs.copy(exampleBuildDir, exampleDir);
-        return;
+        continue;
       }
 
-      console.log('build dir does not exist');
+      console.log(pkg.name, example.name, 'build dir does not exist');
 
       await fs.copy(example.filepath, exampleDir, {
         filter(src) {
