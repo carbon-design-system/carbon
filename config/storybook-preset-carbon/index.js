@@ -26,17 +26,14 @@ module.exports = {
     '@storybook/addon-storysource',
     '@storybook/addon-knobs',
     '@storybook/addon-actions',
-    '@storybook/addon-links',
     '@storybook/addon-docs',
     '@storybook/addon-notes/register',
     'storybook-readme/register',
     "@storybook/addon-links",
-    "@storybook/addon-essentials",
-    "@storybook/preset-create-react-app",
-    require.resolve('./carbon-theme-addon/src/preset.js')
+    require.resolve('./dist/preset.js')
   ],
 
-  webpack(config) {
+  webpack: async (config) => {
     const sassLoader = {
       loader: 'sass-loader',
       options: {
@@ -131,4 +128,8 @@ module.exports = {
 
     return config;
   },
+
+  // webpackFinal: (config) => {
+  //   return { ...config, module: { ...config.module, rules: custom.module.rules } };
+  // },
 };

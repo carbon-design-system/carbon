@@ -6,15 +6,15 @@ const ADDON_ID = 'myaddon';
 const PANEL_ID = `${ADDON_ID}/panel`;
 
 // give a unique name for the panel
-const MyPanel = () => <div>MyAddon</div>;
+const LonelyPanel = () => <div>Lonely Addon Panel</div>;
 
 addons.register(ADDON_ID, (api) => {
   addons.add(PANEL_ID, {
     type: types.PANEL,
-    title: 'My Addon',
+    title: 'Lonely Addon Panel',
     render: ({ active, key }) => (
       <AddonPanel active={active} key={key}>
-        <MyPanel />
+        <LonelyPanel />
       </AddonPanel>
     ),
   });

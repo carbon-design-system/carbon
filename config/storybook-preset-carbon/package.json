@@ -21,9 +21,10 @@
     "@storybook/react": "^5.3.19"
   },
   "dependencies": {
+    "@babel/cli": "^7.12.10",
+    "@babel/core": "^7.12.10",
     "@storybook/addon-actions": "^5.3.19",
     "@storybook/addon-docs": "^5.3.19",
-    "@storybook/addon-essentials": "^5.3.19",
     "@storybook/addon-knobs": "^5.3.19",
     "@storybook/addon-links": "^5.3.19",
     "@storybook/addon-notes": "^5.3.19",
@@ -34,5 +35,8 @@
   },
   "devDependencies": {
     "@storybook/react": "^5.3.19"
+  },
+  "scripts": {
+    "build": "babel ./carbon-theme-addon/src --out-dir ./dist"
   }
 }
