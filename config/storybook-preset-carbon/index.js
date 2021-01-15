@@ -30,7 +30,7 @@ module.exports = {
     '@storybook/addon-notes/register',
     'storybook-readme/register',
     "@storybook/addon-links",
-    require.resolve('./carbon-theme-addon/src/preset.js')
+    require.resolve('./dist/preset.js')
   ],
 
   webpack: async (config) => {
@@ -64,12 +64,6 @@ module.exports = {
       },
     };
 
-    config.module.rules.push({
-      loader: 'babel-loader',
-      test: /\.js$|jsx/,
-      exclude: /node_modules/
-    });
-  
     config.module.rules.push({
       test: /-story\.jsx?$/,
       loaders: [
@@ -134,24 +128,8 @@ module.exports = {
 
     return config;
   },
+
+  // webpackFinal: (config) => {
+  //   return { ...config, module: { ...config.module, rules: custom.module.rules } };
+  // },
 };
-
-
-// module.exports = {
-//   entry: "./src/app.js",
-//   output: {
-//       path: path.join(dirname, 'public'),
-//       filename: 'bundle.js'
-//   },
-//   module:{
-//       rules:[{
-//           loader: 'babel-loader',
-//           test: '/.(js|jsx)$/',
-//           exclude: /node_modules/
-//       }]
-//   },
-//   devtool: 'cheap-module-eval-source-map',
-//   devServer: {
-//       contentBase: path.join(dirname, 'public')
-//   }
-// }
