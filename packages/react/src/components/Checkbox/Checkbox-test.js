@@ -10,6 +10,9 @@ import Checkbox from '../Checkbox';
 import CheckboxSkeleton from '../Checkbox/Checkbox.Skeleton';
 import { mount } from 'enzyme';
 import { settings } from 'carbon-components';
+import { cleanup, render, screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
+import '@testing-library/jest-dom';
 
 const { prefix } = settings;
 
@@ -188,5 +191,43 @@ describe('CheckboxSkeleton', () => {
         expect(label.hasClass(`${prefix}--skeleton`)).toEqual(true);
       });
     });
+  });
+});
+
+describe('Checkbox accessibility', () => {
+  afterEach(cleanup);
+
+  it('should have no Axe violations', async () => {
+    render(<Checkbox labelText="Checkbox label" id="test_id" />);
+    await expect(
+      screen.getByLabelText('Checkbox label')
+    ).toHaveNoAxeViolations();
+  });
+
+  it('should have no Accessibility Checker violations', async () => {
+    render(
+      <main>
+        <Checkbox labelText="Checkbox label" id="test_id" />
+      </main>
+    );
+    await expect(screen.getByLabelText('Checkbox label')).toHaveNoACViolations(
+      'Checkbox'
+    );
+  });
+
+  it('can receive keyboard focus', () => {
+    render(<Checkbox labelText="Checkbox label" id="test_id" />);
+    userEvent.tab();
+    expect(screen.getByLabelText('Checkbox label')).toHaveFocus();
+  });
+
+  it('should have an accessible label', () => {
+    render(<Checkbox labelText="Checkbox label" id="test_id" />);
+    expect(() => screen.getByText('Checkbox label')).not.toThrow();
+  });
+
+  it('should have an appropriate role', () => {
+    render(<Checkbox labelText="Checkbox label" id="test_id" />);
+    expect(() => screen.getByRole('checkbox')).not.toThrow();
   });
 });

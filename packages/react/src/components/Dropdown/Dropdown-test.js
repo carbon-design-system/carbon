@@ -5,6 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+import { cleanup, render } from '@testing-library/react';
 import React from 'react';
 import { mount, shallow } from 'enzyme';
 import {
@@ -175,6 +176,16 @@ describe('Dropdown', () => {
       expect(wrapper.find(`span.${prefix}--list-box__label`).text()).toEqual(
         mockProps.items[1]
       );
+    });
+  });
+
+  describe('Component API', () => {
+    afterEach(cleanup);
+
+    it('should accept a `ref` for the underlying button element', () => {
+      const ref = React.createRef();
+      render(<Dropdown {...mockProps} ref={ref} />);
+      expect(ref.current.getAttribute('aria-haspopup')).toBe('listbox');
     });
   });
 });

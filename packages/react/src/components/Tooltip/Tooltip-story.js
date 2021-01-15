@@ -27,8 +27,15 @@ const directions = {
   'Top (top)': 'top',
   'Right (right)': 'right',
 };
+const alignments = {
+  'Start (start)': 'start',
+  'Center (center)': 'center',
+  'End (end)': 'end',
+};
+
 const props = {
   withIcon: () => ({
+    align: select('Tooltip alignment (align)', alignments, 'center'),
     direction: select('Tooltip direction (direction)', directions, 'bottom'),
     triggerText: text('Trigger text (triggerText)', 'Tooltip label'),
     tabIndex: number('Tab index (tabIndex in <Tooltip>)', 0),
@@ -39,6 +46,7 @@ const props = {
   }),
   withoutIcon: () => ({
     showIcon: false,
+    align: select('Tooltip alignment (align)', alignments, 'center'),
     direction: select('Tooltip direction (direction)', directions, 'bottom'),
     triggerText: text('Trigger text (triggerText)', 'Tooltip label'),
     tabIndex: number('Tab index (tabIndex in <Tooltip>)', 0),
@@ -49,6 +57,7 @@ const props = {
   }),
   customIcon: () => ({
     showIcon: true,
+    align: select('Tooltip alignment (align)', alignments, 'center'),
     direction: select('Tooltip direction (direction)', directions, 'bottom'),
     triggerText: text('Trigger text (triggerText)', 'Tooltip label'),
     tabIndex: number('Tab index (tabIndex in <Tooltip>)', 0),
@@ -67,6 +76,7 @@ const props = {
   }),
   customIconOnly: () => ({
     showIcon: true,
+    align: select('Tooltip alignment (align)', alignments, 'center'),
     direction: select('Tooltip direction (direction)', directions, 'bottom'),
     iconDescription: 'Helpful Information',
     tabIndex: number('Tab index (tabIndex in <Tooltip>)', 0),

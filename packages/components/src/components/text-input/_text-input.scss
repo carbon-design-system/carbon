@@ -86,7 +86,7 @@
     .#{$prefix}--text-input__invalid-icon--warning {
       fill: $support-03;
 
-      path[data-icon-path='inner-path'] {
+      path:first-of-type {
         opacity: 1;
         fill: $carbon__black-100;
       }
@@ -112,6 +112,13 @@
 
       svg {
         fill: $icon-02;
+
+        // Windows, Firefox HCM Fix
+        @media screen and (-ms-high-contrast: active),
+          screen and (prefers-contrast) {
+          // `ButtonText` is a CSS2 system color to help improve colors in HCM
+          fill: ButtonText;
+        }
       }
     }
 

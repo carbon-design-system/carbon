@@ -60,6 +60,12 @@ export default class Tabs extends React.Component {
     onSelectionChange: PropTypes.func,
 
     /**
+     * Choose whether or not to automatically scroll to newly selected tabs
+     * on component rerender
+     */
+    scrollIntoView: PropTypes.bool,
+
+    /**
      * Optionally provide an index for the currently selected <Tab>
      */
     selected: PropTypes.number,
@@ -82,6 +88,7 @@ export default class Tabs extends React.Component {
 
   static defaultProps = {
     type: 'default',
+    scrollIntoView: true,
     selected: 0,
     selectionMode: 'automatic',
   };
@@ -205,7 +212,7 @@ export default class Tabs extends React.Component {
       });
     }
 
-    if (prevState.selected !== selected) {
+    if (this.props.scrollIntoView && prevState.selected !== selected) {
       this.getTabAt(selected)?.tabAnchor?.scrollIntoView({
         block: 'nearest',
         inline: 'nearest',
@@ -379,6 +386,7 @@ export default class Tabs extends React.Component {
       type,
       light,
       onSelectionChange,
+      scrollIntoView, // eslint-disable-line no-unused-vars
       selectionMode, // eslint-disable-line no-unused-vars
       tabContentClassName,
       ...other

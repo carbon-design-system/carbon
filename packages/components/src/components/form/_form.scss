@@ -79,7 +79,8 @@
   input[data-invalid],
   .#{$prefix}--number[data-invalid] .#{$prefix}--number__input-wrapper,
   .#{$prefix}--number__input-wrapper--warning,
-  .#{$prefix}--date-picker-input__wrapper,
+  .#{$prefix}--date-picker-input__wrapper--warn,
+  .#{$prefix}--date-picker-input__wrapper--invalid,
   .#{$prefix}--time-picker--invalid,
   .#{$prefix}--text-input__field-wrapper[data-invalid],
   .#{$prefix}--text-input__field-wrapper--warning,
@@ -99,7 +100,7 @@
 
   input[data-invalid],
   .#{$prefix}--number[data-invalid] .#{$prefix}--number__input-wrapper,
-  .#{$prefix}--date-picker-input__wrapper,
+  .#{$prefix}--date-picker-input__wrapper--invalid,
   .#{$prefix}--time-picker--invalid,
   .#{$prefix}--text-input__field-wrapper[data-invalid],
   .#{$prefix}--text-area__wrapper[data-invalid],

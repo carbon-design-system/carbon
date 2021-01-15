@@ -1,11 +1,9 @@
 {
   "name": "@carbon/bundler",
   "description": "Bundler used for libraries in the Carbon Design System",
-  "version": "10.10.0-rc.0",
+  "version": "10.11.0",
   "license": "Apache-2.0",
-  "bin": {
-    "bundler": "./bin/bundler.js"
-  },
+  "bin": "./bin/bundler.js",
   "repository": {
     "type": "git",
     "url": "https://github.com/carbon-design-system/carbon.git",
@@ -27,7 +25,7 @@
   "dependencies": {
     "@babel/core": "^7.10.0",
     "@babel/preset-env": "^7.10.0",
-    "@carbon/cli-reporter": "^10.4.0-rc.0",
+    "@carbon/cli-reporter": "^10.4.0",
     "@commitlint/parse": "^8.3.4",
     "autoprefixer": "^9.7.4",
     "babel-plugin-macros": "^2.4.2",
