@@ -28185,18 +28185,7 @@ resolve@1.1.x:
   languageName: node
   linkType: hard
 
-"sass@npm:^1.24.5":
-  version: 1.25.0
-  resolution: "sass@npm:1.25.0"
-  dependencies:
-    chokidar: ">=2.0.0 <4.0.0"
-  bin:
-    sass: sass.js
-  checksum: 0e5e0bb9eba11d0d7fd7a8db77b49645e9eff383db3763f078ec0467ac1c0ce66312f1477b7acc083946e107a8dd7a0e210df6cb9faae257031bc6268184cd69
-  languageName: node
-  linkType: hard
-
-"sass@npm:^1.32.4":
+"sass@npm:^1.24.5, sass@npm:^1.32.4":
   version: 1.32.4
   resolution: "sass@npm:1.32.4"
   dependencies:
