@@ -5319,7 +5319,7 @@ Map {
           "type": "bool",
         },
         "invalidText": Object {
-          "type": "string",
+          "type": "node",
         },
         "labelText": Object {
           "isRequired": true,
@@ -5427,7 +5427,7 @@ Map {
           "type": "bool",
         },
         "invalidText": Object {
-          "type": "string",
+          "type": "node",
         },
         "labelText": Object {
           "isRequired": true,
@@ -5538,7 +5538,7 @@ Map {
         "type": "bool",
       },
       "invalidText": Object {
-        "type": "string",
+        "type": "node",
       },
       "labelText": Object {
         "isRequired": true,
@@ -5585,7 +5585,7 @@ Map {
         "type": "bool",
       },
       "warnText": Object {
-        "type": "string",
+        "type": "node",
       },
     },
     "render": [Function],

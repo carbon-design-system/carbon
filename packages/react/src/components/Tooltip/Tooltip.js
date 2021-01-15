@@ -332,7 +332,7 @@ class Tooltip extends Component {
         this._handleUserInputOpenClose(evt, { open: true });
       }
       this._tooltipDismissed = false;
-    } else {
+    } else if (state !== 'out') {
       // Note: SVGElement in IE11 does not have `.contains()`
       const { current: triggerEl } = this._triggerRef;
       const shouldPreventClose =
@@ -371,7 +371,15 @@ class Tooltip extends Component {
       click: 'click',
     }[evt.type];
     const hadContextMenu = this._hasContextMenu;
-    this._hasContextMenu = evt.type === 'contextmenu';
+    if (evt.type === 'click' || evt.type === 'contextmenu') {
+      this._hasContextMenu = evt.type === 'contextmenu';
+    }
+
+    if (this._hasContextMenu) {
+      this._handleUserInputOpenClose(evt, { open: false });
+      return;
+    }
+
     if (state === 'click') {
       evt.stopPropagation();
       evt.preventDefault();
@@ -379,12 +387,8 @@ class Tooltip extends Component {
         ? !this.props.open
         : !this.state.open;
       this._handleUserInputOpenClose(evt, { open: shouldOpen });
-    } else if (
-      state &&
-      (state !== 'out' || !hadContextMenu) &&
-      this._debouncedHandleFocus
-    ) {
-      this._debouncedHandleFocus(state, evt);
+    } else if (state && (state !== 'out' || !hadContextMenu)) {
+      this?._debouncedHandleFocus(state, evt);
     }
   };
 
@@ -470,6 +474,7 @@ class Tooltip extends Component {
       role: 'button',
       tabIndex: tabIndex,
       onClick: this.handleMouse,
+      onContextMenu: this.handleMouse,
       onKeyDown: this.handleKeyPress,
       onMouseOver: this.handleMouse,
       onMouseOut: this.handleMouse,
