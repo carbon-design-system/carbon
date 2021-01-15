@@ -1901,6 +1901,7 @@ __metadata:
     prettier: ^2.1.0
     react-dom: ^16.9.0
     resolve: ^1.12.0
+    sass: ^1.32.4
     tabbable: ^4.0.0
   peerDependencies:
     node-sass: ^4.13.1
@@ -28192,6 +28193,17 @@ resolve@1.1.x:
   bin:
     sass: sass.js
   checksum: 0e5e0bb9eba11d0d7fd7a8db77b49645e9eff383db3763f078ec0467ac1c0ce66312f1477b7acc083946e107a8dd7a0e210df6cb9faae257031bc6268184cd69
+  languageName: node
+  linkType: hard
+
+"sass@npm:^1.32.4":
+  version: 1.32.4
+  resolution: "sass@npm:1.32.4"
+  dependencies:
+    chokidar: ">=2.0.0 <4.0.0"
+  bin:
+    sass: sass.js
+  checksum: d7ff2252fe702f122bb002f6b65a785213dd2e8c738b247b910d34c959a77215cce93655ceddd08ce1a7fecbb9fb6c376924d271fd9d9af036699d3076c2a4fd
   languageName: node
   linkType: hard
 
