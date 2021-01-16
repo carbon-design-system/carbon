@@ -146,30 +146,17 @@
   - [✅exports [mixin]](#exports-mixin)
 - [@carbon/layout](#carbonlayout)
   - [✅carbon--grid-gutter [variable]](#carbon--grid-gutter-variable)
-  - [✅grid-gutter [variable]](#grid-gutter-variable)
   - [✅carbon--grid-gutter--condensed [variable]](#carbon--grid-gutter--condensed-variable)
-  - [✅grid-gutter--condensed [variable]](#grid-gutter--condensed-variable)
   - [✅carbon--grid-breakpoints [variable]](#carbon--grid-breakpoints-variable)
-  - [✅grid-breakpoints [variable]](#grid-breakpoints-variable)
   - [✅carbon--breakpoint-next [function]](#carbon--breakpoint-next-function)
-  - [✅breakpoint-next [function]](#breakpoint-next-function)
   - [✅carbon--breakpoint-prev [function]](#carbon--breakpoint-prev-function)
-  - [✅breakpoint-prev [function]](#breakpoint-prev-function)
   - [✅carbon--is-smallest-breakpoint [function]](#carbon--is-smallest-breakpoint-function)
-  - [✅is-smallest-breakpoint [function]](#is-smallest-breakpoint-function)
   - [✅carbon--largest-breakpoint-name [function]](#carbon--largest-breakpoint-name-function)
-  - [✅largest-breakpoint-name [function]](#largest-breakpoint-name-function)
-  - [✅breakpoint-infix [function]](#breakpoint-infix-function)
   - [✅carbon--breakpoint-infix [function]](#carbon--breakpoint-infix-function)
-  - [✅breakpoint-up [mixin]](#breakpoint-up-mixin)
   - [✅carbon--breakpoint-up [mixin]](#carbon--breakpoint-up-mixin)
-  - [✅breakpoint-down [mixin]](#breakpoint-down-mixin)
   - [✅carbon--breakpoint-down [mixin]](#carbon--breakpoint-down-mixin)
-  - [✅breakpoint-between [mixin]](#breakpoint-between-mixin)
   - [✅carbon--breakpoint-between [mixin]](#carbon--breakpoint-between-mixin)
-  - [✅largest-breakpoint [mixin]](#largest-breakpoint-mixin)
   - [✅carbon--largest-breakpoint [mixin]](#carbon--largest-breakpoint-mixin)
-  - [✅breakpoint [mixin]](#breakpoint-mixin)
   - [✅carbon--breakpoint [mixin]](#carbon--breakpoint-mixin)
   - [✅carbon--container-01 [variable]](#carbon--container-01-variable)
   - [✅carbon--container-02 [variable]](#carbon--container-02-variable)
@@ -183,21 +170,13 @@
   - [✅container-04 [variable]](#container-04-variable)
   - [✅container-05 [variable]](#container-05-variable)
   - [✅carbon--base-font-size [variable]](#carbon--base-font-size-variable)
-  - [✅base-font-size [variable]](#base-font-size-variable)
   - [✅carbon--rem [function]](#carbon--rem-function)
-  - [✅rem [function]](#rem-function)
   - [✅carbon--em [function]](#carbon--em-function)
-  - [✅em [function]](#em-function)
   - [✅carbon--fluid-spacing-01 [variable]](#carbon--fluid-spacing-01-variable)
-  - [✅fluid-spacing-01 [variable]](#fluid-spacing-01-variable)
   - [✅carbon--fluid-spacing-02 [variable]](#carbon--fluid-spacing-02-variable)
-  - [✅fluid-spacing-02 [variable]](#fluid-spacing-02-variable)
   - [✅carbon--fluid-spacing-03 [variable]](#carbon--fluid-spacing-03-variable)
-  - [✅fluid-spacing-03 [variable]](#fluid-spacing-03-variable)
   - [✅carbon--fluid-spacing-04 [variable]](#carbon--fluid-spacing-04-variable)
-  - [✅fluid-spacing-04 [variable]](#fluid-spacing-04-variable)
   - [✅carbon--fluid-spacing [variable]](#carbon--fluid-spacing-variable)
-  - [✅fluid-spacing [variable]](#fluid-spacing-variable)
   - [✅fluid-spacing-01 [variable]](#fluid-spacing-01-variable)
   - [✅fluid-spacing-02 [variable]](#fluid-spacing-02-variable)
   - [✅fluid-spacing-03 [variable]](#fluid-spacing-03-variable)
@@ -228,31 +207,18 @@
   - [✅carbon--mini-unit-size [variable]](#carbon--mini-unit-size-variable)
   - [✅carbon--mini-units [function]](#carbon--mini-units-function)
   - [✅carbon--spacing-01 [variable]](#carbon--spacing-01-variable)
-  - [✅spacing-01 [variable]](#spacing-01-variable)
   - [✅carbon--spacing-02 [variable]](#carbon--spacing-02-variable)
-  - [✅spacing-02 [variable]](#spacing-02-variable)
   - [✅carbon--spacing-03 [variable]](#carbon--spacing-03-variable)
-  - [✅spacing-03 [variable]](#spacing-03-variable)
   - [✅carbon--spacing-04 [variable]](#carbon--spacing-04-variable)
-  - [✅spacing-04 [variable]](#spacing-04-variable)
   - [✅carbon--spacing-05 [variable]](#carbon--spacing-05-variable)
-  - [✅spacing-05 [variable]](#spacing-05-variable)
   - [✅carbon--spacing-06 [variable]](#carbon--spacing-06-variable)
-  - [✅spacing-06 [variable]](#spacing-06-variable)
   - [✅carbon--spacing-07 [variable]](#carbon--spacing-07-variable)
-  - [✅spacing-07 [variable]](#spacing-07-variable)
   - [✅carbon--spacing-08 [variable]](#carbon--spacing-08-variable)
-  - [✅spacing-08 [variable]](#spacing-08-variable)
   - [✅carbon--spacing-09 [variable]](#carbon--spacing-09-variable)
-  - [✅spacing-09 [variable]](#spacing-09-variable)
   - [✅carbon--spacing-10 [variable]](#carbon--spacing-10-variable)
-  - [✅spacing-10 [variable]](#spacing-10-variable)
   - [✅carbon--spacing-11 [variable]](#carbon--spacing-11-variable)
-  - [✅spacing-11 [variable]](#spacing-11-variable)
   - [✅carbon--spacing-12 [variable]](#carbon--spacing-12-variable)
-  - [✅spacing-12 [variable]](#spacing-12-variable)
   - [✅carbon--spacing [variable]](#carbon--spacing-variable)
-  - [✅spacing [variable]](#spacing-variable)
   - [✅spacing-01 [variable]](#spacing-01-variable)
   - [✅spacing-02 [variable]](#spacing-02-variable)
   - [✅spacing-03 [variable]](#spacing-03-variable)
@@ -265,11 +231,8 @@
   - [✅spacing-10 [variable]](#spacing-10-variable)
   - [✅spacing-11 [variable]](#spacing-11-variable)
   - [✅spacing-12 [variable]](#spacing-12-variable)
-  - [✅map-deep-get [function]](#map-deep-get-function)
   - [✅map-deep-get [function]](#map-deep-get-function)
   - [✅carbon--key-by-index [function]](#carbon--key-by-index-function)
-  - [✅key-by-index [function]](#key-by-index-function)
-  - [✅last-map-item [function]](#last-map-item-function)
   - [✅last-map-item [function]](#last-map-item-function)
 - [@carbon/motion](#carbonmotion)
   - [✅carbon--easings [variable]](#carbon--easings-variable)
@@ -4112,7 +4075,6 @@ Generate the CSS for a grid for the given breakpoints and gutters
   - [carbon--hang [mixin]](#carbon--hang-mixin)
   - [carbon--aspect-ratio [mixin]](#carbon--aspect-ratio-mixin)
   - [prefix [variable]](#prefix-variable)
-  - [grid-gutter [variable]](#grid-gutter-variable)
 
 ### ✅prefix [variable]
 
@@ -4297,24 +4259,6 @@ $carbon--grid-gutter: carbon--rem(32px);
 - **Used by**:
   - [carbon--make-container [mixin]](#carbon--make-container-mixin)
 
-### ✅grid-gutter [variable]
-
-Carbon gutter size in rem
-
-<details>
-<summary>Source code</summary>
-
-```scss
-$grid-gutter: convert.rem(32px);
-```
-
-</details>
-
-- **Group**: [@carbon/layout](#carbonlayout)
-- **Type**: `Number`
-- **Used by**:
-  - [carbon--grid [mixin]](#carbon--grid-mixin)
-
 ### ✅carbon--grid-gutter--condensed [variable]
 
 Carbon condensed gutter size in rem
@@ -4324,22 +4268,6 @@ Carbon condensed gutter size in rem
 
 ```scss
 $carbon--grid-gutter--condensed: carbon--rem(1px);
-```
-
-</details>
-
-- **Group**: [@carbon/layout](#carbonlayout)
-- **Type**: `Number`
-
-### ✅grid-gutter--condensed [variable]
-
-Carbon condensed gutter size in rem
-
-<details>
-<summary>Source code</summary>
-
-```scss
-$grid-gutter--condensed: convert.rem(1px);
 ```
 
 </details>
@@ -4387,46 +4315,6 @@ $carbon--grid-breakpoints: (
 - **Group**: [@carbon/layout](#carbonlayout)
 - **Type**: `Map`
 
-### ✅grid-breakpoints [variable]
-
-<details>
-<summary>Source code</summary>
-
-```scss
-$grid-breakpoints: (
-  sm: (
-    columns: 4,
-    margin: 0,
-    width: convert.rem(320px),
-  ),
-  md: (
-    columns: 8,
-    margin: convert.rem(16px),
-    width: convert.rem(672px),
-  ),
-  lg: (
-    columns: 16,
-    margin: convert.rem(16px),
-    width: convert.rem(1056px),
-  ),
-  xlg: (
-    columns: 16,
-    margin: convert.rem(16px),
-    width: convert.rem(1312px),
-  ),
-  max: (
-    columns: 16,
-    margin: convert.rem(24px),
-    width: convert.rem(1584px),
-  ),
-);
-```
-
-</details>
-
-- **Group**: [@carbon/layout](#carbonlayout)
-- **Type**: `Map`
-
 ### ✅carbon--breakpoint-next [function]
 
 Get the value of the next breakpoint, or null for the last breakpoint
@@ -4462,40 +4350,6 @@ Get the value of the next breakpoint, or null for the last breakpoint
 - **Returns**: `String`
 - **Used by**:
   - [fluid-type-size [mixin]](#fluid-type-size-mixin)
-
-### ✅breakpoint-next [function]
-
-Get the value of the next breakpoint, or null for the last breakpoint
-
-<details>
-<summary>Source code</summary>
-
-```scss
-@function breakpoint-next(
-  $name,
-  $breakpoints: $grid-breakpoints,
-  $breakpoint-names: map-keys($breakpoints)
-) {
-  $n: list.index($breakpoint-names, $name);
-  @if $n != null and $n < list.length($breakpoint-names) {
-    @return list.nth($breakpoint-names, $n + 1);
-  }
-  @return null;
-}
-```
-
-</details>
-
-- **Parameters**:
-
-| Name                | Description                                                                                                     | Type     | Default value            |
-| ------------------- | --------------------------------------------------------------------------------------------------------------- | -------- | ------------------------ |
-| `$name`             | The name of the brekapoint                                                                                      | `String` | —                        |
-| `$breakpoints`      | A map of breakpoints where the key is the name of the breakpoint and the value is the values for the breakpoint | `Map`    | `$grid-breakpoints`      |
-| `$breakpoint-names` | A list of names from the `$breakpoints` map                                                                     | `List`   | `map-keys($breakpoints)` |
-
-- **Group**: [@carbon/layout](#carbonlayout)
-- **Returns**: `String`
 
 ### ✅carbon--breakpoint-prev [function]
 
@@ -4533,40 +4387,6 @@ Get the value of the previous breakpoint, or null for the first breakpoint
 - **Used by**:
   - [carbon--make-container [mixin]](#carbon--make-container-mixin)
 
-### ✅breakpoint-prev [function]
-
-Get the value of the previous breakpoint, or null for the first breakpoint
-
-<details>
-<summary>Source code</summary>
-
-```scss
-@function breakpoint-prev(
-  $name,
-  $breakpoints: $grid-breakpoints,
-  $breakpoint-names: map-keys($breakpoints)
-) {
-  $n: list.index($breakpoint-names, $name);
-  @if $n != null and $n > 1 {
-    @return list.nth($breakpoint-names, $n - 1);
-  }
-  @return null;
-}
-```
-
-</details>
-
-- **Parameters**:
-
-| Name                | Description                                                                                                     | Type     | Default value            |
-| ------------------- | --------------------------------------------------------------------------------------------------------------- | -------- | ------------------------ |
-| `$name`             | The name of the brekapoint                                                                                      | `String` | —                        |
-| `$breakpoints`      | A map of breakpoints where the key is the name of the breakpoint and the value is the values for the breakpoint | `Map`    | `$grid-breakpoints`      |
-| `$breakpoint-names` | A list of names from the `$breakpoints` map                                                                     | `List`   | `map-keys($breakpoints)` |
-
-- **Group**: [@carbon/layout](#carbonlayout)
-- **Returns**: `String`
-
 ### ✅carbon--is-smallest-breakpoint [function]
 
 Check to see if the given breakpoint name
@@ -4596,33 +4416,6 @@ Check to see if the given breakpoint name
 - **Returns**: `Bool`
 - **Used by**:
   - [carbon--breakpoint-up [mixin]](#carbon--breakpoint-up-mixin)
-
-### ✅is-smallest-breakpoint [function]
-
-Check to see if the given breakpoint name
-
-<details>
-<summary>Source code</summary>
-
-```scss
-@function is-smallest-breakpoint($name, $breakpoints: $grid-breakpoints) {
-  @return list.index(map.keys($breakpoints), $name) == 1;
-}
-```
-
-</details>
-
-- **Parameters**:
-
-| Name           | Description                                                                                                     | Type     | Default value       |
-| -------------- | --------------------------------------------------------------------------------------------------------------- | -------- | ------------------- |
-| `$name`        | The name of the brekapoint                                                                                      | `String` | —                   |
-| `$breakpoints` | A map of breakpoints where the key is the name of the breakpoint and the value is the values for the breakpoint | `Map`    | `$grid-breakpoints` |
-
-- **Group**: [@carbon/layout](#carbonlayout)
-- **Returns**: `Bool`
-- **Used by**:
-  - [breakpoint-up [mixin]](#breakpoint-up-mixin)
 
 ### ✅carbon--largest-breakpoint-name [function]
 
@@ -4655,60 +4448,6 @@ Returns the largest breakpoint name
 - **Used by**:
   - [carbon--largest-breakpoint [mixin]](#carbon--largest-breakpoint-mixin)
 
-### ✅largest-breakpoint-name [function]
-
-Returns the largest breakpoint name
-
-<details>
-<summary>Source code</summary>
-
-```scss
-@function largest-breakpoint-name($breakpoints: $grid-breakpoints) {
-  $total-breakpoints: list.length($breakpoints);
-  @return key-by-index($breakpoints, $total-breakpoints);
-}
-```
-
-</details>
-
-- **Parameters**:
-
-| Name           | Description                                    | Type  | Default value       |
-| -------------- | ---------------------------------------------- | ----- | ------------------- |
-| `$breakpoints` | A map of breakpoints where the key is the name | `Map` | `$grid-breakpoints` |
-
-- **Group**: [@carbon/layout](#carbonlayout)
-- **Returns**: `String`
-- **Requires**:
-  - [key-by-index [function]](#key-by-index-function)
-- **Used by**:
-  - [largest-breakpoint [mixin]](#largest-breakpoint-mixin)
-
-### ✅breakpoint-infix [function]
-
-Get the infix for a given breakpoint in a list of breakpoints. Usesful for
-generate the size part in a selector, for example: `.prefix--col-sm-2`.
-
-<details>
-<summary>Source code</summary>
-
-```scss
-@function breakpoint-infix($name) {
-  @return '-#{$name}';
-}
-```
-
-</details>
-
-- **Parameters**:
-
-| Name    | Description                | Type     | Default value |
-| ------- | -------------------------- | -------- | ------------- |
-| `$name` | The name of the breakpoint | `String` | —             |
-
-- **Group**: [@carbon/layout](#carbonlayout)
-- **Returns**: `String`
-
 ### ✅carbon--breakpoint-infix [function]
 
 Get the infix for a given breakpoint in a list of breakpoints. Usesful for
@@ -4735,51 +4474,6 @@ generate the size part in a selector, for example: `.prefix--col-sm-2`.
 - **Returns**: `String`
 - **Used by**:
   - [carbon--make-grid-columns [mixin]](#carbon--make-grid-columns-mixin)
-
-### ✅breakpoint-up [mixin]
-
-Generate a media query from the width of the given breakpoint to infinity
-
-<details>
-<summary>Source code</summary>
-
-```scss
-@mixin breakpoint-up($name, $breakpoints: $grid-breakpoints) {
-  @if meta.type-of($name) == 'number' {
-    @media (min-width: $name) {
-      @content;
-    }
-  } @else if map.has-key($breakpoints, $name) {
-    $breakpoint: map.get($breakpoints, $name);
-    $width: map.get($breakpoint, width);
-    @if is-smallest-breakpoint($name, $breakpoints) {
-      @content;
-    } @else {
-      @media (min-width: $width) {
-        @content;
-      }
-    }
-  } @else {
-    @error 'Unable to find a breakpoint with name `#{$name}`. Expected one of: (#{map.keys($breakpoints)})';
-  }
-}
-```
-
-</details>
-
-- **Parameters**:
-
-| Name           | Description                                    | Type               | Default value       |
-| -------------- | ---------------------------------------------- | ------------------ | ------------------- |
-| `$name`        | —                                              | `String \| Number` | —                   |
-| `$breakpoints` | A map of breakpoints where the key is the name | `Map`              | `$grid-breakpoints` |
-
-- **Group**: [@carbon/layout](#carbonlayout)
-- **Requires**:
-  - [is-smallest-breakpoint [function]](#is-smallest-breakpoint-function)
-- **Used by**:
-  - [breakpoint-between [mixin]](#breakpoint-between-mixin)
-  - [breakpoint [mixin]](#breakpoint-mixin)
 
 ### ✅carbon--breakpoint-up [mixin]
 
@@ -4827,49 +4521,6 @@ Generate a media query from the width of the given breakpoint to infinity
   - [carbon--breakpoint [mixin]](#carbon--breakpoint-mixin)
   - [accordion [mixin]](#accordion-mixin)
 
-### ✅breakpoint-down [mixin]
-
-Generate a media query for the maximum width of the given styles
-
-<details>
-<summary>Source code</summary>
-
-```scss
-@mixin breakpoint-down($name, $breakpoints: $grid-breakpoints) {
-  @if meta.type-of($name) == 'number' {
-    @media (max-width: $name) {
-      @content;
-    }
-  } @else if map.has-key($breakpoints, $name) {
-    // We borrow this logic from bootstrap for specifying the value of the
-    // max-width. The maximum width is calculated by finding the breakpoint and
-    // subtracting .02 from its value. This value is used instead of .01 to
-    // avoid rounding issues in Safari
-    // https://github.com/twbs/bootstrap/blob/c5b1919deaf5393fcca9e9b9d7ce9c338160d99d/scss/mixins/_breakpoints.scss#L34-L46
-    $breakpoint: map.get($breakpoints, $name);
-    $width: map.get($breakpoint, width) - 0.02;
-    @media (max-width: $width) {
-      @content;
-    }
-  } @else {
-    @error 'Unable to find a breakpoint with name `#{$name}`. Expected one of: (#{map.keys($breakpoints)})';
-  }
-}
-```
-
-</details>
-
-- **Parameters**:
-
-| Name           | Description                                    | Type               | Default value       |
-| -------------- | ---------------------------------------------- | ------------------ | ------------------- |
-| `$name`        | —                                              | `String \| Number` | —                   |
-| `$breakpoints` | A map of breakpoints where the key is the name | `Map`              | `$grid-breakpoints` |
-
-- **Group**: [@carbon/layout](#carbonlayout)
-- **Used by**:
-  - [breakpoint-between [mixin]](#breakpoint-between-mixin)
-
 ### ✅carbon--breakpoint-down [mixin]
 
 Generate a media query for the maximum width of the given styles
@@ -4914,55 +4565,6 @@ Generate a media query for the maximum width of the given styles
   - [carbon--breakpoint-between [mixin]](#carbon--breakpoint-between-mixin)
   - [pagination [mixin]](#pagination-mixin)
   - [carbon-side-nav [mixin]](#carbon-side-nav-mixin)
-
-### ✅breakpoint-between [mixin]
-
-Generate a media query for the range between the lower and upper breakpoints
-
-<details>
-<summary>Source code</summary>
-
-```scss
-@mixin breakpoint-between($lower, $upper, $breakpoints: $grid-breakpoints) {
-  $is-number-lower: meta.type-of($lower) == 'number';
-  $is-number-upper: meta.type-of($upper) == 'number';
-  $min: if($is-number-lower, $lower, map.get($breakpoints, $lower));
-  $max: if($is-number-upper, $upper, map.get($breakpoints, $upper));
-
-  @if $min and $max {
-    $min-width: if(not $is-number-lower and $min, map.get($min, width), $min);
-    $max-width: if(not $is-number-upper and $max, map.get($max, width), $max);
-    @media (min-width: $min-width) and (max-width: $max-width) {
-      @content;
-    }
-  } @else if $min != null and $max == null {
-    @include breakpoint-up($lower) {
-      @content;
-    }
-  } @else if $min == null and $max != null {
-    @include breakpoint-down($upper) {
-      @content;
-    }
-  } @else {
-    @error 'Unable to find a breakpoint to satisfy: (#{$lower},#{$upper}). Expected both to be one of (#{map.keys($breakpoints)}).';
-  }
-}
-```
-
-</details>
-
-- **Parameters**:
-
-| Name           | Description                                    | Type               | Default value       |
-| -------------- | ---------------------------------------------- | ------------------ | ------------------- |
-| `$lower`       | —                                              | `String \| Number` | —                   |
-| `$upper`       | —                                              | `String \| Number` | —                   |
-| `$breakpoints` | A map of breakpoints where the key is the name | `Map`              | `$grid-breakpoints` |
-
-- **Group**: [@carbon/layout](#carbonlayout)
-- **Requires**:
-  - [breakpoint-up [mixin]](#breakpoint-up-mixin)
-  - [breakpoint-down [mixin]](#breakpoint-down-mixin)
 
 ### ✅carbon--breakpoint-between [mixin]
 
@@ -5017,34 +4619,6 @@ Generate a media query for the range between the lower and upper breakpoints
   - [carbon--breakpoint-up [mixin]](#carbon--breakpoint-up-mixin)
   - [carbon--breakpoint-down [mixin]](#carbon--breakpoint-down-mixin)
 
-### ✅largest-breakpoint [mixin]
-
-Generate media query for the largest breakpoint
-
-<details>
-<summary>Source code</summary>
-
-```scss
-@mixin largest-breakpoint($breakpoints: $grid-breakpoints) {
-  @include breakpoint(largest-breakpoint-name()) {
-    @content;
-  }
-}
-```
-
-</details>
-
-- **Parameters**:
-
-| Name           | Description                                    | Type  | Default value       |
-| -------------- | ---------------------------------------------- | ----- | ------------------- |
-| `$breakpoints` | A map of breakpoints where the key is the name | `Map` | `$grid-breakpoints` |
-
-- **Group**: [@carbon/layout](#carbonlayout)
-- **Requires**:
-  - [breakpoint [mixin]](#breakpoint-mixin)
-  - [largest-breakpoint-name [function]](#largest-breakpoint-name-function)
-
 ### ✅carbon--largest-breakpoint [mixin]
 
 Generate media query for the largest breakpoint
@@ -5074,36 +4648,6 @@ Generate media query for the largest breakpoint
   - [carbon--largest-breakpoint-name [function]](#carbon--largest-breakpoint-name-function)
 - **Used by**:
   - [carbon--grid [mixin]](#carbon--grid-mixin)
-
-### ✅breakpoint [mixin]
-
-Generate a media query for a given breakpoint
-
-<details>
-<summary>Source code</summary>
-
-```scss
-@mixin breakpoint($name, $breakpoints: $grid-breakpoints) {
-  @include breakpoint-up($name, $breakpoints) {
-    @content;
-  }
-}
-```
-
-</details>
-
-- **Parameters**:
-
-| Name           | Description                                    | Type               | Default value       |
-| -------------- | ---------------------------------------------- | ------------------ | ------------------- |
-| `$name`        | —                                              | `String \| Number` | —                   |
-| `$breakpoints` | A map of breakpoints where the key is the name | `Map`              | `$grid-breakpoints` |
-
-- **Group**: [@carbon/layout](#carbonlayout)
-- **Requires**:
-  - [breakpoint-up [mixin]](#breakpoint-up-mixin)
-- **Used by**:
-  - [largest-breakpoint [mixin]](#largest-breakpoint-mixin)
 
 ### ✅carbon--breakpoint [mixin]
 
@@ -5351,25 +4895,6 @@ $carbon--base-font-size: 16px;
   - [carbon--rem [function]](#carbon--rem-function)
   - [carbon--em [function]](#carbon--em-function)
 
-### ✅base-font-size [variable]
-
-Default font size
-
-<details>
-<summary>Source code</summary>
-
-```scss
-$base-font-size: 16px;
-```
-
-</details>
-
-- **Group**: [@carbon/layout](#carbonlayout)
-- **Type**: `Number`
-- **Used by**:
-  - [rem [function]](#rem-function)
-  - [em [function]](#em-function)
-
 ### ✅carbon--rem [function]
 
 Convert a given px unit to a rem unit
@@ -5404,86 +4929,6 @@ Convert a given px unit to a rem unit
   - [carbon--mini-units [function]](#carbon--mini-units-function)
   - [toggle [mixin]](#toggle-mixin)
 
-### ✅rem [function]
-
-Convert a given px unit to a rem unit
-
-<details>
-<summary>Source code</summary>
-
-```scss
-@function rem($px) {
-  @if unit($px) != 'px' {
-    // TODO: update to @error in v11
-    @warn "Expected argument $px to be of type `px`, instead received: `#{unit($px)}`";
-  }
-
-  @return ($px / $base-font-size) * 1rem;
-}
-```
-
-</details>
-
-- **Parameters**:
-
-| Name  | Description         | Type     | Default value |
-| ----- | ------------------- | -------- | ------------- |
-| `$px` | Number with px unit | `Number` | —             |
-
-- **Group**: [@carbon/layout](#carbonlayout)
-- **Returns**: `Number` Number with rem unit
-- **Requires**:
-  - [base-font-size [variable]](#base-font-size-variable)
-- **Used by**:
-  - [accordion [mixin]](#accordion-mixin)
-  - [breadcrumb [mixin]](#breadcrumb-mixin)
-  - [button [mixin]](#button-mixin)
-  - [button-base [mixin]](#button-base-mixin)
-  - [checkbox [mixin]](#checkbox-mixin)
-  - [snippet [mixin]](#snippet-mixin)
-  - [bx--snippet [mixin]](#bx--snippet-mixin)
-  - [content-switcher [mixin]](#content-switcher-mixin)
-  - [data-table-v2-action [mixin]](#data-table-v2-action-mixin)
-  - [data-table-core [mixin]](#data-table-core-mixin)
-  - [data-table-expandable [mixin]](#data-table-expandable-mixin)
-  - [data-table-sort [mixin]](#data-table-sort-mixin)
-  - [date-picker [mixin]](#date-picker-mixin)
-  - [dropdown [mixin]](#dropdown-mixin)
-  - [file-uploader [mixin]](#file-uploader-mixin)
-  - [form [mixin]](#form-mixin)
-  - [inline-loading [mixin]](#inline-loading-mixin)
-  - [lists [mixin]](#lists-mixin)
-  - [listbox [mixin]](#listbox-mixin)
-  - [loading [mixin]](#loading-mixin)
-  - [modal [mixin]](#modal-mixin)
-  - [multiselect [mixin]](#multiselect-mixin)
-  - [inline-notifications [mixin]](#inline-notifications-mixin)
-  - [toast-notifications [mixin]](#toast-notifications-mixin)
-  - [number-input [mixin]](#number-input-mixin)
-  - [overflow-menu [mixin]](#overflow-menu-mixin)
-  - [pagination [mixin]](#pagination-mixin)
-  - [unstable_pagination [mixin]](#unstable_pagination-mixin)
-  - [progress-indicator [mixin]](#progress-indicator-mixin)
-  - [radio-button [mixin]](#radio-button-mixin)
-  - [search [mixin]](#search-mixin)
-  - [select [mixin]](#select-mixin)
-  - [slider [mixin]](#slider-mixin)
-  - [tabs [mixin]](#tabs-mixin)
-  - [tags [mixin]](#tags-mixin)
-  - [text-area [mixin]](#text-area-mixin)
-  - [text-input [mixin]](#text-input-mixin)
-  - [time-picker [mixin]](#time-picker-mixin)
-  - [toggle [mixin]](#toggle-mixin)
-  - [toolbar [mixin]](#toolbar-mixin)
-  - [tooltip--icon [mixin]](#tooltip--icon-mixin)
-  - [tooltip--definition--legacy [mixin]](#tooltip--definition--legacy-mixin)
-  - [tooltip [mixin]](#tooltip-mixin)
-  - [treeview [mixin]](#treeview-mixin)
-  - [carbon-header [mixin]](#carbon-header-mixin)
-  - [carbon-navigation [mixin]](#carbon-navigation-mixin)
-  - [carbon-side-nav [mixin]](#carbon-side-nav-mixin)
-  - [carbon-switcher [mixin]](#carbon-switcher-mixin)
-
 ### ✅carbon--em [function]
 
 Convert a given px unit to a em unit
@@ -5515,37 +4960,6 @@ Convert a given px unit to a em unit
 - **Requires**:
   - [carbon--base-font-size [variable]](#carbon--base-font-size-variable)
 
-### ✅em [function]
-
-Convert a given px unit to a em unit
-
-<details>
-<summary>Source code</summary>
-
-```scss
-@function em($px) {
-  @if unit($px) != 'px' {
-    // TODO: update to @error in v11
-    @warn "Expected argument $px to be of type `px`, instead received: `#{unit($px)}`";
-  }
-
-  @return ($px / $base-font-size) * 1em;
-}
-```
-
-</details>
-
-- **Parameters**:
-
-| Name  | Description         | Type     | Default value |
-| ----- | ------------------- | -------- | ------------- |
-| `$px` | Number with px unit | `Number` | —             |
-
-- **Group**: [@carbon/layout](#carbonlayout)
-- **Returns**: `Number` Number with em unit
-- **Requires**:
-  - [base-font-size [variable]](#base-font-size-variable)
-
 ### ✅carbon--fluid-spacing-01 [variable]
 
 <details>
@@ -5561,22 +4975,6 @@ $carbon--fluid-spacing-01: 0;
 - **Type**: `Number`
 - **Aliased**:
   - `fluid-spacing-01`
-
-### ✅fluid-spacing-01 [variable]
-
-<details>
-<summary>Source code</summary>
-
-```scss
-$fluid-spacing-01: 0;
-```
-
-</details>
-
-- **Group**: [@carbon/layout](#carbonlayout)
-- **Type**: `Number`
-- **Used by**:
-  - [carbon--theme [mixin]](#carbon--theme-mixin)
 
 ### ✅carbon--fluid-spacing-02 [variable]
 
@@ -5594,22 +4992,6 @@ $carbon--fluid-spacing-02: 2vw;
 - **Aliased**:
   - `fluid-spacing-02`
 
-### ✅fluid-spacing-02 [variable]
-
-<details>
-<summary>Source code</summary>
-
-```scss
-$fluid-spacing-02: 2vw;
-```
-
-</details>
-
-- **Group**: [@carbon/layout](#carbonlayout)
-- **Type**: `Number`
-- **Used by**:
-  - [carbon--theme [mixin]](#carbon--theme-mixin)
-
 ### ✅carbon--fluid-spacing-03 [variable]
 
 <details>
@@ -5625,22 +5007,6 @@ $carbon--fluid-spacing-03: 5vw;
 - **Type**: `Number`
 - **Aliased**:
   - `fluid-spacing-03`
-
-### ✅fluid-spacing-03 [variable]
-
-<details>
-<summary>Source code</summary>
-
-```scss
-$fluid-spacing-03: 5vw;
-```
-
-</details>
-
-- **Group**: [@carbon/layout](#carbonlayout)
-- **Type**: `Number`
-- **Used by**:
-  - [carbon--theme [mixin]](#carbon--theme-mixin)
 
 ### ✅carbon--fluid-spacing-04 [variable]
 
@@ -5658,22 +5024,6 @@ $carbon--fluid-spacing-04: 10vw;
 - **Aliased**:
   - `fluid-spacing-04`
 
-### ✅fluid-spacing-04 [variable]
-
-<details>
-<summary>Source code</summary>
-
-```scss
-$fluid-spacing-04: 10vw;
-```
-
-</details>
-
-- **Group**: [@carbon/layout](#carbonlayout)
-- **Type**: `Number`
-- **Used by**:
-  - [carbon--theme [mixin]](#carbon--theme-mixin)
-
 ### ✅carbon--fluid-spacing [variable]
 
 <details>
@@ -5685,25 +5035,6 @@ $carbon--fluid-spacing: (
   $carbon--fluid-spacing-02,
   $carbon--fluid-spacing-03,
   $carbon--fluid-spacing-04
-);
-```
-
-</details>
-
-- **Group**: [@carbon/layout](#carbonlayout)
-- **Type**: `List`
-
-### ✅fluid-spacing [variable]
-
-<details>
-<summary>Source code</summary>
-
-```scss
-$fluid-spacing: (
-  $fluid-spacing-01,
-  $fluid-spacing-02,
-  $fluid-spacing-03,
-  $fluid-spacing-04
 );
 ```
 
@@ -5726,6 +5057,8 @@ $fluid-spacing-01: $carbon--fluid-spacing-01;
 - **Group**: [@carbon/layout](#carbonlayout)
 - **Type**: `Number`
 - **Alias**: `carbon--fluid-spacing-01`
+- **Used by**:
+  - [carbon--theme [mixin]](#carbon--theme-mixin)
 
 ### ✅fluid-spacing-02 [variable]
 
@@ -5741,6 +5074,8 @@ $fluid-spacing-02: $carbon--fluid-spacing-02;
 - **Group**: [@carbon/layout](#carbonlayout)
 - **Type**: `Number`
 - **Alias**: `carbon--fluid-spacing-02`
+- **Used by**:
+  - [carbon--theme [mixin]](#carbon--theme-mixin)
 
 ### ✅fluid-spacing-03 [variable]
 
@@ -5756,6 +5091,8 @@ $fluid-spacing-03: $carbon--fluid-spacing-03;
 - **Group**: [@carbon/layout](#carbonlayout)
 - **Type**: `Number`
 - **Alias**: `carbon--fluid-spacing-03`
+- **Used by**:
+  - [carbon--theme [mixin]](#carbon--theme-mixin)
 
 ### ✅fluid-spacing-04 [variable]
 
@@ -5771,6 +5108,8 @@ $fluid-spacing-04: $carbon--fluid-spacing-04;
 - **Group**: [@carbon/layout](#carbonlayout)
 - **Type**: `Number`
 - **Alias**: `carbon--fluid-spacing-04`
+- **Used by**:
+  - [carbon--theme [mixin]](#carbon--theme-mixin)
 
 ### ✅carbon--icon-size-01 [variable]
 
@@ -6312,23 +5651,6 @@ $carbon--spacing-01: 0.125rem;
   - [search [mixin]](#search-mixin)
   - [time-picker [mixin]](#time-picker-mixin)
 
-### ✅spacing-01 [variable]
-
-<details>
-<summary>Source code</summary>
-
-```scss
-$spacing-01: 0.125rem;
-```
-
-</details>
-
-- **Group**: [@carbon/layout](#carbonlayout)
-- **Type**: `Number`
-- **Used by**:
-  - [carbon--theme [mixin]](#carbon--theme-mixin)
-  - [data-table-core [mixin]](#data-table-core-mixin)
-
 ### ✅carbon--spacing-02 [variable]
 
 <details>
@@ -6353,23 +5675,6 @@ $carbon--spacing-02: 0.25rem;
   - [pseudo-underline [mixin]](#pseudo-underline-mixin)
   - [tags [mixin]](#tags-mixin)
   - [tooltip [mixin]](#tooltip-mixin)
-
-### ✅spacing-02 [variable]
-
-<details>
-<summary>Source code</summary>
-
-```scss
-$spacing-02: 0.25rem;
-```
-
-</details>
-
-- **Group**: [@carbon/layout](#carbonlayout)
-- **Type**: `Number`
-- **Used by**:
-  - [carbon--theme [mixin]](#carbon--theme-mixin)
-  - [modal [mixin]](#modal-mixin)
 
 ### ✅carbon--spacing-03 [variable]
 
@@ -6407,34 +5712,6 @@ $carbon--spacing-03: 0.5rem;
   - [tooltip--definition--legacy [mixin]](#tooltip--definition--legacy-mixin)
   - [tooltip [mixin]](#tooltip-mixin)
 
-### ✅spacing-03 [variable]
-
-<details>
-<summary>Source code</summary>
-
-```scss
-$spacing-03: 0.5rem;
-```
-
-</details>
-
-- **Group**: [@carbon/layout](#carbonlayout)
-- **Type**: `Number`
-- **Used by**:
-  - [carbon--theme [mixin]](#carbon--theme-mixin)
-  - [accordion [mixin]](#accordion-mixin)
-  - [snippet [mixin]](#snippet-mixin)
-  - [data-table-v2-action [mixin]](#data-table-v2-action-mixin)
-  - [data-table-core [mixin]](#data-table-core-mixin)
-  - [data-table-sort [mixin]](#data-table-sort-mixin)
-  - [modal [mixin]](#modal-mixin)
-  - [multiselect [mixin]](#multiselect-mixin)
-  - [select [mixin]](#select-mixin)
-  - [tabs [mixin]](#tabs-mixin)
-  - [tooltip [mixin]](#tooltip-mixin)
-  - [treeview [mixin]](#treeview-mixin)
-  - [carbon-switcher [mixin]](#carbon-switcher-mixin)
-
 ### ✅carbon--spacing-04 [variable]
 
 <details>
@@ -6455,24 +5732,6 @@ $carbon--spacing-04: 0.75rem;
   - [lists [mixin]](#lists-mixin)
   - [text-area [mixin]](#text-area-mixin)
   - [tooltip--definition--legacy [mixin]](#tooltip--definition--legacy-mixin)
-
-### ✅spacing-04 [variable]
-
-<details>
-<summary>Source code</summary>
-
-```scss
-$spacing-04: 0.75rem;
-```
-
-</details>
-
-- **Group**: [@carbon/layout](#carbonlayout)
-- **Type**: `Number`
-- **Used by**:
-  - [carbon--theme [mixin]](#carbon--theme-mixin)
-  - [data-table-core [mixin]](#data-table-core-mixin)
-  - [tabs [mixin]](#tabs-mixin)
 
 ### ✅carbon--spacing-05 [variable]
 
@@ -6519,36 +5778,6 @@ $carbon--spacing-05: 1rem;
   - [tooltip--definition--legacy [mixin]](#tooltip--definition--legacy-mixin)
   - [tooltip [mixin]](#tooltip-mixin)
 
-### ✅spacing-05 [variable]
-
-<details>
-<summary>Source code</summary>
-
-```scss
-$spacing-05: 1rem;
-```
-
-</details>
-
-- **Group**: [@carbon/layout](#carbonlayout)
-- **Type**: `Number`
-- **Used by**:
-  - [carbon--theme [mixin]](#carbon--theme-mixin)
-  - [accordion [mixin]](#accordion-mixin)
-  - [checkbox [mixin]](#checkbox-mixin)
-  - [snippet [mixin]](#snippet-mixin)
-  - [data-table-v2-action [mixin]](#data-table-v2-action-mixin)
-  - [data-table-core [mixin]](#data-table-core-mixin)
-  - [data-table-expandable [mixin]](#data-table-expandable-mixin)
-  - [modal [mixin]](#modal-mixin)
-  - [multiselect [mixin]](#multiselect-mixin)
-  - [pagination [mixin]](#pagination-mixin)
-  - [search [mixin]](#search-mixin)
-  - [select [mixin]](#select-mixin)
-  - [tabs [mixin]](#tabs-mixin)
-  - [treeview [mixin]](#treeview-mixin)
-  - [carbon-switcher [mixin]](#carbon-switcher-mixin)
-
 ### ✅carbon--spacing-06 [variable]
 
 <details>
@@ -6572,24 +5801,6 @@ $carbon--spacing-06: 1.5rem;
   - [toast-notifications [mixin]](#toast-notifications-mixin)
   - [progress-indicator [mixin]](#progress-indicator-mixin)
   - [padding-td [mixin]](#padding-td-mixin)
-
-### ✅spacing-06 [variable]
-
-<details>
-<summary>Source code</summary>
-
-```scss
-$spacing-06: 1.5rem;
-```
-
-</details>
-
-- **Group**: [@carbon/layout](#carbonlayout)
-- **Type**: `Number`
-- **Used by**:
-  - [carbon--theme [mixin]](#carbon--theme-mixin)
-  - [data-table-v2-action [mixin]](#data-table-v2-action-mixin)
-  - [data-table-core [mixin]](#data-table-core-mixin)
 
 ### ✅carbon--spacing-07 [variable]
 
@@ -6615,27 +5826,6 @@ $carbon--spacing-07: 2rem;
   - [progress-indicator [mixin]](#progress-indicator-mixin)
   - [tooltip [mixin]](#tooltip-mixin)
 
-### ✅spacing-07 [variable]
-
-<details>
-<summary>Source code</summary>
-
-```scss
-$spacing-07: 2rem;
-```
-
-</details>
-
-- **Group**: [@carbon/layout](#carbonlayout)
-- **Type**: `Number`
-- **Used by**:
-  - [carbon--theme [mixin]](#carbon--theme-mixin)
-  - [modal [mixin]](#modal-mixin)
-  - [search [mixin]](#search-mixin)
-  - [select [mixin]](#select-mixin)
-  - [treeview [mixin]](#treeview-mixin)
-  - [carbon-switcher [mixin]](#carbon-switcher-mixin)
-
 ### ✅carbon--spacing-08 [variable]
 
 <details>
@@ -6660,25 +5850,6 @@ $carbon--spacing-08: 2.5rem;
   - [tabs [mixin]](#tabs-mixin)
   - [text-area [mixin]](#text-area-mixin)
   - [text-input [mixin]](#text-input-mixin)
-
-### ✅spacing-08 [variable]
-
-<details>
-<summary>Source code</summary>
-
-```scss
-$spacing-08: 2.5rem;
-```
-
-</details>
-
-- **Group**: [@carbon/layout](#carbonlayout)
-- **Type**: `Number`
-- **Used by**:
-  - [carbon--theme [mixin]](#carbon--theme-mixin)
-  - [dropdown [mixin]](#dropdown-mixin)
-  - [search [mixin]](#search-mixin)
-  - [treeview [mixin]](#treeview-mixin)
 
 ### ✅carbon--spacing-09 [variable]
 
@@ -6707,28 +5878,6 @@ $carbon--spacing-09: 3rem;
   - [tabs [mixin]](#tabs-mixin)
   - [tile [mixin]](#tile-mixin)
 
-### ✅spacing-09 [variable]
-
-<details>
-<summary>Source code</summary>
-
-```scss
-$spacing-09: 3rem;
-```
-
-</details>
-
-- **Group**: [@carbon/layout](#carbonlayout)
-- **Type**: `Number`
-- **Used by**:
-  - [carbon--theme [mixin]](#carbon--theme-mixin)
-  - [data-table-v2-action [mixin]](#data-table-v2-action-mixin)
-  - [modal [mixin]](#modal-mixin)
-  - [search [mixin]](#search-mixin)
-  - [select [mixin]](#select-mixin)
-  - [tabs [mixin]](#tabs-mixin)
-  - [carbon-side-nav [mixin]](#carbon-side-nav-mixin)
-
 ### ✅carbon--spacing-10 [variable]
 
 <details>
@@ -6744,22 +5893,6 @@ $carbon--spacing-10: 4rem;
 - **Type**: `Number`
 - **Aliased**:
   - `spacing-10`
-
-### ✅spacing-10 [variable]
-
-<details>
-<summary>Source code</summary>
-
-```scss
-$spacing-10: 4rem;
-```
-
-</details>
-
-- **Group**: [@carbon/layout](#carbonlayout)
-- **Type**: `Number`
-- **Used by**:
-  - [carbon--theme [mixin]](#carbon--theme-mixin)
 
 ### ✅carbon--spacing-11 [variable]
 
@@ -6777,22 +5910,6 @@ $carbon--spacing-11: 5rem;
 - **Aliased**:
   - `spacing-11`
 
-### ✅spacing-11 [variable]
-
-<details>
-<summary>Source code</summary>
-
-```scss
-$spacing-11: 5rem;
-```
-
-</details>
-
-- **Group**: [@carbon/layout](#carbonlayout)
-- **Type**: `Number`
-- **Used by**:
-  - [carbon--theme [mixin]](#carbon--theme-mixin)
-
 ### ✅carbon--spacing-12 [variable]
 
 <details>
@@ -6808,22 +5925,6 @@ $carbon--spacing-12: 6rem;
 - **Type**: `Number`
 - **Aliased**:
   - `spacing-12`
-
-### ✅spacing-12 [variable]
-
-<details>
-<summary>Source code</summary>
-
-```scss
-$spacing-12: 6rem;
-```
-
-</details>
-
-- **Group**: [@carbon/layout](#carbonlayout)
-- **Type**: `Number`
-- **Used by**:
-  - [carbon--theme [mixin]](#carbon--theme-mixin)
 
 ### ✅carbon--spacing [variable]
 
@@ -6852,33 +5953,6 @@ $carbon--spacing: (
 - **Group**: [@carbon/layout](#carbonlayout)
 - **Type**: `List`
 
-### ✅spacing [variable]
-
-<details>
-<summary>Source code</summary>
-
-```scss
-$spacing: (
-  $spacing-01,
-  $spacing-02,
-  $spacing-03,
-  $spacing-04,
-  $spacing-05,
-  $spacing-06,
-  $spacing-07,
-  $spacing-08,
-  $spacing-09,
-  $spacing-10,
-  $spacing-11,
-  $spacing-12
-);
-```
-
-</details>
-
-- **Group**: [@carbon/layout](#carbonlayout)
-- **Type**: `List`
-
 ### ✅spacing-01 [variable]
 
 <details>
@@ -6893,6 +5967,9 @@ $spacing-01: $carbon--spacing-01;
 - **Group**: [@carbon/layout](#carbonlayout)
 - **Type**: `Number`
 - **Alias**: `carbon--spacing-01`
+- **Used by**:
+  - [carbon--theme [mixin]](#carbon--theme-mixin)
+  - [data-table-core [mixin]](#data-table-core-mixin)
 
 ### ✅spacing-02 [variable]
 
@@ -6908,6 +5985,9 @@ $spacing-02: $carbon--spacing-02;
 - **Group**: [@carbon/layout](#carbonlayout)
 - **Type**: `Number`
 - **Alias**: `carbon--spacing-02`
+- **Used by**:
+  - [carbon--theme [mixin]](#carbon--theme-mixin)
+  - [modal [mixin]](#modal-mixin)
 
 ### ✅spacing-03 [variable]
 
@@ -6923,6 +6003,20 @@ $spacing-03: $carbon--spacing-03;
 - **Group**: [@carbon/layout](#carbonlayout)
 - **Type**: `Number`
 - **Alias**: `carbon--spacing-03`
+- **Used by**:
+  - [carbon--theme [mixin]](#carbon--theme-mixin)
+  - [accordion [mixin]](#accordion-mixin)
+  - [snippet [mixin]](#snippet-mixin)
+  - [data-table-v2-action [mixin]](#data-table-v2-action-mixin)
+  - [data-table-core [mixin]](#data-table-core-mixin)
+  - [data-table-sort [mixin]](#data-table-sort-mixin)
+  - [modal [mixin]](#modal-mixin)
+  - [multiselect [mixin]](#multiselect-mixin)
+  - [select [mixin]](#select-mixin)
+  - [tabs [mixin]](#tabs-mixin)
+  - [tooltip [mixin]](#tooltip-mixin)
+  - [treeview [mixin]](#treeview-mixin)
+  - [carbon-switcher [mixin]](#carbon-switcher-mixin)
 
 ### ✅spacing-04 [variable]
 
@@ -6938,6 +6032,10 @@ $spacing-04: $carbon--spacing-04;
 - **Group**: [@carbon/layout](#carbonlayout)
 - **Type**: `Number`
 - **Alias**: `carbon--spacing-04`
+- **Used by**:
+  - [carbon--theme [mixin]](#carbon--theme-mixin)
+  - [data-table-core [mixin]](#data-table-core-mixin)
+  - [tabs [mixin]](#tabs-mixin)
 
 ### ✅spacing-05 [variable]
 
@@ -6953,6 +6051,22 @@ $spacing-05: $carbon--spacing-05;
 - **Group**: [@carbon/layout](#carbonlayout)
 - **Type**: `Number`
 - **Alias**: `carbon--spacing-05`
+- **Used by**:
+  - [carbon--theme [mixin]](#carbon--theme-mixin)
+  - [accordion [mixin]](#accordion-mixin)
+  - [checkbox [mixin]](#checkbox-mixin)
+  - [snippet [mixin]](#snippet-mixin)
+  - [data-table-v2-action [mixin]](#data-table-v2-action-mixin)
+  - [data-table-core [mixin]](#data-table-core-mixin)
+  - [data-table-expandable [mixin]](#data-table-expandable-mixin)
+  - [modal [mixin]](#modal-mixin)
+  - [multiselect [mixin]](#multiselect-mixin)
+  - [pagination [mixin]](#pagination-mixin)
+  - [search [mixin]](#search-mixin)
+  - [select [mixin]](#select-mixin)
+  - [tabs [mixin]](#tabs-mixin)
+  - [treeview [mixin]](#treeview-mixin)
+  - [carbon-switcher [mixin]](#carbon-switcher-mixin)
 
 ### ✅spacing-06 [variable]
 
@@ -6968,6 +6082,10 @@ $spacing-06: $carbon--spacing-06;
 - **Group**: [@carbon/layout](#carbonlayout)
 - **Type**: `Number`
 - **Alias**: `carbon--spacing-06`
+- **Used by**:
+  - [carbon--theme [mixin]](#carbon--theme-mixin)
+  - [data-table-v2-action [mixin]](#data-table-v2-action-mixin)
+  - [data-table-core [mixin]](#data-table-core-mixin)
 
 ### ✅spacing-07 [variable]
 
@@ -6983,6 +6101,13 @@ $spacing-07: $carbon--spacing-07;
 - **Group**: [@carbon/layout](#carbonlayout)
 - **Type**: `Number`
 - **Alias**: `carbon--spacing-07`
+- **Used by**:
+  - [carbon--theme [mixin]](#carbon--theme-mixin)
+  - [modal [mixin]](#modal-mixin)
+  - [search [mixin]](#search-mixin)
+  - [select [mixin]](#select-mixin)
+  - [treeview [mixin]](#treeview-mixin)
+  - [carbon-switcher [mixin]](#carbon-switcher-mixin)
 
 ### ✅spacing-08 [variable]
 
@@ -6998,6 +6123,11 @@ $spacing-08: $carbon--spacing-08;
 - **Group**: [@carbon/layout](#carbonlayout)
 - **Type**: `Number`
 - **Alias**: `carbon--spacing-08`
+- **Used by**:
+  - [carbon--theme [mixin]](#carbon--theme-mixin)
+  - [dropdown [mixin]](#dropdown-mixin)
+  - [search [mixin]](#search-mixin)
+  - [treeview [mixin]](#treeview-mixin)
 
 ### ✅spacing-09 [variable]
 
@@ -7013,6 +6143,14 @@ $spacing-09: $carbon--spacing-09;
 - **Group**: [@carbon/layout](#carbonlayout)
 - **Type**: `Number`
 - **Alias**: `carbon--spacing-09`
+- **Used by**:
+  - [carbon--theme [mixin]](#carbon--theme-mixin)
+  - [data-table-v2-action [mixin]](#data-table-v2-action-mixin)
+  - [modal [mixin]](#modal-mixin)
+  - [search [mixin]](#search-mixin)
+  - [select [mixin]](#select-mixin)
+  - [tabs [mixin]](#tabs-mixin)
+  - [carbon-side-nav [mixin]](#carbon-side-nav-mixin)
 
 ### ✅spacing-10 [variable]
 
@@ -7028,6 +6166,8 @@ $spacing-10: $carbon--spacing-10;
 - **Group**: [@carbon/layout](#carbonlayout)
 - **Type**: `Number`
 - **Alias**: `carbon--spacing-10`
+- **Used by**:
+  - [carbon--theme [mixin]](#carbon--theme-mixin)
 
 ### ✅spacing-11 [variable]
 
@@ -7043,6 +6183,8 @@ $spacing-11: $carbon--spacing-11;
 - **Group**: [@carbon/layout](#carbonlayout)
 - **Type**: `Number`
 - **Alias**: `carbon--spacing-11`
+- **Used by**:
+  - [carbon--theme [mixin]](#carbon--theme-mixin)
 
 ### ✅spacing-12 [variable]
 
@@ -7058,34 +6200,8 @@ $spacing-12: $carbon--spacing-12;
 - **Group**: [@carbon/layout](#carbonlayout)
 - **Type**: `Number`
 - **Alias**: `carbon--spacing-12`
-
-### ✅map-deep-get [function]
-
-Map deep get
-
-<details>
-<summary>Source code</summary>
-
-```scss
-@function map-deep-get($map, $keys) {
-  @each $key in $keys {
-    $map: map-get($map, $key);
-  }
-  @return $map;
-}
-```
-
-</details>
-
-- **Parameters**:
-
-| Name    | Description | Type      | Default value |
-| ------- | ----------- | --------- | ------------- |
-| `$map`  | Map         | `Map`     | —             |
-| `$keys` | Key chain   | `Arglist` | —             |
-
-- **Group**: [@carbon/layout](#carbonlayout)
-- **Returns**: `*` Desired value
+- **Used by**:
+  - [carbon--theme [mixin]](#carbon--theme-mixin)
 
 ### ✅map-deep-get [function]
 
@@ -7144,34 +6260,6 @@ Provide a map and index, and get back the relevant key value
   - [carbon--largest-breakpoint-name [function]](#carbon--largest-breakpoint-name-function)
   - [last-map-item [function]](#last-map-item-function)
 
-### ✅key-by-index [function]
-
-Provide a map and index, and get back the relevant key value
-
-<details>
-<summary>Source code</summary>
-
-```scss
-@function key-by-index($map, $index) {
-  $keys: map-keys($map);
-  @return nth($keys, $index);
-}
-```
-
-</details>
-
-- **Parameters**:
-
-| Name     | Description | Type      | Default value |
-| -------- | ----------- | --------- | ------------- |
-| `$map`   | Map         | `Map`     | —             |
-| `$index` | Key chain   | `Integer` | —             |
-
-- **Group**: [@carbon/layout](#carbonlayout)
-- **Returns**: `String` Desired value
-- **Used by**:
-  - [largest-breakpoint-name [function]](#largest-breakpoint-name-function)
-
 ### ✅last-map-item [function]
 
 Pass in a map, and get the last one in the list back
@@ -7200,33 +6288,6 @@ Pass in a map, and get the last one in the list back
   - [carbon--key-by-index [function]](#carbon--key-by-index-function)
 - **Used by**:
   - [carbon--set-largest-breakpoint [mixin]](#carbon--set-largest-breakpoint-mixin)
-
-### ✅last-map-item [function]
-
-Pass in a map, and get the last one in the list back
-
-<details>
-<summary>Source code</summary>
-
-```scss
-@function last-map-item($map) {
-  $total-length: length($map);
-  @return map-get($map, carbon--key-by-index($map, $total-length));
-}
-```
-
-</details>
-
-- **Parameters**:
-
-| Name   | Description | Type  | Default value |
-| ------ | ----------- | ----- | ------------- |
-| `$map` | Map         | `Map` | —             |
-
-- **Group**: [@carbon/layout](#carbonlayout)
-- **Returns**: `*` Desired value
-- **Requires**:
-  - [carbon--key-by-index [function]](#carbon--key-by-index-function)
 
 ## @carbon/motion
 
@@ -17185,7 +16246,6 @@ Accordion styles
 - **Group**: [accordion](#accordion)
 - **Requires**:
   - [carbon--breakpoint-up [mixin]](#carbon--breakpoint-up-mixin)
-  - [rem [function]](#rem-function)
   - [prefix [variable]](#prefix-variable)
   - [ui-03 [variable]](#ui-03-variable)
   - [text-01 [variable]](#text-01-variable)
@@ -17280,7 +16340,6 @@ Breadcrumb styles
 - **Group**: [breadcrumb](#breadcrumb)
 - **Requires**:
   - [carbon--breakpoint [mixin]](#carbon--breakpoint-mixin)
-  - [rem [function]](#rem-function)
   - [prefix [variable]](#prefix-variable)
   - [carbon--spacing-03 [variable]](#carbon--spacing-03-variable)
   - [link-01 [variable]](#link-01-variable)
@@ -17731,7 +16790,6 @@ Button styles
 - **Requires**:
   - [button-base [mixin]](#button-base-mixin)
   - [button-theme [mixin]](#button-theme-mixin)
-  - [rem [function]](#rem-function)
   - [prefix [variable]](#prefix-variable)
   - [interactive-01 [variable]](#interactive-01-variable)
   - [text-04 [variable]](#text-04-variable)
@@ -17818,7 +16876,6 @@ Button base styles
 
 - **Group**: [button](#button)
 - **Requires**:
-  - [rem [function]](#rem-function)
   - [prefix [variable]](#prefix-variable)
   - [disabled-03 [variable]](#disabled-03-variable)
   - [disabled-02 [variable]](#disabled-02-variable)
@@ -18081,7 +17138,6 @@ Checkbox styles
 
 - **Group**: [checkbox](#checkbox)
 - **Requires**:
-  - [rem [function]](#rem-function)
   - [prefix [variable]](#prefix-variable)
   - [carbon--spacing-02 [variable]](#carbon--spacing-02-variable)
   - [carbon--spacing-01 [variable]](#carbon--spacing-01-variable)
@@ -18664,7 +17720,6 @@ Code snippet styles
 - **Requires**:
   - [bx--snippet [mixin]](#bx--snippet-mixin)
   - [carbon--font-family [mixin]](#carbon--font-family-mixin)
-  - [rem [function]](#rem-function)
   - [prefix [variable]](#prefix-variable)
   - [text-01 [variable]](#text-01-variable)
   - [field-01 [variable]](#field-01-variable)
@@ -18704,8 +17759,6 @@ Code snippet base styles
 </details>
 
 - **Group**: [code-snippet](#code-snippet)
-- **Requires**:
-  - [rem [function]](#rem-function)
 - **Used by**:
   - [snippet [mixin]](#snippet-mixin)
 
@@ -18938,7 +17991,6 @@ Content switcher styles
 
 - **Group**: [content-switcher](#content-switcher)
 - **Requires**:
-  - [rem [function]](#rem-function)
   - [prefix [variable]](#prefix-variable)
   - [carbon--spacing-03 [variable]](#carbon--spacing-03-variable)
   - [carbon--spacing-05 [variable]](#carbon--spacing-05-variable)
@@ -19573,7 +18625,6 @@ Data table action styles
 
 - **Group**: [data-table](#data-table)
 - **Requires**:
-  - [rem [function]](#rem-function)
   - [prefix [variable]](#prefix-variable)
   - [layout-04 [variable]](#layout-04-variable)
   - [ui-01 [variable]](#ui-01-variable)
@@ -20335,7 +19386,6 @@ Data table core styles
 - **Group**: [data-table](#data-table)
 - **Requires**:
   - [text-overflow [mixin]](#text-overflow-mixin)
-  - [rem [function]](#rem-function)
   - [prefix [variable]](#prefix-variable)
   - [spacing-01 [variable]](#spacing-01-variable)
   - [spacing-05 [variable]](#spacing-05-variable)
@@ -20750,7 +19800,6 @@ Data table expandable styles
 
 - **Group**: [data-table](#data-table)
 - **Requires**:
-  - [rem [function]](#rem-function)
   - [prefix [variable]](#prefix-variable)
   - [ui-03 [variable]](#ui-03-variable)
   - [spacing-05 [variable]](#spacing-05-variable)
@@ -20981,7 +20030,6 @@ Data table sort styles
 
 - **Group**: [data-table](#data-table)
 - **Requires**:
-  - [rem [function]](#rem-function)
   - [prefix [variable]](#prefix-variable)
   - [layout-04 [variable]](#layout-04-variable)
   - [text-01 [variable]](#text-01-variable)
@@ -21182,7 +20230,6 @@ Date picker styles
 
 - **Group**: [date-picker](#date-picker)
 - **Requires**:
-  - [rem [function]](#rem-function)
   - [prefix [variable]](#prefix-variable)
   - [field-02 [variable]](#field-02-variable)
   - [carbon--spacing-05 [variable]](#carbon--spacing-05-variable)
@@ -21668,7 +20715,6 @@ Dropdown styles
 
 - **Group**: [dropdown](#dropdown)
 - **Requires**:
-  - [rem [function]](#rem-function)
   - [prefix [variable]](#prefix-variable)
   - [text-01 [variable]](#text-01-variable)
   - [field-01 [variable]](#field-01-variable)
@@ -22024,7 +21070,6 @@ File uploader styles
 
 - **Group**: [file-uploader](#file-uploader)
 - **Requires**:
-  - [rem [function]](#rem-function)
   - [prefix [variable]](#prefix-variable)
   - [carbon--spacing-03 [variable]](#carbon--spacing-03-variable)
   - [support-01 [variable]](#support-01-variable)
@@ -22215,7 +21260,6 @@ Form styles
 
 - **Group**: [form](#form)
 - **Requires**:
-  - [rem [function]](#rem-function)
   - [carbon--font-family [function]](#carbon--font-family-function)
   - [prefix [variable]](#prefix-variable)
   - [carbon--spacing-07 [variable]](#carbon--spacing-07-variable)
@@ -22328,7 +21372,6 @@ Inline loading styles
 
 - **Group**: [inline-loading](#inline-loading)
 - **Requires**:
-  - [rem [function]](#rem-function)
   - [prefix [variable]](#prefix-variable)
   - [loading--small\_\_gap [variable]](#loading--small__gap-variable)
   - [text-02 [variable]](#text-02-variable)
@@ -22515,7 +21558,6 @@ List styles
 
 - **Group**: [list](#list)
 - **Requires**:
-  - [rem [function]](#rem-function)
   - [prefix [variable]](#prefix-variable)
   - [text-01 [variable]](#text-01-variable)
   - [carbon--spacing-06 [variable]](#carbon--spacing-06-variable)
@@ -23373,7 +22415,6 @@ List box styles
 - **Group**: [list-box](#list-box)
 - **Requires**:
   - [tag-theme [mixin]](#tag-theme-mixin)
-  - [rem [function]](#rem-function)
   - [carbon--mini-units [function]](#carbon--mini-units-function)
   - [prefix [variable]](#prefix-variable)
   - [list-box-width [variable]](#list-box-width-variable)
@@ -23491,7 +22532,6 @@ Loading styles
 - **Requires**:
   - [animation\_\_loading--spin [mixin]](#animation__loading--spin-mixin)
   - [animation\_\_loading--stop [mixin]](#animation__loading--stop-mixin)
-  - [rem [function]](#rem-function)
   - [prefix [variable]](#prefix-variable)
   - [loading\_\_size [variable]](#loading__size-variable)
   - [interactive-04 [variable]](#interactive-04-variable)
@@ -23981,7 +23021,6 @@ Modal styles
 - **Group**: [modal](#modal)
 - **Requires**:
   - [carbon--breakpoint [mixin]](#carbon--breakpoint-mixin)
-  - [rem [function]](#rem-function)
   - [prefix [variable]](#prefix-variable)
   - [overlay-01 [variable]](#overlay-01-variable)
   - [field-02 [variable]](#field-02-variable)
@@ -24079,7 +23118,6 @@ Multi select styles
 
 - **Group**: [multi-select](#multi-select)
 - **Requires**:
-  - [rem [function]](#rem-function)
   - [prefix [variable]](#prefix-variable)
   - [text-01 [variable]](#text-01-variable)
   - [spacing-03 [variable]](#spacing-03-variable)
@@ -24397,7 +23435,6 @@ Inline notification styles
 - **Requires**:
   - [carbon--breakpoint [mixin]](#carbon--breakpoint-mixin)
   - [notification--experimental [mixin]](#notification--experimental-mixin)
-  - [rem [function]](#rem-function)
   - [prefix [variable]](#prefix-variable)
   - [carbon--spacing-05 [variable]](#carbon--spacing-05-variable)
   - [inverse-01 [variable]](#inverse-01-variable)
@@ -24695,7 +23732,6 @@ Toast notification styles
 - **Requires**:
   - [carbon--breakpoint [mixin]](#carbon--breakpoint-mixin)
   - [notification--experimental [mixin]](#notification--experimental-mixin)
-  - [rem [function]](#rem-function)
   - [prefix [variable]](#prefix-variable)
   - [carbon--spacing-03 [variable]](#carbon--spacing-03-variable)
   - [carbon--spacing-05 [variable]](#carbon--spacing-05-variable)
@@ -25008,7 +24044,6 @@ Number input styles
 
 - **Group**: [number-input](#number-input)
 - **Requires**:
-  - [rem [function]](#rem-function)
   - [carbon--font-family [function]](#carbon--font-family-function)
   - [prefix [variable]](#prefix-variable)
   - [carbon--spacing-07 [variable]](#carbon--spacing-07-variable)
@@ -25367,7 +24402,6 @@ Overflow menu styles
 
 - **Group**: [overflow-menu](#overflow-menu)
 - **Requires**:
-  - [rem [function]](#rem-function)
   - [prefix [variable]](#prefix-variable)
   - [hover-ui [variable]](#hover-ui-variable)
   - [field-01 [variable]](#field-01-variable)
@@ -25592,7 +24626,6 @@ Pagination styles
 - **Requires**:
   - [carbon--breakpoint [mixin]](#carbon--breakpoint-mixin)
   - [carbon--breakpoint-down [mixin]](#carbon--breakpoint-down-mixin)
-  - [rem [function]](#rem-function)
   - [prefix [variable]](#prefix-variable)
   - [ui-01 [variable]](#ui-01-variable)
   - [ui-03 [variable]](#ui-03-variable)
@@ -25778,7 +24811,6 @@ Unstable pagination styles
 - **Requires**:
   - [carbon--type-style [mixin]](#carbon--type-style-mixin)
   - [carbon--breakpoint [mixin]](#carbon--breakpoint-mixin)
-  - [rem [function]](#rem-function)
   - [carbon--mini-units [function]](#carbon--mini-units-function)
   - [prefix [variable]](#prefix-variable)
   - [ui-01 [variable]](#ui-01-variable)
@@ -26319,7 +25351,6 @@ Progress indicator styles
 
 - **Group**: [progress-indicator](#progress-indicator)
 - **Requires**:
-  - [rem [function]](#rem-function)
   - [prefix [variable]](#prefix-variable)
   - [carbon--spacing-05 [variable]](#carbon--spacing-05-variable)
   - [carbon--spacing-03 [variable]](#carbon--spacing-03-variable)
@@ -26518,7 +25549,6 @@ Radio button styles
 
 - **Group**: [radio-button](#radio-button)
 - **Requires**:
-  - [rem [function]](#rem-function)
   - [carbon--mini-units [function]](#carbon--mini-units-function)
   - [prefix [variable]](#prefix-variable)
   - [carbon--spacing-03 [variable]](#carbon--spacing-03-variable)
@@ -26800,7 +25830,6 @@ Search styles
 
 - **Group**: [search](#search)
 - **Requires**:
-  - [rem [function]](#rem-function)
   - [prefix [variable]](#prefix-variable)
   - [carbon--spacing-08 [variable]](#carbon--spacing-08-variable)
   - [text-01 [variable]](#text-01-variable)
@@ -27065,7 +26094,6 @@ Select styles
 
 - **Group**: [select](#select)
 - **Requires**:
-  - [rem [function]](#rem-function)
   - [carbon--mini-units [function]](#carbon--mini-units-function)
   - [prefix [variable]](#prefix-variable)
   - [spacing-09 [variable]](#spacing-09-variable)
@@ -27316,7 +26344,6 @@ Slider styles
 
 - **Group**: [slider](#slider)
 - **Requires**:
-  - [rem [function]](#rem-function)
   - [prefix [variable]](#prefix-variable)
   - [carbon--spacing-05 [variable]](#carbon--spacing-05-variable)
   - [text-01 [variable]](#text-01-variable)
@@ -28259,7 +27286,6 @@ Tabs styles
 - **Group**: [tabs](#tabs)
 - **Requires**:
   - [carbon--breakpoint [mixin]](#carbon--breakpoint-mixin)
-  - [rem [function]](#rem-function)
   - [prefix [variable]](#prefix-variable)
   - [text-01 [variable]](#text-01-variable)
   - [spacing-09 [variable]](#spacing-09-variable)
@@ -28524,7 +27550,6 @@ Tag styles
 - **Group**: [tag](#tag)
 - **Requires**:
   - [tag-theme [mixin]](#tag-theme-mixin)
-  - [rem [function]](#rem-function)
   - [prefix [variable]](#prefix-variable)
   - [carbon--spacing-02 [variable]](#carbon--spacing-02-variable)
   - [carbon--spacing-03 [variable]](#carbon--spacing-03-variable)
@@ -28635,7 +27660,6 @@ Text area styles
 
 - **Group**: [text-area](#text-area)
 - **Requires**:
-  - [rem [function]](#rem-function)
   - [prefix [variable]](#prefix-variable)
   - [carbon--spacing-05 [variable]](#carbon--spacing-05-variable)
   - [text-01 [variable]](#text-01-variable)
@@ -28960,7 +27984,6 @@ Text input styles
 
 - **Group**: [text-input](#text-input)
 - **Requires**:
-  - [rem [function]](#rem-function)
   - [prefix [variable]](#prefix-variable)
   - [carbon--spacing-05 [variable]](#carbon--spacing-05-variable)
   - [text-01 [variable]](#text-01-variable)
@@ -29276,7 +28299,6 @@ Time picker styles
 
 - **Group**: [time-picker](#time-picker)
 - **Requires**:
-  - [rem [function]](#rem-function)
   - [prefix [variable]](#prefix-variable)
   - [carbon--spacing-01 [variable]](#carbon--spacing-01-variable)
   - [field-02 [variable]](#field-02-variable)
@@ -29759,7 +28781,6 @@ Toggle styles
 - **Group**: [toggle](#toggle)
 - **Requires**:
   - [carbon--rem [function]](#carbon--rem-function)
-  - [rem [function]](#rem-function)
   - [prefix [variable]](#prefix-variable)
   - [carbon--spacing-03 [variable]](#carbon--spacing-03-variable)
   - [ui-04 [variable]](#ui-04-variable)
@@ -29904,7 +28925,6 @@ Toolbar styles
 
 - **Group**: [toolbar](#toolbar)
 - **Requires**:
-  - [rem [function]](#rem-function)
   - [prefix [variable]](#prefix-variable)
   - [text-02 [variable]](#text-02-variable)
   - [field-02 [variable]](#field-02-variable)
@@ -29987,7 +29007,6 @@ Toolbar styles
 
 - **Group**: [tooltip](#tooltip)
 - **Requires**:
-  - [rem [function]](#rem-function)
   - [inverse-02 [variable]](#inverse-02-variable)
   - [inverse-01 [variable]](#inverse-01-variable)
 - **Used by**:
@@ -30181,7 +29200,6 @@ Toolbar styles
 
 - **Group**: [tooltip](#tooltip)
 - **Requires**:
-  - [rem [function]](#rem-function)
   - [prefix [variable]](#prefix-variable)
   - [text-01 [variable]](#text-01-variable)
   - [interactive-01 [variable]](#interactive-01-variable)
@@ -30678,7 +29696,6 @@ Tooltip styles
   - [carbon--type-style [mixin]](#carbon--type-style-mixin)
   - [tooltip--definition--legacy [mixin]](#tooltip--definition--legacy-mixin)
   - [tooltip--icon--legacy [mixin]](#tooltip--icon--legacy-mixin)
-  - [rem [function]](#rem-function)
   - [prefix [variable]](#prefix-variable)
   - [text-02 [variable]](#text-02-variable)
   - [icon-02 [variable]](#icon-02-variable)
@@ -30835,7 +29852,6 @@ Treeview styles
 
 - **Group**: [treeview](#treeview)
 - **Requires**:
-  - [rem [function]](#rem-function)
   - [prefix [variable]](#prefix-variable)
   - [spacing-05 [variable]](#spacing-05-variable)
   - [text-02 [variable]](#text-02-variable)
@@ -31337,7 +30353,6 @@ UI shell header
 - **Requires**:
   - [carbon--breakpoint [mixin]](#carbon--breakpoint-mixin)
   - [mini-units [function]](#mini-units-function)
-  - [rem [function]](#rem-function)
   - [prefix [variable]](#prefix-variable)
   - [shell-header-bg-01 [variable]](#shell-header-bg-01-variable)
   - [shell-header-border-01 [variable]](#shell-header-border-01-variable)
@@ -31567,7 +30582,6 @@ UI shell navigation
 - **Group**: [ui-shell](#ui-shell)
 - **Requires**:
   - [mini-units [function]](#mini-units-function)
-  - [rem [function]](#rem-function)
   - [prefix [variable]](#prefix-variable)
 
 ### ❌product-switcher [mixin]
@@ -32484,7 +31498,6 @@ UI shell side nav
   - [expanded [mixin]](#expanded-mixin)
   - [text-overflow [mixin]](#text-overflow-mixin)
   - [mini-units [function]](#mini-units-function)
-  - [rem [function]](#rem-function)
   - [prefix [variable]](#prefix-variable)
   - [shell-side-nav-text-01 [variable]](#shell-side-nav-text-01-variable)
   - [shell-side-nav-bg-01 [variable]](#shell-side-nav-bg-01-variable)
@@ -32573,7 +31586,6 @@ UI shell side nav
 - **Group**: [ui-shell](#ui-shell)
 - **Requires**:
   - [carbon--type-style [mixin]](#carbon--type-style-mixin)
-  - [rem [function]](#rem-function)
   - [prefix [variable]](#prefix-variable)
   - [shell-panel-text-01 [variable]](#shell-panel-text-01-variable)
   - [spacing-07 [variable]](#spacing-07-variable)
