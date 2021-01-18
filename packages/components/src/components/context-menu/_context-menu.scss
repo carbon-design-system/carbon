@@ -20,7 +20,7 @@
     position: fixed;
     z-index: z('modal');
     min-width: 13rem;
-    max-width: 20rem;
+    max-width: 18rem;
     padding: $spacing-02 0;
     background-color: $ui-01;
     visibility: hidden;
@@ -46,8 +46,7 @@
   }
 
   .#{$prefix}--context-menu-option--active,
-  .#{$prefix}--context-menu-option:hover,
-  .#{$prefix}--context-menu-option:focus-within {
+  .#{$prefix}--context-menu-option:hover {
     background-color: $hover-ui;
   }
 
@@ -70,6 +69,7 @@
   }
 
   .#{$prefix}--context-menu-option__content--disabled {
+    background-color: $ui-01;
     cursor: not-allowed;
   }
 
@@ -101,6 +101,7 @@
   }
 
   .#{$prefix}--context-menu-option__info {
+    display: inline-flex;
     margin-left: $spacing-05;
     color: $icon-01;
   }

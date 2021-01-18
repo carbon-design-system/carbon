@@ -24,7 +24,7 @@ export default {
   },
 };
 
-export const _ContextMenu = () => {
+function useContextMenu() {
   const [open, setOpen] = useState(false);
   const [position, setPosition] = useState([0, 0]);
 
@@ -37,6 +37,10 @@ export const _ContextMenu = () => {
     setOpen(true);
   }
 
+  function onClose() {
+    setOpen(false);
+  }
+
   useEffect(() => {
     document.addEventListener('contextmenu', openContextMenu);
 
@@ -45,22 +49,91 @@ export const _ContextMenu = () => {
     };
   });
 
+  return {
+    open,
+    x: position[0],
+    y: position[1],
+    onClose,
+  };
+}
+
+const InfoBanner = () => (
+  <InlineNotification
+    kind="info"
+    title="Context menu"
+    subtitle="Right-click anywhere on this page to access a demo of this component"
+    lowContrast
+    hideCloseButton
+  />
+);
+
+export const _ContextMenu = () => {
+  const contextMenuProps = useContextMenu();
+
   return (
     <div style={{ height: 'calc(100vh - 6.25rem)' }}>
-      <InlineNotification
-        kind="info"
-        title="Context menu"
-        subtitle="Right-click anywhere on this page to access a demo of this component"
-        lowContrast
-        hideCloseButton
-      />
-      <ContextMenu
-        open={open}
-        x={position[0]}
-        y={position[1]}
-        onClose={() => {
-          setOpen(false);
-        }}>
+      <InfoBanner />
+      <ContextMenu {...contextMenuProps}>
+        <ContextMenuOption label="Share with">
+          <ContextMenuRadioGroup
+            label="Share with"
+            items={['None', 'Product team', 'Organization', 'Company']}
+            initialSelectedItem="Product team"
+            onChange={action('onChange')}
+          />
+        </ContextMenuOption>
+        <ContextMenuDivider />
+        <ContextMenuOption
+          label="Cut"
+          shortcut="⌘X"
+          shortcutText="command x"
+          onClick={action('onClick')}
+        />
+        <ContextMenuOption
+          label="Copy"
+          shortcut="⌘C"
+          shortcutText="command c"
+          onClick={action('onClick')}
+        />
+        <ContextMenuOption
+          label="Copy path"
+          shortcut="⌥⌘C"
+          shortcutText="option command c"
+          onClick={action('onClick')}
+        />
+        <ContextMenuOption
+          label="Paste"
+          shortcut="⌘V"
+          shortcutText="command v"
+          disabled
+          onClick={action('onClick')}
+        />
+        <ContextMenuOption label="Duplicate" onClick={action('onClick')} />
+        <ContextMenuDivider />
+        <ContextMenuOption
+          label="Rename"
+          shortcut="↩︎"
+          shortcutText="enter"
+          onClick={action('onClick')}
+        />
+        <ContextMenuOption
+          label="Delete"
+          shortcut="⌘⌫"
+          shortcutText="command backspace"
+          onClick={action('onClick')}
+        />
+      </ContextMenu>
+    </div>
+  );
+};
+
+export const WithIcons = () => {
+  const contextMenuProps = useContextMenu();
+
+  return (
+    <div style={{ height: 'calc(100vh - 6.25rem)' }}>
+      <InfoBanner />
+      <ContextMenu {...contextMenuProps}>
         <ContextMenuOption label="Share with" renderIcon={FolderShared16}>
           <ContextMenuRadioGroup
             label="Share with"
