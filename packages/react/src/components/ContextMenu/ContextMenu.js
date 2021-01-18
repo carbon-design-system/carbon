@@ -91,12 +91,16 @@ const ContextMenu = function ContextMenu({
     }
   }
 
-  function handleClick() {
-    onClose();
+  function handleClick(e) {
+    if (e.target.tagName !== 'UL') {
+      onClose();
+    }
   }
 
   function handleClickOutside() {
-    onClose();
+    if (open) {
+      onClose();
+    }
   }
 
   function getCorrectedPosition(assumedDirection) {
