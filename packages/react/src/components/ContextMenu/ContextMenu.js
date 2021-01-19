@@ -41,6 +41,7 @@ const ContextMenu = function ContextMenu({
   const rootRef = useRef(null);
   const [direction, setDirection] = useState(1); // 1 = to right, -1 = to left
   const [position, setPosition] = useState([x, y]);
+  const [canBeClosed, setCanBeClosed] = useState(false);
   const isRootMenu = level === 1;
 
   function focusNode(node) {
@@ -98,7 +99,7 @@ const ContextMenu = function ContextMenu({
   }
 
   function handleClickOutside() {
-    if (open) {
+    if (open && canBeClosed) {
       onClose();
     }
   }
@@ -156,6 +157,8 @@ const ContextMenu = function ContextMenu({
   }
 
   useEffect(() => {
+    setCanBeClosed(false);
+
     if (open) {
       let localDirection = 1;
 
@@ -171,6 +174,18 @@ const ContextMenu = function ContextMenu({
 
       const correctedPosition = getCorrectedPosition(localDirection);
       setPosition(correctedPosition);
+
+      document.addEventListener(
+        'mouseup',
+        () => {
+          // wait until mouse button is released before allowing ClickListener
+          // to close context menu as Safari emits 'click' event after 'contextmenu'
+          // event when 'e.preventDefault()' is used on 'contextmenu' and would
+          // otherwise close the menu immediately
+          setCanBeClosed(true);
+        },
+        { once: true }
+      );
     } else {
       setPosition([0, 0]);
     }
