@@ -84,9 +84,11 @@ categories:
       - munich
       - nice
       - nyc--brooklyn
+      - nyc--chrysler-building
       - nyc--manhattan--01
       - nyc--manhattan--02
       - nyc--statue-of-liberty
+      - nyc--world-trade-center
       - paris--arc-de-triomphe
       - paris--louvre
       - paris--notre-dame
@@ -137,8 +139,15 @@ categories:
       - cloud--strategy
       - cloud--tutorials
       - cloud--vmware
-      - condition--builder
+      - cloud-pak--family
+      - cloud-pak--for-applications
+      - cloud-pak--for-data
+      - cloud-pak--for-integration
+      - cloud-pak--for-multicloud-management
+      - cloud-pak--for-security
+      - cloud-pak--system
       - cognos--analytics
+      - condition--builder
       - construct
       - devops
       - digital

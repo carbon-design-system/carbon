@@ -356,6 +356,9 @@ Map {
       "copyLabel": Object {
         "type": "string",
       },
+      "disabled": Object {
+        "type": "bool",
+      },
       "feedback": Object {
         "type": "string",
       },
@@ -5098,6 +5101,9 @@ Map {
       "hidden": Object {
         "type": "bool",
       },
+      "leftOverflowButtonProps": Object {
+        "type": "object",
+      },
       "light": Object {
         "type": "bool",
       },
@@ -5109,6 +5115,9 @@ Map {
       },
       "onSelectionChange": Object {
         "type": "func",
+      },
+      "rightOverflowButtonProps": Object {
+        "type": "object",
       },
       "scrollIntoView": Object {
         "type": "bool",
@@ -5319,7 +5328,7 @@ Map {
           "type": "bool",
         },
         "invalidText": Object {
-          "type": "string",
+          "type": "node",
         },
         "labelText": Object {
           "isRequired": true,
@@ -5427,7 +5436,7 @@ Map {
           "type": "bool",
         },
         "invalidText": Object {
-          "type": "string",
+          "type": "node",
         },
         "labelText": Object {
           "isRequired": true,
@@ -5538,7 +5547,7 @@ Map {
         "type": "bool",
       },
       "invalidText": Object {
-        "type": "string",
+        "type": "node",
       },
       "labelText": Object {
         "isRequired": true,
@@ -5585,7 +5594,7 @@ Map {
         "type": "bool",
       },
       "warnText": Object {
-        "type": "string",
+        "type": "node",
       },
     },
     "render": [Function],
@@ -6182,7 +6191,7 @@ Map {
       },
       "children": Object {
         "isRequired": true,
-        "type": "string",
+        "type": "node",
       },
       "className": Object {
         "type": "string",

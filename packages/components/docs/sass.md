@@ -5626,7 +5626,6 @@ Get the value of the corresponding number of units
   - [carbon--mini-unit-size [variable]](#carbon--mini-unit-size-variable)
 - **Used by**:
   - [listbox [mixin]](#listbox-mixin)
-  - [multiselect [mixin]](#multiselect-mixin)
   - [unstable_pagination [mixin]](#unstable_pagination-mixin)
   - [radio-button [mixin]](#radio-button-mixin)
   - [select [mixin]](#select-mixin)
@@ -5670,6 +5669,7 @@ $carbon--spacing-02: 0.25rem;
 - **Used by**:
   - [checkbox [mixin]](#checkbox-mixin)
   - [snippet [mixin]](#snippet-mixin)
+  - [file-uploader [mixin]](#file-uploader-mixin)
   - [form [mixin]](#form-mixin)
   - [inline-notifications [mixin]](#inline-notifications-mixin)
   - [pseudo-underline [mixin]](#pseudo-underline-mixin)
@@ -5700,7 +5700,6 @@ $carbon--spacing-03: 0.5rem;
   - [file-uploader [mixin]](#file-uploader-mixin)
   - [form [mixin]](#form-mixin)
   - [listbox [mixin]](#listbox-mixin)
-  - [multiselect [mixin]](#multiselect-mixin)
   - [inline-notifications [mixin]](#inline-notifications-mixin)
   - [toast-notifications [mixin]](#toast-notifications-mixin)
   - [progress-indicator [mixin]](#progress-indicator-mixin)
@@ -6012,6 +6011,7 @@ $spacing-03: $carbon--spacing-03;
   - [data-table-core [mixin]](#data-table-core-mixin)
   - [data-table-sort [mixin]](#data-table-sort-mixin)
   - [modal [mixin]](#modal-mixin)
+  - [multiselect [mixin]](#multiselect-mixin)
   - [select [mixin]](#select-mixin)
   - [tabs [mixin]](#tabs-mixin)
   - [tooltip [mixin]](#tooltip-mixin)
@@ -6060,6 +6060,7 @@ $spacing-05: $carbon--spacing-05;
   - [data-table-core [mixin]](#data-table-core-mixin)
   - [data-table-expandable [mixin]](#data-table-expandable-mixin)
   - [modal [mixin]](#modal-mixin)
+  - [multiselect [mixin]](#multiselect-mixin)
   - [pagination [mixin]](#pagination-mixin)
   - [search [mixin]](#search-mixin)
   - [select [mixin]](#select-mixin)
@@ -9554,7 +9555,7 @@ $inverse-link: if(
 
 ### ✅field-01 [variable]
 
-Default input fields; Field color on \$ui-backgrounds
+Default input fields; Field color on $ui-backgrounds
 
 <details>
 <summary>Source code</summary>
@@ -9581,6 +9582,7 @@ $field-01: if(
   - [dropdown [mixin]](#dropdown-mixin)
   - [file-uploader [mixin]](#file-uploader-mixin)
   - [listbox [mixin]](#listbox-mixin)
+  - [multiselect [mixin]](#multiselect-mixin)
   - [number-input [mixin]](#number-input-mixin)
   - [overflow-menu [mixin]](#overflow-menu-mixin)
   - [search [mixin]](#search-mixin)
@@ -9728,7 +9730,6 @@ $support-01: if(
   - [inline-notifications [mixin]](#inline-notifications-mixin)
   - [toast-notifications [mixin]](#toast-notifications-mixin)
   - [number-input [mixin]](#number-input-mixin)
-  - [overflow-menu [mixin]](#overflow-menu-mixin)
   - [progress-indicator [mixin]](#progress-indicator-mixin)
   - [select [mixin]](#select-mixin)
   - [text-area [mixin]](#text-area-mixin)
@@ -9981,6 +9982,7 @@ $danger-01: if(
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
   - [button [mixin]](#button-mixin)
+  - [overflow-menu [mixin]](#overflow-menu-mixin)
 
 ### ✅danger-02 [variable]
 
@@ -10292,6 +10294,7 @@ $hover-ui: if(
   - [dropdown [mixin]](#dropdown-mixin)
   - [listbox [mixin]](#listbox-mixin)
   - [modal [mixin]](#modal-mixin)
+  - [multiselect [mixin]](#multiselect-mixin)
   - [number-input [mixin]](#number-input-mixin)
   - [overflow-menu [mixin]](#overflow-menu-mixin)
   - [pagination [mixin]](#pagination-mixin)
@@ -10618,9 +10621,9 @@ $disabled-01: if(
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
   - [accordion [mixin]](#accordion-mixin)
+  - [snippet [mixin]](#snippet-mixin)
   - [content-switcher [mixin]](#content-switcher-mixin)
   - [date-picker [mixin]](#date-picker-mixin)
-  - [file-uploader [mixin]](#file-uploader-mixin)
   - [listbox [mixin]](#listbox-mixin)
   - [number-input [mixin]](#number-input-mixin)
   - [search [mixin]](#search-mixin)
@@ -10660,6 +10663,7 @@ $disabled-02: if(
   - [accordion [mixin]](#accordion-mixin)
   - [button-base [mixin]](#button-base-mixin)
   - [checkbox [mixin]](#checkbox-mixin)
+  - [snippet [mixin]](#snippet-mixin)
   - [content-switcher [mixin]](#content-switcher-mixin)
   - [date-picker [mixin]](#date-picker-mixin)
   - [dropdown [mixin]](#dropdown-mixin)
@@ -17029,12 +17033,12 @@ Checkbox styles
     left: rem(6px);
     width: rem(9px);
     height: rem(5px);
-    margin-top: rem(-3px);
+    margin-top: rem(-3px) /* rtl: 0rem  */;
     background: none;
     border-bottom: 2px solid $inverse-01;
     border-left: 2px solid $inverse-01;
-    transform: scale(0) rotate(-45deg);
-    transform-origin: bottom right;
+    transform: scale(0) rotate(-45deg) /* rtl: scale(0) rotate(45deg) */;
+    transform-origin: bottom right /* rtl: center */;
     content: '';
   }
 
@@ -17055,7 +17059,7 @@ Checkbox styles
   // Display the check
   .#{$prefix}--checkbox:checked + .#{$prefix}--checkbox-label::after,
   .#{$prefix}--checkbox-label[data-contained-checkbox-state='true']::after {
-    transform: scale(1) rotate(-45deg);
+    transform: scale(1) rotate(-45deg) /* rtl: scale(-1,1) rotate(45deg) */;
   }
 
   // Indeterminate symbol
@@ -17158,6 +17162,27 @@ Code snippet styles
 @mixin snippet() {
   .#{$prefix}--snippet {
     @include reset;
+  }
+
+  .#{$prefix}--snippet--disabled,
+  .#{$prefix}--snippet--disabled
+    .#{$prefix}--btn.#{$prefix}--snippet-btn--expand {
+    color: $disabled-02;
+    background-color: $disabled-01;
+  }
+
+  .#{$prefix}--snippet--disabled .#{$prefix}--snippet-btn--expand:hover,
+  .#{$prefix}--snippet--disabled .#{$prefix}--copy-btn:hover {
+    color: $disabled-02;
+    background-color: $disabled-01;
+    cursor: not-allowed;
+  }
+
+  .#{$prefix}--snippet--disabled .#{$prefix}--snippet__icon,
+  .#{$prefix}--snippet--disabled
+    .#{$prefix}--snippet-btn--expand
+    .#{$prefix}--icon-chevron--down {
+    fill: $disabled-02;
   }
 
   .#{$prefix}--snippet code {
@@ -17456,7 +17481,7 @@ Code snippet styles
   }
 
   // Show more / less button
-  button.#{$prefix}--btn.#{$prefix}--snippet-btn--expand {
+  .#{$prefix}--snippet-btn--expand {
     @include type-style('body-short-01');
     @include carbon--font-family('sans');
 
@@ -17472,8 +17497,7 @@ Code snippet styles
     border: 0;
   }
 
-  button.#{$prefix}--btn.#{$prefix}--snippet-btn--expand
-    .#{$prefix}--snippet-btn--text {
+  .#{$prefix}--snippet-btn--expand .#{$prefix}--snippet-btn--text {
     position: relative;
     top: rem(-1px);
   }
@@ -17483,14 +17507,13 @@ Code snippet styles
   }
 
   .#{$prefix}--snippet-btn--expand .#{$prefix}--icon-chevron--down {
-    margin-bottom: rem(1px);
     margin-left: $spacing-03;
     transform: rotate(0deg);
     transition: $duration--moderate-01 motion(standard, productive);
     fill: $text-01;
   }
 
-  button.#{$prefix}--btn.#{$prefix}--snippet-btn--expand:hover {
+  .#{$prefix}--snippet-btn--expand:hover {
     color: $text-01;
     background: $hover-ui;
   }
@@ -17719,6 +17742,8 @@ Code snippet styles
   - [bx--snippet [mixin]](#bx--snippet-mixin)
   - [carbon--font-family [mixin]](#carbon--font-family-mixin)
   - [prefix [variable]](#prefix-variable)
+  - [disabled-02 [variable]](#disabled-02-variable)
+  - [disabled-01 [variable]](#disabled-01-variable)
   - [text-01 [variable]](#text-01-variable)
   - [field-01 [variable]](#field-01-variable)
   - [ui-03 [variable]](#ui-03-variable)
@@ -18733,12 +18758,9 @@ Data table core styles
     vertical-align: middle;
   }
 
-  .#{$prefix}--data-table td {
+  .#{$prefix}--data-table th {
     padding-right: $spacing-05;
     padding-left: $spacing-05;
-  }
-
-  .#{$prefix}--data-table th {
     color: $text-01;
     background-color: $ui-03;
   }
@@ -18750,8 +18772,6 @@ Data table core styles
   }
 
   .#{$prefix}--data-table .#{$prefix}--table-header-label {
-    padding-right: $spacing-05;
-    padding-left: $spacing-05;
     text-align: left;
   }
 
@@ -18918,22 +18938,40 @@ Data table core styles
   .#{$prefix}--data-table thead th.#{$prefix}--table-expand,
   .#{$prefix}--data-table tbody td.#{$prefix}--table-expand {
     min-width: 0;
-    // spacing between checkbox / chevron and next cell should be 16px / 1rem
-    // adjacent cell has 16px / 1rem padding-left though, hence the removal of padding-right here
-    padding-right: 0;
-    padding-left: $spacing-05;
   }
 
   .#{$prefix}--data-table thead th.#{$prefix}--table-column-checkbox,
   .#{$prefix}--data-table tbody td.#{$prefix}--table-column-checkbox {
     // 16px padding left + 20px checkbox width
-    width: rem(36px);
+    width: rem(16px);
+    // spacing between checkbox / chevron and next cell should be 16px / 1rem
+    // adjacent cell has 16px / 1rem padding-left though, hence the removal of padding-right here
+    padding-right: $spacing-05;
+    padding-left: $spacing-05;
   }
 
   .#{$prefix}--data-table thead th.#{$prefix}--table-expand,
   .#{$prefix}--data-table tbody td.#{$prefix}--table-expand {
-    // 16px padding left + 16px checkbox width
+    width: rem(48px);
+    height: rem(48px);
+  }
+
+  .#{$prefix}--data-table--compact thead th.#{$prefix}--table-expand,
+  .#{$prefix}--data-table--compact tbody td.#{$prefix}--table-expand {
+    width: rem(24px);
+    height: rem(24px);
+  }
+
+  .#{$prefix}--data-table--short thead th.#{$prefix}--table-expand,
+  .#{$prefix}--data-table--short tbody td.#{$prefix}--table-expand {
     width: rem(32px);
+    height: rem(32px);
+  }
+
+  .#{$prefix}--data-table--tall thead th.#{$prefix}--table-expand,
+  .#{$prefix}--data-table--tall tbody td.#{$prefix}--table-expand {
+    width: rem(64px);
+    height: rem(64px);
   }
 
   .#{$prefix}--data-table--tall .#{$prefix}--table-column-checkbox {
@@ -19544,20 +19582,26 @@ Data table expandable styles
   // Expand icon column
   //----------------------------------------------------------------------------
   .#{$prefix}--data-table td.#{$prefix}--table-expand {
-    width: 2.5rem;
-    min-width: 2.5rem;
     border-bottom: 1px solid $ui-03;
   }
 
-  .#{$prefix}--data-table td.#{$prefix}--table-expand,
-  th.#{$prefix}--table-expand {
-    padding: 0 $spacing-05;
+  .#{$prefix}--data-table th.#{$prefix}--table-expand + th,
+  .#{$prefix}--data-table td.#{$prefix}--table-expand + td {
+    padding-left: 0;
   }
 
-  .#{$prefix}--data-table--tall td.#{$prefix}--table-expand,
-  .#{$prefix}--data-table--tall th.#{$prefix}--table-expand {
-    padding-top: rem(16px);
-    padding-bottom: rem(16px);
+  .#{$prefix}--data-table
+    th.#{$prefix}--table-expand
+    + .#{$prefix}--table-column-checkbox,
+  .#{$prefix}--data-table
+    td.#{$prefix}--table-expand
+    + .#{$prefix}--table-column-checkbox {
+    padding-right: 0;
+  }
+
+  .#{$prefix}--data-table td.#{$prefix}--table-expand,
+  .#{$prefix}--data-table th.#{$prefix}--table-expand {
+    padding: 0;
   }
 
   .#{$prefix}--data-table
@@ -19574,17 +19618,21 @@ Data table expandable styles
   .#{$prefix}--table-expand__button {
     @include button-reset('false');
 
-    height: rem(16px);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    // Account for the border in `.bx--table-expand`
+    height: calc(100% + 1px);
     vertical-align: inherit;
   }
 
   .#{$prefix}--table-expand__button:focus {
     outline: none;
+    box-shadow: inset 0 0 0 2px $focus;
   }
 
   .#{$prefix}--table-expand__button:focus .#{$prefix}--table-expand__svg {
-    box-shadow: inset 0 0 0 2px $focus;
-
     // Windows, Firefox HCM Fix
     @media screen and (-ms-high-contrast: active),
       screen and (prefers-contrast) {
@@ -19603,6 +19651,11 @@ Data table expandable styles
       // `ButtonText` is a CSS2 system color to help improve colors in HCM
       fill: ButtonText;
     }
+  }
+
+  .#{$prefix}--data-table--tall .#{$prefix}--table-expand__button {
+    padding-top: rem(16px);
+    padding-bottom: rem(24px);
   }
 
   // fix expanded parent separating border length
@@ -20734,6 +20787,10 @@ File uploader styles
     color: $text-01;
   }
 
+  .#{$prefix}--file--label--disabled {
+    color: $disabled-02;
+  }
+
   .#{$prefix}--file-input {
     @include hidden;
   }
@@ -20789,7 +20846,7 @@ File uploader styles
   }
 
   .#{$prefix}--file-browse-btn--disabled .#{$prefix}--file__drop-container {
-    border: 1px dashed $disabled-01;
+    border: 1px dashed $disabled-02;
   }
 
   .#{$prefix}--label-description {
@@ -20798,6 +20855,10 @@ File uploader styles
 
     margin-bottom: $carbon--spacing-05;
     color: $text-02;
+  }
+
+  .#{$prefix}--label-description--disabled {
+    color: $disabled-02;
   }
 
   // For backwards compatibility
@@ -20817,8 +20878,8 @@ File uploader styles
   .#{$prefix}--file__selected-file {
     display: grid;
     grid-auto-rows: auto;
-    grid-gap: $carbon--spacing-05;
     grid-template-columns: 1fr auto;
+    gap: rem(12px) $carbon--spacing-05;
     align-items: center;
     max-width: rem(320px);
     min-height: $carbon--spacing-09;
@@ -20835,12 +20896,6 @@ File uploader styles
       grid-column: 1 / -1;
       max-height: none;
       margin: 0;
-    }
-
-    .#{$prefix}--loading {
-      width: rem(32px);
-      height: rem(32px);
-      margin-right: -$carbon--spacing-03;
     }
 
     .#{$prefix}--inline-loading__animation .#{$prefix}--loading {
@@ -20865,10 +20920,12 @@ File uploader styles
   }
 
   .#{$prefix}--file__selected-file--field {
+    gap: $carbon--spacing-03 $carbon--spacing-05;
     min-height: rem(40px);
   }
 
   .#{$prefix}--file__selected-file--sm {
+    gap: $carbon--spacing-02 $carbon--spacing-05;
     min-height: rem(32px);
   }
 
@@ -20879,19 +20936,36 @@ File uploader styles
     max-width: rem(320px);
     margin-bottom: $carbon--spacing-03;
     background-color: $field-01;
-
     outline-width: 1px;
   }
 
   .#{$prefix}--file__selected-file--invalid {
     @include focus-outline('invalid');
 
-    padding: $carbon--spacing-05 0;
+    padding: rem(12px) 0;
+  }
+
+  .#{$prefix}--file__selected-file--invalid.#{$prefix}--file__selected-file--sm {
+    padding: $carbon--spacing-02 0;
+  }
+
+  .#{$prefix}--file__selected-file--invalid.#{$prefix}--file__selected-file--field {
+    padding: $carbon--spacing-03 0;
   }
 
   .#{$prefix}--file__selected-file--invalid .#{$prefix}--form-requirement {
     padding-top: $carbon--spacing-05;
     border-top: 1px solid $ui-03;
+  }
+
+  .#{$prefix}--file__selected-file--invalid.#{$prefix}--file__selected-file--sm
+    .#{$prefix}--form-requirement {
+    padding-top: rem(7px);
+  }
+
+  .#{$prefix}--file__selected-file--invalid.#{$prefix}--file__selected-file--field
+    .#{$prefix}--form-requirement {
+    padding-top: rem(11px);
   }
 
   .#{$prefix}--file__selected-file--invalid
@@ -20934,6 +21008,7 @@ File uploader styles
 
   .#{$prefix}--file__state-container {
     display: flex;
+    align-items: center;
     justify-content: center;
     min-width: 1.5rem;
     padding-right: $carbon--spacing-05;
@@ -20961,14 +21036,15 @@ File uploader styles
   .#{$prefix}--file__state-container .#{$prefix}--file-invalid {
     width: $carbon--spacing-05;
     height: $carbon--spacing-05;
-    margin-right: $carbon--spacing-03;
     fill: $support-01;
   }
 
   .#{$prefix}--file__state-container .#{$prefix}--file-close {
     display: flex;
-    width: $carbon--spacing-05;
-    height: $carbon--spacing-05;
+    align-items: center;
+    justify-content: center;
+    width: $carbon--spacing-06;
+    height: $carbon--spacing-06;
     padding: 0;
     background-color: transparent;
     border: none;
@@ -20976,7 +21052,7 @@ File uploader styles
     fill: $icon-01;
 
     &:focus {
-      @include focus-outline('border');
+      @include focus-outline('outline');
     }
   }
 
@@ -21021,15 +21097,15 @@ File uploader styles
   - [carbon--spacing-03 [variable]](#carbon--spacing-03-variable)
   - [support-01 [variable]](#support-01-variable)
   - [text-01 [variable]](#text-01-variable)
+  - [disabled-02 [variable]](#disabled-02-variable)
   - [link-01 [variable]](#link-01-variable)
   - [interactive-03 [variable]](#interactive-03-variable)
-  - [disabled-02 [variable]](#disabled-02-variable)
-  - [disabled-01 [variable]](#disabled-01-variable)
   - [carbon--spacing-05 [variable]](#carbon--spacing-05-variable)
   - [text-02 [variable]](#text-02-variable)
   - [carbon--spacing-06 [variable]](#carbon--spacing-06-variable)
   - [carbon--spacing-09 [variable]](#carbon--spacing-09-variable)
   - [field-01 [variable]](#field-01-variable)
+  - [carbon--spacing-02 [variable]](#carbon--spacing-02-variable)
   - [ui-03 [variable]](#ui-03-variable)
   - [text-error [variable]](#text-error-variable)
   - [ui-05 [variable]](#ui-05-variable)
@@ -21393,10 +21469,6 @@ Link styles
 
   .#{$prefix}--link.#{$prefix}--link--inline {
     text-decoration: underline;
-
-    &:hover {
-      color: $hover-primary-text;
-    }
 
     &:focus,
     &:visited {
@@ -22421,7 +22493,7 @@ Loading styles
   }
 
   .#{$prefix}--loading__svg circle {
-    stroke-width: 8;
+    stroke-width: 10;
     stroke-linecap: butt;
     stroke-dasharray: 240;
   }
@@ -22440,10 +22512,11 @@ Loading styles
   }
 
   .#{$prefix}--loading--small {
-    width: 2rem;
-    height: 2rem;
+    width: rem(16px);
+    height: rem(16px);
+
     circle {
-      stroke-width: 12;
+      stroke-width: 16;
     }
   }
 
@@ -22453,7 +22526,7 @@ Loading styles
 
   .#{$prefix}--loading__background {
     stroke: $ui-03;
-    stroke-dashoffset: 0;
+    stroke-dashoffset: -22;
   }
 
   .#{$prefix}--loading-overlay {
@@ -22553,7 +22626,7 @@ Loading styles
 <summary>Source code</summary>
 
 ```scss
-$loading__gap: 40;
+$loading__gap: 16;
 ```
 
 </details>
@@ -22569,7 +22642,7 @@ $loading__gap: 40;
 <summary>Source code</summary>
 
 ```scss
-$loading--small__gap: 99;
+$loading--small__gap: 25;
 ```
 
 </details>
@@ -22586,7 +22659,7 @@ $loading--small__gap: 99;
 <summary>Source code</summary>
 
 ```scss
-$loading__size: 10.5rem;
+$loading__size: 5.5rem;
 ```
 
 </details>
@@ -23036,11 +23109,22 @@ Multi select styles
     color: $text-01;
   }
 
+  .#{$prefix}--multi-select--filterable .#{$prefix}--text-input {
+    padding-left: $spacing-03;
+  }
+
+  .#{$prefix}--multi-select--filterable:hover .#{$prefix}--text-input {
+    background-color: $hover-ui;
+  }
+
+  .#{$prefix}--multi-select--filterable.#{$prefix}--list-box--disabled:hover
+    .#{$prefix}--text-input {
+    background-color: $field-01;
+  }
+
   .#{$prefix}--multi-select--filterable {
     .#{$prefix}--list-box__selection--multi {
-      position: absolute;
-      right: auto;
-      left: $carbon--spacing-03;
+      margin: 0 0 0 $spacing-05;
     }
   }
 
@@ -23050,15 +23134,6 @@ Multi select styles
     background-color: transparent;
     border-bottom: 0;
   }
-
-  .#{$prefix}--multi-select--selected .#{$prefix}--text-input {
-    // this value will need to change based on the number of digits in
-    // the number of items selected
-    //
-    // i.e. the input field needs adjusted padding to account for the width of
-    // the number in <ListBox.Selection>
-    padding-left: carbon--mini-units(7);
-  }
 }
 ```
 
@@ -23066,10 +23141,12 @@ Multi select styles
 
 - **Group**: [multi-select](#multi-select)
 - **Requires**:
-  - [carbon--mini-units [function]](#carbon--mini-units-function)
   - [prefix [variable]](#prefix-variable)
   - [text-01 [variable]](#text-01-variable)
-  - [carbon--spacing-03 [variable]](#carbon--spacing-03-variable)
+  - [spacing-03 [variable]](#spacing-03-variable)
+  - [hover-ui [variable]](#hover-ui-variable)
+  - [field-01 [variable]](#field-01-variable)
+  - [spacing-05 [variable]](#spacing-05-variable)
 
 ## notification
 
@@ -24302,10 +24379,10 @@ Overflow menu styles
   .#{$prefix}--overflow-menu-options__option--danger
     .#{$prefix}--overflow-menu-options__btn:focus {
     color: $text-04;
-    background-color: $support-01;
+    background-color: $danger-01;
 
     svg {
-      fill: $text-04;
+      fill: currentColor;
     }
   }
 
@@ -24360,7 +24437,7 @@ Overflow menu styles
   - [text-01 [variable]](#text-01-variable)
   - [icon-02 [variable]](#icon-02-variable)
   - [text-04 [variable]](#text-04-variable)
-  - [support-01 [variable]](#support-01-variable)
+  - [danger-01 [variable]](#danger-01-variable)
   - [ui-01 [variable]](#ui-01-variable)
   - [disabled-02 [variable]](#disabled-02-variable)
 
@@ -25836,6 +25913,8 @@ Select styles
     border-bottom: 1px solid $ui-04;
     border-radius: 0;
     cursor: pointer;
+    // reset disabled <select> opacity
+    opacity: 1;
 
     // Do not transition on background-color (see: https://github.com/carbon-design-system/carbon/issues/4464)
     transition: outline $duration--fast-01 motion(standard, productive);
@@ -25909,7 +25988,7 @@ Select styles
     &:disabled,
     &:hover:disabled {
       color: $disabled-02;
-      background-color: $disabled-01;
+      background-color: $field-02;
       cursor: not-allowed;
     }
   }
@@ -25944,11 +26023,6 @@ Select styles
   .#{$prefix}--select-option {
     // For the options to show in IE11
     color: $text-01;
-  }
-
-  .#{$prefix}--select-option[disabled] {
-    cursor: not-allowed;
-    opacity: 0.5;
   }
 
   // Override some Firefox user-agent styles

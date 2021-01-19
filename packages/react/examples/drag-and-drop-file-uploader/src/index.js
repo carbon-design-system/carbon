@@ -27,9 +27,11 @@ function ExampleDropContainerApp(props) {
   const handleDrop = (e) => {
     e.preventDefault();
   };
+
   const handleDragover = (e) => {
     e.preventDefault();
   };
+
   useEffect(() => {
     document.addEventListener('drop', handleDrop);
     document.addEventListener('dragover', handleDragover);
@@ -38,6 +40,7 @@ function ExampleDropContainerApp(props) {
       document.removeEventListener('dragover', handleDragover);
     };
   }, []);
+
   const uploadFile = async (fileToUpload) => {
     // file size validation
     if (fileToUpload.filesize > 512000) {
@@ -124,6 +127,7 @@ function ExampleDropContainerApp(props) {
       console.log(error);
     }
   };
+
   const onAddFiles = useCallback(
     (evt, { addedFiles }) => {
       evt.stopPropagation();
@@ -144,16 +148,18 @@ function ExampleDropContainerApp(props) {
     },
     [files, props.multiple]
   );
+
   const handleFileUploaderItemClick = useCallback(
-    (evt, { uuid: clickedUuid }) =>
+    (_, { uuid: clickedUuid }) =>
       setFiles(files.filter(({ uuid }) => clickedUuid !== uuid)),
     [files]
   );
+
   return (
     <FormItem>
-      <strong className={`${prefix}--file--label`}>Account photo</strong>
+      <strong className={`${prefix}--file--label`}>Upload files</strong>
       <p className={`${prefix}--label-description`}>
-        Only .jpg and .png files. 500kb max file size
+        Max file size is 500kb. Supported file types are .jpg and .png.
       </p>
       <FileUploaderDropContainer {...props} onAddFiles={onAddFiles} />
       <div className="uploaded-files" style={{ width: '100%' }}>
