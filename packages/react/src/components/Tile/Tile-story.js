@@ -73,6 +73,8 @@ const props = {
       'Collapsed icon text (tileExpandedIconText)',
       'Interact to Collapse tile'
     ),
+    tileCollapsedLabel: text('Collapsed icon text (tileCollapsedLabel)'),
+    tileExpandedLabel: text('Collapsed icon text (tileExpandedLabel)'),
     handleClick: action('handleClick'),
     light: boolean('Light variant (light)', false),
   }),
