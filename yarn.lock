@@ -7264,10 +7264,17 @@ __metadata:
   languageName: node
   linkType: hard
 
-"axe-core@npm:^3.0.1, axe-core@npm:^3.3.1, axe-core@npm:^3.3.2":
+"axe-core@npm:^3.0.1, axe-core@npm:^3.3.1":
   version: 3.4.1
   resolution: "axe-core@npm:3.4.1"
   checksum: 3244fcbdaaf3b92a516d45980a587e714118d70c73353dc6efbcc3e18ebfb5ff4f43f7427fb0f69380bdd59cdbb6b0d336d954c3871198f8e03e34a36cc912c3
+  languageName: node
+  linkType: hard
+
+"axe-core@npm:^4.1.1":
+  version: 4.1.1
+  resolution: "axe-core@npm:4.1.1"
+  checksum: cd00c2d359f118bb2631a0e018a5d9183996488aec5dd52c7cea2c96613725c388268f0b01d22f594271837d5f26b586a1e79e302578527fe28e71ea433c0660
   languageName: node
   linkType: hard
 
@@ -18554,7 +18561,7 @@ __metadata:
     "@babel/preset-react": ^7.10.0
     "@babel/runtime": ^7.10.0
     accessibility-checker: ^3.1.1
-    axe-core: ^3.3.2
+    axe-core: ^4.1.1
     babel-jest: ^26.0.1
     chalk: ^4.1.0
     enzyme: ^3.10.0
