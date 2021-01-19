@@ -5708,6 +5708,7 @@ $carbon--spacing-03: 0.5rem;
   - [padding-th [mixin]](#padding-th-mixin)
   - [tabs [mixin]](#tabs-mixin)
   - [tags [mixin]](#tags-mixin)
+  - [tile [mixin]](#tile-mixin)
   - [toggle [mixin]](#toggle-mixin)
   - [tooltip--definition--legacy [mixin]](#tooltip--definition--legacy-mixin)
   - [tooltip [mixin]](#tooltip-mixin)
@@ -28119,11 +28120,14 @@ Tile styles
 
   .#{$prefix}--tile__chevron {
     position: absolute;
-    right: 0.5rem;
-    bottom: 0.5rem;
+    right: $carbon--spacing-05;
+    bottom: $carbon--spacing-05;
+    display: flex;
+    align-items: flex-end;
     height: 1rem;
 
     svg {
+      margin-left: $carbon--spacing-03;
       transform-origin: center;
       transition: $duration--fast-02 motion(standard, productive);
       fill: $ui-05;
@@ -28233,6 +28237,7 @@ Tile styles
   - [text-01 [variable]](#text-01-variable)
   - [carbon--spacing-09 [variable]](#carbon--spacing-09-variable)
   - [icon-02 [variable]](#icon-02-variable)
+  - [carbon--spacing-03 [variable]](#carbon--spacing-03-variable)
   - [ui-05 [variable]](#ui-05-variable)
 
 ## time-picker
