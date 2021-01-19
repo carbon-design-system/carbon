@@ -29,11 +29,11 @@
     "access": "public"
   },
   "scripts": {
-    "build": "yarn clean && bundler bundle src/index.js --name CarbonIconHelpers",
+    "build": "yarn clean && carbon-cli bundle src/index.js --name CarbonIconHelpers",
     "clean": "rimraf es lib umd"
   },
   "devDependencies": {
-    "@carbon/bundler": "^10.11.0",
+    "@carbon/cli": "^10.17.0",
     "rimraf": "^3.0.0"
   },
   "sideEffects": false
