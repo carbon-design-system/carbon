@@ -179,7 +179,8 @@ export default class Tabs extends React.Component {
         tab?.tabAnchor?.offsetParent.getBoundingClientRect().right;
       const rightOverflowNavButtonHidden =
         tablistScrollLeft + tablistClientWidth === tablistScrollWidth;
-      tab?.tabAnchor?.scrollIntoView({ block: 'nearest', inline: 'nearest' });
+      this.props.scrollIntoView &&
+        tab?.tabAnchor?.scrollIntoView({ block: 'nearest', inline: 'nearest' });
 
       // account for overflow buttons in scroll position on mount
       if (!leftOverflowNavButtonHidden && !rightOverflowNavButtonHidden) {
