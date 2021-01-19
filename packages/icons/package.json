@@ -32,13 +32,13 @@
     "access": "public"
   },
   "scripts": {
-    "build": "yarn clean && node tasks/build.js && bundler sassdoc \"scss/*.scss\"",
+    "build": "yarn clean && node tasks/build.js && carbon-cli sassdoc \"scss/*.scss\"",
     "ci-check": "node tasks/ci-check.js",
     "clean": "rimraf es lib metadata.json svg",
     "prepublishOnly": "yarn build"
   },
   "devDependencies": {
+    "@carbon/cli": "^10.17.0",
     "@carbon/icon-build-helpers": "^0.13.0"
-  },
-  "gitHead": "bb04f2f061de0bda6e457a07a67cf624db375808"
+  }
 }
