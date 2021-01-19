@@ -29,8 +29,9 @@ module.exports = {
     '@storybook/addon-docs',
     '@storybook/addon-notes/register',
     'storybook-readme/register',
-    "@storybook/addon-links",
-    CARBON_REACT_STORYBOOK_USE_CUSTOM_PROPERTIES === 'true' && require.resolve('./dist/preset.js'),
+    '@storybook/addon-links',
+    CARBON_REACT_STORYBOOK_USE_CUSTOM_PROPERTIES === 'true' &&
+      require.resolve('./dist/preset.js'),
   ].filter(Boolean),
 
   webpack: async (config) => {
