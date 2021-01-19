@@ -10621,6 +10621,7 @@ $disabled-01: if(
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
   - [accordion [mixin]](#accordion-mixin)
+  - [snippet [mixin]](#snippet-mixin)
   - [content-switcher [mixin]](#content-switcher-mixin)
   - [date-picker [mixin]](#date-picker-mixin)
   - [listbox [mixin]](#listbox-mixin)
@@ -10662,6 +10663,7 @@ $disabled-02: if(
   - [accordion [mixin]](#accordion-mixin)
   - [button-base [mixin]](#button-base-mixin)
   - [checkbox [mixin]](#checkbox-mixin)
+  - [snippet [mixin]](#snippet-mixin)
   - [content-switcher [mixin]](#content-switcher-mixin)
   - [date-picker [mixin]](#date-picker-mixin)
   - [dropdown [mixin]](#dropdown-mixin)
@@ -17162,6 +17164,27 @@ Code snippet styles
     @include reset;
   }
 
+  .#{$prefix}--snippet--disabled,
+  .#{$prefix}--snippet--disabled
+    .#{$prefix}--btn.#{$prefix}--snippet-btn--expand {
+    color: $disabled-02;
+    background-color: $disabled-01;
+  }
+
+  .#{$prefix}--snippet--disabled .#{$prefix}--snippet-btn--expand:hover,
+  .#{$prefix}--snippet--disabled .#{$prefix}--copy-btn:hover {
+    color: $disabled-02;
+    background-color: $disabled-01;
+    cursor: not-allowed;
+  }
+
+  .#{$prefix}--snippet--disabled .#{$prefix}--snippet__icon,
+  .#{$prefix}--snippet--disabled
+    .#{$prefix}--snippet-btn--expand
+    .#{$prefix}--icon-chevron--down {
+    fill: $disabled-02;
+  }
+
   .#{$prefix}--snippet code {
     @include type-style('code-01');
   }
@@ -17458,7 +17481,7 @@ Code snippet styles
   }
 
   // Show more / less button
-  button.#{$prefix}--btn.#{$prefix}--snippet-btn--expand {
+  .#{$prefix}--snippet-btn--expand {
     @include type-style('body-short-01');
     @include carbon--font-family('sans');
 
@@ -17474,8 +17497,7 @@ Code snippet styles
     border: 0;
   }
 
-  button.#{$prefix}--btn.#{$prefix}--snippet-btn--expand
-    .#{$prefix}--snippet-btn--text {
+  .#{$prefix}--snippet-btn--expand .#{$prefix}--snippet-btn--text {
     position: relative;
     top: rem(-1px);
   }
@@ -17485,14 +17507,13 @@ Code snippet styles
   }
 
   .#{$prefix}--snippet-btn--expand .#{$prefix}--icon-chevron--down {
-    margin-bottom: rem(1px);
     margin-left: $spacing-03;
     transform: rotate(0deg);
     transition: $duration--moderate-01 motion(standard, productive);
     fill: $text-01;
   }
 
-  button.#{$prefix}--btn.#{$prefix}--snippet-btn--expand:hover {
+  .#{$prefix}--snippet-btn--expand:hover {
     color: $text-01;
     background: $hover-ui;
   }
@@ -17721,6 +17742,8 @@ Code snippet styles
   - [bx--snippet [mixin]](#bx--snippet-mixin)
   - [carbon--font-family [mixin]](#carbon--font-family-mixin)
   - [prefix [variable]](#prefix-variable)
+  - [disabled-02 [variable]](#disabled-02-variable)
+  - [disabled-01 [variable]](#disabled-01-variable)
   - [text-01 [variable]](#text-01-variable)
   - [field-01 [variable]](#field-01-variable)
   - [ui-03 [variable]](#ui-03-variable)
