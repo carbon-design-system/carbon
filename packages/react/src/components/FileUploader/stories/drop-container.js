@@ -6,11 +6,13 @@
  */
 
 import React, { useState, useCallback, useEffect } from 'react';
+import classnames from 'classnames';
 import { settings } from 'carbon-components';
 import FileUploaderItem from '../FileUploaderItem';
 import FileUploaderDropContainer from '../FileUploaderDropContainer';
 import FormItem from '../../FormItem';
 import uid from '../../../tools/uniqueId';
+import '../FileUploader-story.scss';
 
 const { prefix } = settings;
 
@@ -19,9 +21,11 @@ const ExampleDropContainerApp = (props) => {
   const handleDrop = (e) => {
     e.preventDefault();
   };
+
   const handleDragover = (e) => {
     e.preventDefault();
   };
+
   useEffect(() => {
     document.addEventListener('drop', handleDrop);
     document.addEventListener('dragover', handleDragover);
@@ -30,6 +34,7 @@ const ExampleDropContainerApp = (props) => {
       document.removeEventListener('dragover', handleDragover);
     };
   }, []);
+
   const uploadFile = async (fileToUpload) => {
     // file size validation
     if (fileToUpload.filesize > 512000) {
@@ -96,6 +101,7 @@ const ExampleDropContainerApp = (props) => {
       );
     }, rand + 1000);
   };
+
   const onAddFiles = useCallback(
     (evt, { addedFiles }) => {
       evt.stopPropagation();
@@ -119,16 +125,28 @@ const ExampleDropContainerApp = (props) => {
     // eslint-disable-next-line react/prop-types
     [files, props.multiple]
   );
+
   const handleFileUploaderItemClick = useCallback(
-    (evt, { uuid: clickedUuid }) =>
+    (_, { uuid: clickedUuid }) =>
       setFiles(files.filter(({ uuid }) => clickedUuid !== uuid)),
     [files]
   );
+
+  const labelClasses = classnames(`${prefix}--file--label`, {
+    // eslint-disable-next-line react/prop-types
+    [`${prefix}--file--label--disabled`]: props.disabled,
+  });
+
+  const helperTextClasses = classnames(`${prefix}--label-description`, {
+    // eslint-disable-next-line react/prop-types
+    [`${prefix}--label-description--disabled`]: props.disabled,
+  });
+
   return (
     <FormItem>
-      <strong className={`${prefix}--file--label`}>Account photo</strong>
-      <p className={`${prefix}--label-description`}>
-        Only .jpg and .png files. 500kb max file size
+      <strong className={labelClasses}>Upload files</strong>
+      <p className={helperTextClasses}>
+        Max file size is 500kb. Supported file types are .jpg and .png.
       </p>
       <FileUploaderDropContainer {...props} onAddFiles={onAddFiles} />
       <div className={`${prefix}--file-container`} style={{ width: '100%' }}>
