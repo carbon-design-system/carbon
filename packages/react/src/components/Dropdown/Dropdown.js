@@ -45,6 +45,7 @@ const Dropdown = React.forwardRef(function Dropdown(
     onChange,
     id,
     titleText,
+    hideTitleText,
     helperText,
     translateWithId,
     light,
@@ -98,6 +99,7 @@ const Dropdown = React.forwardRef(function Dropdown(
 
   const titleClasses = cx(`${prefix}--label`, {
     [`${prefix}--label--disabled`]: disabled,
+    [`${prefix}--visually-hidden`]: hideTitleText,
   });
 
   const helperClasses = cx(`${prefix}--form__helper-text`, {
@@ -231,6 +233,11 @@ Dropdown.propTypes = {
    * additional help
    */
   helperText: PropTypes.oneOfType([PropTypes.string, PropTypes.node]),
+
+  /**
+   * Specify whether the title text should be hidden or not
+   */
+  hideTitleText: PropTypes.bool,
 
   /**
    * Specify a custom `id`
