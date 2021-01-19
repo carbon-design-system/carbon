@@ -21,7 +21,7 @@ async function check(args, env) {
     stdio: 'inherit',
   };
   const tasks = [
-    `yarn bundler check --ignore '**/@(node_modules|examples|components|react|fixtures)/**' 'packages/**/*.scss'`,
+    `yarn carbon-cli check --ignore '**/@(node_modules|examples|components|react|fixtures)/**' 'packages/**/*.scss'`,
     `cross-env BABEL_ENV=test yarn test --ci --maxWorkers 2 --reporters=default --reporters=jest-junit`,
     `cross-env BABEL_ENV=test yarn test:e2e --ci --maxWorkers 2 --reporters=default --reporters=jest-junit`,
   ];
