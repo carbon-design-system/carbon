@@ -5671,6 +5671,7 @@ $carbon--spacing-02: 0.25rem;
   - [snippet [mixin]](#snippet-mixin)
   - [file-uploader [mixin]](#file-uploader-mixin)
   - [form [mixin]](#form-mixin)
+  - [lists [mixin]](#lists-mixin)
   - [inline-notifications [mixin]](#inline-notifications-mixin)
   - [pseudo-underline [mixin]](#pseudo-underline-mixin)
   - [tags [mixin]](#tags-mixin)
@@ -5797,7 +5798,6 @@ $carbon--spacing-06: 1.5rem;
 - **Used by**:
   - [accordion [mixin]](#accordion-mixin)
   - [file-uploader [mixin]](#file-uploader-mixin)
-  - [lists [mixin]](#lists-mixin)
   - [listbox [mixin]](#listbox-mixin)
   - [toast-notifications [mixin]](#toast-notifications-mixin)
   - [progress-indicator [mixin]](#progress-indicator-mixin)
@@ -21532,7 +21532,11 @@ List styles
   }
 
   .#{$prefix}--list--nested {
-    margin-left: $carbon--spacing-06;
+    margin-left: rem(32px);
+  }
+
+  .#{$prefix}--list--nested .#{$prefix}--list__item {
+    padding-left: $carbon--spacing-02;
   }
 
   .#{$prefix}--list--ordered:not(.#{$prefix}--list--nested) {
@@ -21584,7 +21588,7 @@ List styles
 - **Requires**:
   - [prefix [variable]](#prefix-variable)
   - [text-01 [variable]](#text-01-variable)
-  - [carbon--spacing-06 [variable]](#carbon--spacing-06-variable)
+  - [carbon--spacing-02 [variable]](#carbon--spacing-02-variable)
   - [carbon--spacing-05 [variable]](#carbon--spacing-05-variable)
   - [carbon--spacing-04 [variable]](#carbon--spacing-04-variable)
 
