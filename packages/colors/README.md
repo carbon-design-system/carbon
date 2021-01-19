@@ -143,6 +143,13 @@ If you're looking for `@carbon/colors` API documentation, check out:
 
 - [Sass](./docs/sass.md)
 
+## 📚 Examples
+
+If you're looking for more examples on how to use `@carbon/colors`, we have some
+examples that you can check out:
+
+- [sass-modules](./examples/sass-modules)
+
 ## 🙌 Contributing
 
 We're always looking for contributors to help us fix bugs, build new features,

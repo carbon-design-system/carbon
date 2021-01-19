@@ -21,6 +21,10 @@ import FloatingMenu, {
 import ClickListener from '../../internal/ClickListener';
 import mergeRefs from '../../tools/mergeRefs';
 import { keys, matches as keyDownMatch } from '../../internal/keyboard';
+import {
+  selectorFocusable,
+  selectorTabbable,
+} from '../../internal/keyboard/navigation';
 import isRequiredOneOf from '../../prop-types/isRequiredOneOf';
 import requiredIfValueExists from '../../prop-types/requiredIfValueExists';
 import { useControlledStateWithValue } from '../../internal/FeatureFlags';
@@ -244,6 +248,7 @@ class Tooltip extends Component {
    * @private
    */
   _tooltipId =
+    this.props.id ||
     this.props.tooltipId ||
     `__carbon-tooltip_${Math.random().toString(36).substr(2)}`;
 
@@ -295,7 +300,19 @@ class Tooltip extends Component {
       }
       if (!open && tooltipBody && tooltipBody.id === this._tooltipId) {
         this._tooltipDismissed = true;
-        this._triggerRef?.current.focus();
+        const primaryFocusNode = tooltipBody.querySelector(
+          this.props.selectorPrimaryFocus || null
+        );
+        const tabbableNode = tooltipBody.querySelector(selectorTabbable);
+        const focusableNode = tooltipBody.querySelector(selectorFocusable);
+        const focusTarget =
+          primaryFocusNode || // User defined focusable node
+          tabbableNode || // First sequentially focusable node
+          focusableNode || // First programmatic focusable node
+          tooltipBody;
+        if (focusTarget !== tooltipBody) {
+          this._triggerRef?.current.focus();
+        }
       }
     });
   };
@@ -306,13 +323,16 @@ class Tooltip extends Component {
    * @param {Element} [evt] For handing `mouseout` event, indicates where the mouse pointer is gone.
    */
   _handleFocus = (state, evt) => {
-    const { relatedTarget } = evt;
+    const { currentTarget, relatedTarget } = evt;
+    if (currentTarget !== relatedTarget) {
+      this._tooltipDismissed = false;
+    }
     if (state === 'over') {
       if (!this._tooltipDismissed) {
         this._handleUserInputOpenClose(evt, { open: true });
       }
       this._tooltipDismissed = false;
-    } else {
+    } else if (state !== 'out') {
       // Note: SVGElement in IE11 does not have `.contains()`
       const { current: triggerEl } = this._triggerRef;
       const shouldPreventClose =
@@ -351,7 +371,15 @@ class Tooltip extends Component {
       click: 'click',
     }[evt.type];
     const hadContextMenu = this._hasContextMenu;
-    this._hasContextMenu = evt.type === 'contextmenu';
+    if (evt.type === 'click' || evt.type === 'contextmenu') {
+      this._hasContextMenu = evt.type === 'contextmenu';
+    }
+
+    if (this._hasContextMenu) {
+      this._handleUserInputOpenClose(evt, { open: false });
+      return;
+    }
+
     if (state === 'click') {
       evt.stopPropagation();
       evt.preventDefault();
@@ -359,12 +387,8 @@ class Tooltip extends Component {
         ? !this.props.open
         : !this.state.open;
       this._handleUserInputOpenClose(evt, { open: shouldOpen });
-    } else if (
-      state &&
-      (state !== 'out' || !hadContextMenu) &&
-      this._debouncedHandleFocus
-    ) {
-      this._debouncedHandleFocus(state, evt);
+    } else if (state && (state !== 'out' || !hadContextMenu)) {
+      this?._debouncedHandleFocus(state, evt);
     }
   };
 
@@ -450,6 +474,7 @@ class Tooltip extends Component {
       role: 'button',
       tabIndex: tabIndex,
       onClick: this.handleMouse,
+      onContextMenu: this.handleMouse,
       onKeyDown: this.handleKeyPress,
       onMouseOver: this.handleMouse,
       onMouseOut: this.handleMouse,
@@ -506,9 +531,9 @@ class Tooltip extends Component {
               this._tooltipEl = node;
             }}>
             <div
-              id={this._tooltipId}
               className={tooltipClasses}
               {...other}
+              id={this._tooltipId}
               data-floating-menu-direction={direction}
               onMouseOver={this.handleMouse}
               onMouseOut={this.handleMouse}
@@ -519,7 +544,6 @@ class Tooltip extends Component {
               <span className={`${prefix}--tooltip__caret`} />
               <div
                 className={`${prefix}--tooltip__content`}
-                tabIndex="-1"
                 role="dialog"
                 aria-describedby={tooltipBodyId}
                 aria-labelledby={triggerId}>

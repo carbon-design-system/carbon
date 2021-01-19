@@ -91,7 +91,7 @@
 
     &:disabled {
       color: $disabled-02;
-      background-color: $disabled-background-color;
+      background-color: $disabled-01;
       border-bottom: 1px solid transparent;
       cursor: not-allowed;
     }

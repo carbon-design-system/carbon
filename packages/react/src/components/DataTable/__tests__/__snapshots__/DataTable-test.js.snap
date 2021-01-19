@@ -1870,7 +1870,6 @@ exports[`DataTable should render 1`] = `
                 >
                   <TableToolbarAction
                     onClick={[MockFunction]}
-                    primaryFocus={true}
                   >
                     Action 1
                   </TableToolbarAction>
@@ -2295,7 +2294,6 @@ exports[`DataTable should render 1`] = `
                   tabIndex="-1"
                 >
                   <Search
-                    aria-hidden={false}
                     closeButtonLabelText="Clear search input"
                     id="custom-id"
                     labelText="Filter table"
@@ -2348,7 +2346,6 @@ exports[`DataTable should render 1`] = `
                         Filter table
                       </label>
                       <input
-                        aria-hidden={false}
                         autoComplete="off"
                         className="bx--search-input"
                         id="custom-id"
@@ -2875,7 +2872,6 @@ exports[`DataTable sticky header should render 1`] = `
                 >
                   <TableToolbarAction
                     onClick={[MockFunction]}
-                    primaryFocus={true}
                   >
                     Action 1
                   </TableToolbarAction>
@@ -3303,7 +3299,6 @@ exports[`DataTable sticky header should render 1`] = `
                   tabIndex="-1"
                 >
                   <Search
-                    aria-hidden={false}
                     closeButtonLabelText="Clear search input"
                     id="custom-id"
                     labelText="Filter table"
@@ -3356,7 +3351,6 @@ exports[`DataTable sticky header should render 1`] = `
                         Filter table
                       </label>
                       <input
-                        aria-hidden={false}
                         autoComplete="off"
                         className="bx--search-input"
                         id="custom-id"

@@ -23,7 +23,7 @@
     "access": "public"
   },
   "scripts": {
-    "build": "bundler sassdoc \"scss/*.scss\""
+    "build": "carbon-cli sassdoc \"scss/*.scss\""
   },
   "eyeglass": {
     "exports": false,

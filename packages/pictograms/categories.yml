@@ -84,14 +84,18 @@ categories:
       - munich
       - nice
       - nyc--brooklyn
+      - nyc--chrysler-building
       - nyc--manhattan--01
       - nyc--manhattan--02
       - nyc--statue-of-liberty
+      - nyc--world-trade-center
       - paris--arc-de-triomphe
       - paris--louvre
       - paris--notre-dame
       - paris--pompidou-center
       - prague--charles-bridge-tower
+      - prague--dancing-house--01
+      - prague--dancing-house--02
       #    - portland
       - raleigh-nc
       - rome
@@ -135,13 +139,22 @@ categories:
       - cloud--strategy
       - cloud--tutorials
       - cloud--vmware
+      - cloud-pak--family
+      - cloud-pak--for-applications
+      - cloud-pak--for-data
+      - cloud-pak--for-integration
+      - cloud-pak--for-multicloud-management
+      - cloud-pak--for-security
+      - cloud-pak--system
       - cognos--analytics
+      - condition--builder
       - construct
       - devops
       - digital
       - docker
       - expand--horz
       - expand--vert
+      - filter--variable
       - free--trial
       - global--business--services
       - global--technology--services
@@ -156,7 +169,9 @@ categories:
       - mas
       - mqa
       - planning--analytics
+      - random--samples
       - saas--enablement
+      - select--range
       - single--sign-on
       - softlayer--enablement
   - name: Controls
@@ -331,11 +346,15 @@ categories:
       - optimize--cash-flow--02
   - name: Healthcare
     members:
+      - baby--bottle
       - care
       - doctor
+      - doctor-patient
+      - dropper
       - first--aid
       - heart--health
       - hospital
+      - hpi
       - medical
       - medical--charts
       - medical--staff
@@ -344,7 +363,12 @@ categories:
       - pill--bottle--01
       - pills
       - pregnant
+      - prescription
       - stethoscope
+      - social--work--01
+      - social--work--02
+      - telemedicine
+      - telemedicine--mobile
       - x-ray--01
       - x-ray--02
   - name: Home
@@ -440,6 +464,7 @@ categories:
       - flower--02
       - perfume
       - racetrack
+      - rock-on
       - scale
       - soft--ice--cream
       - sports

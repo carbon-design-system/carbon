@@ -73,6 +73,7 @@ export default class Tab extends React.Component {
      * side router libraries.
      **/
     renderAnchor: deprecate(PropTypes.func),
+    renderButton: PropTypes.func,
 
     /*
      * An optional parameter to allow overriding the content rendering.
@@ -119,7 +120,8 @@ export default class Tab extends React.Component {
       onClick,
       onKeyDown,
       // TODO: rename renderAnchor to renderButton in next major version
-      renderAnchor: renderButton,
+      renderAnchor,
+      renderButton,
       renderContent, // eslint-disable-line no-unused-vars
       ...other
     } = this.props;
@@ -153,6 +155,8 @@ export default class Tab extends React.Component {
       },
     };
 
+    const renderElement = renderButton || renderAnchor;
+
     return (
       <li
         {...other}
@@ -176,8 +180,8 @@ export default class Tab extends React.Component {
           onKeyDown(evt);
         }}
         role="presentation">
-        {renderButton ? (
-          renderButton(buttonProps)
+        {renderElement ? (
+          renderElement(buttonProps)
         ) : (
           <button type="button" role="tab" {...buttonProps}>
             {label}

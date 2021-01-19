@@ -17,6 +17,7 @@ import {
 } from '@carbon/icons-react';
 import ListBox, { PropTypes as ListBoxPropTypes } from '../ListBox';
 import { mapDownshiftProps } from '../../tools/createPropAdapter';
+import mergeRefs from '../../tools/mergeRefs';
 import deprecate from '../../prop-types/deprecate';
 
 const { prefix } = settings;
@@ -116,7 +117,7 @@ const Dropdown = React.forwardRef(function Dropdown(
 
   // needs to be Capitalized for react to render it correctly
   const ItemToElement = itemToElement;
-
+  const toggleButtonProps = getToggleButtonProps();
   const helper = helperText ? (
     <div className={helperClasses}>{helperText}</div>
   ) : null;
@@ -155,11 +156,11 @@ const Dropdown = React.forwardRef(function Dropdown(
         )}
         <button
           type="button"
-          ref={ref}
           className={`${prefix}--list-box__field`}
           disabled={disabled}
           aria-disabled={disabled}
-          {...getToggleButtonProps()}>
+          {...toggleButtonProps}
+          ref={mergeRefs(toggleButtonProps.ref, ref)}>
           <span className={`${prefix}--list-box__label`}>
             {selectedItem ? itemToString(selectedItem) : label}
           </span>
@@ -262,7 +263,7 @@ Dropdown.propTypes = {
   /**
    * Message which is displayed if the value is invalid.
    */
-  invalidText: PropTypes.string,
+  invalidText: PropTypes.node,
 
   /**
    * Function to render items as custom components instead of strings.
@@ -334,7 +335,7 @@ Dropdown.propTypes = {
   /**
    * Provide the text that is displayed when the control is in warning state
    */
-  warnText: PropTypes.string,
+  warnText: PropTypes.node,
 };
 
 Dropdown.defaultProps = {

@@ -36,6 +36,11 @@ export default class Tabs extends React.Component {
     hidden: PropTypes.bool,
 
     /**
+     * Provide the props that describe the left overflow button
+     */
+    leftOverflowButtonProps: PropTypes.object,
+
+    /**
      * Specify whether or not to use the light component variant
      */
     light: PropTypes.bool,
@@ -60,6 +65,17 @@ export default class Tabs extends React.Component {
     onSelectionChange: PropTypes.func,
 
     /**
+     * Provide the props that describe the right overflow button
+     */
+    rightOverflowButtonProps: PropTypes.object,
+
+    /**
+     * Choose whether or not to automatically scroll to newly selected tabs
+     * on component rerender
+     */
+    scrollIntoView: PropTypes.bool,
+
+    /**
      * Optionally provide an index for the currently selected <Tab>
      */
     selected: PropTypes.number,
@@ -82,6 +98,7 @@ export default class Tabs extends React.Component {
 
   static defaultProps = {
     type: 'default',
+    scrollIntoView: true,
     selected: 0,
     selectionMode: 'automatic',
   };
@@ -205,7 +222,7 @@ export default class Tabs extends React.Component {
       });
     }
 
-    if (prevState.selected !== selected) {
+    if (this.props.scrollIntoView && prevState.selected !== selected) {
       this.getTabAt(selected)?.tabAnchor?.scrollIntoView({
         block: 'nearest',
         inline: 'nearest',
@@ -379,8 +396,11 @@ export default class Tabs extends React.Component {
       type,
       light,
       onSelectionChange,
+      scrollIntoView, // eslint-disable-line no-unused-vars
       selectionMode, // eslint-disable-line no-unused-vars
       tabContentClassName,
+      leftOverflowButtonProps,
+      rightOverflowButtonProps,
       ...other
     } = this.props;
 
@@ -471,6 +491,7 @@ export default class Tabs extends React.Component {
         <div {...other} className={classes.tabs} onScroll={this.handleScroll}>
           <button
             aria-hidden="true"
+            aria-label="Scroll left"
             className={classes.leftOverflowButtonClasses}
             onClick={(_) => this.handleOverflowNavClick(_, { direction: -1 })}
             onMouseDown={(event) =>
@@ -479,7 +500,8 @@ export default class Tabs extends React.Component {
             onMouseUp={this.handleOverflowNavMouseUp}
             ref={this.leftOverflowNavButton}
             tabIndex="-1"
-            type="button">
+            type="button"
+            {...leftOverflowButtonProps}>
             <ChevronLeft16 />
           </button>
           {!leftOverflowNavButtonHidden && (
@@ -497,6 +519,7 @@ export default class Tabs extends React.Component {
           )}
           <button
             aria-hidden="true"
+            aria-label="Scroll right"
             className={classes.rightOverflowButtonClasses}
             onClick={(_) => this.handleOverflowNavClick(_, { direction: 1 })}
             onMouseDown={(event) =>
@@ -505,7 +528,8 @@ export default class Tabs extends React.Component {
             onMouseUp={this.handleOverflowNavMouseUp}
             ref={this.rightOverflowNavButton}
             tabIndex="-1"
-            type="button">
+            type="button"
+            {...rightOverflowButtonProps}>
             <ChevronRight16 />
           </button>
         </div>

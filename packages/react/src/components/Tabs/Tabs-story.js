@@ -43,6 +43,10 @@ const props = {
       'The className for the child `<TabContent>` components',
       'tab-content'
     ),
+    scrollIntoView: boolean(
+      'Scroll to selected tab on component rerender (scrollIntoView)',
+      true
+    ),
     selectionMode: select(
       'Selection mode (selectionMode)',
       selectionModes,
