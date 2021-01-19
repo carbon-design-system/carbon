@@ -44,7 +44,6 @@
     "@babel/preset-env": "^7.10.0",
     "@babel/preset-react": "^7.10.0",
     "@babel/runtime": "^7.10.0",
-    "@carbon/bundler": "workspace:packages/bundler",
     "@carbon/cli": "workspace:packages/cli",
     "@commitlint/cli": "^8.3.5",
     "@commitlint/config-conventional": "^8.3.4",
@@ -65,7 +64,7 @@
     "lerna": "^3.20.2",
     "lint-staged": "^9.5.0",
     "node-gyp": "^7.1.2",
-    "prettier": "^2.1.0",
+    "prettier": "^2.2.1",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
     "rimraf": "^3.0.0",
@@ -146,7 +145,7 @@
     "preset": "jest-config-carbon",
     "collectCoverageFrom": [
       "packages/**/src/**/*.js",
-      "!packages/{bundler,cli,components,sketch}/**",
+      "!packages/{cli,components,sketch}/**",
       "!packages/**/{examples,stories}/**",
       "!**/*-story.js"
     ],
