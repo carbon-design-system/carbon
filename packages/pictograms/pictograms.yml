@@ -1261,7 +1261,7 @@
     - cupcake
     - cake
     - creative
- name: customer--service
+- name: customer--service
   friendly_name: Customer service
   aliases:
     - customer service
