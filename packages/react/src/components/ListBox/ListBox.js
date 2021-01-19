@@ -104,7 +104,7 @@ ListBox.propTypes = {
   /**
    * Specify the text to be displayed when the control is invalid
    */
-  invalidText: PropTypes.string,
+  invalidText: PropTypes.node,
 
   /**
    * Specify if the control should render open
@@ -135,7 +135,7 @@ ListBox.propTypes = {
   /**
    * Provide the text that is displayed when the control is in warning state
    */
-  warnText: PropTypes.string,
+  warnText: PropTypes.node,
 };
 
 ListBox.defaultProps = {

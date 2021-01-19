@@ -148,9 +148,7 @@ export const Example = (props) => {
                 <TableToolbarContent>
                   <TableToolbarSearch onChange={onInputChange} />
                   <TableToolbarMenu>
-                    <TableToolbarAction
-                      primaryFocus
-                      onClick={this.handleOnRowAdd}>
+                    <TableToolbarAction onClick={this.handleOnRowAdd}>
                       Add row
                     </TableToolbarAction>
                     <TableToolbarAction onClick={this.handleOnHeaderAdd}>

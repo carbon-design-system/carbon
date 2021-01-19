@@ -8,7 +8,6 @@
 const chalk = require('chalk');
 const util = require('util');
 const toHaveNoAxeViolations = require('../matchers/toHaveNoAxeViolations');
-const toHaveNoDAPViolations = require('../matchers/toHaveNoDAPViolations');
 const toHaveNoACViolations = require('../matchers/toHaveNoACViolations');
 
 // We can extend `expect` using custom matchers as defined by:
@@ -24,7 +23,6 @@ const toHaveNoACViolations = require('../matchers/toHaveNoACViolations');
 // https://jestjs.io/docs/en/configuration.html#setupfilesafterenv-array
 expect.extend({
   toHaveNoAxeViolations,
-  toHaveNoDAPViolations,
   toHaveNoACViolations,
 });
 
