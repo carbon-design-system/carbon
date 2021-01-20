@@ -2306,6 +2306,9 @@ Map {
         ],
         "type": "oneOfType",
       },
+      "hideLabel": Object {
+        "type": "bool",
+      },
       "id": Object {
         "isRequired": true,
         "type": "string",
