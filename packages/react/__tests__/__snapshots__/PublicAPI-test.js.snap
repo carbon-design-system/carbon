@@ -356,6 +356,9 @@ Map {
       "copyLabel": Object {
         "type": "string",
       },
+      "disabled": Object {
+        "type": "bool",
+      },
       "feedback": Object {
         "type": "string",
       },
@@ -5098,6 +5101,9 @@ Map {
       "hidden": Object {
         "type": "bool",
       },
+      "leftOverflowButtonProps": Object {
+        "type": "object",
+      },
       "light": Object {
         "type": "bool",
       },
@@ -5109,6 +5115,9 @@ Map {
       },
       "onSelectionChange": Object {
         "type": "func",
+      },
+      "rightOverflowButtonProps": Object {
+        "type": "object",
       },
       "scrollIntoView": Object {
         "type": "bool",
@@ -5158,6 +5167,19 @@ Map {
       },
       "onClose": Object {
         "type": "func",
+      },
+      "renderIcon": Object {
+        "args": Array [
+          Array [
+            Object {
+              "type": "func",
+            },
+            Object {
+              "type": "object",
+            },
+          ],
+        ],
+        "type": "oneOfType",
       },
       "title": Object {
         "type": "string",
@@ -5739,7 +5761,13 @@ Map {
       "tileCollapsedIconText": Object {
         "type": "string",
       },
+      "tileCollapsedLabel": Object {
+        "type": "string",
+      },
       "tileExpandedIconText": Object {
+        "type": "string",
+      },
+      "tileExpandedLabel": Object {
         "type": "string",
       },
     },
