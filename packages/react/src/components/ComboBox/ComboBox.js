@@ -114,7 +114,7 @@ export default class ComboBox extends React.Component {
     /**
      * Message which is displayed if the value is invalid.
      */
-    invalidText: PropTypes.string,
+    invalidText: PropTypes.node,
 
     /**
      * Optional function to render items as custom components instead of strings.

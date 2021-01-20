@@ -39,13 +39,6 @@
 
     &:focus {
       @include focus-outline('outline');
-
-      // Windows, Firefox HCM Fix
-      @media screen and (-ms-high-contrast: active),
-        screen and (prefers-contrast) {
-        outline: 3px solid transparent;
-        outline-offset: -3px;
-      }
     }
 
     &:hover {
@@ -274,13 +267,6 @@
 
     &:focus {
       @include focus-outline('outline');
-
-      // Windows, Firefox HCM Fix
-      @media screen and (-ms-high-contrast: active),
-        screen and (prefers-contrast) {
-        outline: 3px solid transparent;
-        outline-offset: -3px;
-      }
     }
 
     &::-moz-focus-inner {
@@ -320,10 +306,10 @@
   .#{$prefix}--overflow-menu-options__option--danger
     .#{$prefix}--overflow-menu-options__btn:focus {
     color: $text-04;
-    background-color: $support-01;
+    background-color: $danger-01;
 
     svg {
-      fill: $text-04;
+      fill: currentColor;
     }
   }
 

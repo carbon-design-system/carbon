@@ -11,6 +11,118 @@
 - [@carbon/colors](#carboncolors)
   - [✅⚠️ibm--colors [mixin]](#ibm--colors-mixin)
   - [✅carbon--colors [mixin]](#carbon--colors-mixin)
+  - [✅black [variable]](#black-variable)
+  - [✅white [variable]](#white-variable)
+  - [✅black-100 [variable]](#black-100-variable)
+  - [✅blue-10 [variable]](#blue-10-variable)
+  - [✅blue-20 [variable]](#blue-20-variable)
+  - [✅blue-30 [variable]](#blue-30-variable)
+  - [✅blue-40 [variable]](#blue-40-variable)
+  - [✅blue-50 [variable]](#blue-50-variable)
+  - [✅blue-60 [variable]](#blue-60-variable)
+  - [✅blue-70 [variable]](#blue-70-variable)
+  - [✅blue-80 [variable]](#blue-80-variable)
+  - [✅blue-90 [variable]](#blue-90-variable)
+  - [✅blue-100 [variable]](#blue-100-variable)
+  - [✅cool-gray-10 [variable]](#cool-gray-10-variable)
+  - [✅cool-gray-20 [variable]](#cool-gray-20-variable)
+  - [✅cool-gray-30 [variable]](#cool-gray-30-variable)
+  - [✅cool-gray-40 [variable]](#cool-gray-40-variable)
+  - [✅cool-gray-50 [variable]](#cool-gray-50-variable)
+  - [✅cool-gray-60 [variable]](#cool-gray-60-variable)
+  - [✅cool-gray-70 [variable]](#cool-gray-70-variable)
+  - [✅cool-gray-80 [variable]](#cool-gray-80-variable)
+  - [✅cool-gray-90 [variable]](#cool-gray-90-variable)
+  - [✅cool-gray-100 [variable]](#cool-gray-100-variable)
+  - [✅cyan-10 [variable]](#cyan-10-variable)
+  - [✅cyan-20 [variable]](#cyan-20-variable)
+  - [✅cyan-30 [variable]](#cyan-30-variable)
+  - [✅cyan-40 [variable]](#cyan-40-variable)
+  - [✅cyan-50 [variable]](#cyan-50-variable)
+  - [✅cyan-60 [variable]](#cyan-60-variable)
+  - [✅cyan-70 [variable]](#cyan-70-variable)
+  - [✅cyan-80 [variable]](#cyan-80-variable)
+  - [✅cyan-90 [variable]](#cyan-90-variable)
+  - [✅cyan-100 [variable]](#cyan-100-variable)
+  - [✅gray-10 [variable]](#gray-10-variable)
+  - [✅gray-20 [variable]](#gray-20-variable)
+  - [✅gray-30 [variable]](#gray-30-variable)
+  - [✅gray-40 [variable]](#gray-40-variable)
+  - [✅gray-50 [variable]](#gray-50-variable)
+  - [✅gray-60 [variable]](#gray-60-variable)
+  - [✅gray-70 [variable]](#gray-70-variable)
+  - [✅gray-80 [variable]](#gray-80-variable)
+  - [✅gray-90 [variable]](#gray-90-variable)
+  - [✅gray-100 [variable]](#gray-100-variable)
+  - [✅green-10 [variable]](#green-10-variable)
+  - [✅green-20 [variable]](#green-20-variable)
+  - [✅green-30 [variable]](#green-30-variable)
+  - [✅green-40 [variable]](#green-40-variable)
+  - [✅green-50 [variable]](#green-50-variable)
+  - [✅green-60 [variable]](#green-60-variable)
+  - [✅green-70 [variable]](#green-70-variable)
+  - [✅green-80 [variable]](#green-80-variable)
+  - [✅green-90 [variable]](#green-90-variable)
+  - [✅green-100 [variable]](#green-100-variable)
+  - [✅magenta-10 [variable]](#magenta-10-variable)
+  - [✅magenta-20 [variable]](#magenta-20-variable)
+  - [✅magenta-30 [variable]](#magenta-30-variable)
+  - [✅magenta-40 [variable]](#magenta-40-variable)
+  - [✅magenta-50 [variable]](#magenta-50-variable)
+  - [✅magenta-60 [variable]](#magenta-60-variable)
+  - [✅magenta-70 [variable]](#magenta-70-variable)
+  - [✅magenta-80 [variable]](#magenta-80-variable)
+  - [✅magenta-90 [variable]](#magenta-90-variable)
+  - [✅magenta-100 [variable]](#magenta-100-variable)
+  - [✅orange-40 [variable]](#orange-40-variable)
+  - [✅orange-60 [variable]](#orange-60-variable)
+  - [✅orange-70 [variable]](#orange-70-variable)
+  - [✅purple-10 [variable]](#purple-10-variable)
+  - [✅purple-20 [variable]](#purple-20-variable)
+  - [✅purple-30 [variable]](#purple-30-variable)
+  - [✅purple-40 [variable]](#purple-40-variable)
+  - [✅purple-50 [variable]](#purple-50-variable)
+  - [✅purple-60 [variable]](#purple-60-variable)
+  - [✅purple-70 [variable]](#purple-70-variable)
+  - [✅purple-80 [variable]](#purple-80-variable)
+  - [✅purple-90 [variable]](#purple-90-variable)
+  - [✅purple-100 [variable]](#purple-100-variable)
+  - [✅red-10 [variable]](#red-10-variable)
+  - [✅red-20 [variable]](#red-20-variable)
+  - [✅red-30 [variable]](#red-30-variable)
+  - [✅red-40 [variable]](#red-40-variable)
+  - [✅red-50 [variable]](#red-50-variable)
+  - [✅red-60 [variable]](#red-60-variable)
+  - [✅red-70 [variable]](#red-70-variable)
+  - [✅red-80 [variable]](#red-80-variable)
+  - [✅red-90 [variable]](#red-90-variable)
+  - [✅red-100 [variable]](#red-100-variable)
+  - [✅teal-10 [variable]](#teal-10-variable)
+  - [✅teal-20 [variable]](#teal-20-variable)
+  - [✅teal-30 [variable]](#teal-30-variable)
+  - [✅teal-40 [variable]](#teal-40-variable)
+  - [✅teal-50 [variable]](#teal-50-variable)
+  - [✅teal-60 [variable]](#teal-60-variable)
+  - [✅teal-70 [variable]](#teal-70-variable)
+  - [✅teal-80 [variable]](#teal-80-variable)
+  - [✅teal-90 [variable]](#teal-90-variable)
+  - [✅teal-100 [variable]](#teal-100-variable)
+  - [✅warm-gray-10 [variable]](#warm-gray-10-variable)
+  - [✅warm-gray-20 [variable]](#warm-gray-20-variable)
+  - [✅warm-gray-30 [variable]](#warm-gray-30-variable)
+  - [✅warm-gray-40 [variable]](#warm-gray-40-variable)
+  - [✅warm-gray-50 [variable]](#warm-gray-50-variable)
+  - [✅warm-gray-60 [variable]](#warm-gray-60-variable)
+  - [✅warm-gray-70 [variable]](#warm-gray-70-variable)
+  - [✅warm-gray-80 [variable]](#warm-gray-80-variable)
+  - [✅warm-gray-90 [variable]](#warm-gray-90-variable)
+  - [✅warm-gray-100 [variable]](#warm-gray-100-variable)
+  - [✅white-0 [variable]](#white-0-variable)
+  - [✅yellow-20 [variable]](#yellow-20-variable)
+  - [✅yellow-30 [variable]](#yellow-30-variable)
+  - [✅yellow-40 [variable]](#yellow-40-variable)
+  - [✅yellow-50 [variable]](#yellow-50-variable)
+  - [✅colors [variable]](#colors-variable)
 - [@carbon/grid](#carbongrid)
   - [✅carbon--12-column-grid [variable]](#carbon--12-column-grid-variable)
   - [❌carbon--make-col-ready [mixin]](#carbon--make-col-ready-mixin)
@@ -182,10 +294,12 @@
   - [✅hover-tertiary [variable]](#hover-tertiary-variable)
   - [✅active-tertiary [variable]](#active-tertiary-variable)
   - [✅hover-ui [variable]](#hover-ui-variable)
+  - [✅hover-light-ui [variable]](#hover-light-ui-variable)
+  - [✅hover-selected-ui [variable]](#hover-selected-ui-variable)
   - [✅active-ui [variable]](#active-ui-variable)
+  - [✅active-light-ui [variable]](#active-light-ui-variable)
   - [✅selected-ui [variable]](#selected-ui-variable)
   - [✅selected-light-ui [variable]](#selected-light-ui-variable)
-  - [✅hover-selected-ui [variable]](#hover-selected-ui-variable)
   - [✅inverse-hover-ui [variable]](#inverse-hover-ui-variable)
   - [✅hover-danger [variable]](#hover-danger-variable)
   - [✅active-danger [variable]](#active-danger-variable)
@@ -196,7 +310,6 @@
   - [✅disabled-03 [variable]](#disabled-03-variable)
   - [✅highlight [variable]](#highlight-variable)
   - [✅decorative-01 [variable]](#decorative-01-variable)
-  - [✅hover-light-ui [variable]](#hover-light-ui-variable)
   - [✅button-separator [variable]](#button-separator-variable)
   - [✅skeleton-01 [variable]](#skeleton-01-variable)
   - [✅skeleton-02 [variable]](#skeleton-02-variable)
@@ -1171,6 +1284,2152 @@ Define color variables
     ),
   ) !default !global;
 }
+```
+
+</details>
+
+- **Group**: [@carbon/colors](#carboncolors)
+- **Requires**:
+  - [black-100 [variable]](#black-100-variable)
+  - [blue-10 [variable]](#blue-10-variable)
+  - [blue-20 [variable]](#blue-20-variable)
+  - [blue-30 [variable]](#blue-30-variable)
+  - [blue-40 [variable]](#blue-40-variable)
+  - [blue-50 [variable]](#blue-50-variable)
+  - [blue-60 [variable]](#blue-60-variable)
+  - [blue-70 [variable]](#blue-70-variable)
+  - [blue-80 [variable]](#blue-80-variable)
+  - [blue-90 [variable]](#blue-90-variable)
+  - [blue-100 [variable]](#blue-100-variable)
+  - [cool-gray-10 [variable]](#cool-gray-10-variable)
+  - [cool-gray-20 [variable]](#cool-gray-20-variable)
+  - [cool-gray-30 [variable]](#cool-gray-30-variable)
+  - [cool-gray-40 [variable]](#cool-gray-40-variable)
+  - [cool-gray-50 [variable]](#cool-gray-50-variable)
+  - [cool-gray-60 [variable]](#cool-gray-60-variable)
+  - [cool-gray-70 [variable]](#cool-gray-70-variable)
+  - [cool-gray-80 [variable]](#cool-gray-80-variable)
+  - [cool-gray-90 [variable]](#cool-gray-90-variable)
+  - [cool-gray-100 [variable]](#cool-gray-100-variable)
+  - [cyan-10 [variable]](#cyan-10-variable)
+  - [cyan-20 [variable]](#cyan-20-variable)
+  - [cyan-30 [variable]](#cyan-30-variable)
+  - [cyan-40 [variable]](#cyan-40-variable)
+  - [cyan-50 [variable]](#cyan-50-variable)
+  - [cyan-60 [variable]](#cyan-60-variable)
+  - [cyan-70 [variable]](#cyan-70-variable)
+  - [cyan-80 [variable]](#cyan-80-variable)
+  - [cyan-90 [variable]](#cyan-90-variable)
+  - [cyan-100 [variable]](#cyan-100-variable)
+  - [gray-10 [variable]](#gray-10-variable)
+  - [gray-20 [variable]](#gray-20-variable)
+  - [gray-30 [variable]](#gray-30-variable)
+  - [gray-40 [variable]](#gray-40-variable)
+  - [gray-50 [variable]](#gray-50-variable)
+  - [gray-60 [variable]](#gray-60-variable)
+  - [gray-70 [variable]](#gray-70-variable)
+  - [gray-80 [variable]](#gray-80-variable)
+  - [gray-90 [variable]](#gray-90-variable)
+  - [gray-100 [variable]](#gray-100-variable)
+  - [green-10 [variable]](#green-10-variable)
+  - [green-20 [variable]](#green-20-variable)
+  - [green-30 [variable]](#green-30-variable)
+  - [green-40 [variable]](#green-40-variable)
+  - [green-50 [variable]](#green-50-variable)
+  - [green-60 [variable]](#green-60-variable)
+  - [green-70 [variable]](#green-70-variable)
+  - [green-80 [variable]](#green-80-variable)
+  - [green-90 [variable]](#green-90-variable)
+  - [green-100 [variable]](#green-100-variable)
+  - [magenta-10 [variable]](#magenta-10-variable)
+  - [magenta-20 [variable]](#magenta-20-variable)
+  - [magenta-30 [variable]](#magenta-30-variable)
+  - [magenta-40 [variable]](#magenta-40-variable)
+  - [magenta-50 [variable]](#magenta-50-variable)
+  - [magenta-60 [variable]](#magenta-60-variable)
+  - [magenta-70 [variable]](#magenta-70-variable)
+  - [magenta-80 [variable]](#magenta-80-variable)
+  - [magenta-90 [variable]](#magenta-90-variable)
+  - [magenta-100 [variable]](#magenta-100-variable)
+  - [orange-40 [variable]](#orange-40-variable)
+  - [orange-60 [variable]](#orange-60-variable)
+  - [orange-70 [variable]](#orange-70-variable)
+  - [purple-10 [variable]](#purple-10-variable)
+  - [purple-20 [variable]](#purple-20-variable)
+  - [purple-30 [variable]](#purple-30-variable)
+  - [purple-40 [variable]](#purple-40-variable)
+  - [purple-50 [variable]](#purple-50-variable)
+  - [purple-60 [variable]](#purple-60-variable)
+  - [purple-70 [variable]](#purple-70-variable)
+  - [purple-80 [variable]](#purple-80-variable)
+  - [purple-90 [variable]](#purple-90-variable)
+  - [purple-100 [variable]](#purple-100-variable)
+  - [red-10 [variable]](#red-10-variable)
+  - [red-20 [variable]](#red-20-variable)
+  - [red-30 [variable]](#red-30-variable)
+  - [red-40 [variable]](#red-40-variable)
+  - [red-50 [variable]](#red-50-variable)
+  - [red-60 [variable]](#red-60-variable)
+  - [red-70 [variable]](#red-70-variable)
+  - [red-80 [variable]](#red-80-variable)
+  - [red-90 [variable]](#red-90-variable)
+  - [red-100 [variable]](#red-100-variable)
+  - [teal-10 [variable]](#teal-10-variable)
+  - [teal-20 [variable]](#teal-20-variable)
+  - [teal-30 [variable]](#teal-30-variable)
+  - [teal-40 [variable]](#teal-40-variable)
+  - [teal-50 [variable]](#teal-50-variable)
+  - [teal-60 [variable]](#teal-60-variable)
+  - [teal-70 [variable]](#teal-70-variable)
+  - [teal-80 [variable]](#teal-80-variable)
+  - [teal-90 [variable]](#teal-90-variable)
+  - [teal-100 [variable]](#teal-100-variable)
+  - [warm-gray-10 [variable]](#warm-gray-10-variable)
+  - [warm-gray-20 [variable]](#warm-gray-20-variable)
+  - [warm-gray-30 [variable]](#warm-gray-30-variable)
+  - [warm-gray-40 [variable]](#warm-gray-40-variable)
+  - [warm-gray-50 [variable]](#warm-gray-50-variable)
+  - [warm-gray-60 [variable]](#warm-gray-60-variable)
+  - [warm-gray-70 [variable]](#warm-gray-70-variable)
+  - [warm-gray-80 [variable]](#warm-gray-80-variable)
+  - [warm-gray-90 [variable]](#warm-gray-90-variable)
+  - [warm-gray-100 [variable]](#warm-gray-100-variable)
+  - [white-0 [variable]](#white-0-variable)
+  - [yellow-20 [variable]](#yellow-20-variable)
+  - [yellow-30 [variable]](#yellow-30-variable)
+  - [yellow-40 [variable]](#yellow-40-variable)
+  - [yellow-50 [variable]](#yellow-50-variable)
+
+### ✅black [variable]
+
+Value for black
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$black: #000000;
+```
+
+</details>
+
+- **Group**: [@carbon/colors](#carboncolors)
+
+### ✅white [variable]
+
+Value for white
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$white: #ffffff;
+```
+
+</details>
+
+- **Group**: [@carbon/colors](#carboncolors)
+
+### ✅black-100 [variable]
+
+Value for black-100 from the IBM Design Language
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$black-100: #000000;
+```
+
+</details>
+
+- **Group**: [@carbon/colors](#carboncolors)
+- **Used by**:
+  - [carbon--colors [mixin]](#carbon--colors-mixin)
+
+### ✅blue-10 [variable]
+
+Value for blue-10 from the IBM Design Language
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$blue-10: #edf5ff;
+```
+
+</details>
+
+- **Group**: [@carbon/colors](#carboncolors)
+- **Used by**:
+  - [carbon--colors [mixin]](#carbon--colors-mixin)
+
+### ✅blue-20 [variable]
+
+Value for blue-20 from the IBM Design Language
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$blue-20: #d0e2ff;
+```
+
+</details>
+
+- **Group**: [@carbon/colors](#carboncolors)
+- **Used by**:
+  - [carbon--colors [mixin]](#carbon--colors-mixin)
+
+### ✅blue-30 [variable]
+
+Value for blue-30 from the IBM Design Language
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$blue-30: #a6c8ff;
+```
+
+</details>
+
+- **Group**: [@carbon/colors](#carboncolors)
+- **Used by**:
+  - [carbon--colors [mixin]](#carbon--colors-mixin)
+
+### ✅blue-40 [variable]
+
+Value for blue-40 from the IBM Design Language
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$blue-40: #78a9ff;
+```
+
+</details>
+
+- **Group**: [@carbon/colors](#carboncolors)
+- **Used by**:
+  - [carbon--colors [mixin]](#carbon--colors-mixin)
+
+### ✅blue-50 [variable]
+
+Value for blue-50 from the IBM Design Language
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$blue-50: #4589ff;
+```
+
+</details>
+
+- **Group**: [@carbon/colors](#carboncolors)
+- **Used by**:
+  - [carbon--colors [mixin]](#carbon--colors-mixin)
+
+### ✅blue-60 [variable]
+
+Value for blue-60 from the IBM Design Language
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$blue-60: #0f62fe;
+```
+
+</details>
+
+- **Group**: [@carbon/colors](#carboncolors)
+- **Used by**:
+  - [carbon--colors [mixin]](#carbon--colors-mixin)
+
+### ✅blue-70 [variable]
+
+Value for blue-70 from the IBM Design Language
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$blue-70: #0043ce;
+```
+
+</details>
+
+- **Group**: [@carbon/colors](#carboncolors)
+- **Used by**:
+  - [carbon--colors [mixin]](#carbon--colors-mixin)
+
+### ✅blue-80 [variable]
+
+Value for blue-80 from the IBM Design Language
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$blue-80: #002d9c;
+```
+
+</details>
+
+- **Group**: [@carbon/colors](#carboncolors)
+- **Used by**:
+  - [carbon--colors [mixin]](#carbon--colors-mixin)
+
+### ✅blue-90 [variable]
+
+Value for blue-90 from the IBM Design Language
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$blue-90: #001d6c;
+```
+
+</details>
+
+- **Group**: [@carbon/colors](#carboncolors)
+- **Used by**:
+  - [carbon--colors [mixin]](#carbon--colors-mixin)
+
+### ✅blue-100 [variable]
+
+Value for blue-100 from the IBM Design Language
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$blue-100: #001141;
+```
+
+</details>
+
+- **Group**: [@carbon/colors](#carboncolors)
+- **Used by**:
+  - [carbon--colors [mixin]](#carbon--colors-mixin)
+
+### ✅cool-gray-10 [variable]
+
+Value for cool-gray-10 from the IBM Design Language
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$cool-gray-10: #f2f4f8;
+```
+
+</details>
+
+- **Group**: [@carbon/colors](#carboncolors)
+- **Used by**:
+  - [carbon--colors [mixin]](#carbon--colors-mixin)
+
+### ✅cool-gray-20 [variable]
+
+Value for cool-gray-20 from the IBM Design Language
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$cool-gray-20: #dde1e6;
+```
+
+</details>
+
+- **Group**: [@carbon/colors](#carboncolors)
+- **Used by**:
+  - [carbon--colors [mixin]](#carbon--colors-mixin)
+
+### ✅cool-gray-30 [variable]
+
+Value for cool-gray-30 from the IBM Design Language
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$cool-gray-30: #c1c7cd;
+```
+
+</details>
+
+- **Group**: [@carbon/colors](#carboncolors)
+- **Used by**:
+  - [carbon--colors [mixin]](#carbon--colors-mixin)
+
+### ✅cool-gray-40 [variable]
+
+Value for cool-gray-40 from the IBM Design Language
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$cool-gray-40: #a2a9b0;
+```
+
+</details>
+
+- **Group**: [@carbon/colors](#carboncolors)
+- **Used by**:
+  - [carbon--colors [mixin]](#carbon--colors-mixin)
+
+### ✅cool-gray-50 [variable]
+
+Value for cool-gray-50 from the IBM Design Language
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$cool-gray-50: #878d96;
+```
+
+</details>
+
+- **Group**: [@carbon/colors](#carboncolors)
+- **Used by**:
+  - [carbon--colors [mixin]](#carbon--colors-mixin)
+
+### ✅cool-gray-60 [variable]
+
+Value for cool-gray-60 from the IBM Design Language
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$cool-gray-60: #697077;
+```
+
+</details>
+
+- **Group**: [@carbon/colors](#carboncolors)
+- **Used by**:
+  - [carbon--colors [mixin]](#carbon--colors-mixin)
+
+### ✅cool-gray-70 [variable]
+
+Value for cool-gray-70 from the IBM Design Language
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$cool-gray-70: #4d5358;
+```
+
+</details>
+
+- **Group**: [@carbon/colors](#carboncolors)
+- **Used by**:
+  - [carbon--colors [mixin]](#carbon--colors-mixin)
+
+### ✅cool-gray-80 [variable]
+
+Value for cool-gray-80 from the IBM Design Language
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$cool-gray-80: #343a3f;
+```
+
+</details>
+
+- **Group**: [@carbon/colors](#carboncolors)
+- **Used by**:
+  - [carbon--colors [mixin]](#carbon--colors-mixin)
+
+### ✅cool-gray-90 [variable]
+
+Value for cool-gray-90 from the IBM Design Language
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$cool-gray-90: #21272a;
+```
+
+</details>
+
+- **Group**: [@carbon/colors](#carboncolors)
+- **Used by**:
+  - [carbon--colors [mixin]](#carbon--colors-mixin)
+
+### ✅cool-gray-100 [variable]
+
+Value for cool-gray-100 from the IBM Design Language
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$cool-gray-100: #121619;
+```
+
+</details>
+
+- **Group**: [@carbon/colors](#carboncolors)
+- **Used by**:
+  - [carbon--colors [mixin]](#carbon--colors-mixin)
+
+### ✅cyan-10 [variable]
+
+Value for cyan-10 from the IBM Design Language
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$cyan-10: #e5f6ff;
+```
+
+</details>
+
+- **Group**: [@carbon/colors](#carboncolors)
+- **Used by**:
+  - [carbon--colors [mixin]](#carbon--colors-mixin)
+
+### ✅cyan-20 [variable]
+
+Value for cyan-20 from the IBM Design Language
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$cyan-20: #bae6ff;
+```
+
+</details>
+
+- **Group**: [@carbon/colors](#carboncolors)
+- **Used by**:
+  - [carbon--colors [mixin]](#carbon--colors-mixin)
+
+### ✅cyan-30 [variable]
+
+Value for cyan-30 from the IBM Design Language
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$cyan-30: #82cfff;
+```
+
+</details>
+
+- **Group**: [@carbon/colors](#carboncolors)
+- **Used by**:
+  - [carbon--colors [mixin]](#carbon--colors-mixin)
+
+### ✅cyan-40 [variable]
+
+Value for cyan-40 from the IBM Design Language
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$cyan-40: #33b1ff;
+```
+
+</details>
+
+- **Group**: [@carbon/colors](#carboncolors)
+- **Used by**:
+  - [carbon--colors [mixin]](#carbon--colors-mixin)
+
+### ✅cyan-50 [variable]
+
+Value for cyan-50 from the IBM Design Language
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$cyan-50: #1192e8;
+```
+
+</details>
+
+- **Group**: [@carbon/colors](#carboncolors)
+- **Used by**:
+  - [carbon--colors [mixin]](#carbon--colors-mixin)
+
+### ✅cyan-60 [variable]
+
+Value for cyan-60 from the IBM Design Language
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$cyan-60: #0072c3;
+```
+
+</details>
+
+- **Group**: [@carbon/colors](#carboncolors)
+- **Used by**:
+  - [carbon--colors [mixin]](#carbon--colors-mixin)
+
+### ✅cyan-70 [variable]
+
+Value for cyan-70 from the IBM Design Language
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$cyan-70: #00539a;
+```
+
+</details>
+
+- **Group**: [@carbon/colors](#carboncolors)
+- **Used by**:
+  - [carbon--colors [mixin]](#carbon--colors-mixin)
+
+### ✅cyan-80 [variable]
+
+Value for cyan-80 from the IBM Design Language
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$cyan-80: #003a6d;
+```
+
+</details>
+
+- **Group**: [@carbon/colors](#carboncolors)
+- **Used by**:
+  - [carbon--colors [mixin]](#carbon--colors-mixin)
+
+### ✅cyan-90 [variable]
+
+Value for cyan-90 from the IBM Design Language
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$cyan-90: #012749;
+```
+
+</details>
+
+- **Group**: [@carbon/colors](#carboncolors)
+- **Used by**:
+  - [carbon--colors [mixin]](#carbon--colors-mixin)
+
+### ✅cyan-100 [variable]
+
+Value for cyan-100 from the IBM Design Language
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$cyan-100: #061727;
+```
+
+</details>
+
+- **Group**: [@carbon/colors](#carboncolors)
+- **Used by**:
+  - [carbon--colors [mixin]](#carbon--colors-mixin)
+
+### ✅gray-10 [variable]
+
+Value for gray-10 from the IBM Design Language
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$gray-10: #f4f4f4;
+```
+
+</details>
+
+- **Group**: [@carbon/colors](#carboncolors)
+- **Used by**:
+  - [carbon--colors [mixin]](#carbon--colors-mixin)
+
+### ✅gray-20 [variable]
+
+Value for gray-20 from the IBM Design Language
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$gray-20: #e0e0e0;
+```
+
+</details>
+
+- **Group**: [@carbon/colors](#carboncolors)
+- **Used by**:
+  - [carbon--colors [mixin]](#carbon--colors-mixin)
+
+### ✅gray-30 [variable]
+
+Value for gray-30 from the IBM Design Language
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$gray-30: #c6c6c6;
+```
+
+</details>
+
+- **Group**: [@carbon/colors](#carboncolors)
+- **Used by**:
+  - [carbon--colors [mixin]](#carbon--colors-mixin)
+
+### ✅gray-40 [variable]
+
+Value for gray-40 from the IBM Design Language
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$gray-40: #a8a8a8;
+```
+
+</details>
+
+- **Group**: [@carbon/colors](#carboncolors)
+- **Used by**:
+  - [carbon--colors [mixin]](#carbon--colors-mixin)
+
+### ✅gray-50 [variable]
+
+Value for gray-50 from the IBM Design Language
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$gray-50: #8d8d8d;
+```
+
+</details>
+
+- **Group**: [@carbon/colors](#carboncolors)
+- **Used by**:
+  - [carbon--colors [mixin]](#carbon--colors-mixin)
+
+### ✅gray-60 [variable]
+
+Value for gray-60 from the IBM Design Language
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$gray-60: #6f6f6f;
+```
+
+</details>
+
+- **Group**: [@carbon/colors](#carboncolors)
+- **Used by**:
+  - [carbon--colors [mixin]](#carbon--colors-mixin)
+
+### ✅gray-70 [variable]
+
+Value for gray-70 from the IBM Design Language
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$gray-70: #525252;
+```
+
+</details>
+
+- **Group**: [@carbon/colors](#carboncolors)
+- **Used by**:
+  - [carbon--colors [mixin]](#carbon--colors-mixin)
+
+### ✅gray-80 [variable]
+
+Value for gray-80 from the IBM Design Language
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$gray-80: #393939;
+```
+
+</details>
+
+- **Group**: [@carbon/colors](#carboncolors)
+- **Used by**:
+  - [carbon--colors [mixin]](#carbon--colors-mixin)
+
+### ✅gray-90 [variable]
+
+Value for gray-90 from the IBM Design Language
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$gray-90: #262626;
+```
+
+</details>
+
+- **Group**: [@carbon/colors](#carboncolors)
+- **Used by**:
+  - [carbon--colors [mixin]](#carbon--colors-mixin)
+
+### ✅gray-100 [variable]
+
+Value for gray-100 from the IBM Design Language
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$gray-100: #161616;
+```
+
+</details>
+
+- **Group**: [@carbon/colors](#carboncolors)
+- **Used by**:
+  - [carbon--colors [mixin]](#carbon--colors-mixin)
+
+### ✅green-10 [variable]
+
+Value for green-10 from the IBM Design Language
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$green-10: #defbe6;
+```
+
+</details>
+
+- **Group**: [@carbon/colors](#carboncolors)
+- **Used by**:
+  - [carbon--colors [mixin]](#carbon--colors-mixin)
+
+### ✅green-20 [variable]
+
+Value for green-20 from the IBM Design Language
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$green-20: #a7f0ba;
+```
+
+</details>
+
+- **Group**: [@carbon/colors](#carboncolors)
+- **Used by**:
+  - [carbon--colors [mixin]](#carbon--colors-mixin)
+
+### ✅green-30 [variable]
+
+Value for green-30 from the IBM Design Language
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$green-30: #6fdc8c;
+```
+
+</details>
+
+- **Group**: [@carbon/colors](#carboncolors)
+- **Used by**:
+  - [carbon--colors [mixin]](#carbon--colors-mixin)
+
+### ✅green-40 [variable]
+
+Value for green-40 from the IBM Design Language
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$green-40: #42be65;
+```
+
+</details>
+
+- **Group**: [@carbon/colors](#carboncolors)
+- **Used by**:
+  - [carbon--colors [mixin]](#carbon--colors-mixin)
+
+### ✅green-50 [variable]
+
+Value for green-50 from the IBM Design Language
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$green-50: #24a148;
+```
+
+</details>
+
+- **Group**: [@carbon/colors](#carboncolors)
+- **Used by**:
+  - [carbon--colors [mixin]](#carbon--colors-mixin)
+
+### ✅green-60 [variable]
+
+Value for green-60 from the IBM Design Language
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$green-60: #198038;
+```
+
+</details>
+
+- **Group**: [@carbon/colors](#carboncolors)
+- **Used by**:
+  - [carbon--colors [mixin]](#carbon--colors-mixin)
+
+### ✅green-70 [variable]
+
+Value for green-70 from the IBM Design Language
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$green-70: #0e6027;
+```
+
+</details>
+
+- **Group**: [@carbon/colors](#carboncolors)
+- **Used by**:
+  - [carbon--colors [mixin]](#carbon--colors-mixin)
+
+### ✅green-80 [variable]
+
+Value for green-80 from the IBM Design Language
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$green-80: #044317;
+```
+
+</details>
+
+- **Group**: [@carbon/colors](#carboncolors)
+- **Used by**:
+  - [carbon--colors [mixin]](#carbon--colors-mixin)
+
+### ✅green-90 [variable]
+
+Value for green-90 from the IBM Design Language
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$green-90: #022d0d;
+```
+
+</details>
+
+- **Group**: [@carbon/colors](#carboncolors)
+- **Used by**:
+  - [carbon--colors [mixin]](#carbon--colors-mixin)
+
+### ✅green-100 [variable]
+
+Value for green-100 from the IBM Design Language
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$green-100: #071908;
+```
+
+</details>
+
+- **Group**: [@carbon/colors](#carboncolors)
+- **Used by**:
+  - [carbon--colors [mixin]](#carbon--colors-mixin)
+
+### ✅magenta-10 [variable]
+
+Value for magenta-10 from the IBM Design Language
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$magenta-10: #fff0f7;
+```
+
+</details>
+
+- **Group**: [@carbon/colors](#carboncolors)
+- **Used by**:
+  - [carbon--colors [mixin]](#carbon--colors-mixin)
+
+### ✅magenta-20 [variable]
+
+Value for magenta-20 from the IBM Design Language
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$magenta-20: #ffd6e8;
+```
+
+</details>
+
+- **Group**: [@carbon/colors](#carboncolors)
+- **Used by**:
+  - [carbon--colors [mixin]](#carbon--colors-mixin)
+
+### ✅magenta-30 [variable]
+
+Value for magenta-30 from the IBM Design Language
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$magenta-30: #ffafd2;
+```
+
+</details>
+
+- **Group**: [@carbon/colors](#carboncolors)
+- **Used by**:
+  - [carbon--colors [mixin]](#carbon--colors-mixin)
+
+### ✅magenta-40 [variable]
+
+Value for magenta-40 from the IBM Design Language
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$magenta-40: #ff7eb6;
+```
+
+</details>
+
+- **Group**: [@carbon/colors](#carboncolors)
+- **Used by**:
+  - [carbon--colors [mixin]](#carbon--colors-mixin)
+
+### ✅magenta-50 [variable]
+
+Value for magenta-50 from the IBM Design Language
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$magenta-50: #ee5396;
+```
+
+</details>
+
+- **Group**: [@carbon/colors](#carboncolors)
+- **Used by**:
+  - [carbon--colors [mixin]](#carbon--colors-mixin)
+
+### ✅magenta-60 [variable]
+
+Value for magenta-60 from the IBM Design Language
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$magenta-60: #d02670;
+```
+
+</details>
+
+- **Group**: [@carbon/colors](#carboncolors)
+- **Used by**:
+  - [carbon--colors [mixin]](#carbon--colors-mixin)
+
+### ✅magenta-70 [variable]
+
+Value for magenta-70 from the IBM Design Language
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$magenta-70: #9f1853;
+```
+
+</details>
+
+- **Group**: [@carbon/colors](#carboncolors)
+- **Used by**:
+  - [carbon--colors [mixin]](#carbon--colors-mixin)
+
+### ✅magenta-80 [variable]
+
+Value for magenta-80 from the IBM Design Language
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$magenta-80: #740937;
+```
+
+</details>
+
+- **Group**: [@carbon/colors](#carboncolors)
+- **Used by**:
+  - [carbon--colors [mixin]](#carbon--colors-mixin)
+
+### ✅magenta-90 [variable]
+
+Value for magenta-90 from the IBM Design Language
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$magenta-90: #510224;
+```
+
+</details>
+
+- **Group**: [@carbon/colors](#carboncolors)
+- **Used by**:
+  - [carbon--colors [mixin]](#carbon--colors-mixin)
+
+### ✅magenta-100 [variable]
+
+Value for magenta-100 from the IBM Design Language
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$magenta-100: #2a0a18;
+```
+
+</details>
+
+- **Group**: [@carbon/colors](#carboncolors)
+- **Used by**:
+  - [carbon--colors [mixin]](#carbon--colors-mixin)
+
+### ✅orange-40 [variable]
+
+Value for orange-40 from the IBM Design Language
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$orange-40: #ff832b;
+```
+
+</details>
+
+- **Group**: [@carbon/colors](#carboncolors)
+- **Used by**:
+  - [carbon--colors [mixin]](#carbon--colors-mixin)
+
+### ✅orange-60 [variable]
+
+Value for orange-60 from the IBM Design Language
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$orange-60: #ba4e00;
+```
+
+</details>
+
+- **Group**: [@carbon/colors](#carboncolors)
+- **Used by**:
+  - [carbon--colors [mixin]](#carbon--colors-mixin)
+
+### ✅orange-70 [variable]
+
+Value for orange-70 from the IBM Design Language
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$orange-70: #8a3800;
+```
+
+</details>
+
+- **Group**: [@carbon/colors](#carboncolors)
+- **Used by**:
+  - [carbon--colors [mixin]](#carbon--colors-mixin)
+
+### ✅purple-10 [variable]
+
+Value for purple-10 from the IBM Design Language
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$purple-10: #f6f2ff;
+```
+
+</details>
+
+- **Group**: [@carbon/colors](#carboncolors)
+- **Used by**:
+  - [carbon--colors [mixin]](#carbon--colors-mixin)
+
+### ✅purple-20 [variable]
+
+Value for purple-20 from the IBM Design Language
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$purple-20: #e8daff;
+```
+
+</details>
+
+- **Group**: [@carbon/colors](#carboncolors)
+- **Used by**:
+  - [carbon--colors [mixin]](#carbon--colors-mixin)
+
+### ✅purple-30 [variable]
+
+Value for purple-30 from the IBM Design Language
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$purple-30: #d4bbff;
+```
+
+</details>
+
+- **Group**: [@carbon/colors](#carboncolors)
+- **Used by**:
+  - [carbon--colors [mixin]](#carbon--colors-mixin)
+
+### ✅purple-40 [variable]
+
+Value for purple-40 from the IBM Design Language
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$purple-40: #be95ff;
+```
+
+</details>
+
+- **Group**: [@carbon/colors](#carboncolors)
+- **Used by**:
+  - [carbon--colors [mixin]](#carbon--colors-mixin)
+
+### ✅purple-50 [variable]
+
+Value for purple-50 from the IBM Design Language
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$purple-50: #a56eff;
+```
+
+</details>
+
+- **Group**: [@carbon/colors](#carboncolors)
+- **Used by**:
+  - [carbon--colors [mixin]](#carbon--colors-mixin)
+
+### ✅purple-60 [variable]
+
+Value for purple-60 from the IBM Design Language
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$purple-60: #8a3ffc;
+```
+
+</details>
+
+- **Group**: [@carbon/colors](#carboncolors)
+- **Used by**:
+  - [carbon--colors [mixin]](#carbon--colors-mixin)
+
+### ✅purple-70 [variable]
+
+Value for purple-70 from the IBM Design Language
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$purple-70: #6929c4;
+```
+
+</details>
+
+- **Group**: [@carbon/colors](#carboncolors)
+- **Used by**:
+  - [carbon--colors [mixin]](#carbon--colors-mixin)
+
+### ✅purple-80 [variable]
+
+Value for purple-80 from the IBM Design Language
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$purple-80: #491d8b;
+```
+
+</details>
+
+- **Group**: [@carbon/colors](#carboncolors)
+- **Used by**:
+  - [carbon--colors [mixin]](#carbon--colors-mixin)
+
+### ✅purple-90 [variable]
+
+Value for purple-90 from the IBM Design Language
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$purple-90: #31135e;
+```
+
+</details>
+
+- **Group**: [@carbon/colors](#carboncolors)
+- **Used by**:
+  - [carbon--colors [mixin]](#carbon--colors-mixin)
+
+### ✅purple-100 [variable]
+
+Value for purple-100 from the IBM Design Language
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$purple-100: #1c0f30;
+```
+
+</details>
+
+- **Group**: [@carbon/colors](#carboncolors)
+- **Used by**:
+  - [carbon--colors [mixin]](#carbon--colors-mixin)
+
+### ✅red-10 [variable]
+
+Value for red-10 from the IBM Design Language
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$red-10: #fff1f1;
+```
+
+</details>
+
+- **Group**: [@carbon/colors](#carboncolors)
+- **Used by**:
+  - [carbon--colors [mixin]](#carbon--colors-mixin)
+
+### ✅red-20 [variable]
+
+Value for red-20 from the IBM Design Language
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$red-20: #ffd7d9;
+```
+
+</details>
+
+- **Group**: [@carbon/colors](#carboncolors)
+- **Used by**:
+  - [carbon--colors [mixin]](#carbon--colors-mixin)
+
+### ✅red-30 [variable]
+
+Value for red-30 from the IBM Design Language
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$red-30: #ffb3b8;
+```
+
+</details>
+
+- **Group**: [@carbon/colors](#carboncolors)
+- **Used by**:
+  - [carbon--colors [mixin]](#carbon--colors-mixin)
+
+### ✅red-40 [variable]
+
+Value for red-40 from the IBM Design Language
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$red-40: #ff8389;
+```
+
+</details>
+
+- **Group**: [@carbon/colors](#carboncolors)
+- **Used by**:
+  - [carbon--colors [mixin]](#carbon--colors-mixin)
+
+### ✅red-50 [variable]
+
+Value for red-50 from the IBM Design Language
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$red-50: #fa4d56;
+```
+
+</details>
+
+- **Group**: [@carbon/colors](#carboncolors)
+- **Used by**:
+  - [carbon--colors [mixin]](#carbon--colors-mixin)
+
+### ✅red-60 [variable]
+
+Value for red-60 from the IBM Design Language
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$red-60: #da1e28;
+```
+
+</details>
+
+- **Group**: [@carbon/colors](#carboncolors)
+- **Used by**:
+  - [carbon--colors [mixin]](#carbon--colors-mixin)
+
+### ✅red-70 [variable]
+
+Value for red-70 from the IBM Design Language
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$red-70: #a2191f;
+```
+
+</details>
+
+- **Group**: [@carbon/colors](#carboncolors)
+- **Used by**:
+  - [carbon--colors [mixin]](#carbon--colors-mixin)
+
+### ✅red-80 [variable]
+
+Value for red-80 from the IBM Design Language
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$red-80: #750e13;
+```
+
+</details>
+
+- **Group**: [@carbon/colors](#carboncolors)
+- **Used by**:
+  - [carbon--colors [mixin]](#carbon--colors-mixin)
+
+### ✅red-90 [variable]
+
+Value for red-90 from the IBM Design Language
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$red-90: #520408;
+```
+
+</details>
+
+- **Group**: [@carbon/colors](#carboncolors)
+- **Used by**:
+  - [carbon--colors [mixin]](#carbon--colors-mixin)
+
+### ✅red-100 [variable]
+
+Value for red-100 from the IBM Design Language
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$red-100: #2d0709;
+```
+
+</details>
+
+- **Group**: [@carbon/colors](#carboncolors)
+- **Used by**:
+  - [carbon--colors [mixin]](#carbon--colors-mixin)
+
+### ✅teal-10 [variable]
+
+Value for teal-10 from the IBM Design Language
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$teal-10: #d9fbfb;
+```
+
+</details>
+
+- **Group**: [@carbon/colors](#carboncolors)
+- **Used by**:
+  - [carbon--colors [mixin]](#carbon--colors-mixin)
+
+### ✅teal-20 [variable]
+
+Value for teal-20 from the IBM Design Language
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$teal-20: #9ef0f0;
+```
+
+</details>
+
+- **Group**: [@carbon/colors](#carboncolors)
+- **Used by**:
+  - [carbon--colors [mixin]](#carbon--colors-mixin)
+
+### ✅teal-30 [variable]
+
+Value for teal-30 from the IBM Design Language
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$teal-30: #3ddbd9;
+```
+
+</details>
+
+- **Group**: [@carbon/colors](#carboncolors)
+- **Used by**:
+  - [carbon--colors [mixin]](#carbon--colors-mixin)
+
+### ✅teal-40 [variable]
+
+Value for teal-40 from the IBM Design Language
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$teal-40: #08bdba;
+```
+
+</details>
+
+- **Group**: [@carbon/colors](#carboncolors)
+- **Used by**:
+  - [carbon--colors [mixin]](#carbon--colors-mixin)
+
+### ✅teal-50 [variable]
+
+Value for teal-50 from the IBM Design Language
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$teal-50: #009d9a;
+```
+
+</details>
+
+- **Group**: [@carbon/colors](#carboncolors)
+- **Used by**:
+  - [carbon--colors [mixin]](#carbon--colors-mixin)
+
+### ✅teal-60 [variable]
+
+Value for teal-60 from the IBM Design Language
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$teal-60: #007d79;
+```
+
+</details>
+
+- **Group**: [@carbon/colors](#carboncolors)
+- **Used by**:
+  - [carbon--colors [mixin]](#carbon--colors-mixin)
+
+### ✅teal-70 [variable]
+
+Value for teal-70 from the IBM Design Language
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$teal-70: #005d5d;
+```
+
+</details>
+
+- **Group**: [@carbon/colors](#carboncolors)
+- **Used by**:
+  - [carbon--colors [mixin]](#carbon--colors-mixin)
+
+### ✅teal-80 [variable]
+
+Value for teal-80 from the IBM Design Language
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$teal-80: #004144;
+```
+
+</details>
+
+- **Group**: [@carbon/colors](#carboncolors)
+- **Used by**:
+  - [carbon--colors [mixin]](#carbon--colors-mixin)
+
+### ✅teal-90 [variable]
+
+Value for teal-90 from the IBM Design Language
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$teal-90: #022b30;
+```
+
+</details>
+
+- **Group**: [@carbon/colors](#carboncolors)
+- **Used by**:
+  - [carbon--colors [mixin]](#carbon--colors-mixin)
+
+### ✅teal-100 [variable]
+
+Value for teal-100 from the IBM Design Language
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$teal-100: #081a1c;
+```
+
+</details>
+
+- **Group**: [@carbon/colors](#carboncolors)
+- **Used by**:
+  - [carbon--colors [mixin]](#carbon--colors-mixin)
+
+### ✅warm-gray-10 [variable]
+
+Value for warm-gray-10 from the IBM Design Language
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$warm-gray-10: #f7f3f2;
+```
+
+</details>
+
+- **Group**: [@carbon/colors](#carboncolors)
+- **Used by**:
+  - [carbon--colors [mixin]](#carbon--colors-mixin)
+
+### ✅warm-gray-20 [variable]
+
+Value for warm-gray-20 from the IBM Design Language
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$warm-gray-20: #e5e0df;
+```
+
+</details>
+
+- **Group**: [@carbon/colors](#carboncolors)
+- **Used by**:
+  - [carbon--colors [mixin]](#carbon--colors-mixin)
+
+### ✅warm-gray-30 [variable]
+
+Value for warm-gray-30 from the IBM Design Language
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$warm-gray-30: #cac5c4;
+```
+
+</details>
+
+- **Group**: [@carbon/colors](#carboncolors)
+- **Used by**:
+  - [carbon--colors [mixin]](#carbon--colors-mixin)
+
+### ✅warm-gray-40 [variable]
+
+Value for warm-gray-40 from the IBM Design Language
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$warm-gray-40: #ada8a8;
+```
+
+</details>
+
+- **Group**: [@carbon/colors](#carboncolors)
+- **Used by**:
+  - [carbon--colors [mixin]](#carbon--colors-mixin)
+
+### ✅warm-gray-50 [variable]
+
+Value for warm-gray-50 from the IBM Design Language
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$warm-gray-50: #8f8b8b;
+```
+
+</details>
+
+- **Group**: [@carbon/colors](#carboncolors)
+- **Used by**:
+  - [carbon--colors [mixin]](#carbon--colors-mixin)
+
+### ✅warm-gray-60 [variable]
+
+Value for warm-gray-60 from the IBM Design Language
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$warm-gray-60: #726e6e;
+```
+
+</details>
+
+- **Group**: [@carbon/colors](#carboncolors)
+- **Used by**:
+  - [carbon--colors [mixin]](#carbon--colors-mixin)
+
+### ✅warm-gray-70 [variable]
+
+Value for warm-gray-70 from the IBM Design Language
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$warm-gray-70: #565151;
+```
+
+</details>
+
+- **Group**: [@carbon/colors](#carboncolors)
+- **Used by**:
+  - [carbon--colors [mixin]](#carbon--colors-mixin)
+
+### ✅warm-gray-80 [variable]
+
+Value for warm-gray-80 from the IBM Design Language
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$warm-gray-80: #3c3838;
+```
+
+</details>
+
+- **Group**: [@carbon/colors](#carboncolors)
+- **Used by**:
+  - [carbon--colors [mixin]](#carbon--colors-mixin)
+
+### ✅warm-gray-90 [variable]
+
+Value for warm-gray-90 from the IBM Design Language
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$warm-gray-90: #272525;
+```
+
+</details>
+
+- **Group**: [@carbon/colors](#carboncolors)
+- **Used by**:
+  - [carbon--colors [mixin]](#carbon--colors-mixin)
+
+### ✅warm-gray-100 [variable]
+
+Value for warm-gray-100 from the IBM Design Language
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$warm-gray-100: #171414;
+```
+
+</details>
+
+- **Group**: [@carbon/colors](#carboncolors)
+- **Used by**:
+  - [carbon--colors [mixin]](#carbon--colors-mixin)
+
+### ✅white-0 [variable]
+
+Value for white-0 from the IBM Design Language
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$white-0: #ffffff;
+```
+
+</details>
+
+- **Group**: [@carbon/colors](#carboncolors)
+- **Used by**:
+  - [carbon--colors [mixin]](#carbon--colors-mixin)
+
+### ✅yellow-20 [variable]
+
+Value for yellow-20 from the IBM Design Language
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$yellow-20: #fdd13a;
+```
+
+</details>
+
+- **Group**: [@carbon/colors](#carboncolors)
+- **Used by**:
+  - [carbon--colors [mixin]](#carbon--colors-mixin)
+
+### ✅yellow-30 [variable]
+
+Value for yellow-30 from the IBM Design Language
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$yellow-30: #f1c21b;
+```
+
+</details>
+
+- **Group**: [@carbon/colors](#carboncolors)
+- **Used by**:
+  - [carbon--colors [mixin]](#carbon--colors-mixin)
+
+### ✅yellow-40 [variable]
+
+Value for yellow-40 from the IBM Design Language
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$yellow-40: #d2a106;
+```
+
+</details>
+
+- **Group**: [@carbon/colors](#carboncolors)
+- **Used by**:
+  - [carbon--colors [mixin]](#carbon--colors-mixin)
+
+### ✅yellow-50 [variable]
+
+Value for yellow-50 from the IBM Design Language
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$yellow-50: #b28600;
+```
+
+</details>
+
+- **Group**: [@carbon/colors](#carboncolors)
+- **Used by**:
+  - [carbon--colors [mixin]](#carbon--colors-mixin)
+
+### ✅colors [variable]
+
+Colors from the IBM Design Language
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$colors: (
+  black: (
+    100: #000000,
+  ),
+  blue: (
+    10: #edf5ff,
+    20: #d0e2ff,
+    30: #a6c8ff,
+    40: #78a9ff,
+    50: #4589ff,
+    60: #0f62fe,
+    70: #0043ce,
+    80: #002d9c,
+    90: #001d6c,
+    100: #001141,
+  ),
+  cool-gray: (
+    10: #f2f4f8,
+    20: #dde1e6,
+    30: #c1c7cd,
+    40: #a2a9b0,
+    50: #878d96,
+    60: #697077,
+    70: #4d5358,
+    80: #343a3f,
+    90: #21272a,
+    100: #121619,
+  ),
+  cyan: (
+    10: #e5f6ff,
+    20: #bae6ff,
+    30: #82cfff,
+    40: #33b1ff,
+    50: #1192e8,
+    60: #0072c3,
+    70: #00539a,
+    80: #003a6d,
+    90: #012749,
+    100: #061727,
+  ),
+  gray: (
+    10: #f4f4f4,
+    20: #e0e0e0,
+    30: #c6c6c6,
+    40: #a8a8a8,
+    50: #8d8d8d,
+    60: #6f6f6f,
+    70: #525252,
+    80: #393939,
+    90: #262626,
+    100: #161616,
+  ),
+  green: (
+    10: #defbe6,
+    20: #a7f0ba,
+    30: #6fdc8c,
+    40: #42be65,
+    50: #24a148,
+    60: #198038,
+    70: #0e6027,
+    80: #044317,
+    90: #022d0d,
+    100: #071908,
+  ),
+  magenta: (
+    10: #fff0f7,
+    20: #ffd6e8,
+    30: #ffafd2,
+    40: #ff7eb6,
+    50: #ee5396,
+    60: #d02670,
+    70: #9f1853,
+    80: #740937,
+    90: #510224,
+    100: #2a0a18,
+  ),
+  orange: (
+    40: #ff832b,
+    60: #ba4e00,
+    70: #8a3800,
+  ),
+  purple: (
+    10: #f6f2ff,
+    20: #e8daff,
+    30: #d4bbff,
+    40: #be95ff,
+    50: #a56eff,
+    60: #8a3ffc,
+    70: #6929c4,
+    80: #491d8b,
+    90: #31135e,
+    100: #1c0f30,
+  ),
+  red: (
+    10: #fff1f1,
+    20: #ffd7d9,
+    30: #ffb3b8,
+    40: #ff8389,
+    50: #fa4d56,
+    60: #da1e28,
+    70: #a2191f,
+    80: #750e13,
+    90: #520408,
+    100: #2d0709,
+  ),
+  teal: (
+    10: #d9fbfb,
+    20: #9ef0f0,
+    30: #3ddbd9,
+    40: #08bdba,
+    50: #009d9a,
+    60: #007d79,
+    70: #005d5d,
+    80: #004144,
+    90: #022b30,
+    100: #081a1c,
+  ),
+  warm-gray: (
+    10: #f7f3f2,
+    20: #e5e0df,
+    30: #cac5c4,
+    40: #ada8a8,
+    50: #8f8b8b,
+    60: #726e6e,
+    70: #565151,
+    80: #3c3838,
+    90: #272525,
+    100: #171414,
+  ),
+  white: (
+    0: #ffffff,
+  ),
+  yellow: (
+    20: #fdd13a,
+    30: #f1c21b,
+    40: #d2a106,
+    50: #b28600,
+  ),
+);
 ```
 
 </details>
@@ -3367,7 +5626,6 @@ Get the value of the corresponding number of units
   - [carbon--mini-unit-size [variable]](#carbon--mini-unit-size-variable)
 - **Used by**:
   - [listbox [mixin]](#listbox-mixin)
-  - [multiselect [mixin]](#multiselect-mixin)
   - [unstable_pagination [mixin]](#unstable_pagination-mixin)
   - [radio-button [mixin]](#radio-button-mixin)
   - [select [mixin]](#select-mixin)
@@ -3410,7 +5668,10 @@ $carbon--spacing-02: 0.25rem;
   - `spacing-02`
 - **Used by**:
   - [checkbox [mixin]](#checkbox-mixin)
+  - [snippet [mixin]](#snippet-mixin)
+  - [file-uploader [mixin]](#file-uploader-mixin)
   - [form [mixin]](#form-mixin)
+  - [lists [mixin]](#lists-mixin)
   - [inline-notifications [mixin]](#inline-notifications-mixin)
   - [pseudo-underline [mixin]](#pseudo-underline-mixin)
   - [tags [mixin]](#tags-mixin)
@@ -3435,11 +5696,11 @@ $carbon--spacing-03: 0.5rem;
   - [accordion [mixin]](#accordion-mixin)
   - [breadcrumb [mixin]](#breadcrumb-mixin)
   - [button [mixin]](#button-mixin)
+  - [snippet [mixin]](#snippet-mixin)
   - [content-switcher [mixin]](#content-switcher-mixin)
   - [file-uploader [mixin]](#file-uploader-mixin)
   - [form [mixin]](#form-mixin)
   - [listbox [mixin]](#listbox-mixin)
-  - [multiselect [mixin]](#multiselect-mixin)
   - [inline-notifications [mixin]](#inline-notifications-mixin)
   - [toast-notifications [mixin]](#toast-notifications-mixin)
   - [progress-indicator [mixin]](#progress-indicator-mixin)
@@ -3448,6 +5709,7 @@ $carbon--spacing-03: 0.5rem;
   - [padding-th [mixin]](#padding-th-mixin)
   - [tabs [mixin]](#tabs-mixin)
   - [tags [mixin]](#tags-mixin)
+  - [tile [mixin]](#tile-mixin)
   - [toggle [mixin]](#toggle-mixin)
   - [tooltip--definition--legacy [mixin]](#tooltip--definition--legacy-mixin)
   - [tooltip [mixin]](#tooltip-mixin)
@@ -3536,7 +5798,6 @@ $carbon--spacing-06: 1.5rem;
 - **Used by**:
   - [accordion [mixin]](#accordion-mixin)
   - [file-uploader [mixin]](#file-uploader-mixin)
-  - [lists [mixin]](#lists-mixin)
   - [listbox [mixin]](#listbox-mixin)
   - [toast-notifications [mixin]](#toast-notifications-mixin)
   - [progress-indicator [mixin]](#progress-indicator-mixin)
@@ -3608,6 +5869,7 @@ $carbon--spacing-09: 3rem;
   - `spacing-09`
 - **Used by**:
   - [accordion [mixin]](#accordion-mixin)
+  - [data-table-expandable [mixin]](#data-table-expandable-mixin)
   - [date-picker [mixin]](#date-picker-mixin)
   - [file-uploader [mixin]](#file-uploader-mixin)
   - [listbox [mixin]](#listbox-mixin)
@@ -3727,6 +5989,7 @@ $spacing-02: $carbon--spacing-02;
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
   - [modal [mixin]](#modal-mixin)
+  - [tags [mixin]](#tags-mixin)
 
 ### ✅spacing-03 [variable]
 
@@ -3750,6 +6013,7 @@ $spacing-03: $carbon--spacing-03;
   - [data-table-core [mixin]](#data-table-core-mixin)
   - [data-table-sort [mixin]](#data-table-sort-mixin)
   - [modal [mixin]](#modal-mixin)
+  - [multiselect [mixin]](#multiselect-mixin)
   - [select [mixin]](#select-mixin)
   - [tabs [mixin]](#tabs-mixin)
   - [tooltip [mixin]](#tooltip-mixin)
@@ -3798,6 +6062,7 @@ $spacing-05: $carbon--spacing-05;
   - [data-table-core [mixin]](#data-table-core-mixin)
   - [data-table-expandable [mixin]](#data-table-expandable-mixin)
   - [modal [mixin]](#modal-mixin)
+  - [multiselect [mixin]](#multiselect-mixin)
   - [pagination [mixin]](#pagination-mixin)
   - [search [mixin]](#search-mixin)
   - [select [mixin]](#select-mixin)
@@ -4246,10 +6511,12 @@ Define theme variables from a map of tokens
   $hover-tertiary: map-get($theme, 'hover-tertiary') !global;
   $active-tertiary: map-get($theme, 'active-tertiary') !global;
   $hover-ui: map-get($theme, 'hover-ui') !global;
+  $hover-light-ui: map-get($theme, 'hover-light-ui') !global;
+  $hover-selected-ui: map-get($theme, 'hover-selected-ui') !global;
   $active-ui: map-get($theme, 'active-ui') !global;
+  $active-light-ui: map-get($theme, 'active-light-ui') !global;
   $selected-ui: map-get($theme, 'selected-ui') !global;
   $selected-light-ui: map-get($theme, 'selected-light-ui') !global;
-  $hover-selected-ui: map-get($theme, 'hover-selected-ui') !global;
   $inverse-hover-ui: map-get($theme, 'inverse-hover-ui') !global;
   $hover-danger: map-get($theme, 'hover-danger') !global;
   $active-danger: map-get($theme, 'active-danger') !global;
@@ -4260,7 +6527,6 @@ Define theme variables from a map of tokens
   $disabled-03: map-get($theme, 'disabled-03') !global;
   $highlight: map-get($theme, 'highlight') !global;
   $decorative-01: map-get($theme, 'decorative-01') !global;
-  $hover-light-ui: map-get($theme, 'hover-light-ui') !global;
   $button-separator: map-get($theme, 'button-separator') !global;
   $skeleton-01: map-get($theme, 'skeleton-01') !global;
   $skeleton-02: map-get($theme, 'skeleton-02') !global;
@@ -4519,9 +6785,21 @@ Define theme variables from a map of tokens
       --#{$custom-property-prefix}-hover-ui,
       map-get($theme, 'hover-ui')
     ) !global;
+    $hover-light-ui: var(
+      --#{$custom-property-prefix}-hover-light-ui,
+      map-get($theme, 'hover-light-ui')
+    ) !global;
+    $hover-selected-ui: var(
+      --#{$custom-property-prefix}-hover-selected-ui,
+      map-get($theme, 'hover-selected-ui')
+    ) !global;
     $active-ui: var(
       --#{$custom-property-prefix}-active-ui,
       map-get($theme, 'active-ui')
+    ) !global;
+    $active-light-ui: var(
+      --#{$custom-property-prefix}-active-light-ui,
+      map-get($theme, 'active-light-ui')
     ) !global;
     $selected-ui: var(
       --#{$custom-property-prefix}-selected-ui,
@@ -4530,10 +6808,6 @@ Define theme variables from a map of tokens
     $selected-light-ui: var(
       --#{$custom-property-prefix}-selected-light-ui,
       map-get($theme, 'selected-light-ui')
-    ) !global;
-    $hover-selected-ui: var(
-      --#{$custom-property-prefix}-hover-selected-ui,
-      map-get($theme, 'hover-selected-ui')
     ) !global;
     $inverse-hover-ui: var(
       --#{$custom-property-prefix}-inverse-hover-ui,
@@ -4574,10 +6848,6 @@ Define theme variables from a map of tokens
     $decorative-01: var(
       --#{$custom-property-prefix}-decorative-01,
       map-get($theme, 'decorative-01')
-    ) !global;
-    $hover-light-ui: var(
-      --#{$custom-property-prefix}-hover-light-ui,
-      map-get($theme, 'hover-light-ui')
     ) !global;
     $button-separator: var(
       --#{$custom-property-prefix}-button-separator,
@@ -5133,9 +7403,48 @@ Define theme variables from a map of tokens
       @include custom-property('hover-ui', map-get($theme, 'hover-ui'));
     }
 
+    @if should-emit(
+      $theme,
+      $parent-carbon-theme,
+      'hover-light-ui',
+      $emit-difference
+    )
+    {
+      @include custom-property(
+        'hover-light-ui',
+        map-get($theme, 'hover-light-ui')
+      );
+    }
+
+    @if should-emit(
+      $theme,
+      $parent-carbon-theme,
+      'hover-selected-ui',
+      $emit-difference
+    )
+    {
+      @include custom-property(
+        'hover-selected-ui',
+        map-get($theme, 'hover-selected-ui')
+      );
+    }
+
     @if should-emit($theme, $parent-carbon-theme, 'active-ui', $emit-difference)
     {
       @include custom-property('active-ui', map-get($theme, 'active-ui'));
+    }
+
+    @if should-emit(
+      $theme,
+      $parent-carbon-theme,
+      'active-light-ui',
+      $emit-difference
+    )
+    {
+      @include custom-property(
+        'active-light-ui',
+        map-get($theme, 'active-light-ui')
+      );
     }
 
     @if should-emit(
@@ -5158,19 +7467,6 @@ Define theme variables from a map of tokens
       @include custom-property(
         'selected-light-ui',
         map-get($theme, 'selected-light-ui')
-      );
-    }
-
-    @if should-emit(
-      $theme,
-      $parent-carbon-theme,
-      'hover-selected-ui',
-      $emit-difference
-    )
-    {
-      @include custom-property(
-        'hover-selected-ui',
-        map-get($theme, 'hover-selected-ui')
       );
     }
 
@@ -5270,19 +7566,6 @@ Define theme variables from a map of tokens
       @include custom-property(
         'decorative-01',
         map-get($theme, 'decorative-01')
-      );
-    }
-
-    @if should-emit(
-      $theme,
-      $parent-carbon-theme,
-      'hover-light-ui',
-      $emit-difference
-    )
-    {
-      @include custom-property(
-        'hover-light-ui',
-        map-get($theme, 'hover-light-ui')
       );
     }
 
@@ -6072,10 +8355,12 @@ Define theme variables from a map of tokens
   - [hover-tertiary [variable]](#hover-tertiary-variable)
   - [active-tertiary [variable]](#active-tertiary-variable)
   - [hover-ui [variable]](#hover-ui-variable)
+  - [hover-light-ui [variable]](#hover-light-ui-variable)
+  - [hover-selected-ui [variable]](#hover-selected-ui-variable)
   - [active-ui [variable]](#active-ui-variable)
+  - [active-light-ui [variable]](#active-light-ui-variable)
   - [selected-ui [variable]](#selected-ui-variable)
   - [selected-light-ui [variable]](#selected-light-ui-variable)
-  - [hover-selected-ui [variable]](#hover-selected-ui-variable)
   - [inverse-hover-ui [variable]](#inverse-hover-ui-variable)
   - [hover-danger [variable]](#hover-danger-variable)
   - [active-danger [variable]](#active-danger-variable)
@@ -6086,7 +8371,6 @@ Define theme variables from a map of tokens
   - [disabled-03 [variable]](#disabled-03-variable)
   - [highlight [variable]](#highlight-variable)
   - [decorative-01 [variable]](#decorative-01-variable)
-  - [hover-light-ui [variable]](#hover-light-ui-variable)
   - [button-separator [variable]](#button-separator-variable)
   - [skeleton-01 [variable]](#skeleton-01-variable)
   - [skeleton-02 [variable]](#skeleton-02-variable)
@@ -6234,7 +8518,9 @@ $carbon--theme--g90: map-merge(
     hover-tertiary: #f4f4f4,
     active-tertiary: #c6c6c6,
     hover-ui: #4c4c4c,
+    hover-light-ui: #656565,
     active-ui: #6f6f6f,
+    active-light-ui: #8d8d8d,
     selected-ui: #525252,
     selected-light-ui: #6f6f6f,
     inverse-hover-ui: #e5e5e5,
@@ -6246,7 +8532,6 @@ $carbon--theme--g90: map-merge(
     disabled-03: #a8a8a8,
     highlight: #0043ce,
     decorative-01: #6f6f6f,
-    hover-light-ui: #6f6f6f,
     button-separator: #161616,
     skeleton-01: #353535,
     skeleton-02: #525252,
@@ -6312,7 +8597,9 @@ $carbon--theme--g100: map-merge(
     hover-tertiary: #f4f4f4,
     active-tertiary: #c6c6c6,
     hover-ui: #353535,
+    hover-light-ui: #4c4c4c,
     active-ui: #525252,
+    active-light-ui: #6f6f6f,
     selected-ui: #393939,
     selected-light-ui: #525252,
     inverse-hover-ui: #e5e5e5,
@@ -6323,7 +8610,6 @@ $carbon--theme--g100: map-merge(
     disabled-02: #525252,
     highlight: #002d9c,
     decorative-01: #525252,
-    hover-light-ui: #525252,
     button-separator: #161616,
     skeleton-01: #353535,
     skeleton-02: #393939,
@@ -6392,7 +8678,9 @@ $carbon--theme--v9: map-merge(
     hover-tertiary: #5a6872,
     active-tertiary: #414f59,
     hover-ui: #eef4fc,
+    hover-light-ui: #eef4fc,
     active-ui: #dfeafa,
+    active-light-ui: #dfeafa,
     selected-ui: #eef4fc,
     selected-light-ui: #eef4fc,
     hover-selected-ui: #dfeafa,
@@ -6405,7 +8693,6 @@ $carbon--theme--v9: map-merge(
     disabled-03: #cdd1d4,
     highlight: #f4f7fb,
     decorative-01: #eef4fc,
-    hover-light-ui: #eef4fc,
     skeleton-01: rgba(61, 112, 178, 0.1),
     skeleton-02: rgba(61, 112, 178, 0.1),
     brand-01: #3d70b2,
@@ -6477,10 +8764,12 @@ $carbon--theme: (
   hover-tertiary: if(global-variable-exists('hover-tertiary'), $hover-tertiary, map-get($carbon--theme--white, 'hover-tertiary')),
   active-tertiary: if(global-variable-exists('active-tertiary'), $active-tertiary, map-get($carbon--theme--white, 'active-tertiary')),
   hover-ui: if(global-variable-exists('hover-ui'), $hover-ui, map-get($carbon--theme--white, 'hover-ui')),
+  hover-light-ui: if(global-variable-exists('hover-light-ui'), $hover-light-ui, map-get($carbon--theme--white, 'hover-light-ui')),
+  hover-selected-ui: if(global-variable-exists('hover-selected-ui'), $hover-selected-ui, map-get($carbon--theme--white, 'hover-selected-ui')),
   active-ui: if(global-variable-exists('active-ui'), $active-ui, map-get($carbon--theme--white, 'active-ui')),
+  active-light-ui: if(global-variable-exists('active-light-ui'), $active-light-ui, map-get($carbon--theme--white, 'active-light-ui')),
   selected-ui: if(global-variable-exists('selected-ui'), $selected-ui, map-get($carbon--theme--white, 'selected-ui')),
   selected-light-ui: if(global-variable-exists('selected-light-ui'), $selected-light-ui, map-get($carbon--theme--white, 'selected-light-ui')),
-  hover-selected-ui: if(global-variable-exists('hover-selected-ui'), $hover-selected-ui, map-get($carbon--theme--white, 'hover-selected-ui')),
   inverse-hover-ui: if(global-variable-exists('inverse-hover-ui'), $inverse-hover-ui, map-get($carbon--theme--white, 'inverse-hover-ui')),
   hover-danger: if(global-variable-exists('hover-danger'), $hover-danger, map-get($carbon--theme--white, 'hover-danger')),
   active-danger: if(global-variable-exists('active-danger'), $active-danger, map-get($carbon--theme--white, 'active-danger')),
@@ -6491,7 +8780,6 @@ $carbon--theme: (
   disabled-03: if(global-variable-exists('disabled-03'), $disabled-03, map-get($carbon--theme--white, 'disabled-03')),
   highlight: if(global-variable-exists('highlight'), $highlight, map-get($carbon--theme--white, 'highlight')),
   decorative-01: if(global-variable-exists('decorative-01'), $decorative-01, map-get($carbon--theme--white, 'decorative-01')),
-  hover-light-ui: if(global-variable-exists('hover-light-ui'), $hover-light-ui, map-get($carbon--theme--white, 'hover-light-ui')),
   button-separator: if(global-variable-exists('button-separator'), $button-separator, map-get($carbon--theme--white, 'button-separator')),
   skeleton-01: if(global-variable-exists('skeleton-01'), $skeleton-01, map-get($carbon--theme--white, 'skeleton-01')),
   skeleton-02: if(global-variable-exists('skeleton-02'), $skeleton-02, map-get($carbon--theme--white, 'skeleton-02')),
@@ -6571,6 +8859,7 @@ $carbon--theme: (
 - **Type**: `Map`
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
+  - [carbon--default-type [mixin]](#carbon--default-type-mixin)
 
 ### ✅interactive-01 [variable]
 
@@ -6747,7 +9036,6 @@ $ui-01: if(
 - **Type**: `{undefined}`
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
-  - [snippet [mixin]](#snippet-mixin)
   - [content-switcher [mixin]](#content-switcher-mixin)
   - [data-table-v2-action [mixin]](#data-table-v2-action-mixin)
   - [data-table-core [mixin]](#data-table-core-mixin)
@@ -6789,7 +9077,6 @@ $ui-02: if(
 - **Type**: `{undefined}`
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
-  - [snippet [mixin]](#snippet-mixin)
   - [content-switcher [mixin]](#content-switcher-mixin)
   - [number-input [mixin]](#number-input-mixin)
   - [tile [mixin]](#tile-mixin)
@@ -7270,7 +9557,7 @@ $inverse-link: if(
 
 ### ✅field-01 [variable]
 
-Default input fields; Field color on \$ui-backgrounds
+Default input fields; Field color on $ui-backgrounds
 
 <details>
 <summary>Source code</summary>
@@ -7297,6 +9584,7 @@ $field-01: if(
   - [dropdown [mixin]](#dropdown-mixin)
   - [file-uploader [mixin]](#file-uploader-mixin)
   - [listbox [mixin]](#listbox-mixin)
+  - [multiselect [mixin]](#multiselect-mixin)
   - [number-input [mixin]](#number-input-mixin)
   - [overflow-menu [mixin]](#overflow-menu-mixin)
   - [search [mixin]](#search-mixin)
@@ -7329,6 +9617,7 @@ $field-02: if(
 - **Type**: `{undefined}`
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
+  - [snippet [mixin]](#snippet-mixin)
   - [date-picker [mixin]](#date-picker-mixin)
   - [dropdown [mixin]](#dropdown-mixin)
   - [listbox [mixin]](#listbox-mixin)
@@ -7435,6 +9724,7 @@ $support-01: if(
 - **Type**: `{undefined}`
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
+  - [date-picker [mixin]](#date-picker-mixin)
   - [dropdown [mixin]](#dropdown-mixin)
   - [file-uploader [mixin]](#file-uploader-mixin)
   - [inline-loading [mixin]](#inline-loading-mixin)
@@ -7442,7 +9732,6 @@ $support-01: if(
   - [inline-notifications [mixin]](#inline-notifications-mixin)
   - [toast-notifications [mixin]](#toast-notifications-mixin)
   - [number-input [mixin]](#number-input-mixin)
-  - [overflow-menu [mixin]](#overflow-menu-mixin)
   - [progress-indicator [mixin]](#progress-indicator-mixin)
   - [select [mixin]](#select-mixin)
   - [text-area [mixin]](#text-area-mixin)
@@ -7501,6 +9790,7 @@ $support-03: if(
 - **Type**: `{undefined}`
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
+  - [date-picker [mixin]](#date-picker-mixin)
   - [listbox [mixin]](#listbox-mixin)
   - [inline-notifications [mixin]](#inline-notifications-mixin)
   - [toast-notifications [mixin]](#toast-notifications-mixin)
@@ -7694,6 +9984,7 @@ $danger-01: if(
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
   - [button [mixin]](#button-mixin)
+  - [overflow-menu [mixin]](#overflow-menu-mixin)
 
 ### ✅danger-02 [variable]
 
@@ -7781,6 +10072,7 @@ $inverse-focus-ui: if(
   - [carbon--theme [mixin]](#carbon--theme-mixin)
   - [inline-notifications [mixin]](#inline-notifications-mixin)
   - [toast-notifications [mixin]](#toast-notifications-mixin)
+  - [tags [mixin]](#tags-mixin)
   - [tooltip [mixin]](#tooltip-mixin)
 
 ### ✅hover-primary [variable]
@@ -8004,6 +10296,7 @@ $hover-ui: if(
   - [dropdown [mixin]](#dropdown-mixin)
   - [listbox [mixin]](#listbox-mixin)
   - [modal [mixin]](#modal-mixin)
+  - [multiselect [mixin]](#multiselect-mixin)
   - [number-input [mixin]](#number-input-mixin)
   - [overflow-menu [mixin]](#overflow-menu-mixin)
   - [pagination [mixin]](#pagination-mixin)
@@ -8012,6 +10305,60 @@ $hover-ui: if(
   - [tabs [mixin]](#tabs-mixin)
   - [tile [mixin]](#tile-mixin)
   - [time-picker [mixin]](#time-picker-mixin)
+  - [treeview [mixin]](#treeview-mixin)
+
+### ✅hover-light-ui [variable]
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$hover-light-ui: if(
+  global-variable-exists('carbon--theme') and map-has-key(
+      $carbon--theme,
+      'hover-light-ui'
+    ),
+  map-get($carbon--theme, 'hover-light-ui'),
+  #e5e5e5
+);
+```
+
+</details>
+
+- **Group**: [@carbon/themes](#carbonthemes)
+- **Type**: `{undefined}`
+- **Used by**:
+  - [carbon--theme [mixin]](#carbon--theme-mixin)
+  - [snippet [mixin]](#snippet-mixin)
+  - [content-switcher [mixin]](#content-switcher-mixin)
+
+### ✅hover-selected-ui [variable]
+
+Data table selected row hover
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$hover-selected-ui: if(
+  global-variable-exists('carbon--theme') and map-has-key(
+      $carbon--theme,
+      'hover-selected-ui'
+    ),
+  map-get($carbon--theme, 'hover-selected-ui'),
+  #cacaca
+);
+```
+
+</details>
+
+- **Group**: [@carbon/themes](#carbonthemes)
+- **Type**: `{undefined}`
+- **Used by**:
+  - [carbon--theme [mixin]](#carbon--theme-mixin)
+  - [data-table-core [mixin]](#data-table-core-mixin)
+  - [data-table-expandable [mixin]](#data-table-expandable-mixin)
+  - [tabs [mixin]](#tabs-mixin)
   - [treeview [mixin]](#treeview-mixin)
 
 ### ✅active-ui [variable]
@@ -8043,6 +10390,30 @@ $active-ui: if(
   - [button [mixin]](#button-mixin)
   - [data-table-core [mixin]](#data-table-core-mixin)
   - [data-table-expandable [mixin]](#data-table-expandable-mixin)
+
+### ✅active-light-ui [variable]
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$active-light-ui: if(
+  global-variable-exists('carbon--theme') and map-has-key(
+      $carbon--theme,
+      'active-light-ui'
+    ),
+  map-get($carbon--theme, 'active-light-ui'),
+  #c6c6c6
+);
+```
+
+</details>
+
+- **Group**: [@carbon/themes](#carbonthemes)
+- **Type**: `{undefined}`
+- **Used by**:
+  - [carbon--theme [mixin]](#carbon--theme-mixin)
+  - [snippet [mixin]](#snippet-mixin)
 
 ### ✅selected-ui [variable]
 
@@ -8098,35 +10469,6 @@ $selected-light-ui: if(
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
   - [listbox [mixin]](#listbox-mixin)
-
-### ✅hover-selected-ui [variable]
-
-Data table selected row hover
-
-<details>
-<summary>Source code</summary>
-
-```scss
-$hover-selected-ui: if(
-  global-variable-exists('carbon--theme') and map-has-key(
-      $carbon--theme,
-      'hover-selected-ui'
-    ),
-  map-get($carbon--theme, 'hover-selected-ui'),
-  #cacaca
-);
-```
-
-</details>
-
-- **Group**: [@carbon/themes](#carbonthemes)
-- **Type**: `{undefined}`
-- **Used by**:
-  - [carbon--theme [mixin]](#carbon--theme-mixin)
-  - [data-table-core [mixin]](#data-table-core-mixin)
-  - [data-table-expandable [mixin]](#data-table-expandable-mixin)
-  - [tabs [mixin]](#tabs-mixin)
-  - [treeview [mixin]](#treeview-mixin)
 
 ### ✅inverse-hover-ui [variable]
 
@@ -8281,9 +10623,13 @@ $disabled-01: if(
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
   - [accordion [mixin]](#accordion-mixin)
+  - [snippet [mixin]](#snippet-mixin)
   - [content-switcher [mixin]](#content-switcher-mixin)
-  - [file-uploader [mixin]](#file-uploader-mixin)
+  - [date-picker [mixin]](#date-picker-mixin)
   - [listbox [mixin]](#listbox-mixin)
+  - [number-input [mixin]](#number-input-mixin)
+  - [search [mixin]](#search-mixin)
+  - [select [mixin]](#select-mixin)
   - [slider [mixin]](#slider-mixin)
   - [tags [mixin]](#tags-mixin)
   - [text-area [mixin]](#text-area-mixin)
@@ -8319,6 +10665,7 @@ $disabled-02: if(
   - [accordion [mixin]](#accordion-mixin)
   - [button-base [mixin]](#button-base-mixin)
   - [checkbox [mixin]](#checkbox-mixin)
+  - [snippet [mixin]](#snippet-mixin)
   - [content-switcher [mixin]](#content-switcher-mixin)
   - [date-picker [mixin]](#date-picker-mixin)
   - [dropdown [mixin]](#dropdown-mixin)
@@ -8420,30 +10767,6 @@ $decorative-01: if(
   - [dropdown [mixin]](#dropdown-mixin)
   - [listbox [mixin]](#listbox-mixin)
   - [overflow-menu [mixin]](#overflow-menu-mixin)
-
-### ✅hover-light-ui [variable]
-
-<details>
-<summary>Source code</summary>
-
-```scss
-$hover-light-ui: if(
-  global-variable-exists('carbon--theme') and map-has-key(
-      $carbon--theme,
-      'hover-light-ui'
-    ),
-  map-get($carbon--theme, 'hover-light-ui'),
-  #e5e5e5
-);
-```
-
-</details>
-
-- **Group**: [@carbon/themes](#carbonthemes)
-- **Type**: `{undefined}`
-- **Used by**:
-  - [carbon--theme [mixin]](#carbon--theme-mixin)
-  - [content-switcher [mixin]](#content-switcher-mixin)
 
 ### ✅button-separator [variable]
 
@@ -8644,7 +10967,6 @@ $hover-field: if(
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
   - [data-table-v2-action [mixin]](#data-table-v2-action-mixin)
-  - [data-table-core [mixin]](#data-table-core-mixin)
   - [data-table-expandable [mixin]](#data-table-expandable-mixin)
   - [search [mixin]](#search-mixin)
 - **Deprecated**: This may not be available in future releases
@@ -11113,7 +13435,13 @@ Include default type styles
   }
 
   a {
-    color: #0062ff;
+    @if global-variable-exists('carbon--theme') and
+      map-has-key($carbon--theme, 'link-01')
+    {
+      color: map-get($carbon--theme, 'link-01');
+    } @else {
+      color: #0062fe;
+    }
   }
 
   em {
@@ -11127,6 +13455,7 @@ Include default type styles
 - **Group**: [@carbon/type](#carbontype)
 - **Requires**:
   - [carbon--type-style [mixin]](#carbon--type-style-mixin)
+  - [carbon--theme [variable]](#carbon--theme-variable)
 
 ### ✅carbon--font-face-sans-condensed [mixin]
 
@@ -14092,6 +16421,7 @@ Button styles
     }
 
     &:active {
+      color: $inverse-01;
       background-color: $active-tertiary;
       border-color: transparent;
     }
@@ -14657,8 +16987,8 @@ Checkbox styles
     position: relative;
     display: flex;
     min-height: rem(24px);
+    padding-top: rem(3px);
     padding-left: rem(20px);
-    line-height: 1.5rem;
     cursor: pointer;
     user-select: none;
   }
@@ -14705,12 +17035,12 @@ Checkbox styles
     left: rem(6px);
     width: rem(9px);
     height: rem(5px);
-    margin-top: rem(-3px);
+    margin-top: rem(-3px) /* rtl: 0rem  */;
     background: none;
     border-bottom: 2px solid $inverse-01;
     border-left: 2px solid $inverse-01;
-    transform: scale(0) rotate(-45deg);
-    transform-origin: bottom right;
+    transform: scale(0) rotate(-45deg) /* rtl: scale(0) rotate(45deg) */;
+    transform-origin: bottom right /* rtl: center */;
     content: '';
   }
 
@@ -14731,7 +17061,7 @@ Checkbox styles
   // Display the check
   .#{$prefix}--checkbox:checked + .#{$prefix}--checkbox-label::after,
   .#{$prefix}--checkbox-label[data-contained-checkbox-state='true']::after {
-    transform: scale(1) rotate(-45deg);
+    transform: scale(1) rotate(-45deg) /* rtl: scale(-1,1) rotate(45deg) */;
   }
 
   // Indeterminate symbol
@@ -14836,6 +17166,27 @@ Code snippet styles
     @include reset;
   }
 
+  .#{$prefix}--snippet--disabled,
+  .#{$prefix}--snippet--disabled
+    .#{$prefix}--btn.#{$prefix}--snippet-btn--expand {
+    color: $disabled-02;
+    background-color: $disabled-01;
+  }
+
+  .#{$prefix}--snippet--disabled .#{$prefix}--snippet-btn--expand:hover,
+  .#{$prefix}--snippet--disabled .#{$prefix}--copy-btn:hover {
+    color: $disabled-02;
+    background-color: $disabled-01;
+    cursor: not-allowed;
+  }
+
+  .#{$prefix}--snippet--disabled .#{$prefix}--snippet__icon,
+  .#{$prefix}--snippet--disabled
+    .#{$prefix}--snippet-btn--expand
+    .#{$prefix}--icon-chevron--down {
+    fill: $disabled-02;
+  }
+
   .#{$prefix}--snippet code {
     @include type-style('code-01');
   }
@@ -14848,7 +17199,7 @@ Code snippet styles
     display: inline;
     padding: 0;
     color: $text-01;
-    background-color: $ui-01;
+    background-color: $field-01;
     border: 2px solid transparent;
     border-radius: 4px;
     cursor: pointer;
@@ -14864,6 +17215,11 @@ Code snippet styles
     &:focus {
       border: 2px solid $focus;
       outline: none;
+
+      // Firefox HCM fix
+      @media screen and (prefers-contrast) {
+        border-style: dotted;
+      }
     }
 
     &::before {
@@ -14911,19 +17267,31 @@ Code snippet styles
     display: inline-block;
 
     &:hover {
-      background-color: $ui-01;
+      background-color: $field-01;
       cursor: auto;
     }
+  }
+
+  .#{$prefix}--snippet--light.#{$prefix}--snippet--inline.#{$prefix}--snippet--no-copy:hover {
+    background-color: $field-02;
+    cursor: auto;
   }
 
   // Single Line Snippet
   .#{$prefix}--snippet--single {
     @include bx--snippet;
 
-    min-width: rem(320px);
+    display: flex;
+    align-items: center;
     max-width: rem(760px);
     height: $carbon--spacing-08;
     padding-right: $carbon--spacing-08;
+
+    // Windows, Firefox HCM Fix
+    @media screen and (-ms-high-contrast: active),
+      screen and (prefers-contrast) {
+      outline: 2px solid transparent;
+    }
   }
 
   .#{$prefix}--snippet--single.#{$prefix}--snippet--no-copy {
@@ -14941,7 +17309,6 @@ Code snippet styles
     height: 100%;
     padding-left: $carbon--spacing-05;
     overflow-x: auto;
-    border-right: solid $carbon--spacing-05 transparent;
 
     &:focus {
       @include focus-outline('outline');
@@ -14955,29 +17322,25 @@ Code snippet styles
     white-space: nowrap;
   }
 
-  .#{$prefix}--snippet--single::after {
-    position: absolute;
-    top: 0;
-    right: rem(56px);
-    width: rem(16px);
-    height: 100%;
-    // Safari interprets `transparent` differently, so make color token value transparent instead:
-    background-image: linear-gradient(to right, rgba($ui-01, 0), $ui-01);
-    content: '';
-  }
-
   // Multi Line Snippet
   .#{$prefix}--snippet--multi {
     @include bx--snippet;
 
-    min-width: rem(320px);
+    display: flex;
     max-width: 100%;
     padding: $carbon--spacing-05;
+
+    // Windows, Firefox HCM Fix
+    @media screen and (-ms-high-contrast: active),
+      screen and (prefers-contrast) {
+      outline: 2px solid transparent;
+    }
   }
 
   //closed snippet container
   .#{$prefix}--snippet--multi .#{$prefix}--snippet-container {
     position: relative;
+    order: 1;
     min-height: rem(56px);
     max-height: rem(238px);
     overflow: hidden;
@@ -15024,7 +17387,7 @@ Code snippet styles
     width: rem(16px);
     height: 100%;
     // Safari interprets `transparent` differently, so make color token value transparent instead:
-    background-image: linear-gradient(to right, rgba($ui-01, 0), $ui-01);
+    background-image: linear-gradient(to right, rgba($field-01, 0), $field-01);
     content: '';
   }
 
@@ -15038,6 +17401,13 @@ Code snippet styles
     height: rem(16px);
     transition: all $duration--fast-01 motion(standard, productive);
     fill: $icon-01;
+
+    // Windows, Firefox HCM Fix
+    @media screen and (-ms-high-contrast: active),
+      screen and (prefers-contrast) {
+      // `ButtonText` is a CSS2 system color to help improve colors in HCM
+      fill: ButtonText;
+    }
   }
 
   .#{$prefix}--snippet-button {
@@ -15053,7 +17423,7 @@ Code snippet styles
     height: $carbon--spacing-08;
     padding: 0;
     overflow: visible;
-    background-color: $ui-01;
+    background-color: $field-01;
     border: none;
     outline: none;
     cursor: pointer;
@@ -15106,30 +17476,30 @@ Code snippet styles
     position: absolute;
     top: 0;
     right: 0;
+    z-index: 10;
 
     // Override inherited rule in code snippet
     @include carbon--font-family('sans');
   }
 
   // Show more / less button
-  button.#{$prefix}--btn.#{$prefix}--snippet-btn--expand {
+  .#{$prefix}--snippet-btn--expand {
     @include type-style('body-short-01');
     @include carbon--font-family('sans');
 
     position: absolute;
-    right: $spacing-03;
-    bottom: $spacing-03;
+    right: 0;
+    bottom: 0;
+    z-index: 10;
     display: inline-flex;
     align-items: center;
-    padding: $spacing-03;
-    padding-left: $carbon--spacing-05;
+    padding: $spacing-03 $spacing-05;
     color: $text-01;
     background-color: $field-01;
     border: 0;
   }
 
-  button.#{$prefix}--btn.#{$prefix}--snippet-btn--expand
-    .#{$prefix}--snippet-btn--text {
+  .#{$prefix}--snippet-btn--expand .#{$prefix}--snippet-btn--text {
     position: relative;
     top: rem(-1px);
   }
@@ -15139,14 +17509,13 @@ Code snippet styles
   }
 
   .#{$prefix}--snippet-btn--expand .#{$prefix}--icon-chevron--down {
-    margin-bottom: rem(1px);
     margin-left: $spacing-03;
     transform: rotate(0deg);
     transition: $duration--moderate-01 motion(standard, productive);
     fill: $text-01;
   }
 
-  button.#{$prefix}--btn.#{$prefix}--snippet-btn--expand:hover {
+  .#{$prefix}--snippet-btn--expand:hover {
     color: $text-01;
     background: $hover-ui;
   }
@@ -15169,29 +17538,35 @@ Code snippet styles
   }
 
   // Light version
-  .#{$prefix}--snippet.#{$prefix}--snippet--light,
-  .#{$prefix}--snippet.#{$prefix}--snippet--light .#{$prefix}--snippet-button,
-  .#{$prefix}--snippet.#{$prefix}--snippet--light
-    .#{$prefix}--snippet-btn--expand,
-  .#{$prefix}--snippet.#{$prefix}--snippet--light .#{$prefix}--copy-btn {
-    background-color: $ui-02;
+  .#{$prefix}--snippet--light,
+  .#{$prefix}--snippet--light .#{$prefix}--snippet-button,
+  .#{$prefix}--snippet--light .#{$prefix}--btn.#{$prefix}--snippet-btn--expand,
+  .#{$prefix}--snippet--light .#{$prefix}--copy-btn {
+    background-color: $field-02;
   }
 
-  .#{$prefix}--snippet.#{$prefix}--snippet--light.#{$prefix}--snippet--inline:hover,
-  .#{$prefix}--snippet.#{$prefix}--snippet--light
-    .#{$prefix}--snippet-button:hover,
-  .#{$prefix}--snippet.#{$prefix}--snippet--light
-    .#{$prefix}--snippet-btn--expand:hover,
-  .#{$prefix}--snippet.#{$prefix}--snippet--light .#{$prefix}--copy-btn:hover {
-    background-color: $hover-ui-light;
+  .#{$prefix}--snippet--light.#{$prefix}--snippet--inline:hover,
+  .#{$prefix}--snippet--light .#{$prefix}--snippet-button:hover,
+  .#{$prefix}--snippet--light
+    .#{$prefix}--btn.#{$prefix}--snippet-btn--expand:hover,
+  .#{$prefix}--snippet--light .#{$prefix}--copy-btn:hover {
+    background-color: $hover-light-ui;
   }
 
-  .#{$prefix}--snippet.#{$prefix}--snippet--light.#{$prefix}--snippet--single::after,
-  .#{$prefix}--snippet.#{$prefix}--snippet--light.#{$prefix}--snippet--multi
+  .#{$prefix}--snippet--light.#{$prefix}--snippet--inline:active,
+  .#{$prefix}--snippet--light .#{$prefix}--snippet-button:active,
+  .#{$prefix}--snippet--light
+    .#{$prefix}--btn.#{$prefix}--snippet-btn--expand:active,
+  .#{$prefix}--snippet--light .#{$prefix}--copy-btn:active {
+    background-color: $active-light-ui;
+  }
+
+  .#{$prefix}--snippet--light.#{$prefix}--snippet--single::after,
+  .#{$prefix}--snippet--light.#{$prefix}--snippet--multi
     .#{$prefix}--snippet-container
     pre::after {
     // Safari interprets `transparent` differently, so make color token value transparent instead:
-    background-image: linear-gradient(to right, rgba($ui-02, 0), $ui-02);
+    background-image: linear-gradient(to right, rgba($field-02, 0), $field-02);
   }
 
   // Skeleton State
@@ -15230,6 +17605,13 @@ Code snippet styles
     }
   }
 
+  .#{$prefix}--snippet--multi .#{$prefix}--copy-btn {
+    top: $carbon--spacing-03;
+    right: $carbon--spacing-03;
+    width: $carbon--spacing-07;
+    height: $carbon--spacing-07;
+  }
+
   .#{$prefix}--snippet--multi
     .#{$prefix}--snippet-button
     .#{$prefix}--btn--copy__feedback {
@@ -15243,6 +17625,80 @@ Code snippet styles
     top: calc(100% - #{rem(4px)});
     right: auto;
     left: 50%;
+  }
+
+  // overflow indicator
+  .#{$prefix}--snippet__overflow-indicator--left,
+  .#{$prefix}--snippet__overflow-indicator--right {
+    z-index: 1;
+    flex: 1 0 auto;
+    width: $carbon--spacing-05;
+  }
+
+  .#{$prefix}--snippet__overflow-indicator--left {
+    order: 0;
+    margin-right: -$carbon--spacing-05;
+    background-image: linear-gradient(to left, transparent, $field-01);
+  }
+
+  .#{$prefix}--snippet__overflow-indicator--right {
+    order: 2;
+    margin-left: -$carbon--spacing-05;
+    background-image: linear-gradient(to right, transparent, $field-01);
+  }
+
+  .#{$prefix}--snippet--single .#{$prefix}--snippet__overflow-indicator--right,
+  .#{$prefix}--snippet--single .#{$prefix}--snippet__overflow-indicator--left {
+    position: absolute;
+    width: $carbon--spacing-07;
+    height: calc(100% - #{$carbon--spacing-02});
+  }
+
+  .#{$prefix}--snippet--single .#{$prefix}--snippet__overflow-indicator--right {
+    right: $carbon--spacing-08;
+  }
+
+  .#{$prefix}--snippet--single
+    .#{$prefix}--snippet-container:focus
+    ~ .#{$prefix}--snippet__overflow-indicator--right {
+    right: calc(#{$carbon--spacing-08} + #{rem(2px)});
+  }
+
+  .#{$prefix}--snippet--single
+    .#{$prefix}--snippet-container:focus
+    + .#{$prefix}--snippet__overflow-indicator--left {
+    left: rem(2px);
+  }
+
+  .#{$prefix}--snippet--light .#{$prefix}--snippet__overflow-indicator--left {
+    background-image: linear-gradient(to left, transparent, $field-02);
+  }
+
+  .#{$prefix}--snippet--light .#{$prefix}--snippet__overflow-indicator--right {
+    background-image: linear-gradient(to right, transparent, $field-02);
+  }
+
+  // Safari-only media query
+  // since fades won't appear correctly with CSS custom properties
+  // see: tabs, code snippet, and modal overflow indicators
+  @media not all and (min-resolution: 0.001dpcm) {
+    @supports (-webkit-appearance: none) and (stroke-color: transparent) {
+      .#{$prefix}--snippet__overflow-indicator--left {
+        background-image: linear-gradient(
+          to left,
+          rgba($field-01, 0),
+          $field-01
+        );
+      }
+
+      .#{$prefix}--snippet__overflow-indicator--right {
+        background-image: linear-gradient(
+          to right,
+          rgba($field-01, 0),
+          $field-01
+        );
+      }
+    }
   }
 
   #{$prefix}--snippet--multi.#{$prefix}--skeleton {
@@ -15288,19 +17744,24 @@ Code snippet styles
   - [bx--snippet [mixin]](#bx--snippet-mixin)
   - [carbon--font-family [mixin]](#carbon--font-family-mixin)
   - [prefix [variable]](#prefix-variable)
+  - [disabled-02 [variable]](#disabled-02-variable)
+  - [disabled-01 [variable]](#disabled-01-variable)
   - [text-01 [variable]](#text-01-variable)
-  - [ui-01 [variable]](#ui-01-variable)
+  - [field-01 [variable]](#field-01-variable)
   - [ui-03 [variable]](#ui-03-variable)
   - [focus [variable]](#focus-variable)
   - [spacing-03 [variable]](#spacing-03-variable)
+  - [field-02 [variable]](#field-02-variable)
   - [carbon--spacing-08 [variable]](#carbon--spacing-08-variable)
   - [carbon--spacing-05 [variable]](#carbon--spacing-05-variable)
   - [spacing-05 [variable]](#spacing-05-variable)
   - [icon-01 [variable]](#icon-01-variable)
   - [carbon--spacing-07 [variable]](#carbon--spacing-07-variable)
   - [hover-ui [variable]](#hover-ui-variable)
-  - [field-01 [variable]](#field-01-variable)
-  - [ui-02 [variable]](#ui-02-variable)
+  - [hover-light-ui [variable]](#hover-light-ui-variable)
+  - [active-light-ui [variable]](#active-light-ui-variable)
+  - [carbon--spacing-03 [variable]](#carbon--spacing-03-variable)
+  - [carbon--spacing-02 [variable]](#carbon--spacing-02-variable)
 
 ### ❌bx--snippet [mixin]
 
@@ -15316,7 +17777,7 @@ Code snippet base styles
   position: relative;
   width: 100%;
   max-width: rem(600px);
-  background: $snippet-background-color;
+  background-color: $snippet-background-color;
 }
 ```
 
@@ -16282,15 +18743,15 @@ Data table core styles
   }
 
   .#{$prefix}--data-table tbody tr:hover {
-    background: $hover-field;
+    background: $hover-ui;
   }
 
   .#{$prefix}--data-table tbody tr:hover td,
   .#{$prefix}--data-table tbody tr:hover th {
     color: $text-01;
-    background: $hover-field;
-    border-top: 1px solid $hover-field;
-    border-bottom: 1px solid $hover-field;
+    background: $hover-ui;
+    border-top: 1px solid $hover-ui;
+    border-bottom: 1px solid $hover-ui;
   }
 
   .#{$prefix}--data-table th,
@@ -16299,12 +18760,9 @@ Data table core styles
     vertical-align: middle;
   }
 
-  .#{$prefix}--data-table td {
+  .#{$prefix}--data-table th {
     padding-right: $spacing-05;
     padding-left: $spacing-05;
-  }
-
-  .#{$prefix}--data-table th {
     color: $text-01;
     background-color: $ui-03;
   }
@@ -16316,8 +18774,6 @@ Data table core styles
   }
 
   .#{$prefix}--data-table .#{$prefix}--table-header-label {
-    padding-right: $spacing-05;
-    padding-left: $spacing-05;
     text-align: left;
   }
 
@@ -16413,7 +18869,7 @@ Data table core styles
   .#{$prefix}--data-table--selected .#{$prefix}--overflow-menu,
   .#{$prefix}--data-table--selected .#{$prefix}--overflow-menu__trigger {
     &:hover {
-      background-color: $hover-field;
+      background-color: $hover-ui;
     }
   }
 
@@ -16438,14 +18894,14 @@ Data table core styles
 
   .#{$prefix}--data-table--zebra
     tbody
-    tr:not(.#{$prefix}--parent-row):nth-child(even)
+    tr:not(.#{$prefix}--parent-row):nth-child(odd)
     td {
     border-bottom: 1px solid $ui-01;
   }
 
   .#{$prefix}--data-table--zebra
     tbody
-    tr:not(.#{$prefix}--parent-row):nth-child(odd)
+    tr:not(.#{$prefix}--parent-row):nth-child(even)
     td {
     background-color: $data-table-zebra-color;
     border-top: 1px solid $data-table-zebra-color;
@@ -16456,9 +18912,9 @@ Data table core styles
     tbody
     tr:not(.#{$prefix}--parent-row):hover
     td {
-    background-color: $hover-field;
-    border-top: 1px solid $hover-field;
-    border-bottom: 1px solid $hover-field;
+    background-color: $hover-ui;
+    border-top: 1px solid $hover-ui;
+    border-bottom: 1px solid $hover-ui;
   }
 
   //----------------------------------------------------------------------------
@@ -16484,22 +18940,40 @@ Data table core styles
   .#{$prefix}--data-table thead th.#{$prefix}--table-expand,
   .#{$prefix}--data-table tbody td.#{$prefix}--table-expand {
     min-width: 0;
-    // spacing between checkbox / chevron and next cell should be 16px / 1rem
-    // adjacent cell has 16px / 1rem padding-left though, hence the removal of padding-right here
-    padding-right: 0;
-    padding-left: $spacing-05;
   }
 
   .#{$prefix}--data-table thead th.#{$prefix}--table-column-checkbox,
   .#{$prefix}--data-table tbody td.#{$prefix}--table-column-checkbox {
     // 16px padding left + 20px checkbox width
-    width: rem(36px);
+    width: rem(16px);
+    // spacing between checkbox / chevron and next cell should be 16px / 1rem
+    // adjacent cell has 16px / 1rem padding-left though, hence the removal of padding-right here
+    padding-right: $spacing-05;
+    padding-left: $spacing-05;
   }
 
   .#{$prefix}--data-table thead th.#{$prefix}--table-expand,
   .#{$prefix}--data-table tbody td.#{$prefix}--table-expand {
-    // 16px padding left + 16px checkbox width
+    width: rem(48px);
+    height: rem(48px);
+  }
+
+  .#{$prefix}--data-table--compact thead th.#{$prefix}--table-expand,
+  .#{$prefix}--data-table--compact tbody td.#{$prefix}--table-expand {
+    width: rem(24px);
+    height: rem(24px);
+  }
+
+  .#{$prefix}--data-table--short thead th.#{$prefix}--table-expand,
+  .#{$prefix}--data-table--short tbody td.#{$prefix}--table-expand {
     width: rem(32px);
+    height: rem(32px);
+  }
+
+  .#{$prefix}--data-table--tall thead th.#{$prefix}--table-expand,
+  .#{$prefix}--data-table--tall tbody td.#{$prefix}--table-expand {
+    width: rem(64px);
+    height: rem(64px);
   }
 
   .#{$prefix}--data-table--tall .#{$prefix}--table-column-checkbox {
@@ -16946,13 +19420,12 @@ Data table core styles
   - [text-02 [variable]](#text-02-variable)
   - [ui-03 [variable]](#ui-03-variable)
   - [layout-04 [variable]](#layout-04-variable)
-  - [hover-field [variable]](#hover-field-variable)
+  - [hover-ui [variable]](#hover-ui-variable)
   - [spacing-04 [variable]](#spacing-04-variable)
   - [spacing-03 [variable]](#spacing-03-variable)
   - [hover-selected-ui [variable]](#hover-selected-ui-variable)
   - [selected-ui [variable]](#selected-ui-variable)
   - [active-ui [variable]](#active-ui-variable)
-  - [hover-ui [variable]](#hover-ui-variable)
 
 ### ❌data-table-expandable [mixin]
 
@@ -17013,9 +19486,11 @@ Data table expandable styles
   }
 
   tr.#{$prefix}--parent-row.#{$prefix}--expandable-row + tr[data-child-row] td {
+    padding-left: $carbon--spacing-09;
     border-bottom: 1px solid $ui-03;
     transition: padding-bottom $duration--fast-02 motion(standard, productive), transform
-        $duration--fast-02 motion(standard, productive);
+        $duration--fast-02 motion(standard, productive),
+      background-color $duration--fast-02 motion(standard, productive);
   }
 
   tr.#{$prefix}--parent-row.#{$prefix}--expandable-row
@@ -17109,20 +19584,26 @@ Data table expandable styles
   // Expand icon column
   //----------------------------------------------------------------------------
   .#{$prefix}--data-table td.#{$prefix}--table-expand {
-    width: 2.5rem;
-    min-width: 2.5rem;
     border-bottom: 1px solid $ui-03;
   }
 
-  .#{$prefix}--data-table td.#{$prefix}--table-expand,
-  th.#{$prefix}--table-expand {
-    padding: 0 $spacing-05;
+  .#{$prefix}--data-table th.#{$prefix}--table-expand + th,
+  .#{$prefix}--data-table td.#{$prefix}--table-expand + td {
+    padding-left: 0;
   }
 
-  .#{$prefix}--data-table--tall td.#{$prefix}--table-expand,
-  .#{$prefix}--data-table--tall th.#{$prefix}--table-expand {
-    padding-top: rem(16px);
-    padding-bottom: rem(16px);
+  .#{$prefix}--data-table
+    th.#{$prefix}--table-expand
+    + .#{$prefix}--table-column-checkbox,
+  .#{$prefix}--data-table
+    td.#{$prefix}--table-expand
+    + .#{$prefix}--table-column-checkbox {
+    padding-right: 0;
+  }
+
+  .#{$prefix}--data-table td.#{$prefix}--table-expand,
+  .#{$prefix}--data-table th.#{$prefix}--table-expand {
+    padding: 0;
   }
 
   .#{$prefix}--data-table
@@ -17139,16 +19620,26 @@ Data table expandable styles
   .#{$prefix}--table-expand__button {
     @include button-reset('false');
 
-    height: rem(16px);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    // Account for the border in `.bx--table-expand`
+    height: calc(100% + 1px);
     vertical-align: inherit;
   }
 
   .#{$prefix}--table-expand__button:focus {
-    outline: 1px solid transparent;
+    outline: none;
+    box-shadow: inset 0 0 0 2px $focus;
   }
 
   .#{$prefix}--table-expand__button:focus .#{$prefix}--table-expand__svg {
-    box-shadow: inset 0 0 0 1px $focus;
+    // Windows, Firefox HCM Fix
+    @media screen and (-ms-high-contrast: active),
+      screen and (prefers-contrast) {
+      outline: 2px solid transparent;
+    }
   }
 
   .#{$prefix}--table-expand__svg {
@@ -17162,6 +19653,11 @@ Data table expandable styles
       // `ButtonText` is a CSS2 system color to help improve colors in HCM
       fill: ButtonText;
     }
+  }
+
+  .#{$prefix}--data-table--tall .#{$prefix}--table-expand__button {
+    padding-top: rem(16px);
+    padding-bottom: rem(24px);
   }
 
   // fix expanded parent separating border length
@@ -17333,6 +19829,7 @@ Data table expandable styles
   - [ui-03 [variable]](#ui-03-variable)
   - [spacing-05 [variable]](#spacing-05-variable)
   - [hover-ui [variable]](#hover-ui-variable)
+  - [carbon--spacing-09 [variable]](#carbon--spacing-09-variable)
   - [text-01 [variable]](#text-01-variable)
   - [focus [variable]](#focus-variable)
   - [ui-05 [variable]](#ui-05-variable)
@@ -17602,9 +20099,19 @@ Date picker styles
     align-items: center;
   }
 
-  .#{$prefix}--date-picker.#{$prefix}--date-picker--simple {
-    .#{$prefix}--date-picker__input {
-      width: rem(120px);
+  .#{$prefix}--date-picker.#{$prefix}--date-picker--simple
+    .#{$prefix}--date-picker__input,
+  .#{$prefix}--date-picker.#{$prefix}--date-picker--simple .#{$prefix}--label {
+    width: rem(120px);
+  }
+
+  .#{$prefix}--date-picker.#{$prefix}--date-picker--simple
+    .#{$prefix}--date-picker-input__wrapper--invalid,
+  .#{$prefix}--date-picker.#{$prefix}--date-picker--simple
+    .#{$prefix}--date-picker-input__wrapper--warn {
+    .#{$prefix}--date-picker__input,
+    ~ .#{$prefix}--form-requirement {
+      width: rem(152px);
     }
   }
 
@@ -17626,7 +20133,6 @@ Date picker styles
 
     position: relative;
     display: block;
-    min-width: rem(144px);
     height: rem(40px);
     padding: 0 $carbon--spacing-05;
     color: $text-01;
@@ -17642,7 +20148,7 @@ Date picker styles
 
     &:disabled {
       color: $disabled-02;
-      background-color: $disabled-background-color;
+      background-color: $disabled-01;
       border-bottom: 1px solid transparent;
       cursor: not-allowed;
     }
@@ -17678,6 +20184,31 @@ Date picker styles
     transform: translateY(-50%);
     cursor: pointer;
     fill: $icon-01;
+
+    // Windows, Firefox HCM Fix
+    @media screen and (-ms-high-contrast: active),
+      screen and (prefers-contrast) {
+      // `ButtonText` is a CSS2 system color to help improve colors in HCM
+      fill: ButtonText;
+    }
+  }
+
+  .#{$prefix}--date-picker__icon--invalid,
+  .#{$prefix}--date-picker__icon--warn {
+    cursor: auto;
+  }
+
+  .#{$prefix}--date-picker__icon--warn {
+    fill: $support-03;
+  }
+
+  .#{$prefix}--date-picker__icon--warn path:first-of-type {
+    opacity: 1;
+    fill: $carbon__black-100;
+  }
+
+  .#{$prefix}--date-picker__icon--invalid {
+    fill: $support-01;
   }
 
   .#{$prefix}--date-picker__icon ~ .#{$prefix}--date-picker__input {
@@ -17731,7 +20262,10 @@ Date picker styles
   - [field-01 [variable]](#field-01-variable)
   - [ui-04 [variable]](#ui-04-variable)
   - [disabled-02 [variable]](#disabled-02-variable)
+  - [disabled-01 [variable]](#disabled-01-variable)
   - [icon-01 [variable]](#icon-01-variable)
+  - [support-03 [variable]](#support-03-variable)
+  - [support-01 [variable]](#support-01-variable)
   - [carbon--spacing-09 [variable]](#carbon--spacing-09-variable)
 
 ## dropdown
@@ -18255,6 +20789,10 @@ File uploader styles
     color: $text-01;
   }
 
+  .#{$prefix}--file--label--disabled {
+    color: $disabled-02;
+  }
+
   .#{$prefix}--file-input {
     @include hidden;
   }
@@ -18310,7 +20848,7 @@ File uploader styles
   }
 
   .#{$prefix}--file-browse-btn--disabled .#{$prefix}--file__drop-container {
-    border: 1px dashed $disabled-01;
+    border: 1px dashed $disabled-02;
   }
 
   .#{$prefix}--label-description {
@@ -18319,6 +20857,10 @@ File uploader styles
 
     margin-bottom: $carbon--spacing-05;
     color: $text-02;
+  }
+
+  .#{$prefix}--label-description--disabled {
+    color: $disabled-02;
   }
 
   // For backwards compatibility
@@ -18338,8 +20880,8 @@ File uploader styles
   .#{$prefix}--file__selected-file {
     display: grid;
     grid-auto-rows: auto;
-    grid-gap: $carbon--spacing-05;
     grid-template-columns: 1fr auto;
+    gap: rem(12px) $carbon--spacing-05;
     align-items: center;
     max-width: rem(320px);
     min-height: $carbon--spacing-09;
@@ -18358,12 +20900,6 @@ File uploader styles
       margin: 0;
     }
 
-    .#{$prefix}--loading {
-      width: rem(32px);
-      height: rem(32px);
-      margin-right: -$carbon--spacing-03;
-    }
-
     .#{$prefix}--inline-loading__animation .#{$prefix}--loading {
       // Vanilla markup has `.bx--inline-loading__animation` which is used for `margin-right` adjustment
       margin-right: 0;
@@ -18377,13 +20913,21 @@ File uploader styles
       white-space: nowrap;
       text-overflow: ellipsis;
     }
+
+    // Windows, Firefox HCM Fix
+    @media screen and (-ms-high-contrast: active),
+      screen and (prefers-contrast) {
+      outline: 2px solid transparent;
+    }
   }
 
   .#{$prefix}--file__selected-file--field {
+    gap: $carbon--spacing-03 $carbon--spacing-05;
     min-height: rem(40px);
   }
 
   .#{$prefix}--file__selected-file--sm {
+    gap: $carbon--spacing-02 $carbon--spacing-05;
     min-height: rem(32px);
   }
 
@@ -18394,19 +20938,36 @@ File uploader styles
     max-width: rem(320px);
     margin-bottom: $carbon--spacing-03;
     background-color: $field-01;
-
     outline-width: 1px;
   }
 
   .#{$prefix}--file__selected-file--invalid {
     @include focus-outline('invalid');
 
-    padding: $carbon--spacing-05 0;
+    padding: rem(12px) 0;
+  }
+
+  .#{$prefix}--file__selected-file--invalid.#{$prefix}--file__selected-file--sm {
+    padding: $carbon--spacing-02 0;
+  }
+
+  .#{$prefix}--file__selected-file--invalid.#{$prefix}--file__selected-file--field {
+    padding: $carbon--spacing-03 0;
   }
 
   .#{$prefix}--file__selected-file--invalid .#{$prefix}--form-requirement {
     padding-top: $carbon--spacing-05;
     border-top: 1px solid $ui-03;
+  }
+
+  .#{$prefix}--file__selected-file--invalid.#{$prefix}--file__selected-file--sm
+    .#{$prefix}--form-requirement {
+    padding-top: rem(7px);
+  }
+
+  .#{$prefix}--file__selected-file--invalid.#{$prefix}--file__selected-file--field
+    .#{$prefix}--form-requirement {
+    padding-top: rem(11px);
   }
 
   .#{$prefix}--file__selected-file--invalid
@@ -18449,6 +21010,7 @@ File uploader styles
 
   .#{$prefix}--file__state-container {
     display: flex;
+    align-items: center;
     justify-content: center;
     min-width: 1.5rem;
     padding-right: $carbon--spacing-05;
@@ -18476,14 +21038,15 @@ File uploader styles
   .#{$prefix}--file__state-container .#{$prefix}--file-invalid {
     width: $carbon--spacing-05;
     height: $carbon--spacing-05;
-    margin-right: $carbon--spacing-03;
     fill: $support-01;
   }
 
   .#{$prefix}--file__state-container .#{$prefix}--file-close {
     display: flex;
-    width: $carbon--spacing-05;
-    height: $carbon--spacing-05;
+    align-items: center;
+    justify-content: center;
+    width: $carbon--spacing-06;
+    height: $carbon--spacing-06;
     padding: 0;
     background-color: transparent;
     border: none;
@@ -18491,12 +21054,19 @@ File uploader styles
     fill: $icon-01;
 
     &:focus {
-      @include focus-outline('border');
+      @include focus-outline('outline');
     }
   }
 
   .#{$prefix}--file__state-container .#{$prefix}--file-close svg path {
     fill: $icon-01;
+
+    // Windows, Firefox HCM Fix
+    @media screen and (-ms-high-contrast: active),
+      screen and (prefers-contrast) {
+      // `ButtonText` is a CSS2 system color to help improve colors in HCM
+      fill: ButtonText;
+    }
   }
 
   .#{$prefix}--file__state-container .#{$prefix}--inline-loading__animation {
@@ -18529,15 +21099,15 @@ File uploader styles
   - [carbon--spacing-03 [variable]](#carbon--spacing-03-variable)
   - [support-01 [variable]](#support-01-variable)
   - [text-01 [variable]](#text-01-variable)
+  - [disabled-02 [variable]](#disabled-02-variable)
   - [link-01 [variable]](#link-01-variable)
   - [interactive-03 [variable]](#interactive-03-variable)
-  - [disabled-02 [variable]](#disabled-02-variable)
-  - [disabled-01 [variable]](#disabled-01-variable)
   - [carbon--spacing-05 [variable]](#carbon--spacing-05-variable)
   - [text-02 [variable]](#text-02-variable)
   - [carbon--spacing-06 [variable]](#carbon--spacing-06-variable)
   - [carbon--spacing-09 [variable]](#carbon--spacing-09-variable)
   - [field-01 [variable]](#field-01-variable)
+  - [carbon--spacing-02 [variable]](#carbon--spacing-02-variable)
   - [ui-03 [variable]](#ui-03-variable)
   - [text-error [variable]](#text-error-variable)
   - [ui-05 [variable]](#ui-05-variable)
@@ -18622,6 +21192,8 @@ Form styles
   .#{$prefix}--number[data-invalid] .#{$prefix}--number__input-wrapper,
   .#{$prefix}--number__input-wrapper--warning,
   .#{$prefix}--date-picker-input__wrapper,
+  .#{$prefix}--date-picker-input__wrapper--warn,
+  .#{$prefix}--date-picker-input__wrapper--invalid,
   .#{$prefix}--time-picker--invalid,
   .#{$prefix}--text-input__field-wrapper[data-invalid],
   .#{$prefix}--text-input__field-wrapper--warning,
@@ -18642,6 +21214,7 @@ Form styles
   input[data-invalid],
   .#{$prefix}--number[data-invalid] .#{$prefix}--number__input-wrapper,
   .#{$prefix}--date-picker-input__wrapper,
+  .#{$prefix}--date-picker-input__wrapper--invalid,
   .#{$prefix}--time-picker--invalid,
   .#{$prefix}--text-input__field-wrapper[data-invalid],
   .#{$prefix}--text-area__wrapper[data-invalid],
@@ -18901,10 +21474,6 @@ Link styles
   .#{$prefix}--link.#{$prefix}--link--inline {
     text-decoration: underline;
 
-    &:hover {
-      color: $hover-primary-text;
-    }
-
     &:focus,
     &:visited {
       text-decoration: none;
@@ -18966,7 +21535,11 @@ List styles
   }
 
   .#{$prefix}--list--nested {
-    margin-left: $carbon--spacing-06;
+    margin-left: rem(32px);
+  }
+
+  .#{$prefix}--list--nested .#{$prefix}--list__item {
+    padding-left: $carbon--spacing-02;
   }
 
   .#{$prefix}--list--ordered:not(.#{$prefix}--list--nested) {
@@ -19018,7 +21591,7 @@ List styles
 - **Requires**:
   - [prefix [variable]](#prefix-variable)
   - [text-01 [variable]](#text-01-variable)
-  - [carbon--spacing-06 [variable]](#carbon--spacing-06-variable)
+  - [carbon--spacing-02 [variable]](#carbon--spacing-02-variable)
   - [carbon--spacing-05 [variable]](#carbon--spacing-05-variable)
   - [carbon--spacing-04 [variable]](#carbon--spacing-04-variable)
 
@@ -19359,10 +21932,9 @@ List box styles
   .#{$prefix}--list-box__field:focus {
     @include focus-outline('outline');
 
-    @media screen and (-ms-high-contrast: active),
-      screen and (prefers-contrast) {
-      // `ButtonText` is a CSS2 system color to help improve colors in HCM
-      border: 2px solid ButtonText;
+    // Firefox HCM fix
+    @media screen and (prefers-contrast) {
+      border-style: dotted;
     }
   }
 
@@ -19929,7 +22501,7 @@ Loading styles
   }
 
   .#{$prefix}--loading__svg circle {
-    stroke-width: 8;
+    stroke-width: 10;
     stroke-linecap: butt;
     stroke-dasharray: 240;
   }
@@ -19948,10 +22520,11 @@ Loading styles
   }
 
   .#{$prefix}--loading--small {
-    width: 2rem;
-    height: 2rem;
+    width: rem(16px);
+    height: rem(16px);
+
     circle {
-      stroke-width: 12;
+      stroke-width: 16;
     }
   }
 
@@ -19961,7 +22534,7 @@ Loading styles
 
   .#{$prefix}--loading__background {
     stroke: $ui-03;
-    stroke-dashoffset: 0;
+    stroke-dashoffset: -22;
   }
 
   .#{$prefix}--loading-overlay {
@@ -20061,7 +22634,7 @@ Loading styles
 <summary>Source code</summary>
 
 ```scss
-$loading__gap: 40;
+$loading__gap: 16;
 ```
 
 </details>
@@ -20077,7 +22650,7 @@ $loading__gap: 40;
 <summary>Source code</summary>
 
 ```scss
-$loading--small__gap: 99;
+$loading--small__gap: 110;
 ```
 
 </details>
@@ -20094,7 +22667,7 @@ $loading--small__gap: 99;
 <summary>Source code</summary>
 
 ```scss
-$loading__size: 10.5rem;
+$loading__size: 5.5rem;
 ```
 
 </details>
@@ -20355,10 +22928,6 @@ Modal styles
     &:focus {
       @include focus-outline('outline');
     }
-
-    > * {
-      @include type-style('body-long-01');
-    }
   }
 
   // Required so overflow-indicator disappears at end of content
@@ -20415,6 +22984,14 @@ Modal styles
     }
   }
 
+  .#{$prefix}--modal-footer button.#{$prefix}--btn:focus {
+    // Firefox HCM Fix
+    @media screen and (prefers-contrast) {
+      border: none;
+      outline-style: dotted;
+    }
+  }
+
   .#{$prefix}--modal-close {
     position: absolute;
     top: 0;
@@ -20435,6 +23012,11 @@ Modal styles
     &:focus {
       border-color: $focus;
       outline: none;
+
+      // Firefox HCM Fix
+      @media screen and (prefers-contrast) {
+        border-style: dotted;
+      }
     }
   }
 
@@ -20535,11 +23117,22 @@ Multi select styles
     color: $text-01;
   }
 
+  .#{$prefix}--multi-select--filterable .#{$prefix}--text-input {
+    padding-left: $spacing-03;
+  }
+
+  .#{$prefix}--multi-select--filterable:hover .#{$prefix}--text-input {
+    background-color: $hover-ui;
+  }
+
+  .#{$prefix}--multi-select--filterable.#{$prefix}--list-box--disabled:hover
+    .#{$prefix}--text-input {
+    background-color: $field-01;
+  }
+
   .#{$prefix}--multi-select--filterable {
     .#{$prefix}--list-box__selection--multi {
-      position: absolute;
-      right: auto;
-      left: $carbon--spacing-03;
+      margin: 0 0 0 $spacing-05;
     }
   }
 
@@ -20549,15 +23142,6 @@ Multi select styles
     background-color: transparent;
     border-bottom: 0;
   }
-
-  .#{$prefix}--multi-select--selected .#{$prefix}--text-input {
-    // this value will need to change based on the number of digits in
-    // the number of items selected
-    //
-    // i.e. the input field needs adjusted padding to account for the width of
-    // the number in <ListBox.Selection>
-    padding-left: carbon--mini-units(7);
-  }
 }
 ```
 
@@ -20565,10 +23149,12 @@ Multi select styles
 
 - **Group**: [multi-select](#multi-select)
 - **Requires**:
-  - [carbon--mini-units [function]](#carbon--mini-units-function)
   - [prefix [variable]](#prefix-variable)
   - [text-01 [variable]](#text-01-variable)
-  - [carbon--spacing-03 [variable]](#carbon--spacing-03-variable)
+  - [spacing-03 [variable]](#spacing-03-variable)
+  - [hover-ui [variable]](#hover-ui-variable)
+  - [field-01 [variable]](#field-01-variable)
+  - [spacing-05 [variable]](#spacing-05-variable)
 
 ## notification
 
@@ -20789,6 +23375,12 @@ Inline notification styles
     outline: 2px solid $inverse-focus-ui;
     outline-offset: -2px;
     box-shadow: none;
+
+    // Firefox HCM Fix
+    @media screen and (prefers-contrast) {
+      border-style: dotted;
+      outline-style: dotted;
+    }
   }
 
   .#{$prefix}--inline-notification--low-contrast
@@ -20825,6 +23417,11 @@ Inline notification styles
     &:focus {
       outline: 2px solid $inverse-focus-ui;
       outline-offset: -2px;
+
+      // Firefox HCM fix
+      @media screen and (prefers-contrast) {
+        outline-style: dotted;
+      }
     }
 
     .#{$prefix}--inline-notification__close-icon {
@@ -21099,6 +23696,11 @@ Toast notification styles
     &:focus {
       outline: 2px solid $inverse-focus-ui;
       outline-offset: -2px;
+
+      // Firefox HCM fix
+      @media screen and (prefers-contrast) {
+        outline-style: dotted;
+      }
     }
 
     .#{$prefix}--toast-notification__close-icon {
@@ -21249,7 +23851,7 @@ Number input styles
   .#{$prefix}--number input[type='number']:disabled,
   .#{$prefix}--number--readonly input[type='number'] {
     color: $disabled;
-    background-color: $disabled-background-color;
+    background-color: $disabled-01;
     border-bottom-color: transparent;
     cursor: not-allowed;
   }
@@ -21337,7 +23939,7 @@ Number input styles
     fill: $support-03;
   }
 
-  .#{$prefix}--number__invalid--warning path[data-icon-path='inner-path'] {
+  .#{$prefix}--number__invalid--warning path:first-of-type {
     opacity: 1;
     fill: $carbon__black-100;
   }
@@ -21480,6 +24082,7 @@ Number input styles
   - [text-01 [variable]](#text-01-variable)
   - [field-01 [variable]](#field-01-variable)
   - [ui-04 [variable]](#ui-04-variable)
+  - [disabled-01 [variable]](#disabled-01-variable)
   - [icon-01 [variable]](#icon-01-variable)
   - [support-01 [variable]](#support-01-variable)
   - [support-03 [variable]](#support-03-variable)
@@ -21518,13 +24121,6 @@ Overflow menu styles
 
     &:focus {
       @include focus-outline('outline');
-
-      // Windows, Firefox HCM Fix
-      @media screen and (-ms-high-contrast: active),
-        screen and (prefers-contrast) {
-        outline: 3px solid transparent;
-        outline-offset: -3px;
-      }
     }
 
     &:hover {
@@ -21752,13 +24348,6 @@ Overflow menu styles
 
     &:focus {
       @include focus-outline('outline');
-
-      // Windows, Firefox HCM Fix
-      @media screen and (-ms-high-contrast: active),
-        screen and (prefers-contrast) {
-        outline: 3px solid transparent;
-        outline-offset: -3px;
-      }
     }
 
     &::-moz-focus-inner {
@@ -21798,10 +24387,10 @@ Overflow menu styles
   .#{$prefix}--overflow-menu-options__option--danger
     .#{$prefix}--overflow-menu-options__btn:focus {
     color: $text-04;
-    background-color: $support-01;
+    background-color: $danger-01;
 
     svg {
-      fill: $text-04;
+      fill: currentColor;
     }
   }
 
@@ -21856,7 +24445,7 @@ Overflow menu styles
   - [text-01 [variable]](#text-01-variable)
   - [icon-02 [variable]](#icon-02-variable)
   - [text-04 [variable]](#text-04-variable)
-  - [support-01 [variable]](#support-01-variable)
+  - [danger-01 [variable]](#danger-01-variable)
   - [ui-01 [variable]](#ui-01-variable)
   - [disabled-02 [variable]](#disabled-02-variable)
 
@@ -21891,6 +24480,10 @@ Pagination styles
 
     @include carbon--breakpoint('md') {
       overflow: initial;
+
+      .#{$prefix}--pagination__control-buttons {
+        display: flex;
+      }
     }
 
     // mobile friendly pagination
@@ -21900,9 +24493,12 @@ Pagination styles
         display: none;
       }
 
-      .#{$prefix}--pagination__items-count,
-      .#{$prefix}--pagination__control-buttons {
+      .#{$prefix}--pagination__items-count {
         display: initial;
+      }
+
+      .#{$prefix}--pagination__control-buttons {
+        display: flex;
       }
     }
   }
@@ -21974,7 +24570,11 @@ Pagination styles
   }
 
   .#{$prefix}--pagination__left {
-    padding: 0 $carbon--spacing-05;
+    padding: 0 $carbon--spacing-05 0 0;
+
+    @include carbon--breakpoint('md') {
+      padding: 0 $carbon--spacing-05;
+    }
   }
 
   .#{$prefix}--pagination__text {
@@ -22859,7 +25459,7 @@ Radio button styles
     flex-shrink: 0;
     width: rem(18px);
     height: rem(18px);
-    margin-right: $carbon--spacing-03;
+    margin: 2px $carbon--spacing-03 2px $carbon--spacing-03;
     background-color: transparent;
     border: $radio-border-width solid $icon-01;
     border-radius: 50%;
@@ -23041,7 +25641,7 @@ Search styles
 
   .#{$prefix}--search-input[disabled] {
     color: $disabled;
-    background-color: $disabled-background-color;
+    background-color: $disabled-01;
     border-bottom: 1px solid transparent;
     cursor: not-allowed;
 
@@ -23266,6 +25866,7 @@ Search styles
   - [text-01 [variable]](#text-01-variable)
   - [field-01 [variable]](#field-01-variable)
   - [ui-04 [variable]](#ui-04-variable)
+  - [disabled-01 [variable]](#disabled-01-variable)
   - [field-02 [variable]](#field-02-variable)
   - [spacing-07 [variable]](#spacing-07-variable)
   - [spacing-08 [variable]](#spacing-08-variable)
@@ -23296,12 +25897,14 @@ Select styles
     display: flex;
     flex-direction: column;
     align-items: flex-start;
+    width: 100%;
   }
 
   .#{$prefix}--select-input__wrapper {
     position: relative;
     display: flex;
     align-items: center;
+    width: 100%;
   }
 
   .#{$prefix}--select-input {
@@ -23309,10 +25912,7 @@ Select styles
     @include focus-outline('reset');
 
     display: block;
-    width: rem(224px);
-    min-width: rem(128px);
-    max-width: rem(448px);
-
+    width: 100%;
     height: rem(40px);
     padding: 0 $spacing-09 0 $spacing-05;
     color: $text-01;
@@ -23321,6 +25921,8 @@ Select styles
     border-bottom: 1px solid $ui-04;
     border-radius: 0;
     cursor: pointer;
+    // reset disabled <select> opacity
+    opacity: 1;
 
     // Do not transition on background-color (see: https://github.com/carbon-design-system/carbon/issues/4464)
     transition: outline $duration--fast-01 motion(standard, productive);
@@ -23350,20 +25952,13 @@ Select styles
       @include focus-outline('outline');
 
       color: $text-01;
-
-      // Windows, Firefox HCM Fix
-      @media screen and (-ms-high-contrast: active),
-        screen and (prefers-contrast) {
-        outline: 3px solid transparent;
-        outline-offset: -3px;
-      }
     }
 
     &:disabled,
     &:hover:disabled {
       color: $disabled-02;
-      background-color: $disabled-background-color;
-      border-bottom-color: $disabled-background-color;
+      background-color: $disabled-01;
+      border-bottom-color: $disabled-01;
       cursor: not-allowed;
     }
   }
@@ -23401,7 +25996,7 @@ Select styles
     &:disabled,
     &:hover:disabled {
       color: $disabled-02;
-      background-color: $disabled-background-color;
+      background-color: $field-02;
       cursor: not-allowed;
     }
   }
@@ -23436,11 +26031,6 @@ Select styles
   .#{$prefix}--select-option {
     // For the options to show in IE11
     color: $text-01;
-  }
-
-  .#{$prefix}--select-option[disabled] {
-    cursor: not-allowed;
-    opacity: 0.5;
   }
 
   // Override some Firefox user-agent styles
@@ -23480,6 +26070,7 @@ Select styles
   }
 
   .#{$prefix}--select--inline .#{$prefix}--select-input {
+    width: auto;
     padding-right: $spacing-07;
     padding-left: $carbon--spacing-03;
     color: $text-01;
@@ -23489,7 +26080,7 @@ Select styles
 
   .#{$prefix}--select--inline .#{$prefix}--select-input[disabled],
   .#{$prefix}--select--inline .#{$prefix}--select-input[disabled]:hover {
-    background-color: $disabled-background-color;
+    background-color: $disabled-01;
   }
 
   .#{$prefix}--select--inline .#{$prefix}--select__arrow {
@@ -23543,6 +26134,7 @@ Select styles
   - [ui-04 [variable]](#ui-04-variable)
   - [hover-ui [variable]](#hover-ui-variable)
   - [disabled-02 [variable]](#disabled-02-variable)
+  - [disabled-01 [variable]](#disabled-01-variable)
   - [field-02 [variable]](#field-02-variable)
   - [ui-05 [variable]](#ui-05-variable)
   - [support-01 [variable]](#support-01-variable)
@@ -23659,6 +26251,11 @@ Slider styles
       box-shadow: inset 0 0 0 2px $interactive-04, inset 0 0 0 3px $ui-01;
       // 20px / 14px = 1.4286
       transform: translate(-50%, -50%) scale(1.4286);
+
+      // Firefox HCM Fix
+      @media screen and (prefers-contrast) {
+        outline-style: dotted;
+      }
     }
 
     &:active {
@@ -24938,6 +27535,22 @@ Tag styles
     }
   }
 
+  .#{$prefix}--tag__custom-icon {
+    flex-shrink: 0;
+    width: rem(16px);
+    height: rem(16px);
+    margin-right: $spacing-02;
+    padding: 0;
+    color: currentColor;
+    background-color: transparent;
+    border: 0;
+    outline: none;
+
+    svg {
+      fill: currentColor;
+    }
+  }
+
   .#{$prefix}--tag--disabled .#{$prefix}--tag__close-icon {
     cursor: not-allowed;
   }
@@ -24946,6 +27559,17 @@ Tag styles
     border-radius: 50%;
     outline: none;
     box-shadow: inset 0 0 0 2px $focus;
+
+    // Windows, Firefox HCM Fix
+    @media screen and (-ms-high-contrast: active),
+      screen and (prefers-contrast) {
+      // `ButtonText` is a CSS2 system color to help improve colors in HCM
+      outline: 1px solid ButtonText;
+    }
+  }
+
+  .#{$prefix}--tag--high-contrast .#{$prefix}--tag__close-icon:focus {
+    box-shadow: inset 0 0 0 2px $inverse-focus-ui;
   }
 
   .#{$prefix}--tag--filter.#{$prefix}--tag--disabled
@@ -24981,7 +27605,9 @@ Tag styles
   - [inverse-hover-ui [variable]](#inverse-hover-ui-variable)
   - [disabled-01 [variable]](#disabled-01-variable)
   - [disabled-02 [variable]](#disabled-02-variable)
+  - [spacing-02 [variable]](#spacing-02-variable)
   - [focus [variable]](#focus-variable)
+  - [inverse-focus-ui [variable]](#inverse-focus-ui-variable)
   - [ui-03 [variable]](#ui-03-variable)
   - [text-01 [variable]](#text-01-variable)
 
@@ -25171,7 +27797,7 @@ Text input styles
     .#{$prefix}--text-input__invalid-icon--warning {
       fill: $support-03;
 
-      path[data-icon-path='inner-path'] {
+      path:first-of-type {
         opacity: 1;
         fill: $carbon__black-100;
       }
@@ -25197,6 +27823,13 @@ Text input styles
 
       svg {
         fill: $icon-02;
+
+        // Windows, Firefox HCM Fix
+        @media screen and (-ms-high-contrast: active),
+          screen and (prefers-contrast) {
+          // `ButtonText` is a CSS2 system color to help improve colors in HCM
+          fill: ButtonText;
+        }
       }
     }
 
@@ -25229,7 +27862,11 @@ Text input styles
     + .#{$prefix}--text-input--password__visibility__toggle
     svg {
     cursor: not-allowed;
-    opacity: 0.5;
+    fill: $disabled-02;
+
+    &:hover {
+      fill: $disabled-02;
+    }
   }
 
   //-----------------------------
@@ -25436,13 +28073,6 @@ Tile styles
 
     &:focus {
       @include focus-outline('outline');
-
-      // Windows, Firefox HCM Fix
-      @media screen and (-ms-high-contrast: active),
-        screen and (prefers-contrast) {
-        outline: 3px solid transparent;
-        outline-offset: -3px;
-      }
     }
   }
 
@@ -25518,11 +28148,14 @@ Tile styles
 
   .#{$prefix}--tile__chevron {
     position: absolute;
-    right: 0.5rem;
-    bottom: 0.5rem;
+    right: $carbon--spacing-05;
+    bottom: $carbon--spacing-05;
+    display: flex;
+    align-items: flex-end;
     height: 1rem;
 
     svg {
+      margin-left: $carbon--spacing-03;
       transform-origin: center;
       transition: $duration--fast-02 motion(standard, productive);
       fill: $ui-05;
@@ -25632,6 +28265,7 @@ Tile styles
   - [text-01 [variable]](#text-01-variable)
   - [carbon--spacing-09 [variable]](#carbon--spacing-09-variable)
   - [icon-02 [variable]](#icon-02-variable)
+  - [carbon--spacing-03 [variable]](#carbon--spacing-03-variable)
   - [ui-05 [variable]](#ui-05-variable)
 
 ## time-picker
@@ -26097,6 +28731,13 @@ Toggle styles
     + .#{$prefix}--toggle-input__label
     > .#{$prefix}--toggle__switch::before {
     box-shadow: 0 0 0 1px $ui-02, 0 0 0 3px $focus;
+
+    // Windows, Firefox HCM Fix
+    @media screen and (-ms-high-contrast: active),
+      screen and (prefers-contrast) {
+      // `ButtonText` is a CSS2 system color to help improve colors in HCM
+      outline: 1px solid ButtonText;
+    }
   }
 
   //----------------------------------------------
@@ -26797,6 +29438,58 @@ Tooltip styles
       box-shadow: inset 0 0 0 1px $inverse-02, inset 0 0 0 2px $ui-background;
     }
 
+    &.#{$prefix}--tooltip--top.#{$prefix}--tooltip--align-start,
+    &.#{$prefix}--tooltip--bottom.#{$prefix}--tooltip--align-start {
+      transform: translate(calc(50% - 22px), 0);
+
+      .#{$prefix}--tooltip__caret {
+        margin-left: 15px;
+      }
+    }
+
+    &.#{$prefix}--tooltip--top.#{$prefix}--tooltip--align-end,
+    &.#{$prefix}--tooltip--bottom.#{$prefix}--tooltip--align-end {
+      transform: translate(calc(22px - 50%), 0);
+
+      .#{$prefix}--tooltip__caret {
+        margin-right: 15px;
+      }
+    }
+
+    &.#{$prefix}--tooltip--left.#{$prefix}--tooltip--align-start {
+      transform: translate(0, calc(-15px + 50%));
+
+      .#{$prefix}--tooltip__caret {
+        top: 14px;
+      }
+    }
+
+    &.#{$prefix}--tooltip--left.#{$prefix}--tooltip--align-end {
+      transform: translate(0, calc(31px - 50%));
+
+      .#{$prefix}--tooltip__caret {
+        top: initial;
+        bottom: 25px;
+      }
+    }
+
+    &.#{$prefix}--tooltip--right.#{$prefix}--tooltip--align-start {
+      transform: translate(0, calc(-26px + 50%));
+
+      .#{$prefix}--tooltip__caret {
+        top: 26px;
+      }
+    }
+
+    &.#{$prefix}--tooltip--right.#{$prefix}--tooltip--align-end {
+      transform: translate(0, calc(20px - 50%));
+
+      .#{$prefix}--tooltip__caret {
+        top: initial;
+        bottom: 12px;
+      }
+    }
+
     p {
       @include type-style('body-short-01');
     }
@@ -27409,11 +30102,9 @@ UI shell header
     border-color: $shell-header-focus;
     outline: none;
 
-    // Windows, Firefox HCM Fix
-    @media screen and (-ms-high-contrast: active),
-      screen and (prefers-contrast) {
-      outline: 3px solid transparent;
-      outline-offset: -3px;
+    // Firefox HCM Fix
+    @media screen and (prefers-contrast) {
+      border-style: dotted;
     }
   }
 
@@ -27467,6 +30158,13 @@ UI shell header
 
   a.#{$prefix}--header__name:focus {
     border-color: $shell-header-focus;
+
+    // Windows, Firefox HCM Fix
+    @media screen and (-ms-high-contrast: active),
+      screen and (prefers-contrast) {
+      // `ButtonText` is a CSS2 system color to help improve colors in HCM
+      border-style: dotted;
+    }
   }
 
   .#{$prefix}--header__name--prefix {
@@ -27558,8 +30256,7 @@ UI shell header
     // Windows, Firefox HCM Fix
     @media screen and (-ms-high-contrast: active),
       screen and (prefers-contrast) {
-      outline: 3px solid transparent;
-      outline-offset: -3px;
+      border-style: dotted;
     }
   }
 
@@ -28544,13 +31241,6 @@ UI shell side nav
 
   .#{$prefix}--side-nav__submenu:focus {
     @include focus-outline('outline');
-
-    // Windows, Firefox HCM Fix
-    @media screen and (-ms-high-contrast: active),
-      screen and (prefers-contrast) {
-      outline: 3px solid transparent;
-      outline-offset: -3px;
-    }
   }
 
   .#{$prefix}--side-nav__submenu-title {
@@ -28682,13 +31372,6 @@ UI shell side nav
   a.#{$prefix}--side-nav__link:focus,
   .#{$prefix}--side-nav a.#{$prefix}--header__menu-item:focus {
     @include focus-outline('outline');
-
-    // Windows, Firefox HCM Fix
-    @media screen and (-ms-high-contrast: active),
-      screen and (prefers-contrast) {
-      outline: 3px solid transparent;
-      outline-offset: -3px;
-    }
   }
 
   a.#{$prefix}--side-nav__link[aria-current='page'],

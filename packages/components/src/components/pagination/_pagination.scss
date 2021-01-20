@@ -41,6 +41,10 @@ $css--helpers: true;
 
     @include carbon--breakpoint('md') {
       overflow: initial;
+
+      .#{$prefix}--pagination__control-buttons {
+        display: flex;
+      }
     }
 
     // mobile friendly pagination
@@ -50,9 +54,12 @@ $css--helpers: true;
         display: none;
       }
 
-      .#{$prefix}--pagination__items-count,
-      .#{$prefix}--pagination__control-buttons {
+      .#{$prefix}--pagination__items-count {
         display: initial;
+      }
+
+      .#{$prefix}--pagination__control-buttons {
+        display: flex;
       }
     }
   }
@@ -124,7 +131,11 @@ $css--helpers: true;
   }
 
   .#{$prefix}--pagination__left {
-    padding: 0 $carbon--spacing-05;
+    padding: 0 $carbon--spacing-05 0 0;
+
+    @include carbon--breakpoint('md') {
+      padding: 0 $carbon--spacing-05;
+    }
   }
 
   .#{$prefix}--pagination__text {

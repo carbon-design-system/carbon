@@ -8,13 +8,7 @@
 'use strict';
 
 const addons = [
-  '@storybook/addon-storysource',
-  '@storybook/addon-knobs',
-  '@storybook/addon-actions',
-  '@storybook/addon-links',
-  '@storybook/addon-docs',
-  '@storybook/addon-notes/register',
-  'storybook-readme/register',
+  'storybook-preset-carbon',
   require.resolve('./addon-carbon-theme/register'),
 ];
 

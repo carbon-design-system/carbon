@@ -93,6 +93,8 @@ Map {
     },
   },
   "Breadcrumb" => Object {
+    "$$typeof": Symbol(react.forward_ref),
+    "displayName": "Breadcrumb",
     "propTypes": Object {
       "aria-label": Object {
         "type": "string",
@@ -107,8 +109,11 @@ Map {
         "type": "bool",
       },
     },
+    "render": [Function],
   },
   "BreadcrumbItem" => Object {
+    "$$typeof": Symbol(react.forward_ref),
+    "displayName": "BreadcrumbItem",
     "propTypes": Object {
       "aria-current": Object {
         "args": Array [
@@ -136,6 +141,7 @@ Map {
         "type": "bool",
       },
     },
+    "render": [Function],
   },
   "Button" => Object {
     "$$typeof": Symbol(react.forward_ref),
@@ -350,6 +356,9 @@ Map {
       "copyLabel": Object {
         "type": "string",
       },
+      "disabled": Object {
+        "type": "bool",
+      },
       "feedback": Object {
         "type": "string",
       },
@@ -560,7 +569,7 @@ Map {
         "type": "bool",
       },
       "invalidText": Object {
-        "type": "string",
+        "type": "node",
       },
       "itemToElement": Object {
         "type": "func",
@@ -1250,6 +1259,9 @@ Map {
           "isRequired": true,
           "type": "string",
         },
+        "onChange": Object {
+          "type": "func",
+        },
         "onSelect": Object {
           "isRequired": true,
           "type": "func",
@@ -1870,6 +1882,9 @@ Map {
         "isRequired": true,
         "type": "string",
       },
+      "onChange": Object {
+        "type": "func",
+      },
       "onSelect": Object {
         "isRequired": true,
         "type": "func",
@@ -2207,7 +2222,7 @@ Map {
         "type": "bool",
       },
       "invalidText": Object {
-        "type": "string",
+        "type": "node",
       },
       "labelText": Object {
         "isRequired": true,
@@ -2237,6 +2252,12 @@ Map {
       },
       "type": Object {
         "type": "string",
+      },
+      "warn": Object {
+        "type": "bool",
+      },
+      "warnText": Object {
+        "type": "node",
       },
     },
   },
@@ -2310,7 +2331,7 @@ Map {
         "type": "bool",
       },
       "invalidText": Object {
-        "type": "string",
+        "type": "node",
       },
       "itemToElement": Object {
         "type": "func",
@@ -2383,7 +2404,7 @@ Map {
         "type": "bool",
       },
       "warnText": Object {
-        "type": "string",
+        "type": "node",
       },
     },
     "render": [Function],
@@ -3546,7 +3567,7 @@ Map {
           "type": "bool",
         },
         "invalidText": Object {
-          "type": "string",
+          "type": "node",
         },
         "itemToString": Object {
           "type": "func",
@@ -3562,6 +3583,9 @@ Map {
           "type": "string",
         },
         "onChange": Object {
+          "type": "func",
+        },
+        "onMenuChange": Object {
           "type": "func",
         },
         "open": Object {
@@ -3604,7 +3628,7 @@ Map {
           "type": "bool",
         },
         "warnText": Object {
-          "type": "string",
+          "type": "node",
         },
       },
     },
@@ -3774,7 +3798,7 @@ Map {
         "type": "bool",
       },
       "invalidText": Object {
-        "type": "string",
+        "type": "node",
       },
       "itemToString": Object {
         "type": "func",
@@ -3794,6 +3818,9 @@ Map {
         "type": "string",
       },
       "onChange": Object {
+        "type": "func",
+      },
+      "onMenuChange": Object {
         "type": "func",
       },
       "open": Object {
@@ -3844,7 +3871,7 @@ Map {
         "type": "bool",
       },
       "warnText": Object {
-        "type": "string",
+        "type": "node",
       },
     },
     "render": [Function],
@@ -4172,6 +4199,9 @@ Map {
       "primaryFocus": [Function],
       "requireTitle": Object {
         "type": "bool",
+      },
+      "title": Object {
+        "type": "string",
       },
       "wrapperClassName": Object {
         "type": "string",
@@ -4633,7 +4663,7 @@ Map {
         "type": "bool",
       },
       "invalidText": Object {
-        "type": "string",
+        "type": "node",
       },
       "labelText": Object {
         "type": "node",
@@ -5019,6 +5049,9 @@ Map {
         "type": "func",
       },
       "renderAnchor": [Function],
+      "renderButton": Object {
+        "type": "func",
+      },
       "renderContent": Object {
         "type": "func",
       },
@@ -5053,6 +5086,7 @@ Map {
   },
   "Tabs" => Object {
     "defaultProps": Object {
+      "scrollIntoView": true,
       "selected": 0,
       "selectionMode": "automatic",
       "type": "default",
@@ -5067,6 +5101,9 @@ Map {
       "hidden": Object {
         "type": "bool",
       },
+      "leftOverflowButtonProps": Object {
+        "type": "object",
+      },
       "light": Object {
         "type": "bool",
       },
@@ -5078,6 +5115,12 @@ Map {
       },
       "onSelectionChange": Object {
         "type": "func",
+      },
+      "rightOverflowButtonProps": Object {
+        "type": "object",
+      },
+      "scrollIntoView": Object {
+        "type": "bool",
       },
       "selected": Object {
         "type": "number",
@@ -5124,6 +5167,19 @@ Map {
       },
       "onClose": Object {
         "type": "func",
+      },
+      "renderIcon": Object {
+        "args": Array [
+          Array [
+            Object {
+              "type": "func",
+            },
+            Object {
+              "type": "object",
+            },
+          ],
+        ],
+        "type": "oneOfType",
       },
       "title": Object {
         "type": "string",
@@ -5199,7 +5255,7 @@ Map {
         "type": "bool",
       },
       "invalidText": Object {
-        "type": "string",
+        "type": "node",
       },
       "labelText": Object {
         "isRequired": true,
@@ -5285,7 +5341,7 @@ Map {
           "type": "bool",
         },
         "invalidText": Object {
-          "type": "string",
+          "type": "node",
         },
         "labelText": Object {
           "isRequired": true,
@@ -5393,7 +5449,7 @@ Map {
           "type": "bool",
         },
         "invalidText": Object {
-          "type": "string",
+          "type": "node",
         },
         "labelText": Object {
           "isRequired": true,
@@ -5504,7 +5560,7 @@ Map {
         "type": "bool",
       },
       "invalidText": Object {
-        "type": "string",
+        "type": "node",
       },
       "labelText": Object {
         "isRequired": true,
@@ -5551,7 +5607,7 @@ Map {
         "type": "bool",
       },
       "warnText": Object {
-        "type": "string",
+        "type": "node",
       },
     },
     "render": [Function],
@@ -5705,7 +5761,13 @@ Map {
       "tileCollapsedIconText": Object {
         "type": "string",
       },
+      "tileCollapsedLabel": Object {
+        "type": "string",
+      },
       "tileExpandedIconText": Object {
+        "type": "string",
+      },
+      "tileExpandedLabel": Object {
         "type": "string",
       },
     },
@@ -5862,7 +5924,7 @@ Map {
         "type": "bool",
       },
       "invalidText": Object {
-        "type": "string",
+        "type": "node",
       },
       "labelText": Object {
         "type": "node",
@@ -5981,6 +6043,14 @@ Map {
       },
       "onToggle": Object {
         "type": "func",
+      },
+      "size": Object {
+        "args": Array [
+          Array [
+            "sm",
+          ],
+        ],
+        "type": "oneOf",
       },
       "toggled": Object {
         "type": "bool",
@@ -6140,7 +6210,7 @@ Map {
       },
       "children": Object {
         "isRequired": true,
-        "type": "string",
+        "type": "node",
       },
       "className": Object {
         "type": "string",

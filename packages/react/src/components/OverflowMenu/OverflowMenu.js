@@ -494,7 +494,7 @@ class OverflowMenu extends Component {
     const childrenWithProps = React.Children.toArray(children).map(
       (child, index) =>
         React.cloneElement(child, {
-          closeMenu: this.closeMenu,
+          closeMenu: child.props.closeMenu || this.closeMenu,
           handleOverflowMenuItemFocus: this.handleOverflowMenuItemFocus,
           ref: (e) => {
             this[`overflowMenuItem${index}`] = e;
@@ -560,6 +560,7 @@ class OverflowMenu extends Component {
   }
 }
 
+export { OverflowMenu };
 export default (() => {
   const forwardRef = (props, ref) => <OverflowMenu {...props} innerRef={ref} />;
   forwardRef.displayName = 'OverflowMenu';

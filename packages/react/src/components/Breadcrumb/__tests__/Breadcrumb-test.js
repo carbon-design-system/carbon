@@ -5,6 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+import { cleanup, render } from '@testing-library/react';
 import React from 'react';
 import { mount } from 'enzyme';
 import { settings } from 'carbon-components';
@@ -94,5 +95,24 @@ describe('Breadcrumb', () => {
       </Breadcrumb>
     );
     expect(aria).toMatchSnapshot();
+  });
+
+  describe('Component API', () => {
+    afterEach(cleanup);
+
+    it('should accept a `ref` for the outermost node', () => {
+      const ref = jest.fn(() => React.createRef());
+      const { container } = render(
+        <Breadcrumb ref={ref}>
+          <BreadcrumbItem href="#a">A</BreadcrumbItem>
+          <BreadcrumbItem href="#b">B</BreadcrumbItem>
+          <BreadcrumbItem href="#c" aria-current="page">
+            C
+          </BreadcrumbItem>
+        </Breadcrumb>
+      );
+      expect(ref).toHaveBeenCalled();
+      expect(ref).toHaveBeenCalledWith(container.firstChild);
+    });
   });
 });

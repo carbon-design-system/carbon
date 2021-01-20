@@ -29,6 +29,7 @@ describe('MultiSelect.Filterable', () => {
       items: generateItems(5, generateGenericItem),
       initialSelectedItems: [],
       onChange: jest.fn(),
+      onMenuChange: jest.fn(),
       placeholder: 'Placeholder...',
     };
   });

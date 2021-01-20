@@ -2,4 +2,4 @@
 
 Available guides:
 
-- [v6 to v7](./migrate-to-7.x.md)
+- [v11 Pictograms React](./11.x-pictograms-react.md)

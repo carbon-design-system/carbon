@@ -36,6 +36,10 @@
     color: $text-01;
   }
 
+  .#{$prefix}--file--label--disabled {
+    color: $disabled-02;
+  }
+
   .#{$prefix}--file-input {
     @include hidden;
   }
@@ -91,7 +95,7 @@
   }
 
   .#{$prefix}--file-browse-btn--disabled .#{$prefix}--file__drop-container {
-    border: 1px dashed $disabled-01;
+    border: 1px dashed $disabled-02;
   }
 
   .#{$prefix}--label-description {
@@ -100,6 +104,10 @@
 
     margin-bottom: $carbon--spacing-05;
     color: $text-02;
+  }
+
+  .#{$prefix}--label-description--disabled {
+    color: $disabled-02;
   }
 
   // For backwards compatibility
@@ -119,8 +127,8 @@
   .#{$prefix}--file__selected-file {
     display: grid;
     grid-auto-rows: auto;
-    grid-gap: $carbon--spacing-05;
     grid-template-columns: 1fr auto;
+    gap: rem(12px) $carbon--spacing-05;
     align-items: center;
     max-width: rem(320px);
     min-height: $carbon--spacing-09;
@@ -139,12 +147,6 @@
       margin: 0;
     }
 
-    .#{$prefix}--loading {
-      width: rem(32px);
-      height: rem(32px);
-      margin-right: -$carbon--spacing-03;
-    }
-
     .#{$prefix}--inline-loading__animation .#{$prefix}--loading {
       // Vanilla markup has `.bx--inline-loading__animation` which is used for `margin-right` adjustment
       margin-right: 0;
@@ -158,13 +160,21 @@
       white-space: nowrap;
       text-overflow: ellipsis;
     }
+
+    // Windows, Firefox HCM Fix
+    @media screen and (-ms-high-contrast: active),
+      screen and (prefers-contrast) {
+      outline: 2px solid transparent;
+    }
   }
 
   .#{$prefix}--file__selected-file--field {
+    gap: $carbon--spacing-03 $carbon--spacing-05;
     min-height: rem(40px);
   }
 
   .#{$prefix}--file__selected-file--sm {
+    gap: $carbon--spacing-02 $carbon--spacing-05;
     min-height: rem(32px);
   }
 
@@ -175,19 +185,36 @@
     max-width: rem(320px);
     margin-bottom: $carbon--spacing-03;
     background-color: $field-01;
-
     outline-width: 1px;
   }
 
   .#{$prefix}--file__selected-file--invalid {
     @include focus-outline('invalid');
 
-    padding: $carbon--spacing-05 0;
+    padding: rem(12px) 0;
+  }
+
+  .#{$prefix}--file__selected-file--invalid.#{$prefix}--file__selected-file--sm {
+    padding: $carbon--spacing-02 0;
+  }
+
+  .#{$prefix}--file__selected-file--invalid.#{$prefix}--file__selected-file--field {
+    padding: $carbon--spacing-03 0;
   }
 
   .#{$prefix}--file__selected-file--invalid .#{$prefix}--form-requirement {
     padding-top: $carbon--spacing-05;
     border-top: 1px solid $ui-03;
+  }
+
+  .#{$prefix}--file__selected-file--invalid.#{$prefix}--file__selected-file--sm
+    .#{$prefix}--form-requirement {
+    padding-top: rem(7px);
+  }
+
+  .#{$prefix}--file__selected-file--invalid.#{$prefix}--file__selected-file--field
+    .#{$prefix}--form-requirement {
+    padding-top: rem(11px);
   }
 
   .#{$prefix}--file__selected-file--invalid
@@ -230,6 +257,7 @@
 
   .#{$prefix}--file__state-container {
     display: flex;
+    align-items: center;
     justify-content: center;
     min-width: 1.5rem;
     padding-right: $carbon--spacing-05;
@@ -257,14 +285,15 @@
   .#{$prefix}--file__state-container .#{$prefix}--file-invalid {
     width: $carbon--spacing-05;
     height: $carbon--spacing-05;
-    margin-right: $carbon--spacing-03;
     fill: $support-01;
   }
 
   .#{$prefix}--file__state-container .#{$prefix}--file-close {
     display: flex;
-    width: $carbon--spacing-05;
-    height: $carbon--spacing-05;
+    align-items: center;
+    justify-content: center;
+    width: $carbon--spacing-06;
+    height: $carbon--spacing-06;
     padding: 0;
     background-color: transparent;
     border: none;
@@ -272,12 +301,19 @@
     fill: $icon-01;
 
     &:focus {
-      @include focus-outline('border');
+      @include focus-outline('outline');
     }
   }
 
   .#{$prefix}--file__state-container .#{$prefix}--file-close svg path {
     fill: $icon-01;
+
+    // Windows, Firefox HCM Fix
+    @media screen and (-ms-high-contrast: active),
+      screen and (prefers-contrast) {
+      // `ButtonText` is a CSS2 system color to help improve colors in HCM
+      fill: ButtonText;
+    }
   }
 
   .#{$prefix}--file__state-container .#{$prefix}--inline-loading__animation {

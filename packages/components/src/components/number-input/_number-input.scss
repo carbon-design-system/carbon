@@ -76,7 +76,7 @@
   .#{$prefix}--number input[type='number']:disabled,
   .#{$prefix}--number--readonly input[type='number'] {
     color: $disabled;
-    background-color: $disabled-background-color;
+    background-color: $disabled-01;
     border-bottom-color: transparent;
     cursor: not-allowed;
   }
@@ -164,7 +164,7 @@
     fill: $support-03;
   }
 
-  .#{$prefix}--number__invalid--warning path[data-icon-path='inner-path'] {
+  .#{$prefix}--number__invalid--warning path:first-of-type {
     opacity: 1;
     fill: $carbon__black-100;
   }

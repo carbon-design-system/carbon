@@ -1,12 +1,16 @@
 {
   "name": "@carbon/upgrade",
   "description": "A tool for upgrading Carbon versions",
-  "version": "10.8.0",
+  "version": "10.9.0",
   "license": "Apache-2.0",
   "bin": {
     "carbon-upgrade": "./bin/carbon-upgrade.js"
   },
-  "repository": "https://github.com/carbon-design-system/carbon/tree/master/packages/upgrade",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/carbon-design-system/carbon.git",
+    "directory": "packages/upgrade"
+  },
   "bugs": "https://github.com/carbon-design-system/carbon/issues",
   "files": [
     "bin",

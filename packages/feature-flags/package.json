@@ -2,11 +2,15 @@
   "name": "@carbon/feature-flags",
   "private": true,
   "description": "Build with feature flags in Carbon",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "license": "Apache-2.0",
   "main": "lib/index.js",
   "module": "es/index.js",
-  "repository": "https://github.com/carbon-design-system/carbon/tree/master/packages/feature-flags",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/carbon-design-system/carbon.git",
+    "directory": "packages/feature-flags"
+  },
   "bugs": "https://github.com/carbon-design-system/carbon/issues",
   "keywords": [
     "ibm",
@@ -23,7 +27,7 @@
   "devDependencies": {
     "@babel/generator": "^7.10.2",
     "@babel/types": "^7.10.2",
-    "@carbon/scss-generator": "^10.10.0",
+    "@carbon/scss-generator": "^10.11.0",
     "fs-extra": "^9.0.1",
     "js-yaml": "^3.14.0",
     "rimraf": "^3.0.2",

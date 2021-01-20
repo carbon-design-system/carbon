@@ -1,0 +1,37 @@
+{
+  "name": "storybook-preset-carbon",
+  "private": true,
+  "version": "0.1.0",
+  "license": "Apache-2.0",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/carbon-design-system/carbon.git",
+    "directory": "config/storybook-preset-carbon"
+  },
+  "bugs": "https://github.com/carbon-design-system/carbon/issues",
+  "keywords": [
+    "ibm",
+    "carbon",
+    "carbon-design-system",
+    "components",
+    "react"
+  ],
+  "peerDependencies": {
+    "@storybook/react": "^5.3.19"
+  },
+  "dependencies": {
+    "@storybook/addon-actions": "^5.3.19",
+    "@storybook/addon-docs": "^5.3.19",
+    "@storybook/addon-knobs": "^5.3.19",
+    "@storybook/addon-links": "^5.3.19",
+    "@storybook/addon-notes": "^5.3.19",
+    "@storybook/addon-storysource": "^5.3.19",
+    "@storybook/addons": "^5.3.19",
+    "@storybook/source-loader": "^5.3.19",
+    "storybook-readme": "^5.0.8"
+  },
+  "devDependencies": {
+    "@storybook/react": "^5.3.19"
+  }
+}

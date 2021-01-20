@@ -10,9 +10,10 @@ import React from 'react';
 import classNames from 'classnames';
 import { settings } from 'carbon-components';
 import deprecate from '../../prop-types/deprecate';
+import setupGetInstanceId from '../../tools/setupGetInstanceId';
 
 const { prefix } = settings;
-
+const getInstanceId = setupGetInstanceId();
 export default class Tab extends React.Component {
   static propTypes = {
     /**
@@ -73,6 +74,7 @@ export default class Tab extends React.Component {
      * side router libraries.
      **/
     renderAnchor: deprecate(PropTypes.func),
+    renderButton: PropTypes.func,
 
     /*
      * An optional parameter to allow overriding the content rendering.
@@ -104,9 +106,11 @@ export default class Tab extends React.Component {
     onKeyDown: () => {},
   };
 
+  tabId = this.props.id || `tab-${getInstanceId()}`;
+
   render() {
     const {
-      id,
+      id, // eslint-disable-line no-unused-vars
       className,
       handleTabClick,
       handleTabKeyDown,
@@ -119,7 +123,8 @@ export default class Tab extends React.Component {
       onClick,
       onKeyDown,
       // TODO: rename renderAnchor to renderButton in next major version
-      renderAnchor: renderButton,
+      renderAnchor,
+      renderButton,
       renderContent, // eslint-disable-line no-unused-vars
       ...other
     } = this.props;
@@ -141,8 +146,8 @@ export default class Tab extends React.Component {
     const buttonProps = {
       ['aria-selected']: selected,
       ['aria-disabled']: disabled,
-      ['aria-controls']: `${id}__panel`,
-      id,
+      ['aria-controls']: `${this.tabId}__panel`,
+      id: this.tabId,
       // TODO: remove scrollable in next major release
       // className:  `${prefix}--tabs__nav-link`,
       className: `${prefix}--tabs--scrollable__nav-link`,
@@ -152,6 +157,8 @@ export default class Tab extends React.Component {
         this.tabAnchor = e;
       },
     };
+
+    const renderElement = renderButton || renderAnchor;
 
     return (
       <li
@@ -176,8 +183,8 @@ export default class Tab extends React.Component {
           onKeyDown(evt);
         }}
         role="presentation">
-        {renderButton ? (
-          renderButton(buttonProps)
+        {renderElement ? (
+          renderElement(buttonProps)
         ) : (
           <button type="button" role="tab" {...buttonProps}>
             {label}

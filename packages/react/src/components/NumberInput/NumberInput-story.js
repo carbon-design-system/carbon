@@ -17,6 +17,7 @@ import {
   select,
 } from '@storybook/addon-knobs';
 import NumberInput from '../NumberInput';
+import { NumberInput as OGNumberInput } from './NumberInput';
 import NumberInputSkeleton from '../NumberInput/NumberInput.Skeleton';
 import mdx from './NumberInput.mdx';
 
@@ -65,10 +66,10 @@ const props = () => ({
 
 export default {
   title: 'NumberInput',
+  component: OGNumberInput,
   decorators: [withKnobs],
 
   parameters: {
-    component: NumberInput,
     docs: {
       page: mdx,
     },

@@ -44,6 +44,11 @@ describe('Code Snippet', () => {
       snippet.setProps({ hideCopyButton: true });
       expect(snippet.find(CopyButton).length).toBe(0);
     });
+
+    it('should set disabled if one is passed via props', () => {
+      snippet.setProps({ disabled: true });
+      expect(snippet.find(`.${prefix}--snippet--disabled`).length).toBe(1);
+    });
   });
 
   describe('Triggers appropriate events', () => {

@@ -1,10 +1,14 @@
 {
   "name": "eslint-config-carbon",
   "description": "ESLint configuration for Carbon",
-  "version": "2.1.0",
+  "version": "2.2.0",
   "license": "Apache-2.0",
   "main": "index.js",
-  "repository": "https://github.com/carbon-design-system/carbon/tree/master/config/eslint-config-carbon",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/carbon-design-system/carbon.git",
+    "directory": "config/eslint-config-carbon"
+  },
   "bugs": "https://github.com/carbon-design-system/carbon/issues",
   "files": [
     "plugins",

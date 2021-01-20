@@ -26,10 +26,10 @@ describe('CodeSnippetSkeleton', () => {
     );
 
     it.each(snippetTypes)(
-      'should have no DAP violations with type="%s"',
+      'should have no AC violations with type="%s"',
       async (type) => {
         const { container } = render(<CodeSnippetSkeleton type={type} />);
-        await expect(container).toHaveNoDAPViolations(
+        await expect(container).toHaveNoACViolations(
           `CodeSnippetSkeleton-${type}`
         );
       }

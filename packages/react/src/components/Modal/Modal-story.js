@@ -68,6 +68,10 @@ const props = () => ({
     'Prevent closing on click outside of modal (preventCloseOnClickOutside)',
     false
   ),
+  primaryButtonDisabled: boolean(
+    'Disable primary button (primaryButtonDisabled)',
+    false
+  ),
 });
 
 const titleOnlyProps = () => {

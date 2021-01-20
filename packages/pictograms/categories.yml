@@ -6,15 +6,11 @@ categories:
       - crop
       - delete
       - do-not
-      - download
       - download--01
       - download--02
-      - download--alt
       - embed
-      - export
       - export--01
       - export--02
-      - export--alt
       - launch
       - love
       - maximize
@@ -26,10 +22,8 @@ categories:
       - repeat
       - reset
       - trash
-      - upload
       - upload--01
       - upload--02
-      - upload--alt
   - name: Blockchain
     members:
       - connected--ecosystem
@@ -57,18 +51,20 @@ categories:
       - amsterdam--canal
       - amsterdam--farm
       - amsterdam--windmill
+      - atlanta
       - austin
       - bangalore
       - barcelona
       #    - basel
       - beijing--municipal
       - beijing--tower
-      - berlin--brandenburg
       - berlin--brandenburg-gate
       - berlin--cathedral
       - berlin--tower
       - boston--zakim-bridge
+      - budapest
       - cairo--giza-plateau
+      - canada--maple-leaf
       - chicago
       - copenhagen--planetarium
       - copenhagen--snekkja
@@ -77,9 +73,9 @@ categories:
       - dublin--brewery
       - dublin--castle
       - hamburg--philharmone
+      - kuala-lumpur
       - london
       - london--big-ben
-      - london--expanded--base
       - madrid--cathedral
       - madrid--skyscrapers
       - madrid--statue
@@ -92,24 +88,26 @@ categories:
       - munich
       - nice
       - nyc--brooklyn
-      - nyc--manhattan
+      - nyc--chrysler-building
       - nyc--manhattan--01
       - nyc--manhattan--02
-      - nyc--manhattan--alt
       - nyc--statue-of-liberty
+      - nyc--world-trade-center
+      - okinawa
       - paris--arc-de-triomphe
       - paris--louvre
       - paris--notre-dame
       - paris--pompidou-center
-      - prague
       - prague--charles-bridge-tower
+      - prague--dancing-house--01
+      - prague--dancing-house--02
       #    - portland
       - raleigh-nc
+      - rio-de-janeiro
       - rome
       - san-francisco
       - san-francisco--fog
       - sao-paulo
-      - sao-paulo--expanded--base
       - seattle
       #    - shanghai
       - singapore
@@ -129,6 +127,8 @@ categories:
       - active--server
       - api
       - automate--modular--management
+      - c--language
+      - c-plus-plus--language
       - cloud--analytics
       - cloud--assets
       - cloud--builder--professional--services
@@ -147,18 +147,30 @@ categories:
       - cloud--strategy
       - cloud--tutorials
       - cloud--vmware
+      - cloud-pak--family
+      - cloud-pak--for-applications
+      - cloud-pak--for-data
+      - cloud-pak--for-integration
+      - cloud-pak--for-multicloud-management
+      - cloud-pak--for-security
+      - cloud-pak--system
+      - cobol--language
       - cognos--analytics
+      - condition--builder
       - construct
       - devops
       - digital
       - docker
       - expand--horz
       - expand--vert
+      - filter--variable
       - free--trial
       - global--business--services
       - global--technology--services
+      - go--language
       - hybrid--cloud
       - hybrid--cloud--services
+      - ibm--automation-platform
       - ibm--cloud
       - java
       - javascript
@@ -167,8 +179,13 @@ categories:
       - marketplace
       - mas
       - mqa
+      - php--language
       - planning--analytics
+      - pli--language
+      - r--language
+      - random--samples
       - saas--enablement
+      - select--range
       - single--sign-on
       - softlayer--enablement
   - name: Controls
@@ -177,10 +194,8 @@ categories:
       - podcast
       - slider
       - toggle
-      - video
       - video--01
       - video--02
-      - video--alt
       - video--chat
       - video--play
       - webcast
@@ -213,11 +228,12 @@ categories:
       - chart--t-SNE
       - circle--packing
       - code--syntax
+      - dashboard
+      - data--apis
       - data--set
       - employee--insights
       - flow--chart
       - flow--chart--detail
-      - heat--map
       - heat--map--01
       - heat--map--02
       - math--curve
@@ -237,21 +253,37 @@ categories:
       - word--cloud
   - name: Data Storage
     members:
+      - accelerated-computing
       - archive
+      - business--continuity
+      - containers-and-cloud-native
       - data--backup
+      - data--privacy
       - data--processing
       - data--storage
+      - flash--storage
       - hard--drive
       - hard--drive--network
+      - hybrid--cloud--02
+      - ibm--z-and-linuxone-single-frame
+      - ibm--z-and-linuxone-multi-frame
+      - infrastructure-security
+      - it--infrastructure-software
+      - sap--hana
+      - server--operating-systems
       - server--rack
       - servers
+      - storage--area-networks
+      - storage--product
+      - tape--storage
   - name: Design and Development
     members:
       - app--developer
       - application
+      - birthday--cake
+      - cupcake
       - design-and-development--01
       - design-and-development--02
-      - feedback
       - feedback--01
       - hills
       - idea
@@ -261,17 +293,25 @@ categories:
       - user--insights
       - user--interface
       - web--developer
+      - wedding--cake
       - windows
   - name: Device Interaction
     members:
       - add--device
       - augmented--reality
+      - color--contrast
+      - device--pairing
+      - flashing--content
+      - keyboard
       - mobile--add
       - mobile--chat
       - mobile--devices
       - mobile--phone
       - swipe--left
       - swipe--right
+      - text--equivalent
+      - text--input
+      - text--layout
       - touch
       - touch--gesture
       - touch--id
@@ -347,11 +387,15 @@ categories:
       - optimize--cash-flow--02
   - name: Healthcare
     members:
+      - baby--bottle
       - care
       - doctor
+      - doctor-patient
+      - dropper
       - first--aid
       - heart--health
       - hospital
+      - hpi
       - medical
       - medical--charts
       - medical--staff
@@ -360,7 +404,12 @@ categories:
       - pill--bottle--01
       - pills
       - pregnant
+      - prescription
       - stethoscope
+      - social--work--01
+      - social--work--02
+      - telemedicine
+      - telemedicine--mobile
       - x-ray--01
       - x-ray--02
   - name: Home
@@ -377,13 +426,12 @@ categories:
   - name: IBM
     members:
       - bee
-      - enterprise--design--thinking
-      - enterprise--design--thinking--alt
       - enterprise--design--thinking--01
       - enterprise--design--thinking--02
       - eye
       - ibm--ix
       - ibm--z
+      - ibm--z--partition
       - progress
       - world--community--grid
   - name: Industry
@@ -393,11 +441,12 @@ categories:
       - cargo--crane
       - cargo--ship
       - cheese
-      - farm
       - farm--01
       - farm--02
       - farmer--01
       - farmer--02
+      - fragile
+      - keep-dry
       - oil--pump
       - oil--rig
       - power
@@ -407,10 +456,12 @@ categories:
       - satellite--dish
       - solar--field
       - solar--panel
+      - stack-limitation
       - steel
       - telecom
+      - this-side-up
       - tractor
-      - weather--01
+      - two-person-lift
       - wheat
       - wind--power
       - wine
@@ -460,11 +511,13 @@ categories:
       - flower--02
       - perfume
       - racetrack
+      - rock-on
       - scale
       - soft--ice--cream
       - sports
       - stationary--bicycle
       - tennis
+      - tree
       - yoga--01
       - yoga--02
       - yoga--03
@@ -473,6 +526,7 @@ categories:
     members:
       - americas
       - asia--australia
+      - earth
       - europe--africa
       - globe
       - globe--locations
@@ -501,19 +555,15 @@ categories:
       - networking--04
       - networking--05
       - networking--06
-      - private--network
       - private--network--01
       - private--network--02
       - private--network--03
       - private--network--04
-      - private--network--alt
-      - private--network--alt--01
       - reset--hybrid--cloud
       - reset--settings
       - support--services
       - transactional--blockchain
       - transactional--trust
-      - transform
       - transform--02
   - name: People
     members:
@@ -588,14 +638,10 @@ categories:
       - govern--users--and--identities
       - high--risk--users
       - identity--trust--assessment
-      - lock
       - lock--01
       - lock--02
-      - lock--alt
-      - locked--network
       - locked--network--01
       - locked--network--02
-      - locked--network--alt
       - master--threat--hunting
       - network--protection
       - protect--critical--assets
@@ -613,17 +659,13 @@ categories:
       - unauthorized--user--access
       - under--utilized--security
       - unify--endpoint--management
-      - unlock
       - unlock--01
       - unlock--02
-      - unlock--alt
   - name: Status
     members:
       - question
-      - warning
       - warning--01
       - warning--02
-      - warning--alt
   - name: Strategy
     members:
       - innovate
@@ -663,6 +705,9 @@ categories:
       - systems-devops--provision
       - systems-devops--release
       - systems-devops--test
+  - name: Third-party logos
+    members:
+      - slack
   - name: Time
     members:
       - calendar
@@ -689,7 +734,6 @@ categories:
     members:
       - alchemy--data--news
       - alchemy--language
-      - alchemy--language--alphabet--a--expanded
       - alchemy--vision
       - analyzes--data
       - concept--expansion
@@ -699,16 +743,13 @@ categories:
       - deliver--insights
       - dialogue
       - document--conversion
-      - ibm--watson
       - knows--dark--data
-      - language
       - language--01
       - language--02
       - language--03
       - language--04
       - language--05
       - language--translation
-      - language--translation--alphabet--a--expanded
       - natural--language--classifier
       - natural--language--understanding
       - personality--insights
@@ -716,7 +757,6 @@ categories:
       - relationship--extraction
       - retrieve--and--rank
       - speech
-      - speech--alphabet--a--expanded
       - speech--to--text
       - text--to--speech
       - tone--analyzer
@@ -752,5 +792,4 @@ categories:
       - temperature--low
       - tornado
       - weather
-      - weather--02
       - windy
