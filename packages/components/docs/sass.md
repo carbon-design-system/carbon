@@ -5671,6 +5671,7 @@ $carbon--spacing-02: 0.25rem;
   - [snippet [mixin]](#snippet-mixin)
   - [file-uploader [mixin]](#file-uploader-mixin)
   - [form [mixin]](#form-mixin)
+  - [lists [mixin]](#lists-mixin)
   - [inline-notifications [mixin]](#inline-notifications-mixin)
   - [pseudo-underline [mixin]](#pseudo-underline-mixin)
   - [tags [mixin]](#tags-mixin)
@@ -5708,6 +5709,7 @@ $carbon--spacing-03: 0.5rem;
   - [padding-th [mixin]](#padding-th-mixin)
   - [tabs [mixin]](#tabs-mixin)
   - [tags [mixin]](#tags-mixin)
+  - [tile [mixin]](#tile-mixin)
   - [toggle [mixin]](#toggle-mixin)
   - [tooltip--definition--legacy [mixin]](#tooltip--definition--legacy-mixin)
   - [tooltip [mixin]](#tooltip-mixin)
@@ -5796,7 +5798,6 @@ $carbon--spacing-06: 1.5rem;
 - **Used by**:
   - [accordion [mixin]](#accordion-mixin)
   - [file-uploader [mixin]](#file-uploader-mixin)
-  - [lists [mixin]](#lists-mixin)
   - [listbox [mixin]](#listbox-mixin)
   - [toast-notifications [mixin]](#toast-notifications-mixin)
   - [progress-indicator [mixin]](#progress-indicator-mixin)
@@ -21531,7 +21532,11 @@ List styles
   }
 
   .#{$prefix}--list--nested {
-    margin-left: $carbon--spacing-06;
+    margin-left: rem(32px);
+  }
+
+  .#{$prefix}--list--nested .#{$prefix}--list__item {
+    padding-left: $carbon--spacing-02;
   }
 
   .#{$prefix}--list--ordered:not(.#{$prefix}--list--nested) {
@@ -21583,7 +21588,7 @@ List styles
 - **Requires**:
   - [prefix [variable]](#prefix-variable)
   - [text-01 [variable]](#text-01-variable)
-  - [carbon--spacing-06 [variable]](#carbon--spacing-06-variable)
+  - [carbon--spacing-02 [variable]](#carbon--spacing-02-variable)
   - [carbon--spacing-05 [variable]](#carbon--spacing-05-variable)
   - [carbon--spacing-04 [variable]](#carbon--spacing-04-variable)
 
@@ -28119,11 +28124,14 @@ Tile styles
 
   .#{$prefix}--tile__chevron {
     position: absolute;
-    right: 0.5rem;
-    bottom: 0.5rem;
+    right: $carbon--spacing-05;
+    bottom: $carbon--spacing-05;
+    display: flex;
+    align-items: flex-end;
     height: 1rem;
 
     svg {
+      margin-left: $carbon--spacing-03;
       transform-origin: center;
       transition: $duration--fast-02 motion(standard, productive);
       fill: $ui-05;
@@ -28233,6 +28241,7 @@ Tile styles
   - [text-01 [variable]](#text-01-variable)
   - [carbon--spacing-09 [variable]](#carbon--spacing-09-variable)
   - [icon-02 [variable]](#icon-02-variable)
+  - [carbon--spacing-03 [variable]](#carbon--spacing-03-variable)
   - [ui-05 [variable]](#ui-05-variable)
 
 ## time-picker
