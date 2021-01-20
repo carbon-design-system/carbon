@@ -30,8 +30,9 @@ module.exports = {
     '@storybook/addon-notes/register',
     'storybook-readme/register',
     '@storybook/addon-links',
+    require.resolve('./dist/preset.js'),
     CARBON_REACT_STORYBOOK_USE_CUSTOM_PROPERTIES === 'true' &&
-      require.resolve('./dist/preset.js'),
+      require.resolve('./carbon-theme-addon/src/register.js'),
   ].filter(Boolean),
 
   webpack: async (config) => {
@@ -129,8 +130,4 @@ module.exports = {
 
     return config;
   },
-
-  // webpackFinal: (config) => {
-  //   return { ...config, module: { ...config.module, rules: custom.module.rules } };
-  // },
 };
