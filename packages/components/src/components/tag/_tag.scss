@@ -172,6 +172,22 @@
     }
   }
 
+  .#{$prefix}--tag__custom-icon {
+    flex-shrink: 0;
+    width: rem(16px);
+    height: rem(16px);
+    margin-right: $spacing-02;
+    padding: 0;
+    color: currentColor;
+    background-color: transparent;
+    border: 0;
+    outline: none;
+
+    svg {
+      fill: currentColor;
+    }
+  }
+
   .#{$prefix}--tag--disabled .#{$prefix}--tag__close-icon {
     cursor: not-allowed;
   }

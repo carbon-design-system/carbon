@@ -5989,6 +5989,7 @@ $spacing-02: $carbon--spacing-02;
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
   - [modal [mixin]](#modal-mixin)
+  - [tags [mixin]](#tags-mixin)
 
 ### ✅spacing-03 [variable]
 
@@ -21190,6 +21191,7 @@ Form styles
   input[data-invalid],
   .#{$prefix}--number[data-invalid] .#{$prefix}--number__input-wrapper,
   .#{$prefix}--number__input-wrapper--warning,
+  .#{$prefix}--date-picker-input__wrapper,
   .#{$prefix}--date-picker-input__wrapper--warn,
   .#{$prefix}--date-picker-input__wrapper--invalid,
   .#{$prefix}--time-picker--invalid,
@@ -21211,6 +21213,7 @@ Form styles
 
   input[data-invalid],
   .#{$prefix}--number[data-invalid] .#{$prefix}--number__input-wrapper,
+  .#{$prefix}--date-picker-input__wrapper,
   .#{$prefix}--date-picker-input__wrapper--invalid,
   .#{$prefix}--time-picker--invalid,
   .#{$prefix}--text-input__field-wrapper[data-invalid],
@@ -22647,7 +22650,7 @@ $loading__gap: 16;
 <summary>Source code</summary>
 
 ```scss
-$loading--small__gap: 25;
+$loading--small__gap: 110;
 ```
 
 </details>
@@ -27532,6 +27535,22 @@ Tag styles
     }
   }
 
+  .#{$prefix}--tag__custom-icon {
+    flex-shrink: 0;
+    width: rem(16px);
+    height: rem(16px);
+    margin-right: $spacing-02;
+    padding: 0;
+    color: currentColor;
+    background-color: transparent;
+    border: 0;
+    outline: none;
+
+    svg {
+      fill: currentColor;
+    }
+  }
+
   .#{$prefix}--tag--disabled .#{$prefix}--tag__close-icon {
     cursor: not-allowed;
   }
@@ -27586,6 +27605,7 @@ Tag styles
   - [inverse-hover-ui [variable]](#inverse-hover-ui-variable)
   - [disabled-01 [variable]](#disabled-01-variable)
   - [disabled-02 [variable]](#disabled-02-variable)
+  - [spacing-02 [variable]](#spacing-02-variable)
   - [focus [variable]](#focus-variable)
   - [inverse-focus-ui [variable]](#inverse-focus-ui-variable)
   - [ui-03 [variable]](#ui-03-variable)
@@ -27842,7 +27862,11 @@ Text input styles
     + .#{$prefix}--text-input--password__visibility__toggle
     svg {
     cursor: not-allowed;
-    opacity: 0.5;
+    fill: $disabled-02;
+
+    &:hover {
+      fill: $disabled-02;
+    }
   }
 
   //-----------------------------
