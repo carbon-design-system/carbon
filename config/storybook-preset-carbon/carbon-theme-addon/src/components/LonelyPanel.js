@@ -10,7 +10,7 @@ import PropTypes from 'prop-types';
 import { Form } from '@storybook/components';
 import { CARBON_CURRENT_THEME, CARBON_TYPE_TOKEN } from '../shared';
 
-export const CarbonThemesPanel = ({ api, active }) => {
+export const LonelyPanel = ({ api, active }) => {
   const [currentTheme, setCurrentTheme] = useState('white');
   const handleChange = useCallback(
     (event) => {
@@ -48,7 +48,7 @@ export const CarbonThemesPanel = ({ api, active }) => {
   );
 };
 
-CarbonThemesPanel.propTypes = {
+LonelyPanel.propTypes = {
   /**
    * The Storybook API object.
    */
