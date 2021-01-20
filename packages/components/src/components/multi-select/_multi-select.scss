@@ -60,10 +60,6 @@
     color: $text-01;
   }
 
-  .#{$prefix}--multi-select--filterable:hover .#{$prefix}--text-input {
-    background-color: $hover-ui;
-  }
-
   .#{$prefix}--multi-select--filterable.#{$prefix}--list-box--disabled:hover
     .#{$prefix}--text-input {
     background-color: $field-01;
