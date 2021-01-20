@@ -22647,7 +22647,7 @@ $loading__gap: 16;
 <summary>Source code</summary>
 
 ```scss
-$loading--small__gap: 25;
+$loading--small__gap: 110;
 ```
 
 </details>
