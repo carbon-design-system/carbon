@@ -19,7 +19,12 @@
 /// @group multi-select
 @mixin multiselect {
   .#{$prefix}--multi-select .#{$prefix}--tag {
+    min-width: auto;
     margin: 0 $carbon--spacing-03 0 0;
+  }
+
+  .#{$prefix}--multi-select--filterable .#{$prefix}--tag {
+    margin: 0 $carbon--spacing-03 0 $carbon--spacing-05;
   }
 
   .#{$prefix}--multi-select .#{$prefix}--list-box__menu {
