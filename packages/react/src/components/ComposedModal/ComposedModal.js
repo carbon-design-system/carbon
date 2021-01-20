@@ -22,6 +22,7 @@ export default class ComposedModal extends Component {
   state = {};
 
   static defaultProps = {
+    ariaLabel: 'modal-container',
     onKeyDown: () => {},
     selectorPrimaryFocus: '[data-modal-primary-focus]',
   };
@@ -33,6 +34,11 @@ export default class ComposedModal extends Component {
   endSentinel = React.createRef();
 
   static propTypes = {
+    /**
+     * Specify the aria-label for bx--modal-container
+     */
+    ariaLabel: PropTypes.string,
+
     /**
      * Specify the content to be placed in the ComposedModal
      */
@@ -216,6 +222,7 @@ export default class ComposedModal extends Component {
   render() {
     const { open } = this.state;
     const {
+      ariaLabel,
       className,
       containerClassName,
       children,
@@ -273,7 +280,12 @@ export default class ComposedModal extends Component {
           className={`${prefix}--visually-hidden`}>
           Focus sentinel
         </span>
-        <div ref={this.innerModal} className={containerClass} role="dialog">
+        <div
+          ref={this.innerModal}
+          className={containerClass}
+          role="dialog"
+          aria-modal="true"
+          aria-label={ariaLabel}>
           {childrenWithProps}
         </div>
         {/* Non-translatable: Focus-wrap code makes this `<span>` not actually read by screen readers */}
@@ -403,9 +415,9 @@ export class ModalHeader extends Component {
 
     return (
       <div className={headerClass} {...other}>
-        {label && <p className={labelClass}>{label}</p>}
+        {label && <h2 className={labelClass}>{label}</h2>}
 
-        {title && <p className={titleClass}>{title}</p>}
+        {title && <h3 className={titleClass}>{title}</h3>}
 
         {children}
 
