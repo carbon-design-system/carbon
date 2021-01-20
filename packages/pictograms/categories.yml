@@ -51,6 +51,7 @@ categories:
       - amsterdam--canal
       - amsterdam--farm
       - amsterdam--windmill
+      - atlanta
       - austin
       - bangalore
       - barcelona
@@ -61,7 +62,9 @@ categories:
       - berlin--cathedral
       - berlin--tower
       - boston--zakim-bridge
+      - budapest
       - cairo--giza-plateau
+      - canada--maple-leaf
       - chicago
       - copenhagen--planetarium
       - copenhagen--snekkja
@@ -70,6 +73,7 @@ categories:
       - dublin--brewery
       - dublin--castle
       - hamburg--philharmone
+      - kuala-lumpur
       - london
       - london--big-ben
       - madrid--cathedral
@@ -84,16 +88,22 @@ categories:
       - munich
       - nice
       - nyc--brooklyn
+      - nyc--chrysler-building
       - nyc--manhattan--01
       - nyc--manhattan--02
       - nyc--statue-of-liberty
+      - nyc--world-trade-center
+      - okinawa
       - paris--arc-de-triomphe
       - paris--louvre
       - paris--notre-dame
       - paris--pompidou-center
       - prague--charles-bridge-tower
+      - prague--dancing-house--01
+      - prague--dancing-house--02
       #    - portland
       - raleigh-nc
+      - rio-de-janeiro
       - rome
       - san-francisco
       - san-francisco--fog
@@ -117,6 +127,8 @@ categories:
       - active--server
       - api
       - automate--modular--management
+      - c--language
+      - c-plus-plus--language
       - cloud--analytics
       - cloud--assets
       - cloud--builder--professional--services
@@ -135,18 +147,30 @@ categories:
       - cloud--strategy
       - cloud--tutorials
       - cloud--vmware
+      - cloud-pak--family
+      - cloud-pak--for-applications
+      - cloud-pak--for-data
+      - cloud-pak--for-integration
+      - cloud-pak--for-multicloud-management
+      - cloud-pak--for-security
+      - cloud-pak--system
+      - cobol--language
       - cognos--analytics
+      - condition--builder
       - construct
       - devops
       - digital
       - docker
       - expand--horz
       - expand--vert
+      - filter--variable
       - free--trial
       - global--business--services
       - global--technology--services
+      - go--language
       - hybrid--cloud
       - hybrid--cloud--services
+      - ibm--automation-platform
       - ibm--cloud
       - java
       - javascript
@@ -155,8 +179,13 @@ categories:
       - marketplace
       - mas
       - mqa
+      - php--language
       - planning--analytics
+      - pli--language
+      - r--language
+      - random--samples
       - saas--enablement
+      - select--range
       - single--sign-on
       - softlayer--enablement
   - name: Controls
@@ -199,6 +228,8 @@ categories:
       - chart--t-SNE
       - circle--packing
       - code--syntax
+      - dashboard
+      - data--apis
       - data--set
       - employee--insights
       - flow--chart
@@ -222,18 +253,35 @@ categories:
       - word--cloud
   - name: Data Storage
     members:
+      - accelerated-computing
       - archive
+      - business--continuity
+      - containers-and-cloud-native
       - data--backup
+      - data--privacy
       - data--processing
       - data--storage
+      - flash--storage
       - hard--drive
       - hard--drive--network
+      - hybrid--cloud--02
+      - ibm--z-and-linuxone-single-frame
+      - ibm--z-and-linuxone-multi-frame
+      - infrastructure-security
+      - it--infrastructure-software
+      - sap--hana
+      - server--operating-systems
       - server--rack
       - servers
+      - storage--area-networks
+      - storage--product
+      - tape--storage
   - name: Design and Development
     members:
       - app--developer
       - application
+      - birthday--cake
+      - cupcake
       - design-and-development--01
       - design-and-development--02
       - feedback--01
@@ -245,17 +293,25 @@ categories:
       - user--insights
       - user--interface
       - web--developer
+      - wedding--cake
       - windows
   - name: Device Interaction
     members:
       - add--device
       - augmented--reality
+      - color--contrast
+      - device--pairing
+      - flashing--content
+      - keyboard
       - mobile--add
       - mobile--chat
       - mobile--devices
       - mobile--phone
       - swipe--left
       - swipe--right
+      - text--equivalent
+      - text--input
+      - text--layout
       - touch
       - touch--gesture
       - touch--id
@@ -331,11 +387,15 @@ categories:
       - optimize--cash-flow--02
   - name: Healthcare
     members:
+      - baby--bottle
       - care
       - doctor
+      - doctor-patient
+      - dropper
       - first--aid
       - heart--health
       - hospital
+      - hpi
       - medical
       - medical--charts
       - medical--staff
@@ -344,7 +404,12 @@ categories:
       - pill--bottle--01
       - pills
       - pregnant
+      - prescription
       - stethoscope
+      - social--work--01
+      - social--work--02
+      - telemedicine
+      - telemedicine--mobile
       - x-ray--01
       - x-ray--02
   - name: Home
@@ -366,6 +431,7 @@ categories:
       - eye
       - ibm--ix
       - ibm--z
+      - ibm--z--partition
       - progress
       - world--community--grid
   - name: Industry
@@ -379,6 +445,8 @@ categories:
       - farm--02
       - farmer--01
       - farmer--02
+      - fragile
+      - keep-dry
       - oil--pump
       - oil--rig
       - power
@@ -388,9 +456,12 @@ categories:
       - satellite--dish
       - solar--field
       - solar--panel
+      - stack-limitation
       - steel
       - telecom
+      - this-side-up
       - tractor
+      - two-person-lift
       - wheat
       - wind--power
       - wine
@@ -440,11 +511,13 @@ categories:
       - flower--02
       - perfume
       - racetrack
+      - rock-on
       - scale
       - soft--ice--cream
       - sports
       - stationary--bicycle
       - tennis
+      - tree
       - yoga--01
       - yoga--02
       - yoga--03
@@ -453,6 +526,7 @@ categories:
     members:
       - americas
       - asia--australia
+      - earth
       - europe--africa
       - globe
       - globe--locations
@@ -631,6 +705,9 @@ categories:
       - systems-devops--provision
       - systems-devops--release
       - systems-devops--test
+  - name: Third-party logos
+    members:
+      - slack
   - name: Time
     members:
       - calendar

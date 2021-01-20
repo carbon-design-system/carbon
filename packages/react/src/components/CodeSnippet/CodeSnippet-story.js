@@ -23,6 +23,28 @@ export default {
   },
 };
 
+const props = () => ({
+  type: select(
+    'Type (type)',
+    {
+      inline: 'inline',
+      'single line': 'single',
+      'multiple line': 'multi',
+    },
+    'inline'
+  ),
+  disabled: boolean('Disabled (disabled)', false),
+  light: boolean('Light variant (light)', false),
+  feedback: text('Feedback text', 'Copied to clipboard'),
+  showMoreText: text('Text for "show more" button', 'Show more'),
+  showLessText: text('Text for "show less" button', 'Show less'),
+  hideCopyButton: boolean('Hide copy button (hideCopyButton)', false),
+  onClick: action('onClick'),
+  copyButtonDescription: text('Copy button title', 'Copy code snippet'),
+  ariaLabel: text('ARIA label', 'Container label'),
+  wrapText: boolean('Wrap text (wrapText)', true),
+});
+
 export const inline = () => (
   <CodeSnippet type="inline" feedback="Copied to clipboard">
     {'node -v'}
@@ -30,9 +52,8 @@ export const inline = () => (
 );
 
 export const multiline = () => (
-  <div style={{ width: '50%' }}>
-    <CodeSnippet {...props()} type="multi" feedback="Copied to clipboard">
-      {`  "scripts": {
+  <CodeSnippet {...props()} type="multi" feedback="Copied to clipboard">
+    {`  "scripts": {
     "build": "lerna run build --stream --prefix --npm-client yarn",
     "ci-check": "carbon-cli ci-check",
     "clean": "lerna run clean && lerna clean --yes && rimraf node_modules",
@@ -61,8 +82,7 @@ export const multiline = () => (
     "@babel/preset-react": "^7.10.0",
     "@babel/runtime": "^7.10.0",
     "@commitlint/cli": "^8.3.5",`}
-    </CodeSnippet>
-  </div>
+  </CodeSnippet>
 );
 
 export const singleline = () => (
@@ -98,27 +118,6 @@ const lightPropMessage = (
     .
   </small>
 );
-
-const props = () => ({
-  type: select(
-    'Type',
-    {
-      inline: 'inline',
-      'single line': 'single',
-      'multiple line': 'multi',
-    },
-    'inline'
-  ),
-  light: boolean('Light variant', false),
-  feedback: text('Feedback text', 'Copied to clipboard'),
-  showMoreText: text('Text for "show more" button', 'Show more'),
-  showLessText: text('Text for "show less" button', 'Show less'),
-  hideCopyButton: boolean('Hide copy button', false),
-  onClick: action('onClick'),
-  copyButtonDescription: text('Copy button title', 'Copy code snippet'),
-  ariaLabel: text('ARIA label', 'Container label'),
-  wrapText: boolean('Wrap text', true),
-});
 
 export const playground = () => (
   <div className={props().light ? 'bx--tile' : ''}>
