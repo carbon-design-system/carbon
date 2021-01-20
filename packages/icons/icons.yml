@@ -1302,8 +1302,14 @@
     - 32
 - name: barcode
   friendly_name: barcode
-  aliases: []
-  sizes:
+  aliases: 
+    - barcode
+    - technology
+    - tracking
+    - UPC
+    - inventory
+    - item
+   sizes:
     - 32
 - name: barrier
   friendly_name: Barrier
@@ -1828,12 +1834,20 @@
     - 32
 - name: calculation
   friendly_name: calculation
-  aliases: []
+  aliases: 
+    - data
+    - calculation
+    - math 
+    - functions
   sizes:
     - 32
 - name: calculation--alt
   friendly_name: calculation--alt
-  aliases: []
+  aliases: 
+    - data
+    - calculation
+    - math
+    - functions
   sizes:
     - 32
 - name: calculator
@@ -2460,8 +2474,14 @@
     - bubble chart
     - chart
 - name: chart--bubble-packed
-  friendly_name: chart--bubble-packed
-  aliases: []
+  friendly_name: Chart--bubble-packed
+  aliases: 
+    - graph
+    - bar
+    - data
+    - bubble chart
+    - packed
+    - chart
   sizes:
     - 32
 - name: chart--bullet
@@ -2653,8 +2673,12 @@
   sizes:
     - 32
 - name: chart--median
-  friendly_name: chart--median
-  aliases: []
+  friendly_name: Chart--median
+  aliases: 
+    - chart median
+    - graph
+    - chart
+    - data
   sizes:
     - 32
 - name: chart--minimum
@@ -2806,8 +2830,12 @@
     - chart scatter
     - scatter chart
 - name: chart--spiral
-  friendly_name: chart--spiral
-  aliases: []
+  friendly_name: Chart--spiral
+  aliases: 
+    - chart spiral
+    - graph
+    - chart
+    - data
   sizes:
     - 32
 - name: chart--stacked
@@ -2868,8 +2896,12 @@
     - chart Venn diagram
     - Venn diagram
 - name: chart--violin-plot
-  friendly_name: chart--violin-plot
-  aliases: []
+  friendly_name: Chart--violin-plot
+  aliases: 
+    - chart violin plot
+    - graph
+    - chart
+    - data
   sizes:
     - 32
 - name: chart--waterfall
@@ -2882,8 +2914,14 @@
   sizes:
     - 32
 - name: chart--win-loss
-  friendly_name: chart--win-loss
-  aliases: []
+  friendly_name: Chart--win-loss
+  aliases: 
+    - chart win-loss
+    - win
+    - loss
+    - graph
+    - chart
+    - data
   sizes:
     - 32
 - name: chat
@@ -3274,8 +3312,13 @@
   sizes:
     - 32
 - name: choropleth-map
-  friendly_name: choropleth-map
-  aliases: []
+  friendly_name: Choropleth-map
+  aliases: 
+    - chart choropleth-map
+    - map
+    - graph
+    - chart
+    - data
   sizes:
     - 32
 - name: circle--filled
