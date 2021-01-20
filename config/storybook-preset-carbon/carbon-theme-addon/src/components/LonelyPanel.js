@@ -10,7 +10,33 @@ import PropTypes from 'prop-types';
 import { Form } from '@storybook/components';
 import { CARBON_CURRENT_THEME, CARBON_TYPE_TOKEN } from '../shared';
 
-export const LonelyPanel = ({ api, active }) => {
+const typeTokenPairings = [
+  '12-16',
+  '14-18',
+  '14-20',
+  '16-24',
+  '16-22',
+  '20-26',
+  '28-36',
+];
+
+const typeTokenDefaults = {
+  'caption-01': '12-16',
+  'label-01': '12-16',
+  'helper-text-01': '12-16',
+  'body-short-01': '14-18',
+  'body-short-02': '16-22',
+  'body-long-01': '14-20',
+  'body-long-02': '16-24',
+  'code-01': '12-16',
+  'code-02': '14-20',
+  'productive-heading-01': '14-18',
+  'productive-heading-02': '16-22',
+  'productive-heading-03': '20-26',
+  'productive-heading-04': '28-36',
+};
+
+export const CarbonThemePanel = ({ api, active }) => {
   const [currentTheme, setCurrentTheme] = useState('white');
   const handleChange = useCallback(
     (event) => {
@@ -48,7 +74,7 @@ export const LonelyPanel = ({ api, active }) => {
   );
 };
 
-LonelyPanel.propTypes = {
+CarbonThemePanel.propTypes = {
   /**
    * The Storybook API object.
    */
@@ -60,4 +86,54 @@ LonelyPanel.propTypes = {
    * `true` if this Storybook add-on panel is active.
    */
   active: PropTypes.bool.isRequired,
+};
+
+export const CarbonTypePanel = ({ api, active }) => {
+  const [currentTypeTokens, setCurrentTypeTokens] = useState(typeTokenDefaults);
+  const handleTokenChange = useCallback(
+    (event) => {
+      const { name: tokenName, value: tokenValue } = event.target;
+      setCurrentTypeTokens({ ...currentTypeTokens, [tokenName]: tokenValue });
+      api.getChannel().emit(CARBON_TYPE_TOKEN, { tokenName, tokenValue });
+    },
+    [api]
+  );
+  return (
+    active && (
+      <Form>
+        {Object.keys(typeTokenDefaults).map((tokenName) => (
+          <Form.Field key={tokenName} label={`${tokenName}:`}>
+            <Form.Select
+              name={tokenName}
+              onChange={handleTokenChange}
+              size="flex"
+              value={currentTypeTokens[tokenName]}>
+              {typeTokenPairings.map((tokenValue) => {
+                const [fontSize, lineHeight] = tokenValue.split('-');
+                return (
+                  <option key={tokenValue} value={tokenValue}>
+                    {`${fontSize}px font-size / ${lineHeight}px line-height`}
+                  </option>
+                );
+              })}
+            </Form.Select>
+          </Form.Field>
+        ))}
+      </Form>
+    )
+  );
+};
+
+CarbonTypePanel.propTypes = {
+    /**
+   * `true` if this Storybook add-on panel is active.
+   */
+  active: PropTypes.bool.isRequired,
+
+  /**
+   * The Storybook API object.
+   */
+  api: PropTypes.shape({
+    getChannel: PropTypes.func,
+  }).isRequired,
 };
