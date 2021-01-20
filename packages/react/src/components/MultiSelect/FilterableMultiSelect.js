@@ -391,6 +391,15 @@ export default class FilterableMultiSelect extends React.Component {
                 ...getToggleButtonProps({ disabled }),
                 'aria-label': undefined,
               };
+
+              // Calculate input padding based on number of selected items
+              let inputPadding;
+              let itemCount = selectedItems.length;
+              if (itemCount > 0 && itemCount <= 9) {
+                inputPadding = '64px';
+              } else if (itemCount >= 10 && itemCount <= 99) {
+                inputPadding = '68px';
+              }
               return (
                 <ListBox
                   className={className}
@@ -423,6 +432,7 @@ export default class FilterableMultiSelect extends React.Component {
                       aria-autocomplete="list"
                       ref={(el) => (this.inputNode = el)}
                       id={`${id}-input`}
+                      style={{ paddingLeft: inputPadding }}
                       {...getInputProps({
                         disabled,
                         placeholder,

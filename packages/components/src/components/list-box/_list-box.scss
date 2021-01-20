@@ -458,8 +458,10 @@ $list-box-menu-width: rem(300px);
   .#{$prefix}--list-box__selection--multi {
     @include type-style('label-01');
 
-    position: static;
+    position: absolute;
     top: auto;
+    right: auto;
+    left: 0;
     display: flex;
     align-items: center;
     justify-content: space-between;
