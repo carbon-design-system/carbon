@@ -60,10 +60,6 @@
     color: $text-01;
   }
 
-  .#{$prefix}--multi-select--filterable .#{$prefix}--text-input {
-    padding-left: $spacing-03;
-  }
-
   .#{$prefix}--multi-select--filterable:hover .#{$prefix}--text-input {
     background-color: $hover-ui;
   }
