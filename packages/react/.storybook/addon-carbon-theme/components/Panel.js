@@ -39,57 +39,57 @@ const typeTokenDefaults = {
 /**
  * Storybook add-on panel for Carbon theme switcher.
  */
-export const CarbonThemesPanel = ({ api, active }) => {
-  const [currentTheme, setCurrentTheme] = useState('white');
-  const handleChange = useCallback(
-    (event) => {
-      const { value } = event.target;
-      setCurrentTheme(value);
-      api.getChannel().emit(CARBON_CURRENT_THEME, value);
-    },
-    [api]
-  );
-  return (
-    active && (
-      <Form>
-        <Form.Field label="Select Carbon theme:">
-          <Form.Select
-            name="carbon-theme"
-            value={currentTheme}
-            onChange={handleChange}
-            size="flex">
-            <option key="white" value="white">
-              white
-            </option>
-            <option key="g10" value="g10">
-              g10
-            </option>
-            <option key="g90" value="g90">
-              g90
-            </option>
-            <option key="g100" value="g100">
-              g100
-            </option>
-          </Form.Select>
-        </Form.Field>
-      </Form>
-    )
-  );
-};
+// export const CarbonThemesPanel = ({ api, active }) => {
+//   const [currentTheme, setCurrentTheme] = useState('white');
+//   const handleChange = useCallback(
+//     (event) => {
+//       const { value } = event.target;
+//       setCurrentTheme(value);
+//       api.getChannel().emit(CARBON_CURRENT_THEME, value);
+//     },
+//     [api]
+//   );
+//   return (
+//     active && (
+//       <Form>
+//         <Form.Field label="Select Carbon theme:">
+//           <Form.Select
+//             name="carbon-theme"
+//             value={currentTheme}
+//             onChange={handleChange}
+//             size="flex">
+//             <option key="white" value="white">
+//               white
+//             </option>
+//             <option key="g10" value="g10">
+//               g10
+//             </option>
+//             <option key="g90" value="g90">
+//               g90
+//             </option>
+//             <option key="g100" value="g100">
+//               g100
+//             </option>
+//           </Form.Select>
+//         </Form.Field>
+//       </Form>
+//     )
+//   );
+// };
 
-CarbonThemesPanel.propTypes = {
-  /**
-   * The Storybook API object.
-   */
-  api: PropTypes.shape({
-    getChannel: PropTypes.func,
-  }).isRequired,
+// CarbonThemesPanel.propTypes = {
+//   /**
+//    * The Storybook API object.
+//    */
+//   api: PropTypes.shape({
+//     getChannel: PropTypes.func,
+//   }).isRequired,
 
-  /**
-   * `true` if this Storybook add-on panel is active.
-   */
-  active: PropTypes.bool.isRequired,
-};
+//   /**
+//    * `true` if this Storybook add-on panel is active.
+//    */
+//   active: PropTypes.bool.isRequired,
+// };
 
 /**
  * Storybook add-on panel for Carbon type token switcher.

@@ -29,9 +29,11 @@ module.exports = {
     '@storybook/addon-docs',
     '@storybook/addon-notes/register',
     'storybook-readme/register',
-    "@storybook/addon-links",
-    require.resolve('./dist/preset.js')
-  ],
+    '@storybook/addon-links',
+    require.resolve('./dist/preset.js'),
+    CARBON_REACT_STORYBOOK_USE_CUSTOM_PROPERTIES === 'true' &&
+      require.resolve('./carbon-theme-addon/src/register.js'),
+  ].filter(Boolean),
 
   webpack: async (config) => {
     const sassLoader = {
@@ -128,8 +130,4 @@ module.exports = {
 
     return config;
   },
-
-  // webpackFinal: (config) => {
-  //   return { ...config, module: { ...config.module, rules: custom.module.rules } };
-  // },
 };
