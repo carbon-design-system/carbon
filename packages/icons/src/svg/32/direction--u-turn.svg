@@ -6,7 +6,6 @@
       }
     </style>
   </defs>
-  <title>direction--u-turn</title>
-  <path d="M26.5859,19.5859,22,24.1719V8a2.0023,2.0023,0,0,0-2-2H8A2.0023,2.0023,0,0,0,6,8V28H8V8H20V24.1719l-4.5859-4.586L14,21l7,7,7-7Z"/>
+  <path d="M26.5859,19.5859,22,24.1719V12A8,8,0,0,0,6,12V28H8V12a6,6,0,0,1,12,0V24.1719l-4.5859-4.586L14,21l7,7,7-7Z"/>
   <rect id="_Transparent_Rectangle_" data-name="&lt;Transparent Rectangle&gt;" class="cls-1" width="32" height="32"/>
 </svg>
