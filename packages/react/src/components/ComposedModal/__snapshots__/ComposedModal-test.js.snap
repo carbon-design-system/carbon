@@ -2,6 +2,7 @@
 
 exports[`<ComposedModal /> renders 1`] = `
 <ComposedModal
+  ariaLabel="modal-container"
   onKeyDown={[Function]}
   open={true}
   selectorPrimaryFocus="[data-modal-primary-focus]"
@@ -23,6 +24,8 @@ exports[`<ComposedModal /> renders 1`] = `
       Focus sentinel
     </span>
     <div
+      aria-label="modal-container"
+      aria-modal="true"
       className="bx--modal-container"
       role="dialog"
     />
