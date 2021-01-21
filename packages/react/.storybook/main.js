@@ -8,8 +8,6 @@
 'use strict';
 
 module.exports = {
-  addons: [
-    'storybook-preset-carbon',
-  ],
+  addons: ['storybook-preset-carbon'],
   stories: ['../src/**/*-story.js', '../src/**/*.stories.mdx'],
 };
