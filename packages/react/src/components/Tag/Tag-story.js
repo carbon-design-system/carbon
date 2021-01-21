@@ -129,6 +129,7 @@ CustomIcon.parameters = {
 export const Skeleton = () => (
   <div>
     <TagSkeleton />
+    <TagSkeleton size="short" />
   </div>
 );
 
