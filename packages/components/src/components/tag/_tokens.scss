@@ -38,15 +38,15 @@ $tag-colors: (
     ),
   ),
   'tag-color-red': (
-    fallback: $carbon__red-70,
+    fallback: $carbon__red-80,
     values: (
       (
         theme: $carbon--theme--white,
-        value: $carbon__red-70,
+        value: $carbon__red-80,
       ),
       (
         theme: $carbon--theme--g10,
-        value: $carbon__red-70,
+        value: $carbon__red-80,
       ),
       (
         theme: $carbon--theme--g90,
@@ -58,7 +58,7 @@ $tag-colors: (
       ),
       (
         theme: $carbon--theme--v9,
-        value: $carbon__red-70,
+        value: $carbon__red-80,
       ),
     ),
   ),
@@ -115,15 +115,15 @@ $tag-colors: (
     ),
   ),
   'tag-color-magenta': (
-    fallback: $carbon__magenta-70,
+    fallback: $carbon__magenta-80,
     values: (
       (
         theme: $carbon--theme--white,
-        value: $carbon__magenta-70,
+        value: $carbon__magenta-80,
       ),
       (
         theme: $carbon--theme--g10,
-        value: $carbon__magenta-70,
+        value: $carbon__magenta-80,
       ),
       (
         theme: $carbon--theme--g90,
@@ -135,7 +135,7 @@ $tag-colors: (
       ),
       (
         theme: $carbon--theme--v9,
-        value: $carbon__magenta-70,
+        value: $carbon__magenta-80,
       ),
     ),
   ),
@@ -192,15 +192,15 @@ $tag-colors: (
     ),
   ),
   'tag-color-purple': (
-    fallback: $carbon__purple-70,
+    fallback: $carbon__purple-80,
     values: (
       (
         theme: $carbon--theme--white,
-        value: $carbon__purple-70,
+        value: $carbon__purple-80,
       ),
       (
         theme: $carbon--theme--g10,
-        value: $carbon__purple-70,
+        value: $carbon__purple-80,
       ),
       (
         theme: $carbon--theme--g90,
@@ -212,7 +212,7 @@ $tag-colors: (
       ),
       (
         theme: $carbon--theme--v9,
-        value: $carbon__purple-70,
+        value: $carbon__purple-80,
       ),
     ),
   ),
@@ -269,15 +269,15 @@ $tag-colors: (
     ),
   ),
   'tag-color-blue': (
-    fallback: $carbon__blue-70,
+    fallback: $carbon__blue-80,
     values: (
       (
         theme: $carbon--theme--white,
-        value: $carbon__blue-70,
+        value: $carbon__blue-80,
       ),
       (
         theme: $carbon--theme--g10,
-        value: $carbon__blue-70,
+        value: $carbon__blue-80,
       ),
       (
         theme: $carbon--theme--g90,
@@ -289,7 +289,7 @@ $tag-colors: (
       ),
       (
         theme: $carbon--theme--v9,
-        value: $carbon__blue-70,
+        value: $carbon__blue-80,
       ),
     ),
   ),
@@ -346,15 +346,15 @@ $tag-colors: (
     ),
   ),
   'tag-color-cyan': (
-    fallback: $carbon__cyan-70,
+    fallback: $carbon__cyan-80,
     values: (
       (
         theme: $carbon--theme--white,
-        value: $carbon__cyan-70,
+        value: $carbon__cyan-80,
       ),
       (
         theme: $carbon--theme--g10,
-        value: $carbon__cyan-70,
+        value: $carbon__cyan-80,
       ),
       (
         theme: $carbon--theme--g90,
@@ -366,7 +366,7 @@ $tag-colors: (
       ),
       (
         theme: $carbon--theme--v9,
-        value: $carbon__cyan-70,
+        value: $carbon__cyan-80,
       ),
     ),
   ),
@@ -423,15 +423,15 @@ $tag-colors: (
     ),
   ),
   'tag-color-teal': (
-    fallback: $carbon__teal-70,
+    fallback: $carbon__teal-80,
     values: (
       (
         theme: $carbon--theme--white,
-        value: $carbon__teal-70,
+        value: $carbon__teal-80,
       ),
       (
         theme: $carbon--theme--g10,
-        value: $carbon__teal-70,
+        value: $carbon__teal-80,
       ),
       (
         theme: $carbon--theme--g90,
@@ -443,7 +443,7 @@ $tag-colors: (
       ),
       (
         theme: $carbon--theme--v9,
-        value: $carbon__teal-70,
+        value: $carbon__teal-80,
       ),
     ),
   ),
@@ -500,15 +500,15 @@ $tag-colors: (
     ),
   ),
   'tag-color-green': (
-    fallback: $carbon__green-70,
+    fallback: $carbon__green-80,
     values: (
       (
         theme: $carbon--theme--white,
-        value: $carbon__green-70,
+        value: $carbon__green-80,
       ),
       (
         theme: $carbon--theme--g10,
-        value: $carbon__green-70,
+        value: $carbon__green-80,
       ),
       (
         theme: $carbon--theme--g90,
@@ -520,7 +520,7 @@ $tag-colors: (
       ),
       (
         theme: $carbon--theme--v9,
-        value: $carbon__green-70,
+        value: $carbon__green-80,
       ),
     ),
   ),
@@ -577,15 +577,15 @@ $tag-colors: (
     ),
   ),
   'tag-color-gray': (
-    fallback: $carbon__gray-70,
+    fallback: $carbon__gray-80,
     values: (
       (
         theme: $carbon--theme--white,
-        value: $carbon__gray-70,
+        value: $carbon__gray-80,
       ),
       (
         theme: $carbon--theme--g10,
-        value: $carbon__gray-70,
+        value: $carbon__gray-80,
       ),
       (
         theme: $carbon--theme--g90,
@@ -597,7 +597,7 @@ $tag-colors: (
       ),
       (
         theme: $carbon--theme--v9,
-        value: $carbon__gray-70,
+        value: $carbon__gray-80,
       ),
     ),
   ),
@@ -654,15 +654,15 @@ $tag-colors: (
     ),
   ),
   'tag-color-cool-gray': (
-    fallback: $carbon__cool-gray-70,
+    fallback: $carbon__cool-gray-80,
     values: (
       (
         theme: $carbon--theme--white,
-        value: $carbon__cool-gray-70,
+        value: $carbon__cool-gray-80,
       ),
       (
         theme: $carbon--theme--g10,
-        value: $carbon__cool-gray-70,
+        value: $carbon__cool-gray-80,
       ),
       (
         theme: $carbon--theme--g90,
@@ -674,7 +674,7 @@ $tag-colors: (
       ),
       (
         theme: $carbon--theme--v9,
-        value: $carbon__cool-gray-70,
+        value: $carbon__cool-gray-80,
       ),
     ),
   ),
@@ -731,15 +731,15 @@ $tag-colors: (
     ),
   ),
   'tag-color-warm-gray': (
-    fallback: $carbon__warm-gray-70,
+    fallback: $carbon__warm-gray-80,
     values: (
       (
         theme: $carbon--theme--white,
-        value: $carbon__warm-gray-70,
+        value: $carbon__warm-gray-80,
       ),
       (
         theme: $carbon--theme--g10,
-        value: $carbon__warm-gray-70,
+        value: $carbon__warm-gray-80,
       ),
       (
         theme: $carbon--theme--g90,
@@ -751,7 +751,7 @@ $tag-colors: (
       ),
       (
         theme: $carbon--theme--v9,
-        value: $carbon__warm-gray-70,
+        value: $carbon__warm-gray-80,
       ),
     ),
   ),
