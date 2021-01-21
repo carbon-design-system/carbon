@@ -35,6 +35,8 @@ const kinds = {
   'Secondary button (secondary)': 'secondary',
   'Tertiary button (tertiary)': 'tertiary',
   'Danger button (danger)': 'danger',
+  'Danger tertiary button (danger--tertiary)': 'danger--tertiary',
+  'Danger ghost button (danger--ghost)': 'danger--ghost',
   'Ghost button (ghost)': 'ghost',
 };
 
@@ -73,17 +75,7 @@ const props = {
     }
     return {
       className: 'some-class',
-      kind: select(
-        'Button kind (kind)',
-        {
-          'Primary button (primary)': 'primary',
-          'Secondary button (secondary)': 'secondary',
-          'Tertiary button (tertiary)': 'tertiary',
-          'Ghost button (ghost)': 'ghost',
-          'Danger button (danger)': 'danger',
-        },
-        'primary'
-      ),
+      kind: select('Button kind (kind)', kinds, 'primary'),
       disabled: boolean('Disabled (disabled)', false),
       size: select('Button size (size)', sizes, 'default'),
       renderIcon: !iconToUse || iconToUse.svgData ? undefined : iconToUse,
