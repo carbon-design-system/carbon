@@ -17,6 +17,9 @@
     "components",
     "react"
   ],
+  "scripts": {
+    "build": "babel ./carbon-theme-addon/src --out-dir ./dist"
+  },
   "peerDependencies": {
     "@storybook/react": "^5.3.19"
   },
@@ -35,8 +38,5 @@
   },
   "devDependencies": {
     "@storybook/react": "^5.3.19"
-  },
-  "scripts": {
-    "build": "babel ./carbon-theme-addon/src --out-dir ./dist"
   }
 }

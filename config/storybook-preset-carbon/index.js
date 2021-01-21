@@ -13,7 +13,7 @@ const customProperties = require('postcss-custom-properties');
 const rtlcss = require('rtlcss');
 
 const {
-  CARBON_REACT_STORYBOOK_USE_CUSTOM_PROPERTIES = 'true',
+  CARBON_REACT_STORYBOOK_USE_CUSTOM_PROPERTIES = 'false',
   CARBON_REACT_STORYBOOK_USE_RTL,
   NODE_ENV = 'development',
 } = process.env;
@@ -30,10 +30,11 @@ module.exports = {
     '@storybook/addon-notes/register',
     'storybook-readme/register',
     '@storybook/addon-links',
-    require.resolve('./dist/preset.js'),
+    CARBON_REACT_STORYBOOK_USE_CUSTOM_PROPERTIES === 'true' &&
+      require.resolve('./dist/preset.js'),
   ],
 
-  webpack: async (config) => {
+  webpack(config) {
     const sassLoader = {
       loader: 'sass-loader',
       options: {

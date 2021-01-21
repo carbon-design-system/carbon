@@ -1,3 +1,10 @@
+/**
+ * Copyright IBM Corp. 2016, 2018
+ *
+ * This source code is licensed under the Apache-2.0 license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
 import React from 'react';
 import { addons } from '@storybook/addons';
 import { CarbonThemePanel, CarbonTypePanel } from './components/LonelyPanel';
@@ -8,6 +15,8 @@ import {
   CARBON_TYPE_PANEL_ID,
 } from './shared';
 
+// Disabling because storybook addons doesn't provide proptypes or display names for these panels
+/* eslint-disable react/display-name, react/prop-types */
 addons.register(CARBON_THEMES_ADDON_ID, (api) => {
   addons.addPanel(CARBON_THEME_PANEL_ID, {
     title: 'Carbon Theme',

@@ -76,16 +76,16 @@ export const CarbonThemePanel = ({ api, active }) => {
 
 CarbonThemePanel.propTypes = {
   /**
+   * `true` if this Storybook add-on panel is active.
+   */
+  active: PropTypes.bool.isRequired,
+
+  /**
    * The Storybook API object.
    */
   api: PropTypes.shape({
     getChannel: PropTypes.func,
   }).isRequired,
-
-  /**
-   * `true` if this Storybook add-on panel is active.
-   */
-  active: PropTypes.bool.isRequired,
 };
 
 export const CarbonTypePanel = ({ api, active }) => {
@@ -93,7 +93,12 @@ export const CarbonTypePanel = ({ api, active }) => {
   const handleTokenChange = useCallback(
     (event) => {
       const { name: tokenName, value: tokenValue } = event.target;
-      setCurrentTypeTokens({ ...currentTypeTokens, [tokenName]: tokenValue });
+      setCurrentTypeTokens((currentTypeTokens) => {
+        return {
+          ...currentTypeTokens,
+          [tokenName]: tokenValue,
+        };
+      });
       api.getChannel().emit(CARBON_TYPE_TOKEN, { tokenName, tokenValue });
     },
     [api]
@@ -125,7 +130,7 @@ export const CarbonTypePanel = ({ api, active }) => {
 };
 
 CarbonTypePanel.propTypes = {
-    /**
+  /**
    * `true` if this Storybook add-on panel is active.
    */
   active: PropTypes.bool.isRequired,
