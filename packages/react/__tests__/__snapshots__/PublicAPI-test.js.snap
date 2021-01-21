@@ -642,12 +642,11 @@ Map {
   },
   "ComposedModal" => Object {
     "defaultProps": Object {
-      "ariaLabel": "modal-container",
       "onKeyDown": [Function],
       "selectorPrimaryFocus": "[data-modal-primary-focus]",
     },
     "propTypes": Object {
-      "ariaLabel": Object {
+      "aria-label": Object {
         "type": "string",
       },
       "children": Object {

@@ -22,7 +22,6 @@ export default class ComposedModal extends Component {
   state = {};
 
   static defaultProps = {
-    ariaLabel: 'modal-container',
     onKeyDown: () => {},
     selectorPrimaryFocus: '[data-modal-primary-focus]',
   };
@@ -37,7 +36,7 @@ export default class ComposedModal extends Component {
     /**
      * Specify the aria-label for bx--modal-container
      */
-    ariaLabel: PropTypes.string,
+    ['aria-label']: PropTypes.string,
 
     /**
      * Specify the content to be placed in the ComposedModal
@@ -222,7 +221,7 @@ export default class ComposedModal extends Component {
   render() {
     const { open } = this.state;
     const {
-      ariaLabel,
+      ['aria-label']: ariaLabel,
       className,
       containerClassName,
       children,
@@ -246,9 +245,12 @@ export default class ComposedModal extends Component {
       [containerClassName]: containerClassName,
     });
 
+    // Generate aria-label based on Modal Header label if one is not provided (L253)
+    let generatedAriaLabel;
     const childrenWithProps = React.Children.toArray(children).map((child) => {
       switch (child.type) {
         case React.createElement(ModalHeader).type:
+          generatedAriaLabel = child.props.label;
           return React.cloneElement(child, {
             closeModal: this.closeModal,
           });
@@ -285,7 +287,7 @@ export default class ComposedModal extends Component {
           className={containerClass}
           role="dialog"
           aria-modal="true"
-          aria-label={ariaLabel}>
+          aria-label={ariaLabel ? ariaLabel : generatedAriaLabel}>
           {childrenWithProps}
         </div>
         {/* Non-translatable: Focus-wrap code makes this `<span>` not actually read by screen readers */}
