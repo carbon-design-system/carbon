@@ -57,6 +57,7 @@
     "dev": "gulp serve",
     "docs": "carbon-cli sassdoc \"scss{/components,/globals/grid,/globals/scss/vendor/@carbon/elements}/**/*.scss\" -i \"scss/globals/scss/vendor/@carbon/elements/**/{_inlined,vendor}/**\"",
     "format:check": "prettier --check \"**/*.{css,js,md,scss}\"",
+    "postinstall": "carbon-telemetry collect --install",
     "prebuild": "gulp clean",
     "prepublishOnly": "yarn build",
     "start": "node server.js",
@@ -70,6 +71,7 @@
     "freshy": ">= 1.0.3"
   },
   "dependencies": {
+    "@carbon/telemetry": "0.0.0-alpha.6",
     "flatpickr": "4.6.1",
     "lodash.debounce": "^4.0.8",
     "warning": "^3.0.0"
