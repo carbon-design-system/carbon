@@ -25,6 +25,11 @@ const iconMap = {
   Tag16,
 };
 
+const sizes = {
+  'Default size': undefined,
+  'Short size (short)': 'short',
+};
+
 const props = {
   regular: () => ({
     type: select(
@@ -40,6 +45,7 @@ const props = {
       )
     ),
     disabled: boolean('Disabled (disabled)', false),
+    size: select('Field size (size)', sizes, undefined) || undefined,
     title: text('Title (title)', 'Clear Filter'),
   }),
   filter() {
