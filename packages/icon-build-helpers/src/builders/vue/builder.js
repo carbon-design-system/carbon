@@ -8,9 +8,10 @@
 'use strict';
 
 const { babel } = require('@rollup/plugin-babel');
+const fs = require('fs-extra');
 const path = require('path');
 const { rollup } = require('rollup');
-const virtual = require('./plugins/virtual');
+const virtual = require('../plugins/virtual');
 
 const BANNER = `/**
  * Copyright IBM Corp. 2019, 2020
@@ -60,6 +61,10 @@ async function builder(metadata, { output }) {
         },
       };
     `,
+    './utils.js': await fs.readFile(
+      path.resolve(__dirname, './utils.js'),
+      'utf8'
+    ),
   };
   const input = {
     'index.js': 'index.js',
@@ -126,98 +131,17 @@ async function builder(metadata, { output }) {
  * @param {object} descriptor
  * @returns {object}
  */
-function createIconComponent(moduleName, descriptor) {
-  const { attrs, content } = descriptor;
-  const attrsAsString = Object.keys(attrs)
-    .map((attr) => `${attr}: "${attrs[attr]}"`)
-    .join(',');
+function createIconComponent(moduleName, { attrs, content }) {
+  return `import createSVGComponent from './utils.js';
 
-  const source = `${BANNER}
-import { h } from 'vue';
-import { getAttributes } from '@carbon/icon-helpers';
+const attrs = ${JSON.stringify(attrs)};
+const content = ${JSON.stringify(content)};
+const ${moduleName} = createSVGComponent(${moduleName}, ${JSON.stringify(
+    attrs
+  )}, ${JSON.stringify(content)});
 
-const common = {
-  name: '${moduleName}',
-  // We use title as the prop name as it is not a valid attribute for an SVG
-  // HTML element
-  props: ['title'],
-};
-
-const getSvgAttrs = (title, componentAttrs) => {
-  return getAttributes({
-    ${attrsAsString},
-    preserveAspectRatio: 'xMidYMid meet',
-    xmlns: 'http://www.w3.org/2000/svg',
-    // Special case here, we need to coordinate that we are using title,
-    // potentially, to get the right focus attributes
-    title,
-    ...componentAttrs
-  });
-};
-
-const component = h ? {
-  // Vue 3 component
-  ...common,
-  setup(props, { attrs }) {
-    return () => h(
-      'svg',
-      getSvgAttrs(props.title, attrs),
-      [
-        props.title && h('title', props.title),
-        ${content.map(convertToVue(3)).join(', ')},
-      ]
-    );
-  },
-} : {
-  // Vue 2 component
-  ...common,
-  functional: true,
-  render(createElement, context) {
-    const { children, data, listeners, props } = context;
-    const attrs = getSvgAttrs(props.title, data.attrs);
-    const svgData = {
-      attrs,
-      on: listeners,
-    };
-    if (data.staticClass) {
-      svgData.class = {
-        [data.staticClass]: true,
-      };
-    }
-    if (data.class) {
-      svgData.class = svgData.class || {}; // may be no static class
-      svgData.class[data.class] = true;
-    }
-    // remove style set by getAttributes
-    delete svgData.attrs.style;
-    // combine incoming staticStyle, style with default willChange
-    svgData.style = { ...data.staticStyle, ...data.style };
-    return createElement('svg', svgData, [
-      props.title && createElement('title', null, props.title),
-      ${content.map(convertToVue(2)).join(', ')},
-      children,
-    ]);
-  },
-};
-
-export default component;
+export default ${moduleName};
 `;
-
-  return source;
-}
-
-/**
- * Returns a function that will create a version appropriate Vue source string from a node
- * @param {number} version
- * @returns {Function}
- */
-function convertToVue(version) {
-  return (node) => {
-    const { elem, attrs } = node;
-    return version < 3
-      ? `createElement('${elem}', { attrs: ${JSON.stringify(attrs)} })`
-      : `h('${elem}', ${JSON.stringify(attrs)})`;
-  };
 }
 
 module.exports = builder;
