@@ -21191,6 +21191,7 @@ Form styles
   input[data-invalid],
   .#{$prefix}--number[data-invalid] .#{$prefix}--number__input-wrapper,
   .#{$prefix}--number__input-wrapper--warning,
+  .#{$prefix}--date-picker-input__wrapper,
   .#{$prefix}--date-picker-input__wrapper--warn,
   .#{$prefix}--date-picker-input__wrapper--invalid,
   .#{$prefix}--time-picker--invalid,
@@ -21212,6 +21213,7 @@ Form styles
 
   input[data-invalid],
   .#{$prefix}--number[data-invalid] .#{$prefix}--number__input-wrapper,
+  .#{$prefix}--date-picker-input__wrapper,
   .#{$prefix}--date-picker-input__wrapper--invalid,
   .#{$prefix}--time-picker--invalid,
   .#{$prefix}--text-input__field-wrapper[data-invalid],
@@ -27860,7 +27862,11 @@ Text input styles
     + .#{$prefix}--text-input--password__visibility__toggle
     svg {
     cursor: not-allowed;
-    opacity: 0.5;
+    fill: $disabled-02;
+
+    &:hover {
+      fill: $disabled-02;
+    }
   }
 
   //-----------------------------
