@@ -206,7 +206,8 @@
       position: static;
     }
 
-    &.#{$prefix}--btn--ghost .#{$prefix}--btn__icon {
+    &.#{$prefix}--btn--ghost .#{$prefix}--btn__icon,
+    &.#{$prefix}--btn--danger--ghost .#{$prefix}--btn__icon {
       margin: 0;
     }
   }
