@@ -54,40 +54,28 @@ const createSVGComponent = (name, svgAttrs, svgContent) => ({
     ? {
         // Vue 3 component
         setup({ title }, { attrs: componentAttrs, slots }) {
-          const content = [...svgContent];
-          if (title) {
-            content.unshift({ elem: 'title', content: title });
-          }
-          if (slots.default) {
-            content.concat(slots.default);
-          }
-
           return () =>
-            h(
-              'svg',
-              getSvgAttrs(title, svgAttrs, componentAttrs),
-              content.map(({ elem, attrs, content }) => h(elem, attrs, content))
-            );
+            h('svg', getSvgAttrs(title, svgAttrs, componentAttrs), [
+              ...(title ? [h('title', title)] : []),
+              ...svgContent.map(({ elem, attrs }) => h(elem, attrs)),
+              ...(slots.default ? slots.default() : []),
+            ]);
         },
       }
     : {
         // Vue 2 component
         functional: true,
         render(createElement, { props: { title }, children, data, listeners }) {
-          const content = [...svgContent];
-          if (title) {
-            content.unshift({ elem: 'title', content: title });
-          }
-          if (children) {
-            content.concat(children);
-          }
-
           return createElement(
             'svg',
             getVue2SvgAttrs(title, svgAttrs, data, listeners),
-            content.map(({ elem, attrs, content }) =>
-              createElement(elem, { attrs: attrs }, content)
-            )
+            [
+              ...(title ? [createElement('title', null, title)] : []),
+              ...svgContent.map(({ elem, attrs }) =>
+                createElement(elem, { attrs: attrs })
+              ),
+              ...(children || []),
+            ]
           );
         },
       }),
