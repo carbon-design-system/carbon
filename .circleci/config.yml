@@ -18,19 +18,17 @@ jobs:
           command: yarn install --immutable --immutable-cache --check-cache
       - run:
           name: Build packages
-          # command: NODE_OPTIONS=--max_old_space_size=8192 yarn build
+          command: yarn build
+      - run:
+          name: Run Continuous Integration checks
           command: |
-            cd packages/icons
-            yarn build
-            cd ../icons-vue
-            yarn build
-
-
-      # - run:
-      # name: Run Continuous Integration checks
-      # command: |
-      # yarn ci-check
-      # yarn lerna run ci-check
+            yarn ci-check
+            yarn lerna run ci-check
+#       - run:
+#           name: Update Visual Snapshots
+#           command: |
+#             export PERCY_TOKEN=dd3392142006a6483c8f524697f39f052755fa9dc087ff4437cac3d64227abdd
+#             yarn workspace carbon-components-react run snapshot
 
 workflows:
   version: 2
