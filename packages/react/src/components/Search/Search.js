@@ -186,10 +186,7 @@ export default class Search extends Component {
 
     return (
       <div role="search" aria-labelledby={searchId} className={searchClasses}>
-        <Search16
-          disabled={disabled}
-          className={`${prefix}--search-magnifier`}
-        />
+        <Search16 className={`${prefix}--search-magnifier`} />
         <label id={searchId} htmlFor={id} className={`${prefix}--label`}>
           {labelText}
         </label>
