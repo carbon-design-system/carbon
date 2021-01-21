@@ -31,6 +31,7 @@
     "build": "yarn clean && node scripts/build.js && rollup -c",
     "build-storybook": "cross-env NODE_ENV=production build-storybook",
     "clean": "rimraf es lib umd storybook-static build react-docgen.json",
+    "postinstall": "carbon-telemetry collect --install",
     "prepublish": "yarn build",
     "start": "yarn storybook",
     "storybook": "rimraf node_modules/.cache/storybook && start-storybook -p 9000",
@@ -44,6 +45,7 @@
   },
   "dependencies": {
     "@carbon/icons-react": "^10.24.0-rc.0",
+    "@carbon/telemetry": "0.0.0-alpha.6",
     "classnames": "2.2.6",
     "downshift": "5.2.1",
     "flatpickr": "4.6.1",
