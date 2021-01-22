@@ -224,16 +224,6 @@
     padding: 0 $carbon--spacing-03;
   }
 
-  .#{$prefix}--tag--short > svg {
-    width: rem(14px);
-    height: rem(14px);
-    padding: 0;
-  }
-
-  .#{$prefix}--tag--short:focus > svg {
-    box-shadow: inset 0 0 0 1px $inverse-focus-ui;
-  }
-
   .#{$prefix}--tag--short.#{$prefix}--tag--filter {
     padding-right: rem(2px);
   }
