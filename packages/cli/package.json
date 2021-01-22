@@ -46,7 +46,7 @@
     "progress-estimator": "^0.2.2",
     "remark": "^10.0.1",
     "replace-in-file": "^6.1.0",
-    "rollup": "^2.36.1",
+    "rollup": "^2.38.0",
     "sass": "^1.32.4",
     "sassdoc": "^2.7.3",
     "yargs": "^15.1.0"
