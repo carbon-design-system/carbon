@@ -2,7 +2,7 @@
   "name": "@carbon/icon-build-helpers",
   "private": true,
   "description": "Build helpers for the Carbon Design System icon library",
-  "version": "0.14.0-rc.0",
+  "version": "0.14.0-rc.1",
   "license": "Apache-2.0",
   "main": "src/index.js",
   "repository": {
