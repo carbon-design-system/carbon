@@ -23197,6 +23197,12 @@ Inline notification styles
     @include carbon--breakpoint(max) {
       max-width: rem(832px);
     }
+
+    // Firefox HCM fix
+    @media screen and (prefers-contrast) {
+      outline-width: 1px;
+      outline-style: solid;
+    }
   }
 
   .#{$prefix}--inline-notification:not(.#{$prefix}--inline-notification--low-contrast)
@@ -23583,6 +23589,12 @@ Toast notification styles
 
     @include carbon--breakpoint(max) {
       width: rem(352px);
+    }
+
+    // Firefox HCM fix
+    @media screen and (prefers-contrast) {
+      outline-width: 1px;
+      outline-style: solid;
     }
   }
 
