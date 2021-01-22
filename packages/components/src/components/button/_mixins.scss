@@ -96,7 +96,7 @@
   }
 
   .#{$prefix}--btn__icon,
-  .#{$prefix}--btn__icon path {
+  .#{$prefix}--btn__icon path:not([data-icon-path]) {
     fill: $icon-color;
   }
 }
