@@ -131,7 +131,30 @@ export {
   yellow40,
   yellow50,
 } from '@carbon/colors';
+export {
+  fluid,
+  fontFamilies,
+  fontFamily,
+  fontWeights,
+  fontWeight,
+  print,
+  reset,
+  getTypeSize,
+  scale,
+  styles,
+  unstable_tokens,
+} from '@carbon/type';
+export {
+  baseFontSize,
+  rem,
+  em,
+  px,
+  breakpoints,
+  breakpointUp,
+  breakpointDown,
+  breakpoint,
+  miniUnit,
+  miniUnits,
+} from '@carbon/layout';
 export * from '@carbon/themes';
-export * from '@carbon/layout';
 export * from '@carbon/motion';
-export * from '@carbon/type';
