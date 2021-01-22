@@ -140,8 +140,6 @@ export default class Search extends Component {
     this.setState({
       hasContent: evt.target.value !== '',
     });
-
-    this.props.onChange(evt);
   };
 
   handleKeyDown = (evt) => {

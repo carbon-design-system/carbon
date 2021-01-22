@@ -9580,6 +9580,7 @@ $field-01: if(
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
   - [snippet [mixin]](#snippet-mixin)
+  - [bx--snippet [mixin]](#bx--snippet-mixin)
   - [date-picker [mixin]](#date-picker-mixin)
   - [dropdown [mixin]](#dropdown-mixin)
   - [file-uploader [mixin]](#file-uploader-mixin)
@@ -17777,13 +17778,15 @@ Code snippet base styles
   position: relative;
   width: 100%;
   max-width: rem(600px);
-  background-color: $snippet-background-color;
+  background-color: $field-01;
 }
 ```
 
 </details>
 
 - **Group**: [code-snippet](#code-snippet)
+- **Requires**:
+  - [field-01 [variable]](#field-01-variable)
 - **Used by**:
   - [snippet [mixin]](#snippet-mixin)
 
