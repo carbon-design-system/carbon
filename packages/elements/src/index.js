@@ -132,6 +132,36 @@ export {
   yellow50,
 } from '@carbon/colors';
 export * from '@carbon/themes';
-export * from '@carbon/layout';
+export {
+  container02,
+  container03,
+  container04,
+  container05,
+  fluidSpacing01,
+  fluidSpacing02,
+  fluidSpacing03,
+  fluidSpacing04,
+  iconSize01,
+  iconSize02,
+  layout01,
+  layout02,
+  layout03,
+  layout04,
+  layout05,
+  layout06,
+  layout07,
+  spacing01,
+  spacing02,
+  spacing03,
+  spacing04,
+  spacing05,
+  spacing06,
+  spacing07,
+  spacing08,
+  spacing09,
+  spacing10,
+  spacing11,
+  spacing12,
+} from '@carbon/layout';
 export * from '@carbon/motion';
 export * from '@carbon/type';
