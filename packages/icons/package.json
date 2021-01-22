@@ -39,6 +39,7 @@
   },
   "devDependencies": {
     "@carbon/cli": "^10.18.0-rc.0",
-    "@carbon/icon-build-helpers": "^0.14.0-rc.0"
+    "@carbon/icon-build-helpers": "^0.14.0-rc.0",
+    "rimraf": "^3.0.2"
   }
 }
