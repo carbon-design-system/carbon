@@ -131,7 +131,6 @@ export {
   yellow40,
   yellow50,
 } from '@carbon/colors';
-export * from '@carbon/themes';
 export {
   container02,
   container03,
@@ -163,5 +162,6 @@ export {
   spacing11,
   spacing12,
 } from '@carbon/layout';
+export * from '@carbon/themes';
 export * from '@carbon/motion';
 export * from '@carbon/type';
