@@ -1619,7 +1619,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@carbon/elements@^10.26.0-rc.1, @carbon/elements@workspace:packages/elements":
+"@carbon/elements@^10.26.0-rc.2, @carbon/elements@workspace:packages/elements":
   version: 0.0.0-use.local
   resolution: "@carbon/elements@workspace:packages/elements"
   dependencies:
@@ -8969,7 +8969,7 @@ __metadata:
     babel-plugin-react-docgen: ^4.0.0
     babel-plugin-transform-inline-environment-variables: ^0.4.0
     browserslist-config-carbon: ^10.6.0
-    carbon-components: ^10.27.0-rc.1
+    carbon-components: ^10.27.0-rc.2
     carbon-icons: ^7.0.5
     chalk: ^2.3.0
     classnames: 2.2.6
@@ -9028,7 +9028,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"carbon-components@^10.27.0-rc.1, carbon-components@workspace:packages/components":
+"carbon-components@^10.27.0-rc.2, carbon-components@workspace:packages/components":
   version: 0.0.0-use.local
   resolution: "carbon-components@workspace:packages/components"
   dependencies:
@@ -9041,7 +9041,7 @@ __metadata:
     "@babel/preset-react": ^7.10.0
     "@babel/runtime": ^7.10.0
     "@carbon/cli": ^10.18.0-rc.0
-    "@carbon/elements": ^10.26.0-rc.1
+    "@carbon/elements": ^10.26.0-rc.2
     "@carbon/icons-handlebars": ^10.24.0-rc.0
     "@carbon/icons-react": ^10.24.0-rc.0
     "@carbon/telemetry": 0.0.0-alpha.6
