@@ -7,10 +7,23 @@
 
 import React from 'react';
 import { withKnobs, select, text, boolean } from '@storybook/addon-knobs';
+import { Carbon16, Compass16, Tag16 } from '@carbon/icons-react';
 import Tag, { types as typesList } from '../Tag';
 import TagSkeleton from '../Tag/Tag.Skeleton';
 import { action } from '@storybook/addon-actions/dist/preview';
 import mdx from './Tag.mdx';
+
+const icons = {
+  'Carbon (Carbon16 from `@carbon/icons-react`)': 'Carbon16',
+  'Compass (Compass16 from `@carbon/icons-react`)': 'Compass16',
+  'Tag (Tag16 from `@carbon/icons-react`)': 'Tag16',
+};
+
+const iconMap = {
+  Carbon16,
+  Compass16,
+  Tag16,
+};
 
 const props = {
   regular: () => ({
@@ -34,6 +47,12 @@ const props = {
       ...this.regular(),
       onClick: action('onClick'),
       onClose: action('onClose'),
+    };
+  },
+  icon() {
+    return {
+      ...this.regular(),
+      renderIcon: iconMap[select('Icon (icon)', icons, 'Tag16')],
     };
   },
 };
@@ -76,6 +95,22 @@ export const Filter = () => (
 );
 
 Filter.parameters = {
+  info: {
+    text: `
+        Tags are used for items that need to be labeled, categorized, or organized using keywords that describe them.
+        The example below shows how the Tag component can be used. Each type has a default message describing the type,
+        but a custom message can also be applied.
+      `,
+  },
+};
+
+export const CustomIcon = () => (
+  <Tag className="some-class" {...props.icon()}>
+    {text('Content (children)', 'This is a tag')}
+  </Tag>
+);
+
+CustomIcon.parameters = {
   info: {
     text: `
         Tags are used for items that need to be labeled, categorized, or organized using keywords that describe them.

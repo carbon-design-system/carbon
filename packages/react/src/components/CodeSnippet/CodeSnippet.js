@@ -23,6 +23,7 @@ function CodeSnippet({
   className,
   type,
   children,
+  disabled,
   feedback,
   onClick,
   ariaLabel,
@@ -110,6 +111,7 @@ function CodeSnippet({
 
   const codeSnippetClasses = classNames(className, `${prefix}--snippet`, {
     [`${prefix}--snippet--${type}`]: type,
+    [`${prefix}--snippet--disabled`]: type !== 'inline' && disabled,
     [`${prefix}--snippet--expand`]: expandedCode,
     [`${prefix}--snippet--light`]: light,
     [`${prefix}--snippet--no-copy`]: hideCopyButton,
@@ -145,7 +147,7 @@ function CodeSnippet({
       <div
         ref={codeContainerRef}
         role={type === 'single' ? 'textbox' : null}
-        tabIndex={type === 'single' ? 0 : null}
+        tabIndex={type === 'single' && !disabled ? 0 : null}
         className={`${prefix}--snippet-container`}
         aria-label={ariaLabel || copyLabel || 'code-snippet'}
         onScroll={(type === 'single' && handleScroll) || null}>
@@ -169,6 +171,7 @@ function CodeSnippet({
       )}
       {!hideCopyButton && (
         <CopyButton
+          disabled={disabled}
           onClick={onClick}
           feedback={feedback}
           iconDescription={copyButtonDescription}
@@ -179,6 +182,7 @@ function CodeSnippet({
           kind="ghost"
           size="field"
           className={`${prefix}--snippet-btn--expand`}
+          disabled={disabled}
           onClick={() => setExpandedCode(!expandedCode)}>
           <span className={`${prefix}--snippet-btn--text`}>
             {expandCodeBtnText}
@@ -222,6 +226,11 @@ CodeSnippet.propTypes = {
    * node
    */
   copyLabel: PropTypes.string,
+
+  /**
+   * Specify whether or not the CodeSnippet should be disabled
+   */
+  disabled: PropTypes.bool,
 
   /**
    * Specify the string displayed when the snippet is copied
