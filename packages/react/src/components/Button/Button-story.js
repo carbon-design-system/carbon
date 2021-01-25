@@ -176,7 +176,9 @@ export const Playground = () => {
         }}>
         <Button {...regularProps}>Button</Button>
         &nbsp;
-        <Button hasIconOnly {...iconOnly}></Button>
+        {!regularProps.kind.includes('danger') && (
+          <Button hasIconOnly {...iconOnly}></Button>
+        )}
       </div>
       <div
         style={{
