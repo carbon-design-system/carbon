@@ -11,118 +11,6 @@
 - [@carbon/colors](#carboncolors)
   - [✅⚠️ibm--colors [mixin]](#ibm--colors-mixin)
   - [✅carbon--colors [mixin]](#carbon--colors-mixin)
-  - [✅black [variable]](#black-variable)
-  - [✅white [variable]](#white-variable)
-  - [✅black-100 [variable]](#black-100-variable)
-  - [✅blue-10 [variable]](#blue-10-variable)
-  - [✅blue-20 [variable]](#blue-20-variable)
-  - [✅blue-30 [variable]](#blue-30-variable)
-  - [✅blue-40 [variable]](#blue-40-variable)
-  - [✅blue-50 [variable]](#blue-50-variable)
-  - [✅blue-60 [variable]](#blue-60-variable)
-  - [✅blue-70 [variable]](#blue-70-variable)
-  - [✅blue-80 [variable]](#blue-80-variable)
-  - [✅blue-90 [variable]](#blue-90-variable)
-  - [✅blue-100 [variable]](#blue-100-variable)
-  - [✅cool-gray-10 [variable]](#cool-gray-10-variable)
-  - [✅cool-gray-20 [variable]](#cool-gray-20-variable)
-  - [✅cool-gray-30 [variable]](#cool-gray-30-variable)
-  - [✅cool-gray-40 [variable]](#cool-gray-40-variable)
-  - [✅cool-gray-50 [variable]](#cool-gray-50-variable)
-  - [✅cool-gray-60 [variable]](#cool-gray-60-variable)
-  - [✅cool-gray-70 [variable]](#cool-gray-70-variable)
-  - [✅cool-gray-80 [variable]](#cool-gray-80-variable)
-  - [✅cool-gray-90 [variable]](#cool-gray-90-variable)
-  - [✅cool-gray-100 [variable]](#cool-gray-100-variable)
-  - [✅cyan-10 [variable]](#cyan-10-variable)
-  - [✅cyan-20 [variable]](#cyan-20-variable)
-  - [✅cyan-30 [variable]](#cyan-30-variable)
-  - [✅cyan-40 [variable]](#cyan-40-variable)
-  - [✅cyan-50 [variable]](#cyan-50-variable)
-  - [✅cyan-60 [variable]](#cyan-60-variable)
-  - [✅cyan-70 [variable]](#cyan-70-variable)
-  - [✅cyan-80 [variable]](#cyan-80-variable)
-  - [✅cyan-90 [variable]](#cyan-90-variable)
-  - [✅cyan-100 [variable]](#cyan-100-variable)
-  - [✅gray-10 [variable]](#gray-10-variable)
-  - [✅gray-20 [variable]](#gray-20-variable)
-  - [✅gray-30 [variable]](#gray-30-variable)
-  - [✅gray-40 [variable]](#gray-40-variable)
-  - [✅gray-50 [variable]](#gray-50-variable)
-  - [✅gray-60 [variable]](#gray-60-variable)
-  - [✅gray-70 [variable]](#gray-70-variable)
-  - [✅gray-80 [variable]](#gray-80-variable)
-  - [✅gray-90 [variable]](#gray-90-variable)
-  - [✅gray-100 [variable]](#gray-100-variable)
-  - [✅green-10 [variable]](#green-10-variable)
-  - [✅green-20 [variable]](#green-20-variable)
-  - [✅green-30 [variable]](#green-30-variable)
-  - [✅green-40 [variable]](#green-40-variable)
-  - [✅green-50 [variable]](#green-50-variable)
-  - [✅green-60 [variable]](#green-60-variable)
-  - [✅green-70 [variable]](#green-70-variable)
-  - [✅green-80 [variable]](#green-80-variable)
-  - [✅green-90 [variable]](#green-90-variable)
-  - [✅green-100 [variable]](#green-100-variable)
-  - [✅magenta-10 [variable]](#magenta-10-variable)
-  - [✅magenta-20 [variable]](#magenta-20-variable)
-  - [✅magenta-30 [variable]](#magenta-30-variable)
-  - [✅magenta-40 [variable]](#magenta-40-variable)
-  - [✅magenta-50 [variable]](#magenta-50-variable)
-  - [✅magenta-60 [variable]](#magenta-60-variable)
-  - [✅magenta-70 [variable]](#magenta-70-variable)
-  - [✅magenta-80 [variable]](#magenta-80-variable)
-  - [✅magenta-90 [variable]](#magenta-90-variable)
-  - [✅magenta-100 [variable]](#magenta-100-variable)
-  - [✅orange-40 [variable]](#orange-40-variable)
-  - [✅orange-60 [variable]](#orange-60-variable)
-  - [✅orange-70 [variable]](#orange-70-variable)
-  - [✅purple-10 [variable]](#purple-10-variable)
-  - [✅purple-20 [variable]](#purple-20-variable)
-  - [✅purple-30 [variable]](#purple-30-variable)
-  - [✅purple-40 [variable]](#purple-40-variable)
-  - [✅purple-50 [variable]](#purple-50-variable)
-  - [✅purple-60 [variable]](#purple-60-variable)
-  - [✅purple-70 [variable]](#purple-70-variable)
-  - [✅purple-80 [variable]](#purple-80-variable)
-  - [✅purple-90 [variable]](#purple-90-variable)
-  - [✅purple-100 [variable]](#purple-100-variable)
-  - [✅red-10 [variable]](#red-10-variable)
-  - [✅red-20 [variable]](#red-20-variable)
-  - [✅red-30 [variable]](#red-30-variable)
-  - [✅red-40 [variable]](#red-40-variable)
-  - [✅red-50 [variable]](#red-50-variable)
-  - [✅red-60 [variable]](#red-60-variable)
-  - [✅red-70 [variable]](#red-70-variable)
-  - [✅red-80 [variable]](#red-80-variable)
-  - [✅red-90 [variable]](#red-90-variable)
-  - [✅red-100 [variable]](#red-100-variable)
-  - [✅teal-10 [variable]](#teal-10-variable)
-  - [✅teal-20 [variable]](#teal-20-variable)
-  - [✅teal-30 [variable]](#teal-30-variable)
-  - [✅teal-40 [variable]](#teal-40-variable)
-  - [✅teal-50 [variable]](#teal-50-variable)
-  - [✅teal-60 [variable]](#teal-60-variable)
-  - [✅teal-70 [variable]](#teal-70-variable)
-  - [✅teal-80 [variable]](#teal-80-variable)
-  - [✅teal-90 [variable]](#teal-90-variable)
-  - [✅teal-100 [variable]](#teal-100-variable)
-  - [✅warm-gray-10 [variable]](#warm-gray-10-variable)
-  - [✅warm-gray-20 [variable]](#warm-gray-20-variable)
-  - [✅warm-gray-30 [variable]](#warm-gray-30-variable)
-  - [✅warm-gray-40 [variable]](#warm-gray-40-variable)
-  - [✅warm-gray-50 [variable]](#warm-gray-50-variable)
-  - [✅warm-gray-60 [variable]](#warm-gray-60-variable)
-  - [✅warm-gray-70 [variable]](#warm-gray-70-variable)
-  - [✅warm-gray-80 [variable]](#warm-gray-80-variable)
-  - [✅warm-gray-90 [variable]](#warm-gray-90-variable)
-  - [✅warm-gray-100 [variable]](#warm-gray-100-variable)
-  - [✅white-0 [variable]](#white-0-variable)
-  - [✅yellow-20 [variable]](#yellow-20-variable)
-  - [✅yellow-30 [variable]](#yellow-30-variable)
-  - [✅yellow-40 [variable]](#yellow-40-variable)
-  - [✅yellow-50 [variable]](#yellow-50-variable)
-  - [✅colors [variable]](#colors-variable)
 - [@carbon/grid](#carbongrid)
   - [✅carbon--12-column-grid [variable]](#carbon--12-column-grid-variable)
   - [❌carbon--make-col-ready [mixin]](#carbon--make-col-ready-mixin)
@@ -146,17 +34,30 @@
   - [✅exports [mixin]](#exports-mixin)
 - [@carbon/layout](#carbonlayout)
   - [✅carbon--grid-gutter [variable]](#carbon--grid-gutter-variable)
+  - [✅grid-gutter [variable]](#grid-gutter-variable)
   - [✅carbon--grid-gutter--condensed [variable]](#carbon--grid-gutter--condensed-variable)
+  - [✅grid-gutter--condensed [variable]](#grid-gutter--condensed-variable)
   - [✅carbon--grid-breakpoints [variable]](#carbon--grid-breakpoints-variable)
+  - [✅grid-breakpoints [variable]](#grid-breakpoints-variable)
   - [✅carbon--breakpoint-next [function]](#carbon--breakpoint-next-function)
+  - [✅breakpoint-next [function]](#breakpoint-next-function)
   - [✅carbon--breakpoint-prev [function]](#carbon--breakpoint-prev-function)
+  - [✅breakpoint-prev [function]](#breakpoint-prev-function)
   - [✅carbon--is-smallest-breakpoint [function]](#carbon--is-smallest-breakpoint-function)
+  - [✅is-smallest-breakpoint [function]](#is-smallest-breakpoint-function)
   - [✅carbon--largest-breakpoint-name [function]](#carbon--largest-breakpoint-name-function)
+  - [✅largest-breakpoint-name [function]](#largest-breakpoint-name-function)
+  - [✅breakpoint-infix [function]](#breakpoint-infix-function)
   - [✅carbon--breakpoint-infix [function]](#carbon--breakpoint-infix-function)
+  - [✅breakpoint-up [mixin]](#breakpoint-up-mixin)
   - [✅carbon--breakpoint-up [mixin]](#carbon--breakpoint-up-mixin)
+  - [✅breakpoint-down [mixin]](#breakpoint-down-mixin)
   - [✅carbon--breakpoint-down [mixin]](#carbon--breakpoint-down-mixin)
+  - [✅breakpoint-between [mixin]](#breakpoint-between-mixin)
   - [✅carbon--breakpoint-between [mixin]](#carbon--breakpoint-between-mixin)
+  - [✅largest-breakpoint [mixin]](#largest-breakpoint-mixin)
   - [✅carbon--largest-breakpoint [mixin]](#carbon--largest-breakpoint-mixin)
+  - [✅breakpoint [mixin]](#breakpoint-mixin)
   - [✅carbon--breakpoint [mixin]](#carbon--breakpoint-mixin)
   - [✅carbon--container-01 [variable]](#carbon--container-01-variable)
   - [✅carbon--container-02 [variable]](#carbon--container-02-variable)
@@ -170,13 +71,21 @@
   - [✅container-04 [variable]](#container-04-variable)
   - [✅container-05 [variable]](#container-05-variable)
   - [✅carbon--base-font-size [variable]](#carbon--base-font-size-variable)
+  - [✅base-font-size [variable]](#base-font-size-variable)
   - [✅carbon--rem [function]](#carbon--rem-function)
+  - [✅rem [function]](#rem-function)
   - [✅carbon--em [function]](#carbon--em-function)
+  - [✅em [function]](#em-function)
   - [✅carbon--fluid-spacing-01 [variable]](#carbon--fluid-spacing-01-variable)
+  - [✅fluid-spacing-01 [variable]](#fluid-spacing-01-variable)
   - [✅carbon--fluid-spacing-02 [variable]](#carbon--fluid-spacing-02-variable)
+  - [✅fluid-spacing-02 [variable]](#fluid-spacing-02-variable)
   - [✅carbon--fluid-spacing-03 [variable]](#carbon--fluid-spacing-03-variable)
+  - [✅fluid-spacing-03 [variable]](#fluid-spacing-03-variable)
   - [✅carbon--fluid-spacing-04 [variable]](#carbon--fluid-spacing-04-variable)
+  - [✅fluid-spacing-04 [variable]](#fluid-spacing-04-variable)
   - [✅carbon--fluid-spacing [variable]](#carbon--fluid-spacing-variable)
+  - [✅fluid-spacing [variable]](#fluid-spacing-variable)
   - [✅fluid-spacing-01 [variable]](#fluid-spacing-01-variable)
   - [✅fluid-spacing-02 [variable]](#fluid-spacing-02-variable)
   - [✅fluid-spacing-03 [variable]](#fluid-spacing-03-variable)
@@ -207,18 +116,31 @@
   - [✅carbon--mini-unit-size [variable]](#carbon--mini-unit-size-variable)
   - [✅carbon--mini-units [function]](#carbon--mini-units-function)
   - [✅carbon--spacing-01 [variable]](#carbon--spacing-01-variable)
+  - [✅spacing-01 [variable]](#spacing-01-variable)
   - [✅carbon--spacing-02 [variable]](#carbon--spacing-02-variable)
+  - [✅spacing-02 [variable]](#spacing-02-variable)
   - [✅carbon--spacing-03 [variable]](#carbon--spacing-03-variable)
+  - [✅spacing-03 [variable]](#spacing-03-variable)
   - [✅carbon--spacing-04 [variable]](#carbon--spacing-04-variable)
+  - [✅spacing-04 [variable]](#spacing-04-variable)
   - [✅carbon--spacing-05 [variable]](#carbon--spacing-05-variable)
+  - [✅spacing-05 [variable]](#spacing-05-variable)
   - [✅carbon--spacing-06 [variable]](#carbon--spacing-06-variable)
+  - [✅spacing-06 [variable]](#spacing-06-variable)
   - [✅carbon--spacing-07 [variable]](#carbon--spacing-07-variable)
+  - [✅spacing-07 [variable]](#spacing-07-variable)
   - [✅carbon--spacing-08 [variable]](#carbon--spacing-08-variable)
+  - [✅spacing-08 [variable]](#spacing-08-variable)
   - [✅carbon--spacing-09 [variable]](#carbon--spacing-09-variable)
+  - [✅spacing-09 [variable]](#spacing-09-variable)
   - [✅carbon--spacing-10 [variable]](#carbon--spacing-10-variable)
+  - [✅spacing-10 [variable]](#spacing-10-variable)
   - [✅carbon--spacing-11 [variable]](#carbon--spacing-11-variable)
+  - [✅spacing-11 [variable]](#spacing-11-variable)
   - [✅carbon--spacing-12 [variable]](#carbon--spacing-12-variable)
+  - [✅spacing-12 [variable]](#spacing-12-variable)
   - [✅carbon--spacing [variable]](#carbon--spacing-variable)
+  - [✅spacing [variable]](#spacing-variable)
   - [✅spacing-01 [variable]](#spacing-01-variable)
   - [✅spacing-02 [variable]](#spacing-02-variable)
   - [✅spacing-03 [variable]](#spacing-03-variable)
@@ -232,7 +154,10 @@
   - [✅spacing-11 [variable]](#spacing-11-variable)
   - [✅spacing-12 [variable]](#spacing-12-variable)
   - [✅map-deep-get [function]](#map-deep-get-function)
+  - [✅map-deep-get [function]](#map-deep-get-function)
   - [✅carbon--key-by-index [function]](#carbon--key-by-index-function)
+  - [✅key-by-index [function]](#key-by-index-function)
+  - [✅last-map-item [function]](#last-map-item-function)
   - [✅last-map-item [function]](#last-map-item-function)
 - [@carbon/motion](#carbonmotion)
   - [✅carbon--easings [variable]](#carbon--easings-variable)
@@ -1130,2152 +1055,6 @@ Define color variables
 </details>
 
 - **Group**: [@carbon/colors](#carboncolors)
-- **Requires**:
-  - [black-100 [variable]](#black-100-variable)
-  - [blue-10 [variable]](#blue-10-variable)
-  - [blue-20 [variable]](#blue-20-variable)
-  - [blue-30 [variable]](#blue-30-variable)
-  - [blue-40 [variable]](#blue-40-variable)
-  - [blue-50 [variable]](#blue-50-variable)
-  - [blue-60 [variable]](#blue-60-variable)
-  - [blue-70 [variable]](#blue-70-variable)
-  - [blue-80 [variable]](#blue-80-variable)
-  - [blue-90 [variable]](#blue-90-variable)
-  - [blue-100 [variable]](#blue-100-variable)
-  - [cool-gray-10 [variable]](#cool-gray-10-variable)
-  - [cool-gray-20 [variable]](#cool-gray-20-variable)
-  - [cool-gray-30 [variable]](#cool-gray-30-variable)
-  - [cool-gray-40 [variable]](#cool-gray-40-variable)
-  - [cool-gray-50 [variable]](#cool-gray-50-variable)
-  - [cool-gray-60 [variable]](#cool-gray-60-variable)
-  - [cool-gray-70 [variable]](#cool-gray-70-variable)
-  - [cool-gray-80 [variable]](#cool-gray-80-variable)
-  - [cool-gray-90 [variable]](#cool-gray-90-variable)
-  - [cool-gray-100 [variable]](#cool-gray-100-variable)
-  - [cyan-10 [variable]](#cyan-10-variable)
-  - [cyan-20 [variable]](#cyan-20-variable)
-  - [cyan-30 [variable]](#cyan-30-variable)
-  - [cyan-40 [variable]](#cyan-40-variable)
-  - [cyan-50 [variable]](#cyan-50-variable)
-  - [cyan-60 [variable]](#cyan-60-variable)
-  - [cyan-70 [variable]](#cyan-70-variable)
-  - [cyan-80 [variable]](#cyan-80-variable)
-  - [cyan-90 [variable]](#cyan-90-variable)
-  - [cyan-100 [variable]](#cyan-100-variable)
-  - [gray-10 [variable]](#gray-10-variable)
-  - [gray-20 [variable]](#gray-20-variable)
-  - [gray-30 [variable]](#gray-30-variable)
-  - [gray-40 [variable]](#gray-40-variable)
-  - [gray-50 [variable]](#gray-50-variable)
-  - [gray-60 [variable]](#gray-60-variable)
-  - [gray-70 [variable]](#gray-70-variable)
-  - [gray-80 [variable]](#gray-80-variable)
-  - [gray-90 [variable]](#gray-90-variable)
-  - [gray-100 [variable]](#gray-100-variable)
-  - [green-10 [variable]](#green-10-variable)
-  - [green-20 [variable]](#green-20-variable)
-  - [green-30 [variable]](#green-30-variable)
-  - [green-40 [variable]](#green-40-variable)
-  - [green-50 [variable]](#green-50-variable)
-  - [green-60 [variable]](#green-60-variable)
-  - [green-70 [variable]](#green-70-variable)
-  - [green-80 [variable]](#green-80-variable)
-  - [green-90 [variable]](#green-90-variable)
-  - [green-100 [variable]](#green-100-variable)
-  - [magenta-10 [variable]](#magenta-10-variable)
-  - [magenta-20 [variable]](#magenta-20-variable)
-  - [magenta-30 [variable]](#magenta-30-variable)
-  - [magenta-40 [variable]](#magenta-40-variable)
-  - [magenta-50 [variable]](#magenta-50-variable)
-  - [magenta-60 [variable]](#magenta-60-variable)
-  - [magenta-70 [variable]](#magenta-70-variable)
-  - [magenta-80 [variable]](#magenta-80-variable)
-  - [magenta-90 [variable]](#magenta-90-variable)
-  - [magenta-100 [variable]](#magenta-100-variable)
-  - [orange-40 [variable]](#orange-40-variable)
-  - [orange-60 [variable]](#orange-60-variable)
-  - [orange-70 [variable]](#orange-70-variable)
-  - [purple-10 [variable]](#purple-10-variable)
-  - [purple-20 [variable]](#purple-20-variable)
-  - [purple-30 [variable]](#purple-30-variable)
-  - [purple-40 [variable]](#purple-40-variable)
-  - [purple-50 [variable]](#purple-50-variable)
-  - [purple-60 [variable]](#purple-60-variable)
-  - [purple-70 [variable]](#purple-70-variable)
-  - [purple-80 [variable]](#purple-80-variable)
-  - [purple-90 [variable]](#purple-90-variable)
-  - [purple-100 [variable]](#purple-100-variable)
-  - [red-10 [variable]](#red-10-variable)
-  - [red-20 [variable]](#red-20-variable)
-  - [red-30 [variable]](#red-30-variable)
-  - [red-40 [variable]](#red-40-variable)
-  - [red-50 [variable]](#red-50-variable)
-  - [red-60 [variable]](#red-60-variable)
-  - [red-70 [variable]](#red-70-variable)
-  - [red-80 [variable]](#red-80-variable)
-  - [red-90 [variable]](#red-90-variable)
-  - [red-100 [variable]](#red-100-variable)
-  - [teal-10 [variable]](#teal-10-variable)
-  - [teal-20 [variable]](#teal-20-variable)
-  - [teal-30 [variable]](#teal-30-variable)
-  - [teal-40 [variable]](#teal-40-variable)
-  - [teal-50 [variable]](#teal-50-variable)
-  - [teal-60 [variable]](#teal-60-variable)
-  - [teal-70 [variable]](#teal-70-variable)
-  - [teal-80 [variable]](#teal-80-variable)
-  - [teal-90 [variable]](#teal-90-variable)
-  - [teal-100 [variable]](#teal-100-variable)
-  - [warm-gray-10 [variable]](#warm-gray-10-variable)
-  - [warm-gray-20 [variable]](#warm-gray-20-variable)
-  - [warm-gray-30 [variable]](#warm-gray-30-variable)
-  - [warm-gray-40 [variable]](#warm-gray-40-variable)
-  - [warm-gray-50 [variable]](#warm-gray-50-variable)
-  - [warm-gray-60 [variable]](#warm-gray-60-variable)
-  - [warm-gray-70 [variable]](#warm-gray-70-variable)
-  - [warm-gray-80 [variable]](#warm-gray-80-variable)
-  - [warm-gray-90 [variable]](#warm-gray-90-variable)
-  - [warm-gray-100 [variable]](#warm-gray-100-variable)
-  - [white-0 [variable]](#white-0-variable)
-  - [yellow-20 [variable]](#yellow-20-variable)
-  - [yellow-30 [variable]](#yellow-30-variable)
-  - [yellow-40 [variable]](#yellow-40-variable)
-  - [yellow-50 [variable]](#yellow-50-variable)
-
-### ✅black [variable]
-
-Value for black
-
-<details>
-<summary>Source code</summary>
-
-```scss
-$black: #000000;
-```
-
-</details>
-
-- **Group**: [@carbon/colors](#carboncolors)
-
-### ✅white [variable]
-
-Value for white
-
-<details>
-<summary>Source code</summary>
-
-```scss
-$white: #ffffff;
-```
-
-</details>
-
-- **Group**: [@carbon/colors](#carboncolors)
-
-### ✅black-100 [variable]
-
-Value for black-100 from the IBM Design Language
-
-<details>
-<summary>Source code</summary>
-
-```scss
-$black-100: #000000;
-```
-
-</details>
-
-- **Group**: [@carbon/colors](#carboncolors)
-- **Used by**:
-  - [carbon--colors [mixin]](#carbon--colors-mixin)
-
-### ✅blue-10 [variable]
-
-Value for blue-10 from the IBM Design Language
-
-<details>
-<summary>Source code</summary>
-
-```scss
-$blue-10: #edf5ff;
-```
-
-</details>
-
-- **Group**: [@carbon/colors](#carboncolors)
-- **Used by**:
-  - [carbon--colors [mixin]](#carbon--colors-mixin)
-
-### ✅blue-20 [variable]
-
-Value for blue-20 from the IBM Design Language
-
-<details>
-<summary>Source code</summary>
-
-```scss
-$blue-20: #d0e2ff;
-```
-
-</details>
-
-- **Group**: [@carbon/colors](#carboncolors)
-- **Used by**:
-  - [carbon--colors [mixin]](#carbon--colors-mixin)
-
-### ✅blue-30 [variable]
-
-Value for blue-30 from the IBM Design Language
-
-<details>
-<summary>Source code</summary>
-
-```scss
-$blue-30: #a6c8ff;
-```
-
-</details>
-
-- **Group**: [@carbon/colors](#carboncolors)
-- **Used by**:
-  - [carbon--colors [mixin]](#carbon--colors-mixin)
-
-### ✅blue-40 [variable]
-
-Value for blue-40 from the IBM Design Language
-
-<details>
-<summary>Source code</summary>
-
-```scss
-$blue-40: #78a9ff;
-```
-
-</details>
-
-- **Group**: [@carbon/colors](#carboncolors)
-- **Used by**:
-  - [carbon--colors [mixin]](#carbon--colors-mixin)
-
-### ✅blue-50 [variable]
-
-Value for blue-50 from the IBM Design Language
-
-<details>
-<summary>Source code</summary>
-
-```scss
-$blue-50: #4589ff;
-```
-
-</details>
-
-- **Group**: [@carbon/colors](#carboncolors)
-- **Used by**:
-  - [carbon--colors [mixin]](#carbon--colors-mixin)
-
-### ✅blue-60 [variable]
-
-Value for blue-60 from the IBM Design Language
-
-<details>
-<summary>Source code</summary>
-
-```scss
-$blue-60: #0f62fe;
-```
-
-</details>
-
-- **Group**: [@carbon/colors](#carboncolors)
-- **Used by**:
-  - [carbon--colors [mixin]](#carbon--colors-mixin)
-
-### ✅blue-70 [variable]
-
-Value for blue-70 from the IBM Design Language
-
-<details>
-<summary>Source code</summary>
-
-```scss
-$blue-70: #0043ce;
-```
-
-</details>
-
-- **Group**: [@carbon/colors](#carboncolors)
-- **Used by**:
-  - [carbon--colors [mixin]](#carbon--colors-mixin)
-
-### ✅blue-80 [variable]
-
-Value for blue-80 from the IBM Design Language
-
-<details>
-<summary>Source code</summary>
-
-```scss
-$blue-80: #002d9c;
-```
-
-</details>
-
-- **Group**: [@carbon/colors](#carboncolors)
-- **Used by**:
-  - [carbon--colors [mixin]](#carbon--colors-mixin)
-
-### ✅blue-90 [variable]
-
-Value for blue-90 from the IBM Design Language
-
-<details>
-<summary>Source code</summary>
-
-```scss
-$blue-90: #001d6c;
-```
-
-</details>
-
-- **Group**: [@carbon/colors](#carboncolors)
-- **Used by**:
-  - [carbon--colors [mixin]](#carbon--colors-mixin)
-
-### ✅blue-100 [variable]
-
-Value for blue-100 from the IBM Design Language
-
-<details>
-<summary>Source code</summary>
-
-```scss
-$blue-100: #001141;
-```
-
-</details>
-
-- **Group**: [@carbon/colors](#carboncolors)
-- **Used by**:
-  - [carbon--colors [mixin]](#carbon--colors-mixin)
-
-### ✅cool-gray-10 [variable]
-
-Value for cool-gray-10 from the IBM Design Language
-
-<details>
-<summary>Source code</summary>
-
-```scss
-$cool-gray-10: #f2f4f8;
-```
-
-</details>
-
-- **Group**: [@carbon/colors](#carboncolors)
-- **Used by**:
-  - [carbon--colors [mixin]](#carbon--colors-mixin)
-
-### ✅cool-gray-20 [variable]
-
-Value for cool-gray-20 from the IBM Design Language
-
-<details>
-<summary>Source code</summary>
-
-```scss
-$cool-gray-20: #dde1e6;
-```
-
-</details>
-
-- **Group**: [@carbon/colors](#carboncolors)
-- **Used by**:
-  - [carbon--colors [mixin]](#carbon--colors-mixin)
-
-### ✅cool-gray-30 [variable]
-
-Value for cool-gray-30 from the IBM Design Language
-
-<details>
-<summary>Source code</summary>
-
-```scss
-$cool-gray-30: #c1c7cd;
-```
-
-</details>
-
-- **Group**: [@carbon/colors](#carboncolors)
-- **Used by**:
-  - [carbon--colors [mixin]](#carbon--colors-mixin)
-
-### ✅cool-gray-40 [variable]
-
-Value for cool-gray-40 from the IBM Design Language
-
-<details>
-<summary>Source code</summary>
-
-```scss
-$cool-gray-40: #a2a9b0;
-```
-
-</details>
-
-- **Group**: [@carbon/colors](#carboncolors)
-- **Used by**:
-  - [carbon--colors [mixin]](#carbon--colors-mixin)
-
-### ✅cool-gray-50 [variable]
-
-Value for cool-gray-50 from the IBM Design Language
-
-<details>
-<summary>Source code</summary>
-
-```scss
-$cool-gray-50: #878d96;
-```
-
-</details>
-
-- **Group**: [@carbon/colors](#carboncolors)
-- **Used by**:
-  - [carbon--colors [mixin]](#carbon--colors-mixin)
-
-### ✅cool-gray-60 [variable]
-
-Value for cool-gray-60 from the IBM Design Language
-
-<details>
-<summary>Source code</summary>
-
-```scss
-$cool-gray-60: #697077;
-```
-
-</details>
-
-- **Group**: [@carbon/colors](#carboncolors)
-- **Used by**:
-  - [carbon--colors [mixin]](#carbon--colors-mixin)
-
-### ✅cool-gray-70 [variable]
-
-Value for cool-gray-70 from the IBM Design Language
-
-<details>
-<summary>Source code</summary>
-
-```scss
-$cool-gray-70: #4d5358;
-```
-
-</details>
-
-- **Group**: [@carbon/colors](#carboncolors)
-- **Used by**:
-  - [carbon--colors [mixin]](#carbon--colors-mixin)
-
-### ✅cool-gray-80 [variable]
-
-Value for cool-gray-80 from the IBM Design Language
-
-<details>
-<summary>Source code</summary>
-
-```scss
-$cool-gray-80: #343a3f;
-```
-
-</details>
-
-- **Group**: [@carbon/colors](#carboncolors)
-- **Used by**:
-  - [carbon--colors [mixin]](#carbon--colors-mixin)
-
-### ✅cool-gray-90 [variable]
-
-Value for cool-gray-90 from the IBM Design Language
-
-<details>
-<summary>Source code</summary>
-
-```scss
-$cool-gray-90: #21272a;
-```
-
-</details>
-
-- **Group**: [@carbon/colors](#carboncolors)
-- **Used by**:
-  - [carbon--colors [mixin]](#carbon--colors-mixin)
-
-### ✅cool-gray-100 [variable]
-
-Value for cool-gray-100 from the IBM Design Language
-
-<details>
-<summary>Source code</summary>
-
-```scss
-$cool-gray-100: #121619;
-```
-
-</details>
-
-- **Group**: [@carbon/colors](#carboncolors)
-- **Used by**:
-  - [carbon--colors [mixin]](#carbon--colors-mixin)
-
-### ✅cyan-10 [variable]
-
-Value for cyan-10 from the IBM Design Language
-
-<details>
-<summary>Source code</summary>
-
-```scss
-$cyan-10: #e5f6ff;
-```
-
-</details>
-
-- **Group**: [@carbon/colors](#carboncolors)
-- **Used by**:
-  - [carbon--colors [mixin]](#carbon--colors-mixin)
-
-### ✅cyan-20 [variable]
-
-Value for cyan-20 from the IBM Design Language
-
-<details>
-<summary>Source code</summary>
-
-```scss
-$cyan-20: #bae6ff;
-```
-
-</details>
-
-- **Group**: [@carbon/colors](#carboncolors)
-- **Used by**:
-  - [carbon--colors [mixin]](#carbon--colors-mixin)
-
-### ✅cyan-30 [variable]
-
-Value for cyan-30 from the IBM Design Language
-
-<details>
-<summary>Source code</summary>
-
-```scss
-$cyan-30: #82cfff;
-```
-
-</details>
-
-- **Group**: [@carbon/colors](#carboncolors)
-- **Used by**:
-  - [carbon--colors [mixin]](#carbon--colors-mixin)
-
-### ✅cyan-40 [variable]
-
-Value for cyan-40 from the IBM Design Language
-
-<details>
-<summary>Source code</summary>
-
-```scss
-$cyan-40: #33b1ff;
-```
-
-</details>
-
-- **Group**: [@carbon/colors](#carboncolors)
-- **Used by**:
-  - [carbon--colors [mixin]](#carbon--colors-mixin)
-
-### ✅cyan-50 [variable]
-
-Value for cyan-50 from the IBM Design Language
-
-<details>
-<summary>Source code</summary>
-
-```scss
-$cyan-50: #1192e8;
-```
-
-</details>
-
-- **Group**: [@carbon/colors](#carboncolors)
-- **Used by**:
-  - [carbon--colors [mixin]](#carbon--colors-mixin)
-
-### ✅cyan-60 [variable]
-
-Value for cyan-60 from the IBM Design Language
-
-<details>
-<summary>Source code</summary>
-
-```scss
-$cyan-60: #0072c3;
-```
-
-</details>
-
-- **Group**: [@carbon/colors](#carboncolors)
-- **Used by**:
-  - [carbon--colors [mixin]](#carbon--colors-mixin)
-
-### ✅cyan-70 [variable]
-
-Value for cyan-70 from the IBM Design Language
-
-<details>
-<summary>Source code</summary>
-
-```scss
-$cyan-70: #00539a;
-```
-
-</details>
-
-- **Group**: [@carbon/colors](#carboncolors)
-- **Used by**:
-  - [carbon--colors [mixin]](#carbon--colors-mixin)
-
-### ✅cyan-80 [variable]
-
-Value for cyan-80 from the IBM Design Language
-
-<details>
-<summary>Source code</summary>
-
-```scss
-$cyan-80: #003a6d;
-```
-
-</details>
-
-- **Group**: [@carbon/colors](#carboncolors)
-- **Used by**:
-  - [carbon--colors [mixin]](#carbon--colors-mixin)
-
-### ✅cyan-90 [variable]
-
-Value for cyan-90 from the IBM Design Language
-
-<details>
-<summary>Source code</summary>
-
-```scss
-$cyan-90: #012749;
-```
-
-</details>
-
-- **Group**: [@carbon/colors](#carboncolors)
-- **Used by**:
-  - [carbon--colors [mixin]](#carbon--colors-mixin)
-
-### ✅cyan-100 [variable]
-
-Value for cyan-100 from the IBM Design Language
-
-<details>
-<summary>Source code</summary>
-
-```scss
-$cyan-100: #061727;
-```
-
-</details>
-
-- **Group**: [@carbon/colors](#carboncolors)
-- **Used by**:
-  - [carbon--colors [mixin]](#carbon--colors-mixin)
-
-### ✅gray-10 [variable]
-
-Value for gray-10 from the IBM Design Language
-
-<details>
-<summary>Source code</summary>
-
-```scss
-$gray-10: #f4f4f4;
-```
-
-</details>
-
-- **Group**: [@carbon/colors](#carboncolors)
-- **Used by**:
-  - [carbon--colors [mixin]](#carbon--colors-mixin)
-
-### ✅gray-20 [variable]
-
-Value for gray-20 from the IBM Design Language
-
-<details>
-<summary>Source code</summary>
-
-```scss
-$gray-20: #e0e0e0;
-```
-
-</details>
-
-- **Group**: [@carbon/colors](#carboncolors)
-- **Used by**:
-  - [carbon--colors [mixin]](#carbon--colors-mixin)
-
-### ✅gray-30 [variable]
-
-Value for gray-30 from the IBM Design Language
-
-<details>
-<summary>Source code</summary>
-
-```scss
-$gray-30: #c6c6c6;
-```
-
-</details>
-
-- **Group**: [@carbon/colors](#carboncolors)
-- **Used by**:
-  - [carbon--colors [mixin]](#carbon--colors-mixin)
-
-### ✅gray-40 [variable]
-
-Value for gray-40 from the IBM Design Language
-
-<details>
-<summary>Source code</summary>
-
-```scss
-$gray-40: #a8a8a8;
-```
-
-</details>
-
-- **Group**: [@carbon/colors](#carboncolors)
-- **Used by**:
-  - [carbon--colors [mixin]](#carbon--colors-mixin)
-
-### ✅gray-50 [variable]
-
-Value for gray-50 from the IBM Design Language
-
-<details>
-<summary>Source code</summary>
-
-```scss
-$gray-50: #8d8d8d;
-```
-
-</details>
-
-- **Group**: [@carbon/colors](#carboncolors)
-- **Used by**:
-  - [carbon--colors [mixin]](#carbon--colors-mixin)
-
-### ✅gray-60 [variable]
-
-Value for gray-60 from the IBM Design Language
-
-<details>
-<summary>Source code</summary>
-
-```scss
-$gray-60: #6f6f6f;
-```
-
-</details>
-
-- **Group**: [@carbon/colors](#carboncolors)
-- **Used by**:
-  - [carbon--colors [mixin]](#carbon--colors-mixin)
-
-### ✅gray-70 [variable]
-
-Value for gray-70 from the IBM Design Language
-
-<details>
-<summary>Source code</summary>
-
-```scss
-$gray-70: #525252;
-```
-
-</details>
-
-- **Group**: [@carbon/colors](#carboncolors)
-- **Used by**:
-  - [carbon--colors [mixin]](#carbon--colors-mixin)
-
-### ✅gray-80 [variable]
-
-Value for gray-80 from the IBM Design Language
-
-<details>
-<summary>Source code</summary>
-
-```scss
-$gray-80: #393939;
-```
-
-</details>
-
-- **Group**: [@carbon/colors](#carboncolors)
-- **Used by**:
-  - [carbon--colors [mixin]](#carbon--colors-mixin)
-
-### ✅gray-90 [variable]
-
-Value for gray-90 from the IBM Design Language
-
-<details>
-<summary>Source code</summary>
-
-```scss
-$gray-90: #262626;
-```
-
-</details>
-
-- **Group**: [@carbon/colors](#carboncolors)
-- **Used by**:
-  - [carbon--colors [mixin]](#carbon--colors-mixin)
-
-### ✅gray-100 [variable]
-
-Value for gray-100 from the IBM Design Language
-
-<details>
-<summary>Source code</summary>
-
-```scss
-$gray-100: #161616;
-```
-
-</details>
-
-- **Group**: [@carbon/colors](#carboncolors)
-- **Used by**:
-  - [carbon--colors [mixin]](#carbon--colors-mixin)
-
-### ✅green-10 [variable]
-
-Value for green-10 from the IBM Design Language
-
-<details>
-<summary>Source code</summary>
-
-```scss
-$green-10: #defbe6;
-```
-
-</details>
-
-- **Group**: [@carbon/colors](#carboncolors)
-- **Used by**:
-  - [carbon--colors [mixin]](#carbon--colors-mixin)
-
-### ✅green-20 [variable]
-
-Value for green-20 from the IBM Design Language
-
-<details>
-<summary>Source code</summary>
-
-```scss
-$green-20: #a7f0ba;
-```
-
-</details>
-
-- **Group**: [@carbon/colors](#carboncolors)
-- **Used by**:
-  - [carbon--colors [mixin]](#carbon--colors-mixin)
-
-### ✅green-30 [variable]
-
-Value for green-30 from the IBM Design Language
-
-<details>
-<summary>Source code</summary>
-
-```scss
-$green-30: #6fdc8c;
-```
-
-</details>
-
-- **Group**: [@carbon/colors](#carboncolors)
-- **Used by**:
-  - [carbon--colors [mixin]](#carbon--colors-mixin)
-
-### ✅green-40 [variable]
-
-Value for green-40 from the IBM Design Language
-
-<details>
-<summary>Source code</summary>
-
-```scss
-$green-40: #42be65;
-```
-
-</details>
-
-- **Group**: [@carbon/colors](#carboncolors)
-- **Used by**:
-  - [carbon--colors [mixin]](#carbon--colors-mixin)
-
-### ✅green-50 [variable]
-
-Value for green-50 from the IBM Design Language
-
-<details>
-<summary>Source code</summary>
-
-```scss
-$green-50: #24a148;
-```
-
-</details>
-
-- **Group**: [@carbon/colors](#carboncolors)
-- **Used by**:
-  - [carbon--colors [mixin]](#carbon--colors-mixin)
-
-### ✅green-60 [variable]
-
-Value for green-60 from the IBM Design Language
-
-<details>
-<summary>Source code</summary>
-
-```scss
-$green-60: #198038;
-```
-
-</details>
-
-- **Group**: [@carbon/colors](#carboncolors)
-- **Used by**:
-  - [carbon--colors [mixin]](#carbon--colors-mixin)
-
-### ✅green-70 [variable]
-
-Value for green-70 from the IBM Design Language
-
-<details>
-<summary>Source code</summary>
-
-```scss
-$green-70: #0e6027;
-```
-
-</details>
-
-- **Group**: [@carbon/colors](#carboncolors)
-- **Used by**:
-  - [carbon--colors [mixin]](#carbon--colors-mixin)
-
-### ✅green-80 [variable]
-
-Value for green-80 from the IBM Design Language
-
-<details>
-<summary>Source code</summary>
-
-```scss
-$green-80: #044317;
-```
-
-</details>
-
-- **Group**: [@carbon/colors](#carboncolors)
-- **Used by**:
-  - [carbon--colors [mixin]](#carbon--colors-mixin)
-
-### ✅green-90 [variable]
-
-Value for green-90 from the IBM Design Language
-
-<details>
-<summary>Source code</summary>
-
-```scss
-$green-90: #022d0d;
-```
-
-</details>
-
-- **Group**: [@carbon/colors](#carboncolors)
-- **Used by**:
-  - [carbon--colors [mixin]](#carbon--colors-mixin)
-
-### ✅green-100 [variable]
-
-Value for green-100 from the IBM Design Language
-
-<details>
-<summary>Source code</summary>
-
-```scss
-$green-100: #071908;
-```
-
-</details>
-
-- **Group**: [@carbon/colors](#carboncolors)
-- **Used by**:
-  - [carbon--colors [mixin]](#carbon--colors-mixin)
-
-### ✅magenta-10 [variable]
-
-Value for magenta-10 from the IBM Design Language
-
-<details>
-<summary>Source code</summary>
-
-```scss
-$magenta-10: #fff0f7;
-```
-
-</details>
-
-- **Group**: [@carbon/colors](#carboncolors)
-- **Used by**:
-  - [carbon--colors [mixin]](#carbon--colors-mixin)
-
-### ✅magenta-20 [variable]
-
-Value for magenta-20 from the IBM Design Language
-
-<details>
-<summary>Source code</summary>
-
-```scss
-$magenta-20: #ffd6e8;
-```
-
-</details>
-
-- **Group**: [@carbon/colors](#carboncolors)
-- **Used by**:
-  - [carbon--colors [mixin]](#carbon--colors-mixin)
-
-### ✅magenta-30 [variable]
-
-Value for magenta-30 from the IBM Design Language
-
-<details>
-<summary>Source code</summary>
-
-```scss
-$magenta-30: #ffafd2;
-```
-
-</details>
-
-- **Group**: [@carbon/colors](#carboncolors)
-- **Used by**:
-  - [carbon--colors [mixin]](#carbon--colors-mixin)
-
-### ✅magenta-40 [variable]
-
-Value for magenta-40 from the IBM Design Language
-
-<details>
-<summary>Source code</summary>
-
-```scss
-$magenta-40: #ff7eb6;
-```
-
-</details>
-
-- **Group**: [@carbon/colors](#carboncolors)
-- **Used by**:
-  - [carbon--colors [mixin]](#carbon--colors-mixin)
-
-### ✅magenta-50 [variable]
-
-Value for magenta-50 from the IBM Design Language
-
-<details>
-<summary>Source code</summary>
-
-```scss
-$magenta-50: #ee5396;
-```
-
-</details>
-
-- **Group**: [@carbon/colors](#carboncolors)
-- **Used by**:
-  - [carbon--colors [mixin]](#carbon--colors-mixin)
-
-### ✅magenta-60 [variable]
-
-Value for magenta-60 from the IBM Design Language
-
-<details>
-<summary>Source code</summary>
-
-```scss
-$magenta-60: #d02670;
-```
-
-</details>
-
-- **Group**: [@carbon/colors](#carboncolors)
-- **Used by**:
-  - [carbon--colors [mixin]](#carbon--colors-mixin)
-
-### ✅magenta-70 [variable]
-
-Value for magenta-70 from the IBM Design Language
-
-<details>
-<summary>Source code</summary>
-
-```scss
-$magenta-70: #9f1853;
-```
-
-</details>
-
-- **Group**: [@carbon/colors](#carboncolors)
-- **Used by**:
-  - [carbon--colors [mixin]](#carbon--colors-mixin)
-
-### ✅magenta-80 [variable]
-
-Value for magenta-80 from the IBM Design Language
-
-<details>
-<summary>Source code</summary>
-
-```scss
-$magenta-80: #740937;
-```
-
-</details>
-
-- **Group**: [@carbon/colors](#carboncolors)
-- **Used by**:
-  - [carbon--colors [mixin]](#carbon--colors-mixin)
-
-### ✅magenta-90 [variable]
-
-Value for magenta-90 from the IBM Design Language
-
-<details>
-<summary>Source code</summary>
-
-```scss
-$magenta-90: #510224;
-```
-
-</details>
-
-- **Group**: [@carbon/colors](#carboncolors)
-- **Used by**:
-  - [carbon--colors [mixin]](#carbon--colors-mixin)
-
-### ✅magenta-100 [variable]
-
-Value for magenta-100 from the IBM Design Language
-
-<details>
-<summary>Source code</summary>
-
-```scss
-$magenta-100: #2a0a18;
-```
-
-</details>
-
-- **Group**: [@carbon/colors](#carboncolors)
-- **Used by**:
-  - [carbon--colors [mixin]](#carbon--colors-mixin)
-
-### ✅orange-40 [variable]
-
-Value for orange-40 from the IBM Design Language
-
-<details>
-<summary>Source code</summary>
-
-```scss
-$orange-40: #ff832b;
-```
-
-</details>
-
-- **Group**: [@carbon/colors](#carboncolors)
-- **Used by**:
-  - [carbon--colors [mixin]](#carbon--colors-mixin)
-
-### ✅orange-60 [variable]
-
-Value for orange-60 from the IBM Design Language
-
-<details>
-<summary>Source code</summary>
-
-```scss
-$orange-60: #ba4e00;
-```
-
-</details>
-
-- **Group**: [@carbon/colors](#carboncolors)
-- **Used by**:
-  - [carbon--colors [mixin]](#carbon--colors-mixin)
-
-### ✅orange-70 [variable]
-
-Value for orange-70 from the IBM Design Language
-
-<details>
-<summary>Source code</summary>
-
-```scss
-$orange-70: #8a3800;
-```
-
-</details>
-
-- **Group**: [@carbon/colors](#carboncolors)
-- **Used by**:
-  - [carbon--colors [mixin]](#carbon--colors-mixin)
-
-### ✅purple-10 [variable]
-
-Value for purple-10 from the IBM Design Language
-
-<details>
-<summary>Source code</summary>
-
-```scss
-$purple-10: #f6f2ff;
-```
-
-</details>
-
-- **Group**: [@carbon/colors](#carboncolors)
-- **Used by**:
-  - [carbon--colors [mixin]](#carbon--colors-mixin)
-
-### ✅purple-20 [variable]
-
-Value for purple-20 from the IBM Design Language
-
-<details>
-<summary>Source code</summary>
-
-```scss
-$purple-20: #e8daff;
-```
-
-</details>
-
-- **Group**: [@carbon/colors](#carboncolors)
-- **Used by**:
-  - [carbon--colors [mixin]](#carbon--colors-mixin)
-
-### ✅purple-30 [variable]
-
-Value for purple-30 from the IBM Design Language
-
-<details>
-<summary>Source code</summary>
-
-```scss
-$purple-30: #d4bbff;
-```
-
-</details>
-
-- **Group**: [@carbon/colors](#carboncolors)
-- **Used by**:
-  - [carbon--colors [mixin]](#carbon--colors-mixin)
-
-### ✅purple-40 [variable]
-
-Value for purple-40 from the IBM Design Language
-
-<details>
-<summary>Source code</summary>
-
-```scss
-$purple-40: #be95ff;
-```
-
-</details>
-
-- **Group**: [@carbon/colors](#carboncolors)
-- **Used by**:
-  - [carbon--colors [mixin]](#carbon--colors-mixin)
-
-### ✅purple-50 [variable]
-
-Value for purple-50 from the IBM Design Language
-
-<details>
-<summary>Source code</summary>
-
-```scss
-$purple-50: #a56eff;
-```
-
-</details>
-
-- **Group**: [@carbon/colors](#carboncolors)
-- **Used by**:
-  - [carbon--colors [mixin]](#carbon--colors-mixin)
-
-### ✅purple-60 [variable]
-
-Value for purple-60 from the IBM Design Language
-
-<details>
-<summary>Source code</summary>
-
-```scss
-$purple-60: #8a3ffc;
-```
-
-</details>
-
-- **Group**: [@carbon/colors](#carboncolors)
-- **Used by**:
-  - [carbon--colors [mixin]](#carbon--colors-mixin)
-
-### ✅purple-70 [variable]
-
-Value for purple-70 from the IBM Design Language
-
-<details>
-<summary>Source code</summary>
-
-```scss
-$purple-70: #6929c4;
-```
-
-</details>
-
-- **Group**: [@carbon/colors](#carboncolors)
-- **Used by**:
-  - [carbon--colors [mixin]](#carbon--colors-mixin)
-
-### ✅purple-80 [variable]
-
-Value for purple-80 from the IBM Design Language
-
-<details>
-<summary>Source code</summary>
-
-```scss
-$purple-80: #491d8b;
-```
-
-</details>
-
-- **Group**: [@carbon/colors](#carboncolors)
-- **Used by**:
-  - [carbon--colors [mixin]](#carbon--colors-mixin)
-
-### ✅purple-90 [variable]
-
-Value for purple-90 from the IBM Design Language
-
-<details>
-<summary>Source code</summary>
-
-```scss
-$purple-90: #31135e;
-```
-
-</details>
-
-- **Group**: [@carbon/colors](#carboncolors)
-- **Used by**:
-  - [carbon--colors [mixin]](#carbon--colors-mixin)
-
-### ✅purple-100 [variable]
-
-Value for purple-100 from the IBM Design Language
-
-<details>
-<summary>Source code</summary>
-
-```scss
-$purple-100: #1c0f30;
-```
-
-</details>
-
-- **Group**: [@carbon/colors](#carboncolors)
-- **Used by**:
-  - [carbon--colors [mixin]](#carbon--colors-mixin)
-
-### ✅red-10 [variable]
-
-Value for red-10 from the IBM Design Language
-
-<details>
-<summary>Source code</summary>
-
-```scss
-$red-10: #fff1f1;
-```
-
-</details>
-
-- **Group**: [@carbon/colors](#carboncolors)
-- **Used by**:
-  - [carbon--colors [mixin]](#carbon--colors-mixin)
-
-### ✅red-20 [variable]
-
-Value for red-20 from the IBM Design Language
-
-<details>
-<summary>Source code</summary>
-
-```scss
-$red-20: #ffd7d9;
-```
-
-</details>
-
-- **Group**: [@carbon/colors](#carboncolors)
-- **Used by**:
-  - [carbon--colors [mixin]](#carbon--colors-mixin)
-
-### ✅red-30 [variable]
-
-Value for red-30 from the IBM Design Language
-
-<details>
-<summary>Source code</summary>
-
-```scss
-$red-30: #ffb3b8;
-```
-
-</details>
-
-- **Group**: [@carbon/colors](#carboncolors)
-- **Used by**:
-  - [carbon--colors [mixin]](#carbon--colors-mixin)
-
-### ✅red-40 [variable]
-
-Value for red-40 from the IBM Design Language
-
-<details>
-<summary>Source code</summary>
-
-```scss
-$red-40: #ff8389;
-```
-
-</details>
-
-- **Group**: [@carbon/colors](#carboncolors)
-- **Used by**:
-  - [carbon--colors [mixin]](#carbon--colors-mixin)
-
-### ✅red-50 [variable]
-
-Value for red-50 from the IBM Design Language
-
-<details>
-<summary>Source code</summary>
-
-```scss
-$red-50: #fa4d56;
-```
-
-</details>
-
-- **Group**: [@carbon/colors](#carboncolors)
-- **Used by**:
-  - [carbon--colors [mixin]](#carbon--colors-mixin)
-
-### ✅red-60 [variable]
-
-Value for red-60 from the IBM Design Language
-
-<details>
-<summary>Source code</summary>
-
-```scss
-$red-60: #da1e28;
-```
-
-</details>
-
-- **Group**: [@carbon/colors](#carboncolors)
-- **Used by**:
-  - [carbon--colors [mixin]](#carbon--colors-mixin)
-
-### ✅red-70 [variable]
-
-Value for red-70 from the IBM Design Language
-
-<details>
-<summary>Source code</summary>
-
-```scss
-$red-70: #a2191f;
-```
-
-</details>
-
-- **Group**: [@carbon/colors](#carboncolors)
-- **Used by**:
-  - [carbon--colors [mixin]](#carbon--colors-mixin)
-
-### ✅red-80 [variable]
-
-Value for red-80 from the IBM Design Language
-
-<details>
-<summary>Source code</summary>
-
-```scss
-$red-80: #750e13;
-```
-
-</details>
-
-- **Group**: [@carbon/colors](#carboncolors)
-- **Used by**:
-  - [carbon--colors [mixin]](#carbon--colors-mixin)
-
-### ✅red-90 [variable]
-
-Value for red-90 from the IBM Design Language
-
-<details>
-<summary>Source code</summary>
-
-```scss
-$red-90: #520408;
-```
-
-</details>
-
-- **Group**: [@carbon/colors](#carboncolors)
-- **Used by**:
-  - [carbon--colors [mixin]](#carbon--colors-mixin)
-
-### ✅red-100 [variable]
-
-Value for red-100 from the IBM Design Language
-
-<details>
-<summary>Source code</summary>
-
-```scss
-$red-100: #2d0709;
-```
-
-</details>
-
-- **Group**: [@carbon/colors](#carboncolors)
-- **Used by**:
-  - [carbon--colors [mixin]](#carbon--colors-mixin)
-
-### ✅teal-10 [variable]
-
-Value for teal-10 from the IBM Design Language
-
-<details>
-<summary>Source code</summary>
-
-```scss
-$teal-10: #d9fbfb;
-```
-
-</details>
-
-- **Group**: [@carbon/colors](#carboncolors)
-- **Used by**:
-  - [carbon--colors [mixin]](#carbon--colors-mixin)
-
-### ✅teal-20 [variable]
-
-Value for teal-20 from the IBM Design Language
-
-<details>
-<summary>Source code</summary>
-
-```scss
-$teal-20: #9ef0f0;
-```
-
-</details>
-
-- **Group**: [@carbon/colors](#carboncolors)
-- **Used by**:
-  - [carbon--colors [mixin]](#carbon--colors-mixin)
-
-### ✅teal-30 [variable]
-
-Value for teal-30 from the IBM Design Language
-
-<details>
-<summary>Source code</summary>
-
-```scss
-$teal-30: #3ddbd9;
-```
-
-</details>
-
-- **Group**: [@carbon/colors](#carboncolors)
-- **Used by**:
-  - [carbon--colors [mixin]](#carbon--colors-mixin)
-
-### ✅teal-40 [variable]
-
-Value for teal-40 from the IBM Design Language
-
-<details>
-<summary>Source code</summary>
-
-```scss
-$teal-40: #08bdba;
-```
-
-</details>
-
-- **Group**: [@carbon/colors](#carboncolors)
-- **Used by**:
-  - [carbon--colors [mixin]](#carbon--colors-mixin)
-
-### ✅teal-50 [variable]
-
-Value for teal-50 from the IBM Design Language
-
-<details>
-<summary>Source code</summary>
-
-```scss
-$teal-50: #009d9a;
-```
-
-</details>
-
-- **Group**: [@carbon/colors](#carboncolors)
-- **Used by**:
-  - [carbon--colors [mixin]](#carbon--colors-mixin)
-
-### ✅teal-60 [variable]
-
-Value for teal-60 from the IBM Design Language
-
-<details>
-<summary>Source code</summary>
-
-```scss
-$teal-60: #007d79;
-```
-
-</details>
-
-- **Group**: [@carbon/colors](#carboncolors)
-- **Used by**:
-  - [carbon--colors [mixin]](#carbon--colors-mixin)
-
-### ✅teal-70 [variable]
-
-Value for teal-70 from the IBM Design Language
-
-<details>
-<summary>Source code</summary>
-
-```scss
-$teal-70: #005d5d;
-```
-
-</details>
-
-- **Group**: [@carbon/colors](#carboncolors)
-- **Used by**:
-  - [carbon--colors [mixin]](#carbon--colors-mixin)
-
-### ✅teal-80 [variable]
-
-Value for teal-80 from the IBM Design Language
-
-<details>
-<summary>Source code</summary>
-
-```scss
-$teal-80: #004144;
-```
-
-</details>
-
-- **Group**: [@carbon/colors](#carboncolors)
-- **Used by**:
-  - [carbon--colors [mixin]](#carbon--colors-mixin)
-
-### ✅teal-90 [variable]
-
-Value for teal-90 from the IBM Design Language
-
-<details>
-<summary>Source code</summary>
-
-```scss
-$teal-90: #022b30;
-```
-
-</details>
-
-- **Group**: [@carbon/colors](#carboncolors)
-- **Used by**:
-  - [carbon--colors [mixin]](#carbon--colors-mixin)
-
-### ✅teal-100 [variable]
-
-Value for teal-100 from the IBM Design Language
-
-<details>
-<summary>Source code</summary>
-
-```scss
-$teal-100: #081a1c;
-```
-
-</details>
-
-- **Group**: [@carbon/colors](#carboncolors)
-- **Used by**:
-  - [carbon--colors [mixin]](#carbon--colors-mixin)
-
-### ✅warm-gray-10 [variable]
-
-Value for warm-gray-10 from the IBM Design Language
-
-<details>
-<summary>Source code</summary>
-
-```scss
-$warm-gray-10: #f7f3f2;
-```
-
-</details>
-
-- **Group**: [@carbon/colors](#carboncolors)
-- **Used by**:
-  - [carbon--colors [mixin]](#carbon--colors-mixin)
-
-### ✅warm-gray-20 [variable]
-
-Value for warm-gray-20 from the IBM Design Language
-
-<details>
-<summary>Source code</summary>
-
-```scss
-$warm-gray-20: #e5e0df;
-```
-
-</details>
-
-- **Group**: [@carbon/colors](#carboncolors)
-- **Used by**:
-  - [carbon--colors [mixin]](#carbon--colors-mixin)
-
-### ✅warm-gray-30 [variable]
-
-Value for warm-gray-30 from the IBM Design Language
-
-<details>
-<summary>Source code</summary>
-
-```scss
-$warm-gray-30: #cac5c4;
-```
-
-</details>
-
-- **Group**: [@carbon/colors](#carboncolors)
-- **Used by**:
-  - [carbon--colors [mixin]](#carbon--colors-mixin)
-
-### ✅warm-gray-40 [variable]
-
-Value for warm-gray-40 from the IBM Design Language
-
-<details>
-<summary>Source code</summary>
-
-```scss
-$warm-gray-40: #ada8a8;
-```
-
-</details>
-
-- **Group**: [@carbon/colors](#carboncolors)
-- **Used by**:
-  - [carbon--colors [mixin]](#carbon--colors-mixin)
-
-### ✅warm-gray-50 [variable]
-
-Value for warm-gray-50 from the IBM Design Language
-
-<details>
-<summary>Source code</summary>
-
-```scss
-$warm-gray-50: #8f8b8b;
-```
-
-</details>
-
-- **Group**: [@carbon/colors](#carboncolors)
-- **Used by**:
-  - [carbon--colors [mixin]](#carbon--colors-mixin)
-
-### ✅warm-gray-60 [variable]
-
-Value for warm-gray-60 from the IBM Design Language
-
-<details>
-<summary>Source code</summary>
-
-```scss
-$warm-gray-60: #726e6e;
-```
-
-</details>
-
-- **Group**: [@carbon/colors](#carboncolors)
-- **Used by**:
-  - [carbon--colors [mixin]](#carbon--colors-mixin)
-
-### ✅warm-gray-70 [variable]
-
-Value for warm-gray-70 from the IBM Design Language
-
-<details>
-<summary>Source code</summary>
-
-```scss
-$warm-gray-70: #565151;
-```
-
-</details>
-
-- **Group**: [@carbon/colors](#carboncolors)
-- **Used by**:
-  - [carbon--colors [mixin]](#carbon--colors-mixin)
-
-### ✅warm-gray-80 [variable]
-
-Value for warm-gray-80 from the IBM Design Language
-
-<details>
-<summary>Source code</summary>
-
-```scss
-$warm-gray-80: #3c3838;
-```
-
-</details>
-
-- **Group**: [@carbon/colors](#carboncolors)
-- **Used by**:
-  - [carbon--colors [mixin]](#carbon--colors-mixin)
-
-### ✅warm-gray-90 [variable]
-
-Value for warm-gray-90 from the IBM Design Language
-
-<details>
-<summary>Source code</summary>
-
-```scss
-$warm-gray-90: #272525;
-```
-
-</details>
-
-- **Group**: [@carbon/colors](#carboncolors)
-- **Used by**:
-  - [carbon--colors [mixin]](#carbon--colors-mixin)
-
-### ✅warm-gray-100 [variable]
-
-Value for warm-gray-100 from the IBM Design Language
-
-<details>
-<summary>Source code</summary>
-
-```scss
-$warm-gray-100: #171414;
-```
-
-</details>
-
-- **Group**: [@carbon/colors](#carboncolors)
-- **Used by**:
-  - [carbon--colors [mixin]](#carbon--colors-mixin)
-
-### ✅white-0 [variable]
-
-Value for white-0 from the IBM Design Language
-
-<details>
-<summary>Source code</summary>
-
-```scss
-$white-0: #ffffff;
-```
-
-</details>
-
-- **Group**: [@carbon/colors](#carboncolors)
-- **Used by**:
-  - [carbon--colors [mixin]](#carbon--colors-mixin)
-
-### ✅yellow-20 [variable]
-
-Value for yellow-20 from the IBM Design Language
-
-<details>
-<summary>Source code</summary>
-
-```scss
-$yellow-20: #fdd13a;
-```
-
-</details>
-
-- **Group**: [@carbon/colors](#carboncolors)
-- **Used by**:
-  - [carbon--colors [mixin]](#carbon--colors-mixin)
-
-### ✅yellow-30 [variable]
-
-Value for yellow-30 from the IBM Design Language
-
-<details>
-<summary>Source code</summary>
-
-```scss
-$yellow-30: #f1c21b;
-```
-
-</details>
-
-- **Group**: [@carbon/colors](#carboncolors)
-- **Used by**:
-  - [carbon--colors [mixin]](#carbon--colors-mixin)
-
-### ✅yellow-40 [variable]
-
-Value for yellow-40 from the IBM Design Language
-
-<details>
-<summary>Source code</summary>
-
-```scss
-$yellow-40: #d2a106;
-```
-
-</details>
-
-- **Group**: [@carbon/colors](#carboncolors)
-- **Used by**:
-  - [carbon--colors [mixin]](#carbon--colors-mixin)
-
-### ✅yellow-50 [variable]
-
-Value for yellow-50 from the IBM Design Language
-
-<details>
-<summary>Source code</summary>
-
-```scss
-$yellow-50: #b28600;
-```
-
-</details>
-
-- **Group**: [@carbon/colors](#carboncolors)
-- **Used by**:
-  - [carbon--colors [mixin]](#carbon--colors-mixin)
-
-### ✅colors [variable]
-
-Colors from the IBM Design Language
-
-<details>
-<summary>Source code</summary>
-
-```scss
-$colors: (
-  black: (
-    100: #000000,
-  ),
-  blue: (
-    10: #edf5ff,
-    20: #d0e2ff,
-    30: #a6c8ff,
-    40: #78a9ff,
-    50: #4589ff,
-    60: #0f62fe,
-    70: #0043ce,
-    80: #002d9c,
-    90: #001d6c,
-    100: #001141,
-  ),
-  cool-gray: (
-    10: #f2f4f8,
-    20: #dde1e6,
-    30: #c1c7cd,
-    40: #a2a9b0,
-    50: #878d96,
-    60: #697077,
-    70: #4d5358,
-    80: #343a3f,
-    90: #21272a,
-    100: #121619,
-  ),
-  cyan: (
-    10: #e5f6ff,
-    20: #bae6ff,
-    30: #82cfff,
-    40: #33b1ff,
-    50: #1192e8,
-    60: #0072c3,
-    70: #00539a,
-    80: #003a6d,
-    90: #012749,
-    100: #061727,
-  ),
-  gray: (
-    10: #f4f4f4,
-    20: #e0e0e0,
-    30: #c6c6c6,
-    40: #a8a8a8,
-    50: #8d8d8d,
-    60: #6f6f6f,
-    70: #525252,
-    80: #393939,
-    90: #262626,
-    100: #161616,
-  ),
-  green: (
-    10: #defbe6,
-    20: #a7f0ba,
-    30: #6fdc8c,
-    40: #42be65,
-    50: #24a148,
-    60: #198038,
-    70: #0e6027,
-    80: #044317,
-    90: #022d0d,
-    100: #071908,
-  ),
-  magenta: (
-    10: #fff0f7,
-    20: #ffd6e8,
-    30: #ffafd2,
-    40: #ff7eb6,
-    50: #ee5396,
-    60: #d02670,
-    70: #9f1853,
-    80: #740937,
-    90: #510224,
-    100: #2a0a18,
-  ),
-  orange: (
-    40: #ff832b,
-    60: #ba4e00,
-    70: #8a3800,
-  ),
-  purple: (
-    10: #f6f2ff,
-    20: #e8daff,
-    30: #d4bbff,
-    40: #be95ff,
-    50: #a56eff,
-    60: #8a3ffc,
-    70: #6929c4,
-    80: #491d8b,
-    90: #31135e,
-    100: #1c0f30,
-  ),
-  red: (
-    10: #fff1f1,
-    20: #ffd7d9,
-    30: #ffb3b8,
-    40: #ff8389,
-    50: #fa4d56,
-    60: #da1e28,
-    70: #a2191f,
-    80: #750e13,
-    90: #520408,
-    100: #2d0709,
-  ),
-  teal: (
-    10: #d9fbfb,
-    20: #9ef0f0,
-    30: #3ddbd9,
-    40: #08bdba,
-    50: #009d9a,
-    60: #007d79,
-    70: #005d5d,
-    80: #004144,
-    90: #022b30,
-    100: #081a1c,
-  ),
-  warm-gray: (
-    10: #f7f3f2,
-    20: #e5e0df,
-    30: #cac5c4,
-    40: #ada8a8,
-    50: #8f8b8b,
-    60: #726e6e,
-    70: #565151,
-    80: #3c3838,
-    90: #272525,
-    100: #171414,
-  ),
-  white: (
-    0: #ffffff,
-  ),
-  yellow: (
-    20: #fdd13a,
-    30: #f1c21b,
-    40: #d2a106,
-    50: #b28600,
-  ),
-);
-```
-
-</details>
-
-- **Group**: [@carbon/colors](#carboncolors)
 
 ## @carbon/grid
 
@@ -3916,6 +1695,7 @@ Generate the CSS for a grid for the given breakpoints and gutters
   - [carbon--hang [mixin]](#carbon--hang-mixin)
   - [carbon--aspect-ratio [mixin]](#carbon--aspect-ratio-mixin)
   - [prefix [variable]](#prefix-variable)
+  - [grid-gutter [variable]](#grid-gutter-variable)
 
 ### ✅prefix [variable]
 
@@ -4040,6 +1820,24 @@ $carbon--grid-gutter: carbon--rem(32px);
 - **Used by**:
   - [carbon--make-container [mixin]](#carbon--make-container-mixin)
 
+### ✅grid-gutter [variable]
+
+Carbon gutter size in rem
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$grid-gutter: convert.rem(32px);
+```
+
+</details>
+
+- **Group**: [@carbon/layout](#carbonlayout)
+- **Type**: `Number`
+- **Used by**:
+  - [carbon--grid [mixin]](#carbon--grid-mixin)
+
 ### ✅carbon--grid-gutter--condensed [variable]
 
 Carbon condensed gutter size in rem
@@ -4049,6 +1847,22 @@ Carbon condensed gutter size in rem
 
 ```scss
 $carbon--grid-gutter--condensed: carbon--rem(1px);
+```
+
+</details>
+
+- **Group**: [@carbon/layout](#carbonlayout)
+- **Type**: `Number`
+
+### ✅grid-gutter--condensed [variable]
+
+Carbon condensed gutter size in rem
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$grid-gutter--condensed: convert.rem(1px);
 ```
 
 </details>
@@ -4096,6 +1910,46 @@ $carbon--grid-breakpoints: (
 - **Group**: [@carbon/layout](#carbonlayout)
 - **Type**: `Map`
 
+### ✅grid-breakpoints [variable]
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$grid-breakpoints: (
+  sm: (
+    columns: 4,
+    margin: 0,
+    width: convert.rem(320px),
+  ),
+  md: (
+    columns: 8,
+    margin: convert.rem(16px),
+    width: convert.rem(672px),
+  ),
+  lg: (
+    columns: 16,
+    margin: convert.rem(16px),
+    width: convert.rem(1056px),
+  ),
+  xlg: (
+    columns: 16,
+    margin: convert.rem(16px),
+    width: convert.rem(1312px),
+  ),
+  max: (
+    columns: 16,
+    margin: convert.rem(24px),
+    width: convert.rem(1584px),
+  ),
+);
+```
+
+</details>
+
+- **Group**: [@carbon/layout](#carbonlayout)
+- **Type**: `Map`
+
 ### ✅carbon--breakpoint-next [function]
 
 Get the value of the next breakpoint, or null for the last breakpoint
@@ -4131,6 +1985,40 @@ Get the value of the next breakpoint, or null for the last breakpoint
 - **Returns**: `String`
 - **Used by**:
   - [fluid-type-size [mixin]](#fluid-type-size-mixin)
+
+### ✅breakpoint-next [function]
+
+Get the value of the next breakpoint, or null for the last breakpoint
+
+<details>
+<summary>Source code</summary>
+
+```scss
+@function breakpoint-next(
+  $name,
+  $breakpoints: $grid-breakpoints,
+  $breakpoint-names: map-keys($breakpoints)
+) {
+  $n: list.index($breakpoint-names, $name);
+  @if $n != null and $n < list.length($breakpoint-names) {
+    @return list.nth($breakpoint-names, $n + 1);
+  }
+  @return null;
+}
+```
+
+</details>
+
+- **Parameters**:
+
+| Name                | Description                                                                                                     | Type     | Default value            |
+| ------------------- | --------------------------------------------------------------------------------------------------------------- | -------- | ------------------------ |
+| `$name`             | The name of the brekapoint                                                                                      | `String` | —                        |
+| `$breakpoints`      | A map of breakpoints where the key is the name of the breakpoint and the value is the values for the breakpoint | `Map`    | `$grid-breakpoints`      |
+| `$breakpoint-names` | A list of names from the `$breakpoints` map                                                                     | `List`   | `map-keys($breakpoints)` |
+
+- **Group**: [@carbon/layout](#carbonlayout)
+- **Returns**: `String`
 
 ### ✅carbon--breakpoint-prev [function]
 
@@ -4168,6 +2056,40 @@ Get the value of the previous breakpoint, or null for the first breakpoint
 - **Used by**:
   - [carbon--make-container [mixin]](#carbon--make-container-mixin)
 
+### ✅breakpoint-prev [function]
+
+Get the value of the previous breakpoint, or null for the first breakpoint
+
+<details>
+<summary>Source code</summary>
+
+```scss
+@function breakpoint-prev(
+  $name,
+  $breakpoints: $grid-breakpoints,
+  $breakpoint-names: map-keys($breakpoints)
+) {
+  $n: list.index($breakpoint-names, $name);
+  @if $n != null and $n > 1 {
+    @return list.nth($breakpoint-names, $n - 1);
+  }
+  @return null;
+}
+```
+
+</details>
+
+- **Parameters**:
+
+| Name                | Description                                                                                                     | Type     | Default value            |
+| ------------------- | --------------------------------------------------------------------------------------------------------------- | -------- | ------------------------ |
+| `$name`             | The name of the brekapoint                                                                                      | `String` | —                        |
+| `$breakpoints`      | A map of breakpoints where the key is the name of the breakpoint and the value is the values for the breakpoint | `Map`    | `$grid-breakpoints`      |
+| `$breakpoint-names` | A list of names from the `$breakpoints` map                                                                     | `List`   | `map-keys($breakpoints)` |
+
+- **Group**: [@carbon/layout](#carbonlayout)
+- **Returns**: `String`
+
 ### ✅carbon--is-smallest-breakpoint [function]
 
 Check to see if the given breakpoint name
@@ -4197,6 +2119,33 @@ Check to see if the given breakpoint name
 - **Returns**: `Bool`
 - **Used by**:
   - [carbon--breakpoint-up [mixin]](#carbon--breakpoint-up-mixin)
+
+### ✅is-smallest-breakpoint [function]
+
+Check to see if the given breakpoint name
+
+<details>
+<summary>Source code</summary>
+
+```scss
+@function is-smallest-breakpoint($name, $breakpoints: $grid-breakpoints) {
+  @return list.index(map.keys($breakpoints), $name) == 1;
+}
+```
+
+</details>
+
+- **Parameters**:
+
+| Name           | Description                                                                                                     | Type     | Default value       |
+| -------------- | --------------------------------------------------------------------------------------------------------------- | -------- | ------------------- |
+| `$name`        | The name of the brekapoint                                                                                      | `String` | —                   |
+| `$breakpoints` | A map of breakpoints where the key is the name of the breakpoint and the value is the values for the breakpoint | `Map`    | `$grid-breakpoints` |
+
+- **Group**: [@carbon/layout](#carbonlayout)
+- **Returns**: `Bool`
+- **Used by**:
+  - [breakpoint-up [mixin]](#breakpoint-up-mixin)
 
 ### ✅carbon--largest-breakpoint-name [function]
 
@@ -4229,6 +2178,60 @@ Returns the largest breakpoint name
 - **Used by**:
   - [carbon--largest-breakpoint [mixin]](#carbon--largest-breakpoint-mixin)
 
+### ✅largest-breakpoint-name [function]
+
+Returns the largest breakpoint name
+
+<details>
+<summary>Source code</summary>
+
+```scss
+@function largest-breakpoint-name($breakpoints: $grid-breakpoints) {
+  $total-breakpoints: list.length($breakpoints);
+  @return key-by-index($breakpoints, $total-breakpoints);
+}
+```
+
+</details>
+
+- **Parameters**:
+
+| Name           | Description                                    | Type  | Default value       |
+| -------------- | ---------------------------------------------- | ----- | ------------------- |
+| `$breakpoints` | A map of breakpoints where the key is the name | `Map` | `$grid-breakpoints` |
+
+- **Group**: [@carbon/layout](#carbonlayout)
+- **Returns**: `String`
+- **Requires**:
+  - [key-by-index [function]](#key-by-index-function)
+- **Used by**:
+  - [largest-breakpoint [mixin]](#largest-breakpoint-mixin)
+
+### ✅breakpoint-infix [function]
+
+Get the infix for a given breakpoint in a list of breakpoints. Usesful for
+generate the size part in a selector, for example: `.prefix--col-sm-2`.
+
+<details>
+<summary>Source code</summary>
+
+```scss
+@function breakpoint-infix($name) {
+  @return '-#{$name}';
+}
+```
+
+</details>
+
+- **Parameters**:
+
+| Name    | Description                | Type     | Default value |
+| ------- | -------------------------- | -------- | ------------- |
+| `$name` | The name of the breakpoint | `String` | —             |
+
+- **Group**: [@carbon/layout](#carbonlayout)
+- **Returns**: `String`
+
 ### ✅carbon--breakpoint-infix [function]
 
 Get the infix for a given breakpoint in a list of breakpoints. Usesful for
@@ -4255,6 +2258,51 @@ generate the size part in a selector, for example: `.prefix--col-sm-2`.
 - **Returns**: `String`
 - **Used by**:
   - [carbon--make-grid-columns [mixin]](#carbon--make-grid-columns-mixin)
+
+### ✅breakpoint-up [mixin]
+
+Generate a media query from the width of the given breakpoint to infinity
+
+<details>
+<summary>Source code</summary>
+
+```scss
+@mixin breakpoint-up($name, $breakpoints: $grid-breakpoints) {
+  @if meta.type-of($name) == 'number' {
+    @media (min-width: $name) {
+      @content;
+    }
+  } @else if map.has-key($breakpoints, $name) {
+    $breakpoint: map.get($breakpoints, $name);
+    $width: map.get($breakpoint, width);
+    @if is-smallest-breakpoint($name, $breakpoints) {
+      @content;
+    } @else {
+      @media (min-width: $width) {
+        @content;
+      }
+    }
+  } @else {
+    @error 'Unable to find a breakpoint with name `#{$name}`. Expected one of: (#{map.keys($breakpoints)})';
+  }
+}
+```
+
+</details>
+
+- **Parameters**:
+
+| Name           | Description                                    | Type               | Default value       |
+| -------------- | ---------------------------------------------- | ------------------ | ------------------- |
+| `$name`        | —                                              | `String \| Number` | —                   |
+| `$breakpoints` | A map of breakpoints where the key is the name | `Map`              | `$grid-breakpoints` |
+
+- **Group**: [@carbon/layout](#carbonlayout)
+- **Requires**:
+  - [is-smallest-breakpoint [function]](#is-smallest-breakpoint-function)
+- **Used by**:
+  - [breakpoint-between [mixin]](#breakpoint-between-mixin)
+  - [breakpoint [mixin]](#breakpoint-mixin)
 
 ### ✅carbon--breakpoint-up [mixin]
 
@@ -4301,6 +2349,49 @@ Generate a media query from the width of the given breakpoint to infinity
   - [carbon--breakpoint-between [mixin]](#carbon--breakpoint-between-mixin)
   - [carbon--breakpoint [mixin]](#carbon--breakpoint-mixin)
 
+### ✅breakpoint-down [mixin]
+
+Generate a media query for the maximum width of the given styles
+
+<details>
+<summary>Source code</summary>
+
+```scss
+@mixin breakpoint-down($name, $breakpoints: $grid-breakpoints) {
+  @if meta.type-of($name) == 'number' {
+    @media (max-width: $name) {
+      @content;
+    }
+  } @else if map.has-key($breakpoints, $name) {
+    // We borrow this logic from bootstrap for specifying the value of the
+    // max-width. The maximum width is calculated by finding the breakpoint and
+    // subtracting .02 from its value. This value is used instead of .01 to
+    // avoid rounding issues in Safari
+    // https://github.com/twbs/bootstrap/blob/c5b1919deaf5393fcca9e9b9d7ce9c338160d99d/scss/mixins/_breakpoints.scss#L34-L46
+    $breakpoint: map.get($breakpoints, $name);
+    $width: map.get($breakpoint, width) - 0.02;
+    @media (max-width: $width) {
+      @content;
+    }
+  } @else {
+    @error 'Unable to find a breakpoint with name `#{$name}`. Expected one of: (#{map.keys($breakpoints)})';
+  }
+}
+```
+
+</details>
+
+- **Parameters**:
+
+| Name           | Description                                    | Type               | Default value       |
+| -------------- | ---------------------------------------------- | ------------------ | ------------------- |
+| `$name`        | —                                              | `String \| Number` | —                   |
+| `$breakpoints` | A map of breakpoints where the key is the name | `Map`              | `$grid-breakpoints` |
+
+- **Group**: [@carbon/layout](#carbonlayout)
+- **Used by**:
+  - [breakpoint-between [mixin]](#breakpoint-between-mixin)
+
 ### ✅carbon--breakpoint-down [mixin]
 
 Generate a media query for the maximum width of the given styles
@@ -4343,6 +2434,55 @@ Generate a media query for the maximum width of the given styles
 - **Group**: [@carbon/layout](#carbonlayout)
 - **Used by**:
   - [carbon--breakpoint-between [mixin]](#carbon--breakpoint-between-mixin)
+
+### ✅breakpoint-between [mixin]
+
+Generate a media query for the range between the lower and upper breakpoints
+
+<details>
+<summary>Source code</summary>
+
+```scss
+@mixin breakpoint-between($lower, $upper, $breakpoints: $grid-breakpoints) {
+  $is-number-lower: meta.type-of($lower) == 'number';
+  $is-number-upper: meta.type-of($upper) == 'number';
+  $min: if($is-number-lower, $lower, map.get($breakpoints, $lower));
+  $max: if($is-number-upper, $upper, map.get($breakpoints, $upper));
+
+  @if $min and $max {
+    $min-width: if(not $is-number-lower and $min, map.get($min, width), $min);
+    $max-width: if(not $is-number-upper and $max, map.get($max, width), $max);
+    @media (min-width: $min-width) and (max-width: $max-width) {
+      @content;
+    }
+  } @else if $min != null and $max == null {
+    @include breakpoint-up($lower) {
+      @content;
+    }
+  } @else if $min == null and $max != null {
+    @include breakpoint-down($upper) {
+      @content;
+    }
+  } @else {
+    @error 'Unable to find a breakpoint to satisfy: (#{$lower},#{$upper}). Expected both to be one of (#{map.keys($breakpoints)}).';
+  }
+}
+```
+
+</details>
+
+- **Parameters**:
+
+| Name           | Description                                    | Type               | Default value       |
+| -------------- | ---------------------------------------------- | ------------------ | ------------------- |
+| `$lower`       | —                                              | `String \| Number` | —                   |
+| `$upper`       | —                                              | `String \| Number` | —                   |
+| `$breakpoints` | A map of breakpoints where the key is the name | `Map`              | `$grid-breakpoints` |
+
+- **Group**: [@carbon/layout](#carbonlayout)
+- **Requires**:
+  - [breakpoint-up [mixin]](#breakpoint-up-mixin)
+  - [breakpoint-down [mixin]](#breakpoint-down-mixin)
 
 ### ✅carbon--breakpoint-between [mixin]
 
@@ -4397,6 +2537,34 @@ Generate a media query for the range between the lower and upper breakpoints
   - [carbon--breakpoint-up [mixin]](#carbon--breakpoint-up-mixin)
   - [carbon--breakpoint-down [mixin]](#carbon--breakpoint-down-mixin)
 
+### ✅largest-breakpoint [mixin]
+
+Generate media query for the largest breakpoint
+
+<details>
+<summary>Source code</summary>
+
+```scss
+@mixin largest-breakpoint($breakpoints: $grid-breakpoints) {
+  @include breakpoint(largest-breakpoint-name()) {
+    @content;
+  }
+}
+```
+
+</details>
+
+- **Parameters**:
+
+| Name           | Description                                    | Type  | Default value       |
+| -------------- | ---------------------------------------------- | ----- | ------------------- |
+| `$breakpoints` | A map of breakpoints where the key is the name | `Map` | `$grid-breakpoints` |
+
+- **Group**: [@carbon/layout](#carbonlayout)
+- **Requires**:
+  - [breakpoint [mixin]](#breakpoint-mixin)
+  - [largest-breakpoint-name [function]](#largest-breakpoint-name-function)
+
 ### ✅carbon--largest-breakpoint [mixin]
 
 Generate media query for the largest breakpoint
@@ -4426,6 +2594,36 @@ Generate media query for the largest breakpoint
   - [carbon--largest-breakpoint-name [function]](#carbon--largest-breakpoint-name-function)
 - **Used by**:
   - [carbon--grid [mixin]](#carbon--grid-mixin)
+
+### ✅breakpoint [mixin]
+
+Generate a media query for a given breakpoint
+
+<details>
+<summary>Source code</summary>
+
+```scss
+@mixin breakpoint($name, $breakpoints: $grid-breakpoints) {
+  @include breakpoint-up($name, $breakpoints) {
+    @content;
+  }
+}
+```
+
+</details>
+
+- **Parameters**:
+
+| Name           | Description                                    | Type               | Default value       |
+| -------------- | ---------------------------------------------- | ------------------ | ------------------- |
+| `$name`        | —                                              | `String \| Number` | —                   |
+| `$breakpoints` | A map of breakpoints where the key is the name | `Map`              | `$grid-breakpoints` |
+
+- **Group**: [@carbon/layout](#carbonlayout)
+- **Requires**:
+  - [breakpoint-up [mixin]](#breakpoint-up-mixin)
+- **Used by**:
+  - [largest-breakpoint [mixin]](#largest-breakpoint-mixin)
 
 ### ✅carbon--breakpoint [mixin]
 
@@ -4665,6 +2863,25 @@ $carbon--base-font-size: 16px;
   - [carbon--rem [function]](#carbon--rem-function)
   - [carbon--em [function]](#carbon--em-function)
 
+### ✅base-font-size [variable]
+
+Default font size
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$base-font-size: 16px;
+```
+
+</details>
+
+- **Group**: [@carbon/layout](#carbonlayout)
+- **Type**: `Number`
+- **Used by**:
+  - [rem [function]](#rem-function)
+  - [em [function]](#em-function)
+
 ### ✅carbon--rem [function]
 
 Convert a given px unit to a rem unit
@@ -4698,6 +2915,37 @@ Convert a given px unit to a rem unit
 - **Used by**:
   - [carbon--mini-units [function]](#carbon--mini-units-function)
 
+### ✅rem [function]
+
+Convert a given px unit to a rem unit
+
+<details>
+<summary>Source code</summary>
+
+```scss
+@function rem($px) {
+  @if unit($px) != 'px' {
+    // TODO: update to @error in v11
+    @warn "Expected argument $px to be of type `px`, instead received: `#{unit($px)}`";
+  }
+
+  @return ($px / $base-font-size) * 1rem;
+}
+```
+
+</details>
+
+- **Parameters**:
+
+| Name  | Description         | Type     | Default value |
+| ----- | ------------------- | -------- | ------------- |
+| `$px` | Number with px unit | `Number` | —             |
+
+- **Group**: [@carbon/layout](#carbonlayout)
+- **Returns**: `Number` Number with rem unit
+- **Requires**:
+  - [base-font-size [variable]](#base-font-size-variable)
+
 ### ✅carbon--em [function]
 
 Convert a given px unit to a em unit
@@ -4729,6 +2977,37 @@ Convert a given px unit to a em unit
 - **Requires**:
   - [carbon--base-font-size [variable]](#carbon--base-font-size-variable)
 
+### ✅em [function]
+
+Convert a given px unit to a em unit
+
+<details>
+<summary>Source code</summary>
+
+```scss
+@function em($px) {
+  @if unit($px) != 'px' {
+    // TODO: update to @error in v11
+    @warn "Expected argument $px to be of type `px`, instead received: `#{unit($px)}`";
+  }
+
+  @return ($px / $base-font-size) * 1em;
+}
+```
+
+</details>
+
+- **Parameters**:
+
+| Name  | Description         | Type     | Default value |
+| ----- | ------------------- | -------- | ------------- |
+| `$px` | Number with px unit | `Number` | —             |
+
+- **Group**: [@carbon/layout](#carbonlayout)
+- **Returns**: `Number` Number with em unit
+- **Requires**:
+  - [base-font-size [variable]](#base-font-size-variable)
+
 ### ✅carbon--fluid-spacing-01 [variable]
 
 <details>
@@ -4744,6 +3023,22 @@ $carbon--fluid-spacing-01: 0;
 - **Type**: `Number`
 - **Aliased**:
   - `fluid-spacing-01`
+
+### ✅fluid-spacing-01 [variable]
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$fluid-spacing-01: 0;
+```
+
+</details>
+
+- **Group**: [@carbon/layout](#carbonlayout)
+- **Type**: `Number`
+- **Used by**:
+  - [carbon--theme [mixin]](#carbon--theme-mixin)
 
 ### ✅carbon--fluid-spacing-02 [variable]
 
@@ -4761,6 +3056,22 @@ $carbon--fluid-spacing-02: 2vw;
 - **Aliased**:
   - `fluid-spacing-02`
 
+### ✅fluid-spacing-02 [variable]
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$fluid-spacing-02: 2vw;
+```
+
+</details>
+
+- **Group**: [@carbon/layout](#carbonlayout)
+- **Type**: `Number`
+- **Used by**:
+  - [carbon--theme [mixin]](#carbon--theme-mixin)
+
 ### ✅carbon--fluid-spacing-03 [variable]
 
 <details>
@@ -4776,6 +3087,22 @@ $carbon--fluid-spacing-03: 5vw;
 - **Type**: `Number`
 - **Aliased**:
   - `fluid-spacing-03`
+
+### ✅fluid-spacing-03 [variable]
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$fluid-spacing-03: 5vw;
+```
+
+</details>
+
+- **Group**: [@carbon/layout](#carbonlayout)
+- **Type**: `Number`
+- **Used by**:
+  - [carbon--theme [mixin]](#carbon--theme-mixin)
 
 ### ✅carbon--fluid-spacing-04 [variable]
 
@@ -4793,6 +3120,22 @@ $carbon--fluid-spacing-04: 10vw;
 - **Aliased**:
   - `fluid-spacing-04`
 
+### ✅fluid-spacing-04 [variable]
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$fluid-spacing-04: 10vw;
+```
+
+</details>
+
+- **Group**: [@carbon/layout](#carbonlayout)
+- **Type**: `Number`
+- **Used by**:
+  - [carbon--theme [mixin]](#carbon--theme-mixin)
+
 ### ✅carbon--fluid-spacing [variable]
 
 <details>
@@ -4804,6 +3147,25 @@ $carbon--fluid-spacing: (
   $carbon--fluid-spacing-02,
   $carbon--fluid-spacing-03,
   $carbon--fluid-spacing-04
+);
+```
+
+</details>
+
+- **Group**: [@carbon/layout](#carbonlayout)
+- **Type**: `List`
+
+### ✅fluid-spacing [variable]
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$fluid-spacing: (
+  $fluid-spacing-01,
+  $fluid-spacing-02,
+  $fluid-spacing-03,
+  $fluid-spacing-04
 );
 ```
 
@@ -4826,8 +3188,6 @@ $fluid-spacing-01: $carbon--fluid-spacing-01;
 - **Group**: [@carbon/layout](#carbonlayout)
 - **Type**: `Number`
 - **Alias**: `carbon--fluid-spacing-01`
-- **Used by**:
-  - [carbon--theme [mixin]](#carbon--theme-mixin)
 
 ### ✅fluid-spacing-02 [variable]
 
@@ -4843,8 +3203,6 @@ $fluid-spacing-02: $carbon--fluid-spacing-02;
 - **Group**: [@carbon/layout](#carbonlayout)
 - **Type**: `Number`
 - **Alias**: `carbon--fluid-spacing-02`
-- **Used by**:
-  - [carbon--theme [mixin]](#carbon--theme-mixin)
 
 ### ✅fluid-spacing-03 [variable]
 
@@ -4860,8 +3218,6 @@ $fluid-spacing-03: $carbon--fluid-spacing-03;
 - **Group**: [@carbon/layout](#carbonlayout)
 - **Type**: `Number`
 - **Alias**: `carbon--fluid-spacing-03`
-- **Used by**:
-  - [carbon--theme [mixin]](#carbon--theme-mixin)
 
 ### ✅fluid-spacing-04 [variable]
 
@@ -4877,8 +3233,6 @@ $fluid-spacing-04: $carbon--fluid-spacing-04;
 - **Group**: [@carbon/layout](#carbonlayout)
 - **Type**: `Number`
 - **Alias**: `carbon--fluid-spacing-04`
-- **Used by**:
-  - [carbon--theme [mixin]](#carbon--theme-mixin)
 
 ### ✅carbon--icon-size-01 [variable]
 
@@ -5405,6 +3759,22 @@ $carbon--spacing-01: 0.125rem;
 - **Aliased**:
   - `spacing-01`
 
+### ✅spacing-01 [variable]
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$spacing-01: 0.125rem;
+```
+
+</details>
+
+- **Group**: [@carbon/layout](#carbonlayout)
+- **Type**: `Number`
+- **Used by**:
+  - [carbon--theme [mixin]](#carbon--theme-mixin)
+
 ### ✅carbon--spacing-02 [variable]
 
 <details>
@@ -5420,6 +3790,22 @@ $carbon--spacing-02: 0.25rem;
 - **Type**: `Number`
 - **Aliased**:
   - `spacing-02`
+
+### ✅spacing-02 [variable]
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$spacing-02: 0.25rem;
+```
+
+</details>
+
+- **Group**: [@carbon/layout](#carbonlayout)
+- **Type**: `Number`
+- **Used by**:
+  - [carbon--theme [mixin]](#carbon--theme-mixin)
 
 ### ✅carbon--spacing-03 [variable]
 
@@ -5437,6 +3823,22 @@ $carbon--spacing-03: 0.5rem;
 - **Aliased**:
   - `spacing-03`
 
+### ✅spacing-03 [variable]
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$spacing-03: 0.5rem;
+```
+
+</details>
+
+- **Group**: [@carbon/layout](#carbonlayout)
+- **Type**: `Number`
+- **Used by**:
+  - [carbon--theme [mixin]](#carbon--theme-mixin)
+
 ### ✅carbon--spacing-04 [variable]
 
 <details>
@@ -5452,6 +3854,22 @@ $carbon--spacing-04: 0.75rem;
 - **Type**: `Number`
 - **Aliased**:
   - `spacing-04`
+
+### ✅spacing-04 [variable]
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$spacing-04: 0.75rem;
+```
+
+</details>
+
+- **Group**: [@carbon/layout](#carbonlayout)
+- **Type**: `Number`
+- **Used by**:
+  - [carbon--theme [mixin]](#carbon--theme-mixin)
 
 ### ✅carbon--spacing-05 [variable]
 
@@ -5469,6 +3887,22 @@ $carbon--spacing-05: 1rem;
 - **Aliased**:
   - `spacing-05`
 
+### ✅spacing-05 [variable]
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$spacing-05: 1rem;
+```
+
+</details>
+
+- **Group**: [@carbon/layout](#carbonlayout)
+- **Type**: `Number`
+- **Used by**:
+  - [carbon--theme [mixin]](#carbon--theme-mixin)
+
 ### ✅carbon--spacing-06 [variable]
 
 <details>
@@ -5484,6 +3918,22 @@ $carbon--spacing-06: 1.5rem;
 - **Type**: `Number`
 - **Aliased**:
   - `spacing-06`
+
+### ✅spacing-06 [variable]
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$spacing-06: 1.5rem;
+```
+
+</details>
+
+- **Group**: [@carbon/layout](#carbonlayout)
+- **Type**: `Number`
+- **Used by**:
+  - [carbon--theme [mixin]](#carbon--theme-mixin)
 
 ### ✅carbon--spacing-07 [variable]
 
@@ -5501,6 +3951,22 @@ $carbon--spacing-07: 2rem;
 - **Aliased**:
   - `spacing-07`
 
+### ✅spacing-07 [variable]
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$spacing-07: 2rem;
+```
+
+</details>
+
+- **Group**: [@carbon/layout](#carbonlayout)
+- **Type**: `Number`
+- **Used by**:
+  - [carbon--theme [mixin]](#carbon--theme-mixin)
+
 ### ✅carbon--spacing-08 [variable]
 
 <details>
@@ -5516,6 +3982,22 @@ $carbon--spacing-08: 2.5rem;
 - **Type**: `Number`
 - **Aliased**:
   - `spacing-08`
+
+### ✅spacing-08 [variable]
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$spacing-08: 2.5rem;
+```
+
+</details>
+
+- **Group**: [@carbon/layout](#carbonlayout)
+- **Type**: `Number`
+- **Used by**:
+  - [carbon--theme [mixin]](#carbon--theme-mixin)
 
 ### ✅carbon--spacing-09 [variable]
 
@@ -5533,6 +4015,22 @@ $carbon--spacing-09: 3rem;
 - **Aliased**:
   - `spacing-09`
 
+### ✅spacing-09 [variable]
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$spacing-09: 3rem;
+```
+
+</details>
+
+- **Group**: [@carbon/layout](#carbonlayout)
+- **Type**: `Number`
+- **Used by**:
+  - [carbon--theme [mixin]](#carbon--theme-mixin)
+
 ### ✅carbon--spacing-10 [variable]
 
 <details>
@@ -5548,6 +4046,22 @@ $carbon--spacing-10: 4rem;
 - **Type**: `Number`
 - **Aliased**:
   - `spacing-10`
+
+### ✅spacing-10 [variable]
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$spacing-10: 4rem;
+```
+
+</details>
+
+- **Group**: [@carbon/layout](#carbonlayout)
+- **Type**: `Number`
+- **Used by**:
+  - [carbon--theme [mixin]](#carbon--theme-mixin)
 
 ### ✅carbon--spacing-11 [variable]
 
@@ -5565,6 +4079,22 @@ $carbon--spacing-11: 5rem;
 - **Aliased**:
   - `spacing-11`
 
+### ✅spacing-11 [variable]
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$spacing-11: 5rem;
+```
+
+</details>
+
+- **Group**: [@carbon/layout](#carbonlayout)
+- **Type**: `Number`
+- **Used by**:
+  - [carbon--theme [mixin]](#carbon--theme-mixin)
+
 ### ✅carbon--spacing-12 [variable]
 
 <details>
@@ -5580,6 +4110,22 @@ $carbon--spacing-12: 6rem;
 - **Type**: `Number`
 - **Aliased**:
   - `spacing-12`
+
+### ✅spacing-12 [variable]
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$spacing-12: 6rem;
+```
+
+</details>
+
+- **Group**: [@carbon/layout](#carbonlayout)
+- **Type**: `Number`
+- **Used by**:
+  - [carbon--theme [mixin]](#carbon--theme-mixin)
 
 ### ✅carbon--spacing [variable]
 
@@ -5608,6 +4154,33 @@ $carbon--spacing: (
 - **Group**: [@carbon/layout](#carbonlayout)
 - **Type**: `List`
 
+### ✅spacing [variable]
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$spacing: (
+  $spacing-01,
+  $spacing-02,
+  $spacing-03,
+  $spacing-04,
+  $spacing-05,
+  $spacing-06,
+  $spacing-07,
+  $spacing-08,
+  $spacing-09,
+  $spacing-10,
+  $spacing-11,
+  $spacing-12
+);
+```
+
+</details>
+
+- **Group**: [@carbon/layout](#carbonlayout)
+- **Type**: `List`
+
 ### ✅spacing-01 [variable]
 
 <details>
@@ -5622,8 +4195,6 @@ $spacing-01: $carbon--spacing-01;
 - **Group**: [@carbon/layout](#carbonlayout)
 - **Type**: `Number`
 - **Alias**: `carbon--spacing-01`
-- **Used by**:
-  - [carbon--theme [mixin]](#carbon--theme-mixin)
 
 ### ✅spacing-02 [variable]
 
@@ -5639,8 +4210,6 @@ $spacing-02: $carbon--spacing-02;
 - **Group**: [@carbon/layout](#carbonlayout)
 - **Type**: `Number`
 - **Alias**: `carbon--spacing-02`
-- **Used by**:
-  - [carbon--theme [mixin]](#carbon--theme-mixin)
 
 ### ✅spacing-03 [variable]
 
@@ -5656,8 +4225,6 @@ $spacing-03: $carbon--spacing-03;
 - **Group**: [@carbon/layout](#carbonlayout)
 - **Type**: `Number`
 - **Alias**: `carbon--spacing-03`
-- **Used by**:
-  - [carbon--theme [mixin]](#carbon--theme-mixin)
 
 ### ✅spacing-04 [variable]
 
@@ -5673,8 +4240,6 @@ $spacing-04: $carbon--spacing-04;
 - **Group**: [@carbon/layout](#carbonlayout)
 - **Type**: `Number`
 - **Alias**: `carbon--spacing-04`
-- **Used by**:
-  - [carbon--theme [mixin]](#carbon--theme-mixin)
 
 ### ✅spacing-05 [variable]
 
@@ -5690,8 +4255,6 @@ $spacing-05: $carbon--spacing-05;
 - **Group**: [@carbon/layout](#carbonlayout)
 - **Type**: `Number`
 - **Alias**: `carbon--spacing-05`
-- **Used by**:
-  - [carbon--theme [mixin]](#carbon--theme-mixin)
 
 ### ✅spacing-06 [variable]
 
@@ -5707,8 +4270,6 @@ $spacing-06: $carbon--spacing-06;
 - **Group**: [@carbon/layout](#carbonlayout)
 - **Type**: `Number`
 - **Alias**: `carbon--spacing-06`
-- **Used by**:
-  - [carbon--theme [mixin]](#carbon--theme-mixin)
 
 ### ✅spacing-07 [variable]
 
@@ -5724,8 +4285,6 @@ $spacing-07: $carbon--spacing-07;
 - **Group**: [@carbon/layout](#carbonlayout)
 - **Type**: `Number`
 - **Alias**: `carbon--spacing-07`
-- **Used by**:
-  - [carbon--theme [mixin]](#carbon--theme-mixin)
 
 ### ✅spacing-08 [variable]
 
@@ -5741,8 +4300,6 @@ $spacing-08: $carbon--spacing-08;
 - **Group**: [@carbon/layout](#carbonlayout)
 - **Type**: `Number`
 - **Alias**: `carbon--spacing-08`
-- **Used by**:
-  - [carbon--theme [mixin]](#carbon--theme-mixin)
 
 ### ✅spacing-09 [variable]
 
@@ -5758,8 +4315,6 @@ $spacing-09: $carbon--spacing-09;
 - **Group**: [@carbon/layout](#carbonlayout)
 - **Type**: `Number`
 - **Alias**: `carbon--spacing-09`
-- **Used by**:
-  - [carbon--theme [mixin]](#carbon--theme-mixin)
 
 ### ✅spacing-10 [variable]
 
@@ -5775,8 +4330,6 @@ $spacing-10: $carbon--spacing-10;
 - **Group**: [@carbon/layout](#carbonlayout)
 - **Type**: `Number`
 - **Alias**: `carbon--spacing-10`
-- **Used by**:
-  - [carbon--theme [mixin]](#carbon--theme-mixin)
 
 ### ✅spacing-11 [variable]
 
@@ -5792,8 +4345,6 @@ $spacing-11: $carbon--spacing-11;
 - **Group**: [@carbon/layout](#carbonlayout)
 - **Type**: `Number`
 - **Alias**: `carbon--spacing-11`
-- **Used by**:
-  - [carbon--theme [mixin]](#carbon--theme-mixin)
 
 ### ✅spacing-12 [variable]
 
@@ -5809,8 +4360,34 @@ $spacing-12: $carbon--spacing-12;
 - **Group**: [@carbon/layout](#carbonlayout)
 - **Type**: `Number`
 - **Alias**: `carbon--spacing-12`
-- **Used by**:
-  - [carbon--theme [mixin]](#carbon--theme-mixin)
+
+### ✅map-deep-get [function]
+
+Map deep get
+
+<details>
+<summary>Source code</summary>
+
+```scss
+@function map-deep-get($map, $keys) {
+  @each $key in $keys {
+    $map: map-get($map, $key);
+  }
+  @return $map;
+}
+```
+
+</details>
+
+- **Parameters**:
+
+| Name    | Description | Type      | Default value |
+| ------- | ----------- | --------- | ------------- |
+| `$map`  | Map         | `Map`     | —             |
+| `$keys` | Key chain   | `Arglist` | —             |
+
+- **Group**: [@carbon/layout](#carbonlayout)
+- **Returns**: `*` Desired value
 
 ### ✅map-deep-get [function]
 
@@ -5869,6 +4446,34 @@ Provide a map and index, and get back the relevant key value
   - [carbon--largest-breakpoint-name [function]](#carbon--largest-breakpoint-name-function)
   - [last-map-item [function]](#last-map-item-function)
 
+### ✅key-by-index [function]
+
+Provide a map and index, and get back the relevant key value
+
+<details>
+<summary>Source code</summary>
+
+```scss
+@function key-by-index($map, $index) {
+  $keys: map-keys($map);
+  @return nth($keys, $index);
+}
+```
+
+</details>
+
+- **Parameters**:
+
+| Name     | Description | Type      | Default value |
+| -------- | ----------- | --------- | ------------- |
+| `$map`   | Map         | `Map`     | —             |
+| `$index` | Key chain   | `Integer` | —             |
+
+- **Group**: [@carbon/layout](#carbonlayout)
+- **Returns**: `String` Desired value
+- **Used by**:
+  - [largest-breakpoint-name [function]](#largest-breakpoint-name-function)
+
 ### ✅last-map-item [function]
 
 Pass in a map, and get the last one in the list back
@@ -5897,6 +4502,33 @@ Pass in a map, and get the last one in the list back
   - [carbon--key-by-index [function]](#carbon--key-by-index-function)
 - **Used by**:
   - [carbon--set-largest-breakpoint [mixin]](#carbon--set-largest-breakpoint-mixin)
+
+### ✅last-map-item [function]
+
+Pass in a map, and get the last one in the list back
+
+<details>
+<summary>Source code</summary>
+
+```scss
+@function last-map-item($map) {
+  $total-length: length($map);
+  @return map-get($map, carbon--key-by-index($map, $total-length));
+}
+```
+
+</details>
+
+- **Parameters**:
+
+| Name   | Description | Type  | Default value |
+| ------ | ----------- | ----- | ------------- |
+| `$map` | Map         | `Map` | —             |
+
+- **Group**: [@carbon/layout](#carbonlayout)
+- **Returns**: `*` Desired value
+- **Requires**:
+  - [carbon--key-by-index [function]](#carbon--key-by-index-function)
 
 ## @carbon/motion
 
