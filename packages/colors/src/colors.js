@@ -13,9 +13,13 @@ export const white0 = white;
 
 export const yellow = '#f1c21b';
 export const yellow30 = yellow;
+export const yellow40 = '#d2a106';
+export const yellow50 = '#b28600';
 
 export const orange = '#ff832b';
 export const orange40 = orange;
+export const orange60 = '#ba4e00';
+export const orange70 = '#8a3800';
 
 export const red10 = '#fff1f1';
 export const red20 = '#ffd7d9';
@@ -262,6 +266,8 @@ export const colors = {
   magenta,
   orange: {
     40: orange40,
+    60: orange60,
+    70: orange70,
   },
   purple,
   red,
@@ -273,5 +279,7 @@ export const colors = {
   yellow: {
     20: yellow20,
     30: yellow30,
+    40: yellow40,
+    50: yellow50,
   },
 };

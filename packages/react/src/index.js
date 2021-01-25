@@ -7,6 +7,7 @@
 
 export Accordion from './components/Accordion';
 export AccordionItem from './components/AccordionItem';
+export { AspectRatio } from './components/AspectRatio';
 export { Breadcrumb, BreadcrumbItem } from './components/Breadcrumb';
 export Button from './components/Button';
 export ButtonSet from './components/ButtonSet';

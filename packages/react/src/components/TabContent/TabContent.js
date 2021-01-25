@@ -23,8 +23,7 @@ const TabContent = (props) => {
       {...other}
       className={tabContentClasses}
       selected={selected}
-      hidden={!selected}
-      aria-live="polite">
+      hidden={!selected}>
       {children}
     </div>
   );

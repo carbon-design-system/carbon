@@ -18,24 +18,27 @@ import { sortStates } from './state/sorting';
 const { prefix } = settings;
 
 const translationKeys = {
-  iconDescription: 'carbon.table.header.icon.description',
+  buttonDescription: 'carbon.table.header.icon.description',
 };
 
-const translateWithId = (key, { sortDirection, isSortHeader, sortStates }) => {
-  if (key === translationKeys.iconDescription) {
+const translateWithId = (
+  key,
+  { header, sortDirection, isSortHeader, sortStates }
+) => {
+  if (key === translationKeys.buttonDescription) {
     if (isSortHeader) {
       // When transitioning, we know that the sequence of states is as follows:
       // NONE -> ASC -> DESC -> NONE
       if (sortDirection === sortStates.NONE) {
-        return 'Sort rows by this header in ascending order';
+        return `Click to sort rows by ${header} header in ascending order`;
       }
       if (sortDirection === sortStates.ASC) {
-        return 'Sort rows by this header in descending order';
+        return `Click to sort rows by ${header} header in descending order`;
       }
 
-      return 'Unsort rows by this header';
+      return `Click to unsort rows by ${header} header`;
     }
-    return 'Sort rows by this header in ascending order';
+    return `Click to sort rows by ${header} header in ascending order`;
   }
 
   return '';
@@ -85,6 +88,13 @@ const TableHeader = React.forwardRef(function TableHeader(
       isSortHeader && sortDirection === sortStates.DESC,
   });
   const ariaSort = !isSortHeader ? 'none' : sortDirections[sortDirection];
+  const uniqueId = Math.random();
+  const sortDescription = t('carbon.table.header.icon.description', {
+    header: children,
+    sortDirection,
+    isSortHeader,
+    sortStates,
+  });
 
   return (
     <th
@@ -93,27 +103,19 @@ const TableHeader = React.forwardRef(function TableHeader(
       colSpan={colSpan}
       ref={ref}
       scope={scope}>
-      <button type="button" className={className} onClick={onClick} {...rest}>
+      <div style={{ display: 'none' }} id={`usage-description-${uniqueId}`}>
+        {sortDescription}
+      </div>
+      <button
+        type="button"
+        aria-describedby={`usage-description-${uniqueId}`}
+        className={className}
+        onClick={onClick}
+        {...rest}>
         <span className={`${prefix}--table-sort__flex`}>
           <div className={`${prefix}--table-header-label`}>{children}</div>
-          <Arrow
-            className={`${prefix}--table-sort__icon`}
-            aria-label={t('carbon.table.header.icon.description', {
-              header: children,
-              sortDirection,
-              isSortHeader,
-              sortStates,
-            })}
-          />
-          <Arrows
-            className={`${prefix}--table-sort__icon-unsorted`}
-            aria-label={t('carbon.table.header.icon.description', {
-              header: children,
-              sortDirection,
-              isSortHeader,
-              sortStates,
-            })}
-          />
+          <Arrow className={`${prefix}--table-sort__icon`} />
+          <Arrows className={`${prefix}--table-sort__icon-unsorted`} />
         </span>
       </button>
     </th>

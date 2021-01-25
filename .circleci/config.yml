@@ -2,7 +2,7 @@ version: 2
 jobs:
   system:
     docker:
-      - image: circleci/node:12-browsers
+      - image: circleci/node:14-browsers
     working_directory: ~/repo
     steps:
       - checkout
@@ -15,7 +15,7 @@ jobs:
             echo 'export PATH="$HOME/.yarn/bin:$PATH"' >> $BASH_ENV
       - run:
           name: Install dependencies
-          command: yarn install --offline --frozen-lockfile
+          command: yarn install --immutable --immutable-cache --check-cache
       - run:
           name: Build packages
           command: yarn build

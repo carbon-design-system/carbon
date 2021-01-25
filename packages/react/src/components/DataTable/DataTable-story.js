@@ -173,7 +173,7 @@ export const WithOverflowMenu = () => (
                   <TableCell key={cell.id}>{cell.value}</TableCell>
                 ))}
                 <TableCell className="bx--table-column-menu">
-                  <OverflowMenu flipped>
+                  <OverflowMenu light flipped>
                     <OverflowMenuItem>Action 1</OverflowMenuItem>
                     <OverflowMenuItem>Action 2</OverflowMenuItem>
                     <OverflowMenuItem>Action 3</OverflowMenuItem>
@@ -207,10 +207,8 @@ export const WithToolbar = () => (
         <TableToolbar {...getToolbarProps()} aria-label="data table toolbar">
           <TableToolbarContent>
             <TableToolbarSearch onChange={onInputChange} />
-            <TableToolbarMenu>
-              <TableToolbarAction
-                onClick={action('Action 1 Click')}
-                primaryFocus>
+            <TableToolbarMenu light>
+              <TableToolbarAction onClick={action('Action 1 Click')}>
                 Action 1
               </TableToolbarAction>
               <TableToolbarAction onClick={action('Action 2 Click')}>
@@ -349,7 +347,6 @@ export const WithCheckmarkColumns = () => {
                           className={`la-${cell.info.header}`}>
                           <Checkbox
                             id={'check-' + cell.id}
-                            checked={cell.value}
                             hideLabel
                             labelText="checkbox"
                           />

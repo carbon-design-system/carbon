@@ -7,17 +7,29 @@
 
 import React from 'react';
 import { ListBulleted16, Grid16 } from '@carbon/icons-react';
-import SearchLayoutButton from '../SearchLayoutButton';
 import { shallow, mount } from 'enzyme';
 import { settings } from 'carbon-components';
 
 const { prefix } = settings;
 
-describe('SearchLayoutButton', () => {
-  const wrapper = mount(<SearchLayoutButton labelText="testlabel" />);
+describe('[Deprecated] SearchLayoutButton', () => {
+  let SearchLayoutButton;
+  let wrapper;
+
+  beforeEach(() => {
+    jest.mock('warning', () => {
+      return jest.fn();
+    });
+    SearchLayoutButton = require('../SearchLayoutButton').default;
+    wrapper = mount(<SearchLayoutButton labelText="testlabel" />);
+  });
 
   describe('buttons', () => {
-    const btn = wrapper.find('button');
+    let btn;
+
+    beforeEach(() => {
+      btn = wrapper.find('button');
+    });
 
     it('should have type="button"', () => {
       const type = btn.instance().getAttribute('type');

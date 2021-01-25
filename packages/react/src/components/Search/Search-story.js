@@ -9,7 +9,6 @@
 
 import React from 'react';
 import { action } from '@storybook/addon-actions';
-
 import { withKnobs, boolean, select, text } from '@storybook/addon-knobs';
 import Search from '../Search';
 import SearchSkeleton from '../Search/Search.Skeleton';
@@ -37,6 +36,7 @@ const props = () => ({
   ),
   placeHolderText: text('Placeholder text (placeHolderText)', 'Search'),
   onChange: action('onChange'),
+  onKeyDown: action('onKeyDown'),
 });
 
 export default {

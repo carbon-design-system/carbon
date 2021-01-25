@@ -20,7 +20,7 @@ exports[`SideNav should render 1`] = `
     onBlur={[Function]}
     onFocus={[Function]}
   >
-    <SideNavLink
+    <ForwardRef(SideNavLink)
       element="a"
       href="/"
       large={false}
@@ -51,7 +51,7 @@ exports[`SideNav should render 1`] = `
           </Link>
         </li>
       </SideNavItem>
-    </SideNavLink>
+    </ForwardRef(SideNavLink)>
   </nav>
 </ForwardRef(SideNav)>
 `;

@@ -9,7 +9,7 @@
 
 import React from 'react';
 import { action } from '@storybook/addon-actions';
-import { withKnobs, text, boolean } from '@storybook/addon-knobs';
+import { withKnobs, text, boolean, select } from '@storybook/addon-knobs';
 import Link from '../Link';
 import mdx from './Link.mdx';
 
@@ -23,6 +23,11 @@ const props = () => ({
     handler(evt);
   })(action('onClick')),
   disabled: boolean('Disabled', false),
+  size: select('Link size', {
+    Default: undefined,
+    'Small (sm)': 'sm',
+    'Large (lg)': 'lg',
+  }),
 });
 
 export default {

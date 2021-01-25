@@ -35,6 +35,7 @@ $disabled: $disabled-02 !default;
 /// @type Color
 /// @access public
 /// @group global-themes
+/// @deprecated
 $disabled-background-color: $disabled-01 !default;
 
 /// @type Color
@@ -189,8 +190,8 @@ $checkbox-border-width: 2px !default;
 /// @type Color
 /// @access public
 /// @group code-snippet
-/// TODO: Define for experimental
-$snippet-background-color: $ui-01 !default;
+/// @deprecated
+$snippet-background-color: $field-01 !default;
 
 /// @type Color
 /// @access public

@@ -23,11 +23,24 @@ const sizes = {
   'Small size (sm)': 'sm',
 };
 
+const types = {
+  Simple: 'simple',
+  Single: 'single',
+  Range: 'range',
+};
+
 const props = {
   datePicker: () => ({
     dateFormat: text('The date format (dateFormat in <DatePicker>)', 'm/d/Y'),
     id: 'date-picker',
     light: boolean('Light variant (light in <DatePicker>)', false),
+    datePickerType: select(
+      'Date Picker Type (datePickerType)',
+      types,
+      'single'
+    ),
+    minDate: text('Disable dates before this date (minDate)', '11/15/2020'),
+    maxDate: text('Disabled dates after this date (maxDate)', '11/01/2040'),
   }),
   datePickerInput: () => ({
     id: 'date-picker-input-id',
@@ -53,7 +66,12 @@ const props = {
     ),
     invalidText: text(
       'Form validation UI content (invalidText in <DatePickerInput>)',
-      'A valid value is required'
+      'A valid date is required'
+    ),
+    warn: boolean('Show warning state (warn)', false),
+    warnText: text(
+      'Warning state text (warnText)',
+      'Selected dates may cause conflicts'
     ),
     iconDescription: text(
       'Icon description (iconDescription in <DatePickerInput>)',
@@ -123,8 +141,11 @@ export const Range = () => {
 Range.storyName = 'range with calendar';
 
 export const DatePickerPlayground = () => (
-  <DatePicker {...props.datePicker()} datePickerType="single">
+  <DatePicker {...props.datePicker()}>
     <DatePickerInput {...props.datePickerInput()} />
+    {props.datePicker().datePickerType === 'range' && (
+      <DatePickerInput {...props.datePickerInput()} id="date-picker-input-2" />
+    )}
   </DatePicker>
 );
 

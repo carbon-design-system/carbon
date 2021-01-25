@@ -6,7 +6,7 @@
  */
 
 import { getCellId } from './cells';
-import { sortStates } from '../state/sorting';
+import { sortStates } from '../state/sortStates';
 
 /**
  * Compare two primitives to determine which comes first. Initially, this method
@@ -33,7 +33,7 @@ export const compare = (a, b, locale = 'en') => {
 
 /**
  * Use the built-in `localeCompare` function available on strings to compare two
- * srints.
+ * strings.
  *
  * @param {string} a
  * @param {string} b
@@ -41,7 +41,13 @@ export const compare = (a, b, locale = 'en') => {
  * @returns {number}
  */
 export const compareStrings = (a, b, locale = 'en') => {
-  return a.localeCompare(b, locale, { numeric: true });
+  // Only set `numeric: true` if the string only contains numbers
+  // https://stackoverflow.com/a/175787
+  if (!isNaN(a) && !isNaN(parseFloat(a))) {
+    return a.localeCompare(b, locale, { numeric: true });
+  }
+
+  return a.localeCompare(b, locale);
 };
 
 /**

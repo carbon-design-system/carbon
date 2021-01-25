@@ -79,6 +79,8 @@ Object {
   },
   "orange": Object {
     "40": "#ff832b",
+    "60": "#ba4e00",
+    "70": "#8a3800",
   },
   "purple": Object {
     "10": "#f6f2ff",
@@ -134,6 +136,8 @@ Object {
   "yellow": Object {
     "20": "#fdd13a",
     "30": "#f1c21b",
+    "40": "#d2a106",
+    "50": "#b28600",
   },
 }
 `;

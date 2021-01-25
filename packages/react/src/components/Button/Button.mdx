@@ -58,9 +58,9 @@ user interacts with it.
 ## Icon-only Buttons
 
 Icon buttons allow users to take actions, and make choices, with a single tap.
-Icon buttons can take the form of any of the five types (Primary, Secondary,
-Tertiary, Danger and Ghost) but most commonly will be styled as primary or ghost
-buttons.
+Icon buttons can take the form of any of the seven types (Primary, Secondary,
+Tertiary, Danger, Danger tertiary, Danger ghost and Ghost) but most commonly
+will be styled as primary or ghost buttons.
 
 <Preview>
   <Story id="button--icon-button" />
@@ -161,22 +161,26 @@ button is interacted with.
 
 ### Button `kind`
 
-Carbon has five types of buttons, `primary`, `secondary`, `tertiary`, `ghost`,
-and `danger`. If no `kind` is specified, a `primary` button will be rendered.
-For more information on when to use each variant, check out the
+Carbon has seven types of buttons, `primary`, `secondary`, `tertiary`, `ghost`,
+`danger`, `danger--tertiary`, and `danger--ghost`. If no `kind` is specified, a
+`primary` button will be rendered. For more information on when to use each
+variant, check out the
 [design documentation](https://www.carbondesignsystem.com/components/button/usage#overview)
 
 <Button>Primary</Button> <Button kind="secondary">Secondary</Button> <Button kind="tertiary">
   Tertiary{' '}
-</Button> <Button kind="danger">Danger</Button> <Button kind="ghost">
-  Ghost
+</Button> <Button kind="danger">Danger</Button> <Button kind="danger--tertiary">
+  Danger Tertiary
 </Button>
+<Button kind="danger--ghost">Danger Ghost</Button> <Button kind="ghost">Ghost</Button>
 
 ```jsx
 <Button>Primary</Button>
 <Button kind="secondary">Secondary</Button>
 <Button kind="tertiary">Tertiary</Button>
 <Button kind="danger">Danger</Button>
+<Button kind="danger--tertiary">Danger Tertiary</Button>
+<Button kind="danger--ghost">Danger Ghost</Button>
 <Button kind="ghost">Ghost</Button>
 ```
 
@@ -227,17 +231,21 @@ an element appear as a button control to a screen reader. Check out the
 ### Button `size`
 
 This prop specifies which size the `Button` should be rendered at. Valid values
-are `field`, `small`, and `default`. If no `size` is specified, it renders as
-`default`.
+are `field`, `sm`, `lg`, `xl` and `default`. If no `size` is specified, it
+renders as `default`.
 
-<Button>Submit</Button> <Button size="field">Submit</Button> <Button size="small">
+{' '}
+
+<Button>Submit</Button> <Button size="field">Submit</Button> <Button size="sm">
   Submit
-</Button>
+</Button> <Button size="lg">Submit</Button> <Button size="xl">Submit</Button>
 
 ```jsx
 <Button>Submit</Button>
 <Button size="field">Submit</Button>
-<Button size="small">Submit</Button>
+<Button size="sm">Submit</Button>
+<Button size="lg">Submit</Button>
+<Button size="xl">Submit</Button>
 ```
 
 ### Button `tooltipAlignment`

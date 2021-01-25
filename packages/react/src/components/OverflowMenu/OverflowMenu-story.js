@@ -10,6 +10,7 @@ import { action } from '@storybook/addon-actions';
 import { withKnobs, boolean, select, text } from '@storybook/addon-knobs';
 import { withReadme } from 'storybook-readme';
 import OverflowMenu from '../OverflowMenu';
+import { OverflowMenu as OGOverflowMenu } from './OverflowMenu';
 import OverflowMenuItem from '../OverflowMenuItem';
 import OverflowREADME from './README.md';
 import mdx from './OverflowMenu.mdx';
@@ -18,7 +19,11 @@ const directions = {
   'Bottom of the trigger button (bottom)': 'bottom',
   'Top of the trigger button (top)': 'top',
 };
-
+const sizes = {
+  'Extra large size (xl)': 'xl',
+  'Default size': undefined,
+  'Small size (sm)': 'sm',
+};
 const props = {
   menu: () => ({
     direction: select('Menu direction (direction)', directions, 'bottom'),
@@ -30,6 +35,7 @@ const props = {
       'Primary focus element selector (selectorPrimaryFocus)',
       ''
     ),
+    size: select('Size (size)', sizes, undefined) || undefined,
     onClick: action('onClick'),
     onFocus: action('onFocus'),
     onKeyDown: action('onKeyDown'),
@@ -52,15 +58,14 @@ OverflowMenu.displayName = 'OverflowMenu';
 export default {
   title: 'OverflowMenu',
   decorators: [withKnobs],
+  component: OGOverflowMenu,
+  subcomponents: {
+    OverflowMenuItem,
+  },
 
   parameters: {
-    component: OverflowMenu,
     docs: {
       page: mdx,
-    },
-
-    subcomponents: {
-      OverflowMenuItem,
     },
   },
 };
@@ -72,11 +77,13 @@ export const Basic = withReadme(OverflowREADME, () => (
       {...props.menuItem()}
       itemText="Option 2 is an example of a really long string and how we recommend handling this"
       requireTitle
+      title="Custom tooltip title"
     />
     <OverflowMenuItem {...props.menuItem()} itemText="Option 3" />
     <OverflowMenuItem {...props.menuItem()} itemText="Option 4" />
     <OverflowMenuItem
       {...props.menuItem()}
+      requireTitle
       itemText="Danger option"
       hasDivider
       isDelete

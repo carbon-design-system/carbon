@@ -41,7 +41,9 @@ const kinds = {
 const sizes = {
   Default: 'default',
   Field: 'field',
-  Small: 'small',
+  'Small (sm)': 'small',
+  'Large (lg)': 'lg',
+  'Extra large size (xl)': 'xl',
 };
 
 const props = {
@@ -153,7 +155,15 @@ export const Tertiary = () => {
 };
 
 export const Danger = () => {
-  return <Button kind="danger">Button</Button>;
+  return (
+    <>
+      <Button kind="danger">Button</Button>
+      &nbsp;
+      <Button kind="danger--tertiary">Tertiary Danger Button</Button>
+      &nbsp;
+      <Button kind="danger--ghost">Ghost Danger Button</Button>
+    </>
+  );
 };
 
 export const Ghost = () => {

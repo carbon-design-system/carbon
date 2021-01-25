@@ -19,6 +19,7 @@ import { defaultSortItems, defaultCompareItems } from './tools/sorting';
 import { useSelection } from '../../internal/Selection';
 import setupGetInstanceId from '../../tools/setupGetInstanceId';
 import { mapDownshiftProps } from '../../tools/createPropAdapter';
+import mergeRefs from '../../tools/mergeRefs';
 
 const { prefix } = settings;
 const noop = () => {};
@@ -60,6 +61,7 @@ const MultiSelect = React.forwardRef(function MultiSelect(
     open,
     selectionFeedback,
     onChange,
+    onMenuChange,
     direction,
   },
   ref
@@ -98,10 +100,18 @@ const MultiSelect = React.forwardRef(function MultiSelect(
   );
 
   /**
+   * wrapper function to forward changes to consumer
+   */
+  const setIsOpenWrapper = (open) => {
+    setIsOpen(open);
+    if (onMenuChange) onMenuChange(open);
+  };
+
+  /**
    * programmatically control this `open` prop
    */
   if (prevOpenProp !== open) {
-    setIsOpen(open);
+    setIsOpenWrapper(open);
     setPrevOpenProp(open);
   }
 
@@ -169,15 +179,17 @@ const MultiSelect = React.forwardRef(function MultiSelect(
         break;
       case MenuBlur:
       case MenuKeyDownEscape:
-        setIsOpen(false);
+        setIsOpenWrapper(false);
         setHighlightedIndex(changes.highlightedIndex);
         break;
       case ToggleButtonClick:
-        setIsOpen(changes.isOpen || false);
+        setIsOpenWrapper(changes.isOpen || false);
         setHighlightedIndex(changes.highlightedIndex);
         break;
     }
   }
+
+  const toggleButtonProps = getToggleButtonProps();
 
   return (
     <div className={wrapperClasses}>
@@ -208,11 +220,11 @@ const MultiSelect = React.forwardRef(function MultiSelect(
         )}
         <button
           type="button"
-          ref={ref}
           className={`${prefix}--list-box__field`}
           disabled={disabled}
           aria-disabled={disabled}
-          {...getToggleButtonProps()}>
+          {...toggleButtonProps}
+          ref={mergeRefs(toggleButtonProps.ref, ref)}>
           {selectedItems.length > 0 && (
             <ListBox.Selection
               clearSelection={!disabled ? clearSelection : noop}
@@ -304,7 +316,7 @@ MultiSelect.propTypes = {
   /**
    * If invalid, what is the error?
    */
-  invalidText: PropTypes.string,
+  invalidText: PropTypes.node,
 
   /**
    * Helper function passed to downshift that allows the library to render a
@@ -341,6 +353,12 @@ MultiSelect.propTypes = {
    * consuming component what kind of internal state changes are occuring.
    */
   onChange: PropTypes.func,
+
+  /**
+   * `onMenuChange` is a utility for this controlled component to communicate to a
+   * consuming component that the menu was opend(`true`)/closed(`false`).
+   */
+  onMenuChange: PropTypes.func,
 
   /**
    * Initialize the component with an open(`true`)/closed(`false`) menu.
@@ -389,7 +407,7 @@ MultiSelect.propTypes = {
   /**
    * Provide the text that is displayed when the control is in warning state
    */
-  warnText: PropTypes.string,
+  warnText: PropTypes.node,
 };
 
 MultiSelect.defaultProps = {

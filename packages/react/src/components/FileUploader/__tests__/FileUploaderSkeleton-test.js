@@ -18,9 +18,9 @@ describe('FileUploaderSkeleton', () => {
       await expect(container).toHaveNoAxeViolations();
     });
 
-    it('should have no DAP violations', async () => {
+    it('should have no AC violations', async () => {
       const { container } = render(<FileUploaderSkeleton />);
-      await expect(container).toHaveNoDAPViolations('FileUploaderSkeleton');
+      await expect(container).toHaveNoACViolations('FileUploaderSkeleton');
     });
   });
 
