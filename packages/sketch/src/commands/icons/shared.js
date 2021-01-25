@@ -117,8 +117,6 @@ function createSVGArtboards(
           symbolName = `${icon.category} / ${icon.subcategory} / ${symbolName}`;
         }
 
-        symbolName = `icon / ${symbolName}`;
-
         const artboard = new Artboard({
           name: symbolName,
           frame: new Rectangle(X_OFFSET, Y_OFFSET, size, size),
