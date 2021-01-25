@@ -5,9 +5,9 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+const { babel } = require('@rollup/plugin-babel');
 const path = require('path');
 const { rollup } = require('rollup');
-const babel = require('rollup-plugin-babel');
 const virtual = require('./plugins/virtual');
 
 const BANNER = `/**
@@ -32,6 +32,7 @@ const babelConfig = {
       },
     ],
   ],
+  babelHelpers: 'bundled',
 };
 
 async function builder(metadata, { output }) {
@@ -83,6 +84,7 @@ async function builder(metadata, { output }) {
       format,
       entryFileNames: '[name]',
       banner: BANNER,
+      exports: 'auto',
     };
 
     await bundle.write(outputOptions);
