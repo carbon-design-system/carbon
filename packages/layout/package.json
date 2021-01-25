@@ -26,7 +26,7 @@
   },
   "scripts": {
     "build": "yarn clean && carbon-cli bundle src/index.js --name CarbonLayout && node tasks/build.js && carbon-cli sassdoc \"scss/**/*.scss\"",
-    "clean": "rimraf es lib umd scss/generated"
+    "clean": "rimraf es lib umd scss/generated scss/modules/generated"
   },
   "devDependencies": {
     "@carbon/cli-reporter": "^10.4.0",

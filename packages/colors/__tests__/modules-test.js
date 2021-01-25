@@ -13,13 +13,13 @@ const { SassRenderer } = require('@carbon/test-utils/scss');
 
 const { render } = SassRenderer.create(__dirname);
 
-describe('modules.scss', () => {
+describe('@carbon/colors', () => {
   test('Public API', async () => {
     const { getValue } = await render(`
       @use 'sass:meta';
-      @use '../scss/module';
+      @use '../index.scss' as colors;
 
-      $_: get-value(meta.module-variables('module'));
+      $_: get-value(meta.module-variables('colors'));
     `);
 
     const variables = getValue(0);
