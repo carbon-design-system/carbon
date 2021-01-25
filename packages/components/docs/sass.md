@@ -9580,6 +9580,7 @@ $field-01: if(
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
   - [snippet [mixin]](#snippet-mixin)
+  - [bx--snippet [mixin]](#bx--snippet-mixin)
   - [date-picker [mixin]](#date-picker-mixin)
   - [dropdown [mixin]](#dropdown-mixin)
   - [file-uploader [mixin]](#file-uploader-mixin)
@@ -17777,13 +17778,15 @@ Code snippet base styles
   position: relative;
   width: 100%;
   max-width: rem(600px);
-  background-color: $snippet-background-color;
+  background-color: $field-01;
 }
 ```
 
 </details>
 
 - **Group**: [code-snippet](#code-snippet)
+- **Requires**:
+  - [field-01 [variable]](#field-01-variable)
 - **Used by**:
   - [snippet [mixin]](#snippet-mixin)
 
@@ -23194,6 +23197,12 @@ Inline notification styles
     @include carbon--breakpoint(max) {
       max-width: rem(832px);
     }
+
+    // Firefox HCM fix
+    @media screen and (prefers-contrast) {
+      outline-width: 1px;
+      outline-style: solid;
+    }
   }
 
   .#{$prefix}--inline-notification:not(.#{$prefix}--inline-notification--low-contrast)
@@ -23580,6 +23589,12 @@ Toast notification styles
 
     @include carbon--breakpoint(max) {
       width: rem(352px);
+    }
+
+    // Firefox HCM fix
+    @media screen and (prefers-contrast) {
+      outline-width: 1px;
+      outline-style: solid;
     }
   }
 

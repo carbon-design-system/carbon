@@ -40,6 +40,12 @@
     @include carbon--breakpoint(max) {
       width: rem(352px);
     }
+
+    // Firefox HCM fix
+    @media screen and (prefers-contrast) {
+      outline-width: 1px;
+      outline-style: solid;
+    }
   }
 
   .#{$prefix}--toast-notification:not(.#{$prefix}--toast-notification--low-contrast)
