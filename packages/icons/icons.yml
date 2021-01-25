@@ -1309,7 +1309,7 @@
     - UPC
     - inventory
     - item
-   sizes:
+  sizes:
     - 32
 - name: barrier
   friendly_name: Barrier
