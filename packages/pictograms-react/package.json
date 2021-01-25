@@ -43,7 +43,7 @@
   },
   "devDependencies": {
     "@carbon/icon-build-helpers": "^0.14.0",
-    "@carbon/pictograms": "^12.0.0"
+    "@carbon/pictograms": "^11.2.0"
   },
   "sideEffects": false
 }

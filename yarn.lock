@@ -1803,7 +1803,7 @@ __metadata:
   dependencies:
     "@carbon/icon-build-helpers": ^0.14.0
     "@carbon/icon-helpers": ^10.12.0
-    "@carbon/pictograms": ^12.0.0
+    "@carbon/pictograms": ^11.2.0
     "@carbon/telemetry": 0.0.0-alpha.6
     prop-types: ^15.7.2
   peerDependencies:
@@ -1811,7 +1811,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@carbon/pictograms@^12.0.0, @carbon/pictograms@workspace:packages/pictograms":
+"@carbon/pictograms@^11.2.0, @carbon/pictograms@workspace:packages/pictograms":
   version: 0.0.0-use.local
   resolution: "@carbon/pictograms@workspace:packages/pictograms"
   dependencies:
@@ -8982,7 +8982,7 @@ __metadata:
     babel-plugin-react-docgen: ^4.0.0
     babel-plugin-transform-inline-environment-variables: ^0.4.0
     browserslist-config-carbon: ^10.6.0
-    carbon-components: ^11.0.0
+    carbon-components: ^10.27.0
     carbon-icons: ^7.0.5
     chalk: ^2.3.0
     classnames: 2.2.6
@@ -9041,7 +9041,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"carbon-components@^11.0.0, carbon-components@workspace:packages/components":
+"carbon-components@^10.27.0, carbon-components@workspace:packages/components":
   version: 0.0.0-use.local
   resolution: "carbon-components@workspace:packages/components"
   dependencies:
