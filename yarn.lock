@@ -3980,9 +3980,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@rollup/plugin-node-resolve@npm:^11.0.1":
-  version: 11.0.1
-  resolution: "@rollup/plugin-node-resolve@npm:11.0.1"
+"@rollup/plugin-node-resolve@npm:^11.0.1, @rollup/plugin-node-resolve@npm:^11.1.0":
+  version: 11.1.0
+  resolution: "@rollup/plugin-node-resolve@npm:11.1.0"
   dependencies:
     "@rollup/pluginutils": ^3.1.0
     "@types/resolve": 1.17.1
@@ -3992,7 +3992,7 @@ __metadata:
     resolve: ^1.19.0
   peerDependencies:
     rollup: ^1.20.0||^2.0.0
-  checksum: bbec78fba9faab9e82b8f019d8883f119b2aa59cf90aa86f48767242235e39ca76ac2d130f0404553b2fa89dbd8fef90e32159642618f1e75ced7029f1bcece5
+  checksum: 87332c94d1ebf50d8238eabd7901ec802e076f566538db929155e2ac2227796a6e7cb35994bd7d15e191c4835e00bf4aac58a21615a276fc6df5fbce7b7fb050
   languageName: node
   linkType: hard
 
@@ -9101,6 +9101,10 @@ __metadata:
     "@carbon/telemetry": 0.0.0-alpha.6
     "@carbon/test-utils": ^10.14.0-rc.0
     "@percy/storybook": ^3.3.1
+    "@rollup/plugin-babel": ^5.2.2
+    "@rollup/plugin-commonjs": ^17.0.0
+    "@rollup/plugin-node-resolve": ^11.1.0
+    "@rollup/plugin-replace": ^2.3.4
     "@storybook/addon-storysource": ^5.3.19
     "@storybook/addons": ^5.3.19
     "@storybook/react": ^5.3.19
@@ -9146,10 +9150,6 @@ __metadata:
     requestanimationframe: ^0.0.23
     rimraf: ^3.0.0
     rollup: ^2.38.0
-    rollup-plugin-babel: ^4.4.0
-    rollup-plugin-commonjs: ^10.1.0
-    rollup-plugin-node-resolve: ^5.2.0
-    rollup-plugin-replace: ^2.2.0
     rollup-plugin-sizes: ^1.0.3
     rollup-plugin-strip-banner: ^2.0.0
     rollup-plugin-terser: ^7.0.2
