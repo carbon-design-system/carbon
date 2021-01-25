@@ -153,16 +153,8 @@
   // Indeterminate
   .#{$prefix}--checkbox:indeterminate:focus + .#{$prefix}--checkbox-label::before,
   .#{$prefix}--checkbox-label[data-contained-checkbox-state='mixed'].#{$prefix}--checkbox-label__focus::before {
-    // Must use box-shadow for appearance of multiple borders with rounded corners.
-    box-shadow: 0 0 0 2px $inverse-01, 0 0 0 4px $focus;
-
-    // Windows, Firefox HCM Fix
-    @media screen and (-ms-high-contrast: active),
-      screen and (prefers-contrast) {
-      // `highlightText` is a CSS2 system color to help improve colors in HCM
-      outline: 1px solid highlightText;
-      outline-offset: 2px;
-    }
+    outline: 2px solid $focus;
+    outline-offset: 1px;
   }
 
   //----------------------------------------------
