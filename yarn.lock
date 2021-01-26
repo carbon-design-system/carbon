@@ -9080,7 +9080,7 @@ __metadata:
     css-loader: ^3.4.2
     custom-event: ^1.0.0
     del: ~2.0.2
-    diff: ^3.4.0
+    diff: ^5.0.0
     express-handlebars: ^3.0.0
     fancy-log: ^1.3.0
     fibers: ^4.0.1
@@ -11788,7 +11788,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"diff@npm:3.5.0, diff@npm:^3.1.0, diff@npm:^3.2.0, diff@npm:^3.4.0, diff@npm:^3.5.0":
+"diff@npm:3.5.0, diff@npm:^3.1.0, diff@npm:^3.2.0, diff@npm:^3.5.0":
   version: 3.5.0
   resolution: "diff@npm:3.5.0"
   checksum: b975b73d7e8fa867cc9e68c293c664e14f11391203603e3f4518689c19fe8e391b4d9e4df3df5b3e51adc6cd81bcb414c80c1666e2f6cf66067f60177eec01d1
@@ -11799,6 +11799,13 @@ __metadata:
   version: 4.0.2
   resolution: "diff@npm:4.0.2"
   checksum: 81b5cd7ddde6f0ba2a532d434cfdca365aedd6cc62bb133e851e66e071d40382a30924a07c1034bd3d5a2e332146f64514b73c06fe2ebc0490a67f0c98da79fb
+  languageName: node
+  linkType: hard
+
+"diff@npm:^5.0.0":
+  version: 5.0.0
+  resolution: "diff@npm:5.0.0"
+  checksum: ef241d3b20017b8a1a6f20d184035b836de662203638e16eb57267653a56392ea82e1f9c12b28836e6e22aa25c28c59847aaeb35dd65e77e75c822c7e848e7e8
   languageName: node
   linkType: hard
 
