@@ -15188,11 +15188,6 @@ Button styles
     }
   }
 
-  .#{$prefix}--btn.#{$prefix}--btn--icon-only.#{$prefix}--btn--ghost:focus svg,
-  .#{$prefix}--btn.#{$prefix}--btn--icon-only.#{$prefix}--btn--ghost:hover svg {
-    fill: $icon-01;
-  }
-
   .#{$prefix}--btn.#{$prefix}--btn--icon-only.#{$prefix}--tooltip__trigger:focus {
     border-color: $focus;
 
@@ -15250,8 +15245,6 @@ Button styles
     .#{$prefix}--btn__icon,
   .#{$prefix}--btn.#{$prefix}--btn--icon-only.#{$prefix}--btn--ghost:hover
     .#{$prefix}--btn__icon {
-    fill: $icon-01;
-
     // Windows, Firefox HCM Fix
     @media screen and (-ms-high-contrast: active),
       screen and (prefers-contrast) {
@@ -15264,7 +15257,7 @@ Button styles
 
   .#{$prefix}--btn--ghost.#{$prefix}--btn--icon-only
     .#{$prefix}--btn__icon
-    path,
+    path:not([data-icon-path]),
   .#{$prefix}--btn--ghost.#{$prefix}--btn--icon-only .#{$prefix}--btn__icon {
     fill: $icon-01;
   }
@@ -15497,8 +15490,8 @@ Button styles
   - [active-ui [variable]](#active-ui-variable)
   - [carbon--spacing-03 [variable]](#carbon--spacing-03-variable)
   - [hover-primary-text [variable]](#hover-primary-text-variable)
-  - [icon-01 [variable]](#icon-01-variable)
   - [focus [variable]](#focus-variable)
+  - [icon-01 [variable]](#icon-01-variable)
   - [danger-01 [variable]](#danger-01-variable)
   - [hover-danger [variable]](#hover-danger-variable)
   - [active-danger [variable]](#active-danger-variable)
@@ -15609,7 +15602,7 @@ Button variant styles
   }
 
   .#{$prefix}--btn__icon,
-  .#{$prefix}--btn__icon path {
+  .#{$prefix}--btn__icon path:not([data-icon-path]) {
     fill: $icon-color;
   }
 }
@@ -15773,16 +15766,8 @@ Checkbox styles
   // Indeterminate
   .#{$prefix}--checkbox:indeterminate:focus + .#{$prefix}--checkbox-label::before,
   .#{$prefix}--checkbox-label[data-contained-checkbox-state='mixed'].#{$prefix}--checkbox-label__focus::before {
-    // Must use box-shadow for appearance of multiple borders with rounded corners.
-    box-shadow: 0 0 0 2px $inverse-01, 0 0 0 4px $focus;
-
-    // Windows, Firefox HCM Fix
-    @media screen and (-ms-high-contrast: active),
-      screen and (prefers-contrast) {
-      // `highlightText` is a CSS2 system color to help improve colors in HCM
-      outline: 1px solid highlightText;
-      outline-offset: 2px;
-    }
+    outline: 2px solid $focus;
+    outline-offset: 1px;
   }
 
   //----------------------------------------------
