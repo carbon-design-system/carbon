@@ -30,10 +30,10 @@ TagSkeleton.propTypes = {
   className: PropTypes.string,
 
   /**
-   * Specify the size of the Tag. Currently supports either `short` or
+   * Specify the size of the Tag. Currently supports either `sm` or
    * default sizes.
    */
-  size: PropTypes.oneOf(['short']),
+  size: PropTypes.oneOf(['sm']),
 };
 
 export default TagSkeleton;

@@ -134,10 +134,10 @@ Tag.propTypes = {
   renderIcon: PropTypes.oneOfType([PropTypes.func, PropTypes.object]),
 
   /**
-   * Specify the size of the Tag. Currently supports either `short` or
+   * Specify the size of the Tag. Currently supports either `sm` or
    * default sizes.
    */
-  size: PropTypes.oneOf(['short']),
+  size: PropTypes.oneOf(['sm']),
 
   /**
    * Text to show on clear filters

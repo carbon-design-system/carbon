@@ -27,7 +27,7 @@ const iconMap = {
 
 const sizes = {
   'Default size': undefined,
-  'Short size (short)': 'short',
+  'Small size (sm)': 'sm',
 };
 
 const props = {
@@ -129,7 +129,7 @@ CustomIcon.parameters = {
 export const Skeleton = () => (
   <div>
     <TagSkeleton />
-    <TagSkeleton size="short" />
+    <TagSkeleton size="sm" />
   </div>
 );
 

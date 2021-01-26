@@ -218,13 +218,13 @@
     fill: $disabled-02;
   }
 
-  // short tags
-  .#{$prefix}--tag--short {
+  // small tags
+  .#{$prefix}--tag--sm {
     min-height: rem(18px);
     padding: 0 $carbon--spacing-03;
   }
 
-  .#{$prefix}--tag--short.#{$prefix}--tag--filter {
+  .#{$prefix}--tag--sm.#{$prefix}--tag--filter {
     padding-right: rem(2px);
   }
 
