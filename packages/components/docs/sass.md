@@ -15232,7 +15232,8 @@ Button styles
       position: static;
     }
 
-    &.#{$prefix}--btn--ghost .#{$prefix}--btn__icon {
+    &.#{$prefix}--btn--ghost .#{$prefix}--btn__icon,
+    &.#{$prefix}--btn--danger--ghost .#{$prefix}--btn__icon {
       margin: 0;
     }
   }
@@ -15334,6 +15335,17 @@ Button styles
       &:active {
         color: $text-04;
         border-color: $active-danger;
+      }
+
+      &:disabled,
+      &:hover:disabled,
+      &:focus:disabled,
+      &.#{$prefix}--btn--disabled,
+      &.#{$prefix}--btn--disabled:hover,
+      &.#{$prefix}--btn--disabled:focus {
+        color: $disabled-03;
+        background: transparent;
+        outline: none;
       }
     }
 
