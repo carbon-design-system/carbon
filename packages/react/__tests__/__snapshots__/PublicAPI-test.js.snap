@@ -5184,7 +5184,7 @@ Map {
       "size": Object {
         "args": Array [
           Array [
-            "short",
+            "sm",
           ],
         ],
         "type": "oneOf",
@@ -6598,7 +6598,7 @@ Map {
       "size": Object {
         "args": Array [
           Array [
-            "short",
+            "sm",
           ],
         ],
         "type": "oneOf",
