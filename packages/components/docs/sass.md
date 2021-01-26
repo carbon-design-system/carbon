@@ -26123,7 +26123,7 @@ Tag styles
     min-width: rem(32px);
     // restricts size of contained elements
     max-width: 100%;
-    min-height: 1.5rem;
+    min-height: rem(24px);
     margin: $carbon--spacing-02;
     padding: $carbon--spacing-02 $carbon--spacing-03;
     word-break: break-word;
@@ -26306,6 +26306,16 @@ Tag styles
 
   .#{$prefix}--tag--filter.#{$prefix}--tag--disabled svg {
     fill: $disabled-02;
+  }
+
+  // small tags
+  .#{$prefix}--tag--sm {
+    min-height: rem(18px);
+    padding: 0 $carbon--spacing-03;
+  }
+
+  .#{$prefix}--tag--sm.#{$prefix}--tag--filter {
+    padding-right: rem(2px);
   }
 
   // Skeleton state
