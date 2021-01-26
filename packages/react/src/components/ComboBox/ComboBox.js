@@ -350,30 +350,6 @@ export default class ComboBox extends React.Component {
       [`${prefix}--text-input--empty`]: !this.state.inputValue,
     });
 
-    // return (
-    // <Downshift>
-    // {({ getRootProps, getInputProps }) => {
-    // const rootProps = getRootProps({}, { suppressRefError: true });
-    // const inputProps = getInputProps({});
-    // console.log('');
-    // console.log(rootProps);
-    // console.log(inputProps);
-
-    // return (
-    // <div id="ex1">
-    // <label htmlFor="cb1-input">Test label</label>
-    // <div className="combobox">
-    // <div className="group">
-    // <input {...rootProps} {...inputProps} type="text" />
-    // <button>Test button</button>
-    // </div>
-    // </div>
-    // </div>
-    // );
-    // }}
-    // </Downshift>
-    // );
-
     // needs to be Capitalized for react to render it correctly
     const ItemToElement = itemToElement;
     return (
@@ -401,6 +377,11 @@ export default class ComboBox extends React.Component {
           toggleMenu,
           getMenuProps,
         }) => {
+          const buttonProps = getToggleButtonProps({
+            disabled,
+            onClick: this.onToggleClick(isOpen),
+          });
+
           return (
             <div className={wrapperClasses}>
               {titleText && (
@@ -416,11 +397,7 @@ export default class ComboBox extends React.Component {
                 isOpen={isOpen}
                 light={light}
                 size={size}>
-                <ListBox.Field
-                  {...getToggleButtonProps({
-                    disabled,
-                    onClick: this.onToggleClick(isOpen),
-                  })}>
+                <ListBox.Field>
                   <input
                     disabled={disabled}
                     className={inputClasses}
@@ -460,6 +437,8 @@ export default class ComboBox extends React.Component {
                   <ListBox.MenuIcon
                     isOpen={isOpen}
                     translateWithId={translateWithId}
+                    tabIndex="-1"
+                    {...buttonProps}
                   />
                 </ListBox.Field>
                 {isOpen && (

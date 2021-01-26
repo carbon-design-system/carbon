@@ -56,17 +56,15 @@ const ListBoxSelection = ({
   };
   const description = selectionCount ? t('clear.all') : t('clear.selection');
   return (
-    <div
-      role="button"
+    <button
       className={className}
-      tabIndex={disabled ? -1 : 0}
+      tabIndex={disabled ? -1 : null}
       onClick={handleOnClick}
       onKeyDown={handleOnKeyDown}
-      aria-label="Clear Selection"
       title={description}>
       {selectionCount}
       <Close16 />
-    </div>
+    </button>
   );
 };
 

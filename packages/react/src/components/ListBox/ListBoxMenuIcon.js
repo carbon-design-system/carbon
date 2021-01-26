@@ -19,25 +19,27 @@ export const translationIds = {
 };
 
 const defaultTranslations = {
-  [translationIds['close.menu']]: 'Close menu',
-  [translationIds['open.menu']]: 'Open menu',
+  [translationIds['close.menu']]: 'Close',
+  [translationIds['open.menu']]: 'Open',
 };
 
 /**
  * `ListBoxMenuIcon` is used to orient the icon up or down depending on the
  * state of the menu for a given `ListBox`
  */
-const ListBoxMenuIcon = ({ isOpen, translateWithId: t }) => {
+const ListBoxMenuIcon = ({ isOpen, translateWithId: t, ...rest }) => {
   const className = cx(`${prefix}--list-box__menu-icon`, {
     [`${prefix}--list-box__menu-icon--open`]: isOpen,
   });
   const description = isOpen ? t('close.menu') : t('open.menu');
   return (
-    <div className={className}>
-      <ChevronDown16 name="chevron--down" aria-label={description}>
-        <title>{description}</title>
-      </ChevronDown16>
-    </div>
+    <button
+      {...rest}
+      aria-label={description}
+      className={className}
+      type="button">
+      <ChevronDown16 />
+    </button>
   );
 };
 

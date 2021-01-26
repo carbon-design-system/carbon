@@ -21,10 +21,7 @@ export const translationIds = {};
  */
 function ListBoxField({ children, disabled, tabIndex, ...rest }) {
   return (
-    <div
-      className={`${prefix}--list-box__field`}
-      tabIndex={(!disabled && tabIndex) || -1}
-      {...rest}>
+    <div className={`${prefix}--list-box__field`} {...rest}>
       {children}
     </div>
   );
