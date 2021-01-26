@@ -5181,6 +5181,14 @@ Map {
         ],
         "type": "oneOfType",
       },
+      "size": Object {
+        "args": Array [
+          Array [
+            "sm",
+          ],
+        ],
+        "type": "oneOf",
+      },
       "title": Object {
         "type": "string",
       },
@@ -6586,6 +6594,14 @@ Map {
     "propTypes": Object {
       "className": Object {
         "type": "string",
+      },
+      "size": Object {
+        "args": Array [
+          Array [
+            "sm",
+          ],
+        ],
+        "type": "oneOf",
       },
     },
   },
