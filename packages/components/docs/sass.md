@@ -29895,17 +29895,10 @@ UI shell side nav
     overflow-y: auto;
   }
 
-  // Force all of our side navigation items to be the same dimensions. When our
-  // menu expands, we can undo the forced dimensions.
   .#{$prefix}--side-nav__item {
-    width: mini-units(6);
-    height: mini-units(6);
+    width: auto;
+    height: auto;
     overflow: hidden;
-
-    @include expanded() {
-      width: auto;
-      height: auto;
-    }
   }
 
   .#{$prefix}--side-nav--ux .#{$prefix}--side-nav__item {
