@@ -310,6 +310,17 @@
         color: $text-04;
         border-color: $active-danger;
       }
+
+      &:disabled,
+      &:hover:disabled,
+      &:focus:disabled,
+      &.#{$prefix}--btn--disabled,
+      &.#{$prefix}--btn--disabled:hover,
+      &.#{$prefix}--btn--disabled:focus {
+        color: $disabled-03;
+        background: transparent;
+        outline: none;
+      }
     }
 
     // TODO: deprecate single dash ghost
