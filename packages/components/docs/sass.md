@@ -16148,7 +16148,6 @@ Code snippet styles
     position: absolute;
     top: 0;
     right: 0;
-    z-index: 10;
 
     // Override inherited rule in code snippet
     @include carbon--font-family('sans');
@@ -16280,6 +16279,7 @@ Code snippet styles
   .#{$prefix}--snippet--multi .#{$prefix}--copy-btn {
     top: $carbon--spacing-03;
     right: $carbon--spacing-03;
+    z-index: 10;
     width: $carbon--spacing-07;
     height: $carbon--spacing-07;
   }
