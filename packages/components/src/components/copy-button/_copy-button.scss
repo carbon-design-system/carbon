@@ -107,6 +107,7 @@
     .#{$prefix}--copy-btn__feedback {
       @include tooltip--content('icon');
 
+      z-index: 3;
       display: none;
       box-sizing: content-box;
       margin: auto;
