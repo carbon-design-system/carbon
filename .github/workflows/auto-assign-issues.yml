@@ -12,4 +12,6 @@ jobs:
         uses: pozil/auto-assign-issue@v1
         with:
           repo-token: ${{ secrets.GITHUB_TOKEN }}
-          assignees: dakahn
+          assignees:
+            dakahn, aledavila, andreancardona, emyarod, joshblack, tw15egan,
+            jnm2377
