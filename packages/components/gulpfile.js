@@ -38,7 +38,7 @@ const through = require('through2');
 
 // Rollup
 const { rollup } = require('rollup');
-const commonjs = require('rollup-plugin-commonjs');
+const commonjs = require('@rollup/plugin-commonjs');
 const { terser: rollupTerser } = require('rollup-plugin-terser');
 const rollupConfigDev = require('./tools/rollup.config.dev');
 const rollupConfigProd = require('./tools/rollup.config');
