@@ -141,7 +141,7 @@
     "karma": "^4.0.0",
     "karma-chrome-launcher": "^2.2.0",
     "karma-coverage": "^1.1.0",
-    "karma-firefox-launcher": "^1.0.0",
+    "karma-firefox-launcher": "^2.1.0",
     "karma-html2js-preprocessor": "^1.1.0",
     "karma-ie-launcher": "^1.0.0",
     "karma-jasmine": "^2.0.1",
