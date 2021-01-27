@@ -465,12 +465,20 @@ class NumberInput extends Component {
                     ref={mergeRefs(ref, this._handleInputRef)}
                   />
                   {isInputInvalid && (
-                    <WarningFilled16 className={`${prefix}--number__invalid`} />
+                    <>
+                      <WarningFilled16
+                        className={`${prefix}--number__invalid`}
+                      />
+                      <div className={`${prefix}--number__rule-divider`}></div>
+                    </>
                   )}
                   {!isInputInvalid && warn && (
-                    <WarningAltFilled16
-                      className={`${prefix}--number__invalid ${prefix}--number__invalid--warning`}
-                    />
+                    <>
+                      <WarningAltFilled16
+                        className={`${prefix}--number__invalid ${prefix}--number__invalid--warning`}
+                      />
+                      <div className={`${prefix}--number__rule-divider`}></div>
+                    </>
                   )}
                   <div className={`${prefix}--number__controls`}>
                     <button

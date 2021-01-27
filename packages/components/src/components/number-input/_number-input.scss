@@ -249,6 +249,11 @@
     fill: $support-01;
   }
 
+  .#{$prefix}--number__invalid + .#{$prefix}--number__rule-divider {
+    position: absolute;
+    right: rem(80px);
+  }
+
   .#{$prefix}--number__invalid--warning {
     fill: $support-03;
   }
