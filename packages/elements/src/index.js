@@ -153,8 +153,13 @@ export {
   breakpointUp,
   breakpointDown,
   breakpoint,
+  container,
+  fluidSpacing,
+  iconSize,
   miniUnit,
   miniUnits,
+  layout,
+  spacing,
 } from '@carbon/layout';
 export * from '@carbon/themes';
 export * from '@carbon/motion';

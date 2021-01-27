@@ -60,6 +60,7 @@ const props = () => ({
   disabled: boolean('Disabled (disabled)', false),
   light: boolean('Light variant (light)', false),
   titleText: text('Title (titleText)', 'Dropdown label'),
+  hideLabel: boolean('No title text shown (hideLabel)', false),
   helperText: text('Helper text (helperText)', 'This is some helper text.'),
   invalid: boolean('Show form validation UI (invalid)', false),
   invalidText: text(

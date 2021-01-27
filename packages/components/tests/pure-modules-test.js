@@ -8,11 +8,11 @@
 const path = require('path');
 const glob = require('glob');
 const { rollup } = require('rollup');
-const commonjs = require('rollup-plugin-commonjs');
-const resolve = require('rollup-plugin-node-resolve');
-const replace = require('rollup-plugin-replace');
+const commonjs = require('@rollup/plugin-commonjs');
+const { nodeResolve } = require('@rollup/plugin-node-resolve');
+const replace = require('@rollup/plugin-replace');
 const terser = require('rollup-plugin-terser');
-const virtual = require('rollup-plugin-virtual');
+const virtual = require('@rollup/plugin-virtual');
 const { breakingChangesX } = require('../src/globals/js/feature-flags');
 
 const ignore = [
@@ -67,7 +67,7 @@ describe('ES modules', () => {
           include: /node_modules/,
           sourceMap: false,
         }),
-        resolve(),
+        nodeResolve(),
         terser.terser(),
       ],
       onwarn: (warning, handle) => {
@@ -96,7 +96,7 @@ describe('ES modules', () => {
           ],
           sourceMap: false,
         }),
-        resolve(),
+        nodeResolve(),
         replace({
           'process.env.NODE_ENV': JSON.stringify('production'),
         }),
