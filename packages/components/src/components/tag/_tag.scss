@@ -171,7 +171,8 @@
     border: 0;
     border-radius: 50%;
     cursor: pointer;
-
+    transition: background-color $duration--fast-01 motion(standard, productive),
+      box-shadow $duration--fast-01 motion(standard, productive);
     svg {
       fill: currentColor;
     }
