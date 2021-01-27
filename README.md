@@ -166,6 +166,7 @@ check out our [Contributing Guide](/.github/CONTRIBUTING.md) and our
   </tr>
   <tr>
     <td align="center"><a href="https://github.com/DavidSCChen"><img src="https://avatars1.githubusercontent.com/u/54974983?v=4?s=100" width="100px;" alt=""/><br /><sub><b>DavidSCChen</b></sub></a><br /><a href="https://github.com/carbon-design-system/carbon/commits?author=DavidSCChen" title="Code">💻</a></td>
+    <td align="center"><a href="https://github.com/molyholy"><img src="https://avatars2.githubusercontent.com/u/77503726?v=4?s=100" width="100px;" alt=""/><br /><sub><b>molyholy</b></sub></a><br /><a href="https://github.com/carbon-design-system/carbon/commits?author=molyholy" title="Code">💻</a></td>
   </tr>
 </table>
 
