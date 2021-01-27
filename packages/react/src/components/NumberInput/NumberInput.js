@@ -495,6 +495,7 @@ class NumberInput extends Component {
                       aria-atomic="true">
                       <Add16 className="up-icon" />
                     </button>
+                    <div className={`${prefix}--number__rule-divider`}></div>
                   </div>
                 </div>
                 {error ? null : helper}
