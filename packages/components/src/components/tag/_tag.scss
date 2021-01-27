@@ -164,7 +164,7 @@
     justify-content: center;
     width: rem(24px);
     height: rem(24px);
-    margin: 0 0 0 rem(4px);
+    margin: 0 0 0 rem(2px);
     padding: 0;
     color: currentColor;
     background-color: transparent;
@@ -236,6 +236,7 @@
   .#{$prefix}--tag--sm .#{$prefix}--tag__close-icon {
     width: rem(18px);
     height: rem(18px);
+    margin-left: rem(5px);
   }
 
   // Skeleton state
