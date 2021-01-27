@@ -147,7 +147,9 @@
 
   // tags used for filtering
   .#{$prefix}--tag--filter {
-    padding-right: rem(2px);
+    padding-top: 0;
+    padding-right: 0;
+    padding-bottom: 0;
     cursor: pointer;
 
     &:hover {
@@ -156,9 +158,12 @@
   }
 
   .#{$prefix}--tag__close-icon {
+    display: flex;
     flex-shrink: 0;
-    width: rem(16px);
-    height: rem(16px);
+    align-items: center;
+    justify-content: center;
+    width: rem(24px);
+    height: rem(24px);
     margin: 0 0 0 rem(4px);
     padding: 0;
     color: currentColor;
