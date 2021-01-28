@@ -8834,6 +8834,7 @@ $hover-primary-text: if(
 - **Type**: `{undefined}`
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
+  - [breadcrumb [mixin]](#breadcrumb-mixin)
   - [button [mixin]](#button-mixin)
   - [link [mixin]](#link-mixin)
 
@@ -14979,6 +14980,10 @@ Breadcrumb styles
 
   .#{$prefix}--breadcrumb-item .#{$prefix}--link:visited {
     color: $link-01;
+
+    &:hover {
+      color: $hover-primary-text;
+    }
   }
 
   .#{$prefix}--breadcrumb-item::after {
@@ -15031,6 +15036,7 @@ Breadcrumb styles
   - [prefix [variable]](#prefix-variable)
   - [carbon--spacing-03 [variable]](#carbon--spacing-03-variable)
   - [link-01 [variable]](#link-01-variable)
+  - [hover-primary-text [variable]](#hover-primary-text-variable)
   - [text-01 [variable]](#text-01-variable)
 
 ## button
