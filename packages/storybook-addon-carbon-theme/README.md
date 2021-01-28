@@ -1,23 +1,22 @@
-# Storybook addon for Carbon themes
+# @carbon/storybook-addon-theme
 
-This addon for storybook allows you to change the theme used with Carbon
-Components!
+> Carbon theme switcher for Storybook
 
-## Supports
+## Getting started
 
-- React
-- Vue
+To install `@carbon/storybook-addon-theme` in your project, you will need to run
+the following command using [npm](https://www.npmjs.com/):
 
-## Install
-
-```sh
-npm install @carbon/storybook-addon-theme
+```bash
+npm install -S @carbon/storybook-addon-theme
 ```
 
-## Requirements
+If you prefer [Yarn](https://yarnpkg.com/en/), use the following command
+instead:
 
-- Use of Carbon Components
-- Use of Custom CSS Properties feature flag
+```bash
+yarn add @carbon/storybook-addon-theme
+```
 
 ## Usage
 
@@ -87,3 +86,13 @@ storiesOf('Component', module)
     },
   });
 ```
+
+## 🙌 Contributing
+
+We're always looking for contributors to help us fix bugs, build new features,
+or help us improve the project documentation. If you're interested, definitely
+check out our [Contributing Guide](/.github/CONTRIBUTING.md)! 👀
+
+## 📝 License
+
+Licensed under the [Apache 2.0 License](/LICENSE).
