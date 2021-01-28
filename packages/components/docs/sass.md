@@ -7805,7 +7805,6 @@ $ui-03: if(
   - [progress-indicator [mixin]](#progress-indicator-mixin)
   - [slider [mixin]](#slider-mixin)
   - [tabs [mixin]](#tabs-mixin)
-  - [tags [mixin]](#tags-mixin)
   - [text-input [mixin]](#text-input-mixin)
   - [toolbar [mixin]](#toolbar-mixin)
 
@@ -9500,6 +9499,7 @@ $skeleton-01: if(
 - **Type**: `{undefined}`
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
+  - [tags [mixin]](#tags-mixin)
 
 ### ✅skeleton-02 [variable]
 
@@ -26340,10 +26340,17 @@ Tag styles
   // Skeleton state
   .#{$prefix}--tag.#{$prefix}--skeleton {
     @include skeleton;
-    @include tag-theme($bg-color: $ui-03, $text-color: $text-01);
+    @include tag-theme($bg-color: $skeleton-01, $text-color: $text-01);
 
     width: rem(60px);
     overflow: hidden;
+
+    // Safari specific bug (#7672)
+    @media not all and (min-resolution: 0.001dpcm) {
+      @supports (-webkit-appearance: none) and (stroke-color: transparent) {
+        transform: translateZ(0);
+      }
+    }
   }
 }
 ```
@@ -26365,7 +26372,7 @@ Tag styles
   - [spacing-02 [variable]](#spacing-02-variable)
   - [focus [variable]](#focus-variable)
   - [inverse-focus-ui [variable]](#inverse-focus-ui-variable)
-  - [ui-03 [variable]](#ui-03-variable)
+  - [skeleton-01 [variable]](#skeleton-01-variable)
   - [text-01 [variable]](#text-01-variable)
 
 ## text-area
