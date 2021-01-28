@@ -304,6 +304,17 @@ Map {
       "defaultChecked": Object {
         "type": "bool",
       },
+      "dir": Object {
+        "args": Array [
+          Array [
+            "",
+            "ltr",
+            "rtl",
+            "auto",
+          ],
+        ],
+        "type": "oneOf",
+      },
       "disabled": Object {
         "type": "bool",
       },
@@ -2836,6 +2847,17 @@ Map {
       },
       "className": Object {
         "type": "string",
+      },
+      "dir": Object {
+        "args": Array [
+          Array [
+            "",
+            "ltr",
+            "rtl",
+            "auto",
+          ],
+        ],
+        "type": "oneOf",
       },
       "id": Object {
         "type": "string",

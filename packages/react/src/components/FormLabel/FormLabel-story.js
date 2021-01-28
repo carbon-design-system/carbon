@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2018
+ * Copyright IBM Corp. 2016, 2021
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -12,6 +12,10 @@ import Tooltip from '../Tooltip';
 
 const additionalProps = {
   className: 'some-class',
+};
+
+const textDirProp = {
+  dir: 'auto',
 };
 
 export default {
@@ -41,5 +45,17 @@ WithTooltip.storyName = 'With tooltip';
 WithTooltip.parameters = {
   info: {
     text: 'Form label with tooltip.',
+  },
+};
+
+export const WithTextDir = () => (
+  <FormLabel {...textDirProp}>שלום Hello !!</FormLabel>
+);
+
+WithTextDir.storyName = 'With textDir';
+
+WithTextDir.parameters = {
+  info: {
+    text: 'Form label with textDir.',
   },
 };
