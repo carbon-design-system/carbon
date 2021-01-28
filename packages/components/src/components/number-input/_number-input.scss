@@ -327,24 +327,18 @@
     height: rem(48px);
   }
 
+  .#{$prefix}--number--xl .#{$prefix}--number__controls {
+    width: rem(96px);
+  }
+
   .#{$prefix}--number--xl .#{$prefix}--number__control-btn {
-    height: rem(24px);
+    width: rem(48px);
   }
 
   .#{$prefix}--number--xl.#{$prefix}--number--mobile
     .#{$prefix}--number__control-btn {
     width: rem(48px);
     height: rem(48px);
-  }
-
-  .#{$prefix}--number--xl .#{$prefix}--number__control-btn.up-icon svg {
-    // Needed to maintain arrow spacing between input sizes.
-    top: rem(6.6px);
-  }
-
-  .#{$prefix}--number--xl .#{$prefix}--number__control-btn.down-icon svg {
-    // Needed to maintain arrow spacing between input sizes.
-    top: rem(-6.6px);
   }
 
   .#{$prefix}--number--sm input[type='number'] {
