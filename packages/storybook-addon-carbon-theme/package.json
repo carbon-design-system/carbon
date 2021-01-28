@@ -1,0 +1,53 @@
+{
+  "name": "@carbon/storybook-addon-theme",
+  "version": "0.1.0",
+  "description": "Carbon theme switcher for Storybook",
+  "keywords": [
+    "addon",
+    "carbon",
+    "theme",
+    "storybook"
+  ],
+  "homepage": "https://github.com/storybookjs/storybook#readme",
+  "bugs": "https://github.com/carbon-design-system/carbon/issues",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/carbon-design-system/carbon.git",
+    "directory": "packages/scss-generator"
+  },
+  "license": "Apache-2.0",
+  "main": "dist/react.js",
+  "files": [
+    "dist/**/*",
+    "README.md",
+    "*.js"
+  ],
+  "scripts": {
+    "clean": "rimraf dist",
+    "build": "npm run clean && babel src --out-dir dist -s",
+    "prepare": "npm run build"
+  },
+  "dependencies": {
+    "@storybook/addons": "5.3.19",
+    "@storybook/api": "5.3.19",
+    "@storybook/client-api": "5.3.19",
+    "@storybook/client-logger": "5.3.19",
+    "@storybook/components": "5.3.19",
+    "@storybook/core-events": "5.3.19",
+    "@storybook/theming": "5.3.19",
+    "core-js": "^3.0.1",
+    "global": "^4.3.2"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.10.0",
+    "@babel/core": "^7.10.0",
+    "@babel/preset-react": "^7.10.4"
+  },
+  "peerDependencies": {
+    "react": "*",
+    "vue": "*"
+  }
+}

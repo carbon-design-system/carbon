@@ -8117,6 +8117,7 @@ $icon-01: if(
   - [radio-button [mixin]](#radio-button-mixin)
   - [search [mixin]](#search-mixin)
   - [tabs [mixin]](#tabs-mixin)
+  - [text-input [mixin]](#text-input-mixin)
   - [treeview [mixin]](#treeview-mixin)
 
 ### ✅icon-02 [variable]
@@ -8834,6 +8835,7 @@ $hover-primary-text: if(
 - **Type**: `{undefined}`
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
+  - [breadcrumb [mixin]](#breadcrumb-mixin)
   - [button [mixin]](#button-mixin)
   - [link [mixin]](#link-mixin)
 
@@ -14979,6 +14981,10 @@ Breadcrumb styles
 
   .#{$prefix}--breadcrumb-item .#{$prefix}--link:visited {
     color: $link-01;
+
+    &:hover {
+      color: $hover-primary-text;
+    }
   }
 
   .#{$prefix}--breadcrumb-item::after {
@@ -15031,6 +15037,7 @@ Breadcrumb styles
   - [prefix [variable]](#prefix-variable)
   - [carbon--spacing-03 [variable]](#carbon--spacing-03-variable)
   - [link-01 [variable]](#link-01-variable)
+  - [hover-primary-text [variable]](#hover-primary-text-variable)
   - [text-01 [variable]](#text-01-variable)
 
 ## button
@@ -26237,7 +26244,9 @@ Tag styles
 
   // tags used for filtering
   .#{$prefix}--tag--filter {
-    padding-right: rem(2px);
+    padding-top: 0;
+    padding-right: 0;
+    padding-bottom: 0;
     cursor: pointer;
 
     &:hover {
@@ -26246,17 +26255,21 @@ Tag styles
   }
 
   .#{$prefix}--tag__close-icon {
+    display: flex;
     flex-shrink: 0;
-    width: rem(16px);
-    height: rem(16px);
-    margin: 0 0 0 rem(4px);
+    align-items: center;
+    justify-content: center;
+    width: rem(24px);
+    height: rem(24px);
+    margin: 0 0 0 rem(2px);
     padding: 0;
     color: currentColor;
     background-color: transparent;
     border: 0;
     border-radius: 50%;
     cursor: pointer;
-
+    transition: background-color $duration--fast-01 motion(standard, productive),
+      box-shadow $duration--fast-01 motion(standard, productive);
     svg {
       fill: currentColor;
     }
@@ -26285,7 +26298,7 @@ Tag styles
   .#{$prefix}--tag__close-icon:focus {
     border-radius: 50%;
     outline: none;
-    box-shadow: inset 0 0 0 2px $focus;
+    box-shadow: inset 0 0 0 1px $focus;
 
     // Windows, Firefox HCM Fix
     @media screen and (-ms-high-contrast: active),
@@ -26296,7 +26309,7 @@ Tag styles
   }
 
   .#{$prefix}--tag--high-contrast .#{$prefix}--tag__close-icon:focus {
-    box-shadow: inset 0 0 0 2px $inverse-focus-ui;
+    box-shadow: inset 0 0 0 1px $inverse-focus-ui;
   }
 
   .#{$prefix}--tag--filter.#{$prefix}--tag--disabled
@@ -26315,7 +26328,13 @@ Tag styles
   }
 
   .#{$prefix}--tag--sm.#{$prefix}--tag--filter {
-    padding-right: rem(2px);
+    padding-right: 0;
+  }
+
+  .#{$prefix}--tag--sm .#{$prefix}--tag__close-icon {
+    width: rem(18px);
+    height: rem(18px);
+    margin-left: rem(5px);
   }
 
   // Skeleton state
@@ -26550,17 +26569,25 @@ Text input styles
 
     .#{$prefix}--text-input--password__visibility,
     // TODO: remove selector above
-    .#{$prefix}--text-input--password__visibility__toggle.#{$prefix}--tooltip__trigger {
+     .#{$prefix}--btn.#{$prefix}--text-input--password__visibility__toggle.#{$prefix}--tooltip__trigger {
+      @include focus-outline('reset');
+
       position: absolute;
-      right: $carbon--spacing-05;
-      width: rem(16px);
-      height: rem(16px);
+      right: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: rem(40px);
+      height: rem(40px);
+      min-height: auto;
       padding: 0;
       background: none;
       border: 0;
       cursor: pointer;
+      transition: outline $duration--fast-01 motion(standard, productive);
 
       svg {
+        transition: fill $duration--fast-01 motion(standard, productive);
         fill: $icon-02;
 
         // Windows, Firefox HCM Fix
@@ -26570,6 +26597,16 @@ Text input styles
           fill: ButtonText;
         }
       }
+    }
+
+    .#{$prefix}--btn.#{$prefix}--text-input--password__visibility__toggle.#{$prefix}--tooltip__trigger:focus {
+      @include focus-outline('outline');
+    }
+
+    .#{$prefix}--btn.#{$prefix}--text-input--password__visibility__toggle.#{$prefix}--tooltip__trigger:hover,
+    .#{$prefix}--btn.#{$prefix}--text-input--password__visibility__toggle.#{$prefix}--tooltip__trigger:focus
+      svg {
+      fill: $icon-01;
     }
 
     .#{$prefix}--text-input--invalid {
@@ -26786,6 +26823,7 @@ Text input styles
   - [support-01 [variable]](#support-01-variable)
   - [support-03 [variable]](#support-03-variable)
   - [icon-02 [variable]](#icon-02-variable)
+  - [icon-01 [variable]](#icon-01-variable)
   - [disabled-02 [variable]](#disabled-02-variable)
   - [disabled-01 [variable]](#disabled-01-variable)
   - [ui-03 [variable]](#ui-03-variable)
