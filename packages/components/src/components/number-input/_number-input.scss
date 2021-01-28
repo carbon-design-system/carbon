@@ -37,7 +37,6 @@
     padding-left: $carbon--spacing-05;
     color: $text-01;
     font-weight: 300;
-
     font-family: carbon--font-family('mono');
     background-color: $field-01;
     border: 0;
@@ -71,6 +70,14 @@
     &::-webkit-inner-spin-button {
       appearance: none;
     }
+  }
+
+  .#{$prefix}--number--xl.#{$prefix}--number input[type='number'] {
+    padding-right: rem(144px);
+  }
+
+  .#{$prefix}--number--sm.#{$prefix}--number input[type='number'] {
+    padding-right: rem(112px);
   }
 
   .#{$prefix}--number input[type='number']:disabled,
@@ -249,9 +256,29 @@
     fill: $support-01;
   }
 
+  .#{$prefix}--number--xl .#{$prefix}--number__invalid {
+    right: rem(112px);
+  }
+
+  .#{$prefix}--number--sm .#{$prefix}--number__invalid {
+    right: rem(80px);
+  }
+
   .#{$prefix}--number__invalid + .#{$prefix}--number__rule-divider {
     position: absolute;
     right: rem(80px);
+  }
+
+  .#{$prefix}--number--xl
+    .#{$prefix}--number__invalid
+    + .#{$prefix}--number__rule-divider {
+    right: rem(96px);
+  }
+
+  .#{$prefix}--number--sm
+    .#{$prefix}--number__invalid
+    + .#{$prefix}--number__rule-divider {
+    right: rem(64px);
   }
 
   .#{$prefix}--number__invalid--warning {
