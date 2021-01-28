@@ -23,7 +23,7 @@
 @mixin dropdown {
   .#{$prefix}--dropdown__wrapper--inline {
     display: inline-grid;
-    grid-gap: rem(4px);
+    grid-gap: rem(24px);
     grid-template: auto auto / auto min-content;
     align-items: center;
 
