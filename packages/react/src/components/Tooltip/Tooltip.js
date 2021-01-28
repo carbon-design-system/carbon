@@ -290,6 +290,8 @@ class Tooltip extends Component {
 
   _handleUserInputOpenClose = (event, { open }) => {
     if (this.isControlled) {
+      // Callback to the parent to let them decide what to do
+      this.props.onChange(event, { open });
       return;
     }
     // capture tooltip body element before it is removed from the DOM

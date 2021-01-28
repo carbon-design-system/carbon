@@ -1,0 +1,232 @@
+//
+// Copyright IBM Corp. 2018, 2018
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+// https://github.com/twbs/bootstrap/blob/v4-dev/scss/mixins/_breakpoints.scss
+@use 'sass:list';
+@use 'sass:map';
+@use 'sass:meta';
+@use 'convert';
+@use 'utilities';
+
+/// Carbon gutter size in rem
+/// @type Number
+/// @access public
+/// @group @carbon/layout
+$grid-gutter: convert.rem(32px);
+
+/// Carbon condensed gutter size in rem
+/// @type Number
+/// @access public
+/// @group @carbon/layout
+$grid-gutter--condensed: convert.rem(1px);
+
+// Initial map of our breakpoints and their values
+/// @type Map
+/// @access public
+/// @group @carbon/layout
+$grid-breakpoints: (
+  sm: (
+    columns: 4,
+    margin: 0,
+    width: convert.rem(320px),
+  ),
+  md: (
+    columns: 8,
+    margin: convert.rem(16px),
+    width: convert.rem(672px),
+  ),
+  lg: (
+    columns: 16,
+    margin: convert.rem(16px),
+    width: convert.rem(1056px),
+  ),
+  xlg: (
+    columns: 16,
+    margin: convert.rem(16px),
+    width: convert.rem(1312px),
+  ),
+  max: (
+    columns: 16,
+    margin: convert.rem(24px),
+    width: convert.rem(1584px),
+  ),
+) !default;
+
+/// Get the value of the next breakpoint, or null for the last breakpoint
+/// @param {String} $name - The name of the brekapoint
+/// @param {Map} $breakpoints [$grid-breakpoints] - A map of breakpoints where the key is the name of the breakpoint and the value is the values for the breakpoint
+/// @param {List} $breakpoint-names [map-keys($breakpoints)] - A list of names from the `$breakpoints` map
+/// @return {String}
+/// @access public
+/// @group @carbon/layout
+@function breakpoint-next(
+  $name,
+  $breakpoints: $grid-breakpoints,
+  $breakpoint-names: map.keys($breakpoints)
+) {
+  $n: list.index($breakpoint-names, $name);
+  @if $n != null and $n < list.length($breakpoint-names) {
+    @return list.nth($breakpoint-names, $n + 1);
+  }
+  @return null;
+}
+
+/// Get the value of the previous breakpoint, or null for the first breakpoint
+/// @param {String} $name - The name of the brekapoint
+/// @param {Map} $breakpoints [$grid-breakpoints] - A map of breakpoints where the key is the name of the breakpoint and the value is the values for the breakpoint
+/// @param {List} $breakpoint-names [map-keys($breakpoints)] - A list of names from the `$breakpoints` map
+/// @return {String}
+/// @access public
+/// @group @carbon/layout
+@function breakpoint-prev(
+  $name,
+  $breakpoints: $grid-breakpoints,
+  $breakpoint-names: map.keys($breakpoints)
+) {
+  $n: list.index($breakpoint-names, $name);
+  @if $n != null and $n > 1 {
+    @return list.nth($breakpoint-names, $n - 1);
+  }
+  @return null;
+}
+
+/// Check to see if the given breakpoint name
+/// @param {String} $name - The name of the brekapoint
+/// @param {Map} $breakpoints [$grid-breakpoints] - A map of breakpoints where the key is the name of the breakpoint and the value is the values for the breakpoint
+/// @return {Bool}
+/// @access public
+/// @group @carbon/layout
+@function is-smallest-breakpoint($name, $breakpoints: $grid-breakpoints) {
+  @return list.index(map.keys($breakpoints), $name) == 1;
+}
+
+/// Returns the largest breakpoint name
+/// @param {Map} $breakpoints [$grid-breakpoints] - A map of breakpoints where the key is the name
+/// @return {String}
+/// @access public
+/// @group @carbon/layout
+@function largest-breakpoint-name($breakpoints: $grid-breakpoints) {
+  $total-breakpoints: list.length($breakpoints);
+  @return key-by-index($breakpoints, $total-breakpoints);
+}
+
+/// Get the infix for a given breakpoint in a list of breakpoints. Usesful for generate the size part in a selector, for example: `.prefix--col-sm-2`.
+/// @param {String} $name - The name of the breakpoint
+/// @return {String}
+/// @access public
+/// @group @carbon/layout
+@function breakpoint-infix($name) {
+  @return '-#{$name}';
+}
+
+/// Generate a media query from the width of the given breakpoint to infinity
+/// @param {String | Number} $name
+/// @param {Map} $breakpoints [$grid-breakpoints] - A map of breakpoints where the key is the name
+/// @content
+/// @access public
+/// @group @carbon/layout
+@mixin breakpoint-up($name, $breakpoints: $grid-breakpoints) {
+  @if meta.type-of($name) == 'number' {
+    @media (min-width: $name) {
+      @content;
+    }
+  } @else if map.has-key($breakpoints, $name) {
+    $breakpoint: map.get($breakpoints, $name);
+    $width: map.get($breakpoint, width);
+    @if is-smallest-breakpoint($name, $breakpoints) {
+      @content;
+    } @else {
+      @media (min-width: $width) {
+        @content;
+      }
+    }
+  } @else {
+    @error 'Unable to find a breakpoint with name `#{$name}`. Expected one of: (#{map.keys($breakpoints)})';
+  }
+}
+
+/// Generate a media query for the maximum width of the given styles
+/// @param {String | Number} $name
+/// @param {Map} $breakpoints [$grid-breakpoints] - A map of breakpoints where the key is the name
+/// @content
+/// @access public
+/// @group @carbon/layout
+@mixin breakpoint-down($name, $breakpoints: $grid-breakpoints) {
+  @if meta.type-of($name) == 'number' {
+    @media (max-width: $name) {
+      @content;
+    }
+  } @else if map.has-key($breakpoints, $name) {
+    // We borrow this logic from bootstrap for specifying the value of the
+    // max-width. The maximum width is calculated by finding the breakpoint and
+    // subtracting .02 from its value. This value is used instead of .01 to
+    // avoid rounding issues in Safari
+    // https://github.com/twbs/bootstrap/blob/c5b1919deaf5393fcca9e9b9d7ce9c338160d99d/scss/mixins/_breakpoints.scss#L34-L46
+    $breakpoint: map.get($breakpoints, $name);
+    $width: map.get($breakpoint, width) - 0.02;
+    @media (max-width: $width) {
+      @content;
+    }
+  } @else {
+    @error 'Unable to find a breakpoint with name `#{$name}`. Expected one of: (#{map.keys($breakpoints)})';
+  }
+}
+
+/// Generate a media query for the range between the lower and upper breakpoints
+/// @param {String | Number} $lower
+/// @param {String | Number} $upper
+/// @param {Map} $breakpoints [$grid-breakpoints] - A map of breakpoints where the key is the name
+/// @content
+/// @access public
+/// @group @carbon/layout
+@mixin breakpoint-between($lower, $upper, $breakpoints: $grid-breakpoints) {
+  $is-number-lower: meta.type-of($lower) == 'number';
+  $is-number-upper: meta.type-of($upper) == 'number';
+  $min: if($is-number-lower, $lower, map.get($breakpoints, $lower));
+  $max: if($is-number-upper, $upper, map.get($breakpoints, $upper));
+
+  @if $min and $max {
+    $min-width: if(not $is-number-lower and $min, map.get($min, width), $min);
+    $max-width: if(not $is-number-upper and $max, map.get($max, width), $max);
+    @media (min-width: $min-width) and (max-width: $max-width) {
+      @content;
+    }
+  } @else if $min != null and $max == null {
+    @include breakpoint-up($lower) {
+      @content;
+    }
+  } @else if $min == null and $max != null {
+    @include breakpoint-down($upper) {
+      @content;
+    }
+  } @else {
+    @error 'Unable to find a breakpoint to satisfy: (#{$lower},#{$upper}). Expected both to be one of (#{map.keys($breakpoints)}).';
+  }
+}
+
+/// Generate media query for the largest breakpoint
+/// @param {Map} $breakpoints [$grid-breakpoints] - A map of breakpoints where the key is the name
+/// @content
+/// @access public
+/// @group @carbon/layout
+@mixin largest-breakpoint($breakpoints: $grid-breakpoints) {
+  @include breakpoint(largest-breakpoint-name()) {
+    @content;
+  }
+}
+
+/// Generate a media query for a given breakpoint
+/// @param {String | Number} $name
+/// @param {Map} $breakpoints [$grid-breakpoints] - A map of breakpoints where the key is the name
+/// @content
+/// @access public
+/// @group @carbon/layout
+@mixin breakpoint($name, $breakpoints: $grid-breakpoints) {
+  @include breakpoint-up($name, $breakpoints) {
+    @content;
+  }
+}

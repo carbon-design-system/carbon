@@ -7,10 +7,10 @@
 
 'use strict';
 
-const babel = require('rollup-plugin-babel');
-const commonjs = require('rollup-plugin-commonjs');
-const resolve = require('rollup-plugin-node-resolve');
-const replace = require('rollup-plugin-replace');
+const { babel } = require('@rollup/plugin-babel');
+const commonjs = require('@rollup/plugin-commonjs');
+const { nodeResolve } = require('@rollup/plugin-node-resolve');
+const replace = require('@rollup/plugin-replace');
 const stripBanner = require('rollup-plugin-strip-banner');
 const { terser } = require('rollup-plugin-terser');
 const packageJson = require('./package.json');
@@ -23,21 +23,9 @@ const baseConfig = {
     'prop-types',
   ],
   plugins: [
-    resolve(),
+    nodeResolve(),
     commonjs({
       include: /node_modules/,
-      namedExports: {
-        'react/index.js': [
-          'Children',
-          'Component',
-          'PureComponent',
-          'Fragment',
-          'PropTypes',
-          'createElement',
-        ],
-        'react-dom/index.js': ['render'],
-        'react-is/index.js': ['isForwardRef'],
-      },
     }),
     babel({
       babelrc: false,
@@ -62,6 +50,7 @@ const baseConfig = {
         '@babel/plugin-proposal-export-namespace-from',
         '@babel/plugin-proposal-export-default-from',
       ],
+      babelHelpers: 'bundled',
     }),
     stripBanner(),
   ],
