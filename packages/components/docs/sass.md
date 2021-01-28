@@ -8834,6 +8834,7 @@ $hover-primary-text: if(
 - **Type**: `{undefined}`
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
+  - [breadcrumb [mixin]](#breadcrumb-mixin)
   - [button [mixin]](#button-mixin)
   - [link [mixin]](#link-mixin)
 
@@ -14979,6 +14980,10 @@ Breadcrumb styles
 
   .#{$prefix}--breadcrumb-item .#{$prefix}--link:visited {
     color: $link-01;
+
+    &:hover {
+      color: $hover-primary-text;
+    }
   }
 
   .#{$prefix}--breadcrumb-item::after {
@@ -15031,6 +15036,7 @@ Breadcrumb styles
   - [prefix [variable]](#prefix-variable)
   - [carbon--spacing-03 [variable]](#carbon--spacing-03-variable)
   - [link-01 [variable]](#link-01-variable)
+  - [hover-primary-text [variable]](#hover-primary-text-variable)
   - [text-01 [variable]](#text-01-variable)
 
 ## button
@@ -26237,7 +26243,9 @@ Tag styles
 
   // tags used for filtering
   .#{$prefix}--tag--filter {
-    padding-right: rem(2px);
+    padding-top: 0;
+    padding-right: 0;
+    padding-bottom: 0;
     cursor: pointer;
 
     &:hover {
@@ -26246,17 +26254,21 @@ Tag styles
   }
 
   .#{$prefix}--tag__close-icon {
+    display: flex;
     flex-shrink: 0;
-    width: rem(16px);
-    height: rem(16px);
-    margin: 0 0 0 rem(4px);
+    align-items: center;
+    justify-content: center;
+    width: rem(24px);
+    height: rem(24px);
+    margin: 0 0 0 rem(2px);
     padding: 0;
     color: currentColor;
     background-color: transparent;
     border: 0;
     border-radius: 50%;
     cursor: pointer;
-
+    transition: background-color $duration--fast-01 motion(standard, productive),
+      box-shadow $duration--fast-01 motion(standard, productive);
     svg {
       fill: currentColor;
     }
@@ -26285,7 +26297,7 @@ Tag styles
   .#{$prefix}--tag__close-icon:focus {
     border-radius: 50%;
     outline: none;
-    box-shadow: inset 0 0 0 2px $focus;
+    box-shadow: inset 0 0 0 1px $focus;
 
     // Windows, Firefox HCM Fix
     @media screen and (-ms-high-contrast: active),
@@ -26296,7 +26308,7 @@ Tag styles
   }
 
   .#{$prefix}--tag--high-contrast .#{$prefix}--tag__close-icon:focus {
-    box-shadow: inset 0 0 0 2px $inverse-focus-ui;
+    box-shadow: inset 0 0 0 1px $inverse-focus-ui;
   }
 
   .#{$prefix}--tag--filter.#{$prefix}--tag--disabled
@@ -26315,7 +26327,13 @@ Tag styles
   }
 
   .#{$prefix}--tag--sm.#{$prefix}--tag--filter {
-    padding-right: rem(2px);
+    padding-right: 0;
+  }
+
+  .#{$prefix}--tag--sm .#{$prefix}--tag__close-icon {
+    width: rem(18px);
+    height: rem(18px);
+    margin-left: rem(5px);
   }
 
   // Skeleton state

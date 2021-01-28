@@ -655,6 +655,106 @@
       "contributions": [
         "code"
       ]
+    },
+    {
+      "login": "scottdickerson",
+      "name": "Scott Dickerson",
+      "avatar_url": "https://avatars.githubusercontent.com/u/6663002?v=4",
+      "profile": "https://github.com/scottdickerson",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "epodgaetskiy",
+      "name": "Evgeniy Podgaetskiy",
+      "avatar_url": "https://avatars.githubusercontent.com/u/15031623?v=4",
+      "profile": "https://start.reactwarriors.com/join",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "CassidyJensen",
+      "name": "CassidyJensen",
+      "avatar_url": "https://avatars.githubusercontent.com/u/45407808?v=4",
+      "profile": "https://github.com/CassidyJensen",
+      "contributions": [
+        "code",
+        "a11y"
+      ]
+    },
+    {
+      "login": "lattmann",
+      "name": "Zsolt Lattmann",
+      "avatar_url": "https://avatars.githubusercontent.com/u/1108945?v=4",
+      "profile": "https://github.com/lattmann",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "ConradSchmidt",
+      "name": "Conrad Schmidt",
+      "avatar_url": "https://avatars.githubusercontent.com/u/3808948?v=4",
+      "profile": "https://conrad.codes/",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "IgnacioBecerra",
+      "name": "Ignacio Becerra",
+      "avatar_url": "https://avatars.githubusercontent.com/u/24970122?v=4",
+      "profile": "https://github.com/IgnacioBecerra",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "swapnilpatil21",
+      "name": "Swapnil Patil",
+      "avatar_url": "https://avatars.githubusercontent.com/u/46713873?v=4",
+      "profile": "https://github.com/swapnilpatil21",
+      "contributions": [
+        "doc"
+      ]
+    },
+    {
+      "login": "sophiiae",
+      "name": "Fei Z",
+      "avatar_url": "https://avatars.githubusercontent.com/u/18622886?v=4",
+      "profile": "https://github.com/sophiiae",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "IgnasA",
+      "name": "Ignas Ausiejus",
+      "avatar_url": "https://avatars.githubusercontent.com/u/7099068?v=4",
+      "profile": "https://github.com/IgnasA",
+      "contributions": [
+        "doc"
+      ]
+    },
+    {
+      "login": "ryanomackey",
+      "name": "Ryan O. Mackey",
+      "avatar_url": "https://avatars.githubusercontent.com/u/17710824?v=4",
+      "profile": "https://ryanomackey.com/",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "skateman",
+      "name": "Dávid Halász",
+      "avatar_url": "https://avatars.githubusercontent.com/u/649130?v=4",
+      "profile": "http://www.skateman.eu/",
+      "contributions": [
+        "code"
+      ]
     }
   ],
   "commitConvention": "none"
