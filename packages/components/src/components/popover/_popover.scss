@@ -1,0 +1,135 @@
+//
+// Copyright IBM Corp. 2016, 2018
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+@import '../../globals/scss/vars';
+@import '../../globals/scss/vendor/@carbon/elements/scss/import-once/import-once';
+
+/// Popover component
+/// @access private
+/// @group popover
+@mixin popover {
+  .#{$prefix}--popover {
+    display: none;
+    position: absolute;
+    z-index: z('floating');
+  }
+
+  .#{$prefix}--popover--relative {
+    position: relative;
+  }
+
+  .#{$prefix}--popover--open {
+    display: block;
+  }
+
+  .#{$prefix}--popover-contents {
+    @include box-shadow;
+
+    position: relative;
+    // TODO: what should the width be here?
+    width: 232px;
+
+    // TODO: debug styles
+    background-color: #000000;
+    border-radius: 6px;
+    padding: 24px;
+    color: #ffffff;
+  }
+
+  $caret-color: #000000;
+  $caret-size: 14px;
+  $caret-offset: -1 * $caret-size;
+  $edge-x-offset: 24px;
+  $edge-y-offset: 16px;
+
+  .#{$prefix}--popover-contents::after {
+    border: $caret-size / 2 solid transparent;
+    content: '';
+    display: inline-block;
+    position: absolute;
+  }
+
+  .#{$prefix}--popover--top .#{$prefix}--popover-contents::after {
+    border-bottom-color: $caret-color;
+    left: 50%;
+    top: $caret-offset;
+    transform: translateX(-50%);
+  }
+
+  .#{$prefix}--popover--bottom .#{$prefix}--popover-contents::after {
+    border-top-color: $caret-color;
+    left: 50%;
+    bottom: $caret-offset;
+    transform: translateX(-50%);
+  }
+
+  .#{$prefix}--popover--left .#{$prefix}--popover-contents::after {
+    border-right-color: $caret-color;
+    top: 50%;
+    left: $caret-offset;
+    transform: translateY(-50%);
+  }
+
+  .#{$prefix}--popover--right .#{$prefix}--popover-contents::after {
+    border-left-color: $caret-color;
+    top: 50%;
+    right: $caret-offset;
+    transform: translateY(-50%);
+  }
+
+  .#{$prefix}--popover--top-left .#{$prefix}--popover-contents::after {
+    border-bottom-color: $caret-color;
+    left: $edge-x-offset;
+    top: $caret-offset;
+  }
+
+  .#{$prefix}--popover--top-right .#{$prefix}--popover-contents::after {
+    border-bottom-color: $caret-color;
+    right: $edge-x-offset;
+    top: $caret-offset;
+  }
+
+  .#{$prefix}--popover--bottom-left .#{$prefix}--popover-contents::after {
+    border-top-color: $caret-color;
+    left: $edge-x-offset;
+    bottom: $caret-offset;
+  }
+
+  .#{$prefix}--popover--bottom-right .#{$prefix}--popover-contents::after {
+    border-top-color: $caret-color;
+    right: $edge-x-offset;
+    bottom: $caret-offset;
+  }
+
+  .#{$prefix}--popover--left-top .#{$prefix}--popover-contents::after {
+    border-right-color: $caret-color;
+    top: $edge-y-offset;
+    left: $caret-offset;
+  }
+
+  .#{$prefix}--popover--left-bottom .#{$prefix}--popover-contents::after {
+    border-right-color: $caret-color;
+    bottom: $edge-y-offset;
+    left: $caret-offset;
+  }
+
+  .#{$prefix}--popover--right-top .#{$prefix}--popover-contents::after {
+    border-left-color: $caret-color;
+    top: $edge-y-offset;
+    right: $caret-offset;
+  }
+
+  .#{$prefix}--popover--right-bottom .#{$prefix}--popover-contents::after {
+    border-left-color: $caret-color;
+    bottom: $edge-y-offset;
+    right: $caret-offset;
+  }
+}
+
+@include exports('popover') {
+  @include popover;
+}
