@@ -18,7 +18,8 @@
     "react"
   ],
   "scripts": {
-    "build": "babel ./carbon-theme-addon/src --out-dir ./dist"
+    "build": "babel ./carbon-theme-addon/src --out-dir ./dist",
+    "clean": "rimraf ./dist"
   },
   "peerDependencies": {
     "@storybook/react": "^5.3.19",
