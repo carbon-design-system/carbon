@@ -7,11 +7,11 @@
 
 'use strict';
 
+const { babel } = require('@rollup/plugin-babel');
 const { camelCase } = require('change-case');
 const fs = require('fs-extra');
 const path = require('path');
 const { rollup } = require('rollup');
-const babel = require('rollup-plugin-babel');
 const virtual = require('../plugins/virtual');
 
 const BANNER = `/**
@@ -41,6 +41,7 @@ const babelConfig = {
     '@babel/plugin-transform-react-constant-elements',
     'babel-plugin-dev-expression',
   ],
+  babelHelpers: 'bundled',
 };
 
 async function builder(metadata, { output }) {
@@ -156,6 +157,7 @@ const didWarnAboutDeprecation = {};`;
       format,
       entryFileNames: '[name]',
       banner: BANNER,
+      exports: 'auto',
     };
 
     await bundle.write(outputOptions);
