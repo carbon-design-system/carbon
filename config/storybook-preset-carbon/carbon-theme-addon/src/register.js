@@ -7,7 +7,7 @@
 
 import React from 'react';
 import { addons } from '@storybook/addons';
-import { CarbonThemePanel, CarbonTypePanel } from './components/LonelyPanel';
+import { CarbonThemePanel, CarbonTypePanel } from './components/Panel';
 import {
   CARBON_THEMES_ADDON_ID,
   CARBON_THEME_PANEL_ID,
