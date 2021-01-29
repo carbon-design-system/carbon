@@ -28,7 +28,7 @@ jobs:
         with:
           node-version: '14.x'
       - name: Install dependencies
-        run: yarn install --immutable --immutable-cache --silent
+        run: yarn install --immutable --immutable-cache
       - name: Check formatting of project files
         run: yarn format:diff
 
@@ -41,7 +41,7 @@ jobs:
         with:
           node-version: '14.x'
       - name: Install dependencies
-        run: yarn install --immutable --immutable-cache --silent
+        run: yarn install --immutable --immutable-cache
       - name: Lint JavaScript files
         run: yarn lint
       - name: Lint Sass files
@@ -56,7 +56,7 @@ jobs:
         with:
           node-version: '14.x'
       - name: Install dependencies
-        run: yarn install --immutable --immutable-cache --silent
+        run: yarn install --immutable --immutable-cache
       - name: Build project
         run: yarn build
       - name: Run CI checks
@@ -64,6 +64,6 @@ jobs:
           yarn lerna run ci-check
           yarn carbon-cli check --ignore '**/@(node_modules|examples|components|react|fixtures)/**' 'packages/**/*.scss'
       - name: Run tests
-        run: BABEL_ENV=test yarn test --ci --maxWorkers 2
+        run: BABEL_ENV=test yarn test --ci
       - name: Run e2e tests
-        run: BABEL_ENV=test yarn test:e2e --ci --maxWorkers 2
+        run: BABEL_ENV=test yarn test:e2e --ci
