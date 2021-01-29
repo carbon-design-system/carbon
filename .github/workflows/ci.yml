@@ -28,7 +28,7 @@ jobs:
         with:
           node-version: '14.x'
       - name: Install dependencies
-        run: yarn install --immutable --immutable-cache
+        run: yarn install --immutable --immutable-cache --silent
       - name: Check formatting of project files
         run: yarn format:diff
 
@@ -41,7 +41,7 @@ jobs:
         with:
           node-version: '14.x'
       - name: Install dependencies
-        run: yarn install --immutable --immutable-cache
+        run: yarn install --immutable --immutable-cache --silent
       - name: Lint JavaScript files
         run: yarn lint
       - name: Lint Sass files
@@ -56,7 +56,7 @@ jobs:
         with:
           node-version: '14.x'
       - name: Install dependencies
-        run: yarn install --immutable --immutable-cache
+        run: yarn install --immutable --immutable-cache --silent
       - name: Build project
         run: yarn build
       - name: Run CI checks
