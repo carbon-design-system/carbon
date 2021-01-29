@@ -1374,6 +1374,9 @@ Map {
         "defaultValue": Object {
           "type": "string",
         },
+        "disabled": Object {
+          "type": "bool",
+        },
         "expanded": Object {
           "type": "bool",
         },
@@ -1961,6 +1964,9 @@ Map {
       },
       "defaultValue": Object {
         "type": "string",
+      },
+      "disabled": Object {
+        "type": "bool",
       },
       "expanded": Object {
         "type": "bool",
