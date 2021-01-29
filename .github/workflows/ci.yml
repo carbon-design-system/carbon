@@ -3,6 +3,10 @@ on:
   pull_request:
     branches:
       - master
+  push:
+    branches:
+      - master
+
 jobs:
   dedupe:
     runs-on: ubuntu-latest
@@ -42,3 +46,24 @@ jobs:
         run: yarn lint
       - name: Lint Sass files
         run: yarn lint:styles
+
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Use Node.js 14.x
+        uses: actions/setup-node@v2.1.4
+        with:
+          node-version: '14.x'
+      - name: Install dependencies
+        run: yarn install --immutable --immutable-cache
+      - name: Build project
+        run: yarn build
+      - name: Run CI checks
+        run: |
+          yarn lerna run ci-check
+          yarn carbon-cli check --ignore '**/@(node_modules|examples|components|react|fixtures)/**' 'packages/**/*.scss'
+      - name: Run tests
+        run: BABEL_ENV=test yarn test --ci --maxWorkers 2
+      - name: Run e2e tests
+        run: BABEL_ENV=test yarn test:e2e --ci --maxWorkers 2
