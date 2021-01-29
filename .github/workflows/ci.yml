@@ -48,7 +48,7 @@ jobs:
         run: yarn lint:styles
 
   test:
-    runs-on: ubuntu-latest
+    runs-on: macos-latest
     steps:
       - uses: actions/checkout@v2
       - name: Use Node.js 14.x
@@ -64,6 +64,6 @@ jobs:
           yarn lerna run ci-check
           yarn carbon-cli check --ignore '**/@(node_modules|examples|components|react|fixtures)/**' 'packages/**/*.scss'
       - name: Run tests
-        run: BABEL_ENV=test DISPLAY=:0.0 yarn test --ci --maxWorkers 2
+        run: BABEL_ENV=test yarn test --ci --maxWorkers 2
       - name: Run e2e tests
         run: BABEL_ENV=test yarn test:e2e --ci --maxWorkers 2
