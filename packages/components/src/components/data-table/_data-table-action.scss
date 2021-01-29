@@ -89,7 +89,7 @@
     .#{$prefix}--search-magnifier {
     background: $disabled-01;
     cursor: not-allowed;
-    transition: none;
+    transition: background-color none;
   }
 
   .#{$prefix}--toolbar-search-container-expandable
@@ -113,7 +113,7 @@
     .#{$prefix}--search-magnifier:hover {
     background: $disabled-01;
     cursor: not-allowed;
-    transition: none;
+    transition: background-color none;
   }
 
   .#{$prefix}--toolbar-search-container-expandable
