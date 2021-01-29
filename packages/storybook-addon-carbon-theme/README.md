@@ -1,22 +1,23 @@
-# @carbon/storybook-addon-theme
+# Storybook addon for Carbon themes
 
-> Carbon theme switcher for Storybook
+This addon for storybook allows you to change the theme used with Carbon
+Components!
 
-## Getting started
+## Supports
 
-To install `@carbon/storybook-addon-theme` in your project, you will need to run
-the following command using [npm](https://www.npmjs.com/):
+- React
+- Vue
 
-```bash
-npm install -S @carbon/storybook-addon-theme
+## Install
+
+```sh
+npm install @carbon/storybook-addon-theme
 ```
 
-If you prefer [Yarn](https://yarnpkg.com/en/), use the following command
-instead:
+## Requirements
 
-```bash
-yarn add @carbon/storybook-addon-theme
-```
+- Use of Carbon Components
+- Use of Custom CSS Properties feature flag
 
 ## Usage
 
@@ -24,7 +25,7 @@ yarn add @carbon/storybook-addon-theme
 
 ```js
 module.exports = {
-  addons: ['@carbon/storyboook-addon-theme'],
+  addons: ['@carbon/storybook-addon-theme/register'],
 };
 ```
 
@@ -36,7 +37,7 @@ const addons = [
 ];
 
 if (process.env.CARBON_REACT_STORYBOOK_USE_CUSTOM_PROPERTIES === 'true') {
-  addons.push('@carbon/storybook-addon-theme');
+  addons.push('@carbon/storybook-addon-theme/register');
 }
 
 module.exports = {
@@ -47,17 +48,33 @@ module.exports = {
 
 ### Global Decorator
 
+`.storybook/preview.js`:
+
 ```js
 import { withCarbonTheme } from '@carbon/storybook-addon-theme'; // for React
 // import { withCarbonTheme } from '@carbon/storybook-addon-theme/vue'; // for Vue
-// for Angular
+// for Angular (not yet supported)
 // .
-// .
+// for all (including story decorators)
+import index from './index.scss';
 // .
 addDecorator(withCarbonTheme);
 // .
-// .
-// .
+```
+
+```js
+// Adding the decorator
+const decorators = [withCarbonTheme];
+const parameters = {
+  carbonTheme: {
+    theme: 'g10',
+  },
+};
+export { decorators, parameters };
+```
+
+```js
+// Older storybook versions
 addParameters({
   // optional
   carbonTheme: {
@@ -67,7 +84,7 @@ addParameters({
 });
 ```
 
-within your stories:
+### Story decorator
 
 ```js
 import { withCarbonTheme } from '@carbon/storybook-addon-theme'; // for React
@@ -85,6 +102,42 @@ storiesOf('Component', module)
       themes: ['g10', 'g90'], // optional carbonTheme filter (additive to global)
     },
   });
+```
+
+## SCSS
+
+`.storybook/index.scss`
+
+```scss
+@import '@carbon/themes/scss/themes';
+
+:root {
+  @include carbon--theme(
+    $theme: $carbon--theme--white,
+    $emit-custom-properties: true
+  );
+}
+
+:root[storybook-carbon-theme='g10'] {
+  @include carbon--theme(
+    $theme: $carbon--theme--g10,
+    $emit-custom-properties: true
+  );
+}
+
+:root[storybook-carbon-theme='g90'] {
+  @include carbon--theme(
+    $theme: $carbon--theme--g90,
+    $emit-custom-properties: true
+  );
+}
+
+:root[storybook-carbon-theme='g100'] {
+  @include carbon--theme(
+    $theme: $carbon--theme--g100,
+    $emit-custom-properties: true
+  );
+}
 ```
 
 ## 🙌 Contributing
