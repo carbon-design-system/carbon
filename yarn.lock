@@ -9227,7 +9227,7 @@ __metadata:
     karma: ^4.0.0
     karma-chrome-launcher: ^2.2.0
     karma-coverage: ^1.1.0
-    karma-firefox-launcher: ^1.0.0
+    karma-firefox-launcher: ^2.1.0
     karma-html2js-preprocessor: ^1.1.0
     karma-ie-launcher: ^1.0.0
     karma-jasmine: ^2.0.1
@@ -17752,6 +17752,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"is-docker@npm:^2.0.0":
+  version: 2.1.1
+  resolution: "is-docker@npm:2.1.1"
+  bin:
+    is-docker: cli.js
+  checksum: dc8e36fa63a246728e5dd4b3ab2d454f685d3dcc1fecbe62144a0c3bc1f5eef0cf67cb3af1b4a9d274dd18877b954b651c7ef0a483abae6a7a2baa8f987554ba
+  languageName: node
+  linkType: hard
+
 "is-dom@npm:^1.0.9":
   version: 1.1.0
   resolution: "is-dom@npm:1.1.0"
@@ -18410,10 +18419,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"is-wsl@npm:^2.1.0, is-wsl@npm:^2.1.1":
-  version: 2.1.1
-  resolution: "is-wsl@npm:2.1.1"
-  checksum: 76711be70c222afa1fcd5b2c509fc015cf1e7227ec0bc5a0a98c9ef1736cb19022d8098e47dc54da42db92ea4b3630d020ba43a26b9d75390781a87c7181123c
+"is-wsl@npm:^2.1.0, is-wsl@npm:^2.1.1, is-wsl@npm:^2.2.0":
+  version: 2.2.0
+  resolution: "is-wsl@npm:2.2.0"
+  dependencies:
+    is-docker: ^2.0.0
+  checksum: 3dcc4073d4682b9f9a4c59411bb73716cfff88eae58a6bd0af302b8ee016263a5150302bb296bc81a4cb0d3b66c86d82b3ee0146ed15f6558022bc847a2549a2
   languageName: node
   linkType: hard
 
@@ -19931,12 +19942,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"karma-firefox-launcher@npm:^1.0.0":
-  version: 1.3.0
-  resolution: "karma-firefox-launcher@npm:1.3.0"
+"karma-firefox-launcher@npm:^2.1.0":
+  version: 2.1.0
+  resolution: "karma-firefox-launcher@npm:2.1.0"
   dependencies:
-    is-wsl: ^2.1.0
-  checksum: 3ba335e54d1eb6bec71235ed90e05e0f6567fc401df2cb68115d17d644883e36379777d6a7151014b60430817b03d8281a05b71866dff4b555896706c11f222e
+    is-wsl: ^2.2.0
+    which: ^2.0.1
+  checksum: 722664261825889fc8a849245ef7a1abe801300f32c2d21ef453d145e3a82e1b0e22523816617637c415e86624d2aacaaa11bf166e55dc7ba3aa1779bb29ed01
   languageName: node
   linkType: hard
 
