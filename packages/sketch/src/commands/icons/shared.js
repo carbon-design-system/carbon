@@ -18,7 +18,6 @@ export function syncIconSymbols({
   document,
   symbols,
   symbolsPage,
-  sharedLayerStyles,
   sizes = [32, 24, 20, 16],
 }) {
   const sharedStyles = syncColorStyles(document, 'fill');

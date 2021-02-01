@@ -19,7 +19,6 @@ export function syncSmallIcons() {
       document,
       symbols: Array.from(symbols),
       symbolsPage,
-      sharedLayerStyles: document.sharedLayerStyles,
       sizes: [16, 20],
     });
   });
@@ -34,7 +33,6 @@ export function syncLargeIcons() {
       document,
       symbols: Array.from(symbols),
       symbolsPage,
-      sharedLayerStyles: document.sharedLayerStyles,
       sizes: [24, 32],
     });
   });
