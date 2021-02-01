@@ -85,6 +85,14 @@
   }
 
   .#{$prefix}--toolbar-search-container-expandable
+    .#{$prefix}--search--disabled
+    .#{$prefix}--search-magnifier {
+    background: $disabled-01;
+    cursor: not-allowed;
+    transition: background-color none;
+  }
+
+  .#{$prefix}--toolbar-search-container-expandable
     .#{$prefix}--search
     .#{$prefix}--search-magnifier:focus {
     @include focus-outline('outline');
@@ -94,6 +102,18 @@
     .#{$prefix}--search
     .#{$prefix}--search-magnifier:hover {
     background: $hover-field;
+  }
+
+  .#{$prefix}--toolbar-action.#{$prefix}--toolbar-search-container-disabled {
+    cursor: not-allowed;
+  }
+
+  .#{$prefix}--toolbar-search-container-expandable
+    .#{$prefix}--search--disabled
+    .#{$prefix}--search-magnifier:hover {
+    background: $disabled-01;
+    cursor: not-allowed;
+    transition: background-color none;
   }
 
   .#{$prefix}--toolbar-search-container-expandable
@@ -577,6 +597,10 @@
 
       background: transparent;
     }
+  }
+
+  .#{$prefix}--search--disabled .#{$prefix}--search-magnifier:hover {
+    background: transparent;
   }
 
   //-------------------------------------------------

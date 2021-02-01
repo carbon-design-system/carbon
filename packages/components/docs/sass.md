@@ -4139,6 +4139,7 @@ $carbon--spacing-03: 0.5rem;
   - [file-uploader [mixin]](#file-uploader-mixin)
   - [form [mixin]](#form-mixin)
   - [listbox [mixin]](#listbox-mixin)
+  - [multiselect [mixin]](#multiselect-mixin)
   - [inline-notifications [mixin]](#inline-notifications-mixin)
   - [toast-notifications [mixin]](#toast-notifications-mixin)
   - [progress-indicator [mixin]](#progress-indicator-mixin)
@@ -4173,7 +4174,6 @@ $spacing-03: 0.5rem;
   - [data-table-core [mixin]](#data-table-core-mixin)
   - [data-table-sort [mixin]](#data-table-sort-mixin)
   - [modal [mixin]](#modal-mixin)
-  - [multiselect [mixin]](#multiselect-mixin)
   - [select [mixin]](#select-mixin)
   - [tabs [mixin]](#tabs-mixin)
   - [tooltip [mixin]](#tooltip-mixin)
@@ -4244,6 +4244,7 @@ $carbon--spacing-05: 1rem;
   - [form [mixin]](#form-mixin)
   - [lists [mixin]](#lists-mixin)
   - [listbox [mixin]](#listbox-mixin)
+  - [multiselect [mixin]](#multiselect-mixin)
   - [inline-notifications [mixin]](#inline-notifications-mixin)
   - [toast-notifications [mixin]](#toast-notifications-mixin)
   - [number-input [mixin]](#number-input-mixin)
@@ -7805,7 +7806,6 @@ $ui-03: if(
   - [progress-indicator [mixin]](#progress-indicator-mixin)
   - [slider [mixin]](#slider-mixin)
   - [tabs [mixin]](#tabs-mixin)
-  - [tags [mixin]](#tags-mixin)
   - [text-input [mixin]](#text-input-mixin)
   - [toolbar [mixin]](#toolbar-mixin)
 
@@ -8117,6 +8117,7 @@ $icon-01: if(
   - [radio-button [mixin]](#radio-button-mixin)
   - [search [mixin]](#search-mixin)
   - [tabs [mixin]](#tabs-mixin)
+  - [text-input [mixin]](#text-input-mixin)
   - [treeview [mixin]](#treeview-mixin)
 
 ### ✅icon-02 [variable]
@@ -8143,7 +8144,6 @@ $icon-02: if(
 - **Type**: `{undefined}`
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
-  - [listbox [mixin]](#listbox-mixin)
   - [overflow-menu [mixin]](#overflow-menu-mixin)
   - [search [mixin]](#search-mixin)
   - [text-input [mixin]](#text-input-mixin)
@@ -8262,6 +8262,7 @@ $field-01: if(
   - [carbon--theme [mixin]](#carbon--theme-mixin)
   - [snippet [mixin]](#snippet-mixin)
   - [bx--snippet [mixin]](#bx--snippet-mixin)
+  - [combo-box [mixin]](#combo-box-mixin)
   - [date-picker [mixin]](#date-picker-mixin)
   - [dropdown [mixin]](#dropdown-mixin)
   - [file-uploader [mixin]](#file-uploader-mixin)
@@ -8300,6 +8301,7 @@ $field-02: if(
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
   - [snippet [mixin]](#snippet-mixin)
+  - [combo-box [mixin]](#combo-box-mixin)
   - [date-picker [mixin]](#date-picker-mixin)
   - [dropdown [mixin]](#dropdown-mixin)
   - [listbox [mixin]](#listbox-mixin)
@@ -8979,7 +8981,6 @@ $hover-ui: if(
   - [dropdown [mixin]](#dropdown-mixin)
   - [listbox [mixin]](#listbox-mixin)
   - [modal [mixin]](#modal-mixin)
-  - [multiselect [mixin]](#multiselect-mixin)
   - [number-input [mixin]](#number-input-mixin)
   - [overflow-menu [mixin]](#overflow-menu-mixin)
   - [pagination [mixin]](#pagination-mixin)
@@ -9014,6 +9015,8 @@ $hover-light-ui: if(
   - [carbon--theme [mixin]](#carbon--theme-mixin)
   - [snippet [mixin]](#snippet-mixin)
   - [content-switcher [mixin]](#content-switcher-mixin)
+  - [dropdown [mixin]](#dropdown-mixin)
+  - [listbox [mixin]](#listbox-mixin)
 
 ### ✅hover-selected-ui [variable]
 
@@ -9308,6 +9311,7 @@ $disabled-01: if(
   - [accordion [mixin]](#accordion-mixin)
   - [snippet [mixin]](#snippet-mixin)
   - [content-switcher [mixin]](#content-switcher-mixin)
+  - [data-table-v2-action [mixin]](#data-table-v2-action-mixin)
   - [date-picker [mixin]](#date-picker-mixin)
   - [listbox [mixin]](#listbox-mixin)
   - [number-input [mixin]](#number-input-mixin)
@@ -9499,6 +9503,7 @@ $skeleton-01: if(
 - **Type**: `{undefined}`
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
+  - [tags [mixin]](#tags-mixin)
 
 ### ✅skeleton-02 [variable]
 
@@ -16492,6 +16497,14 @@ Combo box styles
 
 ```scss
 @mixin combo-box() {
+  .#{$prefix}--combo-box:hover {
+    background-color: $field-01;
+  }
+
+  .#{$prefix}--combo-box.#{$prefix}--list-box--light:hover {
+    background-color: $field-02;
+  }
+
   .#{$prefix}--combo-box .#{$prefix}--text-input::-ms-clear {
     display: none;
   }
@@ -16520,6 +16533,8 @@ Combo box styles
 - **Group**: [combo-box](#combo-box)
 - **Requires**:
   - [prefix [variable]](#prefix-variable)
+  - [field-01 [variable]](#field-01-variable)
+  - [field-02 [variable]](#field-02-variable)
   - [ui-03 [variable]](#ui-03-variable)
 
 ## content-switcher
@@ -16811,6 +16826,14 @@ Data table action styles
   }
 
   .#{$prefix}--toolbar-search-container-expandable
+    .#{$prefix}--search--disabled
+    .#{$prefix}--search-magnifier {
+    background: $disabled-01;
+    cursor: not-allowed;
+    transition: background-color none;
+  }
+
+  .#{$prefix}--toolbar-search-container-expandable
     .#{$prefix}--search
     .#{$prefix}--search-magnifier:focus {
     @include focus-outline('outline');
@@ -16820,6 +16843,18 @@ Data table action styles
     .#{$prefix}--search
     .#{$prefix}--search-magnifier:hover {
     background: $hover-field;
+  }
+
+  .#{$prefix}--toolbar-action.#{$prefix}--toolbar-search-container-disabled {
+    cursor: not-allowed;
+  }
+
+  .#{$prefix}--toolbar-search-container-expandable
+    .#{$prefix}--search--disabled
+    .#{$prefix}--search-magnifier:hover {
+    background: $disabled-01;
+    cursor: not-allowed;
+    transition: background-color none;
   }
 
   .#{$prefix}--toolbar-search-container-expandable
@@ -17305,6 +17340,10 @@ Data table action styles
     }
   }
 
+  .#{$prefix}--search--disabled .#{$prefix}--search-magnifier:hover {
+    background: transparent;
+  }
+
   //-------------------------------------------------
   // SMALL BATCH ACTIONS
   //-------------------------------------------------
@@ -17350,6 +17389,7 @@ Data table action styles
   - [layout-04 [variable]](#layout-04-variable)
   - [ui-01 [variable]](#ui-01-variable)
   - [spacing-05 [variable]](#spacing-05-variable)
+  - [disabled-01 [variable]](#disabled-01-variable)
   - [hover-field [variable]](#hover-field-variable)
   - [hover-ui [variable]](#hover-ui-variable)
   - [focus [variable]](#focus-variable)
@@ -18981,7 +19021,7 @@ Dropdown styles
 @mixin dropdown() {
   .#{$prefix}--dropdown__wrapper--inline {
     display: inline-grid;
-    grid-gap: rem(4px);
+    grid-gap: rem(24px);
     grid-template: auto auto / auto min-content;
     align-items: center;
 
@@ -19098,6 +19138,10 @@ Dropdown styles
 
   .#{$prefix}--dropdown--light {
     background-color: $field-02;
+
+    &:hover {
+      background-color: $hover-light-ui;
+    }
   }
 
   .#{$prefix}--dropdown--up .#{$prefix}--dropdown-list {
@@ -19451,6 +19495,7 @@ Dropdown styles
   - [spacing-08 [variable]](#spacing-08-variable)
   - [support-01 [variable]](#support-01-variable)
   - [field-02 [variable]](#field-02-variable)
+  - [hover-light-ui [variable]](#hover-light-ui-variable)
   - [ui-05 [variable]](#ui-05-variable)
   - [carbon--spacing-05 [variable]](#carbon--spacing-05-variable)
   - [ui-01 [variable]](#ui-01-variable)
@@ -20475,6 +20520,10 @@ List box styles
   // Light variation for 'list-box'
   .#{$prefix}--list-box--light {
     background-color: $field-02;
+
+    &:hover {
+      background-color: $hover-light-ui;
+    }
   }
 
   .#{$prefix}--list-box--light .#{$prefix}--list-box__menu {
@@ -20768,7 +20817,7 @@ List box styles
   }
 
   .#{$prefix}--list-box__selection > svg {
-    fill: $icon-02;
+    fill: $icon-01;
 
     // Windows, Firefox HCM Fix
     @media screen and (-ms-high-contrast: active),
@@ -20913,6 +20962,10 @@ List box styles
     &:active {
       background-color: $selected-ui;
     }
+  }
+
+  .#{$prefix}--list-box--light .#{$prefix}--list-box__menu-item:hover {
+    background-color: $hover-light-ui;
   }
 
   .#{$prefix}--list-box--sm .#{$prefix}--list-box__menu-item {
@@ -21164,6 +21217,7 @@ List box styles
   - [carbon--spacing-08 [variable]](#carbon--spacing-08-variable)
   - [support-01 [variable]](#support-01-variable)
   - [support-03 [variable]](#support-03-variable)
+  - [hover-light-ui [variable]](#hover-light-ui-variable)
   - [decorative-01 [variable]](#decorative-01-variable)
   - [disabled-02 [variable]](#disabled-02-variable)
   - [carbon--spacing-09 [variable]](#carbon--spacing-09-variable)
@@ -21171,7 +21225,6 @@ List box styles
   - [carbon--spacing-07 [variable]](#carbon--spacing-07-variable)
   - [carbon--spacing-05 [variable]](#carbon--spacing-05-variable)
   - [icon-01 [variable]](#icon-01-variable)
-  - [icon-02 [variable]](#icon-02-variable)
   - [inverse-01 [variable]](#inverse-01-variable)
   - [inverse-02 [variable]](#inverse-02-variable)
   - [hover-secondary [variable]](#hover-secondary-variable)
@@ -21787,6 +21840,15 @@ Multi select styles
 
 ```scss
 @mixin multiselect() {
+  .#{$prefix}--multi-select .#{$prefix}--tag {
+    min-width: auto;
+    margin: 0 $carbon--spacing-03 0 0;
+  }
+
+  .#{$prefix}--multi-select--filterable .#{$prefix}--tag {
+    margin: 0 $carbon--spacing-03 0 $carbon--spacing-05;
+  }
+
   .#{$prefix}--multi-select .#{$prefix}--list-box__menu {
     min-width: auto;
   }
@@ -21825,14 +21887,6 @@ Multi select styles
     color: $text-01;
   }
 
-  .#{$prefix}--multi-select--filterable .#{$prefix}--text-input {
-    padding-left: $spacing-03;
-  }
-
-  .#{$prefix}--multi-select--filterable:hover .#{$prefix}--text-input {
-    background-color: $hover-ui;
-  }
-
   .#{$prefix}--multi-select--filterable.#{$prefix}--list-box--disabled:hover
     .#{$prefix}--text-input {
     background-color: $field-01;
@@ -21859,9 +21913,9 @@ Multi select styles
 - **Requires**:
   - [rem [function]](#rem-function)
   - [prefix [variable]](#prefix-variable)
+  - [carbon--spacing-03 [variable]](#carbon--spacing-03-variable)
+  - [carbon--spacing-05 [variable]](#carbon--spacing-05-variable)
   - [text-01 [variable]](#text-01-variable)
-  - [spacing-03 [variable]](#spacing-03-variable)
-  - [hover-ui [variable]](#hover-ui-variable)
   - [field-01 [variable]](#field-01-variable)
   - [spacing-05 [variable]](#spacing-05-variable)
 
@@ -26339,10 +26393,17 @@ Tag styles
   // Skeleton state
   .#{$prefix}--tag.#{$prefix}--skeleton {
     @include skeleton;
-    @include tag-theme($bg-color: $ui-03, $text-color: $text-01);
+    @include tag-theme($bg-color: $skeleton-01, $text-color: $text-01);
 
     width: rem(60px);
     overflow: hidden;
+
+    // Safari specific bug (#7672)
+    @media not all and (min-resolution: 0.001dpcm) {
+      @supports (-webkit-appearance: none) and (stroke-color: transparent) {
+        transform: translateZ(0);
+      }
+    }
   }
 }
 ```
@@ -26364,7 +26425,7 @@ Tag styles
   - [spacing-02 [variable]](#spacing-02-variable)
   - [focus [variable]](#focus-variable)
   - [inverse-focus-ui [variable]](#inverse-focus-ui-variable)
-  - [ui-03 [variable]](#ui-03-variable)
+  - [skeleton-01 [variable]](#skeleton-01-variable)
   - [text-01 [variable]](#text-01-variable)
 
 ## text-area
@@ -26568,17 +26629,25 @@ Text input styles
 
     .#{$prefix}--text-input--password__visibility,
     // TODO: remove selector above
-    .#{$prefix}--text-input--password__visibility__toggle.#{$prefix}--tooltip__trigger {
+     .#{$prefix}--btn.#{$prefix}--text-input--password__visibility__toggle.#{$prefix}--tooltip__trigger {
+      @include focus-outline('reset');
+
       position: absolute;
-      right: $carbon--spacing-05;
-      width: rem(16px);
-      height: rem(16px);
+      right: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: rem(40px);
+      height: rem(40px);
+      min-height: auto;
       padding: 0;
       background: none;
       border: 0;
       cursor: pointer;
+      transition: outline $duration--fast-01 motion(standard, productive);
 
       svg {
+        transition: fill $duration--fast-01 motion(standard, productive);
         fill: $icon-02;
 
         // Windows, Firefox HCM Fix
@@ -26588,6 +26657,16 @@ Text input styles
           fill: ButtonText;
         }
       }
+    }
+
+    .#{$prefix}--btn.#{$prefix}--text-input--password__visibility__toggle.#{$prefix}--tooltip__trigger:focus {
+      @include focus-outline('outline');
+    }
+
+    .#{$prefix}--btn.#{$prefix}--text-input--password__visibility__toggle.#{$prefix}--tooltip__trigger:hover,
+    .#{$prefix}--btn.#{$prefix}--text-input--password__visibility__toggle.#{$prefix}--tooltip__trigger:focus
+      svg {
+      fill: $icon-01;
     }
 
     .#{$prefix}--text-input--invalid {
@@ -26804,6 +26883,7 @@ Text input styles
   - [support-01 [variable]](#support-01-variable)
   - [support-03 [variable]](#support-03-variable)
   - [icon-02 [variable]](#icon-02-variable)
+  - [icon-01 [variable]](#icon-01-variable)
   - [disabled-02 [variable]](#disabled-02-variable)
   - [disabled-01 [variable]](#disabled-01-variable)
   - [ui-03 [variable]](#ui-03-variable)
