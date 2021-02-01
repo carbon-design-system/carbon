@@ -42,7 +42,6 @@ export function syncIconSymbols(
   return artboards.map((artboard) => {
     return syncSymbol({
       symbols,
-      sharedLayerStyles,
       name: artboard.name,
       config: {
         name: artboard.name,

@@ -28,7 +28,6 @@ export function testSyncSymbolId() {
 
     syncSymbol({
       symbols: document.getSymbols(),
-      sharedLayerStyles: document.sharedLayerStyles,
       name: 'test-symbol',
       config: {
         layers: [

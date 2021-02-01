@@ -12,13 +12,12 @@ import { SymbolMaster } from 'sketch/dom';
  * return a new symbol if none exist with the given name.
  * @param {object} params - syncSymbol parameters
  * @param {Array<SymbolMaster>} params.symbols
- * @param {Array<SharedLayerStyles>} params.sharedLayerStyles
  * @param {string} params.name - the name of the symbol
  * @param {object} params.config - the config for the corresponding symbol
  * master
  * @returns {SketchSymbol}
  */
-export function syncSymbol({ symbols, sharedLayerStyles, name, config }) {
+export function syncSymbol({ symbols, name, config }) {
   const symbol = symbols.find((symbol) => symbol.name === name);
 
   if (!symbol) {
