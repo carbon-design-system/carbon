@@ -10,13 +10,15 @@ import { SymbolMaster } from 'sketch/dom';
 /**
  * Sync the given symbol name with a corresponding config in a document. Will
  * return a new symbol if none exist with the given name.
- * @param {Array<SymbolMaster>} symbols
- * @param {Array<SharedLayerStyles>} sharedLayerStyles
- * @param {string} name - the name of the symbol
- * @param {object} config - the config for the corresponding symbol master
+ * @param {object} params - syncSymbol parameters
+ * @param {Array<SymbolMaster>} params.symbols
+ * @param {Array<SharedLayerStyles>} params.sharedLayerStyles
+ * @param {string} params.name - the name of the symbol
+ * @param {object} params.config - the config for the corresponding symbol
+ * master
  * @returns {SketchSymbol}
  */
-export function syncSymbol(symbols, sharedLayerStyles, name, config) {
+export function syncSymbol({ symbols, sharedLayerStyles, name, config }) {
   const symbol = symbols.find((symbol) => symbol.name === name);
 
   if (!symbol) {

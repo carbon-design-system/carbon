@@ -40,12 +40,17 @@ export function syncIconSymbols(
   );
 
   return artboards.map((artboard) => {
-    return syncSymbol(symbols, sharedLayerStyles, artboard.name, {
+    return syncSymbol({
+      symbols,
+      sharedLayerStyles,
       name: artboard.name,
-      frame: artboard.frame,
-      layers: artboard.layers,
-      background: artboard.background,
-      parent: symbolsPage,
+      config: {
+        name: artboard.name,
+        frame: artboard.frame,
+        layers: artboard.layers,
+        background: artboard.background,
+        parent: symbolsPage,
+      },
     });
   });
 }
