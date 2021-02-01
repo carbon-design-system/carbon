@@ -25,7 +25,7 @@
     "access": "public"
   },
   "scripts": {
-    "build": "yarn clean && carbon-cli bundle src/index.js --name CarbonMotion && carbon-cli sassdoc \"scss/*.scss\"",
+    "build": "yarn clean && carbon-cli bundle src/index.js --name CarbonMotion",
     "clean": "rimraf es lib umd"
   },
   "devDependencies": {

@@ -49,13 +49,12 @@
     "access": "public"
   },
   "scripts": {
-    "build": "./tools/copy-vendor-styles.sh && gulp build && carbon-cli check \"scss/**/*.scss\" -i \"**/vendor/**\" && yarn docs",
+    "build": "./tools/copy-vendor-styles.sh && gulp build && carbon-cli check \"scss/**/*.scss\" -i \"**/vendor/**\"",
     "build-dev": "gulp build:dev",
     "build-dev-rollup": "gulp build:dev:deploy --rollup --use-custom-properties",
     "clean": "gulp clean",
     "ci-check": "sh ./tools/ci-check.sh",
     "dev": "gulp serve",
-    "docs": "carbon-cli sassdoc \"scss{/components,/globals/grid,/globals/scss/vendor/@carbon/elements}/**/*.scss\" -i \"scss/globals/scss/vendor/@carbon/elements/**/{_inlined,vendor}/**\"",
     "format:check": "prettier --check \"**/*.{css,js,md,scss}\"",
     "postinstall": "carbon-telemetry collect --install",
     "prebuild": "gulp clean",
