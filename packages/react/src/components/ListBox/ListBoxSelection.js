@@ -55,14 +55,39 @@ const ListBoxSelection = ({
     }
   };
   const description = selectionCount ? t('clear.all') : t('clear.selection');
-  return (
+  const tagClasses = cx(
+    `${prefix}--tag`,
+    `${prefix}--tag--filter`,
+    `${prefix}--tag--high-contrast`,
+    {
+      [`${prefix}--tag--disabled`]: disabled,
+    }
+  );
+  return selectionCount ? (
+    <div className={tagClasses}>
+      <span className={`${prefix}--tag__label`} title={selectionCount}>
+        {selectionCount}
+      </span>
+      <div
+        role="button"
+        tabIndex={disabled ? -1 : 0}
+        className={`${prefix}--tag__close-icon`}
+        onClick={handleOnClick}
+        onKeyDown={handleOnKeyDown}
+        disabled={disabled}
+        aria-label={t('clear.all')}
+        title={description}>
+        <Close16 />
+      </div>
+    </div>
+  ) : (
     <div
       role="button"
       className={className}
       tabIndex={disabled ? -1 : 0}
       onClick={handleOnClick}
       onKeyDown={handleOnKeyDown}
-      aria-label="Clear Selection"
+      aria-label={description}
       title={description}>
       {selectionCount}
       <Close16 />
