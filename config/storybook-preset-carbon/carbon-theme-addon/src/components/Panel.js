@@ -5,8 +5,6 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-'use strict';
-
 import React, { useCallback, useState } from 'react';
 import PropTypes from 'prop-types';
 import { Form } from '@storybook/components';
