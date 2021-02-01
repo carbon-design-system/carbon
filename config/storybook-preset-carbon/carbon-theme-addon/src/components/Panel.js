@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2018
+ * Copyright IBM Corp. 2021, 2021
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -36,10 +36,7 @@ const typeTokenDefaults = {
   'productive-heading-04': '28-36',
 };
 
-/**
- * Storybook add-on panel for Carbon theme switcher.
- */
-export const CarbonThemesPanel = ({ api, active }) => {
+export const CarbonThemePanel = ({ api, active }) => {
   const [currentTheme, setCurrentTheme] = useState('white');
   const handleChange = useCallback(
     (event) => {
@@ -77,29 +74,31 @@ export const CarbonThemesPanel = ({ api, active }) => {
   );
 };
 
-CarbonThemesPanel.propTypes = {
+CarbonThemePanel.propTypes = {
+  /**
+   * `true` if this Storybook add-on panel is active.
+   */
+  active: PropTypes.bool.isRequired,
+
   /**
    * The Storybook API object.
    */
   api: PropTypes.shape({
     getChannel: PropTypes.func,
   }).isRequired,
-
-  /**
-   * `true` if this Storybook add-on panel is active.
-   */
-  active: PropTypes.bool.isRequired,
 };
 
-/**
- * Storybook add-on panel for Carbon type token switcher.
- */
 export const CarbonTypePanel = ({ api, active }) => {
   const [currentTypeTokens, setCurrentTypeTokens] = useState(typeTokenDefaults);
   const handleTokenChange = useCallback(
     (event) => {
       const { name: tokenName, value: tokenValue } = event.target;
-      setCurrentTypeTokens({ ...currentTypeTokens, [tokenName]: tokenValue });
+      setCurrentTypeTokens((currentTypeTokens) => {
+        return {
+          ...currentTypeTokens,
+          [tokenName]: tokenValue,
+        };
+      });
       api.getChannel().emit(CARBON_TYPE_TOKEN, { tokenName, tokenValue });
     },
     [api]
@@ -132,14 +131,14 @@ export const CarbonTypePanel = ({ api, active }) => {
 
 CarbonTypePanel.propTypes = {
   /**
+   * `true` if this Storybook add-on panel is active.
+   */
+  active: PropTypes.bool.isRequired,
+
+  /**
    * The Storybook API object.
    */
   api: PropTypes.shape({
     getChannel: PropTypes.func,
   }).isRequired,
-
-  /**
-   * `true` if this Storybook add-on panel is active.
-   */
-  active: PropTypes.bool.isRequired,
 };
