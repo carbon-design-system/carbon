@@ -10,8 +10,10 @@ import { addDecorator, addParameters } from '@storybook/react';
 import addons from '@storybook/addons';
 import { themes } from '@storybook/theming';
 import { configureActions } from '@storybook/addon-actions';
-import { CARBON_TYPE_TOKEN } from './addon-carbon-theme/shared';
-import { withCarbonTheme } from '@carbon/storybook-addon-theme/react';
+import {
+  CARBON_CURRENT_THEME,
+  CARBON_TYPE_TOKEN,
+} from './addon-carbon-theme/shared';
 import Container from './Container';
 import PackageInfo from './../package.json';
 
@@ -101,7 +103,10 @@ configureActions({
 });
 
 addDecorator((story) => <Container story={story} />);
-addDecorator(withCarbonTheme);
+
+addons.getChannel().on(CARBON_CURRENT_THEME, (theme) => {
+  document.documentElement.setAttribute('storybook-carbon-theme', theme);
+});
 
 addons.getChannel().on(CARBON_TYPE_TOKEN, ({ tokenName, tokenValue }) => {
   const root = document.documentElement;
