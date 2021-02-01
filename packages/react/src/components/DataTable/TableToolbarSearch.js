@@ -32,6 +32,7 @@ const TableToolbarSearch = ({
   expanded: expandedProp,
   defaultExpanded,
   defaultValue,
+  disabled,
   onExpand,
   persistent,
   persistant,
@@ -71,6 +72,7 @@ const TableToolbarSearch = ({
     [searchContainerClass]: searchContainerClass,
     [`${prefix}--toolbar-action`]: true,
     [`${prefix}--toolbar-search-container-active`]: expanded,
+    [`${prefix}--toolbar-search-container-disabled`]: disabled,
     [`${prefix}--toolbar-search-container-expandable`]:
       !persistent || (!persistent && !persistant),
     [`${prefix}--toolbar-search-container-persistent`]:
@@ -78,14 +80,16 @@ const TableToolbarSearch = ({
   });
 
   const handleExpand = (event, value = !expanded) => {
-    if (!controlled && (!persistent || (!persistent && !persistant))) {
-      setExpandedState(value);
-      if (value && !expanded) {
-        setFocusTarget(searchRef);
+    if (!disabled) {
+      if (!controlled && (!persistent || (!persistent && !persistant))) {
+        setExpandedState(value);
+        if (value && !expanded) {
+          setFocusTarget(searchRef);
+        }
       }
-    }
-    if (onExpand) {
-      onExpand(event, value);
+      if (onExpand) {
+        onExpand(event, value);
+      }
     }
   };
 
@@ -105,7 +109,7 @@ const TableToolbarSearch = ({
   return (
     // eslint-disable-next-line jsx-a11y/no-static-element-interactions
     <div
-      tabIndex={searchExpanded ? '-1' : tabIndex}
+      tabIndex={searchExpanded || disabled ? '-1' : tabIndex}
       ref={searchRef}
       onKeyDown={(event) => onClick(event)}
       onClick={(event) => onClick(event)}
@@ -113,6 +117,7 @@ const TableToolbarSearch = ({
       onBlur={(event) => !value && handleExpand(event, false)}
       className={searchContainerClasses}>
       <Search
+        disabled={disabled}
         size="sm"
         tabIndex={searchExpanded ? tabIndex : '-1'}
         className={className}
@@ -146,6 +151,11 @@ TableToolbarSearch.propTypes = {
    * Provide an optional default value for the Search component
    */
   defaultValue: PropTypes.string,
+
+  /**
+   * Specifies if the search should be disabled
+   */
+  disabled: PropTypes.bool,
 
   /**
    * Specifies if the search should expand

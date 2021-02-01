@@ -7805,7 +7805,6 @@ $ui-03: if(
   - [progress-indicator [mixin]](#progress-indicator-mixin)
   - [slider [mixin]](#slider-mixin)
   - [tabs [mixin]](#tabs-mixin)
-  - [tags [mixin]](#tags-mixin)
   - [text-input [mixin]](#text-input-mixin)
   - [toolbar [mixin]](#toolbar-mixin)
 
@@ -8117,6 +8116,7 @@ $icon-01: if(
   - [radio-button [mixin]](#radio-button-mixin)
   - [search [mixin]](#search-mixin)
   - [tabs [mixin]](#tabs-mixin)
+  - [text-input [mixin]](#text-input-mixin)
   - [treeview [mixin]](#treeview-mixin)
 
 ### ✅icon-02 [variable]
@@ -9308,6 +9308,7 @@ $disabled-01: if(
   - [accordion [mixin]](#accordion-mixin)
   - [snippet [mixin]](#snippet-mixin)
   - [content-switcher [mixin]](#content-switcher-mixin)
+  - [data-table-v2-action [mixin]](#data-table-v2-action-mixin)
   - [date-picker [mixin]](#date-picker-mixin)
   - [listbox [mixin]](#listbox-mixin)
   - [number-input [mixin]](#number-input-mixin)
@@ -9499,6 +9500,7 @@ $skeleton-01: if(
 - **Type**: `{undefined}`
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
+  - [tags [mixin]](#tags-mixin)
 
 ### ✅skeleton-02 [variable]
 
@@ -16811,6 +16813,14 @@ Data table action styles
   }
 
   .#{$prefix}--toolbar-search-container-expandable
+    .#{$prefix}--search--disabled
+    .#{$prefix}--search-magnifier {
+    background: $disabled-01;
+    cursor: not-allowed;
+    transition: background-color none;
+  }
+
+  .#{$prefix}--toolbar-search-container-expandable
     .#{$prefix}--search
     .#{$prefix}--search-magnifier:focus {
     @include focus-outline('outline');
@@ -16820,6 +16830,18 @@ Data table action styles
     .#{$prefix}--search
     .#{$prefix}--search-magnifier:hover {
     background: $hover-field;
+  }
+
+  .#{$prefix}--toolbar-action.#{$prefix}--toolbar-search-container-disabled {
+    cursor: not-allowed;
+  }
+
+  .#{$prefix}--toolbar-search-container-expandable
+    .#{$prefix}--search--disabled
+    .#{$prefix}--search-magnifier:hover {
+    background: $disabled-01;
+    cursor: not-allowed;
+    transition: background-color none;
   }
 
   .#{$prefix}--toolbar-search-container-expandable
@@ -17305,6 +17327,10 @@ Data table action styles
     }
   }
 
+  .#{$prefix}--search--disabled .#{$prefix}--search-magnifier:hover {
+    background: transparent;
+  }
+
   //-------------------------------------------------
   // SMALL BATCH ACTIONS
   //-------------------------------------------------
@@ -17350,6 +17376,7 @@ Data table action styles
   - [layout-04 [variable]](#layout-04-variable)
   - [ui-01 [variable]](#ui-01-variable)
   - [spacing-05 [variable]](#spacing-05-variable)
+  - [disabled-01 [variable]](#disabled-01-variable)
   - [hover-field [variable]](#hover-field-variable)
   - [hover-ui [variable]](#hover-ui-variable)
   - [focus [variable]](#focus-variable)
@@ -26339,10 +26366,17 @@ Tag styles
   // Skeleton state
   .#{$prefix}--tag.#{$prefix}--skeleton {
     @include skeleton;
-    @include tag-theme($bg-color: $ui-03, $text-color: $text-01);
+    @include tag-theme($bg-color: $skeleton-01, $text-color: $text-01);
 
     width: rem(60px);
     overflow: hidden;
+
+    // Safari specific bug (#7672)
+    @media not all and (min-resolution: 0.001dpcm) {
+      @supports (-webkit-appearance: none) and (stroke-color: transparent) {
+        transform: translateZ(0);
+      }
+    }
   }
 }
 ```
@@ -26364,7 +26398,7 @@ Tag styles
   - [spacing-02 [variable]](#spacing-02-variable)
   - [focus [variable]](#focus-variable)
   - [inverse-focus-ui [variable]](#inverse-focus-ui-variable)
-  - [ui-03 [variable]](#ui-03-variable)
+  - [skeleton-01 [variable]](#skeleton-01-variable)
   - [text-01 [variable]](#text-01-variable)
 
 ## text-area
@@ -26568,17 +26602,25 @@ Text input styles
 
     .#{$prefix}--text-input--password__visibility,
     // TODO: remove selector above
-    .#{$prefix}--text-input--password__visibility__toggle.#{$prefix}--tooltip__trigger {
+     .#{$prefix}--btn.#{$prefix}--text-input--password__visibility__toggle.#{$prefix}--tooltip__trigger {
+      @include focus-outline('reset');
+
       position: absolute;
-      right: $carbon--spacing-05;
-      width: rem(16px);
-      height: rem(16px);
+      right: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: rem(40px);
+      height: rem(40px);
+      min-height: auto;
       padding: 0;
       background: none;
       border: 0;
       cursor: pointer;
+      transition: outline $duration--fast-01 motion(standard, productive);
 
       svg {
+        transition: fill $duration--fast-01 motion(standard, productive);
         fill: $icon-02;
 
         // Windows, Firefox HCM Fix
@@ -26588,6 +26630,16 @@ Text input styles
           fill: ButtonText;
         }
       }
+    }
+
+    .#{$prefix}--btn.#{$prefix}--text-input--password__visibility__toggle.#{$prefix}--tooltip__trigger:focus {
+      @include focus-outline('outline');
+    }
+
+    .#{$prefix}--btn.#{$prefix}--text-input--password__visibility__toggle.#{$prefix}--tooltip__trigger:hover,
+    .#{$prefix}--btn.#{$prefix}--text-input--password__visibility__toggle.#{$prefix}--tooltip__trigger:focus
+      svg {
+      fill: $icon-01;
     }
 
     .#{$prefix}--text-input--invalid {
@@ -26804,6 +26856,7 @@ Text input styles
   - [support-01 [variable]](#support-01-variable)
   - [support-03 [variable]](#support-03-variable)
   - [icon-02 [variable]](#icon-02-variable)
+  - [icon-01 [variable]](#icon-01-variable)
   - [disabled-02 [variable]](#disabled-02-variable)
   - [disabled-01 [variable]](#disabled-01-variable)
   - [ui-03 [variable]](#ui-03-variable)
