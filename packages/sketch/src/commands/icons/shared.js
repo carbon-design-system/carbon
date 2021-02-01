@@ -14,13 +14,13 @@ import { syncSymbol } from '../../tools/symbols';
 
 const metadata = require('../../../generated/icons/metadata.json');
 
-export function syncIconSymbols(
+export function syncIconSymbols({
   document,
   symbols,
   symbolsPage,
   sharedLayerStyles,
-  sizes = [32, 24, 20, 16]
-) {
+  sizes = [32, 24, 20, 16],
+}) {
   const sharedStyles = syncColorStyles(document, 'fill');
   const [sharedStyle] = sharedStyles.filter(
     ({ name }) => name === 'color / fill / black'
