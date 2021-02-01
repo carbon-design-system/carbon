@@ -27,82 +27,10 @@ export function syncSymbol(symbols, sharedLayerStyles, name, config) {
   }
 
   Object.keys(config).forEach((key) => {
-    if (key === 'layers') {
-      syncSymbolLayers(sharedLayerStyles, symbol, config);
-    } else {
-      symbol[key] = config[key];
-    }
+    symbol[key] = config[key];
   });
 
   return symbol;
-}
-
-/**
- * Sync the layers between the original sketch symbol master and a proposed
- * configuration for this symbol. We will try our best to update the layers for
- * the original symbol, but may have to de-opt and use the proposed layers if we
- * cannot safely merge the two.
- * @param {Array<SharedLayerStyle>} sharedLayerStyles
- * @param {SketchSymbol} original - the original sketch symbol master
- * @param {object} proposed - a proposed set of changes to the symbol
- * @returns {void}
- */
-function syncSymbolLayers(sharedLayerStyles, original, proposed) {
-  // We're going to update the `layers` value on `original` to what is found on
-  // `proposed`. If we can, we'll update the `original` layer in-place. In cases
-  // where we cannot, we'll use the proposed layers.
-  //
-  // The preference is to keep the original layer in-place, namely for symbol
-  // overrides that may exist in the document. If we remove the layer and update
-  // it with a proposed layer, then we lose that override information meaning
-  // that designers will have to go through and update their symbols again
-  // instead of it automatically being updated.
-  //
-  // If nothing is shared between original and proposed, then the layers in
-  // proposed will be used.
-  original.layers = proposed.layers.map((proposedLayer) => {
-    // We often name nested layers that can be overridden.
-    const { name } = proposedLayer;
-    const originalLayer = original.layers.find((layer) => {
-      return layer.name === name;
-    });
-
-    // If we can find a layer in `proposed` with a corresponding `original`
-    // layer, then we'll attempt to merge the two.
-    if (originalLayer) {
-      // We can't safely merge if the type or shapeType have diverged so we'll
-      // need to default to the changed layer
-      if (
-        originalLayer.type !== proposedLayer.type ||
-        originalLayer.shapeType !== proposedLayer.shapeType
-      ) {
-        return proposedLayer;
-      }
-
-      // Attempt to merge the two layers
-      merge(originalLayer, proposedLayer);
-
-      // If our original layer has a shared style, we'll update it to match
-      if (originalLayer.sharedStyleId) {
-        const sharedStyle = sharedLayerStyles.find((sharedStyle) => {
-          return originalLayer.sharedStyleId === sharedStyle.id;
-        });
-
-        if (sharedStyle) {
-          const opacity = originalLayer.style.opacity;
-          originalLayer.style.syncWithSharedStyle(sharedStyle);
-          // We'll want to keep things like opacity from being overridden by the
-          // shared style as we use it to hide layers in certain icons
-          originalLayer.style.opacity = opacity;
-        }
-      }
-
-      return originalLayer;
-    }
-
-    // By default, we'll defer to the proposed layer
-    return proposedLayer;
-  });
 }
 
 const defaultPropertyList = new Set(['frame', 'points', 'style']);
