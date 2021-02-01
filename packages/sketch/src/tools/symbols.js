@@ -32,23 +32,3 @@ export function syncSymbol(symbols, sharedLayerStyles, name, config) {
 
   return symbol;
 }
-
-const defaultPropertyList = new Set(['frame', 'points', 'style']);
-
-/**
- * Merge a given source layer with a target layer. Optionally specify a
- * propertyList that will specify what keys are safe to merge
- *
- * @param {object} source - the source layer that we are trying to update
- * in-place
- * @param {object} target - the target layer that contains the latest changes
- * @param {?Set} propertyList - specify which properties are safe to merge
- * @returns {void}
- */
-function merge(source, target, propertyList = defaultPropertyList) {
-  for (let key in target) {
-    if (propertyList.has(key)) {
-      source[key] = target[key];
-    }
-  }
-}
