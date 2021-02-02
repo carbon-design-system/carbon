@@ -20519,6 +20519,11 @@ Date picker styles
     width: rem(288px);
   }
 
+  .#{$prefix}--date-picker
+    .#{$prefix}--date-picker-input__wrapper--warn
+    ~ .#{$prefix}--form-requirement {
+    color: $text-01;
+  }
   .#{$prefix}--date-picker__input {
     @include reset;
     @include type-style('code-02');
@@ -20652,8 +20657,8 @@ Date picker styles
   - [rem [function]](#rem-function)
   - [prefix [variable]](#prefix-variable)
   - [field-02 [variable]](#field-02-variable)
-  - [carbon--spacing-05 [variable]](#carbon--spacing-05-variable)
   - [text-01 [variable]](#text-01-variable)
+  - [carbon--spacing-05 [variable]](#carbon--spacing-05-variable)
   - [field-01 [variable]](#field-01-variable)
   - [ui-04 [variable]](#ui-04-variable)
   - [disabled-02 [variable]](#disabled-02-variable)
