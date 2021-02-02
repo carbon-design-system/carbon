@@ -18,6 +18,15 @@
 /// @access private
 /// @group multi-select
 @mixin multiselect {
+  .#{$prefix}--multi-select .#{$prefix}--tag {
+    min-width: auto;
+    margin: 0 $carbon--spacing-03 0 0;
+  }
+
+  .#{$prefix}--multi-select--filterable .#{$prefix}--tag {
+    margin: 0 $carbon--spacing-03 0 $carbon--spacing-05;
+  }
+
   .#{$prefix}--multi-select .#{$prefix}--list-box__menu {
     min-width: auto;
   }
@@ -54,14 +63,6 @@
     .#{$prefix}--checkbox:checked
     ~ .#{$prefix}--checkbox-label-text {
     color: $text-01;
-  }
-
-  .#{$prefix}--multi-select--filterable .#{$prefix}--text-input {
-    padding-left: $spacing-03;
-  }
-
-  .#{$prefix}--multi-select--filterable:hover .#{$prefix}--text-input {
-    background-color: $hover-ui;
   }
 
   .#{$prefix}--multi-select--filterable.#{$prefix}--list-box--disabled:hover

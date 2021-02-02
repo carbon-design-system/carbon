@@ -6,6 +6,7 @@ categories:
       - crop
       - delete
       - do-not
+      - do-not--02
       - download--01
       - download--02
       - embed
@@ -39,13 +40,18 @@ categories:
       - apartment
       - building
       - elevator
+      - emergency--exit
       - escalator--down
       - escalator--up
       - fire--alarm
       - fire--extinguisher
       - id--badge
+      - no--smoking
       - office
+      - stairs
+      - stairs--down
       - stairs--plan--view
+      - stairs--up
   - name: Cities
     members:
       - amsterdam--canal
@@ -280,18 +286,26 @@ categories:
     members:
       - app--developer
       - application
+      - art--tools--01
       - birthday--cake
+      - content--design
       - cupcake
       - design-and-development--01
       - design-and-development--02
+      - design--leadership
+      - design--research
       - feedback--01
       - hills
       - idea
       - ideate
+      - organization
+      - overview
       - path
       - pattern
+      - user--experience-design
       - user--insights
       - user--interface
+      - visual--design
       - web--developer
       - wedding--cake
       - windows
@@ -307,8 +321,11 @@ categories:
       - mobile--chat
       - mobile--devices
       - mobile--phone
+      - rotate--device
       - swipe--left
       - swipe--right
+      - tablet--device
+      - tablet--device--check
       - text--equivalent
       - text--input
       - text--layout
@@ -338,6 +355,7 @@ categories:
       - desktop
       - electric
       - headphones
+      - microphone
       - printer
       - telephone
       - television
@@ -392,6 +410,7 @@ categories:
       - doctor
       - doctor-patient
       - dropper
+      - eyewash--station
       - first--aid
       - heart--health
       - hospital
@@ -456,6 +475,7 @@ categories:
       - satellite--dish
       - solar--field
       - solar--panel
+      - sprout
       - stack-limitation
       - steel
       - telecom
@@ -542,11 +562,13 @@ categories:
   - name: Networking
     members:
       - automation--decision
+      - bluepages
       - distribution--ledger
       - global--network
       - integration
       - inspect--data
       - global--partner
+      - mail--verse
       - network
       - network--services
       - networking--01
@@ -559,12 +581,15 @@ categories:
       - private--network--02
       - private--network--03
       - private--network--04
+      - professional--marketplace
       - reset--hybrid--cloud
       - reset--settings
+      - sales--connect
       - support--services
       - transactional--blockchain
       - transactional--trust
       - transform--02
+      - workday
   - name: People
     members:
       - advocate
