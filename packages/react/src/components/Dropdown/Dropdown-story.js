@@ -51,6 +51,11 @@ const directions = {
   'Top ': 'top',
 };
 
+const types = {
+  Default: '',
+  Inline: 'inline',
+};
+
 const props = () => ({
   id: text('Dropdown ID (id)', 'carbon-dropdown-example'),
   size: select('Field size (size)', sizes, undefined) || undefined,
@@ -67,6 +72,7 @@ const props = () => ({
     'Form validation UI content (invalidText)',
     'A valid value is required'
   ),
+  type: select('Type (type)', types, ''),
   warn: boolean('Show warning state (warn)', false),
   warnText: text(
     'Warning state text (warnText)',

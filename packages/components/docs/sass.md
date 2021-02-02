@@ -307,64 +307,118 @@
   - [✅icon-size-02 [variable]](#icon-size-02-variable)
 - [@carbon/type](#carbontype)
   - [✅carbon--type-classes [mixin]](#carbon--type-classes-mixin)
+  - [✅type-classes [mixin]](#type-classes-mixin)
   - [✅carbon--font-families [variable]](#carbon--font-families-variable)
+  - [✅font-families [variable]](#font-families-variable)
   - [✅carbon--font-family [function]](#carbon--font-family-function)
+  - [✅font-family [function]](#font-family-function)
   - [✅carbon--font-family [mixin]](#carbon--font-family-mixin)
+  - [✅font-family [mixin]](#font-family-mixin)
   - [✅carbon--font-weights [variable]](#carbon--font-weights-variable)
+  - [✅font-weights [variable]](#font-weights-variable)
   - [✅carbon--font-weight [function]](#carbon--font-weight-function)
+  - [✅font-weight [function]](#font-weight-function)
   - [✅carbon--font-weight [mixin]](#carbon--font-weight-mixin)
+  - [✅font-weight [mixin]](#font-weight-mixin)
   - [✅carbon--font-face-mono [mixin]](#carbon--font-face-mono-mixin)
   - [✅prefix [variable]](#prefix-variable)
+  - [✅prefix [variable]](#prefix-variable)
   - [✅carbon--type-reset [mixin]](#carbon--type-reset-mixin)
+  - [✅type-reset [mixin]](#type-reset-mixin)
   - [✅carbon--default-type [mixin]](#carbon--default-type-mixin)
+  - [✅default-type [mixin]](#default-type-mixin)
   - [✅carbon--font-face-sans-condensed [mixin]](#carbon--font-face-sans-condensed-mixin)
   - [✅carbon--font-face-sans [mixin]](#carbon--font-face-sans-mixin)
   - [✅carbon--get-type-size [function]](#carbon--get-type-size-function)
+  - [✅get-type-size [function]](#get-type-size-function)
   - [✅carbon--type-scale [variable]](#carbon--type-scale-variable)
+  - [✅type-scale [variable]](#type-scale-variable)
+  - [✅type-scale [function]](#type-scale-function)
   - [✅carbon--type-scale [function]](#carbon--type-scale-function)
+  - [✅type-scale [mixin]](#type-scale-mixin)
   - [✅carbon--type-scale [mixin]](#carbon--type-scale-mixin)
+  - [✅font-size [mixin]](#font-size-mixin)
   - [✅carbon--font-size [mixin]](#carbon--font-size-mixin)
   - [✅carbon--font-face-serif [mixin]](#carbon--font-face-serif-mixin)
   - [✅carbon--font-display [variable]](#carbon--font-display-variable)
   - [✅caption-01 [variable]](#caption-01-variable)
+  - [✅caption-01 [variable]](#caption-01-variable)
+  - [✅label-01 [variable]](#label-01-variable)
   - [✅label-01 [variable]](#label-01-variable)
   - [✅helper-text-01 [variable]](#helper-text-01-variable)
+  - [✅helper-text-01 [variable]](#helper-text-01-variable)
+  - [✅body-short-01 [variable]](#body-short-01-variable)
   - [✅body-short-01 [variable]](#body-short-01-variable)
   - [✅body-long-01 [variable]](#body-long-01-variable)
+  - [✅body-long-01 [variable]](#body-long-01-variable)
+  - [✅body-short-02 [variable]](#body-short-02-variable)
   - [✅body-short-02 [variable]](#body-short-02-variable)
   - [✅body-long-02 [variable]](#body-long-02-variable)
+  - [✅body-long-02 [variable]](#body-long-02-variable)
+  - [✅code-01 [variable]](#code-01-variable)
   - [✅code-01 [variable]](#code-01-variable)
   - [✅code-02 [variable]](#code-02-variable)
+  - [✅code-02 [variable]](#code-02-variable)
+  - [✅heading-01 [variable]](#heading-01-variable)
   - [✅heading-01 [variable]](#heading-01-variable)
   - [✅productive-heading-01 [variable]](#productive-heading-01-variable)
+  - [✅productive-heading-01 [variable]](#productive-heading-01-variable)
+  - [✅heading-02 [variable]](#heading-02-variable)
   - [✅heading-02 [variable]](#heading-02-variable)
   - [✅productive-heading-02 [variable]](#productive-heading-02-variable)
+  - [✅productive-heading-02 [variable]](#productive-heading-02-variable)
+  - [✅productive-heading-03 [variable]](#productive-heading-03-variable)
   - [✅productive-heading-03 [variable]](#productive-heading-03-variable)
   - [✅productive-heading-04 [variable]](#productive-heading-04-variable)
+  - [✅productive-heading-04 [variable]](#productive-heading-04-variable)
+  - [✅productive-heading-05 [variable]](#productive-heading-05-variable)
   - [✅productive-heading-05 [variable]](#productive-heading-05-variable)
   - [✅productive-heading-06 [variable]](#productive-heading-06-variable)
+  - [✅productive-heading-06 [variable]](#productive-heading-06-variable)
+  - [✅productive-heading-07 [variable]](#productive-heading-07-variable)
   - [✅productive-heading-07 [variable]](#productive-heading-07-variable)
   - [✅expressive-heading-01 [variable]](#expressive-heading-01-variable)
+  - [✅expressive-heading-01 [variable]](#expressive-heading-01-variable)
+  - [✅expressive-heading-02 [variable]](#expressive-heading-02-variable)
   - [✅expressive-heading-02 [variable]](#expressive-heading-02-variable)
   - [✅expressive-heading-03 [variable]](#expressive-heading-03-variable)
+  - [✅expressive-heading-03 [variable]](#expressive-heading-03-variable)
+  - [✅expressive-heading-04 [variable]](#expressive-heading-04-variable)
   - [✅expressive-heading-04 [variable]](#expressive-heading-04-variable)
   - [✅expressive-heading-05 [variable]](#expressive-heading-05-variable)
+  - [✅expressive-heading-05 [variable]](#expressive-heading-05-variable)
+  - [✅expressive-heading-06 [variable]](#expressive-heading-06-variable)
   - [✅expressive-heading-06 [variable]](#expressive-heading-06-variable)
   - [✅expressive-paragraph-01 [variable]](#expressive-paragraph-01-variable)
+  - [✅expressive-paragraph-01 [variable]](#expressive-paragraph-01-variable)
+  - [✅quotation-01 [variable]](#quotation-01-variable)
   - [✅quotation-01 [variable]](#quotation-01-variable)
   - [✅quotation-02 [variable]](#quotation-02-variable)
+  - [✅quotation-02 [variable]](#quotation-02-variable)
+  - [✅display-01 [variable]](#display-01-variable)
   - [✅display-01 [variable]](#display-01-variable)
   - [✅display-02 [variable]](#display-02-variable)
+  - [✅display-02 [variable]](#display-02-variable)
+  - [✅display-03 [variable]](#display-03-variable)
   - [✅display-03 [variable]](#display-03-variable)
   - [✅display-04 [variable]](#display-04-variable)
+  - [✅display-04 [variable]](#display-04-variable)
+  - [✅tokens [variable]](#tokens-variable)
   - [✅tokens [variable]](#tokens-variable)
   - [✅properties [mixin]](#properties-mixin)
+  - [✅properties [mixin]](#properties-mixin)
+  - [✅strip-unit [function]](#strip-unit-function)
   - [✅strip-unit [function]](#strip-unit-function)
   - [✅fluid-type [mixin]](#fluid-type-mixin)
+  - [✅fluid-type [mixin]](#fluid-type-mixin)
+  - [✅fluid-type-size [mixin]](#fluid-type-size-mixin)
   - [✅fluid-type-size [mixin]](#fluid-type-size-mixin)
   - [❌custom-property-prefix [variable]](#custom-property-prefix-variable)
+  - [❌custom-property-prefix [variable]](#custom-property-prefix-variable)
+  - [❌custom-properties [mixin]](#custom-properties-mixin)
   - [❌custom-properties [mixin]](#custom-properties-mixin)
   - [✅carbon--type-style [mixin]](#carbon--type-style-mixin)
+  - [✅type-style [mixin]](#type-style-mixin)
 - [accordion](#accordion)
   - [❌accordion [mixin]](#accordion-mixin)
 - [breadcrumb](#breadcrumb)
@@ -1880,6 +1934,7 @@ $prefix: 'bx';
   - [carbon--grid [mixin]](#carbon--grid-mixin)
   - [custom-property [mixin]](#custom-property-mixin)
   - [carbon--type-classes [mixin]](#carbon--type-classes-mixin)
+  - [type-classes [mixin]](#type-classes-mixin)
   - [accordion [mixin]](#accordion-mixin)
   - [breadcrumb [mixin]](#breadcrumb-mixin)
   - [button [mixin]](#button-mixin)
@@ -2238,6 +2293,8 @@ Get the value of the next breakpoint, or null for the last breakpoint
 
 - **Group**: [@carbon/layout](#carbonlayout)
 - **Returns**: `String`
+- **Used by**:
+  - [fluid-type-size [mixin]](#fluid-type-size-mixin)
 
 ### ✅carbon--breakpoint-prev [function]
 
@@ -4139,6 +4196,7 @@ $carbon--spacing-03: 0.5rem;
   - [file-uploader [mixin]](#file-uploader-mixin)
   - [form [mixin]](#form-mixin)
   - [listbox [mixin]](#listbox-mixin)
+  - [multiselect [mixin]](#multiselect-mixin)
   - [inline-notifications [mixin]](#inline-notifications-mixin)
   - [toast-notifications [mixin]](#toast-notifications-mixin)
   - [progress-indicator [mixin]](#progress-indicator-mixin)
@@ -4173,7 +4231,6 @@ $spacing-03: 0.5rem;
   - [data-table-core [mixin]](#data-table-core-mixin)
   - [data-table-sort [mixin]](#data-table-sort-mixin)
   - [modal [mixin]](#modal-mixin)
-  - [multiselect [mixin]](#multiselect-mixin)
   - [select [mixin]](#select-mixin)
   - [tabs [mixin]](#tabs-mixin)
   - [tooltip [mixin]](#tooltip-mixin)
@@ -4244,6 +4301,7 @@ $carbon--spacing-05: 1rem;
   - [form [mixin]](#form-mixin)
   - [lists [mixin]](#lists-mixin)
   - [listbox [mixin]](#listbox-mixin)
+  - [multiselect [mixin]](#multiselect-mixin)
   - [inline-notifications [mixin]](#inline-notifications-mixin)
   - [toast-notifications [mixin]](#toast-notifications-mixin)
   - [number-input [mixin]](#number-input-mixin)
@@ -7541,6 +7599,7 @@ $carbon--theme: (
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
   - [carbon--default-type [mixin]](#carbon--default-type-mixin)
+  - [default-type [mixin]](#default-type-mixin)
 
 ### ✅interactive-01 [variable]
 
@@ -8143,7 +8202,6 @@ $icon-02: if(
 - **Type**: `{undefined}`
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
-  - [listbox [mixin]](#listbox-mixin)
   - [overflow-menu [mixin]](#overflow-menu-mixin)
   - [search [mixin]](#search-mixin)
   - [text-input [mixin]](#text-input-mixin)
@@ -8262,6 +8320,7 @@ $field-01: if(
   - [carbon--theme [mixin]](#carbon--theme-mixin)
   - [snippet [mixin]](#snippet-mixin)
   - [bx--snippet [mixin]](#bx--snippet-mixin)
+  - [combo-box [mixin]](#combo-box-mixin)
   - [date-picker [mixin]](#date-picker-mixin)
   - [dropdown [mixin]](#dropdown-mixin)
   - [file-uploader [mixin]](#file-uploader-mixin)
@@ -8300,6 +8359,7 @@ $field-02: if(
 - **Used by**:
   - [carbon--theme [mixin]](#carbon--theme-mixin)
   - [snippet [mixin]](#snippet-mixin)
+  - [combo-box [mixin]](#combo-box-mixin)
   - [date-picker [mixin]](#date-picker-mixin)
   - [dropdown [mixin]](#dropdown-mixin)
   - [listbox [mixin]](#listbox-mixin)
@@ -8979,7 +9039,6 @@ $hover-ui: if(
   - [dropdown [mixin]](#dropdown-mixin)
   - [listbox [mixin]](#listbox-mixin)
   - [modal [mixin]](#modal-mixin)
-  - [multiselect [mixin]](#multiselect-mixin)
   - [number-input [mixin]](#number-input-mixin)
   - [overflow-menu [mixin]](#overflow-menu-mixin)
   - [pagination [mixin]](#pagination-mixin)
@@ -9014,6 +9073,8 @@ $hover-light-ui: if(
   - [carbon--theme [mixin]](#carbon--theme-mixin)
   - [snippet [mixin]](#snippet-mixin)
   - [content-switcher [mixin]](#content-switcher-mixin)
+  - [dropdown [mixin]](#dropdown-mixin)
+  - [listbox [mixin]](#listbox-mixin)
 
 ### ✅hover-selected-ui [variable]
 
@@ -9308,6 +9369,7 @@ $disabled-01: if(
   - [accordion [mixin]](#accordion-mixin)
   - [snippet [mixin]](#snippet-mixin)
   - [content-switcher [mixin]](#content-switcher-mixin)
+  - [data-table-v2-action [mixin]](#data-table-v2-action-mixin)
   - [date-picker [mixin]](#date-picker-mixin)
   - [listbox [mixin]](#listbox-mixin)
   - [number-input [mixin]](#number-input-mixin)
@@ -11418,6 +11480,53 @@ Create type classes for font families, weights, styles
   - [carbon--font-weights [variable]](#carbon--font-weights-variable)
   - [tokens [variable]](#tokens-variable)
 
+### ✅type-classes [mixin]
+
+Create type classes for font families, weights, styles
+
+<details>
+<summary>Source code</summary>
+
+```scss
+@mixin type-classes() {
+  // Font families
+  @each $name, $value in $font-families {
+    .#{$prefix}--type-#{$name} {
+      font-family: $value;
+    }
+  }
+
+  // Font weights
+  @each $name, $value in $font-weights {
+    .#{$prefix}--type-#{$name} {
+      font-weight: $value;
+    }
+  }
+
+  // Font styles
+  .#{$prefix}--type-italic {
+    font-style: italic;
+  }
+
+  // Type styles
+  @each $name, $value in $tokens {
+    .#{$prefix}--type-#{$name} {
+      @include type-style($name, map.has-key($value, breakpoints));
+    }
+  }
+}
+```
+
+</details>
+
+- **Group**: [@carbon/type](#carbontype)
+- **Requires**:
+  - [type-style [mixin]](#type-style-mixin)
+  - [font-families [variable]](#font-families-variable)
+  - [prefix [variable]](#prefix-variable)
+  - [font-weights [variable]](#font-weights-variable)
+  - [tokens [variable]](#tokens-variable)
+
 ### ✅carbon--font-families [variable]
 
 Font family fallbacks for: IBM Plex Mono, IBM Plex Sans, IBM Plex Sans
@@ -11443,6 +11552,32 @@ $carbon--font-families: (
 - **Used by**:
   - [carbon--type-classes [mixin]](#carbon--type-classes-mixin)
   - [carbon--font-family [function]](#carbon--font-family-function)
+
+### ✅font-families [variable]
+
+Font family fallbacks for: IBM Plex Mono, IBM Plex Sans, IBM Plex Sans
+Condensed, IBM Plex Sans Hebrew, and IBM Plex Serif
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$font-families: (
+  'mono': unquote("'IBM Plex Mono', 'Menlo', 'DejaVu Sans Mono', 'Bitstream Vera Sans Mono', Courier, monospace"),
+  'sans': unquote("'IBM Plex Sans', 'Helvetica Neue', Arial, sans-serif"),
+  'sans-condensed': unquote("'IBM Plex Sans Condensed', 'Helvetica Neue', Arial, sans-serif"),
+  'sans-hebrew': unquote("'IBM Plex Sans Hebrew', 'Helvetica Hebrew', 'Arial Hebrew', sans-serif"),
+  'serif': unquote("'IBM Plex Serif', 'Georgia', Times, serif"),
+);
+```
+
+</details>
+
+- **Group**: [@carbon/type](#carbontype)
+- **Type**: `Map`
+- **Used by**:
+  - [type-classes [mixin]](#type-classes-mixin)
+  - [font-family [function]](#font-family-function)
 
 ### ✅carbon--font-family [function]
 
@@ -11474,6 +11609,34 @@ Get the font-family for an IBM Plex font
   - [form [mixin]](#form-mixin)
   - [number-input [mixin]](#number-input-mixin)
 
+### ✅font-family [function]
+
+Get the font-family for an IBM Plex font
+
+<details>
+<summary>Source code</summary>
+
+```scss
+@function font-family($name) {
+  @return map-get($font-families, $name);
+}
+```
+
+</details>
+
+- **Parameters**:
+
+| Name    | Description | Type     | Default value |
+| ------- | ----------- | -------- | ------------- |
+| `$name` | —           | `String` | —             |
+
+- **Group**: [@carbon/type](#carbontype)
+- **Returns**: `String`
+- **Requires**:
+  - [font-families [variable]](#font-families-variable)
+- **Used by**:
+  - [font-family [mixin]](#font-family-mixin)
+
 ### ✅carbon--font-family [mixin]
 
 Include the `font-family` definition for the given name in your selector
@@ -11501,6 +11664,31 @@ Include the `font-family` definition for the given name in your selector
 - **Used by**:
   - [snippet [mixin]](#snippet-mixin)
 
+### ✅font-family [mixin]
+
+Include the `font-family` definition for the given name in your selector
+
+<details>
+<summary>Source code</summary>
+
+```scss
+@mixin font-family($name) {
+  font-family: font-family($name);
+}
+```
+
+</details>
+
+- **Parameters**:
+
+| Name    | Description | Type     | Default value |
+| ------- | ----------- | -------- | ------------- |
+| `$name` | —           | `String` | —             |
+
+- **Group**: [@carbon/type](#carbontype)
+- **Requires**:
+  - [font-family [function]](#font-family-function)
+
 ### ✅carbon--font-weights [variable]
 
 Suggested font weights to be used in product
@@ -11523,6 +11711,29 @@ $carbon--font-weights: (
 - **Used by**:
   - [carbon--type-classes [mixin]](#carbon--type-classes-mixin)
   - [carbon--font-weight [function]](#carbon--font-weight-function)
+
+### ✅font-weights [variable]
+
+Suggested font weights to be used in product
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$font-weights: (
+  'light': 300,
+  'regular': 400,
+  'semibold': 600,
+);
+```
+
+</details>
+
+- **Group**: [@carbon/type](#carbontype)
+- **Type**: `Map`
+- **Used by**:
+  - [type-classes [mixin]](#type-classes-mixin)
+  - [font-weight [function]](#font-weight-function)
 
 ### ✅carbon--font-weight [function]
 
@@ -11552,6 +11763,34 @@ Retrieve the font-weight value for a given name
 - **Used by**:
   - [carbon--font-weight [mixin]](#carbon--font-weight-mixin)
 
+### ✅font-weight [function]
+
+Retrieve the font-weight value for a given name
+
+<details>
+<summary>Source code</summary>
+
+```scss
+@function font-weight($weight) {
+  @return map-get($font-weights, $weight);
+}
+```
+
+</details>
+
+- **Parameters**:
+
+| Name      | Description | Type     | Default value |
+| --------- | ----------- | -------- | ------------- |
+| `$weight` | —           | `String` | —             |
+
+- **Group**: [@carbon/type](#carbontype)
+- **Returns**: `Number`
+- **Requires**:
+  - [font-weights [variable]](#font-weights-variable)
+- **Used by**:
+  - [font-weight [mixin]](#font-weight-mixin)
+
 ### ✅carbon--font-weight [mixin]
 
 Set the `font-weight` property with the value for a given name
@@ -11578,6 +11817,33 @@ Set the `font-weight` property with the value for a given name
   - [carbon--font-weight [function]](#carbon--font-weight-function)
 - **Used by**:
   - [carbon--type-reset [mixin]](#carbon--type-reset-mixin)
+
+### ✅font-weight [mixin]
+
+Set the `font-weight` property with the value for a given name
+
+<details>
+<summary>Source code</summary>
+
+```scss
+@mixin font-weight($weight) {
+  font-weight: font-weight($weight);
+}
+```
+
+</details>
+
+- **Parameters**:
+
+| Name      | Description | Type     | Default value |
+| --------- | ----------- | -------- | ------------- |
+| `$weight` | —           | `String` | —             |
+
+- **Group**: [@carbon/type](#carbontype)
+- **Requires**:
+  - [font-weight [function]](#font-weight-function)
+- **Used by**:
+  - [type-reset [mixin]](#type-reset-mixin)
 
 ### ✅carbon--font-face-mono [mixin]
 
@@ -12033,6 +12299,20 @@ $prefix: 'bx';
 - **Group**: [@carbon/type](#carbontype)
 - **Type**: `String`
 
+### ✅prefix [variable]
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$prefix: 'bx';
+```
+
+</details>
+
+- **Group**: [@carbon/type](#carbontype)
+- **Type**: `String`
+
 ### ✅carbon--type-reset [mixin]
 
 Include a type reset for a given body and mono font family
@@ -12080,6 +12360,54 @@ Include a type reset for a given body and mono font family
 - **Group**: [@carbon/type](#carbontype)
 - **Requires**:
   - [carbon--font-weight [mixin]](#carbon--font-weight-mixin)
+
+### ✅type-reset [mixin]
+
+Include a type reset for a given body and mono font family
+
+<details>
+<summary>Source code</summary>
+
+```scss
+@mixin type-reset(
+  $body-font-family: font-family('sans'),
+  $mono-font-family: font-family('mono')
+) {
+  html {
+    font-size: 100%;
+  }
+
+  body {
+    @include font-weight('regular');
+
+    font-family: $body-font-family;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  code {
+    font-family: $mono-font-family;
+  }
+
+  strong {
+    @include font-weight('semibold');
+  }
+}
+```
+
+</details>
+
+- **Parameters**:
+
+| Name                | Description                                                                         | Type     | Default value         |
+| ------------------- | ----------------------------------------------------------------------------------- | -------- | --------------------- |
+| `$body-font-family` | The font family used on the `<body>` element                                        | `String` | `font-family('sans')` |
+| `$mono-font-family` | The font family used on elements that require mono fonts, like the `<code>` element | `String` | `font-family('mono')` |
+
+- **Group**: [@carbon/type](#carbontype)
+- **Requires**:
+  - [font-weight [mixin]](#font-weight-mixin)
 
 ### ✅carbon--default-type [mixin]
 
@@ -12139,6 +12467,66 @@ Include default type styles
 - **Group**: [@carbon/type](#carbontype)
 - **Requires**:
   - [carbon--type-style [mixin]](#carbon--type-style-mixin)
+  - [carbon--theme [variable]](#carbon--theme-variable)
+
+### ✅default-type [mixin]
+
+Include default type styles
+
+<details>
+<summary>Source code</summary>
+
+```scss
+@mixin default-type() {
+  h1 {
+    @include type-style('productive-heading-06');
+  }
+
+  h2 {
+    @include type-style('productive-heading-05');
+  }
+
+  h3 {
+    @include type-style('productive-heading-04');
+  }
+
+  h4 {
+    @include type-style('productive-heading-03');
+  }
+
+  h5 {
+    @include type-style('productive-heading-02');
+  }
+
+  h6 {
+    @include type-style('productive-heading-01');
+  }
+
+  p {
+    @include type-style('body-long-02');
+  }
+
+  a {
+    @if meta.global-variable-exists('carbon--theme') and
+      map.has-key($carbon--theme, 'link-01')
+    {
+      color: map.get($carbon--theme, 'link-01');
+    } @else {
+      color: #0062fe;
+    }
+  }
+
+  em {
+    font-style: italic;
+  }
+}
+```
+
+</details>
+
+- **Group**: [@carbon/type](#carbontype)
+- **Requires**:
+  - [type-style [mixin]](#type-style-mixin)
   - [carbon--theme [variable]](#carbon--theme-variable)
 
 ### ✅carbon--font-face-sans-condensed [mixin]
@@ -12997,6 +13385,34 @@ Compute the type size for the given type scale step
 - **Group**: [@carbon/type](#carbontype)
 - **Returns**: `Number` In px
 
+### ✅get-type-size [function]
+
+Compute the type size for the given type scale step
+
+<details>
+<summary>Source code</summary>
+
+```scss
+@function get-type-size($step) {
+  @if $step == 1 {
+    @return 12px;
+  }
+  // Yn = Yn-1 + {INT[(n-2)/4] + 1} * 2
+  @return get-type-size($step - 1) + (floor(($step - 2) / 4) + 1) * 2;
+}
+```
+
+</details>
+
+- **Parameters**:
+
+| Name    | Description | Type     | Default value |
+| ------- | ----------- | -------- | ------------- |
+| `$step` | —           | `Number` | —             |
+
+- **Group**: [@carbon/type](#carbontype)
+- **Returns**: `Number` In px
+
 ### ✅carbon--type-scale [variable]
 
 Type scale follows a custom formula for determining each step size and supports
@@ -13017,6 +13433,56 @@ $carbon--type-scale: ();
   - `carbon--font-size`
 - **Used by**:
   - [carbon--type-scale [function]](#carbon--type-scale-function)
+
+### ✅type-scale [variable]
+
+Type scale follows a custom formula for determining each step size and supports
+sizes from 12px to 92px
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$type-scale: ();
+```
+
+</details>
+
+- **Group**: [@carbon/type](#carbontype)
+- **Type**: `Map`
+- **Aliased**:
+  - `font-size`
+- **Used by**:
+  - [type-scale [function]](#type-scale-function)
+
+### ✅type-scale [function]
+
+Get the value of a specific step in the type scale
+
+<details>
+<summary>Source code</summary>
+
+```scss
+@function type-scale($step) {
+  @return nth($type-scale, $step);
+}
+```
+
+</details>
+
+- **Parameters**:
+
+| Name    | Description | Type     | Default value |
+| ------- | ----------- | -------- | ------------- |
+| `$step` | —           | `Number` | —             |
+
+- **Group**: [@carbon/type](#carbontype)
+- **Returns**: `Number` In rem
+- **Requires**:
+  - [type-scale [variable]](#type-scale-variable)
+- **Used by**:
+  - [type-scale [mixin]](#type-scale-mixin)
+  - [font-size [mixin]](#font-size-mixin)
 
 ### ✅carbon--type-scale [function]
 
@@ -13047,6 +13513,31 @@ Get the value of a specific step in the type scale
   - [carbon--type-scale [mixin]](#carbon--type-scale-mixin)
   - [carbon--font-size [mixin]](#carbon--font-size-mixin)
 
+### ✅type-scale [mixin]
+
+Set the font-size value of a selector with the value at the given `$step`
+
+<details>
+<summary>Source code</summary>
+
+```scss
+@mixin type-scale($step) {
+  font-size: type-scale($step);
+}
+```
+
+</details>
+
+- **Parameters**:
+
+| Name    | Description | Type     | Default value |
+| ------- | ----------- | -------- | ------------- |
+| `$step` | —           | `Number` | —             |
+
+- **Group**: [@carbon/type](#carbontype)
+- **Requires**:
+  - [type-scale [function]](#type-scale-function)
+
 ### ✅carbon--type-scale [mixin]
 
 Set the font-size value of a selector with the value at the given `$step`
@@ -13071,6 +13562,32 @@ Set the font-size value of a selector with the value at the given `$step`
 - **Group**: [@carbon/type](#carbontype)
 - **Requires**:
   - [carbon--type-scale [function]](#carbon--type-scale-function)
+
+### ✅font-size [mixin]
+
+Alias of `type-scale` mixin.
+
+<details>
+<summary>Source code</summary>
+
+```scss
+@mixin font-size($step) {
+  font-size: type-scale($step);
+}
+```
+
+</details>
+
+- **Parameters**:
+
+| Name    | Description | Type     | Default value |
+| ------- | ----------- | -------- | ------------- |
+| `$step` | —           | `Number` | —             |
+
+- **Group**: [@carbon/type](#carbontype)
+- **Alias**: `type-scale`
+- **Requires**:
+  - [type-scale [function]](#type-scale-function)
 
 ### ✅carbon--font-size [mixin]
 
@@ -13590,6 +14107,25 @@ $caption-01: (
 - **Group**: [@carbon/type](#carbontype)
 - **Type**: `Map`
 
+### ✅caption-01 [variable]
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$caption-01: (
+  font-size: scale.type-scale(1),
+  font-weight: font-family.font-weight('regular'),
+  line-height: 1.34,
+  letter-spacing: 0.32px,
+);
+```
+
+</details>
+
+- **Group**: [@carbon/type](#carbontype)
+- **Type**: `Map`
+
 ### ✅label-01 [variable]
 
 <details>
@@ -13609,6 +14145,25 @@ $label-01: (
 - **Group**: [@carbon/type](#carbontype)
 - **Type**: `Map`
 
+### ✅label-01 [variable]
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$label-01: (
+  font-size: scale.type-scale(1),
+  font-weight: font-family.font-weight('regular'),
+  line-height: 1.34,
+  letter-spacing: 0.32px,
+);
+```
+
+</details>
+
+- **Group**: [@carbon/type](#carbontype)
+- **Type**: `Map`
+
 ### ✅helper-text-01 [variable]
 
 <details>
@@ -13617,6 +14172,24 @@ $label-01: (
 ```scss
 $helper-text-01: (
   font-size: carbon--type-scale(1),
+  line-height: 1.34,
+  letter-spacing: 0.32px,
+);
+```
+
+</details>
+
+- **Group**: [@carbon/type](#carbontype)
+- **Type**: `Map`
+
+### ✅helper-text-01 [variable]
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$helper-text-01: (
+  font-size: scale.type-scale(1),
   line-height: 1.34,
   letter-spacing: 0.32px,
 );
@@ -13646,6 +14219,25 @@ $body-short-01: (
 - **Group**: [@carbon/type](#carbontype)
 - **Type**: `Map`
 
+### ✅body-short-01 [variable]
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$body-short-01: (
+  font-size: scale.type-scale(2),
+  font-weight: font-family.font-weight('regular'),
+  line-height: 1.29,
+  letter-spacing: 0.16px,
+);
+```
+
+</details>
+
+- **Group**: [@carbon/type](#carbontype)
+- **Type**: `Map`
+
 ### ✅body-long-01 [variable]
 
 <details>
@@ -13655,6 +14247,25 @@ $body-short-01: (
 $body-long-01: (
   font-size: carbon--type-scale(2),
   font-weight: carbon--font-weight('regular'),
+  line-height: 1.43,
+  letter-spacing: 0.16px,
+);
+```
+
+</details>
+
+- **Group**: [@carbon/type](#carbontype)
+- **Type**: `Map`
+
+### ✅body-long-01 [variable]
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$body-long-01: (
+  font-size: scale.type-scale(2),
+  font-weight: font-family.font-weight('regular'),
   line-height: 1.43,
   letter-spacing: 0.16px,
 );
@@ -13684,6 +14295,25 @@ $body-short-02: (
 - **Group**: [@carbon/type](#carbontype)
 - **Type**: `Map`
 
+### ✅body-short-02 [variable]
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$body-short-02: (
+  font-size: scale.type-scale(3),
+  font-weight: font-family.font-weight('regular'),
+  line-height: 1.375,
+  letter-spacing: 0,
+);
+```
+
+</details>
+
+- **Group**: [@carbon/type](#carbontype)
+- **Type**: `Map`
+
 ### ✅body-long-02 [variable]
 
 <details>
@@ -13693,6 +14323,25 @@ $body-short-02: (
 $body-long-02: (
   font-size: carbon--type-scale(3),
   font-weight: carbon--font-weight('regular'),
+  line-height: 1.5,
+  letter-spacing: 0,
+);
+```
+
+</details>
+
+- **Group**: [@carbon/type](#carbontype)
+- **Type**: `Map`
+
+### ✅body-long-02 [variable]
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$body-long-02: (
+  font-size: scale.type-scale(3),
+  font-weight: font-family.font-weight('regular'),
   line-height: 1.5,
   letter-spacing: 0,
 );
@@ -13723,6 +14372,26 @@ $code-01: (
 - **Group**: [@carbon/type](#carbontype)
 - **Type**: `Map`
 
+### ✅code-01 [variable]
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$code-01: (
+  font-family: font-family.font-family('mono'),
+  font-size: scale.type-scale(1),
+  font-weight: font-family.font-weight('regular'),
+  line-height: 1.34,
+  letter-spacing: 0.32px,
+);
+```
+
+</details>
+
+- **Group**: [@carbon/type](#carbontype)
+- **Type**: `Map`
+
 ### ✅code-02 [variable]
 
 <details>
@@ -13733,6 +14402,26 @@ $code-02: (
   font-family: carbon--font-family('mono'),
   font-size: carbon--type-scale(2),
   font-weight: carbon--font-weight('regular'),
+  line-height: 1.43,
+  letter-spacing: 0.32px,
+);
+```
+
+</details>
+
+- **Group**: [@carbon/type](#carbontype)
+- **Type**: `Map`
+
+### ✅code-02 [variable]
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$code-02: (
+  font-family: font-family.font-family('mono'),
+  font-size: scale.type-scale(2),
+  font-weight: font-family.font-weight('regular'),
   line-height: 1.43,
   letter-spacing: 0.32px,
 );
@@ -13755,6 +14444,39 @@ $heading-01: (
   line-height: 1.29,
   letter-spacing: 0.16px,
 );
+```
+
+</details>
+
+- **Group**: [@carbon/type](#carbontype)
+- **Type**: `Map`
+
+### ✅heading-01 [variable]
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$heading-01: (
+  font-size: scale.type-scale(2),
+  font-weight: font-family.font-weight('semibold'),
+  line-height: 1.29,
+  letter-spacing: 0.16px,
+);
+```
+
+</details>
+
+- **Group**: [@carbon/type](#carbontype)
+- **Type**: `Map`
+
+### ✅productive-heading-01 [variable]
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$productive-heading-01: $heading-01;
 ```
 
 </details>
@@ -13795,6 +14517,39 @@ $heading-02: (
 - **Group**: [@carbon/type](#carbontype)
 - **Type**: `Map`
 
+### ✅heading-02 [variable]
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$heading-02: (
+  font-size: scale.type-scale(3),
+  font-weight: font-family.font-weight('semibold'),
+  line-height: 1.375,
+  letter-spacing: 0,
+);
+```
+
+</details>
+
+- **Group**: [@carbon/type](#carbontype)
+- **Type**: `Map`
+
+### ✅productive-heading-02 [variable]
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$productive-heading-02: $heading-02;
+```
+
+</details>
+
+- **Group**: [@carbon/type](#carbontype)
+- **Type**: `Map`
+
 ### ✅productive-heading-02 [variable]
 
 <details>
@@ -13828,6 +14583,25 @@ $productive-heading-03: (
 - **Group**: [@carbon/type](#carbontype)
 - **Type**: `Map`
 
+### ✅productive-heading-03 [variable]
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$productive-heading-03: (
+  font-size: scale.type-scale(5),
+  font-weight: font-family.font-weight('regular'),
+  line-height: 1.4,
+  letter-spacing: 0,
+);
+```
+
+</details>
+
+- **Group**: [@carbon/type](#carbontype)
+- **Type**: `Map`
+
 ### ✅productive-heading-04 [variable]
 
 <details>
@@ -13847,6 +14621,25 @@ $productive-heading-04: (
 - **Group**: [@carbon/type](#carbontype)
 - **Type**: `Map`
 
+### ✅productive-heading-04 [variable]
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$productive-heading-04: (
+  font-size: scale.type-scale(7),
+  font-weight: font-family.font-weight('regular'),
+  line-height: 1.29,
+  letter-spacing: 0,
+);
+```
+
+</details>
+
+- **Group**: [@carbon/type](#carbontype)
+- **Type**: `Map`
+
 ### ✅productive-heading-05 [variable]
 
 <details>
@@ -13856,6 +14649,25 @@ $productive-heading-04: (
 $productive-heading-05: (
   font-size: carbon--type-scale(8),
   font-weight: carbon--font-weight('regular'),
+  line-height: 1.25,
+  letter-spacing: 0,
+);
+```
+
+</details>
+
+- **Group**: [@carbon/type](#carbontype)
+- **Type**: `Map`
+
+### ✅productive-heading-05 [variable]
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$productive-heading-05: (
+  font-size: scale.type-scale(8),
+  font-weight: font-family.font-weight('regular'),
   line-height: 1.25,
   letter-spacing: 0,
 );
@@ -13886,6 +14698,26 @@ $productive-heading-06: (
 - **Group**: [@carbon/type](#carbontype)
 - **Type**: `Map`
 
+### ✅productive-heading-06 [variable]
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$productive-heading-06: (
+  font-size: scale.type-scale(8),
+  font-weight: font-family.font-weight('light'),
+  // Extra digit needed for precision in Chrome
+  line-height: 1.199,
+  letter-spacing: 0,
+);
+```
+
+</details>
+
+- **Group**: [@carbon/type](#carbontype)
+- **Type**: `Map`
+
 ### ✅productive-heading-07 [variable]
 
 <details>
@@ -13895,6 +14727,25 @@ $productive-heading-06: (
 $productive-heading-07: (
   font-size: carbon--type-scale(10),
   font-weight: carbon--font-weight('light'),
+  line-height: 1.19,
+  letter-spacing: 0,
+);
+```
+
+</details>
+
+- **Group**: [@carbon/type](#carbontype)
+- **Type**: `Map`
+
+### ✅productive-heading-07 [variable]
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$productive-heading-07: (
+  font-size: scale.type-scale(10),
+  font-weight: font-family.font-weight('light'),
   line-height: 1.19,
   letter-spacing: 0,
 );
@@ -13924,6 +14775,25 @@ $expressive-heading-01: map-merge(
 - **Group**: [@carbon/type](#carbontype)
 - **Type**: `Map`
 
+### ✅expressive-heading-01 [variable]
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$expressive-heading-01: map.merge(
+  $heading-01,
+  (
+    line-height: 1.25,
+  )
+);
+```
+
+</details>
+
+- **Group**: [@carbon/type](#carbontype)
+- **Type**: `Map`
+
 ### ✅expressive-heading-02 [variable]
 
 <details>
@@ -13931,6 +14801,25 @@ $expressive-heading-01: map-merge(
 
 ```scss
 $expressive-heading-02: map-merge(
+  $heading-02,
+  (
+    line-height: 1.5,
+  )
+);
+```
+
+</details>
+
+- **Group**: [@carbon/type](#carbontype)
+- **Type**: `Map`
+
+### ✅expressive-heading-02 [variable]
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$expressive-heading-02: map.merge(
   $heading-02,
   (
     line-height: 1.5,
@@ -13972,6 +14861,35 @@ $expressive-heading-03: (
 - **Group**: [@carbon/type](#carbontype)
 - **Type**: `Map`
 
+### ✅expressive-heading-03 [variable]
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$expressive-heading-03: (
+  font-size: scale.type-scale(5),
+  font-weight: font-family.font-weight('regular'),
+  line-height: 1.4,
+  letter-spacing: 0,
+  breakpoints: (
+    xlg: (
+      font-size: scale.type-scale(5),
+      line-height: 1.25,
+    ),
+    max: (
+      font-size: scale.type-scale(6),
+      line-height: 1.334,
+    ),
+  ),
+);
+```
+
+</details>
+
+- **Group**: [@carbon/type](#carbontype)
+- **Type**: `Map`
+
 ### ✅expressive-heading-04 [variable]
 
 <details>
@@ -13990,6 +14908,34 @@ $expressive-heading-04: (
     ),
     max: (
       font-size: carbon--type-scale(8),
+    ),
+  ),
+);
+```
+
+</details>
+
+- **Group**: [@carbon/type](#carbontype)
+- **Type**: `Map`
+
+### ✅expressive-heading-04 [variable]
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$expressive-heading-04: (
+  font-size: scale.type-scale(7),
+  font-weight: font-family.font-weight('regular'),
+  line-height: 1.29,
+  letter-spacing: 0,
+  breakpoints: (
+    xlg: (
+      font-size: scale.type-scale(7),
+      line-height: 1.25,
+    ),
+    max: (
+      font-size: scale.type-scale(8),
     ),
   ),
 );
@@ -14037,6 +14983,43 @@ $expressive-heading-05: (
 - **Group**: [@carbon/type](#carbontype)
 - **Type**: `Map`
 
+### ✅expressive-heading-05 [variable]
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$expressive-heading-05: (
+  font-size: scale.type-scale(8),
+  font-weight: font-family.font-weight('regular'),
+  line-height: 1.25,
+  letter-spacing: 0,
+  breakpoints: (
+    md: (
+      font-size: scale.type-scale(9),
+      font-weight: font-family.font-weight('light'),
+      line-height: 1.22,
+    ),
+    lg: (
+      font-size: scale.type-scale(10),
+      line-height: 1.19,
+    ),
+    xlg: (
+      font-size: scale.type-scale(11),
+      line-height: 1.17,
+    ),
+    max: (
+      font-size: scale.type-scale(13),
+    ),
+  ),
+);
+```
+
+</details>
+
+- **Group**: [@carbon/type](#carbontype)
+- **Type**: `Map`
+
 ### ✅expressive-heading-06 [variable]
 
 <details>
@@ -14073,6 +15056,42 @@ $expressive-heading-06: (
 - **Group**: [@carbon/type](#carbontype)
 - **Type**: `Map`
 
+### ✅expressive-heading-06 [variable]
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$expressive-heading-06: (
+  font-size: scale.type-scale(8),
+  font-weight: font-family.font-weight('semibold'),
+  line-height: 1.25,
+  letter-spacing: 0,
+  breakpoints: (
+    md: (
+      font-size: scale.type-scale(9),
+      line-height: 1.22,
+    ),
+    lg: (
+      font-size: scale.type-scale(10),
+      line-height: 1.19,
+    ),
+    xlg: (
+      font-size: scale.type-scale(11),
+      line-height: 1.17,
+    ),
+    max: (
+      font-size: scale.type-scale(13),
+    ),
+  ),
+);
+```
+
+</details>
+
+- **Group**: [@carbon/type](#carbontype)
+- **Type**: `Map`
+
 ### ✅expressive-paragraph-01 [variable]
 
 <details>
@@ -14091,6 +15110,35 @@ $expressive-paragraph-01: (
     ),
     max: (
       font-size: carbon--type-scale(8),
+      line-height: 1.25,
+    ),
+  ),
+);
+```
+
+</details>
+
+- **Group**: [@carbon/type](#carbontype)
+- **Type**: `Map`
+
+### ✅expressive-paragraph-01 [variable]
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$expressive-paragraph-01: (
+  font-size: scale.type-scale(6),
+  font-weight: font-family.font-weight('light'),
+  line-height: 1.334,
+  letter-spacing: 0,
+  breakpoints: (
+    lg: (
+      font-size: scale.type-scale(7),
+      line-height: 1.29,
+    ),
+    max: (
+      font-size: scale.type-scale(8),
       line-height: 1.25,
     ),
   ),
@@ -14138,6 +15186,42 @@ $quotation-01: (
 - **Group**: [@carbon/type](#carbontype)
 - **Type**: `Map`
 
+### ✅quotation-01 [variable]
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$quotation-01: (
+  font-size: scale.type-scale(5),
+  font-weight: font-family.font-weight('regular'),
+  line-height: 1.3,
+  letter-spacing: 0,
+  breakpoints: (
+    md: (
+      font-size: scale.type-scale(5),
+    ),
+    lg: (
+      font-size: scale.type-scale(6),
+      line-height: 1.334,
+    ),
+    xlg: (
+      font-size: scale.type-scale(7),
+      line-height: 1.29,
+    ),
+    max: (
+      font-size: scale.type-scale(8),
+      line-height: 1.25,
+    ),
+  ),
+);
+```
+
+</details>
+
+- **Group**: [@carbon/type](#carbontype)
+- **Type**: `Map`
+
 ### ✅quotation-02 [variable]
 
 <details>
@@ -14164,6 +15248,42 @@ $quotation-02: (
     ),
     max: (
       font-size: carbon--type-scale(13),
+    ),
+  ),
+);
+```
+
+</details>
+
+- **Group**: [@carbon/type](#carbontype)
+- **Type**: `Map`
+
+### ✅quotation-02 [variable]
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$quotation-02: (
+  font-size: scale.type-scale(8),
+  font-weight: font-family.font-weight('light'),
+  line-height: 1.25,
+  letter-spacing: 0,
+  breakpoints: (
+    md: (
+      font-size: scale.type-scale(9),
+      line-height: 1.22,
+    ),
+    lg: (
+      font-size: scale.type-scale(10),
+      line-height: 1.19,
+    ),
+    xlg: (
+      font-size: scale.type-scale(11),
+      line-height: 1.17,
+    ),
+    max: (
+      font-size: scale.type-scale(13),
     ),
   ),
 );
@@ -14209,6 +15329,41 @@ $display-01: (
 - **Group**: [@carbon/type](#carbontype)
 - **Type**: `Map`
 
+### ✅display-01 [variable]
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$display-01: (
+  font-size: scale.type-scale(10),
+  font-weight: font-family.font-weight('light'),
+  line-height: 1.19,
+  letter-spacing: 0,
+  breakpoints: (
+    md: (
+      font-size: scale.type-scale(10),
+    ),
+    lg: (
+      font-size: scale.type-scale(12),
+    ),
+    xlg: (
+      font-size: scale.type-scale(13),
+      line-height: 1.17,
+    ),
+    max: (
+      font-size: scale.type-scale(15),
+      line-height: 1.13,
+    ),
+  ),
+);
+```
+
+</details>
+
+- **Group**: [@carbon/type](#carbontype)
+- **Type**: `Map`
+
 ### ✅display-02 [variable]
 
 <details>
@@ -14233,6 +15388,41 @@ $display-02: (
     ),
     max: (
       font-size: carbon--type-scale(15),
+      line-height: 1.13,
+    ),
+  ),
+);
+```
+
+</details>
+
+- **Group**: [@carbon/type](#carbontype)
+- **Type**: `Map`
+
+### ✅display-02 [variable]
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$display-02: (
+  font-size: scale.type-scale(10),
+  font-weight: font-family.font-weight('semibold'),
+  line-height: 1.19,
+  letter-spacing: 0,
+  breakpoints: (
+    md: (
+      font-size: scale.type-scale(10),
+    ),
+    lg: (
+      font-size: scale.type-scale(12),
+    ),
+    xlg: (
+      font-size: scale.type-scale(13),
+      line-height: 1.16,
+    ),
+    max: (
+      font-size: scale.type-scale(15),
       line-height: 1.13,
     ),
   ),
@@ -14284,6 +15474,46 @@ $display-03: (
 - **Group**: [@carbon/type](#carbontype)
 - **Type**: `Map`
 
+### ✅display-03 [variable]
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$display-03: (
+  font-size: scale.type-scale(10),
+  font-weight: font-family.font-weight('light'),
+  line-height: 1.19,
+  letter-spacing: 0,
+  breakpoints: (
+    md: (
+      font-size: scale.type-scale(14),
+      line-height: 1.15,
+    ),
+    lg: (
+      font-size: scale.type-scale(17),
+      line-height: 1.11,
+      letter-spacing: -0.64px,
+    ),
+    xlg: (
+      font-size: scale.type-scale(20),
+      line-height: 1.07,
+      letter-spacing: -0.64px,
+    ),
+    max: (
+      font-size: scale.type-scale(23),
+      line-height: 1.05,
+      letter-spacing: -0.96px,
+    ),
+  ),
+);
+```
+
+</details>
+
+- **Group**: [@carbon/type](#carbontype)
+- **Type**: `Map`
+
 ### ✅display-04 [variable]
 
 <details>
@@ -14312,6 +15542,46 @@ $display-04: (
     ),
     max: (
       font-size: carbon--type-scale(23),
+      line-height: 1.05,
+      letter-spacing: -0.96px,
+    ),
+  ),
+);
+```
+
+</details>
+
+- **Group**: [@carbon/type](#carbontype)
+- **Type**: `Map`
+
+### ✅display-04 [variable]
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$display-04: (
+  font-size: scale.type-scale(10),
+  font-weight: font-family.font-weight('semibold'),
+  line-height: 1.19,
+  letter-spacing: 0,
+  breakpoints: (
+    md: (
+      font-size: scale.type-scale(14),
+      line-height: 1.15,
+    ),
+    lg: (
+      font-size: scale.type-scale(17),
+      line-height: 1.11,
+      letter-spacing: -0.64px,
+    ),
+    xlg: (
+      font-size: scale.type-scale(20),
+      line-height: 1.07,
+      letter-spacing: -0.64px,
+    ),
+    max: (
+      font-size: scale.type-scale(23),
       line-height: 1.05,
       letter-spacing: -0.96px,
     ),
@@ -14371,7 +15641,55 @@ $tokens: (
 - **Type**: `Map`
 - **Used by**:
   - [carbon--type-classes [mixin]](#carbon--type-classes-mixin)
+  - [type-classes [mixin]](#type-classes-mixin)
   - [carbon--type-style [mixin]](#carbon--type-style-mixin)
+  - [type-style [mixin]](#type-style-mixin)
+
+### ✅tokens [variable]
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$tokens: (
+  caption-01: $caption-01,
+  label-01: $label-01,
+  helper-text-01: $helper-text-01,
+  body-short-01: $body-short-01,
+  body-short-02: $body-short-02,
+  body-long-01: $body-long-01,
+  body-long-02: $body-long-02,
+  code-01: $code-01,
+  code-02: $code-02,
+  heading-01: $heading-01,
+  heading-02: $heading-02,
+  productive-heading-01: $productive-heading-01,
+  productive-heading-02: $productive-heading-02,
+  productive-heading-03: $productive-heading-03,
+  productive-heading-04: $productive-heading-04,
+  productive-heading-05: $productive-heading-05,
+  productive-heading-06: $productive-heading-06,
+  productive-heading-07: $productive-heading-07,
+  expressive-paragraph-01: $expressive-paragraph-01,
+  expressive-heading-01: $expressive-heading-01,
+  expressive-heading-02: $expressive-heading-02,
+  expressive-heading-03: $expressive-heading-03,
+  expressive-heading-04: $expressive-heading-04,
+  expressive-heading-05: $expressive-heading-05,
+  expressive-heading-06: $expressive-heading-06,
+  quotation-01: $quotation-01,
+  quotation-02: $quotation-02,
+  display-01: $display-01,
+  display-02: $display-02,
+  display-03: $display-03,
+  display-04: $display-04,
+);
+```
+
+</details>
+
+- **Group**: [@carbon/type](#carbontype)
+- **Type**: `Map`
 
 ### ✅properties [mixin]
 
@@ -14398,6 +15716,30 @@ $tokens: (
 - **Used by**:
   - [fluid-type [mixin]](#fluid-type-mixin)
   - [carbon--type-style [mixin]](#carbon--type-style-mixin)
+  - [type-style [mixin]](#type-style-mixin)
+
+### ✅properties [mixin]
+
+<details>
+<summary>Source code</summary>
+
+```scss
+@mixin properties($map) {
+  @each $name, $value in $map {
+    #{$name}: $value;
+  }
+}
+```
+
+</details>
+
+- **Parameters**:
+
+| Name   | Description | Type  | Default value |
+| ------ | ----------- | ----- | ------------- |
+| `$map` | —           | `Map` | —             |
+
+- **Group**: [@carbon/type](#carbontype)
 
 ### ✅strip-unit [function]
 
@@ -14422,6 +15764,28 @@ $tokens: (
 - **Returns**: `Number` Without units
 - **Used by**:
   - [fluid-type-size [mixin]](#fluid-type-size-mixin)
+
+### ✅strip-unit [function]
+
+<details>
+<summary>Source code</summary>
+
+```scss
+@function strip-unit($value) {
+  @return $value / ($value * 0 + 1);
+}
+```
+
+</details>
+
+- **Parameters**:
+
+| Name     | Description       | Type     | Default value |
+| -------- | ----------------- | -------- | ------------- |
+| `$value` | Number with units | `Number` | —             |
+
+- **Group**: [@carbon/type](#carbontype)
+- **Returns**: `Number` Without units
 
 ### ✅fluid-type [mixin]
 
@@ -14477,6 +15841,59 @@ https://css-tricks.com/snippets/css/fluid-typography/
   - [carbon--breakpoint [mixin]](#carbon--breakpoint-mixin)
 - **Used by**:
   - [carbon--type-style [mixin]](#carbon--type-style-mixin)
+  - [type-style [mixin]](#type-style-mixin)
+
+### ✅fluid-type [mixin]
+
+This helper includes fluid type styles for the given token value. Fluid type
+means that the `font-size` is computed using `calc()` in order to be determined
+by the screen size instead of a breakpoint. As a result, fluid styles should be
+used with caution in fixed width contexts.
+
+In addition, we make use of %-based line-heights so that the line-height of each
+type style is computed correctly due to the dynamic nature of the `font-size`.
+
+Most of the logic for this work comes from CSS Tricks:
+https://css-tricks.com/snippets/css/fluid-typography/
+
+<details>
+<summary>Source code</summary>
+
+```scss
+@mixin fluid-type($type-styles, $breakpoints: $grid-breakpoints) {
+  // Include the initial styles for the given token by default without any
+  // media query guard. This includes `font-size` as a fallback in the case
+  // that a browser does not support `calc()`
+  @include properties(map.remove($type-styles, breakpoints));
+  // We also need to include the `sm` styles by default since they don't
+  // appear in the fluid styles for tokens
+  @include fluid-type-size($type-styles, sm, $breakpoints);
+
+  // Finally, we need to go through all the breakpoints defined in the type
+  // token and apply the properties and fluid type size for that given
+  // breakpoint
+  @each $name, $values in map.get($type-styles, breakpoints) {
+    @include layout.breakpoint($name) {
+      @include properties($values);
+      @include fluid-type-size($type-styles, $name, $breakpoints);
+    }
+  }
+}
+```
+
+</details>
+
+- **Parameters**:
+
+| Name           | Description                     | Type  | Default value       |
+| -------------- | ------------------------------- | ----- | ------------------- |
+| `$type-styles` | The value of a given type token | `Map` | —                   |
+| `$breakpoints` | Custom breakpoints to use       | `Map` | `$grid-breakpoints` |
+
+- **Group**: [@carbon/type](#carbontype)
+- **Requires**:
+  - [properties [mixin]](#properties-mixin)
+  - [fluid-type-size [mixin]](#fluid-type-size-mixin)
 
 ### ✅fluid-type-size [mixin]
 
@@ -14580,6 +15997,115 @@ Computes the fluid `font-size` for a given type style and breakpoint
 - **Used by**:
   - [fluid-type [mixin]](#fluid-type-mixin)
 
+### ✅fluid-type-size [mixin]
+
+Computes the fluid `font-size` for a given type style and breakpoint
+
+<details>
+<summary>Source code</summary>
+
+```scss
+@mixin fluid-type-size($type-styles, $name, $breakpoints: $grid-breakpoints) {
+  // Get the information about the breakpoint we're currently working in. Useful
+  // for getting initial width information
+  $breakpoint: map.get($breakpoints, $name);
+
+  // Our fluid styles are captured under the 'breakpoints' property in our type
+  // styles map. These define what values to treat as `max-` variables below
+  $fluid-sizes: map.get($type-styles, breakpoints);
+  $fluid-breakpoint: ();
+  // Special case for `sm` because the styles for small are on the type style
+  // directly
+  @if $name == sm {
+    $fluid-breakpoint: map.remove($type-styles, breakpoints);
+  } @else {
+    $fluid-breakpoint: map.get($fluid-sizes, $name);
+  }
+
+  // Initialize our font-sizes to the default size for the type style
+  $max-font-size: map.get($type-styles, font-size);
+  $min-font-size: map.get($type-styles, font-size);
+  @if map.has-key($fluid-breakpoint, font-size) {
+    $min-font-size: map.get($fluid-breakpoint, font-size);
+  }
+
+  // Initialize our min and max width to the width of the current breakpoint
+  $max-vw: map.get($breakpoint, width);
+  $min-vw: map.get($breakpoint, width);
+
+  // We can use `breakpoint-next` to see if there is another breakpoint we can
+  // use to update `max-font-size` and `max-vw` with larger values
+  $next-breakpoint-available: layout.breakpoint-next($name, $breakpoints);
+  $next-fluid-breakpoint-name: null;
+
+  // We need to figure out what the next available fluid breakpoint is for our
+  // given $type-styles. In this loop we try and iterate through breakpoints
+  // until we either manually set $next-breakpoint-available to null or
+  // `breakpoint-next` returns null.
+  @while $next-breakpoint-available {
+    @if map.has-key($fluid-sizes, $next-breakpoint-available) {
+      $next-fluid-breakpoint-name: $next-breakpoint-available;
+      $next-breakpoint-available: null;
+    } @else {
+      $next-breakpoint-available: layout.breakpoint-next(
+        $next-breakpoint-available,
+        $breakpoints
+      );
+    }
+  }
+
+  // If we have found the next available fluid breakpoint name, then we know
+  // that we have values that we can use to set max-font-size and max-vw as both
+  // values derive from the next breakpoint
+  @if $next-fluid-breakpoint-name {
+    $next-fluid-breakpoint: map.get($breakpoints, $next-fluid-breakpoint-name);
+    $max-font-size: map.get(
+      map.get($fluid-sizes, $next-fluid-breakpoint-name),
+      font-size
+    );
+    $max-vw: map.get($next-fluid-breakpoint, width);
+
+    // prettier-ignore
+    font-size: calc(#{$min-font-size} +
+      #{strip-unit($max-font-size - $min-font-size)} *
+      ((100vw - #{$min-vw}) / #{strip-unit($max-vw - $min-vw)})
+    );
+  } @else {
+    // Otherwise, just default to setting the font size found from the type
+    // style or the given fluid breakpoint in the type style
+    font-size: $min-font-size;
+  }
+}
+```
+
+</details>
+
+- **Parameters**:
+
+| Name           | Description                                            | Type     | Default value       |
+| -------------- | ------------------------------------------------------ | -------- | ------------------- |
+| `$type-styles` | The styles for a given token                           | `Map`    | —                   |
+| `$name`        | The name of the breakpoint to which we apply the fluid | `String` | —                   |
+| `$breakpoints` | The breakpoints for the grid system                    | `Map`    | `$grid-breakpoints` |
+
+- **Group**: [@carbon/type](#carbontype)
+- **Requires**:
+  - [breakpoint-next [function]](#breakpoint-next-function)
+  - [strip-unit [function]](#strip-unit-function)
+
+### ❌custom-property-prefix [variable]
+
+<details>
+<summary>Source code</summary>
+
+```scss
+$custom-property-prefix: 'cds';
+```
+
+</details>
+
+- **Group**: [@carbon/type](#carbontype)
+
 ### ❌custom-property-prefix [variable]
 
 <details>
@@ -14616,6 +16142,29 @@ $custom-property-prefix: 'cds';
   - [custom-property-prefix [variable]](#custom-property-prefix-variable)
 - **Used by**:
   - [carbon--type-style [mixin]](#carbon--type-style-mixin)
+  - [type-style [mixin]](#type-style-mixin)
+
+### ❌custom-properties [mixin]
+
+<details>
+<summary>Source code</summary>
+
+```scss
+@mixin custom-properties() {
+  @each $property, $value in $value {
+    #{$property}: var(
+      --#{$custom-property-prefix}-#{$name}-#{$property},
+      #{$value}
+    );
+  }
+}
+```
+
+</details>
+
+- **Group**: [@carbon/type](#carbontype)
+- **Requires**:
+  - [custom-property-prefix [variable]](#custom-property-prefix-variable)
 
 ### ✅carbon--type-style [mixin]
 
@@ -14680,6 +16229,106 @@ fixed contexts.
   - [unstable_pagination [mixin]](#unstable_pagination-mixin)
   - [tooltip [mixin]](#tooltip-mixin)
   - [carbon-switcher [mixin]](#carbon-switcher-mixin)
+
+### ✅type-style [mixin]
+
+Helper mixin to include the styles for a given token in any selector in your
+project. Also includes an optional fluid option that will enable fluid styles
+for the token if they are defined. Fluid styles will cause the token's font-size
+to be computed based on the viewport size. As a result, use with caution in
+fixed contexts.
+
+<details>
+<summary>Source code</summary>
+
+```scss
+@mixin type-style($name, $fluid: false, $breakpoints: $grid-breakpoints) {
+  @if not map.has-key($tokens, $name) {
+    @error 'Unable to find a token with the name: `#{$name}`';
+  }
+
+  $token: map.get($tokens, $name);
+
+  // If $fluid is set to true and the token has breakpoints defined for fluid
+  // styles, delegate to the fluid-type helper for the given token
+  @if $fluid == true and map.has-key($token, 'breakpoints') {
+    @include fluid-type($token, $breakpoints);
+  } @else {
+    @if global-variable-exists('feature-flags') and
+      map.get($feature-flags, 'enable-css-custom-properties')
+    {
+      @include custom-properties($name, $token);
+    } @else {
+      // Otherwise, we just include all the property declarations directly on the
+      // selector
+      @include properties(map.remove($token, 'breakpoints'));
+    }
+  }
+}
+```
+
+</details>
+
+- **Parameters**:
+
+| Name           | Description                                     | Type      | Default value       |
+| -------------- | ----------------------------------------------- | --------- | ------------------- |
+| `$name`        | The name of the token to get the styles for     | `String`  | —                   |
+| `$fluid`       | Specify whether to include fluid styles for the | `Boolean` | `false`             |
+| `$breakpoints` | Provide a custom breakpoint map to use          | `Map`     | `$grid-breakpoints` |
+
+- **Group**: [@carbon/type](#carbontype)
+- **Requires**:
+  - [fluid-type [mixin]](#fluid-type-mixin)
+  - [custom-properties [mixin]](#custom-properties-mixin)
+  - [properties [mixin]](#properties-mixin)
+  - [tokens [variable]](#tokens-variable)
+- **Used by**:
+  - [type-classes [mixin]](#type-classes-mixin)
+  - [default-type [mixin]](#default-type-mixin)
+  - [accordion [mixin]](#accordion-mixin)
+  - [breadcrumb [mixin]](#breadcrumb-mixin)
+  - [button-base [mixin]](#button-base-mixin)
+  - [checkbox [mixin]](#checkbox-mixin)
+  - [snippet [mixin]](#snippet-mixin)
+  - [bx--snippet [mixin]](#bx--snippet-mixin)
+  - [content-switcher [mixin]](#content-switcher-mixin)
+  - [data-table-v2-action [mixin]](#data-table-v2-action-mixin)
+  - [data-table-core [mixin]](#data-table-core-mixin)
+  - [date-picker [mixin]](#date-picker-mixin)
+  - [dropdown [mixin]](#dropdown-mixin)
+  - [file-uploader [mixin]](#file-uploader-mixin)
+  - [form [mixin]](#form-mixin)
+  - [inline-loading [mixin]](#inline-loading-mixin)
+  - [link [mixin]](#link-mixin)
+  - [lists [mixin]](#lists-mixin)
+  - [listbox [mixin]](#listbox-mixin)
+  - [modal [mixin]](#modal-mixin)
+  - [inline-notifications [mixin]](#inline-notifications-mixin)
+  - [toast-notifications [mixin]](#toast-notifications-mixin)
+  - [number-input [mixin]](#number-input-mixin)
+  - [overflow-menu [mixin]](#overflow-menu-mixin)
+  - [pagination [mixin]](#pagination-mixin)
+  - [pagination-nav [mixin]](#pagination-nav-mixin)
+  - [progress-indicator [mixin]](#progress-indicator-mixin)
+  - [radio-button [mixin]](#radio-button-mixin)
+  - [search [mixin]](#search-mixin)
+  - [select [mixin]](#select-mixin)
+  - [slider [mixin]](#slider-mixin)
+  - [tabs [mixin]](#tabs-mixin)
+  - [tags [mixin]](#tags-mixin)
+  - [text-area [mixin]](#text-area-mixin)
+  - [text-input [mixin]](#text-input-mixin)
+  - [tile [mixin]](#tile-mixin)
+  - [time-picker [mixin]](#time-picker-mixin)
+  - [toggle [mixin]](#toggle-mixin)
+  - [toolbar [mixin]](#toolbar-mixin)
+  - [tooltip--icon [mixin]](#tooltip--icon-mixin)
+  - [tooltip--definition--legacy [mixin]](#tooltip--definition--legacy-mixin)
+  - [tooltip [mixin]](#tooltip-mixin)
+  - [carbon-header [mixin]](#carbon-header-mixin)
+  - [product-switcher [mixin]](#product-switcher-mixin)
+  - [carbon-side-nav [mixin]](#carbon-side-nav-mixin)
 
 ## accordion
 
@@ -14933,6 +16582,7 @@ Accordion styles
 
 - **Group**: [accordion](#accordion)
 - **Requires**:
+  - [type-style [mixin]](#type-style-mixin)
   - [carbon--breakpoint-up [mixin]](#carbon--breakpoint-up-mixin)
   - [rem [function]](#rem-function)
   - [prefix [variable]](#prefix-variable)
@@ -15032,6 +16682,7 @@ Breadcrumb styles
 
 - **Group**: [breadcrumb](#breadcrumb)
 - **Requires**:
+  - [type-style [mixin]](#type-style-mixin)
   - [carbon--breakpoint [mixin]](#carbon--breakpoint-mixin)
   - [rem [function]](#rem-function)
   - [prefix [variable]](#prefix-variable)
@@ -15577,6 +17228,7 @@ Button base styles
 
 - **Group**: [button](#button)
 - **Requires**:
+  - [type-style [mixin]](#type-style-mixin)
   - [rem [function]](#rem-function)
   - [prefix [variable]](#prefix-variable)
   - [disabled-03 [variable]](#disabled-03-variable)
@@ -15832,6 +17484,7 @@ Checkbox styles
 
 - **Group**: [checkbox](#checkbox)
 - **Requires**:
+  - [type-style [mixin]](#type-style-mixin)
   - [rem [function]](#rem-function)
   - [prefix [variable]](#prefix-variable)
   - [carbon--spacing-02 [variable]](#carbon--spacing-02-variable)
@@ -16432,6 +18085,7 @@ Code snippet styles
 
 - **Group**: [code-snippet](#code-snippet)
 - **Requires**:
+  - [type-style [mixin]](#type-style-mixin)
   - [bx--snippet [mixin]](#bx--snippet-mixin)
   - [carbon--font-family [mixin]](#carbon--font-family-mixin)
   - [rem [function]](#rem-function)
@@ -16477,6 +18131,7 @@ Code snippet base styles
 
 - **Group**: [code-snippet](#code-snippet)
 - **Requires**:
+  - [type-style [mixin]](#type-style-mixin)
   - [rem [function]](#rem-function)
   - [field-01 [variable]](#field-01-variable)
 - **Used by**:
@@ -16493,6 +18148,14 @@ Combo box styles
 
 ```scss
 @mixin combo-box() {
+  .#{$prefix}--combo-box:hover {
+    background-color: $field-01;
+  }
+
+  .#{$prefix}--combo-box.#{$prefix}--list-box--light:hover {
+    background-color: $field-02;
+  }
+
   .#{$prefix}--combo-box .#{$prefix}--text-input::-ms-clear {
     display: none;
   }
@@ -16521,6 +18184,8 @@ Combo box styles
 - **Group**: [combo-box](#combo-box)
 - **Requires**:
   - [prefix [variable]](#prefix-variable)
+  - [field-01 [variable]](#field-01-variable)
+  - [field-02 [variable]](#field-02-variable)
   - [ui-03 [variable]](#ui-03-variable)
 
 ## content-switcher
@@ -16711,6 +18376,7 @@ Content switcher styles
 
 - **Group**: [content-switcher](#content-switcher)
 - **Requires**:
+  - [type-style [mixin]](#type-style-mixin)
   - [rem [function]](#rem-function)
   - [prefix [variable]](#prefix-variable)
   - [carbon--spacing-03 [variable]](#carbon--spacing-03-variable)
@@ -16812,6 +18478,14 @@ Data table action styles
   }
 
   .#{$prefix}--toolbar-search-container-expandable
+    .#{$prefix}--search--disabled
+    .#{$prefix}--search-magnifier {
+    background: $disabled-01;
+    cursor: not-allowed;
+    transition: background-color none;
+  }
+
+  .#{$prefix}--toolbar-search-container-expandable
     .#{$prefix}--search
     .#{$prefix}--search-magnifier:focus {
     @include focus-outline('outline');
@@ -16821,6 +18495,18 @@ Data table action styles
     .#{$prefix}--search
     .#{$prefix}--search-magnifier:hover {
     background: $hover-field;
+  }
+
+  .#{$prefix}--toolbar-action.#{$prefix}--toolbar-search-container-disabled {
+    cursor: not-allowed;
+  }
+
+  .#{$prefix}--toolbar-search-container-expandable
+    .#{$prefix}--search--disabled
+    .#{$prefix}--search-magnifier:hover {
+    background: $disabled-01;
+    cursor: not-allowed;
+    transition: background-color none;
   }
 
   .#{$prefix}--toolbar-search-container-expandable
@@ -17306,6 +18992,10 @@ Data table action styles
     }
   }
 
+  .#{$prefix}--search--disabled .#{$prefix}--search-magnifier:hover {
+    background: transparent;
+  }
+
   //-------------------------------------------------
   // SMALL BATCH ACTIONS
   //-------------------------------------------------
@@ -17346,11 +19036,13 @@ Data table action styles
 
 - **Group**: [data-table](#data-table)
 - **Requires**:
+  - [type-style [mixin]](#type-style-mixin)
   - [rem [function]](#rem-function)
   - [prefix [variable]](#prefix-variable)
   - [layout-04 [variable]](#layout-04-variable)
   - [ui-01 [variable]](#ui-01-variable)
   - [spacing-05 [variable]](#spacing-05-variable)
+  - [disabled-01 [variable]](#disabled-01-variable)
   - [hover-field [variable]](#hover-field-variable)
   - [hover-ui [variable]](#hover-ui-variable)
   - [focus [variable]](#focus-variable)
@@ -18107,6 +19799,7 @@ Data table core styles
 
 - **Group**: [data-table](#data-table)
 - **Requires**:
+  - [type-style [mixin]](#type-style-mixin)
   - [text-overflow [mixin]](#text-overflow-mixin)
   - [rem [function]](#rem-function)
   - [prefix [variable]](#prefix-variable)
@@ -18826,6 +20519,11 @@ Date picker styles
     width: rem(288px);
   }
 
+  .#{$prefix}--date-picker
+    .#{$prefix}--date-picker-input__wrapper--warn
+    ~ .#{$prefix}--form-requirement {
+    color: $text-01;
+  }
   .#{$prefix}--date-picker__input {
     @include reset;
     @include type-style('code-02');
@@ -18955,11 +20653,12 @@ Date picker styles
 
 - **Group**: [date-picker](#date-picker)
 - **Requires**:
+  - [type-style [mixin]](#type-style-mixin)
   - [rem [function]](#rem-function)
   - [prefix [variable]](#prefix-variable)
   - [field-02 [variable]](#field-02-variable)
-  - [carbon--spacing-05 [variable]](#carbon--spacing-05-variable)
   - [text-01 [variable]](#text-01-variable)
+  - [carbon--spacing-05 [variable]](#carbon--spacing-05-variable)
   - [field-01 [variable]](#field-01-variable)
   - [ui-04 [variable]](#ui-04-variable)
   - [disabled-02 [variable]](#disabled-02-variable)
@@ -18982,7 +20681,7 @@ Dropdown styles
 @mixin dropdown() {
   .#{$prefix}--dropdown__wrapper--inline {
     display: inline-grid;
-    grid-gap: rem(4px);
+    grid-gap: rem(24px);
     grid-template: auto auto / auto min-content;
     align-items: center;
 
@@ -19099,6 +20798,10 @@ Dropdown styles
 
   .#{$prefix}--dropdown--light {
     background-color: $field-02;
+
+    &:hover {
+      background-color: $hover-light-ui;
+    }
   }
 
   .#{$prefix}--dropdown--up .#{$prefix}--dropdown-list {
@@ -19441,6 +21144,7 @@ Dropdown styles
 
 - **Group**: [dropdown](#dropdown)
 - **Requires**:
+  - [type-style [mixin]](#type-style-mixin)
   - [rem [function]](#rem-function)
   - [prefix [variable]](#prefix-variable)
   - [text-01 [variable]](#text-01-variable)
@@ -19452,6 +21156,7 @@ Dropdown styles
   - [spacing-08 [variable]](#spacing-08-variable)
   - [support-01 [variable]](#support-01-variable)
   - [field-02 [variable]](#field-02-variable)
+  - [hover-light-ui [variable]](#hover-light-ui-variable)
   - [ui-05 [variable]](#ui-05-variable)
   - [carbon--spacing-05 [variable]](#carbon--spacing-05-variable)
   - [ui-01 [variable]](#ui-01-variable)
@@ -19797,6 +21502,7 @@ File uploader styles
 
 - **Group**: [file-uploader](#file-uploader)
 - **Requires**:
+  - [type-style [mixin]](#type-style-mixin)
   - [rem [function]](#rem-function)
   - [prefix [variable]](#prefix-variable)
   - [carbon--spacing-03 [variable]](#carbon--spacing-03-variable)
@@ -19990,6 +21696,7 @@ Form styles
 
 - **Group**: [form](#form)
 - **Requires**:
+  - [type-style [mixin]](#type-style-mixin)
   - [rem [function]](#rem-function)
   - [carbon--font-family [function]](#carbon--font-family-function)
   - [prefix [variable]](#prefix-variable)
@@ -20103,6 +21810,7 @@ Inline loading styles
 
 - **Group**: [inline-loading](#inline-loading)
 - **Requires**:
+  - [type-style [mixin]](#type-style-mixin)
   - [rem [function]](#rem-function)
   - [prefix [variable]](#prefix-variable)
   - [loading--small\_\_gap [variable]](#loading--small__gap-variable)
@@ -20203,6 +21911,7 @@ Link styles
 
 - **Group**: [link](#link)
 - **Requires**:
+  - [type-style [mixin]](#type-style-mixin)
   - [prefix [variable]](#prefix-variable)
   - [link-01 [variable]](#link-01-variable)
   - [hover-primary-text [variable]](#hover-primary-text-variable)
@@ -20294,6 +22003,7 @@ List styles
 
 - **Group**: [list](#list)
 - **Requires**:
+  - [type-style [mixin]](#type-style-mixin)
   - [rem [function]](#rem-function)
   - [prefix [variable]](#prefix-variable)
   - [text-01 [variable]](#text-01-variable)
@@ -20476,6 +22186,10 @@ List box styles
   // Light variation for 'list-box'
   .#{$prefix}--list-box--light {
     background-color: $field-02;
+
+    &:hover {
+      background-color: $hover-light-ui;
+    }
   }
 
   .#{$prefix}--list-box--light .#{$prefix}--list-box__menu {
@@ -20769,7 +22483,7 @@ List box styles
   }
 
   .#{$prefix}--list-box__selection > svg {
-    fill: $icon-02;
+    fill: $icon-01;
 
     // Windows, Firefox HCM Fix
     @media screen and (-ms-high-contrast: active),
@@ -20914,6 +22628,10 @@ List box styles
     &:active {
       background-color: $selected-ui;
     }
+  }
+
+  .#{$prefix}--list-box--light .#{$prefix}--list-box__menu-item:hover {
+    background-color: $hover-light-ui;
   }
 
   .#{$prefix}--list-box--sm .#{$prefix}--list-box__menu-item {
@@ -21151,6 +22869,7 @@ List box styles
 
 - **Group**: [list-box](#list-box)
 - **Requires**:
+  - [type-style [mixin]](#type-style-mixin)
   - [tag-theme [mixin]](#tag-theme-mixin)
   - [rem [function]](#rem-function)
   - [carbon--mini-units [function]](#carbon--mini-units-function)
@@ -21165,6 +22884,7 @@ List box styles
   - [carbon--spacing-08 [variable]](#carbon--spacing-08-variable)
   - [support-01 [variable]](#support-01-variable)
   - [support-03 [variable]](#support-03-variable)
+  - [hover-light-ui [variable]](#hover-light-ui-variable)
   - [decorative-01 [variable]](#decorative-01-variable)
   - [disabled-02 [variable]](#disabled-02-variable)
   - [carbon--spacing-09 [variable]](#carbon--spacing-09-variable)
@@ -21172,7 +22892,6 @@ List box styles
   - [carbon--spacing-07 [variable]](#carbon--spacing-07-variable)
   - [carbon--spacing-05 [variable]](#carbon--spacing-05-variable)
   - [icon-01 [variable]](#icon-01-variable)
-  - [icon-02 [variable]](#icon-02-variable)
   - [inverse-01 [variable]](#inverse-01-variable)
   - [inverse-02 [variable]](#inverse-02-variable)
   - [hover-secondary [variable]](#hover-secondary-variable)
@@ -21760,6 +23479,7 @@ Modal styles
 - **Group**: [modal](#modal)
 - **Requires**:
   - [carbon--breakpoint [mixin]](#carbon--breakpoint-mixin)
+  - [type-style [mixin]](#type-style-mixin)
   - [rem [function]](#rem-function)
   - [prefix [variable]](#prefix-variable)
   - [overlay-01 [variable]](#overlay-01-variable)
@@ -21788,6 +23508,15 @@ Multi select styles
 
 ```scss
 @mixin multiselect() {
+  .#{$prefix}--multi-select .#{$prefix}--tag {
+    min-width: auto;
+    margin: 0 $carbon--spacing-03 0 0;
+  }
+
+  .#{$prefix}--multi-select--filterable .#{$prefix}--tag {
+    margin: 0 $carbon--spacing-03 0 $carbon--spacing-05;
+  }
+
   .#{$prefix}--multi-select .#{$prefix}--list-box__menu {
     min-width: auto;
   }
@@ -21826,14 +23555,6 @@ Multi select styles
     color: $text-01;
   }
 
-  .#{$prefix}--multi-select--filterable .#{$prefix}--text-input {
-    padding-left: $spacing-03;
-  }
-
-  .#{$prefix}--multi-select--filterable:hover .#{$prefix}--text-input {
-    background-color: $hover-ui;
-  }
-
   .#{$prefix}--multi-select--filterable.#{$prefix}--list-box--disabled:hover
     .#{$prefix}--text-input {
     background-color: $field-01;
@@ -21860,9 +23581,9 @@ Multi select styles
 - **Requires**:
   - [rem [function]](#rem-function)
   - [prefix [variable]](#prefix-variable)
+  - [carbon--spacing-03 [variable]](#carbon--spacing-03-variable)
+  - [carbon--spacing-05 [variable]](#carbon--spacing-05-variable)
   - [text-01 [variable]](#text-01-variable)
-  - [spacing-03 [variable]](#spacing-03-variable)
-  - [hover-ui [variable]](#hover-ui-variable)
   - [field-01 [variable]](#field-01-variable)
   - [spacing-05 [variable]](#spacing-05-variable)
 
@@ -22182,6 +23903,7 @@ Inline notification styles
 - **Requires**:
   - [carbon--breakpoint [mixin]](#carbon--breakpoint-mixin)
   - [notification--experimental [mixin]](#notification--experimental-mixin)
+  - [type-style [mixin]](#type-style-mixin)
   - [rem [function]](#rem-function)
   - [prefix [variable]](#prefix-variable)
   - [carbon--spacing-05 [variable]](#carbon--spacing-05-variable)
@@ -22486,6 +24208,7 @@ Toast notification styles
 - **Requires**:
   - [carbon--breakpoint [mixin]](#carbon--breakpoint-mixin)
   - [notification--experimental [mixin]](#notification--experimental-mixin)
+  - [type-style [mixin]](#type-style-mixin)
   - [rem [function]](#rem-function)
   - [prefix [variable]](#prefix-variable)
   - [carbon--spacing-03 [variable]](#carbon--spacing-03-variable)
@@ -22799,6 +24522,7 @@ Number input styles
 
 - **Group**: [number-input](#number-input)
 - **Requires**:
+  - [type-style [mixin]](#type-style-mixin)
   - [rem [function]](#rem-function)
   - [carbon--font-family [function]](#carbon--font-family-function)
   - [prefix [variable]](#prefix-variable)
@@ -23158,6 +24882,7 @@ Overflow menu styles
 
 - **Group**: [overflow-menu](#overflow-menu)
 - **Requires**:
+  - [type-style [mixin]](#type-style-mixin)
   - [rem [function]](#rem-function)
   - [prefix [variable]](#prefix-variable)
   - [hover-ui [variable]](#hover-ui-variable)
@@ -23381,6 +25106,7 @@ Pagination styles
 
 - **Group**: [pagination](#pagination)
 - **Requires**:
+  - [type-style [mixin]](#type-style-mixin)
   - [carbon--breakpoint [mixin]](#carbon--breakpoint-mixin)
   - [carbon--breakpoint-down [mixin]](#carbon--breakpoint-down-mixin)
   - [rem [function]](#rem-function)
@@ -23795,6 +25521,7 @@ Pagination nav base styles
 
 - **Group**: [pagination-nav](#pagination-nav)
 - **Requires**:
+  - [type-style [mixin]](#type-style-mixin)
   - [pseudo-underline [mixin]](#pseudo-underline-mixin)
   - [prefix [variable]](#prefix-variable)
 
@@ -24110,6 +25837,7 @@ Progress indicator styles
 
 - **Group**: [progress-indicator](#progress-indicator)
 - **Requires**:
+  - [type-style [mixin]](#type-style-mixin)
   - [rem [function]](#rem-function)
   - [prefix [variable]](#prefix-variable)
   - [carbon--spacing-05 [variable]](#carbon--spacing-05-variable)
@@ -24309,6 +26037,7 @@ Radio button styles
 
 - **Group**: [radio-button](#radio-button)
 - **Requires**:
+  - [type-style [mixin]](#type-style-mixin)
   - [rem [function]](#rem-function)
   - [carbon--mini-units [function]](#carbon--mini-units-function)
   - [prefix [variable]](#prefix-variable)
@@ -24591,6 +26320,7 @@ Search styles
 
 - **Group**: [search](#search)
 - **Requires**:
+  - [type-style [mixin]](#type-style-mixin)
   - [rem [function]](#rem-function)
   - [prefix [variable]](#prefix-variable)
   - [carbon--spacing-08 [variable]](#carbon--spacing-08-variable)
@@ -24856,6 +26586,7 @@ Select styles
 
 - **Group**: [select](#select)
 - **Requires**:
+  - [type-style [mixin]](#type-style-mixin)
   - [rem [function]](#rem-function)
   - [carbon--mini-units [function]](#carbon--mini-units-function)
   - [prefix [variable]](#prefix-variable)
@@ -25107,6 +26838,7 @@ Slider styles
 
 - **Group**: [slider](#slider)
 - **Requires**:
+  - [type-style [mixin]](#type-style-mixin)
   - [rem [function]](#rem-function)
   - [prefix [variable]](#prefix-variable)
   - [carbon--spacing-05 [variable]](#carbon--spacing-05-variable)
@@ -26049,6 +27781,7 @@ Tabs styles
 
 - **Group**: [tabs](#tabs)
 - **Requires**:
+  - [type-style [mixin]](#type-style-mixin)
   - [carbon--breakpoint [mixin]](#carbon--breakpoint-mixin)
   - [rem [function]](#rem-function)
   - [prefix [variable]](#prefix-variable)
@@ -26359,6 +28092,7 @@ Tag styles
 
 - **Group**: [tag](#tag)
 - **Requires**:
+  - [type-style [mixin]](#type-style-mixin)
   - [tag-theme [mixin]](#tag-theme-mixin)
   - [rem [function]](#rem-function)
   - [prefix [variable]](#prefix-variable)
@@ -26472,6 +28206,7 @@ Text area styles
 
 - **Group**: [text-area](#text-area)
 - **Requires**:
+  - [type-style [mixin]](#type-style-mixin)
   - [rem [function]](#rem-function)
   - [prefix [variable]](#prefix-variable)
   - [carbon--spacing-05 [variable]](#carbon--spacing-05-variable)
@@ -26819,6 +28554,7 @@ Text input styles
 
 - **Group**: [text-input](#text-input)
 - **Requires**:
+  - [type-style [mixin]](#type-style-mixin)
   - [rem [function]](#rem-function)
   - [prefix [variable]](#prefix-variable)
   - [carbon--spacing-05 [variable]](#carbon--spacing-05-variable)
@@ -27042,6 +28778,7 @@ Tile styles
 
 - **Group**: [tile](#tile)
 - **Requires**:
+  - [type-style [mixin]](#type-style-mixin)
   - [prefix [variable]](#prefix-variable)
   - [carbon--spacing-05 [variable]](#carbon--spacing-05-variable)
   - [ui-01 [variable]](#ui-01-variable)
@@ -27140,6 +28877,7 @@ Time picker styles
 
 - **Group**: [time-picker](#time-picker)
 - **Requires**:
+  - [type-style [mixin]](#type-style-mixin)
   - [rem [function]](#rem-function)
   - [prefix [variable]](#prefix-variable)
   - [carbon--spacing-01 [variable]](#carbon--spacing-01-variable)
@@ -27622,6 +29360,7 @@ Toggle styles
 
 - **Group**: [toggle](#toggle)
 - **Requires**:
+  - [type-style [mixin]](#type-style-mixin)
   - [carbon--rem [function]](#carbon--rem-function)
   - [rem [function]](#rem-function)
   - [prefix [variable]](#prefix-variable)
@@ -27768,6 +29507,7 @@ Toolbar styles
 
 - **Group**: [toolbar](#toolbar)
 - **Requires**:
+  - [type-style [mixin]](#type-style-mixin)
   - [rem [function]](#rem-function)
   - [prefix [variable]](#prefix-variable)
   - [text-02 [variable]](#text-02-variable)
@@ -27851,6 +29591,7 @@ Toolbar styles
 
 - **Group**: [tooltip](#tooltip)
 - **Requires**:
+  - [type-style [mixin]](#type-style-mixin)
   - [rem [function]](#rem-function)
   - [inverse-02 [variable]](#inverse-02-variable)
   - [inverse-01 [variable]](#inverse-01-variable)
@@ -28045,6 +29786,7 @@ Toolbar styles
 
 - **Group**: [tooltip](#tooltip)
 - **Requires**:
+  - [type-style [mixin]](#type-style-mixin)
   - [rem [function]](#rem-function)
   - [prefix [variable]](#prefix-variable)
   - [text-01 [variable]](#text-01-variable)
@@ -28539,6 +30281,7 @@ Tooltip styles
 
 - **Group**: [tooltip](#tooltip)
 - **Requires**:
+  - [type-style [mixin]](#type-style-mixin)
   - [carbon--type-style [mixin]](#carbon--type-style-mixin)
   - [tooltip--definition--legacy [mixin]](#tooltip--definition--legacy-mixin)
   - [tooltip--icon--legacy [mixin]](#tooltip--icon--legacy-mixin)
@@ -29200,6 +30943,7 @@ UI shell header
 - **Group**: [ui-shell](#ui-shell)
 - **Requires**:
   - [carbon--breakpoint [mixin]](#carbon--breakpoint-mixin)
+  - [type-style [mixin]](#type-style-mixin)
   - [mini-units [function]](#mini-units-function)
   - [rem [function]](#rem-function)
   - [prefix [variable]](#prefix-variable)
@@ -29620,6 +31364,7 @@ UI shell product switcher
 
 - **Group**: [ui-shell](#ui-shell)
 - **Requires**:
+  - [type-style [mixin]](#type-style-mixin)
   - [mini-units [function]](#mini-units-function)
   - [prefix [variable]](#prefix-variable)
   - [shell-panel-bg-01 [variable]](#shell-panel-bg-01-variable)
@@ -30340,6 +32085,7 @@ UI shell side nav
   - [carbon--breakpoint-down [mixin]](#carbon--breakpoint-down-mixin)
   - [expanded [mixin]](#expanded-mixin)
   - [text-overflow [mixin]](#text-overflow-mixin)
+  - [type-style [mixin]](#type-style-mixin)
   - [mini-units [function]](#mini-units-function)
   - [rem [function]](#rem-function)
   - [prefix [variable]](#prefix-variable)
