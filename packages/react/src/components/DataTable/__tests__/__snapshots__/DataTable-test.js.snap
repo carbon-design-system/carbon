@@ -2025,7 +2025,7 @@ exports[`DataTable should render 1`] = `
                   className="bx--batch-summary__para"
                 >
                   <span>
-                    0 item selected
+                    0 items selected
                   </span>
                 </p>
               </div>
@@ -3030,7 +3030,7 @@ exports[`DataTable sticky header should render 1`] = `
                   className="bx--batch-summary__para"
                 >
                   <span>
-                    0 item selected
+                    0 items selected
                   </span>
                 </p>
               </div>

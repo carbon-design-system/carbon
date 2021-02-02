@@ -1,7 +1,7 @@
 {
   "name": "@carbon/cli",
   "description": "Task automation for working with the Carbon Design System",
-  "version": "10.18.0-rc.0",
+  "version": "10.19.0-rc.0",
   "license": "Apache-2.0",
   "bin": {
     "carbon-cli": "./bin/carbon-cli.js"
@@ -29,7 +29,7 @@
     "@octokit/rest": "^16.28.1",
     "@rollup/plugin-babel": "^5.2.2",
     "@rollup/plugin-commonjs": "^17.0.0",
-    "@rollup/plugin-node-resolve": "^11.0.1",
+    "@rollup/plugin-node-resolve": "^11.1.0",
     "chalk": "^2.4.2",
     "change-case": "^4.1.2",
     "child-process-promise": "^2.2.1",
@@ -42,11 +42,11 @@
     "lodash.template": "^4.5.0",
     "markdown-toc": "^1.2.0",
     "prettier": "^2.2.1",
-    "prettier-config-carbon": "^0.6.0-rc.0",
+    "prettier-config-carbon": "^0.6.0",
     "progress-estimator": "^0.2.2",
     "remark": "^10.0.1",
     "replace-in-file": "^6.1.0",
-    "rollup": "^2.36.1",
+    "rollup": "^2.38.0",
     "sass": "^1.32.4",
     "sassdoc": "^2.7.3",
     "yargs": "^15.1.0"

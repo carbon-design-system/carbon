@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`modules.scss Public API 1`] = `
+exports[`@carbon/colors Public API 1`] = `
 Object {
   "black": "#000000",
   "black-100": "#000000",

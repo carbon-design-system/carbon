@@ -1301,8 +1301,14 @@
   sizes:
     - 32
 - name: barcode
-  friendly_name: barcode
-  aliases: []
+  friendly_name: Barcode
+  aliases: 
+    - barcode
+    - technology
+    - tracking
+    - UPC
+    - inventory
+    - item
   sizes:
     - 32
 - name: barrier
@@ -1827,13 +1833,21 @@
   sizes:
     - 32
 - name: calculation
-  friendly_name: calculation
-  aliases: []
+  friendly_name: Calculation
+  aliases: 
+    - data
+    - calculation
+    - math 
+    - functions
   sizes:
     - 32
 - name: calculation--alt
-  friendly_name: calculation--alt
-  aliases: []
+  friendly_name: Calculation--alt
+  aliases: 
+    - data
+    - calculation
+    - math
+    - functions
   sizes:
     - 32
 - name: calculator
@@ -2460,8 +2474,14 @@
     - bubble chart
     - chart
 - name: chart--bubble-packed
-  friendly_name: chart--bubble-packed
-  aliases: []
+  friendly_name: Chart Bubble-packed
+  aliases: 
+    - graph
+    - bar
+    - data
+    - bubble chart
+    - packed
+    - chart
   sizes:
     - 32
 - name: chart--bullet
@@ -2653,8 +2673,12 @@
   sizes:
     - 32
 - name: chart--median
-  friendly_name: chart--median
-  aliases: []
+  friendly_name: Chart median
+  aliases: 
+    - chart median
+    - graph
+    - chart
+    - data
   sizes:
     - 32
 - name: chart--minimum
@@ -2806,8 +2830,12 @@
     - chart scatter
     - scatter chart
 - name: chart--spiral
-  friendly_name: chart--spiral
-  aliases: []
+  friendly_name: Chart spiral
+  aliases: 
+    - chart spiral
+    - graph
+    - chart
+    - data
   sizes:
     - 32
 - name: chart--stacked
@@ -2868,8 +2896,12 @@
     - chart Venn diagram
     - Venn diagram
 - name: chart--violin-plot
-  friendly_name: chart--violin-plot
-  aliases: []
+  friendly_name: Chart violin-plot
+  aliases: 
+    - chart violin plot
+    - graph
+    - chart
+    - data
   sizes:
     - 32
 - name: chart--waterfall
@@ -2882,8 +2914,14 @@
   sizes:
     - 32
 - name: chart--win-loss
-  friendly_name: chart--win-loss
-  aliases: []
+  friendly_name: Chart win-loss
+  aliases: 
+    - chart win-loss
+    - win
+    - loss
+    - graph
+    - chart
+    - data
   sizes:
     - 32
 - name: chat
@@ -3274,8 +3312,13 @@
   sizes:
     - 32
 - name: choropleth-map
-  friendly_name: choropleth-map
-  aliases: []
+  friendly_name: Chart choropleth-map
+  aliases: 
+    - chart choropleth-map
+    - map
+    - graph
+    - chart
+    - data
   sizes:
     - 32
 - name: circle--filled
@@ -3546,8 +3589,16 @@
   sizes:
     - 32
 - name: code--hide
-  friendly_name: code--hide
-  aliases: []
+  friendly_name: Code hide
+  aliases: 
+    - </>
+    - html
+    - java
+    - css
+    - dev
+    - development
+    - hide
+    - hidden
   sizes:
     - 32
 - name: code--reference
@@ -3638,13 +3689,18 @@
   sizes:
     - 32
 - name: column-dependency
-  friendly_name: column-dependency
-  aliases: []
+  friendly_name: Column dependency
+  aliases: 
+    - column
+    - dependency
+    - formatting
   sizes:
     - 32
 - name: commit
-  friendly_name: commit
-  aliases: []
+  friendly_name: Commit
+  aliases: 
+    - commit
+    - operation
   sizes:
     - 32
 - name: compare
@@ -3709,8 +3765,18 @@
   sizes:
     - 32
 - name: connection-signal--off
-  friendly_name: connection-signal--off
-  aliases: []
+  friendly_name: Connection signal off
+  aliases: 
+    - signal
+    - tower
+    - service
+    - station
+    - radio
+    - connection
+    - wireless
+    - network
+    - off
+    - signal loss
   sizes:
     - 32
 - name: construction
@@ -3943,8 +4009,10 @@
   sizes:
     - 32
 - name: cube
-  friendly_name: cube
-  aliases: []
+  friendly_name: Cube
+  aliases: 
+    - file
+    - cube
   sizes:
     - 32
 - name: cube-view
@@ -4195,8 +4263,14 @@
     - metrics
     - characters
 - name: data--format
-  friendly_name: data--format
-  aliases: []
+  friendly_name: Data format
+  aliases: 
+    - connection
+    - dot
+    - numbers
+    - metrics
+    - characters
+    - format
   sizes:
     - 32
 - name: data--reference
@@ -4240,13 +4314,22 @@
     - metrics
     - characters
 - name: data--view
-  friendly_name: data--view
-  aliases: []
+  friendly_name: Data view
+  aliases: 
+    - connection
+    - dot
+    - numbers
+    - metrics
+    - characters
+    - view
   sizes:
     - 32
 - name: data-bin
-  friendly_name: data-bin
-  aliases: []
+  friendly_name: Data bin
+  aliases: 
+    - data-bin
+    - data
+    - containers
   sizes:
     - 32
 - name: data-class
@@ -4412,20 +4495,32 @@
   sizes:
     - 32
 - name: delivery--parcel
-  friendly_name: delivery--parcel
-  aliases: []
+  friendly_name: Delivery parcel
+  aliases: 
+    - delivery
+    - transportation
+    - shopping
+    - parcel
+    - shipping
+    - ecommerce
   sizes:
     - 32
 - name: delivery
-  friendly_name: delivery
-  aliases: []
+  friendly_name: Delivery
+  aliases: 
+    - truck
+    - delivery
+    - transportation
+    - shopping
+    - van
+    - shipping
+    - ecommerce
   sizes:
     - 32
 - name: delivery-truck
   friendly_name: Delivery truck
   aliases:
     - truck
-    - car
     - delivery
     - transportation
     - shopping
@@ -4607,33 +4702,46 @@
   sizes:
     - 32
 - name: direction--fork
-  friendly_name: direction--fork
-  aliases: []
+  friendly_name: Direction fork
+  aliases:
+    - direction
+    - direction fork
   sizes:
     - 32
 - name: direction--fork--filled
-  friendly_name: direction--fork--filled
-  aliases: []
+  friendly_name: Direction fork filled
+  aliases: 
+    - direction
+    - direction fork
+    - direction fork filled
   sizes:
     - 32
 - name: direction--loop-left
-  friendly_name: direction--loop-left
-  aliases: []
+  friendly_name: Direction loop left
+  aliases: 
+    - direction
+    - direction loop left
   sizes:
     - 32
 - name: direction--loop-left--filled
-  friendly_name: direction--loop-left--filled
-  aliases: []
+  friendly_name: Direction loop left filled
+  aliases: 
+    - direction
+    - direction loop left filled
   sizes:
     - 32
 - name: direction--loop-right
-  friendly_name: direction--loop-right
-  aliases: []
+  friendly_name: Direction loop right
+  aliases: 
+    - direction
+    - direction loop right 
   sizes:
     - 32
 - name: direction--loop-right--filled
-  friendly_name: direction--loop-right--filled
-  aliases: []
+  friendly_name: Direction loop right filled
+  aliases: 
+    - direction
+    - direction loop right filled
   sizes:
     - 32
 - name: direction--merge
@@ -4911,8 +5019,14 @@
     - paper
     - document export
 - name: document--horizontal
-  friendly_name: document--horizontal
-  aliases: []
+  friendly_name: Document horizontal
+  aliases: 
+    - file
+    - doc
+    - paper
+    - horizontal
+    - document
+    - orientation
   sizes:
     - 32
 - name: document--import
@@ -4960,8 +5074,14 @@
   sizes:
     - 32
 - name: document--vertical
-  friendly_name: document--vertical
-  aliases: []
+  friendly_name: Document vertical
+  aliases: 
+    - file
+    - doc
+    - paper
+    - horizontal
+    - document
+    - orientation
   sizes:
     - 32
 - name: document--view
@@ -5080,18 +5200,27 @@
   sizes:
     - 32
 - name: drill-back
-  friendly_name: drill-back
-  aliases: []
+  friendly_name: Drill back
+  aliases: 
+  - drill
+  - back
+  - operation
   sizes:
     - 32
 - name: drill-down
-  friendly_name: drill-down
-  aliases: []
+  friendly_name: Drill down
+  aliases: 
+  - drill
+  - down
+  - operation
   sizes:
     - 32
 - name: drill-through
-  friendly_name: drill-through
-  aliases: []
+  friendly_name: Drill through
+  aliases: 
+  - drill
+  - through
+  - operation
   sizes:
     - 32
 - name: driver-analysis
@@ -5360,8 +5489,12 @@
   sizes:
     - 32
 - name: equalizer
-  friendly_name: equalizer
-  aliases: []
+  friendly_name: Equalizer
+  aliases: 
+    - equalizer
+    - sound
+    - audio
+    - technology
   sizes:
     - 32
 - name: erase
@@ -5497,8 +5630,10 @@
   sizes:
     - 32
 - name: explore
-  friendly_name: explore
-  aliases: []
+  friendly_name: Explore
+  aliases: 
+    - explore
+    - action
   sizes:
     - 32
 - name: export
@@ -5807,8 +5942,14 @@
     - bookmark
     - favorite filled
 - name: favorite--half
-  friendly_name: favorite--half
-  aliases: []
+  friendly_name: Favorite half
+  aliases: 
+    - heart
+    - save
+    - like
+    - fave
+    - bookmark
+    - favorite half
   sizes:
     - 32
 - name: fetch-upload
@@ -6089,8 +6230,14 @@
     - flow data
     - data flow
 - name: flow--modeler
-  friendly_name: flow--modeler
-  aliases: []
+  friendly_name: Flow modeler
+  aliases: 
+    - flow chart
+    - chart
+    - graph
+    - diagram
+    - outline
+    - flow modeler
   sizes:
     - 32
 - name: flow--stream
@@ -6175,8 +6322,14 @@
   sizes:
     - 32
 - name: folder--move-to
-  friendly_name: folder--move-to
-  aliases: []
+  friendly_name: Folder move to
+  aliases: 
+    - file
+    - save
+    - document
+    - organize
+    - folder
+    - folder move to
   sizes:
     - 32
 - name: folder--off
@@ -6401,8 +6554,12 @@
   sizes:
     - 32
 - name: gas-station--filled
-  friendly_name: gas-station--filled
-  aliases: []
+  friendly_name: Gas station filled
+  aliases: 
+    - gas station filled
+    - gas
+    - fueling station
+    - fuel
   sizes:
     - 32
 - name: gender--female
@@ -7219,8 +7376,9 @@
   sizes:
     - 32
 - name: insert-syntax
-  friendly_name: insert-syntax
-  aliases: []
+  friendly_name: Insert syntax
+  aliases: 
+  - insert syntax
   sizes:
     - 32
 - name: integration
@@ -7357,8 +7515,10 @@
     - ISO
     - outline
 - name: join--full
-  friendly_name: join--full
-  aliases: []
+  friendly_name: Join full
+  aliases: 
+    - join
+    - full
   sizes:
     - 32
 - name: join--inner
@@ -7489,8 +7649,11 @@
   sizes:
     - 32
 - name: lasso--polygon
-  friendly_name: lasso--polygon
-  aliases: []
+  friendly_name: Lasso polygon
+  aliases: 
+    - lasso polygon
+    - formatting
+    - tool
   sizes:
     - 32
 - name: launch
@@ -8012,8 +8175,13 @@
   sizes:
     - 32
 - name: location--current
-  friendly_name: location--current
-  aliases: []
+  friendly_name: Location current
+  aliases: 
+    - place
+    - locate
+    - gps
+    - filled
+    - location
   sizes:
     - 32
 - name: location--hazard
@@ -9105,16 +9273,21 @@
   aliases:
     - moon
     - cresent
+    - phase
   sizes:
     - 32
 - name: moonrise
-  friendly_name: moonrise
-  aliases: []
+  friendly_name: Moonrise
+  aliases: 
+    - moonrise
+    - phase
   sizes:
     - 32
 - name: moonset
   friendly_name: moonset
-  aliases: []
+  aliases: 
+    - moonset
+    - phase
   sizes:
     - 32
 - name: mostly-cloudy
@@ -9239,13 +9412,15 @@
   sizes:
     - 32
 - name: music--add
-  friendly_name: music--add
-  aliases: []
+  friendly_name: Music add
+  aliases: 
+    - music add
   sizes:
     - 32
 - name: music--remove
-  friendly_name: music--remove
-  aliases: []
+  friendly_name: Music remove
+  aliases: 
+  - music remove
   sizes:
     - 32
 - name: name-space
@@ -10384,8 +10559,12 @@
   sizes:
     - 32
 - name: pedestrian--family
-  friendly_name: pedestrian--family
-  aliases: []
+  friendly_name: Pedestrian family
+  aliases: 
+    - pedestrian
+    - people
+    - travel
+    - family
   sizes:
     - 32
 - name: pedestrian-child
@@ -10399,13 +10578,17 @@
   sizes:
     - 32
 - name: pen
-  friendly_name: pen
-  aliases: []
+  friendly_name: Pen
+  aliases: 
+    - pen
+    - write
   sizes:
     - 32
 - name: pen--fountain
-  friendly_name: pen--fountain
-  aliases: []
+  friendly_name: Pen fountain
+  aliases: 
+    - pen
+    - fountain
   sizes:
     - 32
 - name: pending
@@ -10504,13 +10687,19 @@
   sizes:
     - 32
 - name: phone--block
-  friendly_name: phone--block
-  aliases: []
+  friendly_name: Phone block
+  aliases: 
+    - phone block
+    - call block
+    - call
   sizes:
     - 32
 - name: phone--block--filled
-  friendly_name: phone--block--filled
-  aliases: []
+  friendly_name: Phone block filled
+  aliases: 
+    - phone block filled
+    - call block
+    - call
   sizes:
     - 32
 - name: phone--filled
@@ -10528,13 +10717,19 @@
     - phone
     - toggle
 - name: phone--incoming
-  friendly_name: phone--incoming
-  aliases: []
+  friendly_name: Phone incoming
+  aliases: 
+    - phone incoming
+    - phone call
+    - call
   sizes:
     - 32
 - name: phone--incoming--filled
-  friendly_name: phone--incoming--filled
-  aliases: []
+  friendly_name: Phone incoming filled
+  aliases: 
+    - phone incoming filled
+    - phone call
+    - call
   sizes:
     - 32
 - name: phone--off
@@ -10563,23 +10758,35 @@
     - mute
     - toggle
 - name: phone--outgoing
-  friendly_name: phone--outgoing
-  aliases: []
+  friendly_name: Phone outgoing
+  aliases: 
+    - phone outgoing
+    - phone call
+    - call
   sizes:
     - 32
 - name: phone--outgoing--filled
-  friendly_name: phone--outgoing--filled
-  aliases: []
+  friendly_name: Phone outgoing filled
+  aliases: 
+    - phone outgoing filled
+    - phone call
+    - call
   sizes:
     - 32
 - name: phone--voice
-  friendly_name: phone--voice
-  aliases: []
+  friendly_name: Phone voice
+  aliases: 
+    - phone voice
+    - phone call
+    - call
   sizes:
     - 32
 - name: phone--voice--filled
-  friendly_name: phone--voice--filled
-  aliases: []
+  friendly_name: Phone voice filled
+  aliases: 
+    - phone voice filled
+    - phone call
+    - call
   sizes:
     - 32
 - name: phrase-sentiment
@@ -10601,8 +10808,13 @@
   sizes:
     - 32
 - name: piggy-bank
-  friendly_name: piggy-bank
-  aliases: []
+  friendly_name: Piggy bank
+  aliases: 
+    - piggy bank
+    - savings
+    - cash
+    - money
+    - currency
   sizes:
     - 32
 - name: pills
@@ -10918,13 +11130,17 @@
   sizes:
     - 32
 - name: progress-bar
-  friendly_name: progress-bar
-  aliases: []
+  friendly_name: Progress bar
+  aliases: 
+  - progress bar
+  - loading
   sizes:
     - 32
 - name: progress-bar--round
-  friendly_name: progress-bar--round
-  aliases: []
+  friendly_name: Progress bar round
+  aliases: 
+  - progreess bar round
+  - loading
   sizes:
     - 32
 - name: purchase
@@ -11242,8 +11458,11 @@
   sizes:
     - 32
 - name: reply--all
-  friendly_name: reply--all
-  aliases: []
+  friendly_name: Reply all
+  aliases: 
+    - back
+    - respond all
+    - email
   sizes:
     - 32
 - name: report
@@ -11663,8 +11882,11 @@
   sizes:
     - 32
 - name: sankey-diagram--alt
-  friendly_name: sankey-diagram--alt
-  aliases: []
+  friendly_name: Sankey diagram alt
+  aliases: 
+    - Sankey diagram alt
+    - data
+    - Sankey alt
   sizes:
     - 32
 - name: satellite
@@ -12069,28 +12291,39 @@
   sizes:
     - 32
 - name: shape--except
-  friendly_name: shape--except
-  aliases: []
+  friendly_name: Shape except
+  aliases: 
+    - shape except
+    - format
   sizes:
     - 32
 - name: shape--exclude
-  friendly_name: shape--exclude
-  aliases: []
+  friendly_name: Shape exclude
+  aliases: 
+    - shape exclude
+    - format
   sizes:
     - 32
 - name: shape--intersect
-  friendly_name: shape--intersect
-  aliases: []
+  friendly_name: Shape intersect
+  aliases: 
+    - shape intersect
+    - format
   sizes:
     - 32
 - name: shape--join
-  friendly_name: shape--join
-  aliases: []
+  friendly_name: Shape join
+  aliases: 
+    - shape
+    - join
+    - format
   sizes:
     - 32
 - name: shape--unite
-  friendly_name: shape--unite
-  aliases: []
+  friendly_name: Shape unite
+  aliases: 
+    - shape unite
+    - format
   sizes:
     - 32
 - name: share
@@ -12146,33 +12379,78 @@
     - store
     - retail
 - name: shopping--cart--arrow-down
-  friendly_name: shopping--cart--arrow-down
-  aliases: []
+  friendly_name: Shopping cart arrow down
+  aliases: 
+    - cart
+    - shop
+    - buy
+    - e-commerce
+    - purchase
+    - store
+    - retail
+    - add to cart
   sizes:
     - 32
 - name: shopping--cart--arrow-up
-  friendly_name: shopping--cart--arrow-up
-  aliases: []
+  friendly_name: Shopping cart arrow up
+  aliases: 
+    - cart
+    - shop
+    - remove
+    - e-commerce
+    - purchase
+    - store
+    - retail
+    - remove from cart
   sizes:
     - 32
 - name: shopping--cart--clear
-  friendly_name: shopping--cart--clear
-  aliases: []
+  friendly_name: Shopping cart clear
+  aliases: 
+    - cart
+    - shop
+    - empty
+    - e-commerce
+    - remove
+    - store
+    - retail
   sizes:
     - 32
 - name: shopping--cart--error
-  friendly_name: shopping--cart--error
-  aliases: []
+  friendly_name: Shopping cart error
+  aliases: 
+    - cart
+    - shop
+    - error
+    - e-commerce
+    - incomplete
+    - store
+    - retail
   sizes:
     - 32
 - name: shopping--cart--minus
-  friendly_name: shopping--cart--minus
-  aliases: []
+  friendly_name: Shopping cart minus
+  aliases: 
+    - cart
+    - shop
+    - remove
+    - e-commerce
+    - store
+    - retail
   sizes:
     - 32
 - name: shopping--cart--plus
-  friendly_name: shopping--cart--plus
-  aliases: []
+  friendly_name: Shopping cart plus
+  aliases: 
+    - cart
+    - shop
+    - buy
+    - e-commerce
+    - purchase
+    - store
+    - retail
+    - cart plus
+    - add to cart
   sizes:
     - 32
 - name: shopping--catalog
@@ -12890,18 +13168,33 @@
     - pause
     - conclude
 - name: stop-sign
-  friendly_name: stop-sign
-  aliases: []
+  friendly_name: Stop sign
+  aliases:
+    - stop sign
+    - travel
+    - naviation
+    - map
+    - direction
+    - road
   sizes:
     - 32
 - name: stop-sign--filled
-  friendly_name: stop-sign--filled
-  aliases: []
+  friendly_name: Stop sign filled
+  aliases: 
+    - stop sign filled
+    - travel
+    - naviation
+    - map
+    - direction
+    - road
   sizes:
     - 32
 - name: storage-pool
-  friendly_name: storage-pool
-  aliases: []
+  friendly_name: Storage pool
+  aliases: 
+    - data
+    - storage pool
+    - pool
   sizes:
     - 32
 - name: storage-request
@@ -13109,8 +13402,15 @@
   sizes:
     - 32
 - name: table--built
-  friendly_name: table--built
-  aliases: []
+  friendly_name: Table built
+  aliases: 
+    - data
+    - spreadsheet
+    - excel
+    - chart
+    - rows
+    - grid
+    - table built
   sizes:
     - 32
 - name: table--split
@@ -13124,6 +13424,7 @@
     - chart
     - rows
     - grid
+    - table split
 - name: table-of-contents
   friendly_name: Table of contents
   aliases:
@@ -13392,8 +13693,12 @@
     - alphabet
     - editor
 - name: text--align--mixed
-  friendly_name: text--align--mixed
-  aliases: []
+  friendly_name: Text align mixed
+  aliases: 
+    - text
+    - align
+    - mixed
+    - typography
   sizes:
     - 32
 - name: text--align--right
@@ -13613,7 +13918,10 @@
     - editor
 - name: text--vertical-alignment
   friendly_name: Text vertical alignment
-  aliases: []
+  aliases:
+    - text vertical alignment
+    - align
+    - format
   sizes:
     - 32
 - name: text--wrap
@@ -13628,7 +13936,7 @@
 - name: text-annotation-toggle
   friendly_name: Text annotation toggle
   aliases:
-    - text-annotation-toggle
+    - text annotation toggle
   sizes:
     - 32
 - name: text-link
@@ -13642,7 +13950,7 @@
   sizes:
     - 32
   aliases:
-    - text-link
+    - text link
 - name: text-mining
   friendly_name: Text mining
   aliases:
@@ -13654,7 +13962,7 @@
   sizes:
     - 32
   aliases:
-    - text-mining
+    - text mining
 - name: theater
   friendly_name: Theater
   aliases:
@@ -13696,7 +14004,7 @@
 - name: thumbnail-preview
   friendly_name: Thumbnail preview
   aliases:
-    - thumbnail-preview
+    - thumbnail preview
   sizes:
     - 32
 - name: thumbs-down
@@ -13996,8 +14304,10 @@
   sizes:
     - 32
 - name: transpose
-  friendly_name: transpose
-  aliases: []
+  friendly_name: Transpose
+  aliases: 
+    - operation
+    - transpose
   sizes:
     - 32
 - name: trash-can
@@ -14098,8 +14408,13 @@
   sizes:
     - 32
 - name: tsunami
-  friendly_name: tsunami
-  aliases: []
+  friendly_name: Tsunami
+  aliases: 
+    - weather
+    - forecast
+    - storm
+    - tropical storm
+    - wave
   sizes:
     - 32
 - name: TSV
@@ -14885,13 +15200,27 @@
     - alert
     - notification
 - name: warning--hex
-  friendly_name: warning--hex
-  aliases: []
+  friendly_name: Warning hex
+  aliases: 
+     - warning hex
+     - status
+     - caution
+     - danger
+     - warn
+     - alert
+     - notification
   sizes:
     - 32
 - name: warning--hex--filled
-  friendly_name: warning--hex--filled
-  aliases: []
+  friendly_name: Warning hex filled
+  aliases: 
+     - warning hex filled
+     - status
+     - caution
+     - danger
+     - warn
+     - alert
+     - notification
   sizes:
     - 32
 - name: warning--other
@@ -15294,8 +15623,14 @@
     - enlarge
     - detail
 - name: zoom--in-area
-  friendly_name: zoom--in-area
-  aliases: []
+  friendly_name: Zoom in area
+  aliases:
+    - expand
+    - inspect
+    - size
+    - enlarge
+    - detail
+    - zoom in area
   sizes:
     - 32
 - name: zoom--out
@@ -15310,8 +15645,13 @@
     - enlarge
     - detail
 - name: zoom--out-area
-  friendly_name: zoom--out-area
-  aliases: []
+  friendly_name: Zoom out area
+  aliases: 
+    - reduce
+    - inspect
+    - size
+    - detail
+    - zoom out area
   sizes:
     - 32
 - name: zoom--reset

@@ -445,7 +445,7 @@ export default class DataTable extends React.Component {
           })
         : this.state.rowIds;
     if (filteredRowIds.length == 0) {
-      return this.state.rowIds;
+      return [];
     }
     return filteredRowIds;
   };
