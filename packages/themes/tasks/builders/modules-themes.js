@@ -15,7 +15,7 @@ function buildThemesFile(themes, tokens, defaultThemeName) {
   const defaultTheme = themes[defaultThemeName];
   const defaultThemeMap = t.Assignment({
     id: t.Identifier(defaultThemeName),
-    init: t.SassFunctionCall(t.Identifier('map.merge'), [
+    init: t.SassFunctionCall(t.Identifier('utilities.merge'), [
       t.SassValue('layout.$spacing'),
       t.SassValue('layout.$fluid-spacing'),
       t.SassValue('type.$tokens'),
@@ -75,6 +75,7 @@ function buildThemesFile(themes, tokens, defaultThemeName) {
     t.SassModule('sass:map'),
     t.SassModule('@carbon/layout'),
     t.SassModule('@carbon/type'),
+    t.SassModule('../utilities'),
     t.Newline(),
     defaultThemeMap,
     ...themeMaps,

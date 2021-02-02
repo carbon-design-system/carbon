@@ -19,14 +19,18 @@ $-custom-property-prefix: 'cds';
   $theme: $active-theme !global;
 
   @each $token, $value in $theme {
-    @if map.get($theme, $token) != map.get($parent-theme, $token) {
-      @include -custom-property($token, $value);
-    }
+    @include -custom-property($token, $value);
   }
 
   @content;
 
   $theme: $parent-theme !global;
+}
+
+/// @access public
+/// @group @carbon/themes
+@mixin set($active-theme) {
+  $theme: $active-theme !global;
 }
 
 /// @access private
@@ -37,7 +41,7 @@ $-custom-property-prefix: 'cds';
       // Only support one-level of depth for values that are maps. This is to
       // avoid bringing properties like `breakpoints` on type tokens
       @if type-of($property-value) != map {
-        @include custom-property('#{$name}-#{$property}', $property-value);
+        @include -custom-property('#{$name}-#{$property}', $property-value);
       }
     }
   } @else {
