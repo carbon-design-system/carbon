@@ -70,10 +70,9 @@
     background-color: $field-01;
   }
 
-  .#{$prefix}--multi-select--filterable {
+  .#{$prefix}--multi-select--filterable
     .#{$prefix}--list-box__selection--multi {
-      margin: 0 0 0 $spacing-05;
-    }
+    margin: 0 0 0 $spacing-05;
   }
 
   .#{$prefix}--multi-select--filterable.#{$prefix}--multi-select--inline,
