@@ -217,6 +217,11 @@
     - storage
     - historical
     - history
+- name: art--tools--01
+  friendly_name: Art tools 01
+  aliases:
+    - art tools
+    - art
 - name: asia--australia
   friendly_name: Asia Australia
   aliases:
@@ -371,7 +376,7 @@
     - travel
     - transportation
 - name: birthday--cake
-  friendly_name: birthday--cake
+  friendly_name: Birthday cake
   aliases:
     - birthday cake
     - cake
@@ -388,6 +393,10 @@
     - block
     - chain
     - blockchain
+- name: bluepages
+  friendly_name: Bluepages
+  aliases:
+    - bluepages
 - name: boston--zakim-bridge
   friendly_name: Boston Zakim Bridge
   aliases:
@@ -1206,6 +1215,10 @@
     - container,
     - containers
     - kubernetes
+- name: content--design
+  friendly_name: Content design
+  aliases:
+    - content design
 - name: continuous--security
   friendly_name: Continuous Security
   aliases:
@@ -1368,6 +1381,14 @@
     - enterprise design thinking team
     - people
     - team
+- name: design--leadership
+  friendly_name: Design leadership
+  aliases:
+    - Design leadership
+- name: design--research
+  friendly_name: Design research
+  aliases:
+    - Design research
 - name: desktop
   friendly_name: Desktop
   aliases:
@@ -1446,6 +1467,14 @@
   friendly_name: Do not
   aliases:
     - do not
+    - warning
+    - caution
+    - don't
+- name: do-not--02
+  friendly_name: Do not 02
+  aliases:
+    - do not
+    - do not 02
     - warning
     - caution
     - don't
@@ -1598,6 +1627,11 @@
   friendly_name: Embed
   aliases:
     - embed
+- name: emergency--exit
+  friendly_name: Emergency exit
+  aliases:
+    - emergency exit
+    - emergency
 - name: employee--insights
   friendly_name: Employee insights
   aliases:
@@ -1702,6 +1736,14 @@
     - eye
     - vision
     - see
+- name: eyewash--station
+  friendly_name: Eyewash station
+  aliases:
+    - eyewash
+    - eye wash
+    - rinse
+    - emergency eye wash
+    - eyewash station
 - name: face--dissatisfied
   friendly_name: Face dissatisfied
   aliases:
@@ -2363,7 +2405,7 @@
     - IBM Z®
     - IBM
 - name: ibm--z-and-linuxone-multi-frame
-  friendly_name: IBM Z and LinuxONE multi-frame
+  friendly_name: IBM Z® and LinuxONE multi-frame
   aliases:
     - LinuxONE
     - Z
@@ -2373,7 +2415,7 @@
     - multi-frame
     - IBM Z
 - name: ibm--z-and-linuxone-single-frame
-  friendly_name: IBM Z and LinuxONE single frame
+  friendly_name: IBM Z® and LinuxONE single frame
   aliases:
     - LinuxONE
     - Z
@@ -2739,6 +2781,11 @@
     - enlarge
     - study
     - life science
+- name: mail--verse
+  friendly_name: Mail verse
+  aliases:
+    - mail
+    - verse
 - name: managing--contractual--flow
   friendly_name: Managing contractual flow
   aliases:
@@ -2849,6 +2896,16 @@
     - life science
     - microbes
     - germs
+- name: microphone
+  friendly_name: Microphone
+  aliases:
+    - microphone
+    - mic
+    - input
+    - audio
+    - stream
+    - record
+    - podcast
 - name: microscope
   friendly_name: Microscope
   aliases:
@@ -3079,6 +3136,11 @@
     - sky
     - stars
     - moon
+- name: no--smoking
+  friendly_name: No smoking
+  aliases:
+    - no smoking
+    - smoke-free area
 - name: nyc--brooklyn
   friendly_name: NYC Brooklyn
   aliases:
@@ -3182,12 +3244,21 @@
     - flow
     - cash flow
     - finance
+- name: organization
+  friendly_name: Organization
+  aliases:
+    - organization
+    - design organization
 - name: overcast
   friendly_name: Overcast
   aliases:
     - overcast
     - weather
     - sky
+- name: overview
+  friendly_name: Overview
+  aliases:
+    - overview
 - name: paper--clip
   friendly_name: Paper clip
   aliases:
@@ -3526,6 +3597,10 @@
     - process
     - working
     - cycle
+- name: professional--marketplace
+  friendly_name: Professional marketplace
+  aliases:
+    - professional marketplace
 - name: progress
   friendly_name: Progress
   aliases:
@@ -3788,6 +3863,12 @@
     - rome
     - city
     - cities
+- name: rotate--device
+  friendly_name: Rotate device
+  aliases:
+    - rotate device
+    - orientation
+    - portrait orientation
 - name: saas--enablement
   friendly_name: SaaS enablement
   aliases:
@@ -3796,6 +3877,10 @@
     - enablement
     - cloud
     - software as a service
+- name: sales--connect
+  friendly_name: Sales connect
+  aliases:
+    - sales connect
 - name: sample--file
   friendly_name: Sample file
   aliases:
@@ -4117,11 +4202,27 @@
     - active
     - running
     - runner
+- name: sprout
+  friendly_name: Sprout
+  aliases:
+    - sprout
+    - compost
 - name: stack-limitation
   friendly_name: Stack limitation
   aliases:
     - stack limitation
     - packaging
+- name: stairs
+  friendly_name: Stairs
+  aliases:
+    - stairs
+    - stairwell
+- name: stairs--down
+  friendly_name: Stairs down
+  aliases:
+    - stairs
+    - stairs down
+    - stairwell
 - name: stairs--plan--view
   friendly_name: Stairs plan view
   aliases:
@@ -4130,6 +4231,12 @@
     - plan
     - building structure
     - structure
+- name: stairs--up
+  friendly_name: Stairs up
+  aliases:
+    - stairs
+    - stairs up
+    - stairwell
 - name: stationary--bicycle
   friendly_name: Stationary bicycle
   aliases:
@@ -4358,6 +4465,17 @@
     - clothes
     - clothing
     - retail
+- name: tablet--device
+  friendly_name: Tablet device
+  aliases:
+    - tablet device
+    - tablet
+- name: tablet--device--check
+  friendly_name: Tablet device check
+  aliases:
+    - tablet device
+    - tablet device check
+    - tablet
 - name: tags
   friendly_name: Tags
   aliases:
@@ -4825,6 +4943,13 @@
     - data
     - analytics
     - user
+- name: user--experience-design
+  friendly_name: User experience design
+  aliases:
+    - user experience design
+    - uxd
+    - ued
+    - xd
 - name: user--insights
   friendly_name: User insights
   aliases:
@@ -4905,6 +5030,10 @@
     - vision
     - watson
     - AI
+- name: visual--design
+  friendly_name: Visual design
+  aliases:
+    - visual design
 - name: visual--insights
   friendly_name: Visual insights
   aliases:
@@ -5059,6 +5188,10 @@
     - data analytics
     - data
     - analytics
+- name: workday
+  friendly_name: Workday
+  aliases:
+    - workday
 - name: world--community--grid
   friendly_name: World Community Grid
   aliases:
