@@ -23341,6 +23341,7 @@ Modal styles
   .#{$prefix}--modal-content {
     @include type-style('body-long-01');
 
+    position: relative;
     grid-row: 2/-2;
     grid-column: 1/-1;
     margin-bottom: $spacing-09;
