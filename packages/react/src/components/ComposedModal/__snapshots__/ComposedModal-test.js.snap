@@ -23,6 +23,7 @@ exports[`<ComposedModal /> renders 1`] = `
       Focus sentinel
     </span>
     <div
+      aria-modal="true"
       className="bx--modal-container"
       role="dialog"
     />
