@@ -646,6 +646,9 @@ Map {
       "selectorPrimaryFocus": "[data-modal-primary-focus]",
     },
     "propTypes": Object {
+      "aria-label": Object {
+        "type": "string",
+      },
       "children": Object {
         "type": "node",
       },
@@ -1371,6 +1374,9 @@ Map {
         "defaultValue": Object {
           "type": "string",
         },
+        "disabled": Object {
+          "type": "bool",
+        },
         "expanded": Object {
           "type": "bool",
         },
@@ -1959,6 +1965,9 @@ Map {
       "defaultValue": Object {
         "type": "string",
       },
+      "disabled": Object {
+        "type": "bool",
+      },
       "expanded": Object {
         "type": "bool",
       },
@@ -2079,9 +2088,11 @@ Map {
           Array [
             "ar",
             "at",
+            "az",
             "be",
             "bg",
             "bn",
+            "bs",
             "cat",
             "cs",
             "cy",
@@ -2093,16 +2104,22 @@ Map {
             "et",
             "fa",
             "fi",
+            "fo",
             "fr",
+            "ga",
             "gr",
             "he",
             "hi",
             "hr",
             "hu",
             "id",
+            "is",
             "it",
             "ja",
+            "ka",
+            "km",
             "ko",
+            "kz",
             "lt",
             "lv",
             "mk",
@@ -2120,12 +2137,15 @@ Map {
             "sk",
             "sl",
             "sq",
+            "sr-cyr",
             "sr",
             "sv",
             "th",
             "tr",
             "uk",
+            "uz",
             "vn",
+            "zh-tw",
             "zh",
           ],
         ],

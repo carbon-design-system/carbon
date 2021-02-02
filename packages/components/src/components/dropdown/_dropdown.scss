@@ -23,7 +23,7 @@
 @mixin dropdown {
   .#{$prefix}--dropdown__wrapper--inline {
     display: inline-grid;
-    grid-gap: rem(4px);
+    grid-gap: rem(24px);
     grid-template: auto auto / auto min-content;
     align-items: center;
 
@@ -140,6 +140,10 @@
 
   .#{$prefix}--dropdown--light {
     background-color: $field-02;
+
+    &:hover {
+      background-color: $hover-light-ui;
+    }
   }
 
   .#{$prefix}--dropdown--up .#{$prefix}--dropdown-list {

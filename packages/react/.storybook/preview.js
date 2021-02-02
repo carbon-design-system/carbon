@@ -10,10 +10,7 @@ import { addDecorator, addParameters } from '@storybook/react';
 import addons from '@storybook/addons';
 import { themes } from '@storybook/theming';
 import { configureActions } from '@storybook/addon-actions';
-import {
-  CARBON_CURRENT_THEME,
-  CARBON_TYPE_TOKEN,
-} from './addon-carbon-theme/shared';
+import { CARBON_CURRENT_THEME, CARBON_TYPE_TOKEN } from './shared';
 import Container from './Container';
 import PackageInfo from './../package.json';
 
