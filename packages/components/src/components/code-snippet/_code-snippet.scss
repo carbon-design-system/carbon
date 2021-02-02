@@ -176,7 +176,12 @@
     @include type-style('code-01');
 
     padding-right: $spacing-03;
-    white-space: nowrap;
+  }
+
+  // Preserve whitespace, but don't allow wrapping for inline and single
+  .#{$prefix}--snippet--single pre,
+  .#{$prefix}--snippet--inline code {
+    white-space: pre;
   }
 
   // Multi Line Snippet
