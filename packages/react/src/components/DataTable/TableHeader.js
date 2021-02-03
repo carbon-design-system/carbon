@@ -14,6 +14,7 @@ import {
   ArrowsVertical20 as Arrows,
 } from '@carbon/icons-react';
 import { sortStates } from './state/sorting';
+import { useId } from '../../internal/useId';
 
 const { prefix } = settings;
 
@@ -65,6 +66,8 @@ const TableHeader = React.forwardRef(function TableHeader(
   },
   ref
 ) {
+  const uniqueId = useId('table-sort');
+
   if (!isSortable) {
     return (
       <th
@@ -88,7 +91,6 @@ const TableHeader = React.forwardRef(function TableHeader(
       isSortHeader && sortDirection === sortStates.DESC,
   });
   const ariaSort = !isSortHeader ? 'none' : sortDirections[sortDirection];
-  const uniqueId = Math.random();
   const sortDescription = t('carbon.table.header.icon.description', {
     header: children,
     sortDirection,
@@ -103,12 +105,12 @@ const TableHeader = React.forwardRef(function TableHeader(
       colSpan={colSpan}
       ref={ref}
       scope={scope}>
-      <div style={{ display: 'none' }} id={`usage-description-${uniqueId}`}>
+      <div style={{ display: 'none' }} id={uniqueId}>
         {sortDescription}
       </div>
       <button
         type="button"
-        aria-describedby={`usage-description-${uniqueId}`}
+        aria-describedby={uniqueId}
         className={className}
         onClick={onClick}
         {...rest}>
