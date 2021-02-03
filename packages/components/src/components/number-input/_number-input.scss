@@ -188,7 +188,7 @@
     input[type='number']:focus
     ~ .#{$prefix}--number__controls
     .#{$prefix}--number__control-btn {
-    border-bottom: 0;
+    border-bottom-color: transparent;
 
     &:hover {
       @include focus-outline('outline');
@@ -199,7 +199,7 @@
     input[type='number'][data-invalid]
     ~ .#{$prefix}--number__controls
     .#{$prefix}--number__control-btn {
-    border-bottom: 0;
+    border-bottom-color: transparent;
 
     &:hover {
       @include focus-outline('invalid');
@@ -239,19 +239,19 @@
 
   .#{$prefix}--number__controls
     .#{$prefix}--number__rule-divider:first-of-type {
-    display: none;
+    background-color: transparent;
   }
 
   .#{$prefix}--number__invalid
     + .#{$prefix}--number__controls
     .#{$prefix}--number__rule-divider:first-of-type {
-    display: block;
+    background-color: $ui-03;
   }
 
   .#{$prefix}--number__invalid
     + .#{$prefix}--number__controls:hover
     .#{$prefix}--number__rule-divider:first-of-type {
-    display: none;
+    background-color: transparent;
   }
 
   .#{$prefix}--number__controls .#{$prefix}--number__rule-divider:last-of-type {
@@ -261,7 +261,7 @@
 
   .#{$prefix}--number__controls:hover .#{$prefix}--number__rule-divider,
   .#{$prefix}--number__control-btn:focus ~ .#{$prefix}--number__rule-divider {
-    display: none;
+    background-color: transparent;
   }
 
   .#{$prefix}--number--readonly .#{$prefix}--number__control-btn {
