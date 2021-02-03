@@ -101,13 +101,6 @@ You can view a full reference of our icons
 [here](https://carbon-elements.netlify.com/icons/examples/preview/) . This is
 useful for finding the path information in order to import an icon.
 
-## 📖 API Documentation
-
-If you're looking for `@carbon/icons` API documentation, check out:
-
-- [Contributing](./docs/contributing.md)
-- [Sass](./docs/sass.md)
-
 ## 🙌 Contributing
 
 We're always looking for contributors to help us fix bugs, build new features,
