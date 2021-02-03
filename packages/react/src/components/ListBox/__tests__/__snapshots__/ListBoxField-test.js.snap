@@ -14,7 +14,7 @@ exports[`ListBoxField should render 1`] = `
       translateWithId={[Function]}
     >
       <div
-        aria-label="Clear Selection"
+        aria-label="Clear selected item"
         className="bx--list-box__selection"
         onClick={[Function]}
         onKeyDown={[Function]}
