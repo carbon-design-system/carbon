@@ -22,9 +22,6 @@
   "publishConfig": {
     "access": "public"
   },
-  "scripts": {
-    "build": "carbon-cli sassdoc \"scss/*.scss\""
-  },
   "eyeglass": {
     "exports": false,
     "name": "@carbon/import-once",
