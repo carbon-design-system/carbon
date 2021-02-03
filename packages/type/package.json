@@ -32,7 +32,7 @@
     "access": "public"
   },
   "scripts": {
-    "build": "yarn clean && carbon-cli bundle src/index.js --name CarbonType && carbon-cli sassdoc \"scss/**/*.scss\" -i \"**/{_inlined,vendor}**\" && carbon-cli inline && carbon-cli check \"scss/*.scss\"",
+    "build": "yarn clean && carbon-cli bundle src/index.js --name CarbonType && carbon-cli inline && carbon-cli check \"scss/*.scss\"",
     "clean": "rimraf css es lib umd scss/_inlined scss/vendor"
   },
   "dependencies": {
