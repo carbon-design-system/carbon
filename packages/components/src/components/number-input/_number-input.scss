@@ -179,6 +179,7 @@
 
     &:disabled {
       color: $disabled;
+      border-bottom-color: transparent;
       cursor: not-allowed;
     }
   }
@@ -236,7 +237,24 @@
     background-color: $ui-03;
   }
 
-  .#{$prefix}--number__controls .#{$prefix}--number__rule-divider {
+  .#{$prefix}--number__controls
+    .#{$prefix}--number__rule-divider:first-of-type {
+    display: none;
+  }
+
+  .#{$prefix}--number__invalid
+    + .#{$prefix}--number__controls
+    .#{$prefix}--number__rule-divider:first-of-type {
+    display: block;
+  }
+
+  .#{$prefix}--number__invalid
+    + .#{$prefix}--number__controls:hover
+    .#{$prefix}--number__rule-divider:first-of-type {
+    display: none;
+  }
+
+  .#{$prefix}--number__controls .#{$prefix}--number__rule-divider:last-of-type {
     // center divider in container
     position: absolute;
   }
@@ -299,6 +317,11 @@
     .#{$prefix}--number--readonly
     input[type='number'] {
     background-color: $field-02;
+  }
+
+  .#{$prefix}--number--light .#{$prefix}--number__control-btn::before,
+  .#{$prefix}--number--light .#{$prefix}--number__control-btn::after {
+    background-color: transparent;
   }
 
   .#{$prefix}--number--mobile {
