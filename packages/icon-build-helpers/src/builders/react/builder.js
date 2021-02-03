@@ -197,9 +197,15 @@ const didWarnAboutDeprecation = {};`;
  */
 function convertToJSX(node, index) {
   const { elem, attrs, className } = node;
-  let _className = className
-    ? `"${className}"`
-    : `{addElementClasses ? "ec-${elem}-${index}" : undefined}`;
+  let _className, _classNameWrapped;
+  if (className) {
+    _className = `${className} `;
+    _classNameWrapped = `"${className}"`;
+  }
+  _className = `{addElementClasses ? "${
+    _className || ''
+  }ec-${elem}-${index}" : ${_classNameWrapped}}`;
+
   return `<${elem} ${formatAttributes(attrs)} className=${_className}/>`;
 }
 
