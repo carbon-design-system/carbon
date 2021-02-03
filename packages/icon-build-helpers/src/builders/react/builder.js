@@ -195,9 +195,10 @@ const didWarnAboutDeprecation = {};`;
  * @param {object} node
  * @returns {string}
  */
-function convertToJSX(node) {
-  const { elem, attrs } = node;
-  return `<${elem} ${formatAttributes(attrs)} />`;
+function convertToJSX(node, index) {
+  const { elem, attrs, className } = node;
+  const _className = className ? className : `ac-${elem}-${index}`;
+  return `<${elem} ${formatAttributes(attrs)} className="${_className}"/>`;
 }
 
 const attributeDenylist = ['data', 'aria'];
