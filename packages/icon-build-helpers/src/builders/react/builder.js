@@ -202,7 +202,7 @@ function convertToJSX(node, index) {
     _className = `${className} `;
     _classNameWrapped = `"${className}"`;
   }
-  _className = `{addElementClasses ? "${
+  _className = `{rest.addElementClasses ? "${
     _className || ''
   }ec-${elem}-${index}" : ${_classNameWrapped}}`;
 
