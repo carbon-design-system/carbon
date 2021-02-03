@@ -26,14 +26,13 @@ exports[`ListBoxSelection should render 1`] = `
     }
   }
 >
-  <div
-    aria-label="Clear Selection"
+  <button
     className="bx--list-box__selection"
     onClick={[Function]}
     onKeyDown={[Function]}
-    role="button"
-    tabIndex={0}
+    tabIndex="-1"
     title="translation"
+    type="button"
   >
     <ForwardRef(Close16)>
       <Icon
@@ -60,7 +59,7 @@ exports[`ListBoxSelection should render 1`] = `
         </svg>
       </Icon>
     </ForwardRef(Close16)>
-  </div>
+  </button>
 </ListBoxSelection>
 `;
 
@@ -91,14 +90,13 @@ exports[`ListBoxSelection should render 2`] = `
     }
   }
 >
-  <div
-    aria-label="Clear Selection"
+  <button
     className="bx--list-box__selection bx--tag--filter bx--list-box__selection--multi"
     onClick={[Function]}
     onKeyDown={[Function]}
-    role="button"
-    tabIndex={0}
+    tabIndex="-1"
     title="translation"
+    type="button"
   >
     3
     <ForwardRef(Close16)>
@@ -126,6 +124,6 @@ exports[`ListBoxSelection should render 2`] = `
         </svg>
       </Icon>
     </ForwardRef(Close16)>
-  </div>
+  </button>
 </ListBoxSelection>
 `;

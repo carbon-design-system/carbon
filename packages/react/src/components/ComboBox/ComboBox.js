@@ -437,7 +437,7 @@ export default class ComboBox extends React.Component {
                 isOpen={isOpen}
                 light={light}
                 size={size}>
-                <ListBox.Field>
+                <div className={`${prefix}--list-box__field`}>
                   <input
                     disabled={disabled}
                     className={inputClasses}
@@ -469,7 +469,7 @@ export default class ComboBox extends React.Component {
                     tabIndex="-1"
                     translateWithId={translateWithId}
                   />
-                </ListBox.Field>
+                </div>
                 {isOpen && (
                   <ListBox.Menu {...getMenuProps({ 'aria-label': ariaLabel })}>
                     {this.filterItems(items, itemToString, inputValue).map(

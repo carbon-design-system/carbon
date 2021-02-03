@@ -5,31 +5,26 @@ exports[`ListBoxMenuIcon should render 1`] = `
   isOpen={true}
   translateWithId={[Function]}
 >
-  <div
+  <button
+    aria-label="Close"
     className="bx--list-box__menu-icon bx--list-box__menu-icon--open"
+    type="button"
   >
-    <ForwardRef(ChevronDown16)
-      aria-label="Close menu"
-      name="chevron--down"
-    >
+    <ForwardRef(ChevronDown16)>
       <Icon
-        aria-label="Close menu"
         fill="currentColor"
         height={16}
-        name="chevron--down"
         preserveAspectRatio="xMidYMid meet"
         viewBox="0 0 16 16"
         width={16}
         xmlns="http://www.w3.org/2000/svg"
       >
         <svg
-          aria-label="Close menu"
+          aria-hidden={true}
           fill="currentColor"
           focusable="false"
           height={16}
-          name="chevron--down"
           preserveAspectRatio="xMidYMid meet"
-          role="img"
           viewBox="0 0 16 16"
           width={16}
           xmlns="http://www.w3.org/2000/svg"
@@ -37,13 +32,10 @@ exports[`ListBoxMenuIcon should render 1`] = `
           <path
             d="M8 11L3 6 3.7 5.3 8 9.6 12.3 5.3 13 6z"
           />
-          <title>
-            Close menu
-          </title>
         </svg>
       </Icon>
     </ForwardRef(ChevronDown16)>
-  </div>
+  </button>
 </ListBoxMenuIcon>
 `;
 
@@ -52,31 +44,26 @@ exports[`ListBoxMenuIcon should render 2`] = `
   isOpen={false}
   translateWithId={[Function]}
 >
-  <div
+  <button
+    aria-label="Open"
     className="bx--list-box__menu-icon"
+    type="button"
   >
-    <ForwardRef(ChevronDown16)
-      aria-label="Open menu"
-      name="chevron--down"
-    >
+    <ForwardRef(ChevronDown16)>
       <Icon
-        aria-label="Open menu"
         fill="currentColor"
         height={16}
-        name="chevron--down"
         preserveAspectRatio="xMidYMid meet"
         viewBox="0 0 16 16"
         width={16}
         xmlns="http://www.w3.org/2000/svg"
       >
         <svg
-          aria-label="Open menu"
+          aria-hidden={true}
           fill="currentColor"
           focusable="false"
           height={16}
-          name="chevron--down"
           preserveAspectRatio="xMidYMid meet"
-          role="img"
           viewBox="0 0 16 16"
           width={16}
           xmlns="http://www.w3.org/2000/svg"
@@ -84,12 +71,9 @@ exports[`ListBoxMenuIcon should render 2`] = `
           <path
             d="M8 11L3 6 3.7 5.3 8 9.6 12.3 5.3 13 6z"
           />
-          <title>
-            Open menu
-          </title>
         </svg>
       </Icon>
     </ForwardRef(ChevronDown16)>
-  </div>
+  </button>
 </ListBoxMenuIcon>
 `;

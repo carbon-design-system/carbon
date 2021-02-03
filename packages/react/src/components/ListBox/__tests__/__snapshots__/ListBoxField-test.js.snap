@@ -13,14 +13,13 @@ exports[`ListBoxField should render 1`] = `
       clearSelection={[MockFunction]}
       translateWithId={[Function]}
     >
-      <div
-        aria-label="Clear Selection"
+      <button
         className="bx--list-box__selection"
         onClick={[Function]}
         onKeyDown={[Function]}
-        role="button"
-        tabIndex={0}
+        tabIndex="-1"
         title="Clear selected item"
+        type="button"
       >
         <ForwardRef(Close16)>
           <Icon
@@ -47,7 +46,7 @@ exports[`ListBoxField should render 1`] = `
             </svg>
           </Icon>
         </ForwardRef(Close16)>
-      </div>
+      </button>
     </ListBoxSelection>
   </div>
 </ListBoxField>

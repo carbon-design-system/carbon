@@ -19,15 +19,12 @@ export const translationIds = {};
  * elements inside of a field. It also provides a11y-related attributes like
  * `role` to make sure a user can focus the given field.
  */
-function ListBoxField({
-  children,
-  // disabled and tabIndex are no longer needed and can be removed
-  disabled: _disabled,
-  tabIndex: _tabIndex,
-  ...rest
-}) {
+function ListBoxField({ children, disabled, tabIndex, ...rest }) {
   return (
-    <div className={`${prefix}--list-box__field`} {...rest}>
+    <div
+      className={`${prefix}--list-box__field`}
+      tabIndex={(!disabled && tabIndex) || -1}
+      {...rest}>
       {children}
     </div>
   );
