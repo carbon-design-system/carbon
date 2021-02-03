@@ -638,6 +638,12 @@ Map {
         ],
         "type": "oneOf",
       },
+      "warn": Object {
+        "type": "bool",
+      },
+      "warnText": Object {
+        "type": "node",
+      },
     },
   },
   "ComposedModal" => Object {
