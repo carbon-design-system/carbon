@@ -25,7 +25,7 @@
   },
   "scripts": {
     "clean": "rimraf es lib umd scss/generated",
-    "build": "yarn clean && carbon-cli bundle src/index.js --name CarbonThemes && node tasks/build.js && carbon-cli check \"scss/*.scss\" && carbon-cli sassdoc \"scss/**/*.scss\""
+    "build": "yarn clean && carbon-cli bundle src/index.js --name CarbonThemes && node tasks/build.js && carbon-cli check \"scss/*.scss\""
   },
   "dependencies": {
     "@carbon/colors": "^10.20.0-rc.0",

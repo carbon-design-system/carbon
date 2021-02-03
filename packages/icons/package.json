@@ -32,7 +32,7 @@
     "access": "public"
   },
   "scripts": {
-    "build": "yarn clean && node tasks/build.js && carbon-cli sassdoc \"scss/*.scss\"",
+    "build": "yarn clean && node tasks/build.js",
     "ci-check": "node tasks/ci-check.js",
     "clean": "rimraf es lib metadata.json svg",
     "prepublishOnly": "yarn build"
