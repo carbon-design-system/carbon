@@ -12,16 +12,27 @@ import React from 'react';
 
 const { prefix } = settings;
 
-function Popover({ children, direction = 'bottom', open, relative, ...rest }) {
+function Popover({
+  className: customClassName,
+  children,
+  direction = 'bottom',
+  light = false,
+  open,
+  relative,
+  ...rest
+}) {
   const className = cx({
     [`${prefix}--popover`]: true,
+    [`${prefix}--popover--light`]: light,
     [`${prefix}--popover--${direction}`]: true,
     [`${prefix}--popover--open`]: open,
     [`${prefix}--popover--relative`]: relative,
+    [customClassName]: !!customClassName,
   });
+
   return (
-    <div className={className}>
-      <div className={`${prefix}--popover-contents`}>{children}</div>
+    <div {...rest} className={className}>
+      {children}
     </div>
   );
 }
@@ -45,7 +56,16 @@ Popover.propTypes = {
     'right-bottom',
     'right-top',
   ]),
+  light: PropTypes.bool,
   open: PropTypes.bool.isRequired,
 };
 
-export { Popover };
+function PopoverContent({ className, children, ...rest }) {
+  return (
+    <div {...rest} className={cx(`${prefix}--popover-contents`, className)}>
+      {children}
+    </div>
+  );
+}
+
+export { Popover, PopoverContent };

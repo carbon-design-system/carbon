@@ -6,7 +6,7 @@
  */
 
 import React from 'react';
-import { Popover } from '../Popover';
+import { Popover, PopoverContent } from '../Popover';
 import Button from '../Button';
 
 export default {
@@ -83,9 +83,9 @@ export const Default = () => {
             </label>
           </div>
         </section>
-        <div>
+        <div style={{ marginTop: '2rem' }}>
           <Popover open={open} direction={direction}>
-            Hello
+            <PopoverContent>Hello</PopoverContent>
           </Popover>
         </div>
       </>
