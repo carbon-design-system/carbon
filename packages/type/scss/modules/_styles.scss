@@ -1,0 +1,713 @@
+//
+// Copyright IBM Corp. 2018, 2018
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+@use 'sass:map';
+@use '@carbon/layout';
+@use 'font-family';
+@use 'scale';
+
+/// @type Map
+/// @access public
+/// @group @carbon/type
+$caption-01: (
+  font-size: scale.type-scale(1),
+  font-weight: font-family.font-weight('regular'),
+  line-height: 1.34,
+  letter-spacing: 0.32px,
+) !default;
+
+/// @type Map
+/// @access public
+/// @group @carbon/type
+$label-01: (
+  font-size: scale.type-scale(1),
+  font-weight: font-family.font-weight('regular'),
+  line-height: 1.34,
+  letter-spacing: 0.32px,
+) !default;
+
+/// @type Map
+/// @access public
+/// @group @carbon/type
+$helper-text-01: (
+  font-size: scale.type-scale(1),
+  line-height: 1.34,
+  letter-spacing: 0.32px,
+) !default;
+
+/// @type Map
+/// @access public
+/// @group @carbon/type
+$body-short-01: (
+  font-size: scale.type-scale(2),
+  font-weight: font-family.font-weight('regular'),
+  line-height: 1.29,
+  letter-spacing: 0.16px,
+) !default;
+
+/// @type Map
+/// @access public
+/// @group @carbon/type
+$body-long-01: (
+  font-size: scale.type-scale(2),
+  font-weight: font-family.font-weight('regular'),
+  line-height: 1.43,
+  letter-spacing: 0.16px,
+) !default;
+
+/// @type Map
+/// @access public
+/// @group @carbon/type
+$body-short-02: (
+  font-size: scale.type-scale(3),
+  font-weight: font-family.font-weight('regular'),
+  line-height: 1.375,
+  letter-spacing: 0,
+) !default;
+
+/// @type Map
+/// @access public
+/// @group @carbon/type
+$body-long-02: (
+  font-size: scale.type-scale(3),
+  font-weight: font-family.font-weight('regular'),
+  line-height: 1.5,
+  letter-spacing: 0,
+) !default;
+
+/// @type Map
+/// @access public
+/// @group @carbon/type
+$code-01: (
+  font-family: font-family.font-family('mono'),
+  font-size: scale.type-scale(1),
+  font-weight: font-family.font-weight('regular'),
+  line-height: 1.34,
+  letter-spacing: 0.32px,
+) !default;
+
+/// @type Map
+/// @access public
+/// @group @carbon/type
+$code-02: (
+  font-family: font-family.font-family('mono'),
+  font-size: scale.type-scale(2),
+  font-weight: font-family.font-weight('regular'),
+  line-height: 1.43,
+  letter-spacing: 0.32px,
+) !default;
+
+/// @type Map
+/// @access public
+/// @group @carbon/type
+$heading-01: (
+  font-size: scale.type-scale(2),
+  font-weight: font-family.font-weight('semibold'),
+  line-height: 1.29,
+  letter-spacing: 0.16px,
+) !default;
+
+/// @type Map
+/// @access public
+/// @group @carbon/type
+$productive-heading-01: $heading-01 !default;
+
+/// @type Map
+/// @access public
+/// @group @carbon/type
+$heading-02: (
+  font-size: scale.type-scale(3),
+  font-weight: font-family.font-weight('semibold'),
+  line-height: 1.375,
+  letter-spacing: 0,
+) !default;
+
+/// @type Map
+/// @access public
+/// @group @carbon/type
+$productive-heading-02: $heading-02 !default;
+
+/// @type Map
+/// @access public
+/// @group @carbon/type
+$productive-heading-03: (
+  font-size: scale.type-scale(5),
+  font-weight: font-family.font-weight('regular'),
+  line-height: 1.4,
+  letter-spacing: 0,
+) !default;
+
+/// @type Map
+/// @access public
+/// @group @carbon/type
+$productive-heading-04: (
+  font-size: scale.type-scale(7),
+  font-weight: font-family.font-weight('regular'),
+  line-height: 1.29,
+  letter-spacing: 0,
+) !default;
+
+/// @type Map
+/// @access public
+/// @group @carbon/type
+$productive-heading-05: (
+  font-size: scale.type-scale(8),
+  font-weight: font-family.font-weight('regular'),
+  line-height: 1.25,
+  letter-spacing: 0,
+) !default;
+
+/// @type Map
+/// @access public
+/// @group @carbon/type
+$productive-heading-06: (
+  font-size: scale.type-scale(8),
+  font-weight: font-family.font-weight('light'),
+  // Extra digit needed for precision in Chrome
+  line-height: 1.199,
+  letter-spacing: 0,
+) !default;
+
+/// @type Map
+/// @access public
+/// @group @carbon/type
+$productive-heading-07: (
+  font-size: scale.type-scale(10),
+  font-weight: font-family.font-weight('light'),
+  line-height: 1.19,
+  letter-spacing: 0,
+) !default;
+
+/// @type Map
+/// @access public
+/// @group @carbon/type
+$expressive-heading-01: map.merge(
+  $heading-01,
+  (
+    line-height: 1.25,
+  )
+) !default;
+
+/// @type Map
+/// @access public
+/// @group @carbon/type
+$expressive-heading-02: map.merge(
+  $heading-02,
+  (
+    line-height: 1.5,
+  )
+) !default;
+
+/// @type Map
+/// @access public
+/// @group @carbon/type
+$expressive-heading-03: (
+  font-size: scale.type-scale(5),
+  font-weight: font-family.font-weight('regular'),
+  line-height: 1.4,
+  letter-spacing: 0,
+  breakpoints: (
+    xlg: (
+      font-size: scale.type-scale(5),
+      line-height: 1.25,
+    ),
+    max: (
+      font-size: scale.type-scale(6),
+      line-height: 1.334,
+    ),
+  ),
+) !default;
+
+/// @type Map
+/// @access public
+/// @group @carbon/type
+$expressive-heading-04: (
+  font-size: scale.type-scale(7),
+  font-weight: font-family.font-weight('regular'),
+  line-height: 1.29,
+  letter-spacing: 0,
+  breakpoints: (
+    xlg: (
+      font-size: scale.type-scale(7),
+      line-height: 1.25,
+    ),
+    max: (
+      font-size: scale.type-scale(8),
+    ),
+  ),
+) !default;
+
+/// @type Map
+/// @access public
+/// @group @carbon/type
+$expressive-heading-05: (
+  font-size: scale.type-scale(8),
+  font-weight: font-family.font-weight('regular'),
+  line-height: 1.25,
+  letter-spacing: 0,
+  breakpoints: (
+    md: (
+      font-size: scale.type-scale(9),
+      font-weight: font-family.font-weight('light'),
+      line-height: 1.22,
+    ),
+    lg: (
+      font-size: scale.type-scale(10),
+      line-height: 1.19,
+    ),
+    xlg: (
+      font-size: scale.type-scale(11),
+      line-height: 1.17,
+    ),
+    max: (
+      font-size: scale.type-scale(13),
+    ),
+  ),
+) !default;
+
+/// @type Map
+/// @access public
+/// @group @carbon/type
+$expressive-heading-06: (
+  font-size: scale.type-scale(8),
+  font-weight: font-family.font-weight('semibold'),
+  line-height: 1.25,
+  letter-spacing: 0,
+  breakpoints: (
+    md: (
+      font-size: scale.type-scale(9),
+      line-height: 1.22,
+    ),
+    lg: (
+      font-size: scale.type-scale(10),
+      line-height: 1.19,
+    ),
+    xlg: (
+      font-size: scale.type-scale(11),
+      line-height: 1.17,
+    ),
+    max: (
+      font-size: scale.type-scale(13),
+    ),
+  ),
+) !default;
+
+/// @type Map
+/// @access public
+/// @group @carbon/type
+$expressive-paragraph-01: (
+  font-size: scale.type-scale(6),
+  font-weight: font-family.font-weight('light'),
+  line-height: 1.334,
+  letter-spacing: 0,
+  breakpoints: (
+    lg: (
+      font-size: scale.type-scale(7),
+      line-height: 1.29,
+    ),
+    max: (
+      font-size: scale.type-scale(8),
+      line-height: 1.25,
+    ),
+  ),
+);
+
+/// @type Map
+/// @access public
+/// @group @carbon/type
+$quotation-01: (
+  font-size: scale.type-scale(5),
+  font-weight: font-family.font-weight('regular'),
+  line-height: 1.3,
+  letter-spacing: 0,
+  breakpoints: (
+    md: (
+      font-size: scale.type-scale(5),
+    ),
+    lg: (
+      font-size: scale.type-scale(6),
+      line-height: 1.334,
+    ),
+    xlg: (
+      font-size: scale.type-scale(7),
+      line-height: 1.29,
+    ),
+    max: (
+      font-size: scale.type-scale(8),
+      line-height: 1.25,
+    ),
+  ),
+) !default;
+
+/// @type Map
+/// @access public
+/// @group @carbon/type
+$quotation-02: (
+  font-size: scale.type-scale(8),
+  font-weight: font-family.font-weight('light'),
+  line-height: 1.25,
+  letter-spacing: 0,
+  breakpoints: (
+    md: (
+      font-size: scale.type-scale(9),
+      line-height: 1.22,
+    ),
+    lg: (
+      font-size: scale.type-scale(10),
+      line-height: 1.19,
+    ),
+    xlg: (
+      font-size: scale.type-scale(11),
+      line-height: 1.17,
+    ),
+    max: (
+      font-size: scale.type-scale(13),
+    ),
+  ),
+) !default;
+
+/// @type Map
+/// @access public
+/// @group @carbon/type
+$display-01: (
+  font-size: scale.type-scale(10),
+  font-weight: font-family.font-weight('light'),
+  line-height: 1.19,
+  letter-spacing: 0,
+  breakpoints: (
+    md: (
+      font-size: scale.type-scale(10),
+    ),
+    lg: (
+      font-size: scale.type-scale(12),
+    ),
+    xlg: (
+      font-size: scale.type-scale(13),
+      line-height: 1.17,
+    ),
+    max: (
+      font-size: scale.type-scale(15),
+      line-height: 1.13,
+    ),
+  ),
+) !default;
+
+/// @type Map
+/// @access public
+/// @group @carbon/type
+$display-02: (
+  font-size: scale.type-scale(10),
+  font-weight: font-family.font-weight('semibold'),
+  line-height: 1.19,
+  letter-spacing: 0,
+  breakpoints: (
+    md: (
+      font-size: scale.type-scale(10),
+    ),
+    lg: (
+      font-size: scale.type-scale(12),
+    ),
+    xlg: (
+      font-size: scale.type-scale(13),
+      line-height: 1.16,
+    ),
+    max: (
+      font-size: scale.type-scale(15),
+      line-height: 1.13,
+    ),
+  ),
+) !default;
+
+/// @type Map
+/// @access public
+/// @group @carbon/type
+$display-03: (
+  font-size: scale.type-scale(10),
+  font-weight: font-family.font-weight('light'),
+  line-height: 1.19,
+  letter-spacing: 0,
+  breakpoints: (
+    md: (
+      font-size: scale.type-scale(14),
+      line-height: 1.15,
+    ),
+    lg: (
+      font-size: scale.type-scale(17),
+      line-height: 1.11,
+      letter-spacing: -0.64px,
+    ),
+    xlg: (
+      font-size: scale.type-scale(20),
+      line-height: 1.07,
+      letter-spacing: -0.64px,
+    ),
+    max: (
+      font-size: scale.type-scale(23),
+      line-height: 1.05,
+      letter-spacing: -0.96px,
+    ),
+  ),
+) !default;
+
+/// @type Map
+/// @access public
+/// @group @carbon/type
+$display-04: (
+  font-size: scale.type-scale(10),
+  font-weight: font-family.font-weight('semibold'),
+  line-height: 1.19,
+  letter-spacing: 0,
+  breakpoints: (
+    md: (
+      font-size: scale.type-scale(14),
+      line-height: 1.15,
+    ),
+    lg: (
+      font-size: scale.type-scale(17),
+      line-height: 1.11,
+      letter-spacing: -0.64px,
+    ),
+    xlg: (
+      font-size: scale.type-scale(20),
+      line-height: 1.07,
+      letter-spacing: -0.64px,
+    ),
+    max: (
+      font-size: scale.type-scale(23),
+      line-height: 1.05,
+      letter-spacing: -0.96px,
+    ),
+  ),
+) !default;
+
+/// @type Map
+/// @access public
+/// @group @carbon/type
+$tokens: (
+  caption-01: $caption-01,
+  label-01: $label-01,
+  helper-text-01: $helper-text-01,
+  body-short-01: $body-short-01,
+  body-short-02: $body-short-02,
+  body-long-01: $body-long-01,
+  body-long-02: $body-long-02,
+  code-01: $code-01,
+  code-02: $code-02,
+  heading-01: $heading-01,
+  heading-02: $heading-02,
+  productive-heading-01: $productive-heading-01,
+  productive-heading-02: $productive-heading-02,
+  productive-heading-03: $productive-heading-03,
+  productive-heading-04: $productive-heading-04,
+  productive-heading-05: $productive-heading-05,
+  productive-heading-06: $productive-heading-06,
+  productive-heading-07: $productive-heading-07,
+  expressive-paragraph-01: $expressive-paragraph-01,
+  expressive-heading-01: $expressive-heading-01,
+  expressive-heading-02: $expressive-heading-02,
+  expressive-heading-03: $expressive-heading-03,
+  expressive-heading-04: $expressive-heading-04,
+  expressive-heading-05: $expressive-heading-05,
+  expressive-heading-06: $expressive-heading-06,
+  quotation-01: $quotation-01,
+  quotation-02: $quotation-02,
+  display-01: $display-01,
+  display-02: $display-02,
+  display-03: $display-03,
+  display-04: $display-04,
+);
+
+/// @param {Map} $map
+/// @access public
+/// @group @carbon/type
+@mixin properties($map) {
+  @each $name, $value in $map {
+    #{$name}: $value;
+  }
+}
+
+/// @param {Number} $value - Number with units
+/// @return {Number} Without units
+/// @access public
+/// @group @carbon/type
+@function strip-unit($value) {
+  @return $value / ($value * 0 + 1);
+}
+
+/// This helper includes fluid type styles for the given token value. Fluid type
+/// means that the `font-size` is computed using `calc()` in order to be
+/// determined by the screen size instead of a breakpoint. As a result, fluid
+/// styles should be used with caution in fixed width contexts.
+///
+/// In addition, we make use of %-based line-heights so that the line-height of
+/// each type style is computed correctly due to the dynamic nature of the
+/// `font-size`.
+///
+/// Most of the logic for this work comes from CSS Tricks:
+/// https://css-tricks.com/snippets/css/fluid-typography/
+///
+/// @param {Map} $type-styles - The value of a given type token
+/// @param {Map} $breakpoints [$grid-breakpoints] - Custom breakpoints to use
+/// @access public
+/// @group @carbon/type
+@mixin fluid-type($type-styles, $breakpoints: layout.$grid-breakpoints) {
+  // Include the initial styles for the given token by default without any
+  // media query guard. This includes `font-size` as a fallback in the case
+  // that a browser does not support `calc()`
+  @include properties(map.remove($type-styles, breakpoints));
+  // We also need to include the `sm` styles by default since they don't
+  // appear in the fluid styles for tokens
+  @include fluid-type-size($type-styles, sm, $breakpoints);
+
+  // Finally, we need to go through all the breakpoints defined in the type
+  // token and apply the properties and fluid type size for that given
+  // breakpoint
+  @each $name, $values in map.get($type-styles, breakpoints) {
+    @include layout.breakpoint($name) {
+      @include properties($values);
+      @include fluid-type-size($type-styles, $name, $breakpoints);
+    }
+  }
+}
+
+/// Computes the fluid `font-size` for a given type style and breakpoint
+/// @param {Map} $type-styles - The styles for a given token
+/// @param {String} $name - The name of the breakpoint to which we apply the fluid
+/// @param {Map} $breakpoints [$grid-breakpoints] - The breakpoints for the grid system
+/// @access public
+/// @group @carbon/type
+@mixin fluid-type-size(
+  $type-styles,
+  $name,
+  $breakpoints: layout.$grid-breakpoints
+) {
+  // Get the information about the breakpoint we're currently working in. Useful
+  // for getting initial width information
+  $breakpoint: map.get($breakpoints, $name);
+
+  // Our fluid styles are captured under the 'breakpoints' property in our type
+  // styles map. These define what values to treat as `max-` variables below
+  $fluid-sizes: map.get($type-styles, breakpoints);
+  $fluid-breakpoint: ();
+  // Special case for `sm` because the styles for small are on the type style
+  // directly
+  @if $name == sm {
+    $fluid-breakpoint: map.remove($type-styles, breakpoints);
+  } @else {
+    $fluid-breakpoint: map.get($fluid-sizes, $name);
+  }
+
+  // Initialize our font-sizes to the default size for the type style
+  $max-font-size: map.get($type-styles, font-size);
+  $min-font-size: map.get($type-styles, font-size);
+  @if map.has-key($fluid-breakpoint, font-size) {
+    $min-font-size: map.get($fluid-breakpoint, font-size);
+  }
+
+  // Initialize our min and max width to the width of the current breakpoint
+  $max-vw: map.get($breakpoint, width);
+  $min-vw: map.get($breakpoint, width);
+
+  // We can use `breakpoint-next` to see if there is another breakpoint we can
+  // use to update `max-font-size` and `max-vw` with larger values
+  $next-breakpoint-available: layout.breakpoint-next($name, $breakpoints);
+  $next-fluid-breakpoint-name: null;
+
+  // We need to figure out what the next available fluid breakpoint is for our
+  // given $type-styles. In this loop we try and iterate through breakpoints
+  // until we either manually set $next-breakpoint-available to null or
+  // `breakpoint-next` returns null.
+  @while $next-breakpoint-available {
+    @if map.has-key($fluid-sizes, $next-breakpoint-available) {
+      $next-fluid-breakpoint-name: $next-breakpoint-available;
+      $next-breakpoint-available: null;
+    } @else {
+      $next-breakpoint-available: layout.breakpoint-next(
+        $next-breakpoint-available,
+        $breakpoints
+      );
+    }
+  }
+
+  // If we have found the next available fluid breakpoint name, then we know
+  // that we have values that we can use to set max-font-size and max-vw as both
+  // values derive from the next breakpoint
+  @if $next-fluid-breakpoint-name {
+    $next-fluid-breakpoint: map.get($breakpoints, $next-fluid-breakpoint-name);
+    $max-font-size: map.get(
+      map.get($fluid-sizes, $next-fluid-breakpoint-name),
+      font-size
+    );
+    $max-vw: map.get($next-fluid-breakpoint, width);
+
+    // prettier-ignore
+    font-size: calc(#{$min-font-size} +
+      #{strip-unit($max-font-size - $min-font-size)} *
+      ((100vw - #{$min-vw}) / #{strip-unit($max-vw - $min-vw)})
+    );
+  } @else {
+    // Otherwise, just default to setting the font size found from the type
+    // style or the given fluid breakpoint in the type style
+    font-size: $min-font-size;
+  }
+}
+
+// TODO move following variable and `custom-property` mixin into shared file for
+// both `@carbon/type` and `@carbon/themes`
+
+/// @access private
+/// @group @carbon/type
+$custom-property-prefix: 'cds' !default;
+
+/// @access private
+/// @group @carbon/type
+@mixin custom-properties($name, $value) {
+  @each $property, $value in $value {
+    #{$property}: var(
+      --#{$custom-property-prefix}-#{$name}-#{$property},
+      #{$value}
+    );
+  }
+}
+
+/// Helper mixin to include the styles for a given token in any selector in your
+/// project. Also includes an optional fluid option that will enable fluid
+/// styles for the token if they are defined. Fluid styles will cause the
+/// token's font-size to be computed based on the viewport size. As a result, use
+/// with caution in fixed contexts.
+/// @param {String} $name - The name of the token to get the styles for
+/// @param {Boolean} $fluid [false] - Specify whether to include fluid styles for the
+/// @param {Map} $breakpoints [$grid-breakpoints] - Provide a custom breakpoint map to use
+/// @access public
+/// @group @carbon/type
+@mixin type-style(
+  $name,
+  $fluid: false,
+  $breakpoints: layout.$grid-breakpoints
+) {
+  @if not map.has-key($tokens, $name) {
+    @error 'Unable to find a token with the name: `#{$name}`';
+  }
+
+  $token: map.get($tokens, $name);
+
+  // If $fluid is set to true and the token has breakpoints defined for fluid
+  // styles, delegate to the fluid-type helper for the given token
+  @if $fluid == true and map.has-key($token, 'breakpoints') {
+    @include fluid-type($token, $breakpoints);
+  } @else {
+    @if global-variable-exists('feature-flags') and
+      map.get($feature-flags, 'enable-css-custom-properties')
+    {
+      @include custom-properties($name, $token);
+    } @else {
+      // Otherwise, we just include all the property declarations directly on the
+      // selector
+      @include properties(map.remove($token, 'breakpoints'));
+    }
+  }
+}

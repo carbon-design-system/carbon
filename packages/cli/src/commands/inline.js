@@ -96,6 +96,10 @@ async function inlineSassDependencies(
         return false;
       }
 
+      if (path.relative(sourceFolder, src).includes('modules')) {
+        return false;
+      }
+
       return path.basename(src) !== 'index.scss';
     },
   });
