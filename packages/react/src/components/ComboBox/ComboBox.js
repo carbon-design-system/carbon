@@ -15,6 +15,7 @@ import ListBox, { PropTypes as ListBoxPropTypes } from '../ListBox';
 import { match, keys } from '../../internal/keyboard';
 import setupGetInstanceId from '../../tools/setupGetInstanceId';
 import { mapDownshiftProps } from '../../tools/createPropAdapter';
+import mergeRefs from '../../tools/mergeRefs';
 
 const { prefix } = settings;
 
@@ -303,6 +304,10 @@ export default class ComboBox extends React.Component {
       event.preventDownshiftDefault = true;
       event.persist();
     }
+
+    if (this.textInput.current) {
+      this.textInput.current.focus();
+    }
   };
 
   render() {
@@ -369,23 +374,58 @@ export default class ComboBox extends React.Component {
           getItemProps,
           getLabelProps,
           getRootProps,
+          getMenuProps,
           isOpen,
           inputValue,
           selectedItem,
           highlightedIndex,
           clearSelection,
           toggleMenu,
-          getMenuProps,
         }) => {
+          const rootProps = getRootProps(
+            {},
+            {
+              suppressRefError: true,
+            }
+          );
+          const labelProps = getLabelProps();
           const buttonProps = getToggleButtonProps({
             disabled,
             onClick: this.onToggleClick(isOpen),
+            // When we moved the "root node" of Downshift to the <input> for
+            // WCAG 2.1 compliance, we unfortunately hit this branch for the
+            // "mouseup" event that downshift listens to:
+            // https://github.com/downshift-js/downshift/blob/v5.2.1/src/downshift.js#L1051-L1065
+            //
+            // As a result, it will reset the state of the component and so we
+            // stop the event from propagating to prevent this. This allows the
+            // toggleMenu behavior for the toggleButton to correctly open and
+            // close the menu.
+            onMouseUp(event) {
+              event.stopPropagation();
+            },
+          });
+          const inputProps = getInputProps({
+            disabled,
+            placeholder,
+            onClick() {
+              toggleMenu();
+            },
+            onKeyDown: (event) => {
+              if (match(event, keys.Space)) {
+                event.stopPropagation();
+              }
+
+              if (match(event, keys.Enter)) {
+                toggleMenu();
+              }
+            },
           });
 
           return (
             <div className={wrapperClasses}>
               {titleText && (
-                <label className={titleClasses} {...getLabelProps()}>
+                <label className={titleClasses} {...labelProps}>
                   {titleText}
                 </label>
               )}
@@ -404,22 +444,10 @@ export default class ComboBox extends React.Component {
                     type="text"
                     tabIndex="0"
                     aria-autocomplete="list"
-                    ref={this.textInput}
                     {...rest}
-                    {...getRootProps({}, { suppressRefError: true })}
-                    {...getInputProps({
-                      disabled,
-                      placeholder,
-                      onKeyDown: (event) => {
-                        if (match(event, keys.Space)) {
-                          event.stopPropagation();
-                        }
-
-                        if (match(event, keys.Enter)) {
-                          toggleMenu();
-                        }
-                      },
-                    })}
+                    {...rootProps}
+                    {...inputProps}
+                    ref={mergeRefs(this.textInput, rootProps.ref)}
                   />
                   {invalid && (
                     <WarningFilled16
@@ -429,16 +457,17 @@ export default class ComboBox extends React.Component {
                   {inputValue && (
                     <ListBox.Selection
                       clearSelection={clearSelection}
-                      translateWithId={translateWithId}
                       disabled={disabled}
                       onClearSelection={this.handleSelectionClear}
+                      tabIndex="-1"
+                      translateWithId={translateWithId}
                     />
                   )}
                   <ListBox.MenuIcon
-                    isOpen={isOpen}
-                    translateWithId={translateWithId}
-                    tabIndex="-1"
                     {...buttonProps}
+                    isOpen={isOpen}
+                    tabIndex="-1"
+                    translateWithId={translateWithId}
                   />
                 </ListBox.Field>
                 {isOpen && (

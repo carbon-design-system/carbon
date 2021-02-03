@@ -58,10 +58,11 @@ const ListBoxSelection = ({
   return (
     <button
       className={className}
-      tabIndex={disabled ? -1 : null}
       onClick={handleOnClick}
       onKeyDown={handleOnKeyDown}
-      title={description}>
+      tabIndex="-1"
+      title={description}
+      type="button">
       {selectionCount}
       <Close16 />
     </button>
