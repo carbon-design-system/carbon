@@ -48,6 +48,7 @@ const HeaderGlobalAction = React.forwardRef(function HeaderGlobalAction(
       {...accessibilityLabel}
       className={className}
       onClick={onClick}
+      title={ariaLabel}
       type="button"
       ref={ref}>
       {children}
