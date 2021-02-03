@@ -35,6 +35,7 @@ const Icon = React.forwardRef(function Icon(
 
 Icon.displayName = 'Icon';
 Icon.propTypes = {
+  addElementClasses: PropTypes.bool,
   'aria-hidden': PropTypes.string,
   'aria-label': PropTypes.string,
   'aria-labelledby': PropTypes.string,
@@ -48,6 +49,7 @@ Icon.propTypes = {
   xmlns: PropTypes.string,
 };
 Icon.defaultProps = {
+  addElementClasses: false,
   xmlns: 'http://www.w3.org/2000/svg',
   preserveAspectRatio: 'xMidYMid meet',
 };

@@ -197,8 +197,10 @@ const didWarnAboutDeprecation = {};`;
  */
 function convertToJSX(node, index) {
   const { elem, attrs, className } = node;
-  const _className = className ? className : `ac-${elem}-${index}`;
-  return `<${elem} ${formatAttributes(attrs)} className="${_className}"/>`;
+  let _className = className
+    ? `"${className}"`
+    : `{addElementClasses ? "ec-${elem}-${index}" : undefined}`;
+  return `<${elem} ${formatAttributes(attrs)} className=${_className}/>`;
 }
 
 const attributeDenylist = ['data', 'aria'];
