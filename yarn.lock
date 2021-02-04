@@ -1807,6 +1807,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@carbon/layout@workspace:packages/layout"
   dependencies:
+    "@carbon/cli": ^10.19.0-rc.0
     "@carbon/cli-reporter": ^10.4.0
     "@carbon/scss-generator": ^10.12.0
     "@carbon/test-utils": ^10.14.0
@@ -4027,8 +4028,8 @@ __metadata:
   linkType: hard
 
 "@rollup/plugin-node-resolve@npm:^11.1.0":
-  version: 11.1.0
-  resolution: "@rollup/plugin-node-resolve@npm:11.1.0"
+  version: 11.1.1
+  resolution: "@rollup/plugin-node-resolve@npm:11.1.1"
   dependencies:
     "@rollup/pluginutils": ^3.1.0
     "@types/resolve": 1.17.1
@@ -4038,7 +4039,7 @@ __metadata:
     resolve: ^1.19.0
   peerDependencies:
     rollup: ^1.20.0||^2.0.0
-  checksum: 87332c94d1ebf50d8238eabd7901ec802e076f566538db929155e2ac2227796a6e7cb35994bd7d15e191c4835e00bf4aac58a21615a276fc6df5fbce7b7fb050
+  checksum: 79161dcdf482812c843ace75fd73b9b8497490d1ee03bbd1e52e8a6d0dac4b0f5c1f773cec447157c77a946eccd2256b8d51f95a42e0a6992b6c2739ad03197a
   languageName: node
   linkType: hard
 
@@ -15117,24 +15118,6 @@ __metadata:
   dependencies:
     node-gyp: latest
   checksum: 66b24358e15cdd0f705b456346e58b4613f2bf54206b47874decda4152614fb0632d2d662c92b0ea54810109f646e5233e4cdd64dbb2a1949070ee5dc14dab87
-  languageName: node
-  linkType: hard
-
-"fsevents@patch:fsevents@~2.1.2#builtin<compat/fsevents>":
-  version: 2.1.2
-  resolution: "fsevents@patch:fsevents@npm%3A2.1.2#builtin<compat/fsevents>::version=2.1.2&hash=11e9ea"
-  dependencies:
-    node-gyp: latest
-  checksum: f4e06c69cb1f888dcefd81822f7789fadb2885efd0f5967cb1ec499d5bdd086fa6b7ab5d76ad2160bed8e68daf81fa96be8b8bf61957d7a531b4c12dbeab3a6a
-  languageName: node
-  linkType: hard
-
-fsevents@~2.1.2:
-  version: 2.1.2
-  resolution: "fsevents@npm:2.1.2"
-  dependencies:
-    node-gyp: latest
-  checksum: 8f61ef784058aa410def121afcf20014fbb845c678c04e43fe1fd1edec6c469c5452343b4a49960d89e8a207955c8e9b37a229af7a8fc5b28658c9e0faabe086
   languageName: node
   linkType: hard
 
@@ -27909,16 +27892,16 @@ resolve@1.1.x:
   linkType: hard
 
 "rollup@npm:^2.38.0":
-  version: 2.38.0
-  resolution: "rollup@npm:2.38.0"
+  version: 2.38.4
+  resolution: "rollup@npm:2.38.4"
   dependencies:
-    fsevents: ~2.1.2
+    fsevents: ~2.3.1
   dependenciesMeta:
     fsevents:
       optional: true
   bin:
     rollup: dist/bin/rollup
-  checksum: 253664a16eaa741506c417e0bb801b17aae655ecb11a50bbc7d578acb7d613a196e06132ce4c38185ab1a6e72f0ca3bef81865992e9062928934eb8faeebcf18
+  checksum: dab8b6c64fced8b1b606d4018bb8e37b96bfd5b711c1cd8523c017fb71694bc3dfed2625e959e670b53d56cfae9fb6941f4005f1de02770e1f9d76d50e5d026d
   languageName: node
   linkType: hard
 

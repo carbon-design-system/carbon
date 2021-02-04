@@ -24,6 +24,7 @@
     "access": "public"
   },
   "scripts": {
+    "ci-check": "carbon-cli check \"scss/**/*.scss\" -i \"**/generated/**\"",
     "clean": "rimraf es lib umd scss/generated",
     "build": "yarn clean && carbon-cli bundle src/index.js --name CarbonThemes && node tasks/build.js && carbon-cli check \"scss/*.scss\""
   },
