@@ -15,13 +15,12 @@ export function syncSmallIcons() {
     const document = Document.getSelectedDocument();
     const symbolsPage = findOrCreateSymbolPage(document);
     const symbols = document.getSymbols();
-    syncIconSymbols(
+    syncIconSymbols({
       document,
-      Array.from(symbols),
+      symbols: Array.from(symbols),
       symbolsPage,
-      document.sharedLayerStyles,
-      [16, 20]
-    );
+      sizes: [16, 20],
+    });
   });
 }
 
@@ -30,12 +29,11 @@ export function syncLargeIcons() {
     const document = Document.getSelectedDocument();
     const symbolsPage = findOrCreateSymbolPage(document);
     const symbols = document.getSymbols();
-    syncIconSymbols(
+    syncIconSymbols({
       document,
-      Array.from(symbols),
+      symbols: Array.from(symbols),
       symbolsPage,
-      document.sharedLayerStyles,
-      [24, 32]
-    );
+      sizes: [24, 32],
+    });
   });
 }
