@@ -9186,6 +9186,7 @@ __metadata:
     object-assign: ^4.1.1
     postcss-custom-properties: ^9.0.2
     postcss-loader: ^3.0.0
+    prismjs: ^1.23.0
     promise: ^8.0.1
     prop-types: ^15.7.2
     react: ^16.8.6
@@ -25388,6 +25389,18 @@ fsevents@~2.1.2:
     clipboard:
       optional: true
   checksum: 41fe7f4e7dd08dd8c312d3be272ea9964710a0d6f5ce9cae6fe2a489feb498fd188c5feffc4e6fc410ee54b803ad4afe185427cb5ce99844e984bc1cc29be482
+  languageName: node
+  linkType: hard
+
+"prismjs@npm:^1.23.0":
+  version: 1.23.0
+  resolution: "prismjs@npm:1.23.0"
+  dependencies:
+    clipboard: ^2.0.0
+  dependenciesMeta:
+    clipboard:
+      optional: true
+  checksum: 9d55785f1ea68e2a2e6b0a5ea1241811ed986182af76053ecf50245521414597d70b17dc5804a7ad961dfd459e6883a89ad3f86bb064ac3484e3ef24b7891f4f
   languageName: node
   linkType: hard
 

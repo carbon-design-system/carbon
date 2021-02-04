@@ -5,12 +5,15 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React from 'react';
+import React, { useEffect } from 'react';
 import { action } from '@storybook/addon-actions';
 import { withKnobs, boolean, text, select } from '@storybook/addon-knobs';
 import CodeSnippet from '../CodeSnippet';
 import CodeSnippetSkeleton from './CodeSnippet.Skeleton';
 import mdx from './CodeSnippet.mdx';
+import Prism from 'prismjs';
+import 'prismjs/themes/prism.css'; //can use default (light theme), solarizedlight (light theme), okaidia (dark theme), tomorrow (dark theme)
+import 'prismjs/components/prism-scss';
 
 export default {
   title: 'CodeSnippet',
@@ -22,6 +25,49 @@ export default {
     },
   },
 };
+
+const highlightExample = `
+/// Code snippet styles
+/// @access private
+/// @group code-snippet
+@mixin snippet {
+  .#{$prefix}--snippet {
+    @include reset;
+  }
+
+  .#{$prefix}--snippet--disabled,
+  .#{$prefix}--snippet--disabled
+    .#{$prefix}--btn.#{$prefix}--snippet-btn--expand {
+    color: $disabled-02;
+    background-color: $disabled-01;
+  }
+
+  .#{$prefix}--snippet--disabled .#{$prefix}--snippet-btn--expand:hover,
+  .#{$prefix}--snippet--disabled .#{$prefix}--copy-btn:hover {
+    color: $disabled-02;
+    background-color: $disabled-01;
+    cursor: not-allowed;
+  }
+
+  .#{$prefix}--snippet--disabled .#{$prefix}--snippet__icon,
+  .#{$prefix}--snippet--disabled
+    .#{$prefix}--snippet-btn--expand
+    .#{$prefix}--icon-chevron--down {
+    fill: $disabled-02;
+  }
+
+  .#{$prefix}--snippet code {
+    @include type-style('code-01');
+  }
+
+  // overrides prismjs styles 
+  .#{$prefix}--snippet code[class*='language-'],
+  .#{$prefix}--snippet pre[class*='language-'] {
+    @include type-style('code-01');
+    padding: 0;
+    margin: 0;
+  }
+`;
 
 const props = () => ({
   type: select(
@@ -50,6 +96,55 @@ export const inline = () => (
     {'node -v'}
   </CodeSnippet>
 );
+
+export const multilineHighlighted = () => {
+  useEffect(() => {
+    Prism.highlightAll();
+  }, []);
+  return (
+    <>
+      <CodeSnippet
+        {...props()}
+        type="multi"
+        feedback="Copied to clipboard"
+        language="scss">
+        {highlightExample}
+      </CodeSnippet>
+      <br />
+      <CodeSnippet
+        {...props()}
+        type="multi"
+        feedback="Copied to clipboard"
+        language="javascript">
+        {`
+    onSubmit(e) {
+      e.preventDefault();
+      const job = {
+        title: 'Developer',
+        company: 'Facebook' 
+        };
+      }
+    `}
+      </CodeSnippet>
+      <br />
+      <CodeSnippet
+        {...props()}
+        type="multi"
+        feedback="Copied to clipboard"
+        language="markup">
+        {`
+    <CodeSnippet
+      {...props()}
+      type="multi"
+      feedback="Copied to clipboard"
+      language="css"> <!-- see https://prismjs.com/#supported-languages for complete list of languages -->
+      {highlightExample}
+    </CodeSnippet>
+      `}
+      </CodeSnippet>
+    </>
+  );
+};
 
 export const multiline = () => (
   <CodeSnippet {...props()} type="multi" feedback="Copied to clipboard">
