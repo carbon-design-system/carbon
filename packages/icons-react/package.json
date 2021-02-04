@@ -1,7 +1,7 @@
 {
   "name": "@carbon/icons-react",
   "description": "React components for icons in digital and software products using the Carbon Design System",
-  "version": "10.25.0-rc.0",
+  "version": "10.25.0",
   "license": "Apache-2.0",
   "main": "lib/index.js",
   "module": "es/index.js",
@@ -36,12 +36,12 @@
     "react": ">=16"
   },
   "dependencies": {
-    "@carbon/icon-helpers": "^10.13.0-rc.0",
+    "@carbon/icon-helpers": "^10.13.0",
     "prop-types": "^15.7.2"
   },
   "devDependencies": {
-    "@carbon/icon-build-helpers": "^0.15.0-rc.0",
-    "@carbon/icons": "^10.25.0-rc.0"
+    "@carbon/icon-build-helpers": "^0.15.0",
+    "@carbon/icons": "^10.25.0"
   },
   "sideEffects": false
 }
