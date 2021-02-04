@@ -34,6 +34,7 @@ function CodeSnippet({
   showLessText,
   hideCopyButton,
   wrapText,
+  language,
   ...rest
 }) {
   const [expandedCode, setExpandedCode] = useState(false);
@@ -109,6 +110,10 @@ function CodeSnippet({
     handleScroll();
   }, [handleScroll]);
 
+  const syntaxHighlightClasses = classNames({
+    [`language-${language}`]: language,
+  });
+
   const codeSnippetClasses = classNames(className, `${prefix}--snippet`, {
     [`${prefix}--snippet--${type}`]: type,
     [`${prefix}--snippet--disabled`]: type !== 'inline' && disabled,
@@ -124,7 +129,9 @@ function CodeSnippet({
     if (hideCopyButton) {
       return (
         <span className={codeSnippetClasses}>
-          <code id={uid}>{children}</code>
+          <code id={uid} className={syntaxHighlightClasses}>
+            {children}
+          </code>
         </span>
       );
     }
@@ -151,13 +158,11 @@ function CodeSnippet({
         className={`${prefix}--snippet-container`}
         aria-label={ariaLabel || copyLabel || 'code-snippet'}
         onScroll={(type === 'single' && handleScroll) || null}>
-        <code>
-          <pre
-            ref={codeContentRef}
-            onScroll={(type === 'multi' && handleScroll) || null}>
-            {children}
-          </pre>
-        </code>
+        <pre
+          ref={codeContentRef}
+          onScroll={(type === 'multi' && handleScroll) || null}>
+          <code className={syntaxHighlightClasses}>{children}</code>
+        </pre>
       </div>
       {/**
        * left overflow indicator must come after the snippet due to z-index and
@@ -275,6 +280,11 @@ CodeSnippet.propTypes = {
    * Specify whether or not to wrap the text.
    */
   wrapText: PropTypes.bool,
+
+  /**
+   * Specify what language the code is for syntax highlight from PrismJS: https://prismjs.com/#supported-languages
+   */
+  language: PropTypes.string,
 };
 
 CodeSnippet.defaultProps = {
