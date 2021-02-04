@@ -46,7 +46,7 @@ export default {
 };
 
 export const Usage = () => (
-  <DataTable rows={rows} headers={headers}>
+  <DataTable rows={rows} headers={headers} useZebraStyles>
     {({
       rows,
       headers,
@@ -97,6 +97,7 @@ export const BatchExpansion = () => (
   <DataTable
     rows={rows}
     headers={headers}
+    useZebraStyles
     render={({
       rows,
       headers,

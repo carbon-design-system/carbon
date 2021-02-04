@@ -106,6 +106,7 @@ export const Example = (props) => {
         <DataTable
           rows={this.state.rows}
           headers={this.state.headers}
+          useZebraStyles
           {...this.props}
           render={({
             rows,
