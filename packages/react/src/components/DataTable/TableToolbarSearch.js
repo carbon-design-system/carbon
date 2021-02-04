@@ -28,6 +28,7 @@ const TableToolbarSearch = ({
   onChange: onChangeProp,
   translateWithId: t,
   placeHolderText,
+  placeholder,
   labelText,
   expanded: expandedProp,
   defaultExpanded,
@@ -125,7 +126,9 @@ const TableToolbarSearch = ({
         id={typeof id !== 'undefined' ? id : uniqueId.toString()}
         labelText={labelText || t('carbon.table.toolbar.search.label')}
         placeHolderText={
-          placeHolderText || t('carbon.table.toolbar.search.placeholder')
+          placeHolderText ||
+          placeholder ||
+          t('carbon.table.toolbar.search.placeholder')
         }
         onChange={onChange}
         {...rest}
@@ -195,7 +198,15 @@ TableToolbarSearch.propTypes = {
   /**
    * Provide an optional placeholder text for the Search component
    */
-  placeHolderText: PropTypes.string,
+  placeHolderText: deprecate(
+    PropTypes.string,
+    `\nThe prop \`placeHolderText\` for TableToolbarSearch has been deprecated in favor of \`placeholder\`. Please use \`placeholder\` instead.`
+  ),
+
+  /**
+   * Provide an optional placeholder text for the Search component
+   */
+  placeholder: PropTypes.string,
 
   /**
    * Provide an optional className for the overal container of the Search
