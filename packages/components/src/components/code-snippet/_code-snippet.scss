@@ -48,6 +48,19 @@
     @include type-style('code-01');
   }
 
+  //overrides prismjs styles
+  .#{$prefix}--snippet code[class*='language-'],
+  .#{$prefix}--snippet pre[class*='language-'] {
+    @include type-style('code-01');
+    padding: 0;
+    margin: 0;
+  }
+
+  .#{$prefix}--snippet :not(pre) > code[class*='language-'],
+  .#{$prefix}--snippet pre[class*='language-'] {
+    background: transparent;
+  }
+
   // Inline Code Snippet
   .#{$prefix}--snippet--inline {
     @include reset;
