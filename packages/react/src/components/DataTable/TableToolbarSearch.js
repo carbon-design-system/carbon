@@ -125,7 +125,7 @@ const TableToolbarSearch = ({
         value={value}
         id={typeof id !== 'undefined' ? id : uniqueId.toString()}
         labelText={labelText || t('carbon.table.toolbar.search.label')}
-        placeHolderText={
+        placeholder={
           placeHolderText ||
           placeholder ||
           t('carbon.table.toolbar.search.placeholder')
@@ -196,7 +196,7 @@ TableToolbarSearch.propTypes = {
   persistent: PropTypes.bool,
 
   /**
-   * Provide an optional placeholder text for the Search component
+   * Deprecated in favor of `placeholder`
    */
   placeHolderText: deprecate(
     PropTypes.string,
