@@ -21,7 +21,7 @@ export ComposedModal, {
 } from './components/ComposedModal';
 export ContentSwitcher from './components/ContentSwitcher';
 export ContextMenu, {
-  ContextMenuOption,
+  ContextMenuItem,
   ContextMenuDivider,
   ContextMenuSelectableOption,
   ContextMenuRadioGroup,

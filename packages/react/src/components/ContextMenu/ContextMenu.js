@@ -195,7 +195,6 @@ const ContextMenu = function ContextMenu({
 
   const someNodesHaveIcons = React.Children.toArray(children).some(
     (node) =>
-      node.props.renderIcon ||
       node.type === ContextMenuSelectableOption ||
       node.type === ContextMenuRadioGroup
   );

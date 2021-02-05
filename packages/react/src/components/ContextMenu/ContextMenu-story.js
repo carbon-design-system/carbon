@@ -7,11 +7,10 @@
 
 import React, { useEffect, useState } from 'react';
 import { action } from '@storybook/addon-actions';
-import { FolderShared16, Edit16, TrashCan16 } from '@carbon/icons-react';
 import { InlineNotification } from '../Notification';
 
 import ContextMenu, {
-  ContextMenuOption,
+  ContextMenuItem,
   ContextMenuDivider,
   ContextMenuSelectableOption,
   ContextMenuRadioGroup,
@@ -74,101 +73,41 @@ export const _ContextMenu = () => {
     <div style={{ height: 'calc(100vh - 6.25rem)' }}>
       <InfoBanner />
       <ContextMenu {...contextMenuProps}>
-        <ContextMenuOption label="Share with">
+        <ContextMenuItem label="Share with">
           <ContextMenuRadioGroup
             label="Share with"
             items={['None', 'Product team', 'Organization', 'Company']}
             initialSelectedItem="Product team"
             onChange={action('onChange')}
           />
-        </ContextMenuOption>
+        </ContextMenuItem>
         <ContextMenuDivider />
-        <ContextMenuOption
+        <ContextMenuItem
           label="Cut"
           shortcut="⌘X"
           shortcutText="command x"
           onClick={action('onClick')}
         />
-        <ContextMenuOption
+        <ContextMenuItem
           label="Copy"
           shortcut="⌘C"
           shortcutText="command c"
           onClick={action('onClick')}
         />
-        <ContextMenuOption
+        <ContextMenuItem
           label="Copy path"
           shortcut="⌥⌘C"
           shortcutText="option command c"
           onClick={action('onClick')}
         />
-        <ContextMenuOption
+        <ContextMenuItem
           label="Paste"
           shortcut="⌘V"
           shortcutText="command v"
           disabled
           onClick={action('onClick')}
         />
-        <ContextMenuOption label="Duplicate" onClick={action('onClick')} />
-        <ContextMenuDivider />
-        <ContextMenuOption
-          label="Rename"
-          shortcut="↩︎"
-          shortcutText="enter"
-          onClick={action('onClick')}
-        />
-        <ContextMenuOption
-          label="Delete"
-          shortcut="⌘⌫"
-          shortcutText="command backspace"
-          onClick={action('onClick')}
-        />
-      </ContextMenu>
-    </div>
-  );
-};
-
-export const WithIcons = () => {
-  const contextMenuProps = useContextMenu();
-
-  return (
-    <div style={{ height: 'calc(100vh - 6.25rem)' }}>
-      <InfoBanner />
-      <ContextMenu {...contextMenuProps}>
-        <ContextMenuOption label="Share with" renderIcon={FolderShared16}>
-          <ContextMenuRadioGroup
-            label="Share with"
-            items={['None', 'Product team', 'Organization', 'Company']}
-            initialSelectedItem="Product team"
-            onChange={action('onChange')}
-          />
-        </ContextMenuOption>
-        <ContextMenuDivider />
-        <ContextMenuOption
-          label="Cut"
-          shortcut="⌘X"
-          shortcutText="command x"
-          onClick={action('onClick')}
-        />
-        <ContextMenuOption
-          label="Copy"
-          shortcut="⌘C"
-          shortcutText="command c"
-          onClick={action('onClick')}
-        />
-        <ContextMenuOption
-          label="Copy path"
-          shortcut="⌥⌘C"
-          shortcutText="option command c"
-          onClick={action('onClick')}
-        />
-        <ContextMenuOption
-          label="Paste"
-          shortcut="⌘V"
-          shortcutText="command v"
-          disabled
-          onClick={action('onClick')}
-        />
-        <ContextMenuOption label="Duplicate" onClick={action('onClick')} />
+        <ContextMenuItem label="Duplicate" onClick={action('onClick')} />
         <ContextMenuDivider />
         <ContextMenuSelectableOption
           label="Publish"
@@ -176,18 +115,16 @@ export const WithIcons = () => {
           onChange={action('onChange')}
         />
         <ContextMenuDivider />
-        <ContextMenuOption
+        <ContextMenuItem
           label="Rename"
           shortcut="↩︎"
           shortcutText="enter"
-          renderIcon={Edit16}
           onClick={action('onClick')}
         />
-        <ContextMenuOption
+        <ContextMenuItem
           label="Delete"
           shortcut="⌘⌫"
           shortcutText="command backspace"
-          renderIcon={TrashCan16}
           onClick={action('onClick')}
         />
       </ContextMenu>
