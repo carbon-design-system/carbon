@@ -35,11 +35,6 @@ describe('Carbon Components React', () => {
         "ComposedModal",
         "Content",
         "ContentSwitcher",
-        "ContextMenu",
-        "ContextMenuDivider",
-        "ContextMenuOption",
-        "ContextMenuRadioGroup",
-        "ContextMenuSelectableOption",
         "Copy",
         "CopyButton",
         "DangerButton",
@@ -198,10 +193,16 @@ describe('Carbon Components React', () => {
         "TooltipDefinition",
         "TooltipIcon",
         "UnorderedList",
+        "unstable_ContextMenu",
+        "unstable_ContextMenuDivider",
+        "unstable_ContextMenuItem",
+        "unstable_ContextMenuRadioGroup",
+        "unstable_ContextMenuSelectableOption",
         "unstable_PageSelector",
         "unstable_Pagination",
         "unstable_TreeNode",
         "unstable_TreeView",
+        "unstable_useContextMenu",
       ]
     `);
   });
