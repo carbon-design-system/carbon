@@ -473,7 +473,6 @@ class NumberInput extends Component {
                     />
                   )}
                   <div className={`${prefix}--number__controls`}>
-                    <div className={`${prefix}--number__rule-divider`}></div>
                     <button
                       type="button"
                       className={`${prefix}--number__control-btn down-icon`}
@@ -485,6 +484,7 @@ class NumberInput extends Component {
                       aria-atomic="true">
                       <Subtract16 className="down-icon" />
                     </button>
+                    <div className={`${prefix}--number__rule-divider`}></div>
                     <button
                       type="button"
                       className={`${prefix}--number__control-btn up-icon`}
