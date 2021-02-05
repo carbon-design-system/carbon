@@ -7,14 +7,13 @@
 
 import React from 'react';
 import ContextMenu, {
-  ContextMenuOption,
+  ContextMenuItem,
   ContextMenuRadioGroup,
   ContextMenuSelectableOption,
   ContextMenuDivider,
 } from '../ContextMenu';
 import { mount } from 'enzyme';
 import { settings } from 'carbon-components';
-import { Copy16 } from '@carbon/icons-react';
 import { describe, expect } from 'window-or-global';
 
 const { prefix } = settings;
@@ -42,14 +41,14 @@ describe('ContextMenu', () => {
 
     describe('option', () => {
       it('receives the expected classes', () => {
-        const wrapper = mount(<ContextMenuOption label="Copy" />);
-        const container = wrapper.childAt(0);
+        const wrapper = mount(<ContextMenuItem label="Copy" />);
+        const container = wrapper.childAt(0).childAt(0);
 
         expect(container.hasClass(`${prefix}--context-menu-option`)).toBe(true);
       });
 
       it('renders props.label', () => {
-        const wrapper = mount(<ContextMenuOption label="Copy" />);
+        const wrapper = mount(<ContextMenuItem label="Copy" />);
 
         expect(
           wrapper.find(`span.${prefix}--context-menu-option__label`).text()
@@ -61,19 +60,9 @@ describe('ContextMenu', () => {
         ).toBe('Copy');
       });
 
-      it('renders props.renderIcon when provided', () => {
-        const wrapper = mount(
-          <ContextMenuOption label="Copy" renderIcon={Copy16} indented />
-        );
-
-        expect(
-          wrapper.find(`div.${prefix}--context-menu-option__icon`).length
-        ).toBeGreaterThan(0);
-      });
-
       it('renders props.shortcut when provided', () => {
         const wrapper = mount(
-          <ContextMenuOption
+          <ContextMenuItem
             label="Copy"
             shortcut="⌘C"
             shortcutText="command c"
@@ -92,7 +81,7 @@ describe('ContextMenu', () => {
       });
 
       it('respects props.disabled', () => {
-        const wrapper = mount(<ContextMenuOption label="Copy" disabled />);
+        const wrapper = mount(<ContextMenuItem label="Copy" disabled />);
         const content = wrapper.find(
           `button.${prefix}--context-menu-option__content`
         );
@@ -111,10 +100,10 @@ describe('ContextMenu', () => {
       it('renders props.children as submenu', () => {
         const wrapper = mount(
           <ContextMenu>
-            <ContextMenuOption label="Format">
-              <ContextMenuOption label="Bold" />
-              <ContextMenuOption label="Italic" />
-            </ContextMenuOption>
+            <ContextMenuItem label="Format">
+              <ContextMenuItem label="Bold" />
+              <ContextMenuItem label="Italic" />
+            </ContextMenuItem>
           </ContextMenu>
         );
 
