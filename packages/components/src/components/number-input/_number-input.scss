@@ -255,6 +255,14 @@
     background-color: transparent;
   }
 
+  .#{$prefix}--number--light .#{$prefix}--number__rule-divider,
+  .#{$prefix}--number--light
+    .#{$prefix}--number__invalid
+    + .#{$prefix}--number__controls
+    .#{$prefix}--number__rule-divider:first-of-type {
+    background-color: $decorative-01;
+  }
+
   .#{$prefix}--number__controls .#{$prefix}--number__rule-divider:last-of-type {
     // center divider in container
     position: absolute;
