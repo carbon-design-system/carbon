@@ -34,15 +34,18 @@ const Tag = ({
   id,
   type,
   filter,
+  renderIcon: CustomIconElement,
   title,
   disabled,
   onClose,
+  size,
   ...other
 }) => {
   const tagId = id || `tag-${getInstanceId()}`;
   const tagClasses = classNames(`${prefix}--tag`, className, {
     [`${prefix}--tag--disabled`]: disabled,
     [`${prefix}--tag--filter`]: filter,
+    [`${prefix}--tag--${size}`]: size,
     [`${prefix}--tag--${type}`]: type,
   });
   const handleClose = (event) => {
@@ -51,6 +54,7 @@ const Tag = ({
       onClose(event);
     }
   };
+
   return filter ? (
     <div
       className={tagClasses}
@@ -77,12 +81,18 @@ const Tag = ({
       </button>
     </div>
   ) : (
-    <span
-      className={tagClasses}
-      title={typeof children === 'string' ? children : null}
-      {...other}>
-      {children !== null && children !== undefined ? children : TYPES[type]}
-    </span>
+    <div className={tagClasses} id={tagId} {...other}>
+      {CustomIconElement ? (
+        <div className={`${prefix}--tag__custom-icon`}>
+          <CustomIconElement />
+        </div>
+      ) : (
+        ''
+      )}
+      <span title={typeof children === 'string' ? children : null}>
+        {children !== null && children !== undefined ? children : TYPES[type]}
+      </span>
+    </div>
   );
 };
 
@@ -116,6 +126,18 @@ Tag.propTypes = {
    * Click handler for filter tag close button.
    */
   onClose: PropTypes.func,
+
+  /**
+   * Optional prop to render a custom icon.
+   * Can be a React component class
+   */
+  renderIcon: PropTypes.oneOfType([PropTypes.func, PropTypes.object]),
+
+  /**
+   * Specify the size of the Tag. Currently supports either `sm` or
+   * default sizes.
+   */
+  size: PropTypes.oneOf(['sm']),
 
   /**
    * Text to show on clear filters

@@ -356,6 +356,9 @@ Map {
       "copyLabel": Object {
         "type": "string",
       },
+      "disabled": Object {
+        "type": "bool",
+      },
       "feedback": Object {
         "type": "string",
       },
@@ -566,7 +569,7 @@ Map {
         "type": "bool",
       },
       "invalidText": Object {
-        "type": "string",
+        "type": "node",
       },
       "itemToElement": Object {
         "type": "func",
@@ -643,6 +646,9 @@ Map {
       "selectorPrimaryFocus": "[data-modal-primary-focus]",
     },
     "propTypes": Object {
+      "aria-label": Object {
+        "type": "string",
+      },
       "children": Object {
         "type": "node",
       },
@@ -1368,6 +1374,9 @@ Map {
         "defaultValue": Object {
           "type": "string",
         },
+        "disabled": Object {
+          "type": "bool",
+        },
         "expanded": Object {
           "type": "bool",
         },
@@ -1956,6 +1965,9 @@ Map {
       "defaultValue": Object {
         "type": "string",
       },
+      "disabled": Object {
+        "type": "bool",
+      },
       "expanded": Object {
         "type": "bool",
       },
@@ -2076,9 +2088,11 @@ Map {
           Array [
             "ar",
             "at",
+            "az",
             "be",
             "bg",
             "bn",
+            "bs",
             "cat",
             "cs",
             "cy",
@@ -2090,16 +2104,22 @@ Map {
             "et",
             "fa",
             "fi",
+            "fo",
             "fr",
+            "ga",
             "gr",
             "he",
             "hi",
             "hr",
             "hu",
             "id",
+            "is",
             "it",
             "ja",
+            "ka",
+            "km",
             "ko",
+            "kz",
             "lt",
             "lv",
             "mk",
@@ -2117,12 +2137,15 @@ Map {
             "sk",
             "sl",
             "sq",
+            "sr-cyr",
             "sr",
             "sv",
             "th",
             "tr",
             "uk",
+            "uz",
             "vn",
+            "zh-tw",
             "zh",
           ],
         ],
@@ -2219,7 +2242,7 @@ Map {
         "type": "bool",
       },
       "invalidText": Object {
-        "type": "string",
+        "type": "node",
       },
       "labelText": Object {
         "isRequired": true,
@@ -2254,7 +2277,7 @@ Map {
         "type": "bool",
       },
       "warnText": Object {
-        "type": "string",
+        "type": "node",
       },
     },
   },
@@ -2306,6 +2329,9 @@ Map {
         ],
         "type": "oneOfType",
       },
+      "hideLabel": Object {
+        "type": "bool",
+      },
       "id": Object {
         "isRequired": true,
         "type": "string",
@@ -2328,7 +2354,7 @@ Map {
         "type": "bool",
       },
       "invalidText": Object {
-        "type": "string",
+        "type": "node",
       },
       "itemToElement": Object {
         "type": "func",
@@ -2401,7 +2427,7 @@ Map {
         "type": "bool",
       },
       "warnText": Object {
-        "type": "string",
+        "type": "node",
       },
     },
     "render": [Function],
@@ -3564,7 +3590,7 @@ Map {
           "type": "bool",
         },
         "invalidText": Object {
-          "type": "string",
+          "type": "node",
         },
         "itemToString": Object {
           "type": "func",
@@ -3625,7 +3651,7 @@ Map {
           "type": "bool",
         },
         "warnText": Object {
-          "type": "string",
+          "type": "node",
         },
       },
     },
@@ -3795,7 +3821,7 @@ Map {
         "type": "bool",
       },
       "invalidText": Object {
-        "type": "string",
+        "type": "node",
       },
       "itemToString": Object {
         "type": "func",
@@ -3868,7 +3894,7 @@ Map {
         "type": "bool",
       },
       "warnText": Object {
-        "type": "string",
+        "type": "node",
       },
     },
     "render": [Function],
@@ -4660,7 +4686,7 @@ Map {
         "type": "bool",
       },
       "invalidText": Object {
-        "type": "string",
+        "type": "node",
       },
       "labelText": Object {
         "type": "node",
@@ -5046,6 +5072,9 @@ Map {
         "type": "func",
       },
       "renderAnchor": [Function],
+      "renderButton": Object {
+        "type": "func",
+      },
       "renderContent": Object {
         "type": "func",
       },
@@ -5080,6 +5109,7 @@ Map {
   },
   "Tabs" => Object {
     "defaultProps": Object {
+      "scrollIntoView": true,
       "selected": 0,
       "selectionMode": "automatic",
       "type": "default",
@@ -5094,6 +5124,9 @@ Map {
       "hidden": Object {
         "type": "bool",
       },
+      "leftOverflowButtonProps": Object {
+        "type": "object",
+      },
       "light": Object {
         "type": "bool",
       },
@@ -5105,6 +5138,12 @@ Map {
       },
       "onSelectionChange": Object {
         "type": "func",
+      },
+      "rightOverflowButtonProps": Object {
+        "type": "object",
+      },
+      "scrollIntoView": Object {
+        "type": "bool",
       },
       "selected": Object {
         "type": "number",
@@ -5151,6 +5190,27 @@ Map {
       },
       "onClose": Object {
         "type": "func",
+      },
+      "renderIcon": Object {
+        "args": Array [
+          Array [
+            Object {
+              "type": "func",
+            },
+            Object {
+              "type": "object",
+            },
+          ],
+        ],
+        "type": "oneOfType",
+      },
+      "size": Object {
+        "args": Array [
+          Array [
+            "sm",
+          ],
+        ],
+        "type": "oneOf",
       },
       "title": Object {
         "type": "string",
@@ -5226,7 +5286,7 @@ Map {
         "type": "bool",
       },
       "invalidText": Object {
-        "type": "string",
+        "type": "node",
       },
       "labelText": Object {
         "isRequired": true,
@@ -5312,7 +5372,7 @@ Map {
           "type": "bool",
         },
         "invalidText": Object {
-          "type": "string",
+          "type": "node",
         },
         "labelText": Object {
           "isRequired": true,
@@ -5420,7 +5480,7 @@ Map {
           "type": "bool",
         },
         "invalidText": Object {
-          "type": "string",
+          "type": "node",
         },
         "labelText": Object {
           "isRequired": true,
@@ -5531,7 +5591,7 @@ Map {
         "type": "bool",
       },
       "invalidText": Object {
-        "type": "string",
+        "type": "node",
       },
       "labelText": Object {
         "isRequired": true,
@@ -5578,7 +5638,7 @@ Map {
         "type": "bool",
       },
       "warnText": Object {
-        "type": "string",
+        "type": "node",
       },
     },
     "render": [Function],
@@ -5732,7 +5792,13 @@ Map {
       "tileCollapsedIconText": Object {
         "type": "string",
       },
+      "tileCollapsedLabel": Object {
+        "type": "string",
+      },
       "tileExpandedIconText": Object {
+        "type": "string",
+      },
+      "tileExpandedLabel": Object {
         "type": "string",
       },
     },
@@ -5889,7 +5955,7 @@ Map {
         "type": "bool",
       },
       "invalidText": Object {
-        "type": "string",
+        "type": "node",
       },
       "labelText": Object {
         "type": "node",
@@ -6175,7 +6241,7 @@ Map {
       },
       "children": Object {
         "isRequired": true,
-        "type": "string",
+        "type": "node",
       },
       "className": Object {
         "type": "string",
@@ -6551,6 +6617,14 @@ Map {
     "propTypes": Object {
       "className": Object {
         "type": "string",
+      },
+      "size": Object {
+        "args": Array [
+          Array [
+            "sm",
+          ],
+        ],
+        "type": "oneOf",
       },
     },
   },

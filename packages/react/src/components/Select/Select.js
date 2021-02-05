@@ -179,7 +179,7 @@ Select.propTypes = {
   /**
    * Message which is displayed if the value is invalid.
    */
-  invalidText: PropTypes.string,
+  invalidText: PropTypes.node,
 
   /**
    * Provide label text to be read by screen readers when interacting with the

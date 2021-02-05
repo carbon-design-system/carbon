@@ -218,7 +218,7 @@
     - 32
 - name: accumulation--ice
   friendly_name: Accumulation ice
-  aliases: 
+  aliases:
     - gauge
     - measurement
     - quantity
@@ -232,7 +232,7 @@
     - 32
 - name: accumulation--precipitation
   friendly_name: Accumulation precipitation
-  aliases: 
+  aliases:
     - gauge
     - measurement
     - quantity
@@ -245,7 +245,7 @@
     - 32
 - name: accumulation--rain
   friendly_name: Accumulation rain
-  aliases: 
+  aliases:
     - gauge
     - measurement
     - quantity
@@ -259,7 +259,7 @@
     - 32
 - name: accumulation--snow
   friendly_name: Accumulation snow
-  aliases: 
+  aliases:
     - gauge
     - measurement
     - quantity
@@ -339,7 +339,7 @@
     - 32
 - name: agriculture-analytics
   friendly_name: Agriculture analytics
-  aliases: 
+  aliases:
     - agriculture
     - analytics
     - farming
@@ -465,10 +465,10 @@
     - 32
 - name: airline--digital-gate
   friendly_name: Airline digital gate
-  aliases: 
+  aliases:
     - airline
     - gate
-    - boarding 
+    - boarding
     - customer service
     - representative
     - agent
@@ -480,7 +480,7 @@
   aliases:
     - airline
     - gate
-    - manage 
+    - manage
     - customer service
     - representative
     - agent
@@ -490,7 +490,7 @@
     - 32
 - name: airline--passenger-care
   friendly_name: Airline passenger care
-  aliases: 
+  aliases:
     - airline
     - customer service
     - representative
@@ -501,10 +501,10 @@
     - 32
 - name: airline--rapid-board
   friendly_name: Airline rapid board
-  aliases: 
+  aliases:
     - airline
     - gate
-    - manage 
+    - manage
     - customer service
     - representative
     - agent
@@ -514,32 +514,32 @@
     - 32
 - name: airport--01
   friendly_name: Airport 01
-  aliases: 
-  - airport
-  - transportation
-  - airline
-  - plane
+  aliases:
+    - airport
+    - transportation
+    - airline
+    - plane
   sizes:
     - 32
 - name: airport--02
   friendly_name: Airport 02
-  aliases: 
-  - airport
-  - transportation
-  - airline
-  - plane
+  aliases:
+    - airport
+    - transportation
+    - airline
+    - plane
   sizes:
     - 32
 - name: airport-location
   friendly_name: Airport location
-  aliases: 
-  - airport
-  - transportation
-  - airline
-  - plane
-  - navigation
-  - map
-  - wayfinding
+  aliases:
+    - airport
+    - transportation
+    - airline
+    - plane
+    - navigation
+    - map
+    - wayfinding
   sizes:
     - 32
 - name: alarm
@@ -662,7 +662,7 @@
     - vertical top align
 - name: align-box--bottom-center
   friendly_name: Align box bottom center
-  aliases: 
+  aliases:
     - align
     - alignment
     - align bottom
@@ -674,7 +674,7 @@
     - 32
 - name: align-box--bottom-left
   friendly_name: Align box bottom left
-  aliases: 
+  aliases:
     - align
     - alignment
     - align bottom
@@ -686,7 +686,7 @@
     - 32
 - name: align-box--bottom-right
   friendly_name: Align box bottom right
-  aliases: 
+  aliases:
     - align
     - alignment
     - align bottom
@@ -698,7 +698,7 @@
     - 32
 - name: align-box--middle-center
   friendly_name: Align box middle center
-  aliases: 
+  aliases:
     - align
     - alignment
     - align middle
@@ -710,7 +710,7 @@
     - 32
 - name: align-box--middle-left
   friendly_name: Align box middle left
-  aliases: 
+  aliases:
     - align
     - alignment
     - align middle
@@ -722,7 +722,7 @@
     - 32
 - name: align-box--middle-right
   friendly_name: Align box middle right
-  aliases:  
+  aliases:
     - align
     - alignment
     - align middle
@@ -734,7 +734,7 @@
     - 32
 - name: align-box--top-center
   friendly_name: Align box top center
-  aliases: 
+  aliases:
     - align
     - alignment
     - align top
@@ -746,7 +746,7 @@
     - 32
 - name: align-box--top-left
   friendly_name: Align box top left
-  aliases: 
+  aliases:
     - align
     - alignment
     - align top
@@ -758,7 +758,7 @@
     - 32
 - name: align-box--top-right
   friendly_name: Align box top right
-  aliases: 
+  aliases:
     - align
     - alignment
     - align top
@@ -947,7 +947,7 @@
     - 32
 - name: area
   friendly_name: Area
-  aliases: 
+  aliases:
     - area
     - boundary
     - field
@@ -957,7 +957,7 @@
     - 32
 - name: area--custom
   friendly_name: Area custom
-  aliases: 
+  aliases:
     - area
     - custom
     - boundary
@@ -1278,12 +1278,12 @@
     - 32
 - name: baggage-claim
   friendly_name: Baggage claim
-  aliases: 
-  - baggage
-  - claim
-  - suitcase
-  - travel
-  - airport
+  aliases:
+    - baggage
+    - claim
+    - suitcase
+    - travel
+    - airport
   sizes:
     - 32
 - name: bar
@@ -1298,6 +1298,17 @@
     - glass
     - wine bottle
     - wine glass
+  sizes:
+    - 32
+- name: barcode
+  friendly_name: Barcode
+  aliases: 
+    - barcode
+    - technology
+    - tracking
+    - UPC
+    - inventory
+    - item
   sizes:
     - 32
 - name: barrier
@@ -1325,10 +1336,10 @@
     - 32
 - name: bat
   friendly_name: bat
-  aliases: 
-  - bat
-  - mammal
-  - animal
+  aliases:
+    - bat
+    - mammal
+    - animal
   sizes:
     - 32
 - name: battery--charging
@@ -1421,7 +1432,7 @@
     - 32
 - name: bee-bat
   friendly_name: Bee bat
-  aliases: 
+  aliases:
     - ibm
     - fly
     - bee
@@ -1512,7 +1523,7 @@
     - wireless communication
 - name: book
   friendly_name: Book
-  aliases: 
+  aliases:
     - book
     - read
     - document
@@ -1536,7 +1547,7 @@
     - 32
 - name: boolean
   friendly_name: boolean
-  aliases: 
+  aliases:
     - boolean
     - search
     - parameter
@@ -1545,7 +1556,7 @@
     - 32
 - name: border--bottom
   friendly_name: Border bottom
-  aliases: 
+  aliases:
     - border
     - bottom
     - formatting
@@ -1553,7 +1564,7 @@
     - 32
 - name: border--full
   friendly_name: Border full
-  aliases: 
+  aliases:
     - border
     - full
     - formatting
@@ -1561,7 +1572,7 @@
     - 32
 - name: border--left
   friendly_name: Border left
-  aliases: 
+  aliases:
     - border
     - left
     - formatting
@@ -1569,7 +1580,7 @@
     - 32
 - name: border--none
   friendly_name: Border none
-  aliases: 
+  aliases:
     - border
     - none
     - formatting
@@ -1577,7 +1588,7 @@
     - 32
 - name: border--right
   friendly_name: Border right
-  aliases: 
+  aliases:
     - border
     - right
     - formatting
@@ -1585,7 +1596,7 @@
     - 32
 - name: border--top
   friendly_name: Border top
-  aliases: 
+  aliases:
     - border
     - top
     - formatting
@@ -1643,7 +1654,7 @@
     - 32
 - name: bring-to-front
   friendly_name: Bring to front
-  aliases: 
+  aliases:
     - bring
     - front
     - formatting
@@ -1737,7 +1748,7 @@
     - 32
 - name: buoy
   friendly_name: Buoy
-  aliases: 
+  aliases:
     - weather
     - buoy
     - forecast
@@ -1756,40 +1767,40 @@
     - 32
 - name: cabin-care
   friendly_name: Cabin care
-  aliases: 
-  - cabin
-  - care
-  - transportation
-  - airline
-  - flight
-  - customer service
-  - attendant
+  aliases:
+    - cabin
+    - care
+    - transportation
+    - airline
+    - flight
+    - customer service
+    - attendant
   sizes:
     - 32
 - name: cabin-care--alert
   friendly_name: Cabin care alert
-  aliases: 
-  - cabin
-  - care
-  - transportation
-  - airline
-  - flight
-  - customer service
-  - alert
-  - call button
-  - attendant
+  aliases:
+    - cabin
+    - care
+    - transportation
+    - airline
+    - flight
+    - customer service
+    - alert
+    - call button
+    - attendant
   sizes:
     - 32
 - name: cabin-care--alt
   friendly_name: Cabin care alt
-  aliases: 
-  - cabin
-  - care
-  - transportation
-  - airline
-  - flight
-  - customer service
-  - attendant
+  aliases:
+    - cabin
+    - care
+    - transportation
+    - airline
+    - flight
+    - customer service
+    - attendant
   sizes:
     - 32
 - name: CAD
@@ -1819,6 +1830,24 @@
     - travel
     - coffee shop
     - cafe
+  sizes:
+    - 32
+- name: calculation
+  friendly_name: Calculation
+  aliases: 
+    - data
+    - calculation
+    - math 
+    - functions
+  sizes:
+    - 32
+- name: calculation--alt
+  friendly_name: Calculation--alt
+  aliases: 
+    - data
+    - calculation
+    - math
+    - functions
   sizes:
     - 32
 - name: calculator
@@ -1896,7 +1925,7 @@
     - 32
 - name: calendar--tools
   friendly_name: Calendar tools
-  aliases: 
+  aliases:
     - date
     - schedule
     - day
@@ -2277,7 +2306,7 @@
     - 32
 - name: center-to-fit
   friendly_name: Center to fit
-  aliases: 
+  aliases:
     - center
     - fit
   sizes:
@@ -2377,7 +2406,7 @@
     - 32
 - name: chart--average
   friendly_name: Chart average
-  aliases: 
+  aliases:
     - chart average
     - graph
     - chart
@@ -2444,6 +2473,17 @@
     - data
     - bubble chart
     - chart
+- name: chart--bubble-packed
+  friendly_name: Chart Bubble-packed
+  aliases: 
+    - graph
+    - bar
+    - data
+    - bubble chart
+    - packed
+    - chart
+  sizes:
+    - 32
 - name: chart--bullet
   friendly_name: Chart bullet
   aliases:
@@ -2625,8 +2665,17 @@
     - 32
 - name: chart--maximum
   friendly_name: Chart maximum
-  aliases: 
+  aliases:
     - chart maximum
+    - graph
+    - chart
+    - data
+  sizes:
+    - 32
+- name: chart--median
+  friendly_name: Chart median
+  aliases: 
+    - chart median
     - graph
     - chart
     - data
@@ -2634,7 +2683,7 @@
     - 32
 - name: chart--minimum
   friendly_name: Chart minimum
-  aliases: 
+  aliases:
     - chart minimum
     - graph
     - chart
@@ -2780,6 +2829,15 @@
     - data
     - chart scatter
     - scatter chart
+- name: chart--spiral
+  friendly_name: Chart spiral
+  aliases: 
+    - chart spiral
+    - graph
+    - chart
+    - data
+  sizes:
+    - 32
 - name: chart--stacked
   friendly_name: Chart stacked
   aliases:
@@ -2837,11 +2895,31 @@
     - Venn diagram chart
     - chart Venn diagram
     - Venn diagram
+- name: chart--violin-plot
+  friendly_name: Chart violin-plot
+  aliases: 
+    - chart violin plot
+    - graph
+    - chart
+    - data
+  sizes:
+    - 32
 - name: chart--waterfall
   friendly_name: Chart waterfall
   aliases:
     - chart waterfall
     - waterfall chart
+    - chart
+    - data
+  sizes:
+    - 32
+- name: chart--win-loss
+  friendly_name: Chart win-loss
+  aliases: 
+    - chart win-loss
+    - win
+    - loss
+    - graph
     - chart
     - data
   sizes:
@@ -3233,6 +3311,16 @@
     - variety
   sizes:
     - 32
+- name: choropleth-map
+  friendly_name: Chart choropleth-map
+  aliases: 
+    - chart choropleth-map
+    - map
+    - graph
+    - chart
+    - data
+  sizes:
+    - 32
 - name: circle--filled
   friendly_name: Circle filled
   aliases:
@@ -3431,7 +3519,7 @@
     - 32
 - name: cloud-ceiling
   friendly_name: Cloud ceiling
-  aliases: 
+  aliases:
     - weather
     - cloud
     - rain
@@ -3498,6 +3586,19 @@
     - css
     - dev
     - development
+  sizes:
+    - 32
+- name: code--hide
+  friendly_name: Code hide
+  aliases: 
+    - </>
+    - html
+    - java
+    - css
+    - dev
+    - development
+    - hide
+    - hidden
   sizes:
     - 32
 - name: code--reference
@@ -3573,7 +3674,7 @@
     - 32
 - name: column--delete
   friendly_name: Column delete
-  aliases: 
+  aliases:
     - column
     - delete
     - formatting
@@ -3581,10 +3682,25 @@
     - 32
 - name: column--insert
   friendly_name: Column insert
-  aliases: 
+  aliases:
     - column
     - insert
     - formatting
+  sizes:
+    - 32
+- name: column-dependency
+  friendly_name: Column dependency
+  aliases: 
+    - column
+    - dependency
+    - formatting
+  sizes:
+    - 32
+- name: commit
+  friendly_name: Commit
+  aliases: 
+    - commit
+    - operation
   sizes:
     - 32
 - name: compare
@@ -3648,9 +3764,24 @@
     - network
   sizes:
     - 32
+- name: connection-signal--off
+  friendly_name: Connection signal off
+  aliases: 
+    - signal
+    - tower
+    - service
+    - station
+    - radio
+    - connection
+    - wireless
+    - network
+    - off
+    - signal loss
+  sizes:
+    - 32
 - name: construction
   friendly_name: Construction
-  aliases: 
+  aliases:
     - construction
     - transportation
     - travel
@@ -3711,11 +3842,10 @@
     - copied
 - name: copy--link
   friendly_name: Copy link
-  aliases: 
+  aliases:
     - copy
     - link
     - file
-    
   sizes:
     - 32
 - name: corn
@@ -3783,7 +3913,7 @@
     - 32
 - name: crop-growth
   friendly_name: Crop growth
-  aliases: 
+  aliases:
     - crop
     - growth
     - agriculture
@@ -3793,7 +3923,7 @@
     - 32
 - name: crop-health
   friendly_name: Crop health
-  aliases: 
+  aliases:
     - crop
     - health
     - agriculture
@@ -3822,7 +3952,7 @@
     - 32
 - name: crossroads
   friendly_name: Crossroads
-  aliases: 
+  aliases:
     - crossroads
     - travel
     - map
@@ -3831,7 +3961,7 @@
     - 32
 - name: crowd-report
   friendly_name: Crowd report
-  aliases: 
+  aliases:
     - crowd
     - report
     - travel
@@ -3840,7 +3970,7 @@
     - 32
 - name: crowd-report--filled
   friendly_name: Crowd report filled
-  aliases: 
+  aliases:
     - crowd
     - report
     - travel
@@ -3878,6 +4008,13 @@
     - three
   sizes:
     - 32
+- name: cube
+  friendly_name: Cube
+  aliases: 
+    - file
+    - cube
+  sizes:
+    - 32
 - name: cube-view
   friendly_name: Cube view
   aliases:
@@ -3887,7 +4024,7 @@
     - 32
 - name: currency--baht
   friendly_name: Currency baht
-  aliases: 
+  aliases:
     - currency
     - money
     - baht
@@ -3896,7 +4033,7 @@
     - 32
 - name: currency--dollar
   friendly_name: Currency dollar
-  aliases: 
+  aliases:
     - currency
     - money
     - dollar
@@ -3905,7 +4042,7 @@
     - 32
 - name: currency--euro
   friendly_name: Currency euro
-  aliases: 
+  aliases:
     - currency
     - money
     - euro
@@ -3914,7 +4051,7 @@
     - 32
 - name: currency--lira
   friendly_name: Currency lira
-  aliases: 
+  aliases:
     - currency
     - money
     - lira
@@ -3923,7 +4060,7 @@
     - 32
 - name: currency--pound
   friendly_name: Currency pound
-  aliases: 
+  aliases:
     - currency
     - money
     - pound
@@ -3932,7 +4069,7 @@
     - 32
 - name: currency--rupee
   friendly_name: Currency rupee
-  aliases: 
+  aliases:
     - currency
     - money
     - rupee
@@ -3941,7 +4078,7 @@
     - 32
 - name: currency--shekel
   friendly_name: Currency shekel
-  aliases: 
+  aliases:
     - currency
     - money
     - shekel
@@ -3950,7 +4087,7 @@
     - 32
 - name: currency--won
   friendly_name: Currency won
-  aliases: 
+  aliases:
     - currency
     - money
     - won
@@ -3959,7 +4096,7 @@
     - 32
 - name: currency--yen
   friendly_name: Currency yen
-  aliases: 
+  aliases:
     - currency
     - money
     - yen
@@ -4125,6 +4262,17 @@
     - numbers
     - metrics
     - characters
+- name: data--format
+  friendly_name: Data format
+  aliases: 
+    - connection
+    - dot
+    - numbers
+    - metrics
+    - characters
+    - format
+  sizes:
+    - 32
 - name: data--reference
   friendly_name: Data reference
   sizes:
@@ -4165,6 +4313,25 @@
     - numbers
     - metrics
     - characters
+- name: data--view
+  friendly_name: Data view
+  aliases: 
+    - connection
+    - dot
+    - numbers
+    - metrics
+    - characters
+    - view
+  sizes:
+    - 32
+- name: data-bin
+  friendly_name: Data bin
+  aliases: 
+    - data-bin
+    - data
+    - containers
+  sizes:
+    - 32
 - name: data-class
   friendly_name: Data class
   aliases:
@@ -4175,7 +4342,7 @@
     - 32
 - name: data-collection
   friendly_name: Data collection
-  aliases: 
+  aliases:
     - data collection
     - input
     - aggregate
@@ -4327,11 +4494,33 @@
     - edit
   sizes:
     - 32
+- name: delivery--parcel
+  friendly_name: Delivery parcel
+  aliases: 
+    - delivery
+    - transportation
+    - shopping
+    - parcel
+    - shipping
+    - ecommerce
+  sizes:
+    - 32
+- name: delivery
+  friendly_name: Delivery
+  aliases: 
+    - truck
+    - delivery
+    - transportation
+    - shopping
+    - van
+    - shipping
+    - ecommerce
+  sizes:
+    - 32
 - name: delivery-truck
   friendly_name: Delivery truck
   aliases:
     - truck
-    - car
     - delivery
     - transportation
     - shopping
@@ -4510,6 +4699,49 @@
   aliases:
     - direction
     - direction curve filled
+  sizes:
+    - 32
+- name: direction--fork
+  friendly_name: Direction fork
+  aliases:
+    - direction
+    - direction fork
+  sizes:
+    - 32
+- name: direction--fork--filled
+  friendly_name: Direction fork filled
+  aliases: 
+    - direction
+    - direction fork
+    - direction fork filled
+  sizes:
+    - 32
+- name: direction--loop-left
+  friendly_name: Direction loop left
+  aliases: 
+    - direction
+    - direction loop left
+  sizes:
+    - 32
+- name: direction--loop-left--filled
+  friendly_name: Direction loop left filled
+  aliases: 
+    - direction
+    - direction loop left filled
+  sizes:
+    - 32
+- name: direction--loop-right
+  friendly_name: Direction loop right
+  aliases: 
+    - direction
+    - direction loop right 
+  sizes:
+    - 32
+- name: direction--loop-right--filled
+  friendly_name: Direction loop right filled
+  aliases: 
+    - direction
+    - direction loop right filled
   sizes:
     - 32
 - name: direction--merge
@@ -4786,6 +5018,17 @@
     - doc
     - paper
     - document export
+- name: document--horizontal
+  friendly_name: Document horizontal
+  aliases: 
+    - file
+    - doc
+    - paper
+    - horizontal
+    - document
+    - orientation
+  sizes:
+    - 32
 - name: document--import
   friendly_name: Document import
   sizes:
@@ -4828,6 +5071,17 @@
     - document unknown
     - document
     - unknown
+  sizes:
+    - 32
+- name: document--vertical
+  friendly_name: Document vertical
+  aliases: 
+    - file
+    - doc
+    - paper
+    - horizontal
+    - document
+    - orientation
   sizes:
     - 32
 - name: document--view
@@ -4945,6 +5199,30 @@
     - doodle
   sizes:
     - 32
+- name: drill-back
+  friendly_name: Drill back
+  aliases: 
+  - drill
+  - back
+  - operation
+  sizes:
+    - 32
+- name: drill-down
+  friendly_name: Drill down
+  aliases: 
+  - drill
+  - down
+  - operation
+  sizes:
+    - 32
+- name: drill-through
+  friendly_name: Drill through
+  aliases: 
+  - drill
+  - through
+  - operation
+  sizes:
+    - 32
 - name: driver-analysis
   friendly_name: Driver analysis
   aliases:
@@ -4973,7 +5251,7 @@
     - camera
 - name: drought
   friendly_name: Drought
-  aliases: 
+  aliases:
     - drought
     - precipitation
     - weather
@@ -5066,7 +5344,7 @@
     - world Southeast Asia filled
 - name: earthquake
   friendly_name: Earthquake
-  aliases: 
+  aliases:
     - weather
     - earthquake
     - forecast
@@ -5210,6 +5488,15 @@
     - company
   sizes:
     - 32
+- name: equalizer
+  friendly_name: Equalizer
+  aliases: 
+    - equalizer
+    - sound
+    - audio
+    - technology
+  sizes:
+    - 32
 - name: erase
   friendly_name: Erase
   aliases:
@@ -5340,6 +5627,13 @@
     - opertions
     - expand
     - categories
+  sizes:
+    - 32
+- name: explore
+  friendly_name: Explore
+  aliases: 
+    - explore
+    - action
   sizes:
     - 32
 - name: export
@@ -5647,6 +5941,17 @@
     - fave
     - bookmark
     - favorite filled
+- name: favorite--half
+  friendly_name: Favorite half
+  aliases: 
+    - heart
+    - save
+    - like
+    - fave
+    - bookmark
+    - favorite half
+  sizes:
+    - 32
 - name: fetch-upload
   friendly_name: Fetch upload
   aliases:
@@ -5848,7 +6153,7 @@
     - flash off filled
 - name: flight--international
   friendly_name: Flight international
-  aliases: 
+  aliases:
     - flight
     - international
     - travel
@@ -5858,7 +6163,7 @@
     - 32
 - name: flight--roster
   friendly_name: Flight roster
-  aliases: 
+  aliases:
     - flight
     - roster
     - manifest
@@ -5868,7 +6173,7 @@
     - 32
 - name: flight--schedule
   friendly_name: Flight schedule
-  aliases: 
+  aliases:
     - flight
     - schedule
     - travel
@@ -5877,7 +6182,7 @@
     - 32
 - name: flood
   friendly_name: Flood
-  aliases: 
+  aliases:
     - flood
     - weather
     - forecast
@@ -5887,7 +6192,7 @@
     - 32
 - name: flood--warning
   friendly_name: Flood warning
-  aliases: 
+  aliases:
     - flood
     - warning
     - disaster
@@ -5924,6 +6229,17 @@
     - outline
     - flow data
     - data flow
+- name: flow--modeler
+  friendly_name: Flow modeler
+  aliases: 
+    - flow chart
+    - chart
+    - graph
+    - diagram
+    - outline
+    - flow modeler
+  sizes:
+    - 32
 - name: flow--stream
   friendly_name: Flow stream
   sizes:
@@ -6005,6 +6321,17 @@
     - source
   sizes:
     - 32
+- name: folder--move-to
+  friendly_name: Folder move to
+  aliases: 
+    - file
+    - save
+    - document
+    - organize
+    - folder
+    - folder move to
+  sizes:
+    - 32
 - name: folder--off
   friendly_name: Folder off
   sizes:
@@ -6047,7 +6374,7 @@
     - 32
 - name: forecast--hail-30
   friendly_name: Forecast hail 30
-  aliases: 
+  aliases:
     - weather
     - forecast
     - hail
@@ -6057,19 +6384,19 @@
     - 32
 - name: forecast--lightning
   friendly_name: Forecast lightning
-  aliases: 
-   - forecast
-   - lightning
-   - weather
+  aliases:
+    - forecast
+    - lightning
+    - weather
   sizes:
     - 32
 - name: forecast--lightning-30
   friendly_name: Forecast lightning 30
-  aliases: 
-   - forecast
-   - lightning
-   - weather
-   - warning
+  aliases:
+    - forecast
+    - lightning
+    - weather
+    - warning
   sizes:
     - 32
 - name: fork
@@ -6221,6 +6548,15 @@
   friendly_name: Gas station
   aliases:
     - gas station
+    - gas
+    - fueling station
+    - fuel
+  sizes:
+    - 32
+- name: gas-station--filled
+  friendly_name: Gas station filled
+  aliases: 
+    - gas station filled
     - gas
     - fueling station
     - fuel
@@ -6756,7 +7092,7 @@
     - 32
 - name: ice--accretion
   friendly_name: Ice accretion
-  aliases: 
+  aliases:
     - ice
     - accretion
     - ice dam
@@ -7039,6 +7375,12 @@
     - insert
   sizes:
     - 32
+- name: insert-syntax
+  friendly_name: Insert syntax
+  aliases: 
+  - insert syntax
+  sizes:
+    - 32
 - name: integration
   friendly_name: Integration
   aliases:
@@ -7073,7 +7415,7 @@
     - 32
 - name: intersect
   friendly_name: Intersect
-  aliases: 
+  aliases:
     - intersect
     - operations
     - converge
@@ -7172,6 +7514,13 @@
     - file set
     - ISO
     - outline
+- name: join--full
+  friendly_name: Join full
+  aliases: 
+    - join
+    - full
+  sizes:
+    - 32
 - name: join--inner
   friendly_name: Join inner
   aliases:
@@ -7299,6 +7648,14 @@
     - tool
   sizes:
     - 32
+- name: lasso--polygon
+  friendly_name: Lasso polygon
+  aliases: 
+    - lasso polygon
+    - formatting
+    - tool
+  sizes:
+    - 32
 - name: launch
   friendly_name: Launch
   aliases:
@@ -7341,7 +7698,7 @@
     - drive
 - name: layers
   friendly_name: Layers
-  aliases: 
+  aliases:
     - operations
     - layers
   sizes:
@@ -7565,7 +7922,7 @@
     - english
 - name: license
   friendly_name: License
-  aliases: 
+  aliases:
     - license
     - document
     - file
@@ -7573,7 +7930,7 @@
     - 32
 - name: license--draft
   friendly_name: License draft
-  aliases: 
+  aliases:
     - license
     - draft
     - file
@@ -7582,7 +7939,7 @@
     - 32
 - name: license--global
   friendly_name: License global
-  aliases: 
+  aliases:
     - license
     - global
     - file
@@ -7591,7 +7948,7 @@
     - 32
 - name: license--maintenance
   friendly_name: License maintenance
-  aliases: 
+  aliases:
     - license
     - maintenance
     - file
@@ -7600,7 +7957,7 @@
     - 32
 - name: license--maintenance-draft
   friendly_name: License maintenance draft
-  aliases: 
+  aliases:
     - license
     - maintenance
     - draft
@@ -7610,7 +7967,7 @@
     - 32
 - name: license--third-party
   friendly_name: License third-party
-  aliases: 
+  aliases:
     - license
     - third-party
     - file
@@ -7619,7 +7976,7 @@
     - 32
 - name: license--third-party-draft
   friendly_name: License third-party draft
-  aliases: 
+  aliases:
     - license
     - third-party
     - draft
@@ -7675,14 +8032,14 @@
     - 32
 - name: linux
   friendly_name: Linux®
-  aliases: 
+  aliases:
     - linux
     - OS
   sizes:
     - 32
 - name: linux--alt
   friendly_name: Linux® alt
-  aliases: 
+  aliases:
     - linux
     - OS
   sizes:
@@ -7784,7 +8141,7 @@
     - 32
 - name: location--company
   friendly_name: Location company
-  aliases: 
+  aliases:
     - place
     - locate
     - gps
@@ -7801,7 +8158,7 @@
     - 32
 - name: location--company--filled
   friendly_name: Location company filled
-  aliases: 
+  aliases:
     - place
     - locate
     - gps
@@ -7811,15 +8168,25 @@
     - site
     - area
     - legend
-    - company 
+    - company
     - filled
     - location
     - travel
   sizes:
     - 32
+- name: location--current
+  friendly_name: Location current
+  aliases: 
+    - place
+    - locate
+    - gps
+    - filled
+    - location
+  sizes:
+    - 32
 - name: location--hazard
   friendly_name: Location hazard
-  aliases: 
+  aliases:
     - place
     - locate
     - gps
@@ -7836,7 +8203,7 @@
     - 32
 - name: location--hazard--filled
   friendly_name: Location hazard filled
-  aliases: 
+  aliases:
     - place
     - locate
     - gps
@@ -7854,7 +8221,7 @@
     - 32
 - name: location--heart
   friendly_name: Location heart
-  aliases: 
+  aliases:
     - place
     - locate
     - gps
@@ -7871,7 +8238,7 @@
     - 32
 - name: location--heart--filled
   friendly_name: Location heart filled
-  aliases: 
+  aliases:
     - place
     - locate
     - gps
@@ -7889,7 +8256,7 @@
     - 32
 - name: location--person
   friendly_name: Location person
-  aliases: 
+  aliases:
     - place
     - locate
     - gps
@@ -7906,7 +8273,7 @@
     - 32
 - name: location--person--filled
   friendly_name: Location person filled
-  aliases: 
+  aliases:
     - place
     - locate
     - gps
@@ -7924,7 +8291,7 @@
     - 32
 - name: location--star
   friendly_name: Location star
-  aliases: 
+  aliases:
     - place
     - locate
     - gps
@@ -7941,7 +8308,7 @@
     - 32
 - name: location--star--filled
   friendly_name: Location star filled
-  aliases: 
+  aliases:
     - place
     - locate
     - gps
@@ -8460,7 +8827,7 @@
     - 32
 - name: map-boundary
   friendly_name: Map boundary
-  aliases: 
+  aliases:
     - place
     - locate
     - destination
@@ -8474,7 +8841,7 @@
     - 32
 - name: marine-warning
   friendly_name: Marine warning
-  aliases: 
+  aliases:
     - weather
     - marine
     - warning
@@ -8888,7 +9255,7 @@
     - 32
 - name: monster
   friendly_name: Monster
-  aliases: 
+  aliases:
     - monster
     - commerce
   sizes:
@@ -8906,6 +9273,21 @@
   aliases:
     - moon
     - cresent
+    - phase
+  sizes:
+    - 32
+- name: moonrise
+  friendly_name: Moonrise
+  aliases: 
+    - moonrise
+    - phase
+  sizes:
+    - 32
+- name: moonset
+  friendly_name: moonset
+  aliases: 
+    - moonset
+    - phase
   sizes:
     - 32
 - name: mostly-cloudy
@@ -9029,9 +9411,21 @@
     - rhythm
   sizes:
     - 32
+- name: music--add
+  friendly_name: Music add
+  aliases: 
+    - music add
+  sizes:
+    - 32
+- name: music--remove
+  friendly_name: Music remove
+  aliases: 
+  - music remove
+  sizes:
+    - 32
 - name: name-space
   friendly_name: Name space
-  aliases: 
+  aliases:
     - name
     - space
     - data
@@ -9048,7 +9442,7 @@
     - 32
 - name: navaid--dme
   friendly_name: Navaid dme
-  aliases: 
+  aliases:
     - travel
     - navigation
     - navaid
@@ -9057,7 +9451,7 @@
     - 32
 - name: navaid--helipad
   friendly_name: Navaid helipad
-  aliases: 
+  aliases:
     - travel
     - navigation
     - navaid
@@ -9066,7 +9460,7 @@
     - 32
 - name: navaid--military
   friendly_name: Navaid military
-  aliases: 
+  aliases:
     - travel
     - navigation
     - navaid
@@ -9075,7 +9469,7 @@
     - 32
 - name: navaid--military-civil
   friendly_name: Navaid military civil
-  aliases: 
+  aliases:
     - travel
     - navigation
     - navaid
@@ -9085,7 +9479,7 @@
     - 32
 - name: navaid--ndb
   friendly_name: Navaid ndb
-  aliases: 
+  aliases:
     - travel
     - navigation
     - navaid
@@ -9094,7 +9488,7 @@
     - 32
 - name: navaid--ndb-dme
   friendly_name: Navaid ndb dme
-  aliases: 
+  aliases:
     - travel
     - navigation
     - navaid
@@ -9104,7 +9498,7 @@
     - 32
 - name: navaid--private
   friendly_name: Navaid private
-  aliases: 
+  aliases:
     - travel
     - navigation
     - navaid
@@ -9113,7 +9507,7 @@
     - 32
 - name: navaid--seaplane
   friendly_name: Navaid seaplane
-  aliases: 
+  aliases:
     - travel
     - navigation
     - navaid
@@ -9122,7 +9516,7 @@
     - 32
 - name: navaid--tacan
   friendly_name: Navaid tacan
-  aliases: 
+  aliases:
     - travel
     - navigation
     - navaid
@@ -9131,7 +9525,7 @@
     - 32
 - name: navaid--vhfor
   friendly_name: Navaid vhfor
-  aliases: 
+  aliases:
     - travel
     - navigation
     - navaid
@@ -9140,7 +9534,7 @@
     - 32
 - name: navaid--vor
   friendly_name: Navaid vor
-  aliases: 
+  aliases:
     - travel
     - navigation
     - navaid
@@ -9149,7 +9543,7 @@
     - 32
 - name: navaid--vordme
   friendly_name: Navaid vordme
-  aliases: 
+  aliases:
     - travel
     - navigation
     - navaid
@@ -9158,7 +9552,7 @@
     - 32
 - name: navaid--vortac
   friendly_name: Navaid vortac
-  aliases: 
+  aliases:
     - travel
     - navigation
     - navaid
@@ -9259,7 +9653,7 @@
     - 32
 - name: non-certified
   friendly_name: Non-certified
-  aliases: 
+  aliases:
     - non-certified
     - file
     - document
@@ -9635,7 +10029,7 @@
     - 32
 - name: observed--hail
   friendly_name: Observed hail
-  aliases: 
+  aliases:
     - weather
     - observed
     - hail
@@ -9645,7 +10039,7 @@
     - 32
 - name: observed--lightning
   friendly_name: Observed lightning
-  aliases: 
+  aliases:
     - weather
     - observed
     - lightning
@@ -9822,14 +10216,14 @@
     - 32
 - name: outage
   friendly_name: Outage
-  aliases: 
+  aliases:
     - outage
     - technology
   sizes:
     - 32
 - name: outlook-severe
   friendly_name: Outlook severe
-  aliases: 
+  aliases:
     - outlook
     - severe
     - weather
@@ -9858,7 +10252,7 @@
     - navigation
 - name: overlay
   friendly_name: Overlay
-  aliases: 
+  aliases:
     - overlay
     - operations
   sizes:
@@ -9900,7 +10294,7 @@
     - navigation
 - name: page-break
   friendly_name: Page break
-  aliases: 
+  aliases:
     - page
     - break
     - formatting
@@ -9908,7 +10302,7 @@
     - 32
 - name: page-number
   friendly_name: Page number
-  aliases: 
+  aliases:
     - page
     - number
     - formatting
@@ -9956,7 +10350,7 @@
     - formatting
 - name: palm-tree
   friendly_name: Palm tree
-  aliases: 
+  aliases:
     - palm tree
     - travel
   sizes:
@@ -10033,7 +10427,7 @@
     - 32
 - name: passenger--drinks
   friendly_name: Passenger drinks
-  aliases: 
+  aliases:
     - travel
     - passenger
     - drinks
@@ -10042,7 +10436,7 @@
     - 32
 - name: passenger--plus
   friendly_name: Passenger plus
-  aliases: 
+  aliases:
     - travel
     - passenger
     - plus
@@ -10113,7 +10507,7 @@
     - control
 - name: pause-future
   friendly_name: Pause future
-  aliases: 
+  aliases:
     - pause
     - future
     - operations
@@ -10122,7 +10516,7 @@
     - 32
 - name: pause-past
   friendly_name: Pause past
-  aliases: 
+  aliases:
     - pause
     - past
     - operations
@@ -10164,6 +10558,15 @@
     - travel
   sizes:
     - 32
+- name: pedestrian--family
+  friendly_name: Pedestrian family
+  aliases: 
+    - pedestrian
+    - people
+    - travel
+    - family
+  sizes:
+    - 32
 - name: pedestrian-child
   friendly_name: Pedestrian child
   aliases:
@@ -10172,6 +10575,20 @@
     - travel
     - parent
     - child
+  sizes:
+    - 32
+- name: pen
+  friendly_name: Pen
+  aliases: 
+    - pen
+    - write
+  sizes:
+    - 32
+- name: pen--fountain
+  friendly_name: Pen fountain
+  aliases: 
+    - pen
+    - fountain
   sizes:
     - 32
 - name: pending
@@ -10229,7 +10646,7 @@
     - people
 - name: pest
   friendly_name: Pest
-  aliases: 
+  aliases:
     - weather
     - pest
     - crop
@@ -10269,6 +10686,22 @@
     - phone
   sizes:
     - 32
+- name: phone--block
+  friendly_name: Phone block
+  aliases: 
+    - phone block
+    - call block
+    - call
+  sizes:
+    - 32
+- name: phone--block--filled
+  friendly_name: Phone block filled
+  aliases: 
+    - phone block filled
+    - call block
+    - call
+  sizes:
+    - 32
 - name: phone--filled
   friendly_name: Phone filled
   sizes:
@@ -10283,6 +10716,22 @@
     - landline
     - phone
     - toggle
+- name: phone--incoming
+  friendly_name: Phone incoming
+  aliases: 
+    - phone incoming
+    - phone call
+    - call
+  sizes:
+    - 32
+- name: phone--incoming--filled
+  friendly_name: Phone incoming filled
+  aliases: 
+    - phone incoming filled
+    - phone call
+    - call
+  sizes:
+    - 32
 - name: phone--off
   friendly_name: Phone off
   sizes:
@@ -10308,6 +10757,38 @@
     - sound
     - mute
     - toggle
+- name: phone--outgoing
+  friendly_name: Phone outgoing
+  aliases: 
+    - phone outgoing
+    - phone call
+    - call
+  sizes:
+    - 32
+- name: phone--outgoing--filled
+  friendly_name: Phone outgoing filled
+  aliases: 
+    - phone outgoing filled
+    - phone call
+    - call
+  sizes:
+    - 32
+- name: phone--voice
+  friendly_name: Phone voice
+  aliases: 
+    - phone voice
+    - phone call
+    - call
+  sizes:
+    - 32
+- name: phone--voice--filled
+  friendly_name: Phone voice filled
+  aliases: 
+    - phone voice filled
+    - phone call
+    - call
+  sizes:
+    - 32
 - name: phrase-sentiment
   friendly_name: Phrase sentiment
   aliases:
@@ -10324,6 +10805,16 @@
     - table
     - travel
     - rest stop
+  sizes:
+    - 32
+- name: piggy-bank
+  friendly_name: Piggy bank
+  aliases: 
+    - piggy bank
+    - savings
+    - cash
+    - money
+    - currency
   sizes:
     - 32
 - name: pills
@@ -10388,7 +10879,7 @@
     - 32
 - name: plane--private
   friendly_name: Plane private
-  aliases: 
+  aliases:
     - airplane
     - flight
     - travel
@@ -10400,7 +10891,7 @@
     - 32
 - name: plane--sea
   friendly_name: Plane sea
-  aliases: 
+  aliases:
     - airplane
     - flight
     - travel
@@ -10638,6 +11129,20 @@
     - product
   sizes:
     - 32
+- name: progress-bar
+  friendly_name: Progress bar
+  aliases: 
+  - progress bar
+  - loading
+  sizes:
+    - 32
+- name: progress-bar--round
+  friendly_name: Progress bar round
+  aliases: 
+  - progreess bar round
+  - loading
+  sizes:
+    - 32
 - name: purchase
   friendly_name: Purchase
   aliases:
@@ -10670,7 +11175,7 @@
     - 32
 - name: query
   friendly_name: Query
-  aliases: 
+  aliases:
     - query
     - operations
     - search
@@ -10698,14 +11203,14 @@
     - 32
 - name: radar
   friendly_name: Radar
-  aliases: 
+  aliases:
     - radar
     - instruments
   sizes:
     - 32
 - name: radar--enhanced
   friendly_name: Radar enhanced
-  aliases: 
+  aliases:
     - radar
     - enhanced
     - instruments
@@ -10713,7 +11218,7 @@
     - 32
 - name: radar--weather
   friendly_name: Radar weather
-  aliases: 
+  aliases:
     - radar
     - weather
     - instruments
@@ -10862,7 +11367,7 @@
     - 32
 - name: ref-evapotranspiration
   friendly_name: Ref evapotranspiration
-  aliases: 
+  aliases:
     - weather
     - ref
     - evapotranspiration
@@ -10949,6 +11454,14 @@
   aliases:
     - back
     - respond
+    - email
+  sizes:
+    - 32
+- name: reply--all
+  friendly_name: Reply all
+  aliases: 
+    - back
+    - respond all
     - email
   sizes:
     - 32
@@ -11087,7 +11600,7 @@
     - reverse
 - name: road
   friendly_name: Road
-  aliases: 
+  aliases:
     - road
     - travel
     - highway
@@ -11095,7 +11608,7 @@
     - 32
 - name: road--weather
   friendly_name: Road weather
-  aliases: 
+  aliases:
     - road
     - travel
     - weather
@@ -11254,7 +11767,7 @@
     - 32
 - name: row--delete
   friendly_name: Row delete
-  aliases: 
+  aliases:
     - row
     - delete
     - formatting
@@ -11270,7 +11783,7 @@
     - 32
 - name: row--insert
   friendly_name: Row insert
-  aliases: 
+  aliases:
     - row
     - insert
     - formatting
@@ -11346,7 +11859,7 @@
     - alt
 - name: sailboat--coastal
   friendly_name: Sailboat coastal
-  aliases: 
+  aliases:
     - sailboat
     - coastal
     - weather
@@ -11354,7 +11867,7 @@
     - 32
 - name: sailboat--offshore
   friendly_name: Sailboat offshore
-  aliases: 
+  aliases:
     - sailboat
     - offshore
     - weather
@@ -11368,16 +11881,24 @@
     - Sankey
   sizes:
     - 32
+- name: sankey-diagram--alt
+  friendly_name: Sankey diagram alt
+  aliases: 
+    - Sankey diagram alt
+    - data
+    - Sankey alt
+  sizes:
+    - 32
 - name: satellite
   friendly_name: Satellite
-  aliases: 
+  aliases:
     - satellite
     - technology
   sizes:
     - 32
 - name: satellite--radar
   friendly_name: Satellite radar
-  aliases: 
+  aliases:
     - satellite
     - radar
     - weather
@@ -11385,7 +11906,7 @@
     - 32
 - name: satellite--weather
   friendly_name: Satellite weather
-  aliases: 
+  aliases:
     - satellite
     - weather
   sizes:
@@ -11465,7 +11986,7 @@
     - 32
 - name: scales
   friendly_name: Scales
-  aliases: 
+  aliases:
     - instruments
     - scales
     - balance
@@ -11474,7 +11995,7 @@
     - 32
 - name: scales--tipped
   friendly_name: Scales tipped
-  aliases: 
+  aliases:
     - scales
     - tipped
     - instruments
@@ -11724,7 +12245,7 @@
     - email
 - name: send-to-back
   friendly_name: Send to back
-  aliases: 
+  aliases:
     - send
     - back
     - formatting
@@ -11763,10 +12284,46 @@
     - controls
 - name: settings--check
   friendly_name: Settings check
-  aliases: 
+  aliases:
     - settings
     - controls
     - check
+  sizes:
+    - 32
+- name: shape--except
+  friendly_name: Shape except
+  aliases: 
+    - shape except
+    - format
+  sizes:
+    - 32
+- name: shape--exclude
+  friendly_name: Shape exclude
+  aliases: 
+    - shape exclude
+    - format
+  sizes:
+    - 32
+- name: shape--intersect
+  friendly_name: Shape intersect
+  aliases: 
+    - shape intersect
+    - format
+  sizes:
+    - 32
+- name: shape--join
+  friendly_name: Shape join
+  aliases: 
+    - shape
+    - join
+    - format
+  sizes:
+    - 32
+- name: shape--unite
+  friendly_name: Shape unite
+  aliases: 
+    - shape unite
+    - format
   sizes:
     - 32
 - name: share
@@ -11821,6 +12378,81 @@
     - purchase
     - store
     - retail
+- name: shopping--cart--arrow-down
+  friendly_name: Shopping cart arrow down
+  aliases: 
+    - cart
+    - shop
+    - buy
+    - e-commerce
+    - purchase
+    - store
+    - retail
+    - add to cart
+  sizes:
+    - 32
+- name: shopping--cart--arrow-up
+  friendly_name: Shopping cart arrow up
+  aliases: 
+    - cart
+    - shop
+    - remove
+    - e-commerce
+    - purchase
+    - store
+    - retail
+    - remove from cart
+  sizes:
+    - 32
+- name: shopping--cart--clear
+  friendly_name: Shopping cart clear
+  aliases: 
+    - cart
+    - shop
+    - empty
+    - e-commerce
+    - remove
+    - store
+    - retail
+  sizes:
+    - 32
+- name: shopping--cart--error
+  friendly_name: Shopping cart error
+  aliases: 
+    - cart
+    - shop
+    - error
+    - e-commerce
+    - incomplete
+    - store
+    - retail
+  sizes:
+    - 32
+- name: shopping--cart--minus
+  friendly_name: Shopping cart minus
+  aliases: 
+    - cart
+    - shop
+    - remove
+    - e-commerce
+    - store
+    - retail
+  sizes:
+    - 32
+- name: shopping--cart--plus
+  friendly_name: Shopping cart plus
+  aliases: 
+    - cart
+    - shop
+    - buy
+    - e-commerce
+    - purchase
+    - store
+    - retail
+    - cart plus
+    - add to cart
+  sizes:
+    - 32
 - name: shopping--catalog
   friendly_name: Shopping catalog
   sizes:
@@ -12199,7 +12831,7 @@
     - precipitation
 - name: snow-density
   friendly_name: Snow density
-  aliases: 
+  aliases:
     - weather
     - snow
     - density
@@ -12222,7 +12854,7 @@
     - 32
 - name: soil-moisture
   friendly_name: Soil moisture
-  aliases: 
+  aliases:
     - soil
     - moisture
     - agriculture
@@ -12230,7 +12862,7 @@
     - 32
 - name: soil-moisture--field
   friendly_name: Soil moisture field
-  aliases: 
+  aliases:
     - soil
     - moisture
     - agriculture
@@ -12239,7 +12871,7 @@
     - 32
 - name: soil-moisture--global
   friendly_name: Soil moisture global
-  aliases: 
+  aliases:
     - soil
     - moisture
     - agriculture
@@ -12248,7 +12880,7 @@
     - 32
 - name: soil-temperature
   friendly_name: Soil temperature
-  aliases: 
+  aliases:
     - soil
     - temperature
     - agriculture
@@ -12256,7 +12888,7 @@
     - 32
 - name: soil-temperature--field
   friendly_name: Soil temperature field
-  aliases: 
+  aliases:
     - soil
     - temperature
     - agriculture
@@ -12265,7 +12897,7 @@
     - 32
 - name: soil-temperature--global
   friendly_name: Soil temperature global
-  aliases: 
+  aliases:
     - global
     - soil
     - temperature
@@ -12449,7 +13081,7 @@
     - 32
 - name: stay-inside
   friendly_name: Stay inside
-  aliases: 
+  aliases:
     - stay inside
     - weather
     - warning
@@ -12535,9 +13167,39 @@
     - control
     - pause
     - conclude
+- name: stop-sign
+  friendly_name: Stop sign
+  aliases:
+    - stop sign
+    - travel
+    - naviation
+    - map
+    - direction
+    - road
+  sizes:
+    - 32
+- name: stop-sign--filled
+  friendly_name: Stop sign filled
+  aliases: 
+    - stop sign filled
+    - travel
+    - naviation
+    - map
+    - direction
+    - road
+  sizes:
+    - 32
+- name: storage-pool
+  friendly_name: Storage pool
+  aliases: 
+    - data
+    - storage pool
+    - pool
+  sizes:
+    - 32
 - name: storage-request
   friendly_name: Storage request
-  aliases: 
+  aliases:
     - storage request
   sizes:
     - 32
@@ -12557,7 +13219,7 @@
     - 32
 - name: storm-tracker
   friendly_name: Storm tracker
-  aliases: 
+  aliases:
     - storm tracker
     - weather
   sizes:
@@ -12739,6 +13401,18 @@
     - grid
   sizes:
     - 32
+- name: table--built
+  friendly_name: Table built
+  aliases: 
+    - data
+    - spreadsheet
+    - excel
+    - chart
+    - rows
+    - grid
+    - table built
+  sizes:
+    - 32
 - name: table--split
   friendly_name: Table split
   sizes:
@@ -12750,6 +13424,7 @@
     - chart
     - rows
     - grid
+    - table split
 - name: table-of-contents
   friendly_name: Table of contents
   aliases:
@@ -12864,7 +13539,7 @@
     - 32
 - name: temperature--feels-like
   friendly_name: Temperature feels-like
-  aliases: 
+  aliases:
     - weather
     - thermometer
     - degree
@@ -12898,7 +13573,7 @@
     - cold
 - name: temperature--inversion
   friendly_name: Temperature inversion
-  aliases: 
+  aliases:
     - weather
     - thermometer
     - degree
@@ -12912,7 +13587,7 @@
     - 32
 - name: temperature--max
   friendly_name: Temperature max
-  aliases: 
+  aliases:
     - weather
     - thermometer
     - degree
@@ -12926,7 +13601,7 @@
     - 32
 - name: temperature--min
   friendly_name: Temperature min
-  aliases: 
+  aliases:
     - weather
     - thermometer
     - degree
@@ -12940,7 +13615,7 @@
     - 32
 - name: temperature--water
   friendly_name: Temperature water
-  aliases: 
+  aliases:
     - weather
     - thermometer
     - degree
@@ -13017,6 +13692,15 @@
     - typography
     - alphabet
     - editor
+- name: text--align--mixed
+  friendly_name: Text align mixed
+  aliases: 
+    - text
+    - align
+    - mixed
+    - typography
+  sizes:
+    - 32
 - name: text--align--right
   friendly_name: Text align right
   sizes:
@@ -13073,10 +13757,10 @@
     - editor
 - name: text--footnote
   friendly_name: Text footnote
-  aliases: 
-  - text
-  - footnote
-  - formatting
+  aliases:
+    - text
+    - footnote
+    - formatting
   sizes:
     - 32
 - name: text--highlight
@@ -13234,7 +13918,10 @@
     - editor
 - name: text--vertical-alignment
   friendly_name: Text vertical alignment
-  aliases: []
+  aliases:
+    - text vertical alignment
+    - align
+    - format
   sizes:
     - 32
 - name: text--wrap
@@ -13249,7 +13936,7 @@
 - name: text-annotation-toggle
   friendly_name: Text annotation toggle
   aliases:
-    - text-annotation-toggle
+    - text annotation toggle
   sizes:
     - 32
 - name: text-link
@@ -13263,7 +13950,7 @@
   sizes:
     - 32
   aliases:
-    - text-link
+    - text link
 - name: text-mining
   friendly_name: Text mining
   aliases:
@@ -13275,7 +13962,7 @@
   sizes:
     - 32
   aliases:
-    - text-mining
+    - text mining
 - name: theater
   friendly_name: Theater
   aliases:
@@ -13317,7 +14004,7 @@
 - name: thumbnail-preview
   friendly_name: Thumbnail preview
   aliases:
-    - thumbnail-preview
+    - thumbnail preview
   sizes:
     - 32
 - name: thumbs-down
@@ -13385,7 +14072,7 @@
     - 32
 - name: tides
   friendly_name: Tides
-  aliases: 
+  aliases:
     - tides
     - weather
     - forecast
@@ -13441,7 +14128,7 @@
     - 32
 - name: tools--alt
   friendly_name: Tools alt
-  aliases: 
+  aliases:
     - tools
     - instruments
   sizes:
@@ -13454,7 +14141,7 @@
     - 32
 - name: tornado-warning
   friendly_name: Tornado warning
-  aliases: 
+  aliases:
     - tornado
     - warning
     - weather
@@ -13492,7 +14179,7 @@
     - 32
 - name: traffic--event
   friendly_name: Traffic event
-  aliases: 
+  aliases:
     - traffic event
     - travel
     - crowd
@@ -13501,7 +14188,7 @@
     - 32
 - name: traffic--flow
   friendly_name: Traffic flow
-  aliases: 
+  aliases:
     - traffic flow
     - travel
     - flow
@@ -13510,7 +14197,7 @@
     - 32
 - name: traffic--flow-incident
   friendly_name: Traffic flow incident
-  aliases: 
+  aliases:
     - traffic flow incident
     - travel
     - accident
@@ -13520,7 +14207,7 @@
     - 32
 - name: traffic--incident
   friendly_name: Traffic incident
-  aliases: 
+  aliases:
     - traffic incident
     - travel
     - accident
@@ -13539,7 +14226,7 @@
     - 32
 - name: traffic-cone
   friendly_name: Traffic cone
-  aliases: 
+  aliases:
     - traffic flow incident
     - travel
     - incident
@@ -13565,7 +14252,7 @@
     - 32
 - name: train--heart
   friendly_name: Train heart
-  aliases: 
+  aliases:
     - train
     - heart
     - transportation
@@ -13574,7 +14261,7 @@
     - 32
 - name: train--ticket
   friendly_name: Train ticket
-  aliases: 
+  aliases:
     - train
     - ticket
     - transportation
@@ -13583,7 +14270,7 @@
     - 32
 - name: train--time
   friendly_name: Train time
-  aliases: 
+  aliases:
     - train
     - time
     - schedule
@@ -13614,6 +14301,13 @@
     - language
     - localization
     - interpret
+  sizes:
+    - 32
+- name: transpose
+  friendly_name: Transpose
+  aliases: 
+    - operation
+    - transpose
   sizes:
     - 32
 - name: trash-can
@@ -13683,7 +14377,7 @@
     - 32
 - name: tropical-storm--model-tracks
   friendly_name: Tropical storm model tracks
-  aliases: 
+  aliases:
     - tropical storm
     - precipitation
     - model
@@ -13694,7 +14388,7 @@
     - 32
 - name: tropical-storm--tracks
   friendly_name: tropical-storm--tracks
-  aliases: 
+  aliases:
     - tropical storm
     - precipitation
     - model
@@ -13705,12 +14399,22 @@
     - 32
 - name: tropical-warning
   friendly_name: Tropical warning
-  aliases: 
+  aliases:
     - tropical warning
     - precipitation
     - warning
     - weather
     - storm
+  sizes:
+    - 32
+- name: tsunami
+  friendly_name: Tsunami
+  aliases: 
+    - weather
+    - forecast
+    - storm
+    - tropical storm
+    - wave
   sizes:
     - 32
 - name: TSV
@@ -14155,7 +14859,7 @@
     - 32
 - name: uv-index--alt
   friendly_name: UV index alt
-  aliases: 
+  aliases:
     - uv
     - index
     - sun exposure
@@ -14299,7 +15003,7 @@
     - visible
 - name: view-next
   friendly_name: View next
-  aliases: 
+  aliases:
     - view
     - view next
     - next
@@ -14495,6 +15199,30 @@
     - warn
     - alert
     - notification
+- name: warning--hex
+  friendly_name: Warning hex
+  aliases: 
+     - warning hex
+     - status
+     - caution
+     - danger
+     - warn
+     - alert
+     - notification
+  sizes:
+    - 32
+- name: warning--hex--filled
+  friendly_name: Warning hex filled
+  aliases: 
+     - warning hex filled
+     - status
+     - caution
+     - danger
+     - warn
+     - alert
+     - notification
+  sizes:
+    - 32
 - name: warning--other
   friendly_name: Warning other
   aliases:
@@ -14539,16 +15267,16 @@
     - ai
 - name: wave-direction
   friendly_name: Wave direction
-  aliases: 
+  aliases:
     - weather
-    - wave 
+    - wave
     - direction
     - forecast
   sizes:
     - 32
 - name: wave-height
   friendly_name: Wave height
-  aliases: 
+  aliases:
     - weather
     - wave
     - height
@@ -14557,7 +15285,7 @@
     - 32
 - name: wave-period
   friendly_name: Wave period
-  aliases: 
+  aliases:
     - weather
     - wave
     - period
@@ -14566,7 +15294,7 @@
     - 32
 - name: weather-front--cold
   friendly_name: Weather front cold
-  aliases: 
+  aliases:
     - weather
     - front
     - cold
@@ -14575,7 +15303,7 @@
     - 32
 - name: weather-front--stationary
   friendly_name: Weather front stationary
-  aliases: 
+  aliases:
     - weather
     - front
     - stationery
@@ -14584,7 +15312,7 @@
     - 32
 - name: weather-front--warm
   friendly_name: Weather front warm
-  aliases: 
+  aliases:
     - weather
     - front
     - warm
@@ -14593,14 +15321,14 @@
     - 32
 - name: weather-station
   friendly_name: Weather station
-  aliases: 
+  aliases:
     - weather station
     - weather
   sizes:
     - 32
 - name: websheet
   friendly_name: Websheet
-  aliases: 
+  aliases:
     - file
     - websheet
   sizes:
@@ -14640,18 +15368,18 @@
     - 32
 - name: wind-gusts
   friendly_name: Wind gusts
-  aliases: 
+  aliases:
     - weather
-    - wind 
+    - wind
     - gusts
     - forecast
   sizes:
     - 32
 - name: wind-stream
   friendly_name: Wind stream
-  aliases: 
+  aliases:
     - weather
-    - wind 
+    - wind
     - stream
     - forecast
   sizes:
@@ -14714,7 +15442,7 @@
     - windy
 - name: winter-warning
   friendly_name: Winter warning
-  aliases: 
+  aliases:
     - weather
     - winter
     - warning
@@ -14894,6 +15622,17 @@
     - size
     - enlarge
     - detail
+- name: zoom--in-area
+  friendly_name: Zoom in area
+  aliases:
+    - expand
+    - inspect
+    - size
+    - enlarge
+    - detail
+    - zoom in area
+  sizes:
+    - 32
 - name: zoom--out
   friendly_name: Zoom out
   sizes:
@@ -14905,6 +15644,16 @@
     - size
     - enlarge
     - detail
+- name: zoom--out-area
+  friendly_name: Zoom out area
+  aliases: 
+    - reduce
+    - inspect
+    - size
+    - detail
+    - zoom out area
+  sizes:
+    - 32
 - name: zoom--reset
   friendly_name: Zoom reset
   sizes:

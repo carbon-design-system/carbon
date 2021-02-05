@@ -162,9 +162,11 @@ export default class DatePicker extends Component {
     locale: PropTypes.oneOf([
       'ar', // Arabic
       'at', // Austria
+      'az', // Azerbaijan
       'be', // Belarusian
       'bg', // Bulgarian
       'bn', // Bangla
+      'bs', // Bosnia
       'cat', // Catalan
       'cs', // Czech
       'cy', // Welsh
@@ -176,16 +178,22 @@ export default class DatePicker extends Component {
       'et', // Estonian
       'fa', // Persian
       'fi', // Finnish
+      'fo', // Faroese
       'fr', // French
+      'ga', // Gaelic
       'gr', // Greek
       'he', // Hebrew
       'hi', // Hindi
       'hr', // Croatian
       'hu', // Hungarian
       'id', // Indonesian
+      'is', // Icelandic
       'it', // Italian
       'ja', // Japanese
+      'ka', // Georgian
+      'km', // Khmer
       'ko', // Korean
+      'kz', // Kazakh
       'lt', // Lithuanian
       'lv', // Latvian
       'mk', // Macedonian
@@ -203,12 +211,15 @@ export default class DatePicker extends Component {
       'sk', // Slovak
       'sl', // Slovenian
       'sq', // Albanian
+      'sr-cyr', // Serbian Cyrillic
       'sr', // Serbian
       'sv', // Swedish
       'th', // Thai
       'tr', // Turkish
       'uk', // Ukrainian
+      'uz', // Uzbek
       'vn', // Vietnamese
+      'zh-tw', // Mandarin Traditional
       'zh', // Mandarin
     ]),
 
@@ -329,6 +340,7 @@ export default class DatePicker extends Component {
           onValueUpdate: onHook,
         });
         this.addKeyboardEvents(this.cal);
+        this.addRoleAttributeToDialog();
       }
     }
   }
@@ -383,6 +395,22 @@ export default class DatePicker extends Component {
       this.cal.selectedDates.length > 0
     ) {
       this.cal.clear();
+    }
+  };
+
+  /**
+   * Flatpickr's calendar dialog is not rendered in a landmark causing an
+   * error with IBM Equal Access Accessibility Checker so we add an aria
+   * role to the container div.
+   */
+  addRoleAttributeToDialog = () => {
+    if (this.inputField) {
+      this.cal.calendarContainer.setAttribute('role', 'region');
+      // IBM EAAC requires an aria-label on a role='region'
+      this.cal.calendarContainer.setAttribute(
+        'aria-label',
+        'calendar-container'
+      );
     }
   };
 

@@ -137,11 +137,12 @@ blue[50]; // Using the `blue` object.
 warmGray100; // Using the `warmGray100` variable.
 ```
 
-## 📖 API Documentation
+## 📚 Examples
 
-If you're looking for `@carbon/colors` API documentation, check out:
+If you're looking for more examples on how to use `@carbon/colors`, we have some
+examples that you can check out:
 
-- [Sass](./docs/sass.md)
+- [sass-modules](./examples/sass-modules)
 
 ## 🙌 Contributing
 

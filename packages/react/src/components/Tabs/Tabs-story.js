@@ -43,6 +43,10 @@ const props = {
       'The className for the child `<TabContent>` components',
       'tab-content'
     ),
+    scrollIntoView: boolean(
+      'Scroll to selected tab on component rerender (scrollIntoView)',
+      true
+    ),
     selectionMode: select(
       'Selection mode (selectionMode)',
       selectionModes,
@@ -118,23 +122,22 @@ export default {
 export const Default = () => (
   <div className={props.tabs().light ? 'tabs-story-wrapper--light' : null}>
     <Tabs {...props.tabs()}>
-      <Tab id="tab-1" {...props.tab()} label="Tab label 1">
+      <Tab {...props.tab()} label="Tab label 1">
         <div className="some-content">
           <p>Content for first tab goes here.</p>
         </div>
       </Tab>
-      <Tab id="tab-2" {...props.tab()} label="Tab label 2">
+      <Tab {...props.tab()} label="Tab label 2">
         <div className="some-content">
           <p>Content for second tab goes here.</p>
         </div>
       </Tab>
-      <Tab id="tab-3" {...props.tab()} label="Tab label 3" disabled>
+      <Tab {...props.tab()} label="Tab label 3" disabled>
         <div className="some-content">
           <p>Content for third tab goes here.</p>
         </div>
       </Tab>
       <Tab
-        id="tab-4"
         {...props.tab()}
         label="Tab label 4 shows truncation"
         title="Tab label 4 shows truncation"
@@ -149,10 +152,7 @@ export const Default = () => (
           <CodeSnippetExample />
         </div>
       </Tab>
-      <Tab
-        id="tab-5"
-        {...props.tab()}
-        label={<CustomLabel text="Custom Label" />}>
+      <Tab {...props.tab()} label={<CustomLabel text="Custom Label" />}>
         <div className="some-content">
           <p>Content for fifth tab goes here.</p>
         </div>
@@ -176,18 +176,17 @@ export const Container = () => (
       props.tabs().light ? 'container-tabs-story-wrapper--light' : null
     }>
     <Tabs type="container" {...props.tabs()}>
-      <Tab id="tab-1" {...props.tab()} label="Tab label 1">
+      <Tab {...props.tab()} label="Tab label 1">
         <div className="some-content">
           <p>Content for first tab goes here.</p>
         </div>
       </Tab>
-      <Tab id="tab-2" {...props.tab()} label="Tab label 2">
+      <Tab {...props.tab()} label="Tab label 2">
         <div className="some-content">
           <p>Content for second tab goes here.</p>
         </div>
       </Tab>
       <Tab
-        id="tab-3"
         {...props.tab()}
         label="Tab label 3 renders content only when selected"
         title="Tab label 3 renders content only when selected"
@@ -202,10 +201,7 @@ export const Container = () => (
           <CodeSnippetExample />
         </div>
       </Tab>
-      <Tab
-        id="tab-4"
-        {...props.tab()}
-        label={<CustomLabel text="Custom Label" />}>
+      <Tab {...props.tab()} label={<CustomLabel text="Custom Label" />}>
         <div className="some-content">
           <p>Content for fourth tab goes here.</p>
           <TextInput light id="sample-input" labelText="Text Input Label" />

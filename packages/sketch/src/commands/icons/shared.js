@@ -14,13 +14,12 @@ import { syncSymbol } from '../../tools/symbols';
 
 const metadata = require('../../../generated/icons/metadata.json');
 
-export function syncIconSymbols(
+export function syncIconSymbols({
   document,
   symbols,
   symbolsPage,
-  sharedLayerStyles,
-  sizes = [32, 24, 20, 16]
-) {
+  sizes = [32, 24, 20, 16],
+}) {
   const sharedStyles = syncColorStyles(document, 'fill');
   const [sharedStyle] = sharedStyles.filter(
     ({ name }) => name === 'color / fill / black'
@@ -40,12 +39,16 @@ export function syncIconSymbols(
   );
 
   return artboards.map((artboard) => {
-    return syncSymbol(symbols, sharedLayerStyles, artboard.name, {
+    return syncSymbol({
+      symbols,
       name: artboard.name,
-      frame: artboard.frame,
-      layers: artboard.layers,
-      background: artboard.background,
-      parent: symbolsPage,
+      config: {
+        name: artboard.name,
+        frame: artboard.frame,
+        layers: artboard.layers,
+        background: artboard.background,
+        parent: symbolsPage,
+      },
     });
   });
 }
@@ -117,8 +120,6 @@ function createSVGArtboards(
           symbolName = `${icon.category} / ${icon.subcategory} / ${symbolName}`;
         }
 
-        symbolName = `icon / ${symbolName}`;
-
         const artboard = new Artboard({
           name: symbolName,
           frame: new Rectangle(X_OFFSET, Y_OFFSET, size, size),
@@ -187,8 +188,6 @@ function createSVGArtboards(
             sharedStyleId: sharedStyle.id,
           });
         }
-
-        shape.style.borders = [];
 
         for (const layer of transparent) {
           layer.remove();

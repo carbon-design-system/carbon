@@ -8,21 +8,6 @@
 'use strict';
 
 module.exports = {
-  addons: [
-    '@storybook/addon-storysource',
-
-    'storybook-preset-carbon',
-
-    // Next batch
-    // Copy over to storybook-preset-carbon/index.js (addons)
-    // Move dependencies from react/package.json to storybook-preset-carbon/package.json
-
-    // ...
-    '@storybook/addon-notes/register',
-    'storybook-readme/register',
-
-    // ...
-    require.resolve('./addon-carbon-theme/register'),
-  ],
+  addons: ['storybook-preset-carbon'],
   stories: ['../src/**/*-story.js', '../src/**/*.stories.mdx'],
 };

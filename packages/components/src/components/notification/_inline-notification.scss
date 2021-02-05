@@ -47,6 +47,12 @@
     @include carbon--breakpoint(max) {
       max-width: rem(832px);
     }
+
+    // Firefox HCM fix
+    @media screen and (prefers-contrast) {
+      outline-width: 1px;
+      outline-style: solid;
+    }
   }
 
   .#{$prefix}--inline-notification:not(.#{$prefix}--inline-notification--low-contrast)
@@ -204,11 +210,6 @@
     @include carbon--breakpoint(md) {
       margin: $carbon--spacing-03 0;
     }
-  }
-
-  .#{$prefix}--inline-notification--low-contrast
-    .#{$prefix}--inline-notification__action-button.#{$prefix}--btn--ghost {
-    color: $link-01;
   }
 
   .#{$prefix}--inline-notification__action-button.#{$prefix}--btn--ghost:active,

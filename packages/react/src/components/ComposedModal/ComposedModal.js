@@ -34,6 +34,11 @@ export default class ComposedModal extends Component {
 
   static propTypes = {
     /**
+     * Specify the aria-label for bx--modal-container
+     */
+    ['aria-label']: PropTypes.string,
+
+    /**
      * Specify the content to be placed in the ComposedModal
      */
     children: PropTypes.node,
@@ -216,6 +221,7 @@ export default class ComposedModal extends Component {
   render() {
     const { open } = this.state;
     const {
+      ['aria-label']: ariaLabel,
       className,
       containerClassName,
       children,
@@ -239,9 +245,12 @@ export default class ComposedModal extends Component {
       [containerClassName]: containerClassName,
     });
 
+    // Generate aria-label based on Modal Header label if one is not provided (L253)
+    let generatedAriaLabel;
     const childrenWithProps = React.Children.toArray(children).map((child) => {
       switch (child.type) {
         case React.createElement(ModalHeader).type:
+          generatedAriaLabel = child.props.label;
           return React.cloneElement(child, {
             closeModal: this.closeModal,
           });
@@ -273,7 +282,12 @@ export default class ComposedModal extends Component {
           className={`${prefix}--visually-hidden`}>
           Focus sentinel
         </span>
-        <div ref={this.innerModal} className={containerClass} role="dialog">
+        <div
+          ref={this.innerModal}
+          className={containerClass}
+          role="dialog"
+          aria-modal="true"
+          aria-label={ariaLabel ? ariaLabel : generatedAriaLabel}>
           {childrenWithProps}
         </div>
         {/* Non-translatable: Focus-wrap code makes this `<span>` not actually read by screen readers */}
@@ -403,9 +417,9 @@ export class ModalHeader extends Component {
 
     return (
       <div className={headerClass} {...other}>
-        {label && <p className={labelClass}>{label}</p>}
+        {label && <h2 className={labelClass}>{label}</h2>}
 
-        {title && <p className={titleClass}>{title}</p>}
+        {title && <h3 className={titleClass}>{title}</h3>}
 
         {children}
 
