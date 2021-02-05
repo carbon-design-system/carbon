@@ -263,6 +263,20 @@
     background-color: $decorative-01;
   }
 
+  .#{$prefix}--number
+    input[type='number']:disabled
+    + .#{$prefix}--number__controls
+    .#{$prefix}--number__rule-divider:first-of-type {
+    background-color: transparent;
+  }
+
+  .#{$prefix}--number
+    input[type='number']:disabled
+    + .#{$prefix}--number__controls
+    .#{$prefix}--number__rule-divider {
+    background-color: $disabled-02;
+  }
+
   .#{$prefix}--number__controls .#{$prefix}--number__rule-divider:last-of-type {
     // center divider in container
     position: absolute;
