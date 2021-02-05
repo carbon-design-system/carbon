@@ -17,7 +17,7 @@ import ContextMenu, {
 } from '../ContextMenu';
 
 export default {
-  title: 'ContextMenu',
+  title: 'unstable_ContextMenu',
   parameters: {
     component: ContextMenu,
   },
@@ -56,14 +56,23 @@ function useContextMenu() {
   };
 }
 
-const InfoBanner = () => (
-  <InlineNotification
-    kind="info"
-    title="Context menu"
-    subtitle="Right-click anywhere on this page to access a demo of this component"
-    lowContrast
-    hideCloseButton
-  />
+const InfoBanners = () => (
+  <>
+    <InlineNotification
+      kind="info"
+      title="Experimental component"
+      subtitle="This component is considered experimental. Its API may change until the stable version is released."
+      lowContrast
+      hideCloseButton
+    />
+    <InlineNotification
+      kind="info"
+      title="Context menu"
+      subtitle="Right-click anywhere on this page to access an example implementation of this component."
+      lowContrast
+      hideCloseButton
+    />
+  </>
 );
 
 export const _ContextMenu = () => {
@@ -71,7 +80,7 @@ export const _ContextMenu = () => {
 
   return (
     <div style={{ height: 'calc(100vh - 6.25rem)' }}>
-      <InfoBanner />
+      <InfoBanners />
       <ContextMenu {...contextMenuProps}>
         <ContextMenuItem label="Share with">
           <ContextMenuRadioGroup

@@ -20,12 +20,6 @@ export ComposedModal, {
   ModalFooter,
 } from './components/ComposedModal';
 export ContentSwitcher from './components/ContentSwitcher';
-export ContextMenu, {
-  ContextMenuItem,
-  ContextMenuDivider,
-  ContextMenuSelectableOption,
-  ContextMenuRadioGroup,
-} from './components/ContextMenu';
 export Copy from './components/Copy';
 export CopyButton from './components/CopyButton';
 export DangerButton from './components/DangerButton';
@@ -212,3 +206,9 @@ export {
 export unstable_TreeView, {
   TreeNode as unstable_TreeNode,
 } from './components/TreeView';
+export unstable_ContextMenu, {
+  ContextMenuItem as unstable_ContextMenuItem,
+  ContextMenuDivider as unstable_ContextMenuDivider,
+  ContextMenuSelectableOption as unstable_ContextMenuSelectableOption,
+  ContextMenuRadioGroup as unstable_ContextMenuRadioGroup,
+} from './components/ContextMenu';

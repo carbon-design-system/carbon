@@ -847,182 +847,6 @@ Map {
       },
     },
   },
-  "ContextMenu" => Object {
-    "ContextMenuDivider": Object {},
-    "ContextMenuOption": Object {
-      "propTypes": Object {
-        "children": Object {
-          "type": "node",
-        },
-        "disabled": Object {
-          "type": "bool",
-        },
-        "indented": Object {
-          "type": "bool",
-        },
-        "label": Object {
-          "isRequired": true,
-          "type": "node",
-        },
-        "level": Object {
-          "type": "number",
-        },
-        "renderIcon": Object {
-          "args": Array [
-            Array [
-              Object {
-                "type": "func",
-              },
-              Object {
-                "type": "object",
-              },
-            ],
-          ],
-          "type": "oneOfType",
-        },
-        "shortcut": Object {
-          "type": "node",
-        },
-        "shortcutText": Object {
-          "type": "string",
-        },
-      },
-    },
-    "ContextMenuRadioGroup": Object {
-      "propTypes": Object {
-        "initialSelectedItem": Object {
-          "type": "string",
-        },
-        "items": Object {
-          "args": Array [
-            Object {
-              "type": "string",
-            },
-          ],
-          "isRequired": true,
-          "type": "arrayOf",
-        },
-        "label": Object {
-          "isRequired": true,
-          "type": "string",
-        },
-        "onChange": Object {
-          "type": "func",
-        },
-      },
-    },
-    "ContextMenuSelectableOption": Object {
-      "propTypes": Object {
-        "initialChecked": Object {
-          "type": "bool",
-        },
-        "label": Object {
-          "isRequired": true,
-          "type": "node",
-        },
-        "onChange": Object {
-          "type": "func",
-        },
-      },
-    },
-    "propTypes": Object {
-      "children": Object {
-        "type": "node",
-      },
-      "level": Object {
-        "type": "number",
-      },
-      "onClose": Object {
-        "type": "func",
-      },
-      "open": Object {
-        "type": "bool",
-      },
-      "x": Object {
-        "type": "number",
-      },
-      "y": Object {
-        "type": "number",
-      },
-    },
-  },
-  "ContextMenuOption" => Object {
-    "propTypes": Object {
-      "children": Object {
-        "type": "node",
-      },
-      "disabled": Object {
-        "type": "bool",
-      },
-      "indented": Object {
-        "type": "bool",
-      },
-      "label": Object {
-        "isRequired": true,
-        "type": "node",
-      },
-      "level": Object {
-        "type": "number",
-      },
-      "renderIcon": Object {
-        "args": Array [
-          Array [
-            Object {
-              "type": "func",
-            },
-            Object {
-              "type": "object",
-            },
-          ],
-        ],
-        "type": "oneOfType",
-      },
-      "shortcut": Object {
-        "type": "node",
-      },
-      "shortcutText": Object {
-        "type": "string",
-      },
-    },
-  },
-  "ContextMenuDivider" => Object {},
-  "ContextMenuSelectableOption" => Object {
-    "propTypes": Object {
-      "initialChecked": Object {
-        "type": "bool",
-      },
-      "label": Object {
-        "isRequired": true,
-        "type": "node",
-      },
-      "onChange": Object {
-        "type": "func",
-      },
-    },
-  },
-  "ContextMenuRadioGroup" => Object {
-    "propTypes": Object {
-      "initialSelectedItem": Object {
-        "type": "string",
-      },
-      "items": Object {
-        "args": Array [
-          Object {
-            "type": "string",
-          },
-        ],
-        "isRequired": true,
-        "type": "arrayOf",
-      },
-      "label": Object {
-        "isRequired": true,
-        "type": "string",
-      },
-      "onChange": Object {
-        "type": "func",
-      },
-    },
-  },
   "Copy" => Object {
     "defaultProps": Object {
       "feedback": "Copied!",
@@ -7662,6 +7486,144 @@ Map {
       },
       "value": Object {
         "type": "string",
+      },
+    },
+  },
+  "unstable_ContextMenu" => Object {
+    "ContextMenuDivider": Object {},
+    "ContextMenuItem": Object {
+      "propTypes": Object {
+        "children": Object {
+          "type": "node",
+        },
+        "disabled": Object {
+          "type": "bool",
+        },
+        "label": Object {
+          "isRequired": true,
+          "type": "node",
+        },
+        "shortcut": Object {
+          "type": "node",
+        },
+        "shortcutText": Object {
+          "type": "string",
+        },
+      },
+    },
+    "ContextMenuRadioGroup": Object {
+      "propTypes": Object {
+        "initialSelectedItem": Object {
+          "type": "string",
+        },
+        "items": Object {
+          "args": Array [
+            Object {
+              "type": "string",
+            },
+          ],
+          "isRequired": true,
+          "type": "arrayOf",
+        },
+        "label": Object {
+          "isRequired": true,
+          "type": "string",
+        },
+        "onChange": Object {
+          "type": "func",
+        },
+      },
+    },
+    "ContextMenuSelectableOption": Object {
+      "propTypes": Object {
+        "initialChecked": Object {
+          "type": "bool",
+        },
+        "label": Object {
+          "isRequired": true,
+          "type": "node",
+        },
+        "onChange": Object {
+          "type": "func",
+        },
+      },
+    },
+    "propTypes": Object {
+      "children": Object {
+        "type": "node",
+      },
+      "level": Object {
+        "type": "number",
+      },
+      "onClose": Object {
+        "type": "func",
+      },
+      "open": Object {
+        "type": "bool",
+      },
+      "x": Object {
+        "type": "number",
+      },
+      "y": Object {
+        "type": "number",
+      },
+    },
+  },
+  "unstable_ContextMenuItem" => Object {
+    "propTypes": Object {
+      "children": Object {
+        "type": "node",
+      },
+      "disabled": Object {
+        "type": "bool",
+      },
+      "label": Object {
+        "isRequired": true,
+        "type": "node",
+      },
+      "shortcut": Object {
+        "type": "node",
+      },
+      "shortcutText": Object {
+        "type": "string",
+      },
+    },
+  },
+  "unstable_ContextMenuDivider" => Object {},
+  "unstable_ContextMenuSelectableOption" => Object {
+    "propTypes": Object {
+      "initialChecked": Object {
+        "type": "bool",
+      },
+      "label": Object {
+        "isRequired": true,
+        "type": "node",
+      },
+      "onChange": Object {
+        "type": "func",
+      },
+    },
+  },
+  "unstable_ContextMenuRadioGroup" => Object {
+    "propTypes": Object {
+      "initialSelectedItem": Object {
+        "type": "string",
+      },
+      "items": Object {
+        "args": Array [
+          Object {
+            "type": "string",
+          },
+        ],
+        "isRequired": true,
+        "type": "arrayOf",
+      },
+      "label": Object {
+        "isRequired": true,
+        "type": "string",
+      },
+      "onChange": Object {
+        "type": "func",
       },
     },
   },
