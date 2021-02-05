@@ -192,6 +192,8 @@
 
     &:hover {
       @include focus-outline('outline');
+
+      border: 0;
     }
   }
 
@@ -202,8 +204,9 @@
     border-bottom-color: transparent;
 
     &:hover {
-      border-top: 2px solid $support-01;
-      border-bottom: 2px solid $support-01;
+      @include focus-outline('invalid');
+
+      border: 0;
     }
   }
 
