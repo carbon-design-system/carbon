@@ -80,6 +80,11 @@
     @include focus-outline('outline');
   }
 
+  .#{$prefix}--multi-select--filterable.#{$prefix}--multi-select--selected
+    .#{$prefix}--text-input {
+    padding-left: 0;
+  }
+
   .#{$prefix}--multi-select--filterable.#{$prefix}--list-box--disabled:hover
     .#{$prefix}--text-input {
     background-color: $field-01;
