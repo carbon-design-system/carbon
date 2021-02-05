@@ -211,4 +211,5 @@ export unstable_ContextMenu, {
   ContextMenuDivider as unstable_ContextMenuDivider,
   ContextMenuSelectableOption as unstable_ContextMenuSelectableOption,
   ContextMenuRadioGroup as unstable_ContextMenuRadioGroup,
+  useContextMenu as unstable_useContextMenu,
 } from './components/ContextMenu';

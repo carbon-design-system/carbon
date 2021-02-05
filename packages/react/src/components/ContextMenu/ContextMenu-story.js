@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { action } from '@storybook/addon-actions';
 import { InlineNotification } from '../Notification';
 
@@ -14,6 +14,7 @@ import ContextMenu, {
   ContextMenuDivider,
   ContextMenuSelectableOption,
   ContextMenuRadioGroup,
+  useContextMenu,
 } from '../ContextMenu';
 
 export default {
@@ -22,39 +23,6 @@ export default {
     component: ContextMenu,
   },
 };
-
-function useContextMenu() {
-  const [open, setOpen] = useState(false);
-  const [position, setPosition] = useState([0, 0]);
-
-  function openContextMenu(e) {
-    e.preventDefault();
-
-    const { x, y } = e;
-
-    setPosition([x, y]);
-    setOpen(true);
-  }
-
-  function onClose() {
-    setOpen(false);
-  }
-
-  useEffect(() => {
-    document.addEventListener('contextmenu', openContextMenu);
-
-    return () => {
-      document.removeEventListener('contextmenu', openContextMenu);
-    };
-  });
-
-  return {
-    open,
-    x: position[0],
-    y: position[1],
-    onClose,
-  };
-}
 
 const InfoBanners = () => (
   <>

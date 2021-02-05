@@ -7627,5 +7627,6 @@ Map {
       },
     },
   },
+  "unstable_useContextMenu" => Object {},
 }
 `;

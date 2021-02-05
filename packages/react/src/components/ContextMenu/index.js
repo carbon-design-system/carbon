@@ -16,10 +16,13 @@ ContextMenu.ContextMenuDivider = ContextMenuDivider;
 ContextMenu.ContextMenuSelectableOption = ContextMenuSelectableOption;
 ContextMenu.ContextMenuRadioGroup = ContextMenuRadioGroup;
 
+import useContextMenu from './useContextMenu';
+
 export {
   ContextMenuItem,
   ContextMenuDivider,
   ContextMenuSelectableOption,
   ContextMenuRadioGroup,
+  useContextMenu,
 };
 export default ContextMenu;
