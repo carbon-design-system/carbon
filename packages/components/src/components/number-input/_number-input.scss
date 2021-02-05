@@ -252,12 +252,6 @@
     background-color: $ui-03;
   }
 
-  .#{$prefix}--number__invalid
-    + .#{$prefix}--number__controls:hover
-    .#{$prefix}--number__rule-divider:first-of-type {
-    background-color: transparent;
-  }
-
   .#{$prefix}--number--light .#{$prefix}--number__rule-divider,
   .#{$prefix}--number--light
     .#{$prefix}--number__invalid
@@ -285,7 +279,6 @@
     position: absolute;
   }
 
-  .#{$prefix}--number__controls:hover .#{$prefix}--number__rule-divider,
   .#{$prefix}--number__control-btn:focus ~ .#{$prefix}--number__rule-divider {
     background-color: transparent;
   }
