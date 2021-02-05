@@ -319,6 +319,10 @@
     background-color: $field-02;
   }
 
+  .#{$prefix}--number--light .#{$prefix}--number__control-btn:hover {
+    background-color: $hover-light-ui;
+  }
+
   .#{$prefix}--number--light .#{$prefix}--number__control-btn::before,
   .#{$prefix}--number--light .#{$prefix}--number__control-btn::after {
     background-color: transparent;
