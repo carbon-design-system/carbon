@@ -65,15 +65,29 @@
     color: $text-01;
   }
 
+  .#{$prefix}--multi-select--filterable {
+    transition: outline-color $duration--fast-01 motion(standard, productive);
+  }
+
+  .#{$prefix}--multi-select--filterable.#{$prefix}--combo-box
+    .#{$prefix}--text-input {
+    background-clip: padding-box;
+    border: rem(2px) solid transparent;
+    outline: none;
+  }
+
+  .#{$prefix}--multi-select--filterable--input-focused {
+    @include focus-outline('outline');
+  }
+
   .#{$prefix}--multi-select--filterable.#{$prefix}--list-box--disabled:hover
     .#{$prefix}--text-input {
     background-color: $field-01;
   }
 
-  .#{$prefix}--multi-select--filterable {
+  .#{$prefix}--multi-select--filterable
     .#{$prefix}--list-box__selection--multi {
-      margin: 0 0 0 $spacing-05;
-    }
+    margin: 0 0 0 $spacing-05;
   }
 
   .#{$prefix}--multi-select--filterable.#{$prefix}--multi-select--inline,
