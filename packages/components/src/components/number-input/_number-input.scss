@@ -202,7 +202,8 @@
     border-bottom-color: transparent;
 
     &:hover {
-      @include focus-outline('invalid');
+      border-top: 2px solid $support-01;
+      border-bottom: 2px solid $support-01;
     }
   }
 
