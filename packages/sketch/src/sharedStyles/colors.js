@@ -14,6 +14,20 @@ import { syncColorStyle } from '../tools/sharedStyles';
 const { black, white, orange, yellow, ...swatches } = colors;
 
 /**
+ * Our shared style name will need to have the `color` namespace alongside a
+ * name for the swatch, the style type, and an optional grade.
+ * @param {string} name
+ * @param {string} type
+ * @param {string?} grade
+ * @returns {string}
+ */
+function formatSharedStyleName(name, type, grade) {
+  return ['color', type, name.split('-').join(' '), grade]
+    .filter(Boolean)
+    .join(' / ');
+}
+
+/**
  * Sync color shared styles to the given document and return the result
  * @param {object} params - syncColorStyles parameters
  * @param {Document} params.document
@@ -48,18 +62,4 @@ export function syncColorStyles({ document }, type) {
   });
 
   return sharedStyles.concat(singleColors);
-}
-
-/**
- * Our shared style name will need to have the `color` namespace alongside a
- * name for the swatch, the style type, and an optional grade.
- * @param {string} name
- * @param {string} type
- * @param {string?} grade
- * @returns {string}
- */
-function formatSharedStyleName(name, type, grade) {
-  return ['color', type, name.split('-').join(' '), grade]
-    .filter(Boolean)
-    .join(' / ');
 }
