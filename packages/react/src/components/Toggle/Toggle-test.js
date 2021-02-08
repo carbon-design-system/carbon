@@ -122,12 +122,5 @@ describe('Toggle', () => {
       const svg = wrapper.find(`.${prefix}--toggle__check`);
       expect(svg.length).toBe(1);
     });
-
-    it('Does not render toggle text', () => {
-      const offLabel = wrapper.find(`.${prefix}--toggle__text--off`);
-      const onLabel = wrapper.find(`.${prefix}--toggle__text--on`);
-      expect(offLabel.length).toBe(0);
-      expect(onLabel.length).toBe(0);
-    });
   });
 });
