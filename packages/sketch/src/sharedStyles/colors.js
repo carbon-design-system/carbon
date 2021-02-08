@@ -16,12 +16,13 @@ const { black, white, orange, yellow, ...swatches } = colors;
 /**
  * Our shared style name will need to have the `color` namespace alongside a
  * name for the swatch, the style type, and an optional grade.
- * @param {string} name
- * @param {string} type
- * @param {string?} grade
+ * @param {object} params - formatSharedColorStyleName parameters
+ * @param {string} params.name
+ * @param {string} params.type
+ * @param {string?} params.grade
  * @returns {string}
  */
-function formatSharedStyleName(name, type, grade) {
+function formatSharedColorStyleName({ name, type, grade }) {
   return ['color', type, name.split('-').join(' '), grade]
     .filter(Boolean)
     .join(' / ');
@@ -39,7 +40,7 @@ export function syncColorStyles({ document }, type) {
     const result = Object.keys(swatches[swatchName]).map((grade) => {
       return syncColorStyle(
         document,
-        formatSharedStyleName(name, type, grade),
+        formatSharedColorStyleName({ name, type, grade }),
         swatches[swatchName][grade],
         type
       );
@@ -55,7 +56,7 @@ export function syncColorStyles({ document }, type) {
   ].map(([name, value]) => {
     return syncColorStyle(
       document,
-      formatSharedStyleName(name, type),
+      formatSharedColorStyleName({ name, type }),
       value,
       type
     );
