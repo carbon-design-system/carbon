@@ -33,7 +33,7 @@ function formatSharedColorStyleName({ name, grade }) {
  * @param {Document} params.document
  * @returns {Array<SharedStyle>}
  */
-export function syncColorStyles({ document }, type) {
+export function syncColorStyles({ document }) {
   const sharedStyles = Object.keys(swatches).flatMap((swatchName) => {
     const name = formatTokenName(swatchName);
     const result = Object.keys(swatches[swatchName]).map((grade) => {
@@ -41,7 +41,6 @@ export function syncColorStyles({ document }, type) {
         document,
         name: formatSharedColorStyleName({ name, grade }),
         value: swatches[swatchName][grade],
-        type,
       });
     });
     return result;
@@ -57,7 +56,6 @@ export function syncColorStyles({ document }, type) {
       document,
       name: formatSharedColorStyleName({ name }),
       value,
-      type,
     });
   });
 
