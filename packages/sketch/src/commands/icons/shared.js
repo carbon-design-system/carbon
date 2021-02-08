@@ -20,7 +20,7 @@ export function syncIconSymbols({
   symbolsPage,
   sizes = [32, 24, 20, 16],
 }) {
-  const sharedStyles = syncColorStyles(document, 'fill');
+  const sharedStyles = syncColorStyles({ document }, 'fill');
   const [sharedStyle] = sharedStyles.filter(
     ({ name }) => name === 'color / fill / black'
   );
