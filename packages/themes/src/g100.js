@@ -133,7 +133,7 @@ export const decorative01 = gray70;
 export const buttonSeparator = '#161616';
 
 export const skeleton01 = '#353535';
-export const skeleton02 = gray80;
+export const skeleton02 = gray70;
 
 export {
   // Type

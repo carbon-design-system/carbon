@@ -137,6 +137,7 @@ exports[`MultiSelect.Filterable should render 1`] = `
                   id="test-filterable-multiselect-input"
                   onBlur={[Function]}
                   onChange={[Function]}
+                  onFocus={[Function]}
                   onKeyDown={[Function]}
                   placeholder="Placeholder..."
                   value=""

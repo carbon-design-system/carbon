@@ -316,6 +316,7 @@ const SassFunctionCall = defineType('SassFunctionCall', {
             assertType(SassMap),
             assertType(SassNumber),
             assertType(SassString),
+            assertType(SassValue),
           ])
         ),
     },
@@ -629,6 +630,34 @@ const SassImport = defineType('SassImport', {
   },
 });
 
+const SassModule = defineType('SassModule', {
+  fields: {
+    path: {
+      validate: assertValueType('string'),
+    },
+  },
+  generate(printer, node) {
+    printer.token('@use');
+    printer.space();
+    printer.token(`'${node.path}'`);
+    printer.token(';');
+  },
+});
+
+const SassForward = defineType('SassForward', {
+  fields: {
+    path: {
+      validate: assertValueType('string'),
+    },
+  },
+  generate(printer, node) {
+    printer.token('@forward');
+    printer.space();
+    printer.token(`'${node.path}'`);
+    printer.token(';');
+  },
+});
+
 //-------------------------------------------------------------------------------
 // Control structures
 //-------------------------------------------------------------------------------
@@ -779,6 +808,7 @@ module.exports = {
   Rule,
   SassBoolean,
   SassColor,
+  SassForward,
   SassFunction,
   SassFunctionCall,
   SassImport,
@@ -787,6 +817,7 @@ module.exports = {
   SassList,
   SassMap,
   SassMapProperty,
+  SassModule,
   SassValue,
   SassMixin,
   SassMixinCall,
