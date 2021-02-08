@@ -38,12 +38,12 @@ export function syncColorStyles({ document }, type) {
   const sharedStyles = Object.keys(swatches).flatMap((swatchName) => {
     const name = formatTokenName(swatchName);
     const result = Object.keys(swatches[swatchName]).map((grade) => {
-      return syncColorStyle(
+      return syncColorStyle({
         document,
-        formatSharedColorStyleName({ name, type, grade }),
-        swatches[swatchName][grade],
-        type
-      );
+        name: formatSharedColorStyleName({ name, type, grade }),
+        value: swatches[swatchName][grade],
+        type,
+      });
     });
     return result;
   });
@@ -54,12 +54,12 @@ export function syncColorStyles({ document }, type) {
     ['orange', orange['40']],
     ['yellow', yellow['30']],
   ].map(([name, value]) => {
-    return syncColorStyle(
+    return syncColorStyle({
       document,
-      formatSharedColorStyleName({ name, type }),
+      name: formatSharedColorStyleName({ name, type }),
       value,
-      type
-    );
+      type,
+    });
   });
 
   return sharedStyles.concat(singleColors);

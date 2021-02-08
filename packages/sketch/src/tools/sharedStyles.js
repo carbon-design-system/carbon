@@ -62,13 +62,14 @@ export function syncSharedStyle(
 
 /**
  * Sync the given color value as a shared style for the document
- * @param {Document} document
- * @param {string} name
- * @param {string} value
- * @param {string} type
+ * @param {object} params - syncColorStyle parameters
+ * @param {Document} params.document
+ * @param {string} params.name
+ * @param {string} params.value
+ * @param {string} params.type
  * @returns {SharedStyle}
  */
-export function syncColorStyle(document, name, value, type) {
+export function syncColorStyle({ document, name, value, type }) {
   if (type === 'fill') {
     return syncSharedStyle(document, name, {
       fills: [

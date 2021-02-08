@@ -42,13 +42,18 @@ export function testSyncSharedStyles() {
     /**
      * Testing shared layer styles
      */
-    const sharedStyle = syncColorStyle(document, 'black', '#000000', 'fill');
+    const sharedStyle = syncColorStyle({
+      document,
+      name: 'black',
+      value: '#000000',
+      type: 'fill',
+    });
 
     if (document.sharedLayerStyles.length !== 1) {
       throw new Error('Expected sync command to generate a shared layer style');
     }
 
-    syncColorStyle(document, 'black', '#000000', 'fill');
+    syncColorStyle({ document, name: 'black', value: '#000000', type: 'fill' });
 
     if (document.sharedLayerStyles.length !== 1) {
       throw new Error(
@@ -118,7 +123,7 @@ export function testSyncSharedStyles() {
       throw new Error('The layer is not in sync with the shared style');
     }
 
-    syncColorStyle(document, 'black', '#dedede', 'fill');
+    syncColorStyle({ document, name: 'black', value: '#dedede', type: 'fill' });
 
     if (getLayerFillColor() !== '#dededeff') {
       throw new Error('The layer did not update to the new shared style');

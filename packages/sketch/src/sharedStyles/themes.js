@@ -44,7 +44,12 @@ export function syncThemeColorStyles(document, styleType) {
         const name = `theme / ${theme.toLowerCase()} / ${type} tokens / ${formatTokenName(
           token
         )}`;
-        return syncColorStyle(document, name, themes[theme][token], styleType);
+        return syncColorStyle({
+          document,
+          name,
+          value: themes[theme][token],
+          type: styleType,
+        });
       });
   });
 
