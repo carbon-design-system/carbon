@@ -1402,7 +1402,8 @@ Map {
         "persistent": Object {
           "type": "bool",
         },
-        "placeHolderText": Object {
+        "placeHolderText": [Function],
+        "placeholder": Object {
           "type": "string",
         },
         "searchContainerClass": Object {
@@ -1993,7 +1994,8 @@ Map {
       "persistent": Object {
         "type": "bool",
       },
-      "placeHolderText": Object {
+      "placeHolderText": [Function],
+      "placeholder": Object {
         "type": "string",
       },
       "searchContainerClass": Object {
@@ -4530,7 +4532,7 @@ Map {
     "defaultProps": Object {
       "closeButtonLabelText": "Clear search input",
       "onChange": [Function],
-      "placeHolderText": "",
+      "placeholder": "",
       "type": "text",
     },
     "propTypes": Object {
@@ -4572,7 +4574,8 @@ Map {
       "onKeyDown": Object {
         "type": "func",
       },
-      "placeHolderText": Object {
+      "placeHolderText": [Function],
+      "placeholder": Object {
         "type": "string",
       },
       "size": Object {

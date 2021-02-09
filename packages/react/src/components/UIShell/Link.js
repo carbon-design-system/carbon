@@ -15,7 +15,11 @@ import React from 'react';
  * `@reach/router`
  */
 const Link = React.forwardRef(function Link(props, ref) {
-  const { element, ...rest } = props;
+  const {
+    element,
+    isSideNavExpanded, // eslint-disable-line no-unused-vars
+    ...rest
+  } = props;
   return React.createElement(element, { ...rest, ref });
 });
 

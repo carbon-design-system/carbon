@@ -211,7 +211,7 @@ export const Default = () => (
         {...searchProps}
         id="search-1"
         labelText="Search"
-        placeHolderText="Search"
+        placeholder="Search"
       />
     </FormGroup>
 
