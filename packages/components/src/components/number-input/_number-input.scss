@@ -196,7 +196,7 @@
     input[type='number']:focus
     ~ .#{$prefix}--number__controls
     .#{$prefix}--number__control-btn {
-    border-bottom-color: transparent;
+    border-bottom-width: 0;
 
     &:hover {
       @include focus-outline('outline');
@@ -209,7 +209,7 @@
     input[type='number'][data-invalid]
     ~ .#{$prefix}--number__controls
     .#{$prefix}--number__control-btn {
-    border-bottom-color: transparent;
+    border-bottom-width: 0;
 
     &:hover {
       @include focus-outline('invalid');
