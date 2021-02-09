@@ -162,10 +162,11 @@ class Tooltip extends Component {
         return;
       }
       const RefForwardingComponent = props[propName];
-      if (!isForwardRef(<RefForwardingComponent />))
+      if (!isForwardRef(<RefForwardingComponent />)) {
         return new Error(`Invalid value of prop '${propName}' supplied to '${componentName}',
                           it should be created/wrapped with React.forwardRef() to have a ref and access the proper
                           DOM node of the element to calculate its position in the viewport.`);
+      }
     },
 
     /**

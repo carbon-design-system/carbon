@@ -181,6 +181,7 @@ export default class FilterableMultiSelect extends React.Component {
       isOpen: props.open,
       inputValue: '',
       topItems: [],
+      inputFocused: false,
     };
   }
 
@@ -220,11 +221,15 @@ export default class FilterableMultiSelect extends React.Component {
         this.setState({
           highlightedIndex: changes.highlightedIndex,
         });
-        if (!this.state.isOpen) this.handleOnMenuChange(true);
+        if (!this.state.isOpen) {
+          this.handleOnMenuChange(true);
+        }
         break;
       case Downshift.stateChangeTypes.keyDownEscape:
       case Downshift.stateChangeTypes.mouseUp:
-        if (this.state.isOpen) this.handleOnMenuChange(false);
+        if (this.state.isOpen) {
+          this.handleOnMenuChange(false);
+        }
         break;
       // Opt-in to some cases where we should be toggling the menu based on
       // a given key press or mouse handler
@@ -239,8 +244,9 @@ export default class FilterableMultiSelect extends React.Component {
             nextIsOpen = true;
           }
         }
-        if (this.state.isOpen !== nextIsOpen)
+        if (this.state.isOpen !== nextIsOpen) {
           this.handleOnMenuChange(nextIsOpen);
+        }
         break;
       }
     }
@@ -262,8 +268,9 @@ export default class FilterableMultiSelect extends React.Component {
           inputValue: inputValue || '',
         };
       });
-      if (Boolean(inputValue) !== this.state.isOpen)
+      if (Boolean(inputValue) !== this.state.isOpen) {
         this.handleOnMenuChange(Boolean(inputValue));
+      }
     }
   };
 
@@ -271,6 +278,14 @@ export default class FilterableMultiSelect extends React.Component {
     event.stopPropagation();
     this.setState({ inputValue: '' });
     this.inputNode && this.inputNode.focus && this.inputNode.focus();
+  };
+
+  handleInputFocus = (_) => {
+    this.setState({ inputFocused: true });
+  };
+
+  handleInputBlur = (_) => {
+    this.setState({ inputFocused: false });
   };
 
   render() {
@@ -385,6 +400,8 @@ export default class FilterableMultiSelect extends React.Component {
                   [`${prefix}--multi-select--inline`]: inline,
                   [`${prefix}--multi-select--selected`]:
                     selectedItem.length > 0,
+                  [`${prefix}--multi-select--filterable--input-focused`]: this
+                    .state.inputFocused,
                 }
               );
               const buttonProps = {
@@ -426,6 +443,8 @@ export default class FilterableMultiSelect extends React.Component {
                       {...getInputProps({
                         disabled,
                         placeholder,
+                        onFocus: this.handleInputFocus,
+                        onBlur: this.handleInputBlur,
                         onKeyDown: this.handleOnInputKeyDown,
                       })}
                     />
