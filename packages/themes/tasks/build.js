@@ -19,6 +19,7 @@ const yaml = require('js-yaml');
 const { formatTokenName, themes, tokens } = require('../lib');
 const buildTokensFile = require('./builders/tokens');
 const buildThemesFile = require('./builders/themes');
+const buildModulesThemesFile = require('./builders/modules-themes');
 const buildMixinsFile = require('./builders/mixins');
 
 const defaultTheme = 'white';
@@ -62,9 +63,28 @@ async function build() {
         );
       },
     },
+    {
+      filepath: path.resolve(
+        SCSS_DIR,
+        '..',
+        'modules',
+        'generated',
+        '_themes.scss'
+      ),
+      builder() {
+        return buildModulesThemesFile(
+          themes,
+          tokens,
+          defaultTheme,
+          defaultThemeMapName
+        );
+      },
+    },
   ];
 
   await fs.ensureDir(SCSS_DIR);
+  await fs.ensureDir(path.resolve(SCSS_DIR, '..', 'modules', 'generated'));
+
   for (const { filepath, builder } of files) {
     const { code } = generate(builder());
     await fs.writeFile(filepath, code);
