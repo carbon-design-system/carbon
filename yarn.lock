@@ -1591,7 +1591,7 @@ __metadata:
   resolution: "@carbon/cli@workspace:packages/cli"
   dependencies:
     "@carbon/cli-reporter": ^10.4.0
-    "@octokit/plugin-retry": ^2.2.0
+    "@octokit/plugin-retry": ^3.0.7
     "@octokit/plugin-throttling": ^2.6.0
     "@octokit/rest": ^16.28.1
     "@rollup/plugin-babel": ^5.2.2
@@ -3834,6 +3834,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@octokit/openapi-types@npm:^4.0.0":
+  version: 4.0.1
+  resolution: "@octokit/openapi-types@npm:4.0.1"
+  checksum: 81734f111b43811335874eeec9f8339973223f07117cedafc9757fb4c840057768d4ea15019b74be7648017becaab03e053d73a8dfb5d3f8a5f88e30621a81a1
+  languageName: node
+  linkType: hard
+
 "@octokit/plugin-enterprise-rest@npm:^3.6.1":
   version: 3.6.2
   resolution: "@octokit/plugin-enterprise-rest@npm:3.6.2"
@@ -3867,12 +3874,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@octokit/plugin-retry@npm:^2.2.0":
-  version: 2.2.0
-  resolution: "@octokit/plugin-retry@npm:2.2.0"
+"@octokit/plugin-retry@npm:^3.0.7":
+  version: 3.0.7
+  resolution: "@octokit/plugin-retry@npm:3.0.7"
   dependencies:
+    "@octokit/types": ^6.0.3
     bottleneck: ^2.15.3
-  checksum: 34dae6f204949d6f3c90acd80280405bd252cbbc1b1f5d4e13a1809e4826e9c3f5262515ffcbb7d1d762011fe7cc19cae901ee02cb539afb4c80db26525a5cdb
+  checksum: afec57d4e6be07a7b571304db111fcdfc61f57785d033b1f7dd9d162f698cf2a07e6871397b3b32093de8c94945528f03a3b53e11e76de91bf3ab2351bf17f29
   languageName: node
   linkType: hard
 
@@ -3942,6 +3950,16 @@ __metadata:
   dependencies:
     "@types/node": ">= 8"
   checksum: 557b38877e08de3944ae9e7e837d91b161101b82598338ef0bc05c70153aefc7a4bb2a1a294c42128c082342032ee7002c389b528d8e6b8fa6176164a7fab5e8
+  languageName: node
+  linkType: hard
+
+"@octokit/types@npm:^6.0.3":
+  version: 6.8.2
+  resolution: "@octokit/types@npm:6.8.2"
+  dependencies:
+    "@octokit/openapi-types": ^4.0.0
+    "@types/node": ">= 8"
+  checksum: 27876139be723ca39da61e1e7d9bf52b2983b83c703c77641095f2f5d6b3bb34e432ca6d9d823e6b076ae8349cd20ac34ce25c707b168166f7c8a268b9e853c8
   languageName: node
   linkType: hard
 
