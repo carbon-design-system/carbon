@@ -244,6 +244,7 @@
   }
 
   .#{$prefix}--number__rule-divider {
+    z-index: z('overlay');
     width: rem(1px);
     height: rem(16px);
     background-color: $ui-03;
