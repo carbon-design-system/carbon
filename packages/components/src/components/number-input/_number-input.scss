@@ -331,6 +331,10 @@
   .#{$prefix}--number__control-btn.down-icon:hover
     ~ .#{$prefix}--number__rule-divider,
   .#{$prefix}--number__control-btn.up-icon:hover
+    + .#{$prefix}--number__rule-divider,
+  .#{$prefix}--number__control-btn.down-icon:focus
+    ~ .#{$prefix}--number__rule-divider,
+  .#{$prefix}--number__control-btn.up-icon:focus
     + .#{$prefix}--number__rule-divider {
     background-color: transparent;
   }
