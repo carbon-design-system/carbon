@@ -6848,6 +6848,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"argparse@npm:^2.0.1":
+  version: 2.0.1
+  resolution: "argparse@npm:2.0.1"
+  checksum: 160b7a25d2a7097fd5fdf25eb8a99e037340078f70e6c7cfdef305837ed14d54570b2b13261bcae26c8cd44ad6e9a7136a0110d815ac65a7891c69c7bf2f4afd
+  languageName: node
+  linkType: hard
+
 "aria-query@npm:^3.0.0":
   version: 3.0.0
   resolution: "aria-query@npm:3.0.0"
@@ -9297,7 +9304,7 @@ __metadata:
     karma-webpack: ^3.0.0
     lodash.debounce: ^4.0.8
     lolex: ^3.0.0
-    markdown-it: ^8.4.0
+    markdown-it: ^12.0.4
     minimatch: ^3.0.4
     mkdirp: ^0.5.0
     mock-raf: ^1.0.0
@@ -12790,10 +12797,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"entities@npm:^2.0.0":
-  version: 2.0.0
-  resolution: "entities@npm:2.0.0"
-  checksum: cc29118c9d4ddee373392bbf81fc4a3866f2efc76e9d1e87fdc5f9ed8c308ae146c494a6200a4917655e64f43756540007142a140557eed0dea1e3cff0d03486
+"entities@npm:^2.0.0, entities@npm:~2.1.0":
+  version: 2.1.0
+  resolution: "entities@npm:2.1.0"
+  checksum: 91d5330633b97df881bcd02e233d32067876d45abdc7c75cf058ded524d8b22f8dc7a3965813d6982ceeba918abdbd9029a0459759ee5f6f98ec953a4786612f
   languageName: node
   linkType: hard
 
@@ -20537,6 +20544,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"linkify-it@npm:^3.0.1":
+  version: 3.0.2
+  resolution: "linkify-it@npm:3.0.2"
+  dependencies:
+    uc.micro: ^1.0.1
+  checksum: bbc23f16d52d25b374971c681af1e3bb20af7ef59c243b4329c6bff5f06780784553150d4c14a16d45c9fecfc1478a7a6b79502b2c6b81d2e817f0da259046b2
+  languageName: node
+  linkType: hard
+
 "lint-staged@npm:^9.5.0":
   version: 9.5.0
   resolution: "lint-staged@npm:9.5.0"
@@ -21648,7 +21664,22 @@ __metadata:
   languageName: node
   linkType: hard
 
-"markdown-it@npm:^8.4.0, markdown-it@npm:^8.4.2":
+"markdown-it@npm:^12.0.4":
+  version: 12.0.4
+  resolution: "markdown-it@npm:12.0.4"
+  dependencies:
+    argparse: ^2.0.1
+    entities: ~2.1.0
+    linkify-it: ^3.0.1
+    mdurl: ^1.0.1
+    uc.micro: ^1.0.5
+  bin:
+    markdown-it: bin/markdown-it.js
+  checksum: 6331b09e1c624def68c8a00e4a6c0237e720d37a6ecd063a583b727d8196264ad5fb473bbc4b589a36bdb0468f17ef60620cbe2993c7fb77965fdd2880671774
+  languageName: node
+  linkType: hard
+
+"markdown-it@npm:^8.4.2":
   version: 8.4.2
   resolution: "markdown-it@npm:8.4.2"
   dependencies:
