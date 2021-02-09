@@ -244,6 +244,7 @@
   }
 
   .#{$prefix}--number__rule-divider {
+    position: absolute;
     z-index: z('overlay');
     width: rem(1px);
     height: rem(16px);
@@ -256,6 +257,7 @@
 
   .#{$prefix}--number__controls
     .#{$prefix}--number__rule-divider:first-of-type {
+    left: 0;
     background-color: transparent;
   }
 
@@ -285,11 +287,6 @@
     + .#{$prefix}--number__controls
     .#{$prefix}--number__rule-divider {
     background-color: $disabled-02;
-  }
-
-  .#{$prefix}--number__controls .#{$prefix}--number__rule-divider:last-of-type {
-    // center divider in container
-    position: absolute;
   }
 
   .#{$prefix}--number__control-btn:focus ~ .#{$prefix}--number__rule-divider {
