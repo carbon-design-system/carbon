@@ -229,13 +229,11 @@ export default class ComboBox extends React.Component {
   constructor(props) {
     super(props);
 
-    this.textInput = React.createRef();
-
     this.comboBoxInstanceId = getInstanceId();
-
     this.state = {
       inputValue: getInputValue(props, {}),
     };
+    this.textInput = React.createRef();
   }
 
   filterItems = (items, itemToString, inputValue) =>
@@ -439,11 +437,8 @@ export default class ComboBox extends React.Component {
                 size={size}>
                 <div className={`${prefix}--list-box__field`}>
                   <input
-                    disabled={disabled}
+                    aria-describedby={comboBoxHelperId}
                     className={inputClasses}
-                    type="text"
-                    tabIndex="0"
-                    aria-autocomplete="list"
                     {...rest}
                     {...rootProps}
                     {...inputProps}

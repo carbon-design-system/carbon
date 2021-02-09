@@ -57,6 +57,7 @@ const ListBoxSelection = ({
   const description = selectionCount ? t('clear.all') : t('clear.selection');
   return (
     <button
+      aria-label={description}
       className={className}
       onClick={handleOnClick}
       onKeyDown={handleOnKeyDown}

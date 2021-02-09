@@ -21,6 +21,8 @@ import { defaultSortItems, defaultCompareItems } from './tools/sorting';
 import { defaultFilterItems } from '../ComboBox/tools/filter';
 import setupGetInstanceId from '../../tools/setupGetInstanceId';
 import { mapDownshiftProps } from '../../tools/createPropAdapter';
+import mergeRefs from '../../tools/mergeRefs';
+import { keys, match } from '../../internal/keyboard';
 
 const { prefix } = settings;
 
@@ -176,13 +178,14 @@ export default class FilterableMultiSelect extends React.Component {
 
   constructor(props) {
     super(props);
+
     this.filterableMultiSelectInstanceId = getInstanceId();
     this.state = {
       isOpen: props.open,
       inputValue: '',
       topItems: [],
-      inputFocused: false,
     };
+    this.textInput = React.createRef();
   }
 
   handleOnChange = (changes) => {
@@ -192,9 +195,17 @@ export default class FilterableMultiSelect extends React.Component {
   };
 
   handleOnMenuChange = (isOpen) => {
-    this.setState((state) => ({
-      isOpen: isOpen ?? !state.isOpen,
-    }));
+    this.setState(
+      (state) => ({
+        isOpen: isOpen ?? !state.isOpen,
+      }),
+      () => {
+        if (this.textInput.current) {
+          this.textInput.current.focus();
+        }
+      }
+    );
+
     if (this.props.onMenuChange) {
       this.props.onMenuChange(isOpen);
     }
@@ -236,7 +247,7 @@ export default class FilterableMultiSelect extends React.Component {
         if (changes.isOpen === false) {
           // If Downshift is trying to close the menu, but we know the input
           // is the active element in the document, then keep the menu open
-          if (this.inputNode === document.activeElement) {
+          if (this.textInput === document.activeElement) {
             nextIsOpen = true;
           }
         }
@@ -271,15 +282,7 @@ export default class FilterableMultiSelect extends React.Component {
   clearInputValue = (event) => {
     event.stopPropagation();
     this.setState({ inputValue: '' });
-    this.inputNode && this.inputNode.focus && this.inputNode.focus();
-  };
-
-  handleInputFocus = (_) => {
-    this.setState({ inputFocused: true });
-  };
-
-  handleInputBlur = (_) => {
-    this.setState({ inputFocused: false });
+    this.textInput && this.textInput.focus && this.textInput.focus();
   };
 
   render() {
@@ -358,9 +361,9 @@ export default class FilterableMultiSelect extends React.Component {
             {...mapDownshiftProps(downshiftProps)}
             highlightedIndex={highlightedIndex}
             id={id}
-            isOpen={isOpen}
             inputValue={inputValue}
-            onInputValueChange={this.handleOnInputValueChange}
+            isOpen={isOpen}
+            itemToString={itemToString}
             onChange={(selectedItem) => {
               // `selectedItem`: The item that was just selected. null if the selection was cleared.
               // https://github.com/downshift-js/downshift#onchange
@@ -370,9 +373,9 @@ export default class FilterableMultiSelect extends React.Component {
               }
               onItemChange(selectedItem);
             }}
-            itemToString={itemToString}
-            onStateChange={this.handleOnStateChange}
+            onInputValueChange={this.handleOnInputValueChange}
             onOuterClick={this.handleOnOuterClick}
+            onStateChange={this.handleOnStateChange}
             selectedItem={selectedItems}>
             {({
               getToggleButtonProps,
@@ -394,14 +397,41 @@ export default class FilterableMultiSelect extends React.Component {
                   [`${prefix}--multi-select--inline`]: inline,
                   [`${prefix}--multi-select--selected`]:
                     selectedItem.length > 0,
-                  [`${prefix}--multi-select--filterable--input-focused`]: this
-                    .state.inputFocused,
                 }
               );
-              const buttonProps = {
-                ...getToggleButtonProps({ disabled }),
-                'aria-label': undefined,
-              };
+
+              const rootProps = getRootProps(
+                {},
+                {
+                  suppressRefError: true,
+                }
+              );
+              const buttonProps = getToggleButtonProps({
+                disabled,
+                // When we moved the "root node" of Downshift to the <input> for
+                // WCAG 2.1 compliance, we unfortunately hit this branch for the
+                // "mouseup" event that downshift listens to:
+                // https://github.com/downshift-js/downshift/blob/v5.2.1/src/downshift.js#L1051-L1065
+                //
+                // As a result, it will reset the state of the component and so we
+                // stop the event from propagating to prevent this. This allows the
+                // toggleMenu behavior for the toggleButton to correctly open and
+                // close the menu.
+                onMouseUp(event) {
+                  event.stopPropagation();
+                },
+              });
+              const inputProps = getInputProps({
+                'aria-describedby': helperId,
+                className: inputClasses,
+                disabled,
+                placeholder,
+                onClick: () => {
+                  this.setState({ isOpen: true });
+                },
+                onKeyDown: this.handleOnInputKeyDown,
+              });
+
               return (
                 <ListBox
                   className={className}
@@ -412,14 +442,13 @@ export default class FilterableMultiSelect extends React.Component {
                   warn={warn}
                   warnText={warnText}
                   isOpen={isOpen}
-                  size={size}
-                  {...getRootProps()}>
-                  <ListBox.Field
-                    id={id}
-                    disabled={disabled}
-                    aria-labelledby={labelId}
-                    aria-describedby={helperId}
-                    {...buttonProps}>
+                  size={size}>
+                  <div className={`${prefix}--list-box__field`}>
+                    <input
+                      {...rootProps}
+                      {...inputProps}
+                      ref={mergeRefs(this.textInput, rootProps.ref)}
+                    />
                     {selectedItem.length > 0 && (
                       <ListBox.Selection
                         clearSelection={clearSelection}
@@ -428,20 +457,6 @@ export default class FilterableMultiSelect extends React.Component {
                         disabled={disabled}
                       />
                     )}
-                    <input
-                      className={inputClasses}
-                      aria-controls={`${id}__menu`}
-                      aria-autocomplete="list"
-                      ref={(el) => (this.inputNode = el)}
-                      id={`${id}-input`}
-                      {...getInputProps({
-                        disabled,
-                        placeholder,
-                        onFocus: this.handleInputFocus,
-                        onBlur: this.handleInputBlur,
-                        onKeyDown: this.handleOnInputKeyDown,
-                      })}
-                    />
                     {invalid && (
                       <WarningFilled16
                         className={`${prefix}--list-box__invalid-icon`}
@@ -459,10 +474,12 @@ export default class FilterableMultiSelect extends React.Component {
                       />
                     )}
                     <ListBox.MenuIcon
+                      {...buttonProps}
                       isOpen={isOpen}
+                      tabIndex="-1"
                       translateWithId={translateWithId}
                     />
-                  </ListBox.Field>
+                  </div>
                   {isOpen && (
                     <ListBox.Menu
                       role="listbox"

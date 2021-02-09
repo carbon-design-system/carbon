@@ -73,11 +73,6 @@
     .#{$prefix}--text-input {
     background-clip: padding-box;
     border: rem(2px) solid transparent;
-    outline: none;
-  }
-
-  .#{$prefix}--multi-select--filterable--input-focused {
-    @include focus-outline('outline');
   }
 
   .#{$prefix}--multi-select--filterable.#{$prefix}--multi-select--selected
