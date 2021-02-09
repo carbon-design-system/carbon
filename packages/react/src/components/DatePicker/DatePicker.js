@@ -162,9 +162,11 @@ export default class DatePicker extends Component {
     locale: PropTypes.oneOf([
       'ar', // Arabic
       'at', // Austria
+      'az', // Azerbaijan
       'be', // Belarusian
       'bg', // Bulgarian
       'bn', // Bangla
+      'bs', // Bosnia
       'cat', // Catalan
       'cs', // Czech
       'cy', // Welsh
@@ -176,16 +178,22 @@ export default class DatePicker extends Component {
       'et', // Estonian
       'fa', // Persian
       'fi', // Finnish
+      'fo', // Faroese
       'fr', // French
+      'ga', // Gaelic
       'gr', // Greek
       'he', // Hebrew
       'hi', // Hindi
       'hr', // Croatian
       'hu', // Hungarian
       'id', // Indonesian
+      'is', // Icelandic
       'it', // Italian
       'ja', // Japanese
+      'ka', // Georgian
+      'km', // Khmer
       'ko', // Korean
+      'kz', // Kazakh
       'lt', // Lithuanian
       'lv', // Latvian
       'mk', // Macedonian
@@ -203,12 +211,15 @@ export default class DatePicker extends Component {
       'sk', // Slovak
       'sl', // Slovenian
       'sq', // Albanian
+      'sr-cyr', // Serbian Cyrillic
       'sr', // Serbian
       'sv', // Swedish
       'th', // Thai
       'tr', // Turkish
       'uk', // Ukrainian
+      'uz', // Uzbek
       'vn', // Vietnamese
+      'zh-tw', // Mandarin Traditional
       'zh', // Mandarin
     ]),
 

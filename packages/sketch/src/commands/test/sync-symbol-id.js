@@ -26,11 +26,10 @@ export function testSyncSymbolId() {
   command('commands/test/sync-symbol-id', () => {
     const document = Document.getSelectedDocument();
 
-    syncSymbol(
-      document.getSymbols(),
-      document.sharedLayerStyles,
-      'test-symbol',
-      {
+    syncSymbol({
+      symbols: document.getSymbols(),
+      name: 'test-symbol',
+      config: {
         layers: [
           new ShapePath({
             name: 'Inner',
@@ -38,7 +37,7 @@ export function testSyncSymbolId() {
             frame: new Rectangle(0, 0, 16, 16),
           }),
         ],
-      }
-    );
+      },
+    });
   });
 }

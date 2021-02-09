@@ -18,6 +18,15 @@
 /// @access private
 /// @group multi-select
 @mixin multiselect {
+  .#{$prefix}--multi-select .#{$prefix}--tag {
+    min-width: auto;
+    margin: 0 $carbon--spacing-03 0 0;
+  }
+
+  .#{$prefix}--multi-select--filterable .#{$prefix}--tag {
+    margin: 0 $carbon--spacing-03 0 $carbon--spacing-05;
+  }
+
   .#{$prefix}--multi-select .#{$prefix}--list-box__menu {
     min-width: auto;
   }
@@ -56,12 +65,24 @@
     color: $text-01;
   }
 
-  .#{$prefix}--multi-select--filterable .#{$prefix}--text-input {
-    padding-left: $spacing-03;
+  .#{$prefix}--multi-select--filterable {
+    transition: outline-color $duration--fast-01 motion(standard, productive);
   }
 
-  .#{$prefix}--multi-select--filterable:hover .#{$prefix}--text-input {
-    background-color: $hover-ui;
+  .#{$prefix}--multi-select--filterable.#{$prefix}--combo-box
+    .#{$prefix}--text-input {
+    background-clip: padding-box;
+    border: rem(2px) solid transparent;
+    outline: none;
+  }
+
+  .#{$prefix}--multi-select--filterable--input-focused {
+    @include focus-outline('outline');
+  }
+
+  .#{$prefix}--multi-select--filterable.#{$prefix}--multi-select--selected
+    .#{$prefix}--text-input {
+    padding-left: 0;
   }
 
   .#{$prefix}--multi-select--filterable.#{$prefix}--list-box--disabled:hover
@@ -69,10 +90,9 @@
     background-color: $field-01;
   }
 
-  .#{$prefix}--multi-select--filterable {
+  .#{$prefix}--multi-select--filterable
     .#{$prefix}--list-box__selection--multi {
-      margin: 0 0 0 $spacing-05;
-    }
+    margin: 0 0 0 $spacing-05;
   }
 
   .#{$prefix}--multi-select--filterable.#{$prefix}--multi-select--inline,
