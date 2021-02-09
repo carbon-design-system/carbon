@@ -184,7 +184,7 @@ const Dropdown = React.forwardRef(function Dropdown(
                   isHighlighted={
                     highlightedIndex === index || selectedItem === item
                   }
-                  title={(offsetWidth < scrollWidth && title) || null}
+                  title={(offsetWidth < scrollWidth && title) || undefined}
                   ref={{
                     menuItemOptionRef: menuItemOptionRefs.current[index],
                   }}
