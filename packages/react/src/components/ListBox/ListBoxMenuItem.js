@@ -17,22 +17,31 @@ const { prefix } = settings;
  * name, alongside any classes for any corresponding states, for a generic list
  * box menu item.
  */
-const ListBoxMenuItem = ({ children, isActive, isHighlighted, ...rest }) => {
+const ListBoxMenuItem = React.forwardRef(function ListBoxMenuItem(
+  { children, isActive, isHighlighted, ...rest },
+  ref
+) {
   const className = cx({
     [`${prefix}--list-box__menu-item`]: true,
     [`${prefix}--list-box__menu-item--active`]: isActive,
     [`${prefix}--list-box__menu-item--highlighted`]: isHighlighted,
   });
+  const { menuItemRef, menuItemOptionRef } = ref || {};
   return (
-    <div className={className} {...rest}>
-      <div className={`${prefix}--list-box__menu-item__option`}>{children}</div>
+    <div className={className} {...rest} ref={menuItemRef}>
+      <div
+        className={`${prefix}--list-box__menu-item__option`}
+        ref={menuItemOptionRef}>
+        {children}
+      </div>
     </div>
   );
-};
+});
 
+ListBoxMenuItem.displayName = 'ListBoxMenuItem';
 ListBoxMenuItem.propTypes = {
   /**
-   * Specify any children nodes that hsould be rendered inside of the ListBox
+   * Specify any children nodes that should be rendered inside of the ListBox
    * Menu Item
    */
   children: PropTypes.node,
