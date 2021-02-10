@@ -221,11 +221,15 @@ export default class FilterableMultiSelect extends React.Component {
         this.setState({
           highlightedIndex: changes.highlightedIndex,
         });
-        if (!this.state.isOpen) this.handleOnMenuChange(true);
+        if (!this.state.isOpen) {
+          this.handleOnMenuChange(true);
+        }
         break;
       case Downshift.stateChangeTypes.keyDownEscape:
       case Downshift.stateChangeTypes.mouseUp:
-        if (this.state.isOpen) this.handleOnMenuChange(false);
+        if (this.state.isOpen) {
+          this.handleOnMenuChange(false);
+        }
         break;
       // Opt-in to some cases where we should be toggling the menu based on
       // a given key press or mouse handler
@@ -240,8 +244,9 @@ export default class FilterableMultiSelect extends React.Component {
             nextIsOpen = true;
           }
         }
-        if (this.state.isOpen !== nextIsOpen)
+        if (this.state.isOpen !== nextIsOpen) {
           this.handleOnMenuChange(nextIsOpen);
+        }
         break;
       }
     }
@@ -263,8 +268,9 @@ export default class FilterableMultiSelect extends React.Component {
           inputValue: inputValue || '',
         };
       });
-      if (Boolean(inputValue) !== this.state.isOpen)
+      if (Boolean(inputValue) !== this.state.isOpen) {
         this.handleOnMenuChange(Boolean(inputValue));
+      }
     }
   };
 
