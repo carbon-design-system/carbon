@@ -318,6 +318,10 @@
     padding-bottom: $spacing-07;
   }
 
+  .#{$prefix}--modal-footer--three-button .#{$prefix}--btn {
+    flex: 0 1 25%;
+  }
+
   .#{$prefix}--modal-footer button.#{$prefix}--btn:focus {
     // Firefox HCM Fix
     @media screen and (prefers-contrast) {
