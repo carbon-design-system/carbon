@@ -216,11 +216,14 @@ export default class FilterableMultiSelect extends React.Component {
     switch (type) {
       case Downshift.stateChangeTypes.keyDownArrowUp:
       case Downshift.stateChangeTypes.itemMouseEnter:
-        this.setState({ highlightedIndex: changes.highlightedIndex });
+        // Sometimes, `changes.highlightedIndex` can be undefined.
+        // This causes Downshift to think we are switching from controlled to
+        // uncontrolled
+        this.setState({ highlightedIndex: changes.highlightedIndex || null });
         break;
       case Downshift.stateChangeTypes.keyDownArrowDown:
         this.setState({
-          highlightedIndex: changes.highlightedIndex,
+          highlightedIndex: changes.highlightedIndex || null,
         });
         if (!this.state.isOpen) {
           this.handleOnMenuChange(true);
