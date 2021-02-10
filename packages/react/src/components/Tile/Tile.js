@@ -502,7 +502,9 @@ export class ExpandableTile extends Component {
   };
 
   componentDidUpdate = (prevProps) => {
-    if (prevProps.expanded !== this.props.expanded) this.setMaxHeight();
+    if (prevProps.expanded !== this.props.expanded) {
+      this.setMaxHeight();
+    }
   };
 
   setMaxHeight = () => {
@@ -516,7 +518,9 @@ export class ExpandableTile extends Component {
   };
 
   handleClick = (evt) => {
-    if (!this.props.onBeforeClick(evt)) return;
+    if (!this.props.onBeforeClick(evt)) {
+      return;
+    }
     evt.persist();
     this.setState(
       {
