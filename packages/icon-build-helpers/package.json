@@ -44,5 +44,8 @@
     "rollup": "^2.38.0",
     "rollup-plugin-strip-banner": "^2.0.0",
     "svgo": "^1.1.1"
+  },
+  "dependencies": {
+    "@babel/core": "^7.12.13"
   }
 }
