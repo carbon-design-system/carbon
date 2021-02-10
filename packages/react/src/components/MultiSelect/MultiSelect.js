@@ -104,7 +104,9 @@ const MultiSelect = React.forwardRef(function MultiSelect(
    */
   const setIsOpenWrapper = (open) => {
     setIsOpen(open);
-    if (onMenuChange) onMenuChange(open);
+    if (onMenuChange) {
+      onMenuChange(open);
+    }
   };
 
   /**
