@@ -393,6 +393,8 @@ $list-box-menu-width: rem(300px);
 
   // Menu status inside of a `list-box__field`
   .#{$prefix}--list-box__menu-icon {
+    @include button-reset($width: false);
+
     position: absolute;
     top: 0;
     right: $carbon--spacing-05;
@@ -421,6 +423,8 @@ $list-box-menu-width: rem(300px);
 
   // Selection indicator for a `list-box__field`
   .#{$prefix}--list-box__selection {
+    @include button-reset($width: false);
+
     position: absolute;
     top: 50%;
     /* to preserve .5rem space between icons according to spec top/transform used to center the combobox clear selection icon in IE11 */
