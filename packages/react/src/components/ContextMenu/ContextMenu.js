@@ -128,14 +128,20 @@ const ContextMenu = function ContextMenu({
     }
 
     // make sure menu is visible in y bounds
-    if (pos[1] > max[1]) pos[1] = max[1];
-    if (pos[1] < min[1]) pos[1] = min[1];
+    if (pos[1] > max[1]) {
+      pos[1] = max[1];
+    }
+    if (pos[1] < min[1]) {
+      pos[1] = min[1];
+    }
 
     if (localDirection === 1) {
       // if it won't fit anymore
       if (pos[0] > max[0]) {
         pos[0] = x - width - parentWidth;
-        if (pos[0] + width > bodyWidth - margin) pos[0] = max[0];
+        if (pos[0] + width > bodyWidth - margin) {
+          pos[0] = max[0];
+        }
         localDirection = -1;
       } else if (pos[0] < min[0]) {
         // keep distance to left screen edge
