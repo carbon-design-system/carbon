@@ -182,6 +182,7 @@ export default class FilterableMultiSelect extends React.Component {
       inputValue: '',
       topItems: [],
       inputFocused: false,
+      highlightedIndex: null,
     };
   }
 
