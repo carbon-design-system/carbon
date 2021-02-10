@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { white, red60, blue70 } from '@carbon/colors';
+import { white, red60 } from '@carbon/colors';
 
 export const interactive01 = '#3d70b2';
 export const interactive02 = '#4d5358';
@@ -31,7 +31,7 @@ export const icon02 = '#5a6872';
 export const icon03 = white;
 
 export const link01 = '#3d70b2';
-export const link02 = blue70;
+export const link02 = '#3d70b2';
 
 export const inverseLink = '#5596e6';
 
