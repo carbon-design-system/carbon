@@ -80,7 +80,7 @@ function ContextMenuOption({
   }
 
   function handleKeyDown(event) {
-    if (match(event, keys.ArrowRight)) {
+    if (match(event, keys.ArrowRight) || match(event, keys.Enter)) {
       openSubmenu(true);
     }
   }

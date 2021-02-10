@@ -79,3 +79,14 @@ export function getParentMenu(el) {
 
   return null;
 }
+
+export function clickedElementHasSubnodes(e) {
+  if (e) {
+    const closestFocusableElement = e.target.closest('[tabindex]');
+    if (closestFocusableElement?.tagName === 'BUTTON') {
+      return getFirstSubNode(closestFocusableElement.parentNode) !== null;
+    }
+  }
+
+  return false;
+}

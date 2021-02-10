@@ -13,11 +13,11 @@ import { keys, match } from '../../internal/keyboard';
 import ClickListener from '../../internal/ClickListener';
 
 import {
+  clickedElementHasSubnodes,
   getValidNodes,
   resetFocus,
   focusNode as focusNodeUtil,
   getNextNode,
-  getFirstSubNode,
   getParentNode,
   getParentMenu,
 } from './_utils';
@@ -70,8 +70,6 @@ const ContextMenu = function ContextMenu({
         nodeToFocus = getNextNode(currentNode, -1);
       } else if (match(event, keys.ArrowDown)) {
         nodeToFocus = getNextNode(currentNode, 1);
-      } else if (match(event, keys.ArrowRight)) {
-        nodeToFocus = getFirstSubNode(currentNode);
       } else if (match(event, keys.ArrowLeft)) {
         nodeToFocus = getParentNode(currentNode);
       }
@@ -93,13 +91,15 @@ const ContextMenu = function ContextMenu({
   }
 
   function handleClick(e) {
-    if (e.target.tagName !== 'UL') {
+    if (!clickedElementHasSubnodes(e) && e.target.tagName !== 'UL') {
       onClose();
+    } else {
+      e.stopPropagation();
     }
   }
 
-  function handleClickOutside() {
-    if (open && canBeClosed) {
+  function handleClickOutside(e) {
+    if (!clickedElementHasSubnodes(e) && open && canBeClosed) {
       onClose();
     }
   }
