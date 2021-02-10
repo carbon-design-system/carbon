@@ -86,6 +86,11 @@ const props = () => ({
   direction: select('Dropdown direction (direction)', directions, 'bottom'),
   onChange: action('onChange'),
   onToggleClick: action('onClick'),
+  warn: boolean('Show warning state (warn)', false),
+  warnText: text(
+    'Warning state text (warnText)',
+    'This mode may perform worse on older machines'
+  ),
 });
 
 export const Playground = () => (

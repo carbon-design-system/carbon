@@ -64,11 +64,19 @@ export default class Search extends Component {
     onKeyDown: PropTypes.func,
 
     /**
+     * Deprecated in favor of `placeholder`
+     */
+    placeHolderText: deprecate(
+      PropTypes.string,
+      `\nThe prop \`placeHolderText\` for Search has been deprecated in favor of \`placeholder\`. Please use \`placeholder\` instead.`
+    ),
+
+    /**
      * Provide an optional placeholder text for the Search.
      * Note: if the label and placeholder differ,
      * VoiceOver on Mac will read both
      */
-    placeHolderText: PropTypes.string,
+    placeholder: PropTypes.string,
 
     /**
      * Specify the search size
@@ -100,7 +108,7 @@ export default class Search extends Component {
 
   static defaultProps = {
     type: 'text',
-    placeHolderText: '',
+    placeholder: '',
     closeButtonLabelText: 'Clear search input',
     onChange: () => {},
   };
@@ -156,6 +164,7 @@ export default class Search extends Component {
         this._inputId ||
         `search__input__id_${Math.random().toString(36).substr(2)}`),
       placeHolderText,
+      placeholder,
       labelText,
       closeButtonLabelText,
       small,
@@ -198,7 +207,7 @@ export default class Search extends Component {
           disabled={disabled}
           className={`${prefix}--search-input`}
           id={id}
-          placeholder={placeHolderText}
+          placeholder={placeHolderText || placeholder}
           onChange={composeEventHandlers([onChange, this.handleChange])}
           onKeyDown={composeEventHandlers([onKeyDown, this.handleKeyDown])}
           ref={(input) => {
