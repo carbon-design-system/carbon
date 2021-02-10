@@ -188,6 +188,8 @@
     "es/globals/js/watch.js",
     "scripts/*",
     "scss/**/*.scss",
+    "src/globals/js/boot.js",
+    "src/globals/js/watch.js",
     "umd/bundle.js",
     "umd/globals/js/boot.js",
     "umd/globals/js/watch.js"
