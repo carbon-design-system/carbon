@@ -7023,6 +7023,13 @@ Map {
       },
     },
   },
+  "SideNavDivider" => Object {
+    "propTypes": Object {
+      "className": Object {
+        "type": "string",
+      },
+    },
+  },
   "SideNavFooter" => Object {
     "defaultProps": Object {
       "assistiveText": "Toggle opening or closing the side navigation",
