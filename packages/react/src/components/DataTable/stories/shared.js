@@ -4,8 +4,9 @@
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
-
+import React from 'react';
 import { action } from '@storybook/addon-actions';
+import Link from '../../Link';
 
 export const rows = [
   {
@@ -15,7 +16,7 @@ export const rows = [
     port: 3000,
     rule: 'Round robin',
     attached_groups: 'Kevin’s VM Groups',
-    status: 'Disabled',
+    status: <Link>Disabled</Link>,
   },
   {
     id: 'b',
@@ -24,7 +25,7 @@ export const rows = [
     port: 443,
     rule: 'Round robin',
     attached_groups: 'Maureen’s VM Groups',
-    status: 'Starting',
+    status: <Link>Starting</Link>,
   },
   {
     id: 'c',
@@ -33,7 +34,7 @@ export const rows = [
     port: 80,
     rule: 'DNS delegation',
     attached_groups: 'Andrew’s VM Groups',
-    status: 'Active',
+    status: <Link>Active</Link>,
   },
   {
     id: 'd',
@@ -42,7 +43,7 @@ export const rows = [
     port: 3000,
     rule: 'Round robin',
     attached_groups: 'Marc’s VM Groups',
-    status: 'Disabled',
+    status: <Link>Disabled</Link>,
   },
   {
     id: 'e',
@@ -51,7 +52,7 @@ export const rows = [
     port: 443,
     rule: 'Round robin',
     attached_groups: 'Mel’s VM Groups',
-    status: 'Starting',
+    status: <Link>Starting</Link>,
   },
   {
     id: 'f',
@@ -60,7 +61,7 @@ export const rows = [
     port: 80,
     rule: 'DNS delegation',
     attached_groups: 'Ronja’s VM Groups',
-    status: 'Active',
+    status: <Link>Active</Link>,
   },
 ];
 
