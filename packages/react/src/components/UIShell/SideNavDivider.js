@@ -12,10 +12,10 @@ import React from 'react';
 
 const { prefix } = settings;
 
-const SideNavDivider = ({ className }) => {
+function SideNavDivider({ className }) {
   const classNames = cx(`${prefix}--side-nav__divider`, className);
   return <li role="separator" className={classNames} />;
-};
+}
 
 SideNavDivider.propTypes = {
   /**
