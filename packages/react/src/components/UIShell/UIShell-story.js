@@ -33,6 +33,7 @@ import {
   // SideNavHeader,
   // SideNavDetails,
   // SideNavSwitcher,
+  SideNavDivider,
   SideNavItems,
   SideNavLink,
   SideNavMenu,
@@ -151,6 +152,7 @@ export default {
       SkipToContent,
       SideNav,
       SideNavItems,
+      SideNavDivider,
       SideNavLink,
       SideNavMenu,
       SideNavMenuItem,
@@ -682,6 +684,58 @@ export const FixedSideNavWIcons = withReadme(readme, () => (
 ));
 
 FixedSideNavWIcons.storyName = 'Fixed SideNav w/ Icons';
+
+export const FixedSideNavWDivider = withReadme(readme, () => (
+  <>
+    <SideNav
+      isFixedNav
+      expanded={true}
+      isChildOfHeader={false}
+      aria-label="Side navigation">
+      <SideNavItems>
+        <SideNavMenu title="L0 menu">
+          <SideNavMenuItem href="javascript:void(0)">
+            L0 menu item
+          </SideNavMenuItem>
+          <SideNavMenuItem href="javascript:void(0)">
+            L0 menu item
+          </SideNavMenuItem>
+          <SideNavMenuItem href="javascript:void(0)">
+            L0 menu item
+          </SideNavMenuItem>
+        </SideNavMenu>
+        <SideNavMenu title="L0 menu" isActive={true}>
+          <SideNavMenuItem href="javascript:void(0)">
+            L0 menu item
+          </SideNavMenuItem>
+          <SideNavMenuItem aria-current="page" href="javascript:void(0)">
+            L0 menu item
+          </SideNavMenuItem>
+          <SideNavMenuItem href="javascript:void(0)">
+            L0 menu item
+          </SideNavMenuItem>
+        </SideNavMenu>
+        <SideNavMenu title="L0 menu">
+          <SideNavMenuItem href="javascript:void(0)">
+            L0 menu item
+          </SideNavMenuItem>
+          <SideNavMenuItem href="javascript:void(0)">
+            L0 menu item
+          </SideNavMenuItem>
+          <SideNavMenuItem href="javascript:void(0)">
+            L0 menu item
+          </SideNavMenuItem>
+        </SideNavMenu>
+        <SideNavDivider />
+        <SideNavLink href="javascript:void(0)">L0 link</SideNavLink>
+        <SideNavLink href="javascript:void(0)">L0 link</SideNavLink>
+      </SideNavItems>
+    </SideNav>
+    <StoryContent useResponsiveOffset={false} />
+  </>
+));
+
+FixedSideNavWDivider.storyName = 'Fixed SideNav w/ Divider';
 
 export const SideNavRail = withReadme(readme, () => (
   <>
