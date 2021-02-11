@@ -320,6 +320,7 @@
 
   .#{$prefix}--modal-footer--three-button .#{$prefix}--btn {
     flex: 0 1 25%;
+    align-items: flex-start;
   }
 
   .#{$prefix}--modal-footer button.#{$prefix}--btn:focus {
