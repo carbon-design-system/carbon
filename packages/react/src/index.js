@@ -186,6 +186,7 @@ export {
   SkipToContent,
   SideNav,
   SideNavDetails,
+  SideNavDivider,
   SideNavFooter,
   SideNavHeader,
   SideNavIcon,
