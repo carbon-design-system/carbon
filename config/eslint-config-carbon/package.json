@@ -42,5 +42,8 @@
     "eslint-plugin-react": "^7.18.0",
     "eslint-plugin-react-hooks": "^4.0.4",
     "eslint-restricted-globals": "^0.2.0"
+  },
+  "devDependencies": {
+    "prettier": "^2.2.1"
   }
 }

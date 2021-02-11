@@ -225,7 +225,9 @@ export const WithChangeOnClose = withReadme(readme, () => {
   const [hasFocus, setHasFocus] = useState(false);
   const [active, setActive] = useState(false);
   const [selItems, setSelItems] = useState([items[0]]);
-  if (!hasFocus && active && selItems.length == 0) setActive(false);
+  if (!hasFocus && active && selItems.length == 0) {
+    setActive(false);
+  }
 
   return (
     <div style={{ width: 300 }}>
@@ -234,7 +236,9 @@ export const WithChangeOnClose = withReadme(readme, () => {
         checked={active}
         onChange={(a) => {
           setActive(a);
-          if (a) setSelItems([items[0]]);
+          if (a) {
+            setSelItems([items[0]]);
+          }
         }}
         labelText="Active"
       />
