@@ -37,6 +37,7 @@ const colors = [
   'icon03',
 
   'link01',
+  'link02',
 
   'inverseLink',
 
@@ -187,6 +188,7 @@ export const unstable__meta = {
         'text05',
         'textError',
         'link01',
+        'link02',
         'icon01',
         'icon02',
         'icon03',
