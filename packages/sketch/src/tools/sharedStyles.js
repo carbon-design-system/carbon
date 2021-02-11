@@ -29,6 +29,21 @@ export function syncSharedStyle(
       : document.sharedTextStyles;
   const [sharedStyle] = Array.from(documentSharedStyles).filter(
     (sharedStyle) => {
+      /**
+       * TODO: remove the following block after next Sketch plugin release
+       * backwards compatibility to avoid breaking changes from #5664, #5744
+       * we search for style names with the following format
+       *   `color/teal/60`
+       * and reformat it to
+       *   `color / teal / 60`
+       * this search and replace will not be needed after the plugin has been
+       * published with renamed style layers
+       */
+      // start removal
+      if (sharedStyle.name.split('/').join(' / ') === name) {
+        sharedStyle.name = name;
+      }
+      // end removal
       return sharedStyle.name === name;
     }
   );
