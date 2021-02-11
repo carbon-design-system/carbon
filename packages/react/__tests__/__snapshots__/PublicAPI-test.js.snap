@@ -188,6 +188,9 @@ Map {
         "type": "string",
       },
       "iconDescription": [Function],
+      "isSelected": Object {
+        "type": "bool",
+      },
       "kind": Object {
         "args": Array [
           Array [
