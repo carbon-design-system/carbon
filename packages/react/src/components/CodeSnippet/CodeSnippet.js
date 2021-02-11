@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2018
+ * Copyright IBM Corp. 2016, 2021
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -18,6 +18,9 @@ import CopyButton from '../CopyButton';
 import getUniqueId from '../../tools/uniqueId';
 
 const { prefix } = settings;
+
+const rowHeightInPixels = 18;
+const defaultCollapsedHeightInRows = 15;
 
 function CodeSnippet({
   className,
@@ -94,7 +97,9 @@ function CodeSnippet({
     onResize: () => {
       if (codeContentRef?.current && type === 'multi') {
         const { height } = codeContentRef.current.getBoundingClientRect();
-        setShouldShowMoreLessBtn(height > 255);
+        setShouldShowMoreLessBtn(
+          height > defaultCollapsedHeightInRows * rowHeightInPixels
+        );
       }
       if (
         (codeContentRef?.current && type === 'multi') ||

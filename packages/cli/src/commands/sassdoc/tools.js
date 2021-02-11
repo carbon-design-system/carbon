@@ -122,7 +122,9 @@ function createAnchorLink(name, heading) {
 function createMarkdownItem(item) {
   let str = '';
 
-  if (!item.context) return '';
+  if (!item.context) {
+    return '';
+  }
 
   let status = item.access === 'public' ? '✅' : '❌';
 
@@ -160,9 +162,13 @@ $${item.context.name}: ${item.context.value};
 
     if (item.parameter) {
       item.parameter.forEach((param) => {
-        if (paramStr) paramStr += `, `;
+        if (paramStr) {
+          paramStr += `, `;
+        }
         paramStr += `$${param.name}`;
-        if (param.default) paramStr += `: ${param.default}`;
+        if (param.default) {
+          paramStr += `: ${param.default}`;
+        }
       });
     }
 

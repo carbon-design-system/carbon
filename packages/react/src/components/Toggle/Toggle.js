@@ -152,20 +152,12 @@ class Toggle extends React.Component {
                 <path d="M2.2 2.7L5 0 6 1 2.2 5 0 2.7 1 1.5z" />
               </svg>
             )}
-            {!size && (
-              <>
-                <span
-                  className={`${prefix}--toggle__text--off`}
-                  aria-hidden="true">
-                  {labelA}
-                </span>
-                <span
-                  className={`${prefix}--toggle__text--on`}
-                  aria-hidden="true">
-                  {labelB}
-                </span>
-              </>
-            )}
+            <span className={`${prefix}--toggle__text--off`} aria-hidden="true">
+              {labelA}
+            </span>
+            <span className={`${prefix}--toggle__text--on`} aria-hidden="true">
+              {labelB}
+            </span>
           </span>
         </label>
       </div>

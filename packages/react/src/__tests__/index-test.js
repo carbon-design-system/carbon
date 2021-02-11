@@ -116,6 +116,7 @@ describe('Carbon Components React', () => {
         "SelectableTile",
         "SideNav",
         "SideNavDetails",
+        "SideNavDivider",
         "SideNavFooter",
         "SideNavHeader",
         "SideNavIcon",

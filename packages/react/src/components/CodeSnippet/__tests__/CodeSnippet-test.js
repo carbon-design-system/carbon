@@ -1,11 +1,12 @@
 /**
- * Copyright IBM Corp. 2016, 2018
+ * Copyright IBM Corp. 2016, 2021
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
 
 import React from 'react';
+import Button from '../../Button';
 import CodeSnippet from '../';
 import Copy from '../../Copy';
 import CopyButton from '../../CopyButton';
@@ -66,6 +67,38 @@ describe('Code Snippet', () => {
       );
       clickWrapper.find(Copy).simulate('click');
       expect(onClick).toBeCalled();
+    });
+  });
+
+  describe('check for showMoreBtn', () => {
+    let wrapper;
+
+    beforeEach(() => {
+      wrapper = mount(<CodeSnippet type={'multi'} />);
+    });
+
+    it('when less then 15 rows', () => {
+      wrapper.setProps({
+        children: '1\n2\n3\n4\n5\n6\n7\n8\n9\n10\n11\n12\n13\n14',
+      });
+
+      expect(wrapper.find(Button).length).toBe(0);
+    });
+
+    it('when exactly 15 rows', () => {
+      wrapper.setProps({
+        children: '1\n2\n3\n4\n5\n6\n7\n8\n9\n10\n11\n12\n13\n14\n15',
+      });
+
+      expect(wrapper.find(Button).length).toBe(0);
+    });
+
+    it.skip('when more then 15 rows', () => {
+      wrapper.setProps({
+        children: '1\n2\n3\n4\n5\n6\n7\n8\n9\n10\n11\n12\n13\n14\n15\n16',
+      });
+
+      expect(wrapper.find(Button).length).toBe(1);
     });
   });
 });
