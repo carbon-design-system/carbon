@@ -32,7 +32,7 @@ function ContextMenuRadioGroup({
     return (
       <ContextMenuOption
         key={i}
-        role="radio"
+        role="menuitemradio"
         aria-checked={isSelected}
         renderIcon={isSelected ? Checkmark16 : null}
         label={option}

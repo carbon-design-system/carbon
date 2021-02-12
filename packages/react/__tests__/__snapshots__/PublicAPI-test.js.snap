@@ -7624,7 +7624,7 @@ Map {
         },
       },
     },
-    "ContextMenuSelectableOption": Object {
+    "ContextMenuSelectableItem": Object {
       "propTypes": Object {
         "initialChecked": Object {
           "type": "bool",
@@ -7680,7 +7680,7 @@ Map {
     },
   },
   "unstable_ContextMenuDivider" => Object {},
-  "unstable_ContextMenuSelectableOption" => Object {
+  "unstable_ContextMenuSelectableItem" => Object {
     "propTypes": Object {
       "initialChecked": Object {
         "type": "bool",

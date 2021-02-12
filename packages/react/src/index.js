@@ -210,7 +210,7 @@ export unstable_TreeView, {
 export unstable_ContextMenu, {
   ContextMenuItem as unstable_ContextMenuItem,
   ContextMenuDivider as unstable_ContextMenuDivider,
-  ContextMenuSelectableOption as unstable_ContextMenuSelectableOption,
+  ContextMenuSelectableItem as unstable_ContextMenuSelectableItem,
   ContextMenuRadioGroup as unstable_ContextMenuRadioGroup,
   useContextMenu as unstable_useContextMenu,
 } from './components/ContextMenu';

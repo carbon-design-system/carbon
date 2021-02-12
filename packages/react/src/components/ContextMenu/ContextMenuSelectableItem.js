@@ -10,7 +10,7 @@ import PropTypes from 'prop-types';
 import { Checkmark16 } from '@carbon/icons-react';
 import ContextMenuOption from './ContextMenuOption';
 
-function ContextMenuSelectableOption({
+function ContextMenuSelectableItem({
   label,
   initialChecked,
   onChange = () => {},
@@ -24,7 +24,7 @@ function ContextMenuSelectableOption({
 
   return (
     <ContextMenuOption
-      role="checkbox"
+      role="menuitemcheckbox"
       aria-checked={checked}
       renderIcon={checked ? Checkmark16 : null}
       label={label}
@@ -34,7 +34,7 @@ function ContextMenuSelectableOption({
   );
 }
 
-ContextMenuSelectableOption.propTypes = {
+ContextMenuSelectableItem.propTypes = {
   /**
    * Whether the option should be checked by default
    */
@@ -51,4 +51,4 @@ ContextMenuSelectableOption.propTypes = {
   onChange: PropTypes.func,
 };
 
-export default ContextMenuSelectableOption;
+export default ContextMenuSelectableItem;

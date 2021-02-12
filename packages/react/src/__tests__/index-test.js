@@ -198,7 +198,7 @@ describe('Carbon Components React', () => {
         "unstable_ContextMenuDivider",
         "unstable_ContextMenuItem",
         "unstable_ContextMenuRadioGroup",
-        "unstable_ContextMenuSelectableOption",
+        "unstable_ContextMenuSelectableItem",
         "unstable_PageSelector",
         "unstable_Pagination",
         "unstable_TreeNode",

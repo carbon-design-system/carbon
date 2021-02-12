@@ -12,7 +12,7 @@ import { InlineNotification } from '../Notification';
 import ContextMenu, {
   ContextMenuItem,
   ContextMenuDivider,
-  ContextMenuSelectableOption,
+  ContextMenuSelectableItem,
   ContextMenuRadioGroup,
   useContextMenu,
 } from '../ContextMenu';
@@ -86,7 +86,7 @@ export const _ContextMenu = () => {
         />
         <ContextMenuItem label="Duplicate" onClick={action('onClick')} />
         <ContextMenuDivider />
-        <ContextMenuSelectableOption
+        <ContextMenuSelectableItem
           label="Publish"
           initialChecked
           onChange={action('onChange')}

@@ -22,7 +22,7 @@ import {
   getParentMenu,
 } from './_utils';
 
-import ContextMenuSelectableOption from './ContextMenuSelectableOption';
+import ContextMenuSelectableItem from './ContextMenuSelectableItem';
 import ContextMenuRadioGroup from './ContextMenuRadioGroup';
 
 const { prefix } = settings;
@@ -201,7 +201,7 @@ const ContextMenu = function ContextMenu({
 
   const someNodesHaveIcons = React.Children.toArray(children).some(
     (node) =>
-      node.type === ContextMenuSelectableOption ||
+      node.type === ContextMenuSelectableItem ||
       node.type === ContextMenuRadioGroup
   );
 

@@ -126,7 +126,7 @@ function ContextMenuOption({
     [`${prefix}--context-menu-option--active`]: subOptions && submenuOpen,
   });
 
-  const allowedRoles = ['radio', 'checkbox'];
+  const allowedRoles = ['menuitemradio', 'menuitemcheckbox'];
   const role =
     rest.role && allowedRoles.includes(rest.role) ? rest.role : 'menuitem';
 
@@ -136,7 +136,7 @@ function ContextMenuOption({
   const submenuPosition = getSubmenuPosition();
 
   return (
-    // role is either radio, checkbox, or menuitem which are all interactive
+    // role is either menuitemradio, menuitemcheckbox, or menuitem which are all interactive
     // eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions
     <li
       {...rest}
