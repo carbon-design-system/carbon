@@ -62,25 +62,21 @@ export const _ContextMenu = () => {
         <ContextMenuItem
           label="Cut"
           shortcut="⌘X"
-          shortcutText="command x"
           onClick={action('onClick')}
         />
         <ContextMenuItem
           label="Copy"
           shortcut="⌘C"
-          shortcutText="command c"
           onClick={action('onClick')}
         />
         <ContextMenuItem
           label="Copy path"
           shortcut="⌥⌘C"
-          shortcutText="option command c"
           onClick={action('onClick')}
         />
         <ContextMenuItem
           label="Paste"
           shortcut="⌘V"
-          shortcutText="command v"
           disabled
           onClick={action('onClick')}
         />
@@ -95,13 +91,11 @@ export const _ContextMenu = () => {
         <ContextMenuItem
           label="Rename"
           shortcut="↩︎"
-          shortcutText="enter"
           onClick={action('onClick')}
         />
         <ContextMenuItem
           label="Delete"
           shortcut="⌘⌫"
-          shortcutText="command backspace"
           onClick={action('onClick')}
         />
       </ContextMenu>

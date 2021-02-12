@@ -9,7 +9,7 @@ import React from 'react';
 import ContextMenu, {
   ContextMenuItem,
   ContextMenuRadioGroup,
-  ContextMenuSelectableOption,
+  ContextMenuSelectableItem,
   ContextMenuDivider,
 } from '../ContextMenu';
 import { mount } from 'enzyme';
@@ -61,13 +61,7 @@ describe('ContextMenu', () => {
       });
 
       it('renders props.shortcut when provided', () => {
-        const wrapper = mount(
-          <ContextMenuItem
-            label="Copy"
-            shortcut="⌘C"
-            shortcutText="command c"
-          />
-        );
+        const wrapper = mount(<ContextMenuItem label="Copy" shortcut="⌘C" />);
 
         expect(
           wrapper.find(`div.${prefix}--context-menu-option__info`).length
@@ -80,10 +74,9 @@ describe('ContextMenu', () => {
       it('respects props.disabled', () => {
         const wrapper = mount(<ContextMenuItem label="Copy" disabled />);
         const content = wrapper.find(
-          `button.${prefix}--context-menu-option__content`
+          `div.${prefix}--context-menu-option__content`
         );
 
-        expect(content.prop('disabled')).toBe(true);
         expect(
           content.hasClass(`${prefix}--context-menu-option__content--disabled`)
         ).toBe(true);
@@ -133,22 +126,22 @@ describe('ContextMenu', () => {
         expect(container.prop('role')).toBe('radiogroup');
       });
 
-      it('children have role "radio"', () => {
+      it('children have role "menuitemradio"', () => {
         const wrapper = mount(
           <ContextMenuRadioGroup label="Share with" items={['None', 'All']} />
         );
         const options = wrapper.find(`li.${prefix}--context-menu-option`);
 
-        expect(options.every('li[role="radio"]')).toBe(true);
+        expect(options.every('li[role="menuitemradio"]')).toBe(true);
       });
     });
 
     describe('selectable', () => {
-      it('has role "checkbox"', () => {
-        const wrapper = mount(<ContextMenuSelectableOption label="Publish" />);
+      it('has role "menuitemcheckbox"', () => {
+        const wrapper = mount(<ContextMenuSelectableItem label="Publish" />);
         const container = wrapper.childAt(0);
 
-        expect(container.prop('role')).toBe('checkbox');
+        expect(container.prop('role')).toBe('menuitemcheckbox');
       });
     });
 
