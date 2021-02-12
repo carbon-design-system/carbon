@@ -92,7 +92,7 @@ export default class TileGroup extends React.Component {
       if (typeof tileRadio.type === 'string') {
         return tileRadio;
       }
-      
+
       return (
         <RadioTile
           {...other}
