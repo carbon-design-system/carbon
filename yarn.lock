@@ -9285,7 +9285,7 @@ __metadata:
     carbon-components-react: ^6.0.0
     chokidar: ^2.0.0
     classnames: ^2.2.0
-    commander: ^2.13.0
+    commander: ^7.0.0
     core-js: ^3.6.5
     cross-env: ^5.2.0
     css-loader: ^3.4.2
@@ -10369,7 +10369,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"commander@npm:^2.11.0, commander@npm:^2.13.0, commander@npm:^2.19.0, commander@npm:^2.2.0, commander@npm:^2.20.0, commander@npm:^2.8.1, commander@npm:^2.9.0, commander@npm:~2.20.3":
+"commander@npm:^2.11.0, commander@npm:^2.19.0, commander@npm:^2.2.0, commander@npm:^2.20.0, commander@npm:^2.8.1, commander@npm:^2.9.0, commander@npm:~2.20.3":
   version: 2.20.3
   resolution: "commander@npm:2.20.3"
   checksum: b73428e97de7624323f81ba13f8ed9271de487017432d18b4da3f07cfc528ad754bbd199004bd5d14e0ccd67d1fdfe0ec8dbbd4c438b401df3c4cc387bfd1daa
@@ -10380,6 +10380,13 @@ __metadata:
   version: 4.1.0
   resolution: "commander@npm:4.1.0"
   checksum: 90e7ae2735d850e3b33986e26fdc44dcaf0aacc464aba9b7c38f10aa28f2379f6984266bcb5e23cc04baf6945b10cfc0829f0bb58339783d805d37408bac1dde
+  languageName: node
+  linkType: hard
+
+"commander@npm:^7.0.0":
+  version: 7.0.0
+  resolution: "commander@npm:7.0.0"
+  checksum: 46e60cb1e1ccc3e8d4bac5672d4be08cb60d0a0c22d0c352ba9f9713a11996e79a67216ace4dc32a04ee621c86c9a327f0c35126e4aaf3ede3004f78a009cb19
   languageName: node
   linkType: hard
 
