@@ -7596,9 +7596,6 @@ Map {
         "shortcut": Object {
           "type": "node",
         },
-        "shortcutText": Object {
-          "type": "string",
-        },
       },
     },
     "ContextMenuRadioGroup": Object {
@@ -7673,9 +7670,6 @@ Map {
       },
       "shortcut": Object {
         "type": "node",
-      },
-      "shortcutText": Object {
-        "type": "string",
       },
     },
   },

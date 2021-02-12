@@ -57,7 +57,6 @@ function ContextMenuOption({
   children,
   disabled,
   shortcut,
-  shortcutText,
   renderIcon,
   indented,
   level,
@@ -130,9 +129,6 @@ function ContextMenuOption({
   const role =
     rest.role && allowedRoles.includes(rest.role) ? rest.role : 'menuitem';
 
-  const ariaLabel =
-    shortcut && shortcutText ? `${label}, ${shortcutText}` : label;
-
   const submenuPosition = getSubmenuPosition();
 
   return (
@@ -143,7 +139,6 @@ function ContextMenuOption({
       ref={rootRef}
       className={classes}
       role={role}
-      aria-label={ariaLabel}
       aria-disabled={!subOptions && disabled}
       onKeyDown={subOptions ? handleKeyDown : null}
       onMouseEnter={subOptions ? handleMouseEnter : null}
@@ -251,11 +246,6 @@ ContextMenuOption.propTypes = {
    * Rendered shortcut for the ContextMenuOption
    */
   shortcut: PropTypes.node,
-
-  /**
-   * The text-only representation of the shortcut read to screen readers
-   */
-  shortcutText: PropTypes.string,
 };
 
 export default ContextMenuOption;

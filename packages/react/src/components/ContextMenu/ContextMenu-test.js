@@ -75,9 +75,6 @@ describe('ContextMenu', () => {
         expect(
           wrapper.find(`div.${prefix}--context-menu-option__info`).text()
         ).toBe('⌘C');
-        expect(
-          wrapper.find(`li.${prefix}--context-menu-option`).prop('aria-label')
-        ).toContain('command c');
       });
 
       it('respects props.disabled', () => {
@@ -109,7 +106,6 @@ describe('ContextMenu', () => {
 
         const level1 = wrapper.find(`li.${prefix}--context-menu-option`).at(0);
 
-        expect(level1.prop('aria-label')).toBe('Format');
         expect(
           level1.find(`ul.${prefix}--context-menu`).length
         ).toBeGreaterThan(0);

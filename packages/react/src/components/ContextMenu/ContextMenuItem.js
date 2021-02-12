@@ -10,21 +10,13 @@ import PropTypes from 'prop-types';
 
 import ContextMenuOption from './ContextMenuOption';
 
-function ContextMenuItem({
-  label,
-  children,
-  disabled,
-  shortcut,
-  shortcutText,
-  ...rest
-}) {
+function ContextMenuItem({ label, children, disabled, shortcut, ...rest }) {
   return (
     <ContextMenuOption
       {...rest}
       label={label}
       disabled={disabled}
-      shortcut={shortcut}
-      shortcutText={shortcutText}>
+      shortcut={shortcut}>
       {children}
     </ContextMenuOption>
   );
@@ -50,11 +42,6 @@ ContextMenuItem.propTypes = {
    * Rendered shortcut for the ContextMenuItem
    */
   shortcut: PropTypes.node,
-
-  /**
-   * The text-only representation of the shortcut read to screen readers
-   */
-  shortcutText: PropTypes.string,
 };
 
 export default ContextMenuItem;
