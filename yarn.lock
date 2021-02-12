@@ -1683,6 +1683,7 @@ __metadata:
     "@babel/generator": ^7.10.2
     "@babel/types": ^7.10.2
     "@carbon/scss-generator": ^10.13.0
+    change-case: ^4.1.2
     fs-extra: ^9.0.1
     js-yaml: ^3.14.0
     rimraf: ^3.0.2
