@@ -154,6 +154,10 @@ export default class Modal extends Component {
 
     /**
      * Specify an array of config objects for secondary buttons
+     * (`Array<{
+     *   buttonText: string,
+     *   onClick: function,
+     * }>`).
      */
     secondaryButtons: (props, propName, componentName) => {
       if (props.secondaryButtons) {
