@@ -119,7 +119,7 @@ const props = {
     return {
       passiveModal: boolean(
         'Without footer (passiveModal)',
-        false || numberOfButtons === 0
+        false || numberOfButtons === '0'
       ),
       ...secondaryButtons(),
     };
@@ -175,7 +175,7 @@ export const Playground = () => {
   const { passiveModal, ...footerProps } = props.modalFooter(numberOfButtons);
   return (
     <Modal
-      passiveModal={numberOfButtons === 0 || passiveModal}
+      passiveModal={numberOfButtons === '0' || passiveModal}
       size={size || undefined}
       hasScrollingContent={hasScrollingContent}
       aria-label={hasScrollingContent ? 'Modal content' : undefined}
