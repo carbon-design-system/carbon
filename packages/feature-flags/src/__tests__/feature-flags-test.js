@@ -10,7 +10,7 @@ describe('@carbon/feature-flags', () => {
 
   beforeEach(() => {
     jest.resetModules();
-    FeatureFlag = require('../src');
+    FeatureFlag = require('../');
   });
 
   describe('add', () => {
