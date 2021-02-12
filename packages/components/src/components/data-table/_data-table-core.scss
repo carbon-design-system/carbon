@@ -92,6 +92,11 @@
     border-bottom: 1px solid $hover-ui;
   }
 
+  .#{$prefix}--data-table tbody tr:hover td .#{$prefix}--link,
+  .#{$prefix}--data-table tbody tr:hover th .#{$prefix}--link {
+    color: $link-02;
+  }
+
   .#{$prefix}--data-table th,
   .#{$prefix}--data-table td {
     text-align: left;
@@ -103,6 +108,14 @@
     padding-left: $spacing-05;
     color: $text-01;
     background-color: $ui-03;
+  }
+
+  .#{$prefix}--data-table.#{$prefix}--data-table--sort th {
+    padding: 0;
+  }
+
+  .#{$prefix}--data-table.#{$prefix}--data-table--sort .#{$prefix}--table-sort {
+    padding-left: $spacing-05;
   }
 
   .#{$prefix}--data-table th:last-of-type {
@@ -209,6 +222,10 @@
     &:hover {
       background-color: $hover-ui;
     }
+  }
+
+  .#{$prefix}--data-table--selected .#{$prefix}--link {
+    color: $link-02;
   }
 
   .#{$prefix}--data-table--compact td.#{$prefix}--table-column-menu,

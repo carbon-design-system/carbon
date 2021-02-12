@@ -113,8 +113,7 @@
     width: 1rem;
     height: 1rem;
     margin: $accordion-arrow-margin;
-    // TODO: RTL rotate(180deg);
-    transform: rotate(90deg);
+    transform: rotate(90deg) #{'/*rtl:ignore*/'};
     transition: all $duration--fast-02 motion(standard, productive);
     fill: $ui-05;
 
@@ -197,8 +196,7 @@
     }
 
     .#{$prefix}--accordion__arrow {
-      /* rtl:ignore */
-      transform: rotate(-90deg);
+      transform: rotate(-90deg) #{'/*rtl:ignore*/'};
       fill: $ui-05;
 
       // Windows, Firefox HCM Fix
