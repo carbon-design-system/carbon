@@ -12,7 +12,12 @@ import { settings } from 'carbon-components';
 import { CaretRight16 } from '@carbon/icons-react';
 import { keys, match } from '../../internal/keyboard';
 
-import { getFirstSubNode, focusNode, getParentMenu } from './_utils';
+import {
+  getFirstSubNode,
+  focusNode,
+  getParentMenu,
+  clickedElementHasSubnodes,
+} from './_utils';
 
 import ContextMenu from './ContextMenu';
 
@@ -26,19 +31,13 @@ function ContextMenuOptionContent({
   disabled,
   icon: Icon,
   indented,
-  ...rest
 }) {
   const classes = classnames(`${prefix}--context-menu-option__content`, {
     [`${prefix}--context-menu-option__content--disabled`]: disabled,
   });
 
   return (
-    <button
-      {...rest}
-      className={classes}
-      type="button"
-      disabled={disabled}
-      tabIndex={-1}>
+    <div className={classes}>
       {indented && (
         <div className={`${prefix}--context-menu-option__icon`}>
           {Icon && <Icon />}
@@ -48,18 +47,19 @@ function ContextMenuOptionContent({
         {label}
       </span>
       <div className={`${prefix}--context-menu-option__info`}>{info}</div>
-    </button>
+    </div>
   );
 }
 
 function ContextMenuOption({
-  label,
   children,
   disabled,
-  shortcut,
-  renderIcon,
   indented,
+  label,
   level,
+  onClick = () => {},
+  renderIcon,
+  shortcut,
   ...rest
 }) {
   const [submenuOpen, setSubmenuOpen] = useState(false);
@@ -79,8 +79,13 @@ function ContextMenuOption({
   }
 
   function handleKeyDown(event) {
-    if (match(event, keys.ArrowRight) || match(event, keys.Enter)) {
+    if (
+      clickedElementHasSubnodes(event) &&
+      (match(event, keys.ArrowRight) || match(event, keys.Enter))
+    ) {
       openSubmenu(true);
+    } else if (match(event, keys.Enter)) {
+      onClick(event);
     }
   }
 
@@ -139,10 +144,13 @@ function ContextMenuOption({
       ref={rootRef}
       className={classes}
       role={role}
+      tabIndex={-1}
       aria-disabled={!subOptions && disabled}
-      onKeyDown={subOptions ? handleKeyDown : null}
+      aria-haspopup={subOptions}
+      onKeyDown={handleKeyDown}
       onMouseEnter={subOptions ? handleMouseEnter : null}
-      onMouseLeave={subOptions ? handleMouseLeave : null}>
+      onMouseLeave={subOptions ? handleMouseLeave : null}
+      onClick={onClick}>
       {subOptions ? (
         <>
           <ContextMenuOptionContent
@@ -150,7 +158,6 @@ function ContextMenuOption({
             icon={renderIcon}
             info={<CaretRight16 />}
             indented={indented}
-            aria-haspopup
           />
           <ContextMenu
             level={level + 1}
@@ -201,11 +208,6 @@ ContextMenuOptionContent.propTypes = {
    * Rendered label for the ContextMenuOptionContent
    */
   label: PropTypes.node.isRequired,
-
-  /**
-   * Which nested level this option is located in.
-   */
-  level: PropTypes.number,
 };
 
 ContextMenuOption.propTypes = {
@@ -235,6 +237,11 @@ ContextMenuOption.propTypes = {
    * Is automatically set by ContextMenu
    */
   level: PropTypes.number,
+
+  /**
+   * The onClick handler
+   */
+  onClick: PropTypes.func,
 
   /**
    * Rendered icon for the ContextMenuOption.

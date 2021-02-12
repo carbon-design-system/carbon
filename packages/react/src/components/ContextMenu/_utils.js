@@ -43,7 +43,7 @@ export function getNextNode(current, direction) {
 
   const nextNode = nodes[currentIndex + direction];
 
-  return nextNode?.firstChild || null;
+  return nextNode || null;
 }
 
 export function getFirstSubNode(node) {
@@ -52,7 +52,7 @@ export function getFirstSubNode(node) {
   if (submenu) {
     const subnodes = getValidNodes(submenu);
 
-    return subnodes[0]?.firstChild || null;
+    return subnodes[0] || null;
   }
 
   return null;
@@ -64,7 +64,7 @@ export function getParentNode(node) {
       `li.${prefix}--context-menu-option`
     );
 
-    return parentNode?.firstChild || null;
+    return parentNode || null;
   }
 
   return null;
@@ -83,8 +83,8 @@ export function getParentMenu(el) {
 export function clickedElementHasSubnodes(e) {
   if (e) {
     const closestFocusableElement = e.target.closest('[tabindex]');
-    if (closestFocusableElement?.tagName === 'BUTTON') {
-      return getFirstSubNode(closestFocusableElement.parentNode) !== null;
+    if (closestFocusableElement?.tagName === 'LI') {
+      return getFirstSubNode(closestFocusableElement) !== null;
     }
   }
 

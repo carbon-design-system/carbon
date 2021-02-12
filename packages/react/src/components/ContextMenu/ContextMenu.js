@@ -52,7 +52,11 @@ const ContextMenu = function ContextMenu({
   }
 
   function handleKeyDown(event) {
-    event.stopPropagation();
+    if (event.target.tagName === 'LI' && match(event, keys.Enter)) {
+      handleClick(event);
+    } else {
+      event.stopPropagation();
+    }
 
     if (
       match(event, keys.Escape) ||
@@ -63,8 +67,8 @@ const ContextMenu = function ContextMenu({
 
     let nodeToFocus;
 
-    if (event.target.tagName === 'BUTTON') {
-      const currentNode = event.target.parentNode;
+    if (event.target.tagName === 'LI') {
+      const currentNode = event.target;
 
       if (match(event, keys.ArrowUp)) {
         nodeToFocus = getNextNode(currentNode, -1);
@@ -77,9 +81,9 @@ const ContextMenu = function ContextMenu({
       const validNodes = getValidNodes(event.target);
 
       if (validNodes.length > 0 && match(event, keys.ArrowUp)) {
-        nodeToFocus = validNodes[validNodes.length - 1].firstChild;
+        nodeToFocus = validNodes[validNodes.length - 1];
       } else if (validNodes.length > 0 && match(event, keys.ArrowDown)) {
-        nodeToFocus = validNodes[0].firstChild;
+        nodeToFocus = validNodes[0];
       }
     }
 
@@ -230,7 +234,6 @@ const ContextMenu = function ContextMenu({
         onClick={handleClick}
         role="menu"
         tabIndex={-1}
-        data-level={level}
         data-direction={direction}
         style={{
           left: `${position[0]}px`,

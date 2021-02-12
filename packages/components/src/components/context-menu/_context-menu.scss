@@ -8,7 +8,6 @@
 @import '../../globals/scss/vars';
 @import '../../globals/scss/vendor/@carbon/elements/scss/import-once/import-once';
 @import '../../globals/scss/helper-mixins';
-@import '../../globals/scss/css--reset';
 
 /// Context Menu styles
 /// @access private
@@ -42,7 +41,12 @@
     position: relative;
     height: $spacing-07;
     background-color: $ui-01;
+    cursor: pointer;
     transition: background-color $duration--fast-01 motion(standard, productive);
+
+    &:focus {
+      @include focus-outline('outline');
+    }
   }
 
   .#{$prefix}--context-menu-option--active,
@@ -55,17 +59,11 @@
   }
 
   .#{$prefix}--context-menu-option__content {
-    @include button-reset;
-
     display: flex;
     align-items: center;
     justify-content: space-between;
     height: 100%;
     padding: 0 $spacing-05;
-
-    &:focus {
-      @include focus-outline('outline');
-    }
   }
 
   .#{$prefix}--context-menu-option__content--disabled {
