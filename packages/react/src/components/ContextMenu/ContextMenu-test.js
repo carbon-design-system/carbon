@@ -117,15 +117,6 @@ describe('ContextMenu', () => {
         );
       });
 
-      it('has role "radiogroup"', () => {
-        const wrapper = mount(
-          <ContextMenuRadioGroup label="Share with" items={['None', 'All']} />
-        );
-        const container = wrapper.childAt(0);
-
-        expect(container.prop('role')).toBe('radiogroup');
-      });
-
       it('children have role "menuitemradio"', () => {
         const wrapper = mount(
           <ContextMenuRadioGroup label="Share with" items={['None', 'All']} />
