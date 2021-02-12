@@ -21,7 +21,7 @@ export default class TileGroup extends React.Component {
 
   static propTypes = {
     /**
-     * Provide a collection of <RadioTile> components to render in the group
+     * Provide a collection of components to render in the group
      */
     children: PropTypes.node,
 
@@ -89,6 +89,10 @@ export default class TileGroup extends React.Component {
         );
       }
 
+      if (typeof tileRadio.type === 'string') {
+        return tileRadio;
+      }
+      
       return (
         <RadioTile
           {...other}
