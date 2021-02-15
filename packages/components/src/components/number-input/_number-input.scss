@@ -213,8 +213,6 @@
 
     &:hover {
       @include focus-outline('invalid');
-
-      border: 0;
     }
   }
 
@@ -359,13 +357,15 @@
     background-color: $field-02;
   }
 
-  .#{$prefix}--number--light .#{$prefix}--number__control-btn:hover {
-    background-color: $hover-light-ui;
-  }
-
   .#{$prefix}--number--light .#{$prefix}--number__control-btn::before,
   .#{$prefix}--number--light .#{$prefix}--number__control-btn::after {
-    background-color: transparent;
+    background-color: $field-02;
+  }
+
+  .#{$prefix}--number--light .#{$prefix}--number__control-btn:hover,
+  .#{$prefix}--number--light .#{$prefix}--number__control-btn:hover::before,
+  .#{$prefix}--number--light .#{$prefix}--number__control-btn:hover::after {
+    background-color: $hover-light-ui;
   }
 
   .#{$prefix}--number--mobile {
