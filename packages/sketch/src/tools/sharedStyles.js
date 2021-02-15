@@ -29,6 +29,21 @@ export function syncSharedStyle(
       : document.sharedTextStyles;
   const [sharedStyle] = Array.from(documentSharedStyles).filter(
     (sharedStyle) => {
+      /**
+       * TODO: remove the following block after next Sketch plugin release
+       * backwards compatibility to avoid breaking changes from #5664, #5744
+       * we search for style names with the following format
+       *   `color/teal/60`
+       * and reformat it to
+       *   `color / teal / 60`
+       * this search and replace will not be needed after the plugin has been
+       * published with renamed style layers
+       */
+      // start removal
+      if (sharedStyle.name.split('/').join(' / ') === name) {
+        sharedStyle.name = name;
+      }
+      // end removal
       return sharedStyle.name === name;
     }
   );
@@ -62,31 +77,19 @@ export function syncSharedStyle(
 
 /**
  * Sync the given color value as a shared style for the document
- * @param {Document} document
- * @param {string} name
- * @param {string} value
- * @param {string} type
+ * @param {object} params - syncColorStyle parameters
+ * @param {Document} params.document
+ * @param {string} params.name
+ * @param {string} params.value
  * @returns {SharedStyle}
  */
-export function syncColorStyle(document, name, value, type) {
-  if (type === 'fill') {
-    return syncSharedStyle(document, name, {
-      fills: [
-        {
-          color: value,
-          fillType: Style.FillType.Color,
-        },
-      ],
-    });
-  }
-  if (type === 'border') {
-    return syncSharedStyle(document, name, {
-      borders: [
-        {
-          color: value,
-          fillType: Style.FillType.Color,
-        },
-      ],
-    });
-  }
+export function syncColorStyle({ document, name, value }) {
+  return syncSharedStyle(document, name, {
+    fills: [
+      {
+        color: value,
+        fillType: Style.FillType.Color,
+      },
+    ],
+  });
 }
