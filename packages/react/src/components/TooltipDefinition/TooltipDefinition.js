@@ -77,7 +77,6 @@ const TooltipDefinition = ({
         type="button"
         className={tooltipTriggerClasses}
         aria-describedby={tooltipId}
-        aria-label={tooltipText}
         onFocus={composeEventHandlers([onFocus, handleFocus])}>
         {children}
       </button>
