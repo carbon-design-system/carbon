@@ -171,7 +171,7 @@ export default class Modal extends Component {
         }
 
         const shape = {
-          buttonText: PropTypes.string,
+          buttonText: PropTypes.node,
           onClick: PropTypes.func,
         };
 
