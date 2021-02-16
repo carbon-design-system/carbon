@@ -79,24 +79,28 @@ $prefix: 'bx';
   :root {
     @include carbon--theme($carbon--theme--white, true) {
       @include emit-component-tokens($tag-colors);
+      @include emit-component-tokens($notification-colors);
     }
   }
 
   :root[storybook-carbon-theme='g10'] {
     @include carbon--theme($carbon--theme--g10, true) {
       @include emit-component-tokens($tag-colors);
+      @include emit-component-tokens($notification-colors);
     }
   }
 
   :root[storybook-carbon-theme='g90'] {
     @include carbon--theme($carbon--theme--g90, true) {
       @include emit-component-tokens($tag-colors);
+      @include emit-component-tokens($notification-colors);
     }
   }
 
   :root[storybook-carbon-theme='g100'] {
     @include carbon--theme($carbon--theme--g100, true) {
       @include emit-component-tokens($tag-colors);
+      @include emit-component-tokens($notification-colors);
     }
   }
 }
