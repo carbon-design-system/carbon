@@ -49,8 +49,8 @@
   }
 
   .#{$prefix}--loading--small {
-    width: rem(16px);
-    height: rem(16px);
+    width: 2rem;
+    height: 2rem;
 
     circle {
       stroke-width: 16;
