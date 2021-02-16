@@ -239,13 +239,15 @@ export const expressiveParagraph01 = {
   fontWeight: fontWeights.light,
   lineHeight: 1.334,
   letterSpacing: 0,
-  lg: {
-    fontSize: rem(scale[6]),
-    lineHeight: 1.29,
-  },
-  max: {
-    fontSize: rem(scale[7]),
-    lineHeight: 1.25,
+  breakpoints: {
+    lg: {
+      fontSize: rem(scale[6]),
+      lineHeight: 1.29,
+    },
+    max: {
+      fontSize: rem(scale[7]),
+      lineHeight: 1.25,
+    },
   },
 };
 

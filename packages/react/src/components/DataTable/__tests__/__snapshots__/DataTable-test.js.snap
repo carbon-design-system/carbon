@@ -2016,6 +2016,7 @@ exports[`DataTable should render 1`] = `
             translateWithId={[Function]}
           >
             <div
+              aria-hidden={true}
               className="bx--batch-actions"
             >
               <div
@@ -2298,7 +2299,7 @@ exports[`DataTable should render 1`] = `
                     id="custom-id"
                     labelText="Filter table"
                     onChange={[Function]}
-                    placeHolderText="Filter table"
+                    placeholder="Filter table"
                     size="sm"
                     tabIndex="0"
                     type="text"
@@ -3021,6 +3022,7 @@ exports[`DataTable sticky header should render 1`] = `
             translateWithId={[Function]}
           >
             <div
+              aria-hidden={true}
               className="bx--batch-actions"
             >
               <div
@@ -3303,7 +3305,7 @@ exports[`DataTable sticky header should render 1`] = `
                     id="custom-id"
                     labelText="Filter table"
                     onChange={[Function]}
-                    placeHolderText="Filter table"
+                    placeholder="Filter table"
                     size="sm"
                     tabIndex="0"
                     type="text"

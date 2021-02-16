@@ -125,9 +125,7 @@ exports[`styles expressiveParagraph01 should be printable 1`] = `
 "font-size: 1.5rem;
 font-weight: 300;
 line-height: 1.334;
-letter-spacing: 0;
-lg: [object Object];
-max: [object Object];"
+letter-spacing: 0;"
 `;
 
 exports[`styles heading01 should be printable 1`] = `

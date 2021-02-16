@@ -14,16 +14,15 @@ import { syncSymbol } from '../../tools/symbols';
 
 const metadata = require('../../../generated/icons/metadata.json');
 
-export function syncIconSymbols(
+export function syncIconSymbols({
   document,
   symbols,
   symbolsPage,
-  sharedLayerStyles,
-  sizes = [32, 24, 20, 16]
-) {
-  const sharedStyles = syncColorStyles(document, 'fill');
+  sizes = [32, 24, 20, 16],
+}) {
+  const sharedStyles = syncColorStyles({ document });
   const [sharedStyle] = sharedStyles.filter(
-    ({ name }) => name === 'color / fill / black'
+    ({ name }) => name === 'color / black'
   );
 
   if (!sharedStyle) {
@@ -40,12 +39,16 @@ export function syncIconSymbols(
   );
 
   return artboards.map((artboard) => {
-    return syncSymbol(symbols, sharedLayerStyles, artboard.name, {
+    return syncSymbol({
+      symbols,
       name: artboard.name,
-      frame: artboard.frame,
-      layers: artboard.layers,
-      background: artboard.background,
-      parent: symbolsPage,
+      config: {
+        name: artboard.name,
+        frame: artboard.frame,
+        layers: artboard.layers,
+        background: artboard.background,
+        parent: symbolsPage,
+      },
     });
   });
 }

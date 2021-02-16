@@ -104,7 +104,9 @@ const MultiSelect = React.forwardRef(function MultiSelect(
    */
   const setIsOpenWrapper = (open) => {
     setIsOpen(open);
-    if (onMenuChange) onMenuChange(open);
+    if (onMenuChange) {
+      onMenuChange(open);
+    }
   };
 
   /**
@@ -382,7 +384,7 @@ MultiSelect.propTypes = {
    * Provide text to be used in a `<label>` element that is tied to the
    * multiselect via ARIA attributes.
    */
-  titleText: PropTypes.string,
+  titleText: PropTypes.node,
 
   /**
    * Callback function for translating ListBoxMenuIcon SVG title

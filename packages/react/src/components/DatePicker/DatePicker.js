@@ -55,7 +55,9 @@ const carbonFlatpickrMonthSelectPlugin = (config) => (fp) => {
       return;
     }
     fp.monthElements.forEach((elem) => {
-      if (!elem.parentNode) return;
+      if (!elem.parentNode) {
+        return;
+      }
       elem.parentNode.removeChild(elem);
     });
     fp.monthElements.splice(

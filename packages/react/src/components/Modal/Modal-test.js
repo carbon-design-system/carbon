@@ -228,7 +228,11 @@ describe('Modal', () => {
     it('should close by default on secondary button click', () => {
       const onRequestClose = jest.fn();
       const modal = mount(
-        <Modal aria-label="test" onRequestClose={onRequestClose} />
+        <Modal
+          aria-label="test"
+          secondaryButtonText="Cancel"
+          onRequestClose={onRequestClose}
+        />
       );
       const secondaryBtn = modal.find(`.${prefix}--btn--secondary`);
       secondaryBtn.simulate('click');
@@ -238,7 +242,11 @@ describe('Modal', () => {
     it('should handle custom secondary button events', () => {
       const onSecondarySubmit = jest.fn();
       const modal = mount(
-        <Modal aria-label="test" onSecondarySubmit={onSecondarySubmit} />
+        <Modal
+          aria-label="test"
+          secondaryButtonText="Cancel"
+          onSecondarySubmit={onSecondarySubmit}
+        />
       );
       const secondaryBtn = modal.find(`.${prefix}--btn--secondary`);
       secondaryBtn.simulate('click');
@@ -272,7 +280,9 @@ describe('Modal Wrapper', () => {
 });
 describe('Danger Modal', () => {
   describe('Renders as expected', () => {
-    const wrapper = shallow(<Modal aria-label="test" danger />);
+    const wrapper = shallow(
+      <Modal aria-label="test" secondaryButtonText="Cancel" danger />
+    );
 
     it('has the expected classes', () => {
       expect(getModal(wrapper).hasClass(`${prefix}--modal--danger`)).toEqual(

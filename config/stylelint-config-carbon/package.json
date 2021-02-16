@@ -35,6 +35,7 @@
     "stylelint-scss": "^3.13.0"
   },
   "devDependencies": {
+    "prettier": "^2.2.1",
     "stylelint": "^13.6.0"
   }
 }

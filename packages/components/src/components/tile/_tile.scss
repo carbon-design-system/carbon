@@ -75,6 +75,12 @@
     text-decoration: none;
   }
 
+  .#{$prefix}--tile--clickable:hover,
+  .#{$prefix}--tile--clickable:active {
+    color: $text-01;
+    text-decoration: none;
+  }
+
   .#{$prefix}--tile--selectable {
     padding-right: $carbon--spacing-09;
   }
