@@ -155,7 +155,7 @@
     "mock-raf": "^1.0.0",
     "node-sass": "^4.13.1",
     "nodemon": "^1.18.7",
-    "path-to-regexp": "^2.2.0",
+    "path-to-regexp": "^6.2.0",
     "portscanner": "^2.2.0",
     "postcss-custom-properties": "^9.0.0",
     "postcss-loader": "^3.0.0",
