@@ -207,15 +207,18 @@ function buildModulesTokenFile(tokenScale, group) {
     return [comment, assignment, t.Newline()];
   });
 
-  const list = [
-    t.Comment(`/ @type List
+  const map = [
+    t.Comment(`/ @type Map
 / @access public
 / @group @carbon/layout`),
     t.Assignment({
       id: t.Identifier(group),
-      init: t.SassList({
-        elements: values.map(([_name, _shorthand, id]) => {
-          return id;
+      init: t.SassMap({
+        properties: values.map(([name, _shorthand, id]) => {
+          return t.SassMapProperty({
+            key: id,
+            value: t.SassValue(`$${name}`),
+          });
         }),
       }),
     }),
@@ -225,7 +228,7 @@ function buildModulesTokenFile(tokenScale, group) {
     FILE_BANNER,
     t.Newline(),
     ...variables,
-    ...list,
+    ...map,
     t.Newline(),
   ]);
 }

@@ -19,12 +19,12 @@ export function generate() {
   command('commands/colors/generate', () => {
     const document = Document.getSelectedDocument();
     const page = selectPage(findOrCreatePage(document, 'color'));
-    const sharedStyles = syncColorStyles(document, 'fill');
+    const sharedStyles = syncColorStyles({ document });
     const { black, white, colors, support } = groupByKey(
       sharedStyles,
       (sharedStyle) => {
         const { name } = sharedStyle;
-        const [_category, _type, swatch] = name.split(' / ');
+        const [_category, swatch] = name.split(' / ');
         switch (swatch) {
           case 'black':
             return 'black';
@@ -43,7 +43,7 @@ export function generate() {
     let Y_OFFSET = 0;
 
     const swatches = groupByKey(colors, (sharedStyle) => {
-      const [_category, _type, swatch] = sharedStyle.name.split('/');
+      const [_category, swatch] = sharedStyle.name.split('/');
       return swatch;
     });
 

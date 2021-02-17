@@ -421,6 +421,21 @@
     box-shadow: none;
   }
 
+  // disabled toggle in data table #7351
+  .#{$prefix}--data-table
+    .#{$prefix}--toggle-input:disabled
+    + .#{$prefix}--toggle-input__label
+    > .#{$prefix}--toggle__switch::before {
+    background-color: $disabled-02;
+  }
+
+  .#{$prefix}--data-table
+    .#{$prefix}--toggle-input:disabled
+    + .#{$prefix}--toggle-input__label
+    > .#{$prefix}--toggle__switch::after {
+    background-color: $disabled-03;
+  }
+
   //----------------------------------------------
   // Small toggle
   // ---------------------------------------------

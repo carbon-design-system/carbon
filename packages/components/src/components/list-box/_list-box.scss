@@ -110,6 +110,7 @@ $list-box-menu-width: rem(300px);
   }
 
   .#{$prefix}--list-box .#{$prefix}--text-input {
+    min-width: 0;
     height: 100%;
   }
 
@@ -147,6 +148,10 @@ $list-box-menu-width: rem(300px);
   // Light variation for 'list-box'
   .#{$prefix}--list-box--light {
     background-color: $field-02;
+
+    &:hover {
+      background-color: $hover-light-ui;
+    }
   }
 
   .#{$prefix}--list-box--light .#{$prefix}--list-box__menu {
@@ -440,7 +445,7 @@ $list-box-menu-width: rem(300px);
   }
 
   .#{$prefix}--list-box__selection > svg {
-    fill: $icon-02;
+    fill: $icon-01;
 
     // Windows, Firefox HCM Fix
     @media screen and (-ms-high-contrast: active),
@@ -585,6 +590,10 @@ $list-box-menu-width: rem(300px);
     &:active {
       background-color: $selected-ui;
     }
+  }
+
+  .#{$prefix}--list-box--light .#{$prefix}--list-box__menu-item:hover {
+    background-color: $hover-light-ui;
   }
 
   .#{$prefix}--list-box--sm .#{$prefix}--list-box__menu-item {

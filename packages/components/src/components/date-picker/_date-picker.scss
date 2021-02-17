@@ -69,6 +69,11 @@
     width: rem(288px);
   }
 
+  .#{$prefix}--date-picker
+    .#{$prefix}--date-picker-input__wrapper--warn
+    ~ .#{$prefix}--form-requirement {
+    color: $text-01;
+  }
   .#{$prefix}--date-picker__input {
     @include reset;
     @include type-style('code-02');

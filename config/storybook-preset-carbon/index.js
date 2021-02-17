@@ -26,13 +26,13 @@ module.exports = {
     '@storybook/addon-storysource',
     '@storybook/addon-knobs',
     '@storybook/addon-actions',
-    '@storybook/addon-links',
     '@storybook/addon-docs',
     '@storybook/addon-notes/register',
     'storybook-readme/register',
-
-    // Phase 3: port over custom panels/add-ons
-  ],
+    '@storybook/addon-links',
+    CARBON_REACT_STORYBOOK_USE_CUSTOM_PROPERTIES === 'true' &&
+      require.resolve('./dist/preset.js'),
+  ].filter(Boolean),
 
   webpack(config) {
     const sassLoader = {

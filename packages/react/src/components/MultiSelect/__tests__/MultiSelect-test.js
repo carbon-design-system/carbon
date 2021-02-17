@@ -212,13 +212,15 @@ describe('MultiSelect', () => {
     Simulate.click(itemNode);
 
     expect(
-      document.querySelector('[aria-label="Clear Selection"]')
+      document.querySelector('[aria-label="Clear all selected items"]')
     ).toBeTruthy();
 
-    Simulate.click(document.querySelector('[aria-label="Clear Selection"]'));
+    Simulate.click(
+      document.querySelector('[aria-label="Clear all selected items"]')
+    );
 
     expect(
-      document.querySelector('[aria-label="Clear Selection"]')
+      document.querySelector('[aria-label="Clear all selected items"]')
     ).toBeFalsy();
   });
 
@@ -250,7 +252,7 @@ describe('MultiSelect', () => {
       );
 
       expect(
-        document.querySelector('[aria-label="Clear Selection"]')
+        document.querySelector('[aria-label="Clear all selected items"]')
       ).toBeTruthy();
 
       const labelNode = getByText(container, label);

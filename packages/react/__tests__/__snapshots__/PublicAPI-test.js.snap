@@ -624,7 +624,7 @@ Map {
         "type": "oneOf",
       },
       "titleText": Object {
-        "type": "string",
+        "type": "node",
       },
       "translateWithId": Object {
         "type": "func",
@@ -638,6 +638,12 @@ Map {
         ],
         "type": "oneOf",
       },
+      "warn": Object {
+        "type": "bool",
+      },
+      "warnText": Object {
+        "type": "node",
+      },
     },
   },
   "ComposedModal" => Object {
@@ -646,6 +652,9 @@ Map {
       "selectorPrimaryFocus": "[data-modal-primary-focus]",
     },
     "propTypes": Object {
+      "aria-label": Object {
+        "type": "string",
+      },
       "children": Object {
         "type": "node",
       },
@@ -1371,6 +1380,9 @@ Map {
         "defaultValue": Object {
           "type": "string",
         },
+        "disabled": Object {
+          "type": "bool",
+        },
         "expanded": Object {
           "type": "bool",
         },
@@ -1390,7 +1402,8 @@ Map {
         "persistent": Object {
           "type": "bool",
         },
-        "placeHolderText": Object {
+        "placeHolderText": [Function],
+        "placeholder": Object {
           "type": "string",
         },
         "searchContainerClass": Object {
@@ -1959,6 +1972,9 @@ Map {
       "defaultValue": Object {
         "type": "string",
       },
+      "disabled": Object {
+        "type": "bool",
+      },
       "expanded": Object {
         "type": "bool",
       },
@@ -1978,7 +1994,8 @@ Map {
       "persistent": Object {
         "type": "bool",
       },
-      "placeHolderText": Object {
+      "placeHolderText": [Function],
+      "placeholder": Object {
         "type": "string",
       },
       "searchContainerClass": Object {
@@ -2079,9 +2096,11 @@ Map {
           Array [
             "ar",
             "at",
+            "az",
             "be",
             "bg",
             "bn",
+            "bs",
             "cat",
             "cs",
             "cy",
@@ -2093,16 +2112,22 @@ Map {
             "et",
             "fa",
             "fi",
+            "fo",
             "fr",
+            "ga",
             "gr",
             "he",
             "hi",
             "hr",
             "hu",
             "id",
+            "is",
             "it",
             "ja",
+            "ka",
+            "km",
             "ko",
+            "kz",
             "lt",
             "lv",
             "mk",
@@ -2120,12 +2145,15 @@ Map {
             "sk",
             "sl",
             "sq",
+            "sr-cyr",
             "sr",
             "sv",
             "th",
             "tr",
             "uk",
+            "uz",
             "vn",
+            "zh-tw",
             "zh",
           ],
         ],
@@ -2309,6 +2337,9 @@ Map {
         ],
         "type": "oneOfType",
       },
+      "hideLabel": Object {
+        "type": "bool",
+      },
       "id": Object {
         "isRequired": true,
         "type": "string",
@@ -2376,17 +2407,7 @@ Map {
         "type": "oneOf",
       },
       "titleText": Object {
-        "args": Array [
-          Array [
-            Object {
-              "type": "string",
-            },
-            Object {
-              "type": "node",
-            },
-          ],
-        ],
-        "type": "oneOfType",
+        "type": "node",
       },
       "translateWithId": Object {
         "type": "func",
@@ -3850,7 +3871,7 @@ Map {
         "type": "func",
       },
       "titleText": Object {
-        "type": "string",
+        "type": "node",
       },
       "translateWithId": Object {
         "type": "func",
@@ -4501,7 +4522,7 @@ Map {
     "defaultProps": Object {
       "closeButtonLabelText": "Clear search input",
       "onChange": [Function],
-      "placeHolderText": "",
+      "placeholder": "",
       "type": "text",
     },
     "propTypes": Object {
@@ -4543,7 +4564,8 @@ Map {
       "onKeyDown": Object {
         "type": "func",
       },
-      "placeHolderText": Object {
+      "placeHolderText": [Function],
+      "placeholder": Object {
         "type": "string",
       },
       "size": Object {
@@ -5180,6 +5202,14 @@ Map {
           ],
         ],
         "type": "oneOfType",
+      },
+      "size": Object {
+        "args": Array [
+          Array [
+            "sm",
+          ],
+        ],
+        "type": "oneOf",
       },
       "title": Object {
         "type": "string",
@@ -6587,6 +6617,14 @@ Map {
       "className": Object {
         "type": "string",
       },
+      "size": Object {
+        "args": Array [
+          Array [
+            "sm",
+          ],
+        ],
+        "type": "oneOf",
+      },
     },
   },
   "TextAreaSkeleton" => Object {
@@ -6971,6 +7009,13 @@ Map {
       },
       "title": Object {
         "isRequired": true,
+        "type": "string",
+      },
+    },
+  },
+  "SideNavDivider" => Object {
+    "propTypes": Object {
+      "className": Object {
         "type": "string",
       },
     },

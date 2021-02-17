@@ -73,6 +73,9 @@ tokens:
     role:
       - Primary links
       - Ghost button
+  - name: link02
+    role:
+      - Secondary link color for lower contrast backgrounds
   - name: field01
     role:
       - Default input fields

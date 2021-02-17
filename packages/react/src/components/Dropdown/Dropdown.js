@@ -45,6 +45,7 @@ const Dropdown = React.forwardRef(function Dropdown(
     onChange,
     id,
     titleText,
+    hideLabel,
     helperText,
     translateWithId,
     light,
@@ -98,6 +99,7 @@ const Dropdown = React.forwardRef(function Dropdown(
 
   const titleClasses = cx(`${prefix}--label`, {
     [`${prefix}--label--disabled`]: disabled,
+    [`${prefix}--visually-hidden`]: hideLabel,
   });
 
   const helperClasses = cx(`${prefix}--form__helper-text`, {
@@ -233,6 +235,11 @@ Dropdown.propTypes = {
   helperText: PropTypes.oneOfType([PropTypes.string, PropTypes.node]),
 
   /**
+   * Specify whether the title text should be hidden or not
+   */
+  hideLabel: PropTypes.bool,
+
+  /**
    * Specify a custom `id`
    */
   id: PropTypes.string.isRequired,
@@ -315,7 +322,7 @@ Dropdown.propTypes = {
    * Provide the title text that will be read by a screen reader when
    * visiting this control
    */
-  titleText: PropTypes.oneOfType([PropTypes.string, PropTypes.node]),
+  titleText: PropTypes.node,
 
   /**
    * Callback function for translating ListBoxMenuIcon SVG title
