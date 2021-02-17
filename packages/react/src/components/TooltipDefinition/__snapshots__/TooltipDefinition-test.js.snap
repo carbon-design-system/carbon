@@ -14,6 +14,7 @@ exports[`TooltipDefinition should allow the user to specify the direction 1`] = 
   >
     <button
       aria-describedby="definition-tooltip-3"
+      aria-label="tooltip text"
       className="bx--tooltip__trigger bx--tooltip--a11y bx--tooltip__trigger--definition bx--tooltip--top bx--tooltip--align-start"
       onFocus={[Function]}
       type="button"
@@ -45,6 +46,7 @@ exports[`TooltipDefinition should render 1`] = `
   >
     <button
       aria-describedby="definition-tooltip-1"
+      aria-label="tooltip text"
       className="bx--tooltip__trigger bx--tooltip--a11y bx--tooltip__trigger--definition bx--tooltip--bottom bx--tooltip--align-start"
       onFocus={[Function]}
       type="button"
@@ -77,6 +79,7 @@ exports[`TooltipDefinition should support a custom trigger element class 1`] = `
   >
     <button
       aria-describedby="definition-tooltip-2"
+      aria-label="tooltip text"
       className="bx--tooltip__trigger bx--tooltip--a11y bx--tooltip__trigger--definition custom-trigger-class bx--tooltip--bottom bx--tooltip--align-start"
       onFocus={[Function]}
       type="button"
