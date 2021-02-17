@@ -9342,7 +9342,7 @@ __metadata:
     react: ^16.8.6
     react-copy-to-clipboard: ^5.0.0
     react-dom: ^16.8.6
-    react-ga: ^2.4.0
+    react-ga: ^3.3.0
     rollup: ^2.38.0
     rollup-plugin-filesize: ^9.1.0
     rollup-plugin-terser: ^7.0.2
@@ -26263,13 +26263,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-ga@npm:^2.4.0":
-  version: 2.7.0
-  resolution: "react-ga@npm:2.7.0"
+"react-ga@npm:^3.3.0":
+  version: 3.3.0
+  resolution: "react-ga@npm:3.3.0"
   peerDependencies:
     prop-types: ^15.6.0
-    react: ^15.6.2 || ^16.0
-  checksum: fd2d21fcf27b69f17759006ce981b79f5ab896b7696a4d6fc7bec8c7ca3f6790e052d530cfe029b9e50055fd5701e0610739d036fa8a8e8e3eda28cdc9929f37
+    react: ^15.6.2 || ^16.0 || ^17
+  checksum: fe3dc0a7679b3a52df3944660f2b1f353ee5d24f73e4bdb88c8323e012e1042ef3c2c1a6e432d3c6e3196861162925ff9f5ba515a8112e11187d21d8a00cc863
   languageName: node
   linkType: hard
 
