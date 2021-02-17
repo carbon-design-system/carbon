@@ -7,7 +7,13 @@
 
 import React from 'react';
 import { action } from '@storybook/addon-actions';
-import { withKnobs, boolean, text, select } from '@storybook/addon-knobs';
+import {
+  withKnobs,
+  boolean,
+  text,
+  select,
+  number,
+} from '@storybook/addon-knobs';
 import CodeSnippet from '../CodeSnippet';
 import CodeSnippetSkeleton from './CodeSnippet.Skeleton';
 import mdx from './CodeSnippet.mdx';
@@ -42,7 +48,15 @@ const props = () => ({
   onClick: action('onClick'),
   copyButtonDescription: text('Copy button title', 'Copy code snippet'),
   ariaLabel: text('ARIA label', 'Container label'),
-  wrapText: boolean('Wrap text (wrapText)', true),
+  wrapText: boolean('wrapText: Specify whether or not to wrap the text)', true),
+  closedNumberOfRows: number(
+    'closedNumberOfRows: Specify the number of rows to be shown when in closed view',
+    15
+  ),
+  expandedNumberOfRows: number(
+    'expandedNumberOfRows: Specify the number of rows to be shown when in expanded view',
+    50
+  ),
 });
 
 export const inline = () => (
