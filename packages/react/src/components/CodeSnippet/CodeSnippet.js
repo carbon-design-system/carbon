@@ -19,24 +19,31 @@ import getUniqueId from '../../tools/uniqueId';
 
 const { prefix } = settings;
 
+const defaultClosedNumberOfRows = 15;
+const defaultExpandedNumberOfRows = 50;
+const defaultShowLessText = 'Show less';
+const defaultShowMoreText = 'Show more';
+const defaultType = 'single';
+const defaultWrapText = false;
 const rowHeightInPixels = 18;
-const defaultCollapsedHeightInRows = 15;
 
 function CodeSnippet({
-  className,
-  type,
-  children,
-  disabled,
-  feedback,
-  onClick,
   ariaLabel,
-  copyLabel, //TODO: Merge this prop to `ariaLabel` in `v11`
+  children,
+  className,
+  closedNumberOfRows = defaultClosedNumberOfRows,
   copyButtonDescription,
-  light,
-  showMoreText,
-  showLessText,
+  copyLabel, //TODO: Merge this prop to `ariaLabel` in `v11`
+  disabled,
+  expandedNumberOfRows = defaultExpandedNumberOfRows,
+  feedback,
   hideCopyButton,
-  wrapText,
+  light,
+  onClick,
+  showLessText = defaultShowLessText,
+  showMoreText = defaultShowMoreText,
+  type = defaultType,
+  wrapText = defaultWrapText,
   ...rest
 }) {
   const [expandedCode, setExpandedCode] = useState(false);
@@ -92,23 +99,27 @@ function CodeSnippet({
     );
   }, [type, getCodeRefDimensions]);
 
-  useResizeObserver({
-    ref: getCodeRef(),
-    onResize: () => {
-      if (codeContentRef?.current && type === 'multi') {
-        const { height } = codeContentRef.current.getBoundingClientRect();
-        setShouldShowMoreLessBtn(
-          height > defaultCollapsedHeightInRows * rowHeightInPixels
-        );
-      }
-      if (
-        (codeContentRef?.current && type === 'multi') ||
-        (codeContainerRef?.current && type === 'single')
-      ) {
-        debounce(handleScroll, 200);
-      }
+  useResizeObserver(
+    {
+      ref: getCodeRef(),
+      onResize: () => {
+        if (codeContentRef?.current && type === 'multi') {
+          const { height } = codeContentRef.current.getBoundingClientRect();
+          setShouldShowMoreLessBtn(
+            closedNumberOfRows < expandedNumberOfRows &&
+              height > closedNumberOfRows * rowHeightInPixels
+          );
+        }
+        if (
+          (codeContentRef?.current && type === 'multi') ||
+          (codeContainerRef?.current && type === 'single')
+        ) {
+          debounce(handleScroll, 200);
+        }
+      },
     },
-  });
+    [type, closedNumberOfRows, expandedNumberOfRows]
+  );
 
   useEffect(() => {
     handleScroll();
@@ -122,8 +133,6 @@ function CodeSnippet({
     [`${prefix}--snippet--no-copy`]: hideCopyButton,
     [`${prefix}--snippet--wraptext`]: wrapText,
   });
-
-  const expandCodeBtnText = expandedCode ? showLessText : showMoreText;
 
   if (type === 'inline') {
     if (hideCopyButton) {
@@ -146,6 +155,8 @@ function CodeSnippet({
       </Copy>
     );
   }
+
+  const expandCodeBtnText = expandedCode ? showLessText : showMoreText;
 
   return (
     <div {...rest} className={codeSnippetClasses}>
@@ -222,6 +233,11 @@ CodeSnippet.propTypes = {
   className: PropTypes.string,
 
   /**
+   * Specify the number of rows to be shown when in closed view.
+   */
+  closedNumberOfRows: PropTypes.number,
+
+  /**
    * Specify the description for the Copy Button
    */
   copyButtonDescription: PropTypes.string,
@@ -236,6 +252,11 @@ CodeSnippet.propTypes = {
    * Specify whether or not the CodeSnippet should be disabled
    */
   disabled: PropTypes.bool,
+
+  /**
+   * Specify the number of rows to be shown when in expanded view.
+   */
+  expandedNumberOfRows: PropTypes.number,
 
   /**
    * Specify the string displayed when the snippet is copied
@@ -267,7 +288,7 @@ CodeSnippet.propTypes = {
 
   /**
    * Specify a string that is displayed when the Code Snippet text is more
-   * than 15 lines
+   * than 'closedNumberOfRows' lines
    */
   showMoreText: PropTypes.string,
 
@@ -280,13 +301,6 @@ CodeSnippet.propTypes = {
    * Specify whether or not to wrap the text.
    */
   wrapText: PropTypes.bool,
-};
-
-CodeSnippet.defaultProps = {
-  type: 'single',
-  showMoreText: 'Show more',
-  showLessText: 'Show less',
-  wrapText: false,
 };
 
 export default CodeSnippet;

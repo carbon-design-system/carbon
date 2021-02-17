@@ -1,5 +1,5 @@
 //
-// Copyright IBM Corp. 2016, 2018
+// Copyright IBM Corp. 2016, 2021
 //
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
@@ -16,9 +16,11 @@
 @import 'mixins';
 
 /// Code snippet styles
+/// @param {Number} $closedMaxHeight - The max-height of the multi snippet when closed
+/// @param {Number} $expandedMaxHeight - The max-height of the multi snippet when expanded
 /// @access private
 /// @group code-snippet
-@mixin snippet {
+@mixin snippet($closedMaxHeight: 100, $expandedMaxHeight: 500) {
   .#{$prefix}--snippet {
     @include reset;
   }
@@ -204,7 +206,9 @@
     position: relative;
     order: 1;
     min-height: rem(56px);
-    max-height: rem(238px);
+    // max-height: rem(238px);
+    // max-height: calc(#{rem(18px)} * #{$closedNumberOfRows});
+    max-height: $closedMaxHeight;
     overflow: hidden;
     transition: max-height $duration--moderate-01 motion(standard, productive);
   }
@@ -212,7 +216,9 @@
   // expanded snippet container
   .#{$prefix}--snippet--multi.#{$prefix}--snippet--expand
     .#{$prefix}--snippet-container {
-    max-height: 100%;
+    // max-height: 100%;
+    // max-height: calc(#{rem(18px)} * #{$expandedNumberOfRows});
+    max-height: $expandedMaxHeight;
     padding-bottom: $spacing-05;
     transition: max-height $duration--moderate-01 motion(standard, productive);
   }
