@@ -218,7 +218,7 @@ class OverflowMenu extends Component {
   };
 
   static defaultProps = {
-    ariaLabel: 'Menu',
+    ariaLabel: 'open and close list of options',
     iconDescription: 'open and close list of options',
     open: false,
     direction: DIRECTION_BOTTOM,
