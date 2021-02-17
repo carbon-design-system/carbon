@@ -655,6 +655,9 @@ Map {
       "aria-label": Object {
         "type": "string",
       },
+      "aria-labelledby": Object {
+        "type": "string",
+      },
       "children": Object {
         "type": "node",
       },
