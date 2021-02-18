@@ -749,7 +749,8 @@ $list-box-menu-width: rem(300px);
     border-bottom-color: $selected-light-ui;
   }
 
-  .#{$prefix}--list-box__menu-item--active:hover {
+  .#{$prefix}--list-box__menu-item--active:hover,
+  .#{$prefix}--list-box__menu-item--active.#{$prefix}--list-box__menu-item--highlighted {
     background-color: $hover-selected-ui;
     border-bottom-color: $hover-selected-ui;
   }
