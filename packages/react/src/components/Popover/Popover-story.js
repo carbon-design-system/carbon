@@ -5,27 +5,37 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+import './story.scss';
 import {
   CaretDown32,
   CaretLeft32,
   CaretRight32,
   CaretUp32,
 } from '@carbon/icons-react';
+import { withKnobs, boolean, select } from '@storybook/addon-knobs';
 import React from 'react';
 import { Popover, PopoverContent } from '../Popover';
 import Button from '../Button';
+import mdx from './Popover.mdx';
+import { useOutsideClick } from '../../internal/useOutsideClick';
 
 export default {
-  title: 'Popover',
+  title: 'unstable_Popover',
   component: Popover,
   subcomponents: {
     PopoverContent,
+  },
+  decorators: [withKnobs],
+  parameters: {
+    docs: {
+      page: mdx,
+    },
   },
 };
 
 export const Default = () => {
   function PopoverDemo() {
-    const [direction, setDirection] = React.useState('top');
+    const [align, setAlign] = React.useState('top');
     const [open, setOpen] = React.useState(true);
     const choices = [
       'top',
@@ -60,11 +70,11 @@ export const Default = () => {
                 <label key={choice}>
                   <input
                     type="radio"
-                    name="direction"
+                    name="align"
                     value={choice}
-                    checked={choice === direction}
+                    checked={choice === align}
                     onChange={() => {
-                      setDirection(choice);
+                      setAlign(choice);
                     }}
                   />
                   {choice}
@@ -90,7 +100,7 @@ export const Default = () => {
           </div>
         </section>
         <div style={{ marginTop: '2rem' }}>
-          <Popover open={open} direction={direction}>
+          <Popover open={open} align={align} relative>
             <PopoverContent>Hello</PopoverContent>
           </Popover>
         </div>
@@ -101,56 +111,44 @@ export const Default = () => {
   return <PopoverDemo />;
 };
 
-const subscribers = [];
-let attached = false;
+export const Playground = () => {
+  const options = [
+    'top',
+    'top-left',
+    'top-right',
 
-function subscribe(thunk) {
-  subscribers.push(thunk);
-  return () => {
-    subscribers.splice(subscribers.indexOf(thunk), 1);
-  };
-}
+    'bottom',
+    'bottom-left',
+    'bottom-right',
 
-function globalHandler(event) {
-  subscribers.forEach((subscriber) => {
-    subscriber(event);
-  });
-}
+    'left',
+    'left-bottom',
+    'left-top',
 
-export const StickerSheet = () => {
-  function useOutsideClick(ref, callback) {
-    const savedCallback = React.useRef(callback);
+    'right',
+    'right-bottom',
+    'right-top',
+  ];
 
-    React.useEffect(() => {
-      savedCallback.current = callback;
-    });
+  return (
+    <Popover
+      caret={boolean('Specify whether the caret should be visible', true)}
+      direction={select('Specify the caret alignment', options, 'top')}
+      highContrast={boolean(
+        'Specify whether the high-contrast variant should render',
+        false
+      )}
+      light={boolean('Specify whether the light variant should render', false)}
+      open={boolean('Specify whether the popover is open or closed', true)}>
+      <PopoverContent>Sample content</PopoverContent>
+    </Popover>
+  );
+};
 
-    React.useEffect(() => {
-      if (attached) {
-        return;
-      }
-
-      attached = true;
-      window.addEventListener('click', globalHandler);
-      return () => {
-        if (subscribers.length === 0) {
-          window.removeEventListener('click', globalHandler);
-        }
-      };
-    }, []);
-
-    React.useEffect(() => {
-      return subscribe((event) => {
-        if (!ref.current.contains(event.target)) {
-          savedCallback.current(event);
-        }
-      });
-    }, [ref]);
-  }
-
+export const Examples = () => {
   function Example({
     children,
-    direction,
+    align,
     relative = false,
     icon,
     size,
@@ -169,7 +167,7 @@ export const StickerSheet = () => {
     if (flip) {
       return (
         <div ref={ref} {...rest}>
-          <Popover direction={direction} open={open} relative={relative}>
+          <Popover align={align} open={open} relative={relative}>
             <PopoverContent>{children}</PopoverContent>
           </Popover>
           <Button
@@ -196,7 +194,7 @@ export const StickerSheet = () => {
           renderIcon={icon}
           size={size}
         />
-        <Popover direction={direction} open={open} relative={relative}>
+        <Popover align={align} open={open} relative={relative}>
           <PopoverContent>{children}</PopoverContent>
         </Popover>
       </div>
@@ -208,14 +206,14 @@ export const StickerSheet = () => {
       <Example
         className="position-relative mb-3"
         icon={CaretDown32}
-        direction="top-left">
+        align="top-left">
         This is some text
       </Example>
 
       <Example
         className="position-relative mb-3"
         icon={CaretDown32}
-        direction="top-left"
+        align="top-left"
         size="sm">
         This is some text
       </Example>
@@ -223,14 +221,14 @@ export const StickerSheet = () => {
       <Example
         className="flex justify-center position-relative mb-3"
         icon={CaretDown32}
-        direction="top">
+        align="top">
         This is some text
       </Example>
 
       <Example
         className="flex justify-center position-relative mb-3"
         icon={CaretDown32}
-        direction="top"
+        align="top"
         size="sm">
         This is some text
       </Example>
@@ -238,14 +236,14 @@ export const StickerSheet = () => {
       <Example
         className="flex justify-end position-relative mb-3"
         icon={CaretDown32}
-        direction="top-right">
+        align="top-right">
         This is some text
       </Example>
 
       <Example
         className="flex justify-end position-relative mb-3"
         icon={CaretDown32}
-        direction="top-right"
+        align="top-right"
         size="sm">
         This is some text
       </Example>
@@ -253,14 +251,14 @@ export const StickerSheet = () => {
       <Example
         className="position-relative mb-3"
         icon={CaretUp32}
-        direction="bottom-left">
+        align="bottom-left">
         This is some text
       </Example>
 
       <Example
         className="position-relative mb-3"
         icon={CaretUp32}
-        direction="bottom-left"
+        align="bottom-left"
         size="sm">
         This is some text
       </Example>
@@ -268,14 +266,14 @@ export const StickerSheet = () => {
       <Example
         className="flex justify-center position-relative mb-3"
         icon={CaretUp32}
-        direction="bottom">
+        align="bottom">
         This is some text
       </Example>
 
       <Example
         className="flex justify-center position-relative mb-3"
         icon={CaretUp32}
-        direction="bottom"
+        align="bottom"
         size="sm">
         This is some text
       </Example>
@@ -283,14 +281,14 @@ export const StickerSheet = () => {
       <Example
         className="flex justify-end position-relative mb-3"
         icon={CaretUp32}
-        direction="bottom-right">
+        align="bottom-right">
         This is some text
       </Example>
 
       <Example
         className="flex justify-end position-relative mb-3"
         icon={CaretUp32}
-        direction="bottom-right"
+        align="bottom-right"
         size="sm">
         This is some text
       </Example>
@@ -300,7 +298,7 @@ export const StickerSheet = () => {
           <Example
             className="position-relative flex align-center mb-3"
             icon={CaretRight32}
-            direction="left"
+            align="left"
             relative>
             This is some text
           </Example>
@@ -308,7 +306,7 @@ export const StickerSheet = () => {
           <Example
             className="position-relative flex align-center mb-3"
             icon={CaretRight32}
-            direction="left"
+            align="left"
             size="sm"
             relative>
             This is some text
@@ -319,7 +317,7 @@ export const StickerSheet = () => {
           <Example
             className="position-relative flex align-center mb-3"
             icon={CaretRight32}
-            direction="left-top"
+            align="left-top"
             relative>
             This is some text
           </Example>
@@ -327,7 +325,7 @@ export const StickerSheet = () => {
           <Example
             className="position-relative flex align-center mb-3"
             icon={CaretRight32}
-            direction="left-top"
+            align="left-top"
             size="sm"
             relative>
             This is some text
@@ -338,7 +336,7 @@ export const StickerSheet = () => {
           <Example
             className="position-relative flex align-center mb-3"
             icon={CaretRight32}
-            direction="left-bottom"
+            align="left-bottom"
             relative>
             This is some text
           </Example>
@@ -346,7 +344,7 @@ export const StickerSheet = () => {
           <Example
             className="position-relative flex align-center mb-3"
             icon={CaretRight32}
-            direction="left-bottom"
+            align="left-bottom"
             size="sm"
             relative>
             This is some text
@@ -359,7 +357,7 @@ export const StickerSheet = () => {
           <Example
             className="position-relative flex align-center mb-3"
             icon={CaretLeft32}
-            direction="right"
+            align="right"
             relative
             flip>
             This is some text
@@ -368,7 +366,7 @@ export const StickerSheet = () => {
           <Example
             className="position-relative flex align-center mb-3"
             icon={CaretLeft32}
-            direction="right"
+            align="right"
             size="sm"
             relative
             flip>
@@ -380,7 +378,7 @@ export const StickerSheet = () => {
           <Example
             className="position-relative flex align-center mb-3"
             icon={CaretLeft32}
-            direction="right-top"
+            align="right-top"
             relative
             flip>
             This is some text
@@ -389,7 +387,7 @@ export const StickerSheet = () => {
           <Example
             className="position-relative flex align-center mb-3"
             icon={CaretLeft32}
-            direction="right-top"
+            align="right-top"
             size="sm"
             relative
             flip>
@@ -401,7 +399,7 @@ export const StickerSheet = () => {
           <Example
             className="position-relative flex align-center mb-3"
             icon={CaretLeft32}
-            direction="right-bottom"
+            align="right-bottom"
             relative
             flip>
             This is some text
@@ -410,7 +408,7 @@ export const StickerSheet = () => {
           <Example
             className="position-relative flex align-center mb-3"
             icon={CaretLeft32}
-            direction="right-bottom"
+            align="right-bottom"
             size="sm"
             relative
             flip>
@@ -422,7 +420,7 @@ export const StickerSheet = () => {
       <Example
         className="position-relative mb-3"
         icon={CaretDown32}
-        direction="top-left">
+        align="top-left">
         Consectetur et sit accusamus laboriosam pariatur. Asperiores eius
         expedita eligendi beatae vero commodi harum Illo hic accusamus fugit
         commodi cupiditate Explicabo distinctio quisquam culpa fugit eius
