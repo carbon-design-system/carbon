@@ -1842,7 +1842,7 @@ __metadata:
   dependencies:
     "@carbon/icon-build-helpers": ^0.16.0
     "@carbon/icon-helpers": ^10.14.0
-    "@carbon/pictograms": ^12.0.0
+    "@carbon/pictograms": ^11.4.0
     "@carbon/telemetry": 0.0.0-alpha.6
     prop-types: ^15.7.2
   peerDependencies:
@@ -1850,7 +1850,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@carbon/pictograms@^12.0.0, @carbon/pictograms@workspace:packages/pictograms":
+"@carbon/pictograms@^11.4.0, @carbon/pictograms@workspace:packages/pictograms":
   version: 0.0.0-use.local
   resolution: "@carbon/pictograms@workspace:packages/pictograms"
   dependencies:
