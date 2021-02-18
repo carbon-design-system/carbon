@@ -1,0 +1,163 @@
+//
+// Copyright IBM Corp. 2018, 2018
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+@use 'sass:map';
+@use 'config' as *;
+@use 'breakpoint' as *;
+
+@mixin css-grid() {
+  display: grid;
+  grid-template-columns: repeat(
+    var(--cds-grid-columns),
+    minmax(0, var(--cds-grid-column-size))
+  );
+  column-gap: var(--cds-grid-gutter);
+  padding-left: calc(var(--cds-grid-margin) + var(--cds-grid-gutter));
+  padding-right: calc(var(--cds-grid-margin) + var(--cds-grid-gutter));
+  margin-left: auto;
+  margin-right: auto;
+}
+
+@mixin subgrid() {
+  display: grid;
+  grid-template-columns: repeat(
+    var(--cds-grid-columns),
+    minmax(0, var(--cds-grid-column-size))
+  );
+  column-gap: var(--cds-grid-gutter);
+}
+
+:root {
+  --cds-grid-columns: 4;
+  --cds-grid-column-size: 1fr;
+  --cds-grid-gutter: 1rem;
+  --cds-grid-margin: 0;
+
+  @include breakpoint(md) {
+    --cds-grid-columns: 8;
+    --cds-grid-margin: 1rem;
+  }
+
+  @include breakpoint(lg) {
+    --cds-grid-columns: 16;
+  }
+
+  @include breakpoint(max) {
+    --cds-grid-margin: 1.5rem;
+  }
+}
+
+.#{$prefix}--css-grid {
+  @include css-grid();
+}
+
+.#{$prefix}--subgrid {
+  @include subgrid();
+}
+
+// -----------------------------------------------------------------------------
+// Column span
+// -----------------------------------------------------------------------------
+@mixin -column-span($i) {
+  @if $i == 0 {
+    display: none;
+  } @else {
+    --cds-grid-columns: #{$i};
+    grid-column: span $i / span $i;
+  }
+}
+
+@for $i from 0 through 16 {
+  .#{$prefix}--col-span-#{$i} {
+    @include -column-span($i);
+  }
+}
+
+.#{$prefix}--col-span-auto {
+  grid-column: auto;
+}
+
+.#{$prefix}--col-span-full {
+  grid-column: 1 / -1;
+}
+
+@each $name, $value in $grid-breakpoints {
+  $columns: map.get($value, columns);
+
+  @for $i from 0 through $columns {
+    .#{$prefix}--#{$name}\:col-span-#{$i} {
+      @include -column-span($i);
+    }
+  }
+
+  .#{$prefix}--#{$name}\:col-span-auto {
+    grid-column: auto;
+  }
+
+  .#{$prefix}--#{$name}\:col-span-full {
+    grid-column: 1 / -1;
+  }
+}
+
+// -----------------------------------------------------------------------------
+// Column offset
+// -----------------------------------------------------------------------------
+@for $i from 1 through 16 {
+  .#{$prefix}--col-start-#{$i} {
+    grid-column-start: $i;
+  }
+
+  .#{$prefix}--col-end-#{$i} {
+    grid-column-end: $i;
+  }
+}
+
+.#{$prefix}--col-start-auto {
+  grid-column-start: auto;
+}
+
+.#{$prefix}--col-end-auto {
+  grid-column-start: end;
+}
+
+@each $name, $value in $grid-breakpoints {
+  $columns: map.get($value, columns);
+
+  @for $i from 1 through $columns {
+    .#{$prefix}--#{$name}\:col-start-#{$i} {
+      grid-column-start: $i;
+    }
+
+    .#{$prefix}--#{$name}\:col-end-#{$i} {
+      grid-column-end: $i;
+    }
+  }
+
+  .#{$prefix}--#{$name}\:col-start-auto {
+    grid-column-start: auto;
+  }
+
+  .#{$prefix}--#{$name}\:col-end-auto {
+    grid-column-start: end;
+  }
+}
+
+// -----------------------------------------------------------------------------
+// Gap
+// -----------------------------------------------------------------------------
+.#{$prefix}--css-grid--condensed {
+  --cds-grid-gutter: 2px;
+  column-gap: var(--cds-grid-gutter);
+}
+
+.#{$prefix}--css-grid--no-gutter {
+  // This is set to 0px (versus 0) so that the calc expression for padding for
+  // a grid container works as epxected. Without the unit, the calc() will
+  // result in a value of 0.
+  --cds-grid-gutter: 0px;
+  column-gap: var(--cds-grid-gutter);
+}

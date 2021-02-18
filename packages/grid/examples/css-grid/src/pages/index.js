@@ -1,0 +1,79 @@
+export default function IndexPage() {
+  return (
+    <>
+    <h1>CSS Grid Demo</h1>
+      <section>
+        <h2>CSS Grid</h2>
+        <article className="example">
+          <div className="bx--css-grid">
+            <div className="content">
+              Span 1
+            </div>
+            <div className="content bx--col-span-2">
+              Span 2
+            </div>
+            <div className="content">
+              Span 1
+            </div>
+            <div className="content">
+              Span 1
+            </div>
+          </div>
+        </article>
+      </section>
+      <section>
+        <h2>Offset</h2>
+        <article className="example">
+          <div className="bx--css-grid">
+            <div className="content bx--col-start-8">Start 8</div>
+            <div className="content bx--col-start-7 bx--col-span-2">Start 7</div>
+            <div className="content bx--col-start-6 bx--col-span-3">Start 6</div>
+            <div className="content bx--col-start-5 bx--col-span-4">Start 5</div>
+            <div className="content bx--col-start-4 bx--col-span-5">Start 4</div>
+            <div className="content bx--col-start-3 bx--col-span-6">Start 3</div>
+            <div className="content bx--col-start-2 bx--col-span-7">Start 2</div>
+            <div className="content bx--col-start-1 bx--col-span-8">Start 1</div>
+            <div className="content bx--col-start-4 bx--col-end-7">
+              Start 4, End 7
+            </div>
+          </div>
+        </article>
+      </section>
+      <section>
+        <h2>Gap</h2>
+        <article className="example">
+          <div className="bx--css-grid bx--css-grid--condensed">
+            <div className="content">
+              Span 1
+            </div>
+            <div className="content bx--col-span-2">
+              Span 2
+            </div>
+            <div className="content">
+              Span 1
+            </div>
+            <div className="content">
+              Span 1
+            </div>
+          </div>
+        </article>
+        <article className="example">
+          <div className="bx--css-grid bx--css-grid--no-gutter">
+            <div className="content">
+              Span 1
+            </div>
+            <div className="content bx--col-span-2">
+              Span 2
+            </div>
+            <div className="content">
+              Span 1
+            </div>
+            <div className="content">
+              Span 1
+            </div>
+          </div>
+        </article>
+      </section>
+    </>
+  );
+}
