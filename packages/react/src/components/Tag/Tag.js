@@ -47,6 +47,7 @@ const Tag = ({
     [`${prefix}--tag--filter`]: filter,
     [`${prefix}--tag--${size}`]: size,
     [`${prefix}--tag--${type}`]: type,
+    [`${prefix}--tag--interactive`]: other.onClick,
   });
   const handleClose = (event) => {
     if (onClose) {

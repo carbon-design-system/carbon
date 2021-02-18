@@ -146,6 +146,10 @@
     text-overflow: ellipsis;
   }
 
+  .#{$prefix}--tag--interactive:hover {
+    cursor: pointer;
+  }
+
   // tags used for filtering
   .#{$prefix}--tag--filter {
     padding-top: 0;
