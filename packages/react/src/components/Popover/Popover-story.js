@@ -101,7 +101,7 @@ export const Default = () => {
         </section>
         <div style={{ marginTop: '2rem' }}>
           <Popover open={open} align={align} relative>
-            <PopoverContent>Hello</PopoverContent>
+            <PopoverContent className="p-3">Hello</PopoverContent>
           </Popover>
         </div>
       </>
@@ -140,7 +140,7 @@ export const Playground = () => {
       )}
       light={boolean('Specify whether the light variant should render', false)}
       open={boolean('Specify whether the popover is open or closed', true)}>
-      <PopoverContent>Sample content</PopoverContent>
+      <PopoverContent className="p-3">Sample content</PopoverContent>
     </Popover>
   );
 };
@@ -168,7 +168,7 @@ export const Examples = () => {
       return (
         <div ref={ref} {...rest}>
           <Popover align={align} open={open} relative={relative}>
-            <PopoverContent>{children}</PopoverContent>
+            <PopoverContent className="p-3">{children}</PopoverContent>
           </Popover>
           <Button
             iconDescription="Toggle"
@@ -195,7 +195,7 @@ export const Examples = () => {
           size={size}
         />
         <Popover align={align} open={open} relative={relative}>
-          <PopoverContent>{children}</PopoverContent>
+          <PopoverContent className="p-3">{children}</PopoverContent>
         </Popover>
       </div>
     );
