@@ -131,7 +131,8 @@
   }
 
   .#{$prefix}--tag--disabled,
-  .#{$prefix}--tag--filter.#{$prefix}--tag--disabled {
+  .#{$prefix}--tag--filter.#{$prefix}--tag--disabled,
+  .#{$prefix}--tag--interactive.#{$prefix}--tag--disabled {
     @include tag-theme($disabled-01, $disabled-02);
 
     &:hover {
