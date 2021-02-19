@@ -16,8 +16,12 @@
     minmax(0, var(--cds-grid-column-size))
   );
   column-gap: var(--cds-grid-gutter);
-  padding-left: calc(var(--cds-grid-margin) + var(--cds-grid-gutter));
-  padding-right: calc(var(--cds-grid-margin) + var(--cds-grid-gutter));
+  padding-left: var(--cds-grid-margin);
+  padding-right: var(--cds-grid-margin);
+  // These lines include the outer gutter, but if we don't include them then
+  // grids with different gutters will align
+  // padding-left: calc(var(--cds-grid-margin) + var(--cds-grid-gutter));
+  // padding-right: calc(var(--cds-grid-margin) + var(--cds-grid-gutter));
   margin-left: auto;
   margin-right: auto;
 }
@@ -34,7 +38,7 @@
 :root {
   --cds-grid-columns: 4;
   --cds-grid-column-size: 1fr;
-  --cds-grid-gutter: 1rem;
+  --cds-grid-gutter: 2rem;
   --cds-grid-margin: 0;
 
   @include breakpoint(md) {
@@ -160,4 +164,11 @@
   // result in a value of 0.
   --cds-grid-gutter: 0px;
   column-gap: var(--cds-grid-gutter);
+}
+
+// -----------------------------------------------------------------------------
+// Hang
+// -----------------------------------------------------------------------------
+.#{$prefix}--hang {
+  padding-left: var(--cds-grid-gutter);
 }
