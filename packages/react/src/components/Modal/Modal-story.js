@@ -8,7 +8,14 @@
 import React, { useState } from 'react';
 import ReactDOM from 'react-dom';
 import { action } from '@storybook/addon-actions';
-import { withKnobs, boolean, select, text } from '@storybook/addon-knobs';
+import {
+  boolean,
+  object,
+  optionsKnob as options,
+  select,
+  text,
+  withKnobs,
+} from '@storybook/addon-knobs';
 import Modal from '../Modal';
 import Button from '../Button';
 import Select from '../Select';
@@ -24,14 +31,17 @@ const sizes = {
 };
 
 const buttons = {
-  'None (0)': 0,
-  'One (1)': 1,
-  'Two (2)': 2,
+  'None (0)': '0',
+  'One (1)': '1',
+  'Two (2)': '2',
+  'Three (3)': '3',
 };
 
 const props = {
   modal: () => ({
-    numberOfButtons: select('Number of Buttons', buttons, 2),
+    numberOfButtons: options('Number of Buttons', buttons, '2', {
+      display: 'inline-radio',
+    }),
     className: 'some-class',
     open: boolean('Open (open)', true),
     danger: boolean('Danger mode (danger)', false),
@@ -77,18 +87,41 @@ const props = {
     ),
   }),
   modalFooter: (numberOfButtons) => {
+    const secondaryButtons = () => {
+      switch (numberOfButtons) {
+        case '2':
+          return {
+            secondaryButtonText: text(
+              'Secondary button text (secondaryButtonText in <ModalFooter>)',
+              'Secondary button'
+            ),
+          };
+        case '3':
+          return {
+            secondaryButtons: object(
+              'Secondary button config array (secondaryButtons)',
+              [
+                {
+                  buttonText: 'Keep both',
+                  onClick: action('onClick'),
+                },
+                {
+                  buttonText: 'Rename',
+                  onClick: action('onClick'),
+                },
+              ]
+            ),
+          };
+        default:
+          return null;
+      }
+    };
     return {
       passiveModal: boolean(
         'Without footer (passiveModal)',
-        false || numberOfButtons === 0
+        false || numberOfButtons === '0'
       ),
-      secondaryButtonText:
-        numberOfButtons === 2
-          ? text(
-              'Secondary button text (secondaryButtonText in <ModalFooter>)',
-              'Secondary button'
-            )
-          : null,
+      ...secondaryButtons(),
     };
   },
 };
@@ -142,7 +175,7 @@ export const Playground = () => {
   const { passiveModal, ...footerProps } = props.modalFooter(numberOfButtons);
   return (
     <Modal
-      passiveModal={numberOfButtons === 0 || passiveModal}
+      passiveModal={numberOfButtons === '0' || passiveModal}
       size={size || undefined}
       hasScrollingContent={hasScrollingContent}
       aria-label={hasScrollingContent ? 'Modal content' : undefined}
