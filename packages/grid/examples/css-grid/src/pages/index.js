@@ -1,14 +1,4 @@
-import { Header, HeaderLabel } from '../components/Header';
-
 export default function IndexPage() {
-  return (
-    <>
-      <Header>
-        <HeaderLabel>Carbon Grid Demo</HeaderLabel>
-      </Header>
-    </>
-  );
-
   return (
     <>
     <h1>CSS Grid Demo</h1>
