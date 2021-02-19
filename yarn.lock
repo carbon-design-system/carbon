@@ -15926,14 +15926,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"graceful-fs@npm:4.X, graceful-fs@npm:^4.0.0, graceful-fs@npm:^4.1.11, graceful-fs@npm:^4.1.15, graceful-fs@npm:^4.1.2, graceful-fs@npm:^4.1.3, graceful-fs@npm:^4.1.6, graceful-fs@npm:^4.1.9, graceful-fs@npm:^4.2.0, graceful-fs@npm:^4.2.2, graceful-fs@npm:^4.2.3, graceful-fs@npm:^4.2.4":
-  version: 4.2.4
-  resolution: "graceful-fs@npm:4.2.4"
-  checksum: d095ee4dc6eacc76814cd52d5d185b860119378a6fd4888e7d4e94983095c54d4f6369942a5e3d759cdbdd4e3ee7eaeb27a39ff938c6ee4610894fd9de46b6cb
-  languageName: node
-  linkType: hard
-
-"graceful-fs@npm:^4.2.6":
+"graceful-fs@npm:4.X, graceful-fs@npm:^4.0.0, graceful-fs@npm:^4.1.11, graceful-fs@npm:^4.1.15, graceful-fs@npm:^4.1.2, graceful-fs@npm:^4.1.3, graceful-fs@npm:^4.1.6, graceful-fs@npm:^4.1.9, graceful-fs@npm:^4.2.0, graceful-fs@npm:^4.2.2, graceful-fs@npm:^4.2.3, graceful-fs@npm:^4.2.4, graceful-fs@npm:^4.2.6":
   version: 4.2.6
   resolution: "graceful-fs@npm:4.2.6"
   checksum: 84d39c7756892553da990a9db7e45f844b3309b37b5a00174cbb4748476f2250c54f24594d4d252f64f085c65c2fdac7c809419bf6d55f0e6e42eb07ac0f5bf2
@@ -16273,24 +16266,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"handlebars@npm:^4.0.11, handlebars@npm:^4.0.12, handlebars@npm:^4.0.13, handlebars@npm:^4.0.5, handlebars@npm:^4.4.0":
-  version: 4.7.2
-  resolution: "handlebars@npm:4.7.2"
-  dependencies:
-    neo-async: ^2.6.0
-    optimist: ^0.6.1
-    source-map: ^0.6.1
-    uglify-js: ^3.1.4
-  dependenciesMeta:
-    uglify-js:
-      optional: true
-  bin:
-    handlebars: bin/handlebars
-  checksum: 9e240d7d03226eca910731f2c82420e49316a799e4fc4dc4ce7e1bb87ed7dcbe182e287f1cd39fc827b5dd2b5d83c81a44c343e7d17a7dc1c74f9940cd9daef1
-  languageName: node
-  linkType: hard
-
-"handlebars@npm:^4.7.7":
+"handlebars@npm:^4.0.11, handlebars@npm:^4.0.12, handlebars@npm:^4.0.13, handlebars@npm:^4.0.5, handlebars@npm:^4.4.0, handlebars@npm:^4.7.7":
   version: 4.7.7
   resolution: "handlebars@npm:4.7.7"
   dependencies:
