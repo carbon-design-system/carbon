@@ -28,7 +28,9 @@ export const defaultFilterRows = ({
   rowIds.filter((rowId) =>
     headers.some(({ key }) => {
       const id = getCellId(rowId, key);
-      if (typeof cellsById[id].value === 'boolean') return false;
+      if (typeof cellsById[id].value === 'boolean') {
+        return false;
+      }
       return ('' + cellsById[id].value)
         .toLowerCase()
         .includes(inputValue.toLowerCase());

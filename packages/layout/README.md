@@ -41,12 +41,6 @@ checkout the [`@carbon/grid`](../grid) package.
 you're looking for support in a different language, feel free to file an issue
 proposing the new addition!
 
-## 📖 API Documentation
-
-If you're looking for `@carbon/layout` API documentation, check out:
-
-- [Sass](./docs/sass.md)
-
 ## 🙌 Contributing
 
 We're always looking for contributors to help us fix bugs, build new features,

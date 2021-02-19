@@ -34,6 +34,11 @@ export default class ComposedModal extends Component {
 
   static propTypes = {
     /**
+     * Specify the aria-label for bx--modal-container
+     */
+    ['aria-label']: PropTypes.string,
+
+    /**
      * Specify the content to be placed in the ComposedModal
      */
     children: PropTypes.node,
@@ -216,6 +221,7 @@ export default class ComposedModal extends Component {
   render() {
     const { open } = this.state;
     const {
+      ['aria-label']: ariaLabel,
       className,
       containerClassName,
       children,
@@ -239,9 +245,12 @@ export default class ComposedModal extends Component {
       [containerClassName]: containerClassName,
     });
 
+    // Generate aria-label based on Modal Header label if one is not provided (L253)
+    let generatedAriaLabel;
     const childrenWithProps = React.Children.toArray(children).map((child) => {
       switch (child.type) {
         case React.createElement(ModalHeader).type:
+          generatedAriaLabel = child.props.label;
           return React.cloneElement(child, {
             closeModal: this.closeModal,
           });
@@ -273,7 +282,12 @@ export default class ComposedModal extends Component {
           className={`${prefix}--visually-hidden`}>
           Focus sentinel
         </span>
-        <div ref={this.innerModal} className={containerClass} role="dialog">
+        <div
+          ref={this.innerModal}
+          className={containerClass}
+          role="dialog"
+          aria-modal="true"
+          aria-label={ariaLabel ? ariaLabel : generatedAriaLabel}>
           {childrenWithProps}
         </div>
         {/* Non-translatable: Focus-wrap code makes this `<span>` not actually read by screen readers */}
@@ -403,9 +417,9 @@ export class ModalHeader extends Component {
 
     return (
       <div className={headerClass} {...other}>
-        {label && <p className={labelClass}>{label}</p>}
+        {label && <h2 className={labelClass}>{label}</h2>}
 
-        {title && <p className={titleClass}>{title}</p>}
+        {title && <h3 className={titleClass}>{title}</h3>}
 
         {children}
 
@@ -550,6 +564,42 @@ export class ModalFooter extends Component {
     secondaryButtonText: PropTypes.string,
 
     /**
+     * Specify an array of config objects for secondary buttons
+     * (`Array<{
+     *   buttonText: string,
+     *   onClick: function,
+     * }>`).
+     */
+    secondaryButtons: (props, propName, componentName) => {
+      if (props.secondaryButtons) {
+        if (
+          !Array.isArray(props.secondaryButtons) ||
+          props.secondaryButtons.length !== 2
+        ) {
+          return new Error(
+            `${propName} needs to be an array of two button config objects`
+          );
+        }
+
+        const shape = {
+          buttonText: PropTypes.node,
+          onClick: PropTypes.func,
+        };
+
+        props[propName].forEach((secondaryButton) => {
+          PropTypes.checkPropTypes(
+            shape,
+            secondaryButton,
+            propName,
+            componentName
+          );
+        });
+      }
+
+      return null;
+    },
+
+    /**
      * Specify a custom className to be applied to the secondary button
      */
     secondaryClassName: PropTypes.string,
@@ -569,6 +619,7 @@ export class ModalFooter extends Component {
     const {
       className,
       primaryClassName,
+      secondaryButtons,
       secondaryClassName,
       secondaryButtonText,
       primaryButtonText,
@@ -585,6 +636,8 @@ export class ModalFooter extends Component {
     const footerClass = classNames({
       [`${prefix}--modal-footer`]: true,
       [className]: className,
+      [`${prefix}--modal-footer--three-button`]:
+        Array.isArray(secondaryButtons) && secondaryButtons.length === 2,
     });
 
     const primaryClass = classNames({
@@ -595,17 +648,36 @@ export class ModalFooter extends Component {
       [secondaryClassName]: secondaryClassName,
     });
 
-    return (
-      <ButtonSet className={footerClass} {...other}>
-        {secondaryButtonText && (
+    const SecondaryButtonSet = () => {
+      if (Array.isArray(secondaryButtons) && secondaryButtons.length <= 2) {
+        return secondaryButtons.map(
+          ({ buttonText, onClick: onButtonClick }, i) => (
+            <Button
+              key={`${buttonText}-${i}`}
+              className={secondaryClass}
+              kind="secondary"
+              onClick={onButtonClick || this.handleRequestClose}>
+              {buttonText}
+            </Button>
+          )
+        );
+      }
+      if (secondaryButtonText) {
+        return (
           <Button
             className={secondaryClass}
             onClick={this.handleRequestClose}
             kind="secondary">
             {secondaryButtonText}
           </Button>
-        )}
+        );
+      }
+      return null;
+    };
 
+    return (
+      <ButtonSet className={footerClass} {...other}>
+        <SecondaryButtonSet />
         {primaryButtonText && (
           <Button
             onClick={onRequestSubmit}

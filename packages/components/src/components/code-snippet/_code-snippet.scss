@@ -176,7 +176,12 @@
     @include type-style('code-01');
 
     padding-right: $spacing-03;
-    white-space: nowrap;
+  }
+
+  // Preserve whitespace, but don't allow wrapping for inline and single
+  .#{$prefix}--snippet--single pre,
+  .#{$prefix}--snippet--inline code {
+    white-space: pre;
   }
 
   // Multi Line Snippet
@@ -333,7 +338,6 @@
     position: absolute;
     top: 0;
     right: 0;
-    z-index: 10;
 
     // Override inherited rule in code snippet
     @include carbon--font-family('sans');
@@ -465,6 +469,7 @@
   .#{$prefix}--snippet--multi .#{$prefix}--copy-btn {
     top: $carbon--spacing-03;
     right: $carbon--spacing-03;
+    z-index: 10;
     width: $carbon--spacing-07;
     height: $carbon--spacing-07;
   }
