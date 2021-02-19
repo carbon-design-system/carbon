@@ -85,25 +85,72 @@
   grid-column: auto;
 }
 
-.#{$prefix}--col-span-full {
+.#{$prefix}--col-span-100 {
   grid-column: 1 / -1;
 }
 
 @each $name, $value in $grid-breakpoints {
   $columns: map.get($value, columns);
 
-  @for $i from 0 through $columns {
-    .#{$prefix}--#{$name}\:col-span-#{$i} {
-      @include -column-span($i);
+  @include breakpoint($name) {
+    @for $i from 0 through $columns {
+      .#{$prefix}--#{$name}\:col-span-#{$i} {
+        @include -column-span($i);
+      }
+    }
+
+    .#{$prefix}--#{$name}\:col-span-auto {
+      grid-column: auto;
+    }
+
+    .#{$prefix}--#{$name}\:col-span-100 {
+      grid-column: 1 / -1;
     }
   }
+}
 
-  .#{$prefix}--#{$name}\:col-span-auto {
-    grid-column: auto;
+.#{$prefix}--col-span-25 {
+  --cds-grid-columns: 1;
+  grid-column: span 1;
+
+  @include breakpoint(md) {
+    --cds-grid-columns: 2;
+    grid-column: span 2;
   }
 
-  .#{$prefix}--#{$name}\:col-span-full {
-    grid-column: 1 / -1;
+  @include breakpoint(lg) {
+    --cds-grid-columns: 4;
+    grid-column: span 4;
+  }
+}
+
+.#{$prefix}--col-span-50 {
+  --cds-grid-columns: 2;
+  grid-column: span 2;
+
+  @include breakpoint(md) {
+    --cds-grid-columns: 4;
+    grid-column: span 4;
+  }
+
+  @include breakpoint(lg) {
+    --cds-grid-columns: 8;
+    grid-column: span 8;
+  }
+}
+
+.#{$prefix}--col-span-75 {
+  --cds-grid-columns: 3;
+  grid-column: span 3;
+
+  @include breakpoint(md) {
+    --cds-grid-columns: 6;
+    grid-column: span 6;
+  }
+
+  @include breakpoint(lg) {
+    --cds-grid-columns: 12;
+    grid-column: span 12;
   }
 }
 
@@ -131,22 +178,24 @@
 @each $name, $value in $grid-breakpoints {
   $columns: map.get($value, columns);
 
-  @for $i from 1 through $columns {
-    .#{$prefix}--#{$name}\:col-start-#{$i} {
-      grid-column-start: $i;
+  @include breakpoint($name) {
+    @for $i from 1 through $columns {
+      .#{$prefix}--#{$name}\:col-start-#{$i} {
+        grid-column-start: $i;
+      }
+
+      .#{$prefix}--#{$name}\:col-end-#{$i} {
+        grid-column-end: $i;
+      }
     }
 
-    .#{$prefix}--#{$name}\:col-end-#{$i} {
-      grid-column-end: $i;
+    .#{$prefix}--#{$name}\:col-start-auto {
+      grid-column-start: auto;
     }
-  }
 
-  .#{$prefix}--#{$name}\:col-start-auto {
-    grid-column-start: auto;
-  }
-
-  .#{$prefix}--#{$name}\:col-end-auto {
-    grid-column-start: end;
+    .#{$prefix}--#{$name}\:col-end-auto {
+      grid-column-start: end;
+    }
   }
 }
 
@@ -171,4 +220,34 @@
 // -----------------------------------------------------------------------------
 .#{$prefix}--hang {
   padding-left: var(--cds-grid-gutter);
+}
+
+// -----------------------------------------------------------------------------
+// Utilities
+// -----------------------------------------------------------------------------
+
+/// Justify items
+.#{$prefix}--justify-items-start {
+  justify-items: start;
+}
+
+.#{$prefix}--justify-items-end {
+  justify-items: end;
+}
+
+.#{$prefix}--justify-items-center {
+  justify-items: center;
+}
+
+/// Align items
+.#{$prefix}--align-items-start {
+  align-items: start;
+}
+
+.#{$prefix}--align-items-end {
+  align-items: end;
+}
+
+.#{$prefix}--align-items-center {
+  align-items: center;
 }

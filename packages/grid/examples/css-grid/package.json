@@ -5,6 +5,7 @@
     "develop": "next"
   },
   "dependencies": {
+    "@carbon/colors": "link:../../../colors",
     "@carbon/grid": "link:../../",
     "next": "^10.0.7",
     "react": "^17.0.1",

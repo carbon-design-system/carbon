@@ -1,4 +1,14 @@
+import { Header, HeaderLabel } from '../components/Header';
+
 export default function IndexPage() {
+  return (
+    <>
+      <Header>
+        <HeaderLabel>Carbon Grid Demo</HeaderLabel>
+      </Header>
+    </>
+  );
+
   return (
     <>
     <h1>CSS Grid Demo</h1>
@@ -21,6 +31,20 @@ export default function IndexPage() {
           </div>
         </article>
       </section>
+      <section>
+        <h2>Responsive</h2>
+      </section>
+      <article className="example">
+        <div className="bx--css-grid">
+          <div className="content bx--col-span-1 bx--md:col-span-2 bx--lg:col-span-4">25%</div>
+          <div className="content bx--col-span-1 bx--md:col-span-2 bx--lg:col-span-4">25%</div>
+          <div className="content bx--col-span-1 bx--md:col-span-2 bx--lg:col-span-4">25%</div>
+          <div className="content bx--col-span-1 bx--md:col-span-2 bx--lg:col-span-4">25%</div>
+          <div className="content bx--col-span-4 bx--md:col-span-6 bx--lg:col-span-12 bx--xlg:col-span-10 bx--max:col-span-8">
+            Responsive
+          </div>
+        </div>
+      </article>
       <section>
         <h2>Offset</h2>
         <article className="example">
@@ -73,6 +97,50 @@ export default function IndexPage() {
             </div>
           </div>
         </article>
+      </section>
+      <section>
+        <h2>Subgrid</h2>
+        <div className="example">
+          <div className="bx--css-grid">
+            <div className="bx--col-span-75 bx--subgrid">
+            </div>
+            <div className="content bx--col-span-25">
+              25%
+            </div>
+          </div>
+        </div>
+      </section>
+      <section>
+        <h2>Relative</h2>
+        <div className="example">
+          <div className="bx--css-grid">
+            <div className="bx--col-span-100">
+              <div className="content">100%</div>
+            </div>
+            <div className="bx--col-span-75">
+              <div className="content">75%</div>
+            </div>
+            <div className="bx--col-span-25">
+              <div className="content">25%</div>
+            </div>
+          </div>
+          <div className="bx--css-grid">
+            <div className="bx--col-span-50">
+              <div className="content">50%</div>
+            </div>
+            <div className="bx--col-span-50">
+              <div className="content">50%</div>
+            </div>
+          </div>
+          <div className="bx--css-grid">
+            <div className="bx--col-span-25">
+              <div className="content">25%</div>
+            </div>
+            <div className="bx--col-span-75">
+              <div className="content">75%</div>
+            </div>
+          </div>
+        </div>
       </section>
     </>
   );

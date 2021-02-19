@@ -52,6 +52,12 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@carbon/colors@link:../../../colors::locator=grid-examples-css-grid%40workspace%3A.":
+  version: 0.0.0-use.local
+  resolution: "@carbon/colors@link:../../../colors::locator=grid-examples-css-grid%40workspace%3A."
+  languageName: node
+  linkType: soft
+
 "@carbon/grid@link:../../::locator=grid-examples-css-grid%40workspace%3A.":
   version: 0.0.0-use.local
   resolution: "@carbon/grid@link:../../::locator=grid-examples-css-grid%40workspace%3A."
@@ -1247,6 +1253,7 @@ fsevents@~2.3.1:
   version: 0.0.0-use.local
   resolution: "grid-examples-css-grid@workspace:."
   dependencies:
+    "@carbon/colors": "link:../../../colors"
     "@carbon/grid": "link:../../"
     next: ^10.0.7
     react: ^17.0.1
