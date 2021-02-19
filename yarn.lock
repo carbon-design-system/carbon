@@ -1594,7 +1594,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@carbon/cli@^10.20.0-rc.0, @carbon/cli@workspace:packages/cli":
+"@carbon/cli@^10.20.0, @carbon/cli@workspace:packages/cli":
   version: 0.0.0-use.local
   resolution: "@carbon/cli@workspace:packages/cli"
   dependencies:
@@ -1640,14 +1640,14 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@carbon/colors@^10.21.0-rc.1, @carbon/colors@workspace:packages/colors":
+"@carbon/colors@^10.21.0, @carbon/colors@workspace:packages/colors":
   version: 0.0.0-use.local
   resolution: "@carbon/colors@workspace:packages/colors"
   dependencies:
-    "@carbon/cli": ^10.20.0-rc.0
+    "@carbon/cli": ^10.20.0
     "@carbon/cli-reporter": ^10.4.0
     "@carbon/scss-generator": ^10.13.0
-    "@carbon/test-utils": ^10.15.0-rc.1
+    "@carbon/test-utils": ^10.15.0
     change-case: ^4.1.1
     core-js: ^3.6.5
     fs-extra: ^8.1.0
@@ -1656,19 +1656,19 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@carbon/elements@^10.28.0-rc.1, @carbon/elements@workspace:packages/elements":
+"@carbon/elements@^10.28.0, @carbon/elements@workspace:packages/elements":
   version: 0.0.0-use.local
   resolution: "@carbon/elements@workspace:packages/elements"
   dependencies:
-    "@carbon/cli": ^10.20.0-rc.0
-    "@carbon/colors": ^10.21.0-rc.1
-    "@carbon/grid": ^10.21.0-rc.1
-    "@carbon/icons": ^10.26.0-rc.0
+    "@carbon/cli": ^10.20.0
+    "@carbon/colors": ^10.21.0
+    "@carbon/grid": ^10.21.0
+    "@carbon/icons": ^10.26.0
     "@carbon/import-once": ^10.6.0
-    "@carbon/layout": ^10.19.0-rc.1
-    "@carbon/motion": ^10.14.0-rc.0
-    "@carbon/themes": ^10.28.0-rc.1
-    "@carbon/type": ^10.22.0-rc.1
+    "@carbon/layout": ^10.19.0
+    "@carbon/motion": ^10.14.0
+    "@carbon/themes": ^10.28.0
+    "@carbon/type": ^10.22.0
     fs-extra: ^8.1.0
     klaw-sync: ^6.0.0
     replace-in-file: ^3.4.2
@@ -1691,18 +1691,18 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@carbon/grid@^10.21.0-rc.1, @carbon/grid@workspace:packages/grid":
+"@carbon/grid@^10.21.0, @carbon/grid@workspace:packages/grid":
   version: 0.0.0-use.local
   resolution: "@carbon/grid@workspace:packages/grid"
   dependencies:
-    "@carbon/cli": ^10.20.0-rc.0
+    "@carbon/cli": ^10.20.0
     "@carbon/import-once": ^10.6.0
-    "@carbon/layout": ^10.19.0-rc.1
+    "@carbon/layout": ^10.19.0
     rimraf: ^3.0.0
   languageName: unknown
   linkType: soft
 
-"@carbon/icon-build-helpers@^0.16.0-rc.0, @carbon/icon-build-helpers@workspace:packages/icon-build-helpers":
+"@carbon/icon-build-helpers@^0.16.0, @carbon/icon-build-helpers@workspace:packages/icon-build-helpers":
   version: 0.0.0-use.local
   resolution: "@carbon/icon-build-helpers@workspace:packages/icon-build-helpers"
   dependencies:
@@ -1710,7 +1710,7 @@ __metadata:
     "@babel/preset-env": ^7.10.0
     "@babel/preset-react": ^7.10.0
     "@carbon/cli-reporter": ^10.4.0
-    "@carbon/icon-helpers": ^10.14.0-rc.0
+    "@carbon/icon-helpers": ^10.14.0
     "@rollup/plugin-babel": ^5.2.2
     "@rollup/plugin-replace": ^2.3.4
     browserslist-config-carbon: ^10.6.0
@@ -1732,11 +1732,11 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@carbon/icon-helpers@^10.14.0-rc.0, @carbon/icon-helpers@workspace:packages/icon-helpers":
+"@carbon/icon-helpers@^10.14.0, @carbon/icon-helpers@workspace:packages/icon-helpers":
   version: 0.0.0-use.local
   resolution: "@carbon/icon-helpers@workspace:packages/icon-helpers"
   dependencies:
-    "@carbon/cli": ^10.20.0-rc.0
+    "@carbon/cli": ^10.20.0
     rimraf: ^3.0.0
   languageName: unknown
   linkType: soft
@@ -1748,25 +1748,25 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@carbon/icons-handlebars@^10.26.0-rc.0, @carbon/icons-handlebars@workspace:packages/icons-handlebars":
+"@carbon/icons-handlebars@^10.26.0, @carbon/icons-handlebars@workspace:packages/icons-handlebars":
   version: 0.0.0-use.local
   resolution: "@carbon/icons-handlebars@workspace:packages/icons-handlebars"
   dependencies:
-    "@carbon/icon-helpers": ^10.14.0-rc.0
-    "@carbon/icons": ^10.26.0-rc.0
+    "@carbon/icon-helpers": ^10.14.0
+    "@carbon/icons": ^10.26.0
     handlebars: ^4.0.12
   peerDependencies:
     handlebars: ^4.0.12
   languageName: unknown
   linkType: soft
 
-"@carbon/icons-react@^10.26.0-rc.0, @carbon/icons-react@workspace:packages/icons-react":
+"@carbon/icons-react@^10.26.0, @carbon/icons-react@workspace:packages/icons-react":
   version: 0.0.0-use.local
   resolution: "@carbon/icons-react@workspace:packages/icons-react"
   dependencies:
-    "@carbon/icon-build-helpers": ^0.16.0-rc.0
-    "@carbon/icon-helpers": ^10.14.0-rc.0
-    "@carbon/icons": ^10.26.0-rc.0
+    "@carbon/icon-build-helpers": ^0.16.0
+    "@carbon/icon-helpers": ^10.14.0
+    "@carbon/icons": ^10.26.0
     prop-types: ^15.7.2
   peerDependencies:
     react: ">=16"
@@ -1788,8 +1788,8 @@ __metadata:
   resolution: "@carbon/icons-vue@workspace:packages/icons-vue"
   dependencies:
     "@carbon/cli-reporter": ^10.4.0
-    "@carbon/icon-helpers": ^10.14.0-rc.0
-    "@carbon/icons": ^10.26.0-rc.0
+    "@carbon/icon-helpers": ^10.14.0
+    "@carbon/icons": ^10.26.0
     fs-extra: ^8.1.0
     prettier: ^2.2.1
     rimraf: ^3.0.0
@@ -1798,12 +1798,12 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@carbon/icons@^10.26.0-rc.0, @carbon/icons@workspace:packages/icons":
+"@carbon/icons@^10.26.0, @carbon/icons@workspace:packages/icons":
   version: 0.0.0-use.local
   resolution: "@carbon/icons@workspace:packages/icons"
   dependencies:
-    "@carbon/cli": ^10.20.0-rc.0
-    "@carbon/icon-build-helpers": ^0.16.0-rc.0
+    "@carbon/cli": ^10.20.0
+    "@carbon/icon-build-helpers": ^0.16.0
     rimraf: ^3.0.2
   languageName: unknown
   linkType: soft
@@ -1814,24 +1814,24 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@carbon/layout@^10.19.0-rc.1, @carbon/layout@workspace:packages/layout":
+"@carbon/layout@^10.19.0, @carbon/layout@workspace:packages/layout":
   version: 0.0.0-use.local
   resolution: "@carbon/layout@workspace:packages/layout"
   dependencies:
-    "@carbon/cli": ^10.20.0-rc.0
+    "@carbon/cli": ^10.20.0
     "@carbon/cli-reporter": ^10.4.0
     "@carbon/scss-generator": ^10.13.0
-    "@carbon/test-utils": ^10.15.0-rc.1
+    "@carbon/test-utils": ^10.15.0
     core-js: ^3.6.5
     rimraf: ^3.0.0
   languageName: unknown
   linkType: soft
 
-"@carbon/motion@^10.14.0-rc.0, @carbon/motion@workspace:packages/motion":
+"@carbon/motion@^10.14.0, @carbon/motion@workspace:packages/motion":
   version: 0.0.0-use.local
   resolution: "@carbon/motion@workspace:packages/motion"
   dependencies:
-    "@carbon/cli": ^10.20.0-rc.0
+    "@carbon/cli": ^10.20.0
     rimraf: ^3.0.0
   languageName: unknown
   linkType: soft
@@ -1840,9 +1840,9 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@carbon/pictograms-react@workspace:packages/pictograms-react"
   dependencies:
-    "@carbon/icon-build-helpers": ^0.16.0-rc.0
-    "@carbon/icon-helpers": ^10.14.0-rc.0
-    "@carbon/pictograms": ^11.4.0-rc.1
+    "@carbon/icon-build-helpers": ^0.16.0
+    "@carbon/icon-helpers": ^10.14.0
+    "@carbon/pictograms": ^11.4.0
     "@carbon/telemetry": 0.0.0-alpha.6
     prop-types: ^15.7.2
   peerDependencies:
@@ -1850,11 +1850,11 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@carbon/pictograms@^11.4.0-rc.1, @carbon/pictograms@workspace:packages/pictograms":
+"@carbon/pictograms@^11.4.0, @carbon/pictograms@workspace:packages/pictograms":
   version: 0.0.0-use.local
   resolution: "@carbon/pictograms@workspace:packages/pictograms"
   dependencies:
-    "@carbon/icon-build-helpers": ^0.16.0-rc.0
+    "@carbon/icon-build-helpers": ^0.16.0
     rimraf: ^3.0.0
   languageName: unknown
   linkType: soft
@@ -1872,11 +1872,11 @@ __metadata:
   resolution: "@carbon/sketch@workspace:packages/sketch"
   dependencies:
     "@babel/polyfill": ^7.8.7
-    "@carbon/colors": ^10.21.0-rc.1
-    "@carbon/icon-helpers": ^10.14.0-rc.0
-    "@carbon/icons": ^10.26.0-rc.0
-    "@carbon/themes": ^10.28.0-rc.1
-    "@carbon/type": ^10.22.0-rc.1
+    "@carbon/colors": ^10.21.0
+    "@carbon/icon-helpers": ^10.14.0
+    "@carbon/icons": ^10.26.0
+    "@carbon/themes": ^10.28.0
+    "@carbon/type": ^10.22.0
     "@skpm/builder": ^0.7.0
     color-string: ^1.5.3
     cross-env: ^5.2.0
@@ -1905,7 +1905,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@carbon/test-utils@^10.15.0-rc.1, @carbon/test-utils@workspace:packages/test-utils":
+"@carbon/test-utils@^10.15.0, @carbon/test-utils@workspace:packages/test-utils":
   version: 0.0.0-use.local
   resolution: "@carbon/test-utils@workspace:packages/test-utils"
   dependencies:
@@ -1922,17 +1922,17 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@carbon/themes@^10.28.0-rc.1, @carbon/themes@workspace:packages/themes":
+"@carbon/themes@^10.28.0, @carbon/themes@workspace:packages/themes":
   version: 0.0.0-use.local
   resolution: "@carbon/themes@workspace:packages/themes"
   dependencies:
-    "@carbon/cli": ^10.20.0-rc.0
+    "@carbon/cli": ^10.20.0
     "@carbon/cli-reporter": ^10.4.0
-    "@carbon/colors": ^10.21.0-rc.1
-    "@carbon/layout": ^10.19.0-rc.1
+    "@carbon/colors": ^10.21.0
+    "@carbon/layout": ^10.19.0
     "@carbon/scss-generator": ^10.13.0
-    "@carbon/test-utils": ^10.15.0-rc.1
-    "@carbon/type": ^10.22.0-rc.1
+    "@carbon/test-utils": ^10.15.0
+    "@carbon/type": ^10.22.0
     change-case: ^4.1.1
     color: ^3.1.2
     core-js: ^3.6.5
@@ -1943,14 +1943,14 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@carbon/type@^10.22.0-rc.1, @carbon/type@workspace:packages/type":
+"@carbon/type@^10.22.0, @carbon/type@workspace:packages/type":
   version: 0.0.0-use.local
   resolution: "@carbon/type@workspace:packages/type"
   dependencies:
-    "@carbon/cli": ^10.20.0-rc.0
+    "@carbon/cli": ^10.20.0
     "@carbon/import-once": ^10.6.0
-    "@carbon/layout": ^10.19.0-rc.1
-    "@carbon/test-utils": ^10.15.0-rc.1
+    "@carbon/layout": ^10.19.0
+    "@carbon/test-utils": ^10.15.0
     change-case: ^4.1.1
     rimraf: ^3.0.0
   languageName: unknown
@@ -9173,9 +9173,9 @@ __metadata:
     "@babel/plugin-transform-object-assign": ^7.7.4
     "@babel/preset-env": ^7.10.0
     "@babel/preset-react": ^7.10.0
-    "@carbon/icons-react": ^10.26.0-rc.0
+    "@carbon/icons-react": ^10.26.0
     "@carbon/telemetry": 0.0.0-alpha.6
-    "@carbon/test-utils": ^10.15.0-rc.1
+    "@carbon/test-utils": ^10.15.0
     "@percy/storybook": ^3.3.1
     "@rollup/plugin-babel": ^5.2.2
     "@rollup/plugin-commonjs": ^17.0.0
@@ -9192,7 +9192,7 @@ __metadata:
     babel-plugin-react-docgen: ^4.0.0
     babel-plugin-transform-inline-environment-variables: ^0.4.0
     browserslist-config-carbon: ^10.6.0
-    carbon-components: ^10.29.0-rc.1
+    carbon-components: ^10.29.0
     carbon-icons: ^7.0.5
     chalk: ^2.3.0
     classnames: 2.2.6
@@ -9231,7 +9231,7 @@ __metadata:
     rollup-plugin-terser: ^7.0.2
     rtlcss: ^2.4.0
     sass-loader: ^8.0.2
-    storybook-preset-carbon: ^0.2.1-rc.0
+    storybook-preset-carbon: ^0.3.0
     string-replace-loader: ^2.1.0
     terser-webpack-plugin: ^2.3.2
     use-resize-observer: ^6.0.0
@@ -9247,7 +9247,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"carbon-components@^10.29.0-rc.1, carbon-components@workspace:packages/components":
+"carbon-components@^10.29.0, carbon-components@workspace:packages/components":
   version: 0.0.0-use.local
   resolution: "carbon-components@workspace:packages/components"
   dependencies:
@@ -9259,12 +9259,12 @@ __metadata:
     "@babel/preset-env": ^7.10.0
     "@babel/preset-react": ^7.10.0
     "@babel/runtime": ^7.10.0
-    "@carbon/cli": ^10.20.0-rc.0
-    "@carbon/elements": ^10.28.0-rc.1
-    "@carbon/icons-handlebars": ^10.26.0-rc.0
-    "@carbon/icons-react": ^10.26.0-rc.0
+    "@carbon/cli": ^10.20.0
+    "@carbon/elements": ^10.28.0
+    "@carbon/icons-handlebars": ^10.26.0
+    "@carbon/icons-react": ^10.26.0
     "@carbon/telemetry": 0.0.0-alpha.6
-    "@carbon/test-utils": ^10.15.0-rc.1
+    "@carbon/test-utils": ^10.15.0
     "@frctl/fractal": ^1.1.0
     "@rollup/plugin-babel": ^5.2.2
     "@rollup/plugin-commonjs": ^17.0.0
@@ -29795,7 +29795,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"storybook-preset-carbon@^0.2.1-rc.0, storybook-preset-carbon@workspace:config/storybook-preset-carbon":
+"storybook-preset-carbon@^0.3.0, storybook-preset-carbon@workspace:config/storybook-preset-carbon":
   version: 0.0.0-use.local
   resolution: "storybook-preset-carbon@workspace:config/storybook-preset-carbon"
   dependencies:
