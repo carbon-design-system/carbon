@@ -39,6 +39,11 @@ export default class ComposedModal extends Component {
     ['aria-label']: PropTypes.string,
 
     /**
+     * Specify the aria-labelledby for bx--modal-container
+     */
+    ['aria-labelledby']: PropTypes.string,
+
+    /**
      * Specify the content to be placed in the ComposedModal
      */
     children: PropTypes.node,
@@ -221,6 +226,7 @@ export default class ComposedModal extends Component {
   render() {
     const { open } = this.state;
     const {
+      ['aria-labelledby']: ariaLabelledBy,
       ['aria-label']: ariaLabel,
       className,
       containerClassName,
@@ -287,7 +293,8 @@ export default class ComposedModal extends Component {
           className={containerClass}
           role="dialog"
           aria-modal="true"
-          aria-label={ariaLabel ? ariaLabel : generatedAriaLabel}>
+          aria-label={ariaLabel ? ariaLabel : generatedAriaLabel}
+          aria-labelledby={ariaLabelledBy}>
           {childrenWithProps}
         </div>
         {/* Non-translatable: Focus-wrap code makes this `<span>` not actually read by screen readers */}
