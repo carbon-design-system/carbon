@@ -8,7 +8,14 @@
 import React, { useState } from 'react';
 import ReactDOM from 'react-dom';
 import { action } from '@storybook/addon-actions';
-import { withKnobs, boolean, select, text } from '@storybook/addon-knobs';
+import {
+  boolean,
+  object,
+  optionsKnob as options,
+  select,
+  text,
+  withKnobs,
+} from '@storybook/addon-knobs';
 import ComposedModal, {
   ModalHeader,
   ModalBody,
@@ -28,14 +35,17 @@ const sizes = {
 };
 
 const buttons = {
-  'None (0)': 0,
-  'One (1)': 1,
-  'Two (2)': 2,
+  'None (0)': '0',
+  'One (1)': '1',
+  'Two (2)': '2',
+  'Three (3)': '3',
 };
 
 const props = {
   composedModal: ({ titleOnly } = {}) => ({
-    numberOfButtons: select('Number of Buttons', buttons, 2),
+    numberOfButtons: options('Number of Buttons', buttons, '2', {
+      display: 'inline-radio',
+    }),
     open: boolean('Open (open in <ComposedModal>)', true),
     onKeyDown: action('onKeyDown'),
     selectorPrimaryFocus: text(
@@ -72,6 +82,35 @@ const props = {
     'aria-label': text('ARIA label for content', 'Example modal content'),
   }),
   modalFooter: (numberOfButtons) => {
+    const secondaryButtons = () => {
+      switch (numberOfButtons) {
+        case '2':
+          return {
+            secondaryButtonText: text(
+              'Secondary button text (secondaryButtonText in <ModalFooter>)',
+              'Secondary button'
+            ),
+          };
+        case '3':
+          return {
+            secondaryButtons: object(
+              'Secondary button config array (secondaryButtons)',
+              [
+                {
+                  buttonText: 'Keep both',
+                  onClick: action('onClick'),
+                },
+                {
+                  buttonText: 'Rename',
+                  onClick: action('onClick'),
+                },
+              ]
+            ),
+          };
+        default:
+          return null;
+      }
+    };
     return {
       danger: boolean('Primary button danger (danger)', false),
       primaryButtonText: text(
@@ -82,13 +121,7 @@ const props = {
         'Primary button disabled (primaryButtonDisabled in <ModalFooter>)',
         false
       ),
-      secondaryButtonText:
-        numberOfButtons === 2
-          ? text(
-              'Secondary button text (secondaryButtonText in <ModalFooter>)',
-              'Secondary button'
-            )
-          : null,
+      ...secondaryButtons(numberOfButtons),
       onRequestClose: action('onRequestClose'),
       onRequestSubmit: action('onRequestSubmit'),
     };
