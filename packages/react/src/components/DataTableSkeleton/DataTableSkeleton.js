@@ -138,7 +138,6 @@ DataTableSkeleton.defaultProps = {
   columnCount: 5,
   zebra: false,
   compact: false,
-  headers: [],
   showHeader: true,
   showToolbar: true,
 };
