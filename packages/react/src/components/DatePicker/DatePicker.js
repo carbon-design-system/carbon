@@ -161,68 +161,71 @@ export default class DatePicker extends Component {
     /**
      *  The language locale used to format the days of the week, months, and numbers. The full list of supported locales can be found here https://github.com/flatpickr/flatpickr/tree/master/src/l10n
      */
-    locale: PropTypes.oneOf([
-      'ar', // Arabic
-      'at', // Austria
-      'az', // Azerbaijan
-      'be', // Belarusian
-      'bg', // Bulgarian
-      'bn', // Bangla
-      'bs', // Bosnia
-      'cat', // Catalan
-      'cs', // Czech
-      'cy', // Welsh
-      'da', // Danish
-      'de', // German
-      'en', // English
-      'eo', // Esperanto
-      'es', // Spanish
-      'et', // Estonian
-      'fa', // Persian
-      'fi', // Finnish
-      'fo', // Faroese
-      'fr', // French
-      'ga', // Gaelic
-      'gr', // Greek
-      'he', // Hebrew
-      'hi', // Hindi
-      'hr', // Croatian
-      'hu', // Hungarian
-      'id', // Indonesian
-      'is', // Icelandic
-      'it', // Italian
-      'ja', // Japanese
-      'ka', // Georgian
-      'km', // Khmer
-      'ko', // Korean
-      'kz', // Kazakh
-      'lt', // Lithuanian
-      'lv', // Latvian
-      'mk', // Macedonian
-      'mn', // Mongolian
-      'ms', // Malaysian
-      'my', // Burmese
-      'nl', // Dutch
-      'no', // Norwegian
-      'pa', // Punjabi
-      'pl', // Polish
-      'pt', // Portuguese
-      'ro', // Romanian
-      'ru', // Russian
-      'si', // Sinhala
-      'sk', // Slovak
-      'sl', // Slovenian
-      'sq', // Albanian
-      'sr-cyr', // Serbian Cyrillic
-      'sr', // Serbian
-      'sv', // Swedish
-      'th', // Thai
-      'tr', // Turkish
-      'uk', // Ukrainian
-      'uz', // Uzbek
-      'vn', // Vietnamese
-      'zh-tw', // Mandarin Traditional
-      'zh', // Mandarin
+    locale: PropTypes.oneOfType([
+      PropTypes.object,
+      PropTypes.oneOf([
+        'ar', // Arabic
+        'at', // Austria
+        'az', // Azerbaijan
+        'be', // Belarusian
+        'bg', // Bulgarian
+        'bn', // Bangla
+        'bs', // Bosnia
+        'cat', // Catalan
+        'cs', // Czech
+        'cy', // Welsh
+        'da', // Danish
+        'de', // German
+        'en', // English
+        'eo', // Esperanto
+        'es', // Spanish
+        'et', // Estonian
+        'fa', // Persian
+        'fi', // Finnish
+        'fo', // Faroese
+        'fr', // French
+        'ga', // Gaelic
+        'gr', // Greek
+        'he', // Hebrew
+        'hi', // Hindi
+        'hr', // Croatian
+        'hu', // Hungarian
+        'id', // Indonesian
+        'is', // Icelandic
+        'it', // Italian
+        'ja', // Japanese
+        'ka', // Georgian
+        'km', // Khmer
+        'ko', // Korean
+        'kz', // Kazakh
+        'lt', // Lithuanian
+        'lv', // Latvian
+        'mk', // Macedonian
+        'mn', // Mongolian
+        'ms', // Malaysian
+        'my', // Burmese
+        'nl', // Dutch
+        'no', // Norwegian
+        'pa', // Punjabi
+        'pl', // Polish
+        'pt', // Portuguese
+        'ro', // Romanian
+        'ru', // Russian
+        'si', // Sinhala
+        'sk', // Slovak
+        'sl', // Slovenian
+        'sq', // Albanian
+        'sr-cyr', // Serbian Cyrillic
+        'sr', // Serbian
+        'sv', // Swedish
+        'th', // Thai
+        'tr', // Turkish
+        'uk', // Ukrainian
+        'uz', // Uzbek
+        'vn', // Vietnamese
+        'zh-tw', // Mandarin Traditional
+        'zh', // Mandarin
+      ]),
     ]),
 
     /**
@@ -292,6 +295,14 @@ export default class DatePicker extends Component {
         this.updateClassNames(instance);
       };
 
+      let localeData;
+      if (typeof locale === 'object') {
+        let location = locale.locale ? locale.locale : 'en';
+        localeData = { ...l10n[location], ...locale };
+      } else {
+        localeData = l10n[locale];
+      }
+
       // inputField ref might not be set in enzyme tests
       if (this.inputField) {
         this.cal = new flatpickr(this.inputField, {
@@ -300,7 +311,7 @@ export default class DatePicker extends Component {
           mode: datePickerType,
           allowInput: allowInput ?? true,
           dateFormat: dateFormat,
-          locale: l10n[locale],
+          locale: localeData,
           minDate: minDate,
           maxDate: maxDate,
           plugins: [
