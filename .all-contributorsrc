@@ -764,6 +764,15 @@
       "contributions": [
         "code"
       ]
+    },
+    {
+      "login": "AndrisJefimovs",
+      "name": "Andris Jefimovs",
+      "avatar_url": "https://avatars.githubusercontent.com/u/58335696",
+      "profile": "https://github.com/AndrisJefimovs/",
+      "contributions": [
+        "design"
+      ]
     }
   ],
   "commitConvention": "none"
