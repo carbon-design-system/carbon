@@ -11,10 +11,12 @@
 
 @import '../../globals/scss/vars';
 @import '../../globals/scss/layout';
+@import '../../globals/scss/component-tokens';
 @import '../../globals/scss/vendor/@carbon/elements/scss/import-once/import-once';
 @import '../../globals/scss/helper-mixins';
 @import '../../globals/scss/css--reset';
 @import 'mixins';
+@import 'tokens';
 
 /// Toast notification styles
 /// @access private
@@ -71,8 +73,7 @@
   }
 
   .#{$prefix}--toast-notification--low-contrast {
-    // Stop-gap to ensure color contrast (vs. fixed background color) until we have component-specific theme tokens
-    color: map-get($carbon--theme--white, 'text-01');
+    color: $text-01;
   }
 
   .#{$prefix}--toast-notification--error {
@@ -82,7 +83,7 @@
   .#{$prefix}--toast-notification--low-contrast.#{$prefix}--toast-notification--error {
     @include notification--experimental(
       $support-01,
-      $notification-error-background-color
+      get-token-value($notification-colors, 'notification-background-error')
     );
   }
 
@@ -93,7 +94,7 @@
   .#{$prefix}--toast-notification--low-contrast.#{$prefix}--toast-notification--success {
     @include notification--experimental(
       $support-02,
-      $notification-success-background-color
+      get-token-value($notification-colors, 'notification-background-success')
     );
   }
 
@@ -106,7 +107,7 @@
   .#{$prefix}--toast-notification--low-contrast.#{$prefix}--toast-notification--info-square {
     @include notification--experimental(
       $support-04,
-      $notification-info-background-color
+      get-token-value($notification-colors, 'notification-background-info')
     );
   }
 
@@ -119,7 +120,7 @@
   .#{$prefix}--toast-notification--low-contrast.#{$prefix}--toast-notification--warning-alt {
     @include notification--experimental(
       $support-03,
-      $notification-warning-background-color
+      get-token-value($notification-colors, 'notification-background-warning')
     );
   }
 
@@ -181,7 +182,7 @@
   .#{$prefix}--toast-notification--low-contrast
     .#{$prefix}--toast-notification__close-button
     .#{$prefix}--toast-notification__close-icon {
-    fill: map-get($carbon--theme--white, 'text-01');
+    fill: $icon-01;
   }
 
   .#{$prefix}--toast-notification__title {
@@ -203,8 +204,7 @@
 
   .#{$prefix}--toast-notification--low-contrast
     .#{$prefix}--toast-notification__subtitle {
-    // Stop-gap to ensure color contrast (vs. fixed background color) until we have component-specific theme tokens
-    color: map-get($carbon--theme--white, 'text-01');
+    color: $text-01;
   }
 
   .#{$prefix}--toast-notification__caption {
@@ -216,8 +216,7 @@
 
   .#{$prefix}--toast-notification--low-contrast
     .#{$prefix}--toast-notification__caption {
-    // Stop-gap to ensure color contrast (vs. fixed background color) until we have component-specific theme tokens
-    color: map-get($carbon--theme--white, 'text-01');
+    color: $text-01;
   }
 }
 
