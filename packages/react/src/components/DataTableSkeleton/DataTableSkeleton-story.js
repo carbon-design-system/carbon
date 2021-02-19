@@ -16,11 +16,11 @@ const props = () => ({
   headers: array(
     'Optional table headers (headers)',
     [
-      { key: 'name' },
-      { key: 'protocol' },
-      { key: 'port' },
-      { key: 'rule' },
-      { key: 'attached-groups' },
+      { key: 'Name' },
+      { key: 'Protocol' },
+      { key: 'Port' },
+      { key: 'Rule' },
+      { key: 'Attached Groups' },
     ],
     ','
   ),
