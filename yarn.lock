@@ -9333,7 +9333,7 @@ __metadata:
     mock-raf: ^1.0.0
     node-sass: ^4.13.1
     nodemon: ^1.18.7
-    path-to-regexp: ^2.2.0
+    path-to-regexp: ^6.2.0
     portscanner: ^2.2.0
     postcss-custom-properties: ^9.0.0
     postcss-loader: ^3.0.0
@@ -24579,10 +24579,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"path-to-regexp@npm:^2.2.0":
-  version: 2.4.0
-  resolution: "path-to-regexp@npm:2.4.0"
-  checksum: 643c15bf32ce32ad4c0ea378f88a3400c0ab3f1178d2b77ffd2f2d3700637e9e15cf92eb3e94a1d75d701e52f9cc1f1a179c1f7477abb3b6089786d3f96787b0
+"path-to-regexp@npm:^6.2.0":
+  version: 6.2.0
+  resolution: "path-to-regexp@npm:6.2.0"
+  checksum: 4116de71f5453163910347f199ab28fdd07f4053ed88093acb42dc044a2e5e7d9e18379e81e8d5d982d1b88291be3666e56be34a0741298673248fd21e3c1c16
   languageName: node
   linkType: hard
 
