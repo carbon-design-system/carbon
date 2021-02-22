@@ -12,12 +12,13 @@ import { themes } from '@storybook/theming';
 import { configureActions } from '@storybook/addon-actions';
 import { CARBON_CURRENT_THEME, CARBON_TYPE_TOKEN } from './shared';
 import Container from './Container';
-import PackageInfo from './../package.json';
+import carbonTheme from './theme';
 
 const customPropertyPrefix = 'cds';
 
 addParameters({
   options: {
+    theme: carbonTheme,
     /**
      * We sort our stories by default alphabetically, however there are specific
      * keywords that will be sorted further down the sidebar, including
@@ -84,12 +85,6 @@ addParameters({
       // By default, if we have no matches we'll do a locale compare between the
       // two ids
       return idA.localeCompare(idB);
-    },
-    theme: {
-      ...themes.light,
-      brandTitle: `Carbon Components React v${PackageInfo.version}`,
-      brandUrl:
-        'https://github.com/carbon-design-system/carbon/tree/master/packages/react',
     },
   },
 });
