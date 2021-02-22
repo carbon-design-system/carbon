@@ -12,6 +12,6 @@ import { syncThemeColorStyles } from '../../sharedStyles/themes';
 export function sync() {
   command('commands/themes/sync', () => {
     const document = Document.getSelectedDocument();
-    syncThemeColorStyles(document, 'fill');
+    syncThemeColorStyles(document);
   });
 }

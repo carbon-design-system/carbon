@@ -37,11 +37,10 @@ export default {
   },
 };
 
-export const Default = () => <CopyButton {...props()} />;
+export const _Default = () => <CopyButton />;
 
-Default.parameters = {
-  info: {
-    text:
-      'The copy button can be used when the user needs to copy information, such as a code snippet, to their clipboard.',
-  },
+_Default.story = {
+  name: 'Copy Button',
 };
+
+export const Playground = () => <CopyButton {...props()} />;
