@@ -6,7 +6,7 @@
  */
 
 import { getAttributes } from '@carbon/icon-helpers';
-import { h } from 'vue';
+import * as Vue from 'vue';
 
 const getSvgAttrs = (title, svgAttrs, componentAttrs) => {
   return getAttributes({
@@ -50,14 +50,14 @@ const createSVGComponent = (name, svgAttrs, svgContent) => ({
   // as it is not a valid attribute for an SVG HTML element
   props: { title: String },
   name: name,
-  ...(h
+  ...(Vue.h
     ? {
         // Vue 3 component
         setup({ title }, { attrs: componentAttrs, slots }) {
           return () =>
-            h('svg', getSvgAttrs(title, svgAttrs, componentAttrs), [
-              ...(title ? [h('title', title)] : []),
-              ...svgContent.map(({ elem, attrs }) => h(elem, attrs)),
+            Vue.h('svg', getSvgAttrs(title, svgAttrs, componentAttrs), [
+              ...(title ? [Vue.h('title', title)] : []),
+              ...svgContent.map(({ elem, attrs }) => Vue.h(elem, attrs)),
               ...(slots.default ? slots.default() : []),
             ]);
         },
