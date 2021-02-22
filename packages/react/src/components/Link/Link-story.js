@@ -42,13 +42,12 @@ export default {
   },
 };
 
-export const Default = () => <Link {...props()}>Link</Link>;
+export const _Default = () => (
+  <Link href="http://www.carbondesignsystem.com">Link</Link>
+);
 
-Default.parameters = {
-  info: {
-    text: `
-            Links are typically used as a means of navigation either within the application, to a place outside, or to a resource.
-            For anything else, especially things that change data, you should be using a button.
-          `,
-  },
+_Default.story = {
+  name: 'Link',
 };
+
+export const Playground = () => <Link {...props()}>Link</Link>;
