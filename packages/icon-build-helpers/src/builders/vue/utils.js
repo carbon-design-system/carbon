@@ -8,6 +8,15 @@
 import { getAttributes } from '@carbon/icon-helpers';
 import * as Vue from 'vue';
 
+// Note: we dynamically access keys on the Vue namespace so that rollup does not
+// automatically rewrite the binding into `import { h } from 'vue'` as this is
+// currently causing issues in Vue 2 environments
+function getVueExport(key) {
+  return Vue[key];
+}
+
+const h = getVueExport('h');
+
 const getSvgAttrs = (title, svgAttrs, componentAttrs) => {
   return getAttributes({
     ...svgAttrs,
@@ -50,14 +59,14 @@ const createSVGComponent = (name, svgAttrs, svgContent) => ({
   // as it is not a valid attribute for an SVG HTML element
   props: { title: String },
   name: name,
-  ...(Vue.h
+  ...(h
     ? {
         // Vue 3 component
         setup({ title }, { attrs: componentAttrs, slots }) {
           return () =>
-            Vue.h('svg', getSvgAttrs(title, svgAttrs, componentAttrs), [
-              ...(title ? [Vue.h('title', title)] : []),
-              ...svgContent.map(({ elem, attrs }) => Vue.h(elem, attrs)),
+            h('svg', getSvgAttrs(title, svgAttrs, componentAttrs), [
+              ...(title ? [h('title', title)] : []),
+              ...svgContent.map(({ elem, attrs }) => h(elem, attrs)),
               ...(slots.default ? slots.default() : []),
             ]);
         },
