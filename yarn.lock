@@ -2198,23 +2198,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@emotion/core@npm:^10.0.20, @emotion/core@npm:^10.0.9":
-  version: 10.0.27
-  resolution: "@emotion/core@npm:10.0.27"
-  dependencies:
-    "@babel/runtime": ^7.5.5
-    "@emotion/cache": ^10.0.27
-    "@emotion/css": ^10.0.27
-    "@emotion/serialize": ^0.11.15
-    "@emotion/sheet": 0.9.4
-    "@emotion/utils": 0.11.3
-  peerDependencies:
-    react: ">=16.3.0"
-  checksum: e64cde15423ae7ee11a9c14a8f576b583b7b27521cb634ad9409ddb8a127a1a1480aa65e30cc3d442140a07dbe4c3f2c8becdec43a131ad443dae157c4763ee5
-  languageName: node
-  linkType: hard
-
-"@emotion/core@npm:^10.1.1":
+"@emotion/core@npm:^10.0.20, @emotion/core@npm:^10.0.9, @emotion/core@npm:^10.1.1":
   version: 10.1.1
   resolution: "@emotion/core@npm:10.1.1"
   dependencies:
@@ -24919,16 +24903,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"polished@npm:^3.3.1":
-  version: 3.4.2
-  resolution: "polished@npm:3.4.2"
-  dependencies:
-    "@babel/runtime": ^7.6.3
-  checksum: a8c3f0961ee6928ad2c8a37b8807ceba80f0371c32ecf555400b8cae7ee103bdb89160f20300e0b51f1331c0505718f4f1c4924dcc20a6baaada23e4db970f5f
-  languageName: node
-  linkType: hard
-
-"polished@npm:^3.4.4":
+"polished@npm:^3.3.1, polished@npm:^3.4.4":
   version: 3.7.1
   resolution: "polished@npm:3.7.1"
   dependencies:
