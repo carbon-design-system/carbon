@@ -81,10 +81,15 @@ function ContextMenuOption({
   function handleKeyDown(event) {
     if (
       clickedElementHasSubnodes(event) &&
-      (match(event, keys.ArrowRight) || match(event, keys.Enter))
+      (match(event, keys.ArrowRight) ||
+        match(event, keys.Enter) ||
+        match(event, keys.Space))
     ) {
       openSubmenu(true);
-    } else if (match(event, keys.Enter) && onClick) {
+    } else if (
+      (match(event, keys.Enter) || match(event, keys.Space)) &&
+      onClick
+    ) {
       onClick(event);
     }
   }

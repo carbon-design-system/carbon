@@ -54,7 +54,10 @@ const ContextMenu = function ContextMenu({
   }
 
   function handleKeyDown(event) {
-    if (event.target.tagName === 'LI' && match(event, keys.Enter)) {
+    if (
+      event.target.tagName === 'LI' &&
+      (match(event, keys.Enter) || match(event, keys.Space))
+    ) {
       handleClick(event);
     } else {
       event.stopPropagation();
