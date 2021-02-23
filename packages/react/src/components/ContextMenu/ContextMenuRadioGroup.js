@@ -7,10 +7,8 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
-import { settings } from 'carbon-components';
+import ContextMenuGroup from './ContextMenuGroup';
 import ContextMenuRadioGroupOptions from './ContextMenuRadioGroupOptions';
-
-const { prefix } = settings;
 
 function ContextMenuRadioGroup({
   items,
@@ -19,18 +17,13 @@ function ContextMenuRadioGroup({
   onChange = () => {},
 }) {
   return (
-    <li role="none">
-      <ul
-        className={`${prefix}--context-menu-radio-group`}
-        aria-label={label}
-        role="group">
-        <ContextMenuRadioGroupOptions
-          items={items}
-          initialSelectedItem={initialSelectedItem}
-          onChange={onChange}
-        />
-      </ul>
-    </li>
+    <ContextMenuGroup label={label}>
+      <ContextMenuRadioGroupOptions
+        items={items}
+        initialSelectedItem={initialSelectedItem}
+        onChange={onChange}
+      />
+    </ContextMenuGroup>
   );
 }
 

@@ -196,6 +196,7 @@ describe('Carbon Components React', () => {
         "UnorderedList",
         "unstable_ContextMenu",
         "unstable_ContextMenuDivider",
+        "unstable_ContextMenuGroup",
         "unstable_ContextMenuItem",
         "unstable_ContextMenuRadioGroup",
         "unstable_ContextMenuSelectableItem",

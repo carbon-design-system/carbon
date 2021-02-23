@@ -7581,6 +7581,17 @@ Map {
   },
   "unstable_ContextMenu" => Object {
     "ContextMenuDivider": Object {},
+    "ContextMenuGroup": Object {
+      "propTypes": Object {
+        "children": Object {
+          "type": "node",
+        },
+        "label": Object {
+          "isRequired": true,
+          "type": "node",
+        },
+      },
+    },
     "ContextMenuItem": Object {
       "propTypes": Object {
         "children": Object {
@@ -7656,6 +7667,18 @@ Map {
       },
     },
   },
+  "unstable_ContextMenuDivider" => Object {},
+  "unstable_ContextMenuGroup" => Object {
+    "propTypes": Object {
+      "children": Object {
+        "type": "node",
+      },
+      "label": Object {
+        "isRequired": true,
+        "type": "node",
+      },
+    },
+  },
   "unstable_ContextMenuItem" => Object {
     "propTypes": Object {
       "children": Object {
@@ -7670,21 +7693,6 @@ Map {
       },
       "shortcut": Object {
         "type": "node",
-      },
-    },
-  },
-  "unstable_ContextMenuDivider" => Object {},
-  "unstable_ContextMenuSelectableItem" => Object {
-    "propTypes": Object {
-      "initialChecked": Object {
-        "type": "bool",
-      },
-      "label": Object {
-        "isRequired": true,
-        "type": "node",
-      },
-      "onChange": Object {
-        "type": "func",
       },
     },
   },
@@ -7705,6 +7713,20 @@ Map {
       "label": Object {
         "isRequired": true,
         "type": "string",
+      },
+      "onChange": Object {
+        "type": "func",
+      },
+    },
+  },
+  "unstable_ContextMenuSelectableItem" => Object {
+    "propTypes": Object {
+      "initialChecked": Object {
+        "type": "bool",
+      },
+      "label": Object {
+        "isRequired": true,
+        "type": "node",
       },
       "onChange": Object {
         "type": "func",

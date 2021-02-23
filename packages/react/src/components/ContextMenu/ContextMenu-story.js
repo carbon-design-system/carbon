@@ -10,10 +10,11 @@ import { action } from '@storybook/addon-actions';
 import { InlineNotification } from '../Notification';
 
 import ContextMenu, {
-  ContextMenuItem,
   ContextMenuDivider,
-  ContextMenuSelectableItem,
+  ContextMenuGroup,
+  ContextMenuItem,
   ContextMenuRadioGroup,
+  ContextMenuSelectableItem,
   useContextMenu,
 } from '../ContextMenu';
 
@@ -53,6 +54,7 @@ const Story = (items) => {
           <ContextMenuItem
             label={item.label}
             shortcut={item.shortcut}
+            disabled={item.disabled}
             onClick={!item.children ? action('onClick') : null}>
             {item.children && item.children.map(renderItem)}
           </ContextMenuItem>
@@ -75,6 +77,12 @@ const Story = (items) => {
             initialSelectedItem={item.initialSelectedItem}
             onChange={action('onChange')}
           />
+        );
+      case 'group':
+        return (
+          <ContextMenuGroup label={item.label}>
+            {item.children && item.children.map(renderItem)}
+          </ContextMenuGroup>
         );
     }
   }
@@ -105,7 +113,7 @@ export const _ContextMenu = () =>
     { type: 'item', label: 'Cut', shortcut: '⌘X' },
     { type: 'item', label: 'Copy', shortcut: '⌘C' },
     { type: 'item', label: 'Copy path', shortcut: '⌥⌘C' },
-    { type: 'item', label: 'Paste', shortcut: '⌘V' },
+    { type: 'item', label: 'Paste', shortcut: '⌘V', disabled: true },
     { type: 'item', label: 'Duplicate' },
     { type: 'divider' },
     { type: 'selectable', label: 'Publish', initialChecked: true },
@@ -117,8 +125,14 @@ _ContextMenu.storyName = 'ContextMenu';
 
 export const _MultipleGroups = () =>
   Story([
-    { type: 'item', label: 'Bold' },
-    { type: 'item', label: 'Italic' },
+    {
+      type: 'group',
+      label: 'Font style',
+      children: [
+        { type: 'selectable', label: 'Bold' },
+        { type: 'selectable', label: 'Italic' },
+      ],
+    },
     { type: 'divider' },
     {
       type: 'radiogroup',

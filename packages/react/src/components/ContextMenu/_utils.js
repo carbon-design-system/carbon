@@ -18,27 +18,25 @@ export function focusNode(node) {
 }
 
 export function getValidNodes(list) {
-  const nodes = Array.from(list?.childNodes ?? []).reduce((acc, child) => {
-    if (child.tagName === 'LI') {
-      return [...acc, child];
-    }
+  const { level } = list.dataset;
 
-    if (child.classList.contains(`${prefix}--context-menu-radio-group`)) {
-      return [...acc, ...child.childNodes];
-    }
+  let nodes = [];
 
-    return acc;
-  }, []);
+  if (level) {
+    const submenus = Array.from(list.querySelectorAll('[data-level]'));
+    nodes = Array.from(
+      list.querySelectorAll(`li.${prefix}--context-menu-option`)
+    ).filter((child) => !submenus.some((submenu) => submenu.contains(child)));
+  }
 
   return nodes.filter((node) =>
-    node.matches(
-      `li.${prefix}--context-menu-option:not(.${prefix}--context-menu-option--disabled)`
-    )
+    node.matches(`:not(.${prefix}--context-menu-option--disabled)`)
   );
 }
 
 export function getNextNode(current, direction) {
-  const nodes = getValidNodes(current.parentNode);
+  const menu = getParentMenu(current);
+  const nodes = getValidNodes(menu);
   const currentIndex = nodes.indexOf(current);
 
   const nextNode = nodes[currentIndex + direction];

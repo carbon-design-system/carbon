@@ -6,23 +6,26 @@
  */
 
 import ContextMenu from './ContextMenu';
-import ContextMenuItem from './ContextMenuItem';
 import ContextMenuDivider from './ContextMenuDivider';
-import ContextMenuSelectableItem from './ContextMenuSelectableItem';
+import ContextMenuGroup from './ContextMenuGroup';
+import ContextMenuItem from './ContextMenuItem';
 import ContextMenuRadioGroup from './ContextMenuRadioGroup';
+import ContextMenuSelectableItem from './ContextMenuSelectableItem';
 
-ContextMenu.ContextMenuItem = ContextMenuItem;
 ContextMenu.ContextMenuDivider = ContextMenuDivider;
-ContextMenu.ContextMenuSelectableItem = ContextMenuSelectableItem;
+ContextMenu.ContextMenuGroup = ContextMenuGroup;
+ContextMenu.ContextMenuItem = ContextMenuItem;
 ContextMenu.ContextMenuRadioGroup = ContextMenuRadioGroup;
+ContextMenu.ContextMenuSelectableItem = ContextMenuSelectableItem;
 
 import useContextMenu from './useContextMenu';
 
 export {
-  ContextMenuItem,
   ContextMenuDivider,
-  ContextMenuSelectableItem,
+  ContextMenuGroup,
+  ContextMenuItem,
   ContextMenuRadioGroup,
+  ContextMenuSelectableItem,
   useContextMenu,
 };
 export default ContextMenu;

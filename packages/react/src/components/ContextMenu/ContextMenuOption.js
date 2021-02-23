@@ -84,7 +84,7 @@ function ContextMenuOption({
       (match(event, keys.ArrowRight) || match(event, keys.Enter))
     ) {
       openSubmenu(true);
-    } else if (match(event, keys.Enter)) {
+    } else if (match(event, keys.Enter) && onClick) {
       onClick(event);
     }
   }

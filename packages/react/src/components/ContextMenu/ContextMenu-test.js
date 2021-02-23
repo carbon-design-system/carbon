@@ -106,17 +106,6 @@ describe('ContextMenu', () => {
     });
 
     describe('radiogroup', () => {
-      it('receives the expected classes', () => {
-        const wrapper = mount(
-          <ContextMenuRadioGroup label="Share with" items={['None', 'All']} />
-        );
-        const container = wrapper.childAt(0);
-
-        expect(container.hasClass(`${prefix}--context-menu-radio-group`)).toBe(
-          true
-        );
-      });
-
       it('children have role "menuitemradio"', () => {
         const wrapper = mount(
           <ContextMenuRadioGroup label="Share with" items={['None', 'All']} />

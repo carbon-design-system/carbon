@@ -22,9 +22,10 @@ import {
   getParentMenu,
 } from './_utils';
 
-import ContextMenuSelectableItem from './ContextMenuSelectableItem';
+import ContextMenuGroup from './ContextMenuGroup';
 import ContextMenuRadioGroup from './ContextMenuRadioGroup';
 import ContextMenuRadioGroupOptions from './ContextMenuRadioGroupOptions';
+import ContextMenuSelectableItem from './ContextMenuSelectableItem';
 
 const { prefix } = settings;
 
@@ -233,6 +234,7 @@ const ContextMenu = function ContextMenu({
     role: 'menu',
     tabIndex: -1,
     'data-direction': direction,
+    'data-level': level,
     style: {
       left: `${position[0]}px`,
       top: `${position[1]}px`,
@@ -241,9 +243,13 @@ const ContextMenu = function ContextMenu({
 
   let childrenToRender = options;
 
-  // if the only child is a radio group, don't render radiogroup component, but
-  // only the children to prevent duplicate group markup
-  if (options.length === 1 && options[0].type === ContextMenuRadioGroup) {
+  // if the only child is a radiogroup, don't render it as radiogroup component, but
+  // only the items to prevent duplicate markup
+  if (
+    options &&
+    options.length === 1 &&
+    options[0].type === ContextMenuRadioGroup
+  ) {
     const radioGroupProps = options[0].props;
 
     ulAttributes['aria-label'] = radioGroupProps.label;
@@ -254,6 +260,15 @@ const ContextMenu = function ContextMenu({
         onChange={radioGroupProps.onChange}
       />
     );
+  }
+
+  // if the only child is a generic group, don't render it as group component, but
+  // only the children to prevent duplicate markup
+  if (options && options.length === 1 && options[0].type === ContextMenuGroup) {
+    const groupProps = options[0].props;
+
+    ulAttributes['aria-label'] = groupProps.label;
+    childrenToRender = React.Children.toArray(options[0].props.children);
   }
 
   return (
