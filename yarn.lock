@@ -1640,7 +1640,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@carbon/colors@^10.21.0, @carbon/colors@workspace:packages/colors":
+"@carbon/colors@10.21.0, @carbon/colors@^10.21.0, @carbon/colors@workspace:packages/colors":
   version: 0.0.0-use.local
   resolution: "@carbon/colors@workspace:packages/colors"
   dependencies:
@@ -1691,7 +1691,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@carbon/grid@^10.21.0, @carbon/grid@workspace:packages/grid":
+"@carbon/grid@10.21.0, @carbon/grid@^10.21.0, @carbon/grid@workspace:packages/grid":
   version: 0.0.0-use.local
   resolution: "@carbon/grid@workspace:packages/grid"
   dependencies:
@@ -1814,7 +1814,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@carbon/layout@^10.19.0, @carbon/layout@workspace:packages/layout":
+"@carbon/layout@10.19.0, @carbon/layout@^10.19.0, @carbon/layout@workspace:packages/layout":
   version: 0.0.0-use.local
   resolution: "@carbon/layout@workspace:packages/layout"
   dependencies:
@@ -1827,7 +1827,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@carbon/motion@^10.14.0, @carbon/motion@workspace:packages/motion":
+"@carbon/motion@10.14.0, @carbon/motion@^10.14.0, @carbon/motion@workspace:packages/motion":
   version: 0.0.0-use.local
   resolution: "@carbon/motion@workspace:packages/motion"
   dependencies:
@@ -1885,6 +1885,20 @@ __metadata:
   languageName: unknown
   linkType: soft
 
+"@carbon/styles@workspace:packages/styles":
+  version: 0.0.0-use.local
+  resolution: "@carbon/styles@workspace:packages/styles"
+  dependencies:
+    "@carbon/colors": 10.21.0
+    "@carbon/grid": 10.21.0
+    "@carbon/layout": 10.19.0
+    "@carbon/motion": 10.14.0
+    "@carbon/test-utils": 10.15.0
+    "@carbon/themes": 10.28.0
+    "@carbon/type": 10.22.0
+  languageName: unknown
+  linkType: soft
+
 "@carbon/telemetry@npm:0.0.0-alpha.6":
   version: 0.0.0-alpha.6
   resolution: "@carbon/telemetry@npm:0.0.0-alpha.6"
@@ -1905,7 +1919,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@carbon/test-utils@^10.15.0, @carbon/test-utils@workspace:packages/test-utils":
+"@carbon/test-utils@10.15.0, @carbon/test-utils@^10.15.0, @carbon/test-utils@workspace:packages/test-utils":
   version: 0.0.0-use.local
   resolution: "@carbon/test-utils@workspace:packages/test-utils"
   dependencies:
@@ -1922,7 +1936,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@carbon/themes@^10.28.0, @carbon/themes@workspace:packages/themes":
+"@carbon/themes@10.28.0, @carbon/themes@^10.28.0, @carbon/themes@workspace:packages/themes":
   version: 0.0.0-use.local
   resolution: "@carbon/themes@workspace:packages/themes"
   dependencies:
@@ -1943,7 +1957,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@carbon/type@^10.22.0, @carbon/type@workspace:packages/type":
+"@carbon/type@10.22.0, @carbon/type@^10.22.0, @carbon/type@workspace:packages/type":
   version: 0.0.0-use.local
   resolution: "@carbon/type@workspace:packages/type"
   dependencies:
