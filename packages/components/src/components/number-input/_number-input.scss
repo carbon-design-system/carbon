@@ -185,6 +185,7 @@
     }
   }
 
+  // set orders to facilitate styling for rule dividers
   .#{$prefix}--number__control-btn.down-icon {
     order: 1;
   }
@@ -193,6 +194,7 @@
     order: 2;
   }
 
+  // add top and bottom outlines to number controls when input is focused
   .#{$prefix}--number
     input[type='number']:focus
     ~ .#{$prefix}--number__controls
@@ -258,6 +260,7 @@
     }
   }
 
+  // rule divider styles
   .#{$prefix}--number__controls
     .#{$prefix}--number__rule-divider:first-of-type {
     left: 0;
