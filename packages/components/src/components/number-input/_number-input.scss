@@ -211,10 +211,14 @@
     ~ .#{$prefix}--number__controls
     .#{$prefix}--number__control-btn {
     border-bottom-width: 0;
+  }
 
-    &:hover {
-      @include focus-outline('invalid');
-    }
+  // add invalid outline to number controls only when invalid input is not focused
+  .#{$prefix}--number
+    input[type='number'][data-invalid]:not(:focus)
+    ~ .#{$prefix}--number__controls
+    .#{$prefix}--number__control-btn:hover {
+    @include focus-outline('invalid');
   }
 
   .#{$prefix}--number
