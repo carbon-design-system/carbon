@@ -43,64 +43,95 @@ const InfoBanners = () => (
   </>
 );
 
-export const _ContextMenu = () => {
+const Story = (items) => {
   const contextMenuProps = useContextMenu();
+
+  function renderItem(item) {
+    switch (item.type) {
+      case 'item':
+        return (
+          <ContextMenuItem
+            label={item.label}
+            shortcut={item.shortcut}
+            onClick={!item.children ? action('onClick') : null}>
+            {item.children && item.children.map(renderItem)}
+          </ContextMenuItem>
+        );
+      case 'divider':
+        return <ContextMenuDivider />;
+      case 'selectable':
+        return (
+          <ContextMenuSelectableItem
+            label={item.label}
+            initialChecked={item.initialChecked}
+            onChange={action('onChange')}
+          />
+        );
+      case 'radiogroup':
+        return (
+          <ContextMenuRadioGroup
+            label={item.label}
+            items={item.items}
+            initialSelectedItem={item.initialSelectedItem}
+            onChange={action('onChange')}
+          />
+        );
+    }
+  }
 
   return (
     <div style={{ height: 'calc(100vh - 6.25rem)' }}>
       <InfoBanners />
-      <ContextMenu {...contextMenuProps}>
-        <ContextMenuItem label="Share with">
-          <ContextMenuRadioGroup
-            label="Share with"
-            items={['None', 'Product team', 'Organization', 'Company']}
-            initialSelectedItem="Product team"
-            onChange={action('onChange')}
-          />
-        </ContextMenuItem>
-        <ContextMenuDivider />
-        <ContextMenuItem
-          label="Cut"
-          shortcut="⌘X"
-          onClick={action('onClick')}
-        />
-        <ContextMenuItem
-          label="Copy"
-          shortcut="⌘C"
-          onClick={action('onClick')}
-        />
-        <ContextMenuItem
-          label="Copy path"
-          shortcut="⌥⌘C"
-          onClick={action('onClick')}
-        />
-        <ContextMenuItem
-          label="Paste"
-          shortcut="⌘V"
-          disabled
-          onClick={action('onClick')}
-        />
-        <ContextMenuItem label="Duplicate" onClick={action('onClick')} />
-        <ContextMenuDivider />
-        <ContextMenuSelectableItem
-          label="Publish"
-          initialChecked
-          onChange={action('onChange')}
-        />
-        <ContextMenuDivider />
-        <ContextMenuItem
-          label="Rename"
-          shortcut="↩︎"
-          onClick={action('onClick')}
-        />
-        <ContextMenuItem
-          label="Delete"
-          shortcut="⌘⌫"
-          onClick={action('onClick')}
-        />
-      </ContextMenu>
+      <ContextMenu {...contextMenuProps}>{items.map(renderItem)}</ContextMenu>
     </div>
   );
 };
 
+export const _ContextMenu = () =>
+  Story([
+    {
+      type: 'item',
+      label: 'Share with',
+      children: [
+        {
+          type: 'radiogroup',
+          label: 'Share with',
+          items: ['None', 'Product team', 'Organization', 'Company'],
+          initialSelectedItem: 'Product team',
+        },
+      ],
+    },
+    { type: 'divider' },
+    { type: 'item', label: 'Cut', shortcut: '⌘X' },
+    { type: 'item', label: 'Copy', shortcut: '⌘C' },
+    { type: 'item', label: 'Copy path', shortcut: '⌥⌘C' },
+    { type: 'item', label: 'Paste', shortcut: '⌘V' },
+    { type: 'item', label: 'Duplicate' },
+    { type: 'divider' },
+    { type: 'selectable', label: 'Publish', initialChecked: true },
+    { type: 'divider' },
+    { type: 'item', label: 'Rename', shortcut: '↩︎' },
+    { type: 'item', label: 'Delete', shortcut: '⌘⌫' },
+  ]);
 _ContextMenu.storyName = 'ContextMenu';
+
+export const _MultipleGroups = () =>
+  Story([
+    { type: 'item', label: 'Bold' },
+    { type: 'item', label: 'Italic' },
+    { type: 'divider' },
+    {
+      type: 'radiogroup',
+      label: 'Text color',
+      items: ['Black', 'Blue', 'Red', 'Green'],
+      initialSelectedItem: 'Black',
+    },
+    { type: 'divider' },
+    {
+      type: 'radiogroup',
+      label: 'Text decoration',
+      items: ['None', 'Overline', 'Line-through', 'Underline'],
+      initialSelectedItem: 'None',
+    },
+  ]);
+_MultipleGroups.storyName = 'MultipleGroups';
