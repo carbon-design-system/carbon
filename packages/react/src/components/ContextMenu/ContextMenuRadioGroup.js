@@ -5,11 +5,10 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React, { useState } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import { settings } from 'carbon-components';
-import { Checkmark16 } from '@carbon/icons-react';
-import ContextMenuOption from './ContextMenuOption';
+import ContextMenuRadioGroupOptions from './ContextMenuRadioGroupOptions';
 
 const { prefix } = settings;
 
@@ -19,38 +18,19 @@ function ContextMenuRadioGroup({
   label,
   onChange = () => {},
 }) {
-  const [selected, setSelected] = useState(initialSelectedItem);
-
-  function handleClick(option) {
-    setSelected(option);
-    onChange(option);
-  }
-
-  const options = items.map((option, i) => {
-    const isSelected = selected === option;
-
-    return (
-      <ContextMenuOption
-        key={i}
-        role="menuitemradio"
-        aria-checked={isSelected}
-        renderIcon={isSelected ? Checkmark16 : null}
-        label={option}
-        indented
-        onClick={() => {
-          handleClick(option);
-        }}
-      />
-    );
-  });
-
   return (
-    <ul
-      className={`${prefix}--context-menu-radio-group`}
-      aria-label={label}
-      role="group">
-      {options}
-    </ul>
+    <li role="none">
+      <ul
+        className={`${prefix}--context-menu-radio-group`}
+        aria-label={label}
+        role="group">
+        <ContextMenuRadioGroupOptions
+          items={items}
+          initialSelectedItem={initialSelectedItem}
+          onChange={onChange}
+        />
+      </ul>
+    </li>
   );
 }
 

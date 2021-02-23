@@ -24,6 +24,7 @@ import {
 
 import ContextMenuSelectableItem from './ContextMenuSelectableItem';
 import ContextMenuRadioGroup from './ContextMenuRadioGroup';
+import ContextMenuRadioGroupOptions from './ContextMenuRadioGroupOptions';
 
 const { prefix } = settings;
 
@@ -225,22 +226,39 @@ const ContextMenu = function ContextMenu({
     [`${prefix}--context-menu--root`]: isRootMenu,
   });
 
+  const ulAttributes = {
+    className: classes,
+    onKeyDown: handleKeyDown,
+    onClick: handleClick,
+    role: 'menu',
+    tabIndex: -1,
+    'data-direction': direction,
+    style: {
+      left: `${position[0]}px`,
+      top: `${position[1]}px`,
+    },
+  };
+
+  let childrenToRender = options;
+
+  // if the only child is a radio group, don't render radiogroup component, but
+  // only the children to prevent duplicate group markup
+  if (options.length === 1 && options[0].type === ContextMenuRadioGroup) {
+    const radioGroupProps = options[0].props;
+
+    ulAttributes['aria-label'] = radioGroupProps.label;
+    childrenToRender = (
+      <ContextMenuRadioGroupOptions
+        items={radioGroupProps.items}
+        initialSelectedItem={radioGroupProps.initialSelectedItem}
+        onChange={radioGroupProps.onChange}
+      />
+    );
+  }
+
   return (
     <ClickListener onClickOutside={handleClickOutside} ref={rootRef}>
-      <ul
-        open={open}
-        className={classes}
-        onKeyDown={handleKeyDown}
-        onClick={handleClick}
-        role="menu"
-        tabIndex={-1}
-        data-direction={direction}
-        style={{
-          left: `${position[0]}px`,
-          top: `${position[1]}px`,
-        }}>
-        {options}
-      </ul>
+      <ul {...ulAttributes}>{childrenToRender}</ul>
     </ClickListener>
   );
 };
