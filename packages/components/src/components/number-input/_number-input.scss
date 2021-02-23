@@ -134,7 +134,8 @@
       top: rem(2px);
       display: block;
       width: rem(2px);
-      height: calc(100% - 4px);
+      // height: calc(100% - 4px) is calculated differently in Safari
+      height: rem(36px);
       background-color: $field-01;
       content: '';
     }
@@ -432,6 +433,12 @@
 
   .#{$prefix}--number--xl .#{$prefix}--number__control-btn {
     width: rem(48px);
+
+    &::before,
+    &::after {
+      // height: calc(100% - 4px) is calculated differently in Safari
+      height: rem(44px);
+    }
   }
 
   .#{$prefix}--number--xl.#{$prefix}--number--mobile
@@ -450,6 +457,12 @@
 
   .#{$prefix}--number--sm .#{$prefix}--number__control-btn {
     width: rem(32px);
+
+    &::before,
+    &::after {
+      // height: calc(100% - 4px) is calculated differently in Safari
+      height: rem(28px);
+    }
   }
 
   .#{$prefix}--number--sm.#{$prefix}--number--mobile
