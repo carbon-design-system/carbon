@@ -1601,7 +1601,7 @@ __metadata:
     "@babel/core": ^7.12.13
     "@carbon/cli-reporter": ^10.4.0
     "@octokit/plugin-retry": ^3.0.7
-    "@octokit/plugin-throttling": ^2.6.0
+    "@octokit/plugin-throttling": ^3.4.1
     "@octokit/rest": ^16.28.1
     "@rollup/plugin-babel": ^5.2.2
     "@rollup/plugin-commonjs": ^17.0.0
@@ -3846,10 +3846,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@octokit/openapi-types@npm:^4.0.0":
-  version: 4.0.1
-  resolution: "@octokit/openapi-types@npm:4.0.1"
-  checksum: 81734f111b43811335874eeec9f8339973223f07117cedafc9757fb4c840057768d4ea15019b74be7648017becaab03e053d73a8dfb5d3f8a5f88e30621a81a1
+"@octokit/openapi-types@npm:^5.1.0":
+  version: 5.1.1
+  resolution: "@octokit/openapi-types@npm:5.1.1"
+  checksum: bddf08ca8cb5f21b2dad0eac942a2c085d46bcf173b70a3032ee51a8888b1cba37cbc592a1fbe449506b0052a63c1adec1a7e9d58a9e22f8dd6dbfc6f3c350ae
   languageName: node
   linkType: hard
 
@@ -3896,12 +3896,15 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@octokit/plugin-throttling@npm:^2.6.0":
-  version: 2.7.1
-  resolution: "@octokit/plugin-throttling@npm:2.7.1"
+"@octokit/plugin-throttling@npm:^3.4.1":
+  version: 3.4.1
+  resolution: "@octokit/plugin-throttling@npm:3.4.1"
   dependencies:
+    "@octokit/types": ^6.0.1
     bottleneck: ^2.15.3
-  checksum: 2c4d5d3642649ec16499fe18b56a7ee8ab1fbb8663d09d2d176eae7a3ed6ae38a6ea4c67eb9d74edec69115e961f10e4ab0fc64e34bda225e227260dc971ca5d
+  peerDependencies:
+    "@octokit/core": ^3.0.0
+  checksum: d5411fcab6e4ad7dd8834852aab7d245ba91403d36c12230ec48e65d79deae13685359130061b4c0d459083859536890e11a0846e72abd0172017d14baf301df
   languageName: node
   linkType: hard
 
@@ -3965,13 +3968,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@octokit/types@npm:^6.0.3":
-  version: 6.8.2
-  resolution: "@octokit/types@npm:6.8.2"
+"@octokit/types@npm:^6.0.1, @octokit/types@npm:^6.0.3":
+  version: 6.10.0
+  resolution: "@octokit/types@npm:6.10.0"
   dependencies:
-    "@octokit/openapi-types": ^4.0.0
-    "@types/node": ">= 8"
-  checksum: 27876139be723ca39da61e1e7d9bf52b2983b83c703c77641095f2f5d6b3bb34e432ca6d9d823e6b076ae8349cd20ac34ce25c707b168166f7c8a268b9e853c8
+    "@octokit/openapi-types": ^5.1.0
+  checksum: ba93f4f721ee73264feee1ec347d5a7eb76a81857c04a8d0dbd9f48b1eca0d892bb59dc623f14e38ada04539c461b2b5b628d6d6bb36348d89f78eb4ae672dab
   languageName: node
   linkType: hard
 
