@@ -43,7 +43,7 @@ const props = () => ({
 });
 
 export default {
-  title: 'DataTable',
+  title: 'Components/DataTable',
   component: DataTable,
   subcomponents: {
     TableContainer,

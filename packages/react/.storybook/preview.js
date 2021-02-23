@@ -40,6 +40,7 @@ addParameters({
       // determine order later on.
       const UNKNOWN_KEYWORD = 3;
       const keywords = new Map([
+        ['welcome', 0],
         ['default', 1],
         ['usage', 2],
         ['playground', 4],
@@ -67,6 +68,8 @@ addParameters({
         if (idB.includes(keyword)) {
           matches.set(idB, weight);
         }
+
+        console.log(idA);
       }
 
       // If we have matches for either id, then we will compare the ids based on

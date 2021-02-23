@@ -5,7 +5,7 @@ import PackageInfo from './../package.json';
 const {
   field01,
   interactive01,
-  interactive02,
+  selectedUI,
   text01,
   inverse01,
   ui01,
@@ -18,12 +18,12 @@ export default create({
   base: 'light',
 
   colorPrimary: interactive01,
-  colorSecondary: interactive02,
+  colorSecondary: selectedUI,
 
   // UI
   appBg: uiBackground,
   appContentBg: ui01,
-  appBorderColor: ui04,
+  appBorderColor: ui03,
   appBorderRadius: 0,
 
   // Typography
