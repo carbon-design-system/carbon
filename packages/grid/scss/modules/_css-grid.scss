@@ -15,15 +15,15 @@
     var(--cds-grid-columns),
     minmax(0, var(--cds-grid-column-size))
   );
-  column-gap: var(--cds-grid-gutter);
-  padding-left: var(--cds-grid-margin);
-  padding-right: var(--cds-grid-margin);
+  margin-right: auto;
   // These lines include the outer gutter, but if we don't include them then
   // grids with different gutters will align
   // padding-left: calc(var(--cds-grid-margin) + var(--cds-grid-gutter));
   // padding-right: calc(var(--cds-grid-margin) + var(--cds-grid-gutter));
   margin-left: auto;
-  margin-right: auto;
+  padding-right: var(--cds-grid-margin);
+  padding-left: var(--cds-grid-margin);
+  column-gap: var(--cds-grid-gutter);
 }
 
 @mixin subgrid() {
@@ -39,6 +39,7 @@
   --cds-grid-columns: 4;
   --cds-grid-column-size: 1fr;
   --cds-grid-gutter: 2rem;
+  --cds-grid-hang: 1rem;
   --cds-grid-margin: 0;
 
   @include breakpoint(md) {
@@ -71,6 +72,7 @@
     display: none;
   } @else {
     --cds-grid-columns: #{$i};
+
     grid-column: span $i / span $i;
   }
 }
@@ -111,45 +113,54 @@
 
 .#{$prefix}--col-span-25 {
   --cds-grid-columns: 1;
+
   grid-column: span 1;
 
   @include breakpoint(md) {
     --cds-grid-columns: 2;
+
     grid-column: span 2;
   }
 
   @include breakpoint(lg) {
     --cds-grid-columns: 4;
+
     grid-column: span 4;
   }
 }
 
 .#{$prefix}--col-span-50 {
   --cds-grid-columns: 2;
+
   grid-column: span 2;
 
   @include breakpoint(md) {
     --cds-grid-columns: 4;
+
     grid-column: span 4;
   }
 
   @include breakpoint(lg) {
     --cds-grid-columns: 8;
+
     grid-column: span 8;
   }
 }
 
 .#{$prefix}--col-span-75 {
   --cds-grid-columns: 3;
+
   grid-column: span 3;
 
   @include breakpoint(md) {
     --cds-grid-columns: 6;
+
     grid-column: span 6;
   }
 
   @include breakpoint(lg) {
     --cds-grid-columns: 12;
+
     grid-column: span 12;
   }
 }
@@ -204,6 +215,7 @@
 // -----------------------------------------------------------------------------
 .#{$prefix}--css-grid--condensed {
   --cds-grid-gutter: 2px;
+
   column-gap: var(--cds-grid-gutter);
 }
 
@@ -211,7 +223,9 @@
   // This is set to 0px (versus 0) so that the calc expression for padding for
   // a grid container works as epxected. Without the unit, the calc() will
   // result in a value of 0.
+  // stylelint-disable-next-line length-zero-no-unit
   --cds-grid-gutter: 0px;
+
   column-gap: var(--cds-grid-gutter);
 }
 
@@ -219,7 +233,31 @@
 // Hang
 // -----------------------------------------------------------------------------
 .#{$prefix}--hang {
-  padding-left: var(--cds-grid-gutter);
+  padding-left: var(--cds-grid-hang);
+}
+
+// -----------------------------------------------------------------------------
+// Column gutter
+// -----------------------------------------------------------------------------
+.#{$prefix}--gutter {
+  padding-right: var(--cds-grid-hang);
+  padding-left: var(--cds-grid-hang);
+}
+
+.#{$prefix}--gutter-start {
+  padding-left: var(--cds-grid-hang);
+}
+
+[dir='rtl'] .#{$prefix}--gutter-start {
+  padding-right: var(--cds-grid-hang);
+}
+
+.#{$prefix}--gutter-end {
+  padding-left: var(--cds-grid-hang);
+}
+
+[dir='rtl'] .#{$prefix}--gutter-end {
+  padding-left: var(--cds-grid-hang);
 }
 
 // -----------------------------------------------------------------------------
