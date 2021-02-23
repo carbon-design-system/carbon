@@ -45,7 +45,10 @@ function ContextMenuRadioGroup({
   });
 
   return (
-    <ul className={`${prefix}--context-menu-radio-group`} aria-label={label}>
+    <ul
+      className={`${prefix}--context-menu-radio-group`}
+      aria-label={label}
+      role="group">
       {options}
     </ul>
   );
