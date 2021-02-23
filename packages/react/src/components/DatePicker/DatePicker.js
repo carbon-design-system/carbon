@@ -215,15 +215,15 @@ export default class DatePicker extends Component {
         'sk', // Slovak
         'sl', // Slovenian
         'sq', // Albanian
-        'sr-cyr', // Serbian Cyrillic
         'sr', // Serbian
         'sv', // Swedish
         'th', // Thai
         'tr', // Turkish
         'uk', // Ukrainian
         'uz', // Uzbek
+        'uz_latn', // Uzbek Latin
         'vn', // Vietnamese
-        'zh-tw', // Mandarin Traditional
+        'zh_tw', // Mandarin Traditional
         'zh', // Mandarin
       ]),
     ]),

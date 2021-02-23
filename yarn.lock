@@ -9216,7 +9216,7 @@ __metadata:
     css-loader: ^3.4.2
     downshift: 5.2.1
     fast-sass-loader: ^1.5.0
-    flatpickr: 4.6.1
+    flatpickr: 4.6.9
     gzip-size: ^6.0.0
     invariant: ^2.2.3
     lcov2badge: ^0.1.0
@@ -14684,6 +14684,13 @@ __metadata:
   version: 4.6.1
   resolution: "flatpickr@npm:4.6.1"
   checksum: 98486bd9e32c939cc3c62a514de132287abe711c0351f7e37bd9566be88395397e3267b307a4749c0597b7afff770223b7521762b7f365c58f4870431e0455db
+  languageName: node
+  linkType: hard
+
+"flatpickr@npm:4.6.9":
+  version: 4.6.9
+  resolution: "flatpickr@npm:4.6.9"
+  checksum: ffcbe9ab04509f3e725139ad9835f0e7ec1ff025f1ccfafe26139fb37e67f661a048e6a3349ecc7620744fbfa8988e64bec95480024261b01de32c999d62ce38
   languageName: node
   linkType: hard
 
