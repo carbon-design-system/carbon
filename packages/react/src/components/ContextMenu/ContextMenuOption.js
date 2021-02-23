@@ -147,6 +147,7 @@ function ContextMenuOption({
       tabIndex={-1}
       aria-disabled={!subOptions && disabled}
       aria-haspopup={subOptions ? true : null}
+      aria-expanded={subOptions ? submenuOpen : null}
       onKeyDown={handleKeyDown}
       onMouseEnter={subOptions ? handleMouseEnter : null}
       onMouseLeave={subOptions ? handleMouseLeave : null}
