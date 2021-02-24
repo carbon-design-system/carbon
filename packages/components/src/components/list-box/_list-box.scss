@@ -396,17 +396,18 @@ $list-box-menu-width: rem(300px);
     @include button-reset($width: false);
 
     position: absolute;
-    top: 0;
     right: $carbon--spacing-05;
     display: flex;
     align-items: center;
-    height: 100%;
+    justify-content: center;
+    width: rem(24px);
+    height: rem(24px);
+    outline: none;
     cursor: pointer;
     transition: transform $duration--fast-01 motion(standard, productive);
   }
 
   .#{$prefix}--list-box__menu-icon > svg {
-    height: 100%;
     fill: $icon-01;
 
     // Windows, Firefox HCM Fix
@@ -418,6 +419,8 @@ $list-box-menu-width: rem(300px);
   }
 
   .#{$prefix}--list-box__menu-icon--open {
+    justify-content: center;
+    width: rem(24px);
     transform: rotate(180deg);
   }
 
@@ -428,12 +431,12 @@ $list-box-menu-width: rem(300px);
     position: absolute;
     top: 50%;
     /* to preserve .5rem space between icons according to spec top/transform used to center the combobox clear selection icon in IE11 */
-    right: rem(33px);
+    right: rem(36px);
     display: flex;
     align-items: center;
     justify-content: center;
-    width: rem(30px);
-    height: rem(30px);
+    width: rem(24px);
+    height: rem(24px);
     transform: translateY(-50%);
     cursor: pointer;
     transition: background-color $duration--fast-01 motion(standard, productive);
