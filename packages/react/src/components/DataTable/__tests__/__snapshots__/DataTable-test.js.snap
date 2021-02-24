@@ -2016,6 +2016,7 @@ exports[`DataTable should render 1`] = `
             translateWithId={[Function]}
           >
             <div
+              aria-hidden={true}
               className="bx--batch-actions"
             >
               <div
@@ -3021,6 +3022,7 @@ exports[`DataTable sticky header should render 1`] = `
             translateWithId={[Function]}
           >
             <div
+              aria-hidden={true}
               className="bx--batch-actions"
             >
               <div

@@ -10,10 +10,10 @@ import React, { Component } from 'react';
 import classNames from 'classnames';
 import { settings } from 'carbon-components';
 import {
+  Add16,
+  Subtract16,
   WarningFilled16,
   WarningAltFilled16,
-  CaretDownGlyph,
-  CaretUpGlyph,
 } from '@carbon/icons-react';
 import mergeRefs from '../../tools/mergeRefs';
 import requiredIfValueExists from '../../prop-types/requiredIfValueExists';
@@ -426,7 +426,7 @@ class NumberInput extends Component {
                       aria-label={decrementNumLabel || iconDescription}
                       aria-live="polite"
                       aria-atomic="true">
-                      <CaretDownGlyph className="down-icon" />
+                      <Subtract16 className="down-icon" />
                     </button>
                     <input
                       type="number"
@@ -444,7 +444,7 @@ class NumberInput extends Component {
                       aria-label={incrementNumLabel || iconDescription}
                       aria-live="polite"
                       aria-atomic="true">
-                      <CaretUpGlyph className="up-icon" />
+                      <Add16 className="up-icon" />
                     </button>
                   </div>
                 </>
@@ -475,17 +475,6 @@ class NumberInput extends Component {
                   <div className={`${prefix}--number__controls`}>
                     <button
                       type="button"
-                      className={`${prefix}--number__control-btn up-icon`}
-                      {...buttonProps}
-                      onClick={(evt) => this.handleArrowClick(evt, 'up')}
-                      title={incrementNumLabel || iconDescription}
-                      aria-label={incrementNumLabel || iconDescription}
-                      aria-live="polite"
-                      aria-atomic="true">
-                      <CaretUpGlyph className="up-icon" />
-                    </button>
-                    <button
-                      type="button"
                       className={`${prefix}--number__control-btn down-icon`}
                       {...buttonProps}
                       onClick={(evt) => this.handleArrowClick(evt, 'down')}
@@ -493,8 +482,21 @@ class NumberInput extends Component {
                       aria-label={decrementNumLabel || iconDescription}
                       aria-live="polite"
                       aria-atomic="true">
-                      <CaretDownGlyph className="down-icon" />
+                      <Subtract16 className="down-icon" />
                     </button>
+                    <div className={`${prefix}--number__rule-divider`}></div>
+                    <button
+                      type="button"
+                      className={`${prefix}--number__control-btn up-icon`}
+                      {...buttonProps}
+                      onClick={(evt) => this.handleArrowClick(evt, 'up')}
+                      title={incrementNumLabel || iconDescription}
+                      aria-label={incrementNumLabel || iconDescription}
+                      aria-live="polite"
+                      aria-atomic="true">
+                      <Add16 className="up-icon" />
+                    </button>
+                    <div className={`${prefix}--number__rule-divider`}></div>
                   </div>
                 </div>
                 {error ? null : helper}

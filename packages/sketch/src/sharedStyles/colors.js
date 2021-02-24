@@ -14,20 +14,34 @@ import { syncColorStyle } from '../tools/sharedStyles';
 const { black, white, orange, yellow, ...swatches } = colors;
 
 /**
+ * Our shared style name will need to have the `color` namespace alongside a
+ * name for the swatch, the style type, and an optional grade.
+ * @param {object} params - formatSharedColorStyleName parameters
+ * @param {string} params.name
+ * @param {string?} params.grade
+ * @returns {string}
+ */
+function formatSharedColorStyleName({ name, grade }) {
+  return ['color', name.split('-').join(' '), grade]
+    .filter(Boolean)
+    .join(' / ');
+}
+
+/**
  * Sync color shared styles to the given document and return the result
- * @param {Document} document
+ * @param {object} params - syncColorStyles parameters
+ * @param {Document} params.document
  * @returns {Array<SharedStyle>}
  */
-export function syncColorStyles(document, type) {
+export function syncColorStyles({ document }) {
   const sharedStyles = Object.keys(swatches).flatMap((swatchName) => {
     const name = formatTokenName(swatchName);
     const result = Object.keys(swatches[swatchName]).map((grade) => {
-      return syncColorStyle(
+      return syncColorStyle({
         document,
-        formatSharedStyleName(name, type, grade),
-        swatches[swatchName][grade],
-        type
-      );
+        name: formatSharedColorStyleName({ name, grade }),
+        value: swatches[swatchName][grade],
+      });
     });
     return result;
   });
@@ -38,27 +52,12 @@ export function syncColorStyles(document, type) {
     ['orange', orange['40']],
     ['yellow', yellow['30']],
   ].map(([name, value]) => {
-    return syncColorStyle(
+    return syncColorStyle({
       document,
-      formatSharedStyleName(name, type),
+      name: formatSharedColorStyleName({ name }),
       value,
-      type
-    );
+    });
   });
 
   return sharedStyles.concat(singleColors);
-}
-
-/**
- * Our shared style name will need to have the `color` namespace alongside a
- * name for the swatch, the style type, and an optional grade.
- * @param {string} name
- * @param {string} type
- * @param {string?} grade
- * @returns {string}
- */
-function formatSharedStyleName(name, type, grade) {
-  return ['color', type, name.split('-').join(' '), grade]
-    .filter(Boolean)
-    .join(' / ');
 }

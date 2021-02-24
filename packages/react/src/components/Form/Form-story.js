@@ -135,7 +135,7 @@ const buttonEvents = {
 RadioButton.displayName = 'RadioButton';
 
 export default {
-  title: 'Form',
+  title: 'Components/Form',
   decorators: [withKnobs],
 
   parameters: {

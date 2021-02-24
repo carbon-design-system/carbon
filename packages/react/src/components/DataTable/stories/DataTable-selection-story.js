@@ -21,7 +21,7 @@ import { rows, headers } from './shared';
 import mdx from '../DataTable.mdx';
 
 export default {
-  title: 'DataTable/Selection',
+  title: 'Components/DataTable/Selection',
   component: DataTable,
   subcomponents: {
     TableSelectAll,

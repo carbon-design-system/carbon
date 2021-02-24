@@ -384,7 +384,7 @@ MultiSelect.propTypes = {
    * Provide text to be used in a `<label>` element that is tied to the
    * multiselect via ARIA attributes.
    */
-  titleText: PropTypes.string,
+  titleText: PropTypes.node,
 
   /**
    * Callback function for translating ListBoxMenuIcon SVG title

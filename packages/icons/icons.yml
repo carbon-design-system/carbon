@@ -11632,6 +11632,13 @@
     - spacecraft
     - boost
     - launch
+    - deploy
+    - start
+    - send
+    - space
+    - orbit
+    - pitch
+    - propel
   sizes:
     - 32
 - name: rotate

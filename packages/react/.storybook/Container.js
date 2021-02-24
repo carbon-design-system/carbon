@@ -10,7 +10,7 @@ import './polyfills';
 
 import React, { useEffect } from 'react';
 
-function Container({ story }) {
+function Container({ story, id }) {
   useEffect(() => {
     const originalDirection = document.documentElement.dir;
     if (process.env.CARBON_REACT_STORYBOOK_USE_RTL === 'true') {
@@ -28,6 +28,7 @@ function Container({ story }) {
   return (
     <React.StrictMode>
       <div
+        className={id.toLowerCase()}
         data-floating-menu-container
         role="main"
         style={{
