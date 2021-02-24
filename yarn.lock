@@ -1640,7 +1640,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@carbon/colors@^10.21.0, @carbon/colors@workspace:packages/colors":
+"@carbon/colors@10.21.0, @carbon/colors@^10.21.0, @carbon/colors@workspace:packages/colors":
   version: 0.0.0-use.local
   resolution: "@carbon/colors@workspace:packages/colors"
   dependencies:
@@ -1691,7 +1691,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@carbon/grid@^10.21.0, @carbon/grid@workspace:packages/grid":
+"@carbon/grid@10.21.0, @carbon/grid@^10.21.0, @carbon/grid@workspace:packages/grid":
   version: 0.0.0-use.local
   resolution: "@carbon/grid@workspace:packages/grid"
   dependencies:
@@ -1814,7 +1814,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@carbon/layout@^10.19.0, @carbon/layout@workspace:packages/layout":
+"@carbon/layout@10.19.0, @carbon/layout@^10.19.0, @carbon/layout@workspace:packages/layout":
   version: 0.0.0-use.local
   resolution: "@carbon/layout@workspace:packages/layout"
   dependencies:
@@ -1827,7 +1827,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@carbon/motion@^10.14.0, @carbon/motion@workspace:packages/motion":
+"@carbon/motion@10.14.0, @carbon/motion@^10.14.0, @carbon/motion@workspace:packages/motion":
   version: 0.0.0-use.local
   resolution: "@carbon/motion@workspace:packages/motion"
   dependencies:
@@ -1885,6 +1885,20 @@ __metadata:
   languageName: unknown
   linkType: soft
 
+"@carbon/styles@workspace:packages/styles":
+  version: 0.0.0-use.local
+  resolution: "@carbon/styles@workspace:packages/styles"
+  dependencies:
+    "@carbon/colors": 10.21.0
+    "@carbon/grid": 10.21.0
+    "@carbon/layout": 10.19.0
+    "@carbon/motion": 10.14.0
+    "@carbon/test-utils": 10.15.0
+    "@carbon/themes": 10.28.0
+    "@carbon/type": 10.22.0
+  languageName: unknown
+  linkType: soft
+
 "@carbon/telemetry@npm:0.0.0-alpha.6":
   version: 0.0.0-alpha.6
   resolution: "@carbon/telemetry@npm:0.0.0-alpha.6"
@@ -1905,7 +1919,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@carbon/test-utils@^10.15.0, @carbon/test-utils@workspace:packages/test-utils":
+"@carbon/test-utils@10.15.0, @carbon/test-utils@^10.15.0, @carbon/test-utils@workspace:packages/test-utils":
   version: 0.0.0-use.local
   resolution: "@carbon/test-utils@workspace:packages/test-utils"
   dependencies:
@@ -1922,7 +1936,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@carbon/themes@^10.28.0, @carbon/themes@workspace:packages/themes":
+"@carbon/themes@10.28.0, @carbon/themes@^10.28.0, @carbon/themes@workspace:packages/themes":
   version: 0.0.0-use.local
   resolution: "@carbon/themes@workspace:packages/themes"
   dependencies:
@@ -1943,7 +1957,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@carbon/type@^10.22.0, @carbon/type@workspace:packages/type":
+"@carbon/type@10.22.0, @carbon/type@^10.22.0, @carbon/type@workspace:packages/type":
   version: 0.0.0-use.local
   resolution: "@carbon/type@workspace:packages/type"
   dependencies:
@@ -9244,7 +9258,7 @@ __metadata:
     css-loader: ^3.4.2
     downshift: 5.2.1
     fast-sass-loader: ^1.5.0
-    flatpickr: 4.6.1
+    flatpickr: 4.6.9
     gzip-size: ^6.0.0
     invariant: ^2.2.3
     lcov2badge: ^0.1.0
@@ -9375,7 +9389,7 @@ __metadata:
     mock-raf: ^1.0.0
     node-sass: ^4.13.1
     nodemon: ^1.18.7
-    path-to-regexp: ^2.2.0
+    path-to-regexp: ^6.2.0
     portscanner: ^2.2.0
     postcss-custom-properties: ^9.0.0
     postcss-loader: ^3.0.0
@@ -14712,6 +14726,13 @@ __metadata:
   version: 4.6.1
   resolution: "flatpickr@npm:4.6.1"
   checksum: 98486bd9e32c939cc3c62a514de132287abe711c0351f7e37bd9566be88395397e3267b307a4749c0597b7afff770223b7521762b7f365c58f4870431e0455db
+  languageName: node
+  linkType: hard
+
+"flatpickr@npm:4.6.9":
+  version: 4.6.9
+  resolution: "flatpickr@npm:4.6.9"
+  checksum: ffcbe9ab04509f3e725139ad9835f0e7ec1ff025f1ccfafe26139fb37e67f661a048e6a3349ecc7620744fbfa8988e64bec95480024261b01de32c999d62ce38
   languageName: node
   linkType: hard
 
@@ -24621,10 +24642,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"path-to-regexp@npm:^2.2.0":
-  version: 2.4.0
-  resolution: "path-to-regexp@npm:2.4.0"
-  checksum: 643c15bf32ce32ad4c0ea378f88a3400c0ab3f1178d2b77ffd2f2d3700637e9e15cf92eb3e94a1d75d701e52f9cc1f1a179c1f7477abb3b6089786d3f96787b0
+"path-to-regexp@npm:^6.2.0":
+  version: 6.2.0
+  resolution: "path-to-regexp@npm:6.2.0"
+  checksum: 4116de71f5453163910347f199ab28fdd07f4053ed88093acb42dc044a2e5e7d9e18379e81e8d5d982d1b88291be3666e56be34a0741298673248fd21e3c1c16
   languageName: node
   linkType: hard
 
