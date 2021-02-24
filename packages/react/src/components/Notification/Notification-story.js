@@ -42,7 +42,7 @@ const notificationProps = () => ({
 });
 
 export default {
-  title: 'Notifications',
+  title: 'Components/Notifications',
   decorators: [withKnobs],
 
   parameters: {

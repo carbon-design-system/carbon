@@ -22,7 +22,7 @@ import mdx from './StructuredList.mdx';
 const { prefix } = settings;
 
 export default {
-  title: 'StructuredList',
+  title: 'Components/StructuredList',
 
   parameters: {
     component: StructuredListWrapper,

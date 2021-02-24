@@ -40,7 +40,7 @@ const props = () => ({
 });
 
 export default {
-  title: 'TooltipDefinition',
+  title: 'Components/TooltipDefinition',
   decorators: [withKnobs],
 
   parameters: {

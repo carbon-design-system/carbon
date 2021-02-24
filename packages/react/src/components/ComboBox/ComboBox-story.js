@@ -52,7 +52,7 @@ const directions = {
 };
 
 export default {
-  title: 'ComboBox',
+  title: 'Components/ComboBox',
   component: ComboBox,
   parameters: {
     docs: {
