@@ -1,6 +1,5 @@
 {
   "name": "@carbon/feature-flags",
-  "private": true,
   "description": "Build with feature flags in Carbon",
   "version": "0.0.0",
   "license": "Apache-2.0",
@@ -34,5 +33,6 @@
     "rimraf": "^3.0.2",
     "rollup": "^2.38.0",
     "rollup-plugin-strip-banner": "^2.0.0"
-  }
+  },
+  "sideEffects": false
 }
