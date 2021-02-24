@@ -74,7 +74,7 @@ const SideNav = React.forwardRef(function SideNav(props, ref) {
 
   const overlayClassName = cx({
     [`${prefix}--side-nav__overlay`]: true,
-    [`${prefix}--side-nav__overlay-active`]: expanded,
+    [`${prefix}--side-nav__overlay-active`]: expanded || expandedViaHoverState,
   });
 
   let childrenToRender = children;
