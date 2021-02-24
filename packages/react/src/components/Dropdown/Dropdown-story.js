@@ -81,7 +81,7 @@ const props = () => ({
 });
 
 export default {
-  title: 'Dropdown',
+  title: 'Components/Dropdown',
   decorators: [withKnobs],
 
   parameters: {

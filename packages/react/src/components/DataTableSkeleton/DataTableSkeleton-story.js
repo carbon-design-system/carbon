@@ -31,7 +31,7 @@ const props = () => ({
 });
 
 export default {
-  title: 'DataTableSkeleton',
+  title: 'Components/DataTable',
   decorators: [withKnobs],
 
   parameters: {
@@ -39,16 +39,16 @@ export default {
   },
 };
 
-export const Default = () => (
+export const Skeleton = () => (
   <div style={{ width: '800px' }}>
     <DataTableSkeleton {...props()} />
     <br />
   </div>
 );
 
-Default.storyName = 'default';
+Skeleton.storyName = 'default';
 
-Default.parameters = {
+Skeleton.parameters = {
   info: {
     text: `
         Skeleton states are used as a progressive loading state while the user waits for content to load.

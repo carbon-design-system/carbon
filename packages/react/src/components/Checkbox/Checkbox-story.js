@@ -17,7 +17,7 @@ import mdx from './Checkbox.mdx';
 const { prefix } = settings;
 
 export default {
-  title: 'Checkbox',
+  title: 'Components/Checkbox',
   component: Checkbox,
   subcomponents: {
     CheckboxSkeleton,

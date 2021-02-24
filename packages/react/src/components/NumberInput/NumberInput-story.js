@@ -65,7 +65,7 @@ const props = () => ({
 });
 
 export default {
-  title: 'NumberInput',
+  title: 'Components/NumberInput',
   component: OGNumberInput,
   decorators: [withKnobs],
 

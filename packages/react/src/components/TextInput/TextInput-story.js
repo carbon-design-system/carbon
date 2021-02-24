@@ -105,7 +105,7 @@ const props = {
 TextInput.displayName = 'TextInput';
 
 export default {
-  title: 'TextInput',
+  title: 'Components/TextInput',
   decorators: [withKnobs],
 
   parameters: {

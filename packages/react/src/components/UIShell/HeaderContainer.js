@@ -16,8 +16,10 @@ const HeaderContainer = ({ isSideNavExpanded, render: Children }) => {
   );
 
   const handleHeaderMenuButtonClick = useCallback(() => {
-    setIsSideNavExpandedState(!isSideNavExpandedState);
-  }, [isSideNavExpandedState, setIsSideNavExpandedState]);
+    setIsSideNavExpandedState(
+      (prevIsSideNavExpanded) => !prevIsSideNavExpanded
+    );
+  }, [setIsSideNavExpandedState]);
 
   return (
     <Children

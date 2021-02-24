@@ -26,7 +26,7 @@ import { rows, headers } from './shared';
 import mdx from '../DataTable.mdx';
 
 export default {
-  title: 'DataTable/Filtering',
+  title: 'Components/DataTable/Filtering',
   component: DataTable,
   subcomponents: {
     TableToolbar,
