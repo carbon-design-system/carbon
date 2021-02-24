@@ -410,7 +410,7 @@ export default class ComboBox extends React.Component {
             disabled,
             onClick: this.onToggleClick(isOpen),
             // When we moved the "root node" of Downshift to the <input> for
-            // WCAG 2.1 compliance, we unfortunately hit this branch for the
+            // ARIA 1.2 compliance, we unfortunately hit this branch for the
             // "mouseup" event that downshift listens to:
             // https://github.com/downshift-js/downshift/blob/v5.2.1/src/downshift.js#L1051-L1065
             //
