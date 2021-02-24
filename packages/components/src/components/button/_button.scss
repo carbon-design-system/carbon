@@ -212,6 +212,10 @@
     }
   }
 
+  .#{$prefix}--btn--icon-only.#{$prefix}--btn--selected {
+    background: $selected-ui;
+  }
+
   .#{$prefix}--btn path[data-icon-path='inner-path'] {
     fill: none;
   }
