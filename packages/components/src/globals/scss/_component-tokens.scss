@@ -20,7 +20,10 @@ $enable-css-custom-properties: feature-flag-enabled(
 /// @example get-token-value($component-tokens, 'tag-background-red');
 /// @returns {String} Token value
 /// @group component-tokens
-@function get-token-value($tokens, $name) {
+@function get-token-value($tokens, $name, $force-static-values: false) {
+  $emit-as-css-custom-property: $force-static-values == false and
+    feature-flag-enabled('enable-css-custom-properties');
+
   @if map-has-key($tokens, $name) {
     $config: map-get($tokens, $name);
     $fallback: map-get($config, 'fallback');
@@ -33,7 +36,7 @@ $enable-css-custom-properties: feature-flag-enabled(
         $value: map-get($option, 'value');
 
         @return if(
-          feature-flag-enabled('enable-css-custom-properties'),
+          $emit-as-css-custom-property,
           var(--#{$custom-property-prefix}-#{$name}, #{$value}),
           $value
         );
@@ -41,7 +44,7 @@ $enable-css-custom-properties: feature-flag-enabled(
     }
 
     @return if(
-      feature-flag-enabled('enable-css-custom-properties'),
+      $emit-as-css-custom-property,
       var(--#{$custom-property-prefix}-#{$name}, #{$fallback}),
       $fallback
     );
@@ -73,6 +76,6 @@ $enable-css-custom-properties: feature-flag-enabled(
 /// @example @include emit-component-tokens($component-tokens);
 @mixin emit-component-tokens($tokens) {
   @each $key, $options in $tokens {
-    @include custom-property($key, get-token-value($tokens, $key));
+    @include custom-property($key, get-token-value($tokens, $key, true));
   }
 }
