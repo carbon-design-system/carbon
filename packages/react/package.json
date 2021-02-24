@@ -29,12 +29,12 @@
   },
   "scripts": {
     "build": "yarn clean && node scripts/build.js && rollup -c",
-    "build-storybook": "cross-env NODE_ENV=production build-storybook",
+    "build-storybook": "cross-env NODE_ENV=production build-storybook -s ./.storybook/assets",
     "clean": "rimraf es lib umd storybook-static build react-docgen.json",
     "postinstall": "carbon-telemetry collect --install",
     "prepublish": "yarn build",
     "start": "yarn storybook",
-    "storybook": "rimraf node_modules/.cache/storybook && start-storybook -p 9000",
+    "storybook": "rimraf node_modules/.cache/storybook && start-storybook -p 9000 -s ./.storybook/assets",
     "snapshot": "build-storybook && percy-storybook --widths=320,1280"
   },
   "peerDependencies": {
@@ -82,7 +82,7 @@
     "@storybook/addons": "^5.3.19",
     "@storybook/react": "^5.3.19",
     "@storybook/source-loader": "^5.3.19",
-    "@storybook/theming": "^5.3.19",
+    "@storybook/theming": "^6.1.18",
     "babel-core": "^7.0.0-bridge.0",
     "babel-loader": "^8.1.0",
     "babel-plugin-dev-expression": "^0.2.2",

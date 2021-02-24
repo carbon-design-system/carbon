@@ -249,7 +249,7 @@ function renderTree({ nodes, expanded, withIcons = false }) {
 }
 
 export default {
-  title: 'unstable_TreeView',
+  title: 'Experimental/unstable_TreeView',
   decorators: [withKnobs],
   parameters: { component: TreeView },
 };

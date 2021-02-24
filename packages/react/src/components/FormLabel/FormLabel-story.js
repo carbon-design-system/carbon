@@ -12,7 +12,7 @@ import Tooltip from '../Tooltip';
 import mdx from './FormLabel.mdx';
 
 export default {
-  title: 'FormLabel',
+  title: 'Components/FormLabel',
 
   parameters: {
     component: FormLabel,
