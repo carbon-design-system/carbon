@@ -4,7 +4,7 @@ import ListItem from '../ListItem';
 import mdx from './OrderedList.mdx';
 
 export default {
-  title: 'OrderedList',
+  title: 'Components/OrderedList',
 
   parameters: {
     component: OrderedList,

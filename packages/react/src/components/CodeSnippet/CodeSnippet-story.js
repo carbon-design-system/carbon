@@ -13,7 +13,7 @@ import CodeSnippetSkeleton from './CodeSnippet.Skeleton';
 import mdx from './CodeSnippet.mdx';
 
 export default {
-  title: 'CodeSnippet',
+  title: 'Components/CodeSnippet',
   component: CodeSnippet,
   decorators: [withKnobs],
   parameters: {

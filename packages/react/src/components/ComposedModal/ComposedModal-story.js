@@ -184,7 +184,7 @@ const scrollingContent = (
 );
 
 export default {
-  title: 'ComposedModal',
+  title: 'Components/ComposedModal',
   decorators: [withKnobs],
   parameters: {
     component: ComposedModal,

@@ -11,7 +11,7 @@ import React from 'react';
 import { Welcome as Intro } from './Welcome';
 
 export default {
-  title: ' Welcome',
+  title: ' Getting Started/ Welcome',
   component: Intro,
 };
 

@@ -127,7 +127,7 @@ const props = {
 };
 
 export default {
-  title: 'Modal',
+  title: 'Components/Modal',
   decorators: [withKnobs],
   parameters: {
     component: Modal,

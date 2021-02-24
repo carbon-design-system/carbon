@@ -19,6 +19,7 @@ const customPropertyPrefix = 'cds';
 addParameters({
   options: {
     theme: carbonTheme,
+    showRoots: true,
     /**
      * We sort our stories by default alphabetically, however there are specific
      * keywords that will be sorted further down the sidebar, including
@@ -68,8 +69,6 @@ addParameters({
         if (idB.includes(keyword)) {
           matches.set(idB, weight);
         }
-
-        console.log(idA);
       }
 
       // If we have matches for either id, then we will compare the ids based on
@@ -97,7 +96,11 @@ configureActions({
   limit: 10,
 });
 
-addDecorator((story) => <Container story={story} />);
+addDecorator((story, i) => {
+  return (
+    <Container id={`container-${story().type?.displayName}`} story={story} />
+  );
+});
 
 addons.getChannel().on(CARBON_CURRENT_THEME, (theme) => {
   document.documentElement.setAttribute('storybook-carbon-theme', theme);

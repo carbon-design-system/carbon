@@ -116,7 +116,7 @@ const props = {
 };
 
 export default {
-  title: 'Button',
+  title: 'Components/Button',
   decorators: [withKnobs],
   parameters: {
     component: Button,

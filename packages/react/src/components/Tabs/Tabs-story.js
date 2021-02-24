@@ -107,7 +107,7 @@ const TabContentRenderedOnlyWhenSelected = ({
   );
 
 export default {
-  title: 'Tabs',
+  title: 'Components/Tabs',
   decorators: [withKnobs],
   parameters: {
     component: Tabs,

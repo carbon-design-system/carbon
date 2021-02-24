@@ -4,7 +4,7 @@ import { Grid, Row, Column } from './';
 import mdx from './Grid.mdx';
 
 export default {
-  title: 'Grid',
+  title: 'Components/Grid',
   component: Grid,
   subcomponents: {
     Row,
