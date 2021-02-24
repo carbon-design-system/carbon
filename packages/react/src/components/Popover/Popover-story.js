@@ -31,6 +31,7 @@ export default {
       page: mdx,
     },
   },
+  includeStories: ['Playground'],
 };
 
 export const Default = () => {
@@ -132,8 +133,8 @@ export const Playground = () => {
 
   return (
     <Popover
+      align={select('Specify the caret alignment', options, 'top')}
       caret={boolean('Specify whether the caret should be visible', true)}
-      direction={select('Specify the caret alignment', options, 'top')}
       highContrast={boolean(
         'Specify whether the high-contrast variant should render',
         false
@@ -143,6 +144,16 @@ export const Playground = () => {
       <PopoverContent className="p-3">Sample content</PopoverContent>
     </Popover>
   );
+};
+
+Playground.story = {
+  decorators: [
+    (story) => (
+      <div className="mt-9">
+        <div className="position-relative">{story()}</div>
+      </div>
+    ),
+  ],
 };
 
 export const Examples = () => {
