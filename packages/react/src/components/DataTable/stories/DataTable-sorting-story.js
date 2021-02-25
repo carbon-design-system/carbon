@@ -19,7 +19,7 @@ import { rows, headers } from './shared';
 import mdx from '../DataTable.mdx';
 
 export default {
-  title: 'DataTable/Sorting',
+  title: 'Components/DataTable/Sorting',
   component: DataTable,
   subcomponents: {
     Table,

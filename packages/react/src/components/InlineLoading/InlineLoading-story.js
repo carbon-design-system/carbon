@@ -34,7 +34,7 @@ const props = () => ({
 });
 
 export default {
-  title: 'InlineLoading',
+  title: 'Components/InlineLoading',
   decorators: [withKnobs],
 
   parameters: {

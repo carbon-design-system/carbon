@@ -77,6 +77,7 @@ const props = {
       className: 'some-class',
       kind: select('Button kind (kind)', kinds, 'primary'),
       disabled: boolean('Disabled (disabled)', false),
+      isSelected: boolean('Selected (isSelected)', false),
       size: select('Button size (size)', sizes, 'default'),
       renderIcon: !iconToUse || iconToUse.svgData ? undefined : iconToUse,
       iconDescription: text(
@@ -116,7 +117,7 @@ const props = {
 };
 
 export default {
-  title: 'Button',
+  title: 'Components/Button',
   decorators: [withKnobs],
   parameters: {
     component: Button,
