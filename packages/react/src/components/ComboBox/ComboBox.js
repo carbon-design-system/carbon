@@ -496,10 +496,11 @@ export default class ComboBox extends React.Component {
                   {isOpen
                     ? this.filterItems(items, itemToString, inputValue).map(
                         (item, index) => {
-                          const itemProps = getItemProps({ 
-                            item, 
+                          const itemProps = getItemProps({
+                            item,
                             index,
-                            ['aria-selected']: selectedItem === item ? true : null,
+                            ['aria-selected']:
+                              selectedItem === item ? true : null,
                           });
                           return (
                             <ListBox.MenuItem
