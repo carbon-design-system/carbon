@@ -124,23 +124,22 @@ export default {
 
 export const _Default = () => (
   <Tabs>
-    <Tab label="Tab label 1" hasNoFocusableContent>
+    <Tab label="Tab label 1">
       <p>Content for first tab goes here.</p>
     </Tab>
     <Tab label="Tab label 2">
       <p>Content for second tab goes here.</p>
       <Button>With a button</Button>
     </Tab>
-    <Tab label="Tab label 3" disabled hasNoFocusableContent>
+    <Tab label="Tab label 3" disabled>
       <p>Content for third tab goes here.</p>
     </Tab>
     <Tab
       label="Tab label 4 shows truncation"
-      title="Tab label 4 shows truncation"
-      hasNoFocusableContent>
+      title="Tab label 4 shows truncation">
       <p>Content for fourth tab goes here.</p>
     </Tab>
-    <Tab label={<div>Custom Label</div>} hasNoFocusableContent>
+    <Tab label={<div>Custom Label</div>}>
       <p>Content for fifth tab goes here.</p>
     </Tab>
   </Tabs>
@@ -153,17 +152,17 @@ _Default.story = {
 export const Playground = () => (
   <div className={props.tabs().light ? 'tabs-story-wrapper--light' : null}>
     <Tabs {...props.tabs()}>
-      <Tab {...props.tab()} label="Tab label 1" hasNoFocusableContent>
+      <Tab {...props.tab()} label="Tab label 1">
         <div className="some-content">
           <p>Content for first tab goes here.</p>
         </div>
       </Tab>
-      <Tab {...props.tab()} label="Tab label 2" hasNoFocusableContent>
+      <Tab {...props.tab()} label="Tab label 2">
         <div className="some-content">
           <p>Content for second tab goes here.</p>
         </div>
       </Tab>
-      <Tab {...props.tab()} label="Tab label 3" disabled hasNoFocusableContent>
+      <Tab {...props.tab()} label="Tab label 3" disabled>
         <div className="some-content">
           <p>Content for third tab goes here.</p>
         </div>
@@ -183,10 +182,7 @@ export const Playground = () => (
           <CodeSnippetExample />
         </div>
       </Tab>
-      <Tab
-        {...props.tab()}
-        label={<CustomLabel text="Custom Label" />}
-        hasNoFocusableContent>
+      <Tab {...props.tab()} label={<CustomLabel text="Custom Label" />}>
         <div className="some-content">
           <p>Content for fifth tab goes here.</p>
         </div>
@@ -197,19 +193,18 @@ export const Playground = () => (
 
 export const Container = () => (
   <Tabs type="container">
-    <Tab label="Tab label 1" hasNoFocusableContent>
+    <Tab label="Tab label 1">
       <p>Content for first tab goes here.</p>
     </Tab>
-    <Tab label="Tab label 2" hasNoFocusableContent>
+    <Tab label="Tab label 2">
       <p>Content for second tab goes here.</p>
     </Tab>
     <Tab
       label="Tab label 3 shows truncation"
-      title="Tab label 3 shows truncation"
-      hasNoFocusableContent>
+      title="Tab label 3 shows truncation">
       <p>Content for third tab goes here.</p>
     </Tab>
-    <Tab label={<div>Custom Label</div>} hasNoFocusableContent>
+    <Tab label={<div>Custom Label</div>}>
       <p>Content for fourth tab goes here.</p>
     </Tab>
   </Tabs>

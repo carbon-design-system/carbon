@@ -39,11 +39,6 @@ export default class Tab extends React.Component {
     handleTabKeyDown: PropTypes.func,
 
     /**
-     * Specify if the tab content does not contain focusable content. The tabpanel instead will be included in the focusable dom order.
-     */
-    hasNoFocusableContent: PropTypes.bool,
-
-    /**
      * Provide a string that represents the `href` of the Tab
      */
     href: deprecate(PropTypes.string),

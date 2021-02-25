@@ -6,23 +6,37 @@
  */
 
 import PropTypes from 'prop-types';
-import React from 'react';
+import React, { useCallback, useState } from 'react';
 import classNames from 'classnames';
 import { settings } from 'carbon-components';
+import { selectorTabbable } from '../../internal/keyboard/navigation';
 
 const { prefix } = settings;
 
+/**
+ * Determine if the node within the provided ref contains content that is tabbable.
+ */
+function useTabbableContent() {
+  const [hasTabbableContent, setHasTabbableContent] = useState(false);
+
+  const ref = useCallback((node) => {
+    if (node !== null) {
+      // we don't need to know which element or how many are tabbable, just that there is _something_ tabbable
+      node.querySelector(selectorTabbable)
+        ? setHasTabbableContent(true)
+        : setHasTabbableContent(false);
+    }
+  }, []);
+
+  return [hasTabbableContent, ref];
+}
+
 const TabContent = (props) => {
-  const {
-    className,
-    selected,
-    children,
-    hasNoFocusableContent,
-    ...other
-  } = props;
+  const { className, selected, children, ...other } = props;
   const tabContentClasses = classNames(`${prefix}--tab-content`, {
     [className]: className,
   });
+  const [hasTabbableContent, ref] = useTabbableContent();
   return (
     <div
       role="tabpanel"
@@ -30,7 +44,8 @@ const TabContent = (props) => {
       className={tabContentClasses}
       selected={selected}
       hidden={!selected}
-      tabIndex={hasNoFocusableContent ? 0 : undefined}>
+      ref={ref}
+      tabIndex={hasTabbableContent ? undefined : 0}>
       {children}
     </div>
   );
@@ -46,11 +61,6 @@ TabContent.propTypes = {
    * Provide a className for the tab content container
    */
   className: PropTypes.string,
-
-  /**
-   * Specify if the tab content does not contain focusable content. The tabpanel instead will be included in the focusable dom order.
-   */
-  hasNoFocusableContent: PropTypes.bool,
 
   /**
    * Specify whether the TabContent is selected

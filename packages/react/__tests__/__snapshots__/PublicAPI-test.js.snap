@@ -5070,9 +5070,6 @@ Map {
       "handleTabKeyDown": Object {
         "type": "func",
       },
-      "hasNoFocusableContent": Object {
-        "type": "bool",
-      },
       "href": [Function],
       "id": Object {
         "type": "string",
@@ -5121,9 +5118,6 @@ Map {
       },
       "className": Object {
         "type": "string",
-      },
-      "hasNoFocusableContent": Object {
-        "type": "bool",
       },
       "selected": Object {
         "type": "bool",
