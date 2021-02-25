@@ -57,7 +57,7 @@
     "lodash.throttle": "^4.1.1",
     "react-is": "^16.8.6",
     "use-resize-observer": "^6.0.0",
-    "warning": "^3.0.0",
+    "warning": "^4.0.3",
     "window-or-global": "^1.0.1"
   },
   "devDependencies": {
