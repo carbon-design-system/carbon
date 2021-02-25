@@ -3917,7 +3917,7 @@ Map {
   },
   "ToastNotification" => Object {
     "defaultProps": Object {
-      "caption": "provide a caption",
+      "caption": "",
       "hideCloseButton": false,
       "iconDescription": "closes notification",
       "kind": "error",

@@ -399,7 +399,7 @@ ToastNotification.propTypes = {
 ToastNotification.defaultProps = {
   kind: 'error',
   title: 'provide a title',
-  caption: 'provide a caption',
+  caption: '',
   role: 'alert',
   notificationType: 'toast',
   iconDescription: 'closes notification',
