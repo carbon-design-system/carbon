@@ -69,7 +69,6 @@
   // -------------------------------------
   // Th > Button > Span (span required for flex bugs in Safari)
   // -------------------------------------
-  .#{$prefix}--data-table--sort th .#{$prefix}--table-sort__flex,
   th .#{$prefix}--table-sort__flex {
     display: flex;
     align-items: center;
