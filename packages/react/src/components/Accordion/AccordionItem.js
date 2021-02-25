@@ -41,6 +41,7 @@ function AccordionItem({
   });
 
   if (open !== prevIsOpen) {
+    setAnimation(isOpen ? 'collapsing' : 'expanding');
     setIsOpen(open);
     setPrevIsOpen(open);
   }
