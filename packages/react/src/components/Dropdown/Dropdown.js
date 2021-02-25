@@ -322,7 +322,7 @@ Dropdown.propTypes = {
    * Provide the title text that will be read by a screen reader when
    * visiting this control
    */
-  titleText: PropTypes.oneOfType([PropTypes.string, PropTypes.node]),
+  titleText: PropTypes.node,
 
   /**
    * Callback function for translating ListBoxMenuIcon SVG title

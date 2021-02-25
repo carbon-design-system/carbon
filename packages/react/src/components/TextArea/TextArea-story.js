@@ -34,7 +34,7 @@ const TextAreaProps = () => ({
 });
 
 export default {
-  title: 'TextArea',
+  title: 'Components/TextArea',
   decorators: [withKnobs],
 
   parameters: {

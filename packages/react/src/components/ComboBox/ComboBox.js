@@ -191,7 +191,7 @@ export default class ComboBox extends React.Component {
      * Provide text to be used in a `<label>` element that is tied to the
      * combobox via ARIA attributes.
      */
-    titleText: PropTypes.string,
+    titleText: PropTypes.node,
 
     /**
      * Specify a custom translation function that takes in a message identifier

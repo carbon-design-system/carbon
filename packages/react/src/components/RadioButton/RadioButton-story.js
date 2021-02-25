@@ -34,7 +34,7 @@ const radioProps = () => ({
 });
 
 export default {
-  title: 'RadioButton',
+  title: 'Components/RadioButton',
   decorators: [withKnobs],
   component: OGRadioButton,
   subcomponents: {

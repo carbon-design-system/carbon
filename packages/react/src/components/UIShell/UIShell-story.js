@@ -131,7 +131,7 @@ const StoryContent = ({ useResponsiveOffset = true }) => {
 };
 
 export default {
-  title: 'UI Shell',
+  title: 'Components/UI Shell',
 
   parameters: {
     docs: {
