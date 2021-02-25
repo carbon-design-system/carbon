@@ -105,7 +105,7 @@ const props = {
 TextInput.displayName = 'TextInput';
 
 export default {
-  title: 'TextInput',
+  title: 'Components/TextInput',
   decorators: [withKnobs],
 
   parameters: {
@@ -204,18 +204,7 @@ FullyControlledTogglePasswordVisibility.parameters = {
   },
 };
 
-export const Skeleton = () => (
-  <div
-    aria-label="loading text input"
-    aria-live="assertive"
-    role="status"
-    tabIndex="0" // eslint-disable-line jsx-a11y/no-noninteractive-tabindex
-  >
-    <TextInputSkeleton />
-    <br />
-    <TextInputSkeleton hideLabel />
-  </div>
-);
+export const Skeleton = () => <TextInputSkeleton />;
 
 Skeleton.storyName = 'skeleton';
 

@@ -45,7 +45,7 @@ const props = () => ({
 });
 
 export default {
-  title: 'Pagination',
+  title: 'Components/Pagination',
   decorators: [
     withKnobs,
     (story) => <div style={{ maxWidth: '800px' }}>{story()}</div>,

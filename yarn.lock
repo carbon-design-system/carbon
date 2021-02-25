@@ -2212,9 +2212,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@emotion/core@npm:^10.0.20, @emotion/core@npm:^10.0.9":
-  version: 10.0.27
-  resolution: "@emotion/core@npm:10.0.27"
+"@emotion/core@npm:^10.0.20, @emotion/core@npm:^10.0.9, @emotion/core@npm:^10.1.1":
+  version: 10.1.1
+  resolution: "@emotion/core@npm:10.1.1"
   dependencies:
     "@babel/runtime": ^7.5.5
     "@emotion/cache": ^10.0.27
@@ -2224,7 +2224,7 @@ __metadata:
     "@emotion/utils": 0.11.3
   peerDependencies:
     react: ">=16.3.0"
-  checksum: e64cde15423ae7ee11a9c14a8f576b583b7b27521cb634ad9409ddb8a127a1a1480aa65e30cc3d442140a07dbe4c3f2c8becdec43a131ad443dae157c4763ee5
+  checksum: 78fec4a70569be2291180eafe3a882303a05285d68fec4d6b6974710f47fa1cc3b105468607e544e4a92bf7a9f94d9e5d2bfd735523a38b90f2d5dd4ce27e308
   languageName: node
   linkType: hard
 
@@ -2252,6 +2252,15 @@ __metadata:
   dependencies:
     "@emotion/memoize": 0.7.4
   checksum: 307e4f3c1e0389e02169e03b85f302e8bbd44aa3ec48ee2734ddd27cd7a0cdcb311c2568f8b6f4c11de82d7ee88fd9b1a7e57a343e3845a739872dfbb43ffcb4
+  languageName: node
+  linkType: hard
+
+"@emotion/is-prop-valid@npm:^0.8.6":
+  version: 0.8.8
+  resolution: "@emotion/is-prop-valid@npm:0.8.8"
+  dependencies:
+    "@emotion/memoize": 0.7.4
+  checksum: 4a6993c4e6a49bcdc772aa5931fa2f00ce6367f7f6fc9cfe46dd50014c9510f9c6b1e355f297655875a8bfd1481e42546900bbbc84f3c0b629a001b4d82e436e
   languageName: node
   linkType: hard
 
@@ -2297,7 +2306,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@emotion/styled@npm:^10.0.17":
+"@emotion/styled@npm:^10.0.17, @emotion/styled@npm:^10.0.23":
   version: 10.0.27
   resolution: "@emotion/styled@npm:10.0.27"
   dependencies:
@@ -4662,6 +4671,16 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@storybook/client-logger@npm:6.1.18":
+  version: 6.1.18
+  resolution: "@storybook/client-logger@npm:6.1.18"
+  dependencies:
+    core-js: ^3.0.1
+    global: ^4.3.2
+  checksum: acf8cf6b58aaea02fff15a33d715268eabed69ffc7fe55cec609bbde5e05b3d47a9635e919a7ecda431c7beed0eb7d11b8c49bac733356dc28e3403dc0fce431
+  languageName: node
+  linkType: hard
+
 "@storybook/components@npm:5.3.19, @storybook/components@npm:^5.0.6":
   version: 5.3.19
   resolution: "@storybook/components@npm:5.3.19"
@@ -4897,7 +4916,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@storybook/theming@npm:5.3.19, @storybook/theming@npm:^5.3.19":
+"@storybook/theming@npm:5.3.19":
   version: 5.3.19
   resolution: "@storybook/theming@npm:5.3.19"
   dependencies:
@@ -4917,6 +4936,29 @@ __metadata:
     react: "*"
     react-dom: "*"
   checksum: 40782bd164e43ad271cf15e0a3df94ac8df50075f217b49e4440f4469ed9b88e9ea5e30e7d571fb0d438b0a2cdce79b485def90345fce49e053ea7ed317c06d3
+  languageName: node
+  linkType: hard
+
+"@storybook/theming@npm:^6.1.18":
+  version: 6.1.18
+  resolution: "@storybook/theming@npm:6.1.18"
+  dependencies:
+    "@emotion/core": ^10.1.1
+    "@emotion/is-prop-valid": ^0.8.6
+    "@emotion/styled": ^10.0.23
+    "@storybook/client-logger": 6.1.18
+    core-js: ^3.0.1
+    deep-object-diff: ^1.1.0
+    emotion-theming: ^10.0.19
+    global: ^4.3.2
+    memoizerific: ^1.11.3
+    polished: ^3.4.4
+    resolve-from: ^5.0.0
+    ts-dedent: ^2.0.0
+  peerDependencies:
+    react: ^16.8.0 || ^17.0.0
+    react-dom: ^16.8.0 || ^17.0.0
+  checksum: 395a079c4e262ba6380b448cd53783577ba303baf96d12be0f78afc59aab0a7c3f0db8a7eae715e8a740240adb0849bbd3c7a37ba5d38d4e7dcb9b8eaed784b0
   languageName: node
   linkType: hard
 
@@ -9199,7 +9241,7 @@ __metadata:
     "@storybook/addons": ^5.3.19
     "@storybook/react": ^5.3.19
     "@storybook/source-loader": ^5.3.19
-    "@storybook/theming": ^5.3.19
+    "@storybook/theming": ^6.1.18
     babel-core: ^7.0.0-bridge.0
     babel-loader: ^8.1.0
     babel-plugin-dev-expression: ^0.2.2
@@ -24882,12 +24924,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"polished@npm:^3.3.1":
-  version: 3.4.2
-  resolution: "polished@npm:3.4.2"
+"polished@npm:^3.3.1, polished@npm:^3.4.4":
+  version: 3.7.1
+  resolution: "polished@npm:3.7.1"
   dependencies:
-    "@babel/runtime": ^7.6.3
-  checksum: a8c3f0961ee6928ad2c8a37b8807ceba80f0371c32ecf555400b8cae7ee103bdb89160f20300e0b51f1331c0505718f4f1c4924dcc20a6baaada23e4db970f5f
+    "@babel/runtime": ^7.12.5
+  checksum: 2483fc6957697620fc5ce2e93bd0fa70f6080d04b112b719426f248afb7cd21d78b5def38939a1b8ac2bc266b9bcdd8acac74639e5ad2aae64a9ac570a82b798
   languageName: node
   linkType: hard
 
@@ -31637,6 +31679,13 @@ __metadata:
   version: 1.1.1
   resolution: "ts-dedent@npm:1.1.1"
   checksum: 262038f5f5337c890dae8d28b784d698c5c1c99c014a48abf046caa3d9d055ec1fa83b3205bd85dbf7fe910f864931577c350fcf90db92c90fd574e142a13b24
+  languageName: node
+  linkType: hard
+
+"ts-dedent@npm:^2.0.0":
+  version: 2.0.0
+  resolution: "ts-dedent@npm:2.0.0"
+  checksum: 386cff404ab3e07eb35431fbb67cedf2a00f3dbd268218fb962ad21ae09383cb787d6cf8937a543bbac6902e54011309fed28b2caa1c48c35b61e8a8c798acb0
   languageName: node
   linkType: hard
 

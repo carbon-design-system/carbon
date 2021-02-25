@@ -18,7 +18,7 @@ const props = () => ({
 });
 
 export default {
-  title: 'Loading',
+  title: 'Components/Loading',
   decorators: [withKnobs],
 
   parameters: {

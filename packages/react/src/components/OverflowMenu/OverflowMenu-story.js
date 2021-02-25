@@ -56,7 +56,7 @@ const props = {
 OverflowMenu.displayName = 'OverflowMenu';
 
 export default {
-  title: 'OverflowMenu',
+  title: 'Components/OverflowMenu',
   decorators: [withKnobs],
   component: OGOverflowMenu,
   subcomponents: {
