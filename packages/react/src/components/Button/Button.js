@@ -70,6 +70,7 @@ const Button = React.forwardRef(function Button(
   let otherProps = {
     disabled,
     type,
+    'aria-pressed': hasIconOnly && kind === 'ghost' ? isSelected : null,
   };
   const anchorProps = {
     href,
