@@ -492,11 +492,15 @@ export default class ComboBox extends React.Component {
                     translateWithId={translateWithId}
                   />
                 </div>
-                <ListBox.Menu {...getMenuProps({ 'aria-label': ariaLabel })}>
+                <ListBox.Menu {...getMenuProps()}>
                   {isOpen
                     ? this.filterItems(items, itemToString, inputValue).map(
                         (item, index) => {
-                          const itemProps = getItemProps({ item, index });
+                          const itemProps = getItemProps({ 
+                            item, 
+                            index,
+                            ['aria-selected']: selectedItem === item ? true : null,
+                          });
                           return (
                             <ListBox.MenuItem
                               key={itemProps.id}
