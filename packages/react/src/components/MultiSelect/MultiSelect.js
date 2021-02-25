@@ -191,6 +191,15 @@ const MultiSelect = React.forwardRef(function MultiSelect(
     }
   }
 
+  const onKeyDown = (e) => {
+    console.log('pressed a key');
+    if (e.keyCode === 8 && !disabled) {
+      console.log('pressed DELETED');
+      clearSelection();
+      e.stopPropagation();
+    }
+  };
+
   const toggleButtonProps = getToggleButtonProps();
 
   return (
@@ -226,7 +235,8 @@ const MultiSelect = React.forwardRef(function MultiSelect(
           disabled={disabled}
           aria-disabled={disabled}
           {...toggleButtonProps}
-          ref={mergeRefs(toggleButtonProps.ref, ref)}>
+          ref={mergeRefs(toggleButtonProps.ref, ref)}
+          onKeyDown={onKeyDown}>
           {selectedItems.length > 0 && (
             <ListBox.Selection
               clearSelection={!disabled ? clearSelection : noop}
