@@ -29,6 +29,7 @@ exports[`DataTable.TableBatchAction should render 1`] = `
     type="button"
   >
     <button
+      aria-pressed={null}
       className="custom-class bx--btn bx--btn--primary"
       disabled={false}
       tabIndex={0}
