@@ -453,6 +453,7 @@
       padding: 0;
       overflow: auto hidden;
       list-style: none;
+      outline: 0;
       transition: max-height $duration--fast-01 motion(standard, productive);
 
       // hide scrollbars
