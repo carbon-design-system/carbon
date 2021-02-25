@@ -13,7 +13,13 @@ import { settings } from 'carbon-components';
 const { prefix } = settings;
 
 const TabContent = (props) => {
-  const { className, selected, children, ...other } = props;
+  const {
+    className,
+    selected,
+    children,
+    hasNoFocusableContent,
+    ...other
+  } = props;
   const tabContentClasses = classNames(`${prefix}--tab-content`, {
     [className]: className,
   });
@@ -23,7 +29,8 @@ const TabContent = (props) => {
       {...other}
       className={tabContentClasses}
       selected={selected}
-      hidden={!selected}>
+      hidden={!selected}
+      tabIndex={hasNoFocusableContent ? 0 : undefined}>
       {children}
     </div>
   );
@@ -39,6 +46,11 @@ TabContent.propTypes = {
    * Provide a className for the tab content container
    */
   className: PropTypes.string,
+
+  /**
+   * Specify if the tab content does not contain focusable content. The tabpanel instead will be included in the focusable dom order.
+   */
+  hasNoFocusableContent: PropTypes.bool,
 
   /**
    * Specify whether the TabContent is selected

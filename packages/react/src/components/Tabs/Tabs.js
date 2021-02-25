@@ -439,6 +439,7 @@ export default class Tabs extends React.Component {
         children,
         selected,
         renderContent: Content = TabContent,
+        hasNoFocusableContent,
       } = tab.props;
 
       return (
@@ -447,7 +448,8 @@ export default class Tabs extends React.Component {
           className={tabContentClassName}
           hidden={!selected}
           selected={selected}
-          aria-labelledby={tabId}>
+          aria-labelledby={tabId}
+          hasNoFocusableContent={hasNoFocusableContent}>
           {children}
         </Content>
       );
