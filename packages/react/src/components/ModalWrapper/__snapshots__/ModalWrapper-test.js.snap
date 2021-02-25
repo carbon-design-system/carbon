@@ -36,6 +36,7 @@ exports[`ModalWrapper should render 1`] = `
       type="button"
     >
       <button
+        aria-pressed={null}
         className="btn-trigger bx--btn bx--btn--primary"
         disabled={false}
         onClick={[Function]}
@@ -171,6 +172,7 @@ exports[`ModalWrapper should render 1`] = `
                   type="button"
                 >
                   <button
+                    aria-pressed={null}
                     className="bx--btn bx--btn--secondary"
                     disabled={false}
                     onClick={[Function]}
@@ -192,6 +194,7 @@ exports[`ModalWrapper should render 1`] = `
                 type="button"
               >
                 <button
+                  aria-pressed={null}
                   className="bx--btn bx--btn--primary"
                   disabled={false}
                   onClick={[Function]}

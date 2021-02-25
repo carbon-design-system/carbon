@@ -64,7 +64,7 @@ const props = {
 };
 
 export default {
-  title: 'Tag',
+  title: 'Components/Tag',
   decorators: [withKnobs],
 
   parameters: {
