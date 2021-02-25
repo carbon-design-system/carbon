@@ -97,6 +97,34 @@ describe('Modal', () => {
     });
   });
 
+  describe('Renders as expected with secondaryButtons prop', () => {
+    const mounted = mount(<Modal aria-label="test" className="extra-class" />);
+
+    it('Should support node in secondary', () => {
+      mounted.setProps({
+        secondaryButtons: [
+          {
+            buttonText: <InlineLoading />,
+            onClick: jest.fn(),
+          },
+          {
+            buttonText: 'Cancel',
+            onClick: jest.fn(),
+          },
+        ],
+      });
+
+      const secondaryButtons = mounted.find(
+        `.${prefix}--btn.${prefix}--btn--secondary`
+      );
+      expect(secondaryButtons.length).toEqual(2);
+      expect(secondaryButtons.at(0).find('InlineLoading').exists()).toEqual(
+        true
+      );
+      expect(secondaryButtons.at(1).text()).toEqual('Cancel');
+    });
+  });
+
   describe('Adds props as expected to the right children', () => {
     it('should set label if one is passed via props', () => {
       const wrapper = shallow(<Modal aria-label="test" modalLabel="modal-1" />);
@@ -113,17 +141,16 @@ describe('Modal', () => {
     });
 
     it('should set button text if one is passed via props', () => {
-      const wrapper = shallow(
+      const wrapper = mount(
         <Modal
           aria-label="test"
           primaryButtonText="Submit"
           secondaryButtonText="Cancel"
         />
       );
-      const modalButtons = wrapper.find(`.${prefix}--modal-footer`).props()
-        .children;
-      expect(modalButtons[0].props.children).toEqual('Cancel');
-      expect(modalButtons[1].props.children).toEqual('Submit');
+      const modalButtons = wrapper.find(`.${prefix}--modal-footer Button`);
+      expect(modalButtons.at(0).props().children).toEqual('Cancel');
+      expect(modalButtons.at(1).props().children).toEqual('Submit');
     });
   });
 
@@ -228,7 +255,11 @@ describe('Modal', () => {
     it('should close by default on secondary button click', () => {
       const onRequestClose = jest.fn();
       const modal = mount(
-        <Modal aria-label="test" onRequestClose={onRequestClose} />
+        <Modal
+          aria-label="test"
+          secondaryButtonText="Cancel"
+          onRequestClose={onRequestClose}
+        />
       );
       const secondaryBtn = modal.find(`.${prefix}--btn--secondary`);
       secondaryBtn.simulate('click');
@@ -238,7 +269,11 @@ describe('Modal', () => {
     it('should handle custom secondary button events', () => {
       const onSecondarySubmit = jest.fn();
       const modal = mount(
-        <Modal aria-label="test" onSecondarySubmit={onSecondarySubmit} />
+        <Modal
+          aria-label="test"
+          secondaryButtonText="Cancel"
+          onSecondarySubmit={onSecondarySubmit}
+        />
       );
       const secondaryBtn = modal.find(`.${prefix}--btn--secondary`);
       secondaryBtn.simulate('click');
@@ -272,7 +307,9 @@ describe('Modal Wrapper', () => {
 });
 describe('Danger Modal', () => {
   describe('Renders as expected', () => {
-    const wrapper = shallow(<Modal aria-label="test" danger />);
+    const wrapper = mount(
+      <Modal aria-label="test" secondaryButtonText="Cancel" danger />
+    );
 
     it('has the expected classes', () => {
       expect(getModal(wrapper).hasClass(`${prefix}--modal--danger`)).toEqual(
@@ -281,10 +318,12 @@ describe('Danger Modal', () => {
     });
 
     it('has correct button combination', () => {
-      const modalButtons = wrapper.find(`.${prefix}--modal-footer`).props()
-        .children;
-      expect(modalButtons[0].props.kind).toEqual('secondary');
-      expect(modalButtons[1].props.kind).toEqual('danger');
+      const modalButtons = wrapper.find(
+        `.${prefix}--modal-footer.${prefix}--btn-set Button`
+      );
+      expect(modalButtons.length).toEqual(2);
+      expect(modalButtons.at(0).props().kind).toEqual('secondary');
+      expect(modalButtons.at(1).props().kind).toEqual('danger');
     });
   });
 });

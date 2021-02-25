@@ -64,7 +64,11 @@ export function ProgressStep({
   // eslint-disable-next-line react/prop-types
   const SVGIcon = ({ complete, current, description, invalid, prefix }) => {
     if (invalid) {
-      return <Warning16 className={`${prefix}--progress__warning`} />;
+      return (
+        <Warning16 className={`${prefix}--progress__warning`}>
+          <title>{description}</title>
+        </Warning16>
+      );
     }
     if (current) {
       return (

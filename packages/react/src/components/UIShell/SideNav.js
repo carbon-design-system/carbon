@@ -116,6 +116,7 @@ const SideNav = React.forwardRef(function SideNav(props, ref) {
     <>
       {isFixedNav ? null : <div className={overlayClassName} />}
       <nav
+        aria-hidden={!expanded}
         ref={ref}
         className={`${prefix}--side-nav__navigation ${className}`}
         {...accessibilityLabel}

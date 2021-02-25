@@ -140,7 +140,7 @@ const props = {
 };
 
 export default {
-  title: 'FileUploader',
+  title: 'Components/FileUploader',
   decorators: [withKnobs],
 
   parameters: {

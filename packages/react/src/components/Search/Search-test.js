@@ -59,7 +59,7 @@ describe('Search', () => {
 
       it('should set placeholder as expected', () => {
         expect(textInput.props().placeholder).toEqual('');
-        wrapper.setProps({ placeHolderText: 'Enter text' });
+        wrapper.setProps({ placeholder: 'Enter text' });
         expect(wrapper.find('input').props().placeholder).toEqual('Enter text');
       });
     });

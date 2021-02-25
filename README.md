@@ -179,7 +179,11 @@ check out our [Contributing Guide](/.github/CONTRIBUTING.md) and our
     <td align="center"><a href="https://github.com/sophiiae"><img src="https://avatars.githubusercontent.com/u/18622886?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Fei Z</b></sub></a><br /><a href="https://github.com/carbon-design-system/carbon/commits?author=sophiiae" title="Code">💻</a></td>
     <td align="center"><a href="https://github.com/IgnasA"><img src="https://avatars.githubusercontent.com/u/7099068?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Ignas Ausiejus</b></sub></a><br /><a href="https://github.com/carbon-design-system/carbon/commits?author=IgnasA" title="Documentation">📖</a></td>
     <td align="center"><a href="https://ryanomackey.com/"><img src="https://avatars.githubusercontent.com/u/17710824?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Ryan O. Mackey</b></sub></a><br /><a href="https://github.com/carbon-design-system/carbon/commits?author=ryanomackey" title="Code">💻</a></td>
-    <td align="center"><a href="http://www.skateman.eu/"><img src="https://avatars.githubusercontent.com/u/649130?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Halász Dávid</b></sub></a><br /><a href="https://github.com/carbon-design-system/carbon/commits?author=skateman" title="Code">💻</a></td>
+    <td align="center"><a href="http://www.skateman.eu/"><img src="https://avatars.githubusercontent.com/u/649130?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Dávid Halász</b></sub></a><br /><a href="https://github.com/carbon-design-system/carbon/commits?author=skateman" title="Code">💻</a></td>
+    <td align="center"><a href="https://github.com/guigueb"><img src="https://avatars1.githubusercontent.com/u/5973642?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Bill Guigue</b></sub></a><br /><a href="https://github.com/carbon-design-system/carbon/commits?author=guigueb" title="Code">💻</a></td>
+  </tr>
+  <tr>
+    <td align="center"><a href="https://github.com/szymonbrandys"><img src="https://avatars.githubusercontent.com/u/79149899?v=4?s=100" width="100px;" alt=""/><br /><sub><b>szymonbrandys</b></sub></a><br /><a href="https://github.com/carbon-design-system/carbon/commits?author=szymonbrandys" title="Code">💻</a></td>
   </tr>
 </table>
 
