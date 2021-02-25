@@ -11,7 +11,7 @@ import { ErrorBoundary, ErrorBoundaryContext } from './';
 import Button from '../Button';
 
 export default {
-  title: 'ErrorBoundary',
+  title: 'Components/ErrorBoundary',
 
   parameters: {
     component: ErrorBoundary,
