@@ -6765,6 +6765,16 @@ Map {
       "onClick": Object {
         "type": "func",
       },
+      "tooltipAlignment": Object {
+        "args": Array [
+          Array [
+            "start",
+            "center",
+            "end",
+          ],
+        ],
+        "type": "oneOf",
+      },
     },
     "render": [Function],
   },
