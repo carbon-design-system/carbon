@@ -1,0 +1,50 @@
+//
+// Copyright IBM Corp. 2018, 2018
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+@use 'sass:map';
+@use 'sass:meta';
+@use 'themes';
+
+$theme: themes.$white !default;
+$-custom-property-prefix: 'cds';
+
+/// @access public
+/// @group @carbon/themes
+@mixin theme($active-theme: $theme) {
+  $parent-theme: $theme;
+  $theme: $active-theme !global;
+
+  @each $token, $value in $theme {
+    @include -custom-property($token, $value);
+  }
+
+  @content;
+
+  $theme: $parent-theme !global;
+}
+
+/// @access public
+/// @group @carbon/themes
+@mixin set($active-theme) {
+  $theme: $active-theme !global;
+}
+
+/// @access private
+/// @group @carbon/themes
+@mixin -custom-property($name, $value, $prefix: $-custom-property-prefix) {
+  @if meta.type-of($value) == map {
+    @each $property, $property-value in $value {
+      // Only support one-level of depth for values that are maps. This is to
+      // avoid bringing properties like `breakpoints` on type tokens
+      @if type-of($property-value) != map {
+        @include -custom-property('#{$name}-#{$property}', $property-value);
+      }
+    }
+  } @else {
+    --#{$prefix}-#{$name}: #{$value};
+  }
+}

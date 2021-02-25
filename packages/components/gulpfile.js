@@ -241,7 +241,9 @@ const convertToESMGulpPlugin = () =>
           }),
         ],
         onwarn: (warning, handle) => {
-          if (warning.code !== 'EMPTY_BUNDLE') handle(warning);
+          if (warning.code !== 'EMPTY_BUNDLE') {
+            handle(warning);
+          }
         },
       })
         .then((bundle) => bundle.generate({ format: 'esm' }))

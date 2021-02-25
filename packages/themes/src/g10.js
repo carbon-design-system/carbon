@@ -67,6 +67,7 @@ export const icon02 = gray70;
 export const icon03 = white;
 
 export const link01 = blue60;
+export const link02 = blue70;
 
 export const inverseLink = blue40;
 
