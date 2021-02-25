@@ -22,9 +22,7 @@ function useTabbableContent() {
   const ref = useCallback((node) => {
     if (node !== null) {
       // we don't need to know which element or how many are tabbable, just that there is _something_ tabbable
-      node.querySelector(selectorTabbable)
-        ? setHasTabbableContent(true)
-        : setHasTabbableContent(false);
+      setHasTabbableContent(node.querySelector(selectorTabbable));
     }
   }, []);
 
