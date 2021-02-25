@@ -14,7 +14,7 @@ import { AspectRatio } from './';
 import mdx from './AspectRatio.mdx';
 
 export default {
-  title: 'AspectRatio',
+  title: 'Components/AspectRatio',
   component: AspectRatio,
   decorators: [
     withKnobs,

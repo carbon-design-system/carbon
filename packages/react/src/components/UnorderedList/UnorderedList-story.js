@@ -12,7 +12,7 @@ import UnorderedList from '../UnorderedList';
 import mdx from './UnorderedList.mdx';
 
 export default {
-  title: 'UnorderedList',
+  title: 'Components/UnorderedList',
 
   parameters: {
     component: UnorderedList,

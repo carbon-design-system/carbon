@@ -24,7 +24,7 @@ import { rows, headers } from '../shared';
 import mdx from '../../DataTable.mdx';
 
 export default {
-  title: 'DataTable/Expansion',
+  title: 'Components/DataTable/Expansion',
   component: DataTable,
   subcomponents: {
     TableExpandHeader,
