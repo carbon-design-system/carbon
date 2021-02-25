@@ -6394,7 +6394,6 @@ Map {
     "defaultProps": Object {
       "columnCount": 5,
       "compact": false,
-      "headers": Array [],
       "rowCount": 5,
       "showHeader": true,
       "showToolbar": true,
