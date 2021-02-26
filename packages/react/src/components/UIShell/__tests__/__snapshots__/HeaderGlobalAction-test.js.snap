@@ -23,6 +23,7 @@ exports[`HeaderGlobalAction should render 1`] = `
   >
     <button
       aria-label="Accessibility label"
+      aria-pressed={null}
       className="custom-class bx--header__action bx--btn bx--btn--primary bx--btn--icon-only bx--tooltip__trigger bx--tooltip--a11y bx--tooltip--bottom bx--tooltip--align-center"
       disabled={false}
       onClick={[MockFunction]}
