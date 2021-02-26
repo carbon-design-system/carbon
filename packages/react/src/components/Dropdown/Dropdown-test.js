@@ -11,7 +11,6 @@ import { mount, shallow } from 'enzyme';
 import {
   assertMenuOpen,
   assertMenuClosed,
-  findMenuItemNode,
   openMenu,
   generateItems,
   generateGenericItem,
@@ -134,7 +133,7 @@ describe('Dropdown', () => {
   it('should let the user select an option by clicking on the option node', () => {
     const wrapper = mount(<Dropdown {...mockProps} />);
     openMenu(wrapper);
-    findMenuItemNode(wrapper, 0).simulate('click');
+    wrapper.find('ForwardRef(ListBoxMenuItem)').at(0).simulate('click');
     expect(mockProps.onChange).toHaveBeenCalledTimes(1);
     expect(mockProps.onChange).toHaveBeenCalledWith({
       selectedItem: mockProps.items[0],
@@ -144,7 +143,7 @@ describe('Dropdown', () => {
     mockProps.onChange.mockClear();
 
     openMenu(wrapper);
-    findMenuItemNode(wrapper, 1).simulate('click');
+    wrapper.find('ForwardRef(ListBoxMenuItem)').at(1).simulate('click');
     expect(mockProps.onChange).toHaveBeenCalledTimes(1);
     expect(mockProps.onChange).toHaveBeenCalledWith({
       selectedItem: mockProps.items[1],

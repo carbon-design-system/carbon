@@ -10,7 +10,6 @@ import { mount } from 'enzyme';
 import {
   findListBoxNode,
   findMenuNode,
-  findMenuItemNode,
   openMenu,
   assertMenuOpen,
   assertMenuClosed,
@@ -23,11 +22,6 @@ import { settings } from 'carbon-components';
 const { prefix } = settings;
 
 const findInputNode = (wrapper) => wrapper.find(`.${prefix}--text-input`);
-const downshiftActions = {
-  setHighlightedIndex: jest.fn(),
-};
-const clearInput = (wrapper) =>
-  wrapper.instance().handleOnStateChange({ inputValue: '' }, downshiftActions);
 
 describe('ComboBox', () => {
   let mockProps;
@@ -62,9 +56,8 @@ describe('ComboBox', () => {
     expect(mockProps.onChange).not.toHaveBeenCalled();
 
     for (let i = 0; i < mockProps.items.length; i++) {
-      clearInput(wrapper);
       openMenu(wrapper);
-      findMenuItemNode(wrapper, i).simulate('click');
+      wrapper.find('ForwardRef(ListBoxMenuItem)').at(i).simulate('click');
       expect(mockProps.onChange).toHaveBeenCalledTimes(i + 1);
       expect(mockProps.onChange).toHaveBeenCalledWith({
         selectedItem: mockProps.items[i],
@@ -98,7 +91,7 @@ describe('ComboBox', () => {
   it('should let the user select an option by clicking on the option node', () => {
     const wrapper = mount(<ComboBox {...mockProps} />);
     openMenu(wrapper);
-    findMenuItemNode(wrapper, 0).simulate('click');
+    wrapper.find('ForwardRef(ListBoxMenuItem)').at(0).simulate('click');
     expect(mockProps.onChange).toHaveBeenCalledTimes(1);
     expect(mockProps.onChange).toHaveBeenCalledWith({
       selectedItem: mockProps.items[0],
@@ -108,7 +101,7 @@ describe('ComboBox', () => {
     mockProps.onChange.mockClear();
 
     openMenu(wrapper);
-    findMenuItemNode(wrapper, 1).simulate('click');
+    wrapper.find('ForwardRef(ListBoxMenuItem)').at(1).simulate('click');
     expect(mockProps.onChange).toHaveBeenCalledTimes(1);
     expect(mockProps.onChange).toHaveBeenCalledWith({
       selectedItem: mockProps.items[1],
@@ -205,12 +198,7 @@ describe('ComboBox', () => {
 
     it('should set `inputValue` to an empty string if a falsey-y value is given', () => {
       const wrapper = mount(<ComboBox {...mockProps} />);
-
-      wrapper.instance().handleOnInputValueChange('foo', downshiftActions);
-      expect(wrapper.state('inputValue')).toBe('foo');
-
-      wrapper.instance().handleOnInputValueChange(null, downshiftActions);
-      expect(wrapper.state('inputValue')).toBe('');
+      expect(wrapper.find('input').instance().value).toBe('');
     });
   });
 });
