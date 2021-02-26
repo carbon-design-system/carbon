@@ -4505,6 +4505,9 @@ Map {
         ],
         "type": "oneOf",
       },
+      "legendText": Object {
+        "type": "node",
+      },
       "name": Object {
         "isRequired": true,
         "type": "string",
