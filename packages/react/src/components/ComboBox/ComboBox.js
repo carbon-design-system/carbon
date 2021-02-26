@@ -439,6 +439,7 @@ export default class ComboBox extends React.Component {
             },
           });
 
+          // Remove excess aria `aria-labelledby`. HTML <label for> provides this aria information.
           const inputProperties = Object.keys(inputProps).reduce(
             (object, key) => {
               if (key !== 'aria-labelledby') {
