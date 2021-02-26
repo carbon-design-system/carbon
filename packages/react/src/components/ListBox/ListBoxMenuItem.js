@@ -28,15 +28,12 @@ function useIsTruncated(ref) {
  * name, alongside any classes for any corresponding states, for a generic list
  * box menu item.
  */
-const ListBoxMenuItem = ({
-  children,
-  isActive,
-  isHighlighted,
-  title,
-  ...rest
-}) => {
+const ListBoxMenuItem = React.forwardRef(function ListBoxMenuItem(
+  { children, isActive, isHighlighted, title, ...rest },
+  forwardedRef
+) {
   const ref = useRef(null);
-  const isTruncated = useIsTruncated(ref);
+  const isTruncated = useIsTruncated(forwardedRef?.menuItemOptionRef || ref);
   const className = cx(`${prefix}--list-box__menu-item`, {
     [`${prefix}--list-box__menu-item--active`]: isActive,
     [`${prefix}--list-box__menu-item--highlighted`]: isHighlighted,
@@ -47,12 +44,14 @@ const ListBoxMenuItem = ({
       {...rest}
       className={className}
       title={isTruncated ? title : undefined}>
-      <div className={`${prefix}--list-box__menu-item__option`} ref={ref}>
+      <div
+        className={`${prefix}--list-box__menu-item__option`}
+        ref={forwardedRef?.menuItemOptionRef || ref}>
         {children}
       </div>
     </div>
   );
-};
+});
 
 ListBoxMenuItem.propTypes = {
   /**
