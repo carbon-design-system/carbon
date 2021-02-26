@@ -6,7 +6,7 @@
  */
 
 import PropTypes from 'prop-types';
-import React, { useState, useEffect } from 'react';
+import React, { useCallback, useState, useEffect } from 'react';
 import cx from 'classnames';
 import { settings } from 'carbon-components';
 import {
@@ -245,6 +245,7 @@ NotificationIcon.propTypes = {
 export function ToastNotification({
   role,
   notificationType,
+  onClose,
   onCloseButtonClick,
   iconDescription,
   statusIconDescription,
@@ -266,9 +267,18 @@ export function ToastNotification({
     [`${prefix}--toast-notification--${kind}`]: kind,
   });
 
+  const handleClose = useCallback(
+    (evt) => {
+      if (!onClose || onClose(evt) !== false) {
+        setIsOpen(false);
+      }
+    },
+    [onClose]
+  );
+
   function handleCloseButtonClick(event) {
-    setIsOpen(false);
     onCloseButtonClick(event);
+    handleClose(event);
   }
 
   useEffect(() => {
@@ -276,15 +286,14 @@ export function ToastNotification({
       return;
     }
 
-    const timeoutId = window.setTimeout(() => {
-      setIsOpen(false);
-      onCloseButtonClick(event);
+    const timeoutId = window.setTimeout((evt) => {
+      handleClose(evt);
     }, timeout);
 
     return () => {
       window.clearTimeout(timeoutId);
     };
-  }, [onCloseButtonClick, timeout]);
+  }, [handleClose, timeout]);
 
   if (!isOpen) {
     return null;
@@ -366,6 +375,11 @@ ToastNotification.propTypes = {
 
   /**
    * Provide a function that is called when menu is closed
+   */
+  onClose: PropTypes.func,
+
+  /**
+   * Provide a function that is called when the close button is clicked
    */
   onCloseButtonClick: PropTypes.func,
 
