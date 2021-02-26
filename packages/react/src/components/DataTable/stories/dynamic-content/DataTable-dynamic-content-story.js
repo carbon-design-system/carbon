@@ -37,7 +37,7 @@ import DataTable, {
 import { batchActionClick, rows, headers } from '../shared';
 
 export default {
-  title: 'DataTable/Development',
+  title: 'Components/DataTable/Development',
 };
 
 export const Example = (props) => {

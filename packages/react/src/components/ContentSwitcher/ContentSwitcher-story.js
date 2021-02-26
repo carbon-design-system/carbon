@@ -42,7 +42,7 @@ const props = {
 };
 
 export default {
-  title: 'ContentSwitcher',
+  title: 'Components/ContentSwitcher',
   decorators: [withKnobs],
 
   parameters: {
