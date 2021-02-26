@@ -336,7 +336,7 @@ export default class ComboBox extends React.Component {
       placeholder,
       initialSelectedItem,
       selectedItem,
-      ariaLabel,
+      ariaLabel, // eslint-disable-line no-unused-vars
       translateWithId,
       invalid,
       invalidText,
@@ -439,6 +439,18 @@ export default class ComboBox extends React.Component {
             },
           });
 
+          // rootProps: 'aria-owns' adds excess aria / conflicts with inputProps: 'aria-controls'
+          // removes rootProps: 'aria-owns' prop
+          const rootProperties = Object.keys(rootProps).reduce(
+            (object, key) => {
+              if (key !== 'aria-owns') {
+                object[key] = rootProps[key];
+              }
+              return object;
+            },
+            {}
+          );
+
           return (
             <div className={wrapperClasses}>
               {titleText && (
@@ -463,9 +475,9 @@ export default class ComboBox extends React.Component {
                     type="text"
                     tabIndex="0"
                     aria-autocomplete="list"
-                    {...rest}
-                    {...rootProps}
+                    {...rootProperties}
                     {...inputProps}
+                    {...rest}
                     ref={mergeRefs(this.textInput, rootProps.ref)}
                   />
                   {invalid && (
