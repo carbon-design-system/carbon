@@ -439,12 +439,10 @@ export default class ComboBox extends React.Component {
             },
           });
 
-          // rootProps: 'aria-owns' adds excess aria / conflicts with inputProps: 'aria-controls'
-          // removes rootProps: 'aria-owns' prop
-          const rootProperties = Object.keys(rootProps).reduce(
+          const inputProperties = Object.keys(inputProps).reduce(
             (object, key) => {
-              if (key !== 'aria-owns') {
-                object[key] = rootProps[key];
+              if (key !== 'aria-labelledby') {
+                object[key] = inputProps[key];
               }
               return object;
             },
@@ -470,13 +468,16 @@ export default class ComboBox extends React.Component {
                 warnText={warnText}>
                 <div className={`${prefix}--list-box__field`}>
                   <input
+                    role="combobox"
                     disabled={disabled}
                     className={inputClasses}
                     type="text"
                     tabIndex="0"
                     aria-autocomplete="list"
-                    {...rootProperties}
-                    {...inputProps}
+                    aria-expanded={rootProps['aria-expanded']}
+                    aria-haspopup="listbox"
+                    aria-controls={inputProperties['aria-controls']}
+                    {...inputProperties}
                     {...rest}
                     ref={mergeRefs(this.textInput, rootProps.ref)}
                   />
