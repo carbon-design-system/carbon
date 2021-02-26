@@ -426,6 +426,7 @@ export function InlineNotification({
   actions,
   role,
   notificationType,
+  onClose,
   onCloseButtonClick,
   iconDescription,
   statusIconDescription,
@@ -446,9 +447,18 @@ export function InlineNotification({
     [`${prefix}--inline-notification--hide-close-button`]: hideCloseButton,
   });
 
+  const handleClose = useCallback(
+    (evt) => {
+      if (!onClose || onClose(evt) !== false) {
+        setIsOpen(false);
+      }
+    },
+    [onClose]
+  );
+
   function handleCloseButtonClick(event) {
-    setIsOpen(false);
     onCloseButtonClick(event);
+    handleClose(event);
   }
 
   if (!isOpen) {
@@ -533,6 +543,11 @@ InlineNotification.propTypes = {
 
   /**
    * Provide a function that is called when menu is closed
+   */
+  onClose: PropTypes.func,
+
+  /**
+   * Provide a function that is called when the close button is clicked
    */
   onCloseButtonClick: PropTypes.func,
 
