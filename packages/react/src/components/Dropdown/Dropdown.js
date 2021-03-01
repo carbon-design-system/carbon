@@ -139,7 +139,7 @@ const Dropdown = React.forwardRef(function Dropdown(
   const buttonRef = useRef();
   const [menuBounds, setMenuBounds] = useState({});
   useEffect(() => {
-    if (buttonRef && buttonRef.current) {
+    if (buttonRef && buttonRef.current) {
       setMenuBounds(buttonRef.current.getBoundingClientRect());
     }
   }, [isOpen]);
@@ -182,17 +182,20 @@ const Dropdown = React.forwardRef(function Dropdown(
           </span>
           <ListBox.MenuIcon isOpen={isOpen} translateWithId={translateWithId} />
         </button>
-        {isOpen && <FloatingMenu
-          target={() => document.body}
-          triggerRef={buttonRef}
-          menuDirection={direction == 'top' ? DIRECTION_TOP : DIRECTION_BOTTOM}
-          menuRef={() => {}}
-          menuOffset={() => {}}
-          styles={{width: menuBounds.width}}>
-          <ListBox.Menu
-            onMouseDown={e => e.stopPropagation()}
-            {...getMenuProps()}>
-            { items.map((item, index) => {
+        {isOpen && (
+          <FloatingMenu
+            target={() => document.body}
+            triggerRef={buttonRef}
+            menuDirection={
+              direction == 'top' ? DIRECTION_TOP : DIRECTION_BOTTOM
+            }
+            menuRef={() => {}}
+            menuOffset={() => {}}
+            styles={{ width: menuBounds.width }}>
+            <ListBox.Menu
+              onMouseDown={(e) => e.stopPropagation()}
+              {...getMenuProps()}>
+              {items.map((item, index) => {
                 const itemProps = getItemProps({ item, index });
                 return (
                   <ListBox.MenuItem
@@ -216,8 +219,9 @@ const Dropdown = React.forwardRef(function Dropdown(
                   </ListBox.MenuItem>
                 );
               })}
-          </ListBox.Menu>
-        </FloatingMenu> }
+            </ListBox.Menu>
+          </FloatingMenu>
+        )}
       </ListBox>
       {!inline && !invalid && !warn && helper}
     </div>
