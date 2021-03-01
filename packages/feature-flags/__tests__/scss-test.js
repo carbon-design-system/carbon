@@ -9,49 +9,142 @@
 
 'use strict';
 
-const { convert, createSassRenderer } = require('@carbon/test-utils/scss');
+const { SassRenderer } = require('@carbon/test-utils/scss');
 
-const render = createSassRenderer(__dirname);
+const { render } = SassRenderer.create(__dirname);
 
-describe('feature-flags.scss', () => {
-  it('should support default feature flags before the import', async () => {
-    const { calls } = await render(`
-      $feature-flags: ('test': true);
+describe('@carbon/feature-flags', () => {
+  describe('add', () => {
+    it('should add the given flag and set whether its enabled', async () => {
+      const { getValue } = await render(`
+        @use '../index.scss' as feature-flags;
 
-      @import '../scss/feature-flags';
+        @include feature-flags.add(flag-a, true);
+        @include feature-flags.add(flag-b, false);
 
-      @if feature-flag-enabled('test') {
-        $t: test(true);
-      }
-    `);
+        $_: get-value(feature-flags.enabled(flag-a));
+        $_: get-value(feature-flags.enabled(flag-b));
+      `);
 
-    expect(calls.length).toBe(1);
-    expect(convert(calls[0][0])).toBe(true);
+      // flag-a
+      expect(getValue(0)).toBe(true);
+      // flag-b
+      expect(getValue(1)).toBe(false);
+    });
   });
 
-  it('should support modifying flags', async () => {
-    const { calls } = await render(`
-      @import '../scss/feature-flags';
+  describe('enable', () => {
+    it('should enable the given feature flag', async () => {
+      const { getValue } = await render(`
+        @use '../index.scss' as feature-flags;
 
-      $feature-flags: map-merge($feature-flags, (
-        'test': true,
-      ));
+        @include feature-flags.add(flag-a, false);
 
-      @if feature-flag-enabled('test') {
-        $t: test('feature-flag-enabled');
-      }
+        $_: get-value(feature-flags.enabled(flag-a));
 
-      $feature-flags: map-merge($feature-flags, (
-        'test': false,
-      ));
+        @include feature-flags.enable(flag-a);
 
-      @if not feature-flag-enabled('test') {
-        $t: test('feature-flag-disabled');
-      }
-    `);
+        $_: get-value(feature-flags.enabled(flag-a));
+      `);
 
-    expect(calls.length).toBe(2);
-    expect(convert(calls[0][0])).toBe('feature-flag-enabled');
-    expect(convert(calls[1][0])).toBe('feature-flag-disabled');
+      expect(getValue(0)).toBe(false);
+      expect(getValue(1)).toBe(true);
+    });
   });
+
+  describe('disable', () => {
+    it('should disable the given feature flag', async () => {
+      const { getValue } = await render(`
+        @use '../index.scss' as feature-flags;
+
+        @include feature-flags.add(flag-a, true);
+
+        $_: get-value(feature-flags.enabled(flag-a));
+
+        @include feature-flags.disable(flag-a);
+
+        $_: get-value(feature-flags.enabled(flag-a));
+      `);
+
+      expect(getValue(0)).toBe(true);
+      expect(getValue(1)).toBe(false);
+    });
+  });
+
+  describe('enabled', () => {
+    it('should return whether a flag is enabled or disabled', async () => {
+      const { getValue } = await render(`
+        @use '../index.scss' as feature-flags;
+
+        @include feature-flags.add(flag-a, true);
+        @include feature-flags.add(flag-b, false);
+
+        $_: get-value(feature-flags.enabled(flag-a));
+        $_: get-value(feature-flags.enabled(flag-b));
+      `);
+
+      // flag-a
+      expect(getValue(0)).toBe(true);
+      // flag-b
+      expect(getValue(1)).toBe(false);
+    });
+  });
+
+  describe('merge', () => {
+    it('should set each feature flag given', async () => {
+      const { getValue } = await render(`
+        @use '../index.scss' as feature-flags;
+
+        @include feature-flags.add(flag-c, false);
+        @include feature-flags.merge((
+          flag-a: true,
+          flag-b: false,
+          flag-c: true,
+        ));
+
+        $_: get-value(feature-flags.enabled(flag-a));
+        $_: get-value(feature-flags.enabled(flag-b));
+        $_: get-value(feature-flags.enabled(flag-c));
+      `);
+
+      // flag-a
+      expect(getValue(0)).toBe(true);
+      // flag-b
+      expect(getValue(1)).toBe(false);
+      // flag-c
+      expect(getValue(2)).toBe(true);
+    });
+  });
+
+  // it('should support default feature flags before the import', async () => {
+  // const { calls } = await render(`
+  // $feature-flags: ('test': true);
+  // @import '../scss/feature-flags';
+  // @if feature-flag-enabled('test') {
+  // $t: test(true);
+  // }
+  // `);
+  // expect(calls.length).toBe(1);
+  // expect(convert(calls[0][0])).toBe(true);
+  // });
+  // it('should support modifying flags', async () => {
+  // const { calls } = await render(`
+  // @import '../scss/feature-flags';
+  // $feature-flags: map-merge($feature-flags, (
+  // 'test': true,
+  // ));
+  // @if feature-flag-enabled('test') {
+  // $t: test('feature-flag-enabled');
+  // }
+  // $feature-flags: map-merge($feature-flags, (
+  // 'test': false,
+  // ));
+  // @if not feature-flag-enabled('test') {
+  // $t: test('feature-flag-disabled');
+  // }
+  // `);
+  // expect(calls.length).toBe(2);
+  // expect(convert(calls[0][0])).toBe('feature-flag-enabled');
+  // expect(convert(calls[1][0])).toBe('feature-flag-disabled');
+  // });
 });
