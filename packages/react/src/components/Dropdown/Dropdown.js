@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { useSelect } from 'downshift';
 import { settings } from 'carbon-components';
 import cx from 'classnames';
@@ -19,6 +19,11 @@ import ListBox, { PropTypes as ListBoxPropTypes } from '../ListBox';
 import { mapDownshiftProps } from '../../tools/createPropAdapter';
 import mergeRefs from '../../tools/mergeRefs';
 import deprecate from '../../prop-types/deprecate';
+
+import FloatingMenu, {
+  DIRECTION_TOP,
+  DIRECTION_BOTTOM,
+} from '../../internal/FloatingMenu';
 
 const { prefix } = settings;
 
@@ -130,6 +135,15 @@ const Dropdown = React.forwardRef(function Dropdown(
     }
   }
 
+  // used for the FloatingMenu
+  const buttonRef = useRef();
+  const [menuBounds, setMenuBounds] = useState({});
+  useEffect(() => {
+    if (buttonRef && buttonRef.current) {
+      setMenuBounds(buttonRef.current.getBoundingClientRect());
+    }
+  }, [isOpen]);
+
   return (
     <div className={wrapperClasses} {...other}>
       {titleText && (
@@ -162,39 +176,48 @@ const Dropdown = React.forwardRef(function Dropdown(
           disabled={disabled}
           aria-disabled={disabled}
           {...toggleButtonProps}
-          ref={mergeRefs(toggleButtonProps.ref, ref)}>
+          ref={mergeRefs(toggleButtonProps.ref, ref, buttonRef)}>
           <span className={`${prefix}--list-box__label`}>
             {selectedItem ? itemToString(selectedItem) : label}
           </span>
           <ListBox.MenuIcon isOpen={isOpen} translateWithId={translateWithId} />
         </button>
-        <ListBox.Menu {...getMenuProps()}>
-          {isOpen &&
-            items.map((item, index) => {
-              const itemProps = getItemProps({ item, index });
-              return (
-                <ListBox.MenuItem
-                  key={itemProps.id}
-                  isActive={selectedItem === item}
-                  isHighlighted={
-                    highlightedIndex === index || selectedItem === item
-                  }
-                  title={itemToElement ? item.text : itemToString(item)}
-                  {...itemProps}>
-                  {itemToElement ? (
-                    <ItemToElement key={itemProps.id} {...item} />
-                  ) : (
-                    itemToString(item)
-                  )}
-                  {selectedItem === item && (
-                    <Checkmark16
-                      className={`${prefix}--list-box__menu-item__selected-icon`}
-                    />
-                  )}
-                </ListBox.MenuItem>
-              );
-            })}
-        </ListBox.Menu>
+        {isOpen && <FloatingMenu
+          target={() => document.body}
+          triggerRef={buttonRef}
+          menuDirection={direction == 'top' ? DIRECTION_TOP : DIRECTION_BOTTOM}
+          menuRef={() => {}}
+          menuOffset={() => {}}
+          styles={{width: menuBounds.width}}>
+          <ListBox.Menu
+            onMouseDown={e => e.stopPropagation()}
+            {...getMenuProps()}>
+            { items.map((item, index) => {
+                const itemProps = getItemProps({ item, index });
+                return (
+                  <ListBox.MenuItem
+                    key={itemProps.id}
+                    isActive={selectedItem === item}
+                    isHighlighted={
+                      highlightedIndex === index || selectedItem === item
+                    }
+                    title={itemToElement ? item.text : itemToString(item)}
+                    {...itemProps}>
+                    {itemToElement ? (
+                      <ItemToElement key={itemProps.id} {...item} />
+                    ) : (
+                      itemToString(item)
+                    )}
+                    {selectedItem === item && (
+                      <Checkmark16
+                        className={`${prefix}--list-box__menu-item__selected-icon`}
+                      />
+                    )}
+                  </ListBox.MenuItem>
+                );
+              })}
+          </ListBox.Menu>
+        </FloatingMenu> }
       </ListBox>
       {!inline && !invalid && !warn && helper}
     </div>

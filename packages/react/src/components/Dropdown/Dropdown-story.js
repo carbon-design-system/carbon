@@ -5,12 +5,14 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React from 'react';
+import React, { useState } from 'react';
 import { action } from '@storybook/addon-actions';
 import { withKnobs, boolean, select, text } from '@storybook/addon-knobs';
 import Dropdown from '../Dropdown';
 import DropdownSkeleton from './Dropdown.Skeleton';
 import mdx from './Dropdown.mdx';
+import Modal from '../Modal';
+import Button from '../Button';
 
 const items = [
   {
@@ -141,3 +143,34 @@ export const Skeleton = () => (
     <DropdownSkeleton />
   </div>
 );
+
+export const Overflow = () => {
+  const propsObj = props();
+  return (
+    <div style={{ width: 300, overflow: 'auto', resize: 'both' }}>
+      <Dropdown
+        {...propsObj}
+        items={items}
+        itemToString={(item) => (item ? item.text : '')}
+      />
+    </div>
+  );
+};
+export const OverflowInModal = () => {
+  const [isOpen, setIsOpen] = useState(true);
+  const propsObj = props();
+  return (
+    <div>
+      <Button onClick={() => setIsOpen(!isOpen)}>Open</Button>
+      <Modal open={isOpen} onRequestClose={() => setIsOpen(false)}>
+        <div style={{ width: 300, overflow: 'auto' }}>
+          <Dropdown
+            {...propsObj}
+            items={items}
+            itemToString={(item) => (item ? item.text : '')}
+          />
+        </div>
+      </Modal>
+    </div>
+  );
+};
