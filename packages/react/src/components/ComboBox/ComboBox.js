@@ -423,6 +423,8 @@ export default class ComboBox extends React.Component {
             },
           });
           const inputProps = getInputProps({
+            // Remove excess aria `aria-labelledby`. HTML <label for> provides this aria information.
+            'aria-labelledby': null,
             disabled,
             placeholder,
             onClick() {
@@ -438,17 +440,6 @@ export default class ComboBox extends React.Component {
               }
             },
           });
-
-          // Remove excess aria `aria-labelledby`. HTML <label for> provides this aria information.
-          const inputProperties = Object.keys(inputProps).reduce(
-            (object, key) => {
-              if (key !== 'aria-labelledby') {
-                object[key] = inputProps[key];
-              }
-              return object;
-            },
-            {}
-          );
 
           return (
             <div className={wrapperClasses}>
@@ -477,8 +468,8 @@ export default class ComboBox extends React.Component {
                     aria-autocomplete="list"
                     aria-expanded={rootProps['aria-expanded']}
                     aria-haspopup="listbox"
-                    aria-controls={inputProperties['aria-controls']}
-                    {...inputProperties}
+                    aria-controls={inputProps['aria-controls']}
+                    {...inputProps}
                     {...rest}
                     ref={mergeRefs(this.textInput, rootProps.ref)}
                   />
