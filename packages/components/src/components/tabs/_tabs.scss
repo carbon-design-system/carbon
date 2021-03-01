@@ -509,7 +509,6 @@
     @media not all and (min-resolution: 0.001dpcm) {
       @supports (-webkit-appearance: none) and (stroke-color: transparent) {
         .#{$prefix}--tabs__overflow-indicator--left {
-          margin-right: -$carbon--spacing-05;
           background-image: linear-gradient(
             to left,
             rgba($ui-background, 0),
@@ -518,7 +517,6 @@
         }
 
         .#{$prefix}--tabs__overflow-indicator--right {
-          margin-left: -$carbon--spacing-05;
           background-image: linear-gradient(
             to right,
             rgba($ui-background, 0),
