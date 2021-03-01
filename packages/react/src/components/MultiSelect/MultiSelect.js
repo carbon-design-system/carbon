@@ -192,9 +192,7 @@ const MultiSelect = React.forwardRef(function MultiSelect(
   }
 
   const onKeyDown = (e) => {
-    console.log('pressed a key');
     if (e.keyCode === 8 && !disabled) {
-      console.log('pressed DELETED');
       clearSelection();
       e.stopPropagation();
     }
@@ -229,7 +227,15 @@ const MultiSelect = React.forwardRef(function MultiSelect(
             className={`${prefix}--list-box__invalid-icon ${prefix}--list-box__invalid-icon--warning`}
           />
         )}
+        {selectedItems.length > 0 && (
+          <span
+            className={`${prefix}--visually-hidden`}
+            id={`clear-button-label${id}`}>
+            To clear selection, press Delete
+          </span>
+        )}
         <button
+          aria-describedby={`clear-button-label${id}`}
           type="button"
           className={`${prefix}--list-box__field`}
           disabled={disabled}
