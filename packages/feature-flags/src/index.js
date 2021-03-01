@@ -29,7 +29,10 @@ function checkForFlag(name) {
  * @param {string} name
  * @param {boolean} enabled
  */
-export function addFeatureFlag(name, enabled) {
+export function add(name, enabled) {
+  if (featureFlags.has(name)) {
+    throw new Error(`The feature flag: ${name} already exists`);
+  }
   featureFlags.set(name, enabled);
 }
 
@@ -37,7 +40,7 @@ export function addFeatureFlag(name, enabled) {
  * Enable a feature flag
  * @param {string} name
  */
-export function enableFeatureFlag(name) {
+export function enable(name) {
   checkForFlag(name);
   featureFlags.set(name, true);
 }
@@ -46,9 +49,20 @@ export function enableFeatureFlag(name) {
  * Disable a feature flag
  * @param {string} name
  */
-export function disableFeatureFlag(name) {
+export function disable(name) {
   checkForFlag(name);
   featureFlags.set(name, false);
+}
+
+/**
+ * Merge the given feature flags with the current set of feature flags.
+ * Duplicate keys will be set to the value in the given feature flags.
+ * @param {object} flags
+ */
+export function merge(flags) {
+  Object.keys(flags).forEach((key) => {
+    featureFlags.set(key, flags[key]);
+  });
 }
 
 /**
@@ -56,7 +70,7 @@ export function disableFeatureFlag(name) {
  * @param {string} name
  * @returns {boolean}
  */
-export function featureFlagEnabled(name) {
+export function enabled(name) {
   checkForFlag(name);
   return featureFlags.get(name);
 }

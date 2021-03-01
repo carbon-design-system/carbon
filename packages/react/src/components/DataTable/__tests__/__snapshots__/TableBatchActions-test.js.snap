@@ -39,6 +39,7 @@ exports[`DataTable.TableBatchActions should render 1`] = `
           type="button"
         >
           <button
+            aria-pressed={null}
             className="bx--batch-summary__cancel bx--btn bx--btn--primary"
             disabled={false}
             onClick={[MockFunction]}
@@ -93,6 +94,7 @@ exports[`DataTable.TableBatchActions should render 2`] = `
           type="button"
         >
           <button
+            aria-pressed={null}
             className="bx--batch-summary__cancel bx--btn bx--btn--primary"
             disabled={false}
             onClick={[MockFunction]}
