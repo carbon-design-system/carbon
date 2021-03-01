@@ -12,6 +12,7 @@ import TextInput from '../TextInput';
 import RadioButtonGroup from '../RadioButtonGroup';
 import RadioButton from '../RadioButton';
 import Button from '../Button';
+import mdx from './FormGroup.mdx';
 
 const props = () => ({
   disabled: boolean('Disabled (disabled)', false),
@@ -24,6 +25,9 @@ export default {
 
   parameters: {
     component: FormGroup,
+    docs: {
+      page: mdx,
+    },
   },
 };
 
