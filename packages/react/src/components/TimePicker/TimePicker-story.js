@@ -67,7 +67,7 @@ const props = {
 };
 
 export default {
-  title: 'TimePicker',
+  title: 'Components/TimePicker',
   decorators: [withKnobs],
   parameters: {
     component: TimePicker,

@@ -218,7 +218,7 @@ class OverflowMenu extends Component {
   };
 
   static defaultProps = {
-    ariaLabel: 'Menu',
+    ariaLabel: 'open and close list of options',
     iconDescription: 'open and close list of options',
     open: false,
     direction: DIRECTION_BOTTOM,
@@ -494,7 +494,7 @@ class OverflowMenu extends Component {
     const childrenWithProps = React.Children.toArray(children).map(
       (child, index) =>
         React.cloneElement(child, {
-          closeMenu: child.props.closeMenu || this.closeMenu,
+          closeMenu: child?.props?.closeMenu || this.closeMenu,
           handleOverflowMenuItemFocus: this.handleOverflowMenuItemFocus,
           ref: (e) => {
             this[`overflowMenuItem${index}`] = e;

@@ -6,7 +6,16 @@
  */
 
 import { getAttributes } from '@carbon/icon-helpers';
-import { h } from 'vue';
+import * as Vue from 'vue';
+
+// Note: we dynamically access keys on the Vue namespace so that rollup does not
+// automatically rewrite the binding into `import { h } from 'vue'` as this is
+// currently causing issues in Vue 2 environments
+function getVueExport(key) {
+  return Vue[key];
+}
+
+const h = getVueExport('h');
 
 const getSvgAttrs = (title, svgAttrs, componentAttrs) => {
   return getAttributes({

@@ -39,7 +39,7 @@ const props = () => ({
 });
 
 export default {
-  title: 'unstable_Pagination',
+  title: 'Experimental/unstable_Pagination',
   decorators: [
     withKnobs,
     (story) => <div style={{ width: '800px' }}>{story()}</div>,
