@@ -18,6 +18,9 @@
     "components",
     "react"
   ],
+  "publishConfig": {
+    "access": "public"
+  },
   "scripts": {
     "build": "yarn clean && node tasks/build.js && rollup -c",
     "clean": "rimraf es lib scss/generated src/generated",
