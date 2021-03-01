@@ -26,7 +26,7 @@ const props = () => ({
 });
 
 export default {
-  title: 'PaginationNav',
+  title: 'Components/PaginationNav',
   decorators: [
     withKnobs,
     (story) => <div style={{ width: '800px' }}>{story()}</div>,

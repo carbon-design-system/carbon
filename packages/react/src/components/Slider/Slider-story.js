@@ -40,7 +40,7 @@ const props = () => ({
 });
 
 export default {
-  title: 'Slider',
+  title: 'Components/Slider',
   decorators: [withKnobs],
 
   parameters: {

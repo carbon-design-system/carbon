@@ -40,7 +40,7 @@ const props = () => ({
 });
 
 export default {
-  title: 'Search',
+  title: 'Components/Search',
   decorators: [withKnobs],
 
   parameters: {

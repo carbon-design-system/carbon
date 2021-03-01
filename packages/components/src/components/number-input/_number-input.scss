@@ -33,15 +33,14 @@
     width: 100%;
     min-width: 9.375rem;
     height: rem(40px);
-    padding-right: $carbon--spacing-07;
+    padding-right: rem(128px);
     padding-left: $carbon--spacing-05;
     color: $text-01;
     font-weight: 300;
-
     font-family: carbon--font-family('mono');
     background-color: $field-01;
-    border: none;
-    border-bottom: 1px solid $ui-04;
+    border: 0;
+    border-bottom: rem(1px) solid $ui-04;
     border-radius: 0;
     transition: background-color $duration--fast-01 motion(standard, productive),
       outline $duration--fast-01 motion(standard, productive);
@@ -73,6 +72,14 @@
     }
   }
 
+  .#{$prefix}--number--xl.#{$prefix}--number input[type='number'] {
+    padding-right: rem(144px);
+  }
+
+  .#{$prefix}--number--sm.#{$prefix}--number input[type='number'] {
+    padding-right: rem(112px);
+  }
+
   .#{$prefix}--number input[type='number']:disabled,
   .#{$prefix}--number--readonly input[type='number'] {
     color: $disabled;
@@ -95,9 +102,11 @@
     top: 50%;
     right: 0;
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     align-items: center;
     justify-content: center;
+    width: rem(80px);
+    height: 100%;
     transform: translateY(-50%);
 
     // Windows, Firefox HCM Fix
@@ -111,24 +120,36 @@
   .#{$prefix}--number__control-btn {
     @include button-reset;
 
+    position: relative;
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    width: rem(32px);
-    height: rem(20px);
+    height: 100%;
     color: $icon-01;
+    border-bottom: rem(1px) solid $ui-04;
+
+    &::before,
+    &::after {
+      position: absolute;
+      top: rem(2px);
+      display: block;
+      width: rem(2px);
+      // height: calc(100% - 4px) is calculated differently in Safari
+      height: rem(36px);
+      background-color: $field-01;
+      content: '';
+    }
+
+    &::before {
+      left: 0;
+    }
+
+    &::after {
+      right: 0;
+    }
 
     svg {
-      position: relative;
       fill: currentColor;
-    }
-
-    &.up-icon svg {
-      top: rem(5px);
-    }
-
-    &.down-icon svg {
-      top: rem(-5px);
     }
 
     &:focus {
@@ -141,13 +162,141 @@
 
     &:hover {
       color: $icon-01;
+      background-color: $hover-ui;
       cursor: pointer;
+
+      &::before,
+      &::after {
+        background-color: $hover-ui;
+      }
+    }
+
+    &:focus::before,
+    &:focus::after,
+    &:hover:focus::before,
+    &:hover:focus::after {
+      background-color: transparent;
     }
 
     &:disabled {
       color: $disabled;
+      border-bottom-color: transparent;
       cursor: not-allowed;
     }
+  }
+
+  // set orders to facilitate styling for rule dividers
+  .#{$prefix}--number__control-btn.down-icon {
+    order: 1;
+  }
+
+  .#{$prefix}--number__control-btn.up-icon {
+    order: 2;
+  }
+
+  // add top and bottom outlines to number controls when input is focused
+  .#{$prefix}--number
+    input[type='number']:focus
+    ~ .#{$prefix}--number__controls
+    .#{$prefix}--number__control-btn {
+    border-bottom-width: 0;
+
+    &:hover {
+      @include focus-outline('outline');
+
+      border: 0;
+    }
+  }
+
+  .#{$prefix}--number
+    input[type='number'][data-invalid]
+    ~ .#{$prefix}--number__controls
+    .#{$prefix}--number__control-btn {
+    border-bottom-width: 0;
+  }
+
+  // add invalid outline to number controls only when invalid input is not focused
+  .#{$prefix}--number
+    input[type='number'][data-invalid]:not(:focus)
+    ~ .#{$prefix}--number__controls
+    .#{$prefix}--number__control-btn:hover {
+    @include focus-outline('invalid');
+  }
+
+  .#{$prefix}--number
+    input[type='number']:focus
+    ~ .#{$prefix}--number__controls
+    .#{$prefix}--number__control-btn.up-icon::after {
+    background-color: transparent;
+  }
+
+  .#{$prefix}--number
+    input[type='number'][data-invalid]
+    ~ .#{$prefix}--number__controls
+    .#{$prefix}--number__control-btn.up-icon::after {
+    background-color: $support-01;
+  }
+
+  .#{$prefix}--number
+    input[type='number'][data-invalid]:focus
+    ~ .#{$prefix}--number__controls
+    .#{$prefix}--number__control-btn.up-icon::after,
+  .#{$prefix}--number
+    input[type='number'][data-invalid]
+    ~ .#{$prefix}--number__controls
+    .#{$prefix}--number__control-btn.up-icon:focus::after {
+    background-color: $focus;
+  }
+
+  .#{$prefix}--number__rule-divider {
+    position: absolute;
+    z-index: z('overlay');
+    width: rem(1px);
+    height: rem(16px);
+    background-color: $ui-03;
+
+    &:first-of-type {
+      order: 0;
+    }
+  }
+
+  // rule divider styles
+  .#{$prefix}--number__controls
+    .#{$prefix}--number__rule-divider:first-of-type {
+    left: 0;
+    background-color: transparent;
+  }
+
+  .#{$prefix}--number__invalid
+    + .#{$prefix}--number__controls
+    .#{$prefix}--number__rule-divider:first-of-type {
+    background-color: $ui-03;
+  }
+
+  .#{$prefix}--number--light .#{$prefix}--number__rule-divider,
+  .#{$prefix}--number--light
+    .#{$prefix}--number__invalid
+    + .#{$prefix}--number__controls
+    .#{$prefix}--number__rule-divider:first-of-type {
+    background-color: $decorative-01;
+  }
+
+  .#{$prefix}--number
+    input[type='number']:disabled
+    + .#{$prefix}--number__controls
+    .#{$prefix}--number__rule-divider:first-of-type {
+    background-color: transparent;
+  }
+
+  .#{$prefix}--number
+    input[type='number']:disabled
+    + .#{$prefix}--number__controls
+    .#{$prefix}--number__rule-divider {
+    background-color: $disabled-02;
+  }
+
+  .#{$prefix}--number__control-btn:focus ~ .#{$prefix}--number__rule-divider {
+    background-color: transparent;
   }
 
   .#{$prefix}--number--readonly .#{$prefix}--number__control-btn {
@@ -156,8 +305,44 @@
 
   .#{$prefix}--number__invalid {
     position: absolute;
-    right: 2rem;
+    right: rem(96px);
     fill: $support-01;
+  }
+
+  .#{$prefix}--number--xl .#{$prefix}--number__invalid {
+    right: rem(112px);
+  }
+
+  .#{$prefix}--number--sm .#{$prefix}--number__invalid {
+    right: rem(80px);
+  }
+
+  .#{$prefix}--number__invalid + .#{$prefix}--number__rule-divider {
+    position: absolute;
+    right: rem(80px);
+  }
+
+  .#{$prefix}--number--xl
+    .#{$prefix}--number__invalid
+    + .#{$prefix}--number__rule-divider {
+    right: rem(96px);
+  }
+
+  .#{$prefix}--number--sm
+    .#{$prefix}--number__invalid
+    + .#{$prefix}--number__rule-divider {
+    right: rem(64px);
+  }
+
+  .#{$prefix}--number__control-btn.down-icon:hover
+    ~ .#{$prefix}--number__rule-divider,
+  .#{$prefix}--number__control-btn.up-icon:hover
+    + .#{$prefix}--number__rule-divider,
+  .#{$prefix}--number__control-btn.down-icon:focus
+    ~ .#{$prefix}--number__rule-divider,
+  .#{$prefix}--number__control-btn.up-icon:focus
+    + .#{$prefix}--number__rule-divider {
+    background-color: transparent;
   }
 
   .#{$prefix}--number__invalid--warning {
@@ -180,52 +365,20 @@
     background-color: $field-02;
   }
 
-  .#{$prefix}--number--mobile {
-    width: auto;
-    min-width: rem(144px);
+  .#{$prefix}--number--light .#{$prefix}--number__control-btn::before,
+  .#{$prefix}--number--light .#{$prefix}--number__control-btn::after {
+    background-color: $field-02;
+  }
 
-    .#{$prefix}--number__control-btn,
-    &.#{$prefix}--number--light .#{$prefix}--number__control-btn {
-      position: static;
-      width: rem(40px);
-      height: rem(40px);
-      background-color: $ui-01;
+  .#{$prefix}--number--light .#{$prefix}--number__control-btn:focus::before,
+  .#{$prefix}--number--light .#{$prefix}--number__control-btn:focus::after {
+    background-color: transparent;
+  }
 
-      &:hover,
-      &:focus {
-        background-color: $hover-ui;
-      }
-
-      &:focus {
-        outline-width: 2px;
-        outline-offset: -2px;
-      }
-
-      svg {
-        position: static;
-      }
-    }
-
-    input[type='number'] {
-      width: auto;
-      min-width: rem(64px);
-      margin: 0;
-      padding: 0;
-      text-align: center;
-      background-color: $field-01;
-      border-right: 1px solid $ui-03;
-      border-left: 1px solid $ui-03;
-    }
-
-    &.#{$prefix}--number--light {
-      input[type='number'] {
-        background-color: $field-02;
-      }
-
-      .#{$prefix}--number__control-btn {
-        background-color: $ui-02;
-      }
-    }
+  .#{$prefix}--number--light .#{$prefix}--number__control-btn:hover,
+  .#{$prefix}--number--light .#{$prefix}--number__control-btn:hover::before,
+  .#{$prefix}--number--light .#{$prefix}--number__control-btn:hover::after {
+    background-color: $hover-light-ui;
   }
 
   // Size Variant styles
@@ -233,48 +386,36 @@
     height: rem(48px);
   }
 
+  .#{$prefix}--number--xl .#{$prefix}--number__controls {
+    width: rem(96px);
+  }
+
   .#{$prefix}--number--xl .#{$prefix}--number__control-btn {
-    height: rem(24px);
-  }
-
-  .#{$prefix}--number--xl.#{$prefix}--number--mobile
-    .#{$prefix}--number__control-btn {
     width: rem(48px);
-    height: rem(48px);
-  }
 
-  .#{$prefix}--number--xl .#{$prefix}--number__control-btn.up-icon svg {
-    // Needed to maintain arrow spacing between input sizes.
-    top: rem(6.6px);
-  }
-
-  .#{$prefix}--number--xl .#{$prefix}--number__control-btn.down-icon svg {
-    // Needed to maintain arrow spacing between input sizes.
-    top: rem(-6.6px);
+    &::before,
+    &::after {
+      // height: calc(100% - 4px) is calculated differently in Safari
+      height: rem(44px);
+    }
   }
 
   .#{$prefix}--number--sm input[type='number'] {
     height: rem(32px);
   }
 
+  .#{$prefix}--number--sm .#{$prefix}--number__controls {
+    width: rem(64px);
+  }
+
   .#{$prefix}--number--sm .#{$prefix}--number__control-btn {
-    height: rem(16px);
-  }
-
-  .#{$prefix}--number--sm.#{$prefix}--number--mobile
-    .#{$prefix}--number__control-btn {
     width: rem(32px);
-    height: rem(32px);
-  }
 
-  .#{$prefix}--number--sm .#{$prefix}--number__control-btn.up-icon svg {
-    // Needed to maintain arrow spacing between input sizes.
-    top: rem(3.4px);
-  }
-
-  .#{$prefix}--number--sm .#{$prefix}--number__control-btn.down-icon svg {
-    // Needed to maintain arrow spacing between input sizes.
-    top: rem(-3.4px);
+    &::before,
+    &::after {
+      // height: calc(100% - 4px) is calculated differently in Safari
+      height: rem(28px);
+    }
   }
 
   //No label positioning adjustment

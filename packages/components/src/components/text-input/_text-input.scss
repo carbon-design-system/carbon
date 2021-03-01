@@ -215,6 +215,13 @@
   }
 
   //-----------------------------
+  // Skeleton
+  //-----------------------------
+  .#{$prefix}--skeleton.#{$prefix}--text-input {
+    @include skeleton;
+  }
+
+  //-----------------------------
   // Fluid Text Input
   //-----------------------------
   .#{$prefix}--form--fluid .#{$prefix}--text-input-wrapper {
