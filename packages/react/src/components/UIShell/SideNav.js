@@ -32,6 +32,7 @@ const SideNav = React.forwardRef(function SideNav(props, ref) {
     isPersistent,
     addFocusListeners,
     addMouseListeners,
+    ...other
   } = props;
 
   const { current: controlled } = useRef(expandedProp !== undefined);
@@ -122,6 +123,7 @@ const SideNav = React.forwardRef(function SideNav(props, ref) {
         {...accessibilityLabel}
         {...eventHandlers}>
         {childrenToRender}
+        {...other}
       </nav>
     </>
   );
