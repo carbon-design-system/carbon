@@ -4505,6 +4505,9 @@ Map {
         ],
         "type": "oneOf",
       },
+      "legendText": Object {
+        "type": "node",
+      },
       "name": Object {
         "isRequired": true,
         "type": "string",
@@ -6394,7 +6397,6 @@ Map {
     "defaultProps": Object {
       "columnCount": 5,
       "compact": false,
-      "headers": Array [],
       "rowCount": 5,
       "showHeader": true,
       "showToolbar": true,

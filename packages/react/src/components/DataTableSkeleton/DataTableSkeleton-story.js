@@ -9,21 +9,19 @@
 
 import React from 'react';
 
-import { withKnobs, boolean, array } from '@storybook/addon-knobs';
+import { withKnobs, boolean } from '@storybook/addon-knobs';
 import DataTableSkeleton from '../DataTableSkeleton';
 
+const headers = [
+  { key: 'Name' },
+  { key: 'Protocol' },
+  { key: 'Port' },
+  { key: 'Rule' },
+  { key: 'Attached Groups' },
+];
+
 const props = () => ({
-  headers: array(
-    'Optional table headers (headers)',
-    [
-      { key: 'name' },
-      { key: 'protocol' },
-      { key: 'port' },
-      { key: 'rule' },
-      { key: 'attached-groups' },
-    ],
-    ','
-  ),
+  showHeaders: boolean('Show table headers', true),
   zebra: boolean('Use zebra stripe (zebra)', false),
   compact: boolean('Compact variant (compact)', false),
   showHeader: boolean('Show the Table Header (showHeader)', true),
@@ -39,12 +37,15 @@ export default {
   },
 };
 
-export const Skeleton = () => (
-  <div style={{ width: '800px' }}>
-    <DataTableSkeleton {...props()} />
-    <br />
-  </div>
-);
+export const Skeleton = () => {
+  const { showHeaders } = props();
+  return (
+    <div style={{ width: '800px' }}>
+      <DataTableSkeleton {...props()} headers={showHeaders ? headers : null} />
+      <br />
+    </div>
+  );
+};
 
 Skeleton.storyName = 'default';
 
