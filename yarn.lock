@@ -1676,13 +1676,14 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@carbon/feature-flags@workspace:packages/feature-flags":
+"@carbon/feature-flags@^0.0.0, @carbon/feature-flags@workspace:packages/feature-flags":
   version: 0.0.0-use.local
   resolution: "@carbon/feature-flags@workspace:packages/feature-flags"
   dependencies:
     "@babel/generator": ^7.10.2
     "@babel/types": ^7.10.2
     "@carbon/scss-generator": ^10.13.0
+    change-case: ^4.1.2
     fs-extra: ^9.0.1
     js-yaml: ^3.14.0
     rimraf: ^3.0.2
@@ -9229,6 +9230,7 @@ __metadata:
     "@babel/plugin-transform-object-assign": ^7.7.4
     "@babel/preset-env": ^7.10.0
     "@babel/preset-react": ^7.10.0
+    "@carbon/feature-flags": ^0.0.0
     "@carbon/icons-react": ^10.26.0
     "@carbon/telemetry": 0.0.0-alpha.6
     "@carbon/test-utils": ^10.15.0
