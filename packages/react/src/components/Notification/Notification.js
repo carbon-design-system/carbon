@@ -6,7 +6,7 @@
  */
 
 import PropTypes from 'prop-types';
-import React, { useCallback, useState, useEffect } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import cx from 'classnames';
 import { settings } from 'carbon-components';
 import {
@@ -267,33 +267,38 @@ export function ToastNotification({
     [`${prefix}--toast-notification--${kind}`]: kind,
   });
 
-  const handleClose = useCallback(
-    (evt) => {
-      if (!onClose || onClose(evt) !== false) {
-        setIsOpen(false);
-      }
-    },
-    [onClose]
-  );
+  const handleClose = (evt) => {
+    if (!onClose || onClose(evt) !== false) {
+      setIsOpen(false);
+    }
+  };
 
   function handleCloseButtonClick(event) {
     onCloseButtonClick(event);
     handleClose(event);
   }
 
+  const savedOnClose = useRef(onClose);
+
+  useEffect(() => {
+    savedOnClose.current = onClose;
+  });
+
   useEffect(() => {
     if (!timeout) {
       return;
     }
 
-    const timeoutId = window.setTimeout((evt) => {
-      handleClose(evt);
-    }, timeout);
-
+    const timeoutId = window.setTimeout((event) => {
+      setIsOpen(false);
+      if (savedOnClose.current) {
+        savedOnClose.current(event);
+      }
+    });
     return () => {
       window.clearTimeout(timeoutId);
     };
-  }, [handleClose, timeout]);
+  }, [timeout]);
 
   if (!isOpen) {
     return null;
@@ -447,14 +452,11 @@ export function InlineNotification({
     [`${prefix}--inline-notification--hide-close-button`]: hideCloseButton,
   });
 
-  const handleClose = useCallback(
-    (evt) => {
-      if (!onClose || onClose(evt) !== false) {
-        setIsOpen(false);
-      }
-    },
-    [onClose]
-  );
+  const handleClose = (evt) => {
+    if (!onClose || onClose(evt) !== false) {
+      setIsOpen(false);
+    }
+  };
 
   function handleCloseButtonClick(event) {
     onCloseButtonClick(event);
