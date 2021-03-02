@@ -254,7 +254,8 @@ export const HeaderBaseWActions = withReadme(readme, () => (
       </HeaderGlobalAction>
       <HeaderGlobalAction
         aria-label="App Switcher"
-        onClick={action('app-switcher click')}>
+        onClick={action('app-switcher click')}
+        tooltipAlignment="end">
         <AppSwitcher20 />
       </HeaderGlobalAction>
     </HeaderGlobalBar>
@@ -283,7 +284,8 @@ export const HeaderBaseWSkipToContent = withReadme(readme, () => (
         </HeaderGlobalAction>
         <HeaderGlobalAction
           aria-label="App Switcher"
-          onClick={action('app-switcher click')}>
+          onClick={action('app-switcher click')}
+          tooltipAlignment="end">
           <AppSwitcher20 />
         </HeaderGlobalAction>
       </HeaderGlobalBar>
@@ -330,7 +332,8 @@ export const HeaderBaseWNavigationAndActions = withReadme(readme, () => (
           </HeaderGlobalAction>
           <HeaderGlobalAction
             aria-label="App Switcher"
-            onClick={action('app-switcher click')}>
+            onClick={action('app-switcher click')}
+            tooltipAlignment="end">
             <AppSwitcher20 />
           </HeaderGlobalAction>
         </HeaderGlobalBar>
@@ -396,7 +399,8 @@ export const HeaderBaseWNavigationActionsAndSideNav = withReadme(readme, () => (
             </HeaderGlobalAction>
             <HeaderGlobalAction
               aria-label="App Switcher"
-              onClick={action('app-switcher click')}>
+              onClick={action('app-switcher click')}
+              tooltipAlignment="end">
               <AppSwitcher20 />
             </HeaderGlobalAction>
           </HeaderGlobalBar>
@@ -552,7 +556,8 @@ export const HeaderBaseWActionsAndRightPanel = withReadme(readme, () => (
       </HeaderGlobalAction>
       <HeaderGlobalAction
         aria-label="App Switcher"
-        onClick={action('app-switcher click')}>
+        onClick={action('app-switcher click')}
+        tooltipAlignment="end">
         <AppSwitcher20 />
       </HeaderGlobalAction>
     </HeaderGlobalBar>
@@ -580,7 +585,8 @@ export const HeaderBaseWActionsAndSwitcher = withReadme(readme, () => (
       <HeaderGlobalAction
         aria-label="App Switcher"
         isActive
-        onClick={action('app-switcher click')}>
+        onClick={action('app-switcher click')}
+        tooltipAlignment="end">
         <AppSwitcher20 />
       </HeaderGlobalAction>
     </HeaderGlobalBar>
@@ -828,7 +834,8 @@ export const SideNavRailWHeader = withReadme(readme, () => (
             </HeaderGlobalAction>
             <HeaderGlobalAction
               aria-label="App Switcher"
-              onClick={action('app-switcher click')}>
+              onClick={action('app-switcher click')}
+              tooltipAlignment="end">
               <AppSwitcher20 />
             </HeaderGlobalAction>
           </HeaderGlobalBar>
