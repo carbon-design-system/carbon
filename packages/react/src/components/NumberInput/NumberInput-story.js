@@ -40,7 +40,6 @@ const props = () => ({
   disabled: boolean('Disabled (disabled)', false),
   readOnly: boolean('Read only (readOnly)', false),
   invalid: boolean('Show form validation UI (invalid)', false),
-  isMobile: boolean('Mobile variant', false),
   invalidText: text(
     'Form validation UI content (invalidText)',
     'Number is not valid'

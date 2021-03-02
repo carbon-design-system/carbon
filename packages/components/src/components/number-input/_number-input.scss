@@ -381,54 +381,6 @@
     background-color: $hover-light-ui;
   }
 
-  .#{$prefix}--number--mobile {
-    width: auto;
-    min-width: rem(144px);
-
-    .#{$prefix}--number__control-btn,
-    &.#{$prefix}--number--light .#{$prefix}--number__control-btn {
-      position: static;
-      width: rem(40px);
-      height: rem(40px);
-      background-color: $ui-01;
-
-      &:hover,
-      &:focus {
-        background-color: $hover-ui;
-      }
-
-      &:focus {
-        outline-width: 2px;
-        outline-offset: -2px;
-      }
-
-      svg {
-        position: static;
-      }
-    }
-
-    input[type='number'] {
-      width: auto;
-      min-width: rem(64px);
-      margin: 0;
-      padding: 0;
-      text-align: center;
-      background-color: $field-01;
-      border-right: 1px solid $ui-03;
-      border-left: 1px solid $ui-03;
-    }
-
-    &.#{$prefix}--number--light {
-      input[type='number'] {
-        background-color: $field-02;
-      }
-
-      .#{$prefix}--number__control-btn {
-        background-color: $ui-02;
-      }
-    }
-  }
-
   // Size Variant styles
   .#{$prefix}--number--xl input[type='number'] {
     height: rem(48px);
@@ -448,12 +400,6 @@
     }
   }
 
-  .#{$prefix}--number--xl.#{$prefix}--number--mobile
-    .#{$prefix}--number__control-btn {
-    width: rem(48px);
-    height: rem(48px);
-  }
-
   .#{$prefix}--number--sm input[type='number'] {
     height: rem(32px);
   }
@@ -470,12 +416,6 @@
       // height: calc(100% - 4px) is calculated differently in Safari
       height: rem(28px);
     }
-  }
-
-  .#{$prefix}--number--sm.#{$prefix}--number--mobile
-    .#{$prefix}--number__control-btn {
-    width: rem(32px);
-    height: rem(32px);
   }
 
   //No label positioning adjustment
