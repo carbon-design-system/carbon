@@ -33,7 +33,7 @@
     "chalk": "^2.4.2",
     "change-case": "^4.1.1",
     "cross-spawn": "^6.0.5",
-    "fast-glob": "^2.2.6",
+    "fast-glob": "^3.2.5",
     "fs-extra": "^8.1.0",
     "inquirer": "^6.3.1",
     "jest-diff": "^23.6.0",
