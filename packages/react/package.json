@@ -44,6 +44,7 @@
     "react-dom": "^16.8.6 || ^17.0.1"
   },
   "dependencies": {
+    "@carbon/feature-flags": "^0.0.0",
     "@carbon/icons-react": "^10.26.0",
     "@carbon/telemetry": "0.0.0-alpha.6",
     "classnames": "2.2.6",
