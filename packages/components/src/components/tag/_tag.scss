@@ -147,6 +147,11 @@
     text-overflow: ellipsis;
   }
 
+  .#{$prefix}--tag--interactive:focus {
+    outline: none;
+    box-shadow: inset 0 0 0 1px $focus;
+  }
+
   .#{$prefix}--tag--interactive:hover {
     cursor: pointer;
   }
