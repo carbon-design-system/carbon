@@ -168,6 +168,10 @@
     }
   }
 
+  .#{$prefix}--tag--interactive {
+    transition: background-color $duration--fast-01 motion(entrance, productive);
+  }
+
   .#{$prefix}--tag__close-icon {
     display: flex;
     flex-shrink: 0;
