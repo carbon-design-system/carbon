@@ -20,6 +20,7 @@ import { useSelection } from '../../internal/Selection';
 import setupGetInstanceId from '../../tools/setupGetInstanceId';
 import { mapDownshiftProps } from '../../tools/createPropAdapter';
 import mergeRefs from '../../tools/mergeRefs';
+import { keys, match } from '../../internal/keyboard';
 
 const { prefix } = settings;
 const noop = () => {};
@@ -194,7 +195,7 @@ const MultiSelect = React.forwardRef(function MultiSelect(
   }
 
   const onKeyDown = (e) => {
-    if (e.keyCode === 8 && !disabled) {
+    if (match(e, keys.Delete) && !disabled) {
       clearSelection();
       e.stopPropagation();
     }
