@@ -19,6 +19,7 @@ import { Add16, Delete16 } from '@carbon/icons-react';
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 
 - [Overview](#overview)
+- [Danger Buttons](#danger-buttons)
 - [Icon-only Buttons](#icon-only-buttons)
 - [Set of Buttons](#set-of-buttons)
 - [Skeleton state](#skeleton-state)
@@ -48,11 +49,24 @@ in a variety of ways. `Button` labels express what action will occur when the
 user interacts with it.
 
 <Preview>
-  <Story id="button--default" />
-  <Story id="button--secondary" />
-  <Story id="button--tertiary" />
-  <Story id="button--danger" />
-  <Story id="button--ghost" />
+  <Story id="components-button--default" />
+  <Story id="components-button--secondary" />
+  <Story id="components-button--tertiary" />
+  <Story id="components-button--ghost" />
+</Preview>
+
+## Danger Buttons
+
+The danger button has three different styles: primary, tertiary, and ghost.
+Determining which danger button style to use will depend on the level of
+emphasis you want to give to the danger action. Destructive actions that are
+considered a required or primary step in a workflow should use the primary
+danger button style. However, if a destructive action is just one of several
+actions a user could choose from, then a lower emphasis style like the tertiary
+danger button or the ghost danger button may be more appropriate.
+
+<Preview>
+  <Story id="components-button--danger" />
 </Preview>
 
 ## Icon-only Buttons
@@ -63,7 +77,7 @@ Tertiary, Danger, Danger tertiary, Danger ghost and Ghost) but most commonly
 will be styled as primary or ghost buttons.
 
 <Preview>
-  <Story id="button--icon-button" />
+  <Story id="components-button--icon-button" />
 </Preview>
 
 ## Set of Buttons
@@ -76,7 +90,7 @@ on the right. When these two types buttons are paired in the correct order, they
 will automatically space themselves apart.
 
 <Preview>
-  <Story id="button--set-of-buttons" />
+  <Story id="components-button--set-of-buttons" />
 </Preview>
 
 ## Skeleton state
@@ -86,7 +100,7 @@ button. This is useful to display on initial page load to indicate to users that
 content is being loaded.
 
 <Preview>
-  <Story id="button--skeleton" />
+  <Story id="components-button--skeleton" />
 </Preview>
 
 ## Component API
