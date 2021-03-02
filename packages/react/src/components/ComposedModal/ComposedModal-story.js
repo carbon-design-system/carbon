@@ -261,6 +261,10 @@ export const Default = () => {
   );
 };
 
+Default.story = {
+  name: 'Composed Modal',
+};
+
 export const PassiveModal = () => {
   return (
     <ComposedModal open>
