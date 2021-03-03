@@ -130,13 +130,14 @@ const SideNav = React.forwardRef(function SideNav(props, ref) {
 });
 
 SideNav.defaultProps = {
-  translateById: (id) => {
-    const translations = {
-      'carbon.sidenav.state.open': 'Close',
-      'carbon.sidenav.state.closed': 'Open',
-    };
-    return translations[id];
-  },
+  // TO-DO: comment back in when footer is added for rails
+  // translateById: (id) => {
+  //   const translations = {
+  //     'carbon.sidenav.state.open': 'Close',
+  //     'carbon.sidenav.state.closed': 'Open',
+  //   };
+  //   return translations[id];
+  // },
   defaultExpanded: false,
   isChildOfHeader: true,
   isFixedNav: false,
