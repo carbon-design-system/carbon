@@ -42,7 +42,7 @@
     "change-case": "^4.1.1",
     "core-js": "^3.6.5",
     "fs-extra": "^8.1.0",
-    "js-yaml": "^3.13.0",
+    "js-yaml": "^4.0.0",
     "node-sass": "^4.13.1",
     "rimraf": "^3.0.0"
   }
