@@ -4505,6 +4505,9 @@ Map {
         ],
         "type": "oneOf",
       },
+      "legendText": Object {
+        "type": "node",
+      },
       "name": Object {
         "isRequired": true,
         "type": "string",
@@ -6780,6 +6783,16 @@ Map {
       },
       "onClick": Object {
         "type": "func",
+      },
+      "tooltipAlignment": Object {
+        "args": Array [
+          Array [
+            "start",
+            "center",
+            "end",
+          ],
+        ],
+        "type": "oneOf",
       },
     },
     "render": [Function],
