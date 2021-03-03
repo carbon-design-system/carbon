@@ -20,7 +20,7 @@ import mdx from './Popover.mdx';
 import { useOutsideClick } from '../../internal/useOutsideClick';
 
 export default {
-  title: 'unstable_Popover',
+  title: ''Experimental/unstable_Popover',
   component: Popover,
   subcomponents: {
     PopoverContent,
