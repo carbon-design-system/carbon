@@ -133,14 +133,14 @@ export const Playground = () => {
 
   return (
     <Popover
-      align={select('Specify the caret alignment', options, 'top')}
-      caret={boolean('Specify whether the caret should be visible', true)}
+      align={select('Specify the caret alignment (align)', options, 'top')}
+      caret={boolean('Specify whether the caret should be visible (caret)', true)}
       highContrast={boolean(
-        'Specify whether the high-contrast variant should render',
+        'Specify whether the high-contrast variant should render (highContrast)',
         false
       )}
-      light={boolean('Specify whether the light variant should render', false)}
-      open={boolean('Specify whether the popover is open or closed', true)}>
+      light={boolean('Specify whether the light variant should render (light)', false)}
+      open={boolean('Specify whether the popover is open or closed (open)', true)}>
       <PopoverContent className="p-3">Sample content</PopoverContent>
     </Popover>
   );
