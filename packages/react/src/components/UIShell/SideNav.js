@@ -121,9 +121,9 @@ const SideNav = React.forwardRef(function SideNav(props, ref) {
         ref={ref}
         className={`${prefix}--side-nav__navigation ${className}`}
         {...accessibilityLabel}
-        {...eventHandlers}>
+        {...eventHandlers}
+        {...other}>
         {childrenToRender}
-        {...other}
       </nav>
     </>
   );
