@@ -336,7 +336,7 @@ export default class ComboBox extends React.Component {
       placeholder,
       initialSelectedItem,
       selectedItem,
-      ariaLabel, // eslint-disable-line no-unused-vars
+      ariaLabel,
       translateWithId,
       invalid,
       invalidText,
@@ -497,7 +497,7 @@ export default class ComboBox extends React.Component {
                     translateWithId={translateWithId}
                   />
                 </div>
-                <ListBox.Menu {...getMenuProps()}>
+                <ListBox.Menu {...getMenuProps({ 'aria-label': ariaLabel })}>
                   {isOpen
                     ? this.filterItems(items, itemToString, inputValue).map(
                         (item, index) => {
