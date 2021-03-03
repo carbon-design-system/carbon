@@ -28,7 +28,7 @@ Section.propTypes = {
   as: PropTypes.elementType,
 
   /**
-   * Specify the content that will be placed in the aspect ratio
+   * Specify the content that will be placed in the component
    */
   children: PropTypes.node,
 
@@ -45,7 +45,7 @@ function Heading(props) {
 
 Heading.propTypes = {
   /**
-   * Specify the content that will be placed in the aspect ratio
+   * Specify the content that will be placed in the component
    */
   children: PropTypes.node,
 
