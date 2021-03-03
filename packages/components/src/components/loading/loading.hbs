@@ -7,13 +7,13 @@
 
 {{#if overlay}}<div class="{{@root.prefix}}--loading-overlay">{{/if}}
   <div data-loading class="{{@root.prefix}}--loading{{#if small}} {{@root.prefix}}--loading--small{{/if}}">
-    <svg class="{{@root.prefix}}--loading__svg" viewBox="-75 -75 150 150">
+    <svg class="{{@root.prefix}}--loading__svg" viewBox="0 0 100 100">
       <title>Loading</title>
       {{#if small}}
-      <circle class="{{@root.prefix}}--loading__background" cx="0" cy="0" r="26.8125" />
-      <circle class="{{@root.prefix}}--loading__stroke" cx="0" cy="0" r="26.8125" />
+      <circle class="{{@root.prefix}}--loading__background" cx="50%" cy="50%" r="42" />
+      <circle class="{{@root.prefix}}--loading__stroke" cx="50%" cy="50%" r="42" />
       {{else}}
-      <circle class="{{@root.prefix}}--loading__stroke" cx="0" cy="0" r="37.5" />
+      <circle class="{{@root.prefix}}--loading__stroke" cx="50%" cy="50%" r="44" />
       {{/if}}
     </svg>
   </div>
