@@ -504,8 +504,10 @@ export default class ComboBox extends React.Component {
                           const itemProps = getItemProps({
                             item,
                             index,
-                            ['aria-selected']:
+                            ['aria-current']:
                               selectedItem === item ? true : null,
+                            ['aria-selected']:
+                              highlightedIndex === index ? true : null,
                           });
                           return (
                             <ListBox.MenuItem
