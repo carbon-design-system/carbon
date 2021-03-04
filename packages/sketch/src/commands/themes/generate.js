@@ -21,7 +21,7 @@ export function generate() {
   command('commands/themes/generate', () => {
     const document = Document.getSelectedDocument();
     const page = selectPage(findOrCreatePage(document, 'themes'));
-    const sharedStyles = syncThemeColorStyles(document, 'fill');
+    const sharedStyles = syncThemeColorStyles(document);
 
     const tokens = groupByKey(sharedStyles, (sharedStyle) => {
       const [_namespace, _category, _group, token] = sharedStyle.name.split(

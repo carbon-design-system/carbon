@@ -162,10 +162,11 @@ class Tooltip extends Component {
         return;
       }
       const RefForwardingComponent = props[propName];
-      if (!isForwardRef(<RefForwardingComponent />))
+      if (!isForwardRef(<RefForwardingComponent />)) {
         return new Error(`Invalid value of prop '${propName}' supplied to '${componentName}',
                           it should be created/wrapped with React.forwardRef() to have a ref and access the proper
                           DOM node of the element to calculate its position in the viewport.`);
+      }
     },
 
     /**
@@ -290,6 +291,8 @@ class Tooltip extends Component {
 
   _handleUserInputOpenClose = (event, { open }) => {
     if (this.isControlled) {
+      // Callback to the parent to let them decide what to do
+      this.props.onChange(event, { open });
       return;
     }
     // capture tooltip body element before it is removed from the DOM

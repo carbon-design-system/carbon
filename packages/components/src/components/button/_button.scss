@@ -162,11 +162,6 @@
     }
   }
 
-  .#{$prefix}--btn.#{$prefix}--btn--icon-only.#{$prefix}--btn--ghost:focus svg,
-  .#{$prefix}--btn.#{$prefix}--btn--icon-only.#{$prefix}--btn--ghost:hover svg {
-    fill: $icon-01;
-  }
-
   .#{$prefix}--btn.#{$prefix}--btn--icon-only.#{$prefix}--tooltip__trigger:focus {
     border-color: $focus;
 
@@ -211,9 +206,14 @@
       position: static;
     }
 
-    &.#{$prefix}--btn--ghost .#{$prefix}--btn__icon {
+    &.#{$prefix}--btn--ghost .#{$prefix}--btn__icon,
+    &.#{$prefix}--btn--danger--ghost .#{$prefix}--btn__icon {
       margin: 0;
     }
+  }
+
+  .#{$prefix}--btn--icon-only.#{$prefix}--btn--selected {
+    background: $selected-ui;
   }
 
   .#{$prefix}--btn path[data-icon-path='inner-path'] {
@@ -224,8 +224,6 @@
     .#{$prefix}--btn__icon,
   .#{$prefix}--btn.#{$prefix}--btn--icon-only.#{$prefix}--btn--ghost:hover
     .#{$prefix}--btn__icon {
-    fill: $icon-01;
-
     // Windows, Firefox HCM Fix
     @media screen and (-ms-high-contrast: active),
       screen and (prefers-contrast) {
@@ -238,7 +236,7 @@
 
   .#{$prefix}--btn--ghost.#{$prefix}--btn--icon-only
     .#{$prefix}--btn__icon
-    path,
+    path:not([data-icon-path]),
   .#{$prefix}--btn--ghost.#{$prefix}--btn--icon-only .#{$prefix}--btn__icon {
     fill: $icon-01;
   }
@@ -315,6 +313,17 @@
       &:active {
         color: $text-04;
         border-color: $active-danger;
+      }
+
+      &:disabled,
+      &:hover:disabled,
+      &:focus:disabled,
+      &.#{$prefix}--btn--disabled,
+      &.#{$prefix}--btn--disabled:hover,
+      &.#{$prefix}--btn--disabled:focus {
+        color: $disabled-03;
+        background: transparent;
+        outline: none;
       }
     }
 

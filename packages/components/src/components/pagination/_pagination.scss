@@ -33,7 +33,7 @@ $css--helpers: true;
     align-items: center;
     justify-content: space-between;
 
-    width: 100%;
+    width: calc(100% - 1px);
     min-height: rem(48px);
     overflow-x: auto;
     background-color: $ui-01;

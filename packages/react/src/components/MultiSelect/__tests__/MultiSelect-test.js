@@ -25,12 +25,12 @@ describe('MultiSelect', () => {
       await expect(container).toHaveNoAxeViolations();
     });
 
-    it('should have no DAP violations', async () => {
+    it('should have no AC violations', async () => {
       const items = generateItems(4, generateGenericItem);
       const { container } = render(
         <MultiSelect id="test" label="Field" items={items} />
       );
-      await expect(container).toHaveNoDAPViolations();
+      await expect(container).toHaveNoACViolations('MultiSelect');
     });
   });
 
@@ -212,13 +212,15 @@ describe('MultiSelect', () => {
     Simulate.click(itemNode);
 
     expect(
-      document.querySelector('[aria-label="Clear Selection"]')
+      document.querySelector('[aria-label="Clear all selected items"]')
     ).toBeTruthy();
 
-    Simulate.click(document.querySelector('[aria-label="Clear Selection"]'));
+    Simulate.click(
+      document.querySelector('[aria-label="Clear all selected items"]')
+    );
 
     expect(
-      document.querySelector('[aria-label="Clear Selection"]')
+      document.querySelector('[aria-label="Clear all selected items"]')
     ).toBeFalsy();
   });
 
@@ -250,7 +252,7 @@ describe('MultiSelect', () => {
       );
 
       expect(
-        document.querySelector('[aria-label="Clear Selection"]')
+        document.querySelector('[aria-label="Clear all selected items"]')
       ).toBeTruthy();
 
       const labelNode = getByText(container, label);

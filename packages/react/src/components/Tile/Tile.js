@@ -9,6 +9,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { settings } from 'carbon-components';
+import Link from '../Link';
 import {
   CheckmarkFilled16 as CheckmarkFilled,
   ChevronDown16,
@@ -168,14 +169,14 @@ export class ClickableTile extends Component {
     );
 
     return (
-      <a
+      <Link
         href={href}
         className={classes}
         {...other}
         onClick={this.handleClick}
         onKeyDown={this.handleKeyDown}>
         {children}
-      </a>
+      </Link>
     );
   }
 }
@@ -429,9 +430,19 @@ export class ExpandableTile extends Component {
     tileCollapsedIconText: PropTypes.string,
 
     /**
+     * When "collapsed", a label to appear next to the chevron (e.g., "View more").
+     */
+    tileCollapsedLabel: PropTypes.string,
+
+    /**
      * The description of the "expanded" icon that can be read by screen readers.
      */
     tileExpandedIconText: PropTypes.string,
+
+    /**
+     * When "expanded", a label to appear next to the chevron (e.g., "View less").
+     */
+    tileExpandedLabel: PropTypes.string,
   };
 
   static defaultProps = {
@@ -492,7 +503,9 @@ export class ExpandableTile extends Component {
   };
 
   componentDidUpdate = (prevProps) => {
-    if (prevProps.expanded !== this.props.expanded) this.setMaxHeight();
+    if (prevProps.expanded !== this.props.expanded) {
+      this.setMaxHeight();
+    }
   };
 
   setMaxHeight = () => {
@@ -506,7 +519,9 @@ export class ExpandableTile extends Component {
   };
 
   handleClick = (evt) => {
-    if (!this.props.onBeforeClick(evt)) return;
+    if (!this.props.onBeforeClick(evt)) {
+      return;
+    }
     evt.persist();
     this.setState(
       {
@@ -546,8 +561,10 @@ export class ExpandableTile extends Component {
       tileMaxHeight, // eslint-disable-line
       tilePadding, // eslint-disable-line
       handleClick, // eslint-disable-line
-      tileCollapsedIconText, // eslint-disable-line
-      tileExpandedIconText, // eslint-disable-line
+      tileCollapsedIconText,
+      tileExpandedIconText,
+      tileCollapsedLabel,
+      tileExpandedLabel,
       onBeforeClick, // eslint-disable-line
       light,
       ...other
@@ -599,6 +616,7 @@ export class ExpandableTile extends Component {
             {childrenAsArray[0]}
           </div>
           <div className={`${prefix}--tile__chevron`}>
+            <span>{isExpanded ? tileExpandedLabel : tileCollapsedLabel}</span>
             <ChevronDown16 />
           </div>
           <div className={`${prefix}--tile-content`}>{childrenAsArray[1]}</div>

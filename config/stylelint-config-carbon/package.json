@@ -1,7 +1,7 @@
 {
   "name": "stylelint-config-carbon",
   "description": "Stylelint configuration for Carbon",
-  "version": "1.3.0",
+  "version": "1.4.0",
   "license": "Apache-2.0",
   "main": "index.js",
   "repository": {
@@ -35,6 +35,7 @@
     "stylelint-scss": "^3.13.0"
   },
   "devDependencies": {
+    "prettier": "^2.2.1",
     "stylelint": "^13.6.0"
   }
 }

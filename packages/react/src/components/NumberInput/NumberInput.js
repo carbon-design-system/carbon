@@ -10,14 +10,15 @@ import React, { Component } from 'react';
 import classNames from 'classnames';
 import { settings } from 'carbon-components';
 import {
+  Add16,
+  Subtract16,
   WarningFilled16,
   WarningAltFilled16,
-  CaretDownGlyph,
-  CaretUpGlyph,
 } from '@carbon/icons-react';
 import mergeRefs from '../../tools/mergeRefs';
 import requiredIfValueExists from '../../prop-types/requiredIfValueExists';
 import { useControlledStateWithValue } from '../../internal/FeatureFlags';
+import deprecate from '../../prop-types/deprecate';
 
 const { prefix } = settings;
 
@@ -46,67 +47,86 @@ class NumberInput extends Component {
      * `true` to allow empty string.
      */
     allowEmpty: PropTypes.bool,
+
     /**
      * Provide a description that would be used to best describe the use case of the NumberInput component
      */
     ariaLabel: PropTypes.string,
+
     /**
      * Specify an optional className to be applied to the wrapper node
      */
     className: PropTypes.string,
+
     /**
      * Optional starting value for uncontrolled state
      */
     defaultValue: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
+
     /**
      * Specify if the control should be disabled, or not
      */
     disabled: PropTypes.bool,
+
     /**
      * Provide text that is used alongside the control label for additional help
      */
     helperText: PropTypes.node,
+
     /**
      * Specify whether you want the underlying label to be visually hidden
      */
     hideLabel: PropTypes.bool,
+
     /**
      * Provide a description for up/down icons that can be read by screen readers
      */
     iconDescription: PropTypes.string.isRequired,
+
     /**
      * Specify a custom `id` for the input
      */
     id: PropTypes.string.isRequired,
+
     /**
      * Specify if the currently value is invalid.
      */
     invalid: PropTypes.bool,
+
     /**
      * Message which is displayed if the value is invalid.
      */
     invalidText: PropTypes.node,
+
     /**
      * `true` to use the mobile variant.
      */
-    isMobile: PropTypes.bool,
+    isMobile: deprecate(
+      PropTypes.bool,
+      `The \`isMobile\` prop no longer needed as the default NumberInput styles are now identical to the mobile variant styles. This prop will be removed in the next major version of \`carbon-components-react\``
+    ),
+
     /**
      * Generic `label` that will be used as the textual representation of what
      * this field is for
      */
     label: PropTypes.node,
+
     /**
      * `true` to use the light version.
      */
     light: PropTypes.bool,
+
     /**
      * The maximum value.
      */
     max: PropTypes.number,
+
     /**
      * The minimum value.
      */
     min: PropTypes.number,
+
     /**
      * The new value is available in 'imaginaryTarget.value'
      * i.e. to get the value: evt.imaginaryTarget.value
@@ -120,34 +140,42 @@ class NumberInput extends Component {
     onChange: !useControlledStateWithValue
       ? PropTypes.func
       : requiredIfValueExists(PropTypes.func),
+
     /**
      * Provide an optional function to be called when the up/down button is clicked
      */
     onClick: PropTypes.func,
+
     /**
      * Specify if the component should be read-only
      */
     readOnly: PropTypes.bool,
+
     /**
      * Specify the size of the Number Input. Currently supports either `sm` or `xl` as an option.
      */
     size: PropTypes.oneOf(['sm', 'xl']),
+
     /**
      * Specify how much the valus should increase/decrease upon clicking on up/down button
      */
     step: PropTypes.number,
+
     /**
      * Provide custom text for the component for each translation id
      */
     translateWithId: PropTypes.func.isRequired,
+
     /**
      * Specify the value of the input
      */
     value: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
+
     /**
      * Specify whether the control is currently in warning state
      */
     warn: PropTypes.bool,
+
     /**
      * Provide the text that is displayed when the control is in warning state
      */
@@ -411,45 +439,6 @@ class NumberInput extends Component {
       <div className={`${prefix}--form-item`}>
         <div className={numberInputClasses} {...inputWrapperProps}>
           {(() => {
-            if (isMobile) {
-              return (
-                <>
-                  {labelText}
-                  {helper}
-                  <div className={`${prefix}--number__input-wrapper`}>
-                    <button
-                      type="button"
-                      className={`${prefix}--number__control-btn down-icon`}
-                      {...buttonProps}
-                      onClick={(evt) => this.handleArrowClick(evt, 'down')}
-                      title={decrementNumLabel}
-                      aria-label={decrementNumLabel || iconDescription}
-                      aria-live="polite"
-                      aria-atomic="true">
-                      <CaretDownGlyph className="down-icon" />
-                    </button>
-                    <input
-                      type="number"
-                      pattern="[0-9]*"
-                      {...other}
-                      {...props}
-                      ref={mergeRefs(ref, this._handleInputRef)}
-                    />
-                    <button
-                      type="button"
-                      className={`${prefix}--number__control-btn up-icon`}
-                      {...buttonProps}
-                      onClick={(evt) => this.handleArrowClick(evt, 'up')}
-                      title={incrementNumLabel}
-                      aria-label={incrementNumLabel || iconDescription}
-                      aria-live="polite"
-                      aria-atomic="true">
-                      <CaretUpGlyph className="up-icon" />
-                    </button>
-                  </div>
-                </>
-              );
-            }
             return (
               <>
                 {labelText}
@@ -475,17 +464,6 @@ class NumberInput extends Component {
                   <div className={`${prefix}--number__controls`}>
                     <button
                       type="button"
-                      className={`${prefix}--number__control-btn up-icon`}
-                      {...buttonProps}
-                      onClick={(evt) => this.handleArrowClick(evt, 'up')}
-                      title={incrementNumLabel || iconDescription}
-                      aria-label={incrementNumLabel || iconDescription}
-                      aria-live="polite"
-                      aria-atomic="true">
-                      <CaretUpGlyph className="up-icon" />
-                    </button>
-                    <button
-                      type="button"
                       className={`${prefix}--number__control-btn down-icon`}
                       {...buttonProps}
                       onClick={(evt) => this.handleArrowClick(evt, 'down')}
@@ -493,8 +471,21 @@ class NumberInput extends Component {
                       aria-label={decrementNumLabel || iconDescription}
                       aria-live="polite"
                       aria-atomic="true">
-                      <CaretDownGlyph className="down-icon" />
+                      <Subtract16 className="down-icon" />
                     </button>
+                    <div className={`${prefix}--number__rule-divider`}></div>
+                    <button
+                      type="button"
+                      className={`${prefix}--number__control-btn up-icon`}
+                      {...buttonProps}
+                      onClick={(evt) => this.handleArrowClick(evt, 'up')}
+                      title={incrementNumLabel || iconDescription}
+                      aria-label={incrementNumLabel || iconDescription}
+                      aria-live="polite"
+                      aria-atomic="true">
+                      <Add16 className="up-icon" />
+                    </button>
+                    <div className={`${prefix}--number__rule-divider`}></div>
                   </div>
                 </div>
                 {error ? null : helper}

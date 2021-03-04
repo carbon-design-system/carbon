@@ -1,7 +1,7 @@
 {
   "name": "@carbon/upgrade",
   "description": "A tool for upgrading Carbon versions",
-  "version": "10.9.0",
+  "version": "10.10.0",
   "license": "Apache-2.0",
   "bin": {
     "carbon-upgrade": "./bin/carbon-upgrade.js"
@@ -40,7 +40,7 @@
     "jscodeshift": "^0.6.4",
     "lodash.clonedeep": "^4.5.0",
     "npm-which": "^3.0.1",
-    "semver": "^5.6.0",
+    "semver": "^7.3.4",
     "yargs": "^15.1.0"
   }
 }

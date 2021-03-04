@@ -75,6 +75,12 @@
     text-decoration: none;
   }
 
+  .#{$prefix}--tile--clickable:hover,
+  .#{$prefix}--tile--clickable:active {
+    color: $text-01;
+    text-decoration: none;
+  }
+
   .#{$prefix}--tile--selectable {
     padding-right: $carbon--spacing-09;
   }
@@ -105,11 +111,14 @@
 
   .#{$prefix}--tile__chevron {
     position: absolute;
-    right: 0.5rem;
-    bottom: 0.5rem;
+    right: $carbon--spacing-05;
+    bottom: $carbon--spacing-05;
+    display: flex;
+    align-items: flex-end;
     height: 1rem;
 
     svg {
+      margin-left: $carbon--spacing-03;
       transform-origin: center;
       transition: $duration--fast-02 motion(standard, productive);
       fill: $ui-05;

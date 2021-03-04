@@ -66,6 +66,7 @@ export const icon02 = gray30;
 export const icon03 = white;
 
 export const link01 = blue40;
+export const link02 = blue30;
 
 export const inverseLink = blue60;
 
@@ -133,7 +134,7 @@ export const decorative01 = gray70;
 export const buttonSeparator = '#161616';
 
 export const skeleton01 = '#353535';
-export const skeleton02 = gray80;
+export const skeleton02 = gray70;
 
 export {
   // Type

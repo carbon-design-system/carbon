@@ -2016,6 +2016,7 @@ exports[`DataTable should render 1`] = `
             translateWithId={[Function]}
           >
             <div
+              aria-hidden={true}
               className="bx--batch-actions"
             >
               <div
@@ -2025,7 +2026,7 @@ exports[`DataTable should render 1`] = `
                   className="bx--batch-summary__para"
                 >
                   <span>
-                    0 item selected
+                    0 items selected
                   </span>
                 </p>
               </div>
@@ -2059,6 +2060,7 @@ exports[`DataTable should render 1`] = `
                       type="button"
                     >
                       <button
+                        aria-pressed={null}
                         className="bx--btn bx--btn--primary"
                         disabled={false}
                         onClick={[MockFunction]}
@@ -2131,6 +2133,7 @@ exports[`DataTable should render 1`] = `
                       type="button"
                     >
                       <button
+                        aria-pressed={null}
                         className="bx--btn bx--btn--primary"
                         disabled={false}
                         onClick={[MockFunction]}
@@ -2203,6 +2206,7 @@ exports[`DataTable should render 1`] = `
                       type="button"
                     >
                       <button
+                        aria-pressed={null}
                         className="bx--btn bx--btn--primary"
                         disabled={false}
                         onClick={[MockFunction]}
@@ -2261,6 +2265,7 @@ exports[`DataTable should render 1`] = `
                     type="button"
                   >
                     <button
+                      aria-pressed={null}
                       className="bx--batch-summary__cancel bx--btn bx--btn--primary"
                       disabled={false}
                       onClick={[Function]}
@@ -2298,7 +2303,7 @@ exports[`DataTable should render 1`] = `
                     id="custom-id"
                     labelText="Filter table"
                     onChange={[Function]}
-                    placeHolderText="Filter table"
+                    placeholder="Filter table"
                     size="sm"
                     tabIndex="0"
                     type="text"
@@ -2514,6 +2519,7 @@ exports[`DataTable should render 1`] = `
                 type="button"
               >
                 <button
+                  aria-pressed={null}
                   className="bx--btn bx--btn--sm bx--btn--primary"
                   disabled={false}
                   onClick={[MockFunction]}
@@ -3021,6 +3027,7 @@ exports[`DataTable sticky header should render 1`] = `
             translateWithId={[Function]}
           >
             <div
+              aria-hidden={true}
               className="bx--batch-actions"
             >
               <div
@@ -3030,7 +3037,7 @@ exports[`DataTable sticky header should render 1`] = `
                   className="bx--batch-summary__para"
                 >
                   <span>
-                    0 item selected
+                    0 items selected
                   </span>
                 </p>
               </div>
@@ -3064,6 +3071,7 @@ exports[`DataTable sticky header should render 1`] = `
                       type="button"
                     >
                       <button
+                        aria-pressed={null}
                         className="bx--btn bx--btn--primary"
                         disabled={false}
                         onClick={[MockFunction]}
@@ -3136,6 +3144,7 @@ exports[`DataTable sticky header should render 1`] = `
                       type="button"
                     >
                       <button
+                        aria-pressed={null}
                         className="bx--btn bx--btn--primary"
                         disabled={false}
                         onClick={[MockFunction]}
@@ -3208,6 +3217,7 @@ exports[`DataTable sticky header should render 1`] = `
                       type="button"
                     >
                       <button
+                        aria-pressed={null}
                         className="bx--btn bx--btn--primary"
                         disabled={false}
                         onClick={[MockFunction]}
@@ -3266,6 +3276,7 @@ exports[`DataTable sticky header should render 1`] = `
                     type="button"
                   >
                     <button
+                      aria-pressed={null}
                       className="bx--batch-summary__cancel bx--btn bx--btn--primary"
                       disabled={false}
                       onClick={[Function]}
@@ -3303,7 +3314,7 @@ exports[`DataTable sticky header should render 1`] = `
                     id="custom-id"
                     labelText="Filter table"
                     onChange={[Function]}
-                    placeHolderText="Filter table"
+                    placeholder="Filter table"
                     size="sm"
                     tabIndex="0"
                     type="text"
@@ -3519,6 +3530,7 @@ exports[`DataTable sticky header should render 1`] = `
                 type="button"
               >
                 <button
+                  aria-pressed={null}
                   className="bx--btn bx--btn--sm bx--btn--primary"
                   disabled={false}
                   onClick={[MockFunction]}

@@ -248,6 +248,7 @@
   .#{$prefix}--modal-content {
     @include type-style('body-long-01');
 
+    position: relative;
     grid-row: 2/-2;
     grid-column: 1/-1;
     margin-bottom: $spacing-09;
@@ -301,21 +302,25 @@
 
   .#{$prefix}--modal-footer {
     display: flex;
-
     grid-row: -1/-1;
     grid-column: 1/-1;
     justify-content: flex-end;
-    height: 4rem;
+    height: rem(64px);
     margin-top: auto;
+  }
 
-    button.#{$prefix}--btn {
-      flex: 0 1 50%;
-      max-width: none;
-      height: 4rem;
-      margin: 0;
-      padding-top: $spacing-05;
-      padding-bottom: $spacing-07;
-    }
+  .#{$prefix}--modal-footer .#{$prefix}--btn {
+    flex: 0 1 50%;
+    max-width: none;
+    height: rem(64px);
+    margin: 0;
+    padding-top: $spacing-05;
+    padding-bottom: $spacing-07;
+  }
+
+  .#{$prefix}--modal-footer--three-button .#{$prefix}--btn {
+    flex: 0 1 25%;
+    align-items: flex-start;
   }
 
   .#{$prefix}--modal-footer button.#{$prefix}--btn:focus {

@@ -45,11 +45,14 @@ const TableBatchActions = ({
   );
 
   return (
-    <div {...rest} className={batchActionsClasses}>
+    <div
+      {...rest}
+      aria-hidden={!shouldShowBatchActions}
+      className={batchActionsClasses}>
       <div className={`${prefix}--batch-summary`}>
         <p className={`${prefix}--batch-summary__para`}>
           <span>
-            {totalSelected > 1
+            {totalSelected > 1 || totalSelected === 0
               ? t('carbon.table.batch.items.selected', { totalSelected })
               : t('carbon.table.batch.item.selected', { totalSelected })}
           </span>
