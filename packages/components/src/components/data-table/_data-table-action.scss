@@ -139,8 +139,8 @@
     height: $spacing-09;
 
     &::before {
-      top: 2px;
-      height: calc(100% - 4px);
+      top: rem(2px);
+      height: calc(100% - #{rem(4px)});
       background-color: $hover-ui;
     }
   }
