@@ -20,7 +20,7 @@ import mdx from './Popover.mdx';
 import { useOutsideClick } from '../../internal/useOutsideClick';
 
 export default {
-  title: ''Experimental/unstable_Popover',
+  title: 'Experimental/unstable_Popover',
   component: Popover,
   subcomponents: {
     PopoverContent,
@@ -134,13 +134,22 @@ export const Playground = () => {
   return (
     <Popover
       align={select('Specify the caret alignment (align)', options, 'top')}
-      caret={boolean('Specify whether the caret should be visible (caret)', true)}
+      caret={boolean(
+        'Specify whether the caret should be visible (caret)',
+        true
+      )}
       highContrast={boolean(
         'Specify whether the high-contrast variant should render (highContrast)',
         false
       )}
-      light={boolean('Specify whether the light variant should render (light)', false)}
-      open={boolean('Specify whether the popover is open or closed (open)', true)}>
+      light={boolean(
+        'Specify whether the light variant should render (light)',
+        false
+      )}
+      open={boolean(
+        'Specify whether the popover is open or closed (open)',
+        true
+      )}>
       <PopoverContent className="p-3">Sample content</PopoverContent>
     </Popover>
   );
