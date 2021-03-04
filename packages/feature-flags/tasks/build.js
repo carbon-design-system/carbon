@@ -10,6 +10,7 @@
 const { default: babelGenerate } = require('@babel/generator');
 const babelTypes = require('@babel/types');
 const { types: t, generate } = require('@carbon/scss-generator');
+const { constantCase } = require('change-case');
 const fs = require('fs-extra');
 const yaml = require('js-yaml');
 const path = require('path');
@@ -96,7 +97,17 @@ function buildJavaScriptModule(featureFlags) {
                   ),
                   t.objectProperty(
                     t.identifier('enabled'),
-                    t.booleanLiteral(featureFlag.enabled)
+                    t.logicalExpression(
+                      '||',
+                      t.memberExpression(
+                        t.memberExpression(
+                          t.identifier('process'),
+                          t.identifier('env')
+                        ),
+                        t.identifier(constantCase(`CARBON_${featureFlag.name}`))
+                      ),
+                      t.booleanLiteral(featureFlag.enabled)
+                    )
                   ),
                 ]);
               })

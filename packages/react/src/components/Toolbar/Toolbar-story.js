@@ -29,7 +29,7 @@ const inputProps = {
 };
 
 export default {
-  title: 'Toolbar [Deprecated]',
+  title: 'Deprecated/Toolbar',
 
   parameters: {
     component: Toolbar,

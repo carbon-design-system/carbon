@@ -29,7 +29,7 @@ function TabsSkeleton({ className, ...rest }) {
           <path d="M10 0L5 5 0 0z" />
         </svg>
       </div>
-      <ul className={`${prefix}--tabs__nav ${prefix}--tabs__nav--hidden`}>
+      <ul className={`${prefix}--tabs__nav `}>
         {tab}
         {tab}
         {tab}

@@ -137,7 +137,7 @@ function UncontrolledTooltipExample() {
 }
 
 export default {
-  title: 'Tooltip',
+  title: 'Components/Tooltip',
   component: OGTooltip,
   decorators: [withKnobs],
 
