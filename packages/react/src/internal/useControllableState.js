@@ -59,7 +59,7 @@ export function useControllableState(
 
     // Controlled -> Uncontrolled
     // If the component prop is controlled, the prop value should be defined
-    if (controlled.current == true && controlledState === undefined) {
+    if (controlled.current === true && controlledState === undefined) {
       warn(
         false,
         'A component is changing a controlled component to be uncontrolled. ' +
