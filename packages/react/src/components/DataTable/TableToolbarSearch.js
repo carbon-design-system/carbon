@@ -71,7 +71,6 @@ const TableToolbarSearch = ({
 
   const searchContainerClasses = cx({
     [searchContainerClass]: searchContainerClass,
-    [`${prefix}--toolbar-action`]: true,
     [`${prefix}--toolbar-search-container-active`]: expanded,
     [`${prefix}--toolbar-search-container-disabled`]: disabled,
     [`${prefix}--toolbar-search-container-expandable`]:
