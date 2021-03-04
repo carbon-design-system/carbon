@@ -7308,47 +7308,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"ast-types@npm:0.11.3":
-  version: 0.11.3
-  resolution: "ast-types@npm:0.11.3"
-  checksum: 77eec4f28517af440c957befc03ac44d761ec1ff9753df2a387e7a8b0d3a6e8f0a9b65a02be7ca3a0b8bc1b3466046d71f3804065b9dfe5a8ef79c3ae9727d54
-  languageName: node
-  linkType: hard
-
-"ast-types@npm:0.11.7":
-  version: 0.11.7
-  resolution: "ast-types@npm:0.11.7"
-  checksum: e421616a07f398be926470e6cb79696cb5951f3de4289a9736b840261b3fbca864ce603c35bf31ab5adfee9930358807ff4704977b085caa6654082cf177074f
-  languageName: node
-  linkType: hard
-
-"ast-types@npm:0.12.4, ast-types@npm:^0.12.2":
-  version: 0.12.4
-  resolution: "ast-types@npm:0.12.4"
-  checksum: 35372468e35001de8e7e65667b86211fb513a20809155a7a6cafc2ff0587047003d28f91ede7f98da9d366000d26404d2bfe1d3bbb73cb1a04ecac9dbdc32729
-  languageName: node
-  linkType: hard
-
-"ast-types@npm:0.13.3, ast-types@npm:^0.13.2":
-  version: 0.13.3
-  resolution: "ast-types@npm:0.13.3"
-  checksum: 684ff566539c6a3812480e6ad8e7484472bfed78e0abcd3f18c0618b2f49360e930b9adc8a22d5d372084a3a1074d7ae45c1e1fa3394ee878c5df4e8befb58d8
-  languageName: node
-  linkType: hard
-
-"ast-types@npm:0.14.2, ast-types@npm:0.x.x":
+"ast-types@npm:^0.14.0":
   version: 0.14.2
   resolution: "ast-types@npm:0.14.2"
   dependencies:
     tslib: ^2.0.1
   checksum: 42bb8a72ce90e3cf726220f93f772ff136aa857d99c1cb6b1fb2bdfa9369b15de54cd9d1ed17ba903a5ef82081676704b93f03eccd1335d7c71da3c5dac88109
-  languageName: node
-  linkType: hard
-
-"ast-types@npm:0.9.6":
-  version: 0.9.6
-  resolution: "ast-types@npm:0.9.6"
-  checksum: 135cc19cb3faeff9f8e3a911892de74bdf021aca0403dd2eaf31275bfffedf4a95e349c001f6b123c516a61c0e3ae71e7519441e258d8e562c539b53ebac6b35
   languageName: node
   linkType: hard
 
@@ -7911,14 +7876,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"babel-plugin-react-docgen@npm:^4.0.0":
-  version: 4.1.0
-  resolution: "babel-plugin-react-docgen@npm:4.1.0"
+"babel-plugin-react-docgen@npm:^4.0.0, babel-plugin-react-docgen@npm:^4.2.1":
+  version: 4.2.1
+  resolution: "babel-plugin-react-docgen@npm:4.2.1"
   dependencies:
+    ast-types: ^0.14.2
     lodash: ^4.17.15
     react-docgen: ^5.0.0
-    recast: ^0.14.7
-  checksum: 57ad24636582d9c23c53cd2aeef8277e540f98e3d7bed9bbcc692c7405edb96007ded0a59cb93e2da8a9d9aa89991c3e60d7ea80640d2a8470a378e352ba8280
+  checksum: e375376f2a4f1cfeb28137b970d1b3d5feba22019ecd9226ef50d72af1a3170434922950799aad62b9b77b99d1da16b1eadfaf4362b95807a8fe42036d7c32f2
   languageName: node
   linkType: hard
 
@@ -9247,7 +9212,7 @@ __metadata:
     babel-core: ^7.0.0-bridge.0
     babel-loader: ^8.1.0
     babel-plugin-dev-expression: ^0.2.2
-    babel-plugin-react-docgen: ^4.0.0
+    babel-plugin-react-docgen: ^4.2.1
     babel-plugin-transform-inline-environment-variables: ^0.4.0
     browserslist-config-carbon: ^10.6.0
     carbon-components: ^10.30.0-rc.0
@@ -26803,18 +26768,6 @@ __metadata:
   dependencies:
     util.promisify: ^1.0.0
   checksum: 67ce6bdaf8f8dd2a85e771b7b79b74b8a47299315a0a3553947df1ab4117de80d1910a2ba856a480d9e4284172cf8d7df209117f5522475e30bb7ecdee63b75b
-  languageName: node
-  linkType: hard
-
-"recast@npm:^0.14.7":
-  version: 0.14.7
-  resolution: "recast@npm:0.14.7"
-  dependencies:
-    ast-types: 0.11.3
-    esprima: ~4.0.0
-    private: ~0.1.5
-    source-map: ~0.6.1
-  checksum: dc35c8333f19728651f66032bc3740326be751b91ea8db6aa8e612abd9dcf6677eccf4cd1c3be2a262e152c35b84e1cd137f48722dc5165f50a3e1fbc446e6fb
   languageName: node
   linkType: hard
 
