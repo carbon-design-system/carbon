@@ -23,7 +23,7 @@
     width: 100%;
     height: $spacing-09;
     overflow: hidden;
-    background: $ui-01;
+    background-color: $ui-01;
   }
 
   .#{$prefix}--toolbar-content {
@@ -87,7 +87,7 @@
   .#{$prefix}--toolbar-search-container-expandable
     .#{$prefix}--search--disabled
     .#{$prefix}--search-magnifier {
-    background: $disabled-01;
+    background-color: $disabled-01;
     cursor: not-allowed;
     transition: background-color none;
   }
@@ -193,7 +193,7 @@
   .#{$prefix}--toolbar-search-container-active
     .#{$prefix}--search
     .#{$prefix}--search-input:not(:placeholder-shown) {
-    background: $hover-field;
+    background-color: $hover-field;
     border: none;
   }
 
@@ -206,7 +206,7 @@
   .#{$prefix}--toolbar-search-container-active
     .#{$prefix}--search
     .#{$prefix}--search-magnifier:hover {
-    background: transparent;
+    background-color: transparent;
     border: none;
     outline: none;
   }
@@ -258,11 +258,11 @@
   }
 
   .#{$prefix}--toolbar-action:hover:not([disabled]) {
-    background: $hover-field;
+    background-color: $hover-field;
   }
 
   .#{$prefix}--toolbar-action:hover[aria-expanded='true'] {
-    background: $ui-01;
+    background-color: $ui-01;
   }
 
   .#{$prefix}--toolbar-action[disabled] {
@@ -347,7 +347,7 @@
   .#{$prefix}--toolbar-search-container-persistent
     .#{$prefix}--search
     .#{$prefix}--search-input:hover:not([disabled]) {
-    background: $hover-field;
+    background-color: $hover-field;
   }
 
   .#{$prefix}--toolbar-search-container-persistent
@@ -356,7 +356,7 @@
   .#{$prefix}--toolbar-search-container-persistent
     .#{$prefix}--search
     .#{$prefix}--search-input:not(:placeholder-shown) {
-    background: $hover-field;
+    background-color: $hover-field;
   }
 
   .#{$prefix}--toolbar-search-container-persistent
@@ -576,7 +576,7 @@
       .#{$prefix}--search-input:focus {
       @include focus-outline('outline');
 
-      background: $hover-field;
+      background-color: $hover-field;
     }
 
     .#{$prefix}--toolbar-search-container-active
@@ -585,7 +585,7 @@
     .#{$prefix}--toolbar-search-container-active
       .#{$prefix}--search
       .#{$prefix}--search-input:not(:placeholder-shown) {
-      background: $hover-field;
+      background-color: $hover-field;
     }
 
     .#{$prefix}--toolbar-search-container-active
@@ -599,12 +599,12 @@
       .#{$prefix}--search-magnifier:hover {
       @include focus-outline('reset');
 
-      background: transparent;
+      background-color: transparent;
     }
   }
 
   .#{$prefix}--search--disabled .#{$prefix}--search-magnifier:hover {
-    background: transparent;
+    background-color: transparent;
   }
 
   //-------------------------------------------------
