@@ -79,9 +79,17 @@ export default {
 };
 
 export const _Default = () => (
-  <Tag className="some-class" {...props.regular()}>
-    {text('Content (children)', 'This is a tag')}
-  </Tag>
+  <>
+    <Tag className="some-class" {...props.regular()}>
+      {text('Content (children)', 'This is a tag')}
+    </Tag>
+    <Tag
+      className="some-class"
+      {...props.regular()}
+      onClick={action('onClick')}>
+      This is an interactive tag
+    </Tag>
+  </>
 );
 
 _Default.parameters = {
