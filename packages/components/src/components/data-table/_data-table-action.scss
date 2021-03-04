@@ -63,77 +63,47 @@
     width: $spacing-09;
     height: $spacing-09;
     box-shadow: none;
-    transition: flex $transition--expansion $carbon--standard-easing;
+    cursor: pointer;
+    transition: width $transition--expansion $carbon--standard-easing,
+      background-color $duration--fast-02 motion(entrance, productive);
+
+    &:hover {
+      background-color: $hover-field;
+    }
   }
 
-  .#{$prefix}--toolbar-search-container-expandable .#{$prefix}--search {
-    position: initial;
-    width: $spacing-09;
+  .#{$prefix}--toolbar-search-container-expandable .#{$prefix}--search-input {
     height: 100%;
+    padding: 0;
+    cursor: pointer;
+    opacity: 0;
   }
 
   .#{$prefix}--toolbar-search-container-expandable
-    .#{$prefix}--search
     .#{$prefix}--search-magnifier {
     left: 0;
     width: $spacing-09;
     height: $spacing-09;
     padding: $spacing-05;
-    cursor: pointer;
-    transition: background $duration--fast-02 motion(entrance, productive);
-    pointer-events: all;
   }
 
-  .#{$prefix}--toolbar-search-container-expandable
-    .#{$prefix}--search--disabled
+  .#{$prefix}--toolbar-search-container-expandable.#{$prefix}--search--disabled
     .#{$prefix}--search-magnifier {
     background-color: $disabled-01;
     cursor: not-allowed;
     transition: background-color none;
   }
 
-  .#{$prefix}--toolbar-search-container-expandable
-    .#{$prefix}--search
-    .#{$prefix}--search-magnifier:focus {
-    @include focus-outline('outline');
-  }
-
-  .#{$prefix}--toolbar-search-container-expandable
-    .#{$prefix}--search
-    .#{$prefix}--search-magnifier:hover {
-    background: $hover-field;
-  }
-
-  .#{$prefix}--toolbar-action.#{$prefix}--toolbar-search-container-disabled {
+  .#{$prefix}--toolbar-search-container-disabled {
     cursor: not-allowed;
   }
 
-  .#{$prefix}--toolbar-search-container-expandable
-    .#{$prefix}--search--disabled
-    .#{$prefix}--search-magnifier:hover {
-    background: $disabled-01;
-    cursor: not-allowed;
-    transition: background-color none;
-  }
-
-  .#{$prefix}--toolbar-search-container-expandable
-    .#{$prefix}--search
+  .#{$prefix}--toolbar-search-container-expandable.#{$prefix}--search
     .#{$prefix}--label {
     visibility: hidden;
   }
 
-  .#{$prefix}--toolbar-search-container-expandable
-    .#{$prefix}--search
-    .#{$prefix}--search-input {
-    height: 100%;
-    padding: 0;
-    background-color: transparent;
-    border: none;
-    visibility: hidden;
-  }
-
-  .#{$prefix}--toolbar-search-container-expandable
-    .#{$prefix}--search
+  .#{$prefix}--toolbar-search-container-expandable.#{$prefix}--search
     .#{$prefix}--search-close {
     width: $spacing-09;
     height: $spacing-09;
@@ -145,8 +115,7 @@
     }
   }
 
-  .#{$prefix}--toolbar-search-container-expandable
-    .#{$prefix}--search
+  .#{$prefix}--toolbar-search-container-expandable.#{$prefix}--search
     .#{$prefix}--search-close:focus::before {
     background-color: $focus;
   }
@@ -154,35 +123,22 @@
   //-------------------------------------------------
   //ACTIVE SEARCH - DEFAULT TOOLBAR
   //-------------------------------------------------
-  .#{$prefix}--toolbar-search-container-active {
-    flex: auto;
-    transition: flex $duration--moderate-01 motion(standard, productive);
-  }
 
-  .#{$prefix}--toolbar-search-container-active .#{$prefix}--search {
+  .#{$prefix}--toolbar-search-container-active.#{$prefix}--search {
     width: 100%;
   }
 
-  .#{$prefix}--toolbar-search-container-active
-    .#{$prefix}--search
-    .#{$prefix}--label,
-  .#{$prefix}--toolbar-search-container-active
-    .#{$prefix}--search
-    .#{$prefix}--search-input {
+  .#{$prefix}--toolbar-search-container-active .#{$prefix}--search-input {
+    opacity: 1;
+  }
+
+  .#{$prefix}--toolbar-search-container-active .#{$prefix}--label,
+  .#{$prefix}--toolbar-search-container-active .#{$prefix}--search-input {
     padding: 0 $spacing-09;
-    visibility: inherit;
+    cursor: text;
   }
 
   .#{$prefix}--toolbar-search-container-active
-    .#{$prefix}--search
-    .#{$prefix}--search-input:focus {
-    @include focus-outline('outline');
-
-    box-shadow: inset 0 0 0 2px $focus;
-  }
-
-  .#{$prefix}--toolbar-search-container-active
-    .#{$prefix}--search
     .#{$prefix}--search-input:focus
     + .#{$prefix}--search-close {
     border: none;
@@ -191,20 +147,16 @@
   }
 
   .#{$prefix}--toolbar-search-container-active
-    .#{$prefix}--search
     .#{$prefix}--search-input:not(:placeholder-shown) {
     background-color: $hover-field;
     border: none;
   }
 
   .#{$prefix}--toolbar-search-container-active
-    .#{$prefix}--search
     .#{$prefix}--search-magnifier:focus,
   .#{$prefix}--toolbar-search-container-active
-    .#{$prefix}--search
     .#{$prefix}--search-magnifier:active,
   .#{$prefix}--toolbar-search-container-active
-    .#{$prefix}--search
     .#{$prefix}--search-magnifier:hover {
     background-color: transparent;
     border: none;
@@ -217,12 +169,8 @@
   .#{$prefix}--toolbar-search-container-persistent .#{$prefix}--search-close,
   .#{$prefix}--toolbar-search-container-persistent
     .#{$prefix}--search-close:hover,
-  .#{$prefix}--toolbar-search-container-active
-    .#{$prefix}--search
-    .#{$prefix}--search-close,
-  .#{$prefix}--toolbar-search-container-active
-    .#{$prefix}--search
-    .#{$prefix}--search-close:hover {
+  .#{$prefix}--toolbar-search-container-active .#{$prefix}--search-close,
+  .#{$prefix}--toolbar-search-container-active .#{$prefix}--search-close:hover {
     background-color: transparent;
     border: none;
   }
@@ -325,45 +273,36 @@
   }
 
   .#{$prefix}--toolbar-search-container-persistent
-    .#{$prefix}--search
     .#{$prefix}--search-magnifier {
     left: $spacing-05;
   }
 
-  .#{$prefix}--toolbar-search-container-persistent
-    .#{$prefix}--search
-    .#{$prefix}--search-input {
-    height: $spacing-09;
+  .#{$prefix}--toolbar-search-container-persistent .#{$prefix}--search-input {
+    height: $layout-04;
     padding: 0 $spacing-09;
     border: none;
   }
 
   .#{$prefix}--toolbar-search-container-persistent
-    .#{$prefix}--search
     .#{$prefix}--search-input:focus:not([disabled]) {
     @include focus-outline('outline');
   }
 
   .#{$prefix}--toolbar-search-container-persistent
-    .#{$prefix}--search
     .#{$prefix}--search-input:hover:not([disabled]) {
     background-color: $hover-field;
   }
 
   .#{$prefix}--toolbar-search-container-persistent
-    .#{$prefix}--search
     .#{$prefix}--search-input:active:not([disabled]),
   .#{$prefix}--toolbar-search-container-persistent
-    .#{$prefix}--search
     .#{$prefix}--search-input:not(:placeholder-shown) {
     background-color: $hover-field;
   }
 
-  .#{$prefix}--toolbar-search-container-persistent
-    .#{$prefix}--search
-    .#{$prefix}--search-close {
-    width: $spacing-09;
-    height: $spacing-09;
+  .#{$prefix}--toolbar-search-container-persistent .#{$prefix}--search-close {
+    width: $layout-04;
+    height: $layout-04;
   }
 
   .#{$prefix}--batch-actions--active ~ .#{$prefix}--toolbar-search-container,
@@ -514,30 +453,20 @@
       height: rem(32px);
     }
 
-    .#{$prefix}--toolbar-search-container-expandable
-      .#{$prefix}--search
-      .#{$prefix}--search-input,
-    .#{$prefix}--toolbar-search-container-persistent
-      .#{$prefix}--search
-      .#{$prefix}--search-input {
+    .#{$prefix}--toolbar-search-container-expandable .#{$prefix}--search-input,
+    .#{$prefix}--toolbar-search-container-persistent .#{$prefix}--search-input {
       height: rem(32px);
     }
 
-    .#{$prefix}--toolbar-search-container-expandable
-      .#{$prefix}--search
-      .#{$prefix}--search-close,
-    .#{$prefix}--toolbar-search-container-persistent
-      .#{$prefix}--search
-      .#{$prefix}--search-close {
+    .#{$prefix}--toolbar-search-container-expandable .#{$prefix}--search-close,
+    .#{$prefix}--toolbar-search-container-persistent .#{$prefix}--search-close {
       width: rem(32px);
       height: rem(32px);
     }
 
     .#{$prefix}--toolbar-search-container-expandable
-      .#{$prefix}--search
       .#{$prefix}--search-magnifier,
     .#{$prefix}--toolbar-search-container-persistent
-      .#{$prefix}--search
       .#{$prefix}--search-magnifier {
       width: rem(32px);
       height: rem(32px);
@@ -565,14 +494,11 @@
       transition: flex 175ms $carbon--standard-easing;
     }
 
-    .#{$prefix}--toolbar-search-container-active
-      .#{$prefix}--search
-      .#{$prefix}--search-input {
+    .#{$prefix}--toolbar-search-container-active .#{$prefix}--search-input {
       visibility: inherit;
     }
 
     .#{$prefix}--toolbar-search-container-active
-      .#{$prefix}--search
       .#{$prefix}--search-input:focus {
       @include focus-outline('outline');
 
@@ -580,22 +506,17 @@
     }
 
     .#{$prefix}--toolbar-search-container-active
-      .#{$prefix}--search
       .#{$prefix}--search-input:active,
     .#{$prefix}--toolbar-search-container-active
-      .#{$prefix}--search
       .#{$prefix}--search-input:not(:placeholder-shown) {
       background-color: $hover-field;
     }
 
     .#{$prefix}--toolbar-search-container-active
-      .#{$prefix}--search
       .#{$prefix}--search-magnifier:focus,
     .#{$prefix}--toolbar-search-container-active
-      .#{$prefix}--search
       .#{$prefix}--search-magnifier:active,
     .#{$prefix}--toolbar-search-container-active
-      .#{$prefix}--search
       .#{$prefix}--search-magnifier:hover {
       @include focus-outline('reset');
 
