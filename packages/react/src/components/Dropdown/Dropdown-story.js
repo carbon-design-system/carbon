@@ -148,9 +148,13 @@ export const Skeleton = () => (
 export const Overflow = () => (
   <div style={{ width: 300, height: 100, overflow: 'auto', resize: 'both' }}>
     <Dropdown
-      {...{ detachMenu: boolean('Detach menu (detachMenu)', true) }}
+      id="default"
+      titleText="Dropdown label"
+      helperText="This is some helper text"
+      label="Dropdown menu options"
       items={items}
       itemToString={(item) => (item ? item.text : '')}
+      {...{ detachMenu: boolean('Detach menu (detachMenu)', true) }}
     />
   </div>
 );
@@ -162,9 +166,13 @@ export const OverflowInModal = () => {
       <Modal open={isOpen} onRequestClose={() => setIsOpen(false)}>
         <div style={{ width: 300, height: 100, overflow: 'auto' }}>
           <Dropdown
-            {...{ detachMenu: boolean('Detach menu (detachMenu)', true) }}
+            id="default"
+            titleText="Dropdown label"
+            helperText="This is some helper text"
+            label="Dropdown menu options"
             items={items}
             itemToString={(item) => (item ? item.text : '')}
+            {...{ detachMenu: boolean('Detach menu (detachMenu)', true) }}
           />
         </div>
       </Modal>
