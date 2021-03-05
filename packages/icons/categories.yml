@@ -63,11 +63,15 @@ categories:
           - video--add
           - video--chat
           - volume--down
+          - volume--down--alt
           - volume--down--filled
+          - volume--down--filled--alt
           - volume--mute
           - volume--mute--filled
           - volume--up
+          - volume--up--alt
           - volume--up--filled
+          - volume--up--filled--alt
       - name: Formatting
         members:
           - align-box--bottom-center
@@ -102,6 +106,7 @@ categories:
           - corner
           - crop
           - cut
+          - cut-out
           - distribute--horizontal-center
           - distribute--horizontal-left
           - distribute--horizontal-right
@@ -120,6 +125,7 @@ categories:
           - eyedropper
           - gradient
           - image
+          - image--copy
           - image--reference
           - language
           - lasso
@@ -173,6 +179,7 @@ categories:
           - text--align--right
           - text--all-caps
           - text--bold
+          - text--clear-format
           - text--color
           - text--creation
           - text--fill
@@ -237,6 +244,7 @@ categories:
           - subtract--alt
           - switcher
           - up-to-top
+          - zoom--area
           - zoom--in
           - zoom--in-area
           - zoom--out
@@ -262,6 +270,7 @@ categories:
           - center--square
           - change-catalog
           - chat
+          - chat--launch
           - chevron--mini
           - chevron--sort
           - chevron--sort--down
@@ -352,6 +361,8 @@ categories:
           - send--alt--filled
           - send--filled
           - shuffle
+          - sort--ascending
+          - sort--descending
           - split
           - split-screen
           - tag
@@ -455,6 +466,7 @@ categories:
         members:
           - logo--delicious
           - logo--digg
+          - logo--discord
           - logo--facebook
           - logo--flickr
           - logo--github
@@ -486,11 +498,13 @@ categories:
           - bee-bat
           - building
           - corn
+          - currency
           - currency--baht
           - currency--dollar
           - currency--euro
           - currency--lira
           - currency--pound
+          - currency--ruble
           - currency--rupee
           - currency--shekel
           - currency--won
@@ -511,6 +525,7 @@ categories:
           - monster
           - noodle-bowl
           - piggy-bank
+          - piggy-bank--slot
           - purchase
           - receipt
           - shopping--bag
@@ -679,6 +694,7 @@ categories:
       - name: Alphanumeric
         members:
           - letter--Aa
+          - letter--Aa--large
           - letter--Bb
           - letter--Cc
           - letter--Dd
@@ -802,6 +818,7 @@ categories:
           - circle--filled
           - classifier--language
           - cloud--data-ops
+          - cloud-registry
           - cloud-satellite
           - column-dependency
           - concept
@@ -849,6 +866,7 @@ categories:
           - flow--stream
           - flow--stream--reference
           - graphical-data-flow
+          - growth
           - hashtag
           - heat-map
           - heat-map--02
@@ -965,14 +983,18 @@ categories:
           - DOC
           - document
           - document--add
+          - document--attachment
+          - document--audio
           - document--blank
           - document--download
           - document--export
           - document--import
           - document--pdf
+          - document--sketch
           - document--subtract
           - document--tasks
           - document--unknown
+          - document--video
           - document--view
           - document--word-processor
           - document--word-processor--reference
@@ -1011,6 +1033,7 @@ categories:
           - license--third-party
           - license--third-party-draft
           - list--dropdown
+          - media--library
           - model
           - model--alt
           - model--reference
@@ -1073,6 +1096,8 @@ categories:
           - checkmark--outline
           - checkmark--outline--error
           - checkmark--outline--warning
+          - condition--point
+          - condition--wait-point
           - error
           - error--filled
           - error--outline
@@ -1130,6 +1155,7 @@ categories:
           - accessibility--color
           - accessibility--color--filled
           - collaborate
+          - cough
           - credentials
           - education
           - events
@@ -1155,10 +1181,12 @@ categories:
           - gender--female
           - gender--male
           - group
+          - group--presentation
           - identification
           - partnership
           - person
           - person--favorite
+          - sight
           - transgender
           - user
           - user--activity
@@ -1182,6 +1210,7 @@ categories:
           - user--speaker
           - user--x-ray
           - user-profile--alt
+          - voice-activate
   - name: Planning
     subcategories:
       - name: Time
@@ -1389,6 +1418,7 @@ categories:
           - humidity--alt
           - hurricane
           - ice--accretion
+          - ice--vision
           - lightning
           - marine-warning
           - mixed-rain-hail
@@ -1518,8 +1548,10 @@ categories:
           - debug
           - deployment-pattern
           - deployment-policy
+          - desk--adjustable
           - development
           - devices
+          - drone
           - edge-cluster
           - edge-device
           - edge-node
@@ -1560,6 +1592,7 @@ categories:
           - mobile--landscape
           - outage
           - password
+          - phone--ip
           - plug
           - plug--filled
           - printer
