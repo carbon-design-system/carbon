@@ -61,6 +61,7 @@ const types = {
 const props = () => ({
   id: text('Dropdown ID (id)', 'carbon-dropdown-example'),
   size: select('Field size (size)', sizes, undefined) || undefined,
+  detachMenu: boolean('Detach menu (detachMenu)', false),
   direction: select('Dropdown direction (direction)', directions, 'bottom'),
   label: text('Label (label)', 'Dropdown menu options'),
   ariaLabel: text('Aria Label (ariaLabel)', 'Dropdown'),
@@ -144,28 +145,24 @@ export const Skeleton = () => (
   </div>
 );
 
-export const Overflow = () => {
-  const propsObj = props();
-  return (
-    <div style={{ width: 300, overflow: 'auto', resize: 'both' }}>
-      <Dropdown
-        {...propsObj}
-        items={items}
-        itemToString={(item) => (item ? item.text : '')}
-      />
-    </div>
-  );
-};
+export const Overflow = () => (
+  <div style={{ width: 300, height: 100, overflow: 'auto', resize: 'both' }}>
+    <Dropdown
+      {...{ detachMenu: boolean('Detach menu (detachMenu)', true) }}
+      items={items}
+      itemToString={(item) => (item ? item.text : '')}
+    />
+  </div>
+);
 export const OverflowInModal = () => {
   const [isOpen, setIsOpen] = useState(true);
-  const propsObj = props();
   return (
     <div>
       <Button onClick={() => setIsOpen(!isOpen)}>Open</Button>
       <Modal open={isOpen} onRequestClose={() => setIsOpen(false)}>
-        <div style={{ width: 300, overflow: 'auto' }}>
+        <div style={{ width: 300, height: 100, overflow: 'auto' }}>
           <Dropdown
-            {...propsObj}
+            {...{ detachMenu: boolean('Detach menu (detachMenu)', true) }}
             items={items}
             itemToString={(item) => (item ? item.text : '')}
           />

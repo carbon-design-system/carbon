@@ -38,6 +38,7 @@ const defaultItemToString = (item) => {
 const Dropdown = React.forwardRef(function Dropdown(
   {
     className: containerClassName,
+    detachMenu,
     disabled,
     direction,
     items,
@@ -143,6 +144,7 @@ const Dropdown = React.forwardRef(function Dropdown(
       setMenuBounds(buttonRef.current.getBoundingClientRect());
     }
   }, [isOpen]);
+  const menuProps = getMenuProps();
 
   return (
     <div className={wrapperClasses} {...other}>
@@ -176,52 +178,65 @@ const Dropdown = React.forwardRef(function Dropdown(
           disabled={disabled}
           aria-disabled={disabled}
           {...toggleButtonProps}
+          onKeyDown={menuProps.onKeyDown}
           ref={mergeRefs(toggleButtonProps.ref, ref, buttonRef)}>
           <span className={`${prefix}--list-box__label`}>
             {selectedItem ? itemToString(selectedItem) : label}
           </span>
           <ListBox.MenuIcon isOpen={isOpen} translateWithId={translateWithId} />
         </button>
-        {isOpen && (
-          <FloatingMenu
-            target={() => document.body}
-            triggerRef={buttonRef}
-            menuDirection={
-              direction == 'top' ? DIRECTION_TOP : DIRECTION_BOTTOM
-            }
-            menuRef={() => {}}
-            menuOffset={() => {}}
-            styles={{ width: menuBounds.width }}>
+        {(() => {
+          const menuEl = (
             <ListBox.Menu
               onMouseDown={(e) => e.stopPropagation()}
-              {...getMenuProps()}>
-              {items.map((item, index) => {
-                const itemProps = getItemProps({ item, index });
-                return (
-                  <ListBox.MenuItem
-                    key={itemProps.id}
-                    isActive={selectedItem === item}
-                    isHighlighted={
-                      highlightedIndex === index || selectedItem === item
-                    }
-                    title={itemToElement ? item.text : itemToString(item)}
-                    {...itemProps}>
-                    {itemToElement ? (
-                      <ItemToElement key={itemProps.id} {...item} />
-                    ) : (
-                      itemToString(item)
-                    )}
-                    {selectedItem === item && (
-                      <Checkmark16
-                        className={`${prefix}--list-box__menu-item__selected-icon`}
-                      />
-                    )}
-                  </ListBox.MenuItem>
-                );
-              })}
+              {...menuProps}>
+              {isOpen &&
+                items.map((item, index) => {
+                  const itemProps = getItemProps({ item, index });
+                  return (
+                    <ListBox.MenuItem
+                      key={itemProps.id}
+                      isActive={selectedItem === item}
+                      isHighlighted={
+                        highlightedIndex === index || selectedItem === item
+                      }
+                      title={itemToElement ? item.text : itemToString(item)}
+                      {...itemProps}>
+                      {itemToElement ? (
+                        <ItemToElement key={itemProps.id} {...item} />
+                      ) : (
+                        itemToString(item)
+                      )}
+                      {selectedItem === item && (
+                        <Checkmark16
+                          className={`${prefix}--list-box__menu-item__selected-icon`}
+                        />
+                      )}
+                    </ListBox.MenuItem>
+                  );
+                })}
             </ListBox.Menu>
-          </FloatingMenu>
-        )}
+          );
+
+          if (!detachMenu) {
+            return menuEl;
+          } else {
+            return (
+              <FloatingMenu
+                target={() => document.body}
+                triggerRef={buttonRef}
+                menuDirection={
+                  direction == 'top' ? DIRECTION_TOP : DIRECTION_BOTTOM
+                }
+                menuRef={() => {}}
+                menuOffset={() => {}}
+                styles={{ width: menuBounds.width }}
+                {...menuProps}>
+                {menuEl}
+              </FloatingMenu>
+            );
+          }
+        })()}
       </ListBox>
       {!inline && !invalid && !warn && helper}
     </div>
@@ -239,6 +254,11 @@ Dropdown.propTypes = {
    * Provide a custom className to be applied on the bx--dropdown node
    */
   className: PropTypes.string,
+
+  /**
+   * Specify whether the menu should be detached (useful in overflow areas)
+   */
+  detachMenu: PropTypes.bool,
 
   /**
    * Specify the direction of the dropdown. Can be either top or bottom.

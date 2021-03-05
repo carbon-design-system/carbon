@@ -155,6 +155,11 @@ class FloatingMenu extends React.Component {
     focusTrap: PropTypes.bool,
 
     /**
+     * Forward elemet reference
+     */
+    innerRef: PropTypes.object,
+
+    /**
      * Where to put the tooltip, relative to the trigger button.
      */
     menuDirection: PropTypes.oneOf([
@@ -433,7 +438,9 @@ class FloatingMenu extends React.Component {
     if (typeof document !== 'undefined') {
       const { focusTrap, target } = this.props;
       return ReactDOM.createPortal(
-        <div onBlur={focusTrap ? this.handleBlur : null}>
+        <div
+          onBlur={focusTrap ? this.handleBlur : null}
+          ref={this.props.innerRef}>
           {/* Non-translatable: Focus management code makes this `<span>` not actually read by screen readers */}
           <span
             ref={this.startSentinel}
@@ -459,4 +466,6 @@ class FloatingMenu extends React.Component {
   }
 }
 
-export default FloatingMenu;
+export default React.forwardRef((props, ref) => (
+  <FloatingMenu innerRef={ref} {...props} />
+));
