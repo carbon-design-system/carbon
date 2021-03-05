@@ -51,43 +51,34 @@ em {
 
 @keyframes skeleton {
   0% {
-    right: auto;
-    left: 0;
-    width: 0%;
+    transform: scaleX(0);
+    transform-origin: left;
     opacity: 0.3; }
   20% {
-    right: auto;
-    left: 0;
-    width: 100%;
+    transform: scaleX(1);
+    transform-origin: left;
     opacity: 1; }
   28% {
-    right: 0;
-    left: auto;
-    width: 100%; }
+    transform: scaleX(1);
+    transform-origin: right; }
   51% {
-    right: 0;
-    left: auto;
-    width: 0%; }
+    transform: scaleX(0);
+    transform-origin: right; }
   58% {
-    right: 0;
-    left: auto;
-    width: 0%; }
+    transform: scaleX(0);
+    transform-origin: right; }
   82% {
-    right: 0;
-    left: auto;
-    width: 100%; }
+    transform: scaleX(1);
+    transform-origin: right; }
   83% {
-    right: auto;
-    left: 0;
-    width: 100%; }
+    transform: scaleX(1);
+    transform-origin: left; }
   96% {
-    right: auto;
-    left: 0;
-    width: 0%; }
+    transform: scaleX(0);
+    transform-origin: left; }
   100% {
-    right: auto;
-    left: 0;
-    width: 0%;
+    transform: scaleX(0);
+    transform-origin: left;
     opacity: 0.3; } }
 
 .bx--grid {
