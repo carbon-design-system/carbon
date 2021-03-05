@@ -25,7 +25,7 @@ import Button from '../Button';
 import mdx from './Accordion.mdx';
 
 export default {
-  title: 'Accordion',
+  title: 'Components/Accordion',
   component: Accordion,
   subcomponents: {
     AccordionItem,

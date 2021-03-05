@@ -30,6 +30,7 @@
     "test:e2e": "cross-env BABEL_ENV=test jest --testPathPattern=e2e --testPathIgnorePatterns='examples,/packages/components/,/packages/react/'"
   },
   "resolutions": {
+    "ast-types": "^0.14.0",
     "react": "~16.9.0",
     "react-dom": "~16.9.0",
     "react-is": "~16.9.0",

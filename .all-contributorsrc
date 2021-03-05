@@ -755,6 +755,24 @@
       "contributions": [
         "code"
       ]
+    },
+    {
+      "login": "guigueb",
+      "name": "Bill Guigue",
+      "avatar_url": "https://avatars1.githubusercontent.com/u/5973642?v=4",
+      "profile": "https://github.com/guigueb",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "szymonbrandys",
+      "name": "szymonbrandys",
+      "avatar_url": "https://avatars.githubusercontent.com/u/79149899?v=4",
+      "profile": "https://github.com/szymonbrandys",
+      "contributions": [
+        "code"
+      ]
     }
   ],
   "commitConvention": "none"

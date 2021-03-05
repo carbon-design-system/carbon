@@ -45,7 +45,10 @@ const TableBatchActions = ({
   );
 
   return (
-    <div {...rest} className={batchActionsClasses}>
+    <div
+      {...rest}
+      aria-hidden={!shouldShowBatchActions}
+      className={batchActionsClasses}>
       <div className={`${prefix}--batch-summary`}>
         <p className={`${prefix}--batch-summary__para`}>
           <span>

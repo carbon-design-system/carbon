@@ -34,13 +34,13 @@ const props = () => ({
     'The label text for the close button (closeButtonLabelText)',
     'Clear search input'
   ),
-  placeHolderText: text('Placeholder text (placeHolderText)', 'Search'),
+  placeholder: text('Placeholder text (placeholder)', 'Search'),
   onChange: action('onChange'),
   onKeyDown: action('onKeyDown'),
 });
 
 export default {
-  title: 'Search',
+  title: 'Components/Search',
   decorators: [withKnobs],
 
   parameters: {

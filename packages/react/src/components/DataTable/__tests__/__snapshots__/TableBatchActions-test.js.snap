@@ -9,6 +9,7 @@ exports[`DataTable.TableBatchActions should render 1`] = `
   translateWithId={[Function]}
 >
   <div
+    aria-hidden={true}
     className="bx--batch-actions custom-class"
   >
     <div
@@ -38,6 +39,7 @@ exports[`DataTable.TableBatchActions should render 1`] = `
           type="button"
         >
           <button
+            aria-pressed={null}
             className="bx--batch-summary__cancel bx--btn bx--btn--primary"
             disabled={false}
             onClick={[MockFunction]}
@@ -62,6 +64,7 @@ exports[`DataTable.TableBatchActions should render 2`] = `
   translateWithId={[Function]}
 >
   <div
+    aria-hidden={false}
     className="bx--batch-actions bx--batch-actions--active custom-class"
   >
     <div
@@ -91,6 +94,7 @@ exports[`DataTable.TableBatchActions should render 2`] = `
           type="button"
         >
           <button
+            aria-pressed={null}
             className="bx--batch-summary__cancel bx--btn bx--btn--primary"
             disabled={false}
             onClick={[MockFunction]}

@@ -71,7 +71,9 @@ describe('ES modules', () => {
         terser.terser(),
       ],
       onwarn: (warning, handle) => {
-        if (warning.code !== 'EMPTY_BUNDLE') handle(warning);
+        if (warning.code !== 'EMPTY_BUNDLE') {
+          handle(warning);
+        }
       },
       treeshake: {
         annotations: false,
@@ -103,7 +105,9 @@ describe('ES modules', () => {
         terser.terser(),
       ],
       onwarn: (warning, handle) => {
-        if (warning.code !== 'EMPTY_BUNDLE') handle(warning);
+        if (warning.code !== 'EMPTY_BUNDLE') {
+          handle(warning);
+        }
       },
       treeshake: {
         annotations: false,

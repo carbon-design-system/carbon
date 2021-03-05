@@ -9,5 +9,9 @@
 
 module.exports = {
   addons: ['storybook-preset-carbon'],
-  stories: ['../src/**/*-story.js', '../src/**/*.stories.mdx'],
+  stories: [
+    './Welcome/Welcome.stories.js',
+    '../src/**/*-story.js',
+    '../src/**/*.stories.mdx',
+  ],
 };

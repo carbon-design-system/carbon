@@ -23,6 +23,7 @@ const Button = React.forwardRef(function Button(
     size,
     kind,
     href,
+    isSelected,
     tabIndex,
     type,
     renderIcon: ButtonImageElement,
@@ -43,6 +44,7 @@ const Button = React.forwardRef(function Button(
     [`${prefix}--btn--${kind}`]: kind,
     [`${prefix}--btn--disabled`]: disabled,
     [`${prefix}--btn--icon-only`]: hasIconOnly,
+    [`${prefix}--btn--selected`]: hasIconOnly && isSelected && kind === 'ghost',
     [`${prefix}--tooltip__trigger`]: hasIconOnly,
     [`${prefix}--tooltip--a11y`]: hasIconOnly,
     [`${prefix}--tooltip--${tooltipPosition}`]: hasIconOnly && tooltipPosition,
@@ -68,6 +70,7 @@ const Button = React.forwardRef(function Button(
   let otherProps = {
     disabled,
     type,
+    'aria-pressed': hasIconOnly && kind === 'ghost' ? isSelected : null,
   };
   const anchorProps = {
     href,
@@ -147,6 +150,11 @@ Button.propTypes = {
     }
     return undefined;
   },
+
+  /**
+   * Specify whether the Button is currently selected
+   */
+  isSelected: PropTypes.bool,
 
   /**
    * Specify the kind of Button you want to create

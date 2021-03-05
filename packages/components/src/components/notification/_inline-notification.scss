@@ -12,9 +12,11 @@
 @import '../../globals/scss/vars';
 @import '../../globals/scss/helper-mixins';
 @import '../../globals/scss/layout';
+@import '../../globals/scss/component-tokens';
 @import '../../globals/scss/vendor/@carbon/elements/scss/import-once/import-once';
 @import '../../globals/scss/css--reset';
 @import 'mixins';
+@import 'tokens';
 
 /// Inline notification styles
 /// @access private
@@ -78,8 +80,7 @@
   }
 
   .#{$prefix}--inline-notification--low-contrast {
-    // Stop-gap to ensure color contrast (vs. fixed background color) until we have component-specific theme tokens
-    color: map-get($carbon--theme--white, 'text-01');
+    color: $text-01;
 
     &::before {
       position: absolute;
@@ -103,7 +104,7 @@
   .#{$prefix}--inline-notification--low-contrast.#{$prefix}--inline-notification--error {
     @include notification--experimental(
       $support-01,
-      $notification-error-background-color
+      get-token-value($notification-colors, 'notification-background-error')
     );
 
     &::before {
@@ -118,7 +119,7 @@
   .#{$prefix}--inline-notification--low-contrast.#{$prefix}--inline-notification--success {
     @include notification--experimental(
       $support-02,
-      $notification-success-background-color
+      get-token-value($notification-colors, 'notification-background-success')
     );
 
     &::before {
@@ -135,7 +136,7 @@
   .#{$prefix}--inline-notification--low-contrast.#{$prefix}--inline-notification--info-square {
     @include notification--experimental(
       $support-04,
-      $notification-info-background-color
+      get-token-value($notification-colors, 'notification-background-info')
     );
 
     &::before {
@@ -152,7 +153,7 @@
   .#{$prefix}--inline-notification--low-contrast.#{$prefix}--inline-notification--warning-alt {
     @include notification--experimental(
       $support-03,
-      $notification-warning-background-color
+      get-token-value($notification-colors, 'notification-background-warning')
     );
 
     &::before {
@@ -205,16 +206,15 @@
     height: rem(32px);
     margin-bottom: $carbon--spacing-03;
     margin-left: $carbon--spacing-08;
-    color: $inverse-link;
 
     @include carbon--breakpoint(md) {
       margin: $carbon--spacing-03 0;
     }
   }
 
-  .#{$prefix}--inline-notification--low-contrast
+  .#{$prefix}--inline-notification:not(.#{$prefix}--inline-notification--low-contrast)
     .#{$prefix}--inline-notification__action-button.#{$prefix}--btn--ghost {
-    color: $link-01;
+    color: $inverse-link;
   }
 
   .#{$prefix}--inline-notification__action-button.#{$prefix}--btn--ghost:active,
@@ -226,7 +226,10 @@
     .#{$prefix}--inline-notification__action-button.#{$prefix}--btn--ghost:active,
   .#{$prefix}--inline-notification--low-contrast
     .#{$prefix}--inline-notification__action-button.#{$prefix}--btn--ghost:hover {
-    background-color: $carbon--white-0;
+    background-color: get-token-value(
+      $notification-colors,
+      'notification-action-hover'
+    );
   }
 
   .#{$prefix}--inline-notification__action-button.#{$prefix}--btn--ghost:focus {
@@ -300,21 +303,7 @@
   .#{$prefix}--inline-notification--low-contrast
     .#{$prefix}--inline-notification__close-button
     .#{$prefix}--inline-notification__close-icon {
-    fill: map-get($carbon--theme--white, 'text-01');
-  }
-
-  .#{$prefix}--inline-notification--low-contrast
-    .#{$prefix}--inline-notification__action-button {
-    color: $interactive-01;
-
-    &:active {
-      color: $interactive-01;
-    }
-
-    &:active,
-    &:hover {
-      background-color: $carbon--white-0;
-    }
+    fill: $icon-01;
   }
 }
 

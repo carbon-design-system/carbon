@@ -30,7 +30,7 @@ const props = () => ({
 });
 
 export default {
-  title: 'SkeletonText',
+  title: 'Components/Skeleton/SkeletonText',
   decorators: [withKnobs],
 
   parameters: {
