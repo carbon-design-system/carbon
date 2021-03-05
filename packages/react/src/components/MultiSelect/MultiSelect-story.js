@@ -67,7 +67,7 @@ const directions = {
   'Top ': 'top',
 };
 
-const props = () => ({
+const props = (defaults = {}) => ({
   id: text('MultiSelect ID (id)', 'carbon-multiselect-example'),
   titleText: text('Title (titleText)', 'Multiselect title'),
   helperText: text('Helper text (helperText)', 'This is helper text'),
@@ -76,6 +76,7 @@ const props = () => ({
   useTitleInItem: boolean('Show tooltip on hover', false),
   type: select('UI type (Only for `<MultiSelect>`) (type)', types, 'default'),
   size: select('Field size (size)', sizes, undefined) || undefined,
+  detachMenu: boolean('Detach menu (detachMenu)', defaults.detachMenu),
   direction: select('Dropdown direction (direction)', directions, 'bottom'),
   label: text('Label (label)', defaultLabel),
   invalid: boolean('Show form validation UI (invalid)', false),
@@ -149,6 +150,25 @@ Default.parameters = {
       `,
   },
 };
+
+export const Overflow = withReadme(readme, () => {
+  const {
+    listBoxMenuIconTranslationIds,
+    selectionFeedback,
+    ...multiSelectProps
+  } = props({ detachMenu: true });
+  return (
+    <div style={{ width: 300, height: 100, overflow: 'auto', resize: 'both' }}>
+      <MultiSelect
+        {...multiSelectProps}
+        items={items}
+        itemToString={(item) => (item ? item.text : '')}
+        translateWithId={(id) => listBoxMenuIconTranslationIds[id]}
+        selectionFeedback={selectionFeedback}
+      />
+    </div>
+  );
+});
 
 export const WithInitialSelectedItems = withReadme(readme, () => {
   const {

@@ -11,7 +11,7 @@ import cx from 'classnames';
 import Downshift, { useSelect } from 'downshift';
 import isEqual from 'lodash.isequal';
 import PropTypes from 'prop-types';
-import React, { useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import ListBox, { PropTypes as ListBoxPropTypes } from '../ListBox';
 import { sortingPropTypes } from './MultiSelectPropTypes';
 import { defaultItemToString } from './tools/itemToString';
@@ -20,6 +20,11 @@ import { useSelection } from '../../internal/Selection';
 import setupGetInstanceId from '../../tools/setupGetInstanceId';
 import { mapDownshiftProps } from '../../tools/createPropAdapter';
 import mergeRefs from '../../tools/mergeRefs';
+
+import FloatingMenu, {
+  DIRECTION_TOP,
+  DIRECTION_BOTTOM,
+} from '../../internal/FloatingMenu';
 
 const { prefix } = settings;
 const noop = () => {};
@@ -38,6 +43,7 @@ const {
 const MultiSelect = React.forwardRef(function MultiSelect(
   {
     className: containerClassName,
+    detachMenu,
     id,
     items,
     itemToString,
@@ -195,6 +201,16 @@ const MultiSelect = React.forwardRef(function MultiSelect(
 
   const toggleButtonProps = getToggleButtonProps();
 
+  // used for the FloatingMenu
+  const buttonRef = useRef();
+  const [menuBounds, setMenuBounds] = useState({});
+  useEffect(() => {
+    if (buttonRef && buttonRef.current) {
+      setMenuBounds(buttonRef.current.getBoundingClientRect());
+    }
+  }, [isOpen]);
+  const menuProps = getMenuProps();
+
   return (
     <div className={wrapperClasses}>
       {titleText && (
@@ -228,7 +244,8 @@ const MultiSelect = React.forwardRef(function MultiSelect(
           disabled={disabled}
           aria-disabled={disabled}
           {...toggleButtonProps}
-          ref={mergeRefs(toggleButtonProps.ref, ref)}>
+          onKeyDown={menuProps.onKeyDown}
+          ref={mergeRefs(toggleButtonProps.ref, ref, buttonRef)}>
           {selectedItems.length > 0 && (
             <ListBox.Selection
               clearSelection={!disabled ? clearSelection : noop}
@@ -242,40 +259,63 @@ const MultiSelect = React.forwardRef(function MultiSelect(
           </span>
           <ListBox.MenuIcon isOpen={isOpen} translateWithId={translateWithId} />
         </button>
-        <ListBox.Menu aria-multiselectable="true" {...getMenuProps()}>
-          {isOpen &&
-            sortItems(items, sortOptions).map((item, index) => {
-              const itemProps = getItemProps({
-                item,
-                // we don't want Downshift to set aria-selected for us
-                // we also don't want to set 'false' for reader verbosity's sake
-                ['aria-selected']: isChecked ? true : null,
-              });
-              const itemText = itemToString(item);
-              const isChecked =
-                selectedItems.filter((selected) => isEqual(selected, item))
-                  .length > 0;
-              return (
-                <ListBox.MenuItem
-                  key={itemProps.id}
-                  isActive={isChecked}
-                  aria-label={itemText}
-                  isHighlighted={highlightedIndex === index}
-                  title={itemText}
-                  {...itemProps}>
-                  <div className={`${prefix}--checkbox-wrapper`}>
-                    <span
-                      title={useTitleInItem ? itemText : null}
-                      className={`${prefix}--checkbox-label`}
-                      data-contained-checkbox-state={isChecked}
-                      id={`${itemProps.id}__checkbox`}>
-                      {itemText}
-                    </span>
-                  </div>
-                </ListBox.MenuItem>
-              );
-            })}
-        </ListBox.Menu>
+        {(() => {
+          const menuEl = (
+            <ListBox.Menu aria-multiselectable="true" {...getMenuProps()}>
+              {isOpen &&
+                sortItems(items, sortOptions).map((item, index) => {
+                  const itemProps = getItemProps({
+                    item,
+                    // we don't want Downshift to set aria-selected for us
+                    // we also don't want to set 'false' for reader verbosity's sake
+                    ['aria-selected']: isChecked ? true : null,
+                  });
+                  const itemText = itemToString(item);
+                  const isChecked =
+                    selectedItems.filter((selected) => isEqual(selected, item))
+                      .length > 0;
+                  return (
+                    <ListBox.MenuItem
+                      key={itemProps.id}
+                      isActive={isChecked}
+                      aria-label={itemText}
+                      isHighlighted={highlightedIndex === index}
+                      title={itemText}
+                      {...itemProps}>
+                      <div className={`${prefix}--checkbox-wrapper`}>
+                        <span
+                          title={useTitleInItem ? itemText : null}
+                          className={`${prefix}--checkbox-label`}
+                          data-contained-checkbox-state={isChecked}
+                          id={`${itemProps.id}__checkbox`}>
+                          {itemText}
+                        </span>
+                      </div>
+                    </ListBox.MenuItem>
+                  );
+                })}
+            </ListBox.Menu>
+          );
+
+          if (!detachMenu) {
+            return menuEl;
+          } else {
+            return (
+              <FloatingMenu
+                target={() => document.body}
+                triggerRef={buttonRef}
+                menuDirection={
+                  direction == 'top' ? DIRECTION_TOP : DIRECTION_BOTTOM
+                }
+                menuRef={() => {}}
+                menuOffset={() => {}}
+                styles={{ width: menuBounds.width }}
+                {...menuProps}>
+                {menuEl}
+              </FloatingMenu>
+            );
+          }
+        })()}
       </ListBox>
       {!inline && !invalid && !warn && helperText && (
         <div id={helperId} className={helperClasses}>
@@ -289,6 +329,11 @@ const MultiSelect = React.forwardRef(function MultiSelect(
 MultiSelect.displayName = 'MultiSelect';
 MultiSelect.propTypes = {
   ...sortingPropTypes,
+
+  /**
+   * Specify whether the menu should be detached (useful in overflow areas)
+   */
+  detachMenu: PropTypes.bool,
 
   /**
    * Specify the direction of the multiselect dropdown. Can be either top or bottom.
