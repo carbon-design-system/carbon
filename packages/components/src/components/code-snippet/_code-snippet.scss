@@ -16,11 +16,9 @@
 @import 'mixins';
 
 /// Code snippet styles
-/// @param {Number} $closedMaxHeight - The max-height of the multi snippet when closed
-/// @param {Number} $expandedMaxHeight - The max-height of the multi snippet when expanded
 /// @access private
 /// @group code-snippet
-@mixin snippet($closedMaxHeight: 100, $expandedMaxHeight: 500) {
+@mixin snippet {
   .#{$prefix}--snippet {
     @include reset;
   }
@@ -203,23 +201,16 @@
 
   //closed snippet container
   .#{$prefix}--snippet--multi .#{$prefix}--snippet-container {
-    position: relative;
     order: 1;
-    min-height: rem(56px);
-    // max-height: rem(238px);
-    // max-height: calc(#{rem(18px)} * #{$closedNumberOfRows});
-    max-height: $closedMaxHeight;
-    overflow: hidden;
+    overflow: scroll;
+    position: relative;
     transition: max-height $duration--moderate-01 motion(standard, productive);
+    width: 100%;
   }
 
   // expanded snippet container
   .#{$prefix}--snippet--multi.#{$prefix}--snippet--expand
     .#{$prefix}--snippet-container {
-    // max-height: 100%;
-    // max-height: calc(#{rem(18px)} * #{$expandedNumberOfRows});
-    max-height: $expandedMaxHeight;
-    padding-bottom: $spacing-05;
     transition: max-height $duration--moderate-01 motion(standard, productive);
   }
 
@@ -228,27 +219,8 @@
     word-wrap: break-word;
   }
 
-  // closed pre
-  .#{$prefix}--snippet--multi .#{$prefix}--snippet-container pre {
-    padding-right: $carbon--spacing-08;
-    padding-bottom: rem(24px);
-    overflow-x: auto;
-  }
-
-  .#{$prefix}--snippet--multi.#{$prefix}--snippet--no-copy
-    .#{$prefix}--snippet-container
-    pre {
-    padding-right: 0;
-  }
-
-  // expanded pre
-  .#{$prefix}--snippet--multi.#{$prefix}--snippet--expand
-    .#{$prefix}--snippet-container
-    pre {
-    overflow-x: auto;
-  }
-
   .#{$prefix}--snippet--multi .#{$prefix}--snippet-container pre::after {
+  // .#{$prefix}--snippet--multi .#{$prefix}--snippet-container::after {
     position: absolute;
     top: 0;
     right: 0;

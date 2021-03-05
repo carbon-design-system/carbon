@@ -19,26 +19,31 @@ import getUniqueId from '../../tools/uniqueId';
 
 const { prefix } = settings;
 
-const defaultClosedNumberOfRows = 15;
-const defaultExpandedNumberOfRows = 50;
+const defaultMinClosedNumberOfRows = 3;
+const defaultMinExpandedNumberOfRows = 16;
+const defaultMaxClosedNumberOfRows = 15;
+const defaultMaxExpandedNumberOfRows = 30;
 const defaultShowLessText = 'Show less';
 const defaultShowMoreText = 'Show more';
 const defaultType = 'single';
 const defaultWrapText = false;
-const rowHeightInPixels = 18;
+
+const rowHeightInPixels = 16;
 
 function CodeSnippet({
   ariaLabel,
   children,
   className,
-  closedNumberOfRows = defaultClosedNumberOfRows,
   copyButtonDescription,
   copyLabel, //TODO: Merge this prop to `ariaLabel` in `v11`
   disabled,
-  expandedNumberOfRows = defaultExpandedNumberOfRows,
   feedback,
   hideCopyButton,
   light,
+  minClosedNumberOfRows = defaultMinClosedNumberOfRows,
+  minExpandedNumberOfRows = defaultMinExpandedNumberOfRows,
+  maxClosedNumberOfRows = defaultMaxClosedNumberOfRows,
+  maxExpandedNumberOfRows = defaultMaxExpandedNumberOfRows,
   onClick,
   showLessText = defaultShowLessText,
   showMoreText = defaultShowMoreText,
@@ -105,10 +110,15 @@ function CodeSnippet({
       onResize: () => {
         if (codeContentRef?.current && type === 'multi') {
           const { height } = codeContentRef.current.getBoundingClientRect();
-          setShouldShowMoreLessBtn(
-            closedNumberOfRows < expandedNumberOfRows &&
-              height > closedNumberOfRows * rowHeightInPixels
-          );
+
+          if (height > maxClosedNumberOfRows * rowHeightInPixels) {
+            setShouldShowMoreLessBtn(
+              maxClosedNumberOfRows < minExpandedNumberOfRows
+            );
+          } else {
+            setShouldShowMoreLessBtn(false);
+            setExpandedCode(false);
+          }
         }
         if (
           (codeContentRef?.current && type === 'multi') ||
@@ -118,7 +128,7 @@ function CodeSnippet({
         }
       },
     },
-    [type, closedNumberOfRows, expandedNumberOfRows]
+    [type, maxClosedNumberOfRows, minExpandedNumberOfRows, rowHeightInPixels]
   );
 
   useEffect(() => {
@@ -158,6 +168,20 @@ function CodeSnippet({
 
   const expandCodeBtnText = expandedCode ? showLessText : showMoreText;
 
+  const containerStyle =
+    type !== 'multi'
+      ? {}
+      : {
+          style: {
+            'minHeight':
+              (expandedCode ? minExpandedNumberOfRows : minClosedNumberOfRows) *
+              rowHeightInPixels,
+            'maxHeight':
+              (expandedCode ? maxExpandedNumberOfRows : maxClosedNumberOfRows) *
+              rowHeightInPixels,
+          },
+        };
+
   return (
     <div {...rest} className={codeSnippetClasses}>
       <div
@@ -166,7 +190,8 @@ function CodeSnippet({
         tabIndex={type === 'single' && !disabled ? 0 : null}
         className={`${prefix}--snippet-container`}
         aria-label={ariaLabel || copyLabel || 'code-snippet'}
-        onScroll={(type === 'single' && handleScroll) || null}>
+        onScroll={(type === 'single' && handleScroll) || null}
+        {...containerStyle}>
         <code>
           <pre
             ref={codeContentRef}
@@ -217,8 +242,7 @@ function CodeSnippet({
 
 CodeSnippet.propTypes = {
   /**
-   * Specify a label to be read by screen readers on the containing <textbox>
-   * node
+   * Specify a label to be read by screen readers on the containing <textbox> node
    */
   ariaLabel: PropTypes.string,
 
@@ -233,18 +257,12 @@ CodeSnippet.propTypes = {
   className: PropTypes.string,
 
   /**
-   * Specify the number of rows to be shown when in closed view.
-   */
-  closedNumberOfRows: PropTypes.number,
-
-  /**
    * Specify the description for the Copy Button
    */
   copyButtonDescription: PropTypes.string,
 
   /**
-   * Specify a label to be read by screen readers on the containing <textbox>
-   * node
+   * Specify a label to be read by screen readers on the containing <textbox> node
    */
   copyLabel: PropTypes.string,
 
@@ -252,11 +270,6 @@ CodeSnippet.propTypes = {
    * Specify whether or not the CodeSnippet should be disabled
    */
   disabled: PropTypes.bool,
-
-  /**
-   * Specify the number of rows to be shown when in expanded view.
-   */
-  expandedNumberOfRows: PropTypes.number,
 
   /**
    * Specify the string displayed when the snippet is copied
@@ -275,20 +288,37 @@ CodeSnippet.propTypes = {
   light: PropTypes.bool,
 
   /**
-   * An optional handler to listen to the `onClick` even fired by the Copy
-   * Button
+   * Specify the minimum number of rows to be shown when in closed view
+   */
+  minClosedNumberOfRows: PropTypes.number,
+
+  /**
+   * Specify the minimum number of rows to be shown when in expanded view
+   */
+  minExpandedNumberOfRows: PropTypes.number,
+
+  /**
+   * Specify the maximum number of rows to be shown when in closed view
+   */
+  maxClosedNumberOfRows: PropTypes.number,
+
+  /**
+   * Specify the maximum number of rows to be shown when in expanded view
+   */
+  maxExpandedNumberOfRows: PropTypes.number,
+
+  /**
+   * An optional handler to listen to the `onClick` even fired by the Copy Button
    */
   onClick: PropTypes.func,
 
   /**
-   * Specify a string that is displayed when the Code Snippet has been
-   * interacted with to show more lines
+   * Specify a string that is displayed to close the Code Snippet
    */
   showLessText: PropTypes.string,
 
   /**
-   * Specify a string that is displayed when the Code Snippet text is more
-   * than 'closedNumberOfRows' lines
+   * Specify a string that is displayed to expand the Code Snippet
    */
   showMoreText: PropTypes.string,
 

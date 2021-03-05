@@ -14,104 +14,9 @@ import {
   select,
   number,
 } from '@storybook/addon-knobs';
-import CodeSnippet from '../CodeSnippet';
+import CodeSnippet from './CodeSnippet';
 import CodeSnippetSkeleton from './CodeSnippet.Skeleton';
 import mdx from './CodeSnippet.mdx';
-
-export default {
-  title: 'CodeSnippet',
-  component: CodeSnippet,
-  decorators: [withKnobs],
-  parameters: {
-    docs: {
-      page: mdx,
-    },
-  },
-};
-
-const props = () => ({
-  type: select(
-    'Type (type)',
-    {
-      inline: 'inline',
-      'single line': 'single',
-      'multiple line': 'multi',
-    },
-    'inline'
-  ),
-  disabled: boolean('Disabled (disabled)', false),
-  light: boolean('Light variant (light)', false),
-  feedback: text('Feedback text', 'Copied to clipboard'),
-  showMoreText: text('Text for "show more" button', 'Show more'),
-  showLessText: text('Text for "show less" button', 'Show less'),
-  hideCopyButton: boolean('Hide copy button (hideCopyButton)', false),
-  onClick: action('onClick'),
-  copyButtonDescription: text('Copy button title', 'Copy code snippet'),
-  ariaLabel: text('ARIA label', 'Container label'),
-  wrapText: boolean('wrapText: Specify whether or not to wrap the text)', true),
-  closedNumberOfRows: number(
-    'closedNumberOfRows: Specify the number of rows to be shown when in closed view',
-    15
-  ),
-  expandedNumberOfRows: number(
-    'expandedNumberOfRows: Specify the number of rows to be shown when in expanded view',
-    50
-  ),
-});
-
-export const inline = () => (
-  <CodeSnippet type="inline" feedback="Copied to clipboard">
-    {'node -v'}
-  </CodeSnippet>
-);
-
-export const multiline = () => (
-  <CodeSnippet {...props()} type="multi" feedback="Copied to clipboard">
-    {`  "scripts": {
-    "build": "lerna run build --stream --prefix --npm-client yarn",
-    "ci-check": "carbon-cli ci-check",
-    "clean": "lerna run clean && lerna clean --yes && rimraf node_modules",
-    "doctoc": "doctoc --title '## Table of Contents'",
-    "format": "prettier --write '**/*.{js,md,scss,ts}' '!**/{build,es,lib,storybook,ts,umd}/**'",
-    "format:diff": "prettier --list-different '**/*.{js,md,scss,ts}' '!**/{build,es,lib,storybook,ts,umd}/**' '!packages/components/**'",
-    "lint": "eslint actions config codemods packages",
-    "lint:styles": "stylelint '**/*.{css,scss}' --report-needless-disables --report-invalid-scope-disables",
-    "sync": "carbon-cli sync",
-    "test": "cross-env BABEL_ENV=test jest",
-    "test:e2e": "cross-env BABEL_ENV=test jest --testPathPattern=e2e --testPathIgnorePatterns='examples,/packages/components/,/packages/react/'"
-  },
-  "resolutions": {
-    "react": "~16.9.0",
-    "react-dom": "~16.9.0",
-    "react-is": "~16.9.0",
-    "react-test-renderer": "~16.9.0"
-  },
-  "devDependencies": {
-    "@babel/core": "^7.10.0",
-    "@babel/plugin-proposal-class-properties": "^7.7.4",
-    "@babel/plugin-proposal-export-default-from": "^7.7.4",
-    "@babel/plugin-proposal-export-namespace-from": "^7.7.4",
-    "@babel/plugin-transform-runtime": "^7.10.0",
-    "@babel/preset-env": "^7.10.0",
-    "@babel/preset-react": "^7.10.0",
-    "@babel/runtime": "^7.10.0",
-    "@commitlint/cli": "^8.3.5",`}
-  </CodeSnippet>
-);
-
-export const singleline = () => (
-  <CodeSnippet type="single" feedback="Copied to clipboard">
-    yarn add carbon-components@latest carbon-components-react@latest
-    @carbon/icons-react@latest carbon-icons@latest
-  </CodeSnippet>
-);
-
-export const skeleton = () => (
-  <div>
-    <CodeSnippetSkeleton type="single" style={{ marginBottom: 8 }} />
-    <CodeSnippetSkeleton type="multi" />
-  </div>
-);
 
 const lightPropMessage = (
   <small style={{ display: 'block', paddingBottom: '1rem' }}>
@@ -133,17 +38,277 @@ const lightPropMessage = (
   </small>
 );
 
-export const playground = () => (
-  <div className={props().light ? 'bx--tile' : ''}>
-    {props().light && lightPropMessage}
-    <CodeSnippet {...props()}>
-      {props().type === 'multi'
-        ? `@mixin grid-container {
-  width: 100%;
-  padding-right: padding(mobile);
-  padding-left: padding(mobile);
-}`
-        : 'node -v'}
-    </CodeSnippet>
+export default {
+  title: 'CodeSnippet',
+  component: CodeSnippet,
+  subcomponents: {
+    CodeSnippetSkeleton,
+  },
+  decorators: [
+    withKnobs,
+    (story) => (
+      <div className={lightProp().light ? 'bx--tile' : ''}>
+        {lightProp().light && lightPropMessage}
+        <br />
+        {story()}
+      </div>
+    ),
+  ],
+  parameters: {
+    docs: {
+      page: mdx,
+    },
+  },
+};
+
+const typeOptions = {
+  inline: { inline: 'inline' },
+  single: { single: 'single' },
+  multi: { multi: 'multi' },
+  skeleton: { single: 'single', multi: 'multi' },
+  playground: {
+    inline: 'inline',
+    single: 'single',
+    multi: 'multi',
+  },
+};
+
+const typeDefaults = {
+  inline: 'inline',
+  single: 'single',
+  multi: 'multi',
+  skeleton: 'single',
+  playground: 'inline',
+};
+
+const childrenOptions = {
+  inline: 'node -v',
+  single:
+    'yarn add carbon-components@latest carbon-components-react@latest @carbon/icons-react@latest carbon-icons@latest',
+  multi: 'The quick brown fox jumps over the lazy dog. The quick brown fox jumps over the lazy dog. The quick brown fox jumps over the lazy dog.\n'.repeat(
+    60
+  ),
+  skeleton: undefined,
+  playground: 'Playground CodeSnippet',
+};
+
+const ariaLabelProp = () => ({
+  ariaLabel: text(
+    'ariaLabel: Specify a label to be read by screen readers',
+    undefined
+  ),
+});
+const classNameProp = () => ({
+  className: text(
+    'className: Specify an optional className to be applied to the container node',
+    undefined
+  ),
+});
+const childrenProp = (type) => ({
+  children: text(
+    'children: Provide the content of your CodeSnippet as a string',
+    childrenOptions[type || 'playground']
+  ),
+});
+const copyButtonDescriptionProp = () => ({
+  copyButtonDescription: text(
+    'copyButtonDescription: Specify the description for the Copy Button',
+    undefined
+  ),
+});
+const disabledProp = () => ({
+  disabled: boolean(
+    'disabled: Specify whether or not the CodeSnippet should be disabled',
+    false
+  ),
+});
+const feedbackProp = () => ({
+  feedback: text(
+    'feedback: Specify the string displayed when the snippet is copied',
+    undefined
+  ),
+});
+const hideCopyButtonProp = () => ({
+  hideCopyButton: boolean(
+    'hideCopyButton: Specify whether or not a copy button should be used/rendered',
+    false
+  ),
+});
+const lightProp = () => ({
+  light: boolean(
+    'light: Specify whether you are using the light variant of the Code Snippet',
+    false
+  ),
+});
+const minClosedNumberOfRowsProp = () => ({
+  minClosedNumberOfRows: number(
+    'minClosedNumberOfRows: Specify the minimum number of rows to be shown when in closed view',
+    3
+  ),
+});
+const minExpandedNumberOfRowsProp = () => ({
+  minExpandedNumberOfRows: number(
+    'minExpandedNumberOfRows: Specify the minimum number of rows to be shown when in expanded view',
+    16
+  ),
+});
+const maxClosedNumberOfRowsProp = () => ({
+  maxClosedNumberOfRows: number(
+    'maxClosedNumberOfRows: Specify the maximum number of rows to be shown when in closed view',
+    15
+  ),
+});
+const maxExpandedNumberOfRowsProp = () => ({
+  maxExpandedNumberOfRows: number(
+    'maxExpandedNumberOfRows: Specify the maximum number of rows to be shown when in expanded view',
+    50
+  ),
+});
+const onClickProp = () => ({
+  onClick: action('onClick'),
+});
+const showLessTextProp = () => ({
+  showLessText: text(
+    'showLessText: Specify a string that is displayed to close the Code Snippet',
+    undefined
+  ),
+});
+const showMoreTextProp = () => ({
+  showMoreText: text(
+    'showMoreText: Specify a string that is displayed to expand the Code Snippet',
+    undefined
+  ),
+});
+const typeProp = (type) => ({
+  type: select(
+    'type: Provide the type of Code Snippet',
+    typeOptions[type],
+    typeDefaults[type]
+  ),
+});
+const wrapTextProp = () => ({
+  wrapText: boolean('wrapText: Specify whether or not to wrap the text)', true),
+});
+
+export const Inline = () => (
+  <CodeSnippet
+    type="inline"
+    {...ariaLabelProp()}
+    {...classNameProp()}
+    // {...copyButtonDescriptionProp()}
+    // {...disabledProp()}
+    {...feedbackProp()}
+    {...hideCopyButtonProp()}
+    {...lightProp()}
+    // {...minClosedNumberOfRowsProp()}
+    // {...minExpandedNumberOfRowsProp()}
+    // {...maxClosedNumberOfRowsProp()}
+    // {...maxExpandedNumberOfRowsProp()}
+    {...onClickProp()}
+    // {...showLessTextProp()}
+    // {...showMoreTextProp()}
+    {...typeProp('inline')}
+    {...wrapTextProp()}>
+    {childrenProp('inline').children}
+  </CodeSnippet>
+);
+
+export const Single = () => (
+  <CodeSnippet
+    type="single"
+    {...ariaLabelProp()}
+    {...classNameProp()}
+    {...copyButtonDescriptionProp()}
+    {...disabledProp()}
+    {...feedbackProp()}
+    {...hideCopyButtonProp()}
+    {...lightProp()}
+    // {...minClosedNumberOfRowsProp()}
+    // {...minExpandedNumberOfRowsProp()}
+    // {...maxClosedNumberOfRowsProp()}
+    // {...maxExpandedNumberOfRowsProp()}
+    {...onClickProp()}
+    // {...showLessTextProp()}
+    // {...showMoreTextProp()}
+    {...typeProp('single')}
+    {...wrapTextProp()}>
+    {childrenProp('single').children}
+  </CodeSnippet>
+);
+
+export const Multi = () => (
+  <CodeSnippet
+    type="multi"
+    {...ariaLabelProp()}
+    {...classNameProp()}
+    {...copyButtonDescriptionProp()}
+    {...disabledProp()}
+    {...feedbackProp()}
+    {...hideCopyButtonProp()}
+    {...lightProp()}
+    {...minClosedNumberOfRowsProp()}
+    {...minExpandedNumberOfRowsProp()}
+    {...maxClosedNumberOfRowsProp()}
+    {...maxExpandedNumberOfRowsProp()}
+    {...onClickProp()}
+    {...showLessTextProp()}
+    {...showMoreTextProp()}
+    {...typeProp('multi')}
+    {...wrapTextProp()}>
+    {childrenProp('multi').children}
+  </CodeSnippet>
+);
+
+export const Skeleton = () => (
+  <CodeSnippetSkeleton
+    type="single"
+    {...classNameProp()}
+    {...typeProp('skeleton')}
+  />
+);
+
+export const Playground = () => {
+  childrenProp('playground');
+  return (
+    <>
+      {typeProp('playground').type === 'inline' && Inline()}
+      {typeProp('playground').type === 'single' && Single()}
+      {typeProp('playground').type === 'multi' && Multi()}
+    </>
+  );
+};
+
+export const DocsOverView = () => (
+  <CodeSnippet type="inline" feedback="Copied to clipboard">
+    {'node -v'}
+  </CodeSnippet>
+);
+
+export const DocsInline = () => (
+  <CodeSnippet type="inline" feedback="Copied to clipboard">
+    {'node -v'}
+  </CodeSnippet>
+);
+
+export const DocsMulti = () => (
+  <CodeSnippet type="multi" feedback="Copied to clipboard">
+    {'The quick brown fox jumps over the lazy dog. The quick brown fox jumps over the lazy dog. The quick brown fox jumps over the lazy dog.\n'.repeat(
+      60
+    )}
+  </CodeSnippet>
+);
+
+export const DocsSingle = () => (
+  <CodeSnippet type="single" feedback="Copied to clipboard">
+    yarn add carbon-components@latest carbon-components-react@latest
+    @carbon/icons-react@latest carbon-icons@latest
+  </CodeSnippet>
+);
+
+export const DocsSkeleton = () => (
+  <div>
+    <CodeSnippetSkeleton type="single" />
+    <br />
+    <CodeSnippetSkeleton type="multi" />
   </div>
 );
