@@ -41,6 +41,6 @@
     "lodash.clonedeep": "^4.5.0",
     "npm-which": "^3.0.1",
     "semver": "^7.3.4",
-    "yargs": "^15.1.0"
+    "yargs": "^16.2.0"
   }
 }
