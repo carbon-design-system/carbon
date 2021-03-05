@@ -1302,7 +1302,7 @@
     - 32
 - name: barcode
   friendly_name: Barcode
-  aliases: 
+  aliases:
     - barcode
     - technology
     - tracking
@@ -1834,16 +1834,16 @@
     - 32
 - name: calculation
   friendly_name: Calculation
-  aliases: 
+  aliases:
     - data
     - calculation
-    - math 
+    - math
     - functions
   sizes:
     - 32
 - name: calculation--alt
   friendly_name: Calculation--alt
-  aliases: 
+  aliases:
     - data
     - calculation
     - math
@@ -2475,7 +2475,7 @@
     - chart
 - name: chart--bubble-packed
   friendly_name: Chart Bubble-packed
-  aliases: 
+  aliases:
     - graph
     - bar
     - data
@@ -2674,7 +2674,7 @@
     - 32
 - name: chart--median
   friendly_name: Chart median
-  aliases: 
+  aliases:
     - chart median
     - graph
     - chart
@@ -2831,7 +2831,7 @@
     - scatter chart
 - name: chart--spiral
   friendly_name: Chart spiral
-  aliases: 
+  aliases:
     - chart spiral
     - graph
     - chart
@@ -2897,7 +2897,7 @@
     - Venn diagram
 - name: chart--violin-plot
   friendly_name: Chart violin-plot
-  aliases: 
+  aliases:
     - chart violin plot
     - graph
     - chart
@@ -2915,7 +2915,7 @@
     - 32
 - name: chart--win-loss
   friendly_name: Chart win-loss
-  aliases: 
+  aliases:
     - chart win-loss
     - win
     - loss
@@ -2939,6 +2939,11 @@
     - talk
     - operations
     - communication
+  sizes:
+    - 32
+- name: chat--launch
+  friendly_name: Chat launch
+  aliases: []
   sizes:
     - 32
 - name: chat-bot
@@ -3313,7 +3318,7 @@
     - 32
 - name: choropleth-map
   friendly_name: Chart choropleth-map
-  aliases: 
+  aliases:
     - chart choropleth-map
     - map
     - graph
@@ -3548,6 +3553,11 @@
     - multicloud
     - cloud
     - foundry
+- name: cloud-registry
+  friendly_name: cloud-registry
+  aliases: []
+  sizes:
+    - 32
 - name: cloud-satellite
   friendly_name: Cloud satellite
   aliases:
@@ -3590,7 +3600,7 @@
     - 32
 - name: code--hide
   friendly_name: Code hide
-  aliases: 
+  aliases:
     - </>
     - html
     - java
@@ -3690,7 +3700,7 @@
     - 32
 - name: column-dependency
   friendly_name: Column dependency
-  aliases: 
+  aliases:
     - column
     - dependency
     - formatting
@@ -3698,7 +3708,7 @@
     - 32
 - name: commit
   friendly_name: Commit
-  aliases: 
+  aliases:
     - commit
     - operation
   sizes:
@@ -3741,6 +3751,16 @@
     - idea
   sizes:
     - 32
+- name: condition--point
+  friendly_name: condition--point
+  aliases: []
+  sizes:
+    - 32
+- name: condition--wait-point
+  friendly_name: condition--wait-point
+  aliases: []
+  sizes:
+    - 32
 - name: connect
   friendly_name: Connect
   aliases:
@@ -3766,7 +3786,7 @@
     - 32
 - name: connection-signal--off
   friendly_name: Connection signal off
-  aliases: 
+  aliases:
     - signal
     - tower
     - service
@@ -3775,7 +3795,7 @@
     - connection
     - wireless
     - network
-    - off
+    - 'off'
     - signal loss
   sizes:
     - 32
@@ -3874,6 +3894,11 @@
     - health
     - coronavirus
     - virus
+  sizes:
+    - 32
+- name: cough
+  friendly_name: cough
+  aliases: []
   sizes:
     - 32
 - name: course
@@ -4010,7 +4035,7 @@
     - 32
 - name: cube
   friendly_name: Cube
-  aliases: 
+  aliases:
     - file
     - cube
   sizes:
@@ -4020,6 +4045,11 @@
   aliases:
     - file
     - cube view
+  sizes:
+    - 32
+- name: currency
+  friendly_name: currency
+  aliases: []
   sizes:
     - 32
 - name: currency--baht
@@ -4065,6 +4095,11 @@
     - money
     - pound
     - finance
+  sizes:
+    - 32
+- name: currency--ruble
+  friendly_name: currency--ruble
+  aliases: []
   sizes:
     - 32
 - name: currency--rupee
@@ -4143,6 +4178,11 @@
     - split
     - half
     - halve
+  sizes:
+    - 32
+- name: cut-out
+  friendly_name: cut-out
+  aliases: []
   sizes:
     - 32
 - name: cY
@@ -4264,7 +4304,7 @@
     - characters
 - name: data--format
   friendly_name: Data format
-  aliases: 
+  aliases:
     - connection
     - dot
     - numbers
@@ -4315,7 +4355,7 @@
     - characters
 - name: data--view
   friendly_name: Data view
-  aliases: 
+  aliases:
     - connection
     - dot
     - numbers
@@ -4326,7 +4366,7 @@
     - 32
 - name: data-bin
   friendly_name: Data bin
-  aliases: 
+  aliases:
     - data-bin
     - data
     - containers
@@ -4494,25 +4534,25 @@
     - edit
   sizes:
     - 32
-- name: delivery--parcel
-  friendly_name: Delivery parcel
-  aliases: 
-    - delivery
-    - transportation
-    - shopping
-    - parcel
-    - shipping
-    - ecommerce
-  sizes:
-    - 32
 - name: delivery
   friendly_name: Delivery
-  aliases: 
+  aliases:
     - truck
     - delivery
     - transportation
     - shopping
     - van
+    - shipping
+    - ecommerce
+  sizes:
+    - 32
+- name: delivery--parcel
+  friendly_name: Delivery parcel
+  aliases:
+    - delivery
+    - transportation
+    - shopping
+    - parcel
     - shipping
     - ecommerce
   sizes:
@@ -4577,6 +4617,11 @@
   aliases:
     - deployment
     - policy
+  sizes:
+    - 32
+- name: desk--adjustable
+  friendly_name: desk--adjustable
+  aliases: []
   sizes:
     - 32
 - name: development
@@ -4710,7 +4755,7 @@
     - 32
 - name: direction--fork--filled
   friendly_name: Direction fork filled
-  aliases: 
+  aliases:
     - direction
     - direction fork
     - direction fork filled
@@ -4718,28 +4763,28 @@
     - 32
 - name: direction--loop-left
   friendly_name: Direction loop left
-  aliases: 
+  aliases:
     - direction
     - direction loop left
   sizes:
     - 32
 - name: direction--loop-left--filled
   friendly_name: Direction loop left filled
-  aliases: 
+  aliases:
     - direction
     - direction loop left filled
   sizes:
     - 32
 - name: direction--loop-right
   friendly_name: Direction loop right
-  aliases: 
+  aliases:
     - direction
-    - direction loop right 
+    - direction loop right
   sizes:
     - 32
 - name: direction--loop-right--filled
   friendly_name: Direction loop right filled
-  aliases: 
+  aliases:
     - direction
     - direction loop right filled
   sizes:
@@ -4990,6 +5035,16 @@
     - file
     - doc
     - paper
+- name: document--attachment
+  friendly_name: document--attachment
+  aliases: []
+  sizes:
+    - 32
+- name: document--audio
+  friendly_name: document--audio
+  aliases: []
+  sizes:
+    - 32
 - name: document--blank
   friendly_name: Document blank
   sizes:
@@ -5020,7 +5075,7 @@
     - document export
 - name: document--horizontal
   friendly_name: Document horizontal
-  aliases: 
+  aliases:
     - file
     - doc
     - paper
@@ -5045,6 +5100,11 @@
     - pdf
     - document format
     - portable document format
+  sizes:
+    - 32
+- name: document--sketch
+  friendly_name: document--sketch
+  aliases: []
   sizes:
     - 32
 - name: document--subtract
@@ -5075,13 +5135,18 @@
     - 32
 - name: document--vertical
   friendly_name: Document vertical
-  aliases: 
+  aliases:
     - file
     - doc
     - paper
     - horizontal
     - document
     - orientation
+  sizes:
+    - 32
+- name: document--video
+  friendly_name: document--video
+  aliases: []
   sizes:
     - 32
 - name: document--view
@@ -5201,26 +5266,26 @@
     - 32
 - name: drill-back
   friendly_name: Drill back
-  aliases: 
-  - drill
-  - back
-  - operation
+  aliases:
+    - drill
+    - back
+    - operation
   sizes:
     - 32
 - name: drill-down
   friendly_name: Drill down
-  aliases: 
-  - drill
-  - down
-  - operation
+  aliases:
+    - drill
+    - down
+    - operation
   sizes:
     - 32
 - name: drill-through
   friendly_name: Drill through
-  aliases: 
-  - drill
-  - through
-  - operation
+  aliases:
+    - drill
+    - through
+    - operation
   sizes:
     - 32
 - name: driver-analysis
@@ -5229,6 +5294,11 @@
     - driver analysis
     - analysis
     - data
+  sizes:
+    - 32
+- name: drone
+  friendly_name: drone
+  aliases: []
   sizes:
     - 32
 - name: drop-photo
@@ -5490,7 +5560,7 @@
     - 32
 - name: equalizer
   friendly_name: Equalizer
-  aliases: 
+  aliases:
     - equalizer
     - sound
     - audio
@@ -5631,7 +5701,7 @@
     - 32
 - name: explore
   friendly_name: Explore
-  aliases: 
+  aliases:
     - explore
     - action
   sizes:
@@ -5943,7 +6013,7 @@
     - favorite filled
 - name: favorite--half
   friendly_name: Favorite half
-  aliases: 
+  aliases:
     - heart
     - save
     - like
@@ -6231,7 +6301,7 @@
     - data flow
 - name: flow--modeler
   friendly_name: Flow modeler
-  aliases: 
+  aliases:
     - flow chart
     - chart
     - graph
@@ -6323,7 +6393,7 @@
     - 32
 - name: folder--move-to
   friendly_name: Folder move to
-  aliases: 
+  aliases:
     - file
     - save
     - document
@@ -6555,7 +6625,7 @@
     - 32
 - name: gas-station--filled
   friendly_name: Gas station filled
-  aliases: 
+  aliases:
     - gas station filled
     - gas
     - fueling station
@@ -6660,6 +6730,16 @@
     - organization
     - cluster
     - group
+  sizes:
+    - 32
+- name: group--presentation
+  friendly_name: group--presentation
+  aliases: []
+  sizes:
+    - 32
+- name: growth
+  friendly_name: growth
+  aliases: []
   sizes:
     - 32
 - name: H
@@ -7099,6 +7179,11 @@
     - precipitation
   sizes:
     - 32
+- name: ice--vision
+  friendly_name: ice--vision
+  aliases: []
+  sizes:
+    - 32
 - name: iD
   friendly_name: ID
   aliases:
@@ -7152,6 +7237,11 @@
     - photograph
     - photo
     - image
+  sizes:
+    - 32
+- name: image--copy
+  friendly_name: image--copy
+  aliases: []
   sizes:
     - 32
 - name: image--medical
@@ -7377,8 +7467,8 @@
     - 32
 - name: insert-syntax
   friendly_name: Insert syntax
-  aliases: 
-  - insert syntax
+  aliases:
+    - insert syntax
   sizes:
     - 32
 - name: integration
@@ -7516,7 +7606,7 @@
     - outline
 - name: join--full
   friendly_name: Join full
-  aliases: 
+  aliases:
     - join
     - full
   sizes:
@@ -7650,7 +7740,7 @@
     - 32
 - name: lasso--polygon
   friendly_name: Lasso polygon
-  aliases: 
+  aliases:
     - lasso polygon
     - formatting
     - tool
@@ -7720,6 +7810,11 @@
     - alphabet
     - language
     - english
+- name: letter--Aa--large
+  friendly_name: letter--Aa--large
+  aliases: []
+  sizes:
+    - 32
 - name: letter--Bb
   friendly_name: Letter Bb
   sizes:
@@ -8176,7 +8271,7 @@
     - 32
 - name: location--current
   friendly_name: Location current
-  aliases: 
+  aliases:
     - place
     - locate
     - gps
@@ -8359,6 +8454,11 @@
     - avatar
     - tag
     - identification
+- name: logo--discord
+  friendly_name: logo--discord
+  aliases: []
+  sizes:
+    - 32
 - name: logo--facebook
   friendly_name: Logo Facebook
   sizes:
@@ -8879,6 +8979,11 @@
   sizes:
     - 16
     - 32
+- name: media--library
+  friendly_name: media--library
+  aliases: []
+  sizes:
+    - 32
 - name: medication
   friendly_name: Medication
   aliases:
@@ -9278,14 +9383,14 @@
     - 32
 - name: moonrise
   friendly_name: Moonrise
-  aliases: 
+  aliases:
     - moonrise
     - phase
   sizes:
     - 32
 - name: moonset
   friendly_name: moonset
-  aliases: 
+  aliases:
     - moonset
     - phase
   sizes:
@@ -9413,14 +9518,14 @@
     - 32
 - name: music--add
   friendly_name: Music add
-  aliases: 
+  aliases:
     - music add
   sizes:
     - 32
 - name: music--remove
   friendly_name: Music remove
-  aliases: 
-  - music remove
+  aliases:
+    - music remove
   sizes:
     - 32
 - name: name-space
@@ -10560,7 +10665,7 @@
     - 32
 - name: pedestrian--family
   friendly_name: Pedestrian family
-  aliases: 
+  aliases:
     - pedestrian
     - people
     - travel
@@ -10579,14 +10684,14 @@
     - 32
 - name: pen
   friendly_name: Pen
-  aliases: 
+  aliases:
     - pen
     - write
   sizes:
     - 32
 - name: pen--fountain
   friendly_name: Pen fountain
-  aliases: 
+  aliases:
     - pen
     - fountain
   sizes:
@@ -10688,7 +10793,7 @@
     - 32
 - name: phone--block
   friendly_name: Phone block
-  aliases: 
+  aliases:
     - phone block
     - call block
     - call
@@ -10696,7 +10801,7 @@
     - 32
 - name: phone--block--filled
   friendly_name: Phone block filled
-  aliases: 
+  aliases:
     - phone block filled
     - call block
     - call
@@ -10718,7 +10823,7 @@
     - toggle
 - name: phone--incoming
   friendly_name: Phone incoming
-  aliases: 
+  aliases:
     - phone incoming
     - phone call
     - call
@@ -10726,10 +10831,15 @@
     - 32
 - name: phone--incoming--filled
   friendly_name: Phone incoming filled
-  aliases: 
+  aliases:
     - phone incoming filled
     - phone call
     - call
+  sizes:
+    - 32
+- name: phone--ip
+  friendly_name: phone--ip
+  aliases: []
   sizes:
     - 32
 - name: phone--off
@@ -10759,7 +10869,7 @@
     - toggle
 - name: phone--outgoing
   friendly_name: Phone outgoing
-  aliases: 
+  aliases:
     - phone outgoing
     - phone call
     - call
@@ -10767,7 +10877,7 @@
     - 32
 - name: phone--outgoing--filled
   friendly_name: Phone outgoing filled
-  aliases: 
+  aliases:
     - phone outgoing filled
     - phone call
     - call
@@ -10775,7 +10885,7 @@
     - 32
 - name: phone--voice
   friendly_name: Phone voice
-  aliases: 
+  aliases:
     - phone voice
     - phone call
     - call
@@ -10783,7 +10893,7 @@
     - 32
 - name: phone--voice--filled
   friendly_name: Phone voice filled
-  aliases: 
+  aliases:
     - phone voice filled
     - phone call
     - call
@@ -10809,12 +10919,17 @@
     - 32
 - name: piggy-bank
   friendly_name: Piggy bank
-  aliases: 
+  aliases:
     - piggy bank
     - savings
     - cash
     - money
     - currency
+  sizes:
+    - 32
+- name: piggy-bank--slot
+  friendly_name: piggy-bank--slot
+  aliases: []
   sizes:
     - 32
 - name: pills
@@ -11131,16 +11246,16 @@
     - 32
 - name: progress-bar
   friendly_name: Progress bar
-  aliases: 
-  - progress bar
-  - loading
+  aliases:
+    - progress bar
+    - loading
   sizes:
     - 32
 - name: progress-bar--round
   friendly_name: Progress bar round
-  aliases: 
-  - progreess bar round
-  - loading
+  aliases:
+    - progreess bar round
+    - loading
   sizes:
     - 32
 - name: purchase
@@ -11459,7 +11574,7 @@
     - 32
 - name: reply--all
   friendly_name: Reply all
-  aliases: 
+  aliases:
     - back
     - respond all
     - email
@@ -11890,7 +12005,7 @@
     - 32
 - name: sankey-diagram--alt
   friendly_name: Sankey diagram alt
-  aliases: 
+  aliases:
     - Sankey diagram alt
     - data
     - Sankey alt
@@ -12299,28 +12414,28 @@
     - 32
 - name: shape--except
   friendly_name: Shape except
-  aliases: 
+  aliases:
     - shape except
     - format
   sizes:
     - 32
 - name: shape--exclude
   friendly_name: Shape exclude
-  aliases: 
+  aliases:
     - shape exclude
     - format
   sizes:
     - 32
 - name: shape--intersect
   friendly_name: Shape intersect
-  aliases: 
+  aliases:
     - shape intersect
     - format
   sizes:
     - 32
 - name: shape--join
   friendly_name: Shape join
-  aliases: 
+  aliases:
     - shape
     - join
     - format
@@ -12328,7 +12443,7 @@
     - 32
 - name: shape--unite
   friendly_name: Shape unite
-  aliases: 
+  aliases:
     - shape unite
     - format
   sizes:
@@ -12387,7 +12502,7 @@
     - retail
 - name: shopping--cart--arrow-down
   friendly_name: Shopping cart arrow down
-  aliases: 
+  aliases:
     - cart
     - shop
     - buy
@@ -12400,7 +12515,7 @@
     - 32
 - name: shopping--cart--arrow-up
   friendly_name: Shopping cart arrow up
-  aliases: 
+  aliases:
     - cart
     - shop
     - remove
@@ -12413,7 +12528,7 @@
     - 32
 - name: shopping--cart--clear
   friendly_name: Shopping cart clear
-  aliases: 
+  aliases:
     - cart
     - shop
     - empty
@@ -12425,7 +12540,7 @@
     - 32
 - name: shopping--cart--error
   friendly_name: Shopping cart error
-  aliases: 
+  aliases:
     - cart
     - shop
     - error
@@ -12437,7 +12552,7 @@
     - 32
 - name: shopping--cart--minus
   friendly_name: Shopping cart minus
-  aliases: 
+  aliases:
     - cart
     - shop
     - remove
@@ -12448,7 +12563,7 @@
     - 32
 - name: shopping--cart--plus
   friendly_name: Shopping cart plus
-  aliases: 
+  aliases:
     - cart
     - shop
     - buy
@@ -12523,6 +12638,11 @@
     - vehicle
     - delivery
     - car
+  sizes:
+    - 32
+- name: sight
+  friendly_name: sight
+  aliases: []
   sizes:
     - 32
 - name: sigma
@@ -12911,6 +13031,16 @@
     - agriculture
   sizes:
     - 32
+- name: sort--ascending
+  friendly_name: sort--ascending
+  aliases: []
+  sizes:
+    - 32
+- name: sort--descending
+  friendly_name: sort--descending
+  aliases: []
+  sizes:
+    - 32
 - name: spell-check
   friendly_name: Spell check
   aliases:
@@ -13187,7 +13317,7 @@
     - 32
 - name: stop-sign--filled
   friendly_name: Stop sign filled
-  aliases: 
+  aliases:
     - stop sign filled
     - travel
     - naviation
@@ -13198,7 +13328,7 @@
     - 32
 - name: storage-pool
   friendly_name: Storage pool
-  aliases: 
+  aliases:
     - data
     - storage pool
     - pool
@@ -13410,7 +13540,7 @@
     - 32
 - name: table--built
   friendly_name: Table built
-  aliases: 
+  aliases:
     - data
     - spreadsheet
     - excel
@@ -13701,7 +13831,7 @@
     - editor
 - name: text--align--mixed
   friendly_name: Text align mixed
-  aliases: 
+  aliases:
     - text
     - align
     - mixed
@@ -13735,6 +13865,11 @@
     - typography
     - alphabet
     - editor
+- name: text--clear-format
+  friendly_name: text--clear-format
+  aliases: []
+  sizes:
+    - 32
 - name: text--color
   friendly_name: Text color
   sizes:
@@ -14312,7 +14447,7 @@
     - 32
 - name: transpose
   friendly_name: Transpose
-  aliases: 
+  aliases:
     - operation
     - transpose
   sizes:
@@ -14416,7 +14551,7 @@
     - 32
 - name: tsunami
   friendly_name: Tsunami
-  aliases: 
+  aliases:
     - weather
     - forecast
     - storm
@@ -15061,6 +15196,11 @@
     - vmdk-disk
   sizes:
     - 32
+- name: voice-activate
+  friendly_name: voice-activate
+  aliases: []
+  sizes:
+    - 32
 - name: voicemail
   friendly_name: Voicemail
   aliases:
@@ -15076,6 +15216,11 @@
   aliases:
     - sound
     - noise
+- name: volume--down--alt
+  friendly_name: volume--down--alt
+  aliases: []
+  sizes:
+    - 32
 - name: volume--down--filled
   friendly_name: Volume down filled
   sizes:
@@ -15083,6 +15228,11 @@
   aliases:
     - sound
     - noise
+- name: volume--down--filled--alt
+  friendly_name: volume--down--filled--alt
+  aliases: []
+  sizes:
+    - 32
 - name: volume--mute
   friendly_name: Volume mute
   sizes:
@@ -15104,6 +15254,11 @@
   aliases:
     - sound
     - noise
+- name: volume--up--alt
+  friendly_name: volume--up--alt
+  aliases: []
+  sizes:
+    - 32
 - name: volume--up--filled
   friendly_name: Volume up filled
   sizes:
@@ -15111,6 +15266,11 @@
   aliases:
     - sound
     - noise
+- name: volume--up--filled--alt
+  friendly_name: volume--up--filled--alt
+  aliases: []
+  sizes:
+    - 32
 - name: VPN
   friendly_name: VPN
   aliases:
@@ -15208,26 +15368,26 @@
     - notification
 - name: warning--hex
   friendly_name: Warning hex
-  aliases: 
-     - warning hex
-     - status
-     - caution
-     - danger
-     - warn
-     - alert
-     - notification
+  aliases:
+    - warning hex
+    - status
+    - caution
+    - danger
+    - warn
+    - alert
+    - notification
   sizes:
     - 32
 - name: warning--hex--filled
   friendly_name: Warning hex filled
-  aliases: 
-     - warning hex filled
-     - status
-     - caution
-     - danger
-     - warn
-     - alert
-     - notification
+  aliases:
+    - warning hex filled
+    - status
+    - caution
+    - danger
+    - warn
+    - alert
+    - notification
   sizes:
     - 32
 - name: warning--other
@@ -15618,6 +15778,11 @@
     - source
   sizes:
     - 32
+- name: zoom--area
+  friendly_name: zoom--area
+  aliases: []
+  sizes:
+    - 32
 - name: zoom--in
   friendly_name: Zoom in
   sizes:
@@ -15653,7 +15818,7 @@
     - detail
 - name: zoom--out-area
   friendly_name: Zoom out area
-  aliases: 
+  aliases:
     - reduce
     - inspect
     - size
