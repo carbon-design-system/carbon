@@ -66,7 +66,7 @@ row before the </tbody></table> line.
     - [Writing a component](#writing-a-component)
     - [Translating a component](#translating-a-component)
       - [Working with messages that depend on state](#working-with-messages-that-depend-on-state)
-  - [Using `useCallback` and `useMemo`](#using-usecallback-and-usememo)
+    - [Using `useCallback` and `useMemo`](#using-usecallback-and-usememo)
     - [Hooks that rely on refs](#hooks-that-rely-on-refs)
     - [Hooks that use a callback](#hooks-that-use-a-callback)
   - [Style](#style-1)
@@ -318,7 +318,7 @@ function MyComponent({ translateWithId: t = translateWithId }) {
 }
 ```
 
-### Using `useCallback` and `useMemo`
+#### Using `useCallback` and `useMemo`
 
 `useCallback` and `useMemo` can be incredibly useful tools in certain
 situations. In general, however, we try to avoid them unless one of the
