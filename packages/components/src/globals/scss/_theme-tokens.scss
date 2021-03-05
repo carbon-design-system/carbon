@@ -269,16 +269,19 @@ $modal-footer-background-color: $ui-03 !default;
 /// @type Color
 /// @access public
 /// @group notification
+/// @deprecated
 $notification-info-background-color: $ibm-color__blue-10 !default;
 
 /// @type Color
 /// @access public
 /// @group notification
+/// @deprecated
 $notification-error-background-color: $ibm-color__red-10 !default;
 
 /// @type Color
 /// @access public
 /// @group notification
+/// @deprecated
 $notification-warning-background-color: mix(
   $ibm-color__yellow-30,
   $ibm-color__white-0,
@@ -288,6 +291,7 @@ $notification-warning-background-color: mix(
 /// @type Color
 /// @access public
 /// @group notification
+/// @deprecated
 $notification-success-background-color: $ibm-color__green-10 !default;
 
 // Progress Indicator

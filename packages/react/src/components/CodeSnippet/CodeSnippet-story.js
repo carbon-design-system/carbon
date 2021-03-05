@@ -39,7 +39,7 @@ const lightPropMessage = (
 );
 
 export default {
-  title: 'CodeSnippet',
+  title: 'Components/CodeSnippet',
   component: CodeSnippet,
   subcomponents: {
     CodeSnippetSkeleton,

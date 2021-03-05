@@ -107,7 +107,7 @@ const props = () => ({
 });
 
 export default {
-  title: 'MultiSelect',
+  title: 'Components/MultiSelect',
   decorators: [withKnobs],
 
   parameters: {

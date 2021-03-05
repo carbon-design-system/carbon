@@ -1,7 +1,7 @@
 'use strict';
 
 const path = require('path');
-const pathRegexp = require('path-to-regexp');
+const { pathToRegexp } = require('path-to-regexp');
 const browserSync = require('browser-sync');
 const serveStatic = require('serve-static');
 
@@ -61,9 +61,9 @@ if (devMode) {
     .on('unlink', invokeWatchCallback);
 }
 
-const reComponentPath = pathRegexp('/component/:component');
-const reDemoComponentPath = pathRegexp('/demo/:component');
-const reCodePath = pathRegexp('/code/:component');
+const reComponentPath = pathToRegexp('/component/:component');
+const reDemoComponentPath = pathToRegexp('/demo/:component');
+const reCodePath = pathToRegexp('/code/:component');
 const demoStaticRoute = serveStatic('demo');
 
 function noopRoute(req, res, next) {
