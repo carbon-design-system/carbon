@@ -417,14 +417,7 @@ gulp.task('sass:dev', () => {
         })
       ).on('error', sass.logError)
     )
-    .pipe(
-      postcss([
-        customProperties(),
-        autoprefixer({
-          browsers: ['> 1%', 'last 2 versions'],
-        }),
-      ])
-    )
+    .pipe(postcss([customProperties(), autoprefixer()]))
     .pipe(sourcemaps.write('.'))
     .pipe(gulp.dest('demo'))
     .pipe(browserSync.stream({ match: '**/*.css' }));
