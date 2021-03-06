@@ -29,6 +29,7 @@ $prefix: 'bx';
 @import '~carbon-components/scss/globals/grid/grid';
 @import '~carbon-components/src/globals/scss/functions';
 
+@import '~carbon-components/src/components/accordion/accordion';
 @import '~carbon-components/src/components/button/button';
 @import '~carbon-components/src/components/copy-button/copy-button';
 @import '~carbon-components/src/components/file-uploader/file-uploader';
@@ -63,7 +64,7 @@ $prefix: 'bx';
 @import '~carbon-components/src/components/treeview/treeview';
 @import '~carbon-components/src/components/pagination/pagination';
 @import '~carbon-components/src/components/pagination/unstable_pagination';
-@import '~carbon-components/src/components/accordion/accordion';
+@import '~carbon-components/src/components/popover/popover';
 @import '~carbon-components/src/components/progress-indicator/progress-indicator';
 @import '~carbon-components/src/components/breadcrumb/breadcrumb';
 @import '~carbon-components/src/components/toolbar/toolbar';
