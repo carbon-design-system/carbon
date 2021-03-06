@@ -143,25 +143,29 @@ const lightProp = () => ({
 const minClosedNumberOfRowsProp = () => ({
   minClosedNumberOfRows: number(
     'minClosedNumberOfRows: Specify the minimum number of rows to be shown when in closed view',
-    3
+    3,
+    { min: 1 }
   ),
 });
 const minExpandedNumberOfRowsProp = () => ({
   minExpandedNumberOfRows: number(
     'minExpandedNumberOfRows: Specify the minimum number of rows to be shown when in expanded view',
-    16
+    16,
+    { min: 1 }
   ),
 });
 const maxClosedNumberOfRowsProp = () => ({
   maxClosedNumberOfRows: number(
     'maxClosedNumberOfRows: Specify the maximum number of rows to be shown when in closed view',
-    15
+    15,
+    { min: 1 }
   ),
 });
 const maxExpandedNumberOfRowsProp = () => ({
   maxExpandedNumberOfRows: number(
     'maxExpandedNumberOfRows: Specify the maximum number of rows to be shown when in expanded view',
-    50
+    50,
+    { min: 1 }
   ),
 });
 const onClickProp = () => ({
