@@ -1,0 +1,233 @@
+//
+// Copyright IBM Corp. 2016, 2018
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+@import '../../globals/scss/vars';
+@import '../../globals/scss/helper-mixins';
+@import '../../globals/scss/vendor/@carbon/elements/scss/import-once/import-once';
+
+/// Popover component
+/// @access private
+/// @group popover
+@mixin popover {
+  $popover-text-color: $text-01;
+  $popover-caret-offset: 1rem;
+  $popover-box-shadow: 2px 2px 6px 0 rgba(0, 0, 0, 0.2);
+  $popover-offset: 8px;
+
+  .#{$prefix}--popover {
+    position: absolute;
+    z-index: z('floating');
+    display: none;
+  }
+
+  .#{$prefix}--popover--relative {
+    position: relative;
+  }
+
+  .#{$prefix}--popover--open {
+    display: block;
+  }
+
+  .#{$prefix}--popover-contents {
+    @include box-shadow;
+
+    position: relative;
+    width: max-content;
+    max-width: rem(368px);
+    color: $popover-text-color;
+    background-color: $ui-01;
+    border-radius: 2px;
+  }
+
+  .#{$prefix}--popover--light .#{$prefix}--popover-contents {
+    background-color: $ui-background;
+  }
+
+  .#{$prefix}--popover--high-contrast .#{$prefix}--popover-contents {
+    color: $inverse-01;
+    background-color: $inverse-02;
+  }
+
+  .#{$prefix}--popover--caret .#{$prefix}--popover-contents::before,
+  .#{$prefix}--popover--caret .#{$prefix}--popover-contents::after {
+    position: absolute;
+    display: inline-block;
+    width: rem(8px);
+    height: rem(8px);
+    background-color: inherit;
+    content: '';
+  }
+
+  .#{$prefix}--popover--caret .#{$prefix}--popover-contents::before {
+    z-index: -1;
+    box-shadow: $popover-box-shadow;
+  }
+
+  // The popover's tooltip is created by drawing two 8px x 8px boxes, one for
+  // rendering the box-shadow that the popover content uses and another for
+  // layering on top of this box to create an effect of a popover caret with a
+  // box-shadow. The layer with the box-shadow is rendered behind the popover
+  // content, while the other is rendered oabove of the popover content.
+
+  //-----------------------------------------------------------------------------
+  // Top
+  //-----------------------------------------------------------------------------
+  .#{$prefix}--popover--top,
+  .#{$prefix}--popover--top-left,
+  .#{$prefix}--popover--top-right {
+    bottom: 0;
+    transform: translateY(calc(100% + #{$popover-offset}));
+  }
+
+  .#{$prefix}--popover--caret.#{$prefix}--popover--top
+    .#{$prefix}--popover-contents::before,
+  .#{$prefix}--popover--caret.#{$prefix}--popover--top
+    .#{$prefix}--popover-contents::after {
+    top: 0;
+    left: 50%;
+    transform: translate(-50%, -50%) rotate(45deg);
+  }
+
+  .#{$prefix}--popover--top-left .#{$prefix}--popover-contents {
+    margin-left: 0;
+  }
+
+  .#{$prefix}--popover--caret.#{$prefix}--popover--top-left
+    .#{$prefix}--popover-contents::before,
+  .#{$prefix}--popover--caret.#{$prefix}--popover--top-left
+    .#{$prefix}--popover-contents::after {
+    top: 0;
+    left: $popover-caret-offset;
+    transform: translateY(-50%) rotate(45deg);
+  }
+
+  .#{$prefix}--popover--top-right .#{$prefix}--popover-contents {
+    margin-right: 0;
+  }
+
+  .#{$prefix}--popover--caret.#{$prefix}--popover--top-right
+    .#{$prefix}--popover-contents::before,
+  .#{$prefix}--popover--caret.#{$prefix}--popover--top-right
+    .#{$prefix}--popover-contents::after {
+    top: 0;
+    right: $popover-caret-offset;
+    transform: translateY(-50%) rotate(45deg);
+  }
+
+  //-----------------------------------------------------------------------------
+  // Bottom
+  //-----------------------------------------------------------------------------
+  .#{$prefix}--popover--bottom,
+  .#{$prefix}--popover--bottom-left,
+  .#{$prefix}--popover--bottom-right {
+    top: 0;
+    transform: translateY(calc(-100% - #{$popover-offset}));
+  }
+
+  .#{$prefix}--popover--caret.#{$prefix}--popover--bottom
+    .#{$prefix}--popover-contents::before,
+  .#{$prefix}--popover--caret.#{$prefix}--popover--bottom
+    .#{$prefix}--popover-contents::after {
+    bottom: 0;
+    left: 50%;
+    transform: translate(-50%, 50%) rotate(45deg);
+  }
+
+  .#{$prefix}--popover--caret.#{$prefix}--popover--bottom-left
+    .#{$prefix}--popover-contents::before,
+  .#{$prefix}--popover--caret.#{$prefix}--popover--bottom-left
+    .#{$prefix}--popover-contents::after {
+    bottom: 0;
+    left: $popover-caret-offset;
+    transform: translateY(50%) rotate(45deg);
+  }
+
+  .#{$prefix}--popover--caret.#{$prefix}--popover--bottom-right
+    .#{$prefix}--popover-contents::before,
+  .#{$prefix}--popover--caret.#{$prefix}--popover--bottom-right
+    .#{$prefix}--popover-contents::after {
+    right: $popover-caret-offset;
+    bottom: 0;
+    transform: translateY(50%) rotate(45deg);
+  }
+
+  //-----------------------------------------------------------------------------
+  // Left
+  //-----------------------------------------------------------------------------
+  .#{$prefix}--popover--left,
+  .#{$prefix}--popover--left-top,
+  .#{$prefix}--popover--left-bottom {
+    margin-left: $popover-offset;
+  }
+
+  .#{$prefix}--popover--caret.#{$prefix}--popover--left
+    .#{$prefix}--popover-contents::before,
+  .#{$prefix}--popover--caret.#{$prefix}--popover--left
+    .#{$prefix}--popover-contents::after {
+    top: 50%;
+    left: 0;
+    transform: translate(-50%, -50%) rotate(45deg);
+  }
+
+  .#{$prefix}--popover--caret.#{$prefix}--popover--left-bottom
+    .#{$prefix}--popover-contents::before,
+  .#{$prefix}--popover--caret.#{$prefix}--popover--left-bottom
+    .#{$prefix}--popover-contents::after {
+    bottom: $popover-caret-offset;
+    left: 0;
+    transform: translateX(-50%) rotate(45deg);
+  }
+
+  .#{$prefix}--popover--caret.#{$prefix}--popover--left-top
+    .#{$prefix}--popover-contents::before,
+  .#{$prefix}--popover--caret.#{$prefix}--popover--left-top
+    .#{$prefix}--popover-contents::after {
+    top: $popover-caret-offset;
+    left: 0;
+    transform: translateX(-50%) rotate(45deg);
+  }
+
+  //-----------------------------------------------------------------------------
+  // Right
+  //-----------------------------------------------------------------------------
+  .#{$prefix}--popover--right,
+  .#{$prefix}--popover--right-top,
+  .#{$prefix}--popover--right-bottom {
+    margin-right: $popover-offset;
+  }
+
+  .#{$prefix}--popover--caret.#{$prefix}--popover--right
+    .#{$prefix}--popover-contents::before,
+  .#{$prefix}--popover--caret.#{$prefix}--popover--right
+    .#{$prefix}--popover-contents::after {
+    top: 50%;
+    right: 0;
+    transform: translate(50%, -50%) rotate(45deg);
+  }
+
+  .#{$prefix}--popover--caret.#{$prefix}--popover--right-bottom
+    .#{$prefix}--popover-contents::before,
+  .#{$prefix}--popover--caret.#{$prefix}--popover--right-bottom
+    .#{$prefix}--popover-contents::after {
+    right: 0;
+    bottom: $popover-caret-offset;
+    transform: translateX(50%) rotate(45deg);
+  }
+
+  .#{$prefix}--popover--caret.#{$prefix}--popover--right-top
+    .#{$prefix}--popover-contents::before,
+  .#{$prefix}--popover--caret.#{$prefix}--popover--right-top
+    .#{$prefix}--popover-contents::after {
+    top: $popover-caret-offset;
+    right: 0;
+    transform: translateX(50%) rotate(45deg);
+  }
+}
+
+@include exports('popover') {
+  @include popover;
+}

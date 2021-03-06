@@ -16,9 +16,11 @@ import {
   WarningFilled16,
 } from '@carbon/icons-react';
 import ListBox, { PropTypes as ListBoxPropTypes } from '../ListBox';
+import { ListBoxTrigger, ListBoxSelection } from '../ListBox/next';
 import { match, keys } from '../../internal/keyboard';
 import setupGetInstanceId from '../../tools/setupGetInstanceId';
 import { mapDownshiftProps } from '../../tools/createPropAdapter';
+import mergeRefs from '../../tools/mergeRefs';
 
 const { prefix } = settings;
 
@@ -242,13 +244,11 @@ export default class ComboBox extends React.Component {
   constructor(props) {
     super(props);
 
-    this.textInput = React.createRef();
-
     this.comboBoxInstanceId = getInstanceId();
-
     this.state = {
       inputValue: getInputValue(props, {}),
     };
+    this.textInput = React.createRef();
   }
 
   filterItems = (items, itemToString, inputValue) =>
@@ -317,6 +317,10 @@ export default class ComboBox extends React.Component {
       event.preventDownshiftDefault = true;
       event.persist();
     }
+
+    if (this.textInput.current) {
+      this.textInput.current.focus();
+    }
   };
 
   render() {
@@ -382,126 +386,168 @@ export default class ComboBox extends React.Component {
         inputId={id}
         selectedItem={selectedItem}>
         {({
-          getToggleButtonProps,
           getInputProps,
           getItemProps,
           getLabelProps,
+          getMenuProps,
+          getRootProps,
+          getToggleButtonProps,
           isOpen,
           inputValue,
           selectedItem,
           highlightedIndex,
           clearSelection,
           toggleMenu,
-          getMenuProps,
-        }) => (
-          <div className={wrapperClasses}>
-            {titleText && (
-              <label className={titleClasses} {...getLabelProps()}>
-                {titleText}
-              </label>
-            )}
-            <ListBox
-              className={className}
-              disabled={disabled}
-              invalid={invalid}
-              aria-label={ariaLabel}
-              invalidText={invalidText}
-              isOpen={isOpen}
-              light={light}
-              size={size}
-              warn={warn}
-              warnText={warnText}>
-              <ListBox.Field
-                {...getToggleButtonProps({
-                  disabled,
-                  onClick: this.onToggleClick(isOpen),
-                })}>
-                <input
-                  disabled={disabled}
-                  className={inputClasses}
-                  type="text"
-                  tabIndex="0"
-                  aria-autocomplete="list"
-                  ref={this.textInput}
-                  {...rest}
-                  {...getInputProps({
-                    disabled,
-                    placeholder,
-                    onKeyDown: (event) => {
-                      if (match(event, keys.Space)) {
-                        event.stopPropagation();
-                      }
+        }) => {
+          const rootProps = getRootProps(
+            {},
+            {
+              suppressRefError: true,
+            }
+          );
+          const labelProps = getLabelProps();
+          const buttonProps = getToggleButtonProps({
+            disabled,
+            onClick: this.onToggleClick(isOpen),
+            // When we moved the "root node" of Downshift to the <input> for
+            // ARIA 1.2 compliance, we unfortunately hit this branch for the
+            // "mouseup" event that downshift listens to:
+            // https://github.com/downshift-js/downshift/blob/v5.2.1/src/downshift.js#L1051-L1065
+            //
+            // As a result, it will reset the state of the component and so we
+            // stop the event from propagating to prevent this. This allows the
+            // toggleMenu behavior for the toggleButton to correctly open and
+            // close the menu.
+            onMouseUp(event) {
+              event.stopPropagation();
+            },
+          });
+          const inputProps = getInputProps({
+            // Remove excess aria `aria-labelledby`. HTML <label for> provides this aria information.
+            'aria-labelledby': null,
+            disabled,
+            placeholder,
+            onClick() {
+              toggleMenu();
+            },
+            onKeyDown: (event) => {
+              if (match(event, keys.Space)) {
+                event.stopPropagation();
+              }
 
-                      if (match(event, keys.Enter)) {
-                        toggleMenu();
-                      }
-                    },
-                  })}
-                />
-                {invalid && (
-                  <WarningFilled16
-                    className={`${prefix}--list-box__invalid-icon`}
-                  />
-                )}
-                {showWarning && (
-                  <WarningAltFilled16
-                    className={`${prefix}--list-box__invalid-icon ${prefix}--list-box__invalid-icon--warning`}
-                  />
-                )}
-                {inputValue && (
-                  <ListBox.Selection
-                    clearSelection={clearSelection}
-                    translateWithId={translateWithId}
-                    disabled={disabled}
-                    onClearSelection={this.handleSelectionClear}
-                  />
-                )}
-                <ListBox.MenuIcon
-                  isOpen={isOpen}
-                  translateWithId={translateWithId}
-                />
-              </ListBox.Field>
-              {isOpen && (
-                <ListBox.Menu {...getMenuProps({ 'aria-label': ariaLabel })}>
-                  {this.filterItems(items, itemToString, inputValue).map(
-                    (item, index) => {
-                      const itemProps = getItemProps({ item, index });
-                      return (
-                        <ListBox.MenuItem
-                          key={itemProps.id}
-                          isActive={selectedItem === item}
-                          tabIndex="-1"
-                          isHighlighted={
-                            highlightedIndex === index ||
-                            (selectedItem && selectedItem.id === item.id) ||
-                            false
-                          }
-                          title={itemToElement ? item.text : itemToString(item)}
-                          {...itemProps}>
-                          {itemToElement ? (
-                            <ItemToElement key={itemProps.id} {...item} />
-                          ) : (
-                            itemToString(item)
-                          )}
-                          {selectedItem === item && (
-                            <Checkmark16
-                              className={`${prefix}--list-box__menu-item__selected-icon`}
-                            />
-                          )}
-                        </ListBox.MenuItem>
-                      );
-                    }
-                  )}
-                </ListBox.Menu>
+              if (match(event, keys.Enter)) {
+                toggleMenu();
+              }
+            },
+          });
+
+          return (
+            <div className={wrapperClasses}>
+              {titleText && (
+                <label className={titleClasses} {...labelProps}>
+                  {titleText}
+                </label>
               )}
-            </ListBox>
-            {helperText && !invalid && !warn && (
-              <div id={comboBoxHelperId} className={helperClasses}>
-                {helperText}
-              </div>
-            )}
-          </div>
-        )}
+              <ListBox
+                className={className}
+                disabled={disabled}
+                invalid={invalid}
+                invalidText={invalidText}
+                isOpen={isOpen}
+                light={light}
+                size={size}
+                warn={warn}
+                warnText={warnText}>
+                <div className={`${prefix}--list-box__field`}>
+                  <input
+                    role="combobox"
+                    disabled={disabled}
+                    className={inputClasses}
+                    type="text"
+                    tabIndex="0"
+                    aria-autocomplete="list"
+                    aria-expanded={rootProps['aria-expanded']}
+                    aria-haspopup="listbox"
+                    aria-controls={inputProps['aria-controls']}
+                    {...inputProps}
+                    {...rest}
+                    ref={mergeRefs(this.textInput, rootProps.ref)}
+                  />
+                  {invalid && (
+                    <WarningFilled16
+                      className={`${prefix}--list-box__invalid-icon`}
+                    />
+                  )}
+                  {showWarning && (
+                    <WarningAltFilled16
+                      className={`${prefix}--list-box__invalid-icon ${prefix}--list-box__invalid-icon--warning`}
+                    />
+                  )}
+                  {inputValue && (
+                    <ListBoxSelection
+                      clearSelection={clearSelection}
+                      translateWithId={translateWithId}
+                      disabled={disabled}
+                      onClearSelection={this.handleSelectionClear}
+                    />
+                  )}
+                  <ListBoxTrigger
+                    {...buttonProps}
+                    isOpen={isOpen}
+                    translateWithId={translateWithId}
+                  />
+                </div>
+                <ListBox.Menu {...getMenuProps({ 'aria-label': ariaLabel })}>
+                  {isOpen
+                    ? this.filterItems(items, itemToString, inputValue).map(
+                        (item, index) => {
+                          const itemProps = getItemProps({
+                            item,
+                            index,
+                            ['aria-current']:
+                              selectedItem === item ? true : null,
+                            ['aria-selected']:
+                              highlightedIndex === index ? true : null,
+                          });
+                          return (
+                            <ListBox.MenuItem
+                              key={itemProps.id}
+                              isActive={selectedItem === item}
+                              tabIndex="-1"
+                              isHighlighted={
+                                highlightedIndex === index ||
+                                (selectedItem && selectedItem.id === item.id) ||
+                                false
+                              }
+                              title={
+                                itemToElement ? item.text : itemToString(item)
+                              }
+                              {...itemProps}>
+                              {itemToElement ? (
+                                <ItemToElement key={itemProps.id} {...item} />
+                              ) : (
+                                itemToString(item)
+                              )}
+                              {selectedItem === item && (
+                                <Checkmark16
+                                  className={`${prefix}--list-box__menu-item__selected-icon`}
+                                />
+                              )}
+                            </ListBox.MenuItem>
+                          );
+                        }
+                      )
+                    : null}
+                </ListBox.Menu>
+              </ListBox>
+              {helperText && !invalid && !warn && (
+                <div id={comboBoxHelperId} className={helperClasses}>
+                  {helperText}
+                </div>
+              )}
+            </div>
+          );
+        }}
       </Downshift>
     );
   }
