@@ -412,11 +412,25 @@
     pointer-events: none;
   }
 
+  .#{$prefix}--skeleton.#{$prefix}--tabs--scrollable:not(.#{$prefix}--tabs--scrollable--container)
+    .#{$prefix}--tabs--scrollable__nav-item {
+    border-bottom: 2px solid $skeleton-02;
+  }
+
   .#{$prefix}--tabs.#{$prefix}--skeleton .#{$prefix}--tabs__nav-link {
+    display: flex;
+    align-items: center;
+    width: 10rem;
+    height: 100%;
+    padding: 0 1rem;
+  }
+
+  .#{$prefix}--tabs.#{$prefix}--skeleton .#{$prefix}--tabs__nav-link span {
     @include skeleton;
 
-    width: rem(75px);
-    height: rem(12px);
+    display: block;
+    width: 100%;
+    height: rem(14px);
   }
 
   .#{$prefix}--tabs.#{$prefix}--skeleton .#{$prefix}--tabs-trigger {
