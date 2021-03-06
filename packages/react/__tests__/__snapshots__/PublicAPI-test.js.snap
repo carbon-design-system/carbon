@@ -337,12 +337,6 @@ Map {
     "render": [Function],
   },
   "CodeSnippet" => Object {
-    "defaultProps": Object {
-      "showLessText": "Show less",
-      "showMoreText": "Show more",
-      "type": "single",
-      "wrapText": false,
-    },
     "propTypes": Object {
       "ariaLabel": Object {
         "type": "string",
@@ -370,6 +364,18 @@ Map {
       },
       "light": Object {
         "type": "bool",
+      },
+      "maxClosedNumberOfRows": Object {
+        "type": "number",
+      },
+      "maxExpandedNumberOfRows": Object {
+        "type": "number",
+      },
+      "minClosedNumberOfRows": Object {
+        "type": "number",
+      },
+      "minExpandedNumberOfRows": Object {
+        "type": "number",
       },
       "onClick": Object {
         "type": "func",
