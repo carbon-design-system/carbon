@@ -199,14 +199,15 @@
 
   //closed snippet container
   .#{$prefix}--snippet--multi .#{$prefix}--snippet-container {
+    position: relative;
     order: 1;
     overflow: scroll;
-    position: relative;
-    transition: max-height $duration--moderate-01 motion(standard, productive);
     width: 100%;
+    transition: max-height $duration--moderate-01 motion(standard, productive);
   }
 
-  .#{$prefix}--snippet--multi.#{$prefix}--snippet--wraptext .#{$prefix}--snippet-container {
+  .#{$prefix}--snippet--multi.#{$prefix}--snippet--wraptext
+    .#{$prefix}--snippet-container {
     overflow-x: hidden;
   }
 
@@ -222,7 +223,7 @@
   }
 
   .#{$prefix}--snippet--multi .#{$prefix}--snippet-container pre::after {
-  // .#{$prefix}--snippet--multi .#{$prefix}--snippet-container::after {
+    // .#{$prefix}--snippet--multi .#{$prefix}--snippet-container::after {
     position: absolute;
     top: 0;
     right: 0;
