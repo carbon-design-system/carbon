@@ -140,20 +140,6 @@ const lightProp = () => ({
     false
   ),
 });
-const minClosedNumberOfRowsProp = () => ({
-  minClosedNumberOfRows: number(
-    'minClosedNumberOfRows: Specify the minimum number of rows to be shown when in closed view',
-    3,
-    { min: 1 }
-  ),
-});
-const minExpandedNumberOfRowsProp = () => ({
-  minExpandedNumberOfRows: number(
-    'minExpandedNumberOfRows: Specify the minimum number of rows to be shown when in expanded view',
-    16,
-    { min: 1 }
-  ),
-});
 const maxClosedNumberOfRowsProp = () => ({
   maxClosedNumberOfRows: number(
     'maxClosedNumberOfRows: Specify the maximum number of rows to be shown when in closed view',
@@ -165,6 +151,20 @@ const maxExpandedNumberOfRowsProp = () => ({
   maxExpandedNumberOfRows: number(
     'maxExpandedNumberOfRows: Specify the maximum number of rows to be shown when in expanded view',
     50,
+    { min: 1 }
+  ),
+});
+const minClosedNumberOfRowsProp = () => ({
+  minClosedNumberOfRows: number(
+    'minClosedNumberOfRows: Specify the minimum number of rows to be shown when in closed view',
+    3,
+    { min: 1 }
+  ),
+});
+const minExpandedNumberOfRowsProp = () => ({
+  minExpandedNumberOfRows: number(
+    'minExpandedNumberOfRows: Specify the minimum number of rows to be shown when in expanded view',
+    16,
     { min: 1 }
   ),
 });
@@ -204,10 +204,10 @@ export const Inline = () => (
     {...feedbackProp()}
     {...hideCopyButtonProp()}
     {...lightProp()}
-    // {...minClosedNumberOfRowsProp()}
-    // {...minExpandedNumberOfRowsProp()}
     // {...maxClosedNumberOfRowsProp()}
     // {...maxExpandedNumberOfRowsProp()}
+    // {...minClosedNumberOfRowsProp()}
+    // {...minExpandedNumberOfRowsProp()}
     {...onClickProp()}
     // {...showLessTextProp()}
     // {...showMoreTextProp()}
@@ -227,10 +227,10 @@ export const Single = () => (
     {...feedbackProp()}
     {...hideCopyButtonProp()}
     {...lightProp()}
-    // {...minClosedNumberOfRowsProp()}
-    // {...minExpandedNumberOfRowsProp()}
     // {...maxClosedNumberOfRowsProp()}
     // {...maxExpandedNumberOfRowsProp()}
+    // {...minClosedNumberOfRowsProp()}
+    // {...minExpandedNumberOfRowsProp()}
     {...onClickProp()}
     // {...showLessTextProp()}
     // {...showMoreTextProp()}
@@ -250,10 +250,10 @@ export const Multi = () => (
     {...feedbackProp()}
     {...hideCopyButtonProp()}
     {...lightProp()}
-    {...minClosedNumberOfRowsProp()}
-    {...minExpandedNumberOfRowsProp()}
     {...maxClosedNumberOfRowsProp()}
     {...maxExpandedNumberOfRowsProp()}
+    {...minClosedNumberOfRowsProp()}
+    {...minExpandedNumberOfRowsProp()}
     {...onClickProp()}
     {...showLessTextProp()}
     {...showMoreTextProp()}

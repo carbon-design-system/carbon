@@ -19,10 +19,10 @@ import getUniqueId from '../../tools/uniqueId';
 
 const { prefix } = settings;
 
-const defaultMinClosedNumberOfRows = 3;
-const defaultMinExpandedNumberOfRows = 16;
 const defaultMaxClosedNumberOfRows = 15;
 const defaultMaxExpandedNumberOfRows = 30;
+const defaultMinClosedNumberOfRows = 3;
+const defaultMinExpandedNumberOfRows = 16;
 const defaultShowLessText = 'Show less';
 const defaultShowMoreText = 'Show more';
 const defaultType = 'single';
@@ -40,10 +40,10 @@ function CodeSnippet({
   feedback,
   hideCopyButton,
   light,
-  minClosedNumberOfRows = defaultMinClosedNumberOfRows,
-  minExpandedNumberOfRows = defaultMinExpandedNumberOfRows,
   maxClosedNumberOfRows = defaultMaxClosedNumberOfRows,
   maxExpandedNumberOfRows = defaultMaxExpandedNumberOfRows,
+  minClosedNumberOfRows = defaultMinClosedNumberOfRows,
+  minExpandedNumberOfRows = defaultMinExpandedNumberOfRows,
   onClick,
   showLessText = defaultShowLessText,
   showMoreText = defaultShowMoreText,
@@ -173,11 +173,11 @@ function CodeSnippet({
       ? {}
       : {
           style: {
-            'minHeight':
-              (expandedCode ? minExpandedNumberOfRows : minClosedNumberOfRows) *
-              rowHeightInPixels,
             'maxHeight':
               (expandedCode ? maxExpandedNumberOfRows : maxClosedNumberOfRows) *
+              rowHeightInPixels,
+            'minHeight':
+              (expandedCode ? minExpandedNumberOfRows : minClosedNumberOfRows) *
               rowHeightInPixels,
           },
         };
@@ -288,16 +288,6 @@ CodeSnippet.propTypes = {
   light: PropTypes.bool,
 
   /**
-   * Specify the minimum number of rows to be shown when in closed view
-   */
-  minClosedNumberOfRows: PropTypes.number,
-
-  /**
-   * Specify the minimum number of rows to be shown when in expanded view
-   */
-  minExpandedNumberOfRows: PropTypes.number,
-
-  /**
    * Specify the maximum number of rows to be shown when in closed view
    */
   maxClosedNumberOfRows: PropTypes.number,
@@ -306,6 +296,16 @@ CodeSnippet.propTypes = {
    * Specify the maximum number of rows to be shown when in expanded view
    */
   maxExpandedNumberOfRows: PropTypes.number,
+
+  /**
+   * Specify the minimum number of rows to be shown when in closed view
+   */
+  minClosedNumberOfRows: PropTypes.number,
+
+  /**
+   * Specify the minimum number of rows to be shown when in expanded view
+   */
+  minExpandedNumberOfRows: PropTypes.number,
 
   /**
    * An optional handler to listen to the `onClick` even fired by the Copy Button
