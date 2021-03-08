@@ -96,7 +96,7 @@
     "@rollup/plugin-replace": "^2.3.4",
     "@rollup/plugin-virtual": "^2.0.3",
     "adaro": "1.0.4",
-    "autoprefixer": "^9.7.4",
+    "autoprefixer": "^10.2.5",
     "babel-core": "^7.0.0-bridge.0",
     "babel-loader": "^8.1.0",
     "babel-plugin-dev-expression": "^0.2.2",
