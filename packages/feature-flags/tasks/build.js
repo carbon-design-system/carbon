@@ -8,6 +8,7 @@
 'use strict';
 
 const { default: babelGenerate } = require('@babel/generator');
+const { default: template } = require('@babel/template');
 const babelTypes = require('@babel/types');
 const { types: t, generate } = require('@carbon/scss-generator');
 const { constantCase } = require('change-case');
@@ -78,6 +79,14 @@ const javascriptBanner = `/**
 `;
 function buildJavaScriptModule(featureFlags) {
   const t = babelTypes;
+  const tmpl = template.expression(`
+    typeof process === 'undefined'
+      ? %%defaultEnabled%%
+      : typeof process.env === 'undefined'
+        ? %%defaultEnabled%%
+        : process.env.%%name%% === 'true'
+  `);
+
   const file = t.file(
     t.program([
       t.exportNamedDeclaration(
@@ -97,17 +106,12 @@ function buildJavaScriptModule(featureFlags) {
                   ),
                   t.objectProperty(
                     t.identifier('enabled'),
-                    t.logicalExpression(
-                      '||',
-                      t.memberExpression(
-                        t.memberExpression(
-                          t.identifier('process'),
-                          t.identifier('env')
-                        ),
-                        t.identifier(constantCase(`CARBON_${featureFlag.name}`))
+                    tmpl({
+                      defaultEnabled: t.booleanLiteral(featureFlag.enabled),
+                      name: t.identifier(
+                        constantCase(`CARBON_${featureFlag.name}`)
                       ),
-                      t.booleanLiteral(featureFlag.enabled)
-                    )
+                    })
                   ),
                 ]);
               })
