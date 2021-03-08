@@ -207,6 +207,9 @@ Map {
         "isRequired": true,
         "type": "oneOf",
       },
+      "onMouseOut": Object {
+        "type": "func",
+      },
       "renderIcon": Object {
         "args": Array [
           Array [

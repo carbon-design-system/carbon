@@ -27,6 +27,7 @@ exports[`HeaderGlobalAction should render 1`] = `
       className="custom-class bx--header__action bx--btn bx--btn--primary bx--btn--icon-only bx--tooltip__trigger bx--tooltip--a11y bx--tooltip--bottom bx--tooltip--align-center"
       disabled={false}
       onClick={[MockFunction]}
+      onMouseOut={[Function]}
       tabIndex={0}
       type="button"
     >

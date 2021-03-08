@@ -204,6 +204,7 @@
 
     .#{$prefix}--btn__icon {
       position: static;
+      pointer-events: none;
     }
 
     &.#{$prefix}--btn--ghost .#{$prefix}--btn__icon,

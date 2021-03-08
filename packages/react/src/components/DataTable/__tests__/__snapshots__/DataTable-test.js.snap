@@ -2064,6 +2064,7 @@ exports[`DataTable should render 1`] = `
                         className="bx--btn bx--btn--primary"
                         disabled={false}
                         onClick={[MockFunction]}
+                        onMouseOut={[Function]}
                         tabIndex={0}
                         type="button"
                       >
@@ -2137,6 +2138,7 @@ exports[`DataTable should render 1`] = `
                         className="bx--btn bx--btn--primary"
                         disabled={false}
                         onClick={[MockFunction]}
+                        onMouseOut={[Function]}
                         tabIndex={0}
                         type="button"
                       >
@@ -2210,6 +2212,7 @@ exports[`DataTable should render 1`] = `
                         className="bx--btn bx--btn--primary"
                         disabled={false}
                         onClick={[MockFunction]}
+                        onMouseOut={[Function]}
                         tabIndex={0}
                         type="button"
                       >
@@ -2269,6 +2272,7 @@ exports[`DataTable should render 1`] = `
                       className="bx--batch-summary__cancel bx--btn bx--btn--primary"
                       disabled={false}
                       onClick={[Function]}
+                      onMouseOut={[Function]}
                       tabIndex={-1}
                       type="button"
                     >
@@ -2523,6 +2527,7 @@ exports[`DataTable should render 1`] = `
                   className="bx--btn bx--btn--sm bx--btn--primary"
                   disabled={false}
                   onClick={[MockFunction]}
+                  onMouseOut={[Function]}
                   tabIndex={0}
                   type="button"
                 >
@@ -3075,6 +3080,7 @@ exports[`DataTable sticky header should render 1`] = `
                         className="bx--btn bx--btn--primary"
                         disabled={false}
                         onClick={[MockFunction]}
+                        onMouseOut={[Function]}
                         tabIndex={0}
                         type="button"
                       >
@@ -3148,6 +3154,7 @@ exports[`DataTable sticky header should render 1`] = `
                         className="bx--btn bx--btn--primary"
                         disabled={false}
                         onClick={[MockFunction]}
+                        onMouseOut={[Function]}
                         tabIndex={0}
                         type="button"
                       >
@@ -3221,6 +3228,7 @@ exports[`DataTable sticky header should render 1`] = `
                         className="bx--btn bx--btn--primary"
                         disabled={false}
                         onClick={[MockFunction]}
+                        onMouseOut={[Function]}
                         tabIndex={0}
                         type="button"
                       >
@@ -3280,6 +3288,7 @@ exports[`DataTable sticky header should render 1`] = `
                       className="bx--batch-summary__cancel bx--btn bx--btn--primary"
                       disabled={false}
                       onClick={[Function]}
+                      onMouseOut={[Function]}
                       tabIndex={-1}
                       type="button"
                     >
@@ -3534,6 +3543,7 @@ exports[`DataTable sticky header should render 1`] = `
                   className="bx--btn bx--btn--sm bx--btn--primary"
                   disabled={false}
                   onClick={[MockFunction]}
+                  onMouseOut={[Function]}
                   tabIndex={0}
                   type="button"
                 >

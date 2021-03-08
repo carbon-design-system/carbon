@@ -31,6 +31,7 @@ const Button = React.forwardRef(function Button(
     hasIconOnly,
     tooltipPosition,
     tooltipAlignment,
+    onMouseOut,
     ...other
   },
   ref
@@ -56,6 +57,14 @@ const Button = React.forwardRef(function Button(
     tabIndex,
     className: buttonClasses,
     ref,
+  };
+
+  const handleMouseOut = (evt) => {
+    evt.currentTarget.blur();
+
+    if (onMouseOut !== undefined) {
+      onMouseOut();
+    }
   };
 
   const buttonImage = !ButtonImageElement ? null : (
@@ -91,6 +100,7 @@ const Button = React.forwardRef(function Button(
   return React.createElement(
     component,
     {
+      onMouseOut: handleMouseOut,
       ...other,
       ...commonProps,
       ...otherProps,
@@ -160,6 +170,12 @@ Button.propTypes = {
    * Specify the kind of Button you want to create
    */
   kind: PropTypes.oneOf(ButtonKinds).isRequired,
+
+  /**
+   * Provide an optional function to be called when the mouse
+   * leaves the button element
+   */
+  onMouseOut: PropTypes.func,
 
   /**
    * Optional prop to allow overriding the icon rendering.

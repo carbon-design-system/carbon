@@ -40,6 +40,7 @@ exports[`ModalWrapper should render 1`] = `
         className="btn-trigger bx--btn bx--btn--primary"
         disabled={false}
         onClick={[Function]}
+        onMouseOut={[Function]}
         tabIndex={0}
         type="button"
       >
@@ -176,6 +177,7 @@ exports[`ModalWrapper should render 1`] = `
                     className="bx--btn bx--btn--secondary"
                     disabled={false}
                     onClick={[Function]}
+                    onMouseOut={[Function]}
                     tabIndex={0}
                     type="button"
                   >
@@ -198,6 +200,7 @@ exports[`ModalWrapper should render 1`] = `
                   className="bx--btn bx--btn--primary"
                   disabled={false}
                   onClick={[Function]}
+                  onMouseOut={[Function]}
                   tabIndex={0}
                   type="button"
                 >
