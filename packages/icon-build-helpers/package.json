@@ -46,6 +46,6 @@
     "rimraf": "^3.0.0",
     "rollup": "^2.38.0",
     "rollup-plugin-strip-banner": "^2.0.0",
-    "svgo": "^1.1.1"
+    "svgo": "^2.2.1"
   }
 }
