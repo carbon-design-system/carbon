@@ -54,7 +54,7 @@ export default function IndexPage() {
         </article>
       </section>
       <section>
-        <h2>Gap</h2>
+        <h2>Gap (condensed, narrow, no gutters)</h2>
         <article className="example">
           <div className="bx--css-grid bx--css-grid--condensed">
             <div className="content">
@@ -72,6 +72,22 @@ export default function IndexPage() {
           </div>
         </article>
         <article className="example">
+          <div className="bx--css-grid bx--css-grid--narrow">
+            <div className="content bx--col-span-1">
+              Span 1
+            </div>
+            <div className="content bx--col-span-2">
+              Span 2
+            </div>
+            <div className="content bx--col-span-1">
+              Span 1
+            </div>
+            <div className="content bx--col-span-1">
+              Span 1
+            </div>
+          </div>
+        </article>
+        <article className="example">
           <div className="bx--css-grid bx--css-grid--no-gutter">
             <div className="content">
               Span 1
@@ -83,6 +99,25 @@ export default function IndexPage() {
               Span 1
             </div>
             <div className="content">
+              Span 1
+            </div>
+          </div>
+        </article>
+      </section>
+      <section>
+        <h2>Gutter helpers</h2>
+        <article className="example">
+          <div className="bx--css-grid bx--css-grid--no-gutter">
+            <div className="content bx--gutter-start">
+              Span 1
+            </div>
+            <div className="content bx--col-span-2 bx--gutter-end">
+              Span 2
+            </div>
+            <div className="content bx--gutter-start">
+              Span 1
+            </div>
+            <div className="content bx--gutter-end">
               Span 1
             </div>
           </div>
