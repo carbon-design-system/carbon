@@ -60,7 +60,7 @@ import { enable, disable, merge } from '@carbon/feature-flags';
 enable('feature-flag-a');
 
 // Disable `feature-flag-a`
-disable('feature-flag-a);
+disable('feature-flag-a');
 
 // Set a variety of feature flags to a specific value
 merge({

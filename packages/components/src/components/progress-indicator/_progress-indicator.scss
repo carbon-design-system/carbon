@@ -246,7 +246,7 @@
     }
   }
 
-  //ERROR STYLING
+  // ERROR STYLING
   .#{$prefix}--progress__warning > * {
     fill: $support-01;
   }
@@ -256,8 +256,8 @@
     @include skeleton;
 
     width: rem(40px);
-
-    height: rem(12px);
+    height: rem(14px);
+    margin-top: 0.625rem;
   }
 
   // Vertical Variant

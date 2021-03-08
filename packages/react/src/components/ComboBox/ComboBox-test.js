@@ -11,7 +11,6 @@ import {
   findListBoxNode,
   findMenuNode,
   findMenuItemNode,
-  openMenu,
   assertMenuOpen,
   assertMenuClosed,
   generateItems,
@@ -28,6 +27,9 @@ const downshiftActions = {
 };
 const clearInput = (wrapper) =>
   wrapper.instance().handleOnStateChange({ inputValue: '' }, downshiftActions);
+const openMenu = (wrapper) => {
+  wrapper.find(`[role="combobox"]`).simulate('click');
+};
 
 describe('ComboBox', () => {
   let mockProps;

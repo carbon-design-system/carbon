@@ -66,6 +66,9 @@ row before the </tbody></table> line.
     - [Writing a component](#writing-a-component)
     - [Translating a component](#translating-a-component)
       - [Working with messages that depend on state](#working-with-messages-that-depend-on-state)
+    - [Using `useCallback` and `useMemo`](#using-usecallback-and-usememo)
+    - [Hooks that rely on refs](#hooks-that-rely-on-refs)
+    - [Hooks that use a callback](#hooks-that-use-a-callback)
   - [Style](#style-1)
     - [Naming event handlers](#naming-event-handlers)
     - [Naming experimental code](#naming-experimental-code)
@@ -314,6 +317,123 @@ function MyComponent({ translateWithId: t = translateWithId }) {
   );
 }
 ```
+
+#### Using `useCallback` and `useMemo`
+
+`useCallback` and `useMemo` can be incredibly useful tools in certain
+situations. In general, however, we try to avoid them unless one of the
+following conditions occur:
+
+- The identitiy of a function or object is required as a dependency in a
+  dependency array
+- We have observed performance issues due to allocations that can be reproduced
+  and resolved using these techniques
+
+This practice is to avoid introducing `useCallback` and `useMemo` prematurely,
+which can create extra work for our components to perform.
+
+A rule of thumb for this is to understand how frequently a dependency will
+update that is given to `useCallback` or `useMemo`. If a dependency is likely to
+update frequently, then React will have to perform comparisons and re-run
+callback to `useCallback` and `useMemo`. This would be slower than creating a
+new function each render instead.
+
+#### Hooks that rely on refs
+
+When designing hooks that require a reference to a DOM node (using a `ref`) you
+should design the hook to take in a `ref` as an argument instead of creating a
+`ref` on behalf of the caller.
+
+This is important when a caller decides to use multiple hooks that rely on a
+`ref`. For example,
+
+```jsx
+function MyComponent() {
+  const [ref1, isHovering] = useHover();
+  const [ref2, isDragging] = useDrag();
+
+  // How should the caller merge these two refs?
+}
+```
+
+If, instead, these hooks took in a `ref` we could have the caller manage the
+`ref` and pass it into the hooks.
+
+```jsx
+function MyComponent() {
+  const ref = useRef(null);
+  const isHovering = useHover(ref);
+  const isDragging = useDrag(ref);
+
+  // Caller has to add `ref` to a node below
+}
+```
+
+#### Hooks that use a callback
+
+Often times, you will want to author a hook that executes a given function when
+something happens. For example, we could have a hook called `useEvent` that will
+execute a function whenever the event is triggered:
+
+```js
+useEvent(window, 'click', (event) => {
+  // Called when the click event fires
+});
+```
+
+When you write a hook that uses a pattern like this, you may run into a problem
+where you want to call the callback in a `useEffect` block, but you don't want
+that effect to fire every time the callback changes.
+
+From our `useEvent` hook above, this would come up when adding the event
+listener to the document:
+
+```js
+function useEvent(element, eventName, callback) {
+  // ...
+
+  useEffect(() => {
+    element.addEventListener(eventName, callback);
+    return () => {
+      element.removeEventListener(eventName, callback);
+    };
+  }, [element, eventName, callback]);
+
+  // ...
+}
+```
+
+In the code snippet above, the effect specified in `useEffect` will trigger any
+time the element changes, the event changes, or the callback changes. However,
+we only would want the listener re-attached any time the element or event name
+changes, not when the callback changes.
+
+To separate out the callback changes from changes in our effect's dependencies,
+you can use the saved callback pattern:
+
+```js
+function useEvent(element, eventName, callback) {
+  const savedCallback = useRef(callback);
+
+  useEffect(() => {
+    savedCallback.current = callback;
+  });
+
+  useEffect(() => {
+    function listener(event) {
+      savedCallback.current(event);
+    }
+    element.addEventListener(eventName, listener);
+    return () => {
+      element.removeEventListener(eventName, listener);
+    };
+  }, [element, eventName]);
+}
+```
+
+By saving our callback in a `ref`, we're able to keep track of changes to the
+callback that we receive without having to re-run our `useEffect` block every
+time it changes.
 
 ### Style
 
