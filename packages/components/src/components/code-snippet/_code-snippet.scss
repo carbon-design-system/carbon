@@ -201,8 +201,8 @@
   .#{$prefix}--snippet--multi .#{$prefix}--snippet-container {
     position: relative;
     order: 1;
-    overflow: scroll;
     width: 100%;
+    overflow: scroll;
     transition: max-height $duration--moderate-01 motion(standard, productive);
   }
 

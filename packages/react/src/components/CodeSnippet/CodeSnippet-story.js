@@ -150,7 +150,7 @@ const maxClosedNumberOfRowsProp = () => ({
 const maxExpandedNumberOfRowsProp = () => ({
   maxExpandedNumberOfRows: number(
     'maxExpandedNumberOfRows: Specify the maximum number of rows to be shown when in expanded view',
-    50,
+    30,
     { min: 1 }
   ),
 });
@@ -191,7 +191,7 @@ const typeProp = (type) => ({
   ),
 });
 const wrapTextProp = () => ({
-  wrapText: boolean('wrapText: Specify whether or not to wrap the text)', true),
+  wrapText: boolean('wrapText: Specify whether or not to wrap the text)', false),
 });
 
 export const Inline = () => (
