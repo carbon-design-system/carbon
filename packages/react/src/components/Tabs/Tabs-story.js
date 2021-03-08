@@ -29,14 +29,14 @@ const selectionModes = {
 };
 
 const types = {
-  Default: '',
+  Default: 'default',
   Container: 'container',
 };
 
 const { prefix } = settings;
 const props = {
   tabs: () => ({
-    type: select('Type of Tabs (type)', types, ''),
+    type: select('Type of Tabs (type)', types, 'default'),
     className: 'some-class',
     light: boolean('Light variant (light)', false),
     selected: number('The index of the selected tab (selected in <Tabs>)', 1),
@@ -208,4 +208,34 @@ export const Container = () => (
   </Tabs>
 );
 
-export const Skeleton = () => <TabsSkeleton />;
+export const Skeleton = () => {
+  const isLoading = boolean('isLoading', true);
+
+  return (
+    <div style={{ maxWidth: '100%' }}>
+      {isLoading ? (
+        <TabsSkeleton type={select('Type of Tabs (type)', types, 'default')} />
+      ) : (
+        <Tabs type={select('Type of Tabs (type)', types, 'default')}>
+          <Tab label="Tab label 1">
+            <p>Content for first tab goes here.</p>
+          </Tab>
+          <Tab label="Tab label 2">
+            <p>Content for second tab goes here.</p>
+          </Tab>
+          <Tab label="Tab label 3" disabled>
+            <p>Content for third tab goes here.</p>
+          </Tab>
+          <Tab
+            label="Tab label 4 shows truncation"
+            title="Tab label 4 shows truncation">
+            <p>Content for fourth tab goes here.</p>
+          </Tab>
+          <Tab label={<div>Custom Label</div>}>
+            <p>Content for fifth tab goes here.</p>
+          </Tab>
+        </Tabs>
+      )}
+    </div>
+  );
+};
