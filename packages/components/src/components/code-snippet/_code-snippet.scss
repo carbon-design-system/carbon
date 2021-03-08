@@ -208,6 +208,10 @@
     width: 100%;
   }
 
+  .#{$prefix}--snippet--multi.#{$prefix}--snippet--wraptext .#{$prefix}--snippet-container {
+    overflow-x: hidden;
+  }
+
   // expanded snippet container
   .#{$prefix}--snippet--multi.#{$prefix}--snippet--expand
     .#{$prefix}--snippet-container {
