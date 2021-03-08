@@ -8441,6 +8441,11 @@
     - username
   sizes:
     - 32
+- name: logo--delicious
+  friendly_name: logo--delicious
+  aliases: []
+  sizes:
+    - 32
 - name: logo--digg
   friendly_name: Logo Digg
   sizes:
@@ -8500,6 +8505,19 @@
     - identification
 - name: logo--glassdoor
   friendly_name: Logo Glassdoor
+  sizes:
+    - 32
+  aliases:
+    - brand
+    - emblem
+    - logotype
+    - symbol
+    - id
+    - avatar
+    - tag
+    - identification
+- name: logo--google
+  friendly_name: Logo google
   sizes:
     - 32
   aliases:
@@ -8694,6 +8712,11 @@
     - avatar
     - tag
     - identification
+- name: logo--stumbleupon
+  friendly_name: logo--stumbleupon
+  aliases: []
+  sizes:
+    - 32
 - name: logo--tumblr
   friendly_name: Logo Tumblr
   sizes:
@@ -8894,6 +8917,11 @@
     - healthcare
     - health
     - medical
+  sizes:
+    - 32
+- name: mammogram--stacked
+  friendly_name: mammogram--stacked
+  aliases: []
   sizes:
     - 32
 - name: manage-protection

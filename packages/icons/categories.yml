@@ -464,12 +464,14 @@ categories:
           - watson--machine-learning
       - name: Social
         members:
+          - logo--delicious
           - logo--digg
           - logo--discord
           - logo--facebook
           - logo--flickr
           - logo--github
           - logo--glassdoor
+          - logo--google
           - logo--instagram
           - logo--linkedin
           - logo--livestream
@@ -484,6 +486,7 @@ categories:
           - logo--xing
           - logo--yelp
           - logo--youtube
+          - logo--stumbleupon
   - name: Enterprise
     subcategories:
       - name: Commerce
@@ -612,6 +615,7 @@ categories:
           - launch-study--3
           - magnify
           - mammogram
+          - mammogram--stacked
           - medication
           - medication--alert
           - medication--reminder
