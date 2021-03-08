@@ -90,7 +90,7 @@
   }
 
   // Skeleton State
-  #{$prefix}--text-area.#{$prefix}--skeleton {
+  .#{$prefix}--text-area.#{$prefix}--skeleton {
     @include skeleton;
 
     height: rem(100px);

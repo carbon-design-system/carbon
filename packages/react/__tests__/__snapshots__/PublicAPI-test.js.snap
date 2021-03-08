@@ -6630,6 +6630,16 @@ Map {
       "className": Object {
         "type": "string",
       },
+      "type": Object {
+        "args": Array [
+          Array [
+            "",
+            "default",
+            "container",
+          ],
+        ],
+        "type": "oneOf",
+      },
     },
   },
   "TagSkeleton" => Object {
@@ -6783,6 +6793,16 @@ Map {
       },
       "onClick": Object {
         "type": "func",
+      },
+      "tooltipAlignment": Object {
+        "args": Array [
+          Array [
+            "start",
+            "center",
+            "end",
+          ],
+        ],
+        "type": "oneOf",
       },
     },
     "render": [Function],
@@ -6978,7 +6998,6 @@ Map {
       "isChildOfHeader": true,
       "isFixedNav": false,
       "isPersistent": true,
-      "translateById": [Function],
     },
     "propTypes": Object {
       "addFocusListeners": Object {
