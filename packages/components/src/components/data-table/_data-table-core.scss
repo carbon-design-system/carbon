@@ -110,14 +110,6 @@
     background-color: $ui-03;
   }
 
-  .#{$prefix}--data-table.#{$prefix}--data-table--sort th {
-    padding: 0;
-  }
-
-  .#{$prefix}--data-table.#{$prefix}--data-table--sort .#{$prefix}--table-sort {
-    padding-left: $spacing-05;
-  }
-
   .#{$prefix}--data-table th:last-of-type {
     // Do not use `position: relative`, as its behavior is undefined for many table elements: https://www.w3.org/TR/CSS21/visuren.html#propdef-position
     position: static;

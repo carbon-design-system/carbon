@@ -85,7 +85,8 @@
     // different checkbox states.
     width: rem(16px);
     height: rem(16px);
-    margin: rem(2px);
+    // increase left margin for #6480
+    margin: rem(2px) rem(2px) rem(2px) rem(3px);
 
     // Checkboxes with a background color look visually off against a parent container.
     background-color: transparent;
@@ -191,7 +192,7 @@
     height: $spacing-05;
 
     // Add extra spacing when label is present
-    margin: auto 0 auto rem(6px);
+    margin: rem(1px) 0 0 rem(6px);
   }
 }
 

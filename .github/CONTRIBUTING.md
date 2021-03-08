@@ -107,8 +107,8 @@ git checkout -b {your-branch-name}
 From the root directory of your fork, run:
 
 ```sh
-# To install the project's dependies
-yarn install --offline
+# To install the project's dependencies
+yarn install
 
 # To build the project:
 yarn build
@@ -164,7 +164,7 @@ all-contributors add <username> <contribution>
 all-contributors add tw15egan code,doc
 ```
 
-Then, you'll need to generate the updated `all-contibutors` table by running
+Then, you'll need to generate the updated `all-contributors` table by running
 
 ```sh
 all-contributors generate
@@ -205,7 +205,7 @@ For more information about how to write your commit message, view our commit
 conventions detailed in a our
 [developer handbook](https://github.com/carbon-design-system/carbon/blob/master/docs/developer-handbook.md#commit-conventions).
 
-After your changes are commited, run:
+After your changes are committed, run:
 
 ```sh
 git push -u origin { YOUR_BRANCH_NAME }

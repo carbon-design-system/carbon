@@ -37,7 +37,7 @@ import { batchActionClick, rows, headers } from './shared';
 import mdx from '../DataTable.mdx';
 
 export default {
-  title: 'DataTable/Batch Actions',
+  title: 'Components/DataTable/Batch Actions',
   component: DataTable,
   subcomponents: {
     TableBatchAction,

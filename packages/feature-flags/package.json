@@ -1,8 +1,7 @@
 {
   "name": "@carbon/feature-flags",
-  "private": true,
   "description": "Build with feature flags in Carbon",
-  "version": "0.5.0",
+  "version": "0.1.0",
   "license": "Apache-2.0",
   "main": "lib/index.js",
   "module": "es/index.js",
@@ -19,6 +18,9 @@
     "components",
     "react"
   ],
+  "publishConfig": {
+    "access": "public"
+  },
   "scripts": {
     "build": "yarn clean && node tasks/build.js && rollup -c",
     "clean": "rimraf es lib scss/generated src/generated",
@@ -28,10 +30,12 @@
     "@babel/generator": "^7.10.2",
     "@babel/types": "^7.10.2",
     "@carbon/scss-generator": "^10.13.0",
+    "change-case": "^4.1.2",
     "fs-extra": "^9.0.1",
     "js-yaml": "^3.14.0",
     "rimraf": "^3.0.2",
     "rollup": "^2.38.0",
     "rollup-plugin-strip-banner": "^2.0.0"
-  }
+  },
+  "sideEffects": false
 }

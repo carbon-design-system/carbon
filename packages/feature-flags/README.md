@@ -24,83 +24,76 @@ The `@carbon/feature-flags` provides a runtime-based feature flag system that
 you can use to enable or disable experimental features from Carbon or in your
 own code.
 
-To enable a feature flag, you will need to enable it in each of the environments
-that you're using it in. Often times, this will mean JavaScript, Sass, or both.
-
-To enable a flag in JavaScript, you would use `enableFeatureFlag`:
+To check if a feature flag is enabled, you can use the `enabled` function in
+JavaScript:
 
 ```js
-import { enableFeatureFlag } from '@carbon/feature-flags';
+import { enabled } from '@carbon/feature-flags';
 
-enableFeatureFlag('feature-flag-name');
+enabled('feature-flag-name');
 ```
 
-To enable a flag in Sass, you would set the `$feature-flags` variable:
+In Sass, you would use the `enabled` function or mixin:
 
 ```scss
-@import '@carbon/feature-flags/scss/feature-flags';
+@use '@carbon/feature-flags';
 
-$feature-flags: map-merge(
-  $feature-flags,
-  (
-    'feature-flag-name': true,
-  )
-);
+// Return true if the flag is enabled
+@if feature-flags.enabled('feature-flag-name') {
+  //
+}
+
+@include enabled('feature-flag-name') {
+  // only include contents if the flag is enabled
+}
 ```
 
-### Managing and using feature flags
+### Managing feature flags
 
-You can use the `@carbon/feature-flags` package to build on top of existing
-feature flags, or to add your own.
-
-You can add and toggle flags in JavaScript and Sass. In JavaScript, this would
-look like:
+You can change whether a feature flag is enabled. In JavaScript, you can use the
+`enable`, `disable`, and `merge` functions to accomplish this.
 
 ```js
-import {
-  addFeatureFlag,
-  enableFeatureFlag,
-  disableFeatureFlag,
-  featureFlagEnabled,
-} from '@carbon/feature-flags';
+import { enable, disable, merge } from '@carbon/feature-flags';
 
-// Specify a default value for the flag
-addFeatureFlag('feature-flag-name', false);
+// Enable `feature-flag-a`
+enable('feature-flag-a');
 
-// You can use `featureFlagEnabled` to conditionally run
-// branches of your code
-if (featureFlagEnabled('feature-flag-name')) {
-  // Run code if the flag is enabled
-}
+// Disable `feature-flag-a`
+disable('feature-flag-a');
 
-// You can also modify the value of the flag
-disableFeatureFlag('feature-flag-name');
-enableFeatureFlag('feature-flag-name');
+// Set a variety of feature flags to a specific value
+merge({
+  'feature-flag-a': true,
+  'feature-flag-b': false,
+  'feature-flag-c': true,
+});
 ```
 
-In Sass, you would write the following:
+In Sass, you can configure whether a feature flag is enabled when you include
+the module or by using `enable`, `disable`, and `merge`.
 
 ```scss
-@import '@carbon/feature-flags/scss/feature-flags';
-
-$feature-flags: map-merge(
-  $feature-flags,
-  (
-    'feature-flag-name': true,
-  )
+@use '@carbon/feature-flags' with (
+  $feature-flags: (
+    'feature-flag-a': false,
+    'feature-flag-b': true,
+  ),
 );
 
-@if feature-flag-enabled('feature-flag-name') {
-  // ...
-}
+// Enable `feature-flag-a`
+@include feature-flags.enable('feature-flag-a');
 
-// You can also run this as a mixin to conditionally include
-// code
-.my-selector {
-  @include feature-flag-enabled('feature-flag-name') {
-    // ...
-  }
-}
+// Disable `feature-flag-b`
+@include feature-flags.disable('feature-flag-b');
+
+// Set a variety of feature flags to a specific value
+@include feature-flags.merge(
+  (
+    'feature-flag-a': true,
+    'feature-flag-b': true,
+  )
+);
 ```
 
 ## 🙌 Contributing

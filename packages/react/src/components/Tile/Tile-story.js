@@ -81,7 +81,7 @@ const props = {
 };
 
 export default {
-  title: 'Tile',
+  title: 'Components/Tile',
   decorators: [withKnobs],
 
   parameters: {

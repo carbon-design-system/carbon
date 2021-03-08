@@ -30,7 +30,7 @@ const sizes = {
 const props = () => ({
   className: 'some-class',
   id: 'tj-input',
-  label: text('Label (label)', 'Number Input label'),
+  label: text('Label (label)', 'NumberInput label'),
   hideLabel: boolean('No label (hideLabel)', false),
   min: number('Minimum value (min)', 0),
   max: number('Maximum value (max)', 100),
@@ -40,7 +40,6 @@ const props = () => ({
   disabled: boolean('Disabled (disabled)', false),
   readOnly: boolean('Read only (readOnly)', false),
   invalid: boolean('Show form validation UI (invalid)', false),
-  isMobile: boolean('Mobile variant', false),
   invalidText: text(
     'Form validation UI content (invalidText)',
     'Number is not valid'
@@ -65,7 +64,7 @@ const props = () => ({
 });
 
 export default {
-  title: 'NumberInput',
+  title: 'Components/NumberInput',
   component: OGNumberInput,
   decorators: [withKnobs],
 
@@ -81,6 +80,23 @@ export default {
 };
 
 export const Default = () => {
+  return (
+    <NumberInput
+      min={0}
+      max={100}
+      value={50}
+      label="NumberInput label"
+      helperText="Optional helper text."
+      invalidText="Number is not valid"
+    />
+  );
+};
+
+Default.story = {
+  name: 'Number Input',
+};
+
+export const Playground = () => {
   const { numberInputArrowTranslationIds, ...rest } = props();
   return (
     <NumberInput
@@ -90,23 +106,4 @@ export const Default = () => {
   );
 };
 
-export const Skeleton = () => (
-  <div
-    aria-label="loading number input"
-    aria-live="assertive"
-    role="status"
-    tabIndex="0" // eslint-disable-line jsx-a11y/no-noninteractive-tabindex
-  >
-    <NumberInputSkeleton />
-  </div>
-);
-
-Skeleton.storyName = 'skeleton';
-
-Skeleton.parameters = {
-  info: {
-    text: `
-        Placeholder skeleton state to use when content is loading.
-      `,
-  },
-};
+export const Skeleton = () => <NumberInputSkeleton />;

@@ -7,24 +7,33 @@
 
 'use strict';
 
+const fs = require('fs');
 const sass = require('sass');
-const { Importer } = require('./importer');
+const path = require('path');
 
 const SassRenderer = {
   create(cwd, initialData = '') {
-    const importer = Importer.create(cwd);
+    const nodeModules = getNodeModulesFolders(cwd);
 
     async function render(data) {
       const values = [];
+      const valuesByKey = new Map();
       const result = sass.renderSync({
         data: `${initialData}\n${data}`,
-        importer,
         functions: {
           'get-value($arg)': (arg) => {
             values.push(arg);
             return sass.types.Null.NULL;
           },
+          'get($key, $value)': (key, value) => {
+            valuesByKey.set(convert(key), {
+              value: convert(value),
+              nativeValue: value,
+            });
+            return sass.types.Null.NULL;
+          },
         },
+        includePaths: [cwd, ...nodeModules],
       });
 
       return {
@@ -32,6 +41,12 @@ const SassRenderer = {
         values,
         getValue(index) {
           return convert(values[index]);
+        },
+        get(key) {
+          if (valuesByKey.has(key)) {
+            return valuesByKey.get(key);
+          }
+          throw new Error(`Unabled to find value with key: ${key}`);
         },
       };
     }
@@ -98,6 +113,29 @@ function convert(value) {
   }
 
   return value;
+}
+
+/**
+ * Collect all the node_modules folders that are present in the current path by
+ * traversing upwards and looking for if a node_modules folder exists. This is
+ * useful for the `includePaths` option for a sass renderer
+ * @param {string} cwd
+ * @returns {Array<string>}
+ */
+function getNodeModulesFolders(cwd) {
+  const { root } = path.parse(cwd);
+  const folders = [];
+  let directory = cwd;
+
+  while (directory !== root) {
+    const folder = path.join(directory, 'node_modules');
+    if (fs.existsSync(folder)) {
+      folders.push(folder);
+    }
+    directory = path.dirname(directory);
+  }
+
+  return folders;
 }
 
 module.exports = {

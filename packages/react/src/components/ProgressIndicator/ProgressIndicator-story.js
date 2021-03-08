@@ -17,7 +17,7 @@ import mdx from './ProgressIndicator.mdx';
 const { prefix } = settings;
 
 export default {
-  title: 'ProgressIndicator',
+  title: 'Components/ProgressIndicator',
   decorators: [withKnobs],
 
   parameters: {
