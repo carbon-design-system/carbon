@@ -173,10 +173,10 @@ function CodeSnippet({
       ? {}
       : {
           style: {
-            'maxHeight':
+            maxHeight:
               (expandedCode ? maxExpandedNumberOfRows : maxClosedNumberOfRows) *
               rowHeightInPixels,
-            'minHeight':
+            minHeight:
               (expandedCode ? minExpandedNumberOfRows : minClosedNumberOfRows) *
               rowHeightInPixels,
           },

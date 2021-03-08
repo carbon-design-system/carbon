@@ -191,7 +191,10 @@ const typeProp = (type) => ({
   ),
 });
 const wrapTextProp = () => ({
-  wrapText: boolean('wrapText: Specify whether or not to wrap the text)', false),
+  wrapText: boolean(
+    'wrapText: Specify whether or not to wrap the text)',
+    false
+  ),
 });
 
 export const Inline = () => (
