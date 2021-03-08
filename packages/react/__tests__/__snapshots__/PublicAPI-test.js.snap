@@ -6998,7 +6998,6 @@ Map {
       "isChildOfHeader": true,
       "isFixedNav": false,
       "isPersistent": true,
-      "translateById": [Function],
     },
     "propTypes": Object {
       "addFocusListeners": Object {
