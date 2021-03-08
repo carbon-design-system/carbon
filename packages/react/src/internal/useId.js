@@ -25,17 +25,10 @@
 
 import { useEffect, useLayoutEffect, useState } from 'react';
 import setupGetInstanceId from '../tools/setupGetInstanceId';
+import { canUseDOM } from './environment';
 
 const getId = setupGetInstanceId();
-const useIsomorphicLayoutEffect = canUseDOM() ? useLayoutEffect : useEffect;
-
-function canUseDOM() {
-  return !!(
-    typeof window !== 'undefined' &&
-    window.document &&
-    window.document.createElement
-  );
-}
+const useIsomorphicLayoutEffect = canUseDOM ? useLayoutEffect : useEffect;
 
 let serverHandoffCompleted = false;
 
