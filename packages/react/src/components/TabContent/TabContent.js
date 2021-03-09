@@ -6,27 +6,27 @@
  */
 
 import PropTypes from 'prop-types';
-import React, { useCallback, useState } from 'react';
+import React, { useState, useRef } from 'react';
 import classNames from 'classnames';
 import { settings } from 'carbon-components';
 import { selectorTabbable } from '../../internal/keyboard/navigation';
+import useIsomorphicEffect from '../../internal/useIsomorphicEffect';
 
 const { prefix } = settings;
 
 /**
  * Determine if the node within the provided ref contains content that is tabbable.
  */
-function useTabbableContent() {
+function useTabbableContent(ref) {
   const [hasTabbableContent, setHasTabbableContent] = useState(false);
 
-  const ref = useCallback((node) => {
-    if (node !== null) {
-      // we don't need to know which element or how many are tabbable, just that there is _something_ tabbable
-      setHasTabbableContent(node.querySelector(selectorTabbable));
+  useIsomorphicEffect(() => {
+    if (ref.current) {
+      setHasTabbableContent(ref.current.querySelector(selectorTabbable));
     }
-  }, []);
+  });
 
-  return [hasTabbableContent, ref];
+  return hasTabbableContent;
 }
 
 const TabContent = (props) => {
@@ -34,7 +34,8 @@ const TabContent = (props) => {
   const tabContentClasses = classNames(`${prefix}--tab-content`, {
     [className]: className,
   });
-  const [hasTabbableContent, ref] = useTabbableContent();
+  const ref = useRef(null);
+  const hasTabbableContent = useTabbableContent(ref);
   return (
     <div
       role="tabpanel"
