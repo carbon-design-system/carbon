@@ -6634,6 +6634,16 @@ Map {
       "className": Object {
         "type": "string",
       },
+      "type": Object {
+        "args": Array [
+          Array [
+            "",
+            "default",
+            "container",
+          ],
+        ],
+        "type": "oneOf",
+      },
     },
   },
   "TagSkeleton" => Object {
@@ -6787,6 +6797,16 @@ Map {
       },
       "onClick": Object {
         "type": "func",
+      },
+      "tooltipAlignment": Object {
+        "args": Array [
+          Array [
+            "start",
+            "center",
+            "end",
+          ],
+        ],
+        "type": "oneOf",
       },
     },
     "render": [Function],
@@ -6982,7 +7002,6 @@ Map {
       "isChildOfHeader": true,
       "isFixedNav": false,
       "isPersistent": true,
-      "translateById": [Function],
     },
     "propTypes": Object {
       "addFocusListeners": Object {
@@ -7589,6 +7608,29 @@ Map {
         "type": "arrayOf",
       },
       "value": Object {
+        "type": "string",
+      },
+    },
+  },
+  "unstable_Heading" => Object {
+    "propTypes": Object {
+      "children": Object {
+        "type": "node",
+      },
+      "className": Object {
+        "type": "string",
+      },
+    },
+  },
+  "unstable_Section" => Object {
+    "propTypes": Object {
+      "as": Object {
+        "type": "elementType",
+      },
+      "children": Object {
+        "type": "node",
+      },
+      "className": Object {
         "type": "string",
       },
     },
