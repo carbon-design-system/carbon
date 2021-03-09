@@ -207,6 +207,15 @@ Map {
         "isRequired": true,
         "type": "oneOf",
       },
+      "onBlur": Object {
+        "type": "func",
+      },
+      "onFocus": Object {
+        "type": "func",
+      },
+      "onMouseEnter": Object {
+        "type": "func",
+      },
       "onMouseOut": Object {
         "type": "func",
       },
@@ -6354,10 +6363,16 @@ Map {
       "id": Object {
         "type": "string",
       },
+      "onBlur": Object {
+        "type": "func",
+      },
       "onFocus": Object {
         "type": "func",
       },
       "onMouseEnter": Object {
+        "type": "func",
+      },
+      "onMouseLeave": Object {
         "type": "func",
       },
       "tooltipText": Object {
