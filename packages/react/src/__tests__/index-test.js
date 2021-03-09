@@ -194,8 +194,10 @@ describe('Carbon Components React', () => {
         "TooltipDefinition",
         "TooltipIcon",
         "UnorderedList",
+        "unstable_Heading",
         "unstable_PageSelector",
         "unstable_Pagination",
+        "unstable_Section",
         "unstable_TreeNode",
         "unstable_TreeView",
       ]

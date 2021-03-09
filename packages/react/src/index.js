@@ -207,3 +207,7 @@ export {
 export unstable_TreeView, {
   TreeNode as unstable_TreeNode,
 } from './components/TreeView';
+export {
+  Heading as unstable_Heading,
+  Section as unstable_Section,
+} from './components/Heading';
