@@ -19,7 +19,7 @@ import ContextMenu, {
 } from '../ContextMenu';
 
 export default {
-  title: 'unstable_ContextMenu',
+  title: 'Experimental/unstable_ContextMenu',
   parameters: {
     component: ContextMenu,
   },
