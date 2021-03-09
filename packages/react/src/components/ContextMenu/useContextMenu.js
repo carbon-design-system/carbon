@@ -33,7 +33,7 @@ function useContextMenu(trigger = document) {
         trigger.removeEventListener('contextmenu', openContextMenu);
       };
     }
-  });
+  }, [trigger]);
 
   return {
     open,

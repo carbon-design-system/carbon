@@ -47,11 +47,12 @@ const InfoBanners = () => (
 const Story = (items) => {
   const contextMenuProps = useContextMenu();
 
-  function renderItem(item) {
+  function renderItem(item, i) {
     switch (item.type) {
       case 'item':
         return (
           <ContextMenuItem
+            key={i}
             label={item.label}
             shortcut={item.shortcut}
             disabled={item.disabled}
@@ -60,10 +61,11 @@ const Story = (items) => {
           </ContextMenuItem>
         );
       case 'divider':
-        return <ContextMenuDivider />;
+        return <ContextMenuDivider key={i} />;
       case 'selectable':
         return (
           <ContextMenuSelectableItem
+            key={i}
             label={item.label}
             initialChecked={item.initialChecked}
             onChange={action('onChange')}
@@ -72,6 +74,7 @@ const Story = (items) => {
       case 'radiogroup':
         return (
           <ContextMenuRadioGroup
+            key={i}
             label={item.label}
             items={item.items}
             initialSelectedItem={item.initialSelectedItem}
@@ -80,7 +83,7 @@ const Story = (items) => {
         );
       case 'group':
         return (
-          <ContextMenuGroup label={item.label}>
+          <ContextMenuGroup key={i} label={item.label}>
             {item.children && item.children.map(renderItem)}
           </ContextMenuGroup>
         );
