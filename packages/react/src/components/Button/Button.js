@@ -6,12 +6,13 @@
  */
 
 import PropTypes from 'prop-types';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import classNames from 'classnames';
 import { settings } from 'carbon-components';
 import { ButtonKinds } from '../../prop-types/types';
 import deprecate from '../../prop-types/deprecate';
 import { composeEventHandlers } from '../../tools/events';
+import { keys, matches } from '../../internal/keyboard';
 import toggleClass from '../../tools/toggleClass';
 
 const { prefix } = settings;
@@ -41,14 +42,12 @@ const Button = React.forwardRef(function Button(
   },
   ref
 ) {
-  const [tooltipVisibile, setTooltipVisibility] = useState(false);
+  const [allowTooltipVisibility, setAllowTooltipVisibility] = useState(true);
 
-  const iconButtonNodes = document?.querySelectorAll(
-    `.${prefix}--tooltip--a11y`
-  );
+  const tooltipNode = document?.querySelectorAll(`.${prefix}--tooltip--a11y`);
 
   const handleMouseEnter = (evt) => {
-    [...iconButtonNodes].map((node) => {
+    [...tooltipNode].map((node) => {
       toggleClass(
         node,
         `${prefix}--tooltip--hidden`,
@@ -56,10 +55,20 @@ const Button = React.forwardRef(function Button(
       );
     });
 
-    setTooltipVisibility(true);
+    setAllowTooltipVisibility(true);
   };
 
-  const handleMouseOut = () => setTooltipVisibility(false);
+  const handleMouseOut = () => setAllowTooltipVisibility(false);
+
+  useEffect(() => {
+    const handleEscKeyDown = (event) => {
+      if (matches(event, [keys.Escape])) {
+        setAllowTooltipVisibility(false);
+      }
+    };
+    document.addEventListener('keydown', handleEscKeyDown);
+    return () => document.removeEventListener('keydown', handleEscKeyDown);
+  }, []);
 
   const buttonClasses = classNames(className, {
     [`${prefix}--btn`]: true,
@@ -69,7 +78,7 @@ const Button = React.forwardRef(function Button(
     [`${prefix}--btn--xl`]: size === 'xl',
     [`${prefix}--btn--${kind}`]: kind,
     [`${prefix}--btn--disabled`]: disabled,
-    [`${prefix}--tooltip--hidden`]: hasIconOnly && !tooltipVisibile,
+    [`${prefix}--tooltip--hidden`]: hasIconOnly && !allowTooltipVisibility,
     [`${prefix}--btn--icon-only`]: hasIconOnly,
     [`${prefix}--btn--selected`]: hasIconOnly && isSelected && kind === 'ghost',
     [`${prefix}--tooltip__trigger`]: hasIconOnly,

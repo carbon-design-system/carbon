@@ -12,6 +12,7 @@ import { settings } from 'carbon-components';
 import setupGetInstanceId from '../../tools/setupGetInstanceId';
 import { composeEventHandlers } from '../../tools/events';
 import { keys, matches } from '../../internal/keyboard';
+import toggleClass from '../../tools/toggleClass';
 
 const { prefix } = settings;
 const getInstanceId = setupGetInstanceId();
@@ -40,12 +41,23 @@ const TooltipIcon = ({
       [`${prefix}--tooltip--hidden`]: !allowTooltipVisibility,
     }
   );
-  const handleFocus = () => setAllowTooltipVisibility(true);
-  const handleMouseEnter = () => {
+
+  const tooltipNode = document?.querySelectorAll(`.${prefix}--tooltip--a11y`);
+
+  const handleMouseEnter = (evt) => {
+    [...tooltipNode].map((node) => {
+      toggleClass(
+        node,
+        `${prefix}--tooltip--hidden`,
+        node !== evt.currentTarget
+      );
+    });
+
     setAllowTooltipVisibility(true);
   };
-  const handleBlur = () => setAllowTooltipVisibility(false);
+
   const handleMouseLeave = () => setAllowTooltipVisibility(false);
+
   useEffect(() => {
     const handleEscKeyDown = (event) => {
       if (matches(event, [keys.Escape])) {
@@ -64,8 +76,8 @@ const TooltipIcon = ({
       aria-describedby={tooltipId}
       onMouseEnter={composeEventHandlers([onMouseEnter, handleMouseEnter])}
       onMouseLeave={composeEventHandlers([onMouseLeave, handleMouseLeave])}
-      onFocus={composeEventHandlers([onFocus, handleFocus])}
-      onBlur={composeEventHandlers([onBlur, handleBlur])}>
+      onFocus={composeEventHandlers([onFocus, handleMouseEnter])}
+      onBlur={composeEventHandlers([onBlur, handleMouseLeave])}>
       <span className={`${prefix}--assistive-text`} id={tooltipId}>
         {tooltipText}
       </span>
