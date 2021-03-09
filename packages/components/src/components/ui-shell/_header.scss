@@ -82,6 +82,7 @@
   }
 
   .#{$prefix}--header__action > svg {
+    pointer-events: none;
     fill: $shell-header-icon-02;
   }
 
