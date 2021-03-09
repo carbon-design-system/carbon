@@ -21,8 +21,10 @@ const TooltipIcon = ({
   children,
   direction,
   align,
+  onBlur,
   onFocus,
   onMouseEnter,
+  onMouseLeave,
   tooltipText,
   ...rest
 }) => {
@@ -39,7 +41,11 @@ const TooltipIcon = ({
     }
   );
   const handleFocus = () => setAllowTooltipVisibility(true);
-  const handleMouseEnter = () => setAllowTooltipVisibility(true);
+  const handleMouseEnter = () => {
+    setAllowTooltipVisibility(true);
+  };
+  const handleBlur = () => setAllowTooltipVisibility(false);
+  const handleMouseLeave = () => setAllowTooltipVisibility(false);
   useEffect(() => {
     const handleEscKeyDown = (event) => {
       if (matches(event, [keys.Escape])) {
@@ -57,7 +63,9 @@ const TooltipIcon = ({
       className={tooltipTriggerClasses}
       aria-describedby={tooltipId}
       onMouseEnter={composeEventHandlers([onMouseEnter, handleMouseEnter])}
-      onFocus={composeEventHandlers([onFocus, handleFocus])}>
+      onMouseLeave={composeEventHandlers([onMouseLeave, handleMouseLeave])}
+      onFocus={composeEventHandlers([onFocus, handleFocus])}
+      onBlur={composeEventHandlers([onBlur, handleBlur])}>
       <span className={`${prefix}--assistive-text`} id={tooltipId}>
         {tooltipText}
       </span>
@@ -96,6 +104,11 @@ TooltipIcon.propTypes = {
   id: PropTypes.string,
 
   /**
+   * The event handler for the `blur` event.
+   */
+  onBlur: PropTypes.func,
+
+  /**
    * The event handler for the `focus` event.
    */
   onFocus: PropTypes.func,
@@ -104,6 +117,11 @@ TooltipIcon.propTypes = {
    * The event handler for the `mouseenter` event.
    */
   onMouseEnter: PropTypes.func,
+
+  /**
+   * The event handler for the `mouseleave` event.
+   */
+  onMouseLeave: PropTypes.func,
 
   /**
    * Provide the ARIA label for the tooltip.

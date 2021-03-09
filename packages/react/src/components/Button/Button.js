@@ -11,6 +11,8 @@ import classNames from 'classnames';
 import { settings } from 'carbon-components';
 import { ButtonKinds } from '../../prop-types/types';
 import deprecate from '../../prop-types/deprecate';
+import { composeEventHandlers } from '../../tools/events';
+import toggleClass from '../../tools/toggleClass';
 
 const { prefix } = settings;
 const Button = React.forwardRef(function Button(
@@ -31,6 +33,8 @@ const Button = React.forwardRef(function Button(
     hasIconOnly,
     tooltipPosition,
     tooltipAlignment,
+    onBlur,
+    onFocus,
     onMouseEnter,
     onMouseOut,
     ...other
@@ -39,21 +43,23 @@ const Button = React.forwardRef(function Button(
 ) {
   const [tooltipVisibile, setTooltipVisibility] = useState(false);
 
-  const handleMouseEnter = () => {
+  const iconButtonNodes = document?.querySelectorAll(
+    `.${prefix}--tooltip--a11y`
+  );
+
+  const handleMouseEnter = (evt) => {
+    [...iconButtonNodes].map((node) => {
+      toggleClass(
+        node,
+        `${prefix}--tooltip--hidden`,
+        node !== evt.currentTarget
+      );
+    });
+
     setTooltipVisibility(true);
-
-    if (onMouseEnter !== undefined) {
-      onMouseEnter();
-    }
   };
 
-  const handleMouseOut = () => {
-    setTooltipVisibility(false);
-
-    if (onMouseOut !== undefined) {
-      onMouseOut();
-    }
-  };
+  const handleMouseOut = () => setTooltipVisibility(false);
 
   const buttonClasses = classNames(className, {
     [`${prefix}--btn`]: true,
@@ -112,10 +118,10 @@ const Button = React.forwardRef(function Button(
   return React.createElement(
     component,
     {
-      onMouseEnter: handleMouseEnter,
-      onFocus: handleMouseEnter,
-      onBlur: handleMouseOut,
-      onMouseOut: handleMouseOut,
+      onMouseEnter: composeEventHandlers([onMouseEnter, handleMouseEnter]),
+      onFocus: composeEventHandlers([onFocus, handleMouseEnter]),
+      onBlur: composeEventHandlers([onBlur, handleMouseOut]),
+      onMouseOut: composeEventHandlers([onMouseOut, handleMouseOut]),
       ...other,
       ...commonProps,
       ...otherProps,
@@ -185,6 +191,18 @@ Button.propTypes = {
    * Specify the kind of Button you want to create
    */
   kind: PropTypes.oneOf(ButtonKinds).isRequired,
+
+  /**
+   * Provide an optional function to be called when the button element
+   * loses focus
+   */
+  onBlur: PropTypes.func,
+
+  /**
+   * Provide an optional function to be called when the button element
+   * receives focus
+   */
+  onFocus: PropTypes.func,
 
   /**
    * Provide an optional function to be called when the mouse

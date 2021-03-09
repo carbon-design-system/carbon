@@ -54,6 +54,7 @@ export default {
 export const Default = () => (
   <div style={{ marginTop: '2rem' }}>
     <TooltipDefinition {...props()}>Definition Tooltip</TooltipDefinition>
+    <TooltipDefinition {...props()}>Definition Tooltip</TooltipDefinition>
   </div>
 );
 

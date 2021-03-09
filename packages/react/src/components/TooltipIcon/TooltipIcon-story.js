@@ -43,9 +43,14 @@ export default {
 };
 
 export const Default = () => (
-  <TooltipIcon {...props()}>
-    <Filter16 />
-  </TooltipIcon>
+  <>
+    <TooltipIcon {...props()}>
+      <Filter16 />
+    </TooltipIcon>
+    <TooltipIcon {...props()}>
+      <Filter16 />
+    </TooltipIcon>
+  </>
 );
 
 Default.storyName = 'default';
