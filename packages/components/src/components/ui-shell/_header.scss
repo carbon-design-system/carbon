@@ -77,6 +77,10 @@
     background-color: $shell-header-bg-03;
   }
 
+  .#{$prefix}--header__action.#{$prefix}--btn--icon-only.#{$prefix}--tooltip__trigger {
+    justify-content: center;
+  }
+
   .#{$prefix}--header__action > svg {
     fill: $shell-header-icon-02;
   }
