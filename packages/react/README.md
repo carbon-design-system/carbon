@@ -1,7 +1,7 @@
 # carbon-components-react
 
 > A collection of
-> [Carbon Components](https://github.com/carbon-design-system/carbon/tree/master/packages/components)
+> [Carbon Components](https://github.com/carbon-design-system/carbon/tree/main/packages/components)
 > built with [React](https://reactjs.org/).
 
 If you're new to React.js or Carbon, check out our
@@ -25,9 +25,9 @@ yarn add carbon-components carbon-components-react carbon-icons
 ```
 
 If you want to try out `carbon-components-react`, you can also use
-[CodeSandbox](https://codesandbox.io/s/github/carbon-design-system/carbon/tree/master/packages/react/examples/codesandbox).
+[CodeSandbox](https://codesandbox.io/s/github/carbon-design-system/carbon/tree/main/packages/react/examples/codesandbox).
 
-[![Edit carbon-components-react](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/github/carbon-design-system/carbon/tree/master/packages/react/examples/codesandbox)
+[![Edit carbon-components-react](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/github/carbon-design-system/carbon/tree/main/packages/react/examples/codesandbox)
 
 ## Usage
 
