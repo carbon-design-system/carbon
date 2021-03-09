@@ -209,7 +209,26 @@ const MultiSelect = React.forwardRef(function MultiSelect(
       setMenuBounds(buttonRef.current.getBoundingClientRect());
     }
   }, [isOpen]);
-  const menuProps = getMenuProps();
+  const detachMenuWrapper = (menuEl) =>
+    !detachMenu ? (
+      menuEl
+    ) : (
+      <FloatingMenu
+        target={() => document.body}
+        triggerRef={buttonRef}
+        menuDirection={direction == 'top' ? DIRECTION_TOP : DIRECTION_BOTTOM}
+        menuRef={() => {}}
+        menuOffset={() => {}}
+        styles={{ width: menuBounds.width }}>
+        <div
+          className={className}
+          role="presentation"
+          {...getMenuProps()}
+          onKeyDown={() => {}}>
+          {menuEl}
+        </div>
+      </FloatingMenu>
+    );
 
   return (
     <div className={wrapperClasses}>
@@ -244,7 +263,6 @@ const MultiSelect = React.forwardRef(function MultiSelect(
           disabled={disabled}
           aria-disabled={disabled}
           {...toggleButtonProps}
-          onKeyDown={menuProps.onKeyDown}
           ref={mergeRefs(toggleButtonProps.ref, ref, buttonRef)}>
           {selectedItems.length > 0 && (
             <ListBox.Selection
@@ -259,63 +277,42 @@ const MultiSelect = React.forwardRef(function MultiSelect(
           </span>
           <ListBox.MenuIcon isOpen={isOpen} translateWithId={translateWithId} />
         </button>
-        {(() => {
-          const menuEl = (
-            <ListBox.Menu aria-multiselectable="true" {...getMenuProps()}>
-              {isOpen &&
-                sortItems(items, sortOptions).map((item, index) => {
-                  const itemProps = getItemProps({
-                    item,
-                    // we don't want Downshift to set aria-selected for us
-                    // we also don't want to set 'false' for reader verbosity's sake
-                    ['aria-selected']: isChecked ? true : null,
-                  });
-                  const itemText = itemToString(item);
-                  const isChecked =
-                    selectedItems.filter((selected) => isEqual(selected, item))
-                      .length > 0;
-                  return (
-                    <ListBox.MenuItem
-                      key={itemProps.id}
-                      isActive={isChecked}
-                      aria-label={itemText}
-                      isHighlighted={highlightedIndex === index}
-                      title={itemText}
-                      {...itemProps}>
-                      <div className={`${prefix}--checkbox-wrapper`}>
-                        <span
-                          title={useTitleInItem ? itemText : null}
-                          className={`${prefix}--checkbox-label`}
-                          data-contained-checkbox-state={isChecked}
-                          id={`${itemProps.id}__checkbox`}>
-                          {itemText}
-                        </span>
-                      </div>
-                    </ListBox.MenuItem>
-                  );
-                })}
-            </ListBox.Menu>
-          );
-
-          if (!detachMenu) {
-            return menuEl;
-          } else {
-            return (
-              <FloatingMenu
-                target={() => document.body}
-                triggerRef={buttonRef}
-                menuDirection={
-                  direction == 'top' ? DIRECTION_TOP : DIRECTION_BOTTOM
-                }
-                menuRef={() => {}}
-                menuOffset={() => {}}
-                styles={{ width: menuBounds.width }}
-                {...menuProps}>
-                {menuEl}
-              </FloatingMenu>
-            );
-          }
-        })()}
+        {detachMenuWrapper(
+          <ListBox.Menu aria-multiselectable="true" {...getMenuProps()}>
+            {isOpen &&
+              sortItems(items, sortOptions).map((item, index) => {
+                const itemProps = getItemProps({
+                  item,
+                  // we don't want Downshift to set aria-selected for us
+                  // we also don't want to set 'false' for reader verbosity's sake
+                  ['aria-selected']: isChecked ? true : null,
+                });
+                const itemText = itemToString(item);
+                const isChecked =
+                  selectedItems.filter((selected) => isEqual(selected, item))
+                    .length > 0;
+                return (
+                  <ListBox.MenuItem
+                    key={itemProps.id}
+                    isActive={isChecked}
+                    aria-label={itemText}
+                    isHighlighted={highlightedIndex === index}
+                    title={itemText}
+                    {...itemProps}>
+                    <div className={`${prefix}--checkbox-wrapper`}>
+                      <span
+                        title={useTitleInItem ? itemText : null}
+                        className={`${prefix}--checkbox-label`}
+                        data-contained-checkbox-state={isChecked}
+                        id={`${itemProps.id}__checkbox`}>
+                        {itemText}
+                      </span>
+                    </div>
+                  </ListBox.MenuItem>
+                );
+              })}
+          </ListBox.Menu>
+        )}
       </ListBox>
       {!inline && !invalid && !warn && helperText && (
         <div id={helperId} className={helperClasses}>

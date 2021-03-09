@@ -144,7 +144,22 @@ const Dropdown = React.forwardRef(function Dropdown(
       setMenuBounds(buttonRef.current.getBoundingClientRect());
     }
   }, [isOpen]);
-  const menuProps = getMenuProps();
+  const detachMenuWrapper = (menuEl) =>
+    !detachMenu ? (
+      menuEl
+    ) : (
+      <FloatingMenu
+        target={() => document.body}
+        triggerRef={buttonRef}
+        menuDirection={direction == 'top' ? DIRECTION_TOP : DIRECTION_BOTTOM}
+        menuRef={() => {}}
+        menuOffset={() => {}}
+        styles={{ width: menuBounds.width }}>
+        <div role="presentation" {...getMenuProps()} onKeyDown={() => {}}>
+          {menuEl}
+        </div>
+      </FloatingMenu>
+    );
 
   return (
     <div className={wrapperClasses} {...other}>
@@ -178,65 +193,43 @@ const Dropdown = React.forwardRef(function Dropdown(
           disabled={disabled}
           aria-disabled={disabled}
           {...toggleButtonProps}
-          onKeyDown={menuProps.onKeyDown}
           ref={mergeRefs(toggleButtonProps.ref, ref, buttonRef)}>
           <span className={`${prefix}--list-box__label`}>
             {selectedItem ? itemToString(selectedItem) : label}
           </span>
           <ListBox.MenuIcon isOpen={isOpen} translateWithId={translateWithId} />
         </button>
-        {(() => {
-          const menuEl = (
-            <ListBox.Menu
-              onMouseDown={(e) => e.stopPropagation()}
-              {...menuProps}>
-              {isOpen &&
-                items.map((item, index) => {
-                  const itemProps = getItemProps({ item, index });
-                  return (
-                    <ListBox.MenuItem
-                      key={itemProps.id}
-                      isActive={selectedItem === item}
-                      isHighlighted={
-                        highlightedIndex === index || selectedItem === item
-                      }
-                      title={itemToElement ? item.text : itemToString(item)}
-                      {...itemProps}>
-                      {itemToElement ? (
-                        <ItemToElement key={itemProps.id} {...item} />
-                      ) : (
-                        itemToString(item)
-                      )}
-                      {selectedItem === item && (
-                        <Checkmark16
-                          className={`${prefix}--list-box__menu-item__selected-icon`}
-                        />
-                      )}
-                    </ListBox.MenuItem>
-                  );
-                })}
-            </ListBox.Menu>
-          );
-
-          if (!detachMenu) {
-            return menuEl;
-          } else {
-            return (
-              <FloatingMenu
-                target={() => document.body}
-                triggerRef={buttonRef}
-                menuDirection={
-                  direction == 'top' ? DIRECTION_TOP : DIRECTION_BOTTOM
-                }
-                menuRef={() => {}}
-                menuOffset={() => {}}
-                styles={{ width: menuBounds.width }}
-                {...menuProps}>
-                {menuEl}
-              </FloatingMenu>
-            );
-          }
-        })()}
+        {detachMenuWrapper(
+          <ListBox.Menu
+            onMouseDown={(e) => e.stopPropagation()}
+            {...getMenuProps()}>
+            {isOpen &&
+              items.map((item, index) => {
+                const itemProps = getItemProps({ item, index });
+                return (
+                  <ListBox.MenuItem
+                    key={itemProps.id}
+                    isActive={selectedItem === item}
+                    isHighlighted={
+                      highlightedIndex === index || selectedItem === item
+                    }
+                    title={itemToElement ? item.text : itemToString(item)}
+                    {...itemProps}>
+                    {itemToElement ? (
+                      <ItemToElement key={itemProps.id} {...item} />
+                    ) : (
+                      itemToString(item)
+                    )}
+                    {selectedItem === item && (
+                      <Checkmark16
+                        className={`${prefix}--list-box__menu-item__selected-icon`}
+                      />
+                    )}
+                  </ListBox.MenuItem>
+                );
+              })}
+          </ListBox.Menu>
+        )}
       </ListBox>
       {!inline && !invalid && !warn && helper}
     </div>
