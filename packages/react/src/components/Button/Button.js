@@ -6,7 +6,7 @@
  */
 
 import PropTypes from 'prop-types';
-import React from 'react';
+import React, { useState } from 'react';
 import classNames from 'classnames';
 import { settings } from 'carbon-components';
 import { ButtonKinds } from '../../prop-types/types';
@@ -31,11 +31,30 @@ const Button = React.forwardRef(function Button(
     hasIconOnly,
     tooltipPosition,
     tooltipAlignment,
+    onMouseEnter,
     onMouseOut,
     ...other
   },
   ref
 ) {
+  const [tooltipVisibile, setTooltipVisibility] = useState(false);
+
+  const handleMouseEnter = () => {
+    setTooltipVisibility(true);
+
+    if (onMouseEnter !== undefined) {
+      onMouseEnter();
+    }
+  };
+
+  const handleMouseOut = () => {
+    setTooltipVisibility(false);
+
+    if (onMouseOut !== undefined) {
+      onMouseOut();
+    }
+  };
+
   const buttonClasses = classNames(className, {
     [`${prefix}--btn`]: true,
     [`${prefix}--btn--field`]: size === 'field',
@@ -44,6 +63,7 @@ const Button = React.forwardRef(function Button(
     [`${prefix}--btn--xl`]: size === 'xl',
     [`${prefix}--btn--${kind}`]: kind,
     [`${prefix}--btn--disabled`]: disabled,
+    [`${prefix}--tooltip--hidden`]: hasIconOnly && !tooltipVisibile,
     [`${prefix}--btn--icon-only`]: hasIconOnly,
     [`${prefix}--btn--selected`]: hasIconOnly && isSelected && kind === 'ghost',
     [`${prefix}--tooltip__trigger`]: hasIconOnly,
@@ -57,14 +77,6 @@ const Button = React.forwardRef(function Button(
     tabIndex,
     className: buttonClasses,
     ref,
-  };
-
-  const handleMouseOut = (evt) => {
-    evt.currentTarget.blur();
-
-    if (onMouseOut !== undefined) {
-      onMouseOut();
-    }
   };
 
   const buttonImage = !ButtonImageElement ? null : (
@@ -100,6 +112,9 @@ const Button = React.forwardRef(function Button(
   return React.createElement(
     component,
     {
+      onMouseEnter: handleMouseEnter,
+      onFocus: handleMouseEnter,
+      onBlur: handleMouseOut,
       onMouseOut: handleMouseOut,
       ...other,
       ...commonProps,
@@ -170,6 +185,12 @@ Button.propTypes = {
    * Specify the kind of Button you want to create
    */
   kind: PropTypes.oneOf(ButtonKinds).isRequired,
+
+  /**
+   * Provide an optional function to be called when the mouse
+   * enters the button element
+   */
+  onMouseEnter: PropTypes.func,
 
   /**
    * Provide an optional function to be called when the mouse

@@ -199,7 +199,10 @@ export const Playground = () => {
 };
 
 export const IconButton = () => (
-  <Button renderIcon={Add16} iconDescription="Icon Description" hasIconOnly />
+  <>
+    <Button renderIcon={Add16} iconDescription="Icon Description" hasIconOnly />
+    <Button renderIcon={Add16} iconDescription="Icon Description" hasIconOnly />
+  </>
 );
 
 IconButton.story = {
