@@ -116,8 +116,9 @@
   }
 
   .#{$prefix}--side-nav__overlay {
-    position: absolute;
+    position: fixed;
     top: rem(48px);
+    left: 0;
     width: 0;
     height: 0;
     background-color: transparent;
@@ -128,7 +129,7 @@
 
   .#{$prefix}--side-nav__overlay-active {
     @include carbon--breakpoint-down('lg') {
-      width: 100%;
+      width: 100vw;
       height: 100vh;
       background-color: $overlay-01;
       opacity: 1;

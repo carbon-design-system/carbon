@@ -9,7 +9,6 @@ exports[`SideNav should render 1`] = `
   isChildOfHeader={true}
   isFixedNav={false}
   isPersistent={true}
-  translateById={[Function]}
 >
   <div
     className="bx--side-nav__overlay"

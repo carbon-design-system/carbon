@@ -36,6 +36,7 @@
     min-height: rem(24px);
     margin: $carbon--spacing-02;
     padding: $carbon--spacing-02 $carbon--spacing-03;
+    vertical-align: middle;
     word-break: break-word;
     border-radius: rem(15px);
     cursor: default;
@@ -130,7 +131,8 @@
   }
 
   .#{$prefix}--tag--disabled,
-  .#{$prefix}--tag--filter.#{$prefix}--tag--disabled {
+  .#{$prefix}--tag--filter.#{$prefix}--tag--disabled,
+  .#{$prefix}--tag--interactive.#{$prefix}--tag--disabled {
     @include tag-theme($disabled-01, $disabled-02);
 
     &:hover {
@@ -145,6 +147,15 @@
     text-overflow: ellipsis;
   }
 
+  .#{$prefix}--tag--interactive:focus {
+    outline: none;
+    box-shadow: inset 0 0 0 1px $focus;
+  }
+
+  .#{$prefix}--tag--interactive:hover {
+    cursor: pointer;
+  }
+
   // tags used for filtering
   .#{$prefix}--tag--filter {
     padding-top: 0;
@@ -155,6 +166,10 @@
     &:hover {
       outline: none;
     }
+  }
+
+  .#{$prefix}--tag--interactive {
+    transition: background-color $duration--fast-01 motion(entrance, productive);
   }
 
   .#{$prefix}--tag__close-icon {
