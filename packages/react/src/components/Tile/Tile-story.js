@@ -47,6 +47,7 @@ const props = {
     handleClick: action('handleClick'),
     handleKeyDown: action('handleKeyDown'),
     light: boolean('Light variant (light)', false),
+    disabled: boolean('Disabled (disabled)', false),
   }),
   group: () => ({
     name: text('Form item (name in <TileGroup>)', 'tile-group'),

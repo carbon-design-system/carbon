@@ -5728,6 +5728,9 @@ Map {
       "className": Object {
         "type": "string",
       },
+      "disabled": Object {
+        "type": "bool",
+      },
       "handleClick": Object {
         "type": "func",
       },
