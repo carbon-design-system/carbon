@@ -14,6 +14,23 @@ import { syncSymbol } from '../../tools/symbols';
 
 const metadata = require('../../../generated/icons/metadata.json');
 
+/**
+ * Returns the formatted icon symbol name, given an icon object and a size value
+ * @param {object} params - getSymbolName parameters
+ * @param {object} params.icon - an icon object from the icon metadata
+ * @param {number} params.size
+ * @returns {string} - formatted icon symbol name:
+ * `[icon.subcategory] / [icon.subcategory] / <name> / <size>`
+ */
+function getSymbolName({ icon, size }) {
+  const symbolName = `${icon.name} / ${size}`;
+  if (icon.category && icon.subcategory) {
+    return `${icon.category} / ${icon.subcategory} / ${symbolName}`;
+  }
+
+  return symbolName;
+}
+
 export function syncIconSymbols({
   document,
   symbols,
@@ -114,12 +131,7 @@ function createSVGArtboards(
           },
         };
 
-        let symbolName = `${icon.name} / ${size}`;
-
-        if (icon.category && icon.subcategory) {
-          symbolName = `${icon.category} / ${icon.subcategory} / ${symbolName}`;
-        }
-
+        const symbolName = getSymbolName({ icon, size });
         const artboard = new Artboard({
           name: symbolName,
           frame: new Rectangle(X_OFFSET, Y_OFFSET, size, size),
