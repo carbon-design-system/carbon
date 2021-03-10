@@ -87,7 +87,7 @@ function getInitialPageOffset(page) {
 
 /**
  * Create the SVG artboards for a given set of icons and sizes and place them in
- * the given page with the given shared style set as th e fill.
+ * the given page with the given shared style set as the fill.
  * @param {Page} page
  * @param {SharedStyle} sharedStyle
  * @param {Array} icons
