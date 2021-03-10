@@ -31,6 +31,32 @@ function getSymbolName({ icon, size }) {
   return symbolName;
 }
 
+/**
+ * Remove deprecated icon symbols from the current Sketch document
+ * @param {object} params - removeDeprecatedSymbolArtboards parameters
+ * @param {Array<object>} params.icons - array of all icon object metadata
+ * @param {Array<number>} params.sizes - array of icon sizes
+ * @param {Page} params.symbolsPage - the symbols page as identified by Sketch
+ */
+function removeDeprecatedSymbolArtboards({ icons, sizes, symbolsPage }) {
+  const deprecatedIcons = icons.reduce((deprecatedIconsMap, currentIcon) => {
+    if (currentIcon.deprecated) {
+      sizes.forEach((size) => {
+        const symbolName = getSymbolName({ icon: currentIcon, size });
+        deprecatedIconsMap.set(symbolName, currentIcon);
+      });
+    }
+
+    return deprecatedIconsMap;
+  }, new Map());
+
+  symbolsPage.layers.forEach((symbol) => {
+    if (deprecatedIcons.get(symbol.name)) {
+      symbol.remove();
+    }
+  });
+}
+
 export function syncIconSymbols({
   document,
   symbols,
@@ -47,6 +73,12 @@ export function syncIconSymbols({
       'Unexpected error occurred, expected shared style but found none'
     );
   }
+
+  removeDeprecatedSymbolArtboards({
+    icons: metadata.icons,
+    sizes,
+    symbolsPage,
+  });
 
   const artboards = createSVGArtboards(
     symbolsPage,
