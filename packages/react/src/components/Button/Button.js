@@ -44,9 +44,8 @@ const Button = React.forwardRef(function Button(
 ) {
   const [allowTooltipVisibility, setAllowTooltipVisibility] = useState(true);
 
-  const tooltipNode = document?.querySelectorAll(`.${prefix}--tooltip--a11y`);
-
   const handleMouseEnter = (evt) => {
+    const tooltipNode = document?.querySelectorAll(`.${prefix}--tooltip--a11y`);
     [...tooltipNode].map((node) => {
       toggleClass(
         node,

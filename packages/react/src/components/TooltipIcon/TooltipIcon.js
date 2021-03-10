@@ -42,9 +42,8 @@ const TooltipIcon = ({
     }
   );
 
-  const tooltipNode = document?.querySelectorAll(`.${prefix}--tooltip--a11y`);
-
   const handleMouseEnter = (evt) => {
+    const tooltipNode = document?.querySelectorAll(`.${prefix}--tooltip--a11y`);
     [...tooltipNode].map((node) => {
       toggleClass(
         node,
