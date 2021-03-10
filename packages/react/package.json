@@ -80,7 +80,7 @@
     "@rollup/plugin-node-resolve": "^11.1.0",
     "@rollup/plugin-replace": "^2.3.4",
     "@storybook/addon-storysource": "^5.3.19",
-    "@storybook/addons": "^5.3.19",
+    "@storybook/addons": "^6.1.21",
     "@storybook/react": "^5.3.19",
     "@storybook/source-loader": "^5.3.19",
     "@storybook/theming": "^6.1.18",
