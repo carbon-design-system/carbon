@@ -5859,6 +5859,9 @@ Map {
       "defaultChecked": Object {
         "type": "bool",
       },
+      "disabled": Object {
+        "type": "bool",
+      },
       "iconDescription": [Function],
       "id": Object {
         "type": "string",
