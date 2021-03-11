@@ -44,6 +44,7 @@ const Button = React.forwardRef(function Button(
 ) {
   const [allowTooltipVisibility, setAllowTooltipVisibility] = useState(true);
   const [isHovered, setIsHovered] = useState(false);
+  const [isFocused, setIsFocused] = useState(false);
   const tooltipRef = useRef(null);
   const tooltipTimeout = useRef(null);
 
@@ -61,11 +62,13 @@ const Button = React.forwardRef(function Button(
   const handleFocus = (evt) => {
     closeTooltips(evt);
     setIsHovered(!isHovered);
+    setIsFocused(true);
     setAllowTooltipVisibility(true);
   };
 
   const handleBlur = () => {
     setIsHovered(false);
+    setIsFocused(false);
     setAllowTooltipVisibility(false);
   };
 
@@ -84,10 +87,12 @@ const Button = React.forwardRef(function Button(
   };
 
   const handleMouseLeave = () => {
-    tooltipTimeout.current = setTimeout(() => {
-      setAllowTooltipVisibility(false);
-      setIsHovered(false);
-    }, 100);
+    if (!isFocused) {
+      tooltipTimeout.current = setTimeout(() => {
+        setAllowTooltipVisibility(false);
+        setIsHovered(false);
+      }, 100);
+    }
   };
 
   useEffect(() => {
