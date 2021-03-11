@@ -49,6 +49,8 @@ const props = {
       false
     ),
     onClick: action('onClick'),
+    hasDivider: boolean('Has divider (hasDivider)', false),
+    isDelete: boolean('Is delete (isDelete)', false),
   }),
 };
 
@@ -105,6 +107,12 @@ export const Playground = () => (
       {...props.menuItem()}
       requireTitle
       itemText="Danger option"
+      isDelete
+    />
+    <OverflowMenuItem
+      {...props.menuItem()}
+      requireTitle
+      itemText="Danger with divider"
       hasDivider
       isDelete
     />
