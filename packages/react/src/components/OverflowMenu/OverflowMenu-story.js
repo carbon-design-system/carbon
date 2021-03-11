@@ -107,12 +107,6 @@ export const Playground = () => (
       {...props.menuItem()}
       requireTitle
       itemText="Danger option"
-      isDelete
-    />
-    <OverflowMenuItem
-      {...props.menuItem()}
-      requireTitle
-      itemText="Danger with divider"
       hasDivider
       isDelete
     />
