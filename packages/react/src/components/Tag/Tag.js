@@ -47,6 +47,7 @@ const Tag = ({
     [`${prefix}--tag--filter`]: filter,
     [`${prefix}--tag--${size}`]: size,
     [`${prefix}--tag--${type}`]: type,
+    [`${prefix}--tag--interactive`]: other.onClick && !filter,
   });
   const handleClose = (event) => {
     if (onClose) {
@@ -55,33 +56,39 @@ const Tag = ({
     }
   };
 
-  return filter ? (
-    <div
-      className={tagClasses}
-      aria-label={
-        title !== undefined
-          ? `${title} ${children}`
-          : `Clear filter ${children}`
-      }
-      id={tagId}
-      {...other}>
-      <span
-        className={`${prefix}--tag__label`}
-        title={typeof children === 'string' ? children : null}>
-        {children !== null && children !== undefined ? children : TYPES[type]}
-      </span>
-      <button
-        type="button"
-        className={`${prefix}--tag__close-icon`}
-        onClick={handleClose}
-        disabled={disabled}
-        aria-labelledby={tagId}
-        title={title}>
-        <Close16 />
-      </button>
-    </div>
-  ) : (
-    <div className={tagClasses} id={tagId} {...other}>
+  if (filter) {
+    return (
+      <div
+        className={tagClasses}
+        aria-label={
+          title !== undefined
+            ? `${title} ${children}`
+            : `Clear filter ${children}`
+        }
+        id={tagId}
+        {...other}>
+        <span
+          className={`${prefix}--tag__label`}
+          title={typeof children === 'string' ? children : null}>
+          {children !== null && children !== undefined ? children : TYPES[type]}
+        </span>
+        <button
+          type="button"
+          className={`${prefix}--tag__close-icon`}
+          onClick={handleClose}
+          disabled={disabled}
+          aria-labelledby={tagId}
+          title={title}>
+          <Close16 />
+        </button>
+      </div>
+    );
+  }
+
+  const ComponentTag = other.onClick ? 'button' : 'div';
+
+  return (
+    <ComponentTag className={tagClasses} id={tagId} {...other}>
       {CustomIconElement ? (
         <div className={`${prefix}--tag__custom-icon`}>
           <CustomIconElement />
@@ -92,7 +99,7 @@ const Tag = ({
       <span title={typeof children === 'string' ? children : null}>
         {children !== null && children !== undefined ? children : TYPES[type]}
       </span>
-    </div>
+    </ComponentTag>
   );
 };
 

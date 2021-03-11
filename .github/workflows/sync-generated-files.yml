@@ -2,7 +2,7 @@ name: Sync generated files
 on:
   push:
     branches:
-      - master
+      - main
 jobs:
   release:
     runs-on: macOS-latest
@@ -31,7 +31,7 @@ jobs:
             git config --global user.name "carbon-bot"
 
             git remote set-url origin "https://x-access-token:$GITHUB_TOKEN@github.com/carbon-design-system/carbon.git"
-            git checkout master
+            git checkout main
             git add -A
             git commit -m "chore(project): sync generated files"
             git push
