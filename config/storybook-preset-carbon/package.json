@@ -22,7 +22,7 @@
     "clean": "rimraf ./dist"
   },
   "peerDependencies": {
-    "@storybook/react": "^5.3.19",
+    "@storybook/react": "^6.1.21",
     "react": "^16.8.6 || ^17.0.1",
     "react-dom": "^16.8.6 || ^17.0.1"
   },
@@ -41,7 +41,7 @@
     "storybook-readme": "^5.0.8"
   },
   "devDependencies": {
-    "@storybook/react": "^5.3.19",
+    "@storybook/react": "^6.1.21",
     "babel-loader": "^8.2.2",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
