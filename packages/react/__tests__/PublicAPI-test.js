@@ -35,7 +35,7 @@ const { isValidElementType } = require('react-is');
  *    below.
  *
  * For full details on our versioning policy, check out our versioning guide:
- * https://github.com/carbon-design-system/carbon/blob/master/docs/guides/versioning.md
+ * https://github.com/carbon-design-system/carbon/blob/main/docs/guides/versioning.md
  */
 
 beforeEach(() => {
