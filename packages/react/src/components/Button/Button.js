@@ -6,7 +6,7 @@
  */
 
 import PropTypes from 'prop-types';
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import classNames from 'classnames';
 import { settings } from 'carbon-components';
 import { ButtonKinds } from '../../prop-types/types';
@@ -37,14 +37,17 @@ const Button = React.forwardRef(function Button(
     onBlur,
     onFocus,
     onMouseEnter,
-    onMouseOut,
+    onMouseLeave,
     ...other
   },
   ref
 ) {
   const [allowTooltipVisibility, setAllowTooltipVisibility] = useState(true);
+  const [isHovered, setIsHovered] = useState(false);
+  const tooltipRef = useRef(null);
+  const tooltipTimeout = useRef(null);
 
-  const handleMouseEnter = (evt) => {
+  const closeTooltips = (evt) => {
     const tooltipNode = document?.querySelectorAll(`.${prefix}--tooltip--a11y`);
     [...tooltipNode].map((node) => {
       toggleClass(
@@ -53,16 +56,45 @@ const Button = React.forwardRef(function Button(
         node !== evt.currentTarget
       );
     });
+  };
+
+  const handleFocus = (evt) => {
+    closeTooltips(evt);
+    setIsHovered(!isHovered);
+    setAllowTooltipVisibility(true);
+  };
+
+  const handleBlur = () => {
+    setIsHovered(false);
+    setAllowTooltipVisibility(false);
+  };
+
+  const handleMouseEnter = (evt) => {
+    setIsHovered(true);
+    tooltipTimeout.current && clearTimeout(tooltipTimeout.current);
+
+    if (evt.target === tooltipRef.current) {
+      setAllowTooltipVisibility(true);
+      return;
+    }
+
+    closeTooltips(evt);
 
     setAllowTooltipVisibility(true);
   };
 
-  const handleMouseOut = () => setAllowTooltipVisibility(false);
+  const handleMouseLeave = () => {
+    tooltipTimeout.current = setTimeout(() => {
+      setAllowTooltipVisibility(false);
+      setIsHovered(false);
+    }, 100);
+  };
 
   useEffect(() => {
     const handleEscKeyDown = (event) => {
       if (matches(event, [keys.Escape])) {
         setAllowTooltipVisibility(false);
+        setIsHovered(false);
       }
     };
     document.addEventListener('keydown', handleEscKeyDown);
@@ -78,6 +110,7 @@ const Button = React.forwardRef(function Button(
     [`${prefix}--btn--${kind}`]: kind,
     [`${prefix}--btn--disabled`]: disabled,
     [`${prefix}--tooltip--hidden`]: hasIconOnly && !allowTooltipVisibility,
+    [`${prefix}--tooltip--visible`]: isHovered,
     [`${prefix}--btn--icon-only`]: hasIconOnly,
     [`${prefix}--btn--selected`]: hasIconOnly && isSelected && kind === 'ghost',
     [`${prefix}--tooltip__trigger`]: hasIconOnly,
@@ -111,7 +144,12 @@ const Button = React.forwardRef(function Button(
     href,
   };
   const assistiveText = hasIconOnly ? (
-    <span className={`${prefix}--assistive-text`}>{iconDescription}</span>
+    <div
+      ref={tooltipRef}
+      onMouseEnter={handleMouseEnter}
+      className={`${prefix}--assistive-text`}>
+      {iconDescription}
+    </div>
   ) : null;
   if (as) {
     component = as;
@@ -127,9 +165,9 @@ const Button = React.forwardRef(function Button(
     component,
     {
       onMouseEnter: composeEventHandlers([onMouseEnter, handleMouseEnter]),
-      onFocus: composeEventHandlers([onFocus, handleMouseEnter]),
-      onBlur: composeEventHandlers([onBlur, handleMouseOut]),
-      onMouseOut: composeEventHandlers([onMouseOut, handleMouseOut]),
+      onMouseLeave: composeEventHandlers([onMouseLeave, handleMouseLeave]),
+      onFocus: composeEventHandlers([onFocus, handleFocus]),
+      onBlur: composeEventHandlers([onBlur, handleBlur]),
       ...other,
       ...commonProps,
       ...otherProps,
@@ -222,7 +260,7 @@ Button.propTypes = {
    * Provide an optional function to be called when the mouse
    * leaves the button element
    */
-  onMouseOut: PropTypes.func,
+  onMouseLeave: PropTypes.func,
 
   /**
    * Optional prop to allow overriding the icon rendering.
