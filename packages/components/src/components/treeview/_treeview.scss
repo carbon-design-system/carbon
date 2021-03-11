@@ -62,8 +62,13 @@
       min-height: rem(32px);
 
       &:hover {
+        color: $text-01;
         background-color: $hover-ui;
       }
+    }
+
+    .#{$prefix}--tree-node__label:hover .#{$prefix}--tree-node__label__details {
+      color: $text-01;
     }
 
     .#{$prefix}--tree-leaf-node {
