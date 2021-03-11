@@ -101,7 +101,7 @@
     .#{$prefix}--tree-parent-node__toggle-icon {
       transform: rotate(-90deg);
       transition: all $duration--fast-02 motion(standard, productive);
-      fill: $icon-01;
+      fill: $icon-02;
     }
 
     .#{$prefix}--tree-parent-node__toggle-icon--expanded {
@@ -110,7 +110,7 @@
 
     .#{$prefix}--tree-node__icon {
       margin-right: $spacing-03;
-      fill: $icon-01;
+      fill: $icon-02;
     }
 
     .#{$prefix}--tree-node--selected > .#{$prefix}--tree-node__label {
