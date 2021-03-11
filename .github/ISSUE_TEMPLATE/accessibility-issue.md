@@ -42,9 +42,9 @@ assignees: ''
 > Please create a reduced test case in CodeSandbox
 >
 > - Style and vanilla JS:
->   https://codesandbox.io/s/github/carbon-design-system/carbon/tree/master/packages/components/examples/codesandbox
+>   https://codesandbox.io/s/github/carbon-design-system/carbon/tree/main/packages/components/examples/codesandbox
 > - React:
->   https://codesandbox.io/s/github/carbon-design-system/carbon/tree/master/packages/react/examples/codesandbox
+>   https://codesandbox.io/s/github/carbon-design-system/carbon/tree/main/packages/react/examples/codesandbox
 
 ## Additional information
 
