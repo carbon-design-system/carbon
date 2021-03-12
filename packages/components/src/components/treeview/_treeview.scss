@@ -71,6 +71,12 @@
       color: $text-01;
     }
 
+    .#{$prefix}--tree-node__label:hover
+      .#{$prefix}--tree-parent-node__toggle-icon,
+    .#{$prefix}--tree-node__label:hover .#{$prefix}--tree-node__icon {
+      fill: $icon-01;
+    }
+
     .#{$prefix}--tree-leaf-node {
       display: flex;
       padding-left: $spacing-08;
@@ -125,6 +131,11 @@
       &:hover {
         background-color: $hover-selected-ui;
       }
+    }
+
+    .#{$prefix}--tree-node--selected .#{$prefix}--tree-parent-node__toggle-icon,
+    .#{$prefix}--tree-node--selected .#{$prefix}--tree-node__icon {
+      fill: $icon-01;
     }
 
     .#{$prefix}--tree-node--active > .#{$prefix}--tree-node__label {
