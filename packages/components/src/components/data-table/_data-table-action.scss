@@ -544,6 +544,10 @@
       padding: $spacing-03;
     }
 
+    .#{$prefix}--toolbar-action.#{$prefix}--toolbar-search-container-persistent {
+      width: 100%;
+    }
+
     //hidden
     .#{$prefix}--toolbar-search-container-expandable {
       width: rem(32px);
