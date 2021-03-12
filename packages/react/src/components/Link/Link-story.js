@@ -9,7 +9,7 @@
 
 import React from 'react';
 import { action } from '@storybook/addon-actions';
-import { withKnobs, text, boolean } from '@storybook/addon-knobs';
+import { withKnobs, text, boolean, select } from '@storybook/addon-knobs';
 import Link from '../Link';
 import mdx from './Link.mdx';
 
@@ -23,10 +23,15 @@ const props = () => ({
     handler(evt);
   })(action('onClick')),
   disabled: boolean('Disabled', false),
+  size: select('Link size', {
+    Default: undefined,
+    'Small (sm)': 'sm',
+    'Large (lg)': 'lg',
+  }),
 });
 
 export default {
-  title: 'Link',
+  title: 'Components/Link',
   decorators: [withKnobs],
 
   parameters: {
@@ -37,13 +42,12 @@ export default {
   },
 };
 
-export const Default = () => <Link {...props()}>Link</Link>;
+export const _Default = () => (
+  <Link href="http://www.carbondesignsystem.com">Link</Link>
+);
 
-Default.parameters = {
-  info: {
-    text: `
-            Links are typically used as a means of navigation either within the application, to a place outside, or to a resource.
-            For anything else, especially things that change data, you should be using a button.
-          `,
-  },
+_Default.story = {
+  name: 'Link',
 };
+
+export const Playground = () => <Link {...props()}>Link</Link>;

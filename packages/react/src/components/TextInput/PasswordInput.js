@@ -11,6 +11,7 @@ const PasswordInput = React.forwardRef(function PasswordInput(
   {
     labelText,
     className,
+    disabled,
     id,
     placeholder,
     onChange,
@@ -46,12 +47,12 @@ const PasswordInput = React.forwardRef(function PasswordInput(
   const sharedTextInputProps = {
     id,
     onChange: (evt) => {
-      if (!other.disabled) {
+      if (!disabled) {
         onChange(evt);
       }
     },
     onClick: (evt) => {
-      if (!other.disabled) {
+      if (!disabled) {
         onClick(evt);
       }
     },
@@ -63,10 +64,10 @@ const PasswordInput = React.forwardRef(function PasswordInput(
   };
   const labelClasses = classNames(`${prefix}--label`, {
     [`${prefix}--visually-hidden`]: hideLabel,
-    [`${prefix}--label--disabled`]: other.disabled,
+    [`${prefix}--label--disabled`]: disabled,
   });
   const helperTextClasses = classNames(`${prefix}--form__helper-text`, {
-    [`${prefix}--form__helper-text--disabled`]: other.disabled,
+    [`${prefix}--form__helper-text--disabled`]: disabled,
   });
   const label = labelText ? (
     <label htmlFor={id} className={labelClasses}>
@@ -86,10 +87,12 @@ const PasswordInput = React.forwardRef(function PasswordInput(
   );
   const passwordVisibilityToggleClasses = classNames(
     `${prefix}--text-input--password__visibility__toggle`,
+    `${prefix}--btn`,
     `${prefix}--btn--icon-only`,
     `${prefix}--tooltip__trigger`,
     `${prefix}--tooltip--a11y`,
     {
+      [`${prefix}--btn--disabled`]: disabled,
       [`${prefix}--tooltip--${tooltipPosition}`]: tooltipPosition,
       [`${prefix}--tooltip--align-${tooltipAlignment}`]: tooltipAlignment,
     }
@@ -98,15 +101,19 @@ const PasswordInput = React.forwardRef(function PasswordInput(
     <>
       <input
         {...textInputProps({ invalid, sharedTextInputProps, errorId })}
+        disabled={disabled}
         data-toggle-password-visibility={inputType === 'password'}
       />
       <button
         type="button"
         className={passwordVisibilityToggleClasses}
+        disabled={disabled}
         onClick={togglePasswordVisibility}>
-        <span className={`${prefix}--assistive-text`}>
-          {passwordIsVisible ? hidePasswordLabel : showPasswordLabel}
-        </span>
+        {!disabled && (
+          <span className={`${prefix}--assistive-text`}>
+            {passwordIsVisible ? hidePasswordLabel : showPasswordLabel}
+          </span>
+        )}
         {passwordVisibilityIcon}
       </button>
     </>
@@ -177,7 +184,7 @@ PasswordInput.propTypes = {
   /**
    * Provide the text that is displayed when the control is in an invalid state
    */
-  invalidText: PropTypes.string,
+  invalidText: PropTypes.node,
 
   /**
    * Provide the text that will be read by a screen reader when visiting this

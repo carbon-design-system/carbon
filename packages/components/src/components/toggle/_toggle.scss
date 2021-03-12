@@ -292,6 +292,13 @@
         background-color $duration--fast-01 motion(exit, productive);
       content: '';
       will-change: box-shadow;
+
+      // Windows, Firefox HCM Fix
+      @media screen and (-ms-high-contrast: active),
+        screen and (prefers-contrast) {
+        // `ButtonText` is a CSS2 system color to help improve colors in HCM
+        border: 1px solid ButtonText;
+      }
     }
 
     // Toggle circle
@@ -307,6 +314,13 @@
       border-radius: 50%;
       transition: transform $duration--fast-01 motion(exit, productive);
       content: '';
+
+      // Windows, Firefox HCM Fix
+      @media screen and (-ms-high-contrast: active),
+        screen and (prefers-contrast) {
+        // `ButtonText` is a CSS2 system color to help improve colors in HCM
+        border: 3px solid ButtonText;
+      }
     }
 
     .#{$prefix}--toggle-input__label & {
@@ -364,6 +378,13 @@
     + .#{$prefix}--toggle-input__label
     > .#{$prefix}--toggle__switch::before {
     box-shadow: 0 0 0 1px $ui-02, 0 0 0 3px $focus;
+
+    // Windows, Firefox HCM Fix
+    @media screen and (-ms-high-contrast: active),
+      screen and (prefers-contrast) {
+      // `ButtonText` is a CSS2 system color to help improve colors in HCM
+      outline: 1px solid ButtonText;
+    }
   }
 
   //----------------------------------------------
@@ -398,6 +419,21 @@
     + .#{$prefix}--toggle-input__label
     > .#{$prefix}--toggle__switch::before {
     box-shadow: none;
+  }
+
+  // disabled toggle in data table #7351
+  .#{$prefix}--data-table
+    .#{$prefix}--toggle-input:disabled
+    + .#{$prefix}--toggle-input__label
+    > .#{$prefix}--toggle__switch::before {
+    background-color: $disabled-02;
+  }
+
+  .#{$prefix}--data-table
+    .#{$prefix}--toggle-input:disabled
+    + .#{$prefix}--toggle-input__label
+    > .#{$prefix}--toggle__switch::after {
+    background-color: $disabled-03;
   }
 
   //----------------------------------------------
@@ -440,7 +476,7 @@
   .#{$prefix}--toggle-input--small:disabled:checked
     + .#{$prefix}--toggle-input__label
     .#{$prefix}--toggle__check {
-    fill: $disabled-02;
+    fill: $disabled-01;
   }
 
   //----------------------------------------------

@@ -37,7 +37,7 @@ import DataTable, {
 import { batchActionClick, rows, headers } from '../shared';
 
 export default {
-  title: 'DataTable/Development',
+  title: 'Components/DataTable/Development',
 };
 
 export const Example = (props) => {
@@ -148,9 +148,7 @@ export const Example = (props) => {
                 <TableToolbarContent>
                   <TableToolbarSearch onChange={onInputChange} />
                   <TableToolbarMenu>
-                    <TableToolbarAction
-                      primaryFocus
-                      onClick={this.handleOnRowAdd}>
+                    <TableToolbarAction onClick={this.handleOnRowAdd}>
                       Add row
                     </TableToolbarAction>
                     <TableToolbarAction onClick={this.handleOnHeaderAdd}>

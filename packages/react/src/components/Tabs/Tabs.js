@@ -12,6 +12,7 @@ import { settings } from 'carbon-components';
 import { ChevronLeft16, ChevronRight16 } from '@carbon/icons-react';
 import debounce from 'lodash.debounce';
 import { keys, match, matches } from '../../internal/keyboard';
+import TabContent from '../TabContent';
 
 const { prefix } = settings;
 
@@ -24,7 +25,7 @@ export default class Tabs extends React.Component {
     children: PropTypes.node,
 
     /**
-     * Provide a className that is applied to the root <nav> component for the
+     * Provide a className that is applied to the root <div> component for the
      * <Tabs>
      */
     className: PropTypes.string,
@@ -33,6 +34,11 @@ export default class Tabs extends React.Component {
      * Specify whether the Tab content is hidden
      */
     hidden: PropTypes.bool,
+
+    /**
+     * Provide the props that describe the left overflow button
+     */
+    leftOverflowButtonProps: PropTypes.object,
 
     /**
      * Specify whether or not to use the light component variant
@@ -59,10 +65,15 @@ export default class Tabs extends React.Component {
     onSelectionChange: PropTypes.func,
 
     /**
-     * By default, this value is "navigation". You can also provide an alternate
-     * role if it makes sense from the accessibility-side
+     * Provide the props that describe the right overflow button
      */
-    role: PropTypes.string.isRequired,
+    rightOverflowButtonProps: PropTypes.object,
+
+    /**
+     * Choose whether or not to automatically scroll to newly selected tabs
+     * on component rerender
+     */
+    scrollIntoView: PropTypes.bool,
 
     /**
      * Optionally provide an index for the currently selected <Tab>
@@ -86,8 +97,8 @@ export default class Tabs extends React.Component {
   };
 
   static defaultProps = {
-    role: 'navigation',
     type: 'default',
+    scrollIntoView: true,
     selected: 0,
     selectionMode: 'automatic',
   };
@@ -152,6 +163,30 @@ export default class Tabs extends React.Component {
 
     this._handleWindowResize();
     window.addEventListener('resize', this._debouncedHandleWindowResize);
+
+    // scroll selected tab into view on mount
+    const {
+      clientWidth: tablistClientWidth,
+      scrollLeft: tablistScrollLeft,
+      scrollWidth: tablistScrollWidth,
+    } = this.tablist?.current || {};
+    const tab = this.getTabAt(this.state.selected);
+    const horizontalOverflow = tablistScrollWidth > tablistClientWidth;
+
+    if (horizontalOverflow) {
+      const leftOverflowNavButtonHidden =
+        tab?.tabAnchor?.getBoundingClientRect().right <
+        tab?.tabAnchor?.offsetParent.getBoundingClientRect().right;
+      const rightOverflowNavButtonHidden =
+        tablistScrollLeft + tablistClientWidth === tablistScrollWidth;
+      this.props.scrollIntoView &&
+        tab?.tabAnchor?.scrollIntoView({ block: 'nearest', inline: 'nearest' });
+
+      // account for overflow buttons in scroll position on mount
+      if (!leftOverflowNavButtonHidden && !rightOverflowNavButtonHidden) {
+        this.tablist.current.scrollLeft += this.OVERFLOW_BUTTON_OFFSET * 2;
+      }
+    }
   }
 
   componentWillUnmount() {
@@ -161,7 +196,7 @@ export default class Tabs extends React.Component {
     window.removeEventListener('resize', this._debouncedHandleWindowResize);
   }
 
-  componentDidUpdate() {
+  componentDidUpdate(_, prevState) {
     // compare current tablist properties to current state
     const {
       clientWidth: tablistClientWidth,
@@ -172,7 +207,9 @@ export default class Tabs extends React.Component {
       tablistClientWidth: currentStateClientWidth,
       tablistScrollLeft: currentStateScrollLeft,
       tablistScrollWidth: currentStateScrollWidth,
+      selected,
     } = this.state;
+
     if (
       tablistClientWidth !== currentStateClientWidth ||
       tablistScrollLeft !== currentStateScrollLeft ||
@@ -183,6 +220,13 @@ export default class Tabs extends React.Component {
         tablistClientWidth,
         tablistScrollLeft,
         tablistScrollWidth,
+      });
+    }
+
+    if (this.props.scrollIntoView && prevState.selected !== selected) {
+      this.getTabAt(selected)?.tabAnchor?.scrollIntoView({
+        block: 'nearest',
+        inline: 'nearest',
       });
     }
   }
@@ -229,7 +273,8 @@ export default class Tabs extends React.Component {
       event.type === 'click'
     ) {
       const currentScrollLeft = this.state.tablistScrollLeft;
-      tab?.tabAnchor?.scrollIntoView({ inline: 'nearest' });
+      tab?.tabAnchor?.scrollIntoView({ block: 'nearest', inline: 'nearest' });
+      tab?.tabAnchor?.focus();
       const newScrollLeft = this.tablist.current.scrollLeft;
       if (newScrollLeft > currentScrollLeft) {
         this.tablist.current.scrollLeft += this.OVERFLOW_BUTTON_OFFSET;
@@ -254,9 +299,23 @@ export default class Tabs extends React.Component {
       if (matches(evt, [keys.Enter, keys.Space])) {
         this.selectTabAt(evt, { index, onSelectionChange });
       }
-      const nextIndex = this.getNextIndex(index, this.getDirection(evt));
+
+      const nextIndex = (() => {
+        if (matches(evt, [keys.ArrowLeft, keys.ArrowRight])) {
+          return this.getNextIndex(index, this.getDirection(evt));
+        }
+        if (match(evt, keys.Home)) {
+          return 0;
+        }
+        if (match(evt, keys.End)) {
+          return this.getEnabledTabs().pop();
+        }
+      })();
       const tab = this.getTabAt(nextIndex);
-      if (matches(evt, [keys.ArrowLeft, keys.ArrowRight])) {
+
+      if (
+        matches(evt, [keys.ArrowLeft, keys.ArrowRight, keys.Home, keys.End])
+      ) {
         evt.preventDefault();
         if (this.props.selectionMode !== 'manual') {
           this.selectTabAt(evt, { index: nextIndex, onSelectionChange });
@@ -282,7 +341,7 @@ export default class Tabs extends React.Component {
 
   overflowNavInterval = null;
 
-  handleOverflowNavClick = (_, { direction, multiplier = 15 }) => {
+  handleOverflowNavClick = (_, { direction, multiplier = 10 }) => {
     // account for overflow button appearing and causing tablist width change
     const { clientWidth, scrollLeft, scrollWidth } = this.tablist?.current;
     if (direction === 1 && !scrollLeft) {
@@ -306,7 +365,11 @@ export default class Tabs extends React.Component {
     }
   };
 
-  handleOverflowNavMouseDown = (_, { direction }) => {
+  handleOverflowNavMouseDown = (event, { direction }) => {
+    // disregard mouse buttons aside from LMB
+    if (event.buttons !== 1) {
+      return;
+    }
     this.overflowNavInterval = setInterval(() => {
       const { clientWidth, scrollLeft, scrollWidth } = this.tablist?.current;
 
@@ -321,7 +384,7 @@ export default class Tabs extends React.Component {
       }
 
       // account for overflow button appearing and causing tablist width change
-      this.handleOverflowNavClick(_, { direction });
+      this.handleOverflowNavClick(event, { direction });
     });
   };
 
@@ -332,12 +395,14 @@ export default class Tabs extends React.Component {
   render() {
     const {
       className,
-      role,
       type,
       light,
       onSelectionChange,
+      scrollIntoView, // eslint-disable-line no-unused-vars
       selectionMode, // eslint-disable-line no-unused-vars
       tabContentClassName,
+      leftOverflowButtonProps,
+      rightOverflowButtonProps,
       ...other
     } = this.props;
 
@@ -374,19 +439,18 @@ export default class Tabs extends React.Component {
         id: tabId,
         children,
         selected,
-        renderContent: TabContent,
+        renderContent: Content = TabContent,
       } = tab.props;
 
       return (
-        <TabContent
+        <Content
           id={tabId && `${tabId}__panel`}
           className={tabContentClassName}
-          aria-hidden={!selected}
           hidden={!selected}
           selected={selected}
           aria-labelledby={tabId}>
           {children}
-        </TabContent>
+        </Content>
       );
     });
 
@@ -397,11 +461,23 @@ export default class Tabs extends React.Component {
       this.state.tablistScrollLeft + this.state.tablistClientWidth ===
         this.state.tablistScrollWidth;
     const classes = {
-      tabs: classNames(`${prefix}--tabs`, className, {
-        [`${prefix}--tabs--container`]: type === 'container',
-        [`${prefix}--tabs--light`]: light,
-      }),
-      tablist: classNames(`${prefix}--tabs__nav`),
+      // TODO: remove scrollable from classnames in next major release and uncomment classnames that don't contain scrollable
+      tabs: classNames(
+        className,
+        // `${prefix}--tabs`,
+        `${prefix}--tabs--scrollable`,
+        {
+          // [`${prefix}--tabs--container`]: type === 'container',
+          [`${prefix}--tabs--scrollable--container`]: type === 'container',
+          // [`${prefix}--tabs--light`]: light,
+          [`${prefix}--tabs--scrollable--light`]: light,
+        }
+      ),
+      // TODO: remove scrollable from classnames in next major release and uncomment classnames that don't contain scrollable
+      tablist: classNames(
+        // `${prefix}--tabs__nav`,
+        `${prefix}--tabs--scrollable__nav`
+      ),
       leftOverflowButtonClasses: classNames({
         [`${prefix}--tab--overflow-nav-button`]: this.state.horizontalOverflow,
         [`${prefix}--tab--overflow-nav-button--hidden`]: leftOverflowNavButtonHidden,
@@ -414,40 +490,48 @@ export default class Tabs extends React.Component {
 
     return (
       <>
-        <div
-          {...other}
-          className={classes.tabs}
-          role={role}
-          onScroll={this.handleScroll}>
+        <div {...other} className={classes.tabs} onScroll={this.handleScroll}>
           <button
-            type="button"
+            aria-hidden="true"
+            aria-label="Scroll left"
             className={classes.leftOverflowButtonClasses}
             onClick={(_) => this.handleOverflowNavClick(_, { direction: -1 })}
-            onMouseDown={(_) =>
-              this.handleOverflowNavMouseDown(_, { direction: -1 })
+            onMouseDown={(event) =>
+              this.handleOverflowNavMouseDown(event, { direction: -1 })
             }
             onMouseUp={this.handleOverflowNavMouseUp}
-            ref={this.leftOverflowNavButton}>
+            ref={this.leftOverflowNavButton}
+            tabIndex="-1"
+            type="button"
+            {...leftOverflowButtonProps}>
             <ChevronLeft16 />
           </button>
           {!leftOverflowNavButtonHidden && (
             <div className={`${prefix}--tabs__overflow-indicator--left`} />
           )}
-          <ul role="tablist" className={classes.tablist} ref={this.tablist}>
+          <ul
+            role="tablist"
+            tabIndex={-1}
+            className={classes.tablist}
+            ref={this.tablist}>
             {tabsWithProps}
           </ul>
           {!rightOverflowNavButtonHidden && (
             <div className={`${prefix}--tabs__overflow-indicator--right`} />
           )}
           <button
-            type="button"
+            aria-hidden="true"
+            aria-label="Scroll right"
             className={classes.rightOverflowButtonClasses}
             onClick={(_) => this.handleOverflowNavClick(_, { direction: 1 })}
-            onMouseDown={(_) =>
-              this.handleOverflowNavMouseDown(_, { direction: 1 })
+            onMouseDown={(event) =>
+              this.handleOverflowNavMouseDown(event, { direction: 1 })
             }
             onMouseUp={this.handleOverflowNavMouseUp}
-            ref={this.rightOverflowNavButton}>
+            ref={this.rightOverflowNavButton}
+            tabIndex="-1"
+            type="button"
+            {...rightOverflowButtonProps}>
             <ChevronRight16 />
           </button>
         </div>

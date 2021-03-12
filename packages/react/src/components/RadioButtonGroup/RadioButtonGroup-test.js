@@ -16,22 +16,30 @@ const { prefix } = settings;
 describe('RadioButtonGroup', () => {
   describe('renders as expected', () => {
     const wrapper = mount(
-      <RadioButtonGroup defaultSelected="female" name="gender">
+      <RadioButtonGroup
+        defaultSelected="female"
+        name="gender"
+        legendText="Radio legend">
         <RadioButton labelText="Male" value="male" />
         <RadioButton labelText="Female" value="female" />
       </RadioButtonGroup>
     );
 
-    describe('wrapping div', () => {
-      const div = wrapper.first('div');
+    describe('wrapping fieldset', () => {
+      const fieldset = wrapper.find('fieldset');
+      const legend = wrapper.find('legend');
 
-      it('renders a div', () => {
-        expect(div.length).toEqual(1);
+      it('renders a fieldset', () => {
+        expect(fieldset.length).toEqual(1);
+      });
+
+      it('renders a legend if legendText is provided', () => {
+        expect(legend.length).toEqual(1);
       });
 
       it('sets classes that are passed via className prop', () => {
         wrapper.setProps({ className: 'extra-class' });
-        expect(div.hasClass('extra-class'));
+        expect(fieldset.hasClass('extra-class'));
       });
 
       it('sets disabled attribute if disabled prop is set', () => {

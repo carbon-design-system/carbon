@@ -87,7 +87,9 @@ describe('Tooltip', () => {
             .find('[data-floating-menu-direction]')
             .first()
             .prop('className')
-        ).toBe(`${prefix}--tooltip ${prefix}--tooltip--shown tooltip--class`);
+        ).toBe(
+          `${prefix}--tooltip ${prefix}--tooltip--shown ${prefix}--tooltip--bottom ${prefix}--tooltip--align-center tooltip--class`
+        );
       });
       it('sets the trigger class', () => {
         expect(label.prop('className')).toBe(

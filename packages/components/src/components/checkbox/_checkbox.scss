@@ -53,8 +53,8 @@
     position: relative;
     display: flex;
     min-height: rem(24px);
+    padding-top: rem(3px);
     padding-left: rem(20px);
-    line-height: 1.5rem;
     cursor: pointer;
     user-select: none;
   }
@@ -85,11 +85,12 @@
     // different checkbox states.
     width: rem(16px);
     height: rem(16px);
-    margin: rem(2px);
+    // increase left margin for #6480
+    margin: rem(2px) rem(2px) rem(2px) rem(3px);
 
     // Checkboxes with a background color look visually off against a parent container.
     background-color: transparent;
-    border: 1px solid $ui-05;
+    border: 1px solid $icon-01;
     border-radius: 1px;
     content: '';
   }
@@ -101,12 +102,12 @@
     left: rem(7px);
     width: rem(9px);
     height: rem(5px);
-    margin-top: rem(-3px);
+    margin-top: rem(-3px) #{'/*rtl:0rem*/'};
     background: none;
     border-bottom: 2px solid $inverse-01;
     border-left: 2px solid $inverse-01;
     transform: scale(0) rotate(-45deg);
-    transform-origin: bottom right;
+    transform-origin: bottom right #{'/*rtl:center*/'};
     content: '';
   }
 
@@ -119,15 +120,15 @@
   .#{$prefix}--checkbox:indeterminate + .#{$prefix}--checkbox-label::before,
   .#{$prefix}--checkbox-label[data-contained-checkbox-state='true']::before,
   .#{$prefix}--checkbox-label[data-contained-checkbox-state='mixed']::before {
-    background-color: $ui-05;
-    border-color: $ui-05;
+    background-color: $icon-01;
+    border-color: $icon-01;
     border-width: 1px;
   }
 
   // Display the check
   .#{$prefix}--checkbox:checked + .#{$prefix}--checkbox-label::after,
   .#{$prefix}--checkbox-label[data-contained-checkbox-state='true']::after {
-    transform: scale(1) rotate(-45deg);
+    transform: scale(1) rotate(-45deg) #{'/*rtl:scale(1.2) rotate3d(.5, 1, 0, 158deg)*/'};
   }
 
   // Indeterminate symbol
@@ -153,8 +154,8 @@
   // Indeterminate
   .#{$prefix}--checkbox:indeterminate:focus + .#{$prefix}--checkbox-label::before,
   .#{$prefix}--checkbox-label[data-contained-checkbox-state='mixed'].#{$prefix}--checkbox-label__focus::before {
-    // Must use box-shadow for appearance of multiple borders with rounded corners.
-    box-shadow: 0 0 0 2px $inverse-01, 0 0 0 4px $focus;
+    outline: 2px solid $focus;
+    outline-offset: 1px;
   }
 
   //----------------------------------------------
@@ -191,7 +192,7 @@
     height: $spacing-05;
 
     // Add extra spacing when label is present
-    margin: auto 0 auto rem(6px);
+    margin: rem(1px) 0 0 rem(6px);
   }
 }
 

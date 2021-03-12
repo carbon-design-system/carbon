@@ -27,6 +27,7 @@ for various frameworks:
 - [Angular](https://github.com/carbon-design-system/carbon-icons-angular)
 - [React](../icons-react)
 - [Vue](../icons-vue)
+- [Svelte](https://github.com/IBM/carbon-icons-svelte)
 
 We also support using icons in Vanilla JavaScript.
 
@@ -99,13 +100,6 @@ in order to get this inner path to be visible on the page.
 You can view a full reference of our icons
 [here](https://carbon-elements.netlify.com/icons/examples/preview/) . This is
 useful for finding the path information in order to import an icon.
-
-## 📖 API Documentation
-
-If you're looking for `@carbon/icons` API documentation, check out:
-
-- [Contributing](./docs/contributing.md)
-- [Sass](./docs/sass.md)
 
 ## 🙌 Contributing
 

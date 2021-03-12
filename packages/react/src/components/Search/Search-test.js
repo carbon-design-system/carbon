@@ -59,7 +59,7 @@ describe('Search', () => {
 
       it('should set placeholder as expected', () => {
         expect(textInput.props().placeholder).toEqual('');
-        wrapper.setProps({ placeHolderText: 'Enter text' });
+        wrapper.setProps({ placeholder: 'Enter text' });
         expect(wrapper.find('input').props().placeholder).toEqual('Enter text');
       });
     });
@@ -149,7 +149,7 @@ describe('Search', () => {
       const small = mount(
         <Search
           id="test"
-          small
+          size="sm"
           className="extra-class"
           label="Search Field"
           labelText="testlabel"

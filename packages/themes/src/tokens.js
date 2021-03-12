@@ -37,6 +37,7 @@ const colors = [
   'icon03',
 
   'link01',
+  'link02',
 
   'inverseLink',
 
@@ -58,7 +59,8 @@ const colors = [
 
   'overlay01',
 
-  'danger',
+  'danger01',
+  'danger02',
 
   // Interactive states
   'focus',
@@ -75,11 +77,12 @@ const colors = [
   'activeTertiary',
 
   'hoverUI',
+  'hoverLightUI',
+  'hoverSelectedUI',
   'activeUI',
-
+  'activeLightUI',
   'selectedUI',
   'selectedLightUI',
-  'hoverSelectedUI',
   'inverseHoverUI',
 
   'hoverDanger',
@@ -97,8 +100,6 @@ const colors = [
 
   'decorative01',
 
-  'hoverLightUI',
-
   'buttonSeparator',
 
   'skeleton01',
@@ -110,6 +111,7 @@ const colors = [
   'brand03',
   'active01',
   'hoverField',
+  'danger',
 ];
 
 const numbers = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'];
@@ -172,6 +174,8 @@ export const unstable__meta = {
         'brand02',
         'brand03',
         'danger',
+        'danger01',
+        'danger02',
         'ui01',
         'ui02',
         'ui03',
@@ -184,6 +188,7 @@ export const unstable__meta = {
         'text05',
         'textError',
         'link01',
+        'link02',
         'icon01',
         'icon02',
         'icon03',
@@ -213,6 +218,7 @@ export const unstable__meta = {
         'hoverSecondary',
         'hoverTertiary',
         'hoverUI',
+        'hoverLightUI',
         'hoverSelectedUI',
         'hoverDanger',
         'hoverRow',
@@ -220,6 +226,7 @@ export const unstable__meta = {
         'activeSecondary',
         'activeTertiary',
         'activeUI',
+        'activeLightUI',
         'activeDanger',
         'selectedUI',
         'selectedLightUI',
@@ -234,10 +241,9 @@ export const unstable__meta = {
         'active01',
         'hoverField',
         'decorative01',
-        'hoverLightUI',
         'buttonSeparator',
       ],
     },
   ],
-  deprecated: ['brand01', 'brand02', 'brand03', 'active01'],
+  deprecated: ['brand01', 'brand02', 'brand03', 'active01', 'danger'],
 };

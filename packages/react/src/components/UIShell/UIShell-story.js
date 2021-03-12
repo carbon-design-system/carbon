@@ -11,7 +11,7 @@ import { Search20, Notification20, AppSwitcher20 } from '@carbon/icons-react';
 
 import { action } from '@storybook/addon-actions';
 
-import React from 'react';
+import React, { useState } from 'react';
 import { withReadme } from 'storybook-readme';
 import readme from './README.md';
 import HeaderContainer from './HeaderContainer';
@@ -33,6 +33,7 @@ import {
   // SideNavHeader,
   // SideNavDetails,
   // SideNavSwitcher,
+  SideNavDivider,
   SideNavItems,
   SideNavLink,
   SideNavMenu,
@@ -41,6 +42,9 @@ import {
   SwitcherItem,
   SwitcherDivider,
 } from '../UIShell';
+import Modal from '../Modal';
+import Button from '../Button';
+
 import mdx from './UIShell.mdx';
 
 SideNav.displayName = 'SideNav';
@@ -59,6 +63,7 @@ const Fade16 = () => (
 );
 
 const StoryContent = ({ useResponsiveOffset = true }) => {
+  const [open, setOpen] = useState(false);
   const classNameFirstColumn = cx({
     'bx--col-lg-13': true,
     'bx--offset-lg-3': useResponsiveOffset,
@@ -111,6 +116,20 @@ const StoryContent = ({ useResponsiveOffset = true }) => {
             on a page when using a side-nav, then the tabs are secondary in
             hierarchy to the side-nav.
           </p>
+          <Button onClick={() => setOpen(true)}>Launch modal</Button>
+          <Modal
+            modalHeading="Add a custom domain"
+            modalLabel="Account resources"
+            primaryButtonText="Add"
+            secondaryButtonText="Cancel"
+            open={open}
+            onRequestClose={() => setOpen(false)}>
+            <p style={{ marginBottom: '1rem' }}>
+              Custom domains direct requests for your apps in this Cloud Foundry
+              organization to a URL that you own. A custom domain can be a
+              shared domain, a shared subdomain, or a shared domain and host.
+            </p>
+          </Modal>
         </div>
       </div>
     </div>
@@ -130,7 +149,7 @@ const StoryContent = ({ useResponsiveOffset = true }) => {
 };
 
 export default {
-  title: 'UI Shell',
+  title: 'Components/UI Shell',
 
   parameters: {
     docs: {
@@ -151,6 +170,7 @@ export default {
       SkipToContent,
       SideNav,
       SideNavItems,
+      SideNavDivider,
       SideNavLink,
       SideNavMenu,
       SideNavMenuItem,
@@ -234,7 +254,8 @@ export const HeaderBaseWActions = withReadme(readme, () => (
       </HeaderGlobalAction>
       <HeaderGlobalAction
         aria-label="App Switcher"
-        onClick={action('app-switcher click')}>
+        onClick={action('app-switcher click')}
+        tooltipAlignment="end">
         <AppSwitcher20 />
       </HeaderGlobalAction>
     </HeaderGlobalBar>
@@ -263,7 +284,8 @@ export const HeaderBaseWSkipToContent = withReadme(readme, () => (
         </HeaderGlobalAction>
         <HeaderGlobalAction
           aria-label="App Switcher"
-          onClick={action('app-switcher click')}>
+          onClick={action('app-switcher click')}
+          tooltipAlignment="end">
           <AppSwitcher20 />
         </HeaderGlobalAction>
       </HeaderGlobalBar>
@@ -310,7 +332,8 @@ export const HeaderBaseWNavigationAndActions = withReadme(readme, () => (
           </HeaderGlobalAction>
           <HeaderGlobalAction
             aria-label="App Switcher"
-            onClick={action('app-switcher click')}>
+            onClick={action('app-switcher click')}
+            tooltipAlignment="end">
             <AppSwitcher20 />
           </HeaderGlobalAction>
         </HeaderGlobalBar>
@@ -376,7 +399,8 @@ export const HeaderBaseWNavigationActionsAndSideNav = withReadme(readme, () => (
             </HeaderGlobalAction>
             <HeaderGlobalAction
               aria-label="App Switcher"
-              onClick={action('app-switcher click')}>
+              onClick={action('app-switcher click')}
+              tooltipAlignment="end">
               <AppSwitcher20 />
             </HeaderGlobalAction>
           </HeaderGlobalBar>
@@ -532,7 +556,8 @@ export const HeaderBaseWActionsAndRightPanel = withReadme(readme, () => (
       </HeaderGlobalAction>
       <HeaderGlobalAction
         aria-label="App Switcher"
-        onClick={action('app-switcher click')}>
+        onClick={action('app-switcher click')}
+        tooltipAlignment="end">
         <AppSwitcher20 />
       </HeaderGlobalAction>
     </HeaderGlobalBar>
@@ -560,7 +585,8 @@ export const HeaderBaseWActionsAndSwitcher = withReadme(readme, () => (
       <HeaderGlobalAction
         aria-label="App Switcher"
         isActive
-        onClick={action('app-switcher click')}>
+        onClick={action('app-switcher click')}
+        tooltipAlignment="end">
         <AppSwitcher20 />
       </HeaderGlobalAction>
     </HeaderGlobalBar>
@@ -683,6 +709,58 @@ export const FixedSideNavWIcons = withReadme(readme, () => (
 
 FixedSideNavWIcons.storyName = 'Fixed SideNav w/ Icons';
 
+export const FixedSideNavWDivider = withReadme(readme, () => (
+  <>
+    <SideNav
+      isFixedNav
+      expanded={true}
+      isChildOfHeader={false}
+      aria-label="Side navigation">
+      <SideNavItems>
+        <SideNavMenu title="L0 menu">
+          <SideNavMenuItem href="javascript:void(0)">
+            L0 menu item
+          </SideNavMenuItem>
+          <SideNavMenuItem href="javascript:void(0)">
+            L0 menu item
+          </SideNavMenuItem>
+          <SideNavMenuItem href="javascript:void(0)">
+            L0 menu item
+          </SideNavMenuItem>
+        </SideNavMenu>
+        <SideNavMenu title="L0 menu" isActive={true}>
+          <SideNavMenuItem href="javascript:void(0)">
+            L0 menu item
+          </SideNavMenuItem>
+          <SideNavMenuItem aria-current="page" href="javascript:void(0)">
+            L0 menu item
+          </SideNavMenuItem>
+          <SideNavMenuItem href="javascript:void(0)">
+            L0 menu item
+          </SideNavMenuItem>
+        </SideNavMenu>
+        <SideNavMenu title="L0 menu">
+          <SideNavMenuItem href="javascript:void(0)">
+            L0 menu item
+          </SideNavMenuItem>
+          <SideNavMenuItem href="javascript:void(0)">
+            L0 menu item
+          </SideNavMenuItem>
+          <SideNavMenuItem href="javascript:void(0)">
+            L0 menu item
+          </SideNavMenuItem>
+        </SideNavMenu>
+        <SideNavDivider />
+        <SideNavLink href="javascript:void(0)">L0 link</SideNavLink>
+        <SideNavLink href="javascript:void(0)">L0 link</SideNavLink>
+      </SideNavItems>
+    </SideNav>
+    <StoryContent useResponsiveOffset={false} />
+  </>
+));
+
+FixedSideNavWDivider.storyName = 'Fixed SideNav w/ Divider';
+
 export const SideNavRail = withReadme(readme, () => (
   <>
     <SideNav aria-label="Side navigation" isRail>
@@ -756,7 +834,8 @@ export const SideNavRailWHeader = withReadme(readme, () => (
             </HeaderGlobalAction>
             <HeaderGlobalAction
               aria-label="App Switcher"
-              onClick={action('app-switcher click')}>
+              onClick={action('app-switcher click')}
+              tooltipAlignment="end">
               <AppSwitcher20 />
             </HeaderGlobalAction>
           </HeaderGlobalBar>

@@ -13,9 +13,13 @@ export const white0 = white;
 
 export const yellow = '#f1c21b';
 export const yellow30 = yellow;
+export const yellow40 = '#d2a106';
+export const yellow50 = '#b28600';
 
 export const orange = '#ff832b';
 export const orange40 = orange;
+export const orange60 = '#ba4e00';
+export const orange70 = '#8a3800';
 
 export const red10 = '#fff1f1';
 export const red20 = '#ffd7d9';
@@ -45,7 +49,7 @@ export const magenta20 = '#ffd6e8';
 export const magenta30 = '#ffafd2';
 export const magenta40 = '#ff7eb6';
 export const magenta50 = '#ee5396';
-export const magenta60 = '#d12771';
+export const magenta60 = '#d02670';
 export const magenta70 = '#9f1853';
 export const magenta80 = '#740937';
 export const magenta90 = '#510224';
@@ -229,7 +233,7 @@ export const warmGray20 = '#e5e0df';
 export const warmGray30 = '#cac5c4';
 export const warmGray40 = '#ada8a8';
 export const warmGray50 = '#8f8b8b';
-export const warmGray60 = '#736f6f';
+export const warmGray60 = '#726e6e';
 export const warmGray70 = '#565151';
 export const warmGray80 = '#3c3838';
 export const warmGray90 = '#272525';
@@ -262,6 +266,8 @@ export const colors = {
   magenta,
   orange: {
     40: orange40,
+    60: orange60,
+    70: orange70,
   },
   purple,
   red,
@@ -273,5 +279,7 @@ export const colors = {
   yellow: {
     20: yellow20,
     30: yellow30,
+    40: yellow40,
+    50: yellow50,
   },
 };

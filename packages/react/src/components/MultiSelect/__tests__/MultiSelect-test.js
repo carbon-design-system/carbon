@@ -7,7 +7,7 @@
 
 import { getByText, isElementVisible } from '@carbon/test-utils/dom';
 import { pressEnter, pressSpace, pressTab } from '@carbon/test-utils/keyboard';
-import { render, cleanup } from '@carbon/test-utils/react';
+import { cleanup, render } from '@testing-library/react';
 import React from 'react';
 import { act, Simulate } from 'react-dom/test-utils';
 import MultiSelect from '../';
@@ -25,12 +25,12 @@ describe('MultiSelect', () => {
       await expect(container).toHaveNoAxeViolations();
     });
 
-    it('should have no DAP violations', async () => {
+    it('should have no AC violations', async () => {
       const items = generateItems(4, generateGenericItem);
       const { container } = render(
         <MultiSelect id="test" label="Field" items={items} />
       );
-      await expect(container).toHaveNoDAPViolations();
+      await expect(container).toHaveNoACViolations('MultiSelect');
     });
   });
 
@@ -212,13 +212,15 @@ describe('MultiSelect', () => {
     Simulate.click(itemNode);
 
     expect(
-      document.querySelector('[aria-label="Clear Selection"]')
+      document.querySelector('[aria-label="Clear all selected items"]')
     ).toBeTruthy();
 
-    Simulate.click(document.querySelector('[aria-label="Clear Selection"]'));
+    Simulate.click(
+      document.querySelector('[aria-label="Clear all selected items"]')
+    );
 
     expect(
-      document.querySelector('[aria-label="Clear Selection"]')
+      document.querySelector('[aria-label="Clear all selected items"]')
     ).toBeFalsy();
   });
 
@@ -250,7 +252,7 @@ describe('MultiSelect', () => {
       );
 
       expect(
-        document.querySelector('[aria-label="Clear Selection"]')
+        document.querySelector('[aria-label="Clear all selected items"]')
       ).toBeTruthy();
 
       const labelNode = getByText(container, label);
@@ -399,6 +401,14 @@ describe('MultiSelect', () => {
 
       // the first option in the list to the the former third option in the list
       expect(optionsArray[0].title).toBe('Item 2');
+    });
+
+    it('should accept a `ref` for the underlying button element', () => {
+      const ref = React.createRef();
+      const items = generateItems(4, generateGenericItem);
+      const label = 'test-label';
+      render(<MultiSelect id="test" label={label} items={items} ref={ref} />);
+      expect(ref.current.getAttribute('aria-haspopup')).toBe('listbox');
     });
   });
 });

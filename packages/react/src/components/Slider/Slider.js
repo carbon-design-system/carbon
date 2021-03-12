@@ -399,11 +399,16 @@ export default class Slider extends PureComponent {
 
     let targetValue = Number.parseFloat(evt.target.value);
 
-    // Avoid calling calcValue for invaid numbers, but still update the state
+    // Avoid calling calcValue for invalid numbers, but still update the state
     if (isNaN(targetValue)) {
       this.setState({ value: evt.target.value });
     } else {
       // Recalculate the state's value and update the Slider
+      // if it is a valid number
+      if (evt.target.checkValidity() === false) {
+        return;
+      }
+
       const { value, left } = this.calcValue({
         value: targetValue,
         useRawValue: true,
@@ -505,6 +510,7 @@ export default class Slider extends PureComponent {
 
     const { value, left } = this.state;
 
+    const labelId = `${id}-label`;
     const labelClasses = classNames(`${prefix}--label`, {
       [`${prefix}--label--disabled`]: disabled,
     });
@@ -536,7 +542,7 @@ export default class Slider extends PureComponent {
 
     return (
       <div className={`${prefix}--form-item`}>
-        <label htmlFor={id} className={labelClasses}>
+        <label htmlFor={id} className={labelClasses} id={labelId}>
           {labelText}
         </label>
         <div className={`${prefix}--slider-container`}>
@@ -560,6 +566,7 @@ export default class Slider extends PureComponent {
               role="slider"
               id={id}
               tabIndex={0}
+              aria-labelledby={labelId}
               aria-valuemax={max}
               aria-valuemin={min}
               aria-valuenow={value}

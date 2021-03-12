@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { WarningFilled16 } from '@carbon/icons-react';
+import { WarningFilled16, WarningAltFilled16 } from '@carbon/icons-react';
 import { settings } from 'carbon-components';
 import cx from 'classnames';
 import Downshift, { useSelect } from 'downshift';
@@ -19,6 +19,7 @@ import { defaultSortItems, defaultCompareItems } from './tools/sorting';
 import { useSelection } from '../../internal/Selection';
 import setupGetInstanceId from '../../tools/setupGetInstanceId';
 import { mapDownshiftProps } from '../../tools/createPropAdapter';
+import mergeRefs from '../../tools/mergeRefs';
 
 const { prefix } = settings;
 const noop = () => {};
@@ -52,12 +53,15 @@ const MultiSelect = React.forwardRef(function MultiSelect(
     light,
     invalid,
     invalidText,
+    warn,
+    warnText,
     useTitleInItem,
     translateWithId,
     downshiftProps,
     open,
     selectionFeedback,
     onChange,
+    onMenuChange,
     direction,
   },
   ref
@@ -88,7 +92,9 @@ const MultiSelect = React.forwardRef(function MultiSelect(
       ...downshiftProps,
       highlightedIndex,
       isOpen,
-      itemToString,
+      itemToString: (items) => {
+        return items.map((item) => itemToString(item)).join(', ');
+      },
       onStateChange,
       selectedItem: controlledSelectedItems,
       items,
@@ -96,14 +102,26 @@ const MultiSelect = React.forwardRef(function MultiSelect(
   );
 
   /**
+   * wrapper function to forward changes to consumer
+   */
+  const setIsOpenWrapper = (open) => {
+    setIsOpen(open);
+    if (onMenuChange) {
+      onMenuChange(open);
+    }
+  };
+
+  /**
    * programmatically control this `open` prop
    */
   if (prevOpenProp !== open) {
-    setIsOpen(open);
+    setIsOpenWrapper(open);
     setPrevOpenProp(open);
   }
 
   const inline = type === 'inline';
+  const showWarning = !invalid && warn;
+
   const wrapperClasses = cx(
     `${prefix}--multi-select__wrapper`,
     `${prefix}--list-box__wrapper`,
@@ -127,6 +145,7 @@ const MultiSelect = React.forwardRef(function MultiSelect(
 
   const className = cx(`${prefix}--multi-select`, containerClassName, {
     [`${prefix}--multi-select--invalid`]: invalid,
+    [`${prefix}--multi-select--warning`]: showWarning,
     [`${prefix}--multi-select--inline`]: inline,
     [`${prefix}--multi-select--selected`]:
       selectedItems && selectedItems.length > 0,
@@ -164,15 +183,17 @@ const MultiSelect = React.forwardRef(function MultiSelect(
         break;
       case MenuBlur:
       case MenuKeyDownEscape:
-        setIsOpen(false);
+        setIsOpenWrapper(false);
         setHighlightedIndex(changes.highlightedIndex);
         break;
       case ToggleButtonClick:
-        setIsOpen(changes.isOpen || false);
+        setIsOpenWrapper(changes.isOpen || false);
         setHighlightedIndex(changes.highlightedIndex);
         break;
     }
   }
+
+  const toggleButtonProps = getToggleButtonProps();
 
   return (
     <div className={wrapperClasses}>
@@ -189,18 +210,25 @@ const MultiSelect = React.forwardRef(function MultiSelect(
         light={light}
         invalid={invalid}
         invalidText={invalidText}
+        warn={warn}
+        warnText={warnText}
         isOpen={isOpen}
         id={id}>
         {invalid && (
           <WarningFilled16 className={`${prefix}--list-box__invalid-icon`} />
         )}
+        {showWarning && (
+          <WarningAltFilled16
+            className={`${prefix}--list-box__invalid-icon ${prefix}--list-box__invalid-icon--warning`}
+          />
+        )}
         <button
           type="button"
-          ref={ref}
           className={`${prefix}--list-box__field`}
           disabled={disabled}
           aria-disabled={disabled}
-          {...getToggleButtonProps()}>
+          {...toggleButtonProps}
+          ref={mergeRefs(toggleButtonProps.ref, ref)}>
           {selectedItems.length > 0 && (
             <ListBox.Selection
               clearSelection={!disabled ? clearSelection : noop}
@@ -219,6 +247,9 @@ const MultiSelect = React.forwardRef(function MultiSelect(
             sortItems(items, sortOptions).map((item, index) => {
               const itemProps = getItemProps({
                 item,
+                // we don't want Downshift to set aria-selected for us
+                // we also don't want to set 'false' for reader verbosity's sake
+                ['aria-selected']: isChecked ? true : null,
               });
               const itemText = itemToString(item);
               const isChecked =
@@ -228,6 +259,7 @@ const MultiSelect = React.forwardRef(function MultiSelect(
                 <ListBox.MenuItem
                   key={itemProps.id}
                   isActive={isChecked}
+                  aria-label={itemText}
                   isHighlighted={highlightedIndex === index}
                   title={itemText}
                   {...itemProps}>
@@ -245,7 +277,7 @@ const MultiSelect = React.forwardRef(function MultiSelect(
             })}
         </ListBox.Menu>
       </ListBox>
-      {!inline && !invalid && helperText && (
+      {!inline && !invalid && !warn && helperText && (
         <div id={helperId} className={helperClasses}>
           {helperText}
         </div>
@@ -292,7 +324,7 @@ MultiSelect.propTypes = {
   /**
    * If invalid, what is the error?
    */
-  invalidText: PropTypes.string,
+  invalidText: PropTypes.node,
 
   /**
    * Helper function passed to downshift that allows the library to render a
@@ -331,6 +363,12 @@ MultiSelect.propTypes = {
   onChange: PropTypes.func,
 
   /**
+   * `onMenuChange` is a utility for this controlled component to communicate to a
+   * consuming component that the menu was opend(`true`)/closed(`false`).
+   */
+  onMenuChange: PropTypes.func,
+
+  /**
    * Initialize the component with an open(`true`)/closed(`false`) menu.
    */
   open: PropTypes.bool,
@@ -352,7 +390,7 @@ MultiSelect.propTypes = {
    * Provide text to be used in a `<label>` element that is tied to the
    * multiselect via ARIA attributes.
    */
-  titleText: PropTypes.string,
+  titleText: PropTypes.node,
 
   /**
    * Callback function for translating ListBoxMenuIcon SVG title
@@ -368,6 +406,16 @@ MultiSelect.propTypes = {
    * Specify title to show title on hover
    */
   useTitleInItem: PropTypes.bool,
+
+  /**
+   * Specify whether the control is currently in warning state
+   */
+  warn: PropTypes.bool,
+
+  /**
+   * Provide the text that is displayed when the control is in warning state
+   */
+  warnText: PropTypes.node,
 };
 
 MultiSelect.defaultProps = {

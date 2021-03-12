@@ -30,7 +30,10 @@
   border-radius: $button-border-radius;
   outline: none;
   cursor: pointer;
-  transition: all $duration--fast-01 motion(entrance, productive);
+  transition: background $duration--fast-01 motion(entrance, productive),
+    box-shadow $duration--fast-01 motion(entrance, productive),
+    border-color $duration--fast-01 motion(entrance, productive),
+    outline $duration--fast-01 motion(entrance, productive);
 
   &:disabled,
   &:hover:disabled,
@@ -78,18 +81,14 @@
   &:focus {
     border-color: $focus;
     box-shadow: inset 0 0 0 $button-outline-width $focus,
-      inset 0 0 0 $button-border-width $ui-02;
-  }
+      inset 0 0 0 $button-border-width $ui-background;
 
-  &:disabled:hover,
-  &:disabled:focus,
-  &:hover.#{$prefix}--btn--disabled,
-  &:focus.#{$prefix}--btn--disabled {
-    color: $ui-04;
-    text-decoration: none;
-    background-color: $disabled-02;
-    border-color: $disabled-02;
-    box-shadow: none;
+    // Windows, Firefox HCM Fix
+    @media screen and (-ms-high-contrast: active),
+      screen and (prefers-contrast) {
+      outline: 3px solid transparent;
+      outline-offset: -3px;
+    }
   }
 
   &:active {
@@ -97,7 +96,14 @@
   }
 
   .#{$prefix}--btn__icon,
-  .#{$prefix}--btn__icon path {
+  .#{$prefix}--btn__icon path:not([data-icon-path]) {
     fill: $icon-color;
   }
+}
+
+@mixin button-padding-large {
+  align-items: baseline;
+  padding-top: $spacing-05;
+  padding-right: $layout-05;
+  padding-left: $spacing-05;
 }

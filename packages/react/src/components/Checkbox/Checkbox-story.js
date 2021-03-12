@@ -6,6 +6,7 @@
  */
 
 import React from 'react';
+import classNames from 'classnames';
 import { action } from '@storybook/addon-actions';
 import { withKnobs, boolean, text } from '@storybook/addon-knobs';
 import Checkbox from '../Checkbox';
@@ -16,7 +17,7 @@ import mdx from './Checkbox.mdx';
 const { prefix } = settings;
 
 export default {
-  title: 'Checkbox',
+  title: 'Components/Checkbox',
   component: Checkbox,
   subcomponents: {
     CheckboxSkeleton,
@@ -39,16 +40,7 @@ export const checkbox = () => {
   );
 };
 
-export const skeleton = () => (
-  <div
-    aria-label="loading checkbox"
-    aria-live="assertive"
-    role="status"
-    tabIndex="0" // eslint-disable-line jsx-a11y/no-noninteractive-tabindex
-  >
-    <CheckboxSkeleton />
-  </div>
-);
+export const skeleton = () => <CheckboxSkeleton />;
 
 const props = () => ({
   checked: boolean('Checked (checked)', false),
@@ -63,7 +55,12 @@ const props = () => ({
 
 export const playground = () => (
   <fieldset className={`${prefix}--fieldset`}>
-    <legend className={`${prefix}--label`}>Checkbox heading</legend>
+    <legend
+      className={classNames(`${prefix}--label`, {
+        [`${prefix}--label--disabled`]: props().disabled,
+      })}>
+      Checkbox heading
+    </legend>
     <Checkbox {...props()} id="checkbox-label-1" />
     <Checkbox {...props()} id="checkbox-label-2" />
   </fieldset>

@@ -20,11 +20,16 @@
 @mixin lists {
   .#{$prefix}--list--nested,
   .#{$prefix}--list--unordered,
-  .#{$prefix}--list--ordered {
+  .#{$prefix}--list--ordered,
+  .#{$prefix}--list--ordered--native {
     @include reset;
     @include type-style('body-short-01');
 
     list-style: none;
+  }
+
+  .#{$prefix}--list--ordered--native {
+    list-style: decimal;
   }
 
   .#{$prefix}--list__item {
@@ -32,7 +37,11 @@
   }
 
   .#{$prefix}--list--nested {
-    margin-left: $carbon--spacing-06;
+    margin-left: rem(32px);
+  }
+
+  .#{$prefix}--list--nested .#{$prefix}--list__item {
+    padding-left: $carbon--spacing-02;
   }
 
   .#{$prefix}--list--ordered:not(.#{$prefix}--list--nested) {
@@ -52,7 +61,8 @@
     counter-increment: item;
   }
 
-  .#{$prefix}--list--ordered.#{$prefix}--list--nested {
+  .#{$prefix}--list--ordered.#{$prefix}--list--nested,
+  .#{$prefix}--list--ordered--native.#{$prefix}--list--nested {
     list-style-type: lower-latin;
   }
 

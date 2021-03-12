@@ -21,6 +21,10 @@ import FloatingMenu, {
 import ClickListener from '../../internal/ClickListener';
 import mergeRefs from '../../tools/mergeRefs';
 import { keys, matches as keyDownMatch } from '../../internal/keyboard';
+import {
+  selectorFocusable,
+  selectorTabbable,
+} from '../../internal/keyboard/navigation';
 import isRequiredOneOf from '../../prop-types/isRequiredOneOf';
 import requiredIfValueExists from '../../prop-types/requiredIfValueExists';
 import { useControlledStateWithValue } from '../../internal/FeatureFlags';
@@ -88,6 +92,12 @@ class Tooltip extends Component {
 
   static propTypes = {
     /**
+     * Specify the alignment (to the trigger button) of the tooltip.
+     * Can be one of: start, center, or end.
+     */
+    align: PropTypes.oneOf(['start', 'center', 'end']),
+
+    /**
      * Contents to put into the tooltip.
      */
     children: PropTypes.node,
@@ -106,6 +116,11 @@ class Tooltip extends Component {
      * Where to put the tooltip, relative to the trigger UI.
      */
     direction: PropTypes.oneOf(['bottom', 'top', 'left', 'right']),
+
+    /**
+     * Enable or disable focus trap behavior
+     */
+    focusTrap: PropTypes.bool,
 
     /**
      * The name of the default tooltip icon.
@@ -147,10 +162,11 @@ class Tooltip extends Component {
         return;
       }
       const RefForwardingComponent = props[propName];
-      if (!isForwardRef(<RefForwardingComponent />))
+      if (!isForwardRef(<RefForwardingComponent />)) {
         return new Error(`Invalid value of prop '${propName}' supplied to '${componentName}',
                           it should be created/wrapped with React.forwardRef() to have a ref and access the proper
                           DOM node of the element to calculate its position in the viewport.`);
+      }
     },
 
     /**
@@ -202,7 +218,9 @@ class Tooltip extends Component {
   };
 
   static defaultProps = {
+    align: 'center',
     direction: DIRECTION_BOTTOM,
+    focusTrap: true,
     renderIcon: Information,
     showIcon: true,
     triggerText: null,
@@ -231,6 +249,7 @@ class Tooltip extends Component {
    * @private
    */
   _tooltipId =
+    this.props.id ||
     this.props.tooltipId ||
     `__carbon-tooltip_${Math.random().toString(36).substr(2)}`;
 
@@ -271,6 +290,11 @@ class Tooltip extends Component {
   }
 
   _handleUserInputOpenClose = (event, { open }) => {
+    if (this.isControlled) {
+      // Callback to the parent to let them decide what to do
+      this.props.onChange(event, { open });
+      return;
+    }
     // capture tooltip body element before it is removed from the DOM
     const tooltipBody = this._tooltipEl;
     this.setState({ open }, () => {
@@ -279,7 +303,19 @@ class Tooltip extends Component {
       }
       if (!open && tooltipBody && tooltipBody.id === this._tooltipId) {
         this._tooltipDismissed = true;
-        this._triggerRef?.current.focus();
+        const primaryFocusNode = tooltipBody.querySelector(
+          this.props.selectorPrimaryFocus || null
+        );
+        const tabbableNode = tooltipBody.querySelector(selectorTabbable);
+        const focusableNode = tooltipBody.querySelector(selectorFocusable);
+        const focusTarget =
+          primaryFocusNode || // User defined focusable node
+          tabbableNode || // First sequentially focusable node
+          focusableNode || // First programmatic focusable node
+          tooltipBody;
+        if (focusTarget !== tooltipBody) {
+          this._triggerRef?.current.focus();
+        }
       }
     });
   };
@@ -290,13 +326,16 @@ class Tooltip extends Component {
    * @param {Element} [evt] For handing `mouseout` event, indicates where the mouse pointer is gone.
    */
   _handleFocus = (state, evt) => {
-    const { relatedTarget } = evt;
+    const { currentTarget, relatedTarget } = evt;
+    if (currentTarget !== relatedTarget) {
+      this._tooltipDismissed = false;
+    }
     if (state === 'over') {
       if (!this._tooltipDismissed) {
         this._handleUserInputOpenClose(evt, { open: true });
       }
       this._tooltipDismissed = false;
-    } else {
+    } else if (state !== 'out') {
       // Note: SVGElement in IE11 does not have `.contains()`
       const { current: triggerEl } = this._triggerRef;
       const shouldPreventClose =
@@ -335,7 +374,15 @@ class Tooltip extends Component {
       click: 'click',
     }[evt.type];
     const hadContextMenu = this._hasContextMenu;
-    this._hasContextMenu = evt.type === 'contextmenu';
+    if (evt.type === 'click' || evt.type === 'contextmenu') {
+      this._hasContextMenu = evt.type === 'contextmenu';
+    }
+
+    if (this._hasContextMenu) {
+      this._handleUserInputOpenClose(evt, { open: false });
+      return;
+    }
+
     if (state === 'click') {
       evt.stopPropagation();
       evt.preventDefault();
@@ -343,12 +390,8 @@ class Tooltip extends Component {
         ? !this.props.open
         : !this.state.open;
       this._handleUserInputOpenClose(evt, { open: shouldOpen });
-    } else if (
-      state &&
-      (state !== 'out' || !hadContextMenu) &&
-      this._debouncedHandleFocus
-    ) {
-      this._debouncedHandleFocus(state, evt);
+    } else if (state && (state !== 'out' || !hadContextMenu)) {
+      this?._debouncedHandleFocus(state, evt);
     }
   };
 
@@ -396,6 +439,8 @@ class Tooltip extends Component {
       className,
       triggerClassName,
       direction,
+      align,
+      focusTrap,
       triggerText,
       showIcon,
       iconName,
@@ -405,6 +450,7 @@ class Tooltip extends Component {
       tabIndex = 0,
       innerRef: ref,
       selectorPrimaryFocus, // eslint-disable-line
+      tooltipId, //eslint-disable-line
       ...other
     } = this.props;
 
@@ -412,7 +458,11 @@ class Tooltip extends Component {
 
     const tooltipClasses = classNames(
       `${prefix}--tooltip`,
-      { [`${prefix}--tooltip--shown`]: open },
+      {
+        [`${prefix}--tooltip--shown`]: open,
+        [`${prefix}--tooltip--${direction}`]: direction,
+        [`${prefix}--tooltip--align-${align}`]: align,
+      },
       className
     );
 
@@ -428,6 +478,7 @@ class Tooltip extends Component {
       role: 'button',
       tabIndex: tabIndex,
       onClick: this.handleMouse,
+      onContextMenu: this.handleMouse,
       onKeyDown: this.handleKeyPress,
       onMouseOver: this.handleMouse,
       onMouseOut: this.handleMouse,
@@ -474,7 +525,7 @@ class Tooltip extends Component {
         </ClickListener>
         {open && (
           <FloatingMenu
-            focusTrap
+            focusTrap={focusTrap}
             selectorPrimaryFocus={this.props.selectorPrimaryFocus}
             target={this._getTarget}
             triggerRef={this._triggerRef}
@@ -484,9 +535,9 @@ class Tooltip extends Component {
               this._tooltipEl = node;
             }}>
             <div
-              id={this._tooltipId}
               className={tooltipClasses}
               {...other}
+              id={this._tooltipId}
               data-floating-menu-direction={direction}
               onMouseOver={this.handleMouse}
               onMouseOut={this.handleMouse}
@@ -497,7 +548,6 @@ class Tooltip extends Component {
               <span className={`${prefix}--tooltip__caret`} />
               <div
                 className={`${prefix}--tooltip__content`}
-                tabIndex="-1"
                 role="dialog"
                 aria-describedby={tooltipBodyId}
                 aria-labelledby={triggerId}>
@@ -511,6 +561,7 @@ class Tooltip extends Component {
   }
 }
 
+export { Tooltip };
 export default (() => {
   const forwardRef = (props, ref) => <Tooltip {...props} innerRef={ref} />;
   forwardRef.displayName = 'Tooltip';

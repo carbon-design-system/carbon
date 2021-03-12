@@ -8,15 +8,10 @@
 'use strict';
 
 module.exports = {
-  addons: [
-    '@storybook/addon-storysource',
-    '@storybook/addon-knobs',
-    '@storybook/addon-actions',
-    '@storybook/addon-links',
-    '@storybook/addon-docs',
-    '@storybook/addon-notes/register',
-    'storybook-readme/register',
-    require.resolve('./addon-carbon-theme/register'),
+  addons: ['storybook-preset-carbon'],
+  stories: [
+    './Welcome/Welcome.stories.js',
+    '../src/**/*-story.js',
+    '../src/**/*.stories.mdx',
   ],
-  stories: ['../src/**/*-story.js', '../src/**/*.stories.mdx'],
 };

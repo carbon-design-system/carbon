@@ -37,7 +37,7 @@ const props = {
       'Form validation UI content (invalidText in <Select>)',
       'A valid value is required'
     ),
-    labelText: text('Label text (helperText)', 'Select'),
+    labelText: text('Label text (labelText)', 'Select'),
     helperText: text('Helper text (helperText)', 'Optional helper text.'),
     onChange: action('onChange'),
   }),
@@ -47,7 +47,7 @@ const props = {
 };
 
 export default {
-  title: 'Select',
+  title: 'Components/Select',
   decorators: [withKnobs],
 
   parameters: {
@@ -67,22 +67,24 @@ export default {
 export const Default = () => {
   const groupProps = props.group();
   return (
-    <Select {...props.select()} id="select-1" defaultValue="placeholder-item">
-      <SelectItem
-        disabled
-        hidden
-        value="placeholder-item"
-        text="Choose an option"
-      />
-      <SelectItemGroup label="Category 1" {...groupProps}>
-        <SelectItem value="option-1" text="Option 1" />
-        <SelectItem value="option-2" text="Option 2" />
-      </SelectItemGroup>
-      <SelectItemGroup label="Category 2" {...groupProps}>
-        <SelectItem value="option-3" text="Option 3" />
-        <SelectItem value="option-4" text="Option 4" />
-      </SelectItemGroup>
-    </Select>
+    <div style={{ width: 400 }}>
+      <Select {...props.select()} id="select-1" defaultValue="placeholder-item">
+        <SelectItem
+          disabled
+          hidden
+          value="placeholder-item"
+          text="Choose an option"
+        />
+        <SelectItemGroup label="Category 1" {...groupProps}>
+          <SelectItem value="option-1" text="Option 1" />
+          <SelectItem value="option-2" text="Option 2" />
+        </SelectItemGroup>
+        <SelectItemGroup label="Category 2" {...groupProps}>
+          <SelectItem value="option-3" text="Option 3" />
+          <SelectItem value="option-4" text="Option 4" />
+        </SelectItemGroup>
+      </Select>
+    </div>
   );
 };
 

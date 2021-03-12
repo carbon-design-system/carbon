@@ -42,6 +42,9 @@ function App({ metadata }) {
               <li>
                 <a href="//www.npmjs.com/package/@carbon/icons-vue">Vue</a>
               </li>
+              <li>
+                <a href="//www.npmjs.com/package/carbon-icons-svelte">Svelte</a>
+              </li>
             </ul>
             <p>
               In order to use icons in alongside these packages, you will need a

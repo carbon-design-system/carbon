@@ -78,14 +78,19 @@
 
   input[data-invalid],
   .#{$prefix}--number[data-invalid] .#{$prefix}--number__input-wrapper,
+  .#{$prefix}--number__input-wrapper--warning,
   .#{$prefix}--date-picker-input__wrapper,
+  .#{$prefix}--date-picker-input__wrapper--warn,
+  .#{$prefix}--date-picker-input__wrapper--invalid,
   .#{$prefix}--time-picker--invalid,
   .#{$prefix}--text-input__field-wrapper[data-invalid],
-  .#{$prefix}--text-input--warn,
+  .#{$prefix}--text-input__field-wrapper--warning,
+  .#{$prefix}--text-input__field-wrapper--warning > .#{$prefix}--text-input,
   .#{$prefix}--text-area__wrapper[data-invalid],
   .#{$prefix}--select-input__wrapper[data-invalid],
   .#{$prefix}--time-picker[data-invalid],
-  .#{$prefix}--list-box[data-invalid] {
+  .#{$prefix}--list-box[data-invalid],
+  .#{$prefix}--list-box--warning {
     ~ .#{$prefix}--form-requirement {
       display: block;
       max-height: rem(200px);
@@ -97,6 +102,7 @@
   input[data-invalid],
   .#{$prefix}--number[data-invalid] .#{$prefix}--number__input-wrapper,
   .#{$prefix}--date-picker-input__wrapper,
+  .#{$prefix}--date-picker-input__wrapper--invalid,
   .#{$prefix}--time-picker--invalid,
   .#{$prefix}--text-input__field-wrapper[data-invalid],
   .#{$prefix}--text-area__wrapper[data-invalid],
@@ -110,7 +116,7 @@
 
   //Fluid Form
   .#{$prefix}--form--fluid .#{$prefix}--text-input__field-wrapper[data-invalid],
-  .#{$prefix}--form--fluid .#{$prefix}--text-input__field-wrapper[data-warn] {
+  .#{$prefix}--form--fluid .#{$prefix}--text-input__field-wrapper--warning {
     display: block;
   }
 

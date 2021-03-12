@@ -86,6 +86,7 @@ const ControlledPasswordInput = React.forwardRef(
     );
     const passwordVisibilityToggleClasses = classNames(
       `${prefix}--text-input--password__visibility__toggle`,
+      `${prefix}--btn`,
       `${prefix}--btn--icon-only`,
       `${prefix}--tooltip__trigger`,
       `${prefix}--tooltip--a11y`,
@@ -175,7 +176,7 @@ ControlledPasswordInput.propTypes = {
   /**
    * Provide the text that is displayed when the control is in an invalid state
    */
-  invalidText: PropTypes.string,
+  invalidText: PropTypes.node,
 
   /**
    * Provide the text that will be read by a screen reader when visiting this

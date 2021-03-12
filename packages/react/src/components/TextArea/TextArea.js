@@ -25,6 +25,7 @@ const TextArea = React.forwardRef(function TextArea(
     invalidText,
     helperText,
     light,
+    placeholder,
     ...other
   },
   ref
@@ -66,7 +67,7 @@ const TextArea = React.forwardRef(function TextArea(
   const errorId = id + '-error-msg';
 
   const error = invalid ? (
-    <div className={`${prefix}--form-requirement`} id={errorId}>
+    <div role="alert" className={`${prefix}--form-requirement`} id={errorId}>
       {invalidText}
     </div>
   ) : null;
@@ -80,6 +81,7 @@ const TextArea = React.forwardRef(function TextArea(
     <textarea
       {...other}
       {...textareaProps}
+      placeholder={placeholder || null}
       className={textareaClasses}
       aria-invalid={invalid || null}
       aria-describedby={invalid ? errorId : null}
@@ -149,7 +151,7 @@ TextArea.propTypes = {
   /**
    * Provide the text that is displayed when the control is in an invalid state
    */
-  invalidText: PropTypes.string,
+  invalidText: PropTypes.node,
 
   /**
    * Provide the text that will be read by a screen reader when visiting this

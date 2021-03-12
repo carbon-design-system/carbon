@@ -133,13 +133,14 @@ class RadioButton extends React.Component {
         />
         <label htmlFor={this.uid} className={`${prefix}--radio-button__label`}>
           <span className={`${prefix}--radio-button__appearance`} />
-          <span className={innerLabelClasses}>{labelText}</span>
+          {labelText && <span className={innerLabelClasses}>{labelText}</span>}
         </label>
       </div>
     );
   }
 }
 
+export { RadioButton };
 export default (() => {
   const forwardRef = (props, ref) => <RadioButton {...props} innerRef={ref} />;
   forwardRef.displayName = 'RadioButton';

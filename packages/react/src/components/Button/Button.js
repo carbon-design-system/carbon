@@ -23,6 +23,7 @@ const Button = React.forwardRef(function Button(
     size,
     kind,
     href,
+    isSelected,
     tabIndex,
     type,
     renderIcon: ButtonImageElement,
@@ -37,10 +38,13 @@ const Button = React.forwardRef(function Button(
   const buttonClasses = classNames(className, {
     [`${prefix}--btn`]: true,
     [`${prefix}--btn--field`]: size === 'field',
-    [`${prefix}--btn--sm`]: size === 'small' || small,
+    [`${prefix}--btn--sm`]: size === 'small' || size === 'sm' || small,
+    [`${prefix}--btn--lg`]: size === 'lg',
+    [`${prefix}--btn--xl`]: size === 'xl',
     [`${prefix}--btn--${kind}`]: kind,
     [`${prefix}--btn--disabled`]: disabled,
     [`${prefix}--btn--icon-only`]: hasIconOnly,
+    [`${prefix}--btn--selected`]: hasIconOnly && isSelected && kind === 'ghost',
     [`${prefix}--tooltip__trigger`]: hasIconOnly,
     [`${prefix}--tooltip--a11y`]: hasIconOnly,
     [`${prefix}--tooltip--${tooltipPosition}`]: hasIconOnly && tooltipPosition,
@@ -66,6 +70,7 @@ const Button = React.forwardRef(function Button(
   let otherProps = {
     disabled,
     type,
+    'aria-pressed': hasIconOnly && kind === 'ghost' ? isSelected : null,
   };
   const anchorProps = {
     href,
@@ -147,6 +152,11 @@ Button.propTypes = {
   },
 
   /**
+   * Specify whether the Button is currently selected
+   */
+  isSelected: PropTypes.bool,
+
+  /**
    * Specify the kind of Button you want to create
    */
   kind: PropTypes.oneOf(ButtonKinds).isRequired,
@@ -166,7 +176,7 @@ Button.propTypes = {
    * Specify the size of the button, from a list of available sizes.
    * For `default` buttons, this prop can remain unspecified.
    */
-  size: PropTypes.oneOf(['default', 'field', 'small']),
+  size: PropTypes.oneOf(['default', 'field', 'small', 'sm', 'lg', 'xl']),
 
   /**
    * Deprecated in v10 in favor of `size`.
@@ -174,7 +184,7 @@ Button.propTypes = {
    */
   small: deprecate(
     PropTypes.bool,
-    `\nThe prop \`small\` for Button has been deprecated in favor of \`size\`. Please use \`size="small"\` instead.`
+    `\nThe prop \`small\` for Button has been deprecated in favor of \`size\`. Please use \`size="sm"\` instead.`
   ),
 
   /**

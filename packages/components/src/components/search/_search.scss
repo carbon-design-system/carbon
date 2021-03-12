@@ -52,8 +52,7 @@
     }
 
     &::placeholder {
-      color: $text-05;
-      font-weight: 400;
+      @include placeholder-colors;
     }
 
     &::-ms-clear {
@@ -63,18 +62,13 @@
 
   .#{$prefix}--search-input[disabled] {
     color: $disabled;
-    background-color: $disabled-background-color;
+    background-color: $disabled-01;
     border-bottom: 1px solid transparent;
     cursor: not-allowed;
 
     &::placeholder {
       color: $disabled;
-      font-weight: 400;
     }
-  }
-
-  .#{$prefix}--search-input[disabled] ~ .#{$prefix}--search-magnifier {
-    fill: $disabled;
   }
 
   .#{$prefix}--search--light .#{$prefix}--search-input {
@@ -120,8 +114,9 @@
     pointer-events: none;
     fill: $icon-02;
 
-    // Windows HCM fix
-    @media screen and (-ms-high-contrast: active) {
+    // Windows, Firefox HCM Fix
+    @media screen and (-ms-high-contrast: active),
+      screen and (prefers-contrast) {
       // `ButtonText` is a CSS2 system color to help improve colors in HCM
       fill: ButtonText;
     }
@@ -170,6 +165,12 @@
 
   .#{$prefix}--search-close svg {
     fill: inherit;
+
+    // Firefox HCM Fix
+    @media screen and (prefers-contrast) {
+      // `ButtonText` is a CSS2 system color to help improve colors in HCM
+      fill: ButtonText;
+    }
   }
 
   .#{$prefix}--search-close,
@@ -204,6 +205,24 @@
 
       background-color: $selected-ui;
     }
+  }
+
+  .#{$prefix}--search--disabled .#{$prefix}--search-close {
+    outline: none;
+    cursor: not-allowed;
+
+    &:hover {
+      background-color: transparent;
+      border-bottom-color: transparent;
+    }
+
+    &:hover::before {
+      background-color: transparent;
+    }
+  }
+
+  .#{$prefix}--search--disabled svg {
+    fill: $disabled;
   }
 
   .#{$prefix}--search-close:focus,

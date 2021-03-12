@@ -44,4 +44,12 @@ module.exports = {
     'no-unused-expressions': 0,
     'prefer-arrow-callback': 0,
   },
+  overrides: [
+    {
+      files: ['*_spec.js'],
+      rules: {
+        'import/no-unresolved': 0,
+      },
+    },
+  ],
 };

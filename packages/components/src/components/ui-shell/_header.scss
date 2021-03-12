@@ -66,10 +66,19 @@
   .#{$prefix}--header__action:focus {
     border-color: $shell-header-focus;
     outline: none;
+
+    // Firefox HCM Fix
+    @media screen and (prefers-contrast) {
+      border-style: dotted;
+    }
   }
 
   .#{$prefix}--header__action:active {
     background-color: $shell-header-bg-03;
+  }
+
+  .#{$prefix}--header__action.#{$prefix}--btn--icon-only.#{$prefix}--tooltip__trigger {
+    justify-content: center;
   }
 
   .#{$prefix}--header__action > svg {
@@ -85,7 +94,9 @@
   }
 
   .#{$prefix}--header__menu-toggle {
-    display: block;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 
   .#{$prefix}--header__menu-toggle__hidden {
@@ -116,6 +127,13 @@
 
   a.#{$prefix}--header__name:focus {
     border-color: $shell-header-focus;
+
+    // Windows, Firefox HCM Fix
+    @media screen and (-ms-high-contrast: active),
+      screen and (prefers-contrast) {
+      // `ButtonText` is a CSS2 system color to help improve colors in HCM
+      border-style: dotted;
+    }
   }
 
   .#{$prefix}--header__name--prefix {
@@ -125,6 +143,11 @@
   a.#{$prefix}--header__name,
   a.#{$prefix}--header__name:hover {
     color: $shell-header-text-01;
+  }
+
+  .#{$prefix}--header__menu-toggle:not(.#{$prefix}--header__menu-toggle__hidden)
+    ~ .#{$prefix}--header__name {
+    padding-left: rem(8px);
   }
 
   //--------------------------------------------------------------------------
@@ -198,6 +221,12 @@
     color: $shell-header-text-01;
     border-color: $shell-header-focus;
     outline: none;
+
+    // Windows, Firefox HCM Fix
+    @media screen and (-ms-high-contrast: active),
+      screen and (prefers-contrast) {
+      border-style: dotted;
+    }
   }
 
   a.#{$prefix}--header__menu-item:hover > svg,

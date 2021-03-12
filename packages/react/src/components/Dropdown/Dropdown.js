@@ -10,9 +10,14 @@ import { useSelect } from 'downshift';
 import { settings } from 'carbon-components';
 import cx from 'classnames';
 import PropTypes from 'prop-types';
-import { Checkmark16, WarningFilled16 } from '@carbon/icons-react';
+import {
+  Checkmark16,
+  WarningAltFilled16,
+  WarningFilled16,
+} from '@carbon/icons-react';
 import ListBox, { PropTypes as ListBoxPropTypes } from '../ListBox';
 import { mapDownshiftProps } from '../../tools/createPropAdapter';
+import mergeRefs from '../../tools/mergeRefs';
 import deprecate from '../../prop-types/deprecate';
 
 const { prefix } = settings;
@@ -40,11 +45,14 @@ const Dropdown = React.forwardRef(function Dropdown(
     onChange,
     id,
     titleText,
+    hideLabel,
     helperText,
     translateWithId,
     light,
     invalid,
     invalidText,
+    warn,
+    warnText,
     initialSelectedItem,
     selectedItem: controlledSelectedItem,
     downshiftProps,
@@ -76,9 +84,11 @@ const Dropdown = React.forwardRef(function Dropdown(
     selectedItem,
   } = useSelect(selectProps);
   const inline = type === 'inline';
+  const showWarning = !invalid && warn;
 
   const className = cx(`${prefix}--dropdown`, containerClassName, {
     [`${prefix}--dropdown--invalid`]: invalid,
+    [`${prefix}--dropdown--warning`]: showWarning,
     [`${prefix}--dropdown--open`]: isOpen,
     [`${prefix}--dropdown--inline`]: inline,
     [`${prefix}--dropdown--disabled`]: disabled,
@@ -89,6 +99,7 @@ const Dropdown = React.forwardRef(function Dropdown(
 
   const titleClasses = cx(`${prefix}--label`, {
     [`${prefix}--label--disabled`]: disabled,
+    [`${prefix}--visually-hidden`]: hideLabel,
   });
 
   const helperClasses = cx(`${prefix}--form__helper-text`, {
@@ -108,7 +119,7 @@ const Dropdown = React.forwardRef(function Dropdown(
 
   // needs to be Capitalized for react to render it correctly
   const ItemToElement = itemToElement;
-
+  const toggleButtonProps = getToggleButtonProps();
   const helper = helperText ? (
     <div className={helperClasses}>{helperText}</div>
   ) : null;
@@ -132,19 +143,26 @@ const Dropdown = React.forwardRef(function Dropdown(
         className={className}
         invalid={invalid}
         invalidText={invalidText}
+        warn={warn}
+        warnText={warnText}
         light={light}
         isOpen={isOpen}
         id={id}>
         {invalid && (
           <WarningFilled16 className={`${prefix}--list-box__invalid-icon`} />
         )}
+        {showWarning && (
+          <WarningAltFilled16
+            className={`${prefix}--list-box__invalid-icon ${prefix}--list-box__invalid-icon--warning`}
+          />
+        )}
         <button
           type="button"
-          ref={ref}
           className={`${prefix}--list-box__field`}
           disabled={disabled}
           aria-disabled={disabled}
-          {...getToggleButtonProps()}>
+          {...toggleButtonProps}
+          ref={mergeRefs(toggleButtonProps.ref, ref)}>
           <span className={`${prefix}--list-box__label`}>
             {selectedItem ? itemToString(selectedItem) : label}
           </span>
@@ -178,7 +196,7 @@ const Dropdown = React.forwardRef(function Dropdown(
             })}
         </ListBox.Menu>
       </ListBox>
-      {!inline && !invalid && helper}
+      {!inline && !invalid && !warn && helper}
     </div>
   );
 });
@@ -217,6 +235,11 @@ Dropdown.propTypes = {
   helperText: PropTypes.oneOfType([PropTypes.string, PropTypes.node]),
 
   /**
+   * Specify whether the title text should be hidden or not
+   */
+  hideLabel: PropTypes.bool,
+
+  /**
    * Specify a custom `id`
    */
   id: PropTypes.string.isRequired,
@@ -247,7 +270,7 @@ Dropdown.propTypes = {
   /**
    * Message which is displayed if the value is invalid.
    */
-  invalidText: PropTypes.string,
+  invalidText: PropTypes.node,
 
   /**
    * Function to render items as custom components instead of strings.
@@ -299,7 +322,7 @@ Dropdown.propTypes = {
    * Provide the title text that will be read by a screen reader when
    * visiting this control
    */
-  titleText: PropTypes.oneOfType([PropTypes.string, PropTypes.node]),
+  titleText: PropTypes.node,
 
   /**
    * Callback function for translating ListBoxMenuIcon SVG title
@@ -310,6 +333,16 @@ Dropdown.propTypes = {
    * The dropdown type, `default` or `inline`
    */
   type: ListBoxPropTypes.ListBoxType,
+
+  /**
+   * Specify whether the control is currently in warning state
+   */
+  warn: PropTypes.bool,
+
+  /**
+   * Provide the text that is displayed when the control is in warning state
+   */
+  warnText: PropTypes.node,
 };
 
 Dropdown.defaultProps = {

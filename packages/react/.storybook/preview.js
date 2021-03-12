@@ -10,17 +10,16 @@ import { addDecorator, addParameters } from '@storybook/react';
 import addons from '@storybook/addons';
 import { themes } from '@storybook/theming';
 import { configureActions } from '@storybook/addon-actions';
-import {
-  CARBON_CURRENT_THEME,
-  CARBON_TYPE_TOKEN,
-} from './addon-carbon-theme/shared';
+import { CARBON_CURRENT_THEME, CARBON_TYPE_TOKEN } from './shared';
 import Container from './Container';
-import PackageInfo from './../package.json';
+import carbonTheme from './theme';
 
 const customPropertyPrefix = 'cds';
 
 addParameters({
   options: {
+    theme: carbonTheme,
+    showRoots: true,
     /**
      * We sort our stories by default alphabetically, however there are specific
      * keywords that will be sorted further down the sidebar, including
@@ -42,6 +41,7 @@ addParameters({
       // determine order later on.
       const UNKNOWN_KEYWORD = 3;
       const keywords = new Map([
+        ['welcome', 0],
         ['default', 1],
         ['usage', 2],
         ['playground', 4],
@@ -88,12 +88,6 @@ addParameters({
       // two ids
       return idA.localeCompare(idB);
     },
-    theme: {
-      ...themes.light,
-      brandTitle: `Carbon Components React v${PackageInfo.version}`,
-      brandUrl:
-        'https://github.com/carbon-design-system/carbon/tree/master/packages/react',
-    },
   },
 });
 
@@ -102,7 +96,11 @@ configureActions({
   limit: 10,
 });
 
-addDecorator((story) => <Container story={story} />);
+addDecorator((story, i) => {
+  return (
+    <Container id={`container-${story().type?.displayName}`} story={story} />
+  );
+});
 
 addons.getChannel().on(CARBON_CURRENT_THEME, (theme) => {
   document.documentElement.setAttribute('storybook-carbon-theme', theme);

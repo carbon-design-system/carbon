@@ -109,4 +109,18 @@ describe('Toggle', () => {
       expect(call[2].target).toBe(inputElement);
     });
   });
+
+  describe('ToggleSmall', () => {
+    const wrapper = mount(<Toggle id="toggle-1" size="sm" />);
+
+    it('Sets the `ToggleSmall` className', () => {
+      const input = wrapper.find('input');
+      expect(input.hasClass(`${prefix}--toggle-input--small`)).toEqual(true);
+    });
+
+    it('Renders a checkmark SVG', () => {
+      const svg = wrapper.find(`.${prefix}--toggle__check`);
+      expect(svg.length).toBe(1);
+    });
+  });
 });

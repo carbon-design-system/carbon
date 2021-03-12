@@ -18,6 +18,14 @@ export default class ClickListener extends React.Component {
     onClickOutside: PropTypes.func.isRequired,
   };
 
+  static getEventTarget(evt) {
+    // support Shadow DOM
+    if (evt.composed && typeof evt.composedPath === 'function') {
+      return evt.composedPath()[0];
+    }
+    return evt.target;
+  }
+
   constructor(props) {
     super(props);
     // We manually bind handlers in this Component, versus using class
@@ -37,7 +45,10 @@ export default class ClickListener extends React.Component {
 
   handleDocumentClick(evt) {
     if (this.element) {
-      if (this.element.contains && !this.element.contains(evt.target)) {
+      if (
+        this.element.contains &&
+        !this.element.contains(ClickListener.getEventTarget(evt))
+      ) {
         this.props.onClickOutside(evt);
       }
     }

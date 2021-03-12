@@ -7,7 +7,7 @@
 
 import React from 'react';
 import { mount, shallow } from 'enzyme';
-import { CaretDownGlyph, CaretUpGlyph } from '@carbon/icons-react';
+import { Subtract16, Add16 } from '@carbon/icons-react';
 import NumberInput from '../NumberInput';
 import NumberInputSkeleton from '../NumberInput/NumberInput.Skeleton';
 import { settings } from 'carbon-components';
@@ -44,7 +44,7 @@ describe('NumberInput', () => {
 
       wrapper = mount(<NumberInput {...mockProps} />);
 
-      const iconTypes = [CaretDownGlyph, CaretUpGlyph];
+      const iconTypes = [Subtract16, Add16];
       label = wrapper.find('label');
       numberInput = wrapper.find('input');
       container = wrapper.find(`.${prefix}--number`);
@@ -154,6 +154,24 @@ describe('NumberInput', () => {
             />
           );
         const getNumberInput = (wrapper) => wrapper.find('input');
+
+        it('should correctly set defaultValue on uncontrolled input', () => {
+          const wrapper = mount(
+            <NumberInput
+              min={-1}
+              max={100}
+              defaultValue={10}
+              id="test"
+              label="Number Input"
+              className="extra-class"
+            />
+          );
+          const numberInput = getNumberInput(wrapper);
+          expect(wrapper.find('NumberInput').instance().state.value).toEqual(
+            10
+          );
+          expect(numberInput.prop('value')).toEqual(10);
+        });
 
         it('should set value as expected when value > min', () => {
           const wrapper = getWrapper(-1, 100, 0);
@@ -272,8 +290,8 @@ describe('NumberInput', () => {
       });
 
       it('should use correct icons', () => {
-        expect(icons.at(0).type()).toBe(CaretUpGlyph);
-        expect(icons.at(1).type()).toBe(CaretDownGlyph);
+        expect(icons.at(0).type()).toBe(Subtract16);
+        expect(icons.at(1).type()).toBe(Add16);
       });
 
       it('adds new iconDescription when passed via props', () => {
@@ -383,8 +401,8 @@ describe('NumberInput', () => {
         );
 
         input = wrapper.find('input');
-        upArrow = wrapper.find(CaretUpGlyph).closest('button');
-        downArrow = wrapper.find(CaretDownGlyph).closest('button');
+        upArrow = wrapper.find(Add16).closest('button');
+        downArrow = wrapper.find(Subtract16).closest('button');
       });
 
       it('should invoke onClick when numberInput is clicked', () => {

@@ -1,14 +1,15 @@
 /**
- * Copyright IBM Corp. 2016, 2018
+ * Copyright IBM Corp. 2016, 2021
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
 
 import PropTypes from 'prop-types';
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect, useCallback } from 'react';
 import classNames from 'classnames';
 import useResizeObserver from 'use-resize-observer/polyfilled';
+import debounce from 'lodash.debounce';
 import { ChevronDown16 } from '@carbon/icons-react';
 import { settings } from 'carbon-components';
 import Copy from '../Copy';
@@ -18,10 +19,14 @@ import getUniqueId from '../../tools/uniqueId';
 
 const { prefix } = settings;
 
+const rowHeightInPixels = 18;
+const defaultCollapsedHeightInRows = 15;
+
 function CodeSnippet({
   className,
   type,
   children,
+  disabled,
   feedback,
   onClick,
   ariaLabel,
@@ -31,29 +36,91 @@ function CodeSnippet({
   showMoreText,
   showLessText,
   hideCopyButton,
+  wrapText,
   ...rest
 }) {
   const [expandedCode, setExpandedCode] = useState(false);
   const [shouldShowMoreLessBtn, setShouldShowMoreLessBtn] = useState(false);
   const { current: uid } = useRef(getUniqueId());
   const codeContentRef = useRef();
+  const codeContainerRef = useRef();
+  const [hasLeftOverflow, setHasLeftOverflow] = useState(false);
+  const [hasRightOverflow, setHasRightOverflow] = useState(false);
+  const getCodeRef = useCallback(() => {
+    if (type === 'single') {
+      return codeContainerRef;
+    }
+    if (type === 'multi') {
+      return codeContentRef;
+    }
+  }, [type]);
+
+  const getCodeRefDimensions = useCallback(() => {
+    const {
+      clientWidth: codeClientWidth,
+      scrollLeft: codeScrollLeft,
+      scrollWidth: codeScrollWidth,
+    } = getCodeRef().current;
+
+    return {
+      horizontalOverflow: codeScrollWidth > codeClientWidth,
+      codeClientWidth,
+      codeScrollWidth,
+      codeScrollLeft,
+    };
+  }, [getCodeRef]);
+
+  const handleScroll = useCallback(() => {
+    if (
+      type === 'inline' ||
+      (type === 'single' && !codeContainerRef?.current) ||
+      (type === 'multi' && !codeContentRef?.current)
+    ) {
+      return;
+    }
+
+    const {
+      horizontalOverflow,
+      codeClientWidth,
+      codeScrollWidth,
+      codeScrollLeft,
+    } = getCodeRefDimensions();
+
+    setHasLeftOverflow(horizontalOverflow && !!codeScrollLeft);
+    setHasRightOverflow(
+      horizontalOverflow && codeScrollLeft + codeClientWidth !== codeScrollWidth
+    );
+  }, [type, getCodeRefDimensions]);
 
   useResizeObserver({
-    ref: codeContentRef,
+    ref: getCodeRef(),
     onResize: () => {
-      if (codeContentRef.current) {
+      if (codeContentRef?.current && type === 'multi') {
         const { height } = codeContentRef.current.getBoundingClientRect();
-        setShouldShowMoreLessBtn(type === 'multi' && height > 255);
+        setShouldShowMoreLessBtn(
+          height > defaultCollapsedHeightInRows * rowHeightInPixels
+        );
+      }
+      if (
+        (codeContentRef?.current && type === 'multi') ||
+        (codeContainerRef?.current && type === 'single')
+      ) {
+        debounce(handleScroll, 200);
       }
     },
   });
 
-  const codeSnippetClasses = classNames(className, {
-    [`${prefix}--snippet`]: true,
+  useEffect(() => {
+    handleScroll();
+  }, [handleScroll]);
+
+  const codeSnippetClasses = classNames(className, `${prefix}--snippet`, {
     [`${prefix}--snippet--${type}`]: type,
+    [`${prefix}--snippet--disabled`]: type !== 'inline' && disabled,
     [`${prefix}--snippet--expand`]: expandedCode,
     [`${prefix}--snippet--light`]: light,
     [`${prefix}--snippet--no-copy`]: hideCopyButton,
+    [`${prefix}--snippet--wraptext`]: wrapText,
   });
 
   const expandCodeBtnText = expandedCode ? showLessText : showMoreText;
@@ -83,16 +150,33 @@ function CodeSnippet({
   return (
     <div {...rest} className={codeSnippetClasses}>
       <div
+        ref={codeContainerRef}
         role={type === 'single' ? 'textbox' : null}
-        tabIndex={type === 'single' ? 0 : null}
+        tabIndex={type === 'single' && !disabled ? 0 : null}
         className={`${prefix}--snippet-container`}
-        aria-label={ariaLabel || copyLabel || 'code-snippet'}>
+        aria-label={ariaLabel || copyLabel || 'code-snippet'}
+        onScroll={(type === 'single' && handleScroll) || null}>
         <code>
-          <pre ref={codeContentRef}>{children}</pre>
+          <pre
+            ref={codeContentRef}
+            onScroll={(type === 'multi' && handleScroll) || null}>
+            {children}
+          </pre>
         </code>
       </div>
+      {/**
+       * left overflow indicator must come after the snippet due to z-index and
+       * snippet focus border overlap
+       */}
+      {hasLeftOverflow && (
+        <div className={`${prefix}--snippet__overflow-indicator--left`} />
+      )}
+      {hasRightOverflow && (
+        <div className={`${prefix}--snippet__overflow-indicator--right`} />
+      )}
       {!hideCopyButton && (
         <CopyButton
+          disabled={disabled}
           onClick={onClick}
           feedback={feedback}
           iconDescription={copyButtonDescription}
@@ -101,8 +185,9 @@ function CodeSnippet({
       {shouldShowMoreLessBtn && (
         <Button
           kind="ghost"
-          size="small"
+          size="field"
           className={`${prefix}--snippet-btn--expand`}
+          disabled={disabled}
           onClick={() => setExpandedCode(!expandedCode)}>
           <span className={`${prefix}--snippet-btn--text`}>
             {expandCodeBtnText}
@@ -148,6 +233,11 @@ CodeSnippet.propTypes = {
   copyLabel: PropTypes.string,
 
   /**
+   * Specify whether or not the CodeSnippet should be disabled
+   */
+  disabled: PropTypes.bool,
+
+  /**
    * Specify the string displayed when the snippet is copied
    */
   feedback: PropTypes.string,
@@ -185,12 +275,18 @@ CodeSnippet.propTypes = {
    * Provide the type of Code Snippet
    */
   type: PropTypes.oneOf(['single', 'inline', 'multi']),
+
+  /**
+   * Specify whether or not to wrap the text.
+   */
+  wrapText: PropTypes.bool,
 };
 
 CodeSnippet.defaultProps = {
   type: 'single',
   showMoreText: 'Show more',
   showLessText: 'Show less',
+  wrapText: false,
 };
 
 export default CodeSnippet;

@@ -36,6 +36,7 @@ exports[`ModalWrapper should render 1`] = `
       type="button"
     >
       <button
+        aria-pressed={null}
         className="btn-trigger bx--btn bx--btn--primary"
         disabled={false}
         onClick={[Function]}
@@ -57,6 +58,7 @@ exports[`ModalWrapper should render 1`] = `
       onRequestSubmit={[Function]}
       open={false}
       passiveModal={false}
+      preventCloseOnClickOutside={false}
       primaryButtonDisabled={false}
       primaryButtonText="Save"
       secondaryButtonText="Cancel"
@@ -158,26 +160,29 @@ exports[`ModalWrapper should render 1`] = `
             <div
               className="bx--modal-footer bx--btn-set"
             >
-              <Button
-                disabled={false}
-                kind="secondary"
-                onClick={[Function]}
-                size="default"
-                tabIndex={0}
-                tooltipAlignment="center"
-                tooltipPosition="top"
-                type="button"
-              >
-                <button
-                  className="bx--btn bx--btn--secondary"
+              <SecondaryButtonSet>
+                <Button
                   disabled={false}
+                  kind="secondary"
                   onClick={[Function]}
+                  size="default"
                   tabIndex={0}
+                  tooltipAlignment="center"
+                  tooltipPosition="top"
                   type="button"
                 >
-                  Cancel
-                </button>
-              </Button>
+                  <button
+                    aria-pressed={null}
+                    className="bx--btn bx--btn--secondary"
+                    disabled={false}
+                    onClick={[Function]}
+                    tabIndex={0}
+                    type="button"
+                  >
+                    Cancel
+                  </button>
+                </Button>
+              </SecondaryButtonSet>
               <Button
                 disabled={false}
                 kind="primary"
@@ -189,6 +194,7 @@ exports[`ModalWrapper should render 1`] = `
                 type="button"
               >
                 <button
+                  aria-pressed={null}
                   className="bx--btn bx--btn--primary"
                   disabled={false}
                   onClick={[Function]}

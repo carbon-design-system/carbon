@@ -3,7 +3,7 @@ import { Accordion, AccordionItem, AccordionSkeleton } from '../Accordion';
 
 # Accordion
 
-[Source code](https://github.com/carbon-design-system/carbon/tree/master/packages/react/src/components/Accordion)
+[Source code](https://github.com/carbon-design-system/carbon/tree/main/packages/react/src/components/Accordion)
 &nbsp;|&nbsp;
 [Usage guidelines](https://www.carbondesignsystem.com/components/accordion/usage)
 &nbsp;|&nbsp;
@@ -34,7 +34,7 @@ Everything you pass in as a child of `AccordionItem` will be rendered in the
 accordion's panel.
 
 <Preview>
-  <Story id="accordion--accordion" />
+  <Story id="components-accordion--accordion" />
 </Preview>
 
 ## Skeleton state
@@ -44,7 +44,7 @@ accordion. This is useful to display while content in your accordion is being
 fetched from an external resource like an API.
 
 <Preview>
-  <Story id="accordion--skeleton" />
+  <Story id="components-accordion--skeleton" />
 </Preview>
 
 ## Component API
@@ -94,7 +94,9 @@ through to the underlying accordion header.
 
 The `className` prop passed into `AccordionItem` will be forwarded along to the
 underlying accordion header. This is useful for specifying a custom class name
-for layout.
+for layout. As a reminder, the callback signature will look like
+`({ isOpen: boolean, event: Event })` rather than the usual
+`(event: Event, state: { isOpen: boolean })` until the next major version.
 
 ```jsx
 <Accordion>
@@ -103,6 +105,19 @@ for layout.
   </AccordionItem>
   <AccordionItem title="Panel B">Panel B</AccordionItem>
   <AccordionItem title="Panel C">Panel C</AccordionItem>
+</Accordion>
+```
+
+### AccordionItem onHeadingClick
+
+You can use the `onHeadingClick` prop to determine the state of the
+`AccordionItem` when it is clicked. it will return
+
+```jsx
+<Accordion>
+  <AccordionItem onHeadingClick={({ isOpen }) => console.log(isOpen)}>
+    Panel A
+  </AccordionItem>
 </Accordion>
 ```
 
@@ -157,4 +172,4 @@ or screen reader.
 
 Help us improve this component by providing feedback, asking questions on Slack,
 or updating this file on
-[GitHub](https://github.com/carbon-design-system/carbon/edit/master/packages/react/src/components/Accordion/Accordion.mdx).
+[GitHub](https://github.com/carbon-design-system/carbon/edit/main/packages/react/src/components/Accordion/Accordion.mdx).

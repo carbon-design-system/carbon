@@ -14,28 +14,32 @@ import {
   ArrowsVertical20 as Arrows,
 } from '@carbon/icons-react';
 import { sortStates } from './state/sorting';
+import { useId } from '../../internal/useId';
 
 const { prefix } = settings;
 
 const translationKeys = {
-  iconDescription: 'carbon.table.header.icon.description',
+  buttonDescription: 'carbon.table.header.icon.description',
 };
 
-const translateWithId = (key, { sortDirection, isSortHeader, sortStates }) => {
-  if (key === translationKeys.iconDescription) {
+const translateWithId = (
+  key,
+  { header, sortDirection, isSortHeader, sortStates }
+) => {
+  if (key === translationKeys.buttonDescription) {
     if (isSortHeader) {
       // When transitioning, we know that the sequence of states is as follows:
       // NONE -> ASC -> DESC -> NONE
       if (sortDirection === sortStates.NONE) {
-        return 'Sort rows by this header in ascending order';
+        return `Click to sort rows by ${header} header in ascending order`;
       }
       if (sortDirection === sortStates.ASC) {
-        return 'Sort rows by this header in descending order';
+        return `Click to sort rows by ${header} header in descending order`;
       }
 
-      return 'Unsort rows by this header';
+      return `Click to unsort rows by ${header} header`;
     }
-    return 'Sort rows by this header in ascending order';
+    return `Click to sort rows by ${header} header in ascending order`;
   }
 
   return '';
@@ -62,6 +66,8 @@ const TableHeader = React.forwardRef(function TableHeader(
   },
   ref
 ) {
+  const uniqueId = useId('table-sort');
+
   if (!isSortable) {
     return (
       <th
@@ -85,6 +91,12 @@ const TableHeader = React.forwardRef(function TableHeader(
       isSortHeader && sortDirection === sortStates.DESC,
   });
   const ariaSort = !isSortHeader ? 'none' : sortDirections[sortDirection];
+  const sortDescription = t('carbon.table.header.icon.description', {
+    header: children,
+    sortDirection,
+    isSortHeader,
+    sortStates,
+  });
 
   return (
     <th
@@ -93,27 +105,19 @@ const TableHeader = React.forwardRef(function TableHeader(
       colSpan={colSpan}
       ref={ref}
       scope={scope}>
-      <button type="button" className={className} onClick={onClick} {...rest}>
+      <div style={{ display: 'none' }} id={uniqueId}>
+        {sortDescription}
+      </div>
+      <button
+        type="button"
+        aria-describedby={uniqueId}
+        className={className}
+        onClick={onClick}
+        {...rest}>
         <span className={`${prefix}--table-sort__flex`}>
           <div className={`${prefix}--table-header-label`}>{children}</div>
-          <Arrow
-            className={`${prefix}--table-sort__icon`}
-            aria-label={t('carbon.table.header.icon.description', {
-              header: children,
-              sortDirection,
-              isSortHeader,
-              sortStates,
-            })}
-          />
-          <Arrows
-            className={`${prefix}--table-sort__icon-unsorted`}
-            aria-label={t('carbon.table.header.icon.description', {
-              header: children,
-              sortDirection,
-              isSortHeader,
-              sortStates,
-            })}
-          />
+          <Arrow className={`${prefix}--table-sort__icon`} />
+          <Arrows className={`${prefix}--table-sort__icon-unsorted`} />
         </span>
       </button>
     </th>

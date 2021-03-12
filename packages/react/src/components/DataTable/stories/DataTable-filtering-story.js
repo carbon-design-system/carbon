@@ -26,7 +26,7 @@ import { rows, headers } from './shared';
 import mdx from '../DataTable.mdx';
 
 export default {
-  title: 'DataTable/Filtering',
+  title: 'Components/DataTable/Filtering',
   component: DataTable,
   subcomponents: {
     TableToolbar,
@@ -65,9 +65,7 @@ export const Usage = () => (
             {/* pass in `onInputChange` change here to make filtering work */}
             <TableToolbarSearch onChange={onInputChange} />
             <TableToolbarMenu>
-              <TableToolbarAction
-                onClick={action('Action 1 Click')}
-                primaryFocus>
+              <TableToolbarAction onClick={action('Action 1 Click')}>
                 Action 1
               </TableToolbarAction>
               <TableToolbarAction onClick={action('Action 2 Click')}>

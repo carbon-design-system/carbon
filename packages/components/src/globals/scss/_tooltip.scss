@@ -50,14 +50,19 @@
 
   // IE media query
   @media all and (-ms-high-contrast: none), (-ms-high-contrast: active) {
-    width: rem(208px);
+    width: auto;
   }
   // Edge 12-15 and Edge 16 feature queries
   @supports (-ms-accelerator: true) {
-    width: rem(208px);
+    width: auto;
   }
   @supports (-ms-ime-align: auto) {
-    width: rem(208px);
+    width: auto;
+  }
+
+  // Windows, Firefox HCM Fix
+  @media screen and (-ms-high-contrast: active), screen and (prefers-contrast) {
+    border: 1px solid transparent;
   }
 }
 
@@ -133,6 +138,7 @@
     color: inherit;
     // overwrite default nowrap behavior
     white-space: normal;
+    word-break: break-word;
     // In order to pass AAT, opacity must be set to 1 in the default state
     // On focus/hover use a keyframe animation to mimic transition
     opacity: 1;

@@ -2,7 +2,7 @@ import { Story, Preview, Props } from '@storybook/addon-docs/blocks';
 
 # Grid
 
-[Source code](https://github.com/carbon-design-system/carbon/tree/master/packages/react/src/components/Grid)
+[Source code](https://github.com/carbon-design-system/carbon/tree/main/packages/react/src/components/Grid)
 &nbsp;|&nbsp;
 [Usage guidelines](https://www.carbondesignsystem.com/guidelines/2x-grid/overview)
 
@@ -40,7 +40,7 @@ import { Grid, Row, Column } from 'carbon-components-react';
 ```
 
 <Preview>
-  <Story id="grid--responsive-grid" />
+  <Story id="components-grid--responsive-grid" />
 </Preview>
 
 ## Overview
@@ -82,7 +82,7 @@ function MyComponent() {
 _Note: by default, `carbon-components` ships with a 12 column grid. You can
 enable a 16 column grid, which will be the default grid in the next major
 version, by using our
-[feature flags in Sass](https://github.com/carbon-design-system/carbon/blob/master/docs/guides/sass.md#feature-flags)._
+[feature flags in Sass](https://github.com/carbon-design-system/carbon/blob/main/docs/guides/sass.md#feature-flags)._
 
 You can pair up multiple breakpoint props to specify how many columns the
 `Column` component should span at different break points. In the example below,
@@ -90,7 +90,7 @@ we will use the `sm`, `md`, and `lg` prop to specify how many columns the
 `Column` components should span at the small, medium, and large breakpoints.
 
 <Preview>
-  <Story id="grid--responsive-grid" />
+  <Story id="components-grid--responsive-grid" />
 </Preview>
 
 ## Grid modes
@@ -110,25 +110,25 @@ to mix-and-match certain grid modes to achieve a particular layout.
 ### Wide grid
 
 <Preview>
-  <Story id="grid--responsive-grid" />
+  <Story id="components-grid--responsive-grid" />
 </Preview>
 
 ### Narrow grid
 
 <Preview>
-  <Story id="grid--narrow" />
+  <Story id="components-grid--narrow" />
 </Preview>
 
 ### Condensed grid
 
 <Preview>
-  <Story id="grid--condensed" />
+  <Story id="components-grid--condensed" />
 </Preview>
 
 ### Mix-and-match
 
 <Preview>
-  <Story id="grid--mixed-grid-modes" />
+  <Story id="components-grid--mixed-grid-modes" />
 </Preview>
 
 ## Auto columns
@@ -148,7 +148,7 @@ components would span 50% each, four `Column` components would span 25% each,
 and so on.
 
 <Preview>
-  <Story id="grid--auto-columns" />
+  <Story id="components-grid--auto-columns" />
 </Preview>
 
 ## Offset columns
@@ -169,7 +169,7 @@ breakpoint. At the medium breakpoint, it will be offset by two columns.
 ```
 
 <Preview>
-  <Story id="grid--offset" />
+  <Story id="components-grid--offset" />
 </Preview>
 
 ## Component API
@@ -187,7 +187,7 @@ a `section`. Simililarly, we use the `as` prop on `Column` to change it from a
 `div` to an `article`.
 
 ```jsx
-import { Grid, Row, Column } from 'carbon-components'react;
+import { Grid, Row, Column } from 'carbon-components-react';
 
 function MyComponent() {
   return (
@@ -207,7 +207,7 @@ You can also provide a custom component to the `as` prop. This custom component
 should accept all props passed to it, like a class name for the column.
 
 ```jsx
-import { Grid, Row, Column } from 'carbon-components'react;
+import { Grid, Row, Column } from 'carbon-components-react';
 
 function Article({ children, ...rest }) {
   return <article {...rest}>{children}</article>;
@@ -259,4 +259,4 @@ would love for you to get in touch!
 
 Help us improve this component by providing feedback, asking questions on Slack,
 or updating this file on
-[GitHub](https://github.com/carbon-design-system/carbon/edit/master/packages/react/src/components/Grid/Grid.mdx).
+[GitHub](https://github.com/carbon-design-system/carbon/edit/main/packages/react/src/components/Grid/Grid.mdx).

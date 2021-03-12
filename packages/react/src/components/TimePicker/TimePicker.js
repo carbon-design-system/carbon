@@ -49,7 +49,7 @@ export default class TimePicker extends Component {
     /**
      * Provide the text that is displayed when the control is in an invalid state
      */
-    invalidText: PropTypes.string,
+    invalidText: PropTypes.node,
 
     /**
      * Provide the text that will be read by a screen reader when visiting this
@@ -94,6 +94,12 @@ export default class TimePicker extends Component {
      * Specify the placeholder attribute for the `<input>`
      */
     placeholder: PropTypes.string,
+
+    /**
+     * Specify the size of the Time Picker. Currently supports either `sm` or
+     * `xl` as an option.
+     */
+    size: PropTypes.oneOf(['sm', 'xl']),
 
     /**
      * Specify the type of the `<input>`
@@ -147,6 +153,7 @@ export default class TimePicker extends Component {
       invalid,
       hideLabel,
       light,
+      size,
       ...other
     } = this.props;
 
@@ -196,6 +203,7 @@ export default class TimePicker extends Component {
       [`${prefix}--time-picker`]: true,
       [`${prefix}--time-picker--light`]: light,
       [`${prefix}--time-picker--invalid`]: invalid,
+      [`${prefix}--time-picker--${size}`]: size,
       [className]: className,
     });
 

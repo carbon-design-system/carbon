@@ -59,11 +59,11 @@ describe('TimePicker', () => {
     describe('Light', () => {
       describe('Renders as expected', () => {
         wrapper = mount(<TimePicker id="test" light className="extra-class" />);
-    
+
         it('Has the expected classes for light', () => {
           expect(wrapper.hasClass(`${prefix}--time-picker--light`)).toEqual(true);
         });
-    
+
         it('Should add extra classes that are passed via className', () => {
           expect(wrapper.hasClass('extra-class')).toEqual(true);
         });
@@ -166,9 +166,8 @@ describe('TimePicker', () => {
   });
 
   describe('Getting derived state from props', () => {
-    const wrapper = shallow(<TimePicker />);
-
     it('should change the value upon change in props', () => {
+      const wrapper = shallow(<TimePicker id="test" />);
       wrapper.setProps({ value: 'foo' });
       wrapper.setState({ value: 'foo' });
       wrapper.setProps({ value: 'bar' });
@@ -176,6 +175,7 @@ describe('TimePicker', () => {
     });
 
     it('should avoid change the value upon setting props, unless there the value actually changes', () => {
+      const wrapper = shallow(<TimePicker id="test" />);
       wrapper.setProps({ value: 'foo' });
       wrapper.setState({ value: 'bar' });
       wrapper.setProps({ value: 'foo' });

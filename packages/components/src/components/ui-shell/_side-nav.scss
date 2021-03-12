@@ -116,8 +116,9 @@
   }
 
   .#{$prefix}--side-nav__overlay {
-    position: absolute;
+    position: fixed;
     top: rem(48px);
+    left: 0;
     width: 0;
     height: 0;
     background-color: transparent;
@@ -128,7 +129,7 @@
 
   .#{$prefix}--side-nav__overlay-active {
     @include carbon--breakpoint-down('lg') {
-      width: 100%;
+      width: 100vw;
       height: 100vh;
       background-color: $overlay-01;
       opacity: 1;
@@ -304,17 +305,10 @@
     overflow-y: auto;
   }
 
-  // Force all of our side navigation items to be the same dimensions. When our
-  // menu expands, we can undo the forced dimensions.
   .#{$prefix}--side-nav__item {
-    width: mini-units(6);
-    height: mini-units(6);
+    width: auto;
+    height: auto;
     overflow: hidden;
-
-    @include expanded() {
-      width: auto;
-      height: auto;
-    }
   }
 
   .#{$prefix}--side-nav--ux .#{$prefix}--side-nav__item {
@@ -349,6 +343,15 @@
 
   .#{$prefix}--side-nav__item--large {
     height: mini-units(6);
+  }
+
+  //----------------------------------------------------------------------------
+  // Side-nav > Navigation > Divider
+  //----------------------------------------------------------------------------
+  .#{$prefix}--side-nav__divider {
+    height: 1px;
+    margin: $spacing-03 $spacing-05;
+    background-color: $ibm-color__gray-20;
   }
 
   //----------------------------------------------------------------------------
@@ -553,6 +556,12 @@
     width: mini-units(2);
     height: mini-units(2);
     fill: $shell-side-nav-icon-01;
+
+    @media screen and (-ms-high-contrast: active),
+      screen and (prefers-contrast) {
+      // `ButtonText` is a CSS2 system color to help improve colors in HCM
+      fill: ButtonText;
+    }
   }
 
   .#{$prefix}--side-nav__icon > svg.#{$prefix}--side-nav-collapse-icon {
@@ -665,6 +674,13 @@
     .#{$prefix}--header__menu-arrow,
   .#{$prefix}--side-nav .#{$prefix}--header__menu-arrow {
     fill: $shell-side-nav-text-01;
+
+    // Windows, Firefox HCM Fix
+    @media screen and (-ms-high-contrast: active),
+      screen and (prefers-contrast) {
+      // `ButtonText` is a CSS2 system color to help improve colors in HCM
+      fill: ButtonText;
+    }
   }
 }
 

@@ -133,6 +133,11 @@ export default class Modal extends Component {
     passiveModal: PropTypes.bool,
 
     /**
+     * Prevent closing on click outside of modal
+     */
+    preventCloseOnClickOutside: PropTypes.bool,
+
+    /**
      * Specify whether the Button should be disabled, or not
      */
     primaryButtonDisabled: PropTypes.bool,
@@ -146,6 +151,42 @@ export default class Modal extends Component {
      * Specify the text for the secondary button
      */
     secondaryButtonText: PropTypes.node,
+
+    /**
+     * Specify an array of config objects for secondary buttons
+     * (`Array<{
+     *   buttonText: string,
+     *   onClick: function,
+     * }>`).
+     */
+    secondaryButtons: (props, propName, componentName) => {
+      if (props.secondaryButtons) {
+        if (
+          !Array.isArray(props.secondaryButtons) ||
+          props.secondaryButtons.length !== 2
+        ) {
+          return new Error(
+            `${propName} needs to be an array of two button config objects`
+          );
+        }
+
+        const shape = {
+          buttonText: PropTypes.node,
+          onClick: PropTypes.func,
+        };
+
+        props[propName].forEach((secondaryButton) => {
+          PropTypes.checkPropTypes(
+            shape,
+            secondaryButton,
+            propName,
+            componentName
+          );
+        });
+      }
+
+      return null;
+    },
 
     /**
      * Specify a CSS selector that matches the DOM element that should
@@ -179,6 +220,7 @@ export default class Modal extends Component {
     iconDescription: 'Close',
     modalHeading: '',
     modalLabel: '',
+    preventCloseOnClickOutside: false,
     selectorPrimaryFocus: '[data-modal-primary-focus]',
     hasScrollingContent: false,
   };
@@ -211,7 +253,8 @@ export default class Modal extends Component {
       !elementOrParentIsFloatingMenu(
         evt.target,
         this.props.selectorsFloatingMenus
-      )
+      ) &&
+      !this.props.preventCloseOnClickOutside
     ) {
       this.props.onRequestClose(evt);
     }
@@ -316,11 +359,13 @@ export default class Modal extends Component {
       primaryButtonDisabled,
       danger,
       alert,
+      secondaryButtons,
       selectorPrimaryFocus, // eslint-disable-line
       selectorsFloatingMenus, // eslint-disable-line
       shouldSubmitOnEnter, // eslint-disable-line
       size,
       hasScrollingContent,
+      preventCloseOnClickOutside, // eslint-disable-line
       ...other
     } = this.props;
 
@@ -343,6 +388,11 @@ export default class Modal extends Component {
     const contentClasses = classNames(`${prefix}--modal-content`, {
       [`${prefix}--modal-content--with-form`]: hasForm,
       [`${prefix}--modal-scroll-content`]: hasScrollingContent,
+    });
+
+    const footerClasses = classNames(`${prefix}--modal-footer`, {
+      [`${prefix}--modal-footer--three-button`]:
+        Array.isArray(secondaryButtons) && secondaryButtons.length === 2,
     });
 
     const modalButton = (
@@ -384,6 +434,29 @@ export default class Modal extends Component {
       alertDialogProps['aria-describedby'] = this.modalBodyId;
     }
 
+    const SecondaryButtonSet = () => {
+      if (Array.isArray(secondaryButtons) && secondaryButtons.length <= 2) {
+        return secondaryButtons.map(
+          ({ buttonText, onClick: onButtonClick }, i) => (
+            <Button
+              key={`${buttonText}-${i}`}
+              kind="secondary"
+              onClick={onButtonClick}>
+              {buttonText}
+            </Button>
+          )
+        );
+      }
+      if (secondaryButtonText) {
+        return (
+          <Button kind="secondary" onClick={onSecondaryButtonClick}>
+            {secondaryButtonText}
+          </Button>
+        );
+      }
+      return null;
+    };
+
     const modalBody = (
       <div
         ref={this.innerModal}
@@ -420,10 +493,8 @@ export default class Modal extends Component {
           <div className={`${prefix}--modal-content--overflow-indicator`} />
         )}
         {!passiveModal && (
-          <ButtonSet className={`${prefix}--modal-footer`}>
-            <Button kind="secondary" onClick={onSecondaryButtonClick}>
-              {secondaryButtonText}
-            </Button>
+          <ButtonSet className={footerClasses}>
+            <SecondaryButtonSet />
             <Button
               kind={danger ? 'danger' : 'primary'}
               disabled={primaryButtonDisabled}

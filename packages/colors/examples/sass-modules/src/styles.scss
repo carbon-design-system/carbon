@@ -1,0 +1,19 @@
+//
+// Copyright IBM Corp. 2018, 2020
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+@use '@carbon/colors' as *;
+
+body {
+  background: $gray-20;
+}
+
+.card {
+  background: $white;
+  width: 300px;
+  padding: 1rem;
+  border-radius: 8px;
+}

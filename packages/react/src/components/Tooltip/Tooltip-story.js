@@ -7,8 +7,15 @@
 
 import React, { useState } from 'react';
 import { settings } from 'carbon-components';
-import { withKnobs, select, text, number } from '@storybook/addon-knobs';
+import {
+  withKnobs,
+  select,
+  text,
+  number,
+  boolean,
+} from '@storybook/addon-knobs';
 import Tooltip from '../Tooltip';
+import { Tooltip as OGTooltip } from './Tooltip';
 import Button from '../Button';
 import { OverflowMenuVertical16 } from '@carbon/icons-react';
 import mdx from './Tooltip.mdx';
@@ -20,8 +27,15 @@ const directions = {
   'Top (top)': 'top',
   'Right (right)': 'right',
 };
+const alignments = {
+  'Start (start)': 'start',
+  'Center (center)': 'center',
+  'End (end)': 'end',
+};
+
 const props = {
   withIcon: () => ({
+    align: select('Tooltip alignment (align)', alignments, 'center'),
     direction: select('Tooltip direction (direction)', directions, 'bottom'),
     triggerText: text('Trigger text (triggerText)', 'Tooltip label'),
     tabIndex: number('Tab index (tabIndex in <Tooltip>)', 0),
@@ -32,6 +46,7 @@ const props = {
   }),
   withoutIcon: () => ({
     showIcon: false,
+    align: select('Tooltip alignment (align)', alignments, 'center'),
     direction: select('Tooltip direction (direction)', directions, 'bottom'),
     triggerText: text('Trigger text (triggerText)', 'Tooltip label'),
     tabIndex: number('Tab index (tabIndex in <Tooltip>)', 0),
@@ -42,6 +57,7 @@ const props = {
   }),
   customIcon: () => ({
     showIcon: true,
+    align: select('Tooltip alignment (align)', alignments, 'center'),
     direction: select('Tooltip direction (direction)', directions, 'bottom'),
     triggerText: text('Trigger text (triggerText)', 'Tooltip label'),
     tabIndex: number('Tab index (tabIndex in <Tooltip>)', 0),
@@ -60,6 +76,7 @@ const props = {
   }),
   customIconOnly: () => ({
     showIcon: true,
+    align: select('Tooltip alignment (align)', alignments, 'center'),
     direction: select('Tooltip direction (direction)', directions, 'bottom'),
     iconDescription: 'Helpful Information',
     tabIndex: number('Tab index (tabIndex in <Tooltip>)', 0),
@@ -96,10 +113,23 @@ function UncontrolledTooltipExample() {
       </Button>
       <div style={{ padding: '15px', margin: '4px 20px' }}>
         <Tooltip
+          {...{
+            ...props.withoutIcon(),
+            focusTrap: boolean('Focus trap (focusTrap)', true),
+          }}
           triggerText={<div>My text wrapped with tooltip</div>}
-          open={value}
-          showIcon={false}>
-          Some text
+          open={value}>
+          <p id="tooltip-body">
+            This is some tooltip text. This box shows the maximum amount of text
+            that should appear inside. If more room is needed please use a modal
+            instead.
+          </p>
+          <div className={`${prefix}--tooltip__footer`}>
+            <a href="/" className={`${prefix}--link`}>
+              Learn More
+            </a>
+            <Button size="small">Create</Button>
+          </div>
         </Tooltip>
       </div>
     </>
@@ -107,11 +137,11 @@ function UncontrolledTooltipExample() {
 }
 
 export default {
-  title: 'Tooltip',
+  title: 'Components/Tooltip',
+  component: OGTooltip,
   decorators: [withKnobs],
 
   parameters: {
-    component: Tooltip,
     docs: {
       page: mdx,
     },

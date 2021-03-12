@@ -38,7 +38,7 @@ const through = require('through2');
 
 // Rollup
 const { rollup } = require('rollup');
-const commonjs = require('rollup-plugin-commonjs');
+const commonjs = require('@rollup/plugin-commonjs');
 const { terser: rollupTerser } = require('rollup-plugin-terser');
 const rollupConfigDev = require('./tools/rollup.config.dev');
 const rollupConfigProd = require('./tools/rollup.config');
@@ -241,7 +241,9 @@ const convertToESMGulpPlugin = () =>
           }),
         ],
         onwarn: (warning, handle) => {
-          if (warning.code !== 'EMPTY_BUNDLE') handle(warning);
+          if (warning.code !== 'EMPTY_BUNDLE') {
+            handle(warning);
+          }
         },
       })
         .then((bundle) => bundle.generate({ format: 'esm' }))
@@ -415,14 +417,7 @@ gulp.task('sass:dev', () => {
         })
       ).on('error', sass.logError)
     )
-    .pipe(
-      postcss([
-        customProperties(),
-        autoprefixer({
-          browsers: ['> 1%', 'last 2 versions'],
-        }),
-      ])
-    )
+    .pipe(postcss([customProperties(), autoprefixer()]))
     .pipe(sourcemaps.write('.'))
     .pipe(gulp.dest('demo'))
     .pipe(browserSync.stream({ match: '**/*.css' }));

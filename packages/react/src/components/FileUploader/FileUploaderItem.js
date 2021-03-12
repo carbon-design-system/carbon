@@ -9,7 +9,7 @@ import { settings } from 'carbon-components';
 import cx from 'classnames';
 import PropTypes from 'prop-types';
 import React, { useRef } from 'react';
-import { Filename } from './';
+import Filename from './Filename';
 import { keys, matches } from '../../internal/keyboard';
 import uid from '../../tools/uniqueId';
 
@@ -35,7 +35,9 @@ function FileUploaderItem({
   });
   return (
     <span className={classes} {...other}>
-      <p className={`${prefix}--file-filename`}>{name}</p>
+      <p className={`${prefix}--file-filename`} title={name}>
+        {name}
+      </p>
       <span className={`${prefix}--file__state-container`}>
         <Filename
           iconDescription={iconDescription}

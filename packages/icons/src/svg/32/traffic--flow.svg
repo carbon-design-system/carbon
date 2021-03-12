@@ -1,0 +1,18 @@
+<svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: none;
+      }
+    </style>
+  </defs>
+  <polygon points="26 8 22 4 18 8 19.41 9.42 21 7.83 21 18 23 18 23 7.83 24.58 9.41 26 8"/>
+  <polygon points="12.59 22.58 11 24.17 11 14 9 14 9 24.17 7.42 22.59 6 24 10 28 14 24 12.59 22.58"/>
+  <rect x="2" y="2" width="2" height="28"/>
+  <rect x="28" y="2" width="2" height="28"/>
+  <rect x="15" y="2" width="2" height="4"/>
+  <rect x="15" y="10" width="2" height="4"/>
+  <rect x="15" y="18" width="2" height="4"/>
+  <rect x="15" y="26" width="2" height="4"/>
+  <rect id="_Transparent_Rectangle_" data-name="&lt;Transparent Rectangle&gt;" class="cls-1" width="32" height="32"/>
+</svg>

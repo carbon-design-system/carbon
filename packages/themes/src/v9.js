@@ -31,6 +31,7 @@ export const icon02 = '#5a6872';
 export const icon03 = white;
 
 export const link01 = '#3d70b2';
+export const link02 = '#3d70b2';
 
 export const inverseLink = '#5596e6';
 
@@ -52,7 +53,8 @@ export const inverseSupport04 = '#5aaafa';
 
 export const overlay01 = 'rgba(223, 227, 230, 0.5)';
 
-export const danger = red60;
+export const danger01 = red60;
+export const danger02 = red60;
 
 // Interaction states
 export const focus = '#3d70b2';
@@ -70,7 +72,9 @@ export const hoverTertiary = '#5a6872';
 export const activeTertiary = '#414f59';
 
 export const hoverUI = '#EEF4FC';
+export const hoverLightUI = '#EEF4FC';
 export const activeUI = '#DFEAFA';
+export const activeLightUI = '#DFEAFA';
 export const selectedUI = '#EEF4FC';
 export const selectedLightUI = '#EEF4FC';
 export const inverseHoverUI = '#4c4c4c';
@@ -91,8 +95,6 @@ export const disabled03 = '#cdd1d4';
 export const highlight = '#f4f7fb';
 
 export const decorative01 = '#EEF4FC';
-
-export const hoverLightUI = '#EEF4FC';
 
 export const buttonSeparator = '#e0e0e0';
 
@@ -176,3 +178,4 @@ export const brand02 = interactive02;
 export const brand03 = interactive03;
 export const active01 = activeUI;
 export const hoverField = hoverUI;
+export const danger = danger01;

@@ -52,6 +52,13 @@
     background: $ui-03;
     transform: translate(0%, -50%);
     cursor: pointer;
+
+    // Windows, Firefox HCM Fix
+    @media screen and (-ms-high-contrast: active),
+      screen and (prefers-contrast) {
+      // `ButtonText` is a CSS2 system color to help improve colors in HCM
+      border: 1px solid transparent;
+    }
   }
 
   .#{$prefix}--slider__track:before {
@@ -75,6 +82,13 @@
     transform-origin: left;
     transition: background $duration--fast-02 motion(standard, productive);
     pointer-events: none;
+
+    // Windows, Firefox HCM Fix
+    @media screen and (-ms-high-contrast: active),
+      screen and (prefers-contrast) {
+      // `ButtonText` is a CSS2 system color to help improve colors in HCM
+      border: 1px solid transparent;
+    }
   }
 
   .#{$prefix}--slider__thumb {
@@ -103,11 +117,23 @@
       box-shadow: inset 0 0 0 2px $interactive-04, inset 0 0 0 3px $ui-01;
       // 20px / 14px = 1.4286
       transform: translate(-50%, -50%) scale(1.4286);
+
+      // Firefox HCM Fix
+      @media screen and (prefers-contrast) {
+        outline-style: dotted;
+      }
     }
 
     &:active {
       box-shadow: inset 0 0 0 2px $interactive-04;
       transform: translate(-50%, -50%) scale(1.4286);
+    }
+
+    // Windows, Firefox HCM Fix
+    @media screen and (-ms-high-contrast: active),
+      screen and (prefers-contrast) {
+      // `ButtonText` is a CSS2 system color to help improve colors in HCM
+      outline: 1px solid ButtonText;
     }
   }
 
@@ -117,7 +143,7 @@
 
   .#{$prefix}--slider-text-input,
   .#{$prefix}-slider-text-input {
-    width: rem(64px);
+    width: auto;
     height: rem(40px);
     text-align: center;
     -moz-appearance: textfield;

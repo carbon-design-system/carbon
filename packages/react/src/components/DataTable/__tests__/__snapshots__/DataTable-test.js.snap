@@ -1870,7 +1870,6 @@ exports[`DataTable should render 1`] = `
                 >
                   <TableToolbarAction
                     onClick={[MockFunction]}
-                    primaryFocus={true}
                   >
                     Action 1
                   </TableToolbarAction>
@@ -2017,6 +2016,7 @@ exports[`DataTable should render 1`] = `
             translateWithId={[Function]}
           >
             <div
+              aria-hidden={true}
               className="bx--batch-actions"
             >
               <div
@@ -2026,7 +2026,7 @@ exports[`DataTable should render 1`] = `
                   className="bx--batch-summary__para"
                 >
                   <span>
-                    0 item selected
+                    0 items selected
                   </span>
                 </p>
               </div>
@@ -2060,6 +2060,7 @@ exports[`DataTable should render 1`] = `
                       type="button"
                     >
                       <button
+                        aria-pressed={null}
                         className="bx--btn bx--btn--primary"
                         disabled={false}
                         onClick={[MockFunction]}
@@ -2093,10 +2094,10 @@ exports[`DataTable should render 1`] = `
                               xmlns="http://www.w3.org/2000/svg"
                             >
                               <path
-                                d="M16,2C8.4,2,2,8.4,2,16s6.4,14,14,14s14-6.4,14-14S23.6,2,16,2z M24,17h-7v7h-2v-7H8v-2h7V8h2v7h7V17z"
+                                d="M16,2A14.1725,14.1725,0,0,0,2,16,14.1725,14.1725,0,0,0,16,30,14.1725,14.1725,0,0,0,30,16,14.1725,14.1725,0,0,0,16,2Zm8,15H17v7H15V17H8V15h7V8h2v7h7Z"
                               />
                               <path
-                                d="M24 17L17 17 17 24 15 24 15 17 8 17 8 15 15 15 15 8 17 8 17 15 24 15z"
+                                d="M24 17L17 17 17 24 15 24 15 17 8 17 8 15 15 15 15 8 17 8 17 15 24 15 24 17z"
                                 data-icon-path="inner-path"
                                 fill="none"
                               />
@@ -2132,6 +2133,7 @@ exports[`DataTable should render 1`] = `
                       type="button"
                     >
                       <button
+                        aria-pressed={null}
                         className="bx--btn bx--btn--primary"
                         disabled={false}
                         onClick={[MockFunction]}
@@ -2165,10 +2167,10 @@ exports[`DataTable should render 1`] = `
                               xmlns="http://www.w3.org/2000/svg"
                             >
                               <path
-                                d="M16,2C8.4,2,2,8.4,2,16s6.4,14,14,14s14-6.4,14-14S23.6,2,16,2z M24,17h-7v7h-2v-7H8v-2h7V8h2v7h7V17z"
+                                d="M16,2A14.1725,14.1725,0,0,0,2,16,14.1725,14.1725,0,0,0,16,30,14.1725,14.1725,0,0,0,30,16,14.1725,14.1725,0,0,0,16,2Zm8,15H17v7H15V17H8V15h7V8h2v7h7Z"
                               />
                               <path
-                                d="M24 17L17 17 17 24 15 24 15 17 8 17 8 15 15 15 15 8 17 8 17 15 24 15z"
+                                d="M24 17L17 17 17 24 15 24 15 17 8 17 8 15 15 15 15 8 17 8 17 15 24 15 24 17z"
                                 data-icon-path="inner-path"
                                 fill="none"
                               />
@@ -2204,6 +2206,7 @@ exports[`DataTable should render 1`] = `
                       type="button"
                     >
                       <button
+                        aria-pressed={null}
                         className="bx--btn bx--btn--primary"
                         disabled={false}
                         onClick={[MockFunction]}
@@ -2237,10 +2240,10 @@ exports[`DataTable should render 1`] = `
                               xmlns="http://www.w3.org/2000/svg"
                             >
                               <path
-                                d="M16,2C8.4,2,2,8.4,2,16s6.4,14,14,14s14-6.4,14-14S23.6,2,16,2z M24,17h-7v7h-2v-7H8v-2h7V8h2v7h7V17z"
+                                d="M16,2A14.1725,14.1725,0,0,0,2,16,14.1725,14.1725,0,0,0,16,30,14.1725,14.1725,0,0,0,30,16,14.1725,14.1725,0,0,0,16,2Zm8,15H17v7H15V17H8V15h7V8h2v7h7Z"
                               />
                               <path
-                                d="M24 17L17 17 17 24 15 24 15 17 8 17 8 15 15 15 15 8 17 8 17 15 24 15z"
+                                d="M24 17L17 17 17 24 15 24 15 17 8 17 8 15 15 15 15 8 17 8 17 15 24 15 24 17z"
                                 data-icon-path="inner-path"
                                 fill="none"
                               />
@@ -2262,6 +2265,7 @@ exports[`DataTable should render 1`] = `
                     type="button"
                   >
                     <button
+                      aria-pressed={null}
                       className="bx--batch-summary__cancel bx--btn bx--btn--primary"
                       disabled={false}
                       onClick={[Function]}
@@ -2295,12 +2299,11 @@ exports[`DataTable should render 1`] = `
                   tabIndex="-1"
                 >
                   <Search
-                    aria-hidden={false}
                     closeButtonLabelText="Clear search input"
                     id="custom-id"
                     labelText="Filter table"
                     onChange={[Function]}
-                    placeHolderText="Filter table"
+                    placeholder="Filter table"
                     size="sm"
                     tabIndex="0"
                     type="text"
@@ -2348,11 +2351,11 @@ exports[`DataTable should render 1`] = `
                         Filter table
                       </label>
                       <input
-                        aria-hidden={false}
                         autoComplete="off"
                         className="bx--search-input"
                         id="custom-id"
                         onChange={[Function]}
+                        onKeyDown={[Function]}
                         placeholder="Filter table"
                         role="searchbox"
                         tabIndex="0"
@@ -2439,7 +2442,6 @@ exports[`DataTable should render 1`] = `
                       }
                     }
                     selectorPrimaryFocus="[data-overflow-menu-primary-focus]"
-                    tabIndex={0}
                     title="Settings"
                   >
                     <ClickListener
@@ -2454,14 +2456,12 @@ exports[`DataTable should render 1`] = `
                         onClose={[Function]}
                         onKeyDown={[Function]}
                         open={false}
-                        tabIndex={0}
                         title="Settings"
                         type="button"
                       >
                         <ForwardRef(Settings16)
                           aria-label="Settings"
                           className="bx--overflow-menu__icon"
-                          focusable="false"
                           onClick={[Function]}
                           onKeyDown={[Function]}
                         >
@@ -2469,7 +2469,6 @@ exports[`DataTable should render 1`] = `
                             aria-label="Settings"
                             className="bx--overflow-menu__icon"
                             fill="currentColor"
-                            focusable="false"
                             height={16}
                             onClick={[Function]}
                             onKeyDown={[Function]}
@@ -2520,6 +2519,7 @@ exports[`DataTable should render 1`] = `
                 type="button"
               >
                 <button
+                  aria-pressed={null}
                   className="bx--btn bx--btn--sm bx--btn--primary"
                   disabled={false}
                   onClick={[MockFunction]}
@@ -2878,7 +2878,6 @@ exports[`DataTable sticky header should render 1`] = `
                 >
                   <TableToolbarAction
                     onClick={[MockFunction]}
-                    primaryFocus={true}
                   >
                     Action 1
                   </TableToolbarAction>
@@ -3028,6 +3027,7 @@ exports[`DataTable sticky header should render 1`] = `
             translateWithId={[Function]}
           >
             <div
+              aria-hidden={true}
               className="bx--batch-actions"
             >
               <div
@@ -3037,7 +3037,7 @@ exports[`DataTable sticky header should render 1`] = `
                   className="bx--batch-summary__para"
                 >
                   <span>
-                    0 item selected
+                    0 items selected
                   </span>
                 </p>
               </div>
@@ -3071,6 +3071,7 @@ exports[`DataTable sticky header should render 1`] = `
                       type="button"
                     >
                       <button
+                        aria-pressed={null}
                         className="bx--btn bx--btn--primary"
                         disabled={false}
                         onClick={[MockFunction]}
@@ -3104,10 +3105,10 @@ exports[`DataTable sticky header should render 1`] = `
                               xmlns="http://www.w3.org/2000/svg"
                             >
                               <path
-                                d="M16,2C8.4,2,2,8.4,2,16s6.4,14,14,14s14-6.4,14-14S23.6,2,16,2z M24,17h-7v7h-2v-7H8v-2h7V8h2v7h7V17z"
+                                d="M16,2A14.1725,14.1725,0,0,0,2,16,14.1725,14.1725,0,0,0,16,30,14.1725,14.1725,0,0,0,30,16,14.1725,14.1725,0,0,0,16,2Zm8,15H17v7H15V17H8V15h7V8h2v7h7Z"
                               />
                               <path
-                                d="M24 17L17 17 17 24 15 24 15 17 8 17 8 15 15 15 15 8 17 8 17 15 24 15z"
+                                d="M24 17L17 17 17 24 15 24 15 17 8 17 8 15 15 15 15 8 17 8 17 15 24 15 24 17z"
                                 data-icon-path="inner-path"
                                 fill="none"
                               />
@@ -3143,6 +3144,7 @@ exports[`DataTable sticky header should render 1`] = `
                       type="button"
                     >
                       <button
+                        aria-pressed={null}
                         className="bx--btn bx--btn--primary"
                         disabled={false}
                         onClick={[MockFunction]}
@@ -3176,10 +3178,10 @@ exports[`DataTable sticky header should render 1`] = `
                               xmlns="http://www.w3.org/2000/svg"
                             >
                               <path
-                                d="M16,2C8.4,2,2,8.4,2,16s6.4,14,14,14s14-6.4,14-14S23.6,2,16,2z M24,17h-7v7h-2v-7H8v-2h7V8h2v7h7V17z"
+                                d="M16,2A14.1725,14.1725,0,0,0,2,16,14.1725,14.1725,0,0,0,16,30,14.1725,14.1725,0,0,0,30,16,14.1725,14.1725,0,0,0,16,2Zm8,15H17v7H15V17H8V15h7V8h2v7h7Z"
                               />
                               <path
-                                d="M24 17L17 17 17 24 15 24 15 17 8 17 8 15 15 15 15 8 17 8 17 15 24 15z"
+                                d="M24 17L17 17 17 24 15 24 15 17 8 17 8 15 15 15 15 8 17 8 17 15 24 15 24 17z"
                                 data-icon-path="inner-path"
                                 fill="none"
                               />
@@ -3215,6 +3217,7 @@ exports[`DataTable sticky header should render 1`] = `
                       type="button"
                     >
                       <button
+                        aria-pressed={null}
                         className="bx--btn bx--btn--primary"
                         disabled={false}
                         onClick={[MockFunction]}
@@ -3248,10 +3251,10 @@ exports[`DataTable sticky header should render 1`] = `
                               xmlns="http://www.w3.org/2000/svg"
                             >
                               <path
-                                d="M16,2C8.4,2,2,8.4,2,16s6.4,14,14,14s14-6.4,14-14S23.6,2,16,2z M24,17h-7v7h-2v-7H8v-2h7V8h2v7h7V17z"
+                                d="M16,2A14.1725,14.1725,0,0,0,2,16,14.1725,14.1725,0,0,0,16,30,14.1725,14.1725,0,0,0,30,16,14.1725,14.1725,0,0,0,16,2Zm8,15H17v7H15V17H8V15h7V8h2v7h7Z"
                               />
                               <path
-                                d="M24 17L17 17 17 24 15 24 15 17 8 17 8 15 15 15 15 8 17 8 17 15 24 15z"
+                                d="M24 17L17 17 17 24 15 24 15 17 8 17 8 15 15 15 15 8 17 8 17 15 24 15 24 17z"
                                 data-icon-path="inner-path"
                                 fill="none"
                               />
@@ -3273,6 +3276,7 @@ exports[`DataTable sticky header should render 1`] = `
                     type="button"
                   >
                     <button
+                      aria-pressed={null}
                       className="bx--batch-summary__cancel bx--btn bx--btn--primary"
                       disabled={false}
                       onClick={[Function]}
@@ -3306,12 +3310,11 @@ exports[`DataTable sticky header should render 1`] = `
                   tabIndex="-1"
                 >
                   <Search
-                    aria-hidden={false}
                     closeButtonLabelText="Clear search input"
                     id="custom-id"
                     labelText="Filter table"
                     onChange={[Function]}
-                    placeHolderText="Filter table"
+                    placeholder="Filter table"
                     size="sm"
                     tabIndex="0"
                     type="text"
@@ -3359,11 +3362,11 @@ exports[`DataTable sticky header should render 1`] = `
                         Filter table
                       </label>
                       <input
-                        aria-hidden={false}
                         autoComplete="off"
                         className="bx--search-input"
                         id="custom-id"
                         onChange={[Function]}
+                        onKeyDown={[Function]}
                         placeholder="Filter table"
                         role="searchbox"
                         tabIndex="0"
@@ -3450,7 +3453,6 @@ exports[`DataTable sticky header should render 1`] = `
                       }
                     }
                     selectorPrimaryFocus="[data-overflow-menu-primary-focus]"
-                    tabIndex={0}
                     title="Settings"
                   >
                     <ClickListener
@@ -3465,14 +3467,12 @@ exports[`DataTable sticky header should render 1`] = `
                         onClose={[Function]}
                         onKeyDown={[Function]}
                         open={false}
-                        tabIndex={0}
                         title="Settings"
                         type="button"
                       >
                         <ForwardRef(Settings16)
                           aria-label="Settings"
                           className="bx--overflow-menu__icon"
-                          focusable="false"
                           onClick={[Function]}
                           onKeyDown={[Function]}
                         >
@@ -3480,7 +3480,6 @@ exports[`DataTable sticky header should render 1`] = `
                             aria-label="Settings"
                             className="bx--overflow-menu__icon"
                             fill="currentColor"
-                            focusable="false"
                             height={16}
                             onClick={[Function]}
                             onKeyDown={[Function]}
@@ -3531,6 +3530,7 @@ exports[`DataTable sticky header should render 1`] = `
                 type="button"
               >
                 <button
+                  aria-pressed={null}
                   className="bx--btn bx--btn--sm bx--btn--primary"
                   disabled={false}
                   onClick={[MockFunction]}

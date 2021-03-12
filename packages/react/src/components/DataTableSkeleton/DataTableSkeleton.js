@@ -13,6 +13,7 @@ import { settings } from 'carbon-components';
 const { prefix } = settings;
 
 const DataTableSkeleton = ({
+  headers,
   rowCount,
   columnCount,
   zebra,
@@ -67,7 +68,13 @@ const DataTableSkeleton = ({
           <tr>
             {columnsArray.map((i) => (
               <th key={i}>
-                <span></span>
+                {headers ? (
+                  <div className="bx--table-header-label">
+                    {headers[i]?.key}
+                  </div>
+                ) : (
+                  <span></span>
+                )}
               </th>
             ))}
           </tr>
@@ -131,7 +138,6 @@ DataTableSkeleton.defaultProps = {
   columnCount: 5,
   zebra: false,
   compact: false,
-  headers: [],
   showHeader: true,
   showToolbar: true,
 };

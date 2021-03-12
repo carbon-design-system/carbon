@@ -45,7 +45,7 @@ const props = () => ({
 });
 
 export default {
-  title: 'Pagination',
+  title: 'Components/Pagination',
   decorators: [
     withKnobs,
     (story) => <div style={{ maxWidth: '800px' }}>{story()}</div>,
@@ -83,5 +83,31 @@ MultiplePaginationComponents.storyName = 'Multiple Pagination components';
 MultiplePaginationComponents.parameters = {
   info: {
     text: `Showcasing unique ids for each pagination component`,
+  },
+};
+
+export const PaginationWithCustomPageSizesLabel = () => {
+  return (
+    <div>
+      <Pagination
+        {...props()}
+        pageSizes={[
+          { text: 'Ten', value: 10 },
+          { text: 'Twenty', value: 20 },
+          { text: 'Thirty', value: 30 },
+          { text: 'Fourty', value: 40 },
+          { text: 'Fifty', value: 50 },
+        ]}
+      />
+    </div>
+  );
+};
+
+PaginationWithCustomPageSizesLabel.storyName =
+  'Pagination with custom page sizes label';
+
+PaginationWithCustomPageSizesLabel.parameters = {
+  info: {
+    text: `It is also possible to use custom label in page sizes list`,
   },
 };

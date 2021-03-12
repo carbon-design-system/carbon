@@ -7,6 +7,7 @@
 
 export Accordion from './components/Accordion';
 export AccordionItem from './components/AccordionItem';
+export { AspectRatio } from './components/AspectRatio';
 export { Breadcrumb, BreadcrumbItem } from './components/Breadcrumb';
 export Button from './components/Button';
 export ButtonSet from './components/ButtonSet';
@@ -185,6 +186,7 @@ export {
   SkipToContent,
   SideNav,
   SideNavDetails,
+  SideNavDivider,
   SideNavFooter,
   SideNavHeader,
   SideNavIcon,
@@ -205,3 +207,15 @@ export {
 export unstable_TreeView, {
   TreeNode as unstable_TreeNode,
 } from './components/TreeView';
+export unstable_ContextMenu, {
+  ContextMenuDivider as unstable_ContextMenuDivider,
+  ContextMenuGroup as unstable_ContextMenuGroup,
+  ContextMenuItem as unstable_ContextMenuItem,
+  ContextMenuRadioGroup as unstable_ContextMenuRadioGroup,
+  ContextMenuSelectableItem as unstable_ContextMenuSelectableItem,
+  useContextMenu as unstable_useContextMenu,
+} from './components/ContextMenu';
+export {
+  Heading as unstable_Heading,
+  Section as unstable_Section,
+} from './components/Heading';

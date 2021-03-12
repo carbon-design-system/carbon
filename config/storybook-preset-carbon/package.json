@@ -1,0 +1,50 @@
+{
+  "name": "storybook-preset-carbon",
+  "private": true,
+  "version": "0.3.0",
+  "license": "Apache-2.0",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/carbon-design-system/carbon.git",
+    "directory": "config/storybook-preset-carbon"
+  },
+  "bugs": "https://github.com/carbon-design-system/carbon/issues",
+  "keywords": [
+    "ibm",
+    "carbon",
+    "carbon-design-system",
+    "components",
+    "react"
+  ],
+  "scripts": {
+    "build": "babel ./carbon-theme-addon/src --out-dir ./dist",
+    "clean": "rimraf ./dist"
+  },
+  "peerDependencies": {
+    "@storybook/react": "^5.3.19",
+    "react": "^16.8.6 || ^17.0.1",
+    "react-dom": "^16.8.6 || ^17.0.1"
+  },
+  "dependencies": {
+    "@babel/cli": "^7.12.10",
+    "@babel/core": "^7.12.10",
+    "@storybook/addon-actions": "^5.3.19",
+    "@storybook/addon-docs": "^5.3.19",
+    "@storybook/addon-knobs": "^5.3.19",
+    "@storybook/addon-links": "^5.3.19",
+    "@storybook/addon-notes": "^5.3.19",
+    "@storybook/addon-storysource": "^5.3.19",
+    "@storybook/addons": "^5.3.19",
+    "@storybook/source-loader": "^5.3.19",
+    "react-is": "^16.8.6",
+    "storybook-readme": "^5.0.8"
+  },
+  "devDependencies": {
+    "@storybook/react": "^5.3.19",
+    "babel-loader": "^8.2.2",
+    "react": "^16.8.6",
+    "react-dom": "^16.8.6",
+    "webpack": "^4.41.5"
+  }
+}

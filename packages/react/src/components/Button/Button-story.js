@@ -35,13 +35,17 @@ const kinds = {
   'Secondary button (secondary)': 'secondary',
   'Tertiary button (tertiary)': 'tertiary',
   'Danger button (danger)': 'danger',
+  'Danger tertiary button (danger--tertiary)': 'danger--tertiary',
+  'Danger ghost button (danger--ghost)': 'danger--ghost',
   'Ghost button (ghost)': 'ghost',
 };
 
 const sizes = {
   Default: 'default',
   Field: 'field',
-  Small: 'small',
+  'Small (sm)': 'small',
+  'Large (lg)': 'lg',
+  'Extra large size (xl)': 'xl',
 };
 
 const props = {
@@ -71,17 +75,9 @@ const props = {
     }
     return {
       className: 'some-class',
-      kind: select(
-        'Button kind (kind)',
-        {
-          'Primary button (primary)': 'primary',
-          'Secondary button (secondary)': 'secondary',
-          'Tertiary button (tertiary)': 'tertiary',
-          'Ghost button (ghost)': 'ghost',
-        },
-        'primary'
-      ),
+      kind: select('Button kind (kind)', kinds, 'primary'),
       disabled: boolean('Disabled (disabled)', false),
+      isSelected: boolean('Selected (isSelected)', false),
       size: select('Button size (size)', sizes, 'default'),
       renderIcon: !iconToUse || iconToUse.svgData ? undefined : iconToUse,
       iconDescription: text(
@@ -121,7 +117,7 @@ const props = {
 };
 
 export default {
-  title: 'Button',
+  title: 'Components/Button',
   decorators: [withKnobs],
   parameters: {
     component: Button,
@@ -152,7 +148,15 @@ export const Tertiary = () => {
 };
 
 export const Danger = () => {
-  return <Button kind="danger">Button</Button>;
+  return (
+    <>
+      <Button kind="danger">Button</Button>
+      &nbsp;
+      <Button kind="danger--tertiary">Tertiary Danger Button</Button>
+      &nbsp;
+      <Button kind="danger--ghost">Ghost Danger Button</Button>
+    </>
+  );
 };
 
 export const Ghost = () => {
@@ -173,7 +177,9 @@ export const Playground = () => {
         }}>
         <Button {...regularProps}>Button</Button>
         &nbsp;
-        <Button hasIconOnly {...iconOnly}></Button>
+        {!regularProps.kind.includes('danger') && (
+          <Button hasIconOnly {...iconOnly}></Button>
+        )}
       </div>
       <div
         style={{
@@ -192,7 +198,9 @@ export const Playground = () => {
   );
 };
 
-export const IconButton = () => <Button {...props.iconOnly()} hasIconOnly />;
+export const IconButton = () => (
+  <Button renderIcon={Add16} iconDescription="Icon Description" hasIconOnly />
+);
 
 IconButton.story = {
   name: 'Icon Button',

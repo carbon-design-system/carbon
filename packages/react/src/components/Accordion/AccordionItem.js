@@ -25,6 +25,7 @@ function AccordionItem({
   onHeadingClick,
   renderExpando: Expando = defaultRenderExpando,
   title = 'title',
+  disabled,
   ...rest
 }) {
   const [isOpen, setIsOpen] = useState(open);
@@ -35,10 +36,12 @@ function AccordionItem({
     [`${prefix}--accordion__item`]: true,
     [`${prefix}--accordion__item--active`]: isOpen,
     [`${prefix}--accordion__item--${animation}`]: animation,
+    [`${prefix}--accordion__item--disabled`]: disabled,
     [customClassName]: !!customClassName,
   });
 
   if (open !== prevIsOpen) {
+    setAnimation(isOpen ? 'collapsing' : 'expanding');
     setIsOpen(open);
     setPrevIsOpen(open);
   }
@@ -73,6 +76,7 @@ function AccordionItem({
   return (
     <li className={className} {...rest} onAnimationEnd={handleAnimationEnd}>
       <Expando
+        disabled={disabled}
         aria-controls={id}
         aria-expanded={isOpen}
         className={`${prefix}--accordion__heading`}
@@ -99,6 +103,11 @@ AccordionItem.propTypes = {
    * Specify an optional className to be applied to the container node
    */
   className: PropTypes.string,
+
+  /**
+   * Specify whether an individual AccordionItem should be disabled
+   */
+  disabled: PropTypes.bool,
 
   /**
    * The description of the expando icon.

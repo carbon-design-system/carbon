@@ -72,6 +72,39 @@
     }
   }
 
+  // Size styles
+  .#{$prefix}--accordion--xl .#{$prefix}--accordion__heading {
+    min-height: rem(48px);
+  }
+
+  .#{$prefix}--accordion--sm .#{$prefix}--accordion__heading {
+    min-height: rem(32px);
+    padding: rem(5px) 0;
+  }
+
+  // Disabled styles
+  .#{$prefix}--accordion__heading[disabled] {
+    color: $disabled-02;
+    cursor: not-allowed;
+  }
+
+  .#{$prefix}--accordion__heading[disabled] .#{$prefix}--accordion__arrow {
+    fill: $disabled-02;
+  }
+
+  .#{$prefix}--accordion__heading[disabled]:hover::before {
+    background-color: transparent;
+  }
+
+  .#{$prefix}--accordion__item--disabled,
+  .#{$prefix}--accordion__item--disabled + .#{$prefix}--accordion__item {
+    border-top: 1px solid $disabled-01;
+  }
+
+  li.#{$prefix}--accordion__item--disabled:last-of-type {
+    border-bottom: 1px solid $disabled-01;
+  }
+
   .#{$prefix}--accordion__arrow {
     @include focus-outline('reset');
     // Without flex basis and flex shrink being set here, our icon width can go
@@ -80,10 +113,16 @@
     width: 1rem;
     height: 1rem;
     margin: $accordion-arrow-margin;
-    // TODO: RTL rotate(180deg);
-    transform: rotate(90deg);
+    transform: rotate(90deg) #{'/*rtl:ignore*/'};
     transition: all $duration--fast-02 motion(standard, productive);
     fill: $ui-05;
+
+    // Windows, Firefox HCM Fix
+    @media screen and (-ms-high-contrast: active),
+      screen and (prefers-contrast) {
+      // `ButtonText` is a CSS2 system color to help improve colors in HCM
+      fill: ButtonText;
+    }
   }
 
   .#{$prefix}--accordion__title {
@@ -157,9 +196,15 @@
     }
 
     .#{$prefix}--accordion__arrow {
-      /* rtl:ignore */
-      transform: rotate(-90deg);
+      transform: rotate(-90deg) #{'/*rtl:ignore*/'};
       fill: $ui-05;
+
+      // Windows, Firefox HCM Fix
+      @media screen and (-ms-high-contrast: active),
+        screen and (prefers-contrast) {
+        // `ButtonText` is a CSS2 system color to help improve colors in HCM
+        fill: ButtonText;
+      }
     }
   }
 

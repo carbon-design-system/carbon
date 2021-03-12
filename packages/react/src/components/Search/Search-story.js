@@ -9,7 +9,6 @@
 
 import React from 'react';
 import { action } from '@storybook/addon-actions';
-
 import { withKnobs, boolean, select, text } from '@storybook/addon-knobs';
 import Search from '../Search';
 import SearchSkeleton from '../Search/Search.Skeleton';
@@ -27,6 +26,7 @@ const props = () => ({
   className: 'some-class',
   size: select('Size (size)', sizes, 'xl'),
   light: boolean('Light variant (light)', false),
+  disabled: boolean('Disabled (disabled)', false),
   name: text('Form item name (name)', ''),
   defaultValue: text('Default value (defaultValue)', ''),
   labelText: text('Label text (labelText)', 'Search'),
@@ -34,12 +34,13 @@ const props = () => ({
     'The label text for the close button (closeButtonLabelText)',
     'Clear search input'
   ),
-  placeHolderText: text('Placeholder text (placeHolderText)', 'Search'),
+  placeholder: text('Placeholder text (placeholder)', 'Search'),
   onChange: action('onChange'),
+  onKeyDown: action('onKeyDown'),
 });
 
 export default {
-  title: 'Search',
+  title: 'Components/Search',
   decorators: [withKnobs],
 
   parameters: {

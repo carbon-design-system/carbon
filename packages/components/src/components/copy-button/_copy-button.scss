@@ -94,6 +94,10 @@
       background-color: $hover-ui;
     }
 
+    &:active {
+      background-color: $active-ui;
+    }
+
     &::before {
       @include tooltip--caret;
 
@@ -103,6 +107,7 @@
     .#{$prefix}--copy-btn__feedback {
       @include tooltip--content('icon');
 
+      z-index: 3;
       display: none;
       box-sizing: content-box;
       margin: auto;

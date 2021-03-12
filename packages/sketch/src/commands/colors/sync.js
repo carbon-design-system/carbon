@@ -11,6 +11,6 @@ import { syncColorStyles } from '../../sharedStyles/colors';
 
 export function sync() {
   command('commands/colors/sync', () => {
-    syncColorStyles(Document.getSelectedDocument(), 'fill');
+    syncColorStyles({ document: Document.getSelectedDocument() });
   });
 }

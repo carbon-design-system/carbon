@@ -7,7 +7,7 @@
 
 import React from 'react';
 import { action } from '@storybook/addon-actions';
-import { withKnobs, boolean, select, text } from '@storybook/addon-knobs';
+import { boolean, select, text } from '@storybook/addon-knobs';
 import ComboBox from '../ComboBox';
 import mdx from './ComboBox.mdx';
 
@@ -51,6 +51,28 @@ const directions = {
   'Top ': 'top',
 };
 
+export default {
+  title: 'Components/ComboBox',
+  component: ComboBox,
+  parameters: {
+    docs: {
+      page: mdx,
+    },
+  },
+};
+
+export const combobox = () => (
+  <div style={{ width: 300 }}>
+    <ComboBox
+      items={items}
+      itemToString={(item) => (item ? item.text : '')}
+      placeholder="Filter..."
+      titleText="ComboBox title"
+      helperText="Combobox helper text"
+    />
+  </div>
+);
+
 const props = () => ({
   id: text('Combobox ID (id)', 'carbon-combobox-example'),
   placeholder: text('Placeholder text (placeholder)', 'Filter...'),
@@ -64,21 +86,14 @@ const props = () => ({
   direction: select('Dropdown direction (direction)', directions, 'bottom'),
   onChange: action('onChange'),
   onToggleClick: action('onClick'),
+  warn: boolean('Show warning state (warn)', false),
+  warnText: text(
+    'Warning state text (warnText)',
+    'This mode may perform worse on older machines'
+  ),
 });
 
-export default {
-  title: 'ComboBox',
-  decorators: [withKnobs],
-
-  parameters: {
-    component: ComboBox,
-    docs: {
-      page: mdx,
-    },
-  },
-};
-
-export const Default = () => (
+export const Playground = () => (
   <div style={{ width: 300 }}>
     <ComboBox
       items={items}
@@ -88,8 +103,28 @@ export const Default = () => (
   </div>
 );
 
-Default.parameters = {
-  info: {
-    text: 'ComboBox',
-  },
-};
+export const disabled = () => (
+  <div style={{ width: 300 }}>
+    <ComboBox
+      disabled
+      items={items}
+      itemToString={(item) => (item ? item.text : '')}
+      placeholder="Filter..."
+      titleText="ComboBox title"
+      helperText="Combobox helper text"
+    />
+  </div>
+);
+
+export const light = () => (
+  <div style={{ width: 300 }}>
+    <ComboBox
+      light
+      items={items}
+      itemToString={(item) => (item ? item.text : '')}
+      placeholder="Filter..."
+      titleText="ComboBox title"
+      helperText="Combobox helper text"
+    />
+  </div>
+);

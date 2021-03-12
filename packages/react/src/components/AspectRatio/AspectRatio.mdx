@@ -1,0 +1,76 @@
+import { Story, Props, Source, Preview } from '@storybook/addon-docs/blocks';
+import { Grid, Row, Column } from '../Grid';
+import { AspectRatio } from '../AspectRatio';
+
+# AspectRatio
+
+[Source code](https://github.com/carbon-design-system/carbon/tree/main/packages/react/src/components/AspectRatio)
+&nbsp;|&nbsp;
+[Usage guidelines](https://www.carbondesignsystem.com/guidelines/2x-grid/overview#aspect-ratio)
+
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+
+## Table of Contents
+
+- [Overview](#overview)
+- [Component API](#component-api)
+- [Feedback](#feedback)
+
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+
+## Overview
+
+The `AspectRatio` component supports rendering your content in a specific aspect
+ratio through the `ratio` prop. This prop will specify the proportion between
+the width and the height of your content. The width will be determined by
+spanning 100% of the space available in your layout, and the height will be
+determined by the ratio that you specified.
+
+<Preview>
+  <Story id="components-aspectratio--aspect-ratio" />
+</Preview>
+
+To see the full list of ratios supported by the `ratio` prop, check out the prop
+table in the [Component API](#component-api) section below.
+
+## Component API
+
+<Props />
+
+### AspectRatio as
+
+You can use the `as` prop to support rendering the outermost node in the
+component with a specific tag, or custom component, as opposed to the default
+`<div>` that is used.
+
+For example, to render an `article` you could use `as="article"`:
+
+```jsx
+<AspectRatio as="article" ratio="4x3">
+  Your content
+</AspectRatio>
+```
+
+You can also provide custom components, for example:
+
+```jsx
+function Article({ children, ...rest }) {
+  return <article {...rest}>{children}</article>;
+}
+
+<AspectRatio as={Article} ratio="4x3">
+  Your content
+</AspectRatio>;
+```
+
+### AspectRatio className
+
+The `className` prop passed into `AspectRatio` will be forwarded to the
+outermost node in the component.
+
+## Feedback
+
+Help us improve this component by providing feedback, asking questions on Slack,
+or updating this file on
+[GitHub](https://github.com/carbon-design-system/carbon/edit/main/packages/react/src/components/AspectRatio/AspectRatio.mdx).

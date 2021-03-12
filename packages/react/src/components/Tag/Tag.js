@@ -34,16 +34,20 @@ const Tag = ({
   id,
   type,
   filter,
+  renderIcon: CustomIconElement,
   title,
   disabled,
   onClose,
+  size,
   ...other
 }) => {
   const tagId = id || `tag-${getInstanceId()}`;
   const tagClasses = classNames(`${prefix}--tag`, className, {
     [`${prefix}--tag--disabled`]: disabled,
     [`${prefix}--tag--filter`]: filter,
+    [`${prefix}--tag--${size}`]: size,
     [`${prefix}--tag--${type}`]: type,
+    [`${prefix}--tag--interactive`]: other.onClick && !filter,
   });
   const handleClose = (event) => {
     if (onClose) {
@@ -51,38 +55,51 @@ const Tag = ({
       onClose(event);
     }
   };
-  return filter ? (
-    <div
-      className={tagClasses}
-      aria-label={
-        title !== undefined
-          ? `${title} ${children}`
-          : `Clear filter ${children}`
-      }
-      id={tagId}
-      {...other}>
-      <span
-        className={`${prefix}--tag__label`}
-        title={typeof children === 'string' ? children : null}>
+
+  if (filter) {
+    return (
+      <div
+        className={tagClasses}
+        aria-label={
+          title !== undefined
+            ? `${title} ${children}`
+            : `Clear filter ${children}`
+        }
+        id={tagId}
+        {...other}>
+        <span
+          className={`${prefix}--tag__label`}
+          title={typeof children === 'string' ? children : null}>
+          {children !== null && children !== undefined ? children : TYPES[type]}
+        </span>
+        <button
+          type="button"
+          className={`${prefix}--tag__close-icon`}
+          onClick={handleClose}
+          disabled={disabled}
+          aria-labelledby={tagId}
+          title={title}>
+          <Close16 />
+        </button>
+      </div>
+    );
+  }
+
+  const ComponentTag = other.onClick ? 'button' : 'div';
+
+  return (
+    <ComponentTag className={tagClasses} id={tagId} {...other}>
+      {CustomIconElement ? (
+        <div className={`${prefix}--tag__custom-icon`}>
+          <CustomIconElement />
+        </div>
+      ) : (
+        ''
+      )}
+      <span title={typeof children === 'string' ? children : null}>
         {children !== null && children !== undefined ? children : TYPES[type]}
       </span>
-      <button
-        type="button"
-        className={`${prefix}--tag__close-icon`}
-        onClick={handleClose}
-        disabled={disabled}
-        aria-labelledby={tagId}
-        title={title}>
-        <Close16 />
-      </button>
-    </div>
-  ) : (
-    <span
-      className={tagClasses}
-      title={typeof children === 'string' ? children : null}
-      {...other}>
-      {children !== null && children !== undefined ? children : TYPES[type]}
-    </span>
+    </ComponentTag>
   );
 };
 
@@ -116,6 +133,18 @@ Tag.propTypes = {
    * Click handler for filter tag close button.
    */
   onClose: PropTypes.func,
+
+  /**
+   * Optional prop to render a custom icon.
+   * Can be a React component class
+   */
+  renderIcon: PropTypes.oneOfType([PropTypes.func, PropTypes.object]),
+
+  /**
+   * Specify the size of the Tag. Currently supports either `sm` or
+   * default sizes.
+   */
+  size: PropTypes.oneOf(['sm']),
 
   /**
    * Text to show on clear filters

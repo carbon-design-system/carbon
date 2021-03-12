@@ -10,16 +10,24 @@ import React from 'react';
 import cx from 'classnames';
 import { settings } from 'carbon-components';
 import deprecate from '../../prop-types/deprecate';
+import { PropTypes as ListBoxPropTypes } from '../ListBox';
 
 const { prefix } = settings;
 
-const DropdownSkeleton = ({ inline, className, ...rest }) => {
+const DropdownSkeleton = ({
+  className,
+  size,
+  // TODO: `inline` is deprecated, remove in next major release
+  // eslint-disable-next-line no-unused-vars
+  inline,
+  ...rest
+}) => {
   const wrapperClasses = cx(className, {
     [`${prefix}--skeleton`]: true,
     [`${prefix}--dropdown-v2`]: true,
     [`${prefix}--list-box`]: true,
     [`${prefix}--form-item`]: true,
-    [`${prefix}--list-box--inline`]: inline,
+    [`${prefix}--list-box--${size}`]: size,
   });
 
   return (
@@ -45,6 +53,11 @@ DropdownSkeleton.propTypes = {
     `The \`inline\` prop has been deprecated and will
     be removed in the next major release. To specify the inline variant of Dropdown, please use the \`type\` prop.`
   ),
+
+  /**
+   * Specify the size of the ListBox. Currently supports either `sm`, `lg` or `xl` as an option.
+   */
+  size: ListBoxPropTypes.ListBoxSize,
 };
 
 export default DropdownSkeleton;
