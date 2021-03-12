@@ -12224,6 +12224,11 @@
     - qr
   sizes:
     - 32
+- name: scan--disabled
+  friendly_name: scan--disabled
+  aliases: []
+  sizes:
+    - 32
 - name: scatter-matrix
   friendly_name: Scatter matrix
   aliases:
@@ -14762,6 +14767,11 @@
     - my account
   sizes:
     - 16
+    - 32
+- name: user--access
+  friendly_name: user--access
+  aliases: []
+  sizes:
     - 32
 - name: user--activity
   friendly_name: User activity
