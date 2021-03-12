@@ -43,7 +43,7 @@ exports[`ModalWrapper should render 1`] = `
         onClick={[Function]}
         onFocus={[Function]}
         onMouseEnter={[Function]}
-        onMouseOut={[Function]}
+        onMouseLeave={[Function]}
         tabIndex={0}
         type="button"
       >
@@ -183,7 +183,7 @@ exports[`ModalWrapper should render 1`] = `
                     onClick={[Function]}
                     onFocus={[Function]}
                     onMouseEnter={[Function]}
-                    onMouseOut={[Function]}
+                    onMouseLeave={[Function]}
                     tabIndex={0}
                     type="button"
                   >
@@ -209,7 +209,7 @@ exports[`ModalWrapper should render 1`] = `
                   onClick={[Function]}
                   onFocus={[Function]}
                   onMouseEnter={[Function]}
-                  onMouseOut={[Function]}
+                  onMouseLeave={[Function]}
                   tabIndex={0}
                   type="button"
                 >

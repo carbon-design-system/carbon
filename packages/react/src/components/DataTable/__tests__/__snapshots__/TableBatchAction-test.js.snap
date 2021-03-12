@@ -35,7 +35,7 @@ exports[`DataTable.TableBatchAction should render 1`] = `
       onBlur={[Function]}
       onFocus={[Function]}
       onMouseEnter={[Function]}
-      onMouseOut={[Function]}
+      onMouseLeave={[Function]}
       tabIndex={0}
       type="button"
     >

@@ -216,7 +216,7 @@ Map {
       "onMouseEnter": Object {
         "type": "func",
       },
-      "onMouseOut": Object {
+      "onMouseLeave": Object {
         "type": "func",
       },
       "renderIcon": Object {

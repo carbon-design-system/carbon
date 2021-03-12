@@ -2067,7 +2067,7 @@ exports[`DataTable should render 1`] = `
                         onClick={[MockFunction]}
                         onFocus={[Function]}
                         onMouseEnter={[Function]}
-                        onMouseOut={[Function]}
+                        onMouseLeave={[Function]}
                         tabIndex={0}
                         type="button"
                       >
@@ -2144,7 +2144,7 @@ exports[`DataTable should render 1`] = `
                         onClick={[MockFunction]}
                         onFocus={[Function]}
                         onMouseEnter={[Function]}
-                        onMouseOut={[Function]}
+                        onMouseLeave={[Function]}
                         tabIndex={0}
                         type="button"
                       >
@@ -2221,7 +2221,7 @@ exports[`DataTable should render 1`] = `
                         onClick={[MockFunction]}
                         onFocus={[Function]}
                         onMouseEnter={[Function]}
-                        onMouseOut={[Function]}
+                        onMouseLeave={[Function]}
                         tabIndex={0}
                         type="button"
                       >
@@ -2284,7 +2284,7 @@ exports[`DataTable should render 1`] = `
                       onClick={[Function]}
                       onFocus={[Function]}
                       onMouseEnter={[Function]}
-                      onMouseOut={[Function]}
+                      onMouseLeave={[Function]}
                       tabIndex={-1}
                       type="button"
                     >
@@ -2542,7 +2542,7 @@ exports[`DataTable should render 1`] = `
                   onClick={[MockFunction]}
                   onFocus={[Function]}
                   onMouseEnter={[Function]}
-                  onMouseOut={[Function]}
+                  onMouseLeave={[Function]}
                   tabIndex={0}
                   type="button"
                 >
@@ -3098,7 +3098,7 @@ exports[`DataTable sticky header should render 1`] = `
                         onClick={[MockFunction]}
                         onFocus={[Function]}
                         onMouseEnter={[Function]}
-                        onMouseOut={[Function]}
+                        onMouseLeave={[Function]}
                         tabIndex={0}
                         type="button"
                       >
@@ -3175,7 +3175,7 @@ exports[`DataTable sticky header should render 1`] = `
                         onClick={[MockFunction]}
                         onFocus={[Function]}
                         onMouseEnter={[Function]}
-                        onMouseOut={[Function]}
+                        onMouseLeave={[Function]}
                         tabIndex={0}
                         type="button"
                       >
@@ -3252,7 +3252,7 @@ exports[`DataTable sticky header should render 1`] = `
                         onClick={[MockFunction]}
                         onFocus={[Function]}
                         onMouseEnter={[Function]}
-                        onMouseOut={[Function]}
+                        onMouseLeave={[Function]}
                         tabIndex={0}
                         type="button"
                       >
@@ -3315,7 +3315,7 @@ exports[`DataTable sticky header should render 1`] = `
                       onClick={[Function]}
                       onFocus={[Function]}
                       onMouseEnter={[Function]}
-                      onMouseOut={[Function]}
+                      onMouseLeave={[Function]}
                       tabIndex={-1}
                       type="button"
                     >
@@ -3573,7 +3573,7 @@ exports[`DataTable sticky header should render 1`] = `
                   onClick={[MockFunction]}
                   onFocus={[Function]}
                   onMouseEnter={[Function]}
-                  onMouseOut={[Function]}
+                  onMouseLeave={[Function]}
                   tabIndex={0}
                   type="button"
                 >

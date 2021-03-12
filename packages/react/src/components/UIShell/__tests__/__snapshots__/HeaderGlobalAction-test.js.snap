@@ -30,15 +30,16 @@ exports[`HeaderGlobalAction should render 1`] = `
       onClick={[MockFunction]}
       onFocus={[Function]}
       onMouseEnter={[Function]}
-      onMouseOut={[Function]}
+      onMouseLeave={[Function]}
       tabIndex={0}
       type="button"
     >
-      <span
+      <div
         className="bx--assistive-text"
+        onMouseEnter={[Function]}
       >
         Accessibility label
-      </span>
+      </div>
       <ForwardRef(Fade32)>
         <Icon
           fill="currentColor"
