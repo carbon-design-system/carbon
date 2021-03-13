@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { settings } from 'carbon-components';
@@ -13,6 +13,7 @@ import setupGetInstanceId from '../../tools/setupGetInstanceId';
 import deprecate from '../../prop-types/deprecate';
 
 const { prefix } = settings;
+const getInstanceId = setupGetInstanceId();
 
 export function StructuredListWrapper(props) {
   const {
@@ -28,7 +29,7 @@ export function StructuredListWrapper(props) {
   });
 
   return (
-    <div className={classes} {...other} aria-label={ariaLabel}>
+    <div role="table" className={classes} {...other} aria-label={ariaLabel}>
       {children}
     </div>
   );
@@ -74,7 +75,7 @@ export function StructuredListHead(props) {
   const classes = classNames(`${prefix}--structured-list-thead`, className);
 
   return (
-    <div className={classes} {...other}>
+    <div role="rowgroup" className={classes} {...other}>
       {children}
     </div>
   );
@@ -92,8 +93,6 @@ StructuredListHead.propTypes = {
   className: PropTypes.string,
 };
 
-const getInstanceId = setupGetInstanceId();
-
 export function StructuredListBody(props) {
   const { children, className, ...other } = props;
   const classes = classNames(`${prefix}--structured-list-tbody`, className);
@@ -101,7 +100,7 @@ export function StructuredListBody(props) {
   const { rowSelected, setRowSelected } = useState(0);
 
   return (
-    <div className={classes} {...other}>
+    <div className={classes} role="rowgroup" {...other}>
       {children}
     </div>
   );
@@ -201,16 +200,16 @@ StructuredListRow.defaultProps = {
 };
 
 export function StructuredListInput(props) {
-  const { className, value, name, title, ...other } = props;
-  const uid = props.id || getInstanceId();
+  const { className, value, name, title, id, ...other } = props;
   const classes = classNames(`${prefix}--structured-list-input`, className);
+  const instanceId = id || getInstanceId();
 
   return (
     <input
       {...other}
       type="radio"
       tabIndex={-1}
-      id={uid}
+      id={instanceId}
       className={classes}
       value={value}
       name={name}
@@ -271,7 +270,7 @@ export function StructuredListCell(props) {
   });
 
   return (
-    <div className={classes} {...other}>
+    <div className={classes} role={head ? 'columnheader' : 'cell'} {...other}>
       {children}
     </div>
   );
