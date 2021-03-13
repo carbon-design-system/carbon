@@ -202,7 +202,7 @@
     position: relative;
     order: 1;
     min-height: rem(56px);
-    max-height: rem(238px);
+    max-height: 100%;
     overflow: hidden;
     transition: max-height $duration--moderate-01 motion(standard, productive);
   }
@@ -210,7 +210,6 @@
   // expanded snippet container
   .#{$prefix}--snippet--multi.#{$prefix}--snippet--expand
     .#{$prefix}--snippet-container {
-    max-height: 100%;
     padding-bottom: $spacing-05;
     transition: max-height $duration--moderate-01 motion(standard, productive);
   }

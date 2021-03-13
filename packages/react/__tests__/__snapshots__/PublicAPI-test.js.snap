@@ -371,6 +371,12 @@ Map {
       "light": Object {
         "type": "bool",
       },
+      "maxClosedNumberOfRows": Object {
+        "type": "number",
+      },
+      "maxExpandedNumberOfRows": Object {
+        "type": "number",
+      },
       "onClick": Object {
         "type": "func",
       },

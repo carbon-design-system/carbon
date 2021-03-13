@@ -19,8 +19,9 @@ import getUniqueId from '../../tools/uniqueId';
 
 const { prefix } = settings;
 
-const rowHeightInPixels = 18;
-const defaultCollapsedHeightInRows = 15;
+const rowHeightInPixels = 16;
+const defaultMaxClosedNumberOfRows = 15;
+const defaultMaxExpandedNumberOfRows = 0;
 
 function CodeSnippet({
   className,
@@ -37,6 +38,8 @@ function CodeSnippet({
   showLessText,
   hideCopyButton,
   wrapText,
+  maxClosedNumberOfRows = defaultMaxClosedNumberOfRows,
+  maxExpandedNumberOfRows = defaultMaxExpandedNumberOfRows,
   ...rest
 }) {
   const [expandedCode, setExpandedCode] = useState(false);
@@ -92,23 +95,35 @@ function CodeSnippet({
     );
   }, [type, getCodeRefDimensions]);
 
-  useResizeObserver({
-    ref: getCodeRef(),
-    onResize: () => {
-      if (codeContentRef?.current && type === 'multi') {
-        const { height } = codeContentRef.current.getBoundingClientRect();
-        setShouldShowMoreLessBtn(
-          height > defaultCollapsedHeightInRows * rowHeightInPixels
-        );
-      }
-      if (
-        (codeContentRef?.current && type === 'multi') ||
-        (codeContainerRef?.current && type === 'single')
-      ) {
-        debounce(handleScroll, 200);
-      }
+  useResizeObserver(
+    {
+      ref: getCodeRef(),
+      onResize: () => {
+        if (codeContentRef?.current && type === 'multi') {
+          const { height } = codeContentRef.current.getBoundingClientRect();
+
+          if (
+            maxClosedNumberOfRows > 0 &&
+            (maxExpandedNumberOfRows === 0 ||
+              maxExpandedNumberOfRows > maxClosedNumberOfRows) &&
+            height > maxClosedNumberOfRows * rowHeightInPixels
+          ) {
+            setShouldShowMoreLessBtn(true);
+          } else {
+            setShouldShowMoreLessBtn(false);
+            setExpandedCode(false);
+          }
+        }
+        if (
+          (codeContentRef?.current && type === 'multi') ||
+          (codeContainerRef?.current && type === 'single')
+        ) {
+          debounce(handleScroll, 200);
+        }
+      },
     },
-  });
+    [type, maxClosedNumberOfRows, maxExpandedNumberOfRows, rowHeightInPixels]
+  );
 
   useEffect(() => {
     handleScroll();
@@ -147,6 +162,23 @@ function CodeSnippet({
     );
   }
 
+  let containerStyle = {};
+  if (type === 'multi') {
+    if (expandedCode) {
+      if (maxExpandedNumberOfRows > 0) {
+        containerStyle.style = {
+          maxHeight: maxExpandedNumberOfRows * rowHeightInPixels,
+        };
+      }
+    } else {
+      if (maxClosedNumberOfRows > 0) {
+        containerStyle.style = {
+          maxHeight: maxClosedNumberOfRows * rowHeightInPixels,
+        };
+      }
+    }
+  }
+
   return (
     <div {...rest} className={codeSnippetClasses}>
       <div
@@ -155,7 +187,8 @@ function CodeSnippet({
         tabIndex={type === 'single' && !disabled ? 0 : null}
         className={`${prefix}--snippet-container`}
         aria-label={ariaLabel || copyLabel || 'code-snippet'}
-        onScroll={(type === 'single' && handleScroll) || null}>
+        onScroll={(type === 'single' && handleScroll) || null}
+        {...containerStyle}>
         <code>
           <pre
             ref={codeContentRef}
@@ -252,6 +285,16 @@ CodeSnippet.propTypes = {
    * typically used for inline snippet to display an alternate color
    */
   light: PropTypes.bool,
+
+  /**
+   * Specify the maximum number of rows to be shown when in closed view
+   */
+  maxClosedNumberOfRows: PropTypes.number,
+
+  /**
+   * Specify the maximum number of rows to be shown when in expanded view
+   */
+  maxExpandedNumberOfRows: PropTypes.number,
 
   /**
    * An optional handler to listen to the `onClick` even fired by the Copy
