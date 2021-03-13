@@ -197,7 +197,7 @@
     @include type-style('body-short-01');
 
     margin-top: 0;
-    margin-bottom: $carbon--spacing-06;
+    margin-bottom: $carbon--spacing-05;
     color: $inverse-01;
     word-break: break-word;
   }
@@ -211,6 +211,7 @@
     @include type-style('body-short-01');
 
     margin-bottom: $carbon--spacing-05;
+    padding-top: $carbon--spacing-03;
     color: $inverse-01;
   }
 
