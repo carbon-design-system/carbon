@@ -158,7 +158,6 @@
   .#{$prefix}--select-input__wrapper[data-invalid]
     .#{$prefix}--select-input
     ~ .#{$prefix}--select__invalid-icon {
-    right: $spacing-09;
     fill: $support-01;
   }
 
