@@ -3672,6 +3672,7 @@ Map {
       },
     },
     "defaultProps": Object {
+      "clearSelectionText": "To clear selection, press Delete",
       "compareItems": [Function],
       "direction": "bottom",
       "disabled": false,
@@ -3687,6 +3688,9 @@ Map {
     },
     "displayName": "MultiSelect",
     "propTypes": Object {
+      "clearSelectionText": Object {
+        "type": "string",
+      },
       "compareItems": Object {
         "isRequired": true,
         "type": "func",
