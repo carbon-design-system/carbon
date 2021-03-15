@@ -51,6 +51,7 @@ const MultiSelect = React.forwardRef(function MultiSelect(
     initialSelectedItems,
     sortItems,
     compareItems,
+    clearSelectionText,
     light,
     invalid,
     invalidText,
@@ -234,7 +235,7 @@ const MultiSelect = React.forwardRef(function MultiSelect(
           <span
             className={`${prefix}--visually-hidden`}
             id={`clear-button-label${id}`}>
-            To clear selection, press Delete
+            {clearSelectionText}
           </span>
         )}
         <button
@@ -306,6 +307,11 @@ const MultiSelect = React.forwardRef(function MultiSelect(
 MultiSelect.displayName = 'MultiSelect';
 MultiSelect.propTypes = {
   ...sortingPropTypes,
+
+  /**
+   * Specify the text that should be read for screen readers to clear selection.
+   */
+  clearSelectionText: PropTypes.string,
 
   /**
    * Specify the direction of the multiselect dropdown. Can be either top or bottom.
@@ -448,6 +454,7 @@ MultiSelect.defaultProps = {
   open: false,
   selectionFeedback: 'top-after-reopen',
   direction: 'bottom',
+  clearSelectionText: 'To clear selection, press Delete',
 };
 
 export default MultiSelect;
