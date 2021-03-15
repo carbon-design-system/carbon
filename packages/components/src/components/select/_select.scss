@@ -165,6 +165,11 @@
     fill: $support-03;
   }
 
+  .#{$prefix}--select__invalid-icon--warning path[fill] {
+    opacity: 1;
+    fill: $carbon__black-100;
+  }
+
   .#{$prefix}--select-optgroup,
   .#{$prefix}--select-option {
     // For the options to show in IE11
