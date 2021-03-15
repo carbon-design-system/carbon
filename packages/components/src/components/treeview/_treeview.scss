@@ -133,8 +133,12 @@
       }
     }
 
-    .#{$prefix}--tree-node--selected .#{$prefix}--tree-parent-node__toggle-icon,
-    .#{$prefix}--tree-node--selected .#{$prefix}--tree-node__icon {
+    .#{$prefix}--tree-node--selected
+      > .#{$prefix}--tree-node__label
+      .#{$prefix}--tree-parent-node__toggle-icon,
+    .#{$prefix}--tree-node--selected
+      > .#{$prefix}--tree-node__label
+      .#{$prefix}--tree-node__icon {
       fill: $icon-01;
     }
 
