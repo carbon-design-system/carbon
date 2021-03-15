@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React, { useState, useRef } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { settings } from 'carbon-components';
@@ -96,8 +96,6 @@ StructuredListHead.propTypes = {
 export function StructuredListBody(props) {
   const { children, className, ...other } = props;
   const classes = classNames(`${prefix}--structured-list-tbody`, className);
-  const { labelRows, setLabelRows } = useState(null);
-  const { rowSelected, setRowSelected } = useState(0);
 
   return (
     <div className={classes} role="rowgroup" {...other}>
