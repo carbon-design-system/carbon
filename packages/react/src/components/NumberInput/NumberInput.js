@@ -468,9 +468,7 @@ class NumberInput extends Component {
                       {...buttonProps}
                       onClick={(evt) => this.handleArrowClick(evt, 'down')}
                       title={decrementNumLabel || iconDescription}
-                      aria-label={decrementNumLabel || iconDescription}
-                      aria-live="polite"
-                      aria-atomic="true">
+                      aria-label={decrementNumLabel || iconDescription}>
                       <Subtract16 className="down-icon" />
                     </button>
                     <div className={`${prefix}--number__rule-divider`}></div>
@@ -480,9 +478,7 @@ class NumberInput extends Component {
                       {...buttonProps}
                       onClick={(evt) => this.handleArrowClick(evt, 'up')}
                       title={incrementNumLabel || iconDescription}
-                      aria-label={incrementNumLabel || iconDescription}
-                      aria-live="polite"
-                      aria-atomic="true">
+                      aria-label={incrementNumLabel || iconDescription}>
                       <Add16 className="up-icon" />
                     </button>
                     <div className={`${prefix}--number__rule-divider`}></div>
