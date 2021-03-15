@@ -399,11 +399,16 @@ export default class Slider extends PureComponent {
 
     let targetValue = Number.parseFloat(evt.target.value);
 
-    // Avoid calling calcValue for invaid numbers, but still update the state
+    // Avoid calling calcValue for invalid numbers, but still update the state
     if (isNaN(targetValue)) {
       this.setState({ value: evt.target.value });
     } else {
       // Recalculate the state's value and update the Slider
+      // if it is a valid number
+      if (evt.target.checkValidity() === false) {
+        return;
+      }
+
       const { value, left } = this.calcValue({
         value: targetValue,
         useRawValue: true,

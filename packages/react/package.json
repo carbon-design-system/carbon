@@ -168,6 +168,6 @@
   ],
   "bundleSizeThreshold": 120000,
   "release": {
-    "branch": "master"
+    "branch": "main"
   }
 }
