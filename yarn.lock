@@ -9221,6 +9221,7 @@ __metadata:
     chalk: ^2.3.0
     classnames: 2.2.6
     cli-table: ^0.3.0
+    copy-to-clipboard: ^3.3.1
     core-js: ^3.6.5
     cross-env: ^5.2.0
     css-loader: ^3.4.2
@@ -10871,12 +10872,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"copy-to-clipboard@npm:^3, copy-to-clipboard@npm:^3.0.8":
-  version: 3.2.0
-  resolution: "copy-to-clipboard@npm:3.2.0"
+"copy-to-clipboard@npm:^3, copy-to-clipboard@npm:^3.0.8, copy-to-clipboard@npm:^3.3.1":
+  version: 3.3.1
+  resolution: "copy-to-clipboard@npm:3.3.1"
   dependencies:
     toggle-selection: ^1.0.6
-  checksum: b574ecaed1dcf116fd3578b2a46aad91b7a2891680645322641a8e1b1a07d155355e029c47f21ea1e2ec829c7cccb5e8d441f8b70b8e5507653356b395f0fcb3
+  checksum: 9707f2e405ca4019de1f4194565568acdf3d1dd8a59f7b8f63d0e7257648132b579461e7aeb6140169cb943cf4b6a243b377cf0437d8c10c6f5e5bb3935dea78
   languageName: node
   linkType: hard
 
