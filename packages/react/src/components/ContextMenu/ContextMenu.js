@@ -196,8 +196,12 @@ const ContextMenu = function ContextMenu({
           // wait until mouse button is released before allowing ClickListener
           // to close context menu as Safari emits 'click' event after 'contextmenu'
           // event when 'e.preventDefault()' is used on 'contextmenu' and would
-          // otherwise close the menu immediately
-          setCanBeClosed(true);
+          // otherwise close the menu immediately.
+          // wait an additional 25ms to await 'click' event which happens after
+          // 'mouseup' event. 'click' is only fired in Safari, 'mouseup' in all browsers.
+          setTimeout(() => {
+            setCanBeClosed(true);
+          }, 25);
         },
         { once: true }
       );
