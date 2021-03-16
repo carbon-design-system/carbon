@@ -292,15 +292,6 @@
     background-color: $hover-ui;
   }
 
-  .#{$prefix}--overflow-menu-options__option--danger {
-    border-top: 1px solid $ui-03;
-  }
-
-  .#{$prefix}--overflow-menu--light
-    .#{$prefix}--overflow-menu-options__option--danger {
-    border-top: 1px solid $decorative-01;
-  }
-
   .#{$prefix}--overflow-menu-options__option--danger
     .#{$prefix}--overflow-menu-options__btn:hover,
   .#{$prefix}--overflow-menu-options__option--danger
