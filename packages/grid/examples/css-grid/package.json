@@ -3,7 +3,7 @@
   "private": true,
   "scripts": {
     "develop": "next",
-    "build": "next build \"/grid/examples/css-grid\""
+    "build": "next build build"
   },
   "dependencies": {
     "@carbon/colors": "link:../../../colors",
