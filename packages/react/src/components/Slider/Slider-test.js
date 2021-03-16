@@ -224,15 +224,30 @@ describe('Slider', () => {
       });
     });
 
-    it('sets correct state when typing in input field', () => {
+    it('does not set incorrect state when typing a invalid value in input field', () => {
       const evt = {
         target: {
           value: '999',
+          checkValidity: () => false,
         },
       };
+
       wrapper.instance().onChange(evt);
-      expect(wrapper.state().value).toEqual(999);
-      expect(handleChange).lastCalledWith({ value: 999 });
+      expect(wrapper.state().value).toEqual(100);
+      expect(handleChange).lastCalledWith({ value: 100 });
+    });
+
+    it('sets correct state when typing a valid value in input field', () => {
+      const evt = {
+        target: {
+          value: '12',
+          checkValidity: () => true,
+        },
+      };
+
+      wrapper.instance().onChange(evt);
+      expect(wrapper.state().value).toEqual(12);
+      expect(handleChange).lastCalledWith({ value: 12 });
     });
   });
 

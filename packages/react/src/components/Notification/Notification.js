@@ -157,9 +157,11 @@ export function NotificationTextDetails({
         <div className={`${prefix}--toast-notification__subtitle`}>
           {subtitle}
         </div>
-        <div className={`${prefix}--toast-notification__caption`}>
-          {caption}
-        </div>
+        {caption && (
+          <div className={`${prefix}--toast-notification__caption`}>
+            {caption}
+          </div>
+        )}
         {children}
       </div>
     );
@@ -203,7 +205,6 @@ NotificationTextDetails.propTypes = {
 
 NotificationTextDetails.defaultProps = {
   title: 'title',
-  caption: 'caption',
   notificationType: 'toast',
 };
 
@@ -399,7 +400,6 @@ ToastNotification.propTypes = {
 ToastNotification.defaultProps = {
   kind: 'error',
   title: 'provide a title',
-  caption: 'provide a caption',
   role: 'alert',
   notificationType: 'toast',
   iconDescription: 'closes notification',
