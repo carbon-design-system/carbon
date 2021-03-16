@@ -40,6 +40,11 @@ const props = {
     labelText: text('Label text (labelText)', 'Select'),
     helperText: text('Helper text (helperText)', 'Optional helper text.'),
     onChange: action('onChange'),
+    warn: boolean('Show warning state (warn)', false),
+    warnText: text(
+      'Warning state text (warnText)',
+      'This will overwrite your current settings'
+    ),
   }),
   group: () => ({
     disabled: boolean('Disabled (disabled in <SelectItemGroup>)', false),
