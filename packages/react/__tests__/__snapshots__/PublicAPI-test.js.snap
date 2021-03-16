@@ -4540,6 +4540,7 @@ Map {
   "Search" => Object {
     "defaultProps": Object {
       "closeButtonLabelText": "Clear search input",
+      "kind": "default",
       "onChange": [Function],
       "placeholder": "",
       "type": "text",
@@ -4569,6 +4570,15 @@ Map {
       },
       "id": Object {
         "type": "string",
+      },
+      "kind": Object {
+        "args": Array [
+          Array [
+            "default",
+            "expandable",
+          ],
+        ],
+        "type": "oneOf",
       },
       "labelText": Object {
         "isRequired": true,

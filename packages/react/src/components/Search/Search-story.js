@@ -22,6 +22,11 @@ const sizes = {
   'Small size (sm)': 'sm',
 };
 
+const kinds = {
+  'Default (default)': 'default',
+  'Expandable (expandable)': 'expandable',
+};
+
 const props = () => ({
   className: 'some-class',
   size: select('Size (size)', sizes, 'xl'),
@@ -35,6 +40,7 @@ const props = () => ({
     'Clear search input'
   ),
   placeholder: text('Placeholder text (placeholder)', 'Search'),
+  kind: select('Kind (kind)', kinds, 'default'),
   onChange: action('onChange'),
   onKeyDown: action('onKeyDown'),
 });
