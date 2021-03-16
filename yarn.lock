@@ -1681,6 +1681,7 @@ __metadata:
   resolution: "@carbon/feature-flags@workspace:packages/feature-flags"
   dependencies:
     "@babel/generator": ^7.10.2
+    "@babel/template": ^7.12.13
     "@babel/types": ^7.10.2
     "@carbon/scss-generator": ^10.13.0
     change-case: ^4.1.2
