@@ -222,13 +222,13 @@
   }
 
   .#{$prefix}--tile--disabled.#{$prefix}--tile--is-selected {
-    outline-color: $disabled-03;
+    outline-color: $disabled-02;
   }
 
   .#{$prefix}--tile--disabled.#{$prefix}--tile--is-selected
     .#{$prefix}--tile__checkmark
     svg {
-    fill: $disabled-03;
+    fill: $disabled-02;
   }
 }
 
