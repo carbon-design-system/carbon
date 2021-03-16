@@ -52,6 +52,7 @@ const MultiSelect = React.forwardRef(function MultiSelect(
     sortItems,
     compareItems,
     clearSelectionText,
+    clearSelectionDescription,
     light,
     invalid,
     invalidText,
@@ -206,11 +207,15 @@ const MultiSelect = React.forwardRef(function MultiSelect(
 
   return (
     <div className={wrapperClasses}>
-      {titleText && (
-        <label className={titleClasses} {...getLabelProps()}>
-          {titleText}
-        </label>
-      )}
+      <label className={titleClasses} {...getLabelProps()}>
+        {titleText && titleText}
+        {selectedItems.length > 0 && (
+          <span className={`${prefix}--visually-hidden`}>
+            {clearSelectionDescription} {selectedItems.length},
+            {clearSelectionText}
+          </span>
+        )}
+      </label>
       <ListBox
         type={type}
         size={size}
@@ -231,15 +236,7 @@ const MultiSelect = React.forwardRef(function MultiSelect(
             className={`${prefix}--list-box__invalid-icon ${prefix}--list-box__invalid-icon--warning`}
           />
         )}
-        {selectedItems.length > 0 && (
-          <span
-            className={`${prefix}--visually-hidden`}
-            id={`clear-button-label${id}`}>
-            {clearSelectionText}
-          </span>
-        )}
         <button
-          aria-describedby={`clear-button-label${id}`}
           type="button"
           className={`${prefix}--list-box__field`}
           disabled={disabled}
@@ -307,6 +304,11 @@ const MultiSelect = React.forwardRef(function MultiSelect(
 MultiSelect.displayName = 'MultiSelect';
 MultiSelect.propTypes = {
   ...sortingPropTypes,
+
+  /**
+   * Specify the text that should be read for screen readers that describes total items selected
+   */
+  clearSelectionDescription: PropTypes.string,
 
   /**
    * Specify the text that should be read for screen readers to clear selection.
@@ -454,7 +456,8 @@ MultiSelect.defaultProps = {
   open: false,
   selectionFeedback: 'top-after-reopen',
   direction: 'bottom',
-  clearSelectionText: 'To clear selection, press Delete',
+  clearSelectionText: 'To clear selection, press Delete or Backspace,',
+  clearSelectionDescription: 'Total items selected: ',
 };
 
 export default MultiSelect;
