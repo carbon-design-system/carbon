@@ -98,7 +98,7 @@ To create a new branch, ensure you are in your forked branch in your terminal
 and run:
 
 ```sh
-git pull origin master
+git pull origin main
 git checkout -b {your-branch-name}
 ```
 
@@ -137,7 +137,7 @@ http://localhost:9000 to see the changes happen on the fly.
 
 For information about our coding style, such as how we name our classes and our
 file structure, go to our
-[developer handbook](https://github.com/carbon-design-system/carbon/blob/master/docs/developer-handbook.md#coding-style)
+[developer handbook](https://github.com/carbon-design-system/carbon/blob/main/docs/developer-handbook.md#coding-style)
 
 ### 6. Test your JavaScript code
 
@@ -149,7 +149,7 @@ yarn test
 ```
 
 For more extensive testing information, see our
-[developer handbook](https://github.com/carbon-design-system/carbon/blob/master/docs/developer-handbook.md#common-tasks)
+[developer handbook](https://github.com/carbon-design-system/carbon/blob/main/docs/developer-handbook.md#common-tasks)
 
 ### 7. Add yourself to the contributor list
 
@@ -203,7 +203,7 @@ git commit -m "YOUR  COMMIT MESSAGE HERE"
 
 For more information about how to write your commit message, view our commit
 conventions detailed in a our
-[developer handbook](https://github.com/carbon-design-system/carbon/blob/master/docs/developer-handbook.md#commit-conventions).
+[developer handbook](https://github.com/carbon-design-system/carbon/blob/main/docs/developer-handbook.md#commit-conventions).
 
 After your changes are committed, run:
 
@@ -295,23 +295,23 @@ Here are some contribution quick tips:
 
 ### What projects can I contribute to?
 
-- [`carbon-components`](https://github.com/carbon-design-system/carbon/tree/master/packages/components)
-- [`carbon-components-react`](https://github.com/carbon-design-system/carbon/tree/master/packages/react)
+- [`carbon-components`](https://github.com/carbon-design-system/carbon/tree/main/packages/components)
+- [`carbon-components-react`](https://github.com/carbon-design-system/carbon/tree/main/packages/react)
 - [`carbon-website`](https://github.com/carbon-design-system/carbon-website)
 - [`gatsby-theme-carbon`](https://github.com/carbon-design-system/gatsby-theme-carbon)
 - [`carbon-design-kit`](https://github.com/carbon-design-system/carbon-design-kit)
-- [`@carbon/elements`](https://github.com/carbon-design-system/carbon/tree/master/packages/elements)
-- [`@carbon/type`](https://github.com/carbon-design-system/carbon/tree/master/packages/type)
-- [`@carbon/colors`](https://github.com/carbon-design-system/carbon/tree/master/packages/colors)
-- [`@carbon/grid`](https://github.com/carbon-design-system/carbon/tree/master/packages/grid)
-- [`@carbon/icons`](https://github.com/carbon-design-system/carbon/tree/master/packages/icons)
-- [`@carbon/layout`](https://github.com/carbon-design-system/carbon/tree/master/packages/layout)
-- [`@carbon/motion`](https://github.com/carbon-design-system/carbon/tree/master/packages/motion)
-- [`@carbon/themes`](https://github.com/carbon-design-system/carbon/tree/master/packages/themes)
-- [`@carbon/icons-react`](https://github.com/carbon-design-system/carbon/tree/master/packages/icons-react)
+- [`@carbon/elements`](https://github.com/carbon-design-system/carbon/tree/main/packages/elements)
+- [`@carbon/type`](https://github.com/carbon-design-system/carbon/tree/main/packages/type)
+- [`@carbon/colors`](https://github.com/carbon-design-system/carbon/tree/main/packages/colors)
+- [`@carbon/grid`](https://github.com/carbon-design-system/carbon/tree/main/packages/grid)
+- [`@carbon/icons`](https://github.com/carbon-design-system/carbon/tree/main/packages/icons)
+- [`@carbon/layout`](https://github.com/carbon-design-system/carbon/tree/main/packages/layout)
+- [`@carbon/motion`](https://github.com/carbon-design-system/carbon/tree/main/packages/motion)
+- [`@carbon/themes`](https://github.com/carbon-design-system/carbon/tree/main/packages/themes)
+- [`@carbon/icons-react`](https://github.com/carbon-design-system/carbon/tree/main/packages/icons-react)
 
 And more! You can view a complete list of our packages
-[here](https://github.com/carbon-design-system/carbon/tree/master/packages).
+[here](https://github.com/carbon-design-system/carbon/tree/main/packages).
 
 ### Besides some of the obvious contributions mentioned above, how else can I contribute?
 
