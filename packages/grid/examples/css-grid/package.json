@@ -2,7 +2,8 @@
   "name": "grid-examples-css-grid",
   "private": true,
   "scripts": {
-    "develop": "next"
+    "develop": "next",
+    "build": "next build \"/grid/examples/css-grid\""
   },
   "dependencies": {
     "@carbon/colors": "link:../../../colors",
