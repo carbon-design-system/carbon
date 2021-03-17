@@ -42,8 +42,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 2rem;
-    height: 2rem;
+    margin-right: $carbon--spacing-03;
   }
 
   .#{$prefix}--inline-loading__checkmark-container {
