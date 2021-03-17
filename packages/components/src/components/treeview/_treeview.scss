@@ -35,24 +35,34 @@
       @include focus-outline('outline');
     }
 
-    .#{$prefix}--tree-node--disabled {
-      color: $disabled-02;
-      background-color: $disabled-01;
-      pointer-events: none;
+    .#{$prefix}--tree-node--disabled:focus > .#{$prefix}--tree-node__label {
+      outline: none;
     }
 
-    .#{$prefix}--tree-node--disabled .#{$prefix}--tree-node__label:hover {
+    .#{$prefix}--tree-node--disabled,
+    .#{$prefix}--tree-node--disabled .#{$prefix}--tree-node__label:hover,
+    .#{$prefix}--tree-node--disabled
+      .#{$prefix}--tree-node__label:hover
+      .#{$prefix}--tree-node__label__details {
+      color: $disabled-02;
       background-color: $disabled-01;
     }
 
     .#{$prefix}--tree-node--disabled .#{$prefix}--tree-parent-node__toggle-icon,
-    .#{$prefix}--tree-node--disabled .#{$prefix}--tree-node__icon {
+    .#{$prefix}--tree-node--disabled .#{$prefix}--tree-node__icon,
+    .#{$prefix}--tree-node--disabled
+      .#{$prefix}--tree-node__label:hover
+      .#{$prefix}--tree-parent-node__toggle-icon,
+    .#{$prefix}--tree-node--disabled
+      .#{$prefix}--tree-node__label:hover
+      .#{$prefix}--tree-node__icon {
       fill: $disabled-02;
     }
 
+    .#{$prefix}--tree-node--disabled,
     .#{$prefix}--tree-node--disabled
       .#{$prefix}--tree-parent-node__toggle-icon:hover {
-      cursor: default;
+      cursor: not-allowed;
     }
 
     .#{$prefix}--tree-node__label {
