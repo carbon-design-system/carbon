@@ -9259,7 +9259,6 @@ __metadata:
     string-replace-loader: ^2.1.0
     terser-webpack-plugin: ^2.3.2
     use-resize-observer: ^6.0.0
-    warning: ^3.0.0
     webpack: ^4.41.5
     whatwg-fetch: ^2.0.3
     window-or-global: ^1.0.1
