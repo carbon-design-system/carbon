@@ -9,7 +9,11 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import classNames from 'classnames';
 import { settings } from 'carbon-components';
-import { ChevronDown16, WarningFilled16 } from '@carbon/icons-react';
+import {
+  ChevronDown16,
+  WarningFilled16,
+  WarningAltFilled16,
+} from '@carbon/icons-react';
 import deprecate from '../../prop-types/deprecate';
 
 const { prefix } = settings;
@@ -32,6 +36,8 @@ const Select = React.forwardRef(function Select(
     helperText,
     light,
     size,
+    warn,
+    warnText,
     ...other
   },
   ref
@@ -42,6 +48,7 @@ const Select = React.forwardRef(function Select(
     [`${prefix}--select--light`]: light,
     [`${prefix}--select--invalid`]: invalid,
     [`${prefix}--select--disabled`]: disabled,
+    [`${prefix}--select--warning`]: warn,
     [className]: className,
   });
   const labelClasses = classNames(`${prefix}--label`, {
@@ -53,11 +60,20 @@ const Select = React.forwardRef(function Select(
     [`${prefix}--select-input--${size}`]: size,
   });
   const errorId = `${id}-error-msg`;
-  const error = invalid ? (
-    <div className={`${prefix}--form-requirement`} id={errorId}>
-      {invalidText}
-    </div>
-  ) : null;
+  const errorText = (() => {
+    if (invalid) {
+      return invalidText;
+    }
+    if (warn) {
+      return warnText;
+    }
+  })();
+  const error =
+    invalid || warn ? (
+      <div className={`${prefix}--form-requirement`} id={errorId}>
+        {errorText}
+      </div>
+    ) : null;
   const helperTextClasses = classNames(`${prefix}--form__helper-text`, {
     [`${prefix}--form__helper-text--disabled`]: disabled,
   });
@@ -84,6 +100,11 @@ const Select = React.forwardRef(function Select(
         <ChevronDown16 className={`${prefix}--select__arrow`} />
         {invalid && (
           <WarningFilled16 className={`${prefix}--select__invalid-icon`} />
+        )}
+        {!invalid && warn && (
+          <WarningAltFilled16
+            className={`${prefix}--select__invalid-icon ${prefix}--select__invalid-icon--warning`}
+          />
         )}
       </>
     );
@@ -208,6 +229,16 @@ Select.propTypes = {
    * Specify the size of the Select Input. Currently supports either `sm` or `xl` as an option.
    */
   size: PropTypes.oneOf(['sm', 'xl']),
+
+  /**
+   * Specify whether the control is currently in warning state
+   */
+  warn: PropTypes.bool,
+
+  /**
+   * Provide the text that is displayed when the control is in warning state
+   */
+  warnText: PropTypes.node,
 };
 
 Select.defaultProps = {
