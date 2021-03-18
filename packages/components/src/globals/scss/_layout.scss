@@ -12,6 +12,9 @@
 /// @type Map
 /// @group global-layout
 $z-indexes: (
+  // Dropdowns that render outside of a Modal should render above a Modal.
+  // Dropdowns below the modal will close when the Modal is opened, so
+  // having a higher z-index *should* not cause issues.
   dropdown: 9100,
   modal: 9000,
   overlay: 6000,
@@ -19,7 +22,7 @@ $z-indexes: (
   footer: 5000,
   hidden: - 1,
   overflowHidden: - 1,
-  floating: 6000,
+  floating: 6000
 );
 
 /// @access public
