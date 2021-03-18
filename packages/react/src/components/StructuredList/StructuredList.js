@@ -9,11 +9,10 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { settings } from 'carbon-components';
-import setupGetInstanceId from '../../tools/setupGetInstanceId';
+import { useId } from '../../internal/useId';
 import deprecate from '../../prop-types/deprecate';
 
 const { prefix } = settings;
-const getInstanceId = setupGetInstanceId();
 
 export function StructuredListWrapper(props) {
   const {
@@ -193,21 +192,27 @@ StructuredListRow.propTypes = {
 StructuredListRow.defaultProps = {
   head: false,
   label: false,
-  tabIndex: 0,
   onKeyDown: () => {},
 };
 
 export function StructuredListInput(props) {
-  const { className, value, name, title, id, ...other } = props;
   const classes = classNames(`${prefix}--structured-list-input`, className);
-  const instanceId = id || getInstanceId();
+  const defaultId = useId('structureListInput');
+  const {
+    className,
+    value,
+    name = `structuredListInput-${defaultId}`,
+    title,
+    id,
+    ...other
+  } = props;
 
   return (
     <input
       {...other}
       type="radio"
-      tabIndex={-1}
-      id={instanceId}
+      tabIndex={0}
+      id={id || defaultId}
       className={classes}
       value={value}
       name={name}
