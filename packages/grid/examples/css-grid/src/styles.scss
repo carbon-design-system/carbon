@@ -1,0 +1,60 @@
+//
+// Copyright IBM Corp. 2018, 2018
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+@use 'scss/reset';
+@use '@carbon/grid/scss/modules/css-grid';
+@use 'scss/components';
+@import '@carbon/layout/scss/spacing';
+@import '@carbon/type/scss/styles';
+
+.example > .bx--css-grid,
+.example > .bx--css-grid--12 {
+  // background-color: #d0e2ff;
+  border: 1px dashed black;
+}
+
+.example .bx--subgrid,
+.subgrid {
+  background-color: rgba(#ffe056, 0.25);
+  outline: 1px solid #ffe056;
+}
+
+.example .content,
+.column {
+  background-color: #edf4ff;
+  outline: 1px solid #a6c8ff;
+}
+
+.example .content {
+  min-height: 80px;
+}
+
+h2, h3, p {
+  $heading-spacing: $carbon--layout-01;
+
+  margin-top: $heading-spacing;
+  margin-bottom: $heading-spacing;
+}
+
+h2 {
+  @include carbon--type-style($name: productive-heading-03);
+}
+
+h3 {
+  @include carbon--type-style($name: productive-heading-01);
+}
+
+p {
+  @include carbon--type-style($name: body-short-02);
+}
+
+.content-focused {
+  display: grid;
+  grid-template-columns: max-content 1fr;
+  grid-column-gap: var(--cds-grid-gutter);
+  grid-row-gap: var(--cds-grid-margin);
+}
