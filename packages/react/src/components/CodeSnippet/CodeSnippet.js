@@ -116,12 +116,11 @@ function CodeSnippet({
   }, [handleScroll]);
 
   const handleCopyClick = (evt) => {
+    copy(children);
+
     if (onClick) {
       onClick(evt);
-      return;
     }
-
-    copy(children);
   };
 
   const codeSnippetClasses = classNames(className, `${prefix}--snippet`, {
