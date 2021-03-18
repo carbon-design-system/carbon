@@ -22,9 +22,7 @@ describe('[Deprecated] Toolbar', () => {
 
   beforeEach(() => {
     // Toolbar is deprecated
-    jest.mock('warning', () => {
-      return jest.fn();
-    });
+    jest.mock('../../internal/warning');
 
     Toolbar = require('../Toolbar').default;
     ToolbarItem = require('../Toolbar').ToolbarItem;
