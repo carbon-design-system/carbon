@@ -86,6 +86,18 @@
 // -----------------------------------------------------------------------------
 // Narrow
 // -----------------------------------------------------------------------------
+.#{$prefix}--css-grid--narrow {
+  --cds-grid-margin: 1rem;
+
+  padding-right: var(--cds-grid-margin);
+  padding-left: var(--cds-grid-margin);
+
+  @include breakpoint(md) {
+    padding-right: calc(var(--cds-grid-margin) + var(--cds-grid-gutter) / 2);
+    padding-left: calc(var(--cds-grid-margin) + var(--cds-grid-gutter) / 2);
+  }
+}
+
 .#{$prefix}--css-grid--narrow > [class*='#{$prefix}--col'] {
   margin-left: calc(var(--cds-grid-gutter) / 2 * -1);
 }
