@@ -32,7 +32,7 @@ module.exports = {
     '@storybook/addon-links',
     CARBON_REACT_STORYBOOK_USE_CUSTOM_PROPERTIES === 'true' &&
       require.resolve('./dist/preset.js'),
-  ],
+  ].filter(Boolean),
 
   webpack(config) {
     const sassLoader = {

@@ -17,7 +17,7 @@ import mdx from './Checkbox.mdx';
 const { prefix } = settings;
 
 export default {
-  title: 'Checkbox',
+  title: 'Components/Checkbox',
   component: Checkbox,
   subcomponents: {
     CheckboxSkeleton,
@@ -40,16 +40,7 @@ export const checkbox = () => {
   );
 };
 
-export const skeleton = () => (
-  <div
-    aria-label="loading checkbox"
-    aria-live="assertive"
-    role="status"
-    tabIndex="0" // eslint-disable-line jsx-a11y/no-noninteractive-tabindex
-  >
-    <CheckboxSkeleton />
-  </div>
-);
+export const skeleton = () => <CheckboxSkeleton />;
 
 const props = () => ({
   checked: boolean('Checked (checked)', false),

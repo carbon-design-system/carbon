@@ -2,14 +2,14 @@ name: Sync generated files
 on:
   push:
     branches:
-      - master
+      - main
 jobs:
   release:
     runs-on: macOS-latest
     steps:
       - uses: actions/checkout@v1
       - name: Use Node.js 14.x
-        uses: actions/setup-node@v1
+        uses: actions/setup-node@v2.1.5
         with:
           node-version: '14.x'
       - name: Install dependencies
@@ -31,7 +31,7 @@ jobs:
             git config --global user.name "carbon-bot"
 
             git remote set-url origin "https://x-access-token:$GITHUB_TOKEN@github.com/carbon-design-system/carbon.git"
-            git checkout master
+            git checkout main
             git add -A
             git commit -m "chore(project): sync generated files"
             git push

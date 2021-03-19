@@ -34,7 +34,7 @@ const TextAreaProps = () => ({
 });
 
 export default {
-  title: 'TextArea',
+  title: 'Components/TextArea',
   decorators: [withKnobs],
 
   parameters: {
@@ -50,32 +50,4 @@ export default {
 
 export const Default = () => <TextArea {...TextAreaProps()} />;
 
-Default.parameters = {
-  info: {
-    text: `
-            Text areas enable the user to interact with and input data. A text area is used when you
-            anticipate the user to input more than 1 sentence.
-          `,
-  },
-};
-
-export const Skeleton = () => (
-  <div
-    aria-label="loading text area"
-    aria-live="assertive"
-    role="status"
-    tabIndex="0" // eslint-disable-line jsx-a11y/no-noninteractive-tabindex
-  >
-    <TextAreaSkeleton />
-  </div>
-);
-
-Skeleton.storyName = 'skeleton';
-
-Skeleton.parameters = {
-  info: {
-    text: `
-        Placeholder skeleton state to use when content is loading.
-      `,
-  },
-};
+export const Skeleton = () => <TextAreaSkeleton />;

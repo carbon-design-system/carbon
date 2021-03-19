@@ -412,11 +412,25 @@
     pointer-events: none;
   }
 
+  .#{$prefix}--skeleton.#{$prefix}--tabs--scrollable:not(.#{$prefix}--tabs--scrollable--container)
+    .#{$prefix}--tabs--scrollable__nav-item {
+    border-bottom: 2px solid $skeleton-02;
+  }
+
   .#{$prefix}--tabs.#{$prefix}--skeleton .#{$prefix}--tabs__nav-link {
+    display: flex;
+    align-items: center;
+    width: 10rem;
+    height: 100%;
+    padding: 0 1rem;
+  }
+
+  .#{$prefix}--tabs.#{$prefix}--skeleton .#{$prefix}--tabs__nav-link span {
     @include skeleton;
 
-    width: rem(75px);
-    height: rem(12px);
+    display: block;
+    width: 100%;
+    height: rem(14px);
   }
 
   .#{$prefix}--tabs.#{$prefix}--skeleton .#{$prefix}--tabs-trigger {
@@ -453,6 +467,7 @@
       padding: 0;
       overflow: auto hidden;
       list-style: none;
+      outline: 0;
       transition: max-height $duration--fast-01 motion(standard, productive);
 
       // hide scrollbars
@@ -509,7 +524,6 @@
     @media not all and (min-resolution: 0.001dpcm) {
       @supports (-webkit-appearance: none) and (stroke-color: transparent) {
         .#{$prefix}--tabs__overflow-indicator--left {
-          margin-right: -$carbon--spacing-05;
           background-image: linear-gradient(
             to left,
             rgba($ui-background, 0),
@@ -518,7 +532,6 @@
         }
 
         .#{$prefix}--tabs__overflow-indicator--right {
-          margin-left: -$carbon--spacing-05;
           background-image: linear-gradient(
             to right,
             rgba($ui-background, 0),

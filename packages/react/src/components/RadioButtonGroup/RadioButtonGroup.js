@@ -9,7 +9,7 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import classNames from 'classnames';
 import RadioButton from '../RadioButton';
-import warning from 'warning';
+import { warning } from '../../internal/warning';
 import { settings } from 'carbon-components';
 
 const { prefix } = settings;
@@ -42,6 +42,12 @@ export default class RadioButtonGroup extends React.Component {
      * Provide where label text should be placed
      */
     labelPosition: PropTypes.oneOf(['left', 'right']),
+
+    /**
+     * Provide a legend to the RadioButtonGroup input that you are
+     * exposing to the user
+     */
+    legendText: PropTypes.node,
 
     /**
      * Specify the name of the underlying `<input>` nodes
@@ -116,7 +122,13 @@ export default class RadioButtonGroup extends React.Component {
   };
 
   render() {
-    const { disabled, className, orientation, labelPosition } = this.props;
+    const {
+      disabled,
+      className,
+      orientation,
+      labelPosition,
+      legendText,
+    } = this.props;
 
     const wrapperClasses = classNames(
       `${prefix}--radio-button-group`,
@@ -130,9 +142,12 @@ export default class RadioButtonGroup extends React.Component {
 
     return (
       <div className={`${prefix}--form-item`}>
-        <div className={wrapperClasses} disabled={disabled}>
+        <fieldset className={wrapperClasses} disabled={disabled}>
+          {legendText && (
+            <legend className={`${prefix}--label`}>{legendText}</legend>
+          )}
           {this.getRadioButtons()}
-        </div>
+        </fieldset>
       </div>
     );
   }

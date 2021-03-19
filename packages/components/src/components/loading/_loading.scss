@@ -66,6 +66,16 @@
     stroke-dashoffset: -22;
   }
 
+  // Negative values for `stroke-dashoffset` are not supported in Safari
+  @media not all and (min-resolution: 0.001dpcm) {
+    @supports (-webkit-appearance: none) and (stroke-color: transparent) {
+      circle.#{$prefix}--loading__background {
+        stroke-dashoffset: 0;
+        stroke-dasharray: 265;
+      }
+    }
+  }
+
   .#{$prefix}--loading-overlay {
     position: fixed;
     top: 0;

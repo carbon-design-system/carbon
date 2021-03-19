@@ -81,7 +81,7 @@ const props = {
 };
 
 export default {
-  title: 'DatePicker',
+  title: 'Components/DatePicker',
   decorators: [withKnobs],
 
   parameters: {
