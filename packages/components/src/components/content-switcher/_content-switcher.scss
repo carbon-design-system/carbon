@@ -110,6 +110,7 @@
     border-bottom-right-radius: rem(4px);
   }
 
+  .#{$prefix}--content-switcher--selected,
   .#{$prefix}--content-switcher--selected:first-child,
   .#{$prefix}--content-switcher--selected:last-child {
     border: 0;
