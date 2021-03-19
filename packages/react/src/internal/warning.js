@@ -7,15 +7,14 @@
 
 const emptyFunction = function () {};
 
-const warn = __DEV__
-  ? function warn(condition, format, ...args) {
+const warning = __DEV__
+  ? function warning(condition, format, ...args) {
       if (format === undefined) {
         throw new Error(
-          '`warn(condition, format, ...args)` requires a warning ' +
-            'message argument'
+          '`warning(condition, format, ...args)` requires a warning ' +
+            'format argument'
         );
       }
-
       if (!condition) {
         let index = 0;
         const message = format.replace(/%s/g, () => {
@@ -27,4 +26,4 @@ const warn = __DEV__
     }
   : emptyFunction;
 
-export { warn };
+export { warning };

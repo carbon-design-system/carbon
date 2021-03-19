@@ -18,6 +18,7 @@ import { settings } from 'carbon-components';
 import classNames from 'classnames';
 import './Tabs-story.scss';
 import CodeSnippet from '../CodeSnippet';
+import Button from '../Button';
 import Tabs from '../Tabs';
 import Tab from '../Tab';
 import TabsSkeleton from '../Tabs/Tabs.Skeleton';
@@ -128,6 +129,7 @@ export const _Default = () => (
     </Tab>
     <Tab label="Tab label 2">
       <p>Content for second tab goes here.</p>
+      <Button>With a button</Button>
     </Tab>
     <Tab label="Tab label 3" disabled>
       <p>Content for third tab goes here.</p>

@@ -49,6 +49,8 @@ const props = {
       false
     ),
     onClick: action('onClick'),
+    hasDivider: boolean('Has divider (hasDivider)', false),
+    isDelete: boolean('Is delete (isDelete)', false),
   }),
 };
 

@@ -127,8 +127,7 @@ $list-box-menu-width: rem(300px);
     fill: $support-03;
   }
 
-  .#{$prefix}--list-box__invalid-icon--warning
-    path[data-icon-path='inner-path'] {
+  .#{$prefix}--list-box__invalid-icon--warning path[fill] {
     opacity: 1;
     fill: $carbon__black-100;
   }

@@ -5,12 +5,12 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+import { settings } from 'carbon-components';
+import classNames from 'classnames';
 import PropTypes from 'prop-types';
 import React from 'react';
-import classNames from 'classnames';
-import warning from 'warning';
-import { settings } from 'carbon-components';
 import { match, keys } from '../../internal/keyboard';
+import { warning } from '../../internal/warning';
 import deprecate from '../../prop-types/deprecate.js';
 
 const { prefix } = settings;
