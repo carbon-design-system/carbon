@@ -52,6 +52,8 @@
     text-decoration: none;
     background-color: transparent;
     border: none;
+    border-top: rem(1px) solid $ui-05;
+    border-bottom: rem(1px) solid $ui-05;
     transition: all $duration--fast-01 motion(standard, productive);
 
     &:focus {
@@ -96,13 +98,20 @@
   }
 
   .#{$prefix}--content-switcher-btn:first-child {
+    border-left: rem(1px) solid $ui-05;
     border-top-left-radius: rem(4px);
     border-bottom-left-radius: rem(4px);
   }
 
   .#{$prefix}--content-switcher-btn:last-child {
+    border-right: rem(1px) solid $ui-05;
     border-top-right-radius: rem(4px);
     border-bottom-right-radius: rem(4px);
+  }
+
+  .#{$prefix}--content-switcher--selected:first-child,
+  .#{$prefix}--content-switcher--selected:last-child {
+    border: 0;
   }
 
   .#{$prefix}--content-switcher-btn::before {
