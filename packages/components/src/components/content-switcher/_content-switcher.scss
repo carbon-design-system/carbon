@@ -81,12 +81,18 @@
 
     &:disabled {
       color: $disabled-02;
-      background-color: $disabled-01;
+      background-color: transparent;
+      border-color: $disabled-02;
       pointer-events: none;
 
       &:hover {
         cursor: not-allowed;
       }
+    }
+
+    &:disabled:first-child,
+    &:disabled:last-child {
+      border-color: $disabled-02;
     }
   }
 
