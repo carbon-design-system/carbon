@@ -5740,6 +5740,9 @@ Map {
       "className": Object {
         "type": "string",
       },
+      "disabled": Object {
+        "type": "bool",
+      },
       "handleClick": Object {
         "type": "func",
       },
@@ -5866,6 +5869,9 @@ Map {
         "type": "string",
       },
       "defaultChecked": Object {
+        "type": "bool",
+      },
+      "disabled": Object {
         "type": "bool",
       },
       "iconDescription": [Function],
