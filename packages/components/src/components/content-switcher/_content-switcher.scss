@@ -83,7 +83,6 @@
       color: $disabled-02;
       background-color: transparent;
       border-color: $disabled-02;
-      pointer-events: none;
 
       &:hover {
         cursor: not-allowed;
@@ -165,6 +164,19 @@
     + .#{$prefix}--content-switcher-btn::before,
   .#{$prefix}--content-switcher--selected::before,
   .#{$prefix}--content-switcher--selected
+    + .#{$prefix}--content-switcher-btn::before {
+    background-color: transparent;
+  }
+
+  .#{$prefix}--content-switcher-btn:disabled::before,
+  .#{$prefix}--content-switcher-btn:disabled:hover
+    + .#{$prefix}--content-switcher-btn:disabled::before {
+    background-color: $disabled-02;
+  }
+
+  .#{$prefix}--content-switcher-btn.#{$prefix}--content-switcher--selected:disabled
+    + .#{$prefix}--content-switcher-btn::before,
+  .#{$prefix}--content-switcher-btn.#{$prefix}--content-switcher--selected:disabled:hover
     + .#{$prefix}--content-switcher-btn::before {
     background-color: transparent;
   }
