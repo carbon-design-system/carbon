@@ -5,7 +5,6 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import warning from 'warning';
 import PropTypes from 'prop-types';
 import React from 'react';
 import ReactDOM from 'react-dom';
@@ -13,6 +12,7 @@ import window from 'window-or-global';
 import { settings } from 'carbon-components';
 import OptimizedResize from './OptimizedResize';
 import { selectorFocusable, selectorTabbable } from './keyboard/navigation';
+import { warning } from './warning';
 import wrapFocus from './wrapFocus';
 
 const { prefix } = settings;

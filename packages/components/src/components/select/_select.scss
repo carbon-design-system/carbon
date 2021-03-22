@@ -108,8 +108,9 @@
     color: $disabled-02;
   }
 
-  .#{$prefix}--select-input__wrapper[data-invalid] .#{$prefix}--select-input {
-    padding-right: carbon--mini-units(10);
+  .#{$prefix}--select-input__wrapper[data-invalid] .#{$prefix}--select-input,
+  .#{$prefix}--select--warning .#{$prefix}--select-input {
+    padding-right: carbon--mini-units(9);
   }
 
   .#{$prefix}--select-input:disabled ~ .#{$prefix}--select__arrow {
@@ -149,12 +150,24 @@
     }
   }
 
+  .#{$prefix}--select__invalid-icon {
+    position: absolute;
+    right: $spacing-08;
+  }
+
   .#{$prefix}--select-input__wrapper[data-invalid]
     .#{$prefix}--select-input
     ~ .#{$prefix}--select__invalid-icon {
-    position: absolute;
-    right: $spacing-09;
     fill: $support-01;
+  }
+
+  .#{$prefix}--select__invalid-icon--warning {
+    fill: $support-03;
+  }
+
+  .#{$prefix}--select__invalid-icon--warning path[fill] {
+    opacity: 1;
+    fill: $carbon__black-100;
   }
 
   .#{$prefix}--select-optgroup,

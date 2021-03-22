@@ -36,6 +36,7 @@ const ListBoxTrigger = ({ isOpen, translateWithId: t, ...rest }) => {
     <button
       {...rest}
       aria-label={description}
+      title={description}
       className={className}
       type="button"
       tabIndex="-1">

@@ -3678,6 +3678,8 @@ Map {
       },
     },
     "defaultProps": Object {
+      "clearSelectionDescription": "Total items selected: ",
+      "clearSelectionText": "To clear selection, press Delete or Backspace,",
       "compareItems": [Function],
       "direction": "bottom",
       "disabled": false,
@@ -3693,6 +3695,12 @@ Map {
     },
     "displayName": "MultiSelect",
     "propTypes": Object {
+      "clearSelectionDescription": Object {
+        "type": "string",
+      },
+      "clearSelectionText": Object {
+        "type": "string",
+      },
       "compareItems": Object {
         "isRequired": true,
         "type": "func",
@@ -4733,6 +4741,12 @@ Map {
         ],
         "type": "oneOf",
       },
+      "warn": Object {
+        "type": "bool",
+      },
+      "warnText": Object {
+        "type": "node",
+      },
     },
     "render": [Function],
   },
@@ -5732,6 +5746,9 @@ Map {
       "className": Object {
         "type": "string",
       },
+      "disabled": Object {
+        "type": "bool",
+      },
       "handleClick": Object {
         "type": "func",
       },
@@ -5858,6 +5875,9 @@ Map {
         "type": "string",
       },
       "defaultChecked": Object {
+        "type": "bool",
+      },
+      "disabled": Object {
         "type": "bool",
       },
       "iconDescription": [Function],
