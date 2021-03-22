@@ -455,6 +455,7 @@ export function ModalBody(props) {
   const contentClass = classNames({
     [`${prefix}--modal-content`]: true,
     [`${prefix}--modal-content--with-form`]: hasForm,
+    [`${prefix}--modal-scroll-content`]: hasScrollingContent,
     [className]: className,
   });
   const hasScrollingContentProps = hasScrollingContent
