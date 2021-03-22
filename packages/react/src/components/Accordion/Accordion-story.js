@@ -88,9 +88,9 @@ const props = {
 };
 
 const sizes = {
-  'Small (sm)': 'sm',
-  'Medium - default (md)': 'md',
-  'Large (lg)': 'lg',
+  'Small  (sm)': 'sm',
+  'Medium (md) - default': undefined,
+  'Large  (lg)': 'lg',
 };
 
 export const playground = () => (
