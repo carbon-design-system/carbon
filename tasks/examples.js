@@ -71,7 +71,11 @@ async function main() {
         }
 
         const examples = (await fs.readdir(examplesDir)).filter((example) => {
-          return example !== '.yarnrc' && !IGNORE_EXAMPLE_DIRS.has(example);
+          return (
+            example !== '.yarnrc' &&
+            !IGNORE_EXAMPLE_DIRS.has(example) &&
+            example !== '.DS_Store'
+          );
         });
 
         return {

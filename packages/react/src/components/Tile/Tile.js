@@ -198,6 +198,11 @@ export class SelectableTile extends Component {
     className: PropTypes.string,
 
     /**
+     * Specify whether the SelectableTile should be disabled
+     */
+    disabled: PropTypes.bool,
+
+    /**
      * Specify the function to run when the SelectableTile is clicked
      */
     handleClick: PropTypes.func,
@@ -332,6 +337,7 @@ export class SelectableTile extends Component {
       // eslint-disable-next-line no-unused-vars
       onChange,
       light,
+      disabled,
       ...other
     } = this.props;
 
@@ -341,6 +347,7 @@ export class SelectableTile extends Component {
       {
         [`${prefix}--tile--is-selected`]: this.state.selected,
         [`${prefix}--tile--light`]: light,
+        [`${prefix}--tile--disabled`]: disabled,
       },
       className
     );
@@ -355,8 +362,9 @@ export class SelectableTile extends Component {
           id={id}
           className={`${prefix}--tile-input`}
           value={value}
-          onChange={this.handleOnChange}
+          onChange={!disabled ? this.handleOnChange : null}
           type="checkbox"
+          disabled={disabled}
           name={name}
           title={title}
           checked={this.state.selected}
@@ -365,10 +373,11 @@ export class SelectableTile extends Component {
         <label
           htmlFor={id}
           className={classes}
-          tabIndex={tabIndex}
+          // eslint-disable-next-line jsx-a11y/no-noninteractive-tabindex
+          tabIndex={!disabled ? tabIndex : null}
           {...other}
-          onClick={this.handleClick}
-          onKeyDown={this.handleKeyDown}>
+          onClick={!disabled ? this.handleClick : null}
+          onKeyDown={!disabled ? this.handleKeyDown : null}>
           <span className={`${prefix}--tile__checkmark`}>
             <CheckmarkFilled />
           </span>

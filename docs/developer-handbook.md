@@ -706,7 +706,7 @@ pattern that we tend to use:
 ```jsx
 // SomeComponent.js
 // React imports
-import warning from 'warning';
+import { warning } from '../../internal/warning';
 
 let didWarnAboutDeprecation = false;
 

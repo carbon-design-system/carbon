@@ -19,6 +19,7 @@ const { prefix } = settings;
 function RadioTile({
   children,
   className,
+  disabled,
   // eslint-disable-next-line no-unused-vars
   iconDescription,
   light,
@@ -38,6 +39,7 @@ function RadioTile({
     {
       [`${prefix}--tile--is-selected`]: checked,
       [`${prefix}--tile--light`]: light,
+      [`${prefix}--tile--disabled`]: disabled,
     }
   );
 
@@ -58,12 +60,13 @@ function RadioTile({
         {...other}
         type="radio"
         checked={checked}
+        disabled={disabled}
         name={name}
         value={value}
         className={`${prefix}--tile-input`}
-        tabIndex={tabIndex}
-        onChange={handleOnChange}
-        onKeyDown={handleOnKeyDown}
+        tabIndex={!disabled ? tabIndex : null}
+        onChange={!disabled ? handleOnChange : null}
+        onKeyDown={!disabled ? handleOnKeyDown : null}
         id={inputId}
       />
       <label htmlFor={inputId} className={classes}>
@@ -96,6 +99,11 @@ RadioTile.propTypes = {
    * `true` if the `<input>` should be checked at initialization.
    */
   defaultChecked: PropTypes.bool,
+
+  /**
+   * Specify whether the RadioTile should be disabled
+   */
+  disabled: PropTypes.bool,
 
   /**
    * The description of the tile checkmark icon.
