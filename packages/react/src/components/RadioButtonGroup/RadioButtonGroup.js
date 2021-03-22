@@ -9,7 +9,7 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import classNames from 'classnames';
 import RadioButton from '../RadioButton';
-import warning from 'warning';
+import { warning } from '../../internal/warning';
 import { settings } from 'carbon-components';
 
 const { prefix } = settings;
