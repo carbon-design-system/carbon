@@ -40,7 +40,10 @@ const props = {
   }),
   clickable: () => ({
     disabled: boolean('disabled (disabled)', false),
-    href: text('Href for clickable UI (href)', 'javascript:void(0)'),
+    href: text(
+      'Href for clickable UI (href)',
+      'https://www.carbondesignsystem.com/'
+    ),
     light: boolean('Light variant (light)', false),
   }),
   selectable: () => ({
