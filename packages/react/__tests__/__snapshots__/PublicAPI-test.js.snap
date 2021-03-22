@@ -29,6 +29,8 @@ Map {
         "args": Array [
           Array [
             "sm",
+            "md",
+            "lg",
             "xl",
           ],
         ],
@@ -652,6 +654,8 @@ Map {
         "args": Array [
           Array [
             "sm",
+            "md",
+            "lg",
             "xl",
           ],
         ],
@@ -2447,6 +2451,8 @@ Map {
         "args": Array [
           Array [
             "sm",
+            "md",
+            "lg",
             "xl",
           ],
         ],
@@ -3681,6 +3687,8 @@ Map {
           "args": Array [
             Array [
               "sm",
+              "md",
+              "lg",
               "xl",
             ],
           ],
@@ -3920,6 +3928,8 @@ Map {
         "args": Array [
           Array [
             "sm",
+            "md",
+            "lg",
             "xl",
           ],
         ],
@@ -6665,6 +6675,8 @@ Map {
         "args": Array [
           Array [
             "sm",
+            "md",
+            "lg",
             "xl",
           ],
         ],
