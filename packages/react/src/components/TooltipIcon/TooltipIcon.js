@@ -6,12 +6,13 @@
  */
 
 import cx from 'classnames';
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
 import { settings } from 'carbon-components';
 import setupGetInstanceId from '../../tools/setupGetInstanceId';
 import { composeEventHandlers } from '../../tools/events';
 import { keys, matches } from '../../internal/keyboard';
+import toggleClass from '../../tools/toggleClass';
 
 const { prefix } = settings;
 const getInstanceId = setupGetInstanceId();
@@ -21,12 +22,18 @@ const TooltipIcon = ({
   children,
   direction,
   align,
+  onBlur,
   onFocus,
   onMouseEnter,
+  onMouseLeave,
   tooltipText,
   ...rest
 }) => {
   const [allowTooltipVisibility, setAllowTooltipVisibility] = useState(true);
+  const [isHovered, setIsHovered] = useState(false);
+  const [isFocused, setIsFocused] = useState(false);
+  const tooltipRef = useRef(null);
+  const tooltipTimeout = useRef(null);
   const tooltipId = id || `icon-tooltip-${getInstanceId()}`;
   const tooltipTriggerClasses = cx(
     `${prefix}--tooltip__trigger`,
@@ -36,14 +43,62 @@ const TooltipIcon = ({
       [`${prefix}--tooltip--${direction}`]: direction,
       [`${prefix}--tooltip--align-${align}`]: align,
       [`${prefix}--tooltip--hidden`]: !allowTooltipVisibility,
+      [`${prefix}--tooltip--visible`]: isHovered,
     }
   );
-  const handleFocus = () => setAllowTooltipVisibility(true);
-  const handleMouseEnter = () => setAllowTooltipVisibility(true);
+
+  const closeTooltips = (evt) => {
+    const tooltipNode = document?.querySelectorAll(`.${prefix}--tooltip--a11y`);
+    [...tooltipNode].map((node) => {
+      toggleClass(
+        node,
+        `${prefix}--tooltip--hidden`,
+        node !== evt.currentTarget
+      );
+    });
+  };
+
+  const handleFocus = (evt) => {
+    closeTooltips(evt);
+    setIsHovered(!isHovered);
+    setIsFocused(true);
+    setAllowTooltipVisibility(true);
+  };
+
+  const handleBlur = () => {
+    setIsHovered(false);
+    setIsFocused(false);
+    setAllowTooltipVisibility(false);
+  };
+
+  const handleMouseEnter = (evt) => {
+    setIsHovered(true);
+    tooltipTimeout.current && clearTimeout(tooltipTimeout.current);
+
+    if (evt.target === tooltipRef.current) {
+      setAllowTooltipVisibility(true);
+      return;
+    }
+
+    closeTooltips(evt);
+
+    setAllowTooltipVisibility(true);
+  };
+
+  const handleMouseLeave = () => {
+    if (!isFocused) {
+      tooltipTimeout.current = setTimeout(() => {
+        setAllowTooltipVisibility(false);
+        setIsHovered(false);
+      }, 100);
+    }
+  };
+
   useEffect(() => {
     const handleEscKeyDown = (event) => {
       if (matches(event, [keys.Escape])) {
         setAllowTooltipVisibility(false);
+        setIsHovered(false);
       }
     };
     document.addEventListener('keydown', handleEscKeyDown);
@@ -57,8 +112,14 @@ const TooltipIcon = ({
       className={tooltipTriggerClasses}
       aria-describedby={tooltipId}
       onMouseEnter={composeEventHandlers([onMouseEnter, handleMouseEnter])}
-      onFocus={composeEventHandlers([onFocus, handleFocus])}>
-      <span className={`${prefix}--assistive-text`} id={tooltipId}>
+      onMouseLeave={composeEventHandlers([onMouseLeave, handleMouseLeave])}
+      onFocus={composeEventHandlers([onFocus, handleFocus])}
+      onBlur={composeEventHandlers([onBlur, handleBlur])}>
+      <span
+        ref={tooltipRef}
+        onMouseEnter={handleMouseEnter}
+        className={`${prefix}--assistive-text`}
+        id={tooltipId}>
         {tooltipText}
       </span>
       {children}
@@ -96,6 +157,11 @@ TooltipIcon.propTypes = {
   id: PropTypes.string,
 
   /**
+   * The event handler for the `blur` event.
+   */
+  onBlur: PropTypes.func,
+
+  /**
    * The event handler for the `focus` event.
    */
   onFocus: PropTypes.func,
@@ -104,6 +170,11 @@ TooltipIcon.propTypes = {
    * The event handler for the `mouseenter` event.
    */
   onMouseEnter: PropTypes.func,
+
+  /**
+   * The event handler for the `mouseleave` event.
+   */
+  onMouseLeave: PropTypes.func,
 
   /**
    * Provide the ARIA label for the tooltip.

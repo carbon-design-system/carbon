@@ -47,6 +47,7 @@ const props = {
     handleClick: action('handleClick'),
     handleKeyDown: action('handleKeyDown'),
     light: boolean('Light variant (light)', false),
+    disabled: boolean('Disabled (disabled)', false),
   }),
   group: () => ({
     name: text('Form item (name in <TileGroup>)', 'tile-group'),
@@ -61,6 +62,7 @@ const props = {
     name: text('Form item name (name in <RadioTile>)', 'tiles'),
     onChange: action('onChange'),
     light: boolean('Light variant (light)', false),
+    disabled: boolean('Disabled (disabled)', false),
   }),
   expandable: () => ({
     tabIndex: number('Tab index (tabIndex)', 0),

@@ -39,7 +39,11 @@ exports[`ModalWrapper should render 1`] = `
         aria-pressed={null}
         className="btn-trigger bx--btn bx--btn--primary"
         disabled={false}
+        onBlur={[Function]}
         onClick={[Function]}
+        onFocus={[Function]}
+        onMouseEnter={[Function]}
+        onMouseLeave={[Function]}
         tabIndex={0}
         type="button"
       >
@@ -175,7 +179,11 @@ exports[`ModalWrapper should render 1`] = `
                     aria-pressed={null}
                     className="bx--btn bx--btn--secondary"
                     disabled={false}
+                    onBlur={[Function]}
                     onClick={[Function]}
+                    onFocus={[Function]}
+                    onMouseEnter={[Function]}
+                    onMouseLeave={[Function]}
                     tabIndex={0}
                     type="button"
                   >
@@ -197,7 +205,11 @@ exports[`ModalWrapper should render 1`] = `
                   aria-pressed={null}
                   className="bx--btn bx--btn--primary"
                   disabled={false}
+                  onBlur={[Function]}
                   onClick={[Function]}
+                  onFocus={[Function]}
+                  onMouseEnter={[Function]}
+                  onMouseLeave={[Function]}
                   tabIndex={0}
                   type="button"
                 >
