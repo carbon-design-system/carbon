@@ -23,10 +23,6 @@
     @include reset;
   }
 
-  .#{$prefix}--snippet .#{$prefix}--btn {
-    background-color: $field-01;
-  }
-
   .#{$prefix}--snippet--disabled,
   .#{$prefix}--snippet--disabled
     .#{$prefix}--btn.#{$prefix}--snippet-btn--expand {
@@ -207,7 +203,7 @@
     order: 1;
     min-height: rem(56px);
     max-height: 100%;
-    overflow: auto;
+    overflow: hidden;
     transition: max-height $duration--moderate-01 motion(standard, productive);
   }
 
@@ -215,6 +211,7 @@
   .#{$prefix}--snippet--multi.#{$prefix}--snippet--expand
     .#{$prefix}--snippet-container {
     padding-bottom: $spacing-05;
+    overflow-y: auto;
     transition: max-height $duration--moderate-01 motion(standard, productive);
   }
 
@@ -227,12 +224,20 @@
   .#{$prefix}--snippet--multi .#{$prefix}--snippet-container pre {
     padding-right: $carbon--spacing-08;
     padding-bottom: rem(24px);
+    overflow-x: auto;
   }
 
   .#{$prefix}--snippet--multi.#{$prefix}--snippet--no-copy
     .#{$prefix}--snippet-container
     pre {
     padding-right: 0;
+  }
+
+  // expanded pre
+  .#{$prefix}--snippet--multi.#{$prefix}--snippet--expand
+    .#{$prefix}--snippet-container
+    pre {
+    overflow-x: auto;
   }
 
   .#{$prefix}--snippet--multi .#{$prefix}--snippet-container pre::after {
@@ -244,6 +249,10 @@
     // Safari interprets `transparent` differently, so make color token value transparent instead:
     background-image: linear-gradient(to right, rgba($field-01, 0), $field-01);
     content: '';
+  }
+
+  .#{$prefix}--snippet--multi .#{$prefix}--snippet-container pre code {
+    overflow: hidden;
   }
 
   //Copy Button
@@ -327,7 +336,6 @@
     position: absolute;
     top: 0;
     right: 0;
-    background-color: $field-01;
 
     // Override inherited rule in code snippet
     @include carbon--font-family('sans');
@@ -346,6 +354,7 @@
     align-items: center;
     padding: $spacing-03 $spacing-05;
     color: $text-01;
+    background-color: $field-01;
     border: 0;
   }
 
