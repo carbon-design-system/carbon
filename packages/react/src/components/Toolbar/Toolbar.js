@@ -10,7 +10,7 @@ import PropTypes from 'prop-types';
 import ToolbarSearch from '../ToolbarSearch';
 import classNames from 'classnames';
 import { settings } from 'carbon-components';
-import warning from 'warning';
+import { warning } from '../../internal/warning';
 
 const { prefix } = settings;
 
