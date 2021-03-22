@@ -23,6 +23,10 @@
     @include reset;
   }
 
+  .#{$prefix}--snippet .#{$prefix}--btn {
+    background-color: $field-01;
+  }
+
   .#{$prefix}--snippet--disabled,
   .#{$prefix}--snippet--disabled
     .#{$prefix}--btn.#{$prefix}--snippet-btn--expand {
@@ -323,6 +327,7 @@
     position: absolute;
     top: 0;
     right: 0;
+    background-color: $field-01;
 
     // Override inherited rule in code snippet
     @include carbon--font-family('sans');
@@ -341,7 +346,6 @@
     align-items: center;
     padding: $spacing-03 $spacing-05;
     color: $text-01;
-    background-color: $field-01;
     border: 0;
   }
 
