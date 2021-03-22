@@ -207,6 +207,18 @@ Map {
         "isRequired": true,
         "type": "oneOf",
       },
+      "onBlur": Object {
+        "type": "func",
+      },
+      "onFocus": Object {
+        "type": "func",
+      },
+      "onMouseEnter": Object {
+        "type": "func",
+      },
+      "onMouseLeave": Object {
+        "type": "func",
+      },
       "renderIcon": Object {
         "args": Array [
           Array [
@@ -3672,6 +3684,8 @@ Map {
       },
     },
     "defaultProps": Object {
+      "clearSelectionDescription": "Total items selected: ",
+      "clearSelectionText": "To clear selection, press Delete or Backspace,",
       "compareItems": [Function],
       "direction": "bottom",
       "disabled": false,
@@ -3687,6 +3701,12 @@ Map {
     },
     "displayName": "MultiSelect",
     "propTypes": Object {
+      "clearSelectionDescription": Object {
+        "type": "string",
+      },
+      "clearSelectionText": Object {
+        "type": "string",
+      },
       "compareItems": Object {
         "isRequired": true,
         "type": "func",
@@ -5732,6 +5752,9 @@ Map {
       "className": Object {
         "type": "string",
       },
+      "disabled": Object {
+        "type": "bool",
+      },
       "handleClick": Object {
         "type": "func",
       },
@@ -5858,6 +5881,9 @@ Map {
         "type": "string",
       },
       "defaultChecked": Object {
+        "type": "bool",
+      },
+      "disabled": Object {
         "type": "bool",
       },
       "iconDescription": [Function],
@@ -6337,10 +6363,16 @@ Map {
       "id": Object {
         "type": "string",
       },
+      "onBlur": Object {
+        "type": "func",
+      },
       "onFocus": Object {
         "type": "func",
       },
       "onMouseEnter": Object {
+        "type": "func",
+      },
+      "onMouseLeave": Object {
         "type": "func",
       },
       "tooltipText": Object {

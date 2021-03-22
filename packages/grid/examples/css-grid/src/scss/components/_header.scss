@@ -1,0 +1,26 @@
+//
+// Copyright IBM Corp. 2018, 2018
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+@use '@carbon/colors';
+@use '@carbon/grid/scss/modules/css-grid';
+
+.cds-header {
+  --cds-header-background-color: #{colors.$gray-100};
+  --cds-header-border-color: #{colors.$gray-80};
+  --cds-header-text-color: #{colors.$gray-10};
+  --cds-header-icon-color: #{colors.$gray-10};
+
+  @include css-grid.css-grid();
+  background-color: var(--cds-header-background-color);
+  border-bottom: 1px solid var(--cds-header-border-color);
+  height: 3rem;
+}
+
+.cds-header-label {
+  color: var(--cds-header-text-color);
+  text-decoration: none;
+}
