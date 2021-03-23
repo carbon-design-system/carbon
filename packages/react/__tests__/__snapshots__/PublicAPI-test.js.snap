@@ -371,7 +371,7 @@ Map {
       "light": Object {
         "type": "bool",
       },
-      "maxClosedNumberOfRows": Object {
+      "maxCollapsedNumberOfRows": Object {
         "type": "number",
       },
       "maxExpandedNumberOfRows": Object {
