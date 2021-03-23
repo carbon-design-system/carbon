@@ -383,6 +383,12 @@ Map {
       "light": Object {
         "type": "bool",
       },
+      "maxCollapsedNumberOfRows": Object {
+        "type": "number",
+      },
+      "maxExpandedNumberOfRows": Object {
+        "type": "number",
+      },
       "onClick": Object {
         "type": "func",
       },
