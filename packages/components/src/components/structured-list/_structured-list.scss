@@ -18,8 +18,8 @@
     @include padding--data-structured-list;
   }
 
-  .#{$prefix}--structured-list-input {
-    display: none;
+  .#{$prefix}--structured-list-row--focused-within {
+    @include focus-outline('outline');
   }
 
   .#{$prefix}--structured-list {
@@ -60,10 +60,6 @@
   .#{$prefix}--structured-list-row.#{$prefix}--structured-list-row--header-row {
     border-bottom: 1px solid $selected-ui;
     cursor: inherit;
-  }
-
-  .#{$prefix}--structured-list-row:focus:not(.#{$prefix}--structured-list-row--header-row) {
-    @include focus-outline('outline');
   }
 
   .#{$prefix}--structured-list--selection

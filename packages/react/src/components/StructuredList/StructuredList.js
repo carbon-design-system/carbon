@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { settings } from 'carbon-components';
@@ -126,6 +126,11 @@ StructuredListBody.defaultProps = {
   onKeyDown: () => {},
 };
 
+function useFocusWithin() {
+  const [hasFocusWithin, setHasFocusWithin] = useState(false);
+  return [hasFocusWithin, setHasFocusWithin];
+}
+
 export function StructuredListRow(props) {
   const {
     onKeyDown,
@@ -136,8 +141,10 @@ export function StructuredListRow(props) {
     label,
     ...other
   } = props;
+  const [hasFocusWithin, setHasFocusWithin] = useFocusWithin();
   const classes = classNames(`${prefix}--structured-list-row`, className, {
     [`${prefix}--structured-list-row--header-row`]: head,
+    [`${prefix}--structured-list-row--focused-within`]: hasFocusWithin,
   });
 
   return label ? (
@@ -146,6 +153,14 @@ export function StructuredListRow(props) {
       {...other}
       tabIndex={tabIndex}
       className={classes}
+      onFocus={() => {
+        setHasFocusWithin(true);
+      }}
+      onBlur={() => {
+        // potential special case where when focus is moved this row is not blurred
+        // multiple interactable per row?
+        setHasFocusWithin(false);
+      }}
       onKeyDown={onKeyDown}>
       {children}
     </label>
@@ -192,9 +207,13 @@ StructuredListRow.propTypes = {
 StructuredListRow.defaultProps = {
   head: false,
   label: false,
+  // tabIndex: 0,
   onKeyDown: () => {},
 };
 
+// when the input gets focus it should add the data- attribute to the parent row
+// on blur it should be removed
+// that can be targeted
 export function StructuredListInput(props) {
   const classes = classNames(`${prefix}--structured-list-input`, className);
   const defaultId = useId('structureListInput');
