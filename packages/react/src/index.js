@@ -215,6 +215,7 @@ export unstable_Menu, {
   MenuSelectableItem as unstable_MenuSelectableItem,
 } from './components/Menu';
 export { useContextMenu as unstable_useContextMenu } from './components/ContextMenu';
+export unstable_OverflowMenu from './components/OverflowMenu-v2';
 export {
   Heading as unstable_Heading,
   Section as unstable_Section,
