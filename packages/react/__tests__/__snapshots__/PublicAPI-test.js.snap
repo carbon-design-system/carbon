@@ -377,6 +377,9 @@ Map {
       "feedback": Object {
         "type": "string",
       },
+      "feedbackTimeout": Object {
+        "type": "number",
+      },
       "hideCopyButton": Object {
         "type": "bool",
       },
