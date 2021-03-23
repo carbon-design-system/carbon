@@ -20,7 +20,7 @@ import getUniqueId from '../../tools/uniqueId';
 const { prefix } = settings;
 
 const rowHeightInPixels = 16;
-const defaultMaxClosedNumberOfRows = 15;
+const defaultMaxCollapsedNumberOfRows = 15;
 const defaultMaxExpandedNumberOfRows = 0;
 
 function CodeSnippet({
@@ -38,7 +38,7 @@ function CodeSnippet({
   showLessText,
   hideCopyButton,
   wrapText,
-  maxClosedNumberOfRows = defaultMaxClosedNumberOfRows,
+  maxCollapsedNumberOfRows = defaultMaxCollapsedNumberOfRows,
   maxExpandedNumberOfRows = defaultMaxExpandedNumberOfRows,
   ...rest
 }) {
@@ -103,10 +103,10 @@ function CodeSnippet({
           const { height } = codeContentRef.current.getBoundingClientRect();
 
           if (
-            maxClosedNumberOfRows > 0 &&
+            maxCollapsedNumberOfRows > 0 &&
             (maxExpandedNumberOfRows === 0 ||
-              maxExpandedNumberOfRows > maxClosedNumberOfRows) &&
-            height > maxClosedNumberOfRows * rowHeightInPixels
+              maxExpandedNumberOfRows > maxCollapsedNumberOfRows) &&
+            height > maxCollapsedNumberOfRows * rowHeightInPixels
           ) {
             setShouldShowMoreLessBtn(true);
           } else {
@@ -122,7 +122,7 @@ function CodeSnippet({
         }
       },
     },
-    [type, maxClosedNumberOfRows, maxExpandedNumberOfRows, rowHeightInPixels]
+    [type, maxCollapsedNumberOfRows, maxExpandedNumberOfRows, rowHeightInPixels]
   );
 
   useEffect(() => {
@@ -171,9 +171,9 @@ function CodeSnippet({
         };
       }
     } else {
-      if (maxClosedNumberOfRows > 0) {
+      if (maxCollapsedNumberOfRows > 0) {
         containerStyle.style = {
-          maxHeight: maxClosedNumberOfRows * rowHeightInPixels,
+          maxHeight: maxCollapsedNumberOfRows * rowHeightInPixels,
         };
       }
     }
@@ -287,9 +287,9 @@ CodeSnippet.propTypes = {
   light: PropTypes.bool,
 
   /**
-   * Specify the maximum number of rows to be shown when in closed view
+   * Specify the maximum number of rows to be shown when in collapsed view
    */
-  maxClosedNumberOfRows: PropTypes.number,
+  maxCollapsedNumberOfRows: PropTypes.number,
 
   /**
    * Specify the maximum number of rows to be shown when in expanded view

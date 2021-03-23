@@ -197,7 +197,7 @@
     }
   }
 
-  //closed snippet container
+  //collapsed snippet container
   .#{$prefix}--snippet--multi .#{$prefix}--snippet-container {
     position: relative;
     order: 1;
@@ -219,7 +219,7 @@
     word-wrap: break-word;
   }
 
-  // closed pre
+  // collapsed pre
   .#{$prefix}--snippet--multi .#{$prefix}--snippet-container pre {
     padding-right: $carbon--spacing-08;
     padding-bottom: rem(24px);
