@@ -207,6 +207,18 @@ Map {
         "isRequired": true,
         "type": "oneOf",
       },
+      "onBlur": Object {
+        "type": "func",
+      },
+      "onFocus": Object {
+        "type": "func",
+      },
+      "onMouseEnter": Object {
+        "type": "func",
+      },
+      "onMouseLeave": Object {
+        "type": "func",
+      },
       "renderIcon": Object {
         "args": Array [
           Array [
@@ -6357,10 +6369,16 @@ Map {
       "id": Object {
         "type": "string",
       },
+      "onBlur": Object {
+        "type": "func",
+      },
       "onFocus": Object {
         "type": "func",
       },
       "onMouseEnter": Object {
+        "type": "func",
+      },
+      "onMouseLeave": Object {
         "type": "func",
       },
       "tooltipText": Object {

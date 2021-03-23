@@ -16,6 +16,7 @@ import Copy from '../Copy';
 import Button from '../Button';
 import CopyButton from '../CopyButton';
 import getUniqueId from '../../tools/uniqueId';
+import copy from 'copy-to-clipboard';
 
 const { prefix } = settings;
 
@@ -129,6 +130,14 @@ function CodeSnippet({
     handleScroll();
   }, [handleScroll]);
 
+  const handleCopyClick = (evt) => {
+    copy(children);
+
+    if (onClick) {
+      onClick(evt);
+    }
+  };
+
   const codeSnippetClasses = classNames(className, `${prefix}--snippet`, {
     [`${prefix}--snippet--${type}`]: type,
     [`${prefix}--snippet--disabled`]: type !== 'inline' && disabled,
@@ -152,7 +161,7 @@ function CodeSnippet({
     return (
       <Copy
         {...rest}
-        onClick={onClick}
+        onClick={handleCopyClick}
         aria-label={copyLabel || ariaLabel}
         aria-describedby={uid}
         className={codeSnippetClasses}
@@ -210,7 +219,7 @@ function CodeSnippet({
       {!hideCopyButton && (
         <CopyButton
           disabled={disabled}
-          onClick={onClick}
+          onClick={handleCopyClick}
           feedback={feedback}
           iconDescription={copyButtonDescription}
         />

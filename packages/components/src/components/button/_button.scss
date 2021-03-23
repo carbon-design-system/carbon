@@ -162,6 +162,12 @@
     }
   }
 
+  // Allow pointer events on tooltip when tooltip is visible
+  .#{$prefix}--btn.#{$prefix}--btn--icon-only:not(.#{$prefix}--tooltip--hidden)
+    .#{$prefix}--assistive-text {
+    pointer-events: all;
+  }
+
   .#{$prefix}--btn.#{$prefix}--btn--icon-only.#{$prefix}--tooltip__trigger:focus {
     border-color: $focus;
 

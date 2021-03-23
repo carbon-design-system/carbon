@@ -293,7 +293,7 @@ exports[`Dropdown should render custom item components 1`] = `
             role="listbox"
             tabIndex={-1}
           >
-            <ListBoxMenuItem
+            <ForwardRef(ListBoxMenuItem)
               aria-selected="false"
               id="downshift-6-item-0"
               isActive={false}
@@ -328,8 +328,8 @@ exports[`Dropdown should render custom item components 1`] = `
                   </itemToElement>
                 </div>
               </div>
-            </ListBoxMenuItem>
-            <ListBoxMenuItem
+            </ForwardRef(ListBoxMenuItem)>
+            <ForwardRef(ListBoxMenuItem)
               aria-selected="false"
               id="downshift-6-item-1"
               isActive={false}
@@ -364,8 +364,8 @@ exports[`Dropdown should render custom item components 1`] = `
                   </itemToElement>
                 </div>
               </div>
-            </ListBoxMenuItem>
-            <ListBoxMenuItem
+            </ForwardRef(ListBoxMenuItem)>
+            <ForwardRef(ListBoxMenuItem)
               aria-selected="false"
               id="downshift-6-item-2"
               isActive={false}
@@ -400,8 +400,8 @@ exports[`Dropdown should render custom item components 1`] = `
                   </itemToElement>
                 </div>
               </div>
-            </ListBoxMenuItem>
-            <ListBoxMenuItem
+            </ForwardRef(ListBoxMenuItem)>
+            <ForwardRef(ListBoxMenuItem)
               aria-selected="false"
               id="downshift-6-item-3"
               isActive={false}
@@ -436,8 +436,8 @@ exports[`Dropdown should render custom item components 1`] = `
                   </itemToElement>
                 </div>
               </div>
-            </ListBoxMenuItem>
-            <ListBoxMenuItem
+            </ForwardRef(ListBoxMenuItem)>
+            <ForwardRef(ListBoxMenuItem)
               aria-selected="false"
               id="downshift-6-item-4"
               isActive={false}
@@ -472,7 +472,7 @@ exports[`Dropdown should render custom item components 1`] = `
                   </itemToElement>
                 </div>
               </div>
-            </ListBoxMenuItem>
+            </ForwardRef(ListBoxMenuItem)>
           </div>
         </ListBoxMenu>
       </div>
@@ -601,7 +601,7 @@ exports[`Dropdown should render with strings as items 1`] = `
             role="listbox"
             tabIndex={-1}
           >
-            <ListBoxMenuItem
+            <ForwardRef(ListBoxMenuItem)
               aria-selected="false"
               id="downshift-4-item-0"
               isActive={false}
@@ -610,7 +610,6 @@ exports[`Dropdown should render with strings as items 1`] = `
               onClick={[Function]}
               onMouseMove={[Function]}
               role="option"
-              title="zar"
             >
               <div
                 aria-selected="false"
@@ -619,7 +618,6 @@ exports[`Dropdown should render with strings as items 1`] = `
                 onClick={[Function]}
                 onMouseMove={[Function]}
                 role="option"
-                title="zar"
               >
                 <div
                   className="bx--list-box__menu-item__option"
@@ -627,8 +625,8 @@ exports[`Dropdown should render with strings as items 1`] = `
                   zar
                 </div>
               </div>
-            </ListBoxMenuItem>
-            <ListBoxMenuItem
+            </ForwardRef(ListBoxMenuItem)>
+            <ForwardRef(ListBoxMenuItem)
               aria-selected="false"
               id="downshift-4-item-1"
               isActive={false}
@@ -637,7 +635,6 @@ exports[`Dropdown should render with strings as items 1`] = `
               onClick={[Function]}
               onMouseMove={[Function]}
               role="option"
-              title="doz"
             >
               <div
                 aria-selected="false"
@@ -646,7 +643,6 @@ exports[`Dropdown should render with strings as items 1`] = `
                 onClick={[Function]}
                 onMouseMove={[Function]}
                 role="option"
-                title="doz"
               >
                 <div
                   className="bx--list-box__menu-item__option"
@@ -654,7 +650,7 @@ exports[`Dropdown should render with strings as items 1`] = `
                   doz
                 </div>
               </div>
-            </ListBoxMenuItem>
+            </ForwardRef(ListBoxMenuItem)>
           </div>
         </ListBoxMenu>
       </div>

@@ -224,6 +224,39 @@
   $caret-width: rem(8px);
   $body-spacing: $caret-spacing + $caret-height;
 
+  // Use pseudo element to create invisible hover area to keep tooltip open on hover
+  .#{$prefix}--assistive-text::after {
+    position: absolute;
+    display: block;
+    content: '';
+    // clip-path: polygon(50% 100%, 0 0, 100% 0);
+
+    @if ($position == 'top' or $position == 'bottom') {
+      left: 0;
+      width: 100%;
+      height: rem(12px);
+    }
+
+    @if ($position == 'left' or $position == 'right') {
+      top: 0;
+      width: rem(12px);
+      height: 100%;
+    }
+
+    @if ($position == 'top') {
+      bottom: rem(-12px);
+    }
+    @if ($position == 'right') {
+      left: rem(-12px);
+    }
+    @if ($position == 'bottom') {
+      top: rem(-12px);
+    }
+    @if ($position == 'left') {
+      right: rem(-12px);
+    }
+  }
+
   // @todo Simplify CSS selectors on next major release
   &::before,
   &::after,
