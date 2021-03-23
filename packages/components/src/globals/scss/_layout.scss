@@ -17,12 +17,12 @@ $z-indexes: (
   // having a higher z-index *should* not cause issues.
   dropdown: 9100,
   modal: 9000,
-  overlay: 6000,
   header: 8000,
+  overlay: 6000,
+  floating: 6000,
   footer: 5000,
   hidden: - 1,
-  overflowHidden: - 1,
-  floating: 6000
+  overflowHidden: - 1
 );
 
 /// @access public
