@@ -25,12 +25,12 @@ export function getValidNodes(list) {
   if (level) {
     const submenus = Array.from(list.querySelectorAll('[data-level]'));
     nodes = Array.from(
-      list.querySelectorAll(`li.${prefix}--context-menu-option`)
+      list.querySelectorAll(`li.${prefix}--menu-option`)
     ).filter((child) => !submenus.some((submenu) => submenu.contains(child)));
   }
 
   return nodes.filter((node) =>
-    node.matches(`:not(.${prefix}--context-menu-option--disabled)`)
+    node.matches(`:not(.${prefix}--menu-option--disabled)`)
   );
 }
 
@@ -45,7 +45,7 @@ export function getNextNode(current, direction) {
 }
 
 export function getFirstSubNode(node) {
-  const submenu = node.querySelector(`ul.${prefix}--context-menu`);
+  const submenu = node.querySelector(`ul.${prefix}--menu`);
 
   if (submenu) {
     const subnodes = getValidNodes(submenu);
@@ -58,9 +58,7 @@ export function getFirstSubNode(node) {
 
 export function getParentNode(node) {
   if (node) {
-    const parentNode = node.parentNode.closest(
-      `li.${prefix}--context-menu-option`
-    );
+    const parentNode = node.parentNode.closest(`li.${prefix}--menu-option`);
 
     return parentNode || null;
   }
@@ -70,7 +68,7 @@ export function getParentNode(node) {
 
 export function getParentMenu(el) {
   if (el) {
-    const parentMenu = el.parentNode.closest(`ul.${prefix}--context-menu`);
+    const parentMenu = el.parentNode.closest(`ul.${prefix}--menu`);
 
     return parentMenu || null;
   }

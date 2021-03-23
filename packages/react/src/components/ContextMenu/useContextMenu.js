@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react';
 
 /**
- * @param {Element|Document|Window} [trigger=document] The element which should trigger the ContextMenu on right-click
- * @returns {object} Props object to pass onto ContextMenu component
+ * @param {Element|Document|Window} [trigger=document] The element which should trigger the Menu on right-click
+ * @returns {object} Props object to pass onto Menu component
  */
 function useContextMenu(trigger = document) {
   const [open, setOpen] = useState(false);

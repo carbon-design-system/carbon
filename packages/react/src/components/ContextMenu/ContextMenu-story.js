@@ -9,19 +9,20 @@ import React from 'react';
 import { action } from '@storybook/addon-actions';
 import { InlineNotification } from '../Notification';
 
-import ContextMenu, {
-  ContextMenuDivider,
-  ContextMenuGroup,
-  ContextMenuItem,
-  ContextMenuRadioGroup,
-  ContextMenuSelectableItem,
-  useContextMenu,
-} from '../ContextMenu';
+import Menu, {
+  MenuDivider,
+  MenuGroup,
+  MenuItem,
+  MenuRadioGroup,
+  MenuSelectableItem,
+} from '../Menu';
+
+import { useContextMenu } from '../ContextMenu';
 
 export default {
-  title: 'Experimental/unstable_ContextMenu',
+  title: 'Experimental/unstable_Menu/ContextMenu',
   parameters: {
-    component: ContextMenu,
+    component: Menu,
   },
 };
 
@@ -45,26 +46,26 @@ const InfoBanners = () => (
 );
 
 const Story = (items) => {
-  const contextMenuProps = useContextMenu();
+  const MenuProps = useContextMenu();
 
   function renderItem(item, i) {
     switch (item.type) {
       case 'item':
         return (
-          <ContextMenuItem
+          <MenuItem
             key={i}
             label={item.label}
             shortcut={item.shortcut}
             disabled={item.disabled}
             onClick={!item.children ? action('onClick') : null}>
             {item.children && item.children.map(renderItem)}
-          </ContextMenuItem>
+          </MenuItem>
         );
       case 'divider':
-        return <ContextMenuDivider key={i} />;
+        return <MenuDivider key={i} />;
       case 'selectable':
         return (
-          <ContextMenuSelectableItem
+          <MenuSelectableItem
             key={i}
             label={item.label}
             initialChecked={item.initialChecked}
@@ -73,7 +74,7 @@ const Story = (items) => {
         );
       case 'radiogroup':
         return (
-          <ContextMenuRadioGroup
+          <MenuRadioGroup
             key={i}
             label={item.label}
             items={item.items}
@@ -83,9 +84,9 @@ const Story = (items) => {
         );
       case 'group':
         return (
-          <ContextMenuGroup key={i} label={item.label}>
+          <MenuGroup key={i} label={item.label}>
             {item.children && item.children.map(renderItem)}
-          </ContextMenuGroup>
+          </MenuGroup>
         );
     }
   }
@@ -93,7 +94,7 @@ const Story = (items) => {
   return (
     <div style={{ height: 'calc(100vh - 6.25rem)' }}>
       <InfoBanners />
-      <ContextMenu {...contextMenuProps}>{items.map(renderItem)}</ContextMenu>
+      <Menu {...MenuProps}>{items.map(renderItem)}</Menu>
     </div>
   );
 };

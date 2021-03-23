@@ -22,16 +22,16 @@ import {
   getParentMenu,
 } from './_utils';
 
-import ContextMenuGroup from './ContextMenuGroup';
-import ContextMenuRadioGroup from './ContextMenuRadioGroup';
-import ContextMenuRadioGroupOptions from './ContextMenuRadioGroupOptions';
-import ContextMenuSelectableItem from './ContextMenuSelectableItem';
+import MenuGroup from './MenuGroup';
+import MenuRadioGroup from './MenuRadioGroup';
+import MenuRadioGroupOptions from './MenuRadioGroupOptions';
+import MenuSelectableItem from './MenuSelectableItem';
 
 const { prefix } = settings;
 
 const margin = 16; // distance to keep to body edges, in px
 
-const ContextMenu = function ContextMenu({
+const Menu = function Menu({
   children,
   open,
   level = 1,
@@ -209,9 +209,7 @@ const ContextMenu = function ContextMenu({
   }, [open, x, y]);
 
   const someNodesHaveIcons = React.Children.toArray(children).some(
-    (node) =>
-      node.type === ContextMenuSelectableItem ||
-      node.type === ContextMenuRadioGroup
+    (node) => node.type === MenuSelectableItem || node.type === MenuRadioGroup
   );
 
   const options = React.Children.map(children, (node) => {
@@ -223,11 +221,11 @@ const ContextMenu = function ContextMenu({
     }
   });
 
-  const classes = classnames(`${prefix}--context-menu`, {
-    [`${prefix}--context-menu--open`]: open,
-    [`${prefix}--context-menu--invisible`]:
+  const classes = classnames(`${prefix}--menu`, {
+    [`${prefix}--menu--open`]: open,
+    [`${prefix}--menu--invisible`]:
       open && position[0] === 0 && position[1] === 0,
-    [`${prefix}--context-menu--root`]: isRootMenu,
+    [`${prefix}--menu--root`]: isRootMenu,
   });
 
   const ulAttributes = {
@@ -248,16 +246,12 @@ const ContextMenu = function ContextMenu({
 
   // if the only child is a radiogroup, don't render it as radiogroup component, but
   // only the items to prevent duplicate markup
-  if (
-    options &&
-    options.length === 1 &&
-    options[0].type === ContextMenuRadioGroup
-  ) {
+  if (options && options.length === 1 && options[0].type === MenuRadioGroup) {
     const radioGroupProps = options[0].props;
 
     ulAttributes['aria-label'] = radioGroupProps.label;
     childrenToRender = (
-      <ContextMenuRadioGroupOptions
+      <MenuRadioGroupOptions
         items={radioGroupProps.items}
         initialSelectedItem={radioGroupProps.initialSelectedItem}
         onChange={radioGroupProps.onChange}
@@ -267,7 +261,7 @@ const ContextMenu = function ContextMenu({
 
   // if the only child is a generic group, don't render it as group component, but
   // only the children to prevent duplicate markup
-  if (options && options.length === 1 && options[0].type === ContextMenuGroup) {
+  if (options && options.length === 1 && options[0].type === MenuGroup) {
     const groupProps = options[0].props;
 
     ulAttributes['aria-label'] = groupProps.label;
@@ -281,9 +275,9 @@ const ContextMenu = function ContextMenu({
   );
 };
 
-ContextMenu.propTypes = {
+Menu.propTypes = {
   /**
-   * Specify the children of the ContextMenu
+   * Specify the children of the Menu
    */
   children: PropTypes.node,
 
@@ -298,7 +292,7 @@ ContextMenu.propTypes = {
   onClose: PropTypes.func,
 
   /**
-   * Specify whether the ContextMenu is currently open
+   * Specify whether the Menu is currently open
    */
   open: PropTypes.bool,
 
@@ -313,4 +307,4 @@ ContextMenu.propTypes = {
   y: PropTypes.number,
 };
 
-export default ContextMenu;
+export default Menu;

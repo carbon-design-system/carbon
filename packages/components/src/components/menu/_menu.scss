@@ -9,11 +9,11 @@
 @import '../../globals/scss/vendor/@carbon/elements/scss/import-once/import-once';
 @import '../../globals/scss/helper-mixins';
 
-/// Context Menu styles
+/// Menu styles
 /// @access private
-/// @group context-menu
-@mixin context-menu {
-  .#{$prefix}--context-menu {
+/// @group menu
+@mixin menu {
+  .#{$prefix}--menu {
     @include box-shadow;
 
     position: fixed;
@@ -25,7 +25,7 @@
     visibility: hidden;
   }
 
-  .#{$prefix}--context-menu--open {
+  .#{$prefix}--menu--open {
     visibility: visible;
 
     &:focus {
@@ -33,11 +33,11 @@
     }
   }
 
-  .#{$prefix}--context-menu--invisible {
+  .#{$prefix}--menu--invisible {
     opacity: 0;
   }
 
-  .#{$prefix}--context-menu-option {
+  .#{$prefix}--menu-option {
     position: relative;
     height: $spacing-07;
     background-color: $ui-01;
@@ -49,16 +49,16 @@
     }
   }
 
-  .#{$prefix}--context-menu-option--active,
-  .#{$prefix}--context-menu-option:hover {
+  .#{$prefix}--menu-option--active,
+  .#{$prefix}--menu-option:hover {
     background-color: $hover-ui;
   }
 
-  .#{$prefix}--context-menu-option > .#{$prefix}--context-menu {
+  .#{$prefix}--menu-option > .#{$prefix}--menu {
     margin-top: calc(#{$spacing-02} * -1);
   }
 
-  .#{$prefix}--context-menu-option__content {
+  .#{$prefix}--menu-option__content {
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -66,26 +66,22 @@
     padding: 0 $spacing-05;
   }
 
-  .#{$prefix}--context-menu-option__content--disabled {
+  .#{$prefix}--menu-option__content--disabled {
     background-color: $ui-01;
     cursor: not-allowed;
   }
 
-  .#{$prefix}--context-menu-option__content--disabled
-    .#{$prefix}--context-menu-option__label,
-  .#{$prefix}--context-menu-option__content--disabled
-    .#{$prefix}--context-menu-option__info,
-  .#{$prefix}--context-menu-option__content--disabled
-    .#{$prefix}--context-menu-option__icon {
+  .#{$prefix}--menu-option__content--disabled .#{$prefix}--menu-option__label,
+  .#{$prefix}--menu-option__content--disabled .#{$prefix}--menu-option__info,
+  .#{$prefix}--menu-option__content--disabled .#{$prefix}--menu-option__icon {
     color: $disabled-02;
   }
 
-  .#{$prefix}--context-menu-option__content--indented
-    .#{$prefix}--context-menu-option__label {
+  .#{$prefix}--menu-option__content--indented .#{$prefix}--menu-option__label {
     margin-left: $spacing-05;
   }
 
-  .#{$prefix}--context-menu-option__label {
+  .#{$prefix}--menu-option__label {
     @include type-style('body-short-01');
 
     flex-grow: 1;
@@ -98,13 +94,13 @@
     text-overflow: ellipsis;
   }
 
-  .#{$prefix}--context-menu-option__info {
+  .#{$prefix}--menu-option__info {
     display: inline-flex;
     margin-left: $spacing-05;
     color: $icon-01;
   }
 
-  .#{$prefix}--context-menu-option__icon {
+  .#{$prefix}--menu-option__icon {
     display: flex;
     align-items: center;
     width: 1rem;
@@ -113,7 +109,7 @@
     color: $icon-01;
   }
 
-  .#{$prefix}--context-menu-divider {
+  .#{$prefix}--menu-divider {
     width: 100%;
     height: 1px;
     margin: $spacing-02 0;
@@ -121,6 +117,6 @@
   }
 }
 
-@include exports('context-menu') {
-  @include context-menu;
+@include exports('menu') {
+  @include menu;
 }
