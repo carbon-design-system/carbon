@@ -241,9 +241,10 @@ TextInput.propTypes = {
   placeholder: PropTypes.string,
 
   /**
-   * Specify the size of the Text Input. Currently supports either `sm` or `xl` as an option.
+   * Specify the size of the Text Input. Currently supports either `sm`, 'md' (default) or 'lg` as an option.
+   * TODO V11: remove `xl` (replaced with lg)
    */
-  size: PropTypes.oneOf(['sm', 'xl']),
+  size: PropTypes.oneOf(['sm', 'md', 'lg', 'xl']),
 
   /**
    * Specify the type of the `<input>`
