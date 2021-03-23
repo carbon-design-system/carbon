@@ -10,10 +10,8 @@ import React from 'react';
 import classNames from 'classnames';
 import { settings } from 'carbon-components';
 import deprecate from '../../prop-types/deprecate';
-import setupGetInstanceId from '../../tools/setupGetInstanceId';
 
 const { prefix } = settings;
-const getInstanceId = setupGetInstanceId();
 export default class Tab extends React.Component {
   static propTypes = {
     /**
@@ -106,11 +104,9 @@ export default class Tab extends React.Component {
     onKeyDown: () => {},
   };
 
-  tabId = this.props.id || `tab-${getInstanceId()}`;
-
   render() {
     const {
-      id, // eslint-disable-line no-unused-vars
+      id,
       className,
       handleTabClick,
       handleTabKeyDown,
@@ -146,8 +142,8 @@ export default class Tab extends React.Component {
     const buttonProps = {
       ['aria-selected']: selected,
       ['aria-disabled']: disabled,
-      ['aria-controls']: `${this.tabId}__panel`,
-      id: this.tabId,
+      ['aria-controls']: id && `${id}__panel`,
+      id,
       // TODO: remove scrollable in next major release
       // className:  `${prefix}--tabs__nav-link`,
       className: `${prefix}--tabs--scrollable__nav-link`,
