@@ -207,15 +207,15 @@ StructuredListRow.propTypes = {
 StructuredListRow.defaultProps = {
   head: false,
   label: false,
-  // tabIndex: 0,
   onKeyDown: () => {},
 };
 
-// when the input gets focus it should add the data- attribute to the parent row
-// on blur it should be removed
-// that can be targeted
 export function StructuredListInput(props) {
-  const classes = classNames(`${prefix}--structured-list-input`, className);
+  const classes = classNames(
+    `${prefix}--structured-list-input`,
+    `${prefix}--visually-hidden`,
+    className
+  );
   const defaultId = useId('structureListInput');
   const {
     className,
