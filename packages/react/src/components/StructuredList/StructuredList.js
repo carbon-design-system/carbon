@@ -28,7 +28,7 @@ export function StructuredListWrapper(props) {
   });
 
   return (
-    <div role="table" className={classes} {...other} aria-label={ariaLabel}>
+    <div role="grid" className={classes} {...other} aria-label={ariaLabel}>
       {children}
     </div>
   );
@@ -132,40 +132,31 @@ function useFocusWithin() {
 }
 
 export function StructuredListRow(props) {
-  const {
-    onKeyDown,
-    tabIndex,
-    children,
-    className,
-    head,
-    label,
-    ...other
-  } = props;
+  const { onKeyDown, children, className, head, ...other } = props;
   const [hasFocusWithin, setHasFocusWithin] = useFocusWithin();
   const classes = classNames(`${prefix}--structured-list-row`, className, {
     [`${prefix}--structured-list-row--header-row`]: head,
     [`${prefix}--structured-list-row--focused-within`]: hasFocusWithin,
   });
 
-  return label ? (
+  return head ? (
+    <div tabIndex={-1} role="row" {...other} className={classes}>
+      {children}
+    </div>
+  ) : (
     // eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions
-    <label
+    <div
       {...other}
-      tabIndex={tabIndex}
+      role="row"
+      tabIndex={-1}
       className={classes}
       onFocus={() => {
         setHasFocusWithin(true);
       }}
       onBlur={() => {
-        // potential special case where when focus is moved this row is not blurred
-        // multiple interactable per row?
         setHasFocusWithin(false);
       }}
       onKeyDown={onKeyDown}>
-      {children}
-    </label>
-  ) : (
-    <div {...other} className={classes}>
       {children}
     </div>
   );
@@ -188,25 +179,13 @@ StructuredListRow.propTypes = {
   head: PropTypes.bool,
 
   /**
-   * Specify whether a `<label>` should be used
-   */
-  label: PropTypes.bool,
-
-  /**
    * Provide a handler that is invoked on the key down event for the control,
-   * if `<label>` is in use
    */
   onKeyDown: PropTypes.func,
-
-  /**
-   * Specify the tab index of the container node, if `<label>` is in use
-   */
-  tabIndex: PropTypes.number,
 };
 
 StructuredListRow.defaultProps = {
   head: false,
-  label: false,
   onKeyDown: () => {},
 };
 
