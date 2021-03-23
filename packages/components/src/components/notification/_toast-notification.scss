@@ -133,8 +133,8 @@
 
   .#{$prefix}--toast-notification__icon {
     flex-shrink: 0;
-    margin-top: rem(14px);
-    margin-right: rem(14px);
+    margin-top: $carbon--spacing-05;
+    margin-right: $carbon--spacing-05;
   }
 
   .#{$prefix}--toast-notification__details {
