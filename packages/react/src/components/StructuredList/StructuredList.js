@@ -190,11 +190,6 @@ StructuredListRow.defaultProps = {
 };
 
 export function StructuredListInput(props) {
-  const classes = classNames(
-    `${prefix}--structured-list-input`,
-    `${prefix}--visually-hidden`,
-    className
-  );
   const defaultId = useId('structureListInput');
   const {
     className,
@@ -204,6 +199,11 @@ export function StructuredListInput(props) {
     id,
     ...other
   } = props;
+  const classes = classNames(
+    `${prefix}--structured-list-input`,
+    `${prefix}--visually-hidden`,
+    className
+  );
 
   return (
     <input

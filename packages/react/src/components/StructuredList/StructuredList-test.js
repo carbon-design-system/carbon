@@ -120,16 +120,6 @@ describe('StructuredListRow', () => {
       ).toEqual(true);
     });
 
-    it('should use <div> HTML by default (or when label prop is false)', () => {
-      const wrapperLabel = shallow(<StructuredListRow />);
-      expect(wrapperLabel.getElement().type).toEqual('div');
-    });
-
-    it('should use <label> HTML when label prop is true', () => {
-      const wrapperLabel = shallow(<StructuredListRow label />);
-      expect(wrapperLabel.getElement().type).toEqual('label');
-    });
-
     it('Should accept other props from ...other', () => {
       const wrapperProps = shallow(
         <StructuredListRow title="title">hi</StructuredListRow>

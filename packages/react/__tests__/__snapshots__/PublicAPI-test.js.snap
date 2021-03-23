@@ -4970,9 +4970,7 @@ Map {
   "StructuredListRow" => Object {
     "defaultProps": Object {
       "head": false,
-      "label": false,
       "onKeyDown": [Function],
-      "tabIndex": 0,
     },
     "propTypes": Object {
       "children": Object {
@@ -4984,14 +4982,8 @@ Map {
       "head": Object {
         "type": "bool",
       },
-      "label": Object {
-        "type": "bool",
-      },
       "onKeyDown": Object {
         "type": "func",
-      },
-      "tabIndex": Object {
-        "type": "number",
       },
     },
   },
