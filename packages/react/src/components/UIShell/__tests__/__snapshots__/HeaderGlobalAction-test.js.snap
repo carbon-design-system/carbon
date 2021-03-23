@@ -26,15 +26,20 @@ exports[`HeaderGlobalAction should render 1`] = `
       aria-pressed={null}
       className="custom-class bx--header__action bx--btn bx--btn--primary bx--btn--icon-only bx--tooltip__trigger bx--tooltip--a11y bx--tooltip--bottom bx--tooltip--align-center"
       disabled={false}
+      onBlur={[Function]}
       onClick={[MockFunction]}
+      onFocus={[Function]}
+      onMouseEnter={[Function]}
+      onMouseLeave={[Function]}
       tabIndex={0}
       type="button"
     >
-      <span
+      <div
         className="bx--assistive-text"
+        onMouseEnter={[Function]}
       >
         Accessibility label
-      </span>
+      </div>
       <ForwardRef(Fade32)>
         <Icon
           fill="currentColor"

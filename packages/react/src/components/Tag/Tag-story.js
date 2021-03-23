@@ -26,7 +26,7 @@ const iconMap = {
 };
 
 const sizes = {
-  'Default size': undefined,
+  'Big/default size': undefined,
   'Small size (sm)': 'sm',
 };
 
