@@ -49,8 +49,8 @@ const props = () => ({
   copyButtonDescription: text('Copy button title', 'Copy code snippet'),
   ariaLabel: text('ARIA label', 'Container label'),
   wrapText: boolean('Wrap text (wrapText)', true),
-  maxClosedNumberOfRows: number(
-    'maxClosedNumberOfRows: Specify the maximum number of rows to be shown when in closed view',
+  maxCollapsedNumberOfRows: number(
+    'maxCollapsedNumberOfRows: Specify the maximum number of rows to be shown when in collapsed view',
     15
   ),
   maxExpandedNumberOfRows: number(
