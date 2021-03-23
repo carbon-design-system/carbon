@@ -74,7 +74,7 @@
 
   .#{$prefix}--toolbar-search-container-expandable
     .#{$prefix}--search
-    .#{$prefix}--search-magnifier {
+    .#{$prefix}--search-magnifier-icon {
     left: 0;
     width: $layout-04;
     height: $layout-04;
@@ -86,7 +86,7 @@
 
   .#{$prefix}--toolbar-search-container-expandable
     .#{$prefix}--search--disabled
-    .#{$prefix}--search-magnifier {
+    .#{$prefix}--search-magnifier-icon {
     background: $disabled-01;
     cursor: not-allowed;
     transition: background-color none;
@@ -94,13 +94,13 @@
 
   .#{$prefix}--toolbar-search-container-expandable
     .#{$prefix}--search
-    .#{$prefix}--search-magnifier:focus {
+    .#{$prefix}--search-magnifier-icon:focus {
     @include focus-outline('outline');
   }
 
   .#{$prefix}--toolbar-search-container-expandable
     .#{$prefix}--search
-    .#{$prefix}--search-magnifier:hover {
+    .#{$prefix}--search-magnifier-icon:hover {
     background: $hover-field;
   }
 
@@ -110,7 +110,7 @@
 
   .#{$prefix}--toolbar-search-container-expandable
     .#{$prefix}--search--disabled
-    .#{$prefix}--search-magnifier:hover {
+    .#{$prefix}--search-magnifier-icon:hover {
     background: $disabled-01;
     cursor: not-allowed;
     transition: background-color none;
@@ -199,13 +199,13 @@
 
   .#{$prefix}--toolbar-search-container-active
     .#{$prefix}--search
-    .#{$prefix}--search-magnifier:focus,
+    .#{$prefix}--search-magnifier-icon:focus,
   .#{$prefix}--toolbar-search-container-active
     .#{$prefix}--search
-    .#{$prefix}--search-magnifier:active,
+    .#{$prefix}--search-magnifier-icon:active,
   .#{$prefix}--toolbar-search-container-active
     .#{$prefix}--search
-    .#{$prefix}--search-magnifier:hover {
+    .#{$prefix}--search-magnifier-icon:hover {
     background: transparent;
     border: none;
     outline: none;
@@ -326,7 +326,7 @@
 
   .#{$prefix}--toolbar-search-container-persistent
     .#{$prefix}--search
-    .#{$prefix}--search-magnifier {
+    .#{$prefix}--search-magnifier-icon {
     left: $spacing-05;
   }
 
@@ -535,10 +535,10 @@
 
     .#{$prefix}--toolbar-search-container-expandable
       .#{$prefix}--search
-      .#{$prefix}--search-magnifier,
+      .#{$prefix}--search-magnifier-icon,
     .#{$prefix}--toolbar-search-container-persistent
       .#{$prefix}--search
-      .#{$prefix}--search-magnifier {
+      .#{$prefix}--search-magnifier-icon {
       width: rem(32px);
       height: rem(32px);
       padding: $spacing-03;
@@ -586,20 +586,20 @@
 
     .#{$prefix}--toolbar-search-container-active
       .#{$prefix}--search
-      .#{$prefix}--search-magnifier:focus,
+      .#{$prefix}--search-magnifier-icon:focus,
     .#{$prefix}--toolbar-search-container-active
       .#{$prefix}--search
-      .#{$prefix}--search-magnifier:active,
+      .#{$prefix}--search-magnifier-icon:active,
     .#{$prefix}--toolbar-search-container-active
       .#{$prefix}--search
-      .#{$prefix}--search-magnifier:hover {
+      .#{$prefix}--search-magnifier-icon:hover {
       @include focus-outline('reset');
 
       background: transparent;
     }
   }
 
-  .#{$prefix}--search--disabled .#{$prefix}--search-magnifier:hover {
+  .#{$prefix}--search--disabled .#{$prefix}--search-magnifier-icon:hover {
     background: transparent;
   }
 
