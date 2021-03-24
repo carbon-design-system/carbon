@@ -5,10 +5,11 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React, { useState } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { settings } from 'carbon-components';
+import { useFocusWithin } from '../../internal/useFocusWithin';
 import { useId } from '../../internal/useId';
 import deprecate from '../../prop-types/deprecate';
 
@@ -126,11 +127,6 @@ StructuredListBody.defaultProps = {
   onKeyDown: () => {},
 };
 
-function useFocusWithin() {
-  const [hasFocusWithin, setHasFocusWithin] = useState(false);
-  return [hasFocusWithin, setHasFocusWithin];
-}
-
 export function StructuredListRow(props) {
   const { onKeyDown, children, className, head, ...other } = props;
   const [hasFocusWithin, setHasFocusWithin] = useFocusWithin();
@@ -140,15 +136,14 @@ export function StructuredListRow(props) {
   });
 
   return head ? (
-    <div tabIndex={-1} role="row" {...other} className={classes}>
+    <div role="row" {...other} className={classes}>
       {children}
     </div>
   ) : (
-    // eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions
+    // eslint-disable-next-line jsx-a11y/interactive-supports-focus
     <div
       {...other}
       role="row"
-      tabIndex={-1}
       className={classes}
       onFocus={() => {
         setHasFocusWithin(true);
@@ -179,6 +174,14 @@ StructuredListRow.propTypes = {
   head: PropTypes.bool,
 
   /**
+   * Specify whether a `<label>` should be used
+   */
+  label: deprecate(
+    PropTypes.bool,
+    `\nThe prop \`label\` will be removed in the next major version of Carbon.`
+  ),
+
+  /**
    * Provide a handler that is invoked on the key down event for the control,
    */
   onKeyDown: PropTypes.func,
@@ -194,7 +197,7 @@ export function StructuredListInput(props) {
   const {
     className,
     value,
-    name = `structuredListInput-${defaultId}`,
+    name = `structured-list-input-${defaultId}`,
     title,
     id,
     ...other
@@ -270,8 +273,12 @@ export function StructuredListCell(props) {
     [`${prefix}--structured-list-content--nowrap`]: noWrap,
   });
 
-  return (
-    <div className={classes} role={head ? 'columnheader' : 'cell'} {...other}>
+  return head ? (
+    <span className={classes} role="columnheader" {...other}>
+      {children}
+    </span>
+  ) : (
+    <div className={classes} role="cell" {...other}>
       {children}
     </div>
   );

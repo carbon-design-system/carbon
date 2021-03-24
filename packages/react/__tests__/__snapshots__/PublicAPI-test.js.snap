@@ -4982,6 +4982,7 @@ Map {
       "head": Object {
         "type": "bool",
       },
+      "label": [Function],
       "onKeyDown": Object {
         "type": "func",
       },
