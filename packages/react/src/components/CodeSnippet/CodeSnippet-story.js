@@ -134,26 +134,6 @@ const lightPropMessage = (
   </small>
 );
 
-const snippetText = '<div>   Hello World   </div>';
-export const demo = () => (
-  <div style={{ padding: '1rem' }}>
-    <br />
-    <CodeSnippet type="inline">{snippetText}</CodeSnippet>
-    <br />
-    <CodeSnippet type="single">{snippetText}</CodeSnippet>
-    <br />
-    <CodeSnippet type="multi">{snippetText}</CodeSnippet>
-    <br />
-    <CodeSnippet className="single-fix" type="single">
-      {snippetText}
-    </CodeSnippet>
-    <CodeSnippet className="inline-fix" type="inline">
-      {snippetText}
-    </CodeSnippet>
-    <br />
-  </div>
-);
-
 export const playground = () => (
   <div className={props().light ? 'bx--tile' : ''}>
     {props().light && lightPropMessage}
