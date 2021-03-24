@@ -23,6 +23,8 @@ const { prefix } = settings;
 const rowHeightInPixels = 16;
 const defaultMaxCollapsedNumberOfRows = 15;
 const defaultMaxExpandedNumberOfRows = 0;
+const defaultMinCollapsedNumberOfRows = 3;
+const defaultMinExpandedNumberOfRows = 16;
 
 function CodeSnippet({
   className,
@@ -41,6 +43,8 @@ function CodeSnippet({
   wrapText,
   maxCollapsedNumberOfRows = defaultMaxCollapsedNumberOfRows,
   maxExpandedNumberOfRows = defaultMaxExpandedNumberOfRows,
+  minCollapsedNumberOfRows = defaultMinCollapsedNumberOfRows,
+  minExpandedNumberOfRows = defaultMinExpandedNumberOfRows,
   ...rest
 }) {
   const [expandedCode, setExpandedCode] = useState(false);
@@ -173,18 +177,26 @@ function CodeSnippet({
 
   let containerStyle = {};
   if (type === 'multi') {
+    const styles = {};
+
     if (expandedCode) {
       if (maxExpandedNumberOfRows > 0) {
-        containerStyle.style = {
-          maxHeight: maxExpandedNumberOfRows * rowHeightInPixels,
-        };
+        styles.maxHeight = maxExpandedNumberOfRows * rowHeightInPixels;
+      }
+      if (minExpandedNumberOfRows > 0) {
+        styles.minHeight = minExpandedNumberOfRows * rowHeightInPixels;
       }
     } else {
       if (maxCollapsedNumberOfRows > 0) {
-        containerStyle.style = {
-          maxHeight: maxCollapsedNumberOfRows * rowHeightInPixels,
-        };
+        styles.maxHeight = maxCollapsedNumberOfRows * rowHeightInPixels;
       }
+      if (minCollapsedNumberOfRows > 0) {
+        styles.minHeight = minCollapsedNumberOfRows * rowHeightInPixels;
+      }
+    }
+
+    if (Object.keys(styles).length) {
+      containerStyle.style = styles;
     }
   }
 
@@ -304,6 +316,16 @@ CodeSnippet.propTypes = {
    * Specify the maximum number of rows to be shown when in expanded view
    */
   maxExpandedNumberOfRows: PropTypes.number,
+
+  /**
+   * Specify the minimum number of rows to be shown when in collapsed view
+   */
+  minCollapsedNumberOfRows: PropTypes.number,
+
+  /**
+   * Specify the minimum number of rows to be shown when in expanded view
+   */
+  minExpandedNumberOfRows: PropTypes.number,
 
   /**
    * An optional handler to listen to the `onClick` even fired by the Copy
