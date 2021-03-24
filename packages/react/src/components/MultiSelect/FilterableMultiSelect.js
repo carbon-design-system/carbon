@@ -410,7 +410,6 @@ export default class FilterableMultiSelect extends React.Component {
                     this.textInput.current.focus();
                   }
                 },
-                // onClick: handleToggleClick(isOpen),
                 // When we moved the "root node" of Downshift to the <input> for
                 // ARIA 1.2 compliance, we unfortunately hit this branch for the
                 // "mouseup" event that downshift listens to:
