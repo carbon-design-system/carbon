@@ -7,7 +7,13 @@
 
 import React from 'react';
 import { action } from '@storybook/addon-actions';
-import { withKnobs, boolean, text, select } from '@storybook/addon-knobs';
+import {
+  withKnobs,
+  boolean,
+  text,
+  select,
+  number,
+} from '@storybook/addon-knobs';
 import CodeSnippet from '../CodeSnippet';
 import CodeSnippetSkeleton from './CodeSnippet.Skeleton';
 import mdx from './CodeSnippet.mdx';
@@ -43,6 +49,14 @@ const props = () => ({
   copyButtonDescription: text('Copy button title', 'Copy code snippet'),
   ariaLabel: text('ARIA label', 'Container label'),
   wrapText: boolean('Wrap text (wrapText)', true),
+  maxCollapsedNumberOfRows: number(
+    'maxCollapsedNumberOfRows: Specify the maximum number of rows to be shown when in collapsed view',
+    15
+  ),
+  maxExpandedNumberOfRows: number(
+    'maxExpandedNumberOfRows: Specify the maximum number of rows to be shown when in expanded view',
+    0
+  ),
 });
 
 export const inline = () => (
