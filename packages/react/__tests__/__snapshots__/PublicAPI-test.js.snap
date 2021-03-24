@@ -854,9 +854,7 @@ Map {
       "className": Object {
         "type": "string",
       },
-      "light": Object {
-        "type": "bool",
-      },
+      "light": [Function],
       "onChange": Object {
         "isRequired": true,
         "type": "func",
