@@ -224,7 +224,10 @@ export default class FilterableMultiSelect extends React.Component {
       case stateChangeTypes.keyDownHome:
       case stateChangeTypes.keyDownEnd:
         this.setState({
-          highlightedIndex: changes.highlightedIndex,
+          highlightedIndex:
+            changes.highlightedIndex !== undefined
+              ? changes.highlightedIndex
+              : null,
         });
         if (stateChangeTypes.keyDownArrowDown === type && !this.state.isOpen) {
           this.handleOnMenuChange(true);
@@ -444,9 +447,14 @@ export default class FilterableMultiSelect extends React.Component {
                   this.setState({ inputFocused: false });
                 },
               });
-              const menuProps = getMenuProps({
-                'aria-label': ariaLabel,
-              });
+              const menuProps = getMenuProps(
+                {
+                  'aria-label': ariaLabel,
+                },
+                {
+                  suppressRefError: true,
+                }
+              );
 
               return (
                 <div className={wrapperClasses}>
