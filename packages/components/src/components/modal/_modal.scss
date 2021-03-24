@@ -70,8 +70,12 @@
     position: fixed;
     top: 0;
     display: grid;
+    // stylelint-disable-next-line declaration-block-no-duplicate-properties
+    display: -ms-grid;
     grid-template-rows: auto 1fr auto;
+    -ms-grid-rows: auto 1fr auto;
     grid-template-columns: auto;
+    -ms-grid-columns: auto;
     width: 100%;
     height: 100%;
     max-height: 100%;
@@ -225,7 +229,9 @@
   }
 
   .#{$prefix}--modal-header {
+    -ms-grid-row: 1;
     grid-row: 1/1;
+    -ms-grid-column: 1;
     grid-column: 1/-1;
     margin-bottom: $spacing-03;
     padding-top: $spacing-05;
@@ -249,7 +255,9 @@
     @include type-style('body-long-01');
 
     position: relative;
+    -ms-grid-row: 2;
     grid-row: 2/-2;
+    -ms-grid-column: 1;
     grid-column: 1/-1;
     margin-bottom: $spacing-09;
 
@@ -278,7 +286,9 @@
     position: absolute;
     bottom: $spacing-09;
     left: 0;
+    -ms-grid-row: 2;
     grid-row: 2/-2;
+    -ms-grid-column: 1;
     grid-column: 1/-1;
     width: 100%;
     height: rem(32px);
@@ -303,10 +313,12 @@
       display: none;
     }
   }
-
+  // prettier-ignore
   .#{$prefix}--modal-footer {
     display: flex;
+    -ms-grid-row: -1;
     grid-row: -1/-1;
+    -ms-grid-column: 1;
     grid-column: 1/-1;
     justify-content: flex-end;
     height: rem(64px);

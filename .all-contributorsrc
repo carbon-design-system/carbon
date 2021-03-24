@@ -773,6 +773,15 @@
       "contributions": [
         "code"
       ]
+    },
+    {
+      "login": "carlosparreno",
+      "name": "Carlos Parreño",
+      "avatar_url": "https://avatars.githubusercontent.com/u/25571131?v=4",
+      "profile": "https://github.com/carlosparreno",
+      "contributions": [
+        "code"
+      ]
     }
   ],
   "commitConvention": "none"
