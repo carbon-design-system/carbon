@@ -29,3 +29,11 @@ deprecated:
     reason: research--matrix has been replaced by matrix
   - name: misuse--alt
     reason: The misuse--alt icon has been replaced by misuse--outline
+  - name: logo--google
+    reason: logo--google has been removed (#5342)
+  - name: mammogram--stacked
+    reason: mammogram--stacked has been removed (#3152)
+  - name: logo--delicious
+    reason: logo--delicious has been removed (#4210)
+  - name: logo--stumbleupon
+    reason: logo--stumbleupon has been removed (#4210)

@@ -141,17 +141,18 @@
   height: rem(40px);
   width: rem(40px);
   padding: 0;
-  fill: $text-01;
+  fill: $icon-01;
   transition: background-color $duration--fast-01 motion(standard, productive);
 
   &:hover {
     background-color: $hover-ui;
   }
-}
 
-.flatpickr-prev-month:hover svg,
-.flatpickr-next-month:hover svg {
-  fill: $text-01;
+  // Windows, Firefox HCM Fix
+  @media screen and (-ms-high-contrast: active), (prefers-contrast) {
+    // `ButtonText` is a CSS2 system color to help improve colors in HCM
+    fill: ButtonText;
+  }
 }
 
 .flatpickr-next-month.disabled,

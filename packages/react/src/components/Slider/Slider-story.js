@@ -54,17 +54,23 @@ export default {
   },
 };
 
-export const Default = () => <Slider required id="slider" {...props()} />;
+export const Default = () => (
+  <Slider
+    labelText="Slider Label"
+    value={50}
+    min={0}
+    max={100}
+    step={1}
+    stepMultiplier={10}
+    novalidate
+  />
+);
 
-Default.storyName = 'default';
-
-Default.parameters = {
-  info: {
-    text: `
-            Sliders provide a visual indication of adjustable content, where the user can move the handle along a horizontal track to increase or decrease the value.
-          `,
-  },
+Default.story = {
+  name: 'Slider',
 };
+
+export const Playground = () => <Slider id="slider" {...props()} />;
 
 export const ControlledSlider = () => {
   const [val, setVal] = useState(87);
@@ -86,26 +92,4 @@ export const ControlledSlider = () => {
   );
 };
 
-ControlledSlider.storyName = 'controlled slider';
-
-export const Skeleton = () => (
-  <div
-    style={{ marginTop: '2rem' }}
-    aria-label="loading slider"
-    aria-live="assertive"
-    role="status"
-    tabIndex="0" // eslint-disable-line jsx-a11y/no-noninteractive-tabindex
-  >
-    <SliderSkeleton />
-  </div>
-);
-
-Skeleton.storyName = 'skeleton';
-
-Skeleton.parameters = {
-  info: {
-    text: `
-        Placeholder skeleton state to use when content is loading.
-      `,
-  },
-};
+export const Skeleton = () => <SliderSkeleton />;

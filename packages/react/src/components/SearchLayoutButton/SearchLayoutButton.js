@@ -5,11 +5,11 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import warning from 'warning';
-import { settings } from 'carbon-components';
 import { ListBulleted16, Grid16 } from '@carbon/icons-react';
+import { settings } from 'carbon-components';
+import PropTypes from 'prop-types';
+import React, { Component } from 'react';
+import { warning } from '../../internal/warning';
 
 const { prefix } = settings;
 

@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React from 'react';
+import React, { useRef } from 'react';
 import { useSelect } from 'downshift';
 import { settings } from 'carbon-components';
 import cx from 'classnames';
@@ -130,6 +130,8 @@ const Dropdown = React.forwardRef(function Dropdown(
     }
   }
 
+  const menuItemOptionRefs = useRef(items.map((_) => React.createRef()));
+
   return (
     <div className={wrapperClasses} {...other}>
       {titleText && (
@@ -172,6 +174,9 @@ const Dropdown = React.forwardRef(function Dropdown(
           {isOpen &&
             items.map((item, index) => {
               const itemProps = getItemProps({ item, index });
+              const title = itemToElement ? item.text : itemToString(item);
+              const { offsetWidth, scrollWidth } =
+                menuItemOptionRefs?.current[index]?.current || {};
               return (
                 <ListBox.MenuItem
                   key={itemProps.id}
@@ -179,7 +184,10 @@ const Dropdown = React.forwardRef(function Dropdown(
                   isHighlighted={
                     highlightedIndex === index || selectedItem === item
                   }
-                  title={itemToElement ? item.text : itemToString(item)}
+                  title={(offsetWidth < scrollWidth && title) || undefined}
+                  ref={{
+                    menuItemOptionRef: menuItemOptionRefs.current[index],
+                  }}
                   {...itemProps}>
                   {itemToElement ? (
                     <ItemToElement key={itemProps.id} {...item} />
