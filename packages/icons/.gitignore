@@ -6,3 +6,6 @@ metadata.json
 
 # Generated files from src/svg
 /svg
+
+# TODO remove in v11
+/next.json
