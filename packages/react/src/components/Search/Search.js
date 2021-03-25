@@ -44,11 +44,6 @@ export default class Search extends Component {
     id: PropTypes.string,
 
     /**
-     * Optional prop to specify the kind of this component
-     */
-    kind: PropTypes.oneOf(['default', 'expandable']),
-
-    /**
      * Provide the label text for the Search icon
      */
     labelText: PropTypes.node.isRequired,
@@ -115,14 +110,12 @@ export default class Search extends Component {
     type: 'text',
     placeholder: '',
     closeButtonLabelText: 'Clear search input',
-    kind: 'default',
     onChange: () => {},
   };
 
   state = {
     hasContent: this.props.value || this.props.defaultValue || false,
     prevValue: this.props.value,
-    expanded: false,
   };
 
   static getDerivedStateFromProps({ value }, state) {
@@ -133,11 +126,6 @@ export default class Search extends Component {
           hasContent: !!value,
           prevValue: value,
         };
-  }
-
-  get isExpandable() {
-    const { kind } = this.props;
-    return kind === 'expandable';
   }
 
   clearInput = (evt) => {
@@ -168,40 +156,6 @@ export default class Search extends Component {
     }
   };
 
-  handleFocus = () => {
-    const { expanded } = this.state;
-
-    if (this.isExpandable && !expanded) {
-      this.setState({
-        expanded: true,
-      });
-    }
-  };
-
-  handleBlur = (evt) => {
-    const { expanded, hasContent } = this.state;
-    const relatedTargetIsAllowed =
-      evt.relatedTarget &&
-      evt.relatedTarget.classList.contains(`${prefix}--search-close`);
-
-    if (
-      this.isExpandable &&
-      expanded &&
-      !relatedTargetIsAllowed &&
-      !hasContent
-    ) {
-      this.setState({
-        expanded: false,
-      });
-    }
-  };
-
-  focusInput = () => {
-    if (this.input) {
-      this.input.focus();
-    }
-  };
-
   render() {
     const {
       className,
@@ -222,15 +176,13 @@ export default class Search extends Component {
       ...other
     } = this.props;
 
-    const { hasContent, expanded } = this.state;
+    const { hasContent } = this.state;
 
     const searchClasses = classNames({
       [`${prefix}--search`]: true,
       [`${prefix}--search--${size}`]: size,
       [`${prefix}--search--light`]: light,
       [`${prefix}--search--disabled`]: disabled,
-      [`${prefix}--search--expandable`]: this.isExpandable,
-      [`${prefix}--search--expanded`]: expanded,
       [className]: className,
     });
 
@@ -243,10 +195,11 @@ export default class Search extends Component {
 
     return (
       <div role="search" aria-labelledby={searchId} className={searchClasses}>
-        {/* eslint-disable-next-line jsx-a11y/click-events-have-key-events */}
         <div
           className={`${prefix}--search-magnifier`}
-          onClick={this.isExpandable && !expanded ? this.focusInput : null}>
+          ref={(magnifier) => {
+            this.magnifier = magnifier;
+          }}>
           <Search16 className={`${prefix}--search-magnifier-icon`} />
         </div>
         <label id={searchId} htmlFor={id} className={`${prefix}--label`}>
@@ -263,8 +216,6 @@ export default class Search extends Component {
           placeholder={placeHolderText || placeholder}
           onChange={composeEventHandlers([onChange, this.handleChange])}
           onKeyDown={composeEventHandlers([onKeyDown, this.handleKeyDown])}
-          onFocus={this.handleFocus}
-          onBlur={this.handleBlur}
           ref={(input) => {
             this.input = input;
           }}

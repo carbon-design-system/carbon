@@ -2301,7 +2301,6 @@ exports[`DataTable should render 1`] = `
                   <Search
                     closeButtonLabelText="Clear search input"
                     id="custom-id"
-                    kind="default"
                     labelText="Filter table"
                     onChange={[Function]}
                     placeholder="Filter table"
@@ -2317,7 +2316,6 @@ exports[`DataTable should render 1`] = `
                     >
                       <div
                         className="bx--search-magnifier"
-                        onClick={null}
                       >
                         <ForwardRef(Search16)
                           className="bx--search-magnifier-icon"
@@ -2360,10 +2358,7 @@ exports[`DataTable should render 1`] = `
                         autoComplete="off"
                         className="bx--search-input"
                         id="custom-id"
-                        kind="default"
-                        onBlur={[Function]}
                         onChange={[Function]}
-                        onFocus={[Function]}
                         onKeyDown={[Function]}
                         placeholder="Filter table"
                         role="searchbox"
@@ -3321,7 +3316,6 @@ exports[`DataTable sticky header should render 1`] = `
                   <Search
                     closeButtonLabelText="Clear search input"
                     id="custom-id"
-                    kind="default"
                     labelText="Filter table"
                     onChange={[Function]}
                     placeholder="Filter table"
@@ -3337,7 +3331,6 @@ exports[`DataTable sticky header should render 1`] = `
                     >
                       <div
                         className="bx--search-magnifier"
-                        onClick={null}
                       >
                         <ForwardRef(Search16)
                           className="bx--search-magnifier-icon"
@@ -3380,10 +3373,7 @@ exports[`DataTable sticky header should render 1`] = `
                         autoComplete="off"
                         className="bx--search-input"
                         id="custom-id"
-                        kind="default"
-                        onBlur={[Function]}
                         onChange={[Function]}
-                        onFocus={[Function]}
                         onKeyDown={[Function]}
                         placeholder="Filter table"
                         role="searchbox"

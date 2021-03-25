@@ -14,17 +14,13 @@ import Search from '../Search';
 import SearchSkeleton from '../Search/Search.Skeleton';
 import SearchFilterButton from '../SearchFilterButton';
 import SearchLayoutButton from '../SearchLayoutButton';
+import ExpandableSearch from '../ExpandableSearch';
 import mdx from './Search.mdx';
 
 const sizes = {
   'Regular size (xl)': 'xl',
   'Large size (lg)': 'lg',
   'Small size (sm)': 'sm',
-};
-
-const kinds = {
-  'Default (default)': 'default',
-  'Expandable (expandable)': 'expandable',
 };
 
 const props = () => ({
@@ -40,7 +36,6 @@ const props = () => ({
     'Clear search input'
   ),
   placeholder: text('Placeholder text (placeholder)', 'Search'),
-  kind: select('Kind (kind)', kinds, 'default'),
   onChange: action('onChange'),
   onKeyDown: action('onKeyDown'),
 });
@@ -59,6 +54,7 @@ export default {
       SearchSkeleton,
       SearchFilterButton,
       SearchLayoutButton,
+      ExpandableSearch,
     },
   },
 };
@@ -110,3 +106,9 @@ Skeleton.parameters = {
       `,
   },
 };
+
+export const Expandable = () => (
+  <ExpandableSearch {...props()} id="search-expandable-1" />
+);
+
+Expandable.storyName = 'Expandable';
