@@ -319,7 +319,6 @@
 
   .#{$prefix}--data-table--tall thead th.#{$prefix}--table-expand,
   .#{$prefix}--data-table--tall tbody td.#{$prefix}--table-expand {
-    width: rem(64px);
     height: rem(64px);
   }
 
@@ -532,7 +531,6 @@
 
   .#{$prefix}--data-table--sticky-header {
     display: block;
-    // max-height: rem(300px);
     overflow-y: scroll;
 
     thead,
@@ -586,10 +584,6 @@
     .#{$prefix}--parent-row {
       min-height: 3rem;
     }
-
-    // .#{$prefix}--parent-row td {
-    //   padding: 1rem;
-    // }
 
     &:not(.#{$prefix}--data-table--compact):not(.#{$prefix}--data-table--tall):not(.#{$prefix}--data-table--short)
       td:not(.#{$prefix}--table-column-menu):not(.#{$prefix}--table-column-checkbox) {
