@@ -60,6 +60,7 @@ function removeDeprecatedSymbolArtboards({ icons, sizes, symbolsPage }) {
  * Sync Carbon icon symbols into current Sketch Document
  * @param {object} params - syncIconSymbols parameters
  * @param {Document} params.document - current document
+ * @param {object} params.IDL_SKETCH_LIBRARY_METADATA - IDL Sketch file metadata
  * @param {Array<SymbolMaster>} params.symbols
  * @param {Page} params.symbolsPage - the symbols page as identified by Sketch
  * @param {Array<number>} params.sizes - array of icon sizes
