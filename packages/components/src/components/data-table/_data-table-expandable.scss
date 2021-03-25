@@ -222,6 +222,7 @@
     width: 100%;
     // Account for the border in `.bx--table-expand`
     height: calc(100% + 1px);
+    padding: 0 1rem;
     vertical-align: inherit;
   }
 
