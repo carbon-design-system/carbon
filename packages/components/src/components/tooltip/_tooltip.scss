@@ -700,6 +700,12 @@
       @include tooltip--placement('icon', 'left', 'end');
     }
   }
+
+  // Allow pointer events on tooltip when tooltip is visible
+  .#{$prefix}--tooltip__trigger:not(.#{$prefix}--tooltip--hidden)
+    .#{$prefix}--assistive-text {
+    pointer-events: all;
+  }
 }
 
 @include exports('tooltip') {

@@ -16,9 +16,7 @@ describe('ToggleSmall', () => {
   let ToggleSmall;
 
   beforeEach(() => {
-    jest.mock('warning', () => {
-      return jest.fn();
-    });
+    jest.mock('../../internal/warning');
 
     ToggleSmall = require('../ToggleSmall').default;
   });
