@@ -7,8 +7,7 @@
 
 /* global MSSVGImporter, NSString, NSUTF8StringEncoding */
 
-import { Artboard, Rectangle, Shape } from 'sketch/dom';
-import { syncColorStyles } from '../../sharedStyles/colors';
+import { Artboard, Library, Rectangle, Shape } from 'sketch/dom';
 import { groupByKey } from '../../tools/grouping';
 import { syncSymbol } from '../../tools/symbols';
 
@@ -67,13 +66,30 @@ function removeDeprecatedSymbolArtboards({ icons, sizes, symbolsPage }) {
  */
 export function syncIconSymbols({
   document,
+  IDL_SKETCH_LIBRARY_METADATA,
   symbols,
   symbolsPage,
   sizes = [32, 24, 20, 16],
 }) {
-  const sharedStyles = syncColorStyles({ document });
-  const [sharedStyle] = sharedStyles.filter(
-    ({ name }) => name === 'color / black'
+  const {
+    id: idlSketchLibraryId,
+    name: idlSketchLibraryName,
+  } = IDL_SKETCH_LIBRARY_METADATA;
+
+  const [idlSketchLibrary] = Library.getLibraries().filter(
+    ({ id, name }) => id === idlSketchLibraryId && name === idlSketchLibraryName
+  );
+
+  idlSketchLibrary
+    .getImportableLayerStyleReferencesForDocument(document)
+    .forEach((layerStyle) => {
+      if (layerStyle.name.startsWith('color')) {
+        layerStyle.import();
+      }
+    });
+
+  const sharedStyle = [...document.sharedLayerStyles].find((sharedLayerStyle) =>
+    sharedLayerStyle?.name.endsWith('black')
   );
 
   if (!sharedStyle) {
