@@ -7,6 +7,7 @@
 
 /* global MSSVGImporter, NSString, NSUTF8StringEncoding */
 
+import sketch from 'sketch';
 import { Artboard, Library, Rectangle, Shape } from 'sketch/dom';
 import { groupByKey } from '../../tools/grouping';
 import { syncSymbol } from '../../tools/symbols';
@@ -57,6 +58,35 @@ function removeDeprecatedSymbolArtboards({ icons, sizes, symbolsPage }) {
 }
 
 /**
+ * Fetch the IDL Sketch Library if it is installed
+ * @param {object} params - fetchIDLSketchLibrary parameters
+ * @param {Array<object>} params.icons - array of all icon object metadata
+ * @param {Array<number>} params.sizes - array of icon sizes
+ * @param {Page} params.symbolsPage - the symbols page as identified by Sketch
+ */
+function fetchIDLSketchLibrary({ IDL_SKETCH_LIBRARY_METADATA }) {
+  const {
+    id: idlSketchLibraryId,
+    name: idlSketchLibraryName,
+  } = IDL_SKETCH_LIBRARY_METADATA;
+
+  const installedLibraries = Library.getLibraries().filter(
+    ({ id, name }) => id === idlSketchLibraryId && name === idlSketchLibraryName
+  );
+
+  if (!installedLibraries.length) {
+    sketch.UI.message(
+      'Please install the IDL V2 Sketch library before trying again'
+    );
+    throw new Error(
+      'Please install the IDL V2 Sketch library before trying again'
+    );
+  }
+
+  return installedLibraries[0];
+}
+
+/**
  * Sync Carbon icon symbols into current Sketch Document
  * @param {object} params - syncIconSymbols parameters
  * @param {Document} params.document - current document
@@ -72,14 +102,9 @@ export function syncIconSymbols({
   symbolsPage,
   sizes = [32, 24, 20, 16],
 }) {
-  const {
-    id: idlSketchLibraryId,
-    name: idlSketchLibraryName,
-  } = IDL_SKETCH_LIBRARY_METADATA;
-
-  const [idlSketchLibrary] = Library.getLibraries().filter(
-    ({ id, name }) => id === idlSketchLibraryId && name === idlSketchLibraryName
-  );
+  const idlSketchLibrary = fetchIDLSketchLibrary({
+    IDL_SKETCH_LIBRARY_METADATA,
+  });
 
   idlSketchLibrary
     .getImportableLayerStyleReferencesForDocument(document)
