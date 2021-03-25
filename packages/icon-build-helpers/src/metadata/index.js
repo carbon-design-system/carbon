@@ -94,7 +94,8 @@ async function build({
   output = input,
 }) {
   const metadata = await load({ adapter, extensions, input });
-  const metadataFilePath = path.join(output.extensions, 'metadata.json');
+  const metadataFilePath =
+    output.metadata || path.join(output.extensions, 'metadata.json');
 
   await fs.ensureFile(metadataFilePath);
   await fs.writeJson(metadataFilePath, metadata, {

@@ -1730,6 +1730,7 @@ __metadata:
     rimraf: ^3.0.0
     rollup: ^2.38.0
     rollup-plugin-strip-banner: ^2.0.0
+    svg-parser: ^2.0.4
     svgo: ^1.1.1
   languageName: unknown
   linkType: soft
@@ -1770,6 +1771,7 @@ __metadata:
     "@carbon/icon-helpers": ^10.15.0
     "@carbon/icons": ^10.28.0
     prop-types: ^15.7.2
+    rimraf: ^3.0.2
   peerDependencies:
     react: ">=16"
   languageName: unknown
@@ -30688,6 +30690,13 @@ __metadata:
   version: 2.0.3
   resolution: "svg-parser@npm:2.0.3"
   checksum: 9dc37382304ef141bd36f5c7514be955e7cbf85413599172b57be934a91a26b76c7dfbcc949b47c0073728ee1df971d79b68ca7d3086fe1ef87c27f9b4ec24a7
+  languageName: node
+  linkType: hard
+
+"svg-parser@npm:^2.0.4":
+  version: 2.0.4
+  resolution: "svg-parser@npm:2.0.4"
+  checksum: 507b0ea204adf43bcba0df34bd8549a1a67f42007d518d4d56cad99bfda4295b5d9b67c1ca4661fb7474dbb593e34a69dd30fb4db804df85f32163fa785b3c31
   languageName: node
   linkType: hard
 

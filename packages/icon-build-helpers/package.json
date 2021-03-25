@@ -22,7 +22,8 @@
     "access": "public"
   },
   "dependencies": {
-    "@babel/core": "^7.12.13"
+    "@babel/core": "^7.12.13",
+    "svg-parser": "^2.0.4"
   },
   "devDependencies": {
     "@babel/preset-env": "^7.10.0",

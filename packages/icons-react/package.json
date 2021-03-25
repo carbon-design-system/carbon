@@ -41,7 +41,8 @@
   },
   "devDependencies": {
     "@carbon/icon-build-helpers": "^0.18.0",
-    "@carbon/icons": "^10.28.0"
+    "@carbon/icons": "^10.28.0",
+    "rimraf": "^3.0.2"
   },
   "sideEffects": false
 }

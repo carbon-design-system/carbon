@@ -11,25 +11,44 @@ const { builders, Metadata } = require('@carbon/icon-build-helpers');
 const path = require('path');
 
 async function build() {
-  const metadata = await Metadata.build({
+  await Metadata.build({
     input: {
       svg: path.resolve(__dirname, '../src/svg'),
       extensions: path.resolve(__dirname, '../'),
     },
+    output: {
+      metadata: path.resolve(__dirname, '../next.json'),
+    },
     extensions: [
       Metadata.extensions.icons,
       Metadata.extensions.assets,
-      Metadata.extensions.deprecated,
-      Metadata.extensions.output,
-      Metadata.extensions.categories,
+      Metadata.extensions.moduleInfo,
+      // Metadata.extensions.deprecated,
+      // Metadata.extensions.output,
+      // Metadata.extensions.categories,
     ],
   });
 
-  const output = path.resolve(__dirname, '../');
-  await Promise.all([
-    builders.svg.run(metadata, { output }),
-    builders.vanilla.run(metadata, { output }),
-  ]);
+  // const metadata = await Metadata.build({
+  // input: {
+  // svg: path.resolve(__dirname, '../src/svg'),
+  // extensions: path.resolve(__dirname, '../'),
+  // },
+  // extensions: [
+  // Metadata.extensions.icons,
+  // Metadata.extensions.assets,
+  // Metadata.extensions.moduleInfo,
+  // // Metadata.extensions.deprecated,
+  // // Metadata.extensions.output,
+  // // Metadata.extensions.categories,
+  // ],
+  // });
+
+  // const output = path.resolve(__dirname, '../');
+  // await Promise.all([
+  // builders.svg.run(metadata, { output }),
+  // builders.vanilla.run(metadata, { output }),
+  // ]);
 }
 
 build().catch((error) => {
