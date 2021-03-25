@@ -109,13 +109,19 @@ function CodeSnippet({
 
           if (
             maxCollapsedNumberOfRows > 0 &&
-            (maxExpandedNumberOfRows === 0 ||
+            (maxExpandedNumberOfRows <= 0 ||
               maxExpandedNumberOfRows > maxCollapsedNumberOfRows) &&
             height > maxCollapsedNumberOfRows * rowHeightInPixels
           ) {
             setShouldShowMoreLessBtn(true);
           } else {
             setShouldShowMoreLessBtn(false);
+          }
+          if (
+            expandedCode &&
+            minExpandedNumberOfRows > 0 &&
+            height <= minExpandedNumberOfRows * rowHeightInPixels
+          ) {
             setExpandedCode(false);
           }
         }
@@ -127,7 +133,13 @@ function CodeSnippet({
         }
       },
     },
-    [type, maxCollapsedNumberOfRows, maxExpandedNumberOfRows, rowHeightInPixels]
+    [
+      type,
+      maxCollapsedNumberOfRows,
+      maxExpandedNumberOfRows,
+      minExpandedNumberOfRows,
+      rowHeightInPixels,
+    ]
   );
 
   useEffect(() => {
