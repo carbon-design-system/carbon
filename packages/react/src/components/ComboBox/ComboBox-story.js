@@ -7,7 +7,7 @@
 
 import React from 'react';
 import { action } from '@storybook/addon-actions';
-import { boolean, select, text } from '@storybook/addon-knobs';
+import { boolean, object, select, text } from '@storybook/addon-knobs';
 import ComboBox from '../ComboBox';
 import mdx from './ComboBox.mdx';
 
@@ -91,17 +91,29 @@ const props = () => ({
     'Warning state text (warnText)',
     'This mode may perform worse on older machines'
   ),
+  listBoxMenuIconTranslationIds: object(
+    'Listbox menu icon translation IDs (for translateWithId callback)',
+    {
+      'close.menu': 'Close menu',
+      'open.menu': 'Open menu',
+      'clear.selection': 'Clear selection',
+    }
+  ),
 });
 
-export const Playground = () => (
-  <div style={{ width: 300 }}>
-    <ComboBox
-      items={items}
-      itemToString={(item) => (item ? item.text : '')}
-      {...props()}
-    />
-  </div>
-);
+export const Playground = () => {
+  const { listBoxMenuIconTranslationIds, ...comboBoxProps } = props();
+  return (
+    <div style={{ width: 300 }}>
+      <ComboBox
+        {...comboBoxProps}
+        items={items}
+        itemToString={(item) => (item ? item.text : '')}
+        translateWithId={(id) => listBoxMenuIconTranslationIds[id]}
+      />
+    </div>
+  );
+};
 
 export const disabled = () => (
   <div style={{ width: 300 }}>
