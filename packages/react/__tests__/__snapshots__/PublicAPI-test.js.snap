@@ -3988,6 +3988,9 @@ Map {
       "notificationType": Object {
         "type": "string",
       },
+      "onClose": Object {
+        "type": "func",
+      },
       "onCloseButtonClick": Object {
         "type": "func",
       },
@@ -4053,6 +4056,9 @@ Map {
       },
       "notificationType": Object {
         "type": "string",
+      },
+      "onClose": Object {
+        "type": "func",
       },
       "onCloseButtonClick": Object {
         "type": "func",
