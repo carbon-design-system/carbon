@@ -14,6 +14,8 @@ import { useId } from '../../internal/useId';
 import deprecate from '../../prop-types/deprecate';
 
 const { prefix } = settings;
+const GridSelectedRowStateContext = React.createContext(null);
+const GridSelectedRowDispatchContext = React.createContext(null);
 
 export function StructuredListWrapper(props) {
   const {
@@ -27,11 +29,16 @@ export function StructuredListWrapper(props) {
   const classes = classNames(`${prefix}--structured-list`, className, {
     [`${prefix}--structured-list--selection`]: selection,
   });
+  const [selectedRow, setSelectedRow] = React.useState(null);
 
   return (
-    <div role="grid" className={classes} {...other} aria-label={ariaLabel}>
-      {children}
-    </div>
+    <GridSelectedRowStateContext.Provider value={selectedRow}>
+      <GridSelectedRowDispatchContext.Provider value={setSelectedRow}>
+        <div role="grid" className={classes} {...other} aria-label={ariaLabel}>
+          {children}
+        </div>
+      </GridSelectedRowDispatchContext.Provider>
+    </GridSelectedRowStateContext.Provider>
   );
 }
 
@@ -127,9 +134,14 @@ StructuredListBody.defaultProps = {
   onKeyDown: () => {},
 };
 
+const GridRowContext = React.createContext(null);
+
 export function StructuredListRow(props) {
   const { onKeyDown, children, className, head, ...other } = props;
   const [hasFocusWithin, setHasFocusWithin] = useFocusWithin();
+  const id = useId('grid-input');
+  const setSelectedRow = React.useContext(GridSelectedRowDispatchContext);
+  const value = { id };
   const classes = classNames(`${prefix}--structured-list-row`, className, {
     [`${prefix}--structured-list-row--header-row`]: head,
     [`${prefix}--structured-list-row--focused-within`]: hasFocusWithin,
@@ -145,6 +157,7 @@ export function StructuredListRow(props) {
       {...other}
       role="row"
       className={classes}
+      onClick={() => setSelectedRow(id)}
       onFocus={() => {
         setHasFocusWithin(true);
       }}
@@ -152,7 +165,9 @@ export function StructuredListRow(props) {
         setHasFocusWithin(false);
       }}
       onKeyDown={onKeyDown}>
-      {children}
+      <GridRowContext.Provider value={value}>
+        {children}
+      </GridRowContext.Provider>
     </div>
   );
 }
@@ -196,7 +211,6 @@ export function StructuredListInput(props) {
   const defaultId = useId('structureListInput');
   const {
     className,
-    value,
     name = `structured-list-input-${defaultId}`,
     title,
     id,
@@ -207,15 +221,22 @@ export function StructuredListInput(props) {
     `${prefix}--visually-hidden`,
     className
   );
+  const row = React.useContext(GridRowContext);
+  const selectedRow = React.useContext(GridSelectedRowStateContext);
+  const setSelectedRow = React.useContext(GridSelectedRowDispatchContext);
 
   return (
     <input
       {...other}
       type="radio"
       tabIndex={0}
-      id={id || defaultId}
+      checked={row.id === selectedRow}
+      value={row.id}
+      onChange={(event) => {
+        setSelectedRow(event.target.value);
+      }}
+      id={id}
       className={classes}
-      value={value}
       name={name}
       title={title}
     />
@@ -231,7 +252,10 @@ StructuredListInput.propTypes = {
   /**
    * Specify whether the underlying input should be checked by default
    */
-  defaultChecked: PropTypes.bool,
+  defaultChecked: deprecate(
+    PropTypes.bool,
+    `\nThe prop \`defaultChecked\` will be removed in the next major version of Carbon.`
+  ),
 
   /**
    * Specify a custom `id` for the input
@@ -246,7 +270,10 @@ StructuredListInput.propTypes = {
   /**
    * Provide an optional hook that is called each time the input is updated
    */
-  onChange: PropTypes.func,
+  onChange: deprecate(
+    PropTypes.func,
+    `\nThe prop \`onChange\` will be removed in the next major version of Carbon.`
+  ),
 
   /**
    * Provide a `title` for the input
@@ -256,12 +283,13 @@ StructuredListInput.propTypes = {
   /**
    * Specify the value of the input
    */
-  value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
+  value: deprecate(
+    PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
+    `\nThe prop \`value\` will be removed in the next major version of Carbon.`
+  ),
 };
 
 StructuredListInput.defaultProps = {
-  onChange: () => {},
-  value: 'value',
   title: 'title',
 };
 
