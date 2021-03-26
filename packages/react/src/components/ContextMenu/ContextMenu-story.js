@@ -56,6 +56,7 @@ const Story = (items) => {
             label={item.label}
             shortcut={item.shortcut}
             disabled={item.disabled}
+            kind={item.kind}
             onClick={!item.children ? action('onClick') : null}>
             {item.children && item.children.map(renderItem)}
           </ContextMenuItem>
@@ -122,7 +123,7 @@ export const _ContextMenu = () =>
     { type: 'selectable', label: 'Publish', initialChecked: true },
     { type: 'divider' },
     { type: 'item', label: 'Rename', shortcut: '↩︎' },
-    { type: 'item', label: 'Delete', shortcut: '⌘⌫' },
+    { type: 'item', label: 'Delete', shortcut: '⌘⌫', kind: 'danger' },
   ]);
 _ContextMenu.storyName = 'ContextMenu';
 
