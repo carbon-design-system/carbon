@@ -88,6 +88,7 @@
   .#{$prefix}--text-input__field-wrapper--warning > .#{$prefix}--text-input,
   .#{$prefix}--text-area__wrapper[data-invalid],
   .#{$prefix}--select-input__wrapper[data-invalid],
+  .#{$prefix}--select--warning .#{$prefix}--select-input__wrapper,
   .#{$prefix}--time-picker[data-invalid],
   .#{$prefix}--list-box[data-invalid],
   .#{$prefix}--list-box--warning {

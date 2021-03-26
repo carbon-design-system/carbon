@@ -7,7 +7,13 @@
 
 import React from 'react';
 import { action } from '@storybook/addon-actions';
-import { withKnobs, boolean, select, text } from '@storybook/addon-knobs';
+import {
+  withKnobs,
+  boolean,
+  object,
+  select,
+  text,
+} from '@storybook/addon-knobs';
 import Dropdown from '../Dropdown';
 import DropdownSkeleton from './Dropdown.Skeleton';
 import mdx from './Dropdown.mdx';
@@ -15,8 +21,7 @@ import mdx from './Dropdown.mdx';
 const items = [
   {
     id: 'option-0',
-    text:
-      'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Vitae, aliquam. Blanditiis quia nemo enim voluptatibus quos ducimus porro molestiae nesciunt error cumque quaerat, tempore vero unde eum aperiam eligendi repellendus.',
+    text: 'Lorem, ipsum dolor sit amet consectetur adipisicing elit.',
   },
   {
     id: 'option-1',
@@ -78,6 +83,13 @@ const props = () => ({
     'Warning state text (warnText)',
     'This mode may perform worse on older machines'
   ),
+  listBoxMenuIconTranslationIds: object(
+    'Listbox menu icon translation IDs (for translateWithId callback)',
+    {
+      'close.menu': 'Close menu',
+      'open.menu': 'Open menu',
+    }
+  ),
 });
 
 export default {
@@ -125,12 +137,14 @@ export const Inline = () => (
 );
 
 export const Playground = () => {
+  const { listBoxMenuIconTranslationIds, ...dropdownProps } = props();
   return (
     <div style={{ width: 300 }}>
       <Dropdown
-        {...props()}
+        {...dropdownProps}
         items={items}
         itemToString={(item) => (item ? item.text : '')}
+        translateWithId={(id) => listBoxMenuIconTranslationIds[id]}
       />
     </div>
   );

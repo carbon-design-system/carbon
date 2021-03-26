@@ -17,9 +17,7 @@ describe('[Deprecated] SearchLayoutButton', () => {
   let wrapper;
 
   beforeEach(() => {
-    jest.mock('warning', () => {
-      return jest.fn();
-    });
+    jest.mock('../../internal/warning');
     SearchLayoutButton = require('../SearchLayoutButton').default;
     wrapper = mount(<SearchLayoutButton labelText="testlabel" />);
   });
