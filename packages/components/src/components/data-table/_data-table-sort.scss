@@ -18,7 +18,7 @@
   // -------------------------------------
   .#{$prefix}--data-table--sort th,
   .#{$prefix}--data-table th[aria-sort] {
-    height: $layout-04;
+    height: $spacing-09;
     padding: 0;
     border-top: none;
     border-bottom: none;
@@ -122,7 +122,7 @@
 
   .#{$prefix}--table-sort__icon-unsorted {
     width: rem(20px);
-    min-width: $layout-01;
+    min-width: $spacing-05;
     margin-right: $spacing-03;
     margin-left: $spacing-03;
     opacity: 0;
@@ -151,7 +151,7 @@
 
   .#{$prefix}--table-sort__icon {
     width: rem(20px);
-    min-width: $layout-01;
+    min-width: $spacing-05;
     margin-right: $spacing-03;
     margin-left: $spacing-03;
     transform: rotate(0);

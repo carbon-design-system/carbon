@@ -21,7 +21,7 @@
     position: relative;
     display: flex;
     width: 100%;
-    height: $layout-04;
+    height: $spacing-09;
     overflow: hidden;
     background: $ui-01;
   }
@@ -30,7 +30,7 @@
     display: flex;
     justify-content: flex-end;
     width: 100%;
-    height: $layout-04;
+    height: $spacing-09;
     transform: translate3d(0, 0, 0);
     transition: transform $duration--fast-02 motion(standard, productive),
       clip-path $duration--fast-02 motion(standard, productive);
@@ -60,15 +60,15 @@
   //-------------------------------------------------
   .#{$prefix}--toolbar-search-container-expandable {
     position: relative;
-    width: $layout-04;
-    height: $layout-04;
+    width: $spacing-09;
+    height: $spacing-09;
     box-shadow: none;
     transition: flex $transition--expansion $carbon--standard-easing;
   }
 
   .#{$prefix}--toolbar-search-container-expandable .#{$prefix}--search {
     position: initial;
-    width: $layout-04;
+    width: $spacing-09;
     height: 100%;
   }
 
@@ -76,8 +76,8 @@
     .#{$prefix}--search
     .#{$prefix}--search-magnifier {
     left: 0;
-    width: $layout-04;
-    height: $layout-04;
+    width: $spacing-09;
+    height: $spacing-09;
     padding: $spacing-05;
     cursor: pointer;
     transition: background $duration--fast-02 motion(entrance, productive);
@@ -135,8 +135,8 @@
   .#{$prefix}--toolbar-search-container-expandable
     .#{$prefix}--search
     .#{$prefix}--search-close {
-    width: $layout-04;
-    height: $layout-04;
+    width: $spacing-09;
+    height: $spacing-09;
 
     &::before {
       top: 2px;
@@ -239,8 +239,8 @@
     @include button-reset;
 
     display: flex;
-    width: $layout-04;
-    height: $layout-04;
+    width: $spacing-09;
+    height: $spacing-09;
     padding: $spacing-05;
     cursor: pointer;
     transition: background $duration--fast-02 motion(entrance, productive);
@@ -251,8 +251,8 @@
     @include button-reset;
 
     display: flex;
-    width: $layout-04;
-    height: $layout-04;
+    width: $spacing-09;
+    height: $spacing-09;
     cursor: pointer;
     transition: background $duration--fast-02 motion(entrance, productive);
   }
@@ -291,7 +291,7 @@
   }
 
   .#{$prefix}--overflow-menu--data-table {
-    height: $layout-04;
+    height: $spacing-09;
   }
 
   //-------------------------------------------------
@@ -299,8 +299,8 @@
   //-------------------------------------------------
   .#{$prefix}--toolbar-action__icon {
     width: auto;
-    max-width: $layout-01;
-    height: $layout-01;
+    max-width: $spacing-05;
+    height: $spacing-05;
     fill: $icon-01;
   }
 
@@ -310,7 +310,7 @@
   .#{$prefix}--toolbar-search-container-persistent {
     position: relative;
     width: 100%;
-    height: $layout-04;
+    height: $spacing-09;
     opacity: 1;
   }
 
@@ -333,7 +333,7 @@
   .#{$prefix}--toolbar-search-container-persistent
     .#{$prefix}--search
     .#{$prefix}--search-input {
-    height: $layout-04;
+    height: $spacing-09;
     padding: 0 $spacing-09;
     border: none;
   }
@@ -362,8 +362,8 @@
   .#{$prefix}--toolbar-search-container-persistent
     .#{$prefix}--search
     .#{$prefix}--search-close {
-    width: $layout-04;
-    height: $layout-04;
+    width: $spacing-09;
+    height: $spacing-09;
   }
 
   .#{$prefix}--batch-actions--active ~ .#{$prefix}--toolbar-search-container,
@@ -470,7 +470,7 @@
     left: 0;
     display: block;
     width: rem(1px);
-    height: $layout-01;
+    height: $spacing-05;
     background-color: $text-04;
     border: none;
     opacity: 1;
