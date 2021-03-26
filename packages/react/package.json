@@ -122,7 +122,7 @@
     "storybook-preset-carbon": "^0.3.0",
     "string-replace-loader": "^2.1.0",
     "terser-webpack-plugin": "^2.3.2",
-    "webpack": "^4.41.5",
+    "webpack": "^5.28.0",
     "whatwg-fetch": "^2.0.3"
   },
   "sideEffects": false,
