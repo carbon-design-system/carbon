@@ -372,11 +372,24 @@ export default class ComboBox extends React.Component {
       [`${prefix}--text-input--empty`]: !this.state.inputValue,
     });
 
+    const {
+      // (1) extract the downshift prop-getters to apply later
+      getInputProps: otherGetInputProps = (v) => v || {},
+      getItemProps: otherGetItemProps = (v) => v || {},
+      getLabelProps: otherGetLabelProps = (v) => v || {},
+      getMenuProps: otherGetMenuProps = (v) => v || {},
+      getRootProps: otherGetRootProps = (v) => v || {},
+      getToggleButtonProps: otherGetToggleButtonProps = (v) => v || {},
+      // (1) otherDownShiftProps include all non-prop-getters (actions, state, and props(basic and advanced) )
+      ...otherDownShiftProps
+    } = mapDownshiftProps(downshiftProps);
+
     // needs to be Capitalized for react to render it correctly
     const ItemToElement = itemToElement;
     return (
       <Downshift
-        {...mapDownshiftProps(downshiftProps)}
+        // (1) pass only all non-prop-getters (actions, state, and props(basic and advanced)
+        {...otherDownShiftProps}
         onChange={this.handleOnChange}
         onInputValueChange={this.handleOnInputValueChange}
         onStateChange={this.handleOnStateChange}
@@ -399,13 +412,20 @@ export default class ComboBox extends React.Component {
           clearSelection,
           toggleMenu,
         }) => {
-          const rootProps = getRootProps(
-            {},
-            {
-              suppressRefError: true,
-            }
+          const rootProps =
+            // (1) need to take into account downshiftProps.getRootProps (see getInputProps call for more details)
+            otherGetRootProps(
+              getRootProps(
+                {},
+                {
+                  suppressRefError: true,
+                }
+              )
+            );
+          const labelProps = getLabelProps(
+            // (1) need to take into account downshiftProps.getLabelProps (see getInputProps call for more details)
+            { ...otherGetLabelProps() }
           );
-          const labelProps = getLabelProps();
           const buttonProps = getToggleButtonProps({
             disabled,
             onClick: this.onToggleClick(isOpen),
@@ -421,6 +441,8 @@ export default class ComboBox extends React.Component {
             onMouseUp(event) {
               event.stopPropagation();
             },
+            // (1) need to take into account downshiftProps.getToggleButtonProps (see getInputProps call for more details)
+            ...otherGetToggleButtonProps(),
           });
           const inputProps = getInputProps({
             // Remove excess aria `aria-labelledby`. HTML <label for> provides this aria information.
@@ -439,6 +461,15 @@ export default class ComboBox extends React.Component {
                 toggleMenu();
               }
             },
+            // (1) need to pass prop-getter here = downshiftProps.getInputProps
+            ...otherGetInputProps(),
+            // (1) need to merge downshiftProps.getInputProps props with props Carbon passes to getInputProps.
+            //
+            // ie: onClick above needs to take into account onClick returned from downshiftProps.getInputProps.
+            // onClick() {
+            //   toggleMenu();
+            //   downshiftProps.getInputProps().onClick();
+            // },
           });
 
           return (
@@ -497,7 +528,12 @@ export default class ComboBox extends React.Component {
                     translateWithId={translateWithId}
                   />
                 </div>
-                <ListBox.Menu {...getMenuProps({ 'aria-label': ariaLabel })}>
+                <ListBox.Menu
+                  {...getMenuProps({
+                    'aria-label': ariaLabel,
+                    // (1) need to take into account downshiftProps.getMenuProps (see getInputProps call for more details)
+                    ...otherGetMenuProps(),
+                  })}>
                   {isOpen
                     ? this.filterItems(items, itemToString, inputValue).map(
                         (item, index) => {
@@ -508,6 +544,8 @@ export default class ComboBox extends React.Component {
                               selectedItem === item ? true : null,
                             ['aria-selected']:
                               highlightedIndex === index ? true : null,
+                            // (1) need to take into account downshiftProps.getItemProps (see getInputProps call for more details)
+                            ...otherGetItemProps(),
                           });
                           return (
                             <ListBox.MenuItem
