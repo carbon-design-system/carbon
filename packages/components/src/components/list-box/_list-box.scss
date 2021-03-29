@@ -395,7 +395,6 @@ $list-box-menu-width: rem(300px);
     @include button-reset($width: false);
 
     position: absolute;
-    top: $carbon--spacing-03;
     right: $carbon--spacing-05;
     display: flex;
     align-items: center;

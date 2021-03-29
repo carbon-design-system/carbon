@@ -184,12 +184,14 @@ export {
   spacing10,
   spacing11,
   spacing12,
+  spacing13,
   // Fluid spacing
   fluidSpacing01,
   fluidSpacing02,
   fluidSpacing03,
   fluidSpacing04,
   // Layout
+  // Deprecated -- Remove in v11
   layout01,
   layout02,
   layout03,
