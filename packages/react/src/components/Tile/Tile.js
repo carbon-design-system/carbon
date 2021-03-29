@@ -9,6 +9,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { settings } from 'carbon-components';
+import Link from '../Link';
 import {
   CheckmarkFilled16 as CheckmarkFilled,
   ChevronDown16,
@@ -168,14 +169,14 @@ export class ClickableTile extends Component {
     );
 
     return (
-      <a
+      <Link
         href={href}
         className={classes}
         {...other}
         onClick={this.handleClick}
         onKeyDown={this.handleKeyDown}>
         {children}
-      </a>
+      </Link>
     );
   }
 }
