@@ -70,6 +70,30 @@
       background-color $duration--fast-02 motion(standard, productive);
   }
 
+  //compact child row padding
+  .#{$prefix}--data-table--compact
+    tr.#{$prefix}--parent-row.#{$prefix}--expandable-row
+    + tr[data-child-row]
+    td {
+    padding-left: 2.5rem;
+  }
+
+  //short child row padding
+  .#{$prefix}--data-table--short
+    tr.#{$prefix}--parent-row.#{$prefix}--expandable-row
+    + tr[data-child-row]
+    td {
+    padding-left: 3rem;
+  }
+
+  //tall child row padding
+  .#{$prefix}--data-table--tall
+    tr.#{$prefix}--parent-row.#{$prefix}--expandable-row
+    + tr[data-child-row]
+    td {
+    padding-left: 5rem;
+  }
+
   tr.#{$prefix}--parent-row.#{$prefix}--expandable-row
     + tr[data-child-row]
     td
@@ -198,6 +222,7 @@
     width: 100%;
     // Account for the border in `.bx--table-expand`
     height: calc(100% + 1px);
+    padding: 0 1rem;
     vertical-align: inherit;
   }
 

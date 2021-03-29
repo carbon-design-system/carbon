@@ -124,17 +124,18 @@ export default {
 
 export const _Default = () => (
   <Tabs>
-    <Tab label="Tab label 1">
+    <Tab id="tab-1" label="Tab label 1">
       <p>Content for first tab goes here.</p>
     </Tab>
-    <Tab label="Tab label 2">
+    <Tab id="tab-2" label="Tab label 2">
       <p>Content for second tab goes here.</p>
       <Button>With a button</Button>
     </Tab>
-    <Tab label="Tab label 3" disabled>
+    <Tab id="tab-3" label="Tab label 3" disabled>
       <p>Content for third tab goes here.</p>
     </Tab>
     <Tab
+      id="tab-4"
       label="Tab label 4 shows truncation"
       title="Tab label 4 shows truncation">
       <p>Content for fourth tab goes here.</p>
@@ -152,23 +153,24 @@ _Default.story = {
 export const Playground = () => (
   <div className={props.tabs().light ? 'tabs-story-wrapper--light' : null}>
     <Tabs {...props.tabs()}>
-      <Tab {...props.tab()} label="Tab label 1">
+      <Tab {...props.tab()} id="tab-1" label="Tab label 1">
         <div className="some-content">
           <p>Content for first tab goes here.</p>
         </div>
       </Tab>
-      <Tab {...props.tab()} label="Tab label 2">
+      <Tab {...props.tab()} id="tab-2" label="Tab label 2">
         <div className="some-content">
           <p>Content for second tab goes here.</p>
         </div>
       </Tab>
-      <Tab {...props.tab()} label="Tab label 3" disabled>
+      <Tab {...props.tab()} id="tab-3" label="Tab label 3" disabled>
         <div className="some-content">
           <p>Content for third tab goes here.</p>
         </div>
       </Tab>
       <Tab
         {...props.tab()}
+        id="tab-4"
         label="Tab label 4 shows truncation"
         title="Tab label 4 shows truncation"
         renderContent={TabContentRenderedOnlyWhenSelected}>
@@ -193,13 +195,14 @@ export const Playground = () => (
 
 export const Container = () => (
   <Tabs type="container">
-    <Tab label="Tab label 1">
+    <Tab id="tab-1" label="Tab label 1">
       <p>Content for first tab goes here.</p>
     </Tab>
-    <Tab label="Tab label 2">
+    <Tab id="tab-2" label="Tab label 2">
       <p>Content for second tab goes here.</p>
     </Tab>
     <Tab
+      id="tab-3"
       label="Tab label 3 shows truncation"
       title="Tab label 3 shows truncation">
       <p>Content for third tab goes here.</p>
@@ -219,16 +222,17 @@ export const Skeleton = () => {
         <TabsSkeleton type={select('Type of Tabs (type)', types, 'default')} />
       ) : (
         <Tabs type={select('Type of Tabs (type)', types, 'default')}>
-          <Tab label="Tab label 1">
+          <Tab id="tab-1" label="Tab label 1">
             <p>Content for first tab goes here.</p>
           </Tab>
-          <Tab label="Tab label 2">
+          <Tab id="tab-2" label="Tab label 2">
             <p>Content for second tab goes here.</p>
           </Tab>
-          <Tab label="Tab label 3" disabled>
+          <Tab id="tab-3" label="Tab label 3" disabled>
             <p>Content for third tab goes here.</p>
           </Tab>
           <Tab
+            id="tab-4"
             label="Tab label 4 shows truncation"
             title="Tab label 4 shows truncation">
             <p>Content for fourth tab goes here.</p>
