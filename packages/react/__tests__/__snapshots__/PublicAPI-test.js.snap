@@ -383,6 +383,12 @@ Map {
       "light": Object {
         "type": "bool",
       },
+      "maxCollapsedNumberOfRows": Object {
+        "type": "number",
+      },
+      "maxExpandedNumberOfRows": Object {
+        "type": "number",
+      },
       "onClick": Object {
         "type": "func",
       },
@@ -848,9 +854,7 @@ Map {
       "className": Object {
         "type": "string",
       },
-      "light": Object {
-        "type": "bool",
-      },
+      "light": [Function],
       "onChange": Object {
         "isRequired": true,
         "type": "func",
@@ -3982,6 +3986,9 @@ Map {
       "notificationType": Object {
         "type": "string",
       },
+      "onClose": Object {
+        "type": "func",
+      },
       "onCloseButtonClick": Object {
         "type": "func",
       },
@@ -4047,6 +4054,9 @@ Map {
       },
       "notificationType": Object {
         "type": "string",
+      },
+      "onClose": Object {
+        "type": "func",
       },
       "onCloseButtonClick": Object {
         "type": "func",
