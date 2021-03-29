@@ -23,8 +23,6 @@ const SideNavLink = React.forwardRef(function SideNavLink(
     renderIcon: IconElement,
     isActive,
     large,
-    // eslint-disable-next-line no-unused-vars
-    isSideNavExpanded,
     ...rest
   },
   ref

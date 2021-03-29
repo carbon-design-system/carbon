@@ -102,6 +102,7 @@ export const spacing09 = miniUnits(6);
 export const spacing10 = miniUnits(8);
 export const spacing11 = miniUnits(10);
 export const spacing12 = miniUnits(12);
+export const spacing13 = miniUnits(20);
 export const spacing = [
   spacing01,
   spacing02,
@@ -115,6 +116,7 @@ export const spacing = [
   spacing10,
   spacing11,
   spacing12,
+  spacing13,
 ];
 
 // Fluid spacing
@@ -130,6 +132,7 @@ export const fluidSpacing = [
 ];
 
 // Layout
+// Deprecated -- Remove in v11
 export const layout01 = miniUnits(2);
 export const layout02 = miniUnits(3);
 export const layout03 = miniUnits(4);
