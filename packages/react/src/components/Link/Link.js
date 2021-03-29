@@ -9,6 +9,7 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import classnames from 'classnames';
 import { settings } from 'carbon-components';
+import deprecate from '../../prop-types/deprecate';
 
 const { prefix } = settings;
 
@@ -76,7 +77,11 @@ Link.propTypes = {
   /**
    * Specify whether you want the link to receive visited styles after the link has been clicked
    */
-  visited: PropTypes.bool,
+  visited: deprecate(
+    PropTypes.bool,
+    `\nThe prop \`visited\` for Link has been deprecated and will
+  be removed in the next major release.`
+  ),
 };
 
 export default Link;
