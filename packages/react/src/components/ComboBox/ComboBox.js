@@ -101,12 +101,14 @@ export default class ComboBox extends React.Component {
     /**
      * Specify a custom `id` for the input
      */
+    //  (2) id is also a downshift prop so also check props.downshiftProps.id
     id: PropTypes.string.isRequired,
 
     /**
      * Allow users to pass in an arbitrary item or a string (in case their items are an array of strings)
      * from their collection that are pre-selected
      */
+    // (2) initialSelectedItem is also a downshift prop so also check props.downshiftProps.initialSelectedItem
     initialSelectedItem: PropTypes.oneOfType([
       PropTypes.object,
       PropTypes.string,
@@ -133,6 +135,7 @@ export default class ComboBox extends React.Component {
      * given item to a string label. By default, it extracts the `label` field
      * from a given item to serve as the item label in the list
      */
+    // (2) itemToString is also a downshift prop so also check props.downshiftProps.itemToString
     itemToString: PropTypes.func,
 
     /**
@@ -151,6 +154,7 @@ export default class ComboBox extends React.Component {
      * consuming component when a specific dropdown item is selected.
      * @param {{ selectedItem }}
      */
+    // (2) onChange is also a downshift prop so also check props.downshiftProps.onChange
     onChange: PropTypes.func.isRequired,
 
     /**
@@ -175,6 +179,7 @@ export default class ComboBox extends React.Component {
     /**
      * For full control of the selection
      */
+    // (2) selectedItem is also a downshift prop so also check props.downshiftProps.selectedItem
     selectedItem: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
 
     /**
@@ -261,9 +266,14 @@ export default class ComboBox extends React.Component {
     );
 
   handleOnChange = (selectedItem) => {
-    if (this.props.onChange) {
-      this.props.onChange({ selectedItem });
-    }
+    // (2) onChange is a direct ComboBox prop, but it is also a downshiftProp. Carbon should look for it in both places.
+    //     which should take presidance? likely the direct prop as it is being exposed presumably for convince.
+    // (2) Other downshift props that Carbon ComboBox provides convience props for are...
+    //     id, initialSelectedItem, itemToString, onChange, selectedItem
+    const mappedOnChange =
+      this.props.onChange ?? this.props.downshiftProps?.onChange;
+
+    mappedOnChange?.({ selectedItem });
   };
 
   handleOnInputValueChange = (inputValue) => {
@@ -388,7 +398,7 @@ export default class ComboBox extends React.Component {
     const ItemToElement = itemToElement;
     return (
       <Downshift
-        // (1) pass only all non-prop-getters (actions, state, and props(basic and advanced)
+        // (1) pass only all non-prop-getters (actions, state, and props(basic and advanced)) to <Downshift>
         {...otherDownShiftProps}
         onChange={this.handleOnChange}
         onInputValueChange={this.handleOnInputValueChange}
@@ -396,7 +406,8 @@ export default class ComboBox extends React.Component {
         inputValue={this.state.inputValue || ''}
         itemToString={itemToString}
         initialSelectedItem={initialSelectedItem}
-        inputId={id}
+        // (2) id can be a direct prop or a downshift prop
+        inputId={id ?? this.props.downshiftProps.id}
         selectedItem={selectedItem}>
         {({
           getInputProps,
