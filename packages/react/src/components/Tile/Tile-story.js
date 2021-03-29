@@ -25,6 +25,7 @@ import {
 } from '../Tile';
 import TileGroup from '../TileGroup';
 import RadioTile from '../RadioTile';
+import Link from '../Link';
 import mdx from './Tile.mdx';
 
 const radioValues = {
@@ -109,7 +110,14 @@ export default {
 
 export const Default = () => {
   const regularProps = props.regular();
-  return <Tile {...regularProps}>Default tile</Tile>;
+  return (
+    <Tile {...regularProps}>
+      Default tile
+      <br />
+      <br />
+      <Link href="https://www.carbondesignsystem.com">Link</Link>
+    </Tile>
+  );
 };
 
 Default.parameters = {
