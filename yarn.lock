@@ -5497,6 +5497,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@types/json-schema@npm:^7.0.6":
+  version: 7.0.7
+  resolution: "@types/json-schema@npm:7.0.7"
+  checksum: b9d2c509fa4e0b82f58e73f5e6ab76c60ff1884ba41bb82f37fb1cece226d4a3e5a62fedf78a43da0005373a6713d9abe61c1e592906402c41c08ad6ab26d52b
+  languageName: node
+  linkType: hard
+
 "@types/keyv@npm:*, @types/keyv@npm:^3.1.1":
   version: 3.1.1
   resolution: "@types/keyv@npm:3.1.1"
@@ -6324,6 +6331,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"ajv-keywords@npm:^3.5.2":
+  version: 3.5.2
+  resolution: "ajv-keywords@npm:3.5.2"
+  peerDependencies:
+    ajv: ^6.9.1
+  checksum: 01f26c292304870c03a1cd14fc1ddcf7c713a05611a122c5193694d4050063d5fba46cbf8b5b2ebde364166fddd3c2e0abdcd97df655b7a7fbb3e6634eeb056a
+  languageName: node
+  linkType: hard
+
 "ajv@npm:^4.7.0":
   version: 4.11.8
   resolution: "ajv@npm:4.11.8"
@@ -6343,6 +6359,18 @@ __metadata:
     json-schema-traverse: ^0.4.1
     uri-js: ^4.2.2
   checksum: 09f3d7992c4a6e554e65accab279878c2da2a7e3ca782032de51c7c91d80a43a3e2aeb26efb8e8950b3941a89882f21aaca1170dafada784a7a0f275b5e6e745
+  languageName: node
+  linkType: hard
+
+"ajv@npm:^6.12.5":
+  version: 6.12.6
+  resolution: "ajv@npm:6.12.6"
+  dependencies:
+    fast-deep-equal: ^3.1.1
+    fast-json-stable-stringify: ^2.0.0
+    json-schema-traverse: ^0.4.1
+    uri-js: ^4.2.2
+  checksum: 19a8f3b0a06001eb68e6268f4f9f04424b32baadd5df6ba8292cd473e22e5f4019ed9ab17c3e3510394178ed8bef9b42ad0bdb5c675d65f042421a774780ce1a
   languageName: node
   linkType: hard
 
@@ -9226,7 +9254,6 @@ __metadata:
     cross-env: ^5.2.0
     css-loader: ^3.4.2
     downshift: 5.2.1
-    fast-sass-loader: ^1.5.0
     flatpickr: 4.6.9
     gzip-size: ^6.0.0
     invariant: ^2.2.3
@@ -9237,7 +9264,6 @@ __metadata:
     lodash.omit: ^4.5.0
     lodash.throttle: ^4.1.1
     mini-css-extract-plugin: ^0.9.0
-    node-sass: ^4.13.1
     npm-which: ^3.0.1
     object-assign: ^4.1.1
     postcss-custom-properties: ^9.0.2
@@ -9255,7 +9281,6 @@ __metadata:
     rollup-plugin-strip-banner: ^2.0.0
     rollup-plugin-terser: ^7.0.2
     rtlcss: ^2.4.0
-    sass-loader: ^8.0.2
     storybook-preset-carbon: ^0.3.0
     string-replace-loader: ^2.1.0
     terser-webpack-plugin: ^2.3.2
@@ -14210,9 +14235,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"fast-sass-loader@npm:^1.5.0":
-  version: 1.5.0
-  resolution: "fast-sass-loader@npm:1.5.0"
+"fast-sass-loader@npm:^2.0.0":
+  version: 2.0.0
+  resolution: "fast-sass-loader@npm:2.0.0"
   dependencies:
     async: ^2.0.1
     cli-source-preview: ^1.0.0
@@ -14220,9 +14245,9 @@ __metadata:
     fs-extra: 3.x
     loader-utils: ^1.1.0
   peerDependencies:
-    node-sass: 4.x || 3.x
-    webpack: 1.x || 2.x || 3.x || 4.x
-  checksum: 4cd63d35b2d43a51a89414eb139edd5926ad188404c8901c9f182fa5b785280686d7850c7f74efd8b72d9f48c6bf73edff0d8f3857f16a282f1a1a47ebf62801
+    sass: 1.x
+    webpack: 1.x || 2.x || 3.x || 4.x || 5.x
+  checksum: 6b307a4ba6d8060b06ab24683dc1155684e750181dfb3f87dd26f025e67c9756868cb5e281d8c0eff5940f2f631a7c71530e9c33a97413eba2353fb31713f31e
   languageName: node
   linkType: hard
 
@@ -20223,6 +20248,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"klona@npm:^2.0.4":
+  version: 2.0.4
+  resolution: "klona@npm:2.0.4"
+  checksum: be4a0c784135b6a75ac2c5ac9564894807aa050de041ac775a20d3ee46969ac5c3d37503d12c215c7decb592196e59e22852fd0cf28ac0cc29fe3a6df9168624
+  languageName: node
+  linkType: hard
+
 "known-css-properties@npm:^0.11.0":
   version: 0.11.0
   resolution: "known-css-properties@npm:0.11.0"
@@ -20677,7 +20709,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"loader-utils@npm:2.0.0":
+"loader-utils@npm:2.0.0, loader-utils@npm:^2.0.0":
   version: 2.0.0
   resolution: "loader-utils@npm:2.0.0"
   dependencies:
@@ -22820,6 +22852,13 @@ __metadata:
   version: 2.6.1
   resolution: "neo-async@npm:2.6.1"
   checksum: b359ccaa5cc3eea9c49605b830382e2ec7661f1746b7210dc1f997645a40f9daf3084328151ecb21800e0e78d891dbf8d46f70c3cb5e8c5dab8a909b5597f9a1
+  languageName: node
+  linkType: hard
+
+"neo-async@npm:^2.6.2":
+  version: 2.6.2
+  resolution: "neo-async@npm:2.6.2"
+  checksum: 34a8f5309135be258a97082af810ea43700a3e0121e7b1ea31b3e22e2663d7c0d502cd949abb6d1ab8c11abfd04500ee61721ec5408b2d4bef8105241fd8a4c2
   languageName: node
   linkType: hard
 
@@ -28130,6 +28169,31 @@ __metadata:
   languageName: node
   linkType: hard
 
+"sass-loader@npm:^10.1.1":
+  version: 10.1.1
+  resolution: "sass-loader@npm:10.1.1"
+  dependencies:
+    klona: ^2.0.4
+    loader-utils: ^2.0.0
+    neo-async: ^2.6.2
+    schema-utils: ^3.0.0
+    semver: ^7.3.2
+  peerDependencies:
+    fibers: ">= 3.1.0"
+    node-sass: ^4.0.0 || ^5.0.0
+    sass: ^1.3.0
+    webpack: ^4.36.0 || ^5.0.0
+  peerDependenciesMeta:
+    fibers:
+      optional: true
+    node-sass:
+      optional: true
+    sass:
+      optional: true
+  checksum: 725245f0259453fcc51c4a1012c484dda1340ebb10b9c461e2b3b4408105f5426ad5613282ad0861c1f32744533d8a584450b11daf42aa1237b04287f01223d4
+  languageName: node
+  linkType: hard
+
 "sass-loader@npm:^8.0.2":
   version: 8.0.2
   resolution: "sass-loader@npm:8.0.2"
@@ -28163,6 +28227,17 @@ __metadata:
   bin:
     sass: sass.js
   checksum: d7ff2252fe702f122bb002f6b65a785213dd2e8c738b247b910d34c959a77215cce93655ceddd08ce1a7fecbb9fb6c376924d271fd9d9af036699d3076c2a4fd
+  languageName: node
+  linkType: hard
+
+"sass@npm:^1.32.2":
+  version: 1.32.8
+  resolution: "sass@npm:1.32.8"
+  dependencies:
+    chokidar: ">=2.0.0 <4.0.0"
+  bin:
+    sass: sass.js
+  checksum: d319b3d7459451b6532b492984e3cbb37381e6c6379622f668900b196c0d545f5a2c32819cf02b5405fb2ef79720fe1f8f16b7614a2fef3fb7af8dfec83a6597
   languageName: node
   linkType: hard
 
@@ -28280,6 +28355,17 @@ __metadata:
     ajv: ^6.12.0
     ajv-keywords: ^3.4.1
   checksum: 78ae62749e3a4a945de51ca47d22047e8959a96b1797af4abb2dfe3c10a7e5c12f877480a183e97158a8590bfde045a65af571fa68737721a975392e5606499c
+  languageName: node
+  linkType: hard
+
+"schema-utils@npm:^3.0.0":
+  version: 3.0.0
+  resolution: "schema-utils@npm:3.0.0"
+  dependencies:
+    "@types/json-schema": ^7.0.6
+    ajv: ^6.12.5
+    ajv-keywords: ^3.5.2
+  checksum: a084f593f222560c412a4d8f40c92386c01c1c709f27c0672c2f02927a4d4d475f57f8b8e91198d0defb452add160476a03f07a05b26200a64b5124fa874e158
   languageName: node
   linkType: hard
 
@@ -29829,9 +29915,12 @@ __metadata:
     "@storybook/react": ^5.3.19
     "@storybook/source-loader": ^5.3.19
     babel-loader: ^8.2.2
+    fast-sass-loader: ^2.0.0
     react: ^16.8.6
     react-dom: ^16.8.6
     react-is: ^16.8.6
+    sass: ^1.32.2
+    sass-loader: ^10.1.1
     storybook-readme: ^5.0.8
     webpack: ^4.41.5
   peerDependencies:

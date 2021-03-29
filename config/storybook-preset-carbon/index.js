@@ -36,25 +36,27 @@ module.exports = {
 
   webpack(config) {
     const sassLoader = {
-      loader: 'sass-loader',
+      loader: require.resolve('sass-loader'),
       options: {
-        prependData() {
+        additionalData(content) {
           return `
             $feature-flags: (
               ui-shell: true,
               enable-css-custom-properties: ${CARBON_REACT_STORYBOOK_USE_CUSTOM_PROPERTIES},
             );
+            ${content}
           `;
         },
         sassOptions: {
-          includePaths: [path.resolve(__dirname, '..', 'node_modules')],
+          implementation: require('sass'),
+          includePaths: [path.resolve(__dirname, '..', '..', 'node_modules')],
         },
         sourceMap: true,
       },
     };
 
     const fastSassLoader = {
-      loader: 'fast-sass-loader',
+      loader: require.resolve('fast-sass-loader'),
       options: {
         data: `
           $feature-flags: (
@@ -62,6 +64,8 @@ module.exports = {
             enable-css-custom-properties: ${CARBON_REACT_STORYBOOK_USE_CUSTOM_PROPERTIES},
           );
         `,
+        implementation: require('sass'),
+        includePaths: [path.resolve(__dirname, '..', '..', 'node_modules')],
       },
     };
 
