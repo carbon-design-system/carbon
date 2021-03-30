@@ -106,6 +106,7 @@ const colors = [
   'skeleton02',
 
   // New color tokens
+  // TO-DO: remove fallback color when v11 is released and assign carbon colors to new tokens
   'background',
   'layer',
   'layerAccent',
