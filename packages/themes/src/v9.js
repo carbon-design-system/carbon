@@ -102,6 +102,7 @@ export const skeleton01 = 'rgba(61, 112, 178, .1)';
 export const skeleton02 = 'rgba(61, 112, 178, .1)';
 
 // New color tokens
+// TO-DO: remove fallback color when v11 is released and assign carbon colors to new tokens
 export const background = uiBackground;
 export const layer = ui01;
 export const layerAlt = ui03;
