@@ -7,72 +7,33 @@
 
 import { featureFlagInfo } from './generated/feature-flags';
 
-const featureFlags = new Map();
+const featureFlags = createScope();
 
 for (let i = 0; i < featureFlagInfo.length; i++) {
   const featureFlag = featureFlagInfo[i];
-  featureFlags.set(featureFlag.name, featureFlag.enabled);
+  featureFlags.add(featureFlag.name, featureFlag.enabled);
 }
 
-/**
- * Check to see if a flag exists
- * @param {string} name
- */
-function checkForFlag(name) {
-  if (!featureFlags.has(name)) {
-    throw new Error(`Unable to find a feature flag with the name \`${name}\``);
-  }
+export function add(...args) {
+  return featureFlags.add(...args);
 }
 
-/**
- * Add a feature flag
- * @param {string} name
- * @param {boolean} enabled
- */
-export function add(name, enabled) {
-  if (featureFlags.has(name)) {
-    throw new Error(`The feature flag: ${name} already exists`);
-  }
-  featureFlags.set(name, enabled);
+export function enable(...args) {
+  return featureFlags.enable(...args);
 }
 
-/**
- * Enable a feature flag
- * @param {string} name
- */
-export function enable(name) {
-  checkForFlag(name);
-  featureFlags.set(name, true);
+export function disable(...args) {
+  return featureFlags.disable(...args);
 }
 
-/**
- * Disable a feature flag
- * @param {string} name
- */
-export function disable(name) {
-  checkForFlag(name);
-  featureFlags.set(name, false);
+export function enabled(...args) {
+  return featureFlags.enabled(...args);
 }
 
-/**
- * Merge the given feature flags with the current set of feature flags.
- * Duplicate keys will be set to the value in the given feature flags.
- * @param {object} flags
- */
-export function merge(flags) {
-  Object.keys(flags).forEach((key) => {
-    featureFlags.set(key, flags[key]);
-  });
+export function merge(...args) {
+  return featureFlags.merge(...args);
 }
 
-/**
- * Check if a feature flag is enabled
- * @param {string} name
- * @returns {boolean}
- */
-export function enabled(name) {
-  checkForFlag(name);
-  return featureFlags.get(name);
+export function createScope(flags) {
+  return new FeatureFlagScope(flags);
 }
-
-export { featureFlagInfo as unstable_featureFlagInfo };
