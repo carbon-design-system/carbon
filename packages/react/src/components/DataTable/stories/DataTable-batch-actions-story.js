@@ -104,7 +104,7 @@ export const Usage = () => (
           </TableBatchActions>
           <TableToolbarContent>
             <TableToolbarSearch
-              defaultExpanded
+              persistent="true"
               tabIndex={getBatchActionProps().shouldShowBatchActions ? -1 : 0}
               onChange={onInputChange}
             />
