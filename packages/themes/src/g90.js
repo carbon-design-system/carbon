@@ -182,6 +182,55 @@ export const supportInfoInverse = inverseSupport04;
 export const overlay = overlay01;
 export const toggleOff = ui04;
 
+export const buttonPrimary = interactive01;
+export const buttonSecondary = interactive02;
+export const buttonTertiary = interactive03;
+export const buttonDangerPrimary = danger01;
+export const buttonDangerSecondary = danger02;
+
+export const backgroundActive = activeUI;
+export const layerActive = activeUI;
+
+export const buttonDangerActive = activeDanger;
+export const buttonPrimaryActive = activePrimary;
+export const buttonSecondaryActive = activeSecondary;
+export const buttonTertiaryActive = activeTertiary;
+
+export const focusInset = inverse01;
+export const focuseInverse = inverseFocusUi;
+
+export const backgroundHover = hoverUI;
+export const layerHover = hoverUI;
+export const fieldHover = hoverUI;
+export const backgroundInverseHover = inverseHoverUI;
+export const linkPrimaryHover = hoverPrimaryText;
+export const buttonDangerHover = hoverDanger;
+export const buttonPrimaryHover = hoverPrimary;
+export const buttonSecondaryHover = hoverSecondary;
+export const buttonTertiaryHover = hoverTertiary;
+
+export const backgroundSelected = selectedUI;
+export const backgroundSelectedHover = hoverSelectedUI;
+export const layerSelected = selectedUI;
+export const layerSelectedHover = hoverSelectedUI;
+export const layerSelectedInverse = ui05;
+export const borderSubtleSelected = activeUI;
+
+export const layerDisabled = disabled01;
+export const fieldDisabled = disabled01;
+export const borderDisabled = disabled01;
+
+export const textDisabled = disabled02;
+export const buttonDisabled = disabled02;
+export const iconDisabled = disabled02;
+
+export const textOnColorDisabled = disabled03;
+export const iconOnColorDisabled = disabled03;
+export const layerSelectedDisabled = disabled03;
+
+export const skeletonBackground = skeleton01;
+export const skeletonElement = skeleton02;
+
 export {
   // Type
   caption01,
