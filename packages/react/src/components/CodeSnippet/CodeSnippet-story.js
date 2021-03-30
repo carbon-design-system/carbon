@@ -56,50 +56,52 @@ const multiSnippet = `"scripts": {
     "@babel/runtime": "^7.10.0",
     "@commitlint/cli": "^8.3.5",`;
 
-const shortSnippet = `yarn add carbon-components@latest carbon-components-react@latest
-    @carbon/icons-react@latest carbon-icons@latest`;
+const shortSnippet = `yarn add carbon-components@latest carbon-components-react@latest @carbon/icons-react@latest carbon-icons@latest`;
 
 const inlineSnippet = `node -v`;
+
+const snippetText = () => ({
+  inline: text('Text to be displayed in the inline CodeSnippet', inlineSnippet),
+  single: text(
+    'Text to be displayed in the single-line CodeSnippet',
+    shortSnippet
+  ),
+  multi: text(
+    'Text to be displayed in the multi-line CodeSnippet',
+    multiSnippet
+  ),
+});
 
 const props = () => ({
   disabled: boolean('Disabled (disabled)', false),
   light: boolean('Light variant (light)', false),
   feedback: text('Feedback text (feedback)', 'Copied to clipboard'),
-  feedbackTimeout: number('Feedback text timout (feedbackTimeout)', 2000),
-  showMoreText: text('Text for "show more" button', 'Show more'),
-  showLessText: text('Text for "show less" button', 'Show less'),
+  feedbackTimeout: number('Feedback text timeout (feedbackTimeout)', 2000),
+  showMoreText: text('Text for "show more" button (showMoreText)', 'Show more'),
+  showLessText: text('Text for "show less" button (showLessText)', 'Show less'),
   hideCopyButton: boolean('Hide copy button (hideCopyButton)', false),
   onClick: action('onClick'),
-  copyButtonDescription: text('Copy button title', 'Copy code snippet'),
-  ariaLabel: text('ARIA label', 'Container label'),
+  copyButtonDescription: text(
+    'Copy button title (copyButtonDescription)',
+    'Copy code snippet'
+  ),
+  ariaLabel: text('ARIA label (ariaLabel)', 'Container label'),
   wrapText: boolean('Wrap text (wrapText)', true),
   maxCollapsedNumberOfRows: number(
-    'maxCollapsedNumberOfRows: Specify the maximum number of rows to be shown when in collapsed view',
+    'Maximum number of rows to be shown when collapsed (maxCollapsedNumberOfRows)',
     15
   ),
   maxExpandedNumberOfRows: number(
-    'maxExpandedNumberOfRows: Specify the maximum number of rows to be shown when in expanded view',
+    'Maximum number of rows to be shown when expanded (maxExpandedNumberOfRows)',
     0
   ),
   minCollapsedNumberOfRows: number(
-    'minCollapsedNumberOfRows: Specify the minimum number of rows to be shown when in collapsed view',
+    'Minimum number of rows to be shown when collapsed (minCollapsedNumberOfRows)',
     3
   ),
   minExpandedNumberOfRows: number(
-    'minExpandedNumberOfRows: Specify the minimum number of rows to be shown when in expanded view',
+    'Minimum number of rows to be shown when expanded (minExpandedNumberOfRows)',
     16
-  ),
-  snippetTextInline: text(
-    'Text to be displayed in the inline CodeSnippet',
-    inlineSnippet
-  ),
-  snippetTextSingle: text(
-    'Text to be displayed in the inline CodeSnippet',
-    shortSnippet
-  ),
-  snippetTextMulti: text(
-    'Text to be displayed in the inline CodeSnippet',
-    multiSnippet
   ),
 });
 
@@ -110,7 +112,7 @@ export const inline = () => (
 );
 
 export const multiline = () => (
-  <CodeSnippet {...props()} type="multi" feedback="Copied to clipboard">
+  <CodeSnippet type="multi" feedback="Copied to clipboard">
     {`  "scripts": {
     "build": "lerna run build --stream --prefix --npm-client yarn",
     "ci-check": "carbon-cli ci-check",
@@ -184,21 +186,21 @@ export const playground = () => (
     <h4>Inline snippet</h4>
     <br />
     <CodeSnippet type="inline" {...props()}>
-      {props().snippetTextInline}
+      {snippetText().inline}
     </CodeSnippet>
     <br />
     <br />
     <h4>Single-line snippet</h4>
     <br />
     <CodeSnippet type="single" {...props()}>
-      {props().snippetTextSingle}
+      {snippetText().single}
     </CodeSnippet>
 
     <br />
     <h4>Multi-line snippet</h4>
     <br />
     <CodeSnippet type="multi" {...props()}>
-      {props().snippetTextMulti}
+      {snippetText().multi}
     </CodeSnippet>
   </div>
 );
