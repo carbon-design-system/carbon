@@ -257,7 +257,7 @@ class NumberInput extends Component {
           if (useControlledStateWithValue) {
             onChange(evt, { value });
           } else if (onChange) {
-            onChange(evt);
+            onChange(evt, { value: Number(value) });
           }
         }
       );
@@ -289,8 +289,8 @@ class NumberInput extends Component {
             onClick && onClick(evt, { value, direction });
             onChange && onChange(evt, { value, direction });
           } else {
-            onClick && onClick(evt, direction);
-            onChange && onChange(evt, direction);
+            onClick && onClick(evt, { value, direction });
+            onChange && onChange(evt, { value, direction });
           }
         }
       );
