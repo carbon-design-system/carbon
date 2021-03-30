@@ -137,6 +137,49 @@ export const buttonSeparator = '#e0e0e0';
 export const skeleton01 = '#e5e5e5';
 export const skeleton02 = gray30;
 
+// New color tokens
+export const background = uiBackground;
+export const layer = ui01;
+export const layerAlt = ui03;
+export const field = field01;
+export const backgroundInverse = inverse02;
+export const backgroundBrand = interactive01;
+export const interactive = interactive04;
+
+export const borderSubtle = ui03;
+export const borderStrong = ui04;
+export const borderInverse = ui05;
+export const borderInteractive = interactive04;
+
+export const textPrimary = text01;
+export const textSecondary = text02;
+export const textPlaceholder = text03;
+export const textHelper = text05;
+export const textOnColor = text04;
+export const textInverse = inverse01;
+
+export const linkPrimary = link01;
+export const linkSecondary = link02;
+export const linkVisited = visitedLink;
+export const linkInverse = inverseLink;
+
+export const iconPrimary = icon01;
+export const iconSecondary = icon02;
+export const iconOnColor = icon03;
+export const iconInverse = inverse01;
+
+export const supportError = support01;
+export const supportSuccess = support02;
+export const supportWarning = support03;
+export const supportInfo = support04;
+export const supportErrorInverse = inverseSupport01;
+export const supportSuccessInverse = inverseSupport02;
+export const supportWarningInverse = inverseSupport03;
+export const supportInfoInverse = inverseSupport04;
+
+export const overlay = overlay01;
+export const toggleOff = ui04;
+
 // Type
 export {
   caption01,
