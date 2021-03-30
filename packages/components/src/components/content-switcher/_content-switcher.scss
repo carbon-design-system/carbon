@@ -30,10 +30,6 @@
     height: rem(48px);
   }
 
-  .#{$prefix}--content-switcher--disabled {
-    cursor: not-allowed;
-  }
-
   .#{$prefix}--content-switcher-btn {
     @include reset;
     @include type-style('body-short-01');
@@ -50,8 +46,10 @@
     white-space: nowrap;
     text-align: left;
     text-decoration: none;
-    background-color: $ui-01;
+    background-color: transparent;
     border: none;
+    border-top: rem(1px) solid $ui-05;
+    border-bottom: rem(1px) solid $ui-05;
     transition: all $duration--fast-01 motion(standard, productive);
 
     &:focus {
@@ -66,6 +64,7 @@
     }
 
     &:hover {
+      color: $text-01;
       cursor: pointer;
     }
 
@@ -78,31 +77,36 @@
 
     &:disabled {
       color: $disabled-02;
-      background-color: $disabled-01;
-      pointer-events: none;
+      background-color: transparent;
+      border-color: $disabled-02;
 
       &:hover {
         cursor: not-allowed;
       }
     }
-  }
 
-  .#{$prefix}--content-switcher--light .#{$prefix}--content-switcher-btn {
-    background-color: $ui-02;
-
-    &:hover {
-      background-color: $hover-light-ui;
+    &:disabled:first-child,
+    &:disabled:last-child {
+      border-color: $disabled-02;
     }
   }
 
   .#{$prefix}--content-switcher-btn:first-child {
+    border-left: rem(1px) solid $ui-05;
     border-top-left-radius: rem(4px);
     border-bottom-left-radius: rem(4px);
   }
 
   .#{$prefix}--content-switcher-btn:last-child {
+    border-right: rem(1px) solid $ui-05;
     border-top-right-radius: rem(4px);
     border-bottom-right-radius: rem(4px);
+  }
+
+  .#{$prefix}--content-switcher--selected,
+  .#{$prefix}--content-switcher--selected:first-child,
+  .#{$prefix}--content-switcher--selected:last-child {
+    border: 0;
   }
 
   .#{$prefix}--content-switcher-btn::before {
@@ -120,26 +124,6 @@
     display: none;
   }
 
-  .#{$prefix}--content-switcher--light
-    .#{$prefix}--content-switcher-btn::before {
-    background-color: $decorative-01;
-  }
-
-  .#{$prefix}--content-switcher--light
-    .#{$prefix}--content-switcher-btn:focus::before,
-  .#{$prefix}--content-switcher--light
-    .#{$prefix}--content-switcher-btn:focus
-    + .#{$prefix}--content-switcher-btn::before,
-  .#{$prefix}--content-switcher--light
-    .#{$prefix}--content-switcher-btn:hover::before,
-  .#{$prefix}--content-switcher--light
-    .#{$prefix}--content-switcher-btn:hover
-    + .#{$prefix}--content-switcher-btn::before,
-  .#{$prefix}--content-switcher--light
-    .#{$prefix}--content-switcher--selected::before,
-  .#{$prefix}--content-switcher--light
-    .#{$prefix}--content-switcher--selected
-    + .#{$prefix}--content-switcher-btn::before,
   .#{$prefix}--content-switcher-btn:focus::before,
   .#{$prefix}--content-switcher-btn:focus
     + .#{$prefix}--content-switcher-btn::before,
@@ -148,6 +132,19 @@
     + .#{$prefix}--content-switcher-btn::before,
   .#{$prefix}--content-switcher--selected::before,
   .#{$prefix}--content-switcher--selected
+    + .#{$prefix}--content-switcher-btn::before {
+    background-color: transparent;
+  }
+
+  .#{$prefix}--content-switcher-btn:disabled::before,
+  .#{$prefix}--content-switcher-btn:disabled:hover
+    + .#{$prefix}--content-switcher-btn:disabled::before {
+    background-color: $disabled-02;
+  }
+
+  .#{$prefix}--content-switcher-btn.#{$prefix}--content-switcher--selected:disabled
+    + .#{$prefix}--content-switcher-btn::before,
+  .#{$prefix}--content-switcher-btn.#{$prefix}--content-switcher--selected:disabled:hover
     + .#{$prefix}--content-switcher-btn::before {
     background-color: transparent;
   }
@@ -173,8 +170,6 @@
     fill: $text-01;
   }
 
-  .#{$prefix}--content-switcher--light
-    .#{$prefix}--content-switcher-btn.#{$prefix}--content-switcher--selected,
   .#{$prefix}--content-switcher-btn.#{$prefix}--content-switcher--selected {
     z-index: 3;
     color: $inverse-01;
