@@ -66,9 +66,6 @@
 
   // Menu's triggering element updated to button with Downshift v5 upgrade
   .#{$prefix}--dropdown .#{$prefix}--list-box__field {
-    @include button-reset;
-
-    padding: 0 rem(48px) 0 rem(16px);
     text-align: left;
 
     // Windows, Firefox HCM Fix

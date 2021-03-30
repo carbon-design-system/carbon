@@ -15,6 +15,10 @@ import { settings } from 'carbon-components';
 
 const { prefix } = settings;
 
+jest.mock('copy-to-clipboard', () => {
+  return jest.fn();
+});
+
 describe('Code Snippet', () => {
   describe('Renders as expected', () => {
     let snippet;
