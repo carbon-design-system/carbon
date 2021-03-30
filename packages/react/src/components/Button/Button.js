@@ -70,14 +70,28 @@ const Button = React.forwardRef(function Button(
   let otherProps = {
     disabled,
     type,
+    'aria-describedby': kind === 'danger' ? 'danger-description' : null,
     'aria-pressed': hasIconOnly && kind === 'ghost' ? isSelected : null,
   };
   const anchorProps = {
     href,
   };
-  const assistiveText = hasIconOnly ? (
-    <span className={`${prefix}--assistive-text`}>{iconDescription}</span>
-  ) : null;
+
+  let assistiveText;
+  if (hasIconOnly) {
+    assistiveText = (
+      <span className={`${prefix}--assistive-text`}>{iconDescription}</span>
+    );
+  } else if (kind === 'danger') {
+    assistiveText = (
+      <span id="danger-description" className={`${prefix}--visually-hidden`}>
+        danger
+      </span>
+    );
+  } else {
+    assistiveText = null;
+  }
+
   if (as) {
     component = as;
     otherProps = {
