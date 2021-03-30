@@ -278,7 +278,7 @@
   }
 
   .#{$prefix}--toolbar-search-container-persistent .#{$prefix}--search-input {
-    height: $layout-04;
+    height: $spacing-09;
     padding: 0 $spacing-09;
     border: none;
   }
@@ -301,8 +301,8 @@
   }
 
   .#{$prefix}--toolbar-search-container-persistent .#{$prefix}--search-close {
-    width: $layout-04;
-    height: $layout-04;
+    width: $spacing-09;
+    height: $spacing-09;
   }
 
   .#{$prefix}--batch-actions--active ~ .#{$prefix}--toolbar-search-container,
