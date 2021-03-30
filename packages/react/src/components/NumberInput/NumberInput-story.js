@@ -20,6 +20,7 @@ import NumberInput from '../NumberInput';
 import { NumberInput as OGNumberInput } from './NumberInput';
 import NumberInputSkeleton from '../NumberInput/NumberInput.Skeleton';
 import mdx from './NumberInput.mdx';
+import { console } from 'window-or-global';
 
 const sizes = {
   'Extra large size (xl)': 'xl',
@@ -88,6 +89,7 @@ export const Default = () => {
       label="NumberInput label"
       helperText="Optional helper text."
       invalidText="Number is not valid"
+      onChange={(e, something) => console.log(something)} //TO-DO: remove before merging
     />
   );
 };
