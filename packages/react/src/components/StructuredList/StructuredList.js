@@ -253,7 +253,7 @@ StructuredListInput.propTypes = {
    */
   defaultChecked: deprecate(
     PropTypes.bool,
-    `\nThe prop \`defaultChecked\` will be removed in the next major version of Carbon.`
+    `\nThe prop \`defaultChecked\` is no longer needed and will be removed in the next major version of Carbon.`
   ),
 
   /**
