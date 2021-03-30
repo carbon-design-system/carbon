@@ -5,11 +5,10 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { settings } from 'carbon-components';
-import { useFocusWithin } from '../../internal/useFocusWithin';
 import { useId } from '../../internal/useId';
 import deprecate from '../../prop-types/deprecate';
 
@@ -138,7 +137,7 @@ const GridRowContext = React.createContext(null);
 
 export function StructuredListRow(props) {
   const { onKeyDown, children, className, head, ...other } = props;
-  const [hasFocusWithin, setHasFocusWithin] = useFocusWithin();
+  const [hasFocusWithin, setHasFocusWithin] = useState(false);
   const id = useId('grid-input');
   const setSelectedRow = React.useContext(GridSelectedRowDispatchContext);
   const value = { id };
@@ -230,12 +229,12 @@ export function StructuredListInput(props) {
       {...other}
       type="radio"
       tabIndex={0}
-      checked={row.id === selectedRow}
-      value={row.id}
+      checked={row && row.id === selectedRow}
+      value={row ? row.id : ''}
       onChange={(event) => {
         setSelectedRow(event.target.value);
       }}
-      id={id}
+      id={!id && defaultId}
       className={classes}
       name={name}
       title={title}

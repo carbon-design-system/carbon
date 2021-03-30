@@ -26,11 +26,13 @@ describe('StructuredListWrapper', () => {
     );
 
     it('should have the expected classes', () => {
-      expect(wrapper.hasClass(`${prefix}--structured-list`)).toEqual(true);
+      expect(
+        wrapper.find('div').hasClass(`${prefix}--structured-list`)
+      ).toEqual(true);
     });
 
     it('Should add extra classes that are passed via className', () => {
-      expect(wrapper.hasClass('extra-class')).toEqual(true);
+      expect(wrapper.find('div').hasClass('extra-class')).toEqual(true);
     });
 
     it('By default, selection prop is false', () => {
@@ -41,9 +43,9 @@ describe('StructuredListWrapper', () => {
 
     it('Should add the modifier class for selection when selection prop is true', () => {
       wrapper.setProps({ selection: true });
-      expect(wrapper.hasClass(`${prefix}--structured-list--selection`)).toEqual(
-        true
-      );
+      expect(
+        wrapper.find('div').hasClass(`${prefix}--structured-list--selection`)
+      ).toEqual(true);
     });
   });
 });
