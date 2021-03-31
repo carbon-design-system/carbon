@@ -35,7 +35,7 @@
     "@storybook/addon-links": "^5.3.19",
     "@storybook/addon-notes": "^5.3.19",
     "@storybook/addon-storysource": "^5.3.19",
-    "@storybook/addons": "^5.3.19",
+    "@storybook/addons": "^6.2.1",
     "@storybook/source-loader": "^5.3.19",
     "react-is": "^16.8.6",
     "storybook-readme": "^5.0.8"
