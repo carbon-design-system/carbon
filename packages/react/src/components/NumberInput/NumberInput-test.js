@@ -413,7 +413,11 @@ describe('NumberInput', () => {
       it('should invoke onClick when up arrow is clicked', () => {
         upArrow.simulate('click');
         expect(onClick).toBeCalled();
-        expect(onClick).toHaveBeenCalledWith(expect.anything(), 'up');
+        expect(onClick).toHaveBeenCalledWith(
+          expect.anything(),
+          'up',
+          expect.anything()
+        );
       });
 
       it('should only increase the value on up arrow click if value is less than max', () => {
@@ -466,13 +470,20 @@ describe('NumberInput', () => {
         downArrow.simulate('click');
         expect(onClick).toBeCalled();
         expect(onChange).toBeCalled();
-        expect(onClick).toHaveBeenCalledWith(expect.anything(), 'down');
+        expect(onClick).toHaveBeenCalledWith(
+          expect.anything(),
+          'down',
+          expect.anything()
+        );
       });
 
       it('should invoke onChange when numberInput is changed', () => {
         input.simulate('change');
         expect(onChange).toBeCalled();
-        expect(onChange).toHaveBeenCalledWith(expect.anything());
+        expect(onChange).toHaveBeenCalledWith(
+          expect.anything(),
+          expect.anything()
+        );
       });
     });
   });
