@@ -104,6 +104,6 @@
 @mixin button-padding-large {
   align-items: baseline;
   padding-top: $spacing-05;
-  padding-right: $layout-05;
+  padding-right: $spacing-10;
   padding-left: $spacing-05;
 }

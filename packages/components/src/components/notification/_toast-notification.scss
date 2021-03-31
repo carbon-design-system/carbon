@@ -31,7 +31,7 @@
     margin-top: $carbon--spacing-03;
     margin-right: $carbon--spacing-05;
     margin-bottom: $carbon--spacing-03;
-    padding-left: rem(14px);
+    padding-left: $carbon--spacing-05;
     color: $inverse-01;
     box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.2);
 
@@ -133,8 +133,8 @@
 
   .#{$prefix}--toast-notification__icon {
     flex-shrink: 0;
-    margin-top: rem(14px);
-    margin-right: rem(14px);
+    margin-top: $carbon--spacing-05;
+    margin-right: $carbon--spacing-05;
   }
 
   .#{$prefix}--toast-notification__details {
@@ -197,7 +197,7 @@
     @include type-style('body-short-01');
 
     margin-top: 0;
-    margin-bottom: $carbon--spacing-06;
+    margin-bottom: $carbon--spacing-05;
     color: $inverse-01;
     word-break: break-word;
   }
@@ -211,6 +211,7 @@
     @include type-style('body-short-01');
 
     margin-bottom: $carbon--spacing-05;
+    padding-top: $carbon--spacing-03;
     color: $inverse-01;
   }
 

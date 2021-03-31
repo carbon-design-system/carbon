@@ -8,9 +8,10 @@
 'use strict';
 
 const { default: babelGenerate } = require('@babel/generator');
+const { default: template } = require('@babel/template');
 const babelTypes = require('@babel/types');
 const { types: t, generate } = require('@carbon/scss-generator');
-const { constantCase } = require('change-case');
+const { camelCase, constantCase } = require('change-case');
 const fs = require('fs-extra');
 const yaml = require('js-yaml');
 const path = require('path');
@@ -78,8 +79,46 @@ const javascriptBanner = `/**
 `;
 function buildJavaScriptModule(featureFlags) {
   const t = babelTypes;
+  const tmpl = template(`
+    if (process.env.%%env%%) {
+      if (process.env.%%env%% === 'true') {
+        enabled.%%key%% = true;
+      } else {
+        enabled.%%key%% = false;
+      }
+    } else {
+      enabled.%%key%% = %%defaultEnabled%%;
+    }
+  `);
+  const fallback = template(`enabled.%%key%% = %%enabled%%;`);
+
   const file = t.file(
     t.program([
+      t.variableDeclaration('const', [
+        t.variableDeclarator(t.identifier('enabled'), t.objectExpression([])),
+      ]),
+      t.tryStatement(
+        t.blockStatement(
+          featureFlags.flatMap((featureFlag) => {
+            return tmpl({
+              env: t.identifier(constantCase(`CARBON_${featureFlag.name}`)),
+              key: t.identifier(camelCase(featureFlag.name)),
+              defaultEnabled: t.booleanLiteral(featureFlag.enabled),
+            });
+          })
+        ),
+        t.catchClause(
+          t.identifier('error'),
+          t.blockStatement(
+            featureFlags.flatMap((featureFlag) => {
+              return fallback({
+                key: t.identifier(camelCase(featureFlag.name)),
+                enabled: t.booleanLiteral(featureFlag.enabled),
+              });
+            })
+          )
+        )
+      ),
       t.exportNamedDeclaration(
         t.variableDeclaration('const', [
           t.variableDeclarator(
@@ -97,16 +136,9 @@ function buildJavaScriptModule(featureFlags) {
                   ),
                   t.objectProperty(
                     t.identifier('enabled'),
-                    t.logicalExpression(
-                      '||',
-                      t.memberExpression(
-                        t.memberExpression(
-                          t.identifier('process'),
-                          t.identifier('env')
-                        ),
-                        t.identifier(constantCase(`CARBON_${featureFlag.name}`))
-                      ),
-                      t.booleanLiteral(featureFlag.enabled)
+                    t.memberExpression(
+                      t.identifier('enabled'),
+                      t.identifier(camelCase(featureFlag.name))
                     )
                   ),
                 ]);
