@@ -28,6 +28,7 @@
   "devDependencies": {
     "@babel/preset-env": "^7.10.0",
     "@babel/preset-react": "^7.10.0",
+    "@babel/template": "^7.12.13",
     "@carbon/cli-reporter": "^10.4.0",
     "@carbon/icon-helpers": "^10.15.0",
     "@rollup/plugin-babel": "^5.2.2",

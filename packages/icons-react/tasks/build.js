@@ -8,14 +8,13 @@
 'use strict';
 
 const { builders } = require('@carbon/icon-build-helpers');
-// const metadata = require('@carbon/icons/metadata.json');
-const next = require('@carbon/icons/next.json');
+const metadata = require('@carbon/icons/metadata.json');
 
 async function build() {
-  // await builders.react.run(metadata, {
-  // output: process.cwd(),
-  // });
-  await builders.reactNext.run(next, {
+  await builders.react.run(metadata, {
+    output: process.cwd(),
+  });
+  await builders.reactNext.run(metadata, {
     output: process.cwd(),
   });
 }
