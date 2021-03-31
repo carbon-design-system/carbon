@@ -109,6 +109,7 @@
     display: table-cell;
     max-width: 36rem;
     color: $text-02;
+    border-top: 1px solid $ui-03;
     transition: color $duration--fast-02 motion(standard, productive);
   }
 
