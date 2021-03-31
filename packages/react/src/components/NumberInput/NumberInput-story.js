@@ -80,7 +80,19 @@ export default {
 };
 
 export const Default = () => {
-  return <NumberInput {...props()} />;
+  return (
+    <NumberInput
+      min={0}
+      max={100}
+      value={50}
+      label="NumberInput label"
+      helperText="Optional helper text."
+      invalidText="Number is not valid"
+      id="number-input-id"
+      onClick={action('onClick')}
+      onChange={action('onChange')}
+    />
+  );
 };
 
 Default.story = {
