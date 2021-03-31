@@ -1709,9 +1709,11 @@ __metadata:
   resolution: "@carbon/icon-build-helpers@workspace:packages/icon-build-helpers"
   dependencies:
     "@babel/core": ^7.12.13
+    "@babel/generator": ^7.13.9
     "@babel/preset-env": ^7.10.0
     "@babel/preset-react": ^7.10.0
     "@babel/template": ^7.12.13
+    "@babel/types": ^7.13.14
     "@carbon/cli-reporter": ^10.4.0
     "@carbon/icon-helpers": ^10.15.0
     "@rollup/plugin-babel": ^5.2.2
@@ -1768,8 +1770,6 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@carbon/icons-react@workspace:packages/icons-react"
   dependencies:
-    "@babel/generator": ^7.13.9
-    "@babel/types": ^7.13.14
     "@carbon/icon-build-helpers": ^0.18.0
     "@carbon/icon-helpers": ^10.15.0
     "@carbon/icons": ^10.29.0-rc.0
