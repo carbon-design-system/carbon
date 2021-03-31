@@ -187,7 +187,8 @@ $list-box-menu-width: rem(300px);
     color: $disabled-02;
   }
 
-  .#{$prefix}--list-box--disabled .#{$prefix}--list-box__menu-icon > svg {
+  .#{$prefix}--list-box--disabled .#{$prefix}--list-box__menu-icon > svg,
+  .#{$prefix}--list-box--disabled .#{$prefix}--list-box__selection > svg {
     fill: $disabled-02;
 
     // Windows, Firefox HCM Fix
@@ -395,7 +396,6 @@ $list-box-menu-width: rem(300px);
     @include button-reset($width: false);
 
     position: absolute;
-    top: $carbon--spacing-03;
     right: $carbon--spacing-05;
     display: flex;
     align-items: center;

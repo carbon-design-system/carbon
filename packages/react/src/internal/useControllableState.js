@@ -6,7 +6,7 @@
  */
 
 import { useEffect, useRef, useState } from 'react';
-import { warn } from './warn';
+import { warning } from './warning';
 
 export function useControllableState(
   controlledState,
@@ -47,7 +47,7 @@ export function useControllableState(
     // Uncontrolled -> Controlled
     // If the component prop is uncontrolled, the prop value should be undefined
     if (controlled.current === false && controlledState !== undefined) {
-      warn(
+      warning(
         false,
         'A component is changing an uncontrolled component to be controlled. ' +
           'This is likely caused by the value changing to a defined value ' +
@@ -60,7 +60,7 @@ export function useControllableState(
     // Controlled -> Uncontrolled
     // If the component prop is controlled, the prop value should be defined
     if (controlled.current === true && controlledState === undefined) {
-      warn(
+      warning(
         false,
         'A component is changing a controlled component to be uncontrolled. ' +
           'This is likely caused by the value changing to an undefined value ' +

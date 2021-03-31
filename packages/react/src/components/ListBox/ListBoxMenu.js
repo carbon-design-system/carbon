@@ -39,6 +39,7 @@ ListBoxMenu.propTypes = {
    * Provide the contents of your ListBoxMenu
    */
   children: PropTypes.oneOfType([
+    PropTypes.node,
     PropTypes.arrayOf(ListBoxMenuItem),
     /**
      * allow single item using the workaround for functional components

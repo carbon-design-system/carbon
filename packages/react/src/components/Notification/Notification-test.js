@@ -178,6 +178,36 @@ describe('ToastNotification', () => {
       expect(wrapper.children().length).toBe(0);
     });
 
+    it('closes notification if `onClose` is provided', () => {
+      const wrapper = mount(
+        <ToastNotification
+          kind="error"
+          title="this is a title"
+          subtitle="this is a subtitle"
+          caption="this is a caption"
+          onClose={() => {}}
+        />
+      );
+
+      wrapper.find('button').simulate('click');
+      expect(wrapper.children().length).toBe(0);
+    });
+
+    it('keeps notification open if `onClose` returns false', () => {
+      const wrapper = mount(
+        <ToastNotification
+          kind="error"
+          title="this is a title"
+          subtitle="this is a subtitle"
+          caption="this is a caption"
+          onClose={() => false}
+        />
+      );
+
+      wrapper.find('button').simulate('click');
+      expect(wrapper.children().length).not.toBe(0);
+    });
+
     it('renders null when open state is false', () => {
       const wrapper = mount(
         <ToastNotification
@@ -287,6 +317,36 @@ describe('InlineNotification', () => {
 
       wrapper.find('button').simulate('click');
       expect(wrapper.children().length).toBe(0);
+    });
+
+    it('closes notification if `onClose` is provided', () => {
+      const wrapper = mount(
+        <InlineNotification
+          kind="success"
+          title="title"
+          subtitle="subtitle"
+          iconDescription="description"
+          onClose={() => {}}
+        />
+      );
+
+      wrapper.find('button').simulate('click');
+      expect(wrapper.children().length).toBe(0);
+    });
+
+    it('keeps notification open if `onClose` returns false', () => {
+      const wrapper = mount(
+        <InlineNotification
+          kind="success"
+          title="title"
+          subtitle="subtitle"
+          iconDescription="description"
+          onClose={() => false}
+        />
+      );
+
+      wrapper.find('button').simulate('click');
+      expect(wrapper.children().length).not.toBe(0);
     });
 
     it('renders null when open state is false', () => {

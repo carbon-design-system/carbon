@@ -9,6 +9,7 @@ import { settings } from 'carbon-components';
 import cx from 'classnames';
 import PropTypes from 'prop-types';
 import React from 'react';
+import { CARBON_SIDENAV_ITEMS } from './_utils';
 
 const { prefix } = settings;
 
@@ -20,7 +21,14 @@ const SideNavItems = ({
   const className = cx([`${prefix}--side-nav__items`], customClassName);
   const childrenWithExpandedState = React.Children.map(children, (child) => {
     if (React.isValidElement(child)) {
-      return React.cloneElement(child, { isSideNavExpanded });
+      // avoid spreading `isSideNavExpanded` to non-Carbon UI Shell children
+      return React.cloneElement(child, {
+        ...(CARBON_SIDENAV_ITEMS.includes(child.type?.displayName)
+          ? {
+              isSideNavExpanded,
+            }
+          : {}),
+      });
     }
   });
   return <ul className={className}>{childrenWithExpandedState}</ul>;

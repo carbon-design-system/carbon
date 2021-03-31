@@ -5,11 +5,11 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+import { settings } from 'carbon-components';
 import PropTypes from 'prop-types';
 import React from 'react';
 import RadioTile from '../RadioTile';
-import warning from 'warning';
-import { settings } from 'carbon-components';
+import { warning } from '../../internal/warning';
 
 const { prefix } = settings;
 
