@@ -146,6 +146,7 @@ Map {
   "Button" => Object {
     "$$typeof": Symbol(react.forward_ref),
     "defaultProps": Object {
+      "dangerDescription": "danger",
       "disabled": false,
       "kind": "primary",
       "size": "default",
@@ -176,6 +177,9 @@ Map {
         "type": "node",
       },
       "className": Object {
+        "type": "string",
+      },
+      "dangerDescription": Object {
         "type": "string",
       },
       "disabled": Object {
