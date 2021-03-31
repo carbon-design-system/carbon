@@ -180,6 +180,11 @@
 
   .#{$prefix}--tile--is-selected {
     outline: 1px solid $ui-05;
+    outline-offset: -2px;
+  }
+
+  .#{$prefix}--tile--multi--select--is-selected {
+    outline: 1px solid $ui-05;
     outline-offset: -1px;
   }
 
