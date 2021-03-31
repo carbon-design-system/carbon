@@ -345,7 +345,7 @@ export class SelectableTile extends Component {
       `${prefix}--tile`,
       `${prefix}--tile--selectable`,
       {
-        [`${prefix}--tile--is-selected`]: this.state.selected,
+        [`${prefix}--tile--multi--select--is-selected`]: this.state.selected,
         [`${prefix}--tile--light`]: light,
         [`${prefix}--tile--disabled`]: disabled,
       },
