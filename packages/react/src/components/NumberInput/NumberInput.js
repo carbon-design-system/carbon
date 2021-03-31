@@ -289,8 +289,8 @@ class NumberInput extends Component {
             onClick && onClick(evt, { value, direction });
             onChange && onChange(evt, { value, direction });
           } else {
-            onClick && onClick(evt, { value, direction });
-            onChange && onChange(evt, { value, direction });
+            onClick && onClick(evt, direction, value);
+            onChange && onChange(evt, direction, value);
           }
         }
       );
