@@ -179,8 +179,7 @@
   }
 
   .#{$prefix}--tile--is-selected {
-    outline: 1px solid $ui-05;
-    outline-offset: -2px;
+    border: 2px solid $ui-05;
   }
 
   .#{$prefix}--tile--is-selected .#{$prefix}--tile__checkmark {
