@@ -196,7 +196,7 @@ function createIconSource(moduleName, sizes, isDeprecated, reason) {
   }, -Infinity);
 
   // Each asset that is not used for our "default" icon will conditionally
-  // render from an if statement in our compnoent
+  // render from an if statement in our component
   const ifStatements = sizeVariants.filter(({ size }) => {
     return size !== maxSize;
   });
@@ -207,8 +207,8 @@ function createIconSource(moduleName, sizes, isDeprecated, reason) {
   });
 
   // We build up our component source by adding in any necessary deprecation
-  // blocks along with conditionally rendering all asset sizes along with a
-  // default return for the "default" icon
+  // blocks along with conditionally rendering all asset sizes. We also use a
+  // return statement for the "default" icon
   const source = templates.component({
     moduleName: t.identifier(moduleName),
     defaultSize: t.numericLiteral(maxSize),
