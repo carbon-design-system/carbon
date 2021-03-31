@@ -16,11 +16,13 @@ import Copy from '../Copy';
 import Button from '../Button';
 import CopyButton from '../CopyButton';
 import getUniqueId from '../../tools/uniqueId';
+import copy from 'copy-to-clipboard';
 
 const { prefix } = settings;
 
-const rowHeightInPixels = 18;
-const defaultCollapsedHeightInRows = 15;
+const rowHeightInPixels = 16;
+const defaultMaxCollapsedNumberOfRows = 15;
+const defaultMaxExpandedNumberOfRows = 0;
 
 function CodeSnippet({
   className,
@@ -28,6 +30,7 @@ function CodeSnippet({
   children,
   disabled,
   feedback,
+  feedbackTimeout,
   onClick,
   ariaLabel,
   copyLabel, //TODO: Merge this prop to `ariaLabel` in `v11`
@@ -37,6 +40,8 @@ function CodeSnippet({
   showLessText,
   hideCopyButton,
   wrapText,
+  maxCollapsedNumberOfRows = defaultMaxCollapsedNumberOfRows,
+  maxExpandedNumberOfRows = defaultMaxExpandedNumberOfRows,
   ...rest
 }) {
   const [expandedCode, setExpandedCode] = useState(false);
@@ -92,27 +97,47 @@ function CodeSnippet({
     );
   }, [type, getCodeRefDimensions]);
 
-  useResizeObserver({
-    ref: getCodeRef(),
-    onResize: () => {
-      if (codeContentRef?.current && type === 'multi') {
-        const { height } = codeContentRef.current.getBoundingClientRect();
-        setShouldShowMoreLessBtn(
-          height > defaultCollapsedHeightInRows * rowHeightInPixels
-        );
-      }
-      if (
-        (codeContentRef?.current && type === 'multi') ||
-        (codeContainerRef?.current && type === 'single')
-      ) {
-        debounce(handleScroll, 200);
-      }
+  useResizeObserver(
+    {
+      ref: getCodeRef(),
+      onResize: () => {
+        if (codeContentRef?.current && type === 'multi') {
+          const { height } = codeContentRef.current.getBoundingClientRect();
+
+          if (
+            maxCollapsedNumberOfRows > 0 &&
+            (maxExpandedNumberOfRows === 0 ||
+              maxExpandedNumberOfRows > maxCollapsedNumberOfRows) &&
+            height > maxCollapsedNumberOfRows * rowHeightInPixels
+          ) {
+            setShouldShowMoreLessBtn(true);
+          } else {
+            setShouldShowMoreLessBtn(false);
+            setExpandedCode(false);
+          }
+        }
+        if (
+          (codeContentRef?.current && type === 'multi') ||
+          (codeContainerRef?.current && type === 'single')
+        ) {
+          debounce(handleScroll, 200);
+        }
+      },
     },
-  });
+    [type, maxCollapsedNumberOfRows, maxExpandedNumberOfRows, rowHeightInPixels]
+  );
 
   useEffect(() => {
     handleScroll();
   }, [handleScroll]);
+
+  const handleCopyClick = (evt) => {
+    copy(children);
+
+    if (onClick) {
+      onClick(evt);
+    }
+  };
 
   const codeSnippetClasses = classNames(className, `${prefix}--snippet`, {
     [`${prefix}--snippet--${type}`]: type,
@@ -137,14 +162,32 @@ function CodeSnippet({
     return (
       <Copy
         {...rest}
-        onClick={onClick}
+        onClick={handleCopyClick}
         aria-label={copyLabel || ariaLabel}
         aria-describedby={uid}
         className={codeSnippetClasses}
-        feedback={feedback}>
+        feedback={feedback}
+        feedbackTimeout={feedbackTimeout}>
         <code id={uid}>{children}</code>
       </Copy>
     );
+  }
+
+  let containerStyle = {};
+  if (type === 'multi') {
+    if (expandedCode) {
+      if (maxExpandedNumberOfRows > 0) {
+        containerStyle.style = {
+          maxHeight: maxExpandedNumberOfRows * rowHeightInPixels,
+        };
+      }
+    } else {
+      if (maxCollapsedNumberOfRows > 0) {
+        containerStyle.style = {
+          maxHeight: maxCollapsedNumberOfRows * rowHeightInPixels,
+        };
+      }
+    }
   }
 
   return (
@@ -155,7 +198,8 @@ function CodeSnippet({
         tabIndex={type === 'single' && !disabled ? 0 : null}
         className={`${prefix}--snippet-container`}
         aria-label={ariaLabel || copyLabel || 'code-snippet'}
-        onScroll={(type === 'single' && handleScroll) || null}>
+        onScroll={(type === 'single' && handleScroll) || null}
+        {...containerStyle}>
         <code>
           <pre
             ref={codeContentRef}
@@ -177,8 +221,9 @@ function CodeSnippet({
       {!hideCopyButton && (
         <CopyButton
           disabled={disabled}
-          onClick={onClick}
+          onClick={handleCopyClick}
           feedback={feedback}
+          feedbackTimeout={feedbackTimeout}
           iconDescription={copyButtonDescription}
         />
       )}
@@ -243,6 +288,11 @@ CodeSnippet.propTypes = {
   feedback: PropTypes.string,
 
   /**
+   * Specify the time it takes for the feedback message to timeout
+   */
+  feedbackTimeout: PropTypes.number,
+
+  /**
    * Specify whether or not a copy button should be used/rendered.
    */
   hideCopyButton: PropTypes.bool,
@@ -252,6 +302,16 @@ CodeSnippet.propTypes = {
    * typically used for inline snippet to display an alternate color
    */
   light: PropTypes.bool,
+
+  /**
+   * Specify the maximum number of rows to be shown when in collapsed view
+   */
+  maxCollapsedNumberOfRows: PropTypes.number,
+
+  /**
+   * Specify the maximum number of rows to be shown when in expanded view
+   */
+  maxExpandedNumberOfRows: PropTypes.number,
 
   /**
    * An optional handler to listen to the `onClick` even fired by the Copy

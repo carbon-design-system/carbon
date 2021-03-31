@@ -38,6 +38,7 @@ const notificationProps = () => ({
     'describes the status icon'
   ),
   hideCloseButton: boolean('Hide close button (hideCloseButton)', false),
+  onClose: action('onClose'),
   onCloseButtonClick: action('onCloseButtonClick'),
 });
 
@@ -60,7 +61,7 @@ export const Toast = () => (
   <ToastNotification
     {...notificationProps()}
     caption={text('Caption (caption)', '00:00:00 AM')}
-    style={{ minWidth: '30rem', marginBottom: '.5rem' }}
+    style={{ marginBottom: '.5rem' }}
   />
 );
 
