@@ -11,6 +11,8 @@ import React from 'react';
 import { action } from '@storybook/addon-actions';
 import { withKnobs, boolean } from '@storybook/addon-knobs';
 import { Breadcrumb, BreadcrumbItem, BreadcrumbSkeleton } from '../Breadcrumb';
+import OverflowMenu from '../OverflowMenu';
+import OverflowMenuItem from '../OverflowMenuItem';
 import mdx from './Breadcrumb.mdx';
 
 export default {
@@ -35,6 +37,22 @@ export const breadcrumb = () => (
     </BreadcrumbItem>
     <BreadcrumbItem href="#">Breadcrumb 2</BreadcrumbItem>
     <BreadcrumbItem href="#">Breadcrumb 3</BreadcrumbItem>
+  </Breadcrumb>
+);
+
+export const breadcrumbWithOverflowMenu = () => (
+  <Breadcrumb>
+    <BreadcrumbItem>
+      <a href="/#">Breadcrumb 1</a>
+    </BreadcrumbItem>
+    <BreadcrumbItem href="#">Breadcrumb 2</BreadcrumbItem>
+    <BreadcrumbItem data-floating-menu-container>
+      <OverflowMenu>
+        <OverflowMenuItem itemText="Breadcrumb 3" />
+        <OverflowMenuItem itemText="Breadcrumb 4" />
+      </OverflowMenu>
+    </BreadcrumbItem>
+    <BreadcrumbItem href="#">Breadcrumb 5</BreadcrumbItem>
   </Breadcrumb>
 );
 
