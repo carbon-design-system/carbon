@@ -7686,6 +7686,15 @@ Map {
         "disabled": Object {
           "type": "bool",
         },
+        "kind": Object {
+          "args": Array [
+            Array [
+              "default",
+              "danger",
+            ],
+          ],
+          "type": "oneOf",
+        },
         "label": Object {
           "isRequired": true,
           "type": "node",
@@ -7772,6 +7781,15 @@ Map {
       },
       "disabled": Object {
         "type": "bool",
+      },
+      "kind": Object {
+        "args": Array [
+          Array [
+            "default",
+            "danger",
+          ],
+        ],
+        "type": "oneOf",
       },
       "label": Object {
         "isRequired": true,
