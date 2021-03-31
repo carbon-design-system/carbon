@@ -70,6 +70,13 @@ The `.bx--col-sm-1` class names tells us that this `<div>` should only span one
 column at our `sm` breakpoint. By default, as we scale beyond the breakpoint the
 layout will still take up a percentage of the overall width.
 
+## 📚 Examples
+
+If you're looking for more examples on how to use `@carbon/grid`, we have some
+examples that you can check out:
+
+- [css-grid](./examples/css-grid)
+
 ## 🙌 Contributing
 
 We're always looking for contributors to help us fix bugs, build new features,

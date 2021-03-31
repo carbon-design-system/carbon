@@ -197,20 +197,19 @@
     }
   }
 
-  //closed snippet container
+  //collapsed snippet container
   .#{$prefix}--snippet--multi .#{$prefix}--snippet-container {
     position: relative;
     order: 1;
     min-height: rem(56px);
-    max-height: rem(238px);
-    overflow: hidden;
+    max-height: 100%;
+    overflow-y: auto;
     transition: max-height $duration--moderate-01 motion(standard, productive);
   }
 
   // expanded snippet container
   .#{$prefix}--snippet--multi.#{$prefix}--snippet--expand
     .#{$prefix}--snippet-container {
-    max-height: 100%;
     padding-bottom: $spacing-05;
     transition: max-height $duration--moderate-01 motion(standard, productive);
   }
@@ -220,7 +219,7 @@
     word-wrap: break-word;
   }
 
-  // closed pre
+  // collapsed pre
   .#{$prefix}--snippet--multi .#{$prefix}--snippet-container pre {
     padding-right: $carbon--spacing-08;
     padding-bottom: rem(24px);

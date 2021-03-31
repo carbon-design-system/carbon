@@ -87,6 +87,31 @@ describe('ContextMenu', () => {
         ).toBe(true);
       });
 
+      it('supports danger kind', () => {
+        const wrapper = mount(<ContextMenuItem label="Delete" kind="danger" />);
+        const option = wrapper.find(`.${prefix}--context-menu-option`);
+
+        expect(option.hasClass(`${prefix}--context-menu-option--danger`)).toBe(
+          true
+        );
+      });
+
+      it('ignores danger kind when it has children', () => {
+        const wrapper = mount(
+          <ContextMenu>
+            <ContextMenuItem label="Remove" kind="danger">
+              <ContextMenuItem label="Move to trash" />
+              <ContextMenuItem label="Delete" />
+            </ContextMenuItem>
+          </ContextMenu>
+        );
+        const option = wrapper.find(`.${prefix}--context-menu-option`).at(0);
+
+        expect(option.hasClass(`${prefix}--context-menu-option--danger`)).toBe(
+          false
+        );
+      });
+
       it('renders props.children as submenu', () => {
         const wrapper = mount(
           <ContextMenu>
