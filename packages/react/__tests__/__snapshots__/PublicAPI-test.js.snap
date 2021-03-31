@@ -377,6 +377,9 @@ Map {
       "feedback": Object {
         "type": "string",
       },
+      "feedbackTimeout": Object {
+        "type": "number",
+      },
       "hideCopyButton": Object {
         "type": "bool",
       },
@@ -854,9 +857,7 @@ Map {
       "className": Object {
         "type": "string",
       },
-      "light": Object {
-        "type": "bool",
-      },
+      "light": [Function],
       "onChange": Object {
         "isRequired": true,
         "type": "func",
@@ -2818,6 +2819,7 @@ Map {
   },
   "FormGroup" => Object {
     "defaultProps": Object {
+      "hasMargin": true,
       "invalid": false,
       "message": false,
       "messageText": "",
@@ -2828,6 +2830,9 @@ Map {
       },
       "className": Object {
         "type": "string",
+      },
+      "hasMargin": Object {
+        "type": "bool",
       },
       "invalid": Object {
         "type": "bool",
