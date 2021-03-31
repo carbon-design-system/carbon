@@ -21,11 +21,8 @@
   "publishConfig": {
     "access": "public"
   },
-  "dependencies": {
-    "@babel/core": "^7.12.13",
-    "svg-parser": "^2.0.4"
-  },
   "devDependencies": {
+    "@babel/core": "^7.12.13",
     "@babel/preset-env": "^7.10.0",
     "@babel/preset-react": "^7.10.0",
     "@babel/template": "^7.12.13",
@@ -48,6 +45,7 @@
     "rimraf": "^3.0.0",
     "rollup": "^2.38.0",
     "rollup-plugin-strip-banner": "^2.0.0",
+    "svg-parser": "^2.0.4",
     "svgo": "^1.1.1"
   }
 }
