@@ -19,7 +19,7 @@ jobs:
           path-to-signatures: "dco-signatures.json"
           path-to-document: "https://github.com/carbon-design-system/carbon-dco/blob/main/dco.md"
           branch: "main"
-          allowlist: dependabot,kodiakhq
+          allowlist: bot*
           remote-organization-name: carbon-design-system
           remote-repository-name: carbon-dco
           create-file-commit-message: "chore: create file to store dco signatures"
