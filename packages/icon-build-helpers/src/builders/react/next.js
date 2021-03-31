@@ -24,7 +24,7 @@ const templates = require('./next/templates');
 // number of icons we currently support (>1600)
 //
 // Each CommonJS module includes an icon component. For more information on the
-// structure of each module, you can view `createIconEntrypoint`
+// structure of each module, checkout `createIconEntrypoint`
 async function builder(metadata, { output }) {
   const modules = metadata.icons.map((icon) => {
     const { moduleInfo } = icon;
