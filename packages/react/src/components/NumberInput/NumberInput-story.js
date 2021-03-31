@@ -88,7 +88,6 @@ export const Default = () => {
       label="NumberInput label"
       helperText="Optional helper text."
       invalidText="Number is not valid"
-      onChange={(e, something) => console.log(something)} //TO-DO: remove before merging
     />
   );
 };
