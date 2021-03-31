@@ -20,7 +20,6 @@ import NumberInput from '../NumberInput';
 import { NumberInput as OGNumberInput } from './NumberInput';
 import NumberInputSkeleton from '../NumberInput/NumberInput.Skeleton';
 import mdx from './NumberInput.mdx';
-import { console } from 'window-or-global';
 
 const sizes = {
   'Extra large size (xl)': 'xl',
