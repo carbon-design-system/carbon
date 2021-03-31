@@ -80,16 +80,7 @@ export default {
 };
 
 export const Default = () => {
-  return (
-    <NumberInput
-      min={0}
-      max={100}
-      value={50}
-      label="NumberInput label"
-      helperText="Optional helper text."
-      invalidText="Number is not valid"
-    />
-  );
+  return <NumberInput {...props()} />;
 };
 
 Default.story = {
