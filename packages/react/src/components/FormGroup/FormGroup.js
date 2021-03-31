@@ -19,10 +19,13 @@ const FormGroup = ({
   className,
   message,
   messageText,
+  hasMargin,
   ...other
 }) => {
   const classNamesLegend = classnames(`${prefix}--label`, className);
-  const classNamesFieldset = classnames(`${prefix}--fieldset`, className);
+  const classNamesFieldset = classnames(`${prefix}--fieldset`, className, {
+    [`${prefix}--fieldset--no-margin`]: !hasMargin,
+  });
 
   return (
     <fieldset
@@ -50,6 +53,11 @@ FormGroup.propTypes = {
   className: PropTypes.string,
 
   /**
+   * Specify whether or not the FormGroup should provide bottom margin
+   */
+  hasMargin: PropTypes.bool,
+
+  /**
    * Specify whether the <FormGroup> is invalid
    */
   invalid: PropTypes.bool,
@@ -74,6 +82,7 @@ FormGroup.defaultProps = {
   invalid: false,
   message: false,
   messageText: '',
+  hasMargin: true,
 };
 
 export default FormGroup;
