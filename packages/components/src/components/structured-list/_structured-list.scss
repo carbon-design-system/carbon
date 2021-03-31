@@ -73,7 +73,7 @@
   .#{$prefix}--structured-list--selection
     .#{$prefix}--structured-list-row:hover:not(.#{$prefix}--structured-list-row--header-row)
     > .#{$prefix}--structured-list-td {
-    border-top: 1px solid $ui-01;
+    border-top: 1px solid $ui-03;
   }
 
   .#{$prefix}--structured-list-thead {
