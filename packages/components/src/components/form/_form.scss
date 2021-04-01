@@ -21,6 +21,10 @@
     margin-bottom: $carbon--spacing-07;
   }
 
+  .#{$prefix}--fieldset--no-margin {
+    margin-bottom: 0;
+  }
+
   .#{$prefix}--form-item {
     @include type-style('body-short-01');
 
@@ -168,6 +172,12 @@
 
   .#{$prefix}--label--disabled,
   .#{$prefix}--form__helper-text--disabled {
+    color: $disabled-02;
+  }
+
+  // If a FormGroup is disabled, Form labels and helper text nested inside should also be disabled
+  fieldset[disabled] .#{$prefix}--label,
+  fieldset[disabled] .#{$prefix}--form__helper-text {
     color: $disabled-02;
   }
 }

@@ -12,12 +12,14 @@ import {
   assertMenuOpen,
   assertMenuClosed,
   findMenuIconNode,
-  openMenu,
   generateItems,
   generateGenericItem,
 } from '../../ListBox/test-helpers';
 
 const listItemName = 'ForwardRef(ListBoxMenuItem)';
+const openMenu = (wrapper) => {
+  wrapper.find(`[role="combobox"]`).simulate('click');
+};
 
 describe('MultiSelect.Filterable', () => {
   let mockProps;
