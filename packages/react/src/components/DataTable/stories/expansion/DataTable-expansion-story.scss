@@ -1,10 +1,6 @@
 @import '~@carbon/type/scss/type';
 @import '~@carbon/themes/scss/themes';
 
-.demo-expanded-td td {
-  padding-left: 4rem;
-}
-
 .demo-inner-container-header {
   @include carbon--type-style('productive-heading-01');
   color: $text-01;
