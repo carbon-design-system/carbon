@@ -81,6 +81,17 @@
     text-decoration: none;
   }
 
+  // Disabled ClickableTile
+  .#{$prefix}--tile--clickable.#{$prefix}--link--disabled {
+    color: $disabled-02;
+  }
+
+  .#{$prefix}--tile--clickable:hover.#{$prefix}--link--disabled {
+    display: block;
+    color: $disabled-02;
+    background-color: $disabled-01;
+  }
+
   .#{$prefix}--tile--selectable {
     padding-right: $carbon--spacing-09;
   }

@@ -39,6 +39,7 @@ const props = {
     light: boolean('Light variant (light)', false),
   }),
   clickable: () => ({
+    disabled: boolean('disabled (disabled)', false),
     href: text('Href for clickable UI (href)', 'javascript:void(0)'),
     light: boolean('Light variant (light)', false),
   }),
