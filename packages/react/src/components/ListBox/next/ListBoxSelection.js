@@ -25,6 +25,7 @@ function ListBoxSelection({
   translateWithId: t,
   disabled,
   onClearSelection,
+  ...rest
 }) {
   const className = cx(`${prefix}--list-box__selection`, {
     [`${prefix}--tag--filter`]: selectionCount,
@@ -89,6 +90,7 @@ function ListBoxSelection({
 
   return (
     <button
+      {...rest}
       aria-label={description}
       className={className}
       onClick={onClick}
