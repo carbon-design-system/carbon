@@ -300,11 +300,15 @@ export function StructuredListCell(props) {
     [`${prefix}--structured-list-content--nowrap`]: noWrap,
   });
 
-  return head ? (
-    <span className={classes} role="columnheader" {...other}>
-      {children}
-    </span>
-  ) : (
+  if (head) {
+    return (
+      <span className={classes} role="columnheader" {...other}>
+        {children}
+      </span>
+    );
+  }
+
+  return (
     <div className={classes} role="cell" {...other}>
       {children}
     </div>
