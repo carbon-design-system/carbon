@@ -8,6 +8,7 @@
 'use strict';
 
 const preprocessor = require('@cypress/react/plugins/load-webpack');
+const percyHealthCheck = require('@percy/cypress/task');
 
 /**
  * @type {Cypress.PluginConfig}
@@ -15,5 +16,7 @@ const preprocessor = require('@cypress/react/plugins/load-webpack');
 module.exports = (on, config) => {
   config.env.webpackFilename = 'webpack.config.js';
   preprocessor(on, config);
+
+  on('task', percyHealthCheck);
   return config;
 };

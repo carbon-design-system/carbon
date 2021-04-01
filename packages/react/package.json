@@ -35,7 +35,9 @@
     "prepublish": "yarn build",
     "start": "yarn storybook",
     "storybook": "rimraf node_modules/.cache/storybook && start-storybook -p 9000 -s ./.storybook/assets",
-    "snapshot": "build-storybook && percy-storybook --widths=320,1280"
+    "snapshot": "build-storybook && percy-storybook --widths=320,1280",
+    "test:e2e": "PERCY_TOKEN=dd3392142006a6483c8f524697f39f052755fa9dc087ff4437cac3d64227abdd PERCY_BRANCH=local percy exec -- cypress run",
+    "test:e2e-ci": "percy exec -- cypress run"
   },
   "peerDependencies": {
     "carbon-components": "^10.9.0",
@@ -74,6 +76,8 @@
     "@babel/preset-react": "^7.10.0",
     "@carbon/test-utils": "^10.15.0",
     "@cypress/react": "^4.16.4",
+    "@percy/cli": "^1.0.0-beta.44",
+    "@percy/cypress": "^2.3.4",
     "@percy/storybook": "^3.3.1",
     "@rollup/plugin-babel": "^5.2.2",
     "@rollup/plugin-commonjs": "^17.0.0",
@@ -84,6 +88,7 @@
     "@storybook/react": "^5.3.19",
     "@storybook/source-loader": "^5.3.19",
     "@storybook/theming": "^6.1.18",
+    "@testing-library/cypress": "^7.0.5",
     "babel-core": "^7.0.0-bridge.0",
     "babel-loader": "^8.1.0",
     "babel-plugin-dev-expression": "^0.2.2",
@@ -98,6 +103,7 @@
     "cross-env": "^5.2.0",
     "css-loader": "^3.4.2",
     "cypress": "^6.5.0",
+    "cypress-real-events": "^1.3.0",
     "fast-sass-loader": "^1.5.0",
     "gzip-size": "^6.0.0",
     "lcov2badge": "^0.1.0",

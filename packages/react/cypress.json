@@ -6,5 +6,5 @@
   },
   "fixturesFolder": false,
   "nodeVersion": "system",
-  "testFiles": "**/*cy-spec.js"
+  "testFiles": "**/*e2e.js"
 }
