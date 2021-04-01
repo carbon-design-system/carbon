@@ -40,8 +40,8 @@
   .#{$prefix}--context-menu-option {
     position: relative;
     height: $spacing-07;
-    color: $text-01;
-    background-color: $ui-01;
+    color: $text-primary;
+    background-color: $layer;
     cursor: pointer;
     transition: background-color $duration--fast-01 motion(standard, productive);
 
@@ -57,8 +57,8 @@
 
   .#{$prefix}--context-menu-option--danger:hover,
   .#{$prefix}--context-menu-option--danger:focus {
-    color: $text-04;
-    background-color: $danger-01;
+    color: $text-on-color;
+    background-color: $button-danger-primary;
   }
 
   .#{$prefix}--context-menu-option > .#{$prefix}--context-menu {
@@ -74,8 +74,8 @@
   }
 
   .#{$prefix}--context-menu-option__content--disabled {
-    color: $disabled-02;
-    background-color: $ui-01;
+    color: $text-disabled;
+    background-color: $layer;
     cursor: not-allowed;
   }
 
