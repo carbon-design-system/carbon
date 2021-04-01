@@ -217,8 +217,8 @@ export class SelectableTile extends Component {
      */
     iconDescription: deprecate(
       PropTypes.string,
-      'The `iconDescription` prop for `RadioTile` is no longer needed and has ' +
-        'been deprecated. It will be moved in the next major release.'
+      'The `iconDescription` prop for `SelectableTile` is no longer needed and has ' +
+        'been deprecated. It will be removed in the next major release.'
     ),
 
     /**
