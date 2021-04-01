@@ -76,7 +76,9 @@
   }
 
   .#{$prefix}--tile--clickable:hover,
-  .#{$prefix}--tile--clickable:active {
+  .#{$prefix}--tile--clickable:active,
+  .#{$prefix}--tile--clickable:visited,
+  .#{$prefix}--tile--clickable:visited:hover {
     color: $text-01;
     text-decoration: none;
   }
