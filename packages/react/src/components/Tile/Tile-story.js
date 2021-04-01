@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { action } from '@storybook/addon-actions';
 
 import {
@@ -223,4 +223,83 @@ Expandable.parameters = {
         Expandable tile
       `,
   },
+};
+
+export const Test = () => {
+  const [selectedTiles, setSelectedTiles] = useState({
+    tile1: true,
+    tile2: false,
+    tile3: false,
+    tile4: true,
+  });
+  useEffect(() => {
+    console.log(selectedTiles);
+  });
+  return (
+    <div aria-label="selectable tiles" role="group">
+      <SelectableTile
+        id="tile1"
+        name="tiles"
+        tabIndex={0}
+        title="title"
+        value="value"
+        selected={selectedTiles.tile1}
+        onClick={() =>
+          setSelectedTiles({ ...selectedTiles, tile1: !selectedTiles.tile1 })
+        }>
+        Tile 1 toggle
+      </SelectableTile>
+      <SelectableTile
+        id="tile2"
+        name="tiles"
+        tabIndex={0}
+        title="title"
+        value="value"
+        selected={selectedTiles.tile2}
+        onClick={() => {
+          setSelectedTiles({
+            ...selectedTiles,
+            tile1: true,
+            tile2: !selectedTiles.tile2,
+          });
+        }}>
+        Tile 1 true, Tile 2 toggle
+      </SelectableTile>
+      <SelectableTile
+        id="tile3"
+        name="tiles"
+        tabIndex={0}
+        title="title"
+        value="value"
+        selected={selectedTiles.tile3}
+        onClick={() =>
+          setSelectedTiles({
+            ...selectedTiles,
+            tile1: true,
+            tile2: true,
+            tile3: !selectedTiles.tile3,
+          })
+        }>
+        Tile 1 true, Tile 2 true, Tile 3 toggle
+      </SelectableTile>
+      <SelectableTile
+        id="tile4"
+        name="tiles"
+        tabIndex={0}
+        title="title"
+        value="value"
+        selected={selectedTiles.tile4}
+        onClick={() => {
+          setSelectedTiles({
+            ...selectedTiles,
+            tile1: true,
+            tile2: true,
+            tile3: true,
+            tile4: true,
+          });
+        }}>
+        All tiles true
+      </SelectableTile>
+    </div>
+  );
 };
