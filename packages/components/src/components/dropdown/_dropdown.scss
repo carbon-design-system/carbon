@@ -225,7 +225,7 @@
       background-color $duration--fast-01 motion(standard, productive);
 
     &:hover {
-      background-color: $field-hover;
+      background-color: $layer-hover;
 
       + .#{$prefix}--dropdown-item .#{$prefix}--dropdown-link {
         border-color: transparent;
@@ -324,7 +324,7 @@
   }
 
   .#{$prefix}--dropdown-item:hover .#{$prefix}--dropdown-link {
-    border-bottom-color: $field-hover;
+    border-bottom-color: $layer-hover;
   }
 
   .#{$prefix}--dropdown--selected {
@@ -456,7 +456,7 @@
   .#{$prefix}--dropdown--show-selected .#{$prefix}--dropdown--selected {
     display: block;
     color: $text-primary;
-    background-color: $field-hover;
+    background-color: $layer-hover;
 
     &:hover {
       background-color: $layer-selected;
