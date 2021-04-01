@@ -31,6 +31,7 @@
 @mixin tooltip--content($tooltip-type: 'icon') {
   @include box-shadow;
 
+  z-index: z('floating');
   width: max-content;
   min-width: rem(24px);
   max-width: rem(208px);
