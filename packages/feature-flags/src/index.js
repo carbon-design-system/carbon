@@ -6,34 +6,37 @@
  */
 
 import { featureFlagInfo } from './generated/feature-flags';
+import { FeatureFlagScope } from './FeatureFlagScope';
 
-const featureFlags = createScope();
+const FeatureFlags = createScope();
 
 for (let i = 0; i < featureFlagInfo.length; i++) {
   const featureFlag = featureFlagInfo[i];
-  featureFlags.add(featureFlag.name, featureFlag.enabled);
+  FeatureFlags.add(featureFlag.name, featureFlag.enabled);
 }
 
-export function add(...args) {
-  return featureFlags.add(...args);
-}
-
-export function enable(...args) {
-  return featureFlags.enable(...args);
-}
-
-export function disable(...args) {
-  return featureFlags.disable(...args);
-}
-
-export function enabled(...args) {
-  return featureFlags.enabled(...args);
-}
-
-export function merge(...args) {
-  return featureFlags.merge(...args);
-}
+export { FeatureFlags };
 
 export function createScope(flags) {
   return new FeatureFlagScope(flags);
+}
+
+export function add(...args) {
+  return FeatureFlags.add(...args);
+}
+
+export function enable(...args) {
+  return FeatureFlags.enable(...args);
+}
+
+export function disable(...args) {
+  return FeatureFlags.disable(...args);
+}
+
+export function enabled(...args) {
+  return FeatureFlags.enabled(...args);
+}
+
+export function merge(...args) {
+  return FeatureFlags.merge(...args);
 }

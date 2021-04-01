@@ -7,11 +7,11 @@
 
 export class FeatureFlagScope {
   constructor(flags) {
-    this.scope = new Map();
+    this.flags = new Map();
 
     if (flags) {
       Object.keys(flags).forEach((key) => {
-        this.scope.set(key, flags[key]);
+        this.flags.set(key, flags[key]);
       });
     }
   }
@@ -21,7 +21,7 @@ export class FeatureFlagScope {
    * @param {string} name
    */
   checkForFlag(name) {
-    if (!this.scope.has(name)) {
+    if (!this.flags.has(name)) {
       throw new Error(
         `Unable to find a feature flag with the name: \`${name}\``
       );
@@ -34,10 +34,10 @@ export class FeatureFlagScope {
    * @param {boolean} enabled
    */
   add(name, enabled) {
-    if (this.scope.has(name)) {
+    if (this.flags.has(name)) {
       throw new Error(`The feature flag: ${name} already exists`);
     }
-    this.scope.set(name, enabled);
+    this.flags.set(name, enabled);
   }
 
   /**
@@ -46,7 +46,7 @@ export class FeatureFlagScope {
    */
   enable(name) {
     this.checkForFlag(name);
-    this.scope.set(name, true);
+    this.flags.set(name, true);
   }
 
   /**
@@ -55,7 +55,7 @@ export class FeatureFlagScope {
    */
   disable(name) {
     this.checkForFlag(name);
-    this.scope.set(name, false);
+    this.flags.set(name, false);
   }
 
   /**
@@ -65,8 +65,20 @@ export class FeatureFlagScope {
    */
   merge(flags) {
     Object.keys(flags).forEach((key) => {
-      this.scope.set(key, flags[key]);
+      this.flags.set(key, flags[key]);
     });
+  }
+
+  /**
+   * @param {FeatureFlagScope} scope
+   */
+  mergeWithScope(scope) {
+    for (const [key, value] of scope.flags) {
+      if (this.flags.has(key)) {
+        continue;
+      }
+      this.flags.set(key, value);
+    }
   }
 
   /**
@@ -76,6 +88,6 @@ export class FeatureFlagScope {
    */
   enabled(name) {
     this.checkForFlag(name);
-    return this.scope.get(name);
+    return this.flags.get(name);
   }
 }
