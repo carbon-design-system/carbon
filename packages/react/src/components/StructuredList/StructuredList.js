@@ -192,7 +192,7 @@ StructuredListRow.propTypes = {
    */
   label: deprecate(
     PropTypes.bool,
-    `\nThe prop \`label\` will be removed in the next major version of Carbon.`
+    `\nThe \`label\` prop is no longer needed and will be removed in the next major version of Carbon.`
   ),
 
   /**
