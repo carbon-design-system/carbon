@@ -21,8 +21,7 @@ import mdx from './Dropdown.mdx';
 const items = [
   {
     id: 'option-0',
-    text:
-      'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Vitae, aliquam. Blanditiis quia nemo enim voluptatibus quos ducimus porro molestiae nesciunt error cumque quaerat, tempore vero unde eum aperiam eligendi repellendus.',
+    text: 'Lorem, ipsum dolor sit amet consectetur adipisicing elit.',
   },
   {
     id: 'option-1',

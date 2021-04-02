@@ -400,7 +400,7 @@ describe('MultiSelect', () => {
       );
 
       // the first option in the list to the the former third option in the list
-      expect(optionsArray[0].title).toBe('Item 2');
+      expect(optionsArray[0].getAttribute('aria-label')).toBe('Item 2');
     });
 
     it('should accept a `ref` for the underlying button element', () => {

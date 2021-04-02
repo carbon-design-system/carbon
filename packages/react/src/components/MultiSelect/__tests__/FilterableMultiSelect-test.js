@@ -12,12 +12,14 @@ import {
   assertMenuOpen,
   assertMenuClosed,
   findMenuIconNode,
-  openMenu,
   generateItems,
   generateGenericItem,
 } from '../../ListBox/test-helpers';
 
-const listItemName = 'ListBoxMenuItem';
+const listItemName = 'ForwardRef(ListBoxMenuItem)';
+const openMenu = (wrapper) => {
+  wrapper.find(`[role="combobox"]`).simulate('click');
+};
 
 describe('MultiSelect.Filterable', () => {
   let mockProps;
@@ -124,7 +126,7 @@ describe('MultiSelect.Filterable', () => {
     });
   });
 
-  it('should let items stay at thier position after selecting', () => {
+  it('should let items stay at their position after selecting', () => {
     const wrapper = mount(
       <MultiSelect.Filterable {...mockProps} selectionFeedback="fixed" />
     );

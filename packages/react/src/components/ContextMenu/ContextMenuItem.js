@@ -10,12 +10,20 @@ import PropTypes from 'prop-types';
 
 import ContextMenuOption from './ContextMenuOption';
 
-function ContextMenuItem({ label, children, disabled, shortcut, ...rest }) {
+function ContextMenuItem({
+  label,
+  children,
+  disabled,
+  kind = 'default',
+  shortcut,
+  ...rest
+}) {
   return (
     <ContextMenuOption
       {...rest}
       label={label}
       disabled={disabled}
+      kind={kind}
       shortcut={shortcut}>
       {children}
     </ContextMenuOption>
@@ -32,6 +40,11 @@ ContextMenuItem.propTypes = {
    * Specify whether this ContextMenuItem is disabled
    */
   disabled: PropTypes.bool,
+
+  /**
+   * Optional prop to specify the kind of the ContextMenuItem
+   */
+  kind: PropTypes.oneOf(['default', 'danger']),
 
   /**
    * Rendered label for the ContextMenuItem

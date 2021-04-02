@@ -38,7 +38,6 @@ const TableToolbarSearch = ({
   persistent,
   persistant,
   id,
-  tabIndex,
   ...rest
 }) => {
   const { current: controlled } = useRef(expandedProp !== undefined);
@@ -46,7 +45,6 @@ const TableToolbarSearch = ({
     defaultExpanded || defaultValue
   );
   const expanded = controlled ? expandedProp : expandedState;
-  const searchRef = useRef(null);
   const [value, setValue] = useState(defaultValue || '');
   const uniqueId = useMemo(getInstanceId, []);
 
@@ -69,9 +67,8 @@ const TableToolbarSearch = ({
     []
   );
 
-  const searchContainerClasses = cx({
+  const searchClasses = cx(className, {
     [searchContainerClass]: searchContainerClass,
-    [`${prefix}--toolbar-action`]: true,
     [`${prefix}--toolbar-search-container-active`]: expanded,
     [`${prefix}--toolbar-search-container-disabled`]: disabled,
     [`${prefix}--toolbar-search-container-expandable`]:
@@ -84,18 +81,11 @@ const TableToolbarSearch = ({
     if (!disabled) {
       if (!controlled && (!persistent || (!persistent && !persistant))) {
         setExpandedState(value);
-        if (value && !expanded) {
-          setFocusTarget(searchRef);
-        }
       }
       if (onExpand) {
         onExpand(event, value);
       }
     }
-  };
-
-  const onClick = (e) => {
-    handleExpand(e, true);
   };
 
   const onChange = (e) => {
@@ -105,35 +95,24 @@ const TableToolbarSearch = ({
     }
   };
 
-  const searchExpanded = expanded || persistent;
-
   return (
-    // eslint-disable-next-line jsx-a11y/no-static-element-interactions
-    <div
-      tabIndex={searchExpanded || disabled ? '-1' : tabIndex}
-      ref={searchRef}
-      onKeyDown={(event) => onClick(event)}
-      onClick={(event) => onClick(event)}
+    <Search
+      disabled={disabled}
+      size="sm"
+      className={searchClasses}
+      value={value}
+      id={typeof id !== 'undefined' ? id : uniqueId.toString()}
+      labelText={labelText || t('carbon.table.toolbar.search.label')}
+      placeholder={
+        placeHolderText ||
+        placeholder ||
+        t('carbon.table.toolbar.search.placeholder')
+      }
+      onChange={onChange}
       onFocus={(event) => handleExpand(event, true)}
       onBlur={(event) => !value && handleExpand(event, false)}
-      className={searchContainerClasses}>
-      <Search
-        disabled={disabled}
-        size="sm"
-        tabIndex={searchExpanded ? tabIndex : '-1'}
-        className={className}
-        value={value}
-        id={typeof id !== 'undefined' ? id : uniqueId.toString()}
-        labelText={labelText || t('carbon.table.toolbar.search.label')}
-        placeholder={
-          placeHolderText ||
-          placeholder ||
-          t('carbon.table.toolbar.search.placeholder')
-        }
-        onChange={onChange}
-        {...rest}
-      />
-    </div>
+      {...rest}
+    />
   );
 };
 

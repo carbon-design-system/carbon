@@ -220,6 +220,11 @@ describe('Tile', () => {
       content.simulate('click');
       expect(onChange).toHaveBeenCalledTimes(2);
     });
+
+    it('supports disabled state', () => {
+      wrapper.setProps({ disabled: true });
+      expect(wrapper.find('input').props().disabled).toEqual(true);
+    });
   });
 
   describe('Renders expandable tile as expected', () => {
