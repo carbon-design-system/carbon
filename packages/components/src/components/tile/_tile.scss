@@ -76,9 +76,22 @@
   }
 
   .#{$prefix}--tile--clickable:hover,
-  .#{$prefix}--tile--clickable:active {
+  .#{$prefix}--tile--clickable:active,
+  .#{$prefix}--tile--clickable:visited,
+  .#{$prefix}--tile--clickable:visited:hover {
     color: $text-01;
     text-decoration: none;
+  }
+
+  // Disabled ClickableTile
+  .#{$prefix}--tile--clickable.#{$prefix}--link--disabled {
+    color: $disabled-02;
+  }
+
+  .#{$prefix}--tile--clickable:hover.#{$prefix}--link--disabled {
+    display: block;
+    color: $disabled-02;
+    background-color: $disabled-01;
   }
 
   .#{$prefix}--tile--selectable {
@@ -196,10 +209,7 @@
     opacity: 1;
   }
 
-  .#{$prefix}--tile-input:checked
-    + .#{$prefix}--tile
-    > .#{$prefix}--tile__checkmark
-    svg {
+  .#{$prefix}--tile--is-selected .#{$prefix}--tile__checkmark svg {
     fill: $ui-05;
 
     // Windows, Firefox HCM Fix
@@ -221,6 +231,26 @@
 
   .#{$prefix}--tile-input:focus + .#{$prefix}--tile {
     @include focus-outline('outline');
+  }
+
+  .#{$prefix}--tile--disabled.#{$prefix}--tile--selectable {
+    color: $disabled-02;
+    background-color: $ui-01;
+    cursor: not-allowed;
+  }
+
+  .#{$prefix}--tile--disabled.#{$prefix}--tile--selectable.#{$prefix}--tile--light {
+    background-color: $ui-02;
+  }
+
+  .#{$prefix}--tile--disabled.#{$prefix}--tile--is-selected {
+    outline-color: $disabled-02;
+  }
+
+  .#{$prefix}--tile--disabled.#{$prefix}--tile--is-selected
+    .#{$prefix}--tile__checkmark
+    svg {
+    fill: $disabled-02;
   }
 }
 
