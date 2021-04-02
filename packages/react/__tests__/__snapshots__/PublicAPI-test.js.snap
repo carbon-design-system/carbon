@@ -6404,7 +6404,7 @@ Map {
       },
       "tooltipText": Object {
         "isRequired": true,
-        "type": "string",
+        "type": "node",
       },
     },
   },
