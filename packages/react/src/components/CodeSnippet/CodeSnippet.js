@@ -32,6 +32,7 @@ function CodeSnippet({
   children,
   disabled,
   feedback,
+  feedbackTimeout,
   onClick,
   ariaLabel,
   copyLabel, //TODO: Merge this prop to `ariaLabel` in `v11`
@@ -181,7 +182,8 @@ function CodeSnippet({
         aria-label={copyLabel || ariaLabel}
         aria-describedby={uid}
         className={codeSnippetClasses}
-        feedback={feedback}>
+        feedback={feedback}
+        feedbackTimeout={feedbackTimeout}>
         <code id={uid}>{children}</code>
       </Copy>
     );
@@ -245,6 +247,7 @@ function CodeSnippet({
           disabled={disabled}
           onClick={handleCopyClick}
           feedback={feedback}
+          feedbackTimeout={feedbackTimeout}
           iconDescription={copyButtonDescription}
         />
       )}
@@ -307,6 +310,11 @@ CodeSnippet.propTypes = {
    * Specify the string displayed when the snippet is copied
    */
   feedback: PropTypes.string,
+
+  /**
+   * Specify the time it takes for the feedback message to timeout
+   */
+  feedbackTimeout: PropTypes.number,
 
   /**
    * Specify whether or not a copy button should be used/rendered.

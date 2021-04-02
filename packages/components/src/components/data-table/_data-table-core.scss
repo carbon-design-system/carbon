@@ -70,7 +70,7 @@
 
   .#{$prefix}--data-table tr {
     width: 100%;
-    height: $layout-04;
+    height: $spacing-09;
     border: none;
   }
 
@@ -139,6 +139,19 @@
       // Fix to show borders in ff
       background-clip: padding-box;
     }
+  }
+
+  // Form Control Overrides
+  .#{$prefix}--list-box input[role='combobox'],
+  .#{$prefix}--list-box input[type='text'],
+  .#{$prefix}--dropdown,
+  .#{$prefix}--list-box,
+  .#{$prefix}--number input[type='number'],
+  .#{$prefix}--number__control-btn::before,
+  .#{$prefix}--number__control-btn::after,
+  .#{$prefix}--text-input,
+  .#{$prefix}--select-input {
+    background-color: $field-02;
   }
 
   // Overflow Menu Overrides
@@ -319,7 +332,6 @@
 
   .#{$prefix}--data-table--tall thead th.#{$prefix}--table-expand,
   .#{$prefix}--data-table--tall tbody td.#{$prefix}--table-expand {
-    width: rem(64px);
     height: rem(64px);
   }
 
@@ -532,7 +544,6 @@
 
   .#{$prefix}--data-table--sticky-header {
     display: block;
-    // max-height: rem(300px);
     overflow-y: scroll;
 
     thead,
@@ -586,10 +597,6 @@
     .#{$prefix}--parent-row {
       min-height: 3rem;
     }
-
-    // .#{$prefix}--parent-row td {
-    //   padding: 1rem;
-    // }
 
     &:not(.#{$prefix}--data-table--compact):not(.#{$prefix}--data-table--tall):not(.#{$prefix}--data-table--short)
       td:not(.#{$prefix}--table-column-menu):not(.#{$prefix}--table-column-checkbox) {

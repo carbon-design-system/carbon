@@ -1885,6 +1885,7 @@ exports[`DataTable should render 1`] = `
                   </TableToolbarAction>
                 </TableToolbarMenu>
                 <Button
+                  dangerDescription="danger"
                   disabled={false}
                   kind="primary"
                   onClick={[MockFunction]}
@@ -2044,6 +2045,7 @@ exports[`DataTable should render 1`] = `
                     }
                   >
                     <Button
+                      dangerDescription="danger"
                       disabled={false}
                       kind="primary"
                       onClick={[MockFunction]}
@@ -2060,6 +2062,7 @@ exports[`DataTable should render 1`] = `
                       type="button"
                     >
                       <button
+                        aria-describedby={null}
                         aria-pressed={null}
                         className="bx--btn bx--btn--primary"
                         disabled={false}
@@ -2121,6 +2124,7 @@ exports[`DataTable should render 1`] = `
                     }
                   >
                     <Button
+                      dangerDescription="danger"
                       disabled={false}
                       kind="primary"
                       onClick={[MockFunction]}
@@ -2137,6 +2141,7 @@ exports[`DataTable should render 1`] = `
                       type="button"
                     >
                       <button
+                        aria-describedby={null}
                         aria-pressed={null}
                         className="bx--btn bx--btn--primary"
                         disabled={false}
@@ -2198,6 +2203,7 @@ exports[`DataTable should render 1`] = `
                     }
                   >
                     <Button
+                      dangerDescription="danger"
                       disabled={false}
                       kind="primary"
                       onClick={[MockFunction]}
@@ -2214,6 +2220,7 @@ exports[`DataTable should render 1`] = `
                       type="button"
                     >
                       <button
+                        aria-describedby={null}
                         aria-pressed={null}
                         className="bx--btn bx--btn--primary"
                         disabled={false}
@@ -2267,6 +2274,7 @@ exports[`DataTable should render 1`] = `
                   </TableBatchAction>
                   <Button
                     className="bx--batch-summary__cancel"
+                    dangerDescription="danger"
                     disabled={false}
                     kind="primary"
                     onClick={[Function]}
@@ -2277,6 +2285,7 @@ exports[`DataTable should render 1`] = `
                     type="button"
                   >
                     <button
+                      aria-describedby={null}
                       aria-pressed={null}
                       className="bx--batch-summary__cancel bx--btn bx--btn--primary"
                       disabled={false}
@@ -2306,113 +2315,109 @@ exports[`DataTable should render 1`] = `
                 tabIndex="0"
                 translateWithId={[Function]}
               >
-                <div
-                  className="bx--toolbar-action bx--toolbar-search-container-persistent"
+                <Search
+                  className="bx--toolbar-search-container-persistent"
+                  closeButtonLabelText="Clear search input"
+                  id="custom-id"
+                  labelText="Filter table"
                   onBlur={[Function]}
-                  onClick={[Function]}
+                  onChange={[Function]}
                   onFocus={[Function]}
-                  onKeyDown={[Function]}
-                  tabIndex="-1"
+                  placeholder="Filter table"
+                  size="sm"
+                  tabIndex="0"
+                  type="text"
+                  value=""
                 >
-                  <Search
-                    closeButtonLabelText="Clear search input"
-                    id="custom-id"
-                    labelText="Filter table"
-                    onChange={[Function]}
-                    placeholder="Filter table"
-                    size="sm"
-                    tabIndex="0"
-                    type="text"
-                    value=""
+                  <div
+                    aria-labelledby="custom-id-search"
+                    className="bx--search bx--search--sm bx--toolbar-search-container-persistent"
+                    role="search"
                   >
-                    <div
-                      aria-labelledby="custom-id-search"
-                      className="bx--search bx--search--sm"
-                      role="search"
+                    <ForwardRef(Search16)
+                      className="bx--search-magnifier"
                     >
-                      <ForwardRef(Search16)
+                      <Icon
                         className="bx--search-magnifier"
+                        fill="currentColor"
+                        height={16}
+                        preserveAspectRatio="xMidYMid meet"
+                        viewBox="0 0 16 16"
+                        width={16}
+                        xmlns="http://www.w3.org/2000/svg"
                       >
-                        <Icon
+                        <svg
+                          aria-hidden={true}
                           className="bx--search-magnifier"
                           fill="currentColor"
+                          focusable="false"
                           height={16}
                           preserveAspectRatio="xMidYMid meet"
                           viewBox="0 0 16 16"
                           width={16}
                           xmlns="http://www.w3.org/2000/svg"
                         >
+                          <path
+                            d="M15,14.3L10.7,10c1.9-2.3,1.6-5.8-0.7-7.7S4.2,0.7,2.3,3S0.7,8.8,3,10.7c2,1.7,5,1.7,7,0l4.3,4.3L15,14.3z M2,6.5	C2,4,4,2,6.5,2S11,4,11,6.5S9,11,6.5,11S2,9,2,6.5z"
+                          />
+                        </svg>
+                      </Icon>
+                    </ForwardRef(Search16)>
+                    <label
+                      className="bx--label"
+                      htmlFor="custom-id"
+                      id="custom-id-search"
+                    >
+                      Filter table
+                    </label>
+                    <input
+                      autoComplete="off"
+                      className="bx--search-input"
+                      id="custom-id"
+                      onBlur={[Function]}
+                      onChange={[Function]}
+                      onFocus={[Function]}
+                      onKeyDown={[Function]}
+                      placeholder="Filter table"
+                      role="searchbox"
+                      tabIndex="0"
+                      type="text"
+                      value=""
+                    />
+                    <button
+                      aria-label="Clear search input"
+                      className="bx--search-close bx--search-close--hidden"
+                      onClick={[Function]}
+                      type="button"
+                    >
+                      <ForwardRef(Close16)>
+                        <Icon
+                          fill="currentColor"
+                          height={16}
+                          preserveAspectRatio="xMidYMid meet"
+                          viewBox="0 0 32 32"
+                          width={16}
+                          xmlns="http://www.w3.org/2000/svg"
+                        >
                           <svg
                             aria-hidden={true}
-                            className="bx--search-magnifier"
                             fill="currentColor"
                             focusable="false"
-                            height={16}
-                            preserveAspectRatio="xMidYMid meet"
-                            viewBox="0 0 16 16"
-                            width={16}
-                            xmlns="http://www.w3.org/2000/svg"
-                          >
-                            <path
-                              d="M15,14.3L10.7,10c1.9-2.3,1.6-5.8-0.7-7.7S4.2,0.7,2.3,3S0.7,8.8,3,10.7c2,1.7,5,1.7,7,0l4.3,4.3L15,14.3z M2,6.5	C2,4,4,2,6.5,2S11,4,11,6.5S9,11,6.5,11S2,9,2,6.5z"
-                            />
-                          </svg>
-                        </Icon>
-                      </ForwardRef(Search16)>
-                      <label
-                        className="bx--label"
-                        htmlFor="custom-id"
-                        id="custom-id-search"
-                      >
-                        Filter table
-                      </label>
-                      <input
-                        autoComplete="off"
-                        className="bx--search-input"
-                        id="custom-id"
-                        onChange={[Function]}
-                        onKeyDown={[Function]}
-                        placeholder="Filter table"
-                        role="searchbox"
-                        tabIndex="0"
-                        type="text"
-                        value=""
-                      />
-                      <button
-                        aria-label="Clear search input"
-                        className="bx--search-close bx--search-close--hidden"
-                        onClick={[Function]}
-                        type="button"
-                      >
-                        <ForwardRef(Close16)>
-                          <Icon
-                            fill="currentColor"
                             height={16}
                             preserveAspectRatio="xMidYMid meet"
                             viewBox="0 0 32 32"
                             width={16}
                             xmlns="http://www.w3.org/2000/svg"
                           >
-                            <svg
-                              aria-hidden={true}
-                              fill="currentColor"
-                              focusable="false"
-                              height={16}
-                              preserveAspectRatio="xMidYMid meet"
-                              viewBox="0 0 32 32"
-                              width={16}
-                              xmlns="http://www.w3.org/2000/svg"
-                            >
-                              <path
-                                d="M24 9.4L22.6 8 16 14.6 9.4 8 8 9.4 14.6 16 8 22.6 9.4 24 16 17.4 22.6 24 24 22.6 17.4 16 24 9.4z"
-                              />
-                            </svg>
-                          </Icon>
-                        </ForwardRef(Close16)>
-                      </button>
-                    </div>
-                  </Search>
-                </div>
+                            <path
+                              d="M24 9.4L22.6 8 16 14.6 9.4 8 8 9.4 14.6 16 8 22.6 9.4 24 16 17.4 22.6 24 24 22.6 17.4 16 24 9.4z"
+                            />
+                          </svg>
+                        </Icon>
+                      </ForwardRef(Close16)>
+                    </button>
+                  </div>
+                </Search>
               </TableToolbarSearch>
               <TableToolbarMenu
                 iconDescription="Settings"
@@ -2525,6 +2530,7 @@ exports[`DataTable should render 1`] = `
                 </ForwardRef(OverflowMenu)>
               </TableToolbarMenu>
               <Button
+                dangerDescription="danger"
                 disabled={false}
                 kind="primary"
                 onClick={[MockFunction]}
@@ -2535,6 +2541,7 @@ exports[`DataTable should render 1`] = `
                 type="button"
               >
                 <button
+                  aria-describedby={null}
                   aria-pressed={null}
                   className="bx--btn bx--btn--sm bx--btn--primary"
                   disabled={false}
@@ -2913,6 +2920,7 @@ exports[`DataTable sticky header should render 1`] = `
                   </TableToolbarAction>
                 </TableToolbarMenu>
                 <Button
+                  dangerDescription="danger"
                   disabled={false}
                   kind="primary"
                   onClick={[MockFunction]}
@@ -3075,6 +3083,7 @@ exports[`DataTable sticky header should render 1`] = `
                     }
                   >
                     <Button
+                      dangerDescription="danger"
                       disabled={false}
                       kind="primary"
                       onClick={[MockFunction]}
@@ -3091,6 +3100,7 @@ exports[`DataTable sticky header should render 1`] = `
                       type="button"
                     >
                       <button
+                        aria-describedby={null}
                         aria-pressed={null}
                         className="bx--btn bx--btn--primary"
                         disabled={false}
@@ -3152,6 +3162,7 @@ exports[`DataTable sticky header should render 1`] = `
                     }
                   >
                     <Button
+                      dangerDescription="danger"
                       disabled={false}
                       kind="primary"
                       onClick={[MockFunction]}
@@ -3168,6 +3179,7 @@ exports[`DataTable sticky header should render 1`] = `
                       type="button"
                     >
                       <button
+                        aria-describedby={null}
                         aria-pressed={null}
                         className="bx--btn bx--btn--primary"
                         disabled={false}
@@ -3229,6 +3241,7 @@ exports[`DataTable sticky header should render 1`] = `
                     }
                   >
                     <Button
+                      dangerDescription="danger"
                       disabled={false}
                       kind="primary"
                       onClick={[MockFunction]}
@@ -3245,6 +3258,7 @@ exports[`DataTable sticky header should render 1`] = `
                       type="button"
                     >
                       <button
+                        aria-describedby={null}
                         aria-pressed={null}
                         className="bx--btn bx--btn--primary"
                         disabled={false}
@@ -3298,6 +3312,7 @@ exports[`DataTable sticky header should render 1`] = `
                   </TableBatchAction>
                   <Button
                     className="bx--batch-summary__cancel"
+                    dangerDescription="danger"
                     disabled={false}
                     kind="primary"
                     onClick={[Function]}
@@ -3308,6 +3323,7 @@ exports[`DataTable sticky header should render 1`] = `
                     type="button"
                   >
                     <button
+                      aria-describedby={null}
                       aria-pressed={null}
                       className="bx--batch-summary__cancel bx--btn bx--btn--primary"
                       disabled={false}
@@ -3337,113 +3353,109 @@ exports[`DataTable sticky header should render 1`] = `
                 tabIndex="0"
                 translateWithId={[Function]}
               >
-                <div
-                  className="bx--toolbar-action bx--toolbar-search-container-persistent"
+                <Search
+                  className="bx--toolbar-search-container-persistent"
+                  closeButtonLabelText="Clear search input"
+                  id="custom-id"
+                  labelText="Filter table"
                   onBlur={[Function]}
-                  onClick={[Function]}
+                  onChange={[Function]}
                   onFocus={[Function]}
-                  onKeyDown={[Function]}
-                  tabIndex="-1"
+                  placeholder="Filter table"
+                  size="sm"
+                  tabIndex="0"
+                  type="text"
+                  value=""
                 >
-                  <Search
-                    closeButtonLabelText="Clear search input"
-                    id="custom-id"
-                    labelText="Filter table"
-                    onChange={[Function]}
-                    placeholder="Filter table"
-                    size="sm"
-                    tabIndex="0"
-                    type="text"
-                    value=""
+                  <div
+                    aria-labelledby="custom-id-search"
+                    className="bx--search bx--search--sm bx--toolbar-search-container-persistent"
+                    role="search"
                   >
-                    <div
-                      aria-labelledby="custom-id-search"
-                      className="bx--search bx--search--sm"
-                      role="search"
+                    <ForwardRef(Search16)
+                      className="bx--search-magnifier"
                     >
-                      <ForwardRef(Search16)
+                      <Icon
                         className="bx--search-magnifier"
+                        fill="currentColor"
+                        height={16}
+                        preserveAspectRatio="xMidYMid meet"
+                        viewBox="0 0 16 16"
+                        width={16}
+                        xmlns="http://www.w3.org/2000/svg"
                       >
-                        <Icon
+                        <svg
+                          aria-hidden={true}
                           className="bx--search-magnifier"
                           fill="currentColor"
+                          focusable="false"
                           height={16}
                           preserveAspectRatio="xMidYMid meet"
                           viewBox="0 0 16 16"
                           width={16}
                           xmlns="http://www.w3.org/2000/svg"
                         >
+                          <path
+                            d="M15,14.3L10.7,10c1.9-2.3,1.6-5.8-0.7-7.7S4.2,0.7,2.3,3S0.7,8.8,3,10.7c2,1.7,5,1.7,7,0l4.3,4.3L15,14.3z M2,6.5	C2,4,4,2,6.5,2S11,4,11,6.5S9,11,6.5,11S2,9,2,6.5z"
+                          />
+                        </svg>
+                      </Icon>
+                    </ForwardRef(Search16)>
+                    <label
+                      className="bx--label"
+                      htmlFor="custom-id"
+                      id="custom-id-search"
+                    >
+                      Filter table
+                    </label>
+                    <input
+                      autoComplete="off"
+                      className="bx--search-input"
+                      id="custom-id"
+                      onBlur={[Function]}
+                      onChange={[Function]}
+                      onFocus={[Function]}
+                      onKeyDown={[Function]}
+                      placeholder="Filter table"
+                      role="searchbox"
+                      tabIndex="0"
+                      type="text"
+                      value=""
+                    />
+                    <button
+                      aria-label="Clear search input"
+                      className="bx--search-close bx--search-close--hidden"
+                      onClick={[Function]}
+                      type="button"
+                    >
+                      <ForwardRef(Close16)>
+                        <Icon
+                          fill="currentColor"
+                          height={16}
+                          preserveAspectRatio="xMidYMid meet"
+                          viewBox="0 0 32 32"
+                          width={16}
+                          xmlns="http://www.w3.org/2000/svg"
+                        >
                           <svg
                             aria-hidden={true}
-                            className="bx--search-magnifier"
                             fill="currentColor"
                             focusable="false"
-                            height={16}
-                            preserveAspectRatio="xMidYMid meet"
-                            viewBox="0 0 16 16"
-                            width={16}
-                            xmlns="http://www.w3.org/2000/svg"
-                          >
-                            <path
-                              d="M15,14.3L10.7,10c1.9-2.3,1.6-5.8-0.7-7.7S4.2,0.7,2.3,3S0.7,8.8,3,10.7c2,1.7,5,1.7,7,0l4.3,4.3L15,14.3z M2,6.5	C2,4,4,2,6.5,2S11,4,11,6.5S9,11,6.5,11S2,9,2,6.5z"
-                            />
-                          </svg>
-                        </Icon>
-                      </ForwardRef(Search16)>
-                      <label
-                        className="bx--label"
-                        htmlFor="custom-id"
-                        id="custom-id-search"
-                      >
-                        Filter table
-                      </label>
-                      <input
-                        autoComplete="off"
-                        className="bx--search-input"
-                        id="custom-id"
-                        onChange={[Function]}
-                        onKeyDown={[Function]}
-                        placeholder="Filter table"
-                        role="searchbox"
-                        tabIndex="0"
-                        type="text"
-                        value=""
-                      />
-                      <button
-                        aria-label="Clear search input"
-                        className="bx--search-close bx--search-close--hidden"
-                        onClick={[Function]}
-                        type="button"
-                      >
-                        <ForwardRef(Close16)>
-                          <Icon
-                            fill="currentColor"
                             height={16}
                             preserveAspectRatio="xMidYMid meet"
                             viewBox="0 0 32 32"
                             width={16}
                             xmlns="http://www.w3.org/2000/svg"
                           >
-                            <svg
-                              aria-hidden={true}
-                              fill="currentColor"
-                              focusable="false"
-                              height={16}
-                              preserveAspectRatio="xMidYMid meet"
-                              viewBox="0 0 32 32"
-                              width={16}
-                              xmlns="http://www.w3.org/2000/svg"
-                            >
-                              <path
-                                d="M24 9.4L22.6 8 16 14.6 9.4 8 8 9.4 14.6 16 8 22.6 9.4 24 16 17.4 22.6 24 24 22.6 17.4 16 24 9.4z"
-                              />
-                            </svg>
-                          </Icon>
-                        </ForwardRef(Close16)>
-                      </button>
-                    </div>
-                  </Search>
-                </div>
+                            <path
+                              d="M24 9.4L22.6 8 16 14.6 9.4 8 8 9.4 14.6 16 8 22.6 9.4 24 16 17.4 22.6 24 24 22.6 17.4 16 24 9.4z"
+                            />
+                          </svg>
+                        </Icon>
+                      </ForwardRef(Close16)>
+                    </button>
+                  </div>
+                </Search>
               </TableToolbarSearch>
               <TableToolbarMenu
                 iconDescription="Settings"
@@ -3556,6 +3568,7 @@ exports[`DataTable sticky header should render 1`] = `
                 </ForwardRef(OverflowMenu)>
               </TableToolbarMenu>
               <Button
+                dangerDescription="danger"
                 disabled={false}
                 kind="primary"
                 onClick={[MockFunction]}
@@ -3566,6 +3579,7 @@ exports[`DataTable sticky header should render 1`] = `
                 type="button"
               >
                 <button
+                  aria-describedby={null}
                   aria-pressed={null}
                   className="bx--btn bx--btn--sm bx--btn--primary"
                   disabled={false}

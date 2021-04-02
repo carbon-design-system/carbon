@@ -7,6 +7,8 @@
 import React from 'react';
 import { action } from '@storybook/addon-actions';
 import Link from '../../Link';
+import Select from '../../Select';
+import SelectItem from '../../SelectItem';
 
 export const rows = [
   {
@@ -17,6 +19,12 @@ export const rows = [
     rule: 'Round robin',
     attached_groups: 'Kevin’s VM Groups',
     status: <Link>Disabled</Link>,
+    foo: (
+      <Select id="bar" noLabel size="sm">
+        <SelectItem value={1} text="1" />
+        <SelectItem value={2} text="2" />
+      </Select>
+    ),
   },
   {
     id: 'b',
@@ -26,6 +34,12 @@ export const rows = [
     rule: 'Round robin',
     attached_groups: 'Maureen’s VM Groups',
     status: <Link>Starting</Link>,
+    foo: (
+      <Select id="bar" noLabel size="sm">
+        <SelectItem value={1} text="1" />
+        <SelectItem value={2} text="2" />
+      </Select>
+    ),
   },
   {
     id: 'c',
@@ -35,6 +49,12 @@ export const rows = [
     rule: 'DNS delegation',
     attached_groups: 'Andrew’s VM Groups',
     status: <Link>Active</Link>,
+    foo: (
+      <Select id="bar" noLabel size="sm">
+        <SelectItem value={1} text="1" />
+        <SelectItem value={2} text="2" />
+      </Select>
+    ),
   },
   {
     id: 'd',
@@ -44,6 +64,12 @@ export const rows = [
     rule: 'Round robin',
     attached_groups: 'Marc’s VM Groups',
     status: <Link>Disabled</Link>,
+    foo: (
+      <Select id="bar" noLabel size="sm">
+        <SelectItem value={1} text="1" />
+        <SelectItem value={2} text="2" />
+      </Select>
+    ),
   },
   {
     id: 'e',
@@ -53,6 +79,12 @@ export const rows = [
     rule: 'Round robin',
     attached_groups: 'Mel’s VM Groups',
     status: <Link>Starting</Link>,
+    foo: (
+      <Select id="bar" noLabel size="sm">
+        <SelectItem value={1} text="1" />
+        <SelectItem value={2} text="2" />
+      </Select>
+    ),
   },
   {
     id: 'f',
@@ -62,6 +94,12 @@ export const rows = [
     rule: 'DNS delegation',
     attached_groups: 'Ronja’s VM Groups',
     status: <Link>Active</Link>,
+    foo: (
+      <Select id="bar" noLabel size="sm">
+        <SelectItem value={1} text="1" />
+        <SelectItem value={2} text="2" />
+      </Select>
+    ),
   },
 ];
 
@@ -89,6 +127,10 @@ export const headers = [
   {
     key: 'status',
     header: 'Status',
+  },
+  {
+    key: 'foo',
+    header: 'foo',
   },
 ];
 
