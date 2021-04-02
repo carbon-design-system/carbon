@@ -41,7 +41,8 @@ const props = () => ({
   ),
   disabled: boolean('Disabled (disabled)', false),
   light: boolean('Light variant (light)', false),
-  feedback: text('Feedback text', 'Copied to clipboard'),
+  feedback: text('Feedback text (feedback)', 'Copied to clipboard'),
+  feedbackTimeout: number('Feedback text timout (feedbackTimeout)', 2000),
   showMoreText: text('Text for "show more" button', 'Show more'),
   showLessText: text('Text for "show less" button', 'Show less'),
   hideCopyButton: boolean('Hide copy button (hideCopyButton)', false),
@@ -56,6 +57,14 @@ const props = () => ({
   maxExpandedNumberOfRows: number(
     'maxExpandedNumberOfRows: Specify the maximum number of rows to be shown when in expanded view',
     0
+  ),
+  minCollapsedNumberOfRows: number(
+    'minCollapsedNumberOfRows: Specify the minimum number of rows to be shown when in collapsed view',
+    3
+  ),
+  minExpandedNumberOfRows: number(
+    'minExpandedNumberOfRows: Specify the minimum number of rows to be shown when in expanded view',
+    16
   ),
 });
 
