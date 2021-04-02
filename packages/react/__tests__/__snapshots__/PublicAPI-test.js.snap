@@ -146,6 +146,7 @@ Map {
   "Button" => Object {
     "$$typeof": Symbol(react.forward_ref),
     "defaultProps": Object {
+      "dangerDescription": "danger",
       "disabled": false,
       "kind": "primary",
       "size": "default",
@@ -176,6 +177,9 @@ Map {
         "type": "node",
       },
       "className": Object {
+        "type": "string",
+      },
+      "dangerDescription": Object {
         "type": "string",
       },
       "disabled": Object {
@@ -390,6 +394,12 @@ Map {
         "type": "number",
       },
       "maxExpandedNumberOfRows": Object {
+        "type": "number",
+      },
+      "minCollapsedNumberOfRows": Object {
+        "type": "number",
+      },
+      "minExpandedNumberOfRows": Object {
         "type": "number",
       },
       "onClick": Object {
@@ -6394,7 +6404,7 @@ Map {
       },
       "tooltipText": Object {
         "isRequired": true,
-        "type": "string",
+        "type": "node",
       },
     },
   },
@@ -7682,6 +7692,15 @@ Map {
         "disabled": Object {
           "type": "bool",
         },
+        "kind": Object {
+          "args": Array [
+            Array [
+              "default",
+              "danger",
+            ],
+          ],
+          "type": "oneOf",
+        },
         "label": Object {
           "isRequired": true,
           "type": "node",
@@ -7768,6 +7787,15 @@ Map {
       },
       "disabled": Object {
         "type": "bool",
+      },
+      "kind": Object {
+        "args": Array [
+          Array [
+            "default",
+            "danger",
+          ],
+        ],
+        "type": "oneOf",
       },
       "label": Object {
         "isRequired": true,
