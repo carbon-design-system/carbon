@@ -25,6 +25,7 @@ exports[`ModalWrapper should render 1`] = `
   >
     <Button
       className="btn-trigger"
+      dangerDescription="danger"
       disabled={false}
       iconDescription="Provide icon description if icon is used"
       kind="primary"
@@ -36,6 +37,7 @@ exports[`ModalWrapper should render 1`] = `
       type="button"
     >
       <button
+        aria-describedby={null}
         aria-pressed={null}
         className="btn-trigger bx--btn bx--btn--primary"
         disabled={false}
@@ -166,6 +168,7 @@ exports[`ModalWrapper should render 1`] = `
             >
               <SecondaryButtonSet>
                 <Button
+                  dangerDescription="danger"
                   disabled={false}
                   kind="secondary"
                   onClick={[Function]}
@@ -176,6 +179,7 @@ exports[`ModalWrapper should render 1`] = `
                   type="button"
                 >
                   <button
+                    aria-describedby={null}
                     aria-pressed={null}
                     className="bx--btn bx--btn--secondary"
                     disabled={false}
@@ -192,6 +196,7 @@ exports[`ModalWrapper should render 1`] = `
                 </Button>
               </SecondaryButtonSet>
               <Button
+                dangerDescription="danger"
                 disabled={false}
                 kind="primary"
                 onClick={[Function]}
@@ -202,6 +207,7 @@ exports[`ModalWrapper should render 1`] = `
                 type="button"
               >
                 <button
+                  aria-describedby={null}
                   aria-pressed={null}
                   className="bx--btn bx--btn--primary"
                   disabled={false}
