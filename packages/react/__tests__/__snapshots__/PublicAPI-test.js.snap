@@ -396,6 +396,12 @@ Map {
       "maxExpandedNumberOfRows": Object {
         "type": "number",
       },
+      "minCollapsedNumberOfRows": Object {
+        "type": "number",
+      },
+      "minExpandedNumberOfRows": Object {
+        "type": "number",
+      },
       "onClick": Object {
         "type": "func",
       },
