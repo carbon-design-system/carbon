@@ -226,16 +226,16 @@ export function SelectableTile(props) {
   });
 
   // TODO: rename to handleClick when handleClick prop is deprecated
-  const handleOnClick = (evt) => {
+  function handleOnClick(evt) {
     evt.preventDefault();
     evt.persist();
     setIsSelected(!isSelected);
     clickHandler(evt);
     onChange(evt);
-  };
+  }
 
   // TODO: rename to handleKeyDown when handleKeyDown prop is deprecated
-  const handleOnKeyDown = (evt) => {
+  function handleOnKeyDown(evt) {
     evt.persist();
     if (matches(evt, [keys.Enter, keys.Space])) {
       evt.preventDefault();
@@ -243,12 +243,12 @@ export function SelectableTile(props) {
       onChange(evt);
     }
     keyDownHandler(evt);
-  };
+  }
 
-  const handleChange = (event) => {
+  function handleChange(event) {
     setIsSelected(event.target.checked);
     onChange(event);
-  };
+  }
 
   useEffect(() => {
     setIsSelected(selected);
