@@ -21,12 +21,13 @@
   "publishConfig": {
     "access": "public"
   },
-  "dependencies": {
-    "@babel/core": "^7.12.13"
-  },
   "devDependencies": {
+    "@babel/core": "^7.12.13",
+    "@babel/generator": "^7.13.9",
     "@babel/preset-env": "^7.10.0",
     "@babel/preset-react": "^7.10.0",
+    "@babel/template": "^7.12.13",
+    "@babel/types": "^7.13.14",
     "@carbon/cli-reporter": "^10.4.0",
     "@carbon/icon-helpers": "^10.15.0",
     "@rollup/plugin-babel": "^5.2.2",
@@ -46,6 +47,7 @@
     "rimraf": "^3.0.0",
     "rollup": "^2.38.0",
     "rollup-plugin-strip-banner": "^2.0.0",
+    "svg-parser": "^2.0.4",
     "svgo": "^1.1.1"
   }
 }
