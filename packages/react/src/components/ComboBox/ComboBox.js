@@ -150,7 +150,7 @@ const ComboBox = (props) => {
     if (onInputChange) {
       onInputChange(inputValue);
     }
-  });
+  }, [onInputChange, inputValue]);
 
   const handleSelectionClear = () => {
     if (textInput?.current) {
