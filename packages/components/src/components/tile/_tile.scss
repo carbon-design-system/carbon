@@ -83,6 +83,7 @@
 
   .#{$prefix}--tile--selectable {
     padding-right: $carbon--spacing-09;
+    border: 1px solid transparent;
   }
 
   .#{$prefix}--tile__checkmark,
@@ -196,6 +197,10 @@
       fill: ButtonText;
     }
   }
+
+  // .#{$prefix}--tile--selectable {
+  //   border: 1px solid transparent;
+  // }
 
   // Fix double border
   .#{$prefix}--tile-input--checked + .#{$prefix}--tile--is-selected {
