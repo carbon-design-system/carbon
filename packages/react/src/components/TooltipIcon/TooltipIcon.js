@@ -180,7 +180,7 @@ TooltipIcon.propTypes = {
    * Provide the ARIA label for the tooltip.
    * TODO: rename this prop (will be a breaking change)
    */
-  tooltipText: PropTypes.string.isRequired,
+  tooltipText: PropTypes.node.isRequired,
 };
 
 TooltipIcon.defaultProps = {
