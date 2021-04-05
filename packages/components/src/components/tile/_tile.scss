@@ -198,10 +198,6 @@
     }
   }
 
-  // .#{$prefix}--tile--selectable {
-  //   border: 1px solid transparent;
-  // }
-
   // Fix double border
   .#{$prefix}--tile-input--checked + .#{$prefix}--tile--is-selected {
     border-top: 1px solid $ui-01;
