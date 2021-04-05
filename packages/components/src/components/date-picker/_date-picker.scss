@@ -13,6 +13,8 @@
 @import '../form/form';
 @import 'flatpickr.scss';
 
+@include flatpickr;
+
 /// Date picker styles
 /// @access private
 /// @group date-picker
