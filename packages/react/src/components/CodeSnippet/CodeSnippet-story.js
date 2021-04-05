@@ -75,7 +75,7 @@ const snippetText = () => ({
 const props = () => ({
   disabled: boolean('Disabled (disabled)', false),
   light: boolean('Light variant (light)', false),
-  feedback: text('Feedback text (feedback)', 'Copied to clipboard'),
+  feedback: text('Feedback text (feedback)', 'Copied'),
   feedbackTimeout: number('Feedback text timeout (feedbackTimeout)', 2000),
   showMoreText: text('Text for "show more" button (showMoreText)', 'Show more'),
   showLessText: text('Text for "show less" button (showLessText)', 'Show less'),
