@@ -141,6 +141,19 @@
     }
   }
 
+  // Form Control Overrides
+  .#{$prefix}--list-box input[role='combobox'],
+  .#{$prefix}--list-box input[type='text'],
+  .#{$prefix}--dropdown,
+  .#{$prefix}--list-box,
+  .#{$prefix}--number input[type='number'],
+  .#{$prefix}--number__control-btn::before,
+  .#{$prefix}--number__control-btn::after,
+  .#{$prefix}--text-input,
+  .#{$prefix}--select-input {
+    background-color: $field-02;
+  }
+
   // Overflow Menu Overrides
   .#{$prefix}--data-table
     td.#{$prefix}--table-column-menu
