@@ -30,7 +30,7 @@
   },
   "scripts": {
     "build": "yarn clean && node tasks/build.js",
-    "clean": "rimraf es lib umd"
+    "clean": "rimraf es lib umd next"
   },
   "peerDependencies": {
     "react": ">=16"
@@ -41,7 +41,8 @@
   },
   "devDependencies": {
     "@carbon/icon-build-helpers": "^0.18.0",
-    "@carbon/icons": "^10.29.0"
+    "@carbon/icons": "^10.29.0",
+    "rimraf": "^3.0.2"
   },
   "sideEffects": false
 }
