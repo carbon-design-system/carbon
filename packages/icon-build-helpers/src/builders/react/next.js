@@ -222,7 +222,16 @@ function createIconSource(moduleName, sizes, isDeprecated, reason) {
         : null,
       ...ifStatements.map(({ size, source }) => {
         return t.ifStatement(
-          t.binaryExpression('===', t.identifier('size'), jsToAST(size)),
+          t.logicalExpression(
+            '||',
+            t.binaryExpression('===', t.identifier('size'), jsToAST(size)),
+            t.binaryExpression('===', t.identifier('size'), jsToAST('' + size)),
+            t.binaryExpression(
+              '===',
+              t.identifier('size'),
+              jsToAST(`${size}px`)
+            )
+          ),
           t.blockStatement([t.returnStatement(source)])
         );
       }),
