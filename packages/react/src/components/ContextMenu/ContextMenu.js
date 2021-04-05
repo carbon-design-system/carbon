@@ -190,13 +190,27 @@ const ContextMenu = function ContextMenu({
       const correctedPosition = getCorrectedPosition(localDirection);
       setPosition(correctedPosition);
 
+      // Safari emits the click event when preventDefault was called on
+      // the contextmenu event. This is registered by the ClickListener
+      // component and would lead to immediate closing when a user is
+      // triggering the menu with ctrl+click. To prevent this, we only
+      // allow the menu to be closed after the click event was received.
+      // Since other browsers don't emit this event, it's also reset with
+      // a 50ms delay after mouseup event was called.
+
       document.addEventListener(
         'mouseup',
         () => {
-          // wait until mouse button is released before allowing ClickListener
-          // to close context menu as Safari emits 'click' event after 'contextmenu'
-          // event when 'e.preventDefault()' is used on 'contextmenu' and would
-          // otherwise close the menu immediately
+          setTimeout(() => {
+            setCanBeClosed(true);
+          }, 50);
+        },
+        { once: true }
+      );
+
+      document.addEventListener(
+        'click',
+        () => {
           setCanBeClosed(true);
         },
         { once: true }
