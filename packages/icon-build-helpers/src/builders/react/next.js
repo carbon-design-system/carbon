@@ -28,15 +28,54 @@ const templates = require('./next/templates');
 async function builder(metadata, { output }) {
   const modules = metadata.icons.map((icon) => {
     const { moduleInfo } = icon;
+    const localPreamble = [];
+    const globalPreamble = [];
+
+    if (icon.deprecated) {
+      localPreamble.push(
+        templates.deprecatedBlock({
+          check: t.identifier('didWarnAboutDeprecation'),
+          warning: t.stringLiteral(
+            formatDeprecationWarning(moduleInfo.local, icon.reason)
+          ),
+        })
+      );
+
+      globalPreamble.push(
+        templates.deprecatedBlock({
+          check: t.memberExpression(
+            t.identifier('didWarnAboutDeprecation'),
+            t.stringLiteral(moduleInfo.global),
+            true
+          ),
+          warning: t.stringLiteral(
+            formatDeprecationWarning(moduleInfo.global, icon.reason)
+          ),
+        })
+      );
+    }
+
+    const localSource = createIconSource(
+      moduleInfo.local,
+      moduleInfo.sizes,
+      localPreamble
+    );
+
+    const globalSource = createIconSource(
+      moduleInfo.global,
+      moduleInfo.sizes,
+      globalPreamble
+    );
+
     return {
       filepath: moduleInfo.filepath,
-      moduleName: moduleInfo.name,
       entrypoint: createIconEntrypoint(
         moduleInfo.local,
-        moduleInfo.sizes,
-        icon.deprecated,
-        icon.reason
+        localSource,
+        icon.deprecated
       ),
+      name: moduleInfo.global,
+      source: globalSource,
     };
   });
 
@@ -44,13 +83,48 @@ async function builder(metadata, { output }) {
   // creating a bundle. This allows us to map different input paths in the
   // `input` object to files that we're generating for each icon component in
   // the `files` object
-  const files = {};
-  const input = {};
+  const files = {
+    'index.js': template.ast(`
+      import React from 'react';
+      import Icon from './Icon.js';
+      import { iconPropTypes } from './iconPropTypes.js';
+      export { Icon };
+      const didWarnAboutDeprecation = {};
+    `),
+  };
+  const input = {
+    'index.js': 'index.js',
+  };
 
   for (const m of modules) {
     files[m.filepath] = m.entrypoint;
     input[m.filepath] = m.filepath;
+
+    files['index.js'].push(...m.source);
+    files['index.js'].push(template.ast(`export { ${m.name} };`));
   }
+
+  files['index.js'] = t.file(t.program(files['index.js']));
+  files['index.js'] = generate(files['index.js']).code;
+
+  const defaultVirtualOptions = {
+    // Each of our Icon modules use the "./Icon.js" path to import this base
+    // componnet
+    './Icon.js': await fs.readFile(
+      path.resolve(__dirname, './components/Icon.js'),
+      'utf8'
+    ),
+    './iconPropTypes.js': `
+    import PropTypes from 'prop-types';
+
+    export const iconPropTypes = {
+      size: PropTypes.oneOfType([
+        PropTypes.number,
+        PropTypes.string,
+      ]),
+    };
+  `,
+  };
 
   const bundle = await rollup({
     input,
@@ -60,25 +134,35 @@ async function builder(metadata, { output }) {
       // created from our metadata to rollup instead of rollup trying to read
       // these files from disk
       virtual({
-        // Each of our Icon modules use the "./Icon.js" path to import this base
-        // componnet
-        './Icon.js': await fs.readFile(
-          path.resolve(__dirname, './components/Icon.js'),
-          'utf8'
-        ),
-        './iconPropTypes.js': `
-          import PropTypes from 'prop-types';
-
-          export const iconPropTypes = {
-            size: PropTypes.oneOfType([
-              PropTypes.number,
-              PropTypes.string,
-            ]),
-          };
-        `,
+        ...defaultVirtualOptions,
         ...files,
       }),
       babel(babelConfig),
+      // Add a custom plugin to emit a `package.json` file. This includes the
+      // settings for the "main" and "module" entrypoints for packages, along
+      // with the new "exports" field for Node.js v14+
+      //
+      // When this bundle becomes the default, this logic will live in
+      // icons-react/package.json
+      {
+        name: 'generate-package-json',
+        generateBundle() {
+          const packageJson = {
+            main: 'index.js',
+            module: 'index.esm.js',
+            exports: {
+              import: 'index.esm.js',
+              require: 'index.js',
+            },
+          };
+          this.emitFile({
+            type: 'asset',
+            name: 'package.json',
+            fileName: 'package.json',
+            source: JSON.stringify(packageJson, null, 2),
+          });
+        },
+      },
     ],
   });
 
@@ -86,8 +170,29 @@ async function builder(metadata, { output }) {
     dir: path.join(output, 'next'),
     format: 'commonjs',
     entryFileNames: '[name]',
-    banner: templates.BANNER,
-    exports: 'default',
+    banner: templates.banner,
+    exports: 'auto',
+  });
+
+  // We create a separate rollup for our ESM bundle since this will only emit
+  // one file: `index.esm.js`
+  const esmBundle = await rollup({
+    input: 'index.js',
+    external: ['@carbon/icon-helpers', 'react', 'prop-types'],
+    plugins: [
+      virtual({
+        ...defaultVirtualOptions,
+        'index.js': files['index.js'],
+      }),
+      babel(babelConfig),
+    ],
+  });
+
+  await esmBundle.write({
+    file: path.join(output, 'next', 'index.esm.js'),
+    format: 'esm',
+    banner: templates.banner,
+    exports: 'auto',
   });
 }
 
@@ -116,12 +221,11 @@ async function builder(metadata, { output }) {
  * ```
  *
  * @param {string} moduleName
- * @param {Array<object>} sizes
+ * @param {Array<object>} source
  * @param {boolean} [isDeprecated]
- * @param {string} [reason]
  * @returns {string}
  */
-function createIconEntrypoint(moduleName, sizes, isDeprecated = false, reason) {
+function createIconEntrypoint(moduleName, source, isDeprecated = false) {
   const statements = [
     // Import statements
     template.ast(`import React from 'react';`),
@@ -135,8 +239,6 @@ function createIconEntrypoint(moduleName, sizes, isDeprecated = false, reason) {
     statements.push(template.ast(`let didWarnAboutDeprecation = false;`));
   }
 
-  // Create the source for the icon component
-  const source = createIconSource(moduleName, sizes, isDeprecated, reason);
   statements.push(...source);
 
   // Export statement
@@ -145,7 +247,7 @@ function createIconEntrypoint(moduleName, sizes, isDeprecated = false, reason) {
   const file = t.file(t.program(statements));
   const { code } = generate(file);
 
-  return `${templates.BANNER}\n\n${code}`;
+  return code;
 }
 
 /**
@@ -158,10 +260,9 @@ function createIconEntrypoint(moduleName, sizes, isDeprecated = false, reason) {
  *
  * @param {string} moduleName
  * @param {Array<object>} sizes
- * @param {boolean} isDeprecated
- * @param {string} [reason]
+ * @param {Array<object>} [preamble]
  */
-function createIconSource(moduleName, sizes, isDeprecated, reason) {
+function createIconSource(moduleName, sizes, preamble = []) {
   // We map over all of our different asset sizes to generate the JSX needed to
   // render the asset
   const sizeVariants = sizes.map(({ size, ast }) => {
@@ -213,19 +314,22 @@ function createIconSource(moduleName, sizes, isDeprecated, reason) {
     moduleName: t.identifier(moduleName),
     defaultSize: t.numericLiteral(maxSize),
     statements: [
-      isDeprecated
-        ? templates.deprecatedBlock({
-            warning: t.stringLiteral(
-              formatDeprecationWarning(moduleName, reason)
-            ),
-          })
-        : null,
+      ...preamble,
       ...ifStatements.map(({ size, source }) => {
+        // Generate if (size === 16 || size === '16' || size === '16px') {}
+        // block statements to match on numbers or strings
         return t.ifStatement(
           t.logicalExpression(
             '||',
-            t.binaryExpression('===', t.identifier('size'), jsToAST(size)),
-            t.binaryExpression('===', t.identifier('size'), jsToAST('' + size)),
+            t.logicalExpression(
+              '||',
+              t.binaryExpression('===', t.identifier('size'), jsToAST(size)),
+              t.binaryExpression(
+                '===',
+                t.identifier('size'),
+                jsToAST('' + size)
+              )
+            ),
             t.binaryExpression(
               '===',
               t.identifier('size'),

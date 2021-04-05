@@ -50,8 +50,8 @@ const component = template(
 const deprecatedBlock = template(
   `
     if (__DEV__) {
-      if (!didWarnAboutDeprecation) {
-        didWarnAboutDeprecation = true;
+      if (!%%check%%) {
+        %%check%% = true;
         console.warn(%%warning%%);
       }
     }
