@@ -8,30 +8,55 @@
 import { settings } from 'carbon-components';
 import cx from 'classnames';
 import PropTypes from 'prop-types';
-import React from 'react';
+import React, { useContext } from 'react';
+import { useFeatureFlag } from '../FeatureFlags';
 
 const { prefix } = settings;
+
+const GridContext = React.createContext({ hasGridParent: false });
 
 function Grid({
   as: BaseComponent = 'div',
   condensed = false,
   narrow = false,
   fullWidth = false,
+  subgrid,
+  columns = 16,
   className: containerClassName,
   children,
   ...rest
 }) {
-  const className = cx(containerClassName, {
+  const hasCSSGrid = useFeatureFlag('enable-css-grid');
+  const { hasGridParent } = useContext(GridContext);
+  const isSubgrid = subgrid || hasGridParent;
+
+  const cssGridClassNames = {
+    [`${prefix}--css-grid`]: !isSubgrid,
+    [`${prefix}--css-grid--${columns}`]: !isSubgrid && columns !== 16,
+    [`${prefix}--css-grid--condensed`]: condensed,
+    [`${prefix}--css-grid--narrow`]: narrow,
+    [`${prefix}--subgrid`]: isSubgrid,
+    [`${prefix}--col-span-${columns}`]: isSubgrid,
+  };
+
+  const flexGridClassNames = {
     [`${prefix}--grid`]: true,
     [`${prefix}--grid--condensed`]: condensed,
     [`${prefix}--grid--narrow`]: narrow,
     [`${prefix}--grid--full-width`]: fullWidth,
-  });
+  };
+
+  const className = cx(
+    containerClassName,
+    hasCSSGrid ? cssGridClassNames : flexGridClassNames
+  );
 
   return (
-    <BaseComponent className={className} {...rest}>
-      {children}
-    </BaseComponent>
+    <GridContext.Provider value={{ hasGridParent: true }}>
+      <BaseComponent className={className} {...rest}>
+        {children}
+      </BaseComponent>
+    </GridContext.Provider>
   );
 }
 
@@ -52,6 +77,11 @@ Grid.propTypes = {
   className: PropTypes.string,
 
   /**
+   * Specify how many columns wide the Grid should span
+   */
+  columns: PropTypes.number,
+
+  /**
    * Collapse the gutter to 1px. Useful for fluid layouts.
    * Rows have 1px of margin between them to match gutter.
    */
@@ -67,6 +97,12 @@ Grid.propTypes = {
    * typographic alignment with and without containers.
    */
   narrow: PropTypes.bool,
+
+  /**
+   * Specify this grid as a subgrid. This is automatically
+   * applied when a <Grid> is nested inside of a parent <Grid>
+   */
+  subgrid: PropTypes.bool,
 };
 
 export default Grid;

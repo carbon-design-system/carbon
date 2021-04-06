@@ -27,6 +27,7 @@ $prefix: 'bx';
 @import '~carbon-components/scss/globals/scss/css--helpers';
 @import '~carbon-components/scss/globals/scss/css--body';
 @import '~carbon-components/scss/globals/grid/grid';
+@use '@carbon/grid/modules/css-grid';
 @import '~carbon-components/src/globals/scss/functions';
 
 @import '~carbon-components/src/components/accordion/accordion';
