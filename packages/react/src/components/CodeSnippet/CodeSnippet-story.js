@@ -58,6 +58,14 @@ const props = () => ({
     'maxExpandedNumberOfRows: Specify the maximum number of rows to be shown when in expanded view',
     0
   ),
+  minCollapsedNumberOfRows: number(
+    'minCollapsedNumberOfRows: Specify the minimum number of rows to be shown when in collapsed view',
+    3
+  ),
+  minExpandedNumberOfRows: number(
+    'minExpandedNumberOfRows: Specify the minimum number of rows to be shown when in expanded view',
+    16
+  ),
 });
 
 export const inline = () => (

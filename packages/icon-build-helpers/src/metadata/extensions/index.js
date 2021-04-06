@@ -12,6 +12,7 @@ const categories = require('./categories');
 const deprecated = require('./deprecated');
 const icons = require('./icons');
 const moduleName = require('./module-name');
+const moduleInfo = require('./module-info');
 const output = require('./output');
 const pictograms = require('./pictograms');
 
@@ -32,6 +33,7 @@ module.exports = {
   deprecated,
   icons,
   moduleName,
+  moduleInfo,
   output,
   pictograms,
 };

@@ -185,7 +185,7 @@ export default class FileUploader extends React.Component {
 
     return (
       <div className={classes} {...other}>
-        <strong className={`${prefix}--file--label`}>{labelTitle}</strong>
+        <p className={`${prefix}--file--label`}>{labelTitle}</p>
         <p className={`${prefix}--label-description`}>{labelDescription}</p>
         <FileUploaderButton
           labelText={buttonLabel}
