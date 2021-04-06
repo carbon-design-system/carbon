@@ -2124,6 +2124,12 @@ Map {
         ],
         "type": "oneOf",
       },
+      "disable": Object {
+        "type": "array",
+      },
+      "enable": Object {
+        "type": "array",
+      },
       "light": Object {
         "type": "bool",
       },
