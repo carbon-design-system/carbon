@@ -78,7 +78,7 @@
   .#{$prefix}--breadcrumb-item .#{$prefix}--overflow-menu {
     position: relative;
     width: rem(20px);
-    height: rem(20px);
+    height: rem(18px);
 
     &:focus {
       outline: 1px solid $focus;
