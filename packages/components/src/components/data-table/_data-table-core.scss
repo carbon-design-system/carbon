@@ -127,7 +127,7 @@
     color: $text-secondary;
     background: $layer;
     border-top: 1px solid $layer;
-    border-bottom: 1px solid $layer-alt;
+    border-bottom: 1px solid $border-subtle;
 
     + td:first-of-type {
       padding-left: $spacing-04;

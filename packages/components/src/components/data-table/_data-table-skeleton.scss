@@ -29,7 +29,7 @@
     tr:hover {
       td {
         background: transparent;
-        border-color: $layer-alt;
+        border-color: $border-subtle;
 
         &:first-of-type,
         &:last-of-type {

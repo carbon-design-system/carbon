@@ -299,7 +299,7 @@
     padding: 1rem;
     color: $text-error;
     font-size: rem(12px);
-    background-color: $background-inverse;
+    background-color: $icon-inverse;
     border: 1px solid $border-subtle;
     box-shadow: 0 -4px 8px rgba(0, 0, 0, 0.1);
     transform: translateY(-100%);
@@ -315,7 +315,7 @@
     z-index: 10;
     width: rem(10px);
     height: rem(10px);
-    background-color: $background-inverse;
+    background-color: $icon-inverse;
     border: 1px solid $border-subtle;
     border-top: 1px solid transparent;
     border-left: 1px solid transparent;
