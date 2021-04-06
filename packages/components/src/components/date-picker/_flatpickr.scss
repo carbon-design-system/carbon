@@ -21,9 +21,9 @@
   animation: none;
   direction: ltr;
   border: 0;
+  border-radius: 0;
   font-size: 14px;
   line-height: 24px;
-  border-radius: 5px;
   position: absolute;
   width: 315px;
   box-sizing: border-box;
@@ -142,6 +142,7 @@
   width: rem(40px);
   padding: 0;
   fill: $icon-01;
+  transform: scale(1, 1) #{'/*rtl: scale(-1,1)*/'};
   transition: background-color $duration--fast-01 motion(standard, productive);
 
   &:hover {

@@ -11,6 +11,7 @@ import classNames from 'classnames';
 import { settings } from 'carbon-components';
 import { composeEventHandlers } from '../../tools/events';
 import { getNextIndex, matches, keys } from '../../internal/keyboard';
+import deprecate from '../../prop-types/deprecate';
 
 const { prefix } = settings;
 
@@ -38,7 +39,11 @@ export default class ContentSwitcher extends React.Component {
     /**
      * `true` to use the light variant.
      */
-    light: PropTypes.bool,
+    light: deprecate(
+      PropTypes.bool,
+      'The `light` prop for `ContentSwitcher` is no longer needed and has ' +
+        'been deprecated. It will be removed in the next major release.'
+    ),
 
     /**
      * Specify an `onChange` handler that is called whenever the ContentSwitcher

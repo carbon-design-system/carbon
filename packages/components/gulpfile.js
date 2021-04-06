@@ -360,7 +360,8 @@ const buildStyles = (prod) => {
       .pipe(
         postcss([
           autoprefixer({
-            browsers: ['> 1%', 'last 2 versions'],
+            browsers: ['> 1%', 'last 2 versions', 'ie >= 11'],
+            grid: 'autoplace',
           }),
         ])
       )
@@ -417,7 +418,15 @@ gulp.task('sass:dev', () => {
         })
       ).on('error', sass.logError)
     )
-    .pipe(postcss([customProperties(), autoprefixer()]))
+    .pipe(
+      postcss([
+        customProperties(),
+        autoprefixer({
+          browsers: ['> 1%', 'last 2 versions', 'ie >= 11'],
+          grid: 'autoplace',
+        }),
+      ])
+    )
     .pipe(sourcemaps.write('.'))
     .pipe(gulp.dest('demo'))
     .pipe(browserSync.stream({ match: '**/*.css' }));
