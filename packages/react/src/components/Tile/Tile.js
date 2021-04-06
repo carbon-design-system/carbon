@@ -341,6 +341,10 @@ export class SelectableTile extends Component {
       ...other
     } = this.props;
 
+    const inputClasses = classNames(`${prefix}--tile-input`, {
+      [`${prefix}--tile-input--checked`]: this.state.selected,
+    });
+
     const classes = classNames(
       `${prefix}--tile`,
       `${prefix}--tile--selectable`,
@@ -360,7 +364,7 @@ export class SelectableTile extends Component {
           }}
           tabIndex={-1}
           id={id}
-          className={`${prefix}--tile-input`}
+          className={inputClasses}
           value={value}
           onChange={!disabled ? this.handleOnChange : null}
           type="checkbox"
