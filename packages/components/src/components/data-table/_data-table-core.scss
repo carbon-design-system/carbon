@@ -142,15 +142,16 @@
   }
 
   // Form Control Overrides
-  .#{$prefix}--list-box input[role='combobox'],
-  .#{$prefix}--list-box input[type='text'],
-  .#{$prefix}--dropdown,
-  .#{$prefix}--list-box,
-  .#{$prefix}--number input[type='number'],
-  .#{$prefix}--number__control-btn::before,
-  .#{$prefix}--number__control-btn::after,
-  .#{$prefix}--text-input,
-  .#{$prefix}--select-input {
+
+  .#{$prefix}--data-table .#{$prefix}--list-box input[role='combobox'],
+  .#{$prefix}--data-table .#{$prefix}--list-box input[type='text'],
+  .#{$prefix}--data-table .#{$prefix}--dropdown,
+  .#{$prefix}--data-table .#{$prefix}--list-box,
+  .#{$prefix}--data-table .#{$prefix}--number input[type='number'],
+  .#{$prefix}--data-table .#{$prefix}--number__control-btn::before,
+  .#{$prefix}--data-table .#{$prefix}--number__control-btn::after,
+  .#{$prefix}--data-table .#{$prefix}--text-input,
+  .#{$prefix}--data-table .#{$prefix}--select-input {
     background-color: $field-02;
   }
 
