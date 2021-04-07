@@ -47,7 +47,7 @@ const props = {
     ),
     minDate: text('Disable dates before this date (minDate)', '11/15/2020'),
     maxDate: text('Disabled dates after this date (maxDate)', '11/01/2040'),
-    disable: array('Disable specific dates (disable)', ['07/15/21'], ','),
+    disable: array('Disable specific dates (disable)', ['07/15/2021'], ','),
   }),
   datePickerInput: () => ({
     id: 'date-picker-input-id',
