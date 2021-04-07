@@ -9221,7 +9221,7 @@ __metadata:
     babel-plugin-react-docgen: ^4.2.1
     babel-plugin-transform-inline-environment-variables: ^0.4.0
     browserslist-config-carbon: ^10.6.1
-    carbon-components: ^10.32.0
+    carbon-components: ^10.32.1
     carbon-icons: ^7.0.5
     chalk: ^2.3.0
     classnames: 2.2.6
@@ -9276,7 +9276,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"carbon-components@^10.32.0, carbon-components@workspace:packages/components":
+"carbon-components@^10.32.1, carbon-components@workspace:packages/components":
   version: 0.0.0-use.local
   resolution: "carbon-components@workspace:packages/components"
   dependencies:
