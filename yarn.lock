@@ -139,14 +139,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@babel/generator@npm:^7.10.2, @babel/generator@npm:^7.10.5, @babel/generator@npm:^7.12.13, @babel/generator@npm:^7.4.0":
-  version: 7.12.15
-  resolution: "@babel/generator@npm:7.12.15"
+"@babel/generator@npm:^7.10.2, @babel/generator@npm:^7.10.5, @babel/generator@npm:^7.12.13, @babel/generator@npm:^7.13.9, @babel/generator@npm:^7.4.0":
+  version: 7.13.9
+  resolution: "@babel/generator@npm:7.13.9"
   dependencies:
-    "@babel/types": ^7.12.13
+    "@babel/types": ^7.13.0
     jsesc: ^2.5.1
     source-map: ^0.5.0
-  checksum: 243c7c8987b9720d7cc8ecec165f69fda4159bb3ab19d3f09a4d5c6d35644d3b62293903aab0ae1f34dda61e39094bfea604d88a035e9f9ec485ffde636a734f
+  checksum: d9cf7db910dd703a55c3ba147a8024564d51de06f5e3e61aef6ca197bcd80a6cb0a633fe4688c8c9f6226c70ee6f32a747050a8e420972b45cc98a6b3fc5ae66
   languageName: node
   linkType: hard
 
@@ -1543,14 +1543,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@babel/types@npm:^7.0.0, @babel/types@npm:^7.10.2, @babel/types@npm:^7.10.4, @babel/types@npm:^7.10.5, @babel/types@npm:^7.12.1, @babel/types@npm:^7.12.13, @babel/types@npm:^7.3.0, @babel/types@npm:^7.3.3, @babel/types@npm:^7.4.0, @babel/types@npm:^7.4.4, @babel/types@npm:^7.6.0, @babel/types@npm:^7.7.0, @babel/types@npm:^7.8.3":
-  version: 7.12.13
-  resolution: "@babel/types@npm:7.12.13"
+"@babel/types@npm:^7.0.0, @babel/types@npm:^7.10.2, @babel/types@npm:^7.10.4, @babel/types@npm:^7.10.5, @babel/types@npm:^7.12.1, @babel/types@npm:^7.12.13, @babel/types@npm:^7.13.0, @babel/types@npm:^7.13.14, @babel/types@npm:^7.3.0, @babel/types@npm:^7.3.3, @babel/types@npm:^7.4.0, @babel/types@npm:^7.4.4, @babel/types@npm:^7.6.0, @babel/types@npm:^7.7.0, @babel/types@npm:^7.8.3":
+  version: 7.13.14
+  resolution: "@babel/types@npm:7.13.14"
   dependencies:
     "@babel/helper-validator-identifier": ^7.12.11
     lodash: ^4.17.19
     to-fast-properties: ^2.0.0
-  checksum: b6bb1356a7f3737a03c9362df03fd08a2b0599d117169cf7e2e856551fdf01cf4d5188d6370b23315f196058b0239fd609b65ccadcfed3bb3c0b90c27575e805
+  checksum: 0dda1e774076c763ad38d77a2292524556be0629f5b7a2078bddb40ae4a2fd059d10197029a988926dc314f7519e17daa8a714656e0faa207f2bb5339b57410c
   languageName: node
   linkType: hard
 
@@ -1709,8 +1709,11 @@ __metadata:
   resolution: "@carbon/icon-build-helpers@workspace:packages/icon-build-helpers"
   dependencies:
     "@babel/core": ^7.12.13
+    "@babel/generator": ^7.13.9
     "@babel/preset-env": ^7.10.0
     "@babel/preset-react": ^7.10.0
+    "@babel/template": ^7.12.13
+    "@babel/types": ^7.13.14
     "@carbon/cli-reporter": ^10.4.0
     "@carbon/icon-helpers": ^10.15.0
     "@rollup/plugin-babel": ^5.2.2
@@ -1730,6 +1733,7 @@ __metadata:
     rimraf: ^3.0.0
     rollup: ^2.38.0
     rollup-plugin-strip-banner: ^2.0.0
+    svg-parser: ^2.0.4
     svgo: ^1.1.1
   languageName: unknown
   linkType: soft
@@ -1770,6 +1774,7 @@ __metadata:
     "@carbon/icon-helpers": ^10.15.0
     "@carbon/icons": ^10.29.0
     prop-types: ^15.7.2
+    rimraf: ^3.0.2
   peerDependencies:
     react: ">=16"
   languageName: unknown
@@ -30684,10 +30689,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"svg-parser@npm:^2.0.0":
-  version: 2.0.3
-  resolution: "svg-parser@npm:2.0.3"
-  checksum: 9dc37382304ef141bd36f5c7514be955e7cbf85413599172b57be934a91a26b76c7dfbcc949b47c0073728ee1df971d79b68ca7d3086fe1ef87c27f9b4ec24a7
+"svg-parser@npm:^2.0.0, svg-parser@npm:^2.0.4":
+  version: 2.0.4
+  resolution: "svg-parser@npm:2.0.4"
+  checksum: 507b0ea204adf43bcba0df34bd8549a1a67f42007d518d4d56cad99bfda4295b5d9b67c1ca4661fb7474dbb593e34a69dd30fb4db804df85f32163fa785b3c31
   languageName: node
   linkType: hard
 
