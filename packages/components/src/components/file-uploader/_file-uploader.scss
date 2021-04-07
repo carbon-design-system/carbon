@@ -278,14 +278,14 @@
     // for checkmark contrast
     [data-icon-path='inner-path'] {
       opacity: 1;
-      fill: $icon-03;
+      fill: $icon-on-color;
     }
   }
 
   .#{$prefix}--file__state-container .#{$prefix}--file-invalid {
     width: $carbon--spacing-05;
     height: $carbon--spacing-05;
-    fill: $support-01;
+    fill: $support-error;
   }
 
   .#{$prefix}--file__state-container .#{$prefix}--file-close {
@@ -298,7 +298,7 @@
     background-color: transparent;
     border: none;
     cursor: pointer;
-    fill: $icon-01;
+    fill: $icon-primary;
 
     &:focus {
       @include focus-outline('outline');
@@ -306,7 +306,7 @@
   }
 
   .#{$prefix}--file__state-container .#{$prefix}--file-close svg path {
-    fill: $icon-01;
+    fill: $icon-primary;
 
     // Windows, Firefox HCM Fix
     @media screen and (-ms-high-contrast: active),
@@ -327,12 +327,12 @@
     height: rem(96px);
     padding: $carbon--spacing-05;
     overflow: hidden;
-    border: 1px dashed $ui-04;
+    border: 1px dashed $border-strong;
   }
 
   .#{$prefix}--file__drop-container--drag-over {
     background: none;
-    outline: 2px solid $interactive-03;
+    outline: 2px solid $focus;
     outline-offset: -2px;
   }
 }
