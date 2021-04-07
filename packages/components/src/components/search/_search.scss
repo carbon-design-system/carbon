@@ -309,7 +309,10 @@
 
     &::placeholder {
       position: relative;
-      transition: padding $duration--fast-01 motion(standard, productive);
+      opacity: 0;
+      transition-timing-function: motion(standard, productive);
+      transition-duration: $duration--fast-01;
+      transition-property: padding, opacity;
     }
   }
 
@@ -320,6 +323,7 @@
     &::placeholder {
       position: relative;
       padding: 0;
+      opacity: 1;
     }
   }
 
