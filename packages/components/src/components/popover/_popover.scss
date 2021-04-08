@@ -76,7 +76,13 @@
   //-----------------------------------------------------------------------------
   // Top
   //-----------------------------------------------------------------------------
-  .#{$prefix}--popover--top,
+  .#{$prefix}--popover--top {
+    left: 50%;
+    bottom: 0;
+    text-align: center;
+    transform: translate(-50%, calc(100% + #{$popover-offset}));
+  }
+
   .#{$prefix}--popover--top-left,
   .#{$prefix}--popover--top-right {
     bottom: 0;
@@ -121,11 +127,18 @@
   //-----------------------------------------------------------------------------
   // Bottom
   //-----------------------------------------------------------------------------
+  .#{$prefix}--popover--bottom {
+    left: 50%;
+    top: 0;
+    text-align: center;
+    transform: translate(-50%, calc(100% - #{$popover-offset}));
+  }
+
   .#{$prefix}--popover--bottom,
   .#{$prefix}--popover--bottom-left,
   .#{$prefix}--popover--bottom-right {
     top: 0;
-    transform: translateY(calc(-100% - #{$popover-offset}));
+    transform: translate(calc(-100% - #{$popover-offset}));
   }
 
   .#{$prefix}--popover--caret.#{$prefix}--popover--bottom

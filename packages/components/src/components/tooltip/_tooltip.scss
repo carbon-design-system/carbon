@@ -706,6 +706,16 @@
     .#{$prefix}--assistive-text {
     pointer-events: all;
   }
+
+  // TODO NEXT
+  .cds--tooltip {
+    display: inline-block;
+    position: relative;
+  }
+
+  .cds--tooltip-content {
+    padding: 1rem;
+  }
 }
 
 @include exports('tooltip') {
