@@ -663,7 +663,7 @@ describe('ComponentName', () => {
     // between minor versions. As a result, tests that you
     // write for id should make assertions around id being
     // placed on the same node.
-    id(
+    it(
       'should place the `id` prop on the same DOM node between minor versions',
       () => {
         const { container } = render(<ComponentName data-testid="test" />);
@@ -690,7 +690,7 @@ describe('ComponentName', () => {
   accessibility errors.
 
 ```js
-describe('ComponentName - AVT1', () => {
+describe('ComponentName AVT1', () => {
   it('should have no aXe violations', async () => {
     render(<ComponentName />);
     await expect(
@@ -713,7 +713,7 @@ describe('ComponentName - AVT1', () => {
   mental model than Jest/JSDOM tests. It's recommended to become familiar with
   the core concepts by reading the
   [Cypress introduction documentation](https://docs.cypress.io/guides/core-concepts/introduction-to-cypress).
-- Trigger Events with ``via`cy.real\*();`
+- Trigger Events with via `cy.real\*();`
 - Keyboard navigation/interaction testing is best done here, in a simulated
   browser environment, not JSDOM.
 - Take snapshots with Percy
