@@ -340,6 +340,15 @@
     .#{$prefix}--search-magnifier {
     pointer-events: none;
   }
+
+  .#{$prefix}--search--expandable .#{$prefix}--search-magnifier-icon {
+    fill: $icon-01;
+  }
+
+  .#{$prefix}--search--expandable.#{$prefix}--search--expanded
+    .#{$prefix}--search-magnifier-icon {
+    fill: $icon-02;
+  }
 }
 
 @include exports('search') {
