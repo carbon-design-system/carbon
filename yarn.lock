@@ -9224,7 +9224,7 @@ __metadata:
     carbon-components: ^10.32.1
     carbon-icons: ^7.0.5
     chalk: ^2.3.0
-    classnames: 2.2.6
+    classnames: 2.3.1
     cli-table: ^0.3.0
     copy-to-clipboard: ^3.3.1
     core-js: ^3.6.5
@@ -9835,10 +9835,17 @@ __metadata:
   languageName: node
   linkType: hard
 
-"classnames@npm:2.2.6, classnames@npm:^2.2.0, classnames@npm:^2.2.5":
+"classnames@npm:2.2.6":
   version: 2.2.6
   resolution: "classnames@npm:2.2.6"
   checksum: 490eaeca5931846737ffd33e472a701d268d5b8bc5717dd4cf108a127b06e86e05350e06799abbbe763a0e4c945b4217f6700b7ae00ddc703505682c370e5cf2
+  languageName: node
+  linkType: hard
+
+"classnames@npm:2.3.1, classnames@npm:^2.2.0, classnames@npm:^2.2.5":
+  version: 2.3.1
+  resolution: "classnames@npm:2.3.1"
+  checksum: 57d536edede609f81425d24b062d8d720a466565faf1e38d32c881e883920baa71519ac70c7b565e9cd39201fb1c1ff9bdf8aabf8e26544bac481e7924867c83
   languageName: node
   linkType: hard
 
