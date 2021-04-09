@@ -31,7 +31,7 @@ You can preview all of the token values for this on the
 
 ### Sass
 
-If you're project is using Sass, you can include this package and the
+If your project is using Sass, you can include this package and the
 corresponding default theme by writing the following in your Sass file:
 
 ```scss
