@@ -9,6 +9,13 @@ $css--font-face: true;
 $css--reset: true;
 $prefix: 'bx';
 
+$feature-flags: (
+  'enable-2021-release': false,
+);
+
+$link-01: red; /* stylelint-disable color-named */
+// $link-primary: red;
+
 // IMPORTANT: This import path should _not_ be used outside our source tree
 // as `src` directory is _not_ meant to be shipped in our NPM package.
 // Use e.g. `@import '~carbon-components/scss/globals/scss/styles.scss'` instead.
