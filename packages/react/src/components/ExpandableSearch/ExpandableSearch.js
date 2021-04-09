@@ -37,13 +37,13 @@ function ExpandableSearch(props) {
     }
   }
 
-  function focusInput() {
-    if (!expanded && searchRef.current?.input) {
-      searchRef.current.input.focus();
-    }
-  }
-
   useEffect(() => {
+    function focusInput() {
+      if (!expanded && searchRef.current?.input) {
+        searchRef.current.input.focus();
+      }
+    }
+
     if (searchRef.current?.magnifier) {
       const { magnifier } = searchRef.current;
       magnifier.addEventListener('click', focusInput);
@@ -52,8 +52,7 @@ function ExpandableSearch(props) {
         magnifier.removeEventListener('click', focusInput);
       };
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [searchRef]);
+  }, [expanded, searchRef]);
 
   const classes = classnames(
     `${prefix}--search--expandable`,
