@@ -1350,6 +1350,12 @@ em {
 .bx--aspect-ratio--3x4::before {
   padding-top: 133.33333%; }
 
+.bx--aspect-ratio--3x2::before {
+  padding-top: 66.66667%; }
+
+.bx--aspect-ratio--2x3::before {
+  padding-top: 150%; }
+
 .bx--aspect-ratio--1x1::before {
   padding-top: 100%; }
 
