@@ -58,56 +58,54 @@
   $overlay: $overlay-01;
   $toggle-off: $ui-04;
 
-  // Todo: fix the rest of the tokens if this approach works
+  $button-primary: $interactive-01;
+  $button-secondary: $interactive-02;
+  $button-tertiary: $interactive-03;
+  $button-danger-primary: $danger-01;
+  $button-danger-secondary: $danger-02;
 
-  // $buttonPrimary: $interactive01;
-  // $buttonSecondary: $interactive02;
-  // $buttonTertiary: $interactive03;
-  // $buttonDangerPrimary: $danger01;
-  // $buttonDangerSecondary: $danger02;
+  $background-active: $active-ui;
+  $layer-active: $active-ui;
 
-  // $backgroundActive: $activeUI;
-  // $layerActive: $activeUI;
+  $button-danger-active: $active-danger;
+  $button-primary-active: $active-primary;
+  $button-secondary-active: $active-secondary;
+  $button-tertiary-active: $active-tertiary;
 
-  // $buttonDangerActive: $activeDanger;
-  // $buttonPrimaryActive: $activePrimary;
-  // $buttonSecondaryActive: $activeSecondary;
-  // $buttonTertiaryActive: $activeTertiary;
+  $focus-inset: $inverse-01;
+  $focuse-inverse: $inverse-focus-ui;
 
-  // $focusInset: $inverse01;
-  // $focuseInverse: $inverseFocusUi;
+  $background-hover: $hover-ui;
+  $layer-hover: $hover-ui;
+  $field-hover: $hover-ui;
+  $background-inverse-hover: $inverse-hover-ui;
+  $link-primary-hover: $hover-primary-text;
+  $button-danger-hover: $hover-danger;
+  $button-primary-hover: $hover-primary;
+  $button-secondary-hover: $hover-secondary;
+  $button-tertiary-hover: $hover-tertiary;
 
-  // $backgroundHover: $hoverUI;
-  // $layerHover: $hoverUI;
-  // $fieldHover: $hoverUI;
-  // $backgroundInverseHover: $inverseHoverUI;
-  // $linkPrimaryHover: $hoverPrimaryText;
-  // $buttonDangerHover: $hoverDanger;
-  // $buttonPrimaryHover: $hoverPrimary;
-  // $buttonSecondaryHover: $hoverSecondary;
-  // $buttonTertiaryHover: $hoverTertiary;
+  $background-selected: $selected-ui;
+  $background-selected-hover: $hover-selected-ui;
+  $layer-selected: $selected-ui;
+  $layer-selected-hover: $hover-selected-ui;
+  $layer-selected-inverse: $ui-05;
+  $border-subtle-selected: $active-ui;
 
-  // $backgroundSelected: $selectedUI;
-  // $backgroundSelectedHover: $hoverSelectedUI;
-  // $layerSelected: $selectedUI;
-  // $layerSelectedHover: $hoverSelectedUI;
-  // $layerSelectedInverse: $ui05;
-  // $borderSubtleSelected: $activeUI;
+  $layer-disabled: $disabled-01;
+  $field-disabled: $disabled-01;
+  $border-disabled: $disabled-01;
 
-  // $layerDisabled: $disabled01;
-  // $fieldDisabled: $disabled01;
-  // $borderDisabled: $disabled01;
+  $text-disabled: $disabled-02;
+  $button-disabled: $disabled-02;
+  $icon-disabled: $disabled-02;
 
-  // $textDisabled: $disabled02;
-  // $buttonDisabled: $disabled02;
-  // $iconDisabled: $disabled02;
+  $text-on-color-disabled: $disabled-03;
+  $icon-on-color-disabled: $disabled-03;
+  $layer-selected-disabled: $disabled-03;
 
-  // $textOnColorDisabled: $disabled03;
-  // $iconOnColorDisabled: $disabled03;
-  // $layerSelectedDisabled: $disabled03;
-
-  // $skeletonBackground: $skeleton01;
-  // $skeletonElement: $skeleton02;
+  $skeleton-background: $skeleton-01;
+  $skeleton-element: $skeleton-02;
 }
 
 /// Theme variables
