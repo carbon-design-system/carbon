@@ -8,9 +8,10 @@
 $css--font-face: true;
 $css--reset: true;
 $prefix: 'bx';
+// $css--disable-css-custom-properties: false;
 
 $feature-flags: (
-  'enable-2021-release': false,
+  'enable-2021-release': true,
 );
 
 $link-01: red; /* stylelint-disable color-named */
@@ -89,6 +90,7 @@ $link-01: red; /* stylelint-disable color-named */
     @include carbon--theme($carbon--theme--white, true) {
       @include emit-component-tokens($tag-colors);
       @include emit-component-tokens($notification-colors);
+      --cds-link-primary: red;
     }
   }
 
