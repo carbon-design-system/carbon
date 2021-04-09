@@ -13,6 +13,8 @@
 @import '../form/form';
 @import 'flatpickr.scss';
 
+@include flatpickr;
+
 /// Date picker styles
 /// @access private
 /// @group date-picker
@@ -170,7 +172,7 @@
 
   .#{$prefix}--date-picker--range
     > .#{$prefix}--date-picker-container:first-child {
-    margin-right: rem(2px);
+    margin-right: rem(1px);
   }
 
   .#{$prefix}--date-picker--range .#{$prefix}--date-picker-container,
