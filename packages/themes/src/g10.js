@@ -8,7 +8,7 @@ import { adjustLightness } from './tools';
 
 import {
   // Blue
-  blue10,
+  blue20,
   blue40,
   blue60,
   blue70,
@@ -128,7 +128,7 @@ export const disabled01 = white;
 export const disabled02 = gray30;
 export const disabled03 = gray50;
 
-export const highlight = blue10;
+export const highlight = blue20;
 
 export const decorative01 = gray20;
 
