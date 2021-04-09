@@ -4371,7 +4371,9 @@ Map {
       "page": Object {
         "type": "number",
       },
-      "pageInputDisabled": [Function],
+      "pageInputDisabled": Object {
+        "type": "bool",
+      },
       "pageNumberText": Object {
         "type": "string",
       },
@@ -4380,6 +4382,9 @@ Map {
       },
       "pageSize": Object {
         "type": "number",
+      },
+      "pageSizeInputDisabled": Object {
+        "type": "bool",
       },
       "pageSizes": Object {
         "args": Array [
