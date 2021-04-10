@@ -38,7 +38,7 @@ $default-feature-flags: (
 
 $feature-flags: map-merge($default-feature-flags, $feature-flags);
 
-@if feature-flag-enabled('enable-2021-release') {
+@if feature-flag-enabled('enable-2021-release') == true {
   @if variable-exists(css--disable-css-custom-properties) ==
     false or
     $css--disable-css-custom-properties ==
