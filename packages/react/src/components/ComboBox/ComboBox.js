@@ -347,7 +347,8 @@ const ComboBox = (props) => {
                             tabIndex="-1"
                             isHighlighted={
                               highlightedIndex === index ||
-                              (selectedItem && selectedItem.id === item.id) ||
+                              (selectedItem?.id &&
+                                selectedItem?.id === item.id) ||
                               false
                             }
                             title={
