@@ -2943,7 +2943,7 @@
     - 32
 - name: chat--launch
   friendly_name: Chat launch
-  aliases: 
+  aliases:
     - chat
     - operations
     - launch
@@ -3565,7 +3565,7 @@
     - foundry
 - name: cloud-registry
   friendly_name: Cloud registry
-  aliases: 
+  aliases:
     - cloud
     - registry
     - data
@@ -3766,7 +3766,7 @@
     - 32
 - name: condition--point
   friendly_name: Condition point
-  aliases: 
+  aliases:
     - point
     - condition
     - status
@@ -3775,7 +3775,7 @@
     - 32
 - name: condition--wait-point
   friendly_name: Condition wait point
-  aliases: 
+  aliases:
     - condition
     - point
     - wait
@@ -3921,7 +3921,7 @@
     - 32
 - name: cough
   friendly_name: Cough
-  aliases: 
+  aliases:
     - cough
     - user
     - person
@@ -4134,7 +4134,7 @@
     - 32
 - name: currency--ruble
   friendly_name: Currency ruble
-  aliases: 
+  aliases:
     - currency
     - money
     - ruble
@@ -4226,7 +4226,7 @@
     - 32
 - name: cut-out
   friendly_name: Cut out
-  aliases: 
+  aliases:
     - formatting
     - cut out
     - clip
@@ -4670,7 +4670,7 @@
     - 32
 - name: desk--adjustable
   friendly_name: Desk adjustable
-  aliases: 
+  aliases:
     - desk
     - adjustable
     - standing desk
@@ -5092,7 +5092,7 @@
     - paper
 - name: document--attachment
   friendly_name: Document attachment
-  aliases: 
+  aliases:
     - file
     - doc
     - paper
@@ -5103,7 +5103,7 @@
     - 32
 - name: document--audio
   friendly_name: Document audio
-  aliases: 
+  aliases:
     - doc
     - file
     - audio
@@ -5168,7 +5168,7 @@
     - 32
 - name: document--sketch
   friendly_name: Document Sketch
-  aliases: 
+  aliases:
     - doc
     - file
     - Sketch
@@ -5214,7 +5214,7 @@
     - 32
 - name: document--video
   friendly_name: Document video
-  aliases: 
+  aliases:
     - doc
     - file
     - video
@@ -5370,7 +5370,7 @@
     - 32
 - name: drone
   friendly_name: Drone
-  aliases: 
+  aliases:
     - drone
     - robot
     - remote control
@@ -6810,8 +6810,8 @@
     - 32
 - name: group--presentation
   friendly_name: Group presentation
-  aliases: 
-    - group 
+  aliases:
+    - group
     - presentation
     - meeting
     - conference
@@ -6822,13 +6822,13 @@
     - 32
 - name: growth
   friendly_name: Growth
-  aliases: 
+  aliases:
     - growth
     - chart
     - data
     - uptick
     - rising
-    - improving    
+    - improving
   sizes:
     - 32
 - name: H
@@ -7270,7 +7270,7 @@
     - 32
 - name: ice--vision
   friendly_name: Ice vision
-  aliases: 
+  aliases:
     - ice
     - vision
     - visibility
@@ -7336,7 +7336,7 @@
     - 32
 - name: image--copy
   friendly_name: Image copy
-  aliases: 
+  aliases:
     - image
     - copy
     - duplicate
@@ -7911,7 +7911,7 @@
     - english
 - name: letter--Aa--large
   friendly_name: Letter Aa large
-  aliases: 
+  aliases:
     - letter
     - alphabet
     - language
@@ -8565,7 +8565,7 @@
     - identification
 - name: logo--discord
   friendly_name: Logo Discord
-  aliases: 
+  aliases:
     - brand
     - emblem
     - id
@@ -9121,7 +9121,7 @@
     - 32
 - name: media--library
   friendly_name: Media library
-  aliases: 
+  aliases:
     - media
     - library
     - file
@@ -10984,7 +10984,7 @@
     - 32
 - name: phone--ip
   friendly_name: Phone IP
-  aliases: 
+  aliases:
     - phone
     - VOIP
     - IP
@@ -11079,7 +11079,7 @@
     - 32
 - name: piggy-bank--slot
   friendly_name: Piggy bank slot
-  aliases: 
+  aliases:
     - piggy bank
     - savings
     - cash
@@ -12803,12 +12803,12 @@
     - 32
 - name: sight
   friendly_name: Sight
-  aliases: 
+  aliases:
     - sight
     - vision
     - see
     - eyescan
-    - visual 
+    - visual
     - user
   sizes:
     - 32
@@ -13201,7 +13201,7 @@
     - 32
 - name: sort--ascending
   friendly_name: Sort ascending
-  aliases: 
+  aliases:
     - sort order
     - order
     - ascending
@@ -13210,7 +13210,7 @@
     - 32
 - name: sort--descending
   friendly_name: Sort descending
-  aliases: 
+  aliases:
     - sort order
     - order
     - descending
@@ -14043,7 +14043,7 @@
     - editor
 - name: text--clear-format
   friendly_name: Text clear format
-  aliases: 
+  aliases:
     - clear
     - format
     - text
@@ -15382,7 +15382,7 @@
     - 32
 - name: voice-activate
   friendly_name: Voice activate
-  aliases: 
+  aliases:
     - voice
     - activate
     - user
@@ -15407,7 +15407,7 @@
     - soft
 - name: volume--down--alt
   friendly_name: Volume down alt
-  aliases: 
+  aliases:
     - volume
     - sound
     - noise
@@ -15424,7 +15424,7 @@
     - soft
 - name: volume--down--filled--alt
   friendly_name: Volume down filled alt
-  aliases: 
+  aliases:
     - volume
     - sound
     - noise
@@ -15454,7 +15454,7 @@
     - noise
 - name: volume--up--alt
   friendly_name: Volume up alt
-  aliases: []
+  aliases:
     - sound
     - noise
     - loud
@@ -15470,7 +15470,7 @@
     - loud
 - name: volume--up--filled--alt
   friendly_name: Volume up filled alt
-  aliases: 
+  aliases:
     - sound
     - noise
     - loud
@@ -15985,7 +15985,7 @@
     - 32
 - name: zoom--area
   friendly_name: Zoom area
-  aliases: 
+  aliases:
     - expand
     - inspect
     - size
