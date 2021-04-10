@@ -13,6 +13,7 @@ import Checkbox from '../Checkbox';
 import CheckboxSkeleton from '../Checkbox/Checkbox.Skeleton';
 import { settings } from 'carbon-components';
 import mdx from './Checkbox.mdx';
+import { FeatureFlags } from '../FeatureFlags';
 
 const { prefix } = settings;
 
@@ -38,6 +39,30 @@ export const checkbox = () => {
       <Checkbox labelText={`Checkbox label`} id="checkbox-label-2" />
     </fieldset>
   );
+};
+
+export const unstable_Checkbox = () => {
+  return (
+    <FeatureFlags flags={{ 'enable-2021-release': true }}>
+      <fieldset className={`${prefix}--fieldset`}>
+        <legend className={`${prefix}--label`}>Checkbox heading</legend>
+        <Checkbox
+          {...props()}
+          labelText={`Checkbox label`}
+          id="checkbox-label-1"
+        />
+        <Checkbox
+          {...props()}
+          labelText={`Checkbox label`}
+          id="checkbox-label-2"
+        />
+      </fieldset>
+    </FeatureFlags>
+  );
+};
+
+unstable_Checkbox.story = {
+  name: 'unstable_Checkbox',
 };
 
 export const skeleton = () => <CheckboxSkeleton />;
