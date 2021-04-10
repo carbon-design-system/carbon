@@ -14,6 +14,7 @@ import Search from '../Search';
 import SearchSkeleton from '../Search/Search.Skeleton';
 import SearchFilterButton from '../SearchFilterButton';
 import SearchLayoutButton from '../SearchLayoutButton';
+import ExpandableSearch from '../ExpandableSearch';
 import mdx from './Search.mdx';
 
 const sizes = {
@@ -53,6 +54,7 @@ export default {
       SearchSkeleton,
       SearchFilterButton,
       SearchLayoutButton,
+      ExpandableSearch,
     },
   },
 };
@@ -104,3 +106,9 @@ Skeleton.parameters = {
       `,
   },
 };
+
+export const Expandable = () => (
+  <ExpandableSearch {...props()} id="search-expandable-1" />
+);
+
+Expandable.storyName = 'Expandable';

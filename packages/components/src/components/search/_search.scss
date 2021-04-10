@@ -76,34 +76,40 @@
   }
 
   // Small styles
-  .#{$prefix}--search--sm .#{$prefix}--search-input {
+  .#{$prefix}--search--sm .#{$prefix}--search-input,
+  .#{$prefix}--search--sm.#{$prefix}--search--expandable.#{$prefix}--search--expanded
+    .#{$prefix}--search-input {
     height: rem(32px);
     // 8px padding on either side of icon + 16px icon (32px)
     padding: 0 $spacing-07;
   }
 
-  .#{$prefix}--search--sm .#{$prefix}--search-magnifier {
+  .#{$prefix}--search--sm .#{$prefix}--search-magnifier-icon {
     left: rem(8px);
   }
 
   // Large styles
-  .#{$prefix}--search--lg .#{$prefix}--search-input {
+  .#{$prefix}--search--lg .#{$prefix}--search-input,
+  .#{$prefix}--search--lg.#{$prefix}--search--expandable.#{$prefix}--search--expanded
+    .#{$prefix}--search-input {
     height: rem(40px);
     // 12px padding on either side of icon + 16px icon (40px)
     padding: 0 $spacing-08;
   }
 
-  .#{$prefix}--search--lg .#{$prefix}--search-magnifier {
+  .#{$prefix}--search--lg .#{$prefix}--search-magnifier-icon {
     left: rem(12px);
   }
 
-  .#{$prefix}--search--xl .#{$prefix}--search-input {
+  .#{$prefix}--search--xl .#{$prefix}--search-input,
+  .#{$prefix}--search--xl.#{$prefix}--search--expandable.#{$prefix}--search--expanded
+    .#{$prefix}--search-input {
     height: rem(48px);
     // 16px padding on either side of icon + 16px icon (48px)
     padding: 0 $spacing-09;
   }
 
-  .#{$prefix}--search-magnifier {
+  .#{$prefix}--search-magnifier-icon {
     position: absolute;
     top: 50%;
     left: $spacing-05;
@@ -207,7 +213,9 @@
     }
   }
 
-  .#{$prefix}--search--disabled .#{$prefix}--search-close {
+  .#{$prefix}--search--disabled .#{$prefix}--search-close,
+  .#{$prefix}--search--disabled.#{$prefix}--search--expandable
+    .#{$prefix}--search-magnifier {
     outline: none;
     cursor: not-allowed;
 
@@ -238,25 +246,40 @@
 
   .#{$prefix}--search--sm {
     .#{$prefix}--search-close,
-    ~ .#{$prefix}--search-button {
+    ~ .#{$prefix}--search-button,
+    &.#{$prefix}--search--expandable .#{$prefix}--search-magnifier {
       width: rem(32px);
       height: rem(32px);
+    }
+
+    &.#{$prefix}--search--expandable .#{$prefix}--search-input::placeholder {
+      padding: 0 rem(32px);
     }
   }
 
   .#{$prefix}--search--lg {
     .#{$prefix}--search-close,
-    ~ .#{$prefix}--search-button {
+    ~ .#{$prefix}--search-button,
+    &.#{$prefix}--search--expandable .#{$prefix}--search-magnifier {
       width: rem(40px);
       height: rem(40px);
+    }
+
+    &.#{$prefix}--search--expandable .#{$prefix}--search-input::placeholder {
+      padding: 0 rem(40px);
     }
   }
 
   .#{$prefix}--search--xl {
     .#{$prefix}--search-close,
-    ~ .#{$prefix}--search-button {
+    ~ .#{$prefix}--search-button,
+    &.#{$prefix}--search--expandable .#{$prefix}--search-magnifier {
       width: rem(48px);
       height: rem(48px);
+    }
+
+    &.#{$prefix}--search--expandable .#{$prefix}--search-input::placeholder {
+      padding: 0 rem(48px);
     }
   }
 
@@ -275,6 +298,56 @@
     &::placeholder {
       color: transparent;
     }
+  }
+
+  .#{$prefix}--search--expandable .#{$prefix}--search-input {
+    width: 0;
+    padding: 0;
+    transition-timing-function: motion(standard, productive);
+    transition-duration: $duration--fast-01;
+    transition-property: width, padding;
+
+    &::placeholder {
+      position: relative;
+      opacity: 0;
+      transition-timing-function: motion(standard, productive);
+      transition-duration: $duration--fast-01;
+      transition-property: padding, opacity;
+    }
+  }
+
+  .#{$prefix}--search--expandable.#{$prefix}--search--expanded
+    .#{$prefix}--search-input {
+    width: 100%;
+
+    &::placeholder {
+      position: relative;
+      padding: 0;
+      opacity: 1;
+    }
+  }
+
+  .#{$prefix}--search--expandable .#{$prefix}--search-magnifier {
+    position: absolute;
+    cursor: pointer;
+  }
+
+  .#{$prefix}--search--expandable .#{$prefix}--search-magnifier:hover {
+    background-color: $hover-ui;
+  }
+
+  .#{$prefix}--search--expandable.#{$prefix}--search--expanded
+    .#{$prefix}--search-magnifier {
+    pointer-events: none;
+  }
+
+  .#{$prefix}--search--expandable .#{$prefix}--search-magnifier-icon {
+    fill: $icon-01;
+  }
+
+  .#{$prefix}--search--expandable.#{$prefix}--search--expanded
+    .#{$prefix}--search-magnifier-icon {
+    fill: $icon-02;
   }
 }
 
