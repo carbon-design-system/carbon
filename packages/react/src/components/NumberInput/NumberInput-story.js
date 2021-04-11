@@ -89,8 +89,6 @@ export const Default = () => {
       helperText="Optional helper text."
       invalidText="Number is not valid"
       id="number-input-id"
-      onClick={action('onClick')}
-      onChange={action('onChange')}
     />
   );
 };
