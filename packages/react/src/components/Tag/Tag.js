@@ -88,7 +88,11 @@ const Tag = ({
   const ComponentTag = other.onClick ? 'button' : 'div';
 
   return (
-    <ComponentTag className={tagClasses} id={tagId} {...other}>
+    <ComponentTag
+      disabled={ComponentTag === 'button' ? disabled : null}
+      className={tagClasses}
+      id={tagId}
+      {...other}>
       {CustomIconElement ? (
         <div className={`${prefix}--tag__custom-icon`}>
           <CustomIconElement />

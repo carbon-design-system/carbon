@@ -146,6 +146,7 @@ Map {
   "Button" => Object {
     "$$typeof": Symbol(react.forward_ref),
     "defaultProps": Object {
+      "dangerDescription": "danger",
       "disabled": false,
       "kind": "primary",
       "size": "default",
@@ -176,6 +177,9 @@ Map {
         "type": "node",
       },
       "className": Object {
+        "type": "string",
+      },
+      "dangerDescription": Object {
         "type": "string",
       },
       "disabled": Object {
@@ -390,6 +394,12 @@ Map {
         "type": "number",
       },
       "maxExpandedNumberOfRows": Object {
+        "type": "number",
+      },
+      "minCollapsedNumberOfRows": Object {
+        "type": "number",
+      },
+      "minExpandedNumberOfRows": Object {
         "type": "number",
       },
       "onClick": Object {
@@ -2819,6 +2829,7 @@ Map {
   },
   "FormGroup" => Object {
     "defaultProps": Object {
+      "hasMargin": true,
       "invalid": false,
       "message": false,
       "messageText": "",
@@ -2829,6 +2840,9 @@ Map {
       },
       "className": Object {
         "type": "string",
+      },
+      "hasMargin": Object {
+        "type": "bool",
       },
       "invalid": Object {
         "type": "bool",
@@ -4693,6 +4707,79 @@ Map {
       },
     },
   },
+  "ExpandableSearch" => Object {
+    "propTypes": Object {
+      "className": Object {
+        "type": "string",
+      },
+      "closeButtonLabelText": Object {
+        "type": "string",
+      },
+      "defaultValue": Object {
+        "args": Array [
+          Array [
+            Object {
+              "type": "string",
+            },
+            Object {
+              "type": "number",
+            },
+          ],
+        ],
+        "type": "oneOfType",
+      },
+      "disabled": Object {
+        "type": "bool",
+      },
+      "id": Object {
+        "type": "string",
+      },
+      "labelText": Object {
+        "isRequired": true,
+        "type": "node",
+      },
+      "light": Object {
+        "type": "bool",
+      },
+      "onChange": Object {
+        "type": "func",
+      },
+      "onKeyDown": Object {
+        "type": "func",
+      },
+      "placeHolderText": [Function],
+      "placeholder": Object {
+        "type": "string",
+      },
+      "size": Object {
+        "args": Array [
+          Array [
+            "sm",
+            "lg",
+            "xl",
+          ],
+        ],
+        "type": "oneOf",
+      },
+      "small": [Function],
+      "type": Object {
+        "type": "string",
+      },
+      "value": Object {
+        "args": Array [
+          Array [
+            Object {
+              "type": "string",
+            },
+            Object {
+              "type": "number",
+            },
+          ],
+        ],
+        "type": "oneOfType",
+      },
+    },
+  },
   "SecondaryButton" => Object {},
   "Select" => Object {
     "$$typeof": Symbol(react.forward_ref),
@@ -6390,7 +6477,7 @@ Map {
       },
       "tooltipText": Object {
         "isRequired": true,
-        "type": "string",
+        "type": "node",
       },
     },
   },
@@ -7678,6 +7765,15 @@ Map {
         "disabled": Object {
           "type": "bool",
         },
+        "kind": Object {
+          "args": Array [
+            Array [
+              "default",
+              "danger",
+            ],
+          ],
+          "type": "oneOf",
+        },
         "label": Object {
           "isRequired": true,
           "type": "node",
@@ -7764,6 +7860,15 @@ Map {
       },
       "disabled": Object {
         "type": "bool",
+      },
+      "kind": Object {
+        "args": Array [
+          Array [
+            "default",
+            "danger",
+          ],
+        ],
+        "type": "oneOf",
       },
       "label": Object {
         "isRequired": true,
