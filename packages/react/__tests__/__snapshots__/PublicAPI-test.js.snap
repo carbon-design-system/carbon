@@ -4707,6 +4707,79 @@ Map {
       },
     },
   },
+  "ExpandableSearch" => Object {
+    "propTypes": Object {
+      "className": Object {
+        "type": "string",
+      },
+      "closeButtonLabelText": Object {
+        "type": "string",
+      },
+      "defaultValue": Object {
+        "args": Array [
+          Array [
+            Object {
+              "type": "string",
+            },
+            Object {
+              "type": "number",
+            },
+          ],
+        ],
+        "type": "oneOfType",
+      },
+      "disabled": Object {
+        "type": "bool",
+      },
+      "id": Object {
+        "type": "string",
+      },
+      "labelText": Object {
+        "isRequired": true,
+        "type": "node",
+      },
+      "light": Object {
+        "type": "bool",
+      },
+      "onChange": Object {
+        "type": "func",
+      },
+      "onKeyDown": Object {
+        "type": "func",
+      },
+      "placeHolderText": [Function],
+      "placeholder": Object {
+        "type": "string",
+      },
+      "size": Object {
+        "args": Array [
+          Array [
+            "sm",
+            "lg",
+            "xl",
+          ],
+        ],
+        "type": "oneOf",
+      },
+      "small": [Function],
+      "type": Object {
+        "type": "string",
+      },
+      "value": Object {
+        "args": Array [
+          Array [
+            Object {
+              "type": "string",
+            },
+            Object {
+              "type": "number",
+            },
+          ],
+        ],
+        "type": "oneOfType",
+      },
+    },
+  },
   "SecondaryButton" => Object {},
   "Select" => Object {
     "$$typeof": Symbol(react.forward_ref),
