@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
 import { settings } from 'carbon-components';
@@ -9,6 +9,7 @@ import {
   WarningFilled16,
 } from '@carbon/icons-react';
 import { textInputProps } from './util';
+import { FormContext } from '../FluidForm';
 
 const { prefix } = settings;
 
@@ -22,6 +23,7 @@ const PasswordInput = React.forwardRef(function PasswordInput(
     onChange,
     onClick,
     hideLabel,
+    inline,
     invalid,
     invalidText,
     helperText,
@@ -73,18 +75,27 @@ const PasswordInput = React.forwardRef(function PasswordInput(
   const inputWrapperClasses = classNames(
     `${prefix}--form-item`,
     `${prefix}--text-input-wrapper`,
-    `${prefix}--password-input-wrapper`
+    `${prefix}--password-input-wrapper`,
+    {
+      [`${prefix}--text-input-wrapper--light`]: light,
+      [`${prefix}--text-input-wrapper--inline`]: inline,
+    }
   );
-
   const labelClasses = classNames(`${prefix}--label`, {
     [`${prefix}--visually-hidden`]: hideLabel,
     [`${prefix}--label--disabled`]: disabled,
+    [`${prefix}--label--inline`]: inline,
+    [`${prefix}--label--inline--${size}`]: inline && !!size,
   });
   const helperTextClasses = classNames(`${prefix}--form__helper-text`, {
     [`${prefix}--form__helper-text--disabled`]: disabled,
+    [`${prefix}--form__helper-text--inline`]: inline,
   });
   const fieldOuterWrapperClasses = classNames(
-    `${prefix}--text-input__field-outer-wrapper`
+    `${prefix}--text-input__field-outer-wrapper`,
+    {
+      [`${prefix}--text-input__field-outer-wrapper--inline`]: inline,
+    }
   );
   const fieldWrapperClasses = classNames(
     `${prefix}--text-input__field-wrapper`,
@@ -162,10 +173,19 @@ const PasswordInput = React.forwardRef(function PasswordInput(
     <div className={helperTextClasses}>{helperText}</div>
   ) : null;
 
+  const { isFluid } = useContext(FormContext);
+
   return (
     <div className={inputWrapperClasses}>
+      {!inline ? (
+        label
+      ) : (
+        <div className={`${prefix}--text-input__label-helper-wrapper`}>
+          {label}
+          {!isFluid && helper}
+        </div>
+      )}
       <div className={fieldOuterWrapperClasses}>
-        {label}
         <div className={fieldWrapperClasses} data-invalid={invalid || null}>
           {invalid && (
             <WarningFilled16
@@ -178,8 +198,10 @@ const PasswordInput = React.forwardRef(function PasswordInput(
             />
           )}
           {input}
+          {isFluid && !inline && error}
         </div>
-        {error ? error : helper}
+        {!isFluid && error}
+        {!invalid && !warn && !isFluid && !inline && helper}
       </div>
     </div>
   );
