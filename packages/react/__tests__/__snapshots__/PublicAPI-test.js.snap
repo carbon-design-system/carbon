@@ -4707,6 +4707,79 @@ Map {
       },
     },
   },
+  "ExpandableSearch" => Object {
+    "propTypes": Object {
+      "className": Object {
+        "type": "string",
+      },
+      "closeButtonLabelText": Object {
+        "type": "string",
+      },
+      "defaultValue": Object {
+        "args": Array [
+          Array [
+            Object {
+              "type": "string",
+            },
+            Object {
+              "type": "number",
+            },
+          ],
+        ],
+        "type": "oneOfType",
+      },
+      "disabled": Object {
+        "type": "bool",
+      },
+      "id": Object {
+        "type": "string",
+      },
+      "labelText": Object {
+        "isRequired": true,
+        "type": "node",
+      },
+      "light": Object {
+        "type": "bool",
+      },
+      "onChange": Object {
+        "type": "func",
+      },
+      "onKeyDown": Object {
+        "type": "func",
+      },
+      "placeHolderText": [Function],
+      "placeholder": Object {
+        "type": "string",
+      },
+      "size": Object {
+        "args": Array [
+          Array [
+            "sm",
+            "lg",
+            "xl",
+          ],
+        ],
+        "type": "oneOf",
+      },
+      "small": [Function],
+      "type": Object {
+        "type": "string",
+      },
+      "value": Object {
+        "args": Array [
+          Array [
+            Object {
+              "type": "string",
+            },
+            Object {
+              "type": "number",
+            },
+          ],
+        ],
+        "type": "oneOfType",
+      },
+    },
+  },
   "SecondaryButton" => Object {},
   "Select" => Object {
     "$$typeof": Symbol(react.forward_ref),
@@ -5630,10 +5703,7 @@ Map {
   },
   "SelectableTile" => Object {
     "defaultProps": Object {
-      "handleClick": [Function],
-      "handleKeyDown": [Function],
       "light": false,
-      "onChange": [Function],
       "selected": false,
       "tabIndex": 0,
       "title": "title",
@@ -5649,12 +5719,8 @@ Map {
       "disabled": Object {
         "type": "bool",
       },
-      "handleClick": Object {
-        "type": "func",
-      },
-      "handleKeyDown": Object {
-        "type": "func",
-      },
+      "handleClick": [Function],
+      "handleKeyDown": [Function],
       "iconDescription": [Function],
       "id": Object {
         "type": "string",
@@ -5666,6 +5732,12 @@ Map {
         "type": "string",
       },
       "onChange": Object {
+        "type": "func",
+      },
+      "onClick": Object {
+        "type": "func",
+      },
+      "onKeyDown": Object {
         "type": "func",
       },
       "selected": Object {
