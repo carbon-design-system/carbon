@@ -25,7 +25,7 @@
     @include reset;
     @include type-style('body-short-01');
 
-    color: $link-primary;
+    color: $link-01;
     text-decoration: none;
     outline: none;
     transition: color $duration--fast-01 motion(standard, productive);
@@ -38,7 +38,7 @@
     &:active,
     &:active:visited,
     &:active:visited:hover {
-      color: $link-primary;
+      color: $text-01;
       text-decoration: underline;
     }
 
@@ -47,7 +47,7 @@
     }
 
     &:visited {
-      color: $link-primary;
+      color: $link-01;
     }
 
     &:visited:hover {

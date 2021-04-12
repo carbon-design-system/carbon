@@ -9,46 +9,6 @@ $css--font-face: true;
 $css--reset: true;
 $prefix: 'bx';
 
-// Scenario 1: A user opts in to all features, and uses new token values to theme
-// Scroll to bottom for Scenario 1 (you will need to comment out the @if theme block ⬇️
-// UNCOMMENT BELOW
-// $feature-flags: (
-//   'enable-2021-release': true,
-// );
-
-// :root {
-//   --cds-link-primary: red;
-// }
-// END SCENARIO 1
-
-// Scenario 2: A user opts in to the new release, but does not want to use custom properties
-// UNCOMMENT BELOW
-// $css--disable-css-custom-properties: true;
-
-// $feature-flags: (
-//   'enable-2021-release': true,
-// );
-
-// $link-primary: red;
-// END SCENARIO 2
-
-// Scenario 3: A current user that is using a custom theme, but  the theme is still mapping to the old tokens:
-// UNCOMMENT BELOW
-// $link-01: red;
-// END SCENARIO 3
-
-// Scenario 4: A current user that is using a custom theme AND custom properties, but the theme is still mapping to the old tokens:
-// Scroll to bottom for Scenario 4 (you will need to comment out the @if theme block ⬇️
-// UNCOMMENT BELOW
-// $feature-flags: (
-//   'enable-css-custom-properties': true,
-// );
-
-// :root {
-//   --cds-link-01: red;
-// }
-// END SCENARIO 4
-
 // IMPORTANT: This import path should _not_ be used outside our source tree
 // as `src` directory is _not_ meant to be shipped in our NPM package.
 // Use e.g. `@import '~carbon-components/scss/globals/scss/styles.scss'` instead.
