@@ -75,15 +75,15 @@ $list-box-menu-width: rem(300px);
     width: $list-box-width;
     height: rem(40px);
     max-height: rem(40px);
-    color: $text-01;
-    background-color: $field-01;
+    color: $text-primary;
+    background-color: $field;
     border: none;
-    border-bottom: 1px solid $ui-04;
+    border-bottom: 1px solid $border-strong;
     cursor: pointer;
     transition: all $duration--fast-01 motion(standard, productive);
 
     &:hover {
-      background-color: $hover-ui;
+      background-color: $field-hover;
     }
   }
 
@@ -100,13 +100,14 @@ $list-box-menu-width: rem(300px);
   }
 
   .#{$prefix}--list-box--expanded {
-    border-bottom-color: $ui-03;
+    border-bottom-color: $border-subtle;
   }
 
   .#{$prefix}--list-box--expanded:hover {
-    background-color: $field-01;
+    background-color: $field;
   }
 
+  // V11: Possibly deprecate
   .#{$prefix}--list-box--expanded:hover.#{$prefix}--list-box--light:hover {
     background-color: $field-02;
   }
@@ -122,11 +123,11 @@ $list-box-menu-width: rem(300px);
     top: 50%;
     right: $carbon--spacing-08;
     transform: translateY(-50%);
-    fill: $support-01;
+    fill: $support-error;
   }
 
   .#{$prefix}--list-box__invalid-icon--warning {
-    fill: $support-03;
+    fill: $support-warning;
   }
 
   .#{$prefix}--list-box__invalid-icon--warning path[fill] {
@@ -147,6 +148,7 @@ $list-box-menu-width: rem(300px);
   }
 
   // Light variation for 'list-box'
+  // V11: Possibly deprecate
   .#{$prefix}--list-box--light {
     background-color: $field-02;
 
@@ -155,10 +157,12 @@ $list-box-menu-width: rem(300px);
     }
   }
 
+  // V11: Possibly deprecate
   .#{$prefix}--list-box--light .#{$prefix}--list-box__menu {
     background: $field-02;
   }
 
+  // V11: Possibly deprecate
   .#{$prefix}--list-box--light .#{$prefix}--list-box__menu-item__option {
     border-top-color: $decorative-01;
   }
@@ -169,9 +173,10 @@ $list-box-menu-width: rem(300px);
 
   // Disabled state for `list-box`
   .#{$prefix}--list-box--disabled:hover {
-    background-color: $field-01;
+    background-color: $field;
   }
 
+  // V11: Possibly deprecate
   .#{$prefix}--list-box--light.#{$prefix}--list-box--disabled {
     background-color: $field-02;
   }
@@ -186,12 +191,12 @@ $list-box-menu-width: rem(300px);
   .#{$prefix}--list-box--disabled .#{$prefix}--list-box__label,
   .#{$prefix}--list-box--disabled.#{$prefix}--list-box--inline
     .#{$prefix}--list-box__label {
-    color: $disabled-02;
+    color: $text-disabled;
   }
 
   .#{$prefix}--list-box--disabled .#{$prefix}--list-box__menu-icon > svg,
   .#{$prefix}--list-box--disabled .#{$prefix}--list-box__selection > svg {
-    fill: $disabled-02;
+    fill: $icon-disabled;
 
     // Windows, Firefox HCM Fix
     @media screen and (-ms-high-contrast: active),
@@ -211,7 +216,7 @@ $list-box-menu-width: rem(300px);
   .#{$prefix}--list-box--disabled .#{$prefix}--list-box__menu-item:hover,
   .#{$prefix}--list-box--disabled
     .#{$prefix}--list-box__menu-item--highlighted {
-    color: $disabled-02;
+    color: $text-disabled;
     text-decoration: none;
   }
 
@@ -236,7 +241,7 @@ $list-box-menu-width: rem(300px);
     border-width: 0;
 
     &:hover {
-      background-color: $hover-ui;
+      background-color: $field-hover;
     }
   }
 
@@ -254,7 +259,7 @@ $list-box-menu-width: rem(300px);
   }
 
   .#{$prefix}--list-box.#{$prefix}--list-box--inline.#{$prefix}--list-box--expanded:hover {
-    background-color: $field-02;
+    background-color: transparent;
   }
 
   .#{$prefix}--list-box.#{$prefix}--list-box--inline
@@ -273,7 +278,7 @@ $list-box-menu-width: rem(300px);
   }
 
   .#{$prefix}--list-box--inline .#{$prefix}--list-box__label {
-    color: $text-01;
+    color: $text-primary;
   }
 
   .#{$prefix}--list-box--inline .#{$prefix}--list-box__field {
@@ -323,7 +328,7 @@ $list-box-menu-width: rem(300px);
   }
 
   .#{$prefix}--list-box__field[disabled] {
-    color: $disabled-02;
+    color: $text-disabled;
     outline: none;
   }
 
@@ -387,7 +392,7 @@ $list-box-menu-width: rem(300px);
     @include type-style('body-short-01');
 
     overflow: hidden;
-    color: $text-01;
+    color: $text-primary;
     white-space: nowrap;
     text-overflow: ellipsis;
     user-select: none;
@@ -410,7 +415,7 @@ $list-box-menu-width: rem(300px);
   }
 
   .#{$prefix}--list-box__menu-icon > svg {
-    fill: $icon-01;
+    fill: $icon-primary;
 
     // Windows, Firefox HCM Fix
     @media screen and (-ms-high-contrast: active),
@@ -454,7 +459,7 @@ $list-box-menu-width: rem(300px);
   }
 
   .#{$prefix}--list-box__selection > svg {
-    fill: $icon-01;
+    fill: $icon-primary;
 
     // Windows, Firefox HCM Fix
     @media screen and (-ms-high-contrast: active),
@@ -483,9 +488,9 @@ $list-box-menu-width: rem(300px);
     padding: rem(8px);
     // Align with hover circle of X button
     padding-right: rem(2px);
-    color: $inverse-01;
+    color: $text-inverse;
     line-height: 0;
-    background-color: $inverse-02;
+    background-color: $background-inverse;
     border-radius: rem(12px);
     transform: none;
 
@@ -501,10 +506,10 @@ $list-box-menu-width: rem(300px);
     height: rem(20px);
     margin-left: rem(4px);
     padding: rem(2px);
-    fill: $inverse-01;
+    fill: $icon-inverse;
 
     &:hover {
-      background-color: $hover-secondary;
+      background-color: $button-secondary-hover;
       border-radius: 50%;
     }
 
@@ -517,10 +522,10 @@ $list-box-menu-width: rem(300px);
   }
 
   .#{$prefix}--list-box--disabled .#{$prefix}--list-box__selection--multi {
-    @include tag-theme($disabled-02, $disabled-01);
+    @include tag-theme($text-disabled, $field-disabled);
 
     > svg {
-      fill: $disabled-01;
+      fill: $icon-disabled;
 
       &:hover {
         background-color: initial;
@@ -549,7 +554,7 @@ $list-box-menu-width: rem(300px);
     z-index: z('dropdown');
     width: $list-box-width;
     overflow-y: auto;
-    background-color: $ui-01;
+    background-color: $layer;
     transition: max-height $duration--fast-02 motion(standard, productive);
 
     &:focus {
@@ -590,20 +595,21 @@ $list-box-menu-width: rem(300px);
 
     position: relative;
     height: rem(40px);
-    color: $text-02;
+    color: $text-secondary;
     cursor: pointer;
     transition: background $duration--fast-01 motion(standard, productive);
     user-select: none;
 
     &:hover {
-      background-color: $hover-ui;
+      background-color: $layer-hover;
     }
 
     &:active {
-      background-color: $selected-ui;
+      background-color: $layer-selected;
     }
   }
 
+  // V11: Possibly deprecate
   .#{$prefix}--list-box--light .#{$prefix}--list-box__menu-item:hover {
     background-color: $hover-light-ui;
   }
@@ -622,13 +628,14 @@ $list-box-menu-width: rem(300px);
     background-color: transparent;
   }
 
+  // V11: Possibly deprecate
   .#{$prefix}--list-box--light .#{$prefix}--list-box__menu-item:active {
     background-color: $selected-light-ui;
   }
 
   .#{$prefix}--list-box--disabled
     .#{$prefix}--list-box__menu-item__option:hover {
-    border-top-color: $ui-03;
+    border-top-color: $border-subtle;
   }
 
   .#{$prefix}--list-box__menu-item:first-of-type
@@ -638,7 +645,7 @@ $list-box-menu-width: rem(300px);
 
   .#{$prefix}--list-box__menu-item:hover
     .#{$prefix}--list-box__menu-item__option {
-    color: $text-01;
+    color: $text-primary;
   }
 
   .#{$prefix}--list-box__menu-item:hover
@@ -651,7 +658,7 @@ $list-box-menu-width: rem(300px);
     .#{$prefix}--list-box__menu-item:hover
     + .#{$prefix}--list-box__menu-item
     .#{$prefix}--list-box__menu-item__option {
-    border-top-color: $ui-03;
+    border-top-color: $border-subtle;
   }
 
   .#{$prefix}--list-box__menu-item__option {
@@ -663,14 +670,14 @@ $list-box-menu-width: rem(300px);
     padding: rem(11px) 0;
     padding-right: $carbon--spacing-06;
     overflow: hidden;
-    color: $text-02;
+    color: $text-secondary;
     font-weight: normal;
     line-height: 1rem;
     white-space: nowrap;
     text-decoration: none;
     text-overflow: ellipsis;
     border-top: 1px solid transparent;
-    border-top-color: $ui-03;
+    border-top-color: $border-subtle;
     border-bottom: 1px solid transparent;
     transition: border-color $duration--fast-01 motion(standard, productive),
       color $duration--fast-01 motion(standard, productive);
@@ -691,7 +698,7 @@ $list-box-menu-width: rem(300px);
     }
 
     &:hover {
-      color: $text-01;
+      color: $text-primary;
       border-color: transparent;
     }
   }
@@ -714,7 +721,7 @@ $list-box-menu-width: rem(300px);
     .#{$prefix}--list-box__menu-item:hover
     .#{$prefix}--list-box__menu-item__option,
   .#{$prefix}--list-box--disabled .#{$prefix}--list-box__menu-item__option {
-    color: $disabled-02;
+    color: $text-disabled;
   }
 
   .#{$prefix}--list-box.#{$prefix}--list-box--inline
@@ -729,8 +736,8 @@ $list-box-menu-width: rem(300px);
   }
 
   .#{$prefix}--list-box__menu-item--highlighted {
-    color: $text-01;
-    background-color: $hover-ui;
+    color: $text-primary;
+    background-color: $layer-hover;
     border-color: transparent;
 
     // Windows, Firefox HCM Fix
@@ -751,15 +758,16 @@ $list-box-menu-width: rem(300px);
 
   .#{$prefix}--list-box__menu-item--highlighted
     .#{$prefix}--list-box__menu-item__option {
-    color: $text-01;
+    color: $text-primary;
   }
 
   .#{$prefix}--list-box__menu-item--active {
-    color: $text-01;
-    background-color: $selected-ui;
-    border-bottom-color: $selected-ui;
+    color: $text-primary;
+    background-color: $layer-selected;
+    border-bottom-color: $layer-selected;
   }
 
+  // V11: Possibly deprecate
   .#{$prefix}--list-box--light .#{$prefix}--list-box__menu-item--active {
     background-color: $selected-light-ui;
     border-bottom-color: $selected-light-ui;
@@ -767,13 +775,13 @@ $list-box-menu-width: rem(300px);
 
   .#{$prefix}--list-box__menu-item--active:hover,
   .#{$prefix}--list-box__menu-item--active.#{$prefix}--list-box__menu-item--highlighted {
-    background-color: $selected-ui;
-    border-bottom-color: $selected-ui;
+    background-color: $layer-selected;
+    border-bottom-color: $layer-selected;
   }
 
   .#{$prefix}--list-box__menu-item--active
     .#{$prefix}--list-box__menu-item__option {
-    color: $text-01;
+    color: $text-primary;
   }
 
   // Hide top border if previous list item is selected
@@ -789,7 +797,7 @@ $list-box-menu-width: rem(300px);
     right: rem(16px);
     display: none;
     transform: translateY(-50%);
-    fill: $icon-01;
+    fill: $icon-primary;
   }
 
   .#{$prefix}--list-box--inline
