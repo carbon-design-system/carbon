@@ -11,8 +11,8 @@ import { withKnobs, text, boolean, select } from '@storybook/addon-knobs';
 import Toggle from '../Toggle';
 
 const sizes = {
-  'Big/default size': undefined,
-  'Small size (sm)': 'sm',
+  'Small  (sm)': 'sm',
+  'Medium (md) - default': undefined,
 };
 
 const toggleProps = () => ({

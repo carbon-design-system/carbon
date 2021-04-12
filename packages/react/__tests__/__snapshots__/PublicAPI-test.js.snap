@@ -29,6 +29,8 @@ Map {
         "args": Array [
           Array [
             "sm",
+            "md",
+            "lg",
             "xl",
           ],
         ],
@@ -652,6 +654,8 @@ Map {
         "args": Array [
           Array [
             "sm",
+            "md",
+            "lg",
             "xl",
           ],
         ],
@@ -727,6 +731,7 @@ Map {
           Array [
             "xs",
             "sm",
+            "md",
             "lg",
           ],
         ],
@@ -888,6 +893,8 @@ Map {
         "args": Array [
           Array [
             "sm",
+            "md",
+            "lg",
             "xl",
           ],
         ],
@@ -2319,6 +2326,8 @@ Map {
         "args": Array [
           Array [
             "sm",
+            "md",
+            "lg",
             "xl",
           ],
         ],
@@ -2447,6 +2456,8 @@ Map {
         "args": Array [
           Array [
             "sm",
+            "md",
+            "lg",
             "xl",
           ],
         ],
@@ -3217,6 +3228,7 @@ Map {
         "args": Array [
           Array [
             "sm",
+            "md",
             "lg",
           ],
         ],
@@ -3365,6 +3377,7 @@ Map {
           Array [
             "xs",
             "sm",
+            "md",
             "lg",
           ],
         ],
@@ -3681,6 +3694,8 @@ Map {
           "args": Array [
             Array [
               "sm",
+              "md",
+              "lg",
               "xl",
             ],
           ],
@@ -3920,6 +3935,8 @@ Map {
         "args": Array [
           Array [
             "sm",
+            "md",
+            "lg",
             "xl",
           ],
         ],
@@ -4842,6 +4859,8 @@ Map {
         "args": Array [
           Array [
             "sm",
+            "md",
+            "lg",
             "xl",
           ],
         ],
@@ -5352,6 +5371,7 @@ Map {
         "args": Array [
           Array [
             "sm",
+            "md",
           ],
         ],
         "type": "oneOf",
@@ -5757,6 +5777,8 @@ Map {
         "args": Array [
           Array [
             "sm",
+            "md",
+            "lg",
             "xl",
           ],
         ],
@@ -6134,6 +6156,8 @@ Map {
         "args": Array [
           Array [
             "sm",
+            "md",
+            "lg",
             "xl",
           ],
         ],
@@ -6228,6 +6252,7 @@ Map {
         "args": Array [
           Array [
             "sm",
+            "md",
           ],
         ],
         "type": "oneOf",
@@ -6665,6 +6690,8 @@ Map {
         "args": Array [
           Array [
             "sm",
+            "md",
+            "lg",
             "xl",
           ],
         ],

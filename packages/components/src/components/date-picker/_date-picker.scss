@@ -118,7 +118,9 @@
   }
 
   // Size variant styles
-  .#{$prefix}--date-picker__input--xl {
+  // TODO V11: Remove xl selector
+  .#{$prefix}--date-picker__input--xl,
+  .#{$prefix}--date-picker__input--lg {
     height: rem(48px);
   }
 
