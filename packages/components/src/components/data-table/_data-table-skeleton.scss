@@ -29,11 +29,11 @@
     tr:hover {
       td {
         background: transparent;
-        border-color: $ui-03;
+        border-color: $border-subtle;
 
         &:first-of-type,
         &:last-of-type {
-          border-color: $ui-03;
+          border-color: $border-subtle;
         }
       }
     }
@@ -44,11 +44,11 @@
   }
 
   .#{$prefix}--data-table.#{$prefix}--skeleton th span {
-    background: $skeleton-02;
+    background: $skeleton-element;
   }
 
   .#{$prefix}--data-table.#{$prefix}--skeleton th span::before {
-    background: $skeleton-01;
+    background: $skeleton-background;
   }
 
   .#{$prefix}--data-table-container.#{$prefix}--skeleton
