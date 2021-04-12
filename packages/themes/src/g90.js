@@ -142,7 +142,7 @@ export const skeleton02 = gray70;
 // TO-DO: remove fallback color when v11 is released and assign carbon colors to new tokens
 export const background = uiBackground;
 export const layer = ui01;
-export const layerAlt = ui03;
+export const layerAccent = ui03;
 export const field = field01;
 export const backgroundInverse = inverse02;
 export const backgroundBrand = interactive01;
@@ -197,7 +197,7 @@ export const buttonSecondaryActive = activeSecondary;
 export const buttonTertiaryActive = activeTertiary;
 
 export const focusInset = inverse01;
-export const focuseInverse = inverseFocusUi;
+export const focusInverse = inverseFocusUi;
 
 export const backgroundHover = hoverUI;
 export const layerHover = hoverUI;

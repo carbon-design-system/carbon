@@ -80,7 +80,7 @@
   }
 
   .#{$prefix}--toolbar-search-container-expandable
-    .#{$prefix}--search-magnifier {
+    .#{$prefix}--search-magnifier-icon {
     left: 0;
     width: $spacing-09;
     height: $spacing-09;
@@ -88,7 +88,7 @@
   }
 
   .#{$prefix}--toolbar-search-container-expandable.#{$prefix}--search--disabled
-    .#{$prefix}--search-magnifier {
+    .#{$prefix}--search-magnifier-icon {
     background-color: $disabled-01;
     cursor: not-allowed;
     transition: background-color none;
@@ -153,11 +153,11 @@
   }
 
   .#{$prefix}--toolbar-search-container-active
-    .#{$prefix}--search-magnifier:focus,
+    .#{$prefix}--search-magnifier-icon:focus,
   .#{$prefix}--toolbar-search-container-active
-    .#{$prefix}--search-magnifier:active,
+    .#{$prefix}--search-magnifier-icon:active,
   .#{$prefix}--toolbar-search-container-active
-    .#{$prefix}--search-magnifier:hover {
+    .#{$prefix}--search-magnifier-icon:hover {
     background-color: transparent;
     border: none;
     outline: none;
@@ -273,7 +273,7 @@
   }
 
   .#{$prefix}--toolbar-search-container-persistent
-    .#{$prefix}--search-magnifier {
+    .#{$prefix}--search-magnifier-icon {
     left: $spacing-05;
   }
 
@@ -465,9 +465,9 @@
     }
 
     .#{$prefix}--toolbar-search-container-expandable
-      .#{$prefix}--search-magnifier,
+      .#{$prefix}--search-magnifier-icon,
     .#{$prefix}--toolbar-search-container-persistent
-      .#{$prefix}--search-magnifier {
+      .#{$prefix}--search-magnifier-icon {
       width: rem(32px);
       height: rem(32px);
       padding: $spacing-03;
@@ -513,18 +513,18 @@
     }
 
     .#{$prefix}--toolbar-search-container-active
-      .#{$prefix}--search-magnifier:focus,
+      .#{$prefix}--search-magnifier-icon:focus,
     .#{$prefix}--toolbar-search-container-active
-      .#{$prefix}--search-magnifier:active,
+      .#{$prefix}--search-magnifier-icon:active,
     .#{$prefix}--toolbar-search-container-active
-      .#{$prefix}--search-magnifier:hover {
+      .#{$prefix}--search-magnifier-icon:hover {
       @include focus-outline('reset');
 
       background-color: transparent;
     }
   }
 
-  .#{$prefix}--search--disabled .#{$prefix}--search-magnifier:hover {
+  .#{$prefix}--search--disabled .#{$prefix}--search-magnifier-icon:hover {
     background-color: transparent;
   }
 
