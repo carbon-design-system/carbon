@@ -160,6 +160,11 @@
     }
   }
 
+  .#{$prefix}--text-input__field-wrapper.#{$prefix}--password-input__field-wrapper
+    .#{$prefix}--text-input__invalid-icon {
+    right: $carbon--spacing-07;
+  }
+
   .#{$prefix}--password-input-wrapper .#{$prefix}--text-input__invalid-icon {
     right: $carbon--spacing-08;
   }
