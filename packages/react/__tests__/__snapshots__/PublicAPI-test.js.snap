@@ -4964,119 +4964,12 @@ Map {
       },
     },
   },
-  "StructuredListWrapper" => Object {
-    "defaultProps": Object {
-      "ariaLabel": "Structured list section",
-      "selection": false,
-    },
-    "propTypes": Object {
-      "ariaLabel": Object {
-        "type": "string",
-      },
-      "border": [Function],
-      "children": Object {
-        "type": "node",
-      },
-      "className": Object {
-        "type": "string",
-      },
-      "selection": Object {
-        "type": "bool",
-      },
-    },
-  },
-  "StructuredListHead" => Object {
-    "propTypes": Object {
-      "children": Object {
-        "type": "node",
-      },
-      "className": Object {
-        "type": "string",
-      },
-    },
-  },
-  "StructuredListBody" => Object {
-    "defaultProps": Object {
-      "onKeyDown": [Function],
-    },
-    "propTypes": Object {
-      "children": Object {
-        "type": "node",
-      },
-      "className": Object {
-        "type": "string",
-      },
-      "head": Object {
-        "type": "bool",
-      },
-      "onKeyDown": Object {
-        "type": "func",
-      },
-    },
-  },
-  "StructuredListRow" => Object {
-    "defaultProps": Object {
-      "head": false,
-      "onKeyDown": [Function],
-    },
-    "propTypes": Object {
-      "children": Object {
-        "type": "node",
-      },
-      "className": Object {
-        "type": "string",
-      },
-      "head": Object {
-        "type": "bool",
-      },
-      "label": [Function],
-      "onKeyDown": Object {
-        "type": "func",
-      },
-    },
-  },
-  "StructuredListInput" => Object {
-    "defaultProps": Object {
-      "title": "title",
-    },
-    "propTypes": Object {
-      "className": Object {
-        "type": "string",
-      },
-      "defaultChecked": [Function],
-      "id": Object {
-        "type": "string",
-      },
-      "name": Object {
-        "type": "string",
-      },
-      "onChange": [Function],
-      "title": Object {
-        "type": "string",
-      },
-      "value": [Function],
-    },
-  },
-  "StructuredListCell" => Object {
-    "defaultProps": Object {
-      "head": false,
-      "noWrap": false,
-    },
-    "propTypes": Object {
-      "children": Object {
-        "type": "node",
-      },
-      "className": Object {
-        "type": "string",
-      },
-      "head": Object {
-        "type": "bool",
-      },
-      "noWrap": Object {
-        "type": "bool",
-      },
-    },
-  },
+  "StructuredListWrapper" => Object {},
+  "StructuredListHead" => Object {},
+  "StructuredListBody" => Object {},
+  "StructuredListRow" => Object {},
+  "StructuredListInput" => Object {},
+  "StructuredListCell" => Object {},
   "Tab" => Object {
     "defaultProps": Object {
       "label": "provide a label",
