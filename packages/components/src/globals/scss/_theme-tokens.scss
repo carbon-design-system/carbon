@@ -18,7 +18,7 @@
 @if not feature-flag-enabled('enable-2021-release') {
   $background: $ui-background;
   $layer: $ui-01;
-  $layer-alt: $ui-03;
+  $layer-accent: $ui-03;
   $field: $field-01;
   $background-inverse: $inverse-02;
   $background-brand: $interactive-01;
@@ -73,7 +73,7 @@
   $button-tertiary-active: $active-tertiary;
 
   $focus-inset: $inverse-01;
-  $focuse-inverse: $inverse-focus-ui;
+  $focus-inverse: $inverse-focus-ui;
 
   $background-hover: $hover-ui;
   $layer-hover: $hover-ui;

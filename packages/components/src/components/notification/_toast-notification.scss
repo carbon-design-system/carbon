@@ -172,8 +172,7 @@
     transition: outline $transition--base, background-color $transition--base;
 
     &:focus {
-      // Needs to be updated to `focus-inverse` once #8269 is merged
-      outline: 2px solid $focuse-inverse;
+      outline: 2px solid $focus-inverse;
       outline-offset: -2px;
 
       // Firefox HCM fix
