@@ -5554,6 +5554,9 @@ Map {
           "isRequired": true,
           "type": "string",
         },
+        "inline": Object {
+          "type": "bool",
+        },
         "invalid": Object {
           "type": "bool",
         },
@@ -5615,6 +5618,12 @@ Map {
             ],
           ],
           "type": "oneOfType",
+        },
+        "warn": Object {
+          "type": "bool",
+        },
+        "warnText": Object {
+          "type": "node",
         },
       },
       "render": [Function],
