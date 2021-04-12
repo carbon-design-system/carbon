@@ -6,68 +6,68 @@
  */
 import React from 'react';
 import {
-  StructuredListWrapper as StructuredListWrapperNew,
-  StructuredListHead as StructuredListHeadNew,
-  StructuredListInput as StructuredListInputNew,
-  StructuredListBody as StructuredListBodyNew,
-  StructuredListRow as StructuredListRowNew,
-  StructuredListCell as StructuredListCellNew,
+  StructuredListWrapper as StructuredListWrapperNext,
+  StructuredListHead as StructuredListHeadNext,
+  StructuredListInput as StructuredListInputNext,
+  StructuredListBody as StructuredListBodyNext,
+  StructuredListRow as StructuredListRowNext,
+  StructuredListCell as StructuredListCellNext,
 } from './next/StructuredList';
 import {
-  StructuredListWrapper as StructuredListWrapperOld,
-  StructuredListHead as StructuredListHeadOld,
-  StructuredListInput as StructuredListInputOld,
-  StructuredListBody as StructuredListBodyOld,
-  StructuredListRow as StructuredListRowOld,
-  StructuredListCell as StructuredListCellOld,
+  StructuredListWrapper as StructuredListWrapperClassic,
+  StructuredListHead as StructuredListHeadClassic,
+  StructuredListInput as StructuredListInputClassic,
+  StructuredListBody as StructuredListBodyClassic,
+  StructuredListRow as StructuredListRowClassic,
+  StructuredListCell as StructuredListCellClassic,
 } from './StructuredList';
 import { useFeatureFlag } from '../FeatureFlags';
 
 export function StructuredListWrapper(props) {
   const enabled = useFeatureFlag('enable-2021-release');
   if (enabled) {
-    return <StructuredListWrapperNew {...props} />;
+    return <StructuredListWrapperNext {...props} />;
   }
-  return <StructuredListWrapperOld {...props} />;
+  return <StructuredListWrapperClassic {...props} />;
 }
 
 export function StructuredListHead(props) {
   const enabled = useFeatureFlag('enable-2021-release');
   if (enabled) {
-    return <StructuredListHeadNew {...props} />;
+    return <StructuredListHeadNext {...props} />;
   }
-  return <StructuredListHeadOld {...props} />;
+  return <StructuredListHeadClassic {...props} />;
 }
 export function StructuredListInput(props) {
   const enabled = useFeatureFlag('enable-2021-release');
   if (enabled) {
-    return <StructuredListInputNew {...props} />;
+    return <StructuredListInputNext {...props} />;
   }
-  return <StructuredListInputOld {...props} />;
+  return <StructuredListInputClassic {...props} />;
 }
 
 export function StructuredListBody(props) {
   const enabled = useFeatureFlag('enable-2021-release');
   if (enabled) {
-    return <StructuredListBodyNew {...props} />;
+    return <StructuredListBodyNext {...props} />;
   }
-  return <StructuredListBodyOld {...props} />;
+  return <StructuredListBodyClassic {...props} />;
 }
 
 export function StructuredListRow(props) {
   const enabled = useFeatureFlag('enable-2021-release');
   if (enabled) {
-    return <StructuredListRowNew {...props} />;
+    return <StructuredListRowNext {...props} />;
   }
-  return <StructuredListRowOld {...props} />;
+  return <StructuredListRowClassic {...props} />;
 }
 
 export function StructuredListCell(props) {
   const enabled = useFeatureFlag('enable-2021-release');
   if (enabled) {
-    return <StructuredListCellNew {...props} />;
+    return <StructuredListCellNext {...props} />;
   }
-  return <StructuredListCellOld {...props} />;
+  return <StructuredListCellClassic {...props} />;
 }
 
 export * from './StructuredList.Skeleton';
