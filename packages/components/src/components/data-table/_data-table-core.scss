@@ -58,7 +58,7 @@
   .#{$prefix}--data-table thead {
     @include type-style('productive-heading-01');
 
-    background-color: $layer-alt;
+    background-color: $layer-accent;
   }
 
   .#{$prefix}--data-table tbody {
@@ -107,7 +107,7 @@
     padding-right: $spacing-05;
     padding-left: $spacing-05;
     color: $text-primary;
-    background-color: $layer-alt;
+    background-color: $layer-accent;
   }
 
   .#{$prefix}--data-table th:last-of-type {
@@ -292,7 +292,7 @@
     width: rem(44px);
     padding-right: $spacing-05;
     padding-left: $spacing-05;
-    background: $layer-alt;
+    background: $layer-accent;
     transition: background-color $duration--fast-01 motion(entrance, productive);
   }
 
@@ -539,7 +539,7 @@
   // Sticky header
   // -------------
   .#{$prefix}--data-table_inner-container {
-    background-color: $layer-alt;
+    background-color: $layer-accent;
     transform: translateZ(0);
   }
 

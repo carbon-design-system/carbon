@@ -39,7 +39,7 @@
     color: $text-primary;
     font: inherit;
     line-height: 1;
-    background-color: $layer-alt;
+    background-color: $layer-accent;
     transition: background-color $duration--fast-01 motion(entrance, productive),
       outline $duration--fast-01 motion(entrance, productive);
   }
