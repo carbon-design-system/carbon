@@ -23,7 +23,7 @@
     width: 100%;
     height: $spacing-09;
     overflow: hidden;
-    background-color: $ui-01;
+    background-color: $layer;
   }
 
   .#{$prefix}--toolbar-content {
@@ -68,7 +68,7 @@
       background-color $duration--fast-02 motion(entrance, productive);
 
     &:hover {
-      background-color: $hover-field;
+      background-color: $field-hover;
     }
   }
 
@@ -89,12 +89,12 @@
 
   .#{$prefix}--toolbar-search-container-expandable.#{$prefix}--search--disabled
     .#{$prefix}--search-magnifier-icon {
-    background-color: $disabled-01;
+    background-color: $layer-disabled;
     cursor: not-allowed;
     transition: background-color none;
   }
 
-  .#{$prefix}--toolbar-search-container-disabled {
+  .#{$prefix}--toolbar-search-container-disabled .#{$prefix}--search-input {
     cursor: not-allowed;
   }
 
@@ -111,7 +111,7 @@
     &::before {
       top: rem(2px);
       height: calc(100% - #{rem(4px)});
-      background-color: $hover-ui;
+      background-color: $field-hover;
     }
   }
 
@@ -148,7 +148,7 @@
 
   .#{$prefix}--toolbar-search-container-active
     .#{$prefix}--search-input:not(:placeholder-shown) {
-    background-color: $hover-field;
+    background-color: $field-hover;
     border: none;
   }
 
@@ -206,11 +206,11 @@
   }
 
   .#{$prefix}--toolbar-action:hover:not([disabled]) {
-    background-color: $hover-field;
+    background-color: $field-hover;
   }
 
   .#{$prefix}--toolbar-action:hover[aria-expanded='true'] {
-    background-color: $ui-01;
+    background-color: $layer;
   }
 
   .#{$prefix}--toolbar-action[disabled] {
@@ -219,7 +219,7 @@
 
   .#{$prefix}--toolbar-action[disabled] .#{$prefix}--toolbar-action__icon {
     cursor: not-allowed;
-    fill: $disabled;
+    fill: $icon-disabled;
   }
 
   .#{$prefix}--toolbar-action:focus:not([disabled]),
@@ -249,7 +249,7 @@
     width: auto;
     max-width: $spacing-05;
     height: $spacing-05;
-    fill: $icon-01;
+    fill: $icon-primary;
   }
 
   //-------------------------------------------------
@@ -290,14 +290,14 @@
 
   .#{$prefix}--toolbar-search-container-persistent
     .#{$prefix}--search-input:hover:not([disabled]) {
-    background-color: $hover-field;
+    background-color: $field-hover;
   }
 
   .#{$prefix}--toolbar-search-container-persistent
     .#{$prefix}--search-input:active:not([disabled]),
   .#{$prefix}--toolbar-search-container-persistent
     .#{$prefix}--search-input:not(:placeholder-shown) {
-    background-color: $hover-field;
+    background-color: $field-hover;
   }
 
   .#{$prefix}--toolbar-search-container-persistent .#{$prefix}--search-close {
@@ -327,7 +327,7 @@
     padding-right: $spacing-06;
     padding-left: $spacing-06;
     overflow-x: auto;
-    background-color: $interactive-01;
+    background-color: $background-brand;
     transform: translate3d(0, 48px, 0);
     transition: transform $duration--fast-02 motion(standard, productive),
       clip-path $duration--fast-02 motion(standard, productive),
@@ -357,17 +357,17 @@
   .#{$prefix}--action-list .#{$prefix}--btn {
     min-width: 0;
     padding: $button-padding-ghost;
-    color: $text-04;
+    color: $text-on-color;
   }
 
   .#{$prefix}--action-list .#{$prefix}--btn:disabled {
-    color: $disabled-03;
+    color: $text-on-color-disabled;
   }
 
   .#{$prefix}--action-list .#{$prefix}--btn .#{$prefix}--btn__icon {
     position: static;
     margin-left: $spacing-03;
-    fill: $icon-03;
+    fill: $icon-on-color;
   }
 
   .#{$prefix}--action-list .#{$prefix}--btn .#{$prefix}--btn__icon .st0 {
@@ -388,7 +388,7 @@
   }
 
   .#{$prefix}--action-list .#{$prefix}--btn--primary:focus {
-    outline: 2px solid $ui-01;
+    outline: 2px solid $layer;
     outline-offset: rem(-2px);
   }
 
@@ -410,7 +410,7 @@
     display: block;
     width: rem(1px);
     height: $spacing-05;
-    background-color: $text-04;
+    background-color: $text-on-color;
     border: none;
     opacity: 1;
     transition: opacity $duration--fast-02 motion(standard, productive);
@@ -435,7 +435,7 @@
     display: flex;
     align-items: center;
     margin-left: $spacing-05;
-    color: $text-04;
+    color: $text-on-color;
   }
 
   .#{$prefix}--batch-summary__para {
@@ -502,14 +502,14 @@
       .#{$prefix}--search-input:focus {
       @include focus-outline('outline');
 
-      background-color: $hover-field;
+      background-color: $field-hover;
     }
 
     .#{$prefix}--toolbar-search-container-active
       .#{$prefix}--search-input:active,
     .#{$prefix}--toolbar-search-container-active
       .#{$prefix}--search-input:not(:placeholder-shown) {
-      background-color: $hover-field;
+      background-color: $field-hover;
     }
 
     .#{$prefix}--toolbar-search-container-active
