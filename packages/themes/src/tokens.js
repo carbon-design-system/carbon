@@ -108,7 +108,7 @@ const colors = [
   // New color tokens
   'background',
   'layer',
-  'layerAlt',
+  'layerAccent',
   'field',
   'backgroundInverse',
   'backgroundBrand',
@@ -163,7 +163,7 @@ const colors = [
   'buttonTertiaryActive',
 
   'focusInset',
-  'focuseInverse',
+  'focusInverse',
 
   'backgroundHover',
   'layerHover',
@@ -302,7 +302,7 @@ export const unstable__meta = {
         //new tokens
         'background',
         'layer',
-        'layerAlt',
+        'layerAccent',
         'field',
         'backgroundInverse',
         'backgroundBrand',
@@ -394,7 +394,7 @@ export const unstable__meta = {
         'buttonTertiaryActive',
 
         'focusInset',
-        'focuseInverse',
+        'focusInverse',
 
         'backgroundHover',
         'layerHover',
