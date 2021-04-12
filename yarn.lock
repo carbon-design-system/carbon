@@ -9278,10 +9278,10 @@ __metadata:
     babel-plugin-react-docgen: ^4.2.1
     babel-plugin-transform-inline-environment-variables: ^0.4.0
     browserslist-config-carbon: ^10.6.1
-    carbon-components: ^10.32.0
+    carbon-components: ^10.32.1
     carbon-icons: ^7.0.5
     chalk: ^2.3.0
-    classnames: 2.2.6
+    classnames: 2.3.1
     cli-table: ^0.3.0
     copy-to-clipboard: ^3.3.1
     core-js: ^3.6.5
@@ -9358,7 +9358,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"carbon-components@^10.32.0, carbon-components@workspace:packages/components":
+"carbon-components@^10.32.1, carbon-components@workspace:packages/components":
   version: 0.0.0-use.local
   resolution: "carbon-components@workspace:packages/components"
   dependencies:
@@ -9917,10 +9917,17 @@ __metadata:
   languageName: node
   linkType: hard
 
-"classnames@npm:2.2.6, classnames@npm:^2.2.0, classnames@npm:^2.2.5":
+"classnames@npm:2.2.6":
   version: 2.2.6
   resolution: "classnames@npm:2.2.6"
   checksum: 09a4fda780158aa8399079898eabeeca0c48c28641d9e4de140db7412e5e346843039ded1af0152f755afc2cc246ff8c3d6f227bf0dcb004e070b7fa14ec54cc
+  languageName: node
+  linkType: hard
+
+"classnames@npm:2.3.1, classnames@npm:^2.2.0, classnames@npm:^2.2.5":
+  version: 2.3.1
+  resolution: "classnames@npm:2.3.1"
+  checksum: 57d536edede609f81425d24b062d8d720a466565faf1e38d32c881e883920baa71519ac70c7b565e9cd39201fb1c1ff9bdf8aabf8e26544bac481e7924867c83
   languageName: node
   linkType: hard
 
