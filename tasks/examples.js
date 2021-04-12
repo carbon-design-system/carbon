@@ -74,6 +74,7 @@ async function main() {
         const examples = (await fs.readdir(examplesDir)).filter((example) => {
           return (
             example !== '.yarnrc' &&
+            example !== '.yarnrc.yml' &&
             !IGNORE_EXAMPLE_DIRS.has(example) &&
             example !== '.DS_Store'
           );
@@ -141,7 +142,8 @@ async function main() {
 
       if (await fs.pathExists(exampleBuildDir)) {
         await fs.copy(exampleBuildDir, exampleDir);
-        return;
+        continue;
+        // return;
       }
 
       await fs.copy(example.filepath, exampleDir, {
