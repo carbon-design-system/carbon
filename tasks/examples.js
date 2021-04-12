@@ -93,78 +93,80 @@ async function main() {
     (pkg) => Array.isArray(pkg.examples) && pkg.examples.length !== 0
   );
 
-  await Promise.all(
-    packagesWithExamples.map(async (pkg) => {
-      reporter.info(`Building examples in package \`${pkg.name}\``);
+  // await Promise.all(
+  // packagesWithExamples.map(async (pkg) => {
+  for (const pkg of packagesWithExamples) {
+    reporter.info(`Building examples in package \`${pkg.name}\``);
 
-      const { examples, name } = pkg;
-      const packageDir = path.join(BUILD_DIR, name, 'examples');
+    const { examples, name } = pkg;
+    const packageDir = path.join(BUILD_DIR, name, 'examples');
 
-      await fs.ensureDir(packageDir);
+    await fs.ensureDir(packageDir);
 
-      // await Promise.all(
-      // examples.map(async (example) => {
-      for (const example of examples) {
-        reporter.info(
-          `Building example \`${example.name}\` in package \`${pkg.name}\``
-        );
+    // await Promise.all(
+    // examples.map(async (example) => {
+    for (const example of examples) {
+      reporter.info(
+        `Building example \`${example.name}\` in package \`${pkg.name}\``
+      );
 
-        const exampleDir = path.join(packageDir, example.name);
-        const exampleBuildDir = path.join(example.filepath, 'build');
-        const packageJsonPath = path.join(example.filepath, 'package.json');
-        const packageJson = await fs.readJson(packageJsonPath);
+      const exampleDir = path.join(packageDir, example.name);
+      const exampleBuildDir = path.join(example.filepath, 'build');
+      const packageJsonPath = path.join(example.filepath, 'package.json');
+      const packageJson = await fs.readJson(packageJsonPath);
 
-        await fs.ensureDir(exampleDir);
+      await fs.ensureDir(exampleDir);
 
-        if (packageJson.scripts.build) {
-          const installResult = spawn.sync('yarn', ['install'], {
-            stdio: 'ignore',
-            cwd: example.filepath,
-          });
-          if (installResult.status !== 0) {
-            throw new Error(
-              `Error installing dependencies for ${pkg.name}:${example.name}`
-            );
-          }
-
-          const buildResult = spawn.sync('yarn', ['build'], {
-            stdio: 'inherit',
-            cwd: example.filepath,
-          });
-          if (buildResult.status !== 0) {
-            throw new Error(
-              `Error building example ${example.name} for ${pkg.name}`
-            );
-          }
-        }
-
-        if (await fs.pathExists(exampleBuildDir)) {
-          await fs.copy(exampleBuildDir, exampleDir);
-          return;
-        }
-
-        await fs.copy(example.filepath, exampleDir, {
-          filter(src) {
-            const relativePath = path.relative(example.filepath, src);
-            if (relativePath.includes('node_modules')) {
-              return false;
-            }
-            if (relativePath[0] === '.') {
-              return false;
-            }
-            return true;
-          },
+      if (packageJson.scripts.build) {
+        const installResult = spawn.sync('yarn', ['install'], {
+          stdio: 'inherit',
+          cwd: example.filepath,
         });
-        reporter.success(
-          `Built example \`${example.name}\` in package \`${pkg.name}\``
-        );
-      }
-      // })
-      // );
+        if (installResult.status !== 0) {
+          throw new Error(
+            `Error installing dependencies for ${pkg.name}:${example.name}`
+          );
+        }
 
-      reporter.success(`Built examples in package \`${pkg.name}\``);
-    })
-  );
+        const buildResult = spawn.sync('yarn', ['build'], {
+          stdio: 'inherit',
+          cwd: example.filepath,
+        });
+        if (buildResult.status !== 0) {
+          throw new Error(
+            `Error building example ${example.name} for ${pkg.name}`
+          );
+        }
+      }
+
+      if (await fs.pathExists(exampleBuildDir)) {
+        await fs.copy(exampleBuildDir, exampleDir);
+        return;
+      }
+
+      await fs.copy(example.filepath, exampleDir, {
+        filter(src) {
+          const relativePath = path.relative(example.filepath, src);
+          if (relativePath.includes('node_modules')) {
+            return false;
+          }
+          if (relativePath[0] === '.') {
+            return false;
+          }
+          return true;
+        },
+      });
+      reporter.success(
+        `Built example \`${example.name}\` in package \`${pkg.name}\``
+      );
+    }
+    // })
+    // );
+
+    reporter.success(`Built examples in package \`${pkg.name}\``);
+  }
+  // })
+  // );
 
   const links = packagesWithExamples.reduce((html, pkg) => {
     const links = pkg.examples.reduce((acc, example) => {
