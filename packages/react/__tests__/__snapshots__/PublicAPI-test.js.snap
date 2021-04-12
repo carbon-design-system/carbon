@@ -5508,6 +5508,9 @@ Map {
         "hideLabel": Object {
           "type": "bool",
         },
+        "hidePasswordLabel": Object {
+          "type": "string",
+        },
         "id": Object {
           "isRequired": true,
           "type": "string",
@@ -5532,6 +5535,9 @@ Map {
           "type": "func",
         },
         "placeholder": Object {
+          "type": "string",
+        },
+        "showPasswordLabel": Object {
           "type": "string",
         },
         "size": Object {
