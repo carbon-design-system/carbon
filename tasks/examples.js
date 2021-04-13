@@ -30,6 +30,7 @@ const IGNORE_EXAMPLE_DIRS = new Set([
   'vue-cli',
   'storybook',
   'sass-modules',
+  'css-grid',
 ]);
 
 /**
