@@ -45,7 +45,9 @@
     }
   }
 
-  .#{$prefix}--text-input--xl {
+  // TODO V11: Remove xl selector
+  .#{$prefix}--text-input--xl,
+  .#{$prefix}--text-input--lg {
     height: rem(48px);
   }
 
@@ -315,7 +317,9 @@
     margin-top: rem(9px);
   }
 
-  .#{$prefix}--text-input-wrapper .#{$prefix}--label--inline--xl {
+  // TODO V11: Remove xl selector
+  .#{$prefix}--text-input-wrapper .#{$prefix}--label--inline--xl,
+  .#{$prefix}--text-input-wrapper .#{$prefix}--label--inline--lg {
     margin-top: rem(17px);
   }
 
