@@ -81,9 +81,9 @@ Link.propTypes = {
   renderIcon: PropTypes.oneOfType([PropTypes.func, PropTypes.object]),
 
   /**
-   * Specify the size of the Link. Currently supports either `sm` or `lg` as an option.
+   * Specify the size of the Link. Currently supports either `sm`, 'md' (default) or 'lg` as an option.
    */
-  size: PropTypes.oneOf(['sm', 'lg']),
+  size: PropTypes.oneOf(['sm', 'md', 'lg']),
 
   /**
    * Specify whether you want the link to receive visited styles after the link has been clicked

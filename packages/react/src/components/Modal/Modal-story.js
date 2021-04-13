@@ -24,9 +24,9 @@ import TextInput from '../TextInput';
 import mdx from './Modal.mdx';
 
 const sizes = {
-  Default: '',
   'Extra small (xs)': 'xs',
   'Small (sm)': 'sm',
+  'Medium (md)': 'md',
   'Large (lg)': 'lg',
 };
 
@@ -65,7 +65,7 @@ const props = {
       'Primary focus element selector (selectorPrimaryFocus)',
       '[data-modal-primary-focus]'
     ),
-    size: select('Size (size)', sizes),
+    size: select('Size (size)', sizes, 'md'),
     iconDescription: text('Close icon description (iconDescription)', 'Close'),
     onBlur: action('onBlur'),
     onClick: action('onClick'),
