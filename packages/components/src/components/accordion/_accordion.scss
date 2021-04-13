@@ -73,7 +73,9 @@
   }
 
   // Size styles
-  .#{$prefix}--accordion--xl .#{$prefix}--accordion__heading {
+  // TODO V11: Remove xl selector
+  .#{$prefix}--accordion--xl .#{$prefix}--accordion__heading,
+  .#{$prefix}--accordion--lg .#{$prefix}--accordion__heading {
     min-height: rem(48px);
   }
 
