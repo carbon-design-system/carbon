@@ -27,6 +27,8 @@ describe('Disclosure', () => {
     expect(screen.getByText('content')).toBeVisible();
   });
 
+  it.todo('should toggle open when interacted with Enter or Space');
+
   describe('Component API', () => {
     it('should accept a custom className on the Disclosure component', () => {
       const { container } = render(
@@ -46,5 +48,9 @@ describe('Disclosure', () => {
 
       expect(container.firstChild).toHaveClass('test');
     });
+
+    it.todo('should allow the parent to control `open` state');
+
+    it.todo('should place the `id` attribute on the outermost node');
   });
 });

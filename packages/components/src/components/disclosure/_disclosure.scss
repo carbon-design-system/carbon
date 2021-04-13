@@ -1,0 +1,38 @@
+//
+// Copyright IBM Corp. 2016, 2018
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+//-----------------------------
+// Disclosure
+//-----------------------------
+
+@import '../../globals/scss/vars';
+@import '../../globals/scss/vendor/@carbon/elements/scss/import-once/import-once';
+
+/// Disclosure styles
+/// @access private
+/// @group list
+@mixin disclosure {
+  .#{$prefix}--disclosure-btn {
+    display: inline-block;
+    // Remove marker added by the display: list-item browser default
+    list-style: none;
+  }
+
+  // Remove marker added by details polyfill
+  .#{$prefix}--disclosure-btn::before {
+    display: none;
+  }
+
+  // Remove marker added by Chrome
+  .#{$prefix}--disclosure-btn::marker {
+    display: none;
+  }
+}
+
+@include exports('disclosure') {
+  @include disclosure;
+}

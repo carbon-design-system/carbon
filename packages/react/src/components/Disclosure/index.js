@@ -5,15 +5,64 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React from 'react';
+import { settings } from 'carbon-components';
+import cx from 'classnames';
 import PropTypes from 'prop-types';
-function Disclosure({ className, children }) {
-  return <details className={className}>{children}</details>;
-}
+import React, { useRef } from 'react';
+import { useOutsideClick } from '../../internal/useOutsideClick';
+import { useControllableState } from '../../internal/useControllableState';
 
-function DisclosureButton({ className, children }) {
-  return <summary className={className}>{children}</summary>;
-}
+const { prefix } = settings;
+
+const Disclosure = React.forwardRef(function Disclosure(
+  {
+    className,
+    children,
+    defaultOpen = false,
+    onChange,
+    open: controlledOpen,
+    ...rest
+  },
+  ref
+) {
+  const detailsRef = useOptionalRef(ref);
+  const [open, setOpen, isControlled] = useControllableState(
+    controlledOpen,
+    onChange,
+    defaultOpen
+  );
+
+  function onToggle(event) {
+    if (!event.defaultPrevented) {
+      setOpen(event.target.open);
+    }
+  }
+
+  useOutsideClick(detailsRef, () => {
+    if (isControlled) {
+      return;
+    }
+    if (open === true) {
+      setOpen(false);
+    }
+  });
+
+  return (
+    <details
+      {...rest}
+      className={cx(
+        `${prefix}--disclosure-container`,
+        `${prefix}--disclosure-overlay`,
+        className
+      )}
+      onToggle={onToggle}
+      open={open}
+      ref={detailsRef}>
+      {children}
+    </details>
+  );
+});
+
 Disclosure.propTypes = {
   /**
    * The child nodes.
@@ -26,6 +75,17 @@ Disclosure.propTypes = {
   className: PropTypes.string,
 };
 
+function DisclosureButton({ className, children, ...rest }) {
+  return (
+    <summary
+      {...rest}
+      className={cx(`${prefix}--disclosure-btn`, className)}
+      role="button">
+      {children}
+    </summary>
+  );
+}
+
 DisclosureButton.propTypes = {
   /**
    * The child nodes.
@@ -37,5 +97,13 @@ DisclosureButton.propTypes = {
    */
   className: PropTypes.string,
 };
+
+function useOptionalRef(optionalRef) {
+  const ref = useRef(null);
+  if (optionalRef) {
+    return optionalRef;
+  }
+  return ref;
+}
 
 export { Disclosure, DisclosureButton };

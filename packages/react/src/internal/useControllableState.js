@@ -36,7 +36,7 @@ export function useControllableState(
   }
 
   function setState(stateOrUpdater) {
-    if (controlled.current === true) {
+    if (controlled.current === true && controlledSetState) {
       controlledSetState(stateOrUpdater);
     } else {
       internalSetState(stateOrUpdater);
@@ -71,5 +71,5 @@ export function useControllableState(
     }
   }, [controlledState]);
 
-  return [state, setState];
+  return [state, setState, controlled.current];
 }
