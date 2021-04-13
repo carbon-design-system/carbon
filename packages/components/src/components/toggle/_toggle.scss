@@ -395,7 +395,7 @@
   // Disabled
   // ---------------------------------------------
   .#{$prefix}--toggle-input:disabled + .#{$prefix}--toggle-input__label {
-    color: $disabled;
+    color: $text-disabled;
     cursor: not-allowed;
   }
 

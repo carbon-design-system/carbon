@@ -271,6 +271,7 @@
 
   .#{$prefix}--data-table--zebra tbody tr[data-parent-row]:nth-child(4n + 1) td,
   .#{$prefix}--data-table--zebra tbody tr[data-child-row]:nth-child(4n + 2) td {
+    // V11: Question for design: This currently maps to $ui-02
     background-color: $data-table-zebra-color;
     border-top: 1px solid $data-table-zebra-color;
     border-bottom: 1px solid $data-table-zebra-color;
