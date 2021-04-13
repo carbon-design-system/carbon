@@ -314,7 +314,7 @@
       box-sizing: border-box;
       width: carbon--rem(18px);
       height: carbon--rem(18px);
-      background-color: $icon-03;
+      background-color: $icon-on-color;
       border-radius: 50%;
       transition: transform $duration--fast-01 motion(exit, productive);
       content: '';
@@ -363,11 +363,11 @@
     + .#{$prefix}--toggle-input__label
     > .#{$prefix}--toggle__switch {
     &::before {
-      background-color: $support-02;
+      background-color: $support-success;
     }
 
     &::after {
-      background-color: $icon-03;
+      background-color: $icon-on-color;
       transform: translateX(carbon--rem(24px));
     }
   }
@@ -381,7 +381,7 @@
   .#{$prefix}--toggle-input:active
     + .#{$prefix}--toggle-input__label
     > .#{$prefix}--toggle__switch::before {
-    box-shadow: 0 0 0 1px $ui-02, 0 0 0 3px $focus;
+    box-shadow: 0 0 0 1px $background, 0 0 0 3px $focus;
 
     // Windows, Firefox HCM Fix
     @media screen and (-ms-high-contrast: active),
@@ -405,11 +405,11 @@
     cursor: not-allowed;
 
     &::before {
-      background-color: $disabled-01;
+      background-color: $layer-disabled;
     }
 
     &::after {
-      background-color: $disabled-02;
+      background-color: $icon-disabled;
     }
 
     &::before,
@@ -430,14 +430,14 @@
     .#{$prefix}--toggle-input:disabled
     + .#{$prefix}--toggle-input__label
     > .#{$prefix}--toggle__switch::before {
-    background-color: $disabled-02;
+    background-color: $button-disabled;
   }
 
   .#{$prefix}--data-table
     .#{$prefix}--toggle-input:disabled
     + .#{$prefix}--toggle-input__label
     > .#{$prefix}--toggle__switch::after {
-    background-color: $disabled-03;
+    background-color: $icon-on-color-disabled;
   }
 
   //----------------------------------------------
@@ -473,14 +473,14 @@
 
     .#{$prefix}--toggle__check {
       transform: scale(1) translateX(carbon--rem(16px));
-      fill: $support-02;
+      fill: $support-success;
     }
   }
 
   .#{$prefix}--toggle-input--small:disabled:checked
     + .#{$prefix}--toggle-input__label
     .#{$prefix}--toggle__check {
-    fill: $disabled-01;
+    fill: $layer-disabled;
   }
 
   //----------------------------------------------
