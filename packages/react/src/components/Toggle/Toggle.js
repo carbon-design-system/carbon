@@ -60,9 +60,9 @@ class Toggle extends React.Component {
     onToggle: PropTypes.func,
 
     /**
-     * Specify the size of the Toggle. Currently only supports 'sm'
+     * Specify the size of the Toggle. Currently only supports 'sm' or 'md' (default)
      */
-    size: PropTypes.oneOf(['sm']),
+    size: PropTypes.oneOf(['sm', 'md']),
 
     /**
      * Specify whether the control is toggled

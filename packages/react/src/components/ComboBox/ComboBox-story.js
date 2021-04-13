@@ -28,7 +28,6 @@ const items = [
   {
     id: 'option-3',
     text: 'Option 3',
-    selected: true,
   },
   {
     id: 'option-4',
@@ -41,9 +40,9 @@ const items = [
 ];
 
 const sizes = {
-  'Extra large size (xl)': 'xl',
-  'Default size': undefined,
-  'Small size (sm)': 'sm',
+  'Small  (sm)': 'sm',
+  'Medium (md) - default': undefined,
+  'Large  (lg)': 'lg',
 };
 
 const directions = {
@@ -64,6 +63,8 @@ export default {
 export const combobox = () => (
   <div style={{ width: 300 }}>
     <ComboBox
+      onChange={() => {}}
+      id="carbon-combobox"
       items={items}
       itemToString={(item) => (item ? item.text : '')}
       placeholder="Filter..."
@@ -118,6 +119,8 @@ export const Playground = () => {
 export const disabled = () => (
   <div style={{ width: 300 }}>
     <ComboBox
+      onChange={() => {}}
+      id="carbon-combobox-disabled"
       disabled
       items={items}
       itemToString={(item) => (item ? item.text : '')}
@@ -131,6 +134,8 @@ export const disabled = () => (
 export const light = () => (
   <div style={{ width: 300 }}>
     <ComboBox
+      onChange={() => {}}
+      id="carbon-combobox-light"
       light
       items={items}
       itemToString={(item) => (item ? item.text : '')}

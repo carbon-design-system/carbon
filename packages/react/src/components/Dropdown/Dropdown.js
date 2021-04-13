@@ -322,7 +322,7 @@ Dropdown.propTypes = {
   selectedItem: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
 
   /**
-   * Specify the size of the ListBox. Currently supports either `sm`, `lg` or `xl` as an option.
+   * Specify the size of the ListBox. Currently supports either `sm`, `md` or `lg` as an option.
    */
   size: ListBoxPropTypes.ListBoxSize,
 

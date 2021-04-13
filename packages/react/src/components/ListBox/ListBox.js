@@ -117,7 +117,7 @@ ListBox.propTypes = {
   light: PropTypes.bool,
 
   /**
-   * Specify the size of the ListBox. Currently supports either `sm` or `xl` as an option.
+   * Specify the size of the ListBox. Currently supports either `sm`, `md` or `lg` as an option.
    */
   size: ListBoxSize,
 

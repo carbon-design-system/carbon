@@ -146,9 +146,9 @@ Tag.propTypes = {
 
   /**
    * Specify the size of the Tag. Currently supports either `sm` or
-   * default sizes.
+   * 'md' (default) sizes.
    */
-  size: PropTypes.oneOf(['sm']),
+  size: PropTypes.oneOf(['sm', 'md']),
 
   /**
    * Text to show on clear filters

@@ -208,7 +208,7 @@ export default class Modal extends Component {
     /**
      * Specify the size variant.
      */
-    size: PropTypes.oneOf(['xs', 'sm', 'lg']),
+    size: PropTypes.oneOf(['xs', 'sm', 'md', 'lg']),
   };
 
   static defaultProps = {

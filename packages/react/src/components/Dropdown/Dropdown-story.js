@@ -46,9 +46,9 @@ const items = [
 ];
 
 const sizes = {
-  'Extra large size (xl)': 'xl',
-  'Default size': undefined,
-  'Small size (sm)': 'sm',
+  'Small  (sm)': 'sm',
+  'Medium (md) - default': undefined,
+  'Large  (lg)': 'lg',
 };
 
 const directions = {
@@ -57,7 +57,7 @@ const directions = {
 };
 
 const types = {
-  Default: '',
+  Default: 'default',
   Inline: 'inline',
 };
 
@@ -77,7 +77,7 @@ const props = () => ({
     'Form validation UI content (invalidText)',
     'A valid value is required'
   ),
-  type: select('Type (type)', types, ''),
+  type: select('Type (type)', types, 'default'),
   warn: boolean('Show warning state (warn)', false),
   warnText: text(
     'Warning state text (warnText)',
