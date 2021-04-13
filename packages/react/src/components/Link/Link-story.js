@@ -13,6 +13,12 @@ import { withKnobs, text, boolean, select } from '@storybook/addon-knobs';
 import Link from '../Link';
 import mdx from './Link.mdx';
 
+const sizes = {
+  'Small  (sm)': 'sm',
+  'Medium (md) - default': undefined,
+  'Large  (lg)': 'lg',
+};
+
 const props = () => ({
   className: 'some-class',
   href: text('The link href (href)', '#'),
@@ -23,11 +29,7 @@ const props = () => ({
     handler(evt);
   })(action('onClick')),
   disabled: boolean('Disabled', false),
-  size: select('Link size', {
-    Default: undefined,
-    'Small (sm)': 'sm',
-    'Large (lg)': 'lg',
-  }),
+  size: select('Field size (size)', sizes, undefined) || undefined,
 });
 
 export default {
