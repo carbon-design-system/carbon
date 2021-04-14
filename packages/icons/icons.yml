@@ -39,6 +39,9 @@
     - health
     - spline
     - s curve
+    - lineage
+    - data
+    - governance
 - name: 3D-curve--auto-vessels
   friendly_name: 3D curve auto vessels
   sizes:
@@ -123,6 +126,7 @@
     - communication
     - lattice
     - group
+    - dependent
   sizes:
     - 32
 - name: 4K
@@ -888,6 +892,7 @@
     - integration
     - network
     - network connection
+    - relational
   sizes:
     - 32
 - name: app-switcher
@@ -2302,6 +2307,7 @@
     - center square
     - cross
     - square
+    - focus
   sizes:
     - 32
 - name: center-to-fit
@@ -2943,7 +2949,17 @@
     - 32
 - name: chat--launch
   friendly_name: Chat launch
-  aliases: []
+  aliases:
+    - chat
+    - operations
+    - launch
+    - begin
+    - initiate
+    - start
+    - message
+    - text
+    - instant message
+    - communications
   sizes:
     - 32
 - name: chat-bot
@@ -3554,8 +3570,11 @@
     - cloud
     - foundry
 - name: cloud-registry
-  friendly_name: cloud-registry
-  aliases: []
+  friendly_name: Cloud registry
+  aliases:
+    - cloud
+    - registry
+    - data
   sizes:
     - 32
 - name: cloud-satellite
@@ -3752,13 +3771,23 @@
   sizes:
     - 32
 - name: condition--point
-  friendly_name: condition--point
-  aliases: []
+  friendly_name: Condition point
+  aliases:
+    - point
+    - condition
+    - status
+    - state
   sizes:
     - 32
 - name: condition--wait-point
-  friendly_name: condition--wait-point
-  aliases: []
+  friendly_name: Condition wait point
+  aliases:
+    - condition
+    - point
+    - wait
+    - status
+    - waiting
+    - state
   sizes:
     - 32
 - name: connect
@@ -3897,8 +3926,12 @@
   sizes:
     - 32
 - name: cough
-  friendly_name: cough
-  aliases: []
+  friendly_name: Cough
+  aliases:
+    - cough
+    - user
+    - person
+    - coughing
   sizes:
     - 32
 - name: course
@@ -4049,7 +4082,10 @@
     - 32
 - name: currency
   friendly_name: currency
-  aliases: []
+  aliases:
+    - currency
+    - money
+    - commerce
   sizes:
     - 32
 - name: currency--baht
@@ -4059,6 +4095,7 @@
     - money
     - baht
     - finance
+    - commerce
   sizes:
     - 32
 - name: currency--dollar
@@ -4068,6 +4105,7 @@
     - money
     - dollar
     - finance
+    - commerce
   sizes:
     - 32
 - name: currency--euro
@@ -4077,6 +4115,7 @@
     - money
     - euro
     - finance
+    - commerce
   sizes:
     - 32
 - name: currency--lira
@@ -4086,6 +4125,7 @@
     - money
     - lira
     - finance
+    - commerce
   sizes:
     - 32
 - name: currency--pound
@@ -4095,11 +4135,17 @@
     - money
     - pound
     - finance
+    - commerce
   sizes:
     - 32
 - name: currency--ruble
-  friendly_name: currency--ruble
-  aliases: []
+  friendly_name: Currency ruble
+  aliases:
+    - currency
+    - money
+    - ruble
+    - finance
+    - commerce
   sizes:
     - 32
 - name: currency--rupee
@@ -4109,6 +4155,7 @@
     - money
     - rupee
     - finance
+    - commerce
   sizes:
     - 32
 - name: currency--shekel
@@ -4118,6 +4165,7 @@
     - money
     - shekel
     - finance
+    - commerce
   sizes:
     - 32
 - name: currency--won
@@ -4127,6 +4175,7 @@
     - money
     - won
     - finance
+    - commerce
   sizes:
     - 32
 - name: currency--yen
@@ -4136,6 +4185,7 @@
     - money
     - yen
     - finance
+    - commerce
   sizes:
     - 32
 - name: cursor--1
@@ -4181,8 +4231,13 @@
   sizes:
     - 32
 - name: cut-out
-  friendly_name: cut-out
-  aliases: []
+  friendly_name: Cut out
+  aliases:
+    - formatting
+    - cut out
+    - clip
+    - clipping
+    - coupon
   sizes:
     - 32
 - name: cY
@@ -4620,8 +4675,14 @@
   sizes:
     - 32
 - name: desk--adjustable
-  friendly_name: desk--adjustable
-  aliases: []
+  friendly_name: Desk adjustable
+  aliases:
+    - desk
+    - adjustable
+    - standing desk
+    - stand up
+    - technology
+    - workplace
   sizes:
     - 32
 - name: development
@@ -5036,13 +5097,22 @@
     - doc
     - paper
 - name: document--attachment
-  friendly_name: document--attachment
-  aliases: []
+  friendly_name: Document attachment
+  aliases:
+    - file
+    - doc
+    - paper
+    - attachment
+    - paper clip
+    - attach
   sizes:
     - 32
 - name: document--audio
-  friendly_name: document--audio
-  aliases: []
+  friendly_name: Document audio
+  aliases:
+    - doc
+    - file
+    - audio
   sizes:
     - 32
 - name: document--blank
@@ -5103,8 +5173,12 @@
   sizes:
     - 32
 - name: document--sketch
-  friendly_name: document--sketch
-  aliases: []
+  friendly_name: Document Sketch
+  aliases:
+    - doc
+    - file
+    - Sketch
+    - wireframe
   sizes:
     - 32
 - name: document--subtract
@@ -5145,8 +5219,12 @@
   sizes:
     - 32
 - name: document--video
-  friendly_name: document--video
-  aliases: []
+  friendly_name: Document video
+  aliases:
+    - doc
+    - file
+    - video
+    - movie
   sizes:
     - 32
 - name: document--view
@@ -5297,8 +5375,12 @@
   sizes:
     - 32
 - name: drone
-  friendly_name: drone
-  aliases: []
+  friendly_name: Drone
+  aliases:
+    - drone
+    - robot
+    - remote control
+    - unmanned
   sizes:
     - 32
 - name: drop-photo
@@ -6716,6 +6798,7 @@
     - 2x grid
     - pattern
     - grid
+    - tile
   sizes:
     - 32
 - name: group
@@ -6733,13 +6816,26 @@
   sizes:
     - 32
 - name: group--presentation
-  friendly_name: group--presentation
-  aliases: []
+  friendly_name: Group presentation
+  aliases:
+    - group
+    - presentation
+    - meeting
+    - conference
+    - audience
+    - presenter
+    - users
   sizes:
     - 32
 - name: growth
-  friendly_name: growth
-  aliases: []
+  friendly_name: Growth
+  aliases:
+    - growth
+    - chart
+    - data
+    - uptick
+    - rising
+    - improving
   sizes:
     - 32
 - name: H
@@ -7046,6 +7142,7 @@
     - time
     - duration
     - hourglass
+    - expiry
   sizes:
     - 32
 - name: HTML
@@ -7180,8 +7277,14 @@
   sizes:
     - 32
 - name: ice--vision
-  friendly_name: ice--vision
-  aliases: []
+  friendly_name: Ice vision
+  aliases:
+    - ice
+    - vision
+    - visibility
+    - weather
+    - forecast
+    - precipitation
   sizes:
     - 32
 - name: iD
@@ -7240,8 +7343,12 @@
   sizes:
     - 32
 - name: image--copy
-  friendly_name: image--copy
-  aliases: []
+  friendly_name: Image copy
+  aliases:
+    - image
+    - copy
+    - duplicate
+    - file
   sizes:
     - 32
 - name: image--medical
@@ -7811,8 +7918,13 @@
     - language
     - english
 - name: letter--Aa--large
-  friendly_name: letter--Aa--large
-  aliases: []
+  friendly_name: Letter Aa large
+  aliases:
+    - letter
+    - alphabet
+    - language
+    - english
+    - large
   sizes:
     - 32
 - name: letter--Bb
@@ -8460,8 +8572,16 @@
     - tag
     - identification
 - name: logo--discord
-  friendly_name: logo--discord
-  aliases: []
+  friendly_name: Logo Discord
+  aliases:
+    - brand
+    - emblem
+    - id
+    - symbol
+    - avatar
+    - tag
+    - social
+    - discord
   sizes:
     - 32
 - name: logo--facebook
@@ -8517,7 +8637,7 @@
     - tag
     - identification
 - name: logo--google
-  friendly_name: Logo google
+  friendly_name: Logo Google
   sizes:
     - 32
   aliases:
@@ -8593,7 +8713,7 @@
     - tag
     - identification
 - name: logo--medium
-  friendly_name: Logo medium
+  friendly_name: Logo Medium
   sizes:
     - 32
   aliases:
@@ -9008,8 +9128,13 @@
     - 16
     - 32
 - name: media--library
-  friendly_name: media--library
-  aliases: []
+  friendly_name: Media library
+  aliases:
+    - media
+    - library
+    - file
+    - repository
+    - folder
   sizes:
     - 32
 - name: medication
@@ -10530,6 +10655,7 @@
     - tree
     - org
     - data
+    - hierarchy
   sizes:
     - 32
 - name: partly-cloudy
@@ -10866,8 +10992,13 @@
   sizes:
     - 32
 - name: phone--ip
-  friendly_name: phone--ip
-  aliases: []
+  friendly_name: Phone IP
+  aliases:
+    - phone
+    - VOIP
+    - IP
+    - telecommunications
+    - handset
   sizes:
     - 32
 - name: phone--off
@@ -10956,8 +11087,14 @@
   sizes:
     - 32
 - name: piggy-bank--slot
-  friendly_name: piggy-bank--slot
-  aliases: []
+  friendly_name: Piggy bank slot
+  aliases:
+    - piggy bank
+    - savings
+    - cash
+    - money
+    - currency
+    - money slot
   sizes:
     - 32
 - name: pills
@@ -12333,6 +12470,7 @@
   aliases:
     - select 01
     - formatting
+    - marquee
   sizes:
     - 32
 - name: select--02
@@ -12674,14 +12812,21 @@
   sizes:
     - 32
 - name: sight
-  friendly_name: sight
-  aliases: []
+  friendly_name: Sight
+  aliases:
+    - sight
+    - vision
+    - see
+    - eyescan
+    - visual
+    - user
   sizes:
     - 32
 - name: sigma
   friendly_name: Sigma
   aliases:
     - sigma
+    - summary
   sizes:
     - 32
 - name: signal-strength
@@ -13066,13 +13211,21 @@
   sizes:
     - 32
 - name: sort--ascending
-  friendly_name: sort--ascending
-  aliases: []
+  friendly_name: Sort ascending
+  aliases:
+    - sort order
+    - order
+    - ascending
+    - operations
   sizes:
     - 32
 - name: sort--descending
-  friendly_name: sort--descending
-  aliases: []
+  friendly_name: Sort descending
+  aliases:
+    - sort order
+    - order
+    - descending
+    - operations
   sizes:
     - 32
 - name: spell-check
@@ -13454,6 +13607,7 @@
   aliases:
     - sub volume
     - health
+    - layers
   sizes:
     - 32
 - name: subtract
@@ -13900,8 +14054,11 @@
     - alphabet
     - editor
 - name: text--clear-format
-  friendly_name: text--clear-format
-  aliases: []
+  friendly_name: Text clear format
+  aliases:
+    - clear
+    - format
+    - text
   sizes:
     - 32
 - name: text--color
@@ -15236,8 +15393,12 @@
   sizes:
     - 32
 - name: voice-activate
-  friendly_name: voice-activate
-  aliases: []
+  friendly_name: Voice activate
+  aliases:
+    - voice
+    - activate
+    - user
+    - input
   sizes:
     - 32
 - name: voicemail
@@ -15255,9 +15416,14 @@
   aliases:
     - sound
     - noise
+    - soft
 - name: volume--down--alt
-  friendly_name: volume--down--alt
-  aliases: []
+  friendly_name: Volume down alt
+  aliases:
+    - volume
+    - sound
+    - noise
+    - soft
   sizes:
     - 32
 - name: volume--down--filled
@@ -15267,9 +15433,14 @@
   aliases:
     - sound
     - noise
+    - soft
 - name: volume--down--filled--alt
-  friendly_name: volume--down--filled--alt
-  aliases: []
+  friendly_name: Volume down filled alt
+  aliases:
+    - volume
+    - sound
+    - noise
+    - soft
   sizes:
     - 32
 - name: volume--mute
@@ -15294,8 +15465,11 @@
     - sound
     - noise
 - name: volume--up--alt
-  friendly_name: volume--up--alt
-  aliases: []
+  friendly_name: Volume up alt
+  aliases:
+    - sound
+    - noise
+    - loud
   sizes:
     - 32
 - name: volume--up--filled
@@ -15305,9 +15479,13 @@
   aliases:
     - sound
     - noise
+    - loud
 - name: volume--up--filled--alt
-  friendly_name: volume--up--filled--alt
-  aliases: []
+  friendly_name: Volume up filled alt
+  aliases:
+    - sound
+    - noise
+    - loud
   sizes:
     - 32
 - name: VPN
@@ -15818,8 +15996,13 @@
   sizes:
     - 32
 - name: zoom--area
-  friendly_name: zoom--area
-  aliases: []
+  friendly_name: Zoom area
+  aliases:
+    - expand
+    - inspect
+    - size
+    - enlarge
+    - detail
   sizes:
     - 32
 - name: zoom--in

@@ -18,11 +18,13 @@ const directions = {
   'Bottom of the trigger button (bottom)': 'bottom',
   'Top of the trigger button (top)': 'top',
 };
+
 const sizes = {
-  'Extra large size (xl)': 'xl',
-  'Default size': undefined,
-  'Small size (sm)': 'sm',
+  'Small  (sm)': 'sm',
+  'Medium (md) - default': undefined,
+  'Large  (lg)': 'lg',
 };
+
 const props = {
   menu: () => ({
     direction: select('Menu direction (direction)', directions, 'bottom'),

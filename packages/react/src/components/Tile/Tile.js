@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React, { Component } from 'react';
+import React, { Component, useEffect, useRef, useState } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { settings } from 'carbon-components';
@@ -181,212 +181,210 @@ export class ClickableTile extends Component {
   }
 }
 
-export class SelectableTile extends Component {
-  state = {
-    selected: this.props.selected,
-  };
+export function SelectableTile(props) {
+  const {
+    children,
+    id,
+    tabIndex = 0,
+    value,
+    name,
+    title,
+    // eslint-disable-next-line no-unused-vars
+    iconDescription,
+    className,
+    handleClick,
+    handleKeyDown,
+    onClick = () => {},
+    onChange = () => {},
+    onKeyDown = () => {},
+    light,
+    disabled,
+    selected,
+    ...other
+  } = props;
 
-  static propTypes = {
-    /**
-     * The child nodes.
-     */
-    children: PropTypes.node,
+  // TODO: replace with onClick when handleClick prop is deprecated
+  const clickHandler = handleClick || onClick;
 
-    /**
-     * The CSS class names.
-     */
-    className: PropTypes.string,
+  // TODO: replace with onClick when handleClick prop is deprecated
+  const keyDownHandler = handleKeyDown || onKeyDown;
 
-    /**
-     * Specify whether the SelectableTile should be disabled
-     */
-    disabled: PropTypes.bool,
+  const [isSelected, setIsSelected] = useState(selected);
+  const input = useRef(null);
+  const classes = classNames(
+    `${prefix}--tile`,
+    `${prefix}--tile--selectable`,
+    {
+      [`${prefix}--tile--is-selected`]: isSelected,
+      [`${prefix}--tile--light`]: light,
+      [`${prefix}--tile--disabled`]: disabled,
+    },
+    className
+  );
+  const inputClasses = classNames(`${prefix}--tile-input`, {
+    [`${prefix}--tile-input--checked`]: isSelected,
+  });
 
-    /**
-     * Specify the function to run when the SelectableTile is clicked
-     */
-    handleClick: PropTypes.func,
-
-    /**
-     * Specify the function to run when the SelectableTile is interacted with via a keyboard
-     */
-    handleKeyDown: PropTypes.func,
-
-    /**
-     * The description of the checkmark icon.
-     */
-    iconDescription: deprecate(
-      PropTypes.string,
-      'The `iconDescription` prop for `RadioTile` is no longer needed and has ' +
-        'been deprecated. It will be moved in the next major release.'
-    ),
-
-    /**
-     * The ID of the `<input>`.
-     */
-    id: PropTypes.string,
-
-    /**
-     * `true` to use the light version. For use on $ui-01 backgrounds only.
-     * Don't use this to make tile background color same as container background color.
-     */
-    light: PropTypes.bool,
-
-    /**
-     * The `name` of the `<input>`.
-     */
-    name: PropTypes.string,
-
-    /**
-     * The empty handler of the `<input>`.
-     */
-    onChange: PropTypes.func,
-
-    /**
-     * `true` to select this tile.
-     */
-    selected: PropTypes.bool,
-
-    /**
-     * Specify the tab index of the wrapper element
-     */
-    tabIndex: PropTypes.number,
-
-    /**
-     * The `title` of the `<input>`.
-     */
-    title: PropTypes.string,
-
-    /**
-     * The value of the `<input>`.
-     */
-    value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
-  };
-
-  static defaultProps = {
-    value: 'value',
-    title: 'title',
-    selected: false,
-    handleClick: () => {},
-    handleKeyDown: () => {},
-    onChange: () => {},
-    tabIndex: 0,
-    light: false,
-  };
-
-  static getDerivedStateFromProps({ selected }, state) {
-    const { prevSelected } = state;
-    return prevSelected === selected
-      ? null
-      : {
-          selected,
-          prevSelected: selected,
-        };
-  }
-
-  handleClick = (evt) => {
+  // TODO: rename to handleClick when handleClick prop is deprecated
+  function handleOnClick(evt) {
     evt.preventDefault();
     evt.persist();
-    this.setState(
-      {
-        selected: !this.state.selected,
-      },
-      () => {
-        this.props.handleClick(evt);
-        this.props.onChange(evt);
-      }
-    );
-  };
+    setIsSelected(!isSelected);
+    clickHandler(evt);
+    onChange(evt);
+  }
 
-  handleKeyDown = (evt) => {
+  // TODO: rename to handleKeyDown when handleKeyDown prop is deprecated
+  function handleOnKeyDown(evt) {
     evt.persist();
     if (matches(evt, [keys.Enter, keys.Space])) {
       evt.preventDefault();
-      this.setState(
-        {
-          selected: !this.state.selected,
-        },
-        () => {
-          this.props.handleKeyDown(evt);
-          this.props.onChange(evt);
-        }
-      );
-    } else {
-      this.props.handleKeyDown(evt);
+      setIsSelected(!isSelected);
+      onChange(evt);
     }
-  };
-
-  handleOnChange = (event) => {
-    this.setState({ selected: event.target.checked });
-    this.props.onChange(event);
-  };
-
-  render() {
-    const {
-      children,
-      id,
-      tabIndex,
-      value,
-      name,
-      title,
-      // eslint-disable-next-line no-unused-vars
-      iconDescription,
-      className,
-      handleClick, // eslint-disable-line
-      handleKeyDown, // eslint-disable-line
-      // eslint-disable-next-line no-unused-vars
-      onChange,
-      light,
-      disabled,
-      ...other
-    } = this.props;
-
-    const classes = classNames(
-      `${prefix}--tile`,
-      `${prefix}--tile--selectable`,
-      {
-        [`${prefix}--tile--is-selected`]: this.state.selected,
-        [`${prefix}--tile--light`]: light,
-        [`${prefix}--tile--disabled`]: disabled,
-      },
-      className
-    );
-
-    return (
-      <>
-        <input
-          ref={(input) => {
-            this.input = input;
-          }}
-          tabIndex={-1}
-          id={id}
-          className={`${prefix}--tile-input`}
-          value={value}
-          onChange={!disabled ? this.handleOnChange : null}
-          type="checkbox"
-          disabled={disabled}
-          name={name}
-          title={title}
-          checked={this.state.selected}
-        />
-        {/* eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions */}
-        <label
-          htmlFor={id}
-          className={classes}
-          // eslint-disable-next-line jsx-a11y/no-noninteractive-tabindex
-          tabIndex={!disabled ? tabIndex : null}
-          {...other}
-          onClick={!disabled ? this.handleClick : null}
-          onKeyDown={!disabled ? this.handleKeyDown : null}>
-          <span className={`${prefix}--tile__checkmark`}>
-            <CheckmarkFilled />
-          </span>
-          <span className={`${prefix}--tile-content`}>{children}</span>
-        </label>
-      </>
-    );
+    keyDownHandler(evt);
   }
+
+  function handleChange(event) {
+    setIsSelected(event.target.checked);
+    onChange(event);
+  }
+
+  useEffect(() => {
+    setIsSelected(selected);
+  }, [selected]);
+
+  return (
+    <>
+      <input
+        ref={input}
+        tabIndex={-1}
+        id={id}
+        className={inputClasses}
+        value={value}
+        onChange={!disabled ? handleChange : null}
+        type="checkbox"
+        disabled={disabled}
+        name={name}
+        title={title}
+        checked={isSelected}
+      />
+      {/* eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions */}
+      <label
+        htmlFor={id}
+        className={classes}
+        // eslint-disable-next-line jsx-a11y/no-noninteractive-tabindex
+        tabIndex={!disabled ? tabIndex : null}
+        {...other}
+        onClick={!disabled ? handleOnClick : null}
+        onKeyDown={!disabled ? handleOnKeyDown : null}>
+        <span className={`${prefix}--tile__checkmark`}>
+          <CheckmarkFilled />
+        </span>
+        <span className={`${prefix}--tile-content`}>{children}</span>
+      </label>
+    </>
+  );
 }
+SelectableTile.defaultProps = {
+  value: 'value',
+  title: 'title',
+  selected: false,
+  tabIndex: 0,
+  light: false,
+};
+SelectableTile.propTypes = {
+  /**
+   * The child nodes.
+   */
+  children: PropTypes.node,
+
+  /**
+   * The CSS class names.
+   */
+  className: PropTypes.string,
+
+  /**
+   * Specify whether the SelectableTile should be disabled
+   */
+  disabled: PropTypes.bool,
+
+  /**
+   * Specify the function to run when the SelectableTile is clicked
+   */
+  handleClick: deprecate(
+    PropTypes.func,
+    'The `handleClick` prop for `SelectableTile` has been deprecated in favor of `onClick`. It will be removed in the next major release.'
+  ),
+
+  /**
+   * Specify the function to run when the SelectableTile is interacted with via a keyboard
+   */
+  handleKeyDown: deprecate(
+    PropTypes.func,
+    'The `handleKeyDown` prop for `SelectableTile` has been deprecated in favor of `onKeyDown`. It will be removed in the next major release.'
+  ),
+
+  /**
+   * The description of the checkmark icon.
+   */
+  iconDescription: deprecate(
+    PropTypes.string,
+    'The `iconDescription` prop for `SelectableTile` is no longer needed and has ' +
+      'been deprecated. It will be removed in the next major release.'
+  ),
+
+  /**
+   * The ID of the `<input>`.
+   */
+  id: PropTypes.string,
+
+  /**
+   * `true` to use the light version. For use on $ui-01 backgrounds only.
+   * Don't use this to make tile background color same as container background color.
+   */
+  light: PropTypes.bool,
+
+  /**
+   * The `name` of the `<input>`.
+   */
+  name: PropTypes.string,
+
+  /**
+   * The empty handler of the `<input>`.
+   */
+  onChange: PropTypes.func,
+
+  /**
+   * Specify the function to run when the SelectableTile is clicked
+   */
+  onClick: PropTypes.func,
+
+  /**
+   * Specify the function to run when the SelectableTile is interacted with via a keyboard
+   */
+  onKeyDown: PropTypes.func,
+
+  /**
+   * `true` to select this tile.
+   */
+  selected: PropTypes.bool,
+
+  /**
+   * Specify the tab index of the wrapper element
+   */
+  tabIndex: PropTypes.number,
+
+  /**
+   * The `title` of the `<input>`.
+   */
+  title: PropTypes.string,
+
+  /**
+   * The value of the `<input>`.
+   */
+  value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
+};
 
 export class ExpandableTile extends Component {
   state = {};

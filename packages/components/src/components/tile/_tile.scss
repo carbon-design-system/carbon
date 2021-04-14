@@ -96,6 +96,7 @@
 
   .#{$prefix}--tile--selectable {
     padding-right: $carbon--spacing-09;
+    border: 1px solid transparent;
   }
 
   .#{$prefix}--tile__checkmark,
@@ -201,8 +202,7 @@
   }
 
   .#{$prefix}--tile--is-selected {
-    outline: 1px solid $ui-05;
-    outline-offset: -1px;
+    border: 1px solid $ui-05;
   }
 
   .#{$prefix}--tile--is-selected .#{$prefix}--tile__checkmark {
@@ -218,6 +218,22 @@
       // `ButtonText` is a CSS2 system color to help improve colors in HCM
       fill: ButtonText;
     }
+  }
+
+  // Fix double border
+  .#{$prefix}--tile-input--checked + .#{$prefix}--tile--is-selected {
+    border-top: 1px solid $ui-01;
+  }
+
+  .#{$prefix}--tile:not(.#{$prefix}--tile--is-selected)
+    + .#{$prefix}--tile-input--checked
+    + .#{$prefix}--tile--is-selected {
+    border-top: 1px solid $ui-05;
+  }
+
+  .#{$prefix}--tile-input--checked:first-of-type
+    + .#{$prefix}--tile--is-selected {
+    border-top: 1px solid $ui-05;
   }
 
   .#{$prefix}--tile-content {
