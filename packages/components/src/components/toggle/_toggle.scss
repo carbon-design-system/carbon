@@ -381,7 +381,7 @@
   .#{$prefix}--toggle-input:active
     + .#{$prefix}--toggle-input__label
     > .#{$prefix}--toggle__switch::before {
-    box-shadow: 0 0 0 1px $background, 0 0 0 3px $focus;
+    box-shadow: 0 0 0 1px $focus-inset, 0 0 0 3px $focus;
 
     // Windows, Firefox HCM Fix
     @media screen and (-ms-high-contrast: active),

@@ -329,8 +329,7 @@ $data-table-row-height: 2rem !default;
 /// @type Color
 /// @access public
 /// @group data-table
-// V11: We need a token for zebra styles
-$data-table-zebra-color: $ui-02 !default;
+$data-table-zebra-color: $layer-accent !default;
 
 /// @type Color
 /// @access public

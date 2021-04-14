@@ -13,10 +13,9 @@
 /// @access private
 /// @group ui-shell
 @mixin carbon-content {
-  // V11: Need new token
   .#{$prefix}--content {
     padding: 2rem;
-    background: $ui-02;
+    background: $layer;
     will-change: margin-left;
   }
 
