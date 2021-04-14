@@ -37,7 +37,6 @@
     "@storybook/addon-storysource": "^5.3.19",
     "@storybook/addons": "^5.3.19",
     "@storybook/source-loader": "^5.3.19",
-    "fast-sass-loader": "^2.0.0",
     "react-is": "^16.8.6",
     "sass": "^1.32.2",
     "sass-loader": "^10.1.1",
