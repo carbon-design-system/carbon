@@ -36,6 +36,7 @@ const Button = React.forwardRef(function Button(
     hasIconOnly,
     tooltipPosition,
     tooltipAlignment,
+    onClick,
     onBlur,
     onFocus,
     onMouseEnter,
@@ -94,6 +95,14 @@ const Button = React.forwardRef(function Button(
         setAllowTooltipVisibility(false);
         setIsHovered(false);
       }, 100);
+    }
+  };
+
+  const handleClick = (evt) => {
+    // Prevent clicks on the tooltip from triggering the button click event
+    if (evt.target === tooltipRef.current) {
+      evt.preventDefault();
+      return;
     }
   };
 
@@ -194,6 +203,7 @@ const Button = React.forwardRef(function Button(
       onMouseLeave: composeEventHandlers([onMouseLeave, handleMouseLeave]),
       onFocus: composeEventHandlers([onFocus, handleFocus]),
       onBlur: composeEventHandlers([onBlur, handleBlur]),
+      onClick: composeEventHandlers([handleClick, onClick]),
       ...other,
       ...commonProps,
       ...otherProps,
@@ -274,6 +284,12 @@ Button.propTypes = {
    * loses focus
    */
   onBlur: PropTypes.func,
+
+  /**
+   * Provide an optional function to be called when the button element
+   * is clicked
+   */
+  onClick: PropTypes.func,
 
   /**
    * Provide an optional function to be called when the button element

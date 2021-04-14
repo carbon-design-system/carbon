@@ -216,6 +216,9 @@ Map {
       "onBlur": Object {
         "type": "func",
       },
+      "onClick": Object {
+        "type": "func",
+      },
       "onFocus": Object {
         "type": "func",
       },
@@ -6488,6 +6491,9 @@ Map {
         "type": "string",
       },
       "onBlur": Object {
+        "type": "func",
+      },
+      "onClick": Object {
         "type": "func",
       },
       "onFocus": Object {
