@@ -347,7 +347,8 @@ const ComboBox = (props) => {
                             tabIndex="-1"
                             isHighlighted={
                               highlightedIndex === index ||
-                              (selectedItem && selectedItem.id === item.id) ||
+                              (selectedItem?.id &&
+                                selectedItem?.id === item.id) ||
                               false
                             }
                             title={
@@ -502,7 +503,7 @@ ComboBox.propTypes = {
   shouldFilterItem: PropTypes.func,
 
   /**
-   * Specify the size of the ListBox. Currently supports either `sm`, `lg` or `xl` as an option.
+   * Specify the size of the ListBox. Currently supports either `sm`, `md` or `lg` as an option.
    */
   size: ListBoxPropTypes.ListBoxSize,
 

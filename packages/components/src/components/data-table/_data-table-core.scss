@@ -31,19 +31,19 @@
   //----------------------------------------------------------------------------
   .#{$prefix}--data-table-header {
     padding: $spacing-05 0 $spacing-06 $spacing-05;
-    background: $ui-01;
+    background: $layer;
   }
 
   .#{$prefix}--data-table-header__title {
     @include type-style('productive-heading-03');
 
-    color: $text-01;
+    color: $text-primary;
   }
 
   .#{$prefix}--data-table-header__description {
     @include type-style('body-short-01');
 
-    color: $text-02;
+    color: $text-secondary;
   }
 
   //----------------------------------------------------------------------------
@@ -58,14 +58,14 @@
   .#{$prefix}--data-table thead {
     @include type-style('productive-heading-01');
 
-    background-color: $ui-03;
+    background-color: $layer-accent;
   }
 
   .#{$prefix}--data-table tbody {
     @include type-style('body-short-01');
 
     width: 100%;
-    background-color: $ui-01;
+    background-color: $layer;
   }
 
   .#{$prefix}--data-table tr {
@@ -81,20 +81,20 @@
   }
 
   .#{$prefix}--data-table tbody tr:hover {
-    background: $hover-ui;
+    background: $layer-hover;
   }
 
   .#{$prefix}--data-table tbody tr:hover td,
   .#{$prefix}--data-table tbody tr:hover th {
-    color: $text-01;
-    background: $hover-ui;
-    border-top: 1px solid $hover-ui;
-    border-bottom: 1px solid $hover-ui;
+    color: $text-primary;
+    background: $layer-hover;
+    border-top: 1px solid $layer-hover;
+    border-bottom: 1px solid $layer-hover;
   }
 
   .#{$prefix}--data-table tbody tr:hover td .#{$prefix}--link,
   .#{$prefix}--data-table tbody tr:hover th .#{$prefix}--link {
-    color: $link-02;
+    color: $link-secondary;
   }
 
   .#{$prefix}--data-table th,
@@ -106,8 +106,8 @@
   .#{$prefix}--data-table th {
     padding-right: $spacing-05;
     padding-left: $spacing-05;
-    color: $text-01;
-    background-color: $ui-03;
+    color: $text-primary;
+    background-color: $layer-accent;
   }
 
   .#{$prefix}--data-table th:last-of-type {
@@ -124,10 +124,10 @@
   .#{$prefix}--data-table tbody th {
     padding-right: $spacing-05;
     padding-left: $spacing-05;
-    color: $text-02;
-    background: $ui-01;
-    border-top: 1px solid $ui-01;
-    border-bottom: 1px solid $ui-03;
+    color: $text-secondary;
+    background: $layer;
+    border-top: 1px solid $layer;
+    border-bottom: 1px solid $border-subtle;
 
     + td:first-of-type {
       padding-left: $spacing-04;
@@ -139,6 +139,20 @@
       // Fix to show borders in ff
       background-clip: padding-box;
     }
+  }
+
+  // Form Control Overrides
+
+  .#{$prefix}--data-table .#{$prefix}--list-box input[role='combobox'],
+  .#{$prefix}--data-table .#{$prefix}--list-box input[type='text'],
+  .#{$prefix}--data-table .#{$prefix}--dropdown,
+  .#{$prefix}--data-table .#{$prefix}--list-box,
+  .#{$prefix}--data-table .#{$prefix}--number input[type='number'],
+  .#{$prefix}--data-table .#{$prefix}--number__control-btn::before,
+  .#{$prefix}--data-table .#{$prefix}--number__control-btn::after,
+  .#{$prefix}--data-table .#{$prefix}--text-input,
+  .#{$prefix}--data-table .#{$prefix}--select-input {
+    background-color: $field-02;
   }
 
   // Overflow Menu Overrides
@@ -205,19 +219,19 @@
   .#{$prefix}--data-table .#{$prefix}--overflow-menu,
   .#{$prefix}--data-table .#{$prefix}--overflow-menu__trigger {
     &:hover {
-      background-color: $hover-selected-ui;
+      background-color: $layer-selected-hover;
     }
   }
 
   .#{$prefix}--data-table--selected .#{$prefix}--overflow-menu,
   .#{$prefix}--data-table--selected .#{$prefix}--overflow-menu__trigger {
     &:hover {
-      background-color: $hover-ui;
+      background-color: $layer-hover;
     }
   }
 
   .#{$prefix}--data-table--selected .#{$prefix}--link {
-    color: $link-02;
+    color: $link-secondary;
   }
 
   .#{$prefix}--data-table--compact td.#{$prefix}--table-column-menu,
@@ -243,7 +257,7 @@
     tbody
     tr:not(.#{$prefix}--parent-row):nth-child(odd)
     td {
-    border-bottom: 1px solid $ui-01;
+    border-bottom: 1px solid $layer;
   }
 
   .#{$prefix}--data-table--zebra
@@ -259,9 +273,9 @@
     tbody
     tr:not(.#{$prefix}--parent-row):hover
     td {
-    background-color: $hover-ui;
-    border-top: 1px solid $hover-ui;
-    border-bottom: 1px solid $hover-ui;
+    background-color: $layer-hover;
+    border-top: 1px solid $layer-hover;
+    border-bottom: 1px solid $layer-hover;
   }
 
   //----------------------------------------------------------------------------
@@ -278,7 +292,7 @@
     width: rem(44px);
     padding-right: $spacing-05;
     padding-left: $spacing-05;
-    background: $ui-03;
+    background: $layer-accent;
     transition: background-color $duration--fast-01 motion(entrance, productive);
   }
 
@@ -351,11 +365,11 @@
     tr:nth-child(odd).#{$prefix}--data-table--selected
     td,
   tr.#{$prefix}--data-table--selected td {
-    color: $text-01;
-    background-color: $selected-ui;
-    border-top: 1px solid $selected-ui;
+    color: $text-primary;
+    background-color: $layer-selected;
+    border-top: 1px solid $layer-selected;
     // Bottom border acts as separator from other rows
-    border-bottom: 1px solid $active-ui;
+    border-bottom: 1px solid $layer-active;
   }
 
   // First row
@@ -365,7 +379,7 @@
     td,
   tr.#{$prefix}--data-table--selected:first-of-type td {
     // Top border acts as separator from thead
-    border-top: 1px solid $active-ui;
+    border-top: 1px solid $layer-active;
   }
 
   // last row + zebra select last
@@ -379,8 +393,8 @@
     td,
   tr.#{$prefix}--data-table--selected:last-of-type td {
     // Doesn't need separators
-    border-top: 1px solid $selected-ui;
-    border-bottom: 1px solid $selected-ui;
+    border-top: 1px solid $layer-selected;
+    border-bottom: 1px solid $layer-selected;
   }
 
   // zebra select - odd child
@@ -388,7 +402,7 @@
     tbody
     tr:nth-child(even).#{$prefix}--data-table--selected
     td {
-    border-bottom: 1px solid $active-ui;
+    border-bottom: 1px solid $layer-active;
   }
 
   .#{$prefix}--data-table--zebra
@@ -404,7 +418,7 @@
     tr:nth-child(odd).#{$prefix}--data-table--selected:hover
     td,
   .#{$prefix}--data-table tbody .#{$prefix}--data-table--selected:hover td {
-    color: $text-01;
+    color: $text-primary;
     background: $data-table-column-hover;
     border-top: 1px solid $data-table-column-hover;
     border-bottom: 1px solid $data-table-column-hover;
@@ -525,7 +539,7 @@
   // Sticky header
   // -------------
   .#{$prefix}--data-table_inner-container {
-    background-color: $ui-03;
+    background-color: $layer-accent;
     transform: translateZ(0);
   }
 
@@ -553,7 +567,7 @@
     }
 
     thead tr th {
-      border-bottom: 1px solid $active-ui;
+      border-bottom: 1px solid $layer-active;
     }
 
     tbody {
@@ -595,7 +609,7 @@
     tr.#{$prefix}--parent-row.#{$prefix}--expandable-row:hover
       + tr[data-child-row]
       td {
-      border-top: 1px solid $hover-ui;
+      border-top: 1px solid $layer-hover;
     }
 
     tr.#{$prefix}--expandable-row:last-of-type {

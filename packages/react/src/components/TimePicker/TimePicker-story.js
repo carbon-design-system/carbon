@@ -21,9 +21,9 @@ import SelectItem from '../SelectItem';
 import mdx from './TimePicker.mdx';
 
 const sizes = {
-  'Extra large size (xl)': 'xl',
-  'Default size': undefined,
-  'Small size (sm)': 'sm',
+  'Small  (sm)': 'sm',
+  'Medium (md) - default': undefined,
+  'Large  (lg)': 'lg',
 };
 
 const props = {

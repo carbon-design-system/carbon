@@ -50,17 +50,17 @@
     display: block;
     width: 100%;
     height: rem(40px);
-    color: $text-01;
+    color: $text-primary;
     list-style: none;
-    background-color: $field-01;
+    background-color: $field;
     border: none;
-    border-bottom: 1px solid $ui-04;
+    border-bottom: 1px solid $border-strong;
     outline: 2px solid transparent;
     cursor: pointer;
     transition: background-color $duration--fast-01 motion(standard, productive);
 
     &:hover {
-      background-color: $hover-ui;
+      background-color: $field-hover;
     }
   }
 
@@ -75,12 +75,16 @@
     }
   }
 
-  .#{$prefix}--dropdown--xl {
+  // TODO V11: Remove xl selector
+  .#{$prefix}--dropdown--xl,
+  .#{$prefix}--dropdown--lg {
     height: rem(48px);
     max-height: rem(48px);
   }
 
-  .#{$prefix}--dropdown--xl .#{$prefix}--dropdown__arrow {
+  // TODO V11: Remove xl selector
+  .#{$prefix}--dropdown--xl .#{$prefix}--dropdown__arrow,
+  .#{$prefix}--dropdown--lg .#{$prefix}--dropdown__arrow {
     top: rem(16px);
   }
 
@@ -94,7 +98,7 @@
   }
 
   .#{$prefix}--dropdown--open {
-    border-bottom-color: $ui-03;
+    border-bottom-color: $border-subtle;
   }
 
   .#{$prefix}--dropdown--invalid {
@@ -116,11 +120,11 @@
     top: 50%;
     right: $spacing-08;
     transform: translateY(-50%);
-    fill: $support-01;
+    fill: $support-error;
   }
 
   .#{$prefix}--dropdown--open:hover {
-    background-color: $field-01;
+    background-color: $field;
   }
 
   .#{$prefix}--dropdown--open:focus {
@@ -135,6 +139,7 @@
     transition: max-height $duration--fast-02 motion(entrance, productive);
   }
 
+  // V11: Possibly deprecate
   .#{$prefix}--dropdown--light {
     background-color: $field-02;
 
@@ -154,12 +159,12 @@
     transform-origin: 50% 45%;
     transition: transform $duration--fast-02 motion(standard, productive);
     pointer-events: none;
-    fill: $ui-05;
+    fill: $icon-primary;
   }
 
   button.#{$prefix}--dropdown-text {
     width: 100%;
-    color: $text-01;
+    color: $text-primary;
     text-align: left;
     // button-reset mixin contradicts with bx--dropdown-text styles
     background: none;
@@ -201,10 +206,11 @@
     overflow-y: auto;
     list-style: none;
 
-    background-color: $ui-01;
+    background-color: $layer;
     transition: max-height $duration--fast-02 motion(standard, productive);
   }
 
+  // V11: Possibly deprecate
   .#{$prefix}--dropdown--light .#{$prefix}--dropdown-list {
     background-color: $field-02;
   }
@@ -223,7 +229,7 @@
       background-color $duration--fast-01 motion(standard, productive);
 
     &:hover {
-      background-color: $hover-ui;
+      background-color: $layer-hover;
 
       + .#{$prefix}--dropdown-item .#{$prefix}--dropdown-link {
         border-color: transparent;
@@ -231,7 +237,7 @@
     }
 
     &:active {
-      background-color: $selected-ui;
+      background-color: $layer-selected;
     }
 
     &:first-of-type .#{$prefix}--dropdown-link {
@@ -251,14 +257,14 @@
     margin: 0 $carbon--spacing-05;
     padding: rem(11px) 0;
     overflow: hidden;
-    color: $text-02;
+    color: $text-secondary;
     font-weight: normal;
     line-height: 1rem;
     white-space: nowrap;
     text-decoration: none;
     text-overflow: ellipsis;
     border: 1px solid transparent;
-    border-top-color: $ui-03;
+    border-top-color: $border-subtle;
 
     &:hover {
       color: $text-01;
@@ -266,6 +272,7 @@
     }
   }
 
+  // V11: Possibly deprecate
   .#{$prefix}--dropdown--light .#{$prefix}--dropdown-link {
     border-top-color: $decorative-01;
   }
@@ -321,7 +328,7 @@
   }
 
   .#{$prefix}--dropdown-item:hover .#{$prefix}--dropdown-link {
-    border-bottom-color: $hover-ui;
+    border-bottom-color: $layer-hover;
   }
 
   .#{$prefix}--dropdown--selected {
@@ -352,7 +359,7 @@
     border-bottom-color: transparent;
 
     &:hover {
-      background-color: $field-01;
+      background-color: $field;
     }
 
     &:focus {
@@ -362,15 +369,16 @@
     // TODO: remove in v11
     .#{$prefix}--dropdown-text,
     .#{$prefix}--list-box__label {
-      color: $disabled-02;
+      color: $text-disabled;
     }
 
     // TODO: remove in v11
     .#{$prefix}--dropdown__arrow,
     .#{$prefix}--list-box__menu-icon svg {
-      fill: $disabled-02;
+      fill: $icon-disabled;
     }
 
+    // V11: Possibly deprecate
     &.#{$prefix}--dropdown--light:hover {
       background-color: $field-02;
     }
@@ -395,7 +403,7 @@
     transition: background $duration--fast-01 motion(entrance, productive);
 
     &:hover {
-      background-color: $hover-ui;
+      background-color: $field-hover;
     }
 
     &.#{$prefix}--dropdown--disabled {
@@ -417,12 +425,12 @@
     height: rem(32px);
     padding: rem(7px) $carbon--spacing-07 rem(7px) $carbon--spacing-04;
     overflow: visible;
-    color: $text-01;
+    color: $text-primary;
   }
 
   .#{$prefix}--dropdown--inline.#{$prefix}--dropdown--disabled
     .#{$prefix}--dropdown-text {
-    color: $disabled-02;
+    color: $text-disabled;
   }
 
   .#{$prefix}--dropdown--inline.#{$prefix}--dropdown--disabled:focus
@@ -451,11 +459,11 @@
 
   .#{$prefix}--dropdown--show-selected .#{$prefix}--dropdown--selected {
     display: block;
-    color: $text-01;
-    background-color: $hover-ui;
+    color: $text-primary;
+    background-color: $layer-hover;
 
     &:hover {
-      background-color: $selected-ui;
+      background-color: $layer-selected;
     }
 
     .#{$prefix}--dropdown-link {

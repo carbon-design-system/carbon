@@ -26,12 +26,10 @@
     height: rem(32px);
   }
 
-  .#{$prefix}--content-switcher--xl {
+  // TODO V11: Remove xl selector
+  .#{$prefix}--content-switcher--xl,
+  .#{$prefix}--content-switcher--lg {
     height: rem(48px);
-  }
-
-  .#{$prefix}--content-switcher--disabled {
-    cursor: not-allowed;
   }
 
   .#{$prefix}--content-switcher-btn {
@@ -46,18 +44,20 @@
     margin: 0;
     padding: $carbon--spacing-03 $carbon--spacing-05;
     overflow: hidden;
-    color: $text-02;
+    color: $text-secondary;
     white-space: nowrap;
     text-align: left;
     text-decoration: none;
-    background-color: $ui-01;
+    background-color: transparent;
     border: none;
+    border-top: rem(1px) solid $border-inverse;
+    border-bottom: rem(1px) solid $border-inverse;
     transition: all $duration--fast-01 motion(standard, productive);
 
     &:focus {
       z-index: 3;
       border-color: $focus;
-      box-shadow: inset 0 0 0 2px $focus, inset 0 0 0 3px $ui-01;
+      box-shadow: inset 0 0 0 2px $focus, inset 0 0 0 3px $focus-inset;
 
       // Firefox HCM Fix
       @media screen and (prefers-contrast) {
@@ -66,43 +66,49 @@
     }
 
     &:hover {
+      color: $text-primary;
       cursor: pointer;
     }
 
     &:hover,
     &:active {
       z-index: 3;
-      color: $text-01;
-      background-color: $hover-ui;
+      color: $text-primary;
+      background-color: $layer-hover;
     }
 
     &:disabled {
-      color: $disabled-02;
-      background-color: $disabled-01;
-      pointer-events: none;
+      color: $text-disabled;
+      background-color: transparent;
+      border-color: $border-disabled;
 
       &:hover {
         cursor: not-allowed;
       }
     }
-  }
 
-  .#{$prefix}--content-switcher--light .#{$prefix}--content-switcher-btn {
-    background-color: $ui-02;
-
-    &:hover {
-      background-color: $hover-light-ui;
+    &:disabled:first-child,
+    &:disabled:last-child {
+      border-color: $border-disabled;
     }
   }
 
   .#{$prefix}--content-switcher-btn:first-child {
+    border-left: rem(1px) solid $border-inverse;
     border-top-left-radius: rem(4px);
     border-bottom-left-radius: rem(4px);
   }
 
   .#{$prefix}--content-switcher-btn:last-child {
+    border-right: rem(1px) solid $border-inverse;
     border-top-right-radius: rem(4px);
     border-bottom-right-radius: rem(4px);
+  }
+
+  .#{$prefix}--content-switcher--selected,
+  .#{$prefix}--content-switcher--selected:first-child,
+  .#{$prefix}--content-switcher--selected:last-child {
+    border: 0;
   }
 
   .#{$prefix}--content-switcher-btn::before {
@@ -112,7 +118,7 @@
     display: block;
     width: rem(1px);
     height: rem(16px);
-    background-color: $content-switcher-divider;
+    background-color: $border-subtle;
     content: '';
   }
 
@@ -120,26 +126,6 @@
     display: none;
   }
 
-  .#{$prefix}--content-switcher--light
-    .#{$prefix}--content-switcher-btn::before {
-    background-color: $decorative-01;
-  }
-
-  .#{$prefix}--content-switcher--light
-    .#{$prefix}--content-switcher-btn:focus::before,
-  .#{$prefix}--content-switcher--light
-    .#{$prefix}--content-switcher-btn:focus
-    + .#{$prefix}--content-switcher-btn::before,
-  .#{$prefix}--content-switcher--light
-    .#{$prefix}--content-switcher-btn:hover::before,
-  .#{$prefix}--content-switcher--light
-    .#{$prefix}--content-switcher-btn:hover
-    + .#{$prefix}--content-switcher-btn::before,
-  .#{$prefix}--content-switcher--light
-    .#{$prefix}--content-switcher--selected::before,
-  .#{$prefix}--content-switcher--light
-    .#{$prefix}--content-switcher--selected
-    + .#{$prefix}--content-switcher-btn::before,
   .#{$prefix}--content-switcher-btn:focus::before,
   .#{$prefix}--content-switcher-btn:focus
     + .#{$prefix}--content-switcher-btn::before,
@@ -152,9 +138,22 @@
     background-color: transparent;
   }
 
+  .#{$prefix}--content-switcher-btn:disabled::before,
+  .#{$prefix}--content-switcher-btn:disabled:hover
+    + .#{$prefix}--content-switcher-btn:disabled::before {
+    background-color: $border-disabled;
+  }
+
+  .#{$prefix}--content-switcher-btn.#{$prefix}--content-switcher--selected:disabled
+    + .#{$prefix}--content-switcher-btn::before,
+  .#{$prefix}--content-switcher-btn.#{$prefix}--content-switcher--selected:disabled:hover
+    + .#{$prefix}--content-switcher-btn::before {
+    background-color: transparent;
+  }
+
   .#{$prefix}--content-switcher__icon {
     transition: fill $duration--fast-01 motion(standard, productive);
-    fill: $text-02;
+    fill: $icon-secondary;
   }
 
   .#{$prefix}--content-switcher__icon + span {
@@ -170,25 +169,23 @@
 
   .#{$prefix}--content-switcher-btn:hover .#{$prefix}--content-switcher__icon,
   .#{$prefix}--content-switcher-btn:focus .#{$prefix}--content-switcher__icon {
-    fill: $text-01;
+    fill: $icon-primary;
   }
 
-  .#{$prefix}--content-switcher--light
-    .#{$prefix}--content-switcher-btn.#{$prefix}--content-switcher--selected,
   .#{$prefix}--content-switcher-btn.#{$prefix}--content-switcher--selected {
     z-index: 3;
-    color: $inverse-01;
-    background-color: $ui-05;
+    color: $text-inverse;
+    background-color: $layer-selected-inverse;
 
     &:disabled {
-      color: $disabled-02;
-      background-color: $disabled-03;
+      color: $text-disabled;
+      background-color: $layer-selected-disabled;
     }
   }
 
   .#{$prefix}--content-switcher-btn.#{$prefix}--content-switcher--selected
     .#{$prefix}--content-switcher__icon {
-    fill: $inverse-01;
+    fill: $icon-inverse;
   }
 }
 

@@ -23,7 +23,7 @@
     width: 100%;
     height: $spacing-09;
     overflow: hidden;
-    background: $ui-01;
+    background-color: $layer;
   }
 
   .#{$prefix}--toolbar-content {
@@ -63,90 +63,59 @@
     width: $spacing-09;
     height: $spacing-09;
     box-shadow: none;
-    transition: flex $transition--expansion $carbon--standard-easing;
+    cursor: pointer;
+    transition: width $transition--expansion $carbon--standard-easing,
+      background-color $duration--fast-02 motion(entrance, productive);
+
+    &:hover {
+      background-color: $field-hover;
+    }
   }
 
-  .#{$prefix}--toolbar-search-container-expandable .#{$prefix}--search {
-    position: initial;
-    width: $spacing-09;
+  .#{$prefix}--toolbar-search-container-expandable .#{$prefix}--search-input {
     height: 100%;
+    padding: 0;
+    cursor: pointer;
+    opacity: 0;
   }
 
   .#{$prefix}--toolbar-search-container-expandable
-    .#{$prefix}--search
-    .#{$prefix}--search-magnifier {
+    .#{$prefix}--search-magnifier-icon {
     left: 0;
     width: $spacing-09;
     height: $spacing-09;
     padding: $spacing-05;
-    cursor: pointer;
-    transition: background $duration--fast-02 motion(entrance, productive);
-    pointer-events: all;
   }
 
-  .#{$prefix}--toolbar-search-container-expandable
-    .#{$prefix}--search--disabled
-    .#{$prefix}--search-magnifier {
-    background: $disabled-01;
+  .#{$prefix}--toolbar-search-container-expandable.#{$prefix}--search--disabled
+    .#{$prefix}--search-magnifier-icon {
+    background-color: $layer-disabled;
     cursor: not-allowed;
     transition: background-color none;
   }
 
-  .#{$prefix}--toolbar-search-container-expandable
-    .#{$prefix}--search
-    .#{$prefix}--search-magnifier:focus {
-    @include focus-outline('outline');
-  }
-
-  .#{$prefix}--toolbar-search-container-expandable
-    .#{$prefix}--search
-    .#{$prefix}--search-magnifier:hover {
-    background: $hover-field;
-  }
-
-  .#{$prefix}--toolbar-action.#{$prefix}--toolbar-search-container-disabled {
+  .#{$prefix}--toolbar-search-container-disabled .#{$prefix}--search-input {
     cursor: not-allowed;
   }
 
-  .#{$prefix}--toolbar-search-container-expandable
-    .#{$prefix}--search--disabled
-    .#{$prefix}--search-magnifier:hover {
-    background: $disabled-01;
-    cursor: not-allowed;
-    transition: background-color none;
-  }
-
-  .#{$prefix}--toolbar-search-container-expandable
-    .#{$prefix}--search
+  .#{$prefix}--toolbar-search-container-expandable.#{$prefix}--search
     .#{$prefix}--label {
     visibility: hidden;
   }
 
-  .#{$prefix}--toolbar-search-container-expandable
-    .#{$prefix}--search
-    .#{$prefix}--search-input {
-    height: 100%;
-    padding: 0;
-    background-color: transparent;
-    border: none;
-    visibility: hidden;
-  }
-
-  .#{$prefix}--toolbar-search-container-expandable
-    .#{$prefix}--search
+  .#{$prefix}--toolbar-search-container-expandable.#{$prefix}--search
     .#{$prefix}--search-close {
     width: $spacing-09;
     height: $spacing-09;
 
     &::before {
-      top: 2px;
-      height: calc(100% - 4px);
-      background-color: $hover-ui;
+      top: rem(2px);
+      height: calc(100% - #{rem(4px)});
+      background-color: $field-hover;
     }
   }
 
-  .#{$prefix}--toolbar-search-container-expandable
-    .#{$prefix}--search
+  .#{$prefix}--toolbar-search-container-expandable.#{$prefix}--search
     .#{$prefix}--search-close:focus::before {
     background-color: $focus;
   }
@@ -154,35 +123,22 @@
   //-------------------------------------------------
   //ACTIVE SEARCH - DEFAULT TOOLBAR
   //-------------------------------------------------
-  .#{$prefix}--toolbar-search-container-active {
-    flex: auto;
-    transition: flex $duration--moderate-01 motion(standard, productive);
-  }
 
-  .#{$prefix}--toolbar-search-container-active .#{$prefix}--search {
+  .#{$prefix}--toolbar-search-container-active.#{$prefix}--search {
     width: 100%;
   }
 
-  .#{$prefix}--toolbar-search-container-active
-    .#{$prefix}--search
-    .#{$prefix}--label,
-  .#{$prefix}--toolbar-search-container-active
-    .#{$prefix}--search
-    .#{$prefix}--search-input {
+  .#{$prefix}--toolbar-search-container-active .#{$prefix}--search-input {
+    opacity: 1;
+  }
+
+  .#{$prefix}--toolbar-search-container-active .#{$prefix}--label,
+  .#{$prefix}--toolbar-search-container-active .#{$prefix}--search-input {
     padding: 0 $spacing-09;
-    visibility: inherit;
+    cursor: text;
   }
 
   .#{$prefix}--toolbar-search-container-active
-    .#{$prefix}--search
-    .#{$prefix}--search-input:focus {
-    @include focus-outline('outline');
-
-    box-shadow: inset 0 0 0 2px $focus;
-  }
-
-  .#{$prefix}--toolbar-search-container-active
-    .#{$prefix}--search
     .#{$prefix}--search-input:focus
     + .#{$prefix}--search-close {
     border: none;
@@ -191,22 +147,18 @@
   }
 
   .#{$prefix}--toolbar-search-container-active
-    .#{$prefix}--search
     .#{$prefix}--search-input:not(:placeholder-shown) {
-    background: $hover-field;
+    background-color: $field-hover;
     border: none;
   }
 
   .#{$prefix}--toolbar-search-container-active
-    .#{$prefix}--search
-    .#{$prefix}--search-magnifier:focus,
+    .#{$prefix}--search-magnifier-icon:focus,
   .#{$prefix}--toolbar-search-container-active
-    .#{$prefix}--search
-    .#{$prefix}--search-magnifier:active,
+    .#{$prefix}--search-magnifier-icon:active,
   .#{$prefix}--toolbar-search-container-active
-    .#{$prefix}--search
-    .#{$prefix}--search-magnifier:hover {
-    background: transparent;
+    .#{$prefix}--search-magnifier-icon:hover {
+    background-color: transparent;
     border: none;
     outline: none;
   }
@@ -217,12 +169,8 @@
   .#{$prefix}--toolbar-search-container-persistent .#{$prefix}--search-close,
   .#{$prefix}--toolbar-search-container-persistent
     .#{$prefix}--search-close:hover,
-  .#{$prefix}--toolbar-search-container-active
-    .#{$prefix}--search
-    .#{$prefix}--search-close,
-  .#{$prefix}--toolbar-search-container-active
-    .#{$prefix}--search
-    .#{$prefix}--search-close:hover {
+  .#{$prefix}--toolbar-search-container-active .#{$prefix}--search-close,
+  .#{$prefix}--toolbar-search-container-active .#{$prefix}--search-close:hover {
     background-color: transparent;
     border: none;
   }
@@ -258,11 +206,11 @@
   }
 
   .#{$prefix}--toolbar-action:hover:not([disabled]) {
-    background: $hover-field;
+    background-color: $field-hover;
   }
 
   .#{$prefix}--toolbar-action:hover[aria-expanded='true'] {
-    background: $ui-01;
+    background-color: $layer;
   }
 
   .#{$prefix}--toolbar-action[disabled] {
@@ -271,7 +219,7 @@
 
   .#{$prefix}--toolbar-action[disabled] .#{$prefix}--toolbar-action__icon {
     cursor: not-allowed;
-    fill: $disabled;
+    fill: $icon-disabled;
   }
 
   .#{$prefix}--toolbar-action:focus:not([disabled]),
@@ -301,7 +249,7 @@
     width: auto;
     max-width: $spacing-05;
     height: $spacing-05;
-    fill: $icon-01;
+    fill: $icon-primary;
   }
 
   //-------------------------------------------------
@@ -325,43 +273,34 @@
   }
 
   .#{$prefix}--toolbar-search-container-persistent
-    .#{$prefix}--search
-    .#{$prefix}--search-magnifier {
+    .#{$prefix}--search-magnifier-icon {
     left: $spacing-05;
   }
 
-  .#{$prefix}--toolbar-search-container-persistent
-    .#{$prefix}--search
-    .#{$prefix}--search-input {
+  .#{$prefix}--toolbar-search-container-persistent .#{$prefix}--search-input {
     height: $spacing-09;
     padding: 0 $spacing-09;
     border: none;
   }
 
   .#{$prefix}--toolbar-search-container-persistent
-    .#{$prefix}--search
     .#{$prefix}--search-input:focus:not([disabled]) {
     @include focus-outline('outline');
   }
 
   .#{$prefix}--toolbar-search-container-persistent
-    .#{$prefix}--search
     .#{$prefix}--search-input:hover:not([disabled]) {
-    background: $hover-field;
+    background-color: $field-hover;
   }
 
   .#{$prefix}--toolbar-search-container-persistent
-    .#{$prefix}--search
     .#{$prefix}--search-input:active:not([disabled]),
   .#{$prefix}--toolbar-search-container-persistent
-    .#{$prefix}--search
     .#{$prefix}--search-input:not(:placeholder-shown) {
-    background: $hover-field;
+    background-color: $field-hover;
   }
 
-  .#{$prefix}--toolbar-search-container-persistent
-    .#{$prefix}--search
-    .#{$prefix}--search-close {
+  .#{$prefix}--toolbar-search-container-persistent .#{$prefix}--search-close {
     width: $spacing-09;
     height: $spacing-09;
   }
@@ -388,7 +327,7 @@
     padding-right: $spacing-06;
     padding-left: $spacing-06;
     overflow-x: auto;
-    background-color: $interactive-01;
+    background-color: $background-brand;
     transform: translate3d(0, 48px, 0);
     transition: transform $duration--fast-02 motion(standard, productive),
       clip-path $duration--fast-02 motion(standard, productive),
@@ -418,17 +357,17 @@
   .#{$prefix}--action-list .#{$prefix}--btn {
     min-width: 0;
     padding: $button-padding-ghost;
-    color: $text-04;
+    color: $text-on-color;
   }
 
   .#{$prefix}--action-list .#{$prefix}--btn:disabled {
-    color: $disabled-03;
+    color: $text-on-color-disabled;
   }
 
   .#{$prefix}--action-list .#{$prefix}--btn .#{$prefix}--btn__icon {
     position: static;
     margin-left: $spacing-03;
-    fill: $icon-03;
+    fill: $icon-on-color;
   }
 
   .#{$prefix}--action-list .#{$prefix}--btn .#{$prefix}--btn__icon .st0 {
@@ -449,7 +388,7 @@
   }
 
   .#{$prefix}--action-list .#{$prefix}--btn--primary:focus {
-    outline: 2px solid $ui-01;
+    outline: 2px solid $layer;
     outline-offset: rem(-2px);
   }
 
@@ -471,7 +410,7 @@
     display: block;
     width: rem(1px);
     height: $spacing-05;
-    background-color: $text-04;
+    background-color: $text-on-color;
     border: none;
     opacity: 1;
     transition: opacity $duration--fast-02 motion(standard, productive);
@@ -496,7 +435,7 @@
     display: flex;
     align-items: center;
     margin-left: $spacing-05;
-    color: $text-04;
+    color: $text-on-color;
   }
 
   .#{$prefix}--batch-summary__para {
@@ -514,31 +453,21 @@
       height: rem(32px);
     }
 
-    .#{$prefix}--toolbar-search-container-expandable
-      .#{$prefix}--search
-      .#{$prefix}--search-input,
-    .#{$prefix}--toolbar-search-container-persistent
-      .#{$prefix}--search
-      .#{$prefix}--search-input {
+    .#{$prefix}--toolbar-search-container-expandable .#{$prefix}--search-input,
+    .#{$prefix}--toolbar-search-container-persistent .#{$prefix}--search-input {
       height: rem(32px);
     }
 
-    .#{$prefix}--toolbar-search-container-expandable
-      .#{$prefix}--search
-      .#{$prefix}--search-close,
-    .#{$prefix}--toolbar-search-container-persistent
-      .#{$prefix}--search
-      .#{$prefix}--search-close {
+    .#{$prefix}--toolbar-search-container-expandable .#{$prefix}--search-close,
+    .#{$prefix}--toolbar-search-container-persistent .#{$prefix}--search-close {
       width: rem(32px);
       height: rem(32px);
     }
 
     .#{$prefix}--toolbar-search-container-expandable
-      .#{$prefix}--search
-      .#{$prefix}--search-magnifier,
+      .#{$prefix}--search-magnifier-icon,
     .#{$prefix}--toolbar-search-container-persistent
-      .#{$prefix}--search
-      .#{$prefix}--search-magnifier {
+      .#{$prefix}--search-magnifier-icon {
       width: rem(32px);
       height: rem(32px);
       padding: $spacing-03;
@@ -565,46 +494,38 @@
       transition: flex 175ms $carbon--standard-easing;
     }
 
-    .#{$prefix}--toolbar-search-container-active
-      .#{$prefix}--search
-      .#{$prefix}--search-input {
+    .#{$prefix}--toolbar-search-container-active .#{$prefix}--search-input {
       visibility: inherit;
     }
 
     .#{$prefix}--toolbar-search-container-active
-      .#{$prefix}--search
       .#{$prefix}--search-input:focus {
       @include focus-outline('outline');
 
-      background: $hover-field;
+      background-color: $field-hover;
     }
 
     .#{$prefix}--toolbar-search-container-active
-      .#{$prefix}--search
       .#{$prefix}--search-input:active,
     .#{$prefix}--toolbar-search-container-active
-      .#{$prefix}--search
       .#{$prefix}--search-input:not(:placeholder-shown) {
-      background: $hover-field;
+      background-color: $field-hover;
     }
 
     .#{$prefix}--toolbar-search-container-active
-      .#{$prefix}--search
-      .#{$prefix}--search-magnifier:focus,
+      .#{$prefix}--search-magnifier-icon:focus,
     .#{$prefix}--toolbar-search-container-active
-      .#{$prefix}--search
-      .#{$prefix}--search-magnifier:active,
+      .#{$prefix}--search-magnifier-icon:active,
     .#{$prefix}--toolbar-search-container-active
-      .#{$prefix}--search
-      .#{$prefix}--search-magnifier:hover {
+      .#{$prefix}--search-magnifier-icon:hover {
       @include focus-outline('reset');
 
-      background: transparent;
+      background-color: transparent;
     }
   }
 
-  .#{$prefix}--search--disabled .#{$prefix}--search-magnifier:hover {
-    background: transparent;
+  .#{$prefix}--search--disabled .#{$prefix}--search-magnifier-icon:hover {
+    background-color: transparent;
   }
 
   //-------------------------------------------------
