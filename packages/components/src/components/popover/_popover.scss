@@ -24,6 +24,14 @@
     display: none;
   }
 
+  // Click area
+  .#{$prefix}--popover::before {
+    content: '';
+    display: block;
+    position: absolute;
+    height: $popover-offset;
+  }
+
   .#{$prefix}--popover--relative {
     position: relative;
   }
@@ -124,6 +132,13 @@
     transform: translateY(-50%) rotate(45deg);
   }
 
+  .#{$prefix}--popover--top.#{$prefix}--popover::before {
+    top: 0;
+    left: 0;
+    right: 0;
+    transform: translateY(-100%);
+  }
+
   //-----------------------------------------------------------------------------
   // Bottom
   //-----------------------------------------------------------------------------
@@ -131,10 +146,9 @@
     left: 50%;
     top: 0;
     text-align: center;
-    transform: translate(-50%, calc(100% - #{$popover-offset}));
+    transform: translate(-50%, calc(-100% - #{$popover-offset}));
   }
 
-  .#{$prefix}--popover--bottom,
   .#{$prefix}--popover--bottom-left,
   .#{$prefix}--popover--bottom-right {
     top: 0;
@@ -166,6 +180,13 @@
     right: $popover-caret-offset;
     bottom: 0;
     transform: translateY(50%) rotate(45deg);
+  }
+
+  .#{$prefix}--popover--bottom.#{$prefix}--popover::before {
+    bottom: 0;
+    left: 0;
+    right: 0;
+    transform: translateY(100%);
   }
 
   //-----------------------------------------------------------------------------

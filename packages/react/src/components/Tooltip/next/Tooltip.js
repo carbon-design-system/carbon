@@ -63,7 +63,6 @@ function Tooltip({
       onMouseLeave={() => setOpen(false)}
       ref={containerRef}>
       {React.cloneElement(child, triggerProps)}
-      {open && <MouseArea from={containerRef} to={tooltipRef} />}
       <Popover align="top" open={open} highContrast>
         <PopoverContent
           aria-hidden="true"
@@ -76,28 +75,6 @@ function Tooltip({
       </Popover>
     </div>
   );
-}
-
-function MouseArea({ from: fromRef, to: toRef }) {
-  const [style, setStyle] = useState({});
-
-  useEffect(() => {
-    const { current: from } = fromRef;
-    const { current: to } = toRef;
-    const fromRect = from.getBoundingClientRect();
-    const toRect = to.getBoundingClientRect();
-
-    const height = toRect.top - fromRect.top;
-    const width = Math.max(toRect.width, fromRect.width);
-
-    // console.log(fromRect);
-    // console.log(toRect);
-
-    console.log(width);
-    console.log(height);
-  }, []);
-
-  return <div style={style} />;
 }
 
 Tooltip.propTypes = {
