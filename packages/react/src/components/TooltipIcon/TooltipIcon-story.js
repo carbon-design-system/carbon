@@ -7,6 +7,7 @@
 
 import React from 'react';
 import { Filter16 } from '@carbon/icons-react';
+import { action } from '@storybook/addon-actions';
 import { withKnobs, select, text } from '@storybook/addon-knobs';
 import TooltipIcon from '../TooltipIcon';
 import mdx from './TooltipIcon.mdx';
@@ -28,6 +29,7 @@ const props = () => ({
   direction: select('Tooltip direction (direction)', directions, 'bottom'),
   align: select('Tooltip alignment (align)', alignments, 'center'),
   tooltipText: text('Tooltip content (tooltipText)', 'Filter'),
+  onClick: action('onClick'),
 });
 
 export default {
