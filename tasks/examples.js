@@ -74,6 +74,7 @@ async function main() {
         const examples = (await fs.readdir(examplesDir)).filter((example) => {
           return (
             example !== '.yarnrc' &&
+            example !== '.yarnrc.yml' &&
             !IGNORE_EXAMPLE_DIRS.has(example) &&
             example !== '.DS_Store'
           );
@@ -117,7 +118,7 @@ async function main() {
 
           if (packageJson.scripts.build) {
             const installResult = spawn.sync('yarn', ['install'], {
-              stdio: 'ignore',
+              stdio: 'inherit',
               cwd: example.filepath,
             });
             if (installResult.status !== 0) {
@@ -127,7 +128,7 @@ async function main() {
             }
 
             const buildResult = spawn.sync('yarn', ['build'], {
-              stdio: 'ignore',
+              stdio: 'inherit',
               cwd: example.filepath,
             });
             if (buildResult.status !== 0) {
