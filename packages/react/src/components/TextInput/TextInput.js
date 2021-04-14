@@ -43,6 +43,7 @@ const TextInput = React.forwardRef(function TextInput(
   const textInputClasses = classNames(`${prefix}--text-input`, className, {
     [`${prefix}--text-input--light`]: light,
     [`${prefix}--text-input--invalid`]: invalid,
+    [`${prefix}--text-input--warning`]: !invalid && warn,
     [`${prefix}--text-input--${size}`]: size,
   });
   const sharedTextInputProps = {
