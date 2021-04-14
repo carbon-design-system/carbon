@@ -39,6 +39,9 @@
     - health
     - spline
     - s curve
+    - lineage
+    - data
+    - governance
 - name: 3D-curve--auto-vessels
   friendly_name: 3D curve auto vessels
   sizes:
@@ -123,6 +126,7 @@
     - communication
     - lattice
     - group
+    - dependent
   sizes:
     - 32
 - name: 4K
@@ -888,6 +892,7 @@
     - integration
     - network
     - network connection
+    - relational
   sizes:
     - 32
 - name: app-switcher
@@ -2302,6 +2307,7 @@
     - center square
     - cross
     - square
+    - focus
   sizes:
     - 32
 - name: center-to-fit
@@ -6792,6 +6798,7 @@
     - 2x grid
     - pattern
     - grid
+    - tile
   sizes:
     - 32
 - name: group
@@ -7135,6 +7142,7 @@
     - time
     - duration
     - hourglass
+    - expiry
   sizes:
     - 32
 - name: HTML
@@ -10647,6 +10655,7 @@
     - tree
     - org
     - data
+    - hierarchy
   sizes:
     - 32
 - name: partly-cloudy
@@ -12461,6 +12470,7 @@
   aliases:
     - select 01
     - formatting
+    - marquee
   sizes:
     - 32
 - name: select--02
@@ -12816,6 +12826,7 @@
   friendly_name: Sigma
   aliases:
     - sigma
+    - summary
   sizes:
     - 32
 - name: signal-strength
@@ -13596,6 +13607,7 @@
   aliases:
     - sub volume
     - health
+    - layers
   sizes:
     - 32
 - name: subtract
