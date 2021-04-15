@@ -28,7 +28,8 @@ const defaultTranslations = {
  * state of the menu for a given `ListBox`
  */
 const ListBoxTrigger = ({ isOpen, translateWithId: t, ...rest }) => {
-  const className = cx(`${prefix}--list-box__menu-icon`, {
+  const className = cx({
+    [`${prefix}--list-box__menu-icon`]: true,
     [`${prefix}--list-box__menu-icon--open`]: isOpen,
   });
   const description = isOpen ? t('close.menu') : t('open.menu');

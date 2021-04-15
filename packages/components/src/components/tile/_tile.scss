@@ -76,13 +76,27 @@
   }
 
   .#{$prefix}--tile--clickable:hover,
-  .#{$prefix}--tile--clickable:active {
+  .#{$prefix}--tile--clickable:active,
+  .#{$prefix}--tile--clickable:visited,
+  .#{$prefix}--tile--clickable:visited:hover {
     color: $text-01;
     text-decoration: none;
   }
 
+  // Disabled ClickableTile
+  .#{$prefix}--tile--clickable.#{$prefix}--link--disabled {
+    color: $disabled-02;
+  }
+
+  .#{$prefix}--tile--clickable:hover.#{$prefix}--link--disabled {
+    display: block;
+    color: $disabled-02;
+    background-color: $disabled-01;
+  }
+
   .#{$prefix}--tile--selectable {
     padding-right: $carbon--spacing-09;
+    border: 1px solid transparent;
   }
 
   .#{$prefix}--tile__checkmark,
@@ -175,12 +189,20 @@
       opacity: 1;
       transition: opacity $duration--fast-02 motion(standard, productive),
         visibility $duration--fast-02 motion(standard, productive);
+
+      // Safari-only media query
+      // Fixes an issue with scrolling
+      // and absolutely positioned elements (#8119)
+      @media not all and (min-resolution: 0.001dpcm) {
+        @supports (-webkit-appearance: none) and (stroke-color: transparent) {
+          overflow-y: auto;
+        }
+      }
     }
   }
 
   .#{$prefix}--tile--is-selected {
-    outline: 1px solid $ui-05;
-    outline-offset: -1px;
+    border: 1px solid $ui-05;
   }
 
   .#{$prefix}--tile--is-selected .#{$prefix}--tile__checkmark {
@@ -196,6 +218,22 @@
       // `ButtonText` is a CSS2 system color to help improve colors in HCM
       fill: ButtonText;
     }
+  }
+
+  // Fix double border
+  .#{$prefix}--tile-input--checked + .#{$prefix}--tile--is-selected {
+    border-top: 1px solid $ui-01;
+  }
+
+  .#{$prefix}--tile:not(.#{$prefix}--tile--is-selected)
+    + .#{$prefix}--tile-input--checked
+    + .#{$prefix}--tile--is-selected {
+    border-top: 1px solid $ui-05;
+  }
+
+  .#{$prefix}--tile-input--checked:first-of-type
+    + .#{$prefix}--tile--is-selected {
+    border-top: 1px solid $ui-05;
   }
 
   .#{$prefix}--tile-content {

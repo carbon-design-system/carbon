@@ -47,7 +47,7 @@
 
   .#{$prefix}--inline-edit-label__icon {
     opacity: 0;
-    fill: $ui-05;
+    fill: $icon-primary;
   }
 
   .#{$prefix}--inline-edit-input {
@@ -60,20 +60,6 @@
 
     input {
       padding-left: $spacing-04;
-    }
-  }
-
-  .#{$prefix}--data-table--short {
-    input {
-      height: rem(32px);
-    }
-
-    select {
-      padding: 0.45rem 2.75rem 0.45rem $spacing-05;
-    }
-
-    .#{$prefix}--select__arrow {
-      top: 0.875rem;
     }
   }
 }

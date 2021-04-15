@@ -7,7 +7,13 @@
 
 import React from 'react';
 import { action } from '@storybook/addon-actions';
-import { withKnobs, boolean, select, text } from '@storybook/addon-knobs';
+import {
+  withKnobs,
+  boolean,
+  number,
+  select,
+  text,
+} from '@storybook/addon-knobs';
 import {
   ToastNotification,
   InlineNotification,
@@ -38,7 +44,16 @@ const notificationProps = () => ({
     'describes the status icon'
   ),
   hideCloseButton: boolean('Hide close button (hideCloseButton)', false),
+  onClose: action('onClose'),
   onCloseButtonClick: action('onCloseButtonClick'),
+});
+
+const toastNotificationProps = () => ({
+  ...notificationProps(),
+  timeout: number(
+    'Duration in milliseconds to display notification (timeout)',
+    0
+  ),
 });
 
 export default {
@@ -58,9 +73,9 @@ export default {
 
 export const Toast = () => (
   <ToastNotification
-    {...notificationProps()}
+    {...toastNotificationProps()}
     caption={text('Caption (caption)', '00:00:00 AM')}
-    style={{ minWidth: '30rem', marginBottom: '.5rem' }}
+    style={{ marginBottom: '.5rem' }}
   />
 );
 

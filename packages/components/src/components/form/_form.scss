@@ -21,6 +21,10 @@
     margin-bottom: $carbon--spacing-07;
   }
 
+  .#{$prefix}--fieldset--no-margin {
+    margin-bottom: 0;
+  }
+
   .#{$prefix}--form-item {
     @include type-style('body-short-01');
 
@@ -39,7 +43,7 @@
 
     display: inline-block;
     margin-bottom: $carbon--spacing-03;
-    color: $text-02;
+    color: $text-secondary;
     font-weight: $input-label-weight;
     line-height: 1rem;
     vertical-align: baseline;
@@ -162,13 +166,19 @@
     // Added to prevent error text from displaying under helper text in Safari (#6392)
     width: 100%;
     margin-top: $carbon--spacing-02;
-    color: $text-02;
+    color: $text-secondary;
     opacity: 1;
   }
 
   .#{$prefix}--label--disabled,
   .#{$prefix}--form__helper-text--disabled {
-    color: $disabled-02;
+    color: $text-disabled;
+  }
+
+  // If a FormGroup is disabled, Form labels and helper text nested inside should also be disabled
+  fieldset[disabled] .#{$prefix}--label,
+  fieldset[disabled] .#{$prefix}--form__helper-text {
+    color: $text-disabled;
   }
 }
 

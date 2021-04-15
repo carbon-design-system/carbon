@@ -130,6 +130,8 @@
     }
 
     .#{$prefix}--tree-node__icon {
+      min-width: 1rem;
+      min-height: 1rem;
       margin-right: $spacing-03;
       fill: $icon-02;
     }

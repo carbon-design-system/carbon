@@ -47,6 +47,7 @@ function MenuOption({
   children,
   disabled,
   indented,
+  kind = 'default',
   label,
   level,
   onClick = () => {},
@@ -125,6 +126,7 @@ function MenuOption({
   const classes = classnames(`${prefix}--menu-option`, {
     [`${prefix}--menu-option--disabled`]: disabled,
     [`${prefix}--menu-option--active`]: subOptions && submenuOpen,
+    [`${prefix}--menu-option--danger`]: !subOptions && kind === 'danger',
   });
 
   const allowedRoles = ['menuitemradio', 'menuitemcheckbox'];
@@ -224,6 +226,11 @@ MenuOption.propTypes = {
    * Is automatically set by Menu
    */
   indented: PropTypes.bool,
+
+  /**
+   * Optional prop to specify the kind of the MenuOption
+   */
+  kind: PropTypes.oneOf(['default', 'danger']),
 
   /**
    * Rendered label for the MenuOption

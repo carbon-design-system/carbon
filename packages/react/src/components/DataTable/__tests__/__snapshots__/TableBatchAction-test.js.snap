@@ -13,6 +13,7 @@ exports[`DataTable.TableBatchAction should render 1`] = `
 >
   <Button
     className="custom-class"
+    dangerDescription="danger"
     disabled={false}
     iconDescription="test"
     kind="primary"
@@ -29,6 +30,7 @@ exports[`DataTable.TableBatchAction should render 1`] = `
     type="button"
   >
     <button
+      aria-describedby={null}
       aria-pressed={null}
       className="custom-class bx--btn bx--btn--primary"
       disabled={false}

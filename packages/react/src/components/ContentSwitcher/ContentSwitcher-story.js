@@ -18,14 +18,14 @@ const selectionModes = {
 };
 
 const sizes = {
-  'Extra large size (xl)': 'xl',
-  'Default size': undefined,
-  'Small size (sm)': 'sm',
+  'Small  (sm)': 'sm',
+  'Medium (md) - default': undefined,
+  'Large  (lg)': 'lg',
 };
 
 const props = {
   contentSwitcher: () => ({
-    light: boolean('Light variant (light)', false),
+    light: boolean('[Deprecated]: Light variant (light)', false),
     selectedIndex: select('Selected index (selectedIndex)', [0, 1, 2], 0),
     selectionMode: select(
       'Selection mode (selectionMode)',

@@ -31,8 +31,8 @@
     margin-top: $carbon--spacing-03;
     margin-right: $carbon--spacing-05;
     margin-bottom: $carbon--spacing-03;
-    padding-left: rem(14px);
-    color: $inverse-01;
+    padding-left: $carbon--spacing-05;
+    color: $text-inverse;
     box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.2);
 
     &:first-child {
@@ -52,7 +52,7 @@
 
   .#{$prefix}--toast-notification:not(.#{$prefix}--toast-notification--low-contrast)
     a {
-    color: $inverse-link;
+    color: $link-inverse;
   }
 
   .#{$prefix}--toast-notification a {
@@ -64,7 +64,7 @@
   }
 
   .#{$prefix}--toast-notification a:focus {
-    outline: 1px solid $inverse-link;
+    outline: 1px solid $link-inverse;
   }
 
   .#{$prefix}--toast-notification.#{$prefix}--toast-notification--low-contrast
@@ -73,53 +73,65 @@
   }
 
   .#{$prefix}--toast-notification--low-contrast {
-    color: $text-01;
+    color: $text-primary;
   }
 
   .#{$prefix}--toast-notification--error {
-    @include notification--experimental($inverse-support-01, $inverse-02);
+    @include notification--experimental(
+      $support-error-inverse,
+      $background-inverse
+    );
   }
 
   .#{$prefix}--toast-notification--low-contrast.#{$prefix}--toast-notification--error {
     @include notification--experimental(
-      $support-01,
+      $support-error,
       get-token-value($notification-colors, 'notification-background-error')
     );
   }
 
   .#{$prefix}--toast-notification--success {
-    @include notification--experimental($inverse-support-02, $inverse-02);
+    @include notification--experimental(
+      $support-success-inverse,
+      $background-inverse
+    );
   }
 
   .#{$prefix}--toast-notification--low-contrast.#{$prefix}--toast-notification--success {
     @include notification--experimental(
-      $support-02,
+      $support-success,
       get-token-value($notification-colors, 'notification-background-success')
     );
   }
 
   .#{$prefix}--toast-notification--info,
   .#{$prefix}--toast-notification--info-square {
-    @include notification--experimental($inverse-support-04, $inverse-02);
+    @include notification--experimental(
+      $support-info-inverse,
+      $background-inverse
+    );
   }
 
   .#{$prefix}--toast-notification--low-contrast.#{$prefix}--toast-notification--info,
   .#{$prefix}--toast-notification--low-contrast.#{$prefix}--toast-notification--info-square {
     @include notification--experimental(
-      $support-04,
+      $support-info,
       get-token-value($notification-colors, 'notification-background-info')
     );
   }
 
   .#{$prefix}--toast-notification--warning,
   .#{$prefix}--toast-notification--warning-alt {
-    @include notification--experimental($inverse-support-03, $inverse-02);
+    @include notification--experimental(
+      $support-warning-inverse,
+      $background-inverse
+    );
   }
 
   .#{$prefix}--toast-notification--low-contrast.#{$prefix}--toast-notification--warning,
   .#{$prefix}--toast-notification--low-contrast.#{$prefix}--toast-notification--warning-alt {
     @include notification--experimental(
-      $support-03,
+      $support-warning,
       get-token-value($notification-colors, 'notification-background-warning')
     );
   }
@@ -133,8 +145,8 @@
 
   .#{$prefix}--toast-notification__icon {
     flex-shrink: 0;
-    margin-top: rem(14px);
-    margin-right: rem(14px);
+    margin-top: $carbon--spacing-05;
+    margin-right: $carbon--spacing-05;
   }
 
   .#{$prefix}--toast-notification__details {
@@ -160,7 +172,7 @@
     transition: outline $transition--base, background-color $transition--base;
 
     &:focus {
-      outline: 2px solid $inverse-focus-ui;
+      outline: 2px solid $focus-inverse;
       outline-offset: -2px;
 
       // Firefox HCM fix
@@ -170,7 +182,7 @@
     }
 
     .#{$prefix}--toast-notification__close-icon {
-      fill: $inverse-01;
+      fill: $icon-inverse;
     }
   }
 
@@ -182,7 +194,7 @@
   .#{$prefix}--toast-notification--low-contrast
     .#{$prefix}--toast-notification__close-button
     .#{$prefix}--toast-notification__close-icon {
-    fill: $icon-01;
+    fill: $icon-primary;
   }
 
   .#{$prefix}--toast-notification__title {
@@ -198,13 +210,13 @@
 
     margin-top: 0;
     margin-bottom: $carbon--spacing-05;
-    color: $inverse-01;
+    color: $text-inverse;
     word-break: break-word;
   }
 
   .#{$prefix}--toast-notification--low-contrast
     .#{$prefix}--toast-notification__subtitle {
-    color: $text-01;
+    color: $text-primary;
   }
 
   .#{$prefix}--toast-notification__caption {
@@ -212,12 +224,12 @@
 
     margin-bottom: $carbon--spacing-05;
     padding-top: $carbon--spacing-03;
-    color: $inverse-01;
+    color: $text-inverse;
   }
 
   .#{$prefix}--toast-notification--low-contrast
     .#{$prefix}--toast-notification__caption {
-    color: $text-01;
+    color: $text-primary;
   }
 }
 
