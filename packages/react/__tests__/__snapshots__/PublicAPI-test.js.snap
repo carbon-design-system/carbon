@@ -4384,7 +4384,9 @@ Map {
       "page": Object {
         "type": "number",
       },
-      "pageInputDisabled": [Function],
+      "pageInputDisabled": Object {
+        "type": "bool",
+      },
       "pageNumberText": Object {
         "type": "string",
       },
@@ -4393,6 +4395,9 @@ Map {
       },
       "pageSize": Object {
         "type": "number",
+      },
+      "pageSizeInputDisabled": Object {
+        "type": "bool",
       },
       "pageSizes": Object {
         "args": Array [
@@ -5428,6 +5433,9 @@ Map {
         "hideLabel": Object {
           "type": "bool",
         },
+        "hidePasswordLabel": Object {
+          "type": "string",
+        },
         "id": Object {
           "isRequired": true,
           "type": "string",
@@ -5452,6 +5460,9 @@ Map {
           "type": "func",
         },
         "placeholder": Object {
+          "type": "string",
+        },
+        "showPasswordLabel": Object {
           "type": "string",
         },
         "size": Object {
