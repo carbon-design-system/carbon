@@ -13,7 +13,7 @@ import { useFeatureFlag } from '../FeatureFlags';
 
 const { prefix } = settings;
 
-const GridContext = React.createContext({ hasGridParent: false });
+const GridContext = React.createContext(false);
 
 function Grid({
   as: BaseComponent = 'div',
@@ -27,7 +27,7 @@ function Grid({
   ...rest
 }) {
   const hasCSSGrid = useFeatureFlag('enable-css-grid');
-  const { hasGridParent } = useContext(GridContext);
+  const hasGridParent = useContext(GridContext);
   const isSubgrid = subgrid || hasGridParent;
 
   const cssGridClassNames = {
