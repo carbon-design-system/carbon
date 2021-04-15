@@ -13,7 +13,7 @@ import {
   StructuredListBody,
   StructuredListRow,
   StructuredListCell,
-} from './StructuredList';
+} from '../StructuredList';
 import { mount, shallow } from 'enzyme';
 import { settings } from 'carbon-components';
 
@@ -26,11 +26,13 @@ describe('StructuredListWrapper', () => {
     );
 
     it('should have the expected classes', () => {
-      expect(wrapper.hasClass(`${prefix}--structured-list`)).toEqual(true);
+      expect(
+        wrapper.find('div').hasClass(`${prefix}--structured-list`)
+      ).toEqual(true);
     });
 
     it('Should add extra classes that are passed via className', () => {
-      expect(wrapper.hasClass('extra-class')).toEqual(true);
+      expect(wrapper.find('div').hasClass('extra-class')).toEqual(true);
     });
 
     it('By default, selection prop is false', () => {
@@ -41,9 +43,9 @@ describe('StructuredListWrapper', () => {
 
     it('Should add the modifier class for selection when selection prop is true', () => {
       wrapper.setProps({ selection: true });
-      expect(wrapper.hasClass(`${prefix}--structured-list--selection`)).toEqual(
-        true
-      );
+      expect(
+        wrapper.find('div').hasClass(`${prefix}--structured-list--selection`)
+      ).toEqual(true);
     });
   });
 });
@@ -118,16 +120,6 @@ describe('StructuredListRow', () => {
       expect(
         wrapper.hasClass(`${prefix}--structured-list-row--header-row`)
       ).toEqual(true);
-    });
-
-    it('should use <div> HTML by default (or when label prop is false)', () => {
-      const wrapperLabel = shallow(<StructuredListRow />);
-      expect(wrapperLabel.getElement().type).toEqual('div');
-    });
-
-    it('should use <label> HTML when label prop is true', () => {
-      const wrapperLabel = shallow(<StructuredListRow label />);
-      expect(wrapperLabel.getElement().type).toEqual('label');
     });
 
     it('Should accept other props from ...other', () => {
