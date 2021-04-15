@@ -35,36 +35,6 @@ module.exports = {
   ].filter(Boolean),
 
   webpack(config) {
-    const sassLoader = {
-      loader: 'sass-loader',
-      options: {
-        prependData() {
-          return `
-            $feature-flags: (
-              ui-shell: true,
-              enable-css-custom-properties: ${CARBON_REACT_STORYBOOK_USE_CUSTOM_PROPERTIES},
-            );
-          `;
-        },
-        sassOptions: {
-          includePaths: [path.resolve(__dirname, '..', 'node_modules')],
-        },
-        sourceMap: true,
-      },
-    };
-
-    const fastSassLoader = {
-      loader: 'fast-sass-loader',
-      options: {
-        data: `
-          $feature-flags: (
-            ui-shell: true,
-            enable-css-custom-properties: ${CARBON_REACT_STORYBOOK_USE_CUSTOM_PROPERTIES},
-          );
-        `,
-      },
-    };
-
     config.module.rules.push({
       test: /-story\.jsx?$/,
       loaders: [
@@ -115,7 +85,27 @@ module.exports = {
             sourceMap: true,
           },
         },
-        NODE_ENV === 'production' ? sassLoader : fastSassLoader,
+        {
+          loader: require.resolve('sass-loader'),
+          options: {
+            additionalData(content) {
+              return `
+                $feature-flags: (
+                  ui-shell: true,
+                  enable-css-custom-properties: ${CARBON_REACT_STORYBOOK_USE_CUSTOM_PROPERTIES},
+                );
+                ${content}
+              `;
+            },
+            sassOptions: {
+              implementation: require('sass'),
+              includePaths: [
+                path.resolve(__dirname, '..', '..', 'node_modules'),
+              ],
+            },
+            sourceMap: true,
+          },
+        },
       ],
     });
 

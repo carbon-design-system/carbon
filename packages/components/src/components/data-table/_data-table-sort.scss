@@ -36,10 +36,10 @@
     width: 100%;
     min-height: 100%;
     padding-left: $spacing-05;
-    color: $text-01;
+    color: $text-primary;
     font: inherit;
     line-height: 1;
-    background-color: $ui-03;
+    background-color: $layer-accent;
     transition: background-color $duration--fast-01 motion(entrance, productive),
       outline $duration--fast-01 motion(entrance, productive);
   }
@@ -126,7 +126,7 @@
     margin-right: $spacing-03;
     margin-left: $spacing-03;
     opacity: 0;
-    fill: $ui-05;
+    fill: $icon-primary;
   }
 
   .#{$prefix}--table-sort.#{$prefix}--table-sort--active {
@@ -157,7 +157,7 @@
     transform: rotate(0);
     opacity: 1;
     transition: transform $transition--base $carbon--standard-easing;
-    fill: $ui-05;
+    fill: $icon-primary;
   }
 
   // Windows, Firefox HCM Fix

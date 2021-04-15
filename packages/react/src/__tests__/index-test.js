@@ -201,6 +201,7 @@ describe('Carbon Components React', () => {
         "unstable_ContextMenuItem",
         "unstable_ContextMenuRadioGroup",
         "unstable_ContextMenuSelectableItem",
+        "unstable_FeatureFlags",
         "unstable_Heading",
         "unstable_PageSelector",
         "unstable_Pagination",
@@ -208,6 +209,8 @@ describe('Carbon Components React', () => {
         "unstable_TreeNode",
         "unstable_TreeView",
         "unstable_useContextMenu",
+        "unstable_useFeatureFlag",
+        "unstable_useFeatureFlags",
       ]
     `);
   });
