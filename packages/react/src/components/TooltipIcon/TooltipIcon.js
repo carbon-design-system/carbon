@@ -22,6 +22,7 @@ const TooltipIcon = ({
   children,
   direction,
   align,
+  onClick,
   onBlur,
   onFocus,
   onMouseEnter,
@@ -94,6 +95,14 @@ const TooltipIcon = ({
     }
   };
 
+  const handleClick = (evt) => {
+    // Prevent clicks on the tooltip from triggering the button click event
+    if (evt.target === tooltipRef.current) {
+      evt.preventDefault();
+      return;
+    }
+  };
+
   useEffect(() => {
     const handleEscKeyDown = (event) => {
       if (matches(event, [keys.Escape])) {
@@ -114,7 +123,8 @@ const TooltipIcon = ({
       onMouseEnter={composeEventHandlers([onMouseEnter, handleMouseEnter])}
       onMouseLeave={composeEventHandlers([onMouseLeave, handleMouseLeave])}
       onFocus={composeEventHandlers([onFocus, handleFocus])}
-      onBlur={composeEventHandlers([onBlur, handleBlur])}>
+      onBlur={composeEventHandlers([onBlur, handleBlur])}
+      onClick={composeEventHandlers([handleClick, onClick])}>
       <span
         ref={tooltipRef}
         onMouseEnter={handleMouseEnter}
@@ -160,6 +170,11 @@ TooltipIcon.propTypes = {
    * The event handler for the `blur` event.
    */
   onBlur: PropTypes.func,
+
+  /**
+   * The event handler for the `click` event.
+   */
+  onClick: PropTypes.func,
 
   /**
    * The event handler for the `focus` event.
