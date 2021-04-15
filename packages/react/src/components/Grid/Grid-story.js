@@ -3,6 +3,7 @@ import React from 'react';
 import { Grid, Row, Column } from './';
 import mdx from './Grid.mdx';
 import { FeatureFlags } from '../FeatureFlags';
+import { Heading } from '../Heading';
 
 export default {
   title: 'Components/Grid',
@@ -29,57 +30,81 @@ function DemoContent({ children }) {
 
 export const experimentalCSSGrid = () => (
   <FeatureFlags flags={{ 'enable-css-grid': true }}>
+    <Heading>Wide</Heading>
     <Grid>
-      <Column sm={2} md={4} lg={6}>
+      <Column sm={1} md={2} lg={4}>
         Column
       </Column>
-      <Column sm={2} md={4} lg={6}>
+      <Column sm={1} md={2} lg={4}>
+        Column
+      </Column>
+      <Column sm={1} md={2} lg={4}>
+        Column
+      </Column>
+      <Column sm={1} md={2} lg={4}>
         Column
       </Column>
       <Grid>
-        <Column>Column</Column>
-        <Column>Column</Column>
+        <Column sm={2} md={4} lg={8}>
+          Subgrid
+        </Column>
+        <Column sm={2} md={4} lg={8}>
+          Subgrid
+        </Column>
       </Grid>
     </Grid>
+
+    <Heading>Narrow</Heading>
     <Grid narrow>
-      <Column>Column</Column>
-      <Column>Column</Column>
-      <Grid>
-        <Column>Column</Column>
-        <Column>Column</Column>
-      </Grid>
+      <Column sm={1} md={2} lg={4}>
+        Column
+      </Column>
+      <Column sm={1} md={2} lg={4}>
+        Column
+      </Column>
+      <Column sm={1} md={2} lg={4}>
+        Column
+      </Column>
+      <Column sm={1} md={2} lg={4}>
+        Column
+      </Column>
     </Grid>
+
+    <Heading>Condensed</Heading>
     <Grid condensed>
-      <Column>Column</Column>
-      <Column>Column</Column>
-      <Grid>
-        <Column>Column</Column>
-        <Column>Column</Column>
-      </Grid>
+      <Column sm={1} md={2} lg={4}>
+        Column
+      </Column>
+      <Column sm={1} md={2} lg={4}>
+        Column
+      </Column>
+      <Column sm={1} md={2} lg={4}>
+        Column
+      </Column>
+      <Column sm={1} md={2} lg={4}>
+        Column
+      </Column>
     </Grid>
   </FeatureFlags>
 );
 
 export const autoColumns = () => (
-  <>
-    <div className="bx--css-grid">Hello</div>
-    <Grid>
-      <Row>
-        <Column>
-          <DemoContent>Span 25%</DemoContent>
-        </Column>
-        <Column>
-          <DemoContent>Span 25%</DemoContent>
-        </Column>
-        <Column>
-          <DemoContent>Span 25%</DemoContent>
-        </Column>
-        <Column>
-          <DemoContent>Span 25%</DemoContent>
-        </Column>
-      </Row>
-    </Grid>
-  </>
+  <Grid>
+    <Row>
+      <Column>
+        <DemoContent>Span 25%</DemoContent>
+      </Column>
+      <Column>
+        <DemoContent>Span 25%</DemoContent>
+      </Column>
+      <Column>
+        <DemoContent>Span 25%</DemoContent>
+      </Column>
+      <Column>
+        <DemoContent>Span 25%</DemoContent>
+      </Column>
+    </Row>
+  </Grid>
 );
 
 export const responsiveGrid = () => (
