@@ -37,6 +37,7 @@ function renderItem(item, i) {
           label={item.label}
           shortcut={item.shortcut}
           disabled={item.disabled}
+          kind={item.kind}
           onClick={!item.children ? action('onClick') : null}>
           {item.children && item.children.map(renderItem)}
         </MenuItem>

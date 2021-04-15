@@ -10,9 +10,14 @@ import PropTypes from 'prop-types';
 
 import MenuOption from './MenuOption';
 
-function MenuItem({ label, children, disabled, shortcut, ...rest }) {
+function MenuItem({ label, children, disabled, kind, shortcut, ...rest }) {
   return (
-    <MenuOption {...rest} label={label} disabled={disabled} shortcut={shortcut}>
+    <MenuOption
+      {...rest}
+      label={label}
+      disabled={disabled}
+      kind={kind}
+      shortcut={shortcut}>
       {children}
     </MenuOption>
   );
@@ -28,6 +33,11 @@ MenuItem.propTypes = {
    * Specify whether this MenuItem is disabled
    */
   disabled: PropTypes.bool,
+
+  /**
+   * Optional prop to specify the kind of the MenuItem
+   */
+  kind: PropTypes.oneOf(['default', 'danger']),
 
   /**
    * Rendered label for the MenuItem

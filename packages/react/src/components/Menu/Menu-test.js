@@ -81,6 +81,13 @@ describe('Menu', () => {
         ).toBe(true);
       });
 
+      it('supports danger kind', () => {
+        const wrapper = mount(<MenuItem label="Delete" kind="danger" />);
+        const option = wrapper.find(`.${prefix}--menu-option`);
+
+        expect(option.hasClass(`${prefix}--menu-option--danger`)).toBe(true);
+      });
+
       it('renders props.children as submenu', () => {
         const wrapper = mount(
           <Menu>

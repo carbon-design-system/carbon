@@ -33,7 +33,7 @@ export const _OverflowMenu = () =>
     { type: 'item', label: 'Rename app' },
     { type: 'item', label: 'Edit routes and access' },
     { type: 'divider' },
-    { type: 'item', label: 'Delete app' },
+    { type: 'item', label: 'Delete app', kind: 'danger' },
   ]);
 _OverflowMenu.storyName = 'OverflowMenu';
 

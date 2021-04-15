@@ -20,13 +20,13 @@ function OverflowMenu({
   ...rest
 }) {
   const [open, setOpen] = useState(false);
-  const [position, setPosotion] = useState([0, 0]);
+  const [position, setPosition] = useState([0, 0]);
   const triggerRef = useRef(null);
 
   function openMenu() {
     if (triggerRef.current) {
       const { left, bottom } = triggerRef.current.getBoundingClientRect();
-      setPosotion([left, bottom]);
+      setPosition([left, bottom]);
     }
 
     setOpen(true);
