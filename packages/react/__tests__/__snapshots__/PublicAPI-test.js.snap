@@ -2917,6 +2917,9 @@ Map {
       "className": Object {
         "type": "string",
       },
+      "columns": Object {
+        "type": "number",
+      },
       "condensed": Object {
         "type": "bool",
       },
@@ -2924,6 +2927,9 @@ Map {
         "type": "bool",
       },
       "narrow": Object {
+        "type": "bool",
+      },
+      "subgrid": Object {
         "type": "bool",
       },
     },
