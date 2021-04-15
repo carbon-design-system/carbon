@@ -11,6 +11,12 @@
     "directory": "packages/feature-flags"
   },
   "bugs": "https://github.com/carbon-design-system/carbon/issues",
+  "files": [
+    "es",
+    "lib",
+    "scss",
+    "index.scss"
+  ],
   "keywords": [
     "ibm",
     "carbon",
