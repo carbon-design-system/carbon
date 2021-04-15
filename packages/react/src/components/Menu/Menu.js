@@ -13,13 +13,15 @@ import { keys, match } from '../../internal/keyboard';
 import ClickListener from '../../internal/ClickListener';
 
 import {
+  capWithinRange,
   clickedElementHasSubnodes,
-  getValidNodes,
-  resetFocus,
   focusNode as focusNodeUtil,
   getNextNode,
-  getParentNode,
   getParentMenu,
+  getParentNode,
+  getPosition,
+  getValidNodes,
+  resetFocus,
 } from './_utils';
 
 import MenuGroup from './MenuGroup';
@@ -45,6 +47,56 @@ const Menu = function Menu({
   const [position, setPosition] = useState([x, y]);
   const [canBeClosed, setCanBeClosed] = useState(false);
   const isRootMenu = level === 1;
+
+  function getContainerBoundaries() {
+    const { clientWidth: bodyWidth, clientHeight: bodyHeight } = document.body;
+    return [margin, margin, bodyWidth - margin, bodyHeight - margin];
+  }
+
+  function getTargetBoundaries() {
+    const xIsRange = typeof x === 'object' && x.length === 2;
+    const yIsRange = typeof y === 'object' && y.length === 2;
+
+    const targetBoundaries = [
+      xIsRange ? x[0] : x,
+      yIsRange ? y[0] : y,
+      xIsRange ? x[1] : x,
+      yIsRange ? y[1] : y,
+    ];
+
+    if (!isRootMenu) {
+      const { width: parentWidth } = getParentMenu(
+        rootRef?.current?.element
+      )?.getBoundingClientRect();
+
+      targetBoundaries[2] -= parentWidth;
+    }
+
+    const containerBoundaries = getContainerBoundaries();
+
+    return [
+      capWithinRange(
+        targetBoundaries[0],
+        containerBoundaries[0],
+        containerBoundaries[2]
+      ),
+      capWithinRange(
+        targetBoundaries[1],
+        containerBoundaries[1],
+        containerBoundaries[3]
+      ),
+      capWithinRange(
+        targetBoundaries[2],
+        containerBoundaries[0],
+        containerBoundaries[2]
+      ),
+      capWithinRange(
+        targetBoundaries[3],
+        containerBoundaries[1],
+        containerBoundaries[3]
+      ),
+    ];
+  }
 
   function focusNode(node) {
     if (node) {
@@ -113,62 +165,25 @@ const Menu = function Menu({
     }
   }
 
-  function getCorrectedPosition(assumedDirection) {
-    const pos = [x, y];
+  function getCorrectedPosition(preferredDirection) {
+    const elementRect = rootRef?.current?.element?.getBoundingClientRect();
+    const elementDimensions = [elementRect.width, elementRect.height];
+    const targetBoundaries = getTargetBoundaries();
+    const containerBoundaries = getContainerBoundaries();
 
     const {
-      width,
-      height,
-    } = rootRef?.current?.element?.getBoundingClientRect();
-    const { clientWidth: bodyWidth, clientHeight: bodyHeight } = document.body;
-    const parentWidth = isRootMenu
-      ? 0
-      : getParentMenu(rootRef?.current?.element)?.getBoundingClientRect()
-          ?.width;
-    let localDirection = assumedDirection;
+      position: correctedPosition,
+      direction: correctedDirection,
+    } = getPosition(
+      elementDimensions,
+      targetBoundaries,
+      containerBoundaries,
+      preferredDirection
+    );
 
-    const min = [margin, margin];
-    const max = [bodyWidth - margin - width, bodyHeight - margin - height];
+    setDirection(correctedDirection);
 
-    // in case it is root menu previously had direction -1, check
-    // if direction 1 would be possible
-    if (isRootMenu && localDirection === -1 && pos[0] < max[0]) {
-      localDirection = 1;
-    }
-
-    // make sure menu is visible in y bounds
-    if (pos[1] > max[1]) {
-      pos[1] = max[1];
-    }
-    if (pos[1] < min[1]) {
-      pos[1] = min[1];
-    }
-
-    if (localDirection === 1) {
-      // if it won't fit anymore
-      if (pos[0] > max[0]) {
-        pos[0] = x - width - parentWidth;
-        if (pos[0] + width > bodyWidth - margin) {
-          pos[0] = max[0];
-        }
-        localDirection = -1;
-      } else if (pos[0] < min[0]) {
-        // keep distance to left screen edge
-        pos[0] = min[0];
-      }
-    } else if (localDirection === -1) {
-      pos[0] = x - width - parentWidth;
-
-      // if it should re-reverse
-      if (pos[0] < min[0]) {
-        pos[0] = x;
-        localDirection = 1;
-      }
-    }
-
-    setDirection(localDirection);
-
-    return [Math.round(pos[0]), Math.round(pos[1])];
+    return correctedPosition;
   }
 
   useEffect(() => {
@@ -313,12 +328,18 @@ Menu.propTypes = {
   /**
    * Specify the x position where this menu is rendered
    */
-  x: PropTypes.number,
+  x: PropTypes.oneOfType([
+    PropTypes.number,
+    PropTypes.arrayOf(PropTypes.number),
+  ]),
 
   /**
    * Specify the y position where this menu is rendered
    */
-  y: PropTypes.number,
+  y: PropTypes.oneOfType([
+    PropTypes.number,
+    PropTypes.arrayOf(PropTypes.number),
+  ]),
 };
 
 export default Menu;
