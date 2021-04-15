@@ -2929,9 +2929,6 @@ Map {
       "narrow": Object {
         "type": "bool",
       },
-      "subgrid": Object {
-        "type": "bool",
-      },
     },
   },
   "Row" => Object {

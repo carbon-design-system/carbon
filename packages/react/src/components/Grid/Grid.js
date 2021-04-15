@@ -13,22 +13,20 @@ import { useFeatureFlag } from '../FeatureFlags';
 
 const { prefix } = settings;
 
-const GridContext = React.createContext(false);
+const SubgridContext = React.createContext(false);
 
 function Grid({
   as: BaseComponent = 'div',
   condensed = false,
   narrow = false,
   fullWidth = false,
-  subgrid,
   columns = 16,
   className: containerClassName,
   children,
   ...rest
 }) {
   const hasCSSGrid = useFeatureFlag('enable-css-grid');
-  const hasGridParent = useContext(GridContext);
-  const isSubgrid = subgrid || hasGridParent;
+  const isSubgrid = useContext(SubgridContext);
 
   const cssGridClassNames = {
     [`${prefix}--css-grid`]: !isSubgrid,
@@ -52,11 +50,11 @@ function Grid({
   );
 
   return (
-    <GridContext.Provider value={{ hasGridParent: true }}>
+    <SubgridContext.Provider value={true}>
       <BaseComponent className={className} {...rest}>
         {children}
       </BaseComponent>
-    </GridContext.Provider>
+    </SubgridContext.Provider>
   );
 }
 
@@ -97,12 +95,6 @@ Grid.propTypes = {
    * typographic alignment with and without containers.
    */
   narrow: PropTypes.bool,
-
-  /**
-   * Specify this grid as a subgrid. This is automatically
-   * applied when a <Grid> is nested inside of a parent <Grid>
-   */
-  subgrid: PropTypes.bool,
 };
 
 export default Grid;
