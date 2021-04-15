@@ -5065,6 +5065,23 @@ Map {
   "StructuredListRow" => Object {},
   "StructuredListInput" => Object {},
   "StructuredListCell" => Object {},
+  "StructuredListSkeleton" => Object {
+    "defaultProps": Object {
+      "border": false,
+      "rowCount": 5,
+    },
+    "propTypes": Object {
+      "border": Object {
+        "type": "bool",
+      },
+      "className": Object {
+        "type": "string",
+      },
+      "rowCount": Object {
+        "type": "number",
+      },
+    },
+  },
   "Tab" => Object {
     "defaultProps": Object {
       "label": "provide a label",
@@ -6640,23 +6657,6 @@ Map {
       },
       "hideLabel": Object {
         "type": "bool",
-      },
-    },
-  },
-  "StructuredListSkeleton" => Object {
-    "defaultProps": Object {
-      "border": false,
-      "rowCount": 5,
-    },
-    "propTypes": Object {
-      "border": Object {
-        "type": "bool",
-      },
-      "className": Object {
-        "type": "string",
-      },
-      "rowCount": Object {
-        "type": "number",
       },
     },
   },
