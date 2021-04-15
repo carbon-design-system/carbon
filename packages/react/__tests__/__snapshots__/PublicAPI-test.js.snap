@@ -7287,6 +7287,23 @@ Map {
     },
     "render": [Function],
   },
+  "unstable_FeatureFlags" => Object {
+    "propTypes": Object {
+      "children": Object {
+        "type": "node",
+      },
+      "flags": Object {
+        "args": Array [
+          Object {
+            "type": "bool",
+          },
+        ],
+        "type": "objectOf",
+      },
+    },
+  },
+  "unstable_useFeatureFlag" => Object {},
+  "unstable_useFeatureFlags" => Object {},
   "unstable_PageSelector" => Object {
     "defaultProps": Object {
       "className": null,
