@@ -34,6 +34,7 @@ const { prefix } = settings;
 const margin = 16; // distance to keep to body edges, in px
 
 const Menu = function Menu({
+  autoclose = true,
   children,
   open,
   level = 1,
@@ -160,7 +161,7 @@ const Menu = function Menu({
   }
 
   function handleClickOutside(e) {
-    if (!clickedElementHasSubnodes(e) && open && canBeClosed) {
+    if (!clickedElementHasSubnodes(e) && open && canBeClosed && autoclose) {
       onClose();
     }
   }
@@ -205,31 +206,7 @@ const Menu = function Menu({
       const correctedPosition = getCorrectedPosition(localDirection);
       setPosition(correctedPosition);
 
-      // Safari emits the click event when preventDefault was called on
-      // the contextmenu event. This is registered by the ClickListener
-      // component and would lead to immediate closing when a user is
-      // triggering the menu with ctrl+click. To prevent this, we only
-      // allow the menu to be closed after the click event was received.
-      // Since other browsers don't emit this event, it's also reset with
-      // a 50ms delay after mouseup event was called.
-
-      document.addEventListener(
-        'mouseup',
-        () => {
-          setTimeout(() => {
-            setCanBeClosed(true);
-          }, 50);
-        },
-        { once: true }
-      );
-
-      document.addEventListener(
-        'click',
-        () => {
-          setCanBeClosed(true);
-        },
-        { once: true }
-      );
+      setCanBeClosed(true);
     } else {
       setPosition([0, 0]);
     }
@@ -305,6 +282,12 @@ const Menu = function Menu({
 };
 
 Menu.propTypes = {
+  /**
+   * Whether or not the menu should automatically close when
+   * an outside click is registered
+   */
+  autoclose: PropTypes.bool,
+
   /**
    * Specify the children of the Menu
    */
