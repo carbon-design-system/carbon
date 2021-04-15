@@ -70,4 +70,4 @@ export function StructuredListCell(props) {
   return <StructuredListCellClassic {...props} />;
 }
 
-export * from './StructuredList.Skeleton';
+export { default as StructuredListSkeleton } from './StructuredList.Skeleton';

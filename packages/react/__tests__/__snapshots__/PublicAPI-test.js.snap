@@ -5071,6 +5071,23 @@ Map {
   "StructuredListRow" => Object {},
   "StructuredListInput" => Object {},
   "StructuredListCell" => Object {},
+  "StructuredListSkeleton" => Object {
+    "defaultProps": Object {
+      "border": false,
+      "rowCount": 5,
+    },
+    "propTypes": Object {
+      "border": Object {
+        "type": "bool",
+      },
+      "className": Object {
+        "type": "string",
+      },
+      "rowCount": Object {
+        "type": "number",
+      },
+    },
+  },
   "Tab" => Object {
     "defaultProps": Object {
       "label": "provide a label",
@@ -6649,23 +6666,6 @@ Map {
       },
     },
   },
-  "StructuredListSkeleton" => Object {
-    "defaultProps": Object {
-      "border": false,
-      "rowCount": 5,
-    },
-    "propTypes": Object {
-      "border": Object {
-        "type": "bool",
-      },
-      "className": Object {
-        "type": "string",
-      },
-      "rowCount": Object {
-        "type": "number",
-      },
-    },
-  },
   "TabsSkeleton" => Object {
     "propTypes": Object {
       "className": Object {
@@ -7293,6 +7293,23 @@ Map {
     },
     "render": [Function],
   },
+  "unstable_FeatureFlags" => Object {
+    "propTypes": Object {
+      "children": Object {
+        "type": "node",
+      },
+      "flags": Object {
+        "args": Array [
+          Object {
+            "type": "bool",
+          },
+        ],
+        "type": "objectOf",
+      },
+    },
+  },
+  "unstable_useFeatureFlag" => Object {},
+  "unstable_useFeatureFlags" => Object {},
   "unstable_PageSelector" => Object {
     "defaultProps": Object {
       "className": null,
