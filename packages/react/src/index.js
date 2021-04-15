@@ -202,6 +202,11 @@ export {
 
 // Experimental
 export {
+  FeatureFlags as unstable_FeatureFlags,
+  useFeatureFlag as unstable_useFeatureFlag,
+  useFeatureFlags as unstable_useFeatureFlags,
+} from './components/FeatureFlags';
+export {
   PageSelector as unstable_PageSelector,
   Pagination as unstable_Pagination,
 } from './components/Pagination/experimental';
