@@ -14,7 +14,6 @@ import Select from '../Select';
 import SelectItem from '../SelectItem';
 import { equals } from '../../tools/array';
 import Button from '../Button';
-import deprecate from '../../prop-types/deprecate';
 
 const { prefix } = settings;
 
@@ -105,12 +104,9 @@ export default class Pagination extends Component {
     page: PropTypes.number,
 
     /**
-     * Deprecated; `true` if the select box to change the page should be disabled.
+     * `true` if the select box to change the page should be disabled.
      */
-    pageInputDisabled: deprecate(
-      PropTypes.bool,
-      `The prop \`pageInputDisabled\` for Pagination has been deprecated, as the feature of \`pageInputDisabled\` has been combined with the general \`disabled\` prop.`
-    ),
+    pageInputDisabled: PropTypes.bool,
 
     pageNumberText: PropTypes.string,
 
@@ -123,6 +119,11 @@ export default class Pagination extends Component {
      * The number dictating how many items a page contains.
      */
     pageSize: PropTypes.number,
+
+    /**
+     * `true` if the select box to change the items per page should be disabled.
+     */
+    pageSizeInputDisabled: PropTypes.bool,
 
     /**
      * The choices for `pageSize`.
@@ -272,6 +273,7 @@ export default class Pagination extends Component {
       isLastPage,
       disabled,
       pageInputDisabled,
+      pageSizeInputDisabled,
       totalItems,
       onChange, // eslint-disable-line no-unused-vars
       page: pageNumber, // eslint-disable-line no-unused-vars
@@ -318,7 +320,7 @@ export default class Pagination extends Component {
             noLabel
             inline
             onChange={this.handleSizeChange}
-            disabled={pageInputDisabled || disabled}
+            disabled={pageSizeInputDisabled || disabled}
             value={statePageSize}>
             {pageSizes.map((sizeObj) => (
               <SelectItem

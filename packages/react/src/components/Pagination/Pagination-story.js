@@ -24,7 +24,11 @@ const props = () => ({
   totalItems: number('Total number of items (totalItems)', 103),
   pagesUnknown: boolean('Total number of items unknown (pagesUnknown)', false),
   pageInputDisabled: boolean(
-    '[Deprecated]: Disable page input (pageInputDisabled)',
+    'Disable page input (pageInputDisabled)',
+    undefined
+  ),
+  pageSizeInputDisabled: boolean(
+    'Disable page size input (pageSizeInputDisabled)',
     undefined
   ),
   backwardText: text(
