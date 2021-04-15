@@ -61,22 +61,25 @@ export const experimentalCSSGrid = () => (
 );
 
 export const autoColumns = () => (
-  <Grid>
-    <Row>
-      <Column>
-        <DemoContent>Span 25%</DemoContent>
-      </Column>
-      <Column>
-        <DemoContent>Span 25%</DemoContent>
-      </Column>
-      <Column>
-        <DemoContent>Span 25%</DemoContent>
-      </Column>
-      <Column>
-        <DemoContent>Span 25%</DemoContent>
-      </Column>
-    </Row>
-  </Grid>
+  <>
+    <div className="bx--css-grid">Hello</div>
+    <Grid>
+      <Row>
+        <Column>
+          <DemoContent>Span 25%</DemoContent>
+        </Column>
+        <Column>
+          <DemoContent>Span 25%</DemoContent>
+        </Column>
+        <Column>
+          <DemoContent>Span 25%</DemoContent>
+        </Column>
+        <Column>
+          <DemoContent>Span 25%</DemoContent>
+        </Column>
+      </Row>
+    </Grid>
+  </>
 );
 
 export const responsiveGrid = () => (
