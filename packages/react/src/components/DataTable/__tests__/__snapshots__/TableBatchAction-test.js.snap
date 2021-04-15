@@ -35,6 +35,7 @@ exports[`DataTable.TableBatchAction should render 1`] = `
       className="custom-class bx--btn bx--btn--primary"
       disabled={false}
       onBlur={[Function]}
+      onClick={[Function]}
       onFocus={[Function]}
       onMouseEnter={[Function]}
       onMouseLeave={[Function]}
