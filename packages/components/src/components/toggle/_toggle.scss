@@ -553,7 +553,7 @@
     .#{$prefix}--toggle__label-text {
       @include type-style('label-01');
 
-      margin: $carbon--spacing-03 0;
+      margin: $carbon--spacing-03 0 $carbon--spacing-05 0;
       color: $text-secondary;
     }
 
