@@ -30,7 +30,7 @@
     "@babel/cli": "^7.12.10",
     "@babel/core": "^7.12.10",
     "@storybook/addon-actions": "^5.3.19",
-    "@storybook/addon-docs": "^5.3.19",
+    "@storybook/addon-docs": "^6.2.8",
     "@storybook/addon-knobs": "^5.3.19",
     "@storybook/addon-links": "^5.3.19",
     "@storybook/addon-notes": "^5.3.19",
