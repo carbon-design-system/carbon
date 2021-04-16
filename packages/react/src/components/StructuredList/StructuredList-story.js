@@ -81,6 +81,48 @@ Simple.parameters = {
   },
 };
 
+export const Condensed = () => (
+  <StructuredListWrapper condensed>
+    <StructuredListHead>
+      <StructuredListRow head>
+        <StructuredListCell head>ColumnA</StructuredListCell>
+        <StructuredListCell head>ColumnB</StructuredListCell>
+        <StructuredListCell head>ColumnC</StructuredListCell>
+      </StructuredListRow>
+    </StructuredListHead>
+    <StructuredListBody>
+      <StructuredListRow>
+        <StructuredListCell noWrap>Row 1</StructuredListCell>
+        <StructuredListCell>Row 1</StructuredListCell>
+        <StructuredListCell>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc dui
+          magna, finibus id tortor sed, aliquet bibendum augue. Aenean posuere
+          sem vel euismod dignissim. Nulla ut cursus dolor. Pellentesque
+          vulputate nisl a porttitor interdum.
+        </StructuredListCell>
+      </StructuredListRow>
+      <StructuredListRow>
+        <StructuredListCell noWrap>Row 2</StructuredListCell>
+        <StructuredListCell>Row 2</StructuredListCell>
+        <StructuredListCell>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc dui
+          magna, finibus id tortor sed, aliquet bibendum augue. Aenean posuere
+          sem vel euismod dignissim. Nulla ut cursus dolor. Pellentesque
+          vulputate nisl a porttitor interdum.
+        </StructuredListCell>
+      </StructuredListRow>
+    </StructuredListBody>
+  </StructuredListWrapper>
+);
+
+Condensed.parameters = {
+  info: {
+    text: `
+        Structured Lists group content that is similar or related, such as terms or definitions.
+      `,
+  },
+};
+
 export const Selection = () => {
   const structuredListBodyRowGenerator = (numRows) => {
     return Array.apply(null, Array(numRows)).map((n, i) => (
