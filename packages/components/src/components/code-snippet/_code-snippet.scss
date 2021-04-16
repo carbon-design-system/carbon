@@ -502,8 +502,8 @@
     right: $carbon--spacing-08;
   }
 
-  .#{$prefix}--snippet--single
-    .#{$prefix}--snippet__overflow-indicator--right:last-child {
+  .#{$prefix}--snippet--single.#{$prefix}--snippet--no-copy
+    .#{$prefix}--snippet__overflow-indicator--right {
     right: 0;
   }
 
