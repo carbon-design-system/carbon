@@ -32,22 +32,27 @@ export default class ToggleSkeleton extends React.Component {
      * provided
      */
     labelText: PropTypes.string,
+
+    /**
+     * Specify the size of the Toggle. Currently only supports 'sm' or 'md' (default)
+     */
+    size: PropTypes.oneOf(['sm', 'md']),
   };
 
   static defaultProps = {
     ['aria-label']: 'Toggle is loading',
+    size: 'md',
   };
 
   render() {
-    const { id, labelText, className, ...rest } = this.props;
+    const { id, labelText, className, size, ...rest } = this.props;
+    const toggleInputClassNames = cx(`${prefix}--toggle ${prefix}--skeleton`, {
+      [`${prefix}--toggle-input--small`]: size === 'sm',
+    });
 
     return (
       <div className={cx(`${prefix}--form-item`, className)} {...rest}>
-        <input
-          type="checkbox"
-          id={id}
-          className={`${prefix}--toggle ${prefix}--skeleton`}
-        />
+        <input type="checkbox" id={id} className={toggleInputClassNames} />
 
         <label
           className={`${prefix}--toggle-input__label`}
