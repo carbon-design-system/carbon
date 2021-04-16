@@ -502,7 +502,8 @@
     right: $carbon--spacing-08;
   }
 
-  .#{$prefix}--snippet--single .#{$prefix}--snippet__overflow-indicator--flush {
+  .#{$prefix}--snippet--single
+    .#{$prefix}--snippet__overflow-indicator--right:last-child {
     right: 0;
   }
 
