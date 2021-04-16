@@ -75,7 +75,10 @@ export const Skeleton = () => {
             This component has been deprecated, please use the `size` prop
             provided by Toggle instead
           </h4>
-          <ToggleSmallSkeleton labelText="label" id="toggle-skeleton-id" />
+          <ToggleSmallSkeleton
+            labelText="Toggle label"
+            id="toggle-skeleton-id"
+          />
         </>
       ) : (
         <>

@@ -534,10 +534,45 @@
   }
 
   //make it square
-  .bx--toggle.bx--skeleton
-    + .bx--toggle-input__label
-    .bx--toggle__switch::before {
+  .#{$prefix}--toggle.#{$prefix}--skeleton
+    + .#{$prefix}--toggle-input__label
+    .#{$prefix}--toggle__switch::before {
     border-radius: 0;
+  }
+
+  //----------------------------------------------
+  // Skeleton - ToggleSmall
+  // TO-DO: remove these styles when component is no longer supported
+  // ---------------------------------------------
+  .#{$prefix}--toggle-small__deprecated {
+    .#{$prefix}--skeleton {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .#{$prefix}--toggle__label-text {
+      @include type-style('label-01');
+
+      margin: $carbon--spacing-03 0;
+      color: $text-secondary;
+    }
+
+    .#{$prefix}--toggle__appearance::after {
+      display: none;
+    }
+
+    .#{$prefix}--toggle--small
+      + .#{$prefix}--toggle__label
+      .#{$prefix}--toggle__appearance::before {
+      border-radius: 0;
+    }
+
+    .#{$prefix}--toggle--small
+      + .#{$prefix}--toggle__label
+      .#{$prefix}--toggle__appearance {
+      left: -1rem;
+      @include skeleton;
+    }
   }
 }
 

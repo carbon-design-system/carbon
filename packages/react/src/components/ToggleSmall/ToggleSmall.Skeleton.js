@@ -41,7 +41,13 @@ export default class ToggleSmallSkeleton extends React.Component {
   render() {
     const { id, labelText, className, ...rest } = this.props;
     return (
-      <div className={cx(`${prefix}--form-item`, className)} {...rest}>
+      <div
+        className={cx(
+          `${prefix}--form-item`,
+          `${prefix}--toggle-small__deprecated`, //needed for different skeleton styles
+          className
+        )}
+        {...rest}>
         <input
           type="checkbox"
           id={id}
