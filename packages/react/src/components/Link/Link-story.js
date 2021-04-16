@@ -10,6 +10,7 @@
 import React from 'react';
 import { action } from '@storybook/addon-actions';
 import { withKnobs, text, boolean, select } from '@storybook/addon-knobs';
+import { Download16 } from '@carbon/icons-react';
 import Link from '../Link';
 import mdx from './Link.mdx';
 
@@ -51,5 +52,11 @@ export const _Default = () => (
 _Default.story = {
   name: 'Link',
 };
+
+export const PairedWithIcon = () => (
+  <Link href="http://www.carbondesignsystem.com" renderIcon={Download16}>
+    Download
+  </Link>
+);
 
 export const Playground = () => <Link {...props()}>Link</Link>;
