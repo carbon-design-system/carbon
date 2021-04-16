@@ -13,6 +13,8 @@
 @import '../form/form';
 @import 'flatpickr.scss';
 
+@include flatpickr;
+
 /// Date picker styles
 /// @access private
 /// @group date-picker
@@ -21,6 +23,7 @@
     display: flex;
   }
 
+  // V11: Possibly deprecate
   .#{$prefix}--date-picker--light .#{$prefix}--date-picker__input {
     background: $field-02;
   }
@@ -72,7 +75,7 @@
   .#{$prefix}--date-picker
     .#{$prefix}--date-picker-input__wrapper--warn
     ~ .#{$prefix}--form-requirement {
-    color: $text-01;
+    color: $text-primary;
   }
   .#{$prefix}--date-picker__input {
     @include reset;
@@ -83,10 +86,10 @@
     display: block;
     height: rem(40px);
     padding: 0 $carbon--spacing-05;
-    color: $text-01;
-    background-color: $field-01;
+    color: $text-primary;
+    background-color: $field;
     border: none;
-    border-bottom: 1px solid $ui-04;
+    border-bottom: 1px solid $border-strong;
     transition: $duration--fast-01 motion(standard, productive) all;
 
     &:focus,
@@ -95,14 +98,14 @@
     }
 
     &:disabled {
-      color: $disabled-02;
-      background-color: $disabled-01;
+      color: $text-disabled;
+      background-color: $field-disabled;
       border-bottom: 1px solid transparent;
       cursor: not-allowed;
     }
 
     &:disabled::placeholder {
-      color: $disabled-02;
+      color: $text-disabled;
     }
 
     &:disabled:hover {
@@ -115,7 +118,9 @@
   }
 
   // Size variant styles
-  .#{$prefix}--date-picker__input--xl {
+  // TODO V11: Remove xl selector
+  .#{$prefix}--date-picker__input--xl,
+  .#{$prefix}--date-picker__input--lg {
     height: rem(48px);
   }
 
@@ -131,7 +136,7 @@
     z-index: 1;
     transform: translateY(-50%);
     cursor: pointer;
-    fill: $icon-01;
+    fill: $icon-primary;
 
     // Windows, Firefox HCM Fix
     @media screen and (-ms-high-contrast: active),
@@ -147,16 +152,17 @@
   }
 
   .#{$prefix}--date-picker__icon--warn {
-    fill: $support-03;
+    fill: $support-warning;
   }
 
+  // V11: Do we have an always black token?
   .#{$prefix}--date-picker__icon--warn path:first-of-type {
     opacity: 1;
     fill: $carbon__black-100;
   }
 
   .#{$prefix}--date-picker__icon--invalid {
-    fill: $support-01;
+    fill: $support-error;
   }
 
   .#{$prefix}--date-picker__icon ~ .#{$prefix}--date-picker__input {
@@ -165,12 +171,12 @@
 
   .#{$prefix}--date-picker__input:disabled ~ .#{$prefix}--date-picker__icon {
     cursor: not-allowed;
-    fill: $disabled-02;
+    fill: $icon-disabled;
   }
 
   .#{$prefix}--date-picker--range
     > .#{$prefix}--date-picker-container:first-child {
-    margin-right: rem(2px);
+    margin-right: rem(1px);
   }
 
   .#{$prefix}--date-picker--range .#{$prefix}--date-picker-container,

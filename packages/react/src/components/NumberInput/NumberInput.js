@@ -152,9 +152,10 @@ class NumberInput extends Component {
     readOnly: PropTypes.bool,
 
     /**
-     * Specify the size of the Number Input. Currently supports either `sm` or `xl` as an option.
+     * Specify the size of the Number Input. Currently supports either `sm`, 'md' (default) or 'lg` as an option.
+     * TODO V11: remove `xl` (replaced with lg)
      */
-    size: PropTypes.oneOf(['sm', 'xl']),
+    size: PropTypes.oneOf(['sm', 'md', 'lg', 'xl']),
 
     /**
      * Specify how much the valus should increase/decrease upon clicking on up/down button

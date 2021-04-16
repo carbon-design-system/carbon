@@ -8,30 +8,53 @@
 import { settings } from 'carbon-components';
 import cx from 'classnames';
 import PropTypes from 'prop-types';
-import React from 'react';
+import React, { useContext } from 'react';
+import { useFeatureFlag } from '../FeatureFlags';
 
 const { prefix } = settings;
+
+const SubgridContext = React.createContext(false);
 
 function Grid({
   as: BaseComponent = 'div',
   condensed = false,
   narrow = false,
   fullWidth = false,
+  columns = 16,
   className: containerClassName,
   children,
   ...rest
 }) {
-  const className = cx(containerClassName, {
+  const hasCSSGrid = useFeatureFlag('enable-css-grid');
+  const isSubgrid = useContext(SubgridContext);
+
+  const cssGridClassNames = {
+    [`${prefix}--css-grid`]: !isSubgrid,
+    [`${prefix}--css-grid--${columns}`]: !isSubgrid && columns !== 16,
+    [`${prefix}--css-grid--condensed`]: condensed,
+    [`${prefix}--css-grid--narrow`]: narrow,
+    [`${prefix}--subgrid`]: isSubgrid,
+    [`${prefix}--col-span-${columns}`]: isSubgrid,
+  };
+
+  const flexGridClassNames = {
     [`${prefix}--grid`]: true,
     [`${prefix}--grid--condensed`]: condensed,
     [`${prefix}--grid--narrow`]: narrow,
     [`${prefix}--grid--full-width`]: fullWidth,
-  });
+  };
+
+  const className = cx(
+    containerClassName,
+    hasCSSGrid ? cssGridClassNames : flexGridClassNames
+  );
 
   return (
-    <BaseComponent className={className} {...rest}>
-      {children}
-    </BaseComponent>
+    <SubgridContext.Provider value={true}>
+      <BaseComponent className={className} {...rest}>
+        {children}
+      </BaseComponent>
+    </SubgridContext.Provider>
   );
 }
 
@@ -50,6 +73,11 @@ Grid.propTypes = {
    * Specify a custom className to be applied to the `Grid`
    */
   className: PropTypes.string,
+
+  /**
+   * Specify how many columns wide the Grid should span
+   */
+  columns: PropTypes.number,
 
   /**
    * Collapse the gutter to 1px. Useful for fluid layouts.

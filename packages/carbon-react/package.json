@@ -1,0 +1,70 @@
+{
+  "name": "@carbon/react",
+  "private": true,
+  "description": "React components for the Carbon Design System",
+  "version": "0.1.0",
+  "license": "Apache-2.0",
+  "main": "lib/index.js",
+  "module": "es/index.js",
+  "type": "module",
+  "exports": {
+    "import": "./es/index.js",
+    "require": "./lib/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/carbon-design-system/carbon.git",
+    "directory": "packages/carbon-react"
+  },
+  "bugs": "https://github.com/carbon-design-system/carbon/issues",
+  "files": [
+    "es",
+    "lib",
+    "scss",
+    "index.scss"
+  ],
+  "keywords": [
+    "ibm",
+    "carbon",
+    "carbon-design-system",
+    "components",
+    "react"
+  ],
+  "scripts": {
+    "build": "yarn clean && rollup -c",
+    "clean": "rimraf es lib",
+    "watch": "yarn clean && rollup -c -w"
+  },
+  "peerDependencies": {
+    "react": "^16.8.6 || ^17.0.1",
+    "react-dom": "^16.8.6 || ^17.0.1"
+  },
+  "dependencies": {
+    "@carbon/feature-flags": "^0.3.0",
+    "@carbon/styles": "^0.4.0",
+    "carbon-components-react": "^7.33.0"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.13.14",
+    "@babel/plugin-proposal-class-properties": "^7.13.0",
+    "@babel/plugin-proposal-export-default-from": "^7.12.13",
+    "@babel/plugin-proposal-export-namespace-from": "^7.12.13",
+    "@babel/plugin-transform-react-constant-elements": "^7.13.13",
+    "@babel/preset-env": "^7.13.12",
+    "@babel/preset-react": "^7.13.13",
+    "@rollup/plugin-babel": "^5.3.0",
+    "@rollup/plugin-commonjs": "^18.0.0",
+    "@rollup/plugin-node-resolve": "^11.2.1",
+    "babel-plugin-dev-expression": "^0.2.2",
+    "prop-types": "^15.7.2",
+    "react": "^16.8.6",
+    "react-dom": "^16.8.6",
+    "rimraf": "^3.0.2",
+    "rollup": "^2.44.0",
+    "rollup-plugin-strip-banner": "^2.0.0"
+  },
+  "sideEffects": [
+    "es/feature-flags.js",
+    "lib/feature-flags.js"
+  ]
+}

@@ -14,6 +14,9 @@ async function build() {
   await builders.react.run(metadata, {
     output: process.cwd(),
   });
+  await builders.reactNext.run(metadata, {
+    output: process.cwd(),
+  });
 }
 
 build().catch((error) => {

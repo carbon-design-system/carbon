@@ -54,16 +54,16 @@
   // Reset hover styles while editing
   .#{$prefix}--data-table--editing tr:hover td {
     background-color: inherit;
-    border-top: 1px solid $ui-04;
-    border-bottom: 1px solid $ui-04;
+    border-top: 1px solid $border-strong;
+    border-bottom: 1px solid $border-strong;
   }
 
   .#{$prefix}--data-table--editing tr:hover td:first-of-type {
-    border-left: 1px solid $ui-04;
+    border-left: 1px solid $border-strong;
   }
 
   .#{$prefix}--data-table--editing tr:hover td:last-of-type {
-    border-right: 1px solid $ui-04;
+    border-right: 1px solid $border-strong;
   }
 
   //----------------------------------------------------------------------------
@@ -135,16 +135,16 @@
   }
 
   .#{$prefix}--data-table-cell__icon--edit {
-    fill: $ui-05;
+    fill: $icon-primary;
   }
 
   .#{$prefix}--data-table-cell__edit:active
     > .#{$prefix}--data-table-cell__icon--edit {
-    fill: $brand-01;
+    fill: $interactive;
   }
 
   .#{$prefix}--data-table-cell__edit:focus {
-    outline: 1px solid $brand-01;
+    outline: 1px solid $focus;
     outline-offset: 2px;
   }
 
@@ -218,7 +218,7 @@
     justify-content: flex-end;
     height: $size--edit-actions--height;
     padding: $spacing--cell-actions;
-    background-color: $inverse-01;
+    background-color: $background-inverse;
   }
 
   // Undo default margin-left from btn classes
@@ -268,7 +268,7 @@
 
   // Status - Success ----------------------------------------------------------
   .#{$prefix}--data-table__icon--success {
-    fill: $support-02;
+    fill: $support-success;
   }
 
   // Status - Error ------------------------------------------------------------
@@ -282,11 +282,11 @@
     height: 100%;
     // Specify outline on child SVG node instead
     outline: none;
-    fill: $support-01;
+    fill: $support-error;
   }
 
   .#{$prefix}--data-table__edit-field--error {
-    border-bottom: 2px solid $support-01;
+    border-bottom: 2px solid $support-error;
   }
 
   .#{$prefix}--data-table__error-text {
@@ -299,8 +299,8 @@
     padding: 1rem;
     color: $text-error;
     font-size: rem(12px);
-    background-color: $inverse-01;
-    border: 1px solid $ui-03;
+    background-color: $icon-inverse;
+    border: 1px solid $border-subtle;
     box-shadow: 0 -4px 8px rgba(0, 0, 0, 0.1);
     transform: translateY(-100%);
     opacity: 0;
@@ -315,8 +315,8 @@
     z-index: 10;
     width: rem(10px);
     height: rem(10px);
-    background-color: $inverse-01;
-    border: 1px solid $ui-03;
+    background-color: $icon-inverse;
+    border: 1px solid $border-subtle;
     border-top: 1px solid transparent;
     border-left: 1px solid transparent;
     transform: rotate(45deg);
@@ -330,13 +330,13 @@
 
   .#{$prefix}--data-table__status--error:focus
     .#{$prefix}--data-table__error-text {
-    box-shadow: 0 0 0 1px $brand-01;
+    box-shadow: 0 0 0 1px $focus;
   }
 
   .#{$prefix}--data-table__status--error:focus
     .#{$prefix}--data-table__error-text::after {
-    border-right-color: $brand-01;
-    border-bottom-color: $brand-01;
+    border-right-color: $focus;
+    border-bottom-color: $focus;
   }
 
   // Visually show the error message

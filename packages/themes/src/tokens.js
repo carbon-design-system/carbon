@@ -105,6 +105,99 @@ const colors = [
   'skeleton01',
   'skeleton02',
 
+  // New color tokens
+  // TO-DO: remove fallback color when v11 is released and assign carbon colors to new tokens
+  'background',
+  'layer',
+  'layerAccent',
+  'field',
+  'backgroundInverse',
+  'backgroundBrand',
+  'interactive',
+
+  'borderSubtle',
+  'borderStrong',
+  'borderInverse',
+  'borderInteractive',
+
+  'textPrimary',
+  'textSecondary',
+  'textPlaceholder',
+  'textHelper',
+  'textOnColor',
+  'textInverse',
+
+  'linkPrimary',
+  'linkSecondary',
+  'linkVisited',
+  'linkInverse',
+
+  'iconPrimary',
+  'iconSecondary',
+  'iconOnColor',
+  'iconInverse',
+
+  'supportError',
+  'supportSuccess',
+  'supportWarning',
+  'supportInfo',
+  'supportErrorInverse',
+  'supportSuccessInverse',
+  'supportWarningInverse',
+  'supportInfoInverse',
+
+  'overlay',
+  'toggleOff',
+
+  'buttonPrimary',
+  'buttonSecondary',
+  'buttonTertiary',
+  'buttonDangerPrimary',
+  'buttonDangerSecondary',
+
+  'backgroundActive',
+  'layerActive',
+
+  'buttonDangerActive',
+  'buttonPrimaryActive',
+  'buttonSecondaryActive',
+  'buttonTertiaryActive',
+
+  'focusInset',
+  'focusInverse',
+
+  'backgroundHover',
+  'layerHover',
+  'fieldHover',
+  'backgroundInverseHover',
+  'linkPrimaryHover',
+  'buttonDangerHover',
+  'buttonPrimaryHover',
+  'buttonSecondaryHover',
+  'buttonTertiaryHover',
+
+  'backgroundSelected',
+  'backgroundSelectedHover',
+  'layerSelected',
+  'layerSelectedHover',
+  'layerSelectedInverse',
+  'borderSubtleSelected',
+
+  'layerDisabled',
+  'fieldDisabled',
+  'borderDisabled',
+
+  'textDisabled',
+  'buttonDisabled',
+  'iconDisabled',
+
+  'textOnColorDisabled',
+  'iconOnColorDisabled',
+  'layerSelectedDisabled',
+
+  'skeletonBackground',
+  'skeletonElement',
+
   // Deprecated
   'brand01',
   'brand02',
@@ -206,6 +299,55 @@ export const unstable__meta = {
         'inverseSupport03',
         'inverseSupport04',
         'overlay01',
+
+        //new tokens
+        'background',
+        'layer',
+        'layerAccent',
+        'field',
+        'backgroundInverse',
+        'backgroundBrand',
+        'interactive',
+
+        'borderSubtle',
+        'borderStrong',
+        'borderInverse',
+        'borderInteractive',
+
+        'textPrimary',
+        'textSecondary',
+        'textPlaceholder',
+        'textHelper',
+        'textOnColor',
+        'textInverse',
+
+        'linkPrimary',
+        'linkSecondary',
+        'linkVisited',
+        'linkInverse',
+
+        'iconPrimary',
+        'iconSecondary',
+        'iconOnColor',
+        'iconInverse',
+
+        'supportError',
+        'supportSuccess',
+        'supportWarning',
+        'supportInfo',
+        'supportErrorInverse',
+        'supportSuccessInverse',
+        'supportWarningInverse',
+        'supportInfoInverse',
+
+        'overlay',
+        'toggleOff',
+
+        'buttonPrimary',
+        'buttonSecondary',
+        'buttonTertiary',
+        'buttonDangerPrimary',
+        'buttonDangerSecondary',
       ],
     },
     {
@@ -242,6 +384,50 @@ export const unstable__meta = {
         'hoverField',
         'decorative01',
         'buttonSeparator',
+
+        // new tokens
+        'backgroundActive',
+        'layerActive',
+
+        'buttonDangerActive',
+        'buttonPrimaryActive',
+        'buttonSecondaryActive',
+        'buttonTertiaryActive',
+
+        'focusInset',
+        'focusInverse',
+
+        'backgroundHover',
+        'layerHover',
+        'fieldHover',
+        'backgroundInverseHover',
+        'linkPrimaryHover',
+        'buttonDangerHover',
+        'buttonPrimaryHover',
+        'buttonSecondaryHover',
+        'buttonTertiaryHover',
+
+        'backgroundSelected',
+        'backgroundSelectedHover',
+        'layerSelected',
+        'layerSelectedHover',
+        'layerSelectedInverse',
+        'borderSubtleSelected',
+
+        'layerDisabled',
+        'fieldDisabled',
+        'borderDisabled',
+
+        'textDisabled',
+        'buttonDisabled',
+        'iconDisabled',
+
+        'textOnColorDisabled',
+        'iconOnColorDisabled',
+        'layerSelectedDisabled',
+
+        'skeletonBackground',
+        'skeletonElement',
       ],
     },
   ],

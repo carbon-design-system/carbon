@@ -136,6 +136,99 @@ export const buttonSeparator = '#161616';
 export const skeleton01 = '#353535';
 export const skeleton02 = gray70;
 
+// New color tokens
+// TO-DO: remove fallback color when v11 is released and assign carbon colors to new tokens
+export const background = uiBackground;
+export const layer = ui01;
+export const layerAccent = ui03;
+export const field = field01;
+export const backgroundInverse = inverse02;
+export const backgroundBrand = interactive01;
+export const interactive = interactive04;
+
+export const borderSubtle = ui03;
+export const borderStrong = ui04;
+export const borderInverse = ui05;
+export const borderInteractive = interactive04;
+
+export const textPrimary = text01;
+export const textSecondary = text02;
+export const textPlaceholder = text03;
+export const textHelper = text05;
+export const textOnColor = text04;
+export const textInverse = inverse01;
+
+export const linkPrimary = link01;
+export const linkSecondary = link02;
+export const linkVisited = visitedLink;
+export const linkInverse = inverseLink;
+
+export const iconPrimary = icon01;
+export const iconSecondary = icon02;
+export const iconOnColor = icon03;
+export const iconInverse = inverse01;
+
+export const supportError = support01;
+export const supportSuccess = support02;
+export const supportWarning = support03;
+export const supportInfo = support04;
+export const supportErrorInverse = inverseSupport01;
+export const supportSuccessInverse = inverseSupport02;
+export const supportWarningInverse = inverseSupport03;
+export const supportInfoInverse = inverseSupport04;
+
+export const overlay = overlay01;
+export const toggleOff = ui04;
+
+export const buttonPrimary = interactive01;
+export const buttonSecondary = interactive02;
+export const buttonTertiary = interactive03;
+export const buttonDangerPrimary = danger01;
+export const buttonDangerSecondary = danger02;
+
+export const backgroundActive = activeUI;
+export const layerActive = activeUI;
+
+export const buttonDangerActive = activeDanger;
+export const buttonPrimaryActive = activePrimary;
+export const buttonSecondaryActive = activeSecondary;
+export const buttonTertiaryActive = activeTertiary;
+
+export const focusInset = inverse01;
+export const focusInverse = inverseFocusUi;
+
+export const backgroundHover = hoverUI;
+export const layerHover = hoverUI;
+export const fieldHover = hoverUI;
+export const backgroundInverseHover = inverseHoverUI;
+export const linkPrimaryHover = hoverPrimaryText;
+export const buttonDangerHover = hoverDanger;
+export const buttonPrimaryHover = hoverPrimary;
+export const buttonSecondaryHover = hoverSecondary;
+export const buttonTertiaryHover = hoverTertiary;
+
+export const backgroundSelected = selectedUI;
+export const backgroundSelectedHover = hoverSelectedUI;
+export const layerSelected = selectedUI;
+export const layerSelectedHover = hoverSelectedUI;
+export const layerSelectedInverse = ui05;
+export const borderSubtleSelected = activeUI;
+
+export const layerDisabled = disabled01;
+export const fieldDisabled = disabled01;
+export const borderDisabled = disabled01;
+
+export const textDisabled = disabled02;
+export const buttonDisabled = disabled02;
+export const iconDisabled = disabled02;
+
+export const textOnColorDisabled = disabled03;
+export const iconOnColorDisabled = disabled03;
+export const layerSelectedDisabled = disabled03;
+
+export const skeletonBackground = skeleton01;
+export const skeletonElement = skeleton02;
+
 export {
   // Type
   caption01,
