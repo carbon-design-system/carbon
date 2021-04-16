@@ -7764,6 +7764,9 @@ Map {
       },
     },
     "propTypes": Object {
+      "autoclose": Object {
+        "type": "bool",
+      },
       "children": Object {
         "type": "node",
       },
@@ -7777,10 +7780,40 @@ Map {
         "type": "bool",
       },
       "x": Object {
-        "type": "number",
+        "args": Array [
+          Array [
+            Object {
+              "type": "number",
+            },
+            Object {
+              "args": Array [
+                Object {
+                  "type": "number",
+                },
+              ],
+              "type": "arrayOf",
+            },
+          ],
+        ],
+        "type": "oneOfType",
       },
       "y": Object {
-        "type": "number",
+        "args": Array [
+          Array [
+            Object {
+              "type": "number",
+            },
+            Object {
+              "args": Array [
+                Object {
+                  "type": "number",
+                },
+              ],
+              "type": "arrayOf",
+            },
+          ],
+        ],
+        "type": "oneOfType",
       },
     },
   },
