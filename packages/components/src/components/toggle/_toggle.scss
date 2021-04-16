@@ -483,13 +483,39 @@
   // Skeleton
   // ---------------------------------------------
 
-  .#{$prefix}--toggle__label.#{$prefix}--skeleton {
-    flex-direction: column;
-    align-items: flex-start;
+  .#{$prefix}--toggle.#{$prefix}--skeleton
+    + .#{$prefix}--toggle-input__label
+    .#{$prefix}--toggle__switch {
+    @include skeleton;
 
-    .#{$prefix}--toggle__label-text {
-      margin-bottom: $carbon--spacing-03;
-    }
+    width: 3rem;
+  }
+
+  .#{$prefix}--toggle-input--small.#{$prefix}--skeleton
+    + .#{$prefix}--toggle-input__label
+    .#{$prefix}--toggle__switch {
+    @include skeleton;
+
+    width: 2rem;
+  }
+
+  .#{$prefix}--toggle.#{$prefix}--skeleton
+    + .#{$prefix}--toggle-input__label
+    .#{$prefix}--toggle__switch::after,
+  .#{$prefix}--toggle.#{$prefix}--skeleton
+    + .#{$prefix}--toggle-input__label
+    .#{$prefix}--toggle__appearance::after,
+  .#{$prefix}--toggle.#{$prefix}--skeleton
+    + .#{$prefix}--toggle-input__label
+    .#{$prefix}--toggle__switch
+    ::before {
+    display: none;
+  }
+
+  .bx--toggle.bx--skeleton
+    + .bx--toggle-input__label
+    .bx--toggle__switch::before {
+    border-radius: 0;
   }
 }
 
