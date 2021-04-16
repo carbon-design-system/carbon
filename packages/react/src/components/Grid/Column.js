@@ -9,6 +9,7 @@ import { settings } from 'carbon-components';
 import cx from 'classnames';
 import PropTypes from 'prop-types';
 import React from 'react';
+import { useFeatureFlag } from '../FeatureFlags';
 
 const { prefix } = settings;
 
@@ -23,7 +24,11 @@ function Column({
   max,
   ...rest
 }) {
-  const columnClassName = getClassNameForBreakpoints([sm, md, lg, xlg, max]);
+  const hasCSSGrid = useFeatureFlag('enable-css-grid');
+  const columnClassName = hasCSSGrid
+    ? getClassNameForBreakpoints([sm, md, lg, xlg, max])
+    : getClassNameForFlexGridBreakpoints([sm, md, lg, xlg, max]);
+
   const className = cx(containerClassName, columnClassName, {
     [`${prefix}--col`]: columnClassName.length === 0,
   });
@@ -115,6 +120,57 @@ const breakpointNames = ['sm', 'md', 'lg', 'xlg', 'max'];
  * @returns {string}
  */
 function getClassNameForBreakpoints(breakpoints) {
+  const classNames = [];
+
+  for (let i = 0; i < breakpoints.length; i++) {
+    const breakpoint = breakpoints[i];
+    if (breakpoint === undefined || breakpoint === null) {
+      continue;
+    }
+
+    const name = breakpointNames[i];
+
+    // If our breakpoint is a boolean, the user has specified that the column
+    // should be "auto" at this size
+    if (breakpoint === true) {
+      classNames.push(`${prefix}--${name}:col-span-auto`);
+      continue;
+    }
+
+    // If our breakpoint is a number, the user has specified the number of
+    // columns they'd like this column to span
+    if (typeof breakpoint === 'number') {
+      classNames.push(`${prefix}--${name}:col-span-${breakpoint}`);
+      continue;
+    }
+
+    const { span, offset } = breakpoint;
+    if (typeof span === 'number') {
+      if (typeof offset === 'number') {
+        classNames.push(`${prefix}--${name}:col-end-${offset + span}`);
+      } else {
+        classNames.push(`${prefix}--${name}:col-span-${span}`);
+      }
+    }
+
+    if (span === true) {
+      classNames.push(`${prefix}--${name}:col-span-auto`);
+    }
+
+    if (typeof offset === 'number') {
+      classNames.push(`${prefix}--${name}:col-start-${offset}`);
+    }
+  }
+
+  return classNames.join(' ');
+}
+
+/**
+ * Build the appropriate className for the given set of breakpoints.
+ * @param {Array<boolean|number|Breakpoint>} breakpoints
+ * @returns {string}
+ */
+function getClassNameForFlexGridBreakpoints(breakpoints) {
   const classNames = [];
 
   for (let i = 0; i < breakpoints.length; i++) {

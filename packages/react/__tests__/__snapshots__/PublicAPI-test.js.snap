@@ -2917,6 +2917,9 @@ Map {
       "className": Object {
         "type": "string",
       },
+      "columns": Object {
+        "type": "number",
+      },
       "condensed": Object {
         "type": "bool",
       },
@@ -3226,6 +3229,19 @@ Map {
       },
       "inline": Object {
         "type": "bool",
+      },
+      "renderIcon": Object {
+        "args": Array [
+          Array [
+            Object {
+              "type": "func",
+            },
+            Object {
+              "type": "object",
+            },
+          ],
+        ],
+        "type": "oneOfType",
       },
       "size": Object {
         "args": Array [
@@ -5420,6 +5436,9 @@ Map {
         "hideLabel": Object {
           "type": "bool",
         },
+        "hidePasswordLabel": Object {
+          "type": "string",
+        },
         "id": Object {
           "isRequired": true,
           "type": "string",
@@ -5444,6 +5463,9 @@ Map {
           "type": "func",
         },
         "placeholder": Object {
+          "type": "string",
+        },
+        "showPasswordLabel": Object {
           "type": "string",
         },
         "size": Object {
