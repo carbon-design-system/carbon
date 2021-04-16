@@ -314,9 +314,8 @@
   .#{$prefix}--search--expandable .#{$prefix}--search-input {
     width: 0;
     padding: 0;
-    transition-timing-function: motion(standard, productive);
-    transition-duration: $duration--fast-01;
-    transition-property: width, padding;
+    transition: padding $duration--fast-01 motion(standard, productive),
+      width 0s linear $duration--fast-01;
 
     &::placeholder {
       position: relative;
@@ -330,6 +329,7 @@
   .#{$prefix}--search--expandable.#{$prefix}--search--expanded
     .#{$prefix}--search-input {
     width: 100%;
+    transition: padding $duration--fast-01 motion(standard, productive);
 
     &::placeholder {
       position: relative;
