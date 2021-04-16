@@ -195,6 +195,7 @@ describe('Carbon Components React', () => {
         "TooltipDefinition",
         "TooltipIcon",
         "UnorderedList",
+        "unstable_FeatureFlags",
         "unstable_Heading",
         "unstable_Menu",
         "unstable_MenuDivider",
@@ -209,6 +210,8 @@ describe('Carbon Components React', () => {
         "unstable_TreeNode",
         "unstable_TreeView",
         "unstable_useContextMenu",
+        "unstable_useFeatureFlag",
+        "unstable_useFeatureFlags",
       ]
     `);
   });
