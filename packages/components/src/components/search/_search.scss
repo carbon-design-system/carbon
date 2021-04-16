@@ -247,6 +247,7 @@
   .#{$prefix}--search--sm {
     .#{$prefix}--search-close,
     ~ .#{$prefix}--search-button,
+    &.#{$prefix}--search--expandable,
     &.#{$prefix}--search--expandable .#{$prefix}--search-magnifier {
       width: rem(32px);
       height: rem(32px);
@@ -260,6 +261,7 @@
   .#{$prefix}--search--lg {
     .#{$prefix}--search-close,
     ~ .#{$prefix}--search-button,
+    &.#{$prefix}--search--expandable,
     &.#{$prefix}--search--expandable .#{$prefix}--search-magnifier {
       width: rem(40px);
       height: rem(40px);
@@ -273,6 +275,7 @@
   .#{$prefix}--search--xl {
     .#{$prefix}--search-close,
     ~ .#{$prefix}--search-button,
+    &.#{$prefix}--search--expandable,
     &.#{$prefix}--search--expandable .#{$prefix}--search-magnifier {
       width: rem(48px);
       height: rem(48px);
@@ -298,6 +301,14 @@
     &::placeholder {
       color: transparent;
     }
+  }
+
+  .#{$prefix}--search--expandable {
+    transition: width $duration--fast-01 motion(standard, productive);
+  }
+
+  .#{$prefix}--search--expandable.#{$prefix}--search--expanded {
+    width: 100%;
   }
 
   .#{$prefix}--search--expandable .#{$prefix}--search-input {
