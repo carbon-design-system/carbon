@@ -1,7 +1,7 @@
 {
   "name": "storybook-preset-carbon",
   "private": true,
-  "version": "0.3.0",
+  "version": "0.4.0",
   "license": "Apache-2.0",
   "main": "index.js",
   "repository": {
@@ -38,6 +38,8 @@
     "@storybook/addons": "^5.3.19",
     "@storybook/source-loader": "^5.3.19",
     "react-is": "^16.8.6",
+    "sass": "^1.32.2",
+    "sass-loader": "^10.1.1",
     "storybook-readme": "^5.0.8"
   },
   "devDependencies": {

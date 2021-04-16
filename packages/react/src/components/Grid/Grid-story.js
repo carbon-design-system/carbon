@@ -2,6 +2,8 @@ import './Grid-story.scss';
 import React from 'react';
 import { Grid, Row, Column } from './';
 import mdx from './Grid.mdx';
+import { FeatureFlags } from '../FeatureFlags';
+import { Heading } from '../Heading';
 
 export default {
   title: 'Components/Grid',
@@ -25,6 +27,66 @@ function DemoContent({ children }) {
     </div>
   );
 }
+
+export const experimentalCSSGrid = () => (
+  <FeatureFlags flags={{ 'enable-css-grid': true }}>
+    <Heading>Wide</Heading>
+    <Grid>
+      <Column sm={1} md={2} lg={4}>
+        Column
+      </Column>
+      <Column sm={1} md={2} lg={4}>
+        Column
+      </Column>
+      <Column sm={1} md={2} lg={4}>
+        Column
+      </Column>
+      <Column sm={1} md={2} lg={4}>
+        Column
+      </Column>
+      <Grid>
+        <Column sm={2} md={4} lg={8}>
+          Subgrid
+        </Column>
+        <Column sm={2} md={4} lg={8}>
+          Subgrid
+        </Column>
+      </Grid>
+    </Grid>
+
+    <Heading>Narrow</Heading>
+    <Grid narrow>
+      <Column sm={1} md={2} lg={4}>
+        Column
+      </Column>
+      <Column sm={1} md={2} lg={4}>
+        Column
+      </Column>
+      <Column sm={1} md={2} lg={4}>
+        Column
+      </Column>
+      <Column sm={1} md={2} lg={4}>
+        Column
+      </Column>
+    </Grid>
+
+    <Heading>Condensed</Heading>
+    <Grid condensed>
+      <Column sm={1} md={2} lg={4}>
+        Column
+      </Column>
+      <Column sm={1} md={2} lg={4}>
+        Column
+      </Column>
+      <Column sm={1} md={2} lg={4}>
+        Column
+      </Column>
+      <Column sm={1} md={2} lg={4}>
+        Column
+      </Column>
+    </Grid>
+  </FeatureFlags>
+);
 
 export const autoColumns = () => (
   <Grid>
