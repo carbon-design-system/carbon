@@ -483,6 +483,7 @@
   // Skeleton
   // ---------------------------------------------
 
+  //md toggle input
   .#{$prefix}--toggle.#{$prefix}--skeleton
     + .#{$prefix}--toggle-input__label
     .#{$prefix}--toggle__switch {
@@ -491,6 +492,7 @@
     width: 3rem;
   }
 
+  //small toggle input
   .#{$prefix}--toggle-input--small.#{$prefix}--skeleton
     + .#{$prefix}--toggle-input__label
     .#{$prefix}--toggle__switch {
@@ -499,6 +501,26 @@
     width: 2rem;
   }
 
+  // on/off text skeleton
+  .#{$prefix}--toggle.#{$prefix}--skeleton
+    + .#{$prefix}--toggle-input__label
+    .#{$prefix}--toggle__switch
+    .#{$prefix}--toggle__text--left {
+    @include skeleton;
+
+    position: absolute;
+    width: 1rem;
+    height: 0.5rem;
+  }
+
+  .#{$prefix}--toggle-input--small.#{$prefix}--skeleton
+    + .#{$prefix}--toggle-input__label
+    .#{$prefix}--toggle__switch
+    .#{$prefix}--toggle__text--left {
+    left: 2rem;
+  }
+
+  //pseudo "toggle" button
   .#{$prefix}--toggle.#{$prefix}--skeleton
     + .#{$prefix}--toggle-input__label
     .#{$prefix}--toggle__switch::after,
@@ -507,11 +529,11 @@
     .#{$prefix}--toggle__appearance::after,
   .#{$prefix}--toggle.#{$prefix}--skeleton
     + .#{$prefix}--toggle-input__label
-    .#{$prefix}--toggle__switch
-    ::before {
+    .#{$prefix}--toggle__appearance::before {
     display: none;
   }
 
+  //make it square
   .bx--toggle.bx--skeleton
     + .bx--toggle-input__label
     .bx--toggle__switch::before {
