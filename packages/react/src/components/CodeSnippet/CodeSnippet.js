@@ -164,6 +164,13 @@ function CodeSnippet({
     [`${prefix}--snippet--wraptext`]: wrapText,
   });
 
+  const codeSnippetOverflowClasses = classNames(
+    `${prefix}--snippet__overflow-indicator--right`,
+    {
+      [`${prefix}--snippet__overflow-indicator--flush`]: hideCopyButton,
+    }
+  );
+
   const expandCodeBtnText = expandedCode ? showLessText : showMoreText;
 
   if (type === 'inline') {
@@ -239,9 +246,7 @@ function CodeSnippet({
       {hasLeftOverflow && (
         <div className={`${prefix}--snippet__overflow-indicator--left`} />
       )}
-      {hasRightOverflow && (
-        <div className={`${prefix}--snippet__overflow-indicator--right`} />
-      )}
+      {hasRightOverflow && <div className={codeSnippetOverflowClasses} />}
       {!hideCopyButton && (
         <CopyButton
           disabled={disabled}
