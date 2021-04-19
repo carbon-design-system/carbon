@@ -41,9 +41,9 @@
     display: block;
     width: rem(224px);
     height: 1px;
+    border: none;
     margin: $spacing-03 $spacing-05;
     background: $shell-panel-border;
-    border: none;
   }
 
   .#{$prefix}--switcher__item-link {
@@ -56,8 +56,8 @@
     text-decoration: none;
 
     &:hover:not(.#{$prefix}--switcher__item-link--selected) {
-      color: $shell-panel-text-02;
       background: $shell-panel-bg-02;
+      color: $shell-panel-text-02;
       cursor: pointer;
     }
 
@@ -67,14 +67,14 @@
     }
 
     &:active {
-      color: $shell-panel-text-02;
       background: $shell-panel-bg-03;
+      color: $shell-panel-text-02;
     }
   }
 
   .#{$prefix}--switcher__item-link--selected {
-    color: $shell-panel-text-02;
     background: $shell-panel-bg-04;
+    color: $shell-panel-text-02;
   }
 }
 

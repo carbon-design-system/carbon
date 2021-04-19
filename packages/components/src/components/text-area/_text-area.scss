@@ -30,13 +30,13 @@
     height: 100%;
     min-height: rem(40px);
     padding: rem(11px) $carbon--spacing-05;
-    color: $text-primary;
-    background-color: $field;
     border: none;
     border-bottom: 1px solid $border-strong;
+    background-color: $field;
+    color: $text-primary;
+    resize: vertical;
     transition: background-color $duration--fast-01 motion(standard, productive),
       outline $duration--fast-01 motion(standard, productive);
-    resize: vertical;
   }
 
   .#{$prefix}--text-area:focus,
@@ -75,11 +75,11 @@
   // Disabled
   //-----------------------------
   .#{$prefix}--text-area:disabled {
-    color: $text-disabled;
-    background-color: $field-disabled;
     border-bottom: 1px solid transparent;
-    outline: none;
+    background-color: $field-disabled;
+    color: $text-disabled;
     cursor: not-allowed;
+    outline: none;
   }
 
   .#{$prefix}--text-area:disabled::placeholder {
