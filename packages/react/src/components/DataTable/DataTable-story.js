@@ -36,8 +36,18 @@ const props = () => ({
   useZebraStyles: boolean('Zebra row styles (useZebraStyles)', false),
   size: select(
     'Row height (size)',
-    { compact: 'compact', short: 'short', tall: 'tall', none: null },
-    null
+    {
+      'Extra small (xs)': 'xs',
+      'Small (sm)': 'sm',
+      'Medium (md)': 'md',
+      'Large - default (lg)': 'lg',
+      'Extra Large (xl)': 'xl',
+      'Compat check - compact': 'compact',
+      'Compat check - short': 'short',
+      'Compat check - tall': 'tall',
+      'No value': null,
+    },
+    'lg'
   ),
   stickyHeader: boolean('Sticky header (experimental)', false),
 });
@@ -63,7 +73,7 @@ export default {
 };
 
 export const Usage = () => (
-  <DataTable rows={rows} headers={headers}>
+  <DataTable rows={rows} headers={headers} {...props()}>
     {({
       rows,
       headers,
@@ -152,7 +162,7 @@ export const BasicTable = () => {
 };
 
 export const WithOverflowMenu = () => (
-  <DataTable rows={rows} headers={headers}>
+  <DataTable rows={rows} headers={headers} {...props()}>
     {({ rows, headers, getHeaderProps, getRowProps, getTableProps }) => (
       <TableContainer title="DataTable" description="With overflow menu">
         <Table {...getTableProps()}>
@@ -189,7 +199,7 @@ export const WithOverflowMenu = () => (
 );
 
 export const WithToolbar = () => (
-  <DataTable rows={rows} headers={headers}>
+  <DataTable rows={rows} headers={headers} {...props()}>
     {({
       rows,
       headers,
@@ -312,7 +322,7 @@ export const WithCheckmarkColumns = () => {
   ];
 
   return (
-    <DataTable rows={rows} headers={headers}>
+    <DataTable rows={rows} headers={headers} {...props()}>
       {({
         rows,
         headers,
