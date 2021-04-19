@@ -12,7 +12,7 @@
       "actions/*",
       "codemods",
       "config/*",
-      "incremental",
+      "dsm",
       "packages/*"
     ],
     "nohoist": []

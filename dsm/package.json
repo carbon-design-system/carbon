@@ -1,0 +1,14 @@
+{
+  "name": "dsm",
+  "private": true,
+  "version": "0.0.0",
+  "bin": "./bin/dsm-cli.js",
+  "dependencies": {
+    "archiver": "^5.3.0",
+    "fast-glob": "^3.2.5",
+    "fs-extra": "^9.1.0",
+    "semver": "^7.3.5",
+    "unzipper": "^0.10.11",
+    "yargs": "^16.2.0"
+  }
+}
