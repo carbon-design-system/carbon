@@ -10,7 +10,7 @@ import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { settings } from 'carbon-components';
 import { OverflowMenuVertical16 } from '@carbon/icons-react';
-import Menu from '../Menu';
+import Menu from '../../Menu';
 
 const { prefix } = settings;
 

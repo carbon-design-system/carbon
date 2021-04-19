@@ -7893,26 +7893,6 @@ Map {
     },
   },
   "unstable_useContextMenu" => Object {},
-  "unstable_OverflowMenu" => Object {
-    "propTypes": Object {
-      "children": Object {
-        "type": "node",
-      },
-      "renderIcon": Object {
-        "args": Array [
-          Array [
-            Object {
-              "type": "func",
-            },
-            Object {
-              "type": "object",
-            },
-          ],
-        ],
-        "type": "oneOfType",
-      },
-    },
-  },
   "unstable_Heading" => Object {
     "propTypes": Object {
       "children": Object {

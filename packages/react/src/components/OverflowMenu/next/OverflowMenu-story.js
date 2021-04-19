@@ -8,8 +8,8 @@
 import React from 'react';
 import { ArrowsVertical16 } from '@carbon/icons-react';
 
-import Menu from '../Menu';
-import { StoryFrame, buildMenu } from '../Menu/_storybook-utils';
+import Menu from '../../Menu';
+import { StoryFrame, buildMenu } from '../../Menu/_storybook-utils';
 
 import OverflowMenu from './OverflowMenu';
 
@@ -35,9 +35,8 @@ export const _OverflowMenu = () =>
     { type: 'divider' },
     { type: 'item', label: 'Delete app', kind: 'danger' },
   ]);
-_OverflowMenu.storyName = 'OverflowMenu';
 
-export const _CustomIcon = () =>
+export const CustomIcon = () =>
   Story(
     [
       {
@@ -58,9 +57,8 @@ export const _CustomIcon = () =>
       renderIcon: ArrowsVertical16,
     }
   );
-_CustomIcon.storyName = 'CustomIcon';
 
-export const _Nested = () =>
+export const Nested = () =>
   Story([
     { type: 'item', label: 'Level 1' },
     { type: 'item', label: 'Level 1' },
@@ -75,4 +73,3 @@ export const _Nested = () =>
     },
     { type: 'item', label: 'Level 1' },
   ]);
-_Nested.storyName = 'Nested';
