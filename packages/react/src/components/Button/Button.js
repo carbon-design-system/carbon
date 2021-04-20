@@ -330,9 +330,17 @@ Button.propTypes = {
    * Specify the size of the button, from a list of available sizes.
    * For `default` buttons, this prop can remain unspecified or use `default`.
    * In the next major release of Carbon, `default`, `field`, and `small` will be removed
-   * V11: add 2xl
    */
-  size: PropTypes.oneOf(['default', 'field', 'small', 'sm', 'md', 'lg', 'xl']),
+  size: PropTypes.oneOf([
+    'default',
+    'field',
+    'small',
+    'sm',
+    'md',
+    'lg',
+    'xl',
+    '2xl',
+  ]),
 
   /**
    * Deprecated in v10 in favor of `size`.

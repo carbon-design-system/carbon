@@ -14,6 +14,7 @@ import Button from '../Button';
 import ButtonSkeleton from '../Button/Button.Skeleton';
 import ButtonSet from '../ButtonSet';
 import mdx from './Button.mdx';
+import { FeatureFlags } from '../FeatureFlags';
 
 const icons = {
   None: 'None',
@@ -150,25 +151,48 @@ _Default.story = {
 
 export const SizeStory = () => {
   return (
-    <>
-      <Button size="sm">sm</Button>&nbsp;
-      <Button size="small">small</Button>
+    <div>
+      <div>
+        <h3>Feature Flags: DISABLED</h3>
+        <Button size="sm">sm</Button>&nbsp;
+        <Button size="small">small</Button>
+        <br />
+        <br />
+        <Button size="field">field</Button>&nbsp;
+        <Button size="md">md</Button>
+        <br />
+        <br />
+        <Button size="default">default</Button>&nbsp;
+        <Button size="lg">lg</Button>&nbsp;
+        <Button></Button>
+        <br />
+        <br />
+        <Button size="lg">lg</Button>&nbsp;
+        <Button size="xl">xl</Button>&nbsp;
+        <Button size="2xl">2xl</Button>
+      </div>
       <br />
+      <h3>Feature Flags: ENABLED</h3>
       <br />
-      <Button size="field">field</Button>&nbsp;
-      <Button size="md">md</Button>
-      <br />
-      <br />
-      <Button size="default">default</Button>&nbsp;
-      <Button></Button>
-      <br />
-      <br />
-      <p>
-        We will need to wait to update lg and xl to xl and 2xl, respectively{' '}
-      </p>
-      <Button size="lg">lg</Button>&nbsp;
-      <Button size="xl">xl</Button>
-    </>
+      <FeatureFlags flags={{ 'enable-2021-release': true }}>
+        <Button size="sm">sm</Button>&nbsp;
+        <Button size="small">small</Button>
+        <br />
+        <br />
+        <Button size="field">field</Button>&nbsp;
+        <Button size="md">md</Button>
+        <br />
+        <br />
+        <Button size="default">default</Button>&nbsp;
+        <Button size="lg">lg</Button>&nbsp;
+        <Button></Button>
+        <br />
+        <br />
+        <Button size="lg">lg</Button>&nbsp;
+        <Button size="xl">xl</Button>&nbsp;
+        <Button size="2xl">2xl</Button>
+      </FeatureFlags>
+    </div>
   );
 };
 
