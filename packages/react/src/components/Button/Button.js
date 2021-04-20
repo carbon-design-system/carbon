@@ -15,6 +15,7 @@ import { composeEventHandlers } from '../../tools/events';
 import { keys, matches } from '../../internal/keyboard';
 import { useId } from '../../internal/useId';
 import toggleClass from '../../tools/toggleClass';
+import { useFeatureFlag } from '../FeatureFlags';
 
 const { prefix } = settings;
 const Button = React.forwardRef(function Button(
@@ -117,13 +118,14 @@ const Button = React.forwardRef(function Button(
     return () => document.removeEventListener('keydown', handleEscKeyDown);
   }, []);
 
+  const enabled = useFeatureFlag('enable-2021-release');
+
   const buttonClasses = classNames(className, {
     [`${prefix}--btn`]: true,
     [`${prefix}--btn--sm`]: size === 'small' || size === 'sm' || small,
     [`${prefix}--btn--md`]: size === 'field' || size === 'md',
-    // V11: lg --> xl, xl --> 2xl
-    [`${prefix}--btn--lg`]: size === 'lg',
-    [`${prefix}--btn--xl`]: size === 'xl',
+    [`${prefix}--btn--xl`]: enabled ? size === 'xl' : size === 'lg',
+    [`${prefix}--btn--2xl`]: enabled ? size === '2xl' : size === 'xl',
     [`${prefix}--btn--${kind}`]: kind,
     [`${prefix}--btn--disabled`]: disabled,
     [`${prefix}--tooltip--hidden`]: hasIconOnly && !allowTooltipVisibility,
@@ -326,9 +328,17 @@ Button.propTypes = {
    * Specify the size of the button, from a list of available sizes.
    * For `default` buttons, this prop can remain unspecified or use `default`.
    * In the next major release of Carbon, `default`, `field`, and `small` will be removed
-   * V11: add 2xl
    */
-  size: PropTypes.oneOf(['default', 'field', 'small', 'sm', 'md', 'lg', 'xl']),
+  size: PropTypes.oneOf([
+    'default',
+    'field',
+    'small',
+    'sm',
+    'md',
+    'lg',
+    'xl',
+    '2xl',
+  ]),
 
   /**
    * Deprecated in v10 in favor of `size`.
