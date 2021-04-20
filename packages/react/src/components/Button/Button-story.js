@@ -160,14 +160,14 @@ export const SizeStory = () => {
       <br />
       <br />
       <Button size="default">default</Button>&nbsp;
-      <Button size="lg">lg</Button>&nbsp;
       <Button></Button>
       <br />
       <br />
+      <p>
+        We will need to wait to update lg and xl to xl and 2xl, respectively{' '}
+      </p>
+      <Button size="lg">lg</Button>&nbsp;
       <Button size="xl">xl</Button>
-      <br />
-      <br />
-      <Button size="2xl">2xl</Button>
     </>
   );
 };
