@@ -19,6 +19,7 @@ const Link = ({
   disabled,
   inline,
   visited,
+  renderIcon: Icon,
   size,
   ...other
 }) => {
@@ -38,6 +39,11 @@ const Link = ({
       rel={rel}
       {...other}>
       {children}
+      {!inline && Icon && (
+        <div className={`${prefix}--link__icon`}>
+          <Icon />
+        </div>
+      )}
     </Tag>
   );
 };
@@ -67,6 +73,12 @@ Link.propTypes = {
    * Specify whether you want the inline version of this control
    */
   inline: PropTypes.bool,
+
+  /**
+   * Optional prop to render an icon next to the link.
+   * Can be a React component class
+   */
+  renderIcon: PropTypes.oneOfType([PropTypes.func, PropTypes.object]),
 
   /**
    * Specify the size of the Link. Currently supports either `sm`, 'md' (default) or 'lg` as an option.

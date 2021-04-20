@@ -142,7 +142,8 @@
       fill: $icon-01;
     }
 
-    .#{$prefix}--text-input--invalid {
+    .#{$prefix}--text-input--invalid,
+    .#{$prefix}--text-input--warning {
       padding-right: $carbon--spacing-08;
     }
 
