@@ -414,20 +414,33 @@
     }
   }
 
+  .#{$prefix}--btn--xs {
+    min-height: rem(24px);
+    padding: rem(2px) rem(60px) rem(2px) rem(12px);
+  }
+
   .#{$prefix}--btn--sm {
     min-height: rem(32px);
     padding: $button-padding-sm;
   }
 
+<<<<<<< HEAD
   // V11: change xl to 2xl
   .#{$prefix}--btn--xl:not(.#{$prefix}--btn--icon-only) {
+=======
+  .#{$prefix}--btn--2xl:not(.#{$prefix}--btn--icon-only) {
+>>>>>>> 1f124fa1a... feat(Button): start size work on Button
     @include button-padding-large;
 
     min-height: rem(80px);
   }
 
+<<<<<<< HEAD
   // V11: change lg to xl
   .#{$prefix}--btn--lg:not(.#{$prefix}--btn--icon-only) {
+=======
+  .#{$prefix}--btn--xl:not(.#{$prefix}--btn--icon-only) {
+>>>>>>> 1f124fa1a... feat(Button): start size work on Button
     @include button-padding-large;
 
     min-height: rem(64px);

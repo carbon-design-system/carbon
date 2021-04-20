@@ -148,6 +148,38 @@ _Default.story = {
   name: 'Button',
 };
 
+export const SizeStory = () => {
+  return (
+    <>
+      <p>Do we need a xs variant?</p>
+      <Button size="xs">xs</Button>
+      <br />
+      <br />
+      <p>This is correct</p>
+      <Button size="sm">sm</Button>
+      <Button size="small">sm</Button>
+      <br />
+      <br />
+      <p>This should be md</p>
+      <Button size="field">field</Button>
+      <br />
+      <br />
+      <p>This should be lg</p>
+      <Button size="default">md - default</Button>
+      <Button size="lg">md - default</Button>
+      <Button>md - default</Button>
+      <br />
+      <br />
+      <p>This should be xl</p>
+      <Button size="lg">lg</Button>
+      <br />
+      <br />
+      <p>This should be 2xl</p>
+      <Button size="xl">xl</Button>
+    </>
+  );
+};
+
 export const Secondary = () => {
   return <Button kind="secondary">Button</Button>;
 };
