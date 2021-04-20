@@ -6,7 +6,7 @@
  */
 
 import PropTypes from 'prop-types';
-import React, { Component } from 'react';
+import React, { useState, useRef } from 'react';
 import classNames from 'classnames';
 import { Search16, Close16 } from '@carbon/icons-react';
 import { settings } from 'carbon-components';
@@ -16,219 +16,325 @@ import deprecate from '../../prop-types/deprecate';
 
 const { prefix } = settings;
 
-export default class Search extends Component {
-  static propTypes = {
-    /**
-     * Specify an optional className to be applied to the container node
-     */
-    className: PropTypes.string,
+const Search = React.forwardRef(function Search(
+  {
+    className,
+    type,
+    id = (this._inputId =
+      this._inputId ||
+      `search__input__id_${Math.random().toString(36).substr(2)}`),
+    placeHolderText,
+    placeholder,
+    labelText,
+    closeButtonLabelText,
+    small,
+    size = !small ? 'xl' : 'sm',
+    light,
+    disabled,
+    onChange,
+    onKeyDown,
+    value,
+    ...other
+  },
+  ref
+) {
+  const [hasContent, setHasContent] = useState(false);
+  const magnifierRef = useRef(null);
+  const inputRef = useRef(null);
 
-    /**
-     * Specify a label to be read by screen readers on the "close" button
-     */
-    closeButtonLabelText: PropTypes.string,
-
-    /**
-     * Optionally provide the default value of the `<input>`
-     */
-    defaultValue: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-
-    /**
-     * Specify whether the `<input>` should be disabled
-     */
-    disabled: PropTypes.bool,
-
-    /**
-     * Specify a custom `id` for the input
-     */
-    id: PropTypes.string,
-
-    /**
-     * Provide the label text for the Search icon
-     */
-    labelText: PropTypes.node.isRequired,
-
-    /**
-     * Specify light version or default version of this control
-     */
-    light: PropTypes.bool,
-
-    /**
-     * Optional callback called when the search value changes.
-     */
-    onChange: PropTypes.func,
-
-    /**
-     * Provide a handler that is invoked on the key down event for the input
-     */
-    onKeyDown: PropTypes.func,
-
-    /**
-     * Deprecated in favor of `placeholder`
-     */
-    placeHolderText: deprecate(
-      PropTypes.string,
-      `\nThe prop \`placeHolderText\` for Search has been deprecated in favor of \`placeholder\`. Please use \`placeholder\` instead.`
-    ),
-
-    /**
-     * Provide an optional placeholder text for the Search.
-     * Note: if the label and placeholder differ,
-     * VoiceOver on Mac will read both
-     */
-    placeholder: PropTypes.string,
-
-    /**
-     * Specify the search size
-     */
-    size: PropTypes.oneOf(['sm', 'lg', 'xl']),
-
-    /**
-     * Specify whether the Search should be a small variant
-     */
-
-    /**
-     * Specify whether the load was successful
-     */
-    small: deprecate(
-      PropTypes.bool,
-      `\nThe prop \`small\` for Search has been deprecated in favor of \`size\`. Please use \`size="sm"\` instead.`
-    ),
-
-    /**
-     * Optional prop to specify the type of the `<input>`
-     */
-    type: PropTypes.string,
-
-    /**
-     * Specify the value of the `<input>`
-     */
-    value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  const handleChange = (evt) => {
+    setHasContent(evt.target.value !== '');
   };
 
-  static defaultProps = {
-    type: 'text',
-    placeholder: '',
-    closeButtonLabelText: 'Clear search input',
-    onChange: () => {},
+  const handleKeyDown = (evt) => {
+    if (match(evt, keys.Escape)) {
+      clearInput(evt);
+    }
   };
 
-  state = {
-    hasContent: this.props.value || this.props.defaultValue || false,
-    prevValue: this.props.value,
-  };
+  const clearInput = (evt) => {
+    const input = ref ? ref : inputRef;
 
-  static getDerivedStateFromProps({ value }, state) {
-    const { prevValue } = state;
-    return prevValue === value
-      ? null
-      : {
-          hasContent: !!value,
-          prevValue: value,
-        };
-  }
-
-  clearInput = (evt) => {
-    if (!this.props.value) {
-      this.input.value = '';
-      this.props.onChange(evt);
+    if (!value) {
+      input.current.value = '';
     } else {
       const clearedEvt = Object.assign({}, evt.target, {
         target: {
           value: '',
         },
       });
-      this.props.onChange(clearedEvt);
+      onChange(clearedEvt);
     }
 
-    this.setState({ hasContent: false }, () => this.input.focus());
+    setHasContent(false);
+    input.current.focus();
   };
 
-  handleChange = (evt) => {
-    this.setState({
-      hasContent: evt.target.value !== '',
-    });
-  };
+  const searchClasses = classNames({
+    [`${prefix}--search`]: true,
+    [`${prefix}--search--${size}`]: size,
+    [`${prefix}--search--light`]: light,
+    [`${prefix}--search--disabled`]: disabled,
+    [className]: className,
+  });
 
-  handleKeyDown = (evt) => {
-    if (match(evt, keys.Escape)) {
-      this.clearInput(evt);
-    }
-  };
+  const clearClasses = classNames({
+    [`${prefix}--search-close`]: true,
+    [`${prefix}--search-close--hidden`]: !hasContent,
+  });
 
-  render() {
-    const {
-      className,
-      type,
-      id = (this._inputId =
-        this._inputId ||
-        `search__input__id_${Math.random().toString(36).substr(2)}`),
-      placeHolderText,
-      placeholder,
-      labelText,
-      closeButtonLabelText,
-      small,
-      size = !small ? 'xl' : 'sm',
-      light,
-      disabled,
-      onChange,
-      onKeyDown,
-      ...other
-    } = this.props;
-
-    const { hasContent } = this.state;
-
-    const searchClasses = classNames({
-      [`${prefix}--search`]: true,
-      [`${prefix}--search--${size}`]: size,
-      [`${prefix}--search--light`]: light,
-      [`${prefix}--search--disabled`]: disabled,
-      [className]: className,
-    });
-
-    const clearClasses = classNames({
-      [`${prefix}--search-close`]: true,
-      [`${prefix}--search-close--hidden`]: !hasContent,
-    });
-
-    const searchId = `${id}-search`;
-
-    return (
-      <div role="search" aria-labelledby={searchId} className={searchClasses}>
-        <div
-          className={`${prefix}--search-magnifier`}
-          ref={(magnifier) => {
-            this.magnifier = magnifier;
-          }}>
-          <Search16 className={`${prefix}--search-magnifier-icon`} />
-        </div>
-        <label id={searchId} htmlFor={id} className={`${prefix}--label`}>
-          {labelText}
-        </label>
-        <input
-          role="searchbox"
-          autoComplete="off"
-          {...other}
-          type={type}
-          disabled={disabled}
-          className={`${prefix}--search-input`}
-          id={id}
-          placeholder={placeHolderText || placeholder}
-          onChange={composeEventHandlers([onChange, this.handleChange])}
-          onKeyDown={composeEventHandlers([onKeyDown, this.handleKeyDown])}
-          ref={(input) => {
-            this.input = input;
-          }}
-        />
-        <button
-          className={clearClasses}
-          disabled={disabled}
-          onClick={this.clearInput}
-          type="button"
-          aria-label={closeButtonLabelText}>
-          <Close16 />
-        </button>
+  const searchId = `${id}-search`;
+  return (
+    <div role="search" aria-labelledby={searchId} className={searchClasses}>
+      <div className={`${prefix}--search-magnifier`} ref={magnifierRef}>
+        <Search16 className={`${prefix}--search-magnifier-icon`} />
       </div>
-    );
-  }
-}
+      <label id={searchId} htmlFor={id} className={`${prefix}--label`}>
+        {labelText}
+      </label>
+      <input
+        role="searchbox"
+        autoComplete="off"
+        type={type}
+        disabled={disabled}
+        className={`${prefix}--search-input`}
+        id={id}
+        placeholder={placeHolderText || placeholder}
+        onChange={composeEventHandlers([onChange, handleChange])}
+        onKeyDown={composeEventHandlers([onKeyDown, handleKeyDown])}
+        ref={ref ? ref : inputRef}
+        value={value ? value : null}
+        {...other}
+      />
+      <button
+        className={clearClasses}
+        disabled={disabled}
+        onClick={clearInput}
+        type="button"
+        aria-label={closeButtonLabelText}>
+        <Close16 />
+      </button>
+    </div>
+  );
+});
+
+// export default class Search extends Component {
+//   static
+
+//   state = {
+//     hasContent: this.props.value || this.props.defaultValue || false,
+//     prevValue: this.props.value,
+//   };
+
+//   static getDerivedStateFromProps({ value }, state) {
+//     const { prevValue } = state;
+//     return prevValue === value
+//       ? null
+//       : {
+//           hasContent: !!value,
+//           prevValue: value,
+//         };
+//   }
+
+//   clearInput = (evt) => {
+//     if (!this.props.value) {
+//       this.input.value = '';
+//       this.props.onChange(evt);
+//     } else {
+//       const clearedEvt = Object.assign({}, evt.target, {
+//         target: {
+//           value: '',
+//         },
+//       });
+//       this.props.onChange(clearedEvt);
+//     }
+
+//     this.setState({ hasContent: false }, () => this.input.focus());
+//   };
+
+//   handleChange = (evt) => {
+//     this.setState({
+//       hasContent: evt.target.value !== '',
+//     });
+//   };
+
+//   handleKeyDown = (evt) => {
+//     if (match(evt, keys.Escape)) {
+//       this.clearInput(evt);
+//     }
+//   };
+
+//   render() {
+//     const {
+//       className,
+//       type,
+//       id = (this._inputId =
+//         this._inputId ||
+//         `search__input__id_${Math.random().toString(36).substr(2)}`),
+//       placeHolderText,
+//       placeholder,
+//       labelText,
+//       closeButtonLabelText,
+//       small,
+//       size = !small ? 'xl' : 'sm',
+//       light,
+//       disabled,
+//       onChange,
+//       onKeyDown,
+//       ...other
+//     } = this.props;
+
+//     const { hasContent } = this.state;
+
+//     const searchClasses = classNames({
+//       [`${prefix}--search`]: true,
+//       [`${prefix}--search--${size}`]: size,
+//       [`${prefix}--search--light`]: light,
+//       [`${prefix}--search--disabled`]: disabled,
+//       [className]: className,
+//     });
+
+//     const clearClasses = classNames({
+//       [`${prefix}--search-close`]: true,
+//       [`${prefix}--search-close--hidden`]: !hasContent,
+//     });
+
+//     const searchId = `${id}-search`;
+
+//     return (
+//       <div role="search" aria-labelledby={searchId} className={searchClasses}>
+//         <div
+//           className={`${prefix}--search-magnifier`}
+//           ref={(magnifier) => {
+//             this.magnifier = magnifier;
+//           }}>
+//           <Search16 className={`${prefix}--search-magnifier-icon`} />
+//         </div>
+//         <label id={searchId} htmlFor={id} className={`${prefix}--label`}>
+//           {labelText}
+//         </label>
+//         <input
+//           role="searchbox"
+//           autoComplete="off"
+//           {...other}
+//           type={type}
+//           disabled={disabled}
+//           className={`${prefix}--search-input`}
+//           id={id}
+//           placeholder={placeHolderText || placeholder}
+//           onChange={composeEventHandlers([onChange, this.handleChange])}
+//           onKeyDown={composeEventHandlers([onKeyDown, this.handleKeyDown])}
+//           ref={(input) => {
+//             this.input = input;
+//           }}
+//         />
+//         <button
+//           className={clearClasses}
+//           disabled={disabled}
+//           onClick={this.clearInput}
+//           type="button"
+//           aria-label={closeButtonLabelText}>
+//           <Close16 />
+//         </button>
+//       </div>
+//     );
+//   }
+// }
+
+Search.defaultProps = {
+  type: 'text',
+  placeholder: '',
+  closeButtonLabelText: 'Clear search input',
+  onChange: () => {},
+};
+
+Search.propTypes = {
+  /**
+   * Specify an optional className to be applied to the container node
+   */
+  className: PropTypes.string,
+
+  /**
+   * Specify a label to be read by screen readers on the "close" button
+   */
+  closeButtonLabelText: PropTypes.string,
+
+  /**
+   * Optionally provide the default value of the `<input>`
+   */
+  defaultValue: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+
+  /**
+   * Specify whether the `<input>` should be disabled
+   */
+  disabled: PropTypes.bool,
+
+  /**
+   * Specify a custom `id` for the input
+   */
+  id: PropTypes.string,
+
+  /**
+   * Provide the label text for the Search icon
+   */
+  labelText: PropTypes.node.isRequired,
+
+  /**
+   * Specify light version or default version of this control
+   */
+  light: PropTypes.bool,
+
+  /**
+   * Optional callback called when the search value changes.
+   */
+  onChange: PropTypes.func,
+
+  /**
+   * Provide a handler that is invoked on the key down event for the input
+   */
+  onKeyDown: PropTypes.func,
+
+  /**
+   * Deprecated in favor of `placeholder`
+   */
+  placeHolderText: deprecate(
+    PropTypes.string,
+    `\nThe prop \`placeHolderText\` for Search has been deprecated in favor of \`placeholder\`. Please use \`placeholder\` instead.`
+  ),
+
+  /**
+   * Provide an optional placeholder text for the Search.
+   * Note: if the label and placeholder differ,
+   * VoiceOver on Mac will read both
+   */
+  placeholder: PropTypes.string,
+
+  /**
+   * Specify the search size
+   */
+  size: PropTypes.oneOf(['sm', 'lg', 'xl']),
+
+  /**
+   * Specify whether the Search should be a small variant
+   */
+
+  /**
+   * Specify whether the load was successful
+   */
+  small: deprecate(
+    PropTypes.bool,
+    `\nThe prop \`small\` for Search has been deprecated in favor of \`size\`. Please use \`size="sm"\` instead.`
+  ),
+
+  /**
+   * Optional prop to specify the type of the `<input>`
+   */
+  type: PropTypes.string,
+
+  /**
+   * Specify the value of the `<input>`
+   */
+  value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+};
+
+export default Search;

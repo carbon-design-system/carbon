@@ -7,7 +7,7 @@
 
 /* eslint-disable no-console */
 
-import React from 'react';
+import React, { useState } from 'react';
 import { action } from '@storybook/addon-actions';
 import { withKnobs, boolean, select, text } from '@storybook/addon-knobs';
 import Search from '../Search';
@@ -59,7 +59,19 @@ export default {
   },
 };
 
-export const Default = () => <Search {...props()} id="search-1" />;
+export const Default = () => {
+  const [value, setValue] = useState('test');
+  return (
+    <Search
+      {...props()}
+      value={value}
+      onChange={(evt) => {
+        setValue(evt.target.value);
+      }}
+      id="search-1"
+    />
+  );
+};
 
 Default.parameters = {
   info: {
