@@ -119,10 +119,8 @@ const Button = React.forwardRef(function Button(
 
   const buttonClasses = classNames(className, {
     [`${prefix}--btn`]: true,
-    [`${prefix}--btn--xs`]: size === 'xs',
     [`${prefix}--btn--sm`]: size === 'small' || size === 'sm' || small,
     [`${prefix}--btn--md`]: size === 'field' || size === 'md',
-    [`${prefix}--btn--lg`]: size === 'lg',
     [`${prefix}--btn--xl`]: size === 'xl',
     [`${prefix}--btn--2xl`]: size === '2xl',
     [`${prefix}--btn--${kind}`]: kind,

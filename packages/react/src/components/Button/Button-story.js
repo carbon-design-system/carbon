@@ -41,11 +41,14 @@ const kinds = {
 };
 
 const sizes = {
-  Default: 'default',
-  Field: 'field',
-  'Small (sm)': 'small',
-  'Large (lg)': 'lg',
-  'Extra large size (xl)': 'xl',
+  'Compat check - Field': 'field',
+  'Compat check - Small': 'small',
+  'Compat check - default': 'default',
+  'Small  (sm)': 'sm',
+  'Medium (md)': 'md',
+  'Large  (lg)  - default': null,
+  'Extra Large (xl)': 'xl',
+  'Extra Extra Large (2xl)': '2xl',
 };
 
 const props = {
@@ -142,31 +145,23 @@ _Default.story = {
 export const SizeStory = () => {
   return (
     <>
-      <p>Do we need a xs variant?</p>
-      <Button size="xs">xs</Button>
+      <Button size="sm">sm</Button>&nbsp;
+      <Button size="small">small</Button>
       <br />
       <br />
-      <p>This is correct</p>
-      <Button size="sm">sm</Button>
-      <Button size="small">sm</Button>
+      <Button size="field">field</Button>&nbsp;
+      <Button size="md">md</Button>
       <br />
       <br />
-      <p>This should be md</p>
-      <Button size="field">field</Button>
+      <Button size="default">default</Button>&nbsp;
+      <Button size="lg">lg</Button>&nbsp;
+      <Button></Button>
       <br />
       <br />
-      <p>This should be lg</p>
-      <Button size="default">md - default</Button>
-      <Button size="lg">md - default</Button>
-      <Button>md - default</Button>
-      <br />
-      <br />
-      <p>This should be xl</p>
-      <Button size="lg">lg</Button>
-      <br />
-      <br />
-      <p>This should be 2xl</p>
       <Button size="xl">xl</Button>
+      <br />
+      <br />
+      <Button size="2xl">2xl</Button>
     </>
   );
 };
