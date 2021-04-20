@@ -545,6 +545,7 @@
 
   .#{$prefix}--tooltip--shown {
     display: block;
+    margin-top: $spacing-03;
   }
 
   // Tooltip Definition
