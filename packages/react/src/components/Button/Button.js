@@ -119,10 +119,12 @@ const Button = React.forwardRef(function Button(
 
   const buttonClasses = classNames(className, {
     [`${prefix}--btn`]: true,
-    [`${prefix}--btn--field`]: size === 'field',
+    [`${prefix}--btn--xs`]: size === 'xs',
     [`${prefix}--btn--sm`]: size === 'small' || size === 'sm' || small,
+    [`${prefix}--btn--md`]: size === 'field' || size === 'md',
     [`${prefix}--btn--lg`]: size === 'lg',
     [`${prefix}--btn--xl`]: size === 'xl',
+    [`${prefix}--btn--2xl`]: size === '2xl',
     [`${prefix}--btn--${kind}`]: kind,
     [`${prefix}--btn--disabled`]: disabled,
     [`${prefix}--tooltip--hidden`]: hasIconOnly && !allowTooltipVisibility,
@@ -323,9 +325,19 @@ Button.propTypes = {
 
   /**
    * Specify the size of the button, from a list of available sizes.
-   * For `default` buttons, this prop can remain unspecified.
+   * For `default` buttons, this prop can remain unspecified or use `lg`.
+   * In the next major release of Carbon, `default`, `field`, and `small` will be removed
    */
-  size: PropTypes.oneOf(['default', 'field', 'small', 'sm', 'lg', 'xl']),
+  size: PropTypes.oneOf([
+    'default',
+    'field',
+    'small',
+    'sm',
+    'md',
+    'lg',
+    'xl',
+    '2xl',
+  ]),
 
   /**
    * Deprecated in v10 in favor of `size`.
