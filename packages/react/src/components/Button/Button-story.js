@@ -40,15 +40,27 @@ const kinds = {
   'Ghost button (ghost)': 'ghost',
 };
 
+// V11: New size table
+// const sizes = {
+//   'Compat check - Field': 'field',
+//   'Compat check - Small': 'small',
+//   'Compat check - default': 'default',
+//   'Small  (sm)': 'sm',
+//   'Medium (md)': 'md',
+//   'Large  (lg)  - default': null,
+//   'Extra Large (xl)': 'xl',
+//   'Extra Extra Large (2xl)': '2xl',
+// };
+
 const sizes = {
   'Compat check - Field': 'field',
   'Compat check - Small': 'small',
   'Compat check - default': 'default',
   'Small  (sm)': 'sm',
   'Medium (md)': 'md',
-  'Large  (lg)  - default': null,
+  Default: null,
+  'Large (lg)': 'lg',
   'Extra Large (xl)': 'xl',
-  'Extra Extra Large (2xl)': '2xl',
 };
 
 const props = {
