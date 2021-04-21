@@ -92,6 +92,13 @@ $prefix: 'bx';
     }
   }
 
+  :root[storybook-carbon-theme='g80'] {
+    @include carbon--theme($carbon--theme--g80, true) {
+      @include emit-component-tokens($tag-colors);
+      @include emit-component-tokens($notification-colors);
+    }
+  }
+
   :root[storybook-carbon-theme='g90'] {
     @include carbon--theme($carbon--theme--g90, true) {
       @include emit-component-tokens($tag-colors);
