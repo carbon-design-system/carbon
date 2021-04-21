@@ -182,13 +182,19 @@ export default class Search extends Component {
     const { hasContent } = this.state;
 
     const scope = this.context;
-    const enabled = scope.enabled('enable-2021-release');
+    let enabled;
+
+    if (scope.enabled) {
+      enabled = scope.enabled('enable-2021-release');
+    }
 
     const searchClasses = classNames({
       [`${prefix}--search`]: true,
       [`${prefix}--search--sm`]: size === 'sm',
-      [`${prefix}--search--md`]: enabled ? size === 'md' : size === 'lg',
-      [`${prefix}--search--lg`]: enabled ? size === 'lg' : size === 'xl',
+      // V11: change to md
+      [`${prefix}--search--lg`]: enabled ? size === 'md' : size === 'lg',
+      // V11: change to lg
+      [`${prefix}--search--xl`]: enabled ? size === 'lg' : size === 'xl',
       [`${prefix}--search--light`]: light,
       [`${prefix}--search--disabled`]: disabled,
       [className]: className,

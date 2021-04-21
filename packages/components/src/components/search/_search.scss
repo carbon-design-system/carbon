@@ -89,20 +89,23 @@
   }
 
   // Large styles
-  .#{$prefix}--search--md .#{$prefix}--search-input,
-  .#{$prefix}--search--md.#{$prefix}--search--expandable.#{$prefix}--search--expanded
+  // V11: change lg to md
+  .#{$prefix}--search--lg .#{$prefix}--search-input,
+  .#{$prefix}--search--lg.#{$prefix}--search--expandable.#{$prefix}--search--expanded
     .#{$prefix}--search-input {
     height: rem(40px);
     // 12px padding on either side of icon + 16px icon (40px)
     padding: 0 $spacing-08;
   }
 
-  .#{$prefix}--search--md .#{$prefix}--search-magnifier-icon {
+  // V11: change lg to md
+  .#{$prefix}--search--lg .#{$prefix}--search-magnifier-icon {
     left: rem(12px);
   }
 
-  .#{$prefix}--search--lg .#{$prefix}--search-input,
-  .#{$prefix}--search--lg.#{$prefix}--search--expandable.#{$prefix}--search--expanded
+  // V11: change xl to lg
+  .#{$prefix}--search--xl .#{$prefix}--search-input,
+  .#{$prefix}--search--xl.#{$prefix}--search--expandable.#{$prefix}--search--expanded
     .#{$prefix}--search-input {
     height: rem(48px);
     // 16px padding on either side of icon + 16px icon (48px)
@@ -257,7 +260,8 @@
     }
   }
 
-  .#{$prefix}--search--md {
+  // V11: change lg to md
+  .#{$prefix}--search--lg {
     .#{$prefix}--search-close,
     ~ .#{$prefix}--search-button,
     &.#{$prefix}--search--expandable .#{$prefix}--search-magnifier {
@@ -270,7 +274,8 @@
     }
   }
 
-  .#{$prefix}--search--lg {
+  // V11: change xl to lg
+  .#{$prefix}--search--xl {
     .#{$prefix}--search-close,
     ~ .#{$prefix}--search-button,
     &.#{$prefix}--search--expandable .#{$prefix}--search-magnifier {
@@ -288,8 +293,9 @@
     opacity: 0;
   }
 
+  // V11: change xl to lg, lg to md
+  .#{$prefix}--search--xl.#{$prefix}--skeleton .#{$prefix}--search-input,
   .#{$prefix}--search--lg.#{$prefix}--skeleton .#{$prefix}--search-input,
-  .#{$prefix}--search--md.#{$prefix}--skeleton .#{$prefix}--search-input,
   .#{$prefix}--search--sm.#{$prefix}--skeleton .#{$prefix}--search-input {
     @include skeleton;
 
