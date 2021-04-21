@@ -13,8 +13,6 @@ import {
   object,
   optionsKnob as options,
   select,
-  number,
-  array,
   text,
   withKnobs,
 } from '@storybook/addon-knobs';
@@ -24,7 +22,6 @@ import Select from '../Select';
 import SelectItem from '../SelectItem';
 import TextInput from '../TextInput';
 import mdx from './Modal.mdx';
-import Pagination from '../Pagination';
 
 const sizes = {
   'Extra small (xs)': 'xs',
@@ -127,38 +124,6 @@ const props = {
       ...secondaryButtons(),
     };
   },
-  pagination: () => ({
-    disabled: boolean('Disable page inputs (disabled)', false),
-    page: number('The current page (page)', 1),
-    totalItems: number('Total number of items (totalItems)', 103),
-    pagesUnknown: boolean(
-      'Total number of items unknown (pagesUnknown)',
-      false
-    ),
-    pageInputDisabled: boolean(
-      'Disable page input (pageInputDisabled)',
-      undefined
-    ),
-    pageSizeInputDisabled: boolean(
-      'Disable page size input (pageSizeInputDisabled)',
-      undefined
-    ),
-    backwardText: text(
-      'The description for the backward icon (backwardText)',
-      'Previous page'
-    ),
-    forwardText: text(
-      'The description for the forward icon (forwardText)',
-      'Next page'
-    ),
-    pageSize: number('Number of items per page (pageSize)', 10),
-    pageSizes: array('Choices of `pageSize` (pageSizes)', [10, 20, 30, 40, 50]),
-    itemsPerPageText: text(
-      'Label for `pageSizes` select UI (itemsPerPageText)',
-      'Items per page:'
-    ),
-    onChange: action('onChange'),
-  }),
 };
 
 export default {
@@ -232,8 +197,6 @@ export const Playground = () => {
         <SelectItem value="us-south" text="US South" />
         <SelectItem value="us-east" text="US East" />
       </Select>
-      <br />
-      <Pagination {...props.pagination()} />
       <br />
       {hasScrollingContent && (
         <>
@@ -343,8 +306,6 @@ export const WithStateManager = () => {
             <SelectItem value="us-south" text="US South" />
             <SelectItem value="us-east" text="US East" />
           </Select>
-          <br />
-          <Pagination {...props.pagination()} />
         </Modal>
       )}
     </ModalStateManager>
