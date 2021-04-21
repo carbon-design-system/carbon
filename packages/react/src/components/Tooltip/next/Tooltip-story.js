@@ -7,7 +7,7 @@
 
 import { Add24 } from '@carbon/icons-react';
 import React from 'react';
-import { Tooltip } from './Tooltip';
+import { TooltipGroup, Tooltip } from './Tooltip';
 
 export default {
   title: 'Experimental/unstable_Tooltip',
@@ -29,5 +29,27 @@ export const Description = () => {
     <Tooltip description="Modify account settings">
       <button type="button">Edit</button>
     </Tooltip>
+  );
+};
+
+export const Duration = () => {
+  return (
+    <>
+      <Tooltip label="Close" enterDelayMs={500} exitDelayMs={500}>
+        <button type="button">
+          <Add24 />
+        </button>
+      </Tooltip>
+      <Tooltip label="Close" enterDelayMs={500} exitDelayMs={500}>
+        <button type="button">
+          <Add24 />
+        </button>
+      </Tooltip>
+      <Tooltip label="Close" enterDelayMs={500} exitDelayMs={500}>
+        <button type="button">
+          <Add24 />
+        </button>
+      </Tooltip>
+    </>
   );
 };

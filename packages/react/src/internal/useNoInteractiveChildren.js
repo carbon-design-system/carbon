@@ -8,13 +8,17 @@
 import { useEffect } from 'react';
 
 export function useNoInteractiveChildren(ref, message) {
-  useEffect(() => {
-    const node = getInteractiveContent(ref.current);
+  if (__DEV__) {
+    useEffect(() => {
+      const node = getInteractiveContent(ref.current);
 
-    if (node) {
-      throw new Error(`Error: ${message}.\n\nInstead found: ${node.outerHTML}`);
-    }
-  });
+      if (node) {
+        throw new Error(
+          `Error: ${message}.\n\nInstead found: ${node.outerHTML}`
+        );
+      }
+    });
+  }
 }
 
 /**

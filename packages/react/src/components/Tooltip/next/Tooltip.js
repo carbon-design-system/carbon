@@ -5,7 +5,6 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { settings } from 'carbon-components';
 import cx from 'classnames';
 import PropTypes from 'prop-types';
 import React, { useRef, useEffect, useState } from 'react';
@@ -15,18 +14,18 @@ import { useEvent } from '../../../internal/useEvent';
 import { useId } from '../../../internal/useId';
 import { useNoInteractiveChildren } from '../../../internal/useNoInteractiveChildren';
 
-const { prefix } = settings;
-
 function Tooltip({
   className: customClassName,
   children,
   label,
   description,
+  enterDelayMs = 100,
+  exitDelayMs = 500,
   ...rest
 }) {
   const containerRef = useRef(null);
   const tooltipRef = useRef(null);
-  const [open, setOpen] = useState(false);
+  const [open, setOpen] = useStateWithDelay(false);
   const id = useId('tooltip');
   const child = React.Children.only(children);
 
@@ -41,16 +40,23 @@ function Tooltip({
     triggerProps['aria-describedby'] = id;
   }
 
-  if (__DEV__) {
-    useNoInteractiveChildren(
-      tooltipRef,
-      'The Tooltip component must have no interactive content rendered by the' +
-        '`label` or `description` prop'
-    );
+  function onMouseEnter() {
+    setOpen(true, enterDelayMs);
   }
 
+  function onMouseLeave() {
+    setOpen(false, exitDelayMs);
+  }
+
+  useNoInteractiveChildren(
+    tooltipRef,
+    'The Tooltip component must have no interactive content rendered by the' +
+      '`label` or `description` prop'
+  );
+
   if (canUseDOM) {
-    useEvent(window, 'keydown', () => {
+    useEvent(window, 'keydown', (event) => {
+      event.stopPropagation();
       setOpen(false);
     });
   }
@@ -59,8 +65,8 @@ function Tooltip({
     <div
       {...rest}
       className={cx('cds--tooltip', customClassName)}
-      onMouseEnter={() => setOpen(true)}
-      onMouseLeave={() => setOpen(false)}
+      onMouseEnter={onMouseEnter}
+      onMouseLeave={onMouseLeave}
       ref={containerRef}>
       {React.cloneElement(child, triggerProps)}
       <Popover align="top" open={open} highContrast>
@@ -111,5 +117,41 @@ Tooltip.propTypes = {
    */
   description: PropTypes.node,
 };
+
+function useStateWithDelay(initialState) {
+  const [state, internalSetState] = useState(initialState);
+  const [delay, setDelay] = useState(null);
+  const [callbackOrValue, setCallbackOrValue] = useState(null);
+
+  function setState(stateOrUpdater, delayMs) {
+    // Synchronous setState
+    if (delayMs === undefined || delayMs === null) {
+      setDelay(null);
+      setCallbackOrValue(null);
+      internalSetState(stateOrUpdater);
+      return;
+    }
+    setDelay(delayMs);
+    setCallbackOrValue(stateOrUpdater);
+  }
+
+  useEffect(() => {
+    if (delay === null || callbackOrValue === null) {
+      return;
+    }
+
+    const timeoutId = setTimeout(() => {
+      setDelay(null);
+      setCallbackOrValue(null);
+      internalSetState(callbackOrValue);
+    }, delay);
+
+    return () => {
+      clearTimeout(timeoutId);
+    };
+  }, [delay, callbackOrValue]);
+
+  return [state, setState];
+}
 
 export { Tooltip };
