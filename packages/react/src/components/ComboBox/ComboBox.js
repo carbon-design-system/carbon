@@ -267,7 +267,7 @@ const ComboBox = (props) => {
               event.stopPropagation();
             }
 
-            if (match(event, keys.Enter)) {
+            if (match(event, keys.Enter) && !inputValue) {
               toggleMenu();
             }
           },
