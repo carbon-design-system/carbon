@@ -25,6 +25,7 @@
     @include reset;
     @include type-style('body-short-01');
 
+    display: inline-flex;
     color: $link-primary;
     text-decoration: none;
     outline: none;
@@ -60,7 +61,6 @@
     @include reset;
     @include type-style('body-short-01');
 
-    display: inline;
     color: $text-disabled;
     font-weight: 400;
     text-decoration: none;
@@ -94,6 +94,12 @@
 
   .#{$prefix}--link--lg {
     @include type-style('body-short-02');
+  }
+
+  .#{$prefix}--link__icon {
+    display: inline-flex;
+    align-self: center;
+    margin-left: $spacing-03;
   }
 }
 

@@ -70,7 +70,7 @@
     flex-shrink: 0;
     width: rem(18px);
     height: rem(18px);
-    margin: rem(2px) $carbon--spacing-03 rem(2px) rem(2px);
+    margin: rem(1px) $carbon--spacing-03 rem(2px) rem(2px);
     background-color: transparent;
     border: $radio-border-width solid $icon-01;
     border-radius: 50%;
@@ -150,7 +150,7 @@
 
   .#{$prefix}--radio-button-wrapper .#{$prefix}--radio-button__label {
     display: flex;
-    align-items: center;
+    align-items: flex-start;
     justify-content: center;
     margin: 0;
   }
