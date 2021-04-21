@@ -27,6 +27,7 @@ const Button = React.forwardRef(function Button(
     size,
     kind,
     href,
+    expressive,
     isSelected,
     tabIndex,
     type,
@@ -125,6 +126,7 @@ const Button = React.forwardRef(function Button(
     [`${prefix}--btn--xl`]: size === 'xl',
     [`${prefix}--btn--${kind}`]: kind,
     [`${prefix}--btn--disabled`]: disabled,
+    [`${prefix}--btn--expressive`]: expressive,
     [`${prefix}--tooltip--hidden`]: hasIconOnly && !allowTooltipVisibility,
     [`${prefix}--tooltip--visible`]: isHovered,
     [`${prefix}--btn--icon-only`]: hasIconOnly,
@@ -247,6 +249,11 @@ Button.propTypes = {
   disabled: PropTypes.bool,
 
   /**
+   * Specify whether the Button is expressive, or not
+   */
+  expressive: PropTypes.bool,
+
+  /**
    * Specify if the button is an icon-only button
    */
   hasIconOnly: PropTypes.bool,
@@ -367,6 +374,7 @@ Button.defaultProps = {
   dangerDescription: 'danger',
   tooltipAlignment: 'center',
   tooltipPosition: 'top',
+  expressive: false,
 };
 
 export default Button;
