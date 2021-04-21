@@ -449,13 +449,15 @@
     padding: $button-padding-sm;
   }
 
-  .#{$prefix}--btn--2xl:not(.#{$prefix}--btn--icon-only) {
+  // V11: change xl to 2xl
+  .#{$prefix}--btn--xl:not(.#{$prefix}--btn--icon-only) {
     @include button-padding-large;
 
     min-height: rem(80px);
   }
 
-  .#{$prefix}--btn--xl:not(.#{$prefix}--btn--icon-only) {
+  // V11: change lg to xl
+  .#{$prefix}--btn--lg:not(.#{$prefix}--btn--icon-only) {
     @include button-padding-large;
 
     min-height: rem(64px);

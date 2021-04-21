@@ -124,8 +124,10 @@ const Button = React.forwardRef(function Button(
     [`${prefix}--btn`]: true,
     [`${prefix}--btn--sm`]: size === 'small' || size === 'sm' || small,
     [`${prefix}--btn--md`]: size === 'field' || size === 'md',
-    [`${prefix}--btn--xl`]: enabled ? size === 'xl' : size === 'lg',
-    [`${prefix}--btn--2xl`]: enabled ? size === '2xl' : size === 'xl',
+    // V11: change lg to xl
+    [`${prefix}--btn--lg`]: enabled ? size === 'xl' : size === 'lg',
+    // V11: change xl to 2xl
+    [`${prefix}--btn--xl`]: enabled ? size === '2xl' : size === 'xl',
     [`${prefix}--btn--${kind}`]: kind,
     [`${prefix}--btn--disabled`]: disabled,
     [`${prefix}--tooltip--hidden`]: hasIconOnly && !allowTooltipVisibility,
