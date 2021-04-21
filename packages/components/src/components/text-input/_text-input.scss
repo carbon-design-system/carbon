@@ -45,7 +45,9 @@
     }
   }
 
-  .#{$prefix}--text-input--xl {
+  // TODO V11: Remove xl selector
+  .#{$prefix}--text-input--xl,
+  .#{$prefix}--text-input--lg {
     height: rem(48px);
   }
 
@@ -140,7 +142,8 @@
       fill: $icon-01;
     }
 
-    .#{$prefix}--text-input--invalid {
+    .#{$prefix}--text-input--invalid,
+    .#{$prefix}--text-input--warning {
       padding-right: $carbon--spacing-08;
     }
 
@@ -300,22 +303,24 @@
   // Inline Text Input
   //-----------------------------
 
-  .#{$prefix}--text-input-wrapper--inline {
+  .#{$prefix}--text-input-wrapper.#{$prefix}--text-input-wrapper--inline {
     flex-flow: row wrap;
   }
 
-  .#{$prefix}--label--inline {
+  .#{$prefix}--text-input-wrapper .#{$prefix}--label--inline {
     flex: 1;
     margin: rem(13px) 0 0 0;
     word-break: break-word;
     overflow-wrap: break-word;
   }
 
-  .#{$prefix}--label--inline--sm {
+  .#{$prefix}--text-input-wrapper .#{$prefix}--label--inline--sm {
     margin-top: rem(9px);
   }
 
-  .#{$prefix}--label--inline--xl {
+  // TODO V11: Remove xl selector
+  .#{$prefix}--text-input-wrapper .#{$prefix}--label--inline--xl,
+  .#{$prefix}--text-input-wrapper .#{$prefix}--label--inline--lg {
     margin-top: rem(17px);
   }
 
@@ -327,7 +332,7 @@
     overflow-wrap: break-word;
   }
 
-  .#{$prefix}--form__helper-text--inline {
+  .#{$prefix}--text-input-wrapper .#{$prefix}--form__helper-text--inline {
     margin-top: rem(2px);
   }
 

@@ -300,12 +300,3 @@ StructuredListCell.defaultProps = {
   head: false,
   noWrap: false,
 };
-
-export default {
-  StructuredListWrapper,
-  StructuredListHead,
-  StructuredListBody,
-  StructuredListRow,
-  StructuredListInput,
-  StructuredListCell,
-};

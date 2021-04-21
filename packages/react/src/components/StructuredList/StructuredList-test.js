@@ -13,7 +13,7 @@ import {
   StructuredListBody,
   StructuredListRow,
   StructuredListCell,
-} from '../StructuredList';
+} from './StructuredList';
 import { mount, shallow } from 'enzyme';
 import { settings } from 'carbon-components';
 

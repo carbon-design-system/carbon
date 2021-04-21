@@ -4,7 +4,6 @@
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
-
 import { getAttributes } from '@carbon/icon-helpers';
 import PropTypes from 'prop-types';
 import React from 'react';
@@ -40,11 +39,11 @@ Icon.propTypes = {
   'aria-labelledby': PropTypes.string,
   children: PropTypes.node,
   className: PropTypes.string,
-  height: PropTypes.number,
+  height: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
   preserveAspectRatio: PropTypes.string,
   tabIndex: PropTypes.string,
   viewBox: PropTypes.string,
-  width: PropTypes.number,
+  width: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
   xmlns: PropTypes.string,
 };
 Icon.defaultProps = {
