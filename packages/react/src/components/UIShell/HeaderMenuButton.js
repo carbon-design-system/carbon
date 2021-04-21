@@ -19,6 +19,8 @@ const HeaderMenuButton = ({
   'aria-label': ariaLabel,
   'aria-labelledby': ariaLabelledBy,
   className: customClassName,
+  customMenuIcon,
+  customCloseIcon,
   onClick,
   isActive,
   isCollapsible,
@@ -36,6 +38,8 @@ const HeaderMenuButton = ({
     'aria-label': ariaLabel,
     'aria-labelledby': ariaLabelledBy,
   };
+  const menuIcon = customMenuIcon ? customMenuIcon : <Menu20 />;
+  const closeIcon = customCloseIcon ? customCloseIcon : <Close20 />;
 
   return (
     <button
@@ -45,7 +49,7 @@ const HeaderMenuButton = ({
       title={ariaLabel}
       type="button"
       onClick={onClick}>
-      {isActive ? <Close20 /> : <Menu20 />}
+      {isActive ? closeIcon : menuIcon}
     </button>
   );
 };
