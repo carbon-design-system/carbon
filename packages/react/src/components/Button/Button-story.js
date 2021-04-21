@@ -53,6 +53,7 @@ const props = {
     const iconToUse = iconMap[select('Icon (icon)', icons, 'none')];
     return {
       className: 'some-class',
+      expressive: boolean('Expressive', false),
       kind: select('Button kind (kind)', kinds, 'primary'),
       disabled: boolean('Disabled (disabled)', false),
       size: select('Button size (size)', sizes, 'default'),
@@ -75,6 +76,7 @@ const props = {
     }
     return {
       className: 'some-class',
+      expressive: boolean('Expressive', false),
       kind: select('Button kind (kind)', kinds, 'primary'),
       disabled: boolean('Disabled (disabled)', false),
       isSelected: boolean('Selected (isSelected)', false),
@@ -102,6 +104,7 @@ const props = {
     const iconToUse = iconMap[select('Icon (icon)', icons, 'none')];
     return {
       className: 'some-class',
+      expressive: boolean('Expressive', false),
       disabled: boolean('Disabled (disabled)', false),
       size: select('Button size (size)', sizes, 'default'),
       renderIcon: !iconToUse || iconToUse.svgData ? undefined : iconToUse,
@@ -178,7 +181,11 @@ export const Playground = () => {
         <Button {...regularProps}>Button</Button>
         &nbsp;
         {!regularProps.kind.includes('danger') && (
-          <Button hasIconOnly {...iconOnly}></Button>
+          <>
+            <Button hasIconOnly {...iconOnly}></Button>
+            &nbsp;
+            <Button hasIconOnly {...iconOnly} kind="ghost"></Button>
+          </>
         )}
       </div>
       <div
