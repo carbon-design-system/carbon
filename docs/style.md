@@ -579,7 +579,6 @@ commands one after another. Refer to the documentation of your shell.
 | `yarn test`                       | All categories                                                       |
 | `yarn test:unit`                  | Only component unit tests                                            |
 | `yarn test:a11y`                  | Only accessibility tests                                             |
-| `yarn test:e2e`                   | Only end to end tests                                                |
 | `yarn test:ssr`                   | Only server side tests                                               |
 | `yarn test:a11y && yarn test:e2e` | In `bash` via `&&`: Run the a11y tests, and if they succeed, run e2e |
 
@@ -599,9 +598,6 @@ details contained within these recipes are enforced via eslint rules declared in
 - Format with `describe`/`it` blocks
 - Use [`jest-dom`](https://github.com/testing-library/jest-dom) matchers for
   assertions
-- Keyboard navigation/interaction event testing is not well supported through
-  JSDOM. Testing this in a simulated browser environment, such as Cypress (e2e),
-  is a better environment for this type of testing.
 
 ```js
 import { render, screen, findByLabel } from '@testing-library/react';
@@ -609,37 +605,7 @@ import userEvent from '@testing-library/user-event';
 import { ComponentName } from '../ComponentName';
 
 describe('ComponentName', () => {
-  it('should render with default props', () => {
-    render(<ComponentName />);
-    expect(screen.findByText('component default text')).toBeInTheDocument();
-  });
-
-  // Event Handlers
-  // -----
-  // When a component accepts an `onClick` or `onChange` prop
-  // it can be helpful to make assertions about when these
-  // props are called and what they are called with in order
-  // to test the Public API of the component.
-  // To make assertions on a function, such as whether its
-  // been called or what it has been called with, we can make
-  // use of Jest's `jest.fn()` method to create mock
-  // functions. We can then make assertions on these mock
-  // functions.
-  it('should call `onClick` when the trigger element is pressed', () => {
-    const onClick = jest.fn();
-
-    render(<TestComponent onClick={onClick} />);
-
-    const trigger = screen.getByText('trigger');
-    userEvent.click(trigger);
-    expect(onClick).toHaveBeenCalled();
-  });
-
-  describe('Component API', () => {
-    describe('i18n', () => {
-      // ... ensure when each prop string is configured it is rendered to the DOM
-    });
-
+  describe('API', () => {
     it('should provide a data-testid attribute on the outermost DOM node', () => {
       const { container } = render(<ComponentName className="test" />);
       expect(screen.getByTestId('component-test-id')).toBeInTheDocument();
@@ -656,6 +622,10 @@ describe('ComponentName', () => {
       expect(container.firstChild).toHaveAttribute('data-testid', 'test');
     });
 
+    describe('i18n', () => {
+      // ... ensure when each prop string is configured it is rendered to the DOM
+    });
+
     // id
     // -----
     // When a component accepts an id prop, it's important
@@ -663,13 +633,31 @@ describe('ComponentName', () => {
     // between minor versions. As a result, tests that you
     // write for id should make assertions around id being
     // placed on the same node.
-    it(
-      'should place the `id` prop on the same DOM node between minor versions',
-      () => {
-        const { container } = render(<ComponentName data-testid="test" />);
-        expect(container.firstChild).toHaveAttribute('id', 'test');
-      }
-    );
+    it('should place the `id` prop on the same DOM node between minor versions', () => {
+      const { container } = render(<ComponentName data-testid="test" />);
+      expect(container.firstChild).toHaveAttribute('id', 'test');
+    });
+
+    // Event Handlers
+    // -----
+    // When a component accepts an `onClick` or `onChange` prop
+    // it can be helpful to make assertions about when these
+    // props are called and what they are called with in order
+    // to test the Public API of the component.
+    // To make assertions on a function, such as whether its
+    // been called or what it has been called with, we can make
+    // use of Jest's `jest.fn()` method to create mock
+    // functions. We can then make assertions on these mock
+    // functions.
+    it('should call `onClick` when the trigger element is pressed', () => {
+      const onClick = jest.fn();
+
+      render(<TestComponent onClick={onClick} />);
+
+      const trigger = screen.getByText('trigger');
+      userEvent.click(trigger);
+      expect(onClick).toHaveBeenCalled();
+    });
 
     // Optional ref tests
     // A component that accepts a ref falls in one of three scenarios:
@@ -688,70 +676,19 @@ describe('ComponentName', () => {
 - Use `accessibility-checker` and `axe`
 - Optionally configure common props to ensure component variants do not contain
   accessibility errors.
+- Always use the destructured `container` from `render()` to ensure the entire
+  DOM tree is validated before and after interaction.
 
 ```js
 describe('ComponentName AVT1', () => {
   it('should have no aXe violations', async () => {
-    render(<ComponentName />);
-    await expect(
-      screen.getByLabelText('or a similar query')
-    ).toHaveNoAxeViolations();
+    const { container } = render(<ComponentName />);
+    await expect(container).toHaveNoAxeViolations();
   });
 
   it('should have no AC violations', async () => {
-    render(<ComponentName />);
-    await expect(
-      screen.getByLabelText('or a similar query')
-    ).toHaveNoACViolations('ComponentName');
-  });
-});
-```
-
-##### `ComponentName-test.e2e.js`
-
-- These tests are ran with Cypress, which is a bit different in syntax and
-  mental model than Jest/JSDOM tests. It's recommended to become familiar with
-  the core concepts by reading the
-  [Cypress introduction documentation](https://docs.cypress.io/guides/core-concepts/introduction-to-cypress).
-- Trigger Events with via `cy.real\*();`
-- Keyboard navigation/interaction testing is best done here, in a simulated
-  browser environment, not JSDOM.
-- Take snapshots with Percy
-  - Percy snapshots should be used very sparingly (1-2 per component)
-  - Percy snapshots should always be taken _after_ an assertion that a
-    element/componen should be visible. This ensures the DOM has settled and the
-    element has fully loaded.
-
-```js
-import 'carbon-components/scss/components/accordion/_accordion.scss';
-
-import React from 'react';
-import { mount } from '@cypress/react';
-
-describe('ComponentName - e2e', () => {
-  beforeEach(() => {
-    mount(<ComponentName />);
-  });
-
-  it('should render', () => {
-    cy.findByText(/ComponentText/).should('be.visible');
-
-    cy.findByText(/ComponentText not visible until interaction/).should(
-      'not.be.visible'
-    );
-
-    cy.percySnapshot();
-  });
-
-  describe('keyboard navigation', () => {
-    it('should tab between items and open on space', () => {
-      cy.findByRole('button', { name: /Section 1/i }).focus();
-
-      cy.realPress('Tab');
-      cy.findByRole('button', { name: /Section 2/i }).should('be.focused');
-
-      // ... continued interaction testing a full keyboard navigation flow
-    });
+    const { container } = render(<ComponentName />);
+    await expect(container).toHaveNoACViolations('ComponentName');
   });
 });
 ```
@@ -762,18 +699,25 @@ describe('ComponentName - e2e', () => {
 /**
  * @jest-environment node
  */
-
+import ReactDOMServer from 'react-dom/server';
 import { ComponentName } from '../ComponentName';
 
 describe('ComponentName - SSR', () => {
-  it('should import ComponentName in node/server env', () => {
-    expect(ComponentName).toBeTruthy();
+  it('should import ComponentName in a node/server environment', () => {
+    expect(ComponentName).not.toThrow();
+  });
+
+  it('should not use document/window/etc', () => {
+    expect(ReactDOMServer.renderToStaticMarkup(ComponentName)).not.toThrow();
   });
 });
 ```
 
 ##### Notes on manual testing
 
+- [The A11Y Project checklist](https://www.a11yproject.com/checklist/) is a
+  great resource listing a range of issues to check for that cover a wide range
+  of disability conditions.
 - Due to
   [the complexity of screenreader testing](https://webaim.org/articles/screenreader_testing/),
   all screen reader testing is done manually.
