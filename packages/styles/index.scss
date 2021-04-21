@@ -8,12 +8,12 @@
 @forward 'scss/config' with (
   $prefix: 'bx' !default,
 );
-@forward '@carbon/colors';
-@forward '@carbon/grid' hide $prefix;
-@forward '@carbon/layout' hide map-deep-get, key-by-index, last-map-item;
-@forward '@carbon/motion';
-@forward '@carbon/themes' hide $white;
-@forward '@carbon/type' hide $prefix;
+@forward 'scss/colors' hide $white;
+@forward 'scss/grid';
+@forward 'scss/motion';
+@forward 'scss/type';
+@forward 'scss/themes';
+@forward 'scss/theme';
 
 @use 'scss/reset';
 @use 'scss/components';

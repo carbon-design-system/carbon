@@ -5,4 +5,5 @@
 // LICENSE file in the root directory of this source tree.
 //
 
-@forward '@carbon/themes/scss/modules/themes' show $white, $g10, $g90, $g100;
+@forward '@carbon/grid/scss/modules/breakpoint'
+  show breakpoint, breakpoint-between, breakpoint-down, breakpoint-up;
