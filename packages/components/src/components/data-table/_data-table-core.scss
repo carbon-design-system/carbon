@@ -523,7 +523,7 @@
 
   .#{$prefix}--data-table--xs .#{$prefix}--overflow-menu {
     width: rem(32px);
-    height: 100%;
+    height: calc(100% + 1px);
   }
 
   .#{$prefix}--data-table.#{$prefix}--data-table--xs
@@ -598,7 +598,7 @@
   }
 
   .#{$prefix}--data-table--sm .#{$prefix}--overflow-menu {
-    height: 100%;
+    height: calc(100% + 1px);
   }
 
   //----------------------------------------------------------------------------
@@ -627,8 +627,9 @@
     padding-bottom: rem(3px);
   }
 
-  .#{$prefix}--data-table--md .#{$prefix}--overflow-menu {
-    height: 100%;
+  .#{$prefix}--data-table--md .#{$prefix}--table-column-menu {
+    padding-top: rem(3px);
+    padding-bottom: rem(3px);
   }
 
   // V11: remove this tall block
