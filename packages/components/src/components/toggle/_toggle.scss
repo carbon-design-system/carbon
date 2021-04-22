@@ -37,9 +37,10 @@
     }
 
     .#{$prefix}--toggle__appearance {
-      display: flex;
+      display: grid;
+      grid-template-columns: max-content max-content;
       align-items: center;
-      width: max-content;
+      column-gap: $spacing-03;
       cursor: pointer;
     }
 
@@ -105,8 +106,6 @@
     .#{$prefix}--toggle__text {
       @include type-style('body-long-01');
 
-      align-content: center;
-      margin-left: $spacing-03;
       color: $text-01;
     }
 
