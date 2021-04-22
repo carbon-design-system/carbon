@@ -40,7 +40,7 @@ const props = () => ({
       'Extra small (xs)': 'xs',
       'Small (sm)': 'sm',
       'Medium (md)': 'md',
-      'Large - default (lg)': 'lg',
+      'Large (lg) - default': 'lg',
       'Extra Large (xl)': 'xl',
       'Compat check - compact': 'compact',
       'Compat check - short': 'short',
