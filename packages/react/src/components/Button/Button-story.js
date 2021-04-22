@@ -14,7 +14,6 @@ import Button from '../Button';
 import ButtonSkeleton from '../Button/Button.Skeleton';
 import ButtonSet from '../ButtonSet';
 import mdx from './Button.mdx';
-import { FeatureFlags } from '../FeatureFlags';
 
 const icons = {
   None: 'None',
@@ -51,9 +50,6 @@ const kinds = {
 // };
 
 const sizes = {
-  'Compat check - Field': 'field',
-  'Compat check - Small': 'small',
-  'Compat check - default': 'default',
   'Small  (sm)': 'sm',
   'Medium (md)': 'md',
   Default: null,
@@ -150,53 +146,6 @@ export const _Default = () => {
 
 _Default.story = {
   name: 'Button',
-};
-
-export const SizeStory = () => {
-  return (
-    <div>
-      <div>
-        <h3>Feature Flags: DISABLED</h3>
-        <Button size="sm">sm</Button>&nbsp;
-        <Button size="small">small</Button>
-        <br />
-        <br />
-        <Button size="field">field</Button>&nbsp;
-        <Button size="md">md</Button>
-        <br />
-        <br />
-        <Button size="default">default</Button>&nbsp;
-        <Button size="lg">lg</Button>&nbsp;
-        <Button></Button>
-        <br />
-        <br />
-        <Button size="lg">lg</Button>&nbsp;
-        <Button size="xl">xl</Button>&nbsp;
-        <Button size="2xl">2xl</Button>
-      </div>
-      <br />
-      <h3>Feature Flags: ENABLED</h3>
-      <br />
-      <FeatureFlags flags={{ 'enable-2021-release': true }}>
-        <Button size="sm">sm</Button>&nbsp;
-        <Button size="small">small</Button>
-        <br />
-        <br />
-        <Button size="field">field</Button>&nbsp;
-        <Button size="md">md</Button>
-        <br />
-        <br />
-        <Button size="default">default</Button>&nbsp;
-        <Button size="lg">lg</Button>&nbsp;
-        <Button></Button>
-        <br />
-        <br />
-        <Button size="lg">lg</Button>&nbsp;
-        <Button size="xl">xl</Button>&nbsp;
-        <Button size="2xl">2xl</Button>
-      </FeatureFlags>
-    </div>
-  );
 };
 
 export const Secondary = () => {
