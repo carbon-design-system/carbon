@@ -10,7 +10,6 @@ import 'carbon-components/scss/components/accordion/_accordion.scss';
 import React from 'react';
 import { mount } from '@cypress/react';
 import { default as Accordion, AccordionItem } from '..';
-import { get } from 'core-js/core/dict';
 
 describe('Accordion', () => {
   beforeEach(() => {
@@ -59,9 +58,9 @@ describe('Accordion', () => {
     // the DOM has settled and the element has fully loaded.
     // cy.percySnapshot();
 
-    cy.realPress('Shift+Tab');
+    cy.realPress(['Shift', 'Tab']);
     cy.realPress('Space');
-    cy.realPress('Shift+Tab');
+    cy.realPress(['Shift', 'Tab']);
     cy.realPress('Space');
 
     cy.findByText(/Panel 1/).should('be.visible');

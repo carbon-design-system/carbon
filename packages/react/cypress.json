@@ -6,5 +6,5 @@
   },
   "fixturesFolder": false,
   "nodeVersion": "system",
-  "testFiles": "**/*e2e.js"
+  "testFiles": "**/*-test.e2e.js"
 }
