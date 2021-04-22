@@ -17,6 +17,7 @@ export function Toggle({
   className,
   defaultToggled = false,
   disabled = false,
+  hideLabel = false,
   id,
   labelA = 'Off',
   labelB = 'On',
@@ -32,7 +33,13 @@ export function Toggle({
     defaultToggled
   );
 
+  function handleClick(e) {
+    setChecked(!checked);
+    onClick(e);
+  }
+
   const isSm = size === 'sm';
+  const sideLabel = hideLabel ? labelText : checked ? labelB : labelA;
 
   const wrapperClasses = classNames(
     `${prefix}--toggle`,
@@ -42,6 +49,10 @@ export function Toggle({
     className
   );
 
+  const labelTextClasses = classNames(`${prefix}--toggle__label-text`, {
+    [`${prefix}--visually-hidden`]: hideLabel,
+  });
+
   const appearanceClasses = classNames(`${prefix}--toggle__appearance`, {
     [`${prefix}--toggle__appearance--sm`]: isSm,
   });
@@ -49,11 +60,6 @@ export function Toggle({
   const switchClasses = classNames(`${prefix}--toggle__switch`, {
     [`${prefix}--toggle__switch--checked`]: checked,
   });
-
-  function handleClick(e) {
-    setChecked(!checked);
-    onClick(e);
-  }
 
   return (
     <div className={wrapperClasses}>
@@ -68,7 +74,7 @@ export function Toggle({
         onClick={handleClick}
       />
       <label htmlFor={id} className={`${prefix}--toggle__label`}>
-        <span className={`${prefix}--toggle__label-text`}>{labelText}</span>
+        <span className={labelTextClasses}>{labelText}</span>
         <div className={appearanceClasses}>
           <div className={switchClasses}>
             {isSm && (
@@ -82,7 +88,7 @@ export function Toggle({
             )}
           </div>
           <span className={`${prefix}--toggle__text`} aria-hidden="true">
-            {checked ? labelB : labelA}
+            {sideLabel}
           </span>
         </div>
       </label>
@@ -105,6 +111,11 @@ Toggle.propTypes = {
    * Whether this control should be disabled
    */
   disabled: PropTypes.bool,
+
+  /**
+   * Specify whether the label should be hidden, or not
+   */
+  hideLabel: PropTypes.bool,
 
   /**
    * Provide an id that unique represents the underlying `<button>`

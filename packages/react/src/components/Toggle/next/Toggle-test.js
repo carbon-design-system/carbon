@@ -71,6 +71,18 @@ describe('Toggle', () => {
       ).toBe(true);
       expect(wrapper.find(`.${prefix}--toggle__check`).length).toBe(1);
     });
+
+    it('supports to use top label as side label', () => {
+      wrapper.setProps({ hideLabel: true });
+      expect(
+        wrapper
+          .find(`.${prefix}--toggle__label-text`)
+          .hasClass(`${prefix}--visually-hidden`)
+      ).toBe(true);
+      expect(wrapper.find(`.${prefix}--toggle__text`).text()).toBe(
+        props.labelText
+      );
+    });
   });
 
   describe('behaves as expected', () => {
