@@ -729,3 +729,73 @@ When writing SassDoc comments, you should use three forward slashes:
   // ...
 }
 ```
+
+### Testing
+
+We use the `@carbon/test-utils` package to test our Sass styles in JavaScript.
+Inside of this package, there is a `SassRenderer` module that you can bring in
+that allows you to get values from Sass in JavaScript to be used in test
+assertions.
+
+The basic template for tests for Sass files will look like:
+
+```js
+/**
+ * <COPYRIGHT>
+ *
+ * @jest-environment node
+ */
+
+'use strict';
+
+const { SassRenderer } = require('@carbon/test-utils/scss');
+
+const { render } = SassRenderer.create(__dirname);
+
+describe('@carbon/styles/scss/config', () => {
+  test('Public API', async () => {
+    const { get } = await render(`
+      // You can bring in modules using the path from the test file
+      @use '../path/to/sass/module';
+
+      $test: true;
+
+      // The `get` helper will let you pass a value from Sass to JavaScript
+      $_: get('test', $test);
+    `);
+
+    // get('<key>') gives you both the JavaScript representation of a value
+    // along with the `nativeValue` which comes from Dart sass. Use `.value`
+    // to get the JavaScript value and make assertions
+    expect(get('test').value).toBe(true);
+  });
+});
+```
+
+#### Recipes
+
+##### Public API
+
+Sometimes it is useful to assert that a module's Public API matches what is
+expected or does not change between versions. To do this in a test file, you can
+use the `sass:meta` module along with several helpers for getting the variables
+and functions from a module. Unfortunately, mixins need to be checked by hand
+using the `mixin-exists` function from `sass:meta`.
+
+```js
+test('Public API', async () => {
+  await render(`
+    @use 'sass:meta';
+    @use '../path/to/module';
+
+    // Get the variables for the module under the namespace `module`
+    $_: get('variables', meta.module-variables('module'));
+
+    // Get the functions for the module under the namespace `module`
+    $_: get('variables', meta.module-functions('module'));
+
+    // Verify that a mixin exists, optionally within a module
+    $_: get('mixin-name', meta.mixin-exists('mixin-name', 'module');
+  `);
+});
+```

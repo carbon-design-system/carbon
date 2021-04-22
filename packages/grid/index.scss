@@ -9,8 +9,4 @@
   $prefix: 'bx' !default,
 );
 @forward 'scss/modules/breakpoint';
-@forward 'scss/modules/mixins';
-
-@use 'scss/modules/mixins';
-
-@include mixins.grid();
+@forward 'scss/modules/css-grid';
