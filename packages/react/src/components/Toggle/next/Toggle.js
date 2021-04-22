@@ -5,10 +5,11 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React, { useState } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { settings } from 'carbon-components';
+import { useControllableState } from '../../../internal/useControllableState';
 
 const { prefix } = settings;
 
@@ -20,10 +21,16 @@ export function Toggle({
   labelA = 'Off',
   labelB = 'On',
   labelText,
-  onToggle = () => {},
+  onClick = () => {},
+  onToggle,
   size = 'md',
+  toggled,
 }) {
-  const [checked, setChecked] = useState(defaultToggled);
+  const [checked, setChecked] = useControllableState(
+    toggled,
+    onToggle,
+    defaultToggled
+  );
 
   const isSm = size === 'sm';
 
@@ -43,6 +50,11 @@ export function Toggle({
     [`${prefix}--toggle__switch--checked`]: checked,
   });
 
+  function handleClick(e) {
+    setChecked(!checked);
+    onClick(e);
+  }
+
   return (
     <div className={wrapperClasses}>
       <button
@@ -53,12 +65,7 @@ export function Toggle({
         type="button"
         aria-checked={checked}
         disabled={disabled}
-        onClick={() => {
-          const newChecked = !checked;
-
-          setChecked(newChecked);
-          onToggle(newChecked);
-        }}
+        onClick={handleClick}
       />
       <label htmlFor={id} className={`${prefix}--toggle__label`}>
         <span className={`${prefix}--toggle__label-text`}>{labelText}</span>
@@ -121,6 +128,11 @@ Toggle.propTypes = {
   labelText: PropTypes.node.isRequired,
 
   /**
+   * Provide an event listener that is called when the control is clicked
+   */
+  onClick: PropTypes.func,
+
+  /**
    * Provide an event listener that is called when the control is toggled
    */
   onToggle: PropTypes.func,
@@ -129,6 +141,11 @@ Toggle.propTypes = {
    * Specify the size of the Toggle. Currently only supports 'sm' or 'md' (default)
    */
   size: PropTypes.oneOf(['sm', 'md']),
+
+  /**
+   * Specify whether the control is toggled
+   */
+  toggled: PropTypes.bool,
 };
 
 export default Toggle;

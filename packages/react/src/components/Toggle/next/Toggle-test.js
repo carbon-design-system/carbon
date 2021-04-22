@@ -18,6 +18,8 @@ describe('Toggle', () => {
     labelA: 'labelA-unchecked',
     labelB: 'labelB-checked',
     labelText: 'toggle-label',
+    toggled: false,
+    onToggle: () => {},
   };
   let wrapper;
 
@@ -91,20 +93,26 @@ describe('Toggle', () => {
       const onClick = jest.fn();
       wrapper.setProps({ onClick });
 
+      expect(onClick.mock.calls.length).toBe(0);
+
       wrapper.find('button').simulate('click');
-      expect(onClick.mock.calls[0]).not.toBe(undefined);
+      expect(onClick.mock.calls.length).toBe(1);
+      expect(onClick.mock.calls[0][0].target.id).toBe(props.id);
     });
 
     it('emits props.onToggle when toggled and passes current state', () => {
       const onToggle = jest.fn();
-      wrapper.setProps({ onToggle });
+      wrapper.setProps({ onToggle, toggled: false });
+
+      expect(onToggle.mock.calls.length).toBe(0);
 
       wrapper.find('button').simulate('click');
-      expect(wrapper.find('button').props()['aria-checked']).toBe(true);
+      expect(onToggle.mock.calls.length).toBe(1);
       expect(onToggle.mock.calls[0][0]).toBe(true);
 
+      wrapper.setProps({ toggled: true });
       wrapper.find('button').simulate('click');
-      expect(wrapper.find('button').props()['aria-checked']).toBe(false);
+      expect(onToggle.mock.calls.length).toBe(2);
       expect(onToggle.mock.calls[1][0]).toBe(false);
     });
   });
