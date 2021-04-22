@@ -10,6 +10,7 @@ import React from 'react';
 import ToggleNext from './next/Toggle';
 import ToggleClassic from './Toggle';
 
+import { enabled } from '@carbon/feature-flags';
 import { useFeatureFlag } from '../FeatureFlags';
 
 function Toggle(props) {
@@ -19,6 +20,10 @@ function Toggle(props) {
   }
   return <ToggleClassic {...props} />;
 }
+
+Toggle.propTypes = enabled('enable-2021-release')
+  ? ToggleNext.propTypes
+  : ToggleClassic.propTypes;
 
 export { default as ToggleSkeleton } from './Toggle.Skeleton';
 export default Toggle;

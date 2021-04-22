@@ -6123,13 +6123,6 @@ Map {
     },
   },
   "Toggle" => Object {
-    "defaultProps": Object {
-      "aria-label": "Toggle",
-      "defaultToggled": false,
-      "labelA": "Off",
-      "labelB": "On",
-      "onToggle": [Function],
-    },
     "propTypes": Object {
       "aria-label": Object {
         "isRequired": true,
