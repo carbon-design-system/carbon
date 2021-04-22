@@ -188,7 +188,7 @@
   .#{$prefix}--accordion__item--active {
     overflow: visible;
 
-    .#{$prefix}--accordion__content {
+    & > .#{$prefix}--accordion__content {
       display: block;
       padding-top: $spacing-03;
       padding-bottom: $carbon--spacing-06;
@@ -197,7 +197,7 @@
         padding-bottom motion(entrance, productive) $duration--fast-02;
     }
 
-    .#{$prefix}--accordion__arrow {
+    & > .#{$prefix}--accordion__arrow {
       transform: rotate(-90deg) #{'/*rtl:ignore*/'};
       fill: $ui-05;
 
