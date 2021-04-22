@@ -12,6 +12,7 @@ exports[`HeaderGlobalAction should render 1`] = `
     className="custom-class bx--header__action"
     dangerDescription="danger"
     disabled={false}
+    expressive={false}
     hasIconOnly={true}
     iconDescription="Accessibility label"
     kind="primary"

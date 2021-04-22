@@ -27,6 +27,7 @@ exports[`ModalWrapper should render 1`] = `
       className="btn-trigger"
       dangerDescription="danger"
       disabled={false}
+      expressive={false}
       iconDescription="Provide icon description if icon is used"
       kind="primary"
       onClick={[Function]}
@@ -170,6 +171,7 @@ exports[`ModalWrapper should render 1`] = `
                 <Button
                   dangerDescription="danger"
                   disabled={false}
+                  expressive={false}
                   kind="secondary"
                   onClick={[Function]}
                   size="default"
@@ -198,6 +200,7 @@ exports[`ModalWrapper should render 1`] = `
               <Button
                 dangerDescription="danger"
                 disabled={false}
+                expressive={false}
                 kind="primary"
                 onClick={[Function]}
                 size="default"

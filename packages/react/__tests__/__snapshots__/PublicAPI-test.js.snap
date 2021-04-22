@@ -150,6 +150,7 @@ Map {
     "defaultProps": Object {
       "dangerDescription": "danger",
       "disabled": false,
+      "expressive": false,
       "kind": "primary",
       "size": "default",
       "tabIndex": 0,
@@ -185,6 +186,9 @@ Map {
         "type": "string",
       },
       "disabled": Object {
+        "type": "bool",
+      },
+      "expressive": Object {
         "type": "bool",
       },
       "hasIconOnly": Object {
@@ -4229,6 +4233,7 @@ Map {
   },
   "OrderedList" => Object {
     "defaultProps": Object {
+      "expressive": false,
       "native": false,
       "nested": false,
     },
@@ -4238,6 +4243,9 @@ Map {
       },
       "className": Object {
         "type": "string",
+      },
+      "expressive": Object {
+        "type": "bool",
       },
       "native": Object {
         "type": "bool",
@@ -6432,6 +6440,9 @@ Map {
       },
       "className": Object {
         "type": "string",
+      },
+      "expressive": Object {
+        "type": "bool",
       },
       "nested": Object {
         "type": "bool",
