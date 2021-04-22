@@ -42,10 +42,6 @@ const props = () => ({
       'Medium (md)': 'md',
       'Large (lg) - default': 'lg',
       'Extra Large (xl)': 'xl',
-      'Compat check - compact': 'compact',
-      'Compat check - short': 'short',
-      'Compat check - tall': 'tall',
-      'No value': null,
     },
     'lg'
   ),
