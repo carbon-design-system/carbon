@@ -17,7 +17,7 @@ describe('Toggle', () => {
     id: 'toggle-id',
     labelA: 'labelA-unchecked',
     labelB: 'labelB-checked',
-    labelText: 'toggle-label',
+    labelText: 'Toggle label',
     toggled: false,
     onToggle: () => {},
   };
