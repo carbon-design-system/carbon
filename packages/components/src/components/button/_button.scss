@@ -138,7 +138,9 @@
       padding: $button-padding-ghost-sm;
     }
 
-    &.#{$prefix}--btn--field {
+    // V11: remove field
+    &.#{$prefix}--btn--field,
+    &.#{$prefix}--btn--md {
       padding: $button-padding-ghost-field;
     }
   }
@@ -329,7 +331,9 @@
     cursor: not-allowed;
   }
 
-  .#{$prefix}--btn--field.#{$prefix}--btn--icon-only {
+  // V11: remove field
+  .#{$prefix}--btn--field.#{$prefix}--btn--icon-only,
+  .#{$prefix}--btn--md.#{$prefix}--btn--icon-only {
     padding-right: rem(11px);
     padding-left: rem(11px);
   }
@@ -432,7 +436,9 @@
         padding: $button-padding-ghost-sm;
       }
 
-      &.#{$prefix}--btn--field {
+      // V11: Remove field
+      &.#{$prefix}--btn--field,
+      &.#{$prefix}--btn--md {
         padding: $button-padding-ghost-field;
       }
     }
@@ -443,19 +449,23 @@
     padding: $button-padding-sm;
   }
 
+  // V11: change xl to 2xl
   .#{$prefix}--btn--xl:not(.#{$prefix}--btn--icon-only) {
     @include button-padding-large;
 
     min-height: rem(80px);
   }
 
+  // V11: change lg to xl
   .#{$prefix}--btn--lg:not(.#{$prefix}--btn--icon-only) {
     @include button-padding-large;
 
     min-height: rem(64px);
   }
 
-  .#{$prefix}--btn--field {
+  // V11: Remove field
+  .#{$prefix}--btn--field,
+  .#{$prefix}--btn--md {
     min-height: rem(40px);
     padding: $button-padding-field;
   }
