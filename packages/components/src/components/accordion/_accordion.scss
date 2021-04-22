@@ -197,7 +197,7 @@
         padding-bottom motion(entrance, productive) $duration--fast-02;
     }
 
-    & > .#{$prefix}--accordion__arrow {
+    & > .#{$prefix}--accordion__heading > .#{$prefix}--accordion__arrow {
       transform: rotate(-90deg) #{'/*rtl:ignore*/'};
       fill: $ui-05;
 
