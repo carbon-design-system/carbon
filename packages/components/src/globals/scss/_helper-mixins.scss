@@ -257,6 +257,16 @@
 
     @if ($type == 'focus') {
       color: Highlight;
+      outline: 1px solid Highlight;
+    }
+
+    @if ($type == 'outline') {
+      outline: 1px solid transparent;
+    }
+
+    @if ($type == 'disabled') {
+      color: GrayText;
+      fill: GrayText;
     }
 
     @content;
