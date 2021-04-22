@@ -131,7 +131,8 @@ const Button = React.forwardRef(function Button(
     [`${prefix}--btn--selected`]: hasIconOnly && isSelected && kind === 'ghost',
     [`${prefix}--tooltip__trigger`]: hasIconOnly,
     [`${prefix}--tooltip--a11y`]: hasIconOnly,
-    [`${prefix}--tooltip--${tooltipPosition}`]: hasIconOnly && tooltipPosition,
+    [`${prefix}--btn--icon-only--${tooltipPosition}`]:
+      hasIconOnly && tooltipPosition,
     [`${prefix}--tooltip--align-${tooltipAlignment}`]:
       hasIconOnly && tooltipAlignment,
   });

@@ -50,6 +50,8 @@
     }
 
     // V11: Question for design: do we have an updated tokens for fields that exist on `layer`?
+    .#{$prefix}--pagination,
+    .#{$prefix}--pagination__control-buttons,
     .#{$prefix}--text-input,
     .#{$prefix}--text-area,
     .#{$prefix}--search-input,

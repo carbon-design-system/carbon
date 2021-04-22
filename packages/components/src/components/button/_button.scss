@@ -195,13 +195,72 @@
     fill: $disabled-03;
   }
 
-  .#{$prefix}--btn--icon-only--top {
+  .#{$prefix}--tooltip__trigger.#{$prefix}--btn--icon-only--top {
     @include tooltip--trigger('icon', 'top');
     @include tooltip--placement('icon', 'top', 'center');
+
+    &.#{$prefix}--tooltip--align-start {
+      @include tooltip--placement('icon', 'top', 'start');
+    }
+
+    &.#{$prefix}--tooltip--align-center {
+      @include tooltip--placement('icon', 'top', 'center');
+    }
+
+    &.#{$prefix}--tooltip--align-end {
+      @include tooltip--placement('icon', 'top', 'end');
+    }
   }
 
-  .#{$prefix}--btn--icon-only--bottom {
+  .#{$prefix}--tooltip__trigger.#{$prefix}--btn--icon-only--right {
+    @include tooltip--trigger('icon', 'right');
+    @include tooltip--placement('icon', 'right', 'center');
+
+    &.#{$prefix}--tooltip--align-start {
+      @include tooltip--placement('icon', 'right', 'start');
+    }
+
+    &.#{$prefix}--tooltip--align-center {
+      @include tooltip--placement('icon', 'right', 'center');
+    }
+
+    &.#{$prefix}--tooltip--align-end {
+      @include tooltip--placement('icon', 'right', 'end');
+    }
+  }
+
+  .#{$prefix}--tooltip__trigger.#{$prefix}--btn--icon-only--bottom {
+    @include tooltip--trigger('icon', 'bottom');
     @include tooltip--placement('icon', 'bottom', 'center');
+
+    &.#{$prefix}--tooltip--align-start {
+      @include tooltip--placement('icon', 'bottom', 'start');
+    }
+
+    &.#{$prefix}--tooltip--align-center {
+      @include tooltip--placement('icon', 'bottom', 'center');
+    }
+
+    &.#{$prefix}--tooltip--align-end {
+      @include tooltip--placement('icon', 'bottom', 'end');
+    }
+  }
+
+  .#{$prefix}--tooltip__trigger.#{$prefix}--btn--icon-only--left {
+    @include tooltip--trigger('icon', 'left');
+    @include tooltip--placement('icon', 'left', 'center');
+
+    &.#{$prefix}--tooltip--align-start {
+      @include tooltip--placement('icon', 'left', 'start');
+    }
+
+    &.#{$prefix}--tooltip--align-center {
+      @include tooltip--placement('icon', 'left', 'center');
+    }
+
+    &.#{$prefix}--tooltip--align-end {
+      @include tooltip--placement('icon', 'left', 'end');
+    }
   }
 
   .#{$prefix}--btn--icon-only {
