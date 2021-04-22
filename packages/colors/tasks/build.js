@@ -142,6 +142,12 @@ async function build() {
           init: t.SassValue(value),
         })
       ),
+      ...colorValues.map(({ grade, swatch, value }) =>
+        t.Assignment({
+          id: t.Identifier(`${swatch}-${grade}`),
+          init: t.SassColor(value),
+        })
+      ),
       t.SassMixin({
         id: t.Identifier(`${NAMESPACE}--colors`),
         body: t.BlockStatement([
