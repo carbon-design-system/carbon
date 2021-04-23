@@ -28,10 +28,10 @@
     width: 100%;
     height: rem(40px);
     padding: 0 $carbon--spacing-05;
-    color: $text-01;
-    background-color: $field-01;
+    color: $text-primary;
+    background-color: $field;
     border: none;
-    border-bottom: 1px solid $ui-04;
+    border-bottom: 1px solid $border-strong;
     transition: background-color $duration--fast-01 motion(standard, productive),
       outline $duration--fast-01 motion(standard, productive);
 
@@ -63,6 +63,7 @@
     @include placeholder-colors;
   }
 
+  // V11: Possibly deprecate
   .#{$prefix}--text-input--light {
     background-color: $field-02;
   }
@@ -82,11 +83,11 @@
       top: 50%;
       right: $carbon--spacing-05;
       transform: translateY(-50%);
-      fill: $support-01;
+      fill: $support-error;
     }
 
     .#{$prefix}--text-input__invalid-icon--warning {
-      fill: $support-03;
+      fill: $support-warning;
 
       path:first-of-type {
         opacity: 1;
@@ -121,7 +122,7 @@
 
       svg {
         transition: fill $duration--fast-01 motion(standard, productive);
-        fill: $icon-02;
+        fill: $icon-secondary;
 
         // Windows, Firefox HCM Fix
         @media screen and (-ms-high-contrast: active),
@@ -136,10 +137,11 @@
       @include focus-outline('outline');
     }
 
-    .#{$prefix}--btn.#{$prefix}--text-input--password__visibility__toggle.#{$prefix}--tooltip__trigger:hover,
+    .#{$prefix}--btn.#{$prefix}--text-input--password__visibility__toggle.#{$prefix}--tooltip__trigger:hover
+      svg,
     .#{$prefix}--btn.#{$prefix}--text-input--password__visibility__toggle.#{$prefix}--tooltip__trigger:focus
       svg {
-      fill: $icon-01;
+      fill: $icon-primary;
     }
 
     .#{$prefix}--text-input--invalid,
@@ -177,10 +179,10 @@
     + .#{$prefix}--text-input--password__visibility__toggle
     svg {
     cursor: not-allowed;
-    fill: $disabled-02;
+    fill: $icon-disabled;
 
     &:hover {
-      fill: $disabled-02;
+      fill: $icon-disabled;
     }
   }
 
@@ -190,20 +192,21 @@
   .#{$prefix}--text-input:disabled {
     @include focus-outline('reset');
 
-    color: $disabled-02;
-    background-color: $disabled-01;
+    color: $text-disabled;
+    background-color: $field-disabled;
     border-bottom: 1px solid transparent;
     // Needed to fix disabled text in Safari #6673
     -webkit-text-fill-color: currentColor;
     cursor: not-allowed;
   }
 
+  // V11: Possibly deprecate
   .#{$prefix}--text-input--light:disabled {
     background-color: $field-02;
   }
 
   .#{$prefix}--text-input:disabled::placeholder {
-    color: $disabled-02;
+    color: $text-disabled;
     opacity: 1;
   }
 
@@ -234,7 +237,7 @@
   //-----------------------------
   .#{$prefix}--form--fluid .#{$prefix}--text-input-wrapper {
     position: relative;
-    background: $field-01;
+    background: $field;
     transition: background-color $duration--fast-01 motion(standard, productive),
       outline $duration--fast-01 motion(standard, productive);
   }
@@ -274,7 +277,7 @@
     + .#{$prefix}--text-input__divider {
     display: block;
     margin: 0 1rem;
-    border-color: $ui-03;
+    border-color: $border-subtle;
     border-style: solid;
     border-bottom: none;
   }
@@ -283,6 +286,7 @@
     top: rem(80px);
   }
 
+  // V11: Possibly deprecate
   .#{$prefix}--form--fluid .#{$prefix}--text-input-wrapper--light {
     background: $field-02;
   }

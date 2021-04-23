@@ -275,9 +275,9 @@
     tbody
     tr:not(.#{$prefix}--parent-row):nth-child(even)
     td {
-    background-color: $data-table-zebra-color;
-    border-top: 1px solid $data-table-zebra-color;
-    border-bottom: 1px solid $data-table-zebra-color;
+    background-color: $layer-accent;
+    border-top: 1px solid $layer-accent;
+    border-bottom: 1px solid $layer-accent;
   }
 
   .#{$prefix}--data-table--zebra
