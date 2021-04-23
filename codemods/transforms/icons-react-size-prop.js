@@ -37,15 +37,15 @@ function transform(fileInfo, api, options) {
     );
   }
 
-  // Otherwise, we will get our import to icons and update the imported icons to
-  // use the new format
-  const iconsImport = matches.get();
-
   // For now, these icons are available under @carbon/icons-react/next
   // TODO: remove in v11
   matches.forEach((path) => {
     path.get('source').get('value').replace('@carbon/icons-react/next');
   });
+
+  // Otherwise, we will get our import to icons and update the imported icons to
+  // use the new format
+  const iconsImport = matches.get();
 
   // Iterate through each of the imported icons, get their size and name, and
   // update the import and all matches in the file
@@ -80,7 +80,7 @@ function transform(fileInfo, api, options) {
         return name;
       }
 
-      // No matter what, update the imported binding from IconName32 to IconName
+      // Update the imported binding from IconName32 to IconName
       j(path).replaceWith(j.importSpecifier(j.identifier(name), newBinding));
 
       // Finally, find all instances where we refer to this import and update
@@ -208,6 +208,37 @@ function transform(fileInfo, api, options) {
           }
 
           path.parent.get('value').replace(replacement);
+        }
+
+        // Support `renderIcon` style props where you pass in an Icon by itself
+        // to the prop
+        //
+        // from:
+        // <Component renderIcon={Icon24} />
+        //
+        // to:
+        // <Component renderIcon={(props) => <Icon size={24} {...props} />} />
+        if (j.JSXExpressionContainer.check(parent) && size !== defaultSize) {
+          path.parentPath.replace(
+            j.jsxExpressionContainer(
+              j.arrowFunctionExpression(
+                [j.identifier('props')],
+                j.jsxElement(
+                  j.jsxOpeningElement(
+                    j.jsxIdentifier(path.node.name),
+                    [
+                      j.jsxAttribute(
+                        j.jsxIdentifier('size'),
+                        j.jsxExpressionContainer(j.numericLiteral(size))
+                      ),
+                      j.jsxSpreadAttribute(j.identifier('props')),
+                    ],
+                    true
+                  )
+                )
+              )
+            )
+          );
         }
       });
     });

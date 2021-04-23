@@ -55,3 +55,13 @@ const mapped = {
     ...props
   })),
 };
+
+function RenderIconProp() {
+  // prettier-ignore
+  return (
+    <div>
+      <DefaultSize renderIcon={Add} />
+      <Size renderIcon={props => <Bee size={24} {...props} />} />
+    </div>
+  );
+}

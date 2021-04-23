@@ -51,3 +51,13 @@ const mapped = {
   // prettier-ignore
   lowercase: chevron,
 };
+
+function RenderIconProp() {
+  // prettier-ignore
+  return (
+    <div>
+      <DefaultSize renderIcon={Add32} />
+      <Size renderIcon={Bee24} />
+    </div>
+  );
+}
