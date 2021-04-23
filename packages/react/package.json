@@ -36,8 +36,7 @@
     "start": "yarn storybook",
     "storybook": "rimraf node_modules/.cache/storybook && start-storybook -p 9000 -s ./.storybook/assets",
     "snapshot": "build-storybook && percy-storybook --widths=320,1280",
-    "test:e2e": "PERCY_TOKEN=dd3392142006a6483c8f524697f39f052755fa9dc087ff4437cac3d64227abdd PERCY_BRANCH=local percy exec -- cypress run",
-    "test:e2e-ci": "percy exec -- cypress run"
+    "test:e2e:cypress": "cypress run"
   },
   "peerDependencies": {
     "carbon-components": "^10.9.0",
