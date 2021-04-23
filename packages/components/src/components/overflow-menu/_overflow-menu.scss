@@ -72,7 +72,7 @@
     .#{$prefix}--overflow-menu__trigger {
     @include box-shadow;
 
-    background-color: $field;
+    background-color: $layer;
     transition: none;
   }
 
@@ -80,7 +80,6 @@
   .#{$prefix}--overflow-menu--light.#{$prefix}--overflow-menu--open
     .#{$prefix}--overflow-menu__trigger {
     background-color: $field-02;
-    // ?
   }
 
   .#{$prefix}--overflow-menu__icon {
@@ -109,12 +108,12 @@
     align-items: flex-start;
     width: rem(160px);
     list-style: none;
-    background-color: $field;
+    background-color: $layer;
 
     &::after {
       position: absolute;
       display: block;
-      background-color: $field;
+      background-color: $layer;
       transition: background-color $duration--fast-02
         motion(entrance, productive);
       content: '';
@@ -122,12 +121,11 @@
   }
 
   .#{$prefix}--overflow-menu.#{$prefix}--overflow-menu--open:hover {
-    background-color: $field;
+    background-color: $layer;
   }
 
   .#{$prefix}--overflow-menu-options--light {
     background-color: $field-02;
-    // these tokens?
     &::after {
       background-color: $field-02;
     }
@@ -135,7 +133,6 @@
 
   .#{$prefix}--overflow-menu.#{$prefix}--overflow-menu--light.#{$prefix}--overflow-menu--open:hover {
     background-color: $field-02;
-    // ?
   }
 
   .#{$prefix}--overflow-menu-options[data-floating-menu-direction='bottom']::after {
@@ -299,7 +296,7 @@
   }
 
   .#{$prefix}--overflow-menu-options__option:hover {
-    background-color: $background-hover;
+    background-color: $layer-hover;
   }
 
   .#{$prefix}--overflow-menu-options__option--danger

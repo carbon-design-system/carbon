@@ -45,7 +45,7 @@
     height: rem(40px);
     padding: 0 $spacing-09 0 $spacing-05;
     color: $text-primary;
-    background-color: $field;
+    background-color: $layer;
     border-bottom: 1px solid $border-strong;
     outline: 2px solid transparent;
     cursor: pointer;
@@ -201,8 +201,8 @@
   }
 
   .#{$prefix}--tabs__nav-item:hover:not(.#{$prefix}--tabs__nav-item--disabled) {
-    background-color: $background-hover;
-    box-shadow: 0 -1px 0 $background-hover;
+    background-color: $layer-hover;
+    box-shadow: 0 -1px 0 $layer-hover;
 
     @include carbon--breakpoint(md) {
       background-color: transparent;
@@ -216,7 +216,7 @@
   .#{$prefix}--tabs--container
     .#{$prefix}--tabs__nav-item:hover:not(.#{$prefix}--tabs__nav-item--disabled) {
     @include carbon--breakpoint(md) {
-      background-color: $background-selected-hover;
+      background-color: $layer-selected-hover;
     }
   }
 
@@ -644,7 +644,7 @@
     //-----------------------------
     &.#{$prefix}--tabs--scrollable--container
       .#{$prefix}--tabs--scrollable__nav-item:hover {
-      background-color: $background-selected-hover;
+      background-color: $layer-selected-hover;
     }
 
     //---------------------------------------------

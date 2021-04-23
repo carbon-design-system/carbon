@@ -169,11 +169,11 @@
   //INCOMPLETE STYLING
   .#{$prefix}--progress-step--incomplete {
     svg {
-      fill: $layer-selected-inverse;
+      fill: $icon-primary;
     }
 
     .#{$prefix}--progress-line {
-      background-color: $layer-accent;
+      background-color: $border-subtle;
     }
   }
 

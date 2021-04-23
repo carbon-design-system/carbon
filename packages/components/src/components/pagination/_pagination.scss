@@ -166,7 +166,7 @@ $css--helpers: true;
     cursor: pointer;
     transition: outline $duration--fast-02 motion(standard, productive),
       background-color $duration--fast-02 motion(standard, productive);
-    fill: $layer-selected-inverse;
+    fill: $icon-primary;
 
     // Windows, Firefox HCM Fix
     @media screen and (-ms-high-contrast: active),
@@ -185,7 +185,7 @@ $css--helpers: true;
 
   .#{$prefix}--pagination__button:hover,
   .#{$prefix}--btn--ghost:hover.#{$prefix}--pagination__button {
-    background: $background-hover;
+    background: $layer-hover;
   }
 
   .#{$prefix}--pagination__button--no-index,

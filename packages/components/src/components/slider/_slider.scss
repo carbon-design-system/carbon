@@ -49,7 +49,7 @@
     position: absolute;
     width: 100%;
     height: rem(2px);
-    background: $layer-accent;
+    background: $border-subtle;
     transform: translate(0%, -50%);
     cursor: pointer;
 
@@ -68,7 +68,7 @@
     display: inline-block;
     width: rem(2px);
     height: rem(4px);
-    background: $layer-accent;
+    background: $border-subtle;
     transform: translate(-50%, 0);
     content: '';
   }
@@ -166,7 +166,7 @@
   }
 
   .#{$prefix}--slider--disabled .#{$prefix}--slider__thumb {
-    background-color: $layer-accent;
+    background-color: $border-subtle;
 
     &:hover {
       transform: translate(-50%, -50%);
@@ -174,14 +174,14 @@
     }
 
     &:focus {
-      background-color: $layer-accent;
+      background-color: $border-subtle;
       outline: none;
       box-shadow: none;
       transform: translate(-50%, -50%);
     }
 
     &:active {
-      background: $layer-accent;
+      background: $border-subtle;
       transform: translate(-50%, -50%);
     }
   }
@@ -191,7 +191,7 @@
   .#{$prefix}--slider--disabled
     .#{$prefix}--slider__thumb:focus
     ~ .#{$prefix}--slider__filled-track {
-    background-color: $layer-accent;
+    background-color: $border-subtle;
     cursor: not-allowed;
   }
 

@@ -79,7 +79,7 @@ $css--helpers: true;
     height: 100%;
     margin: 0;
     padding: 0 rem(14px);
-    color: $layer-selected-inverse;
+    color: $icon-primary;
     background: none;
 
     border: none;
@@ -87,7 +87,7 @@ $css--helpers: true;
     cursor: pointer;
     transition: outline $duration--fast-02 motion(standard, productive),
       background-color $duration--fast-02 motion(standard, productive);
-    fill: $layer-selected-inverse;
+    fill: $icon-primary;
   }
 
   // Unset height/width set by icon-only button:
@@ -101,8 +101,8 @@ $css--helpers: true;
   }
 
   .#{$prefix}--unstable-pagination__button:hover {
-    color: $layer-selected-inverse;
-    background: $background-hover;
+    color: $icon-primary;
+    background: $layer-hover;
   }
 
   .#{$prefix}--unstable-pagination__button--no-index {
