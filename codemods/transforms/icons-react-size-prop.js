@@ -133,6 +133,12 @@ function transform(fileInfo, api, options) {
             );
             refProperty.shorthand = true;
 
+            // Builds up this structure:
+            // (props) => React.forwardRef((props, ref) => React.createElement(iconName, {
+            //   ref,
+            //   size: 20,
+            //   ...props,
+            // }));
             replacement = j.arrowFunctionExpression(
               [j.identifier('props')],
               j.callExpression(
@@ -165,21 +171,35 @@ function transform(fileInfo, api, options) {
               )
             );
           } else {
-            replacement = j.arrowFunctionExpression(
-              [j.identifier('props')],
-              j.jsxElement(
-                j.jsxOpeningElement(
-                  j.jsxIdentifier(newBinding.name),
-                  [
-                    j.jsxAttribute(
-                      j.jsxIdentifier('size'),
-                      j.jsxExpressionContainer(j.numericLiteral(size))
-                    ),
-                    j.jsxSpreadAttribute(j.identifier('props')),
-                  ],
-                  true
-                )
-              )
+            // Build up this structure:
+            // (props) => <IconName size={20} {...props} />
+            replacement = j.callExpression(
+              j.memberExpression(
+                j.identifier('React'),
+                j.identifier('forwardRef')
+              ),
+              [
+                j.arrowFunctionExpression(
+                  [j.identifier('props'), j.identifier('ref')],
+                  j.jsxElement(
+                    j.jsxOpeningElement(
+                      j.jsxIdentifier(newBinding.name),
+                      [
+                        j.jsxAttribute(
+                          j.jsxIdentifier('ref'),
+                          j.jsxExpressionContainer(j.identifier('ref'))
+                        ),
+                        j.jsxAttribute(
+                          j.jsxIdentifier('size'),
+                          j.jsxExpressionContainer(j.numericLiteral(size))
+                        ),
+                        j.jsxSpreadAttribute(j.identifier('props')),
+                      ],
+                      true
+                    )
+                  )
+                ),
+              ]
             );
           }
 
