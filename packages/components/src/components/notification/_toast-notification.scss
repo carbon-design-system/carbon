@@ -221,11 +221,12 @@
     color: $text-primary;
   }
 
+  // Windows HCM fixes
   /* stylelint-disable */
   .#{$prefix}--toast-notification {
     @include high-contrast-mode('outline');
   }
-  .#{$prefix}--toast-notification__close-button {
+  .#{$prefix}--toast-notification__close-button:focus {
     @include high-contrast-mode('focus');
   }
   .#{$prefix}--toast-notification__icon {

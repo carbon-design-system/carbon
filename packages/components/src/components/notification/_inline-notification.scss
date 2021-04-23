@@ -301,13 +301,17 @@
     fill: $icon-primary;
   }
 
+  // Windows HCM fixes
   /* stylelint-disable */
   .#{$prefix}--inline-notification {
     @include high-contrast-mode('outline');
   }
-  .#{$prefix}--inline-notification__close-button {
+
+  .#{$prefix}--inline-notification__close-button:focus,
+  .#{$prefix}--btn.#{$prefix}--btn--ghost.#{$prefix}--inline-notification__action-button:focus {
     @include high-contrast-mode('focus');
   }
+
   .#{$prefix}--inline-notification__icon {
     @include high-contrast-mode('icon-fill');
   }
