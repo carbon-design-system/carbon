@@ -40,15 +40,6 @@ you'd like to not include these rules in your setup, you can also include a
 }
 ```
 
-You can include a `testing` oriented configuration that supplies rules around
-using jest, @testing-library and cypress.io by doing the following:
-
-```json
-{
-  "extends": ["eslint-config-carbon/testing"]
-}
-```
-
 ## 🙌 Contributing
 
 We're always looking for contributors to help us fix bugs, build new features,
