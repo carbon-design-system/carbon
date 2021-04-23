@@ -93,9 +93,9 @@
       height: auto;
       max-height: 90%;
 
-      .#{$prefix}--modal-header,
-      .#{$prefix}--modal-content,
-      .#{$prefix}--modal-content__regular-content {
+      .#{$prefix}--modal-header p,
+      .#{$prefix}--modal-content p,
+      .#{$prefix}--modal-content__regular-content p {
         padding-right: 20%;
       }
 
@@ -131,18 +131,24 @@
   }
 
   .#{$prefix}--modal-container--xs {
-    .#{$prefix}--modal-header {
+    .#{$prefix}--modal-header p {
       padding-right: $carbon--spacing-09;
     }
 
-    .#{$prefix}--modal-content,
-    .#{$prefix}--modal-content__regular-content,
+    .#{$prefix}--modal-content p,
+    .#{$prefix}--modal-content__regular-content p,
     .#{$prefix}--modal-content--with-form {
       padding-right: $spacing-05;
     }
 
     @include carbon--breakpoint(md) {
       width: 48%;
+
+      .#{$prefix}--modal-header p,
+      .#{$prefix}--modal-content p,
+      .#{$prefix}--modal-content__regular-content p {
+        padding-right: $carbon--spacing-05;
+      }
     }
 
     @include carbon--breakpoint(lg) {
@@ -178,9 +184,9 @@
     @include carbon--breakpoint(xlg) {
       width: 36%;
 
-      .#{$prefix}--modal-header,
-      .#{$prefix}--modal-content,
-      .#{$prefix}--modal-content__regular-content {
+      .#{$prefix}--modal-header p,
+      .#{$prefix}--modal-content p,
+      .#{$prefix}--modal-content__regular-content p {
         padding-right: 20%;
       }
 
@@ -205,9 +211,9 @@
     @include carbon--breakpoint(md) {
       width: 96%;
 
-      .#{$prefix}--modal-header,
-      .#{$prefix}--modal-content,
-      .#{$prefix}--modal-content__regular-content {
+      .#{$prefix}--modal-header p,
+      .#{$prefix}--modal-content p,
+      .#{$prefix}--modal-content__regular-content p {
         padding-right: 20%;
       }
 
