@@ -89,57 +89,83 @@ function transform(fileInfo, api, options) {
           scope = scope.parent;
         }
 
-        if (scope) {
-          const { node: parent } = path.parent;
+        if (!scope) {
+          return;
+        }
 
-          // Replace the identifier name with the new binding name
-          path.replace(newBinding);
+        const { node: parent } = path.parent;
 
-          // If our identifier is inside of a JSXOpeningElement, then we need to
-          // check to see if we need to add in the `size` prop that is now
-          // needed
-          if (j.JSXOpeningElement.check(parent) && size !== defaultSize) {
-            parent.attributes.unshift(
-              j.jsxAttribute(
-                j.jsxIdentifier('size'),
-                j.jsxExpressionContainer(j.numericLiteral(size))
+        // Replace the identifier name with the new binding name
+        path.replace(newBinding);
+
+        // If our identifier is inside of a JSXOpeningElement, then we need to
+        // check to see if we need to add in the `size` prop that is now
+        // needed
+        if (j.JSXOpeningElement.check(parent) && size !== defaultSize) {
+          parent.attributes.unshift(
+            j.jsxAttribute(
+              j.jsxIdentifier('size'),
+              j.jsxExpressionContainer(j.numericLiteral(size))
+            )
+          );
+        }
+
+        // Handle cases where the icon is referred to in an object, for
+        // example:
+        //
+        // from:
+        // const alias = { name: IconName24 };
+        //
+        // to:
+        // const alias = { name: (props) => <IconName size={24} {...props} /> };
+        //
+        // Since the `size` information needs to be provided, otherwise the
+        // default size will be used
+        if (j.Property.check(parent) && size !== defaultSize) {
+          let replacement = null;
+
+          // map to React.createElement instead of using as the JSX Opening
+          // Element directly
+          if (newBinding.name[0] === newBinding.name[0].toLowerCase()) {
+            replacement = j.arrowFunctionExpression(
+              [j.identifier('props')],
+              j.callExpression(
+                j.memberExpression(
+                  j.identifier('React'),
+                  j.identifier('createElement')
+                ),
+                [
+                  newBinding,
+                  j.objectExpression([
+                    j.objectProperty(
+                      j.identifier('size'),
+                      j.numericLiteral(size)
+                    ),
+                    j.spreadElement(j.identifier('props')),
+                  ]),
+                ]
+              )
+            );
+          } else {
+            replacement = j.arrowFunctionExpression(
+              [j.identifier('props')],
+              j.jsxElement(
+                j.jsxOpeningElement(
+                  j.jsxIdentifier(newBinding.name),
+                  [
+                    j.jsxAttribute(
+                      j.jsxIdentifier('size'),
+                      j.jsxExpressionContainer(j.numericLiteral(size))
+                    ),
+                    j.jsxSpreadAttribute(j.identifier('props')),
+                  ],
+                  true
+                )
               )
             );
           }
 
-          // Handle cases where the icon is referred to in an object, for
-          // example:
-          //
-          // from:
-          // const alias = { name: IconName24 };
-          //
-          // to:
-          // const alias = { name: (props) => <IconName size={24} {...props} /> };
-          //
-          // Since the `size` information needs to be provided, otherwise the
-          // default size will be used
-          if (j.Property.check(parent) && size !== defaultSize) {
-            path.parent
-              .get('value')
-              .replace(
-                j.arrowFunctionExpression(
-                  [j.identifier('props')],
-                  j.jsxElement(
-                    j.jsxOpeningElement(
-                      j.jsxIdentifier(newBinding.name),
-                      [
-                        j.jsxAttribute(
-                          j.jsxIdentifier('size'),
-                          j.jsxExpressionContainer(j.numericLiteral(size))
-                        ),
-                        j.jsxSpreadAttribute(j.identifier('props')),
-                      ],
-                      true
-                    )
-                  )
-                )
-              );
-          }
+          path.parent.get('value').replace(replacement);
         }
       });
     });

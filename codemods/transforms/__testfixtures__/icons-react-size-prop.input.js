@@ -2,6 +2,7 @@ import {
   Add32,
   Bee24,
   Caret20,
+  ChevronDown16 as chevron,
   DownArrow16,
   Search24,
   Zone24 as CustomZone,
@@ -47,4 +48,6 @@ const mapped = {
   default: Add32,
   // prettier-ignore
   size: Bee24,
+  // prettier-ignore
+  lowercase: chevron,
 };

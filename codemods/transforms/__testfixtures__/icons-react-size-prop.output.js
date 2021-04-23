@@ -2,6 +2,7 @@ import {
   Add,
   Bee,
   Caret,
+  ChevronDown as chevron,
   DownArrow,
   Search as SearchIcon,
   Zone as CustomZone,
@@ -47,4 +48,9 @@ const mapped = {
   default: Add,
   // prettier-ignore
   size: props => <Bee size={24} {...props} />,
+  // prettier-ignore
+  lowercase: props => React.createElement(chevron, {
+    size: 16,
+    ...props
+  }),
 };
