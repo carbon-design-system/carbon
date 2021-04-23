@@ -8,7 +8,7 @@
 'use strict';
 
 module.exports = {
-  plugins: ['jsdoc'],
+  plugins: ['eslint-plugin-cypress'],
   overrides: [
     {
       files: ['*-test.e2e.js'],

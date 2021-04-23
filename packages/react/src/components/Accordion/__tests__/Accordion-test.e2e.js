@@ -34,7 +34,7 @@ describe('Accordion', () => {
     // snapshots should always be taken _after_ an assertion that
     // a element/component should be visible. This is to ensure
     // the DOM has settled and the element has fully loaded.
-    // cy.percySnapshot();
+    cy.percySnapshot();
   });
 
   it('should tab between items and open on space', () => {
@@ -56,7 +56,7 @@ describe('Accordion', () => {
     // snapshots should always be taken _after_ an assertion that
     // a element/component should be visible. This is to ensure
     // the DOM has settled and the element has fully loaded.
-    // cy.percySnapshot();
+    cy.percySnapshot();
 
     cy.realPress(['Shift', 'Tab']);
     cy.realPress('Space');
