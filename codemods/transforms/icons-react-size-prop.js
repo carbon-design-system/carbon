@@ -134,41 +134,38 @@ function transform(fileInfo, api, options) {
             refProperty.shorthand = true;
 
             // Builds up this structure:
-            // (props) => React.forwardRef((props, ref) => React.createElement(iconName, {
+            // React.forwardRef((props, ref) => React.createElement(iconName, {
             //   ref,
             //   size: 20,
             //   ...props,
             // }));
-            replacement = j.arrowFunctionExpression(
-              [j.identifier('props')],
-              j.callExpression(
-                j.memberExpression(
-                  j.identifier('React'),
-                  j.identifier('forwardRef')
+            replacement = j.callExpression(
+              j.memberExpression(
+                j.identifier('React'),
+                j.identifier('forwardRef')
+              ),
+              [
+                j.arrowFunctionExpression(
+                  [j.identifier('props'), j.identifier('ref')],
+                  j.callExpression(
+                    j.memberExpression(
+                      j.identifier('React'),
+                      j.identifier('createElement')
+                    ),
+                    [
+                      newBinding,
+                      j.objectExpression([
+                        refProperty,
+                        j.objectProperty(
+                          j.identifier('size'),
+                          j.numericLiteral(size)
+                        ),
+                        j.spreadElement(j.identifier('props')),
+                      ]),
+                    ]
+                  )
                 ),
-                [
-                  j.arrowFunctionExpression(
-                    [j.identifier('props'), j.identifier('ref')],
-                    j.callExpression(
-                      j.memberExpression(
-                        j.identifier('React'),
-                        j.identifier('createElement')
-                      ),
-                      [
-                        newBinding,
-                        j.objectExpression([
-                          refProperty,
-                          j.objectProperty(
-                            j.identifier('size'),
-                            j.numericLiteral(size)
-                          ),
-                          j.spreadElement(j.identifier('props')),
-                        ]),
-                      ]
-                    )
-                  ),
-                ]
-              )
+              ]
             );
           } else {
             // Build up this structure:
