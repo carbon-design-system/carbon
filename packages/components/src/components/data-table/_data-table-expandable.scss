@@ -228,7 +228,9 @@
     }
   }
 
-  .#{$prefix}--data-table--tall .#{$prefix}--table-expand__button {
+  // V11: remove tall
+  .#{$prefix}--data-table--tall .#{$prefix}--table-expand__button,
+  .#{$prefix}--data-table--xl .#{$prefix}--table-expand__button {
     padding-top: rem(16px);
     padding-bottom: rem(24px);
   }
