@@ -14,7 +14,7 @@ const { createSassRenderer, types } = require('@carbon/test-utils/scss');
 const render = createSassRenderer(__dirname);
 
 describe('colors.scss', () => {
-  it('should emit no side-effects if mixins are included', async () => {
+  it('should emit default variable initializations when mixins are included', async () => {
     const { calls } = await render(`
 @import '../scss/mixins';
 
@@ -22,7 +22,7 @@ $test: test(mixin-exists(carbon--colors));
 $test: test(global-variable-exists(carbon--blue-50));
 `);
     expect(calls[0][0].getValue()).toBe(true);
-    expect(calls[1][0].getValue()).toBe(false);
+    expect(calls[1][0].getValue()).toBe(true);
   });
 
   it('should include color variables as globals if the mixin is called', async () => {
