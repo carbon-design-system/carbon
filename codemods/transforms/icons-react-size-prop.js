@@ -30,6 +30,13 @@ function transform(fileInfo, api, options) {
     return root.toSource(printOptions);
   }
 
+  if (matches.size() > 1) {
+    throw new Error(
+      `Expected only one import to @carbon/icons-react, instead found: ` +
+        `${matches.size()} imports`
+    );
+  }
+
   // Otherwise, we will get our import to icons and update the imported icons to
   // use the new format
   const iconsImport = matches.get();
