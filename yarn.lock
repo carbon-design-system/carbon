@@ -1877,11 +1877,14 @@ __metadata:
     "@babel/preset-env": ^7.13.12
     "@babel/preset-react": ^7.13.13
     "@carbon/feature-flags": ^0.3.0
+    "@carbon/icons-react": ^10.30.0
     "@carbon/styles": ^0.4.0
+    "@carbon/telemetry": 0.0.0-alpha.6
     "@rollup/plugin-babel": ^5.3.0
     "@rollup/plugin-commonjs": ^18.0.0
     "@rollup/plugin-node-resolve": ^11.2.1
     babel-plugin-dev-expression: ^0.2.2
+    browserslist-config-carbon: ^10.6.1
     carbon-components-react: ^7.33.0
     prop-types: ^15.7.2
     react: ^16.8.6
