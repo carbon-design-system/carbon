@@ -131,7 +131,7 @@
     @include carbon--breakpoint-down('lg') {
       width: 100vw;
       height: 100vh;
-      background-color: $overlay-01;
+      background-color: $overlay;
       opacity: 1;
       transition: opacity $transition--expansion $carbon--standard-easing,
         background-color $transition--expansion $carbon--standard-easing;

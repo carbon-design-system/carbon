@@ -25,9 +25,7 @@ export const Table = ({
   ...other
 }) => {
   const componentClass = cx(`${prefix}--data-table`, className, {
-    [`${prefix}--data-table--compact`]: size === 'compact',
-    [`${prefix}--data-table--short`]: size === 'short',
-    [`${prefix}--data-table--tall`]: size === 'tall',
+    [`${prefix}--data-table--${size}`]: size,
     [`${prefix}--data-table--sort`]: isSortable,
     [`${prefix}--data-table--zebra`]: useZebraStyles,
     [`${prefix}--data-table--static`]: useStaticWidth,
@@ -75,9 +73,20 @@ Table.propTypes = {
   shouldShowBorder: PropTypes.bool,
 
   /**
-   * `normal` Change the row height of table
+   *  Change the row height of table. Currently supports `xs`, `sm`, `md`, `lg`, and `xl`.
+   *  The previous terms (`compact`, `short`, `normal`, and `tall`) will be removed in the next major release.
    */
-  size: PropTypes.oneOf(['compact', 'short', 'normal', 'tall']),
+  size: PropTypes.oneOf([
+    'compact',
+    'short',
+    'normal',
+    'tall',
+    'xs',
+    'sm',
+    'md',
+    'lg',
+    'xl',
+  ]),
 
   /**
    * `false` If true, will keep the header sticky (only data rows will scroll)
