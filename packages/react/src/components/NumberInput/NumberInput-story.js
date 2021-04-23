@@ -82,13 +82,13 @@ export default {
 export const Default = () => {
   return (
     <NumberInput
+      id="carbon-number"
       min={0}
       max={100}
       value={50}
       label="NumberInput label"
       helperText="Optional helper text."
       invalidText="Number is not valid"
-      id="number-input-id"
     />
   );
 };
