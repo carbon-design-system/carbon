@@ -100,12 +100,11 @@
 
   .#{$prefix}--accordion__item--disabled,
   .#{$prefix}--accordion__item--disabled + .#{$prefix}--accordion__item {
-    border-top: 1px solid $button-disabled;
-    //should this be $border-disabled (that would make it disabled01)
+    border-top: 1px solid $border-disabled;
   }
 
   li.#{$prefix}--accordion__item--disabled:last-of-type {
-    border-bottom: 1px solid $button-disabled;
+    border-bottom: 1px solid $border-disabled;
   }
 
   .#{$prefix}--accordion__arrow {
@@ -118,7 +117,7 @@
     margin: $accordion-arrow-margin;
     transform: rotate(90deg) #{'/*rtl:ignore*/'};
     transition: all $duration--fast-02 motion(standard, productive);
-    fill: $border-inverse;
+    fill: $icon-primary;
 
     // Windows, Firefox HCM Fix
     @media screen and (-ms-high-contrast: active),
@@ -200,8 +199,7 @@
 
     .#{$prefix}--accordion__arrow {
       transform: rotate(-90deg) #{'/*rtl:ignore*/'};
-      fill: $border-inverse;
-      //or should this be $layer-selected-inverse?
+      fill: $icon-primary;
 
       // Windows, Firefox HCM Fix
       @media screen and (-ms-high-contrast: active),
@@ -221,7 +219,7 @@
   .#{$prefix}--accordion.#{$prefix}--skeleton .#{$prefix}--accordion__arrow {
     cursor: default;
     pointer-events: none;
-    fill: $border-inverse;
+    fill: $icon-primary;
 
     &:hover,
     &:focus,

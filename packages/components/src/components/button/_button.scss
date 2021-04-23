@@ -444,7 +444,7 @@
   }
 
   .#{$prefix}--btn-set .#{$prefix}--btn.#{$prefix}--btn--disabled {
-    box-shadow: rem(-1px) 0 0 0 $layer-selected-disabled;
+    box-shadow: rem(-1px) 0 0 0 $icon-on-color-disabled;
 
     &:first-of-type {
       box-shadow: none;

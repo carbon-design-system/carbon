@@ -131,7 +131,6 @@
 
   .#{$prefix}--snippet--light.#{$prefix}--snippet--inline.#{$prefix}--snippet--no-copy:hover {
     background-color: $field-02;
-    // this???
     cursor: auto;
   }
 
@@ -303,7 +302,7 @@
   }
 
   .#{$prefix}--snippet-button:hover {
-    background: $background-hover;
+    background: $field-hover;
   }
 
   .#{$prefix}--snippet-button:active {
@@ -376,7 +375,7 @@
 
   .#{$prefix}--snippet-btn--expand:hover {
     color: $text-primary;
-    background: $background-hover;
+    background: $field-hover;
   }
 
   .#{$prefix}--snippet-btn--expand:active {
@@ -402,7 +401,6 @@
   .#{$prefix}--snippet--light .#{$prefix}--btn.#{$prefix}--snippet-btn--expand,
   .#{$prefix}--snippet--light .#{$prefix}--copy-btn {
     background-color: $field-02;
-    //?
   }
 
   .#{$prefix}--snippet--light.#{$prefix}--snippet--inline:hover,
@@ -518,12 +516,10 @@
 
   .#{$prefix}--snippet--light .#{$prefix}--snippet__overflow-indicator--left {
     background-image: linear-gradient(to left, transparent, $field-02);
-    // ?
   }
 
   .#{$prefix}--snippet--light .#{$prefix}--snippet__overflow-indicator--right {
     background-image: linear-gradient(to right, transparent, $field-02);
-    // ?
   }
 
   // Safari-only media query
