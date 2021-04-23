@@ -89,6 +89,7 @@
   }
 
   // Large styles
+  // V11: change lg to md
   .#{$prefix}--search--lg .#{$prefix}--search-input,
   .#{$prefix}--search--lg.#{$prefix}--search--expandable.#{$prefix}--search--expanded
     .#{$prefix}--search-input {
@@ -97,10 +98,12 @@
     padding: 0 $spacing-08;
   }
 
+  // V11: change lg to md
   .#{$prefix}--search--lg .#{$prefix}--search-magnifier-icon {
     left: rem(12px);
   }
 
+  // V11: change xl to lg
   .#{$prefix}--search--xl .#{$prefix}--search-input,
   .#{$prefix}--search--xl.#{$prefix}--search--expandable.#{$prefix}--search--expanded
     .#{$prefix}--search-input {
@@ -258,6 +261,7 @@
     }
   }
 
+  // V11: change lg to md
   .#{$prefix}--search--lg {
     .#{$prefix}--search-close,
     ~ .#{$prefix}--search-button,
@@ -272,6 +276,7 @@
     }
   }
 
+  // V11: change xl to lg
   .#{$prefix}--search--xl {
     .#{$prefix}--search-close,
     ~ .#{$prefix}--search-button,
@@ -291,6 +296,7 @@
     opacity: 0;
   }
 
+  // V11: change xl to lg, lg to md
   .#{$prefix}--search--xl.#{$prefix}--skeleton .#{$prefix}--search-input,
   .#{$prefix}--search--lg.#{$prefix}--skeleton .#{$prefix}--search-input,
   .#{$prefix}--search--sm.#{$prefix}--skeleton .#{$prefix}--search-input {
