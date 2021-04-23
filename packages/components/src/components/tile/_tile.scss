@@ -179,7 +179,7 @@
     transition: max-height $duration--fast-02 motion(standard, productive);
 
     .#{$prefix}--tile__chevron svg {
-      transform: rotate(-180deg);
+      transform: rotate(180deg);
     }
 
     .#{$prefix}--tile-content__below-the-fold {
