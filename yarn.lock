@@ -1926,6 +1926,7 @@ __metadata:
   resolution: "@carbon/styles@workspace:packages/styles"
   dependencies:
     "@carbon/colors": ^10.23.0
+    "@carbon/feature-flags": ^0.3.0
     "@carbon/grid": ^10.25.0
     "@carbon/layout": ^10.23.0
     "@carbon/motion": ^10.16.0

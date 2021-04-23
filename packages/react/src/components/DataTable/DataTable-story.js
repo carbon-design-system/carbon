@@ -36,8 +36,14 @@ const props = () => ({
   useZebraStyles: boolean('Zebra row styles (useZebraStyles)', false),
   size: select(
     'Row height (size)',
-    { compact: 'compact', short: 'short', tall: 'tall', none: null },
-    null
+    {
+      'Extra small (xs)': 'xs',
+      'Small (sm)': 'sm',
+      'Medium (md)': 'md',
+      'Large (lg) - default': 'lg',
+      'Extra Large (xl)': 'xl',
+    },
+    'lg'
   ),
   stickyHeader: boolean('Sticky header (experimental)', false),
 });
@@ -63,7 +69,7 @@ export default {
 };
 
 export const Usage = () => (
-  <DataTable rows={rows} headers={headers}>
+  <DataTable rows={rows} headers={headers} {...props()}>
     {({
       rows,
       headers,
@@ -152,7 +158,7 @@ export const BasicTable = () => {
 };
 
 export const WithOverflowMenu = () => (
-  <DataTable rows={rows} headers={headers}>
+  <DataTable rows={rows} headers={headers} {...props()}>
     {({ rows, headers, getHeaderProps, getRowProps, getTableProps }) => (
       <TableContainer title="DataTable" description="With overflow menu">
         <Table {...getTableProps()}>
@@ -173,7 +179,7 @@ export const WithOverflowMenu = () => (
                   <TableCell key={cell.id}>{cell.value}</TableCell>
                 ))}
                 <TableCell className="bx--table-column-menu">
-                  <OverflowMenu light flipped>
+                  <OverflowMenu size="sm" light flipped>
                     <OverflowMenuItem>Action 1</OverflowMenuItem>
                     <OverflowMenuItem>Action 2</OverflowMenuItem>
                     <OverflowMenuItem>Action 3</OverflowMenuItem>
@@ -189,7 +195,7 @@ export const WithOverflowMenu = () => (
 );
 
 export const WithToolbar = () => (
-  <DataTable rows={rows} headers={headers}>
+  <DataTable rows={rows} headers={headers} {...props()}>
     {({
       rows,
       headers,
@@ -312,7 +318,7 @@ export const WithCheckmarkColumns = () => {
   ];
 
   return (
-    <DataTable rows={rows} headers={headers}>
+    <DataTable rows={rows} headers={headers} {...props()}>
       {({
         rows,
         headers,
