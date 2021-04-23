@@ -19,6 +19,6 @@
   ],
   "dependencies": {
     "@babel/preset-env": "^7.12.13",
-    "jscodeshift": "^0.11.0"
+    "jscodeshift": "^0.12.0"
   }
 }
