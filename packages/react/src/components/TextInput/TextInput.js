@@ -261,6 +261,7 @@ TextInput.propTypes = {
    * Specify whether the control is currently in warning state
    */
   warn: PropTypes.bool,
+
   /**
    * Provide the text that is displayed when the control is in warning state
    */
