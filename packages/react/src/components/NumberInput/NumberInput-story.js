@@ -82,7 +82,6 @@ export default {
 export const Default = () => {
   return (
     <NumberInput
-      id="carbon-number"
       min={0}
       max={100}
       value={50}
