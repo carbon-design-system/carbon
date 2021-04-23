@@ -64,7 +64,14 @@ function transform(fileInfo, api, options) {
       // If they renamed the icon in the import, use that as the local name
       // import { IconName32 as CustomName } from '@carbon/icons-react';
       const newBinding =
-        imported.name === local.name ? j.identifier(name) : local;
+        imported.name === local.name ? j.identifier(getSafeBinding()) : local;
+
+      function getSafeBinding() {
+        if (rootScope.declares(name)) {
+          return `${name}Icon`;
+        }
+        return name;
+      }
 
       // No matter what, update the imported binding from IconName32 to IconName
       j(path).replaceWith(j.importSpecifier(j.identifier(name), newBinding));
@@ -86,8 +93,7 @@ function transform(fileInfo, api, options) {
           const { node: parent } = path.parent;
 
           // Replace the identifier name with the new binding name
-          path.get('name').replace(newBinding.name);
-          // path.replace(newBinding);
+          path.replace(newBinding);
 
           // If our identifier is inside of a JSXOpeningElement, then we need to
           // check to see if we need to add in the `size` prop that is now
@@ -99,6 +105,40 @@ function transform(fileInfo, api, options) {
                 j.jsxExpressionContainer(j.numericLiteral(size))
               )
             );
+          }
+
+          // Handle cases where the icon is referred to in an object, for
+          // example:
+          //
+          // from:
+          // const alias = { name: IconName24 };
+          //
+          // to:
+          // const alias = { name: (props) => <IconName size={24} {...props} /> };
+          //
+          // Since the `size` information needs to be provided, otherwise the
+          // default size will be used
+          if (j.Property.check(parent) && size !== defaultSize) {
+            path.parent
+              .get('value')
+              .replace(
+                j.arrowFunctionExpression(
+                  [j.identifier('props')],
+                  j.jsxElement(
+                    j.jsxOpeningElement(
+                      j.jsxIdentifier(newBinding.name),
+                      [
+                        j.jsxAttribute(
+                          j.jsxIdentifier('size'),
+                          j.jsxExpressionContainer(j.numericLiteral(size))
+                        ),
+                        j.jsxSpreadAttribute(j.identifier('props')),
+                      ],
+                      true
+                    )
+                  )
+                )
+              );
           }
         }
       });

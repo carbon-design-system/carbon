@@ -1,4 +1,12 @@
-import { Add32, Bee24, Caret20, DownArrow16 } from '@carbon/icons-react';
+import {
+  Add32,
+  Bee24,
+  Caret20,
+  DownArrow16,
+  Search24,
+  Zone24 as CustomZone,
+} from '@carbon/icons-react';
+import { Search } from 'test';
 
 function RendersIconDirectly() {
   return (
@@ -21,3 +29,22 @@ function RendersIconWithProps(props) {
     </div>
   );
 }
+
+function AliasedIcon() {
+  return <CustomZone />;
+}
+
+function ExistingScope() {
+  return (
+    <div>
+      <Search />
+      <Search24 />
+    </div>
+  );
+}
+
+const mapped = {
+  default: Add32,
+  // prettier-ignore
+  size: Bee24,
+};

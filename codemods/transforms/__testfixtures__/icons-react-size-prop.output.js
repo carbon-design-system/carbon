@@ -1,4 +1,12 @@
-import { Add, Bee, Caret, DownArrow } from '@carbon/icons-react/next';
+import {
+  Add,
+  Bee,
+  Caret,
+  DownArrow,
+  Search as SearchIcon,
+  Zone as CustomZone,
+} from '@carbon/icons-react/next';
+import { Search } from 'test';
 
 function RendersIconDirectly() {
   return (
@@ -21,3 +29,22 @@ function RendersIconWithProps(props) {
     </div>
   );
 }
+
+function AliasedIcon() {
+  return <CustomZone size={24} />;
+}
+
+function ExistingScope() {
+  return (
+    <div>
+      <Search />
+      <SearchIcon size={24} />
+    </div>
+  );
+}
+
+const mapped = {
+  default: Add,
+  // prettier-ignore
+  size: props => <Bee size={24} {...props} />,
+};
