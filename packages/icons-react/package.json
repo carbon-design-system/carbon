@@ -14,7 +14,8 @@
   "files": [
     "es",
     "lib",
-    "umd"
+    "umd",
+    "next"
   ],
   "keywords": [
     "ibm",
