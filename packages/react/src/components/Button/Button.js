@@ -15,6 +15,7 @@ import { composeEventHandlers } from '../../tools/events';
 import { keys, matches } from '../../internal/keyboard';
 import { useId } from '../../internal/useId';
 import toggleClass from '../../tools/toggleClass';
+import { useFeatureFlag } from '../FeatureFlags';
 
 const { prefix } = settings;
 const Button = React.forwardRef(function Button(
@@ -117,12 +118,16 @@ const Button = React.forwardRef(function Button(
     return () => document.removeEventListener('keydown', handleEscKeyDown);
   }, []);
 
+  const enabled = useFeatureFlag('enable-2021-release');
+
   const buttonClasses = classNames(className, {
     [`${prefix}--btn`]: true,
-    [`${prefix}--btn--field`]: size === 'field',
     [`${prefix}--btn--sm`]: size === 'small' || size === 'sm' || small,
-    [`${prefix}--btn--lg`]: size === 'lg',
-    [`${prefix}--btn--xl`]: size === 'xl',
+    [`${prefix}--btn--md`]: size === 'field' || size === 'md',
+    // V11: change lg to xl
+    [`${prefix}--btn--lg`]: enabled ? size === 'xl' : size === 'lg',
+    // V11: change xl to 2xl
+    [`${prefix}--btn--xl`]: enabled ? size === '2xl' : size === 'xl',
     [`${prefix}--btn--${kind}`]: kind,
     [`${prefix}--btn--disabled`]: disabled,
     [`${prefix}--tooltip--hidden`]: hasIconOnly && !allowTooltipVisibility,
@@ -131,7 +136,8 @@ const Button = React.forwardRef(function Button(
     [`${prefix}--btn--selected`]: hasIconOnly && isSelected && kind === 'ghost',
     [`${prefix}--tooltip__trigger`]: hasIconOnly,
     [`${prefix}--tooltip--a11y`]: hasIconOnly,
-    [`${prefix}--tooltip--${tooltipPosition}`]: hasIconOnly && tooltipPosition,
+    [`${prefix}--btn--icon-only--${tooltipPosition}`]:
+      hasIconOnly && tooltipPosition,
     [`${prefix}--tooltip--align-${tooltipAlignment}`]:
       hasIconOnly && tooltipAlignment,
   });
@@ -322,9 +328,19 @@ Button.propTypes = {
 
   /**
    * Specify the size of the button, from a list of available sizes.
-   * For `default` buttons, this prop can remain unspecified.
+   * For `default` buttons, this prop can remain unspecified or use `default`.
+   * In the next major release of Carbon, `default`, `field`, and `small` will be removed
    */
-  size: PropTypes.oneOf(['default', 'field', 'small', 'sm', 'lg', 'xl']),
+  size: PropTypes.oneOf([
+    'default',
+    'field',
+    'small',
+    'sm',
+    'md',
+    'lg',
+    'xl',
+    '2xl',
+  ]),
 
   /**
    * Deprecated in v10 in favor of `size`.
