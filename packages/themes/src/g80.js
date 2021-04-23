@@ -112,7 +112,6 @@ export const layerHover = adjustLightness(layer, +7);
 export const fieldHover = adjustLightness(field, +7);
 export const backgroundInverseHover = adjustLightness(backgroundInverse, -5);
 
-// No token listed in notion doc
 export const linkPrimaryHover = blue30;
 
 export const buttonDangerHover = adjustLightness(buttonDangerPrimary, -8);
@@ -174,7 +173,7 @@ export const link02 = linkSecondary;
 export const inverseLink = linkInverse;
 
 export const field01 = field;
-export const field02 = gray70;
+export const field02 = gray60;
 
 export const inverse01 = textInverse;
 export const inverse02 = backgroundInverse;
@@ -202,26 +201,26 @@ export const activePrimary = buttonPrimaryActive;
 
 export const hoverPrimaryText = linkPrimaryHover;
 
-export const hoverSecondary = '#606060';
-export const activeSecondary = gray80;
+export const hoverSecondary = buttonSecondaryHover;
+export const activeSecondary = buttonSecondaryActive;
 
-export const hoverTertiary = gray10;
-export const activeTertiary = gray30;
+export const hoverTertiary = buttonTertiaryHover;
+export const activeTertiary = buttonTertiaryActive;
 
 export const hoverUI = backgroundHover;
-export const hoverLightUI = '#656565';
+export const hoverLightUI = '#5E5E5E';
 export const activeUI = backgroundActive;
 export const activeLightUI = gray50;
 export const selectedUI = backgroundSelected;
-export const selectedLightUI = gray60;
+export const selectedLightUI = gray50;
 export const inverseHoverUI = backgroundInverseHover;
 
-export const hoverSelectedUI = backgroundSelectedHover;
+export const hoverSelectedUI = layerSelectedHover;
 
 export const hoverDanger = buttonDangerHover;
 export const activeDanger = buttonDangerActive;
 
-export const hoverRow = '#4c4c4c';
+export const hoverRow = layerHover;
 
 export const visitedLink = linkVisited;
 
