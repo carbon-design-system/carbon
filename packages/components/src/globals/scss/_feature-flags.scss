@@ -33,9 +33,25 @@ $default-feature-flags: (
   grid-columns-16: false,
   grid--fallback: false,
   enable-css-custom-properties: false,
+  enable-2021-release: false,
 );
 
 $feature-flags: map-merge($default-feature-flags, $feature-flags);
+
+@if feature-flag-enabled('enable-2021-release') == true {
+  @if variable-exists(css--disable-css-custom-properties) ==
+    false or
+    $css--disable-css-custom-properties ==
+    false
+  {
+    $feature-flags: map-merge(
+      $feature-flags,
+      (
+        enable-css-custom-properties: true,
+      )
+    );
+  }
+}
 
 @if map-get($feature-flags, grid) != true {
   // We supported a flag for experimental grid in the past that we want to keep

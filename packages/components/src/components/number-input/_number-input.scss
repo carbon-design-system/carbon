@@ -22,6 +22,7 @@
     position: relative;
     display: flex;
     flex-direction: column;
+    width: 100%;
   }
 
   .#{$prefix}--number input[type='number'] {
@@ -35,12 +36,12 @@
     height: rem(40px);
     padding-right: rem(128px);
     padding-left: $carbon--spacing-05;
-    color: $text-01;
+    color: $text-primary;
     font-weight: 300;
     font-family: carbon--font-family('mono');
-    background-color: $field-01;
+    background-color: $field;
     border: 0;
-    border-bottom: rem(1px) solid $ui-04;
+    border-bottom: rem(1px) solid $border-strong;
     border-radius: 0;
     transition: background-color $duration--fast-01 motion(standard, productive),
       outline $duration--fast-01 motion(standard, productive);
@@ -58,7 +59,7 @@
     }
 
     &:disabled ~ .#{$prefix}--number__controls svg {
-      fill: $disabled;
+      fill: $icon-disabled;
     }
 
     // IE: Hide "clear-field" `x` button on input field
@@ -72,7 +73,9 @@
     }
   }
 
-  .#{$prefix}--number--xl.#{$prefix}--number input[type='number'] {
+  // TODO V11: Remove xl selector
+  .#{$prefix}--number--xl.#{$prefix}--number input[type='number'],
+  .#{$prefix}--number--lg.#{$prefix}--number input[type='number'] {
     padding-right: rem(144px);
   }
 
@@ -82,8 +85,8 @@
 
   .#{$prefix}--number input[type='number']:disabled,
   .#{$prefix}--number--readonly input[type='number'] {
-    color: $disabled;
-    background-color: $disabled-01;
+    color: $text-disabled;
+    background-color: $field-disabled;
     border-bottom-color: transparent;
     cursor: not-allowed;
   }
@@ -125,8 +128,8 @@
     align-items: center;
     justify-content: center;
     height: 100%;
-    color: $icon-01;
-    border-bottom: rem(1px) solid $ui-04;
+    color: $icon-primary;
+    border-bottom: rem(1px) solid $border-strong;
 
     &::before,
     &::after {
@@ -136,7 +139,7 @@
       width: rem(2px);
       // height: calc(100% - 4px) is calculated differently in Safari
       height: rem(36px);
-      background-color: $field-01;
+      background-color: $field;
       content: '';
     }
 
@@ -155,19 +158,19 @@
     &:focus {
       @include focus-outline;
 
-      color: $icon-01;
+      color: $icon-primary;
       outline-width: 2px;
       outline-offset: -2px;
     }
 
     &:hover {
-      color: $icon-01;
-      background-color: $hover-ui;
+      color: $icon-primary;
+      background-color: $field-hover;
       cursor: pointer;
 
       &::before,
       &::after {
-        background-color: $hover-ui;
+        background-color: $field-hover;
       }
     }
 
@@ -179,7 +182,7 @@
     }
 
     &:disabled {
-      color: $disabled;
+      color: $text-disabled;
       border-bottom-color: transparent;
       cursor: not-allowed;
     }
@@ -234,7 +237,7 @@
     input[type='number'][data-invalid]
     ~ .#{$prefix}--number__controls
     .#{$prefix}--number__control-btn.up-icon::after {
-    background-color: $support-01;
+    background-color: $support-error;
   }
 
   .#{$prefix}--number
@@ -253,7 +256,7 @@
     z-index: z('overlay');
     width: rem(1px);
     height: rem(16px);
-    background-color: $ui-03;
+    background-color: $border-subtle;
 
     &:first-of-type {
       order: 0;
@@ -270,9 +273,10 @@
   .#{$prefix}--number__invalid
     + .#{$prefix}--number__controls
     .#{$prefix}--number__rule-divider:first-of-type {
-    background-color: $ui-03;
+    background-color: $border-subtle;
   }
 
+  // V11: Possibly deprecate
   .#{$prefix}--number--light .#{$prefix}--number__rule-divider,
   .#{$prefix}--number--light
     .#{$prefix}--number__invalid
@@ -292,7 +296,7 @@
     input[type='number']:disabled
     + .#{$prefix}--number__controls
     .#{$prefix}--number__rule-divider {
-    background-color: $disabled-02;
+    background-color: $icon-disabled;
   }
 
   .#{$prefix}--number__control-btn:focus ~ .#{$prefix}--number__rule-divider {
@@ -306,10 +310,12 @@
   .#{$prefix}--number__invalid {
     position: absolute;
     right: rem(96px);
-    fill: $support-01;
+    fill: $support-error;
   }
 
-  .#{$prefix}--number--xl .#{$prefix}--number__invalid {
+  // TODO V11: Remove xl selector
+  .#{$prefix}--number--xl .#{$prefix}--number__invalid,
+  .#{$prefix}--number--lg .#{$prefix}--number__invalid {
     right: rem(112px);
   }
 
@@ -322,7 +328,11 @@
     right: rem(80px);
   }
 
+  // TODO V11: Remove xl selector
   .#{$prefix}--number--xl
+    .#{$prefix}--number__invalid
+    + .#{$prefix}--number__rule-divider,
+  .#{$prefix}--number--lg
     .#{$prefix}--number__invalid
     + .#{$prefix}--number__rule-divider {
     right: rem(96px);
@@ -346,7 +356,7 @@
   }
 
   .#{$prefix}--number__invalid--warning {
-    fill: $support-03;
+    fill: $support-warning;
   }
 
   .#{$prefix}--number__invalid--warning path:first-of-type {
@@ -354,10 +364,12 @@
     fill: $carbon__black-100;
   }
 
+  // V11: Possibly deprecate
   .#{$prefix}--number--light input[type='number'] {
     background-color: $field-02;
   }
 
+  // V11: Possibly deprecate
   .#{$prefix}--number--light input[type='number']:disabled,
   .#{$prefix}--number--light
     .#{$prefix}--number--readonly
@@ -365,6 +377,7 @@
     background-color: $field-02;
   }
 
+  // V11: Possibly deprecate
   .#{$prefix}--number--light .#{$prefix}--number__control-btn::before,
   .#{$prefix}--number--light .#{$prefix}--number__control-btn::after {
     background-color: $field-02;
@@ -375,6 +388,7 @@
     background-color: transparent;
   }
 
+  // V11: Possibly deprecate
   .#{$prefix}--number--light .#{$prefix}--number__control-btn:hover,
   .#{$prefix}--number--light .#{$prefix}--number__control-btn:hover::before,
   .#{$prefix}--number--light .#{$prefix}--number__control-btn:hover::after {
@@ -382,15 +396,21 @@
   }
 
   // Size Variant styles
-  .#{$prefix}--number--xl input[type='number'] {
+  // TODO V11: Remove xl selector
+  .#{$prefix}--number--xl input[type='number'],
+  .#{$prefix}--number--lg input[type='number'] {
     height: rem(48px);
   }
 
-  .#{$prefix}--number--xl .#{$prefix}--number__controls {
+  // TODO V11: Remove xl selector
+  .#{$prefix}--number--xl .#{$prefix}--number__controls,
+  .#{$prefix}--number--lg .#{$prefix}--number__controls {
     width: rem(96px);
   }
 
-  .#{$prefix}--number--xl .#{$prefix}--number__control-btn {
+  // TODO V11: Remove xl selector
+  .#{$prefix}--number--xl .#{$prefix}--number__control-btn,
+  .#{$prefix}--number--lg .#{$prefix}--number__control-btn {
     width: rem(48px);
 
     &::before,

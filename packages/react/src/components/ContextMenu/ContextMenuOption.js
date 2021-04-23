@@ -55,6 +55,7 @@ function ContextMenuOption({
   children,
   disabled,
   indented,
+  kind = 'default',
   label,
   level,
   onClick = () => {},
@@ -133,6 +134,8 @@ function ContextMenuOption({
   const classes = classnames(`${prefix}--context-menu-option`, {
     [`${prefix}--context-menu-option--disabled`]: disabled,
     [`${prefix}--context-menu-option--active`]: subOptions && submenuOpen,
+    [`${prefix}--context-menu-option--danger`]:
+      !subOptions && kind === 'danger',
   });
 
   const allowedRoles = ['menuitemradio', 'menuitemcheckbox'];
@@ -232,6 +235,11 @@ ContextMenuOption.propTypes = {
    * Is automatically set by ContextMenu
    */
   indented: PropTypes.bool,
+
+  /**
+   * Optional prop to specify the kind of the ContextMenuOption
+   */
+  kind: PropTypes.oneOf(['default', 'danger']),
 
   /**
    * Rendered label for the ContextMenuOption

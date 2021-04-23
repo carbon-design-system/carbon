@@ -1885,6 +1885,7 @@ exports[`DataTable should render 1`] = `
                   </TableToolbarAction>
                 </TableToolbarMenu>
                 <Button
+                  dangerDescription="danger"
                   disabled={false}
                   kind="primary"
                   onClick={[MockFunction]}
@@ -2044,6 +2045,7 @@ exports[`DataTable should render 1`] = `
                     }
                   >
                     <Button
+                      dangerDescription="danger"
                       disabled={false}
                       kind="primary"
                       onClick={[MockFunction]}
@@ -2060,11 +2062,12 @@ exports[`DataTable should render 1`] = `
                       type="button"
                     >
                       <button
+                        aria-describedby={null}
                         aria-pressed={null}
                         className="bx--btn bx--btn--primary"
                         disabled={false}
                         onBlur={[Function]}
-                        onClick={[MockFunction]}
+                        onClick={[Function]}
                         onFocus={[Function]}
                         onMouseEnter={[Function]}
                         onMouseLeave={[Function]}
@@ -2121,6 +2124,7 @@ exports[`DataTable should render 1`] = `
                     }
                   >
                     <Button
+                      dangerDescription="danger"
                       disabled={false}
                       kind="primary"
                       onClick={[MockFunction]}
@@ -2137,11 +2141,12 @@ exports[`DataTable should render 1`] = `
                       type="button"
                     >
                       <button
+                        aria-describedby={null}
                         aria-pressed={null}
                         className="bx--btn bx--btn--primary"
                         disabled={false}
                         onBlur={[Function]}
-                        onClick={[MockFunction]}
+                        onClick={[Function]}
                         onFocus={[Function]}
                         onMouseEnter={[Function]}
                         onMouseLeave={[Function]}
@@ -2198,6 +2203,7 @@ exports[`DataTable should render 1`] = `
                     }
                   >
                     <Button
+                      dangerDescription="danger"
                       disabled={false}
                       kind="primary"
                       onClick={[MockFunction]}
@@ -2214,11 +2220,12 @@ exports[`DataTable should render 1`] = `
                       type="button"
                     >
                       <button
+                        aria-describedby={null}
                         aria-pressed={null}
                         className="bx--btn bx--btn--primary"
                         disabled={false}
                         onBlur={[Function]}
-                        onClick={[MockFunction]}
+                        onClick={[Function]}
                         onFocus={[Function]}
                         onMouseEnter={[Function]}
                         onMouseLeave={[Function]}
@@ -2267,6 +2274,7 @@ exports[`DataTable should render 1`] = `
                   </TableBatchAction>
                   <Button
                     className="bx--batch-summary__cancel"
+                    dangerDescription="danger"
                     disabled={false}
                     kind="primary"
                     onClick={[Function]}
@@ -2277,6 +2285,7 @@ exports[`DataTable should render 1`] = `
                     type="button"
                   >
                     <button
+                      aria-describedby={null}
                       aria-pressed={null}
                       className="bx--batch-summary__cancel bx--btn bx--btn--primary"
                       disabled={false}
@@ -2325,35 +2334,39 @@ exports[`DataTable should render 1`] = `
                     className="bx--search bx--search--sm bx--toolbar-search-container-persistent"
                     role="search"
                   >
-                    <ForwardRef(Search16)
+                    <div
                       className="bx--search-magnifier"
                     >
-                      <Icon
-                        className="bx--search-magnifier"
-                        fill="currentColor"
-                        height={16}
-                        preserveAspectRatio="xMidYMid meet"
-                        viewBox="0 0 16 16"
-                        width={16}
-                        xmlns="http://www.w3.org/2000/svg"
+                      <ForwardRef(Search16)
+                        className="bx--search-magnifier-icon"
                       >
-                        <svg
-                          aria-hidden={true}
-                          className="bx--search-magnifier"
+                        <Icon
+                          className="bx--search-magnifier-icon"
                           fill="currentColor"
-                          focusable="false"
                           height={16}
                           preserveAspectRatio="xMidYMid meet"
                           viewBox="0 0 16 16"
                           width={16}
                           xmlns="http://www.w3.org/2000/svg"
                         >
-                          <path
-                            d="M15,14.3L10.7,10c1.9-2.3,1.6-5.8-0.7-7.7S4.2,0.7,2.3,3S0.7,8.8,3,10.7c2,1.7,5,1.7,7,0l4.3,4.3L15,14.3z M2,6.5	C2,4,4,2,6.5,2S11,4,11,6.5S9,11,6.5,11S2,9,2,6.5z"
-                          />
-                        </svg>
-                      </Icon>
-                    </ForwardRef(Search16)>
+                          <svg
+                            aria-hidden={true}
+                            className="bx--search-magnifier-icon"
+                            fill="currentColor"
+                            focusable="false"
+                            height={16}
+                            preserveAspectRatio="xMidYMid meet"
+                            viewBox="0 0 16 16"
+                            width={16}
+                            xmlns="http://www.w3.org/2000/svg"
+                          >
+                            <path
+                              d="M15,14.3L10.7,10c1.9-2.3,1.6-5.8-0.7-7.7S4.2,0.7,2.3,3S0.7,8.8,3,10.7c2,1.7,5,1.7,7,0l4.3,4.3L15,14.3z M2,6.5	C2,4,4,2,6.5,2S11,4,11,6.5S9,11,6.5,11S2,9,2,6.5z"
+                            />
+                          </svg>
+                        </Icon>
+                      </ForwardRef(Search16)>
+                    </div>
                     <label
                       className="bx--label"
                       htmlFor="custom-id"
@@ -2521,6 +2534,7 @@ exports[`DataTable should render 1`] = `
                 </ForwardRef(OverflowMenu)>
               </TableToolbarMenu>
               <Button
+                dangerDescription="danger"
                 disabled={false}
                 kind="primary"
                 onClick={[MockFunction]}
@@ -2531,11 +2545,12 @@ exports[`DataTable should render 1`] = `
                 type="button"
               >
                 <button
+                  aria-describedby={null}
                   aria-pressed={null}
                   className="bx--btn bx--btn--sm bx--btn--primary"
                   disabled={false}
                   onBlur={[Function]}
-                  onClick={[MockFunction]}
+                  onClick={[Function]}
                   onFocus={[Function]}
                   onMouseEnter={[Function]}
                   onMouseLeave={[Function]}
@@ -2558,7 +2573,7 @@ exports[`DataTable should render 1`] = `
           className="bx--data-table-content"
         >
           <table
-            className="bx--data-table bx--data-table--no-border"
+            className="bx--data-table bx--data-table--normal bx--data-table--no-border"
           >
             <TableHead>
               <thead>
@@ -2909,6 +2924,7 @@ exports[`DataTable sticky header should render 1`] = `
                   </TableToolbarAction>
                 </TableToolbarMenu>
                 <Button
+                  dangerDescription="danger"
                   disabled={false}
                   kind="primary"
                   onClick={[MockFunction]}
@@ -3071,6 +3087,7 @@ exports[`DataTable sticky header should render 1`] = `
                     }
                   >
                     <Button
+                      dangerDescription="danger"
                       disabled={false}
                       kind="primary"
                       onClick={[MockFunction]}
@@ -3087,11 +3104,12 @@ exports[`DataTable sticky header should render 1`] = `
                       type="button"
                     >
                       <button
+                        aria-describedby={null}
                         aria-pressed={null}
                         className="bx--btn bx--btn--primary"
                         disabled={false}
                         onBlur={[Function]}
-                        onClick={[MockFunction]}
+                        onClick={[Function]}
                         onFocus={[Function]}
                         onMouseEnter={[Function]}
                         onMouseLeave={[Function]}
@@ -3148,6 +3166,7 @@ exports[`DataTable sticky header should render 1`] = `
                     }
                   >
                     <Button
+                      dangerDescription="danger"
                       disabled={false}
                       kind="primary"
                       onClick={[MockFunction]}
@@ -3164,11 +3183,12 @@ exports[`DataTable sticky header should render 1`] = `
                       type="button"
                     >
                       <button
+                        aria-describedby={null}
                         aria-pressed={null}
                         className="bx--btn bx--btn--primary"
                         disabled={false}
                         onBlur={[Function]}
-                        onClick={[MockFunction]}
+                        onClick={[Function]}
                         onFocus={[Function]}
                         onMouseEnter={[Function]}
                         onMouseLeave={[Function]}
@@ -3225,6 +3245,7 @@ exports[`DataTable sticky header should render 1`] = `
                     }
                   >
                     <Button
+                      dangerDescription="danger"
                       disabled={false}
                       kind="primary"
                       onClick={[MockFunction]}
@@ -3241,11 +3262,12 @@ exports[`DataTable sticky header should render 1`] = `
                       type="button"
                     >
                       <button
+                        aria-describedby={null}
                         aria-pressed={null}
                         className="bx--btn bx--btn--primary"
                         disabled={false}
                         onBlur={[Function]}
-                        onClick={[MockFunction]}
+                        onClick={[Function]}
                         onFocus={[Function]}
                         onMouseEnter={[Function]}
                         onMouseLeave={[Function]}
@@ -3294,6 +3316,7 @@ exports[`DataTable sticky header should render 1`] = `
                   </TableBatchAction>
                   <Button
                     className="bx--batch-summary__cancel"
+                    dangerDescription="danger"
                     disabled={false}
                     kind="primary"
                     onClick={[Function]}
@@ -3304,6 +3327,7 @@ exports[`DataTable sticky header should render 1`] = `
                     type="button"
                   >
                     <button
+                      aria-describedby={null}
                       aria-pressed={null}
                       className="bx--batch-summary__cancel bx--btn bx--btn--primary"
                       disabled={false}
@@ -3352,35 +3376,39 @@ exports[`DataTable sticky header should render 1`] = `
                     className="bx--search bx--search--sm bx--toolbar-search-container-persistent"
                     role="search"
                   >
-                    <ForwardRef(Search16)
+                    <div
                       className="bx--search-magnifier"
                     >
-                      <Icon
-                        className="bx--search-magnifier"
-                        fill="currentColor"
-                        height={16}
-                        preserveAspectRatio="xMidYMid meet"
-                        viewBox="0 0 16 16"
-                        width={16}
-                        xmlns="http://www.w3.org/2000/svg"
+                      <ForwardRef(Search16)
+                        className="bx--search-magnifier-icon"
                       >
-                        <svg
-                          aria-hidden={true}
-                          className="bx--search-magnifier"
+                        <Icon
+                          className="bx--search-magnifier-icon"
                           fill="currentColor"
-                          focusable="false"
                           height={16}
                           preserveAspectRatio="xMidYMid meet"
                           viewBox="0 0 16 16"
                           width={16}
                           xmlns="http://www.w3.org/2000/svg"
                         >
-                          <path
-                            d="M15,14.3L10.7,10c1.9-2.3,1.6-5.8-0.7-7.7S4.2,0.7,2.3,3S0.7,8.8,3,10.7c2,1.7,5,1.7,7,0l4.3,4.3L15,14.3z M2,6.5	C2,4,4,2,6.5,2S11,4,11,6.5S9,11,6.5,11S2,9,2,6.5z"
-                          />
-                        </svg>
-                      </Icon>
-                    </ForwardRef(Search16)>
+                          <svg
+                            aria-hidden={true}
+                            className="bx--search-magnifier-icon"
+                            fill="currentColor"
+                            focusable="false"
+                            height={16}
+                            preserveAspectRatio="xMidYMid meet"
+                            viewBox="0 0 16 16"
+                            width={16}
+                            xmlns="http://www.w3.org/2000/svg"
+                          >
+                            <path
+                              d="M15,14.3L10.7,10c1.9-2.3,1.6-5.8-0.7-7.7S4.2,0.7,2.3,3S0.7,8.8,3,10.7c2,1.7,5,1.7,7,0l4.3,4.3L15,14.3z M2,6.5	C2,4,4,2,6.5,2S11,4,11,6.5S9,11,6.5,11S2,9,2,6.5z"
+                            />
+                          </svg>
+                        </Icon>
+                      </ForwardRef(Search16)>
+                    </div>
                     <label
                       className="bx--label"
                       htmlFor="custom-id"
@@ -3548,6 +3576,7 @@ exports[`DataTable sticky header should render 1`] = `
                 </ForwardRef(OverflowMenu)>
               </TableToolbarMenu>
               <Button
+                dangerDescription="danger"
                 disabled={false}
                 kind="primary"
                 onClick={[MockFunction]}
@@ -3558,11 +3587,12 @@ exports[`DataTable sticky header should render 1`] = `
                 type="button"
               >
                 <button
+                  aria-describedby={null}
                   aria-pressed={null}
                   className="bx--btn bx--btn--sm bx--btn--primary"
                   disabled={false}
                   onBlur={[Function]}
-                  onClick={[MockFunction]}
+                  onClick={[Function]}
                   onFocus={[Function]}
                   onMouseEnter={[Function]}
                   onMouseLeave={[Function]}
@@ -3589,7 +3619,7 @@ exports[`DataTable sticky header should render 1`] = `
             className="bx--data-table-content"
           >
             <table
-              className="bx--data-table bx--data-table--no-border bx--data-table--sticky-header"
+              className="bx--data-table bx--data-table--normal bx--data-table--no-border bx--data-table--sticky-header"
             >
               <TableHead>
                 <thead>

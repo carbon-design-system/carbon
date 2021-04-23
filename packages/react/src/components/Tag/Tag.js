@@ -88,7 +88,11 @@ const Tag = ({
   const ComponentTag = other.onClick ? 'button' : 'div';
 
   return (
-    <ComponentTag className={tagClasses} id={tagId} {...other}>
+    <ComponentTag
+      disabled={ComponentTag === 'button' ? disabled : null}
+      className={tagClasses}
+      id={tagId}
+      {...other}>
       {CustomIconElement ? (
         <div className={`${prefix}--tag__custom-icon`}>
           <CustomIconElement />
@@ -142,9 +146,9 @@ Tag.propTypes = {
 
   /**
    * Specify the size of the Tag. Currently supports either `sm` or
-   * default sizes.
+   * 'md' (default) sizes.
    */
-  size: PropTypes.oneOf(['sm']),
+  size: PropTypes.oneOf(['sm', 'md']),
 
   /**
    * Text to show on clear filters

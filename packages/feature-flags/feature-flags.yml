@@ -14,3 +14,11 @@ feature-flags:
       Enable components to be created in either a controlled or uncontrolled
       mode
     enabled: false
+  - name: enable-css-grid
+    description: >
+      Enable CSS Grid Layout in the Grid and Column React components
+    enabled: false
+  - name: enable-2021-release
+    description: >
+      Enable the features and functionality for the 2021 Release
+    enabled: false

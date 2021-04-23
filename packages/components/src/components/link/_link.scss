@@ -25,20 +25,21 @@
     @include reset;
     @include type-style('body-short-01');
 
-    color: $link-01;
+    display: inline-flex;
+    color: $link-primary;
     text-decoration: none;
     outline: none;
     transition: color $duration--fast-01 motion(standard, productive);
 
     &:hover {
-      color: $hover-primary-text;
+      color: $link-primary-hover;
       text-decoration: underline;
     }
 
     &:active,
     &:active:visited,
     &:active:visited:hover {
-      color: $text-01;
+      color: $text-primary;
       text-decoration: underline;
     }
 
@@ -47,11 +48,11 @@
     }
 
     &:visited {
-      color: $link-01;
+      color: $link-primary;
     }
 
     &:visited:hover {
-      color: $hover-primary-text;
+      color: $link-primary-hover;
     }
   }
 
@@ -60,19 +61,18 @@
     @include reset;
     @include type-style('body-short-01');
 
-    display: inline;
-    color: $disabled-02;
+    color: $text-disabled;
     font-weight: 400;
     text-decoration: none;
     cursor: not-allowed;
   }
 
   .#{$prefix}--link.#{$prefix}--link--visited:visited {
-    color: $visited-link;
+    color: $link-visited;
   }
 
   .#{$prefix}--link.#{$prefix}--link--visited:visited:hover {
-    color: $hover-primary-text;
+    color: $link-primary-hover;
   }
 
   .#{$prefix}--link.#{$prefix}--link--inline {
@@ -94,6 +94,12 @@
 
   .#{$prefix}--link--lg {
     @include type-style('body-short-02');
+  }
+
+  .#{$prefix}--link__icon {
+    display: inline-flex;
+    align-self: center;
+    margin-left: $spacing-03;
   }
 }
 

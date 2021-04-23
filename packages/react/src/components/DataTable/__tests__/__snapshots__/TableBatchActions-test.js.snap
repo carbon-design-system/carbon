@@ -29,6 +29,7 @@ exports[`DataTable.TableBatchActions should render 1`] = `
       >
         <Button
           className="bx--batch-summary__cancel"
+          dangerDescription="danger"
           disabled={false}
           kind="primary"
           onClick={[MockFunction]}
@@ -39,11 +40,12 @@ exports[`DataTable.TableBatchActions should render 1`] = `
           type="button"
         >
           <button
+            aria-describedby={null}
             aria-pressed={null}
             className="bx--batch-summary__cancel bx--btn bx--btn--primary"
             disabled={false}
             onBlur={[Function]}
-            onClick={[MockFunction]}
+            onClick={[Function]}
             onFocus={[Function]}
             onMouseEnter={[Function]}
             onMouseLeave={[Function]}
@@ -88,6 +90,7 @@ exports[`DataTable.TableBatchActions should render 2`] = `
       >
         <Button
           className="bx--batch-summary__cancel"
+          dangerDescription="danger"
           disabled={false}
           kind="primary"
           onClick={[MockFunction]}
@@ -98,11 +101,12 @@ exports[`DataTable.TableBatchActions should render 2`] = `
           type="button"
         >
           <button
+            aria-describedby={null}
             aria-pressed={null}
             className="bx--batch-summary__cancel bx--btn bx--btn--primary"
             disabled={false}
             onBlur={[Function]}
-            onClick={[MockFunction]}
+            onClick={[Function]}
             onFocus={[Function]}
             onMouseEnter={[Function]}
             onMouseLeave={[Function]}

@@ -21,7 +21,7 @@
     min-width: 13rem;
     max-width: 18rem;
     padding: $spacing-02 0;
-    background-color: $ui-01;
+    background-color: $layer;
     visibility: hidden;
   }
 
@@ -40,7 +40,8 @@
   .#{$prefix}--context-menu-option {
     position: relative;
     height: $spacing-07;
-    background-color: $ui-01;
+    color: $text-primary;
+    background-color: $layer;
     cursor: pointer;
     transition: background-color $duration--fast-01 motion(standard, productive);
 
@@ -51,7 +52,13 @@
 
   .#{$prefix}--context-menu-option--active,
   .#{$prefix}--context-menu-option:hover {
-    background-color: $hover-ui;
+    background-color: $layer-hover;
+  }
+
+  .#{$prefix}--context-menu-option--danger:hover,
+  .#{$prefix}--context-menu-option--danger:focus {
+    color: $text-on-color;
+    background-color: $button-danger-primary;
   }
 
   .#{$prefix}--context-menu-option > .#{$prefix}--context-menu {
@@ -67,17 +74,9 @@
   }
 
   .#{$prefix}--context-menu-option__content--disabled {
-    background-color: $ui-01;
+    color: $text-disabled;
+    background-color: $layer;
     cursor: not-allowed;
-  }
-
-  .#{$prefix}--context-menu-option__content--disabled
-    .#{$prefix}--context-menu-option__label,
-  .#{$prefix}--context-menu-option__content--disabled
-    .#{$prefix}--context-menu-option__info,
-  .#{$prefix}--context-menu-option__content--disabled
-    .#{$prefix}--context-menu-option__icon {
-    color: $disabled-02;
   }
 
   .#{$prefix}--context-menu-option__content--indented
@@ -92,7 +91,6 @@
     // add top/bottom padding to make sure letters are not cut off by hidden overflow
     padding: $spacing-02 0;
     overflow: hidden;
-    color: $text-01;
     white-space: nowrap;
     text-align: start;
     text-overflow: ellipsis;
@@ -101,7 +99,6 @@
   .#{$prefix}--context-menu-option__info {
     display: inline-flex;
     margin-left: $spacing-05;
-    color: $icon-01;
   }
 
   .#{$prefix}--context-menu-option__icon {
@@ -110,14 +107,13 @@
     width: 1rem;
     height: 1rem;
     margin-right: $spacing-03;
-    color: $icon-01;
   }
 
   .#{$prefix}--context-menu-divider {
     width: 100%;
     height: 1px;
     margin: $spacing-02 0;
-    background-color: $ui-03;
+    background-color: $border-subtle;
   }
 }
 

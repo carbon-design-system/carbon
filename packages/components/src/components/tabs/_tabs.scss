@@ -402,6 +402,10 @@
   //-----------------------------
   .#{$prefix}--tab-content {
     padding: $carbon--spacing-05;
+
+    &:focus {
+      @include focus-outline('outline');
+    }
   }
 
   //-----------------------------

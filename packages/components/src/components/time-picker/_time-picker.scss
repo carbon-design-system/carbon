@@ -61,16 +61,17 @@
     }
   }
 
+  // V11: Possibly deprecate
   .#{$prefix}--time-picker--light .#{$prefix}--select-input {
     background-color: $field-02;
 
     &:hover {
-      background-color: $hover-ui;
+      background-color: $field-hover;
     }
 
     &:disabled,
     &:hover:disabled {
-      color: $disabled-02;
+      color: $text-disabled;
       background-color: transparent;
       border-bottom: 1px solid transparent;
       cursor: not-allowed;
@@ -83,8 +84,11 @@
     max-height: rem(32px);
   }
 
+  // TODO V11: Remove xl selector
   .#{$prefix}--time-picker--xl .#{$prefix}--select-input,
-  .#{$prefix}--time-picker--xl .#{$prefix}--time-picker__input-field {
+  .#{$prefix}--time-picker--xl .#{$prefix}--time-picker__input-field,
+  .#{$prefix}--time-picker--lg .#{$prefix}--select-input,
+  .#{$prefix}--time-picker--lg .#{$prefix}--time-picker__input-field {
     height: rem(48px);
     max-height: rem(48px);
   }

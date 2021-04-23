@@ -295,7 +295,7 @@ export function ToastNotification({
       if (savedOnClose.current) {
         savedOnClose.current(event);
       }
-    });
+    }, timeout);
     return () => {
       window.clearTimeout(timeoutId);
     };
