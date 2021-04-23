@@ -127,22 +127,40 @@ function transform(fileInfo, api, options) {
           // map to React.createElement instead of using as the JSX Opening
           // Element directly
           if (newBinding.name[0] === newBinding.name[0].toLowerCase()) {
+            const refProperty = j.objectProperty(
+              j.identifier('ref'),
+              j.identifier('ref')
+            );
+            refProperty.shorthand = true;
+
             replacement = j.arrowFunctionExpression(
               [j.identifier('props')],
               j.callExpression(
                 j.memberExpression(
                   j.identifier('React'),
-                  j.identifier('createElement')
+                  j.identifier('forwardRef')
                 ),
                 [
-                  newBinding,
-                  j.objectExpression([
-                    j.objectProperty(
-                      j.identifier('size'),
-                      j.numericLiteral(size)
-                    ),
-                    j.spreadElement(j.identifier('props')),
-                  ]),
+                  j.arrowFunctionExpression(
+                    [j.identifier('props'), j.identifier('ref')],
+                    j.callExpression(
+                      j.memberExpression(
+                        j.identifier('React'),
+                        j.identifier('createElement')
+                      ),
+                      [
+                        newBinding,
+                        j.objectExpression([
+                          refProperty,
+                          j.objectProperty(
+                            j.identifier('size'),
+                            j.numericLiteral(size)
+                          ),
+                          j.spreadElement(j.identifier('props')),
+                        ]),
+                      ]
+                    )
+                  ),
                 ]
               )
             );

@@ -49,8 +49,9 @@ const mapped = {
   // prettier-ignore
   size: props => <Bee size={24} {...props} />,
   // prettier-ignore
-  lowercase: props => React.createElement(chevron, {
+  lowercase: props => React.forwardRef((props, ref) => React.createElement(chevron, {
+    ref,
     size: 16,
     ...props
-  }),
+  })),
 };
