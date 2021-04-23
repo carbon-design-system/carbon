@@ -24,7 +24,7 @@ const props = () => ({
 });
 
 export default {
-  title: 'Components/Skeleton/SkeletonPlaceholder',
+  title: 'Components/Skeleton',
   decorators: [withKnobs],
 
   parameters: {
@@ -35,7 +35,7 @@ export default {
   },
 };
 
-export const Default = () => (
+export const _SkeletonPlaceholder = () => (
   <div style={{ height: '250px', width: '250px' }}>
     <style
       dangerouslySetInnerHTML={{
@@ -60,15 +60,3 @@ export const Default = () => (
     <SkeletonPlaceholder {...props()} />
   </div>
 );
-
-Default.parameters = {
-  info: {
-    text: `
-    Skeleton states are used as a progressive loading state while the user waits for content to load.
-
-    By taking a height and/or width property, this component can be used when you know the exact dimensions of the incoming content, such as an image.
-
-    However, for performance reasons, it's recommended to create a class in your stylesheet to set the dimensions.
-  `,
-  },
-};

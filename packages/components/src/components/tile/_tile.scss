@@ -24,7 +24,7 @@
     min-width: 8rem;
     min-height: 4rem;
     padding: $carbon--spacing-05;
-    background-color: $ui-01;
+    background-color: $layer;
     outline: 2px solid transparent;
     outline-offset: -2px;
 
@@ -33,6 +33,7 @@
     }
   }
 
+  // V11: Possibly deprecate
   .#{$prefix}--tile--light {
     background-color: $ui-02;
   }
@@ -44,7 +45,7 @@
     transition: $duration--moderate-01 motion(standard, productive);
 
     &:hover {
-      background: $hover-ui;
+      background: $layer-hover;
     }
   }
 
@@ -71,7 +72,7 @@
     @include reset;
     @include type-style('body-short-01');
 
-    color: $text-01;
+    color: $text-primary;
     text-decoration: none;
   }
 
@@ -79,19 +80,16 @@
   .#{$prefix}--tile--clickable:active,
   .#{$prefix}--tile--clickable:visited,
   .#{$prefix}--tile--clickable:visited:hover {
-    color: $text-01;
+    color: $text-primary;
     text-decoration: none;
   }
 
   // Disabled ClickableTile
-  .#{$prefix}--tile--clickable.#{$prefix}--link--disabled {
-    color: $disabled-02;
-  }
-
+  .#{$prefix}--tile--clickable.#{$prefix}--link--disabled,
   .#{$prefix}--tile--clickable:hover.#{$prefix}--link--disabled {
     display: block;
-    color: $disabled-02;
-    background-color: $disabled-01;
+    color: $text-disabled;
+    background-color: $layer-disabled;
   }
 
   .#{$prefix}--tile--selectable {
@@ -115,7 +113,7 @@
 
     svg {
       border-radius: 50%;
-      fill: $icon-02;
+      fill: $icon-secondary;
     }
 
     &:focus {
@@ -135,7 +133,7 @@
       margin-left: $carbon--spacing-03;
       transform-origin: center;
       transition: $duration--fast-02 motion(standard, productive);
-      fill: $ui-05;
+      fill: $icon-primary;
 
       // Windows, Firefox HCM Fix
       @media screen and (-ms-high-contrast: active),
@@ -202,7 +200,7 @@
   }
 
   .#{$prefix}--tile--is-selected {
-    border: 1px solid $ui-05;
+    border: 1px solid $layer-selected-inverse;
   }
 
   .#{$prefix}--tile--is-selected .#{$prefix}--tile__checkmark {
@@ -210,7 +208,7 @@
   }
 
   .#{$prefix}--tile--is-selected .#{$prefix}--tile__checkmark svg {
-    fill: $ui-05;
+    fill: $icon-primary;
 
     // Windows, Firefox HCM Fix
     @media screen and (-ms-high-contrast: active),
@@ -222,18 +220,18 @@
 
   // Fix double border
   .#{$prefix}--tile-input--checked + .#{$prefix}--tile--is-selected {
-    border-top: 1px solid $ui-01;
+    border-top: 1px solid $layer;
   }
 
   .#{$prefix}--tile:not(.#{$prefix}--tile--is-selected)
     + .#{$prefix}--tile-input--checked
     + .#{$prefix}--tile--is-selected {
-    border-top: 1px solid $ui-05;
+    border-top: 1px solid $layer-selected-inverse;
   }
 
   .#{$prefix}--tile-input--checked:first-of-type
     + .#{$prefix}--tile--is-selected {
-    border-top: 1px solid $ui-05;
+    border-top: 1px solid $layer-selected-inverse;
   }
 
   .#{$prefix}--tile-content {
@@ -250,23 +248,38 @@
   }
 
   .#{$prefix}--tile--disabled.#{$prefix}--tile--selectable {
-    color: $disabled-02;
-    background-color: $ui-01;
+    color: $text-disabled;
+    background-color: $layer;
     cursor: not-allowed;
   }
 
+  // V11: Possibly deprecate
   .#{$prefix}--tile--disabled.#{$prefix}--tile--selectable.#{$prefix}--tile--light {
     background-color: $ui-02;
   }
 
   .#{$prefix}--tile--disabled.#{$prefix}--tile--is-selected {
-    outline-color: $disabled-02;
+    border-color: $button-disabled;
+  }
+
+  // Disabled style overrides necessary for double border fix (L223)
+  .#{$prefix}--tile-input--checked
+    + .#{$prefix}--tile--disabled.#{$prefix}--tile--is-selected {
+    border-top: 1px solid $layer;
+  }
+
+  .#{$prefix}--tile-input--checked:first-of-type
+    + .#{$prefix}--tile--disabled.#{$prefix}--tile--is-selected,
+  .#{$prefix}--tile:not(.#{$prefix}--tile--is-selected)
+    + .#{$prefix}--tile-input--checked
+    + .#{$prefix}--tile--disabled.#{$prefix}--tile--is-selected {
+    border-top: 1px solid $button-disabled;
   }
 
   .#{$prefix}--tile--disabled.#{$prefix}--tile--is-selected
     .#{$prefix}--tile__checkmark
     svg {
-    fill: $disabled-02;
+    fill: $icon-disabled;
   }
 }
 
