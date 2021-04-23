@@ -96,6 +96,7 @@ export RadioButtonGroup from './components/RadioButtonGroup';
 export Search from './components/Search';
 export SearchFilterButton from './components/SearchFilterButton';
 export SearchLayoutButton from './components/SearchLayoutButton';
+export ExpandableSearch from './components/ExpandableSearch';
 export SecondaryButton from './components/SecondaryButton';
 export Select from './components/Select';
 export SelectItem from './components/SelectItem';
@@ -109,6 +110,7 @@ export {
   StructuredListRow,
   StructuredListInput,
   StructuredListCell,
+  StructuredListSkeleton,
 } from './components/StructuredList';
 export Tab from './components/Tab';
 export TabContent from './components/TabContent';
@@ -158,7 +160,6 @@ export RadioButtonSkeleton from './components/RadioButton/RadioButton.Skeleton';
 export SearchSkeleton from './components/Search/Search.Skeleton';
 export SelectSkeleton from './components/Select/Select.Skeleton';
 export SliderSkeleton from './components/Slider/Slider.Skeleton';
-export StructuredListSkeleton from './components/StructuredList/StructuredList.Skeleton';
 export TabsSkeleton from './components/Tabs/Tabs.Skeleton';
 export TagSkeleton from './components/Tag/Tag.Skeleton';
 export TextAreaSkeleton from './components/TextArea/TextArea.Skeleton';
@@ -201,9 +202,26 @@ export {
 
 // Experimental
 export {
+  FeatureFlags as unstable_FeatureFlags,
+  useFeatureFlag as unstable_useFeatureFlag,
+  useFeatureFlags as unstable_useFeatureFlags,
+} from './components/FeatureFlags';
+export {
   PageSelector as unstable_PageSelector,
   Pagination as unstable_Pagination,
 } from './components/Pagination/experimental';
 export unstable_TreeView, {
   TreeNode as unstable_TreeNode,
 } from './components/TreeView';
+export unstable_ContextMenu, {
+  ContextMenuDivider as unstable_ContextMenuDivider,
+  ContextMenuGroup as unstable_ContextMenuGroup,
+  ContextMenuItem as unstable_ContextMenuItem,
+  ContextMenuRadioGroup as unstable_ContextMenuRadioGroup,
+  ContextMenuSelectableItem as unstable_ContextMenuSelectableItem,
+  useContextMenu as unstable_useContextMenu,
+} from './components/ContextMenu';
+export {
+  Heading as unstable_Heading,
+  Section as unstable_Section,
+} from './components/Heading';

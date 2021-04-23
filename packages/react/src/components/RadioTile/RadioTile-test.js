@@ -145,4 +145,13 @@ describe('RadioButton', () => {
       expect(call[2].target).toBe(inputElement);
     });
   });
+
+  it('supports disabled state', () => {
+    const wrapper = render({
+      disabled: true,
+    });
+
+    const input = () => wrapper.find('input');
+    expect(input().props().disabled).toEqual(true);
+  });
 });

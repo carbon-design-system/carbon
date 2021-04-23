@@ -6,59 +6,37 @@
  */
 
 import { featureFlagInfo } from './generated/feature-flags';
+import { FeatureFlagScope } from './FeatureFlagScope';
 
-const featureFlags = new Map();
+const FeatureFlags = createScope();
 
 for (let i = 0; i < featureFlagInfo.length; i++) {
   const featureFlag = featureFlagInfo[i];
-  featureFlags.set(featureFlag.name, featureFlag.enabled);
+  FeatureFlags.add(featureFlag.name, featureFlag.enabled);
 }
 
-/**
- * Check to see if a flag exists
- * @param {string} name
- */
-function checkForFlag(name) {
-  if (!featureFlags.has(name)) {
-    throw new Error(`Unable to find a feature flag with the name \`${name}\``);
-  }
+export { FeatureFlags };
+
+export function createScope(flags) {
+  return new FeatureFlagScope(flags);
 }
 
-/**
- * Add a feature flag
- * @param {string} name
- * @param {boolean} enabled
- */
-export function addFeatureFlag(name, enabled) {
-  featureFlags.set(name, enabled);
+export function add(...args) {
+  return FeatureFlags.add(...args);
 }
 
-/**
- * Enable a feature flag
- * @param {string} name
- */
-export function enableFeatureFlag(name) {
-  checkForFlag(name);
-  featureFlags.set(name, true);
+export function enable(...args) {
+  return FeatureFlags.enable(...args);
 }
 
-/**
- * Disable a feature flag
- * @param {string} name
- */
-export function disableFeatureFlag(name) {
-  checkForFlag(name);
-  featureFlags.set(name, false);
+export function disable(...args) {
+  return FeatureFlags.disable(...args);
 }
 
-/**
- * Check if a feature flag is enabled
- * @param {string} name
- * @returns {boolean}
- */
-export function featureFlagEnabled(name) {
-  checkForFlag(name);
-  return featureFlags.get(name);
+export function enabled(...args) {
+  return FeatureFlags.enabled(...args);
 }
 
-export { featureFlagInfo as unstable_featureFlagInfo };
+export function merge(...args) {
+  return FeatureFlags.merge(...args);
+}

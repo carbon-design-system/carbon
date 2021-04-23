@@ -13,7 +13,7 @@ import {
   StructuredListBody,
   StructuredListRow,
   StructuredListCell,
-} from '../StructuredList';
+} from './StructuredList';
 import { mount, shallow } from 'enzyme';
 import { settings } from 'carbon-components';
 
@@ -95,7 +95,7 @@ describe('StructuredListInput', () => {
     it('Should render unique id with multiple inputs when no id prop is given', () => {
       const wrapper1 = mount(<StructuredListInput className="extra-class" />);
       const wrapper2 = mount(<StructuredListInput className="extra-class" />);
-      expect(wrapper1.instance().uid).not.toEqual(wrapper2.instance().uid);
+      expect(wrapper1.find('[id]')).not.toEqual(wrapper2.find('[id]'));
     });
   });
 });

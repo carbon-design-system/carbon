@@ -36,6 +36,7 @@
     min-height: rem(24px);
     margin: $carbon--spacing-02;
     padding: $carbon--spacing-02 $carbon--spacing-03;
+    vertical-align: middle;
     word-break: break-word;
     border-radius: rem(15px);
     cursor: default;
@@ -126,12 +127,17 @@
   }
 
   .#{$prefix}--tag--high-contrast {
-    @include tag-theme($inverse-02, $inverse-01, $inverse-hover-ui);
+    @include tag-theme(
+      $background-inverse,
+      $text-inverse,
+      $background-inverse-hover
+    );
   }
 
   .#{$prefix}--tag--disabled,
-  .#{$prefix}--tag--filter.#{$prefix}--tag--disabled {
-    @include tag-theme($disabled-01, $disabled-02);
+  .#{$prefix}--tag--filter.#{$prefix}--tag--disabled,
+  .#{$prefix}--tag--interactive.#{$prefix}--tag--disabled {
+    @include tag-theme($layer-disabled, $text-disabled);
 
     &:hover {
       cursor: not-allowed;
@@ -145,6 +151,15 @@
     text-overflow: ellipsis;
   }
 
+  .#{$prefix}--tag--interactive:focus {
+    outline: none;
+    box-shadow: inset 0 0 0 1px $focus;
+  }
+
+  .#{$prefix}--tag--interactive:hover {
+    cursor: pointer;
+  }
+
   // tags used for filtering
   .#{$prefix}--tag--filter {
     padding-top: 0;
@@ -155,6 +170,10 @@
     &:hover {
       outline: none;
     }
+  }
+
+  .#{$prefix}--tag--interactive {
+    transition: background-color $duration--fast-01 motion(entrance, productive);
   }
 
   .#{$prefix}--tag__close-icon {
@@ -212,7 +231,7 @@
   }
 
   .#{$prefix}--tag--high-contrast .#{$prefix}--tag__close-icon:focus {
-    box-shadow: inset 0 0 0 1px $inverse-focus-ui;
+    box-shadow: inset 0 0 0 1px $focus-inverse;
   }
 
   .#{$prefix}--tag--filter.#{$prefix}--tag--disabled
@@ -221,7 +240,7 @@
   }
 
   .#{$prefix}--tag--filter.#{$prefix}--tag--disabled svg {
-    fill: $disabled-02;
+    fill: $icon-disabled;
   }
 
   // small tags
@@ -243,7 +262,10 @@
   // Skeleton state
   .#{$prefix}--tag.#{$prefix}--skeleton {
     @include skeleton;
-    @include tag-theme($bg-color: $skeleton-01, $text-color: $text-01);
+    @include tag-theme(
+      $bg-color: $skeleton-background,
+      $text-color: $text-primary
+    );
 
     width: rem(60px);
     overflow: hidden;

@@ -16,8 +16,10 @@
   // -------------------------------------
   // Sortable table
   // -------------------------------------
-  .#{$prefix}--data-table--sort th {
-    height: $layout-04;
+  .#{$prefix}--data-table--sort th,
+  .#{$prefix}--data-table th[aria-sort] {
+    height: $spacing-09;
+    padding: 0;
     border-top: none;
     border-bottom: none;
   }
@@ -33,11 +35,11 @@
     justify-content: space-between;
     width: 100%;
     min-height: 100%;
-    color: $text-01;
-
+    padding-left: $spacing-05;
+    color: $text-primary;
     font: inherit;
     line-height: 1;
-    background-color: $ui-03;
+    background-color: $layer-accent;
     transition: background-color $duration--fast-01 motion(entrance, productive),
       outline $duration--fast-01 motion(entrance, productive);
   }
@@ -56,10 +58,18 @@
     opacity: 1;
   }
 
+  // Override for when `isSortable` is set on `DataTable` as well as `TableHeader`
+  .#{$prefix}--data-table.#{$prefix}--data-table--sort
+    th
+    > .#{$prefix}--table-header-label {
+    padding-right: $spacing-05;
+    padding-left: $spacing-05;
+  }
+
   // -------------------------------------
   // Th > Button > Span (span required for flex bugs in Safari)
   // -------------------------------------
-  .#{$prefix}--data-table--sort th .#{$prefix}--table-sort__flex {
+  th .#{$prefix}--table-sort__flex {
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -68,7 +78,8 @@
     min-height: 3rem;
   }
 
-  .#{$prefix}--data-table--sort:not(.#{$prefix}--data-table--compact):not(.#{$prefix}--data-table--short):not(.#{$prefix}--data-table--tall)
+  // V11: Remove compact, short, tall
+  .#{$prefix}--data-table--sort:not(.#{$prefix}--data-table--compact):not(.#{$prefix}--data-table--short):not(.#{$prefix}--data-table--tall):not(.#{$prefix}--data-table--xs):not(.#{$prefix}--data-table--sm):not(.#{$prefix}--data-table--md):not(.#{$prefix}--data-table--xl)
     th
     .#{$prefix}--table-sort__flex {
     /* IE11 workaround for align-items: center and min-height
@@ -79,19 +90,37 @@
     }
   }
 
+  // V11: remove compact
   .#{$prefix}--data-table--compact.#{$prefix}--data-table--sort
+    th
+    .#{$prefix}--table-sort__flex,
+  .#{$prefix}--data-table--xs.#{$prefix}--data-table--sort
     th
     .#{$prefix}--table-sort__flex {
     min-height: 1.5rem;
   }
 
+  // V11: remove short
   .#{$prefix}--data-table--short.#{$prefix}--data-table--sort
+    th
+    .#{$prefix}--table-sort__flex,
+  .#{$prefix}--data-table--sm.#{$prefix}--data-table--sort
     th
     .#{$prefix}--table-sort__flex {
     min-height: 2rem;
   }
 
+  .#{$prefix}--data-table--md.#{$prefix}--data-table--sort
+    th
+    .#{$prefix}--table-sort__flex {
+    min-height: 2.5rem;
+  }
+
+  // V11: remove tall
   .#{$prefix}--data-table--tall.#{$prefix}--data-table--sort
+    th
+    .#{$prefix}--table-sort__flex,
+  .#{$prefix}--data-table--xl.#{$prefix}--data-table--sort
     th
     .#{$prefix}--table-sort__flex {
     align-items: flex-start;
@@ -112,11 +141,11 @@
 
   .#{$prefix}--table-sort__icon-unsorted {
     width: rem(20px);
-    min-width: $layout-01;
+    min-width: $spacing-05;
     margin-right: $spacing-03;
     margin-left: $spacing-03;
     opacity: 0;
-    fill: $ui-05;
+    fill: $icon-primary;
   }
 
   .#{$prefix}--table-sort.#{$prefix}--table-sort--active {
@@ -141,13 +170,13 @@
 
   .#{$prefix}--table-sort__icon {
     width: rem(20px);
-    min-width: $layout-01;
+    min-width: $spacing-05;
     margin-right: $spacing-03;
     margin-left: $spacing-03;
     transform: rotate(0);
     opacity: 1;
     transition: transform $transition--base $carbon--standard-easing;
-    fill: $ui-05;
+    fill: $icon-primary;
   }
 
   // Windows, Firefox HCM Fix
@@ -164,29 +193,48 @@
   // Compact, Short, Tall Sortable
   //----------------------------------------------------------------------------
   // Sortable compact
-  .#{$prefix}--data-table--compact.#{$prefix}--data-table--sort th {
+  // V11: remove compact
+  .#{$prefix}--data-table--compact.#{$prefix}--data-table--sort th,
+  .#{$prefix}--data-table--xs.#{$prefix}--data-table--sort th {
     height: rem(24px);
   }
 
   // Sortable Short
-  .#{$prefix}--data-table--short.#{$prefix}--data-table--sort th {
+  // V11: remove short
+  .#{$prefix}--data-table--short.#{$prefix}--data-table--sort th,
+  .#{$prefix}--data-table--sm.#{$prefix}--data-table--sort th {
     height: rem(32px);
   }
 
+  // Sortable Medium
+  // V11: remove short
+  .#{$prefix}--data-table--md.#{$prefix}--data-table--sort th {
+    height: rem(40px);
+  }
+
   // Sortable Tall
-  .#{$prefix}--data-table--tall.#{$prefix}--data-table--sort th {
+  // V11: remove tall
+  .#{$prefix}--data-table--tall.#{$prefix}--data-table--sort th,
+  .#{$prefix}--data-table--xl.#{$prefix}--data-table--sort th {
     height: rem(64px);
   }
 
+  // V11: remove tall
   .#{$prefix}--data-table--tall.#{$prefix}--data-table--sort
+    th
+    .#{$prefix}--table-sort,
+  .#{$prefix}--data-table--xl.#{$prefix}--data-table--sort
     th
     .#{$prefix}--table-sort {
     display: inline-block;
     height: rem(64px);
   }
 
+  // V11: remove tall
   .#{$prefix}--data-table--tall .#{$prefix}--table-sort__icon-unsorted,
-  .#{$prefix}--data-table--tall .#{$prefix}--table-sort__icon {
+  .#{$prefix}--data-table--tall .#{$prefix}--table-sort__icon,
+  .#{$prefix}--data-table--xl .#{$prefix}--table-sort__icon-unsorted,
+  .#{$prefix}--data-table--xl .#{$prefix}--table-sort__icon {
     margin-top: rem(13px);
   }
 }

@@ -22,6 +22,7 @@ async function build() {
       Metadata.extensions.deprecated,
       Metadata.extensions.output,
       Metadata.extensions.categories,
+      Metadata.extensions.moduleInfo,
     ],
   });
 

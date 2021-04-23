@@ -144,7 +144,7 @@ const ExampleDropContainerApp = (props) => {
 
   return (
     <FormItem>
-      <strong className={labelClasses}>Upload files</strong>
+      <p className={labelClasses}>Upload files</p>
       <p className={helperTextClasses}>
         Max file size is 500kb. Supported file types are .jpg and .png.
       </p>

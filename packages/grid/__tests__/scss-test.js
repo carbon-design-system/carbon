@@ -21,7 +21,7 @@ describe('@carbon/grid', () => {
 
       $_: get('variables', meta.module-variables('grid'));
       $_: get('mixins', (
-        grid: meta.mixin-exists('grid', 'grid'),
+        grid: meta.mixin-exists('css-grid', 'grid'),
       ));
     `);
 

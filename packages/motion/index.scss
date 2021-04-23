@@ -54,3 +54,33 @@ $easings: (
 @mixin motion($name, $mode) {
   transition-timing-function: motion($name, $mode);
 }
+
+/// @access public
+/// @type Duration
+/// @group @carbon/motion
+$duration-fast-01: 70ms;
+
+/// @access public
+/// @type Duration
+/// @group @carbon/motion
+$duration-fast-02: 110ms;
+
+/// @access public
+/// @type Duration
+/// @group @carbon/motion
+$duration-moderate-01: 150ms;
+
+/// @access public
+/// @type Duration
+/// @group @carbon/motion
+$duration-moderate-02: 240ms;
+
+/// @access public
+/// @type Duration
+/// @group @carbon/motion
+$duration-slow-01: 400ms;
+
+/// @access public
+/// @type Duration
+/// @group @carbon/motion
+$duration-slow-02: 700ms;

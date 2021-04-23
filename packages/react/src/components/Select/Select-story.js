@@ -16,9 +16,9 @@ import SelectSkeleton from '../Select/Select.Skeleton';
 import mdx from './Select.mdx';
 
 const sizes = {
-  'Extra large size (xl)': 'xl',
-  'Default size': undefined,
-  'Small size (sm)': 'sm',
+  'Small  (sm)': 'sm',
+  'Medium (md) - default': undefined,
+  'Large  (lg)': 'lg',
 };
 
 const props = {
@@ -40,6 +40,11 @@ const props = {
     labelText: text('Label text (labelText)', 'Select'),
     helperText: text('Helper text (helperText)', 'Optional helper text.'),
     onChange: action('onChange'),
+    warn: boolean('Show warning state (warn)', false),
+    warnText: text(
+      'Warning state text (warnText)',
+      'This will overwrite your current settings'
+    ),
   }),
   group: () => ({
     disabled: boolean('Disabled (disabled in <SelectItemGroup>)', false),

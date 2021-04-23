@@ -10,6 +10,7 @@ import { settings } from 'carbon-components';
 import cx from 'classnames';
 import PropTypes from 'prop-types';
 import { AriaLabelPropType } from '../../prop-types/AriaPropTypes';
+import { CARBON_SIDENAV_ITEMS } from './_utils';
 // TO-DO: comment back in when footer is added for rails
 // import SideNavFooter from './SideNavFooter';
 
@@ -32,6 +33,7 @@ const SideNav = React.forwardRef(function SideNav(props, ref) {
     isPersistent,
     addFocusListeners,
     addMouseListeners,
+    ...other
   } = props;
 
   const { current: controlled } = useRef(expandedProp !== undefined);
@@ -74,7 +76,7 @@ const SideNav = React.forwardRef(function SideNav(props, ref) {
 
   const overlayClassName = cx({
     [`${prefix}--side-nav__overlay`]: true,
-    [`${prefix}--side-nav__overlay-active`]: expanded,
+    [`${prefix}--side-nav__overlay-active`]: expanded || expandedViaHoverState,
   });
 
   let childrenToRender = children;
@@ -86,8 +88,13 @@ const SideNav = React.forwardRef(function SideNav(props, ref) {
       let currentExpansionState = controlled
         ? expandedViaHoverState || expanded
         : expanded;
+      // avoid spreading `isSideNavExpanded` to non-Carbon UI Shell children
       return React.cloneElement(child, {
-        isSideNavExpanded: currentExpansionState,
+        ...(CARBON_SIDENAV_ITEMS.includes(child.type?.displayName)
+          ? {
+              isSideNavExpanded: currentExpansionState,
+            }
+          : {}),
       });
     });
   }
@@ -120,7 +127,8 @@ const SideNav = React.forwardRef(function SideNav(props, ref) {
         ref={ref}
         className={`${prefix}--side-nav__navigation ${className}`}
         {...accessibilityLabel}
-        {...eventHandlers}>
+        {...eventHandlers}
+        {...other}>
         {childrenToRender}
       </nav>
     </>
@@ -128,13 +136,14 @@ const SideNav = React.forwardRef(function SideNav(props, ref) {
 });
 
 SideNav.defaultProps = {
-  translateById: (id) => {
-    const translations = {
-      'carbon.sidenav.state.open': 'Close',
-      'carbon.sidenav.state.closed': 'Open',
-    };
-    return translations[id];
-  },
+  // TO-DO: comment back in when footer is added for rails
+  // translateById: (id) => {
+  //   const translations = {
+  //     'carbon.sidenav.state.open': 'Close',
+  //     'carbon.sidenav.state.closed': 'Open',
+  //   };
+  //   return translations[id];
+  // },
   defaultExpanded: false,
   isChildOfHeader: true,
   isFixedNav: false,

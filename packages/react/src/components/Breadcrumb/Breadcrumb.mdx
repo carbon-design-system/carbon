@@ -3,7 +3,7 @@ import { Breadcrumb, BreadcrumbItem, BreadcrumbSkeleton } from '../Breadcrumb';
 
 # Breadcrumb
 
-[Source code](https://github.com/carbon-design-system/carbon/tree/master/packages/react/src/components/Breadcrumb)
+[Source code](https://github.com/carbon-design-system/carbon/tree/main/packages/react/src/components/Breadcrumb)
 &nbsp;|&nbsp;
 [Usage guidelines](https://www.carbondesignsystem.com/components/breadcrumb/usage)
 &nbsp;|&nbsp;
@@ -25,7 +25,18 @@ You can build a breadcrumb using a combination of the `Breadcrumb` and
 responsible for displaying the page links in the hierarchy.
 
 <Preview>
-  <Story id="breadcrumb--breadcrumb" />
+  <Story id="components-breadcrumb--breadcrumb" />
+</Preview>
+
+## Breadcrumb with `OverflowMenu`
+
+When space becomes limited, use an `OverflowMenu` to truncate the breadcrumbs.
+The first and last two page links should be shown, but the remaining breadcrumbs
+in between are condensed into an overflow menu. Breadcrumbs should never wrap
+onto a second line.
+
+<Preview>
+  <Story id="breadcrumb--breadcrumb-with-overflow-menu" />
 </Preview>
 
 ## Skeleton state
@@ -35,7 +46,7 @@ breadcrumb. This is useful to display while content in your breadcrumb is being
 fetched from an external resource like an API.
 
 <Preview>
-  <Story id="breadcrumb--skeleton" />
+  <Story id="components-breadcrumb--skeleton" />
 </Preview>
 
 ## Component API
@@ -74,4 +85,4 @@ current page.
 
 Help us improve this component by providing feedback, asking questions on Slack,
 or updating this file on
-[GitHub](https://github.com/carbon-design-system/carbon/edit/master/packages/react/src/components/Breadcrumb/Breadcrumb.mdx).
+[GitHub](https://github.com/carbon-design-system/carbon/edit/main/packages/react/src/components/Breadcrumb/Breadcrumb.mdx).

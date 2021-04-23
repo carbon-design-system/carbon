@@ -17,9 +17,14 @@
   .#{$prefix}--structured-list--selection .#{$prefix}--structured-list-th {
     @include padding--data-structured-list;
   }
-
-  .#{$prefix}--structured-list-input {
-    display: none;
+  @if feature-flag-enabled('enable-2021-release') {
+    .#{$prefix}--structured-list-row--focused-within {
+      @include focus-outline('outline');
+    }
+  } @else {
+    .#{$prefix}--structured-list-input {
+      display: none;
+    }
   }
 
   .#{$prefix}--structured-list {
@@ -62,10 +67,11 @@
     cursor: inherit;
   }
 
-  .#{$prefix}--structured-list-row:focus:not(.#{$prefix}--structured-list-row--header-row) {
-    @include focus-outline('outline');
+  @if not feature-flag-enabled('enable-2021-release') {
+    .#{$prefix}--structured-list-row:focus:not(.#{$prefix}--structured-list-row--header-row) {
+      @include focus-outline('outline');
+    }
   }
-
   .#{$prefix}--structured-list--selection
     .#{$prefix}--structured-list-row:hover:not(.#{$prefix}--structured-list-row--header-row)
     > .#{$prefix}--structured-list-td,
@@ -77,7 +83,11 @@
   .#{$prefix}--structured-list--selection
     .#{$prefix}--structured-list-row:hover:not(.#{$prefix}--structured-list-row--header-row)
     > .#{$prefix}--structured-list-td {
-    border-top: 1px solid $ui-01;
+    @if feature-flag-enable('enabled-2021-release') {
+      border-top: 1px solid $ui-03;
+    } @else {
+      border-top: 1px solid $ui-01;
+    }
   }
 
   .#{$prefix}--structured-list-thead {
@@ -96,7 +106,7 @@
     font-weight: 600;
     text-align: left;
     text-transform: $structured-list-text-transform;
-    vertical-align: bottom;
+    vertical-align: top;
   }
 
   .#{$prefix}--structured-list-tbody {
@@ -113,6 +123,10 @@
     display: table-cell;
     max-width: 36rem;
     color: $text-02;
+    @if feature-flag-enabled('enable-2021-release') {
+      border-top: 1px solid $ui-03;
+    }
+
     transition: color $duration--fast-02 motion(standard, productive);
   }
 

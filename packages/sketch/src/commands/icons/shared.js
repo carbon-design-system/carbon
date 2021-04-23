@@ -14,6 +14,49 @@ import { syncSymbol } from '../../tools/symbols';
 
 const metadata = require('../../../generated/icons/metadata.json');
 
+/**
+ * Returns the formatted icon symbol name, given an icon object and a size value
+ * @param {object} params - getSymbolName parameters
+ * @param {object} params.icon - an icon object from the icon metadata
+ * @param {number} params.size
+ * @returns {string} - formatted icon symbol name:
+ * `[icon.subcategory] / [icon.subcategory] / <name> / <size>`
+ */
+function getSymbolName({ icon, size }) {
+  const symbolName = `${icon.name} / ${size}`;
+  if (icon.category && icon.subcategory) {
+    return `${icon.category} / ${icon.subcategory} / ${symbolName}`;
+  }
+
+  return symbolName;
+}
+
+/**
+ * Remove deprecated icon symbols from the current Sketch document
+ * @param {object} params - removeDeprecatedSymbolArtboards parameters
+ * @param {Array<object>} params.icons - array of all icon object metadata
+ * @param {Array<number>} params.sizes - array of icon sizes
+ * @param {Page} params.symbolsPage - the symbols page as identified by Sketch
+ */
+function removeDeprecatedSymbolArtboards({ icons, sizes, symbolsPage }) {
+  const deprecatedIcons = icons.reduce((deprecatedIconsMap, currentIcon) => {
+    if (currentIcon.deprecated) {
+      sizes.forEach((size) => {
+        const symbolName = getSymbolName({ icon: currentIcon, size });
+        deprecatedIconsMap.set(symbolName, currentIcon);
+      });
+    }
+
+    return deprecatedIconsMap;
+  }, new Map());
+
+  symbolsPage.layers.forEach((symbol) => {
+    if (deprecatedIcons.get(symbol.name)) {
+      symbol.remove();
+    }
+  });
+}
+
 export function syncIconSymbols({
   document,
   symbols,
@@ -30,6 +73,12 @@ export function syncIconSymbols({
       'Unexpected error occurred, expected shared style but found none'
     );
   }
+
+  removeDeprecatedSymbolArtboards({
+    icons: metadata.icons,
+    sizes,
+    symbolsPage,
+  });
 
   const artboards = createSVGArtboards(
     symbolsPage,
@@ -70,7 +119,7 @@ function getInitialPageOffset(page) {
 
 /**
  * Create the SVG artboards for a given set of icons and sizes and place them in
- * the given page with the given shared style set as th e fill.
+ * the given page with the given shared style set as the fill.
  * @param {Page} page
  * @param {SharedStyle} sharedStyle
  * @param {Array} icons
@@ -114,12 +163,7 @@ function createSVGArtboards(
           },
         };
 
-        let symbolName = `${icon.name} / ${size}`;
-
-        if (icon.category && icon.subcategory) {
-          symbolName = `${icon.category} / ${icon.subcategory} / ${symbolName}`;
-        }
-
+        const symbolName = getSymbolName({ icon, size });
         const artboard = new Artboard({
           name: symbolName,
           frame: new Rectangle(X_OFFSET, Y_OFFSET, size, size),

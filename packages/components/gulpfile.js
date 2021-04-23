@@ -360,7 +360,8 @@ const buildStyles = (prod) => {
       .pipe(
         postcss([
           autoprefixer({
-            browsers: ['> 1%', 'last 2 versions'],
+            browsers: ['> 1%', 'last 2 versions', 'ie >= 11'],
+            grid: 'autoplace',
           }),
         ])
       )
@@ -421,7 +422,8 @@ gulp.task('sass:dev', () => {
       postcss([
         customProperties(),
         autoprefixer({
-          browsers: ['> 1%', 'last 2 versions'],
+          browsers: ['> 1%', 'last 2 versions', 'ie >= 11'],
+          grid: 'autoplace',
         }),
       ])
     )

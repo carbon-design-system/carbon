@@ -6,7 +6,7 @@
  */
 
 import PropTypes from 'prop-types';
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import cx from 'classnames';
 import { settings } from 'carbon-components';
 import {
@@ -157,9 +157,11 @@ export function NotificationTextDetails({
         <div className={`${prefix}--toast-notification__subtitle`}>
           {subtitle}
         </div>
-        <div className={`${prefix}--toast-notification__caption`}>
-          {caption}
-        </div>
+        {caption && (
+          <div className={`${prefix}--toast-notification__caption`}>
+            {caption}
+          </div>
+        )}
         {children}
       </div>
     );
@@ -203,7 +205,6 @@ NotificationTextDetails.propTypes = {
 
 NotificationTextDetails.defaultProps = {
   title: 'title',
-  caption: 'caption',
   notificationType: 'toast',
 };
 
@@ -245,6 +246,7 @@ NotificationIcon.propTypes = {
 export function ToastNotification({
   role,
   notificationType,
+  onClose,
   onCloseButtonClick,
   iconDescription,
   statusIconDescription,
@@ -266,25 +268,38 @@ export function ToastNotification({
     [`${prefix}--toast-notification--${kind}`]: kind,
   });
 
+  const handleClose = (evt) => {
+    if (!onClose || onClose(evt) !== false) {
+      setIsOpen(false);
+    }
+  };
+
   function handleCloseButtonClick(event) {
-    setIsOpen(false);
     onCloseButtonClick(event);
+    handleClose(event);
   }
+
+  const savedOnClose = useRef(onClose);
+
+  useEffect(() => {
+    savedOnClose.current = onClose;
+  });
 
   useEffect(() => {
     if (!timeout) {
       return;
     }
 
-    const timeoutId = window.setTimeout(() => {
+    const timeoutId = window.setTimeout((event) => {
       setIsOpen(false);
-      onCloseButtonClick(event);
+      if (savedOnClose.current) {
+        savedOnClose.current(event);
+      }
     }, timeout);
-
     return () => {
       window.clearTimeout(timeoutId);
     };
-  }, [onCloseButtonClick, timeout]);
+  }, [timeout]);
 
   if (!isOpen) {
     return null;
@@ -367,6 +382,11 @@ ToastNotification.propTypes = {
   /**
    * Provide a function that is called when menu is closed
    */
+  onClose: PropTypes.func,
+
+  /**
+   * Provide a function that is called when the close button is clicked
+   */
   onCloseButtonClick: PropTypes.func,
 
   /**
@@ -399,7 +419,6 @@ ToastNotification.propTypes = {
 ToastNotification.defaultProps = {
   kind: 'error',
   title: 'provide a title',
-  caption: 'provide a caption',
   role: 'alert',
   notificationType: 'toast',
   iconDescription: 'closes notification',
@@ -412,6 +431,7 @@ export function InlineNotification({
   actions,
   role,
   notificationType,
+  onClose,
   onCloseButtonClick,
   iconDescription,
   statusIconDescription,
@@ -432,9 +452,15 @@ export function InlineNotification({
     [`${prefix}--inline-notification--hide-close-button`]: hideCloseButton,
   });
 
+  const handleClose = (evt) => {
+    if (!onClose || onClose(evt) !== false) {
+      setIsOpen(false);
+    }
+  };
+
   function handleCloseButtonClick(event) {
-    setIsOpen(false);
     onCloseButtonClick(event);
+    handleClose(event);
   }
 
   if (!isOpen) {
@@ -519,6 +545,11 @@ InlineNotification.propTypes = {
 
   /**
    * Provide a function that is called when menu is closed
+   */
+  onClose: PropTypes.func,
+
+  /**
+   * Provide a function that is called when the close button is clicked
    */
   onCloseButtonClick: PropTypes.func,
 
