@@ -249,16 +249,18 @@ class NumberInput extends Component {
     if (!disabled) {
       evt.persist();
       evt.imaginaryTarget = this._inputRef;
+      const prevValue = this.state.value;
       const value = evt.target.value;
+      const direction = prevValue < value ? 'up' : 'down';
       this.setState(
         {
           value,
         },
         () => {
           if (useControlledStateWithValue) {
-            onChange(evt, { value });
+            onChange(evt, { value, direction });
           } else if (onChange) {
-            onChange(evt);
+            onChange(evt, { value, direction });
           }
         }
       );
@@ -286,12 +288,14 @@ class NumberInput extends Component {
           value,
         },
         () => {
+          //TO-DO v11: update these events to return the same things --> evt, {value, direction}
           if (useControlledStateWithValue) {
             onClick && onClick(evt, { value, direction });
             onChange && onChange(evt, { value, direction });
           } else {
-            onClick && onClick(evt, direction);
-            onChange && onChange(evt, direction);
+            // value added as a 3rd argument rather than in same obj so it doesn't break in v10
+            onClick && onClick(evt, direction, value);
+            onChange && onChange(evt, direction, value);
           }
         }
       );
