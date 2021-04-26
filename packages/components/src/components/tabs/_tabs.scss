@@ -845,6 +845,12 @@
     .#{$prefix}--tabs.#{$prefix}--skeleton .#{$prefix}--tabs-trigger svg {
       @include hidden;
     }
+
+    .#{$prefix}--tabs--scrollable__nav-item
+      .#{$prefix}--tabs__nav-item--selected
+      .#{$prefix}--tabs--scrollable__nav-item--selected {
+      @include high-contrast-mode('focus');
+    }
   }
 }
 
