@@ -22,7 +22,7 @@ export function Toggle({
   labelA = 'Off',
   labelB = 'On',
   labelText,
-  onClick = () => {},
+  onClick,
   onToggle,
   size = 'md',
   toggled,
@@ -35,7 +35,10 @@ export function Toggle({
 
   function handleClick(e) {
     setChecked(!checked);
-    onClick(e);
+
+    if (onClick) {
+      onClick(e);
+    }
   }
 
   const isSm = size === 'sm';
