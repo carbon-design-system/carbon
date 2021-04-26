@@ -1,14 +1,4 @@
-function Test1() {
-  return <Button className="test" size="sm" />;
-}
-
-function Test2() {
-  return (
-    <Button className="test" size="sm">
-      Test
-    </Button>
-  );
-}
+import { Add, Bee, Chevron as chevron } from '@carbon/icons-react/next';
 
 const mapped = {
   default: Add,
@@ -27,7 +17,7 @@ function RenderIconProp() {
   return (
     <div>
       <DefaultSize renderIcon={Add} />
-      <Size renderIcon={props => <Bee size={24} {...props} />} />
+      <Size renderIcon={React.forwardRef((props, ref) => <Bee ref={ref} size={24} {...props} />)} />
     </div>
   );
 }

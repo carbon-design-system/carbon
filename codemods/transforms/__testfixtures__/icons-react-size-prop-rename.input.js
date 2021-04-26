@@ -2,7 +2,6 @@ import {
   Add32,
   Bee24,
   Caret20,
-  ChevronDown16 as chevron,
   DownArrow16,
   Search24,
   Zone24 as CustomZone,
@@ -40,24 +39,6 @@ function ExistingScope() {
     <div>
       <Search />
       <Search24 />
-    </div>
-  );
-}
-
-const mapped = {
-  default: Add32,
-  // prettier-ignore
-  size: Bee24,
-  // prettier-ignore
-  lowercase: chevron,
-};
-
-function RenderIconProp() {
-  // prettier-ignore
-  return (
-    <div>
-      <DefaultSize renderIcon={Add32} />
-      <Size renderIcon={Bee24} />
     </div>
   );
 }

@@ -2,7 +2,6 @@ import {
   Add,
   Bee,
   Caret,
-  ChevronDown as chevron,
   DownArrow,
   Search as SearchIcon,
   Zone as CustomZone,
@@ -40,28 +39,6 @@ function ExistingScope() {
     <div>
       <Search />
       <SearchIcon size={24} />
-    </div>
-  );
-}
-
-const mapped = {
-  default: Add,
-  // prettier-ignore
-  size: React.forwardRef((props, ref) => <Bee ref={ref} size={24} {...props} />),
-  // prettier-ignore
-  lowercase: React.forwardRef((props, ref) => React.createElement(chevron, {
-    ref,
-    size: 16,
-    ...props
-  })),
-};
-
-function RenderIconProp() {
-  // prettier-ignore
-  return (
-    <div>
-      <DefaultSize renderIcon={Add} />
-      <Size renderIcon={props => <Bee size={24} {...props} />} />
     </div>
   );
 }

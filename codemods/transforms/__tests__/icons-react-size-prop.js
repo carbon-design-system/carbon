@@ -9,8 +9,24 @@
 
 const { defineTest } = require('jscodeshift/dist/testUtils');
 
-defineTest(__dirname, 'icons-react-size-prop', {
-  printOptions: {
-    quote: 'single',
+defineTest(
+  __dirname,
+  'icons-react-size-prop',
+  {
+    printOptions: {
+      quote: 'single',
+    },
   },
-});
+  'icons-react-size-prop-rename'
+);
+
+defineTest(
+  __dirname,
+  'icons-react-size-prop',
+  {
+    printOptions: {
+      quote: 'single',
+    },
+  },
+  'icons-react-size-prop-with-prop'
+);

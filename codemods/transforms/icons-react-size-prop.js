@@ -221,21 +221,33 @@ function transform(fileInfo, api, options) {
         if (j.JSXExpressionContainer.check(parent) && size !== defaultSize) {
           path.parentPath.replace(
             j.jsxExpressionContainer(
-              j.arrowFunctionExpression(
-                [j.identifier('props')],
-                j.jsxElement(
-                  j.jsxOpeningElement(
-                    j.jsxIdentifier(path.node.name),
-                    [
-                      j.jsxAttribute(
-                        j.jsxIdentifier('size'),
-                        j.jsxExpressionContainer(j.numericLiteral(size))
-                      ),
-                      j.jsxSpreadAttribute(j.identifier('props')),
-                    ],
-                    true
-                  )
-                )
+              j.callExpression(
+                j.memberExpression(
+                  j.identifier('React'),
+                  j.identifier('forwardRef')
+                ),
+                [
+                  j.arrowFunctionExpression(
+                    [j.identifier('props'), j.identifier('ref')],
+                    j.jsxElement(
+                      j.jsxOpeningElement(
+                        j.jsxIdentifier(path.node.name),
+                        [
+                          j.jsxAttribute(
+                            j.jsxIdentifier('ref'),
+                            j.jsxExpressionContainer(j.identifier('ref'))
+                          ),
+                          j.jsxAttribute(
+                            j.jsxIdentifier('size'),
+                            j.jsxExpressionContainer(j.numericLiteral(size))
+                          ),
+                          j.jsxSpreadAttribute(j.identifier('props')),
+                        ],
+                        true
+                      )
+                    )
+                  ),
+                ]
               )
             )
           );
