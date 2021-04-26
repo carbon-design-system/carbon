@@ -25,7 +25,7 @@
 
       display: block;
       margin-bottom: $spacing-05;
-      color: $text-02;
+      color: $text-secondary;
     }
 
     .#{$prefix}--toggle__button {
@@ -48,7 +48,7 @@
       position: relative;
       width: rem(48px);
       height: rem(24px);
-      background-color: $ui-04;
+      background-color: $toggle-off;
       border-radius: rem(12px);
       transition: background-color $duration--fast-01 motion(exit, productive);
 
@@ -65,7 +65,7 @@
         left: rem(3px);
         width: rem(18px);
         height: rem(18px);
-        background-color: $icon-03;
+        background-color: $icon-on-color;
         border-radius: 50%;
         transition: transform $duration--fast-01 motion(exit, productive);
         content: '';
@@ -85,7 +85,7 @@
     .#{$prefix}--toggle__button:active
       + .#{$prefix}--toggle__label
       .#{$prefix}--toggle__switch {
-      box-shadow: 0 0 0 1px $ui-02, 0 0 0 3px $focus;
+      box-shadow: 0 0 0 1px $focus-inset, 0 0 0 3px $focus;
 
       // Windows, Firefox HCM Fix
       @media screen and (-ms-high-contrast: active),
@@ -96,7 +96,7 @@
     }
 
     .#{$prefix}--toggle__switch--checked {
-      background-color: $support-02;
+      background-color: $support-success;
 
       &::before {
         transform: translateX(rem(24px));
@@ -106,7 +106,7 @@
     .#{$prefix}--toggle__text {
       @include type-style('body-long-01');
 
-      color: $text-01;
+      color: $text-primary;
     }
 
     .#{$prefix}--toggle__appearance--sm .#{$prefix}--toggle__switch {
@@ -129,7 +129,7 @@
       top: rem(6px);
       right: rem(5px);
       visibility: hidden;
-      fill: $support-02;
+      fill: $support-success;
     }
 
     .#{$prefix}--toggle__switch--checked .#{$prefix}--toggle__check {
@@ -142,19 +142,19 @@
 
     .#{$prefix}--toggle--disabled .#{$prefix}--toggle__label-text,
     .#{$prefix}--toggle--disabled .#{$prefix}--toggle__text {
-      color: $disabled-02;
+      color: $text-disabled;
     }
 
     .#{$prefix}--toggle--disabled .#{$prefix}--toggle__switch {
-      background-color: $ui-01;
+      background-color: $layer-disabled;
 
       &::before {
-        background-color: $disabled-02;
+        background-color: $icon-disabled;
       }
     }
 
     .#{$prefix}--toggle--disabled .#{$prefix}--toggle__check {
-      fill: $ui-01;
+      fill: $layer-disabled;
     }
   } @else {
     .#{$prefix}--toggle {
