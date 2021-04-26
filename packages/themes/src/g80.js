@@ -120,7 +120,7 @@ export const buttonSecondaryHover = adjustLightness(buttonSecondary, -7);
 export const buttonTertiaryHover = white;
 
 export const backgroundSelected = gray70;
-export const backgroundSelectedHover = adjustLightness(layerSelected, -7);
+export const backgroundSelectedHover = adjustLightness(backgroundSelected, +7);
 export const layerSelected = gray60;
 export const layerSelectedHover = adjustLightness(layerSelected, -6);
 export const layerSelectedInverse = gray10;
