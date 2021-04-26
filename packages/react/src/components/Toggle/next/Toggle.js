@@ -68,7 +68,6 @@ export function Toggle({
     <div className={wrapperClasses}>
       <button
         id={id}
-        tabIndex={0}
         className={`${prefix}--toggle__button`}
         role="switch"
         type="button"
