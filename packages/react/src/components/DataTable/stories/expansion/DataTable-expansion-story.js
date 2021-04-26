@@ -100,7 +100,7 @@ export const Usage = () => (
   </DataTable>
 );
 
-export const CompactExpansion = () => (
+export const ExtraSmallExpansion = () => (
   <DataTable rows={rows} headers={headers}>
     {({
       rows,
@@ -116,7 +116,7 @@ export const CompactExpansion = () => (
         title="DataTable"
         description="With expansion"
         {...getTableContainerProps()}>
-        <TableToolbar {...getToolbarProps()} size="small">
+        <TableToolbar {...getToolbarProps()} size="xs">
           <TableToolbarContent>
             <TableToolbarSearch persistent="true" onChange={onInputChange} />
             <TableToolbarMenu>
@@ -169,7 +169,7 @@ export const CompactExpansion = () => (
   </DataTable>
 );
 
-export const ShortExpansion = () => (
+export const SmallExpansion = () => (
   <DataTable rows={rows} headers={headers}>
     {({
       rows,
@@ -183,7 +183,7 @@ export const ShortExpansion = () => (
         title="DataTable"
         description="With expansion"
         {...getTableContainerProps()}>
-        <Table {...getTableProps()} size="short">
+        <Table {...getTableProps()} size="sm">
           <TableHead>
             <TableRow>
               <TableExpandHeader />
@@ -217,7 +217,7 @@ export const ShortExpansion = () => (
   </DataTable>
 );
 
-export const TallExpansion = () => (
+export const MediumExpansion = () => (
   <DataTable rows={rows} headers={headers}>
     {({
       rows,
@@ -231,7 +231,55 @@ export const TallExpansion = () => (
         title="DataTable"
         description="With expansion"
         {...getTableContainerProps()}>
-        <Table {...getTableProps()} size="tall">
+        <Table {...getTableProps()} size="md">
+          <TableHead>
+            <TableRow>
+              <TableExpandHeader />
+              {headers.map((header, i) => (
+                <TableHeader key={i} {...getHeaderProps({ header })}>
+                  {header.header}
+                </TableHeader>
+              ))}
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {rows.map((row) => (
+              <React.Fragment key={row.id}>
+                <TableExpandRow {...getRowProps({ row })}>
+                  {row.cells.map((cell) => (
+                    <TableCell key={cell.id}>{cell.value}</TableCell>
+                  ))}
+                </TableExpandRow>
+                <TableExpandedRow
+                  colSpan={headers.length + 1}
+                  className="demo-expanded-td">
+                  <h6>Expandable row content</h6>
+                  <div>Description here</div>
+                </TableExpandedRow>
+              </React.Fragment>
+            ))}
+          </TableBody>
+        </Table>
+      </TableContainer>
+    )}
+  </DataTable>
+);
+
+export const ExtraLargeExpansion = () => (
+  <DataTable rows={rows} headers={headers}>
+    {({
+      rows,
+      headers,
+      getHeaderProps,
+      getRowProps,
+      getTableProps,
+      getTableContainerProps,
+    }) => (
+      <TableContainer
+        title="DataTable"
+        description="With expansion"
+        {...getTableContainerProps()}>
+        <Table {...getTableProps()} size="xl">
           <TableHead>
             <TableRow>
               <TableExpandHeader />
