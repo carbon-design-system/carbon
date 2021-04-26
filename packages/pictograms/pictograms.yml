@@ -2917,7 +2917,7 @@
     - contract
     - flow
     - workflow
-    - process 
+    - process
     - cycle
 - name: managing--items
   friendly_name: Managing items
@@ -3857,8 +3857,8 @@
     - recycle bin
     - industry
     - environment
-    - process 
-name: refinery
+    - process
+- name: refinery
   friendly_name: Refinery
   aliases:
     - refinery
