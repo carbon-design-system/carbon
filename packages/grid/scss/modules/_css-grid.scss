@@ -98,7 +98,7 @@
   }
 }
 
-.#{$prefix}--css-grid--narrow > [class*='#{$prefix}--col'] {
+.#{$prefix}--css-grid--narrow > [class*='col'] {
   margin-left: calc(var(--cds-grid-gutter) / 2 * -1);
 }
 

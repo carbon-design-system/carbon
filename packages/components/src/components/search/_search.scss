@@ -88,6 +88,7 @@
   }
 
   // Large styles
+  // V11: change lg to md
   .#{$prefix}--search--lg .#{$prefix}--search-input,
   .#{$prefix}--search--lg.#{$prefix}--search--expandable.#{$prefix}--search--expanded
     .#{$prefix}--search-input {
@@ -96,10 +97,12 @@
     padding: 0 $spacing-08;
   }
 
+  // V11: change lg to md
   .#{$prefix}--search--lg .#{$prefix}--search-magnifier-icon {
     left: rem(12px);
   }
 
+  // V11: change xl to lg
   .#{$prefix}--search--xl .#{$prefix}--search-input,
   .#{$prefix}--search--xl.#{$prefix}--search--expandable.#{$prefix}--search--expanded
     .#{$prefix}--search-input {
@@ -246,6 +249,7 @@
   .#{$prefix}--search--sm {
     .#{$prefix}--search-close,
     ~ .#{$prefix}--search-button,
+    &.#{$prefix}--search--expandable,
     &.#{$prefix}--search--expandable .#{$prefix}--search-magnifier {
       width: rem(32px);
       height: rem(32px);
@@ -256,9 +260,11 @@
     }
   }
 
+  // V11: change lg to md
   .#{$prefix}--search--lg {
     .#{$prefix}--search-close,
     ~ .#{$prefix}--search-button,
+    &.#{$prefix}--search--expandable,
     &.#{$prefix}--search--expandable .#{$prefix}--search-magnifier {
       width: rem(40px);
       height: rem(40px);
@@ -269,9 +275,11 @@
     }
   }
 
+  // V11: change xl to lg
   .#{$prefix}--search--xl {
     .#{$prefix}--search-close,
     ~ .#{$prefix}--search-button,
+    &.#{$prefix}--search--expandable,
     &.#{$prefix}--search--expandable .#{$prefix}--search-magnifier {
       width: rem(48px);
       height: rem(48px);
@@ -287,6 +295,7 @@
     opacity: 0;
   }
 
+  // V11: change xl to lg, lg to md
   .#{$prefix}--search--xl.#{$prefix}--skeleton .#{$prefix}--search-input,
   .#{$prefix}--search--lg.#{$prefix}--skeleton .#{$prefix}--search-input,
   .#{$prefix}--search--sm.#{$prefix}--skeleton .#{$prefix}--search-input {
@@ -299,12 +308,19 @@
     }
   }
 
+  .#{$prefix}--search--expandable {
+    transition: width $duration--fast-01 motion(standard, productive);
+  }
+
+  .#{$prefix}--search--expandable.#{$prefix}--search--expanded {
+    width: 100%;
+  }
+
   .#{$prefix}--search--expandable .#{$prefix}--search-input {
     width: 0;
     padding: 0;
-    transition-timing-function: motion(standard, productive);
-    transition-duration: $duration--fast-01;
-    transition-property: width, padding;
+    transition: padding $duration--fast-01 motion(standard, productive),
+      width 0s linear $duration--fast-01;
 
     &::placeholder {
       position: relative;
@@ -318,6 +334,7 @@
   .#{$prefix}--search--expandable.#{$prefix}--search--expanded
     .#{$prefix}--search-input {
     width: 100%;
+    transition: padding $duration--fast-01 motion(standard, productive);
 
     &::placeholder {
       position: relative;
