@@ -24,7 +24,7 @@ async function check(args, env) {
     `yarn carbon-cli check --ignore '**/@(node_modules|examples|components|react|fixtures)/**' 'packages/**/*.scss'`,
     `cross-env BABEL_ENV=test yarn test --ci --maxWorkers 2 --reporters=default --reporters=jest-junit`,
     `cross-env BABEL_ENV=test yarn test:e2e:jest --ci --maxWorkers 2 --reporters=default --reporters=jest-junit`,
-    `cross-env PERCY_TOKEN=dd3392142006a6483c8f524697f39f052755fa9dc087ff4437cac3d64227abdd percy exec -- yarn test:e2e:cypress`,
+    `cross-env PERCY_TOKEN=dd3392142006a6483c8f524697f39f052755fa9dc087ff4437cac3d64227abdd yarn run percy exec -- yarn test:e2e:cypress`,
   ];
 
   try {
