@@ -1,6 +1,5 @@
 {
   "componentFolder": "src",
-  "experimentalComponentTesting": true,
   "env": {
     "coverage": false
   },

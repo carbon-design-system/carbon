@@ -5,18 +5,15 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-'use strict';
-
-const preprocessor = require('@cypress/react/plugins/load-webpack');
-const percyHealthCheck = require('@percy/cypress/task');
-
-/**
- * @type {Cypress.PluginConfig}
- */
 module.exports = (on, config) => {
-  config.env.webpackFilename = 'webpack.config.js';
-  preprocessor(on, config);
+  if (config.testingType === 'component') {
+    const { startDevServer } = require('@cypress/webpack-dev-server');
+    const webpackConfig = require('../../webpack.config.js');
 
-  on('task', percyHealthCheck);
+    on('dev-server:start', (options) =>
+      startDevServer({ options, webpackConfig })
+    );
+  }
+
   return config;
 };

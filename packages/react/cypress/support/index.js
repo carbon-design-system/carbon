@@ -5,8 +5,6 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import '@cypress/react/support';
-
 // https://github.com/dmtrKovalenko/cypress-real-events
 import 'cypress-real-events/support';
 
