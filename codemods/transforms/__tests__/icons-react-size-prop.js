@@ -9,6 +9,16 @@
 
 const { defineTest } = require('jscodeshift/dist/testUtils');
 
+let mock;
+
+beforeEach(() => {
+  mock = jest.spyOn(console, 'log').mockImplementation(() => {});
+});
+
+afterEach(() => {
+  mock.mockRestore();
+});
+
 defineTest(
   __dirname,
   'icons-react-size-prop',

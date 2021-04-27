@@ -13,6 +13,12 @@ const defaultOptions = {
 };
 const defaultSize = 32;
 
+const manualCheckWarning =
+  'We have updated the file: %s to the new icon API. However, it may be that ' +
+  'this update is missing a `ref` on the prop where the icon is used. Please ' +
+  'make sure to verify that this update is correct.\n\nFor more information, ' +
+  'check out this migration guide: <TODO LINK>';
+
 function transform(fileInfo, api, options) {
   const printOptions = options.printOptions || defaultOptions;
   const j = api.jscodeshift;
@@ -134,79 +140,52 @@ function transform(fileInfo, api, options) {
           // map to React.createElement instead of using as the JSX Opening
           // Element directly
           if (newBinding.name[0] === newBinding.name[0].toLowerCase()) {
-            const refProperty = j.objectProperty(
-              j.identifier('ref'),
-              j.identifier('ref')
-            );
-            refProperty.shorthand = true;
-
             // Builds up this structure:
-            // React.forwardRef((props, ref) => React.createElement(iconName, {
-            //   ref,
+            // (props) => React.createElement(iconName, {
             //   size: 20,
             //   ...props,
-            // }));
-            replacement = j.callExpression(
-              j.memberExpression(
-                j.identifier('React'),
-                j.identifier('forwardRef')
-              ),
-              [
-                j.arrowFunctionExpression(
-                  [j.identifier('props'), j.identifier('ref')],
-                  j.callExpression(
-                    j.memberExpression(
-                      j.identifier('React'),
-                      j.identifier('createElement')
-                    ),
-                    [
-                      newBinding,
-                      j.objectExpression([
-                        refProperty,
-                        j.objectProperty(
-                          j.identifier('size'),
-                          j.numericLiteral(size)
-                        ),
-                        j.spreadElement(j.identifier('props')),
-                      ]),
-                    ]
-                  )
+            // });
+            replacement = j.arrowFunctionExpression(
+              [j.identifier('props')],
+              j.callExpression(
+                j.memberExpression(
+                  j.identifier('React'),
+                  j.identifier('createElement')
                 ),
-              ]
+                [
+                  newBinding,
+                  j.objectExpression([
+                    j.objectProperty(
+                      j.identifier('size'),
+                      j.numericLiteral(size)
+                    ),
+                    j.spreadElement(j.identifier('props')),
+                  ]),
+                ]
+              )
             );
           } else {
             // Build up this structure:
             // (props) => <IconName size={20} {...props} />
-            replacement = j.callExpression(
-              j.memberExpression(
-                j.identifier('React'),
-                j.identifier('forwardRef')
-              ),
-              [
-                j.arrowFunctionExpression(
-                  [j.identifier('props'), j.identifier('ref')],
-                  j.jsxElement(
-                    j.jsxOpeningElement(
-                      j.jsxIdentifier(newBinding.name),
-                      [
-                        j.jsxAttribute(
-                          j.jsxIdentifier('ref'),
-                          j.jsxExpressionContainer(j.identifier('ref'))
-                        ),
-                        j.jsxAttribute(
-                          j.jsxIdentifier('size'),
-                          j.jsxExpressionContainer(j.numericLiteral(size))
-                        ),
-                        j.jsxSpreadAttribute(j.identifier('props')),
-                      ],
-                      true
-                    )
-                  )
-                ),
-              ]
+            replacement = j.arrowFunctionExpression(
+              [j.identifier('props')],
+              j.jsxElement(
+                j.jsxOpeningElement(
+                  j.jsxIdentifier(newBinding.name),
+                  [
+                    j.jsxAttribute(
+                      j.jsxIdentifier('size'),
+                      j.jsxExpressionContainer(j.numericLiteral(size))
+                    ),
+                    j.jsxSpreadAttribute(j.identifier('props')),
+                  ],
+                  true
+                )
+              )
             );
           }
 
+          console.log(manualCheckWarning, fileInfo.path);
           path.parent.get('value').replace(replacement);
         }
 
@@ -219,35 +198,24 @@ function transform(fileInfo, api, options) {
         // to:
         // <Component renderIcon={(props) => <Icon size={24} {...props} />} />
         if (j.JSXExpressionContainer.check(parent) && size !== defaultSize) {
+          console.log(manualCheckWarning, fileInfo.path);
           path.parentPath.replace(
             j.jsxExpressionContainer(
-              j.callExpression(
-                j.memberExpression(
-                  j.identifier('React'),
-                  j.identifier('forwardRef')
-                ),
-                [
-                  j.arrowFunctionExpression(
-                    [j.identifier('props'), j.identifier('ref')],
-                    j.jsxElement(
-                      j.jsxOpeningElement(
-                        j.jsxIdentifier(path.node.name),
-                        [
-                          j.jsxAttribute(
-                            j.jsxIdentifier('ref'),
-                            j.jsxExpressionContainer(j.identifier('ref'))
-                          ),
-                          j.jsxAttribute(
-                            j.jsxIdentifier('size'),
-                            j.jsxExpressionContainer(j.numericLiteral(size))
-                          ),
-                          j.jsxSpreadAttribute(j.identifier('props')),
-                        ],
-                        true
-                      )
-                    )
-                  ),
-                ]
+              j.arrowFunctionExpression(
+                [j.identifier('props')],
+                j.jsxElement(
+                  j.jsxOpeningElement(
+                    j.jsxIdentifier(path.node.name),
+                    [
+                      j.jsxAttribute(
+                        j.jsxIdentifier('size'),
+                        j.jsxExpressionContainer(j.numericLiteral(size))
+                      ),
+                      j.jsxSpreadAttribute(j.identifier('props')),
+                    ],
+                    true
+                  )
+                )
               )
             )
           );
