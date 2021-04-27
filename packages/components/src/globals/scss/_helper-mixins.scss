@@ -46,7 +46,7 @@
 /// @example @include placeholder-colors;
 /// @group global-helpers
 @mixin placeholder-colors {
-  color: $text-05;
+  color: $text-placeholder;
   opacity: 1;
 }
 
@@ -96,7 +96,7 @@
   }
 
   @if ($type == 'invalid') {
-    outline: 2px solid $support-01;
+    outline: 2px solid $support-error;
     outline-offset: -2px;
 
     @media screen and (prefers-contrast) {
@@ -170,7 +170,7 @@
 @mixin skeleton {
   position: relative;
   padding: 0;
-  background: $skeleton-01;
+  background: $skeleton-background;
   border: none;
   box-shadow: none;
   pointer-events: none;
@@ -187,7 +187,7 @@
     position: absolute;
     width: 100%;
     height: 100%;
-    background: $skeleton-02;
+    background: $skeleton-element;
     animation: 3000ms ease-in-out skeleton infinite;
     content: '';
     will-change: transform-origin, transform, opacity;

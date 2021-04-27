@@ -6,11 +6,6 @@
   "license": "Apache-2.0",
   "main": "lib/index.js",
   "module": "es/index.js",
-  "type": "module",
-  "exports": {
-    "import": "./es/index.js",
-    "require": "./lib/index.js"
-  },
   "repository": {
     "type": "git",
     "url": "https://github.com/carbon-design-system/carbon.git",
@@ -21,7 +16,10 @@
     "es",
     "lib",
     "scss",
-    "index.scss"
+    "index.scss",
+    "icons/es",
+    "icons/lib",
+    "icons/package.json"
   ],
   "keywords": [
     "ibm",
@@ -31,9 +29,9 @@
     "react"
   ],
   "scripts": {
-    "build": "yarn clean && rollup -c",
+    "build": "yarn clean && node tasks/build.js",
     "clean": "rimraf es lib",
-    "watch": "yarn clean && rollup -c -w"
+    "postinstall": "carbon-telemetry collect --install"
   },
   "peerDependencies": {
     "react": "^16.8.6 || ^17.0.1",
@@ -41,7 +39,9 @@
   },
   "dependencies": {
     "@carbon/feature-flags": "^0.3.0",
+    "@carbon/icons-react": "^10.30.0",
     "@carbon/styles": "^0.4.0",
+    "@carbon/telemetry": "0.0.0-alpha.6",
     "carbon-components-react": "^7.33.0"
   },
   "devDependencies": {
@@ -56,6 +56,7 @@
     "@rollup/plugin-commonjs": "^18.0.0",
     "@rollup/plugin-node-resolve": "^11.2.1",
     "babel-plugin-dev-expression": "^0.2.2",
+    "browserslist-config-carbon": "^10.6.1",
     "prop-types": "^15.7.2",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
