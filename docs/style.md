@@ -539,6 +539,189 @@ import { unstable_Pagination as Pagination } from 'carbon-components-react';
 This code should be treated as experimental and will break between release
 versions for the package that it is being imported from.
 
+### Testing
+
+#### Strategy
+
+In general we aim to test components from a user-focused perspective. This means
+avoiding testing implementation details, and instead focusing on writing tests
+that closely resemble how the components are used. The various `testing-library`
+packages are used to encourage this mindset when writing and composing test
+suites.
+
+#### Organization
+
+Every component should have tests covering a series of Categories
+
+- General component functionality/API
+- Accessibility
+- End to end tests
+- Server side rendering
+
+Each of these are separated into individual files. In some cases the syntax may
+be slightly different and separate files make this easier to understand.
+Additionally separate file types can be more easily globbed to only run certain
+tests in certain environments (local, CI, Pre-release checks, etc).
+
+| File name                    | Category                        |
+| ---------------------------- | ------------------------------- |
+| `ComponentName-test.js`      | General component functionality |
+| `ComponentName-test.a11y.js` | Accessibility testing           |
+| `ComponentName-test.e2e.js`  | End to end tests                |
+| `ComponentName-test.ssr.js`  | Server side rendering           |
+
+There are corresponding commands to run all categories, individual categories,
+or a combination. Depending on your shell, modifiers can be used to run two
+commands one after another. Refer to the documentation of your shell.
+
+| Command                           | Corresponding test category                                          |
+| --------------------------------- | -------------------------------------------------------------------- |
+| `yarn test`                       | All categories                                                       |
+| `yarn test:unit`                  | Only component unit tests                                            |
+| `yarn test:a11y`                  | Only accessibility tests                                             |
+| `yarn test:ssr`                   | Only server side tests                                               |
+| `yarn test:a11y && yarn test:e2e` | In `bash` via `&&`: Run the a11y tests, and if they succeed, run e2e |
+
+#### Recipes
+
+Below are some common receipes for component testing. Many of the pattern/syntax
+details contained within these recipes are enforced via eslint rules declared in
+`eslint-config-carbon`.
+
+##### `ComponentName-test.js`
+
+- Use `@testing-library/react`
+  - Render using `render()`
+  - Query using `screen()`, prefer
+    [queries accessible to everyone](https://testing-library.com/docs/queries/about#priority)
+  - Simulate events with `userEvent`
+- Format with `describe`/`it` blocks
+- Use [`jest-dom`](https://github.com/testing-library/jest-dom) matchers for
+  assertions
+
+```js
+import { render, screen, findByLabel } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
+import { ComponentName } from '../ComponentName';
+
+describe('ComponentName', () => {
+  describe('API', () => {
+    it('should provide a data-testid attribute on the outermost DOM node', () => {
+      const { container } = render(<ComponentName className="test" />);
+      expect(screen.getByTestId('component-test-id')).toBeInTheDocument();
+      expect(container.firstChild).toHaveAttribute('class', 'test');
+    });
+
+    it('should place the `className` prop on the outermost DOM node', () => {
+      const { container } = render(<ComponentName className="test" />);
+      expect(container.firstChild).toHaveAttribute('class', 'test');
+    });
+
+    it('should place extra props on the outermost DOM node', () => {
+      const { container } = render(<ComponentName data-testid="test" />);
+      expect(container.firstChild).toHaveAttribute('data-testid', 'test');
+    });
+
+    describe('i18n', () => {
+      // ... ensure when each prop string is configured it is rendered to the DOM
+    });
+
+    // id
+    // -----
+    // When a component accepts an id prop, it's important
+    // that the node on which the id is placed is consistent
+    // between minor versions. As a result, tests that you
+    // write for id should make assertions around id being
+    // placed on the same node.
+    it('should place the `id` prop on the same DOM node between minor versions', () => {
+      const { container } = render(<ComponentName data-testid="test" />);
+      expect(container.firstChild).toHaveAttribute('id', 'test');
+    });
+
+    // Event Handlers
+    // -----
+    // When a component accepts an `onClick` or `onChange` prop
+    // it can be helpful to make assertions about when these
+    // props are called and what they are called with in order
+    // to test the Public API of the component.
+    // To make assertions on a function, such as whether its
+    // been called or what it has been called with, we can make
+    // use of Jest's `jest.fn()` method to create mock
+    // functions. We can then make assertions on these mock
+    // functions.
+    it('should call `onClick` when the trigger element is pressed', () => {
+      const onClick = jest.fn();
+
+      render(<TestComponent onClick={onClick} />);
+
+      const trigger = screen.getByText('trigger');
+      userEvent.click(trigger);
+      expect(onClick).toHaveBeenCalled();
+    });
+
+    // Optional ref tests
+    // A component that accepts a ref falls in one of three scenarios:
+    // 1. A class component
+    // 2. A component that uses React.forwardRef and placed
+    //    it on an HTML element
+    // 3. A component that uses React.forwardRef and uses
+    //    useImperativeHandle to decorate the ref (this is
+    //    uncommon but can come up)
+  });
+});
+```
+
+##### `ComponentName-test.a11y.js`
+
+- Use `accessibility-checker` and `axe`
+- Optionally configure common props to ensure component variants do not contain
+  accessibility errors.
+- Always use the destructured `container` from `render()` to ensure the entire
+  DOM tree is validated before and after interaction.
+
+```js
+describe('ComponentName AVT1', () => {
+  it('should have no aXe violations', async () => {
+    const { container } = render(<ComponentName />);
+    await expect(container).toHaveNoAxeViolations();
+  });
+
+  it('should have no AC violations', async () => {
+    const { container } = render(<ComponentName />);
+    await expect(container).toHaveNoACViolations('ComponentName');
+  });
+});
+```
+
+##### `ComponentName-test.server.js`
+
+```js
+/**
+ * @jest-environment node
+ */
+import ReactDOMServer from 'react-dom/server';
+import { ComponentName } from '../ComponentName';
+
+describe('ComponentName - SSR', () => {
+  it('should import ComponentName in a node/server environment', () => {
+    expect(ComponentName).not.toThrow();
+  });
+
+  it('should not use document/window/etc', () => {
+    expect(ReactDOMServer.renderToStaticMarkup(ComponentName)).not.toThrow();
+  });
+});
+```
+
+##### Notes on manual testing
+
+- [The A11Y Project checklist](https://www.a11yproject.com/checklist/) is a
+  great resource listing a range of issues to check for that cover a wide range
+  of disability conditions.
+- Due to
+  [the complexity of screenreader testing](https://webaim.org/articles/screenreader_testing/),
+  all screen reader testing is done manually.
+
 ## Sass
 
 ### Guidelines
@@ -728,4 +911,74 @@ When writing SassDoc comments, you should use three forward slashes:
 .#{$prefix}--my-component {
   // ...
 }
+```
+
+### Testing
+
+We use the `@carbon/test-utils` package to test our Sass styles in JavaScript.
+Inside of this package, there is a `SassRenderer` module that you can bring in
+that allows you to get values from Sass in JavaScript to be used in test
+assertions.
+
+The basic template for tests for Sass files will look like:
+
+```js
+/**
+ * <COPYRIGHT>
+ *
+ * @jest-environment node
+ */
+
+'use strict';
+
+const { SassRenderer } = require('@carbon/test-utils/scss');
+
+const { render } = SassRenderer.create(__dirname);
+
+describe('@carbon/styles/scss/config', () => {
+  test('Public API', async () => {
+    const { get } = await render(`
+      // You can bring in modules using the path from the test file
+      @use '../path/to/sass/module';
+
+      $test: true;
+
+      // The `get` helper will let you pass a value from Sass to JavaScript
+      $_: get('test', $test);
+    `);
+
+    // get('<key>') gives you both the JavaScript representation of a value
+    // along with the `nativeValue` which comes from Dart sass. Use `.value`
+    // to get the JavaScript value and make assertions
+    expect(get('test').value).toBe(true);
+  });
+});
+```
+
+#### Recipes
+
+##### Public API
+
+Sometimes it is useful to assert that a module's Public API matches what is
+expected or does not change between versions. To do this in a test file, you can
+use the `sass:meta` module along with several helpers for getting the variables
+and functions from a module. Unfortunately, mixins need to be checked by hand
+using the `mixin-exists` function from `sass:meta`.
+
+```js
+test('Public API', async () => {
+  await render(`
+    @use 'sass:meta';
+    @use '../path/to/module';
+
+    // Get the variables for the module under the namespace `module`
+    $_: get('variables', meta.module-variables('module'));
+
+    // Get the functions for the module under the namespace `module`
+    $_: get('variables', meta.module-functions('module'));
+
+    // Verify that a mixin exists, optionally within a module
+    $_: get('mixin-name', meta.mixin-exists('mixin-name', 'module');
+  `);
+});
 ```

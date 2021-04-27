@@ -41,10 +41,10 @@
     rem(8px) rem(16px),
     rem(3px) rem(16px)
   );
-  color: $inverse-01;
+  color: $text-inverse;
   font-weight: 400;
   text-align: left;
-  background-color: $inverse-02;
+  background-color: $background-inverse;
   border-radius: rem(2px);
   transform: translateX(-50%);
   @include type-style('body-short-01');
@@ -284,25 +284,25 @@
   &::before {
     @if ($position == 'top') {
       top: -$caret-spacing;
-      border-color: $inverse-02 transparent transparent transparent;
+      border-color: $background-inverse transparent transparent transparent;
       border-width: rem(5px) rem(4px) 0 rem(4px);
       transform: translate(-50%, -100%);
     }
     @if ($position == 'right') {
       right: -$caret-spacing;
-      border-color: transparent $inverse-02 transparent transparent;
+      border-color: transparent $background-inverse transparent transparent;
       border-width: rem(4px) rem(5px) rem(4px) 0;
       transform: translate(100%, -50%);
     }
     @if ($position == 'bottom') {
       bottom: -$caret-spacing;
-      border-color: transparent transparent $inverse-02 transparent;
+      border-color: transparent transparent $background-inverse transparent;
       border-width: 0 rem(4px) rem(5px) rem(4px);
       transform: translate(-50%, 100%);
     }
     @if ($position == 'left') {
       left: -$caret-spacing;
-      border-color: transparent transparent transparent $inverse-02;
+      border-color: transparent transparent transparent $background-inverse;
       border-width: rem(4px) 0 rem(4px) rem(5px);
       transform: translate(-100%, -50%);
     }

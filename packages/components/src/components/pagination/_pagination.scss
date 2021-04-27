@@ -36,8 +36,8 @@ $css--helpers: true;
     width: calc(100% - 1px);
     min-height: rem(48px);
     overflow-x: auto;
-    background-color: $ui-01;
-    border-top: 1px solid $ui-03;
+    background-color: $layer;
+    border-top: 1px solid $border-subtle;
 
     @include carbon--breakpoint('md') {
       overflow: initial;
@@ -84,7 +84,7 @@ $css--helpers: true;
   }
 
   .#{$prefix}--pagination .#{$prefix}--select-input:hover {
-    background: $hover-ui;
+    background: $background-hover;
   }
 
   .#{$prefix}--pagination .#{$prefix}--select__arrow {
@@ -95,13 +95,13 @@ $css--helpers: true;
   .#{$prefix}--pagination
     .#{$prefix}--select__item-count
     .#{$prefix}--select-input {
-    border-right: $spacing-4xs solid $ui-03;
+    border-right: $spacing-4xs solid $border-subtle;
   }
 
   .#{$prefix}--pagination
     .#{$prefix}--select__page-number
     .#{$prefix}--select-input {
-    border-left: 1px solid $ui-03;
+    border-left: 1px solid $border-subtle;
   }
 
   .#{$prefix}--pagination__left,
@@ -146,7 +146,7 @@ $css--helpers: true;
 
   span.#{$prefix}--pagination__text {
     margin-left: $carbon--spacing-05;
-    color: $text-02;
+    color: $text-secondary;
   }
 
   .#{$prefix}--pagination__button,
@@ -162,11 +162,11 @@ $css--helpers: true;
     background: none;
 
     border: none;
-    border-left: 1px solid $ui-03;
+    border-left: 1px solid $border-subtle;
     cursor: pointer;
     transition: outline $duration--fast-02 motion(standard, productive),
       background-color $duration--fast-02 motion(standard, productive);
-    fill: $ui-05;
+    fill: $icon-primary;
 
     // Windows, Firefox HCM Fix
     @media screen and (-ms-high-contrast: active),
@@ -185,23 +185,23 @@ $css--helpers: true;
 
   .#{$prefix}--pagination__button:hover,
   .#{$prefix}--btn--ghost:hover.#{$prefix}--pagination__button {
-    background: $hover-ui;
+    background: $layer-hover;
   }
 
   .#{$prefix}--pagination__button--no-index,
   .#{$prefix}--btn--ghost.#{$prefix}--pagination__button--no-index {
     cursor: not-allowed;
-    fill: $disabled-02;
+    fill: $icon-disabled;
   }
 
   .#{$prefix}--pagination__button:disabled:hover,
   .#{$prefix}--pagination__button--no-index:hover,
   .#{$prefix}--btn--ghost:disabled:hover.#{$prefix}--pagination__button,
   .#{$prefix}--btn--ghost:hover.#{$prefix}--pagination__button--no-index {
-    background: $ui-01;
-    border-color: $ui-03;
+    background: $layer;
+    border-color: $border-subtle;
     cursor: not-allowed;
-    fill: $disabled-02;
+    fill: $icon-disabled;
   }
 
   // Skeleton state

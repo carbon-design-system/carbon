@@ -30,7 +30,7 @@ const props = () => ({
 });
 
 export default {
-  title: 'Components/Skeleton/SkeletonText',
+  title: 'Components/Skeleton',
   decorators: [withKnobs],
 
   parameters: {
@@ -41,16 +41,8 @@ export default {
   },
 };
 
-export const Default = () => (
+export const _SkeletonText = () => (
   <div style={{ width: '300px' }}>
     <SkeletonText {...props()} />
   </div>
 );
-
-Default.parameters = {
-  info: {
-    text: `
-        Skeleton states are used as a progressive loading state while the user waits for content to load.
-      `,
-  },
-};

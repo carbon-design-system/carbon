@@ -13,6 +13,7 @@ import { settings } from 'carbon-components';
 import { composeEventHandlers } from '../../tools/events';
 import { keys, match } from '../../internal/keyboard';
 import deprecate from '../../prop-types/deprecate';
+import { FeatureFlagContext } from '../FeatureFlags';
 
 const { prefix } = settings;
 
@@ -81,7 +82,7 @@ export default class Search extends Component {
     /**
      * Specify the search size
      */
-    size: PropTypes.oneOf(['sm', 'lg', 'xl']),
+    size: PropTypes.oneOf(['sm', 'md', 'lg', 'xl']),
 
     /**
      * Specify whether the Search should be a small variant
@@ -105,6 +106,8 @@ export default class Search extends Component {
      */
     value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   };
+
+  static contextType = FeatureFlagContext;
 
   static defaultProps = {
     type: 'text',
@@ -178,9 +181,20 @@ export default class Search extends Component {
 
     const { hasContent } = this.state;
 
+    const scope = this.context;
+    let enabled;
+
+    if (scope.enabled) {
+      enabled = scope.enabled('enable-2021-release');
+    }
+
     const searchClasses = classNames({
       [`${prefix}--search`]: true,
-      [`${prefix}--search--${size}`]: size,
+      [`${prefix}--search--sm`]: size === 'sm',
+      // V11: change to md
+      [`${prefix}--search--lg`]: enabled ? size === 'md' : size === 'lg',
+      // V11: change to lg
+      [`${prefix}--search--xl`]: enabled ? size === 'lg' : size === 'xl',
       [`${prefix}--search--light`]: light,
       [`${prefix}--search--disabled`]: disabled,
       [className]: className,
