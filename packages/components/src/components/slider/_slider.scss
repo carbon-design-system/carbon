@@ -37,7 +37,7 @@
   .#{$prefix}--slider__range-label {
     @include type-style('code-02');
 
-    color: $text-01;
+    color: $text-primary;
     white-space: nowrap;
 
     &:last-of-type {
@@ -49,7 +49,7 @@
     position: absolute;
     width: 100%;
     height: rem(2px);
-    background: $ui-03;
+    background: $border-subtle;
     transform: translate(0%, -50%);
     cursor: pointer;
 
@@ -68,7 +68,7 @@
     display: inline-block;
     width: rem(2px);
     height: rem(4px);
-    background: $ui-03;
+    background: $border-subtle;
     transform: translate(-50%, 0);
     content: '';
   }
@@ -77,7 +77,7 @@
     position: absolute;
     width: 100%;
     height: rem(2px);
-    background: $ui-05;
+    background: $layer-selected-inverse;
     transform: translate(0%, -50%);
     transform-origin: left;
     transition: background $duration--fast-02 motion(standard, productive);
@@ -97,7 +97,7 @@
     z-index: 3;
     width: rem(14px);
     height: rem(14px);
-    background: $ui-05;
+    background: $layer-selected-inverse;
     border-radius: 50%;
     outline: none;
     box-shadow: inset 0 0 0 1px transparent, inset 0 0 0 2px transparent;
@@ -113,8 +113,8 @@
     }
 
     &:focus {
-      background-color: $interactive-04;
-      box-shadow: inset 0 0 0 2px $interactive-04, inset 0 0 0 3px $ui-01;
+      background-color: $interactive;
+      box-shadow: inset 0 0 0 2px $interactive, inset 0 0 0 3px $layer;
       // 20px / 14px = 1.4286
       transform: translate(-50%, -50%) scale(1.4286);
 
@@ -125,7 +125,7 @@
     }
 
     &:active {
-      box-shadow: inset 0 0 0 2px $interactive-04;
+      box-shadow: inset 0 0 0 2px $interactive;
       transform: translate(-50%, -50%) scale(1.4286);
     }
 
@@ -155,18 +155,18 @@
   }
 
   .#{$prefix}--slider__thumb:focus ~ .#{$prefix}--slider__filled-track {
-    background-color: $interactive-04;
+    background-color: $interactive;
   }
 
   // Disabled state
   .#{$prefix}--label--disabled
     ~ .#{$prefix}--slider-container
     > .#{$prefix}--slider__range-label {
-    color: $disabled-02;
+    color: $text-disabled;
   }
 
   .#{$prefix}--slider--disabled .#{$prefix}--slider__thumb {
-    background-color: $ui-03;
+    background-color: $border-subtle;
 
     &:hover {
       transform: translate(-50%, -50%);
@@ -174,14 +174,14 @@
     }
 
     &:focus {
-      background-color: $ui-03;
+      background-color: $border-subtle;
       outline: none;
       box-shadow: none;
       transform: translate(-50%, -50%);
     }
 
     &:active {
-      background: $ui-03;
+      background: $border-subtle;
       transform: translate(-50%, -50%);
     }
   }
@@ -191,7 +191,7 @@
   .#{$prefix}--slider--disabled
     .#{$prefix}--slider__thumb:focus
     ~ .#{$prefix}--slider__filled-track {
-    background-color: $ui-03;
+    background-color: $border-subtle;
     cursor: not-allowed;
   }
 
@@ -199,8 +199,8 @@
     ~ .#{$prefix}--form-item
     .#{$prefix}--slider-text-input,
   .#{$prefix}--slider--disabled ~ .#{$prefix}--slider-text-input {
-    color: $disabled-02;
-    background-color: $disabled-01;
+    color: $text-disabled;
+    background-color: $field-disabled;
     border: none;
     cursor: not-allowed;
     transition: none;
@@ -208,7 +208,7 @@
     &:active,
     &:focus,
     &:hover {
-      color: $disabled-02;
+      color: $text-disabled;
       outline: none;
     }
   }
