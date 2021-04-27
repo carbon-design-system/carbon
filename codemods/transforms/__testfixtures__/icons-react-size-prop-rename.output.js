@@ -11,10 +11,10 @@ import { Search } from 'test';
 function RendersIconDirectly() {
   return (
     <div>
-      <Add />
+      <Add size={32} />
       <Bee size={24} />
       <Caret size={20} />
-      <DownArrow size={16} />
+      <DownArrow />
     </div>
   );
 }
@@ -22,10 +22,10 @@ function RendersIconDirectly() {
 function RendersIconWithProps(props) {
   return (
     <div>
-      <Add aria-label="test" {...props} />
+      <Add size={32} aria-label="test" {...props} />
       <Bee size={24} aria-label="test" {...props} />
       <Caret size={20} aria-label="test" {...props} />
-      <DownArrow size={16} aria-label="test" {...props} />
+      <DownArrow aria-label="test" {...props} />
     </div>
   );
 }

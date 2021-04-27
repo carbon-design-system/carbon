@@ -6,7 +6,7 @@ const mapped = {
   size: props => <Bee size={24} {...props} />,
   // prettier-ignore
   lowercase: props => React.createElement(chevron, {
-    size: 16,
+    size: 24,
     ...props
   }),
 };
