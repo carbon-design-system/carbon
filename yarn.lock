@@ -31138,20 +31138,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"terser@npm:^5.0.0, terser@npm:^5.5.1":
-  version: 5.5.1
-  resolution: "terser@npm:5.5.1"
-  dependencies:
-    commander: ^2.20.0
-    source-map: ~0.7.2
-    source-map-support: ~0.5.19
-  bin:
-    terser: bin/terser
-  checksum: 82c1bbb9174e97b833fc4e11267e70d957fff1cc632ad674eec022fe3ec15e4fff89d1fdc002335a3f961958387e0f0275da37a1d63197b67efe4e371789e58a
-  languageName: node
-  linkType: hard
-
-"terser@npm:^5.7.0":
+"terser@npm:^5.0.0, terser@npm:^5.5.1, terser@npm:^5.7.0":
   version: 5.7.0
   resolution: "terser@npm:5.7.0"
   dependencies:
