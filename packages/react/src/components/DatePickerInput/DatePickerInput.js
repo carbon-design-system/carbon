@@ -9,7 +9,11 @@ import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import classNames from 'classnames';
 import { settings } from 'carbon-components';
-import { Calendar16, WarningFilled16, WarningAltFilled16 } from '@carbon/icons-react';
+import {
+  Calendar16,
+  WarningFilled16,
+  WarningAltFilled16,
+} from '@carbon/icons-react';
 
 const { prefix } = settings;
 
