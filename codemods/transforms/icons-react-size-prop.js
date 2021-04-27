@@ -11,13 +11,7 @@ const defaultOptions = {
   quote: 'auto',
   trailingComma: true,
 };
-const defaultSize = 32;
-
-const manualCheckWarning =
-  'We have updated the file: %s to the new icon API. However, it may be that ' +
-  'this update is missing a `ref` on the prop where the icon is used. Please ' +
-  'make sure to verify that this update is correct.\n\nFor more information, ' +
-  'check out this migration guide: <TODO LINK>';
+const defaultSize = 16;
 
 function transform(fileInfo, api, options) {
   const printOptions = options.printOptions || defaultOptions;
@@ -185,7 +179,7 @@ function transform(fileInfo, api, options) {
             );
           }
 
-          console.log(manualCheckWarning, fileInfo.path);
+          warn(fileInfo.path);
           path.parent.get('value').replace(replacement);
         }
 
@@ -198,7 +192,7 @@ function transform(fileInfo, api, options) {
         // to:
         // <Component renderIcon={(props) => <Icon size={24} {...props} />} />
         if (j.JSXExpressionContainer.check(parent) && size !== defaultSize) {
-          console.log(manualCheckWarning, fileInfo.path);
+          warn(fileInfo.path);
           path.parentPath.replace(
             j.jsxExpressionContainer(
               j.arrowFunctionExpression(
@@ -224,6 +218,25 @@ function transform(fileInfo, api, options) {
     });
 
   return root.toSource(printOptions);
+}
+
+const manualCheckWarning = `[carbon] ${'='.repeat(71)}
+We have updated the file: %s to the new icon API.
+
+However, it may be that this update is missing a \`ref\` on the prop where the
+icon is used. Please make sure to verify that this update is correct.
+
+For more information, check out this migration guide: <TODO LINK>\n`;
+
+const files = new Set();
+
+function warn(filepath) {
+  if (files.has(filepath)) {
+    return;
+  }
+
+  files.add(filepath);
+  console.log(manualCheckWarning, filepath);
 }
 
 module.exports = transform;
