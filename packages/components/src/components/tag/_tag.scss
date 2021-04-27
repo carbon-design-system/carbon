@@ -29,12 +29,12 @@
     display: inline-flex;
     // ensures tag stays pill shaped;
     min-width: rem(32px);
+    // restricts size of contained elements
     max-width: 100%;
     min-height: rem(24px);
     align-items: center;
     justify-content: center;
     padding: $carbon--spacing-02 $carbon--spacing-03;
-    // restricts size of contained elements
     margin: $carbon--spacing-02;
     border-radius: rem(15px);
     cursor: default;
