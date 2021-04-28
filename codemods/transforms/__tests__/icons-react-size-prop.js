@@ -9,34 +9,36 @@
 
 const { defineTest } = require('jscodeshift/dist/testUtils');
 
-let mock;
+describe('icons-react-size-prop', () => {
+  let mock;
 
-beforeEach(() => {
-  mock = jest.spyOn(console, 'log').mockImplementation(() => {});
-});
+  beforeEach(() => {
+    mock = jest.spyOn(console, 'log').mockImplementation(() => {});
+  });
 
-afterEach(() => {
-  mock.mockRestore();
-});
+  afterEach(() => {
+    mock.mockRestore();
+  });
 
-defineTest(
-  __dirname,
-  'icons-react-size-prop',
-  {
-    printOptions: {
-      quote: 'single',
+  defineTest(
+    __dirname,
+    'icons-react-size-prop',
+    {
+      printOptions: {
+        quote: 'single',
+      },
     },
-  },
-  'icons-react-size-prop-rename'
-);
+    'icons-react-size-prop-rename'
+  );
 
-defineTest(
-  __dirname,
-  'icons-react-size-prop',
-  {
-    printOptions: {
-      quote: 'single',
+  defineTest(
+    __dirname,
+    'icons-react-size-prop',
+    {
+      printOptions: {
+        quote: 'single',
+      },
     },
-  },
-  'icons-react-size-prop-with-prop'
-);
+    'icons-react-size-prop-with-prop'
+  );
+});
