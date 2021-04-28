@@ -121,6 +121,10 @@
     }
   }
 
+  .#{$prefix}--tile__checkmark--persistent {
+    opacity: 1;
+  }
+
   .#{$prefix}--tile__chevron {
     position: absolute;
     right: $carbon--spacing-05;
@@ -276,9 +280,7 @@
     border-top: 1px solid $button-disabled;
   }
 
-  .#{$prefix}--tile--disabled.#{$prefix}--tile--is-selected
-    .#{$prefix}--tile__checkmark
-    svg {
+  .#{$prefix}--tile--disabled .#{$prefix}--tile__checkmark svg {
     fill: $icon-disabled;
   }
 }
