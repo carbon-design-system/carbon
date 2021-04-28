@@ -38,11 +38,11 @@
     order: 1;
     width: 100%;
     padding: 0 $carbon--spacing-08;
-    color: $text-01;
+    color: $text-primary;
     text-overflow: ellipsis;
-    background-color: $field-01;
+    background-color: $field;
     border: none;
-    border-bottom: 1px solid $ui-04;
+    border-bottom: 1px solid $border-strong;
     transition: background-color $duration--fast-02 motion(standard, productive),
       outline $duration--fast-02 motion(standard, productive);
     appearance: none;
@@ -62,7 +62,7 @@
 
   .#{$prefix}--search-input[disabled] {
     color: $disabled;
-    background-color: $disabled-01;
+    background-color: $field-disabled;
     border-bottom: 1px solid transparent;
     cursor: not-allowed;
 
@@ -70,40 +70,48 @@
       color: $disabled;
     }
   }
-
   .#{$prefix}--search--light .#{$prefix}--search-input {
     background: $field-02;
   }
 
   // Small styles
-  .#{$prefix}--search--sm .#{$prefix}--search-input {
+  .#{$prefix}--search--sm .#{$prefix}--search-input,
+  .#{$prefix}--search--sm.#{$prefix}--search--expandable.#{$prefix}--search--expanded
+    .#{$prefix}--search-input {
     height: rem(32px);
     // 8px padding on either side of icon + 16px icon (32px)
     padding: 0 $spacing-07;
   }
 
-  .#{$prefix}--search--sm .#{$prefix}--search-magnifier {
+  .#{$prefix}--search--sm .#{$prefix}--search-magnifier-icon {
     left: rem(8px);
   }
 
   // Large styles
-  .#{$prefix}--search--lg .#{$prefix}--search-input {
+  // V11: change lg to md
+  .#{$prefix}--search--lg .#{$prefix}--search-input,
+  .#{$prefix}--search--lg.#{$prefix}--search--expandable.#{$prefix}--search--expanded
+    .#{$prefix}--search-input {
     height: rem(40px);
     // 12px padding on either side of icon + 16px icon (40px)
     padding: 0 $spacing-08;
   }
 
-  .#{$prefix}--search--lg .#{$prefix}--search-magnifier {
+  // V11: change lg to md
+  .#{$prefix}--search--lg .#{$prefix}--search-magnifier-icon {
     left: rem(12px);
   }
 
-  .#{$prefix}--search--xl .#{$prefix}--search-input {
+  // V11: change xl to lg
+  .#{$prefix}--search--xl .#{$prefix}--search-input,
+  .#{$prefix}--search--xl.#{$prefix}--search--expandable.#{$prefix}--search--expanded
+    .#{$prefix}--search-input {
     height: rem(48px);
     // 16px padding on either side of icon + 16px icon (48px)
     padding: 0 $spacing-09;
   }
 
-  .#{$prefix}--search-magnifier {
+  .#{$prefix}--search-magnifier-icon {
     position: absolute;
     top: 50%;
     left: $spacing-05;
@@ -112,7 +120,7 @@
     height: rem(16px);
     transform: translateY(-50%);
     pointer-events: none;
-    fill: $icon-02;
+    fill: $icon-secondary;
 
     // Windows, Firefox HCM Fix
     @media screen and (-ms-high-contrast: active),
@@ -137,14 +145,14 @@
       display: block;
       width: 2px;
       height: calc(100% - 2px);
-      background-color: $field-01;
+      background-color: $field;
       transition: background-color $duration--fast-02
         motion(standard, productive);
       content: '';
     }
 
     &:hover {
-      border-bottom: 1px solid $ui-04;
+      border-bottom: 1px solid $border-strong;
 
       &::before {
         background-color: $hover-field;
@@ -155,7 +163,7 @@
   .#{$prefix}--search-button {
     flex-shrink: 0;
     margin-left: $carbon--spacing-01;
-    background-color: $field-01;
+    background-color: $field;
 
     svg {
       vertical-align: middle;
@@ -190,7 +198,7 @@
       background-color $duration--fast-02 motion(standard, productive),
       outline $duration--fast-02 motion(standard, productive),
       border $duration--fast-02 motion(standard, productive);
-    fill: $icon-01;
+    fill: $icon-primary;
 
     &:hover {
       background-color: $hover-field;
@@ -203,11 +211,13 @@
     &:active {
       @include focus-outline('outline');
 
-      background-color: $selected-ui;
+      background-color: $background-selected;
     }
   }
 
-  .#{$prefix}--search--disabled .#{$prefix}--search-close {
+  .#{$prefix}--search--disabled .#{$prefix}--search-close,
+  .#{$prefix}--search--disabled.#{$prefix}--search--expandable
+    .#{$prefix}--search-magnifier {
     outline: none;
     cursor: not-allowed;
 
@@ -238,25 +248,45 @@
 
   .#{$prefix}--search--sm {
     .#{$prefix}--search-close,
-    ~ .#{$prefix}--search-button {
+    ~ .#{$prefix}--search-button,
+    &.#{$prefix}--search--expandable,
+    &.#{$prefix}--search--expandable .#{$prefix}--search-magnifier {
       width: rem(32px);
       height: rem(32px);
     }
-  }
 
-  .#{$prefix}--search--lg {
-    .#{$prefix}--search-close,
-    ~ .#{$prefix}--search-button {
-      width: rem(40px);
-      height: rem(40px);
+    &.#{$prefix}--search--expandable .#{$prefix}--search-input::placeholder {
+      padding: 0 rem(32px);
     }
   }
 
+  // V11: change lg to md
+  .#{$prefix}--search--lg {
+    .#{$prefix}--search-close,
+    ~ .#{$prefix}--search-button,
+    &.#{$prefix}--search--expandable,
+    &.#{$prefix}--search--expandable .#{$prefix}--search-magnifier {
+      width: rem(40px);
+      height: rem(40px);
+    }
+
+    &.#{$prefix}--search--expandable .#{$prefix}--search-input::placeholder {
+      padding: 0 rem(40px);
+    }
+  }
+
+  // V11: change xl to lg
   .#{$prefix}--search--xl {
     .#{$prefix}--search-close,
-    ~ .#{$prefix}--search-button {
+    ~ .#{$prefix}--search-button,
+    &.#{$prefix}--search--expandable,
+    &.#{$prefix}--search--expandable .#{$prefix}--search-magnifier {
       width: rem(48px);
       height: rem(48px);
+    }
+
+    &.#{$prefix}--search--expandable .#{$prefix}--search-input::placeholder {
+      padding: 0 rem(48px);
     }
   }
 
@@ -265,6 +295,7 @@
     opacity: 0;
   }
 
+  // V11: change xl to lg, lg to md
   .#{$prefix}--search--xl.#{$prefix}--skeleton .#{$prefix}--search-input,
   .#{$prefix}--search--lg.#{$prefix}--skeleton .#{$prefix}--search-input,
   .#{$prefix}--search--sm.#{$prefix}--skeleton .#{$prefix}--search-input {
@@ -275,6 +306,64 @@
     &::placeholder {
       color: transparent;
     }
+  }
+
+  .#{$prefix}--search--expandable {
+    transition: width $duration--fast-01 motion(standard, productive);
+  }
+
+  .#{$prefix}--search--expandable.#{$prefix}--search--expanded {
+    width: 100%;
+  }
+
+  .#{$prefix}--search--expandable .#{$prefix}--search-input {
+    width: 0;
+    padding: 0;
+    transition: padding $duration--fast-01 motion(standard, productive),
+      width 0s linear $duration--fast-01;
+
+    &::placeholder {
+      position: relative;
+      opacity: 0;
+      transition-timing-function: motion(standard, productive);
+      transition-duration: $duration--fast-01;
+      transition-property: padding, opacity;
+    }
+  }
+
+  .#{$prefix}--search--expandable.#{$prefix}--search--expanded
+    .#{$prefix}--search-input {
+    width: 100%;
+    transition: padding $duration--fast-01 motion(standard, productive);
+
+    &::placeholder {
+      position: relative;
+      padding: 0;
+      opacity: 1;
+    }
+  }
+
+  .#{$prefix}--search--expandable .#{$prefix}--search-magnifier {
+    position: absolute;
+    cursor: pointer;
+  }
+
+  .#{$prefix}--search--expandable .#{$prefix}--search-magnifier:hover {
+    background-color: $background-hover;
+  }
+
+  .#{$prefix}--search--expandable.#{$prefix}--search--expanded
+    .#{$prefix}--search-magnifier {
+    pointer-events: none;
+  }
+
+  .#{$prefix}--search--expandable .#{$prefix}--search-magnifier-icon {
+    fill: $icon-primary;
+  }
+
+  .#{$prefix}--search--expandable.#{$prefix}--search--expanded
+    .#{$prefix}--search-magnifier-icon {
+    fill: $icon-secondary;
   }
 }
 

@@ -29,6 +29,8 @@ Map {
         "args": Array [
           Array [
             "sm",
+            "md",
+            "lg",
             "xl",
           ],
         ],
@@ -214,6 +216,9 @@ Map {
       "onBlur": Object {
         "type": "func",
       },
+      "onClick": Object {
+        "type": "func",
+      },
       "onFocus": Object {
         "type": "func",
       },
@@ -246,8 +251,10 @@ Map {
             "field",
             "small",
             "sm",
+            "md",
             "lg",
             "xl",
+            "2xl",
           ],
         ],
         "type": "oneOf",
@@ -652,6 +659,8 @@ Map {
         "args": Array [
           Array [
             "sm",
+            "md",
+            "lg",
             "xl",
           ],
         ],
@@ -727,6 +736,7 @@ Map {
           Array [
             "xs",
             "sm",
+            "md",
             "lg",
           ],
         ],
@@ -888,6 +898,8 @@ Map {
         "args": Array [
           Array [
             "sm",
+            "md",
+            "lg",
             "xl",
           ],
         ],
@@ -977,6 +989,11 @@ Map {
               "short",
               "normal",
               "tall",
+              "xs",
+              "sm",
+              "md",
+              "lg",
+              "xl",
             ],
           ],
           "type": "oneOf",
@@ -1545,6 +1562,11 @@ Map {
             "short",
             "normal",
             "tall",
+            "xs",
+            "sm",
+            "md",
+            "lg",
+            "xl",
           ],
         ],
         "type": "oneOf",
@@ -1604,6 +1626,11 @@ Map {
             "short",
             "normal",
             "tall",
+            "xs",
+            "sm",
+            "md",
+            "lg",
+            "xl",
           ],
         ],
         "type": "oneOf",
@@ -2319,6 +2346,8 @@ Map {
         "args": Array [
           Array [
             "sm",
+            "md",
+            "lg",
             "xl",
           ],
         ],
@@ -2447,6 +2476,8 @@ Map {
         "args": Array [
           Array [
             "sm",
+            "md",
+            "lg",
             "xl",
           ],
         ],
@@ -2903,6 +2934,9 @@ Map {
       "className": Object {
         "type": "string",
       },
+      "columns": Object {
+        "type": "number",
+      },
       "condensed": Object {
         "type": "bool",
       },
@@ -3213,10 +3247,24 @@ Map {
       "inline": Object {
         "type": "bool",
       },
+      "renderIcon": Object {
+        "args": Array [
+          Array [
+            Object {
+              "type": "func",
+            },
+            Object {
+              "type": "object",
+            },
+          ],
+        ],
+        "type": "oneOfType",
+      },
       "size": Object {
         "args": Array [
           Array [
             "sm",
+            "md",
             "lg",
           ],
         ],
@@ -3365,6 +3413,7 @@ Map {
           Array [
             "xs",
             "sm",
+            "md",
             "lg",
           ],
         ],
@@ -3681,6 +3730,8 @@ Map {
           "args": Array [
             Array [
               "sm",
+              "md",
+              "lg",
               "xl",
             ],
           ],
@@ -3920,6 +3971,8 @@ Map {
         "args": Array [
           Array [
             "sm",
+            "md",
+            "lg",
             "xl",
           ],
         ],
@@ -4351,7 +4404,9 @@ Map {
       "page": Object {
         "type": "number",
       },
-      "pageInputDisabled": [Function],
+      "pageInputDisabled": Object {
+        "type": "bool",
+      },
       "pageNumberText": Object {
         "type": "string",
       },
@@ -4360,6 +4415,9 @@ Map {
       },
       "pageSize": Object {
         "type": "number",
+      },
+      "pageSizeInputDisabled": Object {
+        "type": "bool",
       },
       "pageSizes": Object {
         "args": Array [
@@ -4585,6 +4643,38 @@ Map {
     },
   },
   "Search" => Object {
+    "contextType": Object {
+      "$$typeof": Symbol(react.context),
+      "Consumer": Object {
+        "$$typeof": Symbol(react.context),
+        "_calculateChangedBits": null,
+        "_context": [Circular],
+      },
+      "Provider": Object {
+        "$$typeof": Symbol(react.provider),
+        "_context": [Circular],
+      },
+      "_calculateChangedBits": null,
+      "_currentRenderer": null,
+      "_currentRenderer2": null,
+      "_currentValue": FeatureFlagScope {
+        "flags": Map {
+          "enable-css-custom-properties" => false,
+          "enable-use-controlled-state-with-value" => false,
+          "enable-css-grid" => false,
+          "enable-2021-release" => false,
+        },
+      },
+      "_currentValue2": FeatureFlagScope {
+        "flags": Map {
+          "enable-css-custom-properties" => false,
+          "enable-use-controlled-state-with-value" => false,
+          "enable-css-grid" => false,
+          "enable-2021-release" => false,
+        },
+      },
+      "_threadCount": 0,
+    },
     "defaultProps": Object {
       "closeButtonLabelText": "Clear search input",
       "onChange": [Function],
@@ -4638,6 +4728,7 @@ Map {
         "args": Array [
           Array [
             "sm",
+            "md",
             "lg",
             "xl",
           ],
@@ -4707,6 +4798,80 @@ Map {
       },
     },
   },
+  "ExpandableSearch" => Object {
+    "propTypes": Object {
+      "className": Object {
+        "type": "string",
+      },
+      "closeButtonLabelText": Object {
+        "type": "string",
+      },
+      "defaultValue": Object {
+        "args": Array [
+          Array [
+            Object {
+              "type": "string",
+            },
+            Object {
+              "type": "number",
+            },
+          ],
+        ],
+        "type": "oneOfType",
+      },
+      "disabled": Object {
+        "type": "bool",
+      },
+      "id": Object {
+        "type": "string",
+      },
+      "labelText": Object {
+        "isRequired": true,
+        "type": "node",
+      },
+      "light": Object {
+        "type": "bool",
+      },
+      "onChange": Object {
+        "type": "func",
+      },
+      "onKeyDown": Object {
+        "type": "func",
+      },
+      "placeHolderText": [Function],
+      "placeholder": Object {
+        "type": "string",
+      },
+      "size": Object {
+        "args": Array [
+          Array [
+            "sm",
+            "md",
+            "lg",
+            "xl",
+          ],
+        ],
+        "type": "oneOf",
+      },
+      "small": [Function],
+      "type": Object {
+        "type": "string",
+      },
+      "value": Object {
+        "args": Array [
+          Array [
+            Object {
+              "type": "string",
+            },
+            Object {
+              "type": "number",
+            },
+          ],
+        ],
+        "type": "oneOfType",
+      },
+    },
+  },
   "SecondaryButton" => Object {},
   "Select" => Object {
     "$$typeof": Symbol(react.forward_ref),
@@ -4769,6 +4934,8 @@ Map {
         "args": Array [
           Array [
             "sm",
+            "md",
+            "lg",
             "xl",
           ],
         ],
@@ -4964,142 +5131,26 @@ Map {
       },
     },
   },
-  "StructuredListWrapper" => Object {
+  "StructuredListWrapper" => Object {},
+  "StructuredListHead" => Object {},
+  "StructuredListBody" => Object {},
+  "StructuredListRow" => Object {},
+  "StructuredListInput" => Object {},
+  "StructuredListCell" => Object {},
+  "StructuredListSkeleton" => Object {
     "defaultProps": Object {
-      "ariaLabel": "Structured list section",
-      "selection": false,
+      "border": false,
+      "rowCount": 5,
     },
     "propTypes": Object {
-      "ariaLabel": Object {
-        "type": "string",
-      },
-      "border": [Function],
-      "children": Object {
-        "type": "node",
+      "border": Object {
+        "type": "bool",
       },
       "className": Object {
         "type": "string",
       },
-      "selection": Object {
-        "type": "bool",
-      },
-    },
-  },
-  "StructuredListHead" => Object {
-    "propTypes": Object {
-      "children": Object {
-        "type": "node",
-      },
-      "className": Object {
-        "type": "string",
-      },
-    },
-  },
-  "StructuredListBody" => Object {
-    "defaultProps": Object {
-      "onKeyDown": [Function],
-    },
-    "propTypes": Object {
-      "children": Object {
-        "type": "node",
-      },
-      "className": Object {
-        "type": "string",
-      },
-      "head": Object {
-        "type": "bool",
-      },
-      "onKeyDown": Object {
-        "type": "func",
-      },
-    },
-  },
-  "StructuredListRow" => Object {
-    "defaultProps": Object {
-      "head": false,
-      "label": false,
-      "onKeyDown": [Function],
-      "tabIndex": 0,
-    },
-    "propTypes": Object {
-      "children": Object {
-        "type": "node",
-      },
-      "className": Object {
-        "type": "string",
-      },
-      "head": Object {
-        "type": "bool",
-      },
-      "label": Object {
-        "type": "bool",
-      },
-      "onKeyDown": Object {
-        "type": "func",
-      },
-      "tabIndex": Object {
+      "rowCount": Object {
         "type": "number",
-      },
-    },
-  },
-  "StructuredListInput" => Object {
-    "defaultProps": Object {
-      "onChange": [Function],
-      "title": "title",
-      "value": "value",
-    },
-    "propTypes": Object {
-      "className": Object {
-        "type": "string",
-      },
-      "defaultChecked": Object {
-        "type": "bool",
-      },
-      "id": Object {
-        "type": "string",
-      },
-      "name": Object {
-        "type": "string",
-      },
-      "onChange": Object {
-        "type": "func",
-      },
-      "title": Object {
-        "type": "string",
-      },
-      "value": Object {
-        "args": Array [
-          Array [
-            Object {
-              "type": "string",
-            },
-            Object {
-              "type": "number",
-            },
-          ],
-        ],
-        "isRequired": true,
-        "type": "oneOfType",
-      },
-    },
-  },
-  "StructuredListCell" => Object {
-    "defaultProps": Object {
-      "head": false,
-      "noWrap": false,
-    },
-    "propTypes": Object {
-      "children": Object {
-        "type": "node",
-      },
-      "className": Object {
-        "type": "string",
-      },
-      "head": Object {
-        "type": "bool",
-      },
-      "noWrap": Object {
-        "type": "bool",
       },
     },
   },
@@ -5279,6 +5330,7 @@ Map {
         "args": Array [
           Array [
             "sm",
+            "md",
           ],
         ],
         "type": "oneOf",
@@ -5435,6 +5487,9 @@ Map {
         "hideLabel": Object {
           "type": "bool",
         },
+        "hidePasswordLabel": Object {
+          "type": "string",
+        },
         "id": Object {
           "isRequired": true,
           "type": "string",
@@ -5459,6 +5514,9 @@ Map {
           "type": "func",
         },
         "placeholder": Object {
+          "type": "string",
+        },
+        "showPasswordLabel": Object {
           "type": "string",
         },
         "size": Object {
@@ -5547,6 +5605,9 @@ Map {
           "isRequired": true,
           "type": "string",
         },
+        "inline": Object {
+          "type": "bool",
+        },
         "invalid": Object {
           "type": "bool",
         },
@@ -5608,6 +5669,12 @@ Map {
             ],
           ],
           "type": "oneOfType",
+        },
+        "warn": Object {
+          "type": "bool",
+        },
+        "warnText": Object {
+          "type": "node",
         },
       },
       "render": [Function],
@@ -5684,6 +5751,8 @@ Map {
         "args": Array [
           Array [
             "sm",
+            "md",
+            "lg",
             "xl",
           ],
         ],
@@ -5763,10 +5832,7 @@ Map {
   },
   "SelectableTile" => Object {
     "defaultProps": Object {
-      "handleClick": [Function],
-      "handleKeyDown": [Function],
       "light": false,
-      "onChange": [Function],
       "selected": false,
       "tabIndex": 0,
       "title": "title",
@@ -5782,12 +5848,8 @@ Map {
       "disabled": Object {
         "type": "bool",
       },
-      "handleClick": Object {
-        "type": "func",
-      },
-      "handleKeyDown": Object {
-        "type": "func",
-      },
+      "handleClick": [Function],
+      "handleKeyDown": [Function],
       "iconDescription": [Function],
       "id": Object {
         "type": "string",
@@ -5799,6 +5861,12 @@ Map {
         "type": "string",
       },
       "onChange": Object {
+        "type": "func",
+      },
+      "onClick": Object {
+        "type": "func",
+      },
+      "onKeyDown": Object {
         "type": "func",
       },
       "selected": Object {
@@ -6062,6 +6130,8 @@ Map {
         "args": Array [
           Array [
             "sm",
+            "md",
+            "lg",
             "xl",
           ],
         ],
@@ -6156,6 +6226,7 @@ Map {
         "args": Array [
           Array [
             "sm",
+            "md",
           ],
         ],
         "type": "oneOf",
@@ -6393,6 +6464,9 @@ Map {
       "onBlur": Object {
         "type": "func",
       },
+      "onClick": Object {
+        "type": "func",
+      },
       "onFocus": Object {
         "type": "func",
       },
@@ -6593,6 +6667,8 @@ Map {
         "args": Array [
           Array [
             "sm",
+            "md",
+            "lg",
             "xl",
           ],
         ],
@@ -6668,23 +6744,6 @@ Map {
       },
       "hideLabel": Object {
         "type": "bool",
-      },
-    },
-  },
-  "StructuredListSkeleton" => Object {
-    "defaultProps": Object {
-      "border": false,
-      "rowCount": 5,
-    },
-    "propTypes": Object {
-      "border": Object {
-        "type": "bool",
-      },
-      "className": Object {
-        "type": "string",
-      },
-      "rowCount": Object {
-        "type": "number",
       },
     },
   },
@@ -7318,6 +7377,23 @@ Map {
     },
     "render": [Function],
   },
+  "unstable_FeatureFlags" => Object {
+    "propTypes": Object {
+      "children": Object {
+        "type": "node",
+      },
+      "flags": Object {
+        "args": Array [
+          Object {
+            "type": "bool",
+          },
+        ],
+        "type": "objectOf",
+      },
+    },
+  },
+  "unstable_useFeatureFlag" => Object {},
+  "unstable_useFeatureFlags" => Object {},
   "unstable_PageSelector" => Object {
     "defaultProps": Object {
       "className": null,

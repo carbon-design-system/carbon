@@ -8,6 +8,7 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import classNames from 'classnames';
+import { useFeatureFlag } from '../FeatureFlags';
 import { settings } from 'carbon-components';
 
 const { prefix } = settings;
@@ -36,13 +37,19 @@ const Checkbox = React.forwardRef(function Checkbox(
     wrapperClassName
   );
 
+  const enabled = useFeatureFlag('enable-2021-release');
+
   return (
     <div className={wrapperClasses}>
       <input
         {...other}
         type="checkbox"
         onChange={(evt) => {
-          onChange(evt.target.checked, id, evt);
+          if (enabled) {
+            onChange(evt, { checked: evt.target.checked, id });
+          } else {
+            onChange(evt.target.checked, id, evt);
+          }
         }}
         className={`${prefix}--checkbox`}
         id={id}

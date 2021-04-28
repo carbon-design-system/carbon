@@ -19,6 +19,7 @@ const Link = ({
   disabled,
   inline,
   visited,
+  renderIcon: Icon,
   size,
   ...other
 }) => {
@@ -38,6 +39,11 @@ const Link = ({
       rel={rel}
       {...other}>
       {children}
+      {!inline && Icon && (
+        <div className={`${prefix}--link__icon`}>
+          <Icon />
+        </div>
+      )}
     </Tag>
   );
 };
@@ -69,9 +75,15 @@ Link.propTypes = {
   inline: PropTypes.bool,
 
   /**
-   * Specify the size of the Link. Currently supports either `sm` or `lg` as an option.
+   * Optional prop to render an icon next to the link.
+   * Can be a React component class
    */
-  size: PropTypes.oneOf(['sm', 'lg']),
+  renderIcon: PropTypes.oneOfType([PropTypes.func, PropTypes.object]),
+
+  /**
+   * Specify the size of the Link. Currently supports either `sm`, 'md' (default) or 'lg` as an option.
+   */
+  size: PropTypes.oneOf(['sm', 'md', 'lg']),
 
   /**
    * Specify whether you want the link to receive visited styles after the link has been clicked

@@ -8,7 +8,6 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import classNames from 'classnames';
-import RadioButton from '../RadioButton';
 import { warning } from '../../internal/warning';
 import { settings } from 'carbon-components';
 
@@ -89,7 +88,7 @@ export default class RadioButtonGroup extends React.Component {
 
   getRadioButtons = () => {
     const children = React.Children.map(this.props.children, (radioButton) => {
-      const { value, ...other } = radioButton.props;
+      const { value } = radioButton.props;
       /* istanbul ignore if */
       if (typeof radioButton.props.checked !== 'undefined') {
         warning(
@@ -99,16 +98,13 @@ export default class RadioButtonGroup extends React.Component {
         );
       }
 
-      return (
-        <RadioButton
-          {...other}
-          name={this.props.name}
-          key={value}
-          value={value}
-          onChange={this.handleChange}
-          checked={value === this.state.selected}
-        />
-      );
+      return React.cloneElement(radioButton, {
+        name: this.props.name,
+        key: value,
+        value: value,
+        onChange: this.handleChange,
+        checked: value === this.state.selected,
+      });
     });
 
     return children;

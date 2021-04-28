@@ -29,7 +29,7 @@ $-custom-property-prefix: 'cds';
 
 /// @access public
 /// @group @carbon/themes
-@mixin set($active-theme) {
+@mixin set-theme($active-theme) {
   $theme: $active-theme !global;
 }
 
