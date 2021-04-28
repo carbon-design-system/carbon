@@ -405,11 +405,11 @@
     cursor: not-allowed;
 
     &::before {
-      background-color: $layer-disabled;
+      background-color: $button-disabled;
     }
 
     &::after {
-      background-color: $icon-disabled;
+      background-color: $icon-on-color-disabled;
     }
 
     &::before,
@@ -423,21 +423,6 @@
     + .#{$prefix}--toggle-input__label
     > .#{$prefix}--toggle__switch::before {
     box-shadow: none;
-  }
-
-  // disabled toggle in data table #7351
-  .#{$prefix}--data-table
-    .#{$prefix}--toggle-input:disabled
-    + .#{$prefix}--toggle-input__label
-    > .#{$prefix}--toggle__switch::before {
-    background-color: $button-disabled;
-  }
-
-  .#{$prefix}--data-table
-    .#{$prefix}--toggle-input:disabled
-    + .#{$prefix}--toggle-input__label
-    > .#{$prefix}--toggle__switch::after {
-    background-color: $icon-on-color-disabled;
   }
 
   //----------------------------------------------
