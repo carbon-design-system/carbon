@@ -88,8 +88,8 @@
   .#{$prefix}--tile--clickable.#{$prefix}--link--disabled,
   .#{$prefix}--tile--clickable:hover.#{$prefix}--link--disabled {
     display: block;
-    color: $text-disabled;
     background-color: $layer-disabled;
+    color: $text-disabled;
   }
 
   .#{$prefix}--tile--selectable {
@@ -100,8 +100,8 @@
   .#{$prefix}--tile__checkmark,
   .#{$prefix}--tile__chevron {
     position: absolute;
-    background: transparent;
     border: none;
+    background: transparent;
     transition: $duration--fast-02 motion(standard, productive);
   }
 
@@ -130,14 +130,14 @@
     right: $carbon--spacing-05;
     bottom: $carbon--spacing-05;
     display: flex;
-    align-items: flex-end;
     height: 1rem;
+    align-items: flex-end;
 
     svg {
       margin-left: $carbon--spacing-03;
+      fill: $icon-primary;
       transform-origin: center;
       transition: $duration--fast-02 motion(standard, productive);
-      fill: $icon-primary;
 
       // Windows, Firefox HCM Fix
       @media screen and (-ms-high-contrast: active),
@@ -157,12 +157,12 @@
   }
 
   .#{$prefix}--tile--expandable {
-    width: 100%;
     overflow: hidden;
+    width: 100%;
+    border: 0;
     color: inherit;
     font-size: inherit;
     text-align: left;
-    border: 0;
     transition: max-height $duration--moderate-01 motion(standard, productive);
   }
 
@@ -172,10 +172,10 @@
 
   .#{$prefix}--tile-content__below-the-fold {
     display: block;
-    visibility: hidden;
     opacity: 0;
     transition: opacity $duration--fast-02 motion(standard, productive),
       visibility $duration--fast-02 motion(standard, productive);
+    visibility: hidden;
   }
 
   .#{$prefix}--tile--is-expanded {
@@ -187,10 +187,10 @@
     }
 
     .#{$prefix}--tile-content__below-the-fold {
-      visibility: inherit;
       opacity: 1;
       transition: opacity $duration--fast-02 motion(standard, productive),
         visibility $duration--fast-02 motion(standard, productive);
+      visibility: inherit;
 
       // Safari-only media query
       // Fixes an issue with scrolling
@@ -252,8 +252,8 @@
   }
 
   .#{$prefix}--tile--disabled.#{$prefix}--tile--selectable {
-    color: $text-disabled;
     background-color: $layer;
+    color: $text-disabled;
     cursor: not-allowed;
   }
 

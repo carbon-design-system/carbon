@@ -62,11 +62,11 @@
   } @else {
     // Explicitly include `display: block` to override
     display: block;
-    flex: 0 0 percentage($span / $columns);
     // Add a `max-width` to ensure content within each column does not blow out
     // the width of the column. Applies to IE10+ and Firefox. Chrome and Safari
     // do not appear to require this.
     max-width: percentage($span / $columns);
+    flex: 0 0 percentage($span / $columns);
   }
 }
 
@@ -117,17 +117,17 @@
       // Provide basic `.col-{bp}` classes for equal-width flexbox columns
       .#{$prefix}--col,
       .#{$prefix}--col#{$infix} {
+        max-width: 100%;
         flex-basis: 0;
         flex-grow: 1;
-        max-width: 100%;
       }
 
       .#{$prefix}--col--auto,
       .#{$prefix}--col#{$infix}--auto {
-        flex: 1 0 0%;
         width: auto;
         // Reset earlier grid tiers
         max-width: 100%;
+        flex: 1 0 0%;
       }
 
       @for $i from 0 through $columns {
@@ -266,11 +266,11 @@ $carbon--aspect-ratios: (
   }
 
   .#{$prefix}--aspect-ratio::before {
-    float: left;
     width: 1px;
     height: 0;
     margin-left: -1px;
     content: '';
+    float: left;
   }
 
   .#{$prefix}--aspect-ratio::after {
