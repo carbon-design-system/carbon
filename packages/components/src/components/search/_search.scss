@@ -38,11 +38,11 @@
     order: 1;
     width: 100%;
     padding: 0 $carbon--spacing-08;
-    color: $text-01;
+    color: $text-primary;
     text-overflow: ellipsis;
-    background-color: $field-01;
+    background-color: $field;
     border: none;
-    border-bottom: 1px solid $ui-04;
+    border-bottom: 1px solid $border-strong;
     transition: background-color $duration--fast-02 motion(standard, productive),
       outline $duration--fast-02 motion(standard, productive);
     appearance: none;
@@ -62,7 +62,7 @@
 
   .#{$prefix}--search-input[disabled] {
     color: $disabled;
-    background-color: $disabled-01;
+    background-color: $field-disabled;
     border-bottom: 1px solid transparent;
     cursor: not-allowed;
 
@@ -70,7 +70,6 @@
       color: $disabled;
     }
   }
-
   .#{$prefix}--search--light .#{$prefix}--search-input {
     background: $field-02;
   }
@@ -121,7 +120,7 @@
     height: rem(16px);
     transform: translateY(-50%);
     pointer-events: none;
-    fill: $icon-02;
+    fill: $icon-secondary;
 
     // Windows, Firefox HCM Fix
     @media screen and (-ms-high-contrast: active),
@@ -146,14 +145,14 @@
       display: block;
       width: 2px;
       height: calc(100% - 2px);
-      background-color: $field-01;
+      background-color: $field;
       transition: background-color $duration--fast-02
         motion(standard, productive);
       content: '';
     }
 
     &:hover {
-      border-bottom: 1px solid $ui-04;
+      border-bottom: 1px solid $border-strong;
 
       &::before {
         background-color: $hover-field;
@@ -164,7 +163,7 @@
   .#{$prefix}--search-button {
     flex-shrink: 0;
     margin-left: $carbon--spacing-01;
-    background-color: $field-01;
+    background-color: $field;
 
     svg {
       vertical-align: middle;
@@ -199,7 +198,7 @@
       background-color $duration--fast-02 motion(standard, productive),
       outline $duration--fast-02 motion(standard, productive),
       border $duration--fast-02 motion(standard, productive);
-    fill: $icon-01;
+    fill: $icon-primary;
 
     &:hover {
       background-color: $hover-field;
@@ -212,7 +211,7 @@
     &:active {
       @include focus-outline('outline');
 
-      background-color: $selected-ui;
+      background-color: $background-selected;
     }
   }
 
@@ -350,7 +349,7 @@
   }
 
   .#{$prefix}--search--expandable .#{$prefix}--search-magnifier:hover {
-    background-color: $hover-ui;
+    background-color: $background-hover;
   }
 
   .#{$prefix}--search--expandable.#{$prefix}--search--expanded
@@ -359,12 +358,12 @@
   }
 
   .#{$prefix}--search--expandable .#{$prefix}--search-magnifier-icon {
-    fill: $icon-01;
+    fill: $icon-primary;
   }
 
   .#{$prefix}--search--expandable.#{$prefix}--search--expanded
     .#{$prefix}--search-magnifier-icon {
-    fill: $icon-02;
+    fill: $icon-secondary;
   }
 }
 

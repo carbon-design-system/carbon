@@ -26,14 +26,14 @@
   .#{$prefix}--snippet--disabled,
   .#{$prefix}--snippet--disabled
     .#{$prefix}--btn.#{$prefix}--snippet-btn--expand {
-    color: $disabled-02;
-    background-color: $disabled-01;
+    color: $text-disabled;
+    background-color: $layer-disabled;
   }
 
   .#{$prefix}--snippet--disabled .#{$prefix}--snippet-btn--expand:hover,
   .#{$prefix}--snippet--disabled .#{$prefix}--copy-btn:hover {
-    color: $disabled-02;
-    background-color: $disabled-01;
+    color: $text-disabled;
+    background-color: $layer-disabled;
     cursor: not-allowed;
   }
 
@@ -41,7 +41,7 @@
   .#{$prefix}--snippet--disabled
     .#{$prefix}--snippet-btn--expand
     .#{$prefix}--icon-chevron--down {
-    fill: $disabled-02;
+    fill: $icon-disabled;
   }
 
   .#{$prefix}--snippet code {
@@ -55,14 +55,14 @@
     position: relative;
     display: inline;
     padding: 0;
-    color: $text-01;
-    background-color: $field-01;
+    color: $text-primary;
+    background-color: $field;
     border: 2px solid transparent;
     border-radius: 4px;
     cursor: pointer;
 
     &:hover {
-      background-color: $ui-03;
+      background-color: $layer-accent;
     }
 
     &:active {
@@ -124,7 +124,7 @@
     display: inline-block;
 
     &:hover {
-      background-color: $field-01;
+      background-color: $field;
       cursor: auto;
     }
   }
@@ -246,7 +246,7 @@
     width: rem(16px);
     height: 100%;
     // Safari interprets `transparent` differently, so make color token value transparent instead:
-    background-image: linear-gradient(to right, rgba($field-01, 0), $field-01);
+    background-image: linear-gradient(to right, rgba($field, 0), $field);
     content: '';
   }
 
@@ -259,7 +259,7 @@
     width: rem(16px);
     height: rem(16px);
     transition: all $duration--fast-01 motion(standard, productive);
-    fill: $icon-01;
+    fill: $icon-primary;
 
     // Windows, Firefox HCM Fix
     @media screen and (-ms-high-contrast: active),
@@ -282,7 +282,7 @@
     height: $carbon--spacing-08;
     padding: 0;
     overflow: visible;
-    background-color: $field-01;
+    background-color: $field;
     border: none;
     outline: none;
     cursor: pointer;
@@ -302,7 +302,7 @@
   }
 
   .#{$prefix}--snippet-button:hover {
-    background: $hover-ui;
+    background: $field-hover;
   }
 
   .#{$prefix}--snippet-button:active {
@@ -352,8 +352,8 @@
     display: inline-flex;
     align-items: center;
     padding: $spacing-03 $spacing-05;
-    color: $text-01;
-    background-color: $field-01;
+    color: $text-primary;
+    background-color: $field;
     border: 0;
   }
 
@@ -370,12 +370,12 @@
     margin-left: $spacing-03;
     transform: rotate(0deg);
     transition: $duration--moderate-01 motion(standard, productive);
-    fill: $text-01;
+    fill: $icon-primary;
   }
 
   .#{$prefix}--snippet-btn--expand:hover {
-    color: $text-01;
-    background: $hover-ui;
+    color: $text-primary;
+    background: $field-hover;
   }
 
   .#{$prefix}--snippet-btn--expand:active {
@@ -482,13 +482,13 @@
   .#{$prefix}--snippet__overflow-indicator--left {
     order: 0;
     margin-right: -$carbon--spacing-05;
-    background-image: linear-gradient(to left, transparent, $field-01);
+    background-image: linear-gradient(to left, transparent, $field);
   }
 
   .#{$prefix}--snippet__overflow-indicator--right {
     order: 2;
     margin-left: -$carbon--spacing-05;
-    background-image: linear-gradient(to right, transparent, $field-01);
+    background-image: linear-gradient(to right, transparent, $field);
   }
 
   .#{$prefix}--snippet--single .#{$prefix}--snippet__overflow-indicator--right,
@@ -533,19 +533,11 @@
   @media not all and (min-resolution: 0.001dpcm) {
     @supports (-webkit-appearance: none) and (stroke-color: transparent) {
       .#{$prefix}--snippet__overflow-indicator--left {
-        background-image: linear-gradient(
-          to left,
-          rgba($field-01, 0),
-          $field-01
-        );
+        background-image: linear-gradient(to left, rgba($field, 0), $field);
       }
 
       .#{$prefix}--snippet__overflow-indicator--right {
-        background-image: linear-gradient(
-          to right,
-          rgba($field-01, 0),
-          $field-01
-        );
+        background-image: linear-gradient(to right, rgba($field, 0), $field);
       }
     }
   }
