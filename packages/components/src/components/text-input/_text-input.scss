@@ -169,8 +169,7 @@
     svg,
   // TODO: remove selector above
   .#{$prefix}--text-input:disabled
-    + .#{$prefix}--text-input--password__visibility__toggle
-    svg {
+    + .#{$prefix}--text-input--password__visibility__toggle.#{$prefix}--tooltip__trigger svg {
     cursor: not-allowed;
     fill: $icon-disabled;
 
