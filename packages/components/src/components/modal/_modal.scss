@@ -365,7 +365,7 @@
     z-index: z('modal');
   }
 
-  // Windows HCM fixes
+  // Windows HCM fix
   /* stylelint-disable */
   .#{$prefix}--modal-close__icon {
     @include high-contrast-mode('icon-fill');

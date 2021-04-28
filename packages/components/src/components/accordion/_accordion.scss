@@ -239,7 +239,7 @@
     margin-bottom: 0;
   }
 
-  // Windows HCM fixes
+  // Windows HCM fix
   .#{$prefix}--accordion__arrow,
   .#{$prefix}--accordion__item--active .#{$prefix}--accordion__arrow {
     @include high-contrast-mode('icon-fill');

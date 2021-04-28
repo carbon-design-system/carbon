@@ -177,10 +177,6 @@
     opacity: 1;
     transform: rotate(0);
     transition: transform $transition--base $carbon--standard-easing;
-<<<<<<< HEAD
-=======
-    fill: $icon-primary;
->>>>>>> f44269d77... feat(HCM): update more components
   }
 
   //----------------------------------------------------------------------------
@@ -232,7 +228,7 @@
     margin-top: rem(13px);
   }
 
-  // Windows HCM fixes
+  // Windows HCM fix
   .#{$prefix}--table-sort__icon,
   .#{$prefix}--table-sort__icon-unsorted {
     @include high-contrast-mode('icon-fill');

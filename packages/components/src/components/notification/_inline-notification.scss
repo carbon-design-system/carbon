@@ -301,7 +301,7 @@
     fill: $icon-primary;
   }
 
-  // Windows HCM fixes
+  // Windows HCM fix
   /* stylelint-disable */
   .#{$prefix}--inline-notification {
     @include high-contrast-mode('outline');

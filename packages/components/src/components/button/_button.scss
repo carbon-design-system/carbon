@@ -498,8 +498,8 @@
     }
   }
 
+  // Windows HCM fix
   .#{$prefix}--btn:focus {
-    // Windows HCM Fix
     @include high-contrast-mode('focus');
   }
 }

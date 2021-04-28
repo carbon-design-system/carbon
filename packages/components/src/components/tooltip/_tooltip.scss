@@ -690,18 +690,16 @@
     pointer-events: all;
   }
 
+  // Windows HCM fix
   /* stylelint-disable */
-  .#{$prefix}--tooltip__trigger {
-    svg {
-      @include high-contrast-mode('icon-fill');
-    }
-    &:hover,
-    &:focus {
-      svg {
-        @include high-contrast-mode('icon-fill');
-        @include high-contrast-mode('focus');
-      }
-    }
+  .#{$prefix}--tooltip__trigger svg,
+  .#{$prefix}--tooltip__trigger:hover svg,
+  .#{$prefix}--tooltip__trigger:focus svg {
+    @include high-contrast-mode('icon-fill');
+  }
+
+  .#{$prefix}--tooltip__trigger:focus svg {
+    @include high-contrast-mode('focus');
   }
 
   .#{$prefix}--tooltip {

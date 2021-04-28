@@ -189,6 +189,7 @@
     }
   }
 
+  // Windows HCM fix
   .#{$prefix}--structured-list-input:checked
     + .#{$prefix}--structured-list-td
     .#{$prefix}--structured-list-svg {

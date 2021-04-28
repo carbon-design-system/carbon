@@ -447,12 +447,20 @@
       display: none;
     }
   }
+
+  // Windows HCM fix
   /* stylelint-disable */
+  .#{$prefix}--number__control-btn:hover,
+  .#{$prefix}--number__control-btn:focus {
+    @include high-contrast-mode('focus');
+  }
+
   .#{$prefix}--number__control-btn {
     @include high-contrast-mode('outline');
-    &:focus {
-      @include high-contrast-mode('focus');
-    }
+  }
+
+  .#{$prefix}--number__control-btn svg {
+    @include high-contrast-mode('icon-fill');
   }
   /* stylelint-enable */
 }

@@ -789,7 +789,7 @@ $list-box-menu-width: rem(300px);
     background-color: inherit;
   }
 
-  // Windows HCM fixes
+  // Windows HCM fix
   .#{$prefix}--list-box__field,
   .#{$prefix}--list-box__menu,
   .#{$prefix}--multi-select .#{$prefix}--tag--filter {

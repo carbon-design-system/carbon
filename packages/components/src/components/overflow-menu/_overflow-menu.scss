@@ -338,16 +338,13 @@
 
   // Windows HCM fix
   /* stylelint-disable */
-  .#{$prefix}--overflow-menu {
-    &:focus {
-      @include high-contrast-mode('focus');
-    }
-    circle {
-      @include high-contrast-mode('outline');
-    }
-  }
+  .#{$prefix}--overflow-menu:focus,
   .#{$prefix}--overflow-menu-options__btn:focus {
     @include high-contrast-mode('focus');
+  }
+
+  .#{$prefix}--overflow-menu svg {
+    @include high-contrast-mode('icon-fill');
   }
   /*stylelint-enable */
 }

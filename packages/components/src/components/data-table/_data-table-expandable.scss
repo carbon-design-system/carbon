@@ -379,7 +379,7 @@
     background: $layer-selected;
   }
 
-  // Windows HCM fixes
+  // Windows HCM fix
   .#{$prefix}--table-expand__button:focus .#{$prefix}--table-expand__svg {
     @include high-contrast-mode('focus');
   }

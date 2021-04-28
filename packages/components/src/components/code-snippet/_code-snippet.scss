@@ -552,7 +552,7 @@
     padding-bottom: 0;
   }
 
-  // Windows HCM fixes
+  // Windows HCM fix
   /* stylelint-disable */
   .#{$prefix}--snippet__icon {
     @include high-contrast-mode('icon-fill');

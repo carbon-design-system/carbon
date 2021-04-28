@@ -209,6 +209,7 @@
     pointer-events: none;
   }
 
+  // Windows HCM fix
   /* stylelint-disable */
   .#{$prefix}--slider__thumb {
     @include high-contrast-mode('outline');

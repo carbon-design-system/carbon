@@ -221,7 +221,7 @@
     color: $text-primary;
   }
 
-  // Windows HCM fixes
+  // Windows HCM fix
   /* stylelint-disable */
   .#{$prefix}--toast-notification {
     @include high-contrast-mode('outline');
