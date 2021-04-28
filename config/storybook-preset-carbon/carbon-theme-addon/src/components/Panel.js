@@ -61,6 +61,9 @@ export const CarbonThemePanel = ({ api, active }) => {
             <option key="g10" value="g10">
               g10
             </option>
+            <option key="g80" value="g80">
+              g80
+            </option>
             <option key="g90" value="g90">
               g90
             </option>

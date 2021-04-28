@@ -224,13 +224,11 @@ function CodeSnippet({
         aria-label={ariaLabel || copyLabel || 'code-snippet'}
         onScroll={(type === 'single' && handleScroll) || null}
         {...containerStyle}>
-        <code>
-          <pre
-            ref={codeContentRef}
-            onScroll={(type === 'multi' && handleScroll) || null}>
-            {children}
-          </pre>
-        </code>
+        <pre
+          ref={codeContentRef}
+          onScroll={(type === 'multi' && handleScroll) || null}>
+          <code>{children}</code>
+        </pre>
       </div>
       {/**
        * left overflow indicator must come after the snippet due to z-index and

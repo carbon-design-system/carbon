@@ -28,9 +28,9 @@ import Button from '../Button';
 import mdx from './ComposedModal.mdx';
 
 const sizes = {
-  Default: '',
   'Extra small (xs)': 'xs',
   'Small (sm)': 'sm',
+  'Medium (md)': 'md',
   'Large (lg)': 'lg',
 };
 
@@ -42,7 +42,7 @@ const buttons = {
 };
 
 const props = {
-  composedModal: ({ titleOnly } = {}) => ({
+  composedModal: () => ({
     numberOfButtons: options('Number of Buttons', buttons, '2', {
       display: 'inline-radio',
     }),
@@ -52,7 +52,7 @@ const props = {
       'Primary focus element selector (selectorPrimaryFocus)',
       '[data-modal-primary-focus]'
     ),
-    size: select('Size (size)', sizes, titleOnly ? 'sm' : ''),
+    size: select('Size (size)', sizes, 'md'),
     preventCloseOnClickOutside: boolean(
       'Prevent closing on click outside of modal (preventCloseOnClickOutside)',
       true

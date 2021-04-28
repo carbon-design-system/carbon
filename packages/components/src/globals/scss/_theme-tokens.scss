@@ -15,6 +15,99 @@
 // to make sure that they're in sync if one has diverged from the other.
 @include carbon--theme();
 
+@if not feature-flag-enabled('enable-2021-release') {
+  $background: $ui-background;
+  $layer: $ui-01;
+  $layer-accent: $ui-03;
+  $field: $field-01;
+  $background-inverse: $inverse-02;
+  $background-brand: $interactive-01;
+  $interactive: $interactive-04;
+
+  $border-subtle: $ui-03;
+  $border-strong: $ui-04;
+  $border-inverse: $ui-05;
+  $border-interactive: $interactive-04;
+
+  $text-primary: $text-01;
+  $text-secondary: $text-02;
+  $text-placeholder: $text-03;
+  $text-helper: $text-05;
+  $text-on-color: $text-04;
+  $text-inverse: $inverse-01;
+
+  $link-primary: $link-01;
+  $link-secondary: $link-02;
+  $link-visited: $visited-link;
+  $link-inverse: $inverse-link;
+
+  $icon-primary: $icon-01;
+  $icon-secondary: $icon-02;
+  $icon-on-color: $icon-03;
+  $icon-inverse: $inverse-01;
+
+  $support-error: $support-01;
+  $support-success: $support-02;
+  $support-warning: $support-03;
+  $support-info: $support-04;
+  $support-error-inverse: $inverse-support-01;
+  $support-success-inverse: $inverse-support-02;
+  $support-warning-inverse: $inverse-support-03;
+  $support-info-inverse: $inverse-support-04;
+
+  $overlay: $overlay-01;
+  $toggle-off: $ui-04;
+
+  $button-primary: $interactive-01;
+  $button-secondary: $interactive-02;
+  $button-tertiary: $interactive-03;
+  $button-danger-primary: $danger-01;
+  $button-danger-secondary: $danger-02;
+
+  $background-active: $active-ui;
+  $layer-active: $active-ui;
+
+  $button-danger-active: $active-danger;
+  $button-primary-active: $active-primary;
+  $button-secondary-active: $active-secondary;
+  $button-tertiary-active: $active-tertiary;
+
+  $focus-inset: $inverse-01;
+  $focus-inverse: $inverse-focus-ui;
+
+  $background-hover: $hover-ui;
+  $layer-hover: $hover-ui;
+  $field-hover: $hover-ui;
+  $background-inverse-hover: $inverse-hover-ui;
+  $link-primary-hover: $hover-primary-text;
+  $button-danger-hover: $hover-danger;
+  $button-primary-hover: $hover-primary;
+  $button-secondary-hover: $hover-secondary;
+  $button-tertiary-hover: $hover-tertiary;
+
+  $background-selected: $selected-ui;
+  $background-selected-hover: $hover-selected-ui;
+  $layer-selected: $selected-ui;
+  $layer-selected-hover: $hover-selected-ui;
+  $layer-selected-inverse: $ui-05;
+  $border-subtle-selected: $active-ui;
+
+  $layer-disabled: $disabled-01;
+  $field-disabled: $disabled-01;
+  $border-disabled: $disabled-01;
+
+  $text-disabled: $disabled-02;
+  $button-disabled: $disabled-02;
+  $icon-disabled: $disabled-02;
+
+  $text-on-color-disabled: $disabled-03;
+  $icon-on-color-disabled: $disabled-03;
+  $layer-selected-disabled: $disabled-03;
+
+  $skeleton-background: $skeleton-01;
+  $skeleton-element: $skeleton-02;
+}
+
 /// Theme variables
 
 /// @type Value
@@ -30,13 +123,13 @@ $input-label-weight: 400 !default;
 /// @type Color
 /// @access public
 /// @group global-themes
-$disabled: $disabled-02 !default;
+$disabled: $text-disabled !default;
 
 /// @type Color
 /// @access public
 /// @group global-themes
 /// @deprecated
-$disabled-background-color: $disabled-01 !default;
+$disabled-background-color: $layer-disabled !default;
 
 /// @type Color
 /// @access public
@@ -67,7 +160,7 @@ $link-inverse-color: #6ea6ff !default;
 /// @type Color
 /// @access public
 /// @group tooltip
-$tooltip-background-color: $inverse-02 !default;
+$tooltip-background-color: $background-inverse !default;
 
 // Button
 
@@ -191,13 +284,13 @@ $checkbox-border-width: 2px !default;
 /// @access public
 /// @group code-snippet
 /// @deprecated
-$snippet-background-color: $field-01 !default;
+$snippet-background-color: $field !default;
 
 /// @type Color
 /// @access public
 /// @group code-snippet
 /// TODO: Define for experimental
-$snippet-border-color: $ui-03 !default;
+$snippet-border-color: $border-subtle !default;
 
 // Content Switcher
 
@@ -209,12 +302,12 @@ $content-switcher-border-radius: 0 !default;
 /// @type Number
 /// @access public
 /// @group content-switcher
-$content-switcher-option-border: 1px solid $brand-01 !default;
+$content-switcher-option-border: 1px solid $border-interactive !default;
 
 /// @type Color
 /// @access public
 /// @group content-switcher
-$content-switcher-divider: $ui-03 !default;
+$content-switcher-divider: $border-subtle !default;
 
 // Data Table
 
@@ -226,7 +319,7 @@ $data-table-heading-transform: uppercase !default;
 /// @type Value
 /// @access public
 /// @group data-table
-$data-table-heading-border-bottom: 1px solid $brand-01 !default;
+$data-table-heading-border-bottom: 1px solid $border-interactive !default;
 
 /// @type Number
 /// @access public
@@ -236,12 +329,12 @@ $data-table-row-height: 2rem !default;
 /// @type Color
 /// @access public
 /// @group data-table
-$data-table-zebra-color: $ui-02 !default;
+$data-table-zebra-color: $layer-accent !default;
 
 /// @type Color
 /// @access public
 /// @group data-table
-$data-table-column-hover: $hover-selected-ui !default;
+$data-table-column-hover: $layer-selected-hover !default;
 
 // Date Picker
 
@@ -256,13 +349,13 @@ $date-picker-in-range-background-color: $ibm-color__blue-20 !default;
 /// @type Color
 /// @access public
 /// @group modal
-$modal-border-top: $brand-01 4px solid !default;
+$modal-border-top: 4px solid $border-interactive !default;
 
 /// @type Color
 /// @access public
 /// @group modal
 /// @deprecated
-$modal-footer-background-color: $ui-03 !default;
+$modal-footer-background-color: $layer-accent !default;
 
 // Notification
 
@@ -316,12 +409,12 @@ $progress-indicator-line-offset: 0.625rem !default;
 /// @type Color
 /// @access public
 /// @group copy-button
-$copy-active: $active-ui !default;
+$copy-active: $layer-active !default;
 
 /// @type Color
 /// @access public
 /// @group copy-button
-$copy-btn-feedback: $inverse-02 !default;
+$copy-btn-feedback: $background-inverse !default;
 
 // Radio Button
 
@@ -347,22 +440,22 @@ $structured-list-text-transform: none !default;
 /// @type Value
 /// @access public
 /// @group tabs
-$tab-underline-color: 2px solid $ui-03 !default;
+$tab-underline-color: 2px solid $border-subtle !default;
 
 /// @type Value
 /// @access public
 /// @group tabs
-$tab-underline-color-hover: 2px solid $ui-04 !default;
+$tab-underline-color-hover: 2px solid $border-strong !default;
 
 /// @type Color
 /// @access public
 /// @group tabs
-$tab-text-disabled: $disabled-02 !default;
+$tab-text-disabled: $text-disabled !default;
 
 /// @type Value
 /// @access public
 /// @group tabs
-$tab-underline-disabled: 2px solid $disabled-01 !default;
+$tab-underline-disabled: 2px solid $border-disabled !default;
 
 // Skeleton Loading
 
@@ -370,7 +463,7 @@ $tab-underline-disabled: 2px solid $disabled-01 !default;
 /// @access public
 /// @group skeleton
 /// TODO: Remove this in next major release
-$skeleton: $skeleton-01 !default;
+$skeleton: $skeleton-background !default;
 
 // Light UI
 
@@ -408,4 +501,5 @@ $skeleton: $skeleton-01 !default;
 /// @type Color
 /// @access public
 /// @group light-ui
+// V11: No longer needed
 $hover-ui-light: get-light-value('ui-01');
