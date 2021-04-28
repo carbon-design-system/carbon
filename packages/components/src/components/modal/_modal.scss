@@ -31,21 +31,17 @@
     justify-content: center;
     width: 100vw;
     height: 100vh;
-    background-color: transparent;
+    background-color: $overlay;
     visibility: hidden;
     opacity: 0;
-    transition: background-color $duration--slow-02 motion(exit, expressive),
-      opacity $duration--moderate-02 motion(exit, expressive),
+    transition: opacity $duration--moderate-02 motion(exit, expressive),
       visibility 0ms linear $duration--moderate-02;
     content: '';
 
     &.is-visible {
-      background-color: $overlay;
       visibility: inherit;
       opacity: 1;
-      transition: background-color $duration--slow-02
-          motion(entrance, expressive),
-        opacity $duration--moderate-02 motion(entrance, expressive),
+      transition: opacity $duration--moderate-02 motion(entrance, expressive),
         visibility 0ms linear;
     }
 
