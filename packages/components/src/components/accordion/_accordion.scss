@@ -25,11 +25,11 @@
 
   .#{$prefix}--accordion__item {
     overflow: visible;
-    border-top: 1px solid $ui-03;
+    border-top: 1px solid $border-subtle;
     transition: all $duration--fast-02 motion(standard, productive);
 
     &:last-child {
-      border-bottom: 1px solid $ui-03;
+      border-bottom: 1px solid $border-subtle;
     }
   }
 
@@ -45,7 +45,7 @@
     min-height: rem(40px);
     margin: 0;
     padding: rem(10px) 0;
-    color: $text-01;
+    color: $text-primary;
     cursor: pointer;
     transition: background-color motion(standard, productive) $duration--fast-02;
 
@@ -60,7 +60,7 @@
     }
 
     &:hover::before {
-      background-color: $hover-ui;
+      background-color: $background-hover;
     }
 
     &:focus {
@@ -86,12 +86,12 @@
 
   // Disabled styles
   .#{$prefix}--accordion__heading[disabled] {
-    color: $disabled-02;
+    color: $text-disabled;
     cursor: not-allowed;
   }
 
   .#{$prefix}--accordion__heading[disabled] .#{$prefix}--accordion__arrow {
-    fill: $disabled-02;
+    fill: $icon-disabled;
   }
 
   .#{$prefix}--accordion__heading[disabled]:hover::before {
@@ -100,11 +100,11 @@
 
   .#{$prefix}--accordion__item--disabled,
   .#{$prefix}--accordion__item--disabled + .#{$prefix}--accordion__item {
-    border-top: 1px solid $disabled-02;
+    border-top: 1px solid $border-disabled;
   }
 
   li.#{$prefix}--accordion__item--disabled:last-of-type {
-    border-bottom: 1px solid $disabled-02;
+    border-bottom: 1px solid $border-disabled;
   }
 
   .#{$prefix}--accordion__arrow {
@@ -117,7 +117,7 @@
     margin: $accordion-arrow-margin;
     transform: rotate(-270deg) #{'/*rtl:ignore*/'};
     transition: all $duration--fast-02 motion(standard, productive);
-    fill: $ui-05;
+    fill: $icon-primary;
 
     // Windows, Firefox HCM Fix
     @media screen and (-ms-high-contrast: active),
@@ -199,7 +199,7 @@
 
     .#{$prefix}--accordion__arrow {
       transform: rotate(-90deg) #{'/*rtl:ignore*/'};
-      fill: $ui-05;
+      fill: $icon-primary;
 
       // Windows, Firefox HCM Fix
       @media screen and (-ms-high-contrast: active),
@@ -219,7 +219,7 @@
   .#{$prefix}--accordion.#{$prefix}--skeleton .#{$prefix}--accordion__arrow {
     cursor: default;
     pointer-events: none;
-    fill: $ui-05;
+    fill: $icon-primary;
 
     &:hover,
     &:focus,

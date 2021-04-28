@@ -41,9 +41,9 @@
   &.#{$prefix}--btn--disabled,
   &.#{$prefix}--btn--disabled:hover,
   &.#{$prefix}--btn--disabled:focus {
-    color: $disabled-03;
-    background: $disabled-02;
-    border-color: $disabled-02;
+    color: $text-on-color-disabled;
+    background: $button-disabled;
+    border-color: $button-disabled;
     box-shadow: none;
     cursor: not-allowed;
   }
@@ -81,7 +81,7 @@
   &:focus {
     border-color: $focus;
     box-shadow: inset 0 0 0 $button-outline-width $focus,
-      inset 0 0 0 $button-border-width $ui-background;
+      inset 0 0 0 $button-border-width $background;
 
     // Windows, Firefox HCM Fix
     @media screen and (-ms-high-contrast: active),
