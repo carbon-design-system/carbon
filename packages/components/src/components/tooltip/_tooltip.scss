@@ -707,6 +707,10 @@
   .#{$prefix}--tooltip {
     @include high-contrast-mode('outline');
   }
+
+  .#{$prefix}--assistive-text {
+    @include high-contrast-mode('outline');
+  }
 }
 
 @include exports('tooltip') {
