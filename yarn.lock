@@ -1802,7 +1802,6 @@ __metadata:
     "@octokit/plugin-retry": ^3.0.7
     "@octokit/plugin-throttling": ^2.6.0
     "@octokit/rest": ^16.28.1
-    "@percy/cli": ^1.0.0-beta.48
     "@rollup/plugin-babel": ^5.2.2
     "@rollup/plugin-commonjs": ^17.0.0
     "@rollup/plugin-node-resolve": ^11.1.0
@@ -7044,14 +7043,14 @@ __metadata:
   linkType: hard
 
 "ajv@npm:^8.0.5":
-  version: 8.1.0
-  resolution: "ajv@npm:8.1.0"
+  version: 8.2.0
+  resolution: "ajv@npm:8.2.0"
   dependencies:
     fast-deep-equal: ^3.1.1
     json-schema-traverse: ^1.0.0
     require-from-string: ^2.0.2
     uri-js: ^4.2.2
-  checksum: 612cb595ff113ffca09bce2987bf76b117de9b5257981eb21369ed444fb57ecce0025d43476788b7ca5dd0d5c28f8e1dcf428cfbd0803fc5e576647d4ef4bfbb
+  checksum: 36994bc227aac4c29ff967de5d53f087449ffab62d66f782f99c6aad8ac1d58db4eb7b0f78ce7961492eae00be51c2384b38b69e099d1021d41b2353dce91417
   languageName: node
   linkType: hard
 
@@ -10225,6 +10224,7 @@ __metadata:
     "@carbon/cli": "workspace:packages/cli"
     "@commitlint/cli": ^8.3.5
     "@commitlint/config-conventional": ^8.3.4
+    "@percy/cli": ^1.0.0-beta.48
     "@testing-library/dom": ^7.26.6
     "@testing-library/jest-dom": ^5.11.5
     "@testing-library/react": ^11.1.1
@@ -33357,7 +33357,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"tslib@npm:^2.0.0, tslib@npm:^2.0.1, tslib@npm:^2.0.3":
+"tslib@npm:^2.0.0":
+  version: 2.2.0
+  resolution: "tslib@npm:2.2.0"
+  checksum: a48c9639f7496fa701ea8ffe0561070fcb44c104a59632f7f845c0af00825c99b6373575ec59b2b5cdbfd7505875086dbe5dc83312304d8979f22ce571218ca3
+  languageName: node
+  linkType: hard
+
+"tslib@npm:^2.0.1, tslib@npm:^2.0.3":
   version: 2.1.0
   resolution: "tslib@npm:2.1.0"
   checksum: aa189c8179de0427b0906da30926fd53c59d96ec239dff87d6e6bc831f608df0cbd6f77c61dabc074408bd0aa0b9ae4ec35cb2c15f729e32f37274db5730cb78
