@@ -20,16 +20,16 @@
   //--------------------------------------------------------------------------
   .#{$prefix}--panel--overlay {
     position: fixed;
+    z-index: 1000;
     top: mini-units(6);
     right: 0;
     bottom: 0;
-    z-index: 1000;
     width: mini-units(32);
     height: 100%;
     padding: 1rem 0;
+    background-color: $shell-panel-bg-01;
     overflow-x: hidden;
     overflow-y: auto;
-    background-color: $shell-panel-bg-01;
     transform: translate3d(100%, 0, 0);
     transition: transform 0.11s cubic-bezier(0.2, 0, 0.38, 0.9);
     will-change: transform;
@@ -44,8 +44,8 @@
   // Switcher - Search
   //--------------------------------------------------------------------------
   .#{$prefix}--product-switcher__search {
-    margin-bottom: mini-units(3);
     padding: 0 mini-units(2);
+    margin-bottom: mini-units(3);
   }
 
   .#{$prefix}--search--shell input {
@@ -75,11 +75,11 @@
   .#{$prefix}--product-switcher__back-btn {
     display: inline-block;
     width: 100%;
-    color: $shell-header-link;
-    text-align: left;
-    background: transparent;
     border: none;
+    background: transparent;
+    color: $shell-header-link;
     cursor: pointer;
+    text-align: left;
   }
 
   .#{$prefix}--product-switcher__all-btn:hover,
@@ -89,8 +89,8 @@
 
   .#{$prefix}--product-switcher__all-btn:focus,
   .#{$prefix}--product-switcher__back-btn:focus {
-    outline: none;
     box-shadow: inset 0 0 0 3px $shell-header-link;
+    outline: none;
   }
 
   .#{$prefix}--product-switcher__back-btn {
@@ -122,16 +122,16 @@
 
   .#{$prefix}--product-link {
     display: flex;
+    width: 100%;
     flex-direction: row;
     align-items: center;
-    width: 100%;
     padding: mini-units(1) mini-units(2);
     text-decoration: none;
   }
 
   .#{$prefix}--product-link:focus {
-    outline: none;
     box-shadow: inset 0 0 0 3px $shell-header-link;
+    outline: none;
   }
 
   .#{$prefix}--product-switcher__icon {
@@ -148,9 +148,9 @@
 
   .#{$prefix}--product-switcher__product-list .#{$prefix}--overflow-menu {
     display: none;
+    width: mini-units(5);
     align-items: center;
     justify-content: center;
-    width: mini-units(5);
 
     &.#{$prefix}--overflow-menu--open {
       display: flex;
@@ -173,8 +173,8 @@
 
   .#{$prefix}--product-switcher__product-list .#{$prefix}--overflow-menu:focus {
     display: flex;
-    outline: none;
     box-shadow: inset 0 0 0 3px $shell-header-link;
+    outline: none;
   }
 
   .#{$prefix}--product-switcher__product-list

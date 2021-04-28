@@ -18,9 +18,9 @@
 @mixin inline-loading {
   .#{$prefix}--inline-loading {
     display: flex;
-    align-items: center;
     width: 100%;
     min-height: 2rem;
+    align-items: center;
 
     .#{$prefix}--loading__svg circle {
       stroke-width: 12;
@@ -61,15 +61,15 @@
   }
 
   .#{$prefix}--inline-loading__checkmark {
-    transform-origin: 50% 50%;
-    animation-name: stroke;
     animation-duration: 250ms;
     animation-fill-mode: forwards;
+    animation-name: stroke;
     fill: none;
     stroke: $interactive;
-    stroke-width: 1.8;
     stroke-dasharray: 12;
     stroke-dashoffset: 12;
+    stroke-width: 1.8;
+    transform-origin: 50% 50%;
   }
 
   .#{$prefix}--inline-loading--error {
@@ -95,8 +95,8 @@
 
     .#{$prefix}--inline-loading__checkmark {
       animation: none;
-      stroke-dashoffset: 0;
       stroke-dasharray: 0;
+      stroke-dashoffset: 0;
     }
   }
 }

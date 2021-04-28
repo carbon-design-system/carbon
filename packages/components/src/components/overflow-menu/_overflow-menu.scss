@@ -29,10 +29,10 @@
 
     position: relative;
     display: flex;
-    align-items: center;
-    justify-content: center;
     width: rem(40px);
     height: rem(40px);
+    align-items: center;
+    justify-content: center;
     cursor: pointer;
     transition: outline $duration--fast-02 motion(entrance, productive),
       background-color $duration--fast-02 motion(entrance, productive);
@@ -100,23 +100,23 @@
     @include box-shadow;
 
     position: absolute;
+    z-index: z('floating');
     top: 32px;
     left: 0;
-    z-index: z('floating');
     display: none;
+    width: rem(160px);
     flex-direction: column;
     align-items: flex-start;
-    width: rem(160px);
-    list-style: none;
     background-color: $layer;
+    list-style: none;
 
     &::after {
       position: absolute;
       display: block;
       background-color: $layer;
+      content: '';
       transition: background-color $duration--fast-02
         motion(entrance, productive);
-      content: '';
     }
   }
 
@@ -211,9 +211,9 @@
     @include reset;
 
     display: flex;
-    align-items: center;
     width: 100%;
     height: rem(40px);
+    align-items: center;
     padding: 0;
     background-color: transparent;
     transition: background-color $duration--fast-02 motion(entrance, productive);
@@ -243,8 +243,8 @@
   a.#{$prefix}--overflow-menu-options__btn::before {
     display: inline-block;
     height: 100%;
-    vertical-align: middle;
     content: '';
+    vertical-align: middle;
   }
 
   .#{$prefix}--overflow-menu-options__btn {
@@ -252,18 +252,17 @@
     @include focus-outline('reset');
 
     display: inline-flex;
-    align-items: center;
     width: 100%;
     max-width: 11.25rem;
     height: 100%;
+    align-items: center;
     padding: 0 $carbon--spacing-05;
+    border: none;
+    background-color: transparent;
     color: $text-02;
-
+    cursor: pointer;
     font-weight: 400;
     text-align: left;
-    background-color: transparent;
-    border: none;
-    cursor: pointer;
     transition: outline $duration--fast-02 motion(entrance, productive),
       background-color $duration--fast-02 motion(entrance, productive),
       color $duration--fast-02 motion(entrance, productive);
@@ -291,8 +290,8 @@
 
   .#{$prefix}--overflow-menu-options__option-content {
     overflow: hidden;
-    white-space: nowrap;
     text-overflow: ellipsis;
+    white-space: nowrap;
   }
 
   .#{$prefix}--overflow-menu-options__option:hover {
@@ -303,8 +302,8 @@
     .#{$prefix}--overflow-menu-options__btn:hover,
   .#{$prefix}--overflow-menu-options__option--danger
     .#{$prefix}--overflow-menu-options__btn:focus {
-    color: $text-on-color;
     background-color: $button-danger-primary;
+    color: $text-on-color;
 
     svg {
       fill: currentColor;
