@@ -3342,9 +3342,7 @@ Map {
         "type": "bool",
       },
       "focusTrap": [Function],
-      "hasForm": Object {
-        "type": "bool",
-      },
+      "hasForm": [Function],
       "hasScrollingContent": Object {
         "type": "bool",
       },
@@ -4661,7 +4659,6 @@ Map {
         "flags": Map {
           "enable-css-custom-properties" => false,
           "enable-use-controlled-state-with-value" => false,
-          "enable-css-grid" => false,
           "enable-2021-release" => false,
         },
       },
@@ -4669,7 +4666,6 @@ Map {
         "flags": Map {
           "enable-css-custom-properties" => false,
           "enable-use-controlled-state-with-value" => false,
-          "enable-css-grid" => false,
           "enable-2021-release" => false,
         },
       },
