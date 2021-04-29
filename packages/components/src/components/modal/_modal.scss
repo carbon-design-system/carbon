@@ -133,6 +133,7 @@
 
     .#{$prefix}--modal-content p,
     .#{$prefix}--modal-content__regular-content p,
+    //TO-DO: remove all instances of --modal-content--with-form in v11 since hasForm prop has been deprecated
     .#{$prefix}--modal-content--with-form {
       padding-right: $spacing-05;
     }

@@ -389,7 +389,7 @@ export default class Modal extends Component {
     });
 
     const contentClasses = classNames(`${prefix}--modal-content`, {
-      [`${prefix}--modal-content--with-form`]: hasForm,
+      [`${prefix}--modal-content--with-form`]: hasForm, //TO-DO: delete this line in v11 since hasForm is deprecated
       [`${prefix}--modal-scroll-content`]: hasScrollingContent,
     });
 
