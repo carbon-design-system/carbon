@@ -17,24 +17,24 @@
   .#{$prefix}--assistive-text,
   .#{$prefix}--visually-hidden {
     position: absolute;
+    overflow: hidden;
     width: 1px;
     height: 1px;
-    margin: -1px;
     padding: 0;
-    overflow: hidden;
-    white-space: nowrap;
     border: 0;
-    visibility: inherit;
+    margin: -1px;
     clip: rect(0, 0, 0, 0);
+    visibility: inherit;
+    white-space: nowrap;
   }
 
   .#{$prefix}--body {
     @include reset;
     @include type-style('body-short-01');
 
-    color: $text-01;
+    background-color: $background;
+    color: $text-primary;
     line-height: 1;
-    background-color: $ui-background;
   }
 }
 

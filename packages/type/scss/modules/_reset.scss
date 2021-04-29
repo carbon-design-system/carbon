@@ -16,7 +16,7 @@
 /// @param {String} $mono-font-family [font-family('mono')] - The font family used on elements that require mono fonts, like the `<code>` element
 /// @access public
 /// @group @carbon/type
-@mixin type-reset(
+@mixin reset(
   // TODO: remove in next major release. This has been replaced with 100%
   $base-font-size: layout.$base-font-size,
   $body-font-family: font-family('sans'),
@@ -30,9 +30,9 @@
     @include font-weight('regular');
 
     font-family: $body-font-family;
-    text-rendering: optimizeLegibility;
-    -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
   }
 
   code {

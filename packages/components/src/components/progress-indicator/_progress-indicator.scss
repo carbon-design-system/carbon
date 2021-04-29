@@ -26,10 +26,10 @@
   .#{$prefix}--progress-step {
     position: relative;
     display: inline-flex;
-    flex-direction: row;
+    overflow: visible;
     width: rem(128px);
     min-width: 7rem;
-    overflow: visible;
+    flex-direction: row;
 
     .#{$prefix}--tooltip__label {
       display: block;
@@ -37,8 +37,8 @@
   }
 
   .#{$prefix}--progress--space-equal .#{$prefix}--progress-step {
-    flex-grow: 1;
     min-width: 8rem;
+    flex-grow: 1;
   }
 
   .#{$prefix}--progress-line {
@@ -57,26 +57,26 @@
   .#{$prefix}--progress-step svg {
     position: relative;
     z-index: 1;
-    flex-shrink: 0;
     width: $carbon--spacing-05;
     height: $carbon--spacing-05;
+    flex-shrink: 0;
     margin: rem(10px) $carbon--spacing-03 0 0;
     border-radius: 50%;
-    fill: $interactive-04;
+    fill: $interactive;
   }
 
   .#{$prefix}--progress-label {
     @include type-style('body-short-01');
 
+    overflow: hidden;
     max-width: rem(88px);
     margin: $carbon--spacing-03 0 0 0;
-    overflow: hidden;
-    color: $text-01;
+    color: $text-primary;
     line-height: 1.45;
-    white-space: nowrap;
     text-overflow: ellipsis;
     transition: box-shadow $duration--fast-02 motion(standard, productive),
       color $duration--fast-02 motion(standard, productive);
+    white-space: nowrap;
 
     &::before {
       display: block;
@@ -85,15 +85,15 @@
   }
 
   .#{$prefix}--progress-label:hover {
-    color: $link-01;
-    box-shadow: 0 rem(1px) $link-01;
+    box-shadow: 0 rem(1px) $link-primary;
+    color: $link-primary;
     cursor: pointer;
   }
 
   .#{$prefix}--progress-label:focus {
-    color: $link-01;
+    box-shadow: 0 rem(3px) 0 0 $link-primary;
+    color: $link-primary;
     outline: none;
-    box-shadow: 0 rem(3px) 0 0 $link-01;
   }
 
   .#{$prefix}--progress--space-equal .#{$prefix}--progress-label {
@@ -102,8 +102,8 @@
   }
 
   .#{$prefix}--progress-label:active {
-    color: $interactive-01;
-    box-shadow: 0 rem(3px) 0 0 $interactive-01;
+    box-shadow: 0 rem(3px) 0 0 $background-brand;
+    color: $background-brand;
   }
 
   //OVERFLOW STYLING
@@ -117,8 +117,8 @@
   }
 
   .#{$prefix}--tooltip__text {
-    margin: 0;
     padding: 0;
+    margin: 0;
     font-weight: normal;
   }
 
@@ -131,10 +131,10 @@
 
     min-width: rem(115px);
     min-height: $carbon--spacing-06;
+    padding: $carbon--spacing-03 $carbon--spacing-05;
     margin-top: rem(40px);
     margin-left: rem(22px);
-    padding: $carbon--spacing-03 $carbon--spacing-05;
-    color: $inverse-01;
+    color: $text-inverse;
     visibility: hidden;
   }
 
@@ -144,7 +144,7 @@
 
     width: rem(150px);
     height: auto;
-    color: $inverse-01;
+    color: $text-inverse;
   }
 
   //OPTIONAL HELPER TEXT STYLING
@@ -155,32 +155,32 @@
     left: 0;
     margin-top: rem(28px);
     margin-left: $carbon--spacing-06;
-    color: $text-02;
+    color: $text-secondary;
     text-align: start;
   }
 
   //CURRENT STYLING
   .#{$prefix}--progress-step--current {
     .#{$prefix}--progress-line {
-      background-color: $interactive-04;
+      background-color: $interactive;
     }
   }
 
   //INCOMPLETE STYLING
   .#{$prefix}--progress-step--incomplete {
     svg {
-      fill: $ui-05;
+      fill: $icon-primary;
     }
 
     .#{$prefix}--progress-line {
-      background-color: $ui-03;
+      background-color: $border-subtle;
     }
   }
 
   //COMPLETED STYLING
   .#{$prefix}--progress-step--complete {
     .#{$prefix}--progress-line {
-      background-color: $interactive-04;
+      background-color: $interactive;
     }
   }
 
@@ -194,21 +194,21 @@
 
   //unclickable button
   .#{$prefix}--progress-step-button--unclickable {
-    outline: none;
     cursor: default;
+    outline: none;
   }
 
   .#{$prefix}--progress-step-button--unclickable
     .#{$prefix}--progress-label:hover {
-    color: $text-01;
     box-shadow: none;
+    color: $text-primary;
     cursor: default;
   }
 
   .#{$prefix}--progress-step-button--unclickable
     .#{$prefix}--tooltip__label:hover {
-    color: $link-01;
-    box-shadow: 0 rem(1px) $link-01;
+    box-shadow: 0 rem(1px) $link-primary;
+    color: $link-primary;
     cursor: pointer;
   }
 
@@ -224,15 +224,15 @@
 
     .#{$prefix}--progress-label,
     .#{$prefix}--progress-label:hover {
-      color: $disabled;
       box-shadow: none;
+      color: $disabled;
       cursor: not-allowed;
     }
 
     .#{$prefix}--progress-label:focus,
     .#{$prefix}--progress-label:active {
-      outline: none;
       box-shadow: none;
+      outline: none;
     }
 
     .#{$prefix}--progress-line {
@@ -248,7 +248,7 @@
 
   // ERROR STYLING
   .#{$prefix}--progress__warning > * {
-    fill: $support-01;
+    fill: $support-error;
   }
 
   // Skeleton State
@@ -269,11 +269,11 @@
 
   .#{$prefix}--progress--vertical .#{$prefix}--progress-step,
   .#{$prefix}--progress--vertical .#{$prefix}--progress-step-button {
-    flex-wrap: wrap;
-    align-content: flex-start;
     width: initial;
     min-width: initial;
     min-height: 3.625rem;
+    flex-wrap: wrap;
+    align-content: flex-start;
   }
 
   .#{$prefix}--progress--vertical .#{$prefix}--progress-step svg,
@@ -288,8 +288,8 @@
     width: initial;
     max-width: rem(160px);
     margin: 0;
-    white-space: initial;
     vertical-align: top;
+    white-space: initial;
   }
 
   .#{$prefix}--progress--vertical .#{$prefix}--progress-step .bx--tooltip {

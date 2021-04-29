@@ -13,7 +13,7 @@
 /// @access private
 /// @group popover
 @mixin popover {
-  $popover-text-color: $text-01;
+  $popover-text-color: $text-primary;
   $popover-caret-offset: 1rem;
   $popover-box-shadow: 2px 2px 6px 0 rgba(0, 0, 0, 0.2);
   $popover-offset: 8px;
@@ -38,18 +38,18 @@
     position: relative;
     width: max-content;
     max-width: rem(368px);
-    color: $popover-text-color;
-    background-color: $ui-01;
+    background-color: $layer;
     border-radius: 2px;
+    color: $popover-text-color;
   }
 
   .#{$prefix}--popover--light .#{$prefix}--popover-contents {
-    background-color: $ui-background;
+    background-color: $background;
   }
 
   .#{$prefix}--popover--high-contrast .#{$prefix}--popover-contents {
-    color: $inverse-01;
-    background-color: $inverse-02;
+    background-color: $background-inverse;
+    color: $text-inverse;
   }
 
   .#{$prefix}--popover--caret .#{$prefix}--popover-contents::before,

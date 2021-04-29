@@ -312,7 +312,7 @@ function createIconSource(moduleName, sizes, preamble = []) {
   // return statement for the "default" icon
   const source = templates.component({
     moduleName: t.identifier(moduleName),
-    defaultSize: t.numericLiteral(maxSize),
+    defaultSize: t.numericLiteral(16),
     statements: [
       ...preamble,
       ...ifStatements.map(({ size, source }) => {

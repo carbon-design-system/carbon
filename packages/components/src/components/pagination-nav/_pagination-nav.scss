@@ -29,10 +29,10 @@
       display: block;
       width: 0;
       height: $carbon--spacing-02;
-      background-color: $interactive-01;
+      background-color: $background-brand;
+      content: '';
       opacity: 0;
       transition: width $duration--fast-02 motion(standard, productive);
-      content: '';
     }
   }
 
@@ -59,9 +59,9 @@
 /// @param {Number} $select-icon-top-position [$carbon--spacing-05]
 /// @param {Number} $select-icon-left-position [$carbon--spacing-05]
 @mixin pagination-nav(
-  $text-color: $text-02,
-  $text-color-active: $text-02,
-  $background-color-hover: $hover-ui,
+  $text-color: $text-secondary,
+  $text-color-active: $text-secondary,
+  $background-color-hover: $background-hover,
   $background-color-active: initial,
   $font-weight: 400,
   $item-padding: 0,
@@ -104,20 +104,20 @@
     display: block;
     min-width: $button-min-width;
     padding: $button-padding;
+    border-radius: 0;
     color: $text-color;
     font-weight: $font-weight;
     line-height: 1;
+    outline: 0;
     text-align: center;
     text-decoration: none;
-    border-radius: 0;
-    outline: 0;
     transition: background-color $duration--fast-02 motion(standard, productive),
       color $duration--fast-02 motion(standard, productive);
     user-select: none;
 
     &:hover {
-      color: $text-color;
       background-color: $background-color-hover;
+      color: $text-color;
     }
 
     &:focus {
@@ -126,8 +126,8 @@
 
     &:disabled,
     &.#{$prefix}--pagination-nav__page--disabled {
-      color: rgba($text-color, 0.5);
       background: none;
+      color: rgba($text-color, 0.5);
       outline: none;
       pointer-events: none;
     }
@@ -135,23 +135,23 @@
     @include pseudo-underline();
 
     &.#{$prefix}--pagination-nav__page--active {
+      background-color: $background-color-active;
       color: $text-color-active;
       font-weight: 600;
-      background-color: $background-color-active;
     }
 
     .#{$prefix}--pagination-nav__icon {
-      pointer-events: none;
       fill: currentColor;
+      pointer-events: none;
     }
   }
 
   .#{$prefix}--pagination-nav__page--direction {
     display: flex;
-    align-items: center;
-    justify-content: center;
     width: $button-direction-size;
     height: $button-direction-size;
+    align-items: center;
+    justify-content: center;
     line-height: 0;
   }
 
@@ -161,8 +161,8 @@
 
   .#{$prefix}--pagination-nav__page--select {
     max-height: $button-min-width;
-    text-indent: calc(50% - 4.5px);
     appearance: none;
+    text-indent: calc(50% - 4.5px);
     // Override some Firefox user-agent styles
     @-moz-document url-prefix() {
       text-indent: 0;
