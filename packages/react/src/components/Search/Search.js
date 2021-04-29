@@ -176,6 +176,7 @@ export default class Search extends Component {
       disabled,
       onChange,
       onKeyDown,
+      renderSearchIcon,
       ...other
     } = this.props;
 
@@ -206,6 +207,8 @@ export default class Search extends Component {
     });
 
     const searchId = `${id}-search`;
+    const searchIcon = renderSearchIcon ? renderSearchIcon :
+      <Search16 className={`${prefix}--search-magnifier-icon`}/>
 
     return (
       <div role="search" aria-labelledby={searchId} className={searchClasses}>
@@ -214,7 +217,7 @@ export default class Search extends Component {
           ref={(magnifier) => {
             this.magnifier = magnifier;
           }}>
-          <Search16 className={`${prefix}--search-magnifier-icon`} />
+          {searchIcon}
         </div>
         <label id={searchId} htmlFor={id} className={`${prefix}--label`}>
           {labelText}
