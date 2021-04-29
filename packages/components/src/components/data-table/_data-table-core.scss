@@ -86,10 +86,10 @@
 
   .#{$prefix}--data-table tbody tr:hover td,
   .#{$prefix}--data-table tbody tr:hover th {
-    color: $text-primary;
-    background: $layer-hover;
     border-top: 1px solid $layer-hover;
     border-bottom: 1px solid $layer-hover;
+    background: $layer-hover;
+    color: $text-primary;
   }
 
   .#{$prefix}--data-table tbody tr:hover td .#{$prefix}--link,
@@ -106,8 +106,8 @@
   .#{$prefix}--data-table th {
     padding-right: $spacing-05;
     padding-left: $spacing-05;
-    color: $text-primary;
     background-color: $layer-accent;
+    color: $text-primary;
   }
 
   .#{$prefix}--data-table th:last-of-type {
@@ -124,10 +124,10 @@
   .#{$prefix}--data-table tbody th {
     padding-right: $spacing-05;
     padding-left: $spacing-05;
-    color: $text-secondary;
-    background: $layer;
     border-top: 1px solid $layer;
     border-bottom: 1px solid $border-subtle;
+    background: $layer;
+    color: $text-secondary;
 
     + td:first-of-type {
       padding-left: $spacing-04;
@@ -275,18 +275,18 @@
     tbody
     tr:not(.#{$prefix}--parent-row):nth-child(even)
     td {
-    background-color: $layer-accent;
     border-top: 1px solid $layer-accent;
     border-bottom: 1px solid $layer-accent;
+    background-color: $layer-accent;
   }
 
   .#{$prefix}--data-table--zebra
     tbody
     tr:not(.#{$prefix}--parent-row):hover
     td {
-    background-color: $layer-hover;
     border-top: 1px solid $layer-hover;
     border-bottom: 1px solid $layer-hover;
+    background-color: $layer-hover;
   }
 
   //----------------------------------------------------------------------------
@@ -395,11 +395,11 @@
     tr:nth-child(odd).#{$prefix}--data-table--selected
     td,
   tr.#{$prefix}--data-table--selected td {
-    color: $text-primary;
-    background-color: $layer-selected;
     border-top: 1px solid $layer-selected;
     // Bottom border acts as separator from other rows
     border-bottom: 1px solid $layer-active;
+    background-color: $layer-selected;
+    color: $text-primary;
   }
 
   // First row
@@ -448,10 +448,10 @@
     tr:nth-child(odd).#{$prefix}--data-table--selected:hover
     td,
   .#{$prefix}--data-table tbody .#{$prefix}--data-table--selected:hover td {
-    color: $text-primary;
-    background: $data-table-column-hover;
     border-top: 1px solid $data-table-column-hover;
     border-bottom: 1px solid $data-table-column-hover;
+    background: $data-table-column-hover;
+    color: $text-primary;
   }
 
   // selected overflow menu
@@ -718,13 +718,13 @@
 
     thead {
       position: sticky;
-      top: 0;
       z-index: 1;
-      width: 100%;
+      top: 0;
       overflow: scroll;
-      will-change: transform;
+      width: 100%;
       // Hides ie scrollbar
       -ms-overflow-style: none;
+      will-change: transform;
     }
 
     thead tr th {
@@ -733,9 +733,9 @@
 
     tbody {
       flex-direction: column;
-      overflow-x: scroll;
       // Hides ie scrollbar
       -ms-overflow-style: none;
+      overflow-x: scroll;
       will-change: transform;
     }
 
@@ -785,9 +785,9 @@
     // Selectable fix
     thead th.#{$prefix}--table-column-checkbox,
     tbody tr td.#{$prefix}--table-column-checkbox {
-      align-items: center;
       width: rem(36px);
       min-width: rem(36px);
+      align-items: center;
     }
 
     // V11: remove tall
@@ -809,8 +809,8 @@
     }
 
     td.#{$prefix}--table-column-menu {
-      align-items: center;
       height: auto;
+      align-items: center;
       padding-top: 0;
     }
 

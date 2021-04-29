@@ -23,8 +23,8 @@
 
   position: relative;
   display: inline-flex;
-  align-items: center;
   overflow: visible;
+  align-items: center;
   cursor: pointer;
 
   // Tooltip - renders as a combo of ::before and ::after elements
@@ -36,8 +36,8 @@
     display: flex;
     align-items: center;
     opacity: 0;
-    transition: opacity $duration--fast-01 motion(standard, productive);
     pointer-events: none;
+    transition: opacity $duration--fast-01 motion(standard, productive);
   }
 
   &::before {
@@ -45,12 +45,12 @@
     left: 0;
     width: 0;
     height: 0;
+    border-width: 0 rem(4px) rem(5px) rem(4px);
+    border-style: solid;
+    border-color: transparent transparent $background-inverse transparent;
     margin: 0 auto;
     margin-top: 1px;
     margin-left: 50%;
-    border-color: transparent transparent $background-inverse transparent;
-    border-style: solid;
-    border-width: 0 rem(4px) rem(5px) rem(4px);
     content: '';
   }
 
@@ -60,16 +60,16 @@
     min-width: rem(24px);
     max-width: rem(208px);
     height: rem(24px);
-    margin-left: 50%;
     padding: 0 1rem;
-    color: $text-inverse;
-    font-weight: 400;
-    white-space: nowrap;
+    margin-left: 50%;
     background-color: $background-inverse;
     border-radius: rem(2px);
-    transform: translateX(-50%);
+    color: $text-inverse;
     content: attr(aria-label);
+    font-weight: 400;
     pointer-events: none;
+    transform: translateX(-50%);
+    white-space: nowrap;
   }
 
   &:hover,
@@ -147,8 +147,8 @@
 
       position: relative;
       display: inline-flex;
-      color: $text-primary;
       border-bottom: 1px dotted $highlight;
+      color: $text-primary;
 
       &:hover {
         cursor: pointer;
@@ -178,8 +178,8 @@
     z-index: 1;
     display: none;
     width: rem(208px);
-    margin-top: $carbon--spacing-04;
     padding: $carbon--spacing-03 $carbon--spacing-05;
+    margin-top: $carbon--spacing-04;
     background: $background-inverse;
     border-radius: rem(2px);
     cursor: pointer;
@@ -350,8 +350,8 @@
 
     display: inline-flex;
     align-items: center;
-    font-size: 1rem;
     cursor: pointer;
+    font-size: 1rem;
 
     &:focus {
       @include focus-outline('border');
@@ -378,12 +378,12 @@
     display: none;
     min-width: rem(208px);
     max-width: rem(288px);
-    margin-top: $carbon--spacing-02;
     padding: $carbon--spacing-05;
-    color: $text-inverse;
-    word-wrap: break-word;
+    margin-top: $carbon--spacing-02;
     background: $background-inverse;
     border-radius: rem(2px);
+    color: $text-inverse;
+    word-wrap: break-word;
 
     // Windows, Firefox HCM Fix
     @media screen and (-ms-high-contrast: active),
@@ -395,9 +395,9 @@
     // @todo this can be deprecated in v11 since focus should always be on the content container not the tooltip
     // V11: remove in V11
     &:focus {
-      outline: 0;
       box-shadow: inset 0 0 0 1px $background-inverse,
         inset 0 0 0 2px $background;
+      outline: 0;
     }
 
     &.#{$prefix}--tooltip--top.#{$prefix}--tooltip--align-start,
@@ -499,10 +499,10 @@
       left: 0;
       width: 0;
       height: 0;
-      margin: 0 auto;
       border-right: $caret-size solid transparent;
       border-bottom: $caret-size solid $background-inverse;
       border-left: $caret-size solid transparent;
+      margin: 0 auto;
       content: '';
     }
 
