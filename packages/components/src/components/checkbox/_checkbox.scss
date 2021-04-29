@@ -85,12 +85,12 @@
     // different checkbox states.
     width: rem(16px);
     height: rem(16px);
+    border: 1px solid $icon-primary;
     // increase left margin for #6480
     margin: rem(2px) rem(2px) rem(2px) rem(3px);
 
     // Checkboxes with a background color look visually off against a parent container.
     background-color: transparent;
-    border: 1px solid $icon-01;
     border-radius: 1px;
     content: '';
   }
@@ -102,13 +102,13 @@
     left: rem(7px);
     width: rem(9px);
     height: rem(5px);
+    border-bottom: 2px solid $icon-inverse;
+    border-left: 2px solid $icon-inverse;
     margin-top: rem(-3px) #{'/*rtl:0rem*/'};
     background: none;
-    border-bottom: 2px solid $inverse-01;
-    border-left: 2px solid $inverse-01;
+    content: '';
     transform: scale(0) rotate(-45deg);
     transform-origin: bottom right #{'/*rtl:center*/'};
-    content: '';
   }
 
   //----------------------------------------------
@@ -120,9 +120,9 @@
   .#{$prefix}--checkbox:indeterminate + .#{$prefix}--checkbox-label::before,
   .#{$prefix}--checkbox-label[data-contained-checkbox-state='true']::before,
   .#{$prefix}--checkbox-label[data-contained-checkbox-state='mixed']::before {
-    background-color: $icon-01;
-    border-color: $icon-01;
     border-width: 1px;
+    border-color: $icon-primary;
+    background-color: $icon-primary;
   }
 
   // Display the check
@@ -136,8 +136,8 @@
   .#{$prefix}--checkbox-label[data-contained-checkbox-state='mixed']::after {
     top: rem(11px);
     width: rem(8px);
-    border-bottom: 2px solid $inverse-01;
-    border-left: 0 solid $inverse-01;
+    border-bottom: 2px solid $icon-inverse;
+    border-left: 0 solid $icon-inverse;
     transform: scale(1) rotate(0deg);
   }
 
@@ -164,13 +164,13 @@
 
   .#{$prefix}--checkbox:disabled + .#{$prefix}--checkbox-label,
   .#{$prefix}--checkbox-label[data-contained-checkbox-disabled='true'] {
-    color: $disabled-02;
+    color: $text-disabled;
     cursor: not-allowed;
   }
 
   .#{$prefix}--checkbox:disabled + .#{$prefix}--checkbox-label::before,
   .#{$prefix}--checkbox-label[data-contained-checkbox-disabled='true']::before {
-    border-color: $disabled-02;
+    border-color: $icon-disabled;
   }
 
   .#{$prefix}--checkbox:checked:disabled + .#{$prefix}--checkbox-label::before,
@@ -178,7 +178,7 @@
     + .#{$prefix}--checkbox-label::before,
   .#{$prefix}--checkbox-label[data-contained-checkbox-state='true'][data-contained-checkbox-disabled='true']::before,
   .#{$prefix}--checkbox-label[data-contained-checkbox-state='mixed'][data-contained-checkbox-disabled='true']::before {
-    background-color: $disabled-02;
+    background-color: $icon-disabled;
   }
 
   //-----------------------------------------------

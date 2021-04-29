@@ -16,11 +16,19 @@ import SearchFilterButton from '../SearchFilterButton';
 import SearchLayoutButton from '../SearchLayoutButton';
 import ExpandableSearch from '../ExpandableSearch';
 import mdx from './Search.mdx';
+import { FeatureFlags } from '../FeatureFlags';
+
+// V11: Updated Size Table
+// const sizes = {
+//   'Small (sm)': 'sm',
+//   'Medium (md)': 'md',
+//   'Large (lg) - default': 'lg',
+// };
 
 const sizes = {
-  'Regular size (xl)': 'xl',
-  'Large size (lg)': 'lg',
-  'Small size (sm)': 'sm',
+  'Small (sm)': 'sm',
+  'Large (lg)': 'lg',
+  'Extra Large (xl) - default': 'xl',
 };
 
 const props = () => ({
@@ -60,6 +68,34 @@ export default {
 };
 
 export const Default = () => <Search {...props()} id="search-1" />;
+
+export const SizeStory = () => (
+  <div>
+    <div>
+      <h3>Feature Flags: DISABLED</h3>
+      <br />
+      <br />
+      <Search placeholder="sm" size="sm" id="search-1" />
+      <br />
+      <Search placeholder="lg" size="lg" id="search-1" />
+      <br />
+      <Search placeholder="xl" size="xl" id="search-1" />
+      <br />
+    </div>
+    <br />
+    <br />
+    <FeatureFlags flags={{ 'enable-2021-release': true }}>
+      <h3>Feature Flags: ENABLED</h3>
+      <br />
+      <br />
+      <Search placeholder="sm" size="sm" id="search-4" />
+      <br />
+      <Search placeholder="md" size="md" id="search-5" />
+      <br />
+      <Search placeholder="lg" size="lg" id="search-6" />
+    </FeatureFlags>
+  </div>
+);
 
 Default.parameters = {
   info: {
