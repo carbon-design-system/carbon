@@ -7098,6 +7098,9 @@ Map {
       "isRail": Object {
         "type": "bool",
       },
+      "onOverlayClick": Object {
+        "type": "func",
+      },
       "onToggle": Object {
         "type": "func",
       },

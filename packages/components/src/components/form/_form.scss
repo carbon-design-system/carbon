@@ -98,8 +98,8 @@
   .#{$prefix}--list-box--warning {
     ~ .#{$prefix}--form-requirement {
       display: block;
-      max-height: rem(200px);
       overflow: visible;
+      max-height: rem(200px);
       font-weight: 400;
     }
   }
@@ -134,9 +134,9 @@
   }
 
   .#{$prefix}--form--fluid .#{$prefix}--form-requirement {
-    margin: 0;
     padding: $carbon--spacing-03 rem(40px) $carbon--spacing-03
       $carbon--spacing-05;
+    margin: 0;
   }
 
   // Fix for red ring when input is marked required in Firefox, refs #744
@@ -149,10 +149,9 @@
     @include type-style('caption-01');
 
     display: none;
-    max-height: 0;
-
-    margin: $carbon--spacing-02 0 0;
     overflow: hidden;
+    max-height: 0;
+    margin: $carbon--spacing-02 0 0;
   }
 
   .#{$prefix}--select--inline .#{$prefix}--form__helper-text {
