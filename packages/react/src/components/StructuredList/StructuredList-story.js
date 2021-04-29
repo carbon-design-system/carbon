@@ -7,6 +7,8 @@
 
 import React from 'react';
 import { CheckmarkFilled16 } from '@carbon/icons-react';
+import { withKnobs, boolean } from '@storybook/addon-knobs';
+
 import {
   StructuredListWrapper,
   StructuredListHead,
@@ -21,8 +23,14 @@ import mdx from './StructuredList.mdx';
 
 const { prefix } = settings;
 
+const props = () => ({
+  isCondensed: boolean('Condensed', false),
+  isFlush: boolean('Flush alignment', false),
+});
+
 export default {
   title: 'Components/StructuredList',
+  decorators: [withKnobs],
 
   parameters: {
     component: StructuredListWrapper,
@@ -81,8 +89,8 @@ Simple.parameters = {
   },
 };
 
-export const Condensed = () => (
-  <StructuredListWrapper condensed>
+export const Playground = () => (
+  <StructuredListWrapper {...props()}>
     <StructuredListHead>
       <StructuredListRow head>
         <StructuredListCell head>ColumnA</StructuredListCell>
@@ -115,7 +123,7 @@ export const Condensed = () => (
   </StructuredListWrapper>
 );
 
-Condensed.parameters = {
+Playground.parameters = {
   info: {
     text: `
         Structured Lists group content that is similar or related, such as terms or definitions.
@@ -153,7 +161,7 @@ export const Selection = () => {
     ));
   };
   return (
-    <StructuredListWrapper selection>
+    <StructuredListWrapper selection {...props()}>
       <StructuredListHead>
         <StructuredListRow head>
           <StructuredListCell head>ColumnA</StructuredListCell>

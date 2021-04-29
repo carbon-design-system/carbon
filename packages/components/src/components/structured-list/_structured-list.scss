@@ -39,9 +39,39 @@
     overflow-x: auto;
     overflow-y: hidden;
 
+    // Condensed list
     &.#{$prefix}--structured-list--condensed .#{$prefix}--structured-list-td,
     &.#{$prefix}--structured-list--condensed .#{$prefix}--structured-list-th {
       @include padding-td--condensed;
+      //8px padding all over
+    }
+
+    &.#{$prefix}--structured-list--condensed
+      .#{$prefix}--structured-list-row
+      .#{$prefix}--structured-list-td:first-of-type,
+    &.#{$prefix}--structured-list--condensed
+      .#{$prefix}--structured-list-row
+      .#{$prefix}--structured-list-th:first-of-type {
+      padding-left: 1rem;
+      // condensed styles requires 16px padding between columns
+      // 8px side padding between col creates 16 px, with exception of 1st col, which needs an override to be 16px
+    }
+
+    // Flush list
+    &.#{$prefix}--structured-list--flush .#{$prefix}--structured-list-td,
+    &.#{$prefix}--structured-list--flush .#{$prefix}--structured-list-th {
+      padding-left: 0;
+    }
+
+    &.#{$prefix}--structured-list--condensed.#{$prefix}--structured-list--flush
+      .#{$prefix}--structured-list-row
+      .#{$prefix}--structured-list-td:first-of-type,
+    &.#{$prefix}--structured-list--condensed.#{$prefix}--structured-list--flush
+      .#{$prefix}--structured-list-row
+      .#{$prefix}--structured-list-th:first-of-type {
+      padding-left: 0;
+      // condensed styles requires 16px padding between columns
+      // 8px side padding between col creates 16 px, with exception of 1st col, which needs an override to be 16px
     }
   }
 

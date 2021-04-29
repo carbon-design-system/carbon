@@ -11,7 +11,6 @@
 /// @param {Number} $padding [$structured-list-padding]
 @mixin padding-td--condensed($padding: $structured-list-padding) {
   padding: $padding / 4;
-  padding-left: 0;
 }
 
 /// Used only for [data-structured-list]

@@ -21,13 +21,15 @@ export function StructuredListWrapper(props) {
     selection,
     className,
     ariaLabel,
-    condensed,
+    isCondensed,
+    isFlush,
     border: _border,
     ...other
   } = props;
   const classes = classNames(`${prefix}--structured-list`, className, {
     [`${prefix}--structured-list--selection`]: selection,
-    [`${prefix}--structured-list--condensed`]: condensed,
+    [`${prefix}--structured-list--condensed`]: isCondensed,
+    [`${prefix}--structured-list--flush`]: isFlush,
   });
 
   return (
@@ -64,7 +66,12 @@ StructuredListWrapper.propTypes = {
   /**
    * Specify if structured list is condensed, default is false
    */
-  condensed: PropTypes.bool,
+  isCondensed: PropTypes.bool,
+
+  /**
+   * Specify if structured list is flush, default is false
+   */
+  isFlush: PropTypes.bool,
 
   /**
    * Specify whether your StructuredListWrapper should have selections
@@ -75,7 +82,8 @@ StructuredListWrapper.propTypes = {
 StructuredListWrapper.defaultProps = {
   selection: false,
   ariaLabel: 'Structured list section',
-  condensed: false,
+  isCondensed: false,
+  isFlush: false,
 };
 
 export function StructuredListHead(props) {
