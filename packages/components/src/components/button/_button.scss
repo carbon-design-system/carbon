@@ -74,14 +74,14 @@
     }
 
     &:focus {
-      color: $text-inverse;
       background-color: $button-tertiary;
+      color: $text-inverse;
     }
 
     &:active {
-      color: $text-inverse;
-      background-color: $button-tertiary-active;
       border-color: transparent;
+      background-color: $button-tertiary-active;
+      color: $text-inverse;
     }
 
     &:disabled,
@@ -90,8 +90,8 @@
     &.#{$prefix}--btn--disabled,
     &.#{$prefix}--btn--disabled:hover,
     &.#{$prefix}--btn--disabled:focus {
-      color: $text-on-color-disabled;
       background: transparent;
+      color: $text-on-color-disabled;
       outline: none;
     }
   }
@@ -128,9 +128,9 @@
     &.#{$prefix}--btn--disabled,
     &.#{$prefix}--btn--disabled:hover,
     &.#{$prefix}--btn--disabled:focus {
-      color: $text-on-color-disabled;
-      background: transparent;
       border-color: transparent;
+      background: transparent;
+      color: $text-on-color-disabled;
       outline: none;
     }
 
@@ -157,10 +157,10 @@
     &.#{$prefix}--btn--disabled.#{$prefix}--tooltip--a11y::before,
     &.#{$prefix}--btn--disabled.#{$prefix}--tooltip--a11y::after,
     &.#{$prefix}--btn--disabled .#{$prefix}--assistive-text {
-      margin: -1px;
       overflow: hidden;
-      opacity: 0;
+      margin: -1px;
       clip: rect(0, 0, 0, 0);
+      opacity: 0;
     }
   }
 
@@ -370,18 +370,18 @@
       );
 
       &:hover {
-        color: $text-on-color;
         border-color: $button-danger-hover;
+        color: $text-on-color;
       }
 
       &:focus {
-        color: $text-on-color;
         background-color: $button-danger-primary;
+        color: $text-on-color;
       }
 
       &:active {
-        color: $text-on-color;
         border-color: $button-danger-active;
+        color: $text-on-color;
       }
 
       &:disabled,
@@ -390,8 +390,8 @@
       &.#{$prefix}--btn--disabled,
       &.#{$prefix}--btn--disabled:hover,
       &.#{$prefix}--btn--disabled:focus {
-        color: $text-on-color-disabled;
         background: transparent;
+        color: $text-on-color-disabled;
         outline: none;
       }
     }
@@ -426,9 +426,9 @@
       &.#{$prefix}--btn--disabled,
       &.#{$prefix}--btn--disabled:hover,
       &.#{$prefix}--btn--disabled:focus {
-        color: $disabled;
-        background: transparent;
         border-color: transparent;
+        background: transparent;
+        color: $disabled;
         outline: none;
       }
 

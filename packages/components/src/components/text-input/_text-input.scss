@@ -28,10 +28,10 @@
     width: 100%;
     height: rem(40px);
     padding: 0 $carbon--spacing-05;
-    color: $text-primary;
-    background-color: $field;
     border: none;
     border-bottom: 1px solid $border-strong;
+    background-color: $field;
+    color: $text-primary;
     transition: background-color $duration--fast-01 motion(standard, productive),
       outline $duration--fast-01 motion(standard, productive);
 
@@ -74,24 +74,24 @@
   .#{$prefix}--text-input__field-wrapper {
     position: relative;
     display: flex;
-    align-items: center;
     width: 100%;
+    align-items: center;
 
     .#{$prefix}--text-input__invalid-icon {
       position: absolute;
       // top/transform used to center invalid icon in IE11
       top: 50%;
       right: $carbon--spacing-05;
-      transform: translateY(-50%);
       fill: $support-error;
+      transform: translateY(-50%);
     }
 
     .#{$prefix}--text-input__invalid-icon--warning {
       fill: $support-warning;
 
       path:first-of-type {
-        opacity: 1;
         fill: $carbon__black-100;
+        opacity: 1;
       }
     }
 
@@ -109,20 +109,20 @@
       position: absolute;
       right: 0;
       display: flex;
-      align-items: center;
-      justify-content: center;
       width: rem(40px);
       height: rem(40px);
       min-height: auto;
+      align-items: center;
+      justify-content: center;
       padding: 0;
-      background: none;
       border: 0;
+      background: none;
       cursor: pointer;
       transition: outline $duration--fast-01 motion(standard, productive);
 
       svg {
-        transition: fill $duration--fast-01 motion(standard, productive);
         fill: $icon-secondary;
+        transition: fill $duration--fast-01 motion(standard, productive);
 
         // Windows, Firefox HCM Fix
         @media screen and (-ms-high-contrast: active),
@@ -192,12 +192,12 @@
   .#{$prefix}--text-input:disabled {
     @include focus-outline('reset');
 
-    color: $text-disabled;
-    background-color: $field-disabled;
     border-bottom: 1px solid transparent;
+    background-color: $field-disabled;
+    color: $text-disabled;
+    cursor: not-allowed;
     // Needed to fix disabled text in Safari #6673
     -webkit-text-fill-color: currentColor;
-    cursor: not-allowed;
   }
 
   // V11: Possibly deprecate
@@ -244,9 +244,9 @@
 
   .#{$prefix}--form--fluid .#{$prefix}--label {
     position: absolute;
+    z-index: 1;
     top: rem(13px);
     left: $carbon--spacing-05;
-    z-index: 1;
     margin: 0;
   }
 
@@ -276,10 +276,10 @@
     .#{$prefix}--text-input--warn
     + .#{$prefix}--text-input__divider {
     display: block;
-    margin: 0 1rem;
-    border-color: $border-subtle;
     border-style: solid;
+    border-color: $border-subtle;
     border-bottom: none;
+    margin: 0 1rem;
   }
 
   .#{$prefix}--form--fluid .#{$prefix}--text-input__invalid-icon {
@@ -319,8 +319,8 @@
   .#{$prefix}--text-input-wrapper .#{$prefix}--label--inline {
     flex: 1;
     margin: rem(13px) 0 0 0;
-    word-break: break-word;
     overflow-wrap: break-word;
+    word-break: break-word;
   }
 
   .#{$prefix}--text-input-wrapper .#{$prefix}--label--inline--sm {
@@ -334,9 +334,9 @@
   }
 
   .#{$prefix}--text-input__label-helper-wrapper {
+    max-width: rem(128px);
     flex: 2;
     flex-direction: column;
-    max-width: rem(128px);
     margin-right: rem(24px);
     overflow-wrap: break-word;
   }
@@ -347,10 +347,10 @@
 
   .#{$prefix}--text-input__field-outer-wrapper {
     display: flex;
+    width: 100%;
     flex: 1 1 auto;
     flex-direction: column;
     align-items: flex-start;
-    width: 100%;
   }
 
   .#{$prefix}--text-input__field-outer-wrapper--inline {

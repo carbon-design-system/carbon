@@ -11,18 +11,18 @@
 @include exports('helper-classes') {
   .#{$prefix}--text-truncate--end {
     display: inline-block;
-    width: 100%;
     overflow: hidden;
-    white-space: nowrap;
+    width: 100%;
     text-overflow: ellipsis;
+    white-space: nowrap;
   }
 
   .#{$prefix}--text-truncate--front {
     display: inline-block;
-    width: 100%;
     overflow: hidden;
+    width: 100%;
     direction: rtl;
-    white-space: nowrap;
     text-overflow: ellipsis;
+    white-space: nowrap;
   }
 }

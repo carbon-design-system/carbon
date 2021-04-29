@@ -33,11 +33,11 @@
     display: table;
     width: 100%;
     margin-bottom: 5rem;
-    overflow-x: auto;
-    overflow-y: hidden;
     background-color: transparent;
     border-collapse: collapse;
     border-spacing: 0;
+    overflow-x: auto;
+    overflow-y: hidden;
 
     &.#{$prefix}--structured-list--condensed .#{$prefix}--structured-list-td,
     &.#{$prefix}--structured-list--condensed .#{$prefix}--structured-list-th {
@@ -53,8 +53,8 @@
 
   .#{$prefix}--structured-list--selection
     .#{$prefix}--structured-list-row:hover:not(.#{$prefix}--structured-list-row--header-row):not(.#{$prefix}--structured-list-row--selected) {
-    background-color: $hover-row;
     border-bottom: 1px solid $hover-row;
+    background-color: $hover-row;
     cursor: pointer;
   }
 
@@ -136,9 +136,9 @@
 
   .#{$prefix}--structured-list-svg {
     display: inline-block;
-    vertical-align: middle;
-    transition: all $duration--fast-02 motion(standard, productive);
     fill: transparent;
+    transition: all $duration--fast-02 motion(standard, productive);
+    vertical-align: middle;
   }
 
   .#{$prefix}--structured-list-row:hover .#{$prefix}--structured-list-svg {

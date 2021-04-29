@@ -16,24 +16,24 @@
 
   position: relative;
   display: inline-flex;
+  max-width: rem(320px);
+  min-height: $button-height;
   flex-shrink: 0;
   align-items: center;
   justify-content: space-between;
-  max-width: rem(320px);
-  min-height: $button-height;
+  padding: $button-padding;
   // Fix to remove added margins on buttons in safari (see #5155)
   margin: 0;
-  padding: $button-padding;
+  border-radius: $button-border-radius;
+  cursor: pointer;
+  outline: none;
   text-align: left;
   text-decoration: none;
-  vertical-align: top;
-  border-radius: $button-border-radius;
-  outline: none;
-  cursor: pointer;
   transition: background $duration--fast-01 motion(entrance, productive),
     box-shadow $duration--fast-01 motion(entrance, productive),
     border-color $duration--fast-01 motion(entrance, productive),
     outline $duration--fast-01 motion(entrance, productive);
+  vertical-align: top;
 
   &:disabled,
   &:hover:disabled,
@@ -41,19 +41,19 @@
   &.#{$prefix}--btn--disabled,
   &.#{$prefix}--btn--disabled:hover,
   &.#{$prefix}--btn--disabled:focus {
-    color: $text-on-color-disabled;
-    background: $button-disabled;
     border-color: $button-disabled;
+    background: $button-disabled;
     box-shadow: none;
+    color: $text-on-color-disabled;
     cursor: not-allowed;
   }
 
   .#{$prefix}--btn__icon {
     position: absolute;
     right: rem(16px);
-    flex-shrink: 0;
     width: rem(16px);
     height: rem(16px);
+    flex-shrink: 0;
   }
 }
 
@@ -68,11 +68,11 @@
   $icon-color,
   $active-color
 ) {
-  color: $font-color;
-  background-color: $bg-color;
-  border-color: $border-color;
-  border-style: solid;
   border-width: $button-outline-width;
+  border-style: solid;
+  border-color: $border-color;
+  background-color: $bg-color;
+  color: $font-color;
 
   &:hover {
     background-color: $hover-bg-color;
