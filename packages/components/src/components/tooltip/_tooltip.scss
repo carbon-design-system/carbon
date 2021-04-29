@@ -514,7 +514,7 @@
     }
 
     &[data-floating-menu-direction='left'] {
-      margin-left: -$spacing-03;
+      margin-left: calc(#{$spacing-03} * -1);
 
       .#{$prefix}--tooltip__caret {
         top: 50%;
@@ -526,7 +526,7 @@
     }
 
     &[data-floating-menu-direction='top'] {
-      margin-top: -$spacing-03;
+      margin-left: calc(#{$spacing-03} * -1);
       margin-left: -0.5px;
 
       .#{$prefix}--tooltip__caret {
