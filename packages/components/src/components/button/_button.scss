@@ -463,6 +463,11 @@
     min-height: rem(64px);
   }
 
+  .#{$prefix}--btn--lg.#{$prefix}--btn--icon-only.#{$prefix}--btn--expressive {
+    min-height: rem(48px);
+    padding: 1rem;
+  }
+
   // V11: Remove field
   .#{$prefix}--btn--field,
   .#{$prefix}--btn--md {

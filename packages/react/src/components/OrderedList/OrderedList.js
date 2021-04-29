@@ -17,7 +17,7 @@ const OrderedList = ({
   className,
   nested,
   native,
-  expressive,
+  isExpressive,
   ...other
 }) => {
   const classNames = classnames(
@@ -25,7 +25,7 @@ const OrderedList = ({
       [`${prefix}--list--ordered`]: !native,
       [`${prefix}--list--ordered--native`]: native,
       [`${prefix}--list--nested`]: nested,
-      [`${prefix}--list--expressive`]: expressive,
+      [`${prefix}--list--expressive`]: isExpressive,
     },
     className
   );
@@ -50,7 +50,7 @@ OrderedList.propTypes = {
   /**
    * Specify whether this ordered list expressive or not
    */
-  expressive: PropTypes.bool,
+  isExpressive: PropTypes.bool,
 
   /**
    * Specify whether this ordered list should use native list styles instead of custom counter
@@ -66,7 +66,7 @@ OrderedList.propTypes = {
 OrderedList.defaultProps = {
   nested: false,
   native: false,
-  expressive: false,
+  isExpressive: false,
 };
 
 export default OrderedList;

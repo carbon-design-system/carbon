@@ -16,12 +16,12 @@ const UnorderedList = ({
   children,
   className,
   nested,
-  expressive,
+  isExpressive,
   ...other
 }) => {
   const classNames = classnames(`${prefix}--list--unordered`, className, {
     [`${prefix}--list--nested`]: nested,
-    [`${prefix}--list--expressive`]: expressive,
+    [`${prefix}--list--expressive`]: isExpressive,
   });
   return (
     <ul className={classNames} {...other}>
@@ -44,7 +44,7 @@ UnorderedList.propTypes = {
   /**
    * Specify whether this ordered list expressive or not
    */
-  expressive: PropTypes.bool,
+  isExpressive: PropTypes.bool,
 
   /**
    * Specify whether the list is nested, or not
@@ -54,6 +54,7 @@ UnorderedList.propTypes = {
 
 UnorderedList.defaultProps = {
   nested: false,
+  isExpressive: false,
 };
 
 export default UnorderedList;

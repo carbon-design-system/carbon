@@ -16,6 +16,7 @@ import { keys, matches } from '../../internal/keyboard';
 import { useId } from '../../internal/useId';
 import toggleClass from '../../tools/toggleClass';
 import { useFeatureFlag } from '../FeatureFlags';
+import { console } from 'window-or-global';
 
 const { prefix } = settings;
 const Button = React.forwardRef(function Button(
@@ -28,7 +29,7 @@ const Button = React.forwardRef(function Button(
     size,
     kind,
     href,
-    expressive,
+    isExpressive,
     isSelected,
     tabIndex,
     type,
@@ -120,18 +121,21 @@ const Button = React.forwardRef(function Button(
   }, []);
 
   const enabled = useFeatureFlag('enable-2021-release');
+  console.log('feature flag is:', enabled);
 
   const buttonClasses = classNames(className, {
     [`${prefix}--btn`]: true,
     [`${prefix}--btn--sm`]: size === 'small' || size === 'sm' || small,
     [`${prefix}--btn--md`]: size === 'field' || size === 'md',
     // V11: change lg to xl
-    [`${prefix}--btn--lg`]: enabled ? size === 'xl' : size === 'lg',
+    [`${prefix}--btn--lg`]: enabled
+      ? size === 'xl'
+      : size === 'lg' || isExpressive,
     // V11: change xl to 2xl
     [`${prefix}--btn--xl`]: enabled ? size === '2xl' : size === 'xl',
     [`${prefix}--btn--${kind}`]: kind,
     [`${prefix}--btn--disabled`]: disabled,
-    [`${prefix}--btn--expressive`]: expressive,
+    [`${prefix}--btn--expressive`]: isExpressive,
     [`${prefix}--tooltip--hidden`]: hasIconOnly && !allowTooltipVisibility,
     [`${prefix}--tooltip--visible`]: isHovered,
     [`${prefix}--btn--icon-only`]: hasIconOnly,
@@ -255,11 +259,6 @@ Button.propTypes = {
   disabled: PropTypes.bool,
 
   /**
-   * Specify whether the Button is expressive, or not
-   */
-  expressive: PropTypes.bool,
-
-  /**
    * Specify if the button is an icon-only button
    */
   hasIconOnly: PropTypes.bool,
@@ -281,6 +280,11 @@ Button.propTypes = {
     }
     return undefined;
   },
+
+  /**
+   * Specify whether the Button is expressive, or not
+   */
+  isExpressive: PropTypes.bool,
 
   /**
    * Specify whether the Button is currently selected
@@ -390,7 +394,7 @@ Button.defaultProps = {
   dangerDescription: 'danger',
   tooltipAlignment: 'center',
   tooltipPosition: 'top',
-  expressive: false,
+  isExpressive: false,
 };
 
 export default Button;

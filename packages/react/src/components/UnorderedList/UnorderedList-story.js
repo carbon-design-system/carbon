@@ -15,7 +15,7 @@ import mdx from './UnorderedList.mdx';
 const props = {
   regular: () => {
     return {
-      expressive: boolean('Expressive', false),
+      isExpressive: boolean('Expressive', false),
     };
   },
 };
