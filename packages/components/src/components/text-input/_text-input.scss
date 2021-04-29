@@ -28,10 +28,10 @@
     width: 100%;
     height: rem(40px);
     padding: 0 $carbon--spacing-05;
-    color: $text-01;
-    background-color: $field-01;
     border: none;
-    border-bottom: 1px solid $ui-04;
+    border-bottom: 1px solid $border-strong;
+    background-color: $field;
+    color: $text-primary;
     transition: background-color $duration--fast-01 motion(standard, productive),
       outline $duration--fast-01 motion(standard, productive);
 
@@ -45,7 +45,9 @@
     }
   }
 
-  .#{$prefix}--text-input--xl {
+  // TODO V11: Remove xl selector
+  .#{$prefix}--text-input--xl,
+  .#{$prefix}--text-input--lg {
     height: rem(48px);
   }
 
@@ -61,6 +63,7 @@
     @include placeholder-colors;
   }
 
+  // V11: Possibly deprecate
   .#{$prefix}--text-input--light {
     background-color: $field-02;
   }
@@ -71,24 +74,24 @@
   .#{$prefix}--text-input__field-wrapper {
     position: relative;
     display: flex;
-    align-items: center;
     width: 100%;
+    align-items: center;
 
     .#{$prefix}--text-input__invalid-icon {
       position: absolute;
       // top/transform used to center invalid icon in IE11
       top: 50%;
       right: $carbon--spacing-05;
+      fill: $support-error;
       transform: translateY(-50%);
-      fill: $support-01;
     }
 
     .#{$prefix}--text-input__invalid-icon--warning {
-      fill: $support-03;
+      fill: $support-warning;
 
       path:first-of-type {
-        opacity: 1;
         fill: $carbon__black-100;
+        opacity: 1;
       }
     }
 
@@ -106,20 +109,20 @@
       position: absolute;
       right: 0;
       display: flex;
-      align-items: center;
-      justify-content: center;
       width: rem(40px);
       height: rem(40px);
       min-height: auto;
+      align-items: center;
+      justify-content: center;
       padding: 0;
-      background: none;
       border: 0;
+      background: none;
       cursor: pointer;
       transition: outline $duration--fast-01 motion(standard, productive);
 
       svg {
+        fill: $icon-secondary;
         transition: fill $duration--fast-01 motion(standard, productive);
-        fill: $icon-02;
 
         // Windows, Firefox HCM Fix
         @media screen and (-ms-high-contrast: active),
@@ -134,13 +137,15 @@
       @include focus-outline('outline');
     }
 
-    .#{$prefix}--btn.#{$prefix}--text-input--password__visibility__toggle.#{$prefix}--tooltip__trigger:hover,
+    .#{$prefix}--btn.#{$prefix}--text-input--password__visibility__toggle.#{$prefix}--tooltip__trigger:hover
+      svg,
     .#{$prefix}--btn.#{$prefix}--text-input--password__visibility__toggle.#{$prefix}--tooltip__trigger:focus
       svg {
-      fill: $icon-01;
+      fill: $icon-primary;
     }
 
-    .#{$prefix}--text-input--invalid {
+    .#{$prefix}--text-input--invalid,
+    .#{$prefix}--text-input--warning {
       padding-right: $carbon--spacing-08;
     }
 
@@ -157,6 +162,11 @@
     }
   }
 
+  .#{$prefix}--text-input__field-wrapper.#{$prefix}--password-input__field-wrapper
+    .#{$prefix}--text-input__invalid-icon {
+    right: $carbon--spacing-07;
+  }
+
   .#{$prefix}--password-input-wrapper .#{$prefix}--text-input__invalid-icon {
     right: $carbon--spacing-08;
   }
@@ -169,10 +179,10 @@
     + .#{$prefix}--text-input--password__visibility__toggle
     svg {
     cursor: not-allowed;
-    fill: $disabled-02;
+    fill: $icon-disabled;
 
     &:hover {
-      fill: $disabled-02;
+      fill: $icon-disabled;
     }
   }
 
@@ -182,20 +192,21 @@
   .#{$prefix}--text-input:disabled {
     @include focus-outline('reset');
 
-    color: $disabled-02;
-    background-color: $disabled-01;
     border-bottom: 1px solid transparent;
+    background-color: $field-disabled;
+    color: $text-disabled;
+    cursor: not-allowed;
     // Needed to fix disabled text in Safari #6673
     -webkit-text-fill-color: currentColor;
-    cursor: not-allowed;
   }
 
+  // V11: Possibly deprecate
   .#{$prefix}--text-input--light:disabled {
     background-color: $field-02;
   }
 
   .#{$prefix}--text-input:disabled::placeholder {
-    color: $disabled-02;
+    color: $text-disabled;
     opacity: 1;
   }
 
@@ -226,16 +237,16 @@
   //-----------------------------
   .#{$prefix}--form--fluid .#{$prefix}--text-input-wrapper {
     position: relative;
-    background: $field-01;
+    background: $field;
     transition: background-color $duration--fast-01 motion(standard, productive),
       outline $duration--fast-01 motion(standard, productive);
   }
 
   .#{$prefix}--form--fluid .#{$prefix}--label {
     position: absolute;
+    z-index: 1;
     top: rem(13px);
     left: $carbon--spacing-05;
-    z-index: 1;
     margin: 0;
   }
 
@@ -265,16 +276,17 @@
     .#{$prefix}--text-input--warn
     + .#{$prefix}--text-input__divider {
     display: block;
-    margin: 0 1rem;
-    border-color: $ui-03;
     border-style: solid;
+    border-color: $border-subtle;
     border-bottom: none;
+    margin: 0 1rem;
   }
 
   .#{$prefix}--form--fluid .#{$prefix}--text-input__invalid-icon {
     top: rem(80px);
   }
 
+  // V11: Possibly deprecate
   .#{$prefix}--form--fluid .#{$prefix}--text-input-wrapper--light {
     background: $field-02;
   }
@@ -307,22 +319,24 @@
   .#{$prefix}--text-input-wrapper .#{$prefix}--label--inline {
     flex: 1;
     margin: rem(13px) 0 0 0;
-    word-break: break-word;
     overflow-wrap: break-word;
+    word-break: break-word;
   }
 
   .#{$prefix}--text-input-wrapper .#{$prefix}--label--inline--sm {
     margin-top: rem(9px);
   }
 
-  .#{$prefix}--text-input-wrapper .#{$prefix}--label--inline--xl {
+  // TODO V11: Remove xl selector
+  .#{$prefix}--text-input-wrapper .#{$prefix}--label--inline--xl,
+  .#{$prefix}--text-input-wrapper .#{$prefix}--label--inline--lg {
     margin-top: rem(17px);
   }
 
   .#{$prefix}--text-input__label-helper-wrapper {
+    max-width: rem(128px);
     flex: 2;
     flex-direction: column;
-    max-width: rem(128px);
     margin-right: rem(24px);
     overflow-wrap: break-word;
   }
@@ -333,10 +347,10 @@
 
   .#{$prefix}--text-input__field-outer-wrapper {
     display: flex;
+    width: 100%;
     flex: 1 1 auto;
     flex-direction: column;
     align-items: flex-start;
-    width: 100%;
   }
 
   .#{$prefix}--text-input__field-outer-wrapper--inline {

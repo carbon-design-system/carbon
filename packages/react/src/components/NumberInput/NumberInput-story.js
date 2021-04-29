@@ -22,9 +22,9 @@ import NumberInputSkeleton from '../NumberInput/NumberInput.Skeleton';
 import mdx from './NumberInput.mdx';
 
 const sizes = {
-  'Extra large size (xl)': 'xl',
-  'Default size': undefined,
-  'Small size (sm)': 'sm',
+  'Small  (sm)': 'sm',
+  'Medium (md) - default': undefined,
+  'Large  (lg)': 'lg',
 };
 
 const props = () => ({
@@ -82,6 +82,7 @@ export default {
 export const Default = () => {
   return (
     <NumberInput
+      id="carbon-number"
       min={0}
       max={100}
       value={50}

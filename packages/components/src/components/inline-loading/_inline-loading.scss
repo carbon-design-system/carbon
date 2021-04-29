@@ -18,9 +18,9 @@
 @mixin inline-loading {
   .#{$prefix}--inline-loading {
     display: flex;
-    align-items: center;
     width: 100%;
     min-height: 2rem;
+    align-items: center;
 
     .#{$prefix}--loading__svg circle {
       stroke-width: 12;
@@ -34,7 +34,7 @@
   .#{$prefix}--inline-loading__text {
     @include type-style('label-01');
 
-    color: $text-02;
+    color: $text-secondary;
   }
 
   .#{$prefix}--inline-loading__animation {
@@ -46,7 +46,7 @@
   }
 
   .#{$prefix}--inline-loading__checkmark-container {
-    fill: $support-02;
+    fill: $support-success;
 
     // For deprecated older markup
     &.#{$prefix}--inline-loading__svg {
@@ -61,21 +61,21 @@
   }
 
   .#{$prefix}--inline-loading__checkmark {
-    transform-origin: 50% 50%;
-    animation-name: stroke;
     animation-duration: 250ms;
     animation-fill-mode: forwards;
+    animation-name: stroke;
     fill: none;
-    stroke: $interactive-04;
-    stroke-width: 1.8;
+    stroke: $interactive;
     stroke-dasharray: 12;
     stroke-dashoffset: 12;
+    stroke-width: 1.8;
+    transform-origin: 50% 50%;
   }
 
   .#{$prefix}--inline-loading--error {
     width: rem(16px);
     height: rem(16px);
-    fill: $support-01;
+    fill: $support-error;
 
     &[hidden] {
       display: none;
@@ -83,7 +83,7 @@
   }
 
   .#{$prefix}--loading--small .#{$prefix}--inline-loading__svg {
-    stroke: $interactive-04;
+    stroke: $interactive;
   }
   /* If IE11 Don't show check animation */
   @media screen and (-ms-high-contrast: active),
@@ -95,8 +95,8 @@
 
     .#{$prefix}--inline-loading__checkmark {
       animation: none;
-      stroke-dashoffset: 0;
       stroke-dasharray: 0;
+      stroke-dashoffset: 0;
     }
   }
 }

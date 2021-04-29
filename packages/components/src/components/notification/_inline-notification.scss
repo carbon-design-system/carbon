@@ -27,19 +27,19 @@
 
     position: relative;
     display: flex;
-    flex-wrap: wrap;
     width: 100%;
     min-width: rem(288px);
     max-width: rem(288px);
     height: auto;
     min-height: rem(48px);
+    flex-wrap: wrap;
     margin-top: $carbon--spacing-05;
     margin-bottom: $carbon--spacing-05;
-    color: $inverse-01;
+    color: $text-inverse;
 
     @include carbon--breakpoint(md) {
-      flex-wrap: nowrap;
       max-width: rem(608px);
+      flex-wrap: nowrap;
     }
 
     @include carbon--breakpoint(lg) {
@@ -52,14 +52,14 @@
 
     // Firefox HCM fix
     @media screen and (prefers-contrast) {
-      outline-width: 1px;
       outline-style: solid;
+      outline-width: 1px;
     }
   }
 
   .#{$prefix}--inline-notification:not(.#{$prefix}--inline-notification--low-contrast)
     a {
-    color: $inverse-link;
+    color: $link-inverse;
   }
 
   .#{$prefix}--inline-notification a {
@@ -71,7 +71,7 @@
   }
 
   .#{$prefix}--inline-notification a:focus {
-    outline: 1px solid $inverse-link;
+    outline: 1px solid $link-inverse;
   }
 
   .#{$prefix}--inline-notification.#{$prefix}--inline-notification--low-contrast
@@ -80,92 +80,104 @@
   }
 
   .#{$prefix}--inline-notification--low-contrast {
-    color: $text-01;
+    color: $text-primary;
 
     &::before {
       position: absolute;
       top: 0;
       left: 0;
-      box-sizing: border-box;
       width: 100%;
       height: 100%;
-      border-style: solid;
+      box-sizing: border-box;
       border-width: 1px 1px 1px 0;
-      filter: opacity(0.4);
+      border-style: solid;
       content: '';
+      filter: opacity(0.4);
       pointer-events: none;
     }
   }
 
   .#{$prefix}--inline-notification--error {
-    @include notification--experimental($inverse-support-01, $inverse-02);
+    @include notification--experimental(
+      $support-error-inverse,
+      $background-inverse
+    );
   }
 
   .#{$prefix}--inline-notification--low-contrast.#{$prefix}--inline-notification--error {
     @include notification--experimental(
-      $support-01,
+      $support-error,
       get-token-value($notification-colors, 'notification-background-error')
     );
 
     &::before {
-      border-color: $support-01;
+      border-color: $support-error;
     }
   }
 
   .#{$prefix}--inline-notification--success {
-    @include notification--experimental($inverse-support-02, $inverse-02);
+    @include notification--experimental(
+      $support-success-inverse,
+      $background-inverse
+    );
   }
 
   .#{$prefix}--inline-notification--low-contrast.#{$prefix}--inline-notification--success {
     @include notification--experimental(
-      $support-02,
+      $support-success,
       get-token-value($notification-colors, 'notification-background-success')
     );
 
     &::before {
-      border-color: $support-02;
+      border-color: $support-success;
     }
   }
 
   .#{$prefix}--inline-notification--info,
   .#{$prefix}--inline-notification--info-square {
-    @include notification--experimental($inverse-support-04, $inverse-02);
+    @include notification--experimental(
+      $support-info-inverse,
+      $background-inverse
+    );
   }
 
   .#{$prefix}--inline-notification--low-contrast.#{$prefix}--inline-notification--info,
   .#{$prefix}--inline-notification--low-contrast.#{$prefix}--inline-notification--info-square {
     @include notification--experimental(
-      $support-04,
+      $support-info,
       get-token-value($notification-colors, 'notification-background-info')
     );
 
     &::before {
-      border-color: $support-04;
+      border-color: $support-info;
     }
   }
 
   .#{$prefix}--inline-notification--warning,
   .#{$prefix}--inline-notification--warning-alt {
-    @include notification--experimental($inverse-support-03, $inverse-02);
+    @include notification--experimental(
+      $support-warning-inverse,
+      $background-inverse
+    );
   }
 
   .#{$prefix}--inline-notification--low-contrast.#{$prefix}--inline-notification--warning,
   .#{$prefix}--inline-notification--low-contrast.#{$prefix}--inline-notification--warning-alt {
     @include notification--experimental(
-      $support-03,
+      $support-warning,
       get-token-value($notification-colors, 'notification-background-warning')
     );
 
     &::before {
-      border-color: $support-03;
+      border-color: $support-warning;
     }
   }
 
   .#{$prefix}--inline-notification--warning
     .#{$prefix}--inline-notification__icon
     path[opacity='0'] {
-    opacity: 1;
     fill: $carbon__black-100;
+    opacity: 1;
   }
 
   .#{$prefix}--inline-notification__details {
@@ -214,12 +226,12 @@
 
   .#{$prefix}--inline-notification:not(.#{$prefix}--inline-notification--low-contrast)
     .#{$prefix}--inline-notification__action-button.#{$prefix}--btn--ghost {
-    color: $inverse-link;
+    color: $link-inverse;
   }
 
   .#{$prefix}--inline-notification__action-button.#{$prefix}--btn--ghost:active,
   .#{$prefix}--inline-notification__action-button.#{$prefix}--btn--ghost:hover {
-    background-color: $inverse-hover-ui;
+    background-color: $background-inverse-hover;
   }
 
   .#{$prefix}--inline-notification--low-contrast
@@ -234,9 +246,9 @@
 
   .#{$prefix}--inline-notification__action-button.#{$prefix}--btn--ghost:focus {
     border-color: transparent;
-    outline: 2px solid $inverse-focus-ui;
-    outline-offset: -2px;
     box-shadow: none;
+    outline: 2px solid $focus-inverse;
+    outline-offset: -2px;
 
     // Firefox HCM Fix
     @media screen and (prefers-contrast) {
@@ -262,22 +274,22 @@
     top: 0;
     right: 0;
     display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
     width: rem(48px);
     min-width: rem(48px);
     max-width: rem(48px);
     height: rem(48px);
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
     padding: 0;
-    background: transparent;
     border: none;
+    background: transparent;
     cursor: pointer;
     transition: outline $duration--fast-02 motion(standard, productive),
       background-color $duration--fast-02 motion(standard, productive);
 
     &:focus {
-      outline: 2px solid $inverse-focus-ui;
+      outline: 2px solid $focus-inverse;
       outline-offset: -2px;
 
       // Firefox HCM fix
@@ -287,7 +299,7 @@
     }
 
     .#{$prefix}--inline-notification__close-icon {
-      fill: $inverse-01;
+      fill: $icon-inverse;
     }
 
     @include carbon--breakpoint(md) {
@@ -303,7 +315,7 @@
   .#{$prefix}--inline-notification--low-contrast
     .#{$prefix}--inline-notification__close-button
     .#{$prefix}--inline-notification__close-icon {
-    fill: $icon-01;
+    fill: $icon-primary;
   }
 }
 

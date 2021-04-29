@@ -26,8 +26,8 @@
     "stylelint": "^13.6.0"
   },
   "dependencies": {
+    "stylelint-config-idiomatic-order": "^8.1.0",
     "stylelint-config-prettier": "^8.0.1",
-    "stylelint-config-rational-order": "^0.1.2",
     "stylelint-config-standard": "^20.0.0",
     "stylelint-no-unsupported-browser-features": "^4.0.0",
     "stylelint-order": "^4.1.0",
