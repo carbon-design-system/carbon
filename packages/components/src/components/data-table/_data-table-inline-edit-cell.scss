@@ -14,15 +14,15 @@
 /// @group data-table
 @mixin assistive-text {
   position: absolute;
+  overflow: hidden;
   width: 1px;
   height: 1px;
-  margin: -1px;
   padding: 0;
-  overflow: hidden;
-  white-space: nowrap;
   border: 0;
-  visibility: inherit;
+  margin: -1px;
   clip: rect(0, 0, 0, 0);
+  visibility: inherit;
+  white-space: nowrap;
 }
 
 @include exports('data-table-inline-edit-cell') {
@@ -53,9 +53,9 @@
 
   // Reset hover styles while editing
   .#{$prefix}--data-table--editing tr:hover td {
-    background-color: inherit;
     border-top: 1px solid $border-strong;
     border-bottom: 1px solid $border-strong;
+    background-color: inherit;
   }
 
   .#{$prefix}--data-table--editing tr:hover td:first-of-type {
@@ -154,11 +154,11 @@
 
   .#{$prefix}--data-table__edit-field {
     position: absolute;
+    z-index: 100;
     top: 0;
     right: 0;
     bottom: 0;
     left: 0;
-    z-index: 100;
     display: flex;
     align-items: center;
     justify-content: flex-end;
@@ -209,14 +209,14 @@
     @include box-shadow;
 
     position: absolute;
+    z-index: z('overlay');
     top: $size--edit-actions--height;
     right: 0;
     bottom: 0;
-    z-index: z('overlay');
     display: flex;
+    height: $size--edit-actions--height;
     align-items: center;
     justify-content: flex-end;
-    height: $size--edit-actions--height;
     padding: $spacing--cell-actions;
     background-color: $background-inverse;
   }
@@ -276,13 +276,13 @@
   .#{$prefix}--data-table__status--error {
     position: relative;
     display: flex;
-    align-items: center;
-    justify-content: flex-end;
     width: 100%;
     height: 100%;
+    align-items: center;
+    justify-content: flex-end;
+    fill: $support-error;
     // Specify outline on child SVG node instead
     outline: none;
-    fill: $support-error;
   }
 
   .#{$prefix}--data-table__edit-field--error {
@@ -293,35 +293,35 @@
     @include box-shadow;
 
     position: absolute;
+    z-index: 1000;
     top: rem(-1px);
     right: -1rem;
-    z-index: 1000;
     padding: 1rem;
+    border: 1px solid $border-subtle;
+    background-color: $icon-inverse;
+    box-shadow: 0 -4px 8px rgba(0, 0, 0, 0.1);
     color: $text-error;
     font-size: rem(12px);
-    background-color: $icon-inverse;
-    border: 1px solid $border-subtle;
-    box-shadow: 0 -4px 8px rgba(0, 0, 0, 0.1);
-    transform: translateY(-100%);
     opacity: 0;
+    transform: translateY(-100%);
   }
 
   .#{$prefix}--data-table__error-text::after {
     position: absolute;
+    z-index: 10;
     // Manually offset and center triangle
     right: 1rem;
     // TODO: shift down half of height
     bottom: -7px;
-    z-index: 10;
     width: rem(10px);
     height: rem(10px);
-    background-color: $icon-inverse;
     border: 1px solid $border-subtle;
     border-top: 1px solid transparent;
     border-left: 1px solid transparent;
-    transform: rotate(45deg);
-    opacity: 0;
+    background-color: $icon-inverse;
     content: '';
+    opacity: 0;
+    transform: rotate(45deg);
   }
 
   .#{$prefix}--data-table__icon--error {

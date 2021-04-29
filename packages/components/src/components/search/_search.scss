@@ -22,8 +22,8 @@
   .#{$prefix}--search {
     position: relative;
     display: flex;
-    align-items: center;
     width: 100%;
+    align-items: center;
   }
 
   .#{$prefix}--search .#{$prefix}--label {
@@ -35,17 +35,17 @@
     @include type-style('body-short-01');
     @include focus-outline('reset');
 
-    order: 1;
     width: 100%;
+    order: 1;
     padding: 0 $carbon--spacing-08;
-    color: $text-01;
-    text-overflow: ellipsis;
-    background-color: $field-01;
     border: none;
-    border-bottom: 1px solid $ui-04;
+    border-bottom: 1px solid $border-strong;
+    appearance: none;
+    background-color: $field;
+    color: $text-primary;
+    text-overflow: ellipsis;
     transition: background-color $duration--fast-02 motion(standard, productive),
       outline $duration--fast-02 motion(standard, productive);
-    appearance: none;
 
     &:focus {
       @include focus-outline('outline');
@@ -61,16 +61,15 @@
   }
 
   .#{$prefix}--search-input[disabled] {
-    color: $disabled;
-    background-color: $disabled-01;
     border-bottom: 1px solid transparent;
+    background-color: $field-disabled;
+    color: $disabled;
     cursor: not-allowed;
 
     &::placeholder {
       color: $disabled;
     }
   }
-
   .#{$prefix}--search--light .#{$prefix}--search-input {
     background: $field-02;
   }
@@ -89,6 +88,7 @@
   }
 
   // Large styles
+  // V11: change lg to md
   .#{$prefix}--search--lg .#{$prefix}--search-input,
   .#{$prefix}--search--lg.#{$prefix}--search--expandable.#{$prefix}--search--expanded
     .#{$prefix}--search-input {
@@ -97,10 +97,12 @@
     padding: 0 $spacing-08;
   }
 
+  // V11: change lg to md
   .#{$prefix}--search--lg .#{$prefix}--search-magnifier-icon {
     left: rem(12px);
   }
 
+  // V11: change xl to lg
   .#{$prefix}--search--xl .#{$prefix}--search-input,
   .#{$prefix}--search--xl.#{$prefix}--search--expandable.#{$prefix}--search--expanded
     .#{$prefix}--search-input {
@@ -111,14 +113,14 @@
 
   .#{$prefix}--search-magnifier-icon {
     position: absolute;
+    z-index: 2;
     top: 50%;
     left: $spacing-05;
-    z-index: 2;
     width: rem(16px);
     height: rem(16px);
-    transform: translateY(-50%);
+    fill: $icon-secondary;
     pointer-events: none;
-    fill: $icon-02;
+    transform: translateY(-50%);
 
     // Windows, Firefox HCM Fix
     @media screen and (-ms-high-contrast: active),
@@ -143,14 +145,14 @@
       display: block;
       width: 2px;
       height: calc(100% - 2px);
-      background-color: $field-01;
+      background-color: $field;
+      content: '';
       transition: background-color $duration--fast-02
         motion(standard, productive);
-      content: '';
     }
 
     &:hover {
-      border-bottom: 1px solid $ui-04;
+      border-bottom: 1px solid $border-strong;
 
       &::before {
         background-color: $hover-field;
@@ -161,11 +163,11 @@
   .#{$prefix}--search-button {
     flex-shrink: 0;
     margin-left: $carbon--spacing-01;
-    background-color: $field-01;
+    background-color: $field;
 
     svg {
-      vertical-align: middle;
       fill: currentColor;
+      vertical-align: middle;
     }
   }
 
@@ -182,21 +184,21 @@
   .#{$prefix}--search-close,
   .#{$prefix}--search-button {
     display: flex;
-    align-items: center;
-    justify-content: center;
     width: rem(40px);
     height: rem(40px);
-    border-color: transparent;
-    border-style: solid;
+    align-items: center;
+    justify-content: center;
     border-width: 1px 0;
-    visibility: inherit;
+    border-style: solid;
+    border-color: transparent;
     cursor: pointer;
+    fill: $icon-primary;
     opacity: 1;
     transition: opacity $duration--fast-02 motion(standard, productive),
       background-color $duration--fast-02 motion(standard, productive),
       outline $duration--fast-02 motion(standard, productive),
       border $duration--fast-02 motion(standard, productive);
-    fill: $icon-01;
+    visibility: inherit;
 
     &:hover {
       background-color: $hover-field;
@@ -209,19 +211,19 @@
     &:active {
       @include focus-outline('outline');
 
-      background-color: $selected-ui;
+      background-color: $background-selected;
     }
   }
 
   .#{$prefix}--search--disabled .#{$prefix}--search-close,
   .#{$prefix}--search--disabled.#{$prefix}--search--expandable
     .#{$prefix}--search-magnifier {
-    outline: none;
     cursor: not-allowed;
+    outline: none;
 
     &:hover {
-      background-color: transparent;
       border-bottom-color: transparent;
+      background-color: transparent;
     }
 
     &:hover::before {
@@ -258,6 +260,7 @@
     }
   }
 
+  // V11: change lg to md
   .#{$prefix}--search--lg {
     .#{$prefix}--search-close,
     ~ .#{$prefix}--search-button,
@@ -272,6 +275,7 @@
     }
   }
 
+  // V11: change xl to lg
   .#{$prefix}--search--xl {
     .#{$prefix}--search-close,
     ~ .#{$prefix}--search-button,
@@ -287,10 +291,11 @@
   }
 
   .#{$prefix}--search-close--hidden {
-    visibility: hidden;
     opacity: 0;
+    visibility: hidden;
   }
 
+  // V11: change xl to lg, lg to md
   .#{$prefix}--search--xl.#{$prefix}--skeleton .#{$prefix}--search-input,
   .#{$prefix}--search--lg.#{$prefix}--skeleton .#{$prefix}--search-input,
   .#{$prefix}--search--sm.#{$prefix}--skeleton .#{$prefix}--search-input {
@@ -320,9 +325,9 @@
     &::placeholder {
       position: relative;
       opacity: 0;
-      transition-timing-function: motion(standard, productive);
       transition-duration: $duration--fast-01;
       transition-property: padding, opacity;
+      transition-timing-function: motion(standard, productive);
     }
   }
 
@@ -344,7 +349,7 @@
   }
 
   .#{$prefix}--search--expandable .#{$prefix}--search-magnifier:hover {
-    background-color: $hover-ui;
+    background-color: $background-hover;
   }
 
   .#{$prefix}--search--expandable.#{$prefix}--search--expanded
@@ -353,12 +358,12 @@
   }
 
   .#{$prefix}--search--expandable .#{$prefix}--search-magnifier-icon {
-    fill: $icon-01;
+    fill: $icon-primary;
   }
 
   .#{$prefix}--search--expandable.#{$prefix}--search--expanded
     .#{$prefix}--search-magnifier-icon {
-    fill: $icon-02;
+    fill: $icon-secondary;
   }
 }
 

@@ -15,12 +15,12 @@
 @mixin reset {
   @if variable-exists(css--reset) == false or $css--reset == false {
     box-sizing: border-box;
-    margin: 0;
     padding: 0;
-    font-size: 100%;
-    font-family: inherit;
-    vertical-align: baseline;
     border: 0;
+    margin: 0;
+    font-family: inherit;
+    font-size: 100%;
+    vertical-align: baseline;
 
     *,
     *::before,
@@ -114,12 +114,12 @@
     mark,
     audio,
     video {
-      margin: 0;
       padding: 0;
+      border: 0;
+      margin: 0;
       font: inherit;
       font-size: 100%;
       vertical-align: baseline;
-      border: 0;
     }
 
     // Chrome 62 fix
@@ -127,8 +127,8 @@
     select,
     input,
     textarea {
-      font-family: inherit;
       border-radius: 0;
+      font-family: inherit;
     }
 
     input[type='text']::-ms-clear {
