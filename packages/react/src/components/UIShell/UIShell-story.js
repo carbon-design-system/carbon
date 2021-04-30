@@ -842,7 +842,8 @@ export const SideNavRailWHeader = withReadme(readme, () => (
           <SideNav
             aria-label="Side navigation"
             isRail
-            expanded={isSideNavExpanded}>
+            expanded={isSideNavExpanded}
+            onOverlayClick={onClickSideNavExpand}>
             <SideNavItems>
               <SideNavMenu renderIcon={Fade16} title="Category title">
                 <SideNavMenuItem href="javascript:void(0)">

@@ -61,7 +61,6 @@ async function build() {
       id: t.Identifier(`${swatch}-${grade}`),
       init: t.SassColor(value),
       default: true,
-      global: true,
     })
   );
   const deprecatedColorVariables = colorValues.map(({ grade, swatch, value }) =>
@@ -117,7 +116,6 @@ async function build() {
     id: t.Identifier('carbon--colors'),
     init: colorMapProperties,
     default: true,
-    global: true,
   });
 
   const mixins = t.StyleSheet({
@@ -138,6 +136,18 @@ async function build() {
       t.Comment(`/ Define color variables
 / @access public
 / @group @carbon/colors`),
+      ...colorValues.map(({ grade, swatch, value }) =>
+        t.Assignment({
+          id: t.Identifier(`carbon--${swatch}-${grade}`),
+          init: t.SassValue(value),
+        })
+      ),
+      ...colorValues.map(({ grade, swatch, value }) =>
+        t.Assignment({
+          id: t.Identifier(`${swatch}-${grade}`),
+          init: t.SassColor(value),
+        })
+      ),
       t.SassMixin({
         id: t.Identifier(`${NAMESPACE}--colors`),
         body: t.BlockStatement([
@@ -146,7 +156,6 @@ async function build() {
               id: t.Identifier(`carbon--${swatch}-${grade}`),
               init: t.SassColor(value),
               default: true,
-              global: true,
             })
           ),
           ...colorVariables,

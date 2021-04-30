@@ -2587,7 +2587,7 @@ exports[`DataTable should render 1`] = `
           className="bx--data-table-content"
         >
           <table
-            className="bx--data-table bx--data-table--no-border"
+            className="bx--data-table bx--data-table--normal bx--data-table--no-border"
           >
             <TableHead>
               <thead>
@@ -3647,7 +3647,7 @@ exports[`DataTable sticky header should render 1`] = `
             className="bx--data-table-content"
           >
             <table
-              className="bx--data-table bx--data-table--no-border bx--data-table--sticky-header"
+              className="bx--data-table bx--data-table--normal bx--data-table--no-border bx--data-table--sticky-header"
             >
               <TableHead>
                 <thead>
