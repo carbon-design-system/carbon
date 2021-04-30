@@ -63,7 +63,7 @@ export const _ContextMenu = () =>
     { type: 'selectable', label: 'Publish', initialChecked: true },
     { type: 'divider' },
     { type: 'item', label: 'Rename', shortcut: '↩︎' },
-    { type: 'item', label: 'Delete', shortcut: '⌘⌫' },
+    { type: 'item', label: 'Delete', shortcut: '⌘⌫', kind: 'danger' },
   ]);
 _ContextMenu.storyName = 'ContextMenu';
 
