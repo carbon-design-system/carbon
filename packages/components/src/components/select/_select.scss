@@ -25,16 +25,16 @@
 
     position: relative;
     display: flex;
+    width: 100%;
     flex-direction: column;
     align-items: flex-start;
-    width: 100%;
   }
 
   .#{$prefix}--select-input__wrapper {
     position: relative;
     display: flex;
-    align-items: center;
     width: 100%;
+    align-items: center;
   }
 
   .#{$prefix}--select-input {
@@ -45,18 +45,18 @@
     width: 100%;
     height: rem(40px);
     padding: 0 $spacing-09 0 $spacing-05;
-    color: $text-primary;
-    background-color: $field;
     border: none;
     border-bottom: 1px solid $border-strong;
+    appearance: none;
+    background-color: $field;
     border-radius: 0;
+    color: $text-primary;
     cursor: pointer;
     // reset disabled <select> opacity
     opacity: 1;
 
     // Do not transition on background-color (see: https://github.com/carbon-design-system/carbon/issues/4464)
     transition: outline $duration--fast-01 motion(standard, productive);
-    appearance: none;
 
     &:hover {
       background-color: $background-hover;
@@ -72,9 +72,9 @@
       // Removes dotted inner focus
       &:-moz-focusring,
       &::-moz-focus-inner {
+        background-image: none;
         color: transparent;
         text-shadow: 0 0 0 #000000;
-        background-image: none;
       }
     }
 
@@ -86,9 +86,9 @@
 
     &:disabled,
     &:hover:disabled {
-      color: $text-disabled;
-      background-color: $field-disabled;
       border-bottom-color: $border-disabled;
+      background-color: $field-disabled;
+      color: $text-disabled;
       cursor: not-allowed;
     }
   }
@@ -128,8 +128,8 @@
 
     &:disabled,
     &:hover:disabled {
-      color: $text-disabled;
       background-color: $field-02;
+      color: $text-disabled;
       cursor: not-allowed;
     }
   }
@@ -139,8 +139,8 @@
     top: 0;
     right: $spacing-05;
     height: 100%;
-    pointer-events: none;
     fill: $icon-primary;
+    pointer-events: none;
 
     // Windows, Firefox HCM Fix
     @media screen and (-ms-high-contrast: active),
@@ -168,8 +168,8 @@
   }
 
   .#{$prefix}--select__invalid-icon--warning path[fill] {
-    opacity: 1;
     fill: $carbon__black-100;
+    opacity: 1;
   }
 
   .#{$prefix}--select-optgroup,
@@ -181,8 +181,8 @@
   // Override some Firefox user-agent styles
   @-moz-document url-prefix() {
     .#{$prefix}--select-option {
-      color: $text-primary;
       background-color: $layer;
+      color: $text-primary;
     }
 
     .#{$prefix}--select-optgroup {
@@ -218,9 +218,9 @@
     width: auto;
     padding-right: $spacing-07;
     padding-left: $carbon--spacing-03;
-    color: $text-primary;
-    background-color: transparent;
     border-bottom: none;
+    background-color: transparent;
+    color: $text-primary;
   }
 
   .#{$prefix}--select--inline .#{$prefix}--select-input[disabled],

@@ -51,17 +51,17 @@
       position: absolute;
       top: 0;
       display: block;
-      box-sizing: border-box;
       width: carbon--rem(48px);
       height: carbon--rem(24px);
+      box-sizing: border-box;
       background-color: $toggle-off;
       border-radius: carbon--rem(15px);
       // Corresponds to the double-border for focused state (`0 0 0 1px $ui-02, 0 0 0 3px $focus`)
       box-shadow: 0 0 0 1px transparent, 0 0 0 3px transparent;
+      content: '';
       cursor: pointer;
       transition: box-shadow $duration--fast-01 motion(exit, productive),
         background-color $duration--fast-01 motion(exit, productive);
-      content: '';
       will-change: box-shadow;
     }
 
@@ -71,27 +71,27 @@
       top: carbon--rem(3px);
       left: carbon--rem(3px);
       display: block;
-      box-sizing: border-box;
       width: carbon--rem(18px);
       height: carbon--rem(18px);
+      box-sizing: border-box;
       background-color: $icon-on-color;
       border-radius: 50%;
+      content: '';
       cursor: pointer;
       transition: transform $duration--fast-01 motion(exit, productive);
-      content: '';
     }
   }
 
   .#{$prefix}--toggle__check {
     position: absolute;
+    z-index: 1;
     top: carbon--rem(6px);
     left: carbon--rem(6px);
-    z-index: 1;
     width: carbon--rem(6px);
     height: carbon--rem(5px);
+    fill: $icon-on-color;
     transform: scale(0.2);
     transition: $duration--fast-01 motion(exit, productive);
-    fill: $icon-on-color;
   }
 
   .#{$prefix}--toggle__text--left,
@@ -213,9 +213,9 @@
 
     &::before {
       top: 0;
-      box-sizing: border-box;
       width: carbon--rem(32px);
       height: carbon--rem(16px);
+      box-sizing: border-box;
       border-radius: 0.9375rem;
     }
 
@@ -230,8 +230,8 @@
   .#{$prefix}--toggle--small:checked
     + .#{$prefix}--toggle__label
     .#{$prefix}--toggle__check {
-    transform: scale(1) translateX(carbon--rem(16px));
     fill: $support-success;
+    transform: scale(1) translateX(carbon--rem(16px));
   }
 
   .#{$prefix}--toggle--small
@@ -275,9 +275,9 @@
   .#{$prefix}--toggle__switch {
     position: relative;
     display: flex;
-    align-items: center;
     width: carbon--rem(48px);
     height: carbon--rem(24px);
+    align-items: center;
     cursor: pointer;
 
     // Toggle background oval
@@ -285,16 +285,16 @@
       position: absolute;
       top: 0;
       display: block;
-      box-sizing: border-box;
       width: carbon--rem(48px);
       height: carbon--rem(24px);
+      box-sizing: border-box;
       background-color: $toggle-off;
       border-radius: carbon--rem(15px);
       // Corresponds to the double-border for focused state (`0 0 0 1px $ui-02, 0 0 0 3px $focus`)
       box-shadow: 0 0 0 1px transparent, 0 0 0 3px transparent;
+      content: '';
       transition: box-shadow $duration--fast-01 motion(exit, productive),
         background-color $duration--fast-01 motion(exit, productive);
-      content: '';
       will-change: box-shadow;
 
       // Windows, Firefox HCM Fix
@@ -311,13 +311,13 @@
       top: carbon--rem(3px);
       left: carbon--rem(3px);
       display: block;
-      box-sizing: border-box;
       width: carbon--rem(18px);
       height: carbon--rem(18px);
+      box-sizing: border-box;
       background-color: $icon-on-color;
       border-radius: 50%;
-      transition: transform $duration--fast-01 motion(exit, productive);
       content: '';
+      transition: transform $duration--fast-01 motion(exit, productive);
 
       // Windows, Firefox HCM Fix
       @media screen and (-ms-high-contrast: active),
@@ -340,9 +340,9 @@
     // top offset needed to vertically center absolutely positioned flex child in IE11
     top: 50%;
     margin-left: rem(56px);
-    white-space: nowrap;
     transform: translateY(-50%);
     user-select: none;
+    white-space: nowrap;
   }
 
   //----------------------------------------------
@@ -457,8 +457,8 @@
     }
 
     .#{$prefix}--toggle__check {
-      transform: scale(1) translateX(carbon--rem(16px));
       fill: $support-success;
+      transform: scale(1) translateX(carbon--rem(16px));
     }
   }
 

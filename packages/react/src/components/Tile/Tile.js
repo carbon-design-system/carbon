@@ -11,7 +11,8 @@ import classNames from 'classnames';
 import { settings } from 'carbon-components';
 import Link from '../Link';
 import {
-  CheckmarkFilled16 as CheckmarkFilled,
+  Checkbox16,
+  CheckboxCheckedFilled16,
   ChevronDown16,
 } from '@carbon/icons-react';
 import { keys, matches } from '../../internal/keyboard';
@@ -278,8 +279,9 @@ export function SelectableTile(props) {
         {...other}
         onClick={!disabled ? handleOnClick : null}
         onKeyDown={!disabled ? handleOnKeyDown : null}>
-        <span className={`${prefix}--tile__checkmark`}>
-          <CheckmarkFilled />
+        <span
+          className={`${prefix}--tile__checkmark ${prefix}--tile__checkmark--persistent`}>
+          {isSelected ? <CheckboxCheckedFilled16 /> : <Checkbox16 />}
         </span>
         <span className={`${prefix}--tile-content`}>{children}</span>
       </label>

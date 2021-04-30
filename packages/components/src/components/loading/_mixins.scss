@@ -14,16 +14,16 @@
 /// @group loading
 @mixin animation__loading--spin {
   // Animate the container
-  animation-name: rotate;
   animation-duration: 690ms;
-  animation-timing-function: linear;
-  animation-iteration-count: infinite;
   animation-fill-mode: forwards;
+  animation-iteration-count: infinite;
+  animation-name: rotate;
+  animation-timing-function: linear;
 
   // Animate the stroke
   svg circle {
-    animation-name: init-stroke;
     animation-duration: 10ms;
+    animation-name: init-stroke;
     animation-timing-function: $carbon--standard-easing;
   }
 }
@@ -37,10 +37,10 @@
 
   // Animate the stroke
   svg circle {
-    animation-name: stroke-end;
-    animation-duration: 700ms;
-    animation-timing-function: $carbon--ease-out;
     animation-delay: 700ms;
+    animation-duration: 700ms;
     animation-fill-mode: forwards;
+    animation-name: stroke-end;
+    animation-timing-function: $carbon--ease-out;
   }
 }
