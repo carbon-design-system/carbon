@@ -113,6 +113,7 @@ const ComboBox = (props) => {
   );
   const [prevSelectedItem, setPrevSelectedItem] = useState(null);
   const [doneInitialSelectedItem, setDoneInitialSelectedItem] = useState(null);
+  const savedOnInputChange = useRef(onInputChange);
 
   if (!doneInitialSelectedItem || prevSelectedItem !== selectedItem) {
     setDoneInitialSelectedItem(true);
@@ -147,10 +148,14 @@ const ComboBox = (props) => {
   };
 
   useEffect(() => {
-    if (onInputChange) {
-      onInputChange(inputValue);
+    savedOnInputChange.current = onInputChange;
+  }, [onInputChange]);
+
+  useEffect(() => {
+    if (savedOnInputChange.current) {
+      savedOnInputChange.current(inputValue);
     }
-  });
+  }, [inputValue]);
 
   const handleSelectionClear = () => {
     if (textInput?.current) {
