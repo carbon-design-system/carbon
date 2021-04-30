@@ -19,50 +19,9 @@ import {
   InformationSquareFilled20,
 } from '@carbon/icons-react';
 
-import Button from '../../Button';
 import useIsomorphicEffect from '../../../internal/useIsomorphicEffect';
 
 const { prefix } = settings;
-
-export function NotificationActionButton({
-  children,
-  className: customClassName,
-  onClick,
-  ...rest
-}) {
-  const className = cx(
-    customClassName,
-    `${prefix}--inline-notification__action-button`
-  );
-
-  return (
-    <Button
-      className={className}
-      kind="ghost"
-      onClick={onClick}
-      size="small"
-      {...rest}>
-      {children}
-    </Button>
-  );
-}
-
-NotificationActionButton.propTypes = {
-  /**
-   * Specify the content of the notification action button.
-   */
-  children: PropTypes.node,
-
-  /**
-   * Specify an optional className to be applied to the notification action button
-   */
-  className: PropTypes.string,
-
-  /**
-   * Optionally specify a click handler for the notification action button.
-   */
-  onClick: PropTypes.func,
-};
 
 export function NotificationButton({
   ariaLabel,
@@ -141,45 +100,6 @@ NotificationButton.defaultProps = {
   type: 'button',
   iconDescription: 'close icon',
   renderIcon: Close20,
-};
-
-export function NotificationTextDetails({
-  content,
-  notificationType,
-  ...rest
-}) {
-  if (notificationType === 'toast') {
-    return (
-      <div {...rest} className={`${prefix}--toast-notification__details`}>
-        <div className={`${prefix}--toast-notification__content`}>
-          {content}
-        </div>
-      </div>
-    );
-  }
-
-  if (notificationType === 'inline') {
-    return (
-      <p {...rest} className={`${prefix}--inline-notification__content`}>
-        {content}
-      </p>
-    );
-  }
-}
-
-NotificationTextDetails.propTypes = {
-  /**
-   * Specify the content
-   */
-  content: PropTypes.string,
-  /**
-   * Specify the notification type
-   */
-  notificationType: PropTypes.oneOf(['toast', 'inline']),
-};
-
-NotificationTextDetails.defaultProps = {
-  notificationType: 'toast',
 };
 
 const iconTypes = {
@@ -291,10 +211,7 @@ export function ToastNotification({
         kind={kind}
         iconDescription={statusIconDescription || `${kind} icon`}
       />
-      <NotificationTextDetails
-        content={content}
-        notificationType={notificationType}
-      />
+      <p className={`${prefix}--toast-notification__content`}>{content}</p>
       {!hideCloseButton && (
         <NotificationButton
           iconDescription={iconDescription}
@@ -346,7 +263,7 @@ ToastNotification.propTypes = {
 
   /**
    * By default, this value is "toast". You can also provide an alternate type
-   * if it makes sense for the underlying `<NotificationTextDetails>` and `<NotificationButton>`
+   * if it makes sense for the underlying `<NotificationIcon>` and `<NotificationButton>`
    */
   notificationType: PropTypes.string,
 
@@ -441,10 +358,7 @@ export function InlineNotification({
           kind={kind}
           iconDescription={statusIconDescription || `${kind} icon`}
         />
-        <NotificationTextDetails
-          content={content}
-          notificationType={notificationType}
-        />
+        <p className={`${prefix}--inline-notification__content`}>{content}</p>
       </div>
 
       {!hideCloseButton && (
@@ -498,7 +412,7 @@ InlineNotification.propTypes = {
 
   /**
    * By default, this value is "inline". You can also provide an alternate type
-   * if it makes sense for the underlying `<NotificationTextDetails>` and `<NotificationButton>`
+   * if it makes sense for the underlying `<NotificationIcon>` and `<NotificationButton>`
    */
   notificationType: PropTypes.string,
 

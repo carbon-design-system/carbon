@@ -7,8 +7,6 @@
 
 import React from 'react';
 import {
-  NotificationActionButton as NotificationActionButtonNext,
-  NotificationTextDetails as NotificationTextDetailsNext,
   NotificationButton as NotificationButtonNext,
   ToastNotification as ToastNotificationNext,
   InlineNotification as InlineNotificationNext,
@@ -25,7 +23,7 @@ import { useFeatureFlag } from '../FeatureFlags';
 export function NotificationActionButton(props) {
   const enabled = useFeatureFlag('enable-2021-release');
   if (enabled) {
-    return <NotificationActionButtonNext {...props} />;
+    return null;
   }
   return <NotificationActionButtonClassic {...props} />;
 }
@@ -33,7 +31,7 @@ export function NotificationActionButton(props) {
 export function NotificationTextDetails(props) {
   const enabled = useFeatureFlag('enable-2021-release');
   if (enabled) {
-    return <NotificationTextDetailsNext {...props} />;
+    return null;
   }
   return <NotificationTextDetailsClassic {...props} />;
 }
@@ -56,7 +54,7 @@ export function ToastNotification(props) {
 
 export function InlineNotification(props) {
   const enabled = useFeatureFlag('enable-2021-release');
-  if (!enabled) {
+  if (enabled) {
     return <InlineNotificationNext {...props} />;
   }
   return <InlineNotificationClassic {...props} />;
