@@ -178,18 +178,6 @@
     color: $text-primary;
   }
 
-  // Override some Firefox user-agent styles
-  @-moz-document url-prefix() {
-    .#{$prefix}--select-option {
-      background-color: $layer;
-      color: $text-primary;
-    }
-
-    .#{$prefix}--select-optgroup {
-      color: $text-primary;
-    }
-  }
-
   .#{$prefix}--select--inline {
     display: flex;
     flex-direction: row;
@@ -262,6 +250,12 @@
 
   .#{$prefix}--select.#{$prefix}--skeleton .#{$prefix}--select-input {
     display: none;
+  }
+
+  // Windows HCM fix
+  // stylelint-disable-next-line no-duplicate-selectors
+  .#{$prefix}--select__arrow {
+    @include high-contrast-mode('icon-fill');
   }
 }
 

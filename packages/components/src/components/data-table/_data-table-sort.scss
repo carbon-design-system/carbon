@@ -179,16 +179,6 @@
     transition: transform $transition--base $carbon--standard-easing;
   }
 
-  // Windows, Firefox HCM Fix
-  .#{$prefix}--table-sort__icon,
-  .#{$prefix}--table-sort__icon-unsorted {
-    @media screen and (-ms-high-contrast: active),
-      screen and (prefers-contrast) {
-      // `ButtonText` is a CSS2 system color to help improve colors in HCM
-      fill: ButtonText;
-    }
-  }
-
   //----------------------------------------------------------------------------
   // Compact, Short, Tall Sortable
   //----------------------------------------------------------------------------
@@ -236,6 +226,12 @@
   .#{$prefix}--data-table--xl .#{$prefix}--table-sort__icon-unsorted,
   .#{$prefix}--data-table--xl .#{$prefix}--table-sort__icon {
     margin-top: rem(13px);
+  }
+
+  // Windows HCM fix
+  .#{$prefix}--table-sort__icon,
+  .#{$prefix}--table-sort__icon-unsorted {
+    @include high-contrast-mode('icon-fill');
   }
 }
 

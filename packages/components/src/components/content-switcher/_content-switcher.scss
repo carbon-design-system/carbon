@@ -58,11 +58,6 @@
       z-index: 3;
       border-color: $focus;
       box-shadow: inset 0 0 0 2px $focus, inset 0 0 0 3px $focus-inset;
-
-      // Firefox HCM Fix
-      @media screen and (prefers-contrast) {
-        border-style: dotted;
-      }
     }
 
     &:hover {
@@ -186,6 +181,12 @@
   .#{$prefix}--content-switcher-btn.#{$prefix}--content-switcher--selected
     .#{$prefix}--content-switcher__icon {
     fill: $icon-inverse;
+  }
+
+  // Windows HCM fix
+  // stylelint-disable-next-line no-duplicate-selectors
+  .#{$prefix}--content-switcher-btn:focus {
+    @include high-contrast-mode('focus');
   }
 }
 
