@@ -283,6 +283,13 @@
   .#{$prefix}--tile--disabled .#{$prefix}--tile__checkmark svg {
     fill: $icon-disabled;
   }
+
+  // Windows HCM fix
+  .#{$prefix}--tile__chevron svg,
+  .#{$prefix}--tile__checkmark svg,
+  .#{$prefix}--tile--is-selected .#{$prefix}--tile__checkmark svg {
+    @include high-contrast-mode('icon-fill');
+  }
 }
 
 @include exports('tile') {

@@ -957,6 +957,12 @@
     .#{$prefix}--form-item.#{$prefix}--checkbox-wrapper:last-of-type {
     margin: rem(-3px) 0;
   }
+
+  // Windows HCM fix
+  // stylelint-disable-next-line no-duplicate-selectors
+  .#{$prefix}--data-table-content {
+    @include high-contrast-mode('outline');
+  }
 }
 
 @include exports('data-table-v2-core') {

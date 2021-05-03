@@ -152,13 +152,6 @@
     + .#{$prefix}--structured-list-td
     .#{$prefix}--structured-list-svg {
     fill: $icon-primary;
-
-    // Windows, Firefox HCM Fix
-    @media screen and (-ms-high-contrast: active),
-      screen and (prefers-contrast) {
-      // `ButtonText` is a CSS2 system color to help improve colors in HCM
-      fill: ButtonText;
-    }
   }
 
   // Skeleton State
@@ -194,6 +187,13 @@
     span {
       display: none;
     }
+  }
+
+  // Windows HCM fix
+  .#{$prefix}--structured-list-input:checked
+    + .#{$prefix}--structured-list-td
+    .#{$prefix}--structured-list-svg {
+    @include high-contrast-mode('icon-fill');
   }
 }
 
