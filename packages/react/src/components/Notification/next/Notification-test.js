@@ -9,7 +9,6 @@ import React from 'react';
 import { Close20, ErrorFilled20, CheckmarkFilled20 } from '@carbon/icons-react';
 import {
   NotificationButton,
-  NotificationTextDetails,
   ToastNotification,
   InlineNotification,
 } from '../next/Notification';
@@ -69,29 +68,6 @@ describe('NotificationButton', () => {
         const icon = wrapper.find(Close20);
         expect(
           icon.hasClass(`${prefix}--inline-notification__close-icon`)
-        ).toBe(true);
-      });
-    });
-  });
-});
-
-describe('NotificationTextDetails', () => {
-  describe('Renders as expected', () => {
-    const wrapper = shallow(<NotificationTextDetails />);
-
-    describe('When notificationType equals "toast"', () => {
-      it('div shoudld have correct className by default', () => {
-        expect(wrapper.hasClass(`${prefix}--toast-notification__details`)).toBe(
-          true
-        );
-      });
-    });
-
-    describe('When notificationType equals "inline"', () => {
-      it('paragraph tag should have correct className', () => {
-        wrapper.setProps({ notificationType: 'inline' });
-        expect(
-          wrapper.hasClass(`${prefix}--inline-notification__content`)
         ).toBe(true);
       });
     });
