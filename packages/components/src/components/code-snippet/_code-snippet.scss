@@ -72,11 +72,6 @@
     &:focus {
       border: 2px solid $focus;
       outline: none;
-
-      // Firefox HCM fix
-      @media screen and (prefers-contrast) {
-        border-style: dotted;
-      }
     }
 
     &::before {
@@ -142,12 +137,6 @@
     height: $carbon--spacing-08;
     align-items: center;
     padding-right: $carbon--spacing-08;
-
-    // Windows, Firefox HCM Fix
-    @media screen and (-ms-high-contrast: active),
-      screen and (prefers-contrast) {
-      outline: 2px solid transparent;
-    }
   }
 
   .#{$prefix}--snippet--single.#{$prefix}--snippet--no-copy {
@@ -189,12 +178,6 @@
 
     display: flex;
     padding: $carbon--spacing-05;
-
-    // Windows, Firefox HCM Fix
-    @media screen and (-ms-high-contrast: active),
-      screen and (prefers-contrast) {
-      outline: 2px solid transparent;
-    }
   }
 
   //collapsed snippet container
@@ -260,13 +243,6 @@
     height: rem(16px);
     fill: $icon-primary;
     transition: all $duration--fast-01 motion(standard, productive);
-
-    // Windows, Firefox HCM Fix
-    @media screen and (-ms-high-contrast: active),
-      screen and (prefers-contrast) {
-      // `ButtonText` is a CSS2 system color to help improve colors in HCM
-      fill: ButtonText;
-    }
   }
 
   .#{$prefix}--snippet-button {
@@ -575,6 +551,22 @@
     .#{$prefix}--snippet-container {
     padding-bottom: 0;
   }
+
+  // Windows HCM fix
+  /* stylelint-disable */
+  .#{$prefix}--snippet__icon {
+    @include high-contrast-mode('icon-fill');
+  }
+
+  .#{$prefix}--snippet--inline:focus {
+    @include high-contrast-mode('focus');
+  }
+
+  .#{$prefix}--snippet--single,
+  .#{$prefix}--snippet--multi {
+    @include high-contrast-mode('outline');
+  }
+  /* stylelint-enable */
 }
 
 @include exports('snippet') {

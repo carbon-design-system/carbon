@@ -324,14 +324,6 @@
     align-items: flex-start;
   }
 
-  .#{$prefix}--modal-footer button.#{$prefix}--btn:focus {
-    // Firefox HCM Fix
-    @media screen and (prefers-contrast) {
-      border: none;
-      outline-style: dotted;
-    }
-  }
-
   .#{$prefix}--modal-close {
     position: absolute;
     top: 0;
@@ -352,11 +344,6 @@
     &:focus {
       border-color: $focus;
       outline: none;
-
-      // Firefox HCM Fix
-      @media screen and (prefers-contrast) {
-        border-style: dotted;
-      }
     }
   }
 
@@ -368,13 +355,6 @@
     width: rem(20px);
     height: rem(20px);
     fill: $icon-primary;
-
-    // Windows, Firefox HCM Fix
-    @media screen and (-ms-high-contrast: active),
-      screen and (prefers-contrast) {
-      // `ButtonText` is a CSS2 system color to help improve colors in HCM
-      fill: ButtonText;
-    }
   }
 
   .#{$prefix}--body--with-modal-open {
@@ -384,6 +364,17 @@
   .#{$prefix}--body--with-modal-open .#{$prefix}--tooltip {
     z-index: z('modal');
   }
+
+  // Windows HCM fix
+  /* stylelint-disable */
+  .#{$prefix}--modal-close__icon {
+    @include high-contrast-mode('icon-fill');
+  }
+
+  .#{$prefix}--modal-close:focus {
+    @include high-contrast-mode('focus');
+  }
+  /* stylelint-enable */
 }
 
 @include exports('modal') {
