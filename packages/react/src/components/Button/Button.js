@@ -16,7 +16,6 @@ import { keys, matches } from '../../internal/keyboard';
 import { useId } from '../../internal/useId';
 import toggleClass from '../../tools/toggleClass';
 import { useFeatureFlag } from '../FeatureFlags';
-import { console } from 'window-or-global';
 
 const { prefix } = settings;
 const Button = React.forwardRef(function Button(
@@ -121,7 +120,6 @@ const Button = React.forwardRef(function Button(
   }, []);
 
   const enabled = useFeatureFlag('enable-2021-release');
-  console.log('feature flag is:', enabled);
 
   const buttonClasses = classNames(className, {
     [`${prefix}--btn`]: true,
