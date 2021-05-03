@@ -26,6 +26,7 @@ function ContextMenuSelectableItem({
     <ContextMenuOption
       role="menuitemcheckbox"
       aria-checked={checked}
+      aria-label={label}
       renderIcon={checked ? Checkmark16 : null}
       label={label}
       indented
