@@ -527,7 +527,7 @@
 
     &[data-floating-menu-direction='top'] {
       margin-top: calc(#{$spacing-03} * -1);
-      margin-left: -1px;
+      margin-left: -0.5px;
 
       .#{$prefix}--tooltip__caret {
         top: auto;
