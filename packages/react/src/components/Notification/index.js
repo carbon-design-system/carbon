@@ -59,5 +59,3 @@ export function InlineNotification(props) {
   }
   return <InlineNotificationClassic {...props} />;
 }
-
-export * from './Notification';
