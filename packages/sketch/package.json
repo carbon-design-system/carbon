@@ -28,7 +28,6 @@
     "skpm:link": "skpm-link"
   },
   "dependencies": {
-    "@babel/polyfill": "^7.8.7",
     "@carbon/colors": "^10.24.0",
     "@carbon/icon-helpers": "^10.16.0",
     "@carbon/icons": "^10.31.0",
@@ -36,6 +35,8 @@
     "@carbon/type": "^10.27.0",
     "@skpm/builder": "^0.7.0",
     "color-string": "^1.5.3",
+    "core-js": "^3.11.1",
+    "regenerator-runtime": "^0.13.7",
     "skpm": "^1.2.0"
   },
   "devDependencies": {

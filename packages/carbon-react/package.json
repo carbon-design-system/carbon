@@ -45,12 +45,12 @@
     "carbon-components-react": "^7.34.0"
   },
   "devDependencies": {
-    "@babel/core": "^7.13.14",
+    "@babel/core": "^7.14.0",
     "@babel/plugin-proposal-class-properties": "^7.13.0",
     "@babel/plugin-proposal-export-default-from": "^7.12.13",
     "@babel/plugin-proposal-export-namespace-from": "^7.12.13",
     "@babel/plugin-transform-react-constant-elements": "^7.13.13",
-    "@babel/preset-env": "^7.13.12",
+    "@babel/preset-env": "^7.14.0",
     "@babel/preset-react": "^7.13.13",
     "@rollup/plugin-babel": "^5.3.0",
     "@rollup/plugin-commonjs": "^18.0.0",
