@@ -36,7 +36,7 @@
     "start": "yarn storybook",
     "storybook": "rimraf node_modules/.cache/storybook && start-storybook -p 9000 -s ./.storybook/assets",
     "snapshot": "build-storybook && percy-storybook --widths=320,1280",
-    "test:e2e:cypress": "cypress run-ct --config video=false,screenshotOnRunFailure=false"
+    "test:e2e": "cypress run-ct --config video=false,screenshotOnRunFailure=false"
   },
   "peerDependencies": {
     "carbon-components": "^10.30.0",
