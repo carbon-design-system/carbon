@@ -30,6 +30,7 @@ function ContextMenuRadioGroupOptions({
         key={i}
         role="menuitemradio"
         aria-checked={isSelected}
+        aria-label={option}
         renderIcon={isSelected ? Checkmark16 : null}
         label={option}
         indented
