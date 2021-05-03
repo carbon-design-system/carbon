@@ -21,8 +21,8 @@
 
     position: relative;
     display: flex;
-    flex-direction: column;
     width: 100%;
+    flex-direction: column;
   }
 
   .#{$prefix}--number input[type='number'] {
@@ -30,24 +30,24 @@
     @include focus-outline('reset');
 
     display: inline-flex;
-    box-sizing: border-box;
     width: 100%;
     min-width: 9.375rem;
     height: rem(40px);
+    box-sizing: border-box;
     padding-right: rem(128px);
     padding-left: $carbon--spacing-05;
-    color: $text-primary;
-    font-weight: 300;
-    font-family: carbon--font-family('mono');
-    background-color: $field;
     border: 0;
     border-bottom: rem(1px) solid $border-strong;
-    border-radius: 0;
-    transition: background-color $duration--fast-01 motion(standard, productive),
-      outline $duration--fast-01 motion(standard, productive);
 
     // Firefox: Hide spinner (up and down buttons)
     -moz-appearance: textfield;
+    background-color: $field;
+    border-radius: 0;
+    color: $text-primary;
+    font-family: carbon--font-family('mono');
+    font-weight: 300;
+    transition: background-color $duration--fast-01 motion(standard, productive),
+      outline $duration--fast-01 motion(standard, productive);
 
     &:focus {
       @include focus-outline('outline');
@@ -85,9 +85,9 @@
 
   .#{$prefix}--number input[type='number']:disabled,
   .#{$prefix}--number--readonly input[type='number'] {
-    color: $text-disabled;
-    background-color: $field-disabled;
     border-bottom-color: transparent;
+    background-color: $field-disabled;
+    color: $text-disabled;
     cursor: not-allowed;
   }
 
@@ -105,19 +105,12 @@
     top: 50%;
     right: 0;
     display: flex;
+    width: rem(80px);
+    height: 100%;
     flex-direction: row;
     align-items: center;
     justify-content: center;
-    width: rem(80px);
-    height: 100%;
     transform: translateY(-50%);
-
-    // Windows, Firefox HCM Fix
-    @media screen and (-ms-high-contrast: active),
-      screen and (prefers-contrast) {
-      outline: 1px solid transparent;
-      outline-offset: -1px;
-    }
   }
 
   .#{$prefix}--number__control-btn {
@@ -125,11 +118,11 @@
 
     position: relative;
     display: inline-flex;
+    height: 100%;
     align-items: center;
     justify-content: center;
-    height: 100%;
-    color: $icon-primary;
     border-bottom: rem(1px) solid $border-strong;
+    color: $icon-primary;
 
     &::before,
     &::after {
@@ -159,13 +152,13 @@
       @include focus-outline;
 
       color: $icon-primary;
-      outline-width: 2px;
       outline-offset: -2px;
+      outline-width: 2px;
     }
 
     &:hover {
-      color: $icon-primary;
       background-color: $field-hover;
+      color: $icon-primary;
       cursor: pointer;
 
       &::before,
@@ -182,8 +175,8 @@
     }
 
     &:disabled {
-      color: $text-disabled;
       border-bottom-color: transparent;
+      color: $text-disabled;
       cursor: not-allowed;
     }
   }
@@ -360,8 +353,8 @@
   }
 
   .#{$prefix}--number__invalid--warning path:first-of-type {
-    opacity: 1;
     fill: $carbon__black-100;
+    opacity: 1;
   }
 
   // V11: Possibly deprecate
@@ -454,6 +447,22 @@
       display: none;
     }
   }
+
+  // Windows HCM fix
+  /* stylelint-disable */
+  .#{$prefix}--number__control-btn:hover,
+  .#{$prefix}--number__control-btn:focus {
+    @include high-contrast-mode('focus');
+  }
+
+  .#{$prefix}--number__control-btn {
+    @include high-contrast-mode('outline');
+  }
+
+  .#{$prefix}--number__control-btn svg {
+    @include high-contrast-mode('icon-fill');
+  }
+  /* stylelint-enable */
 }
 
 @include exports('number-input') {

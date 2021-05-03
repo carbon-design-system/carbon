@@ -38,9 +38,9 @@
     position: relative;
     width: max-content;
     max-width: rem(368px);
-    color: $popover-text-color;
     background-color: $layer;
     border-radius: 2px;
+    color: $popover-text-color;
   }
 
   .#{$prefix}--popover--light .#{$prefix}--popover-contents {
@@ -48,8 +48,8 @@
   }
 
   .#{$prefix}--popover--high-contrast .#{$prefix}--popover-contents {
-    color: $text-inverse;
     background-color: $background-inverse;
+    color: $text-inverse;
   }
 
   .#{$prefix}--popover--caret .#{$prefix}--popover-contents::before,
