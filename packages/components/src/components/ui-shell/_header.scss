@@ -27,8 +27,8 @@
     display: flex;
     height: mini-units(6);
     align-items: center;
-    border-bottom: 1px solid $shell-header-border-01;
-    background-color: $shell-header-bg-01;
+    border-bottom: 1px solid $border-subtle;
+    background-color: $background;
   }
 
   .#{$prefix}--header__action {
@@ -54,38 +54,49 @@
   }
 
   .#{$prefix}--header__action:hover {
-    background-color: $shell-header-bg-04;
+    background-color: $background-hover;
   }
 
   .#{$prefix}--header__action--active {
-    border-right: 1px solid $shell-header-border-01;
-    border-bottom: 1px solid $shell-header-bg-01;
-    border-left: 1px solid $shell-header-border-01;
+    border-right: 1px solid $border-subtle;
+    border-bottom: 1px solid $border-subtle;
+    border-left: 1px solid $border-subtle;
   }
 
   .#{$prefix}--header__action:focus {
-    border-color: $shell-header-focus;
+    border-color: $focus;
     outline: none;
   }
 
   .#{$prefix}--header__action:active {
-    background-color: $shell-header-bg-03;
+    background-color: $background-active;
   }
 
   .#{$prefix}--header__action.#{$prefix}--btn--icon-only.#{$prefix}--tooltip__trigger {
     justify-content: center;
   }
 
-  .#{$prefix}--header__action > svg {
-    fill: $shell-header-icon-02;
+  .bx--btn.bx--btn--icon-only.bx--tooltip__trigger.#{$prefix}--header__action
+    svg {
+    fill: $icon-secondary;
+  }
+
+  .bx--btn.bx--btn--icon-only.bx--tooltip__trigger.#{$prefix}--header__action:hover
+    svg,
+  .bx--btn.bx--btn--icon-only.bx--tooltip__trigger.#{$prefix}--header__action:active
+    svg,
+  .bx--btn.bx--btn--icon-only.bx--tooltip__trigger.#{$prefix}--header__action--active
+    svg {
+    fill: $icon-primary;
   }
 
   .#{$prefix}--header__menu-trigger > svg {
-    fill: $shell-header-icon-01;
+    fill: $icon-primary;
   }
 
-  .#{$prefix}--header__menu-trigger:hover {
-    fill: $shell-header-bg-02;
+  .#{$prefix}--header__menu-trigger:hover > svg {
+    fill: $icon-primary;
+    //TO-DO: ask design if this color changes on hover, missing spec for it
   }
 
   .#{$prefix}--header__menu-toggle {
@@ -121,7 +132,8 @@
   }
 
   a.#{$prefix}--header__name:focus {
-    border-color: $shell-header-focus;
+    border-color: $focus;
+    //TO-DO: follow up with design to see if this is correct, missing focus spec for it
   }
 
   .#{$prefix}--header__name--prefix {
@@ -130,7 +142,7 @@
 
   a.#{$prefix}--header__name,
   a.#{$prefix}--header__name:hover {
-    color: $shell-header-text-01;
+    color: $text-primary;
   }
 
   .#{$prefix}--header__menu-toggle:not(.#{$prefix}--header__menu-toggle__hidden)
@@ -151,6 +163,7 @@
       display: block;
     }
 
+    // header nav divider
     &::before {
       position: absolute;
       top: 50%;
@@ -158,7 +171,7 @@
       display: block;
       width: rem(1px);
       height: rem(24px);
-      background-color: $shell-header-border-01;
+      background-color: $border-subtle;
       content: '';
       transform: translateY(-50%);
     }
@@ -181,7 +194,8 @@
     padding: 0 mini-units(2);
     // Used for focus styles
     border: 2px solid transparent;
-    color: $shell-header-text-02;
+    background-color: $background;
+    color: $text-secondary;
     // Text styles
     font-size: rem(14px);
     font-weight: 400;
@@ -195,29 +209,32 @@
   }
 
   a.#{$prefix}--header__menu-item:hover {
-    background-color: $shell-header-bg-02;
-    color: $shell-header-text-01;
+    background-color: $background-hover;
+    color: $text-primary;
   }
 
   .#{$prefix}--header__action:active,
   a.#{$prefix}--header__menu-item:active {
-    background-color: $shell-header-bg-03;
-    color: $shell-header-text-01;
+    background-color: $background-active;
+    color: $text-primary;
   }
 
   a.#{$prefix}--header__menu-item:focus {
-    border-color: $shell-header-focus;
-    color: $shell-header-text-01;
+    border-color: $focus;
     outline: none;
   }
 
   a.#{$prefix}--header__menu-item:hover > svg,
-  a.#{$prefix}--header__menu-item:active > svg,
-  a.#{$prefix}--header__menu-item:focus > svg {
-    fill: $shell-header-icon-01;
+  a.#{$prefix}--header__menu-item:active > svg {
+    fill: $icon-primary;
   }
 
   // Styles for selected state
+
+  a.#{$prefix}--header__menu-item[aria-current='page'],
+  .#{$prefix}--header__menu-item--current {
+    color: $text-primary;
+  }
 
   a.#{$prefix}--header__menu-item[aria-current='page']::after,
   .#{$prefix}--header__menu-item--current::after {
@@ -227,7 +244,7 @@
     bottom: -2px;
     left: 0;
     width: 100%;
-    border-bottom: 3px solid $support-info-inverse;
+    border-bottom: 3px solid $border-interactive;
     content: '';
   }
 
@@ -238,7 +255,7 @@
 
   a.#{$prefix}--header__menu-item[aria-current='page']:focus,
   a.#{$prefix}--header__menu-item.#{$prefix}--header__menu-item--current:focus {
-    border: 2px solid $shell-header-focus;
+    border: 2px solid $focus;
   }
 
   .#{$prefix}--header__submenu {
@@ -253,8 +270,8 @@
     // Note: needs to be higher than menu. Adding 1 here instead of moving to
     // the next level.
     z-index: #{z('header') + 1};
-    background-color: $shell-header-bg-06;
-    color: $shell-header-focus;
+    background-color: $layer;
+    color: $text-secondary;
   }
 
   .#{$prefix}--header__menu-title[aria-expanded='true']
@@ -278,7 +295,7 @@
     display: flex;
     width: mini-units(25);
     flex-direction: column;
-    background-color: $shell-header-bg-06;
+    background-color: $layer;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.5);
     transform: translateY(100%);
   }
@@ -286,27 +303,24 @@
   .#{$prefix}--header__menu-title[aria-expanded='true']
     + .#{$prefix}--header__menu
     .#{$prefix}--header__menu-item:hover {
-    background-color: $shell-header-bg-04;
+    background-color: $layer-hover;
+    color: $text-primary;
   }
 
   .#{$prefix}--header__menu-title[aria-expanded='true']
     + .#{$prefix}--header__menu
     .#{$prefix}--header__menu-item:active {
-    background-color: $shell-header-bg-03;
+    background-color: $layer-active;
+    color: $text-primary;
   }
 
   .#{$prefix}--header__menu .#{$prefix}--header__menu-item {
     height: mini-units(6);
   }
 
-  .#{$prefix}--header__menu .#{$prefix}--header__menu-item:hover {
-    background-color: $shell-header-bg-06;
-    color: $shell-header-text-01;
-  }
-
   .#{$prefix}--header__menu-arrow {
     margin-left: mini-units(1);
-    fill: $shell-header-icon-03;
+    fill: $icon-secondary;
     transition: transform $duration--fast-02, fill $duration--fast-02;
   }
 
@@ -345,10 +359,11 @@
     height: 3rem;
     align-items: center;
     padding: 0 1rem;
-    border: 4px solid $ibm-color__blue-60;
-    background-color: $shell-header-bg-01;
+    border: 4px solid $focus;
+    background-color: $background;
     clip: auto;
-    color: $shell-header-text-01;
+    color: $text-secondary;
+    //TO-DO: double check with design that these tokens are correct, missing spec for it
     outline: none;
   }
 }
