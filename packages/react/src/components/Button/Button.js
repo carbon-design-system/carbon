@@ -121,14 +121,29 @@ const Button = React.forwardRef(function Button(
 
   const enabled = useFeatureFlag('enable-2021-release');
 
+  // v10 sizing
+  // sm = 32px
+  // field = 40px
+  // default = 48px
+  // lg = 64px
+
+  //v11 sizing
+  // sm = 32px
+  // md = 40px
+  // lg = 48px
+  // xl = 64px
+  // 2xl = 80px
+
   const buttonClasses = classNames(className, {
     [`${prefix}--btn`]: true,
-    [`${prefix}--btn--sm`]: size === 'small' || size === 'sm' || small,
-    [`${prefix}--btn--md`]: size === 'field' || size === 'md',
+    [`${prefix}--btn--sm`]:
+      (size === 'small' && !isExpressive) ||
+      (size === 'sm' && !isExpressive) ||
+      (small && !isExpressive),
+    [`${prefix}--btn--md`]:
+      (size === 'field' && !isExpressive) || (size === 'md' && !isExpressive),
     // V11: change lg to xl
-    [`${prefix}--btn--lg`]: enabled
-      ? size === 'xl'
-      : size === 'lg' || isExpressive,
+    [`${prefix}--btn--lg`]: enabled ? size === 'xl' : size === 'lg',
     // V11: change xl to 2xl
     [`${prefix}--btn--xl`]: enabled ? size === '2xl' : size === 'xl',
     [`${prefix}--btn--${kind}`]: kind,

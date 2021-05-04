@@ -463,11 +463,6 @@
     min-height: rem(64px);
   }
 
-  .#{$prefix}--btn--lg.#{$prefix}--btn--icon-only.#{$prefix}--btn--expressive {
-    min-height: rem(48px);
-    padding: 1rem;
-  }
-
   // V11: Remove field
   .#{$prefix}--btn--field,
   .#{$prefix}--btn--md {
@@ -478,6 +473,25 @@
   //expressive styles
   .#{$prefix}--btn--expressive {
     @include carbon--type-style('body-short-02');
+
+    min-height: 3rem;
+  }
+
+  .#{$prefix}--btn--icon-only.#{$prefix}--btn--expressive {
+    padding: 12px 13px;
+    //default size 48px
+  }
+
+  //v11 change this to xl
+  .#{$prefix}--btn--icon-only.#{$prefix}--btn--lg.#{$prefix}--btn--expressive {
+    padding: 21px;
+    //(64px height - 2px top and bottom border - svg height) / 2
+  }
+
+  //v11 change this to 2xl
+  .#{$prefix}--btn--icon-only.#{$prefix}--btn--xl.#{$prefix}--btn--expressive {
+    padding: 29px;
+    //(80px height - 2px top and bottom border - svg height) / 2
   }
 
   .#{$prefix}--btn.#{$prefix}--btn--expressive .#{$prefix}--btn__icon {

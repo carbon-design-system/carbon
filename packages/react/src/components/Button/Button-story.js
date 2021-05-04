@@ -187,7 +187,7 @@ export const Playground = () => {
           alignItems: 'center',
           flexWrap: 'wrap',
         }}>
-        <Button {...regularProps}>Button</Button>
+        <Button {...regularProps}>Buttons</Button>
         &nbsp;
         {!regularProps.kind.includes('danger') && (
           <>
