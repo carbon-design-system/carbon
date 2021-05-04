@@ -119,13 +119,6 @@
     fill: $icon-primary;
     transform: rotate(-270deg) #{'/*rtl:ignore*/'};
     transition: all $duration--fast-02 motion(standard, productive);
-
-    // Windows, Firefox HCM Fix
-    @media screen and (-ms-high-contrast: active),
-      screen and (prefers-contrast) {
-      // `ButtonText` is a CSS2 system color to help improve colors in HCM
-      fill: ButtonText;
-    }
   }
 
   .#{$prefix}--accordion__title {
@@ -201,13 +194,6 @@
     .#{$prefix}--accordion__arrow {
       fill: $icon-primary;
       transform: rotate(-90deg) #{'/*rtl:ignore*/'};
-
-      // Windows, Firefox HCM Fix
-      @media screen and (-ms-high-contrast: active),
-        screen and (prefers-contrast) {
-        // `ButtonText` is a CSS2 system color to help improve colors in HCM
-        fill: ButtonText;
-      }
     }
   }
 
@@ -251,6 +237,12 @@
 
   .#{$prefix}--accordion__title.#{$prefix}--skeleton__text {
     margin-bottom: 0;
+  }
+
+  // Windows HCM fix
+  .#{$prefix}--accordion__arrow,
+  .#{$prefix}--accordion__item--active .#{$prefix}--accordion__arrow {
+    @include high-contrast-mode('icon-fill');
   }
 }
 

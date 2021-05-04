@@ -45,6 +45,8 @@
     }
 
     .#{$prefix}--toggle__switch {
+      @include high-contrast-mode('outline');
+
       position: relative;
       width: rem(48px);
       height: rem(24px);
@@ -52,14 +54,9 @@
       border-radius: rem(12px);
       transition: background-color $duration--fast-01 motion(exit, productive);
 
-      // Windows, Firefox HCM Fix
-      @media screen and (-ms-high-contrast: active),
-        screen and (prefers-contrast) {
-        // `ButtonText` is a CSS2 system color to help improve colors in HCM
-        border: 1px solid ButtonText;
-      }
-
       &::before {
+        @include high-contrast-mode('outline');
+
         position: absolute;
         top: rem(3px);
         left: rem(3px);
@@ -69,13 +66,6 @@
         border-radius: 50%;
         content: '';
         transition: transform $duration--fast-01 motion(exit, productive);
-
-        // Windows, Firefox HCM Fix
-        @media screen and (-ms-high-contrast: active),
-          screen and (prefers-contrast) {
-          // `ButtonText` is a CSS2 system color to help improve colors in HCM
-          border: 3px solid ButtonText;
-        }
       }
     }
 
@@ -85,14 +75,9 @@
     .#{$prefix}--toggle__button:active
       + .#{$prefix}--toggle__label
       .#{$prefix}--toggle__switch {
-      box-shadow: 0 0 0 1px $focus-inset, 0 0 0 3px $focus;
+      @include high-contrast-mode('focus');
 
-      // Windows, Firefox HCM Fix
-      @media screen and (-ms-high-contrast: active),
-        screen and (prefers-contrast) {
-        // `ButtonText` is a CSS2 system color to help improve colors in HCM
-        outline: 1px solid ButtonText;
-      }
+      box-shadow: 0 0 0 1px $focus-inset, 0 0 0 3px $focus;
     }
 
     .#{$prefix}--toggle__switch--checked {
@@ -434,13 +419,6 @@
         transition: box-shadow $duration--fast-01 motion(exit, productive),
           background-color $duration--fast-01 motion(exit, productive);
         will-change: box-shadow;
-
-        // Windows, Firefox HCM Fix
-        @media screen and (-ms-high-contrast: active),
-          screen and (prefers-contrast) {
-          // `ButtonText` is a CSS2 system color to help improve colors in HCM
-          border: 1px solid ButtonText;
-        }
       }
 
       // Toggle circle
@@ -456,13 +434,6 @@
         border-radius: 50%;
         content: '';
         transition: transform $duration--fast-01 motion(exit, productive);
-
-        // Windows, Firefox HCM Fix
-        @media screen and (-ms-high-contrast: active),
-          screen and (prefers-contrast) {
-          // `ButtonText` is a CSS2 system color to help improve colors in HCM
-          border: 3px solid ButtonText;
-        }
       }
 
       .#{$prefix}--toggle-input__label & {
@@ -520,13 +491,6 @@
       + .#{$prefix}--toggle-input__label
       > .#{$prefix}--toggle__switch::before {
       box-shadow: 0 0 0 1px $focus-inset, 0 0 0 3px $focus;
-
-      // Windows, Firefox HCM Fix
-      @media screen and (-ms-high-contrast: active),
-        screen and (prefers-contrast) {
-        // `ButtonText` is a CSS2 system color to help improve colors in HCM
-        outline: 1px solid ButtonText;
-      }
     }
 
     //----------------------------------------------
@@ -618,6 +582,22 @@
       .#{$prefix}--toggle__label-text {
         margin-bottom: $carbon--spacing-03;
       }
+    }
+
+    // Windows HCM fix
+    .#{$prefix}--toggle__switch::after,
+    .#{$prefix}--toggle__switch::before {
+      @include high-contrast-mode('outline');
+    }
+
+    // stylelint-disable-next-line no-duplicate-selectors
+    .#{$prefix}--toggle-input:focus
+      + .#{$prefix}--toggle-input__label
+      > .#{$prefix}--toggle__switch::before,
+    .#{$prefix}--toggle-input:active
+      + .#{$prefix}--toggle-input__label
+      > .#{$prefix}--toggle__switch::before {
+      @include high-contrast-mode('focus');
     }
   }
 }

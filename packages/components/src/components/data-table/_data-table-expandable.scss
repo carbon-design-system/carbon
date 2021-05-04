@@ -153,7 +153,7 @@
 
   tr.#{$prefix}--parent-row.#{$prefix}--expandable-row.#{$prefix}--expandable-row--hover
     td:first-of-type {
-    // First parent td doesnt have visible bottom border
+    // First parent td doesn't have visible bottom border
     border-bottom: 1px solid transparent;
   }
 
@@ -207,25 +207,10 @@
     outline: none;
   }
 
-  .#{$prefix}--table-expand__button:focus .#{$prefix}--table-expand__svg {
-    // Windows, Firefox HCM Fix
-    @media screen and (-ms-high-contrast: active),
-      screen and (prefers-contrast) {
-      outline: 2px solid transparent;
-    }
-  }
-
   .#{$prefix}--table-expand__svg {
     fill: $ui-05;
     transform: rotate(90deg);
     transition: transform $duration--moderate-01 motion(standard, productive);
-
-    // Windows, Firefox HCM Fix
-    @media screen and (-ms-high-contrast: active),
-      screen and (prefers-contrast) {
-      // `ButtonText` is a CSS2 system color to help improve colors in HCM
-      fill: ButtonText;
-    }
   }
 
   // V11: remove tall
@@ -392,6 +377,16 @@
     + tr[data-child-row]
     td {
     background: $layer-selected;
+  }
+
+  // Windows HCM fix
+  .#{$prefix}--table-expand__button:focus .#{$prefix}--table-expand__svg {
+    @include high-contrast-mode('focus');
+  }
+
+  // stylelint-disable-next-line no-duplicate-selectors
+  .#{$prefix}--table-expand__svg {
+    @include high-contrast-mode('icon-fill');
   }
 }
 
