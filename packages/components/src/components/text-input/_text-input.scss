@@ -75,89 +75,91 @@
     position: relative;
     display: flex;
     width: 100%;
+  }
+
+  .#{$prefix}--text-input__invalid-icon {
+    position: absolute;
+    // top/transform used to center invalid icon in IE11
+    top: 50%;
+    right: $carbon--spacing-05;
+    fill: $support-error;
+    transform: translateY(-50%);
+  }
+
+  .#{$prefix}--text-input__invalid-icon--warning {
+    fill: $support-warning;
+  }
+
+  .#{$prefix}--text-input__invalid-icon--warning path:first-of-type {
+    fill: $carbon__black-100;
+    opacity: 1;
+  }
+
+  // TODO: deprecate this style block
+  .#{$prefix}--text-input--password__visibility {
+    @include tooltip--trigger('icon', 'bottom');
+    @include tooltip--placement('icon', 'bottom', 'center');
+  }
+
+  .#{$prefix}--text-input--password__visibility,
+  // TODO: remove selector above
+  .#{$prefix}--btn.#{$prefix}--text-input--password__visibility__toggle.#{$prefix}--tooltip__trigger {
+    @include focus-outline('reset');
+
+    position: absolute;
+    right: 0;
+    display: flex;
+    width: rem(40px);
+    height: rem(40px);
+    min-height: auto;
     align-items: center;
+    justify-content: center;
+    padding: 0;
+    border: 0;
+    background: none;
+    cursor: pointer;
+    transition: outline $duration--fast-01 motion(standard, productive);
+  }
 
-    .#{$prefix}--text-input__invalid-icon {
-      position: absolute;
-      // top/transform used to center invalid icon in IE11
-      top: 50%;
-      right: $carbon--spacing-05;
-      fill: $support-error;
-      transform: translateY(-50%);
-    }
+  .#{$prefix}--btn.#{$prefix}--text-input--password__visibility__toggle.#{$prefix}--tooltip__trigger
+    svg {
+    fill: $icon-secondary;
+    transition: fill $duration--fast-01 motion(standard, productive);
 
-    .#{$prefix}--text-input__invalid-icon--warning {
-      fill: $support-warning;
-
-      path:first-of-type {
-        fill: $carbon__black-100;
-        opacity: 1;
-      }
-    }
-
-    // TODO: deprecate this style block
-    .#{$prefix}--text-input--password__visibility {
-      @include tooltip--trigger('icon', 'bottom');
-      @include tooltip--placement('icon', 'bottom', 'center');
-    }
-
-    .#{$prefix}--text-input--password__visibility,
-    // TODO: remove selector above
-     .#{$prefix}--btn.#{$prefix}--text-input--password__visibility__toggle.#{$prefix}--tooltip__trigger {
-      @include focus-outline('reset');
-
-      position: absolute;
-      right: 0;
-      display: flex;
-      width: rem(40px);
-      height: rem(40px);
-      min-height: auto;
-      align-items: center;
-      justify-content: center;
-      padding: 0;
-      border: 0;
-      background: none;
-      cursor: pointer;
-      transition: outline $duration--fast-01 motion(standard, productive);
-
-      svg {
-        fill: $icon-secondary;
-        transition: fill $duration--fast-01 motion(standard, productive);
-      }
-    }
-
-    .#{$prefix}--btn.#{$prefix}--text-input--password__visibility__toggle.#{$prefix}--tooltip__trigger:focus {
-      @include focus-outline('outline');
-    }
-
-    .#{$prefix}--btn.#{$prefix}--text-input--password__visibility__toggle.#{$prefix}--tooltip__trigger:hover
-      svg,
-    .#{$prefix}--btn.#{$prefix}--text-input--password__visibility__toggle.#{$prefix}--tooltip__trigger:focus
-      svg {
-      fill: $icon-primary;
-    }
-
-    .#{$prefix}--text-input--invalid,
-    .#{$prefix}--text-input--warning {
-      padding-right: $carbon--spacing-08;
-    }
-
-    .#{$prefix}--text-input--invalid.#{$prefix}--password-input {
-      padding-right: rem(64px);
-    }
-
-    .#{$prefix}--text-input--invalid
-      + .#{$prefix}--text-input--password__visibility,
-    // TODO: remove selector above
-    .#{$prefix}--text-input--invalid
-      + .#{$prefix}--text-input--password__visibility__toggle {
-      right: $carbon--spacing-05;
+    // Windows, Firefox HCM Fix
+    @media screen and (-ms-high-contrast: active),
+      screen and (prefers-contrast) {
+      // `ButtonText` is a CSS2 system color to help improve colors in HCM
+      fill: ButtonText;
     }
   }
 
-  .#{$prefix}--text-input__field-wrapper.#{$prefix}--password-input__field-wrapper
-    .#{$prefix}--text-input__invalid-icon {
-    right: $carbon--spacing-07;
+  .#{$prefix}--text-input--password__visibility__toggle.#{$prefix}--tooltip__trigger:focus {
+    @include focus-outline('outline');
+  }
+
+  .#{$prefix}--btn.#{$prefix}--text-input--password__visibility__toggle.#{$prefix}--tooltip__trigger:hover
+    svg,
+  .#{$prefix}--btn.#{$prefix}--text-input--password__visibility__toggle.#{$prefix}--tooltip__trigger:focus
+    svg {
+    fill: $icon-primary;
+  }
+
+  .#{$prefix}--text-input--invalid,
+  .#{$prefix}--text-input--warning {
+    padding-right: $carbon--spacing-08;
+  }
+
+  .#{$prefix}--text-input--invalid.#{$prefix}--password-input {
+    padding-right: rem(64px);
+  }
+
+  .#{$prefix}--text-input--invalid +
+    .#{$prefix}--text-input--password__visibility,
+  // TODO: remove selector above
+  .#{$prefix}--text-input--invalid +
+    .#{$prefix}--text-input--password__visibility__toggle {
+    right: $carbon--spacing-05;
   }
 
   .#{$prefix}--password-input-wrapper .#{$prefix}--text-input__invalid-icon {
@@ -169,8 +171,7 @@
     svg,
   // TODO: remove selector above
   .#{$prefix}--text-input:disabled
-    + .#{$prefix}--text-input--password__visibility__toggle
-    svg {
+    + .#{$prefix}--text-input--password__visibility__toggle.#{$prefix}--tooltip__trigger svg {
     cursor: not-allowed;
     fill: $icon-disabled;
 
