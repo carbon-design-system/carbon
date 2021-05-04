@@ -30,6 +30,9 @@ packages/components/docs/js
 # React
 **/storybook-static/**
 
+# Icons react
+packages/icons-react/next/**
+
 # Sketch
 **/*.sketchplugin/**
 
