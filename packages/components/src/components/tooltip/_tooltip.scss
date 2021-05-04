@@ -500,6 +500,8 @@
     }
 
     &[data-floating-menu-direction='left'] {
+      margin-left: calc(#{$spacing-03} * -1);
+
       .#{$prefix}--tooltip__caret {
         top: 50%;
         // left position has an additional space between caret and tooltip
@@ -510,6 +512,8 @@
     }
 
     &[data-floating-menu-direction='top'] {
+      margin-top: calc(#{$spacing-03} * -1);
+
       .#{$prefix}--tooltip__caret {
         top: auto;
         bottom: calc(#{$caret-size * (-1)} + 1px);
@@ -518,12 +522,18 @@
     }
 
     &[data-floating-menu-direction='right'] {
+      margin-left: $spacing-03;
+
       .#{$prefix}--tooltip__caret {
         top: 50%;
         right: auto;
         left: calc(#{$caret-size * (-1)} + 1px);
         transform: rotate(270deg) translate(50%, -50%);
       }
+    }
+
+    &[data-floating-menu-direction='bottom'] {
+      margin-top: $spacing-03;
     }
   }
 
@@ -535,6 +545,7 @@
 
   .#{$prefix}--tooltip--shown {
     display: block;
+    margin-top: 0;
   }
 
   // Tooltip Definition
