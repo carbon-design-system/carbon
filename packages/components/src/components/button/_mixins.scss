@@ -82,13 +82,6 @@
     border-color: $focus;
     box-shadow: inset 0 0 0 $button-outline-width $focus,
       inset 0 0 0 $button-border-width $background;
-
-    // Windows, Firefox HCM Fix
-    @media screen and (-ms-high-contrast: active),
-      screen and (prefers-contrast) {
-      outline: 3px solid transparent;
-      outline-offset: -3px;
-    }
   }
 
   &:active {
