@@ -45,9 +45,9 @@ $list-box-menu-width: rem(300px);
   // `disabled` and `inline`.
   .#{$prefix}--list-box__wrapper--inline {
     display: inline-grid;
+    align-items: center;
     grid-gap: rem(4px);
     grid-template: auto auto / auto auto;
-    align-items: center;
 
     .#{$prefix}--label {
       @include type-style('body-short-01');
@@ -75,10 +75,10 @@ $list-box-menu-width: rem(300px);
     width: $list-box-width;
     height: rem(40px);
     max-height: rem(40px);
-    color: $text-primary;
-    background-color: $field;
     border: none;
     border-bottom: 1px solid $border-strong;
+    background-color: $field;
+    color: $text-primary;
     cursor: pointer;
     transition: all $duration--fast-01 motion(standard, productive);
 
@@ -122,8 +122,8 @@ $list-box-menu-width: rem(300px);
     position: absolute;
     top: 50%;
     right: $carbon--spacing-08;
-    transform: translateY(-50%);
     fill: $support-error;
+    transform: translateY(-50%);
   }
 
   .#{$prefix}--list-box__invalid-icon--warning {
@@ -131,8 +131,8 @@ $list-box-menu-width: rem(300px);
   }
 
   .#{$prefix}--list-box__invalid-icon--warning path[fill] {
-    opacity: 1;
     fill: $carbon__black-100;
+    opacity: 1;
   }
 
   .#{$prefix}--list-box[data-invalid] .#{$prefix}--list-box__field,
@@ -197,13 +197,6 @@ $list-box-menu-width: rem(300px);
   .#{$prefix}--list-box--disabled .#{$prefix}--list-box__menu-icon > svg,
   .#{$prefix}--list-box--disabled .#{$prefix}--list-box__selection > svg {
     fill: $icon-disabled;
-
-    // Windows, Firefox HCM Fix
-    @media screen and (-ms-high-contrast: active),
-      screen and (prefers-contrast) {
-      // `GrayText` is a CSS2 system color to help improve colors in HCM
-      fill: GrayText;
-    }
   }
 
   .#{$prefix}--list-box--disabled,
@@ -237,8 +230,8 @@ $list-box-menu-width: rem(300px);
 
   // Inline variant for a `list-box`
   .#{$prefix}--list-box.#{$prefix}--list-box--inline {
-    background-color: transparent;
     border-width: 0;
+    background-color: transparent;
 
     &:hover {
       background-color: $field-hover;
@@ -300,31 +293,20 @@ $list-box-menu-width: rem(300px);
 
     position: relative;
     display: inline-flex;
-    align-items: center;
+    overflow: hidden;
     // Account for the border in `.bx--list-box`
     height: calc(100% + 1px);
+    align-items: center;
     padding: 0 $carbon--spacing-09 0 $carbon--spacing-05;
-    overflow: hidden;
-    white-space: nowrap;
+    cursor: pointer;
+    outline: none;
     text-overflow: ellipsis;
     vertical-align: top;
-    outline: none;
-    cursor: pointer;
-
-    @media screen and (-ms-high-contrast: active),
-      screen and (prefers-contrast) {
-      // `ButtonText` is a CSS2 system color to help improve colors in HCM
-      border: 1px solid ButtonText;
-    }
+    white-space: nowrap;
   }
 
   .#{$prefix}--list-box__field:focus {
     @include focus-outline('outline');
-
-    // Firefox HCM fix
-    @media screen and (prefers-contrast) {
-      border-style: dotted;
-    }
   }
 
   .#{$prefix}--list-box__field[disabled] {
@@ -393,9 +375,9 @@ $list-box-menu-width: rem(300px);
 
     overflow: hidden;
     color: $text-primary;
-    white-space: nowrap;
     text-overflow: ellipsis;
     user-select: none;
+    white-space: nowrap;
   }
 
   // Menu status inside of a `list-box__field`
@@ -405,29 +387,22 @@ $list-box-menu-width: rem(300px);
     position: absolute;
     right: $carbon--spacing-05;
     display: flex;
-    align-items: center;
-    justify-content: center;
     width: rem(24px);
     height: rem(24px);
-    outline: none;
+    align-items: center;
+    justify-content: center;
     cursor: pointer;
+    outline: none;
     transition: transform $duration--fast-01 motion(standard, productive);
   }
 
   .#{$prefix}--list-box__menu-icon > svg {
     fill: $icon-primary;
-
-    // Windows, Firefox HCM Fix
-    @media screen and (-ms-high-contrast: active),
-      screen and (prefers-contrast) {
-      // `ButtonText` is a CSS2 system color to help improve colors in HCM
-      fill: ButtonText;
-    }
   }
 
   .#{$prefix}--list-box__menu-icon--open {
-    justify-content: center;
     width: rem(24px);
+    justify-content: center;
     transform: rotate(180deg);
   }
 
@@ -440,12 +415,12 @@ $list-box-menu-width: rem(300px);
     /* to preserve .5rem space between icons according to spec top/transform used to center the combobox clear selection icon in IE11 */
     right: rem(36px);
     display: flex;
-    align-items: center;
-    justify-content: center;
     width: rem(24px);
     height: rem(24px);
-    transform: translateY(-50%);
+    align-items: center;
+    justify-content: center;
     cursor: pointer;
+    transform: translateY(-50%);
     transition: background-color $duration--fast-01 motion(standard, productive);
     user-select: none;
 
@@ -460,13 +435,6 @@ $list-box-menu-width: rem(300px);
 
   .#{$prefix}--list-box__selection > svg {
     fill: $icon-primary;
-
-    // Windows, Firefox HCM Fix
-    @media screen and (-ms-high-contrast: active),
-      screen and (prefers-contrast) {
-      // `ButtonText` is a CSS2 system color to help improve colors in HCM
-      fill: ButtonText;
-    }
   }
 
   .#{$prefix}--list-box--disabled .#{$prefix}--list-box__selection:focus {
@@ -480,44 +448,31 @@ $list-box-menu-width: rem(300px);
     position: static;
     top: auto;
     display: flex;
-    align-items: center;
-    justify-content: space-between;
     width: auto;
     height: rem(24px);
-    margin-right: rem(10px);
+    align-items: center;
+    justify-content: space-between;
     padding: rem(8px);
     // Align with hover circle of X button
     padding-right: rem(2px);
-    color: $text-inverse;
-    line-height: 0;
+    margin-right: rem(10px);
     background-color: $background-inverse;
     border-radius: rem(12px);
+    color: $text-inverse;
+    line-height: 0;
     transform: none;
-
-    // Windows, Firefox HCM Fix
-    @media screen and (-ms-high-contrast: active),
-      screen and (prefers-contrast) {
-      border: 1px solid transparent;
-    }
   }
 
   .#{$prefix}--list-box__selection--multi > svg {
     width: rem(20px);
     height: rem(20px);
-    margin-left: rem(4px);
     padding: rem(2px);
+    margin-left: rem(4px);
     fill: $icon-inverse;
 
     &:hover {
       background-color: $button-secondary-hover;
       border-radius: 50%;
-    }
-
-    // Windows, Firefox HCM Fix
-    @media screen and (-ms-high-contrast: active),
-      screen and (prefers-contrast) {
-      // `ButtonText` is a CSS2 system color to help improve colors in HCM
-      fill: ButtonText;
     }
   }
 
@@ -531,13 +486,6 @@ $list-box-menu-width: rem(300px);
         background-color: initial;
       }
     }
-
-    // Windows, Firefox HCM Fix
-    @media screen and (-ms-high-contrast: active),
-      screen and (prefers-contrast) {
-      // `GrayText` is a CSS2 system color to help improve colors in HCM
-      fill: GrayText;
-    }
   }
 
   .#{$prefix}--list-box__selection--multi:hover {
@@ -549,12 +497,12 @@ $list-box-menu-width: rem(300px);
     @include box-shadow();
 
     position: absolute;
+    z-index: z('dropdown');
     right: 0;
     left: 0;
-    z-index: z('dropdown');
     width: $list-box-width;
-    overflow-y: auto;
     background-color: $layer;
+    overflow-y: auto;
     transition: max-height $duration--fast-02 motion(standard, productive);
 
     &:focus {
@@ -665,41 +613,34 @@ $list-box-menu-width: rem(300px);
     @include focus-outline('reset');
 
     display: block;
+    overflow: hidden;
     height: rem(40px);
-    margin: 0 $carbon--spacing-05;
     padding: rem(11px) 0;
     padding-right: $carbon--spacing-06;
-    overflow: hidden;
-    color: $text-secondary;
-    font-weight: normal;
-    line-height: 1rem;
-    white-space: nowrap;
-    text-decoration: none;
-    text-overflow: ellipsis;
     border-top: 1px solid transparent;
     border-top-color: $border-subtle;
     border-bottom: 1px solid transparent;
+    margin: 0 $carbon--spacing-05;
+    color: $text-secondary;
+    font-weight: normal;
+    line-height: 1rem;
+    text-decoration: none;
+    text-overflow: ellipsis;
     transition: border-color $duration--fast-01 motion(standard, productive),
       color $duration--fast-01 motion(standard, productive);
+    white-space: nowrap;
 
     &:focus {
       @include focus-outline('outline');
 
-      margin: 0;
       padding: rem(11px) rem(16px);
       border-color: transparent;
-
-      // Windows, Firefox HCM Fix
-      @media screen and (-ms-high-contrast: active),
-        screen and (prefers-contrast) {
-        outline: 3px solid transparent;
-        outline-offset: -3px;
-      }
+      margin: 0;
     }
 
     &:hover {
-      color: $text-primary;
       border-color: transparent;
+      color: $text-primary;
     }
   }
 
@@ -729,23 +670,16 @@ $list-box-menu-width: rem(300px);
     margin: 0 $carbon--spacing-03;
 
     &:focus {
-      margin: 0;
       padding-right: $carbon--spacing-03;
       padding-left: $carbon--spacing-03;
+      margin: 0;
     }
   }
 
   .#{$prefix}--list-box__menu-item--highlighted {
-    color: $text-primary;
-    background-color: $layer-hover;
     border-color: transparent;
-
-    // Windows, Firefox HCM Fix
-    @media screen and (-ms-high-contrast: active),
-      screen and (prefers-contrast) {
-      outline: 3px solid transparent;
-      outline-offset: -3px;
-    }
+    background-color: $layer-hover;
+    color: $text-primary;
   }
 
   .#{$prefix}--list-box__menu-item--highlighted
@@ -762,21 +696,21 @@ $list-box-menu-width: rem(300px);
   }
 
   .#{$prefix}--list-box__menu-item--active {
-    color: $text-primary;
-    background-color: $layer-selected;
     border-bottom-color: $layer-selected;
+    background-color: $layer-selected;
+    color: $text-primary;
   }
 
   // V11: Possibly deprecate
   .#{$prefix}--list-box--light .#{$prefix}--list-box__menu-item--active {
-    background-color: $selected-light-ui;
     border-bottom-color: $selected-light-ui;
+    background-color: $selected-light-ui;
   }
 
   .#{$prefix}--list-box__menu-item--active:hover,
   .#{$prefix}--list-box__menu-item--active.#{$prefix}--list-box__menu-item--highlighted {
-    background-color: $layer-selected;
     border-bottom-color: $layer-selected;
+    background-color: $layer-selected;
   }
 
   .#{$prefix}--list-box__menu-item--active
@@ -796,8 +730,8 @@ $list-box-menu-width: rem(300px);
     top: 50%;
     right: rem(16px);
     display: none;
-    transform: translateY(-50%);
     fill: $icon-primary;
+    transform: translateY(-50%);
   }
 
   .#{$prefix}--list-box--inline
@@ -816,8 +750,8 @@ $list-box-menu-width: rem(300px);
 
   .#{$prefix}--list-box__menu-item .#{$prefix}--checkbox-label-text {
     overflow: hidden;
-    white-space: nowrap;
     text-overflow: ellipsis;
+    white-space: nowrap;
   }
 
   // Dropdown top orientation modifiers
@@ -853,6 +787,26 @@ $list-box-menu-width: rem(300px);
   .#{$prefix}--list-box input[type='text'] {
     min-width: 0;
     background-color: inherit;
+  }
+
+  // Windows HCM fix
+  .#{$prefix}--list-box__field,
+  .#{$prefix}--list-box__menu,
+  .#{$prefix}--multi-select .#{$prefix}--tag--filter {
+    @include high-contrast-mode('outline');
+  }
+
+  .#{$prefix}--list-box__field:focus,
+  .#{$prefix}--multi-select .#{$prefix}--tag__close-icon:focus,
+  .#{$prefix}--list-box__menu-item--highlighted
+    .#{$prefix}--list-box__menu-item__option {
+    @include high-contrast-mode('focus');
+  }
+
+  .#{$prefix}--list-box__menu-icon > svg,
+  .#{$prefix}--list-box__selection > svg,
+  .#{$prefix}--list-box__selection--multi > svg {
+    @include high-contrast-mode('icon-fill');
   }
 }
 

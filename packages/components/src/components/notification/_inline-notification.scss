@@ -27,19 +27,19 @@
 
     position: relative;
     display: flex;
-    flex-wrap: wrap;
     width: 100%;
     min-width: rem(288px);
     max-width: rem(288px);
     height: auto;
     min-height: rem(48px);
+    flex-wrap: wrap;
     margin-top: $carbon--spacing-05;
     margin-bottom: $carbon--spacing-05;
     color: $text-inverse;
 
     @include carbon--breakpoint(md) {
-      flex-wrap: nowrap;
       max-width: rem(608px);
+      flex-wrap: nowrap;
     }
 
     @include carbon--breakpoint(lg) {
@@ -48,12 +48,6 @@
 
     @include carbon--breakpoint(max) {
       max-width: rem(832px);
-    }
-
-    // Firefox HCM fix
-    @media screen and (prefers-contrast) {
-      outline-width: 1px;
-      outline-style: solid;
     }
   }
 
@@ -86,13 +80,13 @@
       position: absolute;
       top: 0;
       left: 0;
-      box-sizing: border-box;
       width: 100%;
       height: 100%;
-      border-style: solid;
+      box-sizing: border-box;
       border-width: 1px 1px 1px 0;
-      filter: opacity(0.4);
+      border-style: solid;
       content: '';
+      filter: opacity(0.4);
       pointer-events: none;
     }
   }
@@ -176,8 +170,8 @@
   .#{$prefix}--inline-notification--warning
     .#{$prefix}--inline-notification__icon
     path[opacity='0'] {
-    opacity: 1;
     fill: $carbon__black-100;
+    opacity: 1;
   }
 
   .#{$prefix}--inline-notification__details {
@@ -246,15 +240,9 @@
 
   .#{$prefix}--inline-notification__action-button.#{$prefix}--btn--ghost:focus {
     border-color: transparent;
+    box-shadow: none;
     outline: 2px solid $focus-inverse;
     outline-offset: -2px;
-    box-shadow: none;
-
-    // Firefox HCM Fix
-    @media screen and (prefers-contrast) {
-      border-style: dotted;
-      outline-style: dotted;
-    }
   }
 
   .#{$prefix}--inline-notification--low-contrast
@@ -274,16 +262,16 @@
     top: 0;
     right: 0;
     display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
     width: rem(48px);
     min-width: rem(48px);
     max-width: rem(48px);
     height: rem(48px);
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
     padding: 0;
-    background: transparent;
     border: none;
+    background: transparent;
     cursor: pointer;
     transition: outline $duration--fast-02 motion(standard, productive),
       background-color $duration--fast-02 motion(standard, productive);
@@ -291,11 +279,6 @@
     &:focus {
       outline: 2px solid $focus-inverse;
       outline-offset: -2px;
-
-      // Firefox HCM fix
-      @media screen and (prefers-contrast) {
-        outline-style: dotted;
-      }
     }
 
     .#{$prefix}--inline-notification__close-icon {
@@ -317,6 +300,22 @@
     .#{$prefix}--inline-notification__close-icon {
     fill: $icon-primary;
   }
+
+  // Windows HCM fix
+  /* stylelint-disable */
+  .#{$prefix}--inline-notification {
+    @include high-contrast-mode('outline');
+  }
+
+  .#{$prefix}--inline-notification__close-button:focus,
+  .#{$prefix}--btn.#{$prefix}--btn--ghost.#{$prefix}--inline-notification__action-button:focus {
+    @include high-contrast-mode('focus');
+  }
+
+  .#{$prefix}--inline-notification__icon {
+    @include high-contrast-mode('icon-fill');
+  }
+  /* stylelint-enable */
 }
 
 @include exports('inline-notifications') {
