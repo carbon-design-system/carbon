@@ -27,8 +27,8 @@
 
     display: inline-flex;
     color: $link-primary;
-    text-decoration: none;
     outline: none;
+    text-decoration: none;
     transition: color $duration--fast-01 motion(standard, productive);
 
     &:hover {
@@ -62,9 +62,9 @@
     @include type-style('body-short-01');
 
     color: $text-disabled;
+    cursor: not-allowed;
     font-weight: 400;
     text-decoration: none;
-    cursor: not-allowed;
   }
 
   .#{$prefix}--link.#{$prefix}--link--visited:visited {

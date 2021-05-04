@@ -95,9 +95,9 @@
       width: rem(12px);
       height: 1px;
       background: $link-primary-hover;
+      content: '';
       opacity: 0;
       transition: opacity $duration--fast-01 motion(standard, productive);
-      content: '';
     }
   }
 
@@ -113,8 +113,8 @@
 
   .#{$prefix}--breadcrumb-item .#{$prefix}--overflow-menu__icon {
     position: relative;
-    transform: translateY(4px);
     fill: $link-primary;
+    transform: translateY(4px);
   }
 
   .#{$prefix}--breadcrumb-item
@@ -133,11 +133,11 @@
     left: $caret-size * 2;
     width: 0;
     height: 0;
-    margin: 0 auto;
-    background: transparent;
     border-right: $caret-size solid transparent;
     border-bottom: $caret-size solid $field;
     border-left: $caret-size solid transparent;
+    margin: 0 auto;
+    background: transparent;
   }
 
   // Skeleton State

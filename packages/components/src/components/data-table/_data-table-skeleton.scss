@@ -28,8 +28,8 @@
 
     tr:hover {
       td {
-        background: transparent;
         border-color: $border-subtle;
+        background: transparent;
 
         &:first-of-type,
         &:last-of-type {

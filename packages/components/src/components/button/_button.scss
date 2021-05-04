@@ -74,14 +74,14 @@
     }
 
     &:focus {
-      color: $text-inverse;
       background-color: $button-tertiary;
+      color: $text-inverse;
     }
 
     &:active {
-      color: $text-inverse;
-      background-color: $button-tertiary-active;
       border-color: transparent;
+      background-color: $button-tertiary-active;
+      color: $text-inverse;
     }
 
     &:disabled,
@@ -90,8 +90,8 @@
     &.#{$prefix}--btn--disabled,
     &.#{$prefix}--btn--disabled:hover,
     &.#{$prefix}--btn--disabled:focus {
-      color: $text-on-color-disabled;
       background: transparent;
+      color: $text-on-color-disabled;
       outline: none;
     }
   }
@@ -128,9 +128,9 @@
     &.#{$prefix}--btn--disabled,
     &.#{$prefix}--btn--disabled:hover,
     &.#{$prefix}--btn--disabled:focus {
-      color: $text-on-color-disabled;
-      background: transparent;
       border-color: transparent;
+      background: transparent;
+      color: $text-on-color-disabled;
       outline: none;
     }
 
@@ -157,10 +157,10 @@
     &.#{$prefix}--btn--disabled.#{$prefix}--tooltip--a11y::before,
     &.#{$prefix}--btn--disabled.#{$prefix}--tooltip--a11y::after,
     &.#{$prefix}--btn--disabled .#{$prefix}--assistive-text {
-      margin: -1px;
       overflow: hidden;
-      opacity: 0;
+      margin: -1px;
       clip: rect(0, 0, 0, 0);
+      opacity: 0;
     }
   }
 
@@ -172,13 +172,6 @@
 
   .#{$prefix}--btn.#{$prefix}--btn--icon-only.#{$prefix}--tooltip__trigger:focus {
     border-color: $focus;
-
-    // Windows, Firefox HCM Fix
-    @media screen and (-ms-high-contrast: active),
-      screen and (prefers-contrast) {
-      outline: 3px solid transparent;
-      outline-offset: -3px;
-    }
   }
 
   .#{$prefix}--btn.#{$prefix}--btn--icon-only.#{$prefix}--tooltip__trigger:active:not([disabled]) {
@@ -287,20 +280,6 @@
     fill: none;
   }
 
-  .#{$prefix}--btn.#{$prefix}--btn--icon-only.#{$prefix}--btn--ghost
-    .#{$prefix}--btn__icon,
-  .#{$prefix}--btn.#{$prefix}--btn--icon-only.#{$prefix}--btn--ghost:hover
-    .#{$prefix}--btn__icon {
-    // Windows, Firefox HCM Fix
-    @media screen and (-ms-high-contrast: active),
-      screen and (prefers-contrast) {
-      // `ButtonText` is a CSS2 system color to help improve colors in HCM
-      path {
-        fill: ButtonText;
-      }
-    }
-  }
-
   .#{$prefix}--btn--ghost.#{$prefix}--btn--icon-only
     .#{$prefix}--btn__icon
     path:not([data-icon-path]),
@@ -316,15 +295,6 @@
   .#{$prefix}--btn.#{$prefix}--btn--icon-only.#{$prefix}--btn--ghost[disabled]:hover
     .#{$prefix}--btn__icon {
     fill: $icon-on-color-disabled;
-
-    // Windows, Firefox HCM Fix
-    @media screen and (-ms-high-contrast: active),
-      screen and (prefers-contrast) {
-      // `GrayText` is a CSS2 system color to help improve colors in HCM
-      path {
-        fill: GrayText;
-      }
-    }
   }
 
   .#{$prefix}--btn--ghost.#{$prefix}--btn--icon-only[disabled] {
@@ -370,18 +340,18 @@
       );
 
       &:hover {
-        color: $text-on-color;
         border-color: $button-danger-hover;
+        color: $text-on-color;
       }
 
       &:focus {
-        color: $text-on-color;
         background-color: $button-danger-primary;
+        color: $text-on-color;
       }
 
       &:active {
-        color: $text-on-color;
         border-color: $button-danger-active;
+        color: $text-on-color;
       }
 
       &:disabled,
@@ -390,8 +360,8 @@
       &.#{$prefix}--btn--disabled,
       &.#{$prefix}--btn--disabled:hover,
       &.#{$prefix}--btn--disabled:focus {
-        color: $text-on-color-disabled;
         background: transparent;
+        color: $text-on-color-disabled;
         outline: none;
       }
     }
@@ -426,9 +396,9 @@
       &.#{$prefix}--btn--disabled,
       &.#{$prefix}--btn--disabled:hover,
       &.#{$prefix}--btn--disabled:focus {
-        color: $disabled;
-        background: transparent;
         border-color: transparent;
+        background: transparent;
+        color: $disabled;
         outline: none;
       }
 
@@ -526,6 +496,11 @@
     &:first-of-type {
       box-shadow: none;
     }
+  }
+
+  // Windows HCM fix
+  .#{$prefix}--btn:focus {
+    @include high-contrast-mode('focus');
   }
 }
 
