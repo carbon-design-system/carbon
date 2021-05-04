@@ -104,6 +104,7 @@ module.exports = [
     plugins: [
       ...baseConfig.plugins,
       replace({
+        preventAssignment: true,
         'process.env.NODE_ENV': JSON.stringify('development'),
       }),
     ],
@@ -120,6 +121,7 @@ module.exports = [
     plugins: [
       ...baseConfig.plugins,
       replace({
+        preventAssignment: true,
         'process.env.NODE_ENV': JSON.stringify('production'),
       }),
       terser(),
