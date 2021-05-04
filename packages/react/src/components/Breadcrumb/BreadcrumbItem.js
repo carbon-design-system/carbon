@@ -63,11 +63,17 @@ const BreadcrumbItem = React.forwardRef(function BreadcrumbItem(
     );
   }
 
+  const customChildClassName = children?.props?.className;
+  const childClassName = cx({
+    [`${prefix}--link`]: true,
+    [customChildClassName]: !!customChildClassName,
+  });
+
   return (
     <li className={className} ref={ref} {...rest}>
       {React.cloneElement(children, {
         'aria-current': ariaCurrent,
-        className: `${prefix}--link`,
+        className: childClassName,
       })}
     </li>
   );
