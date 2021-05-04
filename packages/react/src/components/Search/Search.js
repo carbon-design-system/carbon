@@ -80,7 +80,7 @@ export default class Search extends Component {
     placeholder: PropTypes.string,
 
     /**
-     * Rendered icon for the ContextMenuOption.
+     * Rendered icon for the Search.
      * Can be a React component class
      */
     renderIcon: PropTypes.oneOfType([PropTypes.func, PropTypes.object]),
