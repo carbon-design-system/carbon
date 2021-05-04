@@ -80,6 +80,12 @@ export default class Search extends Component {
     placeholder: PropTypes.string,
 
     /**
+     * Rendered icon for the ContextMenuOption.
+     * Can be a React component class
+     */
+    renderIcon: PropTypes.oneOfType([PropTypes.func, PropTypes.object]),
+
+    /**
      * Specify the search size
      */
     size: PropTypes.oneOf(['sm', 'md', 'lg', 'xl']),
@@ -176,7 +182,7 @@ export default class Search extends Component {
       disabled,
       onChange,
       onKeyDown,
-      renderSearchIcon,
+      renderIcon,
       ...other
     } = this.props;
 
@@ -207,8 +213,11 @@ export default class Search extends Component {
     });
 
     const searchId = `${id}-search`;
-    const searchIcon = renderSearchIcon ? renderSearchIcon :
-      <Search16 className={`${prefix}--search-magnifier-icon`}/>
+    const searchIcon = renderIcon ? (
+      renderIcon
+    ) : (
+      <Search16 className={`${prefix}--search-magnifier-icon`} />
+    );
 
     return (
       <div role="search" aria-labelledby={searchId} className={searchClasses}>
