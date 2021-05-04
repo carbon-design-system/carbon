@@ -7,6 +7,7 @@
 
 import React from 'react';
 import { action } from '@storybook/addon-actions';
+import './tile-story.scss';
 
 import {
   withKnobs,
@@ -120,25 +121,9 @@ export const Default = () => {
   );
 };
 
-Default.parameters = {
-  info: {
-    text: `
-        Default tile without any interactions
-      `,
-  },
-};
-
 export const Clickable = () => {
   const clickableProps = props.clickable();
   return <ClickableTile {...clickableProps}>Clickable Tile</ClickableTile>;
-};
-
-Clickable.parameters = {
-  info: {
-    text: `
-        Clickable tile
-      `,
-  },
 };
 
 export const MultiSelect = () => {
@@ -146,28 +131,16 @@ export const MultiSelect = () => {
   return (
     <div role="group" aria-label="selectable tiles">
       <SelectableTile id="tile-1" name="tiles" {...selectableProps}>
-        Multi-select Tile
+        Option 1
       </SelectableTile>
       <SelectableTile id="tile-2" name="tiles" {...selectableProps}>
-        Multi-select Tile
+        Option 2
       </SelectableTile>
       <SelectableTile id="tile-3" name="tiles" {...selectableProps}>
-        Multi-select Tile
+        Option 3
       </SelectableTile>
     </div>
   );
-};
-
-MultiSelect.storyName = 'Multi-select';
-
-MultiSelect.parameters = {
-  info: {
-    text: `
-        Selectable tile
-
-        Use this to select multiple tiles.
-      `,
-  },
 };
 
 export const Radio = () => {
@@ -178,32 +151,16 @@ export const Radio = () => {
       legend="Radio Tile Group"
       {...props.group()}>
       <RadioTile value="standard" {...radioProps}>
-        Radio Tile
+        Option 1
       </RadioTile>
       <RadioTile value="default-selected" id="tile-2" {...radioProps}>
-        Radio Tile
+        Option 2
       </RadioTile>
       <RadioTile value="selected" id="tile-3" {...radioProps}>
-        Radio Tile
+        Option 3
       </RadioTile>
     </TileGroup>
   );
-};
-
-Radio.parameters = {
-  info: {
-    text: `
-         The example below shows a Tile Group component with a default selected Tile.
-         Although you can set the checked prop on the Tile, when using the RadioTile component
-         as a child of the Tile Group, either set the defaultSelected or valueSelected which will
-         automatically set the selected prop on the corresponding RadioTile component.
-
-         Use defaultSelected when you want a tile to be selected initially, but don't need to set it
-         at a later time. If you do need to set it dynamically at a later time, then use the valueSelected property instead.
-
-         Use this to select one tile at a time.
-      `,
-  },
 };
 
 export const Expandable = () => (
@@ -216,11 +173,3 @@ export const Expandable = () => (
     </TileBelowTheFoldContent>
   </ExpandableTile>
 );
-
-Expandable.parameters = {
-  info: {
-    text: `
-        Expandable tile
-      `,
-  },
-};

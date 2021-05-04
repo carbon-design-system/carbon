@@ -336,13 +336,6 @@
 
   .#{$prefix}--tooltip__trigger svg {
     fill: $icon-secondary;
-
-    // Windows, Firefox HCM Fix
-    @media screen and (-ms-high-contrast: active),
-      screen and (prefers-contrast) {
-      // `ButtonText` is a CSS2 system color to help improve colors in HCM
-      fill: ButtonText;
-    }
   }
 
   .#{$prefix}--tooltip__trigger:not(.#{$prefix}--btn--icon-only) {
@@ -384,13 +377,6 @@
     border-radius: rem(2px);
     color: $text-inverse;
     word-wrap: break-word;
-
-    // Windows, Firefox HCM Fix
-    @media screen and (-ms-high-contrast: active),
-      screen and (prefers-contrast) {
-      // `ButtonText` is a CSS2 system color to help improve colors in HCM
-      border: 1px solid transparent;
-    }
 
     // @todo this can be deprecated in v11 since focus should always be on the content container not the tooltip
     // V11: remove in V11
@@ -514,6 +500,8 @@
     }
 
     &[data-floating-menu-direction='left'] {
+      margin-left: calc(#{$spacing-03} * -1);
+
       .#{$prefix}--tooltip__caret {
         top: 50%;
         // left position has an additional space between caret and tooltip
@@ -524,6 +512,8 @@
     }
 
     &[data-floating-menu-direction='top'] {
+      margin-top: calc(#{$spacing-03} * -1);
+
       .#{$prefix}--tooltip__caret {
         top: auto;
         bottom: calc(#{$caret-size * (-1)} + 1px);
@@ -532,12 +522,18 @@
     }
 
     &[data-floating-menu-direction='right'] {
+      margin-left: $spacing-03;
+
       .#{$prefix}--tooltip__caret {
         top: 50%;
         right: auto;
         left: calc(#{$caret-size * (-1)} + 1px);
         transform: rotate(270deg) translate(50%, -50%);
       }
+    }
+
+    &[data-floating-menu-direction='bottom'] {
+      margin-top: $spacing-03;
     }
   }
 
@@ -549,6 +545,7 @@
 
   .#{$prefix}--tooltip--shown {
     display: block;
+    margin-top: 0;
   }
 
   // Tooltip Definition
@@ -626,13 +623,6 @@
     &:focus {
       svg {
         fill: $icon-secondary;
-
-        // Windows, Firefox HCM Fix
-        @media screen and (-ms-high-contrast: active),
-          screen and (prefers-contrast) {
-          // `ButtonText` is a CSS2 system color to help improve colors in HCM
-          fill: ButtonText;
-        }
       }
     }
   }
@@ -709,6 +699,26 @@
   .#{$prefix}--tooltip__trigger:not(.#{$prefix}--tooltip--hidden)
     .#{$prefix}--assistive-text {
     pointer-events: all;
+  }
+
+  // Windows HCM fix
+  /* stylelint-disable */
+  .#{$prefix}--tooltip__trigger svg,
+  .#{$prefix}--tooltip__trigger:hover svg,
+  .#{$prefix}--tooltip__trigger:focus svg {
+    @include high-contrast-mode('icon-fill');
+  }
+
+  .#{$prefix}--tooltip__trigger:focus svg {
+    @include high-contrast-mode('focus');
+  }
+
+  .#{$prefix}--tooltip {
+    @include high-contrast-mode('outline');
+  }
+
+  .#{$prefix}--assistive-text {
+    @include high-contrast-mode('outline');
   }
 }
 
