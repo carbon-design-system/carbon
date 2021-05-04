@@ -215,12 +215,6 @@
     &:hover {
       background-color: $hover-ui;
     }
-
-    // Windows, Firefox HCM Fix
-    @media screen and (-ms-high-contrast: active), (prefers-contrast) {
-      // `ButtonText` is a CSS2 system color to help improve colors in HCM
-      fill: ButtonText;
-    }
   }
 
   .flatpickr-next-month.disabled svg,
@@ -521,5 +515,28 @@
 
   .flatpickr-input[readonly] {
     cursor: pointer;
+  }
+
+  // Windows HCM fix
+  .flatpickr-prev-month,
+  .flatpickr-next-month {
+    @include high-contrast-mode('icon-fill');
+  }
+
+  .flatpickr-day.selected {
+    @include high-contrast-mode('focus') {
+      outline-style: dotted;
+    }
+  }
+
+  .flatpickr-day.today,
+  .flatpickr-day.inRange {
+    @include high-contrast-mode {
+      color: Highlight;
+    }
+  }
+
+  .flatpickr-calendar {
+    @include high-contrast-mode('outline');
   }
 }
