@@ -160,12 +160,6 @@
       text-overflow: ellipsis;
       white-space: nowrap;
     }
-
-    // Windows, Firefox HCM Fix
-    @media screen and (-ms-high-contrast: active),
-      screen and (prefers-contrast) {
-      outline: 2px solid transparent;
-    }
   }
 
   .#{$prefix}--file__selected-file--field {
@@ -307,13 +301,6 @@
 
   .#{$prefix}--file__state-container .#{$prefix}--file-close svg path {
     fill: $icon-primary;
-
-    // Windows, Firefox HCM Fix
-    @media screen and (-ms-high-contrast: active),
-      screen and (prefers-contrast) {
-      // `ButtonText` is a CSS2 system color to help improve colors in HCM
-      fill: ButtonText;
-    }
   }
 
   .#{$prefix}--file__state-container .#{$prefix}--inline-loading__animation {
@@ -335,6 +322,17 @@
     outline: 2px solid $focus;
     outline-offset: -2px;
   }
+
+  // Windows HCM fix
+  /* stylelint-disable */
+  .#{$prefix}--file__selected-file {
+    @include high-contrast-mode('outline');
+  }
+
+  .#{$prefix}--file__state-container .#{$prefix}--file-close svg path {
+    @include high-contrast-mode('icon-fill');
+  }
+  /* stylelint-enable */
 }
 
 @include exports('file-uploader') {
