@@ -86,13 +86,6 @@
     width: rem(16px);
     height: rem(16px);
     fill: $icon-primary;
-
-    // Windows, Firefox HCM Fix
-    @media screen and (-ms-high-contrast: active),
-      screen and (prefers-contrast) {
-      // `ButtonText` is a CSS2 system color to help improve colors in HCM
-      fill: ButtonText;
-    }
   }
 
   .#{$prefix}--overflow-menu-options {
@@ -342,6 +335,18 @@
       left: 145px;
     }
   }
+
+  // Windows HCM fix
+  /* stylelint-disable */
+  .#{$prefix}--overflow-menu:focus,
+  .#{$prefix}--overflow-menu-options__btn:focus {
+    @include high-contrast-mode('focus');
+  }
+
+  .#{$prefix}--overflow-menu svg {
+    @include high-contrast-mode('icon-fill');
+  }
+  /*stylelint-enable */
 }
 
 @include exports('overflow-menu') {

@@ -555,12 +555,6 @@
     width: mini-units(2);
     height: mini-units(2);
     fill: $shell-side-nav-icon-01;
-
-    @media screen and (-ms-high-contrast: active),
-      screen and (prefers-contrast) {
-      // `ButtonText` is a CSS2 system color to help improve colors in HCM
-      fill: ButtonText;
-    }
   }
 
   .#{$prefix}--side-nav__icon > svg.#{$prefix}--side-nav-collapse-icon {
@@ -673,13 +667,18 @@
     .#{$prefix}--header__menu-arrow,
   .#{$prefix}--side-nav .#{$prefix}--header__menu-arrow {
     fill: $shell-side-nav-text-01;
+  }
 
-    // Windows, Firefox HCM Fix
-    @media screen and (-ms-high-contrast: active),
-      screen and (prefers-contrast) {
-      // `ButtonText` is a CSS2 system color to help improve colors in HCM
-      fill: ButtonText;
-    }
+  // Windows HCM fix
+  .#{$prefix}--side-nav__icon > svg,
+  .#{$prefix}--side-nav
+    a.#{$prefix}--header__menu-item:hover
+    .#{$prefix}--header__menu-arrow,
+  .#{$prefix}--side-nav
+    a.#{$prefix}--header__menu-item:focus
+    .#{$prefix}--header__menu-arrow,
+  .#{$prefix}--side-nav .#{$prefix}--header__menu-arrow {
+    @include high-contrast-mode('icon-fill');
   }
 }
 

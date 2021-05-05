@@ -425,6 +425,7 @@ class Tooltip extends Component {
   handleEscKeyPress = (event) => {
     const { open } = this.isControlled ? this.props : this.state;
     if (open && keyDownMatch(event, [keys.Escape])) {
+      event.stopPropagation();
       return this._handleUserInputOpenClose(event, { open: false });
     }
   };

@@ -277,12 +277,22 @@
     left: 0;
     width: 100%;
     height: rem(32px);
-    // Safari interprets `transparent` differently, so make color token value transparent instead:
-    background-image: linear-gradient(to bottom, rgba($layer, 0), $layer);
+    background-image: linear-gradient(to bottom, transparent, $layer);
     content: '';
     grid-column: 1/-1;
     grid-row: 2/-2;
     pointer-events: none;
+  }
+
+  // Safari-only media query
+  // won't appear correctly with CSS custom properties
+  // see: code snippet and tabs overflow indicators
+  @media not all and (min-resolution: 0.001dpcm) {
+    @supports (-webkit-appearance: none) and (stroke-color: transparent) {
+      .#{$prefix}--modal-content--overflow-indicator {
+        background-image: linear-gradient(to bottom, rgba($layer, 0), $layer);
+      }
+    }
   }
 
   .#{$prefix}--modal-content:focus
@@ -324,14 +334,6 @@
     align-items: flex-start;
   }
 
-  .#{$prefix}--modal-footer button.#{$prefix}--btn:focus {
-    // Firefox HCM Fix
-    @media screen and (prefers-contrast) {
-      border: none;
-      outline-style: dotted;
-    }
-  }
-
   .#{$prefix}--modal-close {
     position: absolute;
     top: 0;
@@ -352,11 +354,6 @@
     &:focus {
       border-color: $focus;
       outline: none;
-
-      // Firefox HCM Fix
-      @media screen and (prefers-contrast) {
-        border-style: dotted;
-      }
     }
   }
 
@@ -368,13 +365,6 @@
     width: rem(20px);
     height: rem(20px);
     fill: $icon-primary;
-
-    // Windows, Firefox HCM Fix
-    @media screen and (-ms-high-contrast: active),
-      screen and (prefers-contrast) {
-      // `ButtonText` is a CSS2 system color to help improve colors in HCM
-      fill: ButtonText;
-    }
   }
 
   .#{$prefix}--body--with-modal-open {
@@ -384,6 +374,17 @@
   .#{$prefix}--body--with-modal-open .#{$prefix}--tooltip {
     z-index: z('modal');
   }
+
+  // Windows HCM fix
+  /* stylelint-disable */
+  .#{$prefix}--modal-close__icon {
+    @include high-contrast-mode('icon-fill');
+  }
+
+  .#{$prefix}--modal-close:focus {
+    @include high-contrast-mode('focus');
+  }
+  /* stylelint-enable */
 }
 
 @include exports('modal') {

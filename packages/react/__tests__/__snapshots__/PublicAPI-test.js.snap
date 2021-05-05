@@ -1347,7 +1347,9 @@ Map {
           "args": Array [
             Array [
               "small",
+              "sm",
               "normal",
+              "lg",
             ],
           ],
           "type": "oneOf",
@@ -1984,7 +1986,9 @@ Map {
         "args": Array [
           Array [
             "small",
+            "sm",
             "normal",
+            "lg",
           ],
         ],
         "type": "oneOf",

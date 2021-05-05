@@ -221,13 +221,6 @@
     border-radius: 50%;
     box-shadow: inset 0 0 0 1px $focus;
     outline: none;
-
-    // Windows, Firefox HCM Fix
-    @media screen and (-ms-high-contrast: active),
-      screen and (prefers-contrast) {
-      // `ButtonText` is a CSS2 system color to help improve colors in HCM
-      outline: 1px solid ButtonText;
-    }
   }
 
   .#{$prefix}--tag--high-contrast .#{$prefix}--tag__close-icon:focus {
@@ -277,6 +270,22 @@
       }
     }
   }
+
+  // Windows HCM fix
+  /* stylelint-disable */
+  .#{$prefix}--tag {
+    @include high-contrast-mode('outline');
+  }
+
+  .#{$prefix}--tag__close-icon svg,
+  .#{$prefix}--tag__custom-icon svg {
+    @include high-contrast-mode('icon-fill');
+  }
+
+  .#{$prefix}--tag__close-icon:focus {
+    @include high-contrast-mode('focus');
+  }
+  /* stylelint-enable */
 }
 
 @include exports('tags') {
