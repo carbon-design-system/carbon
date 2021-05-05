@@ -80,6 +80,12 @@ export default class Search extends Component {
     placeholder: PropTypes.string,
 
     /**
+     * Rendered icon for the Search.
+     * Can be a React component class
+     */
+    renderIcon: PropTypes.oneOfType([PropTypes.func, PropTypes.object]),
+
+    /**
      * Specify the search size
      */
     size: PropTypes.oneOf(['sm', 'md', 'lg', 'xl']),
@@ -176,6 +182,7 @@ export default class Search extends Component {
       disabled,
       onChange,
       onKeyDown,
+      renderIcon,
       ...other
     } = this.props;
 
@@ -206,6 +213,11 @@ export default class Search extends Component {
     });
 
     const searchId = `${id}-search`;
+    const searchIcon = renderIcon ? (
+      renderIcon
+    ) : (
+      <Search16 className={`${prefix}--search-magnifier-icon`} />
+    );
 
     return (
       <div role="search" aria-labelledby={searchId} className={searchClasses}>
@@ -214,7 +226,7 @@ export default class Search extends Component {
           ref={(magnifier) => {
             this.magnifier = magnifier;
           }}>
-          <Search16 className={`${prefix}--search-magnifier-icon`} />
+          {searchIcon}
         </div>
         <label id={searchId} htmlFor={id} className={`${prefix}--label`}>
           {labelText}
