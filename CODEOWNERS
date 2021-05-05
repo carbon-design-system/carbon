@@ -14,3 +14,4 @@
 # Release team should be notified of Public API changes in the system
 **/PublicAPI-test.js @carbon-design-system/release @carbon-design-system/developers-system
 **/PublicAPI-test.js.snap @carbon-design-system/release @carbon-design-system/developers-system
+e2e/components/**/selectors-test.js.snap @carbon-design-system/release @carbon-design-system/developers-system
