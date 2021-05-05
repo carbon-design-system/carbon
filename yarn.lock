@@ -9443,7 +9443,6 @@ __metadata:
     commander: ^2.13.0
     core-js: ^3.6.5
     cross-env: ^5.2.0
-    css: ^3.0.0
     css-loader: ^3.4.2
     custom-event: ^1.0.0
     del: ~2.0.2
@@ -9559,6 +9558,7 @@ __metadata:
     all-contributors-cli: ^6.19.0
     cross-env: ^5.2.0
     cross-spawn: ^6.0.5
+    css: ^3.0.0
     doctoc: ^1.4.0
     eslint: ^6.8.0
     fs-extra: ^8.1.0
