@@ -72,7 +72,7 @@ out our
 
 ## 📚 Examples
 
-If you're looking for more examples on how to use `carbon-components-react`, we
+If you're looking for more examples on how to use `@carbon/react`, we
 have some examples that you can check out:
 
 - [Create React App](./examples/create-react-app)
