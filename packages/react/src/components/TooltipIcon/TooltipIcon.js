@@ -117,6 +117,7 @@ const TooltipIcon = ({
 
   return (
     <button
+      style={{ cursor: onClick ? 'pointer' : 'default' }}
       {...rest}
       type="button"
       className={tooltipTriggerClasses}

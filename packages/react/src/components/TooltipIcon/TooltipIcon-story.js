@@ -10,6 +10,7 @@ import { Add16, AddFilled16, Filter16, Search16 } from '@carbon/icons-react';
 import { action } from '@storybook/addon-actions';
 import { withKnobs, select, text } from '@storybook/addon-knobs';
 import TooltipIcon from '../TooltipIcon';
+import { Information16 } from '@carbon/icons-react';
 import mdx from './TooltipIcon.mdx';
 
 const directions = {
@@ -63,7 +64,26 @@ export default {
   },
 };
 
+<<<<<<< HEAD
 export const Default = () => <TooltipIcon {...props()} />;
+=======
+export const Default = () => (
+  <div
+    style={{
+      padding: '2rem',
+      display: 'flex',
+      justifyContent: 'space-between',
+      width: '200px',
+    }}>
+    <TooltipIcon {...props()}>
+      <Filter16 />
+    </TooltipIcon>
+    <TooltipIcon tooltipText="Non-interactive tooltip">
+      <Information16 />
+    </TooltipIcon>
+  </div>
+);
+>>>>>>> 942b60f2e... fix(TooltipIcon): prevent pointer cursor on nointeractive variant
 
 Default.storyName = 'default';
 
