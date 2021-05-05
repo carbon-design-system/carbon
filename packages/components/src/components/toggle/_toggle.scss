@@ -45,8 +45,6 @@
     }
 
     .#{$prefix}--toggle__switch {
-      @include high-contrast-mode('outline');
-
       position: relative;
       width: rem(48px);
       height: rem(24px);
@@ -55,8 +53,6 @@
       transition: background-color $duration--fast-01 motion(exit, productive);
 
       &::before {
-        @include high-contrast-mode('outline');
-
         position: absolute;
         top: rem(3px);
         left: rem(3px);
@@ -75,8 +71,6 @@
     .#{$prefix}--toggle__button:active
       + .#{$prefix}--toggle__label
       .#{$prefix}--toggle__switch {
-      @include high-contrast-mode('focus');
-
       box-shadow: 0 0 0 1px $focus-inset, 0 0 0 3px $focus;
     }
 
@@ -140,6 +134,23 @@
 
     .#{$prefix}--toggle--disabled .#{$prefix}--toggle__check {
       fill: $button-disabled;
+    }
+
+    // HCM
+
+    .#{$prefix}--toggle__switch,
+    .#{$prefix}--toggle__switch::before {
+      @include high-contrast-mode('outline');
+    }
+
+    // stylelint-disable-next-line no-duplicate-selectors
+    .#{$prefix}--toggle__button:focus
+      + .#{$prefix}--toggle__label
+      .#{$prefix}--toggle__switch,
+    .#{$prefix}--toggle__button:active
+      + .#{$prefix}--toggle__label
+      .#{$prefix}--toggle__switch {
+      @include high-contrast-mode('focus');
     }
   } @else {
     .#{$prefix}--toggle {
