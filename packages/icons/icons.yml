@@ -1543,6 +1543,11 @@
     - bookmark
   sizes:
     - 32
+- name: bookmark--add
+  friendly_name: bookmark--add
+  aliases: []
+  sizes:
+    - 32
 - name: bookmark--filled
   friendly_name: Bookmark filled
   aliases:
@@ -1641,6 +1646,11 @@
     - branch
     - operations
     - instruction
+  sizes:
+    - 32
+- name: breaking-change
+  friendly_name: breaking-change
+  aliases: []
   sizes:
     - 32
 - name: brightness-contrast
@@ -3800,6 +3810,36 @@
     - associate
   sizes:
     - 32
+- name: connect--recursive
+  friendly_name: connect--recursive
+  aliases: []
+  sizes:
+    - 32
+- name: connect--source
+  friendly_name: connect--source
+  aliases: []
+  sizes:
+    - 32
+- name: connect--target
+  friendly_name: connect--target
+  aliases: []
+  sizes:
+    - 32
+- name: connection--receive
+  friendly_name: connection--receive
+  aliases: []
+  sizes:
+    - 32
+- name: connection--send
+  friendly_name: connection--send
+  aliases: []
+  sizes:
+    - 32
+- name: connection--two-way
+  friendly_name: connection--two-way
+  aliases: []
+  sizes:
+    - 32
 - name: connection-signal
   friendly_name: Connection signal
   aliases:
@@ -3871,6 +3911,11 @@
     - light
     - dark
     - comparison
+  sizes:
+    - 32
+- name: convert-to-cloud
+  friendly_name: convert-to-cloud
+  aliases: []
   sizes:
     - 32
 - name: copy
@@ -4599,6 +4644,11 @@
     - van
     - shipping
     - ecommerce
+  sizes:
+    - 32
+- name: delivery--add
+  friendly_name: delivery--add
+  aliases: []
   sizes:
     - 32
 - name: delivery--parcel
@@ -6495,6 +6545,16 @@
     - organize
     - folder
     - folder off
+- name: folder--open
+  friendly_name: folder--open
+  aliases: []
+  sizes:
+    - 32
+- name: folder--parent
+  friendly_name: folder--parent
+  aliases: []
+  sizes:
+    - 32
 - name: folder--shared
   friendly_name: Folder shared
   sizes:
@@ -6773,6 +6833,46 @@
     - globe
   sizes:
     - 32
+- name: glyph--caution
+  friendly_name: glyph--caution
+  aliases: []
+  sizes:
+    - glyph
+- name: glyph--caution-inverted
+  friendly_name: glyph--caution-inverted
+  aliases: []
+  sizes:
+    - glyph
+- name: glyph--circle-fill
+  friendly_name: glyph--circle-fill
+  aliases: []
+  sizes:
+    - glyph
+- name: glyph--circle-stroke
+  friendly_name: glyph--circle-stroke
+  aliases: []
+  sizes:
+    - glyph
+- name: glyph--critical
+  friendly_name: glyph--critical
+  aliases: []
+  sizes:
+    - glyph
+- name: glyph--incomplete
+  friendly_name: glyph--incomplete
+  aliases: []
+  sizes:
+    - glyph
+- name: glyph--square-fill
+  friendly_name: glyph--square-fill
+  aliases: []
+  sizes:
+    - glyph
+- name: glyph--undefined
+  friendly_name: glyph--undefined
+  aliases: []
+  sizes:
+    - glyph
 - name: gradient
   friendly_name: Gradient
   aliases:
@@ -8191,6 +8291,11 @@
     - document
   sizes:
     - 32
+- name: lifesaver
+  friendly_name: lifesaver
+  aliases: []
+  sizes:
+    - 32
 - name: light
   friendly_name: Light
   aliases:
@@ -8389,6 +8494,11 @@
     - gps
     - filled
     - location
+  sizes:
+    - 32
+- name: location--filled
+  friendly_name: location--filled
+  aliases: []
   sizes:
     - 32
 - name: location--hazard
@@ -10646,6 +10756,11 @@
     - formatting
   sizes:
     - 32
+- name: parameter
+  friendly_name: parameter
+  aliases: []
+  sizes:
+    - 32
 - name: parent-child
   friendly_name: Parent child
   aliases:
@@ -12458,6 +12573,11 @@
   sizes:
     - 16
     - 32
+- name: search--locate
+  friendly_name: search--locate
+  aliases: []
+  sizes:
+    - 32
 - name: security
   friendly_name: Security
   aliases:
@@ -12478,6 +12598,11 @@
   aliases:
     - select 02
     - formatting
+  sizes:
+    - 32
+- name: select--window
+  friendly_name: select--window
+  aliases: []
   sizes:
     - 32
 - name: send
@@ -14088,6 +14213,11 @@
     - typography
     - alphabet
     - editor
+- name: text--font
+  friendly_name: text--font
+  aliases: []
+  sizes:
+    - 32
 - name: text--footnote
   friendly_name: Text footnote
   aliases:
@@ -14350,6 +14480,11 @@
     - disagree
   sizes:
     - 32
+- name: thumbs-down--filled
+  friendly_name: thumbs-down--filled
+  aliases: []
+  sizes:
+    - 32
 - name: thumbs-up
   friendly_name: Thumbs up
   aliases:
@@ -14358,6 +14493,11 @@
     - up vote
     - 'yes'
     - agree
+  sizes:
+    - 32
+- name: thumbs-up--filled
+  friendly_name: thumbs-up--filled
+  aliases: []
   sizes:
     - 32
 - name: thunderstorm
@@ -14492,6 +14632,21 @@
     - click
     - mobile
     - device
+- name: touch--1--filled
+  friendly_name: touch--1--filled
+  aliases: []
+  sizes:
+    - 32
+- name: touch--1-down
+  friendly_name: touch--1-down
+  aliases: []
+  sizes:
+    - 32
+- name: touch--1-down--filled
+  friendly_name: touch--1-down--filled
+  aliases: []
+  sizes:
+    - 32
 - name: touch--2
   friendly_name: Touch 2
   sizes:
@@ -14503,6 +14658,11 @@
     - click
     - mobile
     - device
+- name: touch--2--filled
+  friendly_name: touch--2--filled
+  aliases: []
+  sizes:
+    - 32
 - name: touch--interaction
   friendly_name: Touch interaction
   aliases:
@@ -16003,6 +16163,11 @@
     - size
     - enlarge
     - detail
+  sizes:
+    - 32
+- name: zoom--fit
+  friendly_name: zoom--fit
+  aliases: []
   sizes:
     - 32
 - name: zoom--in
