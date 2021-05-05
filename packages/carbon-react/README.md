@@ -28,7 +28,7 @@ the Carbon Design System.
 To include a component, you can import it:
 
 ```jsx
-import { Button } from '@carbon/icons-react';
+import { Button } from '@carbon/react';
 
 function MyComponent() {
   return <Button>Example usage</Button>;
