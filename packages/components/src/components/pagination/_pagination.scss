@@ -165,13 +165,6 @@ $css--helpers: true;
     fill: $icon-primary;
     transition: outline $duration--fast-02 motion(standard, productive),
       background-color $duration--fast-02 motion(standard, productive);
-
-    // Windows, Firefox HCM Fix
-    @media screen and (-ms-high-contrast: active),
-      screen and (prefers-contrast) {
-      // `ButtonText` is a CSS2 system color to help improve colors in HCM
-      border: 1px solid transparent;
-    }
   }
 
   .#{$prefix}--pagination__button:focus,
@@ -206,6 +199,13 @@ $css--helpers: true;
   .#{$prefix}--pagination.#{$prefix}--skeleton .#{$prefix}--skeleton__text {
     margin-right: 1rem;
     margin-bottom: 0;
+  }
+
+  // Windows HCM fix
+  // stylelint-disable-next-line no-duplicate-selectors
+  .#{$prefix}--pagination__button,
+  .#{$prefix}--btn--ghost.#{$prefix}--pagination__button {
+    @include high-contrast-mode('outline');
   }
 }
 

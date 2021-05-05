@@ -111,13 +111,6 @@
     align-items: center;
     justify-content: center;
     transform: translateY(-50%);
-
-    // Windows, Firefox HCM Fix
-    @media screen and (-ms-high-contrast: active),
-      screen and (prefers-contrast) {
-      outline: 1px solid transparent;
-      outline-offset: -1px;
-    }
   }
 
   .#{$prefix}--number__control-btn {
@@ -454,6 +447,22 @@
       display: none;
     }
   }
+
+  // Windows HCM fix
+  /* stylelint-disable */
+  .#{$prefix}--number__control-btn:hover,
+  .#{$prefix}--number__control-btn:focus {
+    @include high-contrast-mode('focus');
+  }
+
+  .#{$prefix}--number__control-btn {
+    @include high-contrast-mode('outline');
+  }
+
+  .#{$prefix}--number__control-btn svg {
+    @include high-contrast-mode('icon-fill');
+  }
+  /* stylelint-enable */
 }
 
 @include exports('number-input') {
