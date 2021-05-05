@@ -56,16 +56,11 @@ Note: you will need to configure Sass in order to correctly find modules in your
 `node_modules`. Follow [this guide](./docs/sass.md#configuration) to make sure
 your project is setup correctly.
 
-## :books: Documentation
+## 📖 API Documentation
 
-- TODO
+If you're looking for `@carbon/react` API documentation, check out:
 
-## 📚 Examples
-
-If you're looking for more examples on how to use `@carbon/react`, we have some
-examples that you can check out:
-
-- TODO
+- [Sass](./docs/sass.md)
 
 ## 🙌 Contributing
 
