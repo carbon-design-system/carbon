@@ -7,8 +7,6 @@
 
 'use strict';
 
-import fs from 'fs';
-
 const defaultOptions = {
   quote: 'auto',
   trailingComma: true,
@@ -131,23 +129,10 @@ function transform(fileInfo, api, options) {
     'TextInput',
     'TimePicker',
   ];
+
   for (const component of components) {
     replacePropForComponent(component);
   }
-
-  // Remove before merging
-  // Prints test file to `Test` folder in React package
-  fs.writeFile(
-    '../packages/react/src/components/Test/output.js',
-    root.toSource(),
-    (err) => {
-      if (err) {
-        console.log(err);
-      } else {
-        console.log('File written');
-      }
-    }
-  );
 
   return root.toSource(printOptions);
 }
