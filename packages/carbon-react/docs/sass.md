@@ -14,7 +14,31 @@
 ## Overview
 
 The Carbon Design System requires [Dart Sass](http://npmjs.com/package/sass) to
-compile the styles for components. 
+compile the styles for components. If you're running into issues where the
+styles from Carbon are not compiling, or you see `@use` rules in your code not
+being compiled by Sass, make sure to first follow the
+[configuration](#configuration) section below.
+
+If you're still running into issues with `@use` rules not compiling, most likely
+you are using Node Sass in your project. To verify if this is the case, you can
+provide options to tools like `sass-loader` in Webpack to specify the Sass
+implementation that you'd like to use.
+
+For example, this is how you would configure `sass-loader` to use the `sass`
+implementation. This normally isn't required, but can help out when running into
+the issues mentioned above.
+
+```js
+{
+  loader: 'sass-loader',
+  options: {
+    implementation: require('sass'),
+    sassOptions: {
+      includePaths: ['node_modules'],
+    },
+  },
+}
+```
 
 ## Configuration
 
@@ -36,7 +60,7 @@ of choice. If you can't find what you're looking for, please make an
 [issue](https://github.com/carbon-design-system/carbon/issues/new/choose) and
 we'll try to get instructions for it added!
 
-**`sass-loader`**
+### `sass-loader`
 
 [Link](https://www.npmjs.com/package/sass-loader)
 
@@ -54,7 +78,7 @@ options passed into `sassOptions`:
 }
 ```
 
-**Parcel**
+### Parcel
 
 [Link](https://www.npmjs.com/package/parcel)
 
@@ -66,7 +90,7 @@ Create a `.sassrc` file with the following configuration:
 }
 ```
 
-**Vite**
+### Vite
 
 [Link](https://vitejs.dev/)
 

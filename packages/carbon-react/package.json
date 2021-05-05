@@ -36,7 +36,7 @@
   "peerDependencies": {
     "react": "^16.8.6 || ^17.0.1",
     "react-dom": "^16.8.6 || ^17.0.1",
-    "sass": ">= 1.32"
+    "sass": "^1.32.12"
   },
   "dependencies": {
     "@carbon/feature-flags": "^0.3.0",
