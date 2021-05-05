@@ -39,7 +39,7 @@ To include an icon, use the `@carbon/icons-react/icons` entrypoint and import it
 the same way you would import a component:
 
 ```jsx
-import { Add } from '@carbon/icons-react/icons';
+import { Add } from '@carbon/react/icons';
 
 function MyComponent() {
   return <Add />;
