@@ -707,6 +707,7 @@ categories:
       - name: Alphanumeric
         members:
           - letter--Aa
+          - letter--Aa--large
           - letter--Bb
           - letter--Cc
           - letter--Dd
