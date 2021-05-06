@@ -1937,9 +1937,11 @@ __metadata:
     rimraf: ^3.0.2
     rollup: ^2.46.0
     rollup-plugin-strip-banner: ^2.0.0
+    sass: ^1.32.12
   peerDependencies:
     react: ^16.8.6 || ^17.0.1
     react-dom: ^16.8.6 || ^17.0.1
+    sass: ^1.32.12
   languageName: unknown
   linkType: soft
 
@@ -9774,7 +9776,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"chokidar@npm:>=2.0.0 <4.0.0, chokidar@npm:^3.0.0, chokidar@npm:^3.4.0":
+"chokidar@npm:>=3.0.0 <4.0.0, chokidar@npm:^3.0.0, chokidar@npm:^3.4.0":
   version: 3.5.1
   resolution: "chokidar@npm:3.5.1"
   dependencies:
@@ -28171,14 +28173,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"sass@npm:^1.24.5, sass@npm:^1.32.2, sass@npm:^1.32.4":
-  version: 1.32.8
-  resolution: "sass@npm:1.32.8"
+"sass@npm:^1.24.5, sass@npm:^1.32.12, sass@npm:^1.32.2, sass@npm:^1.32.4":
+  version: 1.32.12
+  resolution: "sass@npm:1.32.12"
   dependencies:
-    chokidar: ">=2.0.0 <4.0.0"
+    chokidar: ">=3.0.0 <4.0.0"
   bin:
     sass: sass.js
-  checksum: a4d67e6be7b3c479d44065b1dd63fc76b90cfb5f5c9684a5d93fb9721c283bae4ec3f4dab478125ee21f3618dd408a9ba65bd3ba6482ab5a422fc86e1ca18b17
+  checksum: 01ddd4abce9817d2fa46f6379bacb76605e298e8ed91fc1caed21d9b8f8ac62948f973716f8a4488f4348746aa54bb47957dfef6698e8097e07846a15fa42644
   languageName: node
   linkType: hard
 
