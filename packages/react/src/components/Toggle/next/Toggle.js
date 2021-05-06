@@ -26,6 +26,7 @@ export function Toggle({
   onToggle,
   size = 'md',
   toggled,
+  ...other
 }) {
   const [checked, setChecked] = useControllableState(
     toggled,
@@ -67,6 +68,7 @@ export function Toggle({
   return (
     <div className={wrapperClasses}>
       <button
+        {...other}
         id={id}
         className={`${prefix}--toggle__button`}
         role="switch"
