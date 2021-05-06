@@ -225,3 +225,8 @@ export {
   Heading as unstable_Heading,
   Section as unstable_Section,
 } from './components/Heading';
+export {
+  Popover as unstable_Popover,
+  PopoverContent as unstable_PopoverContent,
+} from './components/Popover';
+
