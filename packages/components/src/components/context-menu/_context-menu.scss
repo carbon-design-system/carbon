@@ -40,8 +40,8 @@
   .#{$prefix}--context-menu-option {
     position: relative;
     height: $spacing-07;
-    color: $text-primary;
     background-color: $layer;
+    color: $text-primary;
     cursor: pointer;
     transition: background-color $duration--fast-01 motion(standard, productive);
 
@@ -57,8 +57,8 @@
 
   .#{$prefix}--context-menu-option--danger:hover,
   .#{$prefix}--context-menu-option--danger:focus {
-    color: $text-on-color;
     background-color: $button-danger-primary;
+    color: $text-on-color;
   }
 
   .#{$prefix}--context-menu-option > .#{$prefix}--context-menu {
@@ -67,15 +67,15 @@
 
   .#{$prefix}--context-menu-option__content {
     display: flex;
+    height: 100%;
     align-items: center;
     justify-content: space-between;
-    height: 100%;
     padding: 0 $spacing-05;
   }
 
   .#{$prefix}--context-menu-option__content--disabled {
-    color: $text-disabled;
     background-color: $layer;
+    color: $text-disabled;
     cursor: not-allowed;
   }
 
@@ -87,13 +87,13 @@
   .#{$prefix}--context-menu-option__label {
     @include type-style('body-short-01');
 
+    overflow: hidden;
     flex-grow: 1;
     // add top/bottom padding to make sure letters are not cut off by hidden overflow
     padding: $spacing-02 0;
-    overflow: hidden;
-    white-space: nowrap;
     text-align: start;
     text-overflow: ellipsis;
+    white-space: nowrap;
   }
 
   .#{$prefix}--context-menu-option__info {
@@ -103,9 +103,9 @@
 
   .#{$prefix}--context-menu-option__icon {
     display: flex;
-    align-items: center;
     width: 1rem;
     height: 1rem;
+    align-items: center;
     margin-right: $spacing-03;
   }
 

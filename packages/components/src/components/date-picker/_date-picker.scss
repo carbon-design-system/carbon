@@ -86,10 +86,10 @@
     display: block;
     height: rem(40px);
     padding: 0 $carbon--spacing-05;
-    color: $text-primary;
-    background-color: $field;
     border: none;
     border-bottom: 1px solid $border-strong;
+    background-color: $field;
+    color: $text-primary;
     transition: $duration--fast-01 motion(standard, productive) all;
 
     &:focus,
@@ -98,9 +98,9 @@
     }
 
     &:disabled {
-      color: $text-disabled;
-      background-color: $field-disabled;
       border-bottom: 1px solid transparent;
+      background-color: $field-disabled;
+      color: $text-disabled;
       cursor: not-allowed;
     }
 
@@ -130,20 +130,13 @@
 
   .#{$prefix}--date-picker__icon {
     position: absolute;
+    z-index: 1;
     // vertically center icon within parent container on IE11
     top: 50%;
     right: 1rem;
-    z-index: 1;
-    transform: translateY(-50%);
     cursor: pointer;
     fill: $icon-primary;
-
-    // Windows, Firefox HCM Fix
-    @media screen and (-ms-high-contrast: active),
-      screen and (prefers-contrast) {
-      // `ButtonText` is a CSS2 system color to help improve colors in HCM
-      fill: ButtonText;
-    }
+    transform: translateY(-50%);
   }
 
   .#{$prefix}--date-picker__icon--invalid,
@@ -157,8 +150,8 @@
 
   // V11: Do we have an always black token?
   .#{$prefix}--date-picker__icon--warn path:first-of-type {
-    opacity: 1;
     fill: $carbon__black-100;
+    opacity: 1;
   }
 
   .#{$prefix}--date-picker__icon--invalid {
@@ -201,6 +194,12 @@
 
     width: rem(75px);
     height: rem(14px);
+  }
+
+  // Windows HCM fix
+  // stylelint-disable-next-line no-duplicate-selectors
+  .#{$prefix}--date-picker__icon {
+    @include high-contrast-mode('icon-fill');
   }
 }
 
