@@ -4728,6 +4728,19 @@ Map {
       "placeholder": Object {
         "type": "string",
       },
+      "renderIcon": Object {
+        "args": Array [
+          Array [
+            Object {
+              "type": "func",
+            },
+            Object {
+              "type": "object",
+            },
+          ],
+        ],
+        "type": "oneOfType",
+      },
       "size": Object {
         "args": Array [
           Array [
@@ -4845,6 +4858,19 @@ Map {
       "placeHolderText": [Function],
       "placeholder": Object {
         "type": "string",
+      },
+      "renderIcon": Object {
+        "args": Array [
+          Array [
+            Object {
+              "type": "func",
+            },
+            Object {
+              "type": "object",
+            },
+          ],
+        ],
+        "type": "oneOfType",
       },
       "size": Object {
         "args": Array [
