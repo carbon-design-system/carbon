@@ -20,7 +20,7 @@ function Tooltip({
   label,
   description,
   enterDelayMs = 100,
-  exitDelayMs = 500,
+  leaveDelayMs = 500,
   ...rest
 }) {
   const containerRef = useRef(null);
@@ -45,7 +45,7 @@ function Tooltip({
   }
 
   function onMouseLeave() {
-    setOpen(false, exitDelayMs);
+    setOpen(false, leaveDelayMs);
   }
 
   useNoInteractiveChildren(
