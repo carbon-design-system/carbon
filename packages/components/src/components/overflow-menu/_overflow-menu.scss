@@ -29,10 +29,10 @@
 
     position: relative;
     display: flex;
-    align-items: center;
-    justify-content: center;
     width: rem(40px);
     height: rem(40px);
+    align-items: center;
+    justify-content: center;
     cursor: pointer;
     transition: outline $duration--fast-02 motion(entrance, productive),
       background-color $duration--fast-02 motion(entrance, productive);
@@ -42,7 +42,7 @@
     }
 
     &:hover {
-      background-color: $hover-ui;
+      background-color: $background-hover;
     }
   }
 
@@ -72,7 +72,7 @@
     .#{$prefix}--overflow-menu__trigger {
     @include box-shadow;
 
-    background-color: $field-01;
+    background-color: $layer;
     transition: none;
   }
 
@@ -85,14 +85,7 @@
   .#{$prefix}--overflow-menu__icon {
     width: rem(16px);
     height: rem(16px);
-    fill: $icon-01;
-
-    // Windows, Firefox HCM Fix
-    @media screen and (-ms-high-contrast: active),
-      screen and (prefers-contrast) {
-      // `ButtonText` is a CSS2 system color to help improve colors in HCM
-      fill: ButtonText;
-    }
+    fill: $icon-primary;
   }
 
   .#{$prefix}--overflow-menu-options {
@@ -100,28 +93,28 @@
     @include box-shadow;
 
     position: absolute;
+    z-index: z('floating');
     top: 32px;
     left: 0;
-    z-index: z('floating');
     display: none;
+    width: rem(160px);
     flex-direction: column;
     align-items: flex-start;
-    width: rem(160px);
+    background-color: $layer;
     list-style: none;
-    background-color: $field-01;
 
     &::after {
       position: absolute;
       display: block;
-      background-color: $field-01;
+      background-color: $layer;
+      content: '';
       transition: background-color $duration--fast-02
         motion(entrance, productive);
-      content: '';
     }
   }
 
   .#{$prefix}--overflow-menu.#{$prefix}--overflow-menu--open:hover {
-    background-color: $field-01;
+    background-color: $layer;
   }
 
   .#{$prefix}--overflow-menu-options--light {
@@ -211,9 +204,9 @@
     @include reset;
 
     display: flex;
-    align-items: center;
     width: 100%;
     height: rem(40px);
+    align-items: center;
     padding: 0;
     background-color: transparent;
     transition: background-color $duration--fast-02 motion(entrance, productive);
@@ -233,7 +226,7 @@
   }
 
   .#{$prefix}--overflow-menu--divider {
-    border-top: 1px solid $ui-03;
+    border-top: 1px solid $border-subtle;
   }
 
   .#{$prefix}--overflow-menu--light .#{$prefix}--overflow-menu--divider {
@@ -243,8 +236,8 @@
   a.#{$prefix}--overflow-menu-options__btn::before {
     display: inline-block;
     height: 100%;
-    vertical-align: middle;
     content: '';
+    vertical-align: middle;
   }
 
   .#{$prefix}--overflow-menu-options__btn {
@@ -252,18 +245,17 @@
     @include focus-outline('reset');
 
     display: inline-flex;
-    align-items: center;
     width: 100%;
     max-width: 11.25rem;
     height: 100%;
+    align-items: center;
     padding: 0 $carbon--spacing-05;
+    border: none;
+    background-color: transparent;
     color: $text-02;
-
+    cursor: pointer;
     font-weight: 400;
     text-align: left;
-    background-color: transparent;
-    border: none;
-    cursor: pointer;
     transition: outline $duration--fast-02 motion(entrance, productive),
       background-color $duration--fast-02 motion(entrance, productive),
       color $duration--fast-02 motion(entrance, productive);
@@ -282,29 +274,29 @@
   }
 
   .#{$prefix}--overflow-menu-options__btn svg {
-    fill: $icon-02;
+    fill: $icon-secondary;
   }
 
   .#{$prefix}--overflow-menu-options__btn:hover svg {
-    fill: $icon-01;
+    fill: $icon-primary;
   }
 
   .#{$prefix}--overflow-menu-options__option-content {
     overflow: hidden;
-    white-space: nowrap;
     text-overflow: ellipsis;
+    white-space: nowrap;
   }
 
   .#{$prefix}--overflow-menu-options__option:hover {
-    background-color: $hover-ui;
+    background-color: $layer-hover;
   }
 
   .#{$prefix}--overflow-menu-options__option--danger
     .#{$prefix}--overflow-menu-options__btn:hover,
   .#{$prefix}--overflow-menu-options__option--danger
     .#{$prefix}--overflow-menu-options__btn:focus {
-    color: $text-04;
-    background-color: $danger-01;
+    background-color: $button-danger-primary;
+    color: $text-on-color;
 
     svg {
       fill: currentColor;
@@ -312,13 +304,13 @@
   }
 
   .#{$prefix}--overflow-menu-options__option--disabled:hover {
-    background-color: $ui-01;
+    background-color: $layer;
     cursor: not-allowed;
   }
 
   .#{$prefix}--overflow-menu-options__option--disabled
     .#{$prefix}--overflow-menu-options__btn {
-    color: $disabled-02;
+    color: $text-disabled;
     pointer-events: none;
 
     &:hover,
@@ -326,14 +318,14 @@
     &:focus {
       @include focus-outline('reset');
 
-      background-color: $ui-01;
+      background-color: $layer;
     }
   }
 
   .#{$prefix}--overflow-menu-options__option--disabled
     .#{$prefix}--overflow-menu-options__btn
     svg {
-    fill: $disabled-02;
+    fill: $icon-disabled;
   }
 
   .#{$prefix}--overflow-menu--flip {
@@ -343,6 +335,18 @@
       left: 145px;
     }
   }
+
+  // Windows HCM fix
+  /* stylelint-disable */
+  .#{$prefix}--overflow-menu:focus,
+  .#{$prefix}--overflow-menu-options__btn:focus {
+    @include high-contrast-mode('focus');
+  }
+
+  .#{$prefix}--overflow-menu svg {
+    @include high-contrast-mode('icon-fill');
+  }
+  /*stylelint-enable */
 }
 
 @include exports('overflow-menu') {

@@ -24,15 +24,15 @@
     @include carbon--motion(exit, productive);
 
     position: fixed;
+    z-index: z('header');
     top: carbon--mini-units(6);
     right: 0;
     bottom: 0;
-    z-index: z('header');
-    width: 0;
     overflow: hidden;
-    color: $shell-panel-text-01;
-    background-color: $shell-panel-bg-01;
+    width: 0;
     border: none;
+    background-color: $shell-panel-bg-01;
+    color: $shell-panel-text-01;
     transition: width 0.11s;
     will-change: width;
   }

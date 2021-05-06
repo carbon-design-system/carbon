@@ -23,33 +23,31 @@
 @mixin modal {
   .#{$prefix}--modal {
     position: fixed;
+    z-index: z('modal');
     top: 0;
     left: 0;
-    z-index: z('modal');
     display: flex;
-    align-items: center;
-    justify-content: center;
     width: 100vw;
     height: 100vh;
-    background-color: transparent;
-    visibility: hidden;
-    opacity: 0;
-    transition: background-color $duration--slow-02 motion(exit, expressive),
-      opacity $duration--moderate-02 motion(exit, expressive),
-      visibility 0ms linear $duration--moderate-02;
+    align-items: center;
+    justify-content: center;
+    background-color: $overlay;
     content: '';
+    opacity: 0;
+    transition: opacity $duration--moderate-02 motion(exit, expressive),
+      visibility 0ms linear $duration--moderate-02;
+    visibility: hidden;
 
     &.is-visible {
-      background-color: $overlay;
-      visibility: inherit;
       opacity: 1;
-      transition: background-color $duration--slow-02
-          motion(entrance, expressive),
-        opacity $duration--moderate-02 motion(entrance, expressive),
+      transition: opacity $duration--moderate-02 motion(entrance, expressive),
         visibility 0ms linear;
+      visibility: inherit;
     }
 
     // V11: Question for design: do we have an updated tokens for fields that exist on `layer`?
+    .#{$prefix}--pagination,
+    .#{$prefix}--pagination__control-buttons,
     .#{$prefix}--text-input,
     .#{$prefix}--text-area,
     .#{$prefix}--search-input,
@@ -71,13 +69,13 @@
     position: fixed;
     top: 0;
     display: grid;
-    grid-template-rows: auto 1fr auto;
-    grid-template-columns: 100%;
+    overflow: hidden;
     width: 100%;
     height: 100%;
     max-height: 100%;
-    overflow: hidden;
     background-color: $layer;
+    grid-template-columns: 100%;
+    grid-template-rows: auto 1fr auto;
     // make modal edge visible on high contrast themes (#3880)
     outline: 3px solid transparent;
     outline-offset: -3px;
@@ -226,11 +224,11 @@
   }
 
   .#{$prefix}--modal-header {
-    grid-row: 1/1;
-    grid-column: 1/-1;
-    margin-bottom: $spacing-03;
     padding-top: $spacing-05;
     padding-right: $spacing-09;
+    margin-bottom: $spacing-03;
+    grid-column: 1/-1;
+    grid-row: 1/1;
   }
 
   .#{$prefix}--modal-header__label {
@@ -250,16 +248,14 @@
     @include type-style('body-long-01');
 
     position: relative;
-    grid-row: 2/-2;
-    grid-column: 1/-1;
-    margin-bottom: $spacing-09;
-
     // Required to accommodate focus outline's negative offset:
     padding-top: $spacing-03;
-
-    overflow-y: auto;
+    margin-bottom: $spacing-09;
     color: $text-primary;
     font-weight: 400;
+    grid-column: 1/-1;
+    grid-row: 2/-2;
+    overflow-y: auto;
 
     &:focus {
       @include focus-outline('outline');
@@ -279,14 +275,24 @@
     position: absolute;
     bottom: $spacing-09;
     left: 0;
-    grid-row: 2/-2;
-    grid-column: 1/-1;
     width: 100%;
     height: rem(32px);
-    // Safari interprets `transparent` differently, so make color token value transparent instead:
-    background-image: linear-gradient(to bottom, rgba($layer, 0), $layer);
+    background-image: linear-gradient(to bottom, transparent, $layer);
     content: '';
+    grid-column: 1/-1;
+    grid-row: 2/-2;
     pointer-events: none;
+  }
+
+  // Safari-only media query
+  // won't appear correctly with CSS custom properties
+  // see: code snippet and tabs overflow indicators
+  @media not all and (min-resolution: 0.001dpcm) {
+    @supports (-webkit-appearance: none) and (stroke-color: transparent) {
+      .#{$prefix}--modal-content--overflow-indicator {
+        background-image: linear-gradient(to bottom, rgba($layer, 0), $layer);
+      }
+    }
   }
 
   .#{$prefix}--modal-content:focus
@@ -307,20 +313,20 @@
 
   .#{$prefix}--modal-footer {
     display: flex;
-    grid-row: -1/-1;
-    grid-column: 1/-1;
-    justify-content: flex-end;
     height: rem(64px);
+    justify-content: flex-end;
     margin-top: auto;
+    grid-column: 1/-1;
+    grid-row: -1/-1;
   }
 
   .#{$prefix}--modal-footer .#{$prefix}--btn {
-    flex: 0 1 50%;
     max-width: none;
     height: rem(64px);
-    margin: 0;
+    flex: 0 1 50%;
     padding-top: $spacing-05;
     padding-bottom: $spacing-07;
+    margin: 0;
   }
 
   .#{$prefix}--modal-footer--three-button .#{$prefix}--btn {
@@ -328,24 +334,16 @@
     align-items: flex-start;
   }
 
-  .#{$prefix}--modal-footer button.#{$prefix}--btn:focus {
-    // Firefox HCM Fix
-    @media screen and (prefers-contrast) {
-      border: none;
-      outline-style: dotted;
-    }
-  }
-
   .#{$prefix}--modal-close {
     position: absolute;
     top: 0;
     right: 0;
+    overflow: hidden;
     width: 3rem;
     height: 3rem;
     padding: rem(12px);
-    overflow: hidden;
-    background-color: transparent;
     border: 2px solid transparent;
+    background-color: transparent;
     cursor: pointer;
     transition: background-color $duration--fast-02 motion(standard, productive);
 
@@ -356,11 +354,6 @@
     &:focus {
       border-color: $focus;
       outline: none;
-
-      // Firefox HCM Fix
-      @media screen and (prefers-contrast) {
-        border-style: dotted;
-      }
     }
   }
 
@@ -372,13 +365,6 @@
     width: rem(20px);
     height: rem(20px);
     fill: $icon-primary;
-
-    // Windows, Firefox HCM Fix
-    @media screen and (-ms-high-contrast: active),
-      screen and (prefers-contrast) {
-      // `ButtonText` is a CSS2 system color to help improve colors in HCM
-      fill: ButtonText;
-    }
   }
 
   .#{$prefix}--body--with-modal-open {
@@ -388,6 +374,17 @@
   .#{$prefix}--body--with-modal-open .#{$prefix}--tooltip {
     z-index: z('modal');
   }
+
+  // Windows HCM fix
+  /* stylelint-disable */
+  .#{$prefix}--modal-close__icon {
+    @include high-contrast-mode('icon-fill');
+  }
+
+  .#{$prefix}--modal-close:focus {
+    @include high-contrast-mode('focus');
+  }
+  /* stylelint-enable */
 }
 
 @include exports('modal') {

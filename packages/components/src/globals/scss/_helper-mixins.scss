@@ -32,8 +32,8 @@
 @mixin text-overflow($width: false) {
   display: block;
   overflow-x: hidden;
-  white-space: nowrap;
   text-overflow: ellipsis;
+  white-space: nowrap;
 
   // apply a width if width parameter exists
   @if ($width) {
@@ -46,7 +46,7 @@
 /// @example @include placeholder-colors;
 /// @group global-helpers
 @mixin placeholder-colors {
-  color: $text-05;
+  color: $text-placeholder;
   opacity: 1;
 }
 
@@ -73,8 +73,8 @@
   }
 
   @if ($type == 'blurred') {
-    outline: 1px solid transparent;
     box-shadow: 0 0 0 3px $focus;
+    outline: 1px solid transparent;
   }
 
   @if ($type == 'outline') {
@@ -96,7 +96,7 @@
   }
 
   @if ($type == 'invalid') {
-    outline: 2px solid $support-01;
+    outline: 2px solid $support-error;
     outline-offset: -2px;
 
     @media screen and (prefers-contrast) {
@@ -128,15 +128,15 @@
 /// @group global-helpers
 @mixin hidden {
   position: absolute;
+  overflow: hidden;
   width: 1px;
   height: 1px;
-  margin: -1px;
   padding: 0;
-  overflow: hidden;
-  white-space: nowrap;
   border: 0;
-  visibility: inherit;
+  margin: -1px;
   clip: rect(0, 0, 0, 0);
+  visibility: inherit;
+  white-space: nowrap;
 }
 
 /// Resets button styles
@@ -149,10 +149,10 @@
 
   display: inline-block;
   padding: 0;
-  background: none;
   border: 0;
-  cursor: pointer;
   appearance: none;
+  background: none;
+  cursor: pointer;
 
   @if ($width == true) {
     width: 100%;
@@ -170,8 +170,8 @@
 @mixin skeleton {
   position: relative;
   padding: 0;
-  background: $skeleton-01;
   border: none;
+  background: $skeleton-background;
   box-shadow: none;
   pointer-events: none;
 
@@ -179,16 +179,16 @@
   &:focus,
   &:active {
     border: none;
-    outline: none;
     cursor: default;
+    outline: none;
   }
 
   &::before {
     position: absolute;
     width: 100%;
     height: 100%;
-    background: $skeleton-02;
     animation: 3000ms ease-in-out skeleton infinite;
+    background: $skeleton-element;
     content: '';
     will-change: transform-origin, transform, opacity;
 
@@ -201,14 +201,14 @@
 @include exports('skeleton') {
   @keyframes skeleton {
     0% {
+      opacity: 0.3;
       transform: scaleX(0);
       transform-origin: left;
-      opacity: 0.3;
     }
     20% {
+      opacity: 1;
       transform: scaleX(1);
       transform-origin: left;
-      opacity: 1;
     }
     28% {
       transform: scaleX(1);
@@ -235,9 +235,40 @@
       transform-origin: left;
     }
     100% {
+      opacity: 0.3;
       transform: scaleX(0);
       transform-origin: left;
-      opacity: 0.3;
     }
+  }
+}
+
+/// Windows HCM Mixin
+/// @access public
+/// @example @include high-contrast-mode;
+/// @group global-helpers
+/// We should set HCM styles at the end of each file to ensure they are not overridden
+@mixin high-contrast-mode($type: '') {
+  @media screen and (-ms-high-contrast: active),
+    (forced-colors: active),
+    (prefers-contrast) {
+    @if ($type == 'icon-fill') {
+      fill: ButtonText;
+    }
+
+    @if ($type == 'focus') {
+      color: Highlight;
+      outline: 1px solid Highlight;
+    }
+
+    @if ($type == 'outline') {
+      outline: 1px solid transparent;
+    }
+
+    @if ($type == 'disabled') {
+      color: GrayText;
+      fill: GrayText;
+    }
+
+    @content;
   }
 }

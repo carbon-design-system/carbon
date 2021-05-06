@@ -35,20 +35,20 @@
     .#{$prefix}--list-box__menu-item__option
     .#{$prefix}--checkbox-wrapper {
     display: flex;
-    align-items: center;
     width: 100%;
     height: 100%;
+    align-items: center;
   }
 
   .#{$prefix}--multi-select
     .#{$prefix}--list-box__menu-item__option
     .#{$prefix}--checkbox-label {
     display: inline-block;
+    overflow: hidden;
     width: 100%;
     padding-left: rem(28px);
-    overflow: hidden;
-    white-space: nowrap;
     text-overflow: ellipsis;
+    white-space: nowrap;
   }
 
   .#{$prefix}--multi-select
@@ -71,8 +71,8 @@
 
   .#{$prefix}--multi-select--filterable.#{$prefix}--combo-box
     .#{$prefix}--text-input {
-    background-clip: padding-box;
     border: rem(2px) solid transparent;
+    background-clip: padding-box;
     outline: none;
   }
 
@@ -98,8 +98,8 @@
   .#{$prefix}--multi-select--filterable.#{$prefix}--multi-select--inline,
   .#{$prefix}--multi-select--filterable.#{$prefix}--multi-select--inline
     .#{$prefix}--text-input {
-    background-color: transparent;
     border-bottom: 0;
+    background-color: transparent;
   }
 }
 

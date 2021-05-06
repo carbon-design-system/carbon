@@ -28,12 +28,12 @@
     display: flex;
     width: rem(288px);
     height: auto;
+    padding-left: $carbon--spacing-05;
     margin-top: $carbon--spacing-03;
     margin-right: $carbon--spacing-05;
     margin-bottom: $carbon--spacing-03;
-    padding-left: $carbon--spacing-05;
-    color: $text-inverse;
     box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.2);
+    color: $text-inverse;
 
     &:first-child {
       margin-top: $carbon--spacing-05;
@@ -41,12 +41,6 @@
 
     @include carbon--breakpoint(max) {
       width: rem(352px);
-    }
-
-    // Firefox HCM fix
-    @media screen and (prefers-contrast) {
-      outline-width: 1px;
-      outline-style: solid;
     }
   }
 
@@ -139,8 +133,8 @@
   .#{$prefix}--toast-notification--warning
     .#{$prefix}--toast-notification__icon
     path[opacity='0'] {
-    opacity: 1;
     fill: $carbon__black-100;
+    opacity: 1;
   }
 
   .#{$prefix}--toast-notification__icon {
@@ -157,28 +151,23 @@
     @include focus-outline('reset');
 
     display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
     width: rem(48px);
     min-width: rem(48px);
     height: rem(48px);
     min-height: rem(48px);
-    margin-left: auto;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
     padding: 0;
-    background-color: transparent;
     border: none;
+    margin-left: auto;
+    background-color: transparent;
     cursor: pointer;
     transition: outline $transition--base, background-color $transition--base;
 
     &:focus {
       outline: 2px solid $focus-inverse;
       outline-offset: -2px;
-
-      // Firefox HCM fix
-      @media screen and (prefers-contrast) {
-        outline-style: dotted;
-      }
     }
 
     .#{$prefix}--toast-notification__close-icon {
@@ -222,8 +211,8 @@
   .#{$prefix}--toast-notification__caption {
     @include type-style('body-short-01');
 
-    margin-bottom: $carbon--spacing-05;
     padding-top: $carbon--spacing-03;
+    margin-bottom: $carbon--spacing-05;
     color: $text-inverse;
   }
 
@@ -231,6 +220,19 @@
     .#{$prefix}--toast-notification__caption {
     color: $text-primary;
   }
+
+  // Windows HCM fix
+  /* stylelint-disable */
+  .#{$prefix}--toast-notification {
+    @include high-contrast-mode('outline');
+  }
+  .#{$prefix}--toast-notification__close-button:focus {
+    @include high-contrast-mode('focus');
+  }
+  .#{$prefix}--toast-notification__icon {
+    @include high-contrast-mode('icon-fill');
+  }
+  /* stylelint-enable */
 }
 
 @include exports('toast-notifications') {

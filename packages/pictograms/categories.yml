@@ -38,7 +38,9 @@ categories:
     members:
       - alarm
       - apartment
+      - broom
       - building
+      - compost--bin
       - elevator
       - emergency--exit
       - escalator--down
@@ -48,15 +50,18 @@ categories:
       - id--badge
       - no--smoking
       - office
+      - recycle--bin
       - stairs
       - stairs--down
       - stairs--plan--view
       - stairs--up
+      - temporary-badge
   - name: Cities
     members:
       - amsterdam--canal
       - amsterdam--farm
       - amsterdam--windmill
+      - argentina--obelisk
       - atlanta
       - austin
       - bangalore
@@ -72,13 +77,19 @@ categories:
       - cairo--giza-plateau
       - canada--maple-leaf
       - chicago
+      - chile--easter-island
+      - chile--hand-of-the-desert
+      - colombia--cathedral-of-las-lajas
       - copenhagen--planetarium
       - copenhagen--snekkja
       - dubai--palm-islands
       - dubai--skyscraper
       - dublin--brewery
       - dublin--castle
+      - ecuador--quito
       - hamburg--philharmone
+      - hong-kong--cityscape
+      - hong-kong
       - kuala-lumpur
       - london
       - london--big-ben
@@ -104,6 +115,7 @@ categories:
       - paris--louvre
       - paris--notre-dame
       - paris--pompidou-center
+      - peru--machu-picchu
       - prague--charles-bridge-tower
       - prague--dancing-house--01
       - prague--dancing-house--02
@@ -118,12 +130,15 @@ categories:
       #    - shanghai
       - singapore
       - stockholm
+      - taipei--bubble-tea
       - tel-aviv
       - tokyo--cherry-blossom
       - tokyo--gates
       - tokyo--temple
       - tokyo--volcano
       - toronto
+      - uruguay--palacio-salvo
+      - venezuela--national-pantheon-of-venezuela
       - vancouver
       - washington-dc
       - washington-dc--capitol
@@ -158,6 +173,7 @@ categories:
       - cloud-pak--for-data
       - cloud-pak--for-integration
       - cloud-pak--for-multicloud-management
+      - cloud-pak--for-network-automation
       - cloud-pak--for-security
       - cloud-pak--system
       - cobol--language
@@ -336,6 +352,7 @@ categories:
       - touch--swipe
   - name: Education
     members:
+      - badge
       - college
       - education
       - feedback--02
@@ -364,6 +381,7 @@ categories:
   - name: Enforcement
     members:
       - capitol
+      - fairness
       - justice
       - parliament
       - police
@@ -401,6 +419,7 @@ categories:
       - global--markets--bar
       - global--security
       - global--strategy
+      - invoice
       - optimize--cash-flow--01
       - optimize--cash-flow--02
   - name: Healthcare
@@ -495,6 +514,12 @@ categories:
       - transform--01
   - name: Learning
     members:
+      - ai--ethics
+      - ai--explainability
+      - ai--privacy
+      - ai--robustness
+      - ai--transparency
+      - ai--trust
       - intelligence
       - machine--learning--01
       - machine--learning--02
@@ -550,6 +575,7 @@ categories:
       - europe--africa
       - globe
       - globe--locations
+      - india--south-asia
       - location
   - name: Manufacturing
     members:
@@ -634,6 +660,8 @@ categories:
       - price
       - qr-code
       - receipt
+      - secure--search
+      - select--product
       - shirt
       - shop
       - shopping--cart
@@ -752,6 +780,7 @@ categories:
       - electric--charge
       - engine
       - fuel
+      - luggage
       - spaceship
       - steering--wheel
       - train

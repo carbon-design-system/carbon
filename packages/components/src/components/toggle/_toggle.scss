@@ -37,6 +37,10 @@
     cursor: pointer;
   }
 
+  // V11: It looks like this block no longer applies to any element.
+  // May need to check with Vue/Angular implementations,
+  // but I do not see any `toggle__appearance` in the rendered HTML.
+  // There seem to be quite a few references throughout this file.
   .#{$prefix}--toggle__appearance {
     position: relative;
     width: carbon--rem(48px);
@@ -47,17 +51,17 @@
       position: absolute;
       top: 0;
       display: block;
-      box-sizing: border-box;
       width: carbon--rem(48px);
       height: carbon--rem(24px);
-      background-color: $ui-04;
+      box-sizing: border-box;
+      background-color: $toggle-off;
       border-radius: carbon--rem(15px);
       // Corresponds to the double-border for focused state (`0 0 0 1px $ui-02, 0 0 0 3px $focus`)
       box-shadow: 0 0 0 1px transparent, 0 0 0 3px transparent;
+      content: '';
       cursor: pointer;
       transition: box-shadow $duration--fast-01 motion(exit, productive),
         background-color $duration--fast-01 motion(exit, productive);
-      content: '';
       will-change: box-shadow;
     }
 
@@ -67,27 +71,27 @@
       top: carbon--rem(3px);
       left: carbon--rem(3px);
       display: block;
-      box-sizing: border-box;
       width: carbon--rem(18px);
       height: carbon--rem(18px);
-      background-color: $icon-03;
+      box-sizing: border-box;
+      background-color: $icon-on-color;
       border-radius: 50%;
+      content: '';
       cursor: pointer;
       transition: transform $duration--fast-01 motion(exit, productive);
-      content: '';
     }
   }
 
   .#{$prefix}--toggle__check {
     position: absolute;
+    z-index: 1;
     top: carbon--rem(6px);
     left: carbon--rem(6px);
-    z-index: 1;
     width: carbon--rem(6px);
     height: carbon--rem(5px);
+    fill: $icon-on-color;
     transform: scale(0.2);
     transition: $duration--fast-01 motion(exit, productive);
-    fill: $icon-03;
   }
 
   .#{$prefix}--toggle__text--left,
@@ -125,11 +129,11 @@
     + .#{$prefix}--toggle__label
     .#{$prefix}--toggle__appearance {
     &::before {
-      background-color: $support-02;
+      background-color: $support-success;
     }
 
     &::after {
-      background-color: $icon-03;
+      background-color: $icon-on-color;
       transform: translateX(carbon--rem(24px));
     }
   }
@@ -148,7 +152,7 @@
   .#{$prefix}--toggle:active
     + .#{$prefix}--toggle__label
     .#{$prefix}--toggle__appearance::before {
-    box-shadow: 0 0 0 1px $ui-02, 0 0 0 3px $focus;
+    box-shadow: 0 0 0 1px $layer-accent, 0 0 0 3px $focus;
   }
 
   //----------------------------------------------
@@ -162,11 +166,11 @@
     + .#{$prefix}--toggle__label
     .#{$prefix}--toggle__appearance {
     &::before {
-      background-color: $disabled-01;
+      background-color: $layer-disabled;
     }
 
     &::after {
-      background-color: $disabled-02;
+      background-color: $button-disabled;
     }
 
     &::before,
@@ -182,7 +186,7 @@
   .#{$prefix}--toggle:disabled
     + .#{$prefix}--toggle__label
     .#{$prefix}--toggle__text--right {
-    color: $disabled;
+    color: $text-disabled;
   }
 
   .#{$prefix}--toggle:disabled:active
@@ -194,7 +198,7 @@
   .#{$prefix}--toggle:disabled
     + .#{$prefix}--toggle__label
     .#{$prefix}--toggle__check {
-    fill: $disabled-02;
+    fill: $icon-disabled;
   }
 
   //----------------------------------------------
@@ -209,9 +213,9 @@
 
     &::before {
       top: 0;
-      box-sizing: border-box;
       width: carbon--rem(32px);
       height: carbon--rem(16px);
+      box-sizing: border-box;
       border-radius: 0.9375rem;
     }
 
@@ -226,8 +230,8 @@
   .#{$prefix}--toggle--small:checked
     + .#{$prefix}--toggle__label
     .#{$prefix}--toggle__check {
+    fill: $support-success;
     transform: scale(1) translateX(carbon--rem(16px));
-    fill: $support-02;
   }
 
   .#{$prefix}--toggle--small
@@ -264,16 +268,16 @@
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    color: $text-02;
+    color: $text-secondary;
     cursor: pointer;
   }
 
   .#{$prefix}--toggle__switch {
     position: relative;
     display: flex;
-    align-items: center;
     width: carbon--rem(48px);
     height: carbon--rem(24px);
+    align-items: center;
     cursor: pointer;
 
     // Toggle background oval
@@ -281,24 +285,17 @@
       position: absolute;
       top: 0;
       display: block;
-      box-sizing: border-box;
       width: carbon--rem(48px);
       height: carbon--rem(24px);
-      background-color: $ui-04;
+      box-sizing: border-box;
+      background-color: $toggle-off;
       border-radius: carbon--rem(15px);
       // Corresponds to the double-border for focused state (`0 0 0 1px $ui-02, 0 0 0 3px $focus`)
       box-shadow: 0 0 0 1px transparent, 0 0 0 3px transparent;
+      content: '';
       transition: box-shadow $duration--fast-01 motion(exit, productive),
         background-color $duration--fast-01 motion(exit, productive);
-      content: '';
       will-change: box-shadow;
-
-      // Windows, Firefox HCM Fix
-      @media screen and (-ms-high-contrast: active),
-        screen and (prefers-contrast) {
-        // `ButtonText` is a CSS2 system color to help improve colors in HCM
-        border: 1px solid ButtonText;
-      }
     }
 
     // Toggle circle
@@ -307,20 +304,13 @@
       top: carbon--rem(3px);
       left: carbon--rem(3px);
       display: block;
-      box-sizing: border-box;
       width: carbon--rem(18px);
       height: carbon--rem(18px);
-      background-color: $icon-03;
+      box-sizing: border-box;
+      background-color: $icon-on-color;
       border-radius: 50%;
-      transition: transform $duration--fast-01 motion(exit, productive);
       content: '';
-
-      // Windows, Firefox HCM Fix
-      @media screen and (-ms-high-contrast: active),
-        screen and (prefers-contrast) {
-        // `ButtonText` is a CSS2 system color to help improve colors in HCM
-        border: 3px solid ButtonText;
-      }
+      transition: transform $duration--fast-01 motion(exit, productive);
     }
 
     .#{$prefix}--toggle-input__label & {
@@ -336,9 +326,9 @@
     // top offset needed to vertically center absolutely positioned flex child in IE11
     top: 50%;
     margin-left: rem(56px);
-    white-space: nowrap;
     transform: translateY(-50%);
     user-select: none;
+    white-space: nowrap;
   }
 
   //----------------------------------------------
@@ -359,11 +349,11 @@
     + .#{$prefix}--toggle-input__label
     > .#{$prefix}--toggle__switch {
     &::before {
-      background-color: $support-02;
+      background-color: $support-success;
     }
 
     &::after {
-      background-color: $icon-03;
+      background-color: $icon-on-color;
       transform: translateX(carbon--rem(24px));
     }
   }
@@ -377,21 +367,14 @@
   .#{$prefix}--toggle-input:active
     + .#{$prefix}--toggle-input__label
     > .#{$prefix}--toggle__switch::before {
-    box-shadow: 0 0 0 1px $ui-02, 0 0 0 3px $focus;
-
-    // Windows, Firefox HCM Fix
-    @media screen and (-ms-high-contrast: active),
-      screen and (prefers-contrast) {
-      // `ButtonText` is a CSS2 system color to help improve colors in HCM
-      outline: 1px solid ButtonText;
-    }
+    box-shadow: 0 0 0 1px $focus-inset, 0 0 0 3px $focus;
   }
 
   //----------------------------------------------
   // Disabled
   // ---------------------------------------------
   .#{$prefix}--toggle-input:disabled + .#{$prefix}--toggle-input__label {
-    color: $disabled;
+    color: $text-disabled;
     cursor: not-allowed;
   }
 
@@ -401,11 +384,11 @@
     cursor: not-allowed;
 
     &::before {
-      background-color: $disabled-01;
+      background-color: $button-disabled;
     }
 
     &::after {
-      background-color: $disabled-02;
+      background-color: $icon-on-color-disabled;
     }
 
     &::before,
@@ -419,21 +402,6 @@
     + .#{$prefix}--toggle-input__label
     > .#{$prefix}--toggle__switch::before {
     box-shadow: none;
-  }
-
-  // disabled toggle in data table #7351
-  .#{$prefix}--data-table
-    .#{$prefix}--toggle-input:disabled
-    + .#{$prefix}--toggle-input__label
-    > .#{$prefix}--toggle__switch::before {
-    background-color: $disabled-02;
-  }
-
-  .#{$prefix}--data-table
-    .#{$prefix}--toggle-input:disabled
-    + .#{$prefix}--toggle-input__label
-    > .#{$prefix}--toggle__switch::after {
-    background-color: $disabled-03;
   }
 
   //----------------------------------------------
@@ -468,15 +436,15 @@
     }
 
     .#{$prefix}--toggle__check {
+      fill: $support-success;
       transform: scale(1) translateX(carbon--rem(16px));
-      fill: $support-02;
     }
   }
 
   .#{$prefix}--toggle-input--small:disabled:checked
     + .#{$prefix}--toggle-input__label
     .#{$prefix}--toggle__check {
-    fill: $disabled-01;
+    fill: $layer-disabled;
   }
 
   //----------------------------------------------
@@ -490,6 +458,22 @@
     .#{$prefix}--toggle__label-text {
       margin-bottom: $carbon--spacing-03;
     }
+  }
+
+  // Windows HCM fix
+  .#{$prefix}--toggle__switch::after,
+  .#{$prefix}--toggle__switch::before {
+    @include high-contrast-mode('outline');
+  }
+
+  // stylelint-disable-next-line no-duplicate-selectors
+  .#{$prefix}--toggle-input:focus
+    + .#{$prefix}--toggle-input__label
+    > .#{$prefix}--toggle__switch::before,
+  .#{$prefix}--toggle-input:active
+    + .#{$prefix}--toggle-input__label
+    > .#{$prefix}--toggle__switch::before {
+    @include high-contrast-mode('focus');
   }
 }
 

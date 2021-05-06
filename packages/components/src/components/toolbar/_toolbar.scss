@@ -22,6 +22,7 @@ $css--helpers: true;
 /// Toolbar styles
 /// @access private
 /// @group toolbar
+// V11: Remove this component
 @mixin toolbar {
   .#{$prefix}--toolbar {
     display: flex;
@@ -44,17 +45,17 @@ $css--helpers: true;
     }
 
     .#{$prefix}--overflow-menu__icon {
-      transition: fill 50ms $carbon--standard-easing;
       fill: $text-02;
+      transition: fill 50ms $carbon--standard-easing;
     }
 
     .#{$prefix}--search-magnifier {
       top: rem(8px);
       left: rem(6px);
-      transform: scale(1.15);
       cursor: pointer;
-      transition: all 175ms $carbon--standard-easing;
       fill: $text-02;
+      transform: scale(1.15);
+      transition: all 175ms $carbon--standard-easing;
     }
 
     fieldset {
@@ -99,8 +100,8 @@ $css--helpers: true;
     left: 0;
     width: rem(32px);
     height: rem(32px);
-    background: transparent;
     border: 0;
+    background: transparent;
 
     &:focus {
       @include focus-outline;

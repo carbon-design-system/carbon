@@ -5,7 +5,8 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import '@babel/polyfill';
+import 'core-js/stable';
+import 'regenerator-runtime/runtime';
 
 // We export all commands through one entrypoint to prevent build errors
 // triggered by having separate entrypoints. Most notably we would encounter

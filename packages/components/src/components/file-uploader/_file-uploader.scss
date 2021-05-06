@@ -49,8 +49,8 @@
   // TODO: deprecate this block
   .#{$prefix}--file-btn {
     display: inline-flex;
-    margin: 0;
     padding-right: rem(64px);
+    margin: 0;
   }
 
   .#{$prefix}--file-browse-btn {
@@ -59,9 +59,9 @@
     max-width: rem(320px);
     margin-bottom: $carbon--spacing-03;
     color: $link-primary;
+    cursor: pointer;
     outline: 2px solid transparent;
     outline-offset: -2px;
-    cursor: pointer;
     transition: $duration--fast-02 motion(standard, productive);
 
     &:focus,
@@ -83,14 +83,14 @@
 
   .#{$prefix}--file-browse-btn--disabled {
     color: $text-disabled;
-    text-decoration: none;
     cursor: no-drop;
+    text-decoration: none;
 
     &:hover,
     &:focus {
       color: $text-disabled;
-      text-decoration: none;
       outline: none;
+      text-decoration: none;
     }
   }
 
@@ -126,15 +126,15 @@
 
   .#{$prefix}--file__selected-file {
     display: grid;
-    grid-auto-rows: auto;
-    grid-template-columns: 1fr auto;
-    gap: rem(12px) $carbon--spacing-05;
-    align-items: center;
     max-width: rem(320px);
     min-height: $carbon--spacing-09;
+    align-items: center;
     margin-bottom: $carbon--spacing-03;
-    word-break: break-word;
     background-color: $field;
+    gap: rem(12px) $carbon--spacing-05;
+    grid-auto-rows: auto;
+    grid-template-columns: 1fr auto;
+    word-break: break-word;
 
     &:last-child {
       margin-bottom: 0;
@@ -142,9 +142,9 @@
 
     .#{$prefix}--form-requirement {
       display: block;
-      grid-column: 1 / -1;
       max-height: none;
       margin: 0;
+      grid-column: 1 / -1;
     }
 
     .#{$prefix}--inline-loading__animation .#{$prefix}--loading {
@@ -155,27 +155,21 @@
     .#{$prefix}--file-filename {
       @include type-style('body-short-01');
 
-      margin-left: $carbon--spacing-05;
       overflow: hidden;
-      white-space: nowrap;
+      margin-left: $carbon--spacing-05;
       text-overflow: ellipsis;
-    }
-
-    // Windows, Firefox HCM Fix
-    @media screen and (-ms-high-contrast: active),
-      screen and (prefers-contrast) {
-      outline: 2px solid transparent;
+      white-space: nowrap;
     }
   }
 
   .#{$prefix}--file__selected-file--field {
-    gap: $carbon--spacing-03 $carbon--spacing-05;
     min-height: rem(40px);
+    gap: $carbon--spacing-03 $carbon--spacing-05;
   }
 
   .#{$prefix}--file__selected-file--sm {
-    gap: $carbon--spacing-02 $carbon--spacing-05;
     min-height: rem(32px);
+    gap: $carbon--spacing-02 $carbon--spacing-05;
   }
 
   // TODO: deprecate this block
@@ -241,9 +235,9 @@
     @include type-style('caption-01');
 
     display: block;
+    overflow: visible;
     max-height: rem(200px);
     padding: $carbon--spacing-03 $carbon--spacing-05;
-    overflow: visible;
     color: $text-error;
     font-weight: 400;
   }
@@ -257,9 +251,9 @@
 
   .#{$prefix}--file__state-container {
     display: flex;
+    min-width: 1.5rem;
     align-items: center;
     justify-content: center;
-    min-width: 1.5rem;
     padding-right: $carbon--spacing-05;
 
     .#{$prefix}--loading__svg {
@@ -277,8 +271,8 @@
 
     // for checkmark contrast
     [data-icon-path='inner-path'] {
-      opacity: 1;
       fill: $icon-on-color;
+      opacity: 1;
     }
   }
 
@@ -290,13 +284,13 @@
 
   .#{$prefix}--file__state-container .#{$prefix}--file-close {
     display: flex;
-    align-items: center;
-    justify-content: center;
     width: $carbon--spacing-06;
     height: $carbon--spacing-06;
+    align-items: center;
+    justify-content: center;
     padding: 0;
-    background-color: transparent;
     border: none;
+    background-color: transparent;
     cursor: pointer;
     fill: $icon-primary;
 
@@ -307,13 +301,6 @@
 
   .#{$prefix}--file__state-container .#{$prefix}--file-close svg path {
     fill: $icon-primary;
-
-    // Windows, Firefox HCM Fix
-    @media screen and (-ms-high-contrast: active),
-      screen and (prefers-contrast) {
-      // `ButtonText` is a CSS2 system color to help improve colors in HCM
-      fill: ButtonText;
-    }
   }
 
   .#{$prefix}--file__state-container .#{$prefix}--inline-loading__animation {
@@ -322,11 +309,11 @@
 
   .#{$prefix}--file__drop-container {
     display: flex;
+    overflow: hidden;
+    height: rem(96px);
     align-items: flex-start;
     justify-content: space-between;
-    height: rem(96px);
     padding: $carbon--spacing-05;
-    overflow: hidden;
     border: 1px dashed $border-strong;
   }
 
@@ -335,6 +322,17 @@
     outline: 2px solid $focus;
     outline-offset: -2px;
   }
+
+  // Windows HCM fix
+  /* stylelint-disable */
+  .#{$prefix}--file__selected-file {
+    @include high-contrast-mode('outline');
+  }
+
+  .#{$prefix}--file__state-container .#{$prefix}--file-close svg path {
+    @include high-contrast-mode('icon-fill');
+  }
+  /* stylelint-enable */
 }
 
 @include exports('file-uploader') {

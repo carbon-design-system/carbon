@@ -25,11 +25,11 @@
 
   .#{$prefix}--accordion__item {
     overflow: visible;
-    border-top: 1px solid $ui-03;
+    border-top: 1px solid $border-subtle;
     transition: all $duration--fast-02 motion(standard, productive);
 
     &:last-child {
-      border-bottom: 1px solid $ui-03;
+      border-bottom: 1px solid $border-subtle;
     }
   }
 
@@ -38,14 +38,14 @@
 
     position: relative;
     display: flex;
+    width: 100%;
+    min-height: rem(40px);
     flex-direction: $accordion-flex-direction;
     align-items: flex-start;
     justify-content: $accordion-justify-content;
-    width: 100%;
-    min-height: rem(40px);
-    margin: 0;
     padding: rem(10px) 0;
-    color: $text-01;
+    margin: 0;
+    color: $text-primary;
     cursor: pointer;
     transition: background-color motion(standard, productive) $duration--fast-02;
 
@@ -60,7 +60,7 @@
     }
 
     &:hover::before {
-      background-color: $hover-ui;
+      background-color: $background-hover;
     }
 
     &:focus {
@@ -86,12 +86,12 @@
 
   // Disabled styles
   .#{$prefix}--accordion__heading[disabled] {
-    color: $disabled-02;
+    color: $text-disabled;
     cursor: not-allowed;
   }
 
   .#{$prefix}--accordion__heading[disabled] .#{$prefix}--accordion__arrow {
-    fill: $disabled-02;
+    fill: $icon-disabled;
   }
 
   .#{$prefix}--accordion__heading[disabled]:hover::before {
@@ -100,31 +100,25 @@
 
   .#{$prefix}--accordion__item--disabled,
   .#{$prefix}--accordion__item--disabled + .#{$prefix}--accordion__item {
-    border-top: 1px solid $disabled-02;
+    border-top: 1px solid $border-disabled;
   }
 
   li.#{$prefix}--accordion__item--disabled:last-of-type {
-    border-bottom: 1px solid $disabled-02;
+    border-bottom: 1px solid $border-disabled;
   }
 
   .#{$prefix}--accordion__arrow {
     @include focus-outline('reset');
+
+    width: 1rem;
+    height: 1rem;
     // Without flex basis and flex shrink being set here, our icon width can go
     // <16px and cause the icon to render in the incorrect artboard size
     flex: 0 0 1rem;
-    width: 1rem;
-    height: 1rem;
     margin: $accordion-arrow-margin;
-    transform: rotate(90deg) #{'/*rtl:ignore*/'};
+    fill: $icon-primary;
+    transform: rotate(-270deg) #{'/*rtl:ignore*/'};
     transition: all $duration--fast-02 motion(standard, productive);
-    fill: $ui-05;
-
-    // Windows, Firefox HCM Fix
-    @media screen and (-ms-high-contrast: active),
-      screen and (prefers-contrast) {
-      // `ButtonText` is a CSS2 system color to help improve colors in HCM
-      fill: ButtonText;
-    }
   }
 
   .#{$prefix}--accordion__title {
@@ -198,15 +192,8 @@
     }
 
     .#{$prefix}--accordion__arrow {
+      fill: $icon-primary;
       transform: rotate(-90deg) #{'/*rtl:ignore*/'};
-      fill: $ui-05;
-
-      // Windows, Firefox HCM Fix
-      @media screen and (-ms-high-contrast: active),
-        screen and (prefers-contrast) {
-        // `ButtonText` is a CSS2 system color to help improve colors in HCM
-        fill: ButtonText;
-      }
     }
   }
 
@@ -218,15 +205,15 @@
 
   .#{$prefix}--accordion.#{$prefix}--skeleton .#{$prefix}--accordion__arrow {
     cursor: default;
+    fill: $icon-primary;
     pointer-events: none;
-    fill: $ui-05;
 
     &:hover,
     &:focus,
     &:active {
       border: none;
-      outline: none;
       cursor: default;
+      outline: none;
     }
   }
 
@@ -244,12 +231,18 @@
     .#{$prefix}--accordion__heading:focus
     .#{$prefix}--accordion__arrow {
     border: none;
-    outline: none;
     cursor: default;
+    outline: none;
   }
 
   .#{$prefix}--accordion__title.#{$prefix}--skeleton__text {
     margin-bottom: 0;
+  }
+
+  // Windows HCM fix
+  .#{$prefix}--accordion__arrow,
+  .#{$prefix}--accordion__item--active .#{$prefix}--accordion__arrow {
+    @include high-contrast-mode('icon-fill');
   }
 }
 

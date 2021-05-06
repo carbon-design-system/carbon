@@ -30,9 +30,9 @@
   }
 
   .#{$prefix}--loading__svg circle {
-    stroke-width: 10;
-    stroke-linecap: butt;
     stroke-dasharray: 240;
+    stroke-linecap: butt;
+    stroke-width: 10;
   }
 
   .#{$prefix}--loading__stroke {
@@ -70,22 +70,22 @@
   @media not all and (min-resolution: 0.001dpcm) {
     @supports (-webkit-appearance: none) and (stroke-color: transparent) {
       circle.#{$prefix}--loading__background {
-        stroke-dashoffset: 0;
         stroke-dasharray: 265;
+        stroke-dashoffset: 0;
       }
     }
   }
 
   .#{$prefix}--loading-overlay {
     position: fixed;
+    z-index: z('overlay');
     top: 0;
     left: 0;
-    z-index: z('overlay');
     display: flex;
-    align-items: center;
-    justify-content: center;
     width: 100%;
     height: 100%;
+    align-items: center;
+    justify-content: center;
     background-color: $overlay;
     transition: background-color $duration--slow-02 motion(standard, expressive);
   }

@@ -9,6 +9,7 @@ import { useEffect } from 'react';
 
 export function useNoInteractiveChildren(ref, message) {
   if (__DEV__) {
+    // eslint-disable-next-line react-hooks/rules-of-hooks
     useEffect(() => {
       const node = getInteractiveContent(ref.current);
 

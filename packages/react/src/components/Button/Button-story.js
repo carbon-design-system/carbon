@@ -40,12 +40,21 @@ const kinds = {
   'Ghost button (ghost)': 'ghost',
 };
 
+// V11: New size table
+// const sizes = {
+//   'Small  (sm)': 'sm',
+//   'Medium (md)': 'md',
+//   'Large  (lg)  - default': null,
+//   'Extra Large (xl)': 'xl',
+//   'Extra Extra Large (2xl)': '2xl',
+// };
+
 const sizes = {
-  Default: 'default',
-  Field: 'field',
-  'Small (sm)': 'small',
+  'Small  (sm)': 'sm',
+  'Medium (md)': 'md',
+  Default: null,
   'Large (lg)': 'lg',
-  'Extra large size (xl)': 'xl',
+  'Extra Large (xl)': 'xl',
 };
 
 const props = {

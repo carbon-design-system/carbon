@@ -33,11 +33,11 @@
     display: table;
     width: 100%;
     margin-bottom: 5rem;
-    overflow-x: auto;
-    overflow-y: hidden;
     background-color: transparent;
     border-collapse: collapse;
     border-spacing: 0;
+    overflow-x: auto;
+    overflow-y: hidden;
 
     &.#{$prefix}--structured-list--condensed .#{$prefix}--structured-list-td,
     &.#{$prefix}--structured-list--condensed .#{$prefix}--structured-list-th {
@@ -47,23 +47,23 @@
 
   .#{$prefix}--structured-list-row {
     display: table-row;
-    border-bottom: 1px solid $ui-03;
+    border-bottom: 1px solid $border-subtle;
     transition: background-color $duration--fast-02 motion(standard, productive);
   }
 
   .#{$prefix}--structured-list--selection
     .#{$prefix}--structured-list-row:hover:not(.#{$prefix}--structured-list-row--header-row):not(.#{$prefix}--structured-list-row--selected) {
-    background-color: $hover-row;
     border-bottom: 1px solid $hover-row;
+    background-color: $hover-row;
     cursor: pointer;
   }
 
   .#{$prefix}--structured-list-row.#{$prefix}--structured-list-row--selected {
-    background-color: $selected-ui;
+    background-color: $background-selected;
   }
 
   .#{$prefix}--structured-list-row.#{$prefix}--structured-list-row--header-row {
-    border-bottom: 1px solid $selected-ui;
+    border-bottom: 1px solid $background-selected;
     cursor: inherit;
   }
 
@@ -77,16 +77,16 @@
     > .#{$prefix}--structured-list-td,
   .#{$prefix}--structured-list-row.#{$prefix}--structured-list-row--selected
     > .#{$prefix}--structured-list-td {
-    color: $text-01;
+    color: $text-primary;
   }
 
   .#{$prefix}--structured-list--selection
     .#{$prefix}--structured-list-row:hover:not(.#{$prefix}--structured-list-row--header-row)
     > .#{$prefix}--structured-list-td {
     @if feature-flag-enable('enabled-2021-release') {
-      border-top: 1px solid $ui-03;
+      border-top: 1px solid $border-subtle;
     } @else {
-      border-top: 1px solid $ui-01;
+      border-top: 1px solid $layer;
     }
   }
 
@@ -102,7 +102,7 @@
 
     display: table-cell;
     height: rem(40px);
-    color: $text-01;
+    color: $text-primary;
     font-weight: 600;
     text-align: left;
     text-transform: $structured-list-text-transform;
@@ -122,9 +122,9 @@
     position: relative;
     display: table-cell;
     max-width: 36rem;
-    color: $text-02;
+    color: $text-secondary;
     @if feature-flag-enabled('enable-2021-release') {
-      border-top: 1px solid $ui-03;
+      border-top: 1px solid $border-subtle;
     }
 
     transition: color $duration--fast-02 motion(standard, productive);
@@ -136,9 +136,9 @@
 
   .#{$prefix}--structured-list-svg {
     display: inline-block;
-    vertical-align: middle;
-    transition: all $duration--fast-02 motion(standard, productive);
     fill: transparent;
+    transition: all $duration--fast-02 motion(standard, productive);
+    vertical-align: middle;
   }
 
   .#{$prefix}--structured-list-row:hover .#{$prefix}--structured-list-svg {
@@ -151,14 +151,7 @@
   .#{$prefix}--structured-list-input:checked
     + .#{$prefix}--structured-list-td
     .#{$prefix}--structured-list-svg {
-    fill: $icon-01;
-
-    // Windows, Firefox HCM Fix
-    @media screen and (-ms-high-contrast: active),
-      screen and (prefers-contrast) {
-      // `ButtonText` is a CSS2 system color to help improve colors in HCM
-      fill: ButtonText;
-    }
+    fill: $icon-primary;
   }
 
   // Skeleton State
@@ -194,6 +187,13 @@
     span {
       display: none;
     }
+  }
+
+  // Windows HCM fix
+  .#{$prefix}--structured-list-input:checked
+    + .#{$prefix}--structured-list-td
+    .#{$prefix}--structured-list-svg {
+    @include high-contrast-mode('icon-fill');
   }
 }
 
