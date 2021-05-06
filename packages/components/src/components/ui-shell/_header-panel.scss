@@ -31,16 +31,16 @@
     overflow: hidden;
     width: 0;
     border: none;
-    background-color: $shell-panel-bg-01;
-    color: $shell-panel-text-01;
+    background-color: $layer;
+    color: $text-secondary;
     transition: width 0.11s;
     will-change: width;
   }
 
   .#{$prefix}--header-panel--expanded {
     width: carbon--mini-units(32);
-    border-right: 1px solid $shell-panel-border;
-    border-left: 1px solid $shell-panel-border;
+    border-right: 1px solid $border-subtle;
+    border-left: 1px solid $border-subtle;
   }
 }
 
