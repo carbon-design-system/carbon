@@ -20,6 +20,7 @@ import {
 } from '@carbon/icons-react';
 
 import useIsomorphicEffect from '../../../internal/useIsomorphicEffect';
+import { useNoInteractiveChildren } from '../../../internal/useNoInteractiveChildren';
 
 const { prefix } = settings;
 
@@ -139,13 +140,12 @@ NotificationIcon.propTypes = {
 
 export function ToastNotification({
   role,
-  notificationType,
   onClose,
   onCloseButtonClick,
   iconDescription,
   statusIconDescription,
   className,
-  content,
+  children,
   kind,
   lowContrast,
   hideCloseButton,
@@ -158,6 +158,9 @@ export function ToastNotification({
     [`${prefix}--toast-notification--low-contrast`]: lowContrast,
     [`${prefix}--toast-notification--${kind}`]: kind,
   });
+
+  const ref = useRef(null);
+  useNoInteractiveChildren(ref);
 
   const handleClose = (evt) => {
     if (!onClose || onClose(evt) !== false) {
@@ -207,16 +210,19 @@ export function ToastNotification({
   return (
     <div {...rest} role={role} kind={kind} className={containerClassName}>
       <NotificationIcon
-        notificationType={notificationType}
+        notificationType="toast"
         kind={kind}
         iconDescription={statusIconDescription || `${kind} icon`}
       />
-      <p className={`${prefix}--toast-notification__content`}>{content}</p>
+      <p ref={ref} className={`${prefix}--toast-notification__content`}>
+        {children}
+      </p>
       {!hideCloseButton && (
         <NotificationButton
           iconDescription={iconDescription}
-          notificationType={notificationType}
+          notificationType="toast"
           onClick={handleCloseButtonClick}
+          aria-hidden="true"
         />
       )}
     </div>
@@ -225,14 +231,14 @@ export function ToastNotification({
 
 ToastNotification.propTypes = {
   /**
+   * Specify the content
+   */
+  children: PropTypes.node.isRequired,
+
+  /**
    * Specify an optional className to be applied to the notification box
    */
   className: PropTypes.string,
-
-  /**
-   * Specify the content
-   */
-  content: PropTypes.string.isRequired,
 
   /**
    * Specify the close button should be disabled, or not
@@ -262,12 +268,6 @@ ToastNotification.propTypes = {
   lowContrast: PropTypes.bool,
 
   /**
-   * By default, this value is "toast". You can also provide an alternate type
-   * if it makes sense for the underlying `<NotificationIcon>` and `<NotificationButton>`
-   */
-  notificationType: PropTypes.string,
-
-  /**
    * Provide a function that is called when menu is closed
    */
   onClose: PropTypes.func,
@@ -281,7 +281,7 @@ ToastNotification.propTypes = {
    * By default, this value is "alert". You can also provide an alternate
    * role if it makes sense from the accessibility-side
    */
-  role: PropTypes.string.isRequired,
+  role: PropTypes.oneOf(['alert', 'log', 'status']).isRequired,
 
   /**
    * Provide a description for "status" icon that can be read by screen readers
@@ -296,9 +296,8 @@ ToastNotification.propTypes = {
 
 ToastNotification.defaultProps = {
   kind: 'error',
-  content: 'provide content',
+  children: 'provide content',
   role: 'alert',
-  notificationType: 'toast',
   iconDescription: 'closes notification',
   onCloseButtonClick: () => {},
   hideCloseButton: false,
