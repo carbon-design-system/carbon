@@ -9563,6 +9563,7 @@ __metadata:
     css: ^3.0.0
     doctoc: ^1.4.0
     eslint: ^6.8.0
+    fast-glob: ^3.2.5
     fs-extra: ^8.1.0
     glob: ^7.1.4
     husky: ^4.0.10
@@ -14301,6 +14302,20 @@ __metadata:
     micromatch: ^4.0.2
     picomatch: ^2.2.1
   checksum: a70ce897b23e85521688b03897115315e8c781f2e5ee5f3b83e8c10df6a464e8be415c800f55c9c40278b41aeccc60883f018f76dde8250b8cf28e7566c13f75
+  languageName: node
+  linkType: hard
+
+"fast-glob@npm:^3.2.5":
+  version: 3.2.5
+  resolution: "fast-glob@npm:3.2.5"
+  dependencies:
+    "@nodelib/fs.stat": ^2.0.2
+    "@nodelib/fs.walk": ^1.2.3
+    glob-parent: ^5.1.0
+    merge2: ^1.3.0
+    micromatch: ^4.0.2
+    picomatch: ^2.2.1
+  checksum: 5d6772c9b63dbb739d60b5630851e1f2cbf9744119e0968eac44c9f8cbc2d3d5cb4f2f0c74715ccb23daa336c87bea42186ed367e6c991afee61cd3d967320eb
   languageName: node
   linkType: hard
 
