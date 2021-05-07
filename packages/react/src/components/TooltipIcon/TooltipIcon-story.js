@@ -6,11 +6,14 @@
  */
 
 import React from 'react';
+<<<<<<< HEAD
 import { Add16, AddFilled16, Filter16, Search16 } from '@carbon/icons-react';
+=======
+import { Filter16, Information16 } from '@carbon/icons-react';
+>>>>>>> 71c231cd4... feat(TooltipIcon): add disabled support
 import { action } from '@storybook/addon-actions';
-import { withKnobs, select, text } from '@storybook/addon-knobs';
+import { withKnobs, select, boolean } from '@storybook/addon-knobs';
 import TooltipIcon from '../TooltipIcon';
-import { Information16 } from '@carbon/icons-react';
 import mdx from './TooltipIcon.mdx';
 
 const directions = {
@@ -44,8 +47,9 @@ const props = () => {
   const iconToUse = iconMap[select('Icon (icon)', icons, 'Filter16')];
 
   return {
-    direction: select('Tooltip direction (direction)', directions, 'bottom'),
-    align: select('Tooltip alignment (align)', alignments, 'center'),
+  disabled: boolean('Disabled (disabled)', false),
+  direction: select('Tooltip direction (direction)', directions, 'bottom'),
+  align: select('Tooltip alignment (align)', alignments, 'center'),
     renderIcon: !iconToUse || iconToUse.svgData ? undefined : iconToUse,
     tooltipText: text('Tooltip content (tooltipText)', 'Filter'),
     onClick: action('onClick'),
@@ -64,9 +68,7 @@ export default {
   },
 };
 
-<<<<<<< HEAD
-export const Default = () => <TooltipIcon {...props()} />;
-=======
+
 export const Default = () => (
   <div
     style={{
@@ -75,24 +77,14 @@ export const Default = () => (
       justifyContent: 'space-between',
       width: '200px',
     }}>
-    <TooltipIcon {...props()}>
+    <TooltipIcon
+      {...props()}
+      tooltipText="Interactive tooltip"
+      onClick={action('onClick')}>
       <Filter16 />
     </TooltipIcon>
-    <TooltipIcon tooltipText="Non-interactive tooltip">
+    <TooltipIcon {...props()} tooltipText="Non-interactive tooltip">
       <Information16 />
     </TooltipIcon>
   </div>
 );
->>>>>>> 942b60f2e... fix(TooltipIcon): prevent pointer cursor on nointeractive variant
-
-Default.storyName = 'default';
-
-Default.parameters = {
-  info: {
-    text: `
-      Icon tooltip is for short single line of text describing an icon.
-      Icon tooltip does not use any JavaScript. No label should be added to this variation.
-      If there are actions a user can take in the tooltip (e.g. a link or a button), use interactive tooltip.
-    `,
-  },
-};

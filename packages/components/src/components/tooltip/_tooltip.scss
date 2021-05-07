@@ -349,6 +349,11 @@
     }
   }
 
+  // Disabled styles
+  .#{$prefix}--tooltip__trigger:not(.#{$prefix}--btn--icon-only)[disabled] svg {
+    fill: $icon-disabled;
+  }
+
   .#{$prefix}--tooltip__label .#{$prefix}--tooltip__trigger {
     // Override `margin: 0` from button-reset mixin
     margin-left: $carbon--spacing-03;
