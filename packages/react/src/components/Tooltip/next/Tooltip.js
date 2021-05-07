@@ -5,27 +5,32 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+import { settings } from 'carbon-components';
 import cx from 'classnames';
 import PropTypes from 'prop-types';
-import React, { useRef, useEffect, useState } from 'react';
+import React, { useRef } from 'react';
 import { Popover, PopoverContent } from '../../Popover';
 import { canUseDOM } from '../../../internal/environment';
+import { useDelayedState } from '../../../internal/useDelayedState';
 import { useEvent } from '../../../internal/useEvent';
 import { useId } from '../../../internal/useId';
 import { useNoInteractiveChildren } from '../../../internal/useNoInteractiveChildren';
 
+const { prefix } = settings;
+
 function Tooltip({
+  align = 'top',
   className: customClassName,
   children,
   label,
   description,
   enterDelayMs = 100,
-  leaveDelayMs = 500,
+  leaveDelayMs = 300,
   ...rest
 }) {
   const containerRef = useRef(null);
   const tooltipRef = useRef(null);
-  const [open, setOpen] = useStateWithDelay(false);
+  const [open, setOpen] = useDelayedState(false);
   const id = useId('tooltip');
   const child = React.Children.only(children);
 
@@ -55,6 +60,7 @@ function Tooltip({
   );
 
   if (canUseDOM) {
+    // eslint-disable-next-line react-hooks/rules-of-hooks
     useEvent(window, 'keydown', (event) => {
       event.stopPropagation();
       setOpen(false);
@@ -64,15 +70,15 @@ function Tooltip({
   return (
     <div
       {...rest}
-      className={cx('cds--tooltip', customClassName)}
+      className={cx(`${prefix}--tooltip`, customClassName)}
       onMouseEnter={onMouseEnter}
       onMouseLeave={onMouseLeave}
       ref={containerRef}>
       {React.cloneElement(child, triggerProps)}
-      <Popover align="top" open={open} highContrast>
+      <Popover align={align} open={open} highContrast>
         <PopoverContent
           aria-hidden="true"
-          className={`cds--tooltip-content`}
+          className={`${prefix}--tooltip-content`}
           id={id}
           ref={tooltipRef}
           role="tooltip">
@@ -85,6 +91,27 @@ function Tooltip({
 
 Tooltip.propTypes = {
   /**
+   * Specify how the trigger should align with the tooltip
+   */
+  align: PropTypes.oneOf([
+    'top',
+    'top-left',
+    'top-right',
+
+    'bottom',
+    'bottom-left',
+    'bottom-right',
+
+    'left',
+    'left-bottom',
+    'left-top',
+
+    'right',
+    'right-bottom',
+    'right-top',
+  ]),
+
+  /**
    * Pass in the child to which the tooltip will be applied
    */
   children: PropTypes.node,
@@ -93,6 +120,23 @@ Tooltip.propTypes = {
    * Specify an optional className to be applied to the container node
    */
   className: PropTypes.string,
+
+  /**
+   * Provide the description to be rendered inside of the Tooltip. The
+   * description will use `aria-describedby` and will describe the child node
+   * in addition to the text rendered inside of the child. This means that if you
+   * have text in the child node, that it will be announced alongside the
+   * description to the screen reader.
+   *
+   * Note: if label and description are both provided, label will be used and
+   * description will not be used
+   */
+  description: PropTypes.node,
+
+  /**
+   * Specify the duration in milliseconds to delay before displaying the tooltip
+   */
+  enterDelayMs: PropTypes.number,
 
   /**
    * Provide the label to be rendered inside of the Tooltip. The label will use
@@ -106,52 +150,9 @@ Tooltip.propTypes = {
   label: PropTypes.node,
 
   /**
-   * Provide the description to be rendered inside of the Tooltip. The
-   * description will use `aria-describedby` and will describe the child node
-   * in addition to the text rendered inside of the child. This means that if you
-   * have text in the child node, that it will be announced alongside the
-   * description to the screen reader.
-   *
-   * Note: if label and description are both provided, label will be used and
-   * description will not be used
+   * Specify the duration in milliseconds to delay before hiding the tooltip
    */
-  description: PropTypes.node,
+  leaveDelayMs: PropTypes.number,
 };
-
-function useStateWithDelay(initialState) {
-  const [state, internalSetState] = useState(initialState);
-  const [delay, setDelay] = useState(null);
-  const [callbackOrValue, setCallbackOrValue] = useState(null);
-
-  function setState(stateOrUpdater, delayMs) {
-    // Synchronous setState
-    if (delayMs === undefined || delayMs === null) {
-      setDelay(null);
-      setCallbackOrValue(null);
-      internalSetState(stateOrUpdater);
-      return;
-    }
-    setDelay(delayMs);
-    setCallbackOrValue(stateOrUpdater);
-  }
-
-  useEffect(() => {
-    if (delay === null || callbackOrValue === null) {
-      return;
-    }
-
-    const timeoutId = setTimeout(() => {
-      setDelay(null);
-      setCallbackOrValue(null);
-      internalSetState(callbackOrValue);
-    }, delay);
-
-    return () => {
-      clearTimeout(timeoutId);
-    };
-  }, [delay, callbackOrValue]);
-
-  return [state, setState];
-}
 
 export { Tooltip };
