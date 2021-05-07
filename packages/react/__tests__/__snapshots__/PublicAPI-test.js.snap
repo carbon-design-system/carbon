@@ -6471,7 +6471,6 @@ Map {
         "type": "oneOf",
       },
       "children": Object {
-        "isRequired": true,
         "type": "node",
       },
       "className": Object {
@@ -6505,6 +6504,19 @@ Map {
       },
       "onMouseLeave": Object {
         "type": "func",
+      },
+      "renderIcon": Object {
+        "args": Array [
+          Array [
+            Object {
+              "type": "func",
+            },
+            Object {
+              "type": "object",
+            },
+          ],
+        ],
+        "type": "oneOfType",
       },
       "tooltipText": Object {
         "isRequired": true,
