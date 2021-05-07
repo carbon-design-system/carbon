@@ -7,8 +7,11 @@
 
 // Unstable tokens
 export const caption01 = 'caption01';
+export const caption02 = 'caption02';
 export const label01 = 'label01';
+export const label02 = 'label02';
 export const helperText01 = 'helperText01';
+export const helperText02 = 'helperText02';
 export const bodyShort01 = 'bodyShort01';
 export const bodyLong01 = 'bodyLong01';
 export const bodyShort02 = 'bodyShort02';
@@ -40,8 +43,11 @@ export const display04 = 'display04';
 
 export const unstable_tokens = [
   caption01,
+  caption02,
   label01,
+  label02,
   helperText01,
+  helperText02,
   bodyShort01,
   bodyLong01,
   bodyShort02,
