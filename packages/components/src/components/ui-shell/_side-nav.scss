@@ -505,7 +505,7 @@
     .#{$prefix}--text-truncate-end {
     @include text-overflow();
 
-    color: $shell-side-nav-text-01;
+    color: $text-secondary;
     font-size: rem(14px);
     letter-spacing: 0.1px;
     line-height: 1.25rem;
