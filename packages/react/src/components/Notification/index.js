@@ -11,6 +11,7 @@ import {
   NotificationButton as NotificationButtonNext,
   ToastNotification as ToastNotificationNext,
   InlineNotification as InlineNotificationNext,
+  PersistentNotification as PersistentNotificationNext,
 } from './next/Notification';
 import {
   NotificationActionButton as NotificationActionButtonClassic,
@@ -59,4 +60,12 @@ export function InlineNotification(props) {
     return <InlineNotificationNext {...props} />;
   }
   return <InlineNotificationClassic {...props} />;
+}
+
+export function PersistentNotification(props) {
+  const enabled = useFeatureFlag('enable-2021-release');
+  if (enabled) {
+    return <PersistentNotificationNext {...props} />;
+  }
+  return null;
 }

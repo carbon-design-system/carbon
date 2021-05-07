@@ -1,0 +1,270 @@
+//
+// Copyright IBM Corp. 2016, 2018
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+//-----------------------------
+// Notifications
+//-----------------------------
+
+@import '../../globals/scss/vars';
+@import '../../globals/scss/layout';
+@import '../../globals/scss/component-tokens';
+@import '../../globals/scss/vendor/@carbon/elements/scss/import-once/import-once';
+@import '../../globals/scss/helper-mixins';
+@import '../../globals/scss/css--reset';
+@import 'mixins';
+@import 'tokens';
+
+/// Persistent notification styles
+/// @access private
+/// @group notification
+@mixin persistent-notifications {
+  .#{$prefix}--persistent-notification {
+    @include reset;
+
+    display: flex;
+    width: rem(288px);
+    height: auto;
+    padding-left: $carbon--spacing-05;
+    margin-top: $carbon--spacing-03;
+    margin-right: $carbon--spacing-05;
+    margin-bottom: $carbon--spacing-03;
+    box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.2);
+    color: $text-inverse;
+
+    &:first-child {
+      margin-top: $carbon--spacing-05;
+    }
+
+    @include carbon--breakpoint(max) {
+      width: rem(352px);
+    }
+  }
+
+  .#{$prefix}--persistent-notification:not(.#{$prefix}--persistent-notification--low-contrast)
+    a {
+    color: $link-inverse;
+  }
+
+  .#{$prefix}--persistent-notification a {
+    text-decoration: none;
+  }
+
+  .#{$prefix}--persistent-notification a:hover {
+    text-decoration: underline;
+  }
+
+  .#{$prefix}--persistent-notification a:focus {
+    outline: 1px solid $link-inverse;
+  }
+
+  .#{$prefix}--persistent-notification.#{$prefix}--persistent-notification--low-contrast
+    a:focus {
+    @include focus-outline;
+  }
+
+  .#{$prefix}--persistent-notification--low-contrast {
+    color: $text-primary;
+  }
+
+  .#{$prefix}--persistent-notification--error {
+    @include notification--experimental(
+      $support-error-inverse,
+      $background-inverse
+    );
+  }
+
+  .#{$prefix}--persistent-notification--low-contrast.#{$prefix}--persistent-notification--error {
+    @include notification--experimental(
+      $support-error,
+      get-token-value($notification-colors, 'notification-background-error')
+    );
+  }
+
+  .#{$prefix}--persistent-notification--success {
+    @include notification--experimental(
+      $support-success-inverse,
+      $background-inverse
+    );
+  }
+
+  .#{$prefix}--persistent-notification--low-contrast.#{$prefix}--persistent-notification--success {
+    @include notification--experimental(
+      $support-success,
+      get-token-value($notification-colors, 'notification-background-success')
+    );
+  }
+
+  .#{$prefix}--persistent-notification--info,
+  .#{$prefix}--persistent-notification--info-square {
+    @include notification--experimental(
+      $support-info-inverse,
+      $background-inverse
+    );
+  }
+
+  .#{$prefix}--persistent-notification--low-contrast.#{$prefix}--persistent-notification--info,
+  .#{$prefix}--persistent-notification--low-contrast.#{$prefix}--persistent-notification--info-square {
+    @include notification--experimental(
+      $support-info,
+      get-token-value($notification-colors, 'notification-background-info')
+    );
+  }
+
+  .#{$prefix}--persistent-notification--warning,
+  .#{$prefix}--persistent-notification--warning-alt {
+    @include notification--experimental(
+      $support-warning-inverse,
+      $background-inverse
+    );
+  }
+
+  .#{$prefix}--persistent-notification--low-contrast.#{$prefix}--persistent-notification--warning,
+  .#{$prefix}--persistent-notification--low-contrast.#{$prefix}--persistent-notification--warning-alt {
+    @include notification--experimental(
+      $support-warning,
+      get-token-value($notification-colors, 'notification-background-warning')
+    );
+  }
+
+  .#{$prefix}--persistent-notification--warning
+    .#{$prefix}--persistent-notification__icon
+    path[opacity='0'] {
+    fill: $carbon__black-100;
+    opacity: 1;
+  }
+
+  .#{$prefix}--persistent-notification__icon {
+    flex-shrink: 0;
+    margin-top: $carbon--spacing-05;
+    margin-right: $carbon--spacing-05;
+  }
+
+  .#{$prefix}--persistent-notification__details {
+    margin-right: $carbon--spacing-05;
+  }
+
+  .#{$prefix}--persistent-notification__content {
+    @include type-style('body-short-01');
+
+    margin-top: $carbon--spacing-05;
+    margin-right: $carbon--spacing-05;
+    word-break: break-word;
+  }
+
+  .#{$prefix}--toast-notification--low-contrast
+    .#{$prefix}--toast-notification__content {
+    color: $text-primary;
+  }
+
+  .#{$prefix}--persistent-notification__close-button {
+    @include focus-outline('reset');
+
+    display: flex;
+    width: rem(48px);
+    min-width: rem(48px);
+    height: rem(48px);
+    min-height: rem(48px);
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    border: none;
+    margin-left: auto;
+    background-color: transparent;
+    cursor: pointer;
+    transition: outline $transition--base, background-color $transition--base;
+
+    &:focus {
+      outline: 2px solid $focus-inverse;
+      outline-offset: -2px;
+    }
+
+    .#{$prefix}--persistent-notification__close-icon {
+      fill: $icon-inverse;
+    }
+  }
+
+  .#{$prefix}--persistent-notification--low-contrast
+    .#{$prefix}--persistent-notification__close-button:focus {
+    @include focus-outline('outline');
+  }
+
+  .#{$prefix}--persistent-notification--low-contrast
+    .#{$prefix}--persistent-notification__close-button
+    .#{$prefix}--persistent-notification__close-icon {
+    fill: $icon-primary;
+  }
+
+  .#{$prefix}--persistent-notification__action-button.#{$prefix}--btn--ghost {
+    height: rem(32px);
+    margin-bottom: $carbon--spacing-03;
+    margin-left: $carbon--spacing-08;
+
+    @include carbon--breakpoint(md) {
+      margin: $carbon--spacing-03 0;
+    }
+  }
+
+  .#{$prefix}--persistent-notification:not(.#{$prefix}--persistent-notification--low-contrast)
+    .#{$prefix}--persistent-notification__action-button.#{$prefix}--btn--ghost {
+    color: $link-inverse;
+  }
+
+  .#{$prefix}--persistent-notification__action-button.#{$prefix}--btn--ghost:active,
+  .#{$prefix}--persistent-notification__action-button.#{$prefix}--btn--ghost:hover {
+    background-color: $background-inverse-hover;
+  }
+
+  .#{$prefix}--persistent-notification--low-contrast
+    .#{$prefix}--persistent-notification__action-button.#{$prefix}--btn--ghost:active,
+  .#{$prefix}--persistent-notification--low-contrast
+    .#{$prefix}--persistent-notification__action-button.#{$prefix}--btn--ghost:hover {
+    background-color: get-token-value(
+      $notification-colors,
+      'notification-action-hover'
+    );
+  }
+
+  .#{$prefix}--persistent-notification__action-button.#{$prefix}--btn--ghost:focus {
+    border-color: transparent;
+    box-shadow: none;
+    outline: 2px solid $focus-inverse;
+    outline-offset: -2px;
+  }
+
+  .#{$prefix}--persistent-notification--low-contrast
+    .#{$prefix}--persistent-notification__action-button.#{$prefix}--btn--ghost:focus {
+    outline-color: $focus;
+  }
+
+  .#{$prefix}--persistent-notification--hide-close-button
+    .#{$prefix}--persistent-notification__action-button.#{$prefix}--btn--ghost {
+    margin-right: $carbon--spacing-03;
+  }
+
+  // Windows HCM fix
+  /* stylelint-disable */
+  .#{$prefix}--persistent-notification {
+    @include high-contrast-mode('outline');
+  }
+  .#{$prefix}--persistent-notification__close-button:focus {
+    @include high-contrast-mode('focus');
+  }
+  .#{$prefix}--persistent-notification__icon {
+    @include high-contrast-mode('icon-fill');
+  }
+
+  .#{$prefix}--persistent-notification__close-button:focus,
+  .#{$prefix}--btn.#{$prefix}--btn--ghost.#{$prefix}--persistent-notification__action-button:focus {
+    @include high-contrast-mode('focus');
+  }
+  /* stylelint-enable */
+}
+
+@include exports('persistent-notifications') {
+  @include persistent-notifications;
+}
