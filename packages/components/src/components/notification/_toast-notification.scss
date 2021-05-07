@@ -151,6 +151,11 @@
       margin-right: $carbon--spacing-05;
       word-break: break-word;
     }
+
+    .#{$prefix}--toast-notification--low-contrast
+      .#{$prefix}--toast-notification__content {
+      color: $text-primary;
+    }
   } @else {
     .#{$prefix}--toast-notification__details {
       margin-right: $carbon--spacing-05;
