@@ -35,7 +35,8 @@
   },
   "peerDependencies": {
     "react": "^16.8.6 || ^17.0.1",
-    "react-dom": "^16.8.6 || ^17.0.1"
+    "react-dom": "^16.8.6 || ^17.0.1",
+    "sass": "^1.32.12"
   },
   "dependencies": {
     "@carbon/feature-flags": "^0.3.0",
@@ -62,7 +63,8 @@
     "react-dom": "^16.8.6",
     "rimraf": "^3.0.2",
     "rollup": "^2.46.0",
-    "rollup-plugin-strip-banner": "^2.0.0"
+    "rollup-plugin-strip-banner": "^2.0.0",
+    "sass": "^1.32.12"
   },
   "sideEffects": [
     "es/feature-flags.js",
