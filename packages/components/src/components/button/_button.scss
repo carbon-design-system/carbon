@@ -282,7 +282,7 @@
 
   .#{$prefix}--btn--ghost.#{$prefix}--btn--icon-only
     .#{$prefix}--btn__icon
-    path:not([data-icon-path]),
+    path:not([data-icon-path]):not([fill='none']),
   .#{$prefix}--btn--ghost.#{$prefix}--btn--icon-only .#{$prefix}--btn__icon {
     fill: $icon-primary;
   }
