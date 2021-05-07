@@ -14,7 +14,11 @@ import {
   select,
   text,
 } from '@storybook/addon-knobs';
-import { ToastNotification, InlineNotification } from '../Notification';
+import {
+  ToastNotification,
+  InlineNotification,
+  NotificationActionButton,
+} from '../Notification';
 import mdx from './Notification.mdx';
 import { FeatureFlags } from '../FeatureFlags';
 
@@ -29,8 +33,8 @@ const kinds = {
 const notificationProps = () => ({
   kind: select('The notification kind (kind)', kinds, 'info'),
   lowContrast: boolean('Use low contrast variant (lowContrast)', false),
-  role: text('ARIA role (role)', 'alert'),
-  content: text('Content (content)', 'Notification content'),
+  role: text('ARIA role (role)', 'alertdialog'),
+  children: text('Content (children)', 'Notification content'),
   iconDescription: text(
     'Icon description (iconDescription)',
     'describes the close button'
@@ -46,6 +50,7 @@ const notificationProps = () => ({
 
 const toastNotificationProps = () => ({
   ...notificationProps(),
+  role: text('ARIA role (role)', 'alert'),
   timeout: number(
     'Duration in milliseconds to display notification (timeout)',
     0
@@ -75,6 +80,14 @@ export const Toast = () => (
 
 export const Inline = () => (
   <FeatureFlags flags={{ 'enable-2021-release': true }}>
-    <InlineNotification {...notificationProps()} />
+    <InlineNotification
+      {...notificationProps()}
+      actions={
+        <NotificationActionButton
+          onClick={action('NotificationActionButton onClick')}>
+          {text('Action (NotificationActionButton > children)', 'Action')}
+        </NotificationActionButton>
+      }
+    />
   </FeatureFlags>
 );

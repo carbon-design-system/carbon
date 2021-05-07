@@ -7,6 +7,7 @@
 
 import React from 'react';
 import {
+  NotificationActionButton as NotificationActionButtonNext,
   NotificationButton as NotificationButtonNext,
   ToastNotification as ToastNotificationNext,
   InlineNotification as InlineNotificationNext,
@@ -23,7 +24,7 @@ import { useFeatureFlag } from '../FeatureFlags';
 export function NotificationActionButton(props) {
   const enabled = useFeatureFlag('enable-2021-release');
   if (enabled) {
-    return null;
+    return <NotificationActionButtonNext {...props} />;
   }
   return <NotificationActionButtonClassic {...props} />;
 }

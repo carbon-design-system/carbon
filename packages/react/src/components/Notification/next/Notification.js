@@ -19,10 +19,65 @@ import {
   InformationSquareFilled20,
 } from '@carbon/icons-react';
 
+import Button from '../../Button';
 import useIsomorphicEffect from '../../../internal/useIsomorphicEffect';
 import { useNoInteractiveChildren } from '../../../internal/useNoInteractiveChildren';
+import { keys, matches } from '../../../internal/keyboard';
 
 const { prefix } = settings;
+
+function useEscapeToClose(callback) {
+  const handleKeyDown = (event) => {
+    if (matches(event, [keys.Escape])) {
+      callback(event);
+    }
+  };
+
+  useIsomorphicEffect(() => {
+    document.addEventListener('keydown', handleKeyDown, false);
+    return () => document.removeEventListener('keydown', handleKeyDown, false);
+  });
+}
+
+export function NotificationActionButton({
+  children,
+  className: customClassName,
+  onClick,
+  ...rest
+}) {
+  const className = cx(
+    customClassName,
+    `${prefix}--inline-notification__action-button`
+  );
+
+  return (
+    <Button
+      className={className}
+      kind="ghost"
+      onClick={onClick}
+      size="small"
+      {...rest}>
+      {children}
+    </Button>
+  );
+}
+
+NotificationActionButton.propTypes = {
+  /**
+   * Specify the content of the notification action button.
+   */
+  children: PropTypes.node,
+
+  /**
+   * Specify an optional className to be applied to the notification action button
+   */
+  className: PropTypes.string,
+
+  /**
+   * Optionally specify a click handler for the notification action button.
+   */
+  onClick: PropTypes.func,
+};
 
 export function NotificationButton({
   ariaLabel,
@@ -167,14 +222,7 @@ export function ToastNotification({
       setIsOpen(false);
     }
   };
-
-  useIsomorphicEffect(() => {
-    document.addEventListener('keydown', handleClose, false);
-
-    return function cleanup() {
-      document.removeEventListener('keydown', handleClose, false);
-    };
-  });
+  useEscapeToClose(handleClose);
 
   function handleCloseButtonClick(event) {
     onCloseButtonClick(event);
@@ -305,9 +353,9 @@ ToastNotification.defaultProps = {
 };
 
 export function InlineNotification({
-  content,
-  role,
-  notificationType,
+  actions,
+  children,
+  role: initialRole,
   onClose,
   onCloseButtonClick,
   iconDescription,
@@ -326,19 +374,22 @@ export function InlineNotification({
     [`${prefix}--inline-notification--hide-close-button`]: hideCloseButton,
   });
 
+  // Placing interactable element(s) within a notification requires a role of
+  // alertdialog. Additionaly, focus must be automatically moved to the component.
+  const role = actions ? 'alertdialog' : initialRole;
+  const ref = useRef(null);
+  useIsomorphicEffect(() => {
+    if (ref.current && role == 'alertdialog') {
+      ref.current.focus();
+    }
+  });
+
   const handleClose = (evt) => {
     if (!onClose || onClose(evt) !== false) {
       setIsOpen(false);
     }
   };
-
-  useIsomorphicEffect(() => {
-    document.addEventListener('keydown', handleClose, false);
-
-    return function cleanup() {
-      document.removeEventListener('keydown', handleClose, false);
-    };
-  });
+  useEscapeToClose(handleClose);
 
   function handleCloseButtonClick(event) {
     onCloseButtonClick(event);
@@ -350,20 +401,29 @@ export function InlineNotification({
   }
 
   return (
-    <div {...rest} role={role} kind={kind} className={containerClassName}>
+    <div
+      {...rest}
+      ref={ref}
+      role={role}
+      kind={kind}
+      className={containerClassName}>
       <div className={`${prefix}--inline-notification__details`}>
         <NotificationIcon
-          notificationType={notificationType}
+          notificationType="inline"
           kind={kind}
           iconDescription={statusIconDescription || `${kind} icon`}
         />
-        <p className={`${prefix}--inline-notification__content`}>{content}</p>
+        <div className={`${prefix}--inline-notification__text-wrapper`}>
+          <p className={`${prefix}--inline-notification__content`}>
+            {children}
+          </p>
+        </div>
       </div>
-
+      {actions}
       {!hideCloseButton && (
         <NotificationButton
           iconDescription={iconDescription}
-          notificationType={notificationType}
+          notificationType="inline"
           onClick={handleCloseButtonClick}
         />
       )}
@@ -373,14 +433,20 @@ export function InlineNotification({
 
 InlineNotification.propTypes = {
   /**
-   * Specify an optional className to be applied to the notification box
+   * Pass in the action nodes that will be rendered within the InlineNotification.
+   * If this prop is configured, the aria role will be changed to "alertdialog"
    */
-  className: PropTypes.string,
+  actions: PropTypes.node,
 
   /**
    * Specify the content
    */
-  content: PropTypes.string.isRequired,
+  children: PropTypes.node,
+
+  /**
+   * Specify an optional className to be applied to the notification box
+   */
+  className: PropTypes.string,
 
   /**
    * Specify the close button should be disabled, or not
@@ -410,12 +476,6 @@ InlineNotification.propTypes = {
   lowContrast: PropTypes.bool,
 
   /**
-   * By default, this value is "inline". You can also provide an alternate type
-   * if it makes sense for the underlying `<NotificationIcon>` and `<NotificationButton>`
-   */
-  notificationType: PropTypes.string,
-
-  /**
    * Provide a function that is called when menu is closed
    */
   onClose: PropTypes.func,
@@ -427,7 +487,8 @@ InlineNotification.propTypes = {
 
   /**
    * By default, this value is "alert". You can also provide an alternate
-   * role if it makes sense from the accessibility-side
+   * role if it makes sense from the accessibility-side. If the `actions` prop is
+   * configured, this will be overridden to "alertdialog".
    */
   role: PropTypes.string.isRequired,
 
@@ -440,7 +501,6 @@ InlineNotification.propTypes = {
 InlineNotification.defaultProps = {
   content: 'provide content',
   role: 'alert',
-  notificationType: 'inline',
   iconDescription: 'closes notification',
   onCloseButtonClick: () => {},
   hideCloseButton: false,
