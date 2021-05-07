@@ -9,7 +9,13 @@ import React from 'react';
 import { action } from '@storybook/addon-actions';
 import { withKnobs, boolean, select, text } from '@storybook/addon-knobs';
 import { iconAddSolid, iconSearch } from 'carbon-icons';
-import { Add16, AddFilled16, Search16 } from '@carbon/icons-react';
+import {
+  Add16,
+  AddFilled16,
+  Search16,
+  PlayOutlineFilled32,
+  PlayOutlineFilled16,
+} from '@carbon/icons-react';
 import Button from '../Button';
 import ButtonSkeleton from '../Button/Button.Skeleton';
 import ButtonSet from '../ButtonSet';
@@ -20,6 +26,10 @@ const icons = {
   'Add (Add16 from `@carbon/icons-react`)': 'Add16',
   'Add (Filled) (AddFilled16 from `@carbon/icons-react`)': 'AddFilled16',
   'Search (Search16 from `@carbon/icons-react`)': 'Search16',
+  'PlayOutlineFilled16 (PlayOutlineFilled16 from `@carbon/icons-react`)':
+    'PlayOutlineFilled16',
+  'PlayOutlineFilled32 (PlayOutlineFilled32 from `@carbon/icons-react`)':
+    'PlayOutlineFilled32',
 };
 
 const iconMap = {
@@ -28,6 +38,8 @@ const iconMap = {
   Add16,
   AddFilled16,
   Search16,
+  PlayOutlineFilled16,
+  PlayOutlineFilled32,
 };
 
 const kinds = {
