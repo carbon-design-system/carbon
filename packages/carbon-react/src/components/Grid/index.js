@@ -5,10 +5,4 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import * as FeatureFlags from '@carbon/feature-flags';
-
-FeatureFlags.merge({
-  'enable-css-custom-properties': true,
-  'enable-css-grid': true,
-  'enable-2021-release': true,
-});
+export { Grid, Column } from 'carbon-components-react';

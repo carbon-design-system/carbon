@@ -5,6 +5,8 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+import '../index.scss';
+
 import { configureActions } from '@storybook/addon-actions';
 import { white, g10, g90, g100 } from '@carbon/themes';
 import React from 'react';
@@ -81,8 +83,8 @@ configureActions({
 
 export const decorators = [
   (Story, context) => {
-    const { locale, theme } = context.globals;
-    console.log('Globals: locale: %s, theme: %s', locale, theme);
+    // TODO
+    // const { locale, theme } = context.globals;
     return <Story {...context} />;
   },
 ];
