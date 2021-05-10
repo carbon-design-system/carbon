@@ -28,7 +28,10 @@ describe('icons-react-size-prop', () => {
         quote: 'single',
       },
     },
-    'icons-react-size-prop-rename'
+    'icons-react-size-prop-rename',
+    {
+      parser: 'babylon',
+    }
   );
 
   defineTest(
@@ -39,7 +42,10 @@ describe('icons-react-size-prop', () => {
         quote: 'single',
       },
     },
-    'icons-react-size-prop-with-prop'
+    'icons-react-size-prop-with-prop',
+    {
+      parser: 'babylon',
+    }
   );
 
   defineTest(
@@ -50,6 +56,9 @@ describe('icons-react-size-prop', () => {
         quote: 'single',
       },
     },
-    'icons-react-size-prop-object-key'
+    'icons-react-size-prop-object-key',
+    {
+      parser: 'babylon',
+    }
   );
 });

@@ -108,7 +108,7 @@ function transform(fileInfo, api, options) {
           }
 
           if (
-            j.Property.check(parent) &&
+            j.ObjectProperty.check(parent) &&
             parent.key === path.node &&
             !parent.computed
           ) {
@@ -191,7 +191,7 @@ function transform(fileInfo, api, options) {
           //
           // Since the `size` information needs to be provided, otherwise the
           // default size will be used
-          if (j.Property.check(parent) && size !== defaultSize) {
+          if (j.ObjectProperty.check(parent)) {
             let replacement = null;
 
             // map to React.createElement instead of using as the JSX Opening
@@ -244,10 +244,25 @@ function transform(fileInfo, api, options) {
 
             warn(fileInfo.path);
 
-            if (parent.shorthand === true) {
+            // Sometimes consumers will use the icon module name as a shorthand
+            // in an object property.
+            //
+            // Input:
+            // const o = { Add16, Add32 };
+            // Output:
+            // const o = { Add16: Add, Add32: (props) => <Add size={32} {...props} />
+            if (
+              parent.key.name !== newBinding.name &&
+              parent.shorthand === true
+            ) {
               path.parent.get('shorthand').replace(false);
             }
-            path.parent.get('value').replace(replacement);
+
+            if (size !== defaultSize) {
+              path.parent.get('value').replace(replacement);
+            } else {
+              path.parent.get('value').replace(newBinding);
+            }
           }
 
           // Support `renderIcon` style props where you pass in an Icon by itself
