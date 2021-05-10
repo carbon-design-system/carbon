@@ -2,7 +2,7 @@ version: 2
 jobs:
   system:
     docker:
-      - image: cimg/node:16-browsers
+      - image: cimg/node:16.1-browsers
     working_directory: ~/repo
     steps:
       - checkout
