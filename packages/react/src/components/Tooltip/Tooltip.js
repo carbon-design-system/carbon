@@ -505,7 +505,7 @@ class Tooltip extends Component {
       <>
         <ClickListener onClickOutside={this.handleClickOutside}>
           {showIcon ? (
-            <div className={triggerClasses}>
+            <div id={triggerId} className={triggerClasses}>
               {triggerText}
               <div
                 className={`${prefix}--tooltip__trigger`}
