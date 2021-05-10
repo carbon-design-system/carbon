@@ -6,13 +6,15 @@
  */
 
 import React from 'react';
-<<<<<<< HEAD
-import { Add16, AddFilled16, Filter16, Search16 } from '@carbon/icons-react';
-=======
-import { Filter16, Information16 } from '@carbon/icons-react';
->>>>>>> 71c231cd4... feat(TooltipIcon): add disabled support
+import {
+  Add16,
+  AddFilled16,
+  Filter16,
+  Search16,
+  Information16,
+} from '@carbon/icons-react';
 import { action } from '@storybook/addon-actions';
-import { withKnobs, select, boolean } from '@storybook/addon-knobs';
+import { withKnobs, select, boolean, text } from '@storybook/addon-knobs';
 import TooltipIcon from '../TooltipIcon';
 import mdx from './TooltipIcon.mdx';
 
@@ -47,9 +49,9 @@ const props = () => {
   const iconToUse = iconMap[select('Icon (icon)', icons, 'Filter16')];
 
   return {
-  disabled: boolean('Disabled (disabled)', false),
-  direction: select('Tooltip direction (direction)', directions, 'bottom'),
-  align: select('Tooltip alignment (align)', alignments, 'center'),
+    disabled: boolean('Disabled (disabled)', false),
+    direction: select('Tooltip direction (direction)', directions, 'bottom'),
+    align: select('Tooltip alignment (align)', alignments, 'center'),
     renderIcon: !iconToUse || iconToUse.svgData ? undefined : iconToUse,
     tooltipText: text('Tooltip content (tooltipText)', 'Filter'),
     onClick: action('onClick'),
@@ -68,7 +70,6 @@ export default {
   },
 };
 
-
 export const Default = () => (
   <div
     style={{
@@ -78,13 +79,25 @@ export const Default = () => (
       width: '200px',
     }}>
     <TooltipIcon
-      {...props()}
       tooltipText="Interactive tooltip"
-      onClick={action('onClick')}>
-      <Filter16 />
-    </TooltipIcon>
-    <TooltipIcon {...props()} tooltipText="Non-interactive tooltip">
-      <Information16 />
-    </TooltipIcon>
+      onClick={action('onClick')}
+      renderIcon={Filter16}
+    />
+    <TooltipIcon
+      tooltipText="Non-interactive tooltip"
+      renderIcon={Information16}
+    />
+  </div>
+);
+
+export const Playground = () => (
+  <div
+    style={{
+      padding: '2rem',
+      display: 'flex',
+      justifyContent: 'space-between',
+      width: '200px',
+    }}>
+    <TooltipIcon {...props()} />
   </div>
 );
