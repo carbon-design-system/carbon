@@ -21,6 +21,7 @@ const TooltipIcon = ({
   className,
   children,
   direction,
+  disabled,
   align,
   onClick,
   onBlur,
@@ -44,7 +45,7 @@ const TooltipIcon = ({
     {
       [`${prefix}--tooltip--${direction}`]: direction,
       [`${prefix}--tooltip--align-${align}`]: align,
-      [`${prefix}--tooltip--hidden`]: !allowTooltipVisibility,
+      [`${prefix}--tooltip--hidden`]: !allowTooltipVisibility || disabled,
       [`${prefix}--tooltip--visible`]: isHovered,
     }
   );
@@ -74,17 +75,19 @@ const TooltipIcon = ({
   };
 
   const handleMouseEnter = (evt) => {
-    setIsHovered(true);
-    tooltipTimeout.current && clearTimeout(tooltipTimeout.current);
+    if (!disabled) {
+      setIsHovered(true);
+      tooltipTimeout.current && clearTimeout(tooltipTimeout.current);
 
-    if (evt.target === tooltipRef.current) {
+      if (evt.target === tooltipRef.current) {
+        setAllowTooltipVisibility(true);
+        return;
+      }
+
+      closeTooltips(evt);
+
       setAllowTooltipVisibility(true);
-      return;
     }
-
-    closeTooltips(evt);
-
-    setAllowTooltipVisibility(true);
   };
 
   const handleMouseLeave = () => {
@@ -115,8 +118,17 @@ const TooltipIcon = ({
     return () => document.removeEventListener('keydown', handleEscKeyDown);
   }, []);
 
+  let cursorStyle;
+  if (disabled) {
+    cursorStyle = 'not-allowed';
+  } else {
+    cursorStyle = onClick ? 'pointer' : 'default';
+  }
+
   return (
     <button
+      disabled={disabled}
+      style={{ cursor: cursorStyle }}
       {...rest}
       type="button"
       className={tooltipTriggerClasses}
@@ -161,6 +173,11 @@ TooltipIcon.propTypes = {
    * Specify the direction of the tooltip. Can be either top or bottom.
    */
   direction: PropTypes.oneOf(['top', 'right', 'left', 'bottom']),
+
+  /**
+   * Specify whether the `<TooltipIcon>` should be disabled
+   */
+  disabled: PropTypes.bool,
 
   /**
    * Optionally specify a custom id for the tooltip. If one is not provided, we
