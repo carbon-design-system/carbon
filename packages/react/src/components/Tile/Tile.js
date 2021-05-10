@@ -17,6 +17,7 @@ import {
 } from '@carbon/icons-react';
 import { keys, matches } from '../../internal/keyboard';
 import deprecate from '../../prop-types/deprecate';
+import { composeEventHandlers } from '../../tools/events';
 
 const { prefix } = settings;
 
@@ -429,6 +430,11 @@ export class ExpandableTile extends Component {
     onBeforeClick: PropTypes.func,
 
     /**
+     * optional handler to trigger a function when a key is pressed
+     */
+    onKeyUp: PropTypes.func,
+
+    /**
      * The `tabindex` attribute.
      */
     tabIndex: PropTypes.number,
@@ -543,18 +549,11 @@ export class ExpandableTile extends Component {
     );
   };
 
-  handleKeyDown = (evt) => {
-    if (matches(evt, [keys.Enter, keys.Space])) {
-      evt.persist();
-      this.setState(
-        {
-          expanded: !this.state.expanded,
-        },
-        () => {
-          this.setMaxHeight();
-          this.props.handleClick(evt);
-        }
-      );
+  handleKeyUp = (evt) => {
+    if (evt.target !== this.tile) {
+      if (matches(evt, [keys.Enter, keys.Space])) {
+        evt.preventDefault();
+      }
     }
   };
 
@@ -570,6 +569,7 @@ export class ExpandableTile extends Component {
       tileMaxHeight, // eslint-disable-line
       tilePadding, // eslint-disable-line
       handleClick, // eslint-disable-line
+      onKeyUp,
       tileCollapsedIconText,
       tileExpandedIconText,
       tileCollapsedLabel,
@@ -611,6 +611,7 @@ export class ExpandableTile extends Component {
         aria-expanded={isExpanded}
         title={isExpanded ? tileExpandedIconText : tileCollapsedIconText}
         {...other}
+        onKeyUp={composeEventHandlers([onKeyUp, this.handleKeyUp])}
         onClick={this.handleClick}
         tabIndex={tabIndex}>
         <div
