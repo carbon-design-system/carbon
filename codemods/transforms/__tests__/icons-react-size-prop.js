@@ -41,4 +41,15 @@ describe('icons-react-size-prop', () => {
     },
     'icons-react-size-prop-with-prop'
   );
+
+  defineTest(
+    __dirname,
+    'icons-react-size-prop',
+    {
+      printOptions: {
+        quote: 'single',
+      },
+    },
+    'icons-react-size-prop-object-key'
+  );
 });
