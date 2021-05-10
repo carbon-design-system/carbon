@@ -6487,6 +6487,9 @@ Map {
         ],
         "type": "oneOf",
       },
+      "disabled": Object {
+        "type": "bool",
+      },
       "id": Object {
         "type": "string",
       },

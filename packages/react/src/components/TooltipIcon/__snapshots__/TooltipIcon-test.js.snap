@@ -15,6 +15,11 @@ exports[`TooltipIcon should allow the user to specify the direction 1`] = `
     onFocus={[Function]}
     onMouseEnter={[Function]}
     onMouseLeave={[Function]}
+    style={
+      Object {
+        "cursor": "default",
+      }
+    }
     type="button"
   >
     <span
@@ -44,6 +49,11 @@ exports[`TooltipIcon should render 1`] = `
     onFocus={[Function]}
     onMouseEnter={[Function]}
     onMouseLeave={[Function]}
+    style={
+      Object {
+        "cursor": "default",
+      }
+    }
     type="button"
   >
     <span
