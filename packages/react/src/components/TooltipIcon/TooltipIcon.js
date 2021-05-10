@@ -27,6 +27,7 @@ const TooltipIcon = ({
   onFocus,
   onMouseEnter,
   onMouseLeave,
+  renderIcon: IconElement,
   tooltipText,
   ...rest
 }) => {
@@ -132,7 +133,8 @@ const TooltipIcon = ({
         id={tooltipId}>
         {tooltipText}
       </span>
-      {children}
+      {IconElement && <IconElement />}
+      {!IconElement && children}
     </button>
   );
 };
@@ -148,7 +150,7 @@ TooltipIcon.propTypes = {
    * Specify an icon as children that will be used as the tooltip trigger. This
    * can be an icon from our Icon component, or a custom SVG element.
    */
-  children: PropTypes.node.isRequired,
+  children: PropTypes.node,
 
   /**
    * Specify an optional className to be applied to the trigger node
@@ -190,6 +192,11 @@ TooltipIcon.propTypes = {
    * The event handler for the `mouseleave` event.
    */
   onMouseLeave: PropTypes.func,
+
+  /**
+   * Function called to override icon rendering.
+   */
+  renderIcon: PropTypes.oneOfType([PropTypes.func, PropTypes.object]),
 
   /**
    * Provide the ARIA label for the tooltip.

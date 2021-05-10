@@ -6,7 +6,7 @@
  */
 
 import React from 'react';
-import { Filter16 } from '@carbon/icons-react';
+import { Add16, AddFilled16, Filter16, Search16 } from '@carbon/icons-react';
 import { action } from '@storybook/addon-actions';
 import { withKnobs, select, text } from '@storybook/addon-knobs';
 import TooltipIcon from '../TooltipIcon';
@@ -25,12 +25,31 @@ const alignments = {
   'End (end)': 'end',
 };
 
-const props = () => ({
-  direction: select('Tooltip direction (direction)', directions, 'bottom'),
-  align: select('Tooltip alignment (align)', alignments, 'center'),
-  tooltipText: text('Tooltip content (tooltipText)', 'Filter'),
-  onClick: action('onClick'),
-});
+const icons = {
+  'Add (Add16 from `@carbon/icons-react`)': 'Add16',
+  'Add (Filled) (AddFilled16 from `@carbon/icons-react`)': 'AddFilled16',
+  'Filter (Filter16 from `@carbon/icons-react`)': 'Filter16',
+  'Search (Search16 from `@carbon/icons-react`)': 'Search16',
+};
+
+const iconMap = {
+  Add16,
+  AddFilled16,
+  Filter16,
+  Search16,
+};
+
+const props = () => {
+  const iconToUse = iconMap[select('Icon (icon)', icons, 'Filter16')];
+
+  return {
+    direction: select('Tooltip direction (direction)', directions, 'bottom'),
+    align: select('Tooltip alignment (align)', alignments, 'center'),
+    renderIcon: !iconToUse || iconToUse.svgData ? undefined : iconToUse,
+    tooltipText: text('Tooltip content (tooltipText)', 'Filter'),
+    onClick: action('onClick'),
+  };
+};
 
 export default {
   title: 'Components/TooltipIcon',
@@ -44,11 +63,7 @@ export default {
   },
 };
 
-export const Default = () => (
-  <TooltipIcon {...props()}>
-    <Filter16 />
-  </TooltipIcon>
-);
+export const Default = () => <TooltipIcon {...props()} />;
 
 Default.storyName = 'default';
 
