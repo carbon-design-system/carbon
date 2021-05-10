@@ -83,16 +83,16 @@ _Tip: to open a new tab, you can use `CMD`+`T`_
 In this new tab, you should be able to run the following command from `nvm`:
 
 ```bash
-nvm install v8
-nvm alias default v8
+nvm install v16
+nvm alias default v16
 ```
 
-This will install Node.js v8.x and alias is as your default Node.js version.
+This will install Node.js v16.x and alias is as your default Node.js version.
 
 Now, each time you open the terminal you should be able to run the command
-`node -v` and see an output that `v8.x.y`. In addition to installing Node.js and
-the `node` command, this work will also install the `npm` tool for you to use in
-the terminal.
+`node -v` and see an output that `v16.x.y`. In addition to installing Node.js
+and the `node` command, this work will also install the `npm` tool for you to
+use in the terminal.
 
 #### Install VS Code
 
