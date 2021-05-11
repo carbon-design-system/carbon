@@ -9,6 +9,13 @@
 - [Timeline](#timeline)
 - [Updates](#updates)
   - [May 13th, 2021](#may-13th-2021)
+    - [What's changed](#whats-changed)
+      - [Design Tokens](#design-tokens)
+      - [Component `size` prop](#component-size-prop)
+      - [CSS Grid](#css-grid)
+      - [Icon updates](#icon-updates)
+      - [Spacing token updates](#spacing-token-updates)
+    - [What's coming up](#whats-coming-up)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 <!-- prettier-ignore-end -->
@@ -85,6 +92,15 @@ All of the updated design tokens for v11 have been added to each theme and is
 used by components. You can use each token today in the same way you use tokens
 from Carbon.
 
+```scss
+@import 'carbon-components/scss/globals/scss/theme';
+
+.my-component {
+  background: $background;
+  color: $text-primary;
+}
+```
+
 For the full list of tokens, visit this link: [Link](https://bit.ly/3bitQLN)
 
 ##### Component `size` prop
@@ -93,11 +109,63 @@ For the full list of tokens, visit this link: [Link](https://bit.ly/3bitQLN)
 | -------------------- | -------------- | ------------------------------------ |
 | `enable-v11-release` | No flag needed | <span aria-label="checked">✅</span> |
 
+The `size` prop in our React codebase was not consistent across components. This
+has been addressed in v11 so that each `size` prop is consistent across the
+codebase. The full set of prop names and sizes is below.
+
+| Name  | Size |
+| ----- | ---- |
+| `xs`  | 24px |
+| `sm`  | 32px |
+| `md`  | 40px |
+| `lg`  | 48px |
+| `xl`  | 64px |
+| `2xl` | 80px |
+
+The following components have been updated to include this `size` prop change:
+
+- Accordion
+- Button
+- Listbox
+  - Combobox
+  - Dropdown
+  - Multiselect
+  - Filterable Multiselect
+- Content Switcher
+- DatePicker
+- FileUploader
+  - FileUploaderButton
+  - FileUploaderDropContainer
+  - FileUploaderItem
+- Link
+- Modal
+  - ComposedModal
+- Number Input
+- Overflow Menu
+- Search
+- Select
+- Tag
+- Text Input
+- Time Picker
+- Toggle
+
 ##### CSS Grid
 
 | Feature flag      | Styles                               | React                                |
 | ----------------- | ------------------------------------ | ------------------------------------ |
 | `enable-css-grid` | <span aria-label="checked">✅</span> | <span aria-label="checked">✅</span> |
+
+Starting in v11, we will switch from a flex-box implementation of our grid to a
+CSS Grid implementation. We have implemented the initial functionality for our
+grid inside of `@carbon/grid`. These styles are a part of the grid exports in
+`carbon-components` when the `enable-css-grid` feature flag is enabled.
+
+In addition, our `Grid` and `Column` components will use the updated CSS class
+names when the `enable-css-grid` is enabled in JavaScript. Their prop usage
+should be identical to the current implementation.
+
+For more information on how to use the `Grid` and `Column` components in React,
+check our documentation here (TODO link).
 
 ##### Icon updates
 
@@ -105,27 +173,72 @@ For the full list of tokens, visit this link: [Link](https://bit.ly/3bitQLN)
 | --------------- | ------ | ----- |
 | No flags needed | N/A    | N/A   |
 
+Our icons have been updated to optimize for the number of exports from our
+`@carbon/icons-react` package along with simplifying the usage of each icon
+component.
+
+In v10, each icon was exported along with its size. For example, for the `add`
+icon we would have the following components: `Add16`, `Add20`, `Add24`, `Add32`.
+In v11, we will have an `Add` component with a `size` prop, with the default
+size being 16.
+
+You can try out the new icon updates by installing the latest version of
+`@carbon/icons-react`:
+
+```bash
+npm i @carbon/icons-react@^10.32.0
+```
+
+Or, with [Yarn](https://yarnpkg.com/):
+
+```bash
+yarn add @carbon/icons-react@^10.32.0
+```
+
+Next, you should import each icon from the `@carbon/icons-react/next`
+entrypoint. This entrypoint is temporary during v10 and will be moved to
+`@carbon/icons-react` in v11.
+
+For more details on migrating from the v10 icons to v11, check out our
+[migration guide](../migration/11.x-carbon-icons-react.md).
+
+_Note: there will be a codemod to help with automatically updating icon usage in
+our next beta release_
+
 ##### Spacing token updates
 
 | Feature flag    | Styles | React |
 | --------------- | ------ | ----- |
 | No flags needed | N/A    | N/A   |
 
+We deprecated our `layout` scale in v10 in preference of a unified spacing
+scale. This change has been made in v10 and requires no updates or feature flags
+in your codebase.
+
 #### What's coming up
 
-We're hoping to release a second beta version of v11 in the next couple of
-weeks. Inside of this version, we would like to ship the following two parts of
-the release:
+Our goal is to release a second beta version of v11 in the next couple of weeks.
+For this milestone, we are looking to ship two key parts of this release:
 
 - The `@carbon/react` package that will become our new entrypoint for developers
   using React
 - The `@carbon/upgrade` CLI tool for running automated codemods
-- The `@carbon/styles` package
 
-Plex
+In addition, this release will include the first beta of the `@carbon/styles`
+package which will be our next package for styles. This package will be
+re-exported by `@carbon/react`.
 
-Inline theming, UI Shell
+In addition, our team is either tackling or will begin to tackle the following
+efforts over the next couple of sprints:
 
-Component accessibility Notification Tooltip
-
-Removal of deprecated code
+- Updates to IBM Plex, moving from Google Fonts to a more robust solutution to
+  include more font families and weights, along with the variable font for IBM
+  Plex Sans
+- Inline theming support with our new tokens, including support for zones and
+  the ability to support the layering concepts for our token sy stem
+  - This work should coincide with our UI Shell theming efforts
+- Updates to React, including:
+  - Component accessibility updates to follow WCAG AA 2.1 standards
+    - Tooltip
+    - Notification
+    - Disclosure
