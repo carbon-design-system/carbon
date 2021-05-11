@@ -179,8 +179,7 @@ Our icons have been updated to optimize the number of exports from our
 `@carbon/icons-react` package and simplify the usage of each icon
 component.
 
-In v10, each icon was exported along with its size. For example, for the `add`
-icon we would have the following components: `Add16`, `Add20`, `Add24`, `Add32`.
+In v10, each icon was exported along with its size. For example, we would have the following components for the `add` icon: `Add16`, `Add20`, `Add24`, and `Add32`.
 In v11, we will have an `Add` component with a `size` prop, with the default
 size being 16.
 
