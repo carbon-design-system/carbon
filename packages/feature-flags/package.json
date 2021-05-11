@@ -1,7 +1,7 @@
 {
   "name": "@carbon/feature-flags",
   "description": "Build with feature flags in Carbon",
-  "version": "0.3.0",
+  "version": "0.4.0-rc.0",
   "license": "Apache-2.0",
   "main": "lib/index.js",
   "module": "es/index.js",
@@ -33,15 +33,15 @@
     "watch": "yarn clean && node tasks/build.js && rollup -c -w"
   },
   "devDependencies": {
-    "@babel/generator": "^7.10.2",
+    "@babel/generator": "^7.14.0",
     "@babel/template": "^7.12.13",
-    "@babel/types": "^7.10.2",
+    "@babel/types": "^7.14.0",
     "@carbon/scss-generator": "^10.13.0",
     "change-case": "^4.1.2",
     "fs-extra": "^9.0.1",
     "js-yaml": "^3.14.0",
     "rimraf": "^3.0.2",
-    "rollup": "^2.38.0",
+    "rollup": "^2.46.0",
     "rollup-plugin-strip-banner": "^2.0.0"
   },
   "sideEffects": false

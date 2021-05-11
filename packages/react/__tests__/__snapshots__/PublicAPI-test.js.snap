@@ -1351,7 +1351,9 @@ Map {
           "args": Array [
             Array [
               "small",
+              "sm",
               "normal",
+              "lg",
             ],
           ],
           "type": "oneOf",
@@ -1988,7 +1990,9 @@ Map {
         "args": Array [
           Array [
             "small",
+            "sm",
             "normal",
+            "lg",
           ],
         ],
         "type": "oneOf",
@@ -4732,6 +4736,19 @@ Map {
       "placeholder": Object {
         "type": "string",
       },
+      "renderIcon": Object {
+        "args": Array [
+          Array [
+            Object {
+              "type": "func",
+            },
+            Object {
+              "type": "object",
+            },
+          ],
+        ],
+        "type": "oneOfType",
+      },
       "size": Object {
         "args": Array [
           Array [
@@ -4849,6 +4866,19 @@ Map {
       "placeHolderText": [Function],
       "placeholder": Object {
         "type": "string",
+      },
+      "renderIcon": Object {
+        "args": Array [
+          Array [
+            Object {
+              "type": "func",
+            },
+            Object {
+              "type": "object",
+            },
+          ],
+        ],
+        "type": "oneOfType",
       },
       "size": Object {
         "args": Array [
@@ -6449,7 +6479,6 @@ Map {
         "type": "oneOf",
       },
       "children": Object {
-        "isRequired": true,
         "type": "node",
       },
       "className": Object {
@@ -6465,6 +6494,9 @@ Map {
           ],
         ],
         "type": "oneOf",
+      },
+      "disabled": Object {
+        "type": "bool",
       },
       "id": Object {
         "type": "string",
@@ -6483,6 +6515,19 @@ Map {
       },
       "onMouseLeave": Object {
         "type": "func",
+      },
+      "renderIcon": Object {
+        "args": Array [
+          Array [
+            Object {
+              "type": "func",
+            },
+            Object {
+              "type": "object",
+            },
+          ],
+        ],
+        "type": "oneOfType",
       },
       "tooltipText": Object {
         "isRequired": true,
