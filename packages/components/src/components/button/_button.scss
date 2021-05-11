@@ -518,7 +518,6 @@
   .#{$prefix}--btn-set .#{$prefix}--btn:not(.#{$prefix}--btn--expressive) {
     // 196px from design kit
     max-width: rem(196px);
-    //TO-DO: follow up on design specs for width
   }
 
   .#{$prefix}--btn-set .#{$prefix}--btn:focus + .#{$prefix}--btn {
