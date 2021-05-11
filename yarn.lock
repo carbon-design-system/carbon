@@ -1694,7 +1694,7 @@ __metadata:
     change-case: ^4.1.1
     core-js: ^3.6.5
     fs-extra: ^8.1.0
-    node-sass: ^4.13.1
+    node-sass: ^6.0.0
     rimraf: ^3.0.0
   languageName: unknown
   linkType: soft
@@ -2011,7 +2011,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@carbon/test-utils@workspace:packages/test-utils"
   dependencies:
-    node-sass: ^4.13.1
+    node-sass: ^6.0.0
     prettier: ^2.2.1
     react: ^17.0.1
     react-dom: ^16.9.0
@@ -2019,7 +2019,7 @@ __metadata:
     sass: ^1.32.4
     tabbable: ^4.0.0
   peerDependencies:
-    node-sass: ^4.13.1
+    node-sass: "*"
     react-dom: ^16.9.0 || ^17.0.1
   languageName: unknown
   linkType: soft
@@ -2040,7 +2040,7 @@ __metadata:
     core-js: ^3.6.5
     fs-extra: ^8.1.0
     js-yaml: ^3.13.0
-    node-sass: ^4.13.1
+    node-sass: ^6.0.0
     rimraf: ^3.0.0
   languageName: unknown
   linkType: soft
@@ -23173,7 +23173,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"node-sass@npm:^4.13.1, node-sass@npm:^4.8.3":
+"node-sass@npm:^4.8.3":
   version: 4.13.1
   resolution: "node-sass@npm:4.13.1"
   dependencies:
