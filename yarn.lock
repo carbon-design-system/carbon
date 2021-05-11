@@ -9358,7 +9358,7 @@ __metadata:
     gulp-nodemon: ^2.4.2
     gulp-postcss: ^8.0.0
     gulp-rename: ^1.4.0
-    gulp-sass: ^4.0.0
+    gulp-sass: ^4.1.0
     gulp-sass-lint: ^1.4.0
     gulp-sourcemaps: ^2.6.0
     gulp-terser: ^1.0.0
@@ -16141,7 +16141,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"gulp-sass@npm:^4.0.0":
+"gulp-sass@npm:^4.1.0":
   version: 4.1.0
   resolution: "gulp-sass@npm:4.1.0"
   dependencies:
