@@ -88,7 +88,7 @@ would love to hear any feedback that you might have in our
 | -------------------- | ------------------------------------ | ----- |
 | `enable-v11-release` | <span aria-label="checked">✅</span> | N/A   |
 
-All of the updated design tokens for v11 have been added to each theme and is
+All of the updated design tokens for v11 have been added to each theme and are
 used by components. You can use each token today in the same way you use tokens
 from Carbon.
 
