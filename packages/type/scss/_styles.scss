@@ -22,6 +22,16 @@ $caption-01: (
 /// @type Map
 /// @access public
 /// @group @carbon/type
+$caption-02: (
+  font-size: carbon--type-scale(2),
+  font-weight: carbon--font-weight('regular'),
+  line-height: 1.29,
+  letter-spacing: 0.32px,
+) !default;
+
+/// @type Map
+/// @access public
+/// @group @carbon/type
 $label-01: (
   font-size: carbon--type-scale(1),
   font-weight: carbon--font-weight('regular'),
@@ -32,9 +42,29 @@ $label-01: (
 /// @type Map
 /// @access public
 /// @group @carbon/type
+$label-02: (
+  font-size: carbon--type-scale(2),
+  font-weight: carbon--font-weight('regular'),
+  line-height: 1.29,
+  letter-spacing: 0.32px,
+) !default;
+
+/// @type Map
+/// @access public
+/// @group @carbon/type
 $helper-text-01: (
   font-size: carbon--type-scale(1),
   line-height: 1.34,
+  letter-spacing: 0.32px,
+) !default;
+
+/// @type Map
+/// @access public
+/// @group @carbon/type
+$helper-text-02: (
+  font-size: carbon--type-scale(2),
+  font-weight: carbon--font-weight('regular'),
+  line-height: 1.29,
   letter-spacing: 0.32px,
 ) !default;
 

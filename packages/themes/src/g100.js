@@ -232,8 +232,11 @@ export const skeletonElement = skeleton02;
 export {
   // Type
   caption01,
+  caption02,
   label01,
+  label02,
   helperText01,
+  helperText02,
   bodyShort01,
   bodyLong01,
   bodyShort02,
