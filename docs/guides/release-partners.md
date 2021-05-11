@@ -23,7 +23,7 @@
 ## About
 
 This document is for teams participating in our 2021 Release Partner Program for
-the Carbon v11 release. To learn more about this program, or to find out how to
+the Carbon v11 release. To learn more about this program or find out how to
 apply, visit our guide
 [here](https://github.com/carbon-design-system/carbon/wiki/Release-Partner-Program).
 
