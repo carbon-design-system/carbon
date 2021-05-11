@@ -21,12 +21,14 @@ const TooltipIcon = ({
   className,
   children,
   direction,
+  disabled,
   align,
   onClick,
   onBlur,
   onFocus,
   onMouseEnter,
   onMouseLeave,
+  renderIcon: IconElement,
   tooltipText,
   ...rest
 }) => {
@@ -43,7 +45,7 @@ const TooltipIcon = ({
     {
       [`${prefix}--tooltip--${direction}`]: direction,
       [`${prefix}--tooltip--align-${align}`]: align,
-      [`${prefix}--tooltip--hidden`]: !allowTooltipVisibility,
+      [`${prefix}--tooltip--hidden`]: !allowTooltipVisibility || disabled,
       [`${prefix}--tooltip--visible`]: isHovered,
     }
   );
@@ -73,17 +75,19 @@ const TooltipIcon = ({
   };
 
   const handleMouseEnter = (evt) => {
-    setIsHovered(true);
-    tooltipTimeout.current && clearTimeout(tooltipTimeout.current);
+    if (!disabled) {
+      setIsHovered(true);
+      tooltipTimeout.current && clearTimeout(tooltipTimeout.current);
 
-    if (evt.target === tooltipRef.current) {
+      if (evt.target === tooltipRef.current) {
+        setAllowTooltipVisibility(true);
+        return;
+      }
+
+      closeTooltips(evt);
+
       setAllowTooltipVisibility(true);
-      return;
     }
-
-    closeTooltips(evt);
-
-    setAllowTooltipVisibility(true);
   };
 
   const handleMouseLeave = () => {
@@ -114,8 +118,17 @@ const TooltipIcon = ({
     return () => document.removeEventListener('keydown', handleEscKeyDown);
   }, []);
 
+  let cursorStyle;
+  if (disabled) {
+    cursorStyle = 'not-allowed';
+  } else {
+    cursorStyle = onClick ? 'pointer' : 'default';
+  }
+
   return (
     <button
+      disabled={disabled}
+      style={{ cursor: cursorStyle }}
       {...rest}
       type="button"
       className={tooltipTriggerClasses}
@@ -132,7 +145,8 @@ const TooltipIcon = ({
         id={tooltipId}>
         {tooltipText}
       </span>
-      {children}
+      {IconElement && <IconElement />}
+      {!IconElement && children}
     </button>
   );
 };
@@ -148,7 +162,7 @@ TooltipIcon.propTypes = {
    * Specify an icon as children that will be used as the tooltip trigger. This
    * can be an icon from our Icon component, or a custom SVG element.
    */
-  children: PropTypes.node.isRequired,
+  children: PropTypes.node,
 
   /**
    * Specify an optional className to be applied to the trigger node
@@ -159,6 +173,11 @@ TooltipIcon.propTypes = {
    * Specify the direction of the tooltip. Can be either top or bottom.
    */
   direction: PropTypes.oneOf(['top', 'right', 'left', 'bottom']),
+
+  /**
+   * Specify whether the `<TooltipIcon>` should be disabled
+   */
+  disabled: PropTypes.bool,
 
   /**
    * Optionally specify a custom id for the tooltip. If one is not provided, we
@@ -190,6 +209,11 @@ TooltipIcon.propTypes = {
    * The event handler for the `mouseleave` event.
    */
   onMouseLeave: PropTypes.func,
+
+  /**
+   * Function called to override icon rendering.
+   */
+  renderIcon: PropTypes.oneOfType([PropTypes.func, PropTypes.object]),
 
   /**
    * Provide the ARIA label for the tooltip.

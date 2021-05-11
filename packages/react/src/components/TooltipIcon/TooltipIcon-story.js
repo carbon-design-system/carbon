@@ -6,9 +6,15 @@
  */
 
 import React from 'react';
-import { Filter } from '@carbon/icons-react/next';
+import {
+  Add,
+  AddFilled,
+  Filter,
+  Search,
+  Information,
+} from '@carbon/icons-react/next';
 import { action } from '@storybook/addon-actions';
-import { withKnobs, select, text } from '@storybook/addon-knobs';
+import { withKnobs, select, boolean, text } from '@storybook/addon-knobs';
 import TooltipIcon from '../TooltipIcon';
 import mdx from './TooltipIcon.mdx';
 
@@ -25,12 +31,32 @@ const alignments = {
   'End (end)': 'end',
 };
 
-const props = () => ({
-  direction: select('Tooltip direction (direction)', directions, 'bottom'),
-  align: select('Tooltip alignment (align)', alignments, 'center'),
-  tooltipText: text('Tooltip content (tooltipText)', 'Filter'),
-  onClick: action('onClick'),
-});
+const icons = {
+  'Add (Add16 from `@carbon/icons-react`)': 'Add16',
+  'Add (Filled) (AddFilled16 from `@carbon/icons-react`)': 'AddFilled16',
+  'Filter (Filter16 from `@carbon/icons-react`)': 'Filter16',
+  'Search (Search16 from `@carbon/icons-react`)': 'Search16',
+};
+
+const iconMap = {
+  Add16: Add,
+  AddFilled16: AddFilled,
+  Filter16: Filter,
+  Search16: Search,
+};
+
+const props = () => {
+  const iconToUse = iconMap[select('Icon (icon)', icons, 'Filter16')];
+
+  return {
+    disabled: boolean('Disabled (disabled)', false),
+    direction: select('Tooltip direction (direction)', directions, 'bottom'),
+    align: select('Tooltip alignment (align)', alignments, 'center'),
+    renderIcon: !iconToUse || iconToUse.svgData ? undefined : iconToUse,
+    tooltipText: text('Tooltip content (tooltipText)', 'Filter'),
+    onClick: action('onClick'),
+  };
+};
 
 export default {
   title: 'Components/TooltipIcon',
@@ -45,19 +71,33 @@ export default {
 };
 
 export const Default = () => (
-  <TooltipIcon {...props()}>
-    <Filter />
-  </TooltipIcon>
+  <div
+    style={{
+      padding: '2rem',
+      display: 'flex',
+      justifyContent: 'space-between',
+      width: '200px',
+    }}>
+    <TooltipIcon
+      tooltipText="Interactive tooltip"
+      onClick={action('onClick')}
+      renderIcon={Filter}
+    />
+    <TooltipIcon
+      tooltipText="Non-interactive tooltip"
+      renderIcon={Information}
+    />
+  </div>
 );
 
-Default.storyName = 'default';
-
-Default.parameters = {
-  info: {
-    text: `
-      Icon tooltip is for short single line of text describing an icon.
-      Icon tooltip does not use any JavaScript. No label should be added to this variation.
-      If there are actions a user can take in the tooltip (e.g. a link or a button), use interactive tooltip.
-    `,
-  },
-};
+export const Playground = () => (
+  <div
+    style={{
+      padding: '2rem',
+      display: 'flex',
+      justifyContent: 'space-between',
+      width: '200px',
+    }}>
+    <TooltipIcon {...props()} />
+  </div>
+);
