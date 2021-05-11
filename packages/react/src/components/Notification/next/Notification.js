@@ -26,9 +26,14 @@ import { keys, matches } from '../../../internal/keyboard';
 
 const { prefix } = settings;
 
-function useEscapeToClose(callback) {
+/**
+ * Conditionally call a callback when the escape key is pressed
+ * @param {func} callback - function to be called
+ * @param {bool} override - escape hatch to conditionally call the callback
+ */
+function useEscapeToClose(callback, override = true) {
   const handleKeyDown = (event) => {
-    if (matches(event, [keys.Escape])) {
+    if (matches(event, [keys.Escape]) && override) {
       callback(event);
     }
   };
@@ -212,6 +217,7 @@ export function ToastNotification({
   lowContrast,
   hideCloseButton,
   timeout,
+  closeOnEscape,
   ...rest
 }) {
   const [isOpen, setIsOpen] = useState(true);
@@ -229,7 +235,7 @@ export function ToastNotification({
       setIsOpen(false);
     }
   };
-  useEscapeToClose(handleClose);
+  useEscapeToClose(handleClose, closeOnEscape);
 
   function handleCloseButtonClick(event) {
     onCloseButtonClick(event);
@@ -296,6 +302,11 @@ ToastNotification.propTypes = {
   className: PropTypes.string,
 
   /**
+   * Specify if pressing the escape key should close notifications
+   */
+  closeOnEscape: PropTypes.bool,
+
+  /**
    * Specify the close button should be disabled, or not
    */
   hideCloseButton: PropTypes.bool,
@@ -352,11 +363,12 @@ ToastNotification.propTypes = {
 ToastNotification.defaultProps = {
   kind: 'error',
   children: 'provide content',
-  role: 'alert',
+  role: 'status',
   iconDescription: 'closes notification',
   onCloseButtonClick: () => {},
   hideCloseButton: false,
   timeout: 0,
+  closeOnEscape: true,
 };
 
 export function InlineNotification({
@@ -371,6 +383,8 @@ export function InlineNotification({
   kind,
   lowContrast,
   hideCloseButton,
+  hasFocus,
+  closeOnEscape,
   ...rest
 }) {
   const [isOpen, setIsOpen] = useState(true);
@@ -386,7 +400,7 @@ export function InlineNotification({
   const role = actions ? 'alertdialog' : initialRole;
   const ref = useRef(null);
   useIsomorphicEffect(() => {
-    if (ref.current && role == 'alertdialog') {
+    if (ref.current && role == 'alertdialog' && hasFocus) {
       ref.current.focus();
     }
   });
@@ -396,7 +410,7 @@ export function InlineNotification({
       setIsOpen(false);
     }
   };
-  useEscapeToClose(handleClose);
+  useEscapeToClose(handleClose, closeOnEscape);
 
   function handleCloseButtonClick(event) {
     onCloseButtonClick(event);
@@ -457,6 +471,16 @@ InlineNotification.propTypes = {
   className: PropTypes.string,
 
   /**
+   * Specify if pressing the escape key should close notifications
+   */
+  closeOnEscape: PropTypes.bool,
+
+  /**
+   * Specify if focus should be moved to the component when the notification contains actions
+   */
+  hasFocus: PropTypes.bool,
+
+  /**
    * Specify the close button should be disabled, or not
    */
   hideCloseButton: PropTypes.bool,
@@ -512,6 +536,8 @@ InlineNotification.defaultProps = {
   iconDescription: 'closes notification',
   onCloseButtonClick: () => {},
   hideCloseButton: false,
+  hasFocus: true,
+  closeOnEscape: true,
 };
 
 export function PersistentNotification({
@@ -525,6 +551,8 @@ export function PersistentNotification({
   kind,
   lowContrast,
   hideCloseButton,
+  hasFocus,
+  closeOnEscape,
   ...rest
 }) {
   const [isOpen, setIsOpen] = useState(true);
@@ -536,7 +564,7 @@ export function PersistentNotification({
 
   const ref = useRef(null);
   useIsomorphicEffect(() => {
-    if (ref.current) {
+    if (ref.current && hasFocus) {
       ref.current.focus();
     }
   });
@@ -546,7 +574,7 @@ export function PersistentNotification({
       setIsOpen(false);
     }
   };
-  useEscapeToClose(handleClose);
+  useEscapeToClose(handleClose, closeOnEscape);
 
   function handleCloseButtonClick(event) {
     onCloseButtonClick(event);
@@ -613,6 +641,16 @@ PersistentNotification.propTypes = {
   className: PropTypes.string,
 
   /**
+   * Specify if pressing the escape key should close notifications
+   */
+  closeOnEscape: PropTypes.bool,
+
+  /**
+   * Specify if focus should be moved to the component when the notification contains actions
+   */
+  hasFocus: PropTypes.bool,
+
+  /**
    * Specify the close button should be disabled, or not
    */
   hideCloseButton: PropTypes.bool,
@@ -661,4 +699,6 @@ PersistentNotification.defaultProps = {
   iconDescription: 'closes notification',
   onCloseButtonClick: () => {},
   hideCloseButton: false,
+  hasFocus: true,
+  closeOnEscape: true,
 };
