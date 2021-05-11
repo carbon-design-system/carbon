@@ -49,26 +49,12 @@
     cursor: pointer;
     transition: background-color motion(standard, productive) $duration--fast-02;
 
-    &:hover::before,
-    &:focus::before {
-      position: absolute;
-      top: -1px;
-      left: 0;
-      width: 100%;
-      height: calc(100% + 2px);
-      content: '';
-    }
-
-    &:hover::before {
+    &:hover {
       background-color: $background-hover;
     }
 
     &:focus {
-      outline: none;
-    }
-
-    &:focus::before {
-      @include focus-outline('outline-compat');
+      @include focus-outline('outline');
     }
   }
 
