@@ -236,6 +236,69 @@ export const SetOfButtons = () => {
   );
 };
 
+export const ExpressiveButtons = () => {
+  return (
+    <>
+      <div
+        style={{
+          margin: '1rem',
+        }}>
+        <Button isExpressive size="default">
+          Button
+        </Button>
+      </div>
+      <div
+        style={{
+          margin: '1rem',
+        }}>
+        <Button isExpressive size="lg">
+          Button
+        </Button>
+      </div>
+      <div
+        style={{
+          margin: '1rem',
+        }}>
+        <Button isExpressive size="xl">
+          Button
+        </Button>
+      </div>
+      <div
+        style={{
+          margin: '1rem',
+        }}>
+        <Button isExpressive size="2xl" renderIcon={Add16}>
+          Button
+        </Button>
+      </div>
+      <div
+        style={{
+          margin: '1rem',
+        }}>
+        <Button
+          isExpressive
+          renderIcon={Add16}
+          hasIconOnly
+          iconDescription="Icon description"
+        />
+      </div>
+      <div
+        style={{
+          marginTop: '1rem',
+        }}>
+        <ButtonSet>
+          <Button kind="secondary" isExpressive>
+            Secondary button
+          </Button>
+          <Button kind="primary" isExpressive>
+            Primary button
+          </Button>
+        </ButtonSet>
+      </div>
+    </>
+  );
+};
+
 export const Skeleton = () => (
   <div>
     <ButtonSkeleton />

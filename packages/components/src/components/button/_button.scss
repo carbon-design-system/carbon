@@ -482,18 +482,6 @@
     //default size 48px
   }
 
-  //v11 change this to xl
-  .#{$prefix}--btn--icon-only.#{$prefix}--btn--lg.#{$prefix}--btn--expressive {
-    padding: 21px;
-    //(64px height - 2px top and bottom border - svg height) / 2
-  }
-
-  //v11 change this to 2xl
-  .#{$prefix}--btn--icon-only.#{$prefix}--btn--xl.#{$prefix}--btn--expressive {
-    padding: 29px;
-    //(80px height - 2px top and bottom border - svg height) / 2
-  }
-
   .#{$prefix}--btn.#{$prefix}--btn--expressive .#{$prefix}--btn__icon {
     width: rem(20px);
     height: rem(20px);
