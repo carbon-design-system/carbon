@@ -113,6 +113,8 @@ The `size` prop in our React codebase was not consistent across components. This
 has been addressed in v11 so that each `size` prop is consistent across the
 codebase. The full set of prop names and sizes is below.
 
+Note: there will be a codemod to help with automatically updating the size prop in our next beta release
+
 | Name  | Size |
 | ----- | ---- |
 | `xs`  | 24px |
