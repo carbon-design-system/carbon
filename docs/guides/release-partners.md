@@ -248,7 +248,7 @@ efforts over the next couple of sprints:
   include more font families and weights, along with the variable font for IBM
   Plex Sans
 - Inline theming support with our new tokens, including support for zones and
-  the ability to support the layering concepts for our token sy stem
+  the ability to support the layering concepts for our token system
   - This work should coincide with our UI Shell theming efforts
 - Updates to React, including:
   - Component accessibility updates to follow WCAG AA 2.1 standards
