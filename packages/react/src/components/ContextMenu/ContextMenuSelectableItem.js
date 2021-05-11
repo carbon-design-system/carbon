@@ -7,7 +7,7 @@
 
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import { Checkmark16 } from '@carbon/icons-react';
+import { Checkmark } from '@carbon/icons-react/next';
 import ContextMenuOption from './ContextMenuOption';
 
 function ContextMenuSelectableItem({
@@ -26,7 +26,7 @@ function ContextMenuSelectableItem({
     <ContextMenuOption
       role="menuitemcheckbox"
       aria-checked={checked}
-      renderIcon={checked ? Checkmark16 : null}
+      renderIcon={checked ? Checkmark : null}
       label={label}
       indented
       onClick={handleClick}

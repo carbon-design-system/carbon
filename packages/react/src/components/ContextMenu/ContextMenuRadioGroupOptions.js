@@ -7,7 +7,7 @@
 
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import { Checkmark16 } from '@carbon/icons-react';
+import { Checkmark } from '@carbon/icons-react/next';
 import ContextMenuOption from './ContextMenuOption';
 
 function ContextMenuRadioGroupOptions({
@@ -30,7 +30,7 @@ function ContextMenuRadioGroupOptions({
         key={i}
         role="menuitemradio"
         aria-checked={isSelected}
-        renderIcon={isSelected ? Checkmark16 : null}
+        renderIcon={isSelected ? Checkmark : null}
         label={option}
         indented
         onClick={() => {

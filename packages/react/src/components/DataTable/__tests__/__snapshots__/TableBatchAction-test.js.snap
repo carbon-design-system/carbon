@@ -7,6 +7,9 @@ exports[`DataTable.TableBatchAction should render 1`] = `
   renderIcon={
     Object {
       "$$typeof": Symbol(react.forward_ref),
+      "propTypes": Object {
+        "size": [Function],
+      },
       "render": [Function],
     }
   }
@@ -20,6 +23,9 @@ exports[`DataTable.TableBatchAction should render 1`] = `
     renderIcon={
       Object {
         "$$typeof": Symbol(react.forward_ref),
+        "propTypes": Object {
+          "size": [Function],
+        },
         "render": [Function],
       }
     }
@@ -42,7 +48,7 @@ exports[`DataTable.TableBatchAction should render 1`] = `
       tabIndex={0}
       type="button"
     >
-      <ForwardRef(AddFilled16)
+      <ForwardRef(AddFilled)
         aria-hidden="true"
         aria-label="test"
         className="bx--btn__icon"
@@ -76,12 +82,11 @@ exports[`DataTable.TableBatchAction should render 1`] = `
             />
             <path
               d="M24 17L17 17 17 24 15 24 15 17 8 17 8 15 15 15 15 8 17 8 17 15 24 15 24 17z"
-              data-icon-path="inner-path"
               fill="none"
             />
           </svg>
         </Icon>
-      </ForwardRef(AddFilled16)>
+      </ForwardRef(AddFilled)>
     </button>
   </Button>
 </TableBatchAction>

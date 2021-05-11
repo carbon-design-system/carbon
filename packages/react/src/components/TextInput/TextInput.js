@@ -9,7 +9,7 @@ import PropTypes from 'prop-types';
 import React, { useContext } from 'react';
 import classNames from 'classnames';
 import { settings } from 'carbon-components';
-import { WarningFilled16, WarningAltFilled16 } from '@carbon/icons-react';
+import { WarningFilled, WarningAltFilled } from '@carbon/icons-react/next';
 import PasswordInput from './PasswordInput';
 import ControlledPasswordInput from './ControlledPasswordInput';
 import { textInputProps } from './util';
@@ -144,12 +144,10 @@ const TextInput = React.forwardRef(function TextInput(
       <div className={fieldOuterWrapperClasses}>
         <div className={fieldWrapperClasses} data-invalid={invalid || null}>
           {invalid && (
-            <WarningFilled16
-              className={`${prefix}--text-input__invalid-icon`}
-            />
+            <WarningFilled className={`${prefix}--text-input__invalid-icon`} />
           )}
           {!invalid && warn && (
-            <WarningAltFilled16
+            <WarningAltFilled
               className={`${prefix}--text-input__invalid-icon ${prefix}--text-input__invalid-icon--warning`}
             />
           )}

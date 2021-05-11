@@ -7,7 +7,7 @@
 
 import React from 'react';
 import { withKnobs, select, text, boolean } from '@storybook/addon-knobs';
-import { Carbon16, Compass16, Tag16 } from '@carbon/icons-react';
+import { Carbon, Compass, Tag as TagIcon } from '@carbon/icons-react/next';
 import Tag, { types as typesList } from '../Tag';
 import TagSkeleton from '../Tag/Tag.Skeleton';
 import { action } from '@storybook/addon-actions/dist/preview';
@@ -20,9 +20,9 @@ const icons = {
 };
 
 const iconMap = {
-  Carbon16,
-  Compass16,
-  Tag16,
+  Carbon16: Carbon,
+  Compass16: Compass,
+  Tag16: TagIcon,
 };
 
 const sizes = {
@@ -105,7 +105,7 @@ _Default.parameters = {
 export const VerticalAlignment = () => (
   <>
     <Tag type="gray">Tag 1</Tag>
-    <Tag type="gray" renderIcon={Compass16}>
+    <Tag type="gray" renderIcon={Compass}>
       Tag 2
     </Tag>
     <Tag type="gray" filter>

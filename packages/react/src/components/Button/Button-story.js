@@ -10,12 +10,11 @@ import { action } from '@storybook/addon-actions';
 import { withKnobs, boolean, select, text } from '@storybook/addon-knobs';
 import { iconAddSolid, iconSearch } from 'carbon-icons';
 import {
-  Add16,
-  AddFilled16,
-  Search16,
-  PlayOutlineFilled32,
-  PlayOutlineFilled16,
-} from '@carbon/icons-react';
+  Add,
+  AddFilled,
+  Search,
+  PlayOutlineFilled,
+} from '@carbon/icons-react/next';
 import Button from '../Button';
 import ButtonSkeleton from '../Button/Button.Skeleton';
 import ButtonSet from '../ButtonSet';
@@ -35,11 +34,12 @@ const icons = {
 const iconMap = {
   iconAddSolid,
   iconSearch,
-  Add16,
-  AddFilled16,
-  Search16,
-  PlayOutlineFilled16,
-  PlayOutlineFilled32,
+  Add16: Add,
+  AddFilled16: AddFilled,
+  Search16: Search,
+  PlayOutlineFilled16: PlayOutlineFilled,
+  // eslint-disable-next-line react/display-name
+  PlayOutlineFilled32: (props) => <PlayOutlineFilled size={32} {...props} />,
 };
 
 const kinds = {
@@ -90,7 +90,7 @@ const props = {
     let iconToUse;
 
     if (iconMap[select('Icon (icon)', icons, 'Add16')] == undefined) {
-      iconToUse = Add16;
+      iconToUse = Add;
     } else {
       iconToUse = iconMap[select('Icon (icon)', icons, 'Add16')];
     }
@@ -221,7 +221,7 @@ export const Playground = () => {
 
 export const IconButton = () => (
   <Button
-    renderIcon={Add16}
+    renderIcon={Add}
     iconDescription="Icon Description"
     hasIconOnly
     onClick={action('onClick')}

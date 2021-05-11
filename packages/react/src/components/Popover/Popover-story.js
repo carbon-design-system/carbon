@@ -7,11 +7,11 @@
 
 import './story.scss';
 import {
-  CaretDown32,
-  CaretLeft32,
-  CaretRight32,
-  CaretUp32,
-} from '@carbon/icons-react';
+  CaretDown,
+  CaretLeft,
+  CaretRight,
+  CaretUp,
+} from '@carbon/icons-react/next';
 import { withKnobs, boolean, select } from '@storybook/addon-knobs';
 import React from 'react';
 import { Popover, PopoverContent } from '../Popover';
@@ -225,14 +225,14 @@ export const Examples = () => {
     <>
       <Example
         className="position-relative mb-3"
-        icon={CaretDown32}
+        icon={(props) => <CaretDown size={32} {...props} />}
         align="top-left">
         This is some text
       </Example>
 
       <Example
         className="position-relative mb-3"
-        icon={CaretDown32}
+        icon={(props) => <CaretDown size={32} {...props} />}
         align="top-left"
         size="sm">
         This is some text
@@ -240,14 +240,14 @@ export const Examples = () => {
 
       <Example
         className="flex justify-center position-relative mb-3"
-        icon={CaretDown32}
+        icon={(props) => <CaretDown size={32} {...props} />}
         align="top">
         This is some text
       </Example>
 
       <Example
         className="flex justify-center position-relative mb-3"
-        icon={CaretDown32}
+        icon={(props) => <CaretDown size={32} {...props} />}
         align="top"
         size="sm">
         This is some text
@@ -255,14 +255,14 @@ export const Examples = () => {
 
       <Example
         className="flex justify-end position-relative mb-3"
-        icon={CaretDown32}
+        icon={(props) => <CaretDown size={32} {...props} />}
         align="top-right">
         This is some text
       </Example>
 
       <Example
         className="flex justify-end position-relative mb-3"
-        icon={CaretDown32}
+        icon={(props) => <CaretDown size={32} {...props} />}
         align="top-right"
         size="sm">
         This is some text
@@ -270,14 +270,14 @@ export const Examples = () => {
 
       <Example
         className="position-relative mb-3"
-        icon={CaretUp32}
+        icon={(props) => <CaretUp size={32} {...props} />}
         align="bottom-left">
         This is some text
       </Example>
 
       <Example
         className="position-relative mb-3"
-        icon={CaretUp32}
+        icon={(props) => <CaretUp size={32} {...props} />}
         align="bottom-left"
         size="sm">
         This is some text
@@ -285,14 +285,14 @@ export const Examples = () => {
 
       <Example
         className="flex justify-center position-relative mb-3"
-        icon={CaretUp32}
+        icon={(props) => <CaretUp size={32} {...props} />}
         align="bottom">
         This is some text
       </Example>
 
       <Example
         className="flex justify-center position-relative mb-3"
-        icon={CaretUp32}
+        icon={(props) => <CaretUp size={32} {...props} />}
         align="bottom"
         size="sm">
         This is some text
@@ -300,14 +300,14 @@ export const Examples = () => {
 
       <Example
         className="flex justify-end position-relative mb-3"
-        icon={CaretUp32}
+        icon={(props) => <CaretUp size={32} {...props} />}
         align="bottom-right">
         This is some text
       </Example>
 
       <Example
         className="flex justify-end position-relative mb-3"
-        icon={CaretUp32}
+        icon={(props) => <CaretUp size={32} {...props} />}
         align="bottom-right"
         size="sm">
         This is some text
@@ -317,7 +317,7 @@ export const Examples = () => {
         <div>
           <Example
             className="position-relative flex align-center mb-3"
-            icon={CaretRight32}
+            icon={(props) => <CaretRight size={32} {...props} />}
             align="left"
             relative>
             This is some text
@@ -325,7 +325,7 @@ export const Examples = () => {
 
           <Example
             className="position-relative flex align-center mb-3"
-            icon={CaretRight32}
+            icon={(props) => <CaretRight size={32} {...props} />}
             align="left"
             size="sm"
             relative>
@@ -336,7 +336,7 @@ export const Examples = () => {
         <div>
           <Example
             className="position-relative flex align-center mb-3"
-            icon={CaretRight32}
+            icon={(props) => <CaretRight size={32} {...props} />}
             align="left-top"
             relative>
             This is some text
@@ -344,7 +344,7 @@ export const Examples = () => {
 
           <Example
             className="position-relative flex align-center mb-3"
-            icon={CaretRight32}
+            icon={(props) => <CaretRight size={32} {...props} />}
             align="left-top"
             size="sm"
             relative>
@@ -355,7 +355,7 @@ export const Examples = () => {
         <div>
           <Example
             className="position-relative flex align-center mb-3"
-            icon={CaretRight32}
+            icon={(props) => <CaretRight size={32} {...props} />}
             align="left-bottom"
             relative>
             This is some text
@@ -363,7 +363,7 @@ export const Examples = () => {
 
           <Example
             className="position-relative flex align-center mb-3"
-            icon={CaretRight32}
+            icon={(props) => <CaretRight size={32} {...props} />}
             align="left-bottom"
             size="sm"
             relative>
@@ -376,7 +376,7 @@ export const Examples = () => {
         <div>
           <Example
             className="position-relative flex align-center mb-3"
-            icon={CaretLeft32}
+            icon={(props) => <CaretLeft size={32} {...props} />}
             align="right"
             relative
             flip>
@@ -385,7 +385,7 @@ export const Examples = () => {
 
           <Example
             className="position-relative flex align-center mb-3"
-            icon={CaretLeft32}
+            icon={(props) => <CaretLeft size={32} {...props} />}
             align="right"
             size="sm"
             relative
@@ -397,7 +397,7 @@ export const Examples = () => {
         <div>
           <Example
             className="position-relative flex align-center mb-3"
-            icon={CaretLeft32}
+            icon={(props) => <CaretLeft size={32} {...props} />}
             align="right-top"
             relative
             flip>
@@ -406,7 +406,7 @@ export const Examples = () => {
 
           <Example
             className="position-relative flex align-center mb-3"
-            icon={CaretLeft32}
+            icon={(props) => <CaretLeft size={32} {...props} />}
             align="right-top"
             size="sm"
             relative
@@ -418,7 +418,7 @@ export const Examples = () => {
         <div>
           <Example
             className="position-relative flex align-center mb-3"
-            icon={CaretLeft32}
+            icon={(props) => <CaretLeft size={32} {...props} />}
             align="right-bottom"
             relative
             flip>
@@ -427,7 +427,7 @@ export const Examples = () => {
 
           <Example
             className="position-relative flex align-center mb-3"
-            icon={CaretLeft32}
+            icon={(props) => <CaretLeft size={32} {...props} />}
             align="right-bottom"
             size="sm"
             relative
@@ -439,7 +439,7 @@ export const Examples = () => {
 
       <Example
         className="position-relative mb-3"
-        icon={CaretDown32}
+        icon={(props) => <CaretDown size={32} {...props} />}
         align="top-left">
         Consectetur et sit accusamus laboriosam pariatur. Asperiores eius
         expedita eligendi beatae vero commodi harum Illo hic accusamus fugit
