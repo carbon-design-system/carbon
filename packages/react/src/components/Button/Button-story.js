@@ -267,7 +267,7 @@ export const ExpressiveButtons = () => {
         style={{
           margin: '1rem',
         }}>
-        <Button isExpressive size="2xl" renderIcon={Add16}>
+        <Button isExpressive size="default" renderIcon={Add16}>
           Button
         </Button>
       </div>
