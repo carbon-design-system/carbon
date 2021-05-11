@@ -54,7 +54,9 @@ const Button = React.forwardRef(function Button(
   const tooltipTimeout = useRef(null);
 
   const closeTooltips = (evt) => {
-    const tooltipNode = document?.querySelectorAll(`.${prefix}--tooltip--a11y`);
+    const tooltipNode = document?.querySelectorAll(
+      `.${prefix}--tooltip--a11y:not(.${prefix}--tooltip__trigger--definition)`
+    );
     [...tooltipNode].map((node) => {
       toggleClass(
         node,
