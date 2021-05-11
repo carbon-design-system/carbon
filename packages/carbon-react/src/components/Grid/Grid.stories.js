@@ -5,7 +5,9 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { Grid, Column } from '../Grid';
+import { Grid, Column } from 'carbon-components-react/es/components/Grid';
+import React from 'react';
+import mdx from './Grid.mdx';
 
 export default {
   title: 'Components/Grid',
@@ -13,10 +15,17 @@ export default {
   subcomponents: {
     Column,
   },
+  parameters: {
+    docs: {
+      page: mdx,
+    },
+  },
 };
 
-export const Default = () => (
-  <Grid>
-    <Column>Example</Column>
-  </Grid>
-);
+export const Default = () => {
+  return (
+    <Grid>
+      <Column>Example</Column>
+    </Grid>
+  );
+};
