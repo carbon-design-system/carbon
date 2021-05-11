@@ -187,8 +187,8 @@
 
   .#{$prefix}--data-table td.#{$prefix}--table-expand,
   .#{$prefix}--data-table th.#{$prefix}--table-expand {
-    padding: 0;
-    padding-left: 0.5rem;
+    padding: 0.5rem;
+    padding-right: 0;
   }
 
   .#{$prefix}--data-table
@@ -229,8 +229,8 @@
   // V11: remove tall
   .#{$prefix}--data-table--tall .#{$prefix}--table-expand__button,
   .#{$prefix}--data-table--xl .#{$prefix}--table-expand__button {
-    padding-top: rem(16px);
-    padding-bottom: rem(24px);
+    width: rem(32px);
+    padding: 0;
   }
 
   // fix expanded parent separating border length

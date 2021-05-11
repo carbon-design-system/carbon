@@ -305,6 +305,13 @@
     transition: background-color $duration--fast-01 motion(entrance, productive);
   }
 
+  .#{$prefix}--table-column-checkbox
+    .#{$prefix}--checkbox:focus
+    + .#{$prefix}--checkbox-label::before {
+    //make checkbox focus larger to match expansion btn focus
+    outline-offset: rem(6px);
+  }
+
   .#{$prefix}--data-table thead th.#{$prefix}--table-column-checkbox,
   .#{$prefix}--data-table tbody td.#{$prefix}--table-column-checkbox,
   .#{$prefix}--data-table thead th.#{$prefix}--table-expand,
@@ -332,6 +339,7 @@
   .#{$prefix}--data-table--xs tbody td.#{$prefix}--table-expand {
     width: rem(24px);
     height: rem(24px);
+    padding: 0 0 0 0.5rem;
   }
 
   // V11: remove short
@@ -341,12 +349,15 @@
   .#{$prefix}--data-table--sm tbody td.#{$prefix}--table-expand {
     width: rem(32px);
     height: rem(32px);
+    padding: 0;
+    padding-left: 0.5rem;
   }
 
   .#{$prefix}--data-table--md thead th.#{$prefix}--table-expand,
   .#{$prefix}--data-table--md tbody td.#{$prefix}--table-expand {
     width: rem(40px);
     height: rem(40px);
+    padding: rem(4px) 0 rem(4px) rem(8px);
   }
 
   // V11: remove tall
@@ -355,6 +366,8 @@
   .#{$prefix}--data-table--xl thead th.#{$prefix}--table-expand,
   .#{$prefix}--data-table--xl tbody td.#{$prefix}--table-expand {
     height: rem(64px);
+    padding-top: rem(10px);
+    padding-bottom: rem(22px);
   }
 
   // V11: remove tall
