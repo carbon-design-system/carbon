@@ -46,8 +46,8 @@ This is our first beta release for Carbon v11
 <span aria-label="celebrate">🎉</span>
 
 Our goal with this release was to present release partners with the
-documentation and support needed to preview the functionality we've
-accomplished so far for Carbon v11.
+documentation and support needed to preview the functionality we've accomplished
+so far for Carbon v11.
 
 To get started with the beta release, make sure to download the latest versions
 of `carbon-components` and `carbon-components-react`.
@@ -113,7 +113,8 @@ The `size` prop in our React codebase was not consistent across components. This
 has been addressed in v11 so that each `size` prop is consistent across the
 codebase. The full set of prop names and sizes is below.
 
-Note: there will be a codemod to help with automatically updating the size prop in our next beta release
+Note: there will be a codemod to help with automatically updating the size prop
+in our next beta release
 
 | Name  | Size |
 | ----- | ---- |
@@ -176,12 +177,12 @@ check our documentation here (TODO link).
 | No flags needed | N/A    | N/A   |
 
 Our icons have been updated to optimize the number of exports from our
-`@carbon/icons-react` package and simplify the usage of each icon
-component.
+`@carbon/icons-react` package and simplify the usage of each icon component.
 
-In v10, each icon was exported along with its size. For example, we would have the following components for the `add` icon: `Add16`, `Add20`, `Add24`, and `Add32`.
-In v11, we will have an `Add` component with a `size` prop, with the default
-size being 16.
+In v10, each icon was exported along with its size. For example, we would have
+the following components for the `add` icon: `Add16`, `Add20`, `Add24`, and
+`Add32`. In v11, we will have an `Add` component with a `size` prop, with the
+default size being 16.
 
 You can try out the new icon updates by installing the latest version of
 `@carbon/icons-react`:
