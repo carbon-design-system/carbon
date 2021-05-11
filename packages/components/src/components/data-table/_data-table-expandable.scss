@@ -170,12 +170,25 @@
   .#{$prefix}--data-table
     td.#{$prefix}--table-expand
     + .#{$prefix}--table-column-checkbox {
-    padding-right: 0;
+    padding-right: rem(4px);
+    padding-left: rem(8px);
+  }
+
+  .#{$prefix}--data-table
+    th.#{$prefix}--table-expand
+    + .#{$prefix}--table-column-checkbox
+    + th,
+  .#{$prefix}--data-table
+    td.#{$prefix}--table-expand
+    + .#{$prefix}--table-column-checkbox
+    + td {
+    padding-left: rem(8px);
   }
 
   .#{$prefix}--data-table td.#{$prefix}--table-expand,
   .#{$prefix}--data-table th.#{$prefix}--table-expand {
     padding: 0;
+    padding-left: 0.5rem;
   }
 
   .#{$prefix}--data-table
@@ -198,7 +211,7 @@
     height: calc(100% + 1px);
     align-items: center;
     justify-content: center;
-    padding: 0 1rem;
+    padding: 0 0.5rem;
     vertical-align: inherit;
   }
 
