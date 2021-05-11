@@ -215,6 +215,18 @@ We deprecated our `layout` scale in v10 in preference of a unified spacing
 scale. This change has been made in v10 and requires no updates or feature flags
 in your codebase.
 
+The impact of this change is that the following tokens are deprecated:
+
+- `$layout-01`
+- `$layout-02`
+- `$layout-03`
+- `$layout-04`
+- `$layout-05`
+- `$layout-06`
+- `$layout-07`
+
+And the spacing scale has one new token: `$spacing-13`.
+
 #### What's coming up
 
 Our goal is to release a second beta version of v11 in the next couple of weeks.
