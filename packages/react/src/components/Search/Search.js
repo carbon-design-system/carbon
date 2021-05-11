@@ -192,7 +192,7 @@ export default class Search extends Component {
     let enabled;
 
     if (scope.enabled) {
-      enabled = scope.enabled('enable-2021-release');
+      enabled = scope.enabled('enable-v11-release');
     }
 
     const searchClasses = classNames({
