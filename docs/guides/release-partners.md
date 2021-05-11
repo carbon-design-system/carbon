@@ -175,8 +175,8 @@ check our documentation here (TODO link).
 | --------------- | ------ | ----- |
 | No flags needed | N/A    | N/A   |
 
-Our icons have been updated to optimize for the number of exports from our
-`@carbon/icons-react` package along with simplifying the usage of each icon
+Our icons have been updated to optimize the number of exports from our
+`@carbon/icons-react` package and simplify the usage of each icon
 component.
 
 In v10, each icon was exported along with its size. For example, for the `add`
