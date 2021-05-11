@@ -244,7 +244,7 @@ re-exported by `@carbon/react`.
 In addition, our team is either tackling or will begin to tackle the following
 efforts over the next couple of sprints:
 
-- Updates to IBM Plex, moving from Google Fonts to a more robust solutution to
+- Updates to IBM Plex, moving from Google Fonts to a more robust solution to
   include more font families and weights, along with the variable font for IBM
   Plex Sans
 - Inline theming support with our new tokens, including support for zones and
