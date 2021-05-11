@@ -97,7 +97,7 @@ export const Inline = () => (
 export const Persistent = () => (
   <FeatureFlags flags={{ 'enable-2021-release': true }}>
     <PersistentNotification
-      {...toastNotificationProps()}
+      {...notificationProps()}
       actions={
         <>
           <NotificationActionButton

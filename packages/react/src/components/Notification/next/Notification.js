@@ -432,6 +432,7 @@ export function InlineNotification({
           iconDescription={iconDescription}
           notificationType="inline"
           onClick={handleCloseButtonClick}
+          aria-hidden={role === 'alertdialog' ? true : false}
         />
       )}
     </div>
@@ -569,18 +570,19 @@ export function PersistentNotification({
       role="alertdialog"
       kind={kind}
       className={containerClassName}>
-      <NotificationIcon
-        notificationType="persistent"
-        kind={kind}
-        iconDescription={statusIconDescription || `${kind} icon`}
-      />
       <div className={`${prefix}--persistent-notification__details`}>
-        <div className={`${prefix}--persistent-notification__content`}>
-          {children}
+        <NotificationIcon
+          notificationType="persistent"
+          kind={kind}
+          iconDescription={statusIconDescription || `${kind} icon`}
+        />
+        <div className={`${prefix}--persistent-notification__text-wrapper`}>
+          <p className={`${prefix}--persistent-notification__content`}>
+            {children}
+          </p>
         </div>
-        {actions}
       </div>
-
+      {actions}
       {!hideCloseButton && (
         <NotificationButton
           iconDescription={iconDescription}
@@ -598,7 +600,7 @@ PersistentNotification.propTypes = {
    * Pass in the action nodes that will be rendered within the notification.
    * If this prop is configured, the aria role will be changed to "alertdialog"
    */
-  actions: PropTypes.node,
+  actions: PropTypes.node.isRequired,
 
   /**
    * Specify the content

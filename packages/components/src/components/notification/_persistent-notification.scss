@@ -25,10 +25,12 @@
   .#{$prefix}--persistent-notification {
     @include reset;
 
+    position: relative;
     display: flex;
     width: rem(288px);
     height: auto;
-    padding-left: $carbon--spacing-05;
+    min-height: rem(48px);
+    flex-wrap: wrap;
     margin-top: $carbon--spacing-03;
     margin-right: $carbon--spacing-05;
     margin-bottom: $carbon--spacing-03;
@@ -68,6 +70,20 @@
 
   .#{$prefix}--persistent-notification--low-contrast {
     color: $text-primary;
+
+    &::before {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      box-sizing: border-box;
+      border-width: 1px 1px 1px 0;
+      border-style: solid;
+      content: '';
+      filter: opacity(0.4);
+      pointer-events: none;
+    }
   }
 
   .#{$prefix}--persistent-notification--error {
@@ -82,6 +98,10 @@
       $support-error,
       get-token-value($notification-colors, 'notification-background-error')
     );
+
+    &::before {
+      border-color: $support-error;
+    }
   }
 
   .#{$prefix}--persistent-notification--success {
@@ -96,6 +116,10 @@
       $support-success,
       get-token-value($notification-colors, 'notification-background-success')
     );
+
+    &::before {
+      border-color: $support-success;
+    }
   }
 
   .#{$prefix}--persistent-notification--info,
@@ -112,6 +136,10 @@
       $support-info,
       get-token-value($notification-colors, 'notification-background-info')
     );
+
+    &::before {
+      border-color: $support-info;
+    }
   }
 
   .#{$prefix}--persistent-notification--warning,
@@ -128,6 +156,10 @@
       $support-warning,
       get-token-value($notification-colors, 'notification-background-warning')
     );
+
+    &::before {
+      border-color: $support-warning;
+    }
   }
 
   .#{$prefix}--persistent-notification--warning
@@ -137,76 +169,34 @@
     opacity: 1;
   }
 
+  .#{$prefix}--persistent-notification__details {
+    display: flex;
+    flex-grow: 1;
+    margin: 0 $carbon--spacing-09 0 $carbon--spacing-05;
+  }
+
   .#{$prefix}--persistent-notification__icon {
     flex-shrink: 0;
-    margin-top: $carbon--spacing-05;
+    margin-top: rem(14px);
     margin-right: $carbon--spacing-05;
   }
 
-  .#{$prefix}--persistent-notification__details {
-    margin-right: $carbon--spacing-05;
+  .#{$prefix}--persistent-notification__text-wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    padding: rem(15px) 0;
   }
 
   .#{$prefix}--persistent-notification__content {
     @include type-style('body-short-01');
 
-    margin-top: $carbon--spacing-05;
-    margin-right: $carbon--spacing-05;
     word-break: break-word;
-  }
-
-  .#{$prefix}--toast-notification--low-contrast
-    .#{$prefix}--toast-notification__content {
-    color: $text-primary;
-  }
-
-  .#{$prefix}--persistent-notification__close-button {
-    @include focus-outline('reset');
-
-    display: flex;
-    width: rem(48px);
-    min-width: rem(48px);
-    height: rem(48px);
-    min-height: rem(48px);
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    padding: 0;
-    border: none;
-    margin-left: auto;
-    background-color: transparent;
-    cursor: pointer;
-    transition: outline $transition--base, background-color $transition--base;
-
-    &:focus {
-      outline: 2px solid $focus-inverse;
-      outline-offset: -2px;
-    }
-
-    .#{$prefix}--persistent-notification__close-icon {
-      fill: $icon-inverse;
-    }
-  }
-
-  .#{$prefix}--persistent-notification--low-contrast
-    .#{$prefix}--persistent-notification__close-button:focus {
-    @include focus-outline('outline');
-  }
-
-  .#{$prefix}--persistent-notification--low-contrast
-    .#{$prefix}--persistent-notification__close-button
-    .#{$prefix}--persistent-notification__close-icon {
-    fill: $icon-primary;
   }
 
   .#{$prefix}--persistent-notification__action-button.#{$prefix}--btn--ghost {
     height: rem(32px);
     margin-bottom: $carbon--spacing-03;
     margin-left: $carbon--spacing-08;
-
-    @include carbon--breakpoint(md) {
-      margin: $carbon--spacing-03 0;
-    }
   }
 
   .#{$prefix}--persistent-notification:not(.#{$prefix}--persistent-notification--low-contrast)
@@ -246,21 +236,61 @@
     margin-right: $carbon--spacing-03;
   }
 
+  .#{$prefix}--persistent-notification__close-button {
+    @include focus-outline('reset');
+
+    position: absolute;
+    top: 0;
+    right: 0;
+    display: flex;
+    width: rem(48px);
+    min-width: rem(48px);
+    max-width: rem(48px);
+    height: rem(48px);
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    transition: outline $duration--fast-02 motion(standard, productive),
+      background-color $duration--fast-02 motion(standard, productive);
+
+    &:focus {
+      outline: 2px solid $focus-inverse;
+      outline-offset: -2px;
+    }
+
+    .#{$prefix}--persistent-notification__close-icon {
+      fill: $icon-inverse;
+    }
+  }
+
+  .#{$prefix}--persistent-notification--low-contrast
+    .#{$prefix}--persistent-notification__close-button:focus {
+    @include focus-outline('outline');
+  }
+
+  .#{$prefix}--persistent-notification--low-contrast
+    .#{$prefix}--persistent-notification__close-button
+    .#{$prefix}--persistent-notification__close-icon {
+    fill: $icon-primary;
+  }
+
   // Windows HCM fix
   /* stylelint-disable */
   .#{$prefix}--persistent-notification {
     @include high-contrast-mode('outline');
   }
-  .#{$prefix}--persistent-notification__close-button:focus {
-    @include high-contrast-mode('focus');
-  }
-  .#{$prefix}--persistent-notification__icon {
-    @include high-contrast-mode('icon-fill');
-  }
 
   .#{$prefix}--persistent-notification__close-button:focus,
   .#{$prefix}--btn.#{$prefix}--btn--ghost.#{$prefix}--persistent-notification__action-button:focus {
     @include high-contrast-mode('focus');
+  }
+
+  .#{$prefix}--persistent-notification__icon {
+    @include high-contrast-mode('icon-fill');
   }
   /* stylelint-enable */
 }
