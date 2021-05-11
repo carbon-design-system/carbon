@@ -46,7 +46,7 @@ This is our first beta release for Carbon v11
 <span aria-label="celebrate">🎉</span>
 
 Our goal with this release was to present release partners with the
-documentation and support needed to preview the functionality that we've
+documentation and support needed to preview the functionality we've
 accomplished so far for Carbon v11.
 
 To get started with the beta release, make sure to download the latest versions
