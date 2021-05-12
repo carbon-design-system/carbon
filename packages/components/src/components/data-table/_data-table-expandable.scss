@@ -170,8 +170,8 @@
   .#{$prefix}--data-table
     td.#{$prefix}--table-expand
     + .#{$prefix}--table-column-checkbox {
-    padding-right: rem(4px);
-    padding-left: rem(8px);
+    padding-right: rem(6px);
+    padding-left: rem(6px);
   }
 
   .#{$prefix}--data-table
