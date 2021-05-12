@@ -134,7 +134,7 @@
     }
   }
 
-  .#{$prefix}--text-input--password__visibility__toggle.#{$prefix}--tooltip__trigger:focus {
+  .#{$prefix}--btn.#{$prefix}--text-input--password__visibility__toggle.#{$prefix}--tooltip__trigger:focus {
     @include focus-outline('outline');
   }
 
