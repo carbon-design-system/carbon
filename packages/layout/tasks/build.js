@@ -21,6 +21,7 @@ const {
   spacing,
   layout,
   fluidSpacing,
+  sizes,
 } = require('../lib');
 
 async function build() {
@@ -251,10 +252,8 @@ const stylesheet = t.StyleSheet([
   }),
 ]);
 
-console.log(JSON.stringify(stylesheet, null, 2));
-
 // AST -> String
-console.log(generate(stylesheet).code);
+// console.log(generate(stylesheet).code);
 
 /**
  * Format the given step for a token name. Most often, this is to pad a `0` for
