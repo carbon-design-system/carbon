@@ -13,7 +13,7 @@ import ToggleClassic from './Toggle';
 import { useFeatureFlag } from '../FeatureFlags';
 
 function Toggle(props) {
-  const enabled = useFeatureFlag('enable-2021-release');
+  const enabled = useFeatureFlag('enable-v11-release');
   if (enabled) {
     return <ToggleNext {...props} />;
   }
