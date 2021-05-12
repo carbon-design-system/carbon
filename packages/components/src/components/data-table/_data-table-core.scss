@@ -299,7 +299,6 @@
   .#{$prefix}--data-table th.#{$prefix}--table-column-checkbox {
     // Do not use `position: relative`, as its behavior is undefined for many table elements: https://www.w3.org/TR/CSS21/visuren.html#propdef-position
     position: static;
-    // 8px padding left + 4px padding right + 20px checkbox width
     width: rem(32px);
     background: $layer-accent;
     transition: background-color $duration--fast-01 motion(entrance, productive);
