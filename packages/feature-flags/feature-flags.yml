@@ -18,7 +18,7 @@ feature-flags:
     description: >
       Enable CSS Grid Layout in the Grid and Column React components
     enabled: false
-  - name: enable-2021-release
+  - name: enable-v11-release
     description: >
-      Enable the features and functionality for the 2021 Release
+      Enable the features and functionality for the v11 Release
     enabled: false

@@ -37,7 +37,7 @@ const Checkbox = React.forwardRef(function Checkbox(
     wrapperClassName
   );
 
-  const enabled = useFeatureFlag('enable-2021-release');
+  const enabled = useFeatureFlag('enable-v11-release');
 
   return (
     <div className={wrapperClasses}>
