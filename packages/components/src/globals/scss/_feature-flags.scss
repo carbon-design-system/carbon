@@ -33,12 +33,12 @@ $default-feature-flags: (
   grid-columns-16: false,
   grid--fallback: false,
   enable-css-custom-properties: false,
-  enable-2021-release: false,
+  enable-v11-release: false,
 );
 
 $feature-flags: map-merge($default-feature-flags, $feature-flags);
 
-@if feature-flag-enabled('enable-2021-release') == true {
+@if feature-flag-enabled('enable-v11-release') == true {
   @if variable-exists(css--disable-css-custom-properties) ==
     false or
     $css--disable-css-custom-properties ==

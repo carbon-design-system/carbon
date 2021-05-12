@@ -24,7 +24,7 @@ import {
 import { useFeatureFlag } from '../FeatureFlags';
 
 export function StructuredListWrapper(props) {
-  const enabled = useFeatureFlag('enable-2021-release');
+  const enabled = useFeatureFlag('enable-v11-release');
   if (enabled) {
     return <StructuredListWrapperNext {...props} />;
   }
@@ -32,14 +32,14 @@ export function StructuredListWrapper(props) {
 }
 
 export function StructuredListHead(props) {
-  const enabled = useFeatureFlag('enable-2021-release');
+  const enabled = useFeatureFlag('enable-v11-release');
   if (enabled) {
     return <StructuredListHeadNext {...props} />;
   }
   return <StructuredListHeadClassic {...props} />;
 }
 export function StructuredListInput(props) {
-  const enabled = useFeatureFlag('enable-2021-release');
+  const enabled = useFeatureFlag('enable-v11-release');
   if (enabled) {
     return <StructuredListInputNext {...props} />;
   }
@@ -47,7 +47,7 @@ export function StructuredListInput(props) {
 }
 
 export function StructuredListBody(props) {
-  const enabled = useFeatureFlag('enable-2021-release');
+  const enabled = useFeatureFlag('enable-v11-release');
   if (enabled) {
     return <StructuredListBodyNext {...props} />;
   }
@@ -55,7 +55,7 @@ export function StructuredListBody(props) {
 }
 
 export function StructuredListRow(props) {
-  const enabled = useFeatureFlag('enable-2021-release');
+  const enabled = useFeatureFlag('enable-v11-release');
   if (enabled) {
     return <StructuredListRowNext {...props} />;
   }
@@ -63,7 +63,7 @@ export function StructuredListRow(props) {
 }
 
 export function StructuredListCell(props) {
-  const enabled = useFeatureFlag('enable-2021-release');
+  const enabled = useFeatureFlag('enable-v11-release');
   if (enabled) {
     return <StructuredListCellNext {...props} />;
   }
