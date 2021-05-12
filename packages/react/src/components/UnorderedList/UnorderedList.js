@@ -12,9 +12,16 @@ import { settings } from 'carbon-components';
 
 const { prefix } = settings;
 
-const UnorderedList = ({ children, className, nested, ...other }) => {
+const UnorderedList = ({
+  children,
+  className,
+  nested,
+  isExpressive,
+  ...other
+}) => {
   const classNames = classnames(`${prefix}--list--unordered`, className, {
     [`${prefix}--list--nested`]: nested,
+    [`${prefix}--list--expressive`]: isExpressive,
   });
   return (
     <ul className={classNames} {...other}>
@@ -35,6 +42,11 @@ UnorderedList.propTypes = {
   className: PropTypes.string,
 
   /**
+   * Specify whether this ordered list expressive or not
+   */
+  isExpressive: PropTypes.bool,
+
+  /**
    * Specify whether the list is nested, or not
    */
   nested: PropTypes.bool,
@@ -42,6 +54,7 @@ UnorderedList.propTypes = {
 
 UnorderedList.defaultProps = {
   nested: false,
+  isExpressive: false,
 };
 
 export default UnorderedList;
