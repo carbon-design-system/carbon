@@ -376,16 +376,16 @@
     background-color: $field-02;
   }
 
-  .#{$prefix}--number--light .#{$prefix}--number__control-btn:focus::before,
-  .#{$prefix}--number--light .#{$prefix}--number__control-btn:focus::after {
-    background-color: transparent;
-  }
-
   // V11: Possibly deprecate
   .#{$prefix}--number--light .#{$prefix}--number__control-btn:hover,
   .#{$prefix}--number--light .#{$prefix}--number__control-btn:hover::before,
   .#{$prefix}--number--light .#{$prefix}--number__control-btn:hover::after {
     background-color: $hover-light-ui;
+  }
+
+  .#{$prefix}--number--light .#{$prefix}--number__control-btn:focus::before,
+  .#{$prefix}--number--light .#{$prefix}--number__control-btn:focus::after {
+    background-color: transparent;
   }
 
   // Size Variant styles

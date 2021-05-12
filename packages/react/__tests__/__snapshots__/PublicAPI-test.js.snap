@@ -150,6 +150,7 @@ Map {
     "defaultProps": Object {
       "dangerDescription": "danger",
       "disabled": false,
+      "isExpressive": false,
       "kind": "primary",
       "size": "default",
       "tabIndex": 0,
@@ -194,6 +195,9 @@ Map {
         "type": "string",
       },
       "iconDescription": [Function],
+      "isExpressive": Object {
+        "type": "bool",
+      },
       "isSelected": Object {
         "type": "bool",
       },
@@ -4250,6 +4254,7 @@ Map {
   },
   "OrderedList" => Object {
     "defaultProps": Object {
+      "isExpressive": false,
       "native": false,
       "nested": false,
     },
@@ -4259,6 +4264,9 @@ Map {
       },
       "className": Object {
         "type": "string",
+      },
+      "isExpressive": Object {
+        "type": "bool",
       },
       "native": Object {
         "type": "bool",
@@ -4666,7 +4674,7 @@ Map {
           "enable-css-custom-properties" => false,
           "enable-use-controlled-state-with-value" => false,
           "enable-css-grid" => false,
-          "enable-2021-release" => false,
+          "enable-v11-release" => false,
         },
       },
       "_currentValue2": FeatureFlagScope {
@@ -4674,7 +4682,7 @@ Map {
           "enable-css-custom-properties" => false,
           "enable-use-controlled-state-with-value" => false,
           "enable-css-grid" => false,
-          "enable-2021-release" => false,
+          "enable-v11-release" => false,
         },
       },
       "_threadCount": 0,
@@ -4727,6 +4735,19 @@ Map {
       "placeHolderText": [Function],
       "placeholder": Object {
         "type": "string",
+      },
+      "renderIcon": Object {
+        "args": Array [
+          Array [
+            Object {
+              "type": "func",
+            },
+            Object {
+              "type": "object",
+            },
+          ],
+        ],
+        "type": "oneOfType",
       },
       "size": Object {
         "args": Array [
@@ -4845,6 +4866,19 @@ Map {
       "placeHolderText": [Function],
       "placeholder": Object {
         "type": "string",
+      },
+      "renderIcon": Object {
+        "args": Array [
+          Array [
+            Object {
+              "type": "func",
+            },
+            Object {
+              "type": "object",
+            },
+          ],
+        ],
+        "type": "oneOfType",
       },
       "size": Object {
         "args": Array [
@@ -6186,60 +6220,7 @@ Map {
       },
     },
   },
-  "Toggle" => Object {
-    "defaultProps": Object {
-      "aria-label": "Toggle",
-      "defaultToggled": false,
-      "labelA": "Off",
-      "labelB": "On",
-      "onToggle": [Function],
-    },
-    "propTypes": Object {
-      "aria-label": Object {
-        "isRequired": true,
-        "type": "string",
-      },
-      "className": Object {
-        "type": "string",
-      },
-      "defaultToggled": Object {
-        "type": "bool",
-      },
-      "id": Object {
-        "isRequired": true,
-        "type": "string",
-      },
-      "labelA": Object {
-        "isRequired": true,
-        "type": "node",
-      },
-      "labelB": Object {
-        "isRequired": true,
-        "type": "node",
-      },
-      "labelText": Object {
-        "type": "node",
-      },
-      "onChange": Object {
-        "type": "func",
-      },
-      "onToggle": Object {
-        "type": "func",
-      },
-      "size": Object {
-        "args": Array [
-          Array [
-            "sm",
-            "md",
-          ],
-        ],
-        "type": "oneOf",
-      },
-      "toggled": Object {
-        "type": "bool",
-      },
-    },
-  },
+  "Toggle" => Object {},
   "ToggleSmall" => Object {
     "defaultProps": Object {
       "defaultToggled": false,
@@ -6445,7 +6426,6 @@ Map {
         "type": "oneOf",
       },
       "children": Object {
-        "isRequired": true,
         "type": "node",
       },
       "className": Object {
@@ -6461,6 +6441,9 @@ Map {
           ],
         ],
         "type": "oneOf",
+      },
+      "disabled": Object {
+        "type": "bool",
       },
       "id": Object {
         "type": "string",
@@ -6480,6 +6463,19 @@ Map {
       "onMouseLeave": Object {
         "type": "func",
       },
+      "renderIcon": Object {
+        "args": Array [
+          Array [
+            Object {
+              "type": "func",
+            },
+            Object {
+              "type": "object",
+            },
+          ],
+        ],
+        "type": "oneOfType",
+      },
       "tooltipText": Object {
         "isRequired": true,
         "type": "node",
@@ -6488,6 +6484,7 @@ Map {
   },
   "UnorderedList" => Object {
     "defaultProps": Object {
+      "isExpressive": false,
       "nested": false,
     },
     "propTypes": Object {
@@ -6496,6 +6493,9 @@ Map {
       },
       "className": Object {
         "type": "string",
+      },
+      "isExpressive": Object {
+        "type": "bool",
       },
       "nested": Object {
         "type": "bool",
