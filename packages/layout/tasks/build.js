@@ -233,6 +233,29 @@ function buildModulesTokenFile(tokenScale, group) {
   ]);
 }
 
+const convert = {
+  ExtraSmall: 'xs',
+  Small: 'sm',
+  Medium: 'md',
+  Large: 'lg',
+  ExtraLarge: 'xl',
+  DoubleExtraLarge: '2xl',
+};
+
+const stylesheet = t.StyleSheet([
+  ...Object.entries(sizes).map(([name, value]) => {
+    return t.Assignment({
+      id: t.Identifier(`size-${convert[name]}`),
+      init: t.SassValue(value),
+    });
+  }),
+]);
+
+console.log(JSON.stringify(stylesheet, null, 2));
+
+// AST -> String
+console.log(generate(stylesheet).code);
+
 /**
  * Format the given step for a token name. Most often, this is to pad a `0` for
  * numbers that are less than 10. For example, instead of spacing-1 we would
