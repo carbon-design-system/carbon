@@ -8,8 +8,8 @@
 /// Windows HCM Mixin
 /// @access public
 /// @example @include high-contrast-mode;
-/// @group global-helpers
-/// We should set HCM styles at the end of each file to ensure they are not overridden
+/// @group utilities
+/// Set HCM styles at the end of each file to ensure they are not overwritten
 @mixin high-contrast-mode($type: '') {
   @media screen and (-ms-high-contrast: active),
     (forced-colors: active),

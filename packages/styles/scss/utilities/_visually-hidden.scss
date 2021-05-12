@@ -7,7 +7,7 @@
 
 /// Include styles for screen reader/assistive text
 /// @access public
-/// @group global-helpers
+/// @group utilities
 @mixin visually-hidden {
   position: absolute;
   overflow: hidden;

@@ -5,9 +5,9 @@
 // LICENSE file in the root directory of this source tree.
 //
 
-/// @access private
+/// @access public
 /// @type Map
-/// @group global-layout
+/// @group utilities
 $z-indexes: (
   // Dropdowns that render outside of a Modal should render above a Modal.
   // Dropdowns below the modal will close when the Modal is opened, so
@@ -24,7 +24,7 @@ $z-indexes: (
 
 /// @access public
 /// @param {String} $layer - Value from `$z-indexes` map
-/// @group global-layout
+/// @group utilities
 /// @example - scss
 ///   .modal {
 ///     z-index: z('modal');

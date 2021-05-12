@@ -8,7 +8,7 @@
 /// Adds placeholder text color
 /// @access public
 /// @example @include placeholder-colors;
-/// @group global-helpers
+/// @group utilities
 @mixin placeholder-colors {
   color: $text-placeholder;
   opacity: 1;

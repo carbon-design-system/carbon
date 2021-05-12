@@ -10,7 +10,7 @@
 /// @access public
 /// @param {Bool} $width [true] - Sets width to 100% if true
 /// @example @include button-reset($width: false);
-/// @group global-helpers
+/// @group utilities
 @mixin button-reset($width: true) {
   @include component-reset;
 

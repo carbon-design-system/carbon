@@ -5,7 +5,10 @@
 // LICENSE file in the root directory of this source tree.
 //
 
-.#{$prefix}--text-truncate--end {
+// Text truncation at the end of text
+/// @access public
+/// @group utilities
+@mixin text-truncate-end {
   display: inline-block;
   overflow: hidden;
   width: 100%;
@@ -13,7 +16,10 @@
   white-space: nowrap;
 }
 
-.#{$prefix}--text-truncate--front {
+// Text truncation at the beginning of text
+/// @access public
+/// @group utilities
+@mixin text-truncate-front {
   display: inline-block;
   overflow: hidden;
   width: 100%;

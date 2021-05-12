@@ -9,9 +9,7 @@
 @use 'convert';
 
 // Does this need to be relative?
-@use '../type';
-
-// Do we need to import the tokens here?
+@use 'type';
 
 // Tooltip
 // Tooltip caret visual styles

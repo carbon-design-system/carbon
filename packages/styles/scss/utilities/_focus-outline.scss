@@ -9,7 +9,7 @@
 /// @access public
 /// @param {String} $type ['border'] - Type of outline from: `border`, `blurred`, `outline`, `invalid`, `reset`
 /// @example @include focus-outline('outline');
-/// @group global-helpers
+/// @group utilities
 @mixin focus-outline($type: 'border') {
   @if ($type == 'border') {
     outline: 1px solid $focus;

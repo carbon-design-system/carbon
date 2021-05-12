@@ -11,7 +11,7 @@
 /// @param {Number} $speed - Speed of rotation
 /// @param {Value} $origin [center] - `transform-origin`
 /// @example @include rotate(90deg, 300ms);
-/// @group global-helpers
+/// @group utilities
 @mixin rotate($deg, $speed, $origin: center) {
   transform: rotate($deg);
   transform-origin: $origin;

@@ -9,7 +9,7 @@
 /// @access public
 /// @param {Number} $width [false] - Value of width if you want to set width, else nothing
 /// @example @include text-overflow(300px);
-/// @group global-helpers
+/// @group utilities
 @mixin text-overflow($width: false) {
   display: block;
   overflow-x: hidden;
