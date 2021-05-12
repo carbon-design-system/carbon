@@ -510,7 +510,8 @@ class Tooltip extends Component {
               <div
                 className={`${prefix}--tooltip__trigger`}
                 {...properties}
-                ref={refProp}>
+                ref={refProp}
+                aria-describedby={tooltipBodyId}>
                 <IconCustomElement {...iconProperties} />
               </div>
             </div>
@@ -519,7 +520,8 @@ class Tooltip extends Component {
               id={triggerId}
               className={triggerClasses}
               ref={refProp}
-              {...properties}>
+              {...properties}
+              aria-describedby={tooltipBodyId}>
               {triggerText}
             </div>
           )}
@@ -544,14 +546,9 @@ class Tooltip extends Component {
               onMouseOut={this.handleMouse}
               onFocus={this.handleMouse}
               onBlur={this.handleMouse}
-              onContextMenu={this.handleMouse}
-              role="tooltip">
+              onContextMenu={this.handleMouse}>
               <span className={`${prefix}--tooltip__caret`} />
-              <div
-                className={`${prefix}--tooltip__content`}
-                role="dialog"
-                aria-describedby={tooltipBodyId}
-                aria-labelledby={triggerId}>
+              <div className={`${prefix}--tooltip__content`} role="dialog">
                 {children}
               </div>
             </div>

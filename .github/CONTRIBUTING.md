@@ -270,8 +270,8 @@ GitHub.
 3. **Development environment:** If you haven't already, fork and clone whichever
    repo you want to contribute to. Then, create a new branch and add your
    contribution in it. Checkout our
-   [Developer Handbook](../developer-handbook.md) to read up on our best coding
-   practices and proper commit messages.
+   [Developer Handbook](../docs/developer-handbook.md) to read up on our best
+   coding practices and proper commit messages.
 4. **Pull request:** Submit a PR. Be sure to fill out the template properly.
 5. **Approval:** Get PR approved by design and developers, or make any necessary
    changes for approval. This process may be quick or take a few iterations of
