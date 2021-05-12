@@ -1980,6 +1980,7 @@ __metadata:
     "@rollup/plugin-commonjs": ^18.0.0
     "@rollup/plugin-node-resolve": ^11.2.1
     "@storybook/addon-actions": ^6.2.9
+    "@storybook/addon-docs": ^6.2.9
     "@storybook/addon-essentials": ^6.2.9
     "@storybook/react": ^6.2.9
     "@storybook/theming": ^6.2.9
@@ -4700,7 +4701,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@storybook/addon-docs@npm:6.2.9":
+"@storybook/addon-docs@npm:6.2.9, @storybook/addon-docs@npm:^6.2.9":
   version: 6.2.9
   resolution: "@storybook/addon-docs@npm:6.2.9"
   dependencies:
