@@ -12,8 +12,15 @@ import { settings } from 'carbon-components';
 
 const { prefix } = settings;
 describe('Toggle', () => {
+  const commonProps = {
+    'aria-label': 'Toggle label',
+    labelA: 'Off',
+    labelB: 'On',
+    labelText: 'Toggle label',
+  };
+
   describe('Renders as expected', () => {
-    const wrapper = mount(<Toggle id="toggle-1" />);
+    const wrapper = mount(<Toggle {...commonProps} id="toggle-1" />);
 
     const input = wrapper.find('input');
 
@@ -63,7 +70,7 @@ describe('Toggle', () => {
   });
 
   it('toggled prop sets checked prop on input', () => {
-    const wrapper = mount(<Toggle id="test" toggled />);
+    const wrapper = mount(<Toggle {...commonProps} id="test" toggled />);
 
     const input = () => wrapper.find('input');
     expect(input().props().checked).toEqual(true);
@@ -76,7 +83,9 @@ describe('Toggle', () => {
     it('passes along onChange to <input>', () => {
       const onChange = jest.fn();
       const id = 'test-input';
-      const wrapper = mount(<Toggle id={id} onChange={onChange} />);
+      const wrapper = mount(
+        <Toggle {...commonProps} id={id} onChange={onChange} />
+      );
 
       const input = wrapper.find('input');
       const inputElement = input.instance();
@@ -94,7 +103,9 @@ describe('Toggle', () => {
     it('should invoke onToggle with expected arguments', () => {
       const onToggle = jest.fn();
       const id = 'test-input';
-      const wrapper = mount(<Toggle id={id} onToggle={onToggle} />);
+      const wrapper = mount(
+        <Toggle {...commonProps} id={id} onToggle={onToggle} />
+      );
 
       const input = wrapper.find('input');
       const inputElement = input.instance();
@@ -111,7 +122,7 @@ describe('Toggle', () => {
   });
 
   describe('ToggleSmall', () => {
-    const wrapper = mount(<Toggle id="toggle-1" size="sm" />);
+    const wrapper = mount(<Toggle {...commonProps} id="toggle-1" size="sm" />);
 
     it('Sets the `ToggleSmall` className', () => {
       const input = wrapper.find('input');
