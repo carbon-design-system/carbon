@@ -166,7 +166,7 @@
   //----------------------------------------------------------------------------
   // Side-nav > Navigation > Header
   //----------------------------------------------------------------------------
-  //TO-DO: should we add a story using SideNavHeader or is this being deprecated?
+  /// @deprecated currently not being used and will be removed in v11
   .#{$prefix}--side-nav__header {
     display: flex;
     width: 100%;
@@ -179,6 +179,7 @@
     }
   }
 
+  /// @deprecated currently not being used and will be removed in v11
   .#{$prefix}--side-nav--ux .#{$prefix}--side-nav__header {
     height: auto;
   }
@@ -186,6 +187,7 @@
   //----------------------------------------------------------------------------
   // Side-nav > Navigation > Header > Details
   //----------------------------------------------------------------------------
+  /// @deprecated currently not being used and will be removed in v11
   .#{$prefix}--side-nav__details {
     display: flex;
     min-width: 0;
@@ -198,11 +200,13 @@
     @include expanded($opacity: true, $visibility: true);
   }
 
+  /// @deprecated currently not being used and will be removed in v11
   .#{$prefix}--side-nav--ux .#{$prefix}--side-nav__details {
     opacity: 1;
     visibility: inherit;
   }
 
+  /// @deprecated currently not being used and will be removed in v11
   .#{$prefix}--side-nav__title {
     @include text-overflow();
 
@@ -214,6 +218,7 @@
     user-select: none;
   }
 
+  /// @deprecated currently not being used and will be removed in v11
   // Sync up between our title and select field to get position logic for
   // text
   .#{$prefix}--side-nav__title,
@@ -224,7 +229,7 @@
   //----------------------------------------------------------------------------
   // Side-nav > Navigation > Header > Switcher
   //----------------------------------------------------------------------------
-  //TO-DO: should we add a story using SideNav Switcher or is this being deprecated?
+  /// @deprecated currently not being used and will be removed in v11
   .#{$prefix}--side-nav__switcher {
     position: relative;
     display: flex;
@@ -232,6 +237,7 @@
     justify-content: space-between;
   }
 
+  /// @deprecated currently not being used and will be removed in v11
   .#{$prefix}--side-nav__switcher-chevron {
     position: absolute;
     top: 0;
@@ -242,7 +248,7 @@
     fill: $icon-secondary;
   }
 
-  //TO-DO: SideNav Select is being consumed by SideNav Switcher - see note above.
+  /// @deprecated currently not being used and will be removed in v11
   .#{$prefix}--side-nav__select {
     @include focus-outline('reset');
 
@@ -263,6 +269,7 @@
     transition: outline $duration--fast-02;
   }
 
+  /// @deprecated currently not being used and will be removed in v11
   .#{$prefix}--side-nav__select:focus {
     @include focus-outline('outline');
   }
@@ -270,13 +277,14 @@
   //----------------------------------------------------------------------------
   // Side-nav > Navigation > Footer
   //----------------------------------------------------------------------------
-  //TO-DO: should we add a story using SideNav Footer or is this being deprecated?
+  /// @deprecated currently not being used and will be removed in v11
   .#{$prefix}--side-nav__footer {
     width: 100%;
     flex: 0 0 rem(48px);
     background-color: $background;
   }
 
+  /// @deprecated currently not being used and will be removed in v11
   .#{$prefix}--side-nav__toggle {
     @include focus-outline('reset');
     @include button-reset($width: true);
@@ -287,6 +295,7 @@
     transition: outline $duration--fast-02;
   }
 
+  /// @deprecated currently not being used and will be removed in v11
   .#{$prefix}--side-nav__toggle:focus {
     @include focus-outline('outline');
   }

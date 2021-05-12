@@ -11,9 +11,22 @@ import cx from 'classnames';
 import PropTypes from 'prop-types';
 import React from 'react';
 
+import { warning } from '../../internal/warning';
+
+let didWarnAboutDeprecation = false;
+
 const { prefix } = settings;
 
 const SideNavSwitcher = React.forwardRef(function SideNavSwitcher(props, ref) {
+  if (__DEV__) {
+    warning(
+      didWarnAboutDeprecation,
+      'The `SideNavSwitcher` component has been deprecated and will be removed ' +
+        'in the next major release of `carbon-components-react`'
+    );
+    didWarnAboutDeprecation = true;
+  }
+
   const { className: customClassName, labelText, onChange, options } = props;
   const className = cx(`${prefix}--side-nav__switcher`, customClassName);
   // Note for usage around `onBlur`: https://github.com/evcohen/eslint-plugin-jsx-a11y/blob/master/docs/rules/no-onchange.md

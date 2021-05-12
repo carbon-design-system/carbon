@@ -9,10 +9,22 @@ import { settings } from 'carbon-components';
 import cx from 'classnames';
 import PropTypes from 'prop-types';
 import React from 'react';
+import { warning } from '../../internal/warning';
+
+let didWarnAboutDeprecation = false;
 
 const { prefix } = settings;
 
 const SideNavDetails = ({ children, className: customClassName, title }) => {
+  if (__DEV__) {
+    warning(
+      didWarnAboutDeprecation,
+      'The `SideNavDetails` component has been deprecated and will be removed ' +
+        'in the next major release of `carbon-components-react`'
+    );
+    didWarnAboutDeprecation = true;
+  }
+
   const className = cx(`${prefix}--side-nav__details`, customClassName);
   return (
     <div className={className}>
