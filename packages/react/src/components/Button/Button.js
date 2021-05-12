@@ -118,7 +118,7 @@ const Button = React.forwardRef(function Button(
     return () => document.removeEventListener('keydown', handleEscKeyDown);
   }, []);
 
-  const enabled = useFeatureFlag('enable-2021-release');
+  const enabled = useFeatureFlag('enable-v11-release');
 
   const buttonClasses = classNames(className, {
     [`${prefix}--btn`]: true,
