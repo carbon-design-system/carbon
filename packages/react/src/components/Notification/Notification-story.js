@@ -34,7 +34,6 @@ const kinds = {
 const notificationProps = () => ({
   kind: select('The notification kind (kind)', kinds, 'info'),
   lowContrast: boolean('Use low contrast variant (lowContrast)', false),
-  role: text('ARIA role (role)', 'alertdialog'),
   children: text('Content (children)', 'Notification content'),
   iconDescription: text(
     'Icon description (iconDescription)',
@@ -47,15 +46,25 @@ const notificationProps = () => ({
   hideCloseButton: boolean('Hide close button (hideCloseButton)', false),
   onClose: action('onClose'),
   onCloseButtonClick: action('onCloseButtonClick'),
+  closeOnEscape: boolean(
+    'Close notifcation when escape is pressed (closeOnEscape)',
+    true
+  ),
+  hasFocus: boolean('Notification receives focus on render (hasfocus)', true),
 });
 
 const toastNotificationProps = () => ({
   ...notificationProps(),
-  role: text('ARIA role (role)', 'alert'),
+  role: text('ARIA role (role)', 'status'),
   timeout: number(
     'Duration in milliseconds to display notification (timeout)',
     0
   ),
+});
+
+const inlineNotificationProps = () => ({
+  ...notificationProps(),
+  role: text('ARIA role (role)', 'status'),
 });
 
 export default {
@@ -82,7 +91,7 @@ export const Toast = () => (
 export const Inline = () => (
   <FeatureFlags flags={{ 'enable-2021-release': true }}>
     <InlineNotification
-      {...notificationProps()}
+      {...inlineNotificationProps()}
       actions={
         <NotificationActionButton
           onClick={action('NotificationActionButton onClick')}

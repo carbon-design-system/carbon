@@ -235,7 +235,7 @@ export function ToastNotification({
       setIsOpen(false);
     }
   };
-  useEscapeToClose(handleClose, closeOnEscape);
+  useEscapeToClose(handleCloseButtonClick, closeOnEscape);
 
   function handleCloseButtonClick(event) {
     onCloseButtonClick(event);
@@ -269,15 +269,15 @@ export function ToastNotification({
   }
 
   return (
-    <div {...rest} role={role} kind={kind} className={containerClassName}>
+    <div {...rest} role={role} className={containerClassName}>
       <NotificationIcon
         notificationType="toast"
         kind={kind}
         iconDescription={statusIconDescription || `${kind} icon`}
       />
-      <p ref={ref} className={`${prefix}--toast-notification__content`}>
+      <div ref={ref} className={`${prefix}--toast-notification__content`}>
         {children}
-      </p>
+      </div>
       {!hideCloseButton && (
         <NotificationButton
           iconDescription={iconDescription}
@@ -410,7 +410,7 @@ export function InlineNotification({
       setIsOpen(false);
     }
   };
-  useEscapeToClose(handleClose, closeOnEscape);
+  useEscapeToClose(handleCloseButtonClick, closeOnEscape);
 
   function handleCloseButtonClick(event) {
     onCloseButtonClick(event);
@@ -422,12 +422,7 @@ export function InlineNotification({
   }
 
   return (
-    <div
-      {...rest}
-      ref={ref}
-      role={role}
-      kind={kind}
-      className={containerClassName}>
+    <div {...rest} ref={ref} role={role} className={containerClassName}>
       <div className={`${prefix}--inline-notification__details`}>
         <NotificationIcon
           notificationType="inline"
@@ -435,9 +430,9 @@ export function InlineNotification({
           iconDescription={statusIconDescription || `${kind} icon`}
         />
         <div className={`${prefix}--inline-notification__text-wrapper`}>
-          <p className={`${prefix}--inline-notification__content`}>
+          <div className={`${prefix}--inline-notification__content`}>
             {children}
-          </p>
+          </div>
         </div>
       </div>
       {actions}
@@ -446,7 +441,7 @@ export function InlineNotification({
           iconDescription={iconDescription}
           notificationType="inline"
           onClick={handleCloseButtonClick}
-          aria-hidden={role === 'alertdialog' ? true : false}
+          aria-hidden={role === 'alertdialog' ? false : true}
         />
       )}
     </div>
@@ -531,8 +526,9 @@ InlineNotification.propTypes = {
 };
 
 InlineNotification.defaultProps = {
+  kind: 'error',
   content: 'provide content',
-  role: 'alert',
+  role: 'status',
   iconDescription: 'closes notification',
   onCloseButtonClick: () => {},
   hideCloseButton: false,
@@ -574,7 +570,7 @@ export function PersistentNotification({
       setIsOpen(false);
     }
   };
-  useEscapeToClose(handleClose, closeOnEscape);
+  useEscapeToClose(handleCloseButtonClick, closeOnEscape);
 
   function handleCloseButtonClick(event) {
     onCloseButtonClick(event);
@@ -592,12 +588,7 @@ export function PersistentNotification({
   }
 
   return (
-    <div
-      {...rest}
-      ref={ref}
-      role="alertdialog"
-      kind={kind}
-      className={containerClassName}>
+    <div {...rest} ref={ref} role="alertdialog" className={containerClassName}>
       <div className={`${prefix}--persistent-notification__details`}>
         <NotificationIcon
           notificationType="persistent"
@@ -605,9 +596,9 @@ export function PersistentNotification({
           iconDescription={statusIconDescription || `${kind} icon`}
         />
         <div className={`${prefix}--persistent-notification__text-wrapper`}>
-          <p className={`${prefix}--persistent-notification__content`}>
+          <div className={`${prefix}--persistent-notification__content`}>
             {children}
-          </p>
+          </div>
         </div>
       </div>
       {actions}
@@ -616,7 +607,6 @@ export function PersistentNotification({
           iconDescription={iconDescription}
           notificationType="persistent"
           onClick={handleCloseButtonClick}
-          aria-hidden="true"
         />
       )}
     </div>
@@ -673,7 +663,7 @@ PersistentNotification.propTypes = {
   ]).isRequired,
 
   /**
-   * Specify whether you are using the low contrast variant of the ToastNotification.
+   * Specify whether you are using the low contrast variant.
    */
   lowContrast: PropTypes.bool,
 
