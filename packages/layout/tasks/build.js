@@ -270,9 +270,6 @@ function buildModulesTokenFile(tokenScale, group) {
   ]);
 }
 
-// AST -> String
-// console.log(generate(stylesheet).code);
-
 /**
  * Format the given step for a token name. Most often, this is to pad a `0` for
  * numbers that are less than 10. For example, instead of spacing-1 we would
