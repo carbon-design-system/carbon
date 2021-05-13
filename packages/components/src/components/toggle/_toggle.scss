@@ -19,7 +19,7 @@
 /// @access private
 /// @group toggle
 @mixin toggle {
-  @if feature-flag-enabled('enable-2021-release') {
+  @if feature-flag-enabled('enable-v11-release') {
     .#{$prefix}--toggle__label-text {
       @include type-style('label-01');
 
