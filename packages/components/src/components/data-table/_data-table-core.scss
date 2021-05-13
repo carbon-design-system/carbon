@@ -293,18 +293,35 @@
   // Select
   //----------------------------------------------------------------------------
   .#{$prefix}--table-column-checkbox .#{$prefix}--checkbox-label {
-    padding-left: $spacing-05;
+    padding-left: 0;
   }
 
   .#{$prefix}--data-table th.#{$prefix}--table-column-checkbox {
     // Do not use `position: relative`, as its behavior is undefined for many table elements: https://www.w3.org/TR/CSS21/visuren.html#propdef-position
     position: static;
-    // 16px padding left + 8px padding right + 20px checkbox width
-    width: rem(44px);
-    padding-right: $spacing-05;
-    padding-left: $spacing-05;
+    width: rem(32px);
     background: $layer-accent;
     transition: background-color $duration--fast-01 motion(entrance, productive);
+  }
+
+  .#{$prefix}--data-table
+    .#{$prefix}--table-column-checkbox
+    .#{$prefix}--checkbox:focus
+    + .#{$prefix}--checkbox-label::before {
+    //make checkbox focus larger to match expansion btn focus
+    outline-offset: rem(6px);
+  }
+
+  .#{$prefix}--data-table--compact
+    .#{$prefix}--table-column-checkbox
+    .#{$prefix}--checkbox:focus
+    + .#{$prefix}--checkbox-label::before,
+  .#{$prefix}--data-table--xs
+    .#{$prefix}--table-column-checkbox
+    .#{$prefix}--checkbox:focus
+    + .#{$prefix}--checkbox-label::before {
+    //make checkbox match expansion button focus size
+    outline-offset: rem(2px);
   }
 
   .#{$prefix}--data-table thead th.#{$prefix}--table-column-checkbox,
@@ -316,18 +333,15 @@
 
   .#{$prefix}--data-table thead th.#{$prefix}--table-column-checkbox,
   .#{$prefix}--data-table tbody td.#{$prefix}--table-column-checkbox {
-    // 16px padding left + 20px checkbox width
-    width: rem(16px);
-    // spacing between checkbox / chevron and next cell should be 16px / 1rem
-    // adjacent cell has 16px / 1rem padding-left though, hence the removal of padding-right here
-    padding-right: $spacing-05;
-    padding-left: $spacing-05;
+    // spacing between checkbox / chevron and next cell should be 8px / 0.5rem
+    padding-right: rem(4px);
+    padding-left: 1rem;
   }
 
   .#{$prefix}--data-table thead th.#{$prefix}--table-expand,
   .#{$prefix}--data-table tbody td.#{$prefix}--table-expand {
-    width: rem(48px);
-    height: rem(48px);
+    width: rem(32px);
+    height: rem(32px);
   }
 
   // V11: Remove compact
@@ -337,6 +351,7 @@
   .#{$prefix}--data-table--xs tbody td.#{$prefix}--table-expand {
     width: rem(24px);
     height: rem(24px);
+    padding: 0 0 0 0.5rem;
   }
 
   // V11: remove short
@@ -346,12 +361,15 @@
   .#{$prefix}--data-table--sm tbody td.#{$prefix}--table-expand {
     width: rem(32px);
     height: rem(32px);
+    padding: 0;
+    padding-left: 0.5rem;
   }
 
   .#{$prefix}--data-table--md thead th.#{$prefix}--table-expand,
   .#{$prefix}--data-table--md tbody td.#{$prefix}--table-expand {
     width: rem(40px);
     height: rem(40px);
+    padding: rem(4px) 0 rem(4px) rem(8px);
   }
 
   // V11: remove tall
@@ -360,6 +378,8 @@
   .#{$prefix}--data-table--xl thead th.#{$prefix}--table-expand,
   .#{$prefix}--data-table--xl tbody td.#{$prefix}--table-expand {
     height: rem(64px);
+    padding-top: rem(10px);
+    padding-bottom: rem(22px);
   }
 
   // V11: remove tall
