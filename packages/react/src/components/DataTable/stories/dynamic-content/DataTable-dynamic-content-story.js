@@ -8,6 +8,7 @@
 import './story.scss';
 
 import React from 'react';
+import { withKnobs, select } from '@storybook/addon-knobs';
 import {
   Delete16 as Delete,
   Save16 as Save,
@@ -36,8 +37,25 @@ import DataTable, {
 } from '../../../DataTable';
 import { batchActionClick, rows, headers } from '../shared';
 
+const sizes = {
+  Compact: 'compact',
+  Short: 'short',
+  Medium: 'md',
+  Default: null,
+  Tall: 'tall',
+};
+
+const tableProps = {
+  sizeProp: () => {
+    return {
+      size: select('Row size (size)', sizes, null),
+    };
+  },
+};
+
 export default {
   title: 'Components/DataTable/Development',
+  decorators: [withKnobs],
 };
 
 export const Example = (props) => {
@@ -102,6 +120,7 @@ export const Example = (props) => {
     };
 
     render() {
+      const sizeProp = tableProps.sizeProp();
       return (
         <DataTable
           rows={this.state.rows}
@@ -157,7 +176,7 @@ export const Example = (props) => {
                   </TableToolbarMenu>
                 </TableToolbarContent>
               </TableToolbar>
-              <Table {...getTableProps()}>
+              <Table {...getTableProps()} {...sizeProp}>
                 <TableHead>
                   <TableRow>
                     <TableExpandHeader />
