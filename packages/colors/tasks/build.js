@@ -56,21 +56,6 @@ async function build() {
     return acc.concat(...values);
   }, []);
 
-  const colorVariables = colorValues.map(({ grade, swatch, value }) =>
-    t.Assignment({
-      id: t.Identifier(`${swatch}-${grade}`),
-      init: t.SassColor(value),
-      default: true,
-    })
-  );
-  const deprecatedColorVariables = colorValues.map(({ grade, swatch, value }) =>
-    t.Assignment({
-      id: t.Identifier(`ibm-color__${swatch}-${grade}`),
-      init: t.SassColor(value),
-      default: true,
-      global: true,
-    })
-  );
   const colorMapProperties = t.SassMap({
     properties: Object.keys(colors).flatMap((swatch) => {
       const value = t.SassMap({
@@ -106,64 +91,82 @@ async function build() {
       ];
     }),
   });
-  const deprecatedColorMap = t.Assignment({
-    id: t.Identifier('ibm-color-map'),
-    init: colorMapProperties,
-    default: true,
-    global: true,
-  });
-  const colorMap = t.Assignment({
-    id: t.Identifier('carbon--colors'),
-    init: colorMapProperties,
-    default: true,
+
+  const prefixes = ['ibm-color__', 'carbon--', ''];
+  const variables = prefixes.flatMap((prefix) => {
+    return colorValues.flatMap(({ swatch, grade, value }) => {
+      return t.Assignment({
+        id: t.Identifier(`${prefix}${swatch}-${grade}`),
+        init: t.SassColor(value),
+        default: true,
+      });
+    });
   });
 
-  const mixins = t.StyleSheet({
-    children: [
-      FILE_BANNER,
-      t.Comment(`/ Define color variables
+  variables.push(
+    t.Assignment({
+      id: t.Identifier('ibm-color-map'),
+      init: colorMapProperties,
+      default: true,
+    }),
+    t.Assignment({
+      id: t.Identifier('carbon--colors'),
+      init: colorMapProperties,
+      default: true,
+    }),
+    t.Newline()
+  );
+
+  const ibmColorsMixin = t.SassMixin({
+    id: t.Identifier('ibm--colors'),
+    body: t.BlockStatement([
+      ...colorValues.flatMap(({ swatch, grade, value }) => {
+        return t.Assignment({
+          id: t.Identifier(`ibm-color__${swatch}-${grade}`),
+          init: t.SassColor(value),
+          global: true,
+        });
+      }),
+      t.Assignment({
+        id: t.Identifier('ibm-color-map'),
+        init: colorMapProperties,
+        global: true,
+      }),
+    ]),
+  });
+
+  const carbonColorsMixin = t.SassMixin({
+    id: t.Identifier('carbon--colors'),
+    body: t.BlockStatement([
+      ...colorValues.flatMap(({ swatch, grade, value }) => {
+        return t.Assignment({
+          id: t.Identifier(`carbon--${swatch}-${grade}`),
+          init: t.SassColor(value),
+          global: true,
+        });
+      }),
+      t.Assignment({
+        id: t.Identifier('carbon--colors'),
+        init: colorMapProperties,
+        global: true,
+      }),
+    ]),
+  });
+
+  const mixins = t.StyleSheet([
+    FILE_BANNER,
+    ...variables,
+    t.Comment(`/ Define color variables
 / @access public
 / @group @carbon/colors
-/ @deprecated Use \`$${NAMESPACE}--colors\` going forward`),
-      t.SassMixin({
-        id: t.Identifier('ibm--colors'),
-        body: t.BlockStatement([
-          ...deprecatedColorVariables,
-          deprecatedColorMap,
-        ]),
-      }),
-
-      t.Comment(`/ Define color variables
+/ @deprecated Use \`$carbon--colors\` going forward`),
+    ibmColorsMixin,
+    t.Newline(),
+    t.Comment(`/ Define color variables
 / @access public
 / @group @carbon/colors`),
-      ...colorValues.map(({ grade, swatch, value }) =>
-        t.Assignment({
-          id: t.Identifier(`carbon--${swatch}-${grade}`),
-          init: t.SassValue(value),
-        })
-      ),
-      ...colorValues.map(({ grade, swatch, value }) =>
-        t.Assignment({
-          id: t.Identifier(`${swatch}-${grade}`),
-          init: t.SassColor(value),
-        })
-      ),
-      t.SassMixin({
-        id: t.Identifier(`${NAMESPACE}--colors`),
-        body: t.BlockStatement([
-          ...colorValues.map(({ grade, swatch, value }) =>
-            t.Assignment({
-              id: t.Identifier(`carbon--${swatch}-${grade}`),
-              init: t.SassColor(value),
-              default: true,
-            })
-          ),
-          ...colorVariables,
-          colorMap,
-        ]),
-      }),
-    ],
-  });
+    carbonColorsMixin,
+  ]);
 
   const entrypoint = t.StyleSheet([
     FILE_BANNER,
