@@ -6,6 +6,7 @@
  */
 
 import './feature-flags';
+
 export {
   Accordion,
   AccordionItem,
@@ -61,9 +62,7 @@ export {
   FormGroup,
   FormItem,
   FormLabel,
-  Grid,
   Row,
-  Column,
   InlineLoading,
   Link,
   ListItem,
@@ -199,3 +198,9 @@ export {
   unstable_Heading,
   unstable_Section,
 } from 'carbon-components-react';
+
+export {
+  // Grid
+  Grid,
+  Column,
+} from './components/Grid';

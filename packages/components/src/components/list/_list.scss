@@ -28,6 +28,11 @@
     list-style: none;
   }
 
+  .#{$prefix}--list--expressive,
+  .#{$prefix}--list--expressive .#{$prefix}--list--nested {
+    @include type-style('body-long-02');
+  }
+
   .#{$prefix}--list--ordered--native {
     list-style: decimal;
   }
