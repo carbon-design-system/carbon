@@ -61,7 +61,7 @@ $css--use-experimental-grid: false !default;
 /// @deprecated (For v10) v10 always uses `@carbon/grid`
 $css--use-experimental-grid-fallback: false !default;
 
-/// If `enable-2021-release` is set to `true`, it automatically enables the custom properties flag.
+/// If `enable-v11-release` is set to `true`, it automatically enables the custom properties flag.
 /// If so, we need a way to disable custom properties, but use the new tokens.
 /// @access public
 /// @type Bool

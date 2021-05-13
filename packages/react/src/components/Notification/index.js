@@ -23,7 +23,7 @@ import {
 import { useFeatureFlag } from '../FeatureFlags';
 
 export function NotificationActionButton(props) {
-  const enabled = useFeatureFlag('enable-2021-release');
+  const enabled = useFeatureFlag('enable-v11-release');
   if (enabled) {
     return <NotificationActionButtonNext {...props} />;
   }
@@ -31,7 +31,7 @@ export function NotificationActionButton(props) {
 }
 
 export function NotificationTextDetails(props) {
-  const enabled = useFeatureFlag('enable-2021-release');
+  const enabled = useFeatureFlag('enable-v11-release');
   if (enabled) {
     return null;
   }
@@ -39,7 +39,7 @@ export function NotificationTextDetails(props) {
 }
 
 export function NotificationButton(props) {
-  const enabled = useFeatureFlag('enable-2021-release');
+  const enabled = useFeatureFlag('enable-v11-release');
   if (enabled) {
     return <NotificationButtonNext {...props} />;
   }
@@ -47,7 +47,7 @@ export function NotificationButton(props) {
 }
 
 export function ToastNotification(props) {
-  const enabled = useFeatureFlag('enable-2021-release');
+  const enabled = useFeatureFlag('enable-v11-release');
   if (enabled) {
     return <ToastNotificationNext {...props} />;
   }
@@ -55,7 +55,7 @@ export function ToastNotification(props) {
 }
 
 export function InlineNotification(props) {
-  const enabled = useFeatureFlag('enable-2021-release');
+  const enabled = useFeatureFlag('enable-v11-release');
   if (enabled) {
     return <InlineNotificationNext {...props} />;
   }
@@ -63,7 +63,7 @@ export function InlineNotification(props) {
 }
 
 export function PersistentNotification(props) {
-  const enabled = useFeatureFlag('enable-2021-release');
+  const enabled = useFeatureFlag('enable-v11-release');
   if (enabled) {
     return <PersistentNotificationNext {...props} />;
   }

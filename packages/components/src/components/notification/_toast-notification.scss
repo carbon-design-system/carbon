@@ -143,7 +143,7 @@
     margin-right: $carbon--spacing-05;
   }
 
-  @if feature-flag-enabled('enable-2021-release') {
+  @if feature-flag-enabled('enable-v11-release') {
     .#{$prefix}--toast-notification__content {
       @include type-style('body-short-01');
 
@@ -201,7 +201,7 @@
     fill: $icon-primary;
   }
 
-  @if not feature-flag-enabled('enable-2021-release') {
+  @if not feature-flag-enabled('enable-v11-release') {
     .#{$prefix}--toast-notification__title {
       @include type-style('productive-heading-01');
 

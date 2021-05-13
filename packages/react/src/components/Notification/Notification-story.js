@@ -83,13 +83,13 @@ export default {
 };
 
 export const Toast = () => (
-  <FeatureFlags flags={{ 'enable-2021-release': true }}>
+  <FeatureFlags flags={{ 'enable-v11-release': true }}>
     <ToastNotification {...toastNotificationProps()} />
   </FeatureFlags>
 );
 
 export const Inline = () => (
-  <FeatureFlags flags={{ 'enable-2021-release': true }}>
+  <FeatureFlags flags={{ 'enable-v11-release': true }}>
     <InlineNotification
       {...inlineNotificationProps()}
       actions={
@@ -104,7 +104,7 @@ export const Inline = () => (
 );
 
 export const Persistent = () => (
-  <FeatureFlags flags={{ 'enable-2021-release': true }}>
+  <FeatureFlags flags={{ 'enable-v11-release': true }}>
     <PersistentNotification
       {...notificationProps()}
       actions={

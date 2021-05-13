@@ -28,6 +28,7 @@ const Button = React.forwardRef(function Button(
     size,
     kind,
     href,
+    isExpressive,
     isSelected,
     tabIndex,
     type,
@@ -64,34 +65,40 @@ const Button = React.forwardRef(function Button(
   };
 
   const handleFocus = (evt) => {
-    closeTooltips(evt);
-    setIsHovered(!isHovered);
-    setIsFocused(true);
-    setAllowTooltipVisibility(true);
+    if (hasIconOnly) {
+      closeTooltips(evt);
+      setIsHovered(!isHovered);
+      setIsFocused(true);
+      setAllowTooltipVisibility(true);
+    }
   };
 
   const handleBlur = () => {
-    setIsHovered(false);
-    setIsFocused(false);
-    setAllowTooltipVisibility(false);
+    if (hasIconOnly) {
+      setIsHovered(false);
+      setIsFocused(false);
+      setAllowTooltipVisibility(false);
+    }
   };
 
   const handleMouseEnter = (evt) => {
-    setIsHovered(true);
-    tooltipTimeout.current && clearTimeout(tooltipTimeout.current);
+    if (hasIconOnly) {
+      setIsHovered(true);
+      tooltipTimeout.current && clearTimeout(tooltipTimeout.current);
 
-    if (evt.target === tooltipRef.current) {
+      if (evt.target === tooltipRef.current) {
+        setAllowTooltipVisibility(true);
+        return;
+      }
+
+      closeTooltips(evt);
+
       setAllowTooltipVisibility(true);
-      return;
     }
-
-    closeTooltips(evt);
-
-    setAllowTooltipVisibility(true);
   };
 
   const handleMouseLeave = () => {
-    if (!isFocused) {
+    if (!isFocused && hasIconOnly) {
       tooltipTimeout.current = setTimeout(() => {
         setAllowTooltipVisibility(false);
         setIsHovered(false);
@@ -118,18 +125,23 @@ const Button = React.forwardRef(function Button(
     return () => document.removeEventListener('keydown', handleEscKeyDown);
   }, []);
 
-  const enabled = useFeatureFlag('enable-2021-release');
+  const enabled = useFeatureFlag('enable-v11-release');
 
   const buttonClasses = classNames(className, {
     [`${prefix}--btn`]: true,
-    [`${prefix}--btn--sm`]: size === 'small' || size === 'sm' || small,
-    [`${prefix}--btn--md`]: size === 'field' || size === 'md',
+    [`${prefix}--btn--sm`]:
+      (size === 'small' && !isExpressive) ||
+      (size === 'sm' && !isExpressive) ||
+      (small && !isExpressive),
+    [`${prefix}--btn--md`]:
+      (size === 'field' && !isExpressive) || (size === 'md' && !isExpressive),
     // V11: change lg to xl
     [`${prefix}--btn--lg`]: enabled ? size === 'xl' : size === 'lg',
     // V11: change xl to 2xl
     [`${prefix}--btn--xl`]: enabled ? size === '2xl' : size === 'xl',
     [`${prefix}--btn--${kind}`]: kind,
     [`${prefix}--btn--disabled`]: disabled,
+    [`${prefix}--btn--expressive`]: isExpressive,
     [`${prefix}--tooltip--hidden`]: hasIconOnly && !allowTooltipVisibility,
     [`${prefix}--tooltip--visible`]: isHovered,
     [`${prefix}--btn--icon-only`]: hasIconOnly,
@@ -276,6 +288,11 @@ Button.propTypes = {
   },
 
   /**
+   * Specify whether the Button is expressive, or not
+   */
+  isExpressive: PropTypes.bool,
+
+  /**
    * Specify whether the Button is currently selected
    */
   isSelected: PropTypes.bool,
@@ -383,6 +400,7 @@ Button.defaultProps = {
   dangerDescription: 'danger',
   tooltipAlignment: 'center',
   tooltipPosition: 'top',
+  isExpressive: false,
 };
 
 export default Button;

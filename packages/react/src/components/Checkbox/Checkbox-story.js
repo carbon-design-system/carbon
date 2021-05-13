@@ -43,7 +43,7 @@ export const checkbox = () => {
 
 export const unstable_Checkbox = () => {
   return (
-    <FeatureFlags flags={{ 'enable-2021-release': true }}>
+    <FeatureFlags flags={{ 'enable-v11-release': true }}>
       <fieldset className={`${prefix}--fieldset`}>
         <legend className={`${prefix}--label`}>Checkbox heading</legend>
         <Checkbox
