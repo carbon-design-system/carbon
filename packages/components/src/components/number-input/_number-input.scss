@@ -436,6 +436,15 @@
     margin-top: 0;
   }
 
+  // No steppers
+  .#{$prefix}--number--nosteppers input[type='number'] {
+    padding-right: rem(48px);
+  }
+
+  .#{$prefix}--number--nosteppers .#{$prefix}--number__invalid {
+    right: rem(16px);
+  }
+
   // Skeleton State
   .#{$prefix}--number.#{$prefix}--skeleton {
     @include skeleton;
