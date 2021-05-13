@@ -17,6 +17,13 @@ export const caption01 = {
   letterSpacing: px(0.32),
 };
 
+export const caption02 = {
+  fontSize: rem(scale[1]),
+  fontWeight: fontWeights.regular,
+  lineHeight: 1.29,
+  letterSpacing: px(0.32),
+};
+
 export const label01 = {
   fontSize: rem(scale[0]),
   fontWeight: fontWeights.regular,
@@ -24,9 +31,22 @@ export const label01 = {
   letterSpacing: px(0.32),
 };
 
+export const label02 = {
+  fontSize: rem(scale[1]),
+  fontWeight: fontWeights.regular,
+  lineHeight: 1.29,
+  letterSpacing: px(0.32),
+};
+
 export const helperText01 = {
   fontSize: rem(scale[0]),
   lineHeight: 1.34,
+  letterSpacing: px(0.32),
+};
+
+export const helperText02 = {
+  fontSize: rem(scale[1]),
+  lineHeight: 1.29,
   letterSpacing: px(0.32),
 };
 

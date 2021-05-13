@@ -170,12 +170,25 @@
   .#{$prefix}--data-table
     td.#{$prefix}--table-expand
     + .#{$prefix}--table-column-checkbox {
-    padding-right: 0;
+    padding-right: rem(6px);
+    padding-left: rem(6px);
+  }
+
+  .#{$prefix}--data-table
+    th.#{$prefix}--table-expand
+    + .#{$prefix}--table-column-checkbox
+    + th,
+  .#{$prefix}--data-table
+    td.#{$prefix}--table-expand
+    + .#{$prefix}--table-column-checkbox
+    + td {
+    padding-left: rem(8px);
   }
 
   .#{$prefix}--data-table td.#{$prefix}--table-expand,
   .#{$prefix}--data-table th.#{$prefix}--table-expand {
-    padding: 0;
+    padding: 0.5rem;
+    padding-right: 0;
   }
 
   .#{$prefix}--data-table
@@ -198,7 +211,7 @@
     height: calc(100% + 1px);
     align-items: center;
     justify-content: center;
-    padding: 0 1rem;
+    padding: 0 0.5rem;
     vertical-align: inherit;
   }
 
@@ -216,8 +229,8 @@
   // V11: remove tall
   .#{$prefix}--data-table--tall .#{$prefix}--table-expand__button,
   .#{$prefix}--data-table--xl .#{$prefix}--table-expand__button {
-    padding-top: rem(16px);
-    padding-bottom: rem(24px);
+    width: rem(32px);
+    padding: 0;
   }
 
   // fix expanded parent separating border length

@@ -40,8 +40,9 @@ function FileUploaderButton({
   const classes = cx(`${prefix}--btn`, className, {
     [`${prefix}--btn--${buttonKind}`]: buttonKind,
     [`${prefix}--btn--disabled`]: disabled,
-    [`${prefix}--btn--field`]: size === 'field',
-    [`${prefix}--btn--sm`]: size === 'small',
+    // V11: remove field, small
+    [`${prefix}--btn--md`]: size === 'field' || size === 'md',
+    [`${prefix}--btn--sm`]: size === 'small' || size === 'sm',
   });
 
   // Adjust label text state based on changes to the labelText prop
@@ -174,10 +175,11 @@ FileUploaderButton.propTypes = {
   role: PropTypes.string,
 
   /**
-   * Specify the size of the button, from a list of available sizes.
-   * For `default` buttons, this prop can remain unspecified.
+   * Specify the size of the FileUploaderButton, from a list of available
+   * sizes. For `default` buttons, this prop can remain unspecified.
+   * V11: `default`, `field`, and `small` will be removed
    */
-  size: PropTypes.oneOf(['default', 'field', 'small']),
+  size: PropTypes.oneOf(['default', 'field', 'small', 'sm', 'md', 'lg']),
 
   /**
    * Provide a custom tabIndex value for the <FileUploaderButton>

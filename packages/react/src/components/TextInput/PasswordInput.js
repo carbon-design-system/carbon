@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
 import { settings } from 'carbon-components';
@@ -30,18 +30,22 @@ const PasswordInput = React.forwardRef(function PasswordInput(
     light,
     tooltipPosition = 'bottom',
     tooltipAlignment = 'center',
+    type = 'password',
     hidePasswordLabel = 'Hide password',
     showPasswordLabel = 'Show password',
     size,
+    onTogglePasswordVisibility,
     warn,
     warnText,
     ...other
   },
   ref
 ) {
-  const [inputType, setInputType] = useState('password');
-  const togglePasswordVisibility = () =>
+  const [inputType, setInputType] = useState(type);
+  const handleTogglePasswordVisibility = (event) => {
     setInputType(inputType === 'password' ? 'text' : 'password');
+    onTogglePasswordVisibility && onTogglePasswordVisibility(event);
+  };
   const errorId = id + '-error-msg';
   const warnId = id + '-warn-msg';
   const textInputClasses = classNames(
@@ -159,7 +163,7 @@ const PasswordInput = React.forwardRef(function PasswordInput(
         type="button"
         className={passwordVisibilityToggleClasses}
         disabled={disabled}
-        onClick={togglePasswordVisibility}>
+        onClick={handleTogglePasswordVisibility}>
         {!disabled && (
           <span className={`${prefix}--assistive-text`}>
             {passwordIsVisible ? hidePasswordLabel : showPasswordLabel}
@@ -174,6 +178,10 @@ const PasswordInput = React.forwardRef(function PasswordInput(
   ) : null;
 
   const { isFluid } = useContext(FormContext);
+
+  useEffect(() => {
+    setInputType(type);
+  }, [type]);
 
   return (
     <div className={inputWrapperClasses}>
@@ -283,6 +291,12 @@ PasswordInput.propTypes = {
   onClick: PropTypes.func,
 
   /**
+   * Callback function that is called whenever the toggle password visibility
+   * button is clicked
+   */
+  onTogglePasswordVisibility: PropTypes.func,
+
+  /**
    * Specify the placeholder attribute for the `<input>`
    */
   placeholder: PropTypes.string,
@@ -308,6 +322,11 @@ PasswordInput.propTypes = {
    * Can be either top, right, bottom, or left.
    */
   tooltipPosition: PropTypes.oneOf(['top', 'right', 'bottom', 'left']),
+
+  /**
+   * The input type, either password or text
+   */
+  type: PropTypes.oneOf(['password', 'text']),
 
   /**
    * Provide the current value of the `<input>`
