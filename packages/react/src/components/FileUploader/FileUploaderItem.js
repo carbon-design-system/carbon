@@ -30,8 +30,8 @@ function FileUploaderItem({
   const { current: id } = useRef(uuid || uid());
   const classes = cx(`${prefix}--file__selected-file`, {
     [`${prefix}--file__selected-file--invalid`]: invalid,
-    [`${prefix}--file__selected-file--field`]: size === 'field',
-    [`${prefix}--file__selected-file--sm`]: size === 'small',
+    [`${prefix}--file__selected-file--md`]: size === 'field' || size === 'md',
+    [`${prefix}--file__selected-file--sm`]: size === 'small' || size === 'sm',
   });
   return (
     <span className={classes} {...other}>
@@ -107,9 +107,10 @@ FileUploaderItem.propTypes = {
 
   /**
    * Specify the size of the uploaded items, from a list of available
-   * sizes. For `default` size, this prop can remain unspecified.
+   * sizes. For `default` buttons, this prop can remain unspecified.
+   * V11: `default`, `field`, and `small` will be removed
    */
-  size: PropTypes.oneOf(['default', 'field', 'small']),
+  size: PropTypes.oneOf(['default', 'field', 'small', 'sm', 'md', 'lg']),
 
   /**
    * Status of the file upload
