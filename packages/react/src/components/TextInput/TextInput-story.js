@@ -34,7 +34,7 @@ const ControlledPasswordInputApp = React.forwardRef(
     };
     return (
       <>
-        <TextInput.ControlledPasswordInput
+        <TextInput.PasswordInput
           type={type}
           togglePasswordVisibility={togglePasswordVisibility}
           ref={ref}
@@ -115,7 +115,7 @@ export default {
     },
     subcomponents: {
       TextInputSkeleton,
-      'TextInput.ControlledPasswordInput': TextInput.ControlledPasswordInput,
+      'TextInput.PasswordInput': TextInput.PasswordInput,
     },
   },
 };

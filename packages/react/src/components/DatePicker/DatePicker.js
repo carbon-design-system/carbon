@@ -154,6 +154,16 @@ export default class DatePicker extends Component {
     datePickerType: PropTypes.oneOf(['simple', 'single', 'range']),
 
     /**
+     * The flatpickr `disable` option that allows a user to disable certain dates.
+     */
+    disable: PropTypes.array,
+
+    /**
+     * The flatpickr `enable` option that allows a user to enable certain dates.
+     */
+    enable: PropTypes.array,
+
+    /**
      * `true` to use the light version.
      */
     light: PropTypes.bool,
@@ -289,11 +299,25 @@ export default class DatePicker extends Component {
       maxDate,
       value,
       onClose,
+      disable,
+      enable,
     } = this.props;
     if (datePickerType === 'single' || datePickerType === 'range') {
       const onHook = (electedDates, dateStr, instance) => {
         this.updateClassNames(instance);
       };
+
+      // Logic to determine if `enable` or `disable` will be passed down. If neither
+      // is provided, we return the default empty disabled array, allowing all dates.
+      let enableOrDisable = enable ? 'enable' : 'disable';
+      let enableOrDisableArr;
+      if (!enable && !disable) {
+        enableOrDisableArr = [];
+      } else if (enable) {
+        enableOrDisableArr = enable;
+      } else {
+        enableOrDisableArr = disable;
+      }
 
       let localeData;
       if (typeof locale === 'object') {
@@ -312,6 +336,7 @@ export default class DatePicker extends Component {
           allowInput: allowInput ?? true,
           dateFormat: dateFormat,
           locale: localeData,
+          [enableOrDisable]: enableOrDisableArr,
           minDate: minDate,
           maxDate: maxDate,
           plugins: [
@@ -363,8 +388,10 @@ export default class DatePicker extends Component {
     minDate: prevMinDate,
     maxDate: prevMaxDate,
     value: prevValue,
+    disable: prevDisable,
+    enable: prevEnable,
   }) {
-    const { dateFormat, minDate, maxDate, value } = this.props;
+    const { dateFormat, minDate, maxDate, value, disable, enable } = this.props;
     if (this.cal) {
       if (prevDateFormat !== dateFormat) {
         this.cal.set({ dateFormat });
@@ -374,6 +401,12 @@ export default class DatePicker extends Component {
       }
       if (prevMaxDate !== maxDate) {
         this.cal.set('maxDate', maxDate);
+      }
+      if (disable !== prevDisable) {
+        this.cal.set('disable', disable);
+      }
+      if (enable !== prevEnable) {
+        this.cal.set('enable', enable);
       }
     }
 
