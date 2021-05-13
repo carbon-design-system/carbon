@@ -43,12 +43,12 @@ export const unstable_tokens = [
   'container03',
   'container04',
   'container05',
-  'sizesExtraSmall',
+  'sizeXSmall',
   'sizeSmall',
   'sizeMedium',
   'sizeLarge',
-  'sizeExtraLarge',
-  'sizeDoubleExtraLarge',
+  'sizeXLarge',
+  'size2XLarge',
 
   // Icon sizes
   'iconSize01',
