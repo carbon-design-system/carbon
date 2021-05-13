@@ -13,6 +13,8 @@ describe('SideNavDetails', () => {
   let mockProps;
 
   beforeEach(() => {
+    jest.mock('../../internal/warning');
+
     mockProps = {
       title: 'foo',
     };

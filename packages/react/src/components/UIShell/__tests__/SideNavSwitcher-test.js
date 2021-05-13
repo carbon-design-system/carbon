@@ -13,6 +13,8 @@ describe('SideNavSwitcher', () => {
   let mockProps;
 
   beforeEach(() => {
+    jest.mock('../../internal/warning');
+
     mockProps = {
       className: 'custom-classname',
       labelText: 'label',

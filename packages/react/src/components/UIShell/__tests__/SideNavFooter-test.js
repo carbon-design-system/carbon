@@ -13,6 +13,8 @@ describe('SideNavFooter', () => {
   let mockProps;
 
   beforeEach(() => {
+    jest.mock('../../internal/warning');
+
     mockProps = {
       assistiveText: 'open',
       expanded: false,

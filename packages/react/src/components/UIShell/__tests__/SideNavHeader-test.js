@@ -13,6 +13,8 @@ describe('SideNavHeader', () => {
   let mockProps;
 
   beforeEach(() => {
+    jest.mock('../../internal/warning');
+
     mockProps = {
       renderIcon: () => <div>mock icon</div>,
       children: <span>foo</span>,
