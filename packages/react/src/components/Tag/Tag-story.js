@@ -102,19 +102,6 @@ _Default.parameters = {
   },
 };
 
-export const VerticalAlignment = () => (
-  <>
-    <Tag type="gray">Tag 1</Tag>
-    <Tag type="gray" renderIcon={Compass16}>
-      Tag 2
-    </Tag>
-    <Tag type="gray" filter>
-      Tag 3
-    </Tag>
-    <Tag type="gray">Tag 3</Tag>
-  </>
-);
-
 export const Filter = () => (
   <Tag className="some-class" {...props.filter()} filter>
     {text('Content (children)', 'This is a tag')}

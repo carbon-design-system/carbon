@@ -150,6 +150,7 @@ Map {
     "defaultProps": Object {
       "dangerDescription": "danger",
       "disabled": false,
+      "isExpressive": false,
       "kind": "primary",
       "size": "default",
       "tabIndex": 0,
@@ -194,6 +195,9 @@ Map {
         "type": "string",
       },
       "iconDescription": [Function],
+      "isExpressive": Object {
+        "type": "bool",
+      },
       "isSelected": Object {
         "type": "bool",
       },
@@ -2629,6 +2633,9 @@ Map {
             "default",
             "field",
             "small",
+            "sm",
+            "md",
+            "lg",
           ],
         ],
         "type": "oneOf",
@@ -2727,6 +2734,9 @@ Map {
             "default",
             "field",
             "small",
+            "sm",
+            "md",
+            "lg",
           ],
         ],
         "type": "oneOf",
@@ -2784,6 +2794,9 @@ Map {
             "default",
             "field",
             "small",
+            "sm",
+            "md",
+            "lg",
           ],
         ],
         "type": "oneOf",
@@ -2823,6 +2836,9 @@ Map {
             "default",
             "field",
             "small",
+            "sm",
+            "md",
+            "lg",
           ],
         ],
         "type": "oneOf",
@@ -4250,6 +4266,7 @@ Map {
   },
   "OrderedList" => Object {
     "defaultProps": Object {
+      "isExpressive": false,
       "native": false,
       "nested": false,
     },
@@ -4259,6 +4276,9 @@ Map {
       },
       "className": Object {
         "type": "string",
+      },
+      "isExpressive": Object {
+        "type": "bool",
       },
       "native": Object {
         "type": "bool",
@@ -4666,7 +4686,7 @@ Map {
           "enable-css-custom-properties" => false,
           "enable-use-controlled-state-with-value" => false,
           "enable-css-grid" => false,
-          "enable-2021-release" => false,
+          "enable-v11-release" => false,
         },
       },
       "_currentValue2": FeatureFlagScope {
@@ -4674,7 +4694,7 @@ Map {
           "enable-css-custom-properties" => false,
           "enable-use-controlled-state-with-value" => false,
           "enable-css-grid" => false,
-          "enable-2021-release" => false,
+          "enable-v11-release" => false,
         },
       },
       "_threadCount": 0,
@@ -6476,6 +6496,7 @@ Map {
   },
   "UnorderedList" => Object {
     "defaultProps": Object {
+      "isExpressive": false,
       "nested": false,
     },
     "propTypes": Object {
@@ -6484,6 +6505,9 @@ Map {
       },
       "className": Object {
         "type": "string",
+      },
+      "isExpressive": Object {
+        "type": "bool",
       },
       "nested": Object {
         "type": "bool",

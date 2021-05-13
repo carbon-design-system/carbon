@@ -104,7 +104,7 @@ function getRollupConfig(input) {
         transform(_code, id) {
           // Make sure to mark feature-flags.js as having side-effects to make
           // sure it gets included in the final bundle
-          if (id === path.join(__dirname, 'src', 'feature-flags.js')) {
+          if (id === path.join(__dirname, '..', 'src', 'feature-flags.js')) {
             return {
               moduleSideEffects: true,
             };

@@ -376,16 +376,16 @@
     background-color: $field-02;
   }
 
-  .#{$prefix}--number--light .#{$prefix}--number__control-btn:focus::before,
-  .#{$prefix}--number--light .#{$prefix}--number__control-btn:focus::after {
-    background-color: transparent;
-  }
-
   // V11: Possibly deprecate
   .#{$prefix}--number--light .#{$prefix}--number__control-btn:hover,
   .#{$prefix}--number--light .#{$prefix}--number__control-btn:hover::before,
   .#{$prefix}--number--light .#{$prefix}--number__control-btn:hover::after {
     background-color: $hover-light-ui;
+  }
+
+  .#{$prefix}--number--light .#{$prefix}--number__control-btn:focus::before,
+  .#{$prefix}--number--light .#{$prefix}--number__control-btn:focus::after {
+    background-color: transparent;
   }
 
   // Size Variant styles
@@ -434,6 +434,15 @@
   //No label positioning adjustment
   .#{$prefix}--number--nolabel .bx--label + .bx--form__helper-text {
     margin-top: 0;
+  }
+
+  // No steppers
+  .#{$prefix}--number--nosteppers input[type='number'] {
+    padding-right: rem(48px);
+  }
+
+  .#{$prefix}--number--nosteppers .#{$prefix}--number__invalid {
+    right: rem(16px);
   }
 
   // Skeleton State

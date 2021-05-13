@@ -84,7 +84,7 @@ export const SizeStory = () => (
     </div>
     <br />
     <br />
-    <FeatureFlags flags={{ 'enable-2021-release': true }}>
+    <FeatureFlags flags={{ 'enable-v11-release': true }}>
       <h3>Feature Flags: ENABLED</h3>
       <br />
       <br />
