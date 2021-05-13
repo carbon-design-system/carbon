@@ -32,6 +32,7 @@ const props = () => ({
   id: 'tj-input',
   label: text('Label (label)', 'NumberInput label'),
   hideLabel: boolean('No label (hideLabel)', false),
+  hideSteppers: boolean('No steppers (hideSteppers)', false),
   min: number('Minimum value (min)', 0),
   max: number('Maximum value (max)', 100),
   value: number('Value (value)', 50),

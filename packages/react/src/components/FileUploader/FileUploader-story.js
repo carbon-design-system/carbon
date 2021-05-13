@@ -34,11 +34,16 @@ const buttonKinds = {
   'Danger Primary (danger--primary)': 'danger--primary',
   'Tertiary (tertiary)': 'tertiary',
 };
+
 const sizes = {
-  Default: 'default',
-  Field: 'field',
-  Small: 'small',
+  'Compat check - Field': 'field',
+  'Compat check - Small': 'small',
+  'Compat check - default': 'default',
+  'Small  (sm)': 'sm',
+  'Medium (md)': 'md',
+  'Large (lg) - Default': 'lg',
 };
+
 const filenameStatuses = {
   'Edit (edit)': 'edit',
   'Complete (complete)': 'complete',

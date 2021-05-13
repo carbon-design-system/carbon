@@ -151,8 +151,6 @@
       color: $text-primary;
 
       &:hover {
-        cursor: pointer;
-
         + .#{$prefix}--tooltip--definition__top,
         + .#{$prefix}--tooltip--definition__bottom {
           display: block;
@@ -182,7 +180,6 @@
     margin-top: $carbon--spacing-04;
     background: $background-inverse;
     border-radius: rem(2px);
-    cursor: pointer;
     pointer-events: none;
 
     p {
@@ -343,7 +340,6 @@
 
     display: inline-flex;
     align-items: center;
-    cursor: pointer;
     font-size: 1rem;
 
     &:focus {
@@ -351,6 +347,11 @@
 
       fill: $button-primary-hover;
     }
+  }
+
+  // Disabled styles
+  .#{$prefix}--tooltip__trigger:not(.#{$prefix}--btn--icon-only)[disabled] svg {
+    fill: $icon-disabled;
   }
 
   .#{$prefix}--tooltip__label .#{$prefix}--tooltip__trigger {

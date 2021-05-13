@@ -15,7 +15,7 @@
 // to make sure that they're in sync if one has diverged from the other.
 @include carbon--theme();
 
-@if not feature-flag-enabled('enable-2021-release') {
+@if not feature-flag-enabled('enable-v11-release') {
   $background: $ui-background;
   $layer: $ui-01;
   $layer-accent: $ui-03;

@@ -28,7 +28,7 @@ import {
   // Support
   blue50,
   green40,
-  green50,
+  green60,
   yellow,
   red50,
   red60,
@@ -78,7 +78,7 @@ export const inverse01 = white;
 export const inverse02 = gray80;
 
 export const support01 = red60;
-export const support02 = green50;
+export const support02 = green60;
 export const support03 = yellow;
 export const support04 = blue70;
 
@@ -233,8 +233,11 @@ export const skeletonElement = skeleton02;
 export {
   // Type
   caption01,
+  caption02,
   label01,
+  label02,
   helperText01,
+  helperText02,
   bodyShort01,
   bodyLong01,
   bodyShort02,
