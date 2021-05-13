@@ -5677,6 +5677,9 @@ Map {
         "onClick": Object {
           "type": "func",
         },
+        "onTogglePasswordVisibility": Object {
+          "type": "func",
+        },
         "placeholder": Object {
           "type": "string",
         },
@@ -5703,6 +5706,15 @@ Map {
               "right",
               "bottom",
               "left",
+            ],
+          ],
+          "type": "oneOf",
+        },
+        "type": Object {
+          "args": Array [
+            Array [
+              "password",
+              "text",
             ],
           ],
           "type": "oneOf",
