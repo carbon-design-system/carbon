@@ -23,7 +23,7 @@
   .#{$prefix}--list--ordered,
   .#{$prefix}--list--ordered--native {
     @include reset;
-    @include type-style('body-short-01');
+    @include type-style('body-long-01');
 
     list-style: none;
   }
