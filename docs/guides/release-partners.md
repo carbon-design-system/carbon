@@ -62,9 +62,9 @@ Or, with [Yarn](https://yarnpkg.com/):
 yarn add carbon-components@^10.35.0 carbon-components-react@^7.35.0
 ```
 
-Next, follow our feature flags guide to enable the appropriate feature flags in
-Sass and React. Here's a quick breakdown of the flags that are available and
-what features they correspond with:
+Next, follow our [feature flags guide](../migration/v11.x.md#feature-flags) to
+enable the appropriate feature flags in Sass and React. Here's a quick breakdown
+of the flags that are available and what features they correspond with:
 
 | Feature flag                   | Description                                                                                   |
 | ------------------------------ | --------------------------------------------------------------------------------------------- |
@@ -168,7 +168,7 @@ names when the `enable-css-grid` is enabled in JavaScript. Their prop usage
 should be identical to the current implementation.
 
 For more information on how to use the `Grid` and `Column` components in React,
-check our documentation here (TODO link).
+check our documentation which will be available next week.
 
 ##### Icon updates
 
