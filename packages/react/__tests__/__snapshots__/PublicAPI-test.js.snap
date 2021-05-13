@@ -2159,6 +2159,12 @@ Map {
         ],
         "type": "oneOf",
       },
+      "disable": Object {
+        "type": "array",
+      },
+      "enable": Object {
+        "type": "array",
+      },
       "light": Object {
         "type": "bool",
       },
@@ -5677,6 +5683,9 @@ Map {
         "onClick": Object {
           "type": "func",
         },
+        "onTogglePasswordVisibility": Object {
+          "type": "func",
+        },
         "placeholder": Object {
           "type": "string",
         },
@@ -5703,6 +5712,15 @@ Map {
               "right",
               "bottom",
               "left",
+            ],
+          ],
+          "type": "oneOf",
+        },
+        "type": Object {
+          "args": Array [
+            Array [
+              "password",
+              "text",
             ],
           ],
           "type": "oneOf",
@@ -6402,6 +6420,9 @@ Map {
       },
       "id": Object {
         "type": "string",
+      },
+      "onBlur": Object {
+        "type": "func",
       },
       "onFocus": Object {
         "type": "func",
