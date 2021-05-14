@@ -65,9 +65,6 @@
     "test:a11y": "gulp test:a11y",
     "semantic-release": "semantic-release"
   },
-  "resolutions": {
-    "freshy": ">= 1.0.3"
-  },
   "dependencies": {
     "@carbon/telemetry": "0.0.0-alpha.6",
     "flatpickr": "4.6.1",
