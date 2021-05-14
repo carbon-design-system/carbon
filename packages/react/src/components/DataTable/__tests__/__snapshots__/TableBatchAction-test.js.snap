@@ -16,6 +16,7 @@ exports[`DataTable.TableBatchAction should render 1`] = `
     dangerDescription="danger"
     disabled={false}
     iconDescription="test"
+    isExpressive={false}
     kind="primary"
     renderIcon={
       Object {

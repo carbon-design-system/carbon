@@ -9,6 +9,7 @@ import React from 'react';
 
 import { withKnobs, select, text } from '@storybook/addon-knobs';
 import TooltipDefinition from '../TooltipDefinition';
+import Button from '../Button';
 import mdx from './TooltipDefinition.mdx';
 
 const directions = {
@@ -54,6 +55,9 @@ export default {
 export const Default = () => (
   <div style={{ marginTop: '2rem' }}>
     <TooltipDefinition {...props()}>Definition Tooltip</TooltipDefinition>
+    <Button hasIconOnly iconDescription="Filter">
+      Test
+    </Button>
   </div>
 );
 
