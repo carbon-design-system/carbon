@@ -9620,7 +9620,7 @@ __metadata:
     "@testing-library/user-event": ^12.2.0
     all-contributors-cli: ^6.19.0
     cross-env: ^5.2.0
-    cross-spawn: ^6.0.5
+    cross-spawn: ^7.0.3
     doctoc: ^1.4.0
     eslint: ^6.8.0
     fs-extra: ^8.1.0
@@ -11290,18 +11290,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"cross-spawn@npm:^7.0.0":
-  version: 7.0.3
-  resolution: "cross-spawn@npm:7.0.3"
-  dependencies:
-    path-key: ^3.1.0
-    shebang-command: ^2.0.0
-    which: ^2.0.1
-  checksum: 671cc7c7288c3a8406f3c69a3ae2fc85555c04169e9d611def9a675635472614f1c0ed0ef80955d5b6d4e724f6ced67f0ad1bb006c2ea643488fcfef994d7f52
-  languageName: node
-  linkType: hard
-
-"cross-spawn@npm:^7.0.3":
+"cross-spawn@npm:^7.0.0, cross-spawn@npm:^7.0.3":
   version: 7.0.3
   resolution: "cross-spawn@npm:7.0.3"
   dependencies:
