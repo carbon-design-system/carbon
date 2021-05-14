@@ -18,7 +18,6 @@ import {
   ToastNotification,
   InlineNotification,
   NotificationActionButton,
-  PersistentNotification,
 } from '../Notification';
 import mdx from './Notification.mdx';
 import { FeatureFlags } from '../FeatureFlags';
@@ -98,28 +97,6 @@ export const Inline = () => (
           notificationType="inline">
           {text('Action (NotificationActionButton > children)', 'Action')}
         </NotificationActionButton>
-      }
-    />
-  </FeatureFlags>
-);
-
-export const Persistent = () => (
-  <FeatureFlags flags={{ 'enable-v11-release': true }}>
-    <PersistentNotification
-      {...notificationProps()}
-      actions={
-        <>
-          <NotificationActionButton
-            onClick={action('NotificationActionButton onClick')}
-            notificationType="persistent">
-            {text('Action (NotificationActionButton > children)', 'Action 1')}
-          </NotificationActionButton>
-          <NotificationActionButton
-            onClick={action('NotificationActionButton onClick')}
-            notificationType="persistent">
-            {text('Action (NotificationActionButton > children)', 'Action 2')}
-          </NotificationActionButton>
-        </>
       }
     />
   </FeatureFlags>

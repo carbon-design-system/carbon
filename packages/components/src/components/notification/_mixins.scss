@@ -37,8 +37,7 @@
   background: $background-color;
 
   .#{$prefix}--inline-notification__icon,
-  .#{$prefix}--toast-notification__icon,
-  .#{$prefix}--persistent-notification__icon {
+  .#{$prefix}--toast-notification__icon {
     fill: $color;
   }
 }

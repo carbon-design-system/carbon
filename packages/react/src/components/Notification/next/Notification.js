@@ -82,7 +82,7 @@ NotificationActionButton.propTypes = {
   /**
    * Specify the notification type
    */
-  notificationType: PropTypes.oneOf(['inline', 'persistent']),
+  notificationType: PropTypes.oneOf(['inline']),
 
   /**
    * Optionally specify a click handler for the notification action button.
@@ -147,7 +147,7 @@ NotificationButton.propTypes = {
   /**
    * Specify the notification type
    */
-  notificationType: PropTypes.oneOf(['toast', 'inline', 'persistent']),
+  notificationType: PropTypes.oneOf(['toast', 'inline']),
 
   /**
    * Optional prop to allow overriding the icon rendering.
@@ -201,8 +201,7 @@ NotificationIcon.propTypes = {
     'info',
     'info-square',
   ]).isRequired,
-  notificationType: PropTypes.oneOf(['inline', 'toast', 'persistent'])
-    .isRequired,
+  notificationType: PropTypes.oneOf(['inline', 'toast']).isRequired,
 };
 
 export function ToastNotification({
@@ -529,163 +528,6 @@ InlineNotification.defaultProps = {
   kind: 'error',
   content: 'provide content',
   role: 'status',
-  iconDescription: 'closes notification',
-  onCloseButtonClick: () => {},
-  hideCloseButton: false,
-  hasFocus: true,
-  closeOnEscape: true,
-};
-
-export function PersistentNotification({
-  actions,
-  onClose,
-  onCloseButtonClick,
-  iconDescription,
-  statusIconDescription,
-  className,
-  children,
-  kind,
-  lowContrast,
-  hideCloseButton,
-  hasFocus,
-  closeOnEscape,
-  ...rest
-}) {
-  const [isOpen, setIsOpen] = useState(true);
-  const containerClassName = cx(className, {
-    [`${prefix}--persistent-notification`]: true,
-    [`${prefix}--persistent-notification--low-contrast`]: lowContrast,
-    [`${prefix}--persistent-notification--${kind}`]: kind,
-  });
-
-  const ref = useRef(null);
-  useIsomorphicEffect(() => {
-    if (ref.current && hasFocus) {
-      ref.current.focus();
-    }
-  });
-
-  const handleClose = (evt) => {
-    if (!onClose || onClose(evt) !== false) {
-      setIsOpen(false);
-    }
-  };
-  useEscapeToClose(handleCloseButtonClick, closeOnEscape);
-
-  function handleCloseButtonClick(event) {
-    onCloseButtonClick(event);
-    handleClose(event);
-  }
-
-  const savedOnClose = useRef(onClose);
-
-  useEffect(() => {
-    savedOnClose.current = onClose;
-  });
-
-  if (!isOpen) {
-    return null;
-  }
-
-  return (
-    <div {...rest} ref={ref} role="alertdialog" className={containerClassName}>
-      <div className={`${prefix}--persistent-notification__details`}>
-        <NotificationIcon
-          notificationType="persistent"
-          kind={kind}
-          iconDescription={statusIconDescription || `${kind} icon`}
-        />
-        <div className={`${prefix}--persistent-notification__text-wrapper`}>
-          <div className={`${prefix}--persistent-notification__content`}>
-            {children}
-          </div>
-        </div>
-      </div>
-      {actions}
-      {!hideCloseButton && (
-        <NotificationButton
-          iconDescription={iconDescription}
-          notificationType="persistent"
-          onClick={handleCloseButtonClick}
-        />
-      )}
-    </div>
-  );
-}
-
-PersistentNotification.propTypes = {
-  /**
-   * Pass in the action nodes that will be rendered within the notification.
-   * If this prop is configured, the aria role will be changed to "alertdialog"
-   */
-  actions: PropTypes.node.isRequired,
-
-  /**
-   * Specify the content
-   */
-  children: PropTypes.node.isRequired,
-
-  /**
-   * Specify an optional className to be applied to the notification box
-   */
-  className: PropTypes.string,
-
-  /**
-   * Specify if pressing the escape key should close notifications
-   */
-  closeOnEscape: PropTypes.bool,
-
-  /**
-   * Specify if focus should be moved to the component when the notification contains actions
-   */
-  hasFocus: PropTypes.bool,
-
-  /**
-   * Specify the close button should be disabled, or not
-   */
-  hideCloseButton: PropTypes.bool,
-
-  /**
-   * Provide a description for "close" icon that can be read by screen readers
-   */
-  iconDescription: PropTypes.string,
-
-  /**
-   * Specify what state the notification represents
-   */
-  kind: PropTypes.oneOf([
-    'error',
-    'info',
-    'info-square',
-    'success',
-    'warning',
-    'warning-alt',
-  ]).isRequired,
-
-  /**
-   * Specify whether you are using the low contrast variant.
-   */
-  lowContrast: PropTypes.bool,
-
-  /**
-   * Provide a function that is called when menu is closed
-   */
-  onClose: PropTypes.func,
-
-  /**
-   * Provide a function that is called when the close button is clicked
-   */
-  onCloseButtonClick: PropTypes.func,
-
-  /**
-   * Provide a description for "status" icon that can be read by screen readers
-   */
-  statusIconDescription: PropTypes.string,
-};
-
-PersistentNotification.defaultProps = {
-  kind: 'error',
-  children: 'provide content',
   iconDescription: 'closes notification',
   onCloseButtonClick: () => {},
   hideCloseButton: false,
