@@ -38,8 +38,9 @@ TableToolbar.propTypes = {
 
   /**
    * `normal` Change the row height of table
+   * V11: remove small, normal
    */
-  size: PropTypes.oneOf(['small', 'normal']),
+  size: PropTypes.oneOf(['small', 'sm', 'normal', 'lg']),
 };
 
 TableToolbar.defaultProps = {

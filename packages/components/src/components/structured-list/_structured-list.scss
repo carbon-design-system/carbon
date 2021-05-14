@@ -17,7 +17,7 @@
   .#{$prefix}--structured-list--selection .#{$prefix}--structured-list-th {
     @include padding--data-structured-list;
   }
-  @if feature-flag-enabled('enable-2021-release') {
+  @if feature-flag-enabled('enable-v11-release') {
     .#{$prefix}--structured-list-row--focused-within {
       @include focus-outline('outline');
     }
@@ -95,7 +95,7 @@
     cursor: inherit;
   }
 
-  @if not feature-flag-enabled('enable-2021-release') {
+  @if not feature-flag-enabled('enable-v11-release') {
     .#{$prefix}--structured-list-row:focus:not(.#{$prefix}--structured-list-row--header-row) {
       @include focus-outline('outline');
     }
@@ -151,7 +151,7 @@
     display: table-cell;
     max-width: 36rem;
     color: $text-secondary;
-    @if feature-flag-enabled('enable-2021-release') {
+    @if feature-flag-enabled('enable-v11-release') {
       border-top: 1px solid $border-subtle;
     }
 
@@ -180,13 +180,6 @@
     + .#{$prefix}--structured-list-td
     .#{$prefix}--structured-list-svg {
     fill: $icon-primary;
-
-    // Windows, Firefox HCM Fix
-    @media screen and (-ms-high-contrast: active),
-      screen and (prefers-contrast) {
-      // `ButtonText` is a CSS2 system color to help improve colors in HCM
-      fill: ButtonText;
-    }
   }
 
   // Skeleton State
@@ -222,6 +215,13 @@
     span {
       display: none;
     }
+  }
+
+  // Windows HCM fix
+  .#{$prefix}--structured-list-input:checked
+    + .#{$prefix}--structured-list-td
+    .#{$prefix}--structured-list-svg {
+    @include high-contrast-mode('icon-fill');
   }
 }
 
