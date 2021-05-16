@@ -375,6 +375,10 @@
     z-index: z('modal');
   }
 
+  .#{$prefix}--body--with-modal-open .#{$prefix}--overflow-menu-options {
+    z-index: z('modal');
+  }
+
   // Windows HCM fix
   /* stylelint-disable */
   .#{$prefix}--modal-close__icon {
