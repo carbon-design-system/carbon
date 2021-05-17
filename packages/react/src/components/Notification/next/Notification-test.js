@@ -306,9 +306,7 @@ describe('InlineNotification', () => {
     const { container } = render(
       <InlineNotification
         actions={
-          <NotificationActionButton notificationType="inline">
-            Button text
-          </NotificationActionButton>
+          <NotificationActionButton>Button text</NotificationActionButton>
         }
       />
     );

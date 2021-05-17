@@ -93,8 +93,7 @@ export const Inline = () => (
       {...inlineNotificationProps()}
       actions={
         <NotificationActionButton
-          onClick={action('NotificationActionButton onClick')}
-          notificationType="inline">
+          onClick={action('NotificationActionButton onClick')}>
           {text('Action (NotificationActionButton > children)', 'Action')}
         </NotificationActionButton>
       }
