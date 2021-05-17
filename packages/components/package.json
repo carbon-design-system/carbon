@@ -66,8 +66,7 @@
     "semantic-release": "semantic-release"
   },
   "resolutions": {
-    "freshy": ">= 1.0.3",
-    "node-sass": "~6.0.0"
+    "freshy": ">= 1.0.3"
   },
   "dependencies": {
     "@carbon/telemetry": "0.0.0-alpha.6",
