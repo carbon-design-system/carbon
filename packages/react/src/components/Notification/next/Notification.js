@@ -48,12 +48,11 @@ export function NotificationActionButton({
   children,
   className: customClassName,
   onClick,
-  notificationType,
   ...rest
 }) {
   const className = cx(
     customClassName,
-    `${prefix}--${notificationType}-notification__action-button`
+    `${prefix}--inline-notification__action-button`
   );
 
   return (
@@ -78,11 +77,6 @@ NotificationActionButton.propTypes = {
    * Specify an optional className to be applied to the notification action button
    */
   className: PropTypes.string,
-
-  /**
-   * Specify the notification type
-   */
-  notificationType: PropTypes.oneOf(['inline']),
 
   /**
    * Optionally specify a click handler for the notification action button.
