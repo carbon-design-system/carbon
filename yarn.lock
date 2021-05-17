@@ -9379,6 +9379,10 @@ __metadata:
     "@rollup/plugin-node-resolve": ^11.2.1
     "@rollup/plugin-replace": ^2.4.2
     "@storybook/addon-actions": ^5.3.21
+    "@storybook/addon-docs": ^5.3.21
+    "@storybook/addon-knobs": ^5.3.21
+    "@storybook/addon-links": ^5.3.21
+    "@storybook/addon-notes": ^5.3.21
     "@storybook/addon-storysource": ^5.3.21
     "@storybook/addons": ^5.3.21
     "@storybook/react": ^5.3.21
@@ -9399,6 +9403,7 @@ __metadata:
     cross-env: ^5.2.0
     css-loader: ^3.4.2
     downshift: 5.2.1
+    fast-sass-loader: ^1.5.0
     flatpickr: 4.6.9
     gzip-size: ^6.0.0
     invariant: ^2.2.3
@@ -9426,7 +9431,9 @@ __metadata:
     rollup-plugin-strip-banner: ^2.0.0
     rollup-plugin-terser: ^7.0.2
     rtlcss: ^2.4.0
-    storybook-preset-carbon: ^0.6.0
+    sass: ^1.32.2
+    sass-loader: ^10.1.1
+    storybook-readme: ^5.0.8
     string-replace-loader: ^2.1.0
     terser-webpack-plugin: ^2.3.2
     use-resize-observer: ^6.0.0
@@ -29849,37 +29856,6 @@ __metadata:
   checksum: 607ad9cedd8a80dbc120d0af0cf9081a243adb0ce3276dc21a6dc50cc7c44aa17e8eb715c967e27686622d18874a9f3b8d7840bb181a2de6d784956bf715fa55
   languageName: node
   linkType: hard
-
-"storybook-preset-carbon@^0.6.0, storybook-preset-carbon@workspace:config/storybook-preset-carbon":
-  version: 0.0.0-use.local
-  resolution: "storybook-preset-carbon@workspace:config/storybook-preset-carbon"
-  dependencies:
-    "@babel/cli": ^7.13.16
-    "@babel/core": ^7.14.0
-    "@storybook/addon-actions": ^5.3.21
-    "@storybook/addon-docs": ^5.3.21
-    "@storybook/addon-knobs": ^5.3.21
-    "@storybook/addon-links": ^5.3.21
-    "@storybook/addon-notes": ^5.3.21
-    "@storybook/addon-storysource": ^5.3.21
-    "@storybook/addons": ^5.3.21
-    "@storybook/react": ^5.3.21
-    "@storybook/source-loader": ^5.3.21
-    babel-loader: ^8.2.2
-    fast-sass-loader: ^1.5.0
-    react: ^16.8.6
-    react-dom: ^16.8.6
-    react-is: ^16.8.6
-    sass: ^1.32.2
-    sass-loader: ^10.1.1
-    storybook-readme: ^5.0.8
-    webpack: ^4.41.5
-  peerDependencies:
-    "@storybook/react": ^5.3.19
-    react: ^16.8.6 || ^17.0.1
-    react-dom: ^16.8.6 || ^17.0.1
-  languageName: unknown
-  linkType: soft
 
 "storybook-readme@npm:^5.0.8":
   version: 5.0.8
