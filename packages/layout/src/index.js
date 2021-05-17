@@ -170,11 +170,11 @@ export const sizeLarge = rem(48);
 export const sizeXLarge = rem(64);
 export const size2XLarge = rem(80);
 export const sizes = {
-  xSmall: sizeXSmall,
-  small: sizeSmall,
-  medium: sizeMedium,
-  large: sizeLarge,
-  xLarge: sizeXLarge,
+  XSmall: sizeXSmall,
+  Small: sizeSmall,
+  Medium: sizeMedium,
+  Large: sizeLarge,
+  XLarge: sizeXLarge,
   '2XLarge': size2XLarge,
 };
 
