@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import '../index.scss';
+import './styles.scss';
 
 import { configureActions } from '@storybook/addon-actions';
 import { white, g10, g90, g100 } from '@carbon/themes';
@@ -83,8 +83,12 @@ configureActions({
 
 export const decorators = [
   (Story, context) => {
-    // TODO
-    // const { locale, theme } = context.globals;
+    const { theme } = context.globals;
+
+    React.useEffect(() => {
+      document.body.setAttribute('data-carbon-theme', theme);
+    }, [theme]);
+
     return <Story {...context} />;
   },
 ];
