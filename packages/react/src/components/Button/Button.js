@@ -65,34 +65,40 @@ const Button = React.forwardRef(function Button(
   };
 
   const handleFocus = (evt) => {
-    closeTooltips(evt);
-    setIsHovered(!isHovered);
-    setIsFocused(true);
-    setAllowTooltipVisibility(true);
+    if (hasIconOnly) {
+      closeTooltips(evt);
+      setIsHovered(!isHovered);
+      setIsFocused(true);
+      setAllowTooltipVisibility(true);
+    }
   };
 
   const handleBlur = () => {
-    setIsHovered(false);
-    setIsFocused(false);
-    setAllowTooltipVisibility(false);
+    if (hasIconOnly) {
+      setIsHovered(false);
+      setIsFocused(false);
+      setAllowTooltipVisibility(false);
+    }
   };
 
   const handleMouseEnter = (evt) => {
-    setIsHovered(true);
-    tooltipTimeout.current && clearTimeout(tooltipTimeout.current);
+    if (hasIconOnly) {
+      setIsHovered(true);
+      tooltipTimeout.current && clearTimeout(tooltipTimeout.current);
 
-    if (evt.target === tooltipRef.current) {
+      if (evt.target === tooltipRef.current) {
+        setAllowTooltipVisibility(true);
+        return;
+      }
+
+      closeTooltips(evt);
+
       setAllowTooltipVisibility(true);
-      return;
     }
-
-    closeTooltips(evt);
-
-    setAllowTooltipVisibility(true);
   };
 
   const handleMouseLeave = () => {
-    if (!isFocused) {
+    if (!isFocused && hasIconOnly) {
       tooltipTimeout.current = setTimeout(() => {
         setAllowTooltipVisibility(false);
         setIsHovered(false);

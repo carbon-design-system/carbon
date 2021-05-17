@@ -39,9 +39,37 @@
     overflow-x: auto;
     overflow-y: hidden;
 
+    // Condensed list
     &.#{$prefix}--structured-list--condensed .#{$prefix}--structured-list-td,
     &.#{$prefix}--structured-list--condensed .#{$prefix}--structured-list-th {
       @include padding-td--condensed;
+      //8px padding all over
+    }
+
+    .#{$prefix}--structured-list-row
+      .#{$prefix}--structured-list-td:first-of-type,
+    .#{$prefix}--structured-list-row
+      .#{$prefix}--structured-list-th:first-of-type {
+      padding-left: 1rem;
+      // specs require 16px spacing between columns
+      // 8px side padding between col creates 16 px, with exception of 1st col, which needs an override to be 16px
+    }
+
+    // Flush list
+    &.#{$prefix}--structured-list--flush
+      .#{$prefix}--structured-list-row
+      .#{$prefix}--structured-list-td,
+    &.#{$prefix}--structured-list--flush
+      .#{$prefix}--structured-list-row
+      .#{$prefix}--structured-list-th,
+    &.#{$prefix}--structured-list--flush
+      .#{$prefix}--structured-list-row
+      .#{$prefix}--structured-list-td:first-of-type,
+    &.#{$prefix}--structured-list--flush
+      .#{$prefix}--structured-list-row
+      .#{$prefix}--structured-list-th:first-of-type {
+      padding-right: 1rem;
+      padding-left: 0;
     }
   }
 
