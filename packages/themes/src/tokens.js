@@ -306,6 +306,8 @@ export const unstable__meta = {
         'background',
         'layer',
         'layerAccent',
+        'layerAccentHover',
+        'layerAccentActive',
         'field',
         'backgroundInverse',
         'backgroundBrand',
