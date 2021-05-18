@@ -299,6 +299,10 @@ class Tooltip extends Component {
       }
       if (!open && tooltipBody && tooltipBody.id === this._tooltipId) {
         this._tooltipDismissed = true;
+        const currentActiveNode = event?.relatedTarget;
+        if (!currentActiveNode && document.activeElement === document.body) {
+          this._triggerRef?.current.focus();
+        }
       }
     });
   };
