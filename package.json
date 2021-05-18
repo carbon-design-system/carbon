@@ -27,7 +27,7 @@
     "lint:styles": "stylelint '**/*.{css,scss}' --report-needless-disables --report-invalid-scope-disables",
     "sync": "carbon-cli sync",
     "test": "cross-env BABEL_ENV=test jest",
-    "test:e2e": "cross-env BABEL_ENV=test jest --testPathPattern=e2e --testPathIgnorePatterns='examples,/packages/components/,/packages/react/'"
+    "test:e2e": "cross-env BABEL_ENV=test jest --testPathPattern='e2e/' --testPathIgnorePatterns='examples,/packages/components/,/packages/react/'"
   },
   "resolutions": {
     "ast-types": "^0.14.0",
@@ -48,6 +48,7 @@
     "@carbon/cli": "workspace:packages/cli",
     "@commitlint/cli": "^8.3.5",
     "@commitlint/config-conventional": "^8.3.4",
+    "@percy/cli": "^1.0.0-beta.48",
     "@testing-library/dom": "^7.26.6",
     "@testing-library/jest-dom": "^5.11.5",
     "@testing-library/react": "^11.1.1",
