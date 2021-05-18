@@ -65,9 +65,6 @@
     "test:a11y": "gulp test:a11y",
     "semantic-release": "semantic-release"
   },
-  "resolutions": {
-    "freshy": ">= 1.0.3"
-  },
   "dependencies": {
     "@carbon/telemetry": "0.0.0-alpha.6",
     "flatpickr": "4.6.1",
@@ -75,12 +72,12 @@
     "warning": "^3.0.0"
   },
   "devDependencies": {
-    "@babel/core": "^7.14.0",
+    "@babel/core": "^7.14.2",
     "@babel/plugin-proposal-class-properties": "^7.13.0",
-    "@babel/plugin-proposal-object-rest-spread": "^7.13.8",
+    "@babel/plugin-proposal-object-rest-spread": "^7.14.2",
     "@babel/plugin-transform-modules-umd": "^7.14.0",
-    "@babel/plugin-transform-runtime": "^7.13.15",
-    "@babel/preset-env": "^7.14.0",
+    "@babel/plugin-transform-runtime": "^7.14.2",
+    "@babel/preset-env": "^7.14.2",
     "@babel/preset-react": "^7.13.13",
     "@babel/runtime": "^7.14.0",
     "@carbon/cli": "^10.23.0",
