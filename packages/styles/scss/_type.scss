@@ -43,6 +43,4 @@
   $display-02,
   $display-03,
   $display-04,
-  $tokens with (
-    $prefix: config.$prefix
-  );
+  $tokens;
