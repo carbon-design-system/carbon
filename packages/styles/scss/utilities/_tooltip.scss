@@ -7,9 +7,7 @@
 @use 'z-index';
 @use 'box-shadow';
 @use 'convert';
-
-// Does this need to be relative?
-@use 'type';
+@use '../../type';
 
 // Tooltip
 // Tooltip caret visual styles
@@ -48,7 +46,7 @@
   font-weight: 400;
   text-align: left;
   transform: translateX(-50%);
-  @include type-style('body-short-01');
+  @include type.type-style('body-short-01');
 
   // IE media query
   @media all and (-ms-high-contrast: none), (-ms-high-contrast: active) {
