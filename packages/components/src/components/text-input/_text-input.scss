@@ -59,6 +59,14 @@
     padding-right: $carbon--spacing-08;
   }
 
+  .#{$prefix}--text-input--sm.#{$prefix}--password-input {
+    padding-right: $carbon--spacing-07;
+  }
+
+  .#{$prefix}--text-input--lg.#{$prefix}--password-input {
+    padding-right: $carbon--spacing-09;
+  }
+
   .#{$prefix}--text-input::placeholder {
     @include placeholder-colors;
   }
@@ -110,7 +118,7 @@
     right: 0;
     display: flex;
     width: rem(40px);
-    height: rem(40px);
+    height: 100%;
     min-height: auto;
     align-items: center;
     justify-content: center;
@@ -119,6 +127,16 @@
     background: none;
     cursor: pointer;
     transition: outline $duration--fast-01 motion(standard, productive);
+  }
+
+  .#{$prefix}--text-input--sm
+    + .#{$prefix}--btn.#{$prefix}--text-input--password__visibility__toggle.#{$prefix}--tooltip__trigger {
+    width: rem(32px);
+  }
+
+  .#{$prefix}--text-input--lg
+    + .#{$prefix}--btn.#{$prefix}--text-input--password__visibility__toggle.#{$prefix}--tooltip__trigger {
+    width: rem(48px);
   }
 
   .#{$prefix}--btn.#{$prefix}--text-input--password__visibility__toggle.#{$prefix}--tooltip__trigger
@@ -134,7 +152,7 @@
     }
   }
 
-  .#{$prefix}--text-input--password__visibility__toggle.#{$prefix}--tooltip__trigger:focus {
+  .#{$prefix}--btn.#{$prefix}--text-input--password__visibility__toggle.#{$prefix}--tooltip__trigger:focus {
     @include focus-outline('outline');
   }
 
