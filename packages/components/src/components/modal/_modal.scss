@@ -371,10 +371,7 @@
     overflow: hidden;
   }
 
-  .#{$prefix}--body--with-modal-open .#{$prefix}--tooltip {
-    z-index: z('modal');
-  }
-
+  .#{$prefix}--body--with-modal-open .#{$prefix}--tooltip,
   .#{$prefix}--body--with-modal-open .#{$prefix}--overflow-menu-options {
     z-index: z('modal');
   }
