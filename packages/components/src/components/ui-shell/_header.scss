@@ -59,8 +59,13 @@
 
   .#{$prefix}--header__action--active {
     border-right: 1px solid $border-subtle;
-    border-bottom: 1px solid $border-subtle;
+    border-bottom: 1px solid transparent;
     border-left: 1px solid $border-subtle;
+    background: $layer;
+  }
+
+  .#{$prefix}--header__action--active > svg {
+    fill: $icon-primary;
   }
 
   .#{$prefix}--header__action:focus {
@@ -298,6 +303,12 @@
     background-color: $layer;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.5);
     transform: translateY(100%);
+  }
+
+  .#{$prefix}--header__menu-title[aria-expanded='true']
+    + .#{$prefix}--header__menu
+    .#{$prefix}--header__menu-item {
+    background-color: $layer;
   }
 
   .#{$prefix}--header__menu-title[aria-expanded='true']

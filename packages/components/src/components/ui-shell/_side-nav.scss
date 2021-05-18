@@ -449,6 +449,10 @@
     font-weight: 600;
   }
 
+  .#{$prefix}--side-nav__item--active .#{$prefix}--side-nav__icon > svg {
+    fill: $icon-primary;
+  }
+
   .#{$prefix}--side-nav__menu {
     display: block;
     max-height: 0;
