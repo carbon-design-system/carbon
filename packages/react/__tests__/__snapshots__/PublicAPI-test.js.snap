@@ -2258,6 +2258,9 @@ Map {
       "onClose": Object {
         "type": "func",
       },
+      "onOpen": Object {
+        "type": "func",
+      },
       "short": Object {
         "type": "bool",
       },
