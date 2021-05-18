@@ -1,0 +1,24 @@
+// @import '~carbon-components/scss/globals/scss/typography';
+@use '@carbon/styles/scss/theme';
+@use '@carbon/styles/scss/type';
+
+.container-welcome {
+  /* stylelint-disable-next-line declaration-no-important */
+  padding: 0 !important;
+}
+
+.welcome__container {
+  width: 100vw;
+  height: 100vh;
+  padding: 3rem;
+}
+
+.welcome__heading {
+  @include type.type-style('productive-heading-07');
+
+  color: var(--cds-inverse-01);
+}
+
+.welcome__heading--subtitle {
+  font-weight: 600;
+}
