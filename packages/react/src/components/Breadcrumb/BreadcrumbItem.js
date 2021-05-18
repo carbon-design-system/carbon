@@ -67,7 +67,7 @@ const BreadcrumbItem = React.forwardRef(function BreadcrumbItem(
     <li className={className} ref={ref} {...rest}>
       {React.cloneElement(children, {
         'aria-current': ariaCurrent,
-        className: `${prefix}--link`,
+        className: cx(`${prefix}--link`, children.props.className),
       })}
     </li>
   );

@@ -78,13 +78,17 @@
   display: inline-flex;
   overflow: visible;
   align-items: center;
-  cursor: pointer;
 
   &:focus {
     @include focus-outline('border');
   }
 
+  @if $tooltip-type == 'definition' {
+    cursor: default;
+  }
+
   @if $tooltip-type == 'icon' {
+    cursor: pointer;
     &:focus {
       outline: 1px solid transparent;
 

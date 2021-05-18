@@ -846,6 +846,20 @@
       @include hidden;
     }
   }
+
+  // Windows HCM fix
+  .#{$prefix}--tabs--scrollable__nav-item
+    .#{$prefix}--tabs__nav-item--selected
+    .#{$prefix}--tabs--scrollable__nav-item--selected {
+    @include high-contrast-mode('focus');
+  }
+
+  // stylelint-disable-next-line no-duplicate-selectors
+  .#{$prefix}--tabs--scrollable
+    .#{$prefix}--tabs--scrollable__nav-item--disabled
+    .#{$prefix}--tabs--scrollable__nav-link {
+    @include high-contrast-mode('disabled');
+  }
 }
 
 @include exports('tabs') {

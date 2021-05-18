@@ -1887,6 +1887,7 @@ exports[`DataTable should render 1`] = `
                 <Button
                   dangerDescription="danger"
                   disabled={false}
+                  isExpressive={false}
                   kind="primary"
                   onClick={[MockFunction]}
                   size="small"
@@ -2047,6 +2048,7 @@ exports[`DataTable should render 1`] = `
                     <Button
                       dangerDescription="danger"
                       disabled={false}
+                      isExpressive={false}
                       kind="primary"
                       onClick={[MockFunction]}
                       renderIcon={
@@ -2126,6 +2128,7 @@ exports[`DataTable should render 1`] = `
                     <Button
                       dangerDescription="danger"
                       disabled={false}
+                      isExpressive={false}
                       kind="primary"
                       onClick={[MockFunction]}
                       renderIcon={
@@ -2205,6 +2208,7 @@ exports[`DataTable should render 1`] = `
                     <Button
                       dangerDescription="danger"
                       disabled={false}
+                      isExpressive={false}
                       kind="primary"
                       onClick={[MockFunction]}
                       renderIcon={
@@ -2276,6 +2280,7 @@ exports[`DataTable should render 1`] = `
                     className="bx--batch-summary__cancel"
                     dangerDescription="danger"
                     disabled={false}
+                    isExpressive={false}
                     kind="primary"
                     onClick={[Function]}
                     size="default"
@@ -2550,6 +2555,7 @@ exports[`DataTable should render 1`] = `
               <Button
                 dangerDescription="danger"
                 disabled={false}
+                isExpressive={false}
                 kind="primary"
                 onClick={[MockFunction]}
                 size="small"
@@ -2940,6 +2946,7 @@ exports[`DataTable sticky header should render 1`] = `
                 <Button
                   dangerDescription="danger"
                   disabled={false}
+                  isExpressive={false}
                   kind="primary"
                   onClick={[MockFunction]}
                   size="small"
@@ -3103,6 +3110,7 @@ exports[`DataTable sticky header should render 1`] = `
                     <Button
                       dangerDescription="danger"
                       disabled={false}
+                      isExpressive={false}
                       kind="primary"
                       onClick={[MockFunction]}
                       renderIcon={
@@ -3182,6 +3190,7 @@ exports[`DataTable sticky header should render 1`] = `
                     <Button
                       dangerDescription="danger"
                       disabled={false}
+                      isExpressive={false}
                       kind="primary"
                       onClick={[MockFunction]}
                       renderIcon={
@@ -3261,6 +3270,7 @@ exports[`DataTable sticky header should render 1`] = `
                     <Button
                       dangerDescription="danger"
                       disabled={false}
+                      isExpressive={false}
                       kind="primary"
                       onClick={[MockFunction]}
                       renderIcon={
@@ -3332,6 +3342,7 @@ exports[`DataTable sticky header should render 1`] = `
                     className="bx--batch-summary__cancel"
                     dangerDescription="danger"
                     disabled={false}
+                    isExpressive={false}
                     kind="primary"
                     onClick={[Function]}
                     size="default"
@@ -3606,6 +3617,7 @@ exports[`DataTable sticky header should render 1`] = `
               <Button
                 dangerDescription="danger"
                 disabled={false}
+                isExpressive={false}
                 kind="primary"
                 onClick={[MockFunction]}
                 size="small"

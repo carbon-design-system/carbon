@@ -121,13 +121,6 @@
     fill: $icon-secondary;
     pointer-events: none;
     transform: translateY(-50%);
-
-    // Windows, Firefox HCM Fix
-    @media screen and (-ms-high-contrast: active),
-      screen and (prefers-contrast) {
-      // `ButtonText` is a CSS2 system color to help improve colors in HCM
-      fill: ButtonText;
-    }
   }
 
   .#{$prefix}--search-close {
@@ -173,12 +166,6 @@
 
   .#{$prefix}--search-close svg {
     fill: inherit;
-
-    // Firefox HCM Fix
-    @media screen and (prefers-contrast) {
-      // `ButtonText` is a CSS2 system color to help improve colors in HCM
-      fill: ButtonText;
-    }
   }
 
   .#{$prefix}--search-close,
@@ -364,6 +351,12 @@
   .#{$prefix}--search--expandable.#{$prefix}--search--expanded
     .#{$prefix}--search-magnifier-icon {
     fill: $icon-secondary;
+  }
+
+  // Windows HCM fix
+  .#{$prefix}--search-close svg,
+  .#{$prefix}--search-magnifier-icon {
+    @include high-contrast-mode('icon-fill');
   }
 }
 

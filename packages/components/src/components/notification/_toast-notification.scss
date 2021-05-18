@@ -42,12 +42,6 @@
     @include carbon--breakpoint(max) {
       width: rem(352px);
     }
-
-    // Firefox HCM fix
-    @media screen and (prefers-contrast) {
-      outline-style: solid;
-      outline-width: 1px;
-    }
   }
 
   .#{$prefix}--toast-notification:not(.#{$prefix}--toast-notification--low-contrast)
@@ -174,11 +168,6 @@
     &:focus {
       outline: 2px solid $focus-inverse;
       outline-offset: -2px;
-
-      // Firefox HCM fix
-      @media screen and (prefers-contrast) {
-        outline-style: dotted;
-      }
     }
 
     .#{$prefix}--toast-notification__close-icon {
@@ -231,6 +220,19 @@
     .#{$prefix}--toast-notification__caption {
     color: $text-primary;
   }
+
+  // Windows HCM fix
+  /* stylelint-disable */
+  .#{$prefix}--toast-notification {
+    @include high-contrast-mode('outline');
+  }
+  .#{$prefix}--toast-notification__close-button:focus {
+    @include high-contrast-mode('focus');
+  }
+  .#{$prefix}--toast-notification__icon {
+    @include high-contrast-mode('icon-fill');
+  }
+  /* stylelint-enable */
 }
 
 @include exports('toast-notifications') {

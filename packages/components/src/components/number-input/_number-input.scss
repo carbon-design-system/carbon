@@ -111,13 +111,6 @@
     align-items: center;
     justify-content: center;
     transform: translateY(-50%);
-
-    // Windows, Firefox HCM Fix
-    @media screen and (-ms-high-contrast: active),
-      screen and (prefers-contrast) {
-      outline: 1px solid transparent;
-      outline-offset: -1px;
-    }
   }
 
   .#{$prefix}--number__control-btn {
@@ -383,16 +376,16 @@
     background-color: $field-02;
   }
 
-  .#{$prefix}--number--light .#{$prefix}--number__control-btn:focus::before,
-  .#{$prefix}--number--light .#{$prefix}--number__control-btn:focus::after {
-    background-color: transparent;
-  }
-
   // V11: Possibly deprecate
   .#{$prefix}--number--light .#{$prefix}--number__control-btn:hover,
   .#{$prefix}--number--light .#{$prefix}--number__control-btn:hover::before,
   .#{$prefix}--number--light .#{$prefix}--number__control-btn:hover::after {
     background-color: $hover-light-ui;
+  }
+
+  .#{$prefix}--number--light .#{$prefix}--number__control-btn:focus::before,
+  .#{$prefix}--number--light .#{$prefix}--number__control-btn:focus::after {
+    background-color: transparent;
   }
 
   // Size Variant styles
@@ -443,6 +436,15 @@
     margin-top: 0;
   }
 
+  // No steppers
+  .#{$prefix}--number--nosteppers input[type='number'] {
+    padding-right: rem(48px);
+  }
+
+  .#{$prefix}--number--nosteppers .#{$prefix}--number__invalid {
+    right: rem(16px);
+  }
+
   // Skeleton State
   .#{$prefix}--number.#{$prefix}--skeleton {
     @include skeleton;
@@ -454,6 +456,22 @@
       display: none;
     }
   }
+
+  // Windows HCM fix
+  /* stylelint-disable */
+  .#{$prefix}--number__control-btn:hover,
+  .#{$prefix}--number__control-btn:focus {
+    @include high-contrast-mode('focus');
+  }
+
+  .#{$prefix}--number__control-btn {
+    @include high-contrast-mode('outline');
+  }
+
+  .#{$prefix}--number__control-btn svg {
+    @include high-contrast-mode('icon-fill');
+  }
+  /* stylelint-enable */
 }
 
 @include exports('number-input') {

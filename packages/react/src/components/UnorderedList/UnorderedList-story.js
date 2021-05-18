@@ -9,10 +9,20 @@ import React from 'react';
 
 import ListItem from '../ListItem';
 import UnorderedList from '../UnorderedList';
+import { withKnobs, boolean } from '@storybook/addon-knobs';
 import mdx from './UnorderedList.mdx';
+
+const props = {
+  regular: () => {
+    return {
+      isExpressive: boolean('Expressive', false),
+    };
+  },
+};
 
 export default {
   title: 'Components/UnorderedList',
+  decorators: [withKnobs],
 
   parameters: {
     component: UnorderedList,
@@ -44,25 +54,29 @@ Default.parameters = {
   },
 };
 
-export const Nested = () => (
-  <UnorderedList>
-    <ListItem>
-      Unordered List level 1
-      <UnorderedList nested>
-        <ListItem>Unordered List level 2</ListItem>
-        <ListItem>
-          Unordered List level 2
-          <UnorderedList nested>
-            <ListItem>Unordered List level 2</ListItem>
-            <ListItem>Unordered List level 2</ListItem>
-          </UnorderedList>
-        </ListItem>
-      </UnorderedList>
-    </ListItem>
-    <ListItem>Unordered List level 1</ListItem>
-    <ListItem>Unordered List level 1</ListItem>
-  </UnorderedList>
-);
+export const Nested = () => {
+  const regularProps = props.regular();
+
+  return (
+    <UnorderedList {...regularProps}>
+      <ListItem>
+        Unordered List level 1
+        <UnorderedList nested>
+          <ListItem>Unordered List level 2</ListItem>
+          <ListItem>
+            Unordered List level 2
+            <UnorderedList nested>
+              <ListItem>Unordered List level 2</ListItem>
+              <ListItem>Unordered List level 2</ListItem>
+            </UnorderedList>
+          </ListItem>
+        </UnorderedList>
+      </ListItem>
+      <ListItem>Unordered List level 1</ListItem>
+      <ListItem>Unordered List level 1</ListItem>
+    </UnorderedList>
+  );
+};
 
 Nested.storyName = 'nested';
 

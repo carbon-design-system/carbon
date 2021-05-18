@@ -7,6 +7,8 @@
 
 import React from 'react';
 import { CheckmarkFilled16 } from '@carbon/icons-react';
+import { withKnobs, boolean } from '@storybook/addon-knobs';
+
 import {
   StructuredListWrapper,
   StructuredListHead,
@@ -21,8 +23,14 @@ import mdx from './StructuredList.mdx';
 
 const { prefix } = settings;
 
+const props = () => ({
+  isCondensed: boolean('Condensed', false),
+  isFlush: boolean('Flush alignment', false),
+});
+
 export default {
   title: 'Components/StructuredList',
+  decorators: [withKnobs],
 
   parameters: {
     component: StructuredListWrapper,
@@ -81,6 +89,48 @@ Simple.parameters = {
   },
 };
 
+export const Playground = () => (
+  <StructuredListWrapper {...props()}>
+    <StructuredListHead>
+      <StructuredListRow head>
+        <StructuredListCell head>ColumnA</StructuredListCell>
+        <StructuredListCell head>ColumnB</StructuredListCell>
+        <StructuredListCell head>ColumnC</StructuredListCell>
+      </StructuredListRow>
+    </StructuredListHead>
+    <StructuredListBody>
+      <StructuredListRow>
+        <StructuredListCell noWrap>Row 1</StructuredListCell>
+        <StructuredListCell>Row 1</StructuredListCell>
+        <StructuredListCell>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc dui
+          magna, finibus id tortor sed, aliquet bibendum augue. Aenean posuere
+          sem vel euismod dignissim. Nulla ut cursus dolor. Pellentesque
+          vulputate nisl a porttitor interdum.
+        </StructuredListCell>
+      </StructuredListRow>
+      <StructuredListRow>
+        <StructuredListCell noWrap>Row 2</StructuredListCell>
+        <StructuredListCell>Row 2</StructuredListCell>
+        <StructuredListCell>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc dui
+          magna, finibus id tortor sed, aliquet bibendum augue. Aenean posuere
+          sem vel euismod dignissim. Nulla ut cursus dolor. Pellentesque
+          vulputate nisl a porttitor interdum.
+        </StructuredListCell>
+      </StructuredListRow>
+    </StructuredListBody>
+  </StructuredListWrapper>
+);
+
+Playground.parameters = {
+  info: {
+    text: `
+        Structured Lists group content that is similar or related, such as terms or definitions.
+      `,
+  },
+};
+
 export const Selection = () => {
   const structuredListBodyRowGenerator = (numRows) => {
     return Array.apply(null, Array(numRows)).map((n, i) => (
@@ -111,7 +161,7 @@ export const Selection = () => {
     ));
   };
   return (
-    <StructuredListWrapper selection>
+    <StructuredListWrapper selection {...props()}>
       <StructuredListHead>
         <StructuredListRow head>
           <StructuredListCell head>ColumnA</StructuredListCell>

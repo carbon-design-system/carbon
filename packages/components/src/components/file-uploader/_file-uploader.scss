@@ -160,15 +160,11 @@
       text-overflow: ellipsis;
       white-space: nowrap;
     }
-
-    // Windows, Firefox HCM Fix
-    @media screen and (-ms-high-contrast: active),
-      screen and (prefers-contrast) {
-      outline: 2px solid transparent;
-    }
   }
 
-  .#{$prefix}--file__selected-file--field {
+  // V11: Remove --field
+  .#{$prefix}--file__selected-file--field,
+  .#{$prefix}--file__selected-file--md {
     min-height: rem(40px);
     gap: $carbon--spacing-03 $carbon--spacing-05;
   }
@@ -198,7 +194,9 @@
     padding: $carbon--spacing-02 0;
   }
 
-  .#{$prefix}--file__selected-file--invalid.#{$prefix}--file__selected-file--field {
+  // V11: Remove --field
+  .#{$prefix}--file__selected-file--invalid.#{$prefix}--file__selected-file--field,
+  .#{$prefix}--file__selected-file--invalid.#{$prefix}--file__selected-file--md {
     padding: $carbon--spacing-03 0;
   }
 
@@ -212,7 +210,10 @@
     padding-top: rem(7px);
   }
 
+  // V11: Remove --field
   .#{$prefix}--file__selected-file--invalid.#{$prefix}--file__selected-file--field
+    .#{$prefix}--form-requirement,
+  .#{$prefix}--file__selected-file--invalid.#{$prefix}--file__selected-file--md
     .#{$prefix}--form-requirement {
     padding-top: rem(11px);
   }
@@ -307,13 +308,6 @@
 
   .#{$prefix}--file__state-container .#{$prefix}--file-close svg path {
     fill: $icon-primary;
-
-    // Windows, Firefox HCM Fix
-    @media screen and (-ms-high-contrast: active),
-      screen and (prefers-contrast) {
-      // `ButtonText` is a CSS2 system color to help improve colors in HCM
-      fill: ButtonText;
-    }
   }
 
   .#{$prefix}--file__state-container .#{$prefix}--inline-loading__animation {
@@ -335,6 +329,17 @@
     outline: 2px solid $focus;
     outline-offset: -2px;
   }
+
+  // Windows HCM fix
+  /* stylelint-disable */
+  .#{$prefix}--file__selected-file {
+    @include high-contrast-mode('outline');
+  }
+
+  .#{$prefix}--file__state-container .#{$prefix}--file-close svg path {
+    @include high-contrast-mode('icon-fill');
+  }
+  /* stylelint-enable */
 }
 
 @include exports('file-uploader') {
