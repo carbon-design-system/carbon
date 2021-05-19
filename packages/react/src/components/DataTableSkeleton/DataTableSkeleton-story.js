@@ -30,10 +30,10 @@ export default {
 };
 
 export const Skeleton = () => {
-  const { showHeaders } = props();
+  const { showHeaders, ...rest } = props();
   return (
     <div style={{ width: '800px' }}>
-      <DataTableSkeleton {...props()} headers={showHeaders ? headers : null} />
+      <DataTableSkeleton {...rest} headers={showHeaders ? headers : null} />
       <br />
     </div>
   );
