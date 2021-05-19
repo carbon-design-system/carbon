@@ -60,9 +60,8 @@ function removeDeprecatedSymbolArtboards({ icons, sizes, symbolsPage }) {
 /**
  * Fetch the IDL Sketch Library if it is installed
  * @param {object} params - fetchIDLSketchLibrary parameters
- * @param {Array<object>} params.icons - array of all icon object metadata
- * @param {Array<number>} params.sizes - array of icon sizes
- * @param {Page} params.symbolsPage - the symbols page as identified by Sketch
+ * @param {object} params.IDL_SKETCH_LIBRARY_METADATA - IDL Sketch file metadata
+ * @returns {Library}
  */
 function fetchIDLSketchLibrary({ IDL_SKETCH_LIBRARY_METADATA }) {
   const {
