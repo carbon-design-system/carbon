@@ -8005,7 +8005,6 @@ Map {
         "type": "number",
       },
       "value": Object {
-        "isRequired": true,
         "type": "number",
       },
     },

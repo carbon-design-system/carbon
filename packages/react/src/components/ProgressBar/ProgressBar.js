@@ -24,7 +24,7 @@ function ProgressBar({
   const id = useId('progress-bar');
   const helperId = useId('progress-bar-helper');
 
-  const indeterminate = value === null;
+  const indeterminate = value === null || value === undefined;
   const fallback = !indeterminate ? `${Math.round((value / max) * 100)}%` : '';
 
   const wrapperClasses = classNames(

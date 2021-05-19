@@ -27,6 +27,17 @@ export default {
   },
 };
 
-export const _ProgressBar = () => <ProgressBar {...props()} />;
-
+export const _ProgressBar = () => (
+  <ProgressBar
+    label="Progress bar label"
+    helperText="Optional helper text"
+    value={75}
+  />
+);
 _ProgressBar.storyName = 'ProgressBar';
+
+export const _Indeterminate = () => (
+  <ProgressBar label="Progress bar label" helperText="Optional helper text" />
+);
+
+export const Playground = () => <ProgressBar {...props()} />;
