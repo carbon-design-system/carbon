@@ -209,6 +209,8 @@ Array [
   "label02",
   "layer",
   "layerAccent",
+  "layerAccentActive",
+  "layerAccentHover",
   "layerActive",
   "layerDisabled",
   "layerHover",
