@@ -13,7 +13,7 @@ import { default as OverflowMenuClassic } from './OverflowMenu';
 import { useFeatureFlag } from '../FeatureFlags';
 
 const OverflowMenu = React.forwardRef(function OverflowMenu(props, ref) {
-  const enabled = useFeatureFlag('enable-2021-release');
+  const enabled = useFeatureFlag('enable-v11-release');
   if (enabled) {
     return <OverflowMenuNext {...props} />;
   }
