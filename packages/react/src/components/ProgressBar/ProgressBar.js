@@ -24,27 +24,36 @@ function ProgressBar({
   const id = useId('progress-bar');
   const helperId = useId('progress-bar-helper');
 
-  const containerClasses = classNames(`${prefix}--progress-bar`, className);
+  const indeterminate = value === null;
+  const fallback = !indeterminate ? `${Math.round((value / max) * 100)}%` : '';
+
+  const wrapperClasses = classNames(
+    `${prefix}--progress-bar`,
+    {
+      [`${prefix}--progress-bar--indeterminate`]: indeterminate,
+    },
+    className
+  );
 
   const labelClasses = classNames(`${prefix}--progress-bar__label`, {
     [`${prefix}--visually-hidden`]: hideLabel,
   });
 
-  const progressInPercent = `${Math.round((value / max) * 100)}%`;
-
   return (
-    <div className={containerClasses}>
+    <div className={wrapperClasses}>
       <label className={labelClasses} htmlFor={id}>
         {label}
       </label>
-      <progress
-        id={id}
-        className={`${prefix}--progress-bar__bar`}
-        max={max}
-        value={value}
-        aria-describedby={helperText ? helperId : null}>
-        {progressInPercent}
-      </progress>
+      <div className={`${prefix}--progress-bar__container`}>
+        <progress
+          id={id}
+          className={`${prefix}--progress-bar__bar`}
+          max={max}
+          value={value}
+          aria-describedby={helperText ? helperId : null}>
+          {fallback}
+        </progress>
+      </div>
       {helperText && (
         <div id={helperId} className={`${prefix}--progress-bar__helper-text`}>
           {helperText}
@@ -83,7 +92,7 @@ ProgressBar.propTypes = {
   /**
    * The current value.
    */
-  value: PropTypes.number.isRequired,
+  value: PropTypes.number,
 };
 
 export default ProgressBar;
