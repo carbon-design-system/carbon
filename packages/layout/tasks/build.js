@@ -66,11 +66,11 @@ async function build() {
  LICENSE file in the root directory of this source tree.
 `);
         const convert = {
-          xSmall: 'xs',
-          small: 'sm',
-          medium: 'md',
-          large: 'lg',
-          xLarge: 'xl',
+          XSmall: 'xs',
+          Small: 'sm',
+          Medium: 'md',
+          Large: 'lg',
+          XLarge: 'xl',
           '2XLarge': '2xl',
         };
 
