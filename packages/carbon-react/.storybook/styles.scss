@@ -1,0 +1,24 @@
+//
+// Copyright IBM Corp. 2018, 2018
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+@use '../index.scss' as styles;
+
+body {
+  @include styles.theme();
+}
+
+[data-carbon-theme='g10'] {
+  @include styles.theme(styles.$g10);
+}
+
+[data-carbon-theme='g90'] {
+  @include styles.theme(styles.$g90);
+}
+
+[data-carbon-theme='g100'] {
+  @include styles.theme(styles.$g100);
+}
