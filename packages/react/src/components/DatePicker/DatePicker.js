@@ -259,6 +259,11 @@ export default class DatePicker extends Component {
     onClose: PropTypes.func,
 
     /**
+     * The `open` event handler.
+     */
+    onOpen: PropTypes.func,
+
+    /**
      * `true` to use the short version.
      */
     short: PropTypes.bool,
@@ -374,7 +379,13 @@ export default class DatePicker extends Component {
           onReady: onHook,
           onMonthChange: onHook,
           onYearChange: onHook,
-          onOpen: onHook,
+          onOpen: (...args) => {
+            const { onOpen } = this.props;
+            onHook(...args);
+            if (onOpen) {
+              onOpen(...args);
+            }
+          },
           onValueUpdate: onHook,
         });
         this.addKeyboardEvents(this.cal);

@@ -15,9 +15,7 @@ const packageJson = require('../../../package.json');
 
 const WORKSPACE_ROOT = path.resolve(__dirname, '../../../');
 const packagePaths = glob
-  .sync(
-    packageJson.workspaces.packages.map((pattern) => `${pattern}/package.json`)
-  )
+  .sync(packageJson.workspaces.map((pattern) => `${pattern}/package.json`))
   .map((match) => {
     const packageJsonPath = path.join(WORKSPACE_ROOT, match);
     return {
