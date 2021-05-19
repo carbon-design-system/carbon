@@ -5,4 +5,18 @@
 // LICENSE file in the root directory of this source tree.
 //
 
+@forward 'box-shadow';
+@forward 'button-reset';
+@forward 'component-reset';
 @forward 'convert' show em, rem;
+@forward 'focus-outline';
+@forward 'high-contrast-mode';
+@forward 'keyframes';
+@forward 'placeholder-colors';
+@forward 'rotate';
+@forward 'skeleton';
+@forward 'text-overflow';
+@forward 'text-truncate';
+@forward 'tooltip';
+@forward 'visually-hidden';
+@forward 'z-index';

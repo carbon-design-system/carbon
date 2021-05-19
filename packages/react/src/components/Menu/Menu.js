@@ -13,25 +13,28 @@ import { keys, match } from '../../internal/keyboard';
 import ClickListener from '../../internal/ClickListener';
 
 import {
+  capWithinRange,
   clickedElementHasSubnodes,
-  getValidNodes,
-  resetFocus,
   focusNode as focusNodeUtil,
   getNextNode,
-  getParentNode,
   getParentMenu,
+  getParentNode,
+  getPosition,
+  getValidNodes,
+  resetFocus,
 } from './_utils';
 
-import ContextMenuGroup from './ContextMenuGroup';
-import ContextMenuRadioGroup from './ContextMenuRadioGroup';
-import ContextMenuRadioGroupOptions from './ContextMenuRadioGroupOptions';
-import ContextMenuSelectableItem from './ContextMenuSelectableItem';
+import MenuGroup from './MenuGroup';
+import MenuRadioGroup from './MenuRadioGroup';
+import MenuRadioGroupOptions from './MenuRadioGroupOptions';
+import MenuSelectableItem from './MenuSelectableItem';
 
 const { prefix } = settings;
 
 const margin = 16; // distance to keep to body edges, in px
 
-const ContextMenu = function ContextMenu({
+const Menu = function Menu({
+  autoclose = true,
   children,
   open,
   level = 1,
@@ -45,6 +48,56 @@ const ContextMenu = function ContextMenu({
   const [position, setPosition] = useState([x, y]);
   const [canBeClosed, setCanBeClosed] = useState(false);
   const isRootMenu = level === 1;
+
+  function getContainerBoundaries() {
+    const { clientWidth: bodyWidth, clientHeight: bodyHeight } = document.body;
+    return [margin, margin, bodyWidth - margin, bodyHeight - margin];
+  }
+
+  function getTargetBoundaries() {
+    const xIsRange = typeof x === 'object' && x.length === 2;
+    const yIsRange = typeof y === 'object' && y.length === 2;
+
+    const targetBoundaries = [
+      xIsRange ? x[0] : x,
+      yIsRange ? y[0] : y,
+      xIsRange ? x[1] : x,
+      yIsRange ? y[1] : y,
+    ];
+
+    if (!isRootMenu) {
+      const { width: parentWidth } = getParentMenu(
+        rootRef?.current?.element
+      )?.getBoundingClientRect();
+
+      targetBoundaries[2] -= parentWidth;
+    }
+
+    const containerBoundaries = getContainerBoundaries();
+
+    return [
+      capWithinRange(
+        targetBoundaries[0],
+        containerBoundaries[0],
+        containerBoundaries[2]
+      ),
+      capWithinRange(
+        targetBoundaries[1],
+        containerBoundaries[1],
+        containerBoundaries[3]
+      ),
+      capWithinRange(
+        targetBoundaries[2],
+        containerBoundaries[0],
+        containerBoundaries[2]
+      ),
+      capWithinRange(
+        targetBoundaries[3],
+        containerBoundaries[1],
+        containerBoundaries[3]
+      ),
+    ];
+  }
 
   function focusNode(node) {
     if (node) {
@@ -108,67 +161,30 @@ const ContextMenu = function ContextMenu({
   }
 
   function handleClickOutside(e) {
-    if (!clickedElementHasSubnodes(e) && open && canBeClosed) {
+    if (!clickedElementHasSubnodes(e) && open && canBeClosed && autoclose) {
       onClose();
     }
   }
 
-  function getCorrectedPosition(assumedDirection) {
-    const pos = [x, y];
+  function getCorrectedPosition(preferredDirection) {
+    const elementRect = rootRef?.current?.element?.getBoundingClientRect();
+    const elementDimensions = [elementRect.width, elementRect.height];
+    const targetBoundaries = getTargetBoundaries();
+    const containerBoundaries = getContainerBoundaries();
 
     const {
-      width,
-      height,
-    } = rootRef?.current?.element?.getBoundingClientRect();
-    const { clientWidth: bodyWidth, clientHeight: bodyHeight } = document.body;
-    const parentWidth = isRootMenu
-      ? 0
-      : getParentMenu(rootRef?.current?.element)?.getBoundingClientRect()
-          ?.width;
-    let localDirection = assumedDirection;
+      position: correctedPosition,
+      direction: correctedDirection,
+    } = getPosition(
+      elementDimensions,
+      targetBoundaries,
+      containerBoundaries,
+      preferredDirection
+    );
 
-    const min = [margin, margin];
-    const max = [bodyWidth - margin - width, bodyHeight - margin - height];
+    setDirection(correctedDirection);
 
-    // in case it is root menu previously had direction -1, check
-    // if direction 1 would be possible
-    if (isRootMenu && localDirection === -1 && pos[0] < max[0]) {
-      localDirection = 1;
-    }
-
-    // make sure menu is visible in y bounds
-    if (pos[1] > max[1]) {
-      pos[1] = max[1];
-    }
-    if (pos[1] < min[1]) {
-      pos[1] = min[1];
-    }
-
-    if (localDirection === 1) {
-      // if it won't fit anymore
-      if (pos[0] > max[0]) {
-        pos[0] = x - width - parentWidth;
-        if (pos[0] + width > bodyWidth - margin) {
-          pos[0] = max[0];
-        }
-        localDirection = -1;
-      } else if (pos[0] < min[0]) {
-        // keep distance to left screen edge
-        pos[0] = min[0];
-      }
-    } else if (localDirection === -1) {
-      pos[0] = x - width - parentWidth;
-
-      // if it should re-reverse
-      if (pos[0] < min[0]) {
-        pos[0] = x;
-        localDirection = 1;
-      }
-    }
-
-    setDirection(localDirection);
-
-    return [Math.round(pos[0]), Math.round(pos[1])];
+    return correctedPosition;
   }
 
   useEffect(() => {
@@ -190,31 +206,7 @@ const ContextMenu = function ContextMenu({
       const correctedPosition = getCorrectedPosition(localDirection);
       setPosition(correctedPosition);
 
-      // Safari emits the click event when preventDefault was called on
-      // the contextmenu event. This is registered by the ClickListener
-      // component and would lead to immediate closing when a user is
-      // triggering the menu with ctrl+click. To prevent this, we only
-      // allow the menu to be closed after the click event was received.
-      // Since other browsers don't emit this event, it's also reset with
-      // a 50ms delay after mouseup event was called.
-
-      document.addEventListener(
-        'mouseup',
-        () => {
-          setTimeout(() => {
-            setCanBeClosed(true);
-          }, 50);
-        },
-        { once: true }
-      );
-
-      document.addEventListener(
-        'click',
-        () => {
-          setCanBeClosed(true);
-        },
-        { once: true }
-      );
+      setCanBeClosed(true);
     } else {
       setPosition([0, 0]);
     }
@@ -223,9 +215,7 @@ const ContextMenu = function ContextMenu({
   }, [open, x, y]);
 
   const someNodesHaveIcons = React.Children.toArray(children).some(
-    (node) =>
-      node.type === ContextMenuSelectableItem ||
-      node.type === ContextMenuRadioGroup
+    (node) => node.type === MenuSelectableItem || node.type === MenuRadioGroup
   );
 
   const options = React.Children.map(children, (node) => {
@@ -237,11 +227,11 @@ const ContextMenu = function ContextMenu({
     }
   });
 
-  const classes = classnames(`${prefix}--context-menu`, {
-    [`${prefix}--context-menu--open`]: open,
-    [`${prefix}--context-menu--invisible`]:
+  const classes = classnames(`${prefix}--menu`, {
+    [`${prefix}--menu--open`]: open,
+    [`${prefix}--menu--invisible`]:
       open && position[0] === 0 && position[1] === 0,
-    [`${prefix}--context-menu--root`]: isRootMenu,
+    [`${prefix}--menu--root`]: isRootMenu,
   });
 
   const ulAttributes = {
@@ -262,16 +252,12 @@ const ContextMenu = function ContextMenu({
 
   // if the only child is a radiogroup, don't render it as radiogroup component, but
   // only the items to prevent duplicate markup
-  if (
-    options &&
-    options.length === 1 &&
-    options[0].type === ContextMenuRadioGroup
-  ) {
+  if (options && options.length === 1 && options[0].type === MenuRadioGroup) {
     const radioGroupProps = options[0].props;
 
     ulAttributes['aria-label'] = radioGroupProps.label;
     childrenToRender = (
-      <ContextMenuRadioGroupOptions
+      <MenuRadioGroupOptions
         items={radioGroupProps.items}
         initialSelectedItem={radioGroupProps.initialSelectedItem}
         onChange={radioGroupProps.onChange}
@@ -281,7 +267,7 @@ const ContextMenu = function ContextMenu({
 
   // if the only child is a generic group, don't render it as group component, but
   // only the children to prevent duplicate markup
-  if (options && options.length === 1 && options[0].type === ContextMenuGroup) {
+  if (options && options.length === 1 && options[0].type === MenuGroup) {
     const groupProps = options[0].props;
 
     ulAttributes['aria-label'] = groupProps.label;
@@ -295,9 +281,15 @@ const ContextMenu = function ContextMenu({
   );
 };
 
-ContextMenu.propTypes = {
+Menu.propTypes = {
   /**
-   * Specify the children of the ContextMenu
+   * Whether or not the menu should automatically close when
+   * an outside click is registered
+   */
+  autoclose: PropTypes.bool,
+
+  /**
+   * Specify the children of the Menu
    */
   children: PropTypes.node,
 
@@ -312,19 +304,25 @@ ContextMenu.propTypes = {
   onClose: PropTypes.func,
 
   /**
-   * Specify whether the ContextMenu is currently open
+   * Specify whether the Menu is currently open
    */
   open: PropTypes.bool,
 
   /**
    * Specify the x position where this menu is rendered
    */
-  x: PropTypes.number,
+  x: PropTypes.oneOfType([
+    PropTypes.number,
+    PropTypes.arrayOf(PropTypes.number),
+  ]),
 
   /**
    * Specify the y position where this menu is rendered
    */
-  y: PropTypes.number,
+  y: PropTypes.oneOfType([
+    PropTypes.number,
+    PropTypes.arrayOf(PropTypes.number),
+  ]),
 };
 
-export default ContextMenu;
+export default Menu;
