@@ -9,18 +9,19 @@ import { SharedStyle, Style } from 'sketch/dom';
 
 /**
  * Sync a shared style within a document.
- * @param {Document} document
- * @param {string} name
- * @param {object} style
- * @param {StyleType?} styleType
+ * @param {object} params - syncSharedStyle parameters
+ * @param {Document} params.document
+ * @param {string} params.name
+ * @param {object} params.style
+ * @param {StyleType?} params.styleType
  * @returns {SharedStyle}
  */
-export function syncSharedStyle(
+export function syncSharedStyle({
   document,
   name,
   style,
-  styleType = SharedStyle.StyleType.Layer
-) {
+  styleType = SharedStyle.StyleType.Layer,
+}) {
   // Figure out the type of shared style and try and find if we have already
   // created a shared style with the given name
   const documentSharedStyles =
@@ -84,12 +85,16 @@ export function syncSharedStyle(
  * @returns {SharedStyle}
  */
 export function syncColorStyle({ document, name, value }) {
-  return syncSharedStyle(document, name, {
-    fills: [
-      {
-        color: value,
-        fillType: Style.FillType.Color,
-      },
-    ],
+  return syncSharedStyle({
+    document,
+    name,
+    style: {
+      fills: [
+        {
+          color: value,
+          fillType: Style.FillType.Color,
+        },
+      ],
+    },
   });
 }
