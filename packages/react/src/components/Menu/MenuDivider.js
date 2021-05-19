@@ -10,8 +10,8 @@ import { settings } from 'carbon-components';
 
 const { prefix } = settings;
 
-function ContextMenuDivider() {
-  return <li role="separator" className={`${prefix}--context-menu-divider`} />;
+function MenuDivider() {
+  return <li role="separator" className={`${prefix}--menu-divider`} />;
 }
 
-export default ContextMenuDivider;
+export default MenuDivider;
