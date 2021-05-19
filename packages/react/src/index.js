@@ -213,14 +213,14 @@ export {
 export unstable_TreeView, {
   TreeNode as unstable_TreeNode,
 } from './components/TreeView';
-export unstable_ContextMenu, {
-  ContextMenuDivider as unstable_ContextMenuDivider,
-  ContextMenuGroup as unstable_ContextMenuGroup,
-  ContextMenuItem as unstable_ContextMenuItem,
-  ContextMenuRadioGroup as unstable_ContextMenuRadioGroup,
-  ContextMenuSelectableItem as unstable_ContextMenuSelectableItem,
-  useContextMenu as unstable_useContextMenu,
-} from './components/ContextMenu';
+export unstable_Menu, {
+  MenuDivider as unstable_MenuDivider,
+  MenuGroup as unstable_MenuGroup,
+  MenuItem as unstable_MenuItem,
+  MenuRadioGroup as unstable_MenuRadioGroup,
+  MenuSelectableItem as unstable_MenuSelectableItem,
+} from './components/Menu';
+export { useContextMenu as unstable_useContextMenu } from './components/ContextMenu';
 export {
   Heading as unstable_Heading,
   Section as unstable_Section,

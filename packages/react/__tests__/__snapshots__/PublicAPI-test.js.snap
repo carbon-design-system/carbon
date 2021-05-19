@@ -7790,9 +7790,9 @@ Map {
       },
     },
   },
-  "unstable_ContextMenu" => Object {
-    "ContextMenuDivider": Object {},
-    "ContextMenuGroup": Object {
+  "unstable_Menu" => Object {
+    "MenuDivider": Object {},
+    "MenuGroup": Object {
       "propTypes": Object {
         "children": Object {
           "type": "node",
@@ -7803,7 +7803,7 @@ Map {
         },
       },
     },
-    "ContextMenuItem": Object {
+    "MenuItem": Object {
       "propTypes": Object {
         "children": Object {
           "type": "node",
@@ -7829,7 +7829,7 @@ Map {
         },
       },
     },
-    "ContextMenuRadioGroup": Object {
+    "MenuRadioGroup": Object {
       "propTypes": Object {
         "initialSelectedItem": Object {
           "type": "string",
@@ -7852,7 +7852,7 @@ Map {
         },
       },
     },
-    "ContextMenuSelectableItem": Object {
+    "MenuSelectableItem": Object {
       "propTypes": Object {
         "initialChecked": Object {
           "type": "bool",
@@ -7867,6 +7867,9 @@ Map {
       },
     },
     "propTypes": Object {
+      "autoclose": Object {
+        "type": "bool",
+      },
       "children": Object {
         "type": "node",
       },
@@ -7880,15 +7883,45 @@ Map {
         "type": "bool",
       },
       "x": Object {
-        "type": "number",
+        "args": Array [
+          Array [
+            Object {
+              "type": "number",
+            },
+            Object {
+              "args": Array [
+                Object {
+                  "type": "number",
+                },
+              ],
+              "type": "arrayOf",
+            },
+          ],
+        ],
+        "type": "oneOfType",
       },
       "y": Object {
-        "type": "number",
+        "args": Array [
+          Array [
+            Object {
+              "type": "number",
+            },
+            Object {
+              "args": Array [
+                Object {
+                  "type": "number",
+                },
+              ],
+              "type": "arrayOf",
+            },
+          ],
+        ],
+        "type": "oneOfType",
       },
     },
   },
-  "unstable_ContextMenuDivider" => Object {},
-  "unstable_ContextMenuGroup" => Object {
+  "unstable_MenuDivider" => Object {},
+  "unstable_MenuGroup" => Object {
     "propTypes": Object {
       "children": Object {
         "type": "node",
@@ -7899,7 +7932,7 @@ Map {
       },
     },
   },
-  "unstable_ContextMenuItem" => Object {
+  "unstable_MenuItem" => Object {
     "propTypes": Object {
       "children": Object {
         "type": "node",
@@ -7925,7 +7958,7 @@ Map {
       },
     },
   },
-  "unstable_ContextMenuRadioGroup" => Object {
+  "unstable_MenuRadioGroup" => Object {
     "propTypes": Object {
       "initialSelectedItem": Object {
         "type": "string",
@@ -7948,7 +7981,7 @@ Map {
       },
     },
   },
-  "unstable_ContextMenuSelectableItem" => Object {
+  "unstable_MenuSelectableItem" => Object {
     "propTypes": Object {
       "initialChecked": Object {
         "type": "bool",
