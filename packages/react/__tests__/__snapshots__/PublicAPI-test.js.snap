@@ -7986,5 +7986,29 @@ Map {
       },
     },
   },
+  "unstable_ProgressBar" => Object {
+    "propTypes": Object {
+      "className": Object {
+        "type": "string",
+      },
+      "helperText": Object {
+        "type": "string",
+      },
+      "hideLabel": Object {
+        "type": "bool",
+      },
+      "label": Object {
+        "isRequired": true,
+        "type": "string",
+      },
+      "max": Object {
+        "type": "number",
+      },
+      "value": Object {
+        "isRequired": true,
+        "type": "number",
+      },
+    },
+  },
 }
 `;

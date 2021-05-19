@@ -1,0 +1,57 @@
+//
+// Copyright IBM Corp. 2021
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+@import '../../globals/scss/vars';
+@import '../../globals/scss/helper-mixins';
+@import '../../globals/scss/vendor/@carbon/elements/scss/import-once/import-once';
+
+/// Progress Bar styles
+/// @access private
+/// @group progress-bar
+@mixin progress-bar {
+  .#{$prefix}--progress-bar__label {
+    @include type-style('body-short-01');
+
+    display: block;
+    margin-bottom: $spacing-03;
+    color: $text-primary;
+  }
+
+  .#{$prefix}--progress-bar__bar {
+    display: block;
+    width: 100%;
+    height: rem(8px);
+    border: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    background: $layer;
+  }
+
+  .#{$prefix}--progress-bar__bar::-webkit-progress-bar {
+    background: transparent;
+  }
+
+  .#{$prefix}--progress-bar__bar::-webkit-progress-value {
+    background-color: $interactive;
+  }
+
+  .#{$prefix}--progress-bar__bar::-moz-progress-bar {
+    background-color: $interactive;
+  }
+
+  .#{$prefix}--progress-bar__helper-text {
+    @include type-style('helper-text-01');
+
+    margin-top: $spacing-02;
+    color: $text-secondary;
+  }
+}
+
+@include exports('progress-bar') {
+  @include progress-bar;
+}
