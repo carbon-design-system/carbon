@@ -7,27 +7,27 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
-import ContextMenuGroup from './ContextMenuGroup';
-import ContextMenuRadioGroupOptions from './ContextMenuRadioGroupOptions';
+import MenuGroup from './MenuGroup';
+import MenuRadioGroupOptions from './MenuRadioGroupOptions';
 
-function ContextMenuRadioGroup({
+function MenuRadioGroup({
   items,
   initialSelectedItem,
   label,
   onChange = () => {},
 }) {
   return (
-    <ContextMenuGroup label={label}>
-      <ContextMenuRadioGroupOptions
+    <MenuGroup label={label}>
+      <MenuRadioGroupOptions
         items={items}
         initialSelectedItem={initialSelectedItem}
         onChange={onChange}
       />
-    </ContextMenuGroup>
+    </MenuGroup>
   );
 }
 
-ContextMenuRadioGroup.propTypes = {
+MenuRadioGroup.propTypes = {
   /**
    * Whether the option should be checked by default
    */
@@ -49,4 +49,4 @@ ContextMenuRadioGroup.propTypes = {
   onChange: PropTypes.func,
 };
 
-export default ContextMenuRadioGroup;
+export default MenuRadioGroup;

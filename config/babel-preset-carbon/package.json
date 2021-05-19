@@ -1,8 +1,22 @@
 {
   "name": "babel-preset-carbon",
-  "version": "0.0.0",
   "private": true,
+  "version": "0.0.0",
+  "license": "Apache-2.0",
   "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/carbon-design-system/carbon.git",
+    "directory": "config/babel-preset-carbon"
+  },
+  "bugs": "https://github.com/carbon-design-system/carbon/issues",
+  "keywords": [
+    "ibm",
+    "carbon",
+    "carbon-design-system",
+    "components",
+    "react"
+  ],
   "dependencies": {
     "@babel/core": "^7.14.2",
     "@babel/plugin-proposal-class-properties": "^7.13.0",

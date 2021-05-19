@@ -8,53 +8,46 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import ContextMenuOption from './ContextMenuOption';
+import MenuOption from './MenuOption';
 
-function ContextMenuItem({
-  label,
-  children,
-  disabled,
-  kind = 'default',
-  shortcut,
-  ...rest
-}) {
+function MenuItem({ label, children, disabled, kind, shortcut, ...rest }) {
   return (
-    <ContextMenuOption
+    <MenuOption
       {...rest}
       label={label}
       disabled={disabled}
       kind={kind}
       shortcut={shortcut}>
       {children}
-    </ContextMenuOption>
+    </MenuOption>
   );
 }
 
-ContextMenuItem.propTypes = {
+MenuItem.propTypes = {
   /**
-   * Specify the children of the ContextMenuItem
+   * Specify the children of the MenuItem
    */
   children: PropTypes.node,
 
   /**
-   * Specify whether this ContextMenuItem is disabled
+   * Specify whether this MenuItem is disabled
    */
   disabled: PropTypes.bool,
 
   /**
-   * Optional prop to specify the kind of the ContextMenuItem
+   * Optional prop to specify the kind of the MenuItem
    */
   kind: PropTypes.oneOf(['default', 'danger']),
 
   /**
-   * Rendered label for the ContextMenuItem
+   * Rendered label for the MenuItem
    */
   label: PropTypes.node.isRequired,
 
   /**
-   * Rendered shortcut for the ContextMenuItem
+   * Rendered shortcut for the MenuItem
    */
   shortcut: PropTypes.node,
 };
 
-export default ContextMenuItem;
+export default MenuItem;
