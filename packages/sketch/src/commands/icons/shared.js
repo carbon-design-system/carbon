@@ -106,6 +106,7 @@ export function syncIconSymbols({
     IDL_SKETCH_LIBRARY_METADATA,
   });
 
+  // import shared color styles from IDL Sketch library
   idlSketchLibrary
     .getImportableLayerStyleReferencesForDocument(document)
     .forEach((layerStyle) => {
@@ -114,6 +115,7 @@ export function syncIconSymbols({
       }
     });
 
+  // set default icon color shared style
   const sharedStyle = [...document.sharedLayerStyles].find((sharedLayerStyle) =>
     sharedLayerStyle?.name.endsWith('black')
   );
