@@ -430,6 +430,11 @@ export class ExpandableTile extends Component {
     onBeforeClick: PropTypes.func,
 
     /**
+     * optional handler to trigger a function the Tile is clicked
+     */
+    onClick: PropTypes.func,
+
+    /**
      * optional handler to trigger a function when a key is pressed
      */
     onKeyUp: PropTypes.func,
@@ -534,7 +539,7 @@ export class ExpandableTile extends Component {
   };
 
   handleClick = (evt) => {
-    if (!this.props.onBeforeClick(evt)) {
+    if (!this.props.onBeforeClick(evt) || evt.target.tagName === 'INPUT') {
       return;
     }
     evt.persist();
@@ -569,6 +574,7 @@ export class ExpandableTile extends Component {
       tileMaxHeight, // eslint-disable-line
       tilePadding, // eslint-disable-line
       handleClick, // eslint-disable-line
+      onClick,
       onKeyUp,
       tileCollapsedIconText,
       tileExpandedIconText,
@@ -612,7 +618,7 @@ export class ExpandableTile extends Component {
         title={isExpanded ? tileExpandedIconText : tileCollapsedIconText}
         {...other}
         onKeyUp={composeEventHandlers([onKeyUp, this.handleKeyUp])}
-        onClick={this.handleClick}
+        onClick={composeEventHandlers([onClick, this.handleClick])}
         tabIndex={tabIndex}>
         <div
           ref={(tileContent) => {
