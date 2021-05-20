@@ -8,7 +8,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-function ContextMenuGroup({ label, children }) {
+function MenuGroup({ label, children }) {
   return (
     <li role="none">
       <ul role="group" aria-label={label}>
@@ -18,16 +18,16 @@ function ContextMenuGroup({ label, children }) {
   );
 }
 
-ContextMenuGroup.propTypes = {
+MenuGroup.propTypes = {
   /**
-   * Specify the children of the ContextMenuGroup
+   * Specify the children of the MenuGroup
    */
   children: PropTypes.node,
 
   /**
-   * Rendered label for the ContextMenuGroup
+   * Rendered label for the MenuGroup
    */
   label: PropTypes.node.isRequired,
 };
 
-export default ContextMenuGroup;
+export default MenuGroup;

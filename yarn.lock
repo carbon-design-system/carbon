@@ -1745,7 +1745,7 @@ __metadata:
     change-case: ^4.1.1
     core-js: ^3.6.5
     fs-extra: ^8.1.0
-    node-sass: ^4.13.1
+    node-sass: ^6.0.0
     rimraf: ^3.0.0
   languageName: unknown
   linkType: soft
@@ -2080,7 +2080,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@carbon/test-utils@workspace:packages/test-utils"
   dependencies:
-    node-sass: ^4.13.1
+    node-sass: ^6.0.0
     prettier: ^2.2.1
     react: ^17.0.1
     react-dom: ^16.9.0
@@ -11116,7 +11116,7 @@ __metadata:
     gulp-nodemon: ^2.4.2
     gulp-postcss: ^8.0.0
     gulp-rename: ^1.4.0
-    gulp-sass: ^4.0.0
+    gulp-sass: ^4.1.0
     gulp-sass-lint: ^1.4.0
     gulp-sourcemaps: ^2.6.0
     gulp-terser: ^1.0.0
@@ -11141,7 +11141,7 @@ __metadata:
     minimatch: ^3.0.4
     mkdirp: ^0.5.0
     mock-raf: ^1.0.0
-    node-sass: ^4.13.1
+    node-sass: ^6.0.0
     nodemon: ^1.18.7
     path-to-regexp: ^6.2.0
     portscanner: ^2.2.0
@@ -18430,19 +18430,19 @@ __metadata:
   languageName: node
   linkType: hard
 
-"gulp-sass@npm:^4.0.0":
-  version: 4.0.2
-  resolution: "gulp-sass@npm:4.0.2"
+"gulp-sass@npm:^4.1.0":
+  version: 4.1.0
+  resolution: "gulp-sass@npm:4.1.0"
   dependencies:
     chalk: ^2.3.0
-    lodash.clonedeep: ^4.3.2
+    lodash: ^4.17.11
     node-sass: ^4.8.3
     plugin-error: ^1.0.1
     replace-ext: ^1.0.0
     strip-ansi: ^4.0.0
     through2: ^2.0.0
     vinyl-sourcemaps-apply: ^0.2.0
-  checksum: d057ae32b9577a4b814d0cd47a93b2865d12378289ecea66184d37a014a1d7fdda19584a8c6cd8cfd6e9c96dd33533df1ce08c04f5d1541b55657053771c0f99
+  checksum: 9b1e15539820344c2424922f00b48a203840cf630fb911e6ecf7f1856da3581ff0d37c1cd5eb20a5d5058d0651da2ecb087efe4ea36a9f4428ad0c6eac45d0a7
   languageName: node
   linkType: hard
 
@@ -23308,7 +23308,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"lodash.clonedeep@npm:^4.3.0, lodash.clonedeep@npm:^4.3.2, lodash.clonedeep@npm:^4.5.0":
+"lodash.clonedeep@npm:^4.3.0, lodash.clonedeep@npm:^4.5.0":
   version: 4.5.0
   resolution: "lodash.clonedeep@npm:4.5.0"
   checksum: 92c46f094b064e876a23c97f57f81fbffd5d760bf2d8a1c61d85db6d1e488c66b0384c943abee4f6af7debf5ad4e4282e74ff83177c9e63d8ff081a4837c3489
@@ -25635,6 +25635,32 @@ __metadata:
   bin:
     node-sass: bin/node-sass
   checksum: a7510a0f3407ea0ed37b794dc00cd13bf3c10b5c0fcf95057e7503694fec26c5ddabfd0b56ec19baa9355dbeea1b1d27440ce7d2bb168291978a7071d74d8ecf
+  languageName: node
+  linkType: hard
+
+"node-sass@npm:^6.0.0":
+  version: 6.0.0
+  resolution: "node-sass@npm:6.0.0"
+  dependencies:
+    async-foreach: ^0.1.3
+    chalk: ^1.1.1
+    cross-spawn: ^7.0.3
+    gaze: ^1.0.0
+    get-stdin: ^4.0.1
+    glob: ^7.0.3
+    lodash: ^4.17.15
+    meow: ^3.7.0
+    mkdirp: ^0.5.1
+    nan: ^2.13.2
+    node-gyp: ^7.1.0
+    npmlog: ^4.0.0
+    request: ^2.88.0
+    sass-graph: 2.2.5
+    stdout-stream: ^1.4.0
+    true-case-path: ^1.0.2
+  bin:
+    node-sass: bin/node-sass
+  checksum: 5ad2050f7fcb63db33d328ef75ad36dff6626722dd166cb9cf7fabfb5dad3f0d9d31f04ed4b438ba174253bf1e92bb089c27e375c26e6ad6897587a1de51d06f
   languageName: node
   linkType: hard
 
@@ -31064,17 +31090,17 @@ __metadata:
   languageName: node
   linkType: hard
 
-"sass-graph@npm:^2.2.4":
-  version: 2.2.4
-  resolution: "sass-graph@npm:2.2.4"
+"sass-graph@npm:2.2.5, sass-graph@npm:^2.2.4":
+  version: 2.2.5
+  resolution: "sass-graph@npm:2.2.5"
   dependencies:
     glob: ^7.0.0
     lodash: ^4.0.0
     scss-tokenizer: ^0.2.3
-    yargs: ^7.0.0
+    yargs: ^13.3.2
   bin:
     sassgraph: bin/sassgraph
-  checksum: bd19d96eb1f0ce395eaabc5c9004be360084146e1cd5ad78e0ca03595b25dbe4d066937ec92cf519c157d2d4505d314bb23421592a743b7fbb655bebc6025401
+  checksum: 283b6e5a38c8b4fca77cdc4fc1da9641679120dba80e89361c82b6a3975f90d01cc78129f9f8fd148822e5a648f540c58c9a38b8c2b11ca97abc4f381613c013
   languageName: node
   linkType: hard
 
@@ -37451,7 +37477,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"yargs@npm:^7.0.0, yargs@npm:^7.0.2, yargs@npm:^7.1.0":
+"yargs@npm:^7.0.2, yargs@npm:^7.1.0":
   version: 7.1.1
   resolution: "yargs@npm:7.1.1"
   dependencies:

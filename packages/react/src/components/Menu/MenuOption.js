@@ -19,39 +19,31 @@ import {
   clickedElementHasSubnodes,
 } from './_utils';
 
-import ContextMenu from './ContextMenu';
+import Menu from './Menu';
 
 const { prefix } = settings;
 
 const hoverIntentDelay = 150; // in ms
 
-function ContextMenuOptionContent({
-  label,
-  info,
-  disabled,
-  icon: Icon,
-  indented,
-}) {
-  const classes = classnames(`${prefix}--context-menu-option__content`, {
-    [`${prefix}--context-menu-option__content--disabled`]: disabled,
+function MenuOptionContent({ label, info, disabled, icon: Icon, indented }) {
+  const classes = classnames(`${prefix}--menu-option__content`, {
+    [`${prefix}--menu-option__content--disabled`]: disabled,
   });
 
   return (
     <div className={classes}>
       {indented && (
-        <div className={`${prefix}--context-menu-option__icon`}>
-          {Icon && <Icon />}
-        </div>
+        <div className={`${prefix}--menu-option__icon`}>{Icon && <Icon />}</div>
       )}
-      <span className={`${prefix}--context-menu-option__label`} title={label}>
+      <span className={`${prefix}--menu-option__label`} title={label}>
         {label}
       </span>
-      <div className={`${prefix}--context-menu-option__info`}>{info}</div>
+      <div className={`${prefix}--menu-option__info`}>{info}</div>
     </div>
   );
 }
 
-function ContextMenuOption({
+function MenuOption({
   children,
   disabled,
   indented,
@@ -131,11 +123,10 @@ function ContextMenuOption({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [submenuOpen]);
 
-  const classes = classnames(`${prefix}--context-menu-option`, {
-    [`${prefix}--context-menu-option--disabled`]: disabled,
-    [`${prefix}--context-menu-option--active`]: subOptions && submenuOpen,
-    [`${prefix}--context-menu-option--danger`]:
-      !subOptions && kind === 'danger',
+  const classes = classnames(`${prefix}--menu-option`, {
+    [`${prefix}--menu-option--disabled`]: disabled,
+    [`${prefix}--menu-option--active`]: subOptions && submenuOpen,
+    [`${prefix}--menu-option--danger`]: !subOptions && kind === 'danger',
   });
 
   const allowedRoles = ['menuitemradio', 'menuitemcheckbox'];
@@ -162,13 +153,13 @@ function ContextMenuOption({
       onClick={onClick}>
       {subOptions ? (
         <>
-          <ContextMenuOptionContent
+          <MenuOptionContent
             label={label}
             icon={renderIcon}
             info={<CaretRight16 />}
             indented={indented}
           />
-          <ContextMenu
+          <Menu
             level={level + 1}
             open={submenuOpen}
             onClose={() => {
@@ -177,10 +168,10 @@ function ContextMenuOption({
             x={submenuPosition[0]}
             y={submenuPosition[1]}>
             {subOptions}
-          </ContextMenu>
+          </Menu>
         </>
       ) : (
-        <ContextMenuOptionContent
+        <MenuOptionContent
           label={label}
           disabled={disabled}
           icon={renderIcon}
@@ -192,7 +183,7 @@ function ContextMenuOption({
   );
 }
 
-ContextMenuOptionContent.propTypes = {
+MenuOptionContent.propTypes = {
   /**
    * Whether this option is disabled
    */
@@ -214,41 +205,41 @@ ContextMenuOptionContent.propTypes = {
   info: PropTypes.node,
 
   /**
-   * Rendered label for the ContextMenuOptionContent
+   * Rendered label for the MenuOptionContent
    */
   label: PropTypes.node.isRequired,
 };
 
-ContextMenuOption.propTypes = {
+MenuOption.propTypes = {
   /**
-   * Specify the children of the ContextMenuOption
+   * Specify the children of the MenuOption
    */
   children: PropTypes.node,
 
   /**
-   * Specify whether this ContextMenuOption is disabled
+   * Specify whether this MenuOption is disabled
    */
   disabled: PropTypes.bool,
 
   /**
    * Whether the content should be indented (for example because it's in a group with options that have icons).
-   * Is automatically set by ContextMenu
+   * Is automatically set by Menu
    */
   indented: PropTypes.bool,
 
   /**
-   * Optional prop to specify the kind of the ContextMenuOption
+   * Optional prop to specify the kind of the MenuOption
    */
   kind: PropTypes.oneOf(['default', 'danger']),
 
   /**
-   * Rendered label for the ContextMenuOption
+   * Rendered label for the MenuOption
    */
   label: PropTypes.node.isRequired,
 
   /**
    * Which nested level this option is located in.
-   * Is automatically set by ContextMenu
+   * Is automatically set by Menu
    */
   level: PropTypes.number,
 
@@ -258,15 +249,15 @@ ContextMenuOption.propTypes = {
   onClick: PropTypes.func,
 
   /**
-   * Rendered icon for the ContextMenuOption.
+   * Rendered icon for the MenuOption.
    * Can be a React component class
    */
   renderIcon: PropTypes.oneOfType([PropTypes.func, PropTypes.object]),
 
   /**
-   * Rendered shortcut for the ContextMenuOption
+   * Rendered shortcut for the MenuOption
    */
   shortcut: PropTypes.node,
 };
 
-export default ContextMenuOption;
+export default MenuOption;

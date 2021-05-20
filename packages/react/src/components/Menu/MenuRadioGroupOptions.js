@@ -8,9 +8,9 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { Checkmark16 } from '@carbon/icons-react';
-import ContextMenuOption from './ContextMenuOption';
+import MenuOption from './MenuOption';
 
-function ContextMenuRadioGroupOptions({
+function MenuRadioGroupOptions({
   items,
   initialSelectedItem,
   onChange = () => {},
@@ -26,7 +26,7 @@ function ContextMenuRadioGroupOptions({
     const isSelected = selected === option;
 
     return (
-      <ContextMenuOption
+      <MenuOption
         key={i}
         role="menuitemradio"
         aria-checked={isSelected}
@@ -43,7 +43,7 @@ function ContextMenuRadioGroupOptions({
   return options;
 }
 
-ContextMenuRadioGroupOptions.propTypes = {
+MenuRadioGroupOptions.propTypes = {
   /**
    * Whether the option should be checked by default
    */
@@ -60,4 +60,4 @@ ContextMenuRadioGroupOptions.propTypes = {
   onChange: PropTypes.func,
 };
 
-export default ContextMenuRadioGroupOptions;
+export default MenuRadioGroupOptions;
