@@ -17,7 +17,7 @@
   .#{$prefix}--structured-list--selection .#{$prefix}--structured-list-th {
     @include padding--data-structured-list;
   }
-  @if feature-flag-enabled('enable-2021-release') {
+  @if feature-flag-enabled('enable-v11-release') {
     .#{$prefix}--structured-list-row--focused-within {
       @include focus-outline('outline');
     }
@@ -39,9 +39,37 @@
     overflow-x: auto;
     overflow-y: hidden;
 
+    // Condensed list
     &.#{$prefix}--structured-list--condensed .#{$prefix}--structured-list-td,
     &.#{$prefix}--structured-list--condensed .#{$prefix}--structured-list-th {
       @include padding-td--condensed;
+      //8px padding all over
+    }
+
+    .#{$prefix}--structured-list-row
+      .#{$prefix}--structured-list-td:first-of-type,
+    .#{$prefix}--structured-list-row
+      .#{$prefix}--structured-list-th:first-of-type {
+      padding-left: 1rem;
+      // specs require 16px spacing between columns
+      // 8px side padding between col creates 16 px, with exception of 1st col, which needs an override to be 16px
+    }
+
+    // Flush list
+    &.#{$prefix}--structured-list--flush
+      .#{$prefix}--structured-list-row
+      .#{$prefix}--structured-list-td,
+    &.#{$prefix}--structured-list--flush
+      .#{$prefix}--structured-list-row
+      .#{$prefix}--structured-list-th,
+    &.#{$prefix}--structured-list--flush
+      .#{$prefix}--structured-list-row
+      .#{$prefix}--structured-list-td:first-of-type,
+    &.#{$prefix}--structured-list--flush
+      .#{$prefix}--structured-list-row
+      .#{$prefix}--structured-list-th:first-of-type {
+      padding-right: 1rem;
+      padding-left: 0;
     }
   }
 
@@ -67,7 +95,7 @@
     cursor: inherit;
   }
 
-  @if not feature-flag-enabled('enable-2021-release') {
+  @if not feature-flag-enabled('enable-v11-release') {
     .#{$prefix}--structured-list-row:focus:not(.#{$prefix}--structured-list-row--header-row) {
       @include focus-outline('outline');
     }
@@ -123,7 +151,7 @@
     display: table-cell;
     max-width: 36rem;
     color: $text-secondary;
-    @if feature-flag-enabled('enable-2021-release') {
+    @if feature-flag-enabled('enable-v11-release') {
       border-top: 1px solid $border-subtle;
     }
 

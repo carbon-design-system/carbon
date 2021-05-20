@@ -440,6 +440,27 @@
     padding: $button-padding-field;
   }
 
+  //expressive styles
+  .#{$prefix}--btn--expressive {
+    @include carbon--type-style('body-short-02');
+
+    min-height: 3rem;
+  }
+
+  .#{$prefix}--btn--icon-only.#{$prefix}--btn--expressive {
+    padding: 12px 13px;
+    //default size 48px
+  }
+
+  .#{$prefix}--btn.#{$prefix}--btn--expressive .#{$prefix}--btn__icon {
+    width: rem(20px);
+    height: rem(20px);
+  }
+
+  .#{$prefix}--btn-set .#{$prefix}--btn.#{$prefix}--btn--expressive {
+    max-width: rem(320px);
+  }
+
   // Skeleton State
   .#{$prefix}--btn.#{$prefix}--skeleton {
     @include skeleton;

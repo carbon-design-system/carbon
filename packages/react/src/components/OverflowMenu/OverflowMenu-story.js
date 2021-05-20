@@ -8,8 +8,7 @@
 import React from 'react';
 import { action } from '@storybook/addon-actions';
 import { withKnobs, boolean, select, text } from '@storybook/addon-knobs';
-import OverflowMenu from '../OverflowMenu';
-import { OverflowMenu as OGOverflowMenu } from './OverflowMenu';
+import { OverflowMenu } from './OverflowMenu';
 import OverflowMenuItem from '../OverflowMenuItem';
 import mdx from './OverflowMenu.mdx';
 import { Filter16 } from '@carbon/icons-react';
@@ -61,7 +60,7 @@ OverflowMenu.displayName = 'OverflowMenu';
 export default {
   title: 'Components/OverflowMenu',
   decorators: [withKnobs],
-  component: OGOverflowMenu,
+  component: OverflowMenu,
   subcomponents: {
     OverflowMenuItem,
   },
