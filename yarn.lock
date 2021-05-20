@@ -2815,10 +2815,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@ibm/plex@npm:6.0.0-next.3":
-  version: 6.0.0-next.3
-  resolution: "@ibm/plex@npm:6.0.0-next.3"
-  checksum: 72853234602a16a4fe8b934a8920584797802b96b82829cc822ef9abdba61d60dffcf391e7efc8854dca82927266b00db8ed18c758f06acc65ed9c428d0f3820
+"@ibm/plex@npm:6.0.0-next.4":
+  version: 6.0.0-next.4
+  resolution: "@ibm/plex@npm:6.0.0-next.4"
+  checksum: 188827f27431d561111dc39976de1b634deabfd29034074241a9f6f1ef48dee3b589d29e97ed4f65c8d1e1acfacf69577afe313f6042abcb574f85c63754b9e0
   languageName: node
   linkType: hard
 
