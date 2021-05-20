@@ -4,8 +4,11 @@ import PropTypes from 'prop-types';
 import { settings } from 'carbon-components';
 import { View16, ViewOff16, WarningFilled16 } from '@carbon/icons-react';
 import { textInputProps } from './util';
+import { warning } from '../../internal/warning';
 
 const { prefix } = settings;
+
+let didWarnAboutDeprecation = false;
 
 const ControlledPasswordInput = React.forwardRef(
   function ControlledPasswordInput(
@@ -34,6 +37,14 @@ const ControlledPasswordInput = React.forwardRef(
     },
     ref
   ) {
+    if (__DEV__) {
+      warning(
+        didWarnAboutDeprecation,
+        '`<TextInput.ControlledPasswordInput>` has been deprecated in favor of `<TextInput.PasswordInput />` and will be removed in the next major release of `carbon-components-react`'
+      );
+      didWarnAboutDeprecation = true;
+    }
+
     const errorId = id + '-error-msg';
     const textInputClasses = classNames(
       `${prefix}--text-input`,

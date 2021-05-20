@@ -282,7 +282,7 @@
 
   .#{$prefix}--btn--ghost.#{$prefix}--btn--icon-only
     .#{$prefix}--btn__icon
-    path:not([data-icon-path]),
+    path:not([data-icon-path]):not([fill='none']),
   .#{$prefix}--btn--ghost.#{$prefix}--btn--icon-only .#{$prefix}--btn__icon {
     fill: $icon-primary;
   }
@@ -438,6 +438,27 @@
   .#{$prefix}--btn--md {
     min-height: rem(40px);
     padding: $button-padding-field;
+  }
+
+  //expressive styles
+  .#{$prefix}--btn--expressive {
+    @include carbon--type-style('body-short-02');
+
+    min-height: 3rem;
+  }
+
+  .#{$prefix}--btn--icon-only.#{$prefix}--btn--expressive {
+    padding: 12px 13px;
+    //default size 48px
+  }
+
+  .#{$prefix}--btn.#{$prefix}--btn--expressive .#{$prefix}--btn__icon {
+    width: rem(20px);
+    height: rem(20px);
+  }
+
+  .#{$prefix}--btn-set .#{$prefix}--btn.#{$prefix}--btn--expressive {
+    max-width: rem(320px);
   }
 
   // Skeleton State

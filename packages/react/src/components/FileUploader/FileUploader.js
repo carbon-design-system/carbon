@@ -91,8 +91,9 @@ export default class FileUploader extends React.Component {
     /**
      * Specify the size of the FileUploaderButton, from a list of available
      * sizes. For `default` buttons, this prop can remain unspecified.
+     * V11: `default`, `field`, and `small` will be removed
      */
-    size: PropTypes.oneOf(['default', 'field', 'small']),
+    size: PropTypes.oneOf(['default', 'field', 'small', 'sm', 'md', 'lg']),
   };
 
   static defaultProps = {
@@ -179,8 +180,8 @@ export default class FileUploader extends React.Component {
     });
 
     const selectedFileClasses = classNames(`${prefix}--file__selected-file`, {
-      [`${prefix}--file__selected-file--field`]: size === 'field',
-      [`${prefix}--file__selected-file--sm`]: size === 'small',
+      [`${prefix}--file__selected-file--md`]: size === 'field' || size === 'md',
+      [`${prefix}--file__selected-file--sm`]: size === 'small' || size === 'sm',
     });
 
     return (

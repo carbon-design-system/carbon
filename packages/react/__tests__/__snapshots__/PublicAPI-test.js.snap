@@ -150,6 +150,7 @@ Map {
     "defaultProps": Object {
       "dangerDescription": "danger",
       "disabled": false,
+      "isExpressive": false,
       "kind": "primary",
       "size": "default",
       "tabIndex": 0,
@@ -194,6 +195,9 @@ Map {
         "type": "string",
       },
       "iconDescription": [Function],
+      "isExpressive": Object {
+        "type": "bool",
+      },
       "isSelected": Object {
         "type": "bool",
       },
@@ -2155,6 +2159,12 @@ Map {
         ],
         "type": "oneOf",
       },
+      "disable": Object {
+        "type": "array",
+      },
+      "enable": Object {
+        "type": "array",
+      },
       "light": Object {
         "type": "bool",
       },
@@ -2246,6 +2256,9 @@ Map {
         "type": "func",
       },
       "onClose": Object {
+        "type": "func",
+      },
+      "onOpen": Object {
         "type": "func",
       },
       "short": Object {
@@ -2629,6 +2642,9 @@ Map {
             "default",
             "field",
             "small",
+            "sm",
+            "md",
+            "lg",
           ],
         ],
         "type": "oneOf",
@@ -2727,6 +2743,9 @@ Map {
             "default",
             "field",
             "small",
+            "sm",
+            "md",
+            "lg",
           ],
         ],
         "type": "oneOf",
@@ -2784,6 +2803,9 @@ Map {
             "default",
             "field",
             "small",
+            "sm",
+            "md",
+            "lg",
           ],
         ],
         "type": "oneOf",
@@ -2823,6 +2845,9 @@ Map {
             "default",
             "field",
             "small",
+            "sm",
+            "md",
+            "lg",
           ],
         ],
         "type": "oneOf",
@@ -4250,6 +4275,7 @@ Map {
   },
   "OrderedList" => Object {
     "defaultProps": Object {
+      "isExpressive": false,
       "native": false,
       "nested": false,
     },
@@ -4259,6 +4285,9 @@ Map {
       },
       "className": Object {
         "type": "string",
+      },
+      "isExpressive": Object {
+        "type": "bool",
       },
       "native": Object {
         "type": "bool",
@@ -4666,7 +4695,7 @@ Map {
           "enable-css-custom-properties" => false,
           "enable-use-controlled-state-with-value" => false,
           "enable-css-grid" => false,
-          "enable-2021-release" => false,
+          "enable-v11-release" => false,
         },
       },
       "_currentValue2": FeatureFlagScope {
@@ -4674,7 +4703,7 @@ Map {
           "enable-css-custom-properties" => false,
           "enable-use-controlled-state-with-value" => false,
           "enable-css-grid" => false,
-          "enable-2021-release" => false,
+          "enable-v11-release" => false,
         },
       },
       "_threadCount": 0,
@@ -5657,6 +5686,9 @@ Map {
         "onClick": Object {
           "type": "func",
         },
+        "onTogglePasswordVisibility": Object {
+          "type": "func",
+        },
         "placeholder": Object {
           "type": "string",
         },
@@ -5683,6 +5715,15 @@ Map {
               "right",
               "bottom",
               "left",
+            ],
+          ],
+          "type": "oneOf",
+        },
+        "type": Object {
+          "args": Array [
+            Array [
+              "password",
+              "text",
             ],
           ],
           "type": "oneOf",
@@ -6212,60 +6253,7 @@ Map {
       },
     },
   },
-  "Toggle" => Object {
-    "defaultProps": Object {
-      "aria-label": "Toggle",
-      "defaultToggled": false,
-      "labelA": "Off",
-      "labelB": "On",
-      "onToggle": [Function],
-    },
-    "propTypes": Object {
-      "aria-label": Object {
-        "isRequired": true,
-        "type": "string",
-      },
-      "className": Object {
-        "type": "string",
-      },
-      "defaultToggled": Object {
-        "type": "bool",
-      },
-      "id": Object {
-        "isRequired": true,
-        "type": "string",
-      },
-      "labelA": Object {
-        "isRequired": true,
-        "type": "node",
-      },
-      "labelB": Object {
-        "isRequired": true,
-        "type": "node",
-      },
-      "labelText": Object {
-        "type": "node",
-      },
-      "onChange": Object {
-        "type": "func",
-      },
-      "onToggle": Object {
-        "type": "func",
-      },
-      "size": Object {
-        "args": Array [
-          Array [
-            "sm",
-            "md",
-          ],
-        ],
-        "type": "oneOf",
-      },
-      "toggled": Object {
-        "type": "bool",
-      },
-    },
-  },
+  "Toggle" => Object {},
   "ToggleSmall" => Object {
     "defaultProps": Object {
       "defaultToggled": false,
@@ -6436,6 +6424,9 @@ Map {
       "id": Object {
         "type": "string",
       },
+      "onBlur": Object {
+        "type": "func",
+      },
       "onFocus": Object {
         "type": "func",
       },
@@ -6471,7 +6462,6 @@ Map {
         "type": "oneOf",
       },
       "children": Object {
-        "isRequired": true,
         "type": "node",
       },
       "className": Object {
@@ -6487,6 +6477,9 @@ Map {
           ],
         ],
         "type": "oneOf",
+      },
+      "disabled": Object {
+        "type": "bool",
       },
       "id": Object {
         "type": "string",
@@ -6506,6 +6499,19 @@ Map {
       "onMouseLeave": Object {
         "type": "func",
       },
+      "renderIcon": Object {
+        "args": Array [
+          Array [
+            Object {
+              "type": "func",
+            },
+            Object {
+              "type": "object",
+            },
+          ],
+        ],
+        "type": "oneOfType",
+      },
       "tooltipText": Object {
         "isRequired": true,
         "type": "node",
@@ -6514,6 +6520,7 @@ Map {
   },
   "UnorderedList" => Object {
     "defaultProps": Object {
+      "isExpressive": false,
       "nested": false,
     },
     "propTypes": Object {
@@ -6522,6 +6529,9 @@ Map {
       },
       "className": Object {
         "type": "string",
+      },
+      "isExpressive": Object {
+        "type": "bool",
       },
       "nested": Object {
         "type": "bool",
@@ -7780,9 +7790,9 @@ Map {
       },
     },
   },
-  "unstable_ContextMenu" => Object {
-    "ContextMenuDivider": Object {},
-    "ContextMenuGroup": Object {
+  "unstable_Menu" => Object {
+    "MenuDivider": Object {},
+    "MenuGroup": Object {
       "propTypes": Object {
         "children": Object {
           "type": "node",
@@ -7793,7 +7803,7 @@ Map {
         },
       },
     },
-    "ContextMenuItem": Object {
+    "MenuItem": Object {
       "propTypes": Object {
         "children": Object {
           "type": "node",
@@ -7819,7 +7829,7 @@ Map {
         },
       },
     },
-    "ContextMenuRadioGroup": Object {
+    "MenuRadioGroup": Object {
       "propTypes": Object {
         "initialSelectedItem": Object {
           "type": "string",
@@ -7842,7 +7852,7 @@ Map {
         },
       },
     },
-    "ContextMenuSelectableItem": Object {
+    "MenuSelectableItem": Object {
       "propTypes": Object {
         "initialChecked": Object {
           "type": "bool",
@@ -7857,6 +7867,9 @@ Map {
       },
     },
     "propTypes": Object {
+      "autoclose": Object {
+        "type": "bool",
+      },
       "children": Object {
         "type": "node",
       },
@@ -7870,15 +7883,45 @@ Map {
         "type": "bool",
       },
       "x": Object {
-        "type": "number",
+        "args": Array [
+          Array [
+            Object {
+              "type": "number",
+            },
+            Object {
+              "args": Array [
+                Object {
+                  "type": "number",
+                },
+              ],
+              "type": "arrayOf",
+            },
+          ],
+        ],
+        "type": "oneOfType",
       },
       "y": Object {
-        "type": "number",
+        "args": Array [
+          Array [
+            Object {
+              "type": "number",
+            },
+            Object {
+              "args": Array [
+                Object {
+                  "type": "number",
+                },
+              ],
+              "type": "arrayOf",
+            },
+          ],
+        ],
+        "type": "oneOfType",
       },
     },
   },
-  "unstable_ContextMenuDivider" => Object {},
-  "unstable_ContextMenuGroup" => Object {
+  "unstable_MenuDivider" => Object {},
+  "unstable_MenuGroup" => Object {
     "propTypes": Object {
       "children": Object {
         "type": "node",
@@ -7889,7 +7932,7 @@ Map {
       },
     },
   },
-  "unstable_ContextMenuItem" => Object {
+  "unstable_MenuItem" => Object {
     "propTypes": Object {
       "children": Object {
         "type": "node",
@@ -7915,7 +7958,7 @@ Map {
       },
     },
   },
-  "unstable_ContextMenuRadioGroup" => Object {
+  "unstable_MenuRadioGroup" => Object {
     "propTypes": Object {
       "initialSelectedItem": Object {
         "type": "string",
@@ -7938,7 +7981,7 @@ Map {
       },
     },
   },
-  "unstable_ContextMenuSelectableItem" => Object {
+  "unstable_MenuSelectableItem" => Object {
     "propTypes": Object {
       "initialChecked": Object {
         "type": "bool",
