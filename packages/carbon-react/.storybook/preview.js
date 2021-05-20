@@ -24,6 +24,11 @@ export const globalTypes = {
           title: 'English',
           value: 'en',
         },
+        {
+          right: '🇵🇸',
+          title: 'Arabic',
+          value: 'ar',
+        },
       ],
     },
   },
@@ -83,11 +88,15 @@ configureActions({
 
 export const decorators = [
   (Story, context) => {
-    const { theme } = context.globals;
+    const { locale, theme } = context.globals;
 
     React.useEffect(() => {
       document.body.setAttribute('data-carbon-theme', theme);
     }, [theme]);
+
+    React.useEffect(() => {
+      document.documentElement.lang = locale;
+    }, [locale]);
 
     return <Story {...context} />;
   },

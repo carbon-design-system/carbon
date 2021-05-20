@@ -2815,6 +2815,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@ibm/plex@npm:6.0.0-next.3":
+  version: 6.0.0-next.3
+  resolution: "@ibm/plex@npm:6.0.0-next.3"
+  checksum: 72853234602a16a4fe8b934a8920584797802b96b82829cc822ef9abdba61d60dffcf391e7efc8854dca82927266b00db8ed18c758f06acc65ed9c428d0f3820
+  languageName: node
+  linkType: hard
+
 "@icons/material@npm:^0.2.4":
   version: 0.2.4
   resolution: "@icons/material@npm:0.2.4"

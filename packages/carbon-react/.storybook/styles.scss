@@ -5,7 +5,31 @@
 // LICENSE file in the root directory of this source tree.
 //
 
+$feature-flags: (
+  enable-v11-release: true,
+);
+
+@use "~@ibm/plex/default" as sans;
+@use "~@ibm/plex/mono";
+@use "~@ibm/plex/arabic";
+
 @use '../index.scss' as styles;
+
+// For now, including all weights for testing
+@include arabic.all;
+// @include arabic.light;
+// @include arabic.regular;
+// @include arabic.semibold;
+
+@include sans.all;
+// @include sans.light;
+// @include sans.regular;
+// @include sans.semibold;
+
+@include mono.all;
+// @include mono.light;
+// @include mono.regular;
+// @include mono.semibold;
 
 body {
   @include styles.theme();
@@ -21,4 +45,17 @@ body {
 
 [data-carbon-theme='g100'] {
   @include styles.theme(styles.$g100);
+}
+
+html[lang='en'] body {
+  font-family: 'IBM Plex Sans', 'Helvetica Neue', Arial, sans-serif;
+}
+
+html[lang='ar'] body {
+  font-family: 'IBM Plex Sans Arabic', 'Helvetica Neue', Arial, sans-serif;
+}
+
+.text-mono {
+  font-family: 'IBM Plex Mono', Menlo, 'DejaVu Sans Mono',
+    'Bitstream Vera Sans Mono', Courier, monospace;
 }
