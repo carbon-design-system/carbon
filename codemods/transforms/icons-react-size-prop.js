@@ -27,7 +27,7 @@ function transform(fileInfo, api, options) {
 
   // If we cannot find any, then there is no work to do
   if (matches.size() === 0) {
-    return root.toSource(printOptions);
+    return null;
   }
 
   if (matches.size() > 1) {
@@ -46,6 +46,7 @@ function transform(fileInfo, api, options) {
   // Otherwise, we will get our import to icons and update the imported icons to
   // use the new format
   const iconsImport = matches.get();
+  const importSpecifiers = new Set();
 
   // Iterate through each of the imported icons, get their size and name, and
   // update the import and all matches in the file
@@ -80,126 +81,154 @@ function transform(fileInfo, api, options) {
         return name;
       }
 
-      // Update the imported binding from IconName32 to IconName
-      j(path).replaceWith(j.importSpecifier(j.identifier(name), newBinding));
+      // Update the imported binding from IconName32 to IconName. Only do this
+      // replacement once if we have imports of the same icon but in different
+      // sizes.
+      if (!importSpecifiers.has(newBinding.name)) {
+        importSpecifiers.add(newBinding.name);
+        j(path).replaceWith(j.importSpecifier(j.identifier(name), newBinding));
+      } else {
+        j(path).remove();
+      }
 
       // Finally, find all instances where we refer to this import and update
       // its binding
-      root.find(j.Identifier, { name: local.name }).forEach((path) => {
-        let scope = path.scope;
-        while (scope && scope !== rootScope) {
-          // If a scope already declares this binding, return early as it does
-          // not relate to our icon import
-          if (scope.declares(local.name)) {
+      root
+        .find(j.Identifier, { name: local.name })
+        .filter((path) => {
+          const { node: parent } = path.parent;
+
+          if (
+            j.MemberExpression.check(parent) &&
+            parent.property === path.node &&
+            !parent.computed
+          ) {
+            // obj.oldName
+            return false;
+          }
+
+          if (
+            j.ObjectProperty.check(parent) &&
+            parent.key === path.node &&
+            !parent.computed
+          ) {
+            // { oldName: 3 }
+            return false;
+          }
+
+          if (
+            j.MethodDefinition.check(parent) &&
+            parent.key === path.node &&
+            !parent.computed
+          ) {
+            // class A { oldName() {} }
+            return false;
+          }
+
+          if (
+            j.ClassProperty.check(parent) &&
+            parent.key === path.node &&
+            !parent.computed
+          ) {
+            // class A { oldName = 3 }
+            return false;
+          }
+
+          if (
+            j.JSXAttribute.check(parent) &&
+            parent.name === path.node &&
+            !parent.computed
+          ) {
+            // <Foo oldName={oldName} />
+            return false;
+          }
+          return true;
+        })
+        .forEach((path) => {
+          let scope = path.scope;
+          while (scope && scope !== rootScope) {
+            // If a scope already declares this binding, return early as it does
+            // not relate to our icon import
+            if (scope.declares(local.name)) {
+              return;
+            }
+            scope = scope.parent;
+          }
+
+          if (!scope) {
             return;
           }
-          scope = scope.parent;
-        }
 
-        if (!scope) {
-          return;
-        }
+          const { node: parent } = path.parent;
 
-        const { node: parent } = path.parent;
+          // Replace the identifier name with the new binding name. If the parent
+          // node is an `ImportSpecifier`, we won't do this replacement as it is
+          // handled above
+          if (!j.ImportSpecifier.check(parent)) {
+            path.replace(newBinding);
+          }
 
-        // Replace the identifier name with the new binding name
-        path.replace(newBinding);
-
-        // If our identifier is inside of a JSXOpeningElement, then we need to
-        // check to see if we need to add in the `size` prop that is now
-        // needed
-        if (j.JSXOpeningElement.check(parent) && size !== defaultSize) {
-          parent.attributes.unshift(
-            j.jsxAttribute(
-              j.jsxIdentifier('size'),
-              j.jsxExpressionContainer(j.numericLiteral(size))
-            )
-          );
-        }
-
-        // Handle cases where the icon is referred to in an object, for
-        // example:
-        //
-        // from:
-        // const alias = { name: IconName24 };
-        //
-        // to:
-        // const alias = { name: (props) => <IconName size={24} {...props} /> };
-        //
-        // Since the `size` information needs to be provided, otherwise the
-        // default size will be used
-        if (j.Property.check(parent) && size !== defaultSize) {
-          let replacement = null;
-
-          // map to React.createElement instead of using as the JSX Opening
-          // Element directly
-          if (newBinding.name[0] === newBinding.name[0].toLowerCase()) {
-            // Builds up this structure:
-            // (props) => React.createElement(iconName, {
-            //   size: 20,
-            //   ...props,
-            // });
-            replacement = j.arrowFunctionExpression(
-              [j.identifier('props')],
-              j.callExpression(
-                j.memberExpression(
-                  j.identifier('React'),
-                  j.identifier('createElement')
-                ),
-                [
-                  newBinding,
-                  j.objectExpression([
-                    j.objectProperty(
-                      j.identifier('size'),
-                      j.numericLiteral(size)
-                    ),
-                    j.spreadElement(j.identifier('props')),
-                  ]),
-                ]
-              )
-            );
-          } else {
-            // Build up this structure:
-            // (props) => <IconName size={20} {...props} />
-            replacement = j.arrowFunctionExpression(
-              [j.identifier('props')],
-              j.jsxElement(
-                j.jsxOpeningElement(
-                  j.jsxIdentifier(newBinding.name),
-                  [
-                    j.jsxAttribute(
-                      j.jsxIdentifier('size'),
-                      j.jsxExpressionContainer(j.numericLiteral(size))
-                    ),
-                    j.jsxSpreadAttribute(j.identifier('props')),
-                  ],
-                  true
-                )
+          // If our identifier is inside of a JSXOpeningElement, then we need to
+          // check to see if we need to add in the `size` prop that is now
+          // needed
+          if (j.JSXOpeningElement.check(parent) && size !== defaultSize) {
+            parent.attributes.unshift(
+              j.jsxAttribute(
+                j.jsxIdentifier('size'),
+                j.jsxExpressionContainer(j.numericLiteral(size))
               )
             );
           }
 
-          warn(fileInfo.path);
-          path.parent.get('value').replace(replacement);
-        }
+          // Handle cases where the icon is referred to in an object, for
+          // example:
+          //
+          // from:
+          // const alias = { name: IconName24 };
+          //
+          // to:
+          // const alias = { name: (props) => <IconName size={24} {...props} /> };
+          //
+          // Since the `size` information needs to be provided, otherwise the
+          // default size will be used
+          if (j.ObjectProperty.check(parent)) {
+            let replacement = null;
 
-        // Support `renderIcon` style props where you pass in an Icon by itself
-        // to the prop
-        //
-        // from:
-        // <Component renderIcon={Icon24} />
-        //
-        // to:
-        // <Component renderIcon={(props) => <Icon size={24} {...props} />} />
-        if (j.JSXExpressionContainer.check(parent) && size !== defaultSize) {
-          warn(fileInfo.path);
-          path.parentPath.replace(
-            j.jsxExpressionContainer(
-              j.arrowFunctionExpression(
+            // map to React.createElement instead of using as the JSX Opening
+            // Element directly
+            if (newBinding.name[0] === newBinding.name[0].toLowerCase()) {
+              // Builds up this structure:
+              // (props) => React.createElement(iconName, {
+              //   size: 20,
+              //   ...props,
+              // });
+              replacement = j.arrowFunctionExpression(
+                [j.identifier('props')],
+                j.callExpression(
+                  j.memberExpression(
+                    j.identifier('React'),
+                    j.identifier('createElement')
+                  ),
+                  [
+                    newBinding,
+                    j.objectExpression([
+                      j.objectProperty(
+                        j.identifier('size'),
+                        j.numericLiteral(size)
+                      ),
+                      j.spreadElement(j.identifier('props')),
+                    ]),
+                  ]
+                )
+              );
+            } else {
+              // Build up this structure:
+              // (props) => <IconName size={20} {...props} />
+              replacement = j.arrowFunctionExpression(
                 [j.identifier('props')],
                 j.jsxElement(
                   j.jsxOpeningElement(
-                    j.jsxIdentifier(path.node.name),
+                    j.jsxIdentifier(newBinding.name),
                     [
                       j.jsxAttribute(
                         j.jsxIdentifier('size'),
@@ -210,11 +239,64 @@ function transform(fileInfo, api, options) {
                     true
                   )
                 )
+              );
+            }
+
+            warn(fileInfo.path);
+
+            // Sometimes consumers will use the icon module name as a shorthand
+            // in an object property.
+            //
+            // Input:
+            // const o = { Add16, Add32 };
+            // Output:
+            // const o = { Add16: Add, Add32: (props) => <Add size={32} {...props} />
+            if (
+              parent.key.name !== newBinding.name &&
+              parent.shorthand === true
+            ) {
+              path.parent.get('shorthand').replace(false);
+            }
+
+            if (size !== defaultSize) {
+              path.parent.get('value').replace(replacement);
+            } else {
+              path.parent.get('value').replace(newBinding);
+            }
+          }
+
+          // Support `renderIcon` style props where you pass in an Icon by itself
+          // to the prop
+          //
+          // from:
+          // <Component renderIcon={Icon24} />
+          //
+          // to:
+          // <Component renderIcon={(props) => <Icon size={24} {...props} />} />
+          if (j.JSXExpressionContainer.check(parent) && size !== defaultSize) {
+            warn(fileInfo.path);
+            path.parentPath.replace(
+              j.jsxExpressionContainer(
+                j.arrowFunctionExpression(
+                  [j.identifier('props')],
+                  j.jsxElement(
+                    j.jsxOpeningElement(
+                      j.jsxIdentifier(path.node.name),
+                      [
+                        j.jsxAttribute(
+                          j.jsxIdentifier('size'),
+                          j.jsxExpressionContainer(j.numericLiteral(size))
+                        ),
+                        j.jsxSpreadAttribute(j.identifier('props')),
+                      ],
+                      true
+                    )
+                  )
+                )
               )
-            )
-          );
-        }
-      });
+            );
+          }
+        });
     });
 
   return root.toSource(printOptions);
@@ -226,7 +308,7 @@ We have updated the file: %s to the new icon API.
 However, it may be that this update is missing a \`ref\` on the prop where the
 icon is used. Please make sure to verify that this update is correct.
 
-For more information, check out this migration guide: <TODO LINK>\n`;
+For more information, check out our migration guide: https://bit.ly/3o2vVQW\n`;
 
 const files = new Set();
 
