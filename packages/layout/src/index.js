@@ -163,6 +163,20 @@ export const container = [
   container04,
   container05,
 ];
+export const sizeXSmall = rem(24);
+export const sizeSmall = rem(32);
+export const sizeMedium = rem(40);
+export const sizeLarge = rem(48);
+export const sizeXLarge = rem(64);
+export const size2XLarge = rem(80);
+export const sizes = {
+  XSmall: sizeXSmall,
+  Small: sizeSmall,
+  Medium: sizeMedium,
+  Large: sizeLarge,
+  XLarge: sizeXLarge,
+  '2XLarge': size2XLarge,
+};
 
 // Icon
 export const iconSize01 = '1rem';
