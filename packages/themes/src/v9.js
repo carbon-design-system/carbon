@@ -268,6 +268,12 @@ export {
   container03,
   container04,
   container05,
+  sizeXSmall,
+  sizeSmall,
+  sizeMedium,
+  sizeLarge,
+  sizeXLarge,
+  size2XLarge,
   // Icon sizes
   iconSize01,
   iconSize02,

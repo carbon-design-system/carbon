@@ -11,8 +11,8 @@
 /// @param {Bool} $width [true] - Sets width to 100% if true
 /// @example @include button-reset($width: false);
 /// @group utilities
-@mixin button-reset($width: true) {
-  @include component-reset;
+@mixin reset($width: true) {
+  @include component-reset.reset;
 
   display: inline-block;
   padding: 0;
