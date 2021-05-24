@@ -5,6 +5,7 @@
 // LICENSE file in the root directory of this source tree.
 //
 
-@forward 'scss/modules/themes';
-@forward 'scss/modules/theme';
-@forward 'scss/modules/tokens';
+@forward 'accordion';
+@use 'accordion';
+
+@include accordion.accordion;
