@@ -8,6 +8,7 @@
 import { colors } from '@carbon/colors';
 import { formatTokenName } from '@carbon/themes';
 import { syncColorStyle } from '../tools/sharedStyles';
+import { syncColorVariable } from '../tools/colorVariables';
 
 // We separate out certain colors that are not a part of the primary swatches
 // that we need to render
@@ -74,4 +75,39 @@ export function syncColorStyles({ document }) {
   });
 
   return sharedStyles.concat(singleColors);
+}
+
+/**
+ * Sync color variables (Swatches) in the given document and return an array
+ * @param {object} params - syncColorVariables parameters
+ * @param {Document} params.document
+ * @returns {Array<Swatch>}
+ */
+export function syncColorVariables({ document }) {
+  const colorVariables = Object.keys(swatches).flatMap((swatchName) => {
+    const name = formatTokenName(swatchName);
+    const result = Object.keys(swatches[swatchName]).map((grade) => {
+      return syncColorVariable({
+        document,
+        name: formatColorName({ name, grade, formatFor: 'colorVariable' }),
+        color: swatches[swatchName][grade],
+      });
+    });
+    return result;
+  });
+
+  const singleColors = [
+    ['black', black['100']],
+    ['white', white['0']],
+    ['orange', orange['40']],
+    ['yellow', yellow['30']],
+  ].map(([name, color]) => {
+    return syncColorVariable({
+      document,
+      name: formatColorName({ name, formatFor: 'colorVariable' }),
+      color,
+    });
+  });
+
+  return colorVariables.concat(singleColors);
 }
