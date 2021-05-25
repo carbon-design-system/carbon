@@ -1,0 +1,31 @@
+//
+// Copyright IBM Corp. 2021
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+@use 'component-reset';
+
+/// Resets button styles
+/// @access public
+/// @param {Bool} $width [true] - Sets width to 100% if true
+/// @example @include button-reset($width: false);
+/// @group utilities
+@mixin reset($width: true) {
+  @include component-reset.reset;
+
+  display: inline-block;
+  padding: 0;
+  border: 0;
+  appearance: none;
+  background: none;
+  cursor: pointer;
+
+  @if ($width == true) {
+    width: 100%;
+  }
+
+  &::-moz-focus-inner {
+    border: 0;
+  }
+}

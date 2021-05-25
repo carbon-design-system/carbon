@@ -5,4 +5,19 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-export default from './OverflowMenu';
+import React from 'react';
+
+import { default as OverflowMenuNext } from './next/OverflowMenu';
+import { default as OverflowMenuClassic } from './OverflowMenu';
+
+import { useFeatureFlag } from '../FeatureFlags';
+
+const OverflowMenu = React.forwardRef(function OverflowMenu(props, ref) {
+  const enabled = useFeatureFlag('enable-v11-release');
+  if (enabled) {
+    return <OverflowMenuNext {...props} />;
+  }
+  return <OverflowMenuClassic {...props} ref={ref} />;
+});
+
+export default OverflowMenu;

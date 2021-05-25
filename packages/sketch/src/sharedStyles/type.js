@@ -42,12 +42,12 @@ export function syncTextStyles(document) {
     .map((token) => {
       const name = formatSharedStyleName(token);
       const style = convertTypeStyle(token, styles[token]);
-      const sharedTextStyle = syncSharedStyle(
+      const sharedTextStyle = syncSharedStyle({
         document,
         name,
         style,
-        SharedStyle.StyleType.Text
-      );
+        styleType: SharedStyle.StyleType.Text,
+      });
 
       sharedTextStyle.style.textColor = '#000000ff';
       sharedTextStyle.style.borders = [];
