@@ -20,42 +20,26 @@
     margin-bottom: $spacing-03;
     color: $text-primary;
   }
-  .#{$prefix}--progress-bar__container {
+
+  .#{$prefix}--progress-bar__track {
     position: relative;
     width: 100%;
     height: rem(8px);
+    background-color: $layer;
   }
 
   .#{$prefix}--progress-bar__bar {
     display: block;
     width: 100%;
     height: 100%;
-    border: none;
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    appearance: none;
-    background: $layer;
-  }
-
-  .#{$prefix}--progress-bar__bar::-webkit-progress-bar {
-    background: transparent;
-  }
-
-  .#{$prefix}--progress-bar__bar::-webkit-progress-value {
     background-color: $interactive;
-  }
-
-  .#{$prefix}--progress-bar__bar::-moz-progress-bar {
-    background-color: $interactive;
+    transform: scaleX(0);
+    transform-origin: 0 50%;
+    transition: transform $duration--fast-02 motion(standard, productive);
   }
 
   .#{$prefix}--progress-bar--indeterminate
-    .#{$prefix}--progress-bar__bar::-moz-progress-bar {
-    background: transparent;
-  }
-
-  .#{$prefix}--progress-bar--indeterminate
-    .#{$prefix}--progress-bar__container::after {
+    .#{$prefix}--progress-bar__track::after {
     position: absolute;
     top: 0;
     right: 0;

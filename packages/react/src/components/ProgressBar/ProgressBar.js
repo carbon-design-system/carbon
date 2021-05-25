@@ -25,7 +25,14 @@ function ProgressBar({
   const helperId = useId('progress-bar-helper');
 
   const indeterminate = value === null || value === undefined;
-  const fallback = !indeterminate ? `${Math.round((value / max) * 100)}%` : '';
+
+  let percentage = value / max;
+  if (percentage > 1) {
+    percentage = 1;
+  }
+  if (percentage < 0) {
+    percentage = 0;
+  }
 
   const wrapperClasses = classNames(
     `${prefix}--progress-bar`,
@@ -44,15 +51,18 @@ function ProgressBar({
       <label className={labelClasses} htmlFor={id}>
         {label}
       </label>
-      <div className={`${prefix}--progress-bar__container`}>
-        <progress
-          id={id}
+      <div
+        className={`${prefix}--progress-bar__track`}
+        id={id}
+        role="progressbar"
+        aria-valuemin={!indeterminate ? 0 : null}
+        aria-valuemax={!indeterminate ? max : null}
+        aria-valuenow={!indeterminate ? value : null}
+        aria-describedby={helperText ? helperId : null}>
+        <div
           className={`${prefix}--progress-bar__bar`}
-          max={max}
-          value={value}
-          aria-describedby={helperText ? helperId : null}>
-          {fallback}
-        </progress>
+          style={{ transform: `scaleX(${percentage})` }}
+        />
       </div>
       {helperText && (
         <div id={helperId} className={`${prefix}--progress-bar__helper-text`}>
