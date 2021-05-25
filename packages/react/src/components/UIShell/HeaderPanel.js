@@ -12,8 +12,6 @@ import PropTypes from 'prop-types';
 import { AriaLabelPropType } from '../../prop-types/AriaPropTypes';
 import { warning } from '../../internal/warning';
 
-let didWarnAboutDeprecation = false;
-
 const { prefix } = settings;
 
 const HeaderPanel = React.forwardRef(function HeaderPanel(
@@ -38,11 +36,10 @@ const HeaderPanel = React.forwardRef(function HeaderPanel(
   });
 
   warning(
-    didWarnAboutDeprecation,
+    true,
     'The `HeaderPanel` component has been deprecated and will be removed ' +
       'in the next major release of `carbon-components-react`'
   );
-  didWarnAboutDeprecation = true;
 
   return (
     <div {...other} className={className} {...accessibilityLabel} ref={ref}>
