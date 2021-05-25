@@ -20,7 +20,6 @@ import {
   NotificationActionButton,
 } from '../Notification';
 import mdx from './Notification.mdx';
-import { FeatureFlags } from '../FeatureFlags';
 
 const kinds = {
   'Error (error)': 'error',
@@ -33,7 +32,9 @@ const kinds = {
 const notificationProps = () => ({
   kind: select('The notification kind (kind)', kinds, 'info'),
   lowContrast: boolean('Use low contrast variant (lowContrast)', false),
-  children: text('Content (children)', 'Notification content'),
+  role: text('ARIA role (role)', 'alert'),
+  title: text('Title (title)', 'Notification title'),
+  subtitle: text('Subtitle (subtitle)', 'Subtitle text goes here.'),
   iconDescription: text(
     'Icon description (iconDescription)',
     'describes the close button'
@@ -45,25 +46,14 @@ const notificationProps = () => ({
   hideCloseButton: boolean('Hide close button (hideCloseButton)', false),
   onClose: action('onClose'),
   onCloseButtonClick: action('onCloseButtonClick'),
-  closeOnEscape: boolean(
-    'Close notifcation when escape is pressed (closeOnEscape)',
-    true
-  ),
-  hasFocus: boolean('Notification receives focus on render (hasfocus)', true),
 });
 
 const toastNotificationProps = () => ({
   ...notificationProps(),
-  role: text('ARIA role (role)', 'status'),
   timeout: number(
     'Duration in milliseconds to display notification (timeout)',
     0
   ),
-});
-
-const inlineNotificationProps = () => ({
-  ...notificationProps(),
-  role: text('ARIA role (role)', 'status'),
 });
 
 export default {
@@ -82,21 +72,23 @@ export default {
 };
 
 export const Toast = () => (
-  <FeatureFlags flags={{ 'enable-v11-release': true }}>
-    <ToastNotification {...toastNotificationProps()} />
-  </FeatureFlags>
+  <ToastNotification
+    {...toastNotificationProps()}
+    caption={text('Caption (caption)', '00:00:00 AM')}
+    style={{ marginBottom: '.5rem' }}
+  />
 );
 
 export const Inline = () => (
-  <FeatureFlags flags={{ 'enable-v11-release': true }}>
-    <InlineNotification
-      {...inlineNotificationProps()}
-      actions={
-        <NotificationActionButton
-          onClick={action('NotificationActionButton onClick')}>
-          {text('Action (NotificationActionButton > children)', 'Action')}
-        </NotificationActionButton>
-      }
-    />
-  </FeatureFlags>
+  <InlineNotification
+    {...notificationProps()}
+    actions={
+      <NotificationActionButton
+        onClick={action('NotificationActionButton onClick')}>
+        {text('Action (NotificationActionButton > children)', 'Action')}
+      </NotificationActionButton>
+    }
+  />
 );
+
+Inline.storyName = 'inline';

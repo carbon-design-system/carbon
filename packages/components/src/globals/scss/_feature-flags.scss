@@ -33,7 +33,7 @@ $default-feature-flags: (
   grid-columns-16: false,
   grid--fallback: false,
   enable-css-custom-properties: false,
-  enable-v11-release: true,
+  enable-v11-release: false,
 );
 
 $feature-flags: map-merge($default-feature-flags, $feature-flags);

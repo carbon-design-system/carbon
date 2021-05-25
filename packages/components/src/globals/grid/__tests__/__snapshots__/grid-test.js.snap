@@ -2,46 +2,46 @@
 
 exports[`_grid.scss should generate grid code when the grid feature flag is on 1`] = `
 "h1 {
-  font-size: var(--cds-productive-heading-06-font-size, 2.625rem);
-  font-weight: var(--cds-productive-heading-06-font-weight, 300);
-  line-height: var(--cds-productive-heading-06-line-height, 1.199);
-  letter-spacing: var(--cds-productive-heading-06-letter-spacing, 0); }
+  font-size: 2.625rem;
+  font-weight: 300;
+  line-height: 1.199;
+  letter-spacing: 0; }
 
 h2 {
-  font-size: var(--cds-productive-heading-05-font-size, 2rem);
-  font-weight: var(--cds-productive-heading-05-font-weight, 400);
-  line-height: var(--cds-productive-heading-05-line-height, 1.25);
-  letter-spacing: var(--cds-productive-heading-05-letter-spacing, 0); }
+  font-size: 2rem;
+  font-weight: 400;
+  line-height: 1.25;
+  letter-spacing: 0; }
 
 h3 {
-  font-size: var(--cds-productive-heading-04-font-size, 1.75rem);
-  font-weight: var(--cds-productive-heading-04-font-weight, 400);
-  line-height: var(--cds-productive-heading-04-line-height, 1.29);
-  letter-spacing: var(--cds-productive-heading-04-letter-spacing, 0); }
+  font-size: 1.75rem;
+  font-weight: 400;
+  line-height: 1.29;
+  letter-spacing: 0; }
 
 h4 {
-  font-size: var(--cds-productive-heading-03-font-size, 1.25rem);
-  font-weight: var(--cds-productive-heading-03-font-weight, 400);
-  line-height: var(--cds-productive-heading-03-line-height, 1.4);
-  letter-spacing: var(--cds-productive-heading-03-letter-spacing, 0); }
+  font-size: 1.25rem;
+  font-weight: 400;
+  line-height: 1.4;
+  letter-spacing: 0; }
 
 h5 {
-  font-size: var(--cds-productive-heading-02-font-size, 1rem);
-  font-weight: var(--cds-productive-heading-02-font-weight, 600);
-  line-height: var(--cds-productive-heading-02-line-height, 1.375);
-  letter-spacing: var(--cds-productive-heading-02-letter-spacing, 0); }
+  font-size: 1rem;
+  font-weight: 600;
+  line-height: 1.375;
+  letter-spacing: 0; }
 
 h6 {
-  font-size: var(--cds-productive-heading-01-font-size, 0.875rem);
-  font-weight: var(--cds-productive-heading-01-font-weight, 600);
-  line-height: var(--cds-productive-heading-01-line-height, 1.29);
-  letter-spacing: var(--cds-productive-heading-01-letter-spacing, 0.16px); }
+  font-size: 0.875rem;
+  font-weight: 600;
+  line-height: 1.29;
+  letter-spacing: 0.16px; }
 
 p {
-  font-size: var(--cds-body-long-02-font-size, 1rem);
-  font-weight: var(--cds-body-long-02-font-weight, 400);
-  line-height: var(--cds-body-long-02-line-height, 1.5);
-  letter-spacing: var(--cds-body-long-02-letter-spacing, 0); }
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.5;
+  letter-spacing: 0; }
 
 a {
   color: #0f62fe; }
