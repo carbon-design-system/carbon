@@ -596,6 +596,7 @@ export default class DatePicker extends Component {
 
   render() {
     const {
+      allowInput, // eslint-disable-line
       appendTo, // eslint-disable-line
       children,
       className,
