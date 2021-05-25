@@ -34,7 +34,8 @@ function Grid({
     [`${prefix}--css-grid--condensed`]: condensed,
     [`${prefix}--css-grid--narrow`]: narrow,
     [`${prefix}--subgrid`]: isSubgrid,
-    [`${prefix}--col-span-${columns}`]: isSubgrid,
+    [`${prefix}--col-span-${columns}`]:
+      (isSubgrid && columns !== 16) || columns !== 16,
   };
 
   const flexGridClassNames = {

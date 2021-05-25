@@ -53,7 +53,7 @@ module.exports = {
             postcssOptions: {
               plugins: [
                 require('postcss-custom-properties')(),
-                require('rtlcss')(),
+                // require('rtlcss')(),
                 require('autoprefixer')({
                   overrideBrowserslist: ['last 1 version'],
                 }),

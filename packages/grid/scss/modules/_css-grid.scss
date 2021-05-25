@@ -67,6 +67,10 @@
   @include subgrid();
 }
 
+.#{$prefix}--subgrid[class*='col'] {
+  display: grid;
+}
+
 .#{$prefix}--css-grid--narrow .#{$prefix}--subgrid.#{$prefix}--css-grid {
   padding-right: 0;
   padding-left: 0;
@@ -111,6 +115,18 @@
   padding-left: calc(var(--cds-grid-gutter) / 2);
 }
 
+// Narrow subgrid inside wide
+.#{$prefix}--css-grid .#{$prefix}--subgrid.#{$prefix}--css-grid--narrow {
+  margin-left: calc((var(--cds-grid-margin) + var(--cds-grid-gutter) / 2) * -1);
+}
+
+// Narrow subgrid column inside wide
+.#{$prefix}--css-grid
+  .#{$prefix}--subgrid.#{$prefix}--css-grid--narrow
+  > [class*='col'] {
+  margin-left: calc(var(--cds-grid-gutter) / 2 * -1);
+}
+
 // -----------------------------------------------------------------------------
 // Condensed
 // -----------------------------------------------------------------------------
@@ -151,6 +167,7 @@
   } @else {
     --cds-grid-columns: #{$i};
 
+    display: block;
     grid-column: span $i / span $i;
   }
 }
