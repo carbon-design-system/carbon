@@ -6641,14 +6641,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@testing-library/user-event@npm:^12.2.0":
-  version: 12.2.0
-  resolution: "@testing-library/user-event@npm:12.2.0"
+"@testing-library/user-event@npm:^13.1.9":
+  version: 13.1.9
+  resolution: "@testing-library/user-event@npm:13.1.9"
   dependencies:
-    "@babel/runtime": ^7.10.2
+    "@babel/runtime": ^7.12.5
   peerDependencies:
     "@testing-library/dom": ">=7.21.4"
-  checksum: e0133824cdfb4e3ee132c58b8bbddffd329b0133182c29532168cc84387afb9938207cefb13cf0dc8fc0dd47785cab2f8b2114134870a4fd00b1b81a0110bb36
+  checksum: 3a910ba206dc14c276db55ce9344e41485edcd64cc218571e5238d3e92544679e555d50d6472d2a8b2e839a5d1f7dc331d91af6753cf443b995293c3cd276283
   languageName: node
   linkType: hard
 
@@ -11201,7 +11201,7 @@ __metadata:
     "@testing-library/dom": ^7.26.6
     "@testing-library/jest-dom": ^5.11.5
     "@testing-library/react": ^11.1.1
-    "@testing-library/user-event": ^12.2.0
+    "@testing-library/user-event": ^13.1.9
     all-contributors-cli: ^6.19.0
     cross-env: ^5.2.0
     cross-spawn: ^6.0.5
