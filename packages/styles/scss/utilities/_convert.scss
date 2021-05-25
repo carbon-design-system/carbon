@@ -14,6 +14,7 @@ $base-font-size: 16px !default;
 /// @param {Number} $px - Number with px unit
 /// @return {Number} Number with rem unit
 /// @access public
+/// @group utilities
 @function rem($px) {
   @if unit($px) != 'px' {
     // TODO: update to @error in v11
@@ -27,6 +28,7 @@ $base-font-size: 16px !default;
 /// @param {Number} $px - Number with px unit
 /// @return {Number} Number with em unit
 /// @access public
+/// @group utilities
 @function em($px) {
   @if unit($px) != 'px' {
     // TODO: update to @error in v11

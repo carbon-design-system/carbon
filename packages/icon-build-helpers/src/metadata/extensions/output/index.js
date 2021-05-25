@@ -61,9 +61,9 @@ const output = (options = defaultOptions) => {
 
         // If the target is not set to pictograms, then we're building up
         // metadata for icons
-        const defaultAsset = icon.assets.find(
-          (asset) => asset.size === defaultSize
-        );
+        const defaultAsset =
+          icon.assets.find((asset) => asset.size === defaultSize) ??
+          icon.assets[0];
         icon.output = await Promise.all(
           sizes.map(async (size) => {
             const asset = icon.assets.find((asset) => asset.size === size);
