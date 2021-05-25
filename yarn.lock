@@ -1977,6 +1977,7 @@ __metadata:
     "@carbon/styles": ^0.7.0
     "@carbon/telemetry": 0.0.0-alpha.6
     "@carbon/themes": ^10.35.0
+    "@ibm/plex": 6.0.0-next.5
     "@rollup/plugin-babel": ^5.3.0
     "@rollup/plugin-commonjs": ^18.0.0
     "@rollup/plugin-node-resolve": ^11.2.1
@@ -2815,10 +2816,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@ibm/plex@npm:6.0.0-next.4":
-  version: 6.0.0-next.4
-  resolution: "@ibm/plex@npm:6.0.0-next.4"
-  checksum: 188827f27431d561111dc39976de1b634deabfd29034074241a9f6f1ef48dee3b589d29e97ed4f65c8d1e1acfacf69577afe313f6042abcb574f85c63754b9e0
+"@ibm/plex@npm:6.0.0-next.5":
+  version: 6.0.0-next.5
+  resolution: "@ibm/plex@npm:6.0.0-next.5"
+  checksum: 271a083f909f43a5631cf69f10c1b0099989dfb69c1de5ae3f2d8d7cab2bada7b287dcc5ca6f4bd22cc8049f8b62a61b4203f3f2fe0dd2fa0ad4b5d99fddcc26
   languageName: node
   linkType: hard
 
