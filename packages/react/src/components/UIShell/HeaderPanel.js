@@ -37,14 +37,12 @@ const HeaderPanel = React.forwardRef(function HeaderPanel(
     [customClassName]: !!customClassName,
   });
 
-  if (__DEV__) {
-    warning(
-      didWarnAboutDeprecation,
-      'The `HeaderPanel` component has been deprecated and will be removed ' +
-        'in the next major release of `carbon-components-react`'
-    );
-    didWarnAboutDeprecation = true;
-  }
+  warning(
+    didWarnAboutDeprecation,
+    'The `HeaderPanel` component has been deprecated and will be removed ' +
+      'in the next major release of `carbon-components-react`'
+  );
+  didWarnAboutDeprecation = true;
 
   return (
     <div {...other} className={className} {...accessibilityLabel} ref={ref}>
