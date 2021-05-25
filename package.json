@@ -28,6 +28,7 @@
   },
   "resolutions": {
     "ast-types": "^0.14.0",
+    "node-sass": "^6.0.0",
     "react": "~16.9.0",
     "react-dom": "~16.9.0",
     "react-is": "~16.9.0",
