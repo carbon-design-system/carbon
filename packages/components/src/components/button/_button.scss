@@ -457,6 +457,10 @@
     height: rem(20px);
   }
 
+  .#{$prefix}--btn-set .#{$prefix}--btn.#{$prefix}--btn--expressive {
+    max-width: rem(320px);
+  }
+
   // Skeleton State
   .#{$prefix}--btn.#{$prefix}--skeleton {
     @include skeleton;
@@ -475,6 +479,8 @@
 
   .#{$prefix}--btn-set .#{$prefix}--btn {
     width: 100%;
+    // 196px from design kit
+    max-width: rem(196px);
 
     &:not(:focus) {
       box-shadow: rem(-1px) 0 0 0 $button-separator;
@@ -483,11 +489,6 @@
     &:first-of-type:not(:focus) {
       box-shadow: inherit;
     }
-  }
-
-  .#{$prefix}--btn-set .#{$prefix}--btn:not(.#{$prefix}--btn--expressive) {
-    // 196px from design kit
-    max-width: rem(196px);
   }
 
   .#{$prefix}--btn-set .#{$prefix}--btn:focus + .#{$prefix}--btn {

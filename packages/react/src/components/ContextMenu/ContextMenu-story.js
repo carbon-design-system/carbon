@@ -6,96 +6,36 @@
  */
 
 import React from 'react';
-import { action } from '@storybook/addon-actions';
 import { InlineNotification } from '../Notification';
 
-import ContextMenu, {
-  ContextMenuDivider,
-  ContextMenuGroup,
-  ContextMenuItem,
-  ContextMenuRadioGroup,
-  ContextMenuSelectableItem,
-  useContextMenu,
-} from '../ContextMenu';
+import Menu from '../Menu';
+import { StoryFrame, buildMenu } from '../Menu/_storybook-utils';
+
+import { useContextMenu } from './index';
 
 export default {
-  title: 'Experimental/unstable_ContextMenu',
+  title: 'Experimental/unstable_Menu/ContextMenu',
   parameters: {
-    component: ContextMenu,
+    component: Menu,
   },
 };
 
-const InfoBanners = () => (
-  <>
-    <InlineNotification
-      kind="info"
-      title="Experimental component"
-      subtitle="This component is considered experimental. Its API may change until the stable version is released."
-      lowContrast
-      hideCloseButton
-    />
-    <InlineNotification
-      kind="info"
-      title="Context menu"
-      subtitle="Right-click anywhere on this page to access an example implementation of this component."
-      lowContrast
-      hideCloseButton
-    />
-  </>
-);
-
 const Story = (items) => {
-  const contextMenuProps = useContextMenu();
+  const menuProps = useContextMenu();
 
-  function renderItem(item, i) {
-    switch (item.type) {
-      case 'item':
-        return (
-          <ContextMenuItem
-            key={i}
-            label={item.label}
-            shortcut={item.shortcut}
-            disabled={item.disabled}
-            kind={item.kind}
-            onClick={!item.children ? action('onClick') : null}>
-            {item.children && item.children.map(renderItem)}
-          </ContextMenuItem>
-        );
-      case 'divider':
-        return <ContextMenuDivider key={i} />;
-      case 'selectable':
-        return (
-          <ContextMenuSelectableItem
-            key={i}
-            label={item.label}
-            initialChecked={item.initialChecked}
-            onChange={action('onChange')}
-          />
-        );
-      case 'radiogroup':
-        return (
-          <ContextMenuRadioGroup
-            key={i}
-            label={item.label}
-            items={item.items}
-            initialSelectedItem={item.initialSelectedItem}
-            onChange={action('onChange')}
-          />
-        );
-      case 'group':
-        return (
-          <ContextMenuGroup key={i} label={item.label}>
-            {item.children && item.children.map(renderItem)}
-          </ContextMenuGroup>
-        );
-    }
-  }
+  const renderedItems = buildMenu(items);
 
   return (
-    <div style={{ height: 'calc(100vh - 6.25rem)' }}>
-      <InfoBanners />
-      <ContextMenu {...contextMenuProps}>{items.map(renderItem)}</ContextMenu>
-    </div>
+    <StoryFrame>
+      <InlineNotification
+        kind="info"
+        title="Context menu"
+        subtitle="Right-click anywhere on this page to access an example implementation of this component."
+        lowContrast
+        hideCloseButton
+      />
+      <Menu {...menuProps}>{renderedItems}</Menu>
+    </StoryFrame>
   );
 };
 
