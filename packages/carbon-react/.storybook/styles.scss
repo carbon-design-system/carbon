@@ -17,19 +17,8 @@ $feature-flags: (
 
 // For now, including all weights for testing
 @include arabic.all;
-// @include arabic.light;
-// @include arabic.regular;
-// @include arabic.semibold;
-
 @include sans.all;
-// @include sans.light;
-// @include sans.regular;
-// @include sans.semibold;
-
 @include mono.all;
-// @include mono.light;
-// @include mono.regular;
-// @include mono.semibold;
 
 body {
   @include styles.theme();
