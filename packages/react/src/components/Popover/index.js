@@ -108,20 +108,19 @@ Popover.propTypes = {
   relative: PropTypes.bool,
 };
 
-function PopoverContent({
-  as: BaseComponent = 'div',
-  className,
-  children,
-  ...rest
-}) {
+const PopoverContent = React.forwardRef(function PopoverContent(
+  { as: BaseComponent = 'div', className, children, ...rest },
+  ref
+) {
   return (
     <BaseComponent
       {...rest}
-      className={cx(`${prefix}--popover-contents`, className)}>
+      className={cx(`${prefix}--popover-contents`, className)}
+      ref={ref}>
       {children}
     </BaseComponent>
   );
-}
+});
 
 PopoverContent.propTypes = {
   /**

@@ -6,8 +6,8 @@
 //
 
 @forward 'box-shadow';
-@forward 'button-reset';
-@forward 'component-reset';
+@forward 'button-reset' as button-*;
+@forward 'component-reset' as component-*;
 @forward 'convert' show em, rem;
 @forward 'focus-outline';
 @forward 'high-contrast-mode';
