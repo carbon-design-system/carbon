@@ -84,14 +84,14 @@ export function syncSharedStyle({
  * @param {string} params.value
  * @returns {SharedStyle}
  */
-export function syncColorStyle({ document, name, value }) {
+export function syncColorStyle({ document, name, color }) {
   return syncSharedStyle({
     document,
     name,
     style: {
       fills: [
         {
-          color: value,
+          color,
           fillType: Style.FillType.Color,
         },
       ],

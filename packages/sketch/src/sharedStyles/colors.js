@@ -55,7 +55,7 @@ export function syncColorStyles({ document }) {
       return syncColorStyle({
         document,
         name: formatColorName({ name, grade, formatFor: 'sharedLayerStyle' }),
-        value: swatches[swatchName][grade],
+        color: swatches[swatchName][grade],
       });
     });
     return result;
@@ -66,11 +66,11 @@ export function syncColorStyles({ document }) {
     ['white', white['0']],
     ['orange', orange['40']],
     ['yellow', yellow['30']],
-  ].map(([name, value]) => {
+  ].map(([name, color]) => {
     return syncColorStyle({
       document,
       name: formatColorName({ name, formatFor: 'sharedLayerStyle' }),
-      value,
+      color,
     });
   });
 
