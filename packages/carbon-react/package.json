@@ -54,7 +54,7 @@
     "@babel/plugin-transform-react-constant-elements": "^7.13.13",
     "@babel/preset-env": "^7.14.2",
     "@babel/preset-react": "^7.13.13",
-    "@carbon/styles": "^0.7.0-rc.0",
+    "@carbon/styles": "^0.7.0",
     "@carbon/themes": "^10.35.0",
     "@rollup/plugin-babel": "^5.3.0",
     "@rollup/plugin-commonjs": "^18.0.0",

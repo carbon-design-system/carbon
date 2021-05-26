@@ -1974,7 +1974,7 @@ __metadata:
     "@babel/preset-react": ^7.13.13
     "@carbon/feature-flags": ^0.5.0
     "@carbon/icons-react": ^10.33.0
-    "@carbon/styles": ^0.7.0-rc.0
+    "@carbon/styles": ^0.7.0
     "@carbon/telemetry": 0.0.0-alpha.6
     "@carbon/themes": ^10.35.0
     "@rollup/plugin-babel": ^5.3.0
@@ -2041,7 +2041,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@carbon/styles@^0.7.0-rc.0, @carbon/styles@workspace:packages/styles":
+"@carbon/styles@^0.7.0, @carbon/styles@workspace:packages/styles":
   version: 0.0.0-use.local
   resolution: "@carbon/styles@workspace:packages/styles"
   dependencies:
