@@ -8,7 +8,7 @@
 /// Resets default browser styling
 /// @access public
 /// @group utilities
-@mixin component-reset {
+@mixin reset {
   box-sizing: border-box;
   padding: 0;
   border: 0;

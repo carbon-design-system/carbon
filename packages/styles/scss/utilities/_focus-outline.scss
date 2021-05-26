@@ -5,6 +5,8 @@
 // LICENSE file in the root directory of this source tree.
 //
 
+@use '../theme';
+
 /// Adds outline styles depending on specific type
 /// @access public
 /// @param {String} $type ['border'] - Type of outline from: `border`, `blurred`, `outline`, `invalid`, `reset`
@@ -12,7 +14,7 @@
 /// @group utilities
 @mixin focus-outline($type: 'border') {
   @if ($type == 'border') {
-    outline: 1px solid $focus;
+    outline: 1px solid theme.$focus;
 
     @media screen and (prefers-contrast) {
       outline-style: dotted;
@@ -20,12 +22,12 @@
   }
 
   @if ($type == 'blurred') {
-    box-shadow: 0 0 0 3px $focus;
+    box-shadow: 0 0 0 3px theme.$focus;
     outline: 1px solid transparent;
   }
 
   @if ($type == 'outline') {
-    outline: 2px solid $focus;
+    outline: 2px solid theme.$focus;
     outline-offset: -2px;
 
     @media screen and (prefers-contrast) {
@@ -35,7 +37,7 @@
 
   @if ($type == 'outline-compat') {
     box-sizing: border-box;
-    border: 2px solid $focus;
+    border: 2px solid theme.$focus;
 
     @media screen and (prefers-contrast) {
       border-style: dotted;
@@ -43,7 +45,7 @@
   }
 
   @if ($type == 'invalid') {
-    outline: 2px solid $support-error;
+    outline: 2px solid theme.$support-error;
     outline-offset: -2px;
 
     @media screen and (prefers-contrast) {
