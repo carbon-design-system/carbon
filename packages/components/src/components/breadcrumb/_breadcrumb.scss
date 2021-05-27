@@ -21,8 +21,8 @@
     @include type-style('body-short-01');
 
     display: flex;
-    flex-wrap: nowrap;
     overflow: hidden;
+    flex-wrap: nowrap;
   }
 
   .#{$prefix}--breadcrumb-item {
