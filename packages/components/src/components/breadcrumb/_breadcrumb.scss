@@ -20,12 +20,9 @@
     @include reset;
     @include type-style('body-short-01');
 
-    display: inline;
-
-    @include carbon--breakpoint(md) {
-      display: flex;
-      flex-wrap: wrap;
-    }
+    display: flex;
+    flex-wrap: nowrap;
+    overflow: hidden;
   }
 
   .#{$prefix}--breadcrumb-item {
