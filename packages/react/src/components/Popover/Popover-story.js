@@ -102,7 +102,7 @@ export const Default = () => {
         </section>
         <div style={{ marginTop: '2rem' }}>
           <Popover open={open} align={align} relative>
-            <PopoverContent className="p-3">Hello</PopoverContent>
+            <PopoverContent className="p-3">Heading time</PopoverContent>
           </Popover>
         </div>
       </>

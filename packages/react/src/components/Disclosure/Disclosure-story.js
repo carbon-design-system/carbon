@@ -1,3 +1,5 @@
+/* eslint-disable no-console */
+
 /**
  * Copyright IBM Corp. 2016, 2018
  *
@@ -8,10 +10,25 @@
 import React from 'react';
 import { useDisclosure } from '../Disclosure';
 import { Popover, PopoverContent } from '../Popover';
+import Button from '../Button';
+import { UserAvatar20 } from '@carbon/icons-react';
+import {
+  withKnobs,
+  // boolean,
+  // number,
+  // select,
+  // text,
+} from '@storybook/addon-knobs';
 
 export default {
   title: 'Experimental/unstable_Disclosure',
+  component: useDisclosure,
+  decorators: [withKnobs],
   // includeStories: [],
+};
+
+const props = {
+  heading: 'Heading',
 };
 
 export const Default = () => {
@@ -19,24 +36,27 @@ export const Default = () => {
     const { buttonProps, contentProps, open } = useDisclosure('test-id');
 
     return (
-      <div style={{ display: 'inline-block', position: 'relative' }}>
-        <button type="button" {...buttonProps}>
-          {open ? (
-            <span aria-label="Point up" role="img">
-              👆
-            </span>
-          ) : (
-            <span aria-label="Point down" role="img">
-              👇
-            </span>
-          )}
-        </button>
-        <Popover {...contentProps} align="top-left" caret={false} open={open}>
-          <PopoverContent>
-            <div>Test stuff</div>
+      <>
+        <Button
+          renderIcon={UserAvatar20}
+          kind="ghost"
+          iconDescription="profile"
+          type="button"
+          hasIconOnly
+          {...buttonProps}
+        />
+        <Popover {...contentProps} align="top-left" caret={true} open={open}>
+          <PopoverContent {...props} className="p-3">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
+            ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+            aliquip ex ea commodo consequat. Duis aute irure dolor in
+            reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
+            pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
+            culpa qui officia deserunt mollit anim id est laborum.
           </PopoverContent>
         </Popover>
-      </div>
+      </>
     );
   }
 

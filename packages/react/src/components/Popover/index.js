@@ -109,7 +109,7 @@ Popover.propTypes = {
 };
 
 const PopoverContent = React.forwardRef(function PopoverContent(
-  { as: BaseComponent = 'div', className, children, ...rest },
+  { as: BaseComponent = 'div', className, heading, children, ...rest },
   ref
 ) {
   return (
@@ -117,6 +117,7 @@ const PopoverContent = React.forwardRef(function PopoverContent(
       {...rest}
       className={cx(`${prefix}--popover-contents`, className)}
       ref={ref}>
+      <h5>{heading}</h5>
       {children}
     </BaseComponent>
   );
@@ -139,6 +140,11 @@ PopoverContent.propTypes = {
    * component
    */
   className: PropTypes.string,
+
+  /**
+   * Provide a header to be added within the Popover component
+   */
+  heading: PropTypes.string,
 };
 
 export { Popover, PopoverContent };
