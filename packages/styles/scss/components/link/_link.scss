@@ -5,28 +5,16 @@
 // LICENSE file in the root directory of this source tree.
 //
 
-//-----------------------------
-// Link
-//-----------------------------
-
-// @import '../../globals/scss/colors';
-// @import '../../globals/scss/vars';
-// @import '../../globals/scss/theme';
-// @import '../../globals/scss/typography';
-// @import '../../globals/scss/helper-mixins';
-
 @use '../../config' as *;
 @use '../../motion' as *;
 @use '../../spacing' as *;
 @use '../../theme' as *;
 @use '../../type';
-
-// @import '../../globals/scss/css--reset';
 @use '../../utilities/component-reset';
 @use '../../utilities/focus-outline' as *;
 
 /// Link styles
-/// @access private
+/// @access public
 /// @group link
 @mixin link {
   .#{$prefix}--link {
