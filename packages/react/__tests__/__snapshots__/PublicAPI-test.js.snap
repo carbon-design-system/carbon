@@ -2258,6 +2258,9 @@ Map {
       "onClose": Object {
         "type": "func",
       },
+      "onOpen": Object {
+        "type": "func",
+      },
       "short": Object {
         "type": "bool",
       },
@@ -4035,237 +4038,11 @@ Map {
     },
     "render": [Function],
   },
-  "ToastNotification" => Object {
-    "defaultProps": Object {
-      "hideCloseButton": false,
-      "iconDescription": "closes notification",
-      "kind": "error",
-      "notificationType": "toast",
-      "onCloseButtonClick": [Function],
-      "role": "alert",
-      "timeout": 0,
-      "title": "provide a title",
-    },
-    "propTypes": Object {
-      "caption": Object {
-        "type": "node",
-      },
-      "children": Object {
-        "type": "node",
-      },
-      "className": Object {
-        "type": "string",
-      },
-      "hideCloseButton": Object {
-        "type": "bool",
-      },
-      "iconDescription": Object {
-        "type": "string",
-      },
-      "kind": Object {
-        "args": Array [
-          Array [
-            "error",
-            "info",
-            "info-square",
-            "success",
-            "warning",
-            "warning-alt",
-          ],
-        ],
-        "isRequired": true,
-        "type": "oneOf",
-      },
-      "lowContrast": Object {
-        "type": "bool",
-      },
-      "notificationType": Object {
-        "type": "string",
-      },
-      "onClose": Object {
-        "type": "func",
-      },
-      "onCloseButtonClick": Object {
-        "type": "func",
-      },
-      "role": Object {
-        "isRequired": true,
-        "type": "string",
-      },
-      "statusIconDescription": Object {
-        "type": "string",
-      },
-      "subtitle": Object {
-        "type": "node",
-      },
-      "timeout": Object {
-        "type": "number",
-      },
-      "title": Object {
-        "isRequired": true,
-        "type": "string",
-      },
-    },
-  },
-  "InlineNotification" => Object {
-    "defaultProps": Object {
-      "hideCloseButton": false,
-      "iconDescription": "closes notification",
-      "notificationType": "inline",
-      "onCloseButtonClick": [Function],
-      "role": "alert",
-    },
-    "propTypes": Object {
-      "actions": Object {
-        "type": "node",
-      },
-      "children": Object {
-        "type": "node",
-      },
-      "className": Object {
-        "type": "string",
-      },
-      "hideCloseButton": Object {
-        "type": "bool",
-      },
-      "iconDescription": Object {
-        "type": "string",
-      },
-      "kind": Object {
-        "args": Array [
-          Array [
-            "error",
-            "info",
-            "info-square",
-            "success",
-            "warning",
-            "warning-alt",
-          ],
-        ],
-        "isRequired": true,
-        "type": "oneOf",
-      },
-      "lowContrast": Object {
-        "type": "bool",
-      },
-      "notificationType": Object {
-        "type": "string",
-      },
-      "onClose": Object {
-        "type": "func",
-      },
-      "onCloseButtonClick": Object {
-        "type": "func",
-      },
-      "role": Object {
-        "isRequired": true,
-        "type": "string",
-      },
-      "statusIconDescription": Object {
-        "type": "string",
-      },
-      "subtitle": Object {
-        "type": "node",
-      },
-      "title": Object {
-        "isRequired": true,
-        "type": "string",
-      },
-    },
-  },
-  "NotificationActionButton" => Object {
-    "propTypes": Object {
-      "children": Object {
-        "type": "node",
-      },
-      "className": Object {
-        "type": "string",
-      },
-      "onClick": Object {
-        "type": "func",
-      },
-    },
-  },
-  "NotificationButton" => Object {
-    "defaultProps": Object {
-      "ariaLabel": "close notification",
-      "iconDescription": "close icon",
-      "notificationType": "toast",
-      "renderIcon": Object {
-        "$$typeof": Symbol(react.forward_ref),
-        "render": [Function],
-      },
-      "type": "button",
-    },
-    "propTypes": Object {
-      "ariaLabel": Object {
-        "type": "string",
-      },
-      "className": Object {
-        "type": "string",
-      },
-      "iconDescription": Object {
-        "type": "string",
-      },
-      "name": Object {
-        "type": "string",
-      },
-      "notificationType": Object {
-        "args": Array [
-          Array [
-            "toast",
-            "inline",
-          ],
-        ],
-        "type": "oneOf",
-      },
-      "renderIcon": Object {
-        "args": Array [
-          Array [
-            Object {
-              "type": "func",
-            },
-            Object {
-              "type": "object",
-            },
-          ],
-        ],
-        "type": "oneOfType",
-      },
-      "type": Object {
-        "type": "string",
-      },
-    },
-  },
-  "NotificationTextDetails" => Object {
-    "defaultProps": Object {
-      "notificationType": "toast",
-      "title": "title",
-    },
-    "propTypes": Object {
-      "caption": Object {
-        "type": "node",
-      },
-      "children": Object {
-        "type": "node",
-      },
-      "notificationType": Object {
-        "args": Array [
-          Array [
-            "toast",
-            "inline",
-          ],
-        ],
-        "type": "oneOf",
-      },
-      "subtitle": Object {
-        "type": "node",
-      },
-      "title": Object {
-        "type": "string",
-      },
-    },
-  },
+  "ToastNotification" => Object {},
+  "InlineNotification" => Object {},
+  "NotificationActionButton" => Object {},
+  "NotificationButton" => Object {},
+  "NotificationTextDetails" => Object {},
   "NumberInput" => Object {
     "$$typeof": Symbol(react.forward_ref),
     "render": [Function],
@@ -7787,9 +7564,9 @@ Map {
       },
     },
   },
-  "unstable_ContextMenu" => Object {
-    "ContextMenuDivider": Object {},
-    "ContextMenuGroup": Object {
+  "unstable_Menu" => Object {
+    "MenuDivider": Object {},
+    "MenuGroup": Object {
       "propTypes": Object {
         "children": Object {
           "type": "node",
@@ -7800,7 +7577,7 @@ Map {
         },
       },
     },
-    "ContextMenuItem": Object {
+    "MenuItem": Object {
       "propTypes": Object {
         "children": Object {
           "type": "node",
@@ -7826,7 +7603,7 @@ Map {
         },
       },
     },
-    "ContextMenuRadioGroup": Object {
+    "MenuRadioGroup": Object {
       "propTypes": Object {
         "initialSelectedItem": Object {
           "type": "string",
@@ -7849,7 +7626,7 @@ Map {
         },
       },
     },
-    "ContextMenuSelectableItem": Object {
+    "MenuSelectableItem": Object {
       "propTypes": Object {
         "initialChecked": Object {
           "type": "bool",
@@ -7864,6 +7641,9 @@ Map {
       },
     },
     "propTypes": Object {
+      "autoclose": Object {
+        "type": "bool",
+      },
       "children": Object {
         "type": "node",
       },
@@ -7877,15 +7657,45 @@ Map {
         "type": "bool",
       },
       "x": Object {
-        "type": "number",
+        "args": Array [
+          Array [
+            Object {
+              "type": "number",
+            },
+            Object {
+              "args": Array [
+                Object {
+                  "type": "number",
+                },
+              ],
+              "type": "arrayOf",
+            },
+          ],
+        ],
+        "type": "oneOfType",
       },
       "y": Object {
-        "type": "number",
+        "args": Array [
+          Array [
+            Object {
+              "type": "number",
+            },
+            Object {
+              "args": Array [
+                Object {
+                  "type": "number",
+                },
+              ],
+              "type": "arrayOf",
+            },
+          ],
+        ],
+        "type": "oneOfType",
       },
     },
   },
-  "unstable_ContextMenuDivider" => Object {},
-  "unstable_ContextMenuGroup" => Object {
+  "unstable_MenuDivider" => Object {},
+  "unstable_MenuGroup" => Object {
     "propTypes": Object {
       "children": Object {
         "type": "node",
@@ -7896,7 +7706,7 @@ Map {
       },
     },
   },
-  "unstable_ContextMenuItem" => Object {
+  "unstable_MenuItem" => Object {
     "propTypes": Object {
       "children": Object {
         "type": "node",
@@ -7922,7 +7732,7 @@ Map {
       },
     },
   },
-  "unstable_ContextMenuRadioGroup" => Object {
+  "unstable_MenuRadioGroup" => Object {
     "propTypes": Object {
       "initialSelectedItem": Object {
         "type": "string",
@@ -7945,7 +7755,7 @@ Map {
       },
     },
   },
-  "unstable_ContextMenuSelectableItem" => Object {
+  "unstable_MenuSelectableItem" => Object {
     "propTypes": Object {
       "initialChecked": Object {
         "type": "bool",

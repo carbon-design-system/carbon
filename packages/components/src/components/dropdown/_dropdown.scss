@@ -324,10 +324,6 @@
     border-bottom-color: $layer-hover;
   }
 
-  .#{$prefix}--dropdown--selected {
-    display: none;
-  }
-
   .#{$prefix}--dropdown--open .#{$prefix}--dropdown__arrow {
     transform: rotate(-180deg);
   }
