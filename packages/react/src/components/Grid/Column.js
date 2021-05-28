@@ -158,7 +158,8 @@ function getClassNameForBreakpoints(breakpoints) {
     }
 
     if (typeof offset === 'number') {
-      classNames.push(`${prefix}--${name}:col-start-${offset}`);
+      // offset is a zero-index value, whereas the classnames are not
+      classNames.push(`${prefix}--${name}:col-start-${offset + 1}`);
     }
   }
 

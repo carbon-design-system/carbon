@@ -15,7 +15,7 @@ p:first-of-type {
 // Grid modes
 .bx--css-grid {
   background-color: $blue-20;
-  outline: 1px solid $blue-40;
+  outline: 1px dashed $blue-40;
 }
 
 .bx--css-grid p {
@@ -24,17 +24,17 @@ p:first-of-type {
 
 .bx--css-grid.bx--css-grid--narrow {
   background-color: $teal-20;
-  outline: 1px solid $teal-40;
+  outline: 1px dashed $teal-40;
 }
 
 .bx--css-grid.bx--css-grid--condensed {
   background-color: $purple-20;
-  outline: 1px solid $purple-40;
+  outline: 1px dashed $purple-40;
 }
 
-.bx--subgrid {
+// Only use background for subgrid example, not other subgrids in "mixed modes" story or others
+.bx--subgrid.example {
   background-color: $green-20;
-  outline: 1px dashed $green-40;
 }
 
 // Columns
@@ -45,7 +45,6 @@ p:first-of-type {
 
 .bx--css-grid > [class*='col'] {
   background: $blue-10;
-  outline: 1px dashed $blue-30;
 }
 
 .bx--subgrid > [class*='col'] {
@@ -55,10 +54,8 @@ p:first-of-type {
 
 .bx--css-grid.bx--css-grid--narrow > [class*='col'] {
   background: $teal-10;
-  outline: 1px dashed $teal-30;
 }
 
 .bx--css-grid.bx--css-grid--condensed > [class*='col'] {
   background: $purple-10;
-  outline: 1px dashed $purple-30;
 }

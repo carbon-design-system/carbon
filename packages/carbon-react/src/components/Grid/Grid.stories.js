@@ -29,57 +29,23 @@ export default {
       page: mdx,
     },
   },
-};
-
-const ExampleColumns = () => {
-  return (
-    <>
-      <Column sm={4}>
-        <p>sm={`{4}`}</p>
-      </Column>
-      <Column sm={4}>
-        <p>sm={`{4}`}</p>
-      </Column>
-      <Column sm={4}>
-        <p>sm={`{4}`}</p>
-      </Column>
-      <Column sm={4}>
-        <p>sm={`{4}`}</p>
-      </Column>
-
-      {/* <Column sm={2}>1/8</Column>
-      <Column sm={2}>1/8</Column>
-      <Column sm={2}>1/8</Column>
-      <Column sm={2}>1/8</Column>
-      <Column sm={2}>1/8</Column>
-      <Column sm={2}>1/8</Column>
-      <Column sm={2}>1/8</Column>
-      <Column sm={2}>1/8</Column>
-
-      <Column>1/16</Column>
-      <Column>1/16</Column>
-      <Column>1/16</Column>
-      <Column>1/16</Column>
-      <Column>1/16</Column>
-      <Column>1/16</Column>
-      <Column>1/16</Column>
-      <Column>1/16</Column>
-      <Column>1/16</Column>
-      <Column>1/16</Column>
-      <Column>1/16</Column>
-      <Column>1/16</Column>
-      <Column>1/16</Column>
-      <Column>1/16</Column>
-      <Column>1/16</Column>
-      <Column>1/16</Column> */}
-    </>
-  );
+  argTypes: {
+    narrow: {
+      control: false,
+    },
+    condensed: {
+      control: false,
+    },
+  },
 };
 
 export const Wide = () => {
   return (
     <Grid>
-      <ExampleColumns />
+      <Column sm={4} />
+      <Column sm={4} />
+      <Column sm={4} />
+      <Column sm={4} />
     </Grid>
   );
 };
@@ -87,7 +53,10 @@ export const Wide = () => {
 export const Narrow = () => {
   return (
     <Grid narrow>
-      <ExampleColumns />
+      <Column sm={4} />
+      <Column sm={4} />
+      <Column sm={4} />
+      <Column sm={4} />
     </Grid>
   );
 };
@@ -95,10 +64,22 @@ export const Narrow = () => {
 export const Condensed = () => {
   return (
     <Grid condensed>
-      <ExampleColumns />
+      <Column sm={4} />
+      <Column sm={4} />
+      <Column sm={4} />
+      <Column sm={4} />
     </Grid>
   );
 };
+
+export const fullWidth = () => (
+  <Grid fullWidth>
+    <Column sm={4} />
+    <Column sm={4} />
+    <Column sm={4} />
+    <Column sm={4} />
+  </Grid>
+);
 
 export const Responsive = () => (
   <Grid>
@@ -127,88 +108,17 @@ export const Responsive = () => (
 
 export const Subgrid = () => {
   return (
-    <>
-      <Grid>
-        <Column sm={2} md={4} lg={3}>
-          <p>Small: Span 2 of 4</p>
-          <p>Medium: Span 4 of 8</p>
-          <p>Large: Span 3 of 16</p>
-        </Column>
-        <Column sm={2} md={4} lg={10}>
-          <p>Small: Span 2 of 4</p>
-          <p>Medium: Span 4 of 8</p>
-          <p>Large: Span 10 of 16</p>
-          <Grid>
-            <Column sm={2} md={4} lg={10}>
-              <p>Subgrid</p>
-              <div style={{ marginBottom: '1rem' }}>
-                <p>
-                  subgrids should always be wrapped in a column. This way the
-                  *column* will define responsive parameters, and the subgrid
-                  will then inherit them
-                </p>
-                <p>
-                  this actually doesn't work because when the subgrid is a
-                  different mode the grid definition rests with the parent
-                  column of the grid, which means we can't override the margins,
-                  etc so narrow hangs properly in the gutter.
-                </p>
-                <p>
-                  subgrids will always need a `columns` definition and should
-                  not be placed in a column. They should always be direct
-                  children of a Grid.
-                </p>
-                <p>
-                  How do we declare responsive properties for the subgrid then?
-                </p>
-              </div>
-            </Column>
-            <Column sm={1} md={1} lg={2}>
-              <p>sm={1}</p> <p>md={1}</p> <p>lg={2}</p>
-            </Column>
-            <Column sm={1} md={1} lg={2}>
-              <p>sm={1}</p> <p>md={1}</p> <p>lg={2}</p>
-            </Column>
-            <Column sm={0} md={1} lg={1}>
-              <p>sm={0}</p> <p>md={1}</p> <p>lg={1}</p>
-            </Column>
-            <Column sm={0} md={1} lg={1}>
-              <p>sm={0}</p> <p>md={1}</p> <p>lg={1}</p>
-            </Column>
-            <Column sm={0} md={0} lg={1}>
-              <p>sm={0}</p> <p>md={0}</p> <p>lg={1}</p>
-            </Column>
-            <Column sm={0} md={0} lg={1}>
-              <p>sm={0}</p> <p>md={0}</p> <p>lg={1}</p>
-            </Column>
-            <Column sm={0} md={0} lg={1}>
-              <p>sm={0}</p> <p>md={0}</p> <p>lg={1}</p>
-            </Column>
-            <Column sm={0} md={0} lg={1}>
-              <p>sm={0}</p> <p>md={0}</p> <p>lg={1}</p>
-            </Column>
-          </Grid>
-        </Column>
-        <Column sm={0} md={0} lg={3}>
-          <p>Small: Span 0 of 4</p>
-          <p>Medium: Span 0 of 8</p>
-          <p>Large: Span 3 of 16</p>
-        </Column>
-      </Grid>
-
-      <Grid>
-        <Column sm={2} md={4} lg={3}>
-          <p>Small: Span 2 of 4</p>
-          <p>Medium: Span 4 of 8</p>
-          <p>Large: Span 3 of 16</p>
-        </Column>
-        <Grid columns={10}>
-          <Column sm={2} md={4} lg={10}>
-            <p>Subgrid</p>
-            <div style={{ marginBottom: '1rem' }}>
-              <p>try without wrapping in a column</p>
-            </div>
-          </Column>
+    <Grid>
+      <Column sm={2} md={4} lg={3}>
+        <p>Small: Span 2 of 4</p>
+        <p>Medium: Span 4 of 8</p>
+        <p>Large: Span 3 of 16</p>
+      </Column>
+      <Column sm={2} md={4} lg={10}>
+        <p>Small: Span 2 of 4</p>
+        <p>Medium: Span 4 of 8</p>
+        <p>Large: Span 10 of 16</p>
+        <Grid className="example">
           <Column sm={1} md={1} lg={2}>
             <p>sm={1}</p> <p>md={1}</p> <p>lg={2}</p>
           </Column>
@@ -234,165 +144,147 @@ export const Subgrid = () => {
             <p>sm={0}</p> <p>md={0}</p> <p>lg={1}</p>
           </Column>
         </Grid>
-
-        <Column sm={0} md={0} lg={3}>
-          <p>Small: Span 0 of 4</p>
-          <p>Medium: Span 0 of 8</p>
-          <p>Large: Span 3 of 16</p>
-        </Column>
-      </Grid>
-    </>
+      </Column>
+      <Column sm={0} md={0} lg={3}>
+        <p>Small: Span 0 of 4</p>
+        <p>Medium: Span 0 of 8</p>
+        <p>Large: Span 3 of 16</p>
+      </Column>
+    </Grid>
   );
 };
 
-export const MixedModes = () => {
+export const MixedGridModes = () => {
   return (
     <>
-      <p>
-        Wide parent grid, Wide & Narrow children{' '}
-        <span className="subgrid">subgrids</span>
-      </p>
-
+      <p>Wide parent grid, Narrow & Condensed children</p>
       <Grid>
-        <Column lg={4}>
-          <p>Wide</p>
-        </Column>
-        <Grid narrow columns={12}>
-          <Column lg={12}>
-            <p className="bx--gutter-start">Narrow direct subgrid</p>
-          </Column>
-        </Grid>
-      </Grid>
-
-      <Grid>
-        <Column lg={4}>
-          <p>Wide</p>
-        </Column>
-        <Column lg={12}>
+        <Column sm={1} md={2} lg={4}>
           <Grid narrow>
-            <Column lg={12}>
-              <p className="bx--gutter-start">Narrow subgrid in a column</p>
+            <Column sm={1} md={2} lg={4}>
+              <p>narrow</p>
+            </Column>
+          </Grid>
+        </Column>
+        <Column sm={3} md={6} lg={12}>
+          <Grid condensed>
+            <Column sm={3} md={6} lg={12}>
+              <p>condensed</p>
+            </Column>
+          </Grid>
+        </Column>
+        <Column sm={1} md={2} lg={4}>
+          <Grid condensed>
+            <Column sm={1} md={2} lg={4}>
+              <p>condensed</p>
+            </Column>
+          </Grid>
+        </Column>
+        <Column sm={3} md={6} lg={12}>
+          <Grid narrow>
+            <Column sm={3} md={6} lg={12}>
+              <p>narrow</p>
             </Column>
           </Grid>
         </Column>
       </Grid>
 
-      <p>
-        Wide parent grid, Wide & Condensed children{' '}
-        <span className="subgrid">subgrids</span>
-      </p>
+      <p>Narrow parent grid, Wide & Condensed children</p>
 
-      <Grid>
-        <Column sm={4}>
-          <p>Wide</p>
+      <Grid narrow>
+        <Column sm={1} md={2} lg={4}>
+          <Grid>
+            <Column sm={1} md={2} lg={4}>
+              <p>wide</p>
+            </Column>
+          </Grid>
         </Column>
-        <Grid condensed columns={12}>
-          <Column lg={12}>
-            <p>Condensed</p>
-          </Column>
-        </Grid>
+        <Column sm={3} md={6} lg={12}>
+          <Grid condensed>
+            <Column sm={3} md={6} lg={12}>
+              <p>condensed</p>
+            </Column>
+          </Grid>
+        </Column>
+        <Column sm={1} md={2} lg={4}>
+          <Grid condensed>
+            <Column sm={1} md={2} lg={4}>
+              <p>condensed</p>
+            </Column>
+          </Grid>
+        </Column>
+        <Column sm={3} md={6} lg={12}>
+          <Grid>
+            <Column sm={3} md={6} lg={12}>
+              <p>wide</p>
+            </Column>
+          </Grid>
+        </Column>
       </Grid>
 
-      <p>
-        Wide parent grid, Narrow & Condensed children{' '}
-        <span className="subgrid">subgrids</span>
-      </p>
-
-      <section className="bx--css-grid">
-        <div className="bx--col-span-4 bx--subgrid bx--css-grid--narrow">
-          <div className="bx--col-span-100">
-            <p className="bx--gutter-start">Narrow</p>
-          </div>
-        </div>
-        <div className="bx--col-span-12 bx--subgrid bx--css-grid--condensed">
-          <div className="bx--col-span-100">
-            <p>Condensed</p>
-          </div>
-        </div>
-        <div className="bx--col-span-12 bx--subgrid bx--css-grid--condensed">
-          <div className="bx--col-span-100">
-            <p>Condensed</p>
-          </div>
-        </div>
-        <div className="bx--col-span-4 bx--subgrid bx--css-grid--narrow">
-          <div className="bx--col-span-100">
-            <p className="bx--gutter-start">Narrow</p>
-          </div>
-        </div>
-      </section>
-
-      <p>
-        Narrow parent grid, Wide & Condensed children{' '}
-        <span className="subgrid">subgrids</span>
-      </p>
-
-      <section className="bx--css-grid bx--css-grid--narrow">
-        <div className="bx--col-span-4 bx--subgrid bx--css-grid">
-          <div className="bx--col-span-100">
-            <p>Wide subgrid</p>
-          </div>
-        </div>
-        <div className="bx--col-span-12 bx--subgrid bx--css-grid--condensed">
-          <div className="bx--col-span-100">
-            <p>Condensed subgrid</p>
-          </div>
-        </div>
-        <div className="bx--col-span-12 bx--subgrid bx--css-grid--condensed">
-          <div className="bx--col-span-100">
-            <p>Condensed subgrid</p>
-          </div>
-        </div>
-        <div className="bx--col-span-4 bx--subgrid bx--css-grid">
-          <div className="bx--col-span-100">
-            <p>Wide subgrid</p>
-          </div>
-        </div>
-      </section>
-
-      <p>
-        Condensed parent grid, Narrow & Wide children{' '}
-        <span className="subgrid">subgrids</span>
-      </p>
-
-      <section className="bx--css-grid bx--css-grid--condensed">
-        <div className="bx--col-span-4 bx--subgrid bx--css-grid--narrow">
-          <div className="bx--col-span-100">
-            <p className="bx--gutter-start">Narrow subgrid</p>
-          </div>
-        </div>
-        <div className="bx--col-span-12 bx--subgrid bx--css-grid">
-          <div className="bx--col-span-100">
-            <p>Wide subgrid</p>
-          </div>
-        </div>
-        <div className="bx--col-span-12 bx--subgrid bx--css-grid">
-          <div className="bx--col-span-100">
-            <p>Wide subgrid</p>
-          </div>
-        </div>
-        <div className="bx--col-span-4 bx--subgrid bx--css-grid--narrow">
-          <div className="bx--col-span-100">
-            <p className="bx--gutter-start">Narrow subgrid</p>
-          </div>
-        </div>
-      </section>
+      <p>Condensed parent grid, Narrow & Wide children</p>
+      <Grid condensed>
+        <Column sm={1} md={2} lg={4}>
+          <Grid narrow>
+            <Column sm={1} md={2} lg={4}>
+              <p>narrow</p>
+            </Column>
+          </Grid>
+        </Column>
+        <Column sm={3} md={6} lg={12}>
+          <Grid>
+            <Column sm={3} md={6} lg={12}>
+              <p>wide</p>
+            </Column>
+          </Grid>
+        </Column>
+        <Column sm={1} md={2} lg={4}>
+          <Grid>
+            <Column sm={1} md={2} lg={4}>
+              <p>wide</p>
+            </Column>
+          </Grid>
+        </Column>
+        <Column sm={3} md={6} lg={12}>
+          <Grid narrow>
+            <Column sm={3} md={6} lg={12}>
+              <p>narrow</p>
+            </Column>
+          </Grid>
+        </Column>
+      </Grid>
     </>
   );
 };
+
+export const Offset = () => (
+  <Grid>
+    <Column sm={{ span: 1, offset: 3 }}>
+      <p>Small: offset 3</p>
+    </Column>
+    <Column sm={{ span: 2, offset: 2 }}>
+      <p>Small: offset 2</p>
+    </Column>
+    <Column sm={{ span: 3, offset: 1 }}>
+      <p>Small: offset 1</p>
+    </Column>
+    <Column sm={{ span: 4, offset: 0 }}>
+      <p>Small: offset 0</p>
+    </Column>
+  </Grid>
+);
 
 export const AutoColumns = () => {
   return (
-    <>
-      <p>
-        "Auto" is a bit different with CSS Grid. Instead of automatically
-        spanning equal space, it is now equal to 1 column.
-      </p>
-      <Grid>
-        <Column>1/16</Column>
-        <Column>1/16</Column>
-        <Column>1/16</Column>
-        <Column>1/16</Column>
-      </Grid>
-    </>
+    <Grid>
+      <Column></Column>
+      <Column></Column>
+      <Column></Column>
+      <Column></Column>
+      <Column></Column>
+      <Column></Column>
+      <Column></Column>
+      <Column></Column>
+    </Grid>
   );
 };
