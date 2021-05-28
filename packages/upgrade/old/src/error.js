@@ -7,14 +7,7 @@
 
 'use strict';
 
-class CustomError extends Error {
-  constructor(message) {
-    super(message);
-    this.name = this.constructor.name;
-  }
-}
-
-class UpgradeError extends CustomError {}
+class UpgradeError extends Error {}
 
 module.exports = {
   UpgradeError,

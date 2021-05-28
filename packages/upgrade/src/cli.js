@@ -5,15 +5,15 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-/* eslint-disable no-console */
-
 'use strict';
 
+const { prompt } = require('inquirer');
+const semver = require('semver');
 const cli = require('yargs');
 const packageJson = require('../package.json');
 const { UpgradeError } = require('./error');
-const { reporter } = require('./reporter');
-const { run, runInDirectory } = require('./runner');
+const { Migration } = require('./migrations');
+const { findProject } = require('./project');
 
 async function main({ argv, cwd }) {
   cli.scriptName(packageJson.name).version(packageJson.version);
@@ -23,78 +23,131 @@ async function main({ argv, cwd }) {
       default: false,
       describe: 'display the full output while running a command',
     })
-    .option('dry', {
-      alias: 'd',
-      describe:
-        'view the result of running this command without changing any files',
+    .option('write', {
+      alias: 'w',
+      describe: 'update the files with changes found by running the migration',
       default: false,
     })
     .option('ignore', {
       alias: 'i',
       describe:
         'provide a list of glob pattern for directories you would like ignored',
-      default: '',
+      default: [],
       array: true,
     });
 
-  cli
-    .usage('Usage: $0 [options]')
-    .command('$0', 'run to upgrade your project', {}, async (args) => {
-      const { dry, ignore, verbose } = args;
+  cli.usage('Usage: $0 [options]').command(
+    '$0',
+    'run to upgrade your project',
+    {},
+    run(async (args) => {
+      const { ignore, verbose, write } = args;
       const options = {
         cwd: cwd(),
-        dry,
         ignore,
         verbose,
+        write,
       };
 
-      await runCommand(() => runInDirectory(options), options);
-    });
+      // Phase 1: get all the details of the project
+      const project = await findProject(options.cwd);
+      const workspaces = await Migration.getMigrationsByWorkspace(
+        project,
+        Migration.getMigrations()
+      );
+
+      const answers = [];
+
+      for (const workspace of workspaces) {
+        const answer = await prompt({
+          type: 'checkbox',
+          message: `Migrations available for ${workspace.name}`,
+          name: 'selected',
+          choices: workspace.options
+            .filter((option) => {
+              return option.available === true;
+            })
+            .map((option) => {
+              const { dependency, migration } = option;
+              return {
+                name: `Migration ${dependency.name} from: ${dependency.version} to: ${migration.to}`,
+                value: option,
+                checked: true,
+              };
+            }),
+        });
+
+        answers.push(answer);
+      }
+
+      await Migration.applyMigrations(
+        workspaces.map((workspace, i) => {
+          const answer = answers[i];
+          return {
+            ...workspace,
+            options: workspace.options.filter((option) => {
+              return answer.selected.includes(option);
+            }),
+          };
+        })
+      );
+
+      // Get selections for migrations
+      // Hey! We found the following migrations available for the `foo` package,
+      // select all that you would like to run:
+      //
+      // <workspace name>
+      // [ ] @carbon/colors v10.10.0 => v11.0.0
+      //
+      // <workspace name>
+      // [ ] @carbon/colors v10.10.0 => v11.0.0
+      //
+      // Unavailable migrations
+      // XXX @carbon/type v10.10.0 unable to migrate because version does not meet min requirements
+    })
+  );
 
   cli.command(
     'migrate <package> <from> <to>',
     'run a specific migration for a package',
     {},
-    async (args) => {
-      const { dry, from, ignore, package: packageName, to, verbose } = args;
+    run(async (args) => {
+      const { from, ignore, package: packageName, to, write, verbose } = args;
       const options = {
         cwd: cwd(),
         dry,
         ignore,
         verbose,
+        write,
+        from,
+        to,
+        packageName,
       };
-
-      await runCommand(() => run(packageName, from, to, options), options);
-    }
+      console.log(options);
+    })
   );
 
-  cli.demandCommand().recommendCommands().strict().parse(argv.slice(2)).argv;
+  cli.strict().parse(argv.slice(2)).argv;
 }
 
-async function runCommand(makePromise, options) {
-  reporter.info('Thanks for trying out carbon-upgrade! 🙏');
-  reporter.info(
-    'To help prevent any accidental changes, make sure to check in your ' +
-      'work in version control first and use dry mode (-d flag) to ' +
-      'preview any updates!'
-  );
+function run(command) {
+  return async (...args) => {
+    console.log('Thanks for trying out @carbon/upgrade! 🙏');
 
-  if (options.verbose) {
-    reporter.setLogLevel('verbose');
-  }
-
-  try {
-    await makePromise();
-    console.log('Done! ✨');
-  } catch (error) {
-    if (error instanceof UpgradeError) {
-      reporter.error(error.message);
-      return;
+    try {
+      await command(...args);
+      console.log('Done! ✨');
+    } catch (error) {
+      if (error instanceof UpgradeError) {
+        console.error(error.message);
+        process.exit(1);
+      }
+      console.error('Yikes, looks like something really went wrong.');
+      console.error('Please make an issue with the following info:');
+      console.log(error);
+      process.exit(1);
     }
-    reporter.error('Yikes, looks like something really went wrong.');
-    reporter.error('Please make an issue with the following info:');
-    console.log(error);
-  }
+  };
 }
 
 module.exports = main;
