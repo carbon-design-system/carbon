@@ -5592,6 +5592,9 @@ Map {
       "placeholder": Object {
         "type": "string",
       },
+      "readonly": Object {
+        "type": "string",
+      },
       "size": Object {
         "args": Array [
           Array [
