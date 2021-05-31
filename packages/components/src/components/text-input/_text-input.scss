@@ -168,7 +168,8 @@
   }
 
   .#{$prefix}--text-input--invalid,
-  .#{$prefix}--text-input--warning {
+  .#{$prefix}--text-input--warning,
+  .#{$prefix}--text-input-wrapper--readonly .#{$prefix}--text-input {
     padding-right: $carbon--spacing-08;
   }
 
