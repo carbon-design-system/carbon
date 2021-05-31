@@ -12,6 +12,7 @@
   "bugs": "https://github.com/carbon-design-system/carbon/issues",
   "files": [
     "plugins",
+    "rules",
     "base.js",
     "index.js",
     "react.js",
