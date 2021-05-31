@@ -58,7 +58,7 @@ export default class ToggleSkeleton extends React.Component {
           className={`${prefix}--toggle-input__label`}
           htmlFor={id}
           aria-label={labelText ? null : this.props['aria-label']}>
-          {labelText}
+          {labelText ? <div>{labelText}</div> : null}
           <span className={`${prefix}--toggle__switch`}>
             <span className={`${prefix}--toggle__text--left`} />
             <span className={`${prefix}--toggle__appearance`} />

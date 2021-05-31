@@ -448,7 +448,7 @@
       }
 
       .#{$prefix}--toggle-input__label & {
-        margin-top: $carbon--spacing-05;
+        margin-top: $carbon--spacing-03;
       }
     }
 
@@ -512,6 +512,9 @@
       cursor: not-allowed;
     }
 
+    //----------------------------------------------
+    // Skeleton
+    // ---------------------------------------------
     //md toggle input
     .#{$prefix}--toggle.#{$prefix}--skeleton
       + .#{$prefix}--toggle-input__label
@@ -521,6 +524,20 @@
       width: 3rem;
     }
 
+    //md skeleton label text
+    .#{$prefix}--toggle.#{$prefix}--skeleton
+      + .#{$prefix}--toggle-input__label
+      > div {
+      overflow: hidden;
+      width: 1.5rem;
+      height: 0.5rem;
+      //hides text
+      font-size: 0%;
+      line-height: 0;
+
+      @include skeleton;
+    }
+
     //small toggle input
     .#{$prefix}--toggle-input--small.#{$prefix}--skeleton
       + .#{$prefix}--toggle-input__label
@@ -528,6 +545,20 @@
       @include skeleton;
 
       width: 2rem;
+    }
+
+    //sm skeleton label text
+    .#{$prefix}--toggle-input--small.#{$prefix}--skeleton
+      + .#{$prefix}--toggle-input__label
+      > div {
+      overflow: hidden;
+      width: 1rem;
+      height: 0.5rem;
+      //hides text
+      font-size: 0%;
+      line-height: 0;
+
+      @include skeleton;
     }
 
     // on/off text skeleton
