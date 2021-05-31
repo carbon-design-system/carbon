@@ -20,15 +20,15 @@
 @mixin carbon-header {
   .#{$prefix}--header {
     position: fixed;
+    z-index: z('header');
     top: 0;
     right: 0;
     left: 0;
-    z-index: z('header');
     display: flex;
-    align-items: center;
     height: mini-units(6);
-    background-color: $shell-header-bg-01;
+    align-items: center;
     border-bottom: 1px solid $shell-header-border-01;
+    background-color: $shell-header-bg-01;
   }
 
   .#{$prefix}--header__action {
@@ -66,11 +66,6 @@
   .#{$prefix}--header__action:focus {
     border-color: $shell-header-focus;
     outline: none;
-
-    // Firefox HCM Fix
-    @media screen and (prefers-contrast) {
-      border-style: dotted;
-    }
   }
 
   .#{$prefix}--header__action:active {
@@ -112,28 +107,21 @@
     @include type-style('body-short-01');
 
     display: flex;
-    align-items: center;
     height: 100%;
+    align-items: center;
     padding: 0 mini-units(4) 0 mini-units(2);
-    font-weight: 600;
-    line-height: 1.25rem;
-    letter-spacing: 0.1px;
-    text-decoration: none;
     border: rem(2px) solid transparent;
+    font-weight: 600;
+    letter-spacing: 0.1px;
+    line-height: 1.25rem;
     outline: none;
+    text-decoration: none;
     transition: border-color $duration--fast-02;
     user-select: none;
   }
 
   a.#{$prefix}--header__name:focus {
     border-color: $shell-header-focus;
-
-    // Windows, Firefox HCM Fix
-    @media screen and (-ms-high-contrast: active),
-      screen and (prefers-contrast) {
-      // `ButtonText` is a CSS2 system color to help improve colors in HCM
-      border-style: dotted;
-    }
   }
 
   .#{$prefix}--header__name--prefix {
@@ -171,62 +159,56 @@
       width: rem(1px);
       height: rem(24px);
       background-color: $shell-header-border-01;
-      transform: translateY(-50%);
       content: '';
+      transform: translateY(-50%);
     }
   }
 
   .#{$prefix}--header__menu-bar {
     display: flex;
     height: 100%;
-    margin: 0;
     padding: 0;
+    margin: 0;
     list-style: none;
   }
 
   a.#{$prefix}--header__menu-item {
     position: relative;
     display: flex;
-    align-items: center;
     // Used for links that are directly in the menubar to span the full height
     height: 100%;
+    align-items: center;
     padding: 0 mini-units(2);
-    color: $shell-header-text-02;
-    font-weight: 400;
-    // Text styles
-    font-size: rem(14px);
-    line-height: 1.125rem;
-    letter-spacing: 0;
-    // Reset link styles and make sure the text isn't selectable
-    text-decoration: none;
     // Used for focus styles
     border: 2px solid transparent;
+    color: $shell-header-text-02;
+    // Text styles
+    font-size: rem(14px);
+    font-weight: 400;
+    letter-spacing: 0;
+    line-height: 1.125rem;
+    // Reset link styles and make sure the text isn't selectable
+    text-decoration: none;
     transition: background-color $duration--fast-02,
       border-color $duration--fast-02, color $duration--fast-02;
     user-select: none;
   }
 
   a.#{$prefix}--header__menu-item:hover {
-    color: $shell-header-text-01;
     background-color: $shell-header-bg-02;
+    color: $shell-header-text-01;
   }
 
   .#{$prefix}--header__action:active,
   a.#{$prefix}--header__menu-item:active {
-    color: $shell-header-text-01;
     background-color: $shell-header-bg-03;
+    color: $shell-header-text-01;
   }
 
   a.#{$prefix}--header__menu-item:focus {
-    color: $shell-header-text-01;
     border-color: $shell-header-focus;
+    color: $shell-header-text-01;
     outline: none;
-
-    // Windows, Firefox HCM Fix
-    @media screen and (-ms-high-contrast: active),
-      screen and (prefers-contrast) {
-      border-style: dotted;
-    }
   }
 
   a.#{$prefix}--header__menu-item:hover > svg,
@@ -245,7 +227,7 @@
     bottom: -2px;
     left: 0;
     width: 100%;
-    border-bottom: 3px solid $inverse-support-04;
+    border-bottom: 3px solid $support-info-inverse;
     content: '';
   }
 
@@ -271,8 +253,8 @@
     // Note: needs to be higher than menu. Adding 1 here instead of moving to
     // the next level.
     z-index: #{z('header') + 1};
-    color: $shell-header-focus;
     background-color: $shell-header-bg-06;
+    color: $shell-header-focus;
   }
 
   .#{$prefix}--header__menu-title[aria-expanded='true']
@@ -282,20 +264,20 @@
 
   .#{$prefix}--header__menu {
     display: none;
-    margin: 0;
     padding: 0;
+    margin: 0;
     list-style: none;
   }
 
   .#{$prefix}--header__menu-title[aria-expanded='true']
     + .#{$prefix}--header__menu {
     position: absolute;
+    z-index: z('header');
     bottom: 0;
     left: 0;
-    z-index: z('header');
     display: flex;
-    flex-direction: column;
     width: mini-units(25);
+    flex-direction: column;
     background-color: $shell-header-bg-06;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.5);
     transform: translateY(100%);
@@ -318,14 +300,14 @@
   }
 
   .#{$prefix}--header__menu .#{$prefix}--header__menu-item:hover {
-    color: $shell-header-text-01;
     background-color: $shell-header-bg-06;
+    color: $shell-header-text-01;
   }
 
   .#{$prefix}--header__menu-arrow {
     margin-left: mini-units(1);
-    transition: transform $duration--fast-02, fill $duration--fast-02;
     fill: $shell-header-icon-03;
+    transition: transform $duration--fast-02, fill $duration--fast-02;
   }
 
   //--------------------------------------------------------------------------
@@ -333,9 +315,9 @@
   //--------------------------------------------------------------------------
   .#{$prefix}--header__global {
     display: flex;
+    height: 100%;
     flex: 1 1 0%;
     justify-content: flex-end;
-    height: 100%;
   }
 
   //--------------------------------------------------------------------------
@@ -343,31 +325,31 @@
   //--------------------------------------------------------------------------
   .#{$prefix}--skip-to-content {
     position: absolute;
+    overflow: hidden;
     width: 1px;
     height: 1px;
-    margin: -1px;
     padding: 0;
-    overflow: hidden;
-    white-space: nowrap;
     border: 0;
-    visibility: inherit;
+    margin: -1px;
     clip: rect(0, 0, 0, 0);
+    visibility: inherit;
+    white-space: nowrap;
   }
 
   .#{$prefix}--skip-to-content:focus {
+    z-index: 9999;
     top: 0;
     left: 0;
-    z-index: 9999;
     display: flex;
-    align-items: center;
     width: auto;
     height: 3rem;
+    align-items: center;
     padding: 0 1rem;
-    color: $shell-header-text-01;
-    background-color: $shell-header-bg-01;
     border: 4px solid $ibm-color__blue-60;
-    outline: none;
+    background-color: $shell-header-bg-01;
     clip: auto;
+    color: $shell-header-text-01;
+    outline: none;
   }
 }
 

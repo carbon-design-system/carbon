@@ -26,14 +26,14 @@
   .#{$prefix}--snippet--disabled,
   .#{$prefix}--snippet--disabled
     .#{$prefix}--btn.#{$prefix}--snippet-btn--expand {
-    color: $disabled-02;
-    background-color: $disabled-01;
+    background-color: $layer-disabled;
+    color: $text-disabled;
   }
 
   .#{$prefix}--snippet--disabled .#{$prefix}--snippet-btn--expand:hover,
   .#{$prefix}--snippet--disabled .#{$prefix}--copy-btn:hover {
-    color: $disabled-02;
-    background-color: $disabled-01;
+    background-color: $layer-disabled;
+    color: $text-disabled;
     cursor: not-allowed;
   }
 
@@ -41,7 +41,7 @@
   .#{$prefix}--snippet--disabled
     .#{$prefix}--snippet-btn--expand
     .#{$prefix}--icon-chevron--down {
-    fill: $disabled-02;
+    fill: $icon-disabled;
   }
 
   .#{$prefix}--snippet code {
@@ -55,14 +55,14 @@
     position: relative;
     display: inline;
     padding: 0;
-    color: $text-01;
-    background-color: $field-01;
     border: 2px solid transparent;
+    background-color: $field;
     border-radius: 4px;
+    color: $text-primary;
     cursor: pointer;
 
     &:hover {
-      background-color: $ui-03;
+      background-color: $layer-accent;
     }
 
     &:active {
@@ -72,11 +72,6 @@
     &:focus {
       border: 2px solid $focus;
       outline: none;
-
-      // Firefox HCM fix
-      @media screen and (prefers-contrast) {
-        border-style: dotted;
-      }
     }
 
     &::before {
@@ -89,9 +84,9 @@
       @include tooltip--content('icon');
 
       display: none;
+      overflow: visible;
       box-sizing: content-box;
       margin: auto;
-      overflow: visible;
       clip: auto;
     }
 
@@ -124,7 +119,7 @@
     display: inline-block;
 
     &:hover {
-      background-color: $field-01;
+      background-color: $field;
       cursor: auto;
     }
   }
@@ -139,15 +134,9 @@
     @include bx--snippet;
 
     display: flex;
-    align-items: center;
     height: $carbon--spacing-08;
+    align-items: center;
     padding-right: $carbon--spacing-08;
-
-    // Windows, Firefox HCM Fix
-    @media screen and (-ms-high-contrast: active),
-      screen and (prefers-contrast) {
-      outline: 2px solid transparent;
-    }
   }
 
   .#{$prefix}--snippet--single.#{$prefix}--snippet--no-copy {
@@ -161,8 +150,8 @@
   .#{$prefix}--snippet--single .#{$prefix}--snippet-container {
     position: relative;
     display: flex;
-    align-items: center;
     height: 100%;
+    align-items: center;
     padding-left: $carbon--spacing-05;
     overflow-x: auto;
 
@@ -189,20 +178,14 @@
 
     display: flex;
     padding: $carbon--spacing-05;
-
-    // Windows, Firefox HCM Fix
-    @media screen and (-ms-high-contrast: active),
-      screen and (prefers-contrast) {
-      outline: 2px solid transparent;
-    }
   }
 
   //collapsed snippet container
   .#{$prefix}--snippet--multi .#{$prefix}--snippet-container {
     position: relative;
-    order: 1;
     min-height: 100%;
     max-height: 100%;
+    order: 1;
     overflow-y: auto;
     transition: max-height $duration--moderate-01 motion(standard, productive);
   }
@@ -246,7 +229,7 @@
     width: rem(16px);
     height: 100%;
     // Safari interprets `transparent` differently, so make color token value transparent instead:
-    background-image: linear-gradient(to right, rgba($field-01, 0), $field-01);
+    background-image: linear-gradient(to right, rgba($field, 0), $field);
     content: '';
   }
 
@@ -258,15 +241,8 @@
   .#{$prefix}--snippet__icon {
     width: rem(16px);
     height: rem(16px);
+    fill: $icon-primary;
     transition: all $duration--fast-01 motion(standard, productive);
-    fill: $icon-01;
-
-    // Windows, Firefox HCM Fix
-    @media screen and (-ms-high-contrast: active),
-      screen and (prefers-contrast) {
-      // `ButtonText` is a CSS2 system color to help improve colors in HCM
-      fill: ButtonText;
-    }
   }
 
   .#{$prefix}--snippet-button {
@@ -276,16 +252,16 @@
     top: 0;
     right: 0;
     display: flex;
-    align-items: center;
-    justify-content: center;
+    overflow: visible;
     width: $carbon--spacing-08;
     height: $carbon--spacing-08;
+    align-items: center;
+    justify-content: center;
     padding: 0;
-    overflow: visible;
-    background-color: $field-01;
     border: none;
-    outline: none;
+    background-color: $field;
     cursor: pointer;
+    outline: none;
 
     &:focus {
       @include focus-outline('outline');
@@ -302,7 +278,7 @@
   }
 
   .#{$prefix}--snippet-button:hover {
-    background: $hover-ui;
+    background: $field-hover;
   }
 
   .#{$prefix}--snippet-button:active {
@@ -314,10 +290,10 @@
     // Override one in code snippet
     @include carbon--font-family('sans');
 
+    z-index: z('overlay');
     top: 0.75rem;
     right: 1.25rem;
     left: inherit;
-    z-index: z('overlay');
     font-weight: 400;
   }
 
@@ -346,15 +322,15 @@
     @include carbon--font-family('sans');
 
     position: absolute;
+    z-index: 10;
     right: 0;
     bottom: 0;
-    z-index: 10;
     display: inline-flex;
     align-items: center;
     padding: $spacing-03 $spacing-05;
-    color: $text-01;
-    background-color: $field-01;
     border: 0;
+    background-color: $field;
+    color: $text-primary;
   }
 
   .#{$prefix}--snippet-btn--expand .#{$prefix}--snippet-btn--text {
@@ -368,14 +344,14 @@
 
   .#{$prefix}--snippet-btn--expand .#{$prefix}--icon-chevron--down {
     margin-left: $spacing-03;
+    fill: $icon-primary;
     transform: rotate(0deg);
     transition: $duration--moderate-01 motion(standard, productive);
-    fill: $text-01;
   }
 
   .#{$prefix}--snippet-btn--expand:hover {
-    color: $text-01;
-    background: $hover-ui;
+    background: $field-hover;
+    color: $text-primary;
   }
 
   .#{$prefix}--snippet-btn--expand:active {
@@ -449,9 +425,9 @@
   }
 
   .#{$prefix}--snippet--multi .#{$prefix}--copy-btn {
+    z-index: 10;
     top: $carbon--spacing-03;
     right: $carbon--spacing-03;
-    z-index: 10;
     width: $carbon--spacing-07;
     height: $carbon--spacing-07;
   }
@@ -475,20 +451,20 @@
   .#{$prefix}--snippet__overflow-indicator--left,
   .#{$prefix}--snippet__overflow-indicator--right {
     z-index: 1;
-    flex: 1 0 auto;
     width: $carbon--spacing-05;
+    flex: 1 0 auto;
   }
 
   .#{$prefix}--snippet__overflow-indicator--left {
     order: 0;
     margin-right: -$carbon--spacing-05;
-    background-image: linear-gradient(to left, transparent, $field-01);
+    background-image: linear-gradient(to left, transparent, $field);
   }
 
   .#{$prefix}--snippet__overflow-indicator--right {
     order: 2;
     margin-left: -$carbon--spacing-05;
-    background-image: linear-gradient(to right, transparent, $field-01);
+    background-image: linear-gradient(to right, transparent, $field);
   }
 
   .#{$prefix}--snippet--single .#{$prefix}--snippet__overflow-indicator--right,
@@ -500,6 +476,11 @@
 
   .#{$prefix}--snippet--single .#{$prefix}--snippet__overflow-indicator--right {
     right: $carbon--spacing-08;
+  }
+
+  .#{$prefix}--snippet--single.#{$prefix}--snippet--no-copy
+    .#{$prefix}--snippet__overflow-indicator--right {
+    right: 0;
   }
 
   .#{$prefix}--snippet--single
@@ -528,19 +509,11 @@
   @media not all and (min-resolution: 0.001dpcm) {
     @supports (-webkit-appearance: none) and (stroke-color: transparent) {
       .#{$prefix}--snippet__overflow-indicator--left {
-        background-image: linear-gradient(
-          to left,
-          rgba($field-01, 0),
-          $field-01
-        );
+        background-image: linear-gradient(to left, rgba($field, 0), $field);
       }
 
       .#{$prefix}--snippet__overflow-indicator--right {
-        background-image: linear-gradient(
-          to right,
-          rgba($field-01, 0),
-          $field-01
-        );
+        background-image: linear-gradient(to right, rgba($field, 0), $field);
       }
     }
   }
@@ -578,6 +551,22 @@
     .#{$prefix}--snippet-container {
     padding-bottom: 0;
   }
+
+  // Windows HCM fix
+  /* stylelint-disable */
+  .#{$prefix}--snippet__icon {
+    @include high-contrast-mode('icon-fill');
+  }
+
+  .#{$prefix}--snippet--inline:focus {
+    @include high-contrast-mode('focus');
+  }
+
+  .#{$prefix}--snippet--single,
+  .#{$prefix}--snippet--multi {
+    @include high-contrast-mode('outline');
+  }
+  /* stylelint-enable */
 }
 
 @include exports('snippet') {

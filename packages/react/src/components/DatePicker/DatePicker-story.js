@@ -6,7 +6,14 @@
  */
 
 import React from 'react';
-import { withKnobs, boolean, select, text } from '@storybook/addon-knobs';
+import {
+  withKnobs,
+  boolean,
+  select,
+  text,
+  array,
+} from '@storybook/addon-knobs';
+import { action } from '@storybook/addon-actions';
 import DatePicker from '../DatePicker';
 import DatePickerInput from '../DatePickerInput';
 import DatePickerSkeleton from '../DatePicker/DatePicker.Skeleton';
@@ -41,6 +48,9 @@ const props = {
     ),
     minDate: text('Disable dates before this date (minDate)', '11/15/2020'),
     maxDate: text('Disabled dates after this date (maxDate)', '11/01/2040'),
+    disable: array('Disable specific dates (disable)', ['07/15/2021'], ','),
+    onClose: action('onClose'),
+    onOpen: action('onOpen'),
   }),
   datePickerInput: () => ({
     id: 'date-picker-input-id',

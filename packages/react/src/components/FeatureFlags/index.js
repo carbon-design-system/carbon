@@ -154,4 +154,4 @@ function isEqual(a, b) {
   return true;
 }
 
-export { FeatureFlags, useFeatureFlags, useFeatureFlag };
+export { FeatureFlags, FeatureFlagContext, useFeatureFlags, useFeatureFlag };

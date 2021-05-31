@@ -9,7 +9,13 @@ import React from 'react';
 import { action } from '@storybook/addon-actions';
 import { withKnobs, boolean, select, text } from '@storybook/addon-knobs';
 import { iconAddSolid, iconSearch } from 'carbon-icons';
-import { Add16, AddFilled16, Search16 } from '@carbon/icons-react';
+import {
+  Add16,
+  AddFilled16,
+  Search16,
+  PlayOutlineFilled32,
+  PlayOutlineFilled16,
+} from '@carbon/icons-react';
 import Button from '../Button';
 import ButtonSkeleton from '../Button/Button.Skeleton';
 import ButtonSet from '../ButtonSet';
@@ -20,6 +26,10 @@ const icons = {
   'Add (Add16 from `@carbon/icons-react`)': 'Add16',
   'Add (Filled) (AddFilled16 from `@carbon/icons-react`)': 'AddFilled16',
   'Search (Search16 from `@carbon/icons-react`)': 'Search16',
+  'PlayOutlineFilled16 (PlayOutlineFilled16 from `@carbon/icons-react`)':
+    'PlayOutlineFilled16',
+  'PlayOutlineFilled32 (PlayOutlineFilled32 from `@carbon/icons-react`)':
+    'PlayOutlineFilled32',
 };
 
 const iconMap = {
@@ -28,6 +38,8 @@ const iconMap = {
   Add16,
   AddFilled16,
   Search16,
+  PlayOutlineFilled16,
+  PlayOutlineFilled32,
 };
 
 const kinds = {
@@ -40,12 +52,21 @@ const kinds = {
   'Ghost button (ghost)': 'ghost',
 };
 
+// V11: New size table
+// const sizes = {
+//   'Small  (sm)': 'sm',
+//   'Medium (md)': 'md',
+//   'Large  (lg)  - default': null,
+//   'Extra Large (xl)': 'xl',
+//   'Extra Extra Large (2xl)': '2xl',
+// };
+
 const sizes = {
-  Default: 'default',
-  Field: 'field',
-  'Small (sm)': 'small',
+  'Small  (sm)': 'sm',
+  'Medium (md)': 'md',
+  Default: null,
   'Large (lg)': 'lg',
-  'Extra large size (xl)': 'xl',
+  'Extra Large (xl)': 'xl',
 };
 
 const props = {
@@ -53,6 +74,7 @@ const props = {
     const iconToUse = iconMap[select('Icon (icon)', icons, 'none')];
     return {
       className: 'some-class',
+      isExpressive: boolean('Expressive', false),
       kind: select('Button kind (kind)', kinds, 'primary'),
       disabled: boolean('Disabled (disabled)', false),
       size: select('Button size (size)', sizes, 'default'),
@@ -75,6 +97,7 @@ const props = {
     }
     return {
       className: 'some-class',
+      isExpressive: boolean('Expressive', false),
       kind: select('Button kind (kind)', kinds, 'primary'),
       disabled: boolean('Disabled (disabled)', false),
       isSelected: boolean('Selected (isSelected)', false),
@@ -102,6 +125,7 @@ const props = {
     const iconToUse = iconMap[select('Icon (icon)', icons, 'none')];
     return {
       className: 'some-class',
+      isExpressive: boolean('Expressive', false),
       disabled: boolean('Disabled (disabled)', false),
       size: select('Button size (size)', sizes, 'default'),
       renderIcon: !iconToUse || iconToUse.svgData ? undefined : iconToUse,
@@ -175,10 +199,14 @@ export const Playground = () => {
           alignItems: 'center',
           flexWrap: 'wrap',
         }}>
-        <Button {...regularProps}>Button</Button>
+        <Button {...regularProps}>Buttons</Button>
         &nbsp;
         {!regularProps.kind.includes('danger') && (
-          <Button hasIconOnly {...iconOnly}></Button>
+          <>
+            <Button hasIconOnly {...iconOnly}></Button>
+            &nbsp;
+            <Button hasIconOnly {...iconOnly} kind="ghost"></Button>
+          </>
         )}
       </div>
       <div
@@ -217,6 +245,69 @@ export const SetOfButtons = () => {
       <Button kind="secondary">Secondary button</Button>
       <Button kind="primary">Primary button</Button>
     </ButtonSet>
+  );
+};
+
+export const ExpressiveButtons = () => {
+  return (
+    <>
+      <div
+        style={{
+          margin: '1rem',
+        }}>
+        <Button isExpressive size="default">
+          Button
+        </Button>
+      </div>
+      <div
+        style={{
+          margin: '1rem',
+        }}>
+        <Button isExpressive size="lg">
+          Button
+        </Button>
+      </div>
+      <div
+        style={{
+          margin: '1rem',
+        }}>
+        <Button isExpressive size="xl">
+          Button
+        </Button>
+      </div>
+      <div
+        style={{
+          margin: '1rem',
+        }}>
+        <Button isExpressive size="default" renderIcon={Add16}>
+          Button
+        </Button>
+      </div>
+      <div
+        style={{
+          margin: '1rem',
+        }}>
+        <Button
+          isExpressive
+          renderIcon={Add16}
+          hasIconOnly
+          iconDescription="Icon description"
+        />
+      </div>
+      <div
+        style={{
+          marginTop: '1rem',
+        }}>
+        <ButtonSet>
+          <Button kind="secondary" isExpressive>
+            Secondary button
+          </Button>
+          <Button kind="primary" isExpressive>
+            Primary button
+          </Button>
+        </ButtonSet>
+      </div>
+    </>
   );
 };
 

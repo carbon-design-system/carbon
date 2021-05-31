@@ -11,11 +11,13 @@ import classNames from 'classnames';
 import { settings } from 'carbon-components';
 import Link from '../Link';
 import {
-  CheckmarkFilled16 as CheckmarkFilled,
+  Checkbox16,
+  CheckboxCheckedFilled16,
   ChevronDown16,
 } from '@carbon/icons-react';
 import { keys, matches } from '../../internal/keyboard';
 import deprecate from '../../prop-types/deprecate';
+import { composeEventHandlers } from '../../tools/events';
 
 const { prefix } = settings;
 
@@ -278,8 +280,9 @@ export function SelectableTile(props) {
         {...other}
         onClick={!disabled ? handleOnClick : null}
         onKeyDown={!disabled ? handleOnKeyDown : null}>
-        <span className={`${prefix}--tile__checkmark`}>
-          <CheckmarkFilled />
+        <span
+          className={`${prefix}--tile__checkmark ${prefix}--tile__checkmark--persistent`}>
+          {isSelected ? <CheckboxCheckedFilled16 /> : <Checkbox16 />}
         </span>
         <span className={`${prefix}--tile-content`}>{children}</span>
       </label>
@@ -427,6 +430,16 @@ export class ExpandableTile extends Component {
     onBeforeClick: PropTypes.func,
 
     /**
+     * optional handler to trigger a function the Tile is clicked
+     */
+    onClick: PropTypes.func,
+
+    /**
+     * optional handler to trigger a function when a key is pressed
+     */
+    onKeyUp: PropTypes.func,
+
+    /**
      * The `tabindex` attribute.
      */
     tabIndex: PropTypes.number,
@@ -526,7 +539,7 @@ export class ExpandableTile extends Component {
   };
 
   handleClick = (evt) => {
-    if (!this.props.onBeforeClick(evt)) {
+    if (!this.props.onBeforeClick(evt) || evt.target.tagName === 'INPUT') {
       return;
     }
     evt.persist();
@@ -541,18 +554,11 @@ export class ExpandableTile extends Component {
     );
   };
 
-  handleKeyDown = (evt) => {
-    if (matches(evt, [keys.Enter, keys.Space])) {
-      evt.persist();
-      this.setState(
-        {
-          expanded: !this.state.expanded,
-        },
-        () => {
-          this.setMaxHeight();
-          this.props.handleClick(evt);
-        }
-      );
+  handleKeyUp = (evt) => {
+    if (evt.target !== this.tile) {
+      if (matches(evt, [keys.Enter, keys.Space])) {
+        evt.preventDefault();
+      }
     }
   };
 
@@ -568,6 +574,8 @@ export class ExpandableTile extends Component {
       tileMaxHeight, // eslint-disable-line
       tilePadding, // eslint-disable-line
       handleClick, // eslint-disable-line
+      onClick,
+      onKeyUp,
       tileCollapsedIconText,
       tileExpandedIconText,
       tileCollapsedLabel,
@@ -609,7 +617,8 @@ export class ExpandableTile extends Component {
         aria-expanded={isExpanded}
         title={isExpanded ? tileExpandedIconText : tileCollapsedIconText}
         {...other}
-        onClick={this.handleClick}
+        onKeyUp={composeEventHandlers([onKeyUp, this.handleKeyUp])}
+        onClick={composeEventHandlers([onClick, this.handleClick])}
         tabIndex={tabIndex}>
         <div
           ref={(tileContent) => {

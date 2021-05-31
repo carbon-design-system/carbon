@@ -40,8 +40,8 @@
   .#{$prefix}--time-picker .#{$prefix}--select-input {
     width: auto;
     min-width: auto;
-    margin: 0;
     padding-right: rem(48px);
+    margin: 0;
     line-height: 1;
   }
 
@@ -50,9 +50,9 @@
     @include type-style('code-02');
 
     display: flex;
-    align-items: center;
     width: 4.875rem;
     height: rem(40px);
+    align-items: center;
     transition: outline $duration--fast-01 motion(standard, productive),
       background-color $duration--fast-01 motion(standard, productive);
 
@@ -61,18 +61,19 @@
     }
   }
 
+  // V11: Possibly deprecate
   .#{$prefix}--time-picker--light .#{$prefix}--select-input {
     background-color: $field-02;
 
     &:hover {
-      background-color: $hover-ui;
+      background-color: $field-hover;
     }
 
     &:disabled,
     &:hover:disabled {
-      color: $disabled-02;
-      background-color: transparent;
       border-bottom: 1px solid transparent;
+      background-color: transparent;
+      color: $text-disabled;
       cursor: not-allowed;
     }
   }

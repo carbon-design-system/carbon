@@ -25,16 +25,16 @@
 
     position: relative;
     display: flex;
+    width: 100%;
     flex-direction: column;
     align-items: flex-start;
-    width: 100%;
   }
 
   .#{$prefix}--select-input__wrapper {
     position: relative;
     display: flex;
-    align-items: center;
     width: 100%;
+    align-items: center;
   }
 
   .#{$prefix}--select-input {
@@ -45,21 +45,21 @@
     width: 100%;
     height: rem(40px);
     padding: 0 $spacing-09 0 $spacing-05;
-    color: $text-01;
-    background-color: $field-01;
     border: none;
-    border-bottom: 1px solid $ui-04;
+    border-bottom: 1px solid $border-strong;
+    appearance: none;
+    background-color: $field;
     border-radius: 0;
+    color: $text-primary;
     cursor: pointer;
     // reset disabled <select> opacity
     opacity: 1;
 
     // Do not transition on background-color (see: https://github.com/carbon-design-system/carbon/issues/4464)
     transition: outline $duration--fast-01 motion(standard, productive);
-    appearance: none;
 
     &:hover {
-      background-color: $hover-ui;
+      background-color: $background-hover;
     }
 
     // Hide default select arrow in IE10+
@@ -72,23 +72,23 @@
       // Removes dotted inner focus
       &:-moz-focusring,
       &::-moz-focus-inner {
+        background-image: none;
         color: transparent;
         text-shadow: 0 0 0 #000000;
-        background-image: none;
       }
     }
 
     &:focus {
       @include focus-outline('outline');
 
-      color: $text-01;
+      color: $text-primary;
     }
 
     &:disabled,
     &:hover:disabled {
-      color: $disabled-02;
-      background-color: $disabled-01;
-      border-bottom-color: $disabled-01;
+      border-bottom-color: $border-disabled;
+      background-color: $field-disabled;
+      color: $text-disabled;
       cursor: not-allowed;
     }
   }
@@ -107,7 +107,7 @@
 
   .#{$prefix}--select--disabled .#{$prefix}--label,
   .#{$prefix}--select--disabled .#{$prefix}--form__helper-text {
-    color: $disabled-02;
+    color: $text-disabled;
   }
 
   .#{$prefix}--select-input__wrapper[data-invalid] .#{$prefix}--select-input,
@@ -116,20 +116,20 @@
   }
 
   .#{$prefix}--select-input:disabled ~ .#{$prefix}--select__arrow {
-    fill: $disabled-02;
+    fill: $icon-disabled;
   }
 
   .#{$prefix}--select--light .#{$prefix}--select-input {
     background-color: $field-02;
 
     &:hover {
-      background-color: $hover-ui;
+      background-color: $background-hover;
     }
 
     &:disabled,
     &:hover:disabled {
-      color: $disabled-02;
       background-color: $field-02;
+      color: $text-disabled;
       cursor: not-allowed;
     }
   }
@@ -139,8 +139,8 @@
     top: 0;
     right: $spacing-05;
     height: 100%;
+    fill: $icon-primary;
     pointer-events: none;
-    fill: $ui-05;
 
     // Windows, Firefox HCM Fix
     @media screen and (-ms-high-contrast: active),
@@ -160,34 +160,22 @@
   .#{$prefix}--select-input__wrapper[data-invalid]
     .#{$prefix}--select-input
     ~ .#{$prefix}--select__invalid-icon {
-    fill: $support-01;
+    fill: $support-error;
   }
 
   .#{$prefix}--select__invalid-icon--warning {
-    fill: $support-03;
+    fill: $support-warning;
   }
 
   .#{$prefix}--select__invalid-icon--warning path[fill] {
-    opacity: 1;
     fill: $carbon__black-100;
+    opacity: 1;
   }
 
   .#{$prefix}--select-optgroup,
   .#{$prefix}--select-option {
     // For the options to show in IE11
-    color: $text-01;
-  }
-
-  // Override some Firefox user-agent styles
-  @-moz-document url-prefix() {
-    .#{$prefix}--select-option {
-      color: $text-01;
-      background-color: $ui-01;
-    }
-
-    .#{$prefix}--select-optgroup {
-      color: $text-01;
-    }
+    color: $text-primary;
   }
 
   .#{$prefix}--select--inline {
@@ -218,14 +206,14 @@
     width: auto;
     padding-right: $spacing-07;
     padding-left: $carbon--spacing-03;
-    color: $text-01;
-    background-color: transparent;
     border-bottom: none;
+    background-color: transparent;
+    color: $text-primary;
   }
 
   .#{$prefix}--select--inline .#{$prefix}--select-input[disabled],
   .#{$prefix}--select--inline .#{$prefix}--select-input[disabled]:hover {
-    background-color: $disabled-01;
+    background-color: $field-disabled;
   }
 
   .#{$prefix}--select--inline .#{$prefix}--select__arrow {
@@ -262,6 +250,12 @@
 
   .#{$prefix}--select.#{$prefix}--skeleton .#{$prefix}--select-input {
     display: none;
+  }
+
+  // Windows HCM fix
+  // stylelint-disable-next-line no-duplicate-selectors
+  .#{$prefix}--select__arrow {
+    @include high-contrast-mode('icon-fill');
   }
 }
 

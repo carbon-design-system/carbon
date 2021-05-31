@@ -79,6 +79,11 @@ class NumberInput extends Component {
     hideLabel: PropTypes.bool,
 
     /**
+     * Specify whether you want the steppers to be hidden
+     */
+    hideSteppers: PropTypes.bool,
+
+    /**
      * Provide a description for up/down icons that can be read by screen readers
      */
     iconDescription: PropTypes.string.isRequired,
@@ -249,16 +254,18 @@ class NumberInput extends Component {
     if (!disabled) {
       evt.persist();
       evt.imaginaryTarget = this._inputRef;
+      const prevValue = this.state.value;
       const value = evt.target.value;
+      const direction = prevValue < value ? 'up' : 'down';
       this.setState(
         {
           value,
         },
         () => {
           if (useControlledStateWithValue) {
-            onChange(evt, { value });
+            onChange(evt, { value, direction });
           } else if (onChange) {
-            onChange(evt);
+            onChange(evt, { value, direction });
           }
         }
       );
@@ -286,12 +293,14 @@ class NumberInput extends Component {
           value,
         },
         () => {
+          //TO-DO v11: update these events to return the same things --> evt, {value, direction}
           if (useControlledStateWithValue) {
             onClick && onClick(evt, { value, direction });
             onChange && onChange(evt, { value, direction });
           } else {
-            onClick && onClick(evt, direction);
-            onChange && onChange(evt, direction);
+            // value added as a 3rd argument rather than in same obj so it doesn't break in v10
+            onClick && onClick(evt, direction, value);
+            onChange && onChange(evt, direction, value);
           }
         }
       );
@@ -313,6 +322,7 @@ class NumberInput extends Component {
       iconDescription, // eslint-disable-line
       id,
       hideLabel,
+      hideSteppers,
       label,
       max,
       min,
@@ -343,6 +353,7 @@ class NumberInput extends Component {
         [`${prefix}--number--readonly`]: readOnly,
         [`${prefix}--number--light`]: light,
         [`${prefix}--number--nolabel`]: hideLabel,
+        [`${prefix}--number--nosteppers`]: hideSteppers,
         [`${prefix}--number--mobile`]: isMobile,
         [`${prefix}--number--${size}`]: size,
       }
@@ -462,30 +473,32 @@ class NumberInput extends Component {
                       className={`${prefix}--number__invalid ${prefix}--number__invalid--warning`}
                     />
                   )}
-                  <div className={`${prefix}--number__controls`}>
-                    <button
-                      type="button"
-                      className={`${prefix}--number__control-btn down-icon`}
-                      {...buttonProps}
-                      onClick={(evt) => this.handleArrowClick(evt, 'down')}
-                      title={decrementNumLabel || iconDescription}
-                      aria-label={decrementNumLabel || iconDescription}
-                      tabIndex="-1">
-                      <Subtract16 className="down-icon" />
-                    </button>
-                    <div className={`${prefix}--number__rule-divider`}></div>
-                    <button
-                      type="button"
-                      className={`${prefix}--number__control-btn up-icon`}
-                      {...buttonProps}
-                      onClick={(evt) => this.handleArrowClick(evt, 'up')}
-                      title={incrementNumLabel || iconDescription}
-                      aria-label={incrementNumLabel || iconDescription}
-                      tabIndex="-1">
-                      <Add16 className="up-icon" />
-                    </button>
-                    <div className={`${prefix}--number__rule-divider`}></div>
-                  </div>
+                  {!hideSteppers && (
+                    <div className={`${prefix}--number__controls`}>
+                      <button
+                        type="button"
+                        className={`${prefix}--number__control-btn down-icon`}
+                        {...buttonProps}
+                        onClick={(evt) => this.handleArrowClick(evt, 'down')}
+                        title={decrementNumLabel || iconDescription}
+                        aria-label={decrementNumLabel || iconDescription}
+                        tabIndex="-1">
+                        <Subtract16 className="down-icon" />
+                      </button>
+                      <div className={`${prefix}--number__rule-divider`}></div>
+                      <button
+                        type="button"
+                        className={`${prefix}--number__control-btn up-icon`}
+                        {...buttonProps}
+                        onClick={(evt) => this.handleArrowClick(evt, 'up')}
+                        title={incrementNumLabel || iconDescription}
+                        aria-label={incrementNumLabel || iconDescription}
+                        tabIndex="-1">
+                        <Add16 className="up-icon" />
+                      </button>
+                      <div className={`${prefix}--number__rule-divider`}></div>
+                    </div>
+                  )}
                 </div>
                 {error ? null : helper}
               </>

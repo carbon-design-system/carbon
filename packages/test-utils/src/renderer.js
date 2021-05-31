@@ -48,6 +48,12 @@ const SassRenderer = {
           }
           throw new Error(`Unabled to find value with key: ${key}`);
         },
+        unwrap(key) {
+          if (valuesByKey.has(key)) {
+            return valuesByKey.get(key).value;
+          }
+          throw new Error(`Unabled to find value with key: ${key}`);
+        },
       };
     }
 

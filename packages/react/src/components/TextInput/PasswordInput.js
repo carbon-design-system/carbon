@@ -1,9 +1,15 @@
-import React, { useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
 import { settings } from 'carbon-components';
-import { View16, ViewOff16, WarningFilled16 } from '@carbon/icons-react';
+import {
+  View16,
+  ViewOff16,
+  WarningAltFilled16,
+  WarningFilled16,
+} from '@carbon/icons-react';
 import { textInputProps } from './util';
+import { FormContext } from '../FluidForm';
 
 const { prefix } = settings;
 
@@ -17,23 +23,31 @@ const PasswordInput = React.forwardRef(function PasswordInput(
     onChange,
     onClick,
     hideLabel,
+    inline,
     invalid,
     invalidText,
     helperText,
     light,
     tooltipPosition = 'bottom',
     tooltipAlignment = 'center',
+    type = 'password',
     hidePasswordLabel = 'Hide password',
     showPasswordLabel = 'Show password',
     size,
+    onTogglePasswordVisibility,
+    warn,
+    warnText,
     ...other
   },
   ref
 ) {
-  const [inputType, setInputType] = useState('password');
-  const togglePasswordVisibility = () =>
+  const [inputType, setInputType] = useState(type);
+  const handleTogglePasswordVisibility = (event) => {
     setInputType(inputType === 'password' ? 'text' : 'password');
+    onTogglePasswordVisibility && onTogglePasswordVisibility(event);
+  };
   const errorId = id + '-error-msg';
+  const warnId = id + '-warn-msg';
   const textInputClasses = classNames(
     `${prefix}--text-input`,
     `${prefix}--password-input`,
@@ -62,23 +76,58 @@ const PasswordInput = React.forwardRef(function PasswordInput(
     ref,
     ...other,
   };
+  const inputWrapperClasses = classNames(
+    `${prefix}--form-item`,
+    `${prefix}--text-input-wrapper`,
+    `${prefix}--password-input-wrapper`,
+    {
+      [`${prefix}--text-input-wrapper--light`]: light,
+      [`${prefix}--text-input-wrapper--inline`]: inline,
+    }
+  );
   const labelClasses = classNames(`${prefix}--label`, {
     [`${prefix}--visually-hidden`]: hideLabel,
     [`${prefix}--label--disabled`]: disabled,
+    [`${prefix}--label--inline`]: inline,
+    [`${prefix}--label--inline--${size}`]: inline && !!size,
   });
   const helperTextClasses = classNames(`${prefix}--form__helper-text`, {
     [`${prefix}--form__helper-text--disabled`]: disabled,
+    [`${prefix}--form__helper-text--inline`]: inline,
   });
+  const fieldOuterWrapperClasses = classNames(
+    `${prefix}--text-input__field-outer-wrapper`,
+    {
+      [`${prefix}--text-input__field-outer-wrapper--inline`]: inline,
+    }
+  );
+  const fieldWrapperClasses = classNames(
+    `${prefix}--text-input__field-wrapper`,
+    {
+      [`${prefix}--text-input__field-wrapper--warning`]: !invalid && warn,
+    }
+  );
   const label = labelText ? (
     <label htmlFor={id} className={labelClasses}>
       {labelText}
     </label>
   ) : null;
-  const error = invalid ? (
-    <div className={`${prefix}--form-requirement`} id={errorId}>
-      {invalidText}
-    </div>
-  ) : null;
+
+  let error = null;
+  if (invalid) {
+    error = (
+      <div className={`${prefix}--form-requirement`} id={errorId}>
+        {invalidText}
+      </div>
+    );
+  } else if (warn) {
+    error = (
+      <div className={`${prefix}--form-requirement`} id={warnId}>
+        {warnText}
+      </div>
+    );
+  }
+
   const passwordIsVisible = inputType === 'text';
   const passwordVisibilityIcon = passwordIsVisible ? (
     <ViewOff16 className={`${prefix}--icon-visibility-off`} />
@@ -100,7 +149,13 @@ const PasswordInput = React.forwardRef(function PasswordInput(
   const input = (
     <>
       <input
-        {...textInputProps({ invalid, sharedTextInputProps, errorId })}
+        {...textInputProps({
+          invalid,
+          sharedTextInputProps,
+          errorId,
+          warn,
+          warnId,
+        })}
         disabled={disabled}
         data-toggle-password-visibility={inputType === 'password'}
       />
@@ -108,7 +163,7 @@ const PasswordInput = React.forwardRef(function PasswordInput(
         type="button"
         className={passwordVisibilityToggleClasses}
         disabled={disabled}
-        onClick={togglePasswordVisibility}>
+        onClick={handleTogglePasswordVisibility}>
         {!disabled && (
           <span className={`${prefix}--assistive-text`}>
             {passwordIsVisible ? hidePasswordLabel : showPasswordLabel}
@@ -122,19 +177,40 @@ const PasswordInput = React.forwardRef(function PasswordInput(
     <div className={helperTextClasses}>{helperText}</div>
   ) : null;
 
+  const { isFluid } = useContext(FormContext);
+
+  useEffect(() => {
+    setInputType(type);
+  }, [type]);
+
   return (
-    <div
-      className={`${prefix}--form-item ${prefix}--text-input-wrapper ${prefix}--password-input-wrapper`}>
-      {label}
-      <div
-        className={`${prefix}--text-input__field-wrapper`}
-        data-invalid={invalid || null}>
-        {invalid && (
-          <WarningFilled16 className={`${prefix}--text-input__invalid-icon`} />
-        )}
-        {input}
+    <div className={inputWrapperClasses}>
+      {!inline ? (
+        label
+      ) : (
+        <div className={`${prefix}--text-input__label-helper-wrapper`}>
+          {label}
+          {!isFluid && helper}
+        </div>
+      )}
+      <div className={fieldOuterWrapperClasses}>
+        <div className={fieldWrapperClasses} data-invalid={invalid || null}>
+          {invalid && (
+            <WarningFilled16
+              className={`${prefix}--text-input__invalid-icon`}
+            />
+          )}
+          {!invalid && warn && (
+            <WarningAltFilled16
+              className={`${prefix}--text-input__invalid-icon ${prefix}--text-input__invalid-icon--warning`}
+            />
+          )}
+          {input}
+          {isFluid && !inline && error}
+        </div>
+        {!isFluid && error}
+        {!invalid && !warn && !isFluid && !inline && helper}
       </div>
-      {error ? error : helper}
     </div>
   );
 });
@@ -177,6 +253,11 @@ PasswordInput.propTypes = {
   id: PropTypes.string.isRequired,
 
   /**
+   * `true` to use the inline version.
+   */
+  inline: PropTypes.bool,
+
+  /**
    * Specify whether the control is currently invalid
    */
   invalid: PropTypes.bool,
@@ -210,6 +291,12 @@ PasswordInput.propTypes = {
   onClick: PropTypes.func,
 
   /**
+   * Callback function that is called whenever the toggle password visibility
+   * button is clicked
+   */
+  onTogglePasswordVisibility: PropTypes.func,
+
+  /**
    * Specify the placeholder attribute for the `<input>`
    */
   placeholder: PropTypes.string,
@@ -237,9 +324,24 @@ PasswordInput.propTypes = {
   tooltipPosition: PropTypes.oneOf(['top', 'right', 'bottom', 'left']),
 
   /**
+   * The input type, either password or text
+   */
+  type: PropTypes.oneOf(['password', 'text']),
+
+  /**
    * Provide the current value of the `<input>`
    */
   value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+
+  /**
+   * Specify whether the control is currently in warning state
+   */
+  warn: PropTypes.bool,
+
+  /**
+   * Provide the text that is displayed when the control is in warning state
+   */
+  warnText: PropTypes.node,
 };
 
 PasswordInput.defaultProps = {

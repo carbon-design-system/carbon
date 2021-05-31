@@ -37,7 +37,7 @@
   .#{$prefix}--slider__range-label {
     @include type-style('code-02');
 
-    color: $text-01;
+    color: $text-primary;
     white-space: nowrap;
 
     &:last-of-type {
@@ -49,16 +49,9 @@
     position: absolute;
     width: 100%;
     height: rem(2px);
-    background: $ui-03;
-    transform: translate(0%, -50%);
+    background: $border-subtle;
     cursor: pointer;
-
-    // Windows, Firefox HCM Fix
-    @media screen and (-ms-high-contrast: active),
-      screen and (prefers-contrast) {
-      // `ButtonText` is a CSS2 system color to help improve colors in HCM
-      border: 1px solid transparent;
-    }
+    transform: translate(0%, -50%);
   }
 
   .#{$prefix}--slider__track:before {
@@ -68,41 +61,34 @@
     display: inline-block;
     width: rem(2px);
     height: rem(4px);
-    background: $ui-03;
-    transform: translate(-50%, 0);
+    background: $border-subtle;
     content: '';
+    transform: translate(-50%, 0);
   }
 
   .#{$prefix}--slider__filled-track {
     position: absolute;
     width: 100%;
     height: rem(2px);
-    background: $ui-05;
+    background: $layer-selected-inverse;
+    pointer-events: none;
     transform: translate(0%, -50%);
     transform-origin: left;
     transition: background $duration--fast-02 motion(standard, productive);
-    pointer-events: none;
-
-    // Windows, Firefox HCM Fix
-    @media screen and (-ms-high-contrast: active),
-      screen and (prefers-contrast) {
-      // `ButtonText` is a CSS2 system color to help improve colors in HCM
-      border: 1px solid transparent;
-    }
   }
 
   .#{$prefix}--slider__thumb {
     position: absolute;
-    top: 0;
     z-index: 3;
+    top: 0;
     width: rem(14px);
     height: rem(14px);
-    background: $ui-05;
+    background: $layer-selected-inverse;
     border-radius: 50%;
-    outline: none;
     box-shadow: inset 0 0 0 1px transparent, inset 0 0 0 2px transparent;
-    transform: translate(-50%, -50%);
     cursor: pointer;
+    outline: none;
+    transform: translate(-50%, -50%);
     transition: transform $duration--fast-02 motion(standard, productive),
       background $duration--fast-02 motion(standard, productive),
       box-shadow $duration--fast-02 motion(standard, productive);
@@ -113,27 +99,15 @@
     }
 
     &:focus {
-      background-color: $interactive-04;
-      box-shadow: inset 0 0 0 2px $interactive-04, inset 0 0 0 3px $ui-01;
+      background-color: $interactive;
+      box-shadow: inset 0 0 0 2px $interactive, inset 0 0 0 3px $layer;
       // 20px / 14px = 1.4286
       transform: translate(-50%, -50%) scale(1.4286);
-
-      // Firefox HCM Fix
-      @media screen and (prefers-contrast) {
-        outline-style: dotted;
-      }
     }
 
     &:active {
-      box-shadow: inset 0 0 0 2px $interactive-04;
+      box-shadow: inset 0 0 0 2px $interactive;
       transform: translate(-50%, -50%) scale(1.4286);
-    }
-
-    // Windows, Firefox HCM Fix
-    @media screen and (-ms-high-contrast: active),
-      screen and (prefers-contrast) {
-      // `ButtonText` is a CSS2 system color to help improve colors in HCM
-      outline: 1px solid ButtonText;
     }
   }
 
@@ -145,8 +119,8 @@
   .#{$prefix}-slider-text-input {
     width: auto;
     height: rem(40px);
-    text-align: center;
     -moz-appearance: textfield;
+    text-align: center;
 
     &::-webkit-outer-spin-button,
     &::-webkit-inner-spin-button {
@@ -155,33 +129,33 @@
   }
 
   .#{$prefix}--slider__thumb:focus ~ .#{$prefix}--slider__filled-track {
-    background-color: $interactive-04;
+    background-color: $interactive;
   }
 
   // Disabled state
   .#{$prefix}--label--disabled
     ~ .#{$prefix}--slider-container
     > .#{$prefix}--slider__range-label {
-    color: $disabled-02;
+    color: $text-disabled;
   }
 
   .#{$prefix}--slider--disabled .#{$prefix}--slider__thumb {
-    background-color: $ui-03;
+    background-color: $border-subtle;
 
     &:hover {
-      transform: translate(-50%, -50%);
       cursor: not-allowed;
+      transform: translate(-50%, -50%);
     }
 
     &:focus {
-      background-color: $ui-03;
-      outline: none;
+      background-color: $border-subtle;
       box-shadow: none;
+      outline: none;
       transform: translate(-50%, -50%);
     }
 
     &:active {
-      background: $ui-03;
+      background: $border-subtle;
       transform: translate(-50%, -50%);
     }
   }
@@ -191,7 +165,7 @@
   .#{$prefix}--slider--disabled
     .#{$prefix}--slider__thumb:focus
     ~ .#{$prefix}--slider__filled-track {
-    background-color: $ui-03;
+    background-color: $border-subtle;
     cursor: not-allowed;
   }
 
@@ -199,16 +173,16 @@
     ~ .#{$prefix}--form-item
     .#{$prefix}--slider-text-input,
   .#{$prefix}--slider--disabled ~ .#{$prefix}--slider-text-input {
-    color: $disabled-02;
-    background-color: $disabled-01;
     border: none;
+    background-color: $field-disabled;
+    color: $text-disabled;
     cursor: not-allowed;
     transition: none;
 
     &:active,
     &:focus,
     &:hover {
-      color: $disabled-02;
+      color: $text-disabled;
       outline: none;
     }
   }
@@ -234,6 +208,19 @@
     cursor: default;
     pointer-events: none;
   }
+
+  // Windows HCM fix
+  /* stylelint-disable */
+  .#{$prefix}--slider__thumb {
+    @include high-contrast-mode('outline');
+  }
+  .#{$prefix}--slider__thumb:focus {
+    @include high-contrast-mode('focus');
+  }
+  .#{$prefix}--slider__track {
+    @include high-contrast-mode('outline');
+  }
+  /* stylelint-enable */
 }
 
 @include exports('slider') {

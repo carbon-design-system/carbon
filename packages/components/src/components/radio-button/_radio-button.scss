@@ -67,12 +67,12 @@
   .#{$prefix}--radio-button__appearance {
     @include reset;
 
-    flex-shrink: 0;
     width: rem(18px);
     height: rem(18px);
+    flex-shrink: 0;
+    border: $radio-border-width solid $icon-primary;
     margin: rem(1px) $carbon--spacing-03 rem(2px) rem(2px);
     background-color: transparent;
-    border: $radio-border-width solid $icon-01;
     border-radius: 50%;
   }
 
@@ -82,17 +82,17 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    border-color: $icon-01;
+    border-color: $icon-primary;
 
     &::before {
       position: relative;
       display: inline-block;
       width: 100%;
       height: 100%;
-      background-color: $icon-01;
+      background-color: $icon-primary;
       border-radius: 50%;
-      transform: scale(0.5);
       content: '';
+      transform: scale(0.5);
 
       // Allow the selected button to be seen in Windows HCM for IE/Edge
       @media screen and (-ms-high-contrast: active) {
@@ -131,8 +131,8 @@
   .#{$prefix}--radio-button:focus
     + .#{$prefix}--radio-button__label
     .#{$prefix}--radio-button__appearance {
-    outline: 1px solid transparent;
     box-shadow: 0 0 0 2px $focus;
+    outline: 1px solid transparent;
   }
 
   // Skeleton State

@@ -54,7 +54,7 @@ const props = {
       'Modal contains scrollable content (hasScrollingContent)',
       false
     ),
-    hasForm: boolean('Modal contains a form', false),
+    hasForm: boolean('Modal contains a form (hasForm)', false),
     modalHeading: text('Modal heading (modalHeading)', 'Modal heading'),
     modalLabel: text('Optional label (modalLabel)', 'Label'),
     modalAriaLabel: text(

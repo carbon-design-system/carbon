@@ -20,6 +20,7 @@ const { formatTokenName, themes, tokens } = require('../lib');
 const buildTokensFile = require('./builders/tokens');
 const buildThemesFile = require('./builders/themes');
 const buildModulesThemesFile = require('./builders/modules-themes');
+const buildModulesTokensFile = require('./builders/modules-tokens');
 const buildMixinsFile = require('./builders/mixins');
 
 const defaultTheme = 'white';
@@ -78,6 +79,18 @@ async function build() {
           defaultTheme,
           defaultThemeMapName
         );
+      },
+    },
+    {
+      filepath: path.resolve(
+        SCSS_DIR,
+        '..',
+        'modules',
+        'generated',
+        '_tokens.scss'
+      ),
+      builder() {
+        return buildModulesTokensFile(tokens);
       },
     },
   ];

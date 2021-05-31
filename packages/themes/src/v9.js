@@ -5,7 +5,8 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { white, red60 } from '@carbon/colors';
+import { adjustLightness } from './tools';
+import { white, red60, gray40 } from '@carbon/colors';
 
 export const interactive01 = '#3d70b2';
 export const interactive02 = '#4d5358';
@@ -106,6 +107,8 @@ export const skeleton02 = 'rgba(61, 112, 178, .1)';
 export const background = uiBackground;
 export const layer = ui01;
 export const layerAccent = ui03;
+export const layerAccentActive = gray40;
+export const layerAccentHover = adjustLightness(layerAccent, -6);
 export const field = field01;
 export const backgroundInverse = inverse02;
 export const backgroundBrand = interactive01;
@@ -197,8 +200,11 @@ export const skeletonElement = skeleton02;
 export {
   // Type
   caption01,
+  caption02,
   label01,
+  label02,
   helperText01,
+  helperText02,
   bodyShort01,
   bodyLong01,
   bodyShort02,
@@ -262,6 +268,12 @@ export {
   container03,
   container04,
   container05,
+  sizeXSmall,
+  sizeSmall,
+  sizeMedium,
+  sizeLarge,
+  sizeXLarge,
+  size2XLarge,
   // Icon sizes
   iconSize01,
   iconSize02,

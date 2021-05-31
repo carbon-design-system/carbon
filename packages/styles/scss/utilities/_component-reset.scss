@@ -1,0 +1,25 @@
+//
+// Copyright IBM Corp. 2018, 2018
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+/// Resets default browser styling
+/// @access public
+/// @group utilities
+@mixin reset {
+  box-sizing: border-box;
+  padding: 0;
+  border: 0;
+  margin: 0;
+  font-family: inherit;
+  font-size: 100%;
+  vertical-align: baseline;
+
+  *,
+  *::before,
+  *::after {
+    box-sizing: inherit;
+  }
+}

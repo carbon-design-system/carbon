@@ -141,6 +141,8 @@ export const skeleton02 = gray70;
 export const background = uiBackground;
 export const layer = ui01;
 export const layerAccent = ui03;
+export const layerAccentActive = gray60;
+export const layerAccentHover = adjustLightness(layerAccent, +6);
 export const field = field01;
 export const backgroundInverse = inverse02;
 export const backgroundBrand = interactive01;
@@ -232,8 +234,11 @@ export const skeletonElement = skeleton02;
 export {
   // Type
   caption01,
+  caption02,
   label01,
+  label02,
   helperText01,
+  helperText02,
   bodyShort01,
   bodyLong01,
   bodyShort02,
@@ -297,6 +302,12 @@ export {
   container03,
   container04,
   container05,
+  sizeXSmall,
+  sizeSmall,
+  sizeMedium,
+  sizeLarge,
+  sizeXLarge,
+  size2XLarge,
   // Icon sizes
   iconSize01,
   iconSize02,
