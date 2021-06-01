@@ -109,7 +109,7 @@ Popover.propTypes = {
 };
 
 const PopoverContent = React.forwardRef(function PopoverContent(
-  { as: BaseComponent = 'div', className, heading, children, ...rest },
+  { as: BaseComponent = 'div', className, children, ...rest },
   ref
 ) {
   return (
@@ -117,7 +117,6 @@ const PopoverContent = React.forwardRef(function PopoverContent(
       {...rest}
       className={cx(`${prefix}--popover-contents`, className)}
       ref={ref}>
-      <h5>{heading}</h5>
       {children}
     </BaseComponent>
   );
@@ -140,11 +139,70 @@ PopoverContent.propTypes = {
    * component
    */
   className: PropTypes.string,
-
-  /**
-   * Provide a header to be added within the Popover component
-   */
-  heading: PropTypes.string,
 };
 
-export { Popover, PopoverContent };
+const PopoverHeading = React.forwardRef(function PopoverHeading(
+  { as: BaseComponent = 'h5', className, children, ...rest },
+  ref
+) {
+  return (
+    <BaseComponent
+      {...rest}
+      className={cx(`${prefix}--popover-heading`, className)}
+      ref={ref}>
+      {children}
+    </BaseComponent>
+  );
+});
+
+PopoverHeading.propTypes = {
+  /**
+   * Provide a custom element or component to render the top-level node for the
+   * component.
+   */
+  as: PropTypes.oneOfType([PropTypes.string, PropTypes.elementType]),
+
+  /**
+   * Provide elements to be rendered inside of the component
+   */
+  children: PropTypes.node,
+
+  /**
+   * Provide a custom class name to be added to the outermost node in the
+   * component
+   */
+  className: PropTypes.string,
+};
+
+const PopoverFooter = React.forwardRef(function PopoverHeading(
+  { as: BaseComponent = 'footer', className, children, ...rest },
+  ref
+) {
+  return (
+    <BaseComponent {...rest} className={cx(className)} ref={ref}>
+      {children}
+      {/* <hr className={cx(`${prefix}--popover-heading__divider`)} /> */}
+    </BaseComponent>
+  );
+});
+
+PopoverFooter.propTypes = {
+  /**
+   * Provide a custom element or component to render the top-level node for the
+   * component.
+   */
+  as: PropTypes.oneOfType([PropTypes.string, PropTypes.elementType]),
+
+  /**
+   * Provide elements to be rendered inside of the component
+   */
+  children: PropTypes.node,
+
+  /**
+   * Provide a custom class name to be added to the outermost node in the
+   * component
+   */
+  className: PropTypes.string,
+};
+
+export { Popover, PopoverContent, PopoverHeading, PopoverFooter };
