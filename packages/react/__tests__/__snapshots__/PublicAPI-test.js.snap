@@ -5773,6 +5773,12 @@ Map {
       "onBeforeClick": Object {
         "type": "func",
       },
+      "onClick": Object {
+        "type": "func",
+      },
+      "onKeyUp": Object {
+        "type": "func",
+      },
       "tabIndex": Object {
         "type": "number",
       },
