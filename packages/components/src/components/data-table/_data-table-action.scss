@@ -58,7 +58,8 @@
   //-------------------------------------------------
   //HIDDEN SEARCH - DEFAULT TOOLBAR
   //-------------------------------------------------
-  .#{$prefix}--toolbar-search-container-expandable {
+  .#{$prefix}--toolbar-content
+    .#{$prefix}--toolbar-search-container-expandable {
     position: relative;
     width: $spacing-09;
     height: $spacing-09;
@@ -85,6 +86,7 @@
     width: $spacing-09;
     height: $spacing-09;
     padding: $spacing-05;
+    fill: $icon-primary;
   }
 
   .#{$prefix}--toolbar-search-container-expandable.#{$prefix}--search--disabled
