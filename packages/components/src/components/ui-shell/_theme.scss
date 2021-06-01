@@ -14,12 +14,14 @@
 /// @type Color
 /// @access private
 /// @group ui-shell
+/// @deprecated not longer being used and will be removed in v11
 $shell-header-bg-01: $carbon--gray-100;
 
 /// Header menu trigger hover, Header nav link hover
 /// @type Color
 /// @access private
 /// @group ui-shell
+/// @deprecated not longer being used and will be removed in v11
 /// TODO needs color var gray-100-hover
 $shell-header-bg-02: #2c2c2c;
 
@@ -27,12 +29,14 @@ $shell-header-bg-02: #2c2c2c;
 /// @type Color
 /// @access private
 /// @group ui-shell
+/// @deprecated not longer being used and will be removed in v11
 $shell-header-bg-03: $carbon--gray-80;
 
 /// Header submenu link hover
 /// @type Color
 /// @access private
 /// @group ui-shell
+/// @deprecated not longer being used and will be removed in v11
 /// TODO needs color var gray-90-hover
 $shell-header-bg-04: #353535;
 
@@ -40,60 +44,70 @@ $shell-header-bg-04: #353535;
 /// @type Color
 /// @access private
 /// @group ui-shell
+/// @deprecated not longer being used and will be removed in v11
 $shell-header-bg-05: $carbon--gray-70;
 
 /// Header nav link submenu
 /// @type Color
 /// @access private
 /// @group ui-shell
+/// @deprecated not longer being used and will be removed in v11
 $shell-header-bg-06: $carbon--gray-90;
 
 /// Header border bottom
 /// @type Color
 /// @access private
 /// @group ui-shell
+/// @deprecated not longer being used and will be removed in v11
 $shell-header-border-01: $carbon--gray-80;
 
 /// Header focus
 /// @type Color
 /// @access private
 /// @group ui-shell
+/// @deprecated not longer being used and will be removed in v11
 $shell-header-focus: $carbon--white-0;
 
 /// Primary text in header, Title text
 /// @type Color
 /// @access private
 /// @group ui-shell
+/// @deprecated not longer being used and will be removed in v11
 $shell-header-text-01: $carbon--gray-10;
 
 /// Secondary text in header, Menu item nav text
 /// @type Color
 /// @access private
 /// @group ui-shell
+/// @deprecated not longer being used and will be removed in v11
 $shell-header-text-02: $carbon--gray-30;
 
 /// Header menu trigger
 /// @type Color
 /// @access private
 /// @group ui-shell
+/// @deprecated not longer being used and will be removed in v11
 $shell-header-icon-01: $carbon--gray-10;
 
 /// Header bar icons
 /// @type Color
 /// @access private
 /// @group ui-shell
+/// @deprecated not longer being used and will be removed in v11
 $shell-header-icon-02: $carbon--white-0;
 
 /// Header bar icons
 /// @type Color
 /// @access private
 /// @group ui-shell
+/// @deprecated not longer being used and will be removed in v11
 $shell-header-icon-03: $carbon--gray-30;
 
 /// Item link
 /// @type Color
 /// @access private
 /// @group ui-shell
+/// @deprecated not longer being used and will be removed in v11
 $shell-header-link: $carbon--blue-60;
 
 //----------------------------------------------------------------------------
@@ -104,12 +118,14 @@ $shell-header-link: $carbon--blue-60;
 /// @type Color
 /// @access private
 /// @group ui-shell
+/// @deprecated not longer being used and will be removed in v11
 $shell-panel-bg-01: $carbon--gray-100;
 
 /// Panel item hover background
 /// @type Color
 /// @access private
 /// @group ui-shell
+/// @deprecated not longer being used and will be removed in v11
 /// TODO needs color var gray-100-hover
 $shell-panel-bg-02: #2c2c2c;
 
@@ -117,36 +133,42 @@ $shell-panel-bg-02: #2c2c2c;
 /// @type Color
 /// @access private
 /// @group ui-shell
+/// @deprecated not longer being used and will be removed in v11
 $shell-panel-bg-03: $carbon--gray-80;
 
 /// Panel item link selected background
 /// @type Color
 /// @access private
 /// @group ui-shell
+/// @deprecated not longer being used and will be removed in v11
 $shell-panel-bg-04: $carbon--gray-90;
 
 /// Panel border
 /// @type Color
 /// @access private
 /// @group ui-shell
+/// @deprecated not longer being used and will be removed in v11
 $shell-panel-border: $carbon--gray-80;
 
 /// Header panel text
 /// @type Color
 /// @access private
 /// @group ui-shell
+/// @deprecated not longer being used and will be removed in v11
 $shell-panel-text-01: $carbon--gray-30;
 
 /// Header panel secondary text
 /// @type Color
 /// @access private
 /// @group ui-shell
+/// @deprecated not longer being used and will be removed in v11
 $shell-panel-text-02: $carbon--gray-10;
 
 /// Header panel focus border
 /// @type Color
 /// @access private
 /// @group ui-shell
+/// @deprecated not longer being used and will be removed in v11
 $shell-panel-focus: $carbon--white-0;
 
 //----------------------------------------------------------------------------
@@ -156,6 +178,7 @@ $shell-panel-focus: $carbon--white-0;
 /// @type Color
 /// @access private
 /// @group ui-shell
+/// @deprecated not longer being used and will be removed in v11
 $shell-side-nav-bg-01: $carbon--white-0;
 
 /// Selected category background
@@ -165,6 +188,7 @@ $shell-side-nav-bg-01: $carbon--white-0;
 /// @type Color
 /// @access private
 /// @group ui-shell
+/// @deprecated not longer being used and will be removed in v11
 /// TODO waiting for updated color
 $shell-side-nav-bg-02: $carbon--gray-80;
 
@@ -172,6 +196,7 @@ $shell-side-nav-bg-02: $carbon--gray-80;
 /// @type Color
 /// @access private
 /// @group ui-shell
+/// @deprecated not longer being used and will be removed in v11
 /// TODO waiting for updated color
 $shell-side-nav-bg-03: $ibm-color__gray-70;
 
@@ -179,6 +204,7 @@ $shell-side-nav-bg-03: $ibm-color__gray-70;
 /// @type Color
 /// @access private
 /// @group ui-shell
+/// @deprecated not longer being used and will be removed in v11
 /// TODO needs color var gray-90-hover
 $shell-side-nav-bg-04: #e5e5e5;
 
@@ -186,6 +212,7 @@ $shell-side-nav-bg-04: #e5e5e5;
 /// @type Color
 /// @access private
 /// @group ui-shell
+/// @deprecated not longer being used and will be removed in v11
 /// TODO needs color var gray-80-hover
 $shell-side-nav-bg-05: #dcdcdc;
 
@@ -196,6 +223,7 @@ $shell-side-nav-bg-05: #dcdcdc;
 /// @type Color
 /// @access private
 /// @group ui-shell
+/// @deprecated not longer being used and will be removed in v11
 /// TODO waiting for updated color
 $shell-side-nav-text-01: $ibm-color__gray-70;
 
@@ -204,16 +232,19 @@ $shell-side-nav-text-01: $ibm-color__gray-70;
 /// @type Color
 /// @access private
 /// @group ui-shell
+/// @deprecated not longer being used and will be removed in v11
 $shell-side-nav-text-02: $ibm-color__gray-30;
 
 /// Side-nav icon color
 /// @type Color
 /// @access private
 /// @group ui-shell
+/// @deprecated not longer being used and will be removed in v11
 $shell-side-nav-icon-01: $ibm-color__gray-70;
 
 /// Item highlight bar
 /// @type Color
 /// @access private
 /// @group ui-shell
+/// @deprecated currently not being used and will be removed in v11
 $shell-side-nav-accent-01: $ibm-color__blue-60;

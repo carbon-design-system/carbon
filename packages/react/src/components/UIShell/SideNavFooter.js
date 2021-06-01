@@ -11,6 +11,7 @@ import { settings } from 'carbon-components';
 import cx from 'classnames';
 import React from 'react';
 import PropTypes from 'prop-types';
+import { warning } from '../../internal/warning';
 
 const { prefix } = settings;
 
@@ -25,6 +26,12 @@ const SideNavFooter = ({
   expanded,
   onToggle,
 }) => {
+  warning(
+    true,
+    'The `SideNavFooter` component has been deprecated and will be removed ' +
+      'in the next major release of `carbon-components-react`'
+  );
+
   const className = cx(`${prefix}--side-nav__footer`, customClassName);
   return (
     <footer className={className}>

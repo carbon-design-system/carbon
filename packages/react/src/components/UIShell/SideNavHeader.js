@@ -10,6 +10,7 @@ import cx from 'classnames';
 import PropTypes from 'prop-types';
 import React from 'react';
 import SideNavIcon from './SideNavIcon';
+import { warning } from '../../internal/warning';
 
 const { prefix } = settings;
 
@@ -18,6 +19,12 @@ const SideNavHeader = ({
   children,
   renderIcon: IconElement,
 }) => {
+  warning(
+    true,
+    'The `SideNavHeader` component has been deprecated and will be removed ' +
+      'in the next major release of `carbon-components-react`'
+  );
+
   const className = cx(`${prefix}--side-nav__header`, customClassName);
   return (
     <header className={className}>
