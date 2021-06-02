@@ -303,6 +303,11 @@
     width: var(--cds-popover-offset);
     transform: translateX(100%);
   }
+
+  .#{$prefix}--popover-heading {
+    border: 1px solid $border-subtle;
+    //
+  }
 }
 
 /// Helper for placing the caret inside a popover. The selectors here can get
