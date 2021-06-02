@@ -156,104 +156,36 @@ export const Subgrid = () => {
 
 export const MixedGridModes = () => {
   return (
-    <>
-      <p>Wide parent grid, Narrow & Condensed children</p>
-      <Grid>
-        <Column sm={1} md={2} lg={4}>
-          <Grid narrow>
-            <Column sm={1} md={2} lg={4}>
-              <p>narrow</p>
-            </Column>
-          </Grid>
-        </Column>
-        <Column sm={3} md={6} lg={12}>
-          <Grid condensed>
-            <Column sm={3} md={6} lg={12}>
-              <p>condensed</p>
-            </Column>
-          </Grid>
-        </Column>
-        <Column sm={1} md={2} lg={4}>
-          <Grid condensed>
-            <Column sm={1} md={2} lg={4}>
-              <p>condensed</p>
-            </Column>
-          </Grid>
-        </Column>
-        <Column sm={3} md={6} lg={12}>
-          <Grid narrow>
-            <Column sm={3} md={6} lg={12}>
-              <p>narrow</p>
-            </Column>
-          </Grid>
-        </Column>
-      </Grid>
-
-      <p>Narrow parent grid, Wide & Condensed children</p>
-
-      <Grid narrow>
-        <Column sm={1} md={2} lg={4}>
-          <Grid>
-            <Column sm={1} md={2} lg={4}>
-              <p>wide</p>
-            </Column>
-          </Grid>
-        </Column>
-        <Column sm={3} md={6} lg={12}>
-          <Grid condensed>
-            <Column sm={3} md={6} lg={12}>
-              <p>condensed</p>
-            </Column>
-          </Grid>
-        </Column>
-        <Column sm={1} md={2} lg={4}>
-          <Grid condensed>
-            <Column sm={1} md={2} lg={4}>
-              <p>condensed</p>
-            </Column>
-          </Grid>
-        </Column>
-        <Column sm={3} md={6} lg={12}>
-          <Grid>
-            <Column sm={3} md={6} lg={12}>
-              <p>wide</p>
-            </Column>
-          </Grid>
-        </Column>
-      </Grid>
-
-      <p>Condensed parent grid, Narrow & Wide children</p>
-      <Grid condensed>
-        <Column sm={1} md={2} lg={4}>
-          <Grid narrow>
-            <Column sm={1} md={2} lg={4}>
-              <p>narrow</p>
-            </Column>
-          </Grid>
-        </Column>
-        <Column sm={3} md={6} lg={12}>
-          <Grid>
-            <Column sm={3} md={6} lg={12}>
-              <p>wide</p>
-            </Column>
-          </Grid>
-        </Column>
-        <Column sm={1} md={2} lg={4}>
-          <Grid>
-            <Column sm={1} md={2} lg={4}>
-              <p>wide</p>
-            </Column>
-          </Grid>
-        </Column>
-        <Column sm={3} md={6} lg={12}>
-          <Grid narrow>
-            <Column sm={3} md={6} lg={12}>
-              <p>narrow</p>
-            </Column>
-          </Grid>
-        </Column>
-      </Grid>
-    </>
+    <Grid>
+      <Column sm={1} md={2} lg={4}>
+        <Grid narrow>
+          <Column sm={1} md={2} lg={4}>
+            <p>narrow</p>
+          </Column>
+        </Grid>
+      </Column>
+      <Column sm={3} md={6} lg={12}>
+        <Grid condensed>
+          <Column sm={3} md={6} lg={12}>
+            <p>condensed</p>
+          </Column>
+        </Grid>
+      </Column>
+      <Column sm={1} md={2} lg={4}>
+        <Grid condensed>
+          <Column sm={1} md={2} lg={4}>
+            <p>condensed</p>
+          </Column>
+        </Grid>
+      </Column>
+      <Column sm={3} md={6} lg={12}>
+        <Grid narrow>
+          <Column sm={3} md={6} lg={12}>
+            <p>narrow</p>
+          </Column>
+        </Grid>
+      </Column>
+    </Grid>
   );
 };
 

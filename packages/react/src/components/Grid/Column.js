@@ -145,8 +145,13 @@ function getClassNameForBreakpoints(breakpoints) {
     }
 
     const { span, offset } = breakpoint;
+
+    if (typeof offset === 'number' && offset > 0) {
+      classNames.push(`${prefix}--${name}:col-start-${offset}`);
+    }
+
     if (typeof span === 'number') {
-      if (typeof offset === 'number') {
+      if (typeof offset === 'number' && offset > 0) {
         classNames.push(`${prefix}--${name}:col-end-${offset + span}`);
       } else {
         classNames.push(`${prefix}--${name}:col-span-${span}`);
@@ -155,11 +160,6 @@ function getClassNameForBreakpoints(breakpoints) {
 
     if (span === true) {
       classNames.push(`${prefix}--${name}:col-span-auto`);
-    }
-
-    if (typeof offset === 'number') {
-      // offset is a zero-index value, whereas the classnames are not
-      classNames.push(`${prefix}--${name}:col-start-${offset + 1}`);
     }
   }
 

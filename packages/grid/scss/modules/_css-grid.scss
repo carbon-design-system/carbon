@@ -36,7 +36,8 @@
   --cds-grid-columns: 4;
   --cds-grid-column-size: 1fr;
   --cds-grid-gutter: 2rem;
-  --cds-grid-gutter-wide: 2rem; /* used to configure appropriate margins for condensed subgrids inside wide grids */
+  // Used to configure appropriate margins for condensed subgrids inside wide grids
+  --cds-grid-gutter-wide: 2rem;
   --cds-grid-hang: 1rem;
   --cds-grid-margin: 0;
 
@@ -73,26 +74,6 @@
   display: grid;
 }
 
-// Wide grids inside narrow grids
-.#{$prefix}--css-grid--narrow
-  .#{$prefix}--subgrid:not(.#{$prefix}--css-grid--condensed):not(.#{$prefix}--css-grid--narrow) {
-  padding-right: 0;
-  padding-left: 0;
-  margin-right: 0;
-  margin-left: calc(var(--cds-grid-gutter) / 2);
-}
-
-// Wide grids inside condensed grids
-.#{$prefix}--css-grid--condensed
-  .#{$prefix}--subgrid:not(.#{$prefix}--css-grid--condensed):not(.#{$prefix}--css-grid--narrow) {
-  --cds-grid-gutter: 2rem;
-
-  padding-right: calc(var(--cds-grid-gutter) / 2);
-  padding-left: calc(var(--cds-grid-gutter) / 2);
-  margin-right: 0;
-  margin-left: 0;
-}
-
 // -----------------------------------------------------------------------------
 // Narrow
 // -----------------------------------------------------------------------------
@@ -110,15 +91,6 @@
 
 .#{$prefix}--css-grid--narrow > [class*='col'] {
   margin-left: calc(var(--cds-grid-gutter) / 2 * -1);
-}
-
-// Narrow subgrid inside condensed
-.#{$prefix}--css-grid--condensed
-  .#{$prefix}--subgrid.#{$prefix}--css-grid--narrow {
-  --cds-grid-gutter: 2rem;
-
-  padding-right: calc(var(--cds-grid-gutter) / 2);
-  padding-left: calc(var(--cds-grid-gutter) / 2);
 }
 
 // Narrow subgrid inside wide
@@ -149,14 +121,6 @@
   .bx--subgrid.#{$prefix}--css-grid--condensed {
   margin-right: calc((var(--cds-grid-gutter-wide) / 2) * -1);
   margin-left: calc((var(--cds-grid-gutter-wide) / 2) * -1);
-}
-
-// condensed subgrid inside narrow
-.#{$prefix}--css-grid.#{$prefix}--css-grid--narrow
-  .bx--subgrid.#{$prefix}--css-grid--condensed {
-  margin-right: calc(
-    (var(--cds-grid-margin) + var(--cds-grid-gutter) / 2) * -1
-  );
 }
 
 // -----------------------------------------------------------------------------
@@ -310,9 +274,13 @@
       .#{$prefix}--#{$name}\:col-start-#{$i} {
         grid-column-start: $i;
       }
+    }
 
+    // The `grid-column-end` property is *not* inclusive. It ends the column *at*
+    // the column, not *on* the column. We must ensure that there is one additional
+    // class available for each breakpoint.
+    @for $i from 1 through $columns + 1 {
       .#{$prefix}--#{$name}\:col-end-#{$i} {
-        // grid-column-end is *not* inclusive by default, we must add one to make it inclusive
         grid-column-end: $i + 1;
       }
     }
