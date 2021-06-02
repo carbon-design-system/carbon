@@ -241,7 +241,7 @@ TextInput.propTypes = {
   /**
    * Whether the input should be read-only
    */
-  readonly: PropTypes.string,
+  readonly: PropTypes.bool,
 
   /**
    * Specify the size of the Text Input. Currently supports either `sm`, 'md' (default) or 'lg` as an option.
