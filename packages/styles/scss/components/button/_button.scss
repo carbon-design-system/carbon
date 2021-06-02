@@ -260,8 +260,13 @@
   }
 
   .#{$prefix}--btn--icon-only {
+<<<<<<< HEAD
     padding-right: rem(15px);
     padding-left: rem(15px);
+=======
+    padding-right: convert.rem(15px);
+    padding-left: convert.rem(15px);
+>>>>>>> 1b5b16094... feat(Button): add button styles to @carbon/styles
 
     .#{$prefix}--btn__icon {
       position: static;
@@ -305,6 +310,7 @@
   // V11: remove field
   .#{$prefix}--btn--field.#{$prefix}--btn--icon-only,
   .#{$prefix}--btn--md.#{$prefix}--btn--icon-only {
+<<<<<<< HEAD
     padding-right: rem(11px);
     padding-left: rem(11px);
   }
@@ -312,6 +318,15 @@
   .#{$prefix}--btn--sm.#{$prefix}--btn--icon-only {
     padding-right: rem(7px);
     padding-left: rem(7px);
+=======
+    padding-right: convert.rem(11px);
+    padding-left: convert.rem(11px);
+  }
+
+  .#{$prefix}--btn--sm.#{$prefix}--btn--icon-only {
+    padding-right: convert.rem(7px);
+    padding-left: convert.rem(7px);
+>>>>>>> 1b5b16094... feat(Button): add button styles to @carbon/styles
   }
 
   .#{$prefix}--btn--danger {
@@ -416,7 +431,11 @@
   }
 
   .#{$prefix}--btn--sm {
+<<<<<<< HEAD
     min-height: rem(32px);
+=======
+    min-height: convert.rem(32px);
+>>>>>>> 1b5b16094... feat(Button): add button styles to @carbon/styles
     padding: $button-padding-sm;
   }
 
@@ -424,20 +443,32 @@
   .#{$prefix}--btn--xl:not(.#{$prefix}--btn--icon-only) {
     @include button-padding-large;
 
+<<<<<<< HEAD
     min-height: rem(80px);
+=======
+    min-height: convert.rem(80px);
+>>>>>>> 1b5b16094... feat(Button): add button styles to @carbon/styles
   }
 
   // V11: change lg to xl
   .#{$prefix}--btn--lg:not(.#{$prefix}--btn--icon-only) {
     @include button-padding-large;
 
+<<<<<<< HEAD
     min-height: rem(64px);
+=======
+    min-height: convert.rem(64px);
+>>>>>>> 1b5b16094... feat(Button): add button styles to @carbon/styles
   }
 
   // V11: Remove field
   .#{$prefix}--btn--field,
   .#{$prefix}--btn--md {
+<<<<<<< HEAD
     min-height: rem(40px);
+=======
+    min-height: convert.rem(40px);
+>>>>>>> 1b5b16094... feat(Button): add button styles to @carbon/styles
     padding: $button-padding-field;
   }
 
@@ -454,19 +485,32 @@
   }
 
   .#{$prefix}--btn.#{$prefix}--btn--expressive .#{$prefix}--btn__icon {
+<<<<<<< HEAD
     width: rem(20px);
     height: rem(20px);
   }
 
   .#{$prefix}--btn-set .#{$prefix}--btn.#{$prefix}--btn--expressive {
     max-width: rem(320px);
+=======
+    width: convert.rem(20px);
+    height: convert.rem(20px);
+  }
+
+  .#{$prefix}--btn-set .#{$prefix}--btn.#{$prefix}--btn--expressive {
+    max-width: convert.rem(320px);
+>>>>>>> 1b5b16094... feat(Button): add button styles to @carbon/styles
   }
 
   // Skeleton State
   .#{$prefix}--btn.#{$prefix}--skeleton {
     @include skeleton;
 
+<<<<<<< HEAD
     width: rem(150px);
+=======
+    width: convert.rem(150px);
+>>>>>>> 1b5b16094... feat(Button): add button styles to @carbon/styles
   }
 
   // button set styles
@@ -481,10 +525,17 @@
   .#{$prefix}--btn-set .#{$prefix}--btn {
     width: 100%;
     // 196px from design kit
+<<<<<<< HEAD
     max-width: rem(196px);
 
     &:not(:focus) {
       box-shadow: rem(-1px) 0 0 0 $button-separator;
+=======
+    max-width: convert.rem(196px);
+
+    &:not(:focus) {
+      box-shadow: convert.rem(-1px) 0 0 0 $button-separator;
+>>>>>>> 1b5b16094... feat(Button): add button styles to @carbon/styles
     }
 
     &:first-of-type:not(:focus) {
@@ -497,7 +548,11 @@
   }
 
   .#{$prefix}--btn-set--stacked .#{$prefix}--btn:not(:focus) {
+<<<<<<< HEAD
     box-shadow: 0 rem(-1px) 0 0 $button-separator;
+=======
+    box-shadow: 0 convert.rem(-1px) 0 0 $button-separator;
+>>>>>>> 1b5b16094... feat(Button): add button styles to @carbon/styles
   }
 
   .#{$prefix}--btn-set--stacked .#{$prefix}--btn:first-of-type:not(:focus) {
@@ -505,7 +560,11 @@
   }
 
   .#{$prefix}--btn-set .#{$prefix}--btn.#{$prefix}--btn--disabled {
+<<<<<<< HEAD
     box-shadow: rem(-1px) 0 0 0 $icon-on-color-disabled;
+=======
+    box-shadow: convert.rem(-1px) 0 0 0 $icon-on-color-disabled;
+>>>>>>> 1b5b16094... feat(Button): add button styles to @carbon/styles
 
     &:first-of-type {
       box-shadow: none;
@@ -513,7 +572,11 @@
   }
 
   .#{$prefix}--btn-set--stacked .#{$prefix}--btn.#{$prefix}--btn--disabled {
+<<<<<<< HEAD
     box-shadow: 0 rem(-1px) 0 0 $layer-selected-disabled;
+=======
+    box-shadow: 0 convert.rem(-1px) 0 0 $layer-selected-disabled;
+>>>>>>> 1b5b16094... feat(Button): add button styles to @carbon/styles
 
     &:first-of-type {
       box-shadow: none;
