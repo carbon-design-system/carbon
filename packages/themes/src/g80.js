@@ -47,6 +47,8 @@ import {
 export const background = gray80;
 export const layer = gray70;
 export const layerAccent = gray60;
+export const layerAccentActive = gray70;
+export const layerAccentHover = adjustLightness(layerAccent, -7);
 export const field = gray70;
 export const backgroundInverse = gray10;
 export const backgroundBrand = blue60;
@@ -304,6 +306,12 @@ export {
   container03,
   container04,
   container05,
+  sizeXSmall,
+  sizeSmall,
+  sizeMedium,
+  sizeLarge,
+  sizeXLarge,
+  size2XLarge,
   // Icon sizes
   iconSize01,
   iconSize02,

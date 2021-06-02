@@ -303,9 +303,10 @@ function createIconSource(moduleName, sizes, preamble = []) {
   });
 
   // The "default" icon that will be rendered, based on the max size
-  const returnStatement = sizeVariants.find(({ size }) => {
-    return size === maxSize;
-  });
+  const returnStatement =
+    sizeVariants.find(({ size }) => {
+      return size === maxSize;
+    }) ?? sizeVariants[0];
 
   // We build up our component source by adding in any necessary deprecation
   // blocks along with conditionally rendering all asset sizes. We also use a
