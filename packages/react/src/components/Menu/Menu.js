@@ -37,8 +37,9 @@ const margin = 16; // distance to keep to body edges, in px
 const Menu = function Menu({
   autoclose = true,
   children,
-  open,
+  id,
   level = 1,
+  open,
   x = 0,
   y = 0,
   onClose = () => {},
@@ -254,6 +255,7 @@ const Menu = function Menu({
   });
 
   const ulAttributes = {
+    id,
     className: classes,
     onKeyDown: handleKeyDown,
     onClick: handleClick,
@@ -316,6 +318,11 @@ Menu.propTypes = {
    * Specify the children of the Menu
    */
   children: PropTypes.node,
+
+  /**
+   * Define an ID for this menu
+   */
+  id: PropTypes.string,
 
   /**
    * Internal: keeps track of the nesting level of the menu

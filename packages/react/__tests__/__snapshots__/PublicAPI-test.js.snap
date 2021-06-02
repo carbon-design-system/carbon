@@ -7653,6 +7653,9 @@ Map {
       "children": Object {
         "type": "node",
       },
+      "id": Object {
+        "type": "string",
+      },
       "level": Object {
         "type": "number",
       },
