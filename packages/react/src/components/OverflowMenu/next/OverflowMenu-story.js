@@ -73,3 +73,23 @@ export const Nested = () =>
     },
     { type: 'item', label: 'Level 1' },
   ]);
+
+export const InToolbar = () => (
+  <StoryFrame>
+    <div className="bx--table-toolbar" style={{ overflow: 'visible' }}>
+      <div className="bx--toolbar-content">
+        {/* eslint-disable-next-line jsx-a11y/no-noninteractive-tabindex */}
+        <div tabIndex={0}>Tab stop</div>
+        <OverflowMenu>
+          {buildMenu([
+            { type: 'item', label: 'Option 1' },
+            { type: 'item', label: 'Option 2' },
+            { type: 'item', label: 'Option 3' },
+          ])}
+        </OverflowMenu>
+        {/* eslint-disable-next-line jsx-a11y/no-noninteractive-tabindex */}
+        <div tabIndex={0}>Tab stop</div>
+      </div>
+    </div>
+  </StoryFrame>
+);

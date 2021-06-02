@@ -6,6 +6,7 @@
  */
 
 import React, { useEffect, useRef, useState } from 'react';
+import ReactDOM from 'react-dom';
 import classnames from 'classnames';
 import PropTypes from 'prop-types';
 import { settings } from 'carbon-components';
@@ -48,6 +49,7 @@ const Menu = function Menu({
   const [position, setPosition] = useState([x, y]);
   const [canBeClosed, setCanBeClosed] = useState(false);
   const isRootMenu = level === 1;
+  const focusReturn = useRef(null);
 
   function getContainerBoundaries() {
     const { clientWidth: bodyWidth, clientHeight: bodyHeight } = document.body;
@@ -107,6 +109,16 @@ const Menu = function Menu({
   }
 
   function handleKeyDown(event) {
+    if (match(event, keys.Tab)) {
+      event.preventDefault();
+
+      if (focusReturn.current) {
+        focusReturn.current.focus();
+      }
+
+      onClose();
+    }
+
     if (
       event.target.tagName === 'LI' &&
       (match(event, keys.Enter) || match(event, keys.Space))
@@ -187,10 +199,17 @@ const Menu = function Menu({
     return correctedPosition;
   }
 
+  function handleBlur(e) {
+    if (isRootMenu && !rootRef?.current?.element.contains(e.relatedTarget)) {
+      onClose();
+    }
+  }
+
   useEffect(() => {
     setCanBeClosed(false);
 
     if (open) {
+      focusReturn.current = document.activeElement;
       let localDirection = 1;
 
       if (isRootMenu) {
@@ -238,6 +257,7 @@ const Menu = function Menu({
     className: classes,
     onKeyDown: handleKeyDown,
     onClick: handleClick,
+    onBlur: handleBlur,
     role: 'menu',
     tabIndex: -1,
     'data-direction': direction,
@@ -274,11 +294,15 @@ const Menu = function Menu({
     childrenToRender = React.Children.toArray(options[0].props.children);
   }
 
-  return (
+  const menu = (
     <ClickListener onClickOutside={handleClickOutside} ref={rootRef}>
       <ul {...ulAttributes}>{childrenToRender}</ul>
     </ClickListener>
   );
+
+  return isRootMenu
+    ? (open && ReactDOM.createPortal(menu, document.body)) || null
+    : menu;
 };
 
 Menu.propTypes = {
