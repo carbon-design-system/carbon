@@ -76,8 +76,8 @@
   // Overflow Menu overrides
   .#{$prefix}--breadcrumb-item .#{$prefix}--overflow-menu {
     position: relative;
-    width: rem(20px);
-    height: rem(18px);
+    width: convert.rem(20px);
+    height: convert.rem(18px);
 
     &:focus {
       outline: 1px solid $focus;
@@ -91,7 +91,7 @@
     &::after {
       position: absolute;
       bottom: 2px;
-      width: rem(12px);
+      width: convert.rem(12px);
       height: 1px;
       background: $link-primary-hover;
       content: '';
@@ -143,7 +143,7 @@
   .#{$prefix}--breadcrumb.#{$prefix}--skeleton .#{$prefix}--link {
     @include skeleton;
 
-    width: rem(100px);
+    width: convert.rem(100px);
     height: 1rem;
   }
 }
