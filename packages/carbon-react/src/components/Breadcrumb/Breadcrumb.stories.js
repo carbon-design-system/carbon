@@ -5,10 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-// import {
-//   Breadcrumb,
-//   BreadcrumbItem,
-// } from 'carbon-components-react/es/components/Breadcrumb';
+import { Breadcrumb, BreadcrumbItem } from 'carbon-components-react';
 import React from 'react';
 
 export default {
@@ -17,13 +14,12 @@ export default {
 
 export const Default = () => {
   return (
-    // <Breadcrumb>
-    //   <BreadcrumbItem>
-    //     <a href="/#">Breadcrumb 1</a>
-    //   </BreadcrumbItem>
-    //   <BreadcrumbItem href="#">Breadcrumb 2</BreadcrumbItem>
-    //   <BreadcrumbItem href="#">Breadcrumb 3</BreadcrumbItem>
-    // </Breadcrumb>
-    <p>Test</p>
+    <Breadcrumb>
+      <BreadcrumbItem>
+        <a href="/#">Breadcrumb 1</a>
+      </BreadcrumbItem>
+      <BreadcrumbItem href="#">Breadcrumb 2</BreadcrumbItem>
+      <BreadcrumbItem href="#">Breadcrumb 3</BreadcrumbItem>
+    </Breadcrumb>
   );
 };
