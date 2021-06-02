@@ -5593,7 +5593,7 @@ Map {
         "type": "string",
       },
       "readonly": Object {
-        "type": "string",
+        "type": "bool",
       },
       "size": Object {
         "args": Array [
