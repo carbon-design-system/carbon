@@ -481,6 +481,14 @@
       width: 100%;
     }
 
+    // Adjust icon positioning since small has less padding
+    .#{$prefix}--toolbar-search-container-active
+      .#{$prefix}--search-magnifier-icon,
+    .#{$prefix}--toolbar-search-container-persistent
+      .#{$prefix}--search-magnifier-icon {
+      left: $spacing-03;
+    }
+
     //hidden
     .#{$prefix}--toolbar-search-container-expandable {
       width: rem(32px);
