@@ -191,18 +191,22 @@ export const MixedGridModes = () => {
 
 export const Offset = () => (
   <Grid>
-    <Column sm={{ span: 1, offset: 3 }}>
-      <p>Small: offset 3</p>
-    </Column>
-    <Column sm={{ span: 2, offset: 2 }}>
-      <p>Small: offset 2</p>
-    </Column>
-    <Column sm={{ span: 3, offset: 1 }}>
-      <p>Small: offset 1</p>
-    </Column>
-    <Column sm={{ span: 4, offset: 0 }}>
-      <p>Small: offset 0</p>
-    </Column>
+    <Column
+      sm={{ span: 1, offset: 3 }}
+      md={{ span: 2, offset: 6 }}
+      lg={{ span: 4, offset: 12 }}
+    />
+    <Column
+      sm={{ span: 2, offset: 2 }}
+      md={{ span: 4, offset: 4 }}
+      lg={{ span: 8, offset: 8 }}
+    />
+    <Column
+      sm={{ span: 3, offset: 1 }}
+      md={{ span: 6, offset: 2 }}
+      lg={{ span: 12, offset: 4 }}
+    />
+    <Column sm={{ span: 4 }} md={{ span: 8 }} lg={{ span: 16 }} />
   </Grid>
 );
 

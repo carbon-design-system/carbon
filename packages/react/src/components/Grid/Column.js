@@ -147,12 +147,12 @@ function getClassNameForBreakpoints(breakpoints) {
     const { span, offset } = breakpoint;
 
     if (typeof offset === 'number' && offset > 0) {
-      classNames.push(`${prefix}--${name}:col-start-${offset}`);
+      classNames.push(`${prefix}--${name}:col-start-${offset + 1}`);
     }
 
     if (typeof span === 'number') {
       if (typeof offset === 'number' && offset > 0) {
-        classNames.push(`${prefix}--${name}:col-end-${offset + span}`);
+        classNames.push(`${prefix}--${name}:col-end-${offset + span + 1}`);
       } else {
         classNames.push(`${prefix}--${name}:col-span-${span}`);
       }

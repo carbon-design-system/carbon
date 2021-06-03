@@ -270,18 +270,16 @@
   $columns: map.get($value, columns);
 
   @include breakpoint($name) {
-    @for $i from 1 through $columns {
+    // The `grid-column-end` and `grid-column-start` properies are *not* inclusive.
+    // It starts/ends the column *at* the column, not *on* the column. We must
+    // ensure that there is one additional class available for each breakpoint.
+    @for $i from 1 through $columns + 1 {
       .#{$prefix}--#{$name}\:col-start-#{$i} {
         grid-column-start: $i;
       }
-    }
 
-    // The `grid-column-end` property is *not* inclusive. It ends the column *at*
-    // the column, not *on* the column. We must ensure that there is one additional
-    // class available for each breakpoint.
-    @for $i from 1 through $columns + 1 {
       .#{$prefix}--#{$name}\:col-end-#{$i} {
-        grid-column-end: $i + 1;
+        grid-column-end: $i;
       }
     }
 
