@@ -7,13 +7,13 @@
 
 'use strict';
 
-const { prompt } = require('inquirer');
-const semver = require('semver');
 const cli = require('yargs');
 const packageJson = require('../package.json');
 const { UpgradeError } = require('./error');
-const { Migration } = require('./migrations');
-const { findProject } = require('./project');
+const { Migration } = require('./migration');
+const { Planner } = require('./planner');
+const { Project } = require('./project');
+const { Runner } = require('./runner');
 
 async function main({ argv, cwd }) {
   cli.scriptName(packageJson.name).version(packageJson.version);
@@ -49,81 +49,16 @@ async function main({ argv, cwd }) {
         write,
       };
 
-      // Phase 1: get all the details of the project
-      const project = await findProject(options.cwd);
-      const workspaces = await Migration.getMigrationsByWorkspace(
-        project,
+      const project = await Project.detect(options.cwd);
+      const migrationsByWorkspace = await Migration.getMigrationsByWorkspace(
+        Array.from(project.getWorkspaces()),
         Migration.getMigrations()
       );
-
-      const answers = [];
-
-      for (const workspace of workspaces) {
-        const answer = await prompt({
-          type: 'checkbox',
-          message: `Migrations available for ${workspace.name}`,
-          name: 'selected',
-          choices: workspace.options
-            .filter((option) => {
-              return option.available === true;
-            })
-            .map((option) => {
-              const { dependency, migration } = option;
-              return {
-                name: `Migration ${dependency.name} from: ${dependency.version} to: ${migration.to}`,
-                value: option,
-                checked: true,
-              };
-            }),
-        });
-
-        answers.push(answer);
-      }
-
-      await Migration.applyMigrations(
-        workspaces.map((workspace, i) => {
-          const answer = answers[i];
-          return {
-            ...workspace,
-            options: workspace.options.filter((option) => {
-              return answer.selected.includes(option);
-            }),
-          };
-        })
+      const migrationsToRun = await Planner.getSelectedMigrations(
+        migrationsByWorkspace
       );
 
-      // Get selections for migrations
-      // Hey! We found the following migrations available for the `foo` package,
-      // select all that you would like to run:
-      //
-      // <workspace name>
-      // [ ] @carbon/colors v10.10.0 => v11.0.0
-      //
-      // <workspace name>
-      // [ ] @carbon/colors v10.10.0 => v11.0.0
-      //
-      // Unavailable migrations
-      // XXX @carbon/type v10.10.0 unable to migrate because version does not meet min requirements
-    })
-  );
-
-  cli.command(
-    'migrate <package> <from> <to>',
-    'run a specific migration for a package',
-    {},
-    run(async (args) => {
-      const { from, ignore, package: packageName, to, write, verbose } = args;
-      const options = {
-        cwd: cwd(),
-        dry,
-        ignore,
-        verbose,
-        write,
-        from,
-        to,
-        packageName,
-      };
-      console.log(options);
+      await Runner.run(migrationsToRun, options);
     })
   );
 
