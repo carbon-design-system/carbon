@@ -1,0 +1,65 @@
+//
+// Copyright IBM Corp. 2016, 2018
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+@use '../../config' as *;
+@use '../../spacing' as *;
+@use '../../theme' as *;
+@use '../../utilities/button-reset';
+@use '../../utilities/convert' as *;
+@use '../../utilities/focus-outline' as *;
+
+.#{$prefix}--inline-edit-label {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.#{$prefix}--inline-edit-label:hover .#{$prefix}--inline-edit-label__icon {
+  opacity: 1;
+}
+
+.#{$prefix}--inline-edit-label--inactive {
+  display: none;
+}
+
+.#{$prefix}--inline-edit-label__action {
+  @include button-reset.reset(false);
+}
+
+.#{$prefix}--inline-edit-label__action:hover {
+  cursor: pointer;
+}
+
+.#{$prefix}--inline-edit-label__action:focus {
+  @include focus-outline;
+
+  padding: $spacing-01;
+}
+
+.#{$prefix}--inline-edit-label__action:focus
+  .#{$prefix}--inline-edit-label__icon {
+  width: auto;
+  opacity: 1;
+}
+
+.#{$prefix}--inline-edit-label__icon {
+  fill: $icon-primary;
+  opacity: 0;
+}
+
+.#{$prefix}--inline-edit-input {
+  display: none;
+}
+
+.#{$prefix}--inline-edit-input--active {
+  display: block;
+  margin-left: rem(-12px);
+}
+
+.#{$prefix}--inline-edit-input--active input {
+  padding-left: $spacing-04;
+}
