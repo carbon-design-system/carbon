@@ -12,7 +12,7 @@
 @use '../../theme' as *;
 @use '../../type' as *;
 @use '../../utilities/component-reset';
-@use '../../utilities/convert';
+@use '../../utilities/convert' as *;
 
 @mixin button-base {
   @include component-reset.reset;
@@ -20,7 +20,7 @@
 
   position: relative;
   display: inline-flex;
-  max-width: convert.rem(320px);
+  max-width: rem(320px);
   min-height: $button-height;
   flex-shrink: 0;
   align-items: center;
@@ -54,9 +54,9 @@
 
   .#{$prefix}--btn__icon {
     position: absolute;
-    right: convert.rem(16px);
-    width: convert.rem(16px);
-    height: convert.rem(16px);
+    right: rem(16px);
+    width: rem(16px);
+    height: rem(16px);
     flex-shrink: 0;
   }
 }
