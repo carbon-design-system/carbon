@@ -326,3 +326,7 @@
 @include exports('popover') {
   @include popover;
 }
+
+.#{$prefix}--popover--divider {
+  border-bottom: 1px $border-subtle solid;
+}
