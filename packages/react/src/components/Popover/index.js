@@ -9,6 +9,8 @@ import { settings } from 'carbon-components';
 import cx from 'classnames';
 import PropTypes from 'prop-types';
 import React from 'react';
+import './story.scss';
+import { boolean } from '@storybook/addon-knobs';
 
 const { prefix } = settings;
 
@@ -141,15 +143,20 @@ PopoverContent.propTypes = {
   className: PropTypes.string,
 };
 
+const props = () => ({
+  hasDivider: boolean('hasDivider', false),
+});
+
 const PopoverHeading = React.forwardRef(function PopoverHeading(
   { as: BaseComponent = 'h5', className, children, ...rest },
   ref
 ) {
+  const classNames = cx(className, {
+    [`${prefix}--popover--divider`]: props().hasDivider,
+  });
+
   return (
-    <BaseComponent
-      {...rest}
-      className={cx(`${prefix}--popover-heading`, className)}
-      ref={ref}>
+    <BaseComponent {...rest} className={classNames} ref={ref}>
       {children}
     </BaseComponent>
   );
@@ -172,6 +179,8 @@ PopoverHeading.propTypes = {
    * component
    */
   className: PropTypes.string,
+
+  hasDivider: PropTypes.string,
 };
 
 const PopoverFooter = React.forwardRef(function PopoverHeading(
