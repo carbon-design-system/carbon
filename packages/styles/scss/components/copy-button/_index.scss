@@ -5,11 +5,7 @@
 // LICENSE file in the root directory of this source tree.
 //
 
-@use 'accordion';
-@use 'button';
-@use 'breadcrumb';
-@use 'checkbox';
-@use 'code-snippet';
-@use 'link';
-@use 'list';
-@use 'loading';
+@forward 'copy-button';
+@use 'copy-button';
+
+@include copy-button.copy-button;
