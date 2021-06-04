@@ -11,13 +11,12 @@
 @use '../../spacing' as *;
 @use '../../theme' as *;
 @use '../../type' as *;
-@use '../../utilities/component-reset';
-@use '../../utilities/convert';
+@use '../../utilities/convert' as *;
 @use '../../utilities/skeleton' as *;
 
 @mixin breadcrumb {
   .#{$prefix}--breadcrumb {
-    @include component-reset.reset;
+    @include reset;
     @include type-style('body-short-01');
 
     display: inline;
@@ -127,7 +126,7 @@
     outline: none;
   }
 
-  $caret-size: convert.rem(7px);
+  $caret-size: rem(7px);
   .#{$prefix}--breadcrumb-menu-options.#{$prefix}--overflow-menu-options::after {
     top: -$caret-size;
     left: $caret-size * 2;
