@@ -15,6 +15,37 @@ import { settings } from 'carbon-components';
 
 const { prefix } = settings;
 
+/**
+ * @typedef {object} InputProps
+ * @property {string} id - The input's id
+ * @property {boolean} readonly - Whether the input should be readonly
+ * @property {boolean} invalid - Whether the input should be marked as invalid
+ * @property {string} invalidText - The validation message displayed in case the input is considered invalid
+ * @property {boolean} warn - Whether the input should be in warning state
+ * @property {string} warnText - The validation message displayed in case the input is in warning state
+ */
+
+/**
+ * @typedef {object} NormalizedInputProps
+ * @property {boolean} invalid - Whether the input is invalid (takes precedence over warn)
+ * @property {string} invalidId - The invalid message's id
+ * @property {boolean} warn - Whether the input is in warning state
+ * @property {string} warnId - The warning message's id
+ * @property {React.ReactNode | null} validation – React node rendering the appropriate validation message (if any)
+ * @property {React.ReactNode | null} icon – React node rendering the appropriate accompanying icon (if any)
+ */
+
+/**
+ * Returns an object containing non-colliding props and additional, generated ones.
+ * This hook ensures that only either "invalid" or "warn" is true but never both at
+ * the same time. Regardless whether "invalid" or "warn", the appropriate validation
+ * message is passed as "validation". If the input should be accompanied by an icon
+ * (to visually represent a readonly, invalid or warning state), the appropriate icon
+ * is passed as "icon".
+ *
+ * @param {InputProps} props - The props passed to the component
+ * @returns {NormalizedInputProps}
+ */
 export function useNormalizedInputProps({
   id,
   readonly,
@@ -29,6 +60,7 @@ export function useNormalizedInputProps({
     warn: !readonly && !invalid && warn,
     warnId: `${id}-warn-msg`,
     validation: null,
+    icon: null,
   };
 
   if (readonly) {
