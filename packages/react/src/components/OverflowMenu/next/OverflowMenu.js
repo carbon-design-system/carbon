@@ -57,6 +57,14 @@ function OverflowMenu({
     }
   }
 
+  function handleMousedown(e) {
+    // prevent default for mousedown on trigger element to avoid
+    // the "blur" event from firing on the menu as this would close
+    // it and immediately re-open since "click" event is fired after
+    // "blur" event.
+    e.preventDefault();
+  }
+
   const containerClasses = classNames(`${prefix}--overflow-menu__container`);
 
   const triggerClasses = classNames(`${prefix}--overflow-menu`, {
@@ -72,6 +80,7 @@ function OverflowMenu({
         aria-expanded={open}
         className={triggerClasses}
         onClick={handleClick}
+        onMouseDown={handleMousedown}
         ref={triggerRef}>
         <IconElement />
       </button>
