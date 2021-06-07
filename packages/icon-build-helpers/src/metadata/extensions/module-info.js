@@ -24,6 +24,10 @@ const moduleInfo = () => {
         const local = getLocalName(icon.name);
         const global = getGlobalName(icon.name, icon.namespace);
 
+        if (local !== 'Document') {
+          continue;
+        }
+
         const moduleInfo = {
           local: safe(local),
           global: safe(global),
@@ -100,16 +104,53 @@ function safe(name) {
  */
 function parse(input) {
   const root = parser.parse(input);
-  const svg = root.children[0];
-  return {
-    type: svg.type,
-    tagName: svg.tagName,
-    properties: {
-      ...svg.properties,
-      fill: 'currentColor',
-    },
-    children: svg.children,
-  };
+
+  function transform(node) {
+    if (node.type === 'root') {
+      if (node.children.length !== 1) {
+        throw new Error('Unexpected SVG document');
+      }
+      return transform(node.children[0]);
+    }
+
+    if (node.type === 'element') {
+      if (node.name === 'svg') {
+        return {
+          type: node.type,
+          tagName: node.tagName,
+          properties: {
+            ...transformProperties(node.properties),
+            fill: 'currentColor',
+          },
+          children: node.children.map(transform),
+        };
+      }
+
+      return {
+        type: node.type,
+        tagName: node.tagName,
+        properties: transformProperties(node.properties),
+        children: node.children.map(transform),
+      };
+    }
+
+    throw new Error(`Unsupported node type: ${node.type}`);
+  }
+
+  function transformProperties(properties) {
+    const result = {};
+    for (const [key, value] of Object.entries(properties)) {
+      if (typeof value === 'string') {
+        // In our Adobe Illustrator exports, some attributes in the SVG contain
+        // a \t sequence that is included in the parsed SVG ast. Here, we remove
+        // it and replace it with a space as the whitespace character
+        result[key] = value.replace(/\t/g, ' ');
+      }
+    }
+    return result;
+  }
+
+  return transform(root);
 }
 
 module.exports = moduleInfo;
