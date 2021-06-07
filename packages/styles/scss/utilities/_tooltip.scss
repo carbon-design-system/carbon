@@ -363,7 +363,7 @@
     &.#{$prefix}--tooltip--a11y + .#{$prefix}--assistive-text {
       @if ($position == 'bottom') {
         // carryover from https://github.com/carbon-design-system/carbon/pull/3151/files#diff-93734be0784e9530b6d14a7b03b0d352R261-R265
-        bottom: -($body-spacing -rem(1px));
+        bottom: -($body-spacing - rem(1px));
         @if ($align == 'start' or $align == 'end') {
           transform: translate(0, 100%);
         } @else {
