@@ -24,10 +24,6 @@ const moduleInfo = () => {
         const local = getLocalName(icon.name);
         const global = getGlobalName(icon.name, icon.namespace);
 
-        if (local !== 'Document') {
-          continue;
-        }
-
         const moduleInfo = {
           local: safe(local),
           global: safe(global),
