@@ -26,13 +26,15 @@ function ProgressBar({
 
   const indeterminate = value === null || value === undefined;
 
-  let percentage = value / max;
-  if (percentage > 1) {
-    percentage = 1;
+  let cappedValue = value;
+  if (cappedValue > max) {
+    cappedValue = max;
   }
-  if (percentage < 0) {
-    percentage = 0;
+  if (cappedValue < 0) {
+    cappedValue = 0;
   }
+
+  const percentage = cappedValue / max;
 
   const wrapperClasses = classNames(
     `${prefix}--progress-bar`,
@@ -57,7 +59,7 @@ function ProgressBar({
         role="progressbar"
         aria-valuemin={!indeterminate ? 0 : null}
         aria-valuemax={!indeterminate ? max : null}
-        aria-valuenow={!indeterminate ? value : null}
+        aria-valuenow={!indeterminate ? cappedValue : null}
         aria-describedby={helperText ? helperId : null}>
         <div
           className={`${prefix}--progress-bar__bar`}
