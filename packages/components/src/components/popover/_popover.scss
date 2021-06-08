@@ -58,6 +58,10 @@
     color: $text-primary;
   }
 
+  .#{$prefix}--popover-text {
+    padding-top: 1rem;
+  }
+
   .#{$prefix}--popover--light .#{$prefix}--popover-contents {
     background-color: $background;
   }
@@ -328,5 +332,15 @@
 }
 
 .#{$prefix}--popover--divider {
+  padding-bottom: 1rem;
   border-bottom: 1px $border-subtle solid;
+}
+
+.#{$prefix}--popover-footer--divider {
+  padding-bottom: 1rem;
+  border-top: 1px $border-subtle solid;
+}
+
+.#{$prefix}--popover--footer-text {
+  padding-bottom: 1rem;
 }
