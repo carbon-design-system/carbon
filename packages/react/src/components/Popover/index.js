@@ -110,6 +110,11 @@ Popover.propTypes = {
   relative: PropTypes.bool,
 };
 
+const props = () => ({
+  hasDivider: boolean('hasDivider', false),
+  footerHasDivider: boolean('footerHasDivider', false),
+});
+
 const PopoverContent = React.forwardRef(function PopoverContent(
   { as: BaseComponent = 'div', className, children, ...rest },
   ref
@@ -143,9 +148,40 @@ PopoverContent.propTypes = {
   className: PropTypes.string,
 };
 
-const props = () => ({
-  hasDivider: boolean('hasDivider', false),
+const PopoverText = React.forwardRef(function PopoverContent(
+  { as: BaseComponent = 'div', className, children, ...rest },
+  ref
+) {
+  const classNames = cx(className, {
+    [`${prefix}--popover-text`]: props().hasDivider,
+    [`${prefix}--popover--footer-text`]: props().footerHasDivider,
+  });
+
+  return (
+    <BaseComponent {...rest} className={cx(classNames)} ref={ref}>
+      {children}
+    </BaseComponent>
+  );
 });
+
+PopoverText.propTypes = {
+  /**
+   * Provide a custom element or component to render the top-level node for the
+   * component.
+   */
+  as: PropTypes.oneOfType([PropTypes.string, PropTypes.elementType]),
+
+  /**
+   * Provide elements to be rendered inside of the component
+   */
+  children: PropTypes.node,
+
+  /**
+   * Provide a custom class name to be added to the outermost node in the
+   * component
+   */
+  className: PropTypes.string,
+};
 
 const PopoverHeading = React.forwardRef(function PopoverHeading(
   { as: BaseComponent = 'h5', className, children, ...rest },
@@ -187,10 +223,13 @@ const PopoverFooter = React.forwardRef(function PopoverHeading(
   { as: BaseComponent = 'footer', className, children, ...rest },
   ref
 ) {
+  const classNames = cx(className, {
+    [`${prefix}--popover-footer--divider`]: props().footerHasDivider,
+  });
+
   return (
-    <BaseComponent {...rest} className={cx(className)} ref={ref}>
+    <BaseComponent {...rest} className={classNames} ref={ref}>
       {children}
-      {/* <hr className={cx(`${prefix}--popover-heading__divider`)} /> */}
     </BaseComponent>
   );
 });
@@ -214,4 +253,4 @@ PopoverFooter.propTypes = {
   className: PropTypes.string,
 };
 
-export { Popover, PopoverContent, PopoverHeading, PopoverFooter };
+export { Popover, PopoverContent, PopoverHeading, PopoverText, PopoverFooter };

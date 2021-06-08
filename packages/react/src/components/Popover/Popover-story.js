@@ -158,7 +158,7 @@ export const Playground = () => {
 Playground.story = {
   decorators: [
     (story) => (
-      <div className="mt-9">
+      <div className="pt-9">
         <div className="position-relative">{story()}</div>
       </div>
     ),
