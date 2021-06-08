@@ -10,6 +10,7 @@ import './styles.scss';
 import { configureActions } from '@storybook/addon-actions';
 import { white, g10, g90, g100 } from '@carbon/themes';
 import React from 'react';
+import { breakpoints } from '@carbon/layout';
 
 export const globalTypes = {
   locale: {
@@ -78,6 +79,50 @@ export const parameters = {
 
     // https://storybook.js.org/docs/react/essentials/controls#sorting-controls
     sort: 'alpha',
+  },
+  // Small (<672)
+  // Medium (672 - 1056px)
+  // Large (1056 - 1312px)
+  // X-Large (1312 - 1584px)
+  // Max (>1584)
+  viewport: {
+    viewports: {
+      sm: {
+        name: 'Small',
+        styles: {
+          width: breakpoints.sm.width,
+          height: '100%',
+        },
+      },
+      md: {
+        name: 'Medium',
+        styles: {
+          width: breakpoints.md.width,
+          height: '100%',
+        },
+      },
+      lg: {
+        name: 'Large',
+        styles: {
+          width: breakpoints.lg.width,
+          height: '100%',
+        },
+      },
+      xlg: {
+        name: 'X-Large',
+        styles: {
+          width: breakpoints.xlg.width,
+          height: '100%',
+        },
+      },
+      Max: {
+        name: 'Max',
+        styles: {
+          width: breakpoints.max.width,
+          height: '100%',
+        },
+      },
+    },
   },
 };
 
