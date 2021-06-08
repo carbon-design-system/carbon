@@ -5,10 +5,7 @@
 // LICENSE file in the root directory of this source tree.
 //
 
-@use 'accordion';
-@use 'breadcrumb';
-@use 'button';
-@use 'checkbox';
-@use 'link';
-@use 'list';
-@use 'loading';
+@forward 'form';
+@use 'form';
+
+@include form.form;
