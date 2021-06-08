@@ -28,6 +28,7 @@ export function NotificationActionButton(props) {
   }
   return <NotificationActionButtonClassic {...props} />;
 }
+NotificationActionButton.displayName = 'v11Switch(NotificationActionButton)';
 
 export function NotificationTextDetails(props) {
   const enabled = useFeatureFlag('enable-v11-release');
@@ -36,6 +37,7 @@ export function NotificationTextDetails(props) {
   }
   return <NotificationTextDetailsClassic {...props} />;
 }
+NotificationTextDetails.displayName = 'v11Switch(NotificationTextDetails)';
 
 export function NotificationButton(props) {
   const enabled = useFeatureFlag('enable-v11-release');
@@ -44,14 +46,17 @@ export function NotificationButton(props) {
   }
   return <NotificationButtonClassic {...props} />;
 }
+NotificationButton.displayName = 'v11Switch(NotificationButton)';
 
 export function ToastNotification(props) {
   const enabled = useFeatureFlag('enable-v11-release');
+
   if (enabled) {
     return <ToastNotificationNext {...props} />;
   }
   return <ToastNotificationClassic {...props} />;
 }
+ToastNotification.displayName = 'v11Switch(ToastNotification)';
 
 export function InlineNotification(props) {
   const enabled = useFeatureFlag('enable-v11-release');
@@ -60,3 +65,4 @@ export function InlineNotification(props) {
   }
   return <InlineNotificationClassic {...props} />;
 }
+InlineNotification.displayName = 'v11Switch(InlineNotification)';
