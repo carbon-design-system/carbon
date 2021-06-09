@@ -5,9 +5,6 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React from 'react';
-import { useDisclosure } from '../../Disclosure';
-
 describe('useDisclosure', () => {
   // https://www.w3.org/TR/wai-aria-practices-1.1/#keyboard-interaction-8
   it.todo('should toggle visibility when the button is clicked');
