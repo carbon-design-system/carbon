@@ -1,4 +1,4 @@
-//
+ //
 // Copyright IBM Corp. 2016, 2018
 //
 // This source code is licensed under the Apache-2.0 license found in the
@@ -25,7 +25,7 @@
 
     // Specify the distance that the caret should be offset from the side of the
     // popover when not centered
-    --cds-popover-caret-offset: 1rem;
+    --cds-popover-caret-offset: 1.25rem;
 
     position: absolute;
     z-index: z('floating');
@@ -46,7 +46,7 @@
     display: block;
   }
 
-  .#{$prefix}--popover-contents {
+  .#{$prefix}--popover--content {
     @include box-shadow;
     @include type-style('body-long-01');
 
@@ -58,15 +58,24 @@
     color: $text-primary;
   }
 
-  .#{$prefix}--popover-text {
-    padding-top: 1rem;
+
+  .#{$prefix}--popover--header {
+    @include type-style('productive-heading-01');
+    color: $text-01;
+    padding: 0rem 1rem 0rem 1rem;
   }
 
-  .#{$prefix}--popover--light .#{$prefix}--popover-contents {
+  .#{$prefix}--popover--body {
+    @include type-style('body-short-01');
+    color: $text-01;
+    padding: 0rem 1rem 0rem 1rem;
+  }
+
+  .#{$prefix}--popover--light .#{$prefix}--popover--content {
     background-color: $background;
   }
 
-  .#{$prefix}--popover--high-contrast .#{$prefix}--popover-contents {
+  .#{$prefix}--popover--high-contrast .#{$prefix}--popover--content {
     background-color: $background-inverse;
     color: $text-inverse;
   }
@@ -75,8 +84,8 @@
     --cds-popover-offset: 0.5rem;
   }
 
-  .#{$prefix}--popover--caret .#{$prefix}--popover-contents::before,
-  .#{$prefix}--popover--caret .#{$prefix}--popover-contents::after {
+  .#{$prefix}--popover--caret .#{$prefix}--popover--content::before,
+  .#{$prefix}--popover--caret .#{$prefix}--popover--content::after {
     position: absolute;
     display: inline-block;
     width: rem(8px);
@@ -85,7 +94,7 @@
     content: '';
   }
 
-  .#{$prefix}--popover--caret .#{$prefix}--popover-contents::before {
+  .#{$prefix}--popover--caret .#{$prefix}--popover--content::before {
     z-index: -1;
     box-shadow: 2px 2px 6px 0 rgba(0, 0, 0, 0.2);
   }
@@ -308,9 +317,14 @@
     transform: translateX(100%);
   }
 
-  .#{$prefix}--popover-heading {
-    border: 1px solid $border-subtle;
-    //
+  .#{$prefix}--popover--content {
+    padding: 1rem 0 1rem 0;
+  }
+
+  .#{$prefix}--popover--divider {
+    padding-top: 1rem;
+    margin-bottom: 1rem;
+    border-bottom: 1px $ui-03 solid;
   }
 }
 
@@ -320,9 +334,9 @@
 /// passed in should appropriately position the caret for the given direction.
 @mixin place-caret($direction) {
   .#{$prefix}--popover--caret.#{$prefix}--popover--#{$direction}
-    .#{$prefix}--popover-contents::before,
+    .#{$prefix}--popover--content::before,
   .#{$prefix}--popover--caret.#{$prefix}--popover--#{$direction}
-    .#{$prefix}--popover-contents::after {
+    .#{$prefix}--popover--content::after {
     @content;
   }
 }
@@ -331,16 +345,11 @@
   @include popover;
 }
 
-.#{$prefix}--popover--divider {
-  padding-bottom: 1rem;
-  border-bottom: 1px $border-subtle solid;
+.#{$prefix}--popover--footer {
+  padding-left: 1rem;
+  padding-right: 1rem;
 }
 
-.#{$prefix}--popover-footer--divider {
-  padding-bottom: 1rem;
-  border-top: 1px $border-subtle solid;
-}
-
-.#{$prefix}--popover--footer-text {
-  padding-bottom: 1rem;
+.#{$prefix}--popover--footer-divider {
+  padding-top: 1rem;
 }

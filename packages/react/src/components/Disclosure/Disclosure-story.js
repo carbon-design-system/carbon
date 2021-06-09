@@ -12,16 +12,16 @@ import { useDisclosure } from '../Disclosure';
 import {
   Popover,
   PopoverContent,
+  PopoverHeader,
+  PopoverBody,
   PopoverFooter,
-  PopoverHeading,
-  PopoverText,
 } from '../Popover';
 import Button from '../Button';
 import Link from '../Link';
 import { UserAvatar20 } from '@carbon/icons-react';
 import {
   withKnobs,
-  // boolean,
+  boolean,
   // number,
   // select,
   // text,
@@ -31,7 +31,7 @@ export default {
   title: 'Experimental/unstable_Disclosure',
   component: useDisclosure,
   decorators: [withKnobs],
-  // includeStories: [],
+  includeStories: ['Default', 'WithHeader', 'WithFooter'],
 };
 
 export const Default = () => {
@@ -50,10 +50,7 @@ export const Default = () => {
         />
         <Popover {...contentProps} align="top-left" caret={true} open={open}>
           <PopoverContent>
-            <PopoverHeading className="pt-1 pl-3 pr-3">
-              This is a heading on Disclosure
-            </PopoverHeading>
-            <PopoverText className="pl-3 pr-3 pb-3">
+            <PopoverBody>
               Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
               eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
               enim ad minim veniam, quis nostrud exercitation ullamco laboris
@@ -61,7 +58,44 @@ export const Default = () => {
               reprehenderit in voluptate velit esse cillum dolore eu fugiat
               nulla pariatur. Excepteur sint occaecat cupidatat non proident,
               sunt in culpa qui officia deserunt mollit anim id est laborum.
-            </PopoverText>
+            </PopoverBody>
+          </PopoverContent>
+        </Popover>
+      </>
+    );
+  }
+
+  return <Example />;
+};
+
+export const WithHeader = () => {
+  function Example() {
+    const { buttonProps, contentProps, open } = useDisclosure('test-id');
+
+    return (
+      <>
+        <Button
+          renderIcon={UserAvatar20}
+          kind="ghost"
+          iconDescription="profile"
+          type="button"
+          hasIconOnly
+          {...buttonProps}
+        />
+        <Popover {...contentProps} align="top-left" caret={true} open={open}>
+          <PopoverContent>
+            <PopoverHeader hasDivider={boolean('show header divider (hasDivider)', false)}>
+              This is a heading on Disclosure
+            </PopoverHeader>
+            <PopoverBody>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+              eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
+              enim ad minim veniam, quis nostrud exercitation ullamco laboris
+              nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in
+              reprehenderit in voluptate velit esse cillum dolore eu fugiat
+              nulla pariatur. Excepteur sint occaecat cupidatat non proident,
+              sunt in culpa qui officia deserunt mollit anim id est laborum.
+            </PopoverBody>
           </PopoverContent>
         </Popover>
       </>
@@ -87,10 +121,7 @@ export const WithFooter = () => {
         />
         <Popover {...contentProps} align="top-left" caret={true} open={open}>
           <PopoverContent>
-            <PopoverHeading className="pt-1 pl-3 pr-3">
-              This is a heading on Disclosure
-            </PopoverHeading>
-            <PopoverText className="pl-3 pr-3">
+            <PopoverBody>
               Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
               eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
               enim ad minim veniam, quis nostrud exercitation ullamco laboris
@@ -98,8 +129,8 @@ export const WithFooter = () => {
               reprehenderit in voluptate velit esse cillum dolore eu fugiat
               nulla pariatur. Excepteur sint occaecat cupidatat non proident,
               sunt in culpa qui officia deserunt mollit anim id est laborum.
-            </PopoverText>
-            <PopoverFooter className="p-3">
+            </PopoverBody>
+            <PopoverFooter hasDivider={boolean('show footer divider (hasDivider)', false)}>
               <Link href="https://www.carbondesignsystem.com">Linky Link</Link>
             </PopoverFooter>
           </PopoverContent>
