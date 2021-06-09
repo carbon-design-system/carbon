@@ -5,10 +5,7 @@
 // LICENSE file in the root directory of this source tree.
 //
 
-@use 'accordion';
-@use 'breadcrumb';
-@use 'button';
+@forward 'checkbox';
 @use 'checkbox';
-@use 'link';
-@use 'list';
-@use 'loading';
+
+@include checkbox.checkbox;
