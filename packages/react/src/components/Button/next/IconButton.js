@@ -126,25 +126,25 @@ const IconButton = ({
     [`${prefix}--tooltip--align-${tooltipAlignment}`]: tooltipAlignment,
   });
 
+  const tooltipId = Math.random();
+
   let props = {
     disabled,
     size,
     className: buttonClasses,
     'aria-pressed': kind === 'ghost' ? isSelected : null,
+    'aria-describedby': `tooltip-${tooltipId}`,
   };
 
   //what does this do?????? -josefina
-  const buttonImage = !ButtonImageElement ? null : (
-    <ButtonImageElement
-      aria-label={iconDescription}
-      className={`${prefix}--btn__icon`}
-      aria-hidden="true"
-    />
+  const icon = !ButtonImageElement ? null : (
+    <ButtonImageElement className={`${prefix}--btn__icon`} aria-hidden="true" />
   );
 
   const tooltip = (
     <div
       ref={tooltipRef}
+      id={`tooltip-${tooltipId}`}
       onMouseEnter={handleMouseEnter}
       className={`${prefix}--assistive-text`}>
       {iconDescription}
@@ -164,7 +164,7 @@ const IconButton = ({
       type: 'button',
     },
     tooltip,
-    buttonImage
+    icon
   );
 };
 
@@ -184,7 +184,7 @@ IconButton.propTypes = {
    * be read by screen readers
    */
   iconDescription: (props) => {
-    if (props.renderIcon && !props.children && !props.iconDescription) {
+    if (props.renderIcon && !props.iconDescription) {
       return new Error(
         'renderIcon property specified without also providing an iconDescription property.'
       );
@@ -241,7 +241,8 @@ IconButton.propTypes = {
    * Optional prop to allow overriding the icon rendering.
    * Can be a React component class
    */
-  renderIcon: PropTypes.oneOfType([PropTypes.func, PropTypes.object]),
+  renderIcon: PropTypes.oneOfType([PropTypes.func, PropTypes.object])
+    .isRequired,
 
   /**
    * Specify the size of the button, from a list of available sizes.
