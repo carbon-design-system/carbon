@@ -7,6 +7,7 @@
 
 import React from 'react';
 import IconButton from './IconButton';
+import { Add16 } from '@carbon/icons-react';
 
 export default {
   title: 'Experimental/unstable_IconButton',
@@ -14,5 +15,11 @@ export default {
 };
 
 export const Default = () => {
-  return <IconButton />;
+  return (
+    <IconButton
+      renderIcon={Add16}
+      iconDescription="Some tooltip text here"
+      tooltipPosition="right"
+    />
+  );
 };
