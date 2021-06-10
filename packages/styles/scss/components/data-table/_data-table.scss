@@ -5,6 +5,8 @@
 // LICENSE file in the root directory of this source tree.
 //
 
+@use 'mixins' as *;
+@use 'vars' as *;
 @use '../../config' as *;
 @use '../../motion' as *;
 @use '../../spacing' as *;
@@ -14,32 +16,6 @@
 @use '../../utilities/focus-outline' as *;
 @use '../../utilities/high-contrast-mode' as *;
 @use '../../utilities/text-overflow' as *;
-@use 'sticky-header' as *;
-
-/// @type Value
-/// @access public
-/// @group data-table
-$data-table-heading-transform: uppercase !default;
-
-/// @type Value
-/// @access public
-/// @group data-table
-$data-table-heading-border-bottom: 1px solid $border-interactive !default;
-
-/// @type Number
-/// @access public
-/// @group data-table
-$data-table-row-height: 2rem !default;
-
-/// @type Color
-/// @access public
-/// @group data-table
-$data-table-zebra-color: $layer-accent !default;
-
-/// @type Color
-/// @access public
-/// @group data-table
-$data-table-column-hover: $layer-selected-hover !default;
 
 /// Data table core styles
 /// @access public

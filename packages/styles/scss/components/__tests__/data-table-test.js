@@ -26,24 +26,59 @@ describe('scss/components/data-table', () => {
     expect(unwrap('mixin')).toBe(true);
     expect(unwrap('variables')).toMatchInlineSnapshot(`
       Array [
-        "data-table-heading-transform",
-        "data-table-heading-border-bottom",
-        "data-table-row-height",
-        "data-table-zebra-color",
         "data-table-column-hover",
       ]
     `);
   });
 });
 
-describe('scss/components/data-table-action', () => {
+describe('scss/components/data-table/action', () => {
   test('Public API', async () => {
     const { unwrap } = await render(`
          @use 'sass:map';
          @use 'sass:meta';
          @use '../data-table/action';
    
-         $_: get('mixin', meta.mixin-exists('data-table-action', 'data-table-action'));
+         $_: get('mixin', meta.mixin-exists('data-table-action', 'action'));
+       `);
+    expect(unwrap('mixin')).toBe(true);
+  });
+});
+
+describe('scss/components/data-table/expandable', () => {
+  test('Public API', async () => {
+    const { unwrap } = await render(`
+         @use 'sass:map';
+         @use 'sass:meta';
+         @use '../data-table/expandable';
+   
+         $_: get('mixin', meta.mixin-exists('data-table-expandable', 'expandable'));
+       `);
+    expect(unwrap('mixin')).toBe(true);
+  });
+});
+
+describe('scss/components/data-table/skeleton', () => {
+  test('Public API', async () => {
+    const { unwrap } = await render(`
+         @use 'sass:map';
+         @use 'sass:meta';
+         @use '../data-table/skeleton';
+   
+         $_: get('mixin', meta.mixin-exists('data-table-skeleton', 'skeleton'));
+       `);
+    expect(unwrap('mixin')).toBe(true);
+  });
+});
+
+describe('scss/components/data-table/sort', () => {
+  test('Public API', async () => {
+    const { unwrap } = await render(`
+         @use 'sass:map';
+         @use 'sass:meta';
+         @use '../data-table/sort';
+   
+         $_: get('mixin', meta.mixin-exists('data-table-sort', 'sort'));
        `);
     expect(unwrap('mixin')).toBe(true);
   });

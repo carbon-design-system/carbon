@@ -4,7 +4,7 @@
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
 //
-
+@use '../vars' as *;
 @use '../../../config' as *;
 @use '../../../motion' as *;
 @use '../../../spacing' as *;
@@ -12,6 +12,7 @@
 @use '../../../utilities/button-reset';
 @use '../../../utilities/convert' as *;
 @use '../../../utilities/focus-outline' as *;
+@use '../../../utilities/high-contrast-mode' as *;
 
 /// Data table sort styles
 /// @access public
