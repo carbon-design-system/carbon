@@ -55,9 +55,13 @@ function svgToJSX(node) {
     }
 
     const { tagName } = node;
+    const attributeAllowlist = new Set(['data-icon-path']);
     const attributeDenylist = ['data', 'aria'];
     const attributes = Object.entries(node.attributes)
       .filter(([key]) => {
+        if (attributeAllowlist.has(key)) {
+          return true;
+        }
         return attributeDenylist.every((prefix) => !key.startsWith(prefix));
       })
       .map(([key, value]) => {
