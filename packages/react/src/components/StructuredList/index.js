@@ -30,7 +30,6 @@ export function StructuredListWrapper(props) {
   }
   return <StructuredListWrapperClassic {...props} />;
 }
-StructuredListWrapper.displayName = 'v11Switch(StructuredListWrapper)';
 
 export function StructuredListHead(props) {
   const enabled = useFeatureFlag('enable-v11-release');
@@ -39,7 +38,6 @@ export function StructuredListHead(props) {
   }
   return <StructuredListHeadClassic {...props} />;
 }
-StructuredListHead.displayName = 'v11Switch(StructuredListHead)';
 
 export function StructuredListInput(props) {
   const enabled = useFeatureFlag('enable-v11-release');
@@ -48,7 +46,6 @@ export function StructuredListInput(props) {
   }
   return <StructuredListInputClassic {...props} />;
 }
-StructuredListInput.displayName = 'v11Switch(StructuredListInput)';
 
 export function StructuredListBody(props) {
   const enabled = useFeatureFlag('enable-v11-release');
@@ -57,7 +54,6 @@ export function StructuredListBody(props) {
   }
   return <StructuredListBodyClassic {...props} />;
 }
-StructuredListBody.displayName = 'v11Switch(StructuredListBody)';
 
 export function StructuredListRow(props) {
   const enabled = useFeatureFlag('enable-v11-release');
@@ -66,7 +62,6 @@ export function StructuredListRow(props) {
   }
   return <StructuredListRowClassic {...props} />;
 }
-StructuredListRow.displayName = 'v11Switch(StructuredListRow)';
 
 export function StructuredListCell(props) {
   const enabled = useFeatureFlag('enable-v11-release');
@@ -75,6 +70,5 @@ export function StructuredListCell(props) {
   }
   return <StructuredListCellClassic {...props} />;
 }
-StructuredListCell.displayName = 'v11Switch(StructuredListCell)';
 
 export { default as StructuredListSkeleton } from './StructuredList.Skeleton';

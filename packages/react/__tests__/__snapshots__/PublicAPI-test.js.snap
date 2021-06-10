@@ -4964,24 +4964,12 @@ Map {
       },
     },
   },
-  "StructuredListWrapper" => Object {
-    "displayName": "v11Switch(StructuredListWrapper)",
-  },
-  "StructuredListHead" => Object {
-    "displayName": "v11Switch(StructuredListHead)",
-  },
-  "StructuredListBody" => Object {
-    "displayName": "v11Switch(StructuredListBody)",
-  },
-  "StructuredListRow" => Object {
-    "displayName": "v11Switch(StructuredListRow)",
-  },
-  "StructuredListInput" => Object {
-    "displayName": "v11Switch(StructuredListInput)",
-  },
-  "StructuredListCell" => Object {
-    "displayName": "v11Switch(StructuredListCell)",
-  },
+  "StructuredListWrapper" => Object {},
+  "StructuredListHead" => Object {},
+  "StructuredListBody" => Object {},
+  "StructuredListRow" => Object {},
+  "StructuredListInput" => Object {},
+  "StructuredListCell" => Object {},
   "StructuredListSkeleton" => Object {
     "defaultProps": Object {
       "border": false,
