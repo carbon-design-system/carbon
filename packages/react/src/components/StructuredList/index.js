@@ -38,7 +38,6 @@ export function StructuredListHead(props) {
   }
   return <StructuredListHeadClassic {...props} />;
 }
-
 export function StructuredListInput(props) {
   const enabled = useFeatureFlag('enable-v11-release');
   if (enabled) {
