@@ -5,19 +5,19 @@
 // LICENSE file in the root directory of this source tree.
 //
 
-@use '../../config' as *;
-@use '../../motion' as *;
-@use '../../spacing' as *;
-@use '../../theme' as *;
-@use '../../type' as *;
-@use '../../utilities/button-reset';
-@use '../../utilities/convert' as *;
-@use '../../utilities/focus-outline' as *;
+@use '../../../config' as *;
+@use '../../../motion' as *;
+@use '../../../spacing' as *;
+@use '../../../theme' as *;
+@use '../../../type' as *;
+@use '../../../utilities/button-reset';
+@use '../../../utilities/convert' as *;
+@use '../../../utilities/focus-outline' as *;
 
 /// Data table action styles
-/// @access private
+/// @access public
 /// @group data-table
-@mixin data-table-v2-action {
+@mixin data-table-action {
   //-------------------------------------------------
   //TOOLBAR
   //-------------------------------------------------
@@ -69,7 +69,7 @@
     height: $spacing-09;
     box-shadow: none;
     cursor: pointer;
-    transition: width $transition--expansion $carbon--standard-easing,
+    transition: width $transition--expansion $standard-easing,
       background-color $duration-fast-02 motion(entrance, productive);
 
     &:hover {
@@ -424,7 +424,7 @@
 
   .#{$prefix}--btn--primary.#{$prefix}--batch-summary__cancel:hover::before {
     opacity: 0;
-    transition: opacity $transition--base $carbon--standard-easing;
+    transition: opacity $transition--base $standard-easing;
   }
 
   // cancel btn
@@ -498,7 +498,7 @@
     //active
     .#{$prefix}--toolbar-search-container-active {
       flex: auto;
-      transition: flex 175ms $carbon--standard-easing;
+      transition: flex 175ms $standard-easing;
     }
 
     .#{$prefix}--toolbar-search-container-active .#{$prefix}--search-input {

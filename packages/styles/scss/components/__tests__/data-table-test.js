@@ -20,18 +20,31 @@ describe('scss/components/data-table', () => {
        @use 'sass:meta';
        @use '../data-table';
  
-       $_: get('mixin', meta.mixin-exists('data-table-v2-action', 'data-table-v2-action'));
-       $_: get('variables', map.keys(meta.module-variables('data-table-v2-action')));
-
-       $_: get('mixin', meta.mixin-exists('data-table-core', 'data-table-core'));
-       $_: get('variables', map.keys(meta.module-variables('data-table-core')));
-
-       $_: get('mixin', meta.mixin-exists('data-table-expandable', 'data-table-expandable'));
-       $_: get('variables', map.keys(meta.module-variables('data-table-expandable')));
-
-       $_: get('mixin', meta.mixin-exists('data-table-sort', 'data-table-sort'));
-       $_: get('variables', map.keys(meta.module-variables('data-table-sort')));
+       $_: get('mixin', meta.mixin-exists('data-table', 'data-table'));
+       $_: get('variables', map.keys(meta.module-variables('data-table')));
      `);
+    expect(unwrap('mixin')).toBe(true);
+    expect(unwrap('variables')).toMatchInlineSnapshot(`
+      Array [
+        "data-table-heading-transform",
+        "data-table-heading-border-bottom",
+        "data-table-row-height",
+        "data-table-zebra-color",
+        "data-table-column-hover",
+      ]
+    `);
+  });
+});
+
+describe('scss/components/data-table-action', () => {
+  test('Public API', async () => {
+    const { unwrap } = await render(`
+         @use 'sass:map';
+         @use 'sass:meta';
+         @use '../data-table/action';
+   
+         $_: get('mixin', meta.mixin-exists('data-table-action', 'data-table-action'));
+       `);
     expect(unwrap('mixin')).toBe(true);
   });
 });
