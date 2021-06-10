@@ -31,6 +31,7 @@ import { popover } from 'carbon-components-react';
 
 function MyPopover() {
   return (
+    <TriggeringUiElement/>
     <Popover 
       open={open} 
       align={top} 
@@ -45,20 +46,25 @@ function MyPopover() {
 
 <Props />
 
-## Popover Alignment 
+## Caret Alignment 
 
-A popover can be aligned relative to its triggering element in the following directions:
+Users can describe the caret alignment in one of twelve directions. Caret alignement dictates position and direction of the popover.
 
-```
-    'top-left'            'top'        'top-right'
-               ___________________
-              |                   |
-      'left'  |  Trigger element  |  'right'
-              |___________________|
+- 'top',
+- 'top-left',
+- 'top-right',
 
-'left-bottom'        'bottom'      'right-bottom' 
+- 'bottom',
+- 'bottom-left',
+- 'bottom-right',
 
-```
+- 'left',
+- 'left-bottom',
+- 'left-top',
+
+- 'right',
+- 'right-bottom',
+- 'right-top',
 
 ## Feedback
 
