@@ -9,7 +9,7 @@
 
 const { pascalCase } = require('change-case');
 const path = require('path');
-const parser = require('svg-parser');
+const parser = require('svgson');
 const { svgo } = require('./output/optimizer');
 
 /**
@@ -99,23 +99,16 @@ function safe(name) {
  * @returns {object}
  */
 function parse(input) {
-  const root = parser.parse(input);
+  const root = parser.parseSync(input);
 
   function transform(node) {
-    if (node.type === 'root') {
-      if (node.children.length !== 1) {
-        throw new Error('Unexpected SVG document');
-      }
-      return transform(node.children[0]);
-    }
-
     if (node.type === 'element') {
       if (node.name === 'svg') {
         return {
           type: node.type,
-          tagName: node.tagName,
-          properties: {
-            ...transformProperties(node.properties),
+          tagName: node.name,
+          attributes: {
+            ...transformAttributes(node.attributes),
             fill: 'currentColor',
           },
           children: node.children.map(transform),
@@ -124,8 +117,8 @@ function parse(input) {
 
       return {
         type: node.type,
-        tagName: node.tagName,
-        properties: transformProperties(node.properties),
+        tagName: node.name,
+        attributes: transformAttributes(node.attributes),
         children: node.children.map(transform),
       };
     }
@@ -133,9 +126,9 @@ function parse(input) {
     throw new Error(`Unsupported node type: ${node.type}`);
   }
 
-  function transformProperties(properties) {
+  function transformAttributes(attributes) {
     const result = {};
-    for (const [key, value] of Object.entries(properties)) {
+    for (const [key, value] of Object.entries(attributes)) {
       if (typeof value === 'string') {
         // In our Adobe Illustrator exports, some attributes in the SVG contain
         // a \t sequence that is included in the parsed SVG ast. Here, we remove

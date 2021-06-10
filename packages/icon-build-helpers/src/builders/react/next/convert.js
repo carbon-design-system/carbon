@@ -49,14 +49,14 @@ function svgToJSX(node) {
   if (node.type === 'element') {
     if (node.tagName === 'svg') {
       return {
-        svgProps: node.properties,
+        svgProps: node.attributes,
         children: node.children.map(svgToJSX),
       };
     }
 
-    const { tagName, properties } = node;
+    const { tagName } = node;
     const attributeDenylist = ['data', 'aria'];
-    const attributes = Object.entries(properties)
+    const attributes = Object.entries(node.attributes)
       .filter(([key]) => {
         return attributeDenylist.every((prefix) => !key.startsWith(prefix));
       })
