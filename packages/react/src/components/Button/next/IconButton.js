@@ -11,7 +11,6 @@ import { ButtonKinds } from '../../../prop-types/types';
 import classNames from 'classnames';
 import { settings } from 'carbon-components';
 import toggleClass from '../../../tools/toggleClass';
-import { useId } from '../../../internal/useId';
 import { composeEventHandlers } from '../../../tools/events';
 import { keys, matches } from '../../../internal/keyboard';
 
@@ -127,6 +126,13 @@ const IconButton = ({
     [`${prefix}--tooltip--align-${tooltipAlignment}`]: tooltipAlignment,
   });
 
+  let props = {
+    disabled,
+    size,
+    className: buttonClasses,
+    'aria-pressed': kind === 'ghost' ? isSelected : null,
+  };
+
   //what does this do?????? -josefina
   const buttonImage = !ButtonImageElement ? null : (
     <ButtonImageElement
@@ -135,19 +141,6 @@ const IconButton = ({
       aria-hidden="true"
     />
   );
-
-  const dangerButtonVariants = ['danger', 'danger--tertiary', 'danger--ghost'];
-  const assistiveId = useId('danger-description');
-
-  let props = {
-    disabled,
-    size,
-    className: buttonClasses,
-    'aria-describedby': dangerButtonVariants.includes(kind)
-      ? assistiveId
-      : null,
-    'aria-pressed': kind === 'ghost' ? isSelected : null,
-  };
 
   const assistiveText = (
     <div
