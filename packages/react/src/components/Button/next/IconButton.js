@@ -142,7 +142,7 @@ const IconButton = ({
     />
   );
 
-  const assistiveText = (
+  const tooltip = (
     <div
       ref={tooltipRef}
       onMouseEnter={handleMouseEnter}
@@ -163,7 +163,7 @@ const IconButton = ({
       ...props,
       type: 'button',
     },
-    assistiveText,
+    tooltip,
     buttonImage
   );
 };
