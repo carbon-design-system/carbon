@@ -472,11 +472,20 @@ export default class DatePicker extends Component {
     if (this.inputField) {
       this.inputField.addEventListener('keydown', (e) => {
         if (match(e, keys.ArrowDown)) {
+          const {
+            calendarContainer,
+            selectedDateElem: fpSelectedDateElem,
+            todayDateElem: fptodayDateElem,
+          } = cal;
+          const selectedDateElem =
+            calendarContainer.querySelector('.selected') && fpSelectedDateElem;
+          const todayDateElem =
+            calendarContainer.querySelector('.today') && fptodayDateElem;
           (
-            cal.selectedDateElem ||
-            cal.todayDateElem ||
-            cal.calendarContainer.querySelector('.flatpickr-day[tabindex]') ||
-            cal.calendarContainer
+            selectedDateElem ||
+            todayDateElem ||
+            calendarContainer.querySelector('.flatpickr-day[tabindex]') ||
+            calendarContainer
           ).focus();
         }
       });
@@ -490,11 +499,20 @@ export default class DatePicker extends Component {
       });
       this.toInputField.addEventListener('keydown', (e) => {
         if (match(e, keys.ArrowDown)) {
+          const {
+            calendarContainer,
+            selectedDateElem: fpSelectedDateElem,
+            todayDateElem: fptodayDateElem,
+          } = cal;
+          const selectedDateElem =
+            calendarContainer.querySelector('.selected') && fpSelectedDateElem;
+          const todayDateElem =
+            calendarContainer.querySelector('.today') && fptodayDateElem;
           (
-            cal.selectedDateElem ||
-            cal.todayDateElem ||
-            cal.calendarContainer.querySelector('.flatpickr-day[tabindex]') ||
-            cal.calendarContainer
+            selectedDateElem ||
+            todayDateElem ||
+            calendarContainer.querySelector('.flatpickr-day[tabindex]') ||
+            calendarContainer
           ).focus();
         }
       });
