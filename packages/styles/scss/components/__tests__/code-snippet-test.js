@@ -13,31 +13,32 @@ const { SassRenderer } = require('@carbon/test-utils/scss');
 
 const { render } = SassRenderer.create(__dirname);
 
-describe('scss/components/form', () => {
+describe('scss/components/code-snippet', () => {
   test('Public API', async () => {
     const { unwrap } = await render(`
       @use 'sass:map';
       @use 'sass:meta';
-      @use '../form';
+      @use '../code-snippet';
 
-      $_: get('mixin', meta.mixin-exists('form', 'form'));
-      $_: get('variables', map.keys(meta.module-variables('form')));
+      $_: get('mixin', meta.mixin-exists('code-snippet', 'code-snippet'));
+      $_: get('variables', map.keys(meta.module-variables('code-snippet')));
     `);
     expect(unwrap('mixin')).toBe(true);
     expect(unwrap('variables')).toMatchInlineSnapshot(`
       Array [
-        "input-label-weight",
+        "copy-active",
+        "copy-btn-feedback",
       ]
     `);
   });
 
   test('configuration', async () => {
     const { unwrap } = await render(`
-      @use '../form' with (
-        $input-label-weight: 600,
+      @use '../code-snippet' with (
+        $copy-active: #000,
       );
-      $_: get('font-weight', form.$input-label-weight);
+      $_: get('background-color', code-snippet.$copy-active);
     `);
-    expect(unwrap('font-weight')).toBe(600);
+    expect(unwrap('background-color')).toBe('#000');
   });
 });
