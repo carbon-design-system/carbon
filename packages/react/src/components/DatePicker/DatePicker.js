@@ -448,6 +448,7 @@ export default class DatePicker extends Component {
   onChange = () => {
     if (this.inputField.value === '' && this.cal?.selectedDates.length) {
       this.cal.clear();
+      this.cal.input.focus();
     }
   };
 
