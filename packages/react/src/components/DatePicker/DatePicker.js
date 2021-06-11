@@ -446,11 +446,7 @@ export default class DatePicker extends Component {
   }
 
   onChange = (e) => {
-    if (
-      e.target.value === '' &&
-      this.cal &&
-      this.cal.selectedDates.length > 0
-    ) {
+    if (e.target.value === '' && this.cal?.selectedDates.length > 0) {
       this.cal.clear();
     }
   };
