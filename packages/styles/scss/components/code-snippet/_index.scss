@@ -5,11 +5,7 @@
 // LICENSE file in the root directory of this source tree.
 //
 
-@use 'accordion';
-@use 'button';
-@use 'breadcrumb';
-@use 'checkbox';
+@forward 'code-snippet';
 @use 'code-snippet';
-@use 'link';
-@use 'list';
-@use 'loading';
+
+@include code-snippet.code-snippet;
