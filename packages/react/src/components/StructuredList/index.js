@@ -4,7 +4,6 @@
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
-import React from 'react';
 import {
   StructuredListWrapper as StructuredListWrapperNext,
   StructuredListHead as StructuredListHeadNext,
@@ -21,60 +20,42 @@ import {
   StructuredListRow as StructuredListRowClassic,
   StructuredListCell as StructuredListCellClassic,
 } from './StructuredList';
-import { useFeatureFlag } from '../FeatureFlags';
+import { createComponentToggle } from '../../internal/ComponentToggle';
 
-export function StructuredListWrapper(props) {
-  const enabled = useFeatureFlag('enable-v11-release');
-  if (enabled) {
-    return <StructuredListWrapperNext {...props} />;
-  }
-  return <StructuredListWrapperClassic {...props} />;
-}
-StructuredListWrapper.displayName = 'v11Switch(StructuredListWrapper)';
+export const StructuredListWrapper = createComponentToggle({
+  name: 'StructuredListWrapper',
+  next: StructuredListWrapperNext,
+  classic: StructuredListWrapperClassic,
+});
 
-export function StructuredListHead(props) {
-  const enabled = useFeatureFlag('enable-v11-release');
-  if (enabled) {
-    return <StructuredListHeadNext {...props} />;
-  }
-  return <StructuredListHeadClassic {...props} />;
-}
-StructuredListHead.displayName = 'v11Switch(StructuredListHead)';
+export const StructuredListHead = createComponentToggle({
+  name: 'StructuredListHead',
+  next: StructuredListHeadNext,
+  classic: StructuredListHeadClassic,
+});
 
-export function StructuredListInput(props) {
-  const enabled = useFeatureFlag('enable-v11-release');
-  if (enabled) {
-    return <StructuredListInputNext {...props} />;
-  }
-  return <StructuredListInputClassic {...props} />;
-}
-StructuredListInput.displayName = 'v11Switch(StructuredListInput)';
+export const StructuredListInput = createComponentToggle({
+  name: 'StructuredListInput',
+  next: StructuredListInputNext,
+  classic: StructuredListInputClassic,
+});
 
-export function StructuredListBody(props) {
-  const enabled = useFeatureFlag('enable-v11-release');
-  if (enabled) {
-    return <StructuredListBodyNext {...props} />;
-  }
-  return <StructuredListBodyClassic {...props} />;
-}
-StructuredListBody.displayName = 'v11Switch(StructuredListBody)';
+export const StructuredListBody = createComponentToggle({
+  name: 'StructuredListBody',
+  next: StructuredListBodyNext,
+  classic: StructuredListBodyClassic,
+});
 
-export function StructuredListRow(props) {
-  const enabled = useFeatureFlag('enable-v11-release');
-  if (enabled) {
-    return <StructuredListRowNext {...props} />;
-  }
-  return <StructuredListRowClassic {...props} />;
-}
-StructuredListRow.displayName = 'v11Switch(StructuredListRow)';
+export const StructuredListRow = createComponentToggle({
+  name: 'StructuredListRow',
+  next: StructuredListRowNext,
+  classic: StructuredListRowClassic,
+});
 
-export function StructuredListCell(props) {
-  const enabled = useFeatureFlag('enable-v11-release');
-  if (enabled) {
-    return <StructuredListCellNext {...props} />;
-  }
-  return <StructuredListCellClassic {...props} />;
-}
-StructuredListCell.displayName = 'v11Switch(StructuredListCell)';
+export const StructuredListCell = createComponentToggle({
+  name: 'StructuredListCell',
+  next: StructuredListCellNext,
+  classic: StructuredListCellClassic,
+});
 
 export { default as StructuredListSkeleton } from './StructuredList.Skeleton';

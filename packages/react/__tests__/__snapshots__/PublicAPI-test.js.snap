@@ -4038,11 +4038,26 @@ Map {
     },
     "render": [Function],
   },
-  "ToastNotification" => Object {},
-  "InlineNotification" => Object {},
-  "NotificationActionButton" => Object {},
-  "NotificationButton" => Object {},
-  "NotificationTextDetails" => Object {},
+  "ToastNotification" => Object {
+    "$$typeof": Symbol(react.forward_ref),
+    "render": [Function],
+  },
+  "InlineNotification" => Object {
+    "$$typeof": Symbol(react.forward_ref),
+    "render": [Function],
+  },
+  "NotificationActionButton" => Object {
+    "$$typeof": Symbol(react.forward_ref),
+    "render": [Function],
+  },
+  "NotificationButton" => Object {
+    "$$typeof": Symbol(react.forward_ref),
+    "render": [Function],
+  },
+  "NotificationTextDetails" => Object {
+    "$$typeof": Symbol(react.forward_ref),
+    "render": [Function],
+  },
   "NumberInput" => Object {
     "$$typeof": Symbol(react.forward_ref),
     "render": [Function],
@@ -4964,12 +4979,30 @@ Map {
       },
     },
   },
-  "StructuredListWrapper" => Object {},
-  "StructuredListHead" => Object {},
-  "StructuredListBody" => Object {},
-  "StructuredListRow" => Object {},
-  "StructuredListInput" => Object {},
-  "StructuredListCell" => Object {},
+  "StructuredListWrapper" => Object {
+    "$$typeof": Symbol(react.forward_ref),
+    "render": [Function],
+  },
+  "StructuredListHead" => Object {
+    "$$typeof": Symbol(react.forward_ref),
+    "render": [Function],
+  },
+  "StructuredListBody" => Object {
+    "$$typeof": Symbol(react.forward_ref),
+    "render": [Function],
+  },
+  "StructuredListRow" => Object {
+    "$$typeof": Symbol(react.forward_ref),
+    "render": [Function],
+  },
+  "StructuredListInput" => Object {
+    "$$typeof": Symbol(react.forward_ref),
+    "render": [Function],
+  },
+  "StructuredListCell" => Object {
+    "$$typeof": Symbol(react.forward_ref),
+    "render": [Function],
+  },
   "StructuredListSkeleton" => Object {
     "defaultProps": Object {
       "border": false,
@@ -6033,7 +6066,10 @@ Map {
       },
     },
   },
-  "Toggle" => Object {},
+  "Toggle" => Object {
+    "$$typeof": Symbol(react.forward_ref),
+    "render": [Function],
+  },
   "ToggleSmall" => Object {
     "defaultProps": Object {
       "defaultToggled": false,
