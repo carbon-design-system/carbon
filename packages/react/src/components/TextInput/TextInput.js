@@ -26,6 +26,7 @@ const TextInput = React.forwardRef(function TextInput(
     onChange,
     onClick,
     hideLabel,
+    disabled,
     invalid,
     invalidText,
     warn,
@@ -42,6 +43,7 @@ const TextInput = React.forwardRef(function TextInput(
   const normalizedProps = useNormalizedInputProps({
     id,
     readonly,
+    disabled,
     invalid,
     invalidText,
     warn,
@@ -57,12 +59,12 @@ const TextInput = React.forwardRef(function TextInput(
   const sharedTextInputProps = {
     id,
     onChange: (evt) => {
-      if (!other.disabled) {
+      if (!normalizedProps.disabled) {
         onChange(evt);
       }
     },
     onClick: (evt) => {
-      if (!other.disabled) {
+      if (!normalizedProps.disabled) {
         onClick(evt);
       }
     },
@@ -71,6 +73,7 @@ const TextInput = React.forwardRef(function TextInput(
     ref,
     className: textInputClasses,
     title: placeholder,
+    disabled: normalizedProps.disabled,
     readOnly: readonly,
     ...other,
   };
@@ -85,12 +88,12 @@ const TextInput = React.forwardRef(function TextInput(
   );
   const labelClasses = classNames(`${prefix}--label`, {
     [`${prefix}--visually-hidden`]: hideLabel,
-    [`${prefix}--label--disabled`]: other.disabled,
+    [`${prefix}--label--disabled`]: normalizedProps.disabled,
     [`${prefix}--label--inline`]: inline,
     [`${prefix}--label--inline--${size}`]: inline && !!size,
   });
   const helperTextClasses = classNames(`${prefix}--form__helper-text`, {
-    [`${prefix}--form__helper-text--disabled`]: other.disabled,
+    [`${prefix}--form__helper-text--disabled`]: normalizedProps.disabled,
     [`${prefix}--form__helper-text--inline`]: inline,
   });
   const fieldOuterWrapperClasses = classNames(

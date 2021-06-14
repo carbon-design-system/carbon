@@ -19,6 +19,7 @@ const { prefix } = settings;
  * @typedef {object} InputProps
  * @property {string} id - The input's id
  * @property {boolean} readonly - Whether the input should be readonly
+ * @property {boolean} disabled - Whether the input should be disabled
  * @property {boolean} invalid - Whether the input should be marked as invalid
  * @property {string} invalidText - The validation message displayed in case the input is considered invalid
  * @property {boolean} warn - Whether the input should be in warning state
@@ -27,6 +28,7 @@ const { prefix } = settings;
 
 /**
  * @typedef {object} NormalizedInputProps
+ * @property {boolean} disabled - Whether the input is disabled
  * @property {boolean} invalid - Whether the input is invalid (takes precedence over warn)
  * @property {string} invalidId - The invalid message's id
  * @property {boolean} warn - Whether the input is in warning state
@@ -42,6 +44,8 @@ const { prefix } = settings;
  * message is passed as "validation". If the input should be accompanied by an icon
  * (to visually represent a readonly, invalid or warning state), the appropriate icon
  * is passed as "icon".
+ * It also ensure that neither "invalid", nor "warn", nor "disabled" are enabled when
+ * "readonly" is passed as "readonly" takes precedence over these variants.
  *
  * @param {InputProps} props - The props passed to the component
  * @returns {NormalizedInputProps}
@@ -49,12 +53,14 @@ const { prefix } = settings;
 export function useNormalizedInputProps({
   id,
   readonly,
+  disabled,
   invalid,
   invalidText,
   warn,
   warnText,
 }) {
   const normalizedProps = {
+    disabled: !readonly && disabled,
     invalid: !readonly && invalid,
     invalidId: `${id}-error-msg`,
     warn: !readonly && !invalid && warn,
