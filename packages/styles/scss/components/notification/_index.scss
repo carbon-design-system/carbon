@@ -1,0 +1,13 @@
+//
+// Copyright IBM Corp. 2018, 2018
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root diarectory of this source tree.
+//
+
+@forward '../../colors';
+@forward 'tokens';
+@forward 'inline-notification';
+@use 'inline-notification';
+
+@include inline-notification.inline-notification;
