@@ -16056,14 +16056,14 @@
   sizes:
     - 32
 - name: wifi
-  friendly_name: WiFi
+  friendly_name: Wifi
   aliases:
     - wifi
     - internet
   sizes:
     - 32
 - name: wifi--off
-  friendly_name: WiFi off
+  friendly_name: Wifi off
   sizes:
     - 32
   aliases:
