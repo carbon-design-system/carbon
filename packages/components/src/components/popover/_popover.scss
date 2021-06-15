@@ -1,4 +1,4 @@
- //
+//
 // Copyright IBM Corp. 2016, 2018
 //
 // This source code is licensed under the Apache-2.0 license found in the
@@ -53,22 +53,24 @@
     position: relative;
     width: max-content;
     max-width: rem(368px);
+    padding: 1rem 0;
     background-color: $layer;
     border-radius: 2px;
     color: $text-primary;
   }
 
-
   .#{$prefix}--popover--header {
     @include type-style('productive-heading-01');
+
+    padding: 0 1rem;
     color: $text-01;
-    padding: 0rem 1rem 0rem 1rem;
   }
 
   .#{$prefix}--popover--body {
     @include type-style('body-short-01');
+
+    padding: 0 1rem;
     color: $text-01;
-    padding: 0rem 1rem 0rem 1rem;
   }
 
   .#{$prefix}--popover--light .#{$prefix}--popover--content {
@@ -317,14 +319,10 @@
     transform: translateX(100%);
   }
 
-  .#{$prefix}--popover--content {
-    padding: 1rem 0 1rem 0;
-  }
-
   .#{$prefix}--popover--divider {
     padding-top: 1rem;
-    margin-bottom: 1rem;
     border-bottom: 1px $ui-03 solid;
+    margin-bottom: 1rem;
   }
 }
 
@@ -346,8 +344,8 @@
 }
 
 .#{$prefix}--popover--footer {
-  padding-left: 1rem;
   padding-right: 1rem;
+  padding-left: 1rem;
 }
 
 .#{$prefix}--popover--footer-divider {

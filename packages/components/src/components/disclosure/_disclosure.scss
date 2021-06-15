@@ -12,8 +12,8 @@
 /// @group disclosure
 @mixin disclosure {
   .#{$prefix}--disclosure {
-    display: inline-block;
     position: relative;
+    display: inline-block;
   }
 
   /// Examples

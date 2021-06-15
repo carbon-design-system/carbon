@@ -84,7 +84,8 @@ export const WithHeader = () => {
         />
         <Popover {...contentProps} align="top-left" caret={true} open={open}>
           <PopoverContent>
-            <PopoverHeader hasDivider={boolean('show header divider (hasDivider)', false)}>
+            <PopoverHeader
+              hasDivider={boolean('show header divider (hasDivider)', false)}>
               This is a heading on Disclosure
             </PopoverHeader>
             <PopoverBody>
@@ -130,7 +131,8 @@ export const WithFooter = () => {
               nulla pariatur. Excepteur sint occaecat cupidatat non proident,
               sunt in culpa qui officia deserunt mollit anim id est laborum.
             </PopoverBody>
-            <PopoverFooter hasDivider={boolean('show footer divider (hasDivider)', false)}>
+            <PopoverFooter
+              hasDivider={boolean('show footer divider (hasDivider)', false)}>
               <Link href="https://www.carbondesignsystem.com">Linky Link</Link>
             </PopoverFooter>
           </PopoverContent>

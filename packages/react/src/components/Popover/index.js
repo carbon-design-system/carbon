@@ -145,7 +145,6 @@ const PopoverBody = React.forwardRef(function PopoverBody(
   { as: BaseComponent = 'div', className, children, ...rest },
   ref
 ) {
-
   return (
     <BaseComponent
       {...rest}
@@ -179,7 +178,6 @@ const PopoverHeader = React.forwardRef(function PopoverHeader(
   { as: BaseComponent = 'div', className, children, hasDivider, ...rest },
   ref
 ) {
-
   return (
     <>
       <BaseComponent
@@ -188,7 +186,7 @@ const PopoverHeader = React.forwardRef(function PopoverHeader(
         ref={ref}>
         {children}
       </BaseComponent>
-      {hasDivider ? <PopoverDivider/> : null}
+      {hasDivider ? <PopoverDivider /> : null}
     </>
   );
 });
@@ -221,7 +219,6 @@ const PopoverDivider = React.forwardRef(function PopoverDivider(
   { as: BaseComponent = 'div', className, children, ...rest },
   ref
 ) {
-
   return (
     <BaseComponent
       {...rest}
@@ -233,37 +230,39 @@ const PopoverDivider = React.forwardRef(function PopoverDivider(
 });
 
 PopoverDivider.propTypes = {
-   /**
+  /**
    * Provide a custom element or component to render the top-level node for the
    * component.
    */
-    as: PropTypes.oneOfType([PropTypes.string, PropTypes.elementType]),
+  as: PropTypes.oneOfType([PropTypes.string, PropTypes.elementType]),
 
-    /**
-    * Provide elements to be rendered inside of the component
-    */
-    children: PropTypes.node,
-  
-    /**
-    * Provide a custom class name to be added to the outermost node in the
-    * component
-    */
-    className: PropTypes.string,
-}
+  /**
+   * Provide elements to be rendered inside of the component
+   */
+  children: PropTypes.node,
+
+  /**
+   * Provide a custom class name to be added to the outermost node in the
+   * component
+   */
+  className: PropTypes.string,
+};
 
 const PopoverFooter = React.forwardRef(function PopoverFooter(
   { as: BaseComponent = 'footer', className, children, hasDivider, ...rest },
   ref
 ) {
-
   const classNames = cx(className, {
     [`${prefix}--popover--footer-divider`]: !hasDivider,
   });
 
   return (
     <>
-      {hasDivider ? <PopoverDivider/> : null}
-      <BaseComponent {...rest} className={cx(`${prefix}--popover--footer`, classNames)} ref={ref}>
+      {hasDivider ? <PopoverDivider /> : null}
+      <BaseComponent
+        {...rest}
+        className={cx(`${prefix}--popover--footer`, classNames)}
+        ref={ref}>
         {children}
       </BaseComponent>
     </>
@@ -291,7 +290,14 @@ PopoverFooter.propTypes = {
   /**
    * Specify whether the Popover footer has a divider or not.
    */
-    hasDivider: PropTypes.boolean,
+  hasDivider: PropTypes.boolean,
 };
 
-export { Popover, PopoverContent, PopoverHeader, PopoverFooter, PopoverBody, PopoverDivider };
+export {
+  Popover,
+  PopoverContent,
+  PopoverHeader,
+  PopoverFooter,
+  PopoverBody,
+  PopoverDivider,
+};
