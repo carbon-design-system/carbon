@@ -20,7 +20,7 @@ const { prefix } = settings;
 
 describe('NotificationButton', () => {
   describe('Renders as expected', () => {
-    const wrapper = shallow(<NotificationButton className="some-class" />);
+    const wrapper = mount(<NotificationButton className="some-class" />);
 
     it('renders given className', () => {
       expect(wrapper.hasClass('some-class')).toBe(true);
@@ -47,6 +47,7 @@ describe('NotificationButton', () => {
 
     describe('When notificationType equals "toast"', () => {
       it('button should have correct className by default', () => {
+        const wrapper = shallow(<NotificationButton className="some-class" />);
         expect(
           wrapper.hasClass(`${prefix}--toast-notification__close-button`)
         ).toBe(true);
@@ -62,6 +63,7 @@ describe('NotificationButton', () => {
 
     describe('When notificationType equals "inline"', () => {
       it('button should have correct className', () => {
+        const wrapper = shallow(<NotificationButton className="some-class" />);
         wrapper.setProps({ notificationType: 'inline' });
         expect(
           wrapper.hasClass(`${prefix}--inline-notification__close-button`)
@@ -69,6 +71,12 @@ describe('NotificationButton', () => {
       });
 
       it('icon should have correct className', () => {
+        const wrapper = mount(
+          <NotificationButton
+            className="some-class"
+            notificationType="inline"
+          />
+        );
         const icon = wrapper.find(Close);
         expect(
           icon.hasClass(`${prefix}--inline-notification__close-icon`)

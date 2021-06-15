@@ -7,7 +7,7 @@
 
 import React from 'react';
 import { mount } from 'enzyme';
-import { Document, Folder } from '@carbon/icons-react/next';
+import { CaretDown, Document, Folder } from '@carbon/icons-react/next';
 import { settings } from 'carbon-components';
 import TreeView, { TreeNode } from './';
 
@@ -89,7 +89,7 @@ describe('TreeView', () => {
 
   describe('Tree node expansion', () => {
     it('Caret icon should not render in leaf nodes', () => {
-      expect(wrapper.find('ForwardRef(CaretDown16)').length).toBe(2);
+      expect(wrapper.find(CaretDown).length).toBe(2);
     });
   });
 });
