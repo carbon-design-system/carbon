@@ -48,7 +48,7 @@ export const Default = () => {
           hasIconOnly
           {...buttonProps}
         />
-        <Popover {...contentProps} align="top-left" caret={true} open={open}>
+        <Popover {...contentProps} align="bottom-left" caret={true} open={open}>
           <PopoverContent>
             <PopoverBody>
               Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
@@ -82,7 +82,7 @@ export const WithHeader = () => {
           hasIconOnly
           {...buttonProps}
         />
-        <Popover {...contentProps} align="top-left" caret={true} open={open}>
+        <Popover {...contentProps} align="bottom-left" caret={true} open={open}>
           <PopoverContent>
             <PopoverHeader
               hasDivider={boolean('show header divider (hasDivider)', false)}>
@@ -120,7 +120,7 @@ export const WithFooter = () => {
           hasIconOnly
           {...buttonProps}
         />
-        <Popover {...contentProps} align="top-left" caret={true} open={open}>
+        <Popover {...contentProps} align="bottom-left" caret={true} open={open}>
           <PopoverContent>
             <PopoverBody>
               Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
