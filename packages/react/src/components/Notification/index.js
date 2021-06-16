@@ -5,7 +5,6 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React from 'react';
 import {
   NotificationActionButton as NotificationActionButtonNext,
   NotificationButton as NotificationButtonNext,
@@ -19,44 +18,33 @@ import {
   ToastNotification as ToastNotificationClassic,
   InlineNotification as InlineNotificationClassic,
 } from './Notification';
-import { useFeatureFlag } from '../FeatureFlags';
+import { createComponentToggle } from '../../internal/ComponentToggle';
 
-export function NotificationActionButton(props) {
-  const enabled = useFeatureFlag('enable-v11-release');
-  if (enabled) {
-    return <NotificationActionButtonNext {...props} />;
-  }
-  return <NotificationActionButtonClassic {...props} />;
-}
+export const NotificationActionButton = createComponentToggle({
+  name: 'NotificationActionButton',
+  next: NotificationActionButtonNext,
+  classic: NotificationActionButtonClassic,
+});
 
-export function NotificationTextDetails(props) {
-  const enabled = useFeatureFlag('enable-v11-release');
-  if (enabled) {
-    return null;
-  }
-  return <NotificationTextDetailsClassic {...props} />;
-}
+export const NotificationTextDetails = createComponentToggle({
+  name: 'NotificationTextDetails',
+  classic: NotificationTextDetailsClassic,
+});
 
-export function NotificationButton(props) {
-  const enabled = useFeatureFlag('enable-v11-release');
-  if (enabled) {
-    return <NotificationButtonNext {...props} />;
-  }
-  return <NotificationButtonClassic {...props} />;
-}
+export const NotificationButton = createComponentToggle({
+  name: 'NotificationButton',
+  next: NotificationButtonNext,
+  classic: NotificationButtonClassic,
+});
 
-export function ToastNotification(props) {
-  const enabled = useFeatureFlag('enable-v11-release');
-  if (enabled) {
-    return <ToastNotificationNext {...props} />;
-  }
-  return <ToastNotificationClassic {...props} />;
-}
+export const ToastNotification = createComponentToggle({
+  name: 'ToastNotification',
+  next: ToastNotificationNext,
+  classic: ToastNotificationClassic,
+});
 
-export function InlineNotification(props) {
-  const enabled = useFeatureFlag('enable-v11-release');
-  if (enabled) {
-    return <InlineNotificationNext {...props} />;
-  }
-  return <InlineNotificationClassic {...props} />;
-}
+export const InlineNotification = createComponentToggle({
+  name: 'InlineNotification',
+  next: InlineNotificationNext,
+  classic: InlineNotificationClassic,
+});

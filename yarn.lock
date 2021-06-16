@@ -1907,6 +1907,7 @@ __metadata:
     "@carbon/cli": ^10.24.0
     "@carbon/icon-build-helpers": ^0.22.0
     rimraf: ^3.0.2
+    svgson: ^5.2.1
   languageName: unknown
   linkType: soft
 
@@ -13696,6 +13697,16 @@ __metadata:
   languageName: node
   linkType: hard
 
+"deep-rename-keys@npm:^0.2.1":
+  version: 0.2.1
+  resolution: "deep-rename-keys@npm:0.2.1"
+  dependencies:
+    kind-of: ^3.0.2
+    rename-keys: ^1.1.2
+  checksum: 34c838a7ee375e9579be2ba1de59a5ec5aef46bee96bb08cffdd8b6b3887d941bbfce0caccf3ecd7c5a74e6f3a70c7df0b469e732a97e5849a5149ddc1e2a062
+  languageName: node
+  linkType: hard
+
 "deepmerge@npm:^4.2.2":
   version: 4.2.2
   resolution: "deepmerge@npm:4.2.2"
@@ -15879,6 +15890,13 @@ __metadata:
   version: 1.2.0
   resolution: "eventemitter3@npm:1.2.0"
   checksum: 1ce3c91340f5038bd611c31a32c69167ccc598049a6844f58400583b4d70f5c0c2d13a201c763624f81de461498fe2767d0bfadcb2c0c417e37556a481b00c1d
+  languageName: node
+  linkType: hard
+
+"eventemitter3@npm:^2.0.0":
+  version: 2.0.3
+  resolution: "eventemitter3@npm:2.0.3"
+  checksum: dfbf4a07144afea0712d8e6a7f30ae91beb7c12c36c3d480818488aafa437d9a331327461f82c12dfd60a4fbad502efc97f684089cda02809988b84a23630752
   languageName: node
   linkType: hard
 
@@ -26411,6 +26429,16 @@ __metadata:
   languageName: node
   linkType: hard
 
+"omit-deep@npm:0.3.0":
+  version: 0.3.0
+  resolution: "omit-deep@npm:0.3.0"
+  dependencies:
+    is-plain-object: ^2.0.1
+    unset-value: ^0.1.1
+  checksum: ca603591af98f717ee4e4ae199778d386304f80072164fc1fb9c27abb011845faa27ffb32e7fa4a240698a4d54822526059af74f12f4f73315ecd7f03825d590
+  languageName: node
+  linkType: hard
+
 "on-finished@npm:~2.3.0":
   version: 2.3.0
   resolution: "on-finished@npm:2.3.0"
@@ -30411,6 +30439,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"rename-keys@npm:^1.1.2":
+  version: 1.2.0
+  resolution: "rename-keys@npm:1.2.0"
+  checksum: 9d8e5ca3d1ae3fe6c0d7319a3fd80ded6ca34651e85bff27604982dcc750aed28d1a621374224a9c9072083769f5eab1fd86d1d5a53f54f96c7705c18267227b
+  languageName: node
+  linkType: hard
+
 "renderkid@npm:^2.0.1":
   version: 2.0.3
   resolution: "renderkid@npm:2.0.3"
@@ -33916,6 +33951,17 @@ __metadata:
   languageName: node
   linkType: hard
 
+"svgson@npm:^5.2.1":
+  version: 5.2.1
+  resolution: "svgson@npm:5.2.1"
+  dependencies:
+    deep-rename-keys: ^0.2.1
+    omit-deep: 0.3.0
+    xml-reader: 2.4.3
+  checksum: aa5d80d6240f5cac5ad72fe305350af9d925b5e854aa60c234110f60b69a33f03ea8b69915dc1a12c08c0b2eb332a22504b75f0889e0c4939d6c34562c1833e8
+  languageName: node
+  linkType: hard
+
 "symbol-observable@npm:1.0.1":
   version: 1.0.1
   resolution: "symbol-observable@npm:1.0.1"
@@ -35578,6 +35624,16 @@ __metadata:
   version: 1.1.1
   resolution: "unquote@npm:1.1.1"
   checksum: 71745867d09cba44ba2d26cb71d6dda7045a98b14f7405df4faaf2b0c90d24703ad027a9d90ba9a6e0d096de2c8d56f864fd03f1c0498c0b7a3990f73b4c8f5f
+  languageName: node
+  linkType: hard
+
+"unset-value@npm:^0.1.1":
+  version: 0.1.2
+  resolution: "unset-value@npm:0.1.2"
+  dependencies:
+    has-value: ^0.3.1
+    isobject: ^3.0.0
+  checksum: 56c7de1ee6b726002cc67b82954ec31b795836c2312d4d3d114a500eab5f632e1d3d6f5a164aff1ed90d7ffa94a009c452f6357f1f7d23bc444d489f622aeb9d
   languageName: node
   linkType: hard
 
@@ -37251,10 +37307,29 @@ __metadata:
   languageName: node
   linkType: hard
 
+"xml-lexer@npm:^0.2.2":
+  version: 0.2.2
+  resolution: "xml-lexer@npm:0.2.2"
+  dependencies:
+    eventemitter3: ^2.0.0
+  checksum: ec9d3f8cbc61ed93b7fc1052d05b23cfe5bfe0064a1146f89bc3a9cfbb0c80c6c40d795cc253b745cdbba0607271d14fa57d496a7754fe350a06a8fceae23359
+  languageName: node
+  linkType: hard
+
 "xml-name-validator@npm:^3.0.0":
   version: 3.0.0
   resolution: "xml-name-validator@npm:3.0.0"
   checksum: b3ac459afed783c285bb98e4960bd1f3ba12754fd4f2320efa0f9181ca28928c53cc75ca660d15d205e81f92304419afe94c531c7cfb3e0649aa6d140d53ecb0
+  languageName: node
+  linkType: hard
+
+"xml-reader@npm:2.4.3":
+  version: 2.4.3
+  resolution: "xml-reader@npm:2.4.3"
+  dependencies:
+    eventemitter3: ^2.0.0
+    xml-lexer: ^0.2.2
+  checksum: d4b4ca6eb2d61c17d2df2be73dd82a393ae88a4cd10c5152f9908bf3e3bafa5562ce4b63df31ef198bc9a7c8447d4c277c98622438da5b32abf55c2f15984bfa
   languageName: node
   linkType: hard
 
