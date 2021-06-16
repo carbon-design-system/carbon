@@ -2335,7 +2335,7 @@ exports[`DataTable should render 1`] = `
                 >
                   <div
                     aria-labelledby="custom-id-search"
-                    className="bx--search bx--toolbar-search-container-persistent"
+                    className="bx--search bx--search--xl bx--toolbar-search-container-persistent"
                     role="search"
                   >
                     <div
@@ -3396,7 +3396,7 @@ exports[`DataTable sticky header should render 1`] = `
                 >
                   <div
                     aria-labelledby="custom-id-search"
-                    className="bx--search bx--toolbar-search-container-persistent"
+                    className="bx--search bx--search--xl bx--toolbar-search-container-persistent"
                     role="search"
                   >
                     <div
