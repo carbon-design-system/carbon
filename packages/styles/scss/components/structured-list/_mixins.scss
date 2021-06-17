@@ -5,6 +5,20 @@
 // LICENSE file in the root directory of this source tree.
 //
 
+@use '../../spacing' as *;
+
+// Structured List
+
+/// @type Number
+/// @access public
+/// @group structured-list
+$structured-list-padding: 2rem !default;
+
+/// @type Value
+/// @access public
+/// @group structured-list
+$structured-list-text-transform: none !default;
+
 /// Used only for `.#{prefix}--structured-list--condensed`
 /// @access private
 /// @group structured-list
@@ -33,8 +47,7 @@
 /// @group structured-list
 /// @param {Number} $padding [$structured-list-padding]
 @mixin padding-th($padding: $structured-list-padding) {
-  padding: $carbon--spacing-05 $carbon--spacing-03 $carbon--spacing-03
-    $carbon--spacing-03;
+  padding: $spacing-05 $spacing-03 $spacing-03 $spacing-03;
 }
 
 /// Used only for normal structured-list
@@ -42,6 +55,5 @@
 /// @group structured-list
 /// @param {Number} $padding [$structured-list-padding]
 @mixin padding-td($padding: $structured-list-padding) {
-  padding: $carbon--spacing-05 $carbon--spacing-03 $carbon--spacing-06
-    $carbon--spacing-03;
+  padding: $spacing-05 $spacing-03 $spacing-06 $spacing-03;
 }
