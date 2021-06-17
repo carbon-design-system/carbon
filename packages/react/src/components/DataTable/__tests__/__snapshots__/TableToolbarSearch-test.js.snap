@@ -24,7 +24,7 @@ exports[`DataTable.TableToolbarSearch should render 1`] = `
   >
     <div
       aria-labelledby="custom-id-search"
-      className="bx--search custom-class bx--toolbar-search-container-expandable"
+      className="bx--search bx--search--xl custom-class bx--toolbar-search-container-expandable"
       role="search"
     >
       <div

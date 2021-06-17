@@ -177,7 +177,7 @@ export default class Search extends Component {
       labelText,
       closeButtonLabelText,
       small,
-      size = !small ? '' : 'sm',
+      size = !small ? 'xl' : 'sm',
       light,
       disabled,
       onChange,
