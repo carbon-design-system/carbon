@@ -9196,7 +9196,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"axe-core@npm:^4.0.2, axe-core@npm:^4.1.1":
+"axe-core@npm:^4.0.2, axe-core@npm:^4.2.2":
   version: 4.2.2
   resolution: "axe-core@npm:4.2.2"
   checksum: e8370681065bd8854d809ed350d75d79a63cfbbb1350766979a2395e171f12a071532a9d66f12d5eda9043ed8776873b8db8d5fe726d90d1be57a324d9679ef8
@@ -21397,7 +21397,7 @@ __metadata:
     "@babel/preset-react": ^7.13.13
     "@babel/runtime": ^7.14.0
     accessibility-checker: ^3.1.1
-    axe-core: ^4.1.1
+    axe-core: ^4.2.2
     babel-jest: ^26.6.3
     chalk: ^4.1.1
     enzyme: ^3.10.0
