@@ -13,3 +13,8 @@
 @use 'link';
 @use 'list';
 @use 'loading';
+@use 'data-table';
+@use 'data-table/action';
+@use 'data-table/expandable';
+@use 'data-table/skeleton';
+@use 'data-table/sort';
