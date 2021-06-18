@@ -12,7 +12,7 @@
 @use '../../breakpoint' as *;
 @use '../../theme' as *;
 @use '../../utilities/component-reset';
-@use '../../utilities/convert';
+@use '../../utilities/convert' as *;
 @use '../../utilities/focus-outline' as *;
 @use '../../utilities/high-contrast-mode' as *;
 
@@ -25,12 +25,12 @@
   }
 
   .#{$prefix}--pagination {
-    @include reset;
+    @include component-reset.reset;
     @include type-style('body-short-01');
 
     display: flex;
     width: calc(100% - 1px);
-    min-height: rem(48px);
+    min-height: 3rem;
     align-items: center;
     justify-content: space-between;
     border-top: 1px solid $border-subtle;
@@ -73,11 +73,14 @@
   }
 
   .#{$prefix}--pagination .#{$prefix}--select-input {
-    @include type-style('body-short-01');
-
     width: auto;
     min-width: auto;
-    height: rem(48px);
+    height: 3rem;
+  }
+
+  .#{$prefix}--pagination
+    .#{$prefix}--select--inline
+    .#{$prefix}--select-input {
     padding: 0 2.25rem 0 $spacing-05;
   }
 
@@ -93,7 +96,7 @@
   .#{$prefix}--pagination
     .#{$prefix}--select__item-count
     .#{$prefix}--select-input {
-    // border-right: $spacing-4xs solid $border-subtle;
+    border-right: 1px solid $border-subtle;
   }
 
   .#{$prefix}--pagination
@@ -105,7 +108,7 @@
   .#{$prefix}--pagination__left,
   .#{$prefix}--pagination__right {
     display: flex;
-    height: rem(48px);
+    height: 3rem;
     align-items: center;
   }
 
@@ -149,7 +152,7 @@
 
   .#{$prefix}--pagination__button,
   .#{$prefix}--btn--ghost.#{$prefix}--pagination__button {
-    @include reset;
+    @include component-reset.reset;
 
     display: flex;
     width: $spacing-09;
