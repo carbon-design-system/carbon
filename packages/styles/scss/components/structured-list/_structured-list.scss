@@ -7,7 +7,7 @@
 
 @use '../../config' as *;
 @use "../../type" as *;
-@use '../../motion' as *;
+@use '../../motion';
 @use '../../theme' as *;
 @use "../../utilities/focus-outline" as *;
 @use "../../utilities/skeleton" as *;
@@ -79,7 +79,8 @@
   .#{$prefix}--structured-list-row {
     display: table-row;
     border-bottom: 1px solid $border-subtle;
-    transition: background-color $duration--fast-02 motion(standard, productive);
+    transition: background-color motion.$duration-fast-02
+      motion(standard, productive);
   }
 
   .#{$prefix}--structured-list--selection
@@ -158,7 +159,7 @@
       border-top: 1px solid $border-subtle;
     }
 
-    transition: color $duration--fast-02 motion(standard, productive);
+    transition: color motion.$duration-fast-02 motion(standard, productive);
   }
 
   .#{$prefix}--structured-list-content--nowrap {
@@ -168,7 +169,7 @@
   .#{$prefix}--structured-list-svg {
     display: inline-block;
     fill: transparent;
-    transition: all $duration--fast-02 motion(standard, productive);
+    transition: all motion.$duration-fast-02 motion(standard, productive);
     vertical-align: middle;
   }
 
