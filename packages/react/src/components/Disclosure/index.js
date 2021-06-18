@@ -5,10 +5,20 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { useState } from 'react';
+import { useRef, useState } from 'react';
+import { useOutsideClick } from '../../internal/useOutsideClick';
+
 
 function useDisclosure(id) {
   const [open, setOpen] = useState(false);
+  const ref = useRef(null); 
+
+  useOutsideClick(ref, () => {
+    if (open === true) {
+      setOpen(false);
+    }
+  });
+
   const buttonProps = {
     'aria-controls': id,
     'aria-expanded': open,
@@ -18,6 +28,7 @@ function useDisclosure(id) {
   };
   const contentProps = {
     id,
+    ref
   };
 
   return {
