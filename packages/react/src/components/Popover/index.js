@@ -13,7 +13,7 @@ import './story.scss';
 
 const { prefix } = settings;
 
-function Popover({
+const Popover = React.forwardRef(function Popover({
   as: BaseComponent = 'div',
   caret = true,
   className: customClassName,
@@ -24,7 +24,7 @@ function Popover({
   open,
   relative,
   ...rest
-}) {
+}, ref) {
   const className = cx({
     [`${prefix}--popover`]: true,
     [`${prefix}--popover--caret`]: caret,
@@ -37,11 +37,11 @@ function Popover({
   });
 
   return (
-    <BaseComponent {...rest} className={className}>
+    <BaseComponent {...rest} className={className} ref={ref}>
       {children}
     </BaseComponent>
   );
-}
+});
 
 Popover.propTypes = {
   /**
