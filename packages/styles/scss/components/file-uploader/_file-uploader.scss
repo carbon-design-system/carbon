@@ -19,9 +19,6 @@
 @use '../form';
 @use '../loading';
 
-// TODO - how should we resolve this? Should we keep it? Is the '@use type' above enough?
-// @use '../../globals/scss/vendor/@carbon/elements/scss/type/styles';
-
 /// File uploader styles
 /// @access public
 /// @group file-uploader
