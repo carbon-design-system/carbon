@@ -19,7 +19,7 @@
 @use '../form';
 
 /// Select styles
-/// @access private
+/// @access public
 /// @group select
 @mixin select {
   .#{$prefix}--select {
