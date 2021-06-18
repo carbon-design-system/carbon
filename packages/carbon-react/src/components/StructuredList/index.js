@@ -5,9 +5,11 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-export { StructuredListWrapper,
+export {
+  StructuredListWrapper,
   StructuredListHead,
   StructuredListBody,
   StructuredListRow,
   StructuredListInput,
-  StructuredListCell } from 'carbon-components-react';
+  StructuredListCell,
+} from 'carbon-components-react';
