@@ -27,19 +27,19 @@
     );
 
     display: inline-flex;
-    align-items: center;
-    justify-content: center;
     // ensures tag stays pill shaped;
     min-width: rem(32px);
     // restricts size of contained elements
     max-width: 100%;
     min-height: rem(24px);
-    margin: $carbon--spacing-02;
+    align-items: center;
+    justify-content: center;
     padding: $carbon--spacing-02 $carbon--spacing-03;
-    vertical-align: middle;
-    word-break: break-word;
+    margin: $carbon--spacing-02;
     border-radius: rem(15px);
     cursor: default;
+    vertical-align: middle;
+    word-break: break-word;
 
     &:not(:first-child) {
       margin-left: 0;
@@ -127,13 +127,17 @@
   }
 
   .#{$prefix}--tag--high-contrast {
-    @include tag-theme($inverse-02, $inverse-01, $inverse-hover-ui);
+    @include tag-theme(
+      $background-inverse,
+      $text-inverse,
+      $background-inverse-hover
+    );
   }
 
   .#{$prefix}--tag--disabled,
   .#{$prefix}--tag--filter.#{$prefix}--tag--disabled,
   .#{$prefix}--tag--interactive.#{$prefix}--tag--disabled {
-    @include tag-theme($disabled-01, $disabled-02);
+    @include tag-theme($layer-disabled, $text-disabled);
 
     &:hover {
       cursor: not-allowed;
@@ -141,15 +145,15 @@
   }
 
   .#{$prefix}--tag__label {
-    max-width: 100%;
     overflow: hidden;
-    white-space: nowrap;
+    max-width: 100%;
     text-overflow: ellipsis;
+    white-space: nowrap;
   }
 
   .#{$prefix}--tag--interactive:focus {
-    outline: none;
     box-shadow: inset 0 0 0 1px $focus;
+    outline: none;
   }
 
   .#{$prefix}--tag--interactive:hover {
@@ -174,17 +178,17 @@
 
   .#{$prefix}--tag__close-icon {
     display: flex;
+    width: rem(24px);
+    height: rem(24px);
     flex-shrink: 0;
     align-items: center;
     justify-content: center;
-    width: rem(24px);
-    height: rem(24px);
-    margin: 0 0 0 rem(2px);
     padding: 0;
-    color: currentColor;
-    background-color: transparent;
     border: 0;
+    margin: 0 0 0 rem(2px);
+    background-color: transparent;
     border-radius: 50%;
+    color: currentColor;
     cursor: pointer;
     transition: background-color $duration--fast-01 motion(standard, productive),
       box-shadow $duration--fast-01 motion(standard, productive);
@@ -194,14 +198,14 @@
   }
 
   .#{$prefix}--tag__custom-icon {
-    flex-shrink: 0;
     width: rem(16px);
     height: rem(16px);
-    margin-right: $spacing-02;
+    flex-shrink: 0;
     padding: 0;
-    color: currentColor;
-    background-color: transparent;
     border: 0;
+    margin-right: $spacing-02;
+    background-color: transparent;
+    color: currentColor;
     outline: none;
 
     svg {
@@ -215,19 +219,12 @@
 
   .#{$prefix}--tag__close-icon:focus {
     border-radius: 50%;
-    outline: none;
     box-shadow: inset 0 0 0 1px $focus;
-
-    // Windows, Firefox HCM Fix
-    @media screen and (-ms-high-contrast: active),
-      screen and (prefers-contrast) {
-      // `ButtonText` is a CSS2 system color to help improve colors in HCM
-      outline: 1px solid ButtonText;
-    }
+    outline: none;
   }
 
   .#{$prefix}--tag--high-contrast .#{$prefix}--tag__close-icon:focus {
-    box-shadow: inset 0 0 0 1px $inverse-focus-ui;
+    box-shadow: inset 0 0 0 1px $focus-inverse;
   }
 
   .#{$prefix}--tag--filter.#{$prefix}--tag--disabled
@@ -236,7 +233,7 @@
   }
 
   .#{$prefix}--tag--filter.#{$prefix}--tag--disabled svg {
-    fill: $disabled-02;
+    fill: $icon-disabled;
   }
 
   // small tags
@@ -258,10 +255,13 @@
   // Skeleton state
   .#{$prefix}--tag.#{$prefix}--skeleton {
     @include skeleton;
-    @include tag-theme($bg-color: $skeleton-01, $text-color: $text-01);
+    @include tag-theme(
+      $bg-color: $skeleton-background,
+      $text-color: $text-primary
+    );
 
-    width: rem(60px);
     overflow: hidden;
+    width: rem(60px);
 
     // Safari specific bug (#7672)
     @media not all and (min-resolution: 0.001dpcm) {
@@ -270,6 +270,22 @@
       }
     }
   }
+
+  // Windows HCM fix
+  /* stylelint-disable */
+  .#{$prefix}--tag {
+    @include high-contrast-mode('outline');
+  }
+
+  .#{$prefix}--tag__close-icon svg,
+  .#{$prefix}--tag__custom-icon svg {
+    @include high-contrast-mode('icon-fill');
+  }
+
+  .#{$prefix}--tag__close-icon:focus {
+    @include high-contrast-mode('focus');
+  }
+  /* stylelint-enable */
 }
 
 @include exports('tags') {

@@ -102,6 +102,7 @@ export const spacing09 = miniUnits(6);
 export const spacing10 = miniUnits(8);
 export const spacing11 = miniUnits(10);
 export const spacing12 = miniUnits(12);
+export const spacing13 = miniUnits(20);
 export const spacing = [
   spacing01,
   spacing02,
@@ -115,6 +116,7 @@ export const spacing = [
   spacing10,
   spacing11,
   spacing12,
+  spacing13,
 ];
 
 // Fluid spacing
@@ -130,6 +132,7 @@ export const fluidSpacing = [
 ];
 
 // Layout
+// Deprecated -- Remove in v11
 export const layout01 = miniUnits(2);
 export const layout02 = miniUnits(3);
 export const layout03 = miniUnits(4);
@@ -160,6 +163,20 @@ export const container = [
   container04,
   container05,
 ];
+export const sizeXSmall = rem(24);
+export const sizeSmall = rem(32);
+export const sizeMedium = rem(40);
+export const sizeLarge = rem(48);
+export const sizeXLarge = rem(64);
+export const size2XLarge = rem(80);
+export const sizes = {
+  XSmall: sizeXSmall,
+  Small: sizeSmall,
+  Medium: sizeMedium,
+  Large: sizeLarge,
+  XLarge: sizeXLarge,
+  '2XLarge': size2XLarge,
+};
 
 // Icon
 export const iconSize01 = '1rem';

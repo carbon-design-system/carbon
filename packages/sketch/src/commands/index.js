@@ -5,13 +5,18 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import '@babel/polyfill';
+import 'core-js/stable';
+import 'regenerator-runtime/runtime';
 
 // We export all commands through one entrypoint to prevent build errors
 // triggered by having separate entrypoints. Most notably we would encounter
 // parse errors because the bundlers were being generated incorrectly during
 // incremental rebuilds.
-export { sync as syncColors, generate as generateColors } from './colors';
+export {
+  sync as syncColors,
+  syncColorVars,
+  generate as generateColors,
+} from './colors';
 export { generate as generateIcons } from './icons';
 export { syncSmallIcons, syncLargeIcons } from './icons';
 export { sync as syncThemes, generate as generateThemes } from './themes';

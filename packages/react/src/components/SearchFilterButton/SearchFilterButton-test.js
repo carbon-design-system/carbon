@@ -17,9 +17,7 @@ describe('[Deprecated] SearchFilterButton', () => {
   let wrapper;
 
   beforeEach(() => {
-    jest.mock('warning', () => {
-      return jest.fn();
-    });
+    jest.mock('../../internal/warning');
     SearchFilterButton = require('../SearchFilterButton').default;
     wrapper = mount(<SearchFilterButton labelText="testlabel" />);
   });

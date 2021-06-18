@@ -10,8 +10,15 @@
 import React from 'react';
 import { action } from '@storybook/addon-actions';
 import { withKnobs, text, boolean, select } from '@storybook/addon-knobs';
+import { Download16 } from '@carbon/icons-react';
 import Link from '../Link';
 import mdx from './Link.mdx';
+
+const sizes = {
+  'Small  (sm)': 'sm',
+  'Medium (md) - default': undefined,
+  'Large  (lg)': 'lg',
+};
 
 const props = () => ({
   className: 'some-class',
@@ -23,11 +30,7 @@ const props = () => ({
     handler(evt);
   })(action('onClick')),
   disabled: boolean('Disabled', false),
-  size: select('Link size', {
-    Default: undefined,
-    'Small (sm)': 'sm',
-    'Large (lg)': 'lg',
-  }),
+  size: select('Field size (size)', sizes, undefined) || undefined,
 });
 
 export default {
@@ -49,5 +52,11 @@ export const _Default = () => (
 _Default.story = {
   name: 'Link',
 };
+
+export const PairedWithIcon = () => (
+  <Link href="http://www.carbondesignsystem.com" renderIcon={Download16}>
+    Download
+  </Link>
+);
 
 export const Playground = () => <Link {...props()}>Link</Link>;

@@ -8,8 +8,7 @@
 import React from 'react';
 import { action } from '@storybook/addon-actions';
 import { withKnobs, boolean, select, text } from '@storybook/addon-knobs';
-import OverflowMenu from '../OverflowMenu';
-import { OverflowMenu as OGOverflowMenu } from './OverflowMenu';
+import { OverflowMenu } from './OverflowMenu';
 import OverflowMenuItem from '../OverflowMenuItem';
 import mdx from './OverflowMenu.mdx';
 import { Filter16 } from '@carbon/icons-react';
@@ -18,11 +17,13 @@ const directions = {
   'Bottom of the trigger button (bottom)': 'bottom',
   'Top of the trigger button (top)': 'top',
 };
+
 const sizes = {
-  'Extra large size (xl)': 'xl',
-  'Default size': undefined,
-  'Small size (sm)': 'sm',
+  'Small  (sm)': 'sm',
+  'Medium (md) - default': undefined,
+  'Large  (lg)': 'lg',
 };
+
 const props = {
   menu: () => ({
     direction: select('Menu direction (direction)', directions, 'bottom'),
@@ -49,6 +50,8 @@ const props = {
       false
     ),
     onClick: action('onClick'),
+    hasDivider: boolean('Has divider (hasDivider)', false),
+    isDelete: boolean('Is delete (isDelete)', false),
   }),
 };
 
@@ -57,7 +60,7 @@ OverflowMenu.displayName = 'OverflowMenu';
 export default {
   title: 'Components/OverflowMenu',
   decorators: [withKnobs],
-  component: OGOverflowMenu,
+  component: OverflowMenu,
   subcomponents: {
     OverflowMenuItem,
   },

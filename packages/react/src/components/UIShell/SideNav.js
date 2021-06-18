@@ -10,6 +10,7 @@ import { settings } from 'carbon-components';
 import cx from 'classnames';
 import PropTypes from 'prop-types';
 import { AriaLabelPropType } from '../../prop-types/AriaPropTypes';
+import { CARBON_SIDENAV_ITEMS } from './_utils';
 // TO-DO: comment back in when footer is added for rails
 // import SideNavFooter from './SideNavFooter';
 
@@ -32,6 +33,7 @@ const SideNav = React.forwardRef(function SideNav(props, ref) {
     isPersistent,
     addFocusListeners,
     addMouseListeners,
+    onOverlayClick,
     ...other
   } = props;
 
@@ -87,8 +89,13 @@ const SideNav = React.forwardRef(function SideNav(props, ref) {
       let currentExpansionState = controlled
         ? expandedViaHoverState || expanded
         : expanded;
+      // avoid spreading `isSideNavExpanded` to non-Carbon UI Shell children
       return React.cloneElement(child, {
-        isSideNavExpanded: currentExpansionState,
+        ...(CARBON_SIDENAV_ITEMS.includes(child.type?.displayName)
+          ? {
+              isSideNavExpanded: currentExpansionState,
+            }
+          : {}),
       });
     });
   }
@@ -115,7 +122,10 @@ const SideNav = React.forwardRef(function SideNav(props, ref) {
 
   return (
     <>
-      {isFixedNav ? null : <div className={overlayClassName} />}
+      {isFixedNav ? null : (
+        // eslint-disable-next-line jsx-a11y/click-events-have-key-events, jsx-a11y/no-static-element-interactions
+        <div className={overlayClassName} onClick={onOverlayClick} />
+      )}
       <nav
         aria-hidden={!expanded}
         ref={ref}
@@ -197,6 +207,13 @@ SideNav.propTypes = {
    * Optional prop to display the side nav rail.
    */
   isRail: PropTypes.bool,
+
+  /**
+   * An optional listener that is called when the SideNav overlay is clicked
+   *
+   * @param {object} event
+   */
+  onOverlayClick: PropTypes.func,
 
   /**
    * An optional listener that is called when an event that would cause

@@ -5,4 +5,14 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-export default from './OverflowMenu';
+import { default as OverflowMenuNext } from './next/OverflowMenu';
+import { default as OverflowMenuClassic } from './OverflowMenu';
+import { createComponentToggle } from '../../internal/ComponentToggle';
+
+const OverflowMenu = createComponentToggle({
+  name: 'OverflowMenu',
+  next: OverflowMenuNext,
+  classic: OverflowMenuClassic,
+});
+
+export default OverflowMenu;

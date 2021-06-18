@@ -6,29 +6,52 @@
  */
 
 import cx from 'classnames';
-import React from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import PropTypes from 'prop-types';
 import { settings } from 'carbon-components';
 
 const { prefix } = settings;
+
+function useIsTruncated(ref) {
+  const [isTruncated, setIsTruncated] = useState(false);
+
+  useEffect(() => {
+    const { offsetWidth, scrollWidth } = ref.current;
+    setIsTruncated(offsetWidth < scrollWidth);
+  }, [ref, setIsTruncated]);
+
+  return isTruncated;
+}
 
 /**
  * `ListBoxMenuItem` is a helper component for managing the container class
  * name, alongside any classes for any corresponding states, for a generic list
  * box menu item.
  */
-const ListBoxMenuItem = ({ children, isActive, isHighlighted, ...rest }) => {
-  const className = cx({
-    [`${prefix}--list-box__menu-item`]: true,
+const ListBoxMenuItem = React.forwardRef(function ListBoxMenuItem(
+  { children, isActive, isHighlighted, title, ...rest },
+  forwardedRef
+) {
+  const ref = useRef(null);
+  const isTruncated = useIsTruncated(forwardedRef?.menuItemOptionRef || ref);
+  const className = cx(`${prefix}--list-box__menu-item`, {
     [`${prefix}--list-box__menu-item--active`]: isActive,
     [`${prefix}--list-box__menu-item--highlighted`]: isHighlighted,
   });
+
   return (
-    <div className={className} {...rest}>
-      <div className={`${prefix}--list-box__menu-item__option`}>{children}</div>
+    <div
+      {...rest}
+      className={className}
+      title={isTruncated ? title : undefined}>
+      <div
+        className={`${prefix}--list-box__menu-item__option`}
+        ref={forwardedRef?.menuItemOptionRef || ref}>
+        {children}
+      </div>
     </div>
   );
-};
+});
 
 ListBoxMenuItem.propTypes = {
   /**
@@ -46,6 +69,11 @@ ListBoxMenuItem.propTypes = {
    * Specify whether the current menu item is "highlighed".
    */
   isHighlighted: PropTypes.bool.isRequired,
+
+  /**
+   * Provide an optional tooltip for the ListBoxMenuItem
+   */
+  title: PropTypes.string,
 };
 
 ListBoxMenuItem.defaultProps = {

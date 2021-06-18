@@ -22,6 +22,16 @@ $caption-01: (
 /// @type Map
 /// @access public
 /// @group @carbon/type
+$caption-02: (
+  font-size: carbon--type-scale(2),
+  font-weight: carbon--font-weight('regular'),
+  line-height: 1.29,
+  letter-spacing: 0.32px,
+) !default;
+
+/// @type Map
+/// @access public
+/// @group @carbon/type
 $label-01: (
   font-size: carbon--type-scale(1),
   font-weight: carbon--font-weight('regular'),
@@ -32,9 +42,29 @@ $label-01: (
 /// @type Map
 /// @access public
 /// @group @carbon/type
+$label-02: (
+  font-size: carbon--type-scale(2),
+  font-weight: carbon--font-weight('regular'),
+  line-height: 1.29,
+  letter-spacing: 0.32px,
+) !default;
+
+/// @type Map
+/// @access public
+/// @group @carbon/type
 $helper-text-01: (
   font-size: carbon--type-scale(1),
   line-height: 1.34,
+  letter-spacing: 0.32px,
+) !default;
+
+/// @type Map
+/// @access public
+/// @group @carbon/type
+$helper-text-02: (
+  font-size: carbon--type-scale(2),
+  font-weight: carbon--font-weight('regular'),
+  line-height: 1.29,
   letter-spacing: 0.32px,
 ) !default;
 
@@ -488,8 +518,11 @@ $display-04: (
 /// @group @carbon/type
 $tokens: (
   caption-01: $caption-01,
+  caption-02: $caption-02,
   label-01: $label-01,
+  label-02: $label-02,
   helper-text-01: $helper-text-01,
+  helper-text-02: $helper-text-02,
   body-short-01: $body-short-01,
   body-short-02: $body-short-02,
   body-long-01: $body-long-01,
@@ -696,13 +729,14 @@ $custom-property-prefix: 'cds' !default;
 
   // If $fluid is set to true and the token has breakpoints defined for fluid
   // styles, delegate to the fluid-type helper for the given token
+  // Otherwise remove token breakpoints
   @if $fluid == true and map-has-key($token, 'breakpoints') {
     @include fluid-type($token, $breakpoints);
   } @else {
     @if global-variable-exists('feature-flags') and
       map-get($feature-flags, 'enable-css-custom-properties')
     {
-      @include custom-properties($name, $token);
+      @include custom-properties($name, map-remove($token, 'breakpoints'));
     } @else {
       // Otherwise, we just include all the property declarations directly on the
       // selector

@@ -9,8 +9,11 @@ import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import classNames from 'classnames';
 import { settings } from 'carbon-components';
-import { WarningFilled16, WarningAltFilled16 } from '@carbon/icons-react';
-import { Calendar16 } from '@carbon/icons-react';
+import {
+  Calendar16,
+  WarningFilled16,
+  WarningAltFilled16,
+} from '@carbon/icons-react';
 
 const { prefix } = settings;
 
@@ -99,9 +102,10 @@ export default class DatePickerInput extends Component {
     placeholder: PropTypes.string,
 
     /**
-     * Specify the size of the Date Picker Input. Currently supports either `sm` or `xl` as an option.
+     * Specify the size of the Date Picker Input. Currently supports either `sm`, 'md' (default) or 'lg` as an option.
+     * TODO V11: remove `xl` (replaced with lg)
      */
-    size: PropTypes.oneOf(['sm', 'xl']),
+    size: PropTypes.oneOf(['sm', 'md', 'lg', 'xl']),
 
     /**
      * Specify the type of the `<input>`

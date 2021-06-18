@@ -23,6 +23,7 @@ const TooltipDefinition = ({
   children,
   direction,
   align,
+  onBlur,
   onFocus,
   onMouseEnter,
   onMouseLeave,
@@ -49,14 +50,25 @@ const TooltipDefinition = ({
       [`${prefix}--tooltip--visible`]: tooltipVisible,
     }
   );
+
   const debounceTooltipVisible = debounce(() => setTooltipVisible(false), 100);
-  const handleFocus = () => setAllowTooltipVisibility(true);
+
+  const handleFocus = () => {
+    debounceTooltipVisible.cancel();
+    setAllowTooltipVisibility(true);
+    setTooltipVisible(true);
+  };
+
+  const handleBlur = debounceTooltipVisible;
+
   const handleMouseEnter = () => {
     debounceTooltipVisible.cancel();
     setAllowTooltipVisibility(true);
     setTooltipVisible(true);
   };
+
   const handleMouseLeave = debounceTooltipVisible;
+
   useEffect(() => {
     const handleEscKeyDown = (event) => {
       if (matches(event, [keys.Escape])) {
@@ -68,7 +80,7 @@ const TooltipDefinition = ({
   }, []);
 
   return (
-    <div
+    <span
       {...rest}
       className={tooltipClassName}
       onMouseEnter={composeEventHandlers([onMouseEnter, handleMouseEnter])}
@@ -77,16 +89,17 @@ const TooltipDefinition = ({
         type="button"
         className={tooltipTriggerClasses}
         aria-describedby={tooltipId}
-        onFocus={composeEventHandlers([onFocus, handleFocus])}>
+        onFocus={composeEventHandlers([onFocus, handleFocus])}
+        onBlur={composeEventHandlers([onBlur, handleBlur])}>
         {children}
       </button>
-      <div
+      <span
         className={`${prefix}--assistive-text`}
         id={tooltipId}
         role="tooltip">
         {tooltipText}
-      </div>
-    </div>
+      </span>
+    </span>
   );
 };
 
@@ -118,6 +131,11 @@ TooltipDefinition.propTypes = {
    * generate a unique id for you.
    */
   id: PropTypes.string,
+
+  /**
+   * The event handler for the `blur` event.
+   */
+  onBlur: PropTypes.func,
 
   /**
    * The event handler for the `focus` event.

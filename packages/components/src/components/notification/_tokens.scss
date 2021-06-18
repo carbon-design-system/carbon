@@ -5,7 +5,7 @@
 // LICENSE file in the root directory of this source tree.
 //
 
-@import '../../globals/scss/component-tokens';
+@import '../../globals/scss/theme-tokens';
 @import '../../globals/scss/vendor/@carbon/elements/scss/colors/colors';
 @import '../../globals/scss/vendor/@carbon/elements/scss/import-once/import-once';
 
@@ -24,11 +24,11 @@ $notification-colors: (
       ),
       (
         theme: $carbon--theme--g90,
-        value: $ui-01,
+        value: $layer,
       ),
       (
         theme: $carbon--theme--g100,
-        value: $ui-01,
+        value: $layer,
       ),
       (
         theme: $carbon--theme--v9,
@@ -49,11 +49,11 @@ $notification-colors: (
       ),
       (
         theme: $carbon--theme--g90,
-        value: $ui-01,
+        value: $layer,
       ),
       (
         theme: $carbon--theme--g100,
-        value: $ui-01,
+        value: $layer,
       ),
       (
         theme: $carbon--theme--v9,
@@ -74,11 +74,11 @@ $notification-colors: (
       ),
       (
         theme: $carbon--theme--g90,
-        value: $ui-01,
+        value: $layer,
       ),
       (
         theme: $carbon--theme--g100,
-        value: $ui-01,
+        value: $layer,
       ),
       (
         theme: $carbon--theme--v9,
@@ -99,11 +99,11 @@ $notification-colors: (
       ),
       (
         theme: $carbon--theme--g90,
-        value: $ui-01,
+        value: $layer,
       ),
       (
         theme: $carbon--theme--g100,
-        value: $ui-01,
+        value: $layer,
       ),
       (
         theme: $carbon--theme--v9,
@@ -124,11 +124,11 @@ $notification-colors: (
       ),
       (
         theme: $carbon--theme--g90,
-        value: $hover-ui,
+        value: $layer-hover,
       ),
       (
         theme: $carbon--theme--g100,
-        value: $hover-ui,
+        value: $layer-hover,
       ),
       (
         theme: $carbon--theme--v9,

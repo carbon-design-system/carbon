@@ -1,0 +1,50 @@
+//
+// Copyright IBM Corp. 2018, 2018
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+$feature-flags: (
+  enable-v11-release: true,
+);
+
+@use "~@ibm/plex/default" as sans;
+@use "~@ibm/plex/mono";
+@use "~@ibm/plex/arabic";
+
+@use '../index.scss' as styles;
+
+// For now, including all weights for testing
+@include arabic.all;
+@include sans.all;
+@include mono.all;
+
+body {
+  @include styles.theme();
+}
+
+[data-carbon-theme='g10'] {
+  @include styles.theme(styles.$g10);
+}
+
+[data-carbon-theme='g90'] {
+  @include styles.theme(styles.$g90);
+}
+
+[data-carbon-theme='g100'] {
+  @include styles.theme(styles.$g100);
+}
+
+html[lang='en'] body {
+  font-family: 'IBM Plex Sans', 'Helvetica Neue', Arial, sans-serif;
+}
+
+html[lang='ar'] body {
+  font-family: 'IBM Plex Sans Arabic', 'Helvetica Neue', Arial, sans-serif;
+}
+
+.text-mono {
+  font-family: 'IBM Plex Mono', Menlo, 'DejaVu Sans Mono',
+    'Bitstream Vera Sans Mono', Courier, monospace;
+}

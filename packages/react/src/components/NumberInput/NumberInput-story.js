@@ -22,9 +22,9 @@ import NumberInputSkeleton from '../NumberInput/NumberInput.Skeleton';
 import mdx from './NumberInput.mdx';
 
 const sizes = {
-  'Extra large size (xl)': 'xl',
-  'Default size': undefined,
-  'Small size (sm)': 'sm',
+  'Small  (sm)': 'sm',
+  'Medium (md) - default': undefined,
+  'Large  (lg)': 'lg',
 };
 
 const props = () => ({
@@ -32,6 +32,7 @@ const props = () => ({
   id: 'tj-input',
   label: text('Label (label)', 'NumberInput label'),
   hideLabel: boolean('No label (hideLabel)', false),
+  hideSteppers: boolean('No steppers (hideSteppers)', false),
   min: number('Minimum value (min)', 0),
   max: number('Maximum value (max)', 100),
   value: number('Value (value)', 50),
@@ -82,6 +83,7 @@ export default {
 export const Default = () => {
   return (
     <NumberInput
+      id="carbon-number"
       min={0}
       max={100}
       value={50}

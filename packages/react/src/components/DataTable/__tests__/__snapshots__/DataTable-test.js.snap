@@ -1885,7 +1885,9 @@ exports[`DataTable should render 1`] = `
                   </TableToolbarAction>
                 </TableToolbarMenu>
                 <Button
+                  dangerDescription="danger"
                   disabled={false}
+                  isExpressive={false}
                   kind="primary"
                   onClick={[MockFunction]}
                   size="small"
@@ -2044,7 +2046,9 @@ exports[`DataTable should render 1`] = `
                     }
                   >
                     <Button
+                      dangerDescription="danger"
                       disabled={false}
+                      isExpressive={false}
                       kind="primary"
                       onClick={[MockFunction]}
                       renderIcon={
@@ -2060,10 +2064,15 @@ exports[`DataTable should render 1`] = `
                       type="button"
                     >
                       <button
+                        aria-describedby={null}
                         aria-pressed={null}
                         className="bx--btn bx--btn--primary"
                         disabled={false}
-                        onClick={[MockFunction]}
+                        onBlur={[Function]}
+                        onClick={[Function]}
+                        onFocus={[Function]}
+                        onMouseEnter={[Function]}
+                        onMouseLeave={[Function]}
                         tabIndex={0}
                         type="button"
                       >
@@ -2117,7 +2126,9 @@ exports[`DataTable should render 1`] = `
                     }
                   >
                     <Button
+                      dangerDescription="danger"
                       disabled={false}
+                      isExpressive={false}
                       kind="primary"
                       onClick={[MockFunction]}
                       renderIcon={
@@ -2133,10 +2144,15 @@ exports[`DataTable should render 1`] = `
                       type="button"
                     >
                       <button
+                        aria-describedby={null}
                         aria-pressed={null}
                         className="bx--btn bx--btn--primary"
                         disabled={false}
-                        onClick={[MockFunction]}
+                        onBlur={[Function]}
+                        onClick={[Function]}
+                        onFocus={[Function]}
+                        onMouseEnter={[Function]}
+                        onMouseLeave={[Function]}
                         tabIndex={0}
                         type="button"
                       >
@@ -2190,7 +2206,9 @@ exports[`DataTable should render 1`] = `
                     }
                   >
                     <Button
+                      dangerDescription="danger"
                       disabled={false}
+                      isExpressive={false}
                       kind="primary"
                       onClick={[MockFunction]}
                       renderIcon={
@@ -2206,10 +2224,15 @@ exports[`DataTable should render 1`] = `
                       type="button"
                     >
                       <button
+                        aria-describedby={null}
                         aria-pressed={null}
                         className="bx--btn bx--btn--primary"
                         disabled={false}
-                        onClick={[MockFunction]}
+                        onBlur={[Function]}
+                        onClick={[Function]}
+                        onFocus={[Function]}
+                        onMouseEnter={[Function]}
+                        onMouseLeave={[Function]}
                         tabIndex={0}
                         type="button"
                       >
@@ -2255,7 +2278,9 @@ exports[`DataTable should render 1`] = `
                   </TableBatchAction>
                   <Button
                     className="bx--batch-summary__cancel"
+                    dangerDescription="danger"
                     disabled={false}
+                    isExpressive={false}
                     kind="primary"
                     onClick={[Function]}
                     size="default"
@@ -2265,10 +2290,15 @@ exports[`DataTable should render 1`] = `
                     type="button"
                   >
                     <button
+                      aria-describedby={null}
                       aria-pressed={null}
                       className="bx--batch-summary__cancel bx--btn bx--btn--primary"
                       disabled={false}
+                      onBlur={[Function]}
                       onClick={[Function]}
+                      onFocus={[Function]}
+                      onMouseEnter={[Function]}
+                      onMouseLeave={[Function]}
                       tabIndex={-1}
                       type="button"
                     >
@@ -2290,35 +2320,32 @@ exports[`DataTable should render 1`] = `
                 tabIndex="0"
                 translateWithId={[Function]}
               >
-                <div
-                  className="bx--toolbar-action bx--toolbar-search-container-persistent"
+                <Search
+                  className="bx--toolbar-search-container-persistent"
+                  closeButtonLabelText="Clear search input"
+                  id="custom-id"
+                  labelText="Filter table"
                   onBlur={[Function]}
-                  onClick={[Function]}
+                  onChange={[Function]}
                   onFocus={[Function]}
-                  onKeyDown={[Function]}
-                  tabIndex="-1"
+                  placeholder="Filter table"
+                  tabIndex="0"
+                  type="text"
+                  value=""
                 >
-                  <Search
-                    closeButtonLabelText="Clear search input"
-                    id="custom-id"
-                    labelText="Filter table"
-                    onChange={[Function]}
-                    placeholder="Filter table"
-                    size="sm"
-                    tabIndex="0"
-                    type="text"
-                    value=""
+                  <div
+                    aria-labelledby="custom-id-search"
+                    className="bx--search bx--search--xl bx--toolbar-search-container-persistent"
+                    role="search"
                   >
                     <div
-                      aria-labelledby="custom-id-search"
-                      className="bx--search bx--search--sm"
-                      role="search"
+                      className="bx--search-magnifier"
                     >
                       <ForwardRef(Search16)
-                        className="bx--search-magnifier"
+                        className="bx--search-magnifier-icon"
                       >
                         <Icon
-                          className="bx--search-magnifier"
+                          className="bx--search-magnifier-icon"
                           fill="currentColor"
                           height={16}
                           preserveAspectRatio="xMidYMid meet"
@@ -2328,7 +2355,7 @@ exports[`DataTable should render 1`] = `
                         >
                           <svg
                             aria-hidden={true}
-                            className="bx--search-magnifier"
+                            className="bx--search-magnifier-icon"
                             fill="currentColor"
                             focusable="false"
                             height={16}
@@ -2343,60 +2370,62 @@ exports[`DataTable should render 1`] = `
                           </svg>
                         </Icon>
                       </ForwardRef(Search16)>
-                      <label
-                        className="bx--label"
-                        htmlFor="custom-id"
-                        id="custom-id-search"
-                      >
-                        Filter table
-                      </label>
-                      <input
-                        autoComplete="off"
-                        className="bx--search-input"
-                        id="custom-id"
-                        onChange={[Function]}
-                        onKeyDown={[Function]}
-                        placeholder="Filter table"
-                        role="searchbox"
-                        tabIndex="0"
-                        type="text"
-                        value=""
-                      />
-                      <button
-                        aria-label="Clear search input"
-                        className="bx--search-close bx--search-close--hidden"
-                        onClick={[Function]}
-                        type="button"
-                      >
-                        <ForwardRef(Close16)>
-                          <Icon
+                    </div>
+                    <label
+                      className="bx--label"
+                      htmlFor="custom-id"
+                      id="custom-id-search"
+                    >
+                      Filter table
+                    </label>
+                    <input
+                      autoComplete="off"
+                      className="bx--search-input"
+                      id="custom-id"
+                      onBlur={[Function]}
+                      onChange={[Function]}
+                      onFocus={[Function]}
+                      onKeyDown={[Function]}
+                      placeholder="Filter table"
+                      role="searchbox"
+                      tabIndex="0"
+                      type="text"
+                      value=""
+                    />
+                    <button
+                      aria-label="Clear search input"
+                      className="bx--search-close bx--search-close--hidden"
+                      onClick={[Function]}
+                      type="button"
+                    >
+                      <ForwardRef(Close16)>
+                        <Icon
+                          fill="currentColor"
+                          height={16}
+                          preserveAspectRatio="xMidYMid meet"
+                          viewBox="0 0 32 32"
+                          width={16}
+                          xmlns="http://www.w3.org/2000/svg"
+                        >
+                          <svg
+                            aria-hidden={true}
                             fill="currentColor"
+                            focusable="false"
                             height={16}
                             preserveAspectRatio="xMidYMid meet"
                             viewBox="0 0 32 32"
                             width={16}
                             xmlns="http://www.w3.org/2000/svg"
                           >
-                            <svg
-                              aria-hidden={true}
-                              fill="currentColor"
-                              focusable="false"
-                              height={16}
-                              preserveAspectRatio="xMidYMid meet"
-                              viewBox="0 0 32 32"
-                              width={16}
-                              xmlns="http://www.w3.org/2000/svg"
-                            >
-                              <path
-                                d="M24 9.4L22.6 8 16 14.6 9.4 8 8 9.4 14.6 16 8 22.6 9.4 24 16 17.4 22.6 24 24 22.6 17.4 16 24 9.4z"
-                              />
-                            </svg>
-                          </Icon>
-                        </ForwardRef(Close16)>
-                      </button>
-                    </div>
-                  </Search>
-                </div>
+                            <path
+                              d="M24 9.4L22.6 8 16 14.6 9.4 8 8 9.4 14.6 16 8 22.6 9.4 24 16 17.4 22.6 24 24 22.6 17.4 16 24 9.4z"
+                            />
+                          </svg>
+                        </Icon>
+                      </ForwardRef(Close16)>
+                    </button>
+                  </div>
+                </Search>
               </TableToolbarSearch>
               <TableToolbarMenu
                 iconDescription="Settings"
@@ -2407,7 +2436,7 @@ exports[`DataTable should render 1`] = `
                   }
                 }
               >
-                <ForwardRef(OverflowMenu)
+                <ForwardRef(FeatureToggle(OverflowMenu))
                   ariaLabel="Settings"
                   className="bx--toolbar-action bx--overflow-menu"
                   flipped={true}
@@ -2420,96 +2449,112 @@ exports[`DataTable should render 1`] = `
                   }
                   title="Settings"
                 >
-                  <OverflowMenu
+                  <ForwardRef(OverflowMenu)
                     ariaLabel="Settings"
                     className="bx--toolbar-action bx--overflow-menu"
-                    direction="bottom"
                     flipped={true}
                     iconDescription="Settings"
-                    innerRef={null}
-                    light={false}
-                    menuOffset={[Function]}
-                    menuOffsetFlip={[Function]}
-                    onClick={[Function]}
-                    onClose={[Function]}
-                    onKeyDown={[Function]}
-                    onOpen={[Function]}
-                    open={false}
                     renderIcon={
                       Object {
                         "$$typeof": Symbol(react.forward_ref),
                         "render": [Function],
                       }
                     }
-                    selectorPrimaryFocus="[data-overflow-menu-primary-focus]"
                     title="Settings"
                   >
-                    <ClickListener
-                      onClickOutside={[Function]}
+                    <OverflowMenu
+                      ariaLabel="Settings"
+                      className="bx--toolbar-action bx--overflow-menu"
+                      direction="bottom"
+                      flipped={true}
+                      iconDescription="Settings"
+                      innerRef={null}
+                      light={false}
+                      menuOffset={[Function]}
+                      menuOffsetFlip={[Function]}
+                      onClick={[Function]}
+                      onClose={[Function]}
+                      onKeyDown={[Function]}
+                      onOpen={[Function]}
+                      open={false}
+                      renderIcon={
+                        Object {
+                          "$$typeof": Symbol(react.forward_ref),
+                          "render": [Function],
+                        }
+                      }
+                      selectorPrimaryFocus="[data-overflow-menu-primary-focus]"
+                      title="Settings"
                     >
-                      <button
-                        aria-expanded={false}
-                        aria-haspopup={true}
-                        aria-label="Settings"
-                        className="bx--toolbar-action bx--overflow-menu bx--overflow-menu"
-                        onClick={[Function]}
-                        onClose={[Function]}
-                        onKeyDown={[Function]}
-                        open={false}
-                        title="Settings"
-                        type="button"
+                      <ClickListener
+                        onClickOutside={[Function]}
                       >
-                        <ForwardRef(Settings16)
+                        <button
+                          aria-expanded={false}
+                          aria-haspopup={true}
                           aria-label="Settings"
-                          className="bx--overflow-menu__icon"
+                          className="bx--toolbar-action bx--overflow-menu bx--overflow-menu"
                           onClick={[Function]}
+                          onClose={[Function]}
                           onKeyDown={[Function]}
+                          open={false}
+                          title="Settings"
+                          type="button"
                         >
-                          <Icon
+                          <ForwardRef(Settings16)
                             aria-label="Settings"
                             className="bx--overflow-menu__icon"
-                            fill="currentColor"
-                            height={16}
                             onClick={[Function]}
                             onKeyDown={[Function]}
-                            preserveAspectRatio="xMidYMid meet"
-                            viewBox="0 0 16 16"
-                            width={16}
-                            xmlns="http://www.w3.org/2000/svg"
                           >
-                            <svg
+                            <Icon
                               aria-label="Settings"
                               className="bx--overflow-menu__icon"
                               fill="currentColor"
-                              focusable="false"
                               height={16}
                               onClick={[Function]}
                               onKeyDown={[Function]}
                               preserveAspectRatio="xMidYMid meet"
-                              role="img"
                               viewBox="0 0 16 16"
                               width={16}
                               xmlns="http://www.w3.org/2000/svg"
                             >
-                              <path
-                                d="M13.5,8.4c0-0.1,0-0.3,0-0.4c0-0.1,0-0.3,0-0.4l1-0.8c0.4-0.3,0.4-0.9,0.2-1.3l-1.2-2C13.3,3.2,13,3,12.6,3	c-0.1,0-0.2,0-0.3,0.1l-1.2,0.4c-0.2-0.1-0.4-0.3-0.7-0.4l-0.3-1.3C10.1,1.3,9.7,1,9.2,1H6.8c-0.5,0-0.9,0.3-1,0.8L5.6,3.1	C5.3,3.2,5.1,3.3,4.9,3.4L3.7,3C3.6,3,3.5,3,3.4,3C3,3,2.7,3.2,2.5,3.5l-1.2,2C1.1,5.9,1.2,6.4,1.6,6.8l0.9,0.9c0,0.1,0,0.3,0,0.4	c0,0.1,0,0.3,0,0.4L1.6,9.2c-0.4,0.3-0.5,0.9-0.2,1.3l1.2,2C2.7,12.8,3,13,3.4,13c0.1,0,0.2,0,0.3-0.1l1.2-0.4	c0.2,0.1,0.4,0.3,0.7,0.4l0.3,1.3c0.1,0.5,0.5,0.8,1,0.8h2.4c0.5,0,0.9-0.3,1-0.8l0.3-1.3c0.2-0.1,0.4-0.2,0.7-0.4l1.2,0.4	c0.1,0,0.2,0.1,0.3,0.1c0.4,0,0.7-0.2,0.9-0.5l1.1-2c0.2-0.4,0.2-0.9-0.2-1.3L13.5,8.4z M12.6,12l-1.7-0.6c-0.4,0.3-0.9,0.6-1.4,0.8	L9.2,14H6.8l-0.4-1.8c-0.5-0.2-0.9-0.5-1.4-0.8L3.4,12l-1.2-2l1.4-1.2c-0.1-0.5-0.1-1.1,0-1.6L2.2,6l1.2-2l1.7,0.6	C5.5,4.2,6,4,6.5,3.8L6.8,2h2.4l0.4,1.8c0.5,0.2,0.9,0.5,1.4,0.8L12.6,4l1.2,2l-1.4,1.2c0.1,0.5,0.1,1.1,0,1.6l1.4,1.2L12.6,12z"
-                              />
-                              <path
-                                d="M8,11c-1.7,0-3-1.3-3-3s1.3-3,3-3s3,1.3,3,3C11,9.6,9.7,11,8,11C8,11,8,11,8,11z M8,6C6.9,6,6,6.8,6,7.9C6,7.9,6,8,6,8	c0,1.1,0.8,2,1.9,2c0,0,0.1,0,0.1,0c1.1,0,2-0.8,2-1.9c0,0,0-0.1,0-0.1C10,6.9,9.2,6,8,6C8.1,6,8,6,8,6z"
-                              />
-                              <title>
-                                Settings
-                              </title>
-                            </svg>
-                          </Icon>
-                        </ForwardRef(Settings16)>
-                      </button>
-                    </ClickListener>
-                  </OverflowMenu>
-                </ForwardRef(OverflowMenu)>
+                              <svg
+                                aria-label="Settings"
+                                className="bx--overflow-menu__icon"
+                                fill="currentColor"
+                                focusable="false"
+                                height={16}
+                                onClick={[Function]}
+                                onKeyDown={[Function]}
+                                preserveAspectRatio="xMidYMid meet"
+                                role="img"
+                                viewBox="0 0 16 16"
+                                width={16}
+                                xmlns="http://www.w3.org/2000/svg"
+                              >
+                                <path
+                                  d="M13.5,8.4c0-0.1,0-0.3,0-0.4c0-0.1,0-0.3,0-0.4l1-0.8c0.4-0.3,0.4-0.9,0.2-1.3l-1.2-2C13.3,3.2,13,3,12.6,3	c-0.1,0-0.2,0-0.3,0.1l-1.2,0.4c-0.2-0.1-0.4-0.3-0.7-0.4l-0.3-1.3C10.1,1.3,9.7,1,9.2,1H6.8c-0.5,0-0.9,0.3-1,0.8L5.6,3.1	C5.3,3.2,5.1,3.3,4.9,3.4L3.7,3C3.6,3,3.5,3,3.4,3C3,3,2.7,3.2,2.5,3.5l-1.2,2C1.1,5.9,1.2,6.4,1.6,6.8l0.9,0.9c0,0.1,0,0.3,0,0.4	c0,0.1,0,0.3,0,0.4L1.6,9.2c-0.4,0.3-0.5,0.9-0.2,1.3l1.2,2C2.7,12.8,3,13,3.4,13c0.1,0,0.2,0,0.3-0.1l1.2-0.4	c0.2,0.1,0.4,0.3,0.7,0.4l0.3,1.3c0.1,0.5,0.5,0.8,1,0.8h2.4c0.5,0,0.9-0.3,1-0.8l0.3-1.3c0.2-0.1,0.4-0.2,0.7-0.4l1.2,0.4	c0.1,0,0.2,0.1,0.3,0.1c0.4,0,0.7-0.2,0.9-0.5l1.1-2c0.2-0.4,0.2-0.9-0.2-1.3L13.5,8.4z M12.6,12l-1.7-0.6c-0.4,0.3-0.9,0.6-1.4,0.8	L9.2,14H6.8l-0.4-1.8c-0.5-0.2-0.9-0.5-1.4-0.8L3.4,12l-1.2-2l1.4-1.2c-0.1-0.5-0.1-1.1,0-1.6L2.2,6l1.2-2l1.7,0.6	C5.5,4.2,6,4,6.5,3.8L6.8,2h2.4l0.4,1.8c0.5,0.2,0.9,0.5,1.4,0.8L12.6,4l1.2,2l-1.4,1.2c0.1,0.5,0.1,1.1,0,1.6l1.4,1.2L12.6,12z"
+                                />
+                                <path
+                                  d="M8,11c-1.7,0-3-1.3-3-3s1.3-3,3-3s3,1.3,3,3C11,9.6,9.7,11,8,11C8,11,8,11,8,11z M8,6C6.9,6,6,6.8,6,7.9C6,7.9,6,8,6,8	c0,1.1,0.8,2,1.9,2c0,0,0.1,0,0.1,0c1.1,0,2-0.8,2-1.9c0,0,0-0.1,0-0.1C10,6.9,9.2,6,8,6C8.1,6,8,6,8,6z"
+                                />
+                                <title>
+                                  Settings
+                                </title>
+                              </svg>
+                            </Icon>
+                          </ForwardRef(Settings16)>
+                        </button>
+                      </ClickListener>
+                    </OverflowMenu>
+                  </ForwardRef(OverflowMenu)>
+                </ForwardRef(FeatureToggle(OverflowMenu))>
               </TableToolbarMenu>
               <Button
+                dangerDescription="danger"
                 disabled={false}
+                isExpressive={false}
                 kind="primary"
                 onClick={[MockFunction]}
                 size="small"
@@ -2519,10 +2564,15 @@ exports[`DataTable should render 1`] = `
                 type="button"
               >
                 <button
+                  aria-describedby={null}
                   aria-pressed={null}
                   className="bx--btn bx--btn--sm bx--btn--primary"
                   disabled={false}
-                  onClick={[MockFunction]}
+                  onBlur={[Function]}
+                  onClick={[Function]}
+                  onFocus={[Function]}
+                  onMouseEnter={[Function]}
+                  onMouseLeave={[Function]}
                   tabIndex={0}
                   type="button"
                 >
@@ -2542,7 +2592,7 @@ exports[`DataTable should render 1`] = `
           className="bx--data-table-content"
         >
           <table
-            className="bx--data-table bx--data-table--no-border"
+            className="bx--data-table bx--data-table--normal bx--data-table--no-border"
           >
             <TableHead>
               <thead>
@@ -2893,7 +2943,9 @@ exports[`DataTable sticky header should render 1`] = `
                   </TableToolbarAction>
                 </TableToolbarMenu>
                 <Button
+                  dangerDescription="danger"
                   disabled={false}
+                  isExpressive={false}
                   kind="primary"
                   onClick={[MockFunction]}
                   size="small"
@@ -3055,7 +3107,9 @@ exports[`DataTable sticky header should render 1`] = `
                     }
                   >
                     <Button
+                      dangerDescription="danger"
                       disabled={false}
+                      isExpressive={false}
                       kind="primary"
                       onClick={[MockFunction]}
                       renderIcon={
@@ -3071,10 +3125,15 @@ exports[`DataTable sticky header should render 1`] = `
                       type="button"
                     >
                       <button
+                        aria-describedby={null}
                         aria-pressed={null}
                         className="bx--btn bx--btn--primary"
                         disabled={false}
-                        onClick={[MockFunction]}
+                        onBlur={[Function]}
+                        onClick={[Function]}
+                        onFocus={[Function]}
+                        onMouseEnter={[Function]}
+                        onMouseLeave={[Function]}
                         tabIndex={0}
                         type="button"
                       >
@@ -3128,7 +3187,9 @@ exports[`DataTable sticky header should render 1`] = `
                     }
                   >
                     <Button
+                      dangerDescription="danger"
                       disabled={false}
+                      isExpressive={false}
                       kind="primary"
                       onClick={[MockFunction]}
                       renderIcon={
@@ -3144,10 +3205,15 @@ exports[`DataTable sticky header should render 1`] = `
                       type="button"
                     >
                       <button
+                        aria-describedby={null}
                         aria-pressed={null}
                         className="bx--btn bx--btn--primary"
                         disabled={false}
-                        onClick={[MockFunction]}
+                        onBlur={[Function]}
+                        onClick={[Function]}
+                        onFocus={[Function]}
+                        onMouseEnter={[Function]}
+                        onMouseLeave={[Function]}
                         tabIndex={0}
                         type="button"
                       >
@@ -3201,7 +3267,9 @@ exports[`DataTable sticky header should render 1`] = `
                     }
                   >
                     <Button
+                      dangerDescription="danger"
                       disabled={false}
+                      isExpressive={false}
                       kind="primary"
                       onClick={[MockFunction]}
                       renderIcon={
@@ -3217,10 +3285,15 @@ exports[`DataTable sticky header should render 1`] = `
                       type="button"
                     >
                       <button
+                        aria-describedby={null}
                         aria-pressed={null}
                         className="bx--btn bx--btn--primary"
                         disabled={false}
-                        onClick={[MockFunction]}
+                        onBlur={[Function]}
+                        onClick={[Function]}
+                        onFocus={[Function]}
+                        onMouseEnter={[Function]}
+                        onMouseLeave={[Function]}
                         tabIndex={0}
                         type="button"
                       >
@@ -3266,7 +3339,9 @@ exports[`DataTable sticky header should render 1`] = `
                   </TableBatchAction>
                   <Button
                     className="bx--batch-summary__cancel"
+                    dangerDescription="danger"
                     disabled={false}
+                    isExpressive={false}
                     kind="primary"
                     onClick={[Function]}
                     size="default"
@@ -3276,10 +3351,15 @@ exports[`DataTable sticky header should render 1`] = `
                     type="button"
                   >
                     <button
+                      aria-describedby={null}
                       aria-pressed={null}
                       className="bx--batch-summary__cancel bx--btn bx--btn--primary"
                       disabled={false}
+                      onBlur={[Function]}
                       onClick={[Function]}
+                      onFocus={[Function]}
+                      onMouseEnter={[Function]}
+                      onMouseLeave={[Function]}
                       tabIndex={-1}
                       type="button"
                     >
@@ -3301,35 +3381,32 @@ exports[`DataTable sticky header should render 1`] = `
                 tabIndex="0"
                 translateWithId={[Function]}
               >
-                <div
-                  className="bx--toolbar-action bx--toolbar-search-container-persistent"
+                <Search
+                  className="bx--toolbar-search-container-persistent"
+                  closeButtonLabelText="Clear search input"
+                  id="custom-id"
+                  labelText="Filter table"
                   onBlur={[Function]}
-                  onClick={[Function]}
+                  onChange={[Function]}
                   onFocus={[Function]}
-                  onKeyDown={[Function]}
-                  tabIndex="-1"
+                  placeholder="Filter table"
+                  tabIndex="0"
+                  type="text"
+                  value=""
                 >
-                  <Search
-                    closeButtonLabelText="Clear search input"
-                    id="custom-id"
-                    labelText="Filter table"
-                    onChange={[Function]}
-                    placeholder="Filter table"
-                    size="sm"
-                    tabIndex="0"
-                    type="text"
-                    value=""
+                  <div
+                    aria-labelledby="custom-id-search"
+                    className="bx--search bx--search--xl bx--toolbar-search-container-persistent"
+                    role="search"
                   >
                     <div
-                      aria-labelledby="custom-id-search"
-                      className="bx--search bx--search--sm"
-                      role="search"
+                      className="bx--search-magnifier"
                     >
                       <ForwardRef(Search16)
-                        className="bx--search-magnifier"
+                        className="bx--search-magnifier-icon"
                       >
                         <Icon
-                          className="bx--search-magnifier"
+                          className="bx--search-magnifier-icon"
                           fill="currentColor"
                           height={16}
                           preserveAspectRatio="xMidYMid meet"
@@ -3339,7 +3416,7 @@ exports[`DataTable sticky header should render 1`] = `
                         >
                           <svg
                             aria-hidden={true}
-                            className="bx--search-magnifier"
+                            className="bx--search-magnifier-icon"
                             fill="currentColor"
                             focusable="false"
                             height={16}
@@ -3354,60 +3431,62 @@ exports[`DataTable sticky header should render 1`] = `
                           </svg>
                         </Icon>
                       </ForwardRef(Search16)>
-                      <label
-                        className="bx--label"
-                        htmlFor="custom-id"
-                        id="custom-id-search"
-                      >
-                        Filter table
-                      </label>
-                      <input
-                        autoComplete="off"
-                        className="bx--search-input"
-                        id="custom-id"
-                        onChange={[Function]}
-                        onKeyDown={[Function]}
-                        placeholder="Filter table"
-                        role="searchbox"
-                        tabIndex="0"
-                        type="text"
-                        value=""
-                      />
-                      <button
-                        aria-label="Clear search input"
-                        className="bx--search-close bx--search-close--hidden"
-                        onClick={[Function]}
-                        type="button"
-                      >
-                        <ForwardRef(Close16)>
-                          <Icon
+                    </div>
+                    <label
+                      className="bx--label"
+                      htmlFor="custom-id"
+                      id="custom-id-search"
+                    >
+                      Filter table
+                    </label>
+                    <input
+                      autoComplete="off"
+                      className="bx--search-input"
+                      id="custom-id"
+                      onBlur={[Function]}
+                      onChange={[Function]}
+                      onFocus={[Function]}
+                      onKeyDown={[Function]}
+                      placeholder="Filter table"
+                      role="searchbox"
+                      tabIndex="0"
+                      type="text"
+                      value=""
+                    />
+                    <button
+                      aria-label="Clear search input"
+                      className="bx--search-close bx--search-close--hidden"
+                      onClick={[Function]}
+                      type="button"
+                    >
+                      <ForwardRef(Close16)>
+                        <Icon
+                          fill="currentColor"
+                          height={16}
+                          preserveAspectRatio="xMidYMid meet"
+                          viewBox="0 0 32 32"
+                          width={16}
+                          xmlns="http://www.w3.org/2000/svg"
+                        >
+                          <svg
+                            aria-hidden={true}
                             fill="currentColor"
+                            focusable="false"
                             height={16}
                             preserveAspectRatio="xMidYMid meet"
                             viewBox="0 0 32 32"
                             width={16}
                             xmlns="http://www.w3.org/2000/svg"
                           >
-                            <svg
-                              aria-hidden={true}
-                              fill="currentColor"
-                              focusable="false"
-                              height={16}
-                              preserveAspectRatio="xMidYMid meet"
-                              viewBox="0 0 32 32"
-                              width={16}
-                              xmlns="http://www.w3.org/2000/svg"
-                            >
-                              <path
-                                d="M24 9.4L22.6 8 16 14.6 9.4 8 8 9.4 14.6 16 8 22.6 9.4 24 16 17.4 22.6 24 24 22.6 17.4 16 24 9.4z"
-                              />
-                            </svg>
-                          </Icon>
-                        </ForwardRef(Close16)>
-                      </button>
-                    </div>
-                  </Search>
-                </div>
+                            <path
+                              d="M24 9.4L22.6 8 16 14.6 9.4 8 8 9.4 14.6 16 8 22.6 9.4 24 16 17.4 22.6 24 24 22.6 17.4 16 24 9.4z"
+                            />
+                          </svg>
+                        </Icon>
+                      </ForwardRef(Close16)>
+                    </button>
+                  </div>
+                </Search>
               </TableToolbarSearch>
               <TableToolbarMenu
                 iconDescription="Settings"
@@ -3418,7 +3497,7 @@ exports[`DataTable sticky header should render 1`] = `
                   }
                 }
               >
-                <ForwardRef(OverflowMenu)
+                <ForwardRef(FeatureToggle(OverflowMenu))
                   ariaLabel="Settings"
                   className="bx--toolbar-action bx--overflow-menu"
                   flipped={true}
@@ -3431,96 +3510,112 @@ exports[`DataTable sticky header should render 1`] = `
                   }
                   title="Settings"
                 >
-                  <OverflowMenu
+                  <ForwardRef(OverflowMenu)
                     ariaLabel="Settings"
                     className="bx--toolbar-action bx--overflow-menu"
-                    direction="bottom"
                     flipped={true}
                     iconDescription="Settings"
-                    innerRef={null}
-                    light={false}
-                    menuOffset={[Function]}
-                    menuOffsetFlip={[Function]}
-                    onClick={[Function]}
-                    onClose={[Function]}
-                    onKeyDown={[Function]}
-                    onOpen={[Function]}
-                    open={false}
                     renderIcon={
                       Object {
                         "$$typeof": Symbol(react.forward_ref),
                         "render": [Function],
                       }
                     }
-                    selectorPrimaryFocus="[data-overflow-menu-primary-focus]"
                     title="Settings"
                   >
-                    <ClickListener
-                      onClickOutside={[Function]}
+                    <OverflowMenu
+                      ariaLabel="Settings"
+                      className="bx--toolbar-action bx--overflow-menu"
+                      direction="bottom"
+                      flipped={true}
+                      iconDescription="Settings"
+                      innerRef={null}
+                      light={false}
+                      menuOffset={[Function]}
+                      menuOffsetFlip={[Function]}
+                      onClick={[Function]}
+                      onClose={[Function]}
+                      onKeyDown={[Function]}
+                      onOpen={[Function]}
+                      open={false}
+                      renderIcon={
+                        Object {
+                          "$$typeof": Symbol(react.forward_ref),
+                          "render": [Function],
+                        }
+                      }
+                      selectorPrimaryFocus="[data-overflow-menu-primary-focus]"
+                      title="Settings"
                     >
-                      <button
-                        aria-expanded={false}
-                        aria-haspopup={true}
-                        aria-label="Settings"
-                        className="bx--toolbar-action bx--overflow-menu bx--overflow-menu"
-                        onClick={[Function]}
-                        onClose={[Function]}
-                        onKeyDown={[Function]}
-                        open={false}
-                        title="Settings"
-                        type="button"
+                      <ClickListener
+                        onClickOutside={[Function]}
                       >
-                        <ForwardRef(Settings16)
+                        <button
+                          aria-expanded={false}
+                          aria-haspopup={true}
                           aria-label="Settings"
-                          className="bx--overflow-menu__icon"
+                          className="bx--toolbar-action bx--overflow-menu bx--overflow-menu"
                           onClick={[Function]}
+                          onClose={[Function]}
                           onKeyDown={[Function]}
+                          open={false}
+                          title="Settings"
+                          type="button"
                         >
-                          <Icon
+                          <ForwardRef(Settings16)
                             aria-label="Settings"
                             className="bx--overflow-menu__icon"
-                            fill="currentColor"
-                            height={16}
                             onClick={[Function]}
                             onKeyDown={[Function]}
-                            preserveAspectRatio="xMidYMid meet"
-                            viewBox="0 0 16 16"
-                            width={16}
-                            xmlns="http://www.w3.org/2000/svg"
                           >
-                            <svg
+                            <Icon
                               aria-label="Settings"
                               className="bx--overflow-menu__icon"
                               fill="currentColor"
-                              focusable="false"
                               height={16}
                               onClick={[Function]}
                               onKeyDown={[Function]}
                               preserveAspectRatio="xMidYMid meet"
-                              role="img"
                               viewBox="0 0 16 16"
                               width={16}
                               xmlns="http://www.w3.org/2000/svg"
                             >
-                              <path
-                                d="M13.5,8.4c0-0.1,0-0.3,0-0.4c0-0.1,0-0.3,0-0.4l1-0.8c0.4-0.3,0.4-0.9,0.2-1.3l-1.2-2C13.3,3.2,13,3,12.6,3	c-0.1,0-0.2,0-0.3,0.1l-1.2,0.4c-0.2-0.1-0.4-0.3-0.7-0.4l-0.3-1.3C10.1,1.3,9.7,1,9.2,1H6.8c-0.5,0-0.9,0.3-1,0.8L5.6,3.1	C5.3,3.2,5.1,3.3,4.9,3.4L3.7,3C3.6,3,3.5,3,3.4,3C3,3,2.7,3.2,2.5,3.5l-1.2,2C1.1,5.9,1.2,6.4,1.6,6.8l0.9,0.9c0,0.1,0,0.3,0,0.4	c0,0.1,0,0.3,0,0.4L1.6,9.2c-0.4,0.3-0.5,0.9-0.2,1.3l1.2,2C2.7,12.8,3,13,3.4,13c0.1,0,0.2,0,0.3-0.1l1.2-0.4	c0.2,0.1,0.4,0.3,0.7,0.4l0.3,1.3c0.1,0.5,0.5,0.8,1,0.8h2.4c0.5,0,0.9-0.3,1-0.8l0.3-1.3c0.2-0.1,0.4-0.2,0.7-0.4l1.2,0.4	c0.1,0,0.2,0.1,0.3,0.1c0.4,0,0.7-0.2,0.9-0.5l1.1-2c0.2-0.4,0.2-0.9-0.2-1.3L13.5,8.4z M12.6,12l-1.7-0.6c-0.4,0.3-0.9,0.6-1.4,0.8	L9.2,14H6.8l-0.4-1.8c-0.5-0.2-0.9-0.5-1.4-0.8L3.4,12l-1.2-2l1.4-1.2c-0.1-0.5-0.1-1.1,0-1.6L2.2,6l1.2-2l1.7,0.6	C5.5,4.2,6,4,6.5,3.8L6.8,2h2.4l0.4,1.8c0.5,0.2,0.9,0.5,1.4,0.8L12.6,4l1.2,2l-1.4,1.2c0.1,0.5,0.1,1.1,0,1.6l1.4,1.2L12.6,12z"
-                              />
-                              <path
-                                d="M8,11c-1.7,0-3-1.3-3-3s1.3-3,3-3s3,1.3,3,3C11,9.6,9.7,11,8,11C8,11,8,11,8,11z M8,6C6.9,6,6,6.8,6,7.9C6,7.9,6,8,6,8	c0,1.1,0.8,2,1.9,2c0,0,0.1,0,0.1,0c1.1,0,2-0.8,2-1.9c0,0,0-0.1,0-0.1C10,6.9,9.2,6,8,6C8.1,6,8,6,8,6z"
-                              />
-                              <title>
-                                Settings
-                              </title>
-                            </svg>
-                          </Icon>
-                        </ForwardRef(Settings16)>
-                      </button>
-                    </ClickListener>
-                  </OverflowMenu>
-                </ForwardRef(OverflowMenu)>
+                              <svg
+                                aria-label="Settings"
+                                className="bx--overflow-menu__icon"
+                                fill="currentColor"
+                                focusable="false"
+                                height={16}
+                                onClick={[Function]}
+                                onKeyDown={[Function]}
+                                preserveAspectRatio="xMidYMid meet"
+                                role="img"
+                                viewBox="0 0 16 16"
+                                width={16}
+                                xmlns="http://www.w3.org/2000/svg"
+                              >
+                                <path
+                                  d="M13.5,8.4c0-0.1,0-0.3,0-0.4c0-0.1,0-0.3,0-0.4l1-0.8c0.4-0.3,0.4-0.9,0.2-1.3l-1.2-2C13.3,3.2,13,3,12.6,3	c-0.1,0-0.2,0-0.3,0.1l-1.2,0.4c-0.2-0.1-0.4-0.3-0.7-0.4l-0.3-1.3C10.1,1.3,9.7,1,9.2,1H6.8c-0.5,0-0.9,0.3-1,0.8L5.6,3.1	C5.3,3.2,5.1,3.3,4.9,3.4L3.7,3C3.6,3,3.5,3,3.4,3C3,3,2.7,3.2,2.5,3.5l-1.2,2C1.1,5.9,1.2,6.4,1.6,6.8l0.9,0.9c0,0.1,0,0.3,0,0.4	c0,0.1,0,0.3,0,0.4L1.6,9.2c-0.4,0.3-0.5,0.9-0.2,1.3l1.2,2C2.7,12.8,3,13,3.4,13c0.1,0,0.2,0,0.3-0.1l1.2-0.4	c0.2,0.1,0.4,0.3,0.7,0.4l0.3,1.3c0.1,0.5,0.5,0.8,1,0.8h2.4c0.5,0,0.9-0.3,1-0.8l0.3-1.3c0.2-0.1,0.4-0.2,0.7-0.4l1.2,0.4	c0.1,0,0.2,0.1,0.3,0.1c0.4,0,0.7-0.2,0.9-0.5l1.1-2c0.2-0.4,0.2-0.9-0.2-1.3L13.5,8.4z M12.6,12l-1.7-0.6c-0.4,0.3-0.9,0.6-1.4,0.8	L9.2,14H6.8l-0.4-1.8c-0.5-0.2-0.9-0.5-1.4-0.8L3.4,12l-1.2-2l1.4-1.2c-0.1-0.5-0.1-1.1,0-1.6L2.2,6l1.2-2l1.7,0.6	C5.5,4.2,6,4,6.5,3.8L6.8,2h2.4l0.4,1.8c0.5,0.2,0.9,0.5,1.4,0.8L12.6,4l1.2,2l-1.4,1.2c0.1,0.5,0.1,1.1,0,1.6l1.4,1.2L12.6,12z"
+                                />
+                                <path
+                                  d="M8,11c-1.7,0-3-1.3-3-3s1.3-3,3-3s3,1.3,3,3C11,9.6,9.7,11,8,11C8,11,8,11,8,11z M8,6C6.9,6,6,6.8,6,7.9C6,7.9,6,8,6,8	c0,1.1,0.8,2,1.9,2c0,0,0.1,0,0.1,0c1.1,0,2-0.8,2-1.9c0,0,0-0.1,0-0.1C10,6.9,9.2,6,8,6C8.1,6,8,6,8,6z"
+                                />
+                                <title>
+                                  Settings
+                                </title>
+                              </svg>
+                            </Icon>
+                          </ForwardRef(Settings16)>
+                        </button>
+                      </ClickListener>
+                    </OverflowMenu>
+                  </ForwardRef(OverflowMenu)>
+                </ForwardRef(FeatureToggle(OverflowMenu))>
               </TableToolbarMenu>
               <Button
+                dangerDescription="danger"
                 disabled={false}
+                isExpressive={false}
                 kind="primary"
                 onClick={[MockFunction]}
                 size="small"
@@ -3530,10 +3625,15 @@ exports[`DataTable sticky header should render 1`] = `
                 type="button"
               >
                 <button
+                  aria-describedby={null}
                   aria-pressed={null}
                   className="bx--btn bx--btn--sm bx--btn--primary"
                   disabled={false}
-                  onClick={[MockFunction]}
+                  onBlur={[Function]}
+                  onClick={[Function]}
+                  onFocus={[Function]}
+                  onMouseEnter={[Function]}
+                  onMouseLeave={[Function]}
                   tabIndex={0}
                   type="button"
                 >
@@ -3557,7 +3657,7 @@ exports[`DataTable sticky header should render 1`] = `
             className="bx--data-table-content"
           >
             <table
-              className="bx--data-table bx--data-table--no-border bx--data-table--sticky-header"
+              className="bx--data-table bx--data-table--normal bx--data-table--no-border bx--data-table--sticky-header"
             >
               <TableHead>
                 <thead>

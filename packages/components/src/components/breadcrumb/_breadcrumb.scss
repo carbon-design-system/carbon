@@ -36,16 +36,16 @@
   }
 
   .#{$prefix}--breadcrumb-item .#{$prefix}--link:visited {
-    color: $link-01;
+    color: $link-primary;
 
     &:hover {
-      color: $hover-primary-text;
+      color: $link-primary-hover;
     }
   }
 
   .#{$prefix}--breadcrumb-item::after {
     margin-left: $carbon--spacing-03;
-    color: $text-01;
+    color: $text-primary;
     content: '/';
   }
 
@@ -66,12 +66,78 @@
   .#{$prefix}--breadcrumb-item [aria-current='page'],
   .#{$prefix}--breadcrumb-item.#{$prefix}--breadcrumb-item--current
     .#{$prefix}--link {
-    color: $text-01;
+    color: $text-primary;
     cursor: auto;
 
     &:hover {
       text-decoration: none;
     }
+  }
+
+  // Overflow Menu overrides
+  .#{$prefix}--breadcrumb-item .#{$prefix}--overflow-menu {
+    position: relative;
+    width: rem(20px);
+    height: rem(18px);
+
+    &:focus {
+      outline: 1px solid $focus;
+    }
+
+    &:hover {
+      background: transparent;
+    }
+
+    // Used to mimic link underline
+    &::after {
+      position: absolute;
+      bottom: 2px;
+      width: rem(12px);
+      height: 1px;
+      background: $link-primary-hover;
+      content: '';
+      opacity: 0;
+      transition: opacity $duration--fast-01 motion(standard, productive);
+    }
+  }
+
+  .#{$prefix}--breadcrumb-item .#{$prefix}--overflow-menu:hover::after {
+    opacity: 1;
+  }
+
+  .#{$prefix}--breadcrumb-item
+    .#{$prefix}--overflow-menu.#{$prefix}--overflow-menu--open {
+    background: transparent;
+    box-shadow: none;
+  }
+
+  .#{$prefix}--breadcrumb-item .#{$prefix}--overflow-menu__icon {
+    position: relative;
+    fill: $link-primary;
+    transform: translateY(4px);
+  }
+
+  .#{$prefix}--breadcrumb-item
+    .#{$prefix}--overflow-menu:hover
+    .#{$prefix}--overflow-menu__icon {
+    fill: $link-primary-hover;
+  }
+
+  .#{$prefix}--breadcrumb-menu-options:focus {
+    outline: none;
+  }
+
+  $caret-size: rem(7px);
+  .#{$prefix}--breadcrumb-menu-options.#{$prefix}--overflow-menu-options::after {
+    top: -$caret-size;
+    left: $caret-size * 2;
+    width: 0;
+    height: 0;
+    border-right: $caret-size solid transparent;
+    border-bottom: $caret-size solid $field;
+    border-left: $caret-size solid transparent;
+    margin: 0 auto;
+    background: transparent;
   }
 
   // Skeleton State

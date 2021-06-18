@@ -5,7 +5,8 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { white, red60 } from '@carbon/colors';
+import { adjustLightness } from './tools';
+import { white, red60, gray40 } from '@carbon/colors';
 
 export const interactive01 = '#3d70b2';
 export const interactive02 = '#4d5358';
@@ -101,11 +102,109 @@ export const buttonSeparator = '#e0e0e0';
 export const skeleton01 = 'rgba(61, 112, 178, .1)';
 export const skeleton02 = 'rgba(61, 112, 178, .1)';
 
+// New color tokens
+// TO-DO: remove fallback color when v11 is released and assign carbon colors to new tokens
+export const background = uiBackground;
+export const layer = ui01;
+export const layerAccent = ui03;
+export const layerAccentActive = gray40;
+export const layerAccentHover = adjustLightness(layerAccent, -6);
+export const field = field01;
+export const backgroundInverse = inverse02;
+export const backgroundBrand = interactive01;
+export const interactive = interactive04;
+
+export const borderSubtle = ui03;
+export const borderStrong = ui04;
+export const borderInverse = ui05;
+export const borderInteractive = interactive04;
+
+export const textPrimary = text01;
+export const textSecondary = text02;
+export const textPlaceholder = text03;
+export const textHelper = text05;
+export const textOnColor = text04;
+export const textInverse = inverse01;
+
+export const linkPrimary = link01;
+export const linkSecondary = link02;
+export const linkVisited = visitedLink;
+export const linkInverse = inverseLink;
+
+export const iconPrimary = icon01;
+export const iconSecondary = icon02;
+export const iconOnColor = icon03;
+export const iconInverse = inverse01;
+
+export const supportError = support01;
+export const supportSuccess = support02;
+export const supportWarning = support03;
+export const supportInfo = support04;
+export const supportErrorInverse = inverseSupport01;
+export const supportSuccessInverse = inverseSupport02;
+export const supportWarningInverse = inverseSupport03;
+export const supportInfoInverse = inverseSupport04;
+
+export const overlay = overlay01;
+export const toggleOff = ui04;
+
+export const buttonPrimary = interactive01;
+export const buttonSecondary = interactive02;
+export const buttonTertiary = interactive03;
+export const buttonDangerPrimary = danger01;
+export const buttonDangerSecondary = danger02;
+
+export const backgroundActive = activeUI;
+export const layerActive = activeUI;
+
+export const buttonDangerActive = activeDanger;
+export const buttonPrimaryActive = activePrimary;
+export const buttonSecondaryActive = activeSecondary;
+export const buttonTertiaryActive = activeTertiary;
+
+export const focusInset = inverse01;
+export const focusInverse = inverseFocusUi;
+
+export const backgroundHover = hoverUI;
+export const layerHover = hoverUI;
+export const fieldHover = hoverUI;
+export const backgroundInverseHover = inverseHoverUI;
+export const linkPrimaryHover = hoverPrimaryText;
+export const buttonDangerHover = hoverDanger;
+export const buttonPrimaryHover = hoverPrimary;
+export const buttonSecondaryHover = hoverSecondary;
+export const buttonTertiaryHover = hoverTertiary;
+
+export const backgroundSelected = selectedUI;
+export const backgroundSelectedHover = hoverSelectedUI;
+export const layerSelected = selectedUI;
+export const layerSelectedHover = hoverSelectedUI;
+export const layerSelectedInverse = ui05;
+export const borderSubtleSelected = activeUI;
+
+export const layerDisabled = disabled01;
+export const fieldDisabled = disabled01;
+export const borderDisabled = disabled01;
+
+export const textDisabled = disabled02;
+export const buttonDisabled = disabled02;
+export const iconDisabled = disabled02;
+
+export const textOnColorDisabled = disabled03;
+export const iconOnColorDisabled = disabled03;
+export const layerSelectedDisabled = disabled03;
+
+export const skeletonBackground = skeleton01;
+export const skeletonElement = skeleton02;
+
 export {
   // Type
   caption01,
+  caption02,
   label01,
+  label02,
   helperText01,
+  helperText02,
   bodyShort01,
   bodyLong01,
   bodyShort02,
@@ -148,12 +247,14 @@ export {
   spacing10,
   spacing11,
   spacing12,
+  spacing13,
   // Fluid spacing
   fluidSpacing01,
   fluidSpacing02,
   fluidSpacing03,
   fluidSpacing04,
   // Layout
+  // Deprecated -- Remove in v11
   layout01,
   layout02,
   layout03,
@@ -167,6 +268,12 @@ export {
   container03,
   container04,
   container05,
+  sizeXSmall,
+  sizeSmall,
+  sizeMedium,
+  sizeLarge,
+  sizeXLarge,
+  size2XLarge,
   // Icon sizes
   iconSize01,
   iconSize02,

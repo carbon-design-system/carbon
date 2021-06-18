@@ -25,8 +25,10 @@ exports[`ModalWrapper should render 1`] = `
   >
     <Button
       className="btn-trigger"
+      dangerDescription="danger"
       disabled={false}
       iconDescription="Provide icon description if icon is used"
+      isExpressive={false}
       kind="primary"
       onClick={[Function]}
       size="default"
@@ -36,10 +38,15 @@ exports[`ModalWrapper should render 1`] = `
       type="button"
     >
       <button
+        aria-describedby={null}
         aria-pressed={null}
         className="btn-trigger bx--btn bx--btn--primary"
         disabled={false}
+        onBlur={[Function]}
         onClick={[Function]}
+        onFocus={[Function]}
+        onMouseEnter={[Function]}
+        onMouseLeave={[Function]}
         tabIndex={0}
         type="button"
       >
@@ -162,7 +169,9 @@ exports[`ModalWrapper should render 1`] = `
             >
               <SecondaryButtonSet>
                 <Button
+                  dangerDescription="danger"
                   disabled={false}
+                  isExpressive={false}
                   kind="secondary"
                   onClick={[Function]}
                   size="default"
@@ -172,10 +181,15 @@ exports[`ModalWrapper should render 1`] = `
                   type="button"
                 >
                   <button
+                    aria-describedby={null}
                     aria-pressed={null}
                     className="bx--btn bx--btn--secondary"
                     disabled={false}
+                    onBlur={[Function]}
                     onClick={[Function]}
+                    onFocus={[Function]}
+                    onMouseEnter={[Function]}
+                    onMouseLeave={[Function]}
                     tabIndex={0}
                     type="button"
                   >
@@ -184,7 +198,9 @@ exports[`ModalWrapper should render 1`] = `
                 </Button>
               </SecondaryButtonSet>
               <Button
+                dangerDescription="danger"
                 disabled={false}
+                isExpressive={false}
                 kind="primary"
                 onClick={[Function]}
                 size="default"
@@ -194,10 +210,15 @@ exports[`ModalWrapper should render 1`] = `
                 type="button"
               >
                 <button
+                  aria-describedby={null}
                   aria-pressed={null}
                   className="bx--btn bx--btn--primary"
                   disabled={false}
+                  onBlur={[Function]}
                   onClick={[Function]}
+                  onFocus={[Function]}
+                  onMouseEnter={[Function]}
+                  onMouseLeave={[Function]}
                   tabIndex={0}
                   type="button"
                 >

@@ -7,6 +7,7 @@
 
 import React from 'react';
 import { action } from '@storybook/addon-actions';
+import './tile-story.scss';
 
 import {
   withKnobs,
@@ -23,8 +24,10 @@ import {
   TileAboveTheFoldContent,
   TileBelowTheFoldContent,
 } from '../Tile';
+import TextInput from '../TextInput';
 import TileGroup from '../TileGroup';
 import RadioTile from '../RadioTile';
+import Link from '../Link';
 import mdx from './Tile.mdx';
 
 const radioValues = {
@@ -39,7 +42,11 @@ const props = {
     light: boolean('Light variant (light)', false),
   }),
   clickable: () => ({
-    href: text('Href for clickable UI (href)', 'javascript:void(0)'),
+    disabled: boolean('disabled (disabled)', false),
+    href: text(
+      'Href for clickable UI (href)',
+      'https://www.carbondesignsystem.com/'
+    ),
     light: boolean('Light variant (light)', false),
   }),
   selectable: () => ({
@@ -47,6 +54,7 @@ const props = {
     handleClick: action('handleClick'),
     handleKeyDown: action('handleKeyDown'),
     light: boolean('Light variant (light)', false),
+    disabled: boolean('Disabled (disabled)', false),
   }),
   group: () => ({
     name: text('Form item (name in <TileGroup>)', 'tile-group'),
@@ -61,6 +69,7 @@ const props = {
     name: text('Form item name (name in <RadioTile>)', 'tiles'),
     onChange: action('onChange'),
     light: boolean('Light variant (light)', false),
+    disabled: boolean('Disabled (disabled)', false),
   }),
   expandable: () => ({
     tabIndex: number('Tab index (tabIndex)', 0),
@@ -103,15 +112,14 @@ export default {
 
 export const Default = () => {
   const regularProps = props.regular();
-  return <Tile {...regularProps}>Default tile</Tile>;
-};
-
-Default.parameters = {
-  info: {
-    text: `
-        Default tile without any interactions
-      `,
-  },
+  return (
+    <Tile {...regularProps}>
+      Default tile
+      <br />
+      <br />
+      <Link href="https://www.carbondesignsystem.com">Link</Link>
+    </Tile>
+  );
 };
 
 export const Clickable = () => {
@@ -119,41 +127,21 @@ export const Clickable = () => {
   return <ClickableTile {...clickableProps}>Clickable Tile</ClickableTile>;
 };
 
-Clickable.parameters = {
-  info: {
-    text: `
-        Clickable tile
-      `,
-  },
-};
-
 export const MultiSelect = () => {
   const selectableProps = props.selectable();
   return (
     <div role="group" aria-label="selectable tiles">
       <SelectableTile id="tile-1" name="tiles" {...selectableProps}>
-        Multi-select Tile
+        Option 1
       </SelectableTile>
       <SelectableTile id="tile-2" name="tiles" {...selectableProps}>
-        Multi-select Tile
+        Option 2
       </SelectableTile>
       <SelectableTile id="tile-3" name="tiles" {...selectableProps}>
-        Multi-select Tile
+        Option 3
       </SelectableTile>
     </div>
   );
-};
-
-MultiSelect.storyName = 'Multi-select';
-
-MultiSelect.parameters = {
-  info: {
-    text: `
-        Selectable tile
-
-        Use this to select multiple tiles.
-      `,
-  },
 };
 
 export const Radio = () => {
@@ -164,32 +152,16 @@ export const Radio = () => {
       legend="Radio Tile Group"
       {...props.group()}>
       <RadioTile value="standard" {...radioProps}>
-        Radio Tile
+        Option 1
       </RadioTile>
       <RadioTile value="default-selected" id="tile-2" {...radioProps}>
-        Radio Tile
+        Option 2
       </RadioTile>
       <RadioTile value="selected" id="tile-3" {...radioProps}>
-        Radio Tile
+        Option 3
       </RadioTile>
     </TileGroup>
   );
-};
-
-Radio.parameters = {
-  info: {
-    text: `
-         The example below shows a Tile Group component with a default selected Tile.
-         Although you can set the checked prop on the Tile, when using the RadioTile component
-         as a child of the Tile Group, either set the defaultSelected or valueSelected which will
-         automatically set the selected prop on the corresponding RadioTile component.
-
-         Use defaultSelected when you want a tile to be selected initially, but don't need to set it
-         at a later time. If you do need to set it dynamically at a later time, then use the valueSelected property instead.
-
-         Use this to select one tile at a time.
-      `,
-  },
 };
 
 export const Expandable = () => (
@@ -198,15 +170,10 @@ export const Expandable = () => (
       <div style={{ height: '200px' }}>Above the fold content here</div>
     </TileAboveTheFoldContent>
     <TileBelowTheFoldContent>
-      <div style={{ height: '400px' }}>Below the fold content here</div>
+      <div style={{ height: '400px' }}>
+        Below the fold content here
+        <TextInput id="test2" invalidText="A valid value is required" />
+      </div>
     </TileBelowTheFoldContent>
   </ExpandableTile>
 );
-
-Expandable.parameters = {
-  info: {
-    text: `
-        Expandable tile
-      `,
-  },
-};

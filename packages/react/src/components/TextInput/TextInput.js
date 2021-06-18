@@ -9,7 +9,7 @@ import PropTypes from 'prop-types';
 import React, { useContext } from 'react';
 import classNames from 'classnames';
 import { settings } from 'carbon-components';
-import { WarningFilled16, WarningAltFilled16 } from '@carbon/icons-react';
+import { useNormalizedInputProps } from '../../internal/useNormalizedInputProps';
 import PasswordInput from './PasswordInput';
 import ControlledPasswordInput from './ControlledPasswordInput';
 import { textInputProps } from './util';
@@ -26,6 +26,7 @@ const TextInput = React.forwardRef(function TextInput(
     onChange,
     onClick,
     hideLabel,
+    disabled,
     invalid,
     invalidText,
     warn,
@@ -34,26 +35,36 @@ const TextInput = React.forwardRef(function TextInput(
     light,
     size,
     inline,
+    readOnly,
     ...other
   },
   ref
 ) {
-  const errorId = id + '-error-msg';
-  const warnId = id + '-warn-msg';
+  const normalizedProps = useNormalizedInputProps({
+    id,
+    readOnly,
+    disabled,
+    invalid,
+    invalidText,
+    warn,
+    warnText,
+  });
+
   const textInputClasses = classNames(`${prefix}--text-input`, className, {
     [`${prefix}--text-input--light`]: light,
-    [`${prefix}--text-input--invalid`]: invalid,
+    [`${prefix}--text-input--invalid`]: normalizedProps.invalid,
+    [`${prefix}--text-input--warning`]: normalizedProps.warn,
     [`${prefix}--text-input--${size}`]: size,
   });
   const sharedTextInputProps = {
     id,
     onChange: (evt) => {
-      if (!other.disabled) {
+      if (!normalizedProps.disabled) {
         onChange(evt);
       }
     },
     onClick: (evt) => {
-      if (!other.disabled) {
+      if (!normalizedProps.disabled) {
         onClick(evt);
       }
     },
@@ -62,24 +73,27 @@ const TextInput = React.forwardRef(function TextInput(
     ref,
     className: textInputClasses,
     title: placeholder,
+    disabled: normalizedProps.disabled,
+    readOnly,
     ...other,
   };
   const inputWrapperClasses = classNames(
     `${prefix}--form-item`,
     `${prefix}--text-input-wrapper`,
     {
+      [`${prefix}--text-input-wrapper--readonly`]: readOnly,
       [`${prefix}--text-input-wrapper--light`]: light,
       [`${prefix}--text-input-wrapper--inline`]: inline,
     }
   );
   const labelClasses = classNames(`${prefix}--label`, {
     [`${prefix}--visually-hidden`]: hideLabel,
-    [`${prefix}--label--disabled`]: other.disabled,
+    [`${prefix}--label--disabled`]: normalizedProps.disabled,
     [`${prefix}--label--inline`]: inline,
     [`${prefix}--label--inline--${size}`]: inline && !!size,
   });
   const helperTextClasses = classNames(`${prefix}--form__helper-text`, {
-    [`${prefix}--form__helper-text--disabled`]: other.disabled,
+    [`${prefix}--form__helper-text--disabled`]: normalizedProps.disabled,
     [`${prefix}--form__helper-text--inline`]: inline,
   });
   const fieldOuterWrapperClasses = classNames(
@@ -91,42 +105,36 @@ const TextInput = React.forwardRef(function TextInput(
   const fieldWrapperClasses = classNames(
     `${prefix}--text-input__field-wrapper`,
     {
-      [`${prefix}--text-input__field-wrapper--warning`]: !invalid && warn,
+      [`${prefix}--text-input__field-wrapper--warning`]: normalizedProps.warn,
     }
   );
+  const iconClasses = classNames({
+    [`${prefix}--text-input__invalid-icon`]:
+      normalizedProps.invalid || normalizedProps.warn,
+    [`${prefix}--text-input__invalid-icon--warning`]: normalizedProps.warn,
+    [`${prefix}--text-input__readonly-icon`]: readOnly,
+  });
+
   const label = labelText ? (
     <label htmlFor={id} className={labelClasses}>
       {labelText}
     </label>
   ) : null;
-  let error = null;
-  if (invalid) {
-    error = (
-      <div className={`${prefix}--form-requirement`} id={errorId}>
-        {invalidText}
-      </div>
-    );
-  } else if (warn) {
-    error = (
-      <div className={`${prefix}--form-requirement`} id={warnId}>
-        {warnText}
-      </div>
-    );
-  }
-  const input = (
-    <input
-      {...textInputProps({
-        invalid,
-        sharedTextInputProps,
-        errorId,
-        warn,
-        warnId,
-      })}
-    />
-  );
   const helper = helperText ? (
     <div className={helperTextClasses}>{helperText}</div>
   ) : null;
+
+  const input = (
+    <input
+      {...textInputProps({
+        sharedTextInputProps,
+        invalid: normalizedProps.invalid,
+        invalidId: normalizedProps.invalidId,
+        warn: normalizedProps.warn,
+        warnId: normalizedProps.warnId,
+      })}
+    />
+  );
 
   const { isFluid } = useContext(FormContext);
 
@@ -141,24 +149,17 @@ const TextInput = React.forwardRef(function TextInput(
         </div>
       )}
       <div className={fieldOuterWrapperClasses}>
-        <div className={fieldWrapperClasses} data-invalid={invalid || null}>
-          {invalid && (
-            <WarningFilled16
-              className={`${prefix}--text-input__invalid-icon`}
-            />
-          )}
-          {!invalid && warn && (
-            <WarningAltFilled16
-              className={`${prefix}--text-input__invalid-icon ${prefix}--text-input__invalid-icon--warning`}
-            />
+        <div
+          className={fieldWrapperClasses}
+          data-invalid={normalizedProps.invalid || null}>
+          {normalizedProps.icon && (
+            <normalizedProps.icon className={iconClasses} />
           )}
           {input}
           {isFluid && <hr className={`${prefix}--text-input__divider`} />}
-          {/* <hr className={`${prefix}--text-input__divider`} /> */}
-          {isFluid && !inline && error}
+          {isFluid && !inline && normalizedProps.validation}
         </div>
-        {!isFluid && error}
-        {!invalid && !warn && !isFluid && !inline && helper}
+        {!isFluid && !inline && (normalizedProps.validation || helper)}
       </div>
     </div>
   );
@@ -241,9 +242,15 @@ TextInput.propTypes = {
   placeholder: PropTypes.string,
 
   /**
-   * Specify the size of the Text Input. Currently supports either `sm` or `xl` as an option.
+   * Whether the input should be read-only
    */
-  size: PropTypes.oneOf(['sm', 'xl']),
+  readOnly: PropTypes.bool,
+
+  /**
+   * Specify the size of the Text Input. Currently supports either `sm`, 'md' (default) or 'lg` as an option.
+   * TODO V11: remove `xl` (replaced with lg)
+   */
+  size: PropTypes.oneOf(['sm', 'md', 'lg', 'xl']),
 
   /**
    * Specify the type of the `<input>`
@@ -259,6 +266,7 @@ TextInput.propTypes = {
    * Specify whether the control is currently in warning state
    */
   warn: PropTypes.bool,
+
   /**
    * Provide the text that is displayed when the control is in warning state
    */

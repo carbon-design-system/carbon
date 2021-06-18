@@ -10,6 +10,7 @@ import React from 'react';
 import cx from 'classnames';
 import { settings } from 'carbon-components';
 import Link from '../Link';
+import { OverflowMenuHorizontal16 } from '@carbon/icons-react';
 
 const { prefix } = settings;
 
@@ -33,6 +34,25 @@ const BreadcrumbItem = React.forwardRef(function BreadcrumbItem(
     [customClassName]: !!customClassName,
   });
 
+  if (
+    children.type &&
+    children.type.displayName !== undefined &&
+    children.type.displayName === 'OverflowMenu'
+  ) {
+    const horizontalOverflowIcon = (
+      <OverflowMenuHorizontal16 className={`${prefix}--overflow-menu__icon`} />
+    );
+    return (
+      <li className={className} {...rest}>
+        {React.cloneElement(children, {
+          menuOptionsClass: `${prefix}--breadcrumb-menu-options`,
+          menuOffset: { top: 10, left: 59 },
+          renderIcon: () => horizontalOverflowIcon,
+        })}
+      </li>
+    );
+  }
+
   if (typeof children === 'string' && href) {
     return (
       <li className={className} ref={ref} {...rest}>
@@ -47,7 +67,7 @@ const BreadcrumbItem = React.forwardRef(function BreadcrumbItem(
     <li className={className} ref={ref} {...rest}>
       {React.cloneElement(children, {
         'aria-current': ariaCurrent,
-        className: `${prefix}--link`,
+        className: cx(`${prefix}--link`, children.props.className),
       })}
     </li>
   );

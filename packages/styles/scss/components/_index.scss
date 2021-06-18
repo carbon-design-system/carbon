@@ -4,3 +4,18 @@
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
 //
+
+@use 'accordion';
+@use 'button';
+@use 'breadcrumb';
+@use 'checkbox';
+@use 'code-snippet';
+@use 'link';
+@use 'list';
+@use 'loading';
+@use 'menu';
+@use 'data-table';
+@use 'data-table/action';
+@use 'data-table/expandable';
+@use 'data-table/skeleton';
+@use 'data-table/sort';

@@ -154,6 +154,16 @@ export default class DatePicker extends Component {
     datePickerType: PropTypes.oneOf(['simple', 'single', 'range']),
 
     /**
+     * The flatpickr `disable` option that allows a user to disable certain dates.
+     */
+    disable: PropTypes.array,
+
+    /**
+     * The flatpickr `enable` option that allows a user to enable certain dates.
+     */
+    enable: PropTypes.array,
+
+    /**
      * `true` to use the light version.
      */
     light: PropTypes.bool,
@@ -249,6 +259,11 @@ export default class DatePicker extends Component {
     onClose: PropTypes.func,
 
     /**
+     * The `open` event handler.
+     */
+    onOpen: PropTypes.func,
+
+    /**
      * `true` to use the short version.
      */
     short: PropTypes.bool,
@@ -289,11 +304,25 @@ export default class DatePicker extends Component {
       maxDate,
       value,
       onClose,
+      disable,
+      enable,
     } = this.props;
     if (datePickerType === 'single' || datePickerType === 'range') {
       const onHook = (electedDates, dateStr, instance) => {
         this.updateClassNames(instance);
       };
+
+      // Logic to determine if `enable` or `disable` will be passed down. If neither
+      // is provided, we return the default empty disabled array, allowing all dates.
+      let enableOrDisable = enable ? 'enable' : 'disable';
+      let enableOrDisableArr;
+      if (!enable && !disable) {
+        enableOrDisableArr = [];
+      } else if (enable) {
+        enableOrDisableArr = enable;
+      } else {
+        enableOrDisableArr = disable;
+      }
 
       let localeData;
       if (typeof locale === 'object') {
@@ -312,6 +341,7 @@ export default class DatePicker extends Component {
           allowInput: allowInput ?? true,
           dateFormat: dateFormat,
           locale: localeData,
+          [enableOrDisable]: enableOrDisableArr,
           minDate: minDate,
           maxDate: maxDate,
           plugins: [
@@ -349,7 +379,13 @@ export default class DatePicker extends Component {
           onReady: onHook,
           onMonthChange: onHook,
           onYearChange: onHook,
-          onOpen: onHook,
+          onOpen: (...args) => {
+            const { onOpen } = this.props;
+            onHook(...args);
+            if (onOpen) {
+              onOpen(...args);
+            }
+          },
           onValueUpdate: onHook,
         });
         this.addKeyboardEvents(this.cal);
@@ -363,8 +399,10 @@ export default class DatePicker extends Component {
     minDate: prevMinDate,
     maxDate: prevMaxDate,
     value: prevValue,
+    disable: prevDisable,
+    enable: prevEnable,
   }) {
-    const { dateFormat, minDate, maxDate, value } = this.props;
+    const { dateFormat, minDate, maxDate, value, disable, enable } = this.props;
     if (this.cal) {
       if (prevDateFormat !== dateFormat) {
         this.cal.set({ dateFormat });
@@ -374,6 +412,12 @@ export default class DatePicker extends Component {
       }
       if (prevMaxDate !== maxDate) {
         this.cal.set('maxDate', maxDate);
+      }
+      if (disable !== prevDisable) {
+        this.cal.set('disable', disable);
+      }
+      if (enable !== prevEnable) {
+        this.cal.set('enable', enable);
       }
     }
 
@@ -401,13 +445,10 @@ export default class DatePicker extends Component {
     }
   }
 
-  onChange = (e) => {
-    if (
-      e.target.value === '' &&
-      this.cal &&
-      this.cal.selectedDates.length > 0
-    ) {
+  onChange = () => {
+    if (this.inputField.value === '' && this.cal?.selectedDates.length) {
       this.cal.clear();
+      this.cal.input.focus();
     }
   };
 
@@ -428,37 +469,33 @@ export default class DatePicker extends Component {
   };
 
   addKeyboardEvents = (cal) => {
-    if (this.inputField) {
-      this.inputField.addEventListener('keydown', (e) => {
-        if (match(e, keys.ArrowDown)) {
-          (
-            cal.selectedDateElem ||
-            cal.todayDateElem ||
-            cal.calendarContainer.querySelector('.flatpickr-day[tabindex]') ||
-            cal.calendarContainer
-          ).focus();
-        }
-      });
-      this.inputField.addEventListener('change', this.onChange);
-    }
-    if (this.toInputField) {
-      this.toInputField.addEventListener('blur', (evt) => {
-        if (!this.cal.calendarContainer.contains(evt.relatedTarget)) {
-          this.cal.close();
-        }
-      });
-      this.toInputField.addEventListener('keydown', (e) => {
-        if (match(e, keys.ArrowDown)) {
-          (
-            cal.selectedDateElem ||
-            cal.todayDateElem ||
-            cal.calendarContainer.querySelector('.flatpickr-day[tabindex]') ||
-            cal.calendarContainer
-          ).focus();
-        }
-      });
-      this.toInputField.addEventListener('change', this.onChange);
-    }
+    const initArrowDownListener = (element) => {
+      if (element) {
+        element.addEventListener('keydown', (e) => {
+          if (match(e, keys.ArrowDown)) {
+            const {
+              calendarContainer,
+              selectedDateElem: fpSelectedDateElem,
+              todayDateElem: fptodayDateElem,
+            } = cal;
+            const selectedDateElem =
+              calendarContainer.querySelector('.selected') &&
+              fpSelectedDateElem;
+            const todayDateElem =
+              calendarContainer.querySelector('.today') && fptodayDateElem;
+            (
+              selectedDateElem ||
+              todayDateElem ||
+              calendarContainer.querySelector('.flatpickr-day[tabindex]') ||
+              calendarContainer
+            ).focus();
+          }
+        });
+        element.addEventListener('change', this.onChange);
+      }
+    };
+    initArrowDownListener(this.inputField);
+    initArrowDownListener(this.toInputField);
   };
 
   rightArrowHTML() {
@@ -552,6 +589,7 @@ export default class DatePicker extends Component {
 
   render() {
     const {
+      allowInput, // eslint-disable-line
       appendTo, // eslint-disable-line
       children,
       className,

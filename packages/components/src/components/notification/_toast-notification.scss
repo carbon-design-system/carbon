@@ -28,12 +28,12 @@
     display: flex;
     width: rem(288px);
     height: auto;
+    padding-left: $carbon--spacing-05;
     margin-top: $carbon--spacing-03;
     margin-right: $carbon--spacing-05;
     margin-bottom: $carbon--spacing-03;
-    padding-left: rem(14px);
-    color: $inverse-01;
     box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.2);
+    color: $text-inverse;
 
     &:first-child {
       margin-top: $carbon--spacing-05;
@@ -42,17 +42,11 @@
     @include carbon--breakpoint(max) {
       width: rem(352px);
     }
-
-    // Firefox HCM fix
-    @media screen and (prefers-contrast) {
-      outline-width: 1px;
-      outline-style: solid;
-    }
   }
 
   .#{$prefix}--toast-notification:not(.#{$prefix}--toast-notification--low-contrast)
     a {
-    color: $inverse-link;
+    color: $link-inverse;
   }
 
   .#{$prefix}--toast-notification a {
@@ -64,7 +58,7 @@
   }
 
   .#{$prefix}--toast-notification a:focus {
-    outline: 1px solid $inverse-link;
+    outline: 1px solid $link-inverse;
   }
 
   .#{$prefix}--toast-notification.#{$prefix}--toast-notification--low-contrast
@@ -73,53 +67,65 @@
   }
 
   .#{$prefix}--toast-notification--low-contrast {
-    color: $text-01;
+    color: $text-primary;
   }
 
   .#{$prefix}--toast-notification--error {
-    @include notification--experimental($inverse-support-01, $inverse-02);
+    @include notification--experimental(
+      $support-error-inverse,
+      $background-inverse
+    );
   }
 
   .#{$prefix}--toast-notification--low-contrast.#{$prefix}--toast-notification--error {
     @include notification--experimental(
-      $support-01,
+      $support-error,
       get-token-value($notification-colors, 'notification-background-error')
     );
   }
 
   .#{$prefix}--toast-notification--success {
-    @include notification--experimental($inverse-support-02, $inverse-02);
+    @include notification--experimental(
+      $support-success-inverse,
+      $background-inverse
+    );
   }
 
   .#{$prefix}--toast-notification--low-contrast.#{$prefix}--toast-notification--success {
     @include notification--experimental(
-      $support-02,
+      $support-success,
       get-token-value($notification-colors, 'notification-background-success')
     );
   }
 
   .#{$prefix}--toast-notification--info,
   .#{$prefix}--toast-notification--info-square {
-    @include notification--experimental($inverse-support-04, $inverse-02);
+    @include notification--experimental(
+      $support-info-inverse,
+      $background-inverse
+    );
   }
 
   .#{$prefix}--toast-notification--low-contrast.#{$prefix}--toast-notification--info,
   .#{$prefix}--toast-notification--low-contrast.#{$prefix}--toast-notification--info-square {
     @include notification--experimental(
-      $support-04,
+      $support-info,
       get-token-value($notification-colors, 'notification-background-info')
     );
   }
 
   .#{$prefix}--toast-notification--warning,
   .#{$prefix}--toast-notification--warning-alt {
-    @include notification--experimental($inverse-support-03, $inverse-02);
+    @include notification--experimental(
+      $support-warning-inverse,
+      $background-inverse
+    );
   }
 
   .#{$prefix}--toast-notification--low-contrast.#{$prefix}--toast-notification--warning,
   .#{$prefix}--toast-notification--low-contrast.#{$prefix}--toast-notification--warning-alt {
     @include notification--experimental(
-      $support-03,
+      $support-warning,
       get-token-value($notification-colors, 'notification-background-warning')
     );
   }
@@ -127,50 +133,61 @@
   .#{$prefix}--toast-notification--warning
     .#{$prefix}--toast-notification__icon
     path[opacity='0'] {
-    opacity: 1;
     fill: $carbon__black-100;
+    opacity: 1;
   }
 
   .#{$prefix}--toast-notification__icon {
     flex-shrink: 0;
-    margin-top: rem(14px);
-    margin-right: rem(14px);
+    margin-top: $carbon--spacing-05;
+    margin-right: $carbon--spacing-05;
   }
 
-  .#{$prefix}--toast-notification__details {
-    margin-right: $carbon--spacing-05;
+  @if feature-flag-enabled('enable-v11-release') {
+    .#{$prefix}--toast-notification__content {
+      @include type-style('body-short-01');
+
+      margin-top: $carbon--spacing-05;
+      margin-right: $carbon--spacing-05;
+      margin-bottom: $carbon--spacing-05;
+      word-break: break-word;
+    }
+
+    .#{$prefix}--toast-notification--low-contrast
+      .#{$prefix}--toast-notification__content {
+      color: $text-primary;
+    }
+  } @else {
+    .#{$prefix}--toast-notification__details {
+      margin-right: $carbon--spacing-05;
+    }
   }
 
   .#{$prefix}--toast-notification__close-button {
     @include focus-outline('reset');
 
     display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
     width: rem(48px);
     min-width: rem(48px);
     height: rem(48px);
     min-height: rem(48px);
-    margin-left: auto;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
     padding: 0;
-    background-color: transparent;
     border: none;
+    margin-left: auto;
+    background-color: transparent;
     cursor: pointer;
     transition: outline $transition--base, background-color $transition--base;
 
     &:focus {
-      outline: 2px solid $inverse-focus-ui;
+      outline: 2px solid $focus-inverse;
       outline-offset: -2px;
-
-      // Firefox HCM fix
-      @media screen and (prefers-contrast) {
-        outline-style: dotted;
-      }
     }
 
     .#{$prefix}--toast-notification__close-icon {
-      fill: $inverse-01;
+      fill: $icon-inverse;
     }
   }
 
@@ -182,42 +199,58 @@
   .#{$prefix}--toast-notification--low-contrast
     .#{$prefix}--toast-notification__close-button
     .#{$prefix}--toast-notification__close-icon {
-    fill: $icon-01;
+    fill: $icon-primary;
   }
 
-  .#{$prefix}--toast-notification__title {
-    @include type-style('productive-heading-01');
+  @if not feature-flag-enabled('enable-v11-release') {
+    .#{$prefix}--toast-notification__title {
+      @include type-style('productive-heading-01');
 
-    margin-top: $carbon--spacing-05;
-    font-weight: 600;
-    word-break: break-word;
-  }
+      margin-top: $carbon--spacing-05;
+      font-weight: 600;
+      word-break: break-word;
+    }
 
-  .#{$prefix}--toast-notification__subtitle {
-    @include type-style('body-short-01');
-
-    margin-top: 0;
-    margin-bottom: $carbon--spacing-06;
-    color: $inverse-01;
-    word-break: break-word;
-  }
-
-  .#{$prefix}--toast-notification--low-contrast
     .#{$prefix}--toast-notification__subtitle {
-    color: $text-01;
-  }
+      @include type-style('body-short-01');
 
-  .#{$prefix}--toast-notification__caption {
-    @include type-style('body-short-01');
+      margin-top: 0;
+      margin-bottom: $carbon--spacing-05;
+      color: $text-inverse;
+      word-break: break-word;
+    }
 
-    margin-bottom: $carbon--spacing-05;
-    color: $inverse-01;
-  }
+    .#{$prefix}--toast-notification--low-contrast
+      .#{$prefix}--toast-notification__subtitle {
+      color: $text-primary;
+    }
 
-  .#{$prefix}--toast-notification--low-contrast
     .#{$prefix}--toast-notification__caption {
-    color: $text-01;
+      @include type-style('body-short-01');
+
+      padding-top: $carbon--spacing-03;
+      margin-bottom: $carbon--spacing-05;
+      color: $text-inverse;
+    }
+
+    .#{$prefix}--toast-notification--low-contrast
+      .#{$prefix}--toast-notification__caption {
+      color: $text-primary;
+    }
   }
+
+  // Windows HCM fix
+  /* stylelint-disable */
+  .#{$prefix}--toast-notification {
+    @include high-contrast-mode('outline');
+  }
+  .#{$prefix}--toast-notification__close-button:focus {
+    @include high-contrast-mode('focus');
+  }
+  .#{$prefix}--toast-notification__icon {
+    @include high-contrast-mode('icon-fill');
+  }
+  /* stylelint-enable */
 }
 
 @include exports('toast-notifications') {

@@ -63,6 +63,36 @@
     - sow
     - hand
     - soil
+- name: ai--ethics
+  friendly_name: AI ethics
+  aliases:
+    - AI ethics
+    - AI ethics principles
+- name: ai--trust
+  friendly_name: AI trust
+  aliases:
+    - AI trust
+    - trust
+- name: ai--privacy
+  friendly_name: AI privacy
+  aliases:
+    - AI privacy
+    - privacy
+- name: ai--transparency
+  friendly_name: AI transparency
+  aliases:
+    - AI transparency
+    - transparency
+- name: ai--explainability
+  friendly_name: AI explainability
+  aliases:
+    - AI explainability
+    - explainability
+- name: ai--robustness
+  friendly_name: AI robustness
+  aliases:
+    - AI robustness
+    - robustness
 - name: air--conditioner
   friendly_name: Air conditioner
   aliases:
@@ -217,6 +247,11 @@
     - storage
     - historical
     - history
+- name: argentina--obelisk
+  friendly_name: Argentina Obelisk
+  aliases:
+    - Argentina Obelisk
+    - South America
 - name: art--tools--01
   friendly_name: Art tools 01
   aliases:
@@ -296,6 +331,13 @@
     - computer case
     - case
     - travel
+- name: badge
+  friendly_name: Badge
+  aliases:
+    - badge
+    - certification
+    - course
+    - completion
 - name: bag
   friendly_name: Bag
   aliases:
@@ -415,6 +457,13 @@
     - data analytics
     - analytics
     - data
+- name: broom
+  friendly_name: Broom
+  aliases:
+    - broom
+    - sweep
+    - clean
+    - facilities
 - name: budapest
   friendly_name: Budapest
   aliases:
@@ -825,6 +874,18 @@
     - Chicago
     - city
     - cities
+- name: chile--easter-island
+  friendly_name: Chile Easter Island
+  aliases:
+    - Chile
+    - Easter Island
+    - South America
+- name: chile--hand-of-the-desert
+  friendly_name: Chile Hand of the Desert
+  aliases:
+    - Chile
+    - Hand of the Desert
+    - South America
 - name: chip--circuit
   friendly_name: Chip circuit
   aliases:
@@ -1040,6 +1101,14 @@
   friendly_name: Cloud Pak for Multicloud Management
   aliases:
     - Cloud Pak for Multicloud Management
+- name: cloud-pak--for-network-automation
+  friendly_name: Cloud Pak for Network Automation
+  aliases:
+    - network
+    - automation
+    - orchestration
+    - telco
+    - Cloud Pak for Network Automation
 - name: cloud-pak--for-security
   friendly_name: Cloud Pak for Security
   aliases:
@@ -1133,6 +1202,12 @@
   friendly_name: Color contrast
   aliases:
     - color contrast
+- name: colombia--cathedral-of-las-lajas
+  friendly_name: Colombia Cathedral of Las Lajas
+  aliases:
+    - Colombia
+    - Cathedral of Las Lajas
+    - South America
 - name: commercial--financing--01
   friendly_name: Commercial financing 01
   aliases:
@@ -1145,6 +1220,14 @@
     - commercial financing 02
     - financing
     - finance
+- name: compost--bin
+  friendly_name: Copmpost bin
+  aliases:
+    - compost
+    - compost bin
+    - recycle
+    - environment
+    - process
 - name: concept--expansion
   friendly_name: Concept expansion
   aliases:
@@ -1582,6 +1665,12 @@
     - global
     - location
     - map
+- name: ecuador--quito
+  friendly_name: Ecuador Quito
+  aliases:
+    - Ecuador
+    - Quito
+    - South America
 - name: education
   friendly_name: Education
   aliases:
@@ -1783,6 +1872,10 @@
   aliases:
     - factory
     - manufacturing
+- name: fairness
+  friendly_name: Fairness
+  aliases:
+    - fairness
 - name: farm--01
   friendly_name: Farm 01
   aliases:
@@ -2342,6 +2435,18 @@
     - home profile
     - home
     - house
+- name: hong-kong
+  friendly_name: Hong Kong
+  aliases:
+    - Hong Kong
+    - China
+- name: hong-kong--cityscape
+  friendly_name: Hong Kong cityscape
+  aliases:
+    - Hong Kong
+    - China
+    - city
+    - cityscape
 - name: hospital
   friendly_name: Hospital
   aliases:
@@ -2466,6 +2571,11 @@
     - trust
     - assessment
     - security
+- name: india--south-asia
+  friendly_name: India South Asia
+  aliases:
+    - India
+    - South Asia
 - name: infrastructure-security
   friendly_name: Infrastructure security
   aliases:
@@ -2518,6 +2628,13 @@
     - communication
     - entry
     - security
+- name: invoice
+  friendly_name: Invoice
+  aliases:
+    - invoice
+    - buying and invoicing
+    - invoicing
+    - accounting
 - name: iot--munich
   friendly_name: IoT Munich
   aliases:
@@ -2702,6 +2819,13 @@
     - love
     - like
     - heart
+- name: luggage
+  friendly_name: Luggage
+  aliases:
+    - luggage
+    - suitcase
+    - travel
+    - carry-on
 - name: lungs
   friendly_name: Lungs
   aliases:
@@ -2793,7 +2917,7 @@
     - contract
     - flow
     - workflow
-    - process 
+    - process
     - cycle
 - name: managing--items
   friendly_name: Managing items
@@ -3408,6 +3532,12 @@
     - insights
     - watson
     - AI
+- name: peru--machu-picchu
+  friendly_name: Peru Machu Picchu
+  aliases:
+    - Peru
+    - Machu Picchu
+    - South America
 - name: petri--culture
   friendly_name: Petri culture
   aliases:
@@ -3720,6 +3850,14 @@
     - industry
     - environment
     - process
+- name: recycle--bin
+  friendly_name: Recycle bin
+  aliases:
+    - recycle
+    - recycle bin
+    - industry
+    - environment
+    - process
 - name: refinery
   friendly_name: Refinery
   aliases:
@@ -3976,6 +4114,12 @@
     - user data
     - HR
     - employee
+- name: secure--search
+  friendly_name: Secure search
+  aliases:
+    - secure search
+    - search
+    - validating
 - name: security
   friendly_name: Security
   aliases:
@@ -4005,6 +4149,11 @@
     - IBM
     - security
     - shield
+- name: select--product
+  friendly_name: Select product
+  aliases:
+    - select
+    - select product
 - name: select--range
   friendly_name: Select range
   aliases:
@@ -4482,6 +4631,12 @@
     - tags
     - retail
     - label
+- name: taipei--bubble-tea
+  friendly_name: Taipei bubble tea
+  aliases:
+    - Taipei
+    - Taiwan
+    - bubble tea
 - name: tape--storage
   friendly_name: Tape storage
   aliases:
@@ -4574,6 +4729,15 @@
     - cool
     - weather
     - forecast
+- name: temporary-badge
+  friendly_name: Temporary badge
+  aliases:
+    - visitor
+    - badge
+    - access
+    - temporary
+    - guest
+    - visitant
 - name: tennis
   friendly_name: Tennis
   aliases:
@@ -4914,6 +5078,12 @@
     - unlock
     - security
     - open
+- name: uruguay--palacio-salvo
+  friendly_name: Uruguay Palacio Salvo
+  aliases:
+    - Uruguay
+    - Palacio Salvo
+    - South America
 - name: upload--01
   friendly_name: Upload 01
   aliases:
@@ -4995,6 +5165,12 @@
     - vancouver
     - city
     - cities
+- name: venezuela--national-pantheon-of-venezuela
+  friendly_name: Venezuela National Pantheon of Venezuela
+  aliases:
+    - Venezuela
+    - National Pantheon of Venezuela
+    - South America
 - name: video--01
   friendly_name: Video 01
   aliases:

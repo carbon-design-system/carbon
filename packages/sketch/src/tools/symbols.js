@@ -28,7 +28,12 @@ export function syncSymbol({ symbols, name, config }) {
   }
 
   Object.keys(config).forEach((key) => {
-    symbol[key] = config[key];
+    if (key === 'frame') {
+      // prefer x and y positioning of existing artboard #8569
+      symbol[key] = symbol[key] ?? config[key];
+    } else {
+      symbol[key] = config[key];
+    }
   });
 
   return symbol;

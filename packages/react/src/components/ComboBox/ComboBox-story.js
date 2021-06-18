@@ -7,7 +7,7 @@
 
 import React from 'react';
 import { action } from '@storybook/addon-actions';
-import { boolean, select, text } from '@storybook/addon-knobs';
+import { boolean, object, select, text } from '@storybook/addon-knobs';
 import ComboBox from '../ComboBox';
 import mdx from './ComboBox.mdx';
 
@@ -28,7 +28,6 @@ const items = [
   {
     id: 'option-3',
     text: 'Option 3',
-    selected: true,
   },
   {
     id: 'option-4',
@@ -41,9 +40,9 @@ const items = [
 ];
 
 const sizes = {
-  'Extra large size (xl)': 'xl',
-  'Default size': undefined,
-  'Small size (sm)': 'sm',
+  'Small  (sm)': 'sm',
+  'Medium (md) - default': undefined,
+  'Large  (lg)': 'lg',
 };
 
 const directions = {
@@ -64,6 +63,8 @@ export default {
 export const combobox = () => (
   <div style={{ width: 300 }}>
     <ComboBox
+      onChange={() => {}}
+      id="carbon-combobox"
       items={items}
       itemToString={(item) => (item ? item.text : '')}
       placeholder="Filter..."
@@ -91,21 +92,35 @@ const props = () => ({
     'Warning state text (warnText)',
     'This mode may perform worse on older machines'
   ),
+  listBoxMenuIconTranslationIds: object(
+    'Listbox menu icon translation IDs (for translateWithId callback)',
+    {
+      'close.menu': 'Close menu',
+      'open.menu': 'Open menu',
+      'clear.selection': 'Clear selection',
+    }
+  ),
 });
 
-export const Playground = () => (
-  <div style={{ width: 300 }}>
-    <ComboBox
-      items={items}
-      itemToString={(item) => (item ? item.text : '')}
-      {...props()}
-    />
-  </div>
-);
+export const Playground = () => {
+  const { listBoxMenuIconTranslationIds, ...comboBoxProps } = props();
+  return (
+    <div style={{ width: 300 }}>
+      <ComboBox
+        {...comboBoxProps}
+        items={items}
+        itemToString={(item) => (item ? item.text : '')}
+        translateWithId={(id) => listBoxMenuIconTranslationIds[id]}
+      />
+    </div>
+  );
+};
 
 export const disabled = () => (
   <div style={{ width: 300 }}>
     <ComboBox
+      onChange={() => {}}
+      id="carbon-combobox-disabled"
       disabled
       items={items}
       itemToString={(item) => (item ? item.text : '')}
@@ -119,6 +134,8 @@ export const disabled = () => (
 export const light = () => (
   <div style={{ width: 300 }}>
     <ComboBox
+      onChange={() => {}}
+      id="carbon-combobox-light"
       light
       items={items}
       itemToString={(item) => (item ? item.text : '')}

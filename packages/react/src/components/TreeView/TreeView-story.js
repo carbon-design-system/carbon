@@ -17,6 +17,7 @@ import {
 } from '@storybook/addon-knobs';
 import { InlineNotification } from '../Notification';
 import TreeView, { TreeNode } from '../TreeView';
+import './story.scss';
 
 const sizes = {
   default: 'default',

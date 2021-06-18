@@ -23,8 +23,8 @@
 ///   }
 @mixin text-overflow {
   overflow: hidden;
-  white-space: nowrap;
   text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 /// Helper for handling selectors for the expansion state of the side-nav.
@@ -70,16 +70,16 @@
   //----------------------------------------------------------------------------.
   .#{$prefix}--side-nav {
     position: fixed;
+    z-index: z('header');
     top: 0;
     bottom: 0;
     left: 0;
-    z-index: z('header');
-    width: mini-units(6);
-    max-width: mini-units(32);
     // Useful to toggle this property to see what's going on when not expanded
     overflow: hidden;
-    color: $shell-side-nav-text-01;
+    width: mini-units(6);
+    max-width: mini-units(32);
     background-color: $shell-side-nav-bg-01;
+    color: $shell-side-nav-text-01;
     // TODO: sync with motion work
     transition: width 0.11s cubic-bezier(0.2, 0, 1, 0.9);
     will-change: width;
@@ -131,7 +131,7 @@
     @include carbon--breakpoint-down('lg') {
       width: 100vw;
       height: 100vh;
-      background-color: $overlay-01;
+      background-color: $overlay;
       opacity: 1;
       transition: opacity $transition--expansion $carbon--standard-easing,
         background-color $transition--expansion $carbon--standard-easing;
@@ -159,8 +159,8 @@
   //----------------------------------------------------------------------------
   .#{$prefix}--side-nav__navigation {
     display: flex;
-    flex-direction: column;
     height: 100%;
+    flex-direction: column;
   }
 
   //----------------------------------------------------------------------------
@@ -187,29 +187,28 @@
   //----------------------------------------------------------------------------
   .#{$prefix}--side-nav__details {
     display: flex;
+    min-width: 0;
     // Necessary for text truncation in title
     // https://css-tricks.com/flexbox-truncated-text/#article-header-id-3
     flex: 1;
     flex-direction: column;
-    min-width: 0;
     padding-right: mini-units(2);
 
     @include expanded($opacity: true, $visibility: true);
   }
 
   .#{$prefix}--side-nav--ux .#{$prefix}--side-nav__details {
-    visibility: inherit;
     opacity: 1;
+    visibility: inherit;
   }
 
   .#{$prefix}--side-nav__title {
     @include text-overflow();
 
     margin-top: mini-units(2);
-    font-weight: 600;
-
     // TODO: sync with type styles
     font-size: rem(14px);
+    font-weight: 600;
     letter-spacing: 0.1px;
     user-select: none;
   }
@@ -244,21 +243,21 @@
   .#{$prefix}--side-nav__select {
     @include focus-outline('reset');
 
-    flex: 1 1 0%;
     // Flex bug, used to have the select node respect the width if a child has a
     // value that is longer than the width of the select
     min-width: 0;
     height: mini-units(4);
+    flex: 1 1 0%;
     // Buffer the right hand side of select so text doesn't overlay the chevron
     padding-right: mini-units(4);
-    color: $shell-header-text-01;
-    font-size: rem(12px);
-    background-color: $shell-header-bg-01;
     border: none;
-    border-radius: 0;
-    cursor: pointer;
-    transition: outline $duration--fast-02;
     appearance: none;
+    background-color: $shell-header-bg-01;
+    border-radius: 0;
+    color: $shell-header-text-01;
+    cursor: pointer;
+    font-size: rem(12px);
+    transition: outline $duration--fast-02;
   }
 
   .#{$prefix}--side-nav__select:focus {
@@ -269,8 +268,8 @@
   // Side-nav > Navigation > Footer
   //----------------------------------------------------------------------------
   .#{$prefix}--side-nav__footer {
-    flex: 0 0 rem(48px);
     width: 100%;
+    flex: 0 0 rem(48px);
     background-color: $shell-side-nav-bg-01;
   }
 
@@ -292,9 +291,9 @@
   // Side-nav > Navigation > Item(s)
   //----------------------------------------------------------------------------
   .#{$prefix}--side-nav__items {
+    overflow: hidden;
     flex: 1 1 0%;
     padding: 1rem 0 0;
-    overflow: hidden;
 
     @include expanded() {
       overflow-y: auto;
@@ -306,9 +305,9 @@
   }
 
   .#{$prefix}--side-nav__item {
+    overflow: hidden;
     width: auto;
     height: auto;
-    overflow: hidden;
   }
 
   .#{$prefix}--side-nav--ux .#{$prefix}--side-nav__item {
@@ -326,9 +325,9 @@
   .#{$prefix}--side-nav a.#{$prefix}--header__menu-item:hover,
   .#{$prefix}--side-nav
     .#{$prefix}--header__menu-title[aria-expanded='true']:hover {
-    color: $ibm-color__gray-100;
     // TODO: sync color
     background-color: $shell-side-nav-bg-04;
+    color: $ibm-color__gray-100;
   }
 
   .#{$prefix}--side-nav__item:not(.#{$prefix}--side-nav__item--active)
@@ -363,8 +362,8 @@
     @include focus-outline('reset');
 
     display: flex;
-    align-items: center;
     height: mini-units(4);
+    align-items: center;
 
     padding: 0 mini-units(2);
     color: $shell-side-nav-text-01;
@@ -374,8 +373,8 @@
   }
 
   .#{$prefix}--side-nav__submenu:hover {
-    color: $ibm-color__gray-100;
     background-color: $shell-side-nav-bg-04;
+    color: $ibm-color__gray-100;
   }
 
   .#{$prefix}--side-nav__submenu:focus {
@@ -411,15 +410,15 @@
   }
 
   .#{$prefix}--side-nav__item--active .#{$prefix}--side-nav__submenu:hover {
-    color: $ibm-color__gray-100;
     background-color: $shell-side-nav-bg-04;
+    color: $ibm-color__gray-100;
   }
 
   .#{$prefix}--side-nav__item--active
     .#{$prefix}--side-nav__submenu[aria-expanded='false'] {
     position: relative;
-    color: $ibm-color__gray-100;
     background-color: $shell-side-nav-bg-04;
+    color: $ibm-color__gray-100;
     &::before {
       position: absolute;
       top: 0;
@@ -483,8 +482,8 @@
 
     position: relative;
     display: flex;
-    align-items: center;
     min-height: mini-units(4);
+    align-items: center;
     padding: 0 mini-units(2);
     text-decoration: none;
     transition: color $duration--fast-02, background-color $duration--fast-02,
@@ -503,8 +502,8 @@
 
     color: $shell-side-nav-text-01;
     font-size: rem(14px);
-    line-height: 1.25rem;
     letter-spacing: 0.1px;
+    line-height: 1.25rem;
     user-select: none;
   }
 
@@ -515,8 +514,8 @@
 
   a.#{$prefix}--side-nav__link[aria-current='page'],
   a.#{$prefix}--side-nav__link--current {
-    font-weight: 600;
     background-color: $shell-side-nav-bg-04;
+    font-weight: 600;
   }
 
   a.#{$prefix}--side-nav__link[aria-current='page']
@@ -556,12 +555,6 @@
     width: mini-units(2);
     height: mini-units(2);
     fill: $shell-side-nav-icon-01;
-
-    @media screen and (-ms-high-contrast: active),
-      screen and (prefers-contrast) {
-      // `ButtonText` is a CSS2 system color to help improve colors in HCM
-      fill: ButtonText;
-    }
   }
 
   .#{$prefix}--side-nav__icon > svg.#{$prefix}--side-nav-collapse-icon {
@@ -655,8 +648,8 @@
     }
 
     a.#{$prefix}--header__menu-item:hover {
-      color: $ibm-color__gray-100;
       background-color: $shell-side-nav-bg-04;
+      color: $ibm-color__gray-100;
     }
   }
 
@@ -674,13 +667,18 @@
     .#{$prefix}--header__menu-arrow,
   .#{$prefix}--side-nav .#{$prefix}--header__menu-arrow {
     fill: $shell-side-nav-text-01;
+  }
 
-    // Windows, Firefox HCM Fix
-    @media screen and (-ms-high-contrast: active),
-      screen and (prefers-contrast) {
-      // `ButtonText` is a CSS2 system color to help improve colors in HCM
-      fill: ButtonText;
-    }
+  // Windows HCM fix
+  .#{$prefix}--side-nav__icon > svg,
+  .#{$prefix}--side-nav
+    a.#{$prefix}--header__menu-item:hover
+    .#{$prefix}--header__menu-arrow,
+  .#{$prefix}--side-nav
+    a.#{$prefix}--header__menu-item:focus
+    .#{$prefix}--header__menu-arrow,
+  .#{$prefix}--side-nav .#{$prefix}--header__menu-arrow {
+    @include high-contrast-mode('icon-fill');
   }
 }
 

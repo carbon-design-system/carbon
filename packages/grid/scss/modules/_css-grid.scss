@@ -1,0 +1,419 @@
+//
+// Copyright IBM Corp. 2018, 2018
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+@use 'sass:map';
+@use 'config' as *;
+@use 'breakpoint' as *;
+
+@mixin css-grid() {
+  display: grid;
+  max-width: 99rem;
+  padding-right: calc(var(--cds-grid-margin) + var(--cds-grid-gutter) / 2);
+  padding-left: calc(var(--cds-grid-margin) + var(--cds-grid-gutter) / 2);
+  margin-right: auto;
+  margin-left: auto;
+  column-gap: var(--cds-grid-gutter);
+  grid-template-columns: repeat(
+    var(--cds-grid-columns),
+    minmax(0, var(--cds-grid-column-size))
+  );
+}
+
+@mixin subgrid() {
+  display: grid;
+  column-gap: var(--cds-grid-gutter);
+  grid-template-columns: repeat(
+    var(--cds-grid-columns),
+    minmax(0, var(--cds-grid-column-size))
+  );
+}
+
+:root {
+  --cds-grid-columns: 4;
+  --cds-grid-column-size: 1fr;
+  --cds-grid-gutter: 2rem;
+  // Used to configure appropriate margins for condensed subgrids inside wide grids
+  --cds-grid-gutter-wide: 2rem;
+  --cds-grid-hang: 1rem;
+  --cds-grid-margin: 0;
+
+  @include breakpoint(md) {
+    --cds-grid-columns: 8;
+    --cds-grid-margin: 1rem;
+  }
+
+  @include breakpoint(lg) {
+    --cds-grid-columns: 16;
+  }
+
+  @include breakpoint(max) {
+    --cds-grid-margin: 1.5rem;
+  }
+}
+
+.#{$prefix}--css-grid {
+  @include css-grid();
+}
+
+.#{$prefix}--css-grid--12 {
+  @include css-grid();
+  @include breakpoint(lg) {
+    --cds-grid-columns: 12;
+  }
+}
+
+.#{$prefix}--subgrid {
+  @include subgrid();
+}
+
+.#{$prefix}--subgrid[class*='col'] {
+  display: grid;
+}
+
+// -----------------------------------------------------------------------------
+// Narrow
+// -----------------------------------------------------------------------------
+.#{$prefix}--css-grid--narrow {
+  --cds-grid-margin: 1rem;
+
+  padding-right: var(--cds-grid-margin);
+  padding-left: var(--cds-grid-margin);
+
+  @include breakpoint(md) {
+    padding-right: calc(var(--cds-grid-margin) + var(--cds-grid-gutter) / 2);
+    padding-left: calc(var(--cds-grid-margin) + var(--cds-grid-gutter) / 2);
+  }
+}
+
+.#{$prefix}--css-grid--narrow > [class*='col'] {
+  margin-left: calc(var(--cds-grid-gutter) / 2 * -1);
+}
+
+// Narrow subgrid inside wide
+.#{$prefix}--css-grid:not(.#{$prefix}--css-grid--condensed)
+  .#{$prefix}--subgrid.#{$prefix}--css-grid--narrow {
+  padding: 0;
+}
+
+// Narrow subgrid column inside wide
+.#{$prefix}--css-grid
+  .#{$prefix}--subgrid.#{$prefix}--css-grid--narrow
+  > [class*='col'] {
+  margin-left: calc(var(--cds-grid-gutter) / 2 * -1);
+}
+
+// -----------------------------------------------------------------------------
+// Condensed
+// -----------------------------------------------------------------------------
+.#{$prefix}--css-grid--condensed {
+  --cds-grid-gutter: 2px;
+
+  column-gap: var(--cds-grid-gutter);
+  row-gap: var(--cds-grid-gutter);
+}
+
+// condensed subgrid inside wide
+.#{$prefix}--css-grid:not(.#{$prefix}--css-grid--narrow)
+  .bx--subgrid.#{$prefix}--css-grid--condensed {
+  margin-right: calc((var(--cds-grid-gutter-wide) / 2) * -1);
+  margin-left: calc((var(--cds-grid-gutter-wide) / 2) * -1);
+}
+
+// -----------------------------------------------------------------------------
+// No Gutter
+// -----------------------------------------------------------------------------
+.#{$prefix}--css-grid--no-gutter {
+  // This is set to 0px (versus 0) so that the calc expression for padding for
+  // a grid container works as epxected. Without the unit, the calc() will
+  // result in a value of 0.
+  // stylelint-disable-next-line length-zero-no-unit
+  --cds-grid-gutter: 0px;
+
+  column-gap: var(--cds-grid-gutter);
+}
+
+// -----------------------------------------------------------------------------
+// Full width
+// -----------------------------------------------------------------------------
+.#{$prefix}--css-grid--full-width {
+  max-width: 100%;
+}
+
+// -----------------------------------------------------------------------------
+// Column span
+// -----------------------------------------------------------------------------
+@mixin -column-span($i) {
+  @if $i == 0 {
+    display: none;
+  } @else {
+    --cds-grid-columns: #{$i};
+
+    display: block;
+    grid-column: span $i / span $i;
+  }
+}
+
+@for $i from 0 through 16 {
+  .#{$prefix}--col-span-#{$i} {
+    @include -column-span($i);
+  }
+}
+
+.#{$prefix}--col-span-auto {
+  grid-column: auto;
+}
+
+.#{$prefix}--col-span-100 {
+  grid-column: 1 / -1;
+}
+
+@each $name, $value in $grid-breakpoints {
+  $columns: map.get($value, columns);
+
+  @include breakpoint($name) {
+    @for $i from 0 through $columns {
+      .#{$prefix}--#{$name}\:col-span-#{$i} {
+        @include -column-span($i);
+      }
+    }
+
+    .#{$prefix}--#{$name}\:col-span-auto {
+      grid-column: auto;
+    }
+
+    .#{$prefix}--#{$name}\:col-span-100 {
+      grid-column: 1 / -1;
+    }
+  }
+}
+
+.#{$prefix}--col-span-25 {
+  --cds-grid-columns: 1;
+
+  grid-column: span 1;
+
+  @include breakpoint(md) {
+    --cds-grid-columns: 2;
+
+    grid-column: span 2;
+  }
+
+  @include breakpoint(lg) {
+    --cds-grid-columns: 4;
+
+    grid-column: span 4;
+  }
+}
+
+.#{$prefix}--col-span-50 {
+  --cds-grid-columns: 2;
+
+  grid-column: span 2;
+
+  @include breakpoint(md) {
+    --cds-grid-columns: 4;
+
+    grid-column: span 4;
+  }
+
+  @include breakpoint(lg) {
+    --cds-grid-columns: 8;
+
+    grid-column: span 8;
+  }
+}
+
+.#{$prefix}--col-span-75 {
+  --cds-grid-columns: 3;
+
+  grid-column: span 3;
+
+  @include breakpoint(md) {
+    --cds-grid-columns: 6;
+
+    grid-column: span 6;
+  }
+
+  @include breakpoint(lg) {
+    --cds-grid-columns: 12;
+
+    grid-column: span 12;
+  }
+}
+
+// -----------------------------------------------------------------------------
+// Column offset
+// -----------------------------------------------------------------------------
+@for $i from 1 through 16 {
+  .#{$prefix}--col-start-#{$i} {
+    grid-column-start: $i;
+  }
+
+  .#{$prefix}--col-end-#{$i} {
+    grid-column-end: $i;
+  }
+}
+
+.#{$prefix}--col-start-auto {
+  grid-column-start: auto;
+}
+
+.#{$prefix}--col-end-auto {
+  grid-column-start: end;
+}
+
+@each $name, $value in $grid-breakpoints {
+  $columns: map.get($value, columns);
+
+  @include breakpoint($name) {
+    // The `grid-column-end` and `grid-column-start` properies are *not* inclusive.
+    // It starts/ends the column *at* the column, not *on* the column. We must
+    // ensure that there is one additional class available for each breakpoint.
+    @for $i from 1 through $columns + 1 {
+      .#{$prefix}--#{$name}\:col-start-#{$i} {
+        grid-column-start: $i;
+      }
+
+      .#{$prefix}--#{$name}\:col-end-#{$i} {
+        grid-column-end: $i;
+      }
+    }
+
+    .#{$prefix}--#{$name}\:col-start-auto {
+      grid-column-start: auto;
+    }
+
+    .#{$prefix}--#{$name}\:col-end-auto {
+      grid-column-start: end;
+    }
+  }
+}
+
+// -----------------------------------------------------------------------------
+// Hang
+// -----------------------------------------------------------------------------
+.#{$prefix}--hang {
+  padding-left: var(--cds-grid-hang);
+}
+
+// -----------------------------------------------------------------------------
+// Column gutter
+// -----------------------------------------------------------------------------
+.#{$prefix}--gutter {
+  padding-right: var(--cds-grid-hang);
+  padding-left: var(--cds-grid-hang);
+}
+
+.#{$prefix}--gutter-start {
+  padding-left: var(--cds-grid-hang);
+}
+
+[dir='rtl'] .#{$prefix}--gutter-start {
+  padding-right: var(--cds-grid-hang);
+}
+
+.#{$prefix}--gutter-end {
+  padding-right: var(--cds-grid-hang);
+}
+
+[dir='rtl'] .#{$prefix}--gutter-end {
+  padding-left: var(--cds-grid-hang);
+}
+
+// -----------------------------------------------------------------------------
+// Utilities
+// -----------------------------------------------------------------------------
+
+/// Justify items
+.#{$prefix}--justify-items-start {
+  justify-items: start;
+}
+
+.#{$prefix}--justify-items-end {
+  justify-items: end;
+}
+
+.#{$prefix}--justify-items-center {
+  justify-items: center;
+}
+
+/// Align items
+.#{$prefix}--align-items-start {
+  align-items: start;
+}
+
+.#{$prefix}--align-items-end {
+  align-items: end;
+}
+
+.#{$prefix}--align-items-center {
+  align-items: center;
+}
+
+// -----------------------------------------------------------------------------
+// Aspect ratio -- TODO: in v11 should this move to a new file to live alongside the AspectRatio component?
+// -----------------------------------------------------------------------------
+
+/// The aspect ratios that are used to generate corresponding aspect ratio
+/// classes in code
+/// @type List
+/// @access public
+/// @group @carbon/grid
+$carbon--aspect-ratios: (
+  (16, 9),
+  (9, 16),
+  (2, 1),
+  (1, 2),
+  (4, 3),
+  (3, 4),
+  (3, 2),
+  (2, 3),
+  (1, 1)
+);
+
+/// Generates the CSS classname utilities for the aspect ratios
+///
+/// CSS Tricks article on aspect ratios and all the different ways it can be done.
+/// https://css-tricks.com/aspect-ratio-boxes/#article-header-id-6
+///
+/// That article references an earlier article on the topic.
+/// https://keithjgrant.com/posts/2017/03/aspect-ratios/
+///
+/// @param {Number} $width width from an aspect ratio
+/// @param {Number} $height height from an aspect ratio
+/// @access private
+/// @group @carbon/grid
+@mixin carbon--aspect-ratio($aspect-ratios: $carbon--aspect-ratios) {
+  .#{$prefix}--aspect-ratio {
+    position: relative;
+  }
+
+  .#{$prefix}--aspect-ratio::before {
+    width: 1px;
+    height: 0;
+    margin-left: -1px;
+    content: '';
+    float: left;
+  }
+
+  .#{$prefix}--aspect-ratio::after {
+    display: table;
+    clear: both;
+    content: '';
+  }
+
+  @each $aspect-ratio in $aspect-ratios {
+    $width: nth($aspect-ratio, 1);
+    $height: nth($aspect-ratio, 2);
+
+    .#{$prefix}--aspect-ratio--#{$width}x#{$height}::before {
+      padding-top: percentage($height / $width);
+    }
+  }
+}
+
+@include carbon--aspect-ratio();
