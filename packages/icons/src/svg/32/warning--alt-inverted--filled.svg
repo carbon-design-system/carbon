@@ -6,7 +6,7 @@
       }
     </style>
   </defs>
-  <path id="_inner-path_" data-name="&lt;inner-path&gt;" class="cls-1" d="M14.875,5h2.25V15h-2.25ZM16,21a1.5,1.5,0,1,1,1.5-1.5A1.5,1.5,0,0,1,16,21Z"/>
+  <path id="inner-path" class="cls-1" d="M14.875,5h2.25V15h-2.25ZM16,21a1.5,1.5,0,1,1,1.5-1.5A1.5,1.5,0,0,1,16,21Z"/>
   <path d="M29.855,2.481A1.0011,1.0011,0,0,0,29,2H3a1,1,0,0,0-.8872,1.4614l13,25a1,1,0,0,0,1.7744,0l13-25A1.001,1.001,0,0,0,29.855,2.481ZM14.875,5h2.25V15h-2.25ZM16,21a1.5,1.5,0,1,1,1.5-1.5A1.5,1.5,0,0,1,16,21Z"/>
   <rect id="_Transparent_Rectangle_" data-name="&lt;Transparent Rectangle&gt;" class="cls-1" width="32" height="32"/>
 </svg>
