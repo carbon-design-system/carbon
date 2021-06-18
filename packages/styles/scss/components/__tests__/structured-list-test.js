@@ -7,21 +7,21 @@
  * @jest-environment node
  */
 
- 'use strict';
+'use strict';
 
- const { SassRenderer } = require('@carbon/test-utils/scss');
- 
- const { render } = SassRenderer.create(__dirname);
- 
- describe('scss/components/structured-list', () => {
-   test('Public API', async () => {
-     const { unwrap } = await render(`
+const { SassRenderer } = require('@carbon/test-utils/scss');
+
+const { render } = SassRenderer.create(__dirname);
+
+describe('scss/components/structured-list', () => {
+  test('Public API', async () => {
+    const { unwrap } = await render(`
         @use 'sass:map';
         @use 'sass:meta';
         @use '../structured-list';
   
         $_: get('mixin', meta.mixin-exists('structured-list', 'structured-list'));
       `);
-     expect(unwrap('mixin')).toBe(true);
-   });
- });
+    expect(unwrap('mixin')).toBe(true);
+  });
+});
