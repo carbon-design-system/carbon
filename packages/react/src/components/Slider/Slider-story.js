@@ -92,4 +92,37 @@ export const ControlledSlider = () => {
   );
 };
 
+export const TestingUpdatingMINMAXValues = () => {
+  const [params, setParams] = useState({ value: 0, min: 0, max: 0 });
+  return (
+    <>
+      <button
+        type="button"
+        onClick={() => setParams({ value: 0, min: -8, max: 8 })}>
+        1. set props to value: 0, min: -8, max: 8
+      </button>
+      <button
+        type="button"
+        onClick={() => setParams({ value: 0, min: 0, max: 0 })}>
+        2. reset props to value: 0, min: 0, max: 0
+      </button>
+      <button
+        type="button"
+        onClick={() => setParams({ value: 1, min: -8, max: 8 })}>
+        3. set props to value: 1, min: -8, max: 8
+      </button>
+      <button
+        type="button"
+        onClick={() => setParams({ value: 1, min: 1, max: 1 })}>
+        4. set props to value: 1, min: 1, max: 1
+      </button>
+
+      <Slider {...params} />
+      <h1>
+        value {params.value} -- min {params.min} -- max {params.max}
+      </h1>
+    </>
+  );
+};
+
 export const Skeleton = () => <SliderSkeleton />;
