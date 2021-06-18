@@ -18,8 +18,7 @@
 @use '../../utilities/placeholder-colors' as *;
 @use '../../utilities/skeleton' as *;
 
-// I can't figure out what would've been used from this file. Safe to remove?
-// @use '../form/form';
+@use '../form/form';
 
 @use 'flatpickr.scss' as *;
 @include flatpickr;
