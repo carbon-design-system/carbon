@@ -192,7 +192,7 @@ export const Skeleton = () => (
   </div>
 );
 
-Skeleton.storyName = 'skeleton';
+Skeleton.storyName = 'Skeleton';
 
 Skeleton.parameters = {
   info: {

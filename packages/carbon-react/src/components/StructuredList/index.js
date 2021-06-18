@@ -1,6 +1,13 @@
+/**
+ * Copyright IBM Corp. 2016, 2018
+ *
+ * This source code is licensed under the Apache-2.0 license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
 export { StructuredListWrapper,
   StructuredListHead,
   StructuredListBody,
   StructuredListRow,
   StructuredListInput,
-  StructuredListCell, } from 'carbon-components-react';
+  StructuredListCell } from 'carbon-components-react';
