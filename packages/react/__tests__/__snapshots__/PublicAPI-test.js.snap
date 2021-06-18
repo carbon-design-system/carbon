@@ -5625,7 +5625,7 @@ Map {
       "placeholder": Object {
         "type": "string",
       },
-      "readonly": Object {
+      "readOnly": Object {
         "type": "bool",
       },
       "size": Object {

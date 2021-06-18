@@ -81,7 +81,7 @@ const props = {
     onChange: action('onChange'),
   }),
   TextInputProps: () => ({
-    readonly: boolean('Readonly variant (readonly)', false),
+    readOnly: boolean('Readonly variant (readOnly)', false),
   }),
   PasswordInputProps: () => ({
     tooltipPosition: select(
