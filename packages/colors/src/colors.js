@@ -183,6 +183,30 @@ export const blue = {
   100: blue100,
 };
 
+export const blue100Hover = '#001F75';
+export const blue90Hover = '#00258A';
+export const blue80Hover = '#0039C7';
+export const blue70Hover = '#0053FF';
+export const blue60Hover = '#0050E6';
+export const blue50Hover = '#1F70FF';
+export const blue40Hover = '#5C97FF';
+export const blue30Hover = '#B8D3FF';
+export const blue20Hover = '#B8D3FF';
+export const blue10Hover = '#DBEBFF';
+
+export const blueHover = {
+  100: blue100Hover,
+  90: blue90Hover,
+  80: blue80Hover,
+  70: blue70Hover,
+  60: blue60Hover,
+  50: blue50Hover,
+  40: blue40Hover,
+  30: blue30Hover,
+  20: blue20Hover,
+  10: blue10Hover,
+};
+
 export const cyan10 = '#e5f6ff';
 export const cyan20 = '#bae6ff';
 export const cyan30 = '#82cfff';
