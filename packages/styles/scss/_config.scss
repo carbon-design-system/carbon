@@ -12,9 +12,6 @@
 /// @group config
 $prefix: 'cds' !default;
 
-/// @access public
-$custom-property-prefix: $prefix;
-
 /// If true, includes font face mixins in `_css--font-face.scss` depending on the `css--plex` feature flag
 /// @access public
 /// @type Bool
