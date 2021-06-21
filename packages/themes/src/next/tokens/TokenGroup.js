@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { Token } from './token';
+import { Token } from './Token';
 
 /**
  * A TokenGroup allows us to group up a collection of tokens and nested token
