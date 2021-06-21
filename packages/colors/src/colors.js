@@ -11,17 +11,16 @@ export const black100 = black;
 export const white = '#ffffff';
 export const white0 = white;
 
-export const yellow10 = '#FCF4D6';
-export const yellow20 = '#FDDC69';
-export const yellow30 = '#F1C21B';
-export const yellow40 = '#D2A106';
-export const yellow50 = '#B28600';
-export const yellow60 = '#8E6A00';
-export const yellow70 = '#684E00';
+export const yellow10 = '#fcf4d6';
+export const yellow20 = '#fddc69';
+export const yellow30 = '#f1c21b';
+export const yellow40 = '#d2a106';
+export const yellow50 = '#b28600';
+export const yellow60 = '#8e6a00';
+export const yellow70 = '#684e00';
 export const yellow80 = '#483700';
 export const yellow90 = '#302400';
-export const yellow100 = '#1C1500';
-
+export const yellow100 = '#1c1500';
 export const yellow = {
   10: yellow10,
   20: yellow20,
@@ -45,7 +44,6 @@ export const yellow70Hover = '#806000';
 export const yellow80Hover = '#5c4600';
 export const yellow90Hover = '#3d2e00';
 export const yellow100Hover = '#332600';
-
 export const yellowHover = {
   10: yellow10Hover,
   20: yellow20Hover,
@@ -69,7 +67,6 @@ export const orange70 = '#8a3800';
 export const orange80 = '#5e2900';
 export const orange90 = '#3e1a00';
 export const orange100 = '#231000';
-
 export const orange = {
   10: orange10,
   20: orange20,
@@ -83,17 +80,16 @@ export const orange = {
   100: orange100,
 };
 
-export const orange10Hover = '#FFE2CC';
-export const orange20Hover = '#FFC69E';
-export const orange30Hover = '#FF9D57';
-export const orange40Hover = '#FA6800';
-export const orange50Hover = '#CC5500';
-export const orange60Hover = '#9E4200';
-export const orange70Hover = '#A84400';
+export const orange10Hover = '#ffe2cc';
+export const orange20Hover = '#ffc69e';
+export const orange30Hover = '#ff9d57';
+export const orange40Hover = '#fa6800';
+export const orange50Hover = '#cc5500';
+export const orange60Hover = '#9e4200';
+export const orange70Hover = '#a84400';
 export const orange80Hover = '#753300';
 export const orange90Hover = '#522200';
-export const orange100Hover = '#421E00';
-
+export const orange100Hover = '#421e00';
 export const orangeHover = {
   10: orange10Hover,
   20: orange20Hover,
@@ -118,7 +114,6 @@ export const red70 = '#a2191f';
 export const red80 = '#750e13';
 export const red90 = '#520408';
 export const red100 = '#2d0709';
-
 export const red = {
   10: red10,
   20: red20,
@@ -270,17 +265,16 @@ export const blue = {
   100: blue100,
 };
 
-export const blue100Hover = '#001F75';
-export const blue90Hover = '#00258A';
-export const blue80Hover = '#0039C7';
-export const blue70Hover = '#0053FF';
-export const blue60Hover = '#0050E6';
-export const blue50Hover = '#1F70FF';
-export const blue40Hover = '#5C97FF';
-export const blue30Hover = '#B8D3FF';
-export const blue20Hover = '#B8D3FF';
-export const blue10Hover = '#DBEBFF';
-
+export const blue100Hover = '#001f75';
+export const blue90Hover = '#00258a';
+export const blue80Hover = '#0039c7';
+export const blue70Hover = '#0053ff';
+export const blue60Hover = '#0050e6';
+export const blue50Hover = '#1f70ff';
+export const blue40Hover = '#5c97ff';
+export const blue30Hover = '#b8d3ff';
+export const blue20Hover = '#b8d3ff';
+export const blue10Hover = '#dbebff';
 export const blueHover = {
   100: blue100Hover,
   90: blue90Hover,
@@ -317,17 +311,16 @@ export const cyan = {
   100: cyan100,
 };
 
-export const cyan10Hover = '#CCEEFF';
-export const cyan20Hover = '#99DAFF';
-export const cyan30Hover = '#57BEFF';
-export const cyan40Hover = '#059FFF';
-export const cyan50Hover = '#0F7EC8';
-export const cyan60Hover = '#005FA3';
-export const cyan70Hover = '#0066BD';
-export const cyan80Hover = '#00498A';
+export const cyan10Hover = '#cceeff';
+export const cyan20Hover = '#99daff';
+export const cyan30Hover = '#57beff';
+export const cyan40Hover = '#059fff';
+export const cyan50Hover = '#0f7ec8';
+export const cyan60Hover = '#005fa3';
+export const cyan70Hover = '#0066bd';
+export const cyan80Hover = '#00498a';
 export const cyan90Hover = '#013360';
-export const cyan100Hover = '#0B2947';
-
+export const cyan100Hover = '#0b2947';
 export const cyanHover = {
   10: cyan10Hover,
   20: cyan20Hover,
@@ -340,7 +333,6 @@ export const cyanHover = {
   90: cyan90Hover,
   100: cyan10Hover,
 };
-
 
 export const teal10 = '#d9fbfb';
 export const teal20 = '#9ef0f0';
@@ -365,17 +357,16 @@ export const teal = {
   100: teal100,
 };
 
-export const teal10Hover = '#ACF6F6';
-export const teal20Hover = '#57E5E5';
-export const teal30Hover = '#25CAC8';
-export const teal40Hover = '#07ABA9';
-export const teal50Hover = '#008A87';
-export const teal60Hover = '#006B68';
+export const teal10Hover = '#acf6f6';
+export const teal20Hover = '#57e5e5';
+export const teal30Hover = '#25cac8';
+export const teal40Hover = '#07aba9';
+export const teal50Hover = '#008a87';
+export const teal60Hover = '#006b68';
 export const teal70Hover = '#007070';
 export const teal80Hover = '#005357';
 export const teal90Hover = '#033940';
-export const teal100Hover = '#0F3034';
-
+export const teal100Hover = '#0f3034';
 export const tealHover = {
   10: teal10Hover,
   20: teal20Hover,
@@ -412,17 +403,16 @@ export const green = {
   100: green100,
 }
 
-export const green10Hover = '#B6F6C8';
-export const green20Hover = '#74E792';
-export const green30Hover = '#36CE5E';
-export const green40Hover = '#3BAB5A';
-export const green50Hover = '#208E3F';
-export const green60Hover = '#166F31';
-export const green70Hover = '#11742F';
-export const green80Hover = '#05521C';
-export const green90Hover = '#033B11';
-export const green100Hover = '#0D300F';
-
+export const green10Hover = '#b6f6c8';
+export const green20Hover = '#74e792';
+export const green30Hover = '#36ce5e';
+export const green40Hover = '#3bab5a';
+export const green50Hover = '#208e3f';
+export const green60Hover = '#166f31';
+export const green70Hover = '#11742f';
+export const green80Hover = '#05521c';
+export const green90Hover = '#033b11';
+export const green100Hover = '#0d300f';
 export const greenHover = {
   10: green10Hover,
   20: green20Hover,
@@ -459,17 +449,16 @@ export const coolGray = {
   100: coolGray100,
 };
 
-export const coolGray10Hover = '#E4E9F1';
-export const coolGray20Hover = '#CDD3DA';
-export const coolGray30Hover = '#ADB5BD';
-export const coolGray40Hover = '#9199A1';
-export const coolGray50Hover = '#757B85';
-export const coolGray60Hover = '#585E64';
-export const coolGray70Hover = '#5D646A';
-export const coolGray80Hover = '#434A51';
-export const coolGray90Hover = '#2B3236';
-export const coolGray100Hover = '#222A2F';
-
+export const coolGray10Hover = '#e4e9f1';
+export const coolGray20Hover = '#cdd3da';
+export const coolGray30Hover = '#adb5bd';
+export const coolGray40Hover = '#9199a1';
+export const coolGray50Hover = '#757b85';
+export const coolGray60Hover = '#585e64';
+export const coolGray70Hover = '#5d646a';
+export const coolGray80Hover = '#434a51';
+export const coolGray90Hover = '#2b3236';
+export const coolGray100Hover = '#222a2f';
 export const coolGrayHover = {
   10: coolGray10Hover,
   20: coolGray20Hover,
@@ -506,17 +495,16 @@ export const gray = {
   100: gray100,
 };
 
-export const gray10Hover = '#E8E8E8';
-export const gray20Hover = '#D1D1D1';
-export const gray30Hover = '#B5B5B5';
+export const gray10Hover = '#e8e8e8';
+export const gray20Hover = '#d1d1d1';
+export const gray30Hover = '#b5b5b5';
 export const gray40Hover = '#999999';
-export const gray50Hover = '#7A7A7A';
-export const gray60Hover = '#5E5E5E';
+export const gray50Hover = '#7a7a7a';
+export const gray60Hover = '#5e5e5e';
 export const gray70Hover = '#636363';
 export const gray80Hover = '#474747';
 export const gray90Hover = '#333333';
 export const gray100Hover = '#292929';
-
 export const grayHover = {
   10: gray10Hover,
   20: gray20Hover,
@@ -551,6 +539,30 @@ export const warmGray = {
   80: warmGray80,
   90: warmGray90,
   100: warmGray100,
+};
+
+export const warmGray10Hover = '#F0E8E6';
+export const warmGray20Hover = '#D8D0CF';
+export const warmGray30Hover = '#B9B3B1';
+export const warmGray40Hover = '#9C9696';
+export const warmGray50Hover = '#7F7B7B';
+export const warmGray60Hover = '#605D5D';
+export const warmGray70Hover = '#696363';
+export const warmGray80Hover = '#4C4848';
+export const warmGray90Hover = '#343232';
+export const warmGray100Hover = '#2C2626';
+
+export const warmGrayHover = {
+  10: warmGray10Hover,
+  20: warmGray20Hover,
+  30: warmGray30Hover,
+  40: warmGray40Hover,
+  50: warmGray50Hover,
+  60: warmGray60Hover,
+  70: warmGray70Hover,
+  80: warmGray80Hover,
+  90: warmGray90Hover,
+  100: warmGray100Hover,
 };
 
 // Deprecated ☠️
