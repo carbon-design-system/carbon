@@ -17,7 +17,7 @@ describe('scss/components/radio-button', () => {
   test('Public API', async () => {
     const { unwrap } = await render(`
       @use 'sass:meta';
-      @use '../radiobutton/radio-button';
+      @use '../radio-button/radio-button';
       $_: get('mixin', meta.mixin-exists('radio-button', 'radio-button'));
     `);
     expect(unwrap('mixin')).toBe(true);
