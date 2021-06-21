@@ -35,14 +35,14 @@ const TextInput = React.forwardRef(function TextInput(
     light,
     size,
     inline,
-    readonly,
+    readOnly,
     ...other
   },
   ref
 ) {
   const normalizedProps = useNormalizedInputProps({
     id,
-    readonly,
+    readOnly,
     disabled,
     invalid,
     invalidText,
@@ -74,14 +74,14 @@ const TextInput = React.forwardRef(function TextInput(
     className: textInputClasses,
     title: placeholder,
     disabled: normalizedProps.disabled,
-    readOnly: readonly,
+    readOnly,
     ...other,
   };
   const inputWrapperClasses = classNames(
     `${prefix}--form-item`,
     `${prefix}--text-input-wrapper`,
     {
-      [`${prefix}--text-input-wrapper--readonly`]: readonly,
+      [`${prefix}--text-input-wrapper--readonly`]: readOnly,
       [`${prefix}--text-input-wrapper--light`]: light,
       [`${prefix}--text-input-wrapper--inline`]: inline,
     }
@@ -112,7 +112,7 @@ const TextInput = React.forwardRef(function TextInput(
     [`${prefix}--text-input__invalid-icon`]:
       normalizedProps.invalid || normalizedProps.warn,
     [`${prefix}--text-input__invalid-icon--warning`]: normalizedProps.warn,
-    [`${prefix}--text-input__readonly-icon`]: readonly,
+    [`${prefix}--text-input__readonly-icon`]: readOnly,
   });
 
   const label = labelText ? (
@@ -244,7 +244,7 @@ TextInput.propTypes = {
   /**
    * Whether the input should be read-only
    */
-  readonly: PropTypes.bool,
+  readOnly: PropTypes.bool,
 
   /**
    * Specify the size of the Text Input. Currently supports either `sm`, 'md' (default) or 'lg` as an option.

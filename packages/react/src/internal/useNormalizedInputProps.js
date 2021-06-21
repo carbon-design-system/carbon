@@ -18,7 +18,7 @@ const { prefix } = settings;
 /**
  * @typedef {object} InputProps
  * @property {string} id - The input's id
- * @property {boolean} readonly - Whether the input should be readonly
+ * @property {boolean} readOnly - Whether the input should be readonly
  * @property {boolean} disabled - Whether the input should be disabled
  * @property {boolean} invalid - Whether the input should be marked as invalid
  * @property {string} invalidText - The validation message displayed in case the input is considered invalid
@@ -52,7 +52,7 @@ const { prefix } = settings;
  */
 export function useNormalizedInputProps({
   id,
-  readonly,
+  readOnly,
   disabled,
   invalid,
   invalidText,
@@ -60,16 +60,16 @@ export function useNormalizedInputProps({
   warnText,
 }) {
   const normalizedProps = {
-    disabled: !readonly && disabled,
-    invalid: !readonly && invalid,
+    disabled: !readOnly && disabled,
+    invalid: !readOnly && invalid,
     invalidId: `${id}-error-msg`,
-    warn: !readonly && !invalid && warn,
+    warn: !readOnly && !invalid && warn,
     warnId: `${id}-warn-msg`,
     validation: null,
     icon: null,
   };
 
-  if (readonly) {
+  if (readOnly) {
     normalizedProps.icon = EditOff16;
   } else {
     if (normalizedProps.invalid) {
