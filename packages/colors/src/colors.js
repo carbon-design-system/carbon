@@ -230,6 +230,31 @@ export const cyan = {
   100: cyan100,
 };
 
+export const cyan10Hover = '#CCEEFF';
+export const cyan20Hover = '#99DAFF';
+export const cyan30Hover = '#57BEFF';
+export const cyan40Hover = '#059FFF';
+export const cyan50Hover = '#0F7EC8';
+export const cyan60Hover = '#005FA3';
+export const cyan70Hover = '#0066BD';
+export const cyan80Hover = '#00498A';
+export const cyan90Hover = '#013360';
+export const cyan100Hover = '#0B2947';
+
+export const cyanHover = {
+  10: cyan10Hover,
+  20: cyan20Hover,
+  30: cyan30Hover,
+  40: cyan40Hover,
+  50: cyan50Hover,
+  60: cyan60Hover,
+  70: cyan70Hover,
+  80: cyan80Hover,
+  90: cyan90Hover,
+  100: cyan10Hover,
+};
+
+
 export const teal10 = '#d9fbfb';
 export const teal20 = '#9ef0f0';
 export const teal30 = '#3ddbd9';
