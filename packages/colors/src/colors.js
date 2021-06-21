@@ -11,15 +11,102 @@ export const black100 = black;
 export const white = '#ffffff';
 export const white0 = white;
 
-export const yellow = '#f1c21b';
-export const yellow30 = yellow;
-export const yellow40 = '#d2a106';
-export const yellow50 = '#b28600';
+export const yellow10 = '#FCF4D6';
+export const yellow20 = '#FDDC69';
+export const yellow30 = '#F1C21B';
+export const yellow40 = '#D2A106';
+export const yellow50 = '#B28600';
+export const yellow60 = '#8E6A00';
+export const yellow70 = '#684E00';
+export const yellow80 = '#483700';
+export const yellow90 = '#302400';
+export const yellow100 = '#1C1500';
 
-export const orange = '#ff832b';
-export const orange40 = orange;
+export const yellow = {
+  10: yellow10,
+  20: yellow20,
+  30: yellow30,
+  40: yellow40,
+  50: yellow50,
+  60: yellow60,
+  70: yellow70,
+  80: yellow80,
+  90: yellow90,
+  100: yellow100,
+};
+
+export const yellow10Hover = '#f8e6a0';
+export const yellow20Hover = '#fccd27';
+export const yellow30Hover = '#ddb00e';
+export const yellow40Hover = '#bc9005';
+export const yellow50Hover = '#9e7700';
+export const yellow60Hover = '#755800';
+export const yellow70Hover = '#806000';
+export const yellow80Hover = '#5c4600';
+export const yellow90Hover = '#3d2e00';
+export const yellow100Hover = '#332600';
+
+export const yellowHover = {
+  10: yellow10Hover,
+  20: yellow20Hover,
+  30: yellow30Hover,
+  40: yellow40Hover,
+  50: yellow50Hover,
+  60: yellow60Hover,
+  70: yellow70Hover,
+  80: yellow80Hover,
+  90: yellow90Hover,
+  100: yellow100Hover,
+};
+
+export const orange10 = '#fff2e8';
+export const orange20 = '#ffd9be';
+export const orange30 = '#ffb784';
+export const orange40 = '#ff832b';
+export const orange50 = '#eb6200';
 export const orange60 = '#ba4e00';
 export const orange70 = '#8a3800';
+export const orange80 = '#5e2900';
+export const orange90 = '#3e1a00';
+export const orange100 = '#231000';
+
+export const orange = {
+  10: orange10,
+  20: orange20,
+  30: orange30,
+  40: orange40,
+  50: orange50,
+  60: orange60,
+  70: orange70,
+  80: orange80,
+  90: orange90,
+  100: orange100,
+};
+
+export const orange10Hover = '#FFE2CC';
+export const orange20Hover = '#FFC69E';
+export const orange30Hover = '#FF9D57';
+export const orange40Hover = '#FA6800';
+export const orange50Hover = '#CC5500';
+export const orange60Hover = '#9E4200';
+export const orange70Hover = '#A84400';
+export const orange80Hover = '#753300';
+export const orange90Hover = '#522200';
+export const orange100Hover = '#421E00';
+
+export const orangeHover = {
+  10: orange10Hover,
+  20: orange20Hover,
+  30: orange30Hover,
+  40: orange40Hover,
+  50: orange50Hover,
+  60: orange60Hover,
+  70: orange70Hover,
+  80: orange80Hover,
+  90: orange90Hover,
+  100: orange100Hover,
+};
+
 
 export const red10 = '#fff1f1';
 export const red20 = '#ffd7d9';
@@ -278,6 +365,30 @@ export const teal = {
   100: teal100,
 };
 
+export const teal10Hover = '#ACF6F6';
+export const teal20Hover = '#57E5E5';
+export const teal30Hover = '#25CAC8';
+export const teal40Hover = '#07ABA9';
+export const teal50Hover = '#008A87';
+export const teal60Hover = '#006B68';
+export const teal70Hover = '#007070';
+export const teal80Hover = '#005357';
+export const teal90Hover = '#033940';
+export const teal100Hover = '#0F3034';
+
+export const tealHover = {
+  10: teal10Hover,
+  20: teal20Hover,
+  30: teal30Hover,
+  40: teal40Hover,
+  50: teal50Hover,
+  60: teal60Hover,
+  70: teal70Hover,
+  80: teal80Hover,
+  90: teal90Hover,
+  100: teal100Hover,
+};
+
 export const green10 = '#defbe6';
 export const green20 = '#a7f0ba';
 export const green30 = '#6fdc8c';
@@ -299,7 +410,31 @@ export const green = {
   80: green80,
   90: green90,
   100: green100,
-};
+}
+
+export const green10Hover = '#B6F6C8';
+export const green20Hover = '#74E792';
+export const green30Hover = '#36CE5E';
+export const green40Hover = '#3BAB5A';
+export const green50Hover = '#208E3F';
+export const green60Hover = '#166F31';
+export const green70Hover = '#11742F';
+export const green80Hover = '#05521C';
+export const green90Hover = '#033B11';
+export const green100Hover = '#0D300F';
+
+export const greenHover = {
+  10: green10Hover,
+  20: green20Hover,
+  30: green30Hover,
+  40: green40Hover,
+  50: green50Hover,
+  60: green60Hover,
+  70: green70Hover,
+  80: green80Hover,
+  90: green90Hover,
+  100: green100Hover,
+}
 
 export const coolGray10 = '#f2f4f8';
 export const coolGray20 = '#dde1e6';
@@ -324,6 +459,30 @@ export const coolGray = {
   100: coolGray100,
 };
 
+export const coolGray10Hover = '#E4E9F1';
+export const coolGray20Hover = '#CDD3DA';
+export const coolGray30Hover = '#ADB5BD';
+export const coolGray40Hover = '#9199A1';
+export const coolGray50Hover = '#757B85';
+export const coolGray60Hover = '#585E64';
+export const coolGray70Hover = '#5D646A';
+export const coolGray80Hover = '#434A51';
+export const coolGray90Hover = '#2B3236';
+export const coolGray100Hover = '#222A2F';
+
+export const coolGrayHover = {
+  10: coolGray10Hover,
+  20: coolGray20Hover,
+  30: coolGray30Hover,
+  40: coolGray40Hover,
+  50: coolGray50Hover,
+  60: coolGray60Hover,
+  70: coolGray70Hover,
+  80: coolGray80Hover,
+  90: coolGray90Hover,
+  100: coolGray100Hover,
+};
+
 export const gray10 = '#f4f4f4';
 export const gray20 = '#e0e0e0';
 export const gray30 = '#c6c6c6';
@@ -345,6 +504,30 @@ export const gray = {
   80: gray80,
   90: gray90,
   100: gray100,
+};
+
+export const gray10Hover = '#E8E8E8';
+export const gray20Hover = '#D1D1D1';
+export const gray30Hover = '#B5B5B5';
+export const gray40Hover = '#999999';
+export const gray50Hover = '#7A7A7A';
+export const gray60Hover = '#5E5E5E';
+export const gray70Hover = '#636363';
+export const gray80Hover = '#474747';
+export const gray90Hover = '#333333';
+export const gray100Hover = '#292929';
+
+export const grayHover = {
+  10: gray10Hover,
+  20: gray20Hover,
+  30: gray30Hover,
+  40: gray40Hover,
+  50: gray50Hover,
+  60: gray60Hover,
+  70: gray70Hover,
+  80: gray80Hover,
+  90: gray90Hover,
+  100: gray100Hover,
 };
 
 export const warmGray10 = '#f7f3f2';
@@ -371,7 +554,7 @@ export const warmGray = {
 };
 
 // Deprecated ☠️
-export const yellow20 = '#fdd13a';
+// export const yellow20 = '#fdd13a';
 
 export const colors = {
   black: {
