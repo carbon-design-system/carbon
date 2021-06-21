@@ -23,6 +23,6 @@
     "access": "public"
   },
   "dependencies": {
-    "chalk": "^2.4.1"
+    "chalk": "^4.1.1"
   }
 }
