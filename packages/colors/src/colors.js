@@ -103,7 +103,6 @@ export const orangeHover = {
   100: orange100Hover,
 };
 
-
 export const red10 = '#fff1f1';
 export const red20 = '#ffd7d9';
 export const red30 = '#ffb3b8';
@@ -401,7 +400,7 @@ export const green = {
   80: green80,
   90: green90,
   100: green100,
-}
+};
 
 export const green10Hover = '#b6f6c8';
 export const green20Hover = '#74e792';
@@ -424,7 +423,7 @@ export const greenHover = {
   80: green80Hover,
   90: green90Hover,
   100: green100Hover,
-}
+};
 
 export const coolGray10 = '#f2f4f8';
 export const coolGray20 = '#dde1e6';
