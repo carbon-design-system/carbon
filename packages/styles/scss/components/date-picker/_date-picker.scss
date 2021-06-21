@@ -11,22 +11,21 @@
 @use '../../theme' as *;
 @use '../../spacing' as *;
 @use '../../type' as *;
+@use '../form/form';
 @use '../../utilities/component-reset';
 @use '../../utilities/convert' as *;
 @use '../../utilities/focus-outline' as *;
 @use '../../utilities/high-contrast-mode' as *;
 @use '../../utilities/placeholder-colors' as *;
 @use '../../utilities/skeleton' as *;
-
-@use '../form/form';
-
-@use 'flatpickr.scss' as *;
-@include flatpickr;
+@use 'flatpickr' as *;
 
 /// Date picker styles
 /// @access public
 /// @group date-picker
 @mixin date-picker {
+  @include flatpickr;
+
   .#{$prefix}--date-picker {
     display: flex;
   }
