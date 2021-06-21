@@ -42,3 +42,50 @@ jobs:
         run: yarn lint
       - name: Lint Sass files
         run: yarn lint:styles
+
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Use Node.js 14.x
+        uses: actions/setup-node@v2.1.5
+        with:
+          node-version: '14.x'
+      - name: Get yarn cache directory path
+        id: yarn-cache
+        run: echo "::set-output name=dir::$(yarn config get cacheFolder)"
+      - uses: actions/cache@v2.1.6
+        id: cache
+        with:
+          path: ${{ steps.yarn-cache.outputs.dir }}
+          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
+      - name: Install dependencies
+        if: ${{ steps.cache.outputs.cache-hit != 'true' }}
+        run: yarn install --immutable --immutable-cache
+      - name: Build project
+        run: yarn build --ignore '@carbon/sketch'
+      - name: Check generated styles
+        run: |
+          yarn carbon-cli check --ignore '**/@(node_modules|examples|components|react|fixtures)/**' 'packages/**/*.scss'
+      - name: Run tests
+        run: yarn test --ci
+      - uses: dorny/paths-filter@v2.10.2
+        id: filter
+        with:
+          filters: |
+            e2e:
+              - 'e2e/**'
+              - 'packages/icons/**'
+              - 'packages/icons-react/**'
+              - 'packages/icons-vue/**'
+              - 'packages/pictograms/**'
+              - 'packages/pictograms-react/**'
+              - 'packages/icon-build-helpers/**'
+      - name: Run e2e tests
+        if: ${{ steps.filter.outputs.e2e == 'true' }}
+        run: yarn test:e2e
+      - name: Run VRT
+        env:
+          PERCY_TOKEN: ${{ secrets.PERCY_TOKEN }}
+        run:
+          yarn run percy exec -- yarn workspace carbon-components-react test:e2e
