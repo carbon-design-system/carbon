@@ -1,3 +1,4 @@
+@forward 'search';
 @use 'search';
 
 @include search.search;
