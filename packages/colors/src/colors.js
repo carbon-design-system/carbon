@@ -541,16 +541,16 @@ export const warmGray = {
   100: warmGray100,
 };
 
-export const warmGray10Hover = '#F0E8E6';
-export const warmGray20Hover = '#D8D0CF';
-export const warmGray30Hover = '#B9B3B1';
-export const warmGray40Hover = '#9C9696';
-export const warmGray50Hover = '#7F7B7B';
-export const warmGray60Hover = '#605D5D';
+export const warmGray10Hover = '#f0e8e6';
+export const warmGray20Hover = '#d8d0cf';
+export const warmGray30Hover = '#b9b3b1';
+export const warmGray40Hover = '#9c9696';
+export const warmGray50Hover = '#7f7b7b';
+export const warmGray60Hover = '#605d5d';
 export const warmGray70Hover = '#696363';
-export const warmGray80Hover = '#4C4848';
+export const warmGray80Hover = '#4c4848';
 export const warmGray90Hover = '#343232';
-export const warmGray100Hover = '#2C2626';
+export const warmGray100Hover = '#2c2626';
 
 export const warmGrayHover = {
   10: warmGray10Hover,
