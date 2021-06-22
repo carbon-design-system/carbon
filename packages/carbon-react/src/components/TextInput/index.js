@@ -5,4 +5,10 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-export {TextInput, TextInputSkeleton, ControlledPasswordInput, PasswordInput, FluidForm } from 'carbon-components-react';
+export {
+  TextInput,
+  TextInputSkeleton,
+  ControlledPasswordInput,
+  PasswordInput,
+  FluidForm,
+} from 'carbon-components-react';
