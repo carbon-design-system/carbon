@@ -48,6 +48,7 @@ packages/icons-react/next/**
 
 # Examples
 **/examples/**
+!packages/themes/examples/**
 
 # Yarn
 **/.yarn/**
