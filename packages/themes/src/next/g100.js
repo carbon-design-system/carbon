@@ -44,7 +44,7 @@ import { adjustLightness } from '../tools';
 export const background = gray100;
 export const backgroundInverse = gray10;
 export const backgroundBrand = blue60;
-export const backgroundActive = gray30;
+export const backgroundActive = gray80;
 export const backgroundHover = adjustLightness(background, 7);
 export const backgroundInverseHover = adjustLightness(backgroundInverse, -5);
 export const backgroundSelected = gray90;
