@@ -38,7 +38,7 @@ function getColorName(hex) {
 }
 
 export default function IndexPage() {
-  const [activeGroup, setActiveGroup] = React.useState('v11');
+  const [activeGroup, setActiveGroup] = React.useState('All');
   const [activeProperty, setActiveProperty] = React.useState('All');
   const [activeSet, setActiveSet] = React.useState('All');
 
@@ -71,12 +71,9 @@ export default function IndexPage() {
                 onChange={(event) => {
                   setActiveGroup(event.target.value);
                 }}>
-                <option>v11</option>
-                {groups
-                  .filter((group) => group.name !== 'v11')
-                  .map((group) => {
-                    return <option key={group.name}>{group.name}</option>;
-                  })}
+                {groups.map((group) => {
+                  return <option key={group.name}>{group.name}</option>;
+                })}
               </select>
             </li>
             <li className="flex flex-col">
