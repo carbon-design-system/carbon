@@ -8,9 +8,8 @@
 import React, { useState } from 'react';
 import { action } from '@storybook/addon-actions';
 import { withKnobs, boolean, select, text } from '@storybook/addon-knobs';
-import TextInput from '../TextInput';
-import TextInputSkeleton from '../TextInput/TextInput.Skeleton';
-import FluidForm from '../FluidForm/FluidForm';
+import { TextInput, TextInputSkeleton, FluidForm } from '.';
+
 import mdx from './TextInput.mdx';
 
 const types = {
