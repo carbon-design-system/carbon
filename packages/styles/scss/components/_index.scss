@@ -10,6 +10,7 @@
 @use 'breadcrumb';
 @use 'checkbox';
 @use 'code-snippet';
+@use 'date-picker';
 @use 'link';
 @use 'list';
 @use 'loading';
@@ -21,3 +22,4 @@
 @use 'data-table/expandable';
 @use 'data-table/skeleton';
 @use 'data-table/sort';
+@use 'number-input';
