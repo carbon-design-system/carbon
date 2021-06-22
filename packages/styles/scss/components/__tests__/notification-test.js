@@ -13,15 +13,15 @@ const { SassRenderer } = require('@carbon/test-utils/scss');
 
 const { render } = SassRenderer.create(__dirname);
 
-describe('scss/components/inline-notification', () => {
+describe('scss/components/notification', () => {
   test('Public API', async () => {
     const { unwrap } = await render(`
-        @use 'sass:map';
-        @use 'sass:meta';
-        @use '../notification';
-  
-        $_: get('mixin', meta.mixin-exists('inline-notification', 'inline-notification'));
-      `);
+       @use 'sass:map';
+       @use 'sass:meta';
+       @use '../notification';
+ 
+       $_: get('mixin', meta.mixin-exists('notification', 'notification'));
+     `);
     expect(unwrap('mixin')).toBe(true);
   });
 });

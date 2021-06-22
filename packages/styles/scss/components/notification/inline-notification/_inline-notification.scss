@@ -4,18 +4,19 @@
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
 //
-@use 'mixins' as *;
-@use 'tokens' as *;
-@use '../../breakpoint' as *;
-@use '../../config' as *;
-@use '../../spacing' as *;
-@use '../../theme' as *;
-@use '../../themes' as *;
-@use '../../type' as *;
-@use '../../utilities/focus-outline' as *;
-@use '../../utilities/convert' as *;
-@use '../../utilities/component-tokens' as *;
-@use '../../colors' as *;
+@use '../mixins' as *;
+@use '../../../breakpoint' as *;
+@use '../../../colors' as *;
+@use '../../../config' as *;
+@use '../../../motion' as *;
+@use '../../../spacing' as *;
+@use '../../../theme' as *;
+@use '../../../themes' as *;
+@use '../../../type' as *;
+@use '../../../utilities/convert' as *;
+@use '../../../utilities/component-tokens' as *;
+@use '../../../utilities/high-contrast-mode' as *;
+@use '../../../utilities/focus-outline' as *;
 
 /// Inline notification styles
 /// @access public
@@ -100,7 +101,7 @@
   .#{$prefix}--inline-notification--low-contrast.#{$prefix}--inline-notification--error {
     @include notification--experimental(
       $support-error,
-      get-token-value($notification-colors, 'notification-background-error')
+      get-token(var(--cds-background-error))
     );
 
     &::before {
@@ -118,7 +119,7 @@
   .#{$prefix}--inline-notification--low-contrast.#{$prefix}--inline-notification--success {
     @include notification--experimental(
       $support-success,
-      get-token-value($notification-colors, 'notification-background-success')
+      get-token-value(var(--cds-background-success))
     );
 
     &::before {
@@ -138,7 +139,7 @@
   .#{$prefix}--inline-notification--low-contrast.#{$prefix}--inline-notification--info-square {
     @include notification--experimental(
       $support-info,
-      get-token-value($notification-colors, 'notification-background-info')
+      get-token-value(var(--cds-background-info))
     );
 
     &::before {
@@ -158,7 +159,7 @@
   .#{$prefix}--inline-notification--low-contrast.#{$prefix}--inline-notification--warning-alt {
     @include notification--experimental(
       $support-warning,
-      get-token-value($notification-colors, 'notification-background-warning')
+      get-token-value(var(--cds-background-warning))
     );
 
     &::before {
@@ -169,7 +170,7 @@
   .#{$prefix}--inline-notification--warning
     .#{$prefix}--inline-notification__icon
     path[opacity='0'] {
-    fill: $carbon__black-100;
+    fill: $black-100;
     opacity: 1;
   }
 
@@ -239,10 +240,7 @@
     .#{$prefix}--inline-notification__action-button.#{$prefix}--btn--ghost:active,
   .#{$prefix}--inline-notification--low-contrast
     .#{$prefix}--inline-notification__action-button.#{$prefix}--btn--ghost:hover {
-    background-color: get-token-value(
-      $notification-colors,
-      'notification-action-hover'
-    );
+    background-color: get-token-value(var(--cds-action-hover));
   }
 
   .#{$prefix}--inline-notification__action-button.#{$prefix}--btn--ghost:focus {
@@ -280,8 +278,8 @@
     border: none;
     background: transparent;
     cursor: pointer;
-    transition: outline $duration--fast-02 motion(standard, productive),
-      background-color $duration--fast-02 motion(standard, productive);
+    transition: outline $duration-fast-02 motion(standard, productive),
+      background-color $duration-fast-02 motion(standard, productive);
 
     &:focus {
       outline: 2px solid $focus-inverse;
