@@ -577,11 +577,7 @@ export const colors = {
   gray,
   green,
   magenta,
-  orange: {
-    40: orange40,
-    60: orange60,
-    70: orange70,
-  },
+  orange,
   purple,
   red,
   teal,
@@ -589,16 +585,20 @@ export const colors = {
   white: {
     0: white,
   },
-  yellow: {
-    20: yellow20,
-    30: yellow30,
-    40: yellow40,
-    50: yellow50,
-  },
+  yellow,
 };
 
 export const unstable_hoverColors = {
-  redHover,
+  blueHover,
+  coolGrayHover,
+  cyanHover,
+  grayHover,
+  greenHover,
   magentaHover,
+  orangeHover,
   purpleHover,
+  redHover,
+  tealHover,
+  warmGrayHover,
+  yellowHover,
 };
