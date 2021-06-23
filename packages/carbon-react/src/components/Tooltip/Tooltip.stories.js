@@ -113,7 +113,6 @@ export const CustomIconOnly = () => {
         align="center"
         direction="bottom"
         iconDescription="Helpful information"
-        triggerText="Tooltip label"
         tabIndex="0"
         selectorPrimaryFocus=""
         renderIcon={OverflowMenuVertical16}>
