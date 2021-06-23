@@ -34,7 +34,7 @@
     @include reset;
     @include type-style('body-short-01');
     @include focus-outline('reset');
-
+    font-family: inherit;
     width: 100%;
     height: rem(40px);
     padding: 0 $spacing-05;
