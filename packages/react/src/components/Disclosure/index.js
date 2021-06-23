@@ -5,11 +5,10 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { useRef, useState } from 'react';
+import { useState } from 'react';
 
 function useDisclosure(id) {
   const [open, setOpen] = useState(false);
-  const ref = useRef(null);
 
   const buttonProps = {
     'aria-controls': id,
@@ -20,7 +19,6 @@ function useDisclosure(id) {
   };
   const contentProps = {
     id,
-    ref,
   };
 
   return {
