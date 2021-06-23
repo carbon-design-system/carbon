@@ -18,6 +18,10 @@
 /// @access private
 /// @group tile
 @mixin tile {
+  .#{$prefix}--tile-group {
+    @include reset;
+  }
+
   .#{$prefix}--tile {
     position: relative;
     display: block;
