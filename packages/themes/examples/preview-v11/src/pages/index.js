@@ -48,13 +48,13 @@ export default function IndexPage() {
         <header className="flex items-center justify-between header">
           <h1 id="table-title">Tokens ({tokens.length})</h1>
           <ul className="grid grid-columns-4 gap">
-            {activeGroup !== 'v11' ||
+            {activeGroup !== 'All' ||
             activeProperty !== 'All' ||
             activeSet !== 'All' ? (
               <li className="flex justify-end">
                 <button
                   onClick={() => {
-                    setActiveGroup('v11');
+                    setActiveGroup('All');
                     setActiveProperty('All');
                     setActiveSet('All');
                   }}>
