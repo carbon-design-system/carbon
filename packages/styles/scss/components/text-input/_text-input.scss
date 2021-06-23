@@ -9,6 +9,7 @@
 // Text
 //-----------------------------
 @use '../../config' as *;
+@use '../../colors' as *;
 @use '../../theme' as *;
 @use '../../type' as *;
 @use '../../spacing' as *;
@@ -108,7 +109,7 @@
   }
 
   .#{$prefix}--text-input__invalid-icon--warning path:first-of-type {
-    fill: hotpink;
+    fill: $black-100;
     opacity: 1;
   }
 
