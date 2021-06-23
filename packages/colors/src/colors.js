@@ -564,9 +564,6 @@ export const warmGrayHover = {
   100: warmGray100Hover,
 };
 
-// Deprecated ☠️
-// export const yellow20 = '#fdd13a';
-
 export const colors = {
   black: {
     100: black,
