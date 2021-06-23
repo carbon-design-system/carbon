@@ -21,7 +21,7 @@ export const yellow70 = '#684e00';
 export const yellow80 = '#483700';
 export const yellow90 = '#302400';
 export const yellow100 = '#1c1500';
-export const yellow = {
+const unstable_yellow = {
   10: yellow10,
   20: yellow20,
   30: yellow30,
@@ -33,6 +33,7 @@ export const yellow = {
   90: yellow90,
   100: yellow100,
 };
+export const yellow = yellow30;
 
 export const yellow10Hover = '#f8e6a0';
 export const yellow20Hover = '#fccd27';
@@ -67,7 +68,8 @@ export const orange70 = '#8a3800';
 export const orange80 = '#5e2900';
 export const orange90 = '#3e1a00';
 export const orange100 = '#231000';
-export const orange = {
+export const orange = orange40;
+const unstable_orange = {
   10: orange10,
   20: orange20,
   30: orange30,
@@ -574,7 +576,7 @@ export const colors = {
   gray,
   green,
   magenta,
-  orange,
+  orange: unstable_orange,
   purple,
   red,
   teal,
@@ -582,7 +584,7 @@ export const colors = {
   white: {
     0: white,
   },
-  yellow,
+  yellow: unstable_yellow,
 };
 
 export const unstable_hoverColors = {
