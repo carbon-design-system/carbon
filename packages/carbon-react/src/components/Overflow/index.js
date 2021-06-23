@@ -5,4 +5,4 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-export { Accordion, AccordionItem } from 'carbon-components-react';
+export { OverflowMenu, OverflowMenuItem } from 'carbon-components-react';
