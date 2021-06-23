@@ -34,7 +34,7 @@
     @include reset;
     @include type-style('body-short-01');
     @include focus-outline('reset');
-    font-family: inherit;
+
     width: 100%;
     height: rem(40px);
     padding: 0 $spacing-05;
@@ -42,6 +42,7 @@
     border-bottom: 1px solid $border-strong;
     background-color: $field;
     color: $text-primary;
+    font-family: inherit;
     transition: background-color $duration-fast-01 motion(standard, productive),
       outline $duration-fast-01 motion(standard, productive);
 
