@@ -7,21 +7,20 @@
  * @jest-environment node
  */
 
- 'use strict';
+'use strict';
 
- const { SassRenderer } = require('@carbon/test-utils/scss');
- 
- const { render } = SassRenderer.create(__dirname);
- 
- describe('scss/components/text-input', () => {
-   test('Public API', async () => {
-     const { unwrap } = await render(`
+const { SassRenderer } = require('@carbon/test-utils/scss');
+
+const { render } = SassRenderer.create(__dirname);
+
+describe('scss/components/text-input', () => {
+  test('Public API', async () => {
+    const { unwrap } = await render(`
        @use 'sass:meta';
        @use '../text-input';
  
        $_: get('mixin', meta.mixin-exists('text-input', 'text-input'));
      `);
-     expect(unwrap('mixin')).toBe(true);
-   });
- });
- 
+    expect(unwrap('mixin')).toBe(true);
+  });
+});
