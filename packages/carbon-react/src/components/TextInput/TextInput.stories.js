@@ -122,6 +122,7 @@ export default {
   },
 };
 
+/* eslint-disable react/prop-types */
 export const Default = () => (
   <TextInput
     type={select('Form control type (type)', types, 'text')}
@@ -171,16 +172,6 @@ export const TogglePasswordVisibility = () => {
   );
 };
 
-TogglePasswordVisibility.storyName = 'Toggle password visibility';
-
-TogglePasswordVisibility.parameters = {
-  info: {
-    text: `
-      Text field with password visibility toggle.
-    `,
-  },
-};
-
 export const FullyControlledTogglePasswordVisibility = () => {
   ControlledPasswordInputApp.__docgenInfo = {
     ...TextInput.PasswordInput.__docgenInfo,
@@ -197,25 +188,4 @@ export const FullyControlledTogglePasswordVisibility = () => {
   );
 };
 
-FullyControlledTogglePasswordVisibility.storyName =
-  'Fully controlled toggle password visibility';
-
-FullyControlledTogglePasswordVisibility.parameters = {
-  info: {
-    text: `
-    Fully controlled text field with password visibility toggle.
-  `,
-  },
-};
-
 export const Skeleton = () => <TextInputSkeleton />;
-
-Skeleton.storyName = 'skeleton';
-
-Skeleton.parameters = {
-  info: {
-    text: `
-        Placeholder skeleton state to use when content is loading.
-        `,
-  },
-};

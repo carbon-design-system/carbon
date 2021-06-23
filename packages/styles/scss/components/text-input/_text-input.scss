@@ -8,15 +8,25 @@
 //-----------------------------
 // Text
 //-----------------------------
+@use '../../config' as *;
 @use '../../theme' as *;
 @use '../../type' as *;
+@use '../../spacing' as *;
+@use '../../motion' as *;
+
 @use '../../utilities/component-reset';
+@use '../../utilities/placeholder-colors' as *;
+@use '../../utilities/tooltip' as *;
+@use '../../utilities/skeleton' as *;
+@use '../../utilities/high-contrast-mode' as *;
+@use '../../utilities/convert' as *;
+
 @use '../../utilities/focus-outline' as *;
 @use '../../utilities/button-reset';
 @use '../form';
 
 /// Text input styles
-/// @access private
+/// @access public
 /// @group text-input
 @mixin text-input {
   .#{$prefix}--text-input {
@@ -26,13 +36,13 @@
 
     width: 100%;
     height: rem(40px);
-    padding: 0 $carbon--spacing-05;
+    padding: 0 $spacing-05;
     border: none;
     border-bottom: 1px solid $border-strong;
     background-color: $field;
     color: $text-primary;
-    transition: background-color $duration--fast-01 motion(standard, productive),
-      outline $duration--fast-01 motion(standard, productive);
+    transition: background-color $duration-fast-01 motion(standard, productive),
+      outline $duration-fast-01 motion(standard, productive);
 
     &:focus,
     &:active {
@@ -55,15 +65,15 @@
   }
 
   .#{$prefix}--password-input {
-    padding-right: $carbon--spacing-08;
+    padding-right: $spacing-08;
   }
 
   .#{$prefix}--text-input--sm.#{$prefix}--password-input {
-    padding-right: $carbon--spacing-07;
+    padding-right: $spacing-07;
   }
 
   .#{$prefix}--text-input--lg.#{$prefix}--password-input {
-    padding-right: $carbon--spacing-09;
+    padding-right: $spacing-09;
   }
 
   .#{$prefix}--text-input::placeholder {
@@ -88,7 +98,7 @@
     position: absolute;
     // top/transform used to center invalid icon in IE11
     top: 50%;
-    right: $carbon--spacing-05;
+    right: $spacing-05;
     fill: $support-error;
     transform: translateY(-50%);
   }
@@ -98,7 +108,7 @@
   }
 
   .#{$prefix}--text-input__invalid-icon--warning path:first-of-type {
-    fill: $carbon__black-100;
+    fill: hotpink;
     opacity: 1;
   }
 
@@ -125,7 +135,7 @@
     border: 0;
     background: none;
     cursor: pointer;
-    transition: outline $duration--fast-01 motion(standard, productive);
+    transition: outline $duration-fast-01 motion(standard, productive);
   }
 
   .#{$prefix}--text-input--sm
@@ -141,7 +151,7 @@
   .#{$prefix}--btn.#{$prefix}--text-input--password__visibility__toggle.#{$prefix}--tooltip__trigger
     svg {
     fill: $icon-secondary;
-    transition: fill $duration--fast-01 motion(standard, productive);
+    transition: fill $duration-fast-01 motion(standard, productive);
 
     // Windows, Firefox HCM Fix
     @media screen and (-ms-high-contrast: active),
@@ -164,7 +174,7 @@
 
   .#{$prefix}--text-input--invalid,
   .#{$prefix}--text-input--warning {
-    padding-right: $carbon--spacing-08;
+    padding-right: $spacing-08;
   }
 
   .#{$prefix}--text-input--invalid.#{$prefix}--password-input {
@@ -176,11 +186,11 @@
   // TODO: remove selector above
   .#{$prefix}--text-input--invalid +
     .#{$prefix}--text-input--password__visibility__toggle {
-    right: $carbon--spacing-05;
+    right: $spacing-05;
   }
 
   .#{$prefix}--password-input-wrapper .#{$prefix}--text-input__invalid-icon {
-    right: $carbon--spacing-08;
+    right: $spacing-08;
   }
 
   .#{$prefix}--text-input:disabled
@@ -232,7 +242,7 @@
     .#{$prefix}--text-input--password__visibility,
     // TODO: remove selector above
     .#{$prefix}--text-input--password__visibility__toggle {
-      right: $carbon--spacing-08;
+      right: $spacing-08;
     }
   }
 
@@ -249,15 +259,15 @@
   .#{$prefix}--form--fluid .#{$prefix}--text-input-wrapper {
     position: relative;
     background: $field;
-    transition: background-color $duration--fast-01 motion(standard, productive),
-      outline $duration--fast-01 motion(standard, productive);
+    transition: background-color $duration-fast-01 motion(standard, productive),
+      outline $duration-fast-01 motion(standard, productive);
   }
 
   .#{$prefix}--form--fluid .#{$prefix}--label {
     position: absolute;
     z-index: 1;
     top: rem(13px);
-    left: $carbon--spacing-05;
+    left: $spacing-05;
     margin: 0;
   }
 
@@ -267,7 +277,7 @@
 
   .#{$prefix}--form--fluid .#{$prefix}--text-input {
     min-height: rem(64px);
-    padding: rem(32px) $carbon--spacing-05 rem(13px);
+    padding: rem(32px) $spacing-05 rem(13px);
   }
 
   .#{$prefix}--text-input__divider,
@@ -377,8 +387,4 @@
     svg {
     @include high-contrast-mode('icon-fill');
   }
-}
-
-@include exports('text-input') {
-  @include text-input;
 }
