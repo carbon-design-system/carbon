@@ -86,6 +86,10 @@ export OverflowMenu from './components/OverflowMenu';
 export OverflowMenuItem from './components/OverflowMenuItem';
 export Pagination from './components/Pagination';
 export PaginationNav from './components/PaginationNav';
+export {
+  ControlledPasswordInput,
+  PasswordInput,
+} from './components/PasswordInput';
 export PrimaryButton from './components/PrimaryButton';
 export {
   ProgressIndicator,
