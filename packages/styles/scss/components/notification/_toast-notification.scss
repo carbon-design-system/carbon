@@ -5,19 +5,20 @@
 // LICENSE file in the root directory of this source tree.
 //
 
-@use '../mixins' as*;
-@use '../tokens';
-@use '../../../breakpoint' as *;
-@use '../../../colors' as *;
-@use '../../../config' as *;
-@use '../../../motion' as *;
-@use '../../../spacing' as *;
-@use '../../../theme' as *;
-@use '../../../themes' as *;
-@use '../../../type' as *;
-@use '../../../utilities/convert' as *;
-@use '../../../utilities/high-contrast-mode' as *;
-@use '../../../utilities/focus-outline' as *;
+@use 'mixins' as*;
+@use 'tokens' as *;
+@use '../../breakpoint' as *;
+@use '../../colors' as *;
+@use '../../config' as *;
+@use '../../feature-flags' as *;
+@use '../../motion' as *;
+@use '../../spacing' as *;
+@use '../../theme' as *;
+@use '../../themes' as *;
+@use '../../type' as *;
+@use '../../utilities/convert' as *;
+@use '../../utilities/high-contrast-mode' as *;
+@use '../../utilities/focus-outline' as *;
 
 /// Toast notification styles
 /// @access public

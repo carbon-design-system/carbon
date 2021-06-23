@@ -20,7 +20,7 @@ describe('scss/components/notification', () => {
        @use 'sass:meta';
        @use '../notification';
  
-       $_: get('mixin', meta.mixin-exists('notification', 'notification'));
+       $_: get('mixin', meta.mixin-exists('inline-notification', 'notification'));
      `);
     expect(unwrap('mixin')).toBe(true);
   });
