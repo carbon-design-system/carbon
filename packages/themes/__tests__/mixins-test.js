@@ -214,4 +214,23 @@ describe('_mixins.scss', () => {
       expect(unwrap('fourth')).toBe(false);
     });
   });
+
+  describe('v11', () => {
+    it('should use fallback values for v11 tokens', async () => {
+      const { unwrap } = await render(`
+        @import '../scss/mixins';
+        @import '../scss/theme-maps';
+
+        $carbon--theme: (
+          ui-background: #ffffff,
+        );
+        @include carbon--theme();
+
+        $_: get('token', $background);
+      `);
+
+      // `ui-background` is the fallback for `background`
+      expect(unwrap('token')).toBe('#ffffff');
+    });
+  });
 });
