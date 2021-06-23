@@ -98,6 +98,14 @@ module.exports = {
       ],
     });
 
+    if (process.env.NODE_ENV === 'production') {
+      config.plugins.push(
+        new MiniCssExtractPlugin({
+          filename: '[name].[contenthash].css',
+        })
+      );
+    }
+
     return config;
   },
 };
