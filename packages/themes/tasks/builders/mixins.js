@@ -81,18 +81,34 @@ function buildMixinsFile(themes, tokens, defaultTheme, defaultThemeMapName) {
           });
         }),
         t.IfStatement({
+          // global-variable-exists('feature-flags') == false or
+          //   global-variable-exists('feature-flags') and
+          //     map-get($feature-flags, 'enable-v11-release') == true
           test: t.LogicalExpression({
-            left: t.SassFunctionCall(t.Identifier('global-variable-exists'), [
-              t.SassString('feature-flags'),
-            ]),
-            operator: 'and',
-            right: t.LogicalExpression({
-              left: t.SassFunctionCall(t.Identifier('map-get'), [
-                t.Identifier('feature-flags'),
-                t.SassString('enable-v11-release'),
+            // global-variable-exists('feature-flags') == false
+            left: t.LogicalExpression({
+              left: t.SassFunctionCall(t.Identifier('global-variable-exists'), [
+                t.SassString('feature-flags'),
               ]),
-              operator: '!=',
-              right: t.SassBoolean(true),
+              operator: '==',
+              right: t.SassBoolean(false),
+            }),
+            operator: 'or',
+            // global-variable-exists('feature-flags') and
+            //   map-get($feature-flags, 'enable-v11-release') == true
+            right: t.LogicalExpression({
+              left: t.SassFunctionCall(t.Identifier('global-variable-exists'), [
+                t.SassString('feature-flags'),
+              ]),
+              operator: 'and',
+              right: t.LogicalExpression({
+                left: t.SassFunctionCall(t.Identifier('map-get'), [
+                  t.Identifier('feature-flags'),
+                  t.SassString('enable-v11-release'),
+                ]),
+                operator: '!=',
+                right: t.SassBoolean(true),
+              }),
             }),
           }),
           consequent: t.BlockStatement(
