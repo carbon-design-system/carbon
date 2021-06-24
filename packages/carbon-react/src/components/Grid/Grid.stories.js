@@ -6,7 +6,11 @@
  */
 
 import './Grid.stories.scss';
-import { Grid, Column, FeatureFlags } from 'carbon-components-react';
+import {
+  Grid,
+  Column,
+  unstable_FeatureFlags as FeatureFlags,
+} from 'carbon-components-react';
 import React from 'react';
 import mdx from './Grid.mdx';
 
