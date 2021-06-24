@@ -204,7 +204,7 @@
     fill: $icon-primary;
   }
 
-  @if not feature-flag-enabled('enable-v11-release') {
+  @if not enabled('enable-v11-release') {
     .#{$prefix}--toast-notification__title {
       @include type-style('productive-heading-01');
 
