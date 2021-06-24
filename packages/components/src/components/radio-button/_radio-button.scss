@@ -23,6 +23,7 @@
   .#{$prefix}--radio-button-group {
     @include reset;
 
+    position: relative;
     display: flex;
     align-items: center;
   }
