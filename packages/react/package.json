@@ -91,7 +91,7 @@
     "@storybook/addon-storysource": "^5.3.21",
     "@storybook/addons": "^5.3.21",
     "@storybook/react": "^5.3.21",
-    "@storybook/source-loader": "^5.3.21",
+    "@storybook/source-loader": "^6.3.0",
     "@storybook/theming": "^6.2.9",
     "@testing-library/cypress": "^7.0.6",
     "babel-loader": "^8.2.2",
