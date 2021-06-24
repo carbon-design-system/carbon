@@ -231,7 +231,7 @@ export const purple50Hover = '#9352ff';
 export const purple40Hover = '#ae7aff';
 export const purple30Hover = '#c5a3ff';
 export const purple20Hover = '#dcc7ff';
-export const purple10Hover = '#eee6ff';
+export const purple10Hover = '#ede5ff';
 export const purpleHover = {
   100: purple100Hover,
   90: purple90Hover,
@@ -275,7 +275,7 @@ export const blue70Hover = '#0053ff';
 export const blue60Hover = '#0050e6';
 export const blue50Hover = '#1f70ff';
 export const blue40Hover = '#5c97ff';
-export const blue30Hover = '#b8d3ff';
+export const blue30Hover = '#8ab6ff';
 export const blue20Hover = '#b8d3ff';
 export const blue10Hover = '#dbebff';
 export const blueHover = {
@@ -334,7 +334,7 @@ export const cyanHover = {
   70: cyan70Hover,
   80: cyan80Hover,
   90: cyan90Hover,
-  100: cyan10Hover,
+  100: cyan100Hover,
 };
 
 export const teal10 = '#d9fbfb';
