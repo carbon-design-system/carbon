@@ -7705,18 +7705,18 @@ __metadata:
   languageName: node
   linkType: hard
 
-"accessibility-checker@npm:^3.1.1":
-  version: 3.1.1
-  resolution: "accessibility-checker@npm:3.1.1"
+"accessibility-checker@npm:^3.1.8":
+  version: 3.1.8
+  resolution: "accessibility-checker@npm:3.1.8"
   dependencies:
-    chromedriver: ^83.0.0
+    chromedriver: "*"
     deep-diff: ^0.3.4
     js-yaml: ^3.13.1
     puppeteer: ^5.3.0
     request: ^2.88.2
   bin:
     achecker: bin/achecker.js
-  checksum: 15d4399d7cf3509a9e8ff6031abc03dfee3e41f491ccded0e43d681c59211d9fdd8ab3f8a571de01ae32f9fd71b1cf7967c4874d6c24b769896ecbb06cc15749
+  checksum: c76cdd81b71fb1e73da9a69d3032dcb9028af846f1425930ee777265c90d4bc3c831b0c342e2f1d70fd4a1655b41b51ee70e5cda8767ae38d3b491864f5b8f6f
   languageName: node
   linkType: hard
 
@@ -9226,12 +9226,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"axios@npm:^0.19.2":
-  version: 0.19.2
-  resolution: "axios@npm:0.19.2"
+"axios@npm:^0.21.1":
+  version: 0.21.1
+  resolution: "axios@npm:0.21.1"
   dependencies:
-    follow-redirects: 1.5.10
-  checksum: dcace11a0a25fdf9b3b97fc9d011d23dd9c67cc13d91778080482ddddbbfe731f7410a090b11aa0bbbdf83686c5911ccb4289fd3683b7488c1b0c4d3c882380c
+    follow-redirects: ^1.10.0
+  checksum: c87915fa0b18c15c63350112b6b3563a3e2ae524d7707de0a73d2e065e0d30c5d3da8563037bc29d4cc1b7424b5a350cb7274fa52525c6c04a615fe561c6ab11
   languageName: node
   linkType: hard
 
@@ -11641,6 +11641,23 @@ __metadata:
   languageName: node
   linkType: hard
 
+"chromedriver@npm:*":
+  version: 91.0.1
+  resolution: "chromedriver@npm:91.0.1"
+  dependencies:
+    "@testim/chrome-version": ^1.0.7
+    axios: ^0.21.1
+    del: ^6.0.0
+    extract-zip: ^2.0.1
+    https-proxy-agent: ^5.0.0
+    proxy-from-env: ^1.1.0
+    tcp-port-used: ^1.0.1
+  bin:
+    chromedriver: bin/chromedriver
+  checksum: 869fb9954d437bc17da40d142abcfc06ac0dc99b978d3b7e6718cf260a768b88d28aea9d3b8dcfe14bbdf197063b818972a3b3b692e695f64d7bfe8d988468c2
+  languageName: node
+  linkType: hard
+
 "chromedriver@npm:2.41.0":
   version: 2.41.0
   resolution: "chromedriver@npm:2.41.0"
@@ -11653,23 +11670,6 @@ __metadata:
   bin:
     chromedriver: ./bin/chromedriver
   checksum: 18ad0d6dbe474f6474093f7ba4ab5195506e8866364f73247bac3ae21f3d4986f8f759f64e114d88ed28bb728b3bd0e945bd2f6b9bb94b0470a92e1dde43bd0f
-  languageName: node
-  linkType: hard
-
-"chromedriver@npm:^83.0.0":
-  version: 83.0.1
-  resolution: "chromedriver@npm:83.0.1"
-  dependencies:
-    "@testim/chrome-version": ^1.0.7
-    axios: ^0.19.2
-    del: ^5.1.0
-    extract-zip: ^2.0.0
-    https-proxy-agent: ^2.2.4
-    mkdirp: ^1.0.4
-    tcp-port-used: ^1.0.1
-  bin:
-    chromedriver: bin/chromedriver
-  checksum: 5aee224b90eb0124a8e24c534ef4527fb3b570cf2cd638918ec14890f0cca75d3e0022df91508c50cd640d04687cb1e90904172e32b2588ef09847a83db8f18e
   languageName: node
   linkType: hard
 
@@ -13876,7 +13876,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"del@npm:^5.0.0, del@npm:^5.1.0":
+"del@npm:^5.0.0":
   version: 5.1.0
   resolution: "del@npm:5.1.0"
   dependencies:
@@ -13889,6 +13889,22 @@ __metadata:
     rimraf: ^3.0.0
     slash: ^3.0.0
   checksum: d9e4ef2c1227230ed61291fc99bdcb084167c0fe580df5fa8b2524b511c09f0c51887edf7dc5ffaa6ecfb25c92a2ca185ec49d5233baf6c5fe50248ab1f13e57
+  languageName: node
+  linkType: hard
+
+"del@npm:^6.0.0":
+  version: 6.0.0
+  resolution: "del@npm:6.0.0"
+  dependencies:
+    globby: ^11.0.1
+    graceful-fs: ^4.2.4
+    is-glob: ^4.0.1
+    is-path-cwd: ^2.2.0
+    is-path-inside: ^3.0.2
+    p-map: ^4.0.0
+    rimraf: ^3.0.2
+    slash: ^3.0.0
+  checksum: 5742891627e91aaf62385714025233f4664da28bc55b6ab825649dcdea4691fed3cf329a2b1913fd2d2612e693e99e08a03c84cac7f36ef54bacac9390520192
   languageName: node
   linkType: hard
 
@@ -17077,12 +17093,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"follow-redirects@npm:^1.0.0":
-  version: 1.9.1
-  resolution: "follow-redirects@npm:1.9.1"
-  dependencies:
-    debug: ^3.0.0
-  checksum: 7e9635f1c330de235dab911639eb97d475acff3ae3d0e81097b206eb7bf63a5a205fd0dfc8bd938a244eeb769aedb4934f5d84ae31beb860f9fcba928fe2ec30
+"follow-redirects@npm:^1.0.0, follow-redirects@npm:^1.10.0":
+  version: 1.14.1
+  resolution: "follow-redirects@npm:1.14.1"
+  peerDependenciesMeta:
+    debug:
+      optional: true
+  checksum: 7381a55bdc6951c5c1ab73a8da99d9fa4c0496ce72dba92cd2ac2babe0e3ebde9b81c5bca889498ad95984bc773d713284ca2bb17f1b1e1416e5f6531e39a488
   languageName: node
   linkType: hard
 
@@ -19478,7 +19495,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"https-proxy-agent@npm:^2.2.1, https-proxy-agent@npm:^2.2.3, https-proxy-agent@npm:^2.2.4":
+"https-proxy-agent@npm:^2.2.1, https-proxy-agent@npm:^2.2.3":
   version: 2.2.4
   resolution: "https-proxy-agent@npm:2.2.4"
   dependencies:
@@ -21396,7 +21413,7 @@ __metadata:
     "@babel/preset-env": ^7.14.2
     "@babel/preset-react": ^7.13.13
     "@babel/runtime": ^7.14.0
-    accessibility-checker: ^3.1.1
+    accessibility-checker: ^3.1.8
     axe-core: ^4.2.2
     babel-jest: ^26.6.3
     chalk: ^4.1.1
@@ -28588,10 +28605,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"proxy-from-env@npm:^1.0.0":
-  version: 1.0.0
-  resolution: "proxy-from-env@npm:1.0.0"
-  checksum: 292e28d1de0c315958d71d8315eb546dd3cd8c8cbc2dab7c54eeb9f5c17f421771964ad0b5e1f77011bab2305bdae42e1757ce33bdb1ccc3e87732322a8efcf1
+"proxy-from-env@npm:^1.0.0, proxy-from-env@npm:^1.1.0":
+  version: 1.1.0
+  resolution: "proxy-from-env@npm:1.1.0"
+  checksum: ed7fcc2ba0a33404958e34d95d18638249a68c430e30fcb6c478497d72739ba64ce9810a24f53a7d921d0c065e5b78e3822759800698167256b04659366ca4d4
   languageName: node
   linkType: hard
 
