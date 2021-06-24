@@ -13,8 +13,6 @@ import {
 import React from 'react';
 import { action } from '@storybook/addon-actions';
 
-import { boolean, number, select, text } from '@storybook/addon-knobs';
-
 const kinds = {
   'Error (error)': 'error',
   'Info (info)': 'info',
