@@ -54,6 +54,14 @@ async function build() {
   // include the grade in between the swatch name and the hover keyword
   const hoverColorValues = Object.keys(hoverColors).reduce((acc, key) => {
     const swatch = paramCase(key.replace(/Hover/, ''));
+
+    if (typeof hoverColors[key] !== 'object') {
+      return acc.concat({
+        name: `${swatch}-hover`,
+        value: hoverColors[key],
+      });
+    }
+
     const values = Object.keys(hoverColors[key]).reduce((acc, grade) => {
       const value = hoverColors[key][grade];
       return acc.concat({

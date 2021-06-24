@@ -7,9 +7,11 @@
 
 export const black = '#000000';
 export const black100 = black;
+export const blackHover = '#212121';
 
 export const white = '#ffffff';
 export const white0 = white;
+export const whiteHover = '#e8e8e8';
 
 export const yellow10 = '#fcf4d6';
 export const yellow20 = '#fddc69';
@@ -588,6 +590,8 @@ export const colors = {
 };
 
 export const unstable_hoverColors = {
+  whiteHover,
+  blackHover,
   blueHover,
   coolGrayHover,
   cyanHover,
