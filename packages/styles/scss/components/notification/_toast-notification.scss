@@ -145,7 +145,7 @@
     margin-right: $spacing-05;
   }
 
-  @if feature-flag-enabled('enable-v11-release') {
+  @if enabled('enable-v11-release') {
     .#{$prefix}--toast-notification__content {
       @include type-style('body-short-01');
 
