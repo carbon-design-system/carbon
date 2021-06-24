@@ -11,6 +11,7 @@
 @use 'checkbox';
 @use 'code-snippet';
 @use 'date-picker';
+@use 'file-uploader';
 @use 'link';
 @use 'list';
 @use 'loading';
@@ -22,4 +23,5 @@
 @use 'data-table/skeleton';
 @use 'data-table/sort';
 @use "slider";
+@use 'overflow-menu';
 @use 'number-input';

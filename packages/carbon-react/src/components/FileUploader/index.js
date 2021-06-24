@@ -5,4 +5,11 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-export { Accordion, AccordionItem } from 'carbon-components-react';
+export {
+  FileUploader,
+  Filename,
+  FileUploaderSkeleton,
+  FileUploaderButton,
+  FileUploaderDropContainer,
+  FileUploaderItem,
+} from 'carbon-components-react';
