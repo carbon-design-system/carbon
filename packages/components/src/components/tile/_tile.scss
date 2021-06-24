@@ -52,8 +52,7 @@
       background: $layer-hover;
     }
   }
-  .#{$prefix}--tile-clickable tbody tr:hover td .#{$prefix}--link,
-  .#{$prefix}--tile-clickable tbody tr:hover th .#{$prefix}--link {
+  .#{$prefix}--tile--expandable .#{$prefix}--link {
     color: $link-secondary;
   }
 
