@@ -6,6 +6,7 @@
  */
 
 import React, { useState, useEffect, useRef } from 'react';
+import { Popover, PopoverContent } from '../../Popover';
 import PropTypes from 'prop-types';
 import { ButtonKinds } from '../../../prop-types/types';
 import classNames from 'classnames';
@@ -25,8 +26,7 @@ const IconButton = ({
   isSelected,
   renderIcon: ButtonImageElement,
   iconDescription,
-  tooltipPosition,
-  tooltipAlignment,
+  alignment,
   onClick,
   onBlur,
   onFocus,
@@ -114,16 +114,10 @@ const IconButton = ({
   const buttonClasses = classNames(className, {
     [`${prefix}--btn`]: true,
     [`${prefix}--btn--icon-only`]: true,
-    [`${prefix}--tooltip__trigger`]: true,
-    [`${prefix}--tooltip--a11y`]: true,
     [`${prefix}--btn--${kind}`]: kind,
     [`${prefix}--btn--disabled`]: disabled,
     [`${prefix}--btn--expressive`]: isExpressive,
-    [`${prefix}--tooltip--hidden`]: !allowTooltipVisibility, //use popover styles
-    [`${prefix}--tooltip--visible`]: isHovered, //use popover styles?
     [`${prefix}--btn--selected`]: isSelected && kind === 'ghost',
-    [`${prefix}--btn--icon-only--${tooltipPosition}`]: tooltipPosition,
-    [`${prefix}--tooltip--align-${tooltipAlignment}`]: tooltipAlignment,
   });
 
   const tooltipId = Math.random();
@@ -141,34 +135,55 @@ const IconButton = ({
     <ButtonImageElement className={`${prefix}--btn__icon`} aria-hidden="true" />
   );
 
-  const tooltip = (
-    <div
-      ref={tooltipRef}
-      id={`tooltip-${tooltipId}`}
-      onMouseEnter={handleMouseEnter}
-      className={`${prefix}--assistive-text`}>
-      {iconDescription}
+  return (
+    <div className={`${prefix}--btn__icon-container`}>
+      <button
+        onMouseEnter={composeEventHandlers([onMouseEnter, handleMouseEnter])}
+        onMouseLeave={composeEventHandlers([onMouseLeave, handleMouseLeave])}
+        onFocus={composeEventHandlers([onFocus, handleFocus])}
+        onBlur={composeEventHandlers([onBlur, handleBlur])}
+        onClick={composeEventHandlers([handleClick, onClick])}
+        {...props}
+        {...other}
+        type="button">
+        {icon}
+      </button>
+      <Popover align={alignment} open={allowTooltipVisibility} highContrast>
+        <PopoverContent
+          aria-hidden="true"
+          className={`${prefix}--tooltip-content`}
+          id={tooltipId}
+          ref={tooltipRef}
+          role="tooltip">
+          {iconDescription}
+        </PopoverContent>
+      </Popover>
     </div>
-  );
-
-  return React.createElement(
-    'button',
-    {
-      onMouseEnter: composeEventHandlers([onMouseEnter, handleMouseEnter]),
-      onMouseLeave: composeEventHandlers([onMouseLeave, handleMouseLeave]),
-      onFocus: composeEventHandlers([onFocus, handleFocus]),
-      onBlur: composeEventHandlers([onBlur, handleBlur]),
-      onClick: composeEventHandlers([handleClick, onClick]),
-      ...other,
-      ...props,
-      type: 'button',
-    },
-    tooltip,
-    icon
   );
 };
 
 IconButton.propTypes = {
+  /**
+   * Specify the alignment of the tooltip to the icon-only button.
+   * Can be one of: start, center, or end.
+   */
+  alignment: PropTypes.oneOf([
+    'top',
+    'top-left',
+    'top-right',
+
+    'bottom',
+    'bottom-left',
+    'bottom-right',
+
+    'left',
+    'left-bottom',
+    'left-top',
+
+    'right',
+    'right-bottom',
+    'right-top',
+  ]),
   /**
    * Specify an optional className to be added to your Button
    */
@@ -259,26 +274,13 @@ IconButton.propTypes = {
     'xl',
     '2xl',
   ]),
-
-  /**
-   * Specify the alignment of the tooltip to the icon-only button.
-   * Can be one of: start, center, or end.
-   */
-  tooltipAlignment: PropTypes.oneOf(['start', 'center', 'end']),
-
-  /**
-   * Specify the direction of the tooltip for icon-only buttons.
-   * Can be either top, right, bottom, or left.
-   */
-  tooltipPosition: PropTypes.oneOf(['top', 'right', 'bottom', 'left']),
 };
 
 IconButton.defaultProps = {
   disabled: false,
   kind: 'primary',
   size: 'default',
-  tooltipAlignment: 'center',
-  tooltipPosition: 'top',
+  alignment: 'top',
   isExpressive: false,
 };
 

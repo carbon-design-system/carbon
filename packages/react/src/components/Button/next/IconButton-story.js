@@ -19,7 +19,7 @@ export const Default = () => {
     <IconButton
       renderIcon={Add16}
       iconDescription="Some tooltip text here"
-      tooltipPosition="right"
+      alignment="left"
     />
   );
 };
