@@ -11,41 +11,16 @@ import {
   NotificationActionButton,
 } from 'carbon-components-react';
 import React from 'react';
-import { action } from '@storybook/addon-actions';
 
-const kinds = {
-  'Error (error)': 'error',
-  'Info (info)': 'info',
-  'Info square (info-square)': 'info-square',
-  'Success (success)': 'success',
-  'Warning (warning)': 'warning',
-  'Warning (warning-alt)': 'warning-alt',
-};
 const notificationProps = () => ({
-  kind: select('The notification kind (kind)', kinds, 'info'),
-  lowContrast: boolean('Use low contrast variant (lowContrast)', false),
-  role: text('ARIA role (role)', 'alert'),
-  title: text('Title (title)', 'Notification title'),
-  subtitle: text('Subtitle (subtitle)', 'Subtitle text goes here.'),
-  iconDescription: text(
-    'Icon description (iconDescription)',
-    'describes the close button'
-  ),
-  statusIconDescription: text(
-    'Status icon description (statusIconDescription)',
-    'describes the status icon'
-  ),
-  hideCloseButton: boolean('Hide close button (hideCloseButton)', false),
-  onClose: action('onClose'),
-  onCloseButtonClick: action('onCloseButtonClick'),
+  kind: 'info',
+  role: 'alert',
+  title: 'Notification title',
+  subtitle: 'Subtitle text goes here.',
 });
 
 const toastNotificationProps = () => ({
   ...notificationProps(),
-  timeout: number(
-    'Duration in milliseconds to display notification (timeout)',
-    0
-  ),
 });
 
 export default {
@@ -55,7 +30,7 @@ export default {
 export const Toast = () => (
   <ToastNotification
     {...toastNotificationProps()}
-    caption={text('Caption (caption)', '00:00:00 AM')}
+    caption={('Caption (caption)', '00:00:00 AM')}
     style={{ marginBottom: '.5rem' }}
   />
 );
@@ -63,12 +38,7 @@ export const Toast = () => (
 export const Inline = () => (
   <InlineNotification
     {...notificationProps()}
-    actions={
-      <NotificationActionButton
-        onClick={action('NotificationActionButton onClick')}>
-        {text('Action (NotificationActionButton > children)', 'Action')}
-      </NotificationActionButton>
-    }
+    actions={<NotificationActionButton>{'Action'}</NotificationActionButton>}
   />
 );
 
