@@ -53,21 +53,21 @@ export const backgroundSelectedHover = adjustLightness(backgroundSelected, 6);
 // Layer
 // layer-01
 export const layer01 = gray80;
-export const layerActive01 = gray70;
+export const layerActive01 = gray60;
 export const layerHover01 = adjustLightness(layer01, 6);
 export const layerSelected01 = gray70;
 export const layerSelectedHover01 = adjustLightness(layer01, 7);
 
 // layer-02
 export const layer02 = gray70;
-export const layerActive02 = gray60;
+export const layerActive02 = gray50;
 export const layerHover02 = adjustLightness(layer01, 7);
 export const layerSelected02 = gray60;
 export const layerSelectedHover02 = adjustLightness(layer01, -7);
 
 // layer-03
 export const layer03 = gray60;
-export const layerActive03 = gray50;
+export const layerActive03 = gray80;
 export const layerHover03 = adjustLightness(layer01, -7);
 export const layerSelected03 = gray50;
 export const layerSelectedHover03 = adjustLightness(layer01, -7);

@@ -53,21 +53,21 @@ export const backgroundSelectedHover = adjustLightness(backgroundSelected, 5);
 // Layer
 // layer-01
 export const layer01 = gray90;
-export const layerActive01 = gray30;
+export const layerActive01 = gray70;
 export const layerHover01 = adjustLightness(layer01, 5);
 export const layerSelected01 = gray80;
 export const layerSelectedHover01 = adjustLightness(layer01, 6);
 
 // layer-02
 export const layer02 = gray80;
-export const layerActive02 = gray30;
+export const layerActive02 = gray60;
 export const layerHover02 = adjustLightness(layer01, 6);
 export const layerSelected02 = gray70;
 export const layerSelectedHover02 = adjustLightness(layer01, 7);
 
 // layer-03
 export const layer03 = gray70;
-export const layerActive03 = gray30;
+export const layerActive03 = gray50;
 export const layerHover03 = adjustLightness(layer01, 7);
 export const layerSelected03 = gray60;
 export const layerSelectedHover03 = adjustLightness(layer01, -7);
@@ -79,30 +79,30 @@ export const layerSelectedDisabled = gray40;
 
 // layer-accent-01
 export const layerAccent01 = gray80;
-export const layerAccentActive01 = gray40;
+export const layerAccentActive01 = gray60;
 export const layerAccentHover01 = adjustLightness(layerAccent01, 6);
 
 // layer-accent-02
 export const layerAccent02 = gray70;
-export const layerAccentActive02 = gray40;
+export const layerAccentActive02 = gray50;
 export const layerAccentHover02 = adjustLightness(layerAccent01, 7);
 
 // layer-accent-03
 export const layerAccent03 = gray60;
-export const layerAccentActive03 = gray40;
+export const layerAccentActive03 = gray80;
 export const layerAccentHover03 = adjustLightness(layerAccent01, -7);
 
 // Field
 // field-01
-export const field01 = gray80;
+export const field01 = gray90;
 export const fieldHover01 = adjustLightness(field01, 6);
 
 // field-02
-export const field02 = gray70;
+export const field02 = gray80;
 export const fieldHover02 = adjustLightness(field01, 7);
 
 // field-03
-export const field03 = gray60;
+export const field03 = gray70;
 export const fieldHover03 = adjustLightness(field01, -7);
 
 // field
