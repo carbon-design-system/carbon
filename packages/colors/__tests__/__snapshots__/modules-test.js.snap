@@ -4,6 +4,7 @@ exports[`@carbon/colors Public API 1`] = `
 Object {
   "black": "#000000",
   "black-100": "#000000",
+  "black-hover": "#212121",
   "blue-10": "#edf5ff",
   "blue-10-hover": "#dbebff",
   "blue-100": "#001141",
@@ -378,6 +379,7 @@ Object {
   "warm-gray-90-hover": "#343232",
   "white": "#ffffff",
   "white-0": "#ffffff",
+  "white-hover": "#e8e8e8",
   "yellow-10": "#fcf4d6",
   "yellow-10-hover": "#f8e6a0",
   "yellow-100": "#1c1500",

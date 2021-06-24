@@ -157,6 +157,7 @@ Object {
 
 exports[`unstable_hoverColors 1`] = `
 Object {
+  "blackHover": "#212121",
   "blueHover": Object {
     "10": "#dbebff",
     "100": "#001f75",
@@ -289,6 +290,7 @@ Object {
     "80": "#4c4848",
     "90": "#343232",
   },
+  "whiteHover": "#e8e8e8",
   "yellowHover": Object {
     "10": "#f8e6a0",
     "100": "#332600",
