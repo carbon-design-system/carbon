@@ -72,7 +72,7 @@ class Toggle extends React.Component {
 
   static defaultProps = {
     defaultToggled: false,
-    ['aria-label']: 'Toggle',
+    // ['aria-label']: 'Toggle',
     labelA: 'Off',
     labelB: 'On',
     onToggle: () => {},
@@ -116,7 +116,7 @@ class Toggle extends React.Component {
         <input
           {...other}
           {...checkedProps}
-          aria-label={null}
+          aria-labelledby={id}
           type="checkbox"
           id={id}
           className={toggleClasses}
@@ -135,12 +135,7 @@ class Toggle extends React.Component {
             }
           }}
         />
-        <label
-          className={`${prefix}--toggle-input__label`}
-          htmlFor={id}
-          aria-label={
-            typeof labelText === 'string' ? null : this.props['aria-label']
-          }>
+        <label className={`${prefix}--toggle-input__label`} htmlFor={id}>
           {labelText}
           <span className={`${prefix}--toggle__switch`}>
             {size && (
