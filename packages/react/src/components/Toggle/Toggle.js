@@ -72,7 +72,6 @@ class Toggle extends React.Component {
 
   static defaultProps = {
     defaultToggled: false,
-    // ['aria-label']: 'Toggle',
     labelA: 'Off',
     labelB: 'On',
     onToggle: () => {},
@@ -135,7 +134,10 @@ class Toggle extends React.Component {
             }
           }}
         />
-        <label className={`${prefix}--toggle-input__label`} htmlFor={id}>
+        <label
+          className={`${prefix}--toggle-input__label`}
+          id={id}
+          htmlFor={id}>
           {labelText}
           <span className={`${prefix}--toggle__switch`}>
             {size && (
@@ -147,10 +149,14 @@ class Toggle extends React.Component {
                 <path d="M2.2 2.7L5 0 6 1 2.2 5 0 2.7 1 1.5z" />
               </svg>
             )}
-            <span className={`${prefix}--toggle__text--off`} aria-hidden="true">
+            <span
+              className={`${prefix}--toggle__text--off`}
+              aria-labelledby={id}>
               {labelA}
             </span>
-            <span className={`${prefix}--toggle__text--on`} aria-hidden="true">
+            <span
+              className={`${prefix}--toggle__text--on`}
+              aria-labelledby={id}>
               {labelB}
             </span>
           </span>
