@@ -89,7 +89,7 @@
     "@storybook/addon-links": "^5.3.21",
     "@storybook/addon-notes": "^5.3.21",
     "@storybook/addon-storysource": "^5.3.21",
-    "@storybook/addons": "^5.3.21",
+    "@storybook/addons": "^6.3.0",
     "@storybook/react": "^5.3.21",
     "@storybook/source-loader": "^5.3.21",
     "@storybook/theming": "^6.2.9",
