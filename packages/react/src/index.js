@@ -5,6 +5,8 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+import { deprecateFieldOnObject } from './internal/deprecateFieldOnObject';
+
 export Accordion from './components/Accordion';
 export AccordionItem from './components/AccordionItem';
 export { AspectRatio } from './components/AspectRatio';
@@ -72,7 +74,15 @@ export ListItem from './components/ListItem';
 export Loading from './components/Loading';
 export Modal from './components/Modal';
 export ModalWrapper from './components/ModalWrapper';
-export MultiSelect from './components/MultiSelect';
+import MultiSelect from './components/MultiSelect';
+if (__DEV__) {
+  deprecateFieldOnObject(
+    MultiSelect,
+    'FilterableMultiSelect',
+    MultiSelect.Filterable
+  );
+}
+export { MultiSelect };
 export {
   ToastNotification,
   InlineNotification,
@@ -121,7 +131,16 @@ export TabContent from './components/TabContent';
 export Tabs from './components/Tabs';
 export Tag from './components/Tag';
 export TextArea from './components/TextArea';
-export TextInput from './components/TextInput';
+import TextInput from './components/TextInput';
+if (__DEV__) {
+  deprecateFieldOnObject(
+    TextInput,
+    'ControlledPasswordInput',
+    TextInput.ControlledPasswordInput
+  );
+  deprecateFieldOnObject(TextInput, 'PasswordInput', TextInput.PasswordInput);
+}
+export { TextInput };
 export {
   Tile,
   ClickableTile,
