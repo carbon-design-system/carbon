@@ -25,7 +25,6 @@ export const Default = () => (
 export const Expandable = () => (
   <ExpandableSearch
     size="lg"
-    defaultValue="A default value"
     labelText="Search"
     closeButtonLabelText="Clear search input"
     id="search-expandable-1"
