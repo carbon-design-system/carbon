@@ -253,6 +253,7 @@
     background-color: transparent;
     color: $text-02;
     cursor: pointer;
+    font-family: inherit;
     font-weight: 400;
     text-align: left;
     transition: outline $duration-fast-02 motion(entrance, productive),
