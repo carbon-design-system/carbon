@@ -78,7 +78,7 @@ import MultiSelect from './components/MultiSelect';
 if (__DEV__) {
   deprecateFieldOnObject(
     MultiSelect,
-    'FilterableMultiSelect',
+    'MultiSelect.Filterable',
     MultiSelect.Filterable
   );
 }
