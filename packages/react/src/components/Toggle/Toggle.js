@@ -17,8 +17,6 @@ const getInstanceId = setupGetInstanceId();
 
 class Toggle extends React.Component {
   static propTypes = {
-    ['aria-label']: PropTypes.string.isRequired,
-
     /**
      * Specify a custom className to apply to the form-item node
      */
@@ -134,10 +132,7 @@ class Toggle extends React.Component {
             }
           }}
         />
-        <label
-          className={`${prefix}--toggle-input__label`}
-          id={id}
-          htmlFor={id}>
+        <label className={`${prefix}--toggle-input__label`} htmlFor={id}>
           {labelText}
           <span className={`${prefix}--toggle__switch`}>
             {size && (
