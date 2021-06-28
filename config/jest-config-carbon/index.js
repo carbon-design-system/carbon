@@ -26,6 +26,7 @@ module.exports = {
       './transform/fileTransform.js'
     ),
   },
+  testEnvironment: 'jsdom',
   testRunner: 'jest-circus/runner',
   testPathIgnorePatterns: [
     '/cjs/',
