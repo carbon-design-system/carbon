@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { colors } from '@carbon/colors';
+import { colors, unstable_hoverColors } from '@carbon/colors';
 import React from 'react';
 import {
   themes,
@@ -21,12 +21,65 @@ const tokenSets = tokenSet.getTokenSets();
 
 const colorsByValue = {};
 
+function addColorByValue(value, name) {
+  if (!colorsByValue[value]) {
+    colorsByValue[value] = [];
+  }
+  colorsByValue[value].push(name);
+}
+
+function getColorByValue(value, swatchPreference) {
+  if (!colorsByValue[value]) {
+    return '—';
+  }
+  const names = colorsByValue[value];
+
+  if (names.length === 1) {
+    return names[0];
+  }
+
+  const match = names.find((name) => {
+    return name.includes(swatchPreference);
+  });
+  if (match) {
+    return match;
+  }
+
+  return names[0];
+}
+
 for (const [swatch, grades] of Object.entries(colors)) {
   for (const [grade, value] of Object.entries(grades)) {
-    colorsByValue[value] = TokenFormat.convert({
-      name: `${swatch}-${grade}`,
-      format: TokenFormat.formats.scss,
-    });
+    addColorByValue(
+      value,
+      TokenFormat.convert({
+        name: `${swatch}-${grade}`,
+        format: TokenFormat.formats.scss,
+      })
+    );
+  }
+}
+
+for (const [swatch, grades] of Object.entries(unstable_hoverColors)) {
+  if (typeof grades !== 'object') {
+    addColorByValue(
+      grades,
+      TokenFormat.convert({
+        name: swatch,
+        format: TokenFormat.formats.scss,
+      })
+    );
+    continue;
+  }
+
+  for (const [grade, value] of Object.entries(grades)) {
+    addColorByValue(
+      value,
+      TokenFormat.convert({
+        name: `${swatch}-${grade}`,
+        format: TokenFormat.formats.scss,
+      })
+    );
   }
 }
 
@@ -167,7 +220,10 @@ export default function IndexPage() {
                           />
                           <div className="details">
                             <span>
-                              {getColorName(themes.white[exportName])}
+                              {getColorByValue(
+                                themes.white[exportName],
+                                'white'
+                              )}
                             </span>
                             <span className="hex-value">
                               {themes.white[exportName]}
@@ -184,7 +240,9 @@ export default function IndexPage() {
                             }}
                           />
                           <div className="details">
-                            <span>{getColorName(themes.g10[exportName])}</span>
+                            <span>
+                              {getColorByValue(themes.g10[exportName], 'gray')}
+                            </span>
                             <span className="hex-value">
                               {themes.g10[exportName]}
                             </span>
@@ -200,7 +258,9 @@ export default function IndexPage() {
                             }}
                           />
                           <div className="details">
-                            <span>{getColorName(themes.g90[exportName])}</span>
+                            <span>
+                              {getColorByValue(themes.g90[exportName], 'gray')}
+                            </span>
                             <span className="hex-value">
                               {themes.g90[exportName]}
                             </span>
@@ -216,7 +276,9 @@ export default function IndexPage() {
                             }}
                           />
                           <div className="details">
-                            <span>{getColorName(themes.g100[exportName])}</span>
+                            <span>
+                              {getColorByValue(themes.g90[exportName], 'gray')}
+                            </span>
                             <span className="hex-value">
                               {themes.g100[exportName]}
                             </span>

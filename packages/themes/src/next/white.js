@@ -15,6 +15,7 @@ import {
   // Gray
   gray10,
   gray20,
+  gray20Hover,
   gray30,
   gray40,
   gray50,
@@ -35,6 +36,7 @@ import {
 
   // Constants
   white,
+  whiteHover,
 } from '@carbon/colors';
 import { adjustLightness } from '../tools';
 
@@ -43,7 +45,7 @@ export const background = white;
 export const backgroundInverse = gray80;
 export const backgroundBrand = blue60;
 export const backgroundActive = gray30;
-export const backgroundHover = adjustLightness(background, -5);
+export const backgroundHover = whiteHover;
 export const backgroundInverseHover = adjustLightness(backgroundInverse, 6);
 export const backgroundSelected = gray20;
 export const backgroundSelectedHover = adjustLightness(backgroundSelected, -6);
@@ -54,21 +56,21 @@ export const layer01 = gray10;
 export const layerActive01 = gray30;
 export const layerHover01 = adjustLightness(layer01, -5);
 export const layerSelected01 = gray20;
-export const layerSelectedHover01 = adjustLightness(layer01, -6);
+export const layerSelectedHover01 = gray20Hover;
 
 // layer-02
 export const layer02 = white;
 export const layerActive02 = gray30;
 export const layerHover02 = adjustLightness(layer01, -5);
 export const layerSelected02 = gray20;
-export const layerSelectedHover02 = adjustLightness(layer01, -6);
+export const layerSelectedHover02 = gray20Hover;
 
 // layer-03
 export const layer03 = gray10;
 export const layerActive03 = gray30;
 export const layerHover03 = adjustLightness(layer01, -5);
 export const layerSelected03 = gray20;
-export const layerSelectedHover03 = adjustLightness(layer01, -6);
+export const layerSelectedHover03 = gray20Hover;
 
 // layer
 export const layerDisabled = gray10;
@@ -181,7 +183,7 @@ export const focusInset = white;
 export const focusInverse = white;
 
 // Skeleton
-export const skeletonBackground = adjustLightness(background, -5);
+export const skeletonBackground = whiteHover;
 export const skeletonElement = gray30;
 
 // Misc

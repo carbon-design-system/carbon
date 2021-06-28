@@ -14,7 +14,9 @@ import {
 
   // Gray
   gray10,
+  gray10Hover,
   gray20,
+  gray20Hover,
   gray30,
   gray40,
   gray50,
@@ -35,6 +37,7 @@ import {
 
   // Constants
   white,
+  whiteHover,
 } from '@carbon/colors';
 import { adjustLightness } from '../tools';
 
@@ -52,23 +55,23 @@ export const backgroundSelectedHover = adjustLightness(backgroundSelected, -6);
 // layer-01
 export const layer01 = white;
 export const layerActive01 = gray30;
-export const layerHover01 = adjustLightness(layer01, -5);
+export const layerHover01 = whiteHover;
 export const layerSelected01 = gray20;
-export const layerSelectedHover01 = adjustLightness(layer01, -6);
+export const layerSelectedHover01 = gray20Hover;
 
 // layer-02
 export const layer02 = gray10;
 export const layerActive02 = gray30;
-export const layerHover02 = adjustLightness(layer01, -5);
+export const layerHover02 = gray10Hover;
 export const layerSelected02 = gray20;
-export const layerSelectedHover02 = adjustLightness(layer01, -6);
+export const layerSelectedHover02 = gray20Hover;
 
 // layer-03
 export const layer03 = white;
 export const layerActive03 = gray30;
-export const layerHover03 = adjustLightness(layer01, -5);
+export const layerHover03 = whiteHover;
 export const layerSelected03 = gray20;
-export const layerSelectedHover03 = adjustLightness(layer01, -6);
+export const layerSelectedHover03 = gray20Hover;
 
 // layer
 export const layerDisabled = white;
@@ -93,15 +96,15 @@ export const layerAccentHover03 = adjustLightness(layerAccent01, -6);
 // Field
 // field-01
 export const field01 = white;
-export const fieldHover01 = adjustLightness(field01, -5);
+export const fieldHover01 = whiteHover;
 
 // field-02
 export const field02 = gray10;
-export const fieldHover02 = adjustLightness(field01, -5);
+export const fieldHover02 = gray10Hover;
 
 // field-03
 export const field03 = white;
-export const fieldHover03 = adjustLightness(field01, -5);
+export const fieldHover03 = whiteHover;
 
 // field
 export const fieldDisabled = white;
