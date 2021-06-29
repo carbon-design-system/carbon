@@ -9,5 +9,7 @@ import { Token } from './Token';
 import { TokenFormat } from './TokenFormat';
 import { TokenGroup } from './TokenGroup';
 import { TokenSet } from './TokenSet';
+import { group } from './v11TokenGroup';
+import { set } from './v11TokenSet';
 
-export { Token, TokenFormat, TokenGroup, TokenSet };
+export { Token, TokenFormat, TokenGroup, TokenSet, group, set };
