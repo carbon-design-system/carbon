@@ -85,7 +85,7 @@
     "@rollup/plugin-replace": "^2.4.2",
     "@storybook/addon-actions": "^6.3.1",
     "@storybook/addon-docs": "^6.3.1",
-    "@storybook/addon-knobs": "^6.2.9",
+    "@storybook/addon-knobs": "^6.3.0",
     "@storybook/addon-links": "^6.3.1",
     "@storybook/addon-notes": "^5.3.21",
     "@storybook/addon-storysource": "^6.3.1",
