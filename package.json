@@ -24,7 +24,7 @@
     "lint:styles": "stylelint '**/*.{css,scss}' --report-needless-disables --report-invalid-scope-disables",
     "sync": "carbon-cli sync",
     "test": "cross-env BABEL_ENV=test jest",
-    "test:e2e": "cross-env BABEL_ENV=test jest --testPathPattern='e2e/' --testPathIgnorePatterns='examples,/packages/components/,/packages/react/'"
+    "test:e2e": "cross-env BABEL_ENV=test jest -c jest.e2e.config.js"
   },
   "resolutions": {
     "ast-types": "^0.14.0",
@@ -55,11 +55,11 @@
     "cross-env": "^5.2.0",
     "cross-spawn": "^6.0.5",
     "doctoc": "^1.4.0",
-    "eslint": "^6.8.0",
+    "eslint": "^7.28.0",
     "fs-extra": "^8.1.0",
     "glob": "^7.1.4",
     "husky": "^4.0.10",
-    "jest": "^26.0.1",
+    "jest": "^27.0.5",
     "jest-junit": "^10.0.0",
     "lerna": "^3.20.2",
     "lint-staged": "^9.5.0",
@@ -139,19 +139,6 @@
   "stylelint": {
     "extends": [
       "./config/stylelint-config-carbon"
-    ]
-  },
-  "jest": {
-    "preset": "jest-config-carbon",
-    "collectCoverageFrom": [
-      "packages/**/src/**/*.js",
-      "!packages/{cli,components,sketch}/**",
-      "!packages/**/{examples,stories}/**",
-      "!**/*-story.js"
-    ],
-    "reporters": [
-      "default",
-      "jest-junit"
     ]
   }
 }
