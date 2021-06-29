@@ -123,6 +123,41 @@ function buildMixinsFile(themes, tokens, defaultTheme, defaultThemeMapName) {
         }),
         t.IfStatement({
           test: t.LogicalExpression({
+            left: t.Identifier('emit-custom-properties'),
+            operator: '==',
+            right: t.SassBoolean(true),
+          }),
+          consequent: t.BlockStatement(
+            Object.keys(tokens).flatMap((group) => {
+              return tokens[group].flatMap((token) => {
+                const name = formatTokenName(token);
+                return [
+                  t.Newline(),
+                  t.IfStatement({
+                    test: t.SassFunctionCall(t.Identifier('should-emit'), [
+                      t.Identifier('theme'),
+                      t.Identifier('parent-carbon-theme'),
+                      t.SassString(name),
+                      t.Identifier('emit-difference'),
+                    ]),
+                    consequent: t.BlockStatement([
+                      t.SassMixinCall(t.Identifier('custom-property'), [
+                        t.SassString(name),
+                        t.Identifier(name),
+                        // t.SassFunctionCall(t.Identifier('map-get'), [
+                        // t.Identifier('theme'),
+                        // t.SassString(name),
+                        // ]),
+                      ]),
+                    ]),
+                  }),
+                ];
+              });
+            })
+          ),
+        }),
+        t.IfStatement({
+          test: t.LogicalExpression({
             left: t.SassFunctionCall(t.Identifier('global-variable-exists'), [
               t.SassString('feature-flags'),
             ]),
@@ -151,52 +186,19 @@ function buildMixinsFile(themes, tokens, defaultTheme, defaultThemeMapName) {
                         t.SassValue({
                           value: `--#{$custom-property-prefix}-${name}`,
                         }),
-                        t.CallExpression({
-                          callee: t.Identifier('map-get'),
-                          arguments: [
-                            t.Identifier('theme'),
-                            t.SassString(name),
-                          ],
-                        }),
+                        t.Identifier(name),
+                        // t.CallExpression({
+                        // callee: t.Identifier('map-get'),
+                        // arguments: [
+                        // t.Identifier('theme'),
+                        // t.SassString(name),
+                        // ],
+                        // }),
                       ],
                     }),
                     global: true,
                   });
                 });
-            })
-          ),
-        }),
-        t.IfStatement({
-          test: t.LogicalExpression({
-            left: t.Identifier('emit-custom-properties'),
-            operator: '==',
-            right: t.SassBoolean(true),
-          }),
-          consequent: t.BlockStatement(
-            Object.keys(tokens).flatMap((group) => {
-              return tokens[group].flatMap((token) => {
-                const name = formatTokenName(token);
-                return [
-                  t.Newline(),
-                  t.IfStatement({
-                    test: t.SassFunctionCall(t.Identifier('should-emit'), [
-                      t.Identifier('theme'),
-                      t.Identifier('parent-carbon-theme'),
-                      t.SassString(name),
-                      t.Identifier('emit-difference'),
-                    ]),
-                    consequent: t.BlockStatement([
-                      t.SassMixinCall(t.Identifier('custom-property'), [
-                        t.SassString(name),
-                        t.SassFunctionCall(t.Identifier('map-get'), [
-                          t.Identifier('theme'),
-                          t.SassString(name),
-                        ]),
-                      ]),
-                    ]),
-                  }),
-                ];
-              });
             })
           ),
         }),

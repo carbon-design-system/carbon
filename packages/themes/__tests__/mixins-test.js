@@ -10,6 +10,7 @@
 'use strict';
 
 const { SassRenderer } = require('@carbon/test-utils/scss');
+const css = require('css');
 const { themes } = require('../src');
 
 const { render } = SassRenderer.create(__dirname);
@@ -231,6 +232,80 @@ describe('_mixins.scss', () => {
 
       // `ui-background` is the fallback for `background`
       expect(unwrap('token')).toBe('#ffffff');
+    });
+
+    it('should emit css custom properties that use the correct token value', async () => {
+      const { result } = await render(`
+        @import '../scss/mixins';
+        @import '../scss/theme-maps';
+
+        :root {
+          @include carbon--theme(
+            $theme: map-merge($carbon--theme--g100, (
+              interactive-01: #ffffff,
+            )),
+            $emit-custom-properties: true
+          );
+        }
+      `);
+      const ast = css.parse(result.css.toString());
+      const [root] = ast.stylesheet.rules;
+
+      // Assert that every theme value is not an empty string when no value is
+      // given from the given theme
+      for (const declaration of root.declarations) {
+        expect(declaration.value).not.toBe('');
+      }
+
+      // Specific check to make sure button-primary is mapped to interactive-01
+      // in v10
+      const interactive01 = root.declarations.find((declaration) => {
+        return declaration.property.includes('interactive-01');
+      });
+      const buttonPrimary = root.declarations.find((declaration) => {
+        return declaration.property.includes('button-primary');
+      });
+
+      expect(interactive01.value).toBe('#ffffff');
+      expect(interactive01.value).toEqual(buttonPrimary.value);
+    });
+
+    it('should use the derived value instead of the theme value', async () => {
+      const { unwrap } = await render(`
+        @import '../scss/mixins';
+        @import '../scss/theme-maps';
+
+        $carbon--theme: map-merge(
+          $carbon--theme--g100,
+          ( interactive-01: #ffffff )
+        );
+        @include carbon--theme();
+
+        $_: get('interactive-01', $interactive-01);
+        $_: get('button-primary', $button-primary);
+
+        $feature-flags: (
+          enable-css-custom-properties: true,
+        );
+
+        @include carbon--theme();
+
+        $_: get('cp:interactive-01', $interactive-01);
+        $_: get('cp:button-primary', $button-primary);
+      `);
+
+      expect(unwrap('interactive-01')).toBe('#ffffff');
+      expect(unwrap('interactive-01')).toBe(unwrap('button-primary'));
+
+      const [interactive01] = unwrap('cp:interactive-01').match(
+        /#[0-9a-f]{3,6}/
+      );
+      const [buttonPrimary] = unwrap('cp:button-primary').match(
+        /#[0-9a-f]{3,6}/
+      );
+
+      expect(interactive01).toBe('#ffffff');
+      expect(interactive01).toBe(buttonPrimary);
     });
   });
 });
