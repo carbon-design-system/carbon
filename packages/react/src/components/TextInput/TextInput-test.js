@@ -29,6 +29,13 @@ describe('TextInput', () => {
     describe('input', () => {
       let container;
 
+      afterEach(() => {
+        if (container && container.parentNode) {
+          container.parentNode.removeChild(container);
+        }
+        container = null;
+      });
+
       it('renders as expected', () => {
         expect(textInput().length).toBe(1);
       });
@@ -97,13 +104,6 @@ describe('TextInput', () => {
         expect(textInput().props().placeholder).not.toBeDefined();
         wrapper.setProps({ placeholder: 'Enter text' });
         expect(textInput().props().placeholder).toEqual('Enter text');
-      });
-
-      afterEach(() => {
-        if (container && container.parentNode) {
-          container.parentNode.removeChild(container);
-        }
-        container = null;
       });
     });
 
