@@ -61,9 +61,9 @@ describe('Copy', () => {
     it('Should make the feedback visible', () => {
       const feedbackWrapper = mount(<Copy feedback="Copied!" />);
       const feedback = feedbackWrapper.find(`.${prefix}--copy-btn__feedback`);
-      expect(feedback).toBeFalsy;
+      expect(feedback).toBeFalsy();
       feedbackWrapper.simulate('click');
-      expect(feedback).toBeTruthy;
+      expect(feedback).toBeTruthy();
     });
 
     it('Should show feedback for a limited amount of time', () => {
