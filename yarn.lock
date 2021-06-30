@@ -32408,7 +32408,7 @@ resolve@^2.0.0-next.3:
   languageName: node
   linkType: hard
 
-"temp@npm:^0.8.1, temp@npm:^0.8.4":
+"temp@npm:^0.8.4":
   version: 0.8.4
   resolution: "temp@npm:0.8.4"
   dependencies:
