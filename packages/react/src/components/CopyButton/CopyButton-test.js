@@ -96,7 +96,7 @@ describe('CopyButton', () => {
       const onClick = jest.fn();
       const clickWrapper = mount(<CopyButton onClick={onClick} />);
       clickWrapper.simulate('click');
-      expect(onClick).toBeCalled();
+      expect(onClick).toHaveBeenCalled();
     });
   });
 });

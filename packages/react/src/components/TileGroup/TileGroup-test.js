@@ -86,7 +86,7 @@ describe('TileGroup', () => {
     });
 
     it('should invoke onChange with correct arguments', () => {
-      expect(onChange).toBeCalledWith(...args);
+      expect(onChange).toHaveBeenCalledWith(...args);
     });
 
     it('calling onChange with same args should not call onChange prop', () => {

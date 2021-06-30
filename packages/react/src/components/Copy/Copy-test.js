@@ -86,7 +86,7 @@ describe('Copy', () => {
       const onClick = jest.fn();
       const clickWrapper = mount(<Copy onClick={onClick} />);
       clickWrapper.simulate('click');
-      expect(onClick).toBeCalled();
+      expect(onClick).toHaveBeenCalled();
     });
   });
 });

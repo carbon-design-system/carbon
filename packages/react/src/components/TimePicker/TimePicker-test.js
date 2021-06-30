@@ -118,12 +118,12 @@ describe('TimePicker', () => {
 
       it('should not invoke onClick', () => {
         input.simulate('click');
-        expect(onClick).not.toBeCalled();
+        expect(onClick).not.toHaveBeenCalled();
       });
 
       it('should not invoke onChange', () => {
         input.simulate('change');
-        expect(onChange).not.toBeCalled();
+        expect(onChange).not.toHaveBeenCalled();
       });
     });
 
@@ -150,17 +150,17 @@ describe('TimePicker', () => {
 
       it('should invoke onBlur when input is clicked', () => {
         input.simulate('blur', eventObject);
-        expect(onBlur).toBeCalledWith(eventObject);
+        expect(onBlur).toHaveBeenCalledWith(eventObject);
       });
 
       it('should invoke onClick when input is clicked', () => {
         input.simulate('click', eventObject);
-        expect(onClick).toBeCalledWith(eventObject);
+        expect(onClick).toHaveBeenCalledWith(eventObject);
       });
 
       it('should invoke onChange when input value is changed', () => {
         input.simulate('change', eventObject);
-        expect(onChange).toBeCalledWith(eventObject);
+        expect(onChange).toHaveBeenCalledWith(eventObject);
       });
     });
   });

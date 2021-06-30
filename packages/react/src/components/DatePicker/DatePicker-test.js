@@ -352,7 +352,7 @@ describe('DatePicker', () => {
     });
 
     it('should not have "console.error" being created', () => {
-      expect(mockConsoleError).not.toBeCalled();
+      expect(mockConsoleError).not.toHaveBeenCalled();
     });
   });
 });

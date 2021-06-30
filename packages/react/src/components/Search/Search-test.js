@@ -203,12 +203,12 @@ describe('Search', () => {
 
       it('should invoke onClick when input is clicked', () => {
         input.simulate('click');
-        expect(onClick).toBeCalled();
+        expect(onClick).toHaveBeenCalled();
       });
 
       it('should invoke onChange when input value is changed', () => {
         input.simulate('change', eventObject);
-        expect(onChange).toBeCalledWith(eventObject);
+        expect(onChange).toHaveBeenCalledWith(eventObject);
       });
     });
   });
