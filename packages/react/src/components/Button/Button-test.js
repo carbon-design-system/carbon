@@ -402,17 +402,6 @@ describe('Small ButtonSkeleton', () => {
   });
 });
 
-describe('Small ButtonSkeleton', () => {
-  describe('Renders as expected', () => {
-    const wrapper = shallow(<ButtonSkeleton small />);
-
-    it('has the expected classes for small', () => {
-      expect(wrapper.hasClass(`${prefix}--btn--sm`)).toEqual(true);
-      expect(wrapper.hasClass(`${prefix}--skeleton`)).toEqual(true);
-    });
-  });
-});
-
 describe('Button accessibility', () => {
   afterEach(cleanup);
 

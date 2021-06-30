@@ -125,7 +125,8 @@ describe('Select', () => {
       });
     });
   });
-  describe('Renders as expected', () => {
+
+  describe('Renders select as expected', () => {
     const wrapper = mount(
       <Select id="testing" labelText="Select" className="extra-class" inline>
         <SelectItem />
