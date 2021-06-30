@@ -1158,7 +1158,9 @@ categories:
           - glyph--circle-fill
           - glyph--circle-stroke
           - glyph--critical
+          - glyph--critical-severity
           - glyph--incomplete
+          - glyph--low-severity
           - glyph--square-fill
           - glyph--undefined
           - help
