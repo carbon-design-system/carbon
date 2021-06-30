@@ -11,11 +11,10 @@ module.exports = {
   plugins: ['eslint-plugin-jest'],
   overrides: [
     {
-      files: ['*-test.js', '*.test.js'],
+      files: ['*-test.js', '*.test.js', '*-spec.js', '*.spec.js'],
       env: {
         'jest/globals': true,
       },
-      // extends: ['plugin:jest/recommended', 'plugin:jest/style'],
       rules: {
         // Have control over test and it usages
         'jest/consistent-test-it': 'off',
@@ -27,6 +26,12 @@ module.exports = {
             assertFunctionNames: ['expect', 'assert*'],
           },
         ],
+
+        // Enforce lowercase test names
+        'jest/lowercase-name': 'off',
+
+        // Disallow alias methods
+        'jest/no-alias-methods': 'error',
       },
     },
   ],
