@@ -101,6 +101,45 @@ module.exports = {
 
         // Suggest having hooks before any test cases
         'jest/prefer-hooks-on-top': 'error',
+
+        // Suggest using jest.spyOn()
+        'jest/prefer-spy-on': 'off',
+
+        // Suggest using toStrictEqual()
+        'jest/prefer-strict-equal': 'off',
+
+        // Suggest using toBeNull()
+        'jest/prefer-to-be-null': 'off',
+
+        // Suggest using toBeUndefined()
+        'jest/prefer-to-be-undefined': 'off',
+
+        // Suggest using toContain()
+        'jest/prefer-to-contain': 'off',
+
+        // Suggest using toHaveLength()
+        'jest/prefer-to-have-length': 'off',
+
+        // Suggest using test.todo
+        'jest/prefer-todo': 'off',
+
+        // Require a message for toThrow()
+        'jest/require-to-throw-message': 'off',
+
+        // Require test cases and hooks to be inside a describe block
+        'jest/require-top-level-describe': 'off',
+
+        // Enforce valid describe() callback
+        'jest/valid-describe': 'error',
+
+        // Enforce valid expect() usage
+        'jest/valid-expect': 'error',
+
+        // Enforce having return statement when testing with promises
+        'jest/valid-expect-in-promise': 'error',
+
+        // Enforce valid titles
+        'jest/valid-title': 'error',
       },
     },
   ],
