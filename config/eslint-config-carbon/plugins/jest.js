@@ -47,6 +47,21 @@ module.exports = {
 
         // Avoid using a callback in asynchronous tests and hooks
         'jest/no-done-callback': 'error',
+
+        // Disallow duplicate setup and teardown hooks
+        'jest/no-duplicate-hooks': 'error',
+
+        // Disallow using exports in files containing tests
+        'jest/no-export': 'error',
+
+        // Disallow focused tests
+        'jest/no-focused-tests': 'error',
+
+        // Disallow setup and teardown hooks
+        'jest/no-hooks': 'off',
+
+        // Disallow identical titles
+        'jest/no-identical-title': 'error',
       },
     },
   ],
