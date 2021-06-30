@@ -31,6 +31,7 @@
     width: rem(128px);
     min-width: 7rem;
     flex-direction: row;
+    border-top: 2px solid $ui-03;
 
     .#{$prefix}--tooltip__label {
       display: block;
@@ -45,14 +46,23 @@
   .#{$prefix}--progress-line {
     position: absolute;
     left: 0;
-    width: rem(128px);
-    height: 1px;
-    border: $progress-indicator-bar-width;
+    width: 0;
+    height: 2px;
+    transform: translateY(-2px);
+    transition: width 0.15s cubic-bezier(0.2, 0, 0.38, 0.9) 0.15s;
   }
 
   .#{$prefix}--progress--space-equal .#{$prefix}--progress-line {
-    width: 100%;
-    min-width: rem(128px);
+    width: 0;
+  }
+
+  @keyframes progress-indicator-icon-fade {
+    0% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
   }
 
   .#{$prefix}--progress-step svg {
@@ -64,6 +74,10 @@
     margin: rem(10px) $carbon--spacing-03 0 0;
     border-radius: 50%;
     fill: $interactive;
+
+    // animation is disabled for now bc the svg is re-rendered after every change
+    // opacity: 0;
+    // animation: 0.15s progress-indicator-icon-fade 0.15s motion(standard, productive) forwards;
   }
 
   .#{$prefix}--progress-label {
@@ -129,7 +143,6 @@
 
     display: block;
     width: rem(125px);
-
     min-width: rem(115px);
     min-height: $carbon--spacing-06;
     padding: $carbon--spacing-03 $carbon--spacing-05;
@@ -181,6 +194,7 @@
   //COMPLETED STYLING
   .#{$prefix}--progress-step--complete {
     .#{$prefix}--progress-line {
+      width: 100%;
       background-color: $interactive;
     }
   }
@@ -266,6 +280,7 @@
   .#{$prefix}--progress--vertical {
     display: flex;
     flex-direction: column;
+    border-left: 2px solid $ui-03;
   }
 
   .#{$prefix}--progress--vertical .#{$prefix}--progress-step,
@@ -308,8 +323,19 @@
     position: absolute;
     top: 0;
     left: 0;
-    width: 1px;
-    height: 100%;
+    width: 2px;
+    height: 0;
+    background-color: $interactive;
+    transform: translateX(-2px);
+    transition: height 0.15s cubic-bezier(0.2, 0, 0.38, 0.9) 0.15s;
+  }
+
+  .#{$prefix}--progress--vertical {
+    .#{$prefix}--progress-step--complete {
+      .#{$prefix}--progress-line {
+        height: 100%;
+      }
+    }
   }
 }
 
