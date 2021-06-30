@@ -18,6 +18,7 @@
 @use 'list';
 @use 'loading';
 @use 'menu';
+@use 'tooltip';
 @use 'radio-button';
 @use 'modal';
 @use 'search';
@@ -26,8 +27,11 @@
 @use 'data-table/expandable';
 @use 'data-table/skeleton';
 @use 'data-table/sort';
-@use "text-input";
+@use 'text-area';
+@use 'text-input';
 @use 'structured-list';
 @use 'overflow-menu';
 @use 'number-input';
 @use 'toggle';
+@use 'pagination';
+@use 'select';
