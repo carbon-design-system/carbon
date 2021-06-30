@@ -25,7 +25,7 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    color: $shell-panel-text-01;
+    color: $text-secondary;
   }
 
   .#{$prefix}--switcher__item {
@@ -43,7 +43,7 @@
     height: 1px;
     border: none;
     margin: $spacing-03 $spacing-05;
-    background: $shell-panel-border;
+    background: $border-subtle;
   }
 
   .#{$prefix}--switcher__item-link {
@@ -52,29 +52,30 @@
     display: block;
     height: $spacing-07;
     padding: rem(6px) $spacing-05;
-    color: $shell-panel-text-01;
+    color: $text-secondary;
     text-decoration: none;
 
     &:hover:not(.#{$prefix}--switcher__item-link--selected) {
-      background: $shell-panel-bg-02;
-      color: $shell-panel-text-02;
+      background: $layer-hover;
+      color: $text-primary;
       cursor: pointer;
     }
 
     &:focus {
-      outline: 2px solid $shell-panel-focus;
+      outline: 2px solid $focus;
       outline-offset: -2px;
     }
 
     &:active {
-      background: $shell-panel-bg-03;
-      color: $shell-panel-text-02;
+      background: $layer-active;
+      color: $text-primary;
     }
   }
 
   .#{$prefix}--switcher__item-link--selected {
-    background: $shell-panel-bg-04;
-    color: $shell-panel-text-02;
+    //TO-DO: should we add a 3px left border-interactive here too? Doesn't currently have it, but specs have it
+    background: $layer-selected;
+    color: $text-primary;
   }
 }
 

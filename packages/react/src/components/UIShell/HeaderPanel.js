@@ -10,6 +10,7 @@ import { settings } from 'carbon-components';
 import cx from 'classnames';
 import PropTypes from 'prop-types';
 import { AriaLabelPropType } from '../../prop-types/AriaPropTypes';
+import { warning } from '../../internal/warning';
 
 const { prefix } = settings;
 
@@ -33,6 +34,12 @@ const HeaderPanel = React.forwardRef(function HeaderPanel(
     [`${prefix}--header-panel--expanded`]: expanded,
     [customClassName]: !!customClassName,
   });
+
+  warning(
+    true,
+    'The `HeaderPanel` component has been deprecated and will be removed ' +
+      'in the next major release of `carbon-components-react`'
+  );
 
   return (
     <div {...other} className={className} {...accessibilityLabel} ref={ref}>
