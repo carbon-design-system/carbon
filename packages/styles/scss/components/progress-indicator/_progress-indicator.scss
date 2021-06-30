@@ -5,6 +5,8 @@
 // LICENSE file in the root directory of this source tree.
 //
 
+@use '../button';
+@use '../tooltip';
 @use '../../config' as *;
 @use '../../motion' as *;
 @use '../../spacing' as *;
@@ -15,9 +17,12 @@
 @use '../../utilities/skeleton' as *;
 @use '../../utilities/button-reset';
 @use '../../utilities/component-reset';
-@use 'vars' as *;
+@use '../../utilities/tooltip' as *;
 
-// @import '../tooltip/tooltip';
+/// @type Value
+/// @access public
+/// @group progress-indicator
+$progress-indicator-bar-width: 1px inset transparent !default;
 
 /// Progress indicator styles
 /// @access public
