@@ -21,7 +21,12 @@ module.exports = {
         'jest/consistent-test-it': 'off',
 
         // Have control over test and it usages
-        'jest/expect-expect': 'error',
+        'jest/expect-expect': [
+          'error',
+          {
+            assertFunctionNames: ['expect', 'assert*'],
+          },
+        ],
       },
     },
   ],
