@@ -1739,7 +1739,7 @@ __metadata:
   resolution: "@carbon/codemods@workspace:codemods"
   dependencies:
     "@babel/preset-env": ^7.14.2
-    jscodeshift: ^0.12.0
+    jscodeshift: ^0.13.0
   languageName: unknown
   linkType: soft
 
@@ -2148,7 +2148,7 @@ __metadata:
     fs-extra: ^10.0.0
     inquirer: ^8.1.0
     jest-diff: ^27.0.2
-    jscodeshift: ^0.12.0
+    jscodeshift: ^0.13.0
     lodash.clonedeep: ^4.5.0
     lodash.merge: ^4.6.2
     memfs: ^3.2.2
@@ -22268,9 +22268,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"jscodeshift@npm:^0.12.0":
-  version: 0.12.0
-  resolution: "jscodeshift@npm:0.12.0"
+"jscodeshift@npm:^0.13.0":
+  version: 0.13.0
+  resolution: "jscodeshift@npm:0.13.0"
   dependencies:
     "@babel/core": ^7.13.16
     "@babel/parser": ^7.13.16
@@ -22289,13 +22289,13 @@ __metadata:
     neo-async: ^2.5.0
     node-dir: ^0.1.17
     recast: ^0.20.4
-    temp: ^0.8.1
+    temp: ^0.8.4
     write-file-atomic: ^2.3.0
   peerDependencies:
     "@babel/preset-env": ^7.1.6
   bin:
     jscodeshift: bin/jscodeshift.js
-  checksum: 6512de487a43ed17867dccd89a7e9705fd0ad8a329d16bd044d0d9f46876bdae9b767d0ec4df49bc88d64d7e4675c7472165bcccff45355db9723400d3211ae9
+  checksum: 9a581ee8b8ab02d243368b9c181bd5042d3593803876496f77f4e59f1ff65084b15567bd1f1f9b092c5ffe6f486b731cf2f657cc7db570ddaa88fd169f6e52a4
   languageName: node
   linkType: hard
 
@@ -34327,7 +34327,7 @@ resolve@^2.0.0-next.3:
   languageName: node
   linkType: hard
 
-"temp@npm:^0.8.1":
+"temp@npm:^0.8.1, temp@npm:^0.8.4":
   version: 0.8.4
   resolution: "temp@npm:0.8.4"
   dependencies:
