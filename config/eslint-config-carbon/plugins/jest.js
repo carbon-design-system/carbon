@@ -38,6 +38,15 @@ module.exports = {
 
         // Prevent calling expect conditionally
         'jest/no-conditional-expect': 'error',
+
+        // Disallow use of deprecated functions
+        'jest/no-deprecated-functions': 'error',
+
+        // Disallow disabled tests
+        'jest/no-disabled-tests': 'off',
+
+        // Avoid using a callback in asynchronous tests and hooks
+        'jest/no-done-callback': 'error',
       },
     },
   ],
