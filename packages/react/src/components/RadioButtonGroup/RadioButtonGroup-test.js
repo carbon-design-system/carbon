@@ -39,7 +39,7 @@ describe('RadioButtonGroup', () => {
 
       it('sets classes that are passed via className prop', () => {
         wrapper.setProps({ className: 'extra-class' });
-        expect(fieldset.hasClass('extra-class')).toBe(true);
+        expect(wrapper.find('fieldset').hasClass('extra-class')).toBe(true);
       });
 
       it('sets disabled attribute if disabled prop is set', () => {

@@ -71,7 +71,7 @@ describe('CopyButton', () => {
     it('Should make the feedback visible', () => {
       const feedbackWrapper = mount(<CopyButton feedback="Copied!" />);
       const feedback = feedbackWrapper.find(`.${prefix}--copy-btn__feedback`);
-      expect(feedback).toBeFalsy();
+      expect(feedback).toEqual({});
       feedbackWrapper.simulate('click');
       expect(feedback).toBeTruthy();
     });

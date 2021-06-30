@@ -129,7 +129,7 @@ describe('Accordion', () => {
         skipClick: true,
       });
 
-      await expect(screen.getByText('Panel A')).resolves.toBeDefined();
+      expect(screen.getByText('Panel A')).toBeDefined();
     });
 
     it('should open with spacebar', async () => {
@@ -153,7 +153,7 @@ describe('Accordion', () => {
         skipClick: true,
       });
 
-      await expect(screen.getByText('Panel A')).resolves.toBeDefined();
+      expect(screen.getByText('Panel A')).toBeDefined();
     });
   });
 });
