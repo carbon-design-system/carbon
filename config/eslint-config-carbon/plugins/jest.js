@@ -35,6 +35,9 @@ module.exports = {
 
         // Disallow commented out tests
         'jest/no-commented-out-tests': 'error',
+
+        // Prevent calling expect conditionally
+        'jest/no-conditional-expect': 'error',
       },
     },
   ],
