@@ -1,0 +1,107 @@
+//
+// Copyright IBM Corp. 2016, 2018
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+@use 'keyframes';
+@use '../../config' as *;
+@use '../../spacing' as *;
+@use '../../theme' as *;
+@use '../../type' as *;
+@use '../../utilities/convert' as *;
+
+/// @type Number
+/// @access private
+/// @group loading
+$-loading-gap-small: 110;
+
+/// Inline loading styles
+/// @access public
+/// @group inline-loading
+@mixin inline-loading {
+  .#{$prefix}--inline-loading {
+    display: flex;
+    width: 100%;
+    min-height: 2rem;
+    align-items: center;
+
+    .#{$prefix}--loading__svg circle {
+      stroke-width: 12;
+    }
+
+    .#{$prefix}--loading__stroke {
+      stroke-dashoffset: $-loading-gap-small;
+    }
+  }
+
+  .#{$prefix}--inline-loading__text {
+    @include type-style('label-01');
+
+    color: $text-secondary;
+  }
+
+  .#{$prefix}--inline-loading__animation {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: $spacing-03;
+  }
+
+  .#{$prefix}--inline-loading__checkmark-container {
+    fill: $support-success;
+
+    // For deprecated older markup
+    &.#{$prefix}--inline-loading__svg {
+      position: absolute;
+      top: 0.75rem;
+      width: 0.75rem;
+    }
+
+    &[hidden] {
+      display: none;
+    }
+  }
+
+  .#{$prefix}--inline-loading__checkmark {
+    animation-duration: 250ms;
+    animation-fill-mode: forwards;
+    animation-name: stroke;
+    fill: none;
+    stroke: $interactive;
+    stroke-dasharray: 12;
+    stroke-dashoffset: 12;
+    stroke-width: 1.8;
+    transform-origin: 50% 50%;
+  }
+
+  .#{$prefix}--inline-loading--error {
+    width: rem(16px);
+    height: rem(16px);
+    fill: $support-error;
+
+    &[hidden] {
+      display: none;
+    }
+  }
+
+  .#{$prefix}--loading--small .#{$prefix}--inline-loading__svg {
+    stroke: $interactive;
+  }
+  /* If IE11 Don't show check animation */
+  @media screen and (-ms-high-contrast: active),
+    screen and (-ms-high-contrast: none) {
+    .#{$prefix}--inline-loading__checkmark-container {
+      top: 1px;
+      right: 0.5rem;
+    }
+
+    .#{$prefix}--inline-loading__checkmark {
+      animation: none;
+      stroke-dasharray: 0;
+      stroke-dashoffset: 0;
+    }
+  }
+}
