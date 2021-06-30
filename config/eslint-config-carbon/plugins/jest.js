@@ -62,6 +62,45 @@ module.exports = {
 
         // Disallow identical titles
         'jest/no-identical-title': 'error',
+
+        // Disallow conditional logic
+        'jest/no-if': 'error',
+
+        // Disallow string interpolation inside snapshots
+        'jest/no-interpolation-in-snapshots': 'error',
+
+        // Disallow Jasmine globals
+        'jest/no-jasmine-globals': 'error',
+
+        // Disallow importing Jest
+        'jest/no-jest-import': 'error',
+
+        // Disallow large snapshots
+        'jest/no-large-snapshots': 'off',
+
+        // Disallow manually importing from __mocks__
+        'jest/no-mocks-import': 'error',
+
+        // Disallow specific matchers & modifiers
+        'jest/no-restricted-matchers': 'off',
+
+        // Disallow using expect outside of it or test blocks
+        'jest/no-standalone-expect': 'error',
+
+        // Use .only and .skip over f and x
+        'jest/no-test-prefixes': 'off',
+
+        // Disallow explicitly returning from tests
+        'jest/no-test-return-statement': 'error',
+
+        // Suggest using toBeCalledWith() or toHaveBeenCalledWith()
+        'jest/prefer-called-with': 'off',
+
+        // Suggest using expect.assertions() OR expect.hasAssertions()
+        'jest/prefer-expect-assertions': 'off',
+
+        // Suggest having hooks before any test cases
+        'jest/prefer-hooks-on-top': 'error',
       },
     },
   ],
