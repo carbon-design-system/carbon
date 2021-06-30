@@ -32,6 +32,9 @@ module.exports = {
 
         // Disallow alias methods
         'jest/no-alias-methods': 'error',
+
+        // Disallow commented out tests
+        'jest/no-commented-out-tests': 'error',
       },
     },
   ],
