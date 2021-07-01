@@ -23,7 +23,7 @@
 @use '../text-input';
 
 /// Slider styles
-/// @access private
+/// @access public
 /// @group slider
 @mixin slider {
   .#{$prefix}--slider-container {
