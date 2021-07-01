@@ -115,6 +115,13 @@ describe('Checkbox', () => {
 describe('refs', () => {
   let container;
 
+  afterEach(() => {
+    if (container && container.parentNode) {
+      container.parentNode.removeChild(container);
+    }
+    container = null;
+  });
+
   it('should accept refs', () => {
     class MyComponent extends React.Component {
       constructor(props) {
@@ -166,13 +173,6 @@ describe('refs', () => {
     }
     const wrapper = mount(<MyComponent />);
     expect(wrapper.find('input').getDOMNode().indeterminate).toBe(true);
-  });
-
-  afterEach(() => {
-    if (container && container.parentNode) {
-      container.parentNode.removeChild(container);
-    }
-    container = null;
   });
 });
 

@@ -13,10 +13,14 @@ const { SassRenderer } = require('@carbon/test-utils/scss');
 
 const { render } = SassRenderer.create(__dirname);
 
-describe('@carbon/styles', () => {
+describe('scss/components/pagination-nav', () => {
   test('Public API', async () => {
-    await expect(
-      render(`@use '../index.scss' as styles;`)
-    ).resolves.toBeDefined();
+    const { unwrap } = await render(`
+       @use 'sass:meta';
+       @use '../pagination-nav';
+ 
+       $_: get('mixin', meta.mixin-exists('pagination-nav', 'pagination-nav'));
+     `);
+    expect(unwrap('mixin')).toBe(true);
   });
 });
