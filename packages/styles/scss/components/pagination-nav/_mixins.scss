@@ -1,0 +1,38 @@
+//
+// Copyright IBM Corp. 2016, 2018
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+@use '../../config' as *;
+@use '../../spacing' as *;
+@use '../../theme' as *;
+@use '../../motion' as *;
+
+/// Pseudo underline
+/// @access public
+/// @group pagination-nav
+@mixin pseudo-underline() {
+  &:not(.#{$prefix}--pagination-nav__page--direction) {
+    &::after {
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      display: block;
+      width: 0;
+      height: $spacing-02;
+      background-color: $background-brand;
+      content: '';
+      opacity: 0;
+      transition: width $duration-fast-02 motion(standard, productive);
+    }
+  }
+
+  .#{$prefix}--pagination-nav__page--active + &::after,
+  &.#{$prefix}--pagination-nav__page--active::after {
+    left: calc(50% - #{$spacing-05 / 2});
+    width: $spacing-05;
+    opacity: 1;
+  }
+}

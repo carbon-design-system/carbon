@@ -15,33 +15,7 @@
 @use '../../utilities/focus-outline' as *;
 @use '../../utilities/high-contrast-mode' as *;
 @use '../../utilities/visually-hidden' as *;
-
-/// Pseudo underline
-/// @access public
-/// @group pagination-nav
-@mixin pseudo-underline() {
-  &:not(.#{$prefix}--pagination-nav__page--direction) {
-    &::after {
-      position: absolute;
-      bottom: 0;
-      left: 50%;
-      display: block;
-      width: 0;
-      height: $spacing-02;
-      background-color: $background-brand;
-      content: '';
-      opacity: 0;
-      transition: width $duration-fast-02 motion(standard, productive);
-    }
-  }
-
-  .#{$prefix}--pagination-nav__page--active + &::after,
-  &.#{$prefix}--pagination-nav__page--active::after {
-    left: calc(50% - #{$spacing-05 / 2});
-    width: $spacing-05;
-    opacity: 1;
-  }
-}
+@use 'mixins' as *;
 
 /// Pagination nav base styles
 /// @access public
