@@ -106,7 +106,7 @@ describe('[Deprecated] Toolbar', () => {
       expect(toolbarItem.find(OverflowMenu).length).toEqual(1);
     });
 
-    describe('with ToolbarTitle ', () => {
+    describe('with ToolbarTitle', () => {
       let withToolbarTitle;
       let toolbarTitle;
 
@@ -133,7 +133,7 @@ describe('[Deprecated] Toolbar', () => {
       });
     });
 
-    describe('with ToolbarOption ', () => {
+    describe('with ToolbarOption', () => {
       let withToolbarOption;
       let toolbarOption;
 
@@ -162,7 +162,7 @@ describe('[Deprecated] Toolbar', () => {
       });
     });
 
-    describe('with ToolbarDivider ', () => {
+    describe('with ToolbarDivider', () => {
       let withToolbarDivider;
       let toolbarDivider;
 

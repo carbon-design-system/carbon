@@ -8,10 +8,6 @@ p {
   margin-top: $spacing-05;
 }
 
-p:first-of-type {
-  margin-top: 0;
-}
-
 // Grid modes
 .bx--css-grid {
   background-color: $blue-20;
@@ -20,6 +16,11 @@ p:first-of-type {
 
 .bx--css-grid p {
   @include type-style('code-02');
+}
+
+p:first-of-type:not(.bx--progress-label) {
+  //messing up progress indicator stories
+  margin-top: 0;
 }
 
 .bx--css-grid.bx--css-grid--narrow {
