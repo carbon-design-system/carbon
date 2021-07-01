@@ -6488,6 +6488,21 @@ Map {
       "href": Object {
         "type": "string",
       },
+      "size": Object {
+        "args": Array [
+          Array [
+            "default",
+            "field",
+            "small",
+            "sm",
+            "md",
+            "lg",
+            "xl",
+            "2xl",
+          ],
+        ],
+        "type": "oneOf",
+      },
       "small": Object {
         "type": "bool",
       },

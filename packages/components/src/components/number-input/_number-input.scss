@@ -83,8 +83,7 @@
     padding-right: rem(112px);
   }
 
-  .#{$prefix}--number input[type='number']:disabled,
-  .#{$prefix}--number--readonly input[type='number'] {
+  .#{$prefix}--number input[type='number']:disabled {
     border-bottom-color: transparent;
     background-color: $field-disabled;
     color: $text-disabled;
@@ -296,10 +295,6 @@
     background-color: transparent;
   }
 
-  .#{$prefix}--number--readonly .#{$prefix}--number__control-btn {
-    display: none;
-  }
-
   .#{$prefix}--number__invalid {
     position: absolute;
     right: rem(96px);
@@ -363,10 +358,7 @@
   }
 
   // V11: Possibly deprecate
-  .#{$prefix}--number--light input[type='number']:disabled,
-  .#{$prefix}--number--light
-    .#{$prefix}--number--readonly
-    input[type='number'] {
+  .#{$prefix}--number--light input[type='number']:disabled {
     background-color: $field-02;
   }
 
@@ -442,6 +434,20 @@
   }
 
   .#{$prefix}--number--nosteppers .#{$prefix}--number__invalid {
+    right: rem(16px);
+  }
+
+  // Readonly
+  .#{$prefix}--number--readonly input[type='number'] {
+    background: transparent;
+  }
+
+  .#{$prefix}--number--readonly .#{$prefix}--number__controls {
+    display: none;
+  }
+
+  .#{$prefix}--number__readonly-icon {
+    position: absolute;
     right: rem(16px);
   }
 
