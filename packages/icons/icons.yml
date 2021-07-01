@@ -4138,6 +4138,11 @@
     - indentification
   sizes:
     - 32
+- name: critical-severity
+  friendly_name: critical-severity
+  aliases: []
+  sizes:
+    - glyph
 - name: crop
   friendly_name: Crop
   aliases:
@@ -9564,6 +9569,11 @@
     - twirl
   sizes:
     - 32
+- name: low-severity
+  friendly_name: low-severity
+  aliases: []
+  sizes:
+    - glyph
 - name: mac--command
   friendly_name: Mac command
   sizes:
