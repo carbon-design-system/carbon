@@ -19,8 +19,8 @@
 @use '../../utilities/skeleton' as *;
 @use '../../utilities/high-contrast-mode' as *;
 
-@use '../form/form';
-@use '../text-input/text-input';
+@use '../form';
+@use '../text-input';
 
 /// Slider styles
 /// @access private
