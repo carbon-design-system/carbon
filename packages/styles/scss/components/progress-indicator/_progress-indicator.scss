@@ -1,0 +1,326 @@
+//
+// Copyright IBM Corp. 2016, 2018
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+@use '../button';
+@use '../tooltip';
+@use '../../config' as *;
+@use '../../motion' as *;
+@use '../../spacing' as *;
+@use '../../theme' as *;
+@use '../../type' as *;
+@use '../../utilities/focus-outline' as *;
+@use '../../utilities/convert' as *;
+@use '../../utilities/skeleton' as *;
+@use '../../utilities/button-reset';
+@use '../../utilities/component-reset';
+@use '../../utilities/tooltip' as *;
+
+/// @type Value
+/// @access public
+/// @group progress-indicator
+$progress-indicator-bar-width: 1px inset transparent !default;
+
+/// Progress indicator styles
+/// @access public
+/// @group progress-indicator
+@mixin progress-indicator {
+  .#{$prefix}--progress {
+    @include component-reset.reset;
+
+    display: flex;
+    list-style: none;
+  }
+
+  .#{$prefix}--progress-step {
+    position: relative;
+    display: inline-flex;
+    overflow: visible;
+    width: rem(128px);
+    min-width: 7rem;
+    flex-direction: row;
+
+    .#{$prefix}--tooltip__label {
+      display: block;
+    }
+  }
+
+  .#{$prefix}--progress--space-equal .#{$prefix}--progress-step {
+    min-width: 8rem;
+    flex-grow: 1;
+  }
+
+  .#{$prefix}--progress-line {
+    position: absolute;
+    left: 0;
+    width: rem(128px);
+    height: 1px;
+    border: $progress-indicator-bar-width;
+  }
+
+  .#{$prefix}--progress--space-equal .#{$prefix}--progress-line {
+    width: 100%;
+    min-width: rem(128px);
+  }
+
+  .#{$prefix}--progress-step svg {
+    position: relative;
+    z-index: 1;
+    width: $spacing-05;
+    height: $spacing-05;
+    flex-shrink: 0;
+    margin: rem(10px) $spacing-03 0 0;
+    border-radius: 50%;
+    fill: $interactive;
+  }
+
+  .#{$prefix}--progress-label {
+    @include type-style('body-short-01');
+
+    overflow: hidden;
+    max-width: rem(88px);
+    margin: $spacing-03 0 0 0;
+    color: $text-primary;
+    line-height: 1.45;
+    text-overflow: ellipsis;
+    transition: box-shadow $duration-fast-02 motion(standard, productive),
+      color $duration-fast-02 motion(standard, productive);
+    white-space: nowrap;
+
+    &::before {
+      display: block;
+      content: '';
+    }
+  }
+
+  .#{$prefix}--progress-label:hover {
+    box-shadow: 0 rem(1px) $link-primary;
+    color: $link-primary;
+    cursor: pointer;
+  }
+
+  .#{$prefix}--progress-label:focus {
+    box-shadow: 0 rem(3px) 0 0 $link-primary;
+    color: $link-primary;
+    outline: none;
+  }
+
+  .#{$prefix}--progress--space-equal .#{$prefix}--progress-label {
+    max-width: 100%;
+    margin-right: 0.75rem;
+  }
+
+  .#{$prefix}--progress-label:active {
+    //is this still a color token??
+    box-shadow: 0 rem(3px) 0 0 $background-brand;
+    color: $background-brand;
+  }
+
+  //OVERFLOW STYLING
+  .#{$prefix}--progress-label-overflow:hover ~ .#{$prefix}--tooltip,
+  .#{$prefix}--progress-label-overflow:focus ~ .#{$prefix}--tooltip {
+    visibility: inherit;
+  }
+
+  .#{$prefix}--progress-step .#{$prefix}--tooltip .#{$prefix}--tooltip__caret {
+    margin-left: rem(10px);
+  }
+
+  .#{$prefix}--tooltip__text {
+    padding: 0;
+    margin: 0;
+    font-weight: normal;
+  }
+
+  //single line tooltip
+  .#{$prefix}--progress-step .#{$prefix}--tooltip {
+    @include type-style('body-long-01');
+
+    display: block;
+    width: rem(125px);
+
+    min-width: rem(115px);
+    min-height: $spacing-06;
+    padding: $spacing-03 $spacing-05;
+    margin-top: rem(40px);
+    margin-left: rem(22px);
+    color: $text-inverse;
+    visibility: hidden;
+  }
+
+  //multiline tooltip
+  .#{$prefix}--progress-step .#{$prefix}--tooltip_multi {
+    @include type-style('body-long-01');
+
+    width: rem(150px);
+    height: auto;
+    color: $text-inverse;
+  }
+
+  //OPTIONAL HELPER TEXT STYLING
+  .#{$prefix}--progress-optional {
+    @include type-style('label-01');
+
+    position: absolute;
+    left: 0;
+    margin-top: rem(28px);
+    margin-left: $spacing-06;
+    color: $text-secondary;
+    text-align: start;
+  }
+
+  //CURRENT STYLING
+  .#{$prefix}--progress-step--current {
+    .#{$prefix}--progress-line {
+      background-color: $interactive;
+    }
+  }
+
+  //INCOMPLETE STYLING
+  .#{$prefix}--progress-step--incomplete {
+    svg {
+      fill: $icon-primary;
+    }
+
+    .#{$prefix}--progress-line {
+      background-color: $border-subtle;
+    }
+  }
+
+  //COMPLETED STYLING
+  .#{$prefix}--progress-step--complete {
+    .#{$prefix}--progress-line {
+      background-color: $interactive;
+    }
+  }
+
+  //interactive button
+  .#{$prefix}--progress-step-button {
+    @include button-reset.reset;
+
+    display: flex;
+    text-align: left;
+  }
+
+  //unclickable button
+  .#{$prefix}--progress-step-button--unclickable {
+    cursor: default;
+    outline: none;
+  }
+
+  .#{$prefix}--progress-step-button--unclickable
+    .#{$prefix}--progress-label:hover {
+    box-shadow: none;
+    color: $text-primary;
+    cursor: default;
+  }
+
+  .#{$prefix}--progress-step-button--unclickable
+    .#{$prefix}--tooltip__label:hover {
+    box-shadow: 0 rem(1px) $link-primary;
+    color: $link-primary;
+    cursor: pointer;
+  }
+
+  //DISABLED STYLING
+  .#{$prefix}--progress-step--disabled {
+    cursor: not-allowed;
+    pointer-events: none;
+
+    svg {
+      cursor: not-allowed;
+      fill: $icon-disabled;
+    }
+
+    .#{$prefix}--progress-label,
+    .#{$prefix}--progress-label:hover {
+      box-shadow: none;
+      color: $text-disabled;
+      cursor: not-allowed;
+    }
+
+    .#{$prefix}--progress-label:focus,
+    .#{$prefix}--progress-label:active {
+      box-shadow: none;
+      outline: none;
+    }
+
+    .#{$prefix}--progress-line {
+      cursor: not-allowed;
+    }
+
+    .#{$prefix}--progress-label-overflow:hover
+      ~ .#{$prefix}--tooltip--definition
+      .#{$prefix}--tooltip--definition__bottom {
+      display: none;
+    }
+  }
+
+  // ERROR STYLING
+  .#{$prefix}--progress__warning > * {
+    fill: $support-error;
+  }
+
+  // Skeleton State
+  .#{$prefix}--progress.#{$prefix}--skeleton .#{$prefix}--progress-label {
+    @include skeleton;
+
+    width: rem(40px);
+    height: rem(14px);
+    margin-top: 0.625rem;
+  }
+
+  // Vertical Variant
+
+  .#{$prefix}--progress--vertical {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .#{$prefix}--progress--vertical .#{$prefix}--progress-step,
+  .#{$prefix}--progress--vertical .#{$prefix}--progress-step-button {
+    width: initial;
+    min-width: initial;
+    min-height: 3.625rem;
+    flex-wrap: wrap;
+    align-content: flex-start;
+  }
+
+  .#{$prefix}--progress--vertical .#{$prefix}--progress-step svg,
+  .#{$prefix}--progress--vertical .#{$prefix}--progress-step-button svg {
+    display: inline-block;
+    // 1px top margin based on visual review
+    margin: rem(1px) $spacing-03 0;
+  }
+
+  .#{$prefix}--progress--vertical .#{$prefix}--progress-label {
+    display: inline-block;
+    width: initial;
+    max-width: rem(160px);
+    margin: 0;
+    vertical-align: top;
+    white-space: initial;
+  }
+
+  .#{$prefix}--progress--vertical .#{$prefix}--progress-step .bx--tooltip {
+    margin-top: 0.5rem;
+  }
+
+  .#{$prefix}--progress--vertical .#{$prefix}--progress-optional {
+    position: static;
+    width: 100%;
+    margin-top: auto;
+    margin-left: $spacing-07;
+  }
+
+  .#{$prefix}--progress--vertical .#{$prefix}--progress-line {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 1px;
+    height: 100%;
+  }
+}
