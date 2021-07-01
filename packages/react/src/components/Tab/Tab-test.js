@@ -112,13 +112,13 @@ describe('Tab', () => {
       it('invokes handleTabClick from onClick prop', () => {
         wrapper.setProps({ handleTabClick });
         wrapper.simulate('click');
-        expect(handleTabClick).toBeCalled();
+        expect(handleTabClick).toHaveBeenCalled();
       });
 
       it('invokes onClick when a function is passed to onClick prop', () => {
         wrapper.setProps({ onClick });
         wrapper.simulate('click');
-        expect(onClick).toBeCalled();
+        expect(onClick).toHaveBeenCalled();
       });
     });
 
@@ -141,12 +141,12 @@ describe('Tab', () => {
 
       it('invokes onKeyDown when a function is passed to onKeyDown prop', () => {
         wrapper.simulate('keyDown', { which: 38 });
-        expect(onKeyDown).toBeCalled();
+        expect(onKeyDown).toHaveBeenCalled();
       });
 
       it('invokes handleTabAnchorFocus when onKeyDown occurs for appropriate events', () => {
         wrapper.simulate('keyDown', { which: 37 });
-        expect(onKeyDown).toBeCalled();
+        expect(onKeyDown).toHaveBeenCalled();
       });
     });
   });

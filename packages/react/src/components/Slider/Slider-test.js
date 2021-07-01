@@ -149,7 +149,7 @@ describe('Slider', () => {
       };
       wrapper.instance().onKeyDown(evt);
       expect(wrapper.state().value).toEqual(51);
-      expect(handleChange).lastCalledWith({ value: 51 });
+      expect(handleChange).toHaveBeenLastCalledWith({ value: 51 });
     });
 
     it('sets correct state from event with a left/down keydown', () => {
@@ -159,7 +159,7 @@ describe('Slider', () => {
       };
       wrapper.instance().onKeyDown(evt);
       expect(wrapper.state().value).toEqual(50);
-      expect(handleChange).lastCalledWith({ value: 50 });
+      expect(handleChange).toHaveBeenLastCalledWith({ value: 50 });
     });
 
     it('correctly uses setMultiplier with a right/up keydown', () => {
@@ -170,7 +170,7 @@ describe('Slider', () => {
       };
       wrapper.instance().onKeyDown(evt);
       expect(wrapper.state().value).toEqual(55);
-      expect(handleChange).lastCalledWith({ value: 55 });
+      expect(handleChange).toHaveBeenLastCalledWith({ value: 55 });
     });
 
     it('sets correct state from event with a clientX in a mousemove', () => {
@@ -179,7 +179,7 @@ describe('Slider', () => {
         clientX: '1000',
       };
       wrapper.instance()._onDrag(evt);
-      expect(handleChange).lastCalledWith({ value: 100 });
+      expect(handleChange).toHaveBeenLastCalledWith({ value: 100 });
       expect(wrapper.state().value).toEqual(100);
     });
 
@@ -189,7 +189,7 @@ describe('Slider', () => {
         touches: [{ clientX: '0' }],
       };
       wrapper.instance()._onDrag(evt);
-      expect(handleChange).lastCalledWith({ value: 0 });
+      expect(handleChange).toHaveBeenLastCalledWith({ value: 0 });
       expect(wrapper.state().value).toEqual(0);
     });
 
@@ -234,7 +234,7 @@ describe('Slider', () => {
 
       wrapper.instance().onChange(evt);
       expect(wrapper.state().value).toEqual(100);
-      expect(handleChange).lastCalledWith({ value: 100 });
+      expect(handleChange).toHaveBeenLastCalledWith({ value: 100 });
     });
 
     it('sets correct state when typing a valid value in input field', () => {
@@ -247,7 +247,7 @@ describe('Slider', () => {
 
       wrapper.instance().onChange(evt);
       expect(wrapper.state().value).toEqual(12);
-      expect(handleChange).lastCalledWith({ value: 12 });
+      expect(handleChange).toHaveBeenLastCalledWith({ value: 12 });
     });
   });
 
