@@ -313,7 +313,13 @@ export const ExpressiveButtons = () => {
 
 export const Skeleton = () => (
   <div>
+    <ButtonSkeleton size="xl" />
+    &nbsp;
+    <ButtonSkeleton size="lg" />
+    &nbsp;
     <ButtonSkeleton />
+    &nbsp;
+    <ButtonSkeleton size="md" />
     &nbsp;
     <ButtonSkeleton small />
   </div>
