@@ -71,9 +71,9 @@ describe('CopyButton', () => {
     it('Should make the feedback visible', () => {
       const feedbackWrapper = mount(<CopyButton feedback="Copied!" />);
       const feedback = feedbackWrapper.find(`.${prefix}--copy-btn__feedback`);
-      expect(feedback).toBeFalsy;
+      expect(feedback).toEqual({});
       feedbackWrapper.simulate('click');
-      expect(feedback).toBeTruthy;
+      expect(feedback).toBeTruthy();
     });
 
     it('Should show feedback for a limited amount of time', () => {
@@ -96,7 +96,7 @@ describe('CopyButton', () => {
       const onClick = jest.fn();
       const clickWrapper = mount(<CopyButton onClick={onClick} />);
       clickWrapper.simulate('click');
-      expect(onClick).toBeCalled();
+      expect(onClick).toHaveBeenCalled();
     });
   });
 });

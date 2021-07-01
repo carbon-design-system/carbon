@@ -15,8 +15,8 @@ const { render } = SassRenderer.create(__dirname);
 
 describe('@carbon/styles', () => {
   test('Public API', async () => {
-    await render(`
-      @use '../index.scss' as styles;
-    `);
+    await expect(
+      render(`@use '../index.scss' as styles;`)
+    ).resolves.toBeDefined();
   });
 });
