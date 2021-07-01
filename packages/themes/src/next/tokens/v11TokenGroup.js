@@ -226,7 +226,7 @@ export const border = TokenGroup.create({
 
 export const text = TokenGroup.create({
   name: 'Text',
-  properties: ['color'],
+  properties: ['text'],
   tokens: [
     'text-primary',
     'text-secondary',
@@ -251,7 +251,7 @@ export const text = TokenGroup.create({
 
 export const link = TokenGroup.create({
   name: 'Link',
-  properties: ['color'],
+  properties: ['text'],
   tokens: [
     {
       name: 'link-primary',
@@ -321,7 +321,7 @@ export const skeleton = TokenGroup.create({
 });
 
 export const group = TokenGroup.create({
-  name: 'v11',
+  name: 'All',
   tokens: [
     background,
     layer,
@@ -330,7 +330,7 @@ export const group = TokenGroup.create({
     // Interactive
     {
       name: 'interactive',
-      properties: ['background', 'color'],
+      properties: ['background', 'text'],
     },
 
     border,

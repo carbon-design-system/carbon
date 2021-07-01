@@ -196,6 +196,13 @@ describe('<ModalFooter />', () => {
 describe('<ComposedModal />', () => {
   let container;
 
+  afterEach(() => {
+    if (container && container.parentNode) {
+      container.parentNode.removeChild(container);
+    }
+    container = null;
+  });
+
   it('renders', () => {
     const wrapper = mount(<ComposedModal open />);
     expect(wrapper).toMatchSnapshot();
@@ -285,12 +292,5 @@ describe('<ComposedModal />', () => {
     expect(
       document.activeElement.classList.contains(`${prefix}--modal-close`)
     ).toEqual(true);
-  });
-
-  afterEach(() => {
-    if (container && container.parentNode) {
-      container.parentNode.removeChild(container);
-    }
-    container = null;
   });
 });

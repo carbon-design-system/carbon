@@ -52,6 +52,9 @@
       background: $layer-hover;
     }
   }
+  .#{$prefix}--tile--expandable .#{$prefix}--link {
+    color: $link-secondary;
+  }
 
   .#{$prefix}--tile--clickable,
   .#{$prefix}--tile--expandable {
