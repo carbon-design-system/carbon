@@ -6,41 +6,16 @@
  */
 
 import React, { useState } from 'react';
-import { action } from '@storybook/addon-actions';
+// import { action } from '@storybook/addon-actions';
 
-import { withKnobs, boolean, number, text } from '@storybook/addon-knobs';
+// import { withKnobs, boolean, number, text } from '@storybook/addon-knobs';
 import { Slider, SliderSkeleton } from '.';
-import { sliderValuePropSync } from '../../../../react/src/internal/FeatureFlags';
+// import { sliderValuePropSync } from '../../../../react/src/internal/FeatureFlags';
 import mdx from './Slider.mdx';
 
-const props = () => ({
-  name: text('Form item name (name)', ''),
-  inputType: text('The form element type (inputType)', 'number'),
-  ariaLabelInput: text(
-    'The ARIA label for the <input> (ariaLabelInput)',
-    'Label for slider value'
-  ),
-  disabled: boolean('Disabled (disabled)', false),
-  light: boolean('Light variant (light)', false),
-  hideTextInput: boolean('Without text input (hideTextInput)', false),
-  value: !sliderValuePropSync ? 50 : number('The value (value)', 50),
-  min: number('The minimum value (min)', 0),
-  max: number('The maximum value (max)', 100),
-  step: number('The step (step)', 1),
-  stepMultiplier: number(
-    'The step factor for Shift+arrow keys (stepMultiplier)',
-    5
-  ),
-  labelText: text('Label text (labelText)', 'Slider Label'),
-  minLabel: text('Label for minimum value (minLabel)', ''),
-  maxLabel: text('Label for maximum value (maxLabel)', ''),
-  onChange: action('onChange'),
-  onRelease: action('onRelease'),
-});
 
 export default {
   title: 'Components/Slider',
-  decorators: [withKnobs],
 
   parameters: {
     component: Slider,
@@ -68,8 +43,6 @@ export const Default = () => (
 Default.story = {
   name: 'Slider',
 };
-
-export const Playground = () => <Slider id="slider" {...props()} />;
 
 export const ControlledSlider = () => {
   const [val, setVal] = useState(87);
