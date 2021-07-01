@@ -8,6 +8,5 @@
 export {
   TextInput,
   TextInputSkeleton,
-  ControlledPasswordInput,
   FluidForm,
 } from 'carbon-components-react';
