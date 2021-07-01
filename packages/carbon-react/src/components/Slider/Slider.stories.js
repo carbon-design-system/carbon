@@ -13,7 +13,6 @@ import { Slider, SliderSkeleton } from '.';
 // import { sliderValuePropSync } from '../../../../react/src/internal/FeatureFlags';
 import mdx from './Slider.mdx';
 
-
 export default {
   title: 'Components/Slider',
 
