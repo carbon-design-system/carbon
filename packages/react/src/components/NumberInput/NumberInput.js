@@ -9,14 +9,12 @@ import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import classNames from 'classnames';
 import { settings } from 'carbon-components';
-import {
-  Add16,
-  Subtract16,
-  WarningFilled16,
-  WarningAltFilled16,
-} from '@carbon/icons-react';
+import { Add16, Subtract16 } from '@carbon/icons-react';
 import mergeRefs from '../../tools/mergeRefs';
 import requiredIfValueExists from '../../prop-types/requiredIfValueExists';
+// replace "use" prefix to avoid react thinking this is a hook that
+// can only be placed in a function component
+import { useNormalizedInputProps as getNormalizedInputProps } from '../../internal/useNormalizedInputProps';
 import { useControlledStateWithValue } from '../../internal/FeatureFlags';
 import deprecate from '../../prop-types/deprecate';
 
@@ -359,29 +357,6 @@ class NumberInput extends Component {
       }
     );
 
-    const props = {
-      disabled,
-      id,
-      max,
-      min,
-      step,
-      onChange: this.handleChange,
-      value:
-        useControlledStateWithValue && this.isControlled
-          ? value
-          : this.state.value,
-      readOnly,
-      'aria-label': label ? null : ariaLabel,
-    };
-
-    const buttonProps = {
-      disabled,
-    };
-
-    const inputWrapperProps = {};
-    let errorId = null;
-    let error = null;
-
     let isInputInvalid;
 
     // If the user supplied `invalid` through props, we'll defer to the passed in value
@@ -402,25 +377,43 @@ class NumberInput extends Component {
       }
     }
 
-    if (isInputInvalid) {
+    const normalizedProps = getNormalizedInputProps({
+      id,
+      readOnly,
+      disabled,
+      invalid: isInputInvalid,
+      invalidText,
+      warn,
+      warnText,
+    });
+
+    const props = {
+      disabled: normalizedProps.disabled,
+      id,
+      max,
+      min,
+      step,
+      onChange: this.handleChange,
+      value:
+        useControlledStateWithValue && this.isControlled
+          ? value
+          : this.state.value,
+      readOnly,
+      'aria-label': label ? null : ariaLabel,
+    };
+
+    const buttonProps = {
+      disabled,
+    };
+
+    const inputWrapperProps = {};
+
+    if (normalizedProps.invalid) {
       inputWrapperProps['data-invalid'] = true;
-      errorId = `${id}-error-id`;
-      error = (
-        <div className={`${prefix}--form-requirement`} id={errorId}>
-          {invalidText}
-        </div>
-      );
-    } else if (warn) {
-      errorId = `${id}-error-id`;
-      error = (
-        <div className={`${prefix}--form-requirement`} id={errorId}>
-          {warnText}
-        </div>
-      );
     }
 
     const helperTextClasses = classNames(`${prefix}--form__helper-text`, {
-      [`${prefix}--form__helper-text--disabled`]: disabled,
+      [`${prefix}--form__helper-text--disabled`]: normalizedProps.disabled,
     });
 
     const helper = helperText ? (
@@ -428,7 +421,7 @@ class NumberInput extends Component {
     ) : null;
 
     const labelClasses = classNames(`${prefix}--label`, {
-      [`${prefix}--label--disabled`]: disabled,
+      [`${prefix}--label--disabled`]: normalizedProps.disabled,
       [`${prefix}--visually-hidden`]: hideLabel,
     });
 
@@ -444,8 +437,23 @@ class NumberInput extends Component {
     ];
 
     const wrapperClasses = classNames(`${prefix}--number__input-wrapper`, {
-      [`${prefix}--number__input-wrapper--warning`]: !isInputInvalid && warn,
+      [`${prefix}--number__input-wrapper--warning`]: normalizedProps.warn,
     });
+
+    const iconClasses = classNames({
+      [`${prefix}--number__invalid`]:
+        normalizedProps.invalid || normalizedProps.warn,
+      [`${prefix}--number__invalid--warning`]: normalizedProps.warn,
+      [`${prefix}--number__readonly-icon`]: readOnly,
+    });
+
+    let ariaDescribedBy = null;
+    if (normalizedProps.invalid) {
+      ariaDescribedBy = normalizedProps.invalidId;
+    }
+    if (normalizedProps.warn) {
+      ariaDescribedBy = normalizedProps.warnId;
+    }
 
     return (
       <div className={`${prefix}--form-item`}>
@@ -456,22 +464,17 @@ class NumberInput extends Component {
                 {labelText}
                 <div className={wrapperClasses}>
                   <input
-                    data-invalid={isInputInvalid}
-                    aria-invalid={isInputInvalid}
-                    aria-describedby={errorId}
+                    data-invalid={normalizedProps.invalid}
+                    aria-invalid={normalizedProps.invalid}
+                    aria-describedby={ariaDescribedBy}
                     type="number"
                     pattern="[0-9]*"
                     {...other}
                     {...props}
                     ref={mergeRefs(ref, this._handleInputRef)}
                   />
-                  {isInputInvalid && (
-                    <WarningFilled16 className={`${prefix}--number__invalid`} />
-                  )}
-                  {!isInputInvalid && warn && (
-                    <WarningAltFilled16
-                      className={`${prefix}--number__invalid ${prefix}--number__invalid--warning`}
-                    />
+                  {normalizedProps.icon && (
+                    <normalizedProps.icon className={iconClasses} />
                   )}
                   {!hideSteppers && (
                     <div className={`${prefix}--number__controls`}>
@@ -500,11 +503,11 @@ class NumberInput extends Component {
                     </div>
                   )}
                 </div>
-                {error ? null : helper}
+                {normalizedProps.validation ? null : helper}
               </>
             );
           })()}
-          {error}
+          {normalizedProps.validation}
         </div>
       </div>
     );

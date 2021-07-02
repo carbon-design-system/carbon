@@ -29,6 +29,13 @@ describe('TextInput', () => {
     describe('input', () => {
       let container;
 
+      afterEach(() => {
+        if (container && container.parentNode) {
+          container.parentNode.removeChild(container);
+        }
+        container = null;
+      });
+
       it('renders as expected', () => {
         expect(textInput().length).toBe(1);
       });
@@ -98,13 +105,6 @@ describe('TextInput', () => {
         wrapper.setProps({ placeholder: 'Enter text' });
         expect(textInput().props().placeholder).toEqual('Enter text');
       });
-
-      afterEach(() => {
-        if (container && container.parentNode) {
-          container.parentNode.removeChild(container);
-        }
-        container = null;
-      });
     });
 
     describe('label', () => {
@@ -167,12 +167,12 @@ describe('TextInput', () => {
 
       it('should not invoke onClick', () => {
         input.simulate('click');
-        expect(onClick).not.toBeCalled();
+        expect(onClick).not.toHaveBeenCalled();
       });
 
       it('should not invoke onChange', () => {
         input.simulate('change');
-        expect(onChange).not.toBeCalled();
+        expect(onChange).not.toHaveBeenCalled();
       });
     });
 
@@ -198,12 +198,12 @@ describe('TextInput', () => {
 
       it('should invoke onClick when input is clicked', () => {
         input.simulate('click');
-        expect(onClick).toBeCalled();
+        expect(onClick).toHaveBeenCalled();
       });
 
       it('should invoke onChange when input value is changed', () => {
         input.simulate('change', eventObject);
-        expect(onChange).toBeCalledWith(eventObject);
+        expect(onChange).toHaveBeenCalledWith(eventObject);
       });
     });
   });
