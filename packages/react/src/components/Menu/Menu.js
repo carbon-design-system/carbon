@@ -52,6 +52,24 @@ const Menu = function Menu({
   const isRootMenu = level === 1;
   const focusReturn = useRef(null);
 
+  function returnFocus() {
+    if (focusReturn.current) {
+      focusReturn.current.focus();
+    }
+  }
+
+  function close(eventType) {
+    const isKeyboardEvent = /^key/.test(eventType);
+
+    if (isKeyboardEvent) {
+      window.addEventListener('keyup', returnFocus, { once: true });
+    } else {
+      window.addEventListener('mouseup', returnFocus, { once: true });
+    }
+
+    onClose();
+  }
+
   function getContainerBoundaries() {
     const { clientWidth: bodyWidth, clientHeight: bodyHeight } = document.body;
     return [margin, margin, bodyWidth - margin, bodyHeight - margin];
@@ -112,12 +130,7 @@ const Menu = function Menu({
   function handleKeyDown(event) {
     if (match(event, keys.Tab)) {
       event.preventDefault();
-
-      if (focusReturn.current) {
-        focusReturn.current.focus();
-      }
-
-      onClose();
+      close(event.type);
     }
 
     if (
@@ -133,7 +146,7 @@ const Menu = function Menu({
       match(event, keys.Escape) ||
       (!isRootMenu && match(event, keys.ArrowLeft))
     ) {
-      onClose();
+      close(event.type);
     }
 
     let nodeToFocus;
@@ -165,17 +178,17 @@ const Menu = function Menu({
     }
   }
 
-  function handleClick(e) {
-    if (!clickedElementHasSubnodes(e) && e.target.tagName !== 'UL') {
-      onClose();
+  function handleClick(event) {
+    if (!clickedElementHasSubnodes(event) && event.target.tagName !== 'UL') {
+      close(event.type);
     } else {
-      e.stopPropagation();
+      event.stopPropagation();
     }
   }
 
-  function handleClickOutside(e) {
-    if (!clickedElementHasSubnodes(e) && open && canBeClosed && autoclose) {
-      onClose();
+  function handleClickOutside(event) {
+    if (!clickedElementHasSubnodes(event) && open && canBeClosed && autoclose) {
+      close(event.type);
     }
   }
 
@@ -200,9 +213,12 @@ const Menu = function Menu({
     return correctedPosition;
   }
 
-  function handleBlur(e) {
-    if (isRootMenu && !rootRef?.current?.element.contains(e.relatedTarget)) {
-      onClose();
+  function handleBlur(event) {
+    if (
+      isRootMenu &&
+      !rootRef?.current?.element.contains(event.relatedTarget)
+    ) {
+      close(event.type);
     }
   }
 
