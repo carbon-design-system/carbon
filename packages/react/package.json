@@ -58,7 +58,7 @@
     "lodash.isequal": "^4.5.0",
     "lodash.omit": "^4.5.0",
     "lodash.throttle": "^4.1.1",
-    "react-is": "^16.8.6",
+    "react-is": "^17.0.2",
     "use-resize-observer": "^6.0.0",
     "window-or-global": "^1.0.1"
   },
