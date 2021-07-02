@@ -111,7 +111,7 @@
     "fast-sass-loader": "^1.5.0",
     "gzip-size": "^6.0.0",
     "lcov2badge": "^0.1.0",
-    "mini-css-extract-plugin": "^0.9.0",
+    "mini-css-extract-plugin": "^1.6.2",
     "npm-which": "^3.0.1",
     "object-assign": "^4.1.1",
     "postcss-custom-properties": "^9.0.2",
