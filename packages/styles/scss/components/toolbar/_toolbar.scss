@@ -11,6 +11,7 @@
 @use '../../motion' as *;
 @use '../../utilities/convert' as *;
 @use '../../utilities/focus-outline' as *;
+@use '../search';
 
 /// Toolbar styles
 /// @access public
