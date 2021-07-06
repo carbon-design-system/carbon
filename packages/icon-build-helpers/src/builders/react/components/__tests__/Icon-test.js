@@ -55,7 +55,7 @@ describe('Icon', () => {
       svg = node;
     });
     render(<Icon ref={ref} />, mountNode);
-    expect(svg === mountNode.querySelector('svg'));
+    expect(svg).toEqual(mountNode.querySelector('svg'));
   });
 
   it('should be focusable if an aria label and tab index is used', () => {

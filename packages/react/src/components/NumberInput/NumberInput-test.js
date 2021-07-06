@@ -364,17 +364,17 @@ describe('NumberInput', () => {
 
       it('should not invoke onClick when up arrow is clicked', () => {
         upArrow.simulate('click');
-        expect(onClick).not.toBeCalled();
+        expect(onClick).not.toHaveBeenCalled();
       });
 
       it('should not invoke onClick when down arrow is clicked', () => {
         downArrow.simulate('click');
-        expect(onClick).not.toBeCalled();
+        expect(onClick).not.toHaveBeenCalled();
       });
 
       it('should not invoke onChange when numberInput is changed', () => {
         input.simulate('change');
-        expect(onChange).not.toBeCalled();
+        expect(onChange).not.toHaveBeenCalled();
       });
     });
 
@@ -407,13 +407,13 @@ describe('NumberInput', () => {
 
       it('should invoke onClick when numberInput is clicked', () => {
         input.simulate('click');
-        expect(onClick).toBeCalled();
+        expect(onClick).toHaveBeenCalled();
       });
 
       it('should invoke onClick when up arrow is clicked', () => {
         wrapper.setProps({ value: 1 });
         upArrow.simulate('click');
-        expect(onClick).toBeCalled();
+        expect(onClick).toHaveBeenCalled();
         expect(onClick).toHaveBeenCalledWith(expect.anything(), 'up', 2);
       });
 
@@ -422,7 +422,7 @@ describe('NumberInput', () => {
         upArrow.simulate('click');
         // Enzyme doesn't seem to allow state() in a forwardRef-wrapped class component
         expect(wrapper.find('NumberInput').instance().state.value).toEqual(100);
-        expect(onClick).not.toBeCalled();
+        expect(onClick).not.toHaveBeenCalled();
       });
 
       it('should only decrease the value on down arrow click if value is greater than min', () => {
@@ -430,7 +430,7 @@ describe('NumberInput', () => {
         downArrow.simulate('click');
         // Enzyme doesn't seem to allow state() in a forwardRef-wrapped class component
         expect(wrapper.find('NumberInput').instance().state.value).toEqual(0);
-        expect(onClick).not.toBeCalled();
+        expect(onClick).not.toHaveBeenCalled();
       });
 
       it('should increase by the value of step', () => {
@@ -459,20 +459,20 @@ describe('NumberInput', () => {
 
       it('should not invoke onClick when down arrow is clicked and value is 0', () => {
         downArrow.simulate('click');
-        expect(onClick).not.toBeCalled();
+        expect(onClick).not.toHaveBeenCalled();
       });
 
       it('should invoke onClick when down arrow is clicked and value is above min', () => {
         wrapper.setProps({ value: 1 });
         downArrow.simulate('click');
-        expect(onClick).toBeCalled();
-        expect(onChange).toBeCalled();
+        expect(onClick).toHaveBeenCalled();
+        expect(onChange).toHaveBeenCalled();
         expect(onClick).toHaveBeenCalledWith(expect.anything(), 'down', 0);
       });
 
       it('should invoke onChange when numberInput is changed', () => {
         input.simulate('change');
-        expect(onChange).toBeCalled();
+        expect(onChange).toHaveBeenCalled();
         expect(onChange).toHaveBeenCalledWith(
           expect.anything(),
           expect.anything()

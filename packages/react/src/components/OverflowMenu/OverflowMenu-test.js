@@ -181,23 +181,6 @@ describe('OverflowMenu', () => {
       );
     });
 
-    // Removed until a better solution appears
-    //
-    // it('should be hidden when it loses focus', () => {
-    //   const rootWrapper = mount(
-    //     <OverflowMenu className="extra-class">
-    //       <div className="test-child"></div>
-    //       <div className="test-child"></div>
-    //     </OverflowMenu>
-    //   );
-    //   const menu = rootWrapper.childAt(0);
-
-    //   rootWrapper.setState({ open: true });
-
-    //   menu.simulate('blur');
-    //   expect(rootWrapper.state().open).toEqual(false);
-    // });
-
     it('should be in a closed state after handleOutsideClick() is invoked', () => {
       const rootWrapper = mount(<OverflowMenu />);
 
