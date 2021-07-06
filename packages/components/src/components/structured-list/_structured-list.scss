@@ -111,8 +111,8 @@
   .#{$prefix}--structured-list--selection
     .#{$prefix}--structured-list-row:hover:not(.#{$prefix}--structured-list-row--header-row)
     > .#{$prefix}--structured-list-td {
-    @if feature-flag-enable('enabled-2021-release') {
-      border-top: 1px solid $ui-03;
+    @if feature-flag-enabled('enable-v11-release') {
+      border-top: 1px solid $border-subtle;
     } @else {
       border-top: 1px solid $ui-01;
     }
