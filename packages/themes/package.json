@@ -1,7 +1,7 @@
 {
   "name": "@carbon/themes",
   "description": "Themes for applying color in the Carbon Design System",
-  "version": "10.37.0",
+  "version": "10.38.0-rc.0",
   "license": "Apache-2.0",
   "main": "lib/index.js",
   "module": "es/index.js",
@@ -29,9 +29,9 @@
     "build": "yarn clean && carbon-cli bundle src/index.js --name CarbonThemes && node tasks/build.js && carbon-cli check \"scss/*.scss\""
   },
   "dependencies": {
-    "@carbon/colors": "^10.27.0",
-    "@carbon/layout": "^10.26.0",
-    "@carbon/type": "^10.30.0",
+    "@carbon/colors": "^10.28.0-rc.0",
+    "@carbon/layout": "^10.27.0-rc.0",
+    "@carbon/type": "^10.31.0-rc.0",
     "color": "^3.1.2"
   },
   "devDependencies": {
