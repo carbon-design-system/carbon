@@ -116,7 +116,7 @@ function App({ metadata }) {
                     const id = window.encodeURIComponent(info.moduleName);
                     let asset = assets.find(asset => {
                       if (info.size === 'glyph') {
-                        return !asset.size;
+                        return asset.size === 'glyph';
                       }
                       return asset.size === info.size;
                     });
