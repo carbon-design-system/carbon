@@ -25,7 +25,7 @@
     position: relative;
     width: 100%;
     height: auto;
-    color: $text-primary;
+    color: $text-01;
     @include carbon--breakpoint(md) {
       min-height: rem(40px);
       background: none;
@@ -44,9 +44,9 @@
     align-items: center;
     justify-content: space-between;
     padding: 0 $spacing-09 0 $spacing-05;
-    border-bottom: 1px solid $border-strong;
-    background-color: $layer;
-    color: $text-primary;
+    border-bottom: 1px solid $ui-04;
+    background-color: $field-01;
+    color: $text-01;
     cursor: pointer;
     outline: 2px solid transparent;
 
@@ -63,7 +63,7 @@
   .#{$prefix}--tabs-trigger svg {
     position: absolute;
     right: $spacing-05;
-    fill: $border-inverse;
+    fill: $ui-05;
     transition: transform $duration--fast-01 motion(standard, productive);
   }
 
@@ -75,7 +75,7 @@
   }
 
   .#{$prefix}--tabs-trigger--open {
-    background: $layer-accent;
+    background: $ui-03;
   }
 
   .#{$prefix}--tabs-trigger--open svg {
@@ -90,7 +90,7 @@
   .#{$prefix}--tabs-trigger-text {
     overflow: hidden;
     padding-top: 2px;
-    color: $text-primary;
+    color: $text-01;
     font-weight: 400;
     text-decoration: none;
     text-overflow: ellipsis;
@@ -98,7 +98,7 @@
   }
 
   .#{$prefix}--tabs-trigger-text:hover {
-    color: $text-primary;
+    color: $text-01;
   }
 
   .#{$prefix}--tabs-trigger-text:focus {
@@ -116,7 +116,7 @@
     flex-direction: column;
     padding: 0;
     margin: 0;
-    background: $layer;
+    background: $ui-01;
     list-style: none;
     transition: max-height $duration--fast-01 motion(standard, productive);
 
@@ -154,7 +154,7 @@
     width: 100%;
     height: rem(40px);
     padding: 0;
-    background-color: $layer;
+    background-color: $ui-01;
     cursor: pointer;
     transition: background-color $duration--fast-01 motion(standard, productive);
 
@@ -170,12 +170,12 @@
 
   .#{$prefix}--tabs--container .#{$prefix}--tabs__nav-item {
     @include carbon--breakpoint(md) {
-      background-color: $layer-accent;
+      background-color: $ui-03;
 
       + .#{$prefix}--tabs__nav-item {
         margin-left: 0;
         // Draws the border without affecting the inner-content
-        box-shadow: -1px 0 0 0 $border-strong;
+        box-shadow: -1px 0 0 0 $ui-04;
       }
 
       + .#{$prefix}--tabs__nav-item.#{$prefix}--tabs__nav-item--selected,
@@ -201,8 +201,8 @@
   }
 
   .#{$prefix}--tabs__nav-item:hover:not(.#{$prefix}--tabs__nav-item--disabled) {
-    background-color: $layer-hover;
-    box-shadow: 0 -1px 0 $layer-hover;
+    background-color: $hover-ui;
+    box-shadow: 0 -1px 0 $hover-ui;
 
     @include carbon--breakpoint(md) {
       background-color: transparent;
@@ -216,7 +216,7 @@
   .#{$prefix}--tabs--container
     .#{$prefix}--tabs__nav-item:hover:not(.#{$prefix}--tabs__nav-item--disabled) {
     @include carbon--breakpoint(md) {
-      background-color: $layer-selected-hover;
+      background-color: $hover-selected-ui;
     }
   }
 
@@ -234,7 +234,7 @@
   .#{$prefix}--tabs--container
     .#{$prefix}--tabs__nav-item.#{$prefix}--tabs__nav-item--disabled:hover {
     @include carbon--breakpoint(md) {
-      background-color: $button-disabled;
+      background-color: $disabled-02;
     }
   }
 
@@ -243,7 +243,7 @@
     .#{$prefix}--tabs__nav-link {
     @include carbon--breakpoint(md) {
       border-bottom: none;
-      color: $text-on-color-disabled;
+      color: $disabled-03;
     }
   }
 
@@ -262,8 +262,8 @@
       .#{$prefix}--tabs__nav-link:active {
         @include type-style('productive-heading-01');
 
-        border-bottom: 2px solid $border-interactive;
-        color: $text-primary;
+        border-bottom: 2px solid $interactive-04;
+        color: $text-01;
       }
     }
   }
@@ -273,12 +273,12 @@
   .#{$prefix}--tabs--container
     .#{$prefix}--tabs__nav-item--selected:hover:not(.#{$prefix}--tabs__nav-item--disabled) {
     @include carbon--breakpoint(md) {
-      background-color: $layer;
+      background-color: $ui-01;
 
       .#{$prefix}--tabs__nav-link {
         padding: $spacing-03 $spacing-05;
         border-bottom: none;
-        box-shadow: inset 0 2px 0 0 $border-interactive;
+        box-shadow: inset 0 2px 0 0 $interactive-04;
         // height - vertical padding
         // Draws the border without affecting the inner-content
         line-height: calc(#{rem(48px)} - (#{$spacing-03} * 2));
@@ -302,9 +302,9 @@
     width: calc(100% - 32px);
     height: rem(40px);
     padding: $spacing-04 0;
-    border-bottom: 1px solid $border-subtle;
+    border-bottom: 1px solid $ui-03;
     margin: 0 $spacing-05;
-    color: $text-secondary;
+    color: $text-02;
     font-weight: 400;
     line-height: 1rem;
     text-decoration: none;
@@ -352,10 +352,10 @@
   //-----------------------------
   .#{$prefix}--tabs__nav-item:hover:not(.#{$prefix}--tabs__nav-item--selected):not(.#{$prefix}--tabs__nav-item--disabled)
     .#{$prefix}--tabs__nav-link {
-    color: $text-primary;
+    color: $text-01;
     @include carbon--breakpoint(md) {
       border-bottom: $tab-underline-color-hover;
-      color: $text-primary;
+      color: $text-01;
     }
   }
 
@@ -394,7 +394,7 @@
     .#{$prefix}--tabs__nav-link:focus,
   .#{$prefix}--tabs__nav-item:not(.#{$prefix}--tabs__nav-item--selected):not(.#{$prefix}--tabs__nav-item--disabled):not(.#{$prefix}--tabs__nav-item--selected)
     a.#{$prefix}--tabs__nav-link:active {
-    color: $text-secondary;
+    color: $text-02;
   }
 
   //-----------------------------
@@ -418,7 +418,7 @@
 
   .#{$prefix}--skeleton.#{$prefix}--tabs--scrollable:not(.#{$prefix}--tabs--scrollable--container)
     .#{$prefix}--tabs--scrollable__nav-item {
-    border-bottom: 2px solid $skeleton-element;
+    border-bottom: 2px solid $skeleton-02;
   }
 
   .#{$prefix}--tabs.#{$prefix}--skeleton .#{$prefix}--tabs__nav-link {
@@ -456,7 +456,7 @@
     width: 100%;
     height: auto;
     min-height: rem(40px);
-    color: $text-primary;
+    color: $text-01;
 
     &.#{$prefix}--tabs--scrollable--container {
       min-height: rem(48px);
@@ -493,32 +493,32 @@
 
     .#{$prefix}--tabs__overflow-indicator--left {
       margin-right: -$carbon--spacing-03;
-      background-image: linear-gradient(to left, transparent, $background);
+      background-image: linear-gradient(to left, transparent, $ui-background);
     }
 
     .#{$prefix}--tabs__overflow-indicator--right {
       margin-left: -$carbon--spacing-03;
-      background-image: linear-gradient(to right, transparent, $background);
+      background-image: linear-gradient(to right, transparent, $ui-background);
     }
 
     .#{$prefix}--tabs--scrollable--light
       .#{$prefix}--tabs__overflow-indicator--left {
-      background-image: linear-gradient(to left, transparent, $layer);
+      background-image: linear-gradient(to left, transparent, $ui-01);
     }
 
     .#{$prefix}--tabs--scrollable--light
       .#{$prefix}--tabs__overflow-indicator--right {
-      background-image: linear-gradient(to right, transparent, $layer);
+      background-image: linear-gradient(to right, transparent, $ui-01);
     }
 
     &.#{$prefix}--tabs--scrollable--container
       .#{$prefix}--tabs__overflow-indicator--left {
-      background-image: linear-gradient(to left, transparent, $layer-accent);
+      background-image: linear-gradient(to left, transparent, $ui-03);
     }
 
     &.#{$prefix}--tabs--scrollable--container
       .#{$prefix}--tabs__overflow-indicator--right {
-      background-image: linear-gradient(to right, transparent, $layer-accent);
+      background-image: linear-gradient(to right, transparent, $ui-03);
     }
 
     // Safari-only media query
@@ -529,35 +529,27 @@
         .#{$prefix}--tabs__overflow-indicator--left {
           background-image: linear-gradient(
             to left,
-            rgba($background, 0),
-            $background
+            rgba($ui-background, 0),
+            $ui-background
           );
         }
 
         .#{$prefix}--tabs__overflow-indicator--right {
           background-image: linear-gradient(
             to right,
-            rgba($background, 0),
-            $background
+            rgba($ui-background, 0),
+            $ui-background
           );
         }
 
         &.#{$prefix}--tabs--scrollable--container
           .#{$prefix}--tabs__overflow-indicator--left {
-          background-image: linear-gradient(
-            to left,
-            rgba($layer-accent, 0),
-            $layer-accent
-          );
+          background-image: linear-gradient(to left, rgba($ui-03, 0), $ui-03);
         }
 
         &.#{$prefix}--tabs--scrollable--container
           .#{$prefix}--tabs__overflow-indicator--right {
-          background-image: linear-gradient(
-            to right,
-            rgba($layer-accent, 0),
-            $layer-accent
-          );
+          background-image: linear-gradient(to right, rgba($ui-03, 0), $ui-03);
         }
       }
     }
@@ -584,11 +576,11 @@
       .#{$prefix}--tab--overflow-nav-button {
       width: $carbon--spacing-09;
       margin: 0;
-      background-color: $layer-accent;
+      background-color: $ui-03;
     }
 
     .#{$prefix}--tab--overflow-nav-button svg {
-      fill: $icon-primary;
+      fill: $icon-01;
     }
 
     //-----------------------------
@@ -611,7 +603,7 @@
 
     &.#{$prefix}--tabs--scrollable--container
       .#{$prefix}--tabs--scrollable__nav-item {
-      background-color: $layer-accent;
+      background-color: $ui-03;
     }
 
     &.#{$prefix}--tabs--scrollable--container
@@ -619,7 +611,7 @@
       + .#{$prefix}--tabs--scrollable__nav-item {
       margin-left: 0;
       // Draws the border without affecting the inner-content
-      box-shadow: rem(-1px) 0 0 0 $border-strong;
+      box-shadow: rem(-1px) 0 0 0 $ui-04;
     }
 
     &.#{$prefix}--tabs--scrollable--container
@@ -643,7 +635,7 @@
     //-----------------------------
     &.#{$prefix}--tabs--scrollable--container
       .#{$prefix}--tabs--scrollable__nav-item:hover {
-      background-color: $layer-selected-hover;
+      background-color: $hover-selected-ui;
     }
 
     //---------------------------------------------
@@ -660,7 +652,7 @@
       .#{$prefix}--tabs--scrollable__nav-item.#{$prefix}--tabs--scrollable__nav-item--disabled,
     &.#{$prefix}--tabs--scrollable--container
       .#{$prefix}--tabs--scrollable__nav-item.#{$prefix}--tabs--scrollable__nav-item--disabled:hover {
-      background-color: $button-disabled;
+      background-color: $disabled-02;
     }
 
     //-----------------------------
@@ -678,15 +670,15 @@
       .#{$prefix}--tabs--scrollable__nav-link:active {
       @include type-style('productive-heading-01');
 
-      border-bottom: 2px solid $border-interactive;
-      color: $text-primary;
+      border-bottom: 2px solid $interactive-04;
+      color: $text-01;
     }
 
     &.#{$prefix}--tabs--scrollable--container
       .#{$prefix}--tabs--scrollable__nav-item--selected,
     &.#{$prefix}--tabs--scrollable--container
       .#{$prefix}--tabs--scrollable__nav-item--selected:hover {
-      background-color: $layer;
+      background-color: $ui-01;
 
       .#{$prefix}--tabs--scrollable__nav-link:focus,
       .#{$prefix}--tabs--scrollable__nav-link:active {
@@ -698,7 +690,7 @@
       .#{$prefix}--tabs--scrollable__nav-item--selected
       .#{$prefix}--tabs--scrollable__nav-link {
       // Draws the border without affecting the inner-content
-      box-shadow: inset 0 2px 0 0 $border-interactive;
+      box-shadow: inset 0 2px 0 0 $interactive-04;
       // height - vertical padding
       line-height: calc(#{rem(48px)} - (#{$spacing-03} * 2));
     }
@@ -707,7 +699,7 @@
       .#{$prefix}--tabs--scrollable__nav-item--selected,
     &.#{$prefix}--tabs--scrollable--light.#{$prefix}--tabs--scrollable--container
       .#{$prefix}--tabs--scrollable__nav-item--selected:hover {
-      background-color: $background;
+      background-color: $ui-background;
     }
 
     //-----------------------------
@@ -722,7 +714,7 @@
       width: rem(160px);
       padding: $spacing-04 $spacing-05 $spacing-03;
       border-bottom: $tab-underline-color;
-      color: $text-secondary;
+      color: $text-02;
       text-align: left;
       text-decoration: none;
       text-overflow: ellipsis;
@@ -751,7 +743,7 @@
     .#{$prefix}--tabs--scrollable__nav-item:hover
       .#{$prefix}--tabs--scrollable__nav-link {
       border-bottom: $tab-underline-color-hover;
-      color: $text-primary;
+      color: $text-01;
     }
 
     &.#{$prefix}--tabs--scrollable--container
@@ -788,13 +780,13 @@
     .#{$prefix}--tabs--scrollable--light
       .#{$prefix}--tabs--scrollable__nav-item--disabled
       .#{$prefix}--tabs--scrollable__nav-link {
-      border-bottom-color: $border-subtle;
+      border-bottom-color: $ui-03;
     }
 
     .#{$prefix}--tabs--scrollable--light
       .#{$prefix}--tabs--scrollable__nav-item--disabled:hover
       .#{$prefix}--tabs--scrollable__nav-link {
-      border-bottom-color: $border-subtle;
+      border-bottom-color: $ui-03;
     }
 
     .#{$prefix}--tabs--scrollable--light
@@ -803,14 +795,14 @@
     .#{$prefix}--tabs--scrollable--light
       .#{$prefix}--tabs--scrollable__nav-item--disabled
       .#{$prefix}--tabs--scrollable__nav-link:active {
-      border-bottom-color: $border-subtle;
+      border-bottom-color: $ui-03;
     }
 
     &.#{$prefix}--tabs--scrollable--container
       .#{$prefix}--tabs--scrollable__nav-item--disabled
       .#{$prefix}--tabs--scrollable__nav-link {
       border-bottom: none;
-      color: $text-on-color-disabled;
+      color: $disabled-03;
     }
 
     //-----------------------------
