@@ -762,6 +762,9 @@ $list-box-menu-width: rem(300px);
   .#{$prefix}--list-box--up.#{$prefix}--dropdown--sm
     .#{$prefix}--list-box__menu,
   .#{$prefix}--list-box--up.#{$prefix}--list-box--sm
+    .#{$prefix}--list-box__menu,
+  .#{$prefix}--list-box--up
+    .#{$prefix}--list-box--sm
     .#{$prefix}--list-box__menu {
     bottom: 2rem;
   }
@@ -774,6 +777,9 @@ $list-box-menu-width: rem(300px);
   .#{$prefix}--list-box--up.#{$prefix}--dropdown--lg
     .#{$prefix}--list-box__menu,
   .#{$prefix}--list-box--up.#{$prefix}--list-box--lg
+    .#{$prefix}--list-box__menu,
+  .#{$prefix}--list-box--up
+    .#{$prefix}--list-box--lg
     .#{$prefix}--list-box__menu {
     bottom: 3rem;
   }
