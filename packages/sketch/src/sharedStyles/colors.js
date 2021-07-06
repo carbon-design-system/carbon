@@ -47,6 +47,8 @@ function formatColorName({ name, grade, formatFor }) {
  * the result
  * @param {object} params - syncColors parameters
  * @param {Document} params.document
+ * @param {string} params.formatFor - one of 'colorVariable' or
+ * 'sharedLayerStyle'
  * @returns {Array<SharedStyle|Swatch>}
  */
 export function syncColors({ document, formatFor }) {
