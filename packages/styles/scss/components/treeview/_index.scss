@@ -5,7 +5,7 @@
 // LICENSE file in the root directory of this source tree.
 //
 
-@forward 'tooltip';
-@use 'tooltip';
+@forward 'treeview';
+@use 'treeview';
 
-@include tooltip.tooltip;
+@include treeview.treeview;
