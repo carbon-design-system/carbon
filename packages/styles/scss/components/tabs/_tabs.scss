@@ -9,10 +9,10 @@
 // Tabs
 //-----------------------------
 
+@use 'vars' as *;
+
 @use '../../config' as *;
 @use '../../theme' as *;
-// @use '../../themes' as *;
-
 @use '../../colors' as *;
 @use '../../type' as *;
 @use '../../breakpoint' as *;
@@ -23,12 +23,10 @@
 @use '../../utilities/rotate' as *;
 @use '../../utilities/box-shadow' as *;
 @use '../../utilities/component-tokens' as *;
-@use '../../utilities/tabs' as *;
 @use '../../utilities/skeleton' as *;
 @use '../../utilities/visually-hidden' as *;
 @use '../../utilities/button-reset';
 @use '../../utilities/high-contrast-mode' as *;
-
 @use '../../utilities/convert';
 
 /// Tabs styles
