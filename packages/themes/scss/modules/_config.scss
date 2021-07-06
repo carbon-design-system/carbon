@@ -5,11 +5,4 @@
 // LICENSE file in the root directory of this source tree.
 //
 
-@forward 'generated/themes';
-@use 'generated/themes';
-
-/// The default light theme
-$light: themes.$white !default;
-
-/// The default dark theme
-$dark: themes.$g100 !default;
+$prefix: 'cds' !default;
