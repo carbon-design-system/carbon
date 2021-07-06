@@ -3561,6 +3561,7 @@ Map {
       "defaultProps": Object {
         "ariaLabel": "Choose an item",
         "compareItems": [Function],
+        "direction": "bottom",
         "disabled": false,
         "filterItems": [Function],
         "initialSelectedItems": Array [],
@@ -3579,6 +3580,15 @@ Map {
         "compareItems": Object {
           "isRequired": true,
           "type": "func",
+        },
+        "direction": Object {
+          "args": Array [
+            Array [
+              "top",
+              "bottom",
+            ],
+          ],
+          "type": "oneOf",
         },
         "disabled": Object {
           "type": "bool",
