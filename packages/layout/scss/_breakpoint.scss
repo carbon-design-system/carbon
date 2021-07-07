@@ -198,12 +198,12 @@ $carbon--grid-breakpoints: (
   @if $min and $max {
     $min-width: if(
       not $is-number-lower and $min,
-      map-get($min, width + 0.02),
+      map-get($min, width) + 0.02,
       $min
     );
     $max-width: if(
       not $is-number-upper and $max,
-      map-get($max, width - 0.02),
+      map-get($max, width) - 0.02,
       $max
     );
     @media (min-width: $min-width) and (max-width: $max-width) {
