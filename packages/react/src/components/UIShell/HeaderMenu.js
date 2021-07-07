@@ -173,6 +173,7 @@ class HeaderMenu extends React.Component {
       children,
       renderMenuContent: MenuContent,
       menuLinkName,
+      focusRef, // eslint-disable-line no-unused-vars
       ...rest
     } = this.props;
     const accessibilityLabel = {
