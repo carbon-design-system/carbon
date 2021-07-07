@@ -175,6 +175,7 @@ export default class Slider extends PureComponent {
     value: this.props.value,
     left: 0,
     needsOnRelease: false,
+    isValid: true,
   };
 
   /**
@@ -390,6 +391,7 @@ export default class Slider extends PureComponent {
    *
    * @param {Event} evt The event.
    */
+
   onChange = (evt) => {
     // Do nothing if component is disabled
     if (this.props.disabled) {
@@ -407,18 +409,24 @@ export default class Slider extends PureComponent {
     if (isNaN(targetValue)) {
       this.setState({ value: evt.target.value });
     } else {
-      // Recalculate the state's value and update the Slider
-      // if it is a valid number
-      if (evt.target.checkValidity() === false) {
-        return;
-      }
-
       const { value, left } = this.calcValue({
         value: targetValue,
         useRawValue: true,
       });
-      this.setState({ value, left, needsOnRelease: true });
+      this.setState({
+        value,
+        left,
+        needsOnRelease: true,
+      });
     }
+  };
+
+  onBlur = (evt) => {
+    // determine validity of input change after clicking out of input
+    const validity = evt.target.checkValidity();
+    this.setState({
+      isValid: validity,
+    });
   };
 
   /**
@@ -513,7 +521,7 @@ export default class Slider extends PureComponent {
 
     delete other.onRelease;
 
-    const { value, left } = this.state;
+    const { value, left, isValid } = this.state;
 
     const labelId = `${id}-label`;
     const labelClasses = classNames(`${prefix}--label`, {
@@ -531,7 +539,7 @@ export default class Slider extends PureComponent {
       `${prefix}--slider-text-input`,
       {
         [`${prefix}--text-input--light`]: light,
-        [`${prefix}--text-input--invalid`]: this.props.invalid,
+        [`${prefix}--text-input--invalid`]: !isValid || invalid,
       }
     );
 
@@ -564,7 +572,7 @@ export default class Slider extends PureComponent {
             onKeyDown={this.onKeyDown}
             role="presentation"
             tabIndex={-1}
-            data-invalid={invalid || null}
+            data-invalid={!isValid || invalid}
             {...other}>
             <div
               className={`${prefix}--slider__thumb`}
@@ -605,8 +613,9 @@ export default class Slider extends PureComponent {
             max={max}
             step={step}
             onChange={this.onChange}
-            data-invalid={invalid || null}
-            aria-invalid={invalid || null}
+            onBlur={this.onBlur}
+            data-invalid={!isValid || invalid}
+            aria-invalid={!isValid || invalid}
           />
         </div>
       </div>
