@@ -7,9 +7,3 @@
 
 @forward 'generated/themes';
 @use 'generated/themes';
-
-/// The default light theme
-$light: themes.$white !default;
-
-/// The default dark theme
-$dark: themes.$g100 !default;
