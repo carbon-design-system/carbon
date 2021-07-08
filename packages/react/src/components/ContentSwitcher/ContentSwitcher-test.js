@@ -107,7 +107,7 @@ describe('ContentSwitcher', () => {
     children.first().props().onClick(mockData);
 
     it('should invoke onChange', () => {
-      expect(onChange).toBeCalledWith(mockData);
+      expect(onChange).toHaveBeenCalledWith(mockData);
     });
 
     it('should set the correct selectedIndex', () => {
@@ -141,7 +141,7 @@ describe('ContentSwitcher', () => {
     children.first().props().onKeyDown(mockData);
 
     it('should invoke onChange', () => {
-      expect(onChange).toBeCalledWith(mockData);
+      expect(onChange).toHaveBeenCalledWith(mockData);
     });
 
     it('should set the correct selectedIndex', () => {

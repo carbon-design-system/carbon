@@ -12,6 +12,13 @@ import { Props } from '@storybook/addon-docs/blocks';
 
 ## Overview
 
+### `data-floating-menu-container`
+
+`Tooltip` uses React Portals to render the tooltip into the DOM. To determine
+where in the DOM the menu will be placed, it looks for a parent element with the
+`data-floating-menu-container` attribute. If no parent with this attribute is
+found, the menu will be placed on `document.body`.
+
 ## Component API
 
 Please note that in addition to the props below, `Tooltip` also has two

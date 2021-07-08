@@ -13,6 +13,7 @@ import { settings } from 'carbon-components';
 const { prefix } = settings;
 
 const FormGroup = ({
+  legendId,
   legendText,
   invalid,
   children,
@@ -31,8 +32,13 @@ const FormGroup = ({
     <fieldset
       {...(invalid && { 'data-invalid': '' })}
       className={classNamesFieldset}
-      {...other}>
-      <legend className={classNamesLegend}>{legendText}</legend>
+      {...other}
+      aria-labelledby={other['aria-labelledby'] || legendId}>
+      <legend
+        className={classNamesLegend}
+        id={legendId || other['aria-labelledby']}>
+        {legendText}
+      </legend>
       {children}
       {message ? (
         <div className={`${prefix}--form__requirements`}>{messageText}</div>
@@ -61,6 +67,12 @@ FormGroup.propTypes = {
    * Specify whether the <FormGroup> is invalid
    */
   invalid: PropTypes.bool,
+
+  /**
+   * Provide id for the fieldset <legend> which corresponds to the fieldset
+   * `aria-labelledby`
+   */
+  legendId: PropTypes.node,
 
   /**
    * Provide the text to be rendered inside of the fieldset <legend>

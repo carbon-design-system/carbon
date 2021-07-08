@@ -36,7 +36,7 @@
   }
 
   .#{$prefix}--loading__stroke {
-    stroke: $interactive;
+    stroke: $interactive-04;
     stroke-dashoffset: $loading__gap;
   }
 
@@ -58,11 +58,11 @@
   }
 
   .#{$prefix}--loading--small .#{$prefix}--loading__svg {
-    stroke: $interactive;
+    stroke: $interactive-04;
   }
 
   .#{$prefix}--loading__background {
-    stroke: $layer-accent;
+    stroke: $ui-03;
     stroke-dashoffset: -22;
   }
 
@@ -86,7 +86,7 @@
     height: 100%;
     align-items: center;
     justify-content: center;
-    background-color: $overlay;
+    background-color: $overlay-01;
     transition: background-color $duration--slow-02 motion(standard, expressive);
   }
 
