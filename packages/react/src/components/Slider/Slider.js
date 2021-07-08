@@ -515,6 +515,7 @@ export default class Slider extends PureComponent {
       };
     }
     //if invalid prop is not provided, state will remain the same
+    return null;
   }
 
   render() {
