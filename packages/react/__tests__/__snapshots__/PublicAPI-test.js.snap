@@ -983,9 +983,7 @@ Map {
         "overflowMenuOnHover": Object {
           "type": "bool",
         },
-        "shouldShowBorder": Object {
-          "type": "bool",
-        },
+        "shouldShowBorder": [Function],
         "size": Object {
           "args": Array [
             Array [
@@ -1622,9 +1620,7 @@ Map {
       "overflowMenuOnHover": Object {
         "type": "bool",
       },
-      "shouldShowBorder": Object {
-        "type": "bool",
-      },
+      "shouldShowBorder": [Function],
       "size": Object {
         "args": Array [
           Array [
