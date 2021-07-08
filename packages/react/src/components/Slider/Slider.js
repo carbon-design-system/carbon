@@ -300,7 +300,7 @@ export default class Slider extends PureComponent {
     });
 
     // Set needsOnRelease flag so event fires on next update
-    this.setState({ needsOnRelease: true });
+    this.setState({ needsOnRelease: true, isValid: true });
   };
 
   /**
@@ -330,7 +330,7 @@ export default class Slider extends PureComponent {
     }
 
     const { value, left } = this.calcValue({ clientX });
-    this.setState({ value, left });
+    this.setState({ value, left, isValid: true });
   };
 
   /**
@@ -381,7 +381,8 @@ export default class Slider extends PureComponent {
           ? Math.floor(this.state.value / this.props.step) * this.props.step
           : this.state.value) + delta,
     });
-    this.setState({ value, left });
+
+    this.setState({ value, left, isValid: true });
   };
 
   /**
