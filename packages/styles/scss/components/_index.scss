@@ -28,6 +28,7 @@
 @use 'data-table/expandable';
 @use 'data-table/skeleton';
 @use 'data-table/sort';
+@use "slider";
 @use 'text-area';
 @use 'text-input';
 @use 'structured-list';
@@ -35,8 +36,10 @@
 @use 'number-input';
 @use 'tile';
 @use 'time-picker';
+@use 'treeview';
 @use 'toggle';
 @use 'pagination';
 @use 'pagination-nav';
 @use 'select';
 @use 'progress-indicator';
+@use 'tabs';

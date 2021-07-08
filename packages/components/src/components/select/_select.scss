@@ -46,11 +46,11 @@
     height: rem(40px);
     padding: 0 $spacing-09 0 $spacing-05;
     border: none;
-    border-bottom: 1px solid $border-strong;
+    border-bottom: 1px solid $ui-04;
     appearance: none;
-    background-color: $field;
+    background-color: $field-01;
     border-radius: 0;
-    color: $text-primary;
+    color: $text-01;
     cursor: pointer;
     // reset disabled <select> opacity
     opacity: 1;
@@ -59,7 +59,7 @@
     transition: outline $duration--fast-01 motion(standard, productive);
 
     &:hover {
-      background-color: $background-hover;
+      background-color: $hover-ui;
     }
 
     // Hide default select arrow in IE10+
@@ -81,14 +81,14 @@
     &:focus {
       @include focus-outline('outline');
 
-      color: $text-primary;
+      color: $text-01;
     }
 
     &:disabled,
     &:hover:disabled {
-      border-bottom-color: $border-disabled;
-      background-color: $field-disabled;
-      color: $text-disabled;
+      border-bottom-color: $disabled-01;
+      background-color: $disabled-01;
+      color: $disabled-02;
       cursor: not-allowed;
     }
   }
@@ -107,7 +107,7 @@
 
   .#{$prefix}--select--disabled .#{$prefix}--label,
   .#{$prefix}--select--disabled .#{$prefix}--form__helper-text {
-    color: $text-disabled;
+    color: $disabled-02;
   }
 
   .#{$prefix}--select-input__wrapper[data-invalid] .#{$prefix}--select-input,
@@ -116,20 +116,20 @@
   }
 
   .#{$prefix}--select-input:disabled ~ .#{$prefix}--select__arrow {
-    fill: $icon-disabled;
+    fill: $disabled-02;
   }
 
   .#{$prefix}--select--light .#{$prefix}--select-input {
     background-color: $field-02;
 
     &:hover {
-      background-color: $background-hover;
+      background-color: $hover-ui;
     }
 
     &:disabled,
     &:hover:disabled {
       background-color: $field-02;
-      color: $text-disabled;
+      color: $disabled-02;
       cursor: not-allowed;
     }
   }
@@ -139,7 +139,7 @@
     top: 0;
     right: $spacing-05;
     height: 100%;
-    fill: $icon-primary;
+    fill: $ui-05;
     pointer-events: none;
 
     // Windows, Firefox HCM Fix
@@ -160,11 +160,11 @@
   .#{$prefix}--select-input__wrapper[data-invalid]
     .#{$prefix}--select-input
     ~ .#{$prefix}--select__invalid-icon {
-    fill: $support-error;
+    fill: $support-01;
   }
 
   .#{$prefix}--select__invalid-icon--warning {
-    fill: $support-warning;
+    fill: $support-03;
   }
 
   .#{$prefix}--select__invalid-icon--warning path[fill] {
@@ -175,7 +175,7 @@
   .#{$prefix}--select-optgroup,
   .#{$prefix}--select-option {
     // For the options to show in IE11
-    color: $text-primary;
+    color: $text-01;
 
     &:disabled {
       color: $text-disabled;
@@ -212,12 +212,12 @@
     padding-left: $carbon--spacing-03;
     border-bottom: none;
     background-color: transparent;
-    color: $text-primary;
+    color: $text-01;
   }
 
   .#{$prefix}--select--inline .#{$prefix}--select-input[disabled],
   .#{$prefix}--select--inline .#{$prefix}--select-input[disabled]:hover {
-    background-color: $field-disabled;
+    background-color: $disabled-01;
   }
 
   .#{$prefix}--select--inline .#{$prefix}--select__arrow {
