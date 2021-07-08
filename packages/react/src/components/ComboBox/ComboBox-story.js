@@ -70,9 +70,6 @@ export const combobox = () => (
       placeholder="Filter..."
       titleText="ComboBox title"
       helperText="Combobox helper text"
-      ref={() => {
-        console.log('some ref');
-      }}
     />
   </div>
 );
