@@ -8,7 +8,6 @@
 import React from 'react';
 import TabContent from '../TabContent';
 import { render, screen } from '@testing-library/react';
-import '@testing-library/jest-dom';
 
 describe('TabContent', () => {
   describe('renders as expected', () => {
