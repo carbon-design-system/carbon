@@ -8,7 +8,7 @@
 import { RadioButton, RadioButtonGroup } from 'carbon-components-react';
 import React from 'react';
 
-export default { title: 'Components/Radiobutton' };
+export default { title: 'Components/RadioButton' };
 
 export const Default = () => {
   return (
