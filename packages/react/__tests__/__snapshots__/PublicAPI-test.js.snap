@@ -438,6 +438,7 @@ Map {
     },
   },
   "ComboBox" => Object {
+    "$$typeof": Symbol(react.forward_ref),
     "defaultProps": Object {
       "ariaLabel": "Choose an item",
       "direction": "bottom",
@@ -692,6 +693,7 @@ Map {
         "type": "node",
       },
     },
+    "render": [Function],
   },
   "ComposedModal" => Object {
     "defaultProps": Object {
@@ -983,9 +985,7 @@ Map {
         "overflowMenuOnHover": Object {
           "type": "bool",
         },
-        "shouldShowBorder": Object {
-          "type": "bool",
-        },
+        "shouldShowBorder": [Function],
         "size": Object {
           "args": Array [
             Array [
@@ -1622,9 +1622,7 @@ Map {
       "overflowMenuOnHover": Object {
         "type": "bool",
       },
-      "shouldShowBorder": Object {
-        "type": "bool",
-      },
+      "shouldShowBorder": [Function],
       "size": Object {
         "args": Array [
           Array [
@@ -2907,6 +2905,9 @@ Map {
       "invalid": Object {
         "type": "bool",
       },
+      "legendId": Object {
+        "type": "node",
+      },
       "legendText": Object {
         "isRequired": true,
         "type": "node",
@@ -3561,6 +3562,7 @@ Map {
       "defaultProps": Object {
         "ariaLabel": "Choose an item",
         "compareItems": [Function],
+        "direction": "bottom",
         "disabled": false,
         "filterItems": [Function],
         "initialSelectedItems": Array [],
@@ -3579,6 +3581,15 @@ Map {
         "compareItems": Object {
           "isRequired": true,
           "type": "func",
+        },
+        "direction": Object {
+          "args": Array [
+            Array [
+              "top",
+              "bottom",
+            ],
+          ],
+          "type": "oneOf",
         },
         "disabled": Object {
           "type": "bool",

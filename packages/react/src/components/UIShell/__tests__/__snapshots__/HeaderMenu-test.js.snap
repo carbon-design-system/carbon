@@ -58,6 +58,7 @@ exports[`HeaderMenu should render 1`] = `
       onBlur={[Function]}
       onClick={[Function]}
       onKeyDown={[Function]}
+      tabIndex={-1}
     >
       <a
         aria-expanded={false}
