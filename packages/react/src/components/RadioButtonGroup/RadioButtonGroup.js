@@ -14,8 +14,6 @@ import { settings } from 'carbon-components';
 const { prefix } = settings;
 
 export default class RadioButtonGroup extends React.Component {
-  state = { selected: this.props.valueSelected || this.props.defaultSelected };
-
   static propTypes = {
     /**
      * Provide a collection of <RadioButton> components to render in the group
@@ -81,10 +79,20 @@ export default class RadioButtonGroup extends React.Component {
     return prevValueSelected === valueSelected
       ? null
       : {
-          selected: valueSelected || defaultSelected,
+          selected:
+            typeof valueSelected !== 'undefined'
+              ? valueSelected
+              : defaultSelected,
           prevValueSelected: valueSelected,
         };
   }
+
+  state = {
+    selected:
+      typeof this.props.valueSelected !== 'undefined'
+        ? this.props.valueSelected
+        : this.props.defaultSelected,
+  };
 
   getRadioButtons = () => {
     const children = React.Children.map(this.props.children, (radioButton) => {
