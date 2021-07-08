@@ -95,7 +95,7 @@ describe('HeaderMenu', () => {
   });
 
   describe('menu button interactions', () => {
-    it('should should open and close', () => {
+    it('should open and close', () => {
       const wrapper = mount(
         <HeaderMenu {...mockProps}>
           <HeaderMenuItem href="/a">A</HeaderMenuItem>
