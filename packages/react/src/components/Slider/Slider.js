@@ -500,15 +500,16 @@ export default class Slider extends PureComponent {
   };
 
   // syncs invalid state and prop
-  static getDerivedStateFromProps(props) {
+  static getDerivedStateFromProps(props, state) {
+    const { isValid } = state;
     // will override state in favor of invalid prop
-    if (props.invalid === true) {
+    if (props.invalid === true && isValid === true) {
       return {
         isValid: false,
       };
     }
 
-    if (props.invalid === false) {
+    if (props.invalid === false && isValid === false) {
       return {
         isValid: true,
       };
