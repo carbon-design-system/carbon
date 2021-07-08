@@ -19,13 +19,6 @@ import {
   RadioButton,
 } from 'carbon-components-react';
 
-//  const toolbarProps = {
-//    className: 'some-class',
-//  };
-
-//  const inputProps = {
-//    className: 'some-class',
-//  };
 
 export default {
   title: 'Deprecated/Toolbar',
