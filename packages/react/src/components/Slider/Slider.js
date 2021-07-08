@@ -421,6 +421,12 @@ export default class Slider extends PureComponent {
     }
   };
 
+  /**
+   * Checks for validity of input value after clicking out of the input. It also
+   * Handles state change to isValid state.
+   *
+   * @param {Event} evt The event.
+   */
   onBlur = (evt) => {
     // determine validity of input change after clicking out of input
     const validity = evt.target.checkValidity();
@@ -493,6 +499,23 @@ export default class Slider extends PureComponent {
     return { value: steppedValue, left: steppedPercent * 100 };
   };
 
+  // syncs invalid state and prop
+  static getDerivedStateFromProps(props) {
+    // will override state in favor of invalid prop
+    if (props.invalid === true) {
+      return {
+        isValid: false,
+      };
+    }
+
+    if (props.invalid === false) {
+      return {
+        isValid: true,
+      };
+    }
+    //if invalid prop is not provided, state will remain the same
+  }
+
   render() {
     const {
       ariaLabelInput,
@@ -515,7 +538,6 @@ export default class Slider extends PureComponent {
       disabled,
       name,
       light,
-      invalid,
       ...other
     } = this.props;
 
@@ -539,7 +561,7 @@ export default class Slider extends PureComponent {
       `${prefix}--slider-text-input`,
       {
         [`${prefix}--text-input--light`]: light,
-        [`${prefix}--text-input--invalid`]: !isValid || invalid,
+        [`${prefix}--text-input--invalid`]: isValid === false,
       }
     );
 
@@ -572,7 +594,7 @@ export default class Slider extends PureComponent {
             onKeyDown={this.onKeyDown}
             role="presentation"
             tabIndex={-1}
-            data-invalid={!isValid || invalid}
+            data-invalid={isValid ? null : true}
             {...other}>
             <div
               className={`${prefix}--slider__thumb`}
@@ -614,8 +636,8 @@ export default class Slider extends PureComponent {
             step={step}
             onChange={this.onChange}
             onBlur={this.onBlur}
-            data-invalid={!isValid || invalid}
-            aria-invalid={!isValid || invalid}
+            data-invalid={isValid ? null : true}
+            aria-invalid={isValid ? null : true}
           />
         </div>
       </div>
