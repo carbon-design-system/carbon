@@ -2907,6 +2907,9 @@ Map {
       "invalid": Object {
         "type": "bool",
       },
+      "legendId": Object {
+        "type": "node",
+      },
       "legendText": Object {
         "isRequired": true,
         "type": "node",
