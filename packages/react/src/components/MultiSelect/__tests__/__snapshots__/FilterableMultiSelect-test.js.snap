@@ -4,6 +4,7 @@ exports[`MultiSelect.Filterable should render 1`] = `
 <MultiSelect.Filterable
   ariaLabel="Choose an item"
   compareItems={[Function]}
+  direction="bottom"
   disabled={false}
   filterItems={[Function]}
   id="test-filterable-multiselect"
