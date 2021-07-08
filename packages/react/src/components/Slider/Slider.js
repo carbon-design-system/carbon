@@ -429,6 +429,10 @@ export default class Slider extends PureComponent {
    * @param {Event} evt The event.
    */
   onBlur = (evt) => {
+    // Do nothing if we have no valid event, target, or value
+    if (!evt || !('target' in evt) || typeof evt.target.value !== 'string') {
+      return;
+    }
     // determine validity of input change after clicking out of input
     const validity = evt.target.checkValidity();
     this.setState({
@@ -545,6 +549,7 @@ export default class Slider extends PureComponent {
     } = this.props;
 
     delete other.onRelease;
+    delete other.invalid;
 
     const { value, left, isValid } = this.state;
 

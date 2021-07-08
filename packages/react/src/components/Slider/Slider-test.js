@@ -239,23 +239,18 @@ describe('Slider', () => {
       expect(handleChange).toHaveBeenLastCalledWith({ value: 999 });
     });
 
-    it('checks for validity after user has typed invalid value and updates state', () => {
+    it('checks for validity onBlur', () => {
+      const checkValidity = jest.fn();
+
       const evt = {
         target: {
-          checkValidity: () => false,
+          value: '',
+          checkValidity: checkValidity,
         },
       };
 
       wrapper.instance().onBlur(evt);
-      expect(wrapper.state().isValid).toEqual(false);
-      expect(handleBlur).toHaveBeenLastCalledWith({
-        checkValidity: () => false,
-      });
-      expect(
-        wrapper
-          .find(`.${prefix}--slider-text-input`)
-          .hasClass(`${prefix}--text-input--invalid`)
-      ).toEqual(true);
+      expect(checkValidity).toHaveBeenCalled();
     });
 
     it('sets correct state when typing a valid value in input field', () => {
@@ -268,25 +263,6 @@ describe('Slider', () => {
       wrapper.instance().onChange(evt);
       expect(wrapper.state().value).toEqual(12);
       expect(handleChange).toHaveBeenLastCalledWith({ value: 12 });
-    });
-
-    it('checks for validity after user has typed valid value and updates state', () => {
-      const evt = {
-        target: {
-          checkValidity: () => true,
-        },
-      };
-
-      wrapper.instance().onBlur(evt);
-      expect(wrapper.state().isValid).toEqual(true);
-      expect(handleBlur).toHaveBeenLastCalledWith({
-        checkValidity: () => true,
-      });
-      expect(
-        wrapper
-          .find(`.${prefix}--slider-text-input`)
-          .hasClass(`${prefix}--text-input--invalid`)
-      ).toEqual(false);
     });
   });
 
@@ -319,7 +295,7 @@ describe('Slider', () => {
 
       const blurEvt = {
         target: {
-          checkValidity: false,
+          checkValidity: () => false,
         },
       };
 
