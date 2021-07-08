@@ -73,7 +73,7 @@ Table.propTypes = {
    */
   shouldShowBorder: deprecate(
     PropTypes.bool,
-    'The `shouldShowBorder` prop has been deprecated.' +
+    'The `shouldShowBorder` prop has been deprecated and can be safely removed.' +
       'This prop will be removed in the next major release of ' +
       '`carbon-components-react`'
   ),
