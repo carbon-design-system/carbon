@@ -438,6 +438,7 @@ Map {
     },
   },
   "ComboBox" => Object {
+    "$$typeof": Symbol(react.forward_ref),
     "defaultProps": Object {
       "ariaLabel": "Choose an item",
       "direction": "bottom",
@@ -692,6 +693,7 @@ Map {
         "type": "node",
       },
     },
+    "render": [Function],
   },
   "ComposedModal" => Object {
     "defaultProps": Object {
