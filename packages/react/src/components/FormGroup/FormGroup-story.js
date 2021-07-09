@@ -37,16 +37,12 @@ export const _Default = () => (
     legendId="formgroup-legend-id"
     legendText="FormGroup Legend"
     style={{ maxWidth: '400px' }}>
-    <TextInput
-      id="one"
-      labelText="First Name"
-      style={{ marginBottom: '1rem' }}
-    />
-    <TextInput
-      id="two"
-      labelText="Last Name"
-      style={{ marginBottom: '1rem' }}
-    />
+    <div style={{ marginBottom: '1rem' }}>
+      <TextInput id="one" labelText="First Name" />
+    </div>
+    <div style={{ marginBottom: '1rem' }}>
+      <TextInput id="two" labelText="Last Name" />
+    </div>
 
     <RadioButtonGroup
       legendText="Radio button heading"
