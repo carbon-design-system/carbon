@@ -151,6 +151,7 @@ describe('NumberInput', () => {
               id="test"
               label="Number Input"
               className="extra-class"
+              invalidText="Number is not valid"
             />
           );
         const getNumberInput = (wrapper) => wrapper.find('input');
@@ -185,10 +186,13 @@ describe('NumberInput', () => {
           expect(numberInput.prop('value')).toEqual(1);
         });
 
-        it('should set value to equal min when value < min', () => {
+        it('should set value when value < min and set invalid state', () => {
           let wrapper = getWrapper(5, 100, 0);
           let numberInput = wrapper.find('input');
-          expect(numberInput.prop('value')).toEqual(5);
+          let invalidText = wrapper.find(`.${prefix}--form-requirement`);
+          expect(numberInput.prop('value')).toEqual(0);
+          expect(invalidText.length).toEqual(1);
+          expect(invalidText.text()).toEqual('Number is not valid');
         });
 
         it('should set value when min is undefined', () => {
@@ -238,19 +242,17 @@ describe('NumberInput', () => {
           expect(wrapper.find('NumberInput').instance().state.value).toEqual(2);
         });
 
-        it('should cap the number given to value prop', () => {
+        it('should not cap the number given to value prop', () => {
           // Enzyme doesn't seem to allow setState() in a forwardRef-wrapped class component
           wrapper.find('NumberInput').instance().setState({ value: 0 });
           wrapper.update();
           wrapper.setProps({ value: 5, min: 10, max: 20 });
           // Enzyme doesn't seem to allow state() in a forwardRef-wrapped class component
-          expect(wrapper.find('NumberInput').instance().state.value).toEqual(
-            10
-          );
+          expect(wrapper.find('NumberInput').instance().state.value).toEqual(5);
           wrapper.setProps({ value: 25, min: 10, max: 20 });
           // Enzyme doesn't seem to allow state() in a forwardRef-wrapped class component
           expect(wrapper.find('NumberInput').instance().state.value).toEqual(
-            20
+            25
           );
         });
 
