@@ -9,7 +9,6 @@ import React from 'react';
 import { default as Accordion, AccordionItem } from '../';
 import { cleanup, render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import '@testing-library/jest-dom';
 
 describe('Accordion', () => {
   afterEach(cleanup);
@@ -129,7 +128,7 @@ describe('Accordion', () => {
         skipClick: true,
       });
 
-      await expect(screen.getByText('Panel A'));
+      expect(screen.getByText('Panel A')).toBeDefined();
     });
 
     it('should open with spacebar', async () => {
@@ -153,7 +152,7 @@ describe('Accordion', () => {
         skipClick: true,
       });
 
-      await expect(screen.getByText('Panel A'));
+      expect(screen.getByText('Panel A')).toBeDefined();
     });
   });
 });

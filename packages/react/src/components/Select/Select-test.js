@@ -125,7 +125,8 @@ describe('Select', () => {
       });
     });
   });
-  describe('Renders as expected', () => {
+
+  describe('Renders select as expected', () => {
     const wrapper = mount(
       <Select id="testing" labelText="Select" className="extra-class" inline>
         <SelectItem />
@@ -145,6 +146,13 @@ describe('Select', () => {
 
 describe('refs', () => {
   let container;
+
+  afterEach(() => {
+    if (container && container.parentNode) {
+      container.parentNode.removeChild(container);
+    }
+    container = null;
+  });
 
   it('should accept refs', () => {
     class MyComponent extends React.Component {
@@ -169,13 +177,6 @@ describe('refs', () => {
     expect(document.activeElement.type).toBeUndefined();
     wrapper.instance().focus();
     expect(document.activeElement.type).toEqual('select-one');
-  });
-
-  afterEach(() => {
-    if (container && container.parentNode) {
-      container.parentNode.removeChild(container);
-    }
-    container = null;
   });
 });
 

@@ -72,7 +72,7 @@ describe('ClickListener', () => {
     const evt = new MouseEvent('click');
     document.dispatchEvent(evt);
 
-    expect(onClickOutside).toBeCalled();
+    expect(onClickOutside).toHaveBeenCalled();
   });
 
   it('should not overwrite any children function refs', () => {

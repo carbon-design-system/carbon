@@ -1545,7 +1545,7 @@
     - 32
 - name: bookmark--add
   friendly_name: Bookmark add
-  aliases: 
+  aliases:
     - flag
     - marker
     - operations
@@ -1557,7 +1557,7 @@
 - name: bookmark--filled
   friendly_name: Bookmark filled
   aliases:
-    - bookmark 
+    - bookmark
     - filled
     - operations
     - flag
@@ -1659,7 +1659,7 @@
     - 32
 - name: breaking-change
   friendly_name: Breaking change
-  aliases: 
+  aliases:
     - breaking
     - change
   sizes:
@@ -3823,28 +3823,28 @@
     - 32
 - name: connect--recursive
   friendly_name: Connect recursive
-  aliases: 
+  aliases:
     - connection
     - recursive
   sizes:
     - 32
 - name: connect--source
   friendly_name: Connect source
-  aliases: 
+  aliases:
     - connection
     - source
   sizes:
     - 32
 - name: connect--target
   friendly_name: Connect target
-  aliases: 
+  aliases:
     - connection
     - target
   sizes:
     - 32
 - name: connection--receive
   friendly_name: Connection receive
-  aliases: 
+  aliases:
     - connection
     - receive
     - incoming
@@ -3853,7 +3853,7 @@
     - 32
 - name: connection--send
   friendly_name: Connection send
-  aliases: 
+  aliases:
     - connection
     - send
     - outgoing
@@ -3862,7 +3862,7 @@
     - 32
 - name: connection--two-way
   friendly_name: Connection two-way
-  aliases: 
+  aliases:
     - connection
     - input
     - output
@@ -3943,7 +3943,7 @@
     - 32
 - name: convert-to-cloud
   friendly_name: Convert to cloud
-  aliases: 
+  aliases:
     - convert
     - push
     - send
@@ -4679,7 +4679,7 @@
     - 32
 - name: delivery--add
   friendly_name: Delivery add
-  aliases: 
+  aliases:
     - truck
     - delivery
     - transportation
@@ -6587,7 +6587,7 @@
     - folder off
 - name: folder--open
   friendly_name: Folder open
-  aliases: 
+  aliases:
     - file
     - save
     - document
@@ -6598,7 +6598,7 @@
     - 32
 - name: folder--parent
   friendly_name: Folder parent
-  aliases: 
+  aliases:
     - file
     - save
     - document
@@ -6887,7 +6887,16 @@
     - 32
 - name: glyph--caution
   friendly_name: Glyph caution
-  aliases: 
+  aliases:
+    - caution
+    - warning
+    - triangle
+    - filled
+  sizes:
+    - glyph
+- name: caution
+  friendly_name: Caution
+  aliases:
     - caution
     - warning
     - triangle
@@ -6896,17 +6905,36 @@
     - glyph
 - name: glyph--caution-inverted
   friendly_name: Glyph caution inverted
-  aliases: 
+  aliases:
     - caution
     - warning
-    - inverted 
+    - inverted
+    - triangle
+    - filled
+  sizes:
+    - glyph
+- name: caution-inverted
+  friendly_name: Caution inverted
+  aliases:
+    - caution
+    - warning
+    - inverted
     - triangle
     - filled
   sizes:
     - glyph
 - name: glyph--circle-fill
   friendly_name: Glyph circle fill
-  aliases: 
+  aliases:
+    - circle
+    - filled
+    - solid
+    - round
+  sizes:
+    - glyph
+- name: circle-fill
+  friendly_name: Circle fill
+  aliases:
     - circle
     - filled
     - solid
@@ -6915,7 +6943,16 @@
     - glyph
 - name: glyph--circle-stroke
   friendly_name: Glyph circle stroke
-  aliases: 
+  aliases:
+    - stroke
+    - circle
+    - round
+    - outlined
+  sizes:
+    - glyph
+- name: circle-stroke
+  friendly_name: Circle stroke
+  aliases:
     - stroke
     - circle
     - round
@@ -6924,7 +6961,16 @@
     - glyph
 - name: glyph--critical
   friendly_name: Glyph critical
-  aliases: 
+  aliases:
+    - critical
+    - warning
+    - caution
+    - slash
+  sizes:
+    - glyph
+- name: critical
+  friendly_name: Critical
+  aliases:
     - critical
     - warning
     - caution
@@ -6933,7 +6979,7 @@
     - glyph
 - name: glyph--incomplete
   friendly_name: Glyph incomplete
-  aliases: 
+  aliases:
     - incomplete
     - round
     - half filled
@@ -6942,7 +6988,15 @@
     - glyph
 - name: glyph--square-fill
   friendly_name: Glyph square fill
-  aliases: 
+  aliases:
+    - square
+    - filled
+    - box
+  sizes:
+    - glyph
+- name: square-fill
+  friendly_name: Square fill
+  aliases:
     - square
     - filled
     - box
@@ -6950,10 +7004,10 @@
     - glyph
 - name: glyph--undefined
   friendly_name: Glyph undefined
-  aliases: 
+  aliases:
     - square
     - filled
-    - diamond 
+    - diamond
   sizes:
     - glyph
 - name: gradient
@@ -7633,6 +7687,7 @@
     - status
   sizes:
     - 32
+    - glyph
 - name: incomplete--cancel
   friendly_name: Incomplete cancel
   aliases:
@@ -8376,7 +8431,7 @@
     - 32
 - name: lifesaver
   friendly_name: lifesaver
-  aliases: 
+  aliases:
     - life preserver
     - help
     - boating
@@ -8586,7 +8641,7 @@
     - 32
 - name: location--filled
   friendly_name: Location filled
-  aliases: 
+  aliases:
     - place
     - locate
     - gps
@@ -10859,7 +10914,7 @@
     - 32
 - name: parameter
   friendly_name: Parameter
-  aliases: 
+  aliases:
     - parameter
     - code
     - snippet
@@ -12584,7 +12639,7 @@
     - 32
 - name: scan--disabled
   friendly_name: Scan disabled
-  aliases: 
+  aliases:
     - scan
     - disabled
   sizes:
@@ -12683,7 +12738,7 @@
     - 32
 - name: search--locate
   friendly_name: Search locate
-  aliases: 
+  aliases:
     - find
     - investigate
     - explore
@@ -12717,7 +12772,7 @@
     - 32
 - name: select--window
   friendly_name: Select window
-  aliases: 
+  aliases:
     - select
     - formatting
     - window
@@ -14335,7 +14390,7 @@
     - editor
 - name: text--font
   friendly_name: Text font
-  aliases: 
+  aliases:
     - letter
     - typography
     - alphabet
@@ -14608,7 +14663,7 @@
     - 32
 - name: thumbs-down--filled
   friendly_name: Thumbs down filled
-  aliases: 
+  aliases:
     - dislike
     - hand
     - down vote
@@ -14629,7 +14684,7 @@
     - 32
 - name: thumbs-up--filled
   friendly_name: Thumbs up filled
-  aliases: 
+  aliases:
     - like
     - hand
     - up vote
@@ -14772,7 +14827,7 @@
     - device
 - name: touch--1--filled
   friendly_name: Touch 1 filled
-  aliases: 
+  aliases:
     - hand
     - tap
     - press
@@ -14784,7 +14839,7 @@
     - 32
 - name: touch--1-down
   friendly_name: Touch 1 down
-  aliases: 
+  aliases:
     - hand
     - tap
     - depress
@@ -14797,7 +14852,7 @@
     - 32
 - name: touch--1-down--filled
   friendly_name: Touch 1 down filled
-  aliases: 
+  aliases:
     - hand
     - tap
     - depress
@@ -14822,7 +14877,7 @@
     - device
 - name: touch--2--filled
   friendly_name: Touch 2 filled
-  aliases: 
+  aliases:
     - hand
     - tap
     - press
@@ -15156,6 +15211,7 @@
     - undefined
   sizes:
     - 32
+    - glyph
 - name: undefined--filled
   friendly_name: Undefined filled
   sizes:
@@ -16336,7 +16392,7 @@
     - 32
 - name: zoom--fit
   friendly_name: Zoom fit
-  aliases: 
+  aliases:
     - expand
     - inspect
     - size

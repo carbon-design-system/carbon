@@ -278,12 +278,10 @@ describe('DatePicker', () => {
 
   describe('Date picker can be used with enzyme shallow', () => {
     let spy;
-    beforeEach((done) => {
+
+    beforeEach(() => {
       spy = {};
-      spy.console = jest.spyOn(console, 'error').mockImplementation((e) => {
-        done(e);
-      });
-      done();
+      spy.console = jest.spyOn(console, 'error').mockImplementation(() => {});
     });
 
     afterEach(() => {
@@ -352,7 +350,7 @@ describe('DatePicker', () => {
     });
 
     it('should not have "console.error" being created', () => {
-      expect(mockConsoleError).not.toBeCalled();
+      expect(mockConsoleError).not.toHaveBeenCalled();
     });
   });
 });

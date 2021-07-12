@@ -82,15 +82,17 @@ describe('Loading', () => {
       expect(wrapper.find(Loading).length).toEqual(0);
     });
 
-    it('should call the onSuccess function after a delay', (done) => {
-      mount(
-        <InlineLoading
-          status="finished"
-          onSuccess={() => {
-            done();
-          }}
-        />
-      );
+    it('should call the onSuccess function after a delay', () => {
+      jest.useFakeTimers();
+
+      const onSuccess = jest.fn();
+
+      mount(<InlineLoading status="finished" onSuccess={onSuccess} />);
+
+      jest.runAllTimers();
+      expect(onSuccess).toHaveBeenCalled();
+
+      jest.useRealTimers();
     });
   });
 });
