@@ -17,7 +17,7 @@ function deprecateFieldOnObject(object, field, Component, message) {
           false,
           message ||
             `The ${field} field has been deprecated on the ${object.displayName} object. ` +
-              `Please import and use ${field} directly.`
+              `Please import and use ${Component.displayName} directly.`
         );
         didWarnAboutDeprecation[field] = true;
       }
