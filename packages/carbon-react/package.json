@@ -85,7 +85,7 @@
     "sass": "^1.32.12",
     "sass-loader": "10",
     "style-loader": "^2.0.0",
-    "webpack": "^4.41.5"
+    "webpack": "^5.44.0"
   },
   "sideEffects": [
     "es/feature-flags.js",
