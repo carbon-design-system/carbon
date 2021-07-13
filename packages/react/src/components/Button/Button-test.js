@@ -14,7 +14,6 @@ import { shallow, mount } from 'enzyme';
 import { settings } from 'carbon-components';
 import { cleanup, render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import '@testing-library/jest-dom';
 
 const { prefix } = settings;
 
@@ -372,6 +371,24 @@ describe('ButtonSkeleton', () => {
     it('has the expected classes', () => {
       expect(wrapper.hasClass(`${prefix}--skeleton`)).toEqual(true);
       expect(wrapper.hasClass(`${prefix}--btn`)).toEqual(true);
+    });
+
+    const wrapperMd = shallow(<ButtonSkeleton size="md" />);
+
+    it('renders the medium size', () => {
+      expect(wrapperMd.hasClass(`${prefix}--btn--md`)).toEqual(true);
+    });
+
+    const wrapperLg = shallow(<ButtonSkeleton size="lg" />);
+
+    it('renders the large size', () => {
+      expect(wrapperLg.hasClass(`${prefix}--btn--lg`)).toEqual(true);
+    });
+
+    const wrapperXl = shallow(<ButtonSkeleton size="xl" />);
+
+    it('renders the extra-large size', () => {
+      expect(wrapperXl.hasClass(`${prefix}--btn--xl`)).toEqual(true);
     });
   });
 

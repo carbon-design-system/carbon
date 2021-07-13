@@ -1,0 +1,878 @@
+//
+// Copyright IBM Corp. 2016, 2018
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+//-----------------------------
+// Tabs
+//-----------------------------
+
+@use 'vars' as *;
+
+@use '../../config' as *;
+@use '../../theme' as *;
+@use '../../colors' as *;
+@use '../../type' as *;
+@use '../../breakpoint' as *;
+@use '../../spacing' as *;
+@use '../../motion' as *;
+@use '../button/tokens' as button;
+@use '../../utilities/focus-outline' as *;
+@use '../../utilities/rotate' as *;
+@use '../../utilities/box-shadow' as *;
+@use '../../utilities/component-tokens' as *;
+@use '../../utilities/skeleton' as *;
+@use '../../utilities/visually-hidden' as *;
+@use '../../utilities/button-reset';
+@use '../../utilities/high-contrast-mode' as *;
+@use '../../utilities/convert' as *;
+
+/// Tabs styles
+/// @access public
+/// @group tabs
+@mixin tabs {
+  .#{$prefix}--tabs {
+    @include reset;
+    @include type-style('body-short-01');
+
+    position: relative;
+    width: 100%;
+    height: auto;
+    color: $text-primary;
+    @include breakpoint(md) {
+      min-height: rem(40px);
+      background: none;
+    }
+  }
+
+  .#{$prefix}--tabs--container {
+    @include breakpoint(md) {
+      min-height: rem(48px);
+    }
+  }
+
+  .#{$prefix}--tabs-trigger {
+    display: flex;
+    height: rem(40px);
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 $spacing-09 0 $spacing-05;
+    border-bottom: 1px solid $border-strong;
+    background-color: $layer;
+    color: $text-primary;
+    cursor: pointer;
+    outline: 2px solid transparent;
+
+    @include breakpoint(md) {
+      display: none;
+    }
+  }
+
+  .#{$prefix}--tabs-trigger:focus,
+  .#{$prefix}--tabs-trigger:active {
+    @include focus-outline('outline');
+  }
+
+  .#{$prefix}--tabs-trigger svg {
+    position: absolute;
+    right: $spacing-05;
+    fill: $border-inverse;
+    transition: transform $duration-fast-01 motion(standard, productive);
+  }
+
+  .#{$prefix}--tabs-trigger--open:focus,
+  .#{$prefix}--tabs-trigger--open:active {
+    @include focus-outline('reset');
+
+    transition: outline $duration-fast-01 motion(standard, productive);
+  }
+
+  .#{$prefix}--tabs-trigger--open {
+    background: $layer-accent;
+  }
+
+  .#{$prefix}--tabs-trigger--open svg {
+    @include rotate(-180deg, $duration-fast-01, 50% 45%);
+  }
+
+  // There is only a difference in tab color when in mobile/dropdown view
+  .#{$prefix}--tabs--light.#{$prefix}--tabs-trigger {
+    background-color: $field-02;
+  }
+
+  .#{$prefix}--tabs-trigger-text {
+    overflow: hidden;
+    padding-top: 2px;
+    color: $text-primary;
+    font-weight: 400;
+    text-decoration: none;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .#{$prefix}--tabs-trigger-text:hover {
+    color: $text-primary;
+  }
+
+  .#{$prefix}--tabs-trigger-text:focus {
+    outline: none;
+  }
+
+  .#{$prefix}--tabs__nav {
+    @include box-shadow;
+
+    position: absolute;
+    z-index: z('dropdown');
+    display: flex;
+    width: 100%;
+    max-height: 600px;
+    flex-direction: column;
+    padding: 0;
+    margin: 0;
+    background: $layer;
+    list-style: none;
+    transition: max-height $duration-fast-01 motion(standard, productive);
+
+    @include breakpoint(md) {
+      z-index: auto;
+      width: auto;
+      flex-direction: row;
+      background: none;
+      box-shadow: none;
+      transition: inherit;
+    }
+  }
+
+  .#{$prefix}--tabs__nav--hidden {
+    overflow: hidden;
+    max-height: 0;
+    transition: max-height $duration-fast-01 motion(standard, productive);
+
+    @include breakpoint(md) {
+      display: flex;
+      max-width: 100%;
+      max-height: none;
+      overflow-x: auto;
+      transition: inherit;
+    }
+  }
+
+  //-----------------------------
+  // Item
+  //-----------------------------
+  .#{$prefix}--tabs__nav-item {
+    @include reset;
+
+    display: flex;
+    width: 100%;
+    height: rem(40px);
+    padding: 0;
+    background-color: $layer;
+    cursor: pointer;
+    transition: background-color $duration-fast-01 motion(standard, productive);
+
+    @include breakpoint(md) {
+      height: auto;
+      background: transparent;
+
+      + .#{$prefix}--tabs__nav-item {
+        margin-left: rem(1px);
+      }
+    }
+  }
+
+  .#{$prefix}--tabs--container .#{$prefix}--tabs__nav-item {
+    @include breakpoint(md) {
+      background-color: $layer-accent;
+
+      + .#{$prefix}--tabs__nav-item {
+        margin-left: 0;
+        // Draws the border without affecting the inner-content
+        box-shadow: -1px 0 0 0 $border-strong;
+      }
+
+      + .#{$prefix}--tabs__nav-item.#{$prefix}--tabs__nav-item--selected,
+      &.#{$prefix}--tabs__nav-item--selected + .#{$prefix}--tabs__nav-item {
+        box-shadow: none;
+      }
+    }
+  }
+
+  .#{$prefix}--tabs__nav-item .#{$prefix}--tabs__nav-link {
+    transition: color $duration-fast-01 motion(standard, productive),
+      border-bottom-color $duration-fast-01 motion(standard, productive),
+      outline $duration-fast-01 motion(standard, productive);
+  }
+
+  //-----------------------------
+  // Item Hover
+  //-----------------------------
+  .#{$prefix}--tabs__nav-item:hover:not(.#{$prefix}--tabs__nav-item--selected) {
+    @include breakpoint(md) {
+      background: transparent;
+    }
+  }
+
+  .#{$prefix}--tabs__nav-item:hover:not(.#{$prefix}--tabs__nav-item--disabled) {
+    background-color: $layer-hover;
+    box-shadow: 0 -1px 0 $layer-hover;
+
+    @include breakpoint(md) {
+      background-color: transparent;
+
+      + .#{$prefix}--tabs__nav-item {
+        box-shadow: none;
+      }
+    }
+  }
+
+  .#{$prefix}--tabs--container
+    .#{$prefix}--tabs__nav-item:hover:not(.#{$prefix}--tabs__nav-item--disabled) {
+    @include breakpoint(md) {
+      background-color: $layer-selected-hover;
+    }
+  }
+
+  //---------------------------------------------
+  // Item Disabled
+  //---------------------------------------------
+  .#{$prefix}--tabs__nav-item--disabled,
+  .#{$prefix}--tabs__nav-item--disabled:hover {
+    cursor: not-allowed;
+    outline: none;
+  }
+
+  .#{$prefix}--tabs--container
+    .#{$prefix}--tabs__nav-item.#{$prefix}--tabs__nav-item--disabled,
+  .#{$prefix}--tabs--container
+    .#{$prefix}--tabs__nav-item.#{$prefix}--tabs__nav-item--disabled:hover {
+    @include breakpoint(md) {
+      background-color: button.$button-disabled;
+    }
+  }
+
+  .#{$prefix}--tabs--container
+    .#{$prefix}--tabs__nav-item--disabled
+    .#{$prefix}--tabs__nav-link {
+    @include breakpoint(md) {
+      border-bottom: none;
+      color: $text-on-color-disabled;
+    }
+  }
+
+  //-----------------------------
+  // Item Selected
+  //-----------------------------
+  .#{$prefix}--tabs__nav-item--selected:not(.#{$prefix}--tabs__nav-item--disabled) {
+    display: none;
+    border: none;
+    transition: color $duration-fast-01 motion(standard, productive);
+
+    @include breakpoint(md) {
+      display: flex;
+      .#{$prefix}--tabs__nav-link,
+      .#{$prefix}--tabs__nav-link:focus,
+      .#{$prefix}--tabs__nav-link:active {
+        @include type-style('productive-heading-01');
+
+        border-bottom: 2px solid $border-interactive;
+        color: $text-primary;
+      }
+    }
+  }
+
+  .#{$prefix}--tabs--container
+    .#{$prefix}--tabs__nav-item--selected:not(.#{$prefix}--tabs__nav-item--disabled),
+  .#{$prefix}--tabs--container
+    .#{$prefix}--tabs__nav-item--selected:hover:not(.#{$prefix}--tabs__nav-item--disabled) {
+    @include breakpoint(md) {
+      background-color: $layer;
+
+      .#{$prefix}--tabs__nav-link {
+        padding: $spacing-03 $spacing-05;
+        border-bottom: none;
+        box-shadow: inset 0 2px 0 0 $border-interactive;
+        // height - vertical padding
+        // Draws the border without affecting the inner-content
+        line-height: calc(#{rem(48px)} - (#{$spacing-03} * 2));
+      }
+
+      .#{$prefix}--tabs__nav-link:focus,
+      .#{$prefix}--tabs__nav-link:active {
+        box-shadow: none;
+      }
+    }
+  }
+
+  //-----------------------------
+  // Link
+  //-----------------------------
+  a.#{$prefix}--tabs__nav-link {
+    @include focus-outline('reset');
+
+    display: inline-block;
+    overflow: hidden;
+    width: calc(100% - 32px);
+    height: rem(40px);
+    padding: $spacing-04 0;
+    border-bottom: 1px solid $border-subtle;
+    margin: 0 $spacing-05;
+    color: $text-secondary;
+    font-weight: 400;
+    line-height: 1rem;
+    text-decoration: none;
+    text-overflow: ellipsis;
+    transition: border $duration-fast-01 motion(standard, productive),
+      outline $duration-fast-01 motion(standard, productive);
+    white-space: nowrap;
+
+    &:focus,
+    &:active {
+      @include focus-outline('outline');
+
+      width: 100%;
+      padding-left: 16px;
+      margin: 0;
+    }
+
+    @include breakpoint(md) {
+      width: rem(160px);
+      padding: $spacing-04 $spacing-05 $spacing-03;
+      border-bottom: $tab-underline-color;
+      margin: 0;
+      line-height: inherit;
+
+      &:focus,
+      &:active {
+        width: rem(160px);
+        border-bottom: 2px;
+      }
+    }
+  }
+
+  .#{$prefix}--tabs--container a.#{$prefix}--tabs__nav-link {
+    @include breakpoint(md) {
+      height: rem(48px);
+      padding: $spacing-03 $spacing-05;
+      border-bottom: none;
+      // Height - vertical padding
+      line-height: calc(#{rem(48px)} - (#{$spacing-03} * 2));
+    }
+  }
+
+  //-----------------------------
+  //  Link Hover
+  //-----------------------------
+  .#{$prefix}--tabs__nav-item:hover:not(.#{$prefix}--tabs__nav-item--selected):not(.#{$prefix}--tabs__nav-item--disabled)
+    .#{$prefix}--tabs__nav-link {
+    color: $text-primary;
+    @include breakpoint(md) {
+      border-bottom: $tab-underline-color-hover;
+      color: $text-primary;
+    }
+  }
+
+  .#{$prefix}--tabs--container
+    .#{$prefix}--tabs__nav-item:hover:not(.#{$prefix}--tabs__nav-item--selected):not(.#{$prefix}--tabs__nav-item--disabled)
+    .#{$prefix}--tabs__nav-link {
+    @include breakpoint(md) {
+      border-bottom: none;
+    }
+  }
+
+  //-----------------------------
+  //  Link Disabled
+  //-----------------------------
+  .#{$prefix}--tabs__nav-item--disabled .#{$prefix}--tabs__nav-link {
+    border-bottom: $tab-underline-disabled;
+    color: $tab-text-disabled;
+    pointer-events: none;
+  }
+
+  .#{$prefix}--tabs__nav-item--disabled:hover .#{$prefix}--tabs__nav-link {
+    border-bottom: $tab-underline-disabled;
+    cursor: no-drop;
+  }
+
+  .#{$prefix}--tabs__nav-item--disabled .#{$prefix}--tabs__nav-link:focus,
+  .#{$prefix}--tabs__nav-item--disabled a.#{$prefix}--tabs__nav-link:active {
+    border-bottom: $tab-underline-disabled;
+    outline: none;
+  }
+
+  //-----------------------------
+  //  Link Focus
+  //-----------------------------
+  .#{$prefix}--tabs__nav-item:not(.#{$prefix}--tabs__nav-item--selected):not(.#{$prefix}--tabs__nav-item--disabled):not(.#{$prefix}--tabs__nav-item--selected)
+    .#{$prefix}--tabs__nav-link:focus,
+  .#{$prefix}--tabs__nav-item:not(.#{$prefix}--tabs__nav-item--selected):not(.#{$prefix}--tabs__nav-item--disabled):not(.#{$prefix}--tabs__nav-item--selected)
+    a.#{$prefix}--tabs__nav-link:active {
+    color: $text-secondary;
+  }
+
+  //-----------------------------
+  //  Tab Content Container
+  //-----------------------------
+  .#{$prefix}--tab-content {
+    padding: $spacing-05;
+
+    &:focus {
+      @include focus-outline('outline');
+    }
+  }
+
+  //-----------------------------
+  // Skeleton state
+  //-----------------------------
+  .#{$prefix}--tabs.#{$prefix}--skeleton {
+    cursor: default;
+    pointer-events: none;
+  }
+
+  .#{$prefix}--skeleton.#{$prefix}--tabs--scrollable:not(.#{$prefix}--tabs--scrollable--container)
+    .#{$prefix}--tabs--scrollable__nav-item {
+    border-bottom: 2px solid $skeleton-element;
+  }
+
+  .#{$prefix}--tabs.#{$prefix}--skeleton .#{$prefix}--tabs__nav-link {
+    display: flex;
+    width: 10rem;
+    height: 100%;
+    align-items: center;
+    padding: 0 1rem;
+  }
+
+  .#{$prefix}--tabs.#{$prefix}--skeleton .#{$prefix}--tabs__nav-link span {
+    @include skeleton;
+
+    display: block;
+    width: 100%;
+    height: rem(14px);
+  }
+
+  .#{$prefix}--tabs.#{$prefix}--skeleton .#{$prefix}--tabs-trigger {
+    @include skeleton;
+
+    width: rem(100px);
+  }
+
+  .#{$prefix}--tabs.#{$prefix}--skeleton .#{$prefix}--tabs-trigger svg {
+    @include visually-hidden;
+  }
+
+  // TODO: remove namespace and suffix in next major release
+  .#{$prefix}--tabs--scrollable {
+    @include reset;
+    @include type-style('body-short-01');
+
+    display: flex;
+    width: 100%;
+    height: auto;
+    min-height: rem(40px);
+    color: $text-primary;
+
+    &.#{$prefix}--tabs--scrollable--container {
+      min-height: rem(48px);
+    }
+
+    .#{$prefix}--tabs--scrollable__nav {
+      display: flex;
+      overflow: auto hidden;
+      width: auto;
+      max-width: 100%;
+      flex-direction: row;
+      padding: 0;
+      margin: 0;
+      list-style: none;
+      outline: 0;
+      // hide scrollbars
+      scrollbar-width: none;
+      transition: max-height $duration-fast-01 motion(standard, productive);
+
+      &::-webkit-scrollbar {
+        display: none;
+      }
+    }
+
+    //-----------------------------
+    // Overflow Nav Buttons
+    //-----------------------------
+    .#{$prefix}--tabs__overflow-indicator--left,
+    .#{$prefix}--tabs__overflow-indicator--right {
+      z-index: 1;
+      width: $spacing-03;
+      flex: 1 0 auto;
+    }
+
+    .#{$prefix}--tabs__overflow-indicator--left {
+      margin-right: -$spacing-03;
+      background-image: linear-gradient(to left, transparent, $background);
+    }
+
+    .#{$prefix}--tabs__overflow-indicator--right {
+      margin-left: -$spacing-03;
+      background-image: linear-gradient(to right, transparent, $background);
+    }
+
+    .#{$prefix}--tabs--scrollable--light
+      .#{$prefix}--tabs__overflow-indicator--left {
+      background-image: linear-gradient(to left, transparent, $layer);
+    }
+
+    .#{$prefix}--tabs--scrollable--light
+      .#{$prefix}--tabs__overflow-indicator--right {
+      background-image: linear-gradient(to right, transparent, $layer);
+    }
+
+    &.#{$prefix}--tabs--scrollable--container
+      .#{$prefix}--tabs__overflow-indicator--left {
+      background-image: linear-gradient(to left, transparent, $layer-accent);
+    }
+
+    &.#{$prefix}--tabs--scrollable--container
+      .#{$prefix}--tabs__overflow-indicator--right {
+      background-image: linear-gradient(to right, transparent, $layer-accent);
+    }
+
+    // Safari-only media query
+    // won't appear correctly with CSS custom properties
+    // see: code snippet and modal overflow indicators
+    @media not all and (min-resolution: 0.001dpcm) {
+      @supports (-webkit-appearance: none) and (stroke-color: transparent) {
+        .#{$prefix}--tabs__overflow-indicator--left {
+          background-image: linear-gradient(
+            to left,
+            rgba($background, 0),
+            $background
+          );
+        }
+
+        .#{$prefix}--tabs__overflow-indicator--right {
+          background-image: linear-gradient(
+            to right,
+            rgba($background, 0),
+            $background
+          );
+        }
+
+        &.#{$prefix}--tabs--scrollable--container
+          .#{$prefix}--tabs__overflow-indicator--left {
+          background-image: linear-gradient(
+            to left,
+            rgba($layer-accent, 0),
+            $layer-accent
+          );
+        }
+
+        &.#{$prefix}--tabs--scrollable--container
+          .#{$prefix}--tabs__overflow-indicator--right {
+          background-image: linear-gradient(
+            to right,
+            rgba($layer-accent, 0),
+            $layer-accent
+          );
+        }
+      }
+    }
+
+    .#{$prefix}--tab--overflow-nav-button {
+      @include button-reset.reset;
+
+      display: flex;
+      width: $spacing-08;
+      flex-shrink: 0;
+      align-items: center;
+      justify-content: center;
+
+      &:focus {
+        @include focus-outline('outline');
+      }
+    }
+
+    .#{$prefix}--tab--overflow-nav-button--hidden {
+      display: none;
+    }
+
+    &.#{$prefix}--tabs--scrollable--container
+      .#{$prefix}--tab--overflow-nav-button {
+      width: $spacing-09;
+      margin: 0;
+      background-color: $layer-accent;
+    }
+
+    .#{$prefix}--tab--overflow-nav-button svg {
+      fill: $icon-primary;
+    }
+
+    //-----------------------------
+    // Item
+    //-----------------------------
+    .#{$prefix}--tabs--scrollable__nav-item {
+      @include reset;
+
+      display: flex;
+      padding: 0;
+      cursor: pointer;
+      transition: background-color $duration-fast-01
+        motion(standard, productive);
+    }
+
+    .#{$prefix}--tabs--scrollable__nav-item
+      + .#{$prefix}--tabs--scrollable__nav-item {
+      margin-left: rem(1px);
+    }
+
+    &.#{$prefix}--tabs--scrollable--container
+      .#{$prefix}--tabs--scrollable__nav-item {
+      background-color: $layer-accent;
+    }
+
+    &.#{$prefix}--tabs--scrollable--container
+      .#{$prefix}--tabs--scrollable__nav-item
+      + .#{$prefix}--tabs--scrollable__nav-item {
+      margin-left: 0;
+      // Draws the border without affecting the inner-content
+      box-shadow: rem(-1px) 0 0 0 $border-strong;
+    }
+
+    &.#{$prefix}--tabs--scrollable--container
+      .#{$prefix}--tabs--scrollable__nav-item
+      + .#{$prefix}--tabs--scrollable__nav-item.#{$prefix}--tabs--scrollable__nav-item--selected,
+    &.#{$prefix}--tabs--scrollable--container
+      .#{$prefix}--tabs--scrollable__nav-item.#{$prefix}--tabs--scrollable__nav-item--selected
+      + .#{$prefix}--tabs--scrollable__nav-item {
+      box-shadow: none;
+    }
+
+    .#{$prefix}--tabs--scrollable__nav-item
+      .#{$prefix}--tabs--scrollable__nav-link {
+      transition: color $duration-fast-01 motion(standard, productive),
+        border-bottom-color $duration-fast-01 motion(standard, productive),
+        outline $duration-fast-01 motion(standard, productive);
+    }
+
+    //-----------------------------
+    // Item Hover
+    //-----------------------------
+    &.#{$prefix}--tabs--scrollable--container
+      .#{$prefix}--tabs--scrollable__nav-item:hover {
+      background-color: $layer-selected-hover;
+    }
+
+    //---------------------------------------------
+    // Item Disabled
+    //---------------------------------------------
+    .#{$prefix}--tabs--scrollable__nav-item--disabled,
+    .#{$prefix}--tabs--scrollable__nav-item--disabled:hover {
+      background-color: transparent;
+      cursor: not-allowed;
+      outline: none;
+    }
+
+    &.#{$prefix}--tabs--scrollable--container
+      .#{$prefix}--tabs--scrollable__nav-item.#{$prefix}--tabs--scrollable__nav-item--disabled,
+    &.#{$prefix}--tabs--scrollable--container
+      .#{$prefix}--tabs--scrollable__nav-item.#{$prefix}--tabs--scrollable__nav-item--disabled:hover {
+      background-color: button.$button-disabled;
+    }
+
+    //-----------------------------
+    // Item Selected
+    //-----------------------------
+    .#{$prefix}--tabs--scrollable__nav-item--selected {
+      transition: color $duration-fast-01 motion(standard, productive);
+    }
+
+    .#{$prefix}--tabs--scrollable__nav-item--selected
+      .#{$prefix}--tabs--scrollable__nav-link,
+    .#{$prefix}--tabs--scrollable__nav-item--selected
+      .#{$prefix}--tabs--scrollable__nav-link:focus,
+    .#{$prefix}--tabs--scrollable__nav-item--selected
+      .#{$prefix}--tabs--scrollable__nav-link:active {
+      @include type-style('productive-heading-01');
+
+      border-bottom: 2px solid $border-interactive;
+      color: $text-primary;
+    }
+
+    &.#{$prefix}--tabs--scrollable--container
+      .#{$prefix}--tabs--scrollable__nav-item--selected,
+    &.#{$prefix}--tabs--scrollable--container
+      .#{$prefix}--tabs--scrollable__nav-item--selected:hover {
+      background-color: $layer;
+
+      .#{$prefix}--tabs--scrollable__nav-link:focus,
+      .#{$prefix}--tabs--scrollable__nav-link:active {
+        box-shadow: none;
+      }
+    }
+
+    &.#{$prefix}--tabs--scrollable--container
+      .#{$prefix}--tabs--scrollable__nav-item--selected
+      .#{$prefix}--tabs--scrollable__nav-link {
+      // Draws the border without affecting the inner-content
+      box-shadow: inset 0 2px 0 0 $border-interactive;
+      // height - vertical padding
+      line-height: calc(#{rem(48px)} - (#{$spacing-03} * 2));
+    }
+
+    &.#{$prefix}--tabs--scrollable--light.#{$prefix}--tabs--scrollable--container
+      .#{$prefix}--tabs--scrollable__nav-item--selected,
+    &.#{$prefix}--tabs--scrollable--light.#{$prefix}--tabs--scrollable--container
+      .#{$prefix}--tabs--scrollable__nav-item--selected:hover {
+      background-color: $background;
+    }
+
+    //-----------------------------
+    // Link
+    //-----------------------------
+    .#{$prefix}--tabs--scrollable__nav-link {
+      @include button-reset.reset($width: false);
+      @include focus-outline('reset');
+      @include type-style('body-short-01');
+
+      overflow: hidden;
+      width: rem(160px);
+      padding: $spacing-04 $spacing-05 $spacing-03;
+      border-bottom: $tab-underline-color;
+      color: $text-secondary;
+      text-align: left;
+      text-decoration: none;
+      text-overflow: ellipsis;
+      transition: border $duration-fast-01 motion(standard, productive),
+        outline $duration-fast-01 motion(standard, productive);
+      white-space: nowrap;
+
+      &:focus,
+      &:active {
+        @include focus-outline('outline');
+      }
+    }
+
+    &.#{$prefix}--tabs--scrollable--container
+      .#{$prefix}--tabs--scrollable__nav-link {
+      height: rem(48px);
+      padding: $spacing-03 $spacing-05;
+      border-bottom: 0;
+      // height - vertical padding
+      line-height: calc(#{rem(48px)} - (#{$spacing-03} * 2));
+    }
+
+    //-----------------------------
+    //  Link Hover
+    //-----------------------------
+    .#{$prefix}--tabs--scrollable__nav-item:hover
+      .#{$prefix}--tabs--scrollable__nav-link {
+      border-bottom: $tab-underline-color-hover;
+      color: $text-primary;
+    }
+
+    &.#{$prefix}--tabs--scrollable--container
+      .#{$prefix}--tabs--scrollable__nav-item
+      .#{$prefix}--tabs--scrollable__nav-link {
+      border-bottom: none;
+    }
+
+    //-----------------------------
+    //  Link Disabled
+    //-----------------------------
+    .#{$prefix}--tabs--scrollable__nav-item--disabled
+      .#{$prefix}--tabs--scrollable__nav-link {
+      border-bottom: $tab-underline-disabled;
+      color: $tab-text-disabled;
+    }
+
+    .#{$prefix}--tabs--scrollable__nav-item--disabled:hover
+      .#{$prefix}--tabs--scrollable__nav-link {
+      border-bottom: $tab-underline-disabled;
+      color: $tab-text-disabled;
+      cursor: not-allowed;
+      pointer-events: none;
+    }
+
+    .#{$prefix}--tabs--scrollable__nav-item--disabled
+      .#{$prefix}--tabs--scrollable__nav-link:focus,
+    .#{$prefix}--tabs--scrollable__nav-item--disabled
+      .#{$prefix}--tabs--scrollable__nav-link:active {
+      border-bottom: $tab-underline-disabled;
+      outline: none;
+    }
+
+    .#{$prefix}--tabs--scrollable--light
+      .#{$prefix}--tabs--scrollable__nav-item--disabled
+      .#{$prefix}--tabs--scrollable__nav-link {
+      border-bottom-color: $border-subtle;
+    }
+
+    .#{$prefix}--tabs--scrollable--light
+      .#{$prefix}--tabs--scrollable__nav-item--disabled:hover
+      .#{$prefix}--tabs--scrollable__nav-link {
+      border-bottom-color: $border-subtle;
+    }
+
+    .#{$prefix}--tabs--scrollable--light
+      .#{$prefix}--tabs--scrollable__nav-item--disabled
+      .#{$prefix}--tabs--scrollable__nav-link:focus,
+    .#{$prefix}--tabs--scrollable--light
+      .#{$prefix}--tabs--scrollable__nav-item--disabled
+      .#{$prefix}--tabs--scrollable__nav-link:active {
+      border-bottom-color: $border-subtle;
+    }
+
+    &.#{$prefix}--tabs--scrollable--container
+      .#{$prefix}--tabs--scrollable__nav-item--disabled
+      .#{$prefix}--tabs--scrollable__nav-link {
+      border-bottom: none;
+      color: $text-on-color-disabled;
+    }
+
+    //-----------------------------
+    //  Tab Content Container
+    //-----------------------------
+    .#{$prefix}--tab-content {
+      padding: $spacing-05;
+    }
+
+    //-----------------------------
+    // Skeleton state
+    //-----------------------------
+    .#{$prefix}--tabs.#{$prefix}--skeleton {
+      cursor: default;
+      pointer-events: none;
+    }
+
+    .#{$prefix}--tabs.#{$prefix}--skeleton
+      .#{$prefix}--tabs--scrollable__nav-link {
+      @include skeleton;
+
+      width: rem(75px);
+    }
+
+    .#{$prefix}--tabs.#{$prefix}--skeleton .#{$prefix}--tabs-trigger {
+      @include skeleton;
+
+      width: rem(75px);
+      margin-right: rem(1px);
+    }
+
+    .#{$prefix}--tabs.#{$prefix}--skeleton .#{$prefix}--tabs-trigger svg {
+      @include visually-hidden;
+    }
+  }
+
+  // Windows HCM fix
+  .#{$prefix}--tabs--scrollable__nav-item
+    .#{$prefix}--tabs__nav-item--selected
+    .#{$prefix}--tabs--scrollable__nav-item--selected {
+    @include high-contrast-mode('focus');
+  }
+
+  // stylelint-disable-next-line no-duplicate-selectors
+  .#{$prefix}--tabs--scrollable
+    .#{$prefix}--tabs--scrollable__nav-item--disabled
+    .#{$prefix}--tabs--scrollable__nav-link {
+    @include high-contrast-mode('disabled');
+  }
+}

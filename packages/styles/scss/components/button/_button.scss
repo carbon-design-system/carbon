@@ -17,6 +17,7 @@
 @use '../../utilities/skeleton' as *;
 @use '../../utilities/tooltip' as *;
 @use '../../utilities/visually-hidden' as *;
+@use 'tokens' as *;
 
 @mixin button {
   .#{$prefix}--btn {

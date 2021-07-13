@@ -10,6 +10,7 @@
 @use '../../motion' as *;
 @use '../../config' as *;
 @use '../../spacing' as *;
+@use '../button/tokens' as button;
 @use '../../utilities/focus-outline' as *;
 @use '../../utilities/component-reset' as *;
 @use '../../utilities/visually-hidden' as *;
@@ -353,7 +354,7 @@
     &:focus {
       @include focus-outline('border');
 
-      fill: $button-primary-hover;
+      fill: button.$button-primary-hover;
     }
   }
 

@@ -9,7 +9,6 @@ import React from 'react';
 import { default as Accordion, AccordionItem } from '../';
 import { cleanup, render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import '@testing-library/jest-dom';
 
 describe('Accordion', () => {
   afterEach(cleanup);
