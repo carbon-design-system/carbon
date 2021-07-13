@@ -1,0 +1,177 @@
+//
+// Copyright IBM Corp. 2016, 2018
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+@use '../../config' as *;
+@use '../../motion' as *;
+@use '../../spacing' as *;
+@use '../../theme' as *;
+@use '../../type' as *;
+@use '../../utilities/convert' as *;
+@use '../../utilities/focus-outline' as *;
+@use "../../utilities/skeleton" as *;
+
+/// Treeview styles
+/// @access public
+/// @group treeview
+@mixin treeview {
+  .#{$prefix}--tree {
+    overflow: hidden;
+
+    .#{$prefix}--tree-node {
+      padding-left: $spacing-05;
+      background-color: $ui-01;
+      color: $text-02;
+
+      &:focus {
+        outline: none;
+      }
+    }
+
+    .#{$prefix}--tree-node:focus > .#{$prefix}--tree-node__label {
+      @include focus-outline('outline');
+    }
+
+    .#{$prefix}--tree-node--disabled:focus > .#{$prefix}--tree-node__label {
+      outline: none;
+    }
+
+    .#{$prefix}--tree-node--disabled,
+    .#{$prefix}--tree-node--disabled .#{$prefix}--tree-node__label:hover,
+    .#{$prefix}--tree-node--disabled
+      .#{$prefix}--tree-node__label:hover
+      .#{$prefix}--tree-node__label__details {
+      background-color: $disabled-01;
+      color: $disabled-02;
+    }
+
+    .#{$prefix}--tree-node--disabled .#{$prefix}--tree-parent-node__toggle-icon,
+    .#{$prefix}--tree-node--disabled .#{$prefix}--tree-node__icon,
+    .#{$prefix}--tree-node--disabled
+      .#{$prefix}--tree-node__label:hover
+      .#{$prefix}--tree-parent-node__toggle-icon,
+    .#{$prefix}--tree-node--disabled
+      .#{$prefix}--tree-node__label:hover
+      .#{$prefix}--tree-node__icon {
+      fill: $disabled-02;
+    }
+
+    .#{$prefix}--tree-node--disabled,
+    .#{$prefix}--tree-node--disabled
+      .#{$prefix}--tree-parent-node__toggle-icon:hover {
+      cursor: not-allowed;
+    }
+
+    .#{$prefix}--tree-node__label {
+      @include type-style('body-short-01');
+
+      display: flex;
+      min-height: rem(32px);
+      flex: 1;
+      align-items: center;
+
+      &:hover {
+        background-color: $hover-ui;
+        color: $text-01;
+      }
+    }
+
+    .#{$prefix}--tree-node__label:hover .#{$prefix}--tree-node__label__details {
+      color: $text-01;
+    }
+
+    .#{$prefix}--tree-node__label:hover
+      .#{$prefix}--tree-parent-node__toggle-icon,
+    .#{$prefix}--tree-node__label:hover .#{$prefix}--tree-node__icon {
+      fill: $icon-01;
+    }
+
+    .#{$prefix}--tree-leaf-node {
+      display: flex;
+      padding-left: $spacing-08;
+    }
+
+    .#{$prefix}--tree-leaf-node.#{$prefix}--tree-node--with-icon {
+      padding-left: $spacing-07;
+    }
+
+    .#{$prefix}--tree-node__label__details {
+      display: flex;
+      align-items: center;
+    }
+
+    .#{$prefix}--tree-node--with-icon .#{$prefix}--tree-parent-node__toggle {
+      margin-right: 0;
+    }
+
+    .#{$prefix}--tree-parent-node__toggle {
+      padding: 0;
+      border: 0;
+      margin-right: $spacing-03;
+
+      &:hover {
+        cursor: pointer;
+      }
+
+      &:focus {
+        outline: none;
+      }
+    }
+
+    .#{$prefix}--tree-parent-node__toggle-icon {
+      fill: $icon-02;
+      transform: rotate(-90deg);
+      transition: all $duration-fast-02 motion(standard, productive);
+    }
+
+    .#{$prefix}--tree-parent-node__toggle-icon--expanded {
+      transform: rotate(0);
+    }
+
+    .#{$prefix}--tree-node__icon {
+      min-width: 1rem;
+      min-height: 1rem;
+      margin-right: $spacing-03;
+      fill: $icon-02;
+    }
+
+    .#{$prefix}--tree-node--selected > .#{$prefix}--tree-node__label {
+      background-color: $selected-ui;
+      color: $text-01;
+
+      &:hover {
+        background-color: $hover-selected-ui;
+      }
+    }
+
+    .#{$prefix}--tree-node--selected
+      > .#{$prefix}--tree-node__label
+      .#{$prefix}--tree-parent-node__toggle-icon,
+    .#{$prefix}--tree-node--selected
+      > .#{$prefix}--tree-node__label
+      .#{$prefix}--tree-node__icon {
+      fill: $icon-01;
+    }
+
+    .#{$prefix}--tree-node--active > .#{$prefix}--tree-node__label {
+      position: relative;
+
+      &::before {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: rem(4px);
+        height: 100%;
+        background-color: $interactive-04;
+        content: '';
+      }
+    }
+  }
+
+  .#{$prefix}--tree--compact .#{$prefix}--tree-node__label {
+    min-height: rem(24px);
+  }
+}

@@ -23,12 +23,16 @@ $notification-colors: (
         value: $carbon__red-10,
       ),
       (
-        theme: $carbon--theme--g90,
+        theme: $carbon--theme--g80,
         value: $layer,
       ),
       (
+        theme: $carbon--theme--g90,
+        value: $ui-01,
+      ),
+      (
         theme: $carbon--theme--g100,
-        value: $layer,
+        value: $ui-01,
       ),
       (
         theme: $carbon--theme--v9,
@@ -48,12 +52,16 @@ $notification-colors: (
         value: $carbon__green-10,
       ),
       (
-        theme: $carbon--theme--g90,
+        theme: $carbon--theme--g80,
         value: $layer,
       ),
       (
+        theme: $carbon--theme--g90,
+        value: $ui-01,
+      ),
+      (
         theme: $carbon--theme--g100,
-        value: $layer,
+        value: $ui-01,
       ),
       (
         theme: $carbon--theme--v9,
@@ -73,12 +81,16 @@ $notification-colors: (
         value: $carbon__blue-10,
       ),
       (
-        theme: $carbon--theme--g90,
+        theme: $carbon--theme--g80,
         value: $layer,
       ),
       (
+        theme: $carbon--theme--g90,
+        value: $ui-01,
+      ),
+      (
         theme: $carbon--theme--g100,
-        value: $layer,
+        value: $ui-01,
       ),
       (
         theme: $carbon--theme--v9,
@@ -98,12 +110,16 @@ $notification-colors: (
         value: mix($carbon__yellow-30, $carbon__white-0, 15%),
       ),
       (
-        theme: $carbon--theme--g90,
+        theme: $carbon--theme--g80,
         value: $layer,
       ),
       (
+        theme: $carbon--theme--g90,
+        value: $ui-01,
+      ),
+      (
         theme: $carbon--theme--g100,
-        value: $layer,
+        value: $ui-01,
       ),
       (
         theme: $carbon--theme--v9,
@@ -123,12 +139,16 @@ $notification-colors: (
         value: $carbon__white-0,
       ),
       (
-        theme: $carbon--theme--g90,
+        theme: $carbon--theme--g80,
         value: $layer-hover,
       ),
       (
+        theme: $carbon--theme--g90,
+        value: $hover-ui,
+      ),
+      (
         theme: $carbon--theme--g100,
-        value: $layer-hover,
+        value: $hover-ui,
       ),
       (
         theme: $carbon--theme--v9,
