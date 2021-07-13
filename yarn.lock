@@ -448,6 +448,24 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@babel/node@npm:^7.14.2":
+  version: 7.14.7
+  resolution: "@babel/node@npm:7.14.7"
+  dependencies:
+    "@babel/register": ^7.14.5
+    commander: ^4.0.1
+    core-js: ^3.15.0
+    node-environment-flags: ^1.0.5
+    regenerator-runtime: ^0.13.4
+    v8flags: ^3.1.1
+  peerDependencies:
+    "@babel/core": ^7.0.0-0
+  bin:
+    babel-node: ./bin/babel-node.js
+  checksum: 04d665fdcf2db38edd39d69d701c6e7ea723399e6982f44f93f00178a8c6fda7c3648dbe090de78651c174b86e804c4d65fe24071c92b1352af00583b4c82202
+  languageName: node
+  linkType: hard
+
 "@babel/parser@npm:^7.1.0, @babel/parser@npm:^7.12.11, @babel/parser@npm:^7.12.5, @babel/parser@npm:^7.12.7, @babel/parser@npm:^7.13.16, @babel/parser@npm:^7.14.5, @babel/parser@npm:^7.14.6, @babel/parser@npm:^7.14.7, @babel/parser@npm:^7.4.4, @babel/parser@npm:^7.7.0, @babel/parser@npm:^7.7.2":
   version: 7.14.7
   resolution: "@babel/parser@npm:7.14.7"
@@ -1437,7 +1455,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@babel/preset-env@npm:^7.0.0, @babel/preset-env@npm:^7.12.11, @babel/preset-env@npm:^7.14.7":
+"@babel/preset-env@npm:^7.0.0, @babel/preset-env@npm:^7.12.11, @babel/preset-env@npm:^7.14.2, @babel/preset-env@npm:^7.14.7":
   version: 7.14.7
   resolution: "@babel/preset-env@npm:7.14.7"
   dependencies:
@@ -1577,9 +1595,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@babel/register@npm:^7.12.1, @babel/register@npm:^7.13.16":
-  version: 7.13.16
-  resolution: "@babel/register@npm:7.13.16"
+"@babel/register@npm:^7.12.1, @babel/register@npm:^7.13.16, @babel/register@npm:^7.14.5":
+  version: 7.14.5
+  resolution: "@babel/register@npm:7.14.5"
   dependencies:
     clone-deep: ^4.0.1
     find-cache-dir: ^2.0.0
@@ -1588,7 +1606,7 @@ __metadata:
     source-map-support: ^0.5.16
   peerDependencies:
     "@babel/core": ^7.0.0-0
-  checksum: a2a4622292c281fa22e1e501c5c9cf5de41131b6824f3b96095275e315316d1f193593a1316f078bc43fb290f510c0419ae8d3515616c7607b4af4eefecc3d55
+  checksum: 5fab2384f5e3588cf5978312997afcc4cabcfc519eb6db7ebe3c5e704dc7faa7eef691b6939bc086937f732cdfbba028ea3fec0bdc23c41f19443bea13135a97
   languageName: node
   linkType: hard
 
@@ -2100,6 +2118,8 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@carbon/themes@workspace:packages/themes"
   dependencies:
+    "@babel/node": ^7.14.2
+    "@babel/preset-env": ^7.14.2
     "@carbon/cli": ^10.25.0
     "@carbon/cli-reporter": ^10.5.0
     "@carbon/colors": ^10.28.0
@@ -12057,10 +12077,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"core-js@npm:^3.0.1, core-js@npm:^3.0.4, core-js@npm:^3.11.1, core-js@npm:^3.2.0, core-js@npm:^3.6.5, core-js@npm:^3.8.2":
-  version: 3.12.0
-  resolution: "core-js@npm:3.12.0"
-  checksum: d66e368bd73c8af15321b92048c7dfca86675c892336bc1b21be5897b3e059ff1918a8d8308789ea2d287dc73463b9d9f50de944c806ecb995c4f1a9de7499a7
+"core-js@npm:^3.0.1, core-js@npm:^3.0.4, core-js@npm:^3.11.1, core-js@npm:^3.15.0, core-js@npm:^3.2.0, core-js@npm:^3.6.5, core-js@npm:^3.8.2":
+  version: 3.15.2
+  resolution: "core-js@npm:3.15.2"
+  checksum: f8f61569c4c3bdf50679226f5a1045551192a2f4bc3fa46a873b6fa834cff6d1634ee138a6e4bae3eea99f1b1db2d588fa693de74640447476292b41f595a4c3
   languageName: node
   linkType: hard
 
@@ -24482,6 +24502,16 @@ __metadata:
   languageName: node
   linkType: hard
 
+"node-environment-flags@npm:^1.0.5":
+  version: 1.0.6
+  resolution: "node-environment-flags@npm:1.0.6"
+  dependencies:
+    object.getownpropertydescriptors: ^2.0.3
+    semver: ^5.7.0
+  checksum: 268139ed0f7fabdca346dcb26931300ec7a1dc54a58085a849e5c78a82b94967f55df40177a69d4e819da278d98686d5c4fd49ab0d7bcff16fda25b6fffc4ca3
+  languageName: node
+  linkType: hard
+
 "node-fetch-npm@npm:^2.0.2":
   version: 2.0.2
   resolution: "node-fetch-npm@npm:2.0.2"
@@ -34360,12 +34390,12 @@ resolve@^2.0.0-next.3:
   languageName: node
   linkType: hard
 
-"v8flags@npm:^3.0.1":
-  version: 3.1.3
-  resolution: "v8flags@npm:3.1.3"
+"v8flags@npm:^3.0.1, v8flags@npm:^3.1.1":
+  version: 3.2.0
+  resolution: "v8flags@npm:3.2.0"
   dependencies:
     homedir-polyfill: ^1.0.1
-  checksum: ba7fc706f1c9a90a2e7a7cd09d5ae8bf1c273f6e2c5359f294ce26333445b8478a9b329fd9d920e46ab8236fae244cd76b44403540f8202b6cf8a02bc8a47769
+  checksum: 193db08aa396d993da04d3d985450784aa0010f51613005d13ef97d7b2b9e1ba5aef04affa585037adece12de5ca532f6f5fc40288495eab55e2eebc201809d2
   languageName: node
   linkType: hard
 

@@ -10,6 +10,7 @@
 @use '../../spacing' as *;
 @use '../../theme' as *;
 @use '../../type' as *;
+@use '../button/tokens' as button;
 @use '../../utilities/box-shadow' as *;
 @use '../../utilities/focus-outline' as *;
 @use '../../utilities/z-index' as *;
@@ -62,7 +63,7 @@
 
   .#{$prefix}--menu-option--danger:hover,
   .#{$prefix}--menu-option--danger:focus {
-    background-color: $button-danger-primary;
+    background-color: button.$button-danger-primary;
     color: $text-on-color;
   }
 
