@@ -6,6 +6,7 @@
 //
 
 @use 'content';
+@use 'header';
 @use 'side-nav';
 
 /// UI shell content
@@ -13,5 +14,6 @@
 /// @group ui-shell
 @mixin ui-shell {
   @include content.content;
+  @include header.header;
   @include side-nav.side-nav;
 }
