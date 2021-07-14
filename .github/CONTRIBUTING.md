@@ -42,8 +42,8 @@ With that all in place, you're ready to start contributing to Carbon!
 
 ## Setting up the repository:
 ## Windows guide:
-This repository runs best in a linux envrionment, to avoid running into any errors as a windows user
-you will need to run the repo in a linux environment using the linux subsystem for windows.
+This repository runs best in a Linux envrionment, to avoid running into any errors as a windows user
+you will need to run the repo in a Linux environment using the Linux Subsystem for Windows.
 
 System requirements:
 https://docs.microsoft.com/en-us/windows/wsl/install-win10
@@ -61,7 +61,7 @@ dism.exe /online /enable-feature /featurename:Microsoft-Windows-Subsystem-Linux 
 ```
 dism.exe /online /enable-feature /featurename:VirtualMachinePlatform /all /norestart
 ```
-## 3: Install the linux kernal update package
+## 3: Install the Linux kernal update package
 https://wslstorestorage.blob.core.windows.net/wslblob/wsl_update_x64.msi
 
 ## 4: Install the Ubuntu 18.04 from the microsoft store:
@@ -88,7 +88,7 @@ sudo apt-get install build-essential
 sudo apt-get install autoconf automake gdb git libffi-dev zlib1g-dev libssl-dev
 ```
 5:
-Install node.js 14
+Install Node.js 14
 ```
 sudo curl -fsSL https://deb.nodesource.com/setup_14.x | sudo -E bash -
 
@@ -98,7 +98,7 @@ sudo curl -fsSL https://deb.nodesource.com/setup_14.x | sudo -E bash -
 sudo apt-get install -y nodejs
 ```
 7: 
-install node version manager.
+install Node version manager.
 ```
 sudo curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.38.0/install.sh | bash
 ```
@@ -107,7 +107,7 @@ Install yarn
 ```
 sudo npm install -g yarn
 ```
-### After these installations have completed, follow the linux guide to start working with the repo...
+### After these installations have completed, follow the Linux guide to start working with the repo...
 
 
 
