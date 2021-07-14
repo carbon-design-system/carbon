@@ -1,0 +1,34 @@
+//
+// Copyright IBM Corp. 2016, 2018
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+@use '../functions' as *;
+@use '../../../config' as *;
+@use '../../../theme' as *;
+
+/// UI shell content
+/// @access private
+/// @group ui-shell
+@mixin content {
+  .#{$prefix}--content {
+    padding: 2rem;
+    background: $layer;
+    color: $text-primary;
+    will-change: margin-left;
+  }
+
+  .#{$prefix}--header ~ .#{$prefix}--content {
+    margin-top: mini-units(6);
+  }
+
+  .#{$prefix}--side-nav ~ .#{$prefix}--content {
+    margin-left: mini-units(6);
+  }
+
+  .#{$prefix}--side-nav.#{$prefix}--side-nav--expanded ~ .#{$prefix}--content {
+    margin-left: mini-units(32);
+  }
+}

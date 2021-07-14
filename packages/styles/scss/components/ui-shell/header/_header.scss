@@ -1,0 +1,382 @@
+//
+// Copyright IBM Corp. 2016, 2018
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+@use '../mixins' as *;
+@use '../functions' as *;
+@use '../../../breakpoint' as *;
+@use '../../../config' as *;
+@use '../../../motion' as *;
+@use '../../../theme' as *;
+@use '../../../type' as *;
+@use '../../../utilities/button-reset';
+@use '../../../utilities/convert' as *;
+@use '../../../utilities/z-index' as *;
+
+/// UI shell header
+/// @access private
+/// @group ui-shell
+@mixin header {
+  .#{$prefix}--header {
+    position: fixed;
+    z-index: z('header');
+    top: 0;
+    right: 0;
+    left: 0;
+    display: flex;
+    height: mini-units(6);
+    align-items: center;
+    border-bottom: 1px solid $border-subtle;
+    background-color: $background;
+  }
+
+  .#{$prefix}--header__action {
+    @include button-reset.reset();
+
+    width: mini-units(6);
+    height: mini-units(6);
+    border: rem(2px) solid transparent;
+    transition: background-color $duration-fast-02,
+      border-color $duration-fast-02;
+  }
+
+  .#{$prefix}--header__action
+    > svg.#{$prefix}--navigation-menu-panel-collapse-icon,
+  .#{$prefix}--header__action--active
+    > svg.#{$prefix}--navigation-menu-panel-expand-icon {
+    display: none;
+  }
+
+  .#{$prefix}--header__action--active
+    > svg.#{$prefix}--navigation-menu-panel-collapse-icon {
+    display: inline;
+  }
+
+  .#{$prefix}--header__action:hover {
+    background-color: $background-hover;
+  }
+
+  .#{$prefix}--header__action--active {
+    border-right: 1px solid $border-subtle;
+    border-bottom: 1px solid transparent;
+    border-left: 1px solid $border-subtle;
+    background: $layer;
+  }
+
+  .#{$prefix}--header__action--active > svg {
+    fill: $icon-primary;
+  }
+
+  .#{$prefix}--header__action:focus {
+    border-color: $focus;
+    outline: none;
+  }
+
+  .#{$prefix}--header__action:active {
+    background-color: $background-active;
+  }
+
+  .#{$prefix}--header__action.#{$prefix}--btn--icon-only.#{$prefix}--tooltip__trigger {
+    justify-content: center;
+  }
+
+  .bx--btn.bx--btn--icon-only.bx--tooltip__trigger.#{$prefix}--header__action
+    svg {
+    fill: $icon-secondary;
+  }
+
+  .bx--btn.bx--btn--icon-only.bx--tooltip__trigger.#{$prefix}--header__action:hover
+    svg,
+  .bx--btn.bx--btn--icon-only.bx--tooltip__trigger.#{$prefix}--header__action:active
+    svg,
+  .bx--btn.bx--btn--icon-only.bx--tooltip__trigger.#{$prefix}--header__action--active
+    svg {
+    fill: $icon-primary;
+  }
+
+  .#{$prefix}--header__menu-trigger > svg {
+    fill: $icon-primary;
+  }
+
+  .#{$prefix}--header__menu-trigger:hover > svg {
+    fill: $icon-primary;
+    //TO-DO: ask design if this color changes on hover, missing spec for it
+  }
+
+  .#{$prefix}--header__menu-toggle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .#{$prefix}--header__menu-toggle__hidden {
+    @include breakpoint('lg') {
+      display: none;
+    }
+  }
+
+  //--------------------------------------------------------------------------
+  // Header - Name
+  //--------------------------------------------------------------------------
+  a.#{$prefix}--header__name {
+    @include type-style('body-short-01');
+
+    display: flex;
+    height: 100%;
+    align-items: center;
+    padding: 0 mini-units(4) 0 mini-units(2);
+    border: rem(2px) solid transparent;
+    font-weight: 600;
+    letter-spacing: 0.1px;
+    line-height: 1.25rem;
+    outline: none;
+    text-decoration: none;
+    transition: border-color $duration-fast-02;
+    user-select: none;
+  }
+
+  a.#{$prefix}--header__name:focus {
+    border-color: $focus;
+    //TO-DO: follow up with design to see if this is correct, missing focus spec for it
+  }
+
+  .#{$prefix}--header__name--prefix {
+    font-weight: 400;
+  }
+
+  a.#{$prefix}--header__name,
+  a.#{$prefix}--header__name:hover {
+    color: $text-primary;
+  }
+
+  .#{$prefix}--header__menu-toggle:not(.#{$prefix}--header__menu-toggle__hidden)
+    ~ .#{$prefix}--header__name {
+    padding-left: rem(8px);
+  }
+
+  //--------------------------------------------------------------------------
+  // Header - Navigation
+  //--------------------------------------------------------------------------
+  .#{$prefix}--header__nav {
+    position: relative;
+    display: none;
+    height: 100%;
+    padding-left: mini-units(2);
+
+    @include breakpoint('lg') {
+      display: block;
+    }
+
+    // header nav divider
+    &::before {
+      position: absolute;
+      top: 50%;
+      left: 0;
+      display: block;
+      width: rem(1px);
+      height: rem(24px);
+      background-color: $border-subtle;
+      content: '';
+      transform: translateY(-50%);
+    }
+  }
+
+  .#{$prefix}--header__menu-bar {
+    display: flex;
+    height: 100%;
+    padding: 0;
+    margin: 0;
+    list-style: none;
+  }
+
+  a.#{$prefix}--header__menu-item {
+    position: relative;
+    display: flex;
+    // Used for links that are directly in the menubar to span the full height
+    height: 100%;
+    align-items: center;
+    padding: 0 mini-units(2);
+    // Used for focus styles
+    border: 2px solid transparent;
+    background-color: $background;
+    color: $text-secondary;
+    // Text styles
+    font-size: rem(14px);
+    font-weight: 400;
+    letter-spacing: 0;
+    line-height: 1.125rem;
+    // Reset link styles and make sure the text isn't selectable
+    text-decoration: none;
+    transition: background-color $duration-fast-02,
+      border-color $duration-fast-02, color $duration-fast-02;
+    user-select: none;
+  }
+
+  a.#{$prefix}--header__menu-item:hover {
+    background-color: $background-hover;
+    color: $text-primary;
+  }
+
+  .#{$prefix}--header__action:active,
+  a.#{$prefix}--header__menu-item:active {
+    background-color: $background-active;
+    color: $text-primary;
+  }
+
+  a.#{$prefix}--header__menu-item:focus {
+    border-color: $focus;
+    outline: none;
+  }
+
+  a.#{$prefix}--header__menu-item:hover > svg,
+  a.#{$prefix}--header__menu-item:active > svg {
+    fill: $icon-primary;
+  }
+
+  // Styles for selected state
+
+  a.#{$prefix}--header__menu-item[aria-current='page'],
+  .#{$prefix}--header__menu-item--current {
+    color: $text-primary;
+  }
+
+  a.#{$prefix}--header__menu-item[aria-current='page']::after,
+  .#{$prefix}--header__menu-item--current::after {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: -2px;
+    left: 0;
+    width: 100%;
+    border-bottom: 3px solid $border-interactive;
+    content: '';
+  }
+
+  a.#{$prefix}--header__menu-item[aria-current='page']:focus::after,
+  .#{$prefix}--header__menu-item--current:focus::after {
+    border: 0;
+  }
+
+  a.#{$prefix}--header__menu-item[aria-current='page']:focus,
+  a.#{$prefix}--header__menu-item.#{$prefix}--header__menu-item--current:focus {
+    border: 2px solid $focus;
+  }
+
+  .#{$prefix}--header__submenu {
+    position: relative;
+  }
+
+  .#{$prefix}--header__menu-title[aria-haspopup='true'] {
+    position: relative;
+  }
+
+  .#{$prefix}--header__menu-title[aria-expanded='true'] {
+    // Note: needs to be higher than menu. Adding 1 here instead of moving to
+    // the next level.
+    z-index: #{z('header') + 1};
+    background-color: $layer;
+    color: $text-secondary;
+  }
+
+  .#{$prefix}--header__menu-title[aria-expanded='true']
+    > .#{$prefix}--header__menu-arrow {
+    transform: rotate(180deg);
+  }
+
+  .#{$prefix}--header__menu {
+    display: none;
+    padding: 0;
+    margin: 0;
+    list-style: none;
+  }
+
+  .#{$prefix}--header__menu-title[aria-expanded='true']
+    + .#{$prefix}--header__menu {
+    position: absolute;
+    z-index: z('header');
+    bottom: 0;
+    left: 0;
+    display: flex;
+    width: mini-units(25);
+    flex-direction: column;
+    background-color: $layer;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.5);
+    transform: translateY(100%);
+  }
+
+  .#{$prefix}--header__menu-title[aria-expanded='true']
+    + .#{$prefix}--header__menu
+    .#{$prefix}--header__menu-item {
+    background-color: $layer;
+  }
+
+  .#{$prefix}--header__menu-title[aria-expanded='true']
+    + .#{$prefix}--header__menu
+    .#{$prefix}--header__menu-item:hover {
+    background-color: $layer-hover;
+    color: $text-primary;
+  }
+
+  .#{$prefix}--header__menu-title[aria-expanded='true']
+    + .#{$prefix}--header__menu
+    .#{$prefix}--header__menu-item:active {
+    background-color: $layer-active;
+    color: $text-primary;
+  }
+
+  .#{$prefix}--header__menu .#{$prefix}--header__menu-item {
+    height: mini-units(6);
+  }
+
+  .#{$prefix}--header__menu-arrow {
+    margin-left: mini-units(1);
+    fill: $icon-secondary;
+    transition: transform $duration-fast-02, fill $duration-fast-02;
+  }
+
+  //--------------------------------------------------------------------------
+  // Header - Global
+  //--------------------------------------------------------------------------
+  .#{$prefix}--header__global {
+    display: flex;
+    height: 100%;
+    flex: 1 1 0%;
+    justify-content: flex-end;
+  }
+
+  //--------------------------------------------------------------------------
+  // Header - Skip to content
+  //--------------------------------------------------------------------------
+  .#{$prefix}--skip-to-content {
+    position: absolute;
+    overflow: hidden;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    border: 0;
+    margin: -1px;
+    clip: rect(0, 0, 0, 0);
+    visibility: inherit;
+    white-space: nowrap;
+  }
+
+  .#{$prefix}--skip-to-content:focus {
+    z-index: 9999;
+    top: 0;
+    left: 0;
+    display: flex;
+    width: auto;
+    height: 3rem;
+    align-items: center;
+    padding: 0 1rem;
+    border: 4px solid $focus;
+    background-color: $background;
+    clip: auto;
+    color: $text-secondary;
+    //TO-DO: double check with design that these tokens are correct, missing spec for it
+    outline: none;
+  }
+}

@@ -5,8 +5,6 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-/* eslint-disable no-console */
-
 import React from 'react';
 import { Welcome as Intro } from './Welcome';
 import mdx from './Welcome.mdx';
