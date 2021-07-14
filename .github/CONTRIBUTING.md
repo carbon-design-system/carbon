@@ -68,9 +68,9 @@ https://wslstorestorage.blob.core.windows.net/wslblob/wsl_update_x64.msi
 ## 4: Install the Ubuntu 18.04 from the microsoft store:
 https://www.microsoft.com/en-us/p/ubuntu-1804-lts/9n9tngvndl3q?activetab=pivot:overviewtab
 
-## 4.5 Once installed, launch it & setup your user account (follow the prompts)
+## 4.5 Once installed, launch Ubuntu & setup your user account (follow the prompts)
 
-## 5: Run the commands as follows.
+## 5: Run the commands (using Ubuntu) as follows.
 1:
 ```
 sudo apt-get update
