@@ -32,8 +32,8 @@
     @include reset;
     @include type-style('body-short-01');
 
-    background-color: $background;
-    color: $text-primary;
+    background-color: $ui-background;
+    color: $text-01;
     line-height: 1;
   }
 }

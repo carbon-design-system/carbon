@@ -1,0 +1,256 @@
+//
+// Copyright IBM Corp. 2016, 2018
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+@use 'mixins' as*;
+@use 'tokens' as *;
+@use '../../breakpoint' as *;
+@use '../../colors' as *;
+@use '../../config' as *;
+@use '../../feature-flags' as *;
+@use '../../motion' as *;
+@use '../../spacing' as *;
+@use '../../theme' as *;
+@use '../../themes' as *;
+@use '../../type' as *;
+@use '../../utilities/convert' as *;
+@use '../../utilities/high-contrast-mode' as *;
+@use '../../utilities/focus-outline' as *;
+
+/// Toast notification styles
+/// @access public
+/// @group notification
+@mixin toast-notification {
+  .#{$prefix}--toast-notification {
+    @include reset;
+
+    display: flex;
+    width: rem(288px);
+    height: auto;
+    padding-left: $spacing-05;
+    margin-top: $spacing-03;
+    margin-right: $spacing-05;
+    margin-bottom: $spacing-03;
+    box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.2);
+    color: $text-inverse;
+
+    &:first-child {
+      margin-top: $spacing-05;
+    }
+
+    @include breakpoint(max) {
+      width: rem(352px);
+    }
+  }
+
+  .#{$prefix}--toast-notification:not(.#{$prefix}--toast-notification--low-contrast)
+    a {
+    color: $link-inverse;
+  }
+
+  .#{$prefix}--toast-notification a {
+    text-decoration: none;
+  }
+
+  .#{$prefix}--toast-notification a:hover {
+    text-decoration: underline;
+  }
+
+  .#{$prefix}--toast-notification a:focus {
+    outline: 1px solid $link-inverse;
+  }
+
+  .#{$prefix}--toast-notification.#{$prefix}--toast-notification--low-contrast
+    a:focus {
+    @include focus-outline;
+  }
+
+  .#{$prefix}--toast-notification--low-contrast {
+    color: $text-primary;
+  }
+
+  .#{$prefix}--toast-notification--error {
+    @include notification--experimental(
+      $support-error-inverse,
+      $background-inverse
+    );
+  }
+
+  .#{$prefix}--toast-notification--low-contrast.#{$prefix}--toast-notification--error {
+    @include notification--experimental(
+      $support-error,
+      get-token(var(--cds-background-error))
+    );
+  }
+
+  .#{$prefix}--toast-notification--success {
+    @include notification--experimental(
+      $support-success-inverse,
+      $background-inverse
+    );
+  }
+
+  .#{$prefix}--toast-notification--low-contrast.#{$prefix}--toast-notification--success {
+    @include notification--experimental(
+      $support-success,
+      get-token(var(--cds-background-success))
+    );
+  }
+
+  .#{$prefix}--toast-notification--info,
+  .#{$prefix}--toast-notification--info-square {
+    @include notification--experimental(
+      $support-info-inverse,
+      $background-inverse
+    );
+  }
+
+  .#{$prefix}--toast-notification--low-contrast.#{$prefix}--toast-notification--info,
+  .#{$prefix}--toast-notification--low-contrast.#{$prefix}--toast-notification--info-square {
+    @include notification--experimental(
+      $support-info,
+      get-token(var(--cds-background-info))
+    );
+  }
+
+  .#{$prefix}--toast-notification--warning,
+  .#{$prefix}--toast-notification--warning-alt {
+    @include notification--experimental(
+      $support-warning-inverse,
+      $background-inverse
+    );
+  }
+
+  .#{$prefix}--toast-notification--low-contrast.#{$prefix}--toast-notification--warning,
+  .#{$prefix}--toast-notification--low-contrast.#{$prefix}--toast-notification--warning-alt {
+    @include notification--experimental(
+      $support-warning,
+      get-token(var(--cds-background-warning))
+    );
+  }
+
+  .#{$prefix}--toast-notification--warning
+    .#{$prefix}--toast-notification__icon
+    path[opacity='0'] {
+    fill: $black-100;
+    opacity: 1;
+  }
+
+  .#{$prefix}--toast-notification__icon {
+    flex-shrink: 0;
+    margin-top: $spacing-05;
+    margin-right: $spacing-05;
+  }
+
+  @if enabled('enable-v11-release') {
+    .#{$prefix}--toast-notification__content {
+      @include type-style('body-short-01');
+
+      margin-top: $spacing-05;
+      margin-right: $spacing-05;
+      margin-bottom: $spacing-05;
+      word-break: break-word;
+    }
+
+    .#{$prefix}--toast-notification--low-contrast
+      .#{$prefix}--toast-notification__content {
+      color: $text-primary;
+    }
+  } @else {
+    .#{$prefix}--toast-notification__details {
+      margin-right: $spacing-05;
+    }
+  }
+
+  .#{$prefix}--toast-notification__close-button {
+    @include focus-outline('reset');
+
+    display: flex;
+    width: rem(48px);
+    min-width: rem(48px);
+    height: rem(48px);
+    min-height: rem(48px);
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    border: none;
+    margin-left: auto;
+    background-color: transparent;
+    cursor: pointer;
+    transition: outline $transition--base, background-color $transition--base;
+
+    &:focus {
+      outline: 2px solid $focus-inverse;
+      outline-offset: -2px;
+    }
+
+    .#{$prefix}--toast-notification__close-icon {
+      fill: $icon-inverse;
+    }
+  }
+
+  .#{$prefix}--toast-notification--low-contrast
+    .#{$prefix}--toast-notification__close-button:focus {
+    @include focus-outline('outline');
+  }
+
+  .#{$prefix}--toast-notification--low-contrast
+    .#{$prefix}--toast-notification__close-button
+    .#{$prefix}--toast-notification__close-icon {
+    fill: $icon-primary;
+  }
+
+  @if not enabled('enable-v11-release') {
+    .#{$prefix}--toast-notification__title {
+      @include type-style('productive-heading-01');
+
+      margin-top: $spacing-05;
+      font-weight: 600;
+      word-break: break-word;
+    }
+
+    .#{$prefix}--toast-notification__subtitle {
+      @include type-style('body-short-01');
+
+      margin-top: 0;
+      margin-bottom: $spacing-05;
+      color: $text-inverse;
+      word-break: break-word;
+    }
+
+    .#{$prefix}--toast-notification--low-contrast
+      .#{$prefix}--toast-notification__subtitle {
+      color: $text-primary;
+    }
+
+    .#{$prefix}--toast-notification__caption {
+      @include type-style('body-short-01');
+
+      padding-top: $spacing-03;
+      margin-bottom: $spacing-05;
+      color: $text-inverse;
+    }
+
+    .#{$prefix}--toast-notification--low-contrast
+      .#{$prefix}--toast-notification__caption {
+      color: $text-primary;
+    }
+  }
+
+  // Windows HCM fix
+  /* stylelint-disable */
+  .#{$prefix}--toast-notification {
+    @include high-contrast-mode('outline');
+  }
+  .#{$prefix}--toast-notification__close-button:focus {
+    @include high-contrast-mode('focus');
+  }
+  .#{$prefix}--toast-notification__icon {
+    @include high-contrast-mode('icon-fill');
+  }
+  /* stylelint-enable */
+}

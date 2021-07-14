@@ -15,7 +15,6 @@ import {
 } from '../next/Notification';
 import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import '@testing-library/jest-dom';
 import { settings } from 'carbon-components';
 import { it } from 'window-or-global';
 

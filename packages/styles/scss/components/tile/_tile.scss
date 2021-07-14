@@ -1,0 +1,269 @@
+//
+// Copyright IBM Corp. 2016, 2018
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+@use '../../config' as *;
+@use '../../motion' as *;
+@use '../../spacing' as *;
+@use '../../theme' as *;
+@use '../../type' as *;
+@use '../button/tokens' as button;
+@use '../../utilities/focus-outline' as *;
+@use '../../utilities/high-contrast-mode' as *;
+@use '../../utilities/visually-hidden' as *;
+
+/// Tile styles
+/// @access public
+/// @group tile
+@mixin tile {
+  .#{$prefix}--tile-group {
+    @include reset;
+  }
+
+  .#{$prefix}--tile {
+    position: relative;
+    display: block;
+    min-width: 8rem;
+    min-height: 4rem;
+    padding: $spacing-05;
+    background-color: $layer;
+    outline: 2px solid transparent;
+    outline-offset: -2px;
+
+    &:focus {
+      @include focus-outline('outline');
+    }
+  }
+
+  // V11: Possibly deprecate
+  .#{$prefix}--tile--light {
+    background-color: $ui-02;
+  }
+
+  .#{$prefix}--tile--clickable,
+  .#{$prefix}--tile--selectable,
+  .#{$prefix}--tile--expandable {
+    cursor: pointer;
+    transition: $duration-moderate-01 motion(standard, productive);
+
+    &:hover {
+      background: $layer-hover;
+    }
+  }
+
+  .#{$prefix}--tile--clickable,
+  .#{$prefix}--tile--expandable {
+    &:focus {
+      @include focus-outline('outline');
+    }
+
+    &:hover,
+    &:focus {
+      .#{$prefix}--tile__checkmark {
+        opacity: 1;
+      }
+    }
+  }
+
+  // Removes Firefox automatic border on buttons
+  .#{$prefix}--tile--expandable::-moz-focus-inner {
+    border: 0;
+  }
+
+  .#{$prefix}--tile--clickable {
+    @include reset;
+    @include type-style('body-short-01');
+
+    color: $text-primary;
+    text-decoration: none;
+  }
+
+  .#{$prefix}--tile--clickable:hover,
+  .#{$prefix}--tile--clickable:active,
+  .#{$prefix}--tile--clickable:visited,
+  .#{$prefix}--tile--clickable:visited:hover {
+    color: $text-primary;
+    text-decoration: none;
+  }
+
+  // Disabled ClickableTile
+  .#{$prefix}--tile--clickable.#{$prefix}--link--disabled,
+  .#{$prefix}--tile--clickable:hover.#{$prefix}--link--disabled {
+    display: block;
+    background-color: $layer-disabled;
+    color: $text-disabled;
+  }
+
+  .#{$prefix}--tile--selectable {
+    padding-right: $spacing-09;
+    border: 1px solid transparent;
+  }
+
+  .#{$prefix}--tile__checkmark,
+  .#{$prefix}--tile__chevron {
+    position: absolute;
+    border: none;
+    background: transparent;
+    transition: $duration-fast-02 motion(standard, productive);
+  }
+
+  .#{$prefix}--tile__checkmark {
+    top: 1rem;
+    right: 1rem;
+    height: 1rem;
+    opacity: 0;
+
+    svg {
+      border-radius: 50%;
+      fill: $icon-secondary;
+    }
+
+    &:focus {
+      @include focus-outline('outline');
+    }
+  }
+
+  .#{$prefix}--tile__checkmark--persistent {
+    opacity: 1;
+  }
+
+  .#{$prefix}--tile__chevron {
+    position: absolute;
+    right: $spacing-05;
+    bottom: $spacing-05;
+    display: flex;
+    height: 1rem;
+    align-items: flex-end;
+
+    svg {
+      margin-left: $spacing-03;
+      fill: $icon-primary;
+      transform-origin: center;
+      transition: $duration-fast-02 motion(standard, productive);
+
+      // Windows, Firefox HCM Fix
+      @media screen and (-ms-high-contrast: active),
+        screen and (prefers-contrast) {
+        // `ButtonText` is a CSS2 system color to help improve colors in HCM
+        fill: ButtonText;
+      }
+    }
+
+    &:hover {
+      cursor: pointer;
+    }
+
+    &:focus {
+      outline: none;
+    }
+  }
+
+  .#{$prefix}--tile--expandable {
+    overflow: hidden;
+    width: 100%;
+    border: 0;
+    color: inherit;
+    font-family: inherit;
+    font-size: inherit;
+    text-align: left;
+    transition: max-height $duration-moderate-01 motion(standard, productive);
+  }
+
+  .#{$prefix}--tile-content__above-the-fold {
+    display: block;
+  }
+
+  .#{$prefix}--tile-content__below-the-fold {
+    display: block;
+    opacity: 0;
+    transition: opacity $duration-fast-02 motion(standard, productive),
+      visibility $duration-fast-02 motion(standard, productive);
+    visibility: hidden;
+  }
+
+  .#{$prefix}--tile--is-expanded {
+    overflow: visible;
+    transition: max-height $duration-fast-02 motion(standard, productive);
+
+    .#{$prefix}--tile__chevron svg {
+      transform: rotate(180deg);
+    }
+
+    .#{$prefix}--tile-content__below-the-fold {
+      opacity: 1;
+      transition: opacity $duration-fast-02 motion(standard, productive),
+        visibility $duration-fast-02 motion(standard, productive);
+      visibility: inherit;
+
+      // Safari-only media query
+      // Fixes an issue with scrolling
+      // and absolutely positioned elements (#8119)
+      @media not all and (min-resolution: 0.001dpcm) {
+        @supports (-webkit-appearance: none) and (stroke-color: transparent) {
+          overflow-y: auto;
+        }
+      }
+    }
+  }
+
+  .#{$prefix}--tile--is-selected {
+    border: 1px solid $layer-selected-inverse;
+  }
+
+  .#{$prefix}--tile--is-selected .#{$prefix}--tile__checkmark {
+    opacity: 1;
+  }
+
+  .#{$prefix}--tile--is-selected .#{$prefix}--tile__checkmark svg {
+    fill: $icon-primary;
+
+    // Windows, Firefox HCM Fix
+    @media screen and (-ms-high-contrast: active),
+      screen and (prefers-contrast) {
+      // `ButtonText` is a CSS2 system color to help improve colors in HCM
+      fill: ButtonText;
+    }
+  }
+
+  .#{$prefix}--tile-content {
+    width: 100%;
+    height: 100%;
+  }
+
+  .#{$prefix}--tile-input {
+    @include visually-hidden;
+  }
+
+  .#{$prefix}--tile-input:focus + .#{$prefix}--tile {
+    @include focus-outline('outline');
+  }
+
+  .#{$prefix}--tile--disabled.#{$prefix}--tile--selectable {
+    background-color: $layer;
+    color: $text-disabled;
+    cursor: not-allowed;
+  }
+
+  // V11: Possibly deprecate
+  .#{$prefix}--tile--disabled.#{$prefix}--tile--selectable.#{$prefix}--tile--light {
+    background-color: $ui-02;
+  }
+
+  .#{$prefix}--tile--disabled.#{$prefix}--tile--is-selected {
+    border-color: button.$button-disabled;
+  }
+
+  .#{$prefix}--tile--disabled .#{$prefix}--tile__checkmark svg {
+    fill: $icon-disabled;
+  }
+
+  // Windows HCM fix
+  .#{$prefix}--tile__chevron svg,
+  .#{$prefix}--tile__checkmark svg,
+  .#{$prefix}--tile--is-selected .#{$prefix}--tile__checkmark svg {
+    @include high-contrast-mode('icon-fill');
+  }
+}
