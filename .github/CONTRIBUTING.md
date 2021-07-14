@@ -39,6 +39,40 @@ With that all in place, you're ready to start contributing to Carbon!
 
 ## Start contributing
 
+
+## Setting up the repository:
+## Windows guide:
+This repository runs best in a linux envrionment, to avoid running into any errors as a windows user
+you will need to run the repo in a linux environment using the linux subsystem for windows.
+
+
+prerequisites:
+1: Windows Subsystem for Linux
+2: linux operating system of your choice.
+
+Requirements:
+https://docs.microsoft.com/en-us/windows/wsl/install-win10
+
+
+Open a powershell session and enter:
+```
+dism.exe /online /enable-feature /featurename:Microsoft-Windows-Subsystem-Linux /all /norestart
+```
+Once the command has finished executing enter:
+```
+dism.exe /online /enable-feature /featurename:VirtualMachinePlatform /all /norestart
+```
+Awesome, complete the next steps as follows.
+
+You will need to install the linux kernal update package.
+Download from this link:
+https://wslstorestorage.blob.core.windows.net/wslblob/wsl_update_x64.msi
+
+
+
+
+
+## Linux guide:
 ### 1. Fork the repo:
 
 Go to
