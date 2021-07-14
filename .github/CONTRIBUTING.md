@@ -19,7 +19,7 @@ contributing environment. Please take a look at our
 
 Before contributing to Carbon, you should make sure you have the following tools
 installed:
-
+Linux:
 - [Node.js](https://nodejs.org/en/download/) v14 or above here or follow their
   installation through a package manager
   [here](https://nodejs.org/en/download/package-manager/))
@@ -29,6 +29,9 @@ installed:
     version manager for Node.
 - Git
 - [Yarn](https://yarnpkg.com/en/docs/install)
+Windows:
+- Windows Subsystem for Linux
+- linux operating system of your choice.
 
 You'll also need a code editor to make changes to Carbon. There are many to
 choose from but some popular options are
@@ -44,11 +47,6 @@ With that all in place, you're ready to start contributing to Carbon!
 ## Windows guide:
 This repository runs best in a linux envrionment, to avoid running into any errors as a windows user
 you will need to run the repo in a linux environment using the linux subsystem for windows.
-
-
-prerequisites:
-1: Windows Subsystem for Linux
-2: linux operating system of your choice.
 
 System requirements:
 https://docs.microsoft.com/en-us/windows/wsl/install-win10
