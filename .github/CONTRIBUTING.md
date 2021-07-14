@@ -50,23 +50,61 @@ prerequisites:
 1: Windows Subsystem for Linux
 2: linux operating system of your choice.
 
-Requirements:
+System requirements:
 https://docs.microsoft.com/en-us/windows/wsl/install-win10
 
 
-Open a powershell session and enter:
+## 1: Open a powershell session and enter:
 ```
 dism.exe /online /enable-feature /featurename:Microsoft-Windows-Subsystem-Linux /all /norestart
 ```
-Once the command has finished executing enter:
+## 2: Once the command has finished executing run:
 ```
 dism.exe /online /enable-feature /featurename:VirtualMachinePlatform /all /norestart
 ```
-Awesome, complete the next steps as follows.
-
-You will need to install the linux kernal update package.
-Download from this link:
+## 3: Install the linux kernal update package
 https://wslstorestorage.blob.core.windows.net/wslblob/wsl_update_x64.msi
+
+## 4: Install the Ubuntu 18.04 from the microsoft store:
+https://www.microsoft.com/en-us/p/ubuntu-1804-lts/9n9tngvndl3q?activetab=pivot:overviewtab
+
+## 4.5 Once installed, launch it & setup your user account (follow the prompts)
+
+## 5: Run the commands as follows.
+1:
+```
+sudo apt-get update
+```
+2:
+```
+sudo apt-get upgrade
+```
+3: 
+Install linux build tools:
+```
+sudo apt-get install build-essential
+```
+4:
+```
+sudo apt-get install autoconf automake gdb git libffi-dev zlib1g-dev libssl-dev
+```
+5:
+Install node.js 14
+```
+sudo curl -fsSL https://deb.nodesource.com/setup_14.x | sudo -E bash -
+
+```
+6:
+```
+sudo apt-get install -y nodejs
+```
+7: 
+install node version manager.
+```
+sudo curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.38.0/install.sh | bash
+```
+## After these installions have finished follow the linux guide to start working with the repo.
+
 
 
 
