@@ -49,6 +49,7 @@ System requirements:
 https://docs.microsoft.com/en-us/windows/wsl/install-win10
 
 prerequisites:
+- aforementioned prerequisites
 - Windows Subsystem for Linux
 - linux operating system of your choice.
 
@@ -106,7 +107,7 @@ Install yarn
 ```
 sudo npm install -g yarn
 ```
-### After these installations have finished follow the linux guide to start working with the repo.
+### After these installations have finished follow the linux guide to start working with the repo...
 
 
 
