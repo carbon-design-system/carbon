@@ -106,8 +106,7 @@ Install yarn
 ```
 sudo npm install -g yarn
 ```
-
-## After these installions have finished follow the linux guide to start working with the repo.
+## After these installations have finished follow the linux guide to start working with the repo.
 
 
 
