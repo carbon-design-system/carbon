@@ -10,6 +10,17 @@ import { Theme, useTheme } from '../../Theme';
 import { screen, render } from '@testing-library/react';
 
 describe('Theme', () => {
+  it("should apply a given theme to it's children", () => {
+    // render(
+    // <Theme theme="white" id="test">
+    // <span>test</span>
+    // </Theme>
+    // );
+    // const root = document.getElementByid('test');
+  });
+
+  it.todo("should apply a given theme object to it's children");
+
   it('should render the children passed in as a prop', () => {
     render(
       <Theme>
@@ -19,8 +30,7 @@ describe('Theme', () => {
 
     expect(screen.getByTestId('test')).toBeInTheDocument();
   });
-  it.todo("should apply a given theme to it's children");
-  it.todo("should apply a given theme object to it's children");
+
   it('should set the theme in context', () => {
     function TestComponent({ id }) {
       const { theme } = useTheme();
