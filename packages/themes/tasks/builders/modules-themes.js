@@ -8,78 +8,57 @@
 'use strict';
 
 const { types: t } = require('@carbon/scss-generator');
-const { formatTokenName } = require('../../lib');
+const { TokenFormat, themes, group } = require('../../src/next');
 const { FILE_BANNER, primitive } = require('./shared');
 
-function buildThemesFile(themes, tokens, defaultThemeName) {
-  const defaultTheme = themes[defaultThemeName];
-  const defaultThemeMap = t.Assignment({
-    id: t.Identifier(defaultThemeName),
-    init: t.SassFunctionCall(t.Identifier('utilities.merge'), [
-      t.SassValue('layout.$spacing'),
-      t.SassValue('layout.$fluid-spacing'),
-      t.SassValue('type.$tokens'),
-      t.SassMap({
-        properties: Object.keys(defaultTheme)
-          .filter((token) => {
-            return tokens.colors.includes(token);
-          })
-          .map((token) => {
-            return t.SassMapProperty(
-              t.Identifier(formatTokenName(token)),
-              primitive(defaultTheme[token])
-            );
-          }),
-      }),
-    ]),
-    default: true,
-  });
-  const themeMaps = Object.keys(themes)
-    .filter((name) => {
-      return name !== defaultThemeName && name !== 'v9';
-    })
-    .flatMap((name) => {
-      const theme = themes[name];
-      const comment = t.Comment(`/ Carbon's ${name} color theme
-/ @type Map
-/ @access public
-/ @group @carbon/themes`);
-      return [
-        t.Newline(),
-        comment,
-        t.Assignment({
-          id: t.Identifier(name),
-          init: t.SassFunctionCall(t.Identifier('map.merge'), [
-            t.Identifier(defaultThemeName),
-            t.SassMap({
-              properties: Object.keys(theme)
-                .filter((token) => {
-                  return theme[token] !== defaultTheme[token];
-                })
-                .map((token) => {
-                  return t.SassMapProperty(
-                    t.Identifier(formatTokenName(token)),
-                    primitive(theme[token])
-                  );
-                }),
-            }),
-          ]),
-          default: true,
-        }),
-      ];
-    });
-
-  return t.StyleSheet([
-    FILE_BANNER,
-    t.Newline(),
+function buildThemesFile() {
+  const imports = [
     t.SassModule('sass:map'),
     t.SassModule('@carbon/layout'),
     t.SassModule('@carbon/type'),
     t.SassModule('../utilities'),
-    t.Newline(),
-    defaultThemeMap,
-    ...themeMaps,
-  ]);
+  ];
+  const variables = Object.entries(themes).flatMap(([key, theme]) => {
+    return [
+      t.Newline(),
+      t.Assignment({
+        id: t.Identifier(key),
+        init: t.SassMap({
+          properties: Object.entries(theme)
+            .filter(([token]) => {
+              return group.getToken(
+                TokenFormat.convert({
+                  name: token,
+                  format: TokenFormat.formats.scss,
+                })
+              );
+            })
+            .map(([token, value]) => {
+              const id = TokenFormat.convert({
+                name: token,
+                format: TokenFormat.formats.scss,
+              });
+              return t.SassMapProperty(t.Identifier(id), primitive(value));
+            }),
+        }),
+        default: true,
+      }),
+      t.Assignment({
+        id: t.Identifier(key),
+        init: t.SassFunctionCall({
+          id: t.Identifier('utilities.merge'),
+          params: [
+            t.Identifier(key),
+            t.SassValue('layout.$spacing'),
+            t.SassValue('layout.$fluid-spacing'),
+            t.SassValue('type.$tokens'),
+          ],
+        }),
+      }),
+    ];
+  });
+
+  return t.StyleSheet([FILE_BANNER, t.Newline(), ...imports, ...variables]);
 }
 
 module.exports = buildThemesFile;

@@ -13,6 +13,7 @@
 @use '../../type' as *;
 @use '../../utilities/component-reset';
 @use '../../utilities/convert' as *;
+@use 'tokens' as *;
 
 @mixin button-base {
   @include component-reset.reset;

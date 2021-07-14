@@ -55,8 +55,8 @@ For most teams, this configuration will look like:
 }
 ```
 
-For bundler specific solutions, check out the sections below for your bundler
-of choice. If you can't find what you're looking for, please make an
+For bundler specific solutions, check out the sections below for your bundler of
+choice. If you can't find what you're looking for, please make an
 [issue](https://github.com/carbon-design-system/carbon/issues/new/choose) and
 we'll try to get instructions for it added!
 
@@ -105,5 +105,5 @@ export default {
       },
     },
   },
-}
+};
 ```
