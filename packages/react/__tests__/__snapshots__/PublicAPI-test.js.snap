@@ -3578,6 +3578,9 @@ Map {
         "ariaLabel": Object {
           "type": "string",
         },
+        "autoComplete": Object {
+          "type": "string",
+        },
         "compareItems": Object {
           "isRequired": true,
           "type": "func",
