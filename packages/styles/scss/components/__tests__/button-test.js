@@ -25,22 +25,41 @@ describe('scss/components/button', () => {
     `);
     expect(unwrap('mixin')).toBe(true);
     expect(unwrap('variables')).toMatchInlineSnapshot(`
-      Array [
-        "button-font-weight",
-        "button-font-size",
-        "button-border-radius",
-        "button-height",
-        "button-padding",
-        "button-padding-field",
-        "button-padding-sm",
-        "button-padding-lg",
-        "button-padding-ghost",
-        "button-padding-ghost-field",
-        "button-padding-ghost-sm",
-        "button-border-width",
-        "button-outline-width",
-      ]
-    `);
+Array [
+  "button-font-weight",
+  "button-font-size",
+  "button-border-radius",
+  "button-height",
+  "button-padding",
+  "button-padding-field",
+  "button-padding-sm",
+  "button-padding-lg",
+  "button-padding-ghost",
+  "button-padding-ghost-field",
+  "button-padding-ghost-sm",
+  "button-border-width",
+  "button-outline-width",
+  "white",
+  "g10",
+  "g90",
+  "g100",
+  "button-separator",
+  "button-primary",
+  "button-secondary",
+  "button-tertiary",
+  "button-danger-primary",
+  "button-danger-secondary",
+  "button-danger-active",
+  "button-primary-active",
+  "button-secondary-active",
+  "button-tertiary-active",
+  "button-danger-hover",
+  "button-primary-hover",
+  "button-secondary-hover",
+  "button-tertiary-hover",
+  "button-disabled",
+]
+`);
   });
 
   test('configuration', async () => {
