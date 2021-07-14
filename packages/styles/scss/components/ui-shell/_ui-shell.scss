@@ -7,7 +7,9 @@
 
 @use 'content';
 @use 'header';
+@use 'header-panel';
 @use 'side-nav';
+@use 'switcher';
 
 /// UI shell content
 /// @access private
@@ -15,5 +17,7 @@
 @mixin ui-shell {
   @include content.content;
   @include header.header;
+  @include header-panel.header-panel;
   @include side-nav.side-nav;
+  @include switcher.switcher;
 }
