@@ -6,6 +6,7 @@
  */
 
 import React, { useEffect, useRef, useState } from 'react';
+import ReactDOM from 'react-dom';
 import classnames from 'classnames';
 import PropTypes from 'prop-types';
 import { settings } from 'carbon-components';
@@ -36,8 +37,9 @@ const margin = 16; // distance to keep to body edges, in px
 const Menu = function Menu({
   autoclose = true,
   children,
-  open,
+  id,
   level = 1,
+  open,
   x = 0,
   y = 0,
   onClose = () => {},
@@ -48,6 +50,25 @@ const Menu = function Menu({
   const [position, setPosition] = useState([x, y]);
   const [canBeClosed, setCanBeClosed] = useState(false);
   const isRootMenu = level === 1;
+  const focusReturn = useRef(null);
+
+  function returnFocus() {
+    if (focusReturn.current) {
+      focusReturn.current.focus();
+    }
+  }
+
+  function close(eventType) {
+    const isKeyboardEvent = /^key/.test(eventType);
+
+    if (isKeyboardEvent) {
+      window.addEventListener('keyup', returnFocus, { once: true });
+    } else {
+      window.addEventListener('mouseup', returnFocus, { once: true });
+    }
+
+    onClose();
+  }
 
   function getContainerBoundaries() {
     const { clientWidth: bodyWidth, clientHeight: bodyHeight } = document.body;
@@ -107,6 +128,11 @@ const Menu = function Menu({
   }
 
   function handleKeyDown(event) {
+    if (match(event, keys.Tab)) {
+      event.preventDefault();
+      close(event.type);
+    }
+
     if (
       event.target.tagName === 'LI' &&
       (match(event, keys.Enter) || match(event, keys.Space))
@@ -120,7 +146,7 @@ const Menu = function Menu({
       match(event, keys.Escape) ||
       (!isRootMenu && match(event, keys.ArrowLeft))
     ) {
-      onClose();
+      close(event.type);
     }
 
     let nodeToFocus;
@@ -152,17 +178,17 @@ const Menu = function Menu({
     }
   }
 
-  function handleClick(e) {
-    if (!clickedElementHasSubnodes(e) && e.target.tagName !== 'UL') {
-      onClose();
+  function handleClick(event) {
+    if (!clickedElementHasSubnodes(event) && event.target.tagName !== 'UL') {
+      close(event.type);
     } else {
-      e.stopPropagation();
+      event.stopPropagation();
     }
   }
 
-  function handleClickOutside(e) {
-    if (!clickedElementHasSubnodes(e) && open && canBeClosed && autoclose) {
-      onClose();
+  function handleClickOutside(event) {
+    if (!clickedElementHasSubnodes(event) && open && canBeClosed && autoclose) {
+      close(event.type);
     }
   }
 
@@ -187,10 +213,20 @@ const Menu = function Menu({
     return correctedPosition;
   }
 
+  function handleBlur(event) {
+    if (
+      isRootMenu &&
+      !rootRef?.current?.element.contains(event.relatedTarget)
+    ) {
+      close(event.type);
+    }
+  }
+
   useEffect(() => {
     setCanBeClosed(false);
 
     if (open) {
+      focusReturn.current = document.activeElement;
       let localDirection = 1;
 
       if (isRootMenu) {
@@ -235,9 +271,11 @@ const Menu = function Menu({
   });
 
   const ulAttributes = {
+    id,
     className: classes,
     onKeyDown: handleKeyDown,
     onClick: handleClick,
+    onBlur: handleBlur,
     role: 'menu',
     tabIndex: -1,
     'data-direction': direction,
@@ -274,11 +312,15 @@ const Menu = function Menu({
     childrenToRender = React.Children.toArray(options[0].props.children);
   }
 
-  return (
+  const menu = (
     <ClickListener onClickOutside={handleClickOutside} ref={rootRef}>
       <ul {...ulAttributes}>{childrenToRender}</ul>
     </ClickListener>
   );
+
+  return isRootMenu
+    ? (open && ReactDOM.createPortal(menu, document.body)) || null
+    : menu;
 };
 
 Menu.propTypes = {
@@ -292,6 +334,11 @@ Menu.propTypes = {
    * Specify the children of the Menu
    */
   children: PropTypes.node,
+
+  /**
+   * Define an ID for this menu
+   */
+  id: PropTypes.string,
 
   /**
    * Internal: keeps track of the nesting level of the menu
