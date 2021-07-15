@@ -42,7 +42,7 @@ With that all in place, you're ready to start contributing to Carbon!
 
 ## Setting up the repository:
 ## Windows guide:
-This repository runs best in a Linux envrionment, to avoid running into any errors as a windows user
+This repository runs best in a Linux environment. To avoid running into any errors as a Windows user
 you will need to run the repo in a Linux environment using the Linux Subsystem for Windows.
 
 System requirements:
