@@ -79,7 +79,7 @@ sudo apt-get update
 sudo apt-get upgrade
 ```
 3: 
-Install linux build tools:
+Install Linux build tools:
 ```
 sudo apt-get install build-essential
 ```
