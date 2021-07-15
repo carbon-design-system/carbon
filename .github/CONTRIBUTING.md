@@ -51,7 +51,7 @@ https://docs.microsoft.com/en-us/windows/wsl/install-win10
 prerequisites:
 - aforementioned prerequisites
 - Windows Subsystem for Linux
-- linux operating system of your choice.
+- Linux operating system distribution of your choice.
 
 ## 1: Open a PowerShell session and enter:
 ```
