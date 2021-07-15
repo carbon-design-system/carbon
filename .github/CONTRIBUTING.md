@@ -64,7 +64,7 @@ dism.exe /online /enable-feature /featurename:VirtualMachinePlatform /all /nores
 ## 3: Install the Linux kernal update package
 https://wslstorestorage.blob.core.windows.net/wslblob/wsl_update_x64.msi
 
-## 4: Install the Ubuntu 18.04 from the microsoft store:
+## 4: Install Ubuntu 18.04 from the Microsoft Store:
 https://www.microsoft.com/en-us/p/ubuntu-1804-lts/9n9tngvndl3q?activetab=pivot:overviewtab
 
 ### 4.5 Once installed, launch Ubuntu & set up your user account (follow the prompts)
