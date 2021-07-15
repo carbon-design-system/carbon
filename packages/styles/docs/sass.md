@@ -141,17 +141,17 @@ between version updates.
 
 **Files**
 
-| Component | File                                                        |
-| :-------- | :---------------------------------------------------------- |
-| Accordion | [`scss/components/accordion`](../scss/components/accordion) |
+| Component | Import                                             | File                                                        |
+| :-------- | :------------------------------------------------- | :---------------------------------------------------------- |
+| Accordion | `@use '@carbon/styles/scss/components/accordion';` | [`scss/components/accordion`](../scss/components/accordion) |
 
 ## Utilities
 
 **Files**
 
-| File                           | Description |
-| :----------------------------- | :---------- |
-| `scss/utilities/focus-outline` |             |
+| Import                                                | Description |
+| :---------------------------------------------------- | :---------- |
+| `@use '@carbon/styles/scss/utilities/focus-outline';` |             |
 
 ## Configuration
 
