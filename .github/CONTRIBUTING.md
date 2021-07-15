@@ -53,7 +53,7 @@ prerequisites:
 - Windows Subsystem for Linux
 - linux operating system of your choice.
 
-## 1: Open a powershell session and enter:
+## 1: Open a PowerShell session and enter:
 ```
 dism.exe /online /enable-feature /featurename:Microsoft-Windows-Subsystem-Linux /all /norestart
 ```
