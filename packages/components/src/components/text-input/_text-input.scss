@@ -214,7 +214,7 @@
     color: $text-disabled;
     cursor: not-allowed;
     // Needed to fix disabled text in Safari #6673
-    -webkit-text-fill-color: currentColor;
+    -webkit-text-fill-color: $disabled-02;
   }
 
   .#{$prefix}--text-input--light:disabled {
