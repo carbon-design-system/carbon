@@ -60,82 +60,82 @@ be additional files that you can import from directly within the package, these
 are the public entrypoints that are maintained and follow semantic versioning
 between version updates.
 
-| File                 | Description                                                |
-| :------------------- | :--------------------------------------------------------- |
-| `scss/breakpoint`    | Helper functions and mixins for working with breakpoints   |
-| `scss/colors`        | Access colors from every swatch in the IBM Design Language |
-| `scss/config`        | Configure various options for the package                  |
-| `scss/feature-flags` | Configure various feature flags for experiments            |
-| `scss/grid`          | Access and use the CSS Grid built-in to Carbon             |
-| `scss/motion`        | Helper function, mixins, and tokens for motion             |
-| `scss/reset`         | A CSS Reset                                                |
-| `scss/spacing`       | Variables for the spacing scale                            |
-| `scss/theme`         | Tokens for the current theme                               |
-| `scss/themes`        | Reference the default themes from the Carbon Design System |
-| `scss/type`          | Type tokens and helpers                                    |
-| `scss/components/`   | A directory containing component styles                    |
-| `scss/utilities/`    | A directory containing common CSS utilities                |
+| File                                   | Description                                                |
+| :------------------------------------- | :--------------------------------------------------------- |
+| [`scss/breakpoint`](#breakpoint)       | Helper functions and mixins for working with breakpoints   |
+| [`scss/colors`](#colors)               | Access colors from every swatch in the IBM Design Language |
+| [`scss/config`](#config)               | Configure various options for the package                  |
+| [`scss/feature-flags`](#feature-flags) | Configure various feature flags for experiments            |
+| [`scss/grid`](#grid)                   | Access and use the CSS Grid built-in to Carbon             |
+| [`scss/motion`](#motion)               | Helper function, mixins, and tokens for motion             |
+| [`scss/reset`](#reset)                 | A CSS Reset                                                |
+| [`scss/spacing`](#spacing)             | Variables for the spacing scale                            |
+| [`scss/theme`](#theming)               | Tokens for the current theme                               |
+| [`scss/themes`](#theming)              | Reference the default themes from the Carbon Design System |
+| [`scss/type`](#type)                   | Type tokens and helpers                                    |
+| [`scss/components/`](#components)      | A directory containing component styles                    |
+| [`scss/utilities/`](#utilities)        | A directory containing common CSS utilities                |
 
 ## Breakpoint
 
-| Import                            | Filepath                |
-| :-------------------------------- | :---------------------- |
-| `@use '@carbon/scss/breakpoint';` | `scss/_breakpoint.scss` |
+| Import                                   | Filepath                |
+| :--------------------------------------- | :---------------------- |
+| `@use '@carbon/styles/scss/breakpoint';` | `scss/_breakpoint.scss` |
+
+## Colors
+
+| Import                               | Filepath            |
+| :----------------------------------- | :------------------ |
+| `@use '@carbon/styles/scss/colors';` | `scss/_colors.scss` |
 
 ## Config
 
-| Import                        | Filepath            |
-| :---------------------------- | :------------------ |
-| `@use '@carbon/scss/config';` | `scss/_config.scss` |
-
-## Color
-
-| Import                        | Filepath            |
-| :---------------------------- | :------------------ |
-| `@use '@carbon/scss/colors';` | `scss/_colors.scss` |
+| Import                               | Filepath            |
+| :----------------------------------- | :------------------ |
+| `@use '@carbon/styles/scss/config';` | `scss/_config.scss` |
 
 ## Feature Flags
 
-| Import                               | Filepath                   |
-| :----------------------------------- | :------------------------- |
-| `@use '@carbon/scss/feature-flags';` | `scss/_feature-flags.scss` |
+| Import                                      | Filepath                   |
+| :------------------------------------------ | :------------------------- |
+| `@use '@carbon/styles/scss/feature-flags';` | `scss/_feature-flags.scss` |
 
 ## Grid
 
-| Import                      | Filepath          |
-| :-------------------------- | :---------------- |
-| `@use '@carbon/scss/grid';` | `scss/_grid.scss` |
+| Import                             | Filepath          |
+| :--------------------------------- | :---------------- |
+| `@use '@carbon/styles/scss/grid';` | `scss/_grid.scss` |
 
 ## Motion
 
-| Import                        | Filepath            |
-| :---------------------------- | :------------------ |
-| `@use '@carbon/scss/motion';` | `scss/_motion.scss` |
+| Import                               | Filepath            |
+| :----------------------------------- | :------------------ |
+| `@use '@carbon/styles/scss/motion';` | `scss/_motion.scss` |
 
 ## Reset
 
-| Import                       | Filepath           |
-| :--------------------------- | :----------------- |
-| `@use '@carbon/scss/reset';` | `scss/_reset.scss` |
+| Import                              | Filepath           |
+| :---------------------------------- | :----------------- |
+| `@use '@carbon/styles/scss/reset';` | `scss/_reset.scss` |
 
 ## Spacing
 
-| Import                         | Filepath             |
-| :----------------------------- | :------------------- |
-| `@use '@carbon/scss/spacing';` | `scss/_spacing.scss` |
+| Import                                | Filepath             |
+| :------------------------------------ | :------------------- |
+| `@use '@carbon/styles/scss/spacing';` | `scss/_spacing.scss` |
 
 ## Theming
 
-| Import                        | Filepath            |
-| :---------------------------- | :------------------ |
-| `@use '@carbon/scss/theme';`  | `scss/_theme.scss`  |
-| `@use '@carbon/scss/themes';` | `scss/_themes.scss` |
+| Import                               | Filepath            |
+| :----------------------------------- | :------------------ |
+| `@use '@carbon/styles/scss/theme';`  | `scss/_theme.scss`  |
+| `@use '@carbon/styles/scss/themes';` | `scss/_themes.scss` |
 
 ## Type
 
-| Import                      | Filepath          |
-| :-------------------------- | :---------------- |
-| `@use '@carbon/scss/type';` | `scss/_type.scss` |
+| Import                             | Filepath          |
+| :--------------------------------- | :---------------- |
+| `@use '@carbon/styles/scss/type';` | `scss/_type.scss` |
 
 ## Components
 
