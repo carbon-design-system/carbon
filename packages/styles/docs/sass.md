@@ -33,26 +33,6 @@ The `@carbon/styles` package provides the Sass files needed to include every
 style for the Carbon Design System. It includes entrypoints for themes, tokens,
 CSS helpers, components, and more.
 
-This package requires [Dart Sass](http://npmjs.com/package/sass) in order to
-compile. It uses
-[Sass modules](https://css-tricks.com/introducing-sass-modules/) to organize the
-codebase and provide exports to use.
-
-If you're new to Sass, or are wondering how to configure Sass for your project,
-we recommend checking out the following resources and links:
-
-- [Sass Basics](https://sass-lang.com/guide)
-- [Webpack with Sass](https://webpack.js.org/loaders/sass-loader/)
-- [Next.js with Sass](https://nextjs.org/docs/basic-features/built-in-css-support#sass-support)
-- [Create React App with Sass](https://create-react-app.dev/docs/adding-a-sass-stylesheet/)
-- [Parcel with Sass](https://v2.parceljs.org/languages/sass/)
-- [Vite with Sass](https://vitejs.dev/guide/features.html#css-pre-processors)
-- [Snowpack with Sass](https://www.snowpack.dev/guides/sass/)
-
-Once you get Sass up and running in your project, make sure to configure Sass to
-include `node_modules` in its `includePaths` option. For more information,
-checkout the [configuration](#configuration) section below.
-
 ### Files
 
 The following is a table of all files that are available to use. While there may
