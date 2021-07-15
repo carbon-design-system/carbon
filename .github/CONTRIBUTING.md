@@ -61,7 +61,7 @@ dism.exe /online /enable-feature /featurename:Microsoft-Windows-Subsystem-Linux 
 ```
 dism.exe /online /enable-feature /featurename:VirtualMachinePlatform /all /norestart
 ```
-## 3: Install the Linux kernal update package
+## 3: Install the Linux kernel update package
 https://wslstorestorage.blob.core.windows.net/wslblob/wsl_update_x64.msi
 
 ## 4: Install Ubuntu 18.04 from the Microsoft Store:
