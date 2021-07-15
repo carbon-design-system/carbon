@@ -2324,6 +2324,9 @@ Map {
       "disabled": Object {
         "type": "bool",
       },
+      "helperText": Object {
+        "type": "node",
+      },
       "hideLabel": Object {
         "type": "bool",
       },
