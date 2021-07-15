@@ -17,9 +17,7 @@ contributing environment. Please take a look at our
 
 ## Prerequisites
 
-Before contributing to Carbon, you should make sure you have the following tools
-installed:
-
+Before contributing to Carbon, you should make sure you have the following tools installed:
 - [Node.js](https://nodejs.org/en/download/) v14 or above here or follow their
   installation through a package manager
   [here](https://nodejs.org/en/download/package-manager/))
@@ -30,6 +28,8 @@ installed:
 - Git
 - [Yarn](https://yarnpkg.com/en/docs/install)
 
+
+
 You'll also need a code editor to make changes to Carbon. There are many to
 choose from but some popular options are
 [VSCode](https://code.visualstudio.com/), [Atom](https://atom.io), and
@@ -39,6 +39,82 @@ With that all in place, you're ready to start contributing to Carbon!
 
 ## Start contributing
 
+
+## Setting up the repository:
+## Windows guide:
+This repository runs best in a Linux environment. To avoid running into any errors as a Windows user
+you will need to run the repo in a Linux environment using the Linux Subsystem for Windows.
+
+System requirements:
+https://docs.microsoft.com/en-us/windows/wsl/install-win10
+
+prerequisites:
+- aforementioned prerequisites
+- Windows Subsystem for Linux
+- Linux operating system distribution of your choice.
+
+## 1: Open a PowerShell session and enter:
+```
+dism.exe /online /enable-feature /featurename:Microsoft-Windows-Subsystem-Linux /all /norestart
+```
+## 2: Once the command has finished executing run:
+```
+dism.exe /online /enable-feature /featurename:VirtualMachinePlatform /all /norestart
+```
+## 3: Install the Linux kernel update package
+https://wslstorestorage.blob.core.windows.net/wslblob/wsl_update_x64.msi
+
+## 4: Install Ubuntu 18.04 from the Microsoft Store:
+https://www.microsoft.com/en-us/p/ubuntu-1804-lts/9n9tngvndl3q?activetab=pivot:overviewtab
+
+### 4.5 Once installed, launch Ubuntu & set up your user account (follow the prompts)
+
+## 5: Run the commands (using Ubuntu) as follows.
+1:
+```
+sudo apt-get update
+```
+2:
+```
+sudo apt-get upgrade
+```
+3: 
+Install Linux build tools:
+```
+sudo apt-get install build-essential
+```
+4:
+```
+sudo apt-get install autoconf automake gdb git libffi-dev zlib1g-dev libssl-dev
+```
+5:
+Install Node.js 14
+```
+sudo curl -fsSL https://deb.nodesource.com/setup_14.x | sudo -E bash -
+
+```
+6:
+```
+sudo apt-get install -y nodejs
+```
+7: 
+install Node version manager.
+```
+sudo curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.38.0/install.sh | bash
+```
+8:
+Install Yarn
+```
+sudo npm install -g yarn
+```
+### After these installations have completed, follow the Linux guide to start working with the repo...
+
+
+
+
+
+
+## Linux guide:
 ### 1. Fork the repo:
 
 Go to
