@@ -58,7 +58,7 @@
     "@carbon/styles": "^0.10.0-rc.0",
     "@carbon/themes": "^10.38.0",
     "@rollup/plugin-babel": "^5.3.0",
-    "@rollup/plugin-commonjs": "^18.0.0",
+    "@rollup/plugin-commonjs": "^19.0.1",
     "@rollup/plugin-node-resolve": "^11.2.1",
     "@storybook/addon-actions": "^6.3.1",
     "@storybook/addon-docs": "^6.3.1",
