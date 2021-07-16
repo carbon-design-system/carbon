@@ -10,7 +10,7 @@
 @use '@carbon/styles/scss/zone';
 
 .theme-section {
+  padding: 1rem;
   background: theme.$background;
   color: theme.$text-primary;
-  padding: 1rem;
 }
