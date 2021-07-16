@@ -125,10 +125,8 @@ body {
 }
 ```
 
-Under the hood, the value of the `$background` Sass Variable will map to the CSS
-Custom Property `var(--cds-background)`. This file also includes
-[contextual tokens](#todo-link) like `$field`, `$layer`, or `border-strong` for
-you to use, as well.
+For a full list of tokens available for you to use, check out our
+[theming documentation](../themes/docs/sass.md#tokens).
 
 ## 📖 API Documentation
 
