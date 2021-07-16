@@ -10,6 +10,7 @@ import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { settings } from 'carbon-components';
 import { OverflowMenuVertical16 } from '@carbon/icons-react';
+import { useId } from '../../../internal/useId';
 import Menu from '../../Menu';
 
 const { prefix } = settings;
@@ -19,6 +20,7 @@ function OverflowMenu({
   renderIcon: IconElement = OverflowMenuVertical16,
   ...rest
 }) {
+  const id = useId('overflowmenu');
   const [open, setOpen] = useState(false);
   const [position, setPosition] = useState([
     [0, 0],
@@ -55,12 +57,22 @@ function OverflowMenu({
     }
   }
 
+  function handleMousedown(e) {
+    // prevent default for mousedown on trigger element to avoid
+    // the "blur" event from firing on the menu as this would close
+    // it and immediately re-open since "click" event is fired after
+    // "blur" event.
+    e.preventDefault();
+  }
+
+  const containerClasses = classNames(`${prefix}--overflow-menu__container`);
+
   const triggerClasses = classNames(`${prefix}--overflow-menu`, {
     [`${prefix}--overflow-menu--open`]: open,
   });
 
   return (
-    <>
+    <div className={containerClasses} aria-owns={id}>
       <button
         {...rest}
         type="button"
@@ -68,13 +80,19 @@ function OverflowMenu({
         aria-expanded={open}
         className={triggerClasses}
         onClick={handleClick}
+        onMouseDown={handleMousedown}
         ref={triggerRef}>
         <IconElement />
       </button>
-      <Menu open={open} onClose={closeMenu} x={position[0]} y={position[1]}>
+      <Menu
+        id={id}
+        open={open}
+        onClose={closeMenu}
+        x={position[0]}
+        y={position[1]}>
         {children}
       </Menu>
-    </>
+    </div>
   );
 }
 
