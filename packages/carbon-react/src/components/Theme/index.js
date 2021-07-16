@@ -9,8 +9,13 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 
-const ThemeContext = React.createContext({ theme: 'white' });
+const ThemeContext = React.createContext({
+  theme: 'white',
+});
 
+/**
+ * Specify the theme to be applied to a page, or a region in a page
+ */
 export function Theme({
   as: BaseComponent = 'div',
   children,
@@ -56,11 +61,20 @@ Theme.propTypes = {
   children: PropTypes.node,
 
   /**
+   * Provide a custom class name to be used on the outermost element rendered by
+   * the component
+   */
+  className: PropTypes.string,
+
+  /**
    * Specify the theme
    */
-  theme: PropTypes.string,
+  theme: PropTypes.oneOf(['white', 'g10', 'g90', 'g100']),
 };
 
+/**
+ * Get access to the current theme
+ */
 export function useTheme() {
   return React.useContext(ThemeContext);
 }

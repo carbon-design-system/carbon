@@ -10,17 +10,6 @@ import { Theme, useTheme } from '../../Theme';
 import { screen, render } from '@testing-library/react';
 
 describe('Theme', () => {
-  it("should apply a given theme to it's children", () => {
-    // render(
-    // <Theme theme="white" id="test">
-    // <span>test</span>
-    // </Theme>
-    // );
-    // const root = document.getElementByid('test');
-  });
-
-  it.todo("should apply a given theme object to it's children");
-
   it('should render the children passed in as a prop', () => {
     render(
       <Theme>
@@ -37,15 +26,15 @@ describe('Theme', () => {
       return <span data-testid={id}>{theme}</span>;
     }
     render(
-      <Theme theme="default">
+      <Theme theme="white">
         <TestComponent id="default" />
-        <Theme theme="nested">
+        <Theme theme="g100">
           <TestComponent id="nested" />
         </Theme>
       </Theme>
     );
 
-    expect(screen.getByTestId('default')).toHaveTextContent('default');
-    expect(screen.getByTestId('nested')).toHaveTextContent('nested');
+    expect(screen.getByTestId('default')).toHaveTextContent('white');
+    expect(screen.getByTestId('nested')).toHaveTextContent('g100');
   });
 });

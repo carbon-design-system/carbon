@@ -14,13 +14,26 @@ export default {
   title: 'Components/Theme',
   component: Theme,
   parameters: {
+    controls: {
+      hideNoControlsWarning: true,
+    },
     docs: {
       page: mdx,
     },
   },
   argTypes: {
+    as: {
+      table: {
+        disable: true,
+      },
+    },
+    children: {
+      table: {
+        disable: true,
+      },
+    },
     theme: {
-      options: ['white', 'g10', 'g90', 'g100'],
+      defaultValue: 'g10',
     },
   },
 };
@@ -52,21 +65,19 @@ export const Default = () => {
   );
 };
 
-Default.controls = { hideNoControlsWarning: true };
-
 export const UseTheme = () => {
   function Example() {
     const { theme } = useTheme();
-    return <div>The current theme is: {theme}</div>;
+    return <div className="theme-section">The current theme is: {theme}</div>;
   }
 
   return (
-    <>
+    <div>
       <Example />
       <Theme theme="g100">
         <Example />
       </Theme>
-    </>
+    </div>
   );
 };
 
@@ -83,5 +94,3 @@ const PlaygroundStory = (args) => {
 };
 
 export const Playground = PlaygroundStory.bind({});
-
-// Playground.;
