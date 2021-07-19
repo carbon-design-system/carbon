@@ -15,9 +15,12 @@ import Menu from '../../Menu';
 
 const { prefix } = settings;
 
+const defaultSize = 'md';
+
 function OverflowMenu({
   children,
   renderIcon: IconElement = OverflowMenuVertical16,
+  size = defaultSize,
   ...rest
 }) {
   const id = useId('overflowmenu');
@@ -67,9 +70,13 @@ function OverflowMenu({
 
   const containerClasses = classNames(`${prefix}--overflow-menu__container`);
 
-  const triggerClasses = classNames(`${prefix}--overflow-menu`, {
-    [`${prefix}--overflow-menu--open`]: open,
-  });
+  const triggerClasses = classNames(
+    `${prefix}--overflow-menu`,
+    {
+      [`${prefix}--overflow-menu--open`]: open,
+    },
+    size !== defaultSize && `${prefix}--overflow-menu--${size}`
+  );
 
   return (
     <div className={containerClasses} aria-owns={id}>
@@ -86,6 +93,7 @@ function OverflowMenu({
       </button>
       <Menu
         id={id}
+        size={size}
         open={open}
         onClose={closeMenu}
         x={position[0]}
@@ -106,6 +114,11 @@ OverflowMenu.propTypes = {
    * Function called to override icon rendering.
    */
   renderIcon: PropTypes.oneOfType([PropTypes.func, PropTypes.object]),
+
+  /**
+   * Specify the size of the menu, from a list of available sizes.
+   */
+  size: PropTypes.oneOf(['sm', 'md', 'lg']),
 };
 
 export default OverflowMenu;
