@@ -33,6 +33,7 @@ import MenuSelectableItem from './MenuSelectableItem';
 const { prefix } = settings;
 
 const margin = 16; // distance to keep to body edges, in px
+const defaultSize = 'sm';
 
 const Menu = function Menu({
   autoclose = true,
@@ -40,6 +41,7 @@ const Menu = function Menu({
   id,
   level = 1,
   open,
+  size = defaultSize,
   x = 0,
   y = 0,
   onClose = () => {},
@@ -263,12 +265,16 @@ const Menu = function Menu({
     }
   });
 
-  const classes = classnames(`${prefix}--menu`, {
-    [`${prefix}--menu--open`]: open,
-    [`${prefix}--menu--invisible`]:
-      open && position[0] === 0 && position[1] === 0,
-    [`${prefix}--menu--root`]: isRootMenu,
-  });
+  const classes = classnames(
+    `${prefix}--menu`,
+    {
+      [`${prefix}--menu--open`]: open,
+      [`${prefix}--menu--invisible`]:
+        open && position[0] === 0 && position[1] === 0,
+      [`${prefix}--menu--root`]: isRootMenu,
+    },
+    size !== defaultSize && `${prefix}--menu--${size}`
+  );
 
   const ulAttributes = {
     id,
@@ -354,6 +360,11 @@ Menu.propTypes = {
    * Specify whether the Menu is currently open
    */
   open: PropTypes.bool,
+
+  /**
+   * Specify the size of the menu, from a list of available sizes.
+   */
+  size: PropTypes.oneOf(['sm', 'md', 'lg']),
 
   /**
    * Specify the x position where this menu is rendered
