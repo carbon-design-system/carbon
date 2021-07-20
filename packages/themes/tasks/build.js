@@ -121,10 +121,9 @@ async function build() {
     },
   ];
 
-  await fs.ensureDir(SCSS_DIR);
-  await fs.ensureDir(path.resolve(SCSS_DIR, '..', 'modules', 'generated'));
-
   for (const { filepath, builder } of files) {
+    await fs.ensureFile(filepath);
+
     const { code } = generate(builder());
     await fs.writeFile(filepath, code);
   }
