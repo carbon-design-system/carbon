@@ -10,6 +10,7 @@
 @use '../../spacing' as *;
 @use '../../theme' as *;
 @use '../../type' as *;
+@use '../button/tokens' as button;
 @use '../../utilities/focus-outline' as *;
 @use '../../utilities/high-contrast-mode' as *;
 @use '../../utilities/visually-hidden' as *;
@@ -252,7 +253,7 @@
   }
 
   .#{$prefix}--tile--disabled.#{$prefix}--tile--is-selected {
-    border-color: $button-disabled;
+    border-color: button.$button-disabled;
   }
 
   .#{$prefix}--tile--disabled .#{$prefix}--tile__checkmark svg {
