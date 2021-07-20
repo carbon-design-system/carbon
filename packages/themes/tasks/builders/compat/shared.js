@@ -108,7 +108,7 @@ const denylist = new Set([
   'brand02',
   'brand03',
   'active01',
-  'hoverField',
+  // 'hoverField',
   'danger',
 ]);
 

@@ -9,8 +9,13 @@
 @use '@carbon/themes/scss/modules/config' with (
   $prefix: $prefix,
 );
+@use './compat/themes' as compat;
+@use './themes';
 
-@forward '@carbon/themes/scss/modules/theme';
+@forward '@carbon/themes/scss/modules/theme' with (
+  $fallback: themes.$white !default,
+  $theme: compat.$white !default,
+);
 @forward '@carbon/themes/scss/modules/tokens';
 
 @use '@carbon/themes/scss/modules/tokens';
