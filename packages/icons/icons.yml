@@ -7154,8 +7154,27 @@
     - filled
   sizes:
     - glyph
+- name: caution
+  friendly_name: Caution
+  aliases:
+    - caution
+    - warning
+    - triangle
+    - filled
+  sizes:
+    - glyph
 - name: glyph--caution-inverted
   friendly_name: Glyph caution inverted
+  aliases:
+    - caution
+    - warning
+    - inverted
+    - triangle
+    - filled
+  sizes:
+    - glyph
+- name: caution-inverted
+  friendly_name: Caution inverted
   aliases:
     - caution
     - warning
@@ -7173,6 +7192,15 @@
     - round
   sizes:
     - glyph
+- name: circle-fill
+  friendly_name: Circle fill
+  aliases:
+    - circle
+    - filled
+    - solid
+    - round
+  sizes:
+    - glyph
 - name: glyph--circle-stroke
   friendly_name: Glyph circle stroke
   aliases:
@@ -7182,8 +7210,26 @@
     - outlined
   sizes:
     - glyph
+- name: circle-stroke
+  friendly_name: Circle stroke
+  aliases:
+    - stroke
+    - circle
+    - round
+    - outlined
+  sizes:
+    - glyph
 - name: glyph--critical
   friendly_name: Glyph critical
+  aliases:
+    - critical
+    - warning
+    - caution
+    - slash
+  sizes:
+    - glyph
+- name: critical
+  friendly_name: Critical
   aliases:
     - critical
     - warning
@@ -7202,6 +7248,14 @@
     - glyph
 - name: glyph--square-fill
   friendly_name: Glyph square fill
+  aliases:
+    - square
+    - filled
+    - box
+  sizes:
+    - glyph
+- name: square-fill
+  friendly_name: Square fill
   aliases:
     - square
     - filled
@@ -7968,6 +8022,7 @@
     - status
   sizes:
     - 32
+    - glyph
 - name: incomplete--cancel
   friendly_name: Incomplete cancel
   aliases:
@@ -15781,6 +15836,7 @@
     - undefined
   sizes:
     - 32
+    - glyph
 - name: undefined--filled
   friendly_name: Undefined filled
   sizes:

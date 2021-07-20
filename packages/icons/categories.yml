@@ -1154,15 +1154,24 @@ categories:
           - error--filled
           - error--outline
           - glyph--caution
+          - caution
           - glyph--caution-inverted
+          - caution-inverted
           - glyph--circle-fill
+          - circle-fill
           - glyph--circle-stroke
+          - circle-stroke
           - glyph--critical
           - critical-severity
           - glyph--incomplete
           - low-severity
+          - critical
+          - glyph--incomplete
+          - incomplete
           - glyph--square-fill
+          - square-fill
           - glyph--undefined
+          - undefined
           - help
           - help--filled
           - in-progress
