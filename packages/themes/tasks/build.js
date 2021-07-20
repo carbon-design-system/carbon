@@ -19,6 +19,8 @@ const yaml = require('js-yaml');
 const { formatTokenName, themes, tokens } = require('../lib');
 const buildTokensFile = require('./builders/tokens');
 const buildThemesFile = require('./builders/themes');
+const buildCompatThemesFile = require('./builders/compat/themes');
+const buildCompatTokensFile = require('./builders/compat/tokens');
 const buildModulesThemesFile = require('./builders/modules-themes');
 const buildModulesTokensFile = require('./builders/modules-tokens');
 const buildMixinsFile = require('./builders/mixins');
@@ -62,6 +64,30 @@ async function build() {
           defaultTheme,
           defaultThemeMapName
         );
+      },
+    },
+    {
+      filepath: path.resolve(
+        SCSS_DIR,
+        '..',
+        'compat',
+        'generated',
+        '_themes.scss'
+      ),
+      builder() {
+        return buildCompatThemesFile();
+      },
+    },
+    {
+      filepath: path.resolve(
+        SCSS_DIR,
+        '..',
+        'compat',
+        'generated',
+        '_tokens.scss'
+      ),
+      builder() {
+        return buildCompatTokensFile();
       },
     },
     {
