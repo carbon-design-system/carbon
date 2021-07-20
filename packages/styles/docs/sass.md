@@ -65,9 +65,19 @@ between version updates.
 
 ## Colors
 
+The colors package will give you access to every color token within the IBM Design Language.
+
+Access these color tokens for your project by using `@use`. For example: 
+
+```scss
+ @use '@carbon/styles/scss/colors';
+```
+
 | Import                               | Filepath            |
 | :----------------------------------- | :------------------ |
 | `@use '@carbon/styles/scss/colors';` | `scss/_colors.scss` |
+
+For more information checkout our [Files](#files) docs.
 
 ## Config
 
@@ -89,10 +99,23 @@ between version updates.
 
 ## Motion
 
+The motion package provides helper functions, mixins, and duration tokens to add motion into your project.
+
+You can bring in the motion package and tokens by using `@use`. 
+
+For example:
+
+```scss
+ @use '@carbon/styles/scss/motion';
+ .dropdown--arrow {
+  transition: transform $duration-fast-02 motion(standard, productive);
+ }
+```
 | Import                               | Filepath            |
 | :----------------------------------- | :------------------ |
 | `@use '@carbon/styles/scss/motion';` | `scss/_motion.scss` |
 
+For more information checkout our [Files](#files) docs.
 ## Reset
 
 | Import                              | Filepath           |
@@ -187,10 +210,19 @@ options:
 
 ## Type
 
+The type package entrypoint allows you to specifically bring type tokens into your project. The type package includes various type tokens and mixins.
+
+To bring in the `@carbon/type` package use `@use`. For example: 
+
+```scss
+ @use '@carbon/styles/scss/type';
+```
+
 | Import                             | Filepath          |
 | :--------------------------------- | :---------------- |
 | `@use '@carbon/styles/scss/type';` | `scss/_type.scss` |
 
+For more information checkout our [Files](#files) docs.
 ## Components
 
 All of the styles for the components in the Carbon Design System live in the
