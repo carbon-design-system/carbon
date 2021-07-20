@@ -1,0 +1,78 @@
+//
+// Copyright IBM Corp. 2016, 2018
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+@use '../../../config' as *;
+@use '../../../spacing' as *;
+@use '../../../theme' as *;
+@use '../../../type' as *;
+@use '../../../utilities/convert' as *;
+
+/// UI shell side nav
+/// @access private
+/// @group ui-shell
+@mixin switcher {
+  //----------------------------------------------------------------------------
+  // Header Switcher
+  //----------------------------------------------------------------------------
+  .#{$prefix}--switcher {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: $text-secondary;
+  }
+
+  .#{$prefix}--switcher__item {
+    width: 100%;
+    height: $spacing-07;
+  }
+
+  .#{$prefix}--switcher__item:nth-child(1) {
+    margin-top: $spacing-05;
+  }
+
+  .#{$prefix}--switcher__item--divider {
+    display: block;
+    width: rem(224px);
+    height: 1px;
+    border: none;
+    margin: $spacing-03 $spacing-05;
+    background: $border-subtle;
+  }
+
+  .#{$prefix}--switcher__item-link {
+    @include type-style('productive-heading-01');
+
+    display: block;
+    height: $spacing-07;
+    padding: rem(6px) $spacing-05;
+    color: $text-secondary;
+    text-decoration: none;
+
+    &:hover:not(.#{$prefix}--switcher__item-link--selected) {
+      background: $layer-hover;
+      color: $text-primary;
+      cursor: pointer;
+    }
+
+    &:focus {
+      outline: 2px solid $focus;
+      outline-offset: -2px;
+    }
+
+    &:active {
+      background: $layer-active;
+      color: $text-primary;
+    }
+  }
+
+  .#{$prefix}--switcher__item-link--selected {
+    //TO-DO: should we add a 3px left border-interactive here too? Doesn't currently have it, but specs have it
+    background: $layer-selected;
+    color: $text-primary;
+  }
+}
