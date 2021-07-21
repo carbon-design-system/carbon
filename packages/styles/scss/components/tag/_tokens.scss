@@ -12,7 +12,7 @@
 @use '../../utilities/component-tokens';
 
 // prettier-ignore
-$tag-colors: (
+$-tokens: (
   // red
   'tag-background-red': (
     fallback: colors.$red-20,
@@ -663,3 +663,8 @@ $tag-colors: (
     ),
   ),
 );
+
+$white: component-tokens.get-tokens($-tokens, themes.$white);
+$g10: component-tokens.get-tokens($-tokens, themes.$g10);
+$g90: component-tokens.get-tokens($-tokens, themes.$g90);
+$g100: component-tokens.get-tokens($-tokens, themes.$g100);

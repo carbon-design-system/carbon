@@ -11,6 +11,7 @@
 @use '../../type';
 @use '../../motion' as *;
 @use '../../config' as *;
+@use '../../utilities/component-tokens' as *;
 @use '../../utilities/convert' as *;
 @use '../../utilities/high-contrast-mode' as *;
 @use '../../spacing' as *;
@@ -19,7 +20,7 @@
 @use '../../utilities/skeleton';
 
 /// Tag styles
-/// @access private
+/// @access public
 /// @group tag
 @mixin tag {
   .#{$prefix}--tag {
