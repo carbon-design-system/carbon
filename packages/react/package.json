@@ -106,7 +106,7 @@
     "core-js": "^3.6.5",
     "cross-env": "^5.2.0",
     "css-loader": "^3.4.2",
-    "cypress": "^7.2.0",
+    "cypress": "^8.0.0",
     "cypress-real-events": "^1.3.0",
     "fast-sass-loader": "^1.5.0",
     "gzip-size": "^6.0.0",
