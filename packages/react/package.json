@@ -93,7 +93,7 @@
     "@storybook/react": "^6.3.1",
     "@storybook/source-loader": "^6.3.1",
     "@storybook/theming": "^6.3.1",
-    "@testing-library/cypress": "^7.0.6",
+    "@testing-library/cypress": "^8.0.0",
     "babel-loader": "^8.2.2",
     "babel-plugin-dev-expression": "^0.2.2",
     "babel-plugin-react-docgen": "^4.2.1",
