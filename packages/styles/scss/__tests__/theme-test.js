@@ -131,16 +131,19 @@ Array [
   "focus-inverse",
   "skeleton-background",
   "skeleton-element",
-  "border-subtle",
-  "border-strong",
   "layer",
   "layer-active",
   "layer-hover",
-  "layer-accent",
   "layer-selected",
   "layer-selected-hover",
+  "layer-accent",
+  "layer-accent-hover",
+  "layer-accent-active",
   "field",
   "field-hover",
+  "border-subtle",
+  "border-subtle-selected",
+  "border-strong",
 ]
 `);
   });
