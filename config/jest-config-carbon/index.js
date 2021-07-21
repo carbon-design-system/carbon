@@ -37,6 +37,7 @@ module.exports = {
     'e2e',
     'examples',
     '/umd/',
+    '/vendor/',
   ],
   transformIgnorePatterns: [
     '/build/',
