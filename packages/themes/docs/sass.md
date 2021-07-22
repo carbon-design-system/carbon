@@ -72,6 +72,10 @@ You can also extend the theme with your own custom tokens:
 );
 ```
 
+## Tokens
+
+TODO
+
 ## FAQ
 
 ### Why are the themes not exported in `@carbon/themes`?

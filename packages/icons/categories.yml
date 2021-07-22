@@ -353,6 +353,7 @@ categories:
           - renew
           - repeat
           - repeat--one
+          - replicate
           - reply
           - reply--all
           - request-quote
@@ -424,6 +425,7 @@ categories:
           - notification--off
           - notification--off--filled
           - phone
+          - phone--application
           - phone--filled
           - phone--block
           - phone--block--filled
@@ -433,6 +435,7 @@ categories:
           - phone--off--filled
           - phone--outgoing
           - phone--outgoing--filled
+          - phone--settings
           - phone--voice
           - phone--voice--filled
           - radio-button
@@ -495,12 +498,38 @@ categories:
           - logo--snapchat
           - logo--tumblr
           - logo--twitter
+          - logo--wechat
           - logo--xing
           - logo--yelp
           - logo--youtube
           - logo--stumbleupon
   - name: Enterprise
     subcategories:
+      - name: App Catalogue
+        members:
+          - cloud--alerting
+          - cloud--auditing
+          - cloud--data-ops
+          - cloud--logging
+          - cloud--monitoring
+          - cloud--service-management
+          - cloud-foundry--1
+          - cloud-registry
+          - cloud-satellite
+          - cloud-services
+          - content-delivery-network
+          - direct-link
+          - dns-services
+          - flow-logs-vpc
+          - ibm-cloud--dedicated-host
+          - ibm-cloud--internet-services
+          - ibm-cloud--subnets
+          - ibm-cloud--vpc-endpoints
+          - ibm-security--services
+          - infrastructure--classic
+          - load-balancer--vpc
+          - virtual-private-cloud--alt
+          - vlan--ibm
       - name: Commerce
         members:
           - apple
@@ -830,9 +859,6 @@ categories:
           - circle-packing
           - circle--filled
           - classifier--language
-          - cloud--data-ops
-          - cloud-registry
-          - cloud-satellite
           - column-dependency
           - concept
           - container-software
@@ -955,7 +981,6 @@ categories:
           - virtual-column--key
           - virtual-machine
           - virtual-private-cloud
-          - virtual-private-cloud--alt
           - visual-recognition
           - vmdk-disk
           - word-cloud
@@ -984,7 +1009,6 @@ categories:
           - closed-caption
           - closed-caption--alt
           - closed-caption--filled
-          - cloud-foundry--1
           - cloud-foundry--2
           - content-view
           - copy
@@ -1004,10 +1028,14 @@ categories:
           - document--export
           - document--import
           - document--pdf
+          - document--protected
+          - document--security
+          - document--signed
           - document--sketch
           - document--subtract
           - document--tasks
           - document--unknown
+          - document--unprotected
           - document--video
           - document--view
           - document--word-processor
@@ -1078,6 +1106,13 @@ categories:
           - RAW
           - roadmap
           - rule
+          - rule--cancelled
+          - rule--draft
+          - rule--filled
+          - rule--test
+          - result
+          - result--new
+          - result--old
           - scale
           - script
           - script--reference
@@ -1096,6 +1131,7 @@ categories:
           - TXT
           - TXT--reference
           - upload
+          - version
           - websheet
           - WMV
           - workspace
@@ -1126,6 +1162,9 @@ categories:
           - glyph--circle-stroke
           - circle-stroke
           - glyph--critical
+          - critical-severity
+          - glyph--incomplete
+          - low-severity
           - critical
           - glyph--incomplete
           - incomplete
@@ -1167,6 +1206,92 @@ categories:
           - warning--other
           - warning-square
           - warning-square--filled
+      - name: Systems
+        members:
+          - application--mobile
+          - application--virtual
+          - application--web
+          - autoscaling
+          - bare-metal-server
+          - bastion-host
+          - block-storage
+          - block-storage--alt
+          - chat--operational
+          - code-signing-service
+          - container-registry
+          - container-services
+          - data--center
+          - data-accessor
+          - data-backup
+          - data-blob
+          - data-diode
+          - edge-node--alt
+          - file-storage
+          - firewall
+          - firewall--classic
+          - floating-ip
+          - gateway
+          - gateway--api
+          - gateway--mail
+          - gateway--public
+          - gateway--security
+          - gateway--user-access
+          - gateway--vpn
+          - group--access
+          - group--account
+          - group--resource
+          - group--security
+          - gui
+          - gui--management
+          - hardware-security-module
+          - hybrid-networking--alt
+          - id-management
+          - image-service
+          - instance--bx
+          - instance--classic
+          - instance--cx
+          - instance--mx
+          - instance--virtual
+          - intrusion-prevention
+          - kubernetes
+          - load-balancer--application
+          - load-balancer--classic
+          - load-balancer--global
+          - load-balancer--listener
+          - load-balancer--local
+          - load-balancer--network
+          - load-balancer--pool
+          - message-queue
+          - mobility--services
+          - network--enterprise
+          - network--overlay
+          - network--public
+          - object-storage--alt
+          - point-of-presence
+          - router
+          - router--voice
+          - router--wifi
+          - security-services
+          - server--dns
+          - server--proxy
+          - server--time
+          - slisor
+          - subnet-acl-rules
+          - switch-layer-2
+          - switch-layer-3
+          - two-factor-authentication
+          - vehicle--api
+          - vehicle--connected
+          - vehicle--insights
+          - vehicle--services
+          - virtual-desktop
+          - vlan
+          - vpn--connection
+          - vpn--policy
+          - wifi-bridge
+          - wifi-bridge--alt
+          - wifi--not-secure
+          - wifi--secure
   - name: Person
     subcategories:
       - name: Senses
@@ -1193,6 +1318,7 @@ categories:
           - collaborate
           - cough
           - credentials
+          - dog-walker
           - education
           - events
           - events--alt
@@ -1214,6 +1340,7 @@ categories:
           - face--satisfied--filled
           - face--wink
           - face--wink--filled
+          - friendship
           - gender--female
           - gender--male
           - group
@@ -1239,10 +1366,13 @@ categories:
           - user--filled
           - user--follow
           - user--identification
+          - user--military
           - user--multiple
           - user--online
           - user--profile
           - user--role
+          - user--service-desk
+          - user--settings
           - user--simulation
           - user--speaker
           - user--x-ray
@@ -1415,6 +1545,8 @@ categories:
           - traffic-cone
           - train
           - train--heart
+          - train--profile
+          - train--speed
           - train--ticket
           - train--time
           - tram
@@ -1431,6 +1563,7 @@ categories:
           - accumulation--snow
           - agriculture-analytics
           - buoy
+          - carbon-accounting
           - cloud
           - cloud--lightning
           - cloud--rain
@@ -1443,6 +1576,7 @@ categories:
           - dew-point--filled
           - drought
           - earthquake
+          - energy--renewable
           - flood
           - flood--warning
           - fog
@@ -1503,6 +1637,7 @@ categories:
           - soil-temperature
           - soil-temperature--field
           - soil-temperature--global
+          - solar-panel
           - stay-inside
           - storm-tracker
           - sun
@@ -1510,6 +1645,10 @@ categories:
           - sunrise
           - sunset
           - temperature
+          - temperature--celsius
+          - temperature--celsius--alt
+          - temperature--fahrenheit
+          - temperature--fahrenheit--alt
           - temperature--feels-like
           - temperature--frigid
           - temperature--hot
@@ -1541,6 +1680,7 @@ categories:
           - weather-front--warm
           - weather-station
           - wind-gusts
+          - wind-power
           - wind-stream
           - windy
           - windy--dust
@@ -1576,6 +1716,7 @@ categories:
           - calculator--check
           - camera
           - camera--action
+          - cell-tower
           - chat-bot
           - chip
           - cloud--download
@@ -1595,6 +1736,9 @@ categories:
           - development
           - devices
           - drone
+          - drone--delivery
+          - drone--front
+          - drone--video
           - edge-cluster
           - edge-device
           - edge-node
@@ -1641,19 +1785,24 @@ categories:
           - printer
           - qr-code
           - radio
+          - radio--combat
+          - radio--push-to-talk
           - rocket
           - rss
           - satellite
           - share
           - signal-strength
+          - sim-card
           - tablet
           - tablet--landscape
           - terminal
+          - transmission-lte
           - USB
           - voicemail
           - VPN
           - watch
           - wifi
+          - wifi--controller
           - wifi--off
           - wikis
       - name: Instruments
