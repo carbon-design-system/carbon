@@ -124,15 +124,7 @@ beforeEach(() => {
  * the components that we export and their corresponding API.
  */
 test('Public API should only change with a semver change', () => {
-  // deprecation warnings for fields on objects should be ignored
-  const originalWarn = console.warn;
-  const spy = jest.spyOn(console, 'warn').mockImplementation((message) => {
-    if (message.includes('field has been deprecated')) {
-      return;
-    } else {
-      originalWarn(message);
-    }
-  });
+  jest.mock('../src/internal/deprecateFieldOnObject');
 
   const CarbonReact = require('../src');
   const PublicAPI = new Map();
@@ -182,6 +174,4 @@ test('Public API should only change with a semver change', () => {
   }
 
   expect(PublicAPI).toMatchSnapshot();
-
-  spy.mockRestore();
 });

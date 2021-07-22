@@ -14,7 +14,7 @@ import TextInput from './TextInput';
 TextInput.ControlledPasswordInput = ControlledPasswordInput;
 TextInput.PasswordInput = PasswordInput;
 
-if (__DEV__ && !process.env.JEST_WORKER_ID) {
+if (__DEV__) {
   deprecateFieldOnObject(
     TextInput,
     'ControlledPasswordInput',

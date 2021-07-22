@@ -12,7 +12,7 @@ import FilterableMultiSelect from './FilterableMultiSelect';
 FilterableMultiSelect.displayName = 'MultiSelect.Filterable';
 MultiSelect.Filterable = FilterableMultiSelect;
 
-if (__DEV__ && !process.env.JEST_WORKER_ID) {
+if (__DEV__) {
   deprecateFieldOnObject(MultiSelect, 'Filterable', FilterableMultiSelect);
 }
 
