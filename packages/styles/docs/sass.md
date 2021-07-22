@@ -222,7 +222,7 @@ To bring in the `@carbon/type` package use `@use`. For example:
 | :--------------------------------- | :---------------- |
 | `@use '@carbon/styles/scss/type';` | `scss/_type.scss` |
 
-For more information checkout our [Files](#files) docs.
+For more information, check out our [type](#todo) docs.
 ## Components
 
 All of the styles for the components in the Carbon Design System live in the
