@@ -32,6 +32,7 @@ but can be unexpected.
     - `sudo umount /mnt/c`
     - `sudo mount -t drvfs C: /mnt/c -o metadata`
 12. Increase Linux OS limits to avoid errors in build process (limited by WSL by default). 
+    -  https://muhammadtriwibowo.medium.com/set-permanently-ulimit-n-open-files-in-ubuntu-4d61064429a
     - `ulimit -l 65536` -> Increases the maximum amount of locked memory available to OS
     - `ulimit -n 1048576` -> Increases the maximum amount of files that can be in an open state
 13. Change directories into your projects folder
