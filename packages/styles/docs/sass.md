@@ -65,7 +65,7 @@ between version updates.
 
 ## Colors
 
-The colors package will give you access to every color token within the IBM Design Language.
+The colors package will give you access to each swatch from the IBM Design Language. You can refer to a color by its swatch and grade.
 
 Access these color tokens for your project by using `@use`. For example: 
 
