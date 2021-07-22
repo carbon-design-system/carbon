@@ -6,7 +6,7 @@
 //
 
 @use 'sass:color';
-@use '../../colors' as *;
+@use '../../colors';
 @use '../../theme' as *;
 @use '../../themes';
 @use '../../utilities/component-tokens';
@@ -16,650 +16,650 @@
 $-tokens: (
   // red
   'tag-background-red': (
-    fallback: $red-20,
+    fallback: colors.$red-20,
     values: (
       (
         theme: themes.$white,
-        value: $red-20,
+        value: colors.$red-20,
       ),
       (
         theme: themes.$g10,
-        value: $red-20,
+        value: colors.$red-20,
       ),
       (
         theme: themes.$g90,
-        value: $red-80,
+        value: colors.$red-80,
       ),
       (
         theme: themes.$g100,
-        value: $red-80,
+        value: colors.$red-80,
       ),
     ),
   ),
   'tag-color-red': (
-    fallback: $red-80,
+    fallback: colors.$red-80,
     values: (
       (
         theme: themes.$white,
-        value: $red-80,
+        value: colors.$red-80,
       ),
       (
         theme: themes.$g10,
-        value: $red-80,
+        value: colors.$red-80,
       ),
       (
         theme: themes.$g90,
-        value: $red-30,
+        value: colors.$red-30,
       ),
       (
         theme: themes.$g100,
-        value: $red-30,
+        value: colors.$red-30,
       ),
     ),
   ),
   'tag-hover-red': (
-    fallback: $red-30,
+    fallback: colors.$red-30,
     values: (
       (
         theme: themes.$white,
-        value: $red-30,
+        value: colors.$red-30,
       ),
       (
         theme: themes.$g10,
-        value: $red-30,
+        value: colors.$red-30,
       ),
       (
         theme: themes.$g90,
-        value: $red-70,
+        value: colors.$red-70,
       ),
       (
         theme: themes.$g100,
-        value: $red-70,
+        value: colors.$red-70,
       ),
     ),
   ),
 
   // magenta
   'tag-background-magenta': (
-    fallback: $magenta-20,
+    fallback: colors.$magenta-20,
     values: (
       (
         theme: themes.$white,
-        value: $magenta-20,
+        value: colors.$magenta-20,
       ),
       (
         theme: themes.$g10,
-        value: $magenta-20,
+        value: colors.$magenta-20,
       ),
       (
         theme: themes.$g90,
-        value: $magenta-80,
+        value: colors.$magenta-80,
       ),
       (
         theme: themes.$g100,
-        value: $magenta-80,
+        value: colors.$magenta-80,
       ),
     ),
   ),
   'tag-color-magenta': (
-    fallback: $magenta-80,
+    fallback: colors.$magenta-80,
     values: (
       (
         theme: themes.$white,
-        value: $magenta-80,
+        value: colors.$magenta-80,
       ),
       (
         theme: themes.$g10,
-        value: $magenta-80,
+        value: colors.$magenta-80,
       ),
       (
         theme: themes.$g90,
-        value: $magenta-30,
+        value: colors.$magenta-30,
       ),
       (
         theme: themes.$g100,
-        value: $magenta-30,
+        value: colors.$magenta-30,
       ),
     ),
   ),
   'tag-hover-magenta': (
-    fallback: $magenta-30,
+    fallback: colors.$magenta-30,
     values: (
       (
         theme: themes.$white,
-        value: $magenta-30,
+        value: colors.$magenta-30,
       ),
       (
         theme: themes.$g10,
-        value: $magenta-30,
+        value: colors.$magenta-30,
       ),
       (
         theme: themes.$g90,
-        value: $magenta-70,
+        value: colors.$magenta-70,
       ),
       (
         theme: themes.$g100,
-        value: $magenta-70,
+        value: colors.$magenta-70,
       ),
     ),
   ),
 
   // purple
   'tag-background-purple': (
-    fallback: $purple-20,
+    fallback: colors.$purple-20,
     values: (
       (
         theme: themes.$white,
-        value: $purple-20,
+        value: colors.$purple-20,
       ),
       (
         theme: themes.$g10,
-        value: $purple-20,
+        value: colors.$purple-20,
       ),
       (
         theme: themes.$g90,
-        value: $purple-80,
+        value: colors.$purple-80,
       ),
       (
         theme: themes.$g100,
-        value: $purple-80,
+        value: colors.$purple-80,
       ),
     ),
   ),
   'tag-color-purple': (
-    fallback: $purple-80,
+    fallback: colors.$purple-80,
     values: (
       (
         theme: themes.$white,
-        value: $purple-80,
+        value: colors.$purple-80,
       ),
       (
         theme: themes.$g10,
-        value: $purple-80,
+        value: colors.$purple-80,
       ),
       (
         theme: themes.$g90,
-        value: $purple-30,
+        value: colors.$purple-30,
       ),
       (
         theme: themes.$g100,
-        value: $purple-30,
+        value: colors.$purple-30,
       ),
     ),
   ),
   'tag-hover-purple': (
-    fallback: $purple-30,
+    fallback: colors.$purple-30,
     values: (
       (
         theme: themes.$white,
-        value: $purple-30,
+        value: colors.$purple-30,
       ),
       (
         theme: themes.$g10,
-        value: $purple-30,
+        value: colors.$purple-30,
       ),
       (
         theme: themes.$g90,
-        value: $purple-70,
+        value: colors.$purple-70,
       ),
       (
         theme: themes.$g100,
-        value: $purple-70,
+        value: colors.$purple-70,
       ),
     ),
   ),
 
   // blue
   'tag-background-blue': (
-    fallback: $blue-20,
+    fallback: colors.$blue-20,
     values: (
       (
         theme: themes.$white,
-        value: $blue-20,
+        value: colors.$blue-20,
       ),
       (
         theme: themes.$g10,
-        value: $blue-20,
+        value: colors.$blue-20,
       ),
       (
         theme: themes.$g90,
-        value: $blue-80,
+        value: colors.$blue-80,
       ),
       (
         theme: themes.$g100,
-        value: $blue-80,
+        value: colors.$blue-80,
       ),
     ),
   ),
   'tag-color-blue': (
-    fallback: $blue-80,
+    fallback: colors.$blue-80,
     values: (
       (
         theme: themes.$white,
-        value: $blue-80,
+        value: colors.$blue-80,
       ),
       (
         theme: themes.$g10,
-        value: $blue-80,
+        value: colors.$blue-80,
       ),
       (
         theme: themes.$g90,
-        value: $blue-30,
+        value: colors.$blue-30,
       ),
       (
         theme: themes.$g100,
-        value: $blue-30,
+        value: colors.$blue-30,
       ),
     ),
   ),
   'tag-hover-blue': (
-    fallback: $blue-30,
+    fallback: colors.$blue-30,
     values: (
       (
         theme: themes.$white,
-        value: $blue-30,
+        value: colors.$blue-30,
       ),
       (
         theme: themes.$g10,
-        value: $blue-30,
+        value: colors.$blue-30,
       ),
       (
         theme: themes.$g90,
-        value: $blue-70,
+        value: colors.$blue-70,
       ),
       (
         theme: themes.$g100,
-        value: $blue-70,
+        value: colors.$blue-70,
       ),
     ),
   ),
 
   // cyan
   'tag-background-cyan': (
-    fallback: $cyan-20,
+    fallback: colors.$cyan-20,
     values: (
       (
         theme: themes.$white,
-        value: $cyan-20,
+        value: colors.$cyan-20,
       ),
       (
         theme: themes.$g10,
-        value: $cyan-20,
+        value: colors.$cyan-20,
       ),
       (
         theme: themes.$g90,
-        value: $cyan-80,
+        value: colors.$cyan-80,
       ),
       (
         theme: themes.$g100,
-        value: $cyan-80,
+        value: colors.$cyan-80,
       ),
     ),
   ),
   'tag-color-cyan': (
-    fallback: $cyan-80,
+    fallback: colors.$cyan-80,
     values: (
       (
         theme: themes.$white,
-        value: $cyan-80,
+        value: colors.$cyan-80,
       ),
       (
         theme: themes.$g10,
-        value: $cyan-80,
+        value: colors.$cyan-80,
       ),
       (
         theme: themes.$g90,
-        value: $cyan-30,
+        value: colors.$cyan-30,
       ),
       (
         theme: themes.$g100,
-        value: $cyan-30,
+        value: colors.$cyan-30,
       ),
     ),
   ),
   'tag-hover-cyan': (
-    fallback: $cyan-30,
+    fallback: colors.$cyan-30,
     values: (
       (
         theme: themes.$white,
-        value: $cyan-30,
+        value: colors.$cyan-30,
       ),
       (
         theme: themes.$g10,
-        value: $cyan-30,
+        value: colors.$cyan-30,
       ),
       (
         theme: themes.$g90,
-        value: $cyan-70,
+        value: colors.$cyan-70,
       ),
       (
         theme: themes.$g100,
-        value: $cyan-70,
+        value: colors.$cyan-70,
       ),
     ),
   ),
 
   // teal
   'tag-background-teal': (
-    fallback: $teal-20,
+    fallback: colors.$teal-20,
     values: (
       (
         theme: themes.$white,
-        value: $teal-20,
+        value: colors.$teal-20,
       ),
       (
         theme: themes.$g10,
-        value: $teal-20,
+        value: colors.$teal-20,
       ),
       (
         theme: themes.$g90,
-        value: $teal-80,
+        value: colors.$teal-80,
       ),
       (
         theme: themes.$g100,
-        value: $teal-80,
+        value: colors.$teal-80,
       ),
     ),
   ),
   'tag-color-teal': (
-    fallback: $teal-80,
+    fallback: colors.$teal-80,
     values: (
       (
         theme: themes.$white,
-        value: $teal-80,
+        value: colors.$teal-80,
       ),
       (
         theme: themes.$g10,
-        value: $teal-80,
+        value: colors.$teal-80,
       ),
       (
         theme: themes.$g90,
-        value: $teal-30,
+        value: colors.$teal-30,
       ),
       (
         theme: themes.$g100,
-        value: $teal-30,
+        value: colors.$teal-30,
       ),
     ),
   ),
   'tag-hover-teal': (
-    fallback: $teal-30,
+    fallback: colors.$teal-30,
     values: (
       (
         theme: themes.$white,
-        value: $teal-30,
+        value: colors.$teal-30,
       ),
       (
         theme: themes.$g10,
-        value: $teal-30,
+        value: colors.$teal-30,
       ),
       (
         theme: themes.$g90,
-        value: $teal-70,
+        value: colors.$teal-70,
       ),
       (
         theme: themes.$g100,
-        value: $teal-70,
+        value: colors.$teal-70,
       ),
     ),
   ),
 
   // green
   'tag-background-green': (
-    fallback: $green-20,
+    fallback: colors.$green-20,
     values: (
       (
         theme: themes.$white,
-        value: $green-20,
+        value: colors.$green-20,
       ),
       (
         theme: themes.$g10,
-        value: $green-20,
+        value: colors.$green-20,
       ),
       (
         theme: themes.$g90,
-        value: $green-80,
+        value: colors.$green-80,
       ),
       (
         theme: themes.$g100,
-        value: $green-80,
+        value: colors.$green-80,
       ),
     ),
   ),
   'tag-color-green': (
-    fallback: $green-80,
+    fallback: colors.$green-80,
     values: (
       (
         theme: themes.$white,
-        value: $green-80,
+        value: colors.$green-80,
       ),
       (
         theme: themes.$g10,
-        value: $green-80,
+        value: colors.$green-80,
       ),
       (
         theme: themes.$g90,
-        value: $green-30,
+        value: colors.$green-30,
       ),
       (
         theme: themes.$g100,
-        value: $green-30,
+        value: colors.$green-30,
       ),
     ),
   ),
   'tag-hover-green': (
-    fallback: $green-30,
+    fallback: colors.$green-30,
     values: (
       (
         theme: themes.$white,
-        value: $green-30,
+        value: colors.$green-30,
       ),
       (
         theme: themes.$g10,
-        value: $green-30,
+        value: colors.$green-30,
       ),
       (
         theme: themes.$g90,
-        value: $green-70,
+        value: colors.$green-70,
       ),
       (
         theme: themes.$g100,
-        value: $green-70,
+        value: colors.$green-70,
       ),
     ),
   ),
 
   // gray
   'tag-background-gray': (
-    fallback: $gray-20,
+    fallback: colors.$gray-20,
     values: (
       (
         theme: themes.$white,
-        value: $gray-20,
+        value: colors.$gray-20,
       ),
       (
         theme: themes.$g10,
-        value: $gray-20,
+        value: colors.$gray-20,
       ),
       (
         theme: themes.$g90,
-        value: $gray-80,
+        value: colors.$gray-80,
       ),
       (
         theme: themes.$g100,
-        value: $gray-80,
+        value: colors.$gray-80,
       ),
     ),
   ),
   'tag-color-gray': (
-    fallback: $gray-80,
+    fallback: colors.$gray-80,
     values: (
       (
         theme: themes.$white,
-        value: $gray-80,
+        value: colors.$gray-80,
       ),
       (
         theme: themes.$g10,
-        value: $gray-80,
+        value: colors.$gray-80,
       ),
       (
         theme: themes.$g90,
-        value: $gray-30,
+        value: colors.$gray-30,
       ),
       (
         theme: themes.$g100,
-        value: $gray-30,
+        value: colors.$gray-30,
       ),
     ),
   ),
   'tag-hover-gray': (
-    fallback: $gray-30,
+    fallback: colors.$gray-30,
     values: (
       (
         theme: themes.$white,
-        value: $gray-30,
+        value: colors.$gray-30,
       ),
       (
         theme: themes.$g10,
-        value: $gray-30,
+        value: colors.$gray-30,
       ),
       (
         theme: themes.$g90,
-        value: $gray-70,
+        value: colors.$gray-70,
       ),
       (
         theme: themes.$g100,
-        value: $gray-70,
+        value: colors.$gray-70,
       ),
     ),
   ),
 
   // cool-gray
   'tag-background-cool-gray': (
-    fallback: $cool-gray-20,
+    fallback: colors.$cool-gray-20,
     values: (
       (
         theme: themes.$white,
-        value: $cool-gray-20,
+        value: colors.$cool-gray-20,
       ),
       (
         theme: themes.$g10,
-        value: $cool-gray-20,
+        value: colors.$cool-gray-20,
       ),
       (
         theme: themes.$g90,
-        value: $cool-gray-80,
+        value: colors.$cool-gray-80,
       ),
       (
         theme: themes.$g100,
-        value: $cool-gray-80,
+        value: colors.$cool-gray-80,
       ),
     ),
   ),
   'tag-color-cool-gray': (
-    fallback: $cool-gray-80,
+    fallback: colors.$cool-gray-80,
     values: (
       (
         theme: themes.$white,
-        value: $cool-gray-80,
+        value: colors.$cool-gray-80,
       ),
       (
         theme: themes.$g10,
-        value: $cool-gray-80,
+        value: colors.$cool-gray-80,
       ),
       (
         theme: themes.$g90,
-        value: $cool-gray-30,
+        value: colors.$cool-gray-30,
       ),
       (
         theme: themes.$g100,
-        value: $cool-gray-30,
+        value: colors.$cool-gray-30,
       ),
     ),
   ),
   'tag-hover-cool-gray': (
-    fallback: $cool-gray-30,
+    fallback: colors.$cool-gray-30,
     values: (
       (
         theme: themes.$white,
-        value: $cool-gray-30,
+        value: colors.$cool-gray-30,
       ),
       (
         theme: themes.$g10,
-        value: $cool-gray-30,
+        value: colors.$cool-gray-30,
       ),
       (
         theme: themes.$g90,
-        value: $cool-gray-70,
+        value: colors.$cool-gray-70,
       ),
       (
         theme: themes.$g100,
-        value: $cool-gray-70,
+        value: colors.$cool-gray-70,
       ),
     ),
   ),
 
   // warm-gray
   'tag-background-warm-gray': (
-    fallback: $warm-gray-20,
+    fallback: colors.$warm-gray-20,
     values: (
       (
         theme: themes.$white,
-        value: $warm-gray-20,
+        value: colors.$warm-gray-20,
       ),
       (
         theme: themes.$g10,
-        value: $warm-gray-20,
+        value: colors.$warm-gray-20,
       ),
       (
         theme: themes.$g90,
-        value: $warm-gray-80,
+        value: colors.$warm-gray-80,
       ),
       (
         theme: themes.$g100,
-        value: $warm-gray-80,
+        value: colors.$warm-gray-80,
       ),
     ),
   ),
   'tag-color-warm-gray': (
-    fallback: $warm-gray-80,
+    fallback: colors.$warm-gray-80,
     values: (
       (
         theme: themes.$white,
-        value: $warm-gray-80,
+        value: colors.$warm-gray-80,
       ),
       (
         theme: themes.$g10,
-        value: $warm-gray-80,
+        value: colors.$warm-gray-80,
       ),
       (
         theme: themes.$g90,
-        value: $warm-gray-30,
+        value: colors.$warm-gray-30,
       ),
       (
         theme: themes.$g100,
-        value: $warm-gray-30,
+        value: colors.$warm-gray-30,
       ),
     ),
   ),
   'tag-hover-warm-gray': (
-    fallback: $warm-gray-30,
+    fallback: colors.$warm-gray-30,
     values: (
       (
         theme: themes.$white,
-        value: $warm-gray-30,
+        value: colors.$warm-gray-30,
       ),
       (
         theme: themes.$g10,
-        value: $warm-gray-30,
+        value: colors.$warm-gray-30,
       ),
       (
         theme: themes.$g90,
-        value: $warm-gray-70,
+        value: colors.$warm-gray-70,
       ),
       (
         theme: themes.$g100,
-        value: $warm-gray-70,
+        value: colors.$warm-gray-70,
       ),
     ),
   ),
