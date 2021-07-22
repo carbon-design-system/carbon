@@ -65,19 +65,21 @@ between version updates.
 
 ## Colors
 
-The colors package will give you access to each swatch from the IBM Design Language. You can refer to a color by its swatch and grade.
-
-Access these color tokens for your project by using `@use`. For example: 
+The colors package will give you access to each swatch from the IBM Design Language. You can refer to any color by its swatch and grade.
 
 ```scss
  @use '@carbon/styles/scss/colors';
+ 
+ .my-selector {
+   background-color: colors.$blue-50;
+ }
 ```
 
 | Import                               | Filepath            |
 | :----------------------------------- | :------------------ |
 | `@use '@carbon/styles/scss/colors';` | `scss/_colors.scss` |
 
-For more information checkout our [Files](#files) docs.
+To see all the colors available to be imported, checkout our [colors](https://github.com/carbon-design-system/carbon/tree/main/packages/colors) docs.
 
 ## Config
 
@@ -101,21 +103,20 @@ For more information checkout our [Files](#files) docs.
 
 The motion package provides helper functions, mixins, and duration tokens to add motion into your project.
 
-You can bring in the motion package and tokens by using `@use`. 
-
-For example:
-
 ```scss
- @use '@carbon/styles/scss/motion';
- .dropdown--arrow {
+ @use '@carbon/styles/scss/motion' as *;
+
+ .my-selector {
   transition: transform $duration-fast-02 motion(standard, productive);
  }
 ```
+
 | Import                               | Filepath            |
 | :----------------------------------- | :------------------ |
 | `@use '@carbon/styles/scss/motion';` | `scss/_motion.scss` |
 
-For more information checkout our [Files](#files) docs.
+For more information, checkout our [motion](#todo) docs.
+
 ## Reset
 
 | Import                              | Filepath           |
@@ -212,10 +213,13 @@ options:
 
 The type package entrypoint allows you to specifically bring type tokens into your project. The type package includes various type tokens and mixins.
 
-To bring in the `@carbon/type` package use `@use`. For example: 
 
 ```scss
  @use '@carbon/styles/scss/type';
+ 
+ .my-selector {
+   @include type.style(type.$productive-heading-01);
+ }
 ```
 
 | Import                             | Filepath          |
@@ -223,6 +227,7 @@ To bring in the `@carbon/type` package use `@use`. For example:
 | `@use '@carbon/styles/scss/type';` | `scss/_type.scss` |
 
 For more information, check out our [type](#todo) docs.
+
 ## Components
 
 All of the styles for the components in the Carbon Design System live in the
