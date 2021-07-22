@@ -68,21 +68,24 @@ between version updates.
 
 ## Colors
 
-The colors package will give you access to each swatch from the IBM Design Language. You can refer to any color by its swatch and grade.
+The colors package will give you access to each swatch from the IBM Design
+Language. You can refer to any color by its swatch and grade.
 
 ```scss
- @use '@carbon/styles/scss/colors';
- 
- .my-selector {
-   background-color: colors.$blue-50;
- }
+@use '@carbon/styles/scss/colors';
+
+.my-selector {
+  background-color: colors.$blue-50;
+}
 ```
 
 | Import                               | Filepath            |
 | :----------------------------------- | :------------------ |
 | `@use '@carbon/styles/scss/colors';` | `scss/_colors.scss` |
 
-To see all the colors available to be imported, checkout our [colors](https://github.com/carbon-design-system/carbon/tree/main/packages/colors) docs.
+To see all the colors available to be imported, checkout our
+[colors](https://github.com/carbon-design-system/carbon/tree/main/packages/colors)
+docs.
 
 ## Config
 
@@ -166,14 +169,15 @@ grid, there are a few mixins that can be used.
 
 ## Motion
 
-The motion package provides helper functions, mixins, and duration tokens to add motion into your project.
+The motion package provides helper functions, mixins, and duration tokens to add
+motion into your project.
 
 ```scss
- @use '@carbon/styles/scss/motion' as *;
+@use '@carbon/styles/scss/motion' as *;
 
- .my-selector {
+.my-selector {
   transition: transform $duration-fast-02 motion(standard, productive);
- }
+}
 ```
 
 | Import                               | Filepath            |
@@ -276,15 +280,15 @@ options:
 
 ## Type
 
-The type package entrypoint allows you to specifically bring type tokens into your project. The type package includes various type tokens and mixins.
-
+The type package entrypoint allows you to specifically bring type tokens into
+your project. The type package includes various type tokens and mixins.
 
 ```scss
- @use '@carbon/styles/scss/type';
- 
- .my-selector {
-   @include type.style(type.$productive-heading-01);
- }
+@use '@carbon/styles/scss/type';
+
+.my-selector {
+  @include type.style(type.$productive-heading-01);
+}
 ```
 
 | Import                             | Filepath          |
