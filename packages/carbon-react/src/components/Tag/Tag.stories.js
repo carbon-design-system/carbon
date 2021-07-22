@@ -5,15 +5,38 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { Tag } from 'carbon-components-react';
 import React from 'react';
+import { Tag } from 'carbon-components-react';
 
 export default { title: 'Components/Tag' };
 
 export const Default = () => {
   return (
-    <Tag className="some-class" type="red">
-      {'This is a tag'}
-    </Tag>
+    <>
+      <Tag className="some-class" type="red" size="sm" title="Clear Filter">
+        {'Tag content'}
+      </Tag>
+      <Tag className="some-class" type="magenta" size="sm" title="Clear Filter">
+        {'Tag content'}
+      </Tag>
+      <Tag className="some-class" type="purple" size="sm" title="Clear Filter">
+        {'Tag content'}
+      </Tag>
+      <Tag className="some-class" type="blue" size="sm" title="Clear Filter">
+        {'Tag content'}
+      </Tag>
+      <Tag className="some-class" type="cyan" size="sm" title="Clear Filter">
+        {'Tag content'}
+      </Tag>
+      <Tag className="some-class" type="teal" size="sm" title="Clear Filter">
+        {'Tag content'}
+      </Tag>
+      <Tag className="some-class" type="green" size="sm" title="Clear Filter">
+        {'Tag content'}
+      </Tag>
+      <Tag className="some-class" type="gray" size="sm" title="Clear Filter">
+        {'Tag content'}
+      </Tag>
+    </>
   );
 };

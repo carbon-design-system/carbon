@@ -15,7 +15,7 @@
 @use '../../utilities/convert' as *;
 @use '../../utilities/high-contrast-mode' as *;
 @use '../../spacing' as *;
-@use './tokens';
+@use './tokens' as *;
 @use './mixins' as *;
 @use '../../utilities/skeleton';
 
@@ -24,11 +24,7 @@
 /// @group tag
 @mixin tag {
   .#{$prefix}--tag {
-    @include tag-theme(
-      get-token-value(var(--tag-background-gray)),
-      get-token-value(var(--tag-color-gray)),
-      get-token-value(var(--tag-hover-gray))
-    );
+    @include tag-theme($tag-background-gray, $tag-color-gray, $tag-hover-gray);
 
     display: inline-flex;
     // ensures tag stays pill shaped;
@@ -51,82 +47,62 @@
   }
 
   .#{$prefix}--tag--red {
-    @include tag-theme(
-      get-token-value(var(--tag-background-red)),
-      get-token-value(var(--tag-color-red)),
-      get-token-value(var(--tag-hover-red))
-    );
+    @include tag-theme($tag-background-red, $tag-color-red, $tag-hover-red);
   }
 
   .#{$prefix}--tag--magenta {
     @include tag-theme(
-      get-token-value(var(--tag-background-magenta)),
-      get-token-value(var(--tag-color-magenta)),
-      get-token-value(var(--tag-hover-magenta))
+      $tag-background-magenta,
+      $tag-color-magenta,
+      $tag-hover-magenta
     );
   }
 
   .#{$prefix}--tag--purple {
     @include tag-theme(
-      get-token-value(var(--tag-background-purple)),
-      get-token-value(var(--tag-color-purple)),
-      get-token-value(var(--tag-hover-purple))
+      $tag-background-purple,
+      $tag-color-purple,
+      $tag-hover-purple
     );
   }
 
   .#{$prefix}--tag--blue {
-    @include tag-theme(
-      get-token-value(var(--tag-background-blue)),
-      get-token-value(var(--tag-color-blue)),
-      get-token-value(var(--tag-hover-blue))
-    );
+    @include tag-theme($tag-background-blue, $tag-color-blue, $tag-hover-blue);
   }
 
   .#{$prefix}--tag--cyan {
-    @include tag-theme(
-      get-token-value(var(--tag-background-cyan)),
-      get-token-value(var(--tag-color-cyan)),
-      get-token-value(var(--tag-hover-cyan))
-    );
+    @include tag-theme($tag-background-cyan, $tag-color-cyan, $tag-hover-cyan);
   }
 
   .#{$prefix}--tag--teal {
-    @include tag-theme(
-      get-token-value(var(--tag-background-teal)),
-      get-token-value(var(--tag-color-teal)),
-      get-token-value(var(--tag-hover-teal))
-    );
+    @include tag-theme($tag-background-teal, $tag-color-teal, $tag-hover-teal);
   }
 
   .#{$prefix}--tag--green {
     @include tag-theme(
-      get-token-value(var(--tag-background-green)),
-      get-token-value(var(--tag-color-green)),
-      get-token-value(var(--tag-hover-green))
+      $tag-background-green,
+      $tag-color-green,
+      $tag-hover-green
     );
   }
 
   .#{$prefix}--tag--gray {
-    @include tag-theme(
-      get-token-value(var(--tag-background-gray)),
-      get-token-value(var(--tag-color-gray)),
-      get-token-value(var(--tag-hover-gray))
-    );
+    @include tag-theme($tag-background-gray, $tag-color-gray, $tag-hover-gray);
   }
 
   .#{$prefix}--tag--cool-gray {
     @include tag-theme(
-      get-token-value(var(--tag-background-cool-gray)),
-      get-token-value(var(--tag-color-cool-gray)),
-      get-token-value(var(--tag-hover-cool-gray))
+      $tag-background-cool-gray,
+      $tag-color-cool-gray,
+      $tag-hover-cool-gray
     );
   }
 
   .#{$prefix}--tag--warm-gray {
     @include tag-theme(
-      get-token-value(var(--tag-background-warm-gray)),
-      get-token-value(var(--tag-color-warm-gray)),
-      get-token-value(var(--tag-hover-warm-gray))
+      $tag-background-warm-gray,
+      $tag-color-warm-gray,
+      $tag-hover-warm-gray
     );
   }
 
