@@ -8,7 +8,12 @@
 import React from 'react';
 import { Tag } from 'carbon-components-react';
 
-export default { title: 'Components/Tag' };
+export default {
+  title: 'Components/Tag',
+  parameters: {
+    component: Tag,
+  },
+};
 
 export const Default = () => {
   return (
