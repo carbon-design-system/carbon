@@ -76,7 +76,7 @@ const filepaths = [
   'scss/components/slider',
   'scss/components/structured-list',
   'scss/components/tabs',
-  // 'scss/components/tag',
+  'scss/components/tag',
   'scss/components/text-area',
   'scss/components/text-input',
   'scss/components/tile',
