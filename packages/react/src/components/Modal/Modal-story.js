@@ -173,7 +173,6 @@ export const Default = () => {
         ]}
       />
       <MultiSelect
-        // {...multiSelectProps}
         id="test"
         label="Multiselect"
         items={[
@@ -187,8 +186,6 @@ export const Default = () => {
           },
         ]}
         itemToString={(item) => (item ? item.text : '')}
-        // translateWithId={(id) => listBoxMenuIconTranslationIds[id]}
-        // selectionFeedback={selectionFeedback}
       />
     </Modal>
   );
