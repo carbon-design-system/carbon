@@ -120,7 +120,7 @@
     "prop-types": "^15.7.2",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
-    "react-test-renderer": "^16.8.6",
+    "react-test-renderer": "^17.0.2",
     "requestanimationframe": "^0.0.23",
     "rimraf": "^3.0.0",
     "rollup": "^2.46.0",
