@@ -45,7 +45,8 @@
 
   .#{$prefix}--menu-option {
     position: relative;
-    height: $spacing-07;
+    // $size-sm
+    height: 2rem;
     background-color: $layer;
     color: $text-primary;
     cursor: pointer;
@@ -125,5 +126,18 @@
     height: 1px;
     margin: $spacing-02 0;
     background-color: $border-subtle;
+  }
+
+  $supported-sizes: (
+    // $size-md
+    'md': 2.5rem,
+    // $size-lg
+    'lg': 3rem
+  );
+
+  @each $size, $value in $supported-sizes {
+    .#{$prefix}--menu--#{$size} .#{$prefix}--menu-option {
+      height: $value;
+    }
   }
 }
