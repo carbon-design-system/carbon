@@ -175,7 +175,7 @@ export const Default = () => {
       <MultiSelect
         // {...multiSelectProps}
         id="test"
-        label="Field"
+        label="Multiselect"
         items={[
           {
             id: 'downshift-1-item-0',
