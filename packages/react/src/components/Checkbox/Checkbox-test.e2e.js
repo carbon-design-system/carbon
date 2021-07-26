@@ -10,6 +10,7 @@ import 'carbon-components/scss/components/checkbox/_checkbox.scss';
 import React from 'react';
 import { mount } from '@cypress/react';
 import Checkbox from '../Checkbox';
+import CheckboxSkeleton from '../Checkbox.Skeleton';
 
 describe('Checkbox', () => {
   beforeEach(() => {
@@ -18,6 +19,7 @@ describe('Checkbox', () => {
         <legend className={`label`}>Checkbox heading</legend>
         <Checkbox labelText={`Checkbox label 1`} id="checkbox-label-1" />
         <Checkbox labelText={`Checkbox label 2`} id="checkbox-label-2" />
+        <CheckboxSkeleton />
       </fieldset>
     );
   });
