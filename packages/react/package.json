@@ -131,7 +131,7 @@
     "sass": "^1.32.2",
     "sass-loader": "^10.1.1",
     "storybook-readme": "^5.0.9",
-    "string-replace-loader": "^2.1.0",
+    "string-replace-loader": "^3.0.3",
     "terser-webpack-plugin": "^2.3.2",
     "webpack": "^4.41.5",
     "webpack-dev-server": "^3.11.2",
