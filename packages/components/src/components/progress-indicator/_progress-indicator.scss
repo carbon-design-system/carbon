@@ -276,6 +276,9 @@
   }
 
   // Vertical Variant
+  .#{$prefix}--progress--vertical .#{$prefix}--progress-step  {
+    border-top: none
+  }
 
   .#{$prefix}--progress--vertical {
     display: flex;
