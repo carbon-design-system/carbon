@@ -76,11 +76,6 @@ export default function App() {
           ))}
         </section>
       ))}
-      <div className="css-grid">
-        <div class="bx--css-grid">
-          <div class="col-span-100"><h1>Experimental CSS Grid</h1></div>
-          </div>
-        </div>
     </main>
   );
 }
