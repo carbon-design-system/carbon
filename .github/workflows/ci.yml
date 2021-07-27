@@ -67,7 +67,7 @@ jobs:
         run: yarn build --ignore '@carbon/sketch'
       - name: Check generated styles
         run: |
-          yarn carbon-cli check --ignore '**/@(node_modules|examples|components|react|fixtures)/**' 'packages/**/*.scss'
+          yarn carbon-cli check --ignore '**/@(node_modules|examples|components|react|fixtures|compat)/**' 'packages/**/*.scss'
       - name: Run tests
         run: yarn test --ci
 
