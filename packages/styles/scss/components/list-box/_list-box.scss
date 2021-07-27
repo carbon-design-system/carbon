@@ -8,6 +8,7 @@
 @use '../button/tokens' as *;
 @use '../text-input';
 @use '../tag';
+@use '../tag/mixins' as *;
 @use '../../config' as *;
 @use '../../colors' as *;
 @use '../../theme' as *;
@@ -20,8 +21,6 @@
 @use '../../utilities/focus-outline' as *;
 @use '../../utilities/high-contrast-mode' as *;
 @use '../../utilities/z-index' as *;
-// Will need to add `@use '../tag' once added in.
-// @import '../tag/mixins';
 
 /// @type Number
 /// @access public
@@ -83,13 +82,13 @@ $list-box-menu-width: rem(300px);
     max-height: rem(40px);
     border: none;
     border-bottom: 1px solid $border-strong;
-    background-color: $field-01;
-    color: $text-01;
+    background-color: $field;
+    color: $text-primary;
     cursor: pointer;
     transition: all $duration-fast-01 motion(standard, productive);
 
     &:hover {
-      background-color: $hover-ui;
+      background-color: $field-hover;
     }
   }
 
@@ -110,9 +109,10 @@ $list-box-menu-width: rem(300px);
   }
 
   .#{$prefix}--list-box--expanded:hover {
-    background-color: $field-01;
+    background-color: $field;
   }
 
+  // V11: Possibly deprecate
   .#{$prefix}--list-box--expanded:hover.#{$prefix}--list-box--light:hover {
     background-color: $field-02;
   }
@@ -152,6 +152,7 @@ $list-box-menu-width: rem(300px);
     padding-right: rem(56px);
   }
 
+  // V11: Possibly deprecate
   // Light variation for 'list-box'
   .#{$prefix}--list-box--light {
     background-color: $field-02;
@@ -161,10 +162,12 @@ $list-box-menu-width: rem(300px);
     }
   }
 
+  // V11: Possibly deprecate
   .#{$prefix}--list-box--light .#{$prefix}--list-box__menu {
     background: $field-02;
   }
 
+  // V11: Possibly deprecate
   .#{$prefix}--list-box--light .#{$prefix}--list-box__menu-item__option {
     border-top-color: $decorative-01;
   }
@@ -175,9 +178,10 @@ $list-box-menu-width: rem(300px);
 
   // Disabled state for `list-box`
   .#{$prefix}--list-box--disabled:hover {
-    background-color: $field-01;
+    background-color: $field;
   }
 
+  // V11: Possibly deprecate
   .#{$prefix}--list-box--light.#{$prefix}--list-box--disabled {
     background-color: $field-02;
   }
@@ -192,12 +196,12 @@ $list-box-menu-width: rem(300px);
   .#{$prefix}--list-box--disabled .#{$prefix}--list-box__label,
   .#{$prefix}--list-box--disabled.#{$prefix}--list-box--inline
     .#{$prefix}--list-box__label {
-    color: $disabled-02;
+    color: $text-disabled;
   }
 
   .#{$prefix}--list-box--disabled .#{$prefix}--list-box__menu-icon > svg,
   .#{$prefix}--list-box--disabled .#{$prefix}--list-box__selection > svg {
-    fill: $disabled-02;
+    fill: $icon-disabled;
   }
 
   .#{$prefix}--list-box--disabled,
@@ -210,7 +214,7 @@ $list-box-menu-width: rem(300px);
   .#{$prefix}--list-box--disabled .#{$prefix}--list-box__menu-item:hover,
   .#{$prefix}--list-box--disabled
     .#{$prefix}--list-box__menu-item--highlighted {
-    color: $disabled-02;
+    color: $text-disabled;
     text-decoration: none;
   }
 
@@ -235,7 +239,7 @@ $list-box-menu-width: rem(300px);
     background-color: transparent;
 
     &:hover {
-      background-color: $hover-ui;
+      background-color: $field-hover;
     }
   }
 
@@ -248,12 +252,9 @@ $list-box-menu-width: rem(300px);
     border-width: 0;
   }
 
+  .#{$prefix}--list-box.#{$prefix}--list-box--inline.#{$prefix}--list-box--expanded:hover,
   .#{$prefix}--list-box.#{$prefix}--list-box--inline.#{$prefix}--list-box--disabled:hover {
     background-color: transparent;
-  }
-
-  .#{$prefix}--list-box.#{$prefix}--list-box--inline.#{$prefix}--list-box--expanded:hover {
-    background-color: $field-02;
   }
 
   .#{$prefix}--list-box.#{$prefix}--list-box--inline
@@ -272,7 +273,7 @@ $list-box-menu-width: rem(300px);
   }
 
   .#{$prefix}--list-box--inline .#{$prefix}--list-box__label {
-    color: $text-01;
+    color: $text-primary;
   }
 
   .#{$prefix}--list-box--inline .#{$prefix}--list-box__field {
@@ -311,7 +312,7 @@ $list-box-menu-width: rem(300px);
   }
 
   .#{$prefix}--list-box__field[disabled] {
-    color: $disabled-02;
+    color: $text-disabled;
     outline: none;
   }
 
@@ -375,7 +376,7 @@ $list-box-menu-width: rem(300px);
     @include type-style('body-short-01');
 
     overflow: hidden;
-    color: $text-01;
+    color: $text-primary;
     text-overflow: ellipsis;
     user-select: none;
     white-space: nowrap;
@@ -435,7 +436,7 @@ $list-box-menu-width: rem(300px);
   }
 
   .#{$prefix}--list-box__selection > svg {
-    fill: $icon-01;
+    fill: $icon-primary;
   }
 
   .#{$prefix}--list-box--disabled .#{$prefix}--list-box__selection:focus {
@@ -478,11 +479,10 @@ $list-box-menu-width: rem(300px);
   }
 
   .#{$prefix}--list-box--disabled .#{$prefix}--list-box__selection--multi {
-    // TO DO: uncomment when Tag has been merged in
-    // @include tag-theme($disabled-02, $disabled-01);
+    @include tag-theme($text-disabled, $field-disabled);
 
     > svg {
-      fill: $disabled-01;
+      fill: $icon-disabled;
 
       &:hover {
         background-color: initial;
@@ -503,7 +503,7 @@ $list-box-menu-width: rem(300px);
     right: 0;
     left: 0;
     width: $list-box-width;
-    background-color: $field;
+    background-color: $layer;
     overflow-y: auto;
     transition: max-height $duration-fast-02 motion(standard, productive);
 
@@ -545,20 +545,21 @@ $list-box-menu-width: rem(300px);
 
     position: relative;
     height: rem(40px);
-    color: $text-02;
+    color: $text-secondary;
     cursor: pointer;
     transition: background $duration-fast-01 motion(standard, productive);
     user-select: none;
 
     &:hover {
-      background-color: $hover-ui;
+      background-color: $layer-hover;
     }
 
     &:active {
-      background-color: $selected-ui;
+      background-color: $layer-selected;
     }
   }
 
+  // V11: Possibly deprecate
   .#{$prefix}--list-box--light .#{$prefix}--list-box__menu-item:hover {
     background-color: $hover-light-ui;
   }
@@ -577,6 +578,7 @@ $list-box-menu-width: rem(300px);
     background-color: transparent;
   }
 
+  // V11: Possibly deprecate
   .#{$prefix}--list-box--light .#{$prefix}--list-box__menu-item:active {
     // To Do: What should this variable be?
     // background-color: $selected-light-ui;
@@ -594,7 +596,7 @@ $list-box-menu-width: rem(300px);
 
   .#{$prefix}--list-box__menu-item:hover
     .#{$prefix}--list-box__menu-item__option {
-    color: $text-01;
+    color: $text-primary;
   }
 
   .#{$prefix}--list-box__menu-item:hover
@@ -622,7 +624,7 @@ $list-box-menu-width: rem(300px);
     border-top-color: $border-subtle;
     border-bottom: 1px solid transparent;
     margin: 0 $spacing-05;
-    color: $text-02;
+    color: $text-secondary;
     font-weight: normal;
     line-height: 1rem;
     text-decoration: none;
@@ -641,7 +643,7 @@ $list-box-menu-width: rem(300px);
 
     &:hover {
       border-color: transparent;
-      color: $text-01;
+      color: $text-primary;
     }
   }
 
@@ -663,7 +665,7 @@ $list-box-menu-width: rem(300px);
     .#{$prefix}--list-box__menu-item:hover
     .#{$prefix}--list-box__menu-item__option,
   .#{$prefix}--list-box--disabled .#{$prefix}--list-box__menu-item__option {
-    color: $disabled-02;
+    color: $text-disabled;
   }
 
   .#{$prefix}--list-box.#{$prefix}--list-box--inline
@@ -679,8 +681,8 @@ $list-box-menu-width: rem(300px);
 
   .#{$prefix}--list-box__menu-item--highlighted {
     border-color: transparent;
-    background-color: $hover-ui;
-    color: $text-01;
+    background-color: $layer-hover;
+    color: $text-primary;
   }
 
   .#{$prefix}--list-box__menu-item--highlighted
@@ -693,15 +695,16 @@ $list-box-menu-width: rem(300px);
 
   .#{$prefix}--list-box__menu-item--highlighted
     .#{$prefix}--list-box__menu-item__option {
-    color: $text-01;
+    color: $text-primary;
   }
 
   .#{$prefix}--list-box__menu-item--active {
-    border-bottom-color: $selected-ui;
-    background-color: $selected-ui;
-    color: $text-01;
+    border-bottom-color: $layer-selected;
+    background-color: $layer-selected;
+    color: $text-primary;
   }
 
+  // V11: Possibly deprecate
   .#{$prefix}--list-box--light .#{$prefix}--list-box__menu-item--active {
     // To Do: What should this token be?
     // border-bottom-color: $selected-light-ui;
@@ -710,13 +713,13 @@ $list-box-menu-width: rem(300px);
 
   .#{$prefix}--list-box__menu-item--active:hover,
   .#{$prefix}--list-box__menu-item--active.#{$prefix}--list-box__menu-item--highlighted {
-    border-bottom-color: $hover-selected-ui;
-    background-color: $hover-selected-ui;
+    border-bottom-color: $layer-selected;
+    background-color: $layer-selected;
   }
 
   .#{$prefix}--list-box__menu-item--active
     .#{$prefix}--list-box__menu-item__option {
-    color: $text-01;
+    color: $text-primary;
   }
 
   // Hide top border if previous list item is selected
