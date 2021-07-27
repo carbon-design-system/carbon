@@ -28,190 +28,199 @@ const defaultTranslations = {
   'carbon.progress-step.invalid': 'Invalid',
 };
 
-function translateWithId(messageId) {
+const translateWithId = (messageId) => {
   return defaultTranslations[messageId];
-}
-
-export function ProgressStep({
-  label,
-  description,
-  className,
-  current,
-  complete,
-  invalid,
-  secondaryLabel,
-  disabled,
-  onClick,
-  renderLabel: ProgressStepLabel,
-  translateWithId: t,
-  ...rest
-}) {
-  const classes = classnames({
-    [`${prefix}--progress-step`]: true,
-    [`${prefix}--progress-step--current`]: current,
-    [`${prefix}--progress-step--complete`]: complete,
-    [`${prefix}--progress-step--incomplete`]: !complete && !current,
-    [`${prefix}--progress-step--disabled`]: disabled,
-    [className]: className,
-  });
-
-  const handleKeyDown = (e) => {
-    if (matches(e, [keys.Enter, keys.Space])) {
-      onClick();
-    }
-  };
-
-  // eslint-disable-next-line react/prop-types
-  const SVGIcon = ({ complete, current, description, invalid, prefix }) => {
-    if (invalid) {
-      return (
-        <Warning16 className={`${prefix}--progress__warning`}>
-          <title>{description}</title>
-        </Warning16>
-      );
-    }
-    if (current) {
-      return (
-        <CircleFilled16>
-          <title>{description}</title>
-        </CircleFilled16>
-      );
-    }
-    if (complete) {
-      return (
-        <CheckmarkOutline16>
-          <title>{description}</title>
-        </CheckmarkOutline16>
-      );
-    }
-    return (
-      <RadioButton16>
-        <title>{description}</title>
-      </RadioButton16>
-    );
-  };
-
-  let message = t('carbon.progress-step.incomplete');
-
-  if (current) {
-    message = t('carbon.progress-step.current');
-  }
-
-  if (complete) {
-    message = t('carbon.progress-step.complete');
-  }
-
-  if (invalid) {
-    message = t('carbon.progress-step.invalid');
-  }
-
-  return (
-    <li className={classes}>
-      <button
-        type="button"
-        className={classnames(`${prefix}--progress-step-button`, {
-          [`${prefix}--progress-step-button--unclickable`]: !onClick || current,
-        })}
-        disabled={disabled}
-        aria-disabled={disabled}
-        tabIndex={!current && onClick && !disabled ? 0 : -1}
-        onClick={!current ? onClick : undefined}
-        onKeyDown={handleKeyDown}
-        title={label}
-        {...rest}>
-        <span className={`${prefix}--assistive-text`}>{message}</span>
-        <SVGIcon
-          complete={complete}
-          current={current}
-          description={description}
-          invalid={invalid}
-          prefix={prefix}
-        />
-        <ProgressStepLabel className={`${prefix}--progress-label`}>
-          {label}
-        </ProgressStepLabel>
-        {secondaryLabel !== null && secondaryLabel !== undefined ? (
-          <p className={`${prefix}--progress-optional`}>{secondaryLabel}</p>
-        ) : null}
-        <span className={`${prefix}--progress-line`} />
-      </button>
-    </li>
-  );
-}
-
-ProgressStep.propTypes = {
-  /**
-   * Provide an optional className to be applied to the containing `<li>` node
-   */
-  className: PropTypes.string,
-
-  /**
-   * Specify whether the step has been completed
-   */
-  complete: PropTypes.bool,
-
-  /**
-   * Specify whether the step is the current step
-   */
-  current: PropTypes.bool,
-
-  /**
-   * Provide a description for the <ProgressStep>
-   */
-  description: PropTypes.string,
-
-  /**
-   * Specify whether the step is disabled
-   */
-  disabled: PropTypes.bool,
-
-  /**
-   * Index of the current step within the ProgressIndicator
-   */
-  index: PropTypes.number,
-
-  /**
-   * Specify whether the step is invalid
-   */
-  invalid: PropTypes.bool,
-
-  /**
-   * Provide the label for the <ProgressStep>
-   */
-  label: PropTypes.node.isRequired,
-
-  /**
-   * A callback called if the step is clicked or the enter key is pressed
-   */
-  onClick: PropTypes.func,
-
-  /**
-   * Provide the props that describe a progress step tooltip
-   */
-  overflowTooltipProps: PropTypes.object,
-
-  /*
-   * An optional parameter to allow for overflow content to be rendered in a
-   * tooltip.
-   */
-  renderLabel: PropTypes.func,
-
-  /**
-   * Provide an optional secondary label
-   */
-  secondaryLabel: PropTypes.string,
-
-  /**
-   * The ID of the tooltip content.
-   */
-  tooltipId: PropTypes.string,
-
-  /**
-   * Optional method that takes in a message id and returns an
-   * internationalized string.
-   */
-  translateWithId: PropTypes.func,
 };
+
+export class ProgressStep extends React.PureComponent {
+  constructor(props) {
+    super(props);
+  }
+
+  render() {
+    const {
+      label,
+      description,
+      className,
+      secondaryLabel,
+      onClick,
+      renderLabel: ProgressStepLabel,
+      current,
+      complete,
+      invalid,
+      disabled,
+      translateWithId: t,
+      ...rest
+    } = this.props;
+
+    const classes = classnames({
+      [`${prefix}--progress-step`]: true,
+      [`${prefix}--progress-step--current`]: current,
+      [`${prefix}--progress-step--complete`]: complete,
+      [`${prefix}--progress-step--incomplete`]: !complete && !current,
+      [`${prefix}--progress-step--disabled`]: disabled,
+      [className]: className,
+    });
+
+    const handleKeyDown = (e) => {
+      if (matches(e, [keys.Enter, keys.Space])) {
+        onClick();
+      }
+    };
+
+    ProgressStep.propTypes = {
+      /**
+       * Provide an optional className to be applied to the containing `<li>` node
+       */
+      className: PropTypes.string,
+
+      /**
+       * Specify whether the step has been completed
+       */
+      complete: PropTypes.bool,
+
+      /**
+       * Specify whether the step is the current step
+       */
+      current: PropTypes.bool,
+
+      /**
+       * Provide a description for the <ProgressStep>
+       */
+      description: PropTypes.string,
+
+      /**
+       * Specify whether the step is disabled
+       */
+      disabled: PropTypes.bool,
+
+      /**
+       * Index of the current step within the ProgressIndicator
+       */
+      index: PropTypes.number,
+
+      /**
+       * Specify whether the step is invalid
+       */
+      invalid: PropTypes.bool,
+
+      /**
+       * Provide the label for the <ProgressStep>
+       */
+      label: PropTypes.node.isRequired,
+
+      /**
+       * A callback called if the step is clicked or the enter key is pressed
+       */
+      onClick: PropTypes.func,
+
+      /**
+       * Provide the props that describe a progress step tooltip
+       */
+      overflowTooltipProps: PropTypes.object,
+
+      /*
+       * An optional parameter to allow for overflow content to be rendered in a
+       * tooltip.
+       */
+      renderLabel: PropTypes.func,
+
+      /**
+       * Provide an optional secondary label
+       */
+      secondaryLabel: PropTypes.string,
+
+      /**
+       * The ID of the tooltip content.
+       */
+      tooltipId: PropTypes.string,
+
+      /**
+       * Optional method that takes in a message id and returns an
+       * internationalized string.
+       */
+      translateWithId: PropTypes.func,
+    };
+
+    // eslint-disable-next-line react/prop-types
+    const SVGIcon = ({ complete, current, description, invalid, prefix }) => {
+      if (invalid) {
+        return (
+          <Warning16 className={`${prefix}--progress__warning`}>
+            <title>{description}</title>
+          </Warning16>
+        );
+      }
+      if (current) {
+        return (
+          <CircleFilled16>
+            <title>{description}</title>
+          </CircleFilled16>
+        );
+      }
+      if (complete) {
+        return (
+          <CheckmarkOutline16>
+            <title>{description}</title>
+          </CheckmarkOutline16>
+        );
+      }
+      return (
+        <RadioButton16>
+          <title>{description}</title>
+        </RadioButton16>
+      );
+    };
+
+    let message = t('carbon.progress-step.incomplete');
+
+    if (current) {
+      message = t('carbon.progress-step.current');
+    }
+
+    if (complete) {
+      message = t('carbon.progress-step.complete');
+    }
+
+    if (invalid) {
+      message = t('carbon.progress-step.invalid');
+    }
+
+    return (
+      <li className={classes}>
+        <button
+          type="button"
+          className={classnames(`${prefix}--progress-step-button`, {
+            [`${prefix}--progress-step-button--unclickable`]:
+              !onClick || current,
+          })}
+          disabled={disabled}
+          aria-disabled={disabled}
+          tabIndex={!current && onClick && !disabled ? 0 : -1}
+          onClick={!current ? onClick : undefined}
+          onKeyDown={this.handleKeyDown}
+          title={label}
+          {...rest}>
+          <span className={`${prefix}--assistive-text`}>{message}</span>
+          <SVGIcon
+            complete={complete}
+            current={current}
+            description={description}
+            invalid={invalid}
+            prefix={prefix}
+          />
+          <ProgressStepLabel className={`${prefix}--progress-label`}>
+            {label}
+          </ProgressStepLabel>
+          {secondaryLabel !== null && secondaryLabel !== undefined ? (
+            <p className={`${prefix}--progress-optional`}>{secondaryLabel}</p>
+          ) : null}
+          <span className={`${prefix}--progress-line`} />
+        </button>
+      </li>
+    );
+  }
+}
 
 ProgressStep.defaultProps = {
   renderLabel: defaultRenderLabel,
@@ -226,7 +235,6 @@ export class ProgressIndicator extends Component {
      * Provide <ProgressStep> components to be rendered in the
      * <ProgressIndicator>
      */
-    children: PropTypes.node,
 
     /**
      * Provide an optional className to be applied to the containing node
@@ -247,6 +255,27 @@ export class ProgressIndicator extends Component {
      * Specify whether the progress steps should be split equally in size in the div
      */
     spaceEqually: PropTypes.bool,
+
+    /**
+     *  Pass in data needed to render the ProgressSteps
+     */
+    stepData: PropTypes.shape({
+      className: PropTypes.string,
+      complete: PropTypes.bool,
+      current: PropTypes.bool,
+      description: PropTypes.string,
+      disabled: PropTypes.bool,
+      index: PropTypes.number,
+      invalid: PropTypes.bool,
+      label: PropTypes.node.isRequired,
+      onClick: PropTypes.func,
+      overflowTooltipProps: PropTypes.object,
+      renderLabel: PropTypes.func,
+      secondaryLabel: PropTypes.string,
+      tooltipId: PropTypes.string,
+      translateWithId: PropTypes.func,
+    }),
+
     /**
      * Determines whether or not the ProgressIndicator should be rendered vertically.
      */
@@ -267,34 +296,62 @@ export class ProgressIndicator extends Component {
         };
   }
 
-  renderSteps = () => {
+  renderSteps = (stepData) => {
     const { onChange } = this.props;
 
-    return React.Children.map(this.props.children, (child, index) => {
+    return stepData.map((step, index) => {
       // only setup click handlers if onChange event is passed
       const onClick = onChange ? () => onChange(index) : undefined;
+
+      let isCurrent;
+      let isComplete;
+
+      const {
+        className,
+        description,
+        disabled,
+        invalid,
+        label,
+        overflowTooltipProps,
+        renderLabel,
+        secondaryLabel,
+        tooltipId,
+        translateWithId,
+      } = step;
+
       if (index === this.state.currentIndex) {
-        return React.cloneElement(child, {
-          current: true,
-          index,
-          onClick,
-        });
+        isCurrent = true;
       }
+
       if (index < this.state.currentIndex) {
-        return React.cloneElement(child, {
-          complete: true,
-          index,
-          onClick,
-        });
+        if (step.complete != true) {
+          isComplete = true;
+        }
       }
+
       if (index > this.state.currentIndex) {
-        return React.cloneElement(child, {
-          complete: child.props.complete || false,
-          index,
-          onClick,
-        });
+        isComplete = step.complete || false;
       }
-      return null;
+
+      return (
+        <ProgressStep
+          className={className}
+          complete={isComplete}
+          current={isCurrent}
+          description={description}
+          disabled={disabled}
+          index={index}
+          invalid={invalid}
+          key={index}
+          label={label}
+          onClick={onClick}
+          overflowTooltipProps={overflowTooltipProps}
+          renderLabel={renderLabel}
+          secondaryLabel={secondaryLabel}
+          tooltipId={tooltipId}
+          translateWithId={translateWithId}
+        />
+      );
     });
   };
 
@@ -304,6 +361,7 @@ export class ProgressIndicator extends Component {
       currentIndex, // eslint-disable-line no-unused-vars
       vertical,
       spaceEqually,
+      stepData,
       ...other
     } = this.props;
     const classes = classnames({
@@ -314,7 +372,7 @@ export class ProgressIndicator extends Component {
     });
     return (
       <ul className={classes} {...other}>
-        {this.renderSteps()}
+        {this.renderSteps(stepData)}
       </ul>
     );
   }
