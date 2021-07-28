@@ -79,7 +79,7 @@ TableBatchActions.propTypes = {
 
   /**
    * Hook required to listen for when the user initiates a cancel request
-   * through this comopnent
+   * through this component
    */
   onCancel: PropTypes.func.isRequired,
 
@@ -97,7 +97,7 @@ TableBatchActions.propTypes = {
 
   /**
    * Supply a method to translate internal strings with your i18n tool of
-   * choice. Translation keys are avabile on the `translationKeys` field for
+   * choice. Translation keys are available on the `translationKeys` field for
    * this component.
    */
   translateWithId: PropTypes.func,

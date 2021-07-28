@@ -80,7 +80,7 @@ describe('NotificationTextDetails', () => {
     const wrapper = shallow(<NotificationTextDetails />);
 
     describe('When notificationType equals "toast"', () => {
-      it('div shoudld have correct className by default', () => {
+      it('div should have correct className by default', () => {
         expect(wrapper.hasClass(`${prefix}--toast-notification__details`)).toBe(
           true
         );
@@ -88,7 +88,7 @@ describe('NotificationTextDetails', () => {
     });
 
     describe('When notificationType equals "inline"', () => {
-      it('div shoudld have correct className', () => {
+      it('div should have correct className', () => {
         wrapper.setProps({ notificationType: 'inline' });
         expect(
           wrapper.hasClass(`${prefix}--inline-notification__text-wrapper`)
