@@ -2,7 +2,7 @@
   "name": "@carbon/react",
   "private": true,
   "description": "React components for the Carbon Design System",
-  "version": "0.8.1",
+  "version": "0.8.0",
   "license": "Apache-2.0",
   "main": "lib/index.js",
   "module": "es/index.js",
@@ -45,7 +45,7 @@
     "@carbon/styles": "^0.11.0",
     "@carbon/telemetry": "0.0.0-alpha.6",
     "@ibm/plex": "6.0.0-next.6",
-    "carbon-components-react": "^7.40.1"
+    "carbon-components-react": "^7.40.0"
   },
   "devDependencies": {
     "@babel/core": "^7.14.6",
