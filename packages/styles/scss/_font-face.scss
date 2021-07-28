@@ -3,9 +3,11 @@
 @use '@ibm/plex/mono' as mono;
 @use '@ibm/plex/arabic' as arabic;
 
-@if config.$css--plex-arabic == true {
-  @include arabic.all;
-}
+@if config.$css--font-face == true {
+  @include sans.all;
+  @include mono.all;
 
-@include sans.all;
-@include mono.all;
+  @if config.$css--plex-arabic == true {
+    @include arabic.all;
+  }
+} ;
