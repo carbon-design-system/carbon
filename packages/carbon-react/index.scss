@@ -8,4 +8,5 @@
 @forward '@carbon/styles' with (
   $css--font-face: false,
   $css--default-type: false,
+  $css--plex-arabic: true,
 );
