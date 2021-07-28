@@ -129,12 +129,12 @@ describe('@carbon/themes/scss', () => {
     test('$use-fallback-value', async () => {
       const { unwrap } = await render(`
         @use '../' as themes with (
-          $use-fallback-value: true,
+          $use-fallback-value: false,
         );
 
         $_: get('background', themes.$background);
       `);
-      expect(unwrap('background')).toBe('var(--cds-background, #ffffff)');
+      expect(unwrap('background')).toBe('var(--cds-background)');
     });
 
     // Set prefix for CSS Custom Properties
@@ -146,7 +146,7 @@ describe('@carbon/themes/scss', () => {
 
         $_: get('background', themes.$background);
       `);
-      expect(unwrap('background')).toEqual('var(--test-background)');
+      expect(unwrap('background')).toEqual('var(--test-background, #ffffff)');
     });
   });
 });
