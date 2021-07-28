@@ -337,6 +337,11 @@
     }
   }
 
+  // styles for "next" version
+  .#{$prefix}--overflow-menu__container {
+    display: inline-block;
+  }
+
   // Windows HCM fix
   /* stylelint-disable */
   .#{$prefix}--overflow-menu:focus,

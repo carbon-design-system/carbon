@@ -14,26 +14,28 @@ $feature-flags: (
 @use "~@ibm/plex/arabic";
 
 @use '../index.scss' as styles;
+@use '../scss/components/button';
+@use '../scss/components/tag';
 
 // For now, including all weights for testing
 @include arabic.all;
 @include sans.all;
 @include mono.all;
 
-body {
-  @include styles.theme();
+:root {
+  @include styles.theme(styles.$white, button.$white, tag.$white);
 }
 
 [data-carbon-theme='g10'] {
-  @include styles.theme(styles.$g10);
+  @include styles.theme(styles.$g10, button.$g10, tag.$g10);
 }
 
 [data-carbon-theme='g90'] {
-  @include styles.theme(styles.$g90);
+  @include styles.theme(styles.$g90, button.$g90, tag.$g90);
 }
 
 [data-carbon-theme='g100'] {
-  @include styles.theme(styles.$g100);
+  @include styles.theme(styles.$g100, button.$g100, tag.$g100);
 }
 
 html[lang='en'] body {

@@ -18,6 +18,7 @@ const packageDenyList = new Set([
   'carbon-components',
   'carbon-components-react',
   '@carbon/sketch',
+  '@carbon/styles',
 ]);
 
 function run({ root, packagePaths }) {
