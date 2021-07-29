@@ -17,6 +17,7 @@ import {
 import { withReadme } from 'storybook-readme';
 import readme from './README.md';
 import MultiSelect from '../MultiSelect';
+import FilterableMultiSelect from '../MultiSelect/FilterableMultiSelect';
 import Checkbox from '../Checkbox';
 import mdx from './MultiSelect.mdx';
 
@@ -116,7 +117,7 @@ export default {
       page: mdx,
     },
     subcomponents: {
-      'MultiSelect.Filterable': MultiSelect.Filterable,
+      FilterableMultiSelect,
     },
   },
 };
@@ -190,7 +191,7 @@ export const _Filterable = withReadme(readme, () => {
 
   return (
     <div style={{ width: 300 }}>
-      <MultiSelect.Filterable
+      <FilterableMultiSelect
         {...multiSelectProps}
         items={items}
         itemToString={(item) => (item ? item.text : '')}
