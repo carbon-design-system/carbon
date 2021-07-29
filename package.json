@@ -119,17 +119,14 @@
   "lint-staged": {
     "**/*.js": [
       "prettier --write",
-      "eslint",
-      "git add"
+      "eslint"
     ],
     "**/*.scss": [
       "prettier --write",
-      "stylelint --report-needless-disables --report-invalid-scope-disables --allow-empty-input",
-      "git add"
+      "stylelint --report-needless-disables --report-invalid-scope-disables --allow-empty-input"
     ],
     "!(*sass).md": [
-      "prettier --write",
-      "git add"
+      "prettier --write"
     ]
   },
   "eslintConfig": {
