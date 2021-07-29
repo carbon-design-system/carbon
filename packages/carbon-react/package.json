@@ -44,7 +44,6 @@
     "@carbon/icons-react": "^10.36.0",
     "@carbon/styles": "^0.11.0",
     "@carbon/telemetry": "0.0.0-alpha.6",
-    "@ibm/plex": "6.0.0-next.6",
     "carbon-components-react": "^7.40.0"
   },
   "devDependencies": {
