@@ -10,7 +10,7 @@ import 'carbon-components/scss/components/checkbox/_checkbox.scss';
 import React from 'react';
 import { mount } from '@cypress/react';
 import Checkbox from '../Checkbox';
-import CheckboxSkeleton from '../Checkbox.Skeleton';
+import CheckboxSkeleton from '../Checkbox/Checkbox.Skeleton';
 
 describe('Checkbox', () => {
   beforeEach(() => {
