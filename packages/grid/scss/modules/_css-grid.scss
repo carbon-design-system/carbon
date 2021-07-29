@@ -110,7 +110,7 @@
 // Condensed
 // -----------------------------------------------------------------------------
 .#{$prefix}--css-grid--condensed {
-  --cds-grid-gutter: 2px;
+  --cds-grid-gutter: 1px;
 
   column-gap: var(--cds-grid-gutter);
   row-gap: var(--cds-grid-gutter);
