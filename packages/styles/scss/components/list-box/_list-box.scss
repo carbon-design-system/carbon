@@ -11,7 +11,7 @@
 @use '../tag/mixins' as *;
 @use '../../config' as *;
 @use '../../colors' as *;
-@use '../../theme' as *;
+@use '../../compat/theme' as *;
 @use '../../type' as *;
 @use '../../spacing' as *;
 @use '../../motion' as *;
@@ -284,7 +284,7 @@ $list-box-menu-width: rem(300px);
     max-width: rem(480px);
   }
 
-  .#{$prefix}--dropdown--inline .bx--list-box__menu {
+  .#{$prefix}--dropdown--inline .#{$prefix}--list-box__menu {
     min-width: rem(288px);
     max-width: rem(480px);
   }
