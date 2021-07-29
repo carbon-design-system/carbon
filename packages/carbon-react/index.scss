@@ -6,6 +6,6 @@
 //
 
 @forward '@carbon/styles' with (
-  $css--font-face: false,
-  $css--default-type: false,
+  $css--font-face: true,
+  $css--plex-arabic: true,
 );
