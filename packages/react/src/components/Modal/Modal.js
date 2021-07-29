@@ -226,6 +226,7 @@ export default class Modal extends Component {
   };
 
   button = React.createRef();
+  secondaryButton = React.createRef();
   outerModal = React.createRef();
   innerModal = React.createRef();
   startTrap = React.createRef();
@@ -234,13 +235,26 @@ export default class Modal extends Component {
   modalLabelId = `${prefix}--modal-header__label--${this.modalInstanceId}`;
   modalHeadingId = `${prefix}--modal-header__heading--${this.modalInstanceId}`;
   modalBodyId = `${prefix}--modal-body--${this.modalInstanceId}`;
+  modalCloseButtonClass = `${prefix}--modal-close`;
+
+  isCloseButton = (element) => {
+    return (
+      (!this.props.onSecondarySubmit &&
+        element === this.secondaryButton.current) ||
+      element.classList.contains(this.modalCloseButtonClass)
+    );
+  };
 
   handleKeyDown = (evt) => {
     if (this.props.open) {
       if (evt.which === 27) {
         this.props.onRequestClose(evt);
       }
-      if (evt.which === 13 && this.props.shouldSubmitOnEnter) {
+      if (
+        evt.which === 13 &&
+        this.props.shouldSubmitOnEnter &&
+        !this.isCloseButton(evt.target)
+      ) {
         this.props.onRequestSubmit(evt);
       }
     }
@@ -397,7 +411,7 @@ export default class Modal extends Component {
 
     const modalButton = (
       <button
-        className={`${prefix}--modal-close`}
+        className={this.modalCloseButtonClass}
         type="button"
         onClick={onRequestClose}
         title={iconDescription}
@@ -405,7 +419,7 @@ export default class Modal extends Component {
         ref={this.button}>
         <Close20
           aria-label={iconDescription}
-          className={`${prefix}--modal-close__icon`}
+          className={`${this.modalCloseButtonClass}__icon`}
         />
       </button>
     );
@@ -449,7 +463,10 @@ export default class Modal extends Component {
       }
       if (secondaryButtonText) {
         return (
-          <Button kind="secondary" onClick={onSecondaryButtonClick}>
+          <Button
+            kind="secondary"
+            onClick={onSecondaryButtonClick}
+            ref={this.secondaryButton}>
             {secondaryButtonText}
           </Button>
         );
