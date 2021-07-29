@@ -9,7 +9,10 @@ $feature-flags: (
   enable-v11-release: true,
 );
 
-@use '../index.scss' as styles;
+@use '../index.scss' as styles with (
+  $css--font-face: true,
+  $css--plex-arabic: true,
+);
 @use '../scss/components/button';
 @use '../scss/components/tag';
 
