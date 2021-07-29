@@ -70,6 +70,7 @@
     "babel-preset-carbon": "^0.1.0",
     "browserslist-config-carbon": "^10.6.1",
     "css-loader": "^5.2.4",
+    "fs-extra": "^10.0.0",
     "mini-css-extract-plugin": "^1.6.0",
     "postcss": "^8.2.14",
     "postcss-custom-properties": "^11.0.0",
