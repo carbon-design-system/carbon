@@ -10,14 +10,12 @@
 export const fontFamilies = {
   mono:
     "'IBM Plex Mono', 'Menlo', 'DejaVu Sans Mono', 'Bitstream Vera Sans Mono', Courier, monospace",
-  sans:
-    "'IBM Plex Sans', system-ui, -apple-system, BlinkMacSystemFont, '.SFNSText-Regular', sans-serif",
+  sans: "'IBM Plex Sans', 'Helvetica Neue', Arial, sans-serif",
   sansCondensed:
-    "'IBM Plex Sans Condensed', system-ui, -apple-system, BlinkMacSystemFont, '.SFNSText-Regular', sans-serif",
+    "'IBM Plex Sans Condensed', 'Helvetica Neue', Arial, sans-serif",
   sansHebrew:
-    "'IBM Plex Sans Hebrew', system-ui, -apple-system, BlinkMacSystemFont, '.SFNSText-Regular', sans-serif",
-  serif:
-    "'IBM Plex Serif', system-ui, -apple-system, BlinkMacSystemFont, '.SFNSText-Regular', serif",
+    "'IBM Plex Sans Hebrew', 'Helvetica Hebrew', 'Arial Hebrew', sans-serif",
+  serif: "'IBM Plex Serif', 'Georgia', Times, serif",
 };
 
 export function fontFamily(name) {
