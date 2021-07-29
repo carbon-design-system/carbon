@@ -83,16 +83,16 @@
     justify-content: center;
   }
 
-  .bx--btn.bx--btn--icon-only.bx--tooltip__trigger.#{$prefix}--header__action
+  .#{$prefix}--btn.#{$prefix}--btn--icon-only.#{$prefix}--tooltip__trigger.#{$prefix}--header__action
     svg {
     fill: $icon-secondary;
   }
 
-  .bx--btn.bx--btn--icon-only.bx--tooltip__trigger.#{$prefix}--header__action:hover
+  .#{$prefix}--btn.#{$prefix}--btn--icon-only.#{$prefix}--tooltip__trigger.#{$prefix}--header__action:hover
     svg,
-  .bx--btn.bx--btn--icon-only.bx--tooltip__trigger.#{$prefix}--header__action:active
+  .#{$prefix}--btn.#{$prefix}--btn--icon-only.#{$prefix}--tooltip__trigger.#{$prefix}--header__action:active
     svg,
-  .bx--btn.bx--btn--icon-only.bx--tooltip__trigger.#{$prefix}--header__action--active
+  .#{$prefix}--btn.#{$prefix}--btn--icon-only.#{$prefix}--tooltip__trigger.#{$prefix}--header__action--active
     svg {
     fill: $icon-primary;
   }
