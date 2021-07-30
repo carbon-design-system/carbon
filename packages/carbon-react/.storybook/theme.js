@@ -33,8 +33,9 @@ export default create({
   appBorderRadius: 0,
 
   // Typography
-  fontBase: '"IBM Plex Sans", sans-serif',
-  fontCode: '"IBM Plex Mono", monospace',
+  fontBase: "'IBM Plex Sans', 'Helvetica Neue', Arial, sans-serif",
+  fontCode:
+    "'IBM Plex Mono', Menlo, 'DejaVu Sans Mono', 'Bitstream Vera Sans Mono', Courier, monospace",
 
   // Text colors
   textColor: text01,
