@@ -18,6 +18,7 @@ const filepaths = [
   'scss/colors',
   'scss/config',
   'scss/feature-flags',
+  'scss/font-face',
   'scss/grid',
   'scss/motion',
   'scss/reset',
