@@ -135,7 +135,7 @@
     "terser-webpack-plugin": "^2.3.2",
     "webpack": "^4.41.5",
     "webpack-dev-server": "^3.11.2",
-    "whatwg-fetch": "^2.0.3"
+    "whatwg-fetch": "^3.6.2"
   },
   "sideEffects": false,
   "babel": {

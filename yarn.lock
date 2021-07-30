@@ -10390,7 +10390,7 @@ __metadata:
     use-resize-observer: ^6.0.0
     webpack: ^4.41.5
     webpack-dev-server: ^3.11.2
-    whatwg-fetch: ^2.0.3
+    whatwg-fetch: ^3.6.2
     window-or-global: ^1.0.1
   peerDependencies:
     carbon-components: ^10.30.0
@@ -10535,7 +10535,7 @@ __metadata:
     webpack: ^4.41.5
     webpack-dev-middleware: ^3.7.2
     webpack-hot-middleware: ^2.21.0
-    whatwg-fetch: ^3.0.0
+    whatwg-fetch: ^3.6.2
   languageName: unknown
   linkType: soft
 
@@ -35097,17 +35097,10 @@ resolve@^2.0.0-next.3:
   languageName: node
   linkType: hard
 
-"whatwg-fetch@npm:^2.0.3":
-  version: 2.0.4
-  resolution: "whatwg-fetch@npm:2.0.4"
-  checksum: de7c65a68d7d62e2f144a6b30293370b3ad82b65ebcd68f2ac8e8bbe7ede90febd98ba9486b78c1cbc950e0e8838fa5c2727f939899ab3fc7b71a04be52d33a5
-  languageName: node
-  linkType: hard
-
-"whatwg-fetch@npm:^3.0.0":
-  version: 3.0.0
-  resolution: "whatwg-fetch@npm:3.0.0"
-  checksum: dcb90ab919e742d275c32d397d7480f6981da4c1b49961f0d0a2fa6825325b553fee2d793bc38ed85b9bcc8c50de39802440e2480fe40243067b3dab228c52c3
+"whatwg-fetch@npm:^3.6.2":
+  version: 3.6.2
+  resolution: "whatwg-fetch@npm:3.6.2"
+  checksum: ee976b7249e7791edb0d0a62cd806b29006ad7ec3a3d89145921ad8c00a3a67e4be8f3fb3ec6bc7b58498724fd568d11aeeeea1f7827e7e1e5eae6c8a275afed
   languageName: node
   linkType: hard
 
