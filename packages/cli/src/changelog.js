@@ -139,7 +139,7 @@ function getMarkdownTitle(lastTag, latestTag) {
  * @returns {Array}
  */
 async function getCommitsInRange(pkg, range) {
-  // Using the `rev-list` subcommand of `git` we can list out all of the commits
+  // Using the `rev-list` sub-command of `git` we can list out all of the commits
   // for the given range inside of the package's location. This will allow us to
   // find all the commits associated with this package that we'll display in the
   // changelog
@@ -152,7 +152,7 @@ async function getCommitsInRange(pkg, range) {
   ]);
 
   // If the git sub-command returns nothing, then no commits have occurred for
-  // this package in the given commit rnage
+  // this package in the given commit range
   if (stdout === '') {
     return {
       ...pkg,
@@ -196,8 +196,8 @@ async function getCommitsInRange(pkg, range) {
       return true;
     })
     .filter((commit) => {
-      // Running into an issue with duplicate headers when viewing "commited by"
-      // and "commited and authored by", as a result we'll keep a set of all
+      // Running into an issue with duplicate headers when viewing "committed by"
+      // and "committed and authored by", as a result we'll keep a set of all
       // headers and exclude the commit if we've seen it already
       if (headers.has(commit.info.header)) {
         return false;

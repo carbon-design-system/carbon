@@ -56,7 +56,7 @@ export const PaginationWithCustomPageSizesLabel = () => {
           { text: 'Ten', value: 10 },
           { text: 'Twenty', value: 20 },
           { text: 'Thirty', value: 30 },
-          { text: 'Fourty', value: 40 },
+          { text: 'Forty', value: 40 },
           { text: 'Fifty', value: 50 },
         ]}
         itemsPerPageText="Items per page:"

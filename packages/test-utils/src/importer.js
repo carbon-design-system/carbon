@@ -31,7 +31,7 @@ const Importer = {
           basedir: cwd,
           packageFilter(pkg) {
             if (pkg.eyeglass !== undefined) {
-              // Replace JavaScript entrypoint with Sass module entrypoing
+              // Replace JavaScript entrypoint with Sass module entrypoint
               pkg.main = `${pkg.eyeglass.sassDir}/index.scss`;
             }
             return pkg;

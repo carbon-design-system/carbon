@@ -94,7 +94,7 @@ concepts, learn from our mistakes, and grow the number of languages that we
 target or support as a design system.
 
 Guidelines or practices outlined in this document are meant to help us as a
-group build stable and reliable sofware. What this means to the developer may
+group build stable and reliable software. What this means to the developer may
 change depending on the environment in which one writes code.
 
 At the end of the day, we as a group hold the following values about writing
@@ -584,7 +584,7 @@ commands one after another. Refer to the documentation of your shell.
 
 #### Recipes
 
-Below are some common receipes for component testing. Many of the pattern/syntax
+Below are some common recipes for component testing. Many of the pattern/syntax
 details contained within these recipes are enforced via eslint rules declared in
 `eslint-config-carbon`.
 

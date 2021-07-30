@@ -28,8 +28,8 @@ const props = () => ({
   min: number('The minimum value (min)', 0),
   max: number('The maximum value (max)', 100),
   step: number('The step (step)', 1),
-  stepMultiplier: number(
-    'The step factor for Shift+arrow keys (stepMultiplier)',
+  stepMultiple: number(
+    'The step factor for Shift+arrow keys (stepMultiple)',
     5
   ),
   labelText: text('Label text (labelText)', 'Slider Label'),
@@ -61,7 +61,7 @@ export const Default = () => (
     min={0}
     max={100}
     step={1}
-    stepMultiplier={10}
+    stepMultiple={10}
     novalidate
   />
 );

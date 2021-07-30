@@ -41,7 +41,7 @@ describe('Test slider', function () {
         classThumbClicked: 'bx--slider__thumb--clicked',
         eventBeforeSliderValueChange: 'slider-before-value-change',
         eventAfterSliderValueChange: 'slider-after-value-change',
-        stepMultiplier: 4,
+        stepMultiple: 4,
       });
     });
 
@@ -51,7 +51,7 @@ describe('Test slider', function () {
       }
     });
   });
-  describe('Programatic change', function () {
+  describe('Programmatic change', function () {
     let slider;
     let container;
     beforeEach(function () {

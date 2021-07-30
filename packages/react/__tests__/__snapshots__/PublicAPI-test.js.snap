@@ -59,7 +59,7 @@ Map {
       "open": Object {
         "type": "bool",
       },
-      "renderExpando": Object {
+      "renderExpand": Object {
         "type": "func",
       },
       "title": Object {
@@ -1139,7 +1139,7 @@ Map {
         "className": Object {
           "type": "string",
         },
-        "enableExpando": Object {
+        "enableExpand": Object {
           "type": "bool",
         },
         "expandIconDescription": Object {
@@ -1776,7 +1776,7 @@ Map {
       "className": Object {
         "type": "string",
       },
-      "enableExpando": Object {
+      "enableExpand": Object {
         "type": "bool",
       },
       "expandIconDescription": Object {
@@ -5167,7 +5167,7 @@ Map {
       "maxLabel": "",
       "minLabel": "",
       "step": 1,
-      "stepMultiplier": 4,
+      "stepMultiple": 4,
     },
     "propTypes": Object {
       "ariaLabelInput": Object {
@@ -5232,8 +5232,8 @@ Map {
       "step": Object {
         "type": "number",
       },
-      "stepMuliplier": [Function],
-      "stepMultiplier": Object {
+      "stepMultiplier": [Function],
+      "stepMultiple": Object {
         "type": "number",
       },
       "value": Object {
