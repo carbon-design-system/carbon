@@ -40,17 +40,6 @@ function buildThemeTokens() {
     t.SassModule('../theme'),
     t.Newline(),
 
-    // Fallback
-    t.Comment(
-      '/ Specify if a fallback value should be provided for the CSS Custom Property'
-    ),
-    t.Assignment({
-      id: t.Identifier('use-fallback-value'),
-      init: t.SassBoolean(false),
-      default: true,
-    }),
-    t.Newline(),
-
     t.Comment('/ Internal helper for generating CSS Custom Properties'),
     t.SassFunction({
       id: t.Identifier('_get'),
@@ -58,7 +47,7 @@ function buildThemeTokens() {
       body: t.BlockStatement([
         t.IfStatement({
           test: t.LogicalExpression({
-            left: t.Identifier('use-fallback-value'),
+            left: t.SassValue('config.$use-fallback-value'),
             operator: '==',
             right: t.SassBoolean(false),
           }),

@@ -7,6 +7,7 @@
 
 @forward 'scss/config';
 @forward 'scss/colors' hide $white;
+@forward 'scss/font-face';
 @forward 'scss/grid';
 @forward 'scss/motion';
 @forward 'scss/type';
