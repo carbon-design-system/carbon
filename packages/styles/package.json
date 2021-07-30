@@ -16,6 +16,9 @@
     "components",
     "react"
   ],
+  "publishConfig": {
+    "access": "public"
+  },
   "dependencies": {
     "@carbon/colors": "^10.29.0",
     "@carbon/feature-flags": "^0.5.0",
