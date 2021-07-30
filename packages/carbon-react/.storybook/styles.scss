@@ -9,18 +9,9 @@ $feature-flags: (
   enable-v11-release: true,
 );
 
-@use "~@ibm/plex/default" as sans;
-@use "~@ibm/plex/mono";
-@use "~@ibm/plex/arabic";
-
 @use '../index.scss' as styles;
 @use '../scss/components/button';
 @use '../scss/components/tag';
-
-// For now, including all weights for testing
-@include arabic.all;
-@include sans.all;
-@include mono.all;
 
 :root {
   @include styles.theme(styles.$white, button.$white, tag.$white);
