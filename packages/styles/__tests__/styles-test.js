@@ -48,22 +48,22 @@ const filepaths = [
   'scss/components/button',
   'scss/components/checkbox',
   'scss/components/code-snippet',
-  // 'scss/components/combobox',
+  'scss/components/combo-box',
   'scss/components/content-switcher',
   'scss/components/copy-button',
   'scss/components/data-table',
   'scss/components/date-picker',
-  // 'scss/components/dropdown',
+  'scss/components/dropdown',
   'scss/components/file-uploader',
   'scss/components/form',
   'scss/components/inline-loading',
   'scss/components/link',
   'scss/components/list',
-  // 'scss/components/list-box',
+  'scss/components/list-box',
   'scss/components/loading',
   'scss/components/menu',
   'scss/components/modal',
-  // 'scss/components/multiselect',
+  'scss/components/multiselect',
   'scss/components/notification',
   'scss/components/number-input',
   'scss/components/overflow-menu',
@@ -92,21 +92,33 @@ describe.each(filepaths)('%s', (filepath) => {
   });
 });
 
+describe('Snapshot Tests', () => {
+  it('should match snapshots', async () => {
+    expect(filepaths).toMatchSnapshot();
+  });
+});
+
 describe('@carbon/styles/scss/config', () => {
   test('Config overrides', async () => {
     const { get } = await render(`
       @use 'sass:meta';
       @use '../scss/config' with (
         $prefix: 'custom-prefix',
+        $css--font-face: false,
+        $css--plex-arabic: true,
       );
 
       $_: get('config', (
         prefix: config.$prefix,
+        css--font-face: config.$css--font-face,
+        css--plex-arabic: config.$css--plex-arabic,
       ));
     `);
 
     expect(get('config').value).toEqual({
       prefix: 'custom-prefix',
+      ['css--font-face']: false,
+      ['css--plex-arabic']: true,
     });
   });
 });
