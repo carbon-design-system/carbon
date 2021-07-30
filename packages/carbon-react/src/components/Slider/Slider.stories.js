@@ -34,7 +34,7 @@ export const Default = () => (
     min={0}
     max={100}
     step={1}
-    stepMultiplier={10}
+    stepMultiple={10}
     novalidate
   />
 );

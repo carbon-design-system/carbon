@@ -136,7 +136,7 @@ describe('Slider', () => {
         min={0}
         max={100}
         step={1}
-        stepMultiplier={5}
+        stepMultiple={5}
         onChange={handleChange}
         onRelease={handleRelease}
       />

@@ -156,7 +156,7 @@ class Slider extends mixin(
         if (direction !== undefined) {
           const multiplier =
             evt.shiftKey === true
-              ? range / step / this.options.stepMultiplier
+              ? range / step / this.options.stepMultiple
               : 1;
           const stepMultiplied = step * multiplier;
           const stepSize = (stepMultiplied / range) * 100;
@@ -250,7 +250,7 @@ class Slider extends mixin(
       classThumbClicked: `${prefix}--slider__thumb--clicked`,
       eventBeforeSliderValueChange: 'slider-before-value-change',
       eventAfterSliderValueChange: 'slider-after-value-change',
-      stepMultiplier: 4,
+      stepMultiple: 4,
     };
   }
 }
