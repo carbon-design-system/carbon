@@ -1738,7 +1738,7 @@ __metadata:
     rollup: ^2.46.0
     sass: ^1.32.4
     sassdoc: ^2.7.3
-    yargs: ^15.1.0
+    yargs: ^17.0.1
   bin:
     carbon-cli: ./bin/carbon-cli.js
   languageName: unknown
@@ -35876,7 +35876,7 @@ resolve@^2.0.0-next.3:
   languageName: node
   linkType: hard
 
-"yargs@npm:^15.0.1, yargs@npm:^15.1.0, yargs@npm:^15.3.1":
+"yargs@npm:^15.0.1, yargs@npm:^15.3.1":
   version: 15.4.1
   resolution: "yargs@npm:15.4.1"
   dependencies:
