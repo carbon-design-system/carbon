@@ -10,7 +10,7 @@ import './Grid-test.e2e.scss';
 
 import React from 'react';
 import { mount } from '@cypress/react';
-import { Grid, Row, Column } from '..';
+import { Grid, Column } from '..';
 import { FeatureFlags } from '../../FeatureFlags';
 
 describe('Grid', () => {
