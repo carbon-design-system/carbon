@@ -103,7 +103,7 @@
     "carbon-icons": "^7.0.5",
     "chalk": "^4.1.1",
     "cli-table": "^0.3.0",
-    "core-js": "^3.6.5",
+    "core-js": "^3.16.0",
     "cross-env": "^5.2.0",
     "css-loader": "^3.4.2",
     "cypress": "^8.0.0",

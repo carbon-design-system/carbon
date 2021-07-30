@@ -1836,7 +1836,7 @@ __metadata:
     "@rollup/plugin-replace": ^2.4.2
     browserslist-config-carbon: ^10.6.1
     change-case: ^4.1.1
-    core-js: ^3.6.5
+    core-js: ^3.16.0
     fs-extra: ^8.1.0
     joi: ^14.3.1
     js-yaml: ^3.12.1
@@ -1947,7 +1947,7 @@ __metadata:
     "@carbon/cli-reporter": ^10.5.0
     "@carbon/scss-generator": ^10.13.0
     "@carbon/test-utils": ^10.16.0
-    core-js: ^3.6.5
+    core-js: ^3.16.0
     rimraf: ^3.0.0
   languageName: unknown
   linkType: soft
@@ -2057,7 +2057,7 @@ __metadata:
     "@carbon/type": ^10.32.0
     "@skpm/builder": ^0.7.0
     color-string: ^1.5.3
-    core-js: ^3.11.1
+    core-js: ^3.16.0
     cross-env: ^5.2.0
     regenerator-runtime: ^0.13.7
     rimraf: ^3.0.0
@@ -2134,7 +2134,7 @@ __metadata:
     "@carbon/type": ^10.32.0
     change-case: ^4.1.1
     color: ^3.1.2
-    core-js: ^3.6.5
+    core-js: ^3.16.0
     fs-extra: ^8.1.0
     js-yaml: ^3.13.0
     node-sass: ^4.13.1
@@ -10348,7 +10348,7 @@ __metadata:
     classnames: 2.3.1
     cli-table: ^0.3.0
     copy-to-clipboard: ^3.3.1
-    core-js: ^3.6.5
+    core-js: ^3.16.0
     cross-env: ^5.2.0
     css-loader: ^3.4.2
     cypress: ^8.0.0
@@ -10463,7 +10463,7 @@ __metadata:
     chokidar: ^2.0.0
     classnames: ^2.2.0
     commander: ^2.13.0
-    core-js: ^3.6.5
+    core-js: ^3.16.0
     cross-env: ^5.2.0
     css-loader: ^3.4.2
     custom-event: ^1.0.0
@@ -12096,10 +12096,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"core-js@npm:^3.0.1, core-js@npm:^3.0.4, core-js@npm:^3.11.1, core-js@npm:^3.15.0, core-js@npm:^3.2.0, core-js@npm:^3.6.5, core-js@npm:^3.8.2":
-  version: 3.15.2
-  resolution: "core-js@npm:3.15.2"
-  checksum: f8f61569c4c3bdf50679226f5a1045551192a2f4bc3fa46a873b6fa834cff6d1634ee138a6e4bae3eea99f1b1db2d588fa693de74640447476292b41f595a4c3
+"core-js@npm:^3.0.1, core-js@npm:^3.0.4, core-js@npm:^3.15.0, core-js@npm:^3.16.0, core-js@npm:^3.2.0, core-js@npm:^3.6.5, core-js@npm:^3.8.2":
+  version: 3.16.0
+  resolution: "core-js@npm:3.16.0"
+  checksum: e215cf057fadd86e5386d8042c1bd0ddab1c7811d8f66d272c356ba9bae34c0897c3f5a80d19f93fd74cff832652354a0feb0c817234a066ae9177e28c6d865a
   languageName: node
   linkType: hard
 
