@@ -27,6 +27,9 @@
     "components",
     "react"
   ],
+  "publishConfig": {
+    "access": "public"
+  },
   "scripts": {
     "build": "yarn clean && node tasks/build.js",
     "clean": "rimraf es lib",
