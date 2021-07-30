@@ -75,7 +75,7 @@ class Search extends mixin(createComponent, initComponentBySearch, handles) {
 
   /**
    * Toggles between the grid and list layout.
-   * @param {HTMLElement} element The element contining the layout toggle.
+   * @param {HTMLElement} element The element continuing the layout toggle.
    */
   toggleLayout(element) {
     toArray(element.querySelectorAll(this.options.selectorSearchView)).forEach(
@@ -98,7 +98,7 @@ class Search extends mixin(createComponent, initComponentBySearch, handles) {
    * The component options.
    * If `options` is specified in the constructor,
    * {@linkcode Search.create .create()}, or {@linkcode Search.init .init()},
-   * properties in this object are overriden for the instance being created
+   * properties in this object are overridden for the instance being created
    * and how {@linkcode Search.init .init()} works.
    * @member Search.options
    * @type {object}

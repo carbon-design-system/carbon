@@ -282,7 +282,7 @@ Dropdown.propTypes = {
 
   /**
    * Function to render items as custom components instead of strings.
-   * Defaults to null and is overriden by a getter
+   * Defaults to null and is overridden by a getter
    */
   itemToElement: PropTypes.func,
 
