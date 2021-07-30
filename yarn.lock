@@ -1997,10 +1997,9 @@ __metadata:
     "@babel/preset-react": ^7.14.5
     "@carbon/feature-flags": ^0.5.0
     "@carbon/icons-react": ^10.36.0
-    "@carbon/styles": ^0.11.0-rc.0
+    "@carbon/styles": ^0.1.0
     "@carbon/telemetry": 0.0.0-alpha.6
     "@carbon/themes": ^10.39.0
-    "@ibm/plex": 6.0.0-next.6
     "@rollup/plugin-babel": ^5.3.0
     "@rollup/plugin-commonjs": ^18.0.0
     "@rollup/plugin-node-resolve": ^11.2.1
@@ -2016,6 +2015,7 @@ __metadata:
     browserslist-config-carbon: ^10.6.1
     carbon-components-react: ^7.40.0
     css-loader: ^5.2.4
+    fs-extra: ^10.0.0
     mini-css-extract-plugin: ^1.6.0
     postcss: ^8.2.14
     postcss-custom-properties: ^11.0.0
@@ -2065,7 +2065,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@carbon/styles@^0.11.0-rc.0, @carbon/styles@workspace:packages/styles":
+"@carbon/styles@^0.1.0, @carbon/styles@workspace:packages/styles":
   version: 0.0.0-use.local
   resolution: "@carbon/styles@workspace:packages/styles"
   dependencies:
@@ -2077,6 +2077,7 @@ __metadata:
     "@carbon/test-utils": ^10.16.0
     "@carbon/themes": ^10.39.0
     "@carbon/type": ^10.32.0
+    "@ibm/plex": 6.0.0-next.6
     css: ^3.0.0
   languageName: unknown
   linkType: soft
