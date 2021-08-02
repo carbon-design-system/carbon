@@ -562,12 +562,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"carbon-components-react@link:../../../react::locator=grid-examples-css-grid%40workspace%3A.":
-  version: 0.0.0-use.local
-  resolution: "carbon-components-react@link:../../../react::locator=grid-examples-css-grid%40workspace%3A."
-  languageName: node
-  linkType: soft
-
 "carbon-components@link:../../../components::locator=grid-examples-css-grid%40workspace%3A.":
   version: 0.0.0-use.local
   resolution: "carbon-components@link:../../../components::locator=grid-examples-css-grid%40workspace%3A."
@@ -1268,7 +1262,6 @@ fsevents@~2.3.1:
     "@carbon/colors": "link:../../../colors"
     "@carbon/grid": "link:../../"
     carbon-components: "link:../../../components"
-    carbon-components-react: "link:../../../react"
     next: ^10.0.7
     react: ^17.0.1
     react-dom: ^17.0.1
