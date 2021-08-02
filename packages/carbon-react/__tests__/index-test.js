@@ -195,6 +195,12 @@ Array [
   "TooltipDefinition",
   "TooltipIcon",
   "UnorderedList",
+  "unstable_ContextMenu",
+  "unstable_ContextMenuDivider",
+  "unstable_ContextMenuGroup",
+  "unstable_ContextMenuItem",
+  "unstable_ContextMenuRadioGroup",
+  "unstable_ContextMenuSelectableItem",
   "unstable_Heading",
   "unstable_PageSelector",
   "unstable_Pagination",
@@ -202,6 +208,7 @@ Array [
   "unstable_Section",
   "unstable_TreeNode",
   "unstable_TreeView",
+  "unstable_useContextMenu",
   "useTheme",
 ]
 `);
