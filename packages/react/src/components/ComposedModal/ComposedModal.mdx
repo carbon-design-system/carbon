@@ -113,11 +113,7 @@ There are four responsive
   <ModalHeader />
   <ModalBody>
     <p className="bx--modal-content__text">
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse
-      cursus fermentum risus, sit amet fringilla nunc pellentesque quis. Duis
-      quis odio ultrices, cursus lacus ac, posuere felis. Donec dignissim libero
-      in augue mattis, a molestie metus vestibulum. Aliquam placerat felis
-      ultrices lorem condimentum, nec ullamcorper felis porttitor.
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse cursus fermentum risus, sit amet fringilla nunc pellentesque quis. Duis quis odio ultrices, cursus lacus ac, posuere felis. Donec dignissim libero in augue mattis, a molestie metus vestibulum. Aliquam placerat felis ultrices lorem condimentum, nec ullamcorper felis porttitor.
     </p>
   </ModalBody>
 </ComposedModal>
@@ -217,17 +213,17 @@ With `<ComposedModal>`, you can control the buttons with the following code.
       kind="secondary"
       onClick={() => { (Run some action...) setOpen(false); }}>
       Another button
-    </Buttton>
+    </Button>
     <Button
       kind="secondary"
       onClick={() => { (Run some action...) setOpen(false); }}>
       Secondary button
-    </Buttton>
+    </Button>
     <Button
       kind="primary"
       onClick={() => { (Run some action...) setOpen(false); }}>
-      Priamry button
-    </Buttton>
+      Primary button
+    </Button>
   </ModalFooter>
 </ComposedModal>
 ```
@@ -240,7 +236,7 @@ clarity to an otherwise repetitive title and body message.
 To use this pattern with `<Modal>`, you can omit the `children` prop.
 
 ```jsx
-const modalHeadding =
+const modalHeading =
   'Are you sure you want to add the "Speech to Text" service ' +
   'to the node-test app?';
 ...
@@ -255,7 +251,7 @@ To use this pattern with `<ComposedModal>`, you can omit `<ModalBody>`.
 
 ```jsx
 <ComposedModal>
-  <ModalHeader label="Modla label">
+  <ModalHeader label="Modal label">
     <h1>
       Are you sure you want to add the "Speech to Text" service to the node-test
       app?

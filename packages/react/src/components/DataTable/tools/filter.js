@@ -6,7 +6,7 @@
  */
 
 /**
- * Default implemention of how we filter rows internally. The idea behind this
+ * Default implementation of how we filter rows internally. The idea behind this
  * implementation is to use the given list of row ids and headers to get the
  * individual cell values for a row. Then, we go through each cell value and see
  * if any of them includes the given inputValue.
