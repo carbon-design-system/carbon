@@ -553,6 +553,8 @@ export const HeaderBaseWActionsAndRightPanel = withReadme(readme, () => {
       </HeaderName>
       <HeaderGlobalBar>
         <HeaderGlobalAction
+          tooltipAlignment="end"
+          isActive={expanded}
           aria-label="Notifications"
           onClick={toggleRightPanel}>
           <Notification20 />
