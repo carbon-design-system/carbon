@@ -12,6 +12,9 @@
 - [Config](#config)
 - [Feature Flags](#feature-flags)
 - [Grid](#grid)
+  - [Using the grid](#using-the-grid)
+  - [Classes provided](#classes-provided)
+  - [Grid Mixins](#grid-mixins)
 - [Motion](#motion)
 - [Reset](#reset)
 - [Spacing](#spacing)
@@ -45,6 +48,7 @@ between version updates.
 | :------------------------------------- | :--------------------------------------------------------- |
 | [`scss/breakpoint`](#breakpoint)       | Helper functions and mixins for working with breakpoints   |
 | [`scss/colors`](#colors)               | Access colors from every swatch in the IBM Design Language |
+| [`scss/compat/`](#compatibility)       | Helper themes and tokens for migrating from v10 to v11     |
 | [`scss/config`](#config)               | Configure various options for the package                  |
 | [`scss/feature-flags`](#feature-flags) | Configure various feature flags for experiments            |
 | [`scss/grid`](#grid)                   | Access and use the CSS Grid built-in to Carbon             |
@@ -65,9 +69,24 @@ between version updates.
 
 ## Colors
 
+The colors package will give you access to each swatch from the IBM Design
+Language. You can refer to any color by its swatch and grade.
+
+```scss
+@use '@carbon/styles/scss/colors';
+
+.my-selector {
+  background-color: colors.$blue-50;
+}
+```
+
 | Import                               | Filepath            |
 | :----------------------------------- | :------------------ |
 | `@use '@carbon/styles/scss/colors';` | `scss/_colors.scss` |
+
+To see all the colors available to be imported, checkout our
+[colors](https://github.com/carbon-design-system/carbon/tree/main/packages/colors)
+docs.
 
 ## Config
 
@@ -87,11 +106,86 @@ between version updates.
 | :--------------------------------- | :---------------- |
 | `@use '@carbon/styles/scss/grid';` | `scss/_grid.scss` |
 
+### Using the grid
+
+This package `@forward`s the styles defined in the
+[`@carbon/grid`](https://github.com/carbon-design-system/carbon/tree/main/packages/grid)
+package. The full source for Carbon grid styles can be found there alongside
+more comprehensive documentation on package contents, configuration, and usage.
+
+To use the grid via `@carbon/styles`, it must be brought in directly or the grid
+specific style sheet must be imported:
+
+```scss
+/* All the grid styles are included through this central entrypoint */
+@use '@carbon/styles';
+
+/* Alternatively, the grid styles can be brought in on their own */
+@use '@carbon/styles/scss/grid';
+```
+
+### Classes provided
+
+In either case, you will then have access to the grid classes and mixins
+available to build with the grid. There are two primitive class types to use in
+order to structure your application. They include:
+
+- `.#{$prefix}--css-grid` - defines the overall grid context and sets some
+  useful attributes like width and margin
+- `.#{$prefix}--col-span-*` - used to define individual columns
+
+Additional class types are available for advanced usages such as subgrids,
+offset, alignment utilities, and breakpoint helpers to configure the grid at
+different viewport widths. For further information on these and others, see the
+[`@carbon/grid`](https://github.com/carbon-design-system/carbon/tree/main/packages/grid)
+package.
+
+As an example, here's how a 4 column grid could be configured with the default
+prefix:
+
+```html
+<div class="cds--css-grid">
+  <div class="cds--col-span-4"></div>
+  <div class="cds--col-span-4"></div>
+  <div class="cds--col-span-4"></div>
+  <div class="cds--col-span-4"></div>
+</div>
+```
+
+### Grid Mixins
+
+In the event that you'd like to configure your own classes for portions of the
+grid, there are a few mixins that can be used.
+
+- `css-grid()` provides the base grid definition
+- `subgrid()` provides the subgrid definition
+- `carbon--aspect-ratio($aspect-ratios: $carbon--aspect-ratios)` generates the
+  CSS classname utilities for the aspect ratios
+
+```scss
+.custom-grid-class {
+  @include css-grid();
+}
+```
+
 ## Motion
+
+The motion package provides helper functions, mixins, and duration tokens to add
+motion into your project.
+
+```scss
+@use '@carbon/styles/scss/motion' as *;
+
+.my-selector {
+  transition: transform $duration-fast-02 motion(standard, productive);
+}
+```
 
 | Import                               | Filepath            |
 | :----------------------------------- | :------------------ |
 | `@use '@carbon/styles/scss/motion';` | `scss/_motion.scss` |
+
+For more information, checkout our [motion](#todo) docs.
 
 ## Reset
 
@@ -187,9 +281,22 @@ options:
 
 ## Type
 
+The type package entrypoint allows you to specifically bring type tokens into
+your project. The type package includes various type tokens and mixins.
+
+```scss
+@use '@carbon/styles/scss/type';
+
+.my-selector {
+  @include type.style(type.$productive-heading-01);
+}
+```
+
 | Import                             | Filepath          |
 | :--------------------------------- | :---------------- |
 | `@use '@carbon/styles/scss/type';` | `scss/_type.scss` |
+
+For more information, check out our [type](#todo) docs.
 
 ## Components
 
@@ -224,6 +331,48 @@ like to see changed. For example, if you wanted to change the component token
 | Import                                                | Description |
 | :---------------------------------------------------- | :---------- |
 | `@use '@carbon/styles/scss/utilities/focus-outline';` |             |
+
+## Compatibility
+
+| Import                                      | Filepath                   |
+| :------------------------------------------ | :------------------------- |
+| `@use '@carbon/styles/scss/compat/themes';` | `scss/compat/_themes.scss` |
+| `@use '@carbon/styles/scss/compat/theme';`  | `scss/compat/_theme.scss`  |
+
+The compatibility entrypoints for themes and theme provide access to the v10
+tokens along with the v11 tokens. To make sure that the tokens that you're using
+from v10 have the correct value in v11, you will need to include the theme that
+you're using from `scss/compat/themes` and set that as your theme.
+
+```scss
+@use '@carbon/styles/scss/compat/themes' as compat;
+@use '@carbon/styles/scss/themes';
+@use '@carbon/styles/scss/compat/theme' with (
+  $fallback: themes.$g100,
+  $theme: compat.$g100,
+);
+```
+
+It's important that you specify the `$fallback` theme as a value from the
+`scss/themes` entrypoint. This will guarantee that all tokens that you are using
+from v11 will match the theme of the tokens that you are using from v10.
+
+You can directly reference a token from the `scss/compat/theme` entrypoint. This
+entrypoint will also re-export all available v11 tokens and mixins from
+`scss/theme`.
+
+```scss
+@use '@carbon/styles/scss/compat/theme';
+
+body {
+  // You can use both v10 and v11 tokens
+  background: theme.$background;
+  color: theme.$text-01;
+}
+```
+
+_Note: all tokens from v10 are deprecated in v11. They will be removed in the
+next major release of Carbon_
 
 ## Configuration
 

@@ -28,12 +28,14 @@
 @use 'data-table/expandable';
 @use 'data-table/skeleton';
 @use 'data-table/sort';
+@use 'tag';
 @use "slider";
 @use 'text-area';
 @use 'text-input';
 @use 'structured-list';
 @use 'overflow-menu';
 @use 'number-input';
+@use 'popover';
 @use 'tile';
 @use 'time-picker';
 @use 'treeview';
@@ -41,5 +43,11 @@
 @use 'pagination';
 @use 'pagination-nav';
 @use 'select';
+@use 'progress-bar';
 @use 'progress-indicator';
 @use 'tabs';
+@use 'ui-shell';
+@use 'list-box';
+@use 'combo-box';
+@use 'dropdown';
+@use 'multiselect';

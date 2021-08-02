@@ -921,6 +921,21 @@
     - file
   sizes:
     - 32
+- name: application--mobile
+  friendly_name: application--mobile
+  aliases: []
+  sizes:
+    - 32
+- name: application--virtual
+  friendly_name: application--virtual
+  aliases: []
+  sizes:
+    - 32
+- name: application--web
+  friendly_name: application--web
+  aliases: []
+  sizes:
+    - 32
 - name: apps
   friendly_name: Apps
   aliases:
@@ -1242,6 +1257,11 @@
     - automatic
   sizes:
     - 32
+- name: autoscaling
+  friendly_name: autoscaling
+  aliases: []
+  sizes:
+    - 32
 - name: awake
   friendly_name: Awake
   aliases:
@@ -1316,6 +1336,11 @@
     - item
   sizes:
     - 32
+- name: bare-metal-server
+  friendly_name: bare-metal-server
+  aliases: []
+  sizes:
+    - 32
 - name: barrier
   friendly_name: Barrier
   aliases:
@@ -1337,6 +1362,11 @@
     - sport
     - ball
     - sports ball
+  sizes:
+    - 32
+- name: bastion-host
+  friendly_name: bastion-host
+  aliases: []
   sizes:
     - 32
 - name: bat
@@ -1476,6 +1506,16 @@
     - bloch
     - sphere
     - research
+  sizes:
+    - 32
+- name: block-storage
+  friendly_name: block-storage
+  aliases: []
+  sizes:
+    - 32
+- name: block-storage--alt
+  friendly_name: block-storage--alt
+  aliases: []
   sizes:
     - 32
 - name: blockchain
@@ -2058,6 +2098,11 @@
     - design
   sizes:
     - 32
+- name: carbon-accounting
+  friendly_name: carbon-accounting
+  aliases: []
+  sizes:
+    - 32
 - name: caret--down
   friendly_name: Caret down
   sizes:
@@ -2312,6 +2357,11 @@
     - compact disc audio
     - filename extension
     - extension
+  sizes:
+    - 32
+- name: cell-tower
+  friendly_name: cell-tower
+  aliases: []
   sizes:
     - 32
 - name: center--circle
@@ -2983,6 +3033,11 @@
     - communications
   sizes:
     - 32
+- name: chat--operational
+  friendly_name: chat--operational
+  aliases: []
+  sizes:
+    - 32
 - name: chat-bot
   friendly_name: Chat bot
   aliases:
@@ -3492,6 +3547,16 @@
     - forecast
   sizes:
     - 32
+- name: cloud--alerting
+  friendly_name: cloud--alerting
+  aliases: []
+  sizes:
+    - 32
+- name: cloud--auditing
+  friendly_name: cloud--auditing
+  aliases: []
+  sizes:
+    - 32
 - name: cloud--data-ops
   friendly_name: Cloud data-ops
   aliases:
@@ -3521,6 +3586,16 @@
     - cloud
     - lightning
     - forecast
+- name: cloud--logging
+  friendly_name: cloud--logging
+  aliases: []
+  sizes:
+    - 32
+- name: cloud--monitoring
+  friendly_name: cloud--monitoring
+  aliases: []
+  sizes:
+    - 32
 - name: cloud--rain
   friendly_name: Cloud rain
   sizes:
@@ -3531,6 +3606,11 @@
     - rain
     - precipitation
     - forecast
+- name: cloud--service-management
+  friendly_name: cloud--service-management
+  aliases: []
+  sizes:
+    - 32
 - name: cloud--snow
   friendly_name: Cloud snow
   sizes:
@@ -3606,6 +3686,11 @@
     - hybrid
   sizes:
     - 32
+- name: cloud-services
+  friendly_name: cloud-services
+  aliases: []
+  sizes:
+    - 32
 - name: cloudy
   friendly_name: Cloudy
   aliases:
@@ -3661,6 +3746,11 @@
     - source
     - reference
     - code
+  sizes:
+    - 32
+- name: code-signing-service
+  friendly_name: code-signing-service
+  aliases: []
   sizes:
     - 32
 - name: cognitive
@@ -3905,11 +3995,26 @@
     - roadwork
   sizes:
     - 32
+- name: container-registry
+  friendly_name: container-registry
+  aliases: []
+  sizes:
+    - 32
+- name: container-services
+  friendly_name: container-services
+  aliases: []
+  sizes:
+    - 32
 - name: container-software
   friendly_name: Container software
   aliases:
     - container-software
     - software container
+  sizes:
+    - 32
+- name: content-delivery-network
+  friendly_name: content-delivery-network
+  aliases: []
   sizes:
     - 32
 - name: content-view
@@ -4033,6 +4138,11 @@
     - indentification
   sizes:
     - 32
+- name: critical-severity
+  friendly_name: critical-severity
+  aliases: []
+  sizes:
+    - glyph
 - name: crop
   friendly_name: Crop
   aliases:
@@ -4403,6 +4513,11 @@
     - characters
   sizes:
     - 32
+- name: data--center
+  friendly_name: data--center
+  aliases: []
+  sizes:
+    - 32
 - name: data--check
   friendly_name: Data check
   sizes:
@@ -4495,12 +4610,27 @@
     - view
   sizes:
     - 32
+- name: data-accessor
+  friendly_name: data-accessor
+  aliases: []
+  sizes:
+    - 32
+- name: data-backup
+  friendly_name: data-backup
+  aliases: []
+  sizes:
+    - 32
 - name: data-bin
   friendly_name: Data bin
   aliases:
     - data-bin
     - data
     - containers
+  sizes:
+    - 32
+- name: data-blob
+  friendly_name: data-blob
+  aliases: []
   sizes:
     - 32
 - name: data-class
@@ -4520,6 +4650,11 @@
     - combine
     - gather
     - repository
+  sizes:
+    - 32
+- name: data-diode
+  friendly_name: data-diode
+  aliases: []
   sizes:
     - 32
 - name: data-player
@@ -4851,6 +4986,11 @@
     - digital
     - imaging
     - communication
+- name: direct-link
+  friendly_name: direct-link
+  aliases: []
+  sizes:
+    - 32
 - name: direction--bear-right--01
   friendly_name: Direction bear right 01
   aliases:
@@ -5164,6 +5304,11 @@
     - DNA chain
   sizes:
     - 32
+- name: dns-services
+  friendly_name: dns-services
+  aliases: []
+  sizes:
+    - 32
 - name: DOC
   friendly_name: DOC
   aliases:
@@ -5262,6 +5407,21 @@
     - portable document format
   sizes:
     - 32
+- name: document--protected
+  friendly_name: document--protected
+  aliases: []
+  sizes:
+    - 32
+- name: document--security
+  friendly_name: document--security
+  aliases: []
+  sizes:
+    - 32
+- name: document--signed
+  friendly_name: document--signed
+  aliases: []
+  sizes:
+    - 32
 - name: document--sketch
   friendly_name: Document Sketch
   aliases:
@@ -5295,6 +5455,11 @@
     - document unknown
     - document
     - unknown
+  sizes:
+    - 32
+- name: document--unprotected
+  friendly_name: document--unprotected
+  aliases: []
   sizes:
     - 32
 - name: document--vertical
@@ -5351,6 +5516,11 @@
     - understanding
     - document sentiment
     - document
+  sizes:
+    - 32
+- name: dog-walker
+  friendly_name: dog-walker
+  aliases: []
   sizes:
     - 32
 - name: dot-mark
@@ -5471,6 +5641,21 @@
     - robot
     - remote control
     - unmanned
+  sizes:
+    - 32
+- name: drone--delivery
+  friendly_name: drone--delivery
+  aliases: []
+  sizes:
+    - 32
+- name: drone--front
+  friendly_name: drone--front
+  aliases: []
+  sizes:
+    - 32
+- name: drone--video
+  friendly_name: drone--video
+  aliases: []
   sizes:
     - 32
 - name: drop-photo
@@ -5650,6 +5835,11 @@
     - technology
   sizes:
     - 32
+- name: edge-node--alt
+  friendly_name: edge-node--alt
+  aliases: []
+  sizes:
+    - 32
 - name: edge-service
   friendly_name: Edge service
   aliases:
@@ -5720,6 +5910,11 @@
     - email new
     - new email
     - mail
+  sizes:
+    - 32
+- name: energy--renewable
+  friendly_name: energy--renewable
+  aliases: []
   sizes:
     - 32
 - name: enterprise
@@ -6211,6 +6406,11 @@
     - cloud upload
   sizes:
     - 32
+- name: file-storage
+  friendly_name: file-storage
+  aliases: []
+  sizes:
+    - 32
 - name: filter
   friendly_name: Filter
   aliases:
@@ -6276,6 +6476,16 @@
     - fire
     - flames
     - code
+  sizes:
+    - 32
+- name: firewall
+  friendly_name: firewall
+  aliases: []
+  sizes:
+    - 32
+- name: firewall--classic
+  friendly_name: firewall--classic
+  aliases: []
   sizes:
     - 32
 - name: fish
@@ -6422,6 +6632,11 @@
     - calendar
   sizes:
     - 32
+- name: floating-ip
+  friendly_name: floating-ip
+  aliases: []
+  sizes:
+    - 32
 - name: flood
   friendly_name: Flood
   aliases:
@@ -6505,6 +6720,11 @@
     - reference
     - citation
     - source
+  sizes:
+    - 32
+- name: flow-logs-vpc
+  friendly_name: flow-logs-vpc
+  aliases: []
   sizes:
     - 32
 - name: fog
@@ -6732,6 +6952,11 @@
     - commerce
   sizes:
     - 32
+- name: friendship
+  friendly_name: friendship
+  aliases: []
+  sizes:
+    - 32
 - name: fruit-bowl
   friendly_name: Fruit bowl
   aliases:
@@ -6824,6 +7049,41 @@
     - gas
     - fueling station
     - fuel
+  sizes:
+    - 32
+- name: gateway
+  friendly_name: gateway
+  aliases: []
+  sizes:
+    - 32
+- name: gateway--api
+  friendly_name: gateway--api
+  aliases: []
+  sizes:
+    - 32
+- name: gateway--mail
+  friendly_name: gateway--mail
+  aliases: []
+  sizes:
+    - 32
+- name: gateway--public
+  friendly_name: gateway--public
+  aliases: []
+  sizes:
+    - 32
+- name: gateway--security
+  friendly_name: gateway--security
+  aliases: []
+  sizes:
+    - 32
+- name: gateway--user-access
+  friendly_name: gateway--user-access
+  aliases: []
+  sizes:
+    - 32
+- name: gateway--vpn
+  friendly_name: gateway--vpn
+  aliases: []
   sizes:
     - 32
 - name: gender--female
@@ -7052,6 +7312,16 @@
     - group
   sizes:
     - 32
+- name: group--access
+  friendly_name: group--access
+  aliases: []
+  sizes:
+    - 32
+- name: group--account
+  friendly_name: group--account
+  aliases: []
+  sizes:
+    - 32
 - name: group--presentation
   friendly_name: Group presentation
   aliases:
@@ -7064,6 +7334,16 @@
     - users
   sizes:
     - 32
+- name: group--resource
+  friendly_name: group--resource
+  aliases: []
+  sizes:
+    - 32
+- name: group--security
+  friendly_name: group--security
+  aliases: []
+  sizes:
+    - 32
 - name: growth
   friendly_name: Growth
   aliases:
@@ -7073,6 +7353,16 @@
     - uptick
     - rising
     - improving
+  sizes:
+    - 32
+- name: gui
+  friendly_name: gui
+  aliases: []
+  sizes:
+    - 32
+- name: gui--management
+  friendly_name: gui--management
+  aliases: []
   sizes:
     - 32
 - name: H
@@ -7110,6 +7400,11 @@
     - harbor
     - anchor
     - port
+  sizes:
+    - 32
+- name: hardware-security-module
+  friendly_name: hardware-security-module
+  aliases: []
   sizes:
     - 32
 - name: hashtag
@@ -7464,6 +7759,11 @@
     - interactivity
   sizes:
     - 32
+- name: hybrid-networking--alt
+  friendly_name: hybrid-networking--alt
+  aliases: []
+  sizes:
+    - 32
 - name: ibm-cloud
   friendly_name: IBM Cloud®
   aliases:
@@ -7477,6 +7777,26 @@
     - brand
     - smart rays
     - IBM Cloud
+  sizes:
+    - 32
+- name: ibm-cloud--dedicated-host
+  friendly_name: ibm-cloud--dedicated-host
+  aliases: []
+  sizes:
+    - 32
+- name: ibm-cloud--internet-services
+  friendly_name: ibm-cloud--internet-services
+  aliases: []
+  sizes:
+    - 32
+- name: ibm-cloud--subnets
+  friendly_name: ibm-cloud--subnets
+  aliases: []
+  sizes:
+    - 32
+- name: ibm-cloud--vpc-endpoints
+  friendly_name: ibm-cloud--vpc-endpoints
+  aliases: []
   sizes:
     - 32
 - name: ibm-security
@@ -7493,6 +7813,11 @@
     - cyber
     - secure
     - IBM Security
+  sizes:
+    - 32
+- name: ibm-security--services
+  friendly_name: ibm-security--services
+  aliases: []
   sizes:
     - 32
 - name: iCA-2D
@@ -7532,6 +7857,11 @@
     - user ID
     - name tag
     - badge
+  sizes:
+    - 32
+- name: id-management
+  friendly_name: id-management
+  aliases: []
   sizes:
     - 32
 - name: idea
@@ -7630,6 +7960,11 @@
     - photograph
     - photo
     - picture
+  sizes:
+    - 32
+- name: image-service
+  friendly_name: image-service
+  aliases: []
   sizes:
     - 32
 - name: improve-relevance
@@ -7787,6 +8122,11 @@
     - filled
   sizes:
     - 32
+- name: infrastructure--classic
+  friendly_name: infrastructure--classic
+  aliases: []
+  sizes:
+    - 32
 - name: insert
   friendly_name: Insert
   aliases:
@@ -7814,6 +8154,31 @@
   friendly_name: Insert syntax
   aliases:
     - insert syntax
+  sizes:
+    - 32
+- name: instance--bx
+  friendly_name: instance--bx
+  aliases: []
+  sizes:
+    - 32
+- name: instance--classic
+  friendly_name: instance--classic
+  aliases: []
+  sizes:
+    - 32
+- name: instance--cx
+  friendly_name: instance--cx
+  aliases: []
+  sizes:
+    - 32
+- name: instance--mx
+  friendly_name: instance--mx
+  aliases: []
+  sizes:
+    - 32
+- name: instance--virtual
+  friendly_name: instance--virtual
+  aliases: []
   sizes:
     - 32
 - name: integration
@@ -7854,6 +8219,11 @@
     - intersect
     - operations
     - converge
+  sizes:
+    - 32
+- name: intrusion-prevention
+  friendly_name: intrusion-prevention
+  aliases: []
   sizes:
     - 32
 - name: inventory-management
@@ -8059,6 +8429,11 @@
     - computer
     - word processor
     - write
+  sizes:
+    - 32
+- name: kubernetes
+  friendly_name: kubernetes
+  aliases: []
   sizes:
     - 32
 - name: language
@@ -8578,6 +8953,46 @@
     - inventory
     - table
     - tally
+- name: load-balancer--application
+  friendly_name: load-balancer--application
+  aliases: []
+  sizes:
+    - 32
+- name: load-balancer--classic
+  friendly_name: load-balancer--classic
+  aliases: []
+  sizes:
+    - 32
+- name: load-balancer--global
+  friendly_name: load-balancer--global
+  aliases: []
+  sizes:
+    - 32
+- name: load-balancer--listener
+  friendly_name: load-balancer--listener
+  aliases: []
+  sizes:
+    - 32
+- name: load-balancer--local
+  friendly_name: load-balancer--local
+  aliases: []
+  sizes:
+    - 32
+- name: load-balancer--network
+  friendly_name: load-balancer--network
+  aliases: []
+  sizes:
+    - 32
+- name: load-balancer--pool
+  friendly_name: load-balancer--pool
+  aliases: []
+  sizes:
+    - 32
+- name: load-balancer--vpc
+  friendly_name: load-balancer--vpc
+  aliases: []
+  sizes:
+    - 32
 - name: location
   friendly_name: Location
   aliases:
@@ -9142,6 +9557,11 @@
     - avatar
     - tag
     - identification
+- name: logo--wechat
+  friendly_name: logo--wechat
+  aliases: []
+  sizes:
+    - 32
 - name: logo--xing
   friendly_name: Logo XING
   sizes:
@@ -9204,6 +9624,11 @@
     - twirl
   sizes:
     - 32
+- name: low-severity
+  friendly_name: low-severity
+  aliases: []
+  sizes:
+    - glyph
 - name: mac--command
   friendly_name: Mac command
   sizes:
@@ -9464,6 +9889,11 @@
     - 20
     - 24
     - 32
+- name: message-queue
+  friendly_name: message-queue
+  aliases: []
+  sizes:
+    - 32
 - name: meter
   friendly_name: Meter
   aliases:
@@ -9709,6 +10139,11 @@
     - ux
     - portable
     - device
+- name: mobility--services
+  friendly_name: mobility--services
+  aliases: []
+  sizes:
+    - 32
 - name: model
   friendly_name: Model
   aliases:
@@ -10120,6 +10555,21 @@
   aliases:
     - network
     - data
+- name: network--enterprise
+  friendly_name: network--enterprise
+  aliases: []
+  sizes:
+    - 32
+- name: network--overlay
+  friendly_name: network--overlay
+  aliases: []
+  sizes:
+    - 32
+- name: network--public
+  friendly_name: network--public
+  aliases: []
+  sizes:
+    - 32
 - name: new-tab
   friendly_name: New tab
   aliases:
@@ -10549,6 +10999,11 @@
   aliases:
     - object
     - storage
+  sizes:
+    - 32
+- name: object-storage--alt
+  friendly_name: object-storage--alt
+  aliases: []
   sizes:
     - 32
 - name: observed--hail
@@ -11221,6 +11676,11 @@
     - phone
   sizes:
     - 32
+- name: phone--application
+  friendly_name: phone--application
+  aliases: []
+  sizes:
+    - 32
 - name: phone--block
   friendly_name: Phone block
   aliases:
@@ -11316,6 +11776,11 @@
     - phone outgoing filled
     - phone call
     - call
+  sizes:
+    - 32
+- name: phone--settings
+  friendly_name: phone--settings
+  aliases: []
   sizes:
     - 32
 - name: phone--voice
@@ -11566,6 +12031,11 @@
     - compression
   sizes:
     - 32
+- name: point-of-presence
+  friendly_name: point-of-presence
+  aliases: []
+  sizes:
+    - 32
 - name: pointer-text
   friendly_name: Pointer text
   aliases:
@@ -11789,6 +12259,16 @@
     - broadcast
   sizes:
     - 32
+- name: radio--combat
+  friendly_name: radio--combat
+  aliases: []
+  sizes:
+    - 32
+- name: radio--push-to-talk
+  friendly_name: radio--push-to-talk
+  aliases: []
+  sizes:
+    - 32
 - name: radio-button
   friendly_name: Radio button
   aliases:
@@ -12005,6 +12485,11 @@
     - repeat once
     - music
     - control
+- name: replicate
+  friendly_name: replicate
+  aliases: []
+  sizes:
+    - 32
 - name: reply
   friendly_name: Reply
   aliases:
@@ -12127,6 +12612,21 @@
     - food
     - cafe
     - eat
+- name: result
+  friendly_name: result
+  aliases: []
+  sizes:
+    - 32
+- name: result--new
+  friendly_name: result--new
+  aliases: []
+  sizes:
+    - 32
+- name: result--old
+  friendly_name: result--old
+  aliases: []
+  sizes:
+    - 32
 - name: rewind--10
   friendly_name: Rewind 10
   sizes:
@@ -12307,6 +12807,21 @@
     - circulate
     - circle arrow
     - launch
+- name: router
+  friendly_name: router
+  aliases: []
+  sizes:
+    - 32
+- name: router--voice
+  friendly_name: router--voice
+  aliases: []
+  sizes:
+    - 32
+- name: router--wifi
+  friendly_name: router--wifi
+  aliases: []
+  sizes:
+    - 32
 - name: row
   friendly_name: Row
   aliases:
@@ -12370,6 +12885,26 @@
     - governance
     - control
     - policy
+  sizes:
+    - 32
+- name: rule--cancelled
+  friendly_name: rule--cancelled
+  aliases: []
+  sizes:
+    - 32
+- name: rule--draft
+  friendly_name: rule--draft
+  aliases: []
+  sizes:
+    - 32
+- name: rule--filled
+  friendly_name: rule--filled
+  aliases: []
+  sizes:
+    - 32
+- name: rule--test
+  friendly_name: rule--test
+  aliases: []
   sizes:
     - 32
 - name: ruler
@@ -12755,6 +13290,11 @@
     - security
   sizes:
     - 32
+- name: security-services
+  friendly_name: security-services
+  aliases: []
+  sizes:
+    - 32
 - name: select--01
   friendly_name: Select 01
   aliases:
@@ -12845,6 +13385,21 @@
     - group
     - layer
     - order
+  sizes:
+    - 32
+- name: server--dns
+  friendly_name: server--dns
+  aliases: []
+  sizes:
+    - 32
+- name: server--proxy
+  friendly_name: server--proxy
+  aliases: []
+  sizes:
+    - 32
+- name: server--time
+  friendly_name: server--time
+  aliases: []
   sizes:
     - 32
 - name: service-desk
@@ -13136,6 +13691,11 @@
     - technology
   sizes:
     - 32
+- name: sim-card
+  friendly_name: sim-card
+  aliases: []
+  sizes:
+    - 32
 - name: skill-level
   friendly_name: Skill level
   aliases:
@@ -13362,6 +13922,11 @@
     - sleet
   sizes:
     - 32
+- name: slisor
+  friendly_name: slisor
+  aliases: []
+  sizes:
+    - 32
 - name: smell
   friendly_name: Smell
   aliases:
@@ -13508,6 +14073,11 @@
     - soil
     - temperature
     - agriculture
+  sizes:
+    - 32
+- name: solar-panel
+  friendly_name: solar-panel
+  aliases: []
   sizes:
     - 32
 - name: sort--ascending
@@ -13910,6 +14480,11 @@
     - layers
   sizes:
     - 32
+- name: subnet-acl-rules
+  friendly_name: subnet-acl-rules
+  aliases: []
+  sizes:
+    - 32
 - name: subtract
   friendly_name: Subtract
   aliases:
@@ -13984,6 +14559,16 @@
   aliases:
     - travel
     - sports
+  sizes:
+    - 32
+- name: switch-layer-2
+  friendly_name: switch-layer-2
+  aliases: []
+  sizes:
+    - 32
+- name: switch-layer-3
+  friendly_name: switch-layer-3
+  aliases: []
   sizes:
     - 32
 - name: switcher
@@ -14160,6 +14745,26 @@
     - heat
     - hot
     - cold
+  sizes:
+    - 32
+- name: temperature--celsius
+  friendly_name: temperature--celsius
+  aliases: []
+  sizes:
+    - 32
+- name: temperature--celsius--alt
+  friendly_name: temperature--celsius--alt
+  aliases: []
+  sizes:
+    - 32
+- name: temperature--fahrenheit
+  friendly_name: temperature--fahrenheit
+  aliases: []
+  sizes:
+    - 32
+- name: temperature--fahrenheit--alt
+  friendly_name: temperature--fahrenheit--alt
+  aliases: []
   sizes:
     - 32
 - name: temperature--feels-like
@@ -14976,6 +15581,16 @@
     - travel
   sizes:
     - 32
+- name: train--profile
+  friendly_name: train--profile
+  aliases: []
+  sizes:
+    - 32
+- name: train--speed
+  friendly_name: train--speed
+  aliases: []
+  sizes:
+    - 32
 - name: train--ticket
   friendly_name: Train ticket
   aliases:
@@ -15018,6 +15633,11 @@
     - language
     - localization
     - interpret
+  sizes:
+    - 32
+- name: transmission-lte
+  friendly_name: transmission-lte
+  aliases: []
   sizes:
     - 32
 - name: transpose
@@ -15141,6 +15761,11 @@
     - data
     - database
     - spreadsheet
+  sizes:
+    - 32
+- name: two-factor-authentication
+  friendly_name: two-factor-authentication
+  aliases: []
   sizes:
     - 32
 - name: two-person-lift
@@ -15486,6 +16111,11 @@
     - profile
     - account
     - my account
+- name: user--military
+  friendly_name: user--military
+  aliases: []
+  sizes:
+    - 32
 - name: user--multiple
   friendly_name: User multiple
   aliases:
@@ -15532,6 +16162,16 @@
     - profile
     - account
     - my account
+- name: user--service-desk
+  friendly_name: user--service-desk
+  aliases: []
+  sizes:
+    - 32
+- name: user--settings
+  friendly_name: user--settings
+  aliases: []
+  sizes:
+    - 32
 - name: user--simulation
   friendly_name: User simulation
   sizes:
@@ -15606,6 +16246,31 @@
     - delivery
     - truck
     - cargo
+  sizes:
+    - 32
+- name: vehicle--api
+  friendly_name: vehicle--api
+  aliases: []
+  sizes:
+    - 32
+- name: vehicle--connected
+  friendly_name: vehicle--connected
+  aliases: []
+  sizes:
+    - 32
+- name: vehicle--insights
+  friendly_name: vehicle--insights
+  aliases: []
+  sizes:
+    - 32
+- name: vehicle--services
+  friendly_name: vehicle--services
+  aliases: []
+  sizes:
+    - 32
+- name: version
+  friendly_name: version
+  aliases: []
   sizes:
     - 32
 - name: video
@@ -15746,6 +16411,11 @@
     - 32
   aliases:
     - virtual column key
+- name: virtual-desktop
+  friendly_name: virtual-desktop
+  aliases: []
+  sizes:
+    - 32
 - name: virtual-machine
   friendly_name: Virtual machine
   aliases:
@@ -15769,6 +16439,16 @@
   aliases:
     - picture
     - ai
+  sizes:
+    - 32
+- name: vlan
+  friendly_name: vlan
+  aliases: []
+  sizes:
+    - 32
+- name: vlan--ibm
+  friendly_name: vlan--ibm
+  aliases: []
   sizes:
     - 32
 - name: vmdk-disk
@@ -15882,6 +16562,16 @@
     - connection
     - secure
     - internet
+  sizes:
+    - 32
+- name: vpn--connection
+  friendly_name: vpn--connection
+  aliases: []
+  sizes:
+    - 32
+- name: vpn--policy
+  friendly_name: vpn--policy
+  aliases: []
   sizes:
     - 32
 - name: wallet
@@ -16118,6 +16808,16 @@
     - internet
   sizes:
     - 32
+- name: wifi--controller
+  friendly_name: wifi--controller
+  aliases: []
+  sizes:
+    - 32
+- name: wifi--not-secure
+  friendly_name: wifi--not-secure
+  aliases: []
+  sizes:
+    - 32
 - name: wifi--off
   friendly_name: WiFi off
   sizes:
@@ -16125,6 +16825,21 @@
   aliases:
     - wifi
     - internet
+- name: wifi--secure
+  friendly_name: wifi--secure
+  aliases: []
+  sizes:
+    - 32
+- name: wifi-bridge
+  friendly_name: wifi-bridge
+  aliases: []
+  sizes:
+    - 32
+- name: wifi-bridge--alt
+  friendly_name: wifi-bridge--alt
+  aliases: []
+  sizes:
+    - 32
 - name: wikis
   friendly_name: Wikis
   aliases:
@@ -16142,6 +16857,11 @@
     - wind
     - gusts
     - forecast
+  sizes:
+    - 32
+- name: wind-power
+  friendly_name: wind-power
+  aliases: []
   sizes:
     - 32
 - name: wind-stream
