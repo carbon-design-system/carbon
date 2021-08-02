@@ -61,7 +61,7 @@ SideNavSwitcher.propTypes = {
   className: PropTypes.string,
 
   /**
-   * Provide the label for the switcher. This will be the firt visible option
+   * Provide the label for the switcher. This will be the first visible option
    * when someone views this control
    */
   labelText: PropTypes.string.isRequired,
