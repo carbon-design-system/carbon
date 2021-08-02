@@ -36,7 +36,7 @@
     "fast-glob": "^3.2.5",
     "fs-extra": "^10.0.0",
     "inquirer": "^8.1.0",
-    "jest-diff": "^27.0.2",
+    "jest-diff": "^27.0.6",
     "jscodeshift": "^0.13.0",
     "lodash.clonedeep": "^4.5.0",
     "lodash.merge": "^4.6.2",
