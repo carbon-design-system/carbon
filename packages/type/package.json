@@ -16,7 +16,8 @@
     "lib",
     "scss",
     "src",
-    "umd"
+    "umd",
+    "index.scss"
   ],
   "keywords": [
     "eyeglass-module",
