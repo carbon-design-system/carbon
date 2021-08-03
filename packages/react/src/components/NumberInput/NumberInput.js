@@ -161,7 +161,7 @@ class NumberInput extends Component {
     size: PropTypes.oneOf(['sm', 'md', 'lg', 'xl']),
 
     /**
-     * Specify how much the valus should increase/decrease upon clicking on up/down button
+     * Specify how much the values should increase/decrease upon clicking on up/down button
      */
     step: PropTypes.number,
 

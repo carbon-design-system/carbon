@@ -280,7 +280,7 @@ export default class Slider extends PureComponent {
 
   /**
    * Unregisters "drag" and "drag stop" event handlers and calls sets the flag
-   * inidicating that the `onRelease` callback should be called.
+   * indicating that the `onRelease` callback should be called.
    */
   onDragStop = () => {
     // Do nothing if component is disabled
