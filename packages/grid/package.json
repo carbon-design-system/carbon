@@ -11,7 +11,8 @@
   "bugs": "https://github.com/carbon-design-system/carbon/issues",
   "files": [
     "css",
-    "scss"
+    "scss",
+    "index.scss"
   ],
   "keywords": [
     "eyeglass-module",
