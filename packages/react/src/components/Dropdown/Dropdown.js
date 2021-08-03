@@ -132,6 +132,7 @@ const Dropdown = React.forwardRef(function Dropdown(
 
   const menuItemOptionRefs = useRef(items.map((_) => React.createRef()));
 
+  console.log();
   return (
     <div className={wrapperClasses} {...other}>
       {titleText && (
@@ -163,6 +164,7 @@ const Dropdown = React.forwardRef(function Dropdown(
           className={`${prefix}--list-box__field`}
           disabled={disabled}
           aria-disabled={disabled}
+          title={selectedItem ? itemToString(selectedItem) : label}
           {...toggleButtonProps}
           ref={mergeRefs(toggleButtonProps.ref, ref)}>
           <span className={`${prefix}--list-box__label`}>
