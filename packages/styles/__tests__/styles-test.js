@@ -70,6 +70,7 @@ const filepaths = [
   'scss/components/overflow-menu',
   'scss/components/pagination',
   'scss/components/pagination-nav',
+  'scss/components/popover',
   'scss/components/progress-indicator',
   'scss/components/radio-button',
   'scss/components/search',
