@@ -171,7 +171,7 @@ $css--helpers: true;
     @include reset;
 
     display: flex;
-    width: $carbon--spacing-09;
+    width: $size-md;
     height: $size-md;
     min-height: $size-sm;
     align-items: center;
@@ -189,12 +189,14 @@ $css--helpers: true;
   .#{$prefix}--pagination--sm .#{$prefix}--pagination__button,
   .#{$prefix}--pagination--sm
     .#{$prefix}--btn--ghost.#{$prefix}--pagination__button {
+    width: $size-sm;
     height: $size-sm;
   }
 
   .#{$prefix}--pagination--lg .#{$prefix}--pagination__button,
   .#{$prefix}--pagination--lg
     .#{$prefix}--btn--ghost.#{$prefix}--pagination__button {
+    width: $size-lg;
     height: $size-lg;
   }
 
