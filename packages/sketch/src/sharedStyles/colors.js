@@ -18,6 +18,9 @@ const { black, white, orange, yellow, ...swatches } = colors;
 // that we need to render
 const { blackHover, whiteHover, ...hoverSwatches } = unstable_hoverColors;
 
+const coreFolderName = 'core';
+const hoverFolderName = 'hover';
+
 /**
  * Format name for shared layer styles or color variables
  * Shared styles names will need to have the `color` namespace
@@ -31,23 +34,22 @@ const { blackHover, whiteHover, ...hoverSwatches } = unstable_hoverColors;
  */
 function formatColorName({ name, grade, formatFor }) {
   const formattedName = name.split('-').join(' ');
+  const folderName = name.includes('hover') ? hoverFolderName : coreFolderName;
   switch (formatFor) {
     case 'sharedLayerStyle':
-      return ['color', 'core', formattedName, grade]
+      return ['color', folderName, formattedName, grade]
         .filter(Boolean)
         .join(' / ');
-    case 'sharedHoverLayerStyle':
-      const test2 = ['color', 'hover', formattedName, grade]
-        .filter(Boolean)
-        .join(' / ');
-      return test2;
     case 'colorVariable':
-      return [
-        grade ? `${formattedName}/${formattedName}` : formattedName,
+      const test3 = [
+        grade
+          ? `${folderName}/${formattedName}/${formattedName}`
+          : `${folderName}/${formattedName}`,
         grade,
       ]
         .filter(Boolean)
         .join(' ');
+      return test3;
     default:
       return '';
   }
@@ -80,7 +82,7 @@ export function syncColorStyles({ document }) {
         name: formatColorName({
           name,
           grade,
-          formatFor: 'sharedHoverLayerStyle',
+          formatFor: 'sharedLayerStyle',
         }),
         value: hoverSwatches[swatchName][grade],
       });
@@ -102,20 +104,21 @@ export function syncColorStyles({ document }) {
   });
 
   const singleHoverColors = [
-    ['blackHover', blackHover],
-    ['whiteHover', whiteHover],
+    ['black hover', blackHover],
+    ['white hover', whiteHover],
   ].map(([name, value]) => {
     return syncColorStyle({
       document,
-      name: formatColorName({ name, formatFor: 'sharedHoverLayerStyle' }),
+      name: formatColorName({ name, formatFor: 'sharedLayerStyle' }),
       value,
     });
   });
 
-  return sharedCoreStyles
-    .concat(singleColors)
-    .concat(singleHoverColors)
-    .concat(sharedHoverStyles);
+  return sharedCoreStyles.concat(
+    singleColors,
+    singleHoverColors,
+    sharedHoverStyles
+  );
 }
 
 /**
@@ -145,10 +148,45 @@ export function syncColorVariables({ document }) {
   ].map(([name, color]) => {
     return syncColorVariable({
       document,
-      name: formatColorName({ name, formatFor: 'colorVariable' }),
+      name: formatColorName({
+        name,
+        formatFor: 'colorVariable',
+      }),
       color,
     });
   });
 
-  return colorVariables.concat(singleColors);
+  const hoverColorVariables = Object.keys(hoverSwatches).flatMap(
+    (swatchName) => {
+      const name = formatTokenName(swatchName);
+      const result = Object.keys(hoverSwatches[swatchName]).map((grade) => {
+        return syncColorVariable({
+          document,
+          name: formatColorName({ name, grade, formatFor: 'colorVariable' }),
+          color: hoverSwatches[swatchName][grade],
+        });
+      });
+      return result;
+    }
+  );
+
+  const hoverSingleColors = [
+    ['black hover', blackHover],
+    ['white hover', whiteHover],
+  ].map(([name, color]) => {
+    return syncColorVariable({
+      document,
+      name: formatColorName({
+        name,
+        formatFor: 'colorVariable',
+      }),
+      color,
+    });
+  });
+
+  return colorVariables.concat(
+    singleColors,
+    hoverColorVariables,
+    hoverSingleColors
+  );
 }
