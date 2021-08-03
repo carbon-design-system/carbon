@@ -22,7 +22,7 @@ describe('HeaderMenu', () => {
       'aria-label': 'Accessibility label',
       className: 'custom-class',
       menuLinkName: 'test',
-      // We use `ref` instead of `focusRef` becase `HeaderMenu` forwards the ref
+      // We use `ref` instead of `focusRef` because `HeaderMenu` forwards the ref
       // to the underlying menu button
       ref: jest.fn(),
       tabIndex: -1,
