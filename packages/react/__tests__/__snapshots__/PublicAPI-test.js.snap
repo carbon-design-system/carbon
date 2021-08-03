@@ -7644,6 +7644,9 @@ Map {
       "itemsPerPageText": Object {
         "type": "string",
       },
+      "onChange": Object {
+        "type": "func",
+      },
       "pageRangeText": Object {
         "type": "func",
       },
