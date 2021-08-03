@@ -51,6 +51,7 @@ module.exports = {
     {
       files: ['*-story.js'],
       rules: {
+        'react/display-name': 0,
         'react/prop-types': 0,
       },
     },

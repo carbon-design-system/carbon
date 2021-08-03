@@ -18,7 +18,7 @@
 @use '../../breakpoint' as *;
 @use '../../spacing' as *;
 @use '../../motion' as *;
-
+@use '../button/tokens' as button;
 @use '../../utilities/focus-outline' as *;
 @use '../../utilities/rotate' as *;
 @use '../../utilities/box-shadow' as *;
@@ -249,7 +249,7 @@
   .#{$prefix}--tabs--container
     .#{$prefix}--tabs__nav-item.#{$prefix}--tabs__nav-item--disabled:hover {
     @include breakpoint(md) {
-      background-color: $button-disabled;
+      background-color: button.$button-disabled;
     }
   }
 
@@ -675,7 +675,7 @@
       .#{$prefix}--tabs--scrollable__nav-item.#{$prefix}--tabs--scrollable__nav-item--disabled,
     &.#{$prefix}--tabs--scrollable--container
       .#{$prefix}--tabs--scrollable__nav-item.#{$prefix}--tabs--scrollable__nav-item--disabled:hover {
-      background-color: $button-disabled;
+      background-color: button.$button-disabled;
     }
 
     //-----------------------------

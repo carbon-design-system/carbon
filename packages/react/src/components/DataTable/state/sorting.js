@@ -66,7 +66,7 @@ export const getNextSortState = (props, state, { key }) => {
  * @param {object} state.cellsById Lookup object for cells by id
  * @param {Array<string>} state.initialRowOrder Initial row order for the
  * current set of rows
- * @param {string} key The key for the given header we are derving the
+ * @param {string} key The key for the given header we are serving the
  * sorted state for
  * @param {string} sortDirection The sortState that we want to order by
  * @returns {object}
