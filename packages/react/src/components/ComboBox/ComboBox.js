@@ -255,8 +255,10 @@ const ComboBox = React.forwardRef((props, ref) => {
           // stop the event from propagating to prevent this. This allows the
           // toggleMenu behavior for the toggleButton to correctly open and
           // close the menu.
-          onMouseUp(event) {
-            event.stopPropagation();
+          onMouseUp() {
+            if (textInput?.current) {
+              textInput.current.focus();
+            }
           },
         });
         const inputProps = getInputProps({
