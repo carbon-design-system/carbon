@@ -28,7 +28,6 @@ export function syncColorVariable({ document, name, color }) {
     const rootName = name.split('/')[name.split('/').length - 1];
     return rootSwatchName === rootName;
   });
-  console.log(`${colorVariable.name}--${name}`);
 
   // generate new Swatch
   const generatedSwatch = Swatch.from({
