@@ -23,5 +23,5 @@ import Download16 from '@carbon/icons-react/lib/download/16';
 
 ## `<TableExpandedRow>`
 
-- Now manages it's own TabelCell
+- Now manages it's own TableCell
 - Expects `colSpan` prop to determine width

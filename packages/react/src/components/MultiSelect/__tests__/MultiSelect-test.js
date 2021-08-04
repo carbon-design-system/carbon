@@ -14,6 +14,9 @@ import MultiSelect from '../';
 import { generateItems, generateGenericItem } from '../../ListBox/test-helpers';
 
 describe('MultiSelect', () => {
+  beforeEach(() => {
+    jest.mock('../../../internal/deprecateFieldOnObject');
+  });
   afterEach(cleanup);
 
   describe.skip('automated accessibility tests', () => {

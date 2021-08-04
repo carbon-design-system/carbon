@@ -7,18 +7,23 @@
 
 @use 'sass:map';
 @use 'sass:meta';
+@use 'config';
 @use 'themes';
 
-$theme: themes.$white !default;
-$-custom-property-prefix: 'cds';
+/// Specify the fallback theme, used as a catch-all for tokens that you may not
+/// have defined in your custom theme
+$fallback: themes.$white !default;
 
-/// @access public
-/// @group @carbon/themes
+/// Specify the current theme. This can override existing tokens, or add new
+/// tokens. If you are adding new tokens, it's recommended that you set the
+/// fallback for your current theme
+$theme: () !default;
+$theme: map.merge($fallback, $theme);
+
+/// Include the CSS Custom Properties for the active theme or a given theme on
+/// a selector
 @mixin theme($active-theme: $theme, $component-tokens...) {
-  $parent-theme: $theme;
-  $theme: $active-theme !global;
-
-  @each $token, $value in $theme {
+  @each $token, $value in $active-theme {
     @include -custom-property($token, $value);
   }
 
@@ -27,21 +32,20 @@ $-custom-property-prefix: 'cds';
       @include -custom-property($token, $value);
     }
   }
-
-  @content;
-
-  $theme: $parent-theme !global;
 }
 
-/// @access public
-/// @group @carbon/themes
-@mixin set-theme($active-theme) {
-  $theme: $active-theme !global;
+/// Retrieve the value for the given $token from the current $theme
+/// @param {String} $token
+@function get($token) {
+  @if map.has-key($theme, $token) {
+    @return map.get($theme, $token);
+  }
+  @error "Unable to find token: #{$token} in current $theme";
 }
 
 /// @access private
 /// @group @carbon/themes
-@mixin -custom-property($name, $value, $prefix: $-custom-property-prefix) {
+@mixin -custom-property($name, $value) {
   @if meta.type-of($value) == map {
     @each $property, $property-value in $value {
       // Only support one-level of depth for values that are maps. This is to
@@ -51,6 +55,6 @@ $-custom-property-prefix: 'cds';
       }
     }
   } @else {
-    --#{$prefix}-#{$name}: #{$value};
+    --#{config.$prefix}-#{$name}: #{$value};
   }
 }
