@@ -10,15 +10,19 @@ import 'carbon-components/scss/components/accordion/_accordion.scss';
 import React from 'react';
 import { mount } from '@cypress/react';
 import { default as Accordion, AccordionItem } from '..';
+import AccordionSkeleton from '../Accordion.Skeleton';
 
 describe('Accordion', () => {
   beforeEach(() => {
     mount(
-      <Accordion>
-        <AccordionItem title="Section 1">Panel 1</AccordionItem>
-        <AccordionItem title="Section 2">Panel 2</AccordionItem>
-        <AccordionItem title="Section 3">Panel 3</AccordionItem>
-      </Accordion>
+      <>
+        <Accordion>
+          <AccordionItem title="Section 1">Panel 1</AccordionItem>
+          <AccordionItem title="Section 2">Panel 2</AccordionItem>
+          <AccordionItem title="Section 3">Panel 3</AccordionItem>
+        </Accordion>
+        <AccordionSkeleton count={3} />
+      </>
     );
   });
 

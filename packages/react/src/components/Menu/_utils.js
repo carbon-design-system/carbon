@@ -129,7 +129,7 @@ function elementFits(elementDimensions, position, boundaries, axis = 'x') {
  * @param {number[]} [targetBoundaries] The boundaries of the target the element should attach to: [minX, minY, maxX, maxY]
  * @param {number[]} [containerBoundaries] The boundaries of the container the element should be contained in: [minX, minY, maxX, maxY]
  * @param {number} [preferredDirection=1] Which direction is preferred. Either 1 (right right) or -1 (to left)
- * @returns {object} The determined position and direction of the elemnt: { position: [x, y], direction: 1 | -1 }
+ * @returns {object} The determined position and direction of the element: { position: [x, y], direction: 1 | -1 }
  */
 export function getPosition(
   elementDimensions,
