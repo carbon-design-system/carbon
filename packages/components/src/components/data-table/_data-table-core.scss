@@ -18,6 +18,7 @@
   // Container
   //----------------------------------------------------------------------------
   .#{$prefix}--data-table-container {
+    position: relative;
     // Allow space for focus styles
     padding-top: $spacing-01;
   }
