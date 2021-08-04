@@ -539,7 +539,10 @@ class Tooltip extends Component {
               onBlur={this.handleMouse}
               onContextMenu={this.handleMouse}>
               <span className={`${prefix}--tooltip__caret`} />
-              <div className={`${prefix}--tooltip__content`} role="dialog">
+              <div
+                className={`${prefix}--tooltip__content`}
+                aria-label={`${triggerText}-dialog`}
+                role="dialog">
                 {children}
               </div>
             </div>
