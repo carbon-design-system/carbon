@@ -187,7 +187,7 @@ TableToolbarSearch.propTypes = {
   placeholder: PropTypes.string,
 
   /**
-   * Provide an optional className for the overal container of the Search
+   * Provide an optional className for the overall container of the Search
    */
   searchContainerClass: PropTypes.string,
 
