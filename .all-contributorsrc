@@ -774,6 +774,15 @@
       "contributions": [
         "code"
       ]
+    },
+    {
+      "login": "adamalston",
+      "name": "Adam Alston",
+      "avatar_url": "https://avatars.githubusercontent.com/u/18297826?v=4",
+      "profile": "https://github.com/adamalston",
+      "contributions": [
+        "doc"
+      ]
     }
   ],
   "commitConvention": "none"
