@@ -5,6 +5,8 @@
 // LICENSE file in the root directory of this source tree.
 //
 
+@use "sass:math";
+
 @use 'sass:map';
 @use 'config' as *;
 @use 'breakpoint' as *;
@@ -411,7 +413,7 @@ $carbon--aspect-ratios: (
     $height: nth($aspect-ratio, 2);
 
     .#{$prefix}--aspect-ratio--#{$width}x#{$height}::before {
-      padding-top: percentage($height / $width);
+      padding-top: percentage(math.div($height, $width));
     }
   }
 }
