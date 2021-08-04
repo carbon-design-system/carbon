@@ -197,7 +197,7 @@ describe('ComboBox', () => {
       expect(findMenuNode(wrapper).length).toBe(1);
     });
 
-    it('should set `inputValue` to an empty string if a falsey-y value is given', () => {
+    it('should set `inputValue` to an empty string if a false-y value is given', () => {
       const wrapper = mount(<ComboBox {...mockProps} />);
       expect(wrapper.find('input').instance().value).toBe('');
     });

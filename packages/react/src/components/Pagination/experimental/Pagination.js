@@ -27,6 +27,7 @@ function Pagination({
   itemsPerPageText,
   itemRangeText,
   itemText,
+  onChange,
   pageRangeText,
   pageSize,
   pageSizes,
@@ -47,6 +48,18 @@ function Pagination({
 
   function onSetPage(newPage) {
     setCurrentPage(Number(newPage));
+  }
+
+  function incrementPage() {
+    const page = currentPage + 1;
+    setCurrentPage(page);
+    onChange({ page, pageSize: currentPageSize });
+  }
+
+  function decrementPage() {
+    const page = currentPage - 1;
+    setCurrentPage(page);
+    onChange({ page, pageSize: currentPageSize });
   }
 
   const namespace = `${prefix}--unstable-pagination`;
@@ -137,7 +150,7 @@ function Pagination({
               [`${namespace}__button--no-index`]: backButtonDisabled,
             }
           )}
-          onClick={() => setCurrentPage(currentPage - 1)}
+          onClick={() => decrementPage()}
           disabled={backButtonDisabled}
           hasIconOnly
           renderIcon={CaretLeft16}
@@ -153,7 +166,7 @@ function Pagination({
               [`${namespace}__button--no-index`]: forwardButtonDisabled,
             }
           )}
-          onClick={() => setCurrentPage(currentPage + 1)}
+          onClick={() => incrementPage()}
           disabled={forwardButtonDisabled}
           hasIconOnly
           renderIcon={CaretRight16}
@@ -215,6 +228,11 @@ Pagination.propTypes = {
    * The translatable text indicating the number of items per page.
    */
   itemsPerPageText: PropTypes.string,
+
+  /**
+   * The callback function called when the current page changes.
+   */
+  onChange: PropTypes.func,
 
   /**
    * The function returning a translatable text showing where the current page is,
