@@ -86,6 +86,7 @@ export {
   RadioButton,
   RadioButtonGroup,
   Search,
+  ExpandableSearch,
   SearchFilterButton,
   SearchLayoutButton,
   SecondaryButton,
@@ -106,6 +107,7 @@ export {
   Tag,
   TextArea,
   TextInput,
+  PasswordInput,
   Tile,
   ClickableTile,
   SelectableTile,
@@ -184,6 +186,7 @@ export {
   SideNavMenuItem,
   SideNavSwitcher,
   // Experimental
+  unstable_ProgressBar,
   unstable_PageSelector,
   unstable_Pagination,
   unstable_TreeView,
