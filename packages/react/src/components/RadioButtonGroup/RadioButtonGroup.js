@@ -10,7 +10,7 @@ import React from 'react';
 import classNames from 'classnames';
 import { warning } from '../../internal/warning';
 import { settings } from 'carbon-components';
-import { Text } from '../Text';
+import { Legend } from '../Text';
 
 const { prefix } = settings;
 
@@ -149,9 +149,7 @@ export default class RadioButtonGroup extends React.Component {
       <div className={`${prefix}--form-item`}>
         <fieldset className={wrapperClasses} disabled={disabled}>
           {legendText && (
-            <Text as="legend" className={`${prefix}--label`}>
-              {legendText}
-            </Text>
+            <Legend className={`${prefix}--label`}>{legendText}</Legend>
           )}
           {this.getRadioButtons()}
         </fieldset>

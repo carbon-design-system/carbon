@@ -6,15 +6,21 @@
  */
 
 import PropTypes from 'prop-types';
-import React from 'react';
+import React, { useEffect, useMemo, useRef } from 'react';
+import { TextDirectionContext } from './TextDirectionContext';
 
-const TextDirectionContext = React.createContext('auto');
+function TextDirection({ children, dir = 'auto', getTextDirection }) {
+  const savedCallback = useRef(getTextDirection);
+  const value = useMemo(() => {
+    return {
+      direction: dir,
+      getTextDirection: savedCallback,
+    };
+  }, [dir]);
 
-function TextDirection({ children, dir, getTextDirection }) {
-  const value = {
-    direction: dir,
-    getTextDirection,
-  };
+  useEffect(() => {
+    savedCallback.current = getTextDirection;
+  });
 
   return (
     <TextDirectionContext.Provider value={value}>
@@ -24,9 +30,22 @@ function TextDirection({ children, dir, getTextDirection }) {
 }
 
 TextDirection.propTypes = {
+  /**
+   * Provide children to be rendered inside of this component
+   */
   children: PropTypes.node,
+
+  /**
+   * Specify the text direction for rendered children
+   */
   dir: PropTypes.oneOf(['ltr', 'rtl', 'auto']),
+
+  /**
+   * Optionally provide a custom function to get the text direction for a piece
+   * of text. Whatever is returned will become the value of the `dir` attribute
+   * on a node of text. Should return one of: 'ltr', 'rtl', or 'auto'
+   */
   getTextDirection: PropTypes.func,
 };
 
-export { TextDirectionContext, TextDirection };
+export { TextDirection };

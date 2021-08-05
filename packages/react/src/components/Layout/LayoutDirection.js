@@ -6,25 +6,24 @@
  */
 
 import PropTypes from 'prop-types';
-import React, { useContext } from 'react';
-
-const LayoutDirectionContext = React.createContext('ltr');
+import React from 'react';
+import { LayoutDirectionContext } from './LayoutDirectionContext';
 
 function LayoutDirection({
   as: BaseComponent = 'div',
   children,
-  direction,
+  dir,
   ...rest
 }) {
-  const parentDirection = useContext(LayoutDirectionContext);
-  if (parentDirection === direction) {
-    console.log('here?');
-    return children;
-  }
+  const value = React.useMemo(() => {
+    return {
+      direction: dir,
+    };
+  }, [dir]);
 
   return (
-    <LayoutDirectionContext.Provider value={direction}>
-      <BaseComponent dir={direction} {...rest}>
+    <LayoutDirectionContext.Provider value={value}>
+      <BaseComponent dir={dir} {...rest}>
         {children}
       </BaseComponent>
     </LayoutDirectionContext.Provider>
@@ -32,13 +31,25 @@ function LayoutDirection({
 }
 
 LayoutDirection.propTypes = {
+  /**
+   * Customize the element type used to render the outermost node
+   */
   as: PropTypes.oneOfType([
     PropTypes.func,
     PropTypes.string,
     PropTypes.elementType,
   ]),
+
+  /**
+   * Provide child elements or components to be rendered inside of this
+   * component
+   */
   children: PropTypes.node,
-  direction: PropTypes.oneOf(['ltr', 'rtl']),
+
+  /**
+   * Specify the layout direction of this part of the page
+   */
+  dir: PropTypes.oneOf(['ltr', 'rtl']).isRequired,
 };
 
 export { LayoutDirectionContext, LayoutDirection };

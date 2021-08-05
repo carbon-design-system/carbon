@@ -6,7 +6,8 @@
  */
 
 import React from 'react';
-import { LayoutDirection, TextDirection, Text } from '../Text';
+import { LayoutDirection } from '../Layout';
+import { TextDirection, Text } from '../Text';
 import RadioButtonGroup from '../RadioButtonGroup';
 import RadioButton from '../RadioButton';
 
@@ -29,14 +30,14 @@ export const Default = () => (
 );
 
 export const LayoutAndText = () => (
-  <LayoutDirection direction="ltr">
+  <LayoutDirection dir="ltr">
     <p>
       Ipsum ipsa repellat doloribus magni architecto totam Laborum maxime
       ratione nobis voluptatibus facilis nostrum, necessitatibus magnam Maxime
       esse consequatur nemo sit repellat Dignissimos rem nobis hic reprehenderit
       ducimus? Fuga voluptatem?
     </p>
-    <LayoutDirection direction="rtl">
+    <LayoutDirection dir="rtl">
       <Text as="p">
         المغلوطة حول استنكار النشوة وتمجيد الألم نشأت بالفعل، وسأعرض لك التفاصيل
         لتكتشف حقيقة وأساس تلك السعادة البشرية، فلا أحد يرفض أو يكره أو يتجنب

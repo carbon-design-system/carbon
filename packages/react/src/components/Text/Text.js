@@ -7,46 +7,89 @@
 
 import PropTypes from 'prop-types';
 import React, { useContext } from 'react';
-import { TextDirectionContext } from './TextDirection';
+import { TextDirectionContext } from './TextDirectionContext';
 
 function Text({ as: BaseComponent = 'span', children, dir = 'auto', ...rest }) {
-  const textDir = useContext(TextDirectionContext);
+  const context = useContext(TextDirectionContext);
+  const textProps = {};
+  const value = {
+    ...context,
+  };
 
-  if (textDir) {
-    const { direction, getTextDirection } = textDir;
+  if (!context) {
+    textProps.dir = dir;
+    value.direction = dir;
+  } else {
+    const { direction: parentDirection, getTextDirection } = context;
 
-    if (direction) {
-      return (
-        <BaseComponent {...rest} dir={direction}>
-          {children}
-        </BaseComponent>
-      );
-    }
+    if (getTextDirection && getTextDirection.current) {
+      const text = getTextFromChildren(children);
+      const override = getTextDirection.current(text);
 
-    if (getTextDirection) {
-      return (
-        <BaseComponent {...rest} dir={getTextDirection(children) || dir}>
-          {children}
-        </BaseComponent>
-      );
+      if (parentDirection !== override) {
+        textProps.dir = override;
+        value.direction = override;
+      } else if (parentDirection === 'auto') {
+        textProps.dir = override;
+      }
+    } else if (parentDirection !== dir) {
+      textProps.dir = dir;
+      value.direction = dir;
+    } else if (parentDirection === 'auto') {
+      textProps.dir = dir;
     }
   }
 
   return (
-    <BaseComponent {...rest} dir={dir}>
-      {children}
-    </BaseComponent>
+    <TextDirectionContext.Provider value={value}>
+      <BaseComponent {...rest} {...textProps}>
+        {children}
+      </BaseComponent>
+    </TextDirectionContext.Provider>
   );
 }
 
 Text.propTypes = {
+  /**
+   * Provide a custom element type used to render the outermost node
+   */
   as: PropTypes.oneOfType([
     PropTypes.func,
     PropTypes.string,
     PropTypes.elementType,
   ]),
+
+  /**
+   * Provide child elements or text to be rendered inside of this component
+   */
   children: PropTypes.node.isRequired,
+
+  /**
+   * Specify the text direction to be used for this component and any of its
+   * children
+   */
   dir: PropTypes.oneOf(['ltr', 'rtl', 'auto']),
 };
+
+function getTextFromChildren(children) {
+  if (typeof children === 'string') {
+    return children;
+  }
+
+  const text = React.Children.map(children, (child) => {
+    if (typeof child === 'string') {
+      return child;
+    }
+    return null;
+  }).filter((text) => {
+    return text !== null;
+  });
+
+  if (text.length === 1) {
+    return text[0];
+  }
+
+  return text;
+}
 
 export { Text };

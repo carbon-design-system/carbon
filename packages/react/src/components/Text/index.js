@@ -5,6 +5,11 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-export { LayoutDirectionContext, LayoutDirection } from './LayoutDirection';
-export { Text } from './Text';
-export { TextDirectionContext, TextDirection } from './TextDirection';
+import { TextDirection } from './TextDirection';
+import { Text } from './Text';
+import { createTextComponent } from './createTextComponent';
+
+export { TextDirection, Text };
+
+export const Label = createTextComponent('label', 'Label');
+export const Legend = createTextComponent('legend', 'Legend');
