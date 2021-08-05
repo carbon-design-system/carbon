@@ -35,7 +35,7 @@
     "@carbon/type": "^10.33.0-rc.0",
     "@skpm/builder": "^0.7.0",
     "color-string": "^1.5.3",
-    "core-js": "^3.11.1",
+    "core-js": "^3.16.0",
     "regenerator-runtime": "^0.13.7",
     "skpm": "^1.2.0"
   },
