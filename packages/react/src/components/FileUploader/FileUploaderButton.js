@@ -78,13 +78,14 @@ function FileUploaderButton({
     <>
       {/* eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions */}
       <label
+        htmlFor={inputId}
         tabIndex={disabled ? -1 : tabIndex || 0}
-        aria-disabled={disabled}
         className={classes}
         onKeyDown={onKeyDown}
-        htmlFor={inputId}
         {...other}>
-        <span role={role}>{labelText}</span>
+        <span role={role} aria-disabled={disabled}>
+          {labelText}
+        </span>
       </label>
       <input
         className={`${prefix}--visually-hidden`}
