@@ -128,7 +128,7 @@ UxExample.storyName = 'UX example';
 UxExample.parameters = {
   info: {
     text: `
-        This is a full example of how to levarage the <InlineLoading /> component to create a nice user experience when submitting a form.
+        This is a full example of how to leverage the <InlineLoading /> component to create a nice user experience when submitting a form.
 
         For the full source code of this example, check out the 'story' panel below.
       `,

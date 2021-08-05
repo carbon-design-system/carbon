@@ -1,7 +1,7 @@
 {
   "name": "@carbon/cli",
   "description": "Task automation for working with the Carbon Design System",
-  "version": "10.26.0",
+  "version": "10.27.0-rc.0",
   "license": "Apache-2.0",
   "bin": {
     "carbon-cli": "./bin/carbon-cli.js"
@@ -36,7 +36,7 @@
     "child-process-promise": "^2.2.1",
     "clipboardy": "^2.1.0",
     "enquirer": "^2.3.6",
-    "fast-glob": "^3.2.2",
+    "fast-glob": "^3.2.7",
     "fs-extra": "^8.0.1",
     "inquirer": "^6.4.1",
     "klaw-sync": "^6.0.0",
@@ -48,8 +48,8 @@
     "remark": "^10.0.1",
     "replace-in-file": "^6.1.0",
     "rollup": "^2.46.0",
-    "sass": "^1.32.4",
+    "sass": "^1.36.0",
     "sassdoc": "^2.7.3",
-    "yargs": "^15.1.0"
+    "yargs": "^17.0.1"
   }
 }

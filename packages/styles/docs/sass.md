@@ -51,6 +51,7 @@ between version updates.
 | [`scss/compat/`](#compatibility)       | Helper themes and tokens for migrating from v10 to v11     |
 | [`scss/config`](#config)               | Configure various options for the package                  |
 | [`scss/feature-flags`](#feature-flags) | Configure various feature flags for experiments            |
+| [`scss/font-face`](#font-face)         | Configure the IBM Plex font and languages                  |
 | [`scss/grid`](#grid)                   | Access and use the CSS Grid built-in to Carbon             |
 | [`scss/motion`](#motion)               | Helper function, mixins, and tokens for motion             |
 | [`scss/reset`](#reset)                 | A CSS Reset                                                |
@@ -99,6 +100,42 @@ docs.
 | Import                                      | Filepath                   |
 | :------------------------------------------ | :------------------------- |
 | `@use '@carbon/styles/scss/feature-flags';` | `scss/_feature-flags.scss` |
+
+## Font Face
+
+| Import                                  | Filepath               |
+| :-------------------------------------- | :--------------------- |
+| `@use '@carbon/styles/scss/font-face';` | `scss/_font-face.scss` |
+
+### Using IBM Plex
+
+By default, IBM Plex will be emitted when importing via the `@carbon/styles`
+main entrypoint or referencing the `font-face` file directly. If you do not want
+the font-face declarations to be emitted, you can set the `css--font-face` token
+to `false`:
+
+```scss
+@use '@carbon/styles/scss/config' with (
+  $css--font-face: false,
+);
+```
+
+### Emitting additional typefaces
+
+When using the font-face declarations, only `IBM Plex Sans` and `IBM Plex Mono`
+are emitted. If you would like to emit additional typefaces, like
+`IBM Plex Sans Arabic`, you can set additional config tokens:
+
+```scss
+@use '@carbon/styles/scss/config' with (
+  $css--plex-arabic: true,
+);
+```
+
+| IBM Plex Language | Token               |
+| :---------------- | :------------------ |
+| Arabic            | `$css--plex-arabic` |
+| TODO              | `TODO`              |
 
 ## Grid
 
