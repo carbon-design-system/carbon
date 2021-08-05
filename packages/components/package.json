@@ -105,7 +105,7 @@
     "chokidar": "^2.0.0",
     "classnames": "^2.2.0",
     "commander": "^2.13.0",
-    "core-js": "^3.6.5",
+    "core-js": "^3.16.0",
     "cross-env": "^5.2.0",
     "css-loader": "^3.4.2",
     "custom-event": "^1.0.0",
@@ -148,7 +148,7 @@
     "minimatch": "^3.0.4",
     "mkdirp": "^0.5.0",
     "mock-raf": "^1.0.0",
-    "node-sass": "^6.0.0",
+    "node-sass": "^6.0.1",
     "nodemon": "^1.18.7",
     "path-to-regexp": "^6.2.0",
     "portscanner": "^2.2.0",
@@ -174,7 +174,7 @@
     "webpack": "^4.41.5",
     "webpack-dev-middleware": "^3.7.2",
     "webpack-hot-middleware": "^2.21.0",
-    "whatwg-fetch": "^3.0.0"
+    "whatwg-fetch": "^3.6.2"
   },
   "sideEffects": [
     "css/**/*.css",

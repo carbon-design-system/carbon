@@ -36,7 +36,7 @@
     "child-process-promise": "^2.2.1",
     "clipboardy": "^2.1.0",
     "enquirer": "^2.3.6",
-    "fast-glob": "^3.2.2",
+    "fast-glob": "^3.2.7",
     "fs-extra": "^8.0.1",
     "inquirer": "^6.4.1",
     "klaw-sync": "^6.0.0",
@@ -50,6 +50,6 @@
     "rollup": "^2.46.0",
     "sass": "^1.36.0",
     "sassdoc": "^2.7.3",
-    "yargs": "^15.1.0"
+    "yargs": "^17.0.1"
   }
 }
