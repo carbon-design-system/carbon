@@ -42,7 +42,7 @@ function formatColorName({ name, grade, formatFor }) {
         .filter(Boolean)
         .join(' / ');
     case 'colorVariable':
-      const test3 = [
+      return [
         grade
           ? `${folderName}/${formattedName}/${formattedName}`
           : `${folderName}/${formattedName}`,
@@ -50,7 +50,6 @@ function formatColorName({ name, grade, formatFor }) {
       ]
         .filter(Boolean)
         .join(' ');
-      return test3;
     default:
       return '';
   }
