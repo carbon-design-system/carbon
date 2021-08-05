@@ -73,7 +73,7 @@ describe('Loading', () => {
       expect(loader.length).toEqual(1);
     });
 
-    it('shoud render an svg', () => {
+    it('should render an svg', () => {
       expect(svg.length).toEqual(1);
     });
 
