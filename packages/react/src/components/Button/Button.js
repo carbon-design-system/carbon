@@ -14,7 +14,6 @@ import deprecate from '../../prop-types/deprecate';
 import { composeEventHandlers } from '../../tools/events';
 import { keys, matches } from '../../internal/keyboard';
 import { useId } from '../../internal/useId';
-import toggleClass from '../../tools/toggleClass';
 import { useFeatureFlag } from '../FeatureFlags';
 
 const { prefix } = settings;
@@ -47,63 +46,38 @@ const Button = React.forwardRef(function Button(
   },
   ref
 ) {
-  const [allowTooltipVisibility, setAllowTooltipVisibility] = useState(false);
-  const [isHovered, setIsHovered] = useState(false);
-  const [isFocused, setIsFocused] = useState(false);
   const tooltipRef = useRef(null);
   const tooltipTimeout = useRef(null);
+  const [isTooltipVisible, setTooltipVisible] = useState(false);
+  const enabled = useFeatureFlag('enable-v11-release');
 
-  const closeTooltips = (evt) => {
-    const tooltipNode = document?.querySelectorAll(`.${prefix}--tooltip--a11y`);
-    [...tooltipNode].map((node) => {
-      toggleClass(
-        node,
-        `${prefix}--tooltip--hidden`,
-        node !== evt.currentTarget
-      );
-    });
-  };
-
-  const handleFocus = (evt) => {
+  const handleFocus = () => {
     if (hasIconOnly) {
-      closeTooltips(evt);
-      setIsHovered(!isHovered);
-      setIsFocused(true);
-      setAllowTooltipVisibility(true);
+      setTooltipVisible(true);
     }
   };
 
   const handleBlur = () => {
     if (hasIconOnly) {
-      setIsHovered(false);
-      setIsFocused(false);
-      setAllowTooltipVisibility(false);
+      setTooltipVisible(false);
     }
   };
 
-  const handleMouseEnter = (evt) => {
+  const handleMouseEnter = () => {
     if (hasIconOnly) {
-      setIsHovered(true);
-      tooltipTimeout.current && clearTimeout(tooltipTimeout.current);
-
-      if (evt.target === tooltipRef.current) {
-        setAllowTooltipVisibility(true);
-        return;
+      if (tooltipTimeout.current) {
+        clearTimeout(tooltipTimeout.current);
       }
 
-      closeTooltips(evt);
-
-      setAllowTooltipVisibility(true);
+      closeTooltips();
+      setTooltipVisible(true);
     }
   };
 
   const handleMouseLeave = () => {
-    if (!isFocused && hasIconOnly) {
-      tooltipTimeout.current = setTimeout(() => {
-        setAllowTooltipVisibility(false);
-        setIsHovered(false);
-      }, 100);
-    }
+    tooltipTimeout.current = setTimeout(() => {
+      setTooltipVisible(false);
+    }, 100);
   };
 
   const handleClick = (evt) => {
@@ -117,15 +91,29 @@ const Button = React.forwardRef(function Button(
   useEffect(() => {
     const handleEscKeyDown = (event) => {
       if (matches(event, [keys.Escape])) {
-        setAllowTooltipVisibility(false);
-        setIsHovered(false);
+        event.stopPropagation();
+        setTooltipVisible(false);
       }
     };
     document.addEventListener('keydown', handleEscKeyDown);
-    return () => document.removeEventListener('keydown', handleEscKeyDown);
+    return () => {
+      document.removeEventListener('keydown', handleEscKeyDown);
+    };
   }, []);
 
-  const enabled = useFeatureFlag('enable-v11-release');
+  useEffect(() => {
+    return () => {
+      if (tooltipTimeout.current) {
+        clearTimeout(tooltipTimeout.current);
+      }
+    };
+  }, []);
+
+  useEffect(() => {
+    return subscribe((tooltipState) => {
+      setTooltipVisible(tooltipState);
+    });
+  }, []);
 
   const buttonClasses = classNames(className, {
     [`${prefix}--btn`]: true,
@@ -142,8 +130,8 @@ const Button = React.forwardRef(function Button(
     [`${prefix}--btn--${kind}`]: kind,
     [`${prefix}--btn--disabled`]: disabled,
     [`${prefix}--btn--expressive`]: isExpressive,
-    [`${prefix}--tooltip--hidden`]: hasIconOnly && !allowTooltipVisibility,
-    [`${prefix}--tooltip--visible`]: isHovered,
+    [`${prefix}--tooltip--hidden`]: hasIconOnly && !isTooltipVisible,
+    [`${prefix}--tooltip--visible`]: hasIconOnly && isTooltipVisible,
     [`${prefix}--btn--icon-only`]: hasIconOnly,
     [`${prefix}--btn--selected`]: hasIconOnly && isSelected && kind === 'ghost',
     [`${prefix}--tooltip__trigger`]: hasIconOnly,
@@ -214,6 +202,7 @@ const Button = React.forwardRef(function Button(
     component = 'a';
     otherProps = anchorProps;
   }
+
   return React.createElement(
     component,
     {
@@ -402,5 +391,37 @@ Button.defaultProps = {
   tooltipPosition: 'top',
   isExpressive: false,
 };
+
+// The global store for tooltips that are associated with a button. You can cal
+// the `closeTooltips` helper to dismiss all currently active tooltips. This
+// ensures that only one button tooltip is visible at a time.
+//
+// Note: closeTooltips should be called _before_ you set the state for a tooltip
+// to be visible. Otherwise, the tooltip will become visible and then hidden
+// right away.
+const listeners = [];
+
+/**
+ * Subscribe a given callback to be called whenever the state for tooltip
+ * visibility changes
+ * @param {Function} callback
+ * @returns {Function}
+ */
+function subscribe(callback) {
+  listeners.push(callback);
+  return () => {
+    listeners.splice(listeners.indexOf(callback), 1);
+  };
+}
+
+/**
+ * This action will close all visible tooltips that are subscribed to the global
+ * tooltip store
+ */
+function closeTooltips() {
+  listeners.forEach((callback) => {
+    callback(false);
+  });
+}
 
 export default Button;
