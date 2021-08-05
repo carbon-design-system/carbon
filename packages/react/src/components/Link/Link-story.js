@@ -14,17 +14,6 @@ import { Download16 } from '@carbon/icons-react';
 import Link from '../Link';
 import mdx from './Link.mdx';
 
-import {
-  DataTable,
-  Table,
-  TableContainer,
-  TableHead,
-  TableHeader,
-  TableRow,
-  TableBody,
-  TableCell,
-} from 'carbon-components-react';
-
 const sizes = {
   'Small  (sm)': 'sm',
   'Medium (md) - default': undefined,
@@ -71,52 +60,3 @@ export const PairedWithIcon = () => (
 );
 
 export const Playground = () => <Link {...props()}>Link</Link>;
-
-const headerData = [
-  {
-    header: 'Name',
-    key: 'name',
-  },
-];
-const rowData = [
-  {
-    id: 'a',
-    name: 'Load Balancer 3',
-  },
-  {
-    id: 'b',
-    name: 'Load Balancer 1',
-  },
-];
-
-export const TESTING = () => (
-  <DataTable rows={rowData} headers={headerData}>
-    {({ rows, headers, getHeaderProps, getTableProps }) => (
-      <TableContainer title="DataTable">
-        <Table {...getTableProps()}>
-          <TableHead>
-            <TableRow>
-              {headers.map((header) => (
-                // eslint-disable-next-line react/jsx-key
-                <TableHeader {...getHeaderProps({ header })}></TableHeader>
-              ))}
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {rows.map((row) => (
-              <TableRow key={row.id}>
-                {row.cells.map((cell) => (
-                  <TableCell key={cell.id}>
-                    <Link disabled={true} href="#">
-                      {cell.value}
-                    </Link>
-                  </TableCell>
-                ))}
-              </TableRow>
-            ))}
-          </TableBody>
-        </Table>
-      </TableContainer>
-    )}
-  </DataTable>
-);
