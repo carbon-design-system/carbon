@@ -78,10 +78,10 @@ function FileUploaderButton({
     <>
       {/* eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions */}
       <label
-        htmlFor={inputId}
         tabIndex={disabled ? -1 : tabIndex || 0}
         className={classes}
         onKeyDown={onKeyDown}
+        htmlFor={inputId}
         {...other}>
         <span role={role} aria-disabled={disabled}>
           {labelText}
