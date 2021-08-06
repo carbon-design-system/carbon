@@ -97,6 +97,11 @@
     color: $link-secondary;
   }
 
+  .#{$prefix}--data-table tbody tr:hover td .#{$prefix}--link--disabled,
+  .#{$prefix}--data-table tbody tr:hover th .#{$prefix}--link--disabled {
+    color: $disabled-02;
+  }
+
   .#{$prefix}--data-table th,
   .#{$prefix}--data-table td {
     text-align: left;
