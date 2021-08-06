@@ -277,6 +277,8 @@ gulp.task('scripts:umd', () => {
     plugins: [
       '@babel/plugin-transform-modules-umd',
       ['@babel/plugin-proposal-class-properties', { loose: true }],
+      ['@babel/plugin-proposal-private-property-in-object', { loose: true }],
+      ['@babel/plugin-proposal-private-methods', { loose: true }],
     ],
   };
 
@@ -294,7 +296,7 @@ gulp.task('scripts:umd', () => {
 });
 
 gulp.task('scripts:es', () => {
-  const srcFiles = ['./src/**/*.js'];
+  const srcFiles = ['./src/**/accordion.js'];
   const babelOpts = {
     presets: [
       [
@@ -307,7 +309,11 @@ gulp.task('scripts:es', () => {
         },
       ],
     ],
-    plugins: [['@babel/plugin-proposal-class-properties', { loose: true }]],
+    plugins: [
+      ['@babel/plugin-proposal-class-properties', { loose: true }],
+      ['@babel/plugin-proposal-private-property-in-object', { loose: true }],
+      ['@babel/plugin-proposal-private-methods', { loose: true }],
+    ],
   };
   return gulp
     .src(srcFiles)

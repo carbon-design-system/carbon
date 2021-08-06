@@ -109,13 +109,21 @@ module.exports = function convertPureAssignment(babel) {
             const assignmentsToInsert = pureAssignments.map((node) => {
               const clone = t.cloneDeep(node);
               const { left, right } = clone.expression;
+
               left.object = t.cloneDeep(argument);
-              left.trailingComments = left.trailingComments.filter(
-                (item) => !regexPureClassProperty.test(item.value)
-              );
-              right.leadingComments = right.leadingComments.filter(
-                (item) => !regexPureClassProperty.test(item.value)
-              );
+
+              if (Array.isArray(left.trailingComments)) {
+                left.trailingComments = left.trailingComments.filter(
+                  (item) => !regexPureClassProperty.test(item.value)
+                );
+              }
+
+              if (Array.isArray(right.leadingComments)) {
+                right.leadingComments = right.leadingComments.filter(
+                  (item) => !regexPureClassProperty.test(item.value)
+                );
+              }
+
               return clone;
             });
             body.splice(index, 0, ...assignmentsToInsert);
