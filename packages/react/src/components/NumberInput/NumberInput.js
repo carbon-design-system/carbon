@@ -161,7 +161,7 @@ class NumberInput extends Component {
     size: PropTypes.oneOf(['sm', 'md', 'lg', 'xl']),
 
     /**
-     * Specify how much the valus should increase/decrease upon clicking on up/down button
+     * Specify how much the values should increase/decrease upon clicking on up/down button
      */
     step: PropTypes.number,
 
@@ -202,7 +202,7 @@ class NumberInput extends Component {
     translateWithId: (id) => defaultTranslations[id],
   };
 
-  static getDerivedStateFromProps({ min, max, value }, state) {
+  static getDerivedStateFromProps({ value }, state) {
     const { prevValue } = state;
 
     if (useControlledStateWithValue && value === '' && prevValue !== '') {
@@ -214,10 +214,12 @@ class NumberInput extends Component {
 
     // If `useControlledStateWithValue` feature flag is on, do nothing here.
     // Otherwise, do prop -> state sync with "value capping".
+    //// Value capping removed in #8965
+    //// value: capMax(max, capMin(min, value)), (L223)
     return useControlledStateWithValue || prevValue === value
       ? null
       : {
-          value: capMax(max, capMin(min, value)),
+          value,
           prevValue: value,
         };
   }

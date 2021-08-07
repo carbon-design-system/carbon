@@ -35,7 +35,7 @@
     flex-wrap: wrap;
     margin-top: $carbon--spacing-05;
     margin-bottom: $carbon--spacing-05;
-    color: $text-inverse;
+    color: $inverse-01;
 
     @include carbon--breakpoint(md) {
       max-width: rem(608px);
@@ -53,7 +53,7 @@
 
   .#{$prefix}--inline-notification:not(.#{$prefix}--inline-notification--low-contrast)
     a {
-    color: $link-inverse;
+    color: $inverse-link;
   }
 
   .#{$prefix}--inline-notification a {
@@ -65,7 +65,7 @@
   }
 
   .#{$prefix}--inline-notification a:focus {
-    outline: 1px solid $link-inverse;
+    outline: 1px solid $inverse-link;
   }
 
   .#{$prefix}--inline-notification.#{$prefix}--inline-notification--low-contrast
@@ -74,7 +74,7 @@
   }
 
   .#{$prefix}--inline-notification--low-contrast {
-    color: $text-primary;
+    color: $text-01;
 
     &::before {
       position: absolute;
@@ -92,78 +92,66 @@
   }
 
   .#{$prefix}--inline-notification--error {
-    @include notification--experimental(
-      $support-error-inverse,
-      $background-inverse
-    );
+    @include notification--experimental($inverse-support-01, $inverse-02);
   }
 
   .#{$prefix}--inline-notification--low-contrast.#{$prefix}--inline-notification--error {
     @include notification--experimental(
-      $support-error,
+      $support-01,
       get-token-value($notification-colors, 'notification-background-error')
     );
 
     &::before {
-      border-color: $support-error;
+      border-color: $support-01;
     }
   }
 
   .#{$prefix}--inline-notification--success {
-    @include notification--experimental(
-      $support-success-inverse,
-      $background-inverse
-    );
+    @include notification--experimental($inverse-support-02, $inverse-02);
   }
 
   .#{$prefix}--inline-notification--low-contrast.#{$prefix}--inline-notification--success {
     @include notification--experimental(
-      $support-success,
+      $support-02,
       get-token-value($notification-colors, 'notification-background-success')
     );
 
     &::before {
-      border-color: $support-success;
+      border-color: $support-02;
     }
   }
 
   .#{$prefix}--inline-notification--info,
   .#{$prefix}--inline-notification--info-square {
-    @include notification--experimental(
-      $support-info-inverse,
-      $background-inverse
-    );
+    @include notification--experimental($inverse-support-04, $inverse-02);
   }
 
   .#{$prefix}--inline-notification--low-contrast.#{$prefix}--inline-notification--info,
   .#{$prefix}--inline-notification--low-contrast.#{$prefix}--inline-notification--info-square {
     @include notification--experimental(
-      $support-info,
+      $support-04,
       get-token-value($notification-colors, 'notification-background-info')
     );
 
     &::before {
-      border-color: $support-info;
+      border-color: $support-04;
     }
   }
 
   .#{$prefix}--inline-notification--warning,
   .#{$prefix}--inline-notification--warning-alt {
-    @include notification--experimental(
-      $support-warning-inverse,
-      $background-inverse
-    );
+    @include notification--experimental($inverse-support-03, $inverse-02);
   }
 
   .#{$prefix}--inline-notification--low-contrast.#{$prefix}--inline-notification--warning,
   .#{$prefix}--inline-notification--low-contrast.#{$prefix}--inline-notification--warning-alt {
     @include notification--experimental(
-      $support-warning,
+      $support-03,
       get-token-value($notification-colors, 'notification-background-warning')
     );
 
     &::before {
-      border-color: $support-warning;
+      border-color: $support-03;
     }
   }
 
@@ -228,12 +216,12 @@
 
   .#{$prefix}--inline-notification:not(.#{$prefix}--inline-notification--low-contrast)
     .#{$prefix}--inline-notification__action-button.#{$prefix}--btn--ghost {
-    color: $link-inverse;
+    color: $inverse-link;
   }
 
   .#{$prefix}--inline-notification__action-button.#{$prefix}--btn--ghost:active,
   .#{$prefix}--inline-notification__action-button.#{$prefix}--btn--ghost:hover {
-    background-color: $background-inverse-hover;
+    background-color: $inverse-hover-ui;
   }
 
   .#{$prefix}--inline-notification--low-contrast
@@ -249,7 +237,7 @@
   .#{$prefix}--inline-notification__action-button.#{$prefix}--btn--ghost:focus {
     border-color: transparent;
     box-shadow: none;
-    outline: 2px solid $focus-inverse;
+    outline: 2px solid $inverse-focus-ui;
     outline-offset: -2px;
   }
 
@@ -285,12 +273,12 @@
       background-color $duration--fast-02 motion(standard, productive);
 
     &:focus {
-      outline: 2px solid $focus-inverse;
+      outline: 2px solid $inverse-focus-ui;
       outline-offset: -2px;
     }
 
     .#{$prefix}--inline-notification__close-icon {
-      fill: $icon-inverse;
+      fill: $inverse-01;
     }
 
     @include carbon--breakpoint(md) {
@@ -306,7 +294,7 @@
   .#{$prefix}--inline-notification--low-contrast
     .#{$prefix}--inline-notification__close-button
     .#{$prefix}--inline-notification__close-icon {
-    fill: $icon-primary;
+    fill: $icon-01;
   }
 
   // Windows HCM fix

@@ -14,28 +14,25 @@ import Menu, {
 } from '../Menu';
 import { mount } from 'enzyme';
 import { settings } from 'carbon-components';
-import { describe, expect } from 'window-or-global';
 
 const { prefix } = settings;
 
 describe('Menu', () => {
   describe('renders as expected', () => {
     describe('menu', () => {
-      it('receives the expected classes when closed', () => {
+      it("isn't rendered when closed", () => {
         const wrapper = mount(<Menu />);
-        const container = wrapper.childAt(0).childAt(0);
-
-        expect(container.hasClass(`${prefix}--menu`)).toBe(true);
-        expect(container.hasClass(`${prefix}--menu--open`)).toBe(false);
+        expect(wrapper.getDOMNode()).toBe(null);
       });
 
       it('receives the expected classes when opened', () => {
         const wrapper = mount(<Menu open />);
+        const container = wrapper.getDOMNode();
 
-        const container = wrapper.childAt(0).childAt(0);
-
-        expect(container.hasClass(`${prefix}--menu`)).toBe(true);
-        expect(container.hasClass(`${prefix}--menu--open`)).toBe(true);
+        expect(container.classList.contains(`${prefix}--menu`)).toBe(true);
+        expect(container.classList.contains(`${prefix}--menu--open`)).toBe(
+          true
+        );
       });
     });
 
@@ -90,7 +87,7 @@ describe('Menu', () => {
 
       it('renders props.children as submenu', () => {
         const wrapper = mount(
-          <Menu>
+          <Menu open>
             <MenuItem label="Format">
               <MenuItem label="Bold" />
               <MenuItem label="Italic" />

@@ -6,9 +6,10 @@
 //
 
 @use '../../config' as *;
+@use '../../feature-flags' as *;
 @use "../../type" as *;
 @use '../../motion';
-@use '../../theme' as *;
+@use '../../compat/theme' as *;
 @use "../../utilities/focus-outline" as *;
 @use "../../utilities/skeleton" as *;
 @use "../../utilities/high-contrast-mode" as *;
@@ -20,7 +21,7 @@
   .#{$prefix}--structured-list--selection .#{$prefix}--structured-list-th {
     @include padding--data-structured-list;
   }
-  @if feature-flag-enabled('enable-v11-release') {
+  @if enabled('enable-v11-release') {
     .#{$prefix}--structured-list-row--focused-within {
       @include focus-outline('outline');
     }
@@ -99,7 +100,7 @@
     cursor: inherit;
   }
 
-  @if not feature-flag-enabled('enable-v11-release') {
+  @if not enabled('enable-v11-release') {
     .#{$prefix}--structured-list-row:focus:not(.#{$prefix}--structured-list-row--header-row) {
       @include focus-outline('outline');
     }
@@ -115,7 +116,7 @@
   .#{$prefix}--structured-list--selection
     .#{$prefix}--structured-list-row:hover:not(.#{$prefix}--structured-list-row--header-row)
     > .#{$prefix}--structured-list-td {
-    @if feature-flag-enable('enabled-2021-release') {
+    @if enabled('enable-v11-release') {
       border-top: 1px solid $border-subtle;
     } @else {
       border-top: 1px solid $layer;
@@ -155,7 +156,7 @@
     display: table-cell;
     max-width: 36rem;
     color: $text-secondary;
-    @if feature-flag-enabled('enable-v11-release') {
+    @if enabled('enable-v11-release') {
       border-top: 1px solid $border-subtle;
     }
 

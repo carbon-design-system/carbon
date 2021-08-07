@@ -97,6 +97,11 @@
     color: $link-secondary;
   }
 
+  .#{$prefix}--data-table tbody tr:hover td .#{$prefix}--link--disabled,
+  .#{$prefix}--data-table tbody tr:hover th .#{$prefix}--link--disabled {
+    color: $disabled-02;
+  }
+
   .#{$prefix}--data-table th,
   .#{$prefix}--data-table td {
     text-align: left;
@@ -398,10 +403,6 @@
   .#{$prefix}--data-table--tall .#{$prefix}--table-column-radio,
   .#{$prefix}--data-table--xl .#{$prefix}--table-column-radio {
     padding-top: $spacing-05;
-  }
-
-  .#{$prefix}--date-table tbody th.#{$prefix}--table-column-checkbox:hover {
-    background: $data-table-column-hover;
   }
 
   //----------------------------------------------------------------------------
@@ -968,7 +969,8 @@
   // -------------------
   // with boolean column
   // -------------------
-  .#{$prefix}--data-table .bx--form-item.bx--checkbox-wrapper:last-of-type {
+  .#{$prefix}--data-table
+    .#{$prefix}--form-item.#{$prefix}--checkbox-wrapper:last-of-type {
     margin: 0;
   }
 

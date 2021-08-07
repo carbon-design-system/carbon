@@ -70,7 +70,7 @@ const findHighlightedIndex = ({ items, itemToString }, inputValue) => {
 
 const getInstanceId = setupGetInstanceId();
 
-const ComboBox = (props) => {
+const ComboBox = React.forwardRef((props, ref) => {
   const {
     ariaLabel,
     className: containerClassName,
@@ -308,7 +308,7 @@ const ComboBox = (props) => {
                   aria-controls={inputProps['aria-controls']}
                   {...inputProps}
                   {...rest}
-                  ref={mergeRefs(textInput, rootProps.ref)}
+                  ref={mergeRefs(textInput, ref)}
                 />
                 {invalid && (
                   <WarningFilled16
@@ -387,7 +387,7 @@ const ComboBox = (props) => {
       }}
     </Downshift>
   );
-};
+});
 
 ComboBox.propTypes = {
   /**
@@ -447,7 +447,7 @@ ComboBox.propTypes = {
 
   /**
    * Optional function to render items as custom components instead of strings.
-   * Defaults to null and is overriden by a getter
+   * Defaults to null and is overridden by a getter
    */
   itemToElement: PropTypes.func,
 
