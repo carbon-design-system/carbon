@@ -78,9 +78,9 @@ team are concerned with:
 
 ### Triaging a new issue
 
-Triage is the process of determining the severity and priority of issues _as they
-come in_. We need to make sure we know how serious a problem is and how quickly
-it should be addressed.
+Triage is the process of determining the severity and priority of issues _as
+they come in_. We need to make sure we know how serious a problem is and how
+quickly it should be addressed.
 
 ### Triage Process
 
