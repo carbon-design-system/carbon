@@ -20,7 +20,7 @@ const prettierOptions = {
 };
 
 describe('@carbon/scss', () => {
-  describe('assigments', () => {
+  describe('assignments', () => {
     const assignment = [
       ['boolean', t.SassBoolean({ value: true }), '$variable: true;'],
       [

@@ -59,7 +59,7 @@ Map {
       "open": Object {
         "type": "bool",
       },
-      "renderExpando": Object {
+      "renderExpand": Object {
         "type": "func",
       },
       "title": Object {
@@ -1145,7 +1145,7 @@ Map {
         "className": Object {
           "type": "string",
         },
-        "enableExpando": Object {
+        "enableExpand": Object {
           "type": "bool",
         },
         "expandIconDescription": Object {
@@ -1782,7 +1782,7 @@ Map {
       "className": Object {
         "type": "string",
       },
-      "enableExpando": Object {
+      "enableExpand": Object {
         "type": "bool",
       },
       "expandIconDescription": Object {
