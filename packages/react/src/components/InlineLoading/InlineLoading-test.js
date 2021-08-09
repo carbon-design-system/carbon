@@ -22,7 +22,7 @@ describe('Loading', () => {
       expect(container.length).toEqual(1);
     });
 
-    it('shoud render a loader by default', () => {
+    it('should render a loader by default', () => {
       expect(wrapper.find(Loading).length).toEqual(1);
     });
 

@@ -97,7 +97,7 @@ export default class FilterableMultiSelect extends React.Component {
 
     /**
      * `onChange` is a utility for this controlled component to communicate to a
-     * consuming component what kind of internal state changes are occuring.
+     * consuming component what kind of internal state changes are occurring.
      */
     onChange: PropTypes.func,
 

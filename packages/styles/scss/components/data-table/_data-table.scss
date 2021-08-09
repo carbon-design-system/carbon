@@ -25,6 +25,7 @@
   // Container
   //----------------------------------------------------------------------------
   .#{$prefix}--data-table-container {
+    position: relative;
     // Allow space for focus styles
     padding-top: $spacing-01;
   }
@@ -969,7 +970,8 @@
   // -------------------
   // with boolean column
   // -------------------
-  .#{$prefix}--data-table .bx--form-item.bx--checkbox-wrapper:last-of-type {
+  .#{$prefix}--data-table
+    .#{$prefix}--form-item.#{$prefix}--checkbox-wrapper:last-of-type {
     margin: 0;
   }
 

@@ -48,8 +48,10 @@ between version updates.
 | :------------------------------------- | :--------------------------------------------------------- |
 | [`scss/breakpoint`](#breakpoint)       | Helper functions and mixins for working with breakpoints   |
 | [`scss/colors`](#colors)               | Access colors from every swatch in the IBM Design Language |
+| [`scss/compat/`](#compatibility)       | Helper themes and tokens for migrating from v10 to v11     |
 | [`scss/config`](#config)               | Configure various options for the package                  |
 | [`scss/feature-flags`](#feature-flags) | Configure various feature flags for experiments            |
+| [`scss/font-face`](#font-face)         | Configure the IBM Plex font and languages                  |
 | [`scss/grid`](#grid)                   | Access and use the CSS Grid built-in to Carbon             |
 | [`scss/motion`](#motion)               | Helper function, mixins, and tokens for motion             |
 | [`scss/reset`](#reset)                 | A CSS Reset                                                |
@@ -98,6 +100,42 @@ docs.
 | Import                                      | Filepath                   |
 | :------------------------------------------ | :------------------------- |
 | `@use '@carbon/styles/scss/feature-flags';` | `scss/_feature-flags.scss` |
+
+## Font Face
+
+| Import                                  | Filepath               |
+| :-------------------------------------- | :--------------------- |
+| `@use '@carbon/styles/scss/font-face';` | `scss/_font-face.scss` |
+
+### Using IBM Plex
+
+By default, IBM Plex will be emitted when importing via the `@carbon/styles`
+main entrypoint or referencing the `font-face` file directly. If you do not want
+the font-face declarations to be emitted, you can set the `css--font-face` token
+to `false`:
+
+```scss
+@use '@carbon/styles/scss/config' with (
+  $css--font-face: false,
+);
+```
+
+### Emitting additional typefaces
+
+When using the font-face declarations, only `IBM Plex Sans` and `IBM Plex Mono`
+are emitted. If you would like to emit additional typefaces, like
+`IBM Plex Sans Arabic`, you can set additional config tokens:
+
+```scss
+@use '@carbon/styles/scss/config' with (
+  $css--plex-arabic: true,
+);
+```
+
+| IBM Plex Language | Token               |
+| :---------------- | :------------------ |
+| Arabic            | `$css--plex-arabic` |
+| TODO              | `TODO`              |
 
 ## Grid
 
@@ -330,6 +368,48 @@ like to see changed. For example, if you wanted to change the component token
 | Import                                                | Description |
 | :---------------------------------------------------- | :---------- |
 | `@use '@carbon/styles/scss/utilities/focus-outline';` |             |
+
+## Compatibility
+
+| Import                                      | Filepath                   |
+| :------------------------------------------ | :------------------------- |
+| `@use '@carbon/styles/scss/compat/themes';` | `scss/compat/_themes.scss` |
+| `@use '@carbon/styles/scss/compat/theme';`  | `scss/compat/_theme.scss`  |
+
+The compatibility entrypoints for themes and theme provide access to the v10
+tokens along with the v11 tokens. To make sure that the tokens that you're using
+from v10 have the correct value in v11, you will need to include the theme that
+you're using from `scss/compat/themes` and set that as your theme.
+
+```scss
+@use '@carbon/styles/scss/compat/themes' as compat;
+@use '@carbon/styles/scss/themes';
+@use '@carbon/styles/scss/compat/theme' with (
+  $fallback: themes.$g100,
+  $theme: compat.$g100,
+);
+```
+
+It's important that you specify the `$fallback` theme as a value from the
+`scss/themes` entrypoint. This will guarantee that all tokens that you are using
+from v11 will match the theme of the tokens that you are using from v10.
+
+You can directly reference a token from the `scss/compat/theme` entrypoint. This
+entrypoint will also re-export all available v11 tokens and mixins from
+`scss/theme`.
+
+```scss
+@use '@carbon/styles/scss/compat/theme';
+
+body {
+  // You can use both v10 and v11 tokens
+  background: theme.$background;
+  color: theme.$text-01;
+}
+```
+
+_Note: all tokens from v10 are deprecated in v11. They will be removed in the
+next major release of Carbon_
 
 ## Configuration
 

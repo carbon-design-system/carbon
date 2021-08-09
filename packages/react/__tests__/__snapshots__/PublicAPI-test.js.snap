@@ -607,6 +607,9 @@ Map {
             Object {
               "type": "string",
             },
+            Object {
+              "type": "number",
+            },
           ],
         ],
         "type": "oneOfType",
@@ -652,6 +655,9 @@ Map {
             },
             Object {
               "type": "string",
+            },
+            Object {
+              "type": "number",
             },
           ],
         ],
@@ -2446,6 +2452,9 @@ Map {
             Object {
               "type": "string",
             },
+            Object {
+              "type": "number",
+            },
           ],
         ],
         "type": "oneOfType",
@@ -2485,6 +2494,9 @@ Map {
             },
             Object {
               "type": "string",
+            },
+            Object {
+              "type": "number",
             },
           ],
         ],
@@ -4298,6 +4310,16 @@ Map {
       },
       "pagesUnknown": Object {
         "type": "bool",
+      },
+      "size": Object {
+        "args": Array [
+          Array [
+            "sm",
+            "md",
+            "lg",
+          ],
+        ],
+        "type": "oneOf",
       },
       "totalItems": Object {
         "type": "number",
@@ -7643,6 +7665,9 @@ Map {
       },
       "itemsPerPageText": Object {
         "type": "string",
+      },
+      "onChange": Object {
+        "type": "func",
       },
       "pageRangeText": Object {
         "type": "func",

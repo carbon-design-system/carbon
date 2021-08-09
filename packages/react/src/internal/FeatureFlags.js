@@ -35,7 +35,7 @@ import { enabled } from '@carbon/feature-flags';
  *   However, if value is provided and a handler is not, we'll throw a warning indicating the component is now read-only
  * * `readOnly` → silences the above warning, acknowledging the read-only state of the component
  *
- * This flag also disables prop -> state sync in several components, notablly `<NumberInput>`.
+ * This flag also disables prop -> state sync in several components, notably `<NumberInput>`.
  *
  * This flag also updates event handlers to pass an up-to-date value in the second parameter,
  * so applications can use it in both controlled and uncontrolled components.

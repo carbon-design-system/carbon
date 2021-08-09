@@ -21,7 +21,7 @@ Each screen reader should be tested when paired with its preferred browser.
 
 ### JAWS on Edge/Chrome
 
-1. {tab} "Main fram, Button, button. To activate press SPACEBAR"
+1. {tab} "Main frame, Button, button. To activate press SPACEBAR"
 
 ### NVDA on Firefox (optional, but recommended)
 

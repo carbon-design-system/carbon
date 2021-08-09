@@ -433,6 +433,7 @@ ComboBox.propTypes = {
   initialSelectedItem: PropTypes.oneOfType([
     PropTypes.object,
     PropTypes.string,
+    PropTypes.number,
   ]),
 
   /**
@@ -498,7 +499,11 @@ ComboBox.propTypes = {
   /**
    * For full control of the selection
    */
-  selectedItem: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
+  selectedItem: PropTypes.oneOfType([
+    PropTypes.object,
+    PropTypes.string,
+    PropTypes.number,
+  ]),
 
   /**
    * Specify your own filtering logic by passing in a `shouldFilterItem`
