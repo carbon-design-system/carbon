@@ -74,7 +74,7 @@ describe('Metadata', () => {
       // data
       expect(mockSchema).toHaveBeenCalledTimes(1);
 
-      // If ane xtension provides a validate method, it should be called with
+      // If an extension provides a validate method, it should be called with
       // the registry and data for the extension
       expect(mockExtension.validate).toHaveBeenCalledTimes(1);
       expect(mockExtension.validate).toHaveBeenCalledWith(

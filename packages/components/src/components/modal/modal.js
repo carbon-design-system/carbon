@@ -224,7 +224,7 @@ class Modal extends mixin(
   /**
    * The component options.
    * If `options` is specified in the constructor, {@linkcode Modal.create .create()}, or {@linkcode Modal.init .init()},
-   * properties in this object are overriden for the instance being create and how {@linkcode Modal.init .init()} works.
+   * properties in this object are overridden for the instance being create and how {@linkcode Modal.init .init()} works.
    * @member Modal.options
    * @type {object}
    * @property {string} selectorInit The CSS class to find modal dialogs.
