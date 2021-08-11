@@ -16,6 +16,7 @@
 /// Progress indicator styles
 /// @access private
 /// @group progress-indicator
+
 @mixin progress-indicator {
   .#{$prefix}--progress {
     @include reset;
@@ -56,15 +57,6 @@
     width: 0;
   }
 
-  @keyframes progress-indicator-icon-fade {
-    0% {
-      opacity: 0;
-    }
-    100% {
-      opacity: 1;
-    }
-  }
-
   .#{$prefix}--progress-step svg {
     position: relative;
     z-index: 1;
@@ -74,10 +66,6 @@
     margin: rem(10px) $carbon--spacing-03 0 0;
     border-radius: 50%;
     fill: $interactive;
-
-    // animation is disabled for now bc the svg is re-rendered after every change
-    // opacity: 0;
-    // animation: 0.15s progress-indicator-icon-fade 0.15s motion(standard, productive) forwards;
   }
 
   .#{$prefix}--progress-label {
@@ -171,12 +159,22 @@
     margin-left: $carbon--spacing-06;
     color: $text-secondary;
     text-align: start;
+    opacity: 0;
+    transform: translateY(-10px);
+    animation: 0.15s optional-text-entrance 0.15s motion(standard, productive)
+      forwards;
   }
 
   //CURRENT STYLING
   .#{$prefix}--progress-step--current {
     .#{$prefix}--progress-line {
       background-color: $interactive;
+    }
+
+    svg circle {
+      opacity: 0;
+      animation: 0.15s progress-indicator-icon-fade 0.15s
+        motion(standard, productive) forwards;
     }
   }
 
@@ -196,6 +194,12 @@
     .#{$prefix}--progress-line {
       width: 100%;
       background-color: $interactive;
+    }
+
+    svg {
+      opacity: 0;
+      animation: 0.15s progress-indicator-icon-fade motion(standard, productive)
+        forwards;
     }
   }
 
@@ -237,6 +241,12 @@
       fill: $disabled;
     }
 
+    svg circle {
+      opacity: 0;
+      animation: 0.15s progress-indicator-icon-fade 0.15s
+        motion(standard, productive) forwards;
+    }
+
     .#{$prefix}--progress-label,
     .#{$prefix}--progress-label:hover {
       box-shadow: none;
@@ -276,8 +286,8 @@
   }
 
   // Vertical Variant
-  .#{$prefix}--progress--vertical .#{$prefix}--progress-step  {
-    border-top: none
+  .#{$prefix}--progress--vertical .#{$prefix}--progress-step {
+    border-top: none;
   }
 
   .#{$prefix}--progress--vertical {
@@ -339,6 +349,20 @@
         height: 100%;
       }
     }
+  }
+}
+
+// Animations
+@keyframes optional-text-entrance {
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes progress-indicator-icon-fade {
+  to {
+    opacity: 1;
   }
 }
 
