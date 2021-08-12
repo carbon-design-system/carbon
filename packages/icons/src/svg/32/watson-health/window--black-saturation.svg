@@ -1,0 +1,26 @@
+<svg id="icon" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: none;
+      }
+    </style>
+  </defs>
+  <rect x="15" y="2" width="2" height="3"/>
+  <rect x="27" y="15" width="3" height="2"/>
+  <rect x="15" y="27" width="2" height="3"/>
+  <rect x="2" y="15" width="3" height="2"/>
+  <rect x="6.2249" y="5.7288" width="2.0034" height="3.0034" transform="translate(-2.9961 7.2278) rotate(-45)"/>
+  <rect x="23.2674" y="6.2273" width="3" height="2" transform="translate(2.1437 19.63) rotate(-45)"/>
+  <rect x="23.7687" y="23.2686" width="2.0016" height="3.0016" transform="translate(-10.2598 24.7686) rotate(-44.9986)"/>
+  <polygon points="5.47 25.126 7.591 23 9 24.419 6.884 26.54 5.47 25.126"/>
+  <rect x="15" y="13" width="2" height="2"/>
+  <rect x="19" y="13" width="2" height="2"/>
+  <rect x="17" y="11" width="2" height="2"/>
+  <rect x="17" y="15" width="2" height="2"/>
+  <rect x="17" y="19" width="2" height="2"/>
+  <rect x="15" y="17" width="2" height="2"/>
+  <rect x="19" y="17" width="2" height="2"/>
+  <path d="M16,7a9,9,0,1,0,9,9A9.01,9.01,0,0,0,16,7ZM9,16a7.004,7.004,0,0,1,6-6.92V11h2V9.08a6.9231,6.9231,0,0,1,2,.605V11h1.89c.0374.0366.074.0732.11.11V13h1.3149a6.931,6.931,0,0,1,.6053,2H21v2h1.92a6.931,6.931,0,0,1-.6053,2H21v1.89c-.0364.0372-.073.0738-.11.11H19v1.3149a6.9231,6.9231,0,0,1-2,.605V21H15v1.92A7.004,7.004,0,0,1,9,16Z"/>
+  <rect id="_Transparent_Rectangle_" data-name="&lt;Transparent Rectangle&gt;" class="cls-1" width="32" height="32"/>
+</svg>
