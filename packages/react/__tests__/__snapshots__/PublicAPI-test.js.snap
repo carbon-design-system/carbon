@@ -5861,6 +5861,7 @@ Map {
       "warn": false,
       "warnText": "",
     },
+    "displayName": "TextInput",
     "propTypes": Object {
       "className": Object {
         "type": "string",
