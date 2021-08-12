@@ -541,7 +541,7 @@ class Tooltip extends Component {
               <span className={`${prefix}--tooltip__caret`} />
               <div
                 className={`${prefix}--tooltip__content`}
-                aria-label={`${triggerText}-dialog`}
+                title={`${triggerText}-dialog`}
                 role="dialog">
                 {children}
               </div>
