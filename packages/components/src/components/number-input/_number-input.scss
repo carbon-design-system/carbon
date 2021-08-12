@@ -37,13 +37,13 @@
     padding-right: rem(128px);
     padding-left: $carbon--spacing-05;
     border: 0;
-    border-bottom: rem(1px) solid $border-strong;
+    border-bottom: rem(1px) solid $ui-04;
 
     // Firefox: Hide spinner (up and down buttons)
     -moz-appearance: textfield;
-    background-color: $field;
+    background-color: $field-01;
     border-radius: 0;
-    color: $text-primary;
+    color: $text-01;
     font-family: carbon--font-family('mono');
     font-weight: 300;
     transition: background-color $duration--fast-01 motion(standard, productive),
@@ -59,7 +59,7 @@
     }
 
     &:disabled ~ .#{$prefix}--number__controls svg {
-      fill: $icon-disabled;
+      fill: $disabled;
     }
 
     // IE: Hide "clear-field" `x` button on input field
@@ -83,11 +83,10 @@
     padding-right: rem(112px);
   }
 
-  .#{$prefix}--number input[type='number']:disabled,
-  .#{$prefix}--number--readonly input[type='number'] {
+  .#{$prefix}--number input[type='number']:disabled {
     border-bottom-color: transparent;
-    background-color: $field-disabled;
-    color: $text-disabled;
+    background-color: $disabled-01;
+    color: $disabled;
     cursor: not-allowed;
   }
 
@@ -121,8 +120,8 @@
     height: 100%;
     align-items: center;
     justify-content: center;
-    border-bottom: rem(1px) solid $border-strong;
-    color: $icon-primary;
+    border-bottom: rem(1px) solid $ui-04;
+    color: $icon-01;
 
     &::before,
     &::after {
@@ -132,7 +131,7 @@
       width: rem(2px);
       // height: calc(100% - 4px) is calculated differently in Safari
       height: rem(36px);
-      background-color: $field;
+      background-color: $field-01;
       content: '';
     }
 
@@ -151,19 +150,19 @@
     &:focus {
       @include focus-outline;
 
-      color: $icon-primary;
+      color: $icon-01;
       outline-offset: -2px;
       outline-width: 2px;
     }
 
     &:hover {
-      background-color: $field-hover;
-      color: $icon-primary;
+      background-color: $hover-ui;
+      color: $icon-01;
       cursor: pointer;
 
       &::before,
       &::after {
-        background-color: $field-hover;
+        background-color: $hover-ui;
       }
     }
 
@@ -176,7 +175,7 @@
 
     &:disabled {
       border-bottom-color: transparent;
-      color: $text-disabled;
+      color: $disabled;
       cursor: not-allowed;
     }
   }
@@ -230,7 +229,7 @@
     input[type='number'][data-invalid]
     ~ .#{$prefix}--number__controls
     .#{$prefix}--number__control-btn.up-icon::after {
-    background-color: $support-error;
+    background-color: $support-01;
   }
 
   .#{$prefix}--number
@@ -249,7 +248,7 @@
     z-index: z('overlay');
     width: rem(1px);
     height: rem(16px);
-    background-color: $border-subtle;
+    background-color: $ui-03;
 
     &:first-of-type {
       order: 0;
@@ -266,10 +265,9 @@
   .#{$prefix}--number__invalid
     + .#{$prefix}--number__controls
     .#{$prefix}--number__rule-divider:first-of-type {
-    background-color: $border-subtle;
+    background-color: $ui-03;
   }
 
-  // V11: Possibly deprecate
   .#{$prefix}--number--light .#{$prefix}--number__rule-divider,
   .#{$prefix}--number--light
     .#{$prefix}--number__invalid
@@ -289,21 +287,17 @@
     input[type='number']:disabled
     + .#{$prefix}--number__controls
     .#{$prefix}--number__rule-divider {
-    background-color: $icon-disabled;
+    background-color: $disabled-02;
   }
 
   .#{$prefix}--number__control-btn:focus ~ .#{$prefix}--number__rule-divider {
     background-color: transparent;
   }
 
-  .#{$prefix}--number--readonly .#{$prefix}--number__control-btn {
-    display: none;
-  }
-
   .#{$prefix}--number__invalid {
     position: absolute;
     right: rem(96px);
-    fill: $support-error;
+    fill: $support-01;
   }
 
   // TODO V11: Remove xl selector
@@ -349,7 +343,7 @@
   }
 
   .#{$prefix}--number__invalid--warning {
-    fill: $support-warning;
+    fill: $support-03;
   }
 
   .#{$prefix}--number__invalid--warning path:first-of-type {
@@ -357,35 +351,30 @@
     opacity: 1;
   }
 
-  // V11: Possibly deprecate
   .#{$prefix}--number--light input[type='number'] {
     background-color: $field-02;
   }
 
   // V11: Possibly deprecate
-  .#{$prefix}--number--light input[type='number']:disabled,
-  .#{$prefix}--number--light
-    .#{$prefix}--number--readonly
-    input[type='number'] {
+  .#{$prefix}--number--light input[type='number']:disabled {
     background-color: $field-02;
   }
 
-  // V11: Possibly deprecate
   .#{$prefix}--number--light .#{$prefix}--number__control-btn::before,
   .#{$prefix}--number--light .#{$prefix}--number__control-btn::after {
     background-color: $field-02;
   }
 
   // V11: Possibly deprecate
+  .#{$prefix}--number--light .#{$prefix}--number__control-btn:focus::before,
+  .#{$prefix}--number--light .#{$prefix}--number__control-btn:focus::after {
+    background-color: transparent;
+  }
+
   .#{$prefix}--number--light .#{$prefix}--number__control-btn:hover,
   .#{$prefix}--number--light .#{$prefix}--number__control-btn:hover::before,
   .#{$prefix}--number--light .#{$prefix}--number__control-btn:hover::after {
     background-color: $hover-light-ui;
-  }
-
-  .#{$prefix}--number--light .#{$prefix}--number__control-btn:focus::before,
-  .#{$prefix}--number--light .#{$prefix}--number__control-btn:focus::after {
-    background-color: transparent;
   }
 
   // Size Variant styles
@@ -432,7 +421,9 @@
   }
 
   //No label positioning adjustment
-  .#{$prefix}--number--nolabel .bx--label + .bx--form__helper-text {
+  .#{$prefix}--number--nolabel
+    .#{$prefix}--label
+    + .#{$prefix}--form__helper-text {
     margin-top: 0;
   }
 
@@ -442,6 +433,20 @@
   }
 
   .#{$prefix}--number--nosteppers .#{$prefix}--number__invalid {
+    right: rem(16px);
+  }
+
+  // Readonly
+  .#{$prefix}--number--readonly input[type='number'] {
+    background: transparent;
+  }
+
+  .#{$prefix}--number--readonly .#{$prefix}--number__controls {
+    display: none;
+  }
+
+  .#{$prefix}--number__readonly-icon {
+    position: absolute;
     right: rem(16px);
   }
 

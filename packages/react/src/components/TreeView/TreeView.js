@@ -205,7 +205,7 @@ TreeView.propTypes = {
   multiselect: PropTypes.bool,
 
   /**
-   * Callback function that is called when any node is seleected
+   * Callback function that is called when any node is selected
    */
   onSelect: PropTypes.func,
 

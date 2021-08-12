@@ -22,7 +22,7 @@
     @include button-base;
   }
 
-  // Reset intrisic padding in Firefox (see #731)
+  // Reset intrinsic padding in Firefox (see #731)
   .#{$prefix}--btn::-moz-focus-inner {
     padding: 0;
     border: 0;
@@ -30,58 +30,58 @@
 
   .#{$prefix}--btn--primary {
     @include button-theme(
-      $button-primary,
+      $interactive-01,
       transparent,
-      $text-on-color,
-      $button-primary-hover,
+      $text-04,
+      $hover-primary,
       currentColor,
-      $button-primary-active
+      $active-primary
     );
 
     &:hover {
-      color: $text-on-color;
+      color: $text-04;
     }
   }
 
   .#{$prefix}--btn--secondary {
     @include button-theme(
-      $button-secondary,
+      $interactive-02,
       transparent,
-      $text-on-color,
-      $button-secondary-hover,
+      $text-04,
+      $hover-secondary,
       currentColor,
-      $button-secondary-active
+      $active-secondary
     );
 
     &:hover,
     &:focus {
-      color: $text-on-color;
+      color: $text-04;
     }
   }
 
   .#{$prefix}--btn--tertiary {
     @include button-theme(
       transparent,
-      $button-tertiary,
-      $button-tertiary,
-      $button-tertiary-hover,
+      $interactive-03,
+      $interactive-03,
+      $hover-tertiary,
       currentColor,
-      $button-tertiary-active
+      $active-tertiary
     );
 
     &:hover {
-      color: $text-inverse;
+      color: $inverse-01;
     }
 
     &:focus {
-      background-color: $button-tertiary;
-      color: $text-inverse;
+      background-color: $interactive-03;
+      color: $inverse-01;
     }
 
     &:active {
       border-color: transparent;
-      background-color: $button-tertiary-active;
-      color: $text-inverse;
+      background-color: $active-tertiary;
+      color: $inverse-01;
     }
 
     &:disabled,
@@ -91,7 +91,7 @@
     &.#{$prefix}--btn--disabled:hover,
     &.#{$prefix}--btn--disabled:focus {
       background: transparent;
-      color: $text-on-color-disabled;
+      color: $disabled-03;
       outline: none;
     }
   }
@@ -100,10 +100,10 @@
     @include button-theme(
       transparent,
       transparent,
-      $link-primary,
-      $background-hover,
+      $link-01,
+      $hover-ui,
       currentColor,
-      $background-active
+      $active-ui
     );
 
     padding: $button-padding-ghost;
@@ -115,11 +115,11 @@
 
     &:hover,
     &:active {
-      color: $link-primary-hover;
+      color: $hover-primary-text;
     }
 
     &:active {
-      background-color: $background-active;
+      background-color: $active-ui;
     }
 
     &:disabled,
@@ -130,7 +130,7 @@
     &.#{$prefix}--btn--disabled:focus {
       border-color: transparent;
       background: transparent;
-      color: $text-on-color-disabled;
+      color: $disabled-03;
       outline: none;
     }
 
@@ -187,7 +187,7 @@
   .#{$prefix}--btn.#{$prefix}--btn--icon-only.#{$prefix}--tooltip__trigger[disabled]:focus,
   .#{$prefix}--btn.#{$prefix}--btn--icon-only.#{$prefix}--tooltip__trigger[disabled]:active {
     cursor: not-allowed;
-    fill: $icon-on-color-disabled;
+    fill: $disabled-03;
   }
 
   .#{$prefix}--tooltip__trigger.#{$prefix}--btn--icon-only--top {
@@ -273,7 +273,7 @@
   }
 
   .#{$prefix}--btn--icon-only.#{$prefix}--btn--selected {
-    background: $background-selected;
+    background: $selected-ui;
   }
 
   .#{$prefix}--btn path[data-icon-path='inner-path'] {
@@ -284,7 +284,7 @@
     .#{$prefix}--btn__icon
     path:not([data-icon-path]):not([fill='none']),
   .#{$prefix}--btn--ghost.#{$prefix}--btn--icon-only .#{$prefix}--btn__icon {
-    fill: $icon-primary;
+    fill: $icon-01;
   }
 
   .#{$prefix}--btn--ghost.#{$prefix}--btn--icon-only[disabled]
@@ -294,7 +294,7 @@
     .#{$prefix}--btn__icon,
   .#{$prefix}--btn.#{$prefix}--btn--icon-only.#{$prefix}--btn--ghost[disabled]:hover
     .#{$prefix}--btn__icon {
-    fill: $icon-on-color-disabled;
+    fill: $disabled-03;
   }
 
   .#{$prefix}--btn--ghost.#{$prefix}--btn--icon-only[disabled] {
@@ -315,16 +315,16 @@
 
   .#{$prefix}--btn--danger {
     @include button-theme(
-      $button-danger-primary,
+      $danger-01,
       transparent,
-      $text-on-color,
-      $button-danger-hover,
+      $text-04,
+      $hover-danger,
       currentColor,
-      $button-danger-active
+      $active-danger
     );
 
     &:hover {
-      color: $text-on-color;
+      color: $text-04;
     }
 
     // TODO: deprecate single dash tertiary
@@ -332,26 +332,26 @@
     &--tertiary {
       @include button-theme(
         transparent,
-        $button-danger-secondary,
-        $button-danger-secondary,
-        $button-danger-hover,
+        $danger-02,
+        $danger-02,
+        $hover-danger,
         currentColor,
-        $button-danger-active
+        $active-danger
       );
 
       &:hover {
-        border-color: $button-danger-hover;
-        color: $text-on-color;
+        border-color: $hover-danger;
+        color: $text-04;
       }
 
       &:focus {
-        background-color: $button-danger-primary;
-        color: $text-on-color;
+        background-color: $danger-01;
+        color: $text-04;
       }
 
       &:active {
-        border-color: $button-danger-active;
-        color: $text-on-color;
+        border-color: $active-danger;
+        color: $text-04;
       }
 
       &:disabled,
@@ -361,7 +361,7 @@
       &.#{$prefix}--btn--disabled:hover,
       &.#{$prefix}--btn--disabled:focus {
         background: transparent;
-        color: $text-on-color-disabled;
+        color: $disabled-03;
         outline: none;
       }
     }
@@ -372,10 +372,10 @@
       @include button-theme(
         transparent,
         transparent,
-        $button-danger-secondary,
-        $button-danger-hover,
+        $danger-02,
+        $hover-danger,
         currentColor,
-        $button-danger-active
+        $active-danger
       );
 
       padding: $button-padding-ghost;
@@ -387,7 +387,7 @@
 
       &:hover,
       &:active {
-        color: $text-on-color;
+        color: $text-04;
       }
 
       &:disabled,
@@ -504,7 +504,7 @@
   }
 
   .#{$prefix}--btn-set .#{$prefix}--btn.#{$prefix}--btn--disabled {
-    box-shadow: rem(-1px) 0 0 0 $icon-on-color-disabled;
+    box-shadow: rem(-1px) 0 0 0 $disabled-03;
 
     &:first-of-type {
       box-shadow: none;
@@ -512,7 +512,7 @@
   }
 
   .#{$prefix}--btn-set--stacked .#{$prefix}--btn.#{$prefix}--btn--disabled {
-    box-shadow: 0 rem(-1px) 0 0 $layer-selected-disabled;
+    box-shadow: 0 rem(-1px) 0 0 $disabled-03;
 
     &:first-of-type {
       box-shadow: none;

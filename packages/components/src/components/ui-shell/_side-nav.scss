@@ -110,7 +110,7 @@
     width: 0;
   }
 
-  .#{$prefix}--side-nav.bx--side-nav--rail:not(.#{$prefix}--side-nav--fixed):hover,
+  .#{$prefix}--side-nav.#{$prefix}--side-nav--rail:not(.#{$prefix}--side-nav--fixed):hover,
   .#{$prefix}--side-nav--expanded {
     width: mini-units(32);
   }
@@ -131,7 +131,7 @@
     @include carbon--breakpoint-down('lg') {
       width: 100vw;
       height: 100vh;
-      background-color: $overlay;
+      background-color: $overlay-01;
       opacity: 1;
       transition: opacity $transition--expansion $carbon--standard-easing,
         background-color $transition--expansion $carbon--standard-easing;

@@ -45,7 +45,7 @@
 
   // The label corresponds to the content inside of the `label` tag. Since we're
   // creating our own checkbox style, we'll need to position this in order to
-  // accomodate the spacing needed for the checkbox.
+  // accommodate the spacing needed for the checkbox.
   .#{$prefix}--checkbox-label {
     @include reset;
     @include type-style('body-short-01');
@@ -85,7 +85,7 @@
     // different checkbox states.
     width: rem(16px);
     height: rem(16px);
-    border: 1px solid $icon-primary;
+    border: 1px solid $icon-01;
     // increase left margin for #6480
     margin: rem(2px) rem(2px) rem(2px) rem(3px);
 
@@ -102,8 +102,8 @@
     left: rem(7px);
     width: rem(9px);
     height: rem(5px);
-    border-bottom: 2px solid $icon-inverse;
-    border-left: 2px solid $icon-inverse;
+    border-bottom: 2px solid $inverse-01;
+    border-left: 2px solid $inverse-01;
     margin-top: rem(-3px) #{'/*rtl:0rem*/'};
     background: none;
     content: '';
@@ -121,8 +121,8 @@
   .#{$prefix}--checkbox-label[data-contained-checkbox-state='true']::before,
   .#{$prefix}--checkbox-label[data-contained-checkbox-state='mixed']::before {
     border-width: 1px;
-    border-color: $icon-primary;
-    background-color: $icon-primary;
+    border-color: $icon-01;
+    background-color: $icon-01;
   }
 
   // Display the check
@@ -136,8 +136,8 @@
   .#{$prefix}--checkbox-label[data-contained-checkbox-state='mixed']::after {
     top: rem(11px);
     width: rem(8px);
-    border-bottom: 2px solid $icon-inverse;
-    border-left: 0 solid $icon-inverse;
+    border-bottom: 2px solid $inverse-01;
+    border-left: 0 solid $inverse-01;
     transform: scale(1) rotate(0deg);
   }
 
@@ -164,13 +164,13 @@
 
   .#{$prefix}--checkbox:disabled + .#{$prefix}--checkbox-label,
   .#{$prefix}--checkbox-label[data-contained-checkbox-disabled='true'] {
-    color: $text-disabled;
+    color: $disabled-02;
     cursor: not-allowed;
   }
 
   .#{$prefix}--checkbox:disabled + .#{$prefix}--checkbox-label::before,
   .#{$prefix}--checkbox-label[data-contained-checkbox-disabled='true']::before {
-    border-color: $icon-disabled;
+    border-color: $disabled-02;
   }
 
   .#{$prefix}--checkbox:checked:disabled + .#{$prefix}--checkbox-label::before,
@@ -178,7 +178,7 @@
     + .#{$prefix}--checkbox-label::before,
   .#{$prefix}--checkbox-label[data-contained-checkbox-state='true'][data-contained-checkbox-disabled='true']::before,
   .#{$prefix}--checkbox-label[data-contained-checkbox-state='mixed'][data-contained-checkbox-disabled='true']::before {
-    background-color: $icon-disabled;
+    background-color: $disabled-02;
   }
 
   //-----------------------------------------------

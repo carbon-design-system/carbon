@@ -1,0 +1,38 @@
+//
+// Copyright IBM Corp. 2021
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+@use 'sass:list';
+@use 'sass:meta';
+@use '../config' as *;
+@use './custom-property';
+
+/// Define a map of layer sets, each set should have values for each layer in
+/// the application. The key of this map is used for the CSS Custom Property
+/// name whose value is updated as more layers are added.
+/// @type {Map}
+$layer-sets: () !default;
+
+/// Emit the layer tokens defined in $layer-sets for the given $level
+/// @param {Number} $level
+@mixin -emit-layer-tokens($level) {
+  @each $key, $layer-set in $layer-sets {
+    $value: list.nth($layer-set, $level);
+    @include custom-property.declaration($key, $value);
+  }
+}
+
+:root {
+  @include -emit-layer-tokens(1);
+}
+
+.#{$prefix}--layer {
+  @include -emit-layer-tokens(2);
+
+  .#{$prefix}--layer {
+    @include -emit-layer-tokens(3);
+  }
+}

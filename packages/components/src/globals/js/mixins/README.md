@@ -71,7 +71,7 @@ instead of introducing "fat base class".
   - [Clean-up](#clean-up)
   - [Registry of component instances](#registry-of-component-instances)
 - [Sugar layers for component instantiation](#sugar-layers-for-component-instantiation)
-  - [Searching for DOM nodes to intantiate components on (`init-component-by-search.js`)](#searching-for-dom-nodes-to-intantiate-components-on-init-component-by-searchjs)
+  - [Searching for DOM nodes to instantiate components on (`init-component-by-search.js`)](#searching-for-dom-nodes-to-instantiate-components-on-init-component-by-searchjs)
   - [Lazily instantiating a component upon an event on a root element (`init-component-by-event.js`)](#lazily-instantiating-a-component-upon-an-event-on-a-root-element-init-component-by-eventjs)
   - [Lazily instantiating a component upon an event on a launcher button (`init-component-by-launcher.js`)](#lazily-instantiating-a-component-upon-an-event-on-a-launcher-button-init-component-by-launcherjs)
 
@@ -120,7 +120,7 @@ The constructor in `create-component.js` mixin sets the following properties:
 | ---------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `element`  | The root element of the component (see above).                                                                                                                                                                                                                                                                                                                                                     |
 | `options`  | The component options.                                                                                                                                                                                                                                                                                                                                                                             |
-| `children` | The array of Carbon component instances that has to be released along with this component. An exanple is with [overflow menu](http://www.carbondesignsystem.com/components/overflow-menu/code) component which creates another Carbon component called [floating menu](../../../components/floating-menu/floating-menu.js), and the floating menu has to be released along with the overflow menu. |
+| `children` | The array of Carbon component instances that has to be released along with this component. An example is with [overflow menu](http://www.carbondesignsystem.com/components/overflow-menu/code) component which creates another Carbon component called [floating menu](../../../components/floating-menu/floating-menu.js), and the floating menu has to be released along with the overflow menu. |
 
 The `.options` property inherits static `.options` property and merges in the
 2nd argument of static `.create()` method. In above example, `.options` will be
@@ -156,7 +156,7 @@ Carbon defines three types of mixins to allow applications to instantiate
 components in batch. A component can inherit one of those three mixins to
 support batch instantiation.
 
-### Searching for DOM nodes to intantiate components on ([`init-component-by-search.js`](./init-component-by-search.js))
+### Searching for DOM nodes to instantiate components on ([`init-component-by-search.js`](./init-component-by-search.js))
 
 The most basic one is
 [`init-component-by-search.js`](./init-component-by-search.js), which searches
@@ -201,7 +201,7 @@ delaying component instantiation until an event happens on a DOM element that
 will be the root element. For example, the static `.init()` method of Carbon
 [`Tooltip` component](http://www.carbondesignsystem.com/components/tooltip/code)
 delays instantiating the components until user hovers the mouse over a trigger
-button or user puts the keyboard focus on a trigger buton.
+button or user puts the keyboard focus on a trigger button.
 
 Given the same example HTML as the one for `init-component-by-search.js` above,
 the call of static `.init()` method below detects `click` events on DOM elements
@@ -255,7 +255,7 @@ caused instantiating the component.
 
 [`init-component-by-launcher.js`](./init-component-by-launcher.js) mix-in allows
 delaying component instantiation until an event happens on an element that has
-semantic association to the compoennt. For example, the static `.init()` method
+semantic association to the component. For example, the static `.init()` method
 of Carbon
 [`Modal` component](http://www.carbondesignsystem.com/components/modal/code)
 delays instantiating the components until user clicks on a launcher button.

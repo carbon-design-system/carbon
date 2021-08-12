@@ -49,6 +49,7 @@ export default class TextInput extends mixin(
    * the SVG icon for visibility off
    * @param {boolean} obj.passwordIsVisible - The visibility of the password in the
    * input field
+   * @param {boolean} obj.selectorPasswordVisibilityTooltip
    */
   _setIconVisibility = ({
     iconVisibilityOn,
@@ -105,7 +106,7 @@ export default class TextInput extends mixin(
    * If `options` is specified in the constructor,
    * {@linkcode TextInput.create .create()},
    * or {@linkcode TextInput.init .init()},
-   * properties in this object are overriden for the instance being
+   * properties in this object are overridden for the instance being
    * created and how {@linkcode TextInput.init .init()} works.
    * @property {string} selectorInit The CSS selector to find text input UIs.
    */

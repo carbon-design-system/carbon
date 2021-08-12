@@ -15,7 +15,7 @@
 @mixin carbon-content {
   .#{$prefix}--content {
     padding: 2rem;
-    background: $layer;
+    background: $ui-02;
     will-change: margin-left;
   }
 

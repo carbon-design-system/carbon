@@ -36,6 +36,11 @@ export default class FilterableMultiSelect extends React.Component {
     ariaLabel: PropTypes.string,
 
     /**
+     * Specify the direction of the multiselect dropdown. Can be either top or bottom.
+     */
+    direction: PropTypes.oneOf(['top', 'bottom']),
+
+    /**
      * Disable the control
      */
     disabled: PropTypes.bool,
@@ -92,7 +97,7 @@ export default class FilterableMultiSelect extends React.Component {
 
     /**
      * `onChange` is a utility for this controlled component to communicate to a
-     * consuming component what kind of internal state changes are occuring.
+     * consuming component what kind of internal state changes are occurring.
      */
     onChange: PropTypes.func,
 
@@ -165,6 +170,7 @@ export default class FilterableMultiSelect extends React.Component {
   static defaultProps = {
     ariaLabel: 'Choose an item',
     compareItems: defaultCompareItems,
+    direction: 'bottom',
     disabled: false,
     filterItems: defaultFilterItems,
     initialSelectedItems: [],
@@ -277,6 +283,7 @@ export default class FilterableMultiSelect extends React.Component {
     const {
       ariaLabel,
       className: containerClassName,
+      direction,
       disabled,
       filterItems,
       items,
@@ -312,6 +319,7 @@ export default class FilterableMultiSelect extends React.Component {
         [`${prefix}--multi-select__wrapper--inline--invalid`]:
           inline && invalid,
         [`${prefix}--list-box__wrapper--inline--invalid`]: inline && invalid,
+        [`${prefix}--list-box--up`]: direction === 'top',
       }
     );
     const helperId = !helperText

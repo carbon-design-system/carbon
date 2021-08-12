@@ -6,7 +6,11 @@
  */
 
 import './Grid.stories.scss';
-import { Grid, Column, FeatureFlags } from 'carbon-components-react';
+import {
+  Grid,
+  Column,
+  unstable_FeatureFlags as FeatureFlags,
+} from 'carbon-components-react';
 import React from 'react';
 import mdx from './Grid.mdx';
 
@@ -24,16 +28,12 @@ export default {
     ),
   ],
   parameters: {
+    controls: {
+      include: [], // ensure props are not displayed on the controls pane
+      hideNoControlsWarning: true,
+    },
     docs: {
       page: mdx,
-    },
-  },
-  argTypes: {
-    narrow: {
-      control: false,
-    },
-    condensed: {
-      control: false,
     },
   },
 };

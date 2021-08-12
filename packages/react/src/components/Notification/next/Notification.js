@@ -102,9 +102,9 @@ export function NotificationButton({
   });
 
   return (
-    // eslint-disable-next-line react/button-has-type
     <button
       {...rest}
+      // eslint-disable-next-line react/button-has-type
       type={type}
       aria-label={iconDescription}
       title={iconDescription}
@@ -389,7 +389,7 @@ export function InlineNotification({
   });
 
   // Placing interactable element(s) within a notification requires a role of
-  // alertdialog. Additionaly, focus must be automatically moved to the component.
+  // alertdialog. Additionally, focus must be automatically moved to the component.
   const role = actions ? 'alertdialog' : initialRole;
   const ref = useRef(null);
   useIsomorphicEffect(() => {

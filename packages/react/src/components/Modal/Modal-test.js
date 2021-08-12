@@ -72,7 +72,7 @@ describe('Modal', () => {
       expect(primaryButton.prop('disabled')).toEqual(false);
     });
 
-    it('disables primary button when diablePrimaryButton prop is passed', () => {
+    it('disables primary button when disablePrimaryButton prop is passed', () => {
       mounted.setProps({ primaryButtonDisabled: true });
       const primaryButton = mounted
         .find(`.${prefix}--btn.${prefix}--btn--primary`)
@@ -220,9 +220,9 @@ describe('Modal', () => {
         <Modal aria-label="test" open onRequestClose={onRequestClose} />
       );
       wrapper.simulate('keyDown', { which: 26 });
-      expect(onRequestClose).not.toBeCalled();
+      expect(onRequestClose).not.toHaveBeenCalled();
       wrapper.simulate('keyDown', { which: 27 });
-      expect(onRequestClose).toBeCalled();
+      expect(onRequestClose).toHaveBeenCalled();
     });
 
     it('should handle submit keyDown events with shouldSubmitOnEnter enabled', () => {
@@ -236,9 +236,9 @@ describe('Modal', () => {
         />
       );
       wrapper.simulate('keyDown', { which: 14 });
-      expect(onRequestSubmit).not.toBeCalled();
+      expect(onRequestSubmit).not.toHaveBeenCalled();
       wrapper.simulate('keyDown', { which: 13 });
-      expect(onRequestSubmit).toBeCalled();
+      expect(onRequestSubmit).toHaveBeenCalled();
     });
 
     it('should not handle submit keyDown events with shouldSubmitOnEnter not enabled', () => {
@@ -247,9 +247,9 @@ describe('Modal', () => {
         <Modal aria-label="test" open onRequestSubmit={onRequestSubmit} />
       );
       wrapper.simulate('keyDown', { which: 14 });
-      expect(onRequestSubmit).not.toBeCalled();
+      expect(onRequestSubmit).not.toHaveBeenCalled();
       wrapper.simulate('keyDown', { which: 13 });
-      expect(onRequestSubmit).not.toBeCalled();
+      expect(onRequestSubmit).not.toHaveBeenCalled();
     });
 
     it('should close by default on secondary button click', () => {
@@ -263,7 +263,7 @@ describe('Modal', () => {
       );
       const secondaryBtn = modal.find(`.${prefix}--btn--secondary`);
       secondaryBtn.simulate('click');
-      expect(onRequestClose).toBeCalled();
+      expect(onRequestClose).toHaveBeenCalled();
     });
 
     it('should handle custom secondary button events', () => {
@@ -277,7 +277,7 @@ describe('Modal', () => {
       );
       const secondaryBtn = modal.find(`.${prefix}--btn--secondary`);
       secondaryBtn.simulate('click');
-      expect(onSecondarySubmit).toBeCalled();
+      expect(onSecondarySubmit).toHaveBeenCalled();
     });
   });
 });

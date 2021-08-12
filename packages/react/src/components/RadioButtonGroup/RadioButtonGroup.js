@@ -10,12 +10,11 @@ import React from 'react';
 import classNames from 'classnames';
 import { warning } from '../../internal/warning';
 import { settings } from 'carbon-components';
+import { Legend } from '../Text';
 
 const { prefix } = settings;
 
 export default class RadioButtonGroup extends React.Component {
-  state = { selected: this.props.valueSelected || this.props.defaultSelected };
-
   static propTypes = {
     /**
      * Provide a collection of <RadioButton> components to render in the group
@@ -81,10 +80,20 @@ export default class RadioButtonGroup extends React.Component {
     return prevValueSelected === valueSelected
       ? null
       : {
-          selected: valueSelected || defaultSelected,
+          selected:
+            typeof valueSelected !== 'undefined'
+              ? valueSelected
+              : defaultSelected,
           prevValueSelected: valueSelected,
         };
   }
+
+  state = {
+    selected:
+      typeof this.props.valueSelected !== 'undefined'
+        ? this.props.valueSelected
+        : this.props.defaultSelected,
+  };
 
   getRadioButtons = () => {
     const children = React.Children.map(this.props.children, (radioButton) => {
@@ -140,7 +149,7 @@ export default class RadioButtonGroup extends React.Component {
       <div className={`${prefix}--form-item`}>
         <fieldset className={wrapperClasses} disabled={disabled}>
           {legendText && (
-            <legend className={`${prefix}--label`}>{legendText}</legend>
+            <Legend className={`${prefix}--label`}>{legendText}</Legend>
           )}
           {this.getRadioButtons()}
         </fieldset>

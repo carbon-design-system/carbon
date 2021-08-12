@@ -29,7 +29,7 @@
       display: block;
       width: 0;
       height: $carbon--spacing-02;
-      background-color: $background-brand;
+      background-color: $interactive-01;
       content: '';
       opacity: 0;
       transition: width $duration--fast-02 motion(standard, productive);
@@ -38,7 +38,7 @@
 
   .#{$prefix}--pagination-nav__page--active + &::after,
   &.#{$prefix}--pagination-nav__page--active::after {
-    left: calc(50% - #{$carbon--spacing-05 / 2});
+    left: calc(50% - #{$carbon--spacing-05 * 0.5});
     width: $carbon--spacing-05;
     opacity: 1;
   }
@@ -59,9 +59,9 @@
 /// @param {Number} $select-icon-top-position [$carbon--spacing-05]
 /// @param {Number} $select-icon-left-position [$carbon--spacing-05]
 @mixin pagination-nav(
-  $text-color: $text-secondary,
-  $text-color-active: $text-secondary,
-  $background-color-hover: $background-hover,
+  $text-color: $text-02,
+  $text-color-active: $text-02,
+  $background-color-hover: $hover-ui,
   $background-color-active: initial,
   $font-weight: 400,
   $item-padding: 0,
@@ -187,8 +187,8 @@
 
   .#{$prefix}--pagination-nav__select-icon {
     position: absolute;
-    top: calc(50% - #{$select-icon-top-position / 2});
-    left: calc(50% - #{$select-icon-top-position / 2});
+    top: calc(50% - #{$select-icon-top-position * 0.5});
+    left: calc(50% - #{$select-icon-top-position * 0.5});
     pointer-events: none;
   }
 

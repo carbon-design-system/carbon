@@ -36,7 +36,7 @@
 
     width: mini-units(6);
     height: mini-units(6);
-    border: rem(2px) solid transparent;
+    border: rem(1px) solid transparent;
     transition: background-color $duration--fast-02,
       border-color $duration--fast-02;
   }
@@ -227,7 +227,7 @@
     bottom: -2px;
     left: 0;
     width: 100%;
-    border-bottom: 3px solid $support-info-inverse;
+    border-bottom: 3px solid $inverse-support-04;
     content: '';
   }
 

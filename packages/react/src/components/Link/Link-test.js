@@ -10,7 +10,6 @@ import Link from '../Link';
 import { shallow } from 'enzyme';
 import { settings } from 'carbon-components';
 import { cleanup, render, screen } from '@testing-library/react';
-import '@testing-library/jest-dom';
 import userEvent from '@testing-library/user-event';
 import { describe, document } from 'window-or-global';
 
@@ -90,7 +89,7 @@ describe('Link', () => {
   });
 
   describe('keyboard support', () => {
-    it('should recieve keyboard focus', () => {
+    it('should receive keyboard focus', () => {
       render(
         <Link href="/" className="some-class">
           A simple link
