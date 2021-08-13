@@ -591,11 +591,16 @@ exports[`DataTable selection -- radio buttons should render 1`] = `
                                 <span
                                   className="bx--radio-button__appearance"
                                 />
-                                <span
+                                <Text
                                   className="bx--visually-hidden"
                                 >
-                                  Select row
-                                </span>
+                                  <span
+                                    className="bx--visually-hidden"
+                                    dir="auto"
+                                  >
+                                    Select row
+                                  </span>
+                                </Text>
                               </label>
                             </div>
                           </RadioButton>
@@ -677,11 +682,16 @@ exports[`DataTable selection -- radio buttons should render 1`] = `
                                 <span
                                   className="bx--radio-button__appearance"
                                 />
-                                <span
+                                <Text
                                   className="bx--visually-hidden"
                                 >
-                                  Select row
-                                </span>
+                                  <span
+                                    className="bx--visually-hidden"
+                                    dir="auto"
+                                  >
+                                    Select row
+                                  </span>
+                                </Text>
                               </label>
                             </div>
                           </RadioButton>
@@ -763,11 +773,16 @@ exports[`DataTable selection -- radio buttons should render 1`] = `
                                 <span
                                   className="bx--radio-button__appearance"
                                 />
-                                <span
+                                <Text
                                   className="bx--visually-hidden"
                                 >
-                                  Select row
-                                </span>
+                                  <span
+                                    className="bx--visually-hidden"
+                                    dir="auto"
+                                  >
+                                    Select row
+                                  </span>
+                                </Text>
                               </label>
                             </div>
                           </RadioButton>
