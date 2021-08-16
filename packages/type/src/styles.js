@@ -427,3 +427,52 @@ export const display04 = {
     },
   },
 };
+
+// Type changes - V11
+
+// Small styles
+// No changes for code-01, code-02, label-01, label-02
+export const legal01 = {
+  fontSize: rem(scale[0]),
+  fontWeight: fontWeights.regular,
+  lineHeight: 1,
+  letterSpacing: px(0.32),
+};
+
+export const legal02 = {
+  fontSize: rem(scale[1]),
+  fontWeight: fontWeights.regular,
+  lineHeight: 1.125,
+  letterSpacing: px(0.16),
+};
+
+// Body styles
+export const bodyCompact01 = bodyShort01;
+export const bodyCompact02 = bodyShort02;
+export const body01 = bodyLong01;
+export const body02 = bodyLong02;
+
+// Fixed heading styles
+// heading-01 and heading-02 already exist
+export const headingCompact01 = productiveHeading01;
+export const headingCompact02 = productiveHeading02;
+export const heading03 = productiveHeading03;
+export const heading04 = productiveHeading04;
+export const heading05 = productiveHeading05;
+export const heading06 = productiveHeading06;
+export const heading07 = productiveHeading07;
+
+// Fluid heading styles
+export const fluidHeading03 = expressiveHeading03;
+export const fluidHeading04 = expressiveHeading04;
+export const fluidHeading05 = expressiveHeading05;
+export const fluidHeading06 = expressiveHeading06;
+
+// Additional fluid styles
+export const fluidParagraph01 = expressiveParagraph01;
+export const fluidQuotation01 = quotation01;
+export const fluidQuotation02 = quotation02;
+export const fluidDisplay01 = display01;
+export const fluidDisplay02 = display02;
+export const fluidDisplay03 = display03;
+export const fluidDisplay04 = display04;
