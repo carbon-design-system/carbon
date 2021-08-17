@@ -21,7 +21,6 @@ const Dialog = React.forwardRef(function Dialog(props, forwardRef) {
     'aria-labelledby': labelledBy,
     children,
     onDismiss,
-    open = false,
     modal = true,
     ...rest
   } = props;
@@ -30,10 +29,6 @@ const Dialog = React.forwardRef(function Dialog(props, forwardRef) {
   const savedOnDismiss = useSavedCallback(onDismiss);
 
   function onKeyDown(event) {
-    if (!open) {
-      return;
-    }
-
     if (match(event, keys.Escape)) {
       event.stopPropagation();
       savedOnDismiss();
@@ -41,72 +36,77 @@ const Dialog = React.forwardRef(function Dialog(props, forwardRef) {
   }
 
   useEffect(() => {
-    if (open) {
-      //
+    const changes = [];
+    const queue = Array.from(document.body.childNodes);
+
+    while (queue.length !== 0) {
+      const node = queue.shift();
+
+      // If a node is the modal (dialogRef), do nothing
+      if (node === dialogRef.current) {
+        continue;
+      }
+
+      // If a tree contains our `dialogRef`, traverse its children
+      if (node.contains(dialogRef.current)) {
+        queue.push(...Array.from(node.childNodes));
+        continue;
+      }
+
+      // If a node is a bumper, do nothing
+      if (
+        node.hasAttribute('data-dialog-bumper') &&
+        (dialogRef.current.previousSibling === node ||
+          dialogRef.current.nextSibling === node)
+      ) {
+        continue;
+      }
+
+      if (node.hasAttribute('aria-hidden') || node.hasAttribute('inert')) {
+        continue;
+      }
+
+      // what is aria-hidden === 'false'
+
+      // Otherwise, set it to inert and set aria-hidden to true
+      node.setAttribute('aria-hidden', 'true');
+      node.setAttribute('inert', '');
+
+      changes.push(node);
     }
-  }, [open]);
 
-  if (open) {
-    return (
-      <Portal
-        style={{
-          position: 'fixed',
-          top: 0,
-          right: 0,
-          bottom: 0,
-          left: 0,
-          zIndex: 9998,
-        }}>
-        <FullPage />
-        <FocusScope
-          {...rest}
-          aria-labelledby={labelledBy}
-          aria-modal="true"
-          initialFocusRef={dialogRef}
-          onKeyDown={onKeyDown}
-          ref={ref}
-          role="dialog"
-          tabIndex="-1"
-          style={{
-            position: 'relative',
-            zIndex: 9999,
-            background: 'white',
-            padding: '1rem',
-          }}>
-          {children}
-        </FocusScope>
-      </Portal>
-    );
-  }
+    return () => {
+      changes.forEach((node) => {
+        node.removeAttribute('inert');
+        // This mutation needs to be asynchronous to allow the polyfill time to
+        // observe the change and allow mutations to occur
+        // https://github.com/WICG/inert#performance-and-gotchas
+        setTimeout(() => {
+          node.removeAttribute('aria-hidden');
+        }, 0);
+      });
+    };
+  }, []);
 
-  return null;
+  return (
+    <FocusScope
+      {...rest}
+      aria-labelledby={labelledBy}
+      aria-modal="true"
+      initialFocusRef={dialogRef}
+      onKeyDown={onKeyDown}
+      ref={ref}
+      role="dialog"
+      tabIndex="-1">
+      {children}
+    </FocusScope>
+  );
 });
 
 Dialog.propTypes = {};
 
 if (__DEV__) {
   Dialog.displayName = 'Dialog';
-}
-
-function Portal({ children, ...rest }) {
-  return <div {...rest}>{children}</div>;
-}
-
-function FullPage(props) {
-  return (
-    <div
-      style={{
-        position: 'absolute',
-        top: 0,
-        left: 0,
-        bottom: 0,
-        right: 0,
-        transform: 'translateZ(0)',
-        background: 'rgba(0, 0, 0, 0.5)',
-      }}
-      {...props}
-    />
-  );
 }
 
 export { Dialog };

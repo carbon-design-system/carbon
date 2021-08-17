@@ -6,8 +6,10 @@
  */
 
 import * as React from 'react';
+import ReactDOM from 'react-dom';
 import { FocusScope } from './FocusScope';
 import { Dialog } from '../Dialog';
+import { useId } from '../../internal/useId';
 
 export default {
   title: 'Experimental/unstable_Dialog',
@@ -67,11 +69,14 @@ export const Default = () => {
 export const DialogExample = () => {
   function Example() {
     const [open, setOpen] = React.useState(false);
+    const id = useId();
     return (
-      <>
+      <div>
         <div>
           <button>First</button>
         </div>
+
+        {/* trigger */}
         <button
           type="button"
           onClick={() => {
@@ -79,26 +84,91 @@ export const DialogExample = () => {
           }}>
           Open
         </button>
-        <Dialog
-          open={open}
-          onDismiss={() => {
-            setOpen(false);
-          }}>
-          <h1>Hello</h1>
-          <button
-            type="button"
-            onClick={() => {
-              setOpen(false);
+
+        {open ? (
+          <Portal
+            style={{
+              position: 'fixed',
+              top: 0,
+              right: 0,
+              bottom: 0,
+              left: 0,
+              zIndex: 9998,
             }}>
-            Close
-          </button>
-        </Dialog>
+            {/* full screen background */}
+            <FullPage
+              onClick={() => {
+                setOpen(false);
+              }}
+            />
+
+            {/* dialog */}
+            <Dialog
+              aria-labelledby={id}
+              onDismiss={() => {
+                setOpen(false);
+              }}
+              style={{
+                position: 'relative',
+                zIndex: 9999,
+                padding: '1rem',
+                background: 'white',
+              }}>
+              <div>
+                <span id={id}>Hello</span>
+              </div>
+              <div>
+                <Example />
+              </div>
+              <button
+                type="button"
+                onClick={() => {
+                  setOpen(false);
+                }}>
+                Close
+              </button>
+            </Dialog>
+          </Portal>
+        ) : null}
+
         <div>
           <button>Last</button>
         </div>
-      </>
+      </div>
     );
   }
 
   return <Example />;
 };
+
+function FullPage(props) {
+  return (
+    <div
+      style={{
+        position: 'absolute',
+        top: 0,
+        left: 0,
+        bottom: 0,
+        right: 0,
+        transform: 'translateZ(0)',
+        background: 'rgba(0, 0, 0, 0.5)',
+      }}
+      {...props}
+    />
+  );
+}
+
+function Portal({ children }) {
+  const [mountNode, setMountNode] = React.useState(null);
+
+  React.useEffect(() => {
+    // TODO: should this be configurable????
+    setMountNode(document.body);
+  }, []);
+
+  if (mountNode) {
+    return ReactDOM.createPortal(children, mountNode);
+  }
+
+  return null;
+}

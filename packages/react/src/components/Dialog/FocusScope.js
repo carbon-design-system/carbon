@@ -87,7 +87,9 @@ function useRestoreFocus(container) {
       element.removeEventListener('focusout', onFocusOut);
 
       if (containsFocus.current === true) {
-        focus(initialActiveElement);
+        setTimeout(() => {
+          focus(initialActiveElement);
+        }, 0);
       }
     };
   }, []);
@@ -141,6 +143,7 @@ const FocusScope = React.forwardRef(function FocusScope(props, forwardRef) {
   return (
     <>
       <span
+        data-dialog-bumper=""
         tabIndex="0"
         style={{
           outline: 'none',
@@ -156,6 +159,7 @@ const FocusScope = React.forwardRef(function FocusScope(props, forwardRef) {
         {children}
       </BaseComponent>
       <span
+        data-dialog-bumper=""
         tabIndex="0"
         style={{
           outline: 'none',
