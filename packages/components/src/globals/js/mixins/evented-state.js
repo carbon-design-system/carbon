@@ -23,7 +23,7 @@ export default function (ToMix) {
      */
     _changeState() {
       throw new Error(
-        '_changeState() should be overriden to perform actual change in state.'
+        '_changeState() should be overridden to perform actual change in state.'
       );
     }
 
