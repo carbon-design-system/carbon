@@ -75,6 +75,10 @@
     background: $field-02;
   }
 
+  .#{$prefix}--search--light .#{$prefix}--search-close::before {
+    background: $field-02;
+  }
+
   // Small styles
   .#{$prefix}--search--sm .#{$prefix}--search-input,
   .#{$prefix}--search--sm.#{$prefix}--search--expandable.#{$prefix}--search--expanded
