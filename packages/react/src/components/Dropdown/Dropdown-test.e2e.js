@@ -9,13 +9,7 @@ import 'carbon-components/scss/components/dropdown/_dropdown.scss';
 
 import React from 'react';
 import { mount } from '@cypress/react';
-import {
-  assertMenuOpen,
-  assertMenuClosed,
-  openMenu,
-  generateItems,
-  generateGenericItem,
-} from '../ListBox/test-helpers';
+import { generateItems, generateGenericItem } from '../ListBox/test-helpers';
 import Dropdown from '../Dropdown';
 import DropdownSkeleton from '../Dropdown/Dropdown.Skeleton';
 
@@ -23,47 +17,54 @@ describe('Dropdown', () => {
   beforeEach(() => {
     const items = generateItems(5, generateGenericItem);
     const label = 'Dropdown menu options';
-    console.log('items:');
-    console.log(items);
+    const style = { marginBottom: '1rem' };
     mount(
       <>
-        <Dropdown items={items} label={label} />
-        <Dropdown items={items} label={label} size="sm" />
-        <Dropdown items={items} label={label} size="md" />
-        <Dropdown items={items} label={label} size="lg" />
-        <Dropdown items={items} label={label} size="xl" />
-        <Dropdown items={items} label={label} disabled />
         <Dropdown
+          style={{ marginBottom: '14rem' }}
+          items={items}
+          label={label}
+        />
+        <Dropdown style={style} items={items} label={label} size="sm" />
+        <Dropdown style={style} items={items} label={label} size="md" />
+        <Dropdown style={style} items={items} label={label} size="lg" />
+        <Dropdown style={style} items={items} label={label} size="xl" />
+        <Dropdown style={style} items={items} label={label} disabled />
+        <Dropdown
+          style={style}
           items={items}
           label={label}
           helperText="This is helper text"
         />
-        <Dropdown items={items} label={label} warn />
+        <Dropdown style={style} items={items} label={label} warn />
         <Dropdown
+          style={style}
           items={items}
           label={label}
           warn
           warnText="This is warn text"
         />
         <Dropdown
+          style={style}
           items={items}
           label={label}
           invalid
           invalidText="This is invalid text"
         />
-        <Dropdown items={items} label={label} light />
+        <Dropdown style={style} items={items} label={label} light />
         <Dropdown
+          style={style}
           items={items}
           label={label}
           light
           invalid
           invalidText="This is invalid text"
         />
-        <Dropdown items={items} label={label} type="inline" />
-        <DropdownSkeleton size="sm" />
-        <DropdownSkeleton size="md" />
-        <DropdownSkeleton size="lg" />
-        <DropdownSkeleton size="xl" />
+        <Dropdown style={style} items={items} label={label} type="inline" />
+        <DropdownSkeleton style={style} size="sm" />
+        <DropdownSkeleton style={style} size="md" />
+        <DropdownSkeleton style={style} size="lg" />
+        <DropdownSkeleton style={style} size="xl" />
       </>
     );
   });
@@ -85,7 +86,12 @@ describe('Dropdown', () => {
       .first()
       .click();
 
-    // todo ensure listbox is open and visible
+    cy.findAllByText(/Item 0/)
+      .first()
+      .should('be.visible');
+    cy.findAllByText(/Item 4/)
+      .first()
+      .should('be.visible');
 
     // snapshots should always be taken _after_ an assertion that
     // a element/component should be visible. This is to ensure
