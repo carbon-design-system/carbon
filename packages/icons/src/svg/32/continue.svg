@@ -6,7 +6,7 @@
       }
     </style>
   </defs>
-  <path d="M25,19V15a2.0023,2.0023,0,0,0-2-2H19a2.0023,2.0023,0,0,0-2,2v6a2.0077,2.0077,0,0,0,2,2h5V21H19V19Zm-6-4h4v2H19Z"/>
-  <polygon points="15 11 15 9 7 9 7 23 15 23 15 21 9 21 9 17 14 17 14 15 9 15 9 11 15 11"/>
+  <path d="M10,28a1,1,0,0,1-1-1V5a1,1,0,0,1,1.501-.8652l19,11a1,1,0,0,1,0,1.73l-19,11A.9975.9975,0,0,1,10,28ZM11,6.7344V25.2656L27,16Z"/>
+  <rect x="4" y="4" width="2" height="24"/>
   <rect id="_Transparent_Rectangle_" data-name="&lt;Transparent Rectangle&gt;" class="cls-1" width="32" height="32"/>
 </svg>
