@@ -9,6 +9,7 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import classNames from 'classnames';
 import { settings } from 'carbon-components';
+import { Text } from '../Text';
 import { composeEventHandlers } from '../../tools/events';
 import { getNextIndex, matches, keys } from '../../internal/keyboard';
 import deprecate from '../../prop-types/deprecate';
@@ -115,7 +116,7 @@ export default class ContentSwitcher extends React.Component {
               ...data,
               index: this.state.selectedIndex,
               name: child.props.name,
-              text: child.props.text,
+              text: <Text>child.props.text</Text>,
             });
           }
         );
