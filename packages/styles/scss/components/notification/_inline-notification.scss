@@ -197,7 +197,7 @@
     padding: rem(15px) 0;
   }
 
-  @if enabled('enable-v11-release') {
+  @if feature-flag-enabled('enable-v11-release') {
     .#{$prefix}--inline-notification__content {
       @include type-style('body-short-01');
 

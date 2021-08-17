@@ -6,17 +6,15 @@
  */
 
 import {
+  ActionableNotification,
   ToastNotification,
   InlineNotification,
-  NotificationActionButton,
+  unstable_FeatureFlags as FeatureFlags,
 } from 'carbon-components-react';
 import React from 'react';
 
 const notificationProps = () => ({
-  kind: 'info',
-  role: 'alert',
-  title: 'Notification title',
-  subtitle: 'Subtitle text goes here.',
+  // content: 'Notification content',
 });
 
 const toastNotificationProps = () => ({
@@ -25,21 +23,53 @@ const toastNotificationProps = () => ({
 
 export default {
   title: 'Components/Notifications',
+  decorators: [
+    (Story) => (
+      <FeatureFlags flags={{ 'enable-v11-release': true }}>
+        <Story />
+      </FeatureFlags>
+    ),
+  ],
 };
 
 export const Toast = () => (
-  <ToastNotification
-    {...toastNotificationProps()}
-    caption={('Caption (caption)', '00:00:00 AM')}
-    style={{ marginBottom: '.5rem' }}
-  />
+  <>
+    <ToastNotification {...toastNotificationProps()}>
+      Notification content
+    </ToastNotification>
+    <ToastNotification lowContrast {...toastNotificationProps()}>
+      Notification content
+    </ToastNotification>
+  </>
 );
 
 export const Inline = () => (
-  <InlineNotification
-    {...notificationProps()}
-    actions={<NotificationActionButton>{'Action'}</NotificationActionButton>}
-  />
+  <>
+    <InlineNotification {...notificationProps()}>
+      Notification content
+    </InlineNotification>
+    <InlineNotification lowContrast {...notificationProps()}>
+      Notification content
+    </InlineNotification>
+  </>
 );
 
-Inline.storyName = 'Inline';
+export const Actionable = () => (
+  <>
+    <ActionableNotification actionButtonLabel="Action">
+      Notification content
+    </ActionableNotification>
+
+    <ActionableNotification inline actionButtonLabel="Action">
+      Notification content (inline)
+    </ActionableNotification>
+
+    <ActionableNotification lowContrast actionButtonLabel="Action">
+      Notification content
+    </ActionableNotification>
+
+    <ActionableNotification lowContrast inline actionButtonLabel="Action">
+      Notification content (inline)
+    </ActionableNotification>
+  </>
+);
