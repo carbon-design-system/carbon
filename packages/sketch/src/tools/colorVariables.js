@@ -20,9 +20,14 @@ import { Swatch } from 'sketch/dom';
 export function syncColorVariable({ document, name, color }) {
   // check existing color variables
   const documentColorVariables = document.swatches;
-  const colorVariable = documentColorVariables.find(
-    (swatch) => swatch.name === name
-  );
+  const colorVariable = documentColorVariables.find((swatch) => {
+    //todo clean this up yuck
+    const rootSwatchName = swatch.name.split('/')[
+      swatch.name.split('/').length - 1
+    ];
+    const rootName = name.split('/')[name.split('/').length - 1];
+    return rootSwatchName === rootName;
+  });
 
   // generate new Swatch
   const generatedSwatch = Swatch.from({

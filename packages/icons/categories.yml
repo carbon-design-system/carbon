@@ -4,8 +4,12 @@ categories:
       - name: Controls
         members:
           - center-to-fit
+          - continue
+          - continue--filled
           - dashboard
           - dashboard--reference
+          - fit-to-height
+          - fit-to-width
           - fit-to-screen
           - forward--10
           - forward--30
@@ -39,8 +43,10 @@ categories:
           - rewind--30
           - rewind--5
           - settings
-          - settings--check
           - settings--adjust
+          - settings--check
+          - settings--services
+          - settings--view
           - shrink-screen
           - shrink-screen--filled
           - skip--back
@@ -90,6 +96,7 @@ categories:
           - align--vertical-center
           - align--vertical-top
           - attachment
+          - asterisk
           - border--bottom
           - border--full
           - border--left
@@ -124,9 +131,13 @@ categories:
           - erase
           - eyedropper
           - gradient
+          - group-objects
+          - group-objects--new
+          - group-objects--save
           - image
           - image--copy
           - image--reference
+          - label
           - language
           - lasso
           - lasso--polygon
@@ -139,6 +150,8 @@ categories:
           - magic-wand--filled
           - no-image
           - opacity
+          - page-break
+          - page-number
           - paint-brush
           - paint-brush--alt
           - page-break
@@ -205,6 +218,7 @@ categories:
           - text--vertical-alignment
           - text--wrap
           - trash-can
+          - ungroup-objects
           - unlink
       - name: Navigation
         members:
@@ -280,6 +294,7 @@ categories:
           - chevron--sort--down
           - chevron--sort--up
           - choices
+          - choose-item
           - circle-dash
           - clean
           - collapse-all
@@ -314,9 +329,11 @@ categories:
           - fork
           - function-math
           - image--search
+          - image--search--alt
           - insert
           - insert--page
           - insert-syntax
+          - inspection
           - intersect
           - jump-link
           - launch
@@ -364,6 +381,7 @@ categories:
           - run
           - save--model
           - scan
+          - scan--alt
           - scan--disabled
           - search
           - search--locate
@@ -382,6 +400,7 @@ categories:
           - translate
           - transpose
           - undo
+          - update-now
           - upgrade
           - view-next
           - workspace--import
@@ -518,6 +537,14 @@ categories:
           - cloud-satellite
           - cloud-services
           - content-delivery-network
+          - database--datastax
+          - database--elastic
+          - database--enterprise-db2
+          - database--etcd
+          - database--mongodb
+          - database--postgreSQL
+          - database--rabbit
+          - database--redis
           - direct-link
           - dns-services
           - flow-logs-vpc
@@ -525,6 +552,12 @@ categories:
           - ibm-cloud--internet-services
           - ibm-cloud--subnets
           - ibm-cloud--vpc-endpoints
+          - ibm-cloud-pak--applications
+          - ibm-cloud-pak--data
+          - ibm-cloud-pak--integration
+          - ibm-cloud-pak--multicloud-mgmt
+          - ibm-cloud-pak--security
+          - ibm-cloud-pak--system
           - ibm-security--services
           - infrastructure--classic
           - load-balancer--vpc
@@ -629,6 +662,8 @@ categories:
           - chemistry--reference
           - circle-measurement
           - cobb-angle
+          - contour--draw
+          - contour--edit
           - contour-finding
           - coronavirus
           - cross-reference
@@ -697,6 +732,7 @@ categories:
           - text-annotation-toggle
           - window--auto
           - window--base
+          - window--black-saturation
           - window--overlay
           - window--preset
           - zoom-pan
@@ -862,6 +898,8 @@ categories:
           - column-dependency
           - concept
           - container-software
+          - cost
+          - cost--total
           - covariate
           - cross-tab
           - data--1
@@ -877,6 +915,7 @@ categories:
           - data--structured
           - data--unstructured
           - data--view
+          - data--view--alt
           - data-bin
           - data-class
           - data-collection
@@ -953,6 +992,7 @@ categories:
           - scatter-matrix
           - schematics
           - share-knowledge
+          - show-data--cards
           - skill-level
           - skill-level--advanced
           - skill-level--basic
@@ -1025,6 +1065,7 @@ categories:
           - document--audio
           - document--blank
           - document--download
+          - document--epdf
           - document--export
           - document--import
           - document--pdf
@@ -1078,6 +1119,7 @@ categories:
           - license--third-party-draft
           - list--dropdown
           - media--library
+          - media--library--filled
           - model
           - model--alt
           - model--reference
@@ -1123,6 +1165,14 @@ categories:
           - SVG
           - table-of-contents
           - task
+          - task--add
+          - task--approved
+          - task--asset-view
+          - task--complete
+          - task--location
+          - task--settings
+          - task--star
+          - task--tools
           - task--view
           - template
           - ticket
@@ -1182,6 +1232,7 @@ categories:
           - incomplete--error
           - incomplete--warning
           - information
+          - information--disabled
           - information--filled
           - information--square
           - information--square--filled
@@ -1213,11 +1264,18 @@ categories:
           - application--web
           - autoscaling
           - bare-metal-server
+          - bare-metal-server--01
+          - bare-metal-server--02
           - bastion-host
           - block-storage
           - block-storage--alt
+          - box--extra-large
+          - box--large
+          - box--medium
+          - box--small
           - chat--operational
           - code-signing-service
+          - communication--unified
           - container-registry
           - container-services
           - data--center
@@ -1225,7 +1283,17 @@ categories:
           - data-backup
           - data-blob
           - data-diode
+          - deployment-unit--data
+          - deployment-unit--execution
+          - deployment-unit--installation
+          - deployment-unit--presentation
+          - deployment-unit--technical--data
+          - deployment-unit--technical--execution
+          - deployment-unit--technical--installation
+          - deployment-unit--technical--presentation
+          - directory-domain
           - edge-node--alt
+          - encryption
           - file-storage
           - firewall
           - firewall--classic
@@ -1263,10 +1331,15 @@ categories:
           - load-balancer--pool
           - message-queue
           - mobility--services
+          - network--admin-control
           - network--enterprise
           - network--overlay
           - network--public
           - object-storage--alt
+          - pcn--e-node
+          - pcn--military
+          - pcn--p-node
+          - pcn--z-node
           - point-of-presence
           - router
           - router--voice
@@ -1275,6 +1348,7 @@ categories:
           - server--dns
           - server--proxy
           - server--time
+          - session-border-control
           - slisor
           - subnet-acl-rules
           - switch-layer-2
@@ -1286,6 +1360,9 @@ categories:
           - vehicle--services
           - virtual-desktop
           - vlan
+          - volume--block-storage
+          - volume--file-storage
+          - volume--object-storage
           - vpn--connection
           - vpn--policy
           - wifi-bridge
@@ -1409,6 +1486,7 @@ categories:
           - baggage-claim
           - bar
           - bicycle
+          - boot
           - bus
           - cabin-care
           - cabin-care--alert
@@ -1492,11 +1570,15 @@ categories:
           - location--heart--filled
           - location--person
           - location--person--filled
+          - location--save
           - location--star
           - location--star--filled
           - map
+          - map--center
+          - map--identify
           - map-boundary
           - milestone
+          - military-camp
           - monument
           - mountain
           - navaid--civil
@@ -1535,6 +1617,7 @@ categories:
           - stop-sign
           - stop-sign--filled
           - swim
+          - tank
           - taxi
           - theater
           - traffic--event
@@ -1584,6 +1667,7 @@ categories:
           - forecast--hail-30
           - forecast--lightning
           - forecast--lightning-30
+          - ice--accretion
           - hail
           - haze
           - haze--night
@@ -1692,8 +1776,13 @@ categories:
     subcategories:
       - name: Technology
         members:
+          - airplay
+          - airplay--filled
           - aperture
           - asset
+          - asset--confirm
+          - asset--digital-twin
+          - asset--view
           - at
           - audio-console
           - augmented-reality
@@ -1720,6 +1809,7 @@ categories:
           - chat-bot
           - chip
           - cloud--download
+          - cloud--offline
           - cloud--upload
           - code
           - code--hide
@@ -1771,6 +1861,7 @@ categories:
           - machine-learning-model
           - mail--all
           - mail--reply
+          - media-cast
           - mobile
           - mobile--add
           - mobile--audio
@@ -1826,6 +1917,7 @@ categories:
           - stamp
           - stethoscope
           - tool-box
+          - tool-kit
           - tools
           - tools--alt
           - umbrella
