@@ -291,7 +291,7 @@ export const Playground = () => {
 
 export const Playground2 = () => {
   const regularProps = props.regular();
-  const iconOnly = props.iconOnly();
+  // const iconOnly = props.iconOnly();
   // const { stacked, ...buttonProps } = props.set();
   return (
     <>
@@ -301,13 +301,13 @@ export const Playground2 = () => {
           alignItems: 'center',
           flexWrap: 'wrap',
         }}>
-        <Button {...regularProps}>Buttons</Button>
+        <Button>Buttons</Button>
         &nbsp;
         {!regularProps.kind.includes('danger') && (
           <>
-            <Button hasIconOnly {...iconOnly}></Button>
+            <Button hasIconOnly></Button>
             &nbsp;
-            <Button hasIconOnly {...iconOnly} kind="ghost"></Button>
+            <Button hasIconOnly kind="ghost"></Button>
           </>
         )}
       </div>
