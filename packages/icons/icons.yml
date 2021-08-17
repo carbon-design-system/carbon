@@ -516,6 +516,16 @@
     - attendant
   sizes:
     - 32
+- name: airplay
+  friendly_name: airplay
+  aliases: []
+  sizes:
+    - 32
+- name: airplay--filled
+  friendly_name: airplay--filled
+  aliases: []
+  sizes:
+    - 32
 - name: airport--01
   friendly_name: Airport 01
   aliases:
@@ -1193,6 +1203,26 @@
     - benefit
   sizes:
     - 32
+- name: asset--confirm
+  friendly_name: asset--confirm
+  aliases: []
+  sizes:
+    - 32
+- name: asset--digital-twin
+  friendly_name: asset--digital-twin
+  aliases: []
+  sizes:
+    - 32
+- name: asset--view
+  friendly_name: asset--view
+  aliases: []
+  sizes:
+    - 32
+- name: asterisk
+  friendly_name: asterisk
+  aliases: []
+  sizes:
+    - 32
 - name: at
   friendly_name: At
   aliases:
@@ -1338,6 +1368,16 @@
     - 32
 - name: bare-metal-server
   friendly_name: bare-metal-server
+  aliases: []
+  sizes:
+    - 32
+- name: bare-metal-server--01
+  friendly_name: bare-metal-server--01
+  aliases: []
+  sizes:
+    - 32
+- name: bare-metal-server--02
+  friendly_name: bare-metal-server--02
   aliases: []
   sizes:
     - 32
@@ -1613,6 +1653,11 @@
     - data
   sizes:
     - 32
+- name: boot
+  friendly_name: boot
+  aliases: []
+  sizes:
+    - 32
 - name: border--bottom
   friendly_name: Border bottom
   aliases:
@@ -1678,6 +1723,26 @@
     - instruments
     - box
     - file box
+  sizes:
+    - 32
+- name: box--extra-large
+  friendly_name: box--extra-large
+  aliases: []
+  sizes:
+    - 32
+- name: box--large
+  friendly_name: box--large
+  aliases: []
+  sizes:
+    - 32
+- name: box--medium
+  friendly_name: box--medium
+  aliases: []
+  sizes:
+    - 32
+- name: box--small
+  friendly_name: box--small
+  aliases: []
   sizes:
     - 32
 - name: box-plot
@@ -2300,6 +2365,25 @@
     - list
     - category new each
     - each new category
+- name: caution
+  friendly_name: Caution
+  aliases:
+    - caution
+    - warning
+    - triangle
+    - filled
+  sizes:
+    - glyph
+- name: caution-inverted
+  friendly_name: Caution inverted
+  aliases:
+    - caution
+    - warning
+    - inverted
+    - triangle
+    - filled
+  sizes:
+    - glyph
 - name: ccX
   friendly_name: ccX
   aliases:
@@ -3408,6 +3492,11 @@
     - variety
   sizes:
     - 32
+- name: choose-item
+  friendly_name: choose-item
+  aliases: []
+  sizes:
+    - 32
 - name: choropleth-map
   friendly_name: Chart choropleth-map
   aliases:
@@ -3436,6 +3525,15 @@
     - data
   sizes:
     - 32
+- name: circle-fill
+  friendly_name: Circle fill
+  aliases:
+    - circle
+    - filled
+    - solid
+    - round
+  sizes:
+    - glyph
 - name: circle-measurement
   friendly_name: Circle measurement
   aliases:
@@ -3452,6 +3550,15 @@
     - data
   sizes:
     - 32
+- name: circle-stroke
+  friendly_name: Circle stroke
+  aliases:
+    - stroke
+    - circle
+    - round
+    - outlined
+  sizes:
+    - glyph
 - name: circuit-composer
   friendly_name: Circuit composer
   aliases:
@@ -3593,6 +3700,11 @@
     - 32
 - name: cloud--monitoring
   friendly_name: cloud--monitoring
+  aliases: []
+  sizes:
+    - 32
+- name: cloud--offline
+  friendly_name: cloud--offline
   aliases: []
   sizes:
     - 32
@@ -3843,6 +3955,11 @@
     - operation
   sizes:
     - 32
+- name: communication--unified
+  friendly_name: communication--unified
+  aliases: []
+  sizes:
+    - 32
 - name: compare
   friendly_name: Compare
   aliases:
@@ -4025,6 +4142,26 @@
     - file
   sizes:
     - 32
+- name: continue
+  friendly_name: continue
+  aliases: []
+  sizes:
+    - 32
+- name: continue--filled
+  friendly_name: continue--filled
+  aliases: []
+  sizes:
+    - 32
+- name: contour--draw
+  friendly_name: contour--draw
+  aliases: []
+  sizes:
+    - 32
+- name: contour--edit
+  friendly_name: contour--edit
+  aliases: []
+  sizes:
+    - 32
 - name: contour-finding
   friendly_name: Contour finding
   aliases:
@@ -4106,6 +4243,16 @@
     - virus
   sizes:
     - 32
+- name: cost
+  friendly_name: cost
+  aliases: []
+  sizes:
+    - 32
+- name: cost--total
+  friendly_name: cost--total
+  aliases: []
+  sizes:
+    - 32
 - name: cough
   friendly_name: Cough
   aliases:
@@ -4138,6 +4285,15 @@
     - indentification
   sizes:
     - 32
+- name: critical
+  friendly_name: Critical
+  aliases:
+    - critical
+    - warning
+    - caution
+    - slash
+  sizes:
+    - glyph
 - name: critical-severity
   friendly_name: critical-severity
   aliases: []
@@ -4610,6 +4766,11 @@
     - view
   sizes:
     - 32
+- name: data--view--alt
+  friendly_name: data--view--alt
+  aliases: []
+  sizes:
+    - 32
 - name: data-accessor
   friendly_name: data-accessor
   aliases: []
@@ -4766,6 +4927,46 @@
     - metrics
     - stats
     - web
+- name: database--datastax
+  friendly_name: database--datastax
+  aliases: []
+  sizes:
+    - 32
+- name: database--elastic
+  friendly_name: database--elastic
+  aliases: []
+  sizes:
+    - 32
+- name: database--enterprise-db2
+  friendly_name: database--enterprise-db2
+  aliases: []
+  sizes:
+    - 32
+- name: database--etcd
+  friendly_name: database--etcd
+  aliases: []
+  sizes:
+    - 32
+- name: database--mongodb
+  friendly_name: database--mongodb
+  aliases: []
+  sizes:
+    - 32
+- name: database--postgreSQL
+  friendly_name: database--postgreSQL
+  aliases: []
+  sizes:
+    - 32
+- name: database--rabbit
+  friendly_name: database--rabbit
+  aliases: []
+  sizes:
+    - 32
+- name: database--redis
+  friendly_name: database--redis
+  aliases: []
+  sizes:
+    - 32
 - name: datastore
   friendly_name: Data store
   aliases:
@@ -4897,6 +5098,46 @@
   aliases:
     - deployment
     - policy
+  sizes:
+    - 32
+- name: deployment-unit--data
+  friendly_name: deployment-unit--data
+  aliases: []
+  sizes:
+    - 32
+- name: deployment-unit--execution
+  friendly_name: deployment-unit--execution
+  aliases: []
+  sizes:
+    - 32
+- name: deployment-unit--installation
+  friendly_name: deployment-unit--installation
+  aliases: []
+  sizes:
+    - 32
+- name: deployment-unit--presentation
+  friendly_name: deployment-unit--presentation
+  aliases: []
+  sizes:
+    - 32
+- name: deployment-unit--technical--data
+  friendly_name: deployment-unit--technical--data
+  aliases: []
+  sizes:
+    - 32
+- name: deployment-unit--technical--execution
+  friendly_name: deployment-unit--technical--execution
+  aliases: []
+  sizes:
+    - 32
+- name: deployment-unit--technical--installation
+  friendly_name: deployment-unit--technical--installation
+  aliases: []
+  sizes:
+    - 32
+- name: deployment-unit--technical--presentation
+  friendly_name: deployment-unit--technical--presentation
+  aliases: []
   sizes:
     - 32
 - name: desk--adjustable
@@ -5248,6 +5489,11 @@
     - U-turn
   sizes:
     - 32
+- name: directory-domain
+  friendly_name: directory-domain
+  aliases: []
+  sizes:
+    - 32
 - name: distribute--horizontal-center
   friendly_name: Distribute horizontal center
   sizes:
@@ -5367,6 +5613,11 @@
     - file
     - doc
     - paper
+  sizes:
+    - 32
+- name: document--epdf
+  friendly_name: document--epdf
+  aliases: []
   sizes:
     - 32
 - name: document--export
@@ -5910,6 +6161,11 @@
     - email new
     - new email
     - mail
+  sizes:
+    - 32
+- name: encryption
+  friendly_name: encryption
+  aliases: []
   sizes:
     - 32
 - name: energy--renewable
@@ -6505,12 +6761,22 @@
     - fish multiple
     - school
     - school of fish
+- name: fit-to-height
+  friendly_name: fit-to-height
+  aliases: []
+  sizes:
+    - 32
 - name: fit-to-screen
   friendly_name: Fit to screen
   aliases:
     - fit to screen
     - full screen
     - enlarge screen
+  sizes:
+    - 32
+- name: fit-to-width
+  friendly_name: fit-to-width
+  aliases: []
   sizes:
     - 32
 - name: flag
@@ -7154,27 +7420,8 @@
     - filled
   sizes:
     - glyph
-- name: caution
-  friendly_name: Caution
-  aliases:
-    - caution
-    - warning
-    - triangle
-    - filled
-  sizes:
-    - glyph
 - name: glyph--caution-inverted
   friendly_name: Glyph caution inverted
-  aliases:
-    - caution
-    - warning
-    - inverted
-    - triangle
-    - filled
-  sizes:
-    - glyph
-- name: caution-inverted
-  friendly_name: Caution inverted
   aliases:
     - caution
     - warning
@@ -7192,15 +7439,6 @@
     - round
   sizes:
     - glyph
-- name: circle-fill
-  friendly_name: Circle fill
-  aliases:
-    - circle
-    - filled
-    - solid
-    - round
-  sizes:
-    - glyph
 - name: glyph--circle-stroke
   friendly_name: Glyph circle stroke
   aliases:
@@ -7210,26 +7448,8 @@
     - outlined
   sizes:
     - glyph
-- name: circle-stroke
-  friendly_name: Circle stroke
-  aliases:
-    - stroke
-    - circle
-    - round
-    - outlined
-  sizes:
-    - glyph
 - name: glyph--critical
   friendly_name: Glyph critical
-  aliases:
-    - critical
-    - warning
-    - caution
-    - slash
-  sizes:
-    - glyph
-- name: critical
-  friendly_name: Critical
   aliases:
     - critical
     - warning
@@ -7248,14 +7468,6 @@
     - glyph
 - name: glyph--square-fill
   friendly_name: Glyph square fill
-  aliases:
-    - square
-    - filled
-    - box
-  sizes:
-    - glyph
-- name: square-fill
-  friendly_name: Square fill
   aliases:
     - square
     - filled
@@ -7341,6 +7553,21 @@
     - 32
 - name: group--security
   friendly_name: group--security
+  aliases: []
+  sizes:
+    - 32
+- name: group-objects
+  friendly_name: group-objects
+  aliases: []
+  sizes:
+    - 32
+- name: group-objects--new
+  friendly_name: group-objects--new
+  aliases: []
+  sizes:
+    - 32
+- name: group-objects--save
+  friendly_name: group-objects--save
   aliases: []
   sizes:
     - 32
@@ -7799,6 +8026,36 @@
   aliases: []
   sizes:
     - 32
+- name: ibm-cloud-pak--applications
+  friendly_name: ibm-cloud-pak--applications
+  aliases: []
+  sizes:
+    - 32
+- name: ibm-cloud-pak--data
+  friendly_name: ibm-cloud-pak--data
+  aliases: []
+  sizes:
+    - 32
+- name: ibm-cloud-pak--integration
+  friendly_name: ibm-cloud-pak--integration
+  aliases: []
+  sizes:
+    - 32
+- name: ibm-cloud-pak--multicloud-mgmt
+  friendly_name: ibm-cloud-pak--multicloud-mgmt
+  aliases: []
+  sizes:
+    - 32
+- name: ibm-cloud-pak--security
+  friendly_name: ibm-cloud-pak--security
+  aliases: []
+  sizes:
+    - 32
+- name: ibm-cloud-pak--system
+  friendly_name: ibm-cloud-pak--system
+  aliases: []
+  sizes:
+    - 32
 - name: ibm-security
   friendly_name: IBM Security™
   aliases:
@@ -7962,6 +8219,11 @@
     - picture
   sizes:
     - 32
+- name: image--search--alt
+  friendly_name: image--search--alt
+  aliases: []
+  sizes:
+    - 32
 - name: image-service
   friendly_name: image-service
   aliases: []
@@ -8083,6 +8345,11 @@
   sizes:
     - 16
     - 32
+- name: information--disabled
+  friendly_name: information--disabled
+  aliases: []
+  sizes:
+    - 32
 - name: information--filled
   friendly_name: Information filled
   sizes:
@@ -8154,6 +8421,11 @@
   friendly_name: Insert syntax
   aliases:
     - insert syntax
+  sizes:
+    - 32
+- name: inspection
+  friendly_name: inspection
+  aliases: []
   sizes:
     - 32
 - name: instance--bx
@@ -8433,6 +8705,11 @@
     - 32
 - name: kubernetes
   friendly_name: kubernetes
+  aliases: []
+  sizes:
+    - 32
+- name: label
+  friendly_name: label
   aliases: []
   sizes:
     - 32
@@ -9177,6 +9454,11 @@
     - filled
   sizes:
     - 32
+- name: location--save
+  friendly_name: location--save
+  aliases: []
+  sizes:
+    - 32
 - name: location--star
   friendly_name: Location star
   aliases:
@@ -9764,6 +10046,16 @@
     - legend
   sizes:
     - 32
+- name: map--center
+  friendly_name: map--center
+  aliases: []
+  sizes:
+    - 32
+- name: map--identify
+  friendly_name: map--identify
+  aliases: []
+  sizes:
+    - 32
 - name: map-boundary
   friendly_name: Map boundary
   aliases:
@@ -9826,6 +10118,16 @@
     - file
     - repository
     - folder
+  sizes:
+    - 32
+- name: media--library--filled
+  friendly_name: media--library--filled
+  aliases: []
+  sizes:
+    - 32
+- name: media-cast
+  friendly_name: media-cast
+  aliases: []
   sizes:
     - 32
 - name: medication
@@ -10004,6 +10306,11 @@
     - marker
     - map
     - legend
+  sizes:
+    - 32
+- name: military-camp
+  friendly_name: military-camp
+  aliases: []
   sizes:
     - 32
 - name: minimize
@@ -10555,6 +10862,11 @@
   aliases:
     - network
     - data
+- name: network--admin-control
+  friendly_name: network--admin-control
+  aliases: []
+  sizes:
+    - 32
 - name: network--enterprise
   friendly_name: network--enterprise
   aliases: []
@@ -11511,6 +11823,26 @@
     - past
     - operations
     - controls
+  sizes:
+    - 32
+- name: pcn--e-node
+  friendly_name: pcn--e-node
+  aliases: []
+  sizes:
+    - 32
+- name: pcn--military
+  friendly_name: pcn--military
+  aliases: []
+  sizes:
+    - 32
+- name: pcn--p-node
+  friendly_name: pcn--p-node
+  aliases: []
+  sizes:
+    - 32
+- name: pcn--z-node
+  friendly_name: pcn--z-node
+  aliases: []
   sizes:
     - 32
 - name: PDF
@@ -13172,6 +13504,11 @@
     - qr
   sizes:
     - 32
+- name: scan--alt
+  friendly_name: scan--alt
+  aliases: []
+  sizes:
+    - 32
 - name: scan--disabled
   friendly_name: Scan disabled
   aliases:
@@ -13410,6 +13747,11 @@
     - front desk
   sizes:
     - 32
+- name: session-border-control
+  friendly_name: session-border-control
+  aliases: []
+  sizes:
+    - 32
 - name: settings
   friendly_name: Settings
   aliases:
@@ -13436,6 +13778,16 @@
     - settings
     - controls
     - check
+  sizes:
+    - 32
+- name: settings--services
+  friendly_name: settings--services
+  aliases: []
+  sizes:
+    - 32
+- name: settings--view
+  friendly_name: settings--view
+  aliases: []
   sizes:
     - 32
 - name: shape--except
@@ -13614,6 +13966,11 @@
     - purchase
     - store
     - retail
+- name: show-data--cards
+  friendly_name: show-data--cards
+  aliases: []
+  sizes:
+    - 32
 - name: shrink-screen
   friendly_name: Shrink screen
   aliases:
@@ -14177,6 +14534,14 @@
     - query
   sizes:
     - 32
+- name: square-fill
+  friendly_name: Square fill
+  aliases:
+    - square
+    - filled
+    - box
+  sizes:
+    - glyph
 - name: stack-limitation
   friendly_name: Stack limitation
   aliases:
@@ -14695,6 +15060,11 @@
     - sale
     - shop
     - marker
+- name: tank
+  friendly_name: tank
+  aliases: []
+  sizes:
+    - 32
 - name: task
   friendly_name: Task
   aliases:
@@ -14705,6 +15075,46 @@
     - to do list
     - list
     - chore
+  sizes:
+    - 32
+- name: task--add
+  friendly_name: task--add
+  aliases: []
+  sizes:
+    - 32
+- name: task--approved
+  friendly_name: task--approved
+  aliases: []
+  sizes:
+    - 32
+- name: task--asset-view
+  friendly_name: task--asset-view
+  aliases: []
+  sizes:
+    - 32
+- name: task--complete
+  friendly_name: task--complete
+  aliases: []
+  sizes:
+    - 32
+- name: task--location
+  friendly_name: task--location
+  aliases: []
+  sizes:
+    - 32
+- name: task--settings
+  friendly_name: task--settings
+  aliases: []
+  sizes:
+    - 32
+- name: task--star
+  friendly_name: task--star
+  aliases: []
+  sizes:
+    - 32
+- name: task--tools
+  friendly_name: task--tools
+  aliases: []
   sizes:
     - 32
 - name: task--view
@@ -15388,6 +15798,11 @@
     - container
   sizes:
     - 32
+- name: tool-kit
+  friendly_name: tool-kit
+  aliases: []
+  sizes:
+    - 32
 - name: tools
   friendly_name: Tools
   aliases:
@@ -15854,6 +16269,11 @@
     - 20
     - 24
     - 32
+- name: ungroup-objects
+  friendly_name: ungroup-objects
+  aliases: []
+  sizes:
+    - 32
 - name: unknown
   friendly_name: Unknown
   aliases:
@@ -15890,6 +16310,11 @@
     - page up
     - up chevron
     - up
+  sizes:
+    - 32
+- name: update-now
+  friendly_name: update-now
+  aliases: []
   sizes:
     - 32
 - name: upgrade
@@ -16474,6 +16899,11 @@
     - tape
   sizes:
     - 32
+- name: volume--block-storage
+  friendly_name: volume--block-storage
+  aliases: []
+  sizes:
+    - 32
 - name: volume--down
   friendly_name: Volume down
   sizes:
@@ -16508,6 +16938,11 @@
     - soft
   sizes:
     - 32
+- name: volume--file-storage
+  friendly_name: volume--file-storage
+  aliases: []
+  sizes:
+    - 32
 - name: volume--mute
   friendly_name: Volume mute
   sizes:
@@ -16522,6 +16957,11 @@
   aliases:
     - sound
     - noise
+- name: volume--object-storage
+  friendly_name: volume--object-storage
+  aliases: []
+  sizes:
+    - 32
 - name: volume--up
   friendly_name: Volume up
   sizes:
@@ -16889,6 +17329,11 @@
     - brightness
     - contrast
     - sun
+- name: window--black-saturation
+  friendly_name: window--black-saturation
+  aliases: []
+  sizes:
+    - 32
 - name: window--overlay
   friendly_name: Window overlay
   sizes:
