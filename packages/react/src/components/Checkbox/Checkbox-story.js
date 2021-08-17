@@ -35,7 +35,11 @@ export const checkbox = () => {
   return (
     <fieldset className={`${prefix}--fieldset`}>
       <legend className={`${prefix}--label`}>Checkbox heading</legend>
-      <Checkbox labelText={`Checkbox label`} id="checkbox-label-1" />
+      <Checkbox
+        className="some-class"
+        labelText={`Checkbox label`}
+        id="checkbox-label-1"
+      />
       <Checkbox labelText={`Checkbox label`} id="checkbox-label-2" />
     </fieldset>
   );

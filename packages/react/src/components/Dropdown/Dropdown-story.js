@@ -17,6 +17,7 @@ import {
 import Dropdown from '../Dropdown';
 import DropdownSkeleton from './Dropdown.Skeleton';
 import mdx from './Dropdown.mdx';
+import { FeatureFlags } from '../FeatureFlags';
 
 const items = [
   {
@@ -111,6 +112,7 @@ export default {
 export const Default = () => (
   <div style={{ width: 400 }}>
     <Dropdown
+      className="test"
       id="default"
       titleText="Dropdown label"
       helperText="This is some helper text"
@@ -119,6 +121,23 @@ export const Default = () => (
       itemToString={(item) => (item ? item.text : '')}
       onChange={action('onChange')}
     />
+  </div>
+);
+
+export const classNameUpdate = () => (
+  <div style={{ width: 400 }}>
+    <FeatureFlags flags={{ 'enable-v11-release': true }}>
+      <Dropdown
+        className="test"
+        id="default"
+        titleText="Dropdown label"
+        helperText="This is some helper text"
+        label="Dropdown menu options"
+        items={items}
+        itemToString={(item) => (item ? item.text : '')}
+        onChange={action('onChange')}
+      />
+    </FeatureFlags>
   </div>
 );
 
