@@ -59,7 +59,7 @@ Map {
       "open": Object {
         "type": "bool",
       },
-      "renderExpando": Object {
+      "renderExpand": Object {
         "type": "func",
       },
       "title": Object {
@@ -607,6 +607,9 @@ Map {
             Object {
               "type": "string",
             },
+            Object {
+              "type": "number",
+            },
           ],
         ],
         "type": "oneOfType",
@@ -652,6 +655,9 @@ Map {
             },
             Object {
               "type": "string",
+            },
+            Object {
+              "type": "number",
             },
           ],
         ],
@@ -1139,7 +1145,7 @@ Map {
         "className": Object {
           "type": "string",
         },
-        "enableExpando": Object {
+        "enableExpand": Object {
           "type": "bool",
         },
         "expandIconDescription": Object {
@@ -1776,7 +1782,7 @@ Map {
       "className": Object {
         "type": "string",
       },
-      "enableExpando": Object {
+      "enableExpand": Object {
         "type": "bool",
       },
       "expandIconDescription": Object {
@@ -2446,6 +2452,9 @@ Map {
             Object {
               "type": "string",
             },
+            Object {
+              "type": "number",
+            },
           ],
         ],
         "type": "oneOfType",
@@ -2485,6 +2494,9 @@ Map {
             },
             Object {
               "type": "string",
+            },
+            Object {
+              "type": "number",
             },
           ],
         ],
@@ -4298,6 +4310,16 @@ Map {
       },
       "pagesUnknown": Object {
         "type": "bool",
+      },
+      "size": Object {
+        "args": Array [
+          Array [
+            "sm",
+            "md",
+            "lg",
+          ],
+        ],
+        "type": "oneOf",
       },
       "totalItems": Object {
         "type": "number",

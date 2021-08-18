@@ -51,7 +51,7 @@ describe('Test slider', function () {
       }
     });
   });
-  describe('Programatic change', function () {
+  describe('Programmatic change', function () {
     let slider;
     let container;
     beforeEach(function () {

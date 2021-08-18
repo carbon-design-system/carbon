@@ -24,7 +24,8 @@
     "lint:styles": "stylelint '**/*.{css,scss}' --report-needless-disables --report-invalid-scope-disables",
     "sync": "carbon-cli sync",
     "test": "cross-env BABEL_ENV=test jest",
-    "test:e2e": "cross-env BABEL_ENV=test jest -c jest.e2e.config.js"
+    "test:e2e": "cross-env BABEL_ENV=test jest -c jest.e2e.config.js",
+    "postinstall": "husky install"
   },
   "resolutions": {
     "ast-types": "^0.14.0",
@@ -44,8 +45,8 @@
     "@babel/preset-react": "^7.14.5",
     "@babel/runtime": "^7.14.6",
     "@carbon/cli": "workspace:packages/cli",
-    "@commitlint/cli": "^8.3.5",
-    "@commitlint/config-conventional": "^8.3.4",
+    "@commitlint/cli": "^13.1.0",
+    "@commitlint/config-conventional": "^13.1.0",
     "@percy/cli": "^1.0.0-beta.61",
     "@testing-library/dom": "^8.1.0",
     "@testing-library/jest-dom": "^5.14.1",
@@ -58,11 +59,11 @@
     "eslint": "^7.28.0",
     "fs-extra": "^8.1.0",
     "glob": "^7.1.4",
-    "husky": "^4.0.10",
+    "husky": "^7.0.0",
     "jest": "^27.0.6",
     "jest-junit": "^10.0.0",
     "lerna": "^3.20.2",
-    "lint-staged": "^9.5.0",
+    "lint-staged": "^11.1.1",
     "node-gyp": "^7.1.2",
     "prettier": "^2.2.1",
     "react": "^16.8.6",
@@ -118,17 +119,14 @@
   "lint-staged": {
     "**/*.js": [
       "prettier --write",
-      "eslint",
-      "git add"
+      "eslint"
     ],
     "**/*.scss": [
       "prettier --write",
-      "stylelint --report-needless-disables --report-invalid-scope-disables --allow-empty-input",
-      "git add"
+      "stylelint --report-needless-disables --report-invalid-scope-disables --allow-empty-input"
     ],
     "!(*sass).md": [
-      "prettier --write",
-      "git add"
+      "prettier --write"
     ]
   },
   "eslintConfig": {

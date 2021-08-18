@@ -195,7 +195,7 @@ class Tab extends ContentSwitcher {
   /**
    * The component options.
    * If `options` is specified in the constructor, {@linkcode ContentSwitcher.create .create()}, or {@linkcode Tab.init .init()},
-   * properties in this object are overriden for the instance being create and how {@linkcode Tab.init .init()} works.
+   * properties in this object are overridden for the instance being create and how {@linkcode Tab.init .init()} works.
    * @member Tab.options
    * @type {object}
    * @property {string} selectorInit The CSS selector to find tab containers.

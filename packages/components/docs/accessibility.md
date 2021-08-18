@@ -110,7 +110,7 @@ release. To do that:
 ["Keyboard accessibility is one of the most important aspects of web accessibility."](https://webaim.org/techniques/keyboard/)
 and it's the focus of part 1 of our AVT2 testing!
 
-Here's what we're looking for during our AVT2 audit. Therea are two main parts:
+Here's what we're looking for during our AVT2 audit. There are two main parts:
 
 ## Keyboard accessibility testing⌨️
 
