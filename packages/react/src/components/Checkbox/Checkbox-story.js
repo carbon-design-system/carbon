@@ -35,11 +35,7 @@ export const checkbox = () => {
   return (
     <fieldset className={`${prefix}--fieldset`}>
       <legend className={`${prefix}--label`}>Checkbox heading</legend>
-      <Checkbox
-        className="some-class"
-        labelText={`Checkbox label`}
-        id="checkbox-label-1"
-      />
+      <Checkbox labelText={`Checkbox label`} id="checkbox-label-1" />
       <Checkbox labelText={`Checkbox label`} id="checkbox-label-2" />
     </fieldset>
   );
@@ -62,6 +58,26 @@ export const unstable_Checkbox = () => {
         />
       </fieldset>
     </FeatureFlags>
+  );
+};
+
+export const classNameChangeTest = () => {
+  return (
+    <fieldset className={`${prefix}--fieldset`}>
+      <legend className={`${prefix}--label`}>Checkbox heading</legend>
+      <Checkbox
+        className="TEST_CLASS"
+        labelText="The class should be added to the label"
+        id="checkbox-label-1"
+      />
+      <FeatureFlags flags={{ 'enable-v11-release': true }}>
+        <Checkbox
+          className="TEST_CLASS"
+          labelText="The class should be added to the wrapper"
+          id="checkbox-label-2"
+        />
+      </FeatureFlags>
+    </fieldset>
   );
 };
 

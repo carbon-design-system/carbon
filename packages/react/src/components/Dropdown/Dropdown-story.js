@@ -112,7 +112,6 @@ export default {
 export const Default = () => (
   <div style={{ width: 400 }}>
     <Dropdown
-      className="test"
       id="default"
       titleText="Dropdown label"
       helperText="This is some helper text"
@@ -124,14 +123,25 @@ export const Default = () => (
   </div>
 );
 
-export const classNameUpdate = () => (
+export const classNameChangeTest = () => (
   <div style={{ width: 400 }}>
+    <Dropdown
+      className="TEST_CLASS"
+      id="default"
+      titleText="Dropdown label"
+      helperText="The class should be added to the input"
+      label="Dropdown menu options"
+      items={items}
+      itemToString={(item) => (item ? item.text : '')}
+      onChange={action('onChange')}
+    />
+    <br />
     <FeatureFlags flags={{ 'enable-v11-release': true }}>
       <Dropdown
-        className="test"
+        className="TEST_CLASS"
         id="default"
         titleText="Dropdown label"
-        helperText="This is some helper text"
+        helperText="The class should be added to the wrapper"
         label="Dropdown menu options"
         items={items}
         itemToString={(item) => (item ? item.text : '')}
