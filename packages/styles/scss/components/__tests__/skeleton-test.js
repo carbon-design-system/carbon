@@ -13,13 +13,13 @@ const { SassRenderer } = require('@carbon/test-utils/scss');
 
 const { render } = SassRenderer.create(__dirname);
 
-describe('scss/components/skeleton', () => {
+describe('scss/components/skeleton-styles', () => {
   test('Public API', async () => {
     const { unwrap } = await render(`
       @use 'sass:meta';
-      @use '../skeleton';
+      @use '../skeleton-styles';
 
-      $_: get('mixin', meta.mixin-exists('skeleton', 'skeleton-styles'));
+      $_: get('mixin', meta.mixin-exists('skeleton-styles', 'skeleton-styles'));
     `);
     expect(unwrap('mixin')).toBe(true);
   });
