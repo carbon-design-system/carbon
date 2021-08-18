@@ -24,7 +24,7 @@ const sizes = {
 
 const props = {
   select: () => ({
-    // className: 'some-class',
+    className: 'some-class',
     light: boolean('Light variant (light in <Select>)', false),
     inline: boolean(
       'Put control in-line with label (inline in <Select>)',

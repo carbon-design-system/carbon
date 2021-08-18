@@ -54,12 +54,12 @@ const ControlledPasswordInputApp = React.forwardRef(
 
 const props = {
   SharedInputProps: () => ({
-    // className: 'some-class',
+    className: 'some-class',
     id: 'test2',
-    // defaultValue: text(
-    //   'Default value (defaultValue)',
-    //   'This is not a default value'
-    // ),
+    defaultValue: text(
+      'Default value (defaultValue)',
+      'This is not a default value'
+    ),
     size: select('Field size (size)', sizes, undefined) || undefined,
     labelText: text('Label text (labelText)', 'Text input label'),
     placeholder: text('Placeholder text (placeholder)', 'Placeholder text'),
@@ -127,18 +127,20 @@ export default {
 export const classNameChangeTest = () => (
   <>
     <TextInput
-      className="TEST_CLASS"
-      type={select('Form control type (type)', types, 'text')}
       defaultValue="The class should be added to the label"
-      {...props.SharedInputProps()}
+      labelText="Text input label"
+      helperText="Optional help text"
+      type={select('Form control type (type)', types, 'text')}
       {...props.TextInputProps()}
+      className="TEST_CLASS"
     />
     <br />
     <FeatureFlags flags={{ 'enable-v11-release': true }}>
       <TextInput
         defaultValue="The class should be added to the wrapper"
+        labelText="Text input label"
+        helperText="Optional help text"
         type={select('Form control type (type)', types, 'text')}
-        {...props.SharedInputProps()}
         {...props.TextInputProps()}
         className="TEST_CLASS"
       />
