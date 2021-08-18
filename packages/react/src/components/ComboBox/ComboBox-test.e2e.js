@@ -143,8 +143,15 @@ describe('ComboBox', () => {
     cy.percySnapshot();
   });
 
-  it('should open on click/space', () => {
-    cy.get('#carbon-combobox-1').findByRole('combobox').realPress('Space');
-    cy.findByText(/Option 1/).should('be.visible');
+  it('should open on click and display list items', () => {
+    cy.findAllByRole('button').first().click();
+    cy.findAllByText(/Option 1/)
+      .first()
+      .should('be.visible');
+
+    // snapshots should always be taken _after_ an assertion that
+    // a element/component should be visible. This is to ensure
+    // the DOM has settled and the element has fully loaded.
+    cy.percySnapshot();
   });
 });
