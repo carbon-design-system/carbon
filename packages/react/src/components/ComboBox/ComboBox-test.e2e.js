@@ -45,7 +45,7 @@ describe('ComboBox', () => {
 
     mount(
       <>
-        <div style={{ marginBottom: '2rem' }} id="carbon-combobox-1">
+        <div style={{ marginBottom: '2rem' }}>
           <ComboBox
             onChange={() => {}}
             id="carbon-combobox"
