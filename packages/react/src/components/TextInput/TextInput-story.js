@@ -12,6 +12,7 @@ import { TextInput } from '../../index';
 import TextInputSkeleton from '../TextInput/TextInput.Skeleton';
 import FluidForm from '../FluidForm/FluidForm';
 import mdx from './TextInput.mdx';
+import { FeatureFlags } from '../FeatureFlags';
 
 const types = {
   None: '',
@@ -53,12 +54,12 @@ const ControlledPasswordInputApp = React.forwardRef(
 
 const props = {
   SharedInputProps: () => ({
-    className: 'some-class',
+    // className: 'some-class',
     id: 'test2',
-    defaultValue: text(
-      'Default value (defaultValue)',
-      'This is not a default value'
-    ),
+    // defaultValue: text(
+    //   'Default value (defaultValue)',
+    //   'This is not a default value'
+    // ),
     size: select('Field size (size)', sizes, undefined) || undefined,
     labelText: text('Label text (labelText)', 'Text input label'),
     placeholder: text('Placeholder text (placeholder)', 'Placeholder text'),
@@ -122,6 +123,28 @@ export default {
     },
   },
 };
+
+export const classNameChangeTest = () => (
+  <>
+    <TextInput
+      className="TEST_CLASS"
+      type={select('Form control type (type)', types, 'text')}
+      defaultValue="The class should be added to the label"
+      {...props.SharedInputProps()}
+      {...props.TextInputProps()}
+    />
+    <br />
+    <FeatureFlags flags={{ 'enable-v11-release': true }}>
+      <TextInput
+        defaultValue="The class should be added to the wrapper"
+        type={select('Form control type (type)', types, 'text')}
+        {...props.SharedInputProps()}
+        {...props.TextInputProps()}
+        className="TEST_CLASS"
+      />
+    </FeatureFlags>
+  </>
+);
 
 export const Default = () => (
   <TextInput

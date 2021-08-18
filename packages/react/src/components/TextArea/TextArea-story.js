@@ -12,9 +12,10 @@ import { withKnobs, boolean, number, text } from '@storybook/addon-knobs';
 import TextArea from '../TextArea';
 import TextAreaSkeleton from '../TextArea/TextArea.Skeleton';
 import mdx from './TextArea.mdx';
+import { FeatureFlags } from '../FeatureFlags';
 
 const TextAreaProps = () => ({
-  className: 'some-class',
+  // className: 'some-class',
   disabled: boolean('Disabled (disabled)', false),
   light: boolean('Light variant (light)', false),
   hideLabel: boolean('No label (hideLabel)', false),
@@ -51,3 +52,23 @@ export default {
 export const Default = () => <TextArea {...TextAreaProps()} />;
 
 export const Skeleton = () => <TextAreaSkeleton />;
+
+export const classNameChangeTest = () => (
+  <>
+    <TextArea
+      labelText="Text area label"
+      placeholder="The class should be added to the label"
+      helperText="Optional helper text."
+      className="TEST_CLASS"
+    />
+    <br />
+    <FeatureFlags flags={{ 'enable-v11-release': true }}>
+      <TextArea
+        labelText="Text area label"
+        placeholder="The class should be added to the wrapper"
+        helperText="Optional helper text."
+        className="TEST_CLASS"
+      />
+    </FeatureFlags>
+  </>
+);

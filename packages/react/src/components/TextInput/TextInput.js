@@ -14,6 +14,7 @@ import PasswordInput from './PasswordInput';
 import ControlledPasswordInput from './ControlledPasswordInput';
 import { textInputProps } from './util';
 import { FormContext } from '../FluidForm';
+import { useFeatureFlag } from '../FeatureFlags';
 
 const { prefix } = settings;
 const TextInput = React.forwardRef(function TextInput(
@@ -40,6 +41,8 @@ const TextInput = React.forwardRef(function TextInput(
   },
   ref
 ) {
+  const enabled = useFeatureFlag('enable-v11-release');
+
   const normalizedProps = useNormalizedInputProps({
     id,
     readOnly,
@@ -78,7 +81,11 @@ const TextInput = React.forwardRef(function TextInput(
     ...other,
   };
   const inputWrapperClasses = classNames(
-    `${prefix}--form-item`,
+    [
+      enabled
+        ? classNames(`${prefix}--form-item`, className)
+        : `${prefix}--form-item`,
+    ],
     `${prefix}--text-input-wrapper`,
     {
       [`${prefix}--text-input-wrapper--readonly`]: readOnly,
