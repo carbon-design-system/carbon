@@ -18,6 +18,7 @@ import DatePicker from '../DatePicker';
 import DatePickerInput from '../DatePickerInput';
 import DatePickerSkeleton from '../DatePicker/DatePicker.Skeleton';
 import mdx from './DatePicker.mdx';
+import { FeatureFlags } from '../FeatureFlags';
 
 const patterns = {
   'Short (d{1,2}/d{4})': '\\d{1,2}/\\d{4}',
@@ -165,3 +166,25 @@ export const DatePickerPlayground = () => (
 export const Skeleton = () => <DatePickerSkeleton range />;
 
 Skeleton.storyName = 'skeleton';
+
+export const classNameChangeTest = () => (
+  <>
+    <DatePicker className="TEST_CLASS" datePickerType="single">
+      <DatePickerInput
+        placeholder="mm/dd/yyyy"
+        labelText="Date Picker label"
+        id="date-picker-simple"
+      />
+    </DatePicker>
+    <br />
+    <FeatureFlags flags={{ 'enable-v11-release': true }}>
+      <DatePicker className="TEST_CLASS" datePickerType="single">
+        <DatePickerInput
+          placeholder="mm/dd/yyyy"
+          labelText="Date Picker label"
+          id="date-picker-simple-2"
+        />
+      </DatePicker>
+    </FeatureFlags>
+  </>
+);
