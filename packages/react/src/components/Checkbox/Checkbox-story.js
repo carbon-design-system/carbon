@@ -66,12 +66,14 @@ export const classNameChangeTest = () => {
     <fieldset className={`${prefix}--fieldset`}>
       <legend className={`${prefix}--label`}>Checkbox heading</legend>
       <Checkbox
+        wrapperClassName="TEST"
         className="TEST_CLASS"
         labelText="The class should be added to the label"
         id="checkbox-label-1"
       />
       <FeatureFlags flags={{ 'enable-v11-release': true }}>
         <Checkbox
+          wrapperClassName="TEST"
           className="TEST_CLASS"
           labelText="The class should be added to the wrapper"
           id="checkbox-label-2"

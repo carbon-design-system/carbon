@@ -30,24 +30,18 @@ const Checkbox = React.forwardRef(function Checkbox(
 ) {
   const enabled = useFeatureFlag('enable-v11-release');
 
-  const labelClasses = enabled
-    ? `${prefix}--checkbox-label`
-    : classNames(`${prefix}--checkbox-label`, className);
+  const labelClasses = classNames(`${prefix}--checkbox-label`, [
+    enabled ? null : className,
+  ]);
   const innerLabelClasses = classNames(`${prefix}--checkbox-label-text`, {
     [`${prefix}--visually-hidden`]: hideLabel,
   });
 
-  const wrapperClasses = enabled
-    ? classNames(
-        `${prefix}--form-item`,
-        `${prefix}--checkbox-wrapper`,
-        className
-      )
-    : classNames(
-        `${prefix}--form-item`,
-        `${prefix}--checkbox-wrapper`,
-        wrapperClassName
-      );
+  const wrapperClasses = classNames(
+    `${prefix}--form-item`,
+    `${prefix}--checkbox-wrapper`,
+    [enabled ? className : wrapperClassName]
+  );
 
   return (
     <div className={wrapperClasses}>
