@@ -10,6 +10,7 @@ import { action } from '@storybook/addon-actions';
 import { boolean, object, select, text } from '@storybook/addon-knobs';
 import ComboBox from '../ComboBox';
 import mdx from './ComboBox.mdx';
+import { FeatureFlags } from '../FeatureFlags';
 
 const items = [
   {
@@ -143,5 +144,33 @@ export const light = () => (
       titleText="ComboBox title"
       helperText="Combobox helper text"
     />
+  </div>
+);
+
+export const classNameChangeTest = () => (
+  <div style={{ width: 400 }}>
+    <ComboBox
+      className="TEST_CLASS"
+      onChange={() => {}}
+      id="carbon-combobox"
+      items={items}
+      itemToString={(item) => (item ? item.text : '')}
+      placeholder="Filter..."
+      titleText="ComboBox title"
+      helperText="The class should be added to the input"
+    />
+    <br />
+    <FeatureFlags flags={{ 'enable-v11-release': true }}>
+      <ComboBox
+        className="TEST_CLASS"
+        onChange={() => {}}
+        id="carbon-combobox"
+        items={items}
+        itemToString={(item) => (item ? item.text : '')}
+        placeholder="Filter..."
+        titleText="ComboBox title"
+        helperText="The class should be added to the wrapper"
+      />
+    </FeatureFlags>
   </div>
 );
