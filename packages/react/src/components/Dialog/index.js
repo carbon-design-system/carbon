@@ -62,27 +62,48 @@ const Dialog = React.forwardRef(function Dialog(props, forwardRef) {
         continue;
       }
 
-      if (node.hasAttribute('aria-hidden') || node.hasAttribute('inert')) {
+      if (node.getAttribute('aria-hidden') === 'true') {
         continue;
       }
 
-      // what is aria-hidden === 'false'
+      if (node.hasAttribute('inert')) {
+        continue;
+      }
+
+      // what if aria-hidden === 'false'
+      if (node.getAttribute('aria-hidden') === 'false') {
+        node.setAttribute('aria-hidden', 'true');
+        node.setAttribute('inert', '');
+        changes.push({
+          node,
+          attributes: {
+            'aria-hidden': 'false',
+          },
+        });
+        continue;
+      }
 
       // Otherwise, set it to inert and set aria-hidden to true
       node.setAttribute('aria-hidden', 'true');
       node.setAttribute('inert', '');
 
-      changes.push(node);
+      changes.push({
+        node,
+      });
     }
 
     return () => {
-      changes.forEach((node) => {
+      changes.forEach(({ node, attributes }) => {
         node.removeAttribute('inert');
         // This mutation needs to be asynchronous to allow the polyfill time to
         // observe the change and allow mutations to occur
         // https://github.com/WICG/inert#performance-and-gotchas
         setTimeout(() => {
-          node.removeAttribute('aria-hidden');
+          if (attributes && attributes['aria-hidden']) {
+            node.setAttribute('aria-hidden', attributes['aria-hidden']);
+          } else {
+            node.removeAttribute('aria-hidden');
+          }
         }, 0);
       });
     };
@@ -108,5 +129,7 @@ Dialog.propTypes = {};
 if (__DEV__) {
   Dialog.displayName = 'Dialog';
 }
+
+function getElementsToHide(dialogNode) {}
 
 export { Dialog };

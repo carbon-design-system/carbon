@@ -6,10 +6,10 @@
  */
 
 import * as React from 'react';
-import ReactDOM from 'react-dom';
 import { FocusScope } from './FocusScope';
 import { Dialog } from '../Dialog';
 import { useId } from '../../internal/useId';
+import { Portal } from '../Portal';
 
 export default {
   title: 'Experimental/unstable_Dialog',
@@ -156,19 +156,4 @@ function FullPage(props) {
       {...props}
     />
   );
-}
-
-function Portal({ children }) {
-  const [mountNode, setMountNode] = React.useState(null);
-
-  React.useEffect(() => {
-    // TODO: should this be configurable????
-    setMountNode(document.body);
-  }, []);
-
-  if (mountNode) {
-    return ReactDOM.createPortal(children, mountNode);
-  }
-
-  return null;
 }
