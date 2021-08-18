@@ -13,6 +13,7 @@ import Slider from '../Slider';
 import SliderSkeleton from '../Slider/Slider.Skeleton';
 import { sliderValuePropSync } from '../../internal/FeatureFlags';
 import mdx from './Slider.mdx';
+import { FeatureFlags } from '../FeatureFlags';
 
 const props = () => ({
   name: text('Form item name (name)', ''),
@@ -93,3 +94,31 @@ export const ControlledSlider = () => {
 };
 
 export const Skeleton = () => <SliderSkeleton />;
+
+export const classNameChangeTest = () => (
+  <>
+    <Slider
+      className="TEST_CLASS"
+      labelText="The class should be added to the slider"
+      value={50}
+      min={0}
+      max={100}
+      step={1}
+      stepMultiplier={10}
+      novalidate
+    />
+    <br />
+    <FeatureFlags flags={{ 'enable-v11-release': true }}>
+      <Slider
+        className="TEST_CLASS"
+        labelText="The class should be added to the wrapper"
+        value={50}
+        min={0}
+        max={100}
+        step={1}
+        stepMultiplier={10}
+        novalidate
+      />
+    </FeatureFlags>
+  </>
+);
