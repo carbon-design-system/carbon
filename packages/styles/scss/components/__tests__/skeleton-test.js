@@ -19,7 +19,7 @@ describe('scss/components/skeleton', () => {
       @use 'sass:meta';
       @use '../skeleton';
 
-      $_: get('mixin', meta.mixin-exists('skeleton', 'skeleton'));
+      $_: get('mixin', meta.mixin-exists('skeleton', 'skeleton-styles'));
     `);
     expect(unwrap('mixin')).toBe(true);
   });
