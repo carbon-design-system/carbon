@@ -164,7 +164,7 @@ export const classNameChangeTest = () => (
       <ComboBox
         className="TEST_CLASS"
         onChange={() => {}}
-        id="carbon-combobox"
+        id="carbon-combobox-2"
         items={items}
         itemToString={(item) => (item ? item.text : '')}
         placeholder="Filter..."

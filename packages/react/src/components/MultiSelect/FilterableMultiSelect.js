@@ -23,6 +23,7 @@ import { defaultItemToString } from './tools/itemToString';
 import mergeRefs from '../../tools/mergeRefs';
 import setupGetInstanceId from '../../tools/setupGetInstanceId';
 import { defaultSortItems, defaultCompareItems } from './tools/sorting';
+import { FeatureFlagContext } from '../FeatureFlags';
 
 const { prefix } = settings;
 
@@ -159,6 +160,8 @@ export default class FilterableMultiSelect extends React.Component {
      */
     warnText: PropTypes.node,
   };
+
+  static contextType = FeatureFlagContext;
 
   static getDerivedStateFromProps({ open }, state) {
     /**
@@ -320,9 +323,17 @@ export default class FilterableMultiSelect extends React.Component {
     // needs to be capitalized for react to render it correctly
     const ItemToElement = itemToElement;
 
+    const scope = this.context;
+    let enabled;
+
+    if (scope.enabled) {
+      enabled = scope.enabled('enable-v11-release');
+    }
+
     const wrapperClasses = cx(
       `${prefix}--multi-select__wrapper`,
       `${prefix}--list-box__wrapper`,
+      [enabled ? containerClassName : null],
       {
         [`${prefix}--multi-select__wrapper--inline`]: inline,
         [`${prefix}--list-box__wrapper--inline`]: inline,
@@ -397,7 +408,7 @@ export default class FilterableMultiSelect extends React.Component {
                 `${prefix}--multi-select`,
                 `${prefix}--combo-box`,
                 `${prefix}--multi-select--filterable`,
-                containerClassName,
+                [enabled ? null : containerClassName],
                 {
                   [`${prefix}--multi-select--invalid`]: invalid,
                   [`${prefix}--multi-select--open`]: isOpen,

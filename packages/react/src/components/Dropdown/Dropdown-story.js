@@ -139,7 +139,7 @@ export const classNameChangeTest = () => (
     <FeatureFlags flags={{ 'enable-v11-release': true }}>
       <Dropdown
         className="TEST_CLASS"
-        id="default"
+        id="default-2"
         titleText="Dropdown label"
         helperText="The class should be added to the wrapper"
         label="Dropdown menu options"
