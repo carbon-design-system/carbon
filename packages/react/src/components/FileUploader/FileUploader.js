@@ -13,6 +13,7 @@ import Filename from './Filename';
 import FileUploaderButton from './FileUploaderButton';
 import { ButtonKinds } from '../../prop-types/types';
 import { keys, matches } from '../../internal/keyboard';
+import * as FeatureFlag from '@carbon/feature-flags';
 
 const { prefix } = settings;
 
@@ -48,7 +49,9 @@ export default class FileUploader extends React.Component {
     /**
      * Provide a description for the complete/close icon that can be read by screen readers
      */
-    iconDescription: PropTypes.string,
+    iconDescription: FeatureFlag.enabled('enable-v11-release')
+      ? PropTypes.string.isRequired
+      : PropTypes.string,
 
     /**
      * Specify the description text of this <FileUploader>
@@ -97,7 +100,9 @@ export default class FileUploader extends React.Component {
   };
 
   static defaultProps = {
-    iconDescription: 'Provide icon description',
+    iconDescription: FeatureFlag.enabled('enable-v11-release')
+      ? null
+      : 'Provide icon description',
     filenameStatus: 'uploading',
     buttonLabel: '',
     buttonKind: 'primary',
@@ -173,6 +178,8 @@ export default class FileUploader extends React.Component {
       onDelete, // eslint-disable-line no-unused-vars
       ...other
     } = this.props;
+
+    console.log(FeatureFlag.enabled('enable-v11-release'));
 
     const classes = classNames({
       [`${prefix}--form-item`]: true,

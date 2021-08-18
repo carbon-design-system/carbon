@@ -12,6 +12,7 @@ import React, { useRef } from 'react';
 import Filename from './Filename';
 import { keys, matches } from '../../internal/keyboard';
 import uid from '../../tools/uniqueId';
+import * as FeatureFlag from '@carbon/feature-flags';
 
 const { prefix } = settings;
 
@@ -73,55 +74,107 @@ function FileUploaderItem({
   );
 }
 
-FileUploaderItem.propTypes = {
-  /**
-   * Error message body for an invalid file upload
-   */
-  errorBody: PropTypes.string,
+console.log(FeatureFlag.enabled('enable-v11-release'));
+if (FeatureFlag.enabled('enable-v11-release')) {
+  FileUploaderItem.propTypes = {
+    /**
+     * Error message body for an invalid file upload
+     */
+    errorBody: PropTypes.string,
 
-  /**
-   * Error message subject for an invalid file upload
-   */
-  errorSubject: PropTypes.string,
+    /**
+     * Error message subject for an invalid file upload
+     */
+    errorSubject: PropTypes.string,
 
-  /**
-   * Description of status icon (displayed in native tooltip)
-   */
-  iconDescription: PropTypes.string,
+    /**
+     * Description of status icon (displayed in native tooltip)
+     */
+    iconDescription: PropTypes.string.isRequired,
+    /**
+     * Specify if the currently uploaded file is invalid
+     */
+    invalid: PropTypes.bool,
 
-  /**
-   * Specify if the currently uploaded file is invalid
-   */
-  invalid: PropTypes.bool,
+    /**
+     * Name of the uploaded file
+     */
+    name: PropTypes.string,
 
-  /**
-   * Name of the uploaded file
-   */
-  name: PropTypes.string,
+    /**
+     * Event handler that is called after removing a file from the file uploader
+     * The event handler signature looks like `onDelete(evt, { uuid })`
+     */
+    onDelete: PropTypes.func,
 
-  /**
-   * Event handler that is called after removing a file from the file uploader
-   * The event handler signature looks like `onDelete(evt, { uuid })`
-   */
-  onDelete: PropTypes.func,
+    /**
+     * Specify the size of the uploaded items, from a list of available
+     * sizes. For `default` buttons, this prop can remain unspecified.
+     * V11: `default`, `field`, and `small` will be removed
+     */
+    size: PropTypes.oneOf(['default', 'field', 'small', 'sm', 'md', 'lg']),
 
-  /**
-   * Specify the size of the uploaded items, from a list of available
-   * sizes. For `default` buttons, this prop can remain unspecified.
-   * V11: `default`, `field`, and `small` will be removed
-   */
-  size: PropTypes.oneOf(['default', 'field', 'small', 'sm', 'md', 'lg']),
+    /**
+     * Status of the file upload
+     */
+    status: PropTypes.oneOf(['uploading', 'edit', 'complete']),
 
-  /**
-   * Status of the file upload
-   */
-  status: PropTypes.oneOf(['uploading', 'edit', 'complete']),
+    /**
+     * Unique identifier for the file object
+     */
+    uuid: PropTypes.string,
+  };
+} else {
+  FileUploaderItem.propTypes = {
+    /**
+     * Error message body for an invalid file upload
+     */
+    errorBody: PropTypes.string,
 
-  /**
-   * Unique identifier for the file object
-   */
-  uuid: PropTypes.string,
-};
+    /**
+     * Error message subject for an invalid file upload
+     */
+    errorSubject: PropTypes.string,
+
+    /**
+     * Description of status icon (displayed in native tooltip)
+     */
+    iconDescription: PropTypes.string,
+
+    /**
+     * Specify if the currently uploaded file is invalid
+     */
+    invalid: PropTypes.bool,
+
+    /**
+     * Name of the uploaded file
+     */
+    name: PropTypes.string,
+
+    /**
+     * Event handler that is called after removing a file from the file uploader
+     * The event handler signature looks like `onDelete(evt, { uuid })`
+     */
+    onDelete: PropTypes.func,
+
+    /**
+     * Specify the size of the uploaded items, from a list of available
+     * sizes. For `default` buttons, this prop can remain unspecified.
+     * V11: `default`, `field`, and `small` will be removed
+     */
+    size: PropTypes.oneOf(['default', 'field', 'small', 'sm', 'md', 'lg']),
+
+    /**
+     * Status of the file upload
+     */
+    status: PropTypes.oneOf(['uploading', 'edit', 'complete']),
+
+    /**
+     * Unique identifier for the file object
+     */
+    uuid: PropTypes.string,
+  };
+}
 
 FileUploaderItem.defaultProps = {
   status: 'uploading',

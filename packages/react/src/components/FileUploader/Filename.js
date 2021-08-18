@@ -14,6 +14,7 @@ import { settings } from 'carbon-components';
 import PropTypes from 'prop-types';
 import React from 'react';
 import Loading from '../Loading';
+import * as FeatureFlag from '@carbon/feature-flags';
 
 const { prefix } = settings;
 
@@ -50,32 +51,59 @@ function Filename({ iconDescription, status, invalid, ...rest }) {
   }
 }
 
-Filename.propTypes = {
-  /**
-   * Provide a description of the SVG icon to denote file upload status
-   */
-  iconDescription: PropTypes.string,
+if (FeatureFlag.enabled('enable-v11-release')) {
+  Filename.defaultProps = {
+    status: 'uploading',
+    tabIndex: '0',
+  };
 
-  /**
-   * Specify if the file is invalid
-   */
-  invalid: PropTypes.bool,
+  Filename.propTypes = {
+    /**
+     * Provide a description of the SVG icon to denote file upload status
+     */
+    iconDescription: PropTypes.string.isRequired,
+    /**
+     * Specify if the file is invalid
+     */
+    invalid: PropTypes.bool,
 
-  /**
-   * Status of the file upload
-   */
-  status: PropTypes.oneOf(['edit', 'complete', 'uploading']),
+    /**
+     * Status of the file upload
+     */
+    status: PropTypes.oneOf(['edit', 'complete', 'uploading']),
 
-  /**
-   * Provide a custom tabIndex value for the <Filename>
-   */
-  tabIndex: PropTypes.string,
-};
+    /**
+     * Provide a custom tabIndex value for the <Filename>
+     */
+    tabIndex: PropTypes.string,
+  };
+} else {
+  Filename.defaultProps = {
+    iconDescription: 'Provide icon description',
+    status: 'uploading',
+    tabIndex: '0',
+  };
 
-Filename.defaultProps = {
-  iconDescription: 'Uploading file',
-  status: 'uploading',
-  tabIndex: '0',
-};
+  Filename.propTypes = {
+    /**
+     * Provide a description of the SVG icon to denote file upload status
+     */
+    iconDescription: PropTypes.string,
+    /**
+     * Specify if the file is invalid
+     */
+    invalid: PropTypes.bool,
+
+    /**
+     * Status of the file upload
+     */
+    status: PropTypes.oneOf(['edit', 'complete', 'uploading']),
+
+    /**
+     * Provide a custom tabIndex value for the <Filename>
+     */
+    tabIndex: PropTypes.string,
+  };
+}
 
 export default Filename;

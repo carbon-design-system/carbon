@@ -24,6 +24,7 @@ import FileUploaderItem from './FileUploaderItem';
 import FileUploaderDropContainer from './FileUploaderDropContainer';
 import mdx from './FileUploader.mdx';
 import './FileUploader-story.scss';
+import { enable, enabled } from '@carbon/feature-flags';
 
 const { prefix } = settings;
 const buttonKinds = {
@@ -227,6 +228,14 @@ export const Skeleton = () => (
     <FileUploaderSkeleton />
   </div>
 );
+
+export const FileUploaderRequiredPropChange = () => {
+  enable('enable-v11-release');
+
+  console.log(enabled('enable-v11-release'));
+
+  return <FileUploaderItem status="edit" name="README.md" />;
+};
 
 Skeleton.storyName = 'skeleton';
 
