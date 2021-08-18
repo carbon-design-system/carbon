@@ -62,8 +62,8 @@ we support!
 ## :books: Documentation
 
 - See our documentation site
-  [here](https://www.carbondesignsystem.com/get-started/develop/react) for full
-  how-to docs and guidelines
+  [here](https://www.carbondesignsystem.com/developing/frameworks/react/) for
+  full how-to docs and guidelines
 - [Contributing](/.github/CONTRIBUTING.md): Guidelines for making contributions
   to this repo.
 - 🏃‍♀️ Migration Guides
@@ -184,6 +184,8 @@ check out our [Contributing Guide](/.github/CONTRIBUTING.md) and our
   </tr>
   <tr>
     <td align="center"><a href="https://github.com/szymonbrandys"><img src="https://avatars.githubusercontent.com/u/79149899?v=4?s=100" width="100px;" alt=""/><br /><sub><b>szymonbrandys</b></sub></a><br /><a href="https://github.com/carbon-design-system/carbon/commits?author=szymonbrandys" title="Code">💻</a></td>
+    <td align="center"><a href="https://github.com/adamalston"><img src="https://avatars.githubusercontent.com/u/18297826?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Adam Alston</b></sub></a><br /><a href="https://github.com/carbon-design-system/carbon/commits?author=adamalston" title="Documentation">📖</a></td>
+    <td align="center"><a href="https://github.com/Kiittyka"><img src="https://avatars.githubusercontent.com/u/41021851?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Krithika S Udupa</b></sub></a><br /><a href="https://github.com/carbon-design-system/carbon/commits?author=Kiittyka" title="Documentation">📖</a></td>
   </tr>
 </table>
 
