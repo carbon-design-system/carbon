@@ -1,0 +1,112 @@
+name: Bug Report 🐛
+description: Something isn't working as expected? Here is the right place to report.
+labels: ['type: bug 🐛']
+body:
+  - type: markdown
+    attributes:
+      value: |
+        👋
+        Hey, thanks for taking the time to file this bug report.
+        Feel free to leave out sections that aren't relevant.
+
+        Title template: `[Title]: Brief description`
+        <hr />
+  - type: checkboxes
+    attributes:
+      label: What package(s) are you using?
+      options:
+        - label: carbon-components
+        - label: carbon-components-react
+  - type: textarea
+    attributes:
+      label: Describe in detail the issue you're having.
+  - type: dropdown
+    attributes:
+      label: Is this issue related to a specific component?
+      options:
+        - Accordion
+        - AspectRatio
+        - Breadcrumb
+        - Button
+        - Checkbox
+        - CodeSnippet
+        - ComboBox
+        - ComposedModal
+        - ContentSwitcher
+        - CopyButton
+        - DataTable
+        - DatePicker
+        - Dropdown
+        - ErrorBoundary
+        - FileUploader
+        - Form
+        - FormGroup
+        - FormLabel
+        - Grid
+        - InlineLoading
+        - Link
+        - Loading
+        - Modal
+        - MultiSelect
+        - Notifications
+        - NumberInput
+        - OrderedList
+        - OverflowMenu
+        - Pagination
+        - PaginationNav
+        - ProgressIndicator
+        - RadioButton
+        - Search
+        - Select
+        - Skeleton
+        - Slider
+        - StructuredList
+        - Tabs
+        - Tag
+        - TextArea
+        - TextInput
+        - Tile
+        - TimePicker
+        - Toggle
+        - Tooltip
+        - TooltipDefinition
+        - TooltipIcon
+        - UI Shell
+        - UnorderedList
+        - FluidForm
+        - unstable_Heading
+        - unstable_Menu
+        - unstable_Pagination
+        - unstable_Popover
+        - unstable_ProgressBar
+        - unstable_TreeView
+  - type: textarea
+    attributes:
+      label: What did you expect to happen? What happened instead? What would you like to see changed?
+  - type: input
+    attributes:
+      label: What browser are you working in?
+  - type: input
+    attributes:
+      label: What version of the Carbon Design System are you using?
+  - type: input
+    attributes:
+      label: What offering/product do you work on? Any pressing ship or release dates we should be aware of?
+  - type: textarea
+    attributes:
+      label: Steps to reproduce the issue
+      value: |
+        1. Step one
+        2. Step two
+        3. Step three
+        4. etc.
+  - type: markdown
+    attributes:
+      value: |
+        Please provide a reduced test case in CodeSandbox. You can use our template for [styles and Vanilla JS](https://codesandbox.io/s/github/carbon-design-system/carbon/tree/main/packages/components/examples/codesandbox) or [React](https://codesandbox.io/s/github/carbon-design-system/carbon/tree/main/packages/react/examples/codesandbox)
+  - type: input
+    attributes:
+      label: Link to reproduction in CodeSandbox
+  - type: textarea
+    attributes:
+      label: Additional information (screenshots, code or notes)
