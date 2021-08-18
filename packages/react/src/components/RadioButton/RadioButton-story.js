@@ -12,6 +12,7 @@ import { withKnobs, boolean, select, text } from '@storybook/addon-knobs';
 import RadioButtonGroup from '../RadioButtonGroup';
 import RadioButton from '../RadioButton';
 import mdx from './RadioButton.mdx';
+import { FeatureFlags } from '../FeatureFlags';
 
 const values = {
   'Option 1': 'radio-1',
@@ -102,3 +103,29 @@ export const Playground = () => {
     </RadioButtonGroup>
   );
 };
+
+export const classNameChangeTest = () => (
+  <>
+    <RadioButtonGroup
+      className="TEST_CLASS"
+      legendText="The class should be added to the fieldset"
+      name="radio-button-group"
+      defaultSelected="radio-1">
+      <RadioButton labelText="Option 1" value="radio-1" id="radio-1" />
+      <RadioButton labelText="Option 2" value="radio-2" id="radio-2" />
+      <RadioButton labelText="Option 3" value="radio-3" id="radio-3" />
+    </RadioButtonGroup>
+    <br />
+    <FeatureFlags flags={{ 'enable-v11-release': true }}>
+      <RadioButtonGroup
+        className="TEST_CLASS"
+        legendText="The class should be added to the wrapper"
+        name="radio-button-group-2"
+        defaultSelected="radio-1">
+        <RadioButton labelText="Option 1" value="radio-1" id="radio-4" />
+        <RadioButton labelText="Option 2" value="radio-2" id="radio-5" />
+        <RadioButton labelText="Option 3" value="radio-3" id="radio-6" />
+      </RadioButtonGroup>
+    </FeatureFlags>
+  </>
+);
