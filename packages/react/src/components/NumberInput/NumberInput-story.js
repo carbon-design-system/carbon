@@ -20,6 +20,7 @@ import NumberInput from '../NumberInput';
 import { NumberInput as OGNumberInput } from './NumberInput';
 import NumberInputSkeleton from '../NumberInput/NumberInput.Skeleton';
 import mdx from './NumberInput.mdx';
+import { FeatureFlags } from '../FeatureFlags';
 
 const sizes = {
   'Small  (sm)': 'sm',
@@ -109,3 +110,31 @@ export const Playground = () => {
 };
 
 export const Skeleton = () => <NumberInputSkeleton />;
+
+export const classNameChangeTest = () => (
+  <>
+    <NumberInput
+      id="carbon-classname"
+      className="TEST_CLASS"
+      min={0}
+      max={100}
+      value={50}
+      label="NumberInput label"
+      helperText="The class should be placed on the input"
+      invalidText="Number is not valid"
+    />
+    <br />
+    <FeatureFlags flags={{ 'enable-v11-release': true }}>
+      <NumberInput
+        id="carbon-classname-2"
+        className="TEST_CLASS"
+        min={0}
+        max={100}
+        value={50}
+        label="NumberInput label"
+        helperText="The class should be placed on the wrapper"
+        invalidText="Number is not valid"
+      />
+    </FeatureFlags>
+  </>
+);
