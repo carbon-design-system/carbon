@@ -97,6 +97,7 @@ describe('CodeSnippet', () => {
   });
 });
 
+// https://github.com/cypress-io/cypress/issues/8418
 const resizeObserverLoopErrRe = /^ResizeObserver loop limit exceeded/;
 cy.on('uncaught:exception', (err) => {
   if (resizeObserverLoopErrRe.test(err.message)) {
