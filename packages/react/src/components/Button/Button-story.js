@@ -289,6 +289,45 @@ export const Playground = () => {
   );
 };
 
+export const Playground2 = () => {
+  const regularProps = props.regular();
+  // const iconOnly = props.iconOnly();
+  // const { stacked, ...buttonProps } = props.set();
+  return (
+    <>
+      <div
+        style={{
+          display: 'flex',
+          alignItems: 'center',
+          flexWrap: 'wrap',
+        }}>
+        <Button>Buttons</Button>
+        &nbsp;
+        {!regularProps.kind.includes('danger') && (
+          <>
+            <Button hasIconOnly></Button>
+            &nbsp;
+            <Button hasIconOnly kind="ghost"></Button>
+          </>
+        )}
+      </div>
+      {/* <div
+        style={{
+          marginTop: '1rem',
+        }}>
+        <ButtonSet stacked={stacked}>
+          <Button kind="secondary" {...buttonProps}>
+            Secondary button
+          </Button>
+          <Button kind="primary" {...buttonProps}>
+            Primary button
+          </Button>
+        </ButtonSet>
+      </div> */}
+    </>
+  );
+};
+
 export const IconButton = () => (
   <Button
     renderIcon={Add16}
