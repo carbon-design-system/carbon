@@ -33,12 +33,12 @@ export const TABLE_SORT_DIRECTION = {
   NONE: 'NONE',
 
   /**
-   * Sorted ascendingly.
+   * Sorted in ascending order.
    */
   ASCENDING: 'ASC',
 
   /**
-   * Sorted descendingly.
+   * Sorted in descending order.
    */
   DESCENDING: 'DESC',
 };
