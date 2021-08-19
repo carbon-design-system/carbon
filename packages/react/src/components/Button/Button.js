@@ -61,7 +61,6 @@ const Button = React.forwardRef(function Button(
         node !== evt.currentTarget
       );
     });
-    setAllowTooltipVisibility(false);
   };
 
   const handleFocus = (evt) => {
