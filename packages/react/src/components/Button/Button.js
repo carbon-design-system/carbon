@@ -48,7 +48,6 @@ const Button = React.forwardRef(function Button(
   ref
 ) {
   const [allowTooltipVisibility, setAllowTooltipVisibility] = useState(false);
-  const [isHovered, setIsHovered] = useState(false);
   const [isFocused, setIsFocused] = useState(false);
   const tooltipRef = useRef(null);
   const tooltipTimeout = useRef(null);
@@ -62,12 +61,12 @@ const Button = React.forwardRef(function Button(
         node !== evt.currentTarget
       );
     });
+    setAllowTooltipVisibility(false);
   };
 
   const handleFocus = (evt) => {
     if (hasIconOnly) {
       closeTooltips(evt);
-      setIsHovered(!isHovered);
       setIsFocused(true);
       setAllowTooltipVisibility(true);
     }
@@ -75,7 +74,6 @@ const Button = React.forwardRef(function Button(
 
   const handleBlur = () => {
     if (hasIconOnly) {
-      setIsHovered(false);
       setIsFocused(false);
       setAllowTooltipVisibility(false);
     }
@@ -83,7 +81,6 @@ const Button = React.forwardRef(function Button(
 
   const handleMouseEnter = (evt) => {
     if (hasIconOnly) {
-      setIsHovered(true);
       tooltipTimeout.current && clearTimeout(tooltipTimeout.current);
 
       if (evt.target === tooltipRef.current) {
@@ -101,7 +98,6 @@ const Button = React.forwardRef(function Button(
     if (!isFocused && hasIconOnly) {
       tooltipTimeout.current = setTimeout(() => {
         setAllowTooltipVisibility(false);
-        setIsHovered(false);
       }, 100);
     }
   };
@@ -118,7 +114,6 @@ const Button = React.forwardRef(function Button(
     const handleEscKeyDown = (event) => {
       if (matches(event, [keys.Escape])) {
         setAllowTooltipVisibility(false);
-        setIsHovered(false);
       }
     };
     document.addEventListener('keydown', handleEscKeyDown);
@@ -143,7 +138,6 @@ const Button = React.forwardRef(function Button(
     [`${prefix}--btn--disabled`]: disabled,
     [`${prefix}--btn--expressive`]: isExpressive,
     [`${prefix}--tooltip--hidden`]: hasIconOnly && !allowTooltipVisibility,
-    [`${prefix}--tooltip--visible`]: isHovered,
     [`${prefix}--btn--icon-only`]: hasIconOnly,
     [`${prefix}--btn--selected`]: hasIconOnly && isSelected && kind === 'ghost',
     [`${prefix}--tooltip__trigger`]: hasIconOnly,
