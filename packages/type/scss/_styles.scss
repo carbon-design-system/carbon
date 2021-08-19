@@ -8,6 +8,7 @@
 @import '@carbon/layout/scss/breakpoint';
 @import 'font-family';
 @import 'scale';
+@use "sass:math";
 
 /// @type Map
 /// @access public
@@ -567,7 +568,7 @@ $tokens: (
 /// @access public
 /// @group @carbon/type
 @function strip-unit($value) {
-  @return $value / ($value * 0 + 1);
+  @return math.div($value, $value * 0 + 1);
 }
 
 /// This helper includes fluid type styles for the given token value. Fluid type
