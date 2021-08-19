@@ -96,6 +96,7 @@ const MultiSelect = React.forwardRef(function MultiSelect(
       highlightedIndex,
       isOpen,
       itemToString: (items) => {
+        console.log(items);
         return items.map((item) => itemToString(item)).join(', ');
       },
       onStateChange,
@@ -108,7 +109,7 @@ const MultiSelect = React.forwardRef(function MultiSelect(
    * wrapper function to forward changes to consumer
    */
   const setIsOpenWrapper = (open) => {
-    setIsOpen(open);
+    setIsOpen(open); // This opens the menu
     if (onMenuChange) {
       onMenuChange(open);
     }
@@ -179,6 +180,7 @@ const MultiSelect = React.forwardRef(function MultiSelect(
       case MenuKeyDownSpaceButton:
       case MenuKeyDownEnter:
         onItemChange(changes.selectedItem);
+        console.log(changes.selectedItem); // found the undefined.
         break;
       case MenuKeyDownArrowDown:
       case MenuKeyDownArrowUp:
