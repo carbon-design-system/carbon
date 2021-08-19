@@ -14,7 +14,6 @@ import deprecate from '../../prop-types/deprecate';
 import { composeEventHandlers } from '../../tools/events';
 import { keys, matches } from '../../internal/keyboard';
 import { useId } from '../../internal/useId';
-import { Text } from '../Text';
 import toggleClass from '../../tools/toggleClass';
 import { useFeatureFlag } from '../FeatureFlags';
 
@@ -216,8 +215,6 @@ const Button = React.forwardRef(function Button(
     otherProps = anchorProps;
   }
 
-  const childrenWithText = <Text as="span">{children}</Text>;
-
   return React.createElement(
     component,
     {
@@ -231,7 +228,7 @@ const Button = React.forwardRef(function Button(
       ...otherProps,
     },
     assistiveText,
-    childrenWithText,
+    children,
     buttonImage
   );
 });
