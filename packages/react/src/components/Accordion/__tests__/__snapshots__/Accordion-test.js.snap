@@ -31,7 +31,6 @@ exports[`Accordion should render 1`] = `
         </svg>
         <div
           class="bx--accordion__title"
-          dir="auto"
         >
           Heading A
         </div>
@@ -70,7 +69,6 @@ exports[`Accordion should render 1`] = `
         </svg>
         <div
           class="bx--accordion__title"
-          dir="auto"
         >
           Heading B
         </div>
@@ -109,7 +107,6 @@ exports[`Accordion should render 1`] = `
         </svg>
         <div
           class="bx--accordion__title"
-          dir="auto"
         >
           Heading C
         </div>
