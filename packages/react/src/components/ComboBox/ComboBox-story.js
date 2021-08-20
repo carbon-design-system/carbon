@@ -67,7 +67,6 @@ export const combobox = () => (
       id="carbon-combobox"
       items={items}
       itemToString={(item) => (item ? item.text : '')}
-      placeholder="Filter..."
       titleText="ComboBox title"
       helperText="Combobox helper text"
     />
@@ -76,7 +75,6 @@ export const combobox = () => (
 
 const props = () => ({
   id: text('Combobox ID (id)', 'carbon-combobox-example'),
-  placeholder: text('Placeholder text (placeholder)', 'Filter...'),
   titleText: text('Title (titleText)', 'Combobox title'),
   helperText: text('Helper text (helperText)', 'Optional helper text here'),
   light: boolean('Light (light)', false),
@@ -124,7 +122,6 @@ export const disabled = () => (
       disabled
       items={items}
       itemToString={(item) => (item ? item.text : '')}
-      placeholder="Filter..."
       titleText="ComboBox title"
       helperText="Combobox helper text"
     />
@@ -139,7 +136,6 @@ export const light = () => (
       light
       items={items}
       itemToString={(item) => (item ? item.text : '')}
-      placeholder="Filter..."
       titleText="ComboBox title"
       helperText="Combobox helper text"
     />
