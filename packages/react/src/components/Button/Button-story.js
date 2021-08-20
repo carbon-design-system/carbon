@@ -163,7 +163,7 @@ _Default.story = {
   name: 'Button',
 };
 
-export const MouseOut = () => {
+export const SetOfIconButtonsOnTimer = () => {
   const [timer, setTimer] = useState(0);
   const simulateLoading = () => {
     setTimer(true);

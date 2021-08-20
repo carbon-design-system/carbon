@@ -47,8 +47,8 @@ const Button = React.forwardRef(function Button(
   },
   ref
 ) {
-  const [isHovered, setIsHovered] = useState(false);
   const [allowTooltipVisibility, setAllowTooltipVisibility] = useState(false);
+  const [isHovered, setIsHovered] = useState(false);
   const [isFocused, setIsFocused] = useState(false);
   const tooltipRef = useRef(null);
   const tooltipTimeout = useRef(null);
@@ -68,7 +68,6 @@ const Button = React.forwardRef(function Button(
     if (hasIconOnly) {
       closeTooltips(evt);
       // setIsHovered(!isHovered);
-      setIsHovered(false);
       setIsFocused(true);
       setAllowTooltipVisibility(true);
     }
@@ -143,8 +142,8 @@ const Button = React.forwardRef(function Button(
     [`${prefix}--btn--${kind}`]: kind,
     [`${prefix}--btn--disabled`]: disabled,
     [`${prefix}--btn--expressive`]: isExpressive,
-    [`${prefix}--tooltip--hidden`]: hasIconOnly && !allowTooltipVisibility,
     [`${prefix}--tooltip--visible`]: isHovered,
+    [`${prefix}--tooltip--hidden`]: hasIconOnly && !allowTooltipVisibility,
     [`${prefix}--btn--icon-only`]: hasIconOnly,
     [`${prefix}--btn--selected`]: hasIconOnly && isSelected && kind === 'ghost',
     [`${prefix}--tooltip__trigger`]: hasIconOnly,
