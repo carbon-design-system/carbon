@@ -35,7 +35,7 @@ export const label02 = {
   fontSize: rem(scale[1]),
   fontWeight: fontWeights.regular,
   lineHeight: 1.29,
-  letterSpacing: px(0.32),
+  letterSpacing: px(0.16),
 };
 
 export const helperText01 = {
@@ -101,7 +101,12 @@ export const heading01 = {
   letterSpacing: px(0.16),
 };
 
-export const productiveHeading01 = heading01;
+export const productiveHeading01 = {
+  fontSize: rem(scale[1]),
+  fontWeight: fontWeights.semibold,
+  lineHeight: 1.29,
+  letterSpacing: px(0.16),
+};
 
 export const heading02 = {
   fontSize: rem(scale[2]),
@@ -110,7 +115,12 @@ export const heading02 = {
   letterSpacing: 0,
 };
 
-export const productiveHeading02 = heading02;
+export const productiveHeading02 = {
+  fontSize: rem(scale[2]),
+  fontWeight: fontWeights.semibold,
+  lineHeight: 1.375,
+  letterSpacing: 0,
+};
 
 export const productiveHeading03 = {
   fontSize: rem(scale[4]),
@@ -143,7 +153,7 @@ export const productiveHeading06 = {
 export const productiveHeading07 = {
   fontSize: rem(scale[11]),
   fontWeight: fontWeights.light,
-  lineHeight: 1.19,
+  lineHeight: 1.199,
   letterSpacing: 0,
 };
 
@@ -435,14 +445,14 @@ export const display04 = {
 export const legal01 = {
   fontSize: rem(scale[0]),
   fontWeight: fontWeights.regular,
-  lineHeight: 1,
+  lineHeight: 1.34,
   letterSpacing: px(0.32),
 };
 
 export const legal02 = {
   fontSize: rem(scale[1]),
   fontWeight: fontWeights.regular,
-  lineHeight: 1.125,
+  lineHeight: 1.29,
   letterSpacing: px(0.16),
 };
 
