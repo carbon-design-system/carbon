@@ -24,5 +24,6 @@ export function useMergedRefs(refs) {
         ref.current = node;
       }
     });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, refs);
 }

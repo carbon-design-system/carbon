@@ -8,7 +8,7 @@
 import 'wicg-inert';
 import PropTypes from 'prop-types';
 import React, { useEffect, useRef } from 'react';
-import { FocusScope } from './FocusScope';
+import { FocusScope } from '../FocusScope';
 import { useMergedRefs } from '../../internal/useMergedRefs';
 import { useSavedCallback } from '../../internal/useSavedCallback';
 import { match, keys } from '../../internal/keyboard';
@@ -17,13 +17,7 @@ import { match, keys } from '../../internal/keyboard';
  * @see https://www.tpgi.com/the-current-state-of-modal-dialog-accessibility/
  */
 const Dialog = React.forwardRef(function Dialog(props, forwardRef) {
-  const {
-    'aria-labelledby': labelledBy,
-    children,
-    onDismiss,
-    modal = true,
-    ...rest
-  } = props;
+  const { 'aria-labelledby': labelledBy, children, onDismiss, ...rest } = props;
   const dialogRef = useRef(null);
   const ref = useMergedRefs([dialogRef, forwardRef]);
   const savedOnDismiss = useSavedCallback(onDismiss);
@@ -36,76 +30,9 @@ const Dialog = React.forwardRef(function Dialog(props, forwardRef) {
   }
 
   useEffect(() => {
-    const changes = [];
-    const queue = Array.from(document.body.childNodes);
-
-    while (queue.length !== 0) {
-      const node = queue.shift();
-
-      // If a node is the modal (dialogRef), do nothing
-      if (node === dialogRef.current) {
-        continue;
-      }
-
-      // If a tree contains our `dialogRef`, traverse its children
-      if (node.contains(dialogRef.current)) {
-        queue.push(...Array.from(node.childNodes));
-        continue;
-      }
-
-      // If a node is a bumper, do nothing
-      if (
-        node.hasAttribute('data-dialog-bumper') &&
-        (dialogRef.current.previousSibling === node ||
-          dialogRef.current.nextSibling === node)
-      ) {
-        continue;
-      }
-
-      if (node.getAttribute('aria-hidden') === 'true') {
-        continue;
-      }
-
-      if (node.hasAttribute('inert')) {
-        continue;
-      }
-
-      // what if aria-hidden === 'false'
-      if (node.getAttribute('aria-hidden') === 'false') {
-        node.setAttribute('aria-hidden', 'true');
-        node.setAttribute('inert', '');
-        changes.push({
-          node,
-          attributes: {
-            'aria-hidden': 'false',
-          },
-        });
-        continue;
-      }
-
-      // Otherwise, set it to inert and set aria-hidden to true
-      node.setAttribute('aria-hidden', 'true');
-      node.setAttribute('inert', '');
-
-      changes.push({
-        node,
-      });
-    }
-
+    const changes = hide(document.body, dialogRef.current);
     return () => {
-      changes.forEach(({ node, attributes }) => {
-        node.removeAttribute('inert');
-        // This mutation needs to be asynchronous to allow the polyfill time to
-        // observe the change and allow mutations to occur
-        // https://github.com/WICG/inert#performance-and-gotchas
-        setTimeout(() => {
-          if (attributes && attributes['aria-hidden']) {
-            node.setAttribute('aria-hidden', attributes['aria-hidden']);
-          } else {
-            node.removeAttribute('aria-hidden');
-          }
-        }, 0);
-      });
+      show(changes);
     };
   }, []);
 
@@ -124,12 +51,103 @@ const Dialog = React.forwardRef(function Dialog(props, forwardRef) {
   );
 });
 
-Dialog.propTypes = {};
+Dialog.propTypes = {
+  /**
+   * Provide the associated element that labels the Dialog
+   */
+  'aria-labelledby': PropTypes.string.isRequired,
+
+  /**
+   * Provide children to be rendered inside of the Dialog
+   */
+  children: PropTypes.node,
+
+  /**
+   * Provide a handler that is called when the Dialog is requesting to be closed
+   */
+  onDismiss: PropTypes.func.isRequired,
+};
 
 if (__DEV__) {
   Dialog.displayName = 'Dialog';
 }
 
-function getElementsToHide(dialogNode) {}
+function hide(root, dialog) {
+  const changes = [];
+  const queue = Array.from(root.childNodes);
+
+  while (queue.length !== 0) {
+    const node = queue.shift();
+
+    if (node.nodeType !== Node.ELEMENT_NODE) {
+      continue;
+    }
+
+    // If a node is the dialog, do nothing
+    if (node === dialog) {
+      continue;
+    }
+
+    // If a tree contains our dialog, traverse its children
+    if (node.contains(dialog)) {
+      queue.push(...Array.from(node.childNodes));
+      continue;
+    }
+
+    // If a node is a bumper, do nothing
+    if (
+      node.hasAttribute('data-carbon-focus-scope') &&
+      (dialog.previousSibling === node || dialog.nextSibling === node)
+    ) {
+      continue;
+    }
+
+    if (node.getAttribute('aria-hidden') === 'true') {
+      continue;
+    }
+
+    if (node.hasAttribute('inert')) {
+      continue;
+    }
+
+    if (node.getAttribute('aria-hidden') === 'false') {
+      node.setAttribute('aria-hidden', 'true');
+      node.setAttribute('inert', '');
+      changes.push({
+        node,
+        attributes: {
+          'aria-hidden': 'false',
+        },
+      });
+      continue;
+    }
+
+    // Otherwise, set it to inert and set aria-hidden to true
+    node.setAttribute('aria-hidden', 'true');
+    node.setAttribute('inert', '');
+
+    changes.push({
+      node,
+    });
+  }
+
+  return changes;
+}
+
+function show(changes) {
+  changes.forEach(({ node, attributes }) => {
+    node.removeAttribute('inert');
+    // This mutation needs to be asynchronous to allow the polyfill time to
+    // observe the change and allow mutations to occur
+    // https://github.com/WICG/inert#performance-and-gotchas
+    setTimeout(() => {
+      if (attributes && attributes['aria-hidden']) {
+        node.setAttribute('aria-hidden', attributes['aria-hidden']);
+      } else {
+        node.removeAttribute('aria-hidden');
+      }
+    }, 0);
+  });
+}
 
 export { Dialog };

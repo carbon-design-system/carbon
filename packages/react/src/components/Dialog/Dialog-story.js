@@ -6,7 +6,7 @@
  */
 
 import * as React from 'react';
-import { FocusScope } from './FocusScope';
+import { FocusScope } from '../FocusScope';
 import { Dialog } from '../Dialog';
 import { useId } from '../../internal/useId';
 import { Portal } from '../Portal';

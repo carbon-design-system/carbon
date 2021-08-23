@@ -6,21 +6,20 @@
  */
 
 import PropTypes from 'prop-types';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import ReactDOM from 'react-dom';
 
 /**
  * Helper component for rendering content within a portal. By default, the
  * portal will render into document.body. You can customize this behavior with
  * the `container` prop. Any `children` provided to this component will be
- * rendered in the portal node.
+ * rendered inside of the container.
  */
 function Portal({ container, children }) {
   const [mountNode, setMountNode] = useState(null);
 
-  React.useEffect(() => {
-    const node = container.current || container || document.body;
-    setMountNode(node);
+  useEffect(() => {
+    setMountNode(container ? container.current : document.body);
   }, [container]);
 
   if (mountNode) {
@@ -39,9 +38,11 @@ Portal.propTypes = {
   /**
    * Provide a ref for a container node to render the portal
    */
-  container: PropTypes.shape({
-    current: PropTypes.any,
-  }),
+  container: PropTypes.oneOfType([
+    PropTypes.shape({
+      current: PropTypes.any,
+    }),
+  ]),
 };
 
 export { Portal };
