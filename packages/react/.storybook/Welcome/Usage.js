@@ -38,7 +38,7 @@ function Usage() {
       <p>
         Each component that is publicly available can be viewed in our
         Storybook. Each component folder contains an example of the component
-        variants, it's skeleton state, and a playground.
+        variants, its skeleton state, and a playground.
       </p>
       <figure>
         <img src={folder} alt="example of storybook folder structure" />{' '}
