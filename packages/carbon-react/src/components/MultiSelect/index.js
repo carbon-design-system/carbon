@@ -6,3 +6,4 @@
  */
 
 export { MultiSelect } from 'carbon-components-react';
+export { VanillaMultiselect } from './MultiSelect-vanilla.js';

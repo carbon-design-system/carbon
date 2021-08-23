@@ -7,6 +7,7 @@
 
 import React from 'react';
 import { MultiSelect } from 'carbon-components-react';
+import { MultiSelectV2 } from './MultiSelectV2'
 
 const items = [
   {
@@ -62,6 +63,12 @@ export const Default = () => {
     </div>
   );
 };
+
+const options = ['Joey', 'Johnny', 'Dee Dee', 'Tommy', 'Marky', 'Richie', 'Elvis', 'C.J']
+
+export const Vanilla = () => {
+  return <MultiSelectV2 label="Choose a Ramone" options={options}/>
+}
 
 export const WithInitialSelectedItems = () => {
   return (
