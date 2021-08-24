@@ -13,6 +13,7 @@ import RadioButtonGroup from '../RadioButtonGroup';
 import RadioButton from '../RadioButton';
 import Button from '../Button';
 import mdx from './FormGroup.mdx';
+import { FeatureFlags } from '../FeatureFlags';
 
 const props = () => ({
   disabled: boolean('Disabled (disabled)', false),
@@ -53,6 +54,37 @@ export const _Default = () => (
       <RadioButton labelText="Option 3" value="radio-3" id="radio-3" />
     </RadioButtonGroup>
   </FormGroup>
+);
+
+export const classNameChangeTest = () => (
+  <>
+    <FormGroup
+      className="TEST__CLASS"
+      legendId="formgroup-legend-id"
+      legendText="This group should place the same class on the fieldset and legend (existing behavior)"
+      style={{ maxWidth: '400px' }}>
+      <div style={{ marginBottom: '1rem' }}>
+        <TextInput id="one" labelText="First Name" />
+      </div>
+      <div style={{ marginBottom: '1rem' }}>
+        <TextInput id="two" labelText="Last Name" />
+      </div>
+    </FormGroup>
+    <FeatureFlags flags={{ 'enable-v11-release': true }}>
+      <FormGroup
+        className="TEST__CLASS"
+        legendId="formgroup-legend-id-2"
+        legendText="This group should only have the class placed on the fieldset"
+        style={{ maxWidth: '400px' }}>
+        <div style={{ marginBottom: '1rem' }}>
+          <TextInput id="one" labelText="First Name" />
+        </div>
+        <div style={{ marginBottom: '1rem' }}>
+          <TextInput id="two" labelText="Last Name" />
+        </div>
+      </FormGroup>
+    </FeatureFlags>
+  </>
 );
 
 _Default.story = {

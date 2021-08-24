@@ -9,6 +9,7 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import classnames from 'classnames';
 import { settings } from 'carbon-components';
+import { useFeatureFlag } from '../FeatureFlags';
 
 const { prefix } = settings;
 
@@ -23,7 +24,10 @@ const FormGroup = ({
   hasMargin,
   ...other
 }) => {
-  const classNamesLegend = classnames(`${prefix}--label`, className);
+  const enabled = useFeatureFlag('enable-v11-release');
+  const classNamesLegend = classnames(`${prefix}--label`, [
+    enabled ? null : className,
+  ]);
   const classNamesFieldset = classnames(`${prefix}--fieldset`, className, {
     [`${prefix}--fieldset--no-margin`]: !hasMargin,
   });
