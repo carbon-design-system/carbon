@@ -2013,7 +2013,9 @@ __metadata:
     babel-plugin-dev-expression: ^0.2.2
     babel-preset-carbon: ^0.1.0
     browserslist-config-carbon: ^10.6.1
+    carbon-components: 10.41.0
     carbon-components-react: ^7.42.0
+    carbon-icons: ^7.0.7
     css-loader: ^5.2.4
     fs-extra: ^10.0.0
     mini-css-extract-plugin: ^1.6.0
@@ -10522,6 +10524,18 @@ __metadata:
     whatwg-fetch: ^3.6.2
   languageName: unknown
   linkType: soft
+
+"carbon-components@npm:10.41.0":
+  version: 10.41.0
+  resolution: "carbon-components@npm:10.41.0"
+  dependencies:
+    "@carbon/telemetry": 0.0.0-alpha.6
+    flatpickr: 4.6.1
+    lodash.debounce: ^4.0.8
+    warning: ^3.0.0
+  checksum: 9cd5df5f26221aab6f963f8de682a735bbddb8f32fb7f2eb7685a0e748d1796a7ab138da605ea38705924f63fbc5e4f9470c7a0d67dd805a43597fae56aeffbd
+  languageName: node
+  linkType: hard
 
 "carbon-components@npm:^9.0.0":
   version: 9.91.5
