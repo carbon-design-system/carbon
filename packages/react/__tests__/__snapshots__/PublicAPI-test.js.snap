@@ -7996,9 +7996,6 @@ Map {
       },
     },
     "propTypes": Object {
-      "autoclose": Object {
-        "type": "bool",
-      },
       "children": Object {
         "type": "node",
       },
