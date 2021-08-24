@@ -37,6 +37,8 @@
     "storybook": "start-storybook -p 3000"
   },
   "peerDependencies": {
+    "carbon-components": "10.41.0",
+    "carbon-icons": "7.0.7",
     "react": "^16.8.6 || ^17.0.1",
     "react-dom": "^16.8.6 || ^17.0.1",
     "sass": "^1.32.12"
@@ -46,9 +48,7 @@
     "@carbon/icons-react": "^10.38.0",
     "@carbon/styles": "^0.3.0",
     "@carbon/telemetry": "0.0.0-alpha.6",
-    "carbon-components": "10.41.0",
-    "carbon-components-react": "^7.42.0",
-    "carbon-icons": "^7.0.7"
+    "carbon-components-react": "^7.42.0"
   },
   "devDependencies": {
     "@babel/core": "^7.14.6",
