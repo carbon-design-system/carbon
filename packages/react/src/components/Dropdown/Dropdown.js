@@ -132,7 +132,6 @@ const Dropdown = React.forwardRef(function Dropdown(
 
   const menuItemOptionRefs = useRef(items.map((_) => React.createRef()));
 
-  console.log();
   return (
     <div className={wrapperClasses} {...other}>
       {titleText && (
