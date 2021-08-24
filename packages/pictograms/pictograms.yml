@@ -484,6 +484,17 @@
     - build
     - iot
     - internet of things
+- name: build-applications-anywhere
+  friendly_name: Build applications anywhere
+  aliases:
+    - Red Hat
+    - speed
+    - storage
+    - applications
+    - anywhere
+    - build
+    - virtual
+    - cloud
 - name: build--leadership--and--culture
   friendly_name: Build Leadership and Culture
   aliases:
@@ -793,6 +804,11 @@
     - data
     - analytics
     - data analytics
+- name: chart--quadrant-plot
+  friendly_name: Chart quadrant plot
+  aliases:
+    - quadrant plot
+    - group plots
 - name: chart--radar
   friendly_name: Chart radar
   aliases:
@@ -825,6 +841,13 @@
     - data
     - analytics
     - data analytics
+- name: chart--scree-plot
+  friendly_name: Chart scree plot
+  aliases:
+    - scree plot
+    - line plot
+    - factor analysis
+    - principal component analysis
 - name: chart--stepper
   friendly_name: Chart stepper
   aliases:
@@ -1013,6 +1036,20 @@
     - cloud
     - managed services
     - services
+- name: cloud--native--01
+  friendly_name: Cloud native 01
+  aliases:
+    - Red Hat
+    - cloud
+    - native
+    - applications
+- name: cloud--native--02
+  friendly_name: Cloud native 02
+  aliases:
+    - Red Hat
+    - cloud
+    - native
+    - applications
 - name: cloud--oracle
   friendly_name: Cloud Oracle
   aliases:
@@ -1159,6 +1196,11 @@
     - cloudy
     - windy
     - weather
+- name: cluster
+  friendly_name: Cluster
+  aliases:
+    - Red Hat
+    - cluster
 - name: coat--hanger
   friendly_name: Coat hanger
   aliases:
@@ -1255,6 +1297,12 @@
     - connect
     - internet of things
     - iot
+- name: connect--applications
+  friendly_name: Connect applications
+  aliases:
+    - Red Hat
+    - connection
+    - application
 - name: connected--ecosystem
   friendly_name: Connected ecosystem
   aliases:
@@ -1291,6 +1339,22 @@
     - blockchain
     - food
     - supply chain
+- name: container
+  friendly_name: Container
+  aliases:
+    - Red Hat
+    - container
+    - storage, data
+- name: container--microservices
+  friendly_name: Container microservices
+  aliases:
+    - Red Hat
+    - container
+    - services
+    - micro
+    - microservices
+    - storage
+    - data
 - name: containers-and-cloud-native
   friendly_name: Containers and Cloud Native
   aliases:
@@ -1298,6 +1362,15 @@
     - container,
     - containers
     - kubernetes
+- name: containerized-applications
+  friendly_name: Containerized applications
+  aliases:
+    - Red Hat
+    - container
+    - applications
+    - security
+    - storage
+    - data
 - name: content--design
   friendly_name: Content design
   aliases:
@@ -1671,6 +1744,15 @@
     - Ecuador
     - Quito
     - South America
+- name: edge
+  friendly_name: Edge
+  aliases:
+    - Red Hat
+    - edge
+    - cloud
+    - hybrid
+    - IoT
+    - internet of things
 - name: education
   friendly_name: Education
   aliases:
@@ -2281,6 +2363,13 @@
     - grow
     - farm
     - crop
+- name: guitar
+  friendly_name: Guitar
+  aliases:
+    - guitar
+    - musical instrument
+    - music
+    - string instrument
 - name: hail
   friendly_name: Hail
   aliases:
@@ -2483,6 +2572,17 @@
     - cloud storage
     - hybrid cloud
     - cloud servers
+- name: hybrid--cloud--infrastructure
+  friendly_name: Hybrid Cloud infrastructure
+  aliases:
+    - Red Hat
+    - cloud
+    - hybrid
+    - infrastructure
+    - enterprise
+    - data
+    - storage
+    - applications
 - name: hybrid--cloud--services
   friendly_name: Hybrid cloud services
   aliases:
@@ -2504,6 +2604,13 @@
   aliases:
     - IBM iX®
     - IBM
+- name: ibm--rpa
+  friendly_name: IBM RPA
+  aliases:
+    - robot
+    - robotic process automation
+    - bot
+    - automation
 - name: ibm--z
   friendly_name: IBM Z®
   aliases:
@@ -2607,6 +2714,14 @@
     - study
     - networking
     - network
+- name: insurance
+  friendly_name: Insurance
+  aliases:
+    - insurance
+    - home insurance
+    - insure
+    - health insurance
+    - car insurance
 - name: integration
   friendly_name: Integration
   aliases:
@@ -2668,6 +2783,18 @@
     - cloud
     - software
     - code
+- name: juice
+  friendly_name: Juice
+  aliases:
+    - juice
+    - fresh
+    - squeeze
+    - lemon
+    - lime
+    - orange
+    - citrus
+    - drink
+    - fruit
 - name: justice
   friendly_name: Justice
   aliases:
@@ -2704,6 +2831,27 @@
     - Kuala
     - Lumpur
     - Petronas
+- name: kubernetes
+  friendly_name: Kubernetes
+  aliases:
+    - Red Hat
+    - Kubernetes
+    - open source
+    - automation
+    - native
+    - cloud
+    - container
+- name: kubernetes--pod
+  friendly_name: Kubernetes pod
+  aliases:
+    - Red Hat
+    - Kubernetes
+    - pod
+    - open source
+    - automation
+    - native
+    - cloud
+    - container
 - name: language--01
   friendly_name: Language 01
   aliases:
@@ -2910,6 +3058,16 @@
   aliases:
     - mail
     - verse
+- name: manage-applications-anywhere
+  friendly_name: Manage applications anywhere
+  aliases:
+    - Red Hat
+    - applications
+    - manage
+    - speed
+    - anywhere
+    - virtual
+    - cloud
 - name: managing--contractual--flow
   friendly_name: Managing contractual flow
   aliases:
@@ -3350,6 +3508,14 @@
     - Okinawa
     - Shurijo
     - Japan
+- name: open-source
+  friendly_name: Open source
+  aliases:
+    - Red Hat
+    - open
+    - code
+    - applications
+    - developer
 - name: optimize--cash-flow--01
   friendly_name: Optimize cash flow 01
   aliases:
@@ -3766,6 +3932,14 @@
     - qr code
     - code
     - ID
+- name: quantum-computing
+  friendly_name: Quantum computing
+  aliases:
+    - Red Hat
+    - computing
+    - AI
+    - Q
+    - quantum
 - name: question
   friendly_name: Question
   aliases:
@@ -3835,6 +4009,11 @@
     - data analytics
     - data
     - analytics
+- name: read-only
+  friendly_name: Read only
+  aliases:
+    - read
+    - read only
 - name: receipt
   friendly_name: Receipt
   aliases:
@@ -3864,6 +4043,13 @@
     - refinery
     - industry
     - oil
+- name: red-hat--applications
+  friendly_name: Red Hat applications
+  aliases:
+    - Red Hat
+    - applications
+    - software
+    - services
 - name: refresh
   friendly_name: Refresh
   aliases:
@@ -4180,6 +4366,13 @@
     - data
     - storage
     - backup
+- name: serverless
+  friendly_name: Serverless
+  aliases:
+    - serverless
+    - scale
+    - workload
+    - resource
 - name: servers
   friendly_name: Servers
   aliases:
@@ -4554,6 +4747,13 @@
     - interaction
     - device
     - mobile
+- name: synergy
+  friendly_name: Synergy
+  aliases:
+    - Red Hat
+    - synergy
+    - union
+    - Venn diagram
 - name: systems-devops--analyze
   friendly_name: Systems DevOps analyze
   aliases:
@@ -5058,6 +5258,16 @@
     - endpoint
     - management
     - security
+- name: universal-experiences
+  friendly_name: Universal experiences
+  aliases:
+    - universal experiences
+    - customer experience
+    - customer journey
+    - user experiences
+    - user journey
+    - customer experience design
+    - user experience design
 - name: university
   friendly_name: University
   aliases:
@@ -5078,12 +5288,6 @@
     - unlock
     - security
     - open
-- name: uruguay--palacio-salvo
-  friendly_name: Uruguay Palacio Salvo
-  aliases:
-    - Uruguay
-    - Palacio Salvo
-    - South America
 - name: upload--01
   friendly_name: Upload 01
   aliases:
@@ -5096,6 +5300,27 @@
     - upload 02
     - upload
     - input
+- name: uruguay--palacio-salvo
+  friendly_name: Uruguay Palacio Salvo
+  aliases:
+    - Uruguay
+    - Palacio Salvo
+    - South America
+- name: uruguay--sol-de-mayo
+  friendly_name: Uruguay Sol de Mayo
+  aliases:
+    - Uruguay
+    - Sol de Mayo
+    - South America
+    - montevideo
+    - maldonado
+    - salto
+    - uruguaya 
+    - uruguayo
+    - uruguayan
+    - sun
+    - sol
+    - may
 - name: user
   friendly_name: User
   aliases:
@@ -5195,6 +5420,22 @@
     - video play
     - video
     - controls
+- name: virtual--server
+  friendly_name: Virtual server
+  aliases:
+    - Red Hat
+    - virtual
+    - speed
+    - storage
+    - server, cloud
+- name: virtual--storage
+  friendly_name: Virtual storage
+  aliases:
+    - Red Hat
+    - virtual
+    - speed
+    - storage
+    - cloud
 - name: virus
   friendly_name: Virus
   aliases:
