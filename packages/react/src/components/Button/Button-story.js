@@ -32,6 +32,14 @@ const icons = {
     'PlayOutlineFilled32',
 };
 
+// const iconsForControls = {
+//   Add16,
+//   AddFilled16,
+//   Search16,
+//   PlayOutlineFilled16,
+//   PlayOutlineFilled32,
+// };
+
 const iconMap = {
   iconAddSolid,
   iconSearch,
@@ -288,6 +296,86 @@ export const Playground = () => {
     </>
   );
 };
+
+// export const Playground2 = (args) => {
+//   const regularProps = props.regular();
+//   // const iconOnly = props.iconOnly();
+//   const { stacked } = props.set();
+//   return (
+//     <>
+//       <div
+//         style={{
+//           display: 'flex',
+//           alignItems: 'center',
+//           flexWrap: 'wrap',
+//         }}>
+//         <Button {...args}>Buttons</Button>
+//         &nbsp;
+//         {!regularProps.kind.includes('danger') && (
+//           <>
+//             <Button hasIconOnly {...args}></Button>
+//             &nbsp;
+//             <Button hasIconOnly {...args} kind="ghost"></Button>
+//           </>
+//         )}
+//       </div>
+//       <div
+//         style={{
+//           marginTop: '1rem',
+//         }}>
+//         <ButtonSet stacked={stacked}>
+//           <Button {...args} kind="secondary">
+//             Secondary button
+//           </Button>
+//           <Button {...args} kind="primary">
+//             Primary button
+//           </Button>
+//         </ButtonSet>
+//       </div>
+//     </>
+//   );
+// };
+
+// Playground2.args = {
+//   className: 'some-class',
+//   kind: 'primary',
+//   icon: 'Add16',
+// };
+
+// Playground2.argTypes = {
+//   kind: {
+//     options: [
+//       'primary',
+//       'secondary',
+//       'tertiary',
+//       'ghost',
+//       'danger',
+//       'danger--tertiary',
+//       'danger--ghost',
+//     ],
+//     control: { type: 'select' },
+//   },
+//   as: {
+//     table: {
+//       disable: true,
+//     },
+//   },
+//   icon: {
+//     options: Object.keys(iconsForControls), // An array of serializable values
+//     mapping: iconsForControls, // Maps serializable option values to complex arg values
+//     control: {
+//       type: 'select', // Type 'select' is automatically inferred when 'options' is defined
+//       labels: {
+//         // 'labels' maps option values to string labels
+//         Add16: 'Add16',
+//         AddFilled16: 'AddFilled16',
+//         Search16: 'Search16',
+//         PlayOutlineFilled16: 'PlayOutlineFilled16',
+//         PlayOutlineFilled32: 'PlayOutlineFilled32',
+//       },
+//     },
+//   },
+// };
 
 export const IconButton = () => (
   <Button
