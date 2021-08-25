@@ -84,7 +84,7 @@ const props = {
         'Button icon'
       ),
       onClick: action('onClick'),
-      onFocus: action('onFocus'),
+      // onFocus: action('onFocus'),
     };
   },
   iconOnly: () => {
@@ -118,7 +118,7 @@ const props = {
         'center'
       ),
       onClick: action('onClick'),
-      onFocus: action('onFocus'),
+      // onFocus: action('onFocus'),
     };
   },
   set: () => {
@@ -135,7 +135,7 @@ const props = {
       ),
       stacked: boolean('Stack buttons vertically (stacked)', false),
       onClick: action('onClick'),
-      onFocus: action('onFocus'),
+      // onFocus: action('onFocus'),
     };
   },
 };
