@@ -32,6 +32,7 @@ module.exports = {
     '@storybook/addon-notes/register',
     'storybook-readme/register',
     '@storybook/addon-links',
+    '@storybook/addon-controls',
     require.resolve('./addon-theme/register'),
   ],
 
