@@ -3,7 +3,7 @@ import React, { useCallback } from 'react';
 import { Pagination as CarbonPagination } from 'carbon-components-react';
 
 /**
- * Wrapeed version of Carbon `<Pagination>`, that uses zero-based starting row
+ * Wrapped version of Carbon `<Pagination>`, that uses zero-based starting row
  * index instead of page number.
  */
 const Pagination = ({

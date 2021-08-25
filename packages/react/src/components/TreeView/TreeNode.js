@@ -143,9 +143,9 @@ export default function TreeNode({
      * Dynamically calculate padding to recreate tree node indentation
      * - parent nodes have (depth + 1rem) left padding
      * - leaf nodes have (depth + 2.5rem) left padding without icons (because
-     *   of expando icon + spacing)
+     *   of expand icon + spacing)
      * - leaf nodes have (depth + 2rem) left padding with icons (because of
-     *   reduced spacing between the expando icon and the node icon + label)
+     *   reduced spacing between the expand icon and the node icon + label)
      */
     const calcOffset = () => {
       // parent node
