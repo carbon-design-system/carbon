@@ -47,7 +47,7 @@ export const helperText01 = {
 export const helperText02 = {
   fontSize: rem(scale[1]),
   lineHeight: 1.28571,
-  letterSpacing: px(0.32),
+  letterSpacing: px(0.16),
 };
 
 export const bodyShort01 = {
@@ -97,7 +97,7 @@ export const code02 = {
 export const heading01 = {
   fontSize: rem(scale[1]),
   fontWeight: fontWeights.semibold,
-  lineHeight: 1.28571,
+  lineHeight: 1.42857,
   letterSpacing: px(0.16),
 };
 
@@ -111,7 +111,7 @@ export const productiveHeading01 = {
 export const heading02 = {
   fontSize: rem(scale[2]),
   fontWeight: fontWeights.semibold,
-  lineHeight: 1.375,
+  lineHeight: 1.5,
   letterSpacing: 0,
 };
 
@@ -282,6 +282,7 @@ export const expressiveParagraph01 = {
 };
 
 export const quotation01 = {
+  fontFamily: fontFamilies.serif,
   fontSize: rem(scale[4]),
   fontWeight: fontWeights.regular,
   lineHeight: 1.3,
@@ -314,6 +315,7 @@ export const quotation01 = {
 };
 
 export const quotation02 = {
+  fontFamily: fontFamilies.serif,
   fontSize: rem(scale[7]),
   fontWeight: fontWeights.light,
   lineHeight: 1.25,
@@ -463,7 +465,6 @@ export const body01 = bodyLong01;
 export const body02 = bodyLong02;
 
 // Fixed heading styles
-// heading-01 and heading-02 already exist
 export const headingCompact01 = productiveHeading01;
 export const headingCompact02 = productiveHeading02;
 export const heading03 = productiveHeading03;
