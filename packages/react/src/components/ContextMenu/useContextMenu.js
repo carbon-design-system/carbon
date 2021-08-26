@@ -6,7 +6,6 @@ import { useEffect, useState } from 'react';
  */
 function useContextMenu(trigger = document) {
   const [open, setOpen] = useState(false);
-  const [canBeClosed, setCanBeClosed] = useState(false);
   const [position, setPosition] = useState([0, 0]);
 
   function openContextMenu(e) {
@@ -16,32 +15,6 @@ function useContextMenu(trigger = document) {
 
     setPosition([x, y]);
     setOpen(true);
-
-    // Safari emits the click event when preventDefault was called on
-    // the contextmenu event. This is registered by the ClickListener
-    // component and would lead to immediate closing when a user is
-    // triggering the menu with ctrl+click. To prevent this, we only
-    // allow the menu to be closed after the click event was received.
-    // Since other browsers don't emit this event, it's also reset with
-    // a 50ms delay after mouseup event was called.
-
-    document.addEventListener(
-      'mouseup',
-      () => {
-        setTimeout(() => {
-          setCanBeClosed(true);
-        }, 50);
-      },
-      { once: true }
-    );
-
-    document.addEventListener(
-      'click',
-      () => {
-        setCanBeClosed(true);
-      },
-      { once: true }
-    );
   }
 
   function onClose() {
@@ -66,7 +39,6 @@ function useContextMenu(trigger = document) {
     open,
     x: position[0],
     y: position[1],
-    autoclose: canBeClosed,
     onClose,
   };
 }

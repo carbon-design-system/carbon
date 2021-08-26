@@ -78,9 +78,9 @@ team are concerned with:
 
 ### Triaging a new issue
 
-Triage is the process of determing the severity and priority of issues _as they
-come in_. We need to make sure we know how serious a problem is and how quickly
-it should be addressed.
+Triage is the process of determining the severity and priority of issues _as
+they come in_. We need to make sure we know how serious a problem is and how
+quickly it should be addressed.
 
 ### Triage Process
 
@@ -97,10 +97,10 @@ _Process to triaged_
 
 <summary>Is there a duplicate issue?</summary>
 
-We recieve enough duplicate issues that it is always a good idea to check before
-moving on in the triage process. We have issues related to accessibilty that
+We receive enough duplicate issues that it is always a good idea to check before
+moving on in the triage process. We have issues related to accessibility that
 catalogue multiple problems so be sure to check especially with incoming
-accessibilty problems.
+accessibility problems.
 
 If you find a duplicate, comment to the author, label it as a duplicate, and
 close the issue.
@@ -126,7 +126,7 @@ directions in that section.
 The most important part of the issue template is the "steps to reproduce"
 section, if the author didn't provide that (and reproduction isn't obvious)
 comment asking for reproduction and other relevant details not filled out in the
-templete.
+template.
 
 </details>
 
@@ -327,9 +327,9 @@ typically _as complex_ as issue triage/tracking, but it's equally important!
 If the pull request is a WIP (work in progress), RFC (request for comment), or
 Draft then it can be moved to the appropriate swimlane. There are usually a fair
 few of these active at a time and don't need the same regard as an _external_
-pull requets, but they can be helpful to reference when a Work In Progress pull
+pull requests, but they can be helpful to reference when a Work In Progress pull
 request addresses an issue and the maker of that issue asks for a status report
-or update (a common occurance).
+or update (a common occurrence).
 
 ### Pull requests with failing tests or merge conflicts
 

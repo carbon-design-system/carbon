@@ -30,7 +30,7 @@ const cases = [
     'Test32',
   ],
   [
-    'with namespce',
+    'with namespace',
     {
       name: 'test',
       size: '32',
