@@ -6,7 +6,7 @@
  */
 
 import React, { useState } from 'react';
-import { action } from '@storybook/addon-actions';
+// import { action } from '@storybook/addon-actions';
 import { withKnobs, boolean, select, text } from '@storybook/addon-knobs';
 import { iconAddSolid, iconSearch } from 'carbon-icons';
 import {
@@ -83,7 +83,7 @@ const props = {
         'Icon description (iconDescription)',
         'Button icon'
       ),
-      onClick: action('onClick'),
+      // onClick: action('onClick'),
       // onFocus: action('onFocus'),
     };
   },
@@ -117,7 +117,7 @@ const props = {
         ['start', 'center', 'end'],
         'center'
       ),
-      onClick: action('onClick'),
+      // onClick: action('onClick'),
       // onFocus: action('onFocus'),
     };
   },
@@ -134,7 +134,7 @@ const props = {
         'Button icon'
       ),
       stacked: boolean('Stack buttons vertically (stacked)', false),
-      onClick: action('onClick'),
+      // onClick: action('onClick'),
       // onFocus: action('onFocus'),
     };
   },
@@ -294,7 +294,7 @@ export const IconButton = () => (
     renderIcon={Add16}
     iconDescription="Icon Description"
     hasIconOnly
-    onClick={action('onClick')}
+    // onClick={action('onClick')}
   />
 );
 
