@@ -1,0 +1,54 @@
+@import '~carbon-components/scss/globals/scss/vendor/@carbon/layout/scss/breakpoint';
+@import '~carbon-components/scss/globals/scss/typography';
+
+.usage__container {
+  max-width: 1200px;
+}
+
+.usage__container ul {
+  padding-left: 1rem;
+  margin-top: 1.5rem;
+  list-style: circle;
+}
+
+.usage__container li {
+  margin-top: 0.5rem;
+}
+
+.usage__container img {
+  max-width: 100%;
+
+  @include carbon--breakpoint(lg) {
+    max-width: 75%;
+  }
+}
+
+.usage__container .usage__header-img {
+  max-width: 100%;
+}
+
+.usage__container h2 {
+  margin-top: 5rem;
+}
+
+.usage__container h3 {
+  margin-top: 4rem;
+}
+
+.usage__container p {
+  margin-top: 1.5rem;
+
+  @include carbon--breakpoint(md) {
+    max-width: 75%;
+  }
+}
+
+.usage__container figure {
+  margin-top: 1.5rem;
+}
+
+.usage__container figcaption {
+  @include type-style('caption-01');
+
+  margin-top: 0.25rem;
+}

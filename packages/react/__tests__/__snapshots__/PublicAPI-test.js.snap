@@ -2880,6 +2880,243 @@ Map {
       },
     },
   },
+  "FilterableMultiSelect" => Object {
+    "defaultProps": Object {
+      "ariaLabel": "Choose an item",
+      "compareItems": [Function],
+      "direction": "bottom",
+      "disabled": false,
+      "filterItems": [Function],
+      "initialSelectedItems": Array [],
+      "itemToString": [Function],
+      "light": false,
+      "locale": "en",
+      "open": false,
+      "selectionFeedback": "top-after-reopen",
+      "sortItems": [Function],
+    },
+    "displayName": "MultiSelect.Filterable",
+    "propTypes": Object {
+      "ariaLabel": Object {
+        "type": "string",
+      },
+      "compareItems": Object {
+        "isRequired": true,
+        "type": "func",
+      },
+      "direction": Object {
+        "args": Array [
+          Array [
+            "top",
+            "bottom",
+          ],
+        ],
+        "type": "oneOf",
+      },
+      "disabled": Object {
+        "type": "bool",
+      },
+      "downshiftProps": Object {
+        "args": Array [
+          Object {
+            "children": Object {
+              "type": "func",
+            },
+            "defaultHighlightedIndex": Object {
+              "type": "number",
+            },
+            "defaultIsOpen": Object {
+              "type": "bool",
+            },
+            "environment": Object {
+              "args": Array [
+                Object {
+                  "addEventListener": Object {
+                    "type": "func",
+                  },
+                  "document": Object {
+                    "args": Array [
+                      Object {
+                        "activeElement": Object {
+                          "type": "any",
+                        },
+                        "body": Object {
+                          "type": "any",
+                        },
+                        "getElementById": Object {
+                          "type": "func",
+                        },
+                      },
+                    ],
+                    "type": "shape",
+                  },
+                  "removeEventListener": Object {
+                    "type": "func",
+                  },
+                },
+              ],
+              "type": "shape",
+            },
+            "getA11yStatusMessage": Object {
+              "type": "func",
+            },
+            "getItemId": Object {
+              "type": "func",
+            },
+            "highlightedIndex": Object {
+              "type": "number",
+            },
+            "id": Object {
+              "type": "string",
+            },
+            "initialHighlightedIndex": Object {
+              "type": "number",
+            },
+            "initialInputValue": Object {
+              "type": "string",
+            },
+            "initialIsOpen": Object {
+              "type": "bool",
+            },
+            "initialSelectedItem": Object {
+              "type": "any",
+            },
+            "inputId": Object {
+              "type": "string",
+            },
+            "inputValue": Object {
+              "type": "string",
+            },
+            "isOpen": Object {
+              "type": "bool",
+            },
+            "itemCount": Object {
+              "type": "number",
+            },
+            "itemToString": Object {
+              "type": "func",
+            },
+            "labelId": Object {
+              "type": "string",
+            },
+            "menuId": Object {
+              "type": "string",
+            },
+            "onChange": Object {
+              "type": "func",
+            },
+            "onInputValueChange": Object {
+              "type": "func",
+            },
+            "onOuterClick": Object {
+              "type": "func",
+            },
+            "onSelect": Object {
+              "type": "func",
+            },
+            "onStateChange": Object {
+              "type": "func",
+            },
+            "onUserAction": Object {
+              "type": "func",
+            },
+            "scrollIntoView": Object {
+              "type": "func",
+            },
+            "selectedItem": Object {
+              "type": "any",
+            },
+            "selectedItemChanged": Object {
+              "type": "func",
+            },
+            "stateReducer": Object {
+              "type": "func",
+            },
+            "suppressRefError": Object {
+              "type": "bool",
+            },
+          },
+        ],
+        "type": "shape",
+      },
+      "id": Object {
+        "isRequired": true,
+        "type": "string",
+      },
+      "initialSelectedItems": Object {
+        "type": "array",
+      },
+      "invalid": Object {
+        "type": "bool",
+      },
+      "invalidText": Object {
+        "type": "node",
+      },
+      "itemToString": Object {
+        "type": "func",
+      },
+      "items": Object {
+        "isRequired": true,
+        "type": "array",
+      },
+      "light": Object {
+        "type": "bool",
+      },
+      "locale": Object {
+        "type": "string",
+      },
+      "onChange": Object {
+        "type": "func",
+      },
+      "onMenuChange": Object {
+        "type": "func",
+      },
+      "open": Object {
+        "type": "bool",
+      },
+      "placeholder": Object {
+        "isRequired": true,
+        "type": "string",
+      },
+      "selectionFeedback": Object {
+        "args": Array [
+          Array [
+            "top",
+            "fixed",
+            "top-after-reopen",
+          ],
+        ],
+        "type": "oneOf",
+      },
+      "size": Object {
+        "args": Array [
+          Array [
+            "sm",
+            "md",
+            "lg",
+            "xl",
+          ],
+        ],
+        "type": "oneOf",
+      },
+      "sortItems": Object {
+        "isRequired": true,
+        "type": "func",
+      },
+      "translateWithId": Object {
+        "type": "func",
+      },
+      "useTitleInItem": Object {
+        "type": "bool",
+      },
+      "warn": Object {
+        "type": "bool",
+      },
+      "warnText": Object {
+        "type": "node",
+      },
+    },
+  },
   "Form" => Object {
     "propTypes": Object {
       "children": Object {
