@@ -49,7 +49,7 @@ $legal-01: (
 $legal-02: (
   font-size: scale.type-scale(2),
   font-weight: font-family.font-weight('regular'),
-  line-height: 1.28571,
+  line-height: 1.28572,
   letter-spacing: 0.16px,
 ) !default;
 
@@ -69,7 +69,7 @@ $helper-text-01: (
 $body-short-01: (
   font-size: scale.type-scale(2),
   font-weight: font-family.font-weight('regular'),
-  line-height: 1.28571,
+  line-height: 1.28572,
   letter-spacing: 0.16px,
 ) !default;
 
@@ -161,7 +161,7 @@ $heading-01: (
 $productive-heading-01: (
   font-size: scale.type-scale(2),
   font-weight: font-family.font-weight('semibold'),
-  line-height: 1.28571,
+  line-height: 1.28572,
   letter-spacing: 0.16px,
 ) !default;
 
@@ -216,7 +216,7 @@ $heading-03: $productive-heading-03 !default;
 $productive-heading-04: (
   font-size: scale.type-scale(7),
   font-weight: font-family.font-weight('regular'),
-  line-height: 1.28571,
+  line-height: 1.28572,
   letter-spacing: 0,
 ) !default;
 
@@ -312,7 +312,7 @@ $fluid-heading-03: $expressive-heading-03 !default;
 $expressive-heading-04: (
   font-size: scale.type-scale(7),
   font-weight: font-family.font-weight('regular'),
-  line-height: 1.28571,
+  line-height: 1.28572,
   letter-spacing: 0,
   breakpoints: (
     xlg: (
@@ -406,7 +406,7 @@ $expressive-paragraph-01: (
   breakpoints: (
     lg: (
       font-size: scale.type-scale(7),
-      line-height: 1.28571,
+      line-height: 1.28572,
     ),
     max: (
       font-size: scale.type-scale(8),
@@ -439,7 +439,7 @@ $quotation-01: (
     ),
     xlg: (
       font-size: scale.type-scale(7),
-      line-height: 1.28571,
+      line-height: 1.28572,
     ),
     max: (
       font-size: scale.type-scale(8),
