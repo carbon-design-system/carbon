@@ -227,14 +227,16 @@ letter-spacing: 0;"
 `;
 
 exports[`styles fluidQuotation01 should be printable 1`] = `
-"font-size: 1.25rem;
+"font-family: 'IBM Plex Serif', 'Georgia', Times, serif;
+font-size: 1.25rem;
 font-weight: 400;
 line-height: 1.3;
 letter-spacing: 0;"
 `;
 
 exports[`styles fluidQuotation02 should be printable 1`] = `
-"font-size: 2rem;
+"font-family: 'IBM Plex Serif', 'Georgia', Times, serif;
+font-size: 2rem;
 font-weight: 300;
 line-height: 1.25;
 letter-spacing: 0;"
@@ -243,14 +245,14 @@ letter-spacing: 0;"
 exports[`styles heading01 should be printable 1`] = `
 "font-size: 0.875rem;
 font-weight: 600;
-line-height: 1.28571;
+line-height: 1.42857;
 letter-spacing: 0.16px;"
 `;
 
 exports[`styles heading02 should be printable 1`] = `
 "font-size: 1rem;
 font-weight: 600;
-line-height: 1.375;
+line-height: 1.5;
 letter-spacing: 0;"
 `;
 
@@ -312,7 +314,7 @@ letter-spacing: 0.32px;"
 exports[`styles helperText02 should be printable 1`] = `
 "font-size: 0.875rem;
 line-height: 1.28571;
-letter-spacing: 0.32px;"
+letter-spacing: 0.16px;"
 `;
 
 exports[`styles label01 should be printable 1`] = `
@@ -393,14 +395,16 @@ letter-spacing: 0;"
 `;
 
 exports[`styles quotation01 should be printable 1`] = `
-"font-size: 1.25rem;
+"font-family: 'IBM Plex Serif', 'Georgia', Times, serif;
+font-size: 1.25rem;
 font-weight: 400;
 line-height: 1.3;
 letter-spacing: 0;"
 `;
 
 exports[`styles quotation02 should be printable 1`] = `
-"font-size: 2rem;
+"font-family: 'IBM Plex Serif', 'Georgia', Times, serif;
+font-size: 2rem;
 font-weight: 300;
 line-height: 1.25;
 letter-spacing: 0;"
