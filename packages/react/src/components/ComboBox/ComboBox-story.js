@@ -64,7 +64,7 @@ export const combobox = () => (
   <div style={{ width: 300 }}>
     <ComboBox
       onChange={() => {}}
-      id="carbon-combobox-1"
+      id="carbon-combobox"
       items={items}
       itemToString={(item) => (item ? item.text : '')}
       placeholder="Filter..."
