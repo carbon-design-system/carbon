@@ -13,54 +13,54 @@ import { scale } from './scale';
 export const caption01 = {
   fontSize: rem(scale[0]),
   fontWeight: fontWeights.regular,
-  lineHeight: 1.34,
+  lineHeight: 1.33333,
   letterSpacing: px(0.32),
 };
 
 export const caption02 = {
   fontSize: rem(scale[1]),
   fontWeight: fontWeights.regular,
-  lineHeight: 1.29,
+  lineHeight: 1.285714,
   letterSpacing: px(0.32),
 };
 
 export const label01 = {
   fontSize: rem(scale[0]),
   fontWeight: fontWeights.regular,
-  lineHeight: 1.34,
+  lineHeight: 1.33333,
   letterSpacing: px(0.32),
 };
 
 export const label02 = {
   fontSize: rem(scale[1]),
   fontWeight: fontWeights.regular,
-  lineHeight: 1.29,
+  lineHeight: 1.285714,
   letterSpacing: px(0.16),
 };
 
 export const helperText01 = {
   fontSize: rem(scale[0]),
-  lineHeight: 1.34,
+  lineHeight: 1.33333,
   letterSpacing: px(0.32),
 };
 
 export const helperText02 = {
   fontSize: rem(scale[1]),
-  lineHeight: 1.29,
+  lineHeight: 1.285714,
   letterSpacing: px(0.32),
 };
 
 export const bodyShort01 = {
   fontSize: rem(scale[1]),
   fontWeight: fontWeights.regular,
-  lineHeight: 1.29,
+  lineHeight: 1.285714,
   letterSpacing: px(0.16),
 };
 
 export const bodyLong01 = {
   fontSize: rem(scale[1]),
   fontWeight: fontWeights.regular,
-  lineHeight: 1.43,
+  lineHeight: 1.42857,
   letterSpacing: px(0.16),
 };
 
@@ -82,7 +82,7 @@ export const code01 = {
   fontFamily: fontFamilies.mono,
   fontSize: rem(scale[0]),
   fontWeight: fontWeights.regular,
-  lineHeight: 1.34,
+  lineHeight: 1.33333,
   letterSpacing: px(0.32),
 };
 
@@ -90,21 +90,21 @@ export const code02 = {
   fontFamily: fontFamilies.mono,
   fontSize: rem(scale[1]),
   fontWeight: fontWeights.regular,
-  lineHeight: 1.43,
+  lineHeight: 1.42857,
   letterSpacing: px(0.32),
 };
 
 export const heading01 = {
   fontSize: rem(scale[1]),
   fontWeight: fontWeights.semibold,
-  lineHeight: 1.29,
+  lineHeight: 1.285714,
   letterSpacing: px(0.16),
 };
 
 export const productiveHeading01 = {
   fontSize: rem(scale[1]),
   fontWeight: fontWeights.semibold,
-  lineHeight: 1.29,
+  lineHeight: 1.285714,
   letterSpacing: px(0.16),
 };
 
@@ -132,7 +132,7 @@ export const productiveHeading03 = {
 export const productiveHeading04 = {
   fontSize: rem(scale[6]),
   fontWeight: fontWeights.regular,
-  lineHeight: 1.29,
+  lineHeight: 1.285714,
   letterSpacing: 0,
 };
 
@@ -187,7 +187,7 @@ export const expressiveHeading03 = {
 export const expressiveHeading04 = {
   fontSize: rem(scale[6]),
   fontWeight: fontWeights.regular,
-  lineHeight: 1.29,
+  lineHeight: 1.285714,
   letterSpacing: 0,
   breakpoints: {
     xlg: {
@@ -272,7 +272,7 @@ export const expressiveParagraph01 = {
   breakpoints: {
     lg: {
       fontSize: rem(scale[6]),
-      lineHeight: 1.29,
+      lineHeight: 1.285714,
     },
     max: {
       fontSize: rem(scale[7]),
@@ -301,7 +301,7 @@ export const quotation01 = {
     xlg: {
       fontSize: rem(scale[6]),
       fontWeight: fontWeights.regular,
-      lineHeight: 1.29,
+      lineHeight: 1.285714,
       letterSpacing: 0,
     },
     max: {
@@ -445,14 +445,14 @@ export const display04 = {
 export const legal01 = {
   fontSize: rem(scale[0]),
   fontWeight: fontWeights.regular,
-  lineHeight: 1.34,
+  lineHeight: 1.33333,
   letterSpacing: px(0.32),
 };
 
 export const legal02 = {
   fontSize: rem(scale[1]),
   fontWeight: fontWeights.regular,
-  lineHeight: 1.29,
+  lineHeight: 1.285714,
   letterSpacing: px(0.16),
 };
 
