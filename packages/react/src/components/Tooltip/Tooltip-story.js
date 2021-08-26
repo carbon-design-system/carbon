@@ -147,6 +147,31 @@ export default {
     },
   },
 };
+export const TEST = () => (
+  <div
+    style={{
+      display: 'flex',
+      flexDirection: 'row',
+      flex: 1,
+      justifyContent: 'center',
+      alignItems: 'center',
+      height: '100vh',
+    }}>
+    <p style={{ textAlign: 'center', marginBottom: '3rem' }}>blah</p>
+    <Tooltip>
+      Hi!
+      <div className={`${prefix}--tooltip__footer`}>
+        <a href="/" className={`${prefix}--link`}>
+          Learn More
+        </a>
+        <Button size="small">Create</Button>
+      </div>
+    </Tooltip>
+    <br />
+    <Tooltip>Hello again!</Tooltip>
+    <Tooltip>Hello again blahhhhhh</Tooltip>
+  </div>
+);
 
 export const DefaultBottom = () => (
   <div style={containerStyles}>
