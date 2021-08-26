@@ -61,30 +61,17 @@ export default {
 };
 
 export const combobox = () => (
-  <>
-    <div style={{ width: 300 }}>
-      <ComboBox
-        onChange={() => {}}
-        id="carbon-combobox-1"
-        items={items}
-        itemToString={(item) => (item ? item.text : '')}
-        placeholder="Filter..."
-        titleText="ComboBox title"
-        helperText="Combobox helper text"
-      />
-    </div>
-    <div style={{ width: 300, position: 'absolute', right: 0 }}>
-      <ComboBox
-        onChange={() => {}}
-        id="carbon-combobox-2"
-        items={items}
-        itemToString={(item) => (item ? item.text : '')}
-        placeholder="Filter..."
-        titleText="ComboBox title"
-        helperText="Combobox helper text"
-      />
-    </div>
-  </>
+  <div style={{ width: 300 }}>
+    <ComboBox
+      onChange={() => {}}
+      id="carbon-combobox-1"
+      items={items}
+      itemToString={(item) => (item ? item.text : '')}
+      placeholder="Filter..."
+      titleText="ComboBox title"
+      helperText="Combobox helper text"
+    />
+  </div>
 );
 
 const props = () => ({
@@ -157,4 +144,31 @@ export const light = () => (
       helperText="Combobox helper text"
     />
   </div>
+);
+
+export const multipleInstances = () => (
+  <>
+    <div style={{ width: 300 }}>
+      <ComboBox
+        onChange={() => {}}
+        id="carbon-combobox-1"
+        items={items}
+        itemToString={(item) => (item ? item.text : '')}
+        placeholder="Filter..."
+        titleText="ComboBox title"
+        helperText="Combobox helper text"
+      />
+    </div>
+    <div style={{ width: 300, position: 'absolute', right: 0 }}>
+      <ComboBox
+        onChange={() => {}}
+        id="carbon-combobox-2"
+        items={items}
+        itemToString={(item) => (item ? item.text : '')}
+        placeholder="Filter..."
+        titleText="ComboBox title"
+        helperText="Combobox helper text"
+      />
+    </div>
+  </>
 );
