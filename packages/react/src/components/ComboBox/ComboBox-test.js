@@ -221,27 +221,31 @@ describe('ComboBox', () => {
       const firstComboboxChevron = within(firstCombobox).getByRole('button');
       const secondComboboxChevron = within(secondCombobox).getByRole('button');
 
-      expect(within(firstCombobox).getByRole('listbox')).toBeEmptyDOMElement();
-      expect(within(secondCombobox).getByRole('listbox')).toBeEmptyDOMElement();
+      function firstListBox() {
+        return within(firstCombobox).getByRole('listbox');
+      }
+
+      function secondListBox() {
+        return within(secondCombobox).getByRole('listbox');
+      }
+
+      expect(firstListBox()).toBeEmptyDOMElement();
+      expect(secondListBox()).toBeEmptyDOMElement();
 
       userEvent.click(firstComboboxChevron);
 
-      expect(
-        within(firstCombobox).getByRole('listbox')
-      ).not.toBeEmptyDOMElement();
-      expect(within(secondCombobox).getByRole('listbox')).toBeEmptyDOMElement();
+      expect(firstListBox()).not.toBeEmptyDOMElement();
+      expect(secondListBox()).toBeEmptyDOMElement();
 
       userEvent.click(secondComboboxChevron);
 
-      expect(within(firstCombobox).getByRole('listbox')).toBeEmptyDOMElement();
-      expect(
-        within(secondCombobox).getByRole('listbox')
-      ).not.toBeEmptyDOMElement();
+      expect(firstListBox()).toBeEmptyDOMElement();
+      expect(secondListBox()).not.toBeEmptyDOMElement();
 
       userEvent.click(secondComboboxChevron);
 
-      expect(within(firstCombobox).getByRole('listbox')).toBeEmptyDOMElement();
-      expect(within(secondCombobox).getByRole('listbox')).toBeEmptyDOMElement();
+      expect(firstListBox()).toBeEmptyDOMElement();
+      expect(secondListBox()).toBeEmptyDOMElement();
     });
   });
 });
