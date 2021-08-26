@@ -6,5 +6,5 @@
 //
 
 @function loading-progress($circumference, $percentage) {
-  @return $circumference - $percentage / 100 * $circumference;
+  @return $circumference - $percentage * 0.01 * $circumference;
 }

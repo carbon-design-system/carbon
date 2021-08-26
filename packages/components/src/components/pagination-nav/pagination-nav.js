@@ -185,7 +185,7 @@ class PaginationNav extends mixin(
    * The component options.
    * If `options` is specified in the constructor, {@linkcode PaginationNav.create .create()},
    * or {@linkcode PaginationNav.init .init()},
-   * properties in this object are overriden for the instance being create and how {@linkcode PaginationNav.init .init()} works.
+   * properties in this object are overridden for the instance being create and how {@linkcode PaginationNav.init .init()} works.
    * @member PaginationNav.options
    * @type {object}
    * @property {string} selectorInit The data attribute to find pagination nav.

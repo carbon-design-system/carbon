@@ -2586,14 +2586,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"sass@npm:^1.32.7":
-  version: 1.35.1
-  resolution: "sass@npm:1.35.1"
+"sass@npm:^1.36.0":
+  version: 1.37.5
+  resolution: "sass@npm:1.37.5"
   dependencies:
     chokidar: ">=3.0.0 <4.0.0"
   bin:
     sass: sass.js
-  checksum: f49e738d637971f5985ab07aeda79629a9b555cca5e414ae2750b90bc9ce94703beada7f8cb5cbf972942e4c6ea941457846846618f2c6a8cd138087ee0502b2
+  checksum: 301925e66ea8ac402fedc8e9b938fc000b8ae683ffeae474ed05bf34ee8a4b7a2e1a42a37a1bf2fbb7a5a9e88df5c0175bdbb3866cedc3bedde41a4270514d75
   languageName: node
   linkType: hard
 
@@ -2981,7 +2981,7 @@ __metadata:
     next: ^10.0.7
     react: ^17.0.1
     react-dom: ^17.0.1
-    sass: ^1.32.7
+    sass: ^1.36.0
   languageName: unknown
   linkType: soft
 

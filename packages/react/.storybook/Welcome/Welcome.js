@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 import React from 'react';
-import bg from './carbon_bg.png';
+import bg from './img/carbon_bg.png';
 import './welcome.scss';
 import PackageInfo from './../../package.json';
 
