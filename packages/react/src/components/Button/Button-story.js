@@ -6,7 +6,6 @@
  */
 
 import React, { useState } from 'react';
-// import { action } from '@storybook/addon-actions';
 import { withKnobs, boolean, select, text } from '@storybook/addon-knobs';
 import { iconAddSolid, iconSearch } from 'carbon-icons';
 import {
@@ -83,8 +82,6 @@ const props = {
         'Icon description (iconDescription)',
         'Button icon'
       ),
-      // onClick: action('onClick'),
-      // onFocus: action('onFocus'),
     };
   },
   iconOnly: () => {
@@ -117,8 +114,6 @@ const props = {
         ['start', 'center', 'end'],
         'center'
       ),
-      // onClick: action('onClick'),
-      // onFocus: action('onFocus'),
     };
   },
   set: () => {
@@ -134,8 +129,6 @@ const props = {
         'Button icon'
       ),
       stacked: boolean('Stack buttons vertically (stacked)', false),
-      // onClick: action('onClick'),
-      // onFocus: action('onFocus'),
     };
   },
 };
@@ -262,24 +255,13 @@ export const Playground = () => {
           alignItems: 'center',
           flexWrap: 'wrap',
         }}>
-        <Button
-          onFocus={() => console.log('regular button focus')}
-          {...regularProps}>
-          Buttons
-        </Button>
+        <Button {...regularProps}>Buttons</Button>
         &nbsp;
         {!regularProps.kind.includes('danger') && (
           <>
-            <Button
-              hasIconOnly
-              onFocus={() => console.log('iconOnly focus')}
-              {...iconOnly}></Button>
+            <Button hasIconOnly {...iconOnly}></Button>
             &nbsp;
-            <Button
-              hasIconOnly
-              onFocus={() => console.log('iconOnly Ghost focus')}
-              {...iconOnly}
-              kind="ghost"></Button>
+            <Button hasIconOnly {...iconOnly} kind="ghost"></Button>
           </>
         )}
       </div>
@@ -301,12 +283,7 @@ export const Playground = () => {
 };
 
 export const IconButton = () => (
-  <Button
-    renderIcon={Add16}
-    iconDescription="Icon Description"
-    hasIconOnly
-    // onClick={action('onClick')}
-  />
+  <Button renderIcon={Add16} iconDescription="Icon Description" hasIconOnly />
 );
 
 IconButton.story = {
