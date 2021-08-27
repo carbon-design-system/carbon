@@ -17,6 +17,7 @@ import SearchLayoutButton from '../SearchLayoutButton';
 import ExpandableSearch from '../ExpandableSearch';
 import mdx from './Search.mdx';
 import { FeatureFlags } from '../FeatureFlags';
+import { Filter16 } from '@carbon/icons-react';
 
 // V11: Updated Size Table
 // const sizes = {
@@ -68,6 +69,18 @@ export default {
 };
 
 export const Default = () => <Search {...props()} id="search-1" />;
+
+export const RenderIconTest = () => (
+  <>
+    <Search
+      renderIcon={<Filter16 />}
+      placeholder="Filter..."
+      id="search-filter"
+    />
+    <br />
+    <Search placeholder="Search..." id="search" />
+  </>
+);
 
 export const SizeStory = () => (
   <div>
