@@ -83,7 +83,11 @@ class Tooltip extends Component {
       return;
     }
     const open = useControlledStateWithValue ? props.defaultOpen : props.open;
-    this.state = { open };
+    this.state = {
+      open,
+      storedDirection: props.direction,
+      storedAlign: props.align,
+    };
   }
 
   static propTypes = {
@@ -263,6 +267,15 @@ class Tooltip extends Component {
     document.addEventListener('keydown', this.handleEscKeyPress, false);
   }
 
+  componentDidUpdate(prevProps) {
+    if (prevProps.direction != this.props.direction) {
+      this.setState({ storedDirection: this.props.direction });
+    }
+    if (prevProps.align != this.props.align) {
+      this.setState({ align: this.props.align });
+    }
+  }
+
   componentWillUnmount() {
     if (this._debouncedHandleFocus) {
       this._debouncedHandleFocus.cancel();
@@ -421,6 +434,17 @@ class Tooltip extends Component {
     }
   };
 
+  updateOrientation = (orientation) => {
+    const { direction, align } = orientation;
+    this.setState({ storedDirection: direction });
+
+    if (align === 'original') {
+      this.setState({ storedAlign: this.props.align });
+    } else {
+      this.setState({ storedAlign: align });
+    }
+  };
+
   render() {
     const {
       triggerId = (this.triggerId =
@@ -430,8 +454,6 @@ class Tooltip extends Component {
       children,
       className,
       triggerClassName,
-      direction,
-      align,
       focusTrap,
       triggerText,
       showIcon,
@@ -447,13 +469,14 @@ class Tooltip extends Component {
     } = this.props;
 
     const { open } = this.isControlled ? this.props : this.state;
+    const { storedDirection, storedAlign } = this.state;
 
     const tooltipClasses = classNames(
       `${prefix}--tooltip`,
       {
         [`${prefix}--tooltip--shown`]: open,
-        [`${prefix}--tooltip--${direction}`]: direction,
-        [`${prefix}--tooltip--align-${align}`]: align,
+        [`${prefix}--tooltip--${storedDirection}`]: storedDirection,
+        [`${prefix}--tooltip--align-${storedAlign}`]: storedAlign,
       },
       className
     );
@@ -523,16 +546,17 @@ class Tooltip extends Component {
             selectorPrimaryFocus={this.props.selectorPrimaryFocus}
             target={this._getTarget}
             triggerRef={this._triggerRef}
-            menuDirection={direction}
+            menuDirection={storedDirection}
             menuOffset={menuOffset}
             menuRef={(node) => {
               this._tooltipEl = node;
-            }}>
+            }}
+            updateOrientation={this.updateOrientation}>
             <div
               className={tooltipClasses}
               {...other}
               id={this._tooltipId}
-              data-floating-menu-direction={direction}
+              data-floating-menu-direction={storedDirection}
               onMouseOver={this.handleMouse}
               onMouseOut={this.handleMouse}
               onFocus={this.handleMouse}
