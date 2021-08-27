@@ -6098,6 +6098,7 @@ Map {
       "warn": false,
       "warnText": "",
     },
+    "displayName": "TextInput",
     "propTypes": Object {
       "className": Object {
         "type": "string",
@@ -8233,9 +8234,6 @@ Map {
       },
     },
     "propTypes": Object {
-      "autoclose": Object {
-        "type": "bool",
-      },
       "children": Object {
         "type": "node",
       },
