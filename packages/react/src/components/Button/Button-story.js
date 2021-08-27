@@ -262,13 +262,24 @@ export const Playground = () => {
           alignItems: 'center',
           flexWrap: 'wrap',
         }}>
-        <Button {...regularProps}>Buttons</Button>
+        <Button
+          onFocus={() => console.log('regular button focus')}
+          {...regularProps}>
+          Buttons
+        </Button>
         &nbsp;
         {!regularProps.kind.includes('danger') && (
           <>
-            <Button hasIconOnly {...iconOnly}></Button>
+            <Button
+              hasIconOnly
+              onFocus={() => console.log('iconOnly focus')}
+              {...iconOnly}></Button>
             &nbsp;
-            <Button hasIconOnly {...iconOnly} kind="ghost"></Button>
+            <Button
+              hasIconOnly
+              onFocus={() => console.log('iconOnly Ghost focus')}
+              {...iconOnly}
+              kind="ghost"></Button>
           </>
         )}
       </div>
