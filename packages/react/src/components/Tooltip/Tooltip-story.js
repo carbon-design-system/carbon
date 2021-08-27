@@ -192,7 +192,7 @@ export const EdgeBottom = () => (
   <div
     style={{
       ...containerStyles,
-      justifyContent: 'flex-start',
+      justifyContent: 'flex-end',
       alignItems: 'flex-start',
     }}>
     <Tooltip {...props.closeToEdge()} tooltipBodyId="tooltip-body">

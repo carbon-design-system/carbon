@@ -133,6 +133,97 @@ const getFloatingPosition = ({
   }[direction]();
 };
 
+const getBestDirection = ({
+  menuSize,
+  refPosition = {},
+  offset = {},
+  direction = DIRECTION_BOTTOM,
+  scrollX: pageXOffset = 0,
+  scrollY: pageYOffset = 0,
+  container,
+}) => {
+  const {
+    left: refLeft = 0,
+    top: refTop = 0,
+    right: refRight = 0,
+    bottom: refBottom = 0,
+  } = refPosition;
+  const scrollX = container.position !== 'static' ? 0 : pageXOffset;
+  const scrollY = container.position !== 'static' ? 0 : pageYOffset;
+  const relativeDiff = {
+    top: container.position !== 'static' ? container.rect.top : 0,
+    left: container.position !== 'static' ? container.rect.left : 0,
+  };
+  const { width, height } = menuSize;
+  const { top = 0, left = 0 } = offset;
+  // const refCenterHorizontal = (refLeft + refRight) / 2;
+  const refCenterVertical = (refTop + refBottom) / 2;
+
+  const newDirection = () => {
+    switch (direction) {
+      case DIRECTION_LEFT:
+        return refLeft - width + scrollX - left - relativeDiff.left < 0
+          ? DIRECTION_RIGHT
+          : direction;
+      case DIRECTION_TOP:
+        return refTop - height + scrollY - top - relativeDiff.top < 0
+          ? DIRECTION_BOTTOM
+          : direction;
+      case DIRECTION_RIGHT:
+        return refRight + scrollX + left - relativeDiff.left + width >
+          container.rect.width
+          ? DIRECTION_LEFT
+          : direction;
+      case DIRECTION_BOTTOM:
+        return direction;
+      default:
+        return DIRECTION_BOTTOM;
+    }
+  };
+
+  const newAlignment = () => {
+    switch (direction) {
+      case DIRECTION_LEFT:
+      case DIRECTION_RIGHT:
+        if (
+          refCenterVertical -
+            height / 2 +
+            scrollY +
+            top -
+            9 -
+            relativeDiff.top <
+          0
+        ) {
+          // If goes above the top boundary
+          return 'start';
+        } else if (
+          refCenterVertical -
+            height / 2 +
+            scrollY +
+            top -
+            9 -
+            relativeDiff.top +
+            height >
+          container.rect.height
+        ) {
+          // IF goes below the bottom boundary
+          return 'end';
+        } else {
+          return 'original';
+        }
+      case DIRECTION_TOP:
+      case DIRECTION_BOTTOM:
+        return 'original';
+      default:
+        return 'original';
+    }
+  };
+
+  return {
+    direction: newDirection(),
+    align: newAlignment(),
+  };
+};
 /**
  * A menu that is detached from the triggering element.
  * Useful when the container of the triggering element cannot have `overflow:visible` style, etc.
@@ -210,11 +301,17 @@ class FloatingMenu extends React.Component {
         current: PropTypes.any,
       }),
     ]),
+
+    /**
+     * Optional function to change orientation of tooltip based on parent
+     */
+    updateOrientation: PropTypes.func,
   };
 
   static defaultProps = {
     menuOffset: {},
     menuDirection: DIRECTION_BOTTOM,
+    updateOrientation: () => {},
   };
 
   // `true` if the menu body is mounted and calculation of the position is in progress.
@@ -281,7 +378,8 @@ class FloatingMenu extends React.Component {
       hasChangeInOffset(oldMenuOffset, menuOffset) ||
       oldMenuDirection !== menuDirection
     ) {
-      const { flipped, triggerRef } = this.props;
+      const { flipped, triggerRef, updateOrientation } = this.props;
+
       const { current: triggerEl } = triggerRef;
       const menuSize = menuBody.getBoundingClientRect();
       const refPosition = triggerEl && triggerEl.getBoundingClientRect();
@@ -289,6 +387,22 @@ class FloatingMenu extends React.Component {
         typeof menuOffset !== 'function'
           ? menuOffset
           : menuOffset(menuBody, menuDirection, triggerEl, flipped);
+
+      // If containing within parent dynamically calculate best direction
+      updateOrientation(
+        getBestDirection({
+          menuSize,
+          refPosition,
+          direction: menuDirection,
+          offset,
+          scrollX: window.pageXOffset,
+          scrollY: window.pageYOffset,
+          container: {
+            rect: this.props.target().getBoundingClientRect(),
+            position: getComputedStyle(this.props.target()).position,
+          },
+        })
+      );
       // Skips if either in the following condition:
       // a) Menu body has `display:none`
       // b) `menuOffset` as a callback returns `undefined` (The callback saw that it couldn't calculate the value)

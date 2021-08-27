@@ -267,12 +267,19 @@ class Tooltip extends Component {
     document.addEventListener('keydown', this.handleEscKeyPress, false);
   }
 
-  componentDidUpdate(prevProps) {
+  componentDidUpdate(prevProps, prevState) {
     if (prevProps.direction != this.props.direction) {
       this.setState({ storedDirection: this.props.direction });
     }
     if (prevProps.align != this.props.align) {
-      this.setState({ align: this.props.align });
+      this.setState({ storedAlign: this.props.align });
+    }
+    if (prevState.open && !this.state.open) {
+      // Reset orientation when closing
+      this.setState({
+        storedDirection: this.props.direction,
+        storedAlign: this.props.align,
+      });
     }
   }
 
