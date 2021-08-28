@@ -231,7 +231,6 @@ class Tooltip extends Component {
     triggerText: null,
     menuOffset: getMenuOffset,
     selectorPrimaryFocus: '[data-tooltip-primary-focus]',
-    autoOrientation: false,
   };
 
   /**
