@@ -98,6 +98,11 @@ class Tooltip extends Component {
     align: PropTypes.oneOf(['start', 'center', 'end']),
 
     /**
+     * Whether or not to re-orientate the tooltip if it goes outside,
+     * of the bounds of the parent.
+     */
+    autoOrientation: PropTypes.bool,
+    /**
      * Contents to put into the tooltip.
      */
     children: PropTypes.node,
@@ -226,6 +231,7 @@ class Tooltip extends Component {
     triggerText: null,
     menuOffset: getMenuOffset,
     selectorPrimaryFocus: '[data-tooltip-primary-focus]',
+    autoOrientation: false,
   };
 
   /**
@@ -442,17 +448,20 @@ class Tooltip extends Component {
   };
 
   updateOrientation = (orientation) => {
-    const { direction, align } = orientation;
-    if (direction !== this.state.storedDirection) {
-      this.setState({ open: false }, () => {
-        this.setState({ open: true, storedDirection: direction });
-      });
-    }
+    if (this.props.autoOrientation) {
+      const { direction, align } = orientation;
+      if (direction !== this.state.storedDirection) {
+        console.log(direction);
+        this.setState({ open: false }, () => {
+          this.setState({ open: true, storedDirection: direction });
+        });
+      }
 
-    if (align === 'original') {
-      this.setState({ storedAlign: this.props.align });
-    } else {
-      this.setState({ storedAlign: align });
+      if (align === 'original') {
+        this.setState({ storedAlign: this.props.align });
+      } else {
+        this.setState({ storedAlign: align });
+      }
     }
   };
 

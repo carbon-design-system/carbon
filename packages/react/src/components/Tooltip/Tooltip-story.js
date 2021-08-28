@@ -53,6 +53,7 @@ const props = {
       'Primary focus element selector (selectorPrimaryFocus)',
       ''
     ),
+    autoOrientation: boolean('Auto orientation', true),
   }),
   withoutIcon: () => ({
     showIcon: false,
