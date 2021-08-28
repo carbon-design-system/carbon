@@ -44,7 +44,7 @@ const props = {
       ''
     ),
   }),
-  autoAlign: () => ({
+  autoOrientation: () => ({
     align: select('Tooltip alignment (align)', alignments, 'center'),
     direction: select('Tooltip direction (direction)', directions, 'bottom'),
     triggerText: text('Trigger text (triggerText)', 'Test'),
@@ -189,14 +189,14 @@ DefaultBottom.parameters = {
   },
 };
 
-export const AutoAlign = () => (
+export const AutoOrientation = () => (
   <div
     style={{
       ...containerStyles,
       justifyContent: 'flex-start',
       alignItems: 'flex-start',
     }}>
-    <Tooltip {...props.autoAlign()} tooltipBodyId="tooltip-body">
+    <Tooltip {...props.autoOrientation()} tooltipBodyId="tooltip-body">
       <p id="tooltip-body">
         This is some tooltip text. This box shows the maximum amount of text
         that should appear inside. If more room is needed please use a modal
@@ -212,9 +212,9 @@ export const AutoAlign = () => (
   </div>
 );
 
-AutoAlign.storyName = 'auto align';
+AutoOrientation.storyName = 'auto orientation';
 
-AutoAlign.parameters = {
+AutoOrientation.parameters = {
   info: {
     text: `
         Interactive tooltip should be used if there are actions a user can take in the tooltip (e.g. a link or a button).
