@@ -133,118 +133,6 @@ const getFloatingPosition = ({
   }[direction]();
 };
 
-const getBestDirection = ({
-  menuSize,
-  refPosition = {},
-  offset = {},
-  direction = DIRECTION_BOTTOM,
-  scrollX: pageXOffset = 0,
-  scrollY: pageYOffset = 0,
-  container,
-}) => {
-  const {
-    left: refLeft = 0,
-    top: refTop = 0,
-    right: refRight = 0,
-    bottom: refBottom = 0,
-  } = refPosition;
-  const scrollX = container.position !== 'static' ? 0 : pageXOffset;
-  const scrollY = container.position !== 'static' ? 0 : pageYOffset;
-  const relativeDiff = {
-    top: container.position !== 'static' ? container.rect.top : 0,
-    left: container.position !== 'static' ? container.rect.left : 0,
-  };
-  const { width, height } = menuSize;
-  const { top = 0, left = 0 } = offset;
-  const refCenterHorizontal = (refLeft + refRight) / 2;
-  const refCenterVertical = (refTop + refBottom) / 2;
-  console.table(container);
-  const newDirection = () => {
-    switch (direction) {
-      case DIRECTION_LEFT:
-        return refLeft - width + scrollX - left - relativeDiff.left < 0
-          ? DIRECTION_RIGHT
-          : direction;
-      case DIRECTION_TOP:
-        return refTop - height + scrollY - top - relativeDiff.top < 0
-          ? DIRECTION_BOTTOM
-          : direction;
-      case DIRECTION_RIGHT:
-        return refRight + scrollX + left - relativeDiff.left + width >
-          container.rect.width
-          ? DIRECTION_LEFT
-          : direction;
-      case DIRECTION_BOTTOM:
-        return refBottom + scrollY + top - relativeDiff.top + height >
-          container.rect.height
-          ? DIRECTION_TOP
-          : direction;
-      default:
-        return DIRECTION_BOTTOM;
-    }
-  };
-
-  const newAlignment = () => {
-    switch (direction) {
-      case DIRECTION_LEFT:
-      case DIRECTION_RIGHT:
-        if (
-          refCenterVertical -
-            height / 2 +
-            scrollY +
-            top -
-            9 -
-            relativeDiff.top <
-          0
-        ) {
-          // If goes above the top boundary
-          return 'start';
-        } else if (
-          refCenterVertical -
-            height / 2 +
-            scrollY +
-            top -
-            9 -
-            relativeDiff.top +
-            height >
-          container.rect.height
-        ) {
-          // If goes below the bottom boundary
-          return 'end';
-        } else {
-          return 'original';
-        }
-      case DIRECTION_TOP:
-      case DIRECTION_BOTTOM:
-        if (
-          refCenterHorizontal - width / 2 + scrollX + left - relativeDiff.left <
-          0
-        ) {
-          // If goes below the left boundary
-          return 'start';
-        } else if (
-          refCenterHorizontal -
-            width / 2 +
-            scrollX +
-            left -
-            relativeDiff.left +
-            width >
-          container.rect.width
-        ) {
-          return 'end';
-        } else {
-          return 'original';
-        }
-      default:
-        return 'original';
-    }
-  };
-
-  return {
-    direction: newDirection(),
-    align: newAlignment(),
-  };
-};
 /**
  * A menu that is detached from the triggering element.
  * Useful when the container of the triggering element cannot have `overflow:visible` style, etc.
@@ -332,7 +220,7 @@ class FloatingMenu extends React.Component {
   static defaultProps = {
     menuOffset: {},
     menuDirection: DIRECTION_BOTTOM,
-    updateOrientation: () => {},
+    updateOrientation: null,
   };
 
   // `true` if the menu body is mounted and calculation of the position is in progress.
@@ -409,9 +297,10 @@ class FloatingMenu extends React.Component {
           ? menuOffset
           : menuOffset(menuBody, menuDirection, triggerEl, flipped);
 
-      // If containing within parent dynamically calculate best direction
-      updateOrientation(
-        getBestDirection({
+      // Optional function to allow parent component to check
+      // if the orientation needs to be changed based on params
+      if (updateOrientation) {
+        updateOrientation({
           menuSize,
           refPosition,
           direction: menuDirection,
@@ -422,8 +311,8 @@ class FloatingMenu extends React.Component {
             rect: this.props.target().getBoundingClientRect(),
             position: getComputedStyle(this.props.target()).position,
           },
-        })
-      );
+        });
+      }
       // Skips if either in the following condition:
       // a) Menu body has `display:none`
       // b) `menuOffset` as a callback returns `undefined` (The callback saw that it couldn't calculate the value)
