@@ -158,7 +158,7 @@ const getBestDirection = ({
   const { top = 0, left = 0 } = offset;
   // const refCenterHorizontal = (refLeft + refRight) / 2;
   const refCenterVertical = (refTop + refBottom) / 2;
-
+  console.table(container);
   const newDirection = () => {
     switch (direction) {
       case DIRECTION_LEFT:
@@ -175,7 +175,10 @@ const getBestDirection = ({
           ? DIRECTION_LEFT
           : direction;
       case DIRECTION_BOTTOM:
-        return direction;
+        return refBottom + scrollY + top - relativeDiff.top + height >
+          container.rect.height
+          ? DIRECTION_TOP
+          : direction;
       default:
         return DIRECTION_BOTTOM;
     }

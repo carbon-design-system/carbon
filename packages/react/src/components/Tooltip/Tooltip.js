@@ -443,7 +443,11 @@ class Tooltip extends Component {
 
   updateOrientation = (orientation) => {
     const { direction, align } = orientation;
-    this.setState({ storedDirection: direction });
+    if (direction !== this.state.storedDirection) {
+      this.setState({ open: false }, () => {
+        this.setState({ open: true, storedDirection: direction });
+      });
+    }
 
     if (align === 'original') {
       this.setState({ storedAlign: this.props.align });
