@@ -44,10 +44,10 @@ const props = {
       ''
     ),
   }),
-  closeToEdge: () => ({
+  autoAlign: () => ({
     align: select('Tooltip alignment (align)', alignments, 'center'),
     direction: select('Tooltip direction (direction)', directions, 'bottom'),
-    triggerText: text('Trigger text (triggerText)', 'ABC'),
+    triggerText: text('Trigger text (triggerText)', 'Test'),
     tabIndex: number('Tab index (tabIndex in <Tooltip>)', 0),
     selectorPrimaryFocus: text(
       'Primary focus element selector (selectorPrimaryFocus)',
@@ -189,14 +189,14 @@ DefaultBottom.parameters = {
   },
 };
 
-export const EdgeBottom = () => (
+export const AutoAlign = () => (
   <div
     style={{
       ...containerStyles,
-      justifyContent: 'flex-end',
-      alignItems: 'flex-end',
+      justifyContent: 'flex-start',
+      alignItems: 'flex-start',
     }}>
-    <Tooltip {...props.closeToEdge()} tooltipBodyId="tooltip-body">
+    <Tooltip {...props.autoAlign()} tooltipBodyId="tooltip-body">
       <p id="tooltip-body">
         This is some tooltip text. This box shows the maximum amount of text
         that should appear inside. If more room is needed please use a modal
@@ -212,9 +212,9 @@ export const EdgeBottom = () => (
   </div>
 );
 
-EdgeBottom.storyName = 'next to edge';
+AutoAlign.storyName = 'auto align';
 
-EdgeBottom.parameters = {
+AutoAlign.parameters = {
   info: {
     text: `
         Interactive tooltip should be used if there are actions a user can take in the tooltip (e.g. a link or a button).

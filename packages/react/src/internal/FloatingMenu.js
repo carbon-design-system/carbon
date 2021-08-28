@@ -156,7 +156,7 @@ const getBestDirection = ({
   };
   const { width, height } = menuSize;
   const { top = 0, left = 0 } = offset;
-  // const refCenterHorizontal = (refLeft + refRight) / 2;
+  const refCenterHorizontal = (refLeft + refRight) / 2;
   const refCenterVertical = (refTop + refBottom) / 2;
   console.table(container);
   const newDirection = () => {
@@ -209,14 +209,32 @@ const getBestDirection = ({
             height >
           container.rect.height
         ) {
-          // IF goes below the bottom boundary
+          // If goes below the bottom boundary
           return 'end';
         } else {
           return 'original';
         }
       case DIRECTION_TOP:
       case DIRECTION_BOTTOM:
-        return 'original';
+        if (
+          refCenterHorizontal - width / 2 + scrollX + left - relativeDiff.left <
+          0
+        ) {
+          // If goes below the left boundary
+          return 'start';
+        } else if (
+          refCenterHorizontal -
+            width / 2 +
+            scrollX +
+            left -
+            relativeDiff.left +
+            width >
+          container.rect.width
+        ) {
+          return 'end';
+        } else {
+          return 'original';
+        }
       default:
         return 'original';
     }
