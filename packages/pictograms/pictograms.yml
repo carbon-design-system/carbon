@@ -68,31 +68,31 @@
   aliases:
     - AI ethics
     - AI ethics principles
-- name: ai--trust
-  friendly_name: AI trust
-  aliases:
-    - AI trust
-    - trust
-- name: ai--privacy
-  friendly_name: AI privacy
-  aliases:
-    - AI privacy
-    - privacy
-- name: ai--transparency
-  friendly_name: AI transparency
-  aliases:
-    - AI transparency
-    - transparency
 - name: ai--explainability
   friendly_name: AI explainability
   aliases:
     - AI explainability
     - explainability
+- name: ai--privacy
+  friendly_name: AI privacy
+  aliases:
+    - AI privacy
+    - privacy
 - name: ai--robustness
   friendly_name: AI robustness
   aliases:
     - AI robustness
     - robustness
+- name: ai--transparency
+  friendly_name: AI transparency
+  aliases:
+    - AI transparency
+    - transparency
+- name: ai--trust
+  friendly_name: AI trust
+  aliases:
+    - AI trust
+    - trust
 - name: air--conditioner
   friendly_name: Air conditioner
   aliases:
@@ -484,6 +484,14 @@
     - build
     - iot
     - internet of things
+- name: build--leadership--and--culture
+  friendly_name: Build Leadership and Culture
+  aliases:
+    - build leadership and culture
+    - build
+    - leadership
+    - culture
+    - security
 - name: build-applications-anywhere
   friendly_name: Build applications anywhere
   aliases:
@@ -495,14 +503,6 @@
     - build
     - virtual
     - cloud
-- name: build--leadership--and--culture
-  friendly_name: Build Leadership and Culture
-  aliases:
-    - build leadership and culture
-    - build
-    - leadership
-    - culture
-    - security
 - name: building
   friendly_name: Building
   aliases:
@@ -529,15 +529,15 @@
     - consistency
     - business consistency
     - infinity
-- name: c-plus-plus--language
-  friendly_name: C++
-  aliases:
-    - c++, coding language
 - name: c--language
   friendly_name: C
   aliases:
     - c
     - coding language
+- name: c-plus-plus--language
+  friendly_name: C++
+  aliases:
+    - 'c++, coding language'
 - name: cafe
   friendly_name: Café
   aliases:
@@ -1240,16 +1240,16 @@
     - higher education
     - education
     - school
-- name: color--contrast
-  friendly_name: Color contrast
-  aliases:
-    - color contrast
 - name: colombia--cathedral-of-las-lajas
   friendly_name: Colombia Cathedral of Las Lajas
   aliases:
     - Colombia
     - Cathedral of Las Lajas
     - South America
+- name: color--contrast
+  friendly_name: Color contrast
+  aliases:
+    - color contrast
 - name: commercial--financing--01
   friendly_name: Commercial financing 01
   aliases:
@@ -1344,7 +1344,7 @@
   aliases:
     - Red Hat
     - container
-    - storage, data
+    - 'storage, data'
 - name: container--microservices
   friendly_name: Container microservices
   aliases:
@@ -1355,13 +1355,6 @@
     - microservices
     - storage
     - data
-- name: containers-and-cloud-native
-  friendly_name: Containers and Cloud Native
-  aliases:
-    - cloud native
-    - container,
-    - containers
-    - kubernetes
 - name: containerized-applications
   friendly_name: Containerized applications
   aliases:
@@ -1371,6 +1364,13 @@
     - security
     - storage
     - data
+- name: containers-and-cloud-native
+  friendly_name: Containers and Cloud Native
+  aliases:
+    - cloud native
+    - 'container,'
+    - containers
+    - kubernetes
 - name: content--design
   friendly_name: Content design
   aliases:
@@ -1516,6 +1516,14 @@
     - truck
     - delivery
     - manufacturing
+- name: design--leadership
+  friendly_name: Design leadership
+  aliases:
+    - Design leadership
+- name: design--research
+  friendly_name: Design research
+  aliases:
+    - Design research
 - name: design-and-development--01
   friendly_name: Design and development 01
   aliases:
@@ -1537,14 +1545,6 @@
     - enterprise design thinking team
     - people
     - team
-- name: design--leadership
-  friendly_name: Design leadership
-  aliases:
-    - Design leadership
-- name: design--research
-  friendly_name: Design research
-  aliases:
-    - Design research
 - name: desktop
   friendly_name: Desktop
   aliases:
@@ -2616,6 +2616,14 @@
   aliases:
     - IBM Z®
     - IBM
+- name: ibm--z--partition
+  friendly_name: IBM Z® partition
+  aliases:
+    - LPAR
+    - partition
+    - Z LPAR
+    - Z partition
+    - Z DPM mode partition
 - name: ibm--z-and-linuxone-multi-frame
   friendly_name: IBM Z® and LinuxONE multi-frame
   aliases:
@@ -2636,14 +2644,6 @@
     - Linux
     - single frame
     - IBM Z
-- name: ibm--z--partition
-  friendly_name: IBM Z® partition
-  aliases:
-    - LPAR
-    - partition
-    - Z LPAR
-    - Z partition
-    - Z DPM mode partition
 - name: id--badge
   friendly_name: ID badge
   aliases:
@@ -3712,6 +3712,11 @@
     - petri
     - life science
     - research
+- name: php--language
+  friendly_name: PHP
+  aliases:
+    - php
+    - coding language
 - name: pill--bottle--01
   friendly_name: Pill bottle 01
   aliases:
@@ -3720,11 +3725,6 @@
     - prescription
     - rx
     - healthcare
-- name: php--language
-  friendly_name: PHP
-  aliases:
-    - php
-    - coding language
 - name: pills
   friendly_name: Pills
   aliases:
@@ -4037,12 +4037,6 @@
     - industry
     - environment
     - process
-- name: refinery
-  friendly_name: Refinery
-  aliases:
-    - refinery
-    - industry
-    - oil
 - name: red-hat--applications
   friendly_name: Red Hat applications
   aliases:
@@ -4050,6 +4044,12 @@
     - applications
     - software
     - services
+- name: refinery
+  friendly_name: Refinery
+  aliases:
+    - refinery
+    - industry
+    - oil
 - name: refresh
   friendly_name: Refresh
   aliases:
@@ -4955,6 +4955,18 @@
     - lab
     - laboratory
     - research
+- name: text--equivalent
+  friendly_name: Text equivalent
+  aliases:
+    - text equivalent
+- name: text--input
+  friendly_name: Text input
+  aliases:
+    - 'text input, user input'
+- name: text--layout
+  friendly_name: Text layout
+  aliases:
+    - text layout
 - name: text--to--speech
   friendly_name: Text to speech
   aliases:
@@ -4963,18 +4975,6 @@
     - speech
     - watson
     - AI
-- name: text--equivalent
-  friendly_name: Text equivalent
-  aliases:
-    - text equivalent
-- name: text--input
-  friendly_name: Text input
-  aliases:
-    - text input, user input
-- name: text--layout
-  friendly_name: Text layout
-  aliases:
-    - text layout
 - name: this-side-up
   friendly_name: This side up
   aliases:
@@ -5315,7 +5315,7 @@
     - montevideo
     - maldonado
     - salto
-    - uruguaya 
+    - uruguaya
     - uruguayo
     - uruguayan
     - sun
@@ -5427,7 +5427,7 @@
     - virtual
     - speed
     - storage
-    - server, cloud
+    - 'server, cloud'
 - name: virtual--storage
   friendly_name: Virtual storage
   aliases:
