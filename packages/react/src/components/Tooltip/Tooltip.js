@@ -333,6 +333,10 @@ class Tooltip extends Component {
     const refCenterHorizontal = (refLeft + refRight) / 2;
     const refCenterVertical = (refTop + refBottom) / 2;
 
+    // Calculate whether a new direction is needed to stay in parent.
+    // It will switch the current direction to the opposite i.e.
+    // If the direction="top" and the top boundary is overflowed
+    // then it switches the direction to "bottom".
     const newDirection = () => {
       switch (direction) {
         case DIRECTION_LEFT:
@@ -354,10 +358,16 @@ class Tooltip extends Component {
             ? DIRECTION_TOP
             : direction;
         default:
-          return DIRECTION_BOTTOM;
+          // If there is a new direction then ignore the logic above
+          return direction;
       }
     };
 
+    // Calculate whether a new alignment is needed to stay in parent
+    // If the direction is left or right this involves checking the
+    // overflow in the vertical direction. If the direction is top or
+    // bottom, this involves checking overflow in the horizontal direction.
+    // "original" is used to signify no change.
     const newAlignment = () => {
       switch (direction) {
         case DIRECTION_LEFT:
@@ -386,6 +396,7 @@ class Tooltip extends Component {
             // If goes below the bottom boundary
             return 'end';
           } else {
+            // No need to change alignment
             return 'original';
           }
         case DIRECTION_TOP:
@@ -409,11 +420,14 @@ class Tooltip extends Component {
               width >
             container.rect.width
           ) {
+            // If it goes over the right boundary
             return 'end';
           } else {
+            // No need to change alignment
             return 'original';
           }
         default:
+          // No need to change alignment
           return 'original';
       }
     };
