@@ -291,7 +291,7 @@ const MultiSelect = React.forwardRef(function MultiSelect(
                       {itemToElement ? (
                         <ItemToElement key={itemProps.id} {...item} />
                       ) : (
-                        itemToString(item)
+                        itemText
                       )}
                     </span>
                   </div>

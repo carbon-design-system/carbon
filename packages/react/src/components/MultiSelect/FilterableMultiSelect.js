@@ -578,7 +578,7 @@ export default class FilterableMultiSelect extends React.Component {
                                       {...item}
                                     />
                                   ) : (
-                                    itemToString(item)
+                                    itemText
                                   )}
                                 </span>
                               </div>
