@@ -82,7 +82,6 @@ const Button = React.forwardRef(function Button(
 
   const handleMouseEnter = (evt) => {
     if (hasIconOnly) {
-      // setIsHovered(true);
       tooltipTimeout.current && clearTimeout(tooltipTimeout.current);
 
       if (evt.target === tooltipRef.current) {
