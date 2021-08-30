@@ -133,7 +133,7 @@ Checkbox.propTypes = {
    */
   wrapperClassName: deprecate(
     PropTypes.string,
-    `\nThe prop \`wrapperClassName\` for Checkbox has been deprecated in favor of \`className\`. \`className\` is now placed on the outer wrapper.`
+    `\nThe prop \`wrapperClassName\` for Checkbox will be deprecated in V11 in favor of \`className\`. \`className\` will then be placed on the outer wrapper.`
   ),
 };
 
