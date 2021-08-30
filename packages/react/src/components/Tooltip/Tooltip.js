@@ -286,7 +286,7 @@ class Tooltip extends Component {
   }
 
   _handleUserInputOpenClose = (event, { open }) => {
-    if (this.isControlled) {
+    if (this.isControlled && this.props.onChange) {
       // Callback to the parent to let them decide what to do
       this.props.onChange(event, { open });
       return;
