@@ -1,1 +1,1 @@
-export FilterableMultiSelect from '../MultiSelect/FilterableMultiSelect';
+export default from '../MultiSelect/FilterableMultiSelect';

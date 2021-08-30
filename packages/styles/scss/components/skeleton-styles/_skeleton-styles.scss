@@ -1,0 +1,47 @@
+//
+// Copyright IBM Corp. 2016, 2018
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+@use '../../config' as *;
+@use '../../utilities/skeleton' as *;
+@use '../../utilities/convert' as *;
+@use '../../spacing' as *;
+
+/// Skeleton styles
+/// @access public
+/// @group skeleton
+@mixin skeleton-styles {
+  //skeleton icon
+  .#{$prefix}--icon--skeleton {
+    @include skeleton;
+
+    display: inline-block;
+    width: rem(16px);
+    height: rem(16px);
+  }
+
+  //skeleton placeholder
+  .#{$prefix}--skeleton__placeholder {
+    @include skeleton;
+
+    width: rem(100px);
+
+    height: rem(100px);
+  }
+
+  //skeleton text
+  .#{$prefix}--skeleton__text {
+    @include skeleton;
+
+    width: 100%;
+    height: 1rem;
+    margin-bottom: $spacing-03;
+  }
+
+  .#{$prefix}--skeleton__heading {
+    height: 1.5rem;
+  }
+}
