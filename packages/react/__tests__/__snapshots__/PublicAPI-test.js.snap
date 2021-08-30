@@ -2888,6 +2888,7 @@ Map {
       "disabled": false,
       "filterItems": [Function],
       "initialSelectedItems": Array [],
+      "itemToElement": null,
       "itemToString": [Function],
       "light": false,
       "locale": "en",
@@ -3051,6 +3052,9 @@ Map {
       },
       "invalidText": Object {
         "type": "node",
+      },
+      "itemToElement": Object {
+        "type": "func",
       },
       "itemToString": Object {
         "type": "func",
@@ -3818,6 +3822,7 @@ Map {
         "disabled": false,
         "filterItems": [Function],
         "initialSelectedItems": Array [],
+        "itemToElement": null,
         "itemToString": [Function],
         "light": false,
         "locale": "en",
@@ -3982,6 +3987,9 @@ Map {
         "invalidText": Object {
           "type": "node",
         },
+        "itemToElement": Object {
+          "type": "func",
+        },
         "itemToString": Object {
           "type": "func",
         },
@@ -4054,6 +4062,7 @@ Map {
       "direction": "bottom",
       "disabled": false,
       "initialSelectedItems": Array [],
+      "itemToElement": null,
       "itemToString": [Function],
       "light": false,
       "locale": "en",
@@ -4222,6 +4231,9 @@ Map {
       },
       "invalidText": Object {
         "type": "node",
+      },
+      "itemToElement": Object {
+        "type": "func",
       },
       "itemToString": Object {
         "type": "func",
