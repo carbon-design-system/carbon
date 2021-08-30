@@ -67,7 +67,6 @@ const Button = React.forwardRef(function Button(
   const handleFocus = (evt) => {
     if (hasIconOnly) {
       closeTooltips(evt);
-      // setIsHovered(!isHovered);
       setIsFocused(true);
       setAllowTooltipVisibility(true);
     }
