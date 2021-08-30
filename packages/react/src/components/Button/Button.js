@@ -269,7 +269,7 @@ Button.propTypes = {
    */
   handleClick: deprecate(
     PropTypes.func,
-    'The handleClick prop for ClickableTile has been deprecated in favor of onClick. It will be removed in the next major release.'
+    'The handleClick prop for Button has been deprecated in favor of onClick. It will be removed in the next major release.'
   ),
 
   /**
