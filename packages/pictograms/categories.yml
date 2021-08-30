@@ -116,10 +116,10 @@ categories:
       - paris--notre-dame
       - paris--pompidou-center
       - peru--machu-picchu
+      - portland--building
       - prague--charles-bridge-tower
       - prague--dancing-house--01
       - prague--dancing-house--02
-      #    - portland
       - raleigh-nc
       - rio-de-janeiro
       - rome
@@ -127,6 +127,7 @@ categories:
       - san-francisco--fog
       - sao-paulo
       - seattle
+      - seoul--gyeongbokgung-palace
       #    - shanghai
       - singapore
       - stockholm
@@ -383,13 +384,6 @@ categories:
       - television
       - washer
       - wifi
-  - name: Enforcement
-    members:
-      - capitol
-      - fairness
-      - justice
-      - parliament
-      - police
   - name: File
     members:
       - add--document
@@ -428,6 +422,12 @@ categories:
       - invoice
       - optimize--cash-flow--01
       - optimize--cash-flow--02
+  - name: Government
+    members:
+      - capitol
+      - fairness
+      - justice
+      - parliament
   - name: Healthcare
     members:
       - baby--bottle
@@ -679,6 +679,12 @@ categories:
       - synergy
       - virtual--server
       - virtual--storage
+  - name: Public service
+    members:
+      - firefighter
+      - police
+      - social--worker
+      - teacher
   - name: Retail
     members:
       - bag

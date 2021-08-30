@@ -2080,6 +2080,12 @@
     - fire extinguisher
     - fire
     - extinguisher
+- name: firefighter
+  friendly_name: Firefighter
+  aliases:
+    - firefighter
+    - public servant
+    - fire
 - name: firewall
   friendly_name: Firewall
   aliases:
@@ -3773,6 +3779,15 @@
     - data analytics
     - data
     - analytics
+- name: portland--building
+  friendly_name: Portland building
+  aliases:
+    - Portland
+    - Oregon
+    - building
+    - city
+    - cities
+    - Pacific northwest
 - name: power
   friendly_name: Power
   aliases:
@@ -4347,6 +4362,14 @@
     - select
     - range
     - multiline select
+- name: seoul--gyeongbokgung-palace
+  friendly_name: Seoul Gyeongbokgung Palace
+  aliases:
+    - Seoul
+    - Korea
+    - Asia
+    - East Asia
+    - Gyeongbokgung Palace
 - name: server--operating-systems
   friendly_name: Server operating systems
   aliases:
@@ -4468,6 +4491,12 @@
     - social work
     - health and human services
     - community service
+- name: social--worker
+  friendly_name: Social Worker
+  aliases:
+    - social worker
+    - public servant
+    - social
 - name: socks
   friendly_name: Socks
   aliases:
@@ -4857,6 +4886,14 @@
     - target
     - business
     - strategy
+- name: teacher
+  friendly_name: Teacher
+  aliases:
+    - teacher
+    - teach
+    - education
+    - school
+    - professor
 - name: team--alignment
   friendly_name: Team alignment
   aliases:
