@@ -306,6 +306,7 @@ const ComboBox = React.forwardRef((props, ref) => {
                   aria-expanded={rootProps['aria-expanded']}
                   aria-haspopup="listbox"
                   aria-controls={inputProps['aria-controls']}
+                  title={textInput?.current?.value}
                   {...inputProps}
                   {...rest}
                   ref={mergeRefs(textInput, ref)}
