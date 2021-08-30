@@ -294,7 +294,6 @@ class Tooltip extends Component {
       const { direction, align } = newOrientation;
 
       if (direction !== this.state.storedDirection) {
-        console.log(direction);
         this.setState({ open: false }, () => {
           this.setState({ open: true, storedDirection: direction });
         });
@@ -333,7 +332,7 @@ class Tooltip extends Component {
     const { top = 0, left = 0 } = offset;
     const refCenterHorizontal = (refLeft + refRight) / 2;
     const refCenterVertical = (refTop + refBottom) / 2;
-    console.table(container);
+
     const newDirection = () => {
       switch (direction) {
         case DIRECTION_LEFT:
