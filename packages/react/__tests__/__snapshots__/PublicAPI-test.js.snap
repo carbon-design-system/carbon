@@ -3052,6 +3052,9 @@ Map {
       "invalidText": Object {
         "type": "node",
       },
+      "itemToElement": Object {
+        "type": "func",
+      },
       "itemToString": Object {
         "type": "func",
       },
@@ -3982,6 +3985,9 @@ Map {
         "invalidText": Object {
           "type": "node",
         },
+        "itemToElement": Object {
+          "type": "func",
+        },
         "itemToString": Object {
           "type": "func",
         },
@@ -4222,6 +4228,9 @@ Map {
       },
       "invalidText": Object {
         "type": "node",
+      },
+      "itemToElement": Object {
+        "type": "func",
       },
       "itemToString": Object {
         "type": "func",
