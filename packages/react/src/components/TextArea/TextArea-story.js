@@ -15,7 +15,7 @@ import mdx from './TextArea.mdx';
 import { FeatureFlags } from '../FeatureFlags';
 
 const TextAreaProps = () => ({
-  // className: 'some-class',
+  className: 'some-class',
   disabled: boolean('Disabled (disabled)', false),
   light: boolean('Light variant (light)', false),
   hideLabel: boolean('No label (hideLabel)', false),
