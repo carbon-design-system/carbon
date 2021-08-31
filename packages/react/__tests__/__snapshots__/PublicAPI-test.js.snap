@@ -644,7 +644,6 @@ Map {
         "type": "func",
       },
       "placeholder": Object {
-        "isRequired": true,
         "type": "string",
       },
       "selectedItem": Object {
