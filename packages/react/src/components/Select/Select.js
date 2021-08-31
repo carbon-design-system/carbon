@@ -122,7 +122,6 @@ const Select = React.forwardRef(function Select(
           : `${prefix}--form-item`
       }>
       <div className={selectClasses}>
-        {console.log('hi', className)}
         {!noLabel && (
           <label htmlFor={id} className={labelClasses}>
             {labelText}
