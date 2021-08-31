@@ -72,6 +72,12 @@ export default class FilterableMultiSelect extends React.Component {
     invalidText: PropTypes.node,
 
     /**
+     * Function to render items as custom components instead of strings.
+     * Defaults to null and is overridden by a getter
+     */
+    itemToElement: PropTypes.func,
+
+    /**
      * Helper function passed to downshift that allows the library to render a
      * given item to a string label. By default, it extracts the `label` field
      * from a given item to serve as the item label in the list.
@@ -287,6 +293,7 @@ export default class FilterableMultiSelect extends React.Component {
       disabled,
       filterItems,
       items,
+      itemToElement,
       itemToString,
       titleText,
       helperText,
@@ -309,6 +316,9 @@ export default class FilterableMultiSelect extends React.Component {
     } = this.props;
     const inline = type === 'inline';
     const showWarning = !invalid && warn;
+
+    // needs to be capitalized for react to render it correctly
+    const ItemToElement = itemToElement;
 
     const wrapperClasses = cx(
       `${prefix}--multi-select__wrapper`,
@@ -561,7 +571,14 @@ export default class FilterableMultiSelect extends React.Component {
                                   className={`${prefix}--checkbox-label`}
                                   data-contained-checkbox-state={isChecked}
                                   id={`${itemProps.id}-item`}>
-                                  {itemText}
+                                  {itemToElement ? (
+                                    <ItemToElement
+                                      key={itemProps.id}
+                                      {...item}
+                                    />
+                                  ) : (
+                                    itemText
+                                  )}
                                 </span>
                               </div>
                             </ListBox.MenuItem>
