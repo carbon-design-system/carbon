@@ -46,7 +46,9 @@
     "@carbon/icons-react": "^10.38.0",
     "@carbon/styles": "^0.3.0",
     "@carbon/telemetry": "0.0.0-alpha.6",
-    "carbon-components-react": "^7.42.0"
+    "carbon-components": "10.41.0",
+    "carbon-components-react": "^7.42.0",
+    "carbon-icons": "^7.0.7"
   },
   "devDependencies": {
     "@babel/core": "^7.14.6",

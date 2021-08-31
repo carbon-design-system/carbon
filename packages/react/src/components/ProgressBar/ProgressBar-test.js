@@ -25,8 +25,8 @@ describe('ProgressBar', () => {
   describe('renders as expected', () => {
     it('progress bar and label ids match', () => {
       const bar = wrapper.getByRole('progressbar');
-      const label = wrapper.container.querySelector('label');
-      expect(bar.id).toBe(label.htmlFor);
+      const label = wrapper.container.querySelector('span');
+      expect(bar.getAttribute('aria-labelledby')).toBe(label.id);
     });
 
     it('renders helper text when passed', () => {
@@ -44,7 +44,7 @@ describe('ProgressBar', () => {
 
     it('still renders accessible when hideLabel is passed', () => {
       wrapper.rerender(<ProgressBar {...props} hideLabel />);
-      const label = wrapper.container.querySelector('label');
+      const label = wrapper.container.querySelector('span');
 
       expect(label.textContent).toBe(props.label);
       expect(label.classList.contains(`${prefix}--visually-hidden`)).toBe(true);
