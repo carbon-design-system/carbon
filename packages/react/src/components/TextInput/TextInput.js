@@ -172,6 +172,7 @@ const TextInput = React.forwardRef(function TextInput(
   );
 });
 
+TextInput.displayName = 'TextInput';
 TextInput.PasswordInput = PasswordInput;
 TextInput.ControlledPasswordInput = ControlledPasswordInput;
 TextInput.propTypes = {
