@@ -53,12 +53,16 @@ const TextInput = React.forwardRef(function TextInput(
     warnText,
   });
 
-  const textInputClasses = classNames(`${prefix}--text-input`, className, {
-    [`${prefix}--text-input--light`]: light,
-    [`${prefix}--text-input--invalid`]: normalizedProps.invalid,
-    [`${prefix}--text-input--warning`]: normalizedProps.warn,
-    [`${prefix}--text-input--${size}`]: size,
-  });
+  const textInputClasses = classNames(
+    `${prefix}--text-input`,
+    [enabled ? null : className],
+    {
+      [`${prefix}--text-input--light`]: light,
+      [`${prefix}--text-input--invalid`]: normalizedProps.invalid,
+      [`${prefix}--text-input--warning`]: normalizedProps.warn,
+      [`${prefix}--text-input--${size}`]: size,
+    }
+  );
   const sharedTextInputProps = {
     id,
     onChange: (evt) => {
