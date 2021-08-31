@@ -181,7 +181,6 @@ export default class FilterableMultiSelect extends React.Component {
     filterItems: defaultFilterItems,
     initialSelectedItems: [],
     itemToString: defaultItemToString,
-    itemToElement: null,
     locale: 'en',
     sortItems: defaultSortItems,
     light: false,

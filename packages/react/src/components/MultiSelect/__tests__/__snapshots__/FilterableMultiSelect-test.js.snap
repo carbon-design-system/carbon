@@ -9,7 +9,6 @@ exports[`FilterableMultiSelect should render 1`] = `
   filterItems={[Function]}
   id="test-filterable-multiselect"
   initialSelectedItems={Array []}
-  itemToElement={null}
   itemToString={[Function]}
   items={
     Array [

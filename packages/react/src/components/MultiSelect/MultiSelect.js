@@ -461,7 +461,6 @@ MultiSelect.defaultProps = {
   compareItems: defaultCompareItems,
   disabled: false,
   locale: 'en',
-  itemToElement: null,
   itemToString: defaultItemToString,
   initialSelectedItems: [],
   sortItems: defaultSortItems,
