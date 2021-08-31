@@ -41,6 +41,7 @@ const MultiSelect = React.forwardRef(function MultiSelect(
     className: containerClassName,
     id,
     items,
+    itemToElement,
     itemToString,
     titleText,
     helperText,
@@ -154,6 +155,9 @@ const MultiSelect = React.forwardRef(function MultiSelect(
       selectedItems && selectedItems.length > 0,
     [`${prefix}--list-box--up`]: direction === 'top',
   });
+
+  // needs to be capitalized for react to render it correctly
+  const ItemToElement = itemToElement;
 
   const sortOptions = {
     selectedItems: controlledSelectedItems,
@@ -284,7 +288,11 @@ const MultiSelect = React.forwardRef(function MultiSelect(
                       className={`${prefix}--checkbox-label`}
                       data-contained-checkbox-state={isChecked}
                       id={`${itemProps.id}__checkbox`}>
-                      {itemText}
+                      {itemToElement ? (
+                        <ItemToElement key={itemProps.id} {...item} />
+                      ) : (
+                        itemText
+                      )}
                     </span>
                   </div>
                 </ListBox.MenuItem>
@@ -350,6 +358,12 @@ MultiSelect.propTypes = {
    * If invalid, what is the error?
    */
   invalidText: PropTypes.node,
+
+  /**
+   * Function to render items as custom components instead of strings.
+   * Defaults to null and is overridden by a getter
+   */
+  itemToElement: PropTypes.func,
 
   /**
    * Helper function passed to downshift that allows the library to render a
