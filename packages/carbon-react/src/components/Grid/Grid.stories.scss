@@ -1,6 +1,5 @@
-@import '~carbon-components/scss/globals/scss/vars';
-@import '~carbon-components/scss/globals/scss/colors';
-@import '~carbon-components/scss/globals/scss/typography';
+@use '@carbon/styles/scss/colors' as *;
+@use '@carbon/styles/scss/type' as *;
 
 // Grid modes
 .bx--css-grid {
