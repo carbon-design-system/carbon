@@ -5,15 +5,15 @@
 // LICENSE file in the root directory of this source tree.
 //
 //-------------------------------------------
-// Compatibility notes
+// Compatibility notes (*.import.scss)
 // ------------------------------------------
 //
-// This file is intended to be consumed and processed with node-sass/libsass.
-// Sass language features only available in dart-sass, such as `math.div`,
-// should not be used.
+// This file is intended to be consumed and processed with dart-sass.
+// It is incompatible with node-sass/libsass as it contains sass language features
+// or functions that are unavailable in node-sass/libsass, such as `math.div`.
 //
-// The `.import` suffixed version of this file eg. `_filename.import.scss`
-// is intended to be compatible with dart-sass.
+// The non-`.import` suffixed version of this file eg. `_filename.scss`
+// is intended to be compatible with node-sass/libsass.
 //
 // Styles authored within this file must be duplicated to the corresponding
 // compatibility file to ensure we continue to support node-sass and dart-sass
@@ -23,8 +23,9 @@
 // and often derived from, bootstrap:
 // https://github.com/twbs/bootstrap/blob/v4-dev/scss/mixins/_grid.scss
 
-@import '@carbon/layout/scss/breakpoint';
-@import 'prefix';
+@use 'sass:math';
+@import '@carbon/layout/scss/breakpoint'; /* stylelint-disable-line no-invalid-position-at-import-rule */
+@import 'prefix'; /* stylelint-disable-line no-invalid-position-at-import-rule */
 
 // -----------------------------------------------------------------------------
 // Columns
@@ -45,21 +46,21 @@
   // always setting `width: 100%;`. This works because we use `flex` values
   // later on to override this initial width.
   width: 100%;
-  padding-right: ($gutter / 2);
-  padding-left: ($gutter / 2);
+  padding-right: math.div($gutter, 2);
+  padding-left: math.div($gutter, 2);
 
   // For our condensed use-case, our gutters collapse to 2px solid, 1px on each
   // side.
   .#{$prefix}--row--condensed &,
   .#{$prefix}--grid--condensed & {
-    padding-right: ($condensed-gutter / 2);
-    padding-left: ($condensed-gutter / 2);
+    padding-right: math.div($condensed-gutter, 2);
+    padding-left: math.div($condensed-gutter, 2);
   }
 
   // For our narrow use-case, our container hangs 16px into the gutter
   .#{$prefix}--row--narrow &,
   .#{$prefix}--grid--narrow & {
-    padding-right: ($gutter / 2);
+    padding-right: math.div($gutter, 2);
     padding-left: 0;
   }
 }
@@ -79,8 +80,8 @@
     // Add a `max-width` to ensure content within each column does not blow out
     // the width of the column. Applies to IE10+ and Firefox. Chrome and Safari
     // do not appear to require this.
-    max-width: percentage($span / $columns);
-    flex: 0 0 percentage($span / $columns);
+    max-width: percentage(math.div($span, $columns));
+    flex: 0 0 percentage(math.div($span, $columns));
   }
 }
 
@@ -90,7 +91,7 @@
 /// @access private
 /// @group @carbon/grid
 @mixin carbon--make-col-offset($span, $columns) {
-  $offset: $span / $columns;
+  $offset: math.div($span, $columns);
   @if $offset == 0 {
     margin-left: 0;
   } @else {
@@ -172,8 +173,8 @@
 @mixin carbon--make-row($gutter: $carbon--grid-gutter) {
   display: flex;
   flex-wrap: wrap;
-  margin-right: -1 * $gutter / 2;
-  margin-left: -1 * $gutter / 2;
+  margin-right: -1 * math.div($gutter, 2);
+  margin-left: -1 * math.div($gutter, 2);
 }
 
 // -----------------------------------------------------------------------------
@@ -224,20 +225,20 @@
 /// @group @carbon/grid
 @mixin carbon--hang($gutter: $carbon--grid-gutter) {
   .#{$prefix}--hang--start {
-    padding-left: ($gutter / 2);
+    padding-left: math.div($gutter, 2);
   }
 
   .#{$prefix}--hang--end {
-    padding-right: ($gutter / 2);
+    padding-right: math.div($gutter, 2);
   }
 
   // Deprecated ☠️
   .#{$prefix}--hang--left {
-    padding-left: ($gutter / 2);
+    padding-left: math.div($gutter, 2);
   }
 
   .#{$prefix}--hang--right {
-    padding-right: ($gutter / 2);
+    padding-right: math.div($gutter, 2);
   }
 }
 
@@ -298,7 +299,7 @@ $carbon--aspect-ratios: (
     $height: nth($aspect-ratio, 2);
 
     .#{$prefix}--aspect-ratio--#{$width}x#{$height}::before {
-      padding-top: percentage($height / $width);
+      padding-top: percentage(math.div($height, $width));
     }
   }
 
@@ -335,14 +336,14 @@ $carbon--aspect-ratios: (
       $prev-margin: map-get($prev-breakpoint, margin);
       @if $prev-margin != $margin {
         @include carbon--breakpoint($name) {
-          padding-right: #{($carbon--grid-gutter / 2) + $margin};
-          padding-left: #{($carbon--grid-gutter / 2) + $margin};
+          padding-right: #{math.div($carbon--grid-gutter, 2) + $margin};
+          padding-left: #{math.div($carbon--grid-gutter, 2) + $margin};
         }
       }
     } @else {
       @include carbon--breakpoint($name) {
-        padding-right: #{($carbon--grid-gutter / 2) + $margin};
-        padding-left: #{($carbon--grid-gutter / 2) + $margin};
+        padding-right: #{math.div($carbon--grid-gutter, 2) + $margin};
+        padding-left: #{math.div($carbon--grid-gutter, 2) + $margin};
       }
     }
   }
@@ -399,13 +400,13 @@ $carbon--aspect-ratios: (
 
   .#{$prefix}--row-padding [class*='#{$prefix}--col'],
   .#{$prefix}--col-padding {
-    padding-top: $grid-gutter / 2;
-    padding-bottom: $grid-gutter / 2;
+    padding-top: math.div($grid-gutter, 2);
+    padding-bottom: math.div($grid-gutter, 2);
   }
 
   .#{$prefix}--grid--condensed [class*='#{$prefix}--col'] {
-    padding-top: $condensed-gutter / 2;
-    padding-bottom: $condensed-gutter / 2;
+    padding-top: math.div($condensed-gutter, 2);
+    padding-bottom: math.div($condensed-gutter, 2);
   }
 
   @include carbon--make-grid-columns($breakpoints, $grid-gutter);
