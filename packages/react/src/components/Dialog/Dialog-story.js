@@ -13,6 +13,7 @@ import { Portal } from '../Portal';
 
 export default {
   title: 'Experimental/unstable_Dialog',
+  includeStories: [],
 };
 
 export const Default = () => {
@@ -46,6 +47,7 @@ export const Default = () => {
               <DemoComponent />
               <button
                 ref={ref}
+                type="button"
                 onClick={() => {
                   setOpen(false);
                 }}>
@@ -57,11 +59,10 @@ export const Default = () => {
       </div>
     );
   }
-
   return (
     <>
       <DemoComponent />
-      <button>Hello</button>
+      <button type="button">Hello</button>
     </>
   );
 };
@@ -70,13 +71,12 @@ export const DialogExample = () => {
   function Example() {
     const [open, setOpen] = React.useState(false);
     const id = useId();
+
     return (
       <div>
         <div>
-          <button>First</button>
+          <button type="button">First</button>
         </div>
-
-        {/* trigger */}
         <button
           type="button"
           onClick={() => {
@@ -84,7 +84,6 @@ export const DialogExample = () => {
           }}>
           Open
         </button>
-
         {open ? (
           <Portal
             style={{
@@ -93,16 +92,9 @@ export const DialogExample = () => {
               right: 0,
               bottom: 0,
               left: 0,
-              zIndex: 9998,
+              zIndex: 9999,
             }}>
-            {/* full screen background */}
-            <FullPage
-              onClick={() => {
-                setOpen(false);
-              }}
-            />
-
-            {/* dialog */}
+            <FullPage />
             <Dialog
               aria-labelledby={id}
               onDismiss={() => {
@@ -132,7 +124,7 @@ export const DialogExample = () => {
         ) : null}
 
         <div>
-          <button>Last</button>
+          <button type="button">Last</button>
         </div>
       </div>
     );
@@ -141,9 +133,10 @@ export const DialogExample = () => {
   return <Example />;
 };
 
-function FullPage(props) {
+const FullPage = React.forwardRef(function FullPage(props, ref) {
   return (
     <div
+      ref={ref}
       style={{
         position: 'absolute',
         top: 0,
@@ -156,4 +149,4 @@ function FullPage(props) {
       {...props}
     />
   );
-}
+});
