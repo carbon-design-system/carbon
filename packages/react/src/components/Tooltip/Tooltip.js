@@ -398,7 +398,7 @@ class Tooltip extends Component {
   };
 
   handleKeyPress = (event) => {
-    if (keyDownMatch(event, [keys.Escape])) {
+    if (keyDownMatch(event, [keys.Escape, keys.Tab])) {
       event.stopPropagation();
       this._handleUserInputOpenClose(event, { open: false });
     }

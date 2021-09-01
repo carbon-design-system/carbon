@@ -59,7 +59,7 @@ Map {
       "open": Object {
         "type": "bool",
       },
-      "renderExpand": Object {
+      "renderExpando": Object {
         "type": "func",
       },
       "title": Object {
@@ -1145,7 +1145,7 @@ Map {
         "className": Object {
           "type": "string",
         },
-        "enableExpand": Object {
+        "enableExpando": Object {
           "type": "bool",
         },
         "expandIconDescription": Object {
@@ -1782,7 +1782,7 @@ Map {
       "className": Object {
         "type": "string",
       },
-      "enableExpand": Object {
+      "enableExpando": Object {
         "type": "bool",
       },
       "expandIconDescription": Object {
@@ -3052,6 +3052,9 @@ Map {
       "invalidText": Object {
         "type": "node",
       },
+      "itemToElement": Object {
+        "type": "func",
+      },
       "itemToString": Object {
         "type": "func",
       },
@@ -3982,6 +3985,9 @@ Map {
         "invalidText": Object {
           "type": "node",
         },
+        "itemToElement": Object {
+          "type": "func",
+        },
         "itemToString": Object {
           "type": "func",
         },
@@ -4222,6 +4228,9 @@ Map {
       },
       "invalidText": Object {
         "type": "node",
+      },
+      "itemToElement": Object {
+        "type": "func",
       },
       "itemToString": Object {
         "type": "func",
