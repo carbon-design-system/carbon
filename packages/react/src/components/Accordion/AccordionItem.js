@@ -16,7 +16,7 @@ import { useId } from '../../internal/useId';
 import deprecate from '../../prop-types/deprecate.js';
 
 const { prefix } = settings;
-const defaultRenderExpand = (props) => <button type="button" {...props} />;
+const defaultRenderExpando = (props) => <button type="button" {...props} />;
 
 function AccordionItem({
   children,
@@ -24,7 +24,7 @@ function AccordionItem({
   iconDescription, // eslint-disable-line
   open = false,
   onHeadingClick,
-  renderExpand: Expand = defaultRenderExpand,
+  renderExpando: Expando = defaultRenderExpando,
   title = 'title',
   disabled,
   ...rest
@@ -76,7 +76,7 @@ function AccordionItem({
 
   return (
     <li className={className} {...rest} onAnimationEnd={handleAnimationEnd}>
-      <Expand
+      <Expando
         disabled={disabled}
         aria-controls={id}
         aria-expanded={isOpen}
@@ -86,7 +86,7 @@ function AccordionItem({
         type="button">
         <ChevronRight16 className={`${prefix}--accordion__arrow`} />
         <div className={`${prefix}--accordion__title`}>{title}</div>
-      </Expand>
+      </Expando>
       <Text as="div" id={id} className={`${prefix}--accordion__content`}>
         {children}
       </Text>
@@ -111,7 +111,7 @@ AccordionItem.propTypes = {
   disabled: PropTypes.bool,
 
   /**
-   * The description of the expand icon.
+   * The description of the expando icon.
    */
   iconDescription: deprecate(
     PropTypes.string,
@@ -132,15 +132,15 @@ AccordionItem.propTypes = {
   onHeadingClick: PropTypes.func,
 
   /**
-   * `true` to open the expand.
+   * `true` to open the expando.
    */
   open: PropTypes.bool,
 
   /**
-   * The callback function to render the expand button.
+   * The callback function to render the expando button.
    * Can be a React component class.
    */
-  renderExpand: PropTypes.func,
+  renderExpando: PropTypes.func,
 
   /**
    * The accordion title.

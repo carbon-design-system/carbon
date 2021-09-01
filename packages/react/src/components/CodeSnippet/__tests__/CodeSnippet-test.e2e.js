@@ -73,6 +73,7 @@ describe('CodeSnippet', () => {
 
   it('should render', () => {
     cy.findAllByText(/node/).should('be.visible');
+    cy.findAllByText(/Show more/).should('be.visible');
 
     // snapshots should always be taken _after_ an assertion that
     // a element/component should be visible. This is to ensure
@@ -94,4 +95,14 @@ describe('CodeSnippet', () => {
     // the DOM has settled and the element has fully loaded.
     cy.percySnapshot();
   });
+});
+
+// https://github.com/cypress-io/cypress/issues/8418
+const resizeObserverLoopErrRe = /^ResizeObserver loop limit exceeded/;
+cy.on('uncaught:exception', (err) => {
+  if (resizeObserverLoopErrRe.test(err.message)) {
+    // returning false here prevents Cypress from
+    // failing the test
+    return false;
+  }
 });

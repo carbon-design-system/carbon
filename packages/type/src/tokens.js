@@ -40,6 +40,31 @@ export const display01 = 'display01';
 export const display02 = 'display02';
 export const display03 = 'display03';
 export const display04 = 'display04';
+// V11 Tokens
+export const legal01 = 'legal01';
+export const legal02 = 'legal02';
+export const bodyCompact01 = 'bodyCompact01';
+export const bodyCompact02 = 'bodyCompact02';
+export const body01 = 'body01';
+export const body02 = 'body02';
+export const headingCompact01 = 'headingCompact01';
+export const headingCompact02 = 'headingCompact02';
+export const heading03 = 'heading03';
+export const heading04 = 'heading04';
+export const heading05 = 'heading05';
+export const heading06 = 'heading06';
+export const heading07 = 'heading07';
+export const fluidHeading03 = 'fluidHeading03';
+export const fluidHeading04 = 'fluidHeading04';
+export const fluidHeading05 = 'fluidHeading05';
+export const fluidHeading06 = 'fluidHeading06';
+export const fluidParagraph01 = 'fluidParagraph01';
+export const fluidQuotation01 = 'fluidQuotation01';
+export const fluidQuotation02 = 'fluidQuotation02';
+export const fluidDisplay01 = 'fluidDisplay01';
+export const fluidDisplay02 = 'fluidDisplay02';
+export const fluidDisplay03 = 'fluidDisplay03';
+export const fluidDisplay04 = 'fluidDisplay04';
 
 export const unstable_tokens = [
   caption01,
@@ -76,4 +101,29 @@ export const unstable_tokens = [
   display02,
   display03,
   display04,
+  // V11 Tokens
+  legal01,
+  legal02,
+  bodyCompact01,
+  bodyCompact02,
+  body01,
+  body02,
+  headingCompact01,
+  headingCompact02,
+  heading03,
+  heading04,
+  heading05,
+  heading06,
+  heading07,
+  fluidHeading03,
+  fluidHeading04,
+  fluidHeading05,
+  fluidHeading06,
+  fluidParagraph01,
+  fluidQuotation01,
+  fluidQuotation02,
+  fluidDisplay01,
+  fluidDisplay02,
+  fluidDisplay03,
+  fluidDisplay04,
 ];
