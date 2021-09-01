@@ -193,22 +193,74 @@ export const AutoOrientation = () => (
   <div
     style={{
       ...containerStyles,
-      justifyContent: 'flex-start',
-      alignItems: 'flex-start',
+      justifyContent: 'unset',
+      alignItems: 'unset',
+      flexWrap: 'wrap',
     }}>
-    <Tooltip {...props.autoOrientation()} tooltipBodyId="tooltip-body">
-      <p id="tooltip-body">
-        This is some tooltip text. This box shows the maximum amount of text
-        that should appear inside. If more room is needed please use a modal
-        instead.
-      </p>
-      <div className={`${prefix}--tooltip__footer`}>
-        <a href="/" className={`${prefix}--link`}>
-          Learn More
-        </a>
-        <Button size="small">Create</Button>
-      </div>
-    </Tooltip>
+    {/* Top Left */}
+    <div style={{ flex: '50%' }}>
+      <Tooltip {...props.autoOrientation()} tooltipBodyId="tooltip-body">
+        <p id="tooltip-body">
+          This is some tooltip text. This box shows the maximum amount of text
+          that should appear inside. If more room is needed please use a modal
+          instead.
+        </p>
+        <div className={`${prefix}--tooltip__footer`}>
+          <a href="/" className={`${prefix}--link`}>
+            Learn More
+          </a>
+          <Button size="small">Create</Button>
+        </div>
+      </Tooltip>
+    </div>
+    {/* Top Right */}
+    <div style={{ flex: '50%', textAlign: 'right' }}>
+      <Tooltip {...props.autoOrientation()} tooltipBodyId="tooltip-body">
+        <p id="tooltip-body">
+          This is some tooltip text. This box shows the maximum amount of text
+          that should appear inside. If more room is needed please use a modal
+          instead.
+        </p>
+        <div className={`${prefix}--tooltip__footer`}>
+          <a href="/" className={`${prefix}--link`}>
+            Learn More
+          </a>
+          <Button size="small">Create</Button>
+        </div>
+      </Tooltip>
+    </div>
+    {/* Bottom Left */}
+    <div style={{ flex: '50%', marginTop: 'auto' }}>
+      <Tooltip {...props.autoOrientation()} tooltipBodyId="tooltip-body">
+        <p id="tooltip-body">
+          This is some tooltip text. This box shows the maximum amount of text
+          that should appear inside. If more room is needed please use a modal
+          instead.
+        </p>
+        <div className={`${prefix}--tooltip__footer`}>
+          <a href="/" className={`${prefix}--link`}>
+            Learn More
+          </a>
+          <Button size="small">Create</Button>
+        </div>
+      </Tooltip>
+    </div>
+    {/* Bottom Right */}
+    <div style={{ flex: '50%', textAlign: 'right', marginTop: 'auto' }}>
+      <Tooltip {...props.autoOrientation()} tooltipBodyId="tooltip-body">
+        <p id="tooltip-body">
+          This is some tooltip text. This box shows the maximum amount of text
+          that should appear inside. If more room is needed please use a modal
+          instead.
+        </p>
+        <div className={`${prefix}--tooltip__footer`}>
+          <a href="/" className={`${prefix}--link`}>
+            Learn More
+          </a>
+          <Button size="small">Create</Button>
+        </div>
+      </Tooltip>
+    </div>
   </div>
 );
 
