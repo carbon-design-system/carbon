@@ -21,7 +21,7 @@ import { composeEventHandlers } from '../../tools/events';
 
 const { prefix } = settings;
 
-export const Tile = ({ children, className, light = false, ...other }) => {
+const Tile = ({ children, className, light = false, ...other }) => {
   const tileClasses = classNames(
     `${prefix}--tile`,
     {
