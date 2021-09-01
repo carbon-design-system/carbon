@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React, { useState } from 'react';
+import React from 'react';
 import { withKnobs, boolean, select, text } from '@storybook/addon-knobs';
 import { iconAddSolid, iconSearch } from 'carbon-icons';
 import {
@@ -154,69 +154,6 @@ export const _Default = () => {
 
 _Default.story = {
   name: 'Button',
-};
-
-export const SetOfIconButtonsOnTimer = () => {
-  const [timer, setTimer] = useState(0);
-  const simulateLoading = () => {
-    setTimer(true);
-    setTimeout(() => {
-      setTimer(false);
-    }, 3000);
-  };
-
-  const [timer2, setTimer2] = useState(0);
-  const simulateLoading2 = () => {
-    setTimer2(true);
-    setTimeout(() => {
-      setTimer2(false);
-    }, 3000);
-  };
-
-  const [timer3, setTimer3] = useState(0);
-  const simulateLoading3 = () => {
-    setTimer3(true);
-    setTimeout(() => {
-      setTimer3(false);
-    }, 3000);
-  };
-  return (
-    <>
-      <div className="App" style={{ padding: '1rem' }}>
-        <Button
-          hasIconOnly
-          renderIcon={Add16}
-          tooltipAlignment="center"
-          tooltipPosition="bottom"
-          iconDescription="Button description here"
-          onClick={simulateLoading}
-          disabled={timer}
-        />
-      </div>
-      <div className="App" style={{ padding: '1rem' }}>
-        <Button
-          hasIconOnly
-          renderIcon={Add16}
-          tooltipAlignment="center"
-          tooltipPosition="bottom"
-          iconDescription="Button description here"
-          onClick={simulateLoading2}
-          disabled={timer2}
-        />
-      </div>
-      <div className="App" style={{ padding: '1rem' }}>
-        <Button
-          hasIconOnly
-          renderIcon={Add16}
-          tooltipAlignment="center"
-          tooltipPosition="bottom"
-          iconDescription="Button description here"
-          onClick={simulateLoading3}
-          disabled={timer3}
-        />
-      </div>
-    </>
-  );
 };
 
 export const Secondary = () => {
