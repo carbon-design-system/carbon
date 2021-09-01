@@ -54,136 +54,122 @@ Tile.propTypes = {
   light: PropTypes.bool,
 };
 
-export class ClickableTile extends Component {
-  state = {};
+export const ClickableTile = ({
+  children,
+  href,
+  className,
+  onClick = () => {},
+  onKeyDown = () => {},
+  handleClick,
+  handleKeyDown,
+  clicked = false,
+  light = false,
+  ...other
+}) => {
+  const classes = classNames(
+    `${prefix}--tile`,
+    `${prefix}--tile--clickable`,
+    {
+      [`${prefix}--tile--is-clicked`]: clicked,
+      [`${prefix}--tile--light`]: light,
+    },
+    className
+  );
 
-  static propTypes = {
-    /**
-     * The child nodes.
-     */
-    children: PropTypes.node,
+  const [isSelected, setIsSelected] = useState(clicked);
 
-    /**
-     * The CSS class names.
-     */
-    className: PropTypes.string,
+  // TODO: replace with onClick when handleClick prop is deprecated
+  const clickHandler = handleClick || onClick;
 
-    /**
-     * Deprecated in v11. Use 'onClick' instead.
-     */
-    handleClick: deprecate(
-      PropTypes.func,
-      'The handleClick prop for ClickableTile has been deprecated in favor of onClick. It will be removed in the next major release.'
-    ),
+  // TODO: replace with onClick when handleClick prop is deprecated
+  const keyDownHandler = handleKeyDown || onKeyDown;
 
-    /**
-     * Specify the function to run when the ClickableTile is interacted with via a keyboard
-     */
-    handleKeyDown: PropTypes.func,
-
-    /**
-     * The href for the link.
-     */
-    href: PropTypes.string,
-
-    /**
-     * `true` to use the light version. For use on $ui-01 backgrounds only.
-     * Don't use this to make tile background color same as container background color.
-     */
-    light: PropTypes.bool,
-
-    /**
-     * Specify the function to run when the ClickableTile is clicked
-     */
-    onClick: PropTypes.func,
-
-    /**
-     * The rel property for the link.
-     */
-    rel: PropTypes.string,
-  };
-
-  static defaultProps = {
-    clicked: false,
-    onClick: () => {},
-    handleClick: () => {},
-    handleKeyDown: () => {},
-    light: false,
-  };
-
-  handleClick = (evt) => {
+  function handleOnClick(evt) {
     evt.persist();
-    this.setState(
-      {
-        clicked: !this.state.clicked,
-      },
-      () => {
-        this.props.handleClick(evt);
-      }
-    );
-  };
+    setIsSelected(!isSelected);
+    clickHandler(evt);
+  }
 
-  handleKeyDown = (evt) => {
+  function handleOnKeyDown(evt) {
     evt.persist();
     if (matches(evt, [keys.Enter, keys.Space])) {
-      this.setState(
-        {
-          clicked: !this.state.clicked,
-        },
-        () => {
-          this.props.handleKeyDown(evt);
-        }
-      );
-    } else {
-      this.props.handleKeyDown(evt);
+      evt.preventDefault();
+      setIsSelected(!isSelected);
+      keyDownHandler(evt);
     }
-  };
-
-  // eslint-disable-next-line react/prop-types
-  static getDerivedStateFromProps({ clicked }, state) {
-    const { prevClicked } = state;
-    return prevClicked === clicked
-      ? null
-      : {
-          clicked,
-          prevClicked: clicked,
-        };
+    keyDownHandler(evt);
   }
 
-  render() {
-    const {
-      children,
-      href,
-      className,
-      // handleClick, // eslint-disable-line
-      // handleKeyDown, // eslint-disable-line
-      // clicked, // eslint-disable-line
-      light,
-      ...other
-    } = this.props;
+  return (
+    <Link
+      href={href}
+      className={classes}
+      {...other}
+      onClick={handleOnClick}
+      onKeyDown={handleOnKeyDown}>
+      {children}
+    </Link>
+  );
+};
 
-    const classes = classNames(
-      `${prefix}--tile`,
-      `${prefix}--tile--clickable`,
-      {
-        [`${prefix}--tile--is-clicked`]: this.state.clicked,
-        [`${prefix}--tile--light`]: light,
-      },
-      className
-    );
+ClickableTile.propTypes = {
+  /**
+   * The child nodes.
+   */
+  children: PropTypes.node,
 
-    return (
-      <Link
-        href={href}
-        className={classes}
-        {...other}
-        onClick={this.handleClick}
-        onKeyDown={this.handleKeyDown}>
-        {children}
-      </Link>
-    );
-  }
-}
+  /**
+   * The CSS class names.
+   */
+  className: PropTypes.string,
+
+  /**
+   * Boolean for whether a tile has been clicked.
+   */
+  clicked: PropTypes.bool,
+
+  /**
+   * Deprecated in v11. Use 'onClick' instead.
+   */
+  handleClick: deprecate(
+    PropTypes.func,
+    'The handleClick prop for ClickableTile has been deprecated in favor of onClick. It will be removed in the next major release.'
+  ),
+
+  /**
+   * Specify the function to run when the ClickableTile is interacted with via a keyboard
+   */
+  handleKeyDown: deprecate(
+    PropTypes.func,
+    'The handleKeyDown prop for ClickableTile has been deprecated in favor of onKeyDown. It will be removed in the next major release.'
+  ),
+
+  /**
+   * The href for the link.
+   */
+  href: PropTypes.string,
+
+  /**
+   * `true` to use the light version. For use on $ui-01 backgrounds only.
+   * Don't use this to make tile background color same as container background color.
+   */
+  light: PropTypes.bool,
+
+  /**
+   * Specify the function to run when the ClickableTile is clicked
+   */
+  onClick: PropTypes.func,
+
+  /**
+   * Specify the function to run when the ClickableTile is interacted with via a keyboard
+   */
+  onKeyDown: PropTypes.func,
+
+  /**
+   * The rel property for the link.
+   */
+  rel: PropTypes.string,
+};
 
 export function SelectableTile(props) {
   const {
