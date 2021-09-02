@@ -426,6 +426,7 @@ PaginationOverflow.propTypes = {
   translateWithId: PropTypes.func,
 };
 
+PaginationNav.displayName = 'PaginationNav';
 PaginationNav.propTypes = {
   /**
    * Additional CSS class names.

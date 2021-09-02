@@ -53,6 +53,7 @@ const ListBoxMenuItem = React.forwardRef(function ListBoxMenuItem(
   );
 });
 
+ListBoxMenuItem.displayName = 'ListBoxMenuItem';
 ListBoxMenuItem.propTypes = {
   /**
    * Specify any children nodes that should be rendered inside of the ListBox

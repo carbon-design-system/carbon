@@ -46,6 +46,7 @@ const HeaderMenuItem = React.forwardRef(function HeaderMenuItem(
   );
 });
 
+HeaderMenuItem.displayName = 'HeaderMenuItem';
 HeaderMenuItem.propTypes = {
   /**
    * Pass in a valid `element` to replace the underlying `<a>` tag with a

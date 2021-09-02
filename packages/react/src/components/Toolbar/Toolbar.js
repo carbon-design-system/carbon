@@ -86,6 +86,7 @@ export const ToolbarTitle = React.forwardRef(({ title }, ref) => (
   </li>
 ));
 
+ToolbarTitle.displayName = 'ToolbarTitle';
 ToolbarTitle.propTypes = {
   /**
    * Specify the title of the Toolbar
@@ -100,6 +101,7 @@ export const ToolbarOption = React.forwardRef(({ children }, ref) => (
   </li>
 ));
 
+ToolbarOption.displayName = 'ToolbarOption';
 ToolbarOption.propTypes = {
   /**
    * Specify the contents of the ToolbarOption
@@ -111,5 +113,7 @@ ToolbarOption.propTypes = {
 export const ToolbarDivider = React.forwardRef((props, ref) => (
   <hr ref={ref} className={`${prefix}--toolbar-menu__divider`} />
 ));
+
+ToolbarDivider.displayName = 'ToolbarDivider';
 
 export default Toolbar;

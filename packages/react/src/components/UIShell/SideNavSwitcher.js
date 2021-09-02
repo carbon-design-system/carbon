@@ -54,6 +54,7 @@ const SideNavSwitcher = React.forwardRef(function SideNavSwitcher(props, ref) {
   );
 });
 
+SideNavSwitcher.displayName = 'SideNavSwitcher';
 SideNavSwitcher.propTypes = {
   /**
    * Provide an optional class to be applied to the containing node

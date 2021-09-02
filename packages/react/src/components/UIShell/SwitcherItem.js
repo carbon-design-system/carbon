@@ -51,6 +51,7 @@ const SwitcherItem = React.forwardRef(function SwitcherItem(props, ref) {
   );
 });
 
+SwitcherItem.displayName = 'SwitcherItem';
 SwitcherItem.propTypes = {
   /**
    * Required props for accessibility label on the underlying menuitem

@@ -31,6 +31,7 @@ const SideNavMenuItem = React.forwardRef(function SideNavMenuItem(props, ref) {
   );
 });
 
+SideNavMenuItem.displayName = 'SideNavMenuItem';
 SideNavMenuItem.propTypes = {
   /**
    * Specify the children to be rendered inside of the `SideNavMenuItem`
