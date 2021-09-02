@@ -116,10 +116,10 @@ categories:
       - paris--notre-dame
       - paris--pompidou-center
       - peru--machu-picchu
+      - portland--building
       - prague--charles-bridge-tower
       - prague--dancing-house--01
       - prague--dancing-house--02
-      #    - portland
       - raleigh-nc
       - rio-de-janeiro
       - rome
@@ -127,6 +127,7 @@ categories:
       - san-francisco--fog
       - sao-paulo
       - seattle
+      - seoul--gyeongbokgung-palace
       #    - shanghai
       - singapore
       - stockholm
@@ -138,6 +139,7 @@ categories:
       - tokyo--volcano
       - toronto
       - uruguay--palacio-salvo
+      - uruguay--sol-de-mayo
       - venezuela--national-pantheon-of-venezuela
       - vancouver
       - washington-dc
@@ -208,6 +210,7 @@ categories:
       - random--samples
       - saas--enablement
       - select--range
+      - serverless
       - single--sign-on
       - softlayer--enablement
   - name: Controls
@@ -242,9 +245,11 @@ categories:
       - chart--multi-type
       - chart--parallel
       - chart--pie
+      - chart--quadrant-plot
       - chart--radar
       - chart--river
       - chart--scatterplot
+      - chart--scree-plot
       - chart--stepper
       - chart--sunburst
       - chart--t-SNE
@@ -318,6 +323,7 @@ categories:
       - overview
       - path
       - pattern
+      - universal-experiences
       - user--experience-design
       - user--insights
       - user--interface
@@ -378,13 +384,6 @@ categories:
       - television
       - washer
       - wifi
-  - name: Enforcement
-    members:
-      - capitol
-      - fairness
-      - justice
-      - parliament
-      - police
   - name: File
     members:
       - add--document
@@ -395,6 +394,7 @@ categories:
       - file--backup
       - file--transfer
       - folder
+      - read-only
       - rich--text--format
   - name: Finance
     members:
@@ -422,6 +422,12 @@ categories:
       - invoice
       - optimize--cash-flow--01
       - optimize--cash-flow--02
+  - name: Government
+    members:
+      - capitol
+      - fairness
+      - justice
+      - parliament
   - name: Healthcare
     members:
       - baby--bottle
@@ -484,6 +490,7 @@ categories:
       - farmer--01
       - farmer--02
       - fragile
+      - insurance
       - keep-dry
       - oil--pump
       - oil--rig
@@ -554,6 +561,8 @@ categories:
       - hard--ice--cream
       - flower--01
       - flower--02
+      - guitar
+      - juice
       - perfume
       - racetrack
       - rock-on
@@ -582,6 +591,7 @@ categories:
       - delivery--truck
       - factory
       - forklift
+      - ibm--rpa
       - robot
       - robotics
       - tools
@@ -648,6 +658,33 @@ categories:
       - user
       - user--profile
       - user--search
+  - name: Red Hat
+    members:
+      - build-applications-anywhere
+      - cloud--native--01
+      - cloud--native--02
+      - cluster
+      - connect--applications
+      - container
+      - container--microservices
+      - containerized-applications
+      - edge
+      - hybrid--cloud--infrastructure
+      - kubernetes
+      - kubernetes--pod
+      - manage-applications-anywhere
+      - open-source
+      - quantum-computing
+      - red-hat--applications
+      - synergy
+      - virtual--server
+      - virtual--storage
+  - name: Public service
+    members:
+      - firefighter
+      - police
+      - social--worker
+      - teacher
   - name: Retail
     members:
       - bag

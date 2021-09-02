@@ -141,6 +141,52 @@ export const Default = withReadme(readme, () => {
   );
 });
 
+export const ItemToElement = withReadme(readme, () => {
+  return (
+    <div style={{ width: 300 }}>
+      <MultiSelect
+        titleText="Multiselect with element items"
+        label="Choose an item"
+        items={items}
+        itemToString={(item) => (item ? item.text : '')}
+        itemToElement={(item) =>
+          item ? (
+            <span className="test">
+              {item.text}{' '}
+              <span role="img" alt="fire">
+                {' '}
+                🔥
+              </span>
+            </span>
+          ) : (
+            ''
+          )
+        }
+      />
+      <br />
+      <FilterableMultiSelect
+        titleText="Filterable Multiselect with element items"
+        placeholder="itemToElement example"
+        items={items}
+        itemToString={(item) => (item ? item.text : '')}
+        itemToElement={(item) =>
+          item ? (
+            <span className="test">
+              {item.text}{' '}
+              <span role="img" alt="fire">
+                {' '}
+                🔥
+              </span>
+            </span>
+          ) : (
+            ''
+          )
+        }
+      />
+    </div>
+  );
+});
+
 Default.storyName = 'default';
 
 Default.parameters = {
