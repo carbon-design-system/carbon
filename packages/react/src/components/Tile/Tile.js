@@ -58,8 +58,8 @@ export const ClickableTile = ({
   children,
   href,
   className,
-  onClick = () => {},
-  onKeyDown = () => {},
+  onClick,
+  onKeyDown,
   handleClick,
   handleKeyDown,
   clicked = false,
@@ -171,28 +171,26 @@ ClickableTile.propTypes = {
   rel: PropTypes.string,
 };
 
-export function SelectableTile(props) {
-  const {
-    children,
-    id,
-    tabIndex = 0,
-    value,
-    name,
-    title,
-    // eslint-disable-next-line no-unused-vars
-    iconDescription,
-    className,
-    handleClick,
-    handleKeyDown,
-    onClick = () => {},
-    onChange = () => {},
-    onKeyDown = () => {},
-    light,
-    disabled,
-    selected,
-    ...other
-  } = props;
-
+export const SelectableTile = ({
+  children,
+  value = 'value',
+  title = 'title',
+  selected = false,
+  tabIndex = 0,
+  light = false,
+  id,
+  name,
+  // eslint-disable-next-line no-unused-vars
+  iconDescription,
+  className,
+  handleClick,
+  handleKeyDown,
+  onClick = () => {},
+  onChange = () => {},
+  onKeyDown = () => {},
+  disabled,
+  ...other
+}) => {
   // TODO: replace with onClick when handleClick prop is deprecated
   const clickHandler = handleClick || onClick;
 
@@ -275,14 +273,8 @@ export function SelectableTile(props) {
       </label>
     </>
   );
-}
-SelectableTile.defaultProps = {
-  value: 'value',
-  title: 'title',
-  selected: false,
-  tabIndex: 0,
-  light: false,
 };
+
 SelectableTile.propTypes = {
   /**
    * The child nodes.
@@ -632,40 +624,32 @@ export class ExpandableTile extends Component {
   }
 }
 
-export class TileAboveTheFoldContent extends Component {
-  static propTypes = {
-    /**
-     * The child nodes.
-     */
-    children: PropTypes.node,
-  };
+export const TileAboveTheFoldContent = ({ children }) => {
+  return (
+    <span className={`${prefix}--tile-content__above-the-fold`}>
+      {children}
+    </span>
+  );
+};
 
-  render() {
-    const { children } = this.props;
+TileAboveTheFoldContent.propTypes = {
+  /**
+   * The child nodes.
+   */
+  children: PropTypes.node,
+};
 
-    return (
-      <span className={`${prefix}--tile-content__above-the-fold`}>
-        {children}
-      </span>
-    );
-  }
-}
+export const TileBelowTheFoldContent = ({ children }) => {
+  return (
+    <span className={`${prefix}--tile-content__below-the-fold`}>
+      {children}
+    </span>
+  );
+};
 
-export class TileBelowTheFoldContent extends Component {
-  static propTypes = {
-    /**
-     * The child nodes.
-     */
-    children: PropTypes.node,
-  };
-
-  render() {
-    const { children } = this.props;
-
-    return (
-      <span className={`${prefix}--tile-content__below-the-fold`}>
-        {children}
-      </span>
-    );
-  }
-}
+TileBelowTheFoldContent.propTypes = {
+  /**
+   * The child nodes.
+   */
+  children: PropTypes.node,
+};
