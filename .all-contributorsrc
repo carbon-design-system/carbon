@@ -792,6 +792,15 @@
       "contributions": [
         "doc"
       ]
+    },
+    {
+      "login": "egriff38",
+      "name": "Eshin Griffith",
+      "avatar_url": "https://avatars.githubusercontent.com/u/6627718?v=4",
+      "profile": "https://github.com/egriff38",
+      "contributions": [
+        "code"
+      ]
     }
   ],
   "commitConvention": "none"

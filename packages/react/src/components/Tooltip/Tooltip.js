@@ -286,7 +286,7 @@ class Tooltip extends Component {
   }
 
   _handleUserInputOpenClose = (event, { open }) => {
-    if (this.isControlled) {
+    if (this.isControlled && this.props.onChange) {
       // Callback to the parent to let them decide what to do
       this.props.onChange(event, { open });
       return;
@@ -398,7 +398,7 @@ class Tooltip extends Component {
   };
 
   handleKeyPress = (event) => {
-    if (keyDownMatch(event, [keys.Escape])) {
+    if (keyDownMatch(event, [keys.Escape, keys.Tab])) {
       event.stopPropagation();
       this._handleUserInputOpenClose(event, { open: false });
     }
@@ -539,7 +539,10 @@ class Tooltip extends Component {
               onBlur={this.handleMouse}
               onContextMenu={this.handleMouse}>
               <span className={`${prefix}--tooltip__caret`} />
-              <div className={`${prefix}--tooltip__content`} role="dialog">
+              <div
+                className={`${prefix}--tooltip__content`}
+                aria-labelledby={this._tooltipId}
+                role="dialog">
                 {children}
               </div>
             </div>

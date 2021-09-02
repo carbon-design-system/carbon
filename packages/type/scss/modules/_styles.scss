@@ -5,6 +5,8 @@
 // LICENSE file in the root directory of this source tree.
 //
 
+/* stylelint-disable number-max-precision */
+
 @use 'sass:map';
 @use '@carbon/layout';
 @use 'font-family';
@@ -12,11 +14,12 @@
 
 /// @type Map
 /// @access public
+/// @deprecated
 /// @group @carbon/type
 $caption-01: (
   font-size: scale.type-scale(1),
   font-weight: font-family.font-weight('regular'),
-  line-height: 1.34,
+  line-height: 1.33333,
   letter-spacing: 0.32px,
 ) !default;
 
@@ -26,16 +29,37 @@ $caption-01: (
 $label-01: (
   font-size: scale.type-scale(1),
   font-weight: font-family.font-weight('regular'),
-  line-height: 1.34,
+  line-height: 1.33333,
   letter-spacing: 0.32px,
 ) !default;
 
 /// @type Map
 /// @access public
 /// @group @carbon/type
+$legal-01: (
+  font-size: scale.type-scale(1),
+  font-weight: font-family.font-weight('regular'),
+  line-height: 1.33333,
+  letter-spacing: 0.32px,
+) !default;
+
+/// @type Map
+/// @access public
+/// @group @carbon/type
+$legal-02: (
+  font-size: scale.type-scale(2),
+  font-weight: font-family.font-weight('regular'),
+  line-height: 1.28572,
+  letter-spacing: 0.16px,
+) !default;
+
+/// @type Map
+/// @access public
+/// @deprecated
+/// @group @carbon/type
 $helper-text-01: (
   font-size: scale.type-scale(1),
-  line-height: 1.34,
+  line-height: 1.33333,
   letter-spacing: 0.32px,
 ) !default;
 
@@ -45,9 +69,14 @@ $helper-text-01: (
 $body-short-01: (
   font-size: scale.type-scale(2),
   font-weight: font-family.font-weight('regular'),
-  line-height: 1.29,
+  line-height: 1.28572,
   letter-spacing: 0.16px,
 ) !default;
+
+/// @type Map
+/// @access public
+/// @group @carbon/type
+$body-compact-01: $body-short-01 !default;
 
 /// @type Map
 /// @access public
@@ -55,9 +84,14 @@ $body-short-01: (
 $body-long-01: (
   font-size: scale.type-scale(2),
   font-weight: font-family.font-weight('regular'),
-  line-height: 1.43,
+  line-height: 1.42857,
   letter-spacing: 0.16px,
 ) !default;
+
+/// @type Map
+/// @access public
+/// @group @carbon/type
+$body-01: $body-long-01 !default;
 
 /// @type Map
 /// @access public
@@ -72,6 +106,11 @@ $body-short-02: (
 /// @type Map
 /// @access public
 /// @group @carbon/type
+$body-compact-02: $body-short-02 !default;
+
+/// @type Map
+/// @access public
+/// @group @carbon/type
 $body-long-02: (
   font-size: scale.type-scale(3),
   font-weight: font-family.font-weight('regular'),
@@ -82,11 +121,16 @@ $body-long-02: (
 /// @type Map
 /// @access public
 /// @group @carbon/type
+$body-02: $body-long-02 !default;
+
+/// @type Map
+/// @access public
+/// @group @carbon/type
 $code-01: (
   font-family: font-family.font-family('mono'),
   font-size: scale.type-scale(1),
   font-weight: font-family.font-weight('regular'),
-  line-height: 1.34,
+  line-height: 1.33333,
   letter-spacing: 0.32px,
 ) !default;
 
@@ -97,7 +141,7 @@ $code-02: (
   font-family: font-family.font-family('mono'),
   font-size: scale.type-scale(2),
   font-weight: font-family.font-weight('regular'),
-  line-height: 1.43,
+  line-height: 1.42857,
   letter-spacing: 0.32px,
 ) !default;
 
@@ -107,19 +151,39 @@ $code-02: (
 $heading-01: (
   font-size: scale.type-scale(2),
   font-weight: font-family.font-weight('semibold'),
-  line-height: 1.29,
+  line-height: 1.42857,
   letter-spacing: 0.16px,
 ) !default;
 
 /// @type Map
 /// @access public
 /// @group @carbon/type
-$productive-heading-01: $heading-01 !default;
+$productive-heading-01: (
+  font-size: scale.type-scale(2),
+  font-weight: font-family.font-weight('semibold'),
+  line-height: 1.28572,
+  letter-spacing: 0.16px,
+) !default;
+
+/// @type Map
+/// @access public
+/// @group @carbon/type
+$heading-compact-01: $productive-heading-01 !default;
 
 /// @type Map
 /// @access public
 /// @group @carbon/type
 $heading-02: (
+  font-size: scale.type-scale(3),
+  font-weight: font-family.font-weight('semibold'),
+  line-height: 1.5,
+  letter-spacing: 0,
+) !default;
+
+/// @type Map
+/// @access public
+/// @group @carbon/type
+$productive-heading-02: (
   font-size: scale.type-scale(3),
   font-weight: font-family.font-weight('semibold'),
   line-height: 1.375,
@@ -129,7 +193,7 @@ $heading-02: (
 /// @type Map
 /// @access public
 /// @group @carbon/type
-$productive-heading-02: $heading-02 !default;
+$heading-compact-02: $productive-heading-02 !default;
 
 /// @type Map
 /// @access public
@@ -144,12 +208,22 @@ $productive-heading-03: (
 /// @type Map
 /// @access public
 /// @group @carbon/type
+$heading-03: $productive-heading-03 !default;
+
+/// @type Map
+/// @access public
+/// @group @carbon/type
 $productive-heading-04: (
   font-size: scale.type-scale(7),
   font-weight: font-family.font-weight('regular'),
-  line-height: 1.29,
+  line-height: 1.28572,
   letter-spacing: 0,
 ) !default;
+
+/// @type Map
+/// @access public
+/// @group @carbon/type
+$heading-04: $productive-heading-04 !default;
 
 /// @type Map
 /// @access public
@@ -160,6 +234,11 @@ $productive-heading-05: (
   line-height: 1.25,
   letter-spacing: 0,
 ) !default;
+
+/// @type Map
+/// @access public
+/// @group @carbon/type
+$heading-05: $productive-heading-05 !default;
 
 /// @type Map
 /// @access public
@@ -175,6 +254,11 @@ $productive-heading-06: (
 /// @type Map
 /// @access public
 /// @group @carbon/type
+$heading-06: $productive-heading-06 !default;
+
+/// @type Map
+/// @access public
+/// @group @carbon/type
 $productive-heading-07: (
   font-size: scale.type-scale(10),
   font-weight: font-family.font-weight('light'),
@@ -185,22 +269,17 @@ $productive-heading-07: (
 /// @type Map
 /// @access public
 /// @group @carbon/type
-$expressive-heading-01: map.merge(
-  $heading-01,
-  (
-    line-height: 1.25,
-  )
-) !default;
+$heading-07: $productive-heading-07 !default;
 
 /// @type Map
 /// @access public
 /// @group @carbon/type
-$expressive-heading-02: map.merge(
-  $heading-02,
-  (
-    line-height: 1.5,
-  )
-) !default;
+$expressive-heading-01: $heading-01 !default;
+
+/// @type Map
+/// @access public
+/// @group @carbon/type
+$expressive-heading-02: $heading-02 !default;
 
 /// @type Map
 /// @access public
@@ -225,10 +304,15 @@ $expressive-heading-03: (
 /// @type Map
 /// @access public
 /// @group @carbon/type
+$fluid-heading-03: $expressive-heading-03 !default;
+
+/// @type Map
+/// @access public
+/// @group @carbon/type
 $expressive-heading-04: (
   font-size: scale.type-scale(7),
   font-weight: font-family.font-weight('regular'),
-  line-height: 1.29,
+  line-height: 1.28572,
   letter-spacing: 0,
   breakpoints: (
     xlg: (
@@ -240,6 +324,11 @@ $expressive-heading-04: (
     ),
   ),
 ) !default;
+
+/// @type Map
+/// @access public
+/// @group @carbon/type
+$fluid-heading-04: $expressive-heading-04 !default;
 
 /// @type Map
 /// @access public
@@ -272,6 +361,11 @@ $expressive-heading-05: (
 /// @type Map
 /// @access public
 /// @group @carbon/type
+$fluid-heading-05: $expressive-heading-05 !default;
+
+/// @type Map
+/// @access public
+/// @group @carbon/type
 $expressive-heading-06: (
   font-size: scale.type-scale(8),
   font-weight: font-family.font-weight('semibold'),
@@ -299,6 +393,11 @@ $expressive-heading-06: (
 /// @type Map
 /// @access public
 /// @group @carbon/type
+$fluid-heading-06: $expressive-heading-06 !default;
+
+/// @type Map
+/// @access public
+/// @group @carbon/type
 $expressive-paragraph-01: (
   font-size: scale.type-scale(6),
   font-weight: font-family.font-weight('light'),
@@ -307,7 +406,7 @@ $expressive-paragraph-01: (
   breakpoints: (
     lg: (
       font-size: scale.type-scale(7),
-      line-height: 1.29,
+      line-height: 1.28572,
     ),
     max: (
       font-size: scale.type-scale(8),
@@ -319,7 +418,13 @@ $expressive-paragraph-01: (
 /// @type Map
 /// @access public
 /// @group @carbon/type
+$fluid-paragraph-01: $expressive-paragraph-01 !default;
+
+/// @type Map
+/// @access public
+/// @group @carbon/type
 $quotation-01: (
+  font-family: font-family.font-family('serif'),
   font-size: scale.type-scale(5),
   font-weight: font-family.font-weight('regular'),
   line-height: 1.3,
@@ -334,7 +439,7 @@ $quotation-01: (
     ),
     xlg: (
       font-size: scale.type-scale(7),
-      line-height: 1.29,
+      line-height: 1.28572,
     ),
     max: (
       font-size: scale.type-scale(8),
@@ -346,7 +451,13 @@ $quotation-01: (
 /// @type Map
 /// @access public
 /// @group @carbon/type
+$fluid-quotation-01: $quotation-01 !default;
+
+/// @type Map
+/// @access public
+/// @group @carbon/type
 $quotation-02: (
+  font-family: font-family.font-family('serif'),
   font-size: scale.type-scale(8),
   font-weight: font-family.font-weight('light'),
   line-height: 1.25,
@@ -369,6 +480,11 @@ $quotation-02: (
     ),
   ),
 ) !default;
+
+/// @type Map
+/// @access public
+/// @group @carbon/type
+$fluid-quotation-02: $quotation-02 !default;
 
 /// @type Map
 /// @access public
@@ -399,6 +515,11 @@ $display-01: (
 /// @type Map
 /// @access public
 /// @group @carbon/type
+$fluid-display-01: $display-01 !default;
+
+/// @type Map
+/// @access public
+/// @group @carbon/type
 $display-02: (
   font-size: scale.type-scale(10),
   font-weight: font-family.font-weight('semibold'),
@@ -421,6 +542,11 @@ $display-02: (
     ),
   ),
 ) !default;
+
+/// @type Map
+/// @access public
+/// @group @carbon/type
+$fluid-display-02: $display-02 !default;
 
 /// @type Map
 /// @access public
@@ -456,6 +582,11 @@ $display-03: (
 /// @type Map
 /// @access public
 /// @group @carbon/type
+$fluid-display-03: $display-03 !default;
+
+/// @type Map
+/// @access public
+/// @group @carbon/type
 $display-04: (
   font-size: scale.type-scale(10),
   font-weight: font-family.font-weight('semibold'),
@@ -483,6 +614,11 @@ $display-04: (
     ),
   ),
 ) !default;
+
+/// @type Map
+/// @access public
+/// @group @carbon/type
+$fluid-display-04: $display-04 !default;
 
 /// @type Map
 /// @access public
@@ -519,6 +655,31 @@ $tokens: (
   display-02: $display-02,
   display-03: $display-03,
   display-04: $display-04,
+  // V11 Tokens
+  legal-01: $legal-01,
+  legal-02: $legal-02,
+  body-compact-01: $body-compact-01,
+  body-compact-02: $body-compact-02,
+  heading-compact-01: $heading-compact-01,
+  heading-compact-02: $heading-compact-02,
+  body-01: $body-01,
+  body-02: $body-02,
+  heading-03: $heading-03,
+  heading-04: $heading-04,
+  heading-05: $heading-05,
+  heading-06: $heading-06,
+  heading-07: $heading-07,
+  fluid-heading-03: $fluid-heading-03,
+  fluid-heading-04: $fluid-heading-04,
+  fluid-heading-05: $fluid-heading-05,
+  fluid-heading-06: $fluid-heading-06,
+  fluid-paragraph-01: $fluid-paragraph-01,
+  fluid-quotation-01: $fluid-quotation-01,
+  fluid-quotation-02: $fluid-quotation-02,
+  fluid-display-01: $fluid-display-01,
+  fluid-display-02: $fluid-display-02,
+  fluid-display-03: $fluid-display-03,
+  fluid-display-04: $fluid-display-04,
 );
 
 /// @param {Map} $map
