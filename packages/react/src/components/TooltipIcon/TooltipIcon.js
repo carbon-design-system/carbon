@@ -63,7 +63,6 @@ const TooltipIcon = ({
 
   const handleFocus = (evt) => {
     closeTooltips(evt);
-    setIsHovered(!isHovered);
     setIsFocused(true);
     setAllowTooltipVisibility(true);
   };
@@ -76,7 +75,6 @@ const TooltipIcon = ({
 
   const handleMouseEnter = (evt) => {
     if (!disabled) {
-      setIsHovered(true);
       tooltipTimeout.current && clearTimeout(tooltipTimeout.current);
 
       if (evt.target === tooltipRef.current) {
