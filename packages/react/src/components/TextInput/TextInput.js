@@ -14,6 +14,7 @@ import PasswordInput from './PasswordInput';
 import ControlledPasswordInput from './ControlledPasswordInput';
 import { textInputProps } from './util';
 import { FormContext } from '../FluidForm';
+import { useFeatureFlag } from '../FeatureFlags';
 
 const { prefix } = settings;
 const TextInput = React.forwardRef(function TextInput(
@@ -40,6 +41,8 @@ const TextInput = React.forwardRef(function TextInput(
   },
   ref
 ) {
+  const enabled = useFeatureFlag('enable-v11-release');
+
   const normalizedProps = useNormalizedInputProps({
     id,
     readOnly,
@@ -50,12 +53,16 @@ const TextInput = React.forwardRef(function TextInput(
     warnText,
   });
 
-  const textInputClasses = classNames(`${prefix}--text-input`, className, {
-    [`${prefix}--text-input--light`]: light,
-    [`${prefix}--text-input--invalid`]: normalizedProps.invalid,
-    [`${prefix}--text-input--warning`]: normalizedProps.warn,
-    [`${prefix}--text-input--${size}`]: size,
-  });
+  const textInputClasses = classNames(
+    `${prefix}--text-input`,
+    [enabled ? null : className],
+    {
+      [`${prefix}--text-input--light`]: light,
+      [`${prefix}--text-input--invalid`]: normalizedProps.invalid,
+      [`${prefix}--text-input--warning`]: normalizedProps.warn,
+      [`${prefix}--text-input--${size}`]: size,
+    }
+  );
   const sharedTextInputProps = {
     id,
     onChange: (evt) => {
@@ -78,7 +85,11 @@ const TextInput = React.forwardRef(function TextInput(
     ...other,
   };
   const inputWrapperClasses = classNames(
-    `${prefix}--form-item`,
+    [
+      enabled
+        ? classNames(`${prefix}--form-item`, className)
+        : `${prefix}--form-item`,
+    ],
     `${prefix}--text-input-wrapper`,
     {
       [`${prefix}--text-input-wrapper--readonly`]: readOnly,
