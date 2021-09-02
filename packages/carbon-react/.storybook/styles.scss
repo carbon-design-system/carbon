@@ -5,10 +5,6 @@
 // LICENSE file in the root directory of this source tree.
 //
 
-$feature-flags: (
-  enable-v11-release: true,
-);
-
 @use '../index.scss' as styles with (
   $css--font-face: true,
   $css--plex-arabic: true,
@@ -30,6 +26,10 @@ $feature-flags: (
 
 [data-carbon-theme='g100'] {
   @include styles.theme(styles.$g100, button.$g100, tag.$g100);
+}
+
+body {
+  background: styles.$background;
 }
 
 html[lang='en'] body {
