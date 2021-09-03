@@ -291,6 +291,9 @@
     margin: 0;
     vertical-align: top;
     white-space: initial;
+    @media (max-width: 307px) {
+      max-width: rem(144px);
+    }
   }
 
   .#{$prefix}--progress--vertical
