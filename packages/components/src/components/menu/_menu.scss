@@ -36,6 +36,7 @@
 
   .#{$prefix}--menu--invisible {
     opacity: 0;
+    pointer-events: none;
   }
 
   .#{$prefix}--menu-option {
