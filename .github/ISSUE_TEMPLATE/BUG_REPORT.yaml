@@ -1,13 +1,12 @@
 name: Bug report 🐛
 description:
-  Something not working as expected? This is the place to report your
-  issue.
+  Something not working as expected? This is the place to report your issue.
 title: '[Bug]: '
-labels: [type: bug 🐛]
+labels: 'type: bug 🐛'
 body:
   - type: markdown
     attributes:
-      value: "## Welcome!"
+      value: '## Welcome!'
   - type: markdown
     attributes:
       value: Thanks for taking the time to fill out this bug report.
@@ -50,8 +49,7 @@ body:
     id: version
     attributes:
       label: Package version
-      description:
-        'Which version(s) are you using?'
+      description: 'Which version(s) are you using?'
       placeholder: e.g. v10.42.0
     validations:
       required: true
@@ -77,7 +75,9 @@ body:
     id: reproduce
     attributes:
       label: Steps to reproduce
-      description: "How do we reproduce the error you described using the CodeSandbox link above?" 
+      description:
+        'How do we reproduce the error you described using the CodeSandbox link
+        above?'
     validations:
       required: true
   - type: checkboxes
@@ -86,7 +86,11 @@ body:
       label: Code of Conduct
       description: Please confirm the following
       options:
-      - label: I agree to follow this project's [Code of Conduct](https://github.com/carbon-design-system/carbon/blob/f555616971a03fd454c0f4daea184adf41fff05b/.github/CODE_OF_CONDUCT.md)
-        required: true
-      - label: I checked the [current issues](https://github.com/carbon-design-system/carbon/issues) for duplicate problems
-
+        - label:
+            I agree to follow this project's [Code of
+            Conduct](https://github.com/carbon-design-system/carbon/blob/f555616971a03fd454c0f4daea184adf41fff05b/.github/CODE_OF_CONDUCT.md)
+          required: true
+        - label:
+            I checked the [current
+            issues](https://github.com/carbon-design-system/carbon/issues) for
+            duplicate problems
