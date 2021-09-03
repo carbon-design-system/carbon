@@ -188,6 +188,7 @@ Map {
       "disabled": Object {
         "type": "bool",
       },
+      "handleClick": [Function],
       "hasIconOnly": Object {
         "type": "bool",
       },
@@ -6203,9 +6204,6 @@ Map {
     "render": [Function],
   },
   "Tile" => Object {
-    "defaultProps": Object {
-      "light": false,
-    },
     "propTypes": Object {
       "children": Object {
         "type": "node",
@@ -6219,12 +6217,6 @@ Map {
     },
   },
   "ClickableTile" => Object {
-    "defaultProps": Object {
-      "clicked": false,
-      "handleClick": [Function],
-      "handleKeyDown": [Function],
-      "light": false,
-    },
     "propTypes": Object {
       "children": Object {
         "type": "node",
@@ -6232,17 +6224,22 @@ Map {
       "className": Object {
         "type": "string",
       },
-      "handleClick": Object {
-        "type": "func",
+      "clicked": Object {
+        "type": "bool",
       },
-      "handleKeyDown": Object {
-        "type": "func",
-      },
+      "handleClick": [Function],
+      "handleKeyDown": [Function],
       "href": Object {
         "type": "string",
       },
       "light": Object {
         "type": "bool",
+      },
+      "onClick": Object {
+        "type": "func",
+      },
+      "onKeyDown": Object {
+        "type": "func",
       },
       "rel": Object {
         "type": "string",
@@ -6250,13 +6247,6 @@ Map {
     },
   },
   "SelectableTile" => Object {
-    "defaultProps": Object {
-      "light": false,
-      "selected": false,
-      "tabIndex": 0,
-      "title": "title",
-      "value": "value",
-    },
     "propTypes": Object {
       "children": Object {
         "type": "node",
@@ -6335,9 +6325,7 @@ Map {
       "expanded": Object {
         "type": "bool",
       },
-      "handleClick": Object {
-        "type": "func",
-      },
+      "handleClick": [Function],
       "id": Object {
         "type": "string",
       },
