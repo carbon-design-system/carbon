@@ -4152,8 +4152,8 @@
   aliases: []
   sizes:
     - 32
-- name: contour--draw
-  friendly_name: contour--draw
+- name: contour-draw
+  friendly_name: Contour draw
   aliases: []
   sizes:
     - 32
