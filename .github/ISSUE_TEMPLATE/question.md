@@ -19,6 +19,6 @@ Workspaces:
 - #carbon-components for questions about component styles
 - #carbon-react for questions about our React components
 
-For non-IBMer's you can ask a question on our [Github Discussions board](https://github.com/carbon-design-system/carbon/discussions/new) or join [our Discord server](https://discord.gg/R7Hn2A96) to chat with Carbon maintainers and fellow community members.
+For non-IBMer's you can ask a question on our [Github Discussions board](https://github.com/carbon-design-system/carbon/discussions/new) or join [our Discord server](https://discord.gg/KAECRaWdzE) to chat with Carbon maintainers and fellow community members.
 
 -->

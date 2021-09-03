@@ -5,19 +5,21 @@
 // LICENSE file in the root directory of this source tree.
 //
 //-------------------------------------------
-// Compatibility notes
+// Compatibility notes (*.import.scss)
 // ------------------------------------------
 //
-// This file is intended to be consumed and processed with node-sass/libsass.
-// Sass language features only available in dart-sass, such as `math.div`,
-// should not be used.
+// This file is intended to be consumed and processed with dart-sass.
+// It is incompatible with node-sass/libsass as it contains sass language features
+// or functions that are unavailable in node-sass/libsass, such as `math.div`.
 //
-// The `.import` suffixed version of this file eg. `_filename.import.scss`
-// is intended to be compatible with dart-sass.
+// The non-`.import` suffixed version of this file eg. `_filename.scss`
+// is intended to be compatible with node-sass/libsass.
 //
 // Styles authored within this file must be duplicated to the corresponding
 // compatibility file to ensure we continue to support node-sass and dart-sass
 // in v10.
+
+@use 'sass:math';
 
 /// Default font size
 /// @type Number
@@ -36,7 +38,7 @@ $carbon--base-font-size: 16px !default;
     @warn "Expected argument $px to be of type `px`, instead received: `#{unit($px)}`";
   }
 
-  @return ($px / $carbon--base-font-size) * 1rem;
+  @return math.div($px, $carbon--base-font-size) * 1rem;
 }
 
 /// Convert a given px unit to a em unit
@@ -50,5 +52,5 @@ $carbon--base-font-size: 16px !default;
     @warn "Expected argument $px to be of type `px`, instead received: `#{unit($px)}`";
   }
 
-  @return ($px / $carbon--base-font-size) * 1em;
+  @return math.div($px, $carbon--base-font-size) * 1em;
 }
