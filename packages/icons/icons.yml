@@ -9,6 +9,7 @@
     - health
     - cube
     - 3D cube
+    - test
   sizes:
     - 32
 - name: 3D-cursor--alt
