@@ -39,9 +39,6 @@ packages/icons-react/next/**
 # Changelogs
 **/CHANGELOG.md
 
-# Generated docs
-**/docs/sass.md
-
 # Generate sass files
 **/scss/vendor/**
 **/_inlined/**

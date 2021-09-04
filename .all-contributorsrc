@@ -203,7 +203,8 @@
       "avatar_url": "https://avatars2.githubusercontent.com/u/28265588?v=4",
       "profile": "https://janhassel.de/",
       "contributions": [
-        "code"
+        "code",
+        "doc"
       ]
     },
     {
@@ -770,6 +771,33 @@
       "name": "szymonbrandys",
       "avatar_url": "https://avatars.githubusercontent.com/u/79149899?v=4",
       "profile": "https://github.com/szymonbrandys",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "adamalston",
+      "name": "Adam Alston",
+      "avatar_url": "https://avatars.githubusercontent.com/u/18297826?v=4",
+      "profile": "https://github.com/adamalston",
+      "contributions": [
+        "doc"
+      ]
+    },
+    {
+      "login": "Kiittyka",
+      "name": "Krithika S Udupa",
+      "avatar_url": "https://avatars.githubusercontent.com/u/41021851?v=4",
+      "profile": "https://github.com/Kiittyka",
+      "contributions": [
+        "doc"
+      ]
+    },
+    {
+      "login": "egriff38",
+      "name": "Eshin Griffith",
+      "avatar_url": "https://avatars.githubusercontent.com/u/6627718?v=4",
+      "profile": "https://github.com/egriff38",
       "contributions": [
         "code"
       ]

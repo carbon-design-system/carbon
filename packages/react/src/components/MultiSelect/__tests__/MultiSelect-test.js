@@ -14,6 +14,9 @@ import MultiSelect from '../';
 import { generateItems, generateGenericItem } from '../../ListBox/test-helpers';
 
 describe('MultiSelect', () => {
+  beforeEach(() => {
+    jest.mock('../../../internal/deprecateFieldOnObject');
+  });
   afterEach(cleanup);
 
   describe.skip('automated accessibility tests', () => {
@@ -306,6 +309,38 @@ describe('MultiSelect', () => {
       expect(getByText(container, 'tommy')).toBeTruthy();
       expect(getByText(container, 'dee dee')).toBeTruthy();
       expect(getByText(container, 'marky')).toBeTruthy();
+    });
+
+    it('should support a custom itemToElement', () => {
+      const items = [{ text: 'test-item' }];
+      const label = 'test-label';
+      const { container } = render(
+        <MultiSelect
+          id="custom-id"
+          label={label}
+          items={items}
+          itemToString={(item) => (item ? item.text : '')}
+          itemToElement={(item) =>
+            item ? (
+              <span className="test-element">
+                {item.text}{' '}
+                <span role="img" alt="fire">
+                  {' '}
+                  🔥
+                </span>
+              </span>
+            ) : (
+              ''
+            )
+          }
+        />
+      );
+
+      const labelNode = getByText(container, label);
+      Simulate.click(labelNode);
+
+      expect(document.querySelector('.test-element')).toBeTruthy();
+      expect(document.querySelector('span[role="img"]')).toBeTruthy();
     });
 
     it('should support custom translation with translateWithId', () => {

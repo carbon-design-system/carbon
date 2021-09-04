@@ -36,7 +36,7 @@ class DataTableDemoExpandRowAllManager extends mixin(
   }
 
   /**
-   * Handles `click` event on the row expando button.
+   * Handles `click` event on the row expand button.
    * @private
    */
   _handleClickRowExpando = () => {
@@ -62,7 +62,7 @@ class DataTableDemoExpandRowAllManager extends mixin(
    * The component options.
    * If `options` is specified in the constructor, {@linkcode DataTableDemoExpandRowAllManager.create .create()},
    * or {@linkcode DataTableDemoExpandRowAllManager.init .init()},
-   * properties in this object are overriden for the instance being create
+   * properties in this object are overridden for the instance being create
    * and how {@linkcode DataTableDemoExpandRowAllManager.init .init()} works.
    * @member DataTableDemoExpandRowAllManager.options
    * @type {Object}

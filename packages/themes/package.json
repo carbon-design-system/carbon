@@ -1,7 +1,7 @@
 {
   "name": "@carbon/themes",
   "description": "Themes for applying color in the Carbon Design System",
-  "version": "10.38.0-rc.0",
+  "version": "10.42.0",
   "license": "Apache-2.0",
   "main": "lib/index.js",
   "module": "es/index.js",
@@ -24,26 +24,29 @@
     "access": "public"
   },
   "scripts": {
-    "ci-check": "carbon-cli check \"scss/**/*.scss\" -i \"**/generated/**\"",
+    "ci-check": "carbon-cli check \"scss/**/*.scss\" -i \"**/generated/**\" -i \"**/compat/**\"",
     "clean": "rimraf es lib umd scss/generated",
-    "build": "yarn clean && carbon-cli bundle src/index.js --name CarbonThemes && node tasks/build.js && carbon-cli check \"scss/*.scss\""
+    "build": "yarn clean && carbon-cli bundle src/index.js --name CarbonThemes && babel-node --presets '@babel/preset-env' tasks/build.js && carbon-cli check \"scss/*.scss\""
   },
   "dependencies": {
-    "@carbon/colors": "^10.28.0-rc.0",
-    "@carbon/layout": "^10.27.0-rc.0",
-    "@carbon/type": "^10.31.0-rc.0",
+    "@carbon/colors": "^10.31.0",
+    "@carbon/layout": "^10.31.0",
+    "@carbon/type": "^10.35.0",
     "color": "^3.1.2"
   },
   "devDependencies": {
-    "@carbon/cli": "^10.25.0",
+    "@babel/node": "^7.14.2",
+    "@babel/preset-env": "^7.14.2",
+    "@carbon/cli": "^10.28.0",
     "@carbon/cli-reporter": "^10.5.0",
     "@carbon/scss-generator": "^10.13.0",
-    "@carbon/test-utils": "^10.16.0",
+    "@carbon/test-utils": "^10.18.0",
     "change-case": "^4.1.1",
-    "core-js": "^3.6.5",
+    "core-js": "^3.16.0",
     "fs-extra": "^8.1.0",
     "js-yaml": "^3.13.0",
-    "node-sass": "^4.13.1",
+    "node-sass": "^6.0.1",
     "rimraf": "^3.0.0"
-  }
+  },
+  "sideEffects": false
 }

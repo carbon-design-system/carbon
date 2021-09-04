@@ -70,7 +70,7 @@ const findHighlightedIndex = ({ items, itemToString }, inputValue) => {
 
 const getInstanceId = setupGetInstanceId();
 
-const ComboBox = (props) => {
+const ComboBox = React.forwardRef((props, ref) => {
   const {
     ariaLabel,
     className: containerClassName,
@@ -252,11 +252,13 @@ const ComboBox = (props) => {
           // https://github.com/downshift-js/downshift/blob/v5.2.1/src/downshift.js#L1051-L1065
           //
           // As a result, it will reset the state of the component and so we
-          // stop the event from propagating to prevent this. This allows the
-          // toggleMenu behavior for the toggleButton to correctly open and
+          // stop the event from propagating to prevent this if the menu is already open.
+          // This allows the toggleMenu behavior for the toggleButton to correctly open and
           // close the menu.
           onMouseUp(event) {
-            event.stopPropagation();
+            if (isOpen) {
+              event.stopPropagation();
+            }
           },
         });
         const inputProps = getInputProps({
@@ -306,9 +308,10 @@ const ComboBox = (props) => {
                   aria-expanded={rootProps['aria-expanded']}
                   aria-haspopup="listbox"
                   aria-controls={inputProps['aria-controls']}
+                  title={textInput?.current?.value}
                   {...inputProps}
                   {...rest}
-                  ref={mergeRefs(textInput, rootProps.ref)}
+                  ref={mergeRefs(textInput, ref)}
                 />
                 {invalid && (
                   <WarningFilled16
@@ -387,7 +390,7 @@ const ComboBox = (props) => {
       }}
     </Downshift>
   );
-};
+});
 
 ComboBox.propTypes = {
   /**
@@ -433,6 +436,7 @@ ComboBox.propTypes = {
   initialSelectedItem: PropTypes.oneOfType([
     PropTypes.object,
     PropTypes.string,
+    PropTypes.number,
   ]),
 
   /**
@@ -447,7 +451,7 @@ ComboBox.propTypes = {
 
   /**
    * Optional function to render items as custom components instead of strings.
-   * Defaults to null and is overriden by a getter
+   * Defaults to null and is overridden by a getter
    */
   itemToElement: PropTypes.func,
 
@@ -498,7 +502,11 @@ ComboBox.propTypes = {
   /**
    * For full control of the selection
    */
-  selectedItem: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
+  selectedItem: PropTypes.oneOfType([
+    PropTypes.object,
+    PropTypes.string,
+    PropTypes.number,
+  ]),
 
   /**
    * Specify your own filtering logic by passing in a `shouldFilterItem`

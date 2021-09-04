@@ -13,54 +13,54 @@ import { scale } from './scale';
 export const caption01 = {
   fontSize: rem(scale[0]),
   fontWeight: fontWeights.regular,
-  lineHeight: 1.34,
+  lineHeight: 1.33333,
   letterSpacing: px(0.32),
 };
 
 export const caption02 = {
   fontSize: rem(scale[1]),
   fontWeight: fontWeights.regular,
-  lineHeight: 1.29,
+  lineHeight: 1.28572,
   letterSpacing: px(0.32),
 };
 
 export const label01 = {
   fontSize: rem(scale[0]),
   fontWeight: fontWeights.regular,
-  lineHeight: 1.34,
+  lineHeight: 1.33333,
   letterSpacing: px(0.32),
 };
 
 export const label02 = {
   fontSize: rem(scale[1]),
   fontWeight: fontWeights.regular,
-  lineHeight: 1.29,
-  letterSpacing: px(0.32),
+  lineHeight: 1.28572,
+  letterSpacing: px(0.16),
 };
 
 export const helperText01 = {
   fontSize: rem(scale[0]),
-  lineHeight: 1.34,
+  lineHeight: 1.33333,
   letterSpacing: px(0.32),
 };
 
 export const helperText02 = {
   fontSize: rem(scale[1]),
-  lineHeight: 1.29,
-  letterSpacing: px(0.32),
+  lineHeight: 1.28572,
+  letterSpacing: px(0.16),
 };
 
 export const bodyShort01 = {
   fontSize: rem(scale[1]),
   fontWeight: fontWeights.regular,
-  lineHeight: 1.29,
+  lineHeight: 1.28572,
   letterSpacing: px(0.16),
 };
 
 export const bodyLong01 = {
   fontSize: rem(scale[1]),
   fontWeight: fontWeights.regular,
-  lineHeight: 1.43,
+  lineHeight: 1.42857,
   letterSpacing: px(0.16),
 };
 
@@ -82,7 +82,7 @@ export const code01 = {
   fontFamily: fontFamilies.mono,
   fontSize: rem(scale[0]),
   fontWeight: fontWeights.regular,
-  lineHeight: 1.34,
+  lineHeight: 1.33333,
   letterSpacing: px(0.32),
 };
 
@@ -90,27 +90,37 @@ export const code02 = {
   fontFamily: fontFamilies.mono,
   fontSize: rem(scale[1]),
   fontWeight: fontWeights.regular,
-  lineHeight: 1.43,
+  lineHeight: 1.42857,
   letterSpacing: px(0.32),
 };
 
 export const heading01 = {
   fontSize: rem(scale[1]),
   fontWeight: fontWeights.semibold,
-  lineHeight: 1.29,
+  lineHeight: 1.42857,
   letterSpacing: px(0.16),
 };
 
-export const productiveHeading01 = heading01;
+export const productiveHeading01 = {
+  fontSize: rem(scale[1]),
+  fontWeight: fontWeights.semibold,
+  lineHeight: 1.28572,
+  letterSpacing: px(0.16),
+};
 
 export const heading02 = {
+  fontSize: rem(scale[2]),
+  fontWeight: fontWeights.semibold,
+  lineHeight: 1.5,
+  letterSpacing: 0,
+};
+
+export const productiveHeading02 = {
   fontSize: rem(scale[2]),
   fontWeight: fontWeights.semibold,
   lineHeight: 1.375,
   letterSpacing: 0,
 };
-
-export const productiveHeading02 = heading02;
 
 export const productiveHeading03 = {
   fontSize: rem(scale[4]),
@@ -122,7 +132,7 @@ export const productiveHeading03 = {
 export const productiveHeading04 = {
   fontSize: rem(scale[6]),
   fontWeight: fontWeights.regular,
-  lineHeight: 1.29,
+  lineHeight: 1.28572,
   letterSpacing: 0,
 };
 
@@ -143,7 +153,7 @@ export const productiveHeading06 = {
 export const productiveHeading07 = {
   fontSize: rem(scale[11]),
   fontWeight: fontWeights.light,
-  lineHeight: 1.19,
+  lineHeight: 1.199,
   letterSpacing: 0,
 };
 
@@ -177,7 +187,7 @@ export const expressiveHeading03 = {
 export const expressiveHeading04 = {
   fontSize: rem(scale[6]),
   fontWeight: fontWeights.regular,
-  lineHeight: 1.29,
+  lineHeight: 1.28572,
   letterSpacing: 0,
   breakpoints: {
     xlg: {
@@ -262,7 +272,7 @@ export const expressiveParagraph01 = {
   breakpoints: {
     lg: {
       fontSize: rem(scale[6]),
-      lineHeight: 1.29,
+      lineHeight: 1.28572,
     },
     max: {
       fontSize: rem(scale[7]),
@@ -272,6 +282,7 @@ export const expressiveParagraph01 = {
 };
 
 export const quotation01 = {
+  fontFamily: fontFamilies.serif,
   fontSize: rem(scale[4]),
   fontWeight: fontWeights.regular,
   lineHeight: 1.3,
@@ -291,7 +302,7 @@ export const quotation01 = {
     xlg: {
       fontSize: rem(scale[6]),
       fontWeight: fontWeights.regular,
-      lineHeight: 1.29,
+      lineHeight: 1.28572,
       letterSpacing: 0,
     },
     max: {
@@ -304,6 +315,7 @@ export const quotation01 = {
 };
 
 export const quotation02 = {
+  fontFamily: fontFamilies.serif,
   fontSize: rem(scale[7]),
   fontWeight: fontWeights.light,
   lineHeight: 1.25,
@@ -427,3 +439,51 @@ export const display04 = {
     },
   },
 };
+
+// Type changes - V11
+
+// Small styles
+// No changes for code-01, code-02, label-01, label-02
+export const legal01 = {
+  fontSize: rem(scale[0]),
+  fontWeight: fontWeights.regular,
+  lineHeight: 1.33333,
+  letterSpacing: px(0.32),
+};
+
+export const legal02 = {
+  fontSize: rem(scale[1]),
+  fontWeight: fontWeights.regular,
+  lineHeight: 1.28572,
+  letterSpacing: px(0.16),
+};
+
+// Body styles
+export const bodyCompact01 = bodyShort01;
+export const bodyCompact02 = bodyShort02;
+export const body01 = bodyLong01;
+export const body02 = bodyLong02;
+
+// Fixed heading styles
+export const headingCompact01 = productiveHeading01;
+export const headingCompact02 = productiveHeading02;
+export const heading03 = productiveHeading03;
+export const heading04 = productiveHeading04;
+export const heading05 = productiveHeading05;
+export const heading06 = productiveHeading06;
+export const heading07 = productiveHeading07;
+
+// Fluid heading styles
+export const fluidHeading03 = expressiveHeading03;
+export const fluidHeading04 = expressiveHeading04;
+export const fluidHeading05 = expressiveHeading05;
+export const fluidHeading06 = expressiveHeading06;
+
+// Additional fluid styles
+export const fluidParagraph01 = expressiveParagraph01;
+export const fluidQuotation01 = quotation01;
+export const fluidQuotation02 = quotation02;
+export const fluidDisplay01 = display01;
+export const fluidDisplay02 = display02;
+export const fluidDisplay03 = display03;
+export const fluidDisplay04 = display04;

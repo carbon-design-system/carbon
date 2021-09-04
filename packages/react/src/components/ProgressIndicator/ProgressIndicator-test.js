@@ -152,7 +152,7 @@ describe('ProgressIndicator', () => {
       });
 
       describe('incomplete', () => {
-        it('should render any incompleted ProgressSteps with correct className', () => {
+        it('should render any incomplete ProgressSteps with correct className', () => {
           expect(
             mountedList
               .find(ProgressStep)
@@ -161,7 +161,7 @@ describe('ProgressIndicator', () => {
               .hasClass(`${prefix}--progress-step--incomplete`)
           ).toEqual(true);
         });
-        it('should render any incompleted ProgressSteps with correct props', () => {
+        it('should render any incomplete ProgressSteps with correct props', () => {
           expect(list.find(ProgressStep).at(5).prop('complete')).toBe(false);
         });
 

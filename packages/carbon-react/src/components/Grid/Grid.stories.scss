@@ -1,12 +1,5 @@
-@import '~carbon-components/scss/globals/scss/vars';
-@import '~carbon-components/scss/globals/scss/colors';
-@import '~carbon-components/scss/globals/scss/typography';
-
-p {
-  @include type-style('body-short-02');
-
-  margin-top: $spacing-05;
-}
+@use '@carbon/styles/scss/colors' as *;
+@use '@carbon/styles/scss/type' as *;
 
 // Grid modes
 .bx--css-grid {
@@ -18,7 +11,7 @@ p {
   @include type-style('code-02');
 }
 
-p:first-of-type:not(.bx--progress-label) {
+.bx--css-grid p:first-of-type {
   //messing up progress indicator stories
   margin-top: 0;
 }

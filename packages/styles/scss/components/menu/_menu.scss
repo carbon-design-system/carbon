@@ -10,6 +10,7 @@
 @use '../../spacing' as *;
 @use '../../theme' as *;
 @use '../../type' as *;
+@use '../button/tokens' as button;
 @use '../../utilities/box-shadow' as *;
 @use '../../utilities/focus-outline' as *;
 @use '../../utilities/z-index' as *;
@@ -40,11 +41,13 @@
 
   .#{$prefix}--menu--invisible {
     opacity: 0;
+    pointer-events: none;
   }
 
   .#{$prefix}--menu-option {
     position: relative;
-    height: $spacing-07;
+    // $size-sm
+    height: 2rem;
     background-color: $layer;
     color: $text-primary;
     cursor: pointer;
@@ -62,7 +65,7 @@
 
   .#{$prefix}--menu-option--danger:hover,
   .#{$prefix}--menu-option--danger:focus {
-    background-color: $button-danger-primary;
+    background-color: button.$button-danger-primary;
     color: $text-on-color;
   }
 
@@ -124,5 +127,18 @@
     height: 1px;
     margin: $spacing-02 0;
     background-color: $border-subtle;
+  }
+
+  $supported-sizes: (
+    // $size-md
+    'md': 2.5rem,
+    // $size-lg
+    'lg': 3rem
+  );
+
+  @each $size, $value in $supported-sizes {
+    .#{$prefix}--menu--#{$size} .#{$prefix}--menu-option {
+      height: $value;
+    }
   }
 }

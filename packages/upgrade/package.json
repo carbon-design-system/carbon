@@ -1,7 +1,7 @@
 {
   "name": "@carbon/upgrade",
   "description": "A tool for upgrading Carbon versions",
-  "version": "10.13.0-rc.0",
+  "version": "10.14.0",
   "license": "Apache-2.0",
   "bin": {
     "carbon-upgrade": "./bin/carbon-upgrade.js"
@@ -33,10 +33,10 @@
     "chalk": "^4.1.1",
     "change-case": "^4.1.2",
     "cross-spawn": "^7.0.3",
-    "fast-glob": "^3.2.5",
+    "fast-glob": "^3.2.7",
     "fs-extra": "^10.0.0",
     "inquirer": "^8.1.0",
-    "jest-diff": "^27.0.2",
+    "jest-diff": "^27.0.6",
     "jscodeshift": "^0.13.0",
     "lodash.clonedeep": "^4.5.0",
     "lodash.merge": "^4.6.2",

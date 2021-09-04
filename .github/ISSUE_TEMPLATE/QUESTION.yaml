@@ -1,0 +1,53 @@
+name: Question ❓
+description: Usage question or discussion about Carbon components.
+title: '[Question]: '
+labels: 'type: question ❓'
+body:
+  - type: markdown
+    attributes:
+      value: '## Hi there! 👋'
+  - type: markdown
+    attributes:
+      value:
+        Hope everything is going okay using projects from the Carbon Design
+        System. It looks like you might have a question about our work, so we
+        wanted to share a couple of resources that you could use if you haven't
+        tried them yet 🙂
+  - type: markdown
+    attributes:
+      value:
+        If you're an IBMer, we have a couple of Slack channels available across
+        all IBM Workspaces.
+  - type: markdown
+    attributes:
+      value: '- `#carbon-design-system` for questions about the Design System.'
+  - type: markdown
+    attributes:
+      value: '- `#carbon-components` for questions about component styles.'
+  - type: markdown
+    attributes:
+      value: '- `#carbon-react` for questions about our React components'
+  - type: markdown
+    attributes:
+      value:
+        "For non-IBMer's, you can ask a question on our [Github Discussions
+        board](https://github.com/carbon-design-system/carbon/discussions/new)
+        or join [our Discord server](https://discord.gg/KAECRaWdzE) to chat with
+        Carbon maintainers and fellow community members."
+  - type: textarea
+    id: summary
+    attributes:
+      label: Question for Carbon
+      description: 'Let us know how we can help!'
+    validations:
+      required: true
+  - type: checkboxes
+    id: terms
+    attributes:
+      label: Code of Conduct
+      description: Please confirm the following
+      options:
+        - label:
+            I agree to follow this project's [Code of
+            Conduct](https://github.com/carbon-design-system/carbon/blob/f555616971a03fd454c0f4daea184adf41fff05b/.github/CODE_OF_CONDUCT.md)
+          required: true

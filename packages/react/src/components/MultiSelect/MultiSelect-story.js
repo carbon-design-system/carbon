@@ -17,6 +17,7 @@ import {
 import { withReadme } from 'storybook-readme';
 import readme from './README.md';
 import MultiSelect from '../MultiSelect';
+import FilterableMultiSelect from '../MultiSelect/FilterableMultiSelect';
 import Checkbox from '../Checkbox';
 import mdx from './MultiSelect.mdx';
 
@@ -116,7 +117,7 @@ export default {
       page: mdx,
     },
     subcomponents: {
-      'MultiSelect.Filterable': MultiSelect.Filterable,
+      FilterableMultiSelect,
     },
   },
 };
@@ -135,6 +136,52 @@ export const Default = withReadme(readme, () => {
         itemToString={(item) => (item ? item.text : '')}
         translateWithId={(id) => listBoxMenuIconTranslationIds[id]}
         selectionFeedback={selectionFeedback}
+      />
+    </div>
+  );
+});
+
+export const ItemToElement = withReadme(readme, () => {
+  return (
+    <div style={{ width: 300 }}>
+      <MultiSelect
+        titleText="Multiselect with element items"
+        label="Choose an item"
+        items={items}
+        itemToString={(item) => (item ? item.text : '')}
+        itemToElement={(item) =>
+          item ? (
+            <span className="test">
+              {item.text}{' '}
+              <span role="img" alt="fire">
+                {' '}
+                🔥
+              </span>
+            </span>
+          ) : (
+            ''
+          )
+        }
+      />
+      <br />
+      <FilterableMultiSelect
+        titleText="Filterable Multiselect with element items"
+        placeholder="itemToElement example"
+        items={items}
+        itemToString={(item) => (item ? item.text : '')}
+        itemToElement={(item) =>
+          item ? (
+            <span className="test">
+              {item.text}{' '}
+              <span role="img" alt="fire">
+                {' '}
+                🔥
+              </span>
+            </span>
+          ) : (
+            ''
+          )
+        }
       />
     </div>
   );
@@ -190,7 +237,7 @@ export const _Filterable = withReadme(readme, () => {
 
   return (
     <div style={{ width: 300 }}>
-      <MultiSelect.Filterable
+      <FilterableMultiSelect
         {...multiSelectProps}
         items={items}
         itemToString={(item) => (item ? item.text : '')}

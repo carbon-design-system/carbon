@@ -22,7 +22,7 @@
     @include button-base;
   }
 
-  // Reset intrisic padding in Firefox (see #731)
+  // Reset intrinsic padding in Firefox (see #731)
   .#{$prefix}--btn::-moz-focus-inner {
     padding: 0;
     border: 0;

@@ -6,6 +6,7 @@
 //
 
 @import '../../globals/scss/vars';
+@import '../../globals/scss/vendor/@carbon/layout/scss/generated/size';
 @import '../../globals/scss/vendor/@carbon/elements/scss/import-once/import-once';
 @import '../../globals/scss/helper-mixins';
 
@@ -35,11 +36,12 @@
 
   .#{$prefix}--menu--invisible {
     opacity: 0;
+    pointer-events: none;
   }
 
   .#{$prefix}--menu-option {
     position: relative;
-    height: $spacing-07;
+    height: $size-sm;
     background-color: $layer;
     color: $text-primary;
     cursor: pointer;
@@ -119,6 +121,17 @@
     height: 1px;
     margin: $spacing-02 0;
     background-color: $border-subtle;
+  }
+
+  $supported-sizes: (
+    'md': $size-md,
+    'lg': $size-lg,
+  );
+
+  @each $size, $value in $supported-sizes {
+    .#{$prefix}--menu--#{$size} .#{$prefix}--menu-option {
+      height: $value;
+    }
   }
 }
 

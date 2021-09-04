@@ -163,6 +163,7 @@ const Dropdown = React.forwardRef(function Dropdown(
           className={`${prefix}--list-box__field`}
           disabled={disabled}
           aria-disabled={disabled}
+          title={selectedItem ? itemToString(selectedItem) : label}
           {...toggleButtonProps}
           ref={mergeRefs(toggleButtonProps.ref, ref)}>
           <span className={`${prefix}--list-box__label`}>
@@ -259,6 +260,7 @@ Dropdown.propTypes = {
   initialSelectedItem: PropTypes.oneOfType([
     PropTypes.object,
     PropTypes.string,
+    PropTypes.number,
   ]),
 
   /**
@@ -282,7 +284,7 @@ Dropdown.propTypes = {
 
   /**
    * Function to render items as custom components instead of strings.
-   * Defaults to null and is overriden by a getter
+   * Defaults to null and is overridden by a getter
    */
   itemToElement: PropTypes.func,
 
@@ -312,14 +314,18 @@ Dropdown.propTypes = {
 
   /**
    * `onChange` is a utility for this controlled component to communicate to a
-   * consuming component what kind of internal state changes are occuring.
+   * consuming component what kind of internal state changes are occurring.
    */
   onChange: PropTypes.func,
 
   /**
    * In the case you want to control the dropdown selection entirely.
    */
-  selectedItem: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
+  selectedItem: PropTypes.oneOfType([
+    PropTypes.object,
+    PropTypes.string,
+    PropTypes.number,
+  ]),
 
   /**
    * Specify the size of the ListBox. Currently supports either `sm`, `md` or `lg` as an option.
