@@ -311,7 +311,10 @@ class FloatingMenu extends React.Component {
           },
           () => {
             if (!isAdjustment) {
-              this._updateMenuSize(this.props, true);
+              const newMenuSize = menuBody.getBoundingClientRect();
+              if (newMenuSize !== menuSize) {
+                this._updateMenuSize(this.props, true);
+              }
             }
           }
         );
