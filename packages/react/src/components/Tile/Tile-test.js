@@ -19,6 +19,14 @@ import { settings } from 'carbon-components';
 
 const { prefix } = settings;
 
+const observe = jest.fn();
+const unobserve = jest.fn();
+
+window.ResizeObserver = jest.fn(() => ({
+  observe,
+  unobserve,
+}));
+
 describe('Tile', () => {
   describe('Renders default tile as expected', () => {
     const wrapper = shallow(
