@@ -508,7 +508,6 @@ export class ExpandableTile extends Component {
   }
 
   resizeObserver = null;
-  resizeElement = React.createRef();
 
   componentDidMount = () => {
     this.resizeObserver = new ResizeObserver((entries) => {
