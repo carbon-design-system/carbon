@@ -6204,6 +6204,8 @@ Map {
     "render": [Function],
   },
   "Tile" => Object {
+    "$$typeof": Symbol(react.forward_ref),
+    "displayName": "Tile",
     "propTypes": Object {
       "children": Object {
         "type": "node",
@@ -6215,8 +6217,11 @@ Map {
         "type": "bool",
       },
     },
+    "render": [Function],
   },
   "ClickableTile" => Object {
+    "$$typeof": Symbol(react.forward_ref),
+    "displayName": "ClickableTile",
     "propTypes": Object {
       "children": Object {
         "type": "node",
@@ -6245,8 +6250,11 @@ Map {
         "type": "string",
       },
     },
+    "render": [Function],
   },
   "SelectableTile" => Object {
+    "$$typeof": Symbol(react.forward_ref),
+    "displayName": "SelectableTile",
     "propTypes": Object {
       "children": Object {
         "type": "node",
@@ -6302,6 +6310,7 @@ Map {
         "type": "oneOfType",
       },
     },
+    "render": [Function],
   },
   "ExpandableTile" => Object {
     "defaultProps": Object {
@@ -6359,18 +6368,24 @@ Map {
     },
   },
   "TileAboveTheFoldContent" => Object {
+    "$$typeof": Symbol(react.forward_ref),
+    "displayName": "TileAboveTheFoldContent",
     "propTypes": Object {
       "children": Object {
         "type": "node",
       },
     },
+    "render": [Function],
   },
   "TileBelowTheFoldContent" => Object {
+    "$$typeof": Symbol(react.forward_ref),
+    "displayName": "TileBelowTheFoldContent",
     "propTypes": Object {
       "children": Object {
         "type": "node",
       },
     },
+    "render": [Function],
   },
   "RadioTile" => Object {
     "defaultProps": Object {
