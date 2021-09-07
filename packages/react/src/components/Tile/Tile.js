@@ -672,7 +672,6 @@ export class TileAboveTheFoldContent extends Component {
 
     return (
       <span
-        id="abovethefold"
         className={`${prefix}--tile-content__above-the-fold`}>
         {children}
       </span>
