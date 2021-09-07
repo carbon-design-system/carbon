@@ -7,7 +7,7 @@
 
 import React, { Component, useEffect, useRef, useState } from 'react';
 import PropTypes from 'prop-types';
-import classNames from 'classnames';
+import cx from 'classnames';
 import { settings } from 'carbon-components';
 import Link from '../Link';
 import {
@@ -21,8 +21,11 @@ import { composeEventHandlers } from '../../tools/events';
 
 const { prefix } = settings;
 
-export const Tile = ({ children, className, light = false, ...other }) => {
-  const tileClasses = classNames(
+export const Tile = React.forwardRef(function Tile(
+  { children, className, light = false, ...rest },
+  ref
+) {
+  const tileClasses = cx(
     `${prefix}--tile`,
     {
       [`${prefix}--tile--light`]: light,
@@ -30,12 +33,13 @@ export const Tile = ({ children, className, light = false, ...other }) => {
     className
   );
   return (
-    <div className={tileClasses} {...other}>
+    <div className={tileClasses} ref={ref} {...rest}>
       {children}
     </div>
   );
-};
+});
 
+Tile.displayName = 'Tile';
 Tile.propTypes = {
   /**
    * The child nodes.
@@ -54,19 +58,22 @@ Tile.propTypes = {
   light: PropTypes.bool,
 };
 
-export const ClickableTile = ({
-  children,
-  href,
-  className,
-  onClick,
-  onKeyDown,
-  handleClick,
-  handleKeyDown,
-  clicked = false,
-  light = false,
-  ...other
-}) => {
-  const classes = classNames(
+export const ClickableTile = React.forwardRef(function ClickableTile(
+  {
+    children,
+    href,
+    className,
+    onClick,
+    onKeyDown,
+    handleClick,
+    handleKeyDown,
+    clicked = false,
+    light = false,
+    ...rest
+  },
+  ref
+) {
+  const classes = cx(
     `${prefix}--tile`,
     `${prefix}--tile--clickable`,
     {
@@ -104,14 +111,16 @@ export const ClickableTile = ({
     <Link
       href={href}
       className={classes}
-      {...other}
+      {...rest}
       onClick={handleOnClick}
-      onKeyDown={handleOnKeyDown}>
+      onKeyDown={handleOnKeyDown}
+      ref={ref}>
       {children}
     </Link>
   );
-};
+});
 
+ClickableTile.displayName = 'ClickableTile';
 ClickableTile.propTypes = {
   /**
    * The child nodes.
@@ -171,26 +180,29 @@ ClickableTile.propTypes = {
   rel: PropTypes.string,
 };
 
-export const SelectableTile = ({
-  children,
-  value = 'value',
-  title = 'title',
-  selected = false,
-  tabIndex = 0,
-  light = false,
-  id,
-  name,
-  // eslint-disable-next-line no-unused-vars
-  iconDescription,
-  className,
-  handleClick,
-  handleKeyDown,
-  onClick = () => {},
-  onChange = () => {},
-  onKeyDown = () => {},
-  disabled,
-  ...other
-}) => {
+export const SelectableTile = React.forwardRef(function SelectableTile(
+  {
+    children,
+    value = 'value',
+    title = 'title',
+    selected = false,
+    tabIndex = 0,
+    light = false,
+    id,
+    name,
+    // eslint-disable-next-line no-unused-vars
+    iconDescription,
+    className,
+    handleClick,
+    handleKeyDown,
+    onClick = () => {},
+    onChange = () => {},
+    onKeyDown = () => {},
+    disabled,
+    ...rest
+  },
+  ref
+) {
   // TODO: replace with onClick when handleClick prop is deprecated
   const clickHandler = handleClick || onClick;
 
@@ -199,7 +211,7 @@ export const SelectableTile = ({
 
   const [isSelected, setIsSelected] = useState(selected);
   const input = useRef(null);
-  const classes = classNames(
+  const classes = cx(
     `${prefix}--tile`,
     `${prefix}--tile--selectable`,
     {
@@ -209,7 +221,7 @@ export const SelectableTile = ({
     },
     className
   );
-  const inputClasses = classNames(`${prefix}--tile-input`, {
+  const inputClasses = cx(`${prefix}--tile-input`, {
     [`${prefix}--tile-input--checked`]: isSelected,
   });
 
@@ -262,7 +274,8 @@ export const SelectableTile = ({
         className={classes}
         // eslint-disable-next-line jsx-a11y/no-noninteractive-tabindex
         tabIndex={!disabled ? tabIndex : null}
-        {...other}
+        ref={ref}
+        {...rest}
         onClick={!disabled ? handleOnClick : null}
         onKeyDown={!disabled ? handleOnKeyDown : null}>
         <span
@@ -273,8 +286,9 @@ export const SelectableTile = ({
       </label>
     </>
   );
-};
+});
 
+SelectableTile.displayName = 'SelectableTile';
 SelectableTile.propTypes = {
   /**
    * The child nodes.
@@ -564,12 +578,12 @@ export class ExpandableTile extends Component {
       tileExpandedLabel,
       onBeforeClick, // eslint-disable-line
       light,
-      ...other
+      ...rest
     } = this.props;
 
     const { expanded: isExpanded } = this.state;
 
-    const classes = classNames(
+    const classes = cx(
       `${prefix}--tile`,
       `${prefix}--tile--expandable`,
       {
@@ -598,7 +612,7 @@ export class ExpandableTile extends Component {
         className={classes}
         aria-expanded={isExpanded}
         title={isExpanded ? tileExpandedIconText : tileCollapsedIconText}
-        {...other}
+        {...rest}
         onKeyUp={composeEventHandlers([onKeyUp, this.handleKeyUp])}
         onClick={composeEventHandlers([onClick, this.handleClick])}
         tabIndex={tabIndex}>
@@ -624,14 +638,17 @@ export class ExpandableTile extends Component {
   }
 }
 
-export const TileAboveTheFoldContent = ({ children }) => {
-  return (
-    <span className={`${prefix}--tile-content__above-the-fold`}>
-      {children}
-    </span>
-  );
-};
+export const TileAboveTheFoldContent = React.forwardRef(
+  function TileAboveTheFoldContent({ children }) {
+    return (
+      <span className={`${prefix}--tile-content__above-the-fold`}>
+        {children}
+      </span>
+    );
+  }
+);
 
+TileAboveTheFoldContent.displayName = 'TileAboveTheFoldContent';
 TileAboveTheFoldContent.propTypes = {
   /**
    * The child nodes.
@@ -639,14 +656,17 @@ TileAboveTheFoldContent.propTypes = {
   children: PropTypes.node,
 };
 
-export const TileBelowTheFoldContent = ({ children }) => {
-  return (
-    <span className={`${prefix}--tile-content__below-the-fold`}>
-      {children}
-    </span>
-  );
-};
+export const TileBelowTheFoldContent = React.forwardRef(
+  function TileBelowTheFoldContent({ children }) {
+    return (
+      <span className={`${prefix}--tile-content__below-the-fold`}>
+        {children}
+      </span>
+    );
+  }
+);
 
+TileBelowTheFoldContent.displayName = 'TileBelowTheFoldContent';
 TileBelowTheFoldContent.propTypes = {
   /**
    * The child nodes.
