@@ -252,11 +252,13 @@ const ComboBox = React.forwardRef((props, ref) => {
           // https://github.com/downshift-js/downshift/blob/v5.2.1/src/downshift.js#L1051-L1065
           //
           // As a result, it will reset the state of the component and so we
-          // stop the event from propagating to prevent this. This allows the
-          // toggleMenu behavior for the toggleButton to correctly open and
+          // stop the event from propagating to prevent this if the menu is already open.
+          // This allows the toggleMenu behavior for the toggleButton to correctly open and
           // close the menu.
           onMouseUp(event) {
-            event.stopPropagation();
+            if (isOpen) {
+              event.stopPropagation();
+            }
           },
         });
         const inputProps = getInputProps({
