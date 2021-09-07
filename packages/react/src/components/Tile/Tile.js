@@ -671,8 +671,7 @@ export class TileAboveTheFoldContent extends Component {
     const { children } = this.props;
 
     return (
-      <span
-        className={`${prefix}--tile-content__above-the-fold`}>
+      <span className={`${prefix}--tile-content__above-the-fold`}>
         {children}
       </span>
     );
