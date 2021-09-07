@@ -10377,6 +10377,7 @@ __metadata:
     webpack: ^4.41.5
     webpack-dev-server: ^3.11.2
     whatwg-fetch: ^3.6.2
+    wicg-inert: ^3.1.1
     window-or-global: ^1.0.1
   peerDependencies:
     carbon-components: ^10.30.0
@@ -34938,6 +34939,13 @@ resolve@^2.0.0-next.3:
   bin:
     node-which: ./bin/node-which
   checksum: 1a5c563d3c1b52d5f893c8b61afe11abc3bab4afac492e8da5bde69d550de701cf9806235f20a47b5c8fa8a1d6a9135841de2596535e998027a54589000e66d1
+  languageName: node
+  linkType: hard
+
+"wicg-inert@npm:^3.1.1":
+  version: 3.1.1
+  resolution: "wicg-inert@npm:3.1.1"
+  checksum: d4553ea762ad5808b2d20990f05695d3272cf5d24ee9b0008d0edb0c69466eb6a24824ed932070553a2dc8b25eee8fcde780e073de89d640882d9da99f874944
   languageName: node
   linkType: hard
 
