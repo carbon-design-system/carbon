@@ -19,14 +19,6 @@ import { settings } from 'carbon-components';
 
 const { prefix } = settings;
 
-const observe = jest.fn();
-const unobserve = jest.fn();
-
-window.ResizeObserver = jest.fn(() => ({
-  observe,
-  unobserve,
-}));
-
 describe('Tile', () => {
   describe('Renders default tile as expected', () => {
     const wrapper = shallow(
@@ -258,8 +250,22 @@ describe('Tile', () => {
       </ExpandableTile>
     );
 
+    let nativeResizeObserver = null;
+
     beforeEach(() => {
       wrapper.state().expanded = false;
+
+      nativeResizeObserver = window.ResizeObserver;
+      window.ResizeObserver = jest.fn(() => {
+        return {
+          observe: jest.fn(),
+          unobserve: jest.fn(),
+        };
+      });
+    });
+
+    afterEach(() => {
+      window.ResizeObserver = nativeResizeObserver;
     });
 
     it('renders children as expected', () => {
