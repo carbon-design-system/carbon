@@ -119,6 +119,7 @@ export class ClickableTile extends Component {
   };
 
   static defaultProps = {
+    //
     clicked: false,
     onClick: () => {},
     onKeyDown: () => {},
