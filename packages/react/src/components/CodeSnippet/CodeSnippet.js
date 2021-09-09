@@ -9,7 +9,6 @@ import PropTypes from 'prop-types';
 import React, { useState, useRef, useEffect, useCallback } from 'react';
 import classNames from 'classnames';
 import useResizeObserver from 'use-resize-observer/polyfilled';
-import debounce from 'lodash.debounce';
 import { ChevronDown16 } from '@carbon/icons-react';
 import { settings } from 'carbon-components';
 import Copy from '../Copy';
@@ -130,7 +129,7 @@ function CodeSnippet({
           (codeContentRef?.current && type === 'multi') ||
           (codeContainerRef?.current && type === 'single')
         ) {
-          debounce(handleScroll, 200);
+          handleScroll();
         }
       },
     },
