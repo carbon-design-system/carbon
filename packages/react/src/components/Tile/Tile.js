@@ -119,7 +119,6 @@ export class ClickableTile extends Component {
   };
 
   static defaultProps = {
-    //
     clicked: false,
     onClick: () => {},
     onKeyDown: () => {},
@@ -175,6 +174,8 @@ export class ClickableTile extends Component {
       className,
       handleClick, // eslint-disable-line
       handleKeyDown, // eslint-disable-line
+      onClick, // eslint-disable-line
+      onKeyDown, // eslint-disable-line
       clicked, // eslint-disable-line
       light,
       ...rest
@@ -195,8 +196,10 @@ export class ClickableTile extends Component {
         href={href}
         className={classes}
         {...rest}
-        onClick={this.handleClick}
-        onKeyDown={this.handleKeyDown}>
+        // TODO: replace with onClick when handleClick prop is deprecated
+        onClick={composeEventHandlers([this.onClick, this.handleClick])}
+        // TODO: replace with onKeyDown when handleKeyDown prop is deprecated
+        onKeyDown={composeEventHandlers([this.onKeyDown, this.handleKeyDown])}>
         {children}
       </Link>
     );
@@ -432,9 +435,12 @@ export class ExpandableTile extends Component {
     expanded: PropTypes.bool,
 
     /**
-     * Specify the function to run when the ExpandableTile is clicked
+     * Deprecated in v11. Use 'onClick' instead.
      */
-    handleClick: PropTypes.func,
+    handleClick: deprecate(
+      PropTypes.func,
+      'The handleClick prop for ClickableTile has been deprecated in favor of onClick. It will be removed in the next major release.'
+    ),
 
     /**
      * An ID that can be provided to aria-labelledby
@@ -453,7 +459,8 @@ export class ExpandableTile extends Component {
     onBeforeClick: PropTypes.func,
 
     /**
-     * optional handler to trigger a function the Tile is clicked
+     * Specify the function to run when the ExpandableTile is clicked
+
      */
     onClick: PropTypes.func,
 
@@ -494,7 +501,7 @@ export class ExpandableTile extends Component {
     tileMaxHeight: 0,
     tilePadding: 0,
     onBeforeClick: () => true,
-    handleClick: () => {},
+    onClick: () => {},
     tileCollapsedIconText: 'Interact to expand Tile',
     tileExpandedIconText: 'Interact to collapse Tile',
     light: false,
@@ -572,7 +579,8 @@ export class ExpandableTile extends Component {
       },
       () => {
         this.setMaxHeight();
-        this.props.handleClick(evt);
+        // TODO: Remove handleClick prop when handleClick is deprecated
+        this.props.handleClick?.(evt) || this.props.onClick(evt);
       }
     );
   };
@@ -597,8 +605,8 @@ export class ExpandableTile extends Component {
       tileMaxHeight, // eslint-disable-line
       tilePadding, // eslint-disable-line
       handleClick, // eslint-disable-line
-      onClick,
-      onKeyUp,
+      onClick, // eslint-disable-line
+      onKeyUp, // eslint-disable-line
       tileCollapsedIconText,
       tileExpandedIconText,
       tileCollapsedLabel,
@@ -640,8 +648,10 @@ export class ExpandableTile extends Component {
         aria-expanded={isExpanded}
         title={isExpanded ? tileExpandedIconText : tileCollapsedIconText}
         {...rest}
-        onKeyUp={composeEventHandlers([onKeyUp, this.handleKeyUp])}
-        onClick={composeEventHandlers([onClick, this.handleClick])}
+        // TODO: replace with onKeyUp when handleKeyup prop is deprecated
+        onKeyUp={composeEventHandlers([this.onKeyUp, this.handleKeyUp])}
+        // TODO: replace with onClick when handleClick prop is deprecated
+        onClick={composeEventHandlers([this.onClick, this.handleClick])}
         tabIndex={tabIndex}>
         <div
           ref={(tileContent) => {
