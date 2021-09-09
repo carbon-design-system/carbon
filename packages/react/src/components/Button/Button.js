@@ -219,7 +219,7 @@ const Button = React.forwardRef(function Button(
       onMouseLeave: composeEventHandlers([onMouseLeave, handleMouseLeave]),
       onFocus: composeEventHandlers([onFocus, handleFocus]),
       onBlur: composeEventHandlers([onBlur, handleBlur]),
-      onClick: composeEventHandlers([handleClick, onClick]),
+      onClick: composeEventHandlers([onClick, handleClick]),
       ...other,
       ...commonProps,
       ...otherProps,
@@ -261,6 +261,14 @@ Button.propTypes = {
    * Specify whether the Button should be disabled, or not
    */
   disabled: PropTypes.bool,
+
+  /**
+   * Deprecated in v11. Use 'onClick' instead.
+   */
+  handleClick: deprecate(
+    PropTypes.func,
+    'The handleClick prop for Button has been deprecated in favor of onClick. It will be removed in the next major release.'
+  ),
 
   /**
    * Specify if the button is an icon-only button
