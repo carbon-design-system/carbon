@@ -9,21 +9,20 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import classNames from 'classnames';
 import { settings } from 'carbon-components';
-import TabContent from '../TabContent';
+import deprecate from '../../prop-types/deprecate';
 
 const { prefix } = settings;
-
 export default class Tab extends React.Component {
   static propTypes = {
-    /**
-     * The element ID for the top-level element.
-     */
-    id: PropTypes.string,
-
     /**
      * Specify an optional className to be added to your Tab
      */
     className: PropTypes.string,
+
+    /**
+     * Whether your Tab is disabled.
+     */
+    disabled: PropTypes.bool,
 
     /**
      * A handler that is invoked when a user clicks on the control.
@@ -38,14 +37,14 @@ export default class Tab extends React.Component {
     handleTabKeyDown: PropTypes.func,
 
     /**
-     * Whether your Tab is disabled.
-     */
-    disabled: PropTypes.bool,
-
-    /**
      * Provide a string that represents the `href` of the Tab
      */
-    href: PropTypes.string.isRequired,
+    href: deprecate(PropTypes.string),
+
+    /**
+     * The element ID for the top-level element.
+     */
+    id: PropTypes.string,
 
     /**
      * The index of your Tab in your Tabs. Reserved for usage in Tabs
@@ -58,11 +57,6 @@ export default class Tab extends React.Component {
     label: PropTypes.node,
 
     /**
-     * Provide an accessibility role for your Tab
-     */
-    role: PropTypes.string.isRequired,
-
-    /**
      * Provide a handler that is invoked when a user clicks on the control
      */
     onClick: PropTypes.func.isRequired,
@@ -72,6 +66,24 @@ export default class Tab extends React.Component {
      */
     onKeyDown: PropTypes.func.isRequired,
 
+    /*
+     * An optional parameter to allow overriding the anchor rendering.
+     * Useful for using Tab along with react-router or other client
+     * side router libraries.
+     **/
+    renderAnchor: deprecate(PropTypes.func),
+    renderButton: PropTypes.func,
+
+    /*
+     * An optional parameter to allow overriding the content rendering.
+     **/
+    renderContent: PropTypes.func,
+
+    /**
+     * Provide an accessibility role for your Tab
+     */
+    role: PropTypes.string.isRequired,
+
     /**
      * Whether your Tab is selected.
      * Reserved for usage in Tabs
@@ -79,30 +91,15 @@ export default class Tab extends React.Component {
     selected: PropTypes.bool.isRequired,
 
     /**
-     * Specify the tab index of the <a> node
+     * Specify the tab index of the `<button>` node
      */
-    tabIndex: PropTypes.number.isRequired,
-
-    /*
-     * An optional parameter to allow overriding the anchor rendering.
-     * Useful for using Tab along with react-router or other client
-     * side router libraries.
-     **/
-    renderAnchor: PropTypes.func,
-
-    /*
-     * An optional parameter to allow overriding the content rendering.
-     **/
-    renderContent: PropTypes.func,
+    tabIndex: PropTypes.number,
   };
 
   static defaultProps = {
     role: 'presentation',
     label: 'provide a label',
-    tabIndex: 0,
-    href: '#',
     selected: false,
-    renderContent: TabContent,
     onClick: () => {},
     onKeyDown: () => {},
   };
@@ -114,60 +111,80 @@ export default class Tab extends React.Component {
       handleTabClick,
       handleTabKeyDown,
       disabled,
-      href,
+      href = '#',
       index,
       label,
       selected,
-      tabIndex,
+      tabIndex = 0,
       onClick,
       onKeyDown,
+      // TODO: rename renderAnchor to renderButton in next major version
       renderAnchor,
+      renderButton,
       renderContent, // eslint-disable-line no-unused-vars
       ...other
     } = this.props;
 
-    const classes = classNames(className, `${prefix}--tabs__nav-item`, {
-      [`${prefix}--tabs__nav-item--disabled`]: disabled,
-      [`${prefix}--tabs__nav-item--selected`]: selected,
-    });
+    const classes = classNames(
+      className,
+      // TODO: remove scrollable in next major release
+      // `${prefix}--tabs__nav-item`,
+      `${prefix}--tabs--scrollable__nav-item`,
+      {
+        [`${prefix}--tabs__nav-item--disabled`]: disabled,
+        [`${prefix}--tabs__nav-item--selected`]: selected,
+        // TODO: remove scrollable in next major release
+        [`${prefix}--tabs--scrollable__nav-item--disabled`]: disabled,
+        [`${prefix}--tabs--scrollable__nav-item--selected`]: selected,
+      }
+    );
 
-    const anchorProps = {
+    const buttonProps = {
+      ['aria-selected']: selected,
+      ['aria-disabled']: disabled,
+      ['aria-controls']: id && `${id}__panel`,
       id,
-      className: `${prefix}--tabs__nav-link`,
+      // TODO: remove scrollable in next major release
+      // className:  `${prefix}--tabs__nav-link`,
+      className: `${prefix}--tabs--scrollable__nav-link`,
       href,
       tabIndex: !disabled ? tabIndex : -1,
-      ref: e => {
+      ref: (e) => {
         this.tabAnchor = e;
       },
     };
 
+    const renderElement = renderButton || renderAnchor;
+
     return (
       <li
         {...other}
-        tabIndex={-1}
         className={classes}
-        onClick={evt => {
+        onClick={(evt) => {
           if (disabled) {
             return;
           }
-          handleTabClick(index, evt);
+          if (handleTabClick) {
+            handleTabClick(index, evt);
+          }
           onClick(evt);
         }}
-        onKeyDown={evt => {
+        onKeyDown={(evt) => {
           if (disabled) {
             return;
           }
-          handleTabKeyDown(index, evt);
+          if (handleTabKeyDown) {
+            handleTabKeyDown(index, evt);
+          }
           onKeyDown(evt);
         }}
-        role="tab"
-        aria-selected={selected}
-        aria-disabled={disabled}
-        aria-controls={`${id}__panel`}>
-        {renderAnchor ? (
-          renderAnchor(anchorProps)
+        role="presentation">
+        {renderElement ? (
+          renderElement(buttonProps)
         ) : (
-          <a {...anchorProps}>{label}</a>
+          <button type="button" role="tab" {...buttonProps}>
+            {label}
+          </button>
         )}
       </li>
     );

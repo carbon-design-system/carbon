@@ -26,46 +26,43 @@
 
   .#{$prefix}--btn--copy__feedback {
     position: absolute;
-    display: none;
     top: 1.2rem;
     left: 50%;
+    display: none;
 
-    &:focus {
-      border: 2px solid red;
-    }
-
-    &:before {
+    &::before {
       @include box-shadow;
       @include type-style('body-short-01');
+
+      z-index: 2;
       top: 1.1rem;
       padding: $spacing-02;
-      color: $inverse-01;
+      border-radius: 4px;
+      color: $text-inverse;
       content: attr(data-feedback);
+      font-weight: 400;
+      pointer-events: none;
       transform: translateX(-50%);
       white-space: nowrap;
-      pointer-events: none;
-      border-radius: 4px;
-      font-weight: 400;
-      z-index: 2;
     }
 
-    &:after {
+    &::after {
+      z-index: 1;
       top: 0.85rem;
+      left: -0.3rem;
       width: 0.6rem;
       height: 0.6rem;
-      left: -0.3rem;
-      border-right: 1px solid $inverse-02;
-      border-bottom: 1px solid $inverse-02;
+      border-right: 1px solid $background-inverse;
+      border-bottom: 1px solid $background-inverse;
       content: '';
       transform: rotate(-135deg);
-      z-index: 1;
     }
 
-    &:before,
-    &:after {
+    &::before,
+    &::after {
       position: absolute;
       display: block;
-      background: $inverse-02;
+      background: $background-inverse;
     }
 
     &--displayed {
@@ -74,39 +71,50 @@
   }
 
   // TODO: deprecate above styles
+
   .#{$prefix}--copy-btn {
     @include reset;
+
     position: relative;
     display: flex;
-    justify-content: center;
+    width: $carbon--spacing-08;
+    height: $carbon--spacing-08;
     align-items: center;
+    justify-content: center;
     padding: 0;
     border: none;
-    height: $carbon--spacing-08;
-    width: $carbon--spacing-08;
-    background-color: $ui-01;
+    background-color: $layer;
     cursor: pointer;
 
     &:hover {
-      background-color: $hover-ui;
+      background-color: $layer-hover;
+    }
+
+    &:active {
+      background-color: $layer-active;
     }
 
     &::before {
       @include tooltip--caret;
+
       display: none;
     }
 
     .#{$prefix}--copy-btn__feedback {
       @include tooltip--content('icon');
-      clip: auto;
-      margin: auto;
-      overflow: visible;
+
       display: none;
+      overflow: visible;
+      box-sizing: content-box;
+      margin: auto;
+      clip: auto;
     }
+
     @include tooltip--placement('icon', 'bottom', 'center');
 
     &:focus {
       @include focus-outline('outline');
+
       outline-color: $focus;
     }
 
@@ -118,6 +126,7 @@
     &.#{$prefix}--copy-btn--animating.#{$prefix}--copy-btn--fade-out::before,
     &.#{$prefix}--copy-btn--animating.#{$prefix}--copy-btn--fade-out
       .#{$prefix}--copy-btn__feedback {
+      // https://github.com/stylelint/stylelint/issues/2363
       animation: $duration--fast-02 motion(standard, productive) hide-feedback;
     }
 
@@ -126,5 +135,10 @@
       .#{$prefix}--copy-btn__feedback {
       animation: $duration--fast-02 motion(standard, productive) show-feedback;
     }
+  }
+
+  // Needs to come after reset so hidden text is not set to font-size: 100%
+  .#{$prefix}--copy {
+    font-size: 0;
   }
 }

@@ -1,0 +1,783 @@
+//
+// Copyright IBM Corp. 2020
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+@import '../../globals/scss/theme-tokens';
+@import '../../globals/scss/vendor/@carbon/elements/scss/colors/colors';
+@import '../../globals/scss/vendor/@carbon/elements/scss/import-once/import-once';
+
+// prettier-ignore
+$tag-colors: (
+  // red
+  'tag-background-red': (
+    fallback: $carbon__red-20,
+    values: (
+      (
+        theme: $carbon--theme--white,
+        value: $carbon__red-20,
+      ),
+      (
+        theme: $carbon--theme--g10,
+        value: $carbon__red-20,
+      ),
+      (
+        theme: $carbon--theme--g90,
+        value: $carbon__red-80,
+      ),
+      (
+        theme: $carbon--theme--g100,
+        value: $carbon__red-80,
+      ),
+      (
+        theme: $carbon--theme--v9,
+        value: $carbon__red-20,
+      ),
+    ),
+  ),
+  'tag-color-red': (
+    fallback: $carbon__red-80,
+    values: (
+      (
+        theme: $carbon--theme--white,
+        value: $carbon__red-80,
+      ),
+      (
+        theme: $carbon--theme--g10,
+        value: $carbon__red-80,
+      ),
+      (
+        theme: $carbon--theme--g90,
+        value: $carbon__red-30,
+      ),
+      (
+        theme: $carbon--theme--g100,
+        value: $carbon__red-30,
+      ),
+      (
+        theme: $carbon--theme--v9,
+        value: $carbon__red-80,
+      ),
+    ),
+  ),
+  'tag-hover-red': (
+    fallback: $carbon__red-30,
+    values: (
+      (
+        theme: $carbon--theme--white,
+        value: $carbon__red-30,
+      ),
+      (
+        theme: $carbon--theme--g10,
+        value: $carbon__red-30,
+      ),
+      (
+        theme: $carbon--theme--g90,
+        value: $carbon__red-70,
+      ),
+      (
+        theme: $carbon--theme--g100,
+        value: $carbon__red-70,
+      ),
+      (
+        theme: $carbon--theme--v9,
+        value: $carbon__red-30,
+      ),
+    ),
+  ),
+
+  // magenta
+  'tag-background-magenta': (
+    fallback: $carbon__magenta-20,
+    values: (
+      (
+        theme: $carbon--theme--white,
+        value: $carbon__magenta-20,
+      ),
+      (
+        theme: $carbon--theme--g10,
+        value: $carbon__magenta-20,
+      ),
+      (
+        theme: $carbon--theme--g90,
+        value: $carbon__magenta-80,
+      ),
+      (
+        theme: $carbon--theme--g100,
+        value: $carbon__magenta-80,
+      ),
+      (
+        theme: $carbon--theme--v9,
+        value: $carbon__magenta-20,
+      ),
+    ),
+  ),
+  'tag-color-magenta': (
+    fallback: $carbon__magenta-80,
+    values: (
+      (
+        theme: $carbon--theme--white,
+        value: $carbon__magenta-80,
+      ),
+      (
+        theme: $carbon--theme--g10,
+        value: $carbon__magenta-80,
+      ),
+      (
+        theme: $carbon--theme--g90,
+        value: $carbon__magenta-30,
+      ),
+      (
+        theme: $carbon--theme--g100,
+        value: $carbon__magenta-30,
+      ),
+      (
+        theme: $carbon--theme--v9,
+        value: $carbon__magenta-80,
+      ),
+    ),
+  ),
+  'tag-hover-magenta': (
+    fallback: $carbon__magenta-30,
+    values: (
+      (
+        theme: $carbon--theme--white,
+        value: $carbon__magenta-30,
+      ),
+      (
+        theme: $carbon--theme--g10,
+        value: $carbon__magenta-30,
+      ),
+      (
+        theme: $carbon--theme--g90,
+        value: $carbon__magenta-70,
+      ),
+      (
+        theme: $carbon--theme--g100,
+        value: $carbon__magenta-70,
+      ),
+      (
+        theme: $carbon--theme--v9,
+        value: $carbon__magenta-30,
+      ),
+    ),
+  ),
+
+  // purple
+  'tag-background-purple': (
+    fallback: $carbon__purple-20,
+    values: (
+      (
+        theme: $carbon--theme--white,
+        value: $carbon__purple-20,
+      ),
+      (
+        theme: $carbon--theme--g10,
+        value: $carbon__purple-20,
+      ),
+      (
+        theme: $carbon--theme--g90,
+        value: $carbon__purple-80,
+      ),
+      (
+        theme: $carbon--theme--g100,
+        value: $carbon__purple-80,
+      ),
+      (
+        theme: $carbon--theme--v9,
+        value: $carbon__purple-20,
+      ),
+    ),
+  ),
+  'tag-color-purple': (
+    fallback: $carbon__purple-80,
+    values: (
+      (
+        theme: $carbon--theme--white,
+        value: $carbon__purple-80,
+      ),
+      (
+        theme: $carbon--theme--g10,
+        value: $carbon__purple-80,
+      ),
+      (
+        theme: $carbon--theme--g90,
+        value: $carbon__purple-30,
+      ),
+      (
+        theme: $carbon--theme--g100,
+        value: $carbon__purple-30,
+      ),
+      (
+        theme: $carbon--theme--v9,
+        value: $carbon__purple-80,
+      ),
+    ),
+  ),
+  'tag-hover-purple': (
+    fallback: $carbon__purple-30,
+    values: (
+      (
+        theme: $carbon--theme--white,
+        value: $carbon__purple-30,
+      ),
+      (
+        theme: $carbon--theme--g10,
+        value: $carbon__purple-30,
+      ),
+      (
+        theme: $carbon--theme--g90,
+        value: $carbon__purple-70,
+      ),
+      (
+        theme: $carbon--theme--g100,
+        value: $carbon__purple-70,
+      ),
+      (
+        theme: $carbon--theme--v9,
+        value: $carbon__purple-30,
+      ),
+    ),
+  ),
+
+  // blue
+  'tag-background-blue': (
+    fallback: $carbon__blue-20,
+    values: (
+      (
+        theme: $carbon--theme--white,
+        value: $carbon__blue-20,
+      ),
+      (
+        theme: $carbon--theme--g10,
+        value: $carbon__blue-20,
+      ),
+      (
+        theme: $carbon--theme--g90,
+        value: $carbon__blue-80,
+      ),
+      (
+        theme: $carbon--theme--g100,
+        value: $carbon__blue-80,
+      ),
+      (
+        theme: $carbon--theme--v9,
+        value: $carbon__blue-20,
+      ),
+    ),
+  ),
+  'tag-color-blue': (
+    fallback: $carbon__blue-80,
+    values: (
+      (
+        theme: $carbon--theme--white,
+        value: $carbon__blue-80,
+      ),
+      (
+        theme: $carbon--theme--g10,
+        value: $carbon__blue-80,
+      ),
+      (
+        theme: $carbon--theme--g90,
+        value: $carbon__blue-30,
+      ),
+      (
+        theme: $carbon--theme--g100,
+        value: $carbon__blue-30,
+      ),
+      (
+        theme: $carbon--theme--v9,
+        value: $carbon__blue-80,
+      ),
+    ),
+  ),
+  'tag-hover-blue': (
+    fallback: $carbon__blue-30,
+    values: (
+      (
+        theme: $carbon--theme--white,
+        value: $carbon__blue-30,
+      ),
+      (
+        theme: $carbon--theme--g10,
+        value: $carbon__blue-30,
+      ),
+      (
+        theme: $carbon--theme--g90,
+        value: $carbon__blue-70,
+      ),
+      (
+        theme: $carbon--theme--g100,
+        value: $carbon__blue-70,
+      ),
+      (
+        theme: $carbon--theme--v9,
+        value: $carbon__blue-30,
+      ),
+    ),
+  ),
+
+  // cyan
+  'tag-background-cyan': (
+    fallback: $carbon__cyan-20,
+    values: (
+      (
+        theme: $carbon--theme--white,
+        value: $carbon__cyan-20,
+      ),
+      (
+        theme: $carbon--theme--g10,
+        value: $carbon__cyan-20,
+      ),
+      (
+        theme: $carbon--theme--g90,
+        value: $carbon__cyan-80,
+      ),
+      (
+        theme: $carbon--theme--g100,
+        value: $carbon__cyan-80,
+      ),
+      (
+        theme: $carbon--theme--v9,
+        value: $carbon__cyan-20,
+      ),
+    ),
+  ),
+  'tag-color-cyan': (
+    fallback: $carbon__cyan-80,
+    values: (
+      (
+        theme: $carbon--theme--white,
+        value: $carbon__cyan-80,
+      ),
+      (
+        theme: $carbon--theme--g10,
+        value: $carbon__cyan-80,
+      ),
+      (
+        theme: $carbon--theme--g90,
+        value: $carbon__cyan-30,
+      ),
+      (
+        theme: $carbon--theme--g100,
+        value: $carbon__cyan-30,
+      ),
+      (
+        theme: $carbon--theme--v9,
+        value: $carbon__cyan-80,
+      ),
+    ),
+  ),
+  'tag-hover-cyan': (
+    fallback: $carbon__cyan-30,
+    values: (
+      (
+        theme: $carbon--theme--white,
+        value: $carbon__cyan-30,
+      ),
+      (
+        theme: $carbon--theme--g10,
+        value: $carbon__cyan-30,
+      ),
+      (
+        theme: $carbon--theme--g90,
+        value: $carbon__cyan-70,
+      ),
+      (
+        theme: $carbon--theme--g100,
+        value: $carbon__cyan-70,
+      ),
+      (
+        theme: $carbon--theme--v9,
+        value: $carbon__cyan-30,
+      ),
+    ),
+  ),
+
+  // teal
+  'tag-background-teal': (
+    fallback: $carbon__teal-20,
+    values: (
+      (
+        theme: $carbon--theme--white,
+        value: $carbon__teal-20,
+      ),
+      (
+        theme: $carbon--theme--g10,
+        value: $carbon__teal-20,
+      ),
+      (
+        theme: $carbon--theme--g90,
+        value: $carbon__teal-80,
+      ),
+      (
+        theme: $carbon--theme--g100,
+        value: $carbon__teal-80,
+      ),
+      (
+        theme: $carbon--theme--v9,
+        value: $carbon__teal-20,
+      ),
+    ),
+  ),
+  'tag-color-teal': (
+    fallback: $carbon__teal-80,
+    values: (
+      (
+        theme: $carbon--theme--white,
+        value: $carbon__teal-80,
+      ),
+      (
+        theme: $carbon--theme--g10,
+        value: $carbon__teal-80,
+      ),
+      (
+        theme: $carbon--theme--g90,
+        value: $carbon__teal-30,
+      ),
+      (
+        theme: $carbon--theme--g100,
+        value: $carbon__teal-30,
+      ),
+      (
+        theme: $carbon--theme--v9,
+        value: $carbon__teal-80,
+      ),
+    ),
+  ),
+  'tag-hover-teal': (
+    fallback: $carbon__teal-30,
+    values: (
+      (
+        theme: $carbon--theme--white,
+        value: $carbon__teal-30,
+      ),
+      (
+        theme: $carbon--theme--g10,
+        value: $carbon__teal-30,
+      ),
+      (
+        theme: $carbon--theme--g90,
+        value: $carbon__teal-70,
+      ),
+      (
+        theme: $carbon--theme--g100,
+        value: $carbon__teal-70,
+      ),
+      (
+        theme: $carbon--theme--v9,
+        value: $carbon__teal-30,
+      ),
+    ),
+  ),
+
+  // green
+  'tag-background-green': (
+    fallback: $carbon__green-20,
+    values: (
+      (
+        theme: $carbon--theme--white,
+        value: $carbon__green-20,
+      ),
+      (
+        theme: $carbon--theme--g10,
+        value: $carbon__green-20,
+      ),
+      (
+        theme: $carbon--theme--g90,
+        value: $carbon__green-80,
+      ),
+      (
+        theme: $carbon--theme--g100,
+        value: $carbon__green-80,
+      ),
+      (
+        theme: $carbon--theme--v9,
+        value: $carbon__green-20,
+      ),
+    ),
+  ),
+  'tag-color-green': (
+    fallback: $carbon__green-80,
+    values: (
+      (
+        theme: $carbon--theme--white,
+        value: $carbon__green-80,
+      ),
+      (
+        theme: $carbon--theme--g10,
+        value: $carbon__green-80,
+      ),
+      (
+        theme: $carbon--theme--g90,
+        value: $carbon__green-30,
+      ),
+      (
+        theme: $carbon--theme--g100,
+        value: $carbon__green-30,
+      ),
+      (
+        theme: $carbon--theme--v9,
+        value: $carbon__green-80,
+      ),
+    ),
+  ),
+  'tag-hover-green': (
+    fallback: $carbon__green-30,
+    values: (
+      (
+        theme: $carbon--theme--white,
+        value: $carbon__green-30,
+      ),
+      (
+        theme: $carbon--theme--g10,
+        value: $carbon__green-30,
+      ),
+      (
+        theme: $carbon--theme--g90,
+        value: $carbon__green-70,
+      ),
+      (
+        theme: $carbon--theme--g100,
+        value: $carbon__green-70,
+      ),
+      (
+        theme: $carbon--theme--v9,
+        value: $carbon__green-30,
+      ),
+    ),
+  ),
+
+  // gray
+  'tag-background-gray': (
+    fallback: $carbon__gray-20,
+    values: (
+      (
+        theme: $carbon--theme--white,
+        value: $carbon__gray-20,
+      ),
+      (
+        theme: $carbon--theme--g10,
+        value: $carbon__gray-20,
+      ),
+      (
+        theme: $carbon--theme--g90,
+        value: $carbon__gray-80,
+      ),
+      (
+        theme: $carbon--theme--g100,
+        value: $carbon__gray-80,
+      ),
+      (
+        theme: $carbon--theme--v9,
+        value: $carbon__gray-20,
+      ),
+    ),
+  ),
+  'tag-color-gray': (
+    fallback: $carbon__gray-80,
+    values: (
+      (
+        theme: $carbon--theme--white,
+        value: $carbon__gray-80,
+      ),
+      (
+        theme: $carbon--theme--g10,
+        value: $carbon__gray-80,
+      ),
+      (
+        theme: $carbon--theme--g90,
+        value: $carbon__gray-30,
+      ),
+      (
+        theme: $carbon--theme--g100,
+        value: $carbon__gray-30,
+      ),
+      (
+        theme: $carbon--theme--v9,
+        value: $carbon__gray-80,
+      ),
+    ),
+  ),
+  'tag-hover-gray': (
+    fallback: $carbon__gray-30,
+    values: (
+      (
+        theme: $carbon--theme--white,
+        value: $carbon__gray-30,
+      ),
+      (
+        theme: $carbon--theme--g10,
+        value: $carbon__gray-30,
+      ),
+      (
+        theme: $carbon--theme--g90,
+        value: $carbon__gray-70,
+      ),
+      (
+        theme: $carbon--theme--g100,
+        value: $carbon__gray-70,
+      ),
+      (
+        theme: $carbon--theme--v9,
+        value: $carbon__gray-30,
+      ),
+    ),
+  ),
+
+  // cool-gray
+  'tag-background-cool-gray': (
+    fallback: $carbon__cool-gray-20,
+    values: (
+      (
+        theme: $carbon--theme--white,
+        value: $carbon__cool-gray-20,
+      ),
+      (
+        theme: $carbon--theme--g10,
+        value: $carbon__cool-gray-20,
+      ),
+      (
+        theme: $carbon--theme--g90,
+        value: $carbon__cool-gray-80,
+      ),
+      (
+        theme: $carbon--theme--g100,
+        value: $carbon__cool-gray-80,
+      ),
+      (
+        theme: $carbon--theme--v9,
+        value: $carbon__cool-gray-20,
+      ),
+    ),
+  ),
+  'tag-color-cool-gray': (
+    fallback: $carbon__cool-gray-80,
+    values: (
+      (
+        theme: $carbon--theme--white,
+        value: $carbon__cool-gray-80,
+      ),
+      (
+        theme: $carbon--theme--g10,
+        value: $carbon__cool-gray-80,
+      ),
+      (
+        theme: $carbon--theme--g90,
+        value: $carbon__cool-gray-30,
+      ),
+      (
+        theme: $carbon--theme--g100,
+        value: $carbon__cool-gray-30,
+      ),
+      (
+        theme: $carbon--theme--v9,
+        value: $carbon__cool-gray-80,
+      ),
+    ),
+  ),
+  'tag-hover-cool-gray': (
+    fallback: $carbon__cool-gray-30,
+    values: (
+      (
+        theme: $carbon--theme--white,
+        value: $carbon__cool-gray-30,
+      ),
+      (
+        theme: $carbon--theme--g10,
+        value: $carbon__cool-gray-30,
+      ),
+      (
+        theme: $carbon--theme--g90,
+        value: $carbon__cool-gray-70,
+      ),
+      (
+        theme: $carbon--theme--g100,
+        value: $carbon__cool-gray-70,
+      ),
+      (
+        theme: $carbon--theme--v9,
+        value: $carbon__cool-gray-30,
+      ),
+    ),
+  ),
+
+  // warm-gray
+  'tag-background-warm-gray': (
+    fallback: $carbon__warm-gray-20,
+    values: (
+      (
+        theme: $carbon--theme--white,
+        value: $carbon__warm-gray-20,
+      ),
+      (
+        theme: $carbon--theme--g10,
+        value: $carbon__warm-gray-20,
+      ),
+      (
+        theme: $carbon--theme--g90,
+        value: $carbon__warm-gray-80,
+      ),
+      (
+        theme: $carbon--theme--g100,
+        value: $carbon__warm-gray-80,
+      ),
+      (
+        theme: $carbon--theme--v9,
+        value: $carbon__warm-gray-20,
+      ),
+    ),
+  ),
+  'tag-color-warm-gray': (
+    fallback: $carbon__warm-gray-80,
+    values: (
+      (
+        theme: $carbon--theme--white,
+        value: $carbon__warm-gray-80,
+      ),
+      (
+        theme: $carbon--theme--g10,
+        value: $carbon__warm-gray-80,
+      ),
+      (
+        theme: $carbon--theme--g90,
+        value: $carbon__warm-gray-30,
+      ),
+      (
+        theme: $carbon--theme--g100,
+        value: $carbon__warm-gray-30,
+      ),
+      (
+        theme: $carbon--theme--v9,
+        value: $carbon__warm-gray-80,
+      ),
+    ),
+  ),
+  'tag-hover-warm-gray': (
+    fallback: $carbon__warm-gray-30,
+    values: (
+      (
+        theme: $carbon--theme--white,
+        value: $carbon__warm-gray-30,
+      ),
+      (
+        theme: $carbon--theme--g10,
+        value: $carbon__warm-gray-30,
+      ),
+      (
+        theme: $carbon--theme--g90,
+        value: $carbon__warm-gray-70,
+      ),
+      (
+        theme: $carbon--theme--g100,
+        value: $carbon__warm-gray-70,
+      ),
+      (
+        theme: $carbon--theme--v9,
+        value: $carbon__warm-gray-30,
+      ),
+    ),
+  ),
+);

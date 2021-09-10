@@ -1,11 +1,15 @@
 {
   "name": "@carbon/pictograms-react",
   "description": "React components for pictograms in digital and software products using the Carbon Design System",
-  "version": "10.8.0",
+  "version": "11.17.0",
   "license": "Apache-2.0",
   "main": "lib/index.js",
   "module": "es/index.js",
-  "repository": "https://github.com/carbon-design-system/carbon/tree/master/packages/pictograms-react",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/carbon-design-system/carbon.git",
+    "directory": "packages/pictograms-react"
+  },
   "bugs": "https://github.com/carbon-design-system/carbon/issues",
   "files": [
     "es",
@@ -26,14 +30,20 @@
   },
   "scripts": {
     "build": "yarn clean && node tasks/build.js",
-    "clean": "rimraf es lib umd"
+    "clean": "rimraf es lib umd",
+    "postinstall": "carbon-telemetry collect --install"
+  },
+  "peerDependencies": {
+    "react": ">=16"
   },
   "dependencies": {
-    "@carbon/icon-helpers": "^10.5.0"
+    "@carbon/icon-helpers": "^10.22.0",
+    "@carbon/telemetry": "0.0.0-alpha.6",
+    "prop-types": "^15.7.2"
   },
   "devDependencies": {
-    "@carbon/icon-build-helpers": "^0.3.0",
-    "@carbon/pictograms": "^10.8.0"
+    "@carbon/icon-build-helpers": "^0.27.0",
+    "@carbon/pictograms": "^11.17.0"
   },
   "sideEffects": false
 }

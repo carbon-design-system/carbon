@@ -13,8 +13,8 @@ describe('deprecate', () => {
 
   beforeEach(() => {
     jest.resetModules();
-    jest.mock('warning');
-    warning = require('warning');
+    jest.mock('../../internal/warning');
+    warning = require('../../internal/warning').warning;
     deprecate = require('../deprecate').default;
     mockPropType = jest.fn();
     mockArgs = [{ propName: true }, 'propName', 'ComponentName'];

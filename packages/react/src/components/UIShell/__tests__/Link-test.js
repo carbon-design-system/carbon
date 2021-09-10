@@ -31,7 +31,7 @@ describe('UI Shell - Link', () => {
   });
 
   it('should support rendering a component as the element', () => {
-    const mockComponent = props => <a {...props}>link</a>;
+    const mockComponent = (props) => <a {...props}>link</a>;
     const wrapper = mount(<Link {...mockProps} element={mockComponent} />);
     expect(wrapper).toMatchSnapshot();
   });

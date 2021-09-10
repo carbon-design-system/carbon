@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React, { useState, useCallback } from 'react';
+import React, { useState, useCallback, useEffect } from 'react';
 import { render } from 'react-dom';
 import { settings } from 'carbon-components';
 import {
@@ -24,9 +24,26 @@ const { prefix } = settings;
 
 function ExampleDropContainerApp(props) {
   const [files, setFiles] = useState([]);
-  const uploadFile = async fileToUpload => {
+  const handleDrop = (e) => {
+    e.preventDefault();
+  };
+
+  const handleDragover = (e) => {
+    e.preventDefault();
+  };
+
+  useEffect(() => {
+    document.addEventListener('drop', handleDrop);
+    document.addEventListener('dragover', handleDragover);
+    return () => {
+      document.removeEventListener('drop', handleDrop);
+      document.removeEventListener('dragover', handleDragover);
+    };
+  }, []);
+
+  const uploadFile = async (fileToUpload) => {
     // file size validation
-    if (fileToUpload.size > 512000) {
+    if (fileToUpload.filesize > 512000) {
       const updatedFile = {
         ...fileToUpload,
         status: 'edit',
@@ -35,8 +52,25 @@ function ExampleDropContainerApp(props) {
         errorSubject: 'File size exceeds limit',
         errorBody: '500kb max file size. Select a new file and try again.',
       };
-      setFiles(files =>
-        files.map(file =>
+      setFiles((files) =>
+        files.map((file) =>
+          file.uuid === fileToUpload.uuid ? updatedFile : file
+        )
+      );
+      return;
+    }
+    // file type validation
+    if (fileToUpload.invalidFileType) {
+      const updatedFile = {
+        ...fileToUpload,
+        status: 'edit',
+        iconDescription: 'Delete file',
+        invalid: true,
+        errorSubject: 'Invalid file type',
+        errorBody: `"${fileToUpload.name}" does not have a valid file type.`,
+      };
+      setFiles((files) =>
+        files.map((file) =>
           file.uuid === fileToUpload.uuid ? updatedFile : file
         )
       );
@@ -59,8 +93,8 @@ function ExampleDropContainerApp(props) {
         status: 'complete',
         iconDescription: 'Upload complete',
       };
-      setFiles(files =>
-        files.map(file =>
+      setFiles((files) =>
+        files.map((file) =>
           file.uuid === fileToUpload.uuid ? updatedFile : file
         )
       );
@@ -72,8 +106,8 @@ function ExampleDropContainerApp(props) {
           status: 'edit',
           iconDescription: 'Remove file',
         };
-        setFiles(files =>
-          files.map(file =>
+        setFiles((files) =>
+          files.map((file) =>
             file.uuid === fileToUpload.uuid ? updatedFile : file
           )
         );
@@ -85,49 +119,66 @@ function ExampleDropContainerApp(props) {
         iconDescription: 'Upload failed',
         invalid: true,
       };
-      setFiles(files =>
-        files.map(file => (file === fileToUpload ? updatedFile : file))
+      setFiles((files) =>
+        files.map((file) =>
+          file.uuid === fileToUpload.uuid ? updatedFile : file
+        )
       );
       console.log(error);
     }
   };
+
   const onAddFiles = useCallback(
     (evt, { addedFiles }) => {
       evt.stopPropagation();
-      const newFiles = addedFiles.map(file => ({
+      const newFiles = addedFiles.map((file) => ({
         uuid: uid(),
         name: file.name,
-        size: file.size,
+        filesize: file.size,
         status: 'uploading',
         iconDescription: 'Uploading',
       }));
-      props.multiple
-        ? setFiles([...files, ...newFiles])
-        : setFiles([...files, newFiles[0]]);
-      newFiles.forEach(uploadFile);
+      if (props.multiple) {
+        setFiles([...files, ...newFiles]);
+        newFiles.forEach(uploadFile);
+      } else if (newFiles[0]) {
+        setFiles([newFiles[0]]);
+        uploadFile(newFiles[0]);
+      }
     },
     [files, props.multiple]
   );
+
   const handleFileUploaderItemClick = useCallback(
-    (evt, { uuid: clickedUuid }) =>
+    (_, { uuid: clickedUuid }) =>
       setFiles(files.filter(({ uuid }) => clickedUuid !== uuid)),
     [files]
   );
+
   return (
     <FormItem>
-      <strong className={`${prefix}--file--label`}>Account photo</strong>
+      <p className={`${prefix}--file--label`}>Upload files</p>
       <p className={`${prefix}--label-description`}>
-        Only .jpg and .png files. 500kb max file size
+        Max file size is 500kb. Supported file types are .jpg and .png.
       </p>
       <FileUploaderDropContainer {...props} onAddFiles={onAddFiles} />
       <div className="uploaded-files" style={{ width: '100%' }}>
         {files.map(
-          ({ uuid, name, size, status, iconDescription, invalid, ...rest }) => (
+          ({
+            uuid,
+            name,
+            filesize,
+            status,
+            iconDescription,
+            invalid,
+            ...rest
+          }) => (
             <FileUploaderItem
               key={uid()}
               uuid={uuid}
               name={name}
-              size={size}
+              filesize={filesize}
+              size="default"
               status={status}
               iconDescription={iconDescription}
               invalid={invalid}

@@ -193,7 +193,7 @@ async function createAPIDoc(name, docsDir) {
     return [];
   }
 
-  const docs = (await fs.readdir(docsDir)).filter(name => {
+  const docs = (await fs.readdir(docsDir)).filter((name) => {
     // Ignore dotfiles and json files
     return !(name[0] === '.' || name === 'sass.json');
   });
@@ -234,7 +234,7 @@ async function createAPIDoc(name, docsDir) {
       type: 'list',
       ordered: false,
       spread: false,
-      children: docs.map(doc => ({
+      children: docs.map((doc) => ({
         type: 'listItem',
         spread: false,
         checked: null,
@@ -249,8 +249,10 @@ async function createAPIDoc(name, docsDir) {
                 children: [
                   {
                     type: 'text',
-                    value: `${doc[0].toUpperCase() +
-                      doc.slice(1).replace(/\.[^/.]+$/, '')}`,
+                    value: `${
+                      doc[0].toUpperCase() +
+                      doc.slice(1).replace(/\.[^/.]+$/, '')
+                    }`,
                   },
                 ],
               },
@@ -268,7 +270,7 @@ async function createExamples(name, examplesDir) {
     return [];
   }
 
-  const examples = (await fs.readdir(examplesDir)).filter(name => {
+  const examples = (await fs.readdir(examplesDir)).filter((name) => {
     // Ignore dotfiles and special cases `codesandbox` and `storybook`
     return !(
       name[0] === '.' ||
@@ -314,7 +316,7 @@ async function createExamples(name, examplesDir) {
       type: 'list',
       ordered: false,
       spread: false,
-      children: examples.map(example => ({
+      children: examples.map((example) => ({
         type: 'listItem',
         spread: false,
         checked: null,

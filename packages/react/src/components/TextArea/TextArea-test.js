@@ -103,17 +103,11 @@ describe('TextArea', () => {
 
       it('renders children as expected', () => {
         wrapper.setProps({
-          helperText: (
-            <span>
-              This helper text has <a href="#">a link</a>.
-            </span>
-          ),
+          helperText: <span>This is helper text.</span>,
         });
         const renderedHelper = wrapper.find(`.${prefix}--form__helper-text`);
         expect(renderedHelper.props().children).toEqual(
-          <span>
-            This helper text has <a href="#">a link</a>.
-          </span>
+          <span>This is helper text.</span>
         );
       });
 
@@ -144,12 +138,12 @@ describe('TextArea', () => {
 
       it('should not invoke onClick when textarea is clicked', () => {
         textarea.simulate('click');
-        expect(onClick).not.toBeCalled();
+        expect(onClick).not.toHaveBeenCalled();
       });
 
       it('should not invoke onChange', () => {
         textarea.simulate('change');
-        expect(onChange).not.toBeCalled();
+        expect(onChange).not.toHaveBeenCalled();
       });
     });
 
@@ -173,12 +167,12 @@ describe('TextArea', () => {
 
       it('should invoke onClick when textarea is clicked', () => {
         textarea.simulate('click');
-        expect(onClick).toBeCalled();
+        expect(onClick).toHaveBeenCalled();
       });
 
       it('should invoke onChange when textarea value is changed', () => {
         textarea.simulate('change', eventObject);
-        expect(onChange).toBeCalledWith(eventObject);
+        expect(onChange).toHaveBeenCalledWith(eventObject);
       });
     });
   });

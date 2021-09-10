@@ -29,14 +29,14 @@ function elementOrParentIsFloatingMenu(
   ]
 ) {
   if (node && typeof node.closest === 'function') {
-    return selectorsFloatingMenus.some(selector => node.closest(selector));
+    return selectorsFloatingMenus.some((selector) => node.closest(selector));
   }
 }
 
 /**
  * Ensures the focus is kept in the given `modalNode`, implementing "focus-wrap" behavior.
  * @param {object} options The options.
- * @param {Node} options.modalNode The DOM node of the inner modal.
+ * @param {Node} options.bodyNode
  * @param {Node} options.startTrapNode The DOM node of the focus sentinel the is placed earlier next to `modalNode`.
  * @param {Node} options.endTrapNode The DOM node of the focus sentinel the is placed next to `modalNode`.
  * @param {Node} options.currentActiveNode The DOM node that has focus.
@@ -44,7 +44,7 @@ function elementOrParentIsFloatingMenu(
  * @param {Node} [options.selectorsFloatingMenus] The CSS selectors that matches floating menus.
  */
 function wrapFocus({
-  modalNode,
+  bodyNode,
   startTrapNode,
   endTrapNode,
   currentActiveNode,
@@ -52,10 +52,10 @@ function wrapFocus({
   selectorsFloatingMenus,
 }) {
   if (
-    modalNode &&
+    bodyNode &&
     currentActiveNode &&
     oldActiveNode &&
-    !modalNode.contains(currentActiveNode) &&
+    !bodyNode.contains(currentActiveNode) &&
     !elementOrParentIsFloatingMenu(currentActiveNode, selectorsFloatingMenus)
   ) {
     const comparisonResult = oldActiveNode.compareDocumentPosition(
@@ -66,26 +66,26 @@ function wrapFocus({
       comparisonResult & DOCUMENT_POSITION_BROAD_PRECEDING
     ) {
       const tabbable = findLast(
-        modalNode.querySelectorAll(selectorTabbable),
-        elem => Boolean(elem.offsetParent)
+        bodyNode.querySelectorAll(selectorTabbable),
+        (elem) => Boolean(elem.offsetParent)
       );
       if (tabbable) {
         tabbable.focus();
-      } else if (modalNode !== oldActiveNode) {
-        modalNode.focus();
+      } else if (bodyNode !== oldActiveNode) {
+        bodyNode.focus();
       }
     } else if (
       currentActiveNode === endTrapNode ||
       comparisonResult & DOCUMENT_POSITION_BROAD_FOLLOWING
     ) {
       const tabbable = Array.prototype.find.call(
-        modalNode.querySelectorAll(selectorTabbable),
-        elem => Boolean(elem.offsetParent)
+        bodyNode.querySelectorAll(selectorTabbable),
+        (elem) => Boolean(elem.offsetParent)
       );
       if (tabbable) {
         tabbable.focus();
-      } else if (modalNode !== oldActiveNode) {
-        modalNode.focus();
+      } else if (bodyNode !== oldActiveNode) {
+        bodyNode.focus();
       }
     }
   }

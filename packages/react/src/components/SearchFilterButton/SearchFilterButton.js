@@ -5,11 +5,11 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React from 'react';
-import PropTypes from 'prop-types';
-import warning from 'warning';
-import { settings } from 'carbon-components';
 import { Filter16 } from '@carbon/icons-react';
+import { settings } from 'carbon-components';
+import PropTypes from 'prop-types';
+import React from 'react';
+import { warning } from '../../internal/warning';
 
 const { prefix } = settings;
 
@@ -43,14 +43,14 @@ const SearchFilterButton = ({ labelText, iconDescription, ...other }) => {
 
 SearchFilterButton.propTypes = {
   /**
-   * The a11y label text.
-   */
-  labelText: PropTypes.string,
-
-  /**
    * The icon description.
    */
   iconDescription: PropTypes.string,
+
+  /**
+   * The a11y label text.
+   */
+  labelText: PropTypes.string,
 };
 
 SearchFilterButton.defaultProps = {

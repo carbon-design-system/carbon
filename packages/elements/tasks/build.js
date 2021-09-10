@@ -17,7 +17,7 @@ const packageJson = require('../package.json');
 
 const WORKSPACE_NODE_MODULES = path.resolve(__dirname, '../../../node_modules');
 const BUNDLE_DIR = path.resolve(__dirname, '../scss');
-const dependencies = Object.keys(packageJson.dependencies).map(key => {
+const dependencies = Object.keys(packageJson.dependencies).map((key) => {
   return [key, path.join(WORKSPACE_NODE_MODULES, key)];
 });
 
@@ -55,7 +55,7 @@ async function build() {
   });
 
   await Promise.all(
-    paths.map(async file => {
+    paths.map(async (file) => {
       const relativeImportPath = path.relative(
         path.dirname(file.path),
         BUNDLE_DIR
@@ -75,6 +75,6 @@ async function build() {
   );
 }
 
-build().catch(error => {
+build().catch((error) => {
   console.error(error);
 });

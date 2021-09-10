@@ -1,0 +1,12 @@
+<svg id="icon" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: none;
+      }
+    </style>
+  </defs>
+  <title>chart--rose</title>
+  <path d="M30,17A15.017,15.017,0,0,0,15,2H14V8.0591A9.0122,9.0122,0,0,0,6.0591,16H4v1A11.0109,11.0109,0,0,0,14,27.9492V30h1A13.0084,13.0084,0,0,0,27.9492,18H30ZM16,4.0381A13.0217,13.0217,0,0,1,27.9619,16H16ZM14,10.08V16H8.08A7.0037,7.0037,0,0,1,14,10.08ZM6.0552,18H14v7.939A9.0134,9.0134,0,0,1,6.0552,18ZM16,27.9551V18h9.9551A11.0191,11.0191,0,0,1,16,27.9551Z"/>
+  <rect id="_Transparent_Rectangle_" data-name="&lt;Transparent Rectangle&gt;" class="cls-1" width="32" height="32"/>
+</svg>

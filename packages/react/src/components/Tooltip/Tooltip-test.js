@@ -21,7 +21,7 @@ const { prefix } = settings;
 
 jest.mock('lodash.debounce');
 
-debounce.mockImplementation(fn => fn);
+debounce.mockImplementation((fn) => fn);
 
 describe('Tooltip', () => {
   // An icon component class
@@ -87,7 +87,9 @@ describe('Tooltip', () => {
             .find('[data-floating-menu-direction]')
             .first()
             .prop('className')
-        ).toBe(`${prefix}--tooltip ${prefix}--tooltip--shown tooltip--class`);
+        ).toBe(
+          `${prefix}--tooltip ${prefix}--tooltip--shown ${prefix}--tooltip--bottom ${prefix}--tooltip--align-center tooltip--class`
+        );
       });
       it('sets the trigger class', () => {
         expect(label.prop('className')).toBe(
@@ -159,15 +161,9 @@ describe('Tooltip', () => {
       // Enzyme doesn't seem to allow state() in a forwardRef-wrapped class component
       expect(rootWrapper.find('Tooltip').instance().state.open).toBeFalsy();
       // Enzyme doesn't seem to allow setState() in a forwardRef-wrapped class component
-      rootWrapper
-        .find('Tooltip')
-        .instance()
-        .setState({ open: true });
+      rootWrapper.find('Tooltip').instance().setState({ open: true });
       rootWrapper.update();
-      rootWrapper
-        .find('Tooltip')
-        .instance()
-        .handleClickOutside();
+      rootWrapper.find('Tooltip').instance().handleClickOutside();
       // Enzyme doesn't seem to allow state() in a forwardRef-wrapped class component
       expect(rootWrapper.find('Tooltip').instance().state.open).toEqual(false);
     });
@@ -188,64 +184,11 @@ describe('Tooltip', () => {
       const rootWrapper = mount(<Tooltip />);
       rootWrapper.setProps({ open: true });
       // Enzyme doesn't seem to allow setState() in a forwardRef-wrapped class component
-      rootWrapper
-        .find('Tooltip')
-        .instance()
-        .setState({ open: false });
+      rootWrapper.find('Tooltip').instance().setState({ open: false });
       rootWrapper.update();
       rootWrapper.setProps({ open: true });
       // Enzyme doesn't seem to allow state() in a forwardRef-wrapped class component
       expect(rootWrapper.find('Tooltip').instance().state.open).toEqual(false);
-    });
-  });
-
-  describe('getTriggerPosition', () => {
-    it('sets triggerPosition when triggerEl is set', () => {
-      const rootWrapper = mount(<Tooltip triggerText="Tooltip" />);
-      // Enzyme doesn't seem to allow setState() in a forwardRef-wrapped class component
-      rootWrapper
-        .find('Tooltip')
-        .instance()
-        .setState({
-          triggerPosition: { left: 0, top: 0, right: 0, bottom: 0 },
-        });
-      rootWrapper.update();
-      rootWrapper
-        .find('Tooltip')
-        .instance()
-        .getTriggerPosition();
-      // Enzyme doesn't seem to allow state() in a forwardRef-wrapped class component
-      expect(rootWrapper.find('Tooltip').state.triggerPosition).not.toEqual({
-        left: 0,
-        top: 0,
-        right: 0,
-        bottom: 0,
-      });
-    });
-    it('does not set triggerPosition when triggerEl is not set', () => {
-      const rootWrapper = mount(<Tooltip triggerText="Tooltip" />);
-      // Enzyme doesn't seem to allow setState() in a forwardRef-wrapped class component
-      rootWrapper
-        .find('Tooltip')
-        .instance()
-        .setState({
-          triggerPosition: { left: 0, top: 0, right: 0, bottom: 0 },
-        });
-      rootWrapper.update();
-      delete rootWrapper.find('Tooltip').instance().triggerEl;
-      rootWrapper
-        .find('Tooltip')
-        .instance()
-        .getTriggerPosition();
-      // Enzyme doesn't seem to allow state() in a forwardRef-wrapped class component
-      expect(
-        rootWrapper.find('Tooltip').instance().state.triggerPosition
-      ).toEqual({
-        left: 0,
-        top: 0,
-        right: 0,
-        bottom: 0,
-      });
     });
   });
 });

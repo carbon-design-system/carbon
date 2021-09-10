@@ -23,32 +23,31 @@
 @mixin modal {
   .#{$prefix}--modal {
     position: fixed;
+    z-index: z('modal');
     top: 0;
     left: 0;
-    z-index: z('modal');
     display: flex;
-    align-items: center;
-    justify-content: center;
     width: 100vw;
     height: 100vh;
+    align-items: center;
+    justify-content: center;
+    background-color: $overlay-01;
     content: '';
-    background-color: transparent;
     opacity: 0;
-    visibility: hidden;
-    transition: background-color $duration--slow-02 motion(exit, expressive),
-      opacity $duration--moderate-02 motion(exit, expressive),
+    transition: opacity $duration--moderate-02 motion(exit, expressive),
       visibility 0ms linear $duration--moderate-02;
+    visibility: hidden;
 
     &.is-visible {
-      visibility: visible;
       opacity: 1;
-      background-color: $overlay-01;
-      transition: background-color $duration--slow-02
-          motion(entrance, expressive),
-        opacity $duration--moderate-02 motion(entrance, expressive),
+      transition: opacity $duration--moderate-02 motion(entrance, expressive),
         visibility 0ms linear;
+      visibility: inherit;
     }
 
+    // V11: Question for design: do we have an updated tokens for fields that exist on `layer`?
+    .#{$prefix}--pagination,
+    .#{$prefix}--pagination__control-buttons,
     .#{$prefix}--text-input,
     .#{$prefix}--text-area,
     .#{$prefix}--search-input,
@@ -56,37 +55,40 @@
     .#{$prefix}--dropdown,
     .#{$prefix}--dropdown-list,
     .#{$prefix}--number input[type='number'],
-    .#{$prefix}--date-picker__input {
+    .#{$prefix}--date-picker__input,
+    .#{$prefix}--multi-select {
       background-color: $field-02;
     }
   }
 
   .#{$prefix}--modal.is-visible .#{$prefix}--modal-container {
-    transition: transform $duration--moderate-02 motion(entrance, expressive);
     transform: translate3d(0, 0, 0);
+    transition: transform $duration--moderate-02 motion(entrance, expressive);
   }
 
   .#{$prefix}--modal-container {
-    position: relative;
+    position: fixed;
+    top: 0;
     display: grid;
-    grid-template-rows: auto 1fr auto;
-    grid-template-columns: auto;
-    background-color: $ui-01;
+    overflow: hidden;
     width: 100%;
     height: 100%;
     max-height: 100%;
+    background-color: $ui-01;
+    grid-template-columns: 100%;
+    grid-template-rows: auto 1fr auto;
     // make modal edge visible on high contrast themes (#3880)
     outline: 3px solid transparent;
     outline-offset: -3px;
-    overflow: hidden;
-    transform-origin: top center;
     transform: translate3d(0, -24px, 0);
+    transform-origin: top center;
     transition: transform $duration--moderate-02 motion(exit, expressive);
 
     @include carbon--breakpoint(md) {
+      position: static;
       width: 84%;
-      max-height: 90%;
       height: auto;
+      max-height: 90%;
 
       .#{$prefix}--modal-header,
       .#{$prefix}--modal-content,
@@ -95,7 +97,8 @@
       }
 
       .#{$prefix}--modal-content--with-form {
-        padding-right: $spacing-05; // Override for `.#{$prefix}--modal-content`
+        // Override for `.#{$prefix}--modal-content`
+        padding-right: $spacing-05;
       }
     }
 
@@ -179,7 +182,8 @@
       }
 
       .#{$prefix}--modal-content--with-form {
-        padding-right: $spacing-05; // Override for `.#{$prefix}--modal-content`
+        // Override for `.#{$prefix}--modal-content`
+        padding-right: $spacing-05;
       }
     }
   }
@@ -205,7 +209,8 @@
       }
 
       .#{$prefix}--modal-content--with-form {
-        padding-right: $spacing-05; // Override for `.#{$prefix}--modal-content`
+        // Override for `.#{$prefix}--modal-content`
+        padding-right: $spacing-05;
       }
     }
 
@@ -223,16 +228,15 @@
     padding-top: $spacing-05;
     padding-right: $spacing-09;
     margin-bottom: $spacing-03;
-
-    grid-row: 1/1;
     grid-column: 1/-1;
+    grid-row: 1/1;
   }
 
   .#{$prefix}--modal-header__label {
     @include type-style('label-01');
 
-    color: $text-02;
     margin-bottom: $spacing-02;
+    color: $text-02;
   }
 
   .#{$prefix}--modal-header__heading {
@@ -244,20 +248,24 @@
   .#{$prefix}--modal-content {
     @include type-style('body-long-01');
 
-    grid-row: 2/-2;
-    grid-column: 1/-1;
-
-    overflow-y: auto;
-    margin-bottom: $spacing-08;
-    color: $text-01;
-    font-weight: 400;
-
+    position: relative;
     // Required to accommodate focus outline's negative offset:
     padding-top: $spacing-03;
+    margin-bottom: $spacing-09;
+    color: $text-01;
+
+    font-weight: 400;
+    grid-column: 1/-1;
+    grid-row: 2/-2;
+    overflow-y: auto;
 
     &:focus {
       @include focus-outline('outline');
     }
+  }
+
+  .#{$prefix}--modal-content > p {
+    @include type-style('body-long-01');
   }
 
   // Required so overflow-indicator disappears at end of content
@@ -265,61 +273,82 @@
     padding-bottom: $spacing-07;
   }
 
-  .#{$prefix}--modal-content {
-    > * {
-      @include type-style('body-long-01');
-    }
-  }
-
   .#{$prefix}--modal-content--overflow-indicator {
-    grid-row: 2/-2;
-    grid-column: 1/-1;
+    position: absolute;
+    bottom: $spacing-09;
+    left: 0;
     width: 100%;
     height: rem(32px);
-    content: '';
-    position: absolute;
-    left: 0;
-    bottom: $spacing-08;
     // Safari interprets `transparent` differently, so make color token value transparent instead:
     background-image: linear-gradient(to bottom, rgba($ui-01, 0), $ui-01);
+    content: '';
+    grid-column: 1/-1;
+    grid-row: 2/-2;
+    pointer-events: none;
+  }
+
+  // Safari-only media query
+  // won't appear correctly with CSS custom properties
+  // see: code snippet and tabs overflow indicators
+  @media not all and (min-resolution: 0.001dpcm) {
+    @supports (-webkit-appearance: none) and (stroke-color: transparent) {
+      .#{$prefix}--modal-content--overflow-indicator {
+        background-image: linear-gradient(to bottom, rgba($layer, 0), $layer);
+      }
+    }
   }
 
   .#{$prefix}--modal-content:focus
     ~ .#{$prefix}--modal-content--overflow-indicator {
     width: calc(100% - 4px);
-    margin: 0 2px 2px 2px;
+    margin: 0 2px 2px;
+  }
+
+  @media screen and (-ms-high-contrast: active) {
+    .#{$prefix}--modal-scroll-content > *:last-child {
+      padding-bottom: 0;
+    }
+
+    .#{$prefix}--modal-content--overflow-indicator {
+      display: none;
+    }
   }
 
   .#{$prefix}--modal-footer {
     display: flex;
+    height: rem(64px);
+    justify-content: flex-end;
     margin-top: auto;
-    height: 4rem;
-    background-color: $modal-footer-background-color;
-
-    grid-row: -1/-1;
     grid-column: 1/-1;
+    grid-row: -1/-1;
+  }
 
-    button.#{$prefix}--btn {
-      max-width: none;
-      flex: 1;
-      height: 4rem;
-      margin: 0;
-      padding-top: $spacing-05;
-      padding-bottom: $spacing-07;
-    }
+  .#{$prefix}--modal-footer .#{$prefix}--btn {
+    max-width: none;
+    height: rem(64px);
+    flex: 0 1 50%;
+    padding-top: $spacing-05;
+    padding-bottom: $spacing-07;
+    margin: 0;
+  }
+
+  .#{$prefix}--modal-footer--three-button .#{$prefix}--btn {
+    flex: 0 1 25%;
+    align-items: flex-start;
   }
 
   .#{$prefix}--modal-close {
     position: absolute;
+    z-index: 2;
     top: 0;
     right: 0;
-    height: 3rem;
+    overflow: hidden;
     width: 3rem;
+    height: 3rem;
     padding: rem(12px);
     border: 2px solid transparent;
-    overflow: hidden;
-    cursor: pointer;
     background-color: transparent;
+    cursor: pointer;
     transition: background-color $duration--fast-02 motion(standard, productive);
 
     &:hover {
@@ -327,8 +356,8 @@
     }
 
     &:focus {
-      outline: none;
       border-color: $focus;
+      outline: none;
     }
   }
 
@@ -337,14 +366,30 @@
   }
 
   .#{$prefix}--modal-close__icon {
-    fill: $icon-01;
-    height: rem(20px);
     width: rem(20px);
+    height: rem(20px);
+    fill: $icon-01;
   }
 
   .#{$prefix}--body--with-modal-open {
     overflow: hidden;
   }
+
+  .#{$prefix}--body--with-modal-open .#{$prefix}--tooltip,
+  .#{$prefix}--body--with-modal-open .#{$prefix}--overflow-menu-options {
+    z-index: z('modal');
+  }
+
+  // Windows HCM fix
+  /* stylelint-disable */
+  .#{$prefix}--modal-close__icon {
+    @include high-contrast-mode('icon-fill');
+  }
+
+  .#{$prefix}--modal-close:focus {
+    @include high-contrast-mode('focus');
+  }
+  /* stylelint-enable */
 }
 
 @include exports('modal') {

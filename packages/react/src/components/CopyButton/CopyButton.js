@@ -28,15 +28,9 @@ export default function CopyButton({ iconDescription, className, ...other }) {
 
 CopyButton.propTypes = {
   /**
-   * Specify an optional className to be applied to the underlying <button>
+   * Specify an optional className to be applied to the underlying `<button>`
    */
   className: PropTypes.string,
-
-  /**
-   * Provide a description for the icon representing the copy action that can
-   * be read by screen readers
-   */
-  iconDescription: PropTypes.string,
 
   /**
    * Specify the string that is displayed when the button is clicked and the
@@ -50,8 +44,14 @@ CopyButton.propTypes = {
   feedbackTimeout: PropTypes.number,
 
   /**
+   * Provide a description for the icon representing the copy action that can
+   * be read by screen readers
+   */
+  iconDescription: PropTypes.string,
+
+  /**
    * Specify an optional `onClick` handler that is called when the underlying
-   * <button> is clicked
+   * `<button>` is clicked
    */
   onClick: PropTypes.func,
 };

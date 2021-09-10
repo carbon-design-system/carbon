@@ -19,7 +19,7 @@ import watch from '../../src/globals/js/watch';
 
 settings.disableAutoInit = true;
 
-describe('Test watch mode', function() {
+describe('Test watch mode', function () {
   const watchOptions = { foo: 'Foo' };
   const ClassInitedBySearch = class extends mixin(
     createComponent,
@@ -66,7 +66,7 @@ describe('Test watch mode', function() {
     ClassInitedByLauncher,
   };
 
-  beforeAll(function() {
+  beforeAll(function () {
     spyOn(ClassInitedBySearch, 'init').and.callThrough();
     spyOn(ClassInitedBySearch.prototype, 'release').and.callThrough();
     spyOn(ClassInitedByEvent, 'init').and.callThrough();
@@ -75,12 +75,12 @@ describe('Test watch mode', function() {
     spyOn(ClassInitedByLauncher.prototype, 'release').and.callThrough();
   });
 
-  describe('Handling regular components', function() {
+  describe('Handling regular components', function () {
     let lastTarget;
     let handle;
     let element;
 
-    beforeAll(function() {
+    beforeAll(function () {
       const origObserve = MutationObserver.prototype.observe;
       spyOn(MutationObserver.prototype, 'observe').and.callFake(
         function stubObserveImpl(target, options) {
@@ -90,7 +90,7 @@ describe('Test watch mode', function() {
       );
     });
 
-    it('Should throw if given element is neither a DOM element or a document', function() {
+    it('Should throw if given element is neither a DOM element or a document', function () {
       expect(() => {
         handle = watch(document.createTextNode(''));
       }).toThrowError(
@@ -99,12 +99,12 @@ describe('Test watch mode', function() {
       );
     });
 
-    it('Should look at document if no element is given', function() {
+    it('Should look at document if no element is given', function () {
       handle = watch();
       expect(lastTarget).toBe(document);
     });
 
-    it('Should instantiate the components', async function() {
+    it('Should instantiate the components', async function () {
       await watch.__with__({ components })(async () => {
         handle = watch(document, watchOptions);
 
@@ -133,7 +133,7 @@ describe('Test watch mode', function() {
       });
     });
 
-    it('Should release the components', async function() {
+    it('Should release the components', async function () {
       await watch.__with__({ components })(async () => {
         handle = watch();
 
@@ -185,7 +185,7 @@ describe('Test watch mode', function() {
       });
     });
 
-    it('Should release the components even if the removed node is of the component', async function() {
+    it('Should release the components even if the removed node is of the component', async function () {
       await watch.__with__({ components })(async () => {
         handle = watch();
 
@@ -203,7 +203,7 @@ describe('Test watch mode', function() {
       });
     });
 
-    it('Should stop instantiating components once the handle is released', async function() {
+    it('Should stop instantiating components once the handle is released', async function () {
       await watch.__with__({ components })(async () => {
         handle = watch(document, watchOptions);
 
@@ -234,7 +234,7 @@ describe('Test watch mode', function() {
       });
     });
 
-    afterEach(function() {
+    afterEach(function () {
       if (element && element.parentNode) {
         element.parentNode.removeChild(element);
         element = null;
@@ -245,7 +245,7 @@ describe('Test watch mode', function() {
     });
   });
 
-  afterEach(function() {
+  afterEach(function () {
     ClassInitedByLauncher.prototype.release.calls.reset();
     ClassInitedByEvent.prototype.release.calls.reset();
     ClassInitedBySearch.prototype.release.calls.reset();

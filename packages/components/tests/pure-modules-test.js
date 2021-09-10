@@ -8,11 +8,11 @@
 const path = require('path');
 const glob = require('glob');
 const { rollup } = require('rollup');
-const commonjs = require('rollup-plugin-commonjs');
-const resolve = require('rollup-plugin-node-resolve');
-const replace = require('rollup-plugin-replace');
+const commonjs = require('@rollup/plugin-commonjs');
+const { nodeResolve } = require('@rollup/plugin-node-resolve');
+const replace = require('@rollup/plugin-replace');
 const terser = require('rollup-plugin-terser');
-const virtual = require('rollup-plugin-virtual');
+const virtual = require('@rollup/plugin-virtual');
 const { breakingChangesX } = require('../src/globals/js/feature-flags');
 
 const ignore = [
@@ -67,11 +67,13 @@ describe('ES modules', () => {
           include: /node_modules/,
           sourceMap: false,
         }),
-        resolve(),
+        nodeResolve(),
         terser.terser(),
       ],
       onwarn: (warning, handle) => {
-        if (warning.code !== 'EMPTY_BUNDLE') handle(warning);
+        if (warning.code !== 'EMPTY_BUNDLE') {
+          handle(warning);
+        }
       },
       treeshake: {
         annotations: false,
@@ -80,7 +82,7 @@ describe('ES modules', () => {
     lodashOutput = (await lodashBundle.generate({ format: 'iife' })).output;
   });
 
-  it.each(files)('%s should be tree-shakable', async relativeFilePath => {
+  it.each(files)('%s should be tree-shakable', async (relativeFilePath) => {
     const filepath = path.join(cwd, relativeFilePath);
     const bundle = await rollup({
       input: entry,
@@ -96,14 +98,17 @@ describe('ES modules', () => {
           ],
           sourceMap: false,
         }),
-        resolve(),
+        nodeResolve(),
         replace({
           'process.env.NODE_ENV': JSON.stringify('production'),
+          preventAssignment: true,
         }),
         terser.terser(),
       ],
       onwarn: (warning, handle) => {
-        if (warning.code !== 'EMPTY_BUNDLE') handle(warning);
+        if (warning.code !== 'EMPTY_BUNDLE') {
+          handle(warning);
+        }
       },
       treeshake: {
         annotations: false,
@@ -112,12 +117,12 @@ describe('ES modules', () => {
     const { output } = await bundle.generate({ format: 'iife' });
     // lo-dash seems to remain small chunk of code after tree-shaken
     const code = output
-      .map(item => item.code)
+      .map((item) => item.code)
       .join('')
       .trim()
       .replace(
         lodashOutput
-          .map(item => item.code)
+          .map((item) => item.code)
           .join('')
           .trim(),
         ''

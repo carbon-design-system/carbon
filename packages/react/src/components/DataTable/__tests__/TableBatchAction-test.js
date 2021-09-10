@@ -18,7 +18,7 @@ describe('DataTable.TableBatchAction', () => {
   });
 
   it('should support rendering a custom icon', () => {
-    const renderIcon = jest.fn(props => (
+    const renderIcon = jest.fn((props) => (
       <svg {...props}>
         <circle cx="16" cy="16" r="8" />
       </svg>

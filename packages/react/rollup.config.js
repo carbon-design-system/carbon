@@ -7,10 +7,10 @@
 
 'use strict';
 
-const babel = require('rollup-plugin-babel');
-const commonjs = require('rollup-plugin-commonjs');
-const resolve = require('rollup-plugin-node-resolve');
-const replace = require('rollup-plugin-replace');
+const { babel } = require('@rollup/plugin-babel');
+const commonjs = require('@rollup/plugin-commonjs');
+const { nodeResolve } = require('@rollup/plugin-node-resolve');
+const replace = require('@rollup/plugin-replace');
 const stripBanner = require('rollup-plugin-strip-banner');
 const { terser } = require('rollup-plugin-terser');
 const packageJson = require('./package.json');
@@ -23,21 +23,9 @@ const baseConfig = {
     'prop-types',
   ],
   plugins: [
-    resolve(),
+    nodeResolve(),
     commonjs({
       include: /node_modules/,
-      namedExports: {
-        'react/index.js': [
-          'Children',
-          'Component',
-          'PureComponent',
-          'Fragment',
-          'PropTypes',
-          'createElement',
-        ],
-        'react-dom/index.js': ['render'],
-        'react-is/index.js': ['isForwardRef'],
-      },
     }),
     babel({
       babelrc: false,
@@ -62,6 +50,7 @@ const baseConfig = {
         '@babel/plugin-proposal-export-namespace-from',
         '@babel/plugin-proposal-export-default-from',
       ],
+      babelHelpers: 'bundled',
     }),
     stripBanner(),
   ],
@@ -69,7 +58,7 @@ const baseConfig = {
 
 const umdExternalDependencies = Object.keys(
   packageJson.peerDependencies
-).filter(dependency => dependency !== 'carbon-components');
+).filter((dependency) => dependency !== 'carbon-components');
 
 const umdBundleConfig = {
   input: baseConfig.input,
@@ -88,28 +77,25 @@ const umdBundleConfig = {
 };
 
 module.exports = [
+  // TODO: update configuration to correctly support tree-shaking for React
+  // components. See:
+  // https://github.com/carbon-design-system/carbon/issues/5442
   // Generates the following bundles:
   // ESM:       es/index.js
   // CommonJS: lib/index.js
-  {
-    ...baseConfig,
-    plugins: [
-      ...baseConfig.plugins,
-      replace({
-        'process.env.NODE_ENV': JSON.stringify('development'),
-      }),
-    ],
-    output: [
-      {
-        format: 'esm',
-        file: 'es/index.js',
-      },
-      {
-        format: 'cjs',
-        file: 'lib/index.js',
-      },
-    ],
-  },
+  // {
+  //   ...baseConfig,
+  //   output: [
+  //     {
+  //       format: 'esm',
+  //       file: 'es/index.js',
+  //     },
+  //     {
+  //       format: 'cjs',
+  //       file: 'lib/index.js',
+  //     },
+  //   ],
+  // },
 
   // Generate the development UMD bundle:
   // UMD: umd/carbon-components-react.js
@@ -118,6 +104,7 @@ module.exports = [
     plugins: [
       ...baseConfig.plugins,
       replace({
+        preventAssignment: true,
         'process.env.NODE_ENV': JSON.stringify('development'),
       }),
     ],
@@ -134,6 +121,7 @@ module.exports = [
     plugins: [
       ...baseConfig.plugins,
       replace({
+        preventAssignment: true,
         'process.env.NODE_ENV': JSON.stringify('production'),
       }),
       terser(),

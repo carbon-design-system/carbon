@@ -7,9 +7,9 @@ import rangePlugin from 'flatpickr/dist/plugins/rangePlugin';
  *     Workaround for: https://github.com/flatpickr/flatpickr/issues/1944
  *   * A logic to ensure `fp.setDate()` call won't end up with "startDate to endDate" set to the first `<input>`
  */
-export default config => {
+export default (config) => {
   const factory = rangePlugin(Object.assign({ position: 'left' }, config));
-  return fp => {
+  return (fp) => {
     const origSetDate = fp.setDate;
 
     const init = () => {

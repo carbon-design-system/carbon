@@ -10,16 +10,30 @@ import { command } from '../command';
 import { syncIconSymbols } from './shared';
 import { findOrCreateSymbolPage } from '../../tools/page';
 
-export function sync() {
-  command('commands/icons/sync', () => {
+export function syncSmallIcons() {
+  command('commands/icons/syncSmallIcons', () => {
     const document = Document.getSelectedDocument();
     const symbolsPage = findOrCreateSymbolPage(document);
     const symbols = document.getSymbols();
-    syncIconSymbols(
+    syncIconSymbols({
       document,
-      Array.from(symbols),
+      symbols: Array.from(symbols),
       symbolsPage,
-      document.sharedLayerStyles
-    );
+      sizes: [16, 20],
+    });
+  });
+}
+
+export function syncLargeIcons() {
+  command('commands/icons/syncLargeIcons', () => {
+    const document = Document.getSelectedDocument();
+    const symbolsPage = findOrCreateSymbolPage(document);
+    const symbols = document.getSymbols();
+    syncIconSymbols({
+      document,
+      symbols: Array.from(symbols),
+      symbolsPage,
+      sizes: [24, 32],
+    });
   });
 }

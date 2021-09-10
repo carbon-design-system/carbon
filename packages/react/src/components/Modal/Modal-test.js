@@ -9,13 +9,15 @@ import React from 'react';
 import { Close20 } from '@carbon/icons-react';
 import Modal from '../Modal';
 import ModalWrapper from '../ModalWrapper';
+import InlineLoading from '../InlineLoading';
 import { shallow, mount } from 'enzyme';
 import { settings } from 'carbon-components';
 
 const { prefix } = settings;
 
 // The modal is the 0th child inside the wrapper on account of focus-trap-react
-const getModal = wrapper => wrapper.find('.bx--modal');
+const getModal = (wrapper) => wrapper.find('.bx--modal');
+const getModalBody = (wrapper) => wrapper.find('.bx--modal-container');
 
 describe('Modal', () => {
   describe('Renders as expected', () => {
@@ -49,7 +51,7 @@ describe('Modal', () => {
     });
 
     it('has the expected default iconDescription', () => {
-      expect(mounted.props().iconDescription).toEqual('close the modal');
+      expect(mounted.props().iconDescription).toEqual('Close');
     });
 
     it('adds new iconDescription when passed via props', () => {
@@ -70,12 +72,56 @@ describe('Modal', () => {
       expect(primaryButton.prop('disabled')).toEqual(false);
     });
 
-    it('disables primary button when diablePrimaryButton prop is passed', () => {
+    it('disables primary button when disablePrimaryButton prop is passed', () => {
       mounted.setProps({ primaryButtonDisabled: true });
       const primaryButton = mounted
         .find(`.${prefix}--btn.${prefix}--btn--primary`)
         .at(0);
       expect(primaryButton.props().disabled).toEqual(true);
+    });
+
+    it('Should have node in primary', () => {
+      mounted.setProps({ primaryButtonText: <InlineLoading /> });
+      const primaryButton = mounted
+        .find(`.${prefix}--btn.${prefix}--btn--primary`)
+        .at(0);
+      expect(primaryButton.find('InlineLoading').exists()).toEqual(true);
+    });
+
+    it('Should have node in secondary', () => {
+      mounted.setProps({ secondaryButtonText: <InlineLoading /> });
+      const secondaryButton = mounted
+        .find(`.${prefix}--btn.${prefix}--btn--secondary`)
+        .at(0);
+      expect(secondaryButton.find('InlineLoading').exists()).toEqual(true);
+    });
+  });
+
+  describe('Renders as expected with secondaryButtons prop', () => {
+    const mounted = mount(<Modal aria-label="test" className="extra-class" />);
+
+    it('Should support node in secondary', () => {
+      mounted.setProps({
+        secondaryButtons: [
+          {
+            buttonText: <InlineLoading />,
+            onClick: jest.fn(),
+          },
+          {
+            buttonText: 'Cancel',
+            onClick: jest.fn(),
+          },
+        ],
+      });
+
+      const secondaryButtons = mounted.find(
+        `.${prefix}--btn.${prefix}--btn--secondary`
+      );
+      expect(secondaryButtons.length).toEqual(2);
+      expect(secondaryButtons.at(0).find('InlineLoading').exists()).toEqual(
+        true
+      );
+      expect(secondaryButtons.at(1).text()).toEqual('Cancel');
     });
   });
 
@@ -95,17 +141,16 @@ describe('Modal', () => {
     });
 
     it('should set button text if one is passed via props', () => {
-      const wrapper = shallow(
+      const wrapper = mount(
         <Modal
           aria-label="test"
           primaryButtonText="Submit"
           secondaryButtonText="Cancel"
         />
       );
-      const modalButtons = wrapper.find(`.${prefix}--modal-footer`).props()
-        .children;
-      expect(modalButtons[0].props.children).toEqual('Cancel');
-      expect(modalButtons[1].props.children).toEqual('Submit');
+      const modalButtons = wrapper.find(`.${prefix}--modal-footer Button`);
+      expect(modalButtons.at(0).props().children).toEqual('Cancel');
+      expect(modalButtons.at(1).props().children).toEqual('Submit');
     });
   });
 
@@ -175,9 +220,9 @@ describe('Modal', () => {
         <Modal aria-label="test" open onRequestClose={onRequestClose} />
       );
       wrapper.simulate('keyDown', { which: 26 });
-      expect(onRequestClose).not.toBeCalled();
+      expect(onRequestClose).not.toHaveBeenCalled();
       wrapper.simulate('keyDown', { which: 27 });
-      expect(onRequestClose).toBeCalled();
+      expect(onRequestClose).toHaveBeenCalled();
     });
 
     it('should handle submit keyDown events with shouldSubmitOnEnter enabled', () => {
@@ -191,9 +236,9 @@ describe('Modal', () => {
         />
       );
       wrapper.simulate('keyDown', { which: 14 });
-      expect(onRequestSubmit).not.toBeCalled();
+      expect(onRequestSubmit).not.toHaveBeenCalled();
       wrapper.simulate('keyDown', { which: 13 });
-      expect(onRequestSubmit).toBeCalled();
+      expect(onRequestSubmit).toHaveBeenCalled();
     });
 
     it('should not handle submit keyDown events with shouldSubmitOnEnter not enabled', () => {
@@ -202,29 +247,37 @@ describe('Modal', () => {
         <Modal aria-label="test" open onRequestSubmit={onRequestSubmit} />
       );
       wrapper.simulate('keyDown', { which: 14 });
-      expect(onRequestSubmit).not.toBeCalled();
+      expect(onRequestSubmit).not.toHaveBeenCalled();
       wrapper.simulate('keyDown', { which: 13 });
-      expect(onRequestSubmit).not.toBeCalled();
+      expect(onRequestSubmit).not.toHaveBeenCalled();
     });
 
     it('should close by default on secondary button click', () => {
       const onRequestClose = jest.fn();
       const modal = mount(
-        <Modal aria-label="test" onRequestClose={onRequestClose} />
+        <Modal
+          aria-label="test"
+          secondaryButtonText="Cancel"
+          onRequestClose={onRequestClose}
+        />
       );
       const secondaryBtn = modal.find(`.${prefix}--btn--secondary`);
       secondaryBtn.simulate('click');
-      expect(onRequestClose).toBeCalled();
+      expect(onRequestClose).toHaveBeenCalled();
     });
 
     it('should handle custom secondary button events', () => {
       const onSecondarySubmit = jest.fn();
       const modal = mount(
-        <Modal aria-label="test" onSecondarySubmit={onSecondarySubmit} />
+        <Modal
+          aria-label="test"
+          secondaryButtonText="Cancel"
+          onSecondarySubmit={onSecondarySubmit}
+        />
       );
       const secondaryBtn = modal.find(`.${prefix}--btn--secondary`);
       secondaryBtn.simulate('click');
-      expect(onSecondarySubmit).toBeCalled();
+      expect(onSecondarySubmit).toHaveBeenCalled();
     });
   });
 });
@@ -254,7 +307,9 @@ describe('Modal Wrapper', () => {
 });
 describe('Danger Modal', () => {
   describe('Renders as expected', () => {
-    const wrapper = shallow(<Modal aria-label="test" danger />);
+    const wrapper = mount(
+      <Modal aria-label="test" secondaryButtonText="Cancel" danger />
+    );
 
     it('has the expected classes', () => {
       expect(getModal(wrapper).hasClass(`${prefix}--modal--danger`)).toEqual(
@@ -263,10 +318,35 @@ describe('Danger Modal', () => {
     });
 
     it('has correct button combination', () => {
-      const modalButtons = wrapper.find(`.${prefix}--modal-footer`).props()
-        .children;
-      expect(modalButtons[0].props.kind).toEqual('secondary');
-      expect(modalButtons[1].props.kind).toEqual('danger');
+      const modalButtons = wrapper.find(
+        `.${prefix}--modal-footer.${prefix}--btn-set Button`
+      );
+      expect(modalButtons.length).toEqual(2);
+      expect(modalButtons.at(0).props().kind).toEqual('secondary');
+      expect(modalButtons.at(1).props().kind).toEqual('danger');
+    });
+  });
+});
+describe('Alert Modal', () => {
+  describe('Renders as expected', () => {
+    const wrapper = shallow(<Modal aria-label="test" alert />);
+
+    it('has the expected attributes', () => {
+      expect(getModalBody(wrapper).props()).toEqual(
+        expect.objectContaining({
+          role: 'alertdialog',
+          'aria-describedby': expect.any(String),
+        })
+      );
+    });
+
+    it('should be a passive modal when passiveModal is passed', () => {
+      wrapper.setProps({ passiveModal: true });
+      expect(getModalBody(wrapper).props()).toEqual(
+        expect.objectContaining({
+          role: 'alert',
+        })
+      );
     });
   });
 });

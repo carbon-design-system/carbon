@@ -6,10 +6,10 @@ exports[`ListBoxMenu should render 1`] = `
 >
   <div
     className="bx--list-box__menu"
-    id="test-listbox__menu"
+    id="test-listbox"
     role="listbox"
   >
-    <ListBoxMenuItem
+    <ForwardRef(ListBoxMenuItem)
       isActive={false}
       isHighlighted={false}
     >
@@ -22,7 +22,7 @@ exports[`ListBoxMenu should render 1`] = `
           Hello
         </div>
       </div>
-    </ListBoxMenuItem>
+    </ForwardRef(ListBoxMenuItem)>
   </div>
 </ListBoxMenu>
 `;

@@ -38,11 +38,6 @@ class HeaderMenu extends React.Component {
     focusRef: PropTypes.func,
 
     /**
-     * Optionally provide a tabIndex for the underlying menu button
-     */
-    tabIndex: PropTypes.number,
-
-    /**
      * Provide a label for the link text
      */
     menuLinkName: PropTypes.string.isRequired,
@@ -51,6 +46,11 @@ class HeaderMenu extends React.Component {
      * Optional component to render instead of string
      */
     renderMenuContent: PropTypes.func,
+
+    /**
+     * Optionally provide a tabIndex for the underlying menu button
+     */
+    tabIndex: PropTypes.number,
   };
 
   static defaultProps = {
@@ -74,13 +74,13 @@ class HeaderMenu extends React.Component {
   /**
    * Toggle the expanded state of the menu on click.
    */
-  handleOnClick = e => {
+  handleOnClick = (e) => {
     const { current: subMenusNode } = this._subMenus;
     if (!subMenusNode || !subMenusNode.contains(e.target)) {
       e.preventDefault();
     }
 
-    this.setState(prevState => ({
+    this.setState((prevState) => ({
       expanded: !prevState.expanded,
     }));
   };
@@ -88,13 +88,13 @@ class HeaderMenu extends React.Component {
   /**
    * Keyboard event handler for the entire menu.
    */
-  handleOnKeyDown = event => {
+  handleOnKeyDown = (event) => {
     // Handle enter or space key for toggling the expanded state of the menu.
     if (matches(event, [keys.Enter, keys.Space])) {
       event.stopPropagation();
       event.preventDefault();
 
-      this.setState(prevState => ({
+      this.setState((prevState) => ({
         expanded: !prevState.expanded,
       }));
 
@@ -107,16 +107,17 @@ class HeaderMenu extends React.Component {
    * for toggling the expansion status of our menu in response to a user
    * clicking off of the menu or menubar.
    */
-  handleOnBlur = event => {
+  handleOnBlur = (event) => {
     // Rough guess for a blur event that is triggered outside of our menu or
     // menubar context
     const itemTriggeredBlur = this.items.find(
-      element => element === event.relatedTarget
+      (element) => element === event.relatedTarget
     );
-
     if (
       event.relatedTarget &&
-      (event.relatedTarget.getAttribute('href') !== '#' || itemTriggeredBlur)
+      ((event.relatedTarget.getAttribute('href') &&
+        event.relatedTarget.getAttribute('href') !== '#') ||
+        itemTriggeredBlur)
     ) {
       return;
     }
@@ -132,7 +133,7 @@ class HeaderMenu extends React.Component {
    * menu or menubar as it will allow the parent to explicitly focus the menu
    * button node when that child should receive focus.
    */
-  handleMenuButtonRef = node => {
+  handleMenuButtonRef = (node) => {
     if (this.props.focusRef) {
       this.props.focusRef(node);
     }
@@ -143,11 +144,11 @@ class HeaderMenu extends React.Component {
    * Handles individual menuitem refs. We assign them to a class instance
    * property so that we can properly manage focus of our children.
    */
-  handleItemRef = index => node => {
+  handleItemRef = (index) => (node) => {
     this.items[index] = node;
   };
 
-  handleMenuClose = event => {
+  handleMenuClose = (event) => {
     // Handle ESC keydown for closing the expanded menu.
     if (matches(event, [keys.Escape]) && this.state.expanded) {
       event.stopPropagation();
@@ -172,6 +173,8 @@ class HeaderMenu extends React.Component {
       children,
       renderMenuContent: MenuContent,
       menuLinkName,
+      focusRef, // eslint-disable-line no-unused-vars
+      ...rest
     } = this.props;
     const accessibilityLabel = {
       'aria-label': ariaLabel,
@@ -187,6 +190,7 @@ class HeaderMenu extends React.Component {
     // - href can be set to javascript:void(0), ideally this will be a button
     return (
       <li // eslint-disable-line jsx-a11y/mouse-events-have-key-events,jsx-a11y/no-noninteractive-element-interactions
+        {...rest}
         className={className}
         onKeyDown={this.handleMenuClose}
         onClick={this.handleOnClick}

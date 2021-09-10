@@ -4,18 +4,19 @@
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
-
+import React from 'react';
 import { action } from '@storybook/addon-actions';
+import Link from '../../Link';
 
-export const initialRows = [
+export const rows = [
   {
     id: 'a',
     name: 'Load Balancer 3',
     protocol: 'HTTP',
     port: 3000,
     rule: 'Round robin',
-    attached_groups: 'Kevins VM Groups',
-    status: 'Disabled',
+    attached_groups: 'Kevin’s VM Groups',
+    status: <Link disabled={true}>Disabled</Link>,
   },
   {
     id: 'b',
@@ -23,8 +24,8 @@ export const initialRows = [
     protocol: 'HTTP',
     port: 443,
     rule: 'Round robin',
-    attached_groups: 'Maureens VM Groups',
-    status: 'Starting',
+    attached_groups: 'Maureen’s VM Groups',
+    status: <Link>Starting</Link>,
   },
   {
     id: 'c',
@@ -32,8 +33,8 @@ export const initialRows = [
     protocol: 'HTTP',
     port: 80,
     rule: 'DNS delegation',
-    attached_groups: 'Andrews VM Groups',
-    status: 'Active',
+    attached_groups: 'Andrew’s VM Groups',
+    status: <Link>Active</Link>,
   },
   {
     id: 'd',
@@ -41,8 +42,8 @@ export const initialRows = [
     protocol: 'HTTP',
     port: 3000,
     rule: 'Round robin',
-    attached_groups: 'Marcs VM Groups',
-    status: 'Disabled',
+    attached_groups: 'Marc’s VM Groups',
+    status: <Link disabled={true}>Disabled</Link>,
   },
   {
     id: 'e',
@@ -50,8 +51,8 @@ export const initialRows = [
     protocol: 'HTTP',
     port: 443,
     rule: 'Round robin',
-    attached_groups: 'Mels VM Groups',
-    status: 'Starting',
+    attached_groups: 'Mel’s VM Groups',
+    status: <Link>Starting</Link>,
   },
   {
     id: 'f',
@@ -59,8 +60,8 @@ export const initialRows = [
     protocol: 'HTTP',
     port: 80,
     rule: 'DNS delegation',
-    attached_groups: 'Ronjas VM Groups',
-    status: 'Active',
+    attached_groups: 'Ronja’s VM Groups',
+    status: <Link>Active</Link>,
   },
 ];
 
@@ -91,5 +92,5 @@ export const headers = [
   },
 ];
 
-export const batchActionClick = selectedRows => () =>
+export const batchActionClick = (selectedRows) => () =>
   action('batch action click')(selectedRows);

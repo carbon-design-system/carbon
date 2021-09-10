@@ -5,13 +5,16 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+import { settings } from 'carbon-components';
+import classNames from 'classnames';
 import PropTypes from 'prop-types';
 import React from 'react';
-import classNames from 'classnames';
-import { settings } from 'carbon-components';
 import { keys, match } from '../../internal/keyboard';
+import { warning } from '../../internal/warning';
 
 const { prefix } = settings;
+
+let didWarnAboutDeprecation = false;
 
 const ToggleSmall = ({
   className,
@@ -25,6 +28,14 @@ const ToggleSmall = ({
   labelB,
   ...other
 }) => {
+  if (__DEV__) {
+    warning(
+      didWarnAboutDeprecation,
+      '`<ToggleSmall>` has been deprecated in favor of `<Toggle size="sm" />` and will be removed in the next major release of `carbon-components-react`'
+    );
+    didWarnAboutDeprecation = true;
+  }
+
   let input;
   const wrapperClasses = classNames(`${prefix}--form-item`, {
     [className]: className,
@@ -37,7 +48,11 @@ const ToggleSmall = ({
   } else {
     checkedProps.defaultChecked = defaultToggled;
   }
-  const ariaLabel = labelText || other['aria-label'] || other.ariaLabel || null;
+  const ariaLabel =
+    (typeof labelText === 'string' && labelText) ||
+    other['aria-label'] ||
+    other.ariaLabel ||
+    null;
 
   return (
     <div className={wrapperClasses}>
@@ -48,17 +63,17 @@ const ToggleSmall = ({
         type="checkbox"
         id={id}
         className={`${prefix}--toggle-input ${prefix}--toggle-input--small`}
-        onChange={evt => {
+        onChange={(evt) => {
           onChange && onChange(evt);
           onToggle(input.checked, id, evt);
         }}
-        ref={el => {
+        ref={(el) => {
           input = el;
         }}
-        onKeyUp={evt => {
+        onKeyUp={(evt) => {
           if (match(evt, keys.Enter)) {
             input.checked = !input.checked;
-            onChange(evt);
+            onChange && onChange(evt);
             onToggle(input.checked, id, evt);
           }
         }}
@@ -89,6 +104,8 @@ const ToggleSmall = ({
 };
 
 ToggleSmall.propTypes = {
+  ['aria-label']: PropTypes.string.isRequired,
+
   /**
    * The CSS class for the toggle
    */
@@ -100,35 +117,38 @@ ToggleSmall.propTypes = {
   defaultToggled: PropTypes.bool,
 
   /**
-   * The event handler for the `onChange` event.
-   */
-  onToggle: PropTypes.func,
-
-  /**
    * The `id` attribute for the toggle
    */
   id: PropTypes.string.isRequired,
 
   /**
-   * `true` to make it toggled on
-   */
-  toggled: PropTypes.bool,
-
-  /**
-   * The `aria-label` attribute for the toggle
-   */
-  labelText: PropTypes.string,
-  ['aria-label']: PropTypes.string.isRequired,
-
-  /**
    * Specify the label for the "off" position
    */
-  labelA: PropTypes.string.isRequired,
+  labelA: PropTypes.node.isRequired,
 
   /**
    * Specify the label for the "on" position
    */
-  labelB: PropTypes.string.isRequired,
+  labelB: PropTypes.node.isRequired,
+
+  /**
+   * The `aria-label` attribute for the toggle
+   */
+  labelText: PropTypes.node,
+  /**
+   * Provide an optional hook that is called when the control is changed
+   */
+  onChange: PropTypes.func,
+
+  /**
+   * The event handler for the `onChange` event.
+   */
+  onToggle: PropTypes.func,
+
+  /**
+   * `true` to make it toggled on
+   */
+  toggled: PropTypes.bool,
 };
 
 ToggleSmall.defaultProps = {

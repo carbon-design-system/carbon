@@ -44,91 +44,6 @@ describe('wrapFocus', () => {
     spyButton2 = jest.spyOn(node.querySelector('#button-2'), 'focus');
   });
 
-  it('runs forward focus-wrap when following outer node is focused on', () => {
-    wrapFocus({
-      modalNode: node.querySelector('#inner-modal'),
-      startSentinelNode: node.querySelector('#start-sentinel'),
-      endSentinelNode: node.querySelector('#end-sentinel'),
-      currentActiveNode: node.querySelector('#outer-following'),
-      oldActiveNode: node.querySelector('#button-2'),
-    });
-    expect(spyButton0).toHaveBeenCalled();
-  });
-
-  it('runs forward focus-wrap when following focus sentinel is focused on', () => {
-    wrapFocus({
-      modalNode: node.querySelector('#inner-modal'),
-      startSentinelNode: node.querySelector('#start-sentinel'),
-      endSentinelNode: node.querySelector('#end-sentinel'),
-      currentActiveNode: node.querySelector('#end-sentinel'),
-      oldActiveNode: node.querySelector('#button-2'),
-    });
-    expect(spyButton0).toHaveBeenCalled();
-  });
-
-  it('runs reverse focus-wrap when preceding outer node is focused on', () => {
-    wrapFocus({
-      modalNode: node.querySelector('#inner-modal'),
-      startSentinelNode: node.querySelector('#start-sentinel'),
-      endSentinelNode: node.querySelector('#end-sentinel'),
-      currentActiveNode: node.querySelector('#outer-preceding'),
-      oldActiveNode: node.querySelector('#button-0'),
-    });
-    expect(spyButton2).toHaveBeenCalled();
-  });
-
-  it('runs reverse focus-wrap when preceding focus sentinel is focused on', () => {
-    wrapFocus({
-      modalNode: node.querySelector('#inner-modal'),
-      startSentinelNode: node.querySelector('#start-sentinel'),
-      endSentinelNode: node.querySelector('#end-sentinel'),
-      currentActiveNode: node.querySelector('#start-sentinel'),
-      oldActiveNode: node.querySelector('#button-0'),
-    });
-    expect(spyButton2).toHaveBeenCalled();
-  });
-
-  it('does not run focus-wrap when a floating menu is focused on', () => {
-    wrapFocus({
-      modalNode: node.querySelector('#inner-modal'),
-      startSentinelNode: node.querySelector('#start-sentinel'),
-      endSentinelNode: node.querySelector('#end-sentinel'),
-      currentActiveNode: node.querySelector('.bx--tooltip'),
-      oldActiveNode: node.querySelector('#button-2'),
-    });
-    expect(spyInnerModal).not.toHaveBeenCalled();
-    expect(spyButton0).not.toHaveBeenCalled();
-    expect(spyButton2).not.toHaveBeenCalled();
-  });
-
-  it('uses inner modal node as a escape hatch for focusing for forward focus-wrap', () => {
-    node.querySelector(
-      '#inner-modal'
-    ).innerHTML = `<div id="dummy-old-active-node"></div>`;
-    wrapFocus({
-      modalNode: node.querySelector('#inner-modal'),
-      startSentinelNode: node.querySelector('#start-sentinel'),
-      endSentinelNode: node.querySelector('#end-sentinel'),
-      currentActiveNode: node.querySelector('#outer-following'),
-      oldActiveNode: node.querySelector('#dummy-old-active-node'),
-    });
-    expect(spyInnerModal).toHaveBeenCalled();
-  });
-
-  it('uses inner modal node as a escape hatch for focusing for reverse focus-wrap', () => {
-    node.querySelector(
-      '#inner-modal'
-    ).innerHTML = `<div id="dummy-old-active-node"></div>`;
-    wrapFocus({
-      modalNode: node.querySelector('#inner-modal'),
-      startSentinelNode: node.querySelector('#start-sentinel'),
-      endSentinelNode: node.querySelector('#end-sentinel'),
-      currentActiveNode: node.querySelector('#outer-preceding'),
-      oldActiveNode: node.querySelector('#dummy-old-active-node'),
-    });
-    expect(spyInnerModal).toHaveBeenCalled();
-  });
-
   afterEach(() => {
     if (spyButton2) {
       spyButton2.mockRestore();
@@ -146,5 +61,90 @@ describe('wrapFocus', () => {
       node.parentNode.removeChild(node);
       node = null;
     }
+  });
+
+  it('runs forward focus-wrap when following outer node is focused on', () => {
+    wrapFocus({
+      bodyNode: node.querySelector('#inner-modal'),
+      startSentinelNode: node.querySelector('#start-sentinel'),
+      endSentinelNode: node.querySelector('#end-sentinel'),
+      currentActiveNode: node.querySelector('#outer-following'),
+      oldActiveNode: node.querySelector('#button-2'),
+    });
+    expect(spyButton0).toHaveBeenCalled();
+  });
+
+  it('runs forward focus-wrap when following focus sentinel is focused on', () => {
+    wrapFocus({
+      bodyNode: node.querySelector('#inner-modal'),
+      startSentinelNode: node.querySelector('#start-sentinel'),
+      endSentinelNode: node.querySelector('#end-sentinel'),
+      currentActiveNode: node.querySelector('#end-sentinel'),
+      oldActiveNode: node.querySelector('#button-2'),
+    });
+    expect(spyButton0).toHaveBeenCalled();
+  });
+
+  it('runs reverse focus-wrap when preceding outer node is focused on', () => {
+    wrapFocus({
+      bodyNode: node.querySelector('#inner-modal'),
+      startSentinelNode: node.querySelector('#start-sentinel'),
+      endSentinelNode: node.querySelector('#end-sentinel'),
+      currentActiveNode: node.querySelector('#outer-preceding'),
+      oldActiveNode: node.querySelector('#button-0'),
+    });
+    expect(spyButton2).toHaveBeenCalled();
+  });
+
+  it('runs reverse focus-wrap when preceding focus sentinel is focused on', () => {
+    wrapFocus({
+      bodyNode: node.querySelector('#inner-modal'),
+      startSentinelNode: node.querySelector('#start-sentinel'),
+      endSentinelNode: node.querySelector('#end-sentinel'),
+      currentActiveNode: node.querySelector('#start-sentinel'),
+      oldActiveNode: node.querySelector('#button-0'),
+    });
+    expect(spyButton2).toHaveBeenCalled();
+  });
+
+  it('does not run focus-wrap when a floating menu is focused on', () => {
+    wrapFocus({
+      bodyNode: node.querySelector('#inner-modal'),
+      startSentinelNode: node.querySelector('#start-sentinel'),
+      endSentinelNode: node.querySelector('#end-sentinel'),
+      currentActiveNode: node.querySelector('.bx--tooltip'),
+      oldActiveNode: node.querySelector('#button-2'),
+    });
+    expect(spyInnerModal).not.toHaveBeenCalled();
+    expect(spyButton0).not.toHaveBeenCalled();
+    expect(spyButton2).not.toHaveBeenCalled();
+  });
+
+  it('uses inner modal node as a escape hatch for focusing for forward focus-wrap', () => {
+    node.querySelector(
+      '#inner-modal'
+    ).innerHTML = `<div id="dummy-old-active-node"></div>`;
+    wrapFocus({
+      bodyNode: node.querySelector('#inner-modal'),
+      startSentinelNode: node.querySelector('#start-sentinel'),
+      endSentinelNode: node.querySelector('#end-sentinel'),
+      currentActiveNode: node.querySelector('#outer-following'),
+      oldActiveNode: node.querySelector('#dummy-old-active-node'),
+    });
+    expect(spyInnerModal).toHaveBeenCalled();
+  });
+
+  it('uses inner modal node as a escape hatch for focusing for reverse focus-wrap', () => {
+    node.querySelector(
+      '#inner-modal'
+    ).innerHTML = `<div id="dummy-old-active-node"></div>`;
+    wrapFocus({
+      bodyNode: node.querySelector('#inner-modal'),
+      startSentinelNode: node.querySelector('#start-sentinel'),
+      endSentinelNode: node.querySelector('#end-sentinel'),
+      currentActiveNode: node.querySelector('#outer-preceding'),
+      oldActiveNode: node.querySelector('#dummy-old-active-node'),
+    });
+    expect(spyInnerModal).toHaveBeenCalled();
   });
 });

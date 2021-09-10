@@ -38,7 +38,7 @@ Flatpickr.l10ns.en.weekdays.shorthand.forEach((day, index) => {
   }
 });
 
-const toArray = arrayLike => Array.prototype.slice.call(arrayLike);
+const toArray = (arrayLike) => Array.prototype.slice.call(arrayLike);
 
 /**
  * @param {number} monthNumber The month number.
@@ -58,12 +58,12 @@ const monthToStr = (monthNumber, shorthand, locale) =>
  * @param {string} config.classFlatpickrCurrentMonth The CSS class for the text-based month selection UI.
  * @returns {Plugin} A Flatpickr plugin to use text instead of `<select>` for month picker.
  */
-const carbonFlatpickrMonthSelectPlugin = config => fp => {
+const carbonFlatpickrMonthSelectPlugin = (config) => (fp) => {
   const setupElements = () => {
     if (!fp.monthElements) {
       return;
     }
-    fp.monthElements.forEach(elem => {
+    fp.monthElements.forEach((elem) => {
       if (!elem.parentNode) return;
       elem.parentNode.removeChild(elem);
     });
@@ -98,13 +98,13 @@ const carbonFlatpickrMonthSelectPlugin = config => fp => {
       config.shorthand === true,
       fp.l10n
     );
-    fp.yearElements.forEach(elem => {
+    fp.yearElements.forEach((elem) => {
       const currentMonthContainer = elem.closest(
         config.selectorFlatpickrMonthYearContainer
       );
       Array.prototype.forEach.call(
         currentMonthContainer.querySelectorAll('.cur-month'),
-        monthElement => {
+        (monthElement) => {
           monthElement.textContent = monthStr;
         }
       );
@@ -141,7 +141,7 @@ class DatePicker extends mixin(
     this.calendar = this._initDatePicker(type);
     if (this.calendar.calendarContainer) {
       this.manage(
-        on(this.element, 'keydown', e => {
+        on(this.element, 'keydown', (e) => {
           if (e.which === 40) {
             e.preventDefault();
             (
@@ -153,7 +153,7 @@ class DatePicker extends mixin(
         })
       );
       this.manage(
-        on(this.calendar.calendarContainer, 'keydown', e => {
+        on(this.calendar.calendarContainer, 'keydown', (e) => {
           if (e.which === 9 && type === 'range') {
             this._updateClassNames(this.calendar);
             this.element
@@ -181,7 +181,7 @@ class DatePicker extends mixin(
    * Used only for range mode for now.
    * @private
    */
-  _handleBlur = event => {
+  _handleBlur = (event) => {
     if (this.calendar) {
       const focusTo = event.relatedTarget;
       if (
@@ -195,7 +195,7 @@ class DatePicker extends mixin(
     }
   };
 
-  _initDatePicker = type => {
+  _initDatePicker = (type) => {
     if (type === 'range') {
       // Given FlatPickr assumes one `<input>` even in range mode,
       // use a hidden `<input>` for such purpose, separate from our from/to `<input>`s
@@ -383,7 +383,7 @@ class DatePicker extends mixin(
     }
     const inputField = input;
     this.manage(
-      on(inputField, 'change', evt => {
+      on(inputField, 'change', (evt) => {
         if (evt.isTrusted || (evt.detail && evt.detail.isNotFromFlatpickr)) {
           const inputDate = this.calendar.parseDate(inputField.value);
           if (inputDate && !isNaN(inputDate.valueOf())) {
@@ -402,7 +402,7 @@ class DatePicker extends mixin(
     // An attempt to temporarily set the `<input>` being edited as the one FlatPicker manages,
     // as FlatPicker attempts to take over `keydown` event handler on `document` to run on the date picker dropdown.
     this.manage(
-      on(inputField, 'keydown', evt => {
+      on(inputField, 'keydown', (evt) => {
         const origInput = this.calendar._input;
         this.calendar._input = evt.target;
         setTimeout(() => {
@@ -425,14 +425,14 @@ class DatePicker extends mixin(
         .querySelector('.flatpickr-days')
         .classList.add(this.options.classDays);
       toArray(calendarContainer.querySelectorAll('.flatpickr-weekday')).forEach(
-        item => {
+        (item) => {
           const currentItem = item;
           currentItem.innerHTML = currentItem.innerHTML.replace(/\s+/g, '');
           currentItem.classList.add(this.options.classWeekday);
         }
       );
       toArray(calendarContainer.querySelectorAll('.flatpickr-day')).forEach(
-        item => {
+        (item) => {
           item.classList.add(this.options.classDay);
           if (item.classList.contains('today') && selectedDates.length > 0) {
             item.classList.add('no-border');
@@ -469,7 +469,7 @@ class DatePicker extends mixin(
     this._updateClassNames(this.calendar);
   };
 
-  _formatDate = date =>
+  _formatDate = (date) =>
     this.calendar.formatDate(date, this.calendar.config.dateFormat);
 
   release() {
@@ -489,7 +489,7 @@ class DatePicker extends mixin(
    * The component options.
    * If `options` is specified in the constructor,
    * {@linkcode DatePicker.create .create()}, or {@linkcode DatePicker.init .init()},
-   * properties in this object are overriden for the instance being create and how {@linkcode DatePicker.init .init()} works.
+   * properties in this object are overridden for the instance being create and how {@linkcode DatePicker.init .init()} works.
    * @property {string} selectorInit The CSS selector to find date picker UIs.
    */
   static get options() {

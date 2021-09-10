@@ -7,6 +7,7 @@
 
 import cx from 'classnames';
 import PropTypes from 'prop-types';
+import requiredIfGivenPropIsTruthy from '../../prop-types/requiredIfGivenPropIsTruthy';
 import React from 'react';
 import { ChevronRight16 } from '@carbon/icons-react';
 import { settings } from 'carbon-components';
@@ -34,6 +35,7 @@ const TableExpandHeader = ({
       {...rest}>
       {!enableExpando ? null : (
         <button
+          type="button"
           className={`${prefix}--table-expand__button`}
           onClick={onExpand}
           title={expandIconDescription}
@@ -50,30 +52,35 @@ const TableExpandHeader = ({
 };
 
 TableExpandHeader.propTypes = {
-  className: PropTypes.string,
-  children: PropTypes.node,
-
   /**
    * Specify the string read by a voice reader when the expand trigger is
    * focused
    */
-  ariaLabel: PropTypes.string.isRequired,
+  ariaLabel: requiredIfGivenPropIsTruthy('enableExpando', PropTypes.string),
+  children: PropTypes.node,
+
+  className: PropTypes.string,
 
   /**
-   * Specify whether this row is expanded or not. This helps coordinate data
-   * attributes so that `TableExpandRow` and `TableExapndedRow` work together
+   * Specify whether an expand all button should be displayed
    */
-  isExpanded: PropTypes.bool.isRequired,
-
-  /**
-   * Hook for when a listener initiates a request to expand the given row
-   */
-  onExpand: PropTypes.func.isRequired,
+  enableExpando: PropTypes.bool,
 
   /**
    * The description of the chevron right icon, to be put in its SVG `<title>` element.
    */
   expandIconDescription: PropTypes.string,
+
+  /**
+   * Specify whether this row is expanded or not. This helps coordinate data
+   * attributes so that `TableExpandRow` and `TableExpandedRow` work together
+   */
+  isExpanded: requiredIfGivenPropIsTruthy('enableExpando', PropTypes.bool),
+
+  /**
+   * Hook for when a listener initiates a request to expand the given row
+   */
+  onExpand: requiredIfGivenPropIsTruthy('enableExpando', PropTypes.func),
 };
 
 export default TableExpandHeader;

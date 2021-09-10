@@ -1,12 +1,16 @@
 {
   "name": "@carbon/upgrade",
   "description": "A tool for upgrading Carbon versions",
-  "version": "10.4.0",
+  "version": "10.14.0",
   "license": "Apache-2.0",
   "bin": {
     "carbon-upgrade": "./bin/carbon-upgrade.js"
   },
-  "repository": "https://github.com/carbon-design-system/carbon/tree/master/packages/upgrade",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/carbon-design-system/carbon.git",
+    "directory": "packages/upgrade"
+  },
   "bugs": "https://github.com/carbon-design-system/carbon/issues",
   "files": [
     "bin",
@@ -26,17 +30,21 @@
     "access": "public"
   },
   "dependencies": {
-    "chalk": "^2.4.2",
-    "change-case": "^4.1.1",
-    "cross-spawn": "^6.0.5",
-    "fast-glob": "^2.2.6",
-    "fs-extra": "^8.1.0",
-    "inquirer": "^6.3.1",
-    "jest-diff": "^23.6.0",
-    "jscodeshift": "^0.6.4",
+    "chalk": "^4.1.1",
+    "change-case": "^4.1.2",
+    "cross-spawn": "^7.0.3",
+    "fast-glob": "^3.2.7",
+    "fs-extra": "^10.0.0",
+    "inquirer": "^8.1.0",
+    "jest-diff": "^27.0.6",
+    "jscodeshift": "^0.13.0",
     "lodash.clonedeep": "^4.5.0",
+    "lodash.merge": "^4.6.2",
     "npm-which": "^3.0.1",
-    "semver": "^5.6.0",
-    "yargs": "^15.1.0"
+    "semver": "^7.3.5",
+    "yargs": "^17.0.1"
+  },
+  "devDependencies": {
+    "memfs": "^3.2.2"
   }
 }

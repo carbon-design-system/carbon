@@ -1,0 +1,31 @@
+{
+  "name": "babel-preset-carbon",
+  "private": true,
+  "version": "0.1.0",
+  "license": "Apache-2.0",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/carbon-design-system/carbon.git",
+    "directory": "config/babel-preset-carbon"
+  },
+  "bugs": "https://github.com/carbon-design-system/carbon/issues",
+  "keywords": [
+    "ibm",
+    "carbon",
+    "carbon-design-system",
+    "components",
+    "react"
+  ],
+  "dependencies": {
+    "@babel/core": "^7.14.6",
+    "@babel/plugin-proposal-class-properties": "^7.14.5",
+    "@babel/plugin-proposal-export-default-from": "^7.14.5",
+    "@babel/plugin-proposal-export-namespace-from": "^7.14.5",
+    "@babel/plugin-transform-react-constant-elements": "^7.14.5",
+    "@babel/preset-env": "^7.14.7",
+    "@babel/preset-react": "^7.14.5",
+    "babel-plugin-dev-expression": "^0.2.2",
+    "browserslist-config-carbon": "^10.6.1"
+  }
+}

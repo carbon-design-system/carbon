@@ -10,6 +10,8 @@ import Checkbox from '../Checkbox';
 import CheckboxSkeleton from '../Checkbox/Checkbox.Skeleton';
 import { mount } from 'enzyme';
 import { settings } from 'carbon-components';
+import { cleanup, render, screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 
 const { prefix } = settings;
 
@@ -110,6 +112,15 @@ describe('Checkbox', () => {
 });
 
 describe('refs', () => {
+  let container;
+
+  afterEach(() => {
+    if (container && container.parentNode) {
+      container.parentNode.removeChild(container);
+    }
+    container = null;
+  });
+
   it('should accept refs', () => {
     class MyComponent extends React.Component {
       constructor(props) {
@@ -131,7 +142,12 @@ describe('refs', () => {
         );
       }
     }
-    const wrapper = mount(<MyComponent />);
+    container = document.createElement('div');
+    container.id = 'container';
+    document.body.appendChild(container);
+    const wrapper = mount(<MyComponent />, {
+      attachTo: document.querySelector('#container'),
+    });
     expect(document.activeElement.type).toBeUndefined();
     wrapper.instance().focus();
     expect(document.activeElement.type).toEqual('checkbox');
@@ -174,5 +190,43 @@ describe('CheckboxSkeleton', () => {
         expect(label.hasClass(`${prefix}--skeleton`)).toEqual(true);
       });
     });
+  });
+});
+
+describe('Checkbox accessibility', () => {
+  afterEach(cleanup);
+
+  it('should have no Axe violations', async () => {
+    render(<Checkbox labelText="Checkbox label" id="test_id" />);
+    await expect(
+      screen.getByLabelText('Checkbox label')
+    ).toHaveNoAxeViolations();
+  });
+
+  it('should have no Accessibility Checker violations', async () => {
+    render(
+      <main>
+        <Checkbox labelText="Checkbox label" id="test_id" />
+      </main>
+    );
+    await expect(screen.getByLabelText('Checkbox label')).toHaveNoACViolations(
+      'Checkbox'
+    );
+  });
+
+  it('can receive keyboard focus', () => {
+    render(<Checkbox labelText="Checkbox label" id="test_id" />);
+    userEvent.tab();
+    expect(screen.getByLabelText('Checkbox label')).toHaveFocus();
+  });
+
+  it('should have an accessible label', () => {
+    render(<Checkbox labelText="Checkbox label" id="test_id" />);
+    expect(() => screen.getByText('Checkbox label')).not.toThrow();
+  });
+
+  it('should have an appropriate role', () => {
+    render(<Checkbox labelText="Checkbox label" id="test_id" />);
+    expect(() => screen.getByRole('checkbox')).not.toThrow();
   });
 });

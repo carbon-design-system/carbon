@@ -316,6 +316,7 @@ const SassFunctionCall = defineType('SassFunctionCall', {
             assertType(SassMap),
             assertType(SassNumber),
             assertType(SassString),
+            assertType(SassValue),
           ])
         ),
     },
@@ -570,7 +571,7 @@ const Assignment = defineType('Assignment', {
       // after an assignment
       if (collection && collection.length > 1) {
         const assignments = collection.filter(
-          node => node.type === Assignment.type
+          (node) => node.type === Assignment.type
         );
         if (
           assignments.length === 1 ||
@@ -623,6 +624,34 @@ const SassImport = defineType('SassImport', {
   },
   generate(printer, node) {
     printer.token('@import');
+    printer.space();
+    printer.token(`'${node.path}'`);
+    printer.token(';');
+  },
+});
+
+const SassModule = defineType('SassModule', {
+  fields: {
+    path: {
+      validate: assertValueType('string'),
+    },
+  },
+  generate(printer, node) {
+    printer.token('@use');
+    printer.space();
+    printer.token(`'${node.path}'`);
+    printer.token(';');
+  },
+});
+
+const SassForward = defineType('SassForward', {
+  fields: {
+    path: {
+      validate: assertValueType('string'),
+    },
+  },
+  generate(printer, node) {
+    printer.token('@forward');
     printer.space();
     printer.token(`'${node.path}'`);
     printer.token(';');
@@ -779,6 +808,7 @@ module.exports = {
   Rule,
   SassBoolean,
   SassColor,
+  SassForward,
   SassFunction,
   SassFunctionCall,
   SassImport,
@@ -787,6 +817,7 @@ module.exports = {
   SassList,
   SassMap,
   SassMapProperty,
+  SassModule,
   SassValue,
   SassMixin,
   SassMixinCall,

@@ -22,24 +22,25 @@
   //----------------------------------------------------------------------------
   .#{$prefix}--header-panel {
     @include carbon--motion(exit, productive);
+
     position: fixed;
-    top: carbon--mini-units(6);
-    bottom: 0;
-    right: 0;
-    width: 0;
-    background-color: $shell-panel-bg-01;
-    border: none;
-    will-change: width;
-    transition: width 0.11s;
-    overflow: hidden;
     z-index: z('header');
+    top: carbon--mini-units(6);
+    right: 0;
+    bottom: 0;
+    overflow: hidden;
+    width: 0;
+    border: none;
+    background-color: $shell-panel-bg-01;
     color: $shell-panel-text-01;
+    transition: width 0.11s;
+    will-change: width;
   }
 
   .#{$prefix}--header-panel--expanded {
     width: carbon--mini-units(32);
-    border-left: 1px solid $shell-panel-border;
     border-right: 1px solid $shell-panel-border;
+    border-left: 1px solid $shell-panel-border;
   }
 }
 

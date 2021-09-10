@@ -30,14 +30,14 @@ packages/components/docs/js
 # React
 **/storybook-static/**
 
+# Icons react
+packages/icons-react/next/**
+
 # Sketch
 **/*.sketchplugin/**
 
 # Changelogs
 **/CHANGELOG.md
-
-# Generated docs
-**/docs/sass.md
 
 # Generate sass files
 **/scss/vendor/**
@@ -45,6 +45,16 @@ packages/components/docs/js
 
 # Examples
 **/examples/**
+!packages/themes/examples/**
 
 # Yarn
 **/.yarn/**
+
+# Generated files
+**/generated/**
+
+# Templates
+**/*.template.*
+
+# Nextjs
+.next

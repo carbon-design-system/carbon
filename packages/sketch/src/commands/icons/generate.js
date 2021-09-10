@@ -9,7 +9,7 @@ import { Document, Text, Rectangle, Group } from 'sketch/dom';
 import { command } from '../command';
 import { findOrCreatePage, selectPage } from '../../tools/page';
 
-const { categories } = require('@carbon/icons/metadata.json');
+const { icons, categories } = require('../../../generated/icons/metadata.json');
 
 export function generate() {
   command('commands/icons/generate', () => {
@@ -22,11 +22,11 @@ export function generate() {
 
     for (const category of categories) {
       const categoryText = new Text({
-        frame: new Rectangle(0, 0),
         text: category.name,
         style: {
           fontFamily: 'IBM Plex Sans',
           fontSize: 32,
+          fontStyle: undefined,
           fontWeight: 4,
           lineHeight: 40,
         },
@@ -42,13 +42,12 @@ export function generate() {
       let GROUP_Y_OFFSET = categoryText.frame.height + 32;
 
       for (const subcategory of category.subcategories) {
-        const iconsGroupedByBase = getIconsGroupedByBase(subcategory.members);
         const subcategoryText = new Text({
-          frame: new Rectangle(0, 0),
           text: subcategory.name,
           style: {
             fontFamily: 'IBM Plex Sans',
             fontSize: 20,
+            fontStyle: undefined,
             fontWeight: 4,
             lineHeight: 26,
           },
@@ -65,26 +64,34 @@ export function generate() {
         let ICON_Y_OFFSET = subcategoryText.frame.height + 8;
         let COLUMN_COUNT = 0;
 
-        for (const icons of iconsGroupedByBase) {
-          for (const icon of icons) {
-            const symbol = symbols.find(symbol => {
-              const parts = symbol.name.split('/').map(string => string.trim());
-              const [_type, _category, _subcategory, name, size] = parts;
-              return name === icon && size === '32';
-            });
-            const instance = symbol.createNewInstance();
-            instance.frame.offset(ICON_X_OFFSET, ICON_Y_OFFSET);
+        const members = subcategory.members.filter((member) => {
+          const icon = icons.find((icon) => icon.name === member);
+          return !icon.deprecated;
+        });
 
-            layers.push(instance);
-            ICON_X_OFFSET = ICON_X_OFFSET + 32 + MARGIN;
-            COLUMN_COUNT = COLUMN_COUNT + 1;
+        for (const icon of members) {
+          const symbol = symbols.find((symbol) => {
+            const parts = symbol.name.split('/').map((string) => string.trim());
+            const [_type, _category, _subcategory, name, size] = parts;
+            return name === icon && size === '32';
+          });
 
-            // 8 column layout
-            if (COLUMN_COUNT > 7) {
-              ICON_X_OFFSET = 0;
-              COLUMN_COUNT = 0;
-              ICON_Y_OFFSET = ICON_Y_OFFSET + 32 + MARGIN;
-            }
+          if (!symbol) {
+            throw new Error(`Unable to find symbol for icon ${icon}!`);
+          }
+
+          const instance = symbol.createNewInstance();
+          instance.frame.offset(ICON_X_OFFSET, ICON_Y_OFFSET);
+
+          layers.push(instance);
+          ICON_X_OFFSET = ICON_X_OFFSET + 32 + MARGIN;
+          COLUMN_COUNT = COLUMN_COUNT + 1;
+
+          // 8 column layout
+          if (COLUMN_COUNT > 7) {
+            ICON_X_OFFSET = 0;
+            COLUMN_COUNT = 0;
+            ICON_Y_OFFSET = ICON_Y_OFFSET + 32 + MARGIN;
           }
         }
 
@@ -103,22 +110,4 @@ export function generate() {
 
     page.layers.push(...groups);
   });
-}
-
-function getIconsGroupedByBase(members) {
-  return Object.values(
-    members.reduce((acc, member) => {
-      const [type] = member.split('--');
-      if (acc[type]) {
-        return {
-          ...acc,
-          [type]: acc[type].concat(member),
-        };
-      }
-      return {
-        ...acc,
-        [type]: [member],
-      };
-    }, {})
-  );
 }

@@ -41,24 +41,16 @@ module.exports = {
   context: {
     prefix,
     default: {
-      idSuffix: `example-${Math.random()
-        .toString(36)
-        .substr(2)}`,
+      idSuffix: `example-${Math.random().toString(36).substr(2)}`,
     },
     helper: {
-      idSuffix: `example-${Math.random()
-        .toString(36)
-        .substr(2)}`,
+      idSuffix: `example-${Math.random().toString(36).substr(2)}`,
     },
     disabled: {
-      idSuffix: `example-${Math.random()
-        .toString(36)
-        .substr(2)}`,
+      idSuffix: `example-${Math.random().toString(36).substr(2)}`,
     },
     invalid: {
-      idSuffix: `example-${Math.random()
-        .toString(36)
-        .substr(2)}`,
+      idSuffix: `example-${Math.random().toString(36).substr(2)}`,
     },
   },
   variants: [

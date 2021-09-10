@@ -5,47 +5,68 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React from 'react';
-import { storiesOf } from '@storybook/react';
+import React, { useState } from 'react';
+import ReactDOM from 'react-dom';
 import { action } from '@storybook/addon-actions';
-import { withKnobs, boolean, select, text } from '@storybook/addon-knobs';
+import {
+  boolean,
+  object,
+  optionsKnob as options,
+  select,
+  text,
+  withKnobs,
+} from '@storybook/addon-knobs';
 import ComposedModal, {
   ModalHeader,
   ModalBody,
   ModalFooter,
 } from '../ComposedModal';
+import Select from '../Select';
+import SelectItem from '../SelectItem';
+import TextInput from '../TextInput';
 import Button from '../Button';
-import { settings } from 'carbon-components';
-
-const { prefix } = settings;
+import mdx from './ComposedModal.mdx';
 
 const sizes = {
-  Default: '',
   'Extra small (xs)': 'xs',
   'Small (sm)': 'sm',
+  'Medium (md)': 'md',
   'Large (lg)': 'lg',
 };
 
+const buttons = {
+  'None (0)': '0',
+  'One (1)': '1',
+  'Two (2)': '2',
+  'Three (3)': '3',
+};
+
 const props = {
-  composedModal: ({ titleOnly } = {}) => ({
+  composedModal: () => ({
+    numberOfButtons: options('Number of Buttons', buttons, '2', {
+      display: 'inline-radio',
+    }),
     open: boolean('Open (open in <ComposedModal>)', true),
     onKeyDown: action('onKeyDown'),
-    danger: boolean('Danger mode (danger)', false),
     selectorPrimaryFocus: text(
       'Primary focus element selector (selectorPrimaryFocus)',
       '[data-modal-primary-focus]'
     ),
-    size: select('Size (size)', sizes, titleOnly ? 'sm' : ''),
+    size: select('Size (size)', sizes, 'md'),
+    preventCloseOnClickOutside: boolean(
+      'Prevent closing on click outside of modal (preventCloseOnClickOutside)',
+      true
+    ),
   }),
   modalHeader: ({ titleOnly } = {}) => ({
-    label: text('Optional Label (label in <ModalHeader>)', 'Optional Label'),
+    label: text('Optional Label (label in <ModalHeader>)', 'Label'),
     title: text(
       'Optional title (title in <ModalHeader>)',
       titleOnly
         ? `
       Passive modal title as the message. Should be direct and 3 lines or less.
     `.trim()
-        : 'Example'
+        : 'Modal heading'
     ),
     iconDescription: text(
       'Close icon description (iconDescription in <ModalHeader>)',
@@ -56,26 +77,55 @@ const props = {
   modalBody: () => ({
     hasScrollingContent: boolean(
       'Modal contains scrollable content (hasScrollingContent)',
-      true
+      false
     ),
     'aria-label': text('ARIA label for content', 'Example modal content'),
   }),
-  modalFooter: () => ({
-    primaryButtonText: text(
-      'Primary button text (primaryButtonText in <ModalFooter>)',
-      'Save'
-    ),
-    primaryButtonDisabled: boolean(
-      'Primary button disabled (primaryButtonDisabled in <ModalFooter>)',
-      false
-    ),
-    secondaryButtonText: text(
-      'Secondary button text (secondaryButtonText in <ModalFooter>)',
-      ''
-    ),
-    onRequestClose: action('onRequestClose'),
-    onRequestSubmit: action('onRequestSubmit'),
-  }),
+  modalFooter: (numberOfButtons) => {
+    const secondaryButtons = () => {
+      switch (numberOfButtons) {
+        case '2':
+          return {
+            secondaryButtonText: text(
+              'Secondary button text (secondaryButtonText in <ModalFooter>)',
+              'Secondary button'
+            ),
+          };
+        case '3':
+          return {
+            secondaryButtons: object(
+              'Secondary button config array (secondaryButtons)',
+              [
+                {
+                  buttonText: 'Keep both',
+                  onClick: action('onClick'),
+                },
+                {
+                  buttonText: 'Rename',
+                  onClick: action('onClick'),
+                },
+              ]
+            ),
+          };
+        default:
+          return null;
+      }
+    };
+    return {
+      danger: boolean('Primary button danger (danger)', false),
+      primaryButtonText: text(
+        'Primary button text (primaryButtonText in <ModalFooter>)',
+        'Primary button'
+      ),
+      primaryButtonDisabled: boolean(
+        'Primary button disabled (primaryButtonDisabled in <ModalFooter>)',
+        false
+      ),
+      ...secondaryButtons(numberOfButtons),
+      onRequestClose: action('onRequestClose'),
+      onRequestSubmit: action('onRequestSubmit'),
+    };
+  },
 };
 
 const scrollingContent = (
@@ -133,143 +183,147 @@ const scrollingContent = (
   </>
 );
 
-storiesOf('ComposedModal', module)
-  .addDecorator(withKnobs)
-  .add(
-    'Using Header / Footer Props',
-    () => {
-      const { size, ...rest } = props.composedModal();
-      const { hasScrollingContent, ...bodyProps } = props.modalBody();
-      return (
-        <ComposedModal {...rest} size={size || undefined}>
-          <ModalHeader {...props.modalHeader()} />
-          <ModalBody
-            {...bodyProps}
-            aria-label={hasScrollingContent ? 'Modal content' : undefined}>
-            <p className={`${prefix}--modal-content__text`}>
-              Please see ModalWrapper for more examples and demo of the
-              functionality.
-            </p>
-            {hasScrollingContent && scrollingContent}
-          </ModalBody>
-          <ModalFooter {...props.modalFooter()} />
-        </ComposedModal>
-      );
+export default {
+  title: 'Components/ComposedModal',
+  decorators: [withKnobs],
+  parameters: {
+    component: ComposedModal,
+    subcomponents: {
+      ModalHeader,
+      ModalBody,
+      ModalFooter,
     },
-    {
-      info: {
-        text: `
-            Composed Modal allows you to create your own modal with just the parts you need. The ComposedModal element provides the state management for open/close, as well as passes the ModalHeader a prop to close the modal (with the close button).
+    docs: {
+      page: mdx,
+    },
+  },
+};
 
-            The interior components - ModalHeader / ModalBody / ModalFooter - are all container elements that will render any children you add in, wrapped in the appropriate CSS classes.
-
-            The Modal Header / Modal Footer come with some built in props to let you accelerate towards standard Carbon modal UI. If there are customizations you need to do, see the next example of just using the interior components as containers.
-          `,
-      },
-    }
-  )
-  .add(
-    'Using child nodes',
-    () => {
-      const { size, ...rest } = props.composedModal();
-      const { hasScrollingContent, ...bodyProps } = props.modalBody();
-      return (
-        <ComposedModal {...rest} size={size || undefined}>
-          <ModalHeader {...props.modalHeader()}>
-            <h1>Testing</h1>
-          </ModalHeader>
-          <ModalBody
-            {...bodyProps}
-            aria-label={hasScrollingContent ? 'Modal content' : undefined}>
-            <p>
-              Please see ModalWrapper for more examples and demo of the
-              functionality.
-            </p>
-            {hasScrollingContent && scrollingContent}
-          </ModalBody>
-          <ModalFooter>
-            <Button kind="secondary">Cancel</Button>
-            <Button kind={props.composedModal().danger ? 'danger' : 'primary'}>
-              Save
-            </Button>
-          </ModalFooter>
-        </ComposedModal>
-      );
-    },
-    {
-      info: {
-        text: `
-            Alternatively, you can just use the Modal components as wrapper elements and figure the children out yourself. We do suggest for the header you utilize the built in props for label and title though, for the footer it's mostly a composed element so creating the two buttons yourself (using the Button component) is probably the most straight-forward pattern.
-          `,
-      },
-    }
-  )
-  .add(
-    'Title only',
-    () => {
-      const { size, ...rest } = props.composedModal({ titleOnly: true });
-      return (
-        <ComposedModal {...rest} size={size || undefined}>
-          <ModalHeader {...props.modalHeader({ titleOnly: true })} />
-          <ModalBody />
-          <ModalFooter {...props.modalFooter()} />
-        </ComposedModal>
-      );
-    },
-    {
-      info: {
-        text: `
-          In "small" and "xs" modals size, the title is allowed to span multiple lines and be used for the main message.
-          It should be less than 3 lines of text. If more room is required then use the standard body copy format.
-        `,
-      },
-    }
-  )
-  .add(
-    'Example usage with trigger button',
-    () => {
-      class ComposedModalExample extends React.Component {
-        state = { open: false };
-        toggleModal = open => this.setState({ open });
-        render() {
-          const { open } = this.state;
-          const { size, ...rest } = props.composedModal();
-          const { hasScrollingContent, ...bodyProps } = props.modalBody();
-          return (
-            <>
-              <Button onClick={() => this.toggleModal(true)}>
-                Launch composed modal
-              </Button>
-              <ComposedModal
-                {...rest}
-                open={open}
-                size={size || undefined}
-                onClose={() => this.toggleModal(false)}>
-                <ModalHeader {...props.modalHeader()} />
-                <ModalBody
-                  {...bodyProps}
-                  aria-label={
-                    hasScrollingContent ? 'Modal content' : undefined
-                  }>
-                  <p className={`${prefix}--modal-content__text`}>
-                    Please see ModalWrapper for more examples and demo of the
-                    functionality.
-                  </p>
-                  {hasScrollingContent && scrollingContent}
-                </ModalBody>
-                <ModalFooter {...props.modalFooter()} />
-              </ComposedModal>
-            </>
-          );
-        }
-      }
-      return <ComposedModalExample />;
-    },
-    {
-      info: {
-        text: `
-            An example ComposedModal with a trigger button
-          `,
-      },
-    }
+export const Playground = () => {
+  const { size, numberOfButtons, ...rest } = props.composedModal();
+  const { hasScrollingContent } = props.modalBody();
+  return (
+    <ComposedModal {...rest} size={size || undefined}>
+      <ModalHeader {...props.modalHeader()} />
+      <ModalBody
+        {...props.modalBody()}
+        aria-label={hasScrollingContent ? 'Modal content' : undefined}>
+        <p style={{ marginBottom: '1rem' }}>
+          Custom domains direct requests for your apps in this Cloud Foundry
+          organization to a URL that you own. A custom domain can be a shared
+          domain, a shared subdomain, or a shared domain and host.
+        </p>
+        <TextInput
+          data-modal-primary-focus
+          id="text-input-1"
+          labelText="Domain name"
+          placeholder="e.g. github.com"
+          style={{ marginBottom: '1rem' }}
+        />
+        <Select id="select-1" defaultValue="us-south" labelText="Region">
+          <SelectItem value="us-south" text="US South" />
+          <SelectItem value="us-east" text="US East" />
+        </Select>
+        <br />
+        {hasScrollingContent && scrollingContent}
+      </ModalBody>
+      {numberOfButtons > 0 && (
+        <ModalFooter {...props.modalFooter(numberOfButtons)}></ModalFooter>
+      )}
+    </ComposedModal>
   );
+};
+
+export const Default = () => {
+  return (
+    <ComposedModal open>
+      <ModalHeader label="Account resources" title="Add a custom domain" />
+      <ModalBody>
+        <p style={{ marginBottom: '1rem' }}>
+          Custom domains direct requests for your apps in this Cloud Foundry
+          organization to a URL that you own. A custom domain can be a shared
+          domain, a shared subdomain, or a shared domain and host.
+        </p>
+        <TextInput
+          data-modal-primary-focus
+          id="text-input-1"
+          labelText="Domain name"
+          placeholder="e.g. github.com"
+          style={{ marginBottom: '1rem' }}
+        />
+        <Select id="select-1" defaultValue="us-south" labelText="Region">
+          <SelectItem value="us-south" text="US South" />
+          <SelectItem value="us-east" text="US East" />
+        </Select>
+      </ModalBody>
+      <ModalFooter primaryButtonText="Add" secondaryButtonText="Cancel" />
+    </ComposedModal>
+  );
+};
+
+Default.story = {
+  name: 'Composed Modal',
+};
+
+export const PassiveModal = () => {
+  return (
+    <ComposedModal open>
+      <ModalHeader title="You have been successfully signed out" />
+      <ModalBody />
+    </ComposedModal>
+  );
+};
+
+export const WithStateManager = () => {
+  /**
+   * Simple state manager for modals.
+   */
+  const ModalStateManager = ({
+    renderLauncher: LauncherContent,
+    children: ModalContent,
+  }) => {
+    const [open, setOpen] = useState(false);
+    return (
+      <>
+        {!ModalContent || typeof document === 'undefined'
+          ? null
+          : ReactDOM.createPortal(
+              <ModalContent open={open} setOpen={setOpen} />,
+              document.body
+            )}
+        {LauncherContent && <LauncherContent open={open} setOpen={setOpen} />}
+      </>
+    );
+  };
+  return (
+    <ModalStateManager
+      renderLauncher={({ setOpen }) => (
+        <Button onClick={() => setOpen(true)}>Launch composed modal</Button>
+      )}>
+      {({ open, setOpen }) => (
+        <ComposedModal open={open} onClose={() => setOpen(false)}>
+          <ModalHeader label="Account resources" title="Add a custom domain" />
+          <ModalBody>
+            <p style={{ marginBottom: '1rem' }}>
+              Custom domains direct requests for your apps in this Cloud Foundry
+              organization to a URL that you own. A custom domain can be a
+              shared domain, a shared subdomain, or a shared domain and host.
+            </p>
+            <TextInput
+              data-modal-primary-focus
+              id="text-input-1"
+              labelText="Domain name"
+              placeholder="e.g. github.com"
+              style={{ marginBottom: '1rem' }}
+            />
+            <Select id="select-1" defaultValue="us-south" labelText="Region">
+              <SelectItem value="us-south" text="US South" />
+              <SelectItem value="us-east" text="US East" />
+            </Select>
+          </ModalBody>
+          <ModalFooter primaryButtonText="Add" secondaryButtonText="Cancel" />
+        </ComposedModal>
+      )}
+    </ModalStateManager>
+  );
+};

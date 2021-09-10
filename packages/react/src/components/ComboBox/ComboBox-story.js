@@ -5,44 +5,74 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React, { useState } from 'react';
-import { storiesOf } from '@storybook/react';
+import React from 'react';
 import { action } from '@storybook/addon-actions';
-import { withKnobs, boolean, select, text } from '@storybook/addon-knobs';
+import { boolean, object, select, text } from '@storybook/addon-knobs';
 import ComboBox from '../ComboBox';
-import Button from '../Button';
-import WithState from '../../tools/withState';
+import mdx from './ComboBox.mdx';
 
 const items = [
   {
     id: 'option-0',
-    text: 'Option 1',
+    text:
+      'An example option that is really long to show what should be done to handle long text',
   },
   {
     id: 'option-1',
-    text: 'Option 2',
+    text: 'Option 1',
   },
   {
     id: 'option-2',
-    text: 'Option 3',
-    selected: true,
+    text: 'Option 2',
   },
   {
     id: 'option-3',
-    text: 'Option 4',
+    text: 'Option 3',
   },
   {
     id: 'option-4',
-    text:
-      'An example option that is really long to show what should be done to handle long text',
+    text: 'Option 4',
+  },
+  {
+    id: 'option-5',
+    text: 'Option 5',
   },
 ];
 
 const sizes = {
-  'Extra large size (xl)': 'xl',
-  'Regular size (lg)': '',
-  'Small size (sm)': 'sm',
+  'Small  (sm)': 'sm',
+  'Medium (md) - default': undefined,
+  'Large  (lg)': 'lg',
 };
+
+const directions = {
+  'Bottom (default)': 'bottom',
+  'Top ': 'top',
+};
+
+export default {
+  title: 'Components/ComboBox',
+  component: ComboBox,
+  parameters: {
+    docs: {
+      page: mdx,
+    },
+  },
+};
+
+export const combobox = () => (
+  <div style={{ width: 300 }}>
+    <ComboBox
+      onChange={() => {}}
+      id="carbon-combobox"
+      items={items}
+      itemToString={(item) => (item ? item.text : '')}
+      placeholder="Filter..."
+      titleText="ComboBox title"
+      helperText="Combobox helper text"
+    />
+  </div>
+);
 
 const props = () => ({
   id: text('Combobox ID (id)', 'carbon-combobox-example'),
@@ -53,122 +83,65 @@ const props = () => ({
   disabled: boolean('Disabled (disabled)', false),
   invalid: boolean('Invalid (invalid)', false),
   invalidText: text('Invalid text (invalidText)', 'A valid value is required'),
-  size: select('Field size (size)', sizes, '') || undefined,
+  size: select('Field size (size)', sizes, undefined) || undefined,
+  direction: select('Dropdown direction (direction)', directions, 'bottom'),
   onChange: action('onChange'),
+  onToggleClick: action('onClick'),
+  warn: boolean('Show warning state (warn)', false),
+  warnText: text(
+    'Warning state text (warnText)',
+    'This mode may perform worse on older machines'
+  ),
+  listBoxMenuIconTranslationIds: object(
+    'Listbox menu icon translation IDs (for translateWithId callback)',
+    {
+      'close.menu': 'Close menu',
+      'open.menu': 'Open menu',
+      'clear.selection': 'Clear selection',
+    }
+  ),
 });
 
-const itemToElement = item => {
-  const itemAsArray = item.text.split(' ');
+export const Playground = () => {
+  const { listBoxMenuIconTranslationIds, ...comboBoxProps } = props();
   return (
-    <div>
-      <span>{itemAsArray[0]}</span>
-      <span style={{ color: 'blue' }}> {itemAsArray[1]}</span>
+    <div style={{ width: 300 }}>
+      <ComboBox
+        {...comboBoxProps}
+        items={items}
+        itemToString={(item) => (item ? item.text : '')}
+        translateWithId={(id) => listBoxMenuIconTranslationIds[id]}
+      />
     </div>
   );
 };
 
-const ControlledComboBoxApp = props => {
-  const [selectedItem, setSelectedItem] = useState(items[0]);
-  let uid = items.length;
-  return (
-    <>
-      <ComboBox
-        {...props}
-        items={items}
-        itemToString={item => (item ? item.text : '')}
-        onChange={({ selectedItem }) => setSelectedItem(selectedItem)}
-        initialSelectedItem={items[0]}
-        selectedItem={selectedItem}
-      />
-      <Button
-        style={{ marginTop: '1rem' }}
-        onClick={() => {
-          items.push({
-            id: `id-${uid++}`,
-            text: `Option ${uid}`,
-          });
-          setSelectedItem(items[items.length - 1]);
-        }}>
-        Add new item
-      </Button>
-    </>
-  );
-};
-ControlledComboBoxApp.__docgenInfo = {
-  ...ComboBox.__docgenInfo,
-  props: {
-    ...ComboBox.__docgenInfo.props,
-  },
-};
+export const disabled = () => (
+  <div style={{ width: 300 }}>
+    <ComboBox
+      onChange={() => {}}
+      id="carbon-combobox-disabled"
+      disabled
+      items={items}
+      itemToString={(item) => (item ? item.text : '')}
+      placeholder="Filter..."
+      titleText="ComboBox title"
+      helperText="Combobox helper text"
+    />
+  </div>
+);
 
-storiesOf('ComboBox', module)
-  .addDecorator(withKnobs)
-  .add(
-    'Default',
-    () => (
-      <div style={{ width: 300 }}>
-        <ComboBox
-          items={items}
-          itemToString={item => (item ? item.text : '')}
-          {...props()}
-        />
-      </div>
-    ),
-    {
-      info: {
-        text: 'ComboBox',
-      },
-    }
-  )
-  .add(
-    'items as components',
-    () => (
-      <div style={{ width: 300 }}>
-        <ComboBox
-          items={items}
-          itemToString={item => (item ? item.text : '')}
-          itemToElement={itemToElement}
-          {...props()}
-        />
-      </div>
-    ),
-    {
-      info: {
-        text: 'ComboBox',
-      },
-    }
-  )
-  .add(
-    'custom text input handling',
-    () => (
-      <WithState initialState={{ inputText: '' }}>
-        {({ state, setState }) => (
-          <div style={{ width: 300 }}>
-            <ComboBox
-              items={items}
-              itemToString={item =>
-                item ? `${item.text} queried with ${state.inputText}` : ''
-              }
-              shouldFilterItem={() => true}
-              onInputChange={text => setState({ inputText: text })}
-              {...props()}
-            />
-          </div>
-        )}
-      </WithState>
-    ),
-    {
-      info: {
-        text: `Sometimes you want to perform an async action to trigger a backend call on input change.`,
-      },
-    }
-  )
-  .add(
-    'application-level control for selection',
-    () => <ControlledComboBoxApp {...props()} />,
-    {
-      info: {
-        text: `Controlled ComboBox example application`,
-      },
-    }
-  );
+export const light = () => (
+  <div style={{ width: 300 }}>
+    <ComboBox
+      onChange={() => {}}
+      id="carbon-combobox-light"
+      light
+      items={items}
+      itemToString={(item) => (item ? item.text : '')}
+      placeholder="Filter..."
+      titleText="ComboBox title"
+      helperText="Combobox helper text"
+    />
+  </div>
+);

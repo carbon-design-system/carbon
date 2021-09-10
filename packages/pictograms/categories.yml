@@ -5,98 +5,153 @@ categories:
       - cloud--upload
       - crop
       - delete
-      - do--not
-      - download
-      - download--alt
+      - do-not
+      - do-not--02
+      - download--01
+      - download--02
       - embed
-      - export
-      - export--alt
-      - heart
+      - export--01
+      - export--02
       - launch
+      - love
       - maximize
       - minimize
       - paper--clip
+      - player--flow
       - refresh
       - renew
       - repeat
       - reset
       - trash
-      - upload
-      - upload--alt
+      - upload--01
+      - upload--02
+  - name: Blockchain
+    members:
+      - connected--ecosystem
+      - consumer--engagement--food--journey
+      - supply--chain--optimization--01
+      - supply--chain--optimization--02
+      - transparency--01
+      - transparency--02
+      - trust
   - name: Building Structure
     members:
       - alarm
       - apartment
+      - broom
       - building
+      - compost--bin
       - elevator
+      - emergency--exit
       - escalator--down
       - escalator--up
       - fire--alarm
       - fire--extinguisher
+      - id--badge
+      - no--smoking
       - office
+      - recycle--bin
+      - stairs
+      - stairs--down
       - stairs--plan--view
+      - stairs--up
+      - temporary-badge
   - name: Cities
     members:
       - amsterdam--canal
       - amsterdam--farm
       - amsterdam--windmill
+      - argentina--obelisk
+      - atlanta
       - austin
       - bangalore
+      - barcelona
       #    - basel
       - beijing--municipal
       - beijing--tower
-      - berlin--brandenburg--gate
-      - berlin--brandenburg #DEPRECATED: use berlin--brandenburg--gate instead
+      - berlin--brandenburg-gate
       - berlin--cathedral
       - berlin--tower
+      - boston--zakim-bridge
+      - budapest
+      - cairo--giza-plateau
+      - canada--maple-leaf
+      - chicago
+      - chile--easter-island
+      - chile--hand-of-the-desert
+      - colombia--cathedral-of-las-lajas
       - copenhagen--planetarium
       - copenhagen--snekkja
-      - dubai--palm--islands
+      - dubai--palm-islands
       - dubai--skyscraper
       - dublin--brewery
       - dublin--castle
+      - ecuador--quito
+      - hamburg--philharmone
+      - hong-kong--cityscape
+      - hong-kong
+      - kuala-lumpur
       - london
-      - london--big--ben
-      - london--expanded--base
+      - london--big-ben
       - madrid--cathedral
       - madrid--skyscrapers
       - madrid--statue
       - melbourne
-      - mexico-city--angel--of--independence
-      - mexico-city--museo--soumaya
-      - milan--duomo--di--milano
+      - mexico-city--angel-of-independence
+      - mexico-city--museo-soumaya
+      - milan--duomo-di-milano
       - milan--skyscrapers
       - moscow
       - munich
       - nice
       - nyc--brooklyn
-      - nyc--manhattan
-      - nyc--manhattan--alt
-      #    - portland
+      - nyc--chrysler-building
+      - nyc--manhattan--01
+      - nyc--manhattan--02
+      - nyc--statue-of-liberty
+      - nyc--world-trade-center
+      - okinawa
+      - paris--arc-de-triomphe
+      - paris--louvre
+      - paris--notre-dame
+      - paris--pompidou-center
+      - peru--machu-picchu
+      - portland--building
+      - prague--charles-bridge-tower
+      - prague--dancing-house--01
+      - prague--dancing-house--02
+      - raleigh-nc
+      - rio-de-janeiro
       - rome
-      - san--francisco
-      - san--francisco--fog
-      - sao--paulo
-      - sao--paulo--expanded--base
+      - san-francisco
+      - san-francisco--fog
+      - sao-paulo
       - seattle
+      - seoul--gyeongbokgung-palace
       #    - shanghai
       - singapore
-      #    - stockholm
-      - tel--aviv
-      - tokyo--cherry--blossom
+      - stockholm
+      - taipei--bubble-tea
+      - tel-aviv
+      - tokyo--cherry-blossom
       - tokyo--gates
       - tokyo--temple
       - tokyo--volcano
       - toronto
+      - uruguay--palacio-salvo
+      - uruguay--sol-de-mayo
+      - venezuela--national-pantheon-of-venezuela
       - vancouver
-      - washington--dc
-      - washington--dc--capitol
-      - washington--dc--monument
+      - washington-dc
+      - washington-dc--capitol
+      - washington-dc--monument
   - name: Cloud
     members:
       - active--server
       - api
       - automate--modular--management
+      - c--language
+      - c-plus-plus--language
       - cloud--analytics
       - cloud--assets
       - cloud--builder--professional--services
@@ -115,18 +170,32 @@ categories:
       - cloud--strategy
       - cloud--tutorials
       - cloud--vmware
+      - cloud-pak--family
+      - cloud-pak--for-applications
+      - cloud-pak--for-data
+      - cloud-pak--for-integration
+      - cloud-pak--for-multicloud-management
+      - cloud-pak--for-network-automation
+      - cloud-pak--for-security
+      - cloud-pak--system
+      - cobol--language
       - cognos--analytics
+      - condition--builder
       - construct
       - devops
       - digital
       - docker
       - expand--horz
       - expand--vert
+      - filter--variable
       - free--trial
       - global--business--services
       - global--technology--services
+      - go--language
       - hybrid--cloud
       - hybrid--cloud--services
+      - ibm--automation-platform
+      - ibm--cloud
       - java
       - javascript
       - list--bullet
@@ -134,7 +203,14 @@ categories:
       - marketplace
       - mas
       - mqa
+      - php--language
+      - planning--analytics
+      - pli--language
+      - r--language
+      - random--samples
       - saas--enablement
+      - select--range
+      - serverless
       - single--sign-on
       - softlayer--enablement
   - name: Controls
@@ -143,8 +219,8 @@ categories:
       - podcast
       - slider
       - toggle
-      - video
-      - video--alt
+      - video--01
+      - video--02
       - video--chat
       - video--play
       - webcast
@@ -152,50 +228,129 @@ categories:
     members:
       - analyze
       - blockchain
+      - box--plot
+      - chart--3D
+      - chart--area
       - chart--bar
+      - chart--bubble
       - chart--bubble--line
+      - chart--candlestick
+      - chart--custom
+      - chart--error-bar
+      - chart--evaluation
+      - chart--high-low
+      - chart--histogram
       - chart--line
+      - chart--multi-line
+      - chart--multi-type
+      - chart--parallel
+      - chart--pie
+      - chart--quadrant-plot
+      - chart--radar
+      - chart--river
       - chart--scatterplot
+      - chart--scree-plot
+      - chart--stepper
+      - chart--sunburst
+      - chart--t-SNE
+      - circle--packing
+      - code--syntax
+      - dashboard
+      - data--apis
+      - data--set
+      - employee--insights
       - flow--chart
       - flow--chart--detail
-      - heat--map
+      - heat--map--01
+      - heat--map--02
+      - math--curve
+      - population--diagram
+      - q-q-plot
       - rank
+      - relationship--diagram
       - report
+      - sample--file
+      - scatter--matrix
       - secure--data
+      - stem--leaf--plot
+      - time--plot
+      - tree--diagram
+      - tree--map
       - user--analytics
+      - word--cloud
   - name: Data Storage
     members:
+      - accelerated-computing
       - archive
+      - business--continuity
+      - containers-and-cloud-native
       - data--backup
+      - data--privacy
       - data--processing
       - data--storage
+      - flash--storage
       - hard--drive
       - hard--drive--network
+      - hybrid--cloud--02
+      - ibm--z-and-linuxone-single-frame
+      - ibm--z-and-linuxone-multi-frame
+      - infrastructure-security
+      - it--infrastructure-software
+      - sap--hana
+      - server--operating-systems
       - server--rack
       - servers
+      - storage--area-networks
+      - storage--product
+      - tape--storage
   - name: Design and Development
     members:
       - app--developer
       - application
-      - design--and--development--01
-      - design--and--development--02
-      - feedback
+      - art--tools--01
+      - birthday--cake
+      - content--design
+      - cupcake
+      - design-and-development--01
+      - design-and-development--02
+      - design--leadership
+      - design--research
+      - feedback--01
+      - hills
       - idea
       - ideate
+      - organization
+      - overview
       - path
       - pattern
+      - universal-experiences
+      - user--experience-design
       - user--insights
+      - user--interface
+      - visual--design
       - web--developer
+      - wedding--cake
       - windows
   - name: Device Interaction
     members:
+      - add--device
       - augmented--reality
+      - color--contrast
+      - device--pairing
+      - flashing--content
+      - keyboard
       - mobile--add
       - mobile--chat
       - mobile--devices
       - mobile--phone
+      - rotate--device
       - swipe--left
       - swipe--right
+      - tablet--device
+      - tablet--device--check
+      - text--equivalent
+      - text--input
+      - text--layout
       - touch
       - touch--gesture
       - touch--id
@@ -203,8 +358,13 @@ categories:
       - touch--swipe
   - name: Education
     members:
+      - badge
       - college
       - education
+      - feedback--02
+      - goals
+      - growth
+      - insights
       - university
   - name: Electronics
     members:
@@ -218,37 +378,84 @@ categories:
       - desktop
       - electric
       - headphones
+      - microphone
       - printer
       - telephone
       - television
       - washer
       - wifi
-  - name: Enforcement
-    members:
-      - capitol
-      - justice
-      - parliament
-      - police
   - name: File
     members:
+      - add--document
+      - contract
+      - document--security
       - duplicate--file
       - envelope
       - file--backup
       - file--transfer
       - folder
+      - read-only
       - rich--text--format
+  - name: Finance
+    members:
+      - client--financing--01
+      - client--financing--02
+      - commercial--financing--01
+      - commercial--financing--02
+      - finance--strategy
+      - financial--consultant
+      - financial--gain
+      - financial--networks
+      - financial--news
+      - global--analytics
+      - global--assets-and-recovery--01
+      - global--assets-and-recovery--02
+      - global--currency
+      - global--exchange
+      - global--finance--euro
+      - global--finance--network
+      - global--finance--sterling
+      - global--markets
+      - global--markets--bar
+      - global--security
+      - global--strategy
+      - invoice
+      - optimize--cash-flow--01
+      - optimize--cash-flow--02
+  - name: Government
+    members:
+      - capitol
+      - fairness
+      - justice
+      - parliament
   - name: Healthcare
     members:
+      - baby--bottle
       - care
       - doctor
+      - doctor-patient
+      - dropper
+      - eyewash--station
+      - first--aid
       - heart--health
       - hospital
+      - hpi
       - medical
       - medical--charts
       - medical--staff
+      - mri
+      - mri--patient
       - pill--bottle--01
       - pills
+      - pregnant
+      - prescription
       - stethoscope
+      - social--work--01
+      - social--work--02
+      - telemedicine
+      - telemedicine--mobile
+      - x-ray--01
+      - x-ray--02
   - name: Home
     members:
       - door--handle
@@ -263,17 +470,28 @@ categories:
   - name: IBM
     members:
       - bee
-      - enterprise--design--thinking
-      - enterprise--design--thinking--alt
+      - enterprise--design--thinking--01
+      - enterprise--design--thinking--02
       - eye
       - ibm--ix
       - ibm--z
+      - ibm--z--partition
       - progress
+      - world--community--grid
   - name: Industry
     members:
       - agriculture
       - bulldozer
-      - farm
+      - cargo--crane
+      - cargo--ship
+      - cheese
+      - farm--01
+      - farm--02
+      - farmer--01
+      - farmer--02
+      - fragile
+      - insurance
+      - keep-dry
       - oil--pump
       - oil--rig
       - power
@@ -281,10 +499,15 @@ categories:
       - refinery
       - satellite
       - satellite--dish
+      - solar--field
+      - solar--panel
+      - sprout
+      - stack-limitation
       - steel
       - telecom
+      - this-side-up
       - tractor
-      - weather
+      - two-person-lift
       - wheat
       - wind--power
       - wine
@@ -295,9 +518,15 @@ categories:
       - connect
       - iot--munich
       - solve
-      - transform
+      - transform--01
   - name: Learning
     members:
+      - ai--ethics
+      - ai--explainability
+      - ai--privacy
+      - ai--robustness
+      - ai--transparency
+      - ai--trust
       - intelligence
       - machine--learning--01
       - machine--learning--02
@@ -308,6 +537,7 @@ categories:
   - name: Life Science
     members:
       - cell
+      - coronavirus
       - dna
       - erlenmeyer--flask
       - heart
@@ -315,22 +545,33 @@ categories:
       - magnify
       - microorganisms
       - microscope
-      - mortar--and--pestle
+      - mortar-and-pestle
       - petri--culture
+      - research
       - test--tubes
       - virus
   - name: Lifestyle
     members:
       - apple
+      - backpack
+      - blender
       - cafe
       - cherries
       - dining
       - hard--ice--cream
+      - flower--01
+      - flower--02
+      - guitar
+      - juice
       - perfume
+      - racetrack
+      - rock-on
       - scale
       - soft--ice--cream
+      - sports
       - stationary--bicycle
       - tennis
+      - tree
       - yoga--01
       - yoga--02
       - yoga--03
@@ -339,22 +580,31 @@ categories:
     members:
       - americas
       - asia--australia
-      - europe-africa
+      - earth
+      - europe--africa
       - globe
       - globe--locations
+      - india--south-asia
       - location
   - name: Manufacturing
     members:
       - delivery--truck
       - factory
       - forklift
+      - ibm--rpa
       - robot
       - robotics
       - tools
   - name: Networking
     members:
+      - automation--decision
+      - bluepages
+      - distribution--ledger
       - global--network
       - integration
+      - inspect--data
+      - global--partner
+      - mail--verse
       - network
       - network--services
       - networking--01
@@ -362,17 +612,24 @@ categories:
       - networking--03
       - networking--04
       - networking--05
-      - private--network
+      - networking--06
       - private--network--01
-      - private--network--alt
-      - private--network--alt--01
+      - private--network--02
+      - private--network--03
+      - private--network--04
+      - professional--marketplace
       - reset--hybrid--cloud
       - reset--settings
+      - sales--connect
       - support--services
-      - transform
+      - transactional--blockchain
+      - transactional--trust
+      - transform--02
+      - workday
   - name: People
     members:
       - advocate
+      - design-thinking-team
       - expand--user
       - face--dissatisfied
       - face--neutral
@@ -396,43 +653,111 @@ categories:
       - person--08
       - person--09
       - renew--team
+      - team--alignment
+      - teammates
+      - user
+      - user--profile
       - user--search
+  - name: Red Hat
+    members:
+      - build-applications-anywhere
+      - cloud--native--01
+      - cloud--native--02
+      - cluster
+      - connect--applications
+      - container
+      - container--microservices
+      - containerized-applications
+      - edge
+      - hybrid--cloud--infrastructure
+      - kubernetes
+      - kubernetes--pod
+      - manage-applications-anywhere
+      - open-source
+      - quantum-computing
+      - red-hat--applications
+      - synergy
+      - virtual--server
+      - virtual--storage
+  - name: Public service
+    members:
+      - firefighter
+      - police
+      - social--worker
+      - teacher
   - name: Retail
     members:
       - bag
+      - clothes--rack--01
+      - clothes--rack--02
       - coat--hanger
       - credit--card
       - customer--service
+      - gift
       - price
+      - qr-code
       - receipt
+      - secure--search
+      - select--product
+      - shirt
       - shop
       - shopping--cart
       - sneaker
+      - socks
       - tags
+      - t-shirt
+      - trousers
   - name: Security
     members:
+      - advanced--fraud--protection
+      - advanced--threats
+      - anonymous--users
+      - application--security
+      - assets
+      - bug--virus--malware
+      - build--leadership--and--culture
+      - collaboration
+      - continuous--security
+      - data--security
+      - detect--and--stop--advancing--threats
+      - digital--id
+      - digital--trust
+      - endpoint--protection
       - firewall
-      - lock
-      - lock--alt
-      - locked--network
-      - locked--network--alt
+      - get--ahead--of--risk--and--compliance
+      - govern--users--and--identities
+      - high--risk--users
+      - identity--trust--assessment
+      - lock--01
+      - lock--02
+      - locked--network--01
+      - locked--network--02
+      - master--threat--hunting
+      - network--protection
+      - protect--critical--assets
+      - secure--hybrid--cloud
       - secure--profile
       - security
+      - security--as--a--service
+      - security--hygiene
+      - security--intelligence
       - security--shield
-      - unlock
-      - unlock--alt
+      - strategy--and--risk
+      - threat--management
+      - tool--overload
+      - trusted--user
+      - unauthorized--user--access
+      - under--utilized--security
+      - unify--endpoint--management
+      - unlock--01
+      - unlock--02
   - name: Status
     members:
       - question
-      - warning
-      - warning--alt
+      - warning--01
+      - warning--02
   - name: Strategy
     members:
-      - financial--consultant
-      - financial--gain
-      - financial--news
-      - global--finance--euro
-      - global--finance--sterling
       - innovate
       - presentation
       - presenter
@@ -442,8 +767,37 @@ categories:
       - strategy--move
       - strategy--play
       - streamline
+      - summit
       - target
       - target--area
+  - name: Supply Chain
+    members:
+      - connected--nodes--to--the--cloud
+      - managing--contractual--flow
+      - managing--items
+      - monitored--item--on--conveyor
+      - movement--in--overlapping--networks
+      - movement--of--goods--01
+      - movement--of--goods--02
+      - movement--of--goods--03
+      - movement--of--items
+      - process
+  - name: Systems DevOps
+    members:
+      - developer-z-os
+      - systems-devops--analyze
+      - systems-devops--build
+      - systems-devops--cicd-pipeline
+      - systems-devops--code
+      - systems-devops--deploy
+      - systems-devops--monitor
+      - systems-devops--plan
+      - systems-devops--provision
+      - systems-devops--release
+      - systems-devops--test
+  - name: Third-party logos
+    members:
+      - slack
   - name: Time
     members:
       - calendar
@@ -452,22 +806,23 @@ categories:
       - meter
       - speedometer
       - time
-      - time-lapse
+      - time--lapse
   - name: Transportation
     members:
       - airplane
       - automobile
       - bicycle
       - bus
+      - electric--car
       - electric--charge
       - engine
       - fuel
+      - luggage
       - spaceship
       - steering--wheel
       - train
   - name: Watson
     members:
-      - alchemy--language--alphabet--a--expanded
       - alchemy--data--news
       - alchemy--language
       - alchemy--vision
@@ -480,20 +835,19 @@ categories:
       - dialogue
       - document--conversion
       - knows--dark--data
-      - language
       - language--01
       - language--02
       - language--03
       - language--04
+      - language--05
       - language--translation
-      - language--translation--alphabet--a--expanded
       - natural--language--classifier
+      - natural--language--understanding
       - personality--insights
       - question--and--answer
       - relationship--extraction
       - retrieve--and--rank
       - speech
-      - speech--alphabet--a--expanded
       - speech--to--text
       - text--to--speech
       - tone--analyzer
@@ -501,7 +855,7 @@ categories:
       - vision
       - visual--insights
       - visual--recognition
-      - watson--avatar
+      - watson--logo
   - name: Weather
     members:
       - cloudy

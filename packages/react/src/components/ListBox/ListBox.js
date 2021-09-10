@@ -13,13 +13,13 @@ import { ListBoxType, ListBoxSize } from './ListBoxPropTypes';
 
 const { prefix } = settings;
 
-const handleOnKeyDown = event => {
+const handleOnKeyDown = (event) => {
   if (event.keyCode === 27) {
     event.stopPropagation();
   }
 };
 
-const handleClick = event => {
+const handleClick = (event) => {
   event.preventDefault();
   event.stopPropagation();
 };
@@ -28,19 +28,25 @@ const handleClick = event => {
  * `ListBox` is a generic container component that handles creating the
  * container class name in response to certain props.
  */
-const ListBox = ({
-  children,
-  className: containerClassName,
-  disabled,
-  innerRef,
-  type,
-  size,
-  invalid,
-  invalidText,
-  light,
-  isOpen,
-  ...rest
-}) => {
+const ListBox = React.forwardRef(function ListBox(
+  {
+    children,
+    className: containerClassName,
+    disabled,
+    type,
+    size,
+    invalid,
+    invalidText,
+    warn,
+    warnText,
+    light,
+    isOpen,
+    ...rest
+  },
+  ref
+) {
+  const showWarning = !invalid && warn;
+
   const className = cx({
     [containerClassName]: !!containerClassName,
     [`${prefix}--list-box`]: true,
@@ -49,13 +55,15 @@ const ListBox = ({
     [`${prefix}--list-box--disabled`]: disabled,
     [`${prefix}--list-box--light`]: light,
     [`${prefix}--list-box--expanded`]: isOpen,
+    [`${prefix}--list-box--warning`]: showWarning,
   });
   return (
     <>
+      {/* eslint-disable-next-line jsx-a11y/no-static-element-interactions */}
       <div
         {...rest}
         className={className}
-        ref={innerRef}
+        ref={ref}
         onKeyDown={handleOnKeyDown}
         onClick={handleClick}
         data-invalid={invalid || undefined}>
@@ -64,10 +72,14 @@ const ListBox = ({
       {invalid ? (
         <div className={`${prefix}--form-requirement`}>{invalidText}</div>
       ) : null}
+      {showWarning ? (
+        <div className={`${prefix}--form-requirement`}>{warnText}</div>
+      ) : null}
     </>
   );
-};
+});
 
+ListBox.displayName = 'ListBox';
 ListBox.propTypes = {
   /**
    * Provide the contents of your ListBox
@@ -80,15 +92,34 @@ ListBox.propTypes = {
   className: PropTypes.string,
 
   /**
-   * `innerRef` hook used for libraries like Downshift that require a reference
-   * on a container node when it is not a native element
-   */
-  innerRef: PropTypes.func.isRequired,
-
-  /**
    * Specify whether the ListBox is currently disabled
    */
   disabled: PropTypes.bool.isRequired,
+
+  /**
+   * Specify whether the control is currently invalid
+   */
+  invalid: PropTypes.bool,
+
+  /**
+   * Specify the text to be displayed when the control is invalid
+   */
+  invalidText: PropTypes.node,
+
+  /**
+   * Specify if the control should render open
+   */
+  isOpen: PropTypes.bool,
+
+  /**
+   * Specify if the control should use the light variant
+   */
+  light: PropTypes.bool,
+
+  /**
+   * Specify the size of the ListBox. Currently supports either `sm`, `md` or `lg` as an option.
+   */
+  size: ListBoxSize,
 
   /**
    * Specify the "type" of the ListBox. Currently supports either `default` or
@@ -97,13 +128,17 @@ ListBox.propTypes = {
   type: ListBoxType.isRequired,
 
   /**
-   * Specify the size of the ListBox. Currently supports either `sm`, `lg` or `xl` as an option.
+   * Specify whether the control is currently in warning state
    */
-  size: ListBoxSize,
+  warn: PropTypes.bool,
+
+  /**
+   * Provide the text that is displayed when the control is in warning state
+   */
+  warnText: PropTypes.node,
 };
 
 ListBox.defaultProps = {
-  innerRef: () => {},
   disabled: false,
   type: 'default',
 };

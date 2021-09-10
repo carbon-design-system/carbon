@@ -1,0 +1,35 @@
+import { Props } from '@storybook/addon-docs/blocks';
+
+# Tooltip
+
+[Source code](https://github.com/carbon-design-system/carbon/tree/main/packages/react/src/components/Tooltip)
+&nbsp;|&nbsp;
+[Usage guidelines](https://www.carbondesignsystem.com/components/tooltip/usage)
+&nbsp;|&nbsp;
+[Accessibility](https://www.carbondesignsystem.com/components/tooltip/accessibility)
+
+## Table of Contents
+
+## Overview
+
+### `data-floating-menu-container`
+
+`Tooltip` uses React Portals to render the tooltip into the DOM. To determine
+where in the DOM the menu will be placed, it looks for a parent element with the
+`data-floating-menu-container` attribute. If no parent with this attribute is
+found, the menu will be placed on `document.body`.
+
+## Component API
+
+Please note that in addition to the props below, `Tooltip` also has two
+additional props: `triggerText` and `iconDescription`. If the `triggerText` prop
+is _not_ provided, the `iconDescription` prop is required to populate the
+`aria-label` property for a11y reasons.
+
+<Props />
+
+## Feedback
+
+Help us improve this component by providing feedback, asking questions on Slack,
+or updating this file on
+[GitHub](https://github.com/carbon-design-system/carbon/edit/main/packages/react/src/components/Tooltip/Tooltip.mdx).

@@ -1,0 +1,58 @@
+//
+// Copyright IBM Corp. 2018, 2018
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+@use 'scss/reset';
+@use '@carbon/grid/scss/modules/css-grid';
+@use 'scss/components';
+@import '@carbon/layout/scss/spacing';
+@import '@carbon/type/scss/styles';
+
+@import '~carbon-components/scss/globals/scss/vars';
+
+// Grid
+.bx--css-grid {
+  background-color: $blue-20;
+  outline: 1px dashed $blue-40;
+}
+
+.bx--css-grid.bx--css-grid--narrow {
+  background-color: $teal-20;
+  outline: 1px dashed $teal-40;
+}
+
+.bx--css-grid.bx--css-grid--condensed {
+  background-color: $purple-20;
+  outline: 1px dashed $purple-40;
+}
+
+// Only use background for subgrid example, not other subgrids in "mixed modes" example or others
+.bx--subgrid.example {
+  background-color: $green-20;
+}
+
+// Columns
+.bx--css-grid > [class*='col'],
+.bx--subgrid > [class*='col'] {
+  min-height: 80px;
+}
+
+.bx--css-grid > [class*='col'] {
+  background: $blue-10;
+}
+
+.bx--subgrid > [class*='col'] {
+  background: $green-10;
+  outline: 1px dashed $green-30;
+}
+
+.bx--css-grid.bx--css-grid--narrow > [class*='col'] {
+  background: $teal-10;
+}
+
+.bx--css-grid.bx--css-grid--condensed > [class*='col'] {
+  background: $purple-10;
+}

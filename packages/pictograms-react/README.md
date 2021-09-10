@@ -21,9 +21,7 @@ yarn add @carbon/pictograms-react
 
 ## Usage
 
-Icons in this package support the following sizes: `16`, `20`, `24`, and `32`
-pixels. These sizes refer to the width and height of the icon. You can import an
-icon component into your project by referring to its name and size:
+You can import a pictogram component into your project by referring to its name:
 
 ```jsx
 import { Airplane } from '@carbon/pictograms-react';

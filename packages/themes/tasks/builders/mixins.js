@@ -57,8 +57,17 @@ function buildMixinsFile(themes, tokens, defaultTheme, defaultThemeMapName) {
     ],
     body: t.BlockStatement({
       body: [
-        ...Object.keys(tokens).flatMap(group => {
-          return tokens[group].flatMap(token => {
+        t.Assignment({
+          id: t.Identifier('parent-carbon-theme'),
+          init: t.Identifier('carbon--theme'),
+        }),
+        t.Assignment({
+          id: t.Identifier('carbon--theme'),
+          init: t.Identifier('theme'),
+          global: true,
+        }),
+        ...Object.keys(tokens).flatMap((group) => {
+          return tokens[group].flatMap((token) => {
             const name = formatTokenName(token);
 
             return t.Assignment({
@@ -72,6 +81,47 @@ function buildMixinsFile(themes, tokens, defaultTheme, defaultThemeMapName) {
           });
         }),
         t.IfStatement({
+          // global-variable-exists('feature-flags') == false or
+          //   global-variable-exists('feature-flags') and
+          //     map-get($feature-flags, 'enable-v11-release') == true
+          test: t.LogicalExpression({
+            // global-variable-exists('feature-flags') == false
+            left: t.LogicalExpression({
+              left: t.SassFunctionCall(t.Identifier('global-variable-exists'), [
+                t.SassString('feature-flags'),
+              ]),
+              operator: '==',
+              right: t.SassBoolean(false),
+            }),
+            operator: 'or',
+            // global-variable-exists('feature-flags') and
+            //   map-get($feature-flags, 'enable-v11-release') == true
+            right: t.LogicalExpression({
+              left: t.SassFunctionCall(t.Identifier('global-variable-exists'), [
+                t.SassString('feature-flags'),
+              ]),
+              operator: 'and',
+              right: t.LogicalExpression({
+                left: t.SassFunctionCall(t.Identifier('map-get'), [
+                  t.Identifier('feature-flags'),
+                  t.SassString('enable-v11-release'),
+                ]),
+                operator: '!=',
+                right: t.SassBoolean(true),
+              }),
+            }),
+          }),
+          consequent: t.BlockStatement(
+            Object.entries(tokenMappings).map(([key, value]) => {
+              return t.Assignment({
+                id: t.Identifier(key),
+                init: t.Identifier(value),
+                global: true,
+              });
+            })
+          ),
+        }),
+        t.IfStatement({
           test: t.LogicalExpression({
             left: t.SassFunctionCall(t.Identifier('global-variable-exists'), [
               t.SassString('feature-flags'),
@@ -83,15 +133,15 @@ function buildMixinsFile(themes, tokens, defaultTheme, defaultThemeMapName) {
             ]),
           }),
           consequent: t.BlockStatement(
-            Object.keys(tokens).flatMap(group => {
+            Object.keys(tokens).flatMap((group) => {
               return tokens[group]
-                .filter(token => {
+                .filter((token) => {
                   // We don't want to inline CSS Custom Properties for tokens
                   // that are maps, we'll need to use a corresponding mixin for
                   // that token to embed CSS Custom Properties
                   return typeof themes[defaultTheme][token] !== 'object';
                 })
-                .flatMap(token => {
+                .flatMap((token) => {
                   const name = formatTokenName(token);
                   return t.Assignment({
                     id: t.Identifier(name),
@@ -123,15 +173,15 @@ function buildMixinsFile(themes, tokens, defaultTheme, defaultThemeMapName) {
             right: t.SassBoolean(true),
           }),
           consequent: t.BlockStatement(
-            Object.keys(tokens).flatMap(group => {
-              return tokens[group].flatMap(token => {
+            Object.keys(tokens).flatMap((group) => {
+              return tokens[group].flatMap((token) => {
                 const name = formatTokenName(token);
                 return [
                   t.Newline(),
                   t.IfStatement({
                     test: t.SassFunctionCall(t.Identifier('should-emit'), [
                       t.Identifier('theme'),
-                      t.Identifier('carbon--theme'),
+                      t.Identifier('parent-carbon-theme'),
                       t.SassString(name),
                       t.Identifier('emit-difference'),
                     ]),
@@ -151,14 +201,20 @@ function buildMixinsFile(themes, tokens, defaultTheme, defaultThemeMapName) {
           ),
         }),
         t.AtContent(),
+        t.Newline(),
         t.Comment(' Reset to default theme after apply in content'),
         t.IfStatement({
           test: t.LogicalExpression({
-            left: t.Identifier('theme'),
+            left: t.Identifier('carbon--theme'),
             operator: '!=',
-            right: t.Identifier(defaultThemeMapName),
+            right: t.Identifier('parent-carbon-theme'),
           }),
           consequent: t.BlockStatement([
+            t.Assignment({
+              id: t.Identifier('carbon--theme'),
+              init: t.Identifier('parent-carbon-theme'),
+              global: true,
+            }),
             t.SassMixinCall(t.Identifier('carbon--theme')),
           ]),
         }),
@@ -175,5 +231,98 @@ function buildMixinsFile(themes, tokens, defaultTheme, defaultThemeMapName) {
     mixin,
   ]);
 }
+
+const tokenMappings = {
+  background: 'ui-background',
+  layer: 'ui-01',
+  'layer-accent': 'ui-03',
+  field: 'field-01',
+  'background-inverse': 'inverse-02',
+  'background-brand': 'interactive-01',
+  interactive: 'interactive-04',
+
+  'border-subtle': 'ui-03',
+  'border-strong': 'ui-04',
+  'border-inverse': 'ui-05',
+  'border-interactive': 'interactive-04',
+
+  'text-primary': 'text-01',
+  'text-secondary': 'text-02',
+  'text-placeholder': 'text-03',
+  'text-helper': 'text-05',
+  'text-on-color': 'text-04',
+  'text-inverse': 'inverse-01',
+
+  'link-primary': 'link-01',
+  'link-secondary': 'link-02',
+  'link-visited': 'visited-link',
+  'link-inverse': 'inverse-link',
+
+  'icon-primary': 'icon-01',
+  'icon-secondary': 'icon-02',
+  'icon-on-color': 'icon-03',
+  'icon-inverse': 'inverse-01',
+
+  'support-error': 'support-01',
+  'support-success': 'support-02',
+  'support-warning': 'support-03',
+  'support-info': 'support-04',
+  'support-error-inverse': 'inverse-support-01',
+  'support-success-inverse': 'inverse-support-02',
+  'support-warning-inverse': 'inverse-support-03',
+  'support-info-inverse': 'inverse-support-04',
+
+  overlay: 'overlay-01',
+  'toggle-off': 'ui-04',
+
+  'button-primary': 'interactive-01',
+  'button-secondary': 'interactive-02',
+  'button-tertiary': 'interactive-03',
+  'button-danger-primary': 'danger-01',
+  'button-danger-secondary': 'danger-02',
+
+  'background-active': 'active-ui',
+  'layer-active': 'active-ui',
+
+  'button-danger-active': 'active-danger',
+  'button-primary-active': 'active-primary',
+  'button-secondary-active': 'active-secondary',
+  'button-tertiary-active': 'active-tertiary',
+
+  'focus-inset': 'inverse-01',
+  'focus-inverse': 'inverse-focus-ui',
+
+  'background-hover': 'hover-ui',
+  'layer-hover': 'hover-ui',
+  'field-hover': 'hover-ui',
+  'background-inverse-hover': 'inverse-hover-ui',
+  'link-primary-hover': 'hover-primary-text',
+  'button-danger-hover': 'hover-danger',
+  'button-primary-hover': 'hover-primary',
+  'button-secondary-hover': 'hover-secondary',
+  'button-tertiary-hover': 'hover-tertiary',
+
+  'background-selected': 'selected-ui',
+  'background-selected-hover': 'hover-selected-ui',
+  'layer-selected': 'selected-ui',
+  'layer-selected-hover': 'hover-selected-ui',
+  'layer-selected-inverse': 'ui-05',
+  'border-subtle-selected': 'active-ui',
+
+  'layer-disabled': 'disabled-01',
+  'field-disabled': 'disabled-01',
+  'border-disabled': 'disabled-01',
+
+  'text-disabled': 'disabled-02',
+  'button-disabled': 'disabled-02',
+  'icon-disabled': 'disabled-02',
+
+  'text-on-color-disabled': 'disabled-03',
+  'icon-on-color-disabled': 'disabled-03',
+  'layer-selected-disabled': 'disabled-03',
+
+  'skeleton-background': 'skeleton-01',
+  'skeleton-element': 'skeleton-02',
+};
 
 module.exports = buildMixinsFile;

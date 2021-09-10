@@ -1,0 +1,311 @@
+import { Story, Props, Source, Preview } from '@storybook/addon-docs/blocks';
+import DatePicker from '../DatePicker';
+import DatePickerInput from '../DatePickerInput';
+
+# Date Picker
+
+[Source code](https://github.com/carbon-design-system/carbon/tree/main/packages/react/src/components/DatePicker)
+&nbsp;|&nbsp;
+[Usage guidelines](https://www.carbondesignsystem.com/components/date-picker/usage)
+&nbsp;|&nbsp;
+[Accessibility](https://www.carbondesignsystem.com/components/date-picker/accessibility)
+
+## Table of Contents
+
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+
+- [Overview](#overview)
+  - [Simple DatePicker](#simple-datepicker)
+  - [Range Datepicker](#range-datepicker)
+  - [Skeleton state](#skeleton-state)
+- [Component API](#component-api)
+  - [DatePicker `appendTo`](#datepicker-appendto)
+  - [DatePicker `className`](#datepicker-classname)
+  - [DatePicker `dateFormat`](#datepicker-dateformat)
+  - [DatePicker `datePickerType`](#datepicker-datepickertype)
+  - [DatePicker `light`](#datepicker-light)
+  - [DatePicker `locale`](#datepicker-locale)
+  - [DatePicker `maxDate`](#datepicker-maxdate)
+  - [DatePicker `minDate`](#datepicker-mindate)
+  - [DatePicker `disable` and `enable`](#datepicker-disable-and-enable)
+- [References](#references)
+- [Feedback](#feedback)
+
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+
+## Overview
+
+Date pickers allow users to select a single or a range of dates. Pickers are
+used to display past, present, or future dates. The kind of date (exact,
+approximate, memorable) you are requesting from the user will determine which
+picker is best to use. Each picker’s format can be customized depending on
+location or need. The `DatePicker` component expects a `DatePickerInput` as a
+child.
+
+### Simple DatePicker
+
+The simple date input provides the user with only a text field in which they can
+manually input a date. It allows dates to be entered without adding unnecessary
+interactions that come with the calendar menu or a dropdown.
+
+<Preview>
+  <Story id="components-datepicker--simple" />
+</Preview>
+
+### Range Datepicker
+
+Calendar pickers default to showing today’s date when opened and only one month
+is shown at a time. Calendar pickers allow users to navigate through months and
+years, however they work best when used for recent or near future dates.
+
+<Preview>
+  <Story id="components-datepicker--single" />
+  <Story id="components-datepicker--range" />
+</Preview>
+
+### Skeleton state
+
+You can use the `DatePickerSkeleton` component to render a skeleton variant of a
+`DatePicker`. This is useful to display while an initial date range in your
+`DatePicker` is being fetched from an external resource like an API.
+
+<Preview>
+  <Story id="components-datepicker--skeleton" />
+</Preview>
+
+## Component API
+
+<Props />
+
+### DatePicker `appendTo`
+
+By default, the `DatePicker` menu will be appended to the end of the `body`
+element. If you would like to attach it to a different node, you can specify a
+DOM element with the `appendTo` prop.
+
+```jsx
+const node = document.querySelector('#my-node');
+
+<DatePicker appendTo={node}>...</DatePicker>;
+```
+
+### DatePicker `className`
+
+The className prop passed into `DatePicker` will be forwarded along to the
+underlying wrapper `div.bx--date-picker` element. This is useful for specifying
+a custom class name for layout.
+
+```jsx
+<DatePicker className="some-class">...</DatePicker>
+```
+
+### DatePicker `dateFormat`
+
+You can use the `dateFormat` prop to change how the selected date is displayed
+in the input. For a complete list of supported date formatting tokens, please
+see the Flatpickr
+[documentation](https://flatpickr.js.org/formatting/#date-formatting-tokens)
+
+<DatePicker datePickerType="single" dateFormat="Y-m-d">
+  <DatePickerInput
+    placeholder="yyyy-mm-dd"
+    id="date-picker-1"
+    labelText="Date format example"
+  />
+</DatePicker>
+
+```jsx
+<DatePicker datePickerType="single" dateFormat="Y-m-d">
+  <DatePickerInput placeholder="mm/dd/yyyy" />
+</DatePicker>
+```
+
+### DatePicker `datePickerType`
+
+There are three supported variations of `DatePicker` in Carbon.
+
+- `simple` will render a simple text input _without_ a calendar dropdown.
+- `single` will render a a single text input _with_ a calendar dropdown.
+- `range` will indicate that multiple `DatePicker` inputs will be rendered. Two
+  `DatePickerInput` will need to be provided as children.
+
+```jsx
+<DatePicker datePickerType="range">
+  <DatePickerInput placeholder="Start" />
+  <DatePickerInput placeholder="End" />
+</DatePicker>
+```
+
+### DatePicker `light`
+
+In certain circumstances, a `DatePicker` will exist on a container element with
+the same background color. To improve contrast, you can use the `light` property
+to toggle the light variant of the `DatePicker`.
+
+```jsx
+<DatePicker light>...</DatePicker>
+```
+
+### DatePicker `locale`
+
+The `locale` prop can be used to help with internationalization. For best
+results, combine with the `dateFormat` prop. We pass this under the hood to the
+FlatPickr instance. A complete list of valid locales can be found in the
+[component API](#component-api) section
+
+<DatePicker locale="no" dateFormat="d/m/Y" datePickerType="single">
+  <DatePickerInput
+    placeholder="dd/mm/yyyy"
+    id="date-picker-2"
+    labelText="Locale example"
+  />
+</DatePicker>
+
+```jsx
+// Load Norwegian text with the proper date format
+<DatePicker locale="no" dateFormat="d/m/Y" datePickerType="single">
+  <DatePickerInput placeholder="dd/mm/yyyy" />
+</DatePicker>
+```
+
+### DatePicker `maxDate`
+
+Limits the date selection to any date before the date specified. The string
+format depends on the `locale` specified. For example, the top example below is
+using the default US date format, and the one below it is using the same format
+as the `locale` prop example. One is setting it as September 1st, and the other
+is setting it as January 9th.
+
+<DatePicker maxDate="09/01/2020" datePickerType="single">
+  <DatePickerInput
+    placeholder="dd/mm/yyyy"
+    id="date-picker-3"
+    labelText="US format"
+  />
+</DatePicker>
+<br />
+<DatePicker
+  maxDate="09/01/2020"
+  datePickerType="single"
+  locale="no"
+  dateFormat="d/m/Y">
+  <DatePickerInput
+    placeholder="mm/dd/yyyy"
+    id="date-picker-4"
+    labelText="European format"
+  />
+</DatePicker>
+
+```jsx
+<DatePicker maxDate="09/01/2020">
+  <DatePickerInput placeholder="mm/dd/yyyy" />
+</DatePicker>
+
+<DatePicker
+  maxDate="09/01/2020"
+  datePickerType="single"
+  locale="no"
+  dateFormat="d/m/Y">
+  <DatePickerInput placeholder="mm/dd/yyyy" />
+</DatePicker>;
+```
+
+### DatePicker `minDate`
+
+Works similarly to the `maxDate` prop. [See above](#datepicker-maxdate).
+
+<DatePicker maxDate="09/01/2020" datePickerType="single" value="07/15/1988">
+  <DatePickerInput
+    placeholder="dd/mm/yyyy"
+    id="date-picker-5"
+    labelText="minDate example"
+  />
+</DatePicker>
+
+### DatePicker `disable` and `enable`
+
+This uses the Flatpickr `disable` option which allows a user to disable certain
+dates. The disable takes in a array of date strings, or you can pass in a date
+function to the array that will disable dates that returns true.
+[See the Flatpickr documentation for more info](https://flatpickr.js.org/examples/#disabling-dates).
+
+```
+<DatePicker
+  datePickerType="single"
+  disable={[ (date) => (date.getDay() === 0 || date.getDay() === 6)]}>
+  <DatePickerInput
+    placeholder="dd/mm/yyyy"
+    id="date-picker-8"
+    labelText="minDate example"
+  />
+</DatePicker>
+```
+
+The `enable` option works the same, but will disable all dates that are not
+explicitly added to the array.
+[See the flatpickr documentation for more info](https://flatpickr.js.org/examples/#disabling-all-dates-except-select-few).
+
+```
+<DatePicker
+  datePickerType="single"
+  enable={["2021-04-01", "2021-05-01"]}>
+  <DatePickerInput
+    placeholder="dd/mm/yyyy"
+    id="date-picker-8"
+    labelText="minDate example"
+  />
+</DatePicker>
+```
+
+### DatePicker `value`
+
+By default `DatePicker` will set the current date as its value. If you'd like to
+start this at a different date, you can pass in a date string or date object.
+
+<DatePicker maxDate="09/01/2020" datePickerType="single" value="07/15/1988">
+  <DatePickerInput
+    placeholder="dd/mm/yyyy"
+    id="date-picker-6"
+    labelText="Value as string example"
+  />
+</DatePicker>
+<br />
+<DatePicker
+  maxDate="09/01/2020"
+  datePickerType="single"
+  value={new Date().setDate(-10)}>
+  <DatePickerInput
+    placeholder="dd/mm/yyyy"
+    id="date-picker-7"
+    labelText="Value as object example"
+  />
+</DatePicker>
+
+```jsx
+<DatePicker maxDate="09/01/2020" datePickerType="single" value="07/15/1988">
+  <DatePickerInput placeholder="dd/mm/yyyy" />
+</DatePicker>
+
+<DatePicker
+  maxDate="09/01/2020"
+  datePickerType="single"
+  value={new Date().setDate(-10)}>
+  <DatePickerInput placeholder="dd/mm/yyyy" />
+</DatePicker>
+```
+
+## References
+
+- The `DatePicker` component utilizes Flatpickr under the hood. We will pass any
+  extra options down to the FlatPickr instance. For a full list of options,
+  please see the [Flatpickr docs](https://flatpickr.js.org/options/)
+- The `DatePickerInput` takes in similar props to the `TextInput` component,
+  such as `size` and `placeholder`. For more information on these props, check
+  out the `TextInput` page.
+
+## Feedback
+
+Help us improve this component by providing feedback, asking questions on Slack,
+or updating this file on
+[GitHub](https://github.com/carbon-design-system/carbon/edit/main/packages/react/src/components/DatePicker/DatePicker.mdx).

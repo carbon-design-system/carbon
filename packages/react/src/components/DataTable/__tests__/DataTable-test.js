@@ -35,11 +35,11 @@ import { mount } from 'enzyme';
 const getHeaderAt = (wrapper, index) =>
   wrapper.find('TableHeader button').at(index);
 const getRowAt = (wrapper, index) => wrapper.find('tbody tr').at(index);
-const getFilterInput = wrapper =>
+const getFilterInput = (wrapper) =>
   wrapper.find('TableToolbarSearch Search input');
-const getSelectAll = wrapper =>
+const getSelectAll = (wrapper) =>
   wrapper.find('TableSelectAll input[type="checkbox"]');
-const getLastCallFor = mocker =>
+const getLastCallFor = (mocker) =>
   mocker.mock.calls[mocker.mock.calls.length - 1];
 const getInputAtIndex = ({ wrapper, index, inputType }) =>
   getRowAt(wrapper, index).find(`input[type="${inputType}"]`);
@@ -103,7 +103,7 @@ describe('DataTable', () => {
                   id="custom-id"
                 />
                 <TableToolbarMenu>
-                  <TableToolbarAction primaryFocus onClick={jest.fn()}>
+                  <TableToolbarAction onClick={jest.fn()}>
                     Action 1
                   </TableToolbarAction>
                   <TableToolbarAction onClick={jest.fn()}>
@@ -121,17 +121,17 @@ describe('DataTable', () => {
             <Table {...getTableProps()}>
               <TableHead>
                 <TableRow>
-                  {headers.map(header => (
-                    <TableHeader {...getHeaderProps({ header })}>
+                  {headers.map((header, i) => (
+                    <TableHeader key={i} {...getHeaderProps({ header })}>
                       {header.header}
                     </TableHeader>
                   ))}
                 </TableRow>
               </TableHead>
               <TableBody>
-                {rows.map(row => (
+                {rows.map((row) => (
                   <TableRow key={row.id}>
-                    {row.cells.map(cell => (
+                    {row.cells.map((cell) => (
                       <TableCell key={cell.id}>{cell.value}</TableCell>
                     ))}
                   </TableRow>
@@ -254,18 +254,18 @@ describe('DataTable', () => {
                 <TableHead>
                   <TableRow>
                     <TableSelectAll {...getSelectionProps()} />
-                    {headers.map(header => (
-                      <TableHeader {...getHeaderProps({ header })}>
+                    {headers.map((header, i) => (
+                      <TableHeader key={i} {...getHeaderProps({ header })}>
                         {header.header}
                       </TableHeader>
                     ))}
                   </TableRow>
                 </TableHead>
                 <TableBody>
-                  {rows.map(row => (
+                  {rows.map((row) => (
                     <TableRow key={row.id}>
                       <TableSelectRow {...getSelectionProps({ row })} />
-                      {row.cells.map(cell => (
+                      {row.cells.map((cell) => (
                         <TableCell key={cell.id}>{cell.value}</TableCell>
                       ))}
                     </TableRow>
@@ -390,7 +390,7 @@ describe('DataTable', () => {
                     id="custom-id"
                   />
                   <TableToolbarMenu>
-                    <TableToolbarAction primaryFocus onClick={jest.fn()}>
+                    <TableToolbarAction onClick={jest.fn()}>
                       Action 1
                     </TableToolbarAction>
                     <TableToolbarAction onClick={jest.fn()}>
@@ -409,18 +409,18 @@ describe('DataTable', () => {
                 <TableHead>
                   <TableRow>
                     <TableSelectAll {...getSelectionProps()} />
-                    {headers.map(header => (
-                      <TableHeader {...getHeaderProps({ header })}>
+                    {headers.map((header, i) => (
+                      <TableHeader key={i} {...getHeaderProps({ header })}>
                         {header.header}
                       </TableHeader>
                     ))}
                   </TableRow>
                 </TableHead>
                 <TableBody>
-                  {rows.map(row => (
+                  {rows.map((row) => (
                     <TableRow key={row.id}>
                       <TableSelectRow {...getSelectionProps({ row })} />
-                      {row.cells.map(cell => (
+                      {row.cells.map((cell) => (
                         <TableCell key={cell.id}>{cell.value}</TableCell>
                       ))}
                     </TableRow>
@@ -465,7 +465,7 @@ describe('DataTable', () => {
       const wrapper = mount(<DataTable {...mockProps} />);
 
       const nextRows = [
-        ...mockProps.rows.map(row => ({ ...row })),
+        ...mockProps.rows.map((row) => ({ ...row })),
         {
           id: 'd',
           fieldA: 'Field 3:A',
@@ -493,7 +493,7 @@ describe('DataTable', () => {
       const wrapper = mount(<DataTable {...mockProps} />);
 
       const nextRows = [
-        ...mockProps.rows.map(row => ({ ...row, disabled: true })),
+        ...mockProps.rows.map((row) => ({ ...row, disabled: true })),
       ];
 
       wrapper.setProps({ rows: nextRows });
@@ -555,18 +555,18 @@ describe('DataTable', () => {
               <Table>
                 <TableHead>
                   <TableRow>
-                    {headers.map(header => (
-                      <TableHeader {...getHeaderProps({ header })}>
+                    {headers.map((header, i) => (
+                      <TableHeader key={i} {...getHeaderProps({ header })}>
                         {header.header}
                       </TableHeader>
                     ))}
                   </TableRow>
                 </TableHead>
                 <TableBody>
-                  {rows.map(row => (
+                  {rows.map((row) => (
                     <TableRow key={row.id}>
                       <TableSelectRow {...getSelectionProps({ row })} />
-                      {row.cells.map(cell => (
+                      {row.cells.map((cell) => (
                         <TableCell key={cell.id}>{cell.value}</TableCell>
                       ))}
                     </TableRow>
@@ -651,7 +651,7 @@ describe('DataTable', () => {
     });
   });
 
-  describe('componentWillReceiveProps', () => {
+  describe('componentDidUpdate', () => {
     let mockProps;
 
     beforeEach(() => {
@@ -707,19 +707,19 @@ describe('DataTable', () => {
                   <TableRow>
                     <TableExpandHeader {...getExpandHeaderProps()} />
                     <TableSelectAll {...getSelectionProps()} />
-                    {headers.map(header => (
-                      <TableHeader {...getHeaderProps({ header })}>
+                    {headers.map((header, i) => (
+                      <TableHeader key={i} {...getHeaderProps({ header })}>
                         {header.header}
                       </TableHeader>
                     ))}
                   </TableRow>
                 </TableHead>
                 <TableBody>
-                  {rows.map(row => (
+                  {rows.map((row) => (
                     <React.Fragment key={row.id}>
                       <TableExpandRow {...getRowProps({ row })}>
                         <TableSelectRow {...getSelectionProps({ row })} />
-                        {row.cells.map(cell => (
+                        {row.cells.map((cell) => (
                           <TableCell key={cell.id}>{cell.value}</TableCell>
                         ))}
                       </TableExpandRow>
@@ -756,9 +756,9 @@ describe('DataTable', () => {
 
       wrapper.setProps({ rows: nextRows });
 
-      const nextArgs = mockProps.render.mock.calls[1][0];
+      const nextArgs = getLastCallFor(mockProps.render)[0];
       expect(nextArgs.rows.length).toBe(nextRows.length);
-      expect(nextArgs.rows.map(row => row.id)).toEqual(['b', 'a', 'c', 'd']);
+      expect(nextArgs.rows.map((row) => row.id)).toEqual(['b', 'a', 'c', 'd']);
     });
 
     it('should add additional headers when receiving new props', () => {
@@ -768,7 +768,7 @@ describe('DataTable', () => {
       expect(args.headers).toEqual(mockProps.headers);
 
       const nextProps = {
-        rows: mockProps.rows.map(row => ({
+        rows: mockProps.rows.map((row) => ({
           ...row,
           fieldC: 'Field X:C',
         })),
@@ -783,7 +783,7 @@ describe('DataTable', () => {
 
       wrapper.setProps(nextProps);
 
-      const nextArgs = mockProps.render.mock.calls[1][0];
+      const nextArgs = getLastCallFor(mockProps.render)[0];
       expect(nextArgs.headers).toEqual(nextProps.headers);
     });
 
@@ -792,7 +792,7 @@ describe('DataTable', () => {
       getSelectAll(wrapper).simulate('click');
 
       const nextRows = [
-        ...mockProps.rows.map(row => ({ ...row, isSelected: true })),
+        ...mockProps.rows.map((row) => ({ ...row, isSelected: true })),
         {
           id: 'd',
           fieldA: 'Field 4:A',
@@ -802,6 +802,7 @@ describe('DataTable', () => {
       ];
 
       wrapper.setProps({ rows: nextRows });
+      wrapper.update();
 
       expect(getSelectAll(wrapper).prop('checked')).toBe(false);
       const { getBatchActionProps, selectedRows } = getLastCallFor(
@@ -843,8 +844,8 @@ describe('DataTable', () => {
 
       wrapper.setProps({ rows: nextRows });
 
-      const nextArgs = mockProps.render.mock.calls[1][0];
-      expect(nextArgs.rows.map(row => row.id)).toEqual(['c', 'a', 'b']);
+      const nextArgs = getLastCallFor(mockProps.render)[0];
+      expect(nextArgs.rows.map((row) => row.id)).toEqual(['c', 'a', 'b']);
     });
 
     it('should update cells when receiving new props', () => {
@@ -853,7 +854,7 @@ describe('DataTable', () => {
 
       expect(args.rows.length).toEqual(mockProps.rows.length);
 
-      const nextRows = mockProps.rows.map(row => {
+      const nextRows = mockProps.rows.map((row) => {
         return {
           ...row,
           fieldA: row.fieldA + '!',
@@ -862,8 +863,8 @@ describe('DataTable', () => {
 
       wrapper.setProps({ rows: nextRows });
 
-      const nextArgs = mockProps.render.mock.calls[1][0];
-      expect(nextArgs.rows.map(row => row.cells[0].value)).toEqual([
+      const nextArgs = getLastCallFor(mockProps.render)[0];
+      expect(nextArgs.rows.map((row) => row.cells[0].value)).toEqual([
         'Field 2:A!',
         'Field 1:A!',
         'Field 3:A!',

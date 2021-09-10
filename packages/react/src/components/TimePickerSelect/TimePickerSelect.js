@@ -10,6 +10,7 @@ import React, { Component } from 'react';
 import classNames from 'classnames';
 import { ChevronDown16 } from '@carbon/icons-react';
 import { settings } from 'carbon-components';
+import deprecate from '../../prop-types/deprecate';
 
 const { prefix } = settings;
 
@@ -26,6 +27,30 @@ export default class TimePickerSelect extends Component {
     className: PropTypes.string,
 
     /**
+     * Optionally provide the default value of the `<select>`
+     */
+    defaultValue: PropTypes.any,
+
+    /**
+     * Specify whether the control is disabled
+     */
+    disabled: PropTypes.bool,
+
+    /**
+     * Specify whether the label should be hidden, or not
+     */
+    hideLabel: deprecate(
+      PropTypes.bool,
+      'The `hideLabel` prop for `TimePickerSelect` is no longer needed and has ' +
+        'been deprecated. It will be removed in the next major release.'
+    ),
+
+    /**
+     * Provide a description for the twistie icon that can be read by screen readers
+     */
+    iconDescription: PropTypes.string.isRequired,
+
+    /**
      * Specify a custom `id` for the `<select>`
      */
     id: PropTypes.string.isRequired,
@@ -34,26 +59,6 @@ export default class TimePickerSelect extends Component {
      * Specify whether you want the inline version of this control
      */
     inline: PropTypes.bool,
-
-    /**
-     * Specify whether the control is disabled
-     */
-    disabled: PropTypes.bool,
-
-    /**
-     * Optionally provide the default value of the `<select>`
-     */
-    defaultValue: PropTypes.any,
-
-    /**
-     * Provide a description for the twistie icon that can be read by screen readers
-     */
-    iconDescription: PropTypes.string.isRequired,
-
-    /**
-     * Specify whether the label should be hidden, or not
-     */
-    hideLabel: PropTypes.bool,
 
     /**
      * Provide label text to be read by screen readers when interacting with the
@@ -66,7 +71,6 @@ export default class TimePickerSelect extends Component {
     disabled: false,
     inline: true,
     iconDescription: 'open list of options',
-    hideLabel: true,
   };
 
   render() {
@@ -76,7 +80,7 @@ export default class TimePickerSelect extends Component {
       children,
       iconDescription,
       className,
-      hideLabel,
+      hideLabel = true,
       labelText,
       inline, // eslint-disable-line
       ...other
@@ -89,6 +93,7 @@ export default class TimePickerSelect extends Component {
     });
 
     const labelClasses = classNames(`${prefix}--label`, {
+      // TODO: set to always be `true` after `hideLabel` is deprecated
       [`${prefix}--visually-hidden`]: hideLabel,
     });
 

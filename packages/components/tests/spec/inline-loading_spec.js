@@ -1,9 +1,9 @@
 import InlineLoading from '../../src/components/inline-loading/inline-loading';
 import InlineLoadingHTML from '../../html/inline-loading/inline-loading.html';
 
-describe('Test Inline Loading', function() {
-  describe('Constructor', function() {
-    it('Should throw if root element is not given', function() {
+describe('Test Inline Loading', function () {
+  describe('Constructor', function () {
+    it('Should throw if root element is not given', function () {
       expect(() => {
         new InlineLoading();
       }).toThrowError(
@@ -12,7 +12,7 @@ describe('Test Inline Loading', function() {
       );
     });
 
-    it('Should throw if root element is not a DOM element', function() {
+    it('Should throw if root element is not a DOM element', function () {
       expect(() => {
         new InlineLoading(document.createTextNode(''));
       }).toThrowError(
@@ -22,16 +22,16 @@ describe('Test Inline Loading', function() {
     });
   });
 
-  describe('Setting state', function() {
+  describe('Setting state', function () {
     let elem;
     let instance;
 
-    beforeEach(function() {
+    beforeEach(function () {
       elem = document.createElement('div');
       elem.innerHTML = InlineLoadingHTML;
     });
 
-    it('Should support setting the initial state via options', function() {
+    it('Should support setting the initial state via options', function () {
       instance = new InlineLoading(
         elem.querySelector('[data-inline-loading]'),
         { initialState: 'active' }
@@ -71,7 +71,7 @@ describe('Test Inline Loading', function() {
       ).toBe(true);
     });
 
-    it('Should hide everything but spinner when the state is set to inactive', function() {
+    it('Should hide everything but spinner when the state is set to inactive', function () {
       instance = new InlineLoading(
         elem.querySelector('[data-inline-loading]')
       ).setState('inactive');
@@ -110,7 +110,7 @@ describe('Test Inline Loading', function() {
       ).toBe(true);
     });
 
-    it('Should hide elements for finished states when the state is set to active', function() {
+    it('Should hide elements for finished states when the state is set to active', function () {
       instance = new InlineLoading(
         elem.querySelector('[data-inline-loading]')
       ).setState('active');
@@ -149,7 +149,7 @@ describe('Test Inline Loading', function() {
       ).toBe(true);
     });
 
-    it('Should hide elements for active states when the state is set to finished', function() {
+    it('Should hide elements for active states when the state is set to finished', function () {
       instance = new InlineLoading(
         elem.querySelector('[data-inline-loading]')
       ).setState('finished');
@@ -188,7 +188,7 @@ describe('Test Inline Loading', function() {
       ).toBe(true);
     });
 
-    it('Should hide elements for active states when the state is set to error', function() {
+    it('Should hide elements for active states when the state is set to error', function () {
       instance = new InlineLoading(
         elem.querySelector('[data-inline-loading]')
       ).setState('error');
@@ -227,7 +227,7 @@ describe('Test Inline Loading', function() {
       ).toBe(false);
     });
 
-    it('Should throw if a wrong state is passed in', function() {
+    it('Should throw if a wrong state is passed in', function () {
       instance = new InlineLoading(document.createElement('div'));
       expect(() => instance.setState()).toThrowError(
         Error,
@@ -239,12 +239,12 @@ describe('Test Inline Loading', function() {
       );
     });
 
-    it('Should return self', function() {
+    it('Should return self', function () {
       instance = new InlineLoading(document.createElement('div'));
       expect(instance.setState('active')).toBe(instance);
     });
 
-    afterEach(function() {
+    afterEach(function () {
       if (instance) {
         instance = instance.release();
       }
@@ -254,14 +254,14 @@ describe('Test Inline Loading', function() {
     });
   });
 
-  describe('Managing instances', function() {
+  describe('Managing instances', function () {
     let element;
 
-    beforeAll(function() {
+    beforeAll(function () {
       element = document.createElement('a');
     });
 
-    it('Should prevent creating duplicate instances', function() {
+    it('Should prevent creating duplicate instances', function () {
       let first;
       let second;
       try {
@@ -276,7 +276,7 @@ describe('Test Inline Loading', function() {
       }
     });
 
-    it('Should let create a new instance for an element if an earlier one has been released', function() {
+    it('Should let create a new instance for an element if an earlier one has been released', function () {
       let first;
       let second;
       try {

@@ -10,17 +10,23 @@ import { settings } from 'carbon-components';
 const { prefix } = settings;
 
 // Finding nodes in a ListBox
-export const findMenuNode = wrapper =>
+export const findListBoxNode = (wrapper) =>
+  wrapper.find(`.${prefix}--list-box`);
+export const findMenuNode = (wrapper) =>
   wrapper.find(`.${prefix}--list-box__menu`);
 export const findMenuItemNode = (wrapper, index) =>
   wrapper.find('ListBoxMenuItem').at(index);
-export const findMenuIconNode = wrapper =>
+export const findMenuIconNode = (wrapper) =>
   wrapper.find(`.${prefix}--list-box__menu-icon`);
-export const findFieldNode = wrapper =>
+export const findFieldNode = (wrapper) =>
   wrapper.find(`.${prefix}--list-box__field`);
+export const findComboboxNode = (wrapper) =>
+  wrapper.find(`.${prefix}--list-box[role="combobox"]`);
+export const findPopupNode = (wrapper) =>
+  wrapper.find('[aria-haspopup="listbox"]').hostNodes();
 
 // Actions
-export const openMenu = wrapper => findFieldNode(wrapper).simulate('click');
+export const openMenu = (wrapper) => findFieldNode(wrapper).simulate('click');
 
 // Common assertions, useful for validating a11y props are set when needed
 export const assertMenuOpen = (wrapper, mockProps) => {
@@ -28,26 +34,16 @@ export const assertMenuOpen = (wrapper, mockProps) => {
   expect(findMenuIconNode(wrapper).prop('className')).toEqual(
     expect.stringContaining(`${prefix}--list-box__menu-icon--open`)
   );
-  expect(findFieldNode(wrapper).props()).toEqual(
-    expect.objectContaining({
-      'aria-expanded': true,
-      'aria-haspopup': true,
-    })
-  );
+  expect(findPopupNode(wrapper).prop('aria-expanded')).toBe(true);
 };
-export const assertMenuClosed = wrapper => {
+export const assertMenuClosed = (wrapper) => {
   expect(findMenuIconNode(wrapper).prop('className')).toEqual(
     expect.stringContaining(`${prefix}--list-box__menu-icon`)
   );
   expect(findMenuIconNode(wrapper).prop('className')).not.toEqual(
     expect.stringContaining(`${prefix}--list-box__menu-icon--open`)
   );
-  expect(findFieldNode(wrapper).props()).toEqual(
-    expect.objectContaining({
-      'aria-expanded': false,
-      'aria-haspopup': true,
-    })
-  );
+  expect(findPopupNode(wrapper).prop('aria-expanded')).toBe(false);
 };
 
 /**
@@ -58,7 +54,7 @@ export const assertMenuClosed = wrapper => {
  *
  * @returns {{id: string, label: string, value: string}}
  */
-export const generateGenericItem = index => ({
+export const generateGenericItem = (index) => ({
   id: `id-${index}`,
   label: `Item ${index}`,
   value: index,
@@ -72,7 +68,7 @@ export const generateGenericItem = index => ({
  *
  * @returns {{field: string, value: string}}
  */
-export const generateCustomItem = index => ({
+export const generateCustomItem = (index) => ({
   field: `Item ${index}`,
   value: `Custom value ${index}`,
 });

@@ -9,32 +9,9 @@ exports[`DataTable.TableBatchActions should render 1`] = `
   translateWithId={[Function]}
 >
   <div
+    aria-hidden={true}
     className="bx--batch-actions custom-class"
   >
-    <TableActionList>
-      <div
-        className="bx--action-list"
-      >
-        <ForwardRef(Button)
-          className="bx--batch-summary__cancel"
-          disabled={false}
-          kind="primary"
-          onClick={[MockFunction]}
-          tabIndex={-1}
-          type="button"
-        >
-          <button
-            className="bx--batch-summary__cancel bx--btn bx--btn--primary"
-            disabled={false}
-            onClick={[MockFunction]}
-            tabIndex={-1}
-            type="button"
-          >
-            Cancel
-          </button>
-        </ForwardRef(Button)>
-      </div>
-    </TableActionList>
     <div
       className="bx--batch-summary"
     >
@@ -46,6 +23,41 @@ exports[`DataTable.TableBatchActions should render 1`] = `
         </span>
       </p>
     </div>
+    <TableActionList>
+      <div
+        className="bx--action-list"
+      >
+        <Button
+          className="bx--batch-summary__cancel"
+          dangerDescription="danger"
+          disabled={false}
+          isExpressive={false}
+          kind="primary"
+          onClick={[MockFunction]}
+          size="default"
+          tabIndex={-1}
+          tooltipAlignment="center"
+          tooltipPosition="top"
+          type="button"
+        >
+          <button
+            aria-describedby={null}
+            aria-pressed={null}
+            className="bx--batch-summary__cancel bx--btn bx--btn--primary"
+            disabled={false}
+            onBlur={[Function]}
+            onClick={[Function]}
+            onFocus={[Function]}
+            onMouseEnter={[Function]}
+            onMouseLeave={[Function]}
+            tabIndex={-1}
+            type="button"
+          >
+            Cancel
+          </button>
+        </Button>
+      </div>
+    </TableActionList>
   </div>
 </TableBatchActions>
 `;
@@ -59,32 +71,9 @@ exports[`DataTable.TableBatchActions should render 2`] = `
   translateWithId={[Function]}
 >
   <div
+    aria-hidden={false}
     className="bx--batch-actions bx--batch-actions--active custom-class"
   >
-    <TableActionList>
-      <div
-        className="bx--action-list"
-      >
-        <ForwardRef(Button)
-          className="bx--batch-summary__cancel"
-          disabled={false}
-          kind="primary"
-          onClick={[MockFunction]}
-          tabIndex={0}
-          type="button"
-        >
-          <button
-            className="bx--batch-summary__cancel bx--btn bx--btn--primary"
-            disabled={false}
-            onClick={[MockFunction]}
-            tabIndex={0}
-            type="button"
-          >
-            Cancel
-          </button>
-        </ForwardRef(Button)>
-      </div>
-    </TableActionList>
     <div
       className="bx--batch-summary"
     >
@@ -96,6 +85,41 @@ exports[`DataTable.TableBatchActions should render 2`] = `
         </span>
       </p>
     </div>
+    <TableActionList>
+      <div
+        className="bx--action-list"
+      >
+        <Button
+          className="bx--batch-summary__cancel"
+          dangerDescription="danger"
+          disabled={false}
+          isExpressive={false}
+          kind="primary"
+          onClick={[MockFunction]}
+          size="default"
+          tabIndex={0}
+          tooltipAlignment="center"
+          tooltipPosition="top"
+          type="button"
+        >
+          <button
+            aria-describedby={null}
+            aria-pressed={null}
+            className="bx--batch-summary__cancel bx--btn bx--btn--primary"
+            disabled={false}
+            onBlur={[Function]}
+            onClick={[Function]}
+            onFocus={[Function]}
+            onMouseEnter={[Function]}
+            onMouseLeave={[Function]}
+            tabIndex={0}
+            type="button"
+          >
+            Cancel
+          </button>
+        </Button>
+      </div>
+    </TableActionList>
   </div>
 </TableBatchActions>
 `;

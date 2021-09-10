@@ -11,9 +11,9 @@
  * @param {object} config Plugin configuration.
  * @returns {Plugin} A Flatpickr plugin to put adjust the position of calendar dropdown.
  */
-export default config => fp => {
+export default (config) => (fp) => {
   /**
-   * Adjusts the floating meun position after Flatpicker sets it.
+   * Adjusts the floating menu position after Flatpicker sets it.
    */
   const handlePreCalendarPosition = () => {
     Promise.resolve().then(() => {
@@ -43,7 +43,7 @@ export default config => fp => {
           'Floating menu container must not have `position:static`.'
         );
       }
-      // `2` for negative mergin on calendar dropdown
+      // `2` for negative margin on calendar dropdown
       calendarContainer.style.top = `${refBottom - containerTop + 2}px`;
       calendarContainer.style.left = `${refLeft - containerLeft}px`;
     });

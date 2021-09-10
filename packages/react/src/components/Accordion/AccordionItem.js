@@ -11,31 +11,37 @@ import cx from 'classnames';
 import PropTypes from 'prop-types';
 import React, { useState } from 'react';
 import { match, keys } from '../../internal/keyboard';
+import { useId } from '../../internal/useId';
+import deprecate from '../../prop-types/deprecate.js';
 
 const { prefix } = settings;
-const defaultRenderExpando = props => <button {...props} />;
+const defaultRenderExpando = (props) => <button type="button" {...props} />;
 
 function AccordionItem({
   children,
   className: customClassName,
-  iconDescription = 'Expand/Collapse',
+  iconDescription, // eslint-disable-line
   open = false,
   onHeadingClick,
   renderExpando: Expando = defaultRenderExpando,
   title = 'title',
+  disabled,
   ...rest
 }) {
   const [isOpen, setIsOpen] = useState(open);
   const [prevIsOpen, setPrevIsOpen] = useState(open);
   const [animation, setAnimation] = useState('');
+  const id = useId('accordion-item');
   const className = cx({
     [`${prefix}--accordion__item`]: true,
     [`${prefix}--accordion__item--active`]: isOpen,
     [`${prefix}--accordion__item--${animation}`]: animation,
+    [`${prefix}--accordion__item--disabled`]: disabled,
     [customClassName]: !!customClassName,
   });
 
   if (open !== prevIsOpen) {
+    setAnimation(isOpen ? 'collapsing' : 'expanding');
     setIsOpen(open);
     setPrevIsOpen(open);
   }
@@ -70,19 +76,19 @@ function AccordionItem({
   return (
     <li className={className} {...rest} onAnimationEnd={handleAnimationEnd}>
       <Expando
+        disabled={disabled}
+        aria-controls={id}
         aria-expanded={isOpen}
         className={`${prefix}--accordion__heading`}
         onClick={onClick}
         onKeyDown={onKeyDown}
-        title={iconDescription}
         type="button">
-        <ChevronRight16
-          aria-label={iconDescription}
-          className={`${prefix}--accordion__arrow`}
-        />
+        <ChevronRight16 className={`${prefix}--accordion__arrow`} />
         <div className={`${prefix}--accordion__title`}>{title}</div>
       </Expando>
-      <div className={`${prefix}--accordion__content`}>{children}</div>
+      <div id={id} className={`${prefix}--accordion__content`}>
+        {children}
+      </div>
     </li>
   );
 }
@@ -99,25 +105,20 @@ AccordionItem.propTypes = {
   className: PropTypes.string,
 
   /**
-   * The accordion title.
+   * Specify whether an individual AccordionItem should be disabled
    */
-  title: PropTypes.node,
-
-  /**
-   * The callback function to render the expando button.
-   * Can be a React component class.
-   */
-  renderExpando: PropTypes.func,
+  disabled: PropTypes.bool,
 
   /**
    * The description of the expando icon.
    */
-  iconDescription: PropTypes.string,
-
-  /**
-   * `true` to open the expando.
-   */
-  open: PropTypes.bool,
+  iconDescription: deprecate(
+    PropTypes.string,
+    'The `iconDescription` prop has been deprecated as it is no longer ' +
+      'required. Feel free to remove this prop from <AccordionItem>. This ' +
+      'prop will be removed in the next major release of ' +
+      '`carbon-components-react`'
+  ),
 
   /**
    * The handler of the massaged `click` event.
@@ -128,6 +129,22 @@ AccordionItem.propTypes = {
    * The handler of the massaged `click` event on the heading.
    */
   onHeadingClick: PropTypes.func,
+
+  /**
+   * `true` to open the expando.
+   */
+  open: PropTypes.bool,
+
+  /**
+   * The callback function to render the expando button.
+   * Can be a React component class.
+   */
+  renderExpando: PropTypes.func,
+
+  /**
+   * The accordion title.
+   */
+  title: PropTypes.node,
 };
 
 export default AccordionItem;

@@ -1,11 +1,15 @@
 {
   "name": "@carbon/motion",
   "description": "Motion helpers for digital and software products using the Carbon Design System",
-  "version": "10.5.0",
+  "version": "10.23.0",
   "license": "Apache-2.0",
   "main": "lib/index.js",
   "module": "es/index.js",
-  "repository": "https://github.com/carbon-design-system/carbon/tree/master/packages/motion",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/carbon-design-system/carbon.git",
+    "directory": "packages/motion"
+  },
   "bugs": "https://github.com/carbon-design-system/carbon/issues",
   "keywords": [
     "eyeglass-module",
@@ -21,11 +25,11 @@
     "access": "public"
   },
   "scripts": {
-    "build": "yarn clean && bundler bundle src/index.js --name CarbonMotion && bundler sassdoc \"scss/*.scss\"",
+    "build": "yarn clean && carbon-cli bundle src/index.js --name CarbonMotion",
     "clean": "rimraf es lib umd"
   },
   "devDependencies": {
-    "@carbon/bundler": "^10.5.0",
+    "@carbon/cli": "^10.28.0",
     "rimraf": "^3.0.0"
   },
   "eyeglass": {

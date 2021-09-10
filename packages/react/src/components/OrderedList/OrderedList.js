@@ -12,10 +12,23 @@ import { settings } from 'carbon-components';
 
 const { prefix } = settings;
 
-const OrderedList = ({ children, className, nested, ...other }) => {
-  const classNames = classnames(`${prefix}--list--ordered`, className, {
-    [`${prefix}--list--nested`]: nested,
-  });
+const OrderedList = ({
+  children,
+  className,
+  nested,
+  native,
+  isExpressive,
+  ...other
+}) => {
+  const classNames = classnames(
+    {
+      [`${prefix}--list--ordered`]: !native,
+      [`${prefix}--list--ordered--native`]: native,
+      [`${prefix}--list--nested`]: nested,
+      [`${prefix}--list--expressive`]: isExpressive,
+    },
+    className
+  );
   return (
     <ol className={classNames} {...other}>
       {children}
@@ -35,6 +48,16 @@ OrderedList.propTypes = {
   className: PropTypes.string,
 
   /**
+   * Specify whether this ordered list expressive or not
+   */
+  isExpressive: PropTypes.bool,
+
+  /**
+   * Specify whether this ordered list should use native list styles instead of custom counter
+   */
+  native: PropTypes.bool,
+
+  /**
    * Specify whether this ordered list is nested inside of another nested list
    */
   nested: PropTypes.bool,
@@ -42,6 +65,8 @@ OrderedList.propTypes = {
 
 OrderedList.defaultProps = {
   nested: false,
+  native: false,
+  isExpressive: false,
 };
 
 export default OrderedList;

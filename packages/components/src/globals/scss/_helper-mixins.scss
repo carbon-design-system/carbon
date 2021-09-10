@@ -46,7 +46,8 @@
 /// @example @include placeholder-colors;
 /// @group global-helpers
 @mixin placeholder-colors {
-  color: $text-03;
+  color: $text-05;
+  opacity: 1;
 }
 
 /// Adds box shadow
@@ -54,7 +55,7 @@
 /// @example @include box-shadow;
 /// @group global-helpers
 @mixin box-shadow {
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
 }
 
 /// Adds outline styles depending on specific type
@@ -65,6 +66,10 @@
 @mixin focus-outline($type: 'border') {
   @if ($type == 'border') {
     outline: 1px solid $focus;
+
+    @media screen and (prefers-contrast) {
+      outline-style: dotted;
+    }
   }
 
   @if ($type == 'blurred') {
@@ -75,16 +80,28 @@
   @if ($type == 'outline') {
     outline: 2px solid $focus;
     outline-offset: -2px;
+
+    @media screen and (prefers-contrast) {
+      outline-style: dotted;
+    }
   }
 
   @if ($type == 'outline-compat') {
-    border: 2px solid $focus;
     box-sizing: border-box;
+    border: 2px solid $focus;
+
+    @media screen and (prefers-contrast) {
+      border-style: dotted;
+    }
   }
 
   @if ($type == 'invalid') {
     outline: 2px solid $support-01;
     outline-offset: -2px;
+
+    @media screen and (prefers-contrast) {
+      outline-style: dotted;
+    }
   }
 
   @if ($type == 'reset') {
@@ -102,8 +119,8 @@
 /// @group global-helpers
 @mixin rotate($deg, $speed, $origin: center) {
   transform: rotate($deg);
-  transition: transform $speed;
   transform-origin: $origin;
+  transition: transform $speed;
 }
 
 /// Adds styles to hide content
@@ -111,14 +128,14 @@
 /// @group global-helpers
 @mixin hidden {
   position: absolute;
+  overflow: hidden;
   width: 1px;
   height: 1px;
   padding: 0;
-  margin: -1px;
-  overflow: hidden;
-  clip: rect(0, 0, 0, 0);
   border: 0;
-  visibility: visible;
+  margin: -1px;
+  clip: rect(0, 0, 0, 0);
+  visibility: inherit;
   white-space: nowrap;
 }
 
@@ -129,11 +146,12 @@
 /// @group global-helpers
 @mixin button-reset($width: true) {
   @include reset;
+
   display: inline-block;
-  background: none;
-  appearance: none;
-  border: 0;
   padding: 0;
+  border: 0;
+  appearance: none;
+  background: none;
   cursor: pointer;
 
   @if ($width == true) {
@@ -151,29 +169,28 @@
 /// @group global-helpers
 @mixin skeleton {
   position: relative;
-  border: none;
   padding: 0;
+  border: none;
+  background: $skeleton-01;
   box-shadow: none;
   pointer-events: none;
-  background: $skeleton-01;
 
   &:hover,
   &:focus,
   &:active {
     border: none;
-    outline: none;
     cursor: default;
+    outline: none;
   }
 
-  &:before {
-    content: '';
-    width: 0%;
-    height: 100%;
+  &::before {
     position: absolute;
-    top: 0;
-    left: 0;
-    background: $skeleton-02;
+    width: 100%;
+    height: 100%;
     animation: 3000ms ease-in-out skeleton infinite;
+    background: $skeleton-02;
+    content: '';
+    will-change: transform-origin, transform, opacity;
 
     @media (prefers-reduced-motion: reduce) {
       animation: none;
@@ -184,52 +201,74 @@
 @include exports('skeleton') {
   @keyframes skeleton {
     0% {
-      width: 0%;
-      left: 0;
-      right: auto;
       opacity: 0.3;
+      transform: scaleX(0);
+      transform-origin: left;
     }
     20% {
-      width: 100%;
-      left: 0;
-      right: auto;
       opacity: 1;
+      transform: scaleX(1);
+      transform-origin: left;
     }
     28% {
-      width: 100%;
-      left: auto;
-      right: 0;
+      transform: scaleX(1);
+      transform-origin: right;
     }
     51% {
-      width: 0%;
-      left: auto;
-      right: 0;
+      transform: scaleX(0);
+      transform-origin: right;
     }
     58% {
-      width: 0%;
-      left: auto;
-      right: 0;
+      transform: scaleX(0);
+      transform-origin: right;
     }
     82% {
-      width: 100%;
-      left: auto;
-      right: 0;
+      transform: scaleX(1);
+      transform-origin: right;
     }
     83% {
-      width: 100%;
-      left: 0;
-      right: auto;
+      transform: scaleX(1);
+      transform-origin: left;
     }
     96% {
-      width: 0%;
-      left: 0;
-      right: auto;
+      transform: scaleX(0);
+      transform-origin: left;
     }
     100% {
-      width: 0%;
-      left: 0;
-      right: auto;
       opacity: 0.3;
+      transform: scaleX(0);
+      transform-origin: left;
     }
+  }
+}
+
+/// Windows HCM Mixin
+/// @access public
+/// @example @include high-contrast-mode;
+/// @group global-helpers
+/// We should set HCM styles at the end of each file to ensure they are not overridden
+@mixin high-contrast-mode($type: '') {
+  @media screen and (-ms-high-contrast: active),
+    (forced-colors: active),
+    (prefers-contrast) {
+    @if ($type == 'icon-fill') {
+      fill: ButtonText;
+    }
+
+    @if ($type == 'focus') {
+      color: Highlight;
+      outline: 1px solid Highlight;
+    }
+
+    @if ($type == 'outline') {
+      outline: 1px solid transparent;
+    }
+
+    @if ($type == 'disabled') {
+      color: GrayText;
+      fill: GrayText;
+    }
+
+    @content;
   }
 }

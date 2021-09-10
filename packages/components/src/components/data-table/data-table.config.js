@@ -202,7 +202,7 @@ const columnsExpandable = [
   },
 ];
 
-const columnsSmall = columns.slice(1, -1).map(column => ({
+const columnsSmall = columns.slice(1, -1).map((column) => ({
   ...column,
   sortable: false,
 }));

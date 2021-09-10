@@ -21,7 +21,8 @@ describe('HeaderMenu', () => {
     mockProps = {
       'aria-label': 'Accessibility label',
       className: 'custom-class',
-      // We use `ref` instead of `focusRef` becase `HeaderMenu` forwards the ref
+      menuLinkName: 'test',
+      // We use `ref` instead of `focusRef` because `HeaderMenu` forwards the ref
       // to the underlying menu button
       ref: jest.fn(),
       tabIndex: -1,
@@ -34,17 +35,17 @@ describe('HeaderMenu', () => {
     mountNode.parentNode.removeChild(mountNode);
   });
 
-  const wrapper = mount(
-    <HeaderMenu {...mockProps}>
-      <HeaderMenuItem href="/a">A</HeaderMenuItem>
-      <HeaderMenuItem href="/b">B</HeaderMenuItem>
-      <HeaderMenuItem href="/c">C</HeaderMenuItem>
-    </HeaderMenu>,
-    {
-      attachTo: mountNode,
-    }
-  );
   it('should render', () => {
+    const wrapper = mount(
+      <HeaderMenu {...mockProps}>
+        <HeaderMenuItem href="/a">A</HeaderMenuItem>
+        <HeaderMenuItem href="/b">B</HeaderMenuItem>
+        <HeaderMenuItem href="/c">C</HeaderMenuItem>
+      </HeaderMenu>,
+      {
+        attachTo: mountNode,
+      }
+    );
     expect(wrapper).toMatchSnapshot();
   });
 
@@ -83,7 +84,7 @@ describe('HeaderMenu', () => {
     const headerMenu = wrapper.childAt(0);
     const headerMenuAnchorChildText = headerMenu
       .find(`.${prefix}--header__menu-title`)
-      .childAt(0)
+      .childAt(1)
       .text();
     const headerMenuText = headerMenu
       .find(`.${prefix}--header__menu-title`)
@@ -94,7 +95,18 @@ describe('HeaderMenu', () => {
   });
 
   describe('menu button interactions', () => {
-    it('should should open and close', () => {
+    it('should open and close', () => {
+      const wrapper = mount(
+        <HeaderMenu {...mockProps}>
+          <HeaderMenuItem href="/a">A</HeaderMenuItem>
+          <HeaderMenuItem href="/b">B</HeaderMenuItem>
+          <HeaderMenuItem href="/c">C</HeaderMenuItem>
+        </HeaderMenu>,
+        {
+          attachTo: mountNode,
+        }
+      );
+
       const headerMenu = wrapper.childAt(0);
       const headerInstance = headerMenu.instance();
 

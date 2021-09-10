@@ -5,11 +5,11 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+import { settings } from 'carbon-components';
 import PropTypes from 'prop-types';
 import React from 'react';
 import RadioTile from '../RadioTile';
-import warning from 'warning';
-import { settings } from 'carbon-components';
+import { warning } from '../../internal/warning';
 
 const { prefix } = settings;
 
@@ -36,25 +36,25 @@ export default class TileGroup extends React.Component {
     defaultSelected: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
 
     /**
-     * Specify the name of the underlying <input> nodes
-     */
-    name: PropTypes.string.isRequired,
-
-    /**
      * Specify whether the group is disabled
      */
     disabled: PropTypes.bool,
+
+    /**
+     * Provide an optional legend for this group
+     */
+    legend: PropTypes.string,
+
+    /**
+     * Specify the name of the underlying `<input>` nodes
+     */
+    name: PropTypes.string.isRequired,
 
     /**
      * Provide an optional `onChange` hook that is called whenever the value of
      * the group changes
      */
     onChange: PropTypes.func,
-
-    /**
-     * Provide an optional legend for this group
-     */
-    legend: PropTypes.string,
 
     /**
      * Specify the value that is currently selected in the group
@@ -78,7 +78,7 @@ export default class TileGroup extends React.Component {
 
   getRadioTiles = () => {
     const childrenArray = React.Children.toArray(this.props.children);
-    const children = childrenArray.map(tileRadio => {
+    const children = childrenArray.map((tileRadio) => {
       const { value, ...other } = tileRadio.props;
       /* istanbul ignore if */
       if (typeof tileRadio.props.checked !== 'undefined') {
@@ -111,9 +111,9 @@ export default class TileGroup extends React.Component {
     }
   };
 
-  renderLegend = legend => {
+  renderLegend = (legend) => {
     if (legend) {
-      return <legend>{legend}</legend>;
+      return <legend className={`${prefix}--label`}>{legend}</legend>;
     }
   };
 

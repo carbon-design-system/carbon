@@ -21,14 +21,14 @@ const TextInputSkeleton = ({ hideLabel, className, ...rest }) => (
 
 TextInputSkeleton.propTypes = {
   /**
-   * Specify whether the label should be hidden, or not
-   */
-  hideLabel: PropTypes.bool,
-
-  /**
    * Specify an optional className to add to the form item wrapper.
    */
   className: PropTypes.string,
+
+  /**
+   * Specify whether the label should be hidden, or not
+   */
+  hideLabel: PropTypes.bool,
 };
 
 export default TextInputSkeleton;

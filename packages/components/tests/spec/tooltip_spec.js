@@ -1,9 +1,9 @@
 import Tooltip from '../../src/components/tooltip/tooltip';
 import HTML from '../../html/tooltip/tooltip.html';
 
-describe('Test tooltip', function() {
-  describe('Constructor', function() {
-    it('Should throw if root element is not given', function() {
+describe('Test tooltip', function () {
+  describe('Constructor', function () {
+    it('Should throw if root element is not given', function () {
       expect(() => {
         new Tooltip();
       }).toThrowError(
@@ -12,7 +12,7 @@ describe('Test tooltip', function() {
       );
     });
 
-    it('Should throw if root element is not a DOM element', function() {
+    it('Should throw if root element is not a DOM element', function () {
       expect(() => {
         new Tooltip(document.createTextNode(''));
       }).toThrowError(
@@ -22,7 +22,7 @@ describe('Test tooltip', function() {
     });
   });
 
-  describe('Showing/hiding', function() {
+  describe('Showing/hiding', function () {
     const container = document.createElement('div');
     container.innerHTML = HTML;
 
@@ -30,33 +30,33 @@ describe('Test tooltip', function() {
     const floating = container.querySelector('.bx--tooltip');
     let tooltip;
 
-    beforeAll(function() {
+    beforeAll(function () {
       document.body.appendChild(container);
       return Tooltip.__with__({
-        debounce: fn => fn,
+        debounce: (fn) => fn,
       })(() => {
         tooltip = new Tooltip(element);
       });
     });
 
-    it('Content should be programmatically focusable', function() {
+    it('Content should be programmatically focusable', function () {
       element.dispatchEvent(new CustomEvent('click', { bubbles: true }));
       const content = floating.querySelector('.bx--tooltip__content');
 
       expect(content.getAttribute('tabindex')).toBe('-1');
     });
 
-    it('Should show the tooltip upon clicking', function() {
+    it('Should show the tooltip upon clicking', function () {
       element.dispatchEvent(new CustomEvent('click', { bubbles: true }));
       expect(floating.classList.contains('bx--tooltip--shown')).toBe(true);
     });
 
-    it('Should apply focus to a child element upon opening', function() {
+    it('Should apply focus to a child element upon opening', function () {
       element.dispatchEvent(new CustomEvent('click', { bubbles: true }));
       expect(document.activeElement.closest('.bx--tooltip')).not.toBe(null);
     });
 
-    it('Should remain open upon focusing the content within the tooltip', function() {
+    it('Should remain open upon focusing the content within the tooltip', function () {
       element.dispatchEvent(new CustomEvent('click', { bubbles: true }));
 
       const content = floating.querySelector('.bx--tooltip__content');
@@ -66,17 +66,17 @@ describe('Test tooltip', function() {
 
     // Known bug: https://github.com/carbon-design-system/carbon/issues/3835
 
-    it('Should hide the tooltip upon blurring', function() {
+    it('Should hide the tooltip upon blurring', function () {
       floating.classList.add('bx--tooltip--shown');
       element.dispatchEvent(new CustomEvent('blur', { bubbles: true }));
       expect(floating.classList.contains('bx--tooltip--shown')).toBe(false);
     });
 
-    afterEach(function() {
+    afterEach(function () {
       floating.classList.remove('bx--tooltip--shown');
     });
 
-    afterAll(function() {
+    afterAll(function () {
       if (document.body.contains(floating)) {
         floating.parentNode.removeChild(floating);
       }
@@ -88,7 +88,7 @@ describe('Test tooltip', function() {
     });
   });
 
-  describe('Automatic creation', function() {
+  describe('Automatic creation', function () {
     const container = document.createElement('div');
     container.innerHTML = HTML;
 
@@ -96,21 +96,21 @@ describe('Test tooltip', function() {
     const floating = container.querySelector('.bx--tooltip');
     let initContext;
 
-    beforeAll(function() {
+    beforeAll(function () {
       document.body.appendChild(container);
       initContext = Tooltip.init();
     });
 
-    it('Should create an instance upon clicking', function() {
+    it('Should create an instance upon clicking', function () {
       return Tooltip.__with__({
-        debounce: fn => fn,
+        debounce: (fn) => fn,
       })(() => {
         element.dispatchEvent(new CustomEvent('click', { bubbles: true }));
         expect(floating.classList.contains('bx--tooltip--shown')).toBe(true);
       });
     });
 
-    afterEach(function() {
+    afterEach(function () {
       floating.classList.remove('bx--tooltip--shown');
       const tooltip = Tooltip.components.get(element);
       if (tooltip) {
@@ -118,7 +118,7 @@ describe('Test tooltip', function() {
       }
     });
 
-    afterAll(function() {
+    afterAll(function () {
       if (initContext) {
         initContext.release();
       }

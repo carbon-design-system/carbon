@@ -5,17 +5,17 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React from 'react';
-import PropTypes from 'prop-types';
 import { settings } from 'carbon-components';
-import classNames from 'classnames';
-import { Filename } from './FileUploader';
+import cx from 'classnames';
+import PropTypes from 'prop-types';
+import React, { useRef } from 'react';
+import Filename from './Filename';
 import { keys, matches } from '../../internal/keyboard';
 import uid from '../../tools/uniqueId';
 
 const { prefix } = settings;
 
-export default function FileUploaderItem({
+function FileUploaderItem({
   uuid,
   name,
   status,
@@ -24,29 +24,35 @@ export default function FileUploaderItem({
   invalid,
   errorSubject,
   errorBody,
+  size,
   ...other
 }) {
-  const classes = classNames(`${prefix}--file__selected-file`, {
+  const { current: id } = useRef(uuid || uid());
+  const classes = cx(`${prefix}--file__selected-file`, {
     [`${prefix}--file__selected-file--invalid`]: invalid,
+    [`${prefix}--file__selected-file--md`]: size === 'field' || size === 'md',
+    [`${prefix}--file__selected-file--sm`]: size === 'small' || size === 'sm',
   });
   return (
     <span className={classes} {...other}>
-      <p className={`${prefix}--file-filename`}>{name}</p>
+      <p className={`${prefix}--file-filename`} title={name}>
+        {name}
+      </p>
       <span className={`${prefix}--file__state-container`}>
         <Filename
           iconDescription={iconDescription}
           status={status}
           invalid={invalid}
-          onKeyDown={evt => {
+          onKeyDown={(evt) => {
             if (matches(evt, [keys.Enter, keys.Space])) {
               if (status === 'edit') {
-                onDelete(evt, { uuid });
+                onDelete(evt, { uuid: id });
               }
             }
           }}
-          onClick={evt => {
+          onClick={(evt) => {
             if (status === 'edit') {
-              onDelete(evt, { uuid });
+              onDelete(evt, { uuid: id });
             }
           }}
         />
@@ -69,19 +75,14 @@ export default function FileUploaderItem({
 
 FileUploaderItem.propTypes = {
   /**
-   * Unique identifier for the file object
+   * Error message body for an invalid file upload
    */
-  uuid: PropTypes.string.isRequired,
+  errorBody: PropTypes.string,
 
   /**
-   * Name of the uploaded file
+   * Error message subject for an invalid file upload
    */
-  name: PropTypes.string,
-
-  /**
-   * Status of the file upload
-   */
-  status: PropTypes.oneOf(['uploading', 'edit', 'complete']),
+  errorSubject: PropTypes.string,
 
   /**
    * Description of status icon (displayed in native tooltip)
@@ -94,24 +95,37 @@ FileUploaderItem.propTypes = {
   invalid: PropTypes.bool,
 
   /**
+   * Name of the uploaded file
+   */
+  name: PropTypes.string,
+
+  /**
    * Event handler that is called after removing a file from the file uploader
    * The event handler signature looks like `onDelete(evt, { uuid })`
    */
   onDelete: PropTypes.func,
 
   /**
-   * Error message subject for an invalid file upload
+   * Specify the size of the uploaded items, from a list of available
+   * sizes. For `default` buttons, this prop can remain unspecified.
+   * V11: `default`, `field`, and `small` will be removed
    */
-  errorSubject: PropTypes.string,
+  size: PropTypes.oneOf(['default', 'field', 'small', 'sm', 'md', 'lg']),
 
   /**
-   * Error message body for an invalid file upload
+   * Status of the file upload
    */
-  errorBody: PropTypes.string,
+  status: PropTypes.oneOf(['uploading', 'edit', 'complete']),
+
+  /**
+   * Unique identifier for the file object
+   */
+  uuid: PropTypes.string,
 };
 
 FileUploaderItem.defaultProps = {
-  uuid: uid(),
   status: 'uploading',
   onDelete: () => {},
 };
+
+export default FileUploaderItem;

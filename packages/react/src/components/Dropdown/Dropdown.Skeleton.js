@@ -9,21 +9,30 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import cx from 'classnames';
 import { settings } from 'carbon-components';
+import deprecate from '../../prop-types/deprecate';
+import { PropTypes as ListBoxPropTypes } from '../ListBox';
 
 const { prefix } = settings;
 
-const DropdownSkeleton = ({ inline, className, ...rest }) => {
+const DropdownSkeleton = ({
+  className,
+  size,
+  // TODO: `inline` is deprecated, remove in next major release
+  // eslint-disable-next-line no-unused-vars
+  inline,
+  ...rest
+}) => {
   const wrapperClasses = cx(className, {
     [`${prefix}--skeleton`]: true,
     [`${prefix}--dropdown-v2`]: true,
     [`${prefix}--list-box`]: true,
     [`${prefix}--form-item`]: true,
-    [`${prefix}--list-box--inline`]: inline,
+    [`${prefix}--list-box--${size}`]: size,
   });
 
   return (
     <div className={wrapperClasses} {...rest}>
-      <div role="button" className={`${prefix}--list-box__field`}>
+      <div className={`${prefix}--list-box__field`}>
         <span className={`${prefix}--list-box__label`} />
       </div>
     </div>
@@ -32,18 +41,23 @@ const DropdownSkeleton = ({ inline, className, ...rest }) => {
 
 DropdownSkeleton.propTypes = {
   /**
-   * Specify whether you want the inline version of this control
-   */
-  inline: PropTypes.bool,
-
-  /**
    * Specify an optional className to add.
    */
   className: PropTypes.string,
-};
 
-DropdownSkeleton.defaultProps = {
-  inline: false,
+  /**
+   * Specify whether you want the inline version of this control
+   */
+  inline: deprecate(
+    PropTypes.bool,
+    `The \`inline\` prop has been deprecated and will
+    be removed in the next major release. To specify the inline variant of Dropdown, please use the \`type\` prop.`
+  ),
+
+  /**
+   * Specify the size of the ListBox.
+   */
+  size: ListBoxPropTypes.ListBoxSize,
 };
 
 export default DropdownSkeleton;

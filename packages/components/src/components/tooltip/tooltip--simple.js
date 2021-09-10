@@ -5,6 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+import debounce from 'lodash.debounce';
 import settings from '../../globals/js/settings';
 import mixin from '../../globals/js/misc/mixin';
 import createComponent from '../../globals/js/mixins/create-component';
@@ -28,20 +29,32 @@ export default class TooltipSimple extends mixin(
   constructor(element, options) {
     super(element, options);
     this.manage(
-      on(this.element.ownerDocument, 'keydown', event => {
+      on(this.element.ownerDocument, 'keydown', (event) => {
         // ESC
         if (event.which === 27) {
           this.allowTooltipVisibility({ visible: false });
+          const tooltipTriggerButton = this.getTooltipTriggerButton();
+          if (tooltipTriggerButton) {
+            tooltipTriggerButton.classList.remove(
+              this.options.classTooltipVisible
+            );
+          }
         }
       })
     );
     this.manage(
-      on(this.element, 'mouseenter', () =>
-        this.allowTooltipVisibility({ visible: true })
-      )
+      on(this.element, 'mouseenter', () => {
+        this.tooltipFadeOut.cancel();
+        this.allowTooltipVisibility({ visible: true });
+        const tooltipTriggerButton = this.getTooltipTriggerButton();
+        if (tooltipTriggerButton) {
+          tooltipTriggerButton.classList.add(this.options.classTooltipVisible);
+        }
+      })
     );
+    this.manage(on(this.element, 'mouseleave', this.tooltipFadeOut));
     this.manage(
-      on(this.element, 'focus', event => {
+      on(this.element, 'focusin', (event) => {
         if (eventMatches(event, this.options.selectorTriggerButton)) {
           this.allowTooltipVisibility({ visible: true });
         }
@@ -49,12 +62,20 @@ export default class TooltipSimple extends mixin(
     );
   }
 
-  allowTooltipVisibility = ({ visible }) => {
-    const tooltipTriggerButton = this.element.matches(
-      this.options.selectorTriggerButton
-    )
+  tooltipFadeOut = debounce(() => {
+    const tooltipTriggerButton = this.getTooltipTriggerButton();
+    if (tooltipTriggerButton) {
+      tooltipTriggerButton.classList.remove(this.options.classTooltipVisible);
+    }
+  }, 100);
+
+  getTooltipTriggerButton = () =>
+    this.element.matches(this.options.selectorTriggerButton)
       ? this.element
       : this.element.querySelector(this.options.selectorTriggerButton);
+
+  allowTooltipVisibility = ({ visible }) => {
+    const tooltipTriggerButton = this.getTooltipTriggerButton();
 
     if (!tooltipTriggerButton) {
       return;
@@ -73,7 +94,7 @@ export default class TooltipSimple extends mixin(
    * If `options` is specified in the constructor,
    * {@linkcode TooltipSimple.create .create()},
    * or {@linkcode TooltipSimple.init .init()},
-   * properties in this object are overriden for the instance being
+   * properties in this object are overridden for the instance being
    * created and how {@linkcode TooltipSimple.init .init()} works.
    * @property {string} selectorInit The CSS selector to find simple tooltip UIs.
    */
@@ -83,6 +104,7 @@ export default class TooltipSimple extends mixin(
       selectorInit: '[data-tooltip-definition],[data-tooltip-icon]',
       selectorTriggerButton: `.${prefix}--tooltip__trigger.${prefix}--tooltip--a11y`,
       classTooltipHidden: `${prefix}--tooltip--hidden`,
+      classTooltipVisible: `${prefix}--tooltip--visible`,
     };
   }
 

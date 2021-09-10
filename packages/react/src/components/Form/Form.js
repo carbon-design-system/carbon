@@ -14,7 +14,6 @@ const { prefix } = settings;
 
 const Form = ({ className, children, ...other }) => {
   const classNames = classnames(`${prefix}--form`, className);
-
   return (
     <form className={classNames} {...other}>
       {' '}

@@ -13,8 +13,8 @@ const { colors } = tokens;
 
 describe('tokens', () => {
   describe('colors', () => {
-    test.each(colors)('%s should be grouped in meta', color => {
-      const entry = meta.colors.find(group => {
+    test.each(colors)('%s should be grouped in meta', (color) => {
+      const entry = meta.colors.find((group) => {
         return group.tokens.includes(color);
       });
       expect(entry).toBeDefined();

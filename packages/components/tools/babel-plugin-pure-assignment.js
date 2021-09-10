@@ -4,7 +4,7 @@ const regexPure = /^\s*[#@]__PURE__\s*$/;
 const regexPureClassProperty = /^\s*[#@]__PURE_CLASS_PROPERTY__\s*$/;
 
 /**
- * @param {Map} map The `Map` instanve.
+ * @param {Map} map The `Map` instance.
  * @param {string} key The key in the given `map`.
  * @param createFn
  *   A function that returns the value for the new map item.
@@ -53,7 +53,7 @@ module.exports = function convertPureAssignment(babel) {
         const { left, computed, optional } = expression;
         const comment =
           left.trailingComments &&
-          left.trailingComments.find(item =>
+          left.trailingComments.find((item) =>
             regexPureClassProperty.test(item.value)
           );
         if (
@@ -70,7 +70,7 @@ module.exports = function convertPureAssignment(babel) {
             binding &&
             init.type === 'CallExpression' &&
             init.leadingComments &&
-            init.leadingComments.some(item => regexPure.test(item.value))
+            init.leadingComments.some((item) => regexPure.test(item.value))
           ) {
             const list = mapGetOrCreate(
               this.pureAssignmentsMap,
@@ -102,19 +102,19 @@ module.exports = function convertPureAssignment(babel) {
       if (pureAssignments) {
         const declarator = t.cloneDeep(path.node);
         const { body } = declarator.init.callee.body;
-        const index = body.findIndex(item => item.type === 'ReturnStatement');
+        const index = body.findIndex((item) => item.type === 'ReturnStatement');
         if (index >= 0) {
           const { argument } = body[index];
           if (argument.type === 'Identifier') {
-            const assignmentsToInsert = pureAssignments.map(node => {
+            const assignmentsToInsert = pureAssignments.map((node) => {
               const clone = t.cloneDeep(node);
               const { left, right } = clone.expression;
               left.object = t.cloneDeep(argument);
               left.trailingComments = left.trailingComments.filter(
-                item => !regexPureClassProperty.test(item.value)
+                (item) => !regexPureClassProperty.test(item.value)
               );
               right.leadingComments = right.leadingComments.filter(
-                item => !regexPureClassProperty.test(item.value)
+                (item) => !regexPureClassProperty.test(item.value)
               );
               return clone;
             });

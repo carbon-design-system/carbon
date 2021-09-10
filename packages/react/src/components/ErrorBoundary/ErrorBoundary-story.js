@@ -6,77 +6,88 @@
  */
 
 import React, { useState } from 'react';
-import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 import { ErrorBoundary, ErrorBoundaryContext } from './';
 import Button from '../Button';
 
-storiesOf('ErrorBoundary', module)
-  .add('default', () => {
-    function DemoComponent() {
-      const [shouldThrowError, setShouldThrowError] = useState(false);
+export default {
+  title: 'Components/ErrorBoundary',
 
-      function onClick() {
-        setShouldThrowError(!shouldThrowError);
-      }
+  parameters: {
+    component: ErrorBoundary,
+  },
+};
 
-      return (
-        <>
-          <Button onClick={onClick}>Toggle throwing error</Button>
-          <div>
-            <ErrorBoundary fallback={<Fallback />}>
-              <ThrowError shouldThrowError={shouldThrowError} />
-            </ErrorBoundary>
-          </div>
-        </>
-      );
+export const Default = () => {
+  function DemoComponent() {
+    const [shouldThrowError, setShouldThrowError] = useState(false);
+
+    function onClick() {
+      setShouldThrowError(!shouldThrowError);
     }
 
-    function Fallback() {
-      return 'Whoops';
+    return (
+      <>
+        <Button onClick={onClick}>Toggle throwing error</Button>
+        <div>
+          <ErrorBoundary fallback={<Fallback />}>
+            <ThrowError shouldThrowError={shouldThrowError} />
+          </ErrorBoundary>
+        </div>
+      </>
+    );
+  }
+
+  function Fallback() {
+    return 'Whoops';
+  }
+
+  function ThrowError({ shouldThrowError }) {
+    if (shouldThrowError) {
+      throw new Error('Component threw error');
     }
 
-    function ThrowError({ shouldThrowError }) {
-      if (shouldThrowError) {
-        throw new Error('Component threw error');
-      }
+    return 'Successfully rendered';
+  }
 
-      return 'Successfully rendered';
+  return <DemoComponent />;
+};
+
+Default.storyName = 'default';
+
+export const WithCustomContext = () => {
+  function DemoComponent() {
+    const [shouldThrowError, setShouldThrowError] = useState(false);
+
+    function onClick() {
+      setShouldThrowError(!shouldThrowError);
     }
 
-    return <DemoComponent />;
-  })
-  .add('with custom context', () => {
-    function DemoComponent() {
-      const [shouldThrowError, setShouldThrowError] = useState(false);
+    return (
+      <ErrorBoundaryContext.Provider value={{ log: action('log') }}>
+        <Button onClick={onClick}>Toggle throwing error</Button>
+        <div>
+          <ErrorBoundary fallback={<Fallback />}>
+            <ThrowError shouldThrowError={shouldThrowError} />
+          </ErrorBoundary>
+        </div>
+      </ErrorBoundaryContext.Provider>
+    );
+  }
 
-      function onClick() {
-        setShouldThrowError(!shouldThrowError);
-      }
+  function Fallback() {
+    return 'Whoops';
+  }
 
-      return (
-        <ErrorBoundaryContext.Provider value={{ log: action('log') }}>
-          <Button onClick={onClick}>Toggle throwing error</Button>
-          <div>
-            <ErrorBoundary fallback={<Fallback />}>
-              <ThrowError shouldThrowError={shouldThrowError} />
-            </ErrorBoundary>
-          </div>
-        </ErrorBoundaryContext.Provider>
-      );
+  function ThrowError({ shouldThrowError }) {
+    if (shouldThrowError) {
+      throw new Error('Component threw error');
     }
 
-    function Fallback() {
-      return 'Whoops';
-    }
+    return 'Successfully rendered';
+  }
 
-    function ThrowError({ shouldThrowError }) {
-      if (shouldThrowError) {
-        throw new Error('Component threw error');
-      }
+  return <DemoComponent />;
+};
 
-      return 'Successfully rendered';
-    }
-
-    return <DemoComponent />;
-  });
+WithCustomContext.storyName = 'with custom context';

@@ -19,6 +19,10 @@ const yaml = require('js-yaml');
 const { formatTokenName, themes, tokens } = require('../lib');
 const buildTokensFile = require('./builders/tokens');
 const buildThemesFile = require('./builders/themes');
+const buildCompatThemesFile = require('./builders/compat/themes');
+const buildCompatTokensFile = require('./builders/compat/tokens');
+const buildModulesThemesFile = require('./builders/modules-themes');
+const buildModulesTokensFile = require('./builders/modules-tokens');
 const buildMixinsFile = require('./builders/mixins');
 
 const defaultTheme = 'white';
@@ -62,10 +66,64 @@ async function build() {
         );
       },
     },
+    {
+      filepath: path.resolve(
+        SCSS_DIR,
+        '..',
+        'compat',
+        'generated',
+        '_themes.scss'
+      ),
+      builder() {
+        return buildCompatThemesFile();
+      },
+    },
+    {
+      filepath: path.resolve(
+        SCSS_DIR,
+        '..',
+        'compat',
+        'generated',
+        '_tokens.scss'
+      ),
+      builder() {
+        return buildCompatTokensFile();
+      },
+    },
+    {
+      filepath: path.resolve(
+        SCSS_DIR,
+        '..',
+        'modules',
+        'generated',
+        '_themes.scss'
+      ),
+      builder() {
+        return buildModulesThemesFile(
+          themes,
+          tokens,
+          defaultTheme,
+          defaultThemeMapName
+        );
+      },
+    },
+    {
+      filepath: path.resolve(
+        SCSS_DIR,
+        '..',
+        'modules',
+        'generated',
+        '_tokens.scss'
+      ),
+      builder() {
+        return buildModulesTokensFile(tokens);
+      },
+    },
   ];
 
-  await fs.ensureDir(SCSS_DIR);
   for (const { filepath, builder } of files) {
+    await fs.ensureFile(filepath);
+
     const { code } = generate(builder());
     await fs.writeFile(filepath, code);
   }
@@ -81,12 +139,12 @@ async function build() {
  */
 function transformMetadata(metadata) {
   const namesRegEx = new RegExp(
-    metadata.tokens.map(token => token.name).join('|'),
+    metadata.tokens.map((token) => token.name).join('|'),
     'g'
   );
 
   const replaceMap = {};
-  metadata.tokens.map(token => {
+  metadata.tokens.map((token) => {
     replaceMap[token.name] = formatTokenName(token.name);
   });
 
@@ -94,7 +152,7 @@ function transformMetadata(metadata) {
     // interactive01 to `$interactive-01`
     if (token.role) {
       token.role.forEach((role, j) => {
-        metadata.tokens[i].role[j] = role.replace(namesRegEx, match => {
+        metadata.tokens[i].role[j] = role.replace(namesRegEx, (match) => {
           return '`$' + replaceMap[match] + '`';
         });
       });
@@ -109,7 +167,7 @@ function transformMetadata(metadata) {
   return metadata;
 }
 
-build().catch(error => {
+build().catch((error) => {
   console.error(error);
   process.exit(1);
 });

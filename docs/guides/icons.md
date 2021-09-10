@@ -147,7 +147,7 @@ update PR:
    ![metadata.yml](https://github.com/IBM/carbon-elements/blob/master/packages/icons/metadata.yml)
    in browser.
 2. find the icon you'd like to edit. Please note that icon names are without
-   `--modifiers`. All icons with `--modifiers` are listed as vairants of the
+   `--modifiers`. All icons with `--modifiers` are listed as variants of the
    same icon.
 3. make desired edits on the icon's `aliases` list.
 4. commit changes, preferably with a commit message "[icon name] metadata

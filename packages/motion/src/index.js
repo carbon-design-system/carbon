@@ -5,6 +5,22 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+export const fast01 = '70ms';
+export const fast02 = '110ms';
+export const moderate01 = '150ms';
+export const moderate02 = '240ms';
+export const slow01 = '400ms';
+export const slow02 = '700ms';
+
+export const unstable_tokens = [
+  'fast01',
+  'fast02',
+  'moderate01',
+  'moderate02',
+  'slow01',
+  'slow02',
+];
+
 export const easings = {
   standard: {
     productive: 'cubic-bezier(0.2, 0, 0.38, 0.9)',

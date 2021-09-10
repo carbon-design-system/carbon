@@ -19,14 +19,14 @@
   .#{$prefix}--accordion {
     @include reset;
 
-    list-style: none;
     width: 100%;
+    list-style: none;
   }
 
   .#{$prefix}--accordion__item {
-    transition: all $duration--fast-02 motion(standard, productive);
-    border-top: 1px solid $ui-03;
     overflow: visible;
+    border-top: 1px solid $ui-03;
+    transition: all $duration--fast-02 motion(standard, productive);
 
     &:last-child {
       border-bottom: 1px solid $ui-03;
@@ -35,26 +35,28 @@
 
   .#{$prefix}--accordion__heading {
     @include button-reset;
-    color: $text-01;
+
+    position: relative;
     display: flex;
+    width: 100%;
+    min-height: rem(40px);
+    flex-direction: $accordion-flex-direction;
     align-items: flex-start;
     justify-content: $accordion-justify-content;
-    cursor: pointer;
-    padding: rem(6px) 0;
-    flex-direction: $accordion-flex-direction;
-    position: relative;
-    width: 100%;
+    padding: rem(10px) 0;
     margin: 0;
+    color: $text-01;
+    cursor: pointer;
     transition: background-color motion(standard, productive) $duration--fast-02;
 
     &:hover::before,
     &:focus::before {
-      content: '';
       position: absolute;
       top: -1px;
       left: 0;
       width: 100%;
       height: calc(100% + 2px);
+      content: '';
     }
 
     &:hover::before {
@@ -65,40 +67,75 @@
       outline: none;
     }
 
-    &:focus:before {
+    &:focus::before {
       @include focus-outline('outline-compat');
     }
   }
 
+  // Size styles
+  // TODO V11: Remove xl selector
+  .#{$prefix}--accordion--xl .#{$prefix}--accordion__heading,
+  .#{$prefix}--accordion--lg .#{$prefix}--accordion__heading {
+    min-height: rem(48px);
+  }
+
+  .#{$prefix}--accordion--sm .#{$prefix}--accordion__heading {
+    min-height: rem(32px);
+    padding: rem(5px) 0;
+  }
+
+  // Disabled styles
+  .#{$prefix}--accordion__heading[disabled] {
+    color: $disabled-02;
+    cursor: not-allowed;
+  }
+
+  .#{$prefix}--accordion__heading[disabled] .#{$prefix}--accordion__arrow {
+    fill: $disabled-02;
+  }
+
+  .#{$prefix}--accordion__heading[disabled]:hover::before {
+    background-color: transparent;
+  }
+
+  .#{$prefix}--accordion__item--disabled,
+  .#{$prefix}--accordion__item--disabled + .#{$prefix}--accordion__item {
+    border-top: 1px solid $disabled-01;
+  }
+
+  li.#{$prefix}--accordion__item--disabled:last-of-type {
+    border-bottom: 1px solid $disabled-01;
+  }
+
   .#{$prefix}--accordion__arrow {
     @include focus-outline('reset');
+
+    width: 1rem;
+    height: 1rem;
     // Without flex basis and flex shrink being set here, our icon width can go
     // <16px and cause the icon to render in the incorrect artboard size
     flex: 0 0 1rem;
-    width: 1rem;
-    height: 1rem;
     margin: $accordion-arrow-margin;
     fill: $ui-05;
-    // TODO: RTL rotate(180deg);
-    transform: rotate(90deg);
+    transform: rotate(-270deg) #{'/*rtl:ignore*/'};
     transition: all $duration--fast-02 motion(standard, productive);
   }
 
   .#{$prefix}--accordion__title {
     @include type-style('body-long-01');
 
-    margin: $accordion-title-margin;
-    width: 100%;
-    text-align: left;
     z-index: 1;
+    width: 100%;
+    margin: $accordion-title-margin;
+    text-align: left;
   }
 
   .#{$prefix}--accordion__content {
     display: none;
+    padding-right: $carbon--spacing-05;
+    padding-left: $carbon--spacing-05;
     // Transition property for when the accordion closes
     transition: padding motion(standard, productive) $duration--fast-02;
-    padding-left: $carbon--spacing-05;
-    padding-right: $carbon--spacing-05;
 
     // Custom breakpoints based on issue #4993
     @include carbon--breakpoint-up(480px) {
@@ -147,17 +184,16 @@
 
     .#{$prefix}--accordion__content {
       display: block;
-      padding-bottom: $carbon--spacing-06;
       padding-top: $spacing-03;
+      padding-bottom: $carbon--spacing-06;
       // Transition property for when the accordion opens
       transition: padding-top motion(entrance, productive) $duration--fast-02,
         padding-bottom motion(entrance, productive) $duration--fast-02;
     }
 
     .#{$prefix}--accordion__arrow {
-      /*rtl:ignore*/
-      transform: rotate(-90deg);
       fill: $ui-05;
+      transform: rotate(-90deg) #{'/*rtl:ignore*/'};
     }
   }
 
@@ -168,17 +204,22 @@
   }
 
   .#{$prefix}--accordion.#{$prefix}--skeleton .#{$prefix}--accordion__arrow {
-    pointer-events: none;
-    fill: $ui-05;
     cursor: default;
+    fill: $ui-05;
+    pointer-events: none;
 
     &:hover,
     &:focus,
     &:active {
       border: none;
-      outline: none;
       cursor: default;
+      outline: none;
     }
+  }
+
+  .#{$prefix}--accordion.#{$prefix}--skeleton
+    .#{$prefix}--accordion__heading:hover::before {
+    background-color: transparent;
   }
 
   .#{$prefix}--accordion--end.#{$prefix}--skeleton
@@ -190,12 +231,18 @@
     .#{$prefix}--accordion__heading:focus
     .#{$prefix}--accordion__arrow {
     border: none;
-    outline: none;
     cursor: default;
+    outline: none;
   }
 
   .#{$prefix}--accordion__title.#{$prefix}--skeleton__text {
     margin-bottom: 0;
+  }
+
+  // Windows HCM fix
+  .#{$prefix}--accordion__arrow,
+  .#{$prefix}--accordion__item--active .#{$prefix}--accordion__arrow {
+    @include high-contrast-mode('icon-fill');
   }
 }
 

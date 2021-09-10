@@ -14,13 +14,24 @@ import settings from '../../globals/js/settings';
 import eventMatches from '../../globals/js/misc/event-matches';
 
 const forEach = /* #__PURE__ */ (() => Array.prototype.forEach)();
-const toArray = arrayLike => Array.prototype.slice.call(arrayLike);
+const toArray = (arrayLike) => Array.prototype.slice.call(arrayLike);
 
-export default class HeaderSubmenu extends mixin(
+class HeaderSubmenu extends mixin(
   createComponent,
   initComponentBySearch,
   handles
 ) {
+  /**
+   * Sub menus in header nav.
+   * @extends CreateComponent
+   * @extends InitComponentBySearch
+   * @extends Handles
+   * @param {HTMLElement} element The element working as a submenu in header nav.
+   * @param {object} [options] The component options.
+   * @param {string} [options.selectorTrigger] The CSS selector to find the trigger button.
+   * @param {string} [options.selectorItem] The CSS selector to find the menu items.
+   * @param {string} [options.attribExpanded] The attribute that represents the expanded/collapsed state.
+   */
   constructor(element, options) {
     super(element, options);
     const hasFocusOut = 'onfocusout' in window;
@@ -60,7 +71,7 @@ export default class HeaderSubmenu extends mixin(
   /**
    * @returns {actions | null}
    */
-  _getAction = event => {
+  _getAction = (event) => {
     const isFlyoutMenu = eventMatches(event, this.options.selectorFlyoutMenu);
     if (isFlyoutMenu) {
       return this.constructor.actions.DELEGATE_TO_FLYOUT_MENU;
@@ -96,7 +107,7 @@ export default class HeaderSubmenu extends mixin(
    * @param {action} action
    * @returns {boolean} new header submenu state
    */
-  _getNewState = action => {
+  _getNewState = (action) => {
     const trigger = this.element.querySelector(this.options.selectorTrigger);
     const isExpanded =
       trigger.getAttribute(this.options.attribExpanded) === 'true';
@@ -121,7 +132,7 @@ export default class HeaderSubmenu extends mixin(
     trigger.setAttribute(this.options.attribExpanded, shouldBeExpanded);
     forEach.call(
       this.element.querySelectorAll(this.options.selectorItem),
-      item => {
+      (item) => {
         item.tabIndex = shouldBeExpanded ? 0 : -1;
       }
     );
@@ -147,14 +158,14 @@ export default class HeaderSubmenu extends mixin(
    * Moves the focus up/down.
    * @param {number} direction The direction of navigating.
    */
-  navigate = direction => {
+  navigate = (direction) => {
     const items = toArray(
       this.element.querySelectorAll(this.options.selectorItem)
     );
     const start =
       this.getCurrentNavigation() ||
       this.element.querySelector(this.options.selectorItemSelected);
-    const getNextItem = old => {
+    const getNextItem = (old) => {
       const handleUnderflow = (index, length) =>
         index + (index >= 0 ? 0 : length);
       const handleOverflow = (index, length) =>
@@ -182,7 +193,7 @@ export default class HeaderSubmenu extends mixin(
     }
   };
 
-  _handleEvent = event => {
+  _handleEvent = (event) => {
     const trigger = this.element.querySelector(this.options.selectorTrigger);
     if (!trigger) {
       return;
@@ -198,7 +209,7 @@ export default class HeaderSubmenu extends mixin(
    * Handles keydown event.
    * @param {Event} event The event triggering this method.
    */
-  _handleKeyDown = event => {
+  _handleKeyDown = (event) => {
     const trigger = this.element.querySelector(this.options.selectorTrigger);
     if (!trigger) {
       return;
@@ -277,11 +288,14 @@ export default class HeaderSubmenu extends mixin(
    * If `options` is specified in the constructor,
    * {@linkcode HeaderSubmenu.create .create()}, or
    * {@linkcode HeaderSubmenu.init .init()},
-   * properties in this object are overriden for the instance being create and
+   * properties in this object are overridden for the instance being create and
    * how {@linkcode HeaderSubmenu.init .init()} works.
    * @member HeaderSubmenu.options
    * @type {object}
    * @property {string} selectorInit The data attribute to find side navs.
+   * @property {string} [selectorTrigger] The CSS selector to find the trigger button.
+   * @property {string} [selectorItem] The CSS selector to find the menu items.
+   * @property {string} [attribExpanded] The attribute that represents the expanded/collapsed state.
    */
   static get options() {
     const { prefix } = settings;
@@ -306,3 +320,5 @@ export default class HeaderSubmenu extends mixin(
     FORWARD: 1,
   };
 }
+
+export default HeaderSubmenu;

@@ -1,0 +1,76 @@
+//
+// Copyright IBM Corp. 2018, 2018
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+@use 'sass:map';
+@use '../../theme' as *;
+@use '../../utilities/custom-property';
+
+$white: (
+  button-separator: #e0e0e0,
+  button-primary: #0f62fe,
+  button-secondary: #393939,
+  button-tertiary: #0f62fe,
+  button-danger-primary: #da1e28,
+  button-danger-secondary: #da1e28,
+  button-danger-active: #750e13,
+  button-primary-active: #002d9c,
+  button-secondary-active: #6f6f6f,
+  button-tertiary-active: #002d9c,
+  button-danger-hover: #b81921,
+  button-primary-hover: #0353e9,
+  button-secondary-hover: #4c4c4c,
+  button-tertiary-hover: #0353e9,
+  button-disabled: #c6c6c6,
+);
+
+$g10: $white;
+
+$g90: map.merge(
+  $white,
+  (
+    button-separator: #161616,
+    button-secondary: #6f6f6f,
+    button-tertiary: #ffffff,
+    button-danger-secondary: #ff8389,
+    button-secondary-active: #393939,
+    button-tertiary-active: #c6c6c6,
+    button-secondary-hover: #606060,
+    button-tertiary-hover: #f4f4f4,
+    button-disabled: #6f6f6f,
+  )
+);
+
+$g100: map.merge(
+  $white,
+  (
+    button-separator: #161616,
+    button-secondary: #6f6f6f,
+    button-tertiary: #ffffff,
+    button-danger-secondary: #fa4d56,
+    button-secondary-active: #393939,
+    button-tertiary-active: #c6c6c6,
+    button-secondary-hover: #606060,
+    button-tertiary-hover: #f4f4f4,
+    button-disabled: #525252,
+  )
+);
+
+$button-separator: custom-property.get-var('button-separator');
+$button-primary: custom-property.get-var('button-primary');
+$button-secondary: custom-property.get-var('button-secondary');
+$button-tertiary: custom-property.get-var('button-tertiary');
+$button-danger-primary: custom-property.get-var('button-danger-primary');
+$button-danger-secondary: custom-property.get-var('button-danger-secondary');
+$button-danger-active: custom-property.get-var('button-danger-active');
+$button-primary-active: custom-property.get-var('button-primary-active');
+$button-secondary-active: custom-property.get-var('button-secondary-active');
+$button-tertiary-active: custom-property.get-var('button-tertiary-active');
+$button-danger-hover: custom-property.get-var('button-danger-hover');
+$button-primary-hover: custom-property.get-var('button-primary-hover');
+$button-secondary-hover: custom-property.get-var('button-secondary-hover');
+$button-tertiary-hover: custom-property.get-var('button-tertiary-hover');
+$button-disabled: custom-property.get-var('button-disabled');

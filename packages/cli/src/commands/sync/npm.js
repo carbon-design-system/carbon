@@ -25,7 +25,7 @@ function run({ packagePaths }) {
 
       if (await fs.pathExists(ignorePath)) {
         const ignoreFile = await fs.readFile(ignorePath, 'utf8');
-        const localIgnorePatterns = ignoreFile.split('\n').filter(pattern => {
+        const localIgnorePatterns = ignoreFile.split('\n').filter((pattern) => {
           return ignorePatterns.indexOf(pattern) === -1;
         });
 

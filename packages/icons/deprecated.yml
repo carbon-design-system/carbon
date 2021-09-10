@@ -1,0 +1,57 @@
+deprecated:
+  - name: app-switcher
+    reason: The app switcher icon has been replaced by switcher
+  - name: arrows
+    reason: The arrows icon has been replaced by arrows--vertical
+  - name: back-to-top
+    reason: The back-to-top icon has been replaced by up-to-top
+  - name: checkbox--undeterminate
+    reason:
+      The checkbox--undeterminate icon has been replaced by
+      checkbox--indeterminate
+  - name: checkbox--undeterminate--filled
+    reason:
+      The checkbox--undeterminate--filled icon has been replaced by
+      checkbox--indeterminate
+  - name: cloud--lightning
+  - name: cloud--rain
+  - name: cloud--snow
+  - name: delete
+    reason: The delete icon has been replaced by trash-can
+  - name: edit-filter
+    reason: The edit-filter icon has been replaced by filter--edit
+  - name: sunny
+  - name: research--bloch-sphere
+    reason: research--bloch-sphere has been replaced by bloch-sphere
+  - name: research--hinton-plot
+    reason: research--hinton-plot has been replaced by hinton-plot
+  - name: research--matrix
+    reason: research--matrix has been replaced by matrix
+  - name: misuse--alt
+    reason: The misuse--alt icon has been replaced by misuse--outline
+  - name: logo--google
+    reason: logo--google has been removed (#5342)
+  - name: mammogram--stacked
+    reason: mammogram--stacked has been removed (#3152)
+  - name: logo--delicious
+    reason: logo--delicious has been removed (#4210)
+  - name: logo--stumbleupon
+    reason: logo--stumbleupon has been removed (#4210)
+  - name: letter--Aa--large
+    reason: letter--Aa--large has been replaced by text--font
+  - name: glyph--caution-inverted
+    reason: glyph--cuation-inverted has been replaced by caution-inverted
+  - name: glyph--caution
+    reason: glyph--caution has been replaced by caution
+  - name: glyph--circle-fill
+    reason: glyph--circle-fill has been replaced by circle-fill
+  - name: glyph--circle-stroke
+    reason: glyph--circle-stroke has been replaced by circle-stroke
+  - name: glyph--critical
+    reason: glyph--critical has been replaced by critical
+  - name: glyph--incomplete
+    reason: glyph--incomplete has been replaced by incomplete
+  - name: glyph--square-fill
+    reason: glyph--square-fill has been replaced by square-fill
+  - name: glyph--undefined
+    reason: glyph--undefined has been replaced by undefined

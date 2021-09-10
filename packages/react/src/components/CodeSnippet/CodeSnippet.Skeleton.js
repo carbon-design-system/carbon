@@ -49,14 +49,14 @@ function CodeSnippetSkeleton({
 
 CodeSnippetSkeleton.propTypes = {
   /**
-   * The type of the code snippet, including single or multi
-   */
-  type: PropTypes.oneOf(['single', 'multi']),
-
-  /**
    * Specify an optional className to be applied to the container node
    */
   className: PropTypes.string,
+
+  /**
+   * The type of the code snippet, including single or multi
+   */
+  type: PropTypes.oneOf(['single', 'multi']),
 };
 
 export default CodeSnippetSkeleton;

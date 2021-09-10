@@ -10,22 +10,31 @@ import Slider from '../Slider';
 import SliderSkeleton from '../Slider/Slider.Skeleton';
 import { mount, shallow } from 'enzyme';
 import 'requestanimationframe';
+import throttle from 'lodash.throttle';
 import { settings } from 'carbon-components';
+
+jest.mock('lodash.throttle');
+
+throttle.mockImplementation((fn) => Object.assign(fn, { throttled: true }));
 
 const { prefix } = settings;
 describe('Slider', () => {
-  describe('Renders as expected', () => {
-    const wrapper = mount(
+  const id = 'slider';
+  let wrapper;
+  beforeEach(() => {
+    wrapper = mount(
       <Slider
-        id="slider"
+        id={id}
         className="extra-class"
-        value={50}
-        min={0}
-        max={100}
+        value={1}
+        min={1}
+        max={3}
         step={1}
       />
     );
+  });
 
+  describe('Renders as expected', () => {
     it('renders children as expected', () => {
       expect(wrapper.find(`.${prefix}--text-input`).length).toBe(1);
     });
@@ -50,10 +59,36 @@ describe('Slider', () => {
       expect(wrapper.props().value).toEqual(55);
     });
 
+    it('should change the value upon change in props', () => {
+      wrapper.setProps({ value: 1 });
+      wrapper.setState({ value: 1 });
+      wrapper.update();
+      wrapper.setProps({ value: 2 });
+      expect(wrapper.state().value).toEqual(2);
+    });
+
+    it('should accurately position slider on mount', () => {
+      expect(wrapper.state().left).toEqual(0);
+    });
+
     it('should specify light version as expected', () => {
       expect(wrapper.props().light).toEqual(false);
       wrapper.setProps({ light: true });
       expect(wrapper.props().light).toEqual(true);
+    });
+
+    it('marks input field as hidden if hidden via props', () => {
+      wrapper.setProps({ hideTextInput: true });
+      expect(wrapper.find(`#${id}-input-for-slider`).props().type).toEqual(
+        'hidden'
+      );
+    });
+
+    it('sets style to display:none on input field if hidden via props', () => {
+      wrapper.setProps({ hideTextInput: true });
+      expect(wrapper.find(`#${id}-input-for-slider`).props().style).toEqual({
+        display: 'none',
+      });
     });
   });
 
@@ -63,16 +98,10 @@ describe('Slider', () => {
         <Slider min={0} minLabel="min" max={100} maxLabel="max" value={0} />
       );
       expect(
-        wrapper
-          .find(`.${prefix}--slider__range-label`)
-          .first()
-          .text()
+        wrapper.find(`.${prefix}--slider__range-label`).first().text()
       ).toBe('0min');
       expect(
-        wrapper
-          .find(`.${prefix}--slider__range-label`)
-          .last()
-          .text()
+        wrapper.find(`.${prefix}--slider__range-label`).last().text()
       ).toBe('100max');
     });
 
@@ -88,21 +117,141 @@ describe('Slider', () => {
         />
       );
       expect(
-        wrapper
-          .find(`.${prefix}--slider__range-label`)
-          .first()
-          .text()
+        wrapper.find(`.${prefix}--slider__range-label`).first().text()
       ).toBe('0-min');
       expect(
-        wrapper
-          .find(`.${prefix}--slider__range-label`)
-          .last()
-          .text()
+        wrapper.find(`.${prefix}--slider__range-label`).last().text()
       ).toBe('100-max');
     });
   });
 
-  describe('updatePosition method', () => {
+  describe('key/mouse event processing', () => {
+    const handleChange = jest.fn();
+    const handleRelease = jest.fn();
+    const wrapper = mount(
+      <Slider
+        id="slider"
+        className="extra-class"
+        value={50}
+        min={0}
+        max={100}
+        step={1}
+        stepMultiplier={5}
+        onChange={handleChange}
+        onRelease={handleRelease}
+      />
+    );
+
+    it('sets correct state from event with a right/up keydown', () => {
+      const evt = {
+        type: 'keydown',
+        which: '38',
+      };
+      wrapper.instance().onKeyDown(evt);
+      expect(wrapper.state().value).toEqual(51);
+      expect(handleChange).toHaveBeenLastCalledWith({ value: 51 });
+    });
+
+    it('sets correct state from event with a left/down keydown', () => {
+      const evt = {
+        type: 'keydown',
+        which: '40',
+      };
+      wrapper.instance().onKeyDown(evt);
+      expect(wrapper.state().value).toEqual(50);
+      expect(handleChange).toHaveBeenLastCalledWith({ value: 50 });
+    });
+
+    it('correctly uses setMultiplier with a right/up keydown', () => {
+      const evt = {
+        type: 'keydown',
+        which: '38',
+        shiftKey: true,
+      };
+      wrapper.instance().onKeyDown(evt);
+      expect(wrapper.state().value).toEqual(55);
+      expect(handleChange).toHaveBeenLastCalledWith({ value: 55 });
+    });
+
+    it('sets correct state from event with a clientX in a mousemove', () => {
+      const evt = {
+        type: 'mousemove',
+        clientX: '1000',
+      };
+      wrapper.instance()._onDrag(evt);
+      expect(handleChange).toHaveBeenLastCalledWith({ value: 100 });
+      expect(wrapper.state().value).toEqual(100);
+    });
+
+    it('sets correct state from event with a clientX in a touchmove', () => {
+      const evt = {
+        type: 'touchmove',
+        touches: [{ clientX: '0' }],
+      };
+      wrapper.instance()._onDrag(evt);
+      expect(handleChange).toHaveBeenLastCalledWith({ value: 0 });
+      expect(wrapper.state().value).toEqual(0);
+    });
+
+    it('throttles mousemove events', () => {
+      expect(wrapper.instance().onDrag.throttled).toBe(true);
+    });
+
+    describe('user is holding the handle', () => {
+      it('does not call onRelease', () => {
+        const evt = {
+          type: 'mousemove',
+          clientX: '1000',
+        };
+        handleRelease.mockClear();
+        expect(handleRelease).not.toHaveBeenCalled();
+
+        wrapper.instance().onDragStart(evt);
+        wrapper.instance().onDrag(evt);
+        expect(handleRelease).not.toHaveBeenCalled();
+      });
+    });
+
+    describe('user releases the handle', () => {
+      it('calls onRelease', () => {
+        handleRelease.mockClear();
+        expect(handleRelease).not.toHaveBeenCalled();
+        wrapper.setState({
+          needsOnRelease: true,
+        });
+        wrapper.instance().onDragStop();
+        expect(handleRelease).toHaveBeenCalled();
+      });
+    });
+
+    it('does not set incorrect state when typing a invalid value in input field', () => {
+      const evt = {
+        target: {
+          value: '999',
+          checkValidity: () => false,
+        },
+      };
+
+      wrapper.instance().onChange(evt);
+      expect(wrapper.state().value).toEqual(100);
+      expect(handleChange).toHaveBeenLastCalledWith({ value: 100 });
+    });
+
+    it('sets correct state when typing a valid value in input field', () => {
+      const evt = {
+        target: {
+          value: '12',
+          checkValidity: () => true,
+        },
+      };
+
+      wrapper.instance().onChange(evt);
+      expect(wrapper.state().value).toEqual(12);
+      expect(handleChange).toHaveBeenLastCalledWith({ value: 12 });
+    });
+  });
+
+  describe('error handling', () => {
     const handleChange = jest.fn();
     const handleRelease = jest.fn();
     const wrapper = mount(
@@ -118,57 +267,115 @@ describe('Slider', () => {
       />
     );
 
-    it('sets correct state from event with a right/up keydown', () => {
+    it('handles non-number typed into input field', () => {
       const evt = {
-        type: 'keydown',
-        which: '38',
+        target: {
+          value: '',
+        },
       };
-      wrapper.instance().updatePosition(evt);
-      expect(handleChange).lastCalledWith({ value: 51 });
-      expect(wrapper.state().value).toEqual(51);
+      wrapper.instance().onChange(evt);
+      expect(wrapper.state().value).toEqual('');
+      expect(handleChange).not.toHaveBeenCalled();
     });
 
-    it('sets correct state from event with a left/down keydown', () => {
+    it('gracefully tolerates empty event passed to _onDrag', () => {
+      const evt = {};
+      wrapper.instance()._onDrag(evt);
+      expect(wrapper.state().value).toEqual(''); // from last test
+      expect(handleChange).not.toHaveBeenCalled();
+    });
+
+    it('gracefully tolerates empty event passed to onChange', () => {
+      const evt = {};
+      wrapper.instance().onChange(evt);
+      expect(wrapper.state().value).toEqual(''); // from last test
+      expect(handleChange).not.toHaveBeenCalled();
+    });
+
+    it('gracefully tolerates empty event passed to onKeyDown', () => {
+      const evt = {};
+      wrapper.instance().onKeyDown(evt);
+      expect(wrapper.state().value).toEqual(''); // from last test
+      expect(handleChange).not.toHaveBeenCalled();
+    });
+
+    it('gracefully tolerates bad key code passed to onKeyDown', () => {
+      const evt = {
+        which: '123',
+      };
+      wrapper.instance().onKeyDown(evt);
+      expect(wrapper.state().value).toEqual(''); // from last test
+      expect(handleChange).not.toHaveBeenCalled();
+    });
+  });
+
+  describe('slider is disabled', () => {
+    const handleChange = jest.fn();
+    const handleRelease = jest.fn();
+    const wrapper = mount(
+      <Slider
+        id="slider"
+        className="extra-class"
+        value={50}
+        min={0}
+        max={100}
+        step={1}
+        onChange={handleChange}
+        onRelease={handleRelease}
+        disabled={true}
+      />
+    );
+
+    it('does nothing when trying to type in the input', () => {
+      const evt = {
+        target: {
+          value: '',
+        },
+      };
+      wrapper.instance().onChange(evt);
+      expect(wrapper.state().value).toEqual(50);
+      expect(handleChange).not.toHaveBeenCalled();
+    });
+
+    it('does nothing when trying to start a drag', () => {
+      const evt = {
+        type: 'mousedown',
+        clientX: '1001',
+      };
+      wrapper.instance().onDragStart(evt);
+      expect(wrapper.state().value).toEqual(50);
+      expect(handleChange).not.toHaveBeenCalled();
+    });
+
+    it('does nothing when trying to drag', () => {
+      const evt = {
+        type: 'mousemove',
+        clientX: '1000',
+      };
+      wrapper.instance()._onDrag(evt);
+      expect(wrapper.state().value).toEqual(50);
+      expect(handleChange).not.toHaveBeenCalled();
+    });
+
+    it('does nothing when trying to stop a drag', () => {
+      const evt = {
+        type: 'mouseup',
+        clientX: '1001',
+      };
+      wrapper.instance().onDragStop(evt);
+      expect(wrapper.state().needsOnRelease).toEqual(false);
+      expect(handleChange).not.toHaveBeenCalled();
+      expect(handleRelease).not.toHaveBeenCalled();
+    });
+
+    it('does nothing when using arrow key', () => {
       const evt = {
         type: 'keydown',
         which: '40',
       };
-      wrapper.instance().updatePosition(evt);
-      expect(handleChange).lastCalledWith({ value: 50 });
+      wrapper.instance().onKeyDown(evt);
       expect(wrapper.state().value).toEqual(50);
-    });
-
-    it('sets correct state from event with a clientX', () => {
-      const evt = {
-        type: 'click',
-        clientX: '1000',
-      };
-      wrapper.instance().updatePosition(evt);
-      expect(handleChange).lastCalledWith({ value: 100 });
-      expect(wrapper.state().value).toEqual(100);
-    });
-
-    describe('user is holding the handle', () => {
-      it('does not call onRelease', () => {
-        handleRelease.mockClear();
-        expect(handleRelease).not.toHaveBeenCalled();
-
-        wrapper.instance().handleMouseStart();
-        wrapper.instance().updatePosition();
-        expect(handleRelease).not.toHaveBeenCalled();
-      });
-    });
-
-    describe('user releases the handle', () => {
-      it('calls onRelease', () => {
-        handleRelease.mockClear();
-        expect(handleRelease).not.toHaveBeenCalled();
-        wrapper.setState({
-          holding: false,
-        });
-        wrapper.instance().updatePosition();
-        expect(handleRelease).toHaveBeenCalled();
-      });
+      expect(handleChange).not.toHaveBeenCalled();
     });
   });
 });

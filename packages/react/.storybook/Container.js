@@ -8,25 +8,27 @@
 import './styles.scss';
 import './polyfills';
 
-import { settings } from 'carbon-components';
 import React, { useEffect } from 'react';
 
-const { prefix } = settings;
-
-function Container({ story }) {
+function Container({ story, id }) {
   useEffect(() => {
     const originalDirection = document.documentElement.dir;
     if (process.env.CARBON_REACT_STORYBOOK_USE_RTL === 'true') {
       document.documentElement.dir = 'rtl';
     }
     return () => {
-      document.documentElement.dir = originalDirection;
+      if (originalDirection) {
+        document.documentElement.dir = originalDirection;
+      } else {
+        document.documentElement.removeAttribute('dir');
+      }
     };
   }, []);
 
   return (
     <React.StrictMode>
       <div
+        className={id.toLowerCase()}
         data-floating-menu-container
         role="main"
         style={{
@@ -35,7 +37,9 @@ function Container({ story }) {
           flexDirection: 'column',
           alignItems: 'center',
         }}>
-        {story()}
+        <div style={{ position: 'relative', width: '100%', zIndex: 0 }}>
+          {story()}
+        </div>
       </div>
     </React.StrictMode>
   );

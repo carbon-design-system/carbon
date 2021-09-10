@@ -12,10 +12,12 @@ import { settings } from 'carbon-components';
 
 const { prefix } = settings;
 
-function TagSkeleton({ className, ...rest }) {
+function TagSkeleton({ className, size, ...rest }) {
   return (
     <span
-      className={cx(`${prefix}--tag`, `${prefix}--skeleton`, className)}
+      className={cx(`${prefix}--tag`, `${prefix}--skeleton`, className, {
+        [`${prefix}--tag--${size}`]: size,
+      })}
       {...rest}
     />
   );
@@ -26,6 +28,12 @@ TagSkeleton.propTypes = {
    * Specify an optional className to add.
    */
   className: PropTypes.string,
+
+  /**
+   * Specify the size of the Tag. Currently supports either `sm` or
+   * default sizes.
+   */
+  size: PropTypes.oneOf(['sm']),
 };
 
 export default TagSkeleton;

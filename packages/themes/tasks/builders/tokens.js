@@ -31,12 +31,12 @@ function buildTokensFile(tokens, metadata, defaultTheme) {
     layout: 'Number',
   };
 
-  const assignments = Object.keys(tokens).flatMap(group => {
-    return tokens[group].flatMap(token => {
+  const assignments = Object.keys(tokens).flatMap((group) => {
+    return tokens[group].flatMap((token) => {
       const name = formatTokenName(token);
       const tokenData =
         (metadata.tokens &&
-          metadata.tokens.find(tok => {
+          metadata.tokens.find((tok) => {
             return tok.name === token;
           })) ||
         {};

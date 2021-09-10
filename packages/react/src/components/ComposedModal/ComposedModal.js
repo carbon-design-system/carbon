@@ -8,11 +8,12 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import Button from '../Button';
+import ButtonSet from '../ButtonSet';
 import classNames from 'classnames';
 import { settings } from 'carbon-components';
 import { Close20 } from '@carbon/icons-react';
 import toggleClass from '../../tools/toggleClass';
-import requiredIfGivenPropExists from '../../prop-types/requiredIfGivenPropExists';
+import requiredIfGivenPropIsTruthy from '../../prop-types/requiredIfGivenPropIsTruthy';
 import wrapFocus from '../../internal/wrapFocus';
 
 const { prefix } = settings;
@@ -33,6 +34,21 @@ export default class ComposedModal extends Component {
 
   static propTypes = {
     /**
+     * Specify the aria-label for bx--modal-container
+     */
+    ['aria-label']: PropTypes.string,
+
+    /**
+     * Specify the aria-labelledby for bx--modal-container
+     */
+    ['aria-labelledby']: PropTypes.string,
+
+    /**
+     * Specify the content to be placed in the ComposedModal
+     */
+    children: PropTypes.node,
+
+    /**
      * Specify an optional className to be applied to the modal root node
      */
     className: PropTypes.string,
@@ -41,6 +57,12 @@ export default class ComposedModal extends Component {
      * Specify an optional className to be applied to the modal node
      */
     containerClassName: PropTypes.string,
+
+    /**
+     * Specify whether the primary button should be replaced with danger button.
+     * Note that this prop is not applied if you render primary/danger button by yourself
+     */
+    danger: PropTypes.bool,
 
     /**
      * Specify an optional handler for closing modal.
@@ -59,6 +81,8 @@ export default class ComposedModal extends Component {
      */
     open: PropTypes.bool,
 
+    preventCloseOnClickOutside: PropTypes.bool,
+
     /**
      * Specify a CSS selector that matches the DOM element that should be
      * focused when the Modal opens
@@ -66,9 +90,14 @@ export default class ComposedModal extends Component {
     selectorPrimaryFocus: PropTypes.string,
 
     /**
+     * Specify the CSS selectors that match the floating menus
+     */
+    selectorsFloatingMenus: PropTypes.string,
+
+    /**
      * Specify the size variant.
      */
-    size: PropTypes.oneOf(['xs', 'sm', 'lg']),
+    size: PropTypes.oneOf(['xs', 'sm', 'md', 'lg']),
   };
 
   static getDerivedStateFromProps({ open }, state) {
@@ -81,7 +110,7 @@ export default class ComposedModal extends Component {
         };
   }
 
-  handleKeyDown = evt => {
+  handleKeyDown = (evt) => {
     // Esc key
     if (evt.which === 27) {
       this.closeModal(evt);
@@ -90,7 +119,13 @@ export default class ComposedModal extends Component {
     this.props.onKeyDown(evt);
   };
 
-  handleClick = evt => {
+  handleClick = (evt) => {
+    if (
+      !this.innerModal.current.contains(evt.target) &&
+      this.props.preventCloseOnClickOutside
+    ) {
+      return;
+    }
     if (
       this.innerModal.current &&
       !this.innerModal.current.contains(evt.target)
@@ -105,11 +140,11 @@ export default class ComposedModal extends Component {
   }) => {
     const { open, selectorsFloatingMenus } = this.props;
     if (open && currentActiveNode && oldActiveNode) {
-      const { current: modalNode } = this.innerModal;
+      const { current: bodyNode } = this.innerModal;
       const { current: startSentinelNode } = this.startSentinel;
       const { current: endSentinelNode } = this.endSentinel;
       wrapFocus({
-        modalNode,
+        bodyNode,
         startSentinelNode,
         endSentinelNode,
         currentActiveNode,
@@ -125,23 +160,28 @@ export default class ComposedModal extends Component {
     } else if (prevState.open && !this.state.open) {
       this.beingOpen = false;
     }
-    toggleClass(
-      document.body,
-      `${prefix}--body--with-modal-open`,
-      this.state.open
-    );
+
+    if (prevState.open !== this.state.open) {
+      toggleClass(
+        document.body,
+        `${prefix}--body--with-modal-open`,
+        this.state.open
+      );
+    }
   }
 
-  focusButton = focusContainerElement => {
-    const primaryFocusElement = focusContainerElement.querySelector(
-      this.props.selectorPrimaryFocus
-    );
-    if (primaryFocusElement) {
-      primaryFocusElement.focus();
-      return;
-    }
-    if (this.button.current) {
-      this.button.current.focus();
+  focusButton = (focusContainerElement) => {
+    if (focusContainerElement) {
+      const primaryFocusElement = focusContainerElement.querySelector(
+        this.props.selectorPrimaryFocus
+      );
+      if (primaryFocusElement) {
+        primaryFocusElement.focus();
+        return;
+      }
+      if (this.button.current) {
+        this.button.current.focus();
+      }
     }
   };
 
@@ -158,10 +198,12 @@ export default class ComposedModal extends Component {
     if (!this.props.open) {
       return;
     }
-    this.focusButton(this.innerModal.current);
+    if (this.innerModal.current) {
+      this.focusButton(this.innerModal.current);
+    }
   }
 
-  handleTransitionEnd = evt => {
+  handleTransitionEnd = (evt) => {
     if (
       this.outerModal.current.offsetWidth &&
       this.outerModal.current.offsetHeight &&
@@ -172,7 +214,7 @@ export default class ComposedModal extends Component {
     }
   };
 
-  closeModal = evt => {
+  closeModal = (evt) => {
     const { onClose } = this.props;
     if (!onClose || onClose(evt) !== false) {
       this.setState({
@@ -184,10 +226,13 @@ export default class ComposedModal extends Component {
   render() {
     const { open } = this.state;
     const {
+      ['aria-labelledby']: ariaLabelledBy,
+      ['aria-label']: ariaLabel,
       className,
       containerClassName,
       children,
       danger,
+      preventCloseOnClickOutside, // eslint-disable-line
       selectorPrimaryFocus, // eslint-disable-line
       size,
       ...other
@@ -206,13 +251,16 @@ export default class ComposedModal extends Component {
       [containerClassName]: containerClassName,
     });
 
-    const childrenWithProps = React.Children.toArray(children).map(child => {
+    // Generate aria-label based on Modal Header label if one is not provided (L253)
+    let generatedAriaLabel;
+    const childrenWithProps = React.Children.toArray(children).map((child) => {
       switch (child.type) {
-        case ModalHeader:
+        case React.createElement(ModalHeader).type:
+          generatedAriaLabel = child.props.label;
           return React.cloneElement(child, {
             closeModal: this.closeModal,
           });
-        case ModalFooter:
+        case React.createElement(ModalFooter).type:
           return React.cloneElement(child, {
             closeModal: this.closeModal,
             inputref: this.button,
@@ -240,7 +288,13 @@ export default class ComposedModal extends Component {
           className={`${prefix}--visually-hidden`}>
           Focus sentinel
         </span>
-        <div ref={this.innerModal} className={containerClass} tabIndex={-1}>
+        <div
+          ref={this.innerModal}
+          className={containerClass}
+          role="dialog"
+          aria-modal="true"
+          aria-label={ariaLabel ? ariaLabel : generatedAriaLabel}
+          aria-labelledby={ariaLabelledBy}>
           {childrenWithProps}
         </div>
         {/* Non-translatable: Focus-wrap code makes this `<span>` not actually read by screen readers */}
@@ -259,19 +313,20 @@ export default class ComposedModal extends Component {
 export class ModalHeader extends Component {
   static propTypes = {
     /**
+     * Provide an optional function to be called when the close button is
+     * clicked
+     */
+    buttonOnClick: PropTypes.func,
+
+    /**
+     * Specify the content to be placed in the ModalHeader
+     */
+    children: PropTypes.node,
+
+    /**
      * Specify an optional className to be applied to the modal header
      */
     className: PropTypes.string,
-
-    /**
-     * Specify an optional className to be applied to the modal header label
-     */
-    labelClassName: PropTypes.string,
-
-    /**
-     * Specify an optional className to be applied to the modal heading
-     */
-    titleClassName: PropTypes.string,
 
     /**
      * Specify an optional className to be applied to the modal close node
@@ -284,19 +339,9 @@ export class ModalHeader extends Component {
     closeIconClassName: PropTypes.string,
 
     /**
-     * Specify an optional label to be displayed
+     * Provide an optional function to be called when the modal is closed
      */
-    label: PropTypes.node,
-
-    /**
-     * Specify an optional title to be displayed
-     */
-    title: PropTypes.node,
-
-    /**
-     * Specify the content to be placed in the ModalHeader
-     */
-    children: PropTypes.node,
+    closeModal: PropTypes.func,
 
     /**
      * Specify a description for the close icon that can be read by screen
@@ -305,15 +350,24 @@ export class ModalHeader extends Component {
     iconDescription: PropTypes.string,
 
     /**
-     * Provide an optional function to be called when the modal is closed
+     * Specify an optional label to be displayed
      */
-    closeModal: PropTypes.func,
+    label: PropTypes.node,
 
     /**
-     * Provide an optional function to be called when the close button is
-     * clicked
+     * Specify an optional className to be applied to the modal header label
      */
-    buttonOnClick: PropTypes.func,
+    labelClassName: PropTypes.string,
+
+    /**
+     * Specify an optional title to be displayed
+     */
+    title: PropTypes.node,
+
+    /**
+     * Specify an optional className to be applied to the modal heading
+     */
+    titleClassName: PropTypes.string,
   };
 
   static defaultProps = {
@@ -321,7 +375,7 @@ export class ModalHeader extends Component {
     buttonOnClick: () => {},
   };
 
-  handleCloseButtonClick = evt => {
+  handleCloseButtonClick = (evt) => {
     this.props.closeModal(evt);
     this.props.buttonOnClick();
   };
@@ -339,6 +393,7 @@ export class ModalHeader extends Component {
       iconDescription,
       closeModal, // eslint-disable-line
       buttonOnClick, // eslint-disable-line
+      preventCloseOnClickOutside, // eslint-disable-line
       ...other
     } = this.props;
 
@@ -369,9 +424,9 @@ export class ModalHeader extends Component {
 
     return (
       <div className={headerClass} {...other}>
-        {label && <p className={labelClass}>{label}</p>}
+        {label && <h2 className={labelClass}>{label}</h2>}
 
-        {title && <p className={titleClass}>{title}</p>}
+        {title && <h3 className={titleClass}>{title}</h3>}
 
         {children}
 
@@ -389,10 +444,18 @@ export class ModalHeader extends Component {
 }
 
 export function ModalBody(props) {
-  const { className, children, hasForm, hasScrollingContent, ...other } = props;
+  const {
+    className,
+    children,
+    hasForm,
+    hasScrollingContent,
+    preventCloseOnClickOutside, // eslint-disable-line
+    ...other
+  } = props;
   const contentClass = classNames({
     [`${prefix}--modal-content`]: true,
     [`${prefix}--modal-content--with-form`]: hasForm,
+    [`${prefix}--modal-scroll-content`]: hasScrollingContent,
     [className]: className,
   });
   const hasScrollingContentProps = hasScrollingContent
@@ -414,6 +477,19 @@ export function ModalBody(props) {
 }
 ModalBody.propTypes = {
   /**
+   * Required props for the accessibility label of the header
+   */
+  ['aria-label']: requiredIfGivenPropIsTruthy(
+    'hasScrollingContent',
+    PropTypes.string
+  ),
+
+  /**
+   * Specify the content to be placed in the ModalBody
+   */
+  children: PropTypes.node,
+
+  /**
    * Specify an optional className to be added to the Modal Body node
    */
   className: PropTypes.string,
@@ -428,47 +504,40 @@ ModalBody.propTypes = {
    * Specify whether the modal contains scrolling content
    */
   hasScrollingContent: PropTypes.bool,
-
-  /**
-   * Required props for the accessibility label of the header
-   */
-  ['aria-label']: requiredIfGivenPropExists(
-    'hasScrollingContent',
-    PropTypes.string
-  ),
 };
 
 export class ModalFooter extends Component {
   static propTypes = {
+    /**
+     * Pass in content that will be rendered in the Modal Footer
+     */
+    children: PropTypes.node,
+
     /**
      * Specify a custom className to be applied to the Modal Footer container
      */
     className: PropTypes.string,
 
     /**
-     * Specify a custom className to be applied to the primary button
+     * Specify an optional function that is called whenever the modal is closed
      */
-    primaryClassName: PropTypes.string,
+    closeModal: PropTypes.func,
 
     /**
-     * Specify the text for the primary button
+     * Specify whether the primary button should be replaced with danger button.
+     * Note that this prop is not applied if you render primary/danger button by yourself
      */
-    primaryButtonText: PropTypes.string,
+    danger: PropTypes.bool,
 
     /**
-     * Specify whether the primary button should be disabled
+     * The `ref` callback for the primary button.
      */
-    primaryButtonDisabled: PropTypes.bool,
-
-    /**
-     * Specify a custom className to be applied to the secondary button
-     */
-    secondaryClassName: PropTypes.string,
-
-    /**
-     * Specify the text for the secondary button
-     */
-    secondaryButtonText: PropTypes.string,
+    inputref: PropTypes.oneOfType([
+      PropTypes.func,
+      PropTypes.shape({
+        current: PropTypes.any,
+      }),
+    ]),
 
     /**
      * Specify an optional function for when the modal is requesting to be
@@ -483,14 +552,65 @@ export class ModalFooter extends Component {
     onRequestSubmit: PropTypes.func,
 
     /**
-     * Specify an optional function that is called whenever the modal is closed
+     * Specify whether the primary button should be disabled
      */
-    closeModal: PropTypes.func,
+    primaryButtonDisabled: PropTypes.bool,
 
     /**
-     * Pass in content that will be rendered in the Modal Footer
+     * Specify the text for the primary button
      */
-    children: PropTypes.node,
+    primaryButtonText: PropTypes.string,
+
+    /**
+     * Specify a custom className to be applied to the primary button
+     */
+    primaryClassName: PropTypes.string,
+
+    /**
+     * Specify the text for the secondary button
+     */
+    secondaryButtonText: PropTypes.string,
+
+    /**
+     * Specify an array of config objects for secondary buttons
+     * (`Array<{
+     *   buttonText: string,
+     *   onClick: function,
+     * }>`).
+     */
+    secondaryButtons: (props, propName, componentName) => {
+      if (props.secondaryButtons) {
+        if (
+          !Array.isArray(props.secondaryButtons) ||
+          props.secondaryButtons.length !== 2
+        ) {
+          return new Error(
+            `${propName} needs to be an array of two button config objects`
+          );
+        }
+
+        const shape = {
+          buttonText: PropTypes.node,
+          onClick: PropTypes.func,
+        };
+
+        props[propName].forEach((secondaryButton) => {
+          PropTypes.checkPropTypes(
+            shape,
+            secondaryButton,
+            propName,
+            componentName
+          );
+        });
+      }
+
+      return null;
+    },
+
+    /**
+     * Specify a custom className to be applied to the secondary button
+     */
+    secondaryClassName: PropTypes.string,
   };
 
   static defaultProps = {
@@ -498,7 +618,7 @@ export class ModalFooter extends Component {
     onRequestSubmit: () => {},
   };
 
-  handleRequestClose = evt => {
+  handleRequestClose = (evt) => {
     this.props.closeModal(evt);
     this.props.onRequestClose(evt);
   };
@@ -507,6 +627,7 @@ export class ModalFooter extends Component {
     const {
       className,
       primaryClassName,
+      secondaryButtons,
       secondaryClassName,
       secondaryButtonText,
       primaryButtonText,
@@ -516,12 +637,15 @@ export class ModalFooter extends Component {
       onRequestSubmit, // eslint-disable-line
       children,
       danger,
+      inputref,
       ...other
     } = this.props;
 
     const footerClass = classNames({
       [`${prefix}--modal-footer`]: true,
       [className]: className,
+      [`${prefix}--modal-footer--three-button`]:
+        Array.isArray(secondaryButtons) && secondaryButtons.length === 2,
     });
 
     const primaryClass = classNames({
@@ -532,30 +656,49 @@ export class ModalFooter extends Component {
       [secondaryClassName]: secondaryClassName,
     });
 
-    return (
-      <div className={footerClass} {...other}>
-        {secondaryButtonText && (
+    const SecondaryButtonSet = () => {
+      if (Array.isArray(secondaryButtons) && secondaryButtons.length <= 2) {
+        return secondaryButtons.map(
+          ({ buttonText, onClick: onButtonClick }, i) => (
+            <Button
+              key={`${buttonText}-${i}`}
+              className={secondaryClass}
+              kind="secondary"
+              onClick={onButtonClick || this.handleRequestClose}>
+              {buttonText}
+            </Button>
+          )
+        );
+      }
+      if (secondaryButtonText) {
+        return (
           <Button
             className={secondaryClass}
             onClick={this.handleRequestClose}
             kind="secondary">
             {secondaryButtonText}
           </Button>
-        )}
+        );
+      }
+      return null;
+    };
 
+    return (
+      <ButtonSet className={footerClass} {...other}>
+        <SecondaryButtonSet />
         {primaryButtonText && (
           <Button
             onClick={onRequestSubmit}
             className={primaryClass}
             disabled={primaryButtonDisabled}
             kind={danger ? 'danger' : 'primary'}
-            ref={this.props.inputref}>
+            ref={inputref}>
             {primaryButtonText}
           </Button>
         )}
 
         {children}
-      </div>
+      </ButtonSet>
     );
   }
 }

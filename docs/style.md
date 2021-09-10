@@ -1,5 +1,3 @@
-<!-- alex disable hooks -->
-
 <!--
 Inspired by Uber's Go Style Guide:
 https://github.com/uber-go/guide/blob/85bf203f4371a8ae9e5e9a4d52ea77b17ca04ae6/style.md
@@ -66,8 +64,14 @@ row before the </tbody></table> line.
 - [React](#react)
   - [Guidelines](#guidelines)
     - [Writing a component](#writing-a-component)
+    - [Translating a component](#translating-a-component)
+      - [Working with messages that depend on state](#working-with-messages-that-depend-on-state)
+    - [Using `useCallback` and `useMemo`](#using-usecallback-and-usememo)
+    - [Hooks that rely on refs](#hooks-that-rely-on-refs)
+    - [Hooks that use a callback](#hooks-that-use-a-callback)
   - [Style](#style-1)
     - [Naming event handlers](#naming-event-handlers)
+    - [Naming experimental code](#naming-experimental-code)
 - [Sass](#sass)
   - [Guidelines](#guidelines-1)
     - [Author component styles using mixins](#author-component-styles-using-mixins)
@@ -90,7 +94,7 @@ concepts, learn from our mistakes, and grow the number of languages that we
 target or support as a design system.
 
 Guidelines or practices outlined in this document are meant to help us as a
-group build stable and reliable sofware. What this means to the developer may
+group build stable and reliable software. What this means to the developer may
 change depending on the environment in which one writes code.
 
 At the end of the day, we as a group hold the following values about writing
@@ -220,6 +224,217 @@ _Note: not every component will mirror the structure above. Some will need to
 incorporate `useEffect`, some will not. You can think of the outline above as
 slots that you can fill if you need this functionality in a component._
 
+#### Translating a component
+
+Certain components will need to expose a way for the caller to pass in
+translated strings. For a wide variety of components, this should be done
+through props. However, if there are situations where props don't make sense or
+the data that needs to be translated depends on state or is nested you will need
+to use the following strategy to translate a component.
+
+For component translation, you will need to define a map of translation ids and
+their corresponding default values, along with a default `translateWithId` prop.
+For example:
+
+```js
+const translationIds = {
+  'carbon.component-name.field': 'Default value',
+  'carbon.component-name.other-field': 'Other value',
+};
+
+function translateWithId(messageId) {
+  return translationIds[messageId];
+}
+
+function MyComponent({ translateWithId: t = translateWithId }) {
+  return (
+    <>
+      <span>t('carbon.component-name.field')</span>
+      <span>t('carbon.component-name.other-field')</span>
+    </>
+  );
+}
+```
+
+The `id`s used in `translationIds` should be consistent between major versions.
+Changing one will represent a breaking change for the component.
+
+These translation message `id`s should be specified in the component
+documentation page.
+
+##### Working with messages that depend on state
+
+If it seems like your translation requires state in order to be translated
+correctly, consider creating specific message ids for each state value.
+
+For example, when working with something that can be sorted in ascending or
+descending order you could create two message ids and choose, based on state,
+which one to use.
+
+```jsx
+function MyComponent({ translateWithId: t = translateWithId }) {
+  const [sortDirection, setSortDirection] = useState('ASC');
+
+  function onClick() {
+    if (sortDirection === 'ASC') {
+      setSortDirection('DESC');
+    } else {
+      setSortDirection('ASC');
+    }
+  }
+
+  return (
+    <>
+      <span>
+        {sortDirection === 'ASC'
+          ? t('carbon.component-name.sort.ascending')
+          : t('carbon.component-name.sort.descending')}
+      </span>
+      <button onClick={onClick}>t('carbon.component-name.toggle-sort')</button>
+    </>
+  );
+}
+```
+
+If the message depends on a state value, for example a count, then you should
+pass along this information as a state argument to `translateWithId`.
+
+```jsx
+function MyComponent({ translateWithId: t = translateWithId }) {
+  const [count, updateCount] = useState(0);
+  const translationState = {
+    count,
+  };
+
+  return (
+    <>
+      <span>The current count is:
+      {t('carbon.component-name.display-count'), translationState}</span>
+      <button onClick={() => updateCount(count + 1)}>
+        {t('carbon.component-name.increment-count')}</span>
+      </button>
+    </>
+  );
+}
+```
+
+#### Using `useCallback` and `useMemo`
+
+`useCallback` and `useMemo` can be incredibly useful tools in certain
+situations. In general, however, we try to avoid them unless one of the
+following conditions occur:
+
+- The identitiy of a function or object is required as a dependency in a
+  dependency array
+- We have observed performance issues due to allocations that can be reproduced
+  and resolved using these techniques
+
+This practice is to avoid introducing `useCallback` and `useMemo` prematurely,
+which can create extra work for our components to perform.
+
+A rule of thumb for this is to understand how frequently a dependency will
+update that is given to `useCallback` or `useMemo`. If a dependency is likely to
+update frequently, then React will have to perform comparisons and re-run
+callback to `useCallback` and `useMemo`. This would be slower than creating a
+new function each render instead.
+
+#### Hooks that rely on refs
+
+When designing hooks that require a reference to a DOM node (using a `ref`) you
+should design the hook to take in a `ref` as an argument instead of creating a
+`ref` on behalf of the caller.
+
+This is important when a caller decides to use multiple hooks that rely on a
+`ref`. For example,
+
+```jsx
+function MyComponent() {
+  const [ref1, isHovering] = useHover();
+  const [ref2, isDragging] = useDrag();
+
+  // How should the caller merge these two refs?
+}
+```
+
+If, instead, these hooks took in a `ref` we could have the caller manage the
+`ref` and pass it into the hooks.
+
+```jsx
+function MyComponent() {
+  const ref = useRef(null);
+  const isHovering = useHover(ref);
+  const isDragging = useDrag(ref);
+
+  // Caller has to add `ref` to a node below
+}
+```
+
+#### Hooks that use a callback
+
+Often times, you will want to author a hook that executes a given function when
+something happens. For example, we could have a hook called `useEvent` that will
+execute a function whenever the event is triggered:
+
+```js
+useEvent(window, 'click', (event) => {
+  // Called when the click event fires
+});
+```
+
+When you write a hook that uses a pattern like this, you may run into a problem
+where you want to call the callback in a `useEffect` block, but you don't want
+that effect to fire every time the callback changes.
+
+From our `useEvent` hook above, this would come up when adding the event
+listener to the document:
+
+```js
+function useEvent(element, eventName, callback) {
+  // ...
+
+  useEffect(() => {
+    element.addEventListener(eventName, callback);
+    return () => {
+      element.removeEventListener(eventName, callback);
+    };
+  }, [element, eventName, callback]);
+
+  // ...
+}
+```
+
+In the code snippet above, the effect specified in `useEffect` will trigger any
+time the element changes, the event changes, or the callback changes. However,
+we only would want the listener re-attached any time the element or event name
+changes, not when the callback changes.
+
+To separate out the callback changes from changes in our effect's dependencies,
+you can use the saved callback pattern:
+
+```js
+function useEvent(element, eventName, callback) {
+  const savedCallback = useRef(callback);
+
+  useEffect(() => {
+    savedCallback.current = callback;
+  });
+
+  useEffect(() => {
+    function listener(event) {
+      savedCallback.current(event);
+    }
+    element.addEventListener(eventName, listener);
+    return () => {
+      element.removeEventListener(eventName, listener);
+    };
+  }, [element, eventName]);
+}
+```
+
+By saving our callback in a `ref`, we're able to keep track of changes to the
+callback that we receive without having to re-run our `useEffect` block every
+time it changes.
+
 ### Style
 
 #### Naming event handlers
@@ -281,6 +496,231 @@ When writing event handlers, we prefer using the exact name, `onClick` to a
 shorthand. If that name is already being used in a given scope, which often
 happens if the component supports a prop `onClick`, then we prefer to specify
 the function as `handleOnClick`.
+
+#### Naming experimental code
+
+The team occasionally will author code, or accept contributions, that is
+considered experimental or unstable. The goal for this code is to ship it as
+unstable for sponsor groups to leverage. During this time, the team can get
+feedback around what is working and what does not work so that changes can be
+made before an official release.
+
+For experimental or unstable code, we use the `unstable_` prefix. For example:
+
+```js
+// An unstable method
+function unstable_layout() {
+  // ...
+}
+
+// An unstable variable
+const unstable_meta = {
+  // ...
+};
+
+// An unstable component will retain its name, specifically for things like
+// the rules of hooks plugin which depend on the correct casing of the name
+function Pagination(props) {
+  // ...
+}
+
+// However, when we export the component we will export it with the `unstable_`
+// prefix. (Similar to React.unstable_Suspense, React.unstable_Profiler)
+export { default as unstable_Pagination } from './components/Pagination';
+```
+
+For teams using these features, they will need to import the functionality by
+using the `unstable_` prefix. For example:
+
+```jsx
+import { unstable_Pagination as Pagination } from 'carbon-components-react';
+```
+
+This code should be treated as experimental and will break between release
+versions for the package that it is being imported from.
+
+### Testing
+
+#### Strategy
+
+In general we aim to test components from a user-focused perspective. This means
+avoiding testing implementation details, and instead focusing on writing tests
+that closely resemble how the components are used. The various `testing-library`
+packages are used to encourage this mindset when writing and composing test
+suites.
+
+#### Organization
+
+Every component should have tests covering a series of Categories
+
+- General component functionality/API
+- Accessibility
+- End to end tests
+- Server side rendering
+
+Each of these are separated into individual files. In some cases the syntax may
+be slightly different and separate files make this easier to understand.
+Additionally separate file types can be more easily globbed to only run certain
+tests in certain environments (local, CI, Pre-release checks, etc).
+
+| File name                    | Category                        |
+| ---------------------------- | ------------------------------- |
+| `ComponentName-test.js`      | General component functionality |
+| `ComponentName-test.a11y.js` | Accessibility testing           |
+| `ComponentName-test.e2e.js`  | End to end tests                |
+| `ComponentName-test.ssr.js`  | Server side rendering           |
+
+There are corresponding commands to run all categories, individual categories,
+or a combination. Depending on your shell, modifiers can be used to run two
+commands one after another. Refer to the documentation of your shell.
+
+| Command                           | Corresponding test category                                          |
+| --------------------------------- | -------------------------------------------------------------------- |
+| `yarn test`                       | All categories                                                       |
+| `yarn test:unit`                  | Only component unit tests                                            |
+| `yarn test:a11y`                  | Only accessibility tests                                             |
+| `yarn test:ssr`                   | Only server side tests                                               |
+| `yarn test:a11y && yarn test:e2e` | In `bash` via `&&`: Run the a11y tests, and if they succeed, run e2e |
+
+#### Recipes
+
+Below are some common recipes for component testing. Many of the pattern/syntax
+details contained within these recipes are enforced via eslint rules declared in
+`eslint-config-carbon`.
+
+##### `ComponentName-test.js`
+
+- Use `@testing-library/react`
+  - Render using `render()`
+  - Query using `screen()`, prefer
+    [queries accessible to everyone](https://testing-library.com/docs/queries/about#priority)
+  - Simulate events with `userEvent`
+- Format with `describe`/`it` blocks
+- Use [`jest-dom`](https://github.com/testing-library/jest-dom) matchers for
+  assertions
+
+```js
+import { render, screen, findByLabel } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
+import { ComponentName } from '../ComponentName';
+
+describe('ComponentName', () => {
+  describe('API', () => {
+    it('should provide a data-testid attribute on the outermost DOM node', () => {
+      const { container } = render(<ComponentName className="test" />);
+      expect(screen.getByTestId('component-test-id')).toBeInTheDocument();
+      expect(container.firstChild).toHaveAttribute('class', 'test');
+    });
+
+    it('should place the `className` prop on the outermost DOM node', () => {
+      const { container } = render(<ComponentName className="test" />);
+      expect(container.firstChild).toHaveAttribute('class', 'test');
+    });
+
+    it('should place extra props on the outermost DOM node', () => {
+      const { container } = render(<ComponentName data-testid="test" />);
+      expect(container.firstChild).toHaveAttribute('data-testid', 'test');
+    });
+
+    describe('i18n', () => {
+      // ... ensure when each prop string is configured it is rendered to the DOM
+    });
+
+    // id
+    // -----
+    // When a component accepts an id prop, it's important
+    // that the node on which the id is placed is consistent
+    // between minor versions. As a result, tests that you
+    // write for id should make assertions around id being
+    // placed on the same node.
+    it('should place the `id` prop on the same DOM node between minor versions', () => {
+      const { container } = render(<ComponentName data-testid="test" />);
+      expect(container.firstChild).toHaveAttribute('id', 'test');
+    });
+
+    // Event Handlers
+    // -----
+    // When a component accepts an `onClick` or `onChange` prop
+    // it can be helpful to make assertions about when these
+    // props are called and what they are called with in order
+    // to test the Public API of the component.
+    // To make assertions on a function, such as whether its
+    // been called or what it has been called with, we can make
+    // use of Jest's `jest.fn()` method to create mock
+    // functions. We can then make assertions on these mock
+    // functions.
+    it('should call `onClick` when the trigger element is pressed', () => {
+      const onClick = jest.fn();
+
+      render(<TestComponent onClick={onClick} />);
+
+      const trigger = screen.getByText('trigger');
+      userEvent.click(trigger);
+      expect(onClick).toHaveBeenCalled();
+    });
+
+    // Optional ref tests
+    // A component that accepts a ref falls in one of three scenarios:
+    // 1. A class component
+    // 2. A component that uses React.forwardRef and placed
+    //    it on an HTML element
+    // 3. A component that uses React.forwardRef and uses
+    //    useImperativeHandle to decorate the ref (this is
+    //    uncommon but can come up)
+  });
+});
+```
+
+##### `ComponentName-test.a11y.js`
+
+- Use `accessibility-checker` and `axe`
+- Optionally configure common props to ensure component variants do not contain
+  accessibility errors.
+- Always use the destructured `container` from `render()` to ensure the entire
+  DOM tree is validated before and after interaction.
+
+```js
+describe('ComponentName AVT1', () => {
+  it('should have no aXe violations', async () => {
+    const { container } = render(<ComponentName />);
+    await expect(container).toHaveNoAxeViolations();
+  });
+
+  it('should have no AC violations', async () => {
+    const { container } = render(<ComponentName />);
+    await expect(container).toHaveNoACViolations('ComponentName');
+  });
+});
+```
+
+##### `ComponentName-test.server.js`
+
+```js
+/**
+ * @jest-environment node
+ */
+import ReactDOMServer from 'react-dom/server';
+import { ComponentName } from '../ComponentName';
+
+describe('ComponentName - SSR', () => {
+  it('should import ComponentName in a node/server environment', () => {
+    expect(ComponentName).not.toThrow();
+  });
+
+  it('should not use document/window/etc', () => {
+    expect(ReactDOMServer.renderToStaticMarkup(ComponentName)).not.toThrow();
+  });
+});
+```
+
+##### Notes on manual testing
+
+- [The A11Y Project checklist](https://www.a11yproject.com/checklist/) is a
+  great resource listing a range of issues to check for that cover a wide range
+  of disability conditions.
+- Due to
+  [the complexity of screenreader testing](https://webaim.org/articles/screenreader_testing/),
+  all screen reader testing is done manually.
 
 ## Sass
 
@@ -471,4 +911,74 @@ When writing SassDoc comments, you should use three forward slashes:
 .#{$prefix}--my-component {
   // ...
 }
+```
+
+### Testing
+
+We use the `@carbon/test-utils` package to test our Sass styles in JavaScript.
+Inside of this package, there is a `SassRenderer` module that you can bring in
+that allows you to get values from Sass in JavaScript to be used in test
+assertions.
+
+The basic template for tests for Sass files will look like:
+
+```js
+/**
+ * <COPYRIGHT>
+ *
+ * @jest-environment node
+ */
+
+'use strict';
+
+const { SassRenderer } = require('@carbon/test-utils/scss');
+
+const { render } = SassRenderer.create(__dirname);
+
+describe('@carbon/styles/scss/config', () => {
+  test('Public API', async () => {
+    const { get } = await render(`
+      // You can bring in modules using the path from the test file
+      @use '../path/to/sass/module';
+
+      $test: true;
+
+      // The `get` helper will let you pass a value from Sass to JavaScript
+      $_: get('test', $test);
+    `);
+
+    // get('<key>') gives you both the JavaScript representation of a value
+    // along with the `nativeValue` which comes from Dart sass. Use `.value`
+    // to get the JavaScript value and make assertions
+    expect(get('test').value).toBe(true);
+  });
+});
+```
+
+#### Recipes
+
+##### Public API
+
+Sometimes it is useful to assert that a module's Public API matches what is
+expected or does not change between versions. To do this in a test file, you can
+use the `sass:meta` module along with several helpers for getting the variables
+and functions from a module. Unfortunately, mixins need to be checked by hand
+using the `mixin-exists` function from `sass:meta`.
+
+```js
+test('Public API', async () => {
+  await render(`
+    @use 'sass:meta';
+    @use '../path/to/module';
+
+    // Get the variables for the module under the namespace `module`
+    $_: get('variables', meta.module-variables('module'));
+
+    // Get the functions for the module under the namespace `module`
+    $_: get('variables', meta.module-functions('module'));
+
+    // Verify that a mixin exists, optionally within a module
+    $_: get('mixin-name', meta.mixin-exists('mixin-name', 'module');
+  `);
+});
 ```

@@ -142,7 +142,7 @@ class FloatingMenu extends mixin(
       );
     }
     this.manage(
-      on(this.element.ownerDocument, 'keydown', event => {
+      on(this.element.ownerDocument, 'keydown', (event) => {
         this._handleKeydown(event);
       })
     );
@@ -246,7 +246,7 @@ class FloatingMenu extends mixin(
       right: 'auto',
       margin: 0,
     };
-    Object.keys(styles).forEach(key => {
+    Object.keys(styles).forEach((key) => {
       const expected =
         typeof styles[key] === 'number' ? parseFloat(styles[key]) : styles[key];
       const actual = computedStyle.getPropertyValue(key);

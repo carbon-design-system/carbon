@@ -86,10 +86,7 @@ describe('SideNavMenu', () => {
       children: <SideNavMenuItem isActive={true}>Test</SideNavMenuItem>,
     });
     expect(
-      wrapper
-        .find('li')
-        .at(0)
-        .hasClass(`${prefix}--side-nav__item--active`)
+      wrapper.find('li').at(0).hasClass(`${prefix}--side-nav__item--active`)
     ).toBe(true);
     wrapper.setProps({
       children: [
@@ -100,14 +97,11 @@ describe('SideNavMenu', () => {
       ],
     });
     expect(
-      wrapper
-        .find('li')
-        .at(0)
-        .hasClass(`${prefix}--side-nav__item--active`)
+      wrapper.find('li').at(0).hasClass(`${prefix}--side-nav__item--active`)
     ).toBe(true);
   });
 
-  it('should include a css class to render the large varient is large prop is set', () => {
+  it('should include a css class to render the large variant is large prop is set', () => {
     wrapper = mount(<SideNavMenu {...mockProps} />);
     expect(
       wrapper.find('li').hasClass(`${prefix}--side-nav__item--large`)

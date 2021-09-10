@@ -29,7 +29,7 @@ describe('match', () => {
     inputNode.parentNode.removeChild(inputNode);
   });
 
-  it.each(Object.keys(keys))('should match when using %s', key => {
+  it.each(Object.keys(keys))('should match when using %s', (key) => {
     // Clone the export so we don't accidentally mutate it in the if block below
     const keyboardEventInit = Object.assign({}, keys[key]);
 

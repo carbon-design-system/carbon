@@ -10,9 +10,7 @@
 const { prefix } = require('../../globals/js/settings');
 
 const items = () => {
-  const groupId = Math.random()
-    .toString(36)
-    .substr(2);
+  const groupId = Math.random().toString(36).substr(2);
   return [
     {
       id: `radio-button-${groupId}-1`,

@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { getByText, isElementVisible } from '../dom';
+import { getByLabel, getByText, isElementVisible } from '../dom';
 
 describe('DOM test helpers', () => {
   let container;
@@ -35,6 +35,31 @@ describe('DOM test helpers', () => {
 
     it('should return null if no matches are found', () => {
       expect(getByText(container, 'Not found')).toEqual(null);
+    });
+  });
+
+  describe('getByLabel', () => {
+    it('should get the matching node based on aria-label', () => {
+      container.innerHTML = '<button aria-label="test">Test</button>';
+      expect(getByLabel(container, 'test')).toEqual(container.childNodes[0]);
+    });
+
+    it('should get the matching node based on aria-labelledby', () => {
+      container.innerHTML = [
+        '<span id="test">label</span>',
+        '<button aria-labelledby="test">Test</button>',
+      ].join('');
+
+      expect(getByLabel(container, 'label')).toEqual(container.childNodes[1]);
+    });
+
+    it('should support matching based on text if label is in an interactive node', () => {
+      container.innerHTML = '<button>test</button>';
+      expect(getByLabel(container, 'test')).toEqual(container.childNodes[0]);
+    });
+
+    it('should return null if no matches are found', () => {
+      expect(getByLabel(container, 'Not found')).toEqual(null);
     });
   });
 

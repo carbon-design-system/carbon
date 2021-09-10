@@ -13,7 +13,7 @@ import trackBlur from '../../globals/js/mixins/track-blur';
 import eventMatches from '../../globals/js/misc/event-matches';
 import on from '../../globals/js/misc/on';
 
-const toArray = arrayLike => Array.prototype.slice.call(arrayLike);
+const toArray = (arrayLike) => Array.prototype.slice.call(arrayLike);
 
 class Dropdown extends mixin(
   createComponent,
@@ -41,17 +41,17 @@ class Dropdown extends mixin(
     super(element, options);
 
     this.manage(
-      on(this.element.ownerDocument, 'click', event => {
+      on(this.element.ownerDocument, 'click', (event) => {
         this._toggle(event);
       })
     );
     this.manage(
-      on(this.element, 'keydown', event => {
+      on(this.element, 'keydown', (event) => {
         this._handleKeyDown(event);
       })
     );
     this.manage(
-      on(this.element, 'click', event => {
+      on(this.element, 'click', (event) => {
         const item = eventMatches(event, this.options.selectorItem);
         if (item) {
           this.select(item);
@@ -71,7 +71,7 @@ class Dropdown extends mixin(
     ) {
       // Using the latest HTML structure that supports the aria-activedescendant attribute
       this.manage(
-        on(this.element, 'mouseover', event => {
+        on(this.element, 'mouseover', (event) => {
           const item = eventMatches(event, this.options.selectorItem);
           if (item) {
             this._updateFocus(item);
@@ -209,7 +209,7 @@ class Dropdown extends mixin(
         toggle: isOfSelf && event.which !== 27 && event.which !== 40,
       };
       let changedState = false;
-      Object.keys(actions).forEach(action => {
+      Object.keys(actions).forEach((action) => {
         if (actions[action]) {
           changedState = true;
           this.element.classList[action](this.options.classOpen);
@@ -260,13 +260,24 @@ class Dropdown extends mixin(
 
       // @todo remove once legacy structure is depreciated
       if (!triggerNode) {
-        listItems.forEach(item => {
+        listItems.forEach((item) => {
           if (this.element.classList.contains(this.options.classOpen)) {
             item.tabIndex = 0;
           } else {
             item.tabIndex = -1;
           }
         });
+      }
+
+      const menuListNode = this.element.querySelector(
+        this.options.selectorMenu
+      );
+      if (menuListNode) {
+        menuListNode.tabIndex = this.element.classList.contains(
+          this.options.classOpen
+        )
+          ? '0'
+          : '-1';
       }
     }
   }
@@ -308,7 +319,7 @@ class Dropdown extends mixin(
     const start =
       this.getCurrentNavigation() ||
       this.element.querySelector(this.options.selectorLinkSelected);
-    const getNextItem = old => {
+    const getNextItem = (old) => {
       const handleUnderflow = (i, l) => i + (i >= 0 ? 0 : l);
       const handleOverflow = (i, l) => i - (i < l ? 0 : l);
       // `items.indexOf(old)` may be -1 (Scenario of no previous focus)
@@ -377,7 +388,7 @@ class Dropdown extends mixin(
 
       toArray(
         this.element.querySelectorAll(this.options.selectorLinkSelected)
-      ).forEach(item => {
+      ).forEach((item) => {
         if (itemToSelect !== item) {
           item.parentElement.classList.remove(this.options.classSelected);
         }

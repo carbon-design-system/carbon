@@ -15,11 +15,7 @@ import eventMatches from '../../globals/js/misc/event-matches';
 
 const { prefix } = settings;
 
-export default class SideNav extends mixin(
-  createComponent,
-  initComponentBySearch,
-  handles
-) {
+class SideNav extends mixin(createComponent, initComponentBySearch, handles) {
   /**
    * The map associating DOM element and copy button UI instance.
    * @member SideNav.components
@@ -27,6 +23,26 @@ export default class SideNav extends mixin(
    */
   static components /* #__PURE_CLASS_PROPERTY__ */ = new WeakMap();
 
+  /**
+   * Side nav.
+   * @extends CreateComponent
+   * @extends InitComponentBySearch
+   * @extends Handles
+   * @param {HTMLElement} element The element working as a side nav.
+   * @param {object} [options] The component options.
+   * @param {string} [options.selectorSideNavToggle]
+   *   The CSS selector to find the toggle button.
+   * @param {string} [options.selectorSideNavSubmenu] The CSS selector to find the trigger buttons for sub nav items.
+   * @param {string} [options.selectorSideNavItem] The CSS selector to find the nav items.
+   * @param {string} [options.selectorSideNavLink] The CSS selector to find the interactive potions in non-nested nav items.
+   * @param {string} [options.selectorSideNavLinkCurrent]
+   *   The CSS selector to find the interactive potion in active non-nested nav item.
+   * @param {string} [options.classSideNavExpanded] The CSS class for the expanded state.
+   * @param {string} [options.classSideNavItemActive]
+   *   The CSS class for the active/inactive state for nav items.
+   * @param {string} [options.classSideNavLinkCurrent]
+   *   The CSS class for the active/inactive state of the interactive potion in non-nested nav items.
+   */
   constructor(element, options) {
     super(element, options);
     this.manage(on(element, 'click', this._handleClick));
@@ -62,7 +78,7 @@ export default class SideNav extends mixin(
     );
   }
 
-  _handleClick = evt => {
+  _handleClick = (evt) => {
     const matchesToggle = eventMatches(evt, this.options.selectorSideNavToggle);
     const matchesNavSubmenu = eventMatches(
       evt,
@@ -94,7 +110,7 @@ export default class SideNav extends mixin(
         ...this.element.querySelectorAll(
           this.options.selectorSideNavLinkCurrent
         ),
-      ].forEach(el => {
+      ].forEach((el) => {
         el.classList.remove(
           this.options.classSideNavItemActive,
           this.options.classSideNavLinkCurrent
@@ -114,10 +130,20 @@ export default class SideNav extends mixin(
   /**
    * The component options.
    * If `options` is specified in the constructor, {@linkcode SideNav.create .create()}, or {@linkcode SideNav.init .init()},
-   * properties in this object are overriden for the instance being create and how {@linkcode SideNav.init .init()} works.
+   * properties in this object are overridden for the instance being create and how {@linkcode SideNav.init .init()} works.
    * @member SideNav.options
    * @type {object}
    * @property {string} selectorInit The data attribute to find side navs.
+   * @property {string} [selectorSideNavToggle] The CSS selector to find the toggle button.
+   * @property {string} [selectorSideNavSubmenu] The CSS selector to find the trigger buttons for sub nav items.
+   * @property {string} [selectorSideNavItem] The CSS selector to find the nav items.
+   * @property {string} [selectorSideNavLink] The CSS selector to find the interactive portions in non-nested nav items.
+   * @property {string} [selectorSideNavLinkCurrent]
+   *   The CSS selector to find the interactive potion in active non-nested nav item.
+   * @property {string} [classSideNavExpanded] The CSS class for the expanded state.
+   * @property {string} [classSideNavItemActive] The CSS class for the active/inactive state for nav items.
+   * @property {string} [classSideNavLinkCurrent]
+   *   The CSS class for the active/inactive state of the interactive portion in non-nested nav items.
    */
   static options /* #__PURE_CLASS_PROPERTY__ */ = {
     selectorInit: '[data-side-nav]',
@@ -131,3 +157,5 @@ export default class SideNav extends mixin(
     classSideNavLinkCurrent: `${prefix}--side-nav__link--current`,
   };
 }
+
+export default SideNav;

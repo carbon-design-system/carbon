@@ -6,6 +6,9 @@
 //
 
 @import 'helper-mixins';
+@import 'css--helpers';
+@import 'layout';
+@import 'typography';
 
 // Tooltip
 // Tooltip caret visual styles
@@ -27,7 +30,10 @@
 /// @group tooltip
 @mixin tooltip--content($tooltip-type: 'icon') {
   @include box-shadow;
+
+  z-index: z('floating');
   width: max-content;
+  min-width: rem(24px);
   max-width: rem(208px);
   height: auto;
   padding: if(
@@ -35,25 +41,29 @@
     rem(8px) rem(16px),
     rem(3px) rem(16px)
   );
+  background-color: $inverse-02;
   border-radius: rem(2px);
   color: $inverse-01;
   font-weight: 400;
   text-align: left;
   transform: translateX(-50%);
-  pointer-events: none;
-  background-color: $inverse-02;
   @include type-style('body-short-01');
 
   // IE media query
   @media all and (-ms-high-contrast: none), (-ms-high-contrast: active) {
-    width: rem(208px);
+    width: auto;
   }
   // Edge 12-15 and Edge 16 feature queries
   @supports (-ms-accelerator: true) {
-    width: rem(208px);
+    width: auto;
   }
   @supports (-ms-ime-align: auto) {
-    width: rem(208px);
+    width: auto;
+  }
+
+  // Windows, Firefox HCM Fix
+  @media screen and (-ms-high-contrast: active), screen and (prefers-contrast) {
+    border: 1px solid transparent;
   }
 }
 
@@ -66,15 +76,19 @@
 @mixin tooltip--trigger($tooltip-type: 'icon', $position: 'bottom') {
   position: relative;
   display: inline-flex;
-  align-items: center;
-  cursor: pointer;
   overflow: visible;
+  align-items: center;
 
   &:focus {
     @include focus-outline('border');
   }
 
+  @if $tooltip-type == 'definition' {
+    cursor: default;
+  }
+
   @if $tooltip-type == 'icon' {
+    cursor: pointer;
     &:focus {
       outline: 1px solid transparent;
 
@@ -132,6 +146,7 @@
     opacity: 1;
     // overwrite default nowrap behavior
     white-space: normal;
+    word-break: break-word;
   }
 
   // content box
@@ -150,6 +165,7 @@
     content: none;
   }
 
+  &.#{$prefix}--tooltip--visible,
   &:hover,
   &:focus {
     &::before,
@@ -168,9 +184,9 @@
 
     .#{$prefix}--assistive-text,
     + .#{$prefix}--assistive-text {
-      clip: auto;
-      margin: auto;
       overflow: visible;
+      margin: auto;
+      clip: auto;
     }
 
     .#{$prefix}--assistive-text,
@@ -182,9 +198,9 @@
 
   &.#{$prefix}--tooltip--hidden .#{$prefix}--assistive-text,
   &.#{$prefix}--tooltip--hidden + .#{$prefix}--assistive-text {
-    clip: rect(0, 0, 0, 0);
-    margin: -1px;
     overflow: hidden;
+    margin: -1px;
+    clip: rect(0, 0, 0, 0);
   }
 
   &.#{$prefix}--tooltip--hidden.#{$prefix}--tooltip--a11y::before {
@@ -206,14 +222,45 @@
   $align: 'center'
 ) {
   // position and alignment
-  $caret-spacing: if(
-    $tooltip-type == 'definition',
-    rem(4px),
-    rem(8px)
-  ); // space between caret and trigger button
+  $caret-spacing: if($tooltip-type == 'definition', rem(4px), rem(8px));
+
+  // space between caret and trigger button
   $caret-height: rem(5px);
   $caret-width: rem(8px);
   $body-spacing: $caret-spacing + $caret-height;
+
+  // Use pseudo element to create invisible hover area to keep tooltip open on hover
+  .#{$prefix}--assistive-text::after {
+    position: absolute;
+    display: block;
+    content: '';
+    // clip-path: polygon(50% 100%, 0 0, 100% 0);
+
+    @if ($position == 'top' or $position == 'bottom') {
+      left: 0;
+      width: 100%;
+      height: rem(12px);
+    }
+
+    @if ($position == 'left' or $position == 'right') {
+      top: 0;
+      width: rem(12px);
+      height: 100%;
+    }
+
+    @if ($position == 'top') {
+      bottom: rem(-12px);
+    }
+    @if ($position == 'right') {
+      left: rem(-12px);
+    }
+    @if ($position == 'bottom') {
+      top: rem(-12px);
+    }
+    @if ($position == 'left') {
+      right: rem(-12px);
+    }
+  }
 
   // @todo Simplify CSS selectors on next major release
   &::before,
@@ -269,8 +316,6 @@
   // @todo Simplify CSS selectors on next major release
   &::after,
   .#{$prefix}--assistive-text,
-  .#{$prefix}--assistive-text,
-  + .#{$prefix}--assistive-text,
   + .#{$prefix}--assistive-text {
     @if ($position == 'top') {
       top: -$body-spacing;
@@ -313,9 +358,8 @@
   @if $tooltip-type == 'definition' {
     &.#{$prefix}--tooltip--a11y + .#{$prefix}--assistive-text {
       @if ($position == 'bottom') {
-        bottom: -(
-            $body-spacing - rem(1px)
-          ); // carryover from https://github.com/carbon-design-system/carbon/pull/3151/files#diff-93734be0784e9530b6d14a7b03b0d352R261-R265
+        // carryover from https://github.com/carbon-design-system/carbon/pull/3151/files#diff-93734be0784e9530b6d14a7b03b0d352R261-R265
+        bottom: -($body-spacing - rem(1px));
         @if ($align == 'start' or $align == 'end') {
           transform: translate(0, 100%);
         } @else {

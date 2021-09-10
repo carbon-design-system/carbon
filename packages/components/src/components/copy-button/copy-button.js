@@ -28,7 +28,9 @@ class CopyButton extends mixin(
     super(element, options);
     this.manage(on(this.element, 'click', () => this.handleClick()));
     this.manage(
-      on(this.element, 'animationend', event => this.handleAnimationEnd(event))
+      on(this.element, 'animationend', (event) =>
+        this.handleAnimationEnd(event)
+      )
     );
   }
 
@@ -72,7 +74,7 @@ class CopyButton extends mixin(
   /**
    * The component options.
    * If `options` is specified in the constructor, {@linkcode CopyBtn.create .create()}, or {@linkcode CopyBtn.init .init()},
-   * properties in this object are overriden for the instance being create and how {@linkcode CopyBtn.init .init()} works.
+   * properties in this object are overridden for the instance being create and how {@linkcode CopyBtn.init .init()} works.
    * @member CopyBtn.options
    * @type {object}
    * @property {string} selectorInit The data attribute to find copy button UIs.

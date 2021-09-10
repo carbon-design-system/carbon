@@ -10,19 +10,19 @@
 
 @include exports('helper-classes') {
   .#{$prefix}--text-truncate--end {
-    width: 100%;
     display: inline-block;
+    overflow: hidden;
+    width: 100%;
     text-overflow: ellipsis;
     white-space: nowrap;
-    overflow: hidden;
   }
 
   .#{$prefix}--text-truncate--front {
-    width: 100%;
     display: inline-block;
+    overflow: hidden;
+    width: 100%;
     direction: rtl;
     text-overflow: ellipsis;
     white-space: nowrap;
-    overflow: hidden;
   }
 }

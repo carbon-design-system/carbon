@@ -17,25 +17,59 @@
   .#{$prefix}--structured-list--selection .#{$prefix}--structured-list-th {
     @include padding--data-structured-list;
   }
-
-  .#{$prefix}--structured-list-input {
-    display: none;
+  @if feature-flag-enabled('enable-v11-release') {
+    .#{$prefix}--structured-list-row--focused-within {
+      @include focus-outline('outline');
+    }
+  } @else {
+    .#{$prefix}--structured-list-input {
+      display: none;
+    }
   }
 
   .#{$prefix}--structured-list {
     @include reset;
+
     display: table;
-    overflow-x: auto;
-    overflow-y: hidden;
     width: 100%;
-    border-collapse: collapse;
-    border-spacing: 0;
     margin-bottom: 5rem;
     background-color: transparent;
+    border-collapse: collapse;
+    border-spacing: 0;
+    overflow-x: auto;
+    overflow-y: hidden;
 
+    // Condensed list
     &.#{$prefix}--structured-list--condensed .#{$prefix}--structured-list-td,
     &.#{$prefix}--structured-list--condensed .#{$prefix}--structured-list-th {
       @include padding-td--condensed;
+      //8px padding all over
+    }
+
+    .#{$prefix}--structured-list-row
+      .#{$prefix}--structured-list-td:first-of-type,
+    .#{$prefix}--structured-list-row
+      .#{$prefix}--structured-list-th:first-of-type {
+      padding-left: 1rem;
+      // specs require 16px spacing between columns
+      // 8px side padding between col creates 16 px, with exception of 1st col, which needs an override to be 16px
+    }
+
+    // Flush list
+    &.#{$prefix}--structured-list--flush
+      .#{$prefix}--structured-list-row
+      .#{$prefix}--structured-list-td,
+    &.#{$prefix}--structured-list--flush
+      .#{$prefix}--structured-list-row
+      .#{$prefix}--structured-list-th,
+    &.#{$prefix}--structured-list--flush
+      .#{$prefix}--structured-list-row
+      .#{$prefix}--structured-list-td:first-of-type,
+    &.#{$prefix}--structured-list--flush
+      .#{$prefix}--structured-list-row
+      .#{$prefix}--structured-list-th:first-of-type {
+      padding-right: 1rem;
+      padding-left: 0;
     }
   }
 
@@ -47,9 +81,9 @@
 
   .#{$prefix}--structured-list--selection
     .#{$prefix}--structured-list-row:hover:not(.#{$prefix}--structured-list-row--header-row):not(.#{$prefix}--structured-list-row--selected) {
+    border-bottom: 1px solid $hover-row;
     background-color: $hover-row;
     cursor: pointer;
-    border-bottom: 1px solid $hover-row;
   }
 
   .#{$prefix}--structured-list-row.#{$prefix}--structured-list-row--selected {
@@ -61,10 +95,11 @@
     cursor: inherit;
   }
 
-  .#{$prefix}--structured-list-row:focus:not(.#{$prefix}--structured-list-row--header-row) {
-    @include focus-outline('outline');
+  @if not feature-flag-enabled('enable-v11-release') {
+    .#{$prefix}--structured-list-row:focus:not(.#{$prefix}--structured-list-row--header-row) {
+      @include focus-outline('outline');
+    }
   }
-
   .#{$prefix}--structured-list--selection
     .#{$prefix}--structured-list-row:hover:not(.#{$prefix}--structured-list-row--header-row)
     > .#{$prefix}--structured-list-td,
@@ -76,7 +111,11 @@
   .#{$prefix}--structured-list--selection
     .#{$prefix}--structured-list-row:hover:not(.#{$prefix}--structured-list-row--header-row)
     > .#{$prefix}--structured-list-td {
-    border-top: 1px solid $ui-01;
+    @if feature-flag-enabled('enable-v11-release') {
+      border-top: 1px solid $border-subtle;
+    } @else {
+      border-top: 1px solid $ui-01;
+    }
   }
 
   .#{$prefix}--structured-list-thead {
@@ -88,12 +127,14 @@
     @include reset;
     @include padding-th;
     @include type-style('productive-heading-01');
+
     display: table-cell;
-    font-weight: 600;
     height: rem(40px);
+    color: $text-01;
+    font-weight: 600;
     text-align: left;
     text-transform: $structured-list-text-transform;
-    vertical-align: bottom;
+    vertical-align: top;
   }
 
   .#{$prefix}--structured-list-tbody {
@@ -105,18 +146,16 @@
     @include reset;
     @include type-style('body-long-01');
     @include padding-td;
-    line-height: carbon--rem(21px);
+
     position: relative;
     display: table-cell;
     max-width: 36rem;
-    transition: color $duration--fast-02 motion(standard, productive);
-  }
-
-  .#{$prefix}--structured-list-th {
-    color: $text-01;
-  }
-  .#{$prefix}--structured-list-td {
     color: $text-02;
+    @if feature-flag-enabled('enable-v11-release') {
+      border-top: 1px solid $ui-03;
+    }
+
+    transition: color $duration--fast-02 motion(standard, productive);
   }
 
   .#{$prefix}--structured-list-content--nowrap {
@@ -126,12 +165,8 @@
   .#{$prefix}--structured-list-svg {
     display: inline-block;
     fill: transparent;
-    vertical-align: middle;
     transition: all $duration--fast-02 motion(standard, productive);
-  }
-
-  .#{$prefix}--structured-list-row:hover .#{$prefix}--structured-list-svg {
-    fill: $ibm-color__gray-40;
+    vertical-align: middle;
   }
 
   .#{$prefix}--structured-list-input:checked
@@ -159,21 +194,14 @@
       }
     }
 
-    .#{$prefix}--structured-list-th span {
+    span {
       @include skeleton;
+
+      display: block;
+
       width: 75%;
       height: 1rem;
-      display: block;
     }
-  }
-
-  .#{$prefix}--structured-list.#{$prefix}--skeleton
-    .#{$prefix}--structured-list-th
-    span {
-    @include skeleton;
-    width: 75%;
-    height: 1rem;
-    display: block;
   }
 
   .#{$prefix}--structured-list.#{$prefix}--structured-list--selection.#{$prefix}--skeleton
@@ -183,6 +211,13 @@
     span {
       display: none;
     }
+  }
+
+  // Windows HCM fix
+  .#{$prefix}--structured-list-input:checked
+    + .#{$prefix}--structured-list-td
+    .#{$prefix}--structured-list-svg {
+    @include high-contrast-mode('icon-fill');
   }
 }
 

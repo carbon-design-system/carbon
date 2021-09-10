@@ -1,9 +1,9 @@
 import Tab from '../../src/components/tabs/tabs';
 import flattenOptions from '../utils/flatten-options';
 
-describe('Test tabs', function() {
-  describe('Constructor', function() {
-    it('Should set default options', function() {
+describe('Test tabs', function () {
+  describe('Constructor', function () {
+    it('Should set default options', function () {
       spyOn(Tab.prototype, '_updateTriggerText');
       const tab = new Tab(document.createElement('div'));
       expect(flattenOptions(tab.options)).toEqual({
@@ -25,7 +25,7 @@ describe('Test tabs', function() {
       });
     });
 
-    it('Should initialize currently selected tab item for narrow screen', function() {
+    it('Should initialize currently selected tab item for narrow screen', function () {
       const triggerTextNode = document.createElement('div');
       triggerTextNode.classList.add('bx--tabs-trigger-text');
 
@@ -46,7 +46,7 @@ describe('Test tabs', function() {
       expect(triggerTextNode.textContent).toBe('0');
     });
 
-    it('Should deal with a condition with no selected item when constructor runs', function() {
+    it('Should deal with a condition with no selected item when constructor runs', function () {
       const element = document.createElement('div');
       const buttonNode = document.createElement('div');
       buttonNode.classList.add('bx--tabs__nav-item');
@@ -57,12 +57,12 @@ describe('Test tabs', function() {
     });
   });
 
-  describe('Toggling drop down for narrow screen', function() {
+  describe('Toggling drop down for narrow screen', function () {
     let element;
     let triggerNode;
     let menuNode;
 
-    beforeAll(function() {
+    beforeAll(function () {
       spyOn(Tab.prototype, '_updateTriggerText');
 
       triggerNode = document.createElement('div');
@@ -80,7 +80,7 @@ describe('Test tabs', function() {
       new Tab(element);
     });
 
-    it('Should show drop down upon hitting trigger button', function() {
+    it('Should show drop down upon hitting trigger button', function () {
       menuNode.classList.add('bx--tabs__nav--hidden');
       triggerNode.dispatchEvent(new CustomEvent('click', { bubbles: true }));
       expect(menuNode.classList.contains('bx--tabs__nav--hidden')).toBe(false);
@@ -89,7 +89,7 @@ describe('Test tabs', function() {
       );
     });
 
-    it('Should hide drop down upon hitting trigger button', function() {
+    it('Should hide drop down upon hitting trigger button', function () {
       triggerNode.dispatchEvent(new CustomEvent('click', { bubbles: true }));
       expect(menuNode.classList.contains('bx--tabs__nav--hidden')).toBe(true);
       expect(triggerNode.classList.contains('bx--tabs-trigger--open')).toBe(
@@ -97,21 +97,21 @@ describe('Test tabs', function() {
       );
     });
 
-    afterEach(function() {
+    afterEach(function () {
       menuNode.classList.remove('bx--tabs__nav--hidden');
     });
 
-    afterAll(function() {
+    afterAll(function () {
       document.body.removeChild(element);
     });
   });
 
-  describe('Setting active tab', function() {
+  describe('Setting active tab', function () {
     let element;
     let buttonNodes;
     let triggerTextNode;
 
-    beforeAll(function() {
+    beforeAll(function () {
       spyOn(Tab.prototype, '_updateMenuState');
 
       triggerTextNode = document.createElement('div');
@@ -135,7 +135,7 @@ describe('Test tabs', function() {
       new Tab(element);
     });
 
-    beforeEach(function() {
+    beforeEach(function () {
       buttonNodes.forEach((buttonNode, i) => {
         buttonNode.classList.remove('bx--tabs__nav-item--disabled');
         buttonNode.classList[i === 0 ? 'add' : 'remove'](
@@ -144,7 +144,7 @@ describe('Test tabs', function() {
       });
     });
 
-    it('Should update active tab upon clicking', function() {
+    it('Should update active tab upon clicking', function () {
       buttonNodes[1].dispatchEvent(new CustomEvent('click', { bubbles: true }));
       expect(
         buttonNodes[0].classList.contains('bx--tabs__nav-item--selected')
@@ -157,7 +157,7 @@ describe('Test tabs', function() {
       ).toBe(false);
     });
 
-    it('Should skip disabled tab upon right key', function() {
+    it('Should skip disabled tab upon right key', function () {
       buttonNodes[1].classList.add('bx--tabs__nav-item--disabled');
       const defaultPrevented = element.dispatchEvent(
         Object.assign(new CustomEvent('keydown'), { which: 39 })
@@ -174,7 +174,7 @@ describe('Test tabs', function() {
       ).toBe(true);
     });
 
-    it('Should avoid activating disabled tab on click', function() {
+    it('Should avoid activating disabled tab on click', function () {
       buttonNodes[1].classList.add('bx--tabs__nav-item--disabled');
       buttonNodes[1].dispatchEvent(new CustomEvent('click', { bubbles: true }));
       expect(
@@ -188,12 +188,12 @@ describe('Test tabs', function() {
       ).toBe(false);
     });
 
-    it('Should update currently selected tab item for narrow screen', function() {
+    it('Should update currently selected tab item for narrow screen', function () {
       buttonNodes[1].dispatchEvent(new CustomEvent('click', { bubbles: true }));
       expect(triggerTextNode.textContent).toBe(buttonNodes[1].textContent);
     });
 
-    it('Should update active tab upon right key', function() {
+    it('Should update active tab upon right key', function () {
       const defaultPrevented = element.dispatchEvent(
         Object.assign(new CustomEvent('keydown'), { which: 39 })
       );
@@ -209,7 +209,7 @@ describe('Test tabs', function() {
       ).toBe(false);
     });
 
-    it('Should handle out of range index', function() {
+    it('Should handle out of range index', function () {
       element.dispatchEvent(
         Object.assign(new CustomEvent('keydown'), { which: 39 })
       );
@@ -230,7 +230,7 @@ describe('Test tabs', function() {
       ).toBe(false);
     });
 
-    it('Should update active tab upon left key', function() {
+    it('Should update active tab upon left key', function () {
       const defaultPrevented = element.dispatchEvent(
         Object.assign(new CustomEvent('keydown'), { which: 37 })
       );
@@ -246,7 +246,7 @@ describe('Test tabs', function() {
       ).toBe(true);
     });
 
-    it('Should focus on the new active tab upon keyboard navigation', function() {
+    it('Should focus on the new active tab upon keyboard navigation', function () {
       const link = document.createElement('a');
       spyOn(link, 'focus');
       link.classList.add('bx--tabs__nav-link');
@@ -261,7 +261,7 @@ describe('Test tabs', function() {
       }
     });
 
-    afterAll(function() {
+    afterAll(function () {
       document.body.removeChild(element);
     });
   });

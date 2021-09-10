@@ -1,232 +1,121 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Accordion should render 1`] = `
-<Accordion
-  align="end"
-  className="extra-class"
->
+<DocumentFragment>
   <ul
-    className="bx--accordion extra-class bx--accordion--end"
+    class="bx--accordion extra-class bx--accordion--end"
   >
-    <AccordionItem
-      className="child"
-      title="Heading A"
+    <li
+      class="bx--accordion__item child"
     >
-      <li
-        className="bx--accordion__item child"
-        onAnimationEnd={[Function]}
+      <button
+        aria-controls="accordion-item-1"
+        aria-expanded="false"
+        class="bx--accordion__heading"
+        type="button"
       >
-        <defaultRenderExpando
-          aria-expanded={false}
-          className="bx--accordion__heading"
-          onClick={[Function]}
-          onKeyDown={[Function]}
-          title="Expand/Collapse"
-          type="button"
+        <svg
+          aria-hidden="true"
+          class="bx--accordion__arrow"
+          fill="currentColor"
+          focusable="false"
+          height="16"
+          preserveAspectRatio="xMidYMid meet"
+          viewBox="0 0 16 16"
+          width="16"
+          xmlns="http://www.w3.org/2000/svg"
         >
-          <button
-            aria-expanded={false}
-            className="bx--accordion__heading"
-            onClick={[Function]}
-            onKeyDown={[Function]}
-            title="Expand/Collapse"
-            type="button"
-          >
-            <ForwardRef(ChevronRight16)
-              aria-label="Expand/Collapse"
-              className="bx--accordion__arrow"
-            >
-              <Icon
-                aria-label="Expand/Collapse"
-                className="bx--accordion__arrow"
-                height={16}
-                preserveAspectRatio="xMidYMid meet"
-                viewBox="0 0 16 16"
-                width={16}
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <svg
-                  aria-label="Expand/Collapse"
-                  className="bx--accordion__arrow"
-                  focusable="false"
-                  height={16}
-                  preserveAspectRatio="xMidYMid meet"
-                  role="img"
-                  style={
-                    Object {
-                      "willChange": "transform",
-                    }
-                  }
-                  viewBox="0 0 16 16"
-                  width={16}
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    d="M11 8L6 13 5.3 12.3 9.6 8 5.3 3.7 6 3z"
-                  />
-                </svg>
-              </Icon>
-            </ForwardRef(ChevronRight16)>
-            <div
-              className="bx--accordion__title"
-            >
-              Heading A
-            </div>
-          </button>
-        </defaultRenderExpando>
+          <path
+            d="M11 8L6 13 5.3 12.3 9.6 8 5.3 3.7 6 3z"
+          />
+        </svg>
         <div
-          className="bx--accordion__content"
+          class="bx--accordion__title"
         >
-          Panel A
+          Heading A
         </div>
-      </li>
-    </AccordionItem>
-    <AccordionItem
-      className="child"
-      title="Heading B"
+      </button>
+      <div
+        class="bx--accordion__content"
+        id="accordion-item-1"
+      >
+        Panel A
+      </div>
+    </li>
+    <li
+      class="bx--accordion__item child"
     >
-      <li
-        className="bx--accordion__item child"
-        onAnimationEnd={[Function]}
+      <button
+        aria-controls="accordion-item-2"
+        aria-expanded="false"
+        class="bx--accordion__heading"
+        type="button"
       >
-        <defaultRenderExpando
-          aria-expanded={false}
-          className="bx--accordion__heading"
-          onClick={[Function]}
-          onKeyDown={[Function]}
-          title="Expand/Collapse"
-          type="button"
+        <svg
+          aria-hidden="true"
+          class="bx--accordion__arrow"
+          fill="currentColor"
+          focusable="false"
+          height="16"
+          preserveAspectRatio="xMidYMid meet"
+          viewBox="0 0 16 16"
+          width="16"
+          xmlns="http://www.w3.org/2000/svg"
         >
-          <button
-            aria-expanded={false}
-            className="bx--accordion__heading"
-            onClick={[Function]}
-            onKeyDown={[Function]}
-            title="Expand/Collapse"
-            type="button"
-          >
-            <ForwardRef(ChevronRight16)
-              aria-label="Expand/Collapse"
-              className="bx--accordion__arrow"
-            >
-              <Icon
-                aria-label="Expand/Collapse"
-                className="bx--accordion__arrow"
-                height={16}
-                preserveAspectRatio="xMidYMid meet"
-                viewBox="0 0 16 16"
-                width={16}
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <svg
-                  aria-label="Expand/Collapse"
-                  className="bx--accordion__arrow"
-                  focusable="false"
-                  height={16}
-                  preserveAspectRatio="xMidYMid meet"
-                  role="img"
-                  style={
-                    Object {
-                      "willChange": "transform",
-                    }
-                  }
-                  viewBox="0 0 16 16"
-                  width={16}
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    d="M11 8L6 13 5.3 12.3 9.6 8 5.3 3.7 6 3z"
-                  />
-                </svg>
-              </Icon>
-            </ForwardRef(ChevronRight16)>
-            <div
-              className="bx--accordion__title"
-            >
-              Heading B
-            </div>
-          </button>
-        </defaultRenderExpando>
+          <path
+            d="M11 8L6 13 5.3 12.3 9.6 8 5.3 3.7 6 3z"
+          />
+        </svg>
         <div
-          className="bx--accordion__content"
+          class="bx--accordion__title"
         >
-          Panel B
+          Heading B
         </div>
-      </li>
-    </AccordionItem>
-    <AccordionItem
-      className="child"
-      title="Heading C"
+      </button>
+      <div
+        class="bx--accordion__content"
+        id="accordion-item-2"
+      >
+        Panel B
+      </div>
+    </li>
+    <li
+      class="bx--accordion__item child"
     >
-      <li
-        className="bx--accordion__item child"
-        onAnimationEnd={[Function]}
+      <button
+        aria-controls="accordion-item-3"
+        aria-expanded="false"
+        class="bx--accordion__heading"
+        type="button"
       >
-        <defaultRenderExpando
-          aria-expanded={false}
-          className="bx--accordion__heading"
-          onClick={[Function]}
-          onKeyDown={[Function]}
-          title="Expand/Collapse"
-          type="button"
+        <svg
+          aria-hidden="true"
+          class="bx--accordion__arrow"
+          fill="currentColor"
+          focusable="false"
+          height="16"
+          preserveAspectRatio="xMidYMid meet"
+          viewBox="0 0 16 16"
+          width="16"
+          xmlns="http://www.w3.org/2000/svg"
         >
-          <button
-            aria-expanded={false}
-            className="bx--accordion__heading"
-            onClick={[Function]}
-            onKeyDown={[Function]}
-            title="Expand/Collapse"
-            type="button"
-          >
-            <ForwardRef(ChevronRight16)
-              aria-label="Expand/Collapse"
-              className="bx--accordion__arrow"
-            >
-              <Icon
-                aria-label="Expand/Collapse"
-                className="bx--accordion__arrow"
-                height={16}
-                preserveAspectRatio="xMidYMid meet"
-                viewBox="0 0 16 16"
-                width={16}
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <svg
-                  aria-label="Expand/Collapse"
-                  className="bx--accordion__arrow"
-                  focusable="false"
-                  height={16}
-                  preserveAspectRatio="xMidYMid meet"
-                  role="img"
-                  style={
-                    Object {
-                      "willChange": "transform",
-                    }
-                  }
-                  viewBox="0 0 16 16"
-                  width={16}
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    d="M11 8L6 13 5.3 12.3 9.6 8 5.3 3.7 6 3z"
-                  />
-                </svg>
-              </Icon>
-            </ForwardRef(ChevronRight16)>
-            <div
-              className="bx--accordion__title"
-            >
-              Heading C
-            </div>
-          </button>
-        </defaultRenderExpando>
+          <path
+            d="M11 8L6 13 5.3 12.3 9.6 8 5.3 3.7 6 3z"
+          />
+        </svg>
         <div
-          className="bx--accordion__content"
+          class="bx--accordion__title"
         >
-          Panel C
+          Heading C
         </div>
-      </li>
-    </AccordionItem>
+      </button>
+      <div
+        class="bx--accordion__content"
+        id="accordion-item-3"
+      >
+        Panel C
+      </div>
+    </li>
   </ul>
-</Accordion>
+</DocumentFragment>
 `;

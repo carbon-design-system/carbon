@@ -80,6 +80,35 @@ function FontFaces() {
         </tbody>
       </table>
       <table>
+        <caption>IBM Plex Sans Condensed</caption>
+        <thead>
+          <tr>
+            <td>Weight</td>
+            <td>Sample</td>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Light</td>
+            <td className="bx--type-sans-condensed bx--type-light">Light</td>
+          </tr>
+          <tr>
+            <td>Regular</td>
+            <td className="bx--type-sans-condensed">Regular</td>
+          </tr>
+          <tr>
+            <td>Regular Italic</td>
+            <td className="bx--type-sans-condensed bx--type-italic">Regular</td>
+          </tr>
+          <tr>
+            <td>Semibold</td>
+            <td className="bx--type-sans-condensed bx--type-semibold">
+              Semibold
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <table>
         <caption>IBM Plex Serif</caption>
         <thead>
           <tr>
@@ -207,7 +236,7 @@ function TypeStyles() {
           </tr>
         </thead>
         <tbody>
-          {Object.keys(CarbonType.styles).map(token => (
+          {Object.keys(CarbonType.styles).map((token) => (
             <tr key={token}>
               <td>
                 <pre>

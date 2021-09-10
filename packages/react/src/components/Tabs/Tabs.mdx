@@ -1,0 +1,77 @@
+import { Props, Preview, Story } from '@storybook/addon-docs/blocks';
+import Tabs from '../Tabs';
+import Tab from '../Tab';
+
+# Tabs
+
+[Source code](https://github.com/carbon-design-system/carbon/tree/main/packages/react/src/components/Tabs)
+&nbsp;|&nbsp;
+[Usage guidelines](https://www.carbondesignsystem.com/components/tabs/usage)
+&nbsp;|&nbsp;
+[Accessibility](https://www.carbondesignsystem.com/components/tabs/accessibility)
+
+## Table of Contents
+
+- [Overview](#overview)
+  - [Default Tabs](#default-tabs)
+  - [Container Tabs](#container-tabs)
+- [Component API](#component-api)
+  - [Tab `renderContent`](#tab-rendercontent)
+- [Feedback](#feedback)
+
+## Overview
+
+Use tabs to allow users to navigate easily between views within the same
+context.
+
+### Default Tabs
+
+<Preview>
+  <Story id="components-tabs--default" />
+</Preview>
+
+### Container Tabs
+
+<Preview>
+  <Story id="components-tabs--container" />
+</Preview>
+
+## Component API
+
+<Props />
+
+### Tab `renderContent`
+
+You will occasionally run into a situation where you only want Tab content to be
+loaded when the Tab is clicked. To do this, you can use the `renderContent` prop
+like so:
+
+```jsx
+const TabContentRenderedOnlyWhenSelected = ({
+  selected,
+  children,
+  className,
+  ...other
+}) =>
+  !selected ? (
+    <div {...other} className={`${prefix}--visually-hidden`} />
+  ) : (
+    <div
+      {...other}
+      className={classNames(className, `${prefix}--tab-content`)}
+      role="tabpanel"
+      selected={selected}>
+      {children}
+    </div>
+  );
+
+<Tabs>
+  <Tab renderContent={TabContentRenderedOnlyWhenSelected}></Tab>
+</Tabs>;
+```
+
+## Feedback
+
+Help us improve this component by providing feedback, asking questions on Slack,
+or updating this file on
+[GitHub](https://github.com/carbon-design-system/carbon/edit/main/packages/react/src/components/Tabs/Tabs.mdx).

@@ -3,29 +3,34 @@
 exports[`DataTable.TableExpandHeader should render 1`] = `
 <Table
   isSortable={false}
+  overflowMenuOnHover={true}
 >
-  <table
-    className="bx--data-table bx--data-table--no-border"
+  <div
+    className="bx--data-table-content"
   >
-    <TableHead>
-      <thead>
-        <TableRow>
-          <tr>
-            <TableExpandHeader
-              ariaLabel="test-label"
-              className="custom-class"
-              isExpanded={false}
-              onExpand={[MockFunction]}
-            >
-              <th
-                className="bx--table-expand custom-class"
-                scope="col"
-              />
-            </TableExpandHeader>
-          </tr>
-        </TableRow>
-      </thead>
-    </TableHead>
-  </table>
+    <table
+      className="bx--data-table bx--data-table--no-border"
+    >
+      <TableHead>
+        <thead>
+          <TableRow>
+            <tr>
+              <TableExpandHeader
+                ariaLabel="test-label"
+                className="custom-class"
+                isExpanded={false}
+                onExpand={[MockFunction]}
+              >
+                <th
+                  className="bx--table-expand custom-class"
+                  scope="col"
+                />
+              </TableExpandHeader>
+            </tr>
+          </TableRow>
+        </thead>
+      </TableHead>
+    </table>
+  </div>
 </Table>
 `;

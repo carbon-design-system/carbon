@@ -12,13 +12,25 @@ import React from 'react';
 
 const { prefix } = settings;
 
-function Accordion({ align, children, className: customClassName, ...rest }) {
+function Accordion({
+  align,
+  children,
+  className: customClassName,
+  disabled,
+  size,
+  ...rest
+}) {
   const className = cx(`${prefix}--accordion`, customClassName, {
     [`${prefix}--accordion--${align}`]: align,
+    [`${prefix}--accordion--${size}`]: size,
   });
   return (
     <ul className={className} {...rest}>
-      {children}
+      {disabled
+        ? React.Children.toArray(children).map((child) => {
+            return React.cloneElement(child, { disabled });
+          })
+        : children}
     </ul>
   );
 }
@@ -28,6 +40,11 @@ Accordion.defaultProps = {
 };
 
 Accordion.propTypes = {
+  /**
+   * Specify the alignment of the accordion heading title and chevron.
+   */
+  align: PropTypes.oneOf(['start', 'end']),
+
   /**
    * Pass in the children that will be rendered within the Accordion
    */
@@ -39,9 +56,15 @@ Accordion.propTypes = {
   className: PropTypes.string,
 
   /**
-   * Specify the alignment of the accordion heading title and chevron.
+   * Specify whether an individual AccordionItem should be disabled
    */
-  align: PropTypes.oneOf(['start', 'end']),
+  disabled: PropTypes.bool,
+
+  /**
+   * Specify the size of the Accordion. Currently supports either `sm`, 'md' (default) or 'lg` as an option.
+   * TODO V11: remove `xl` (replaced with lg)
+   */
+  size: PropTypes.oneOf(['sm', 'md', 'lg', 'xl']),
 };
 
 export default Accordion;

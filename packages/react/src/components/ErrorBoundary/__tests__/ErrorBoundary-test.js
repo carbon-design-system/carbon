@@ -77,11 +77,11 @@ describe('ErrorBoundary', () => {
       if (shouldThrowError) {
         throw new Error('test error');
       }
-      return <span ref={element => (content = element)}>mock</span>;
+      return <span ref={(element) => (content = element)}>mock</span>;
     }
 
     function MockFallback() {
-      return <span ref={element => (fallback = element)}>mock</span>;
+      return <span ref={(element) => (fallback = element)}>mock</span>;
     }
 
     function MockTest() {
@@ -93,7 +93,10 @@ describe('ErrorBoundary', () => {
 
       return (
         <ErrorBoundaryContext.Provider value={{ log: jest.fn() }}>
-          <button ref={element => (button = element)} onClick={onClick}>
+          <button
+            type="button"
+            ref={(element) => (button = element)}
+            onClick={onClick}>
             Toggle
           </button>
           <ErrorBoundary fallback={<MockFallback />}>

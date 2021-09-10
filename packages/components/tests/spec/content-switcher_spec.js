@@ -4,9 +4,9 @@ import ContentSwitcher from '../../src/components/content-switcher/content-switc
 import HTML from '../../html/content-switcher/content-switcher.html';
 import flattenOptions from '../utils/flatten-options';
 
-describe('Test content switcher', function() {
-  describe('Constructor', function() {
-    it('Should set default options', function() {
+describe('Test content switcher', function () {
+  describe('Constructor', function () {
+    it('Should set default options', function () {
       const contentSwitcher = new ContentSwitcher(
         document.createElement('div')
       );
@@ -20,14 +20,14 @@ describe('Test content switcher', function() {
     });
   });
 
-  describe('_handleClick', function() {
+  describe('_handleClick', function () {
     let instance;
     let element;
     let wrapper;
     let buttons;
     const events = new EventManager();
 
-    beforeEach(function() {
+    beforeEach(function () {
       wrapper = document.createElement('div');
       wrapper.innerHTML = HTML;
       document.body.appendChild(wrapper);
@@ -36,14 +36,14 @@ describe('Test content switcher', function() {
       buttons = element.querySelectorAll('button');
     });
 
-    it('Should be called on click', function() {
+    it('Should be called on click', function () {
       spyOn(instance, '_handleClick');
       const event = new CustomEvent('click', { bubbles: true });
       buttons[1].dispatchEvent(event);
       expect(instance._handleClick).toHaveBeenCalled();
     });
 
-    it('Should update active item upon clicking', function() {
+    it('Should update active item upon clicking', function () {
       const event = new CustomEvent('click', { bubbles: true });
       buttons[1].dispatchEvent(event);
       expect(buttons[1].classList.contains(instance.options.classActive)).toBe(
@@ -54,16 +54,16 @@ describe('Test content switcher', function() {
       );
     });
 
-    it('Should update aria-selected upon clicking', function() {
+    it('Should update aria-selected upon clicking', function () {
       const event = new CustomEvent('click', { bubbles: true });
       buttons[1].dispatchEvent(event);
       expect(buttons[1].getAttribute('aria-selected')).toBe('true');
       expect(buttons[0].getAttribute('aria-selected')).toBe('false');
     });
 
-    it('Should provide a way to cancel switching item upon clicking', async function() {
-      const eventBeforeSelected = await new Promise(resolve => {
-        events.on(element, 'content-switcher-beingselected', event => {
+    it('Should provide a way to cancel switching item upon clicking', async function () {
+      const eventBeforeSelected = await new Promise((resolve) => {
+        events.on(element, 'content-switcher-beingselected', (event) => {
           event.preventDefault();
           resolve(event);
         });
@@ -78,21 +78,21 @@ describe('Test content switcher', function() {
       ).toBe(false);
     });
 
-    afterEach(function() {
+    afterEach(function () {
       events.reset();
       instance.release();
       document.body.removeChild(wrapper);
     });
   });
 
-  describe('setActive', function() {
+  describe('setActive', function () {
     let instance;
     let element;
     let wrapper;
     let buttons;
     const events = new EventManager();
 
-    beforeEach(function() {
+    beforeEach(function () {
       wrapper = document.createElement('div');
       wrapper.innerHTML = HTML;
       document.body.appendChild(wrapper);
@@ -101,7 +101,7 @@ describe('Test content switcher', function() {
       buttons = element.querySelectorAll('button');
     });
 
-    it('Should update selected item when using setActive method', function() {
+    it('Should update selected item when using setActive method', function () {
       instance.setActive(buttons[1]);
       expect(
         buttons[0].classList.contains('bx--content-switcher--selected')
@@ -111,13 +111,13 @@ describe('Test content switcher', function() {
       ).toBe(true);
     });
 
-    it('Should update aria-selected when using setActive method', function() {
+    it('Should update aria-selected when using setActive method', function () {
       instance.setActive(buttons[1]);
       expect(buttons[0].getAttribute('aria-selected')).toBe('false');
       expect(buttons[1].getAttribute('aria-selected')).toBe('true');
     });
 
-    it('Should update active item upon an API call', async function() {
+    it('Should update active item upon an API call', async function () {
       const item = await promisify(instance.setActive, { context: instance })(
         buttons[1]
       );
@@ -130,7 +130,7 @@ describe('Test content switcher', function() {
       ).toBe(true);
     });
 
-    it('Should update aria-selected upon an API call', async function() {
+    it('Should update aria-selected upon an API call', async function () {
       const item = await promisify(instance.setActive, { context: instance })(
         buttons[1]
       );
@@ -139,10 +139,10 @@ describe('Test content switcher', function() {
       expect(buttons[1].getAttribute('aria-selected')).toBe('true');
     });
 
-    it('Should provide a way to cancel switching item upon an API call', async function() {
+    it('Should provide a way to cancel switching item upon an API call', async function () {
       let errorBeforeSelected;
       let eventBeforeSelected;
-      events.on(element, 'content-switcher-beingselected', event => {
+      events.on(element, 'content-switcher-beingselected', (event) => {
         eventBeforeSelected = event;
         event.preventDefault();
       });
@@ -162,25 +162,23 @@ describe('Test content switcher', function() {
       ).toBe(false);
     });
 
-    afterEach(function() {
+    afterEach(function () {
       events.reset();
       instance.release();
       document.body.removeChild(wrapper);
     });
   });
 
-  describe('Panes', function() {
+  describe('Panes', function () {
     let element;
     let buttonNodes;
     let paneNodes;
     let contentSwitcher;
 
-    const id = `__element_${Math.random()
-      .toString(36)
-      .substr(2)}`;
+    const id = `__element_${Math.random().toString(36).substr(2)}`;
     const events = new EventManager();
 
-    beforeAll(function() {
+    beforeAll(function () {
       element = document.createElement('div');
 
       buttonNodes = [...new Array(2)].map((item, i) => {
@@ -200,8 +198,8 @@ describe('Test content switcher', function() {
           paneNode.className = `${id}_${i}`;
           return paneNode;
         });
-      })).forEach(nodes => {
-        nodes.forEach(node => {
+      })).forEach((nodes) => {
+        nodes.forEach((node) => {
           document.body.appendChild(node);
         });
       });
@@ -210,7 +208,7 @@ describe('Test content switcher', function() {
       contentSwitcher = new ContentSwitcher(element);
     });
 
-    beforeEach(function() {
+    beforeEach(function () {
       buttonNodes.forEach((buttonNode, i) => {
         buttonNode.classList[i === 0 ? 'add' : 'remove'](
           'bx--content-switcher--selected'
@@ -218,39 +216,39 @@ describe('Test content switcher', function() {
       });
     });
 
-    it('Should select target pane', function() {
+    it('Should select target pane', function () {
       try {
         buttonNodes[0].dataset.target = `.${id}_0`;
         buttonNodes[1].dataset.target = `.${id}_1`;
         buttonNodes[1].dispatchEvent(
           new CustomEvent('click', { bubbles: true })
         );
-        paneNodes[0].forEach(node => {
+        paneNodes[0].forEach((node) => {
           expect(node.hasAttribute('hidden'), 'hidden of unselected item').toBe(
             true
           );
         });
-        paneNodes[1].forEach(node => {
+        paneNodes[1].forEach((node) => {
           expect(node.hasAttribute('hidden'), 'hidden of selected item').toBe(
             false
           );
         });
       } finally {
         // eslint-disable-next-line no-param-reassign
-        buttonNodes.forEach(buttonNode => {
+        buttonNodes.forEach((buttonNode) => {
           buttonNode.dataset.target = undefined;
         });
       }
     });
 
-    afterEach(function() {
+    afterEach(function () {
       events.reset();
     });
 
-    afterAll(function() {
+    afterAll(function () {
       contentSwitcher.release();
-      paneNodes.forEach(nodes => {
-        nodes.forEach(node => {
+      paneNodes.forEach((nodes) => {
+        nodes.forEach((node) => {
           document.body.removeChild(node);
         });
       });
@@ -258,11 +256,11 @@ describe('Test content switcher', function() {
     });
   });
 
-  describe('Setting active item with link', function() {
+  describe('Setting active item with link', function () {
     let element;
     let linkNodes;
 
-    beforeAll(function() {
+    beforeAll(function () {
       element = document.createElement('div');
 
       document.body.appendChild(element);
@@ -281,13 +279,13 @@ describe('Test content switcher', function() {
       });
     });
 
-    it('Should update active item upon clicking', function() {
+    it('Should update active item upon clicking', function () {
       linkNodes[1].dispatchEvent(new CustomEvent('click', { bubbles: true }));
       expect(linkNodes[0].getAttribute('aria-selected')).toBe('false');
       expect(linkNodes[1].getAttribute('aria-selected')).toBe('true');
     });
 
-    afterAll(function() {
+    afterAll(function () {
       document.body.removeChild(element);
     });
   });

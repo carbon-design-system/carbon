@@ -6,24 +6,37 @@
  */
 
 import React from 'react';
-import ToggleSmall from '../ToggleSmall';
 import ToggleSmallSkeleton from '../ToggleSmall/ToggleSmall.Skeleton';
 import { mount, shallow } from 'enzyme';
 import { settings } from 'carbon-components';
 
 const { prefix } = settings;
-describe('ToggleSmall', () => {
-  describe('Renders as expected', () => {
-    const wrapper = mount(
-      <ToggleSmall
-        id="toggle-1"
-        aria-label="test label"
-        labelA="Off"
-        labelB="On"
-      />
-    );
 
-    const input = wrapper.find('input');
+describe('ToggleSmall', () => {
+  let ToggleSmall;
+
+  beforeEach(() => {
+    jest.mock('../../internal/warning');
+
+    ToggleSmall = require('../ToggleSmall').default;
+  });
+
+  describe('Renders as expected', () => {
+    let input;
+    let wrapper;
+
+    beforeEach(() => {
+      wrapper = mount(
+        <ToggleSmall
+          id="toggle-1"
+          aria-label="test label"
+          labelA="Off"
+          labelB="On"
+        />
+      );
+
+      input = wrapper.find('input');
+    });
 
     it('Switch and label Ids should match', () => {
       const toggleLabel = wrapper.find(`.${prefix}--toggle__label`);
@@ -83,7 +96,7 @@ describe('ToggleSmall', () => {
       wrapper.find('input').simulate('change');
 
       expect(
-        onChange.mock.calls.map(call =>
+        onChange.mock.calls.map((call) =>
           call.map((arg, i) => (i > 0 ? arg : arg.target))
         )
       ).toEqual([[inputElement]]);

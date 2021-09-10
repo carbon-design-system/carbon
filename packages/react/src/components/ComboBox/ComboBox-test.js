@@ -7,10 +7,11 @@
 
 import React from 'react';
 import { mount } from 'enzyme';
+import { render, screen, within } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import {
+  findListBoxNode,
   findMenuNode,
-  findMenuItemNode,
-  openMenu,
   assertMenuOpen,
   assertMenuClosed,
   generateItems,
@@ -20,13 +21,10 @@ import ComboBox from '../ComboBox';
 import { settings } from 'carbon-components';
 
 const { prefix } = settings;
-
-const findInputNode = wrapper => wrapper.find(`.${prefix}--text-input`);
-const downshiftActions = {
-  setHighlightedIndex: jest.fn(),
+const findInputNode = (wrapper) => wrapper.find(`.${prefix}--text-input`);
+const openMenu = (wrapper) => {
+  wrapper.find(`[role="combobox"]`).simulate('click');
 };
-const clearInput = wrapper =>
-  wrapper.instance().handleOnStateChange({ inputValue: '' }, downshiftActions);
 
 describe('ComboBox', () => {
   let mockProps;
@@ -61,9 +59,8 @@ describe('ComboBox', () => {
     expect(mockProps.onChange).not.toHaveBeenCalled();
 
     for (let i = 0; i < mockProps.items.length; i++) {
-      clearInput(wrapper);
       openMenu(wrapper);
-      findMenuItemNode(wrapper, i).simulate('click');
+      wrapper.find('ForwardRef(ListBoxMenuItem)').at(i).simulate('click');
       expect(mockProps.onChange).toHaveBeenCalledTimes(i + 1);
       expect(mockProps.onChange).toHaveBeenCalledWith({
         selectedItem: mockProps.items[i],
@@ -87,7 +84,7 @@ describe('ComboBox', () => {
   it('should render custom item components', () => {
     const wrapper = mount(<ComboBox {...mockProps} />);
     wrapper.setProps({
-      itemToElement: item => <div className="mock-item">{item.text}</div>,
+      itemToElement: (item) => <div className="mock-item">{item.text}</div>,
     });
     openMenu(wrapper);
 
@@ -97,7 +94,7 @@ describe('ComboBox', () => {
   it('should let the user select an option by clicking on the option node', () => {
     const wrapper = mount(<ComboBox {...mockProps} />);
     openMenu(wrapper);
-    findMenuItemNode(wrapper, 0).simulate('click');
+    wrapper.find('ForwardRef(ListBoxMenuItem)').at(0).simulate('click');
     expect(mockProps.onChange).toHaveBeenCalledTimes(1);
     expect(mockProps.onChange).toHaveBeenCalledWith({
       selectedItem: mockProps.items[0],
@@ -107,7 +104,7 @@ describe('ComboBox', () => {
     mockProps.onChange.mockClear();
 
     openMenu(wrapper);
-    findMenuItemNode(wrapper, 1).simulate('click');
+    wrapper.find('ForwardRef(ListBoxMenuItem)').at(1).simulate('click');
     expect(mockProps.onChange).toHaveBeenCalledTimes(1);
     expect(mockProps.onChange).toHaveBeenCalledWith({
       selectedItem: mockProps.items[1],
@@ -182,7 +179,9 @@ describe('ComboBox', () => {
     it('should not let the user expand the menu', () => {
       const wrapper = mount(<ComboBox {...mockProps} disabled={true} />);
       openMenu(wrapper);
-      expect(findMenuNode(wrapper).length).toBe(0);
+      expect(findListBoxNode(wrapper).hasClass('bx--list-box--expanded')).toBe(
+        false
+      );
     });
   });
 
@@ -200,14 +199,53 @@ describe('ComboBox', () => {
       expect(findMenuNode(wrapper).length).toBe(1);
     });
 
-    it('should set `inputValue` to an empty string if a falsey-y value is given', () => {
+    it('should set `inputValue` to an empty string if a false-y value is given', () => {
       const wrapper = mount(<ComboBox {...mockProps} />);
+      expect(wrapper.find('input').instance().value).toBe('');
+    });
 
-      wrapper.instance().handleOnInputValueChange('foo', downshiftActions);
-      expect(wrapper.state('inputValue')).toBe('foo');
+    it('should only render one listbox at a time when multiple comboboxes are present', () => {
+      render(
+        <>
+          <div data-testid="combobox-1">
+            <ComboBox {...mockProps} id="combobox-1" />
+          </div>
+          <div data-testid="combobox-2">
+            <ComboBox {...mockProps} id="combobox-2" />
+          </div>
+        </>
+      );
+      const firstCombobox = screen.getByTestId('combobox-1');
+      const secondCombobox = screen.getByTestId('combobox-2');
 
-      wrapper.instance().handleOnInputValueChange(null, downshiftActions);
-      expect(wrapper.state('inputValue')).toBe('');
+      const firstComboboxChevron = within(firstCombobox).getByRole('button');
+      const secondComboboxChevron = within(secondCombobox).getByRole('button');
+
+      function firstListBox() {
+        return within(firstCombobox).getByRole('listbox');
+      }
+
+      function secondListBox() {
+        return within(secondCombobox).getByRole('listbox');
+      }
+
+      expect(firstListBox()).toBeEmptyDOMElement();
+      expect(secondListBox()).toBeEmptyDOMElement();
+
+      userEvent.click(firstComboboxChevron);
+
+      expect(firstListBox()).not.toBeEmptyDOMElement();
+      expect(secondListBox()).toBeEmptyDOMElement();
+
+      userEvent.click(secondComboboxChevron);
+
+      expect(firstListBox()).toBeEmptyDOMElement();
+      expect(secondListBox()).not.toBeEmptyDOMElement();
+
+      userEvent.click(secondComboboxChevron);
+
+      expect(firstListBox()).toBeEmptyDOMElement();
+      expect(secondListBox()).toBeEmptyDOMElement();
     });
   });
 });

@@ -1,11 +1,11 @@
 import Pagination from '../../src/components/pagination/pagination';
 import flattenOptions from '../utils/flatten-options';
 
-describe('Test pagination', function() {
-  describe('Constructor', function() {
+describe('Test pagination', function () {
+  describe('Constructor', function () {
     let pagination;
 
-    it('Should throw if root element is not given', function() {
+    it('Should throw if root element is not given', function () {
       expect(() => {
         pagination = new Pagination();
       }).toThrowError(
@@ -14,7 +14,7 @@ describe('Test pagination', function() {
       );
     });
 
-    it('Should throw if root element is not a DOM element', function() {
+    it('Should throw if root element is not a DOM element', function () {
       expect(() => {
         pagination = new Pagination(document.createTextNode(''));
       }).toThrowError(
@@ -23,7 +23,7 @@ describe('Test pagination', function() {
       );
     });
 
-    it('Should set default options', function() {
+    it('Should set default options', function () {
       expect(
         flattenOptions(
           (pagination = new Pagination(document.createElement('div'))).options
@@ -40,7 +40,7 @@ describe('Test pagination', function() {
       });
     });
 
-    afterEach(function() {
+    afterEach(function () {
       if (pagination) {
         pagination = pagination.release();
       }

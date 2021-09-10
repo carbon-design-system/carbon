@@ -13,7 +13,7 @@ describe('mergeRefs', () => {
     const elem = document.createElement('div');
     const ref = React.createRef();
     let functionRefResult;
-    mergeRefs(ref, el => {
+    mergeRefs(ref, (el) => {
       functionRefResult = el;
     })(elem);
     expect(ref.current).toBe(elem);

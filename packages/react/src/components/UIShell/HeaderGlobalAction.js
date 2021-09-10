@@ -10,6 +10,7 @@ import cx from 'classnames';
 import React from 'react';
 import PropTypes from 'prop-types';
 import { AriaLabelPropType } from '../../prop-types/AriaPropTypes';
+import Button from '../Button';
 
 const { prefix } = settings;
 
@@ -29,6 +30,7 @@ const HeaderGlobalAction = React.forwardRef(function HeaderGlobalAction(
     className: customClassName,
     onClick,
     isActive,
+    tooltipAlignment,
     ...rest
   },
   ref
@@ -43,15 +45,19 @@ const HeaderGlobalAction = React.forwardRef(function HeaderGlobalAction(
     'aria-labelledby': ariaLabelledBy,
   };
   return (
-    <button
+    <Button
       {...rest}
       {...accessibilityLabel}
       className={className}
       onClick={onClick}
       type="button"
+      hasIconOnly
+      iconDescription={ariaLabel}
+      tooltipPosition="bottom"
+      tooltipAlignment={tooltipAlignment}
       ref={ref}>
       {children}
-    </button>
+    </Button>
   );
 });
 
@@ -73,15 +79,21 @@ HeaderGlobalAction.propTypes = {
   className: PropTypes.string,
 
   /**
+   * Specify whether the action is currently active
+   */
+  isActive: PropTypes.bool,
+
+  /**
    * Optionally provide an onClick handler that is called when the underlying
    * button fires it's onclick event
    */
   onClick: PropTypes.func,
 
   /**
-   * Specify whether the action is currently active
+   * Specify the alignment of the tooltip to the icon-only button.
+   * Can be one of: start, center, or end.
    */
-  isActive: PropTypes.bool,
+  tooltipAlignment: PropTypes.oneOf(['start', 'center', 'end']),
 };
 
 HeaderGlobalAction.displayName = 'HeaderGlobalAction';

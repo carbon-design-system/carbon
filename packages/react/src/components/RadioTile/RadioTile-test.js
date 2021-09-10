@@ -12,7 +12,7 @@ import { settings } from 'carbon-components';
 
 const { prefix } = settings;
 
-const render = props =>
+const render = (props) =>
   mount(
     <RadioButton
       {...props}
@@ -144,5 +144,14 @@ describe('RadioButton', () => {
       expect(call[1]).toEqual('test-name');
       expect(call[2].target).toBe(inputElement);
     });
+  });
+
+  it('supports disabled state', () => {
+    const wrapper = render({
+      disabled: true,
+    });
+
+    const input = () => wrapper.find('input');
+    expect(input().props().disabled).toEqual(true);
   });
 });

@@ -29,12 +29,12 @@ class NumberInput extends mixin(
     // Broken DOM tree is seen with up/down arrows <svg> in IE, which breaks event delegation.
     // <svg> does not have `Element.classList` in IE11
     this.manage(
-      on(this.element.querySelector('.up-icon'), 'click', event => {
+      on(this.element.querySelector('.up-icon'), 'click', (event) => {
         this._handleClick(event);
       })
     );
     this.manage(
-      on(this.element.querySelector('.down-icon'), 'click', event => {
+      on(this.element.querySelector('.down-icon'), 'click', (event) => {
         this._handleClick(event);
       })
     );
@@ -47,11 +47,36 @@ class NumberInput extends mixin(
   _handleClick(event) {
     const numberInput = this.element.querySelector(this.options.selectorInput);
     const target = event.currentTarget.getAttribute('class').split(' ');
+    const min = Number(numberInput.min);
+    const max = Number(numberInput.max);
+    const step = Number(numberInput.step) || 1;
 
     if (target.indexOf('up-icon') >= 0) {
-      ++numberInput.value;
+      const nextValue = Number(numberInput.value) + step;
+      if (numberInput.max === '') {
+        numberInput.value = nextValue;
+      } else if (numberInput.value < max) {
+        if (nextValue > max) {
+          numberInput.value = max;
+        } else if (nextValue < min) {
+          numberInput.value = min;
+        } else {
+          numberInput.value = nextValue;
+        }
+      }
     } else if (target.indexOf('down-icon') >= 0) {
-      --numberInput.value;
+      const nextValue = Number(numberInput.value) - step;
+      if (numberInput.min === '') {
+        numberInput.value = nextValue;
+      } else if (numberInput.value > min) {
+        if (nextValue < min) {
+          numberInput.value = min;
+        } else if (nextValue > max) {
+          numberInput.value = max;
+        } else {
+          numberInput.value = nextValue;
+        }
+      }
     }
 
     // Programmatic change in value (including `stepUp()`/`stepDown()`) won't fire change event
@@ -74,7 +99,7 @@ class NumberInput extends mixin(
    * The component options.
    * If `options` is specified in the constructor,
    * {@linkcode NumberInput.create .create()}, or {@linkcode NumberInput.init .init()},
-   * properties in this object are overriden for the instance being create and how {@linkcode NumberInput.init .init()} works.
+   * properties in this object are overridden for the instance being create and how {@linkcode NumberInput.init .init()} works.
    * @member NumberInput.options
    * @type {object}
    * @property {string} selectorInit The CSS selector to find number input UIs.

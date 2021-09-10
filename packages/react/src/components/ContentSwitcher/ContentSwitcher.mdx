@@ -1,0 +1,210 @@
+import { Story, Props, Source, Preview } from '@storybook/addon-docs/blocks';
+import ContentSwitcher from '../ContentSwitcher';
+import Switch from '../Switch';
+
+# Content Switcher
+
+[Source code](https://github.com/carbon-design-system/carbon/tree/main/packages/react/src/components/ContentSwitcher)
+&nbsp;|&nbsp;
+[Usage guidelines](https://www.carbondesignsystem.com/components/content-switcher/usage)
+&nbsp;|&nbsp;
+[Accessibility](https://www.carbondesignsystem.com/components/content-switcher/accessibility)
+
+## Table of Contents
+
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+
+- [Overview](#overview)
+- [Component API](#component-api)
+  - [ContentSwitcher `className`](#contentswitcher-classname)
+  - [ContentSwitcher `light`](#contentswitcher-light)
+  - [ContentSwitcher `onChange`](#contentswitcher-onchange)
+  - [ContentSwitcher `selectedIndex`](#contentswitcher-selectedindex)
+  - [ContentSwitcher `selectionMode`](#contentswitcher-selectionmode)
+  - [Switch `className`](#switch-classname)
+  - [Switch `disabled`](#switch-disabled)
+  - [Switch `index`, `name` and `text`](#switch-index-name-and-text)
+- [References](#references)
+  - [Accessibility concerns](#accessibility-concerns)
+- [Feedback](#feedback)
+
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+
+## Overview
+
+Content switchers allow users to toggle between two or more content sections
+within the same space on screen. Only one content section is shown at a time.
+Create Switch components for each section in the content switcher.
+
+<Preview>
+  <Story id="components-contentswitcher--default" />
+</Preview>
+
+## Component API
+
+<Props />
+
+### ContentSwitcher `className`
+
+The className prop passed into `ContentSwitcher` will be forwarded along to the
+underlying wrapper `div.bx--content-switcher` element. This is useful for
+specifying a custom class name for layout.
+
+```jsx
+<ContentSwitcher className="some-class">...</ContentSwitcher>
+```
+
+### ContentSwitcher `light`
+
+In certain circumstances, a `ContentSwitcher` will exist on a container element
+with the same background color. To improve contrast, you can use the `light`
+property to toggle the light variant of the `ContentSwitcher`.
+
+```jsx
+<ContentSwitcher light>...</ContentSwitcher>
+```
+
+### ContentSwitcher `onChange`
+
+This is a required prop. You will need to specify a function to run when the
+selection of the `ContentSwitcher` is changed.
+
+```jsx
+<ContentSwitcher
+  onChange={() => {
+    /* Code to run on change */
+  }}>
+  ...
+</ContentSwitcher>
+```
+
+### ContentSwitcher `selectedIndex`
+
+This prop allows you to specify which `ContentSwitcher` index you would like to
+be selected on initial render. This number defaults to `0`.
+
+<ContentSwitcher selectedIndex={2} onChange={() => {}}>
+  <Switch name="one" text="First section" />
+  <Switch name="two" text="Second section" />
+  <Switch name="three" text="Third section" />
+</ContentSwitcher>
+
+```jsx
+<ContentSwitcher selectedIndex={2} onChange={() => {}}>
+  <Switch name="one" text="First section" />
+  <Switch name="two" text="Second section" />
+  <Switch name="three" text="Third section" />
+</ContentSwitcher>
+```
+
+### ContentSwitcher `selectionMode`
+
+By default, when a `ContentSwitcher` is focused and an arrow key is pressed, the
+selection is updated immediately and the `onChange` is fired. However, sometimes
+you may want to only change the `selectedIndex` once a selection has been made.
+To do this, you can set the `selectionMode` to `manual`, and the `onChange` will
+only fire when a selection is made.
+
+<ContentSwitcher
+  selectionMode="manual"
+  onChange={() => {
+    console.log('change');
+  }}>
+  <Switch name="one" text="First section" />
+  <Switch name="two" text="Second section" />
+  <Switch name="three" text="Third section" />
+</ContentSwitcher>
+
+```jsx
+<ContentSwitcher
+  selectionMode="manual"
+  onChange={() => {
+    console.log('change');
+  }}>
+  <Switch name="one" text="First section" />
+  <Switch name="two" text="Second section" />
+  <Switch name="three" text="Third section" />
+</ContentSwitcher>
+```
+
+### Switch `className`
+
+The className prop passed into `Switch` will be forwarded along to the
+underlying wrapper `button` element.
+
+```jsx
+<ContentSwitcher>
+  <Switch className="switch-one" />
+  <Switch className="switch-two " />
+</ContentSwitcher>
+```
+
+### Switch `disabled`
+
+You can disable the `ContentSwitcher` by passing in `disabled` to the `Switch`
+elements directly.
+
+<ContentSwitcher>
+  <Switch disabled name="one" text="First section" />
+  <Switch disabled name="two" text="Second section" />
+  <Switch disabled name="three" text="Third section" />
+</ContentSwitcher>
+
+```jsx
+<ContentSwitcher>
+  <Switch disabled name="one" text="First section" />
+  <Switch disabled name="two" text="Second section" />
+  <Switch disabled name="three" text="Third section" />
+</ContentSwitcher>
+```
+
+### Switch `index`, `name` and `text`
+
+These are the values that will be returned in the `onChange` call.
+
+<ContentSwitcher
+  onChange={(obj) => {
+    const { index, name, text } = obj;
+    alert(`index: ${index} ||  name: ${name} || text: ${text}`);
+  }}>
+  <Switch name="one" text="First section" />
+  <Switch name="two" text="Second section" />
+  <Switch name="three" text="Third section" />
+</ContentSwitcher>
+
+```jsx
+<ContentSwitcher
+  onChange={(obj) => {
+    let { index, name, text } = obj;
+    alert(`index: ${index} ||  name: ${name} || text: ${text}`);
+  }}>
+  <Switch name="one" text="First section" />
+  <Switch name="two" text="Second section" />
+  <Switch name="three" text="Third section" />
+</ContentSwitcher>
+```
+
+## References
+
+### Accessibility concerns
+
+Each content switcher tab must have a unique title that clearly describes the
+content panel. This is particularly helpful for users of assistive technologies
+so they have the necessary information to efficiently navigate the content.
+
+Content authors need to ensure the content that is added to the tab panel is
+accessible. For example, if you add an image to the panel you need to include
+alternative text to pass accessibility testing.
+
+[W3C WAI-ARIA Tab Design Pattern](https://www.w3.org/TR/wai-aria-practices-1.1/#tabpanel)
+covers the usage of ARIA names, state and roles, as well as the expected
+keyboard interactions.
+
+[Carbon Usage Guidelines](https://www.carbondesignsystem.com/components/content-switcher/usage/)
+
+## Feedback
+
+Help us improve this component by providing feedback, asking questions, and
+leaving any other comments on
+[GitHub](https://github.com/carbon-design-system/carbon/edit/main/packages/react/src/components/ContentSwitcher/ContentSwitcher.mdx).

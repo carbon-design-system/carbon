@@ -124,13 +124,13 @@ class OverflowMenu extends mixin(
       );
     }
     this.manage(
-      on(this.element.ownerDocument, 'click', event => {
+      on(this.element.ownerDocument, 'click', (event) => {
         this._handleDocumentClick(event);
         this.wasOpenBeforeClick = undefined;
       })
     );
     this.manage(
-      on(this.element.ownerDocument, 'keydown', event => {
+      on(this.element.ownerDocument, 'keydown', (event) => {
         this._handleKeyPress(event);
       })
     );
@@ -229,14 +229,14 @@ class OverflowMenu extends mixin(
    * Moves the focus up/down.
    * @param {number} direction The direction of navigating.
    */
-  navigate = direction => {
+  navigate = (direction) => {
     const items = [
       ...this.element.ownerDocument.querySelectorAll(this.options.selectorItem),
     ];
     const start =
       this.getCurrentNavigation() ||
       this.element.querySelector(this.options.selectorItemSelected);
-    const getNextItem = old => {
+    const getNextItem = (old) => {
       const handleUnderflow = (index, length) =>
         index + (index >= 0 ? 0 : length);
       const handleOverflow = (index, length) =>

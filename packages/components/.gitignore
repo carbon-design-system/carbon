@@ -9,6 +9,7 @@ demo/hot
 !demo/index.js
 !demo/components.js
 dist
+docs/js
 
 # Test reports
 tests/a11y-results

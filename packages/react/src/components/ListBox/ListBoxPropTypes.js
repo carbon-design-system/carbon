@@ -8,4 +8,5 @@
 import PropTypes from 'prop-types';
 
 export const ListBoxType = PropTypes.oneOf(['default', 'inline']);
-export const ListBoxSize = PropTypes.oneOf(['sm', 'lg', 'xl']);
+// TODO V11: remove xl
+export const ListBoxSize = PropTypes.oneOf(['sm', 'md', 'lg', 'xl']);

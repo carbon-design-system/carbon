@@ -32,7 +32,7 @@ const types = [
 // Filter supported commit types per release bump
 const typesByReleaseBump = {
   minor: types,
-  patch: types.filter(type => type !== 'feat'),
+  patch: types.filter((type) => type !== 'feat'),
 };
 
 const logger = createLogger('release');
@@ -183,7 +183,7 @@ async function cherryPickCommitsFrom(commitRange, bump) {
 
     commits.push(result);
   }
-  const commitsToCherryPick = commits.filter(commit => {
+  const commitsToCherryPick = commits.filter((commit) => {
     return (
       typesByReleaseBump[bump].includes(commit.info.type) ||
       commit.info.type === 'manual'
@@ -234,7 +234,7 @@ async function cherryPickCommitsFrom(commitRange, bump) {
  * When working with multiple local environments, it's helpful to reset the
  * project to a known state. This helper will try and clean everything up so
  * that the environment is clean and good-to-go moving forward. Most of the
- * steps in this method ultimately reflect what we do in Continous Integration
+ * steps in this method ultimately reflect what we do in Continuous Integration
  * environments, with the addition of a `clean` command to remove generated
  * artifacts locally.
  *

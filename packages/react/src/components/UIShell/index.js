@@ -27,6 +27,7 @@ export SkipToContent from './SkipToContent';
 
 export SideNav from './SideNav';
 export SideNavDetails from './SideNavDetails';
+export SideNavDivider from './SideNavDivider';
 export SideNavFooter from './SideNavFooter';
 export SideNavHeader from './SideNavHeader';
 export SideNavIcon from './SideNavIcon';

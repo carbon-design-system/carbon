@@ -1,0 +1,62 @@
+//
+// Copyright IBM Corp. 2018, 2018
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+@use '@carbon/themes';
+
+@include themes.set(themes.$g100);
+
+html {
+  box-sizing: border-box;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
+}
+
+html,
+body,
+#__next,
+.container {
+  width: 100%;
+  height: 100%;
+}
+
+body {
+  margin: 0;
+}
+
+body {
+  @include themes.theme();
+}
+
+.container {
+  display: grid;
+  grid-template-rows: repeat(4, 1fr);
+}
+
+.white {
+  @include themes.theme(themes.$white);
+}
+
+.g10 {
+  @include themes.theme(themes.$g10);
+}
+
+.g90 {
+  @include themes.theme(themes.$g90);
+}
+
+.g100 {
+  @include themes.theme(themes.$g100);
+}
+
+section {
+  background: var(--cds-ui-background);
+  color: var(--cds-text-01);
+}

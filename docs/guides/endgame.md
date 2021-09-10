@@ -1,5 +1,3 @@
-<!-- alex disable black -->
-
 # Endgame
 
 <!-- prettier-ignore-start -->

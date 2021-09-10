@@ -16,14 +16,14 @@ const defaultOptions = {
 const cwd = path.resolve(__dirname, '../src');
 const files = glob.sync('**/*.scss', {
   cwd,
-  ignore: ['**/vendor/@carbon/**'],
+  ignore: ['**/vendor/@carbon/**', '**/*.import.scss'],
 });
 
 const render = promisify(sass.render);
 
 describe('styles', () => {
-  jest.setTimeout(20000);
-  it.each(files)('%s should compile', async relativeFilePath => {
+  jest.setTimeout(40000);
+  it.each(files)('%s should compile', async (relativeFilePath) => {
     const filepath = path.join(cwd, relativeFilePath);
     try {
       expect(

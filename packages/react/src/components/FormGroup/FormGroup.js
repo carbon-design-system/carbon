@@ -9,27 +9,40 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import classnames from 'classnames';
 import { settings } from 'carbon-components';
+import { useFeatureFlag } from '../FeatureFlags';
 
 const { prefix } = settings;
 
 const FormGroup = ({
+  legendId,
   legendText,
   invalid,
   children,
   className,
   message,
   messageText,
+  hasMargin,
   ...other
 }) => {
-  const classNamesLegend = classnames(`${prefix}--label`, className);
-  const classNamesFieldset = classnames(`${prefix}--fieldset`, className);
+  const enabled = useFeatureFlag('enable-v11-release');
+  const classNamesLegend = classnames(`${prefix}--label`, [
+    enabled ? null : className,
+  ]);
+  const classNamesFieldset = classnames(`${prefix}--fieldset`, className, {
+    [`${prefix}--fieldset--no-margin`]: !hasMargin,
+  });
 
   return (
     <fieldset
       {...(invalid && { 'data-invalid': '' })}
       className={classNamesFieldset}
-      {...other}>
-      <legend className={classNamesLegend}>{legendText}</legend>
+      {...other}
+      aria-labelledby={other['aria-labelledby'] || legendId}>
+      <legend
+        className={classNamesLegend}
+        id={legendId || other['aria-labelledby']}>
+        {legendText}
+      </legend>
       {children}
       {message ? (
         <div className={`${prefix}--form__requirements`}>{messageText}</div>
@@ -45,19 +58,30 @@ FormGroup.propTypes = {
   children: PropTypes.node,
 
   /**
-   * Provide the text to be rendered inside of the fieldset <legend>
-   */
-  legendText: PropTypes.string.isRequired,
-
-  /**
    * Provide a custom className to be applied to the containing <fieldset> node
    */
   className: PropTypes.string,
 
   /**
+   * Specify whether or not the FormGroup should provide bottom margin
+   */
+  hasMargin: PropTypes.bool,
+
+  /**
    * Specify whether the <FormGroup> is invalid
    */
   invalid: PropTypes.bool,
+
+  /**
+   * Provide id for the fieldset <legend> which corresponds to the fieldset
+   * `aria-labelledby`
+   */
+  legendId: PropTypes.node,
+
+  /**
+   * Provide the text to be rendered inside of the fieldset <legend>
+   */
+  legendText: PropTypes.node.isRequired,
 
   /**
    * Specify whether the message should be displayed in the <FormGroup>
@@ -74,6 +98,7 @@ FormGroup.defaultProps = {
   invalid: false,
   message: false,
   messageText: '',
+  hasMargin: true,
 };
 
 export default FormGroup;

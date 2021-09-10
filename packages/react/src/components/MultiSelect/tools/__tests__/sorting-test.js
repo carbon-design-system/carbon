@@ -22,7 +22,7 @@ describe('defaultSortItems', () => {
   });
 
   it('should sort un-selected options alphabetically', () => {
-    const mockItems = ['d', 'c', 'b', 'a'].map(label => ({ label }));
+    const mockItems = ['d', 'c', 'b', 'a'].map((label) => ({ label }));
     expect(defaultSortItems(mockItems, mockOptions)).toEqual([
       {
         label: 'a',
@@ -40,7 +40,7 @@ describe('defaultSortItems', () => {
   });
 
   it('should sort un-selected numbers in increasing order', () => {
-    const mockItems = ['1', '10', '11', '2', '3'].map(label => ({ label }));
+    const mockItems = ['1', '10', '11', '2', '3'].map((label) => ({ label }));
     expect(defaultSortItems(mockItems, mockOptions)).toEqual([
       {
         label: '1',
@@ -66,7 +66,7 @@ describe('defaultSortItems', () => {
       'Option 10',
       'Option 11',
       'Option 2',
-    ].map(label => ({ label }));
+    ].map((label) => ({ label }));
     expect(defaultSortItems(mockItems, mockOptions)).toEqual([
       {
         label: 'Option 1',
@@ -89,7 +89,7 @@ describe('defaultSortItems', () => {
       'Option 10',
       'Option 11',
       'Option 2',
-    ].map(label => ({ label }));
+    ].map((label) => ({ label }));
 
     // Set `selectedItems` to ['Option 11']
     mockOptions.selectedItems = [mockItems[2]];
@@ -116,7 +116,7 @@ describe('defaultSortItems', () => {
       'Option 10',
       'Option 11',
       'Option 2',
-    ].map(label => ({ label }));
+    ].map((label) => ({ label }));
 
     // Set `selectedItems` to ['Option 11', 'Option 2']
     mockOptions.selectedItems = [mockItems[2], mockItems[3]];

@@ -1,0 +1,12 @@
+name: Issue Triage
+description: A custom action for triaging issues
+inputs:
+  GITHUB_TOKEN:
+    description: A GitHub token to execute GitHub tasks
+    required: true
+  enabled:
+    description: Specify whether this action should run
+    required: false
+runs:
+  using: 'docker'
+  image: 'Dockerfile'

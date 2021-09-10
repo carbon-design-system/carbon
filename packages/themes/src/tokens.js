@@ -37,6 +37,7 @@ const colors = [
   'icon03',
 
   'link01',
+  'link02',
 
   'inverseLink',
 
@@ -58,7 +59,8 @@ const colors = [
 
   'overlay01',
 
-  'danger',
+  'danger01',
+  'danger02',
 
   // Interactive states
   'focus',
@@ -75,10 +77,12 @@ const colors = [
   'activeTertiary',
 
   'hoverUI',
-  'activeUI',
-
-  'selectedUI',
+  'hoverLightUI',
   'hoverSelectedUI',
+  'activeUI',
+  'activeLightUI',
+  'selectedUI',
+  'selectedLightUI',
   'inverseHoverUI',
 
   'hoverDanger',
@@ -94,8 +98,107 @@ const colors = [
 
   'highlight',
 
+  'decorative01',
+
+  'buttonSeparator',
+
   'skeleton01',
   'skeleton02',
+
+  // New color tokens
+  // TO-DO: remove fallback color when v11 is released and assign carbon colors to new tokens
+  'background',
+  'layer',
+  'layerAccent',
+  'layerAccentHover',
+  'layerAccentActive',
+  'field',
+  'backgroundInverse',
+  'backgroundBrand',
+  'interactive',
+
+  'borderSubtle',
+  'borderStrong',
+  'borderInverse',
+  'borderInteractive',
+
+  'textPrimary',
+  'textSecondary',
+  'textPlaceholder',
+  'textHelper',
+  'textOnColor',
+  'textInverse',
+
+  'linkPrimary',
+  'linkSecondary',
+  'linkVisited',
+  'linkInverse',
+
+  'iconPrimary',
+  'iconSecondary',
+  'iconOnColor',
+  'iconInverse',
+
+  'supportError',
+  'supportSuccess',
+  'supportWarning',
+  'supportInfo',
+  'supportErrorInverse',
+  'supportSuccessInverse',
+  'supportWarningInverse',
+  'supportInfoInverse',
+
+  'overlay',
+  'toggleOff',
+
+  'buttonPrimary',
+  'buttonSecondary',
+  'buttonTertiary',
+  'buttonDangerPrimary',
+  'buttonDangerSecondary',
+
+  'backgroundActive',
+  'layerActive',
+
+  'buttonDangerActive',
+  'buttonPrimaryActive',
+  'buttonSecondaryActive',
+  'buttonTertiaryActive',
+
+  'focusInset',
+  'focusInverse',
+
+  'backgroundHover',
+  'layerHover',
+  'fieldHover',
+  'backgroundInverseHover',
+  'linkPrimaryHover',
+  'buttonDangerHover',
+  'buttonPrimaryHover',
+  'buttonSecondaryHover',
+  'buttonTertiaryHover',
+
+  'backgroundSelected',
+  'backgroundSelectedHover',
+  'layerSelected',
+  'layerSelectedHover',
+  'layerSelectedInverse',
+  'borderSubtleSelected',
+
+  'layerDisabled',
+  'fieldDisabled',
+  'borderDisabled',
+
+  'textDisabled',
+  'buttonDisabled',
+  'iconDisabled',
+
+  'textOnColorDisabled',
+  'iconOnColorDisabled',
+  'layerSelectedDisabled',
+
+  'skeletonBackground',
+  'skeletonElement',
 
   // Deprecated
   'brand01',
@@ -103,6 +206,7 @@ const colors = [
   'brand03',
   'active01',
   'hoverField',
+  'danger',
 ];
 
 const numbers = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'];
@@ -165,6 +269,8 @@ export const unstable__meta = {
         'brand02',
         'brand03',
         'danger',
+        'danger01',
+        'danger02',
         'ui01',
         'ui02',
         'ui03',
@@ -177,6 +283,7 @@ export const unstable__meta = {
         'text05',
         'textError',
         'link01',
+        'link02',
         'icon01',
         'icon02',
         'icon03',
@@ -194,6 +301,57 @@ export const unstable__meta = {
         'inverseSupport03',
         'inverseSupport04',
         'overlay01',
+
+        //new tokens
+        'background',
+        'layer',
+        'layerAccent',
+        'layerAccentHover',
+        'layerAccentActive',
+        'field',
+        'backgroundInverse',
+        'backgroundBrand',
+        'interactive',
+
+        'borderSubtle',
+        'borderStrong',
+        'borderInverse',
+        'borderInteractive',
+
+        'textPrimary',
+        'textSecondary',
+        'textPlaceholder',
+        'textHelper',
+        'textOnColor',
+        'textInverse',
+
+        'linkPrimary',
+        'linkSecondary',
+        'linkVisited',
+        'linkInverse',
+
+        'iconPrimary',
+        'iconSecondary',
+        'iconOnColor',
+        'iconInverse',
+
+        'supportError',
+        'supportSuccess',
+        'supportWarning',
+        'supportInfo',
+        'supportErrorInverse',
+        'supportSuccessInverse',
+        'supportWarningInverse',
+        'supportInfoInverse',
+
+        'overlay',
+        'toggleOff',
+
+        'buttonPrimary',
+        'buttonSecondary',
+        'buttonTertiary',
+        'buttonDangerPrimary',
+        'buttonDangerSecondary',
       ],
     },
     {
@@ -206,6 +364,7 @@ export const unstable__meta = {
         'hoverSecondary',
         'hoverTertiary',
         'hoverUI',
+        'hoverLightUI',
         'hoverSelectedUI',
         'hoverDanger',
         'hoverRow',
@@ -213,8 +372,10 @@ export const unstable__meta = {
         'activeSecondary',
         'activeTertiary',
         'activeUI',
+        'activeLightUI',
         'activeDanger',
         'selectedUI',
+        'selectedLightUI',
         'highlight',
         'skeleton01',
         'skeleton02',
@@ -225,8 +386,54 @@ export const unstable__meta = {
         'inverseHoverUI',
         'active01',
         'hoverField',
+        'decorative01',
+        'buttonSeparator',
+
+        // new tokens
+        'backgroundActive',
+        'layerActive',
+
+        'buttonDangerActive',
+        'buttonPrimaryActive',
+        'buttonSecondaryActive',
+        'buttonTertiaryActive',
+
+        'focusInset',
+        'focusInverse',
+
+        'backgroundHover',
+        'layerHover',
+        'fieldHover',
+        'backgroundInverseHover',
+        'linkPrimaryHover',
+        'buttonDangerHover',
+        'buttonPrimaryHover',
+        'buttonSecondaryHover',
+        'buttonTertiaryHover',
+
+        'backgroundSelected',
+        'backgroundSelectedHover',
+        'layerSelected',
+        'layerSelectedHover',
+        'layerSelectedInverse',
+        'borderSubtleSelected',
+
+        'layerDisabled',
+        'fieldDisabled',
+        'borderDisabled',
+
+        'textDisabled',
+        'buttonDisabled',
+        'iconDisabled',
+
+        'textOnColorDisabled',
+        'iconOnColorDisabled',
+        'layerSelectedDisabled',
+
+        'skeletonBackground',
+        'skeletonElement',
       ],
     },
   ],
-  deprecated: ['brand01', 'brand02', 'brand03', 'active01'],
+  deprecated: ['brand01', 'brand02', 'brand03', 'active01', 'danger'],
 };

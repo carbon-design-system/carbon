@@ -31,7 +31,7 @@ You can preview all of the token values for this on the
 
 ### Sass
 
-If you're project is using Sass, you can include this package and the
+If your project is using Sass, you can include this package and the
 corresponding default theme by writing the following in your Sass file:
 
 ```scss
@@ -39,23 +39,8 @@ corresponding default theme by writing the following in your Sass file:
 ```
 
 By default, the white theme will be initialized. If you would like to include
-another theme, you can do so by calling our mixin. For example:
-
-```scss
-@import '@carbon/themes/scss/themes';
-
-// Use the gray 10 theme
-@include carbon--theme($carbon--theme--g10);
-
-// Use the gray 90 theme
-@include carbon--theme($carbon--theme--g90);
-
-// Use the gray 100 theme
-@include carbon--theme($carbon--theme--g100);
-```
-
-Alternatively, you can set the global theme variable then call the mixin without
-passing in a theme name.
+another theme, you can do so by setting the global theme variable and then
+calling our mixin. For example:
 
 ```scss
 @import '@carbon/themes/scss/themes';
@@ -113,6 +98,14 @@ import {
 If you're looking for `@carbon/themes` API documentation, check out:
 
 - [Sass](./docs/sass.md)
+
+## 📚 Examples
+
+If you're looking for more examples on how to use `@carbon/themes`, we have some
+examples that you can check out:
+
+- [preview-v11](./examples/preview-v11)
+- [sass-modules](./examples/sass-modules)
 
 ## 🙌 Contributing
 

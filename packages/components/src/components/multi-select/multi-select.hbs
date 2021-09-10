@@ -8,9 +8,6 @@
 <div class="{{@root.prefix}}--form-item">
   <div class="{{@root.prefix}}--list-box__wrapper {{#if inline}}{{@root.prefix}}--list-box__wrapper--inline{{/if}}">
     <label class="{{@root.prefix}}--label">Multi-Select label</label>
-    {{#unless inline}}
-    <div class="{{@root.prefix}}--form__helper-text">Optional helper text here</div>
-    {{/unless}}
     <div
       class="{{@root.prefix}}--multi-select {{@root.prefix}}--list-box {{#if inline}} {{@root.prefix}}--list-box--inline{{/if}}{{#if light}} {{@root.prefix}}--list-box--light{{/if}}{{#if filterable}} {{@root.prefix}}--combo-box {{@root.prefix}}--multi-select--filterable{{/if}}">
       <div role="button" class="{{@root.prefix}}--list-box__field" tabindex="0" aria-label="open menu"
@@ -25,14 +22,14 @@
         </div>
       </div>
     </div>
+    {{#unless inline}}
+    <div class="{{@root.prefix}}--form__helper-text">Optional helper text here</div>
+    {{/unless}}
   </div>
 </div>
 <div class="{{@root.prefix}}--form-item">
   <div class="{{@root.prefix}}--list-box__wrapper {{#if inline}}{{@root.prefix}}--list-box__wrapper--inline{{/if}}">
     <label class="{{@root.prefix}}--label">Multi-Select label</label>
-    {{#unless inline}}
-    <div class="{{@root.prefix}}--form__helper-text">Optional helper text here</div>
-    {{/unless}}
     <div
       class="{{@root.prefix}}--multi-select {{@root.prefix}}--list-box {{@root.prefix}}--list-box--expanded {{@root.prefix}}--multi-select--selected{{#if inline}} {{@root.prefix}}--list-box--inline{{/if}}{{#if light}} {{@root.prefix}}--list-box--light{{/if}}{{#if filterable}} {{@root.prefix}}--combo-box {{@root.prefix}}--multi-select--filterable{{/if}}">
       <div role="button" class="{{@root.prefix}}--list-box__field" tabindex="0" aria-label="close menu"
@@ -70,5 +67,8 @@
         {{/each}}
       </fieldset>
     </div>
+    {{#unless inline}}
+    <div class="{{@root.prefix}}--form__helper-text">Optional helper text here</div>
+    {{/unless}}
   </div>
 </div>

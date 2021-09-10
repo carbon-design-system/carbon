@@ -10,13 +10,16 @@
 const fs = require('fs-extra');
 const path = require('path');
 const prettier = require('prettier');
+const prettierConfig = require('prettier-config-carbon');
 const createRemark = require('remark');
 const monorepo = require('./remark/remark-monorepo');
 
 const packageDenyList = new Set([
   'carbon-components',
   'carbon-components-react',
+  '@carbon/react',
   '@carbon/sketch',
+  '@carbon/styles',
 ]);
 
 function run({ root, packagePaths }) {
@@ -24,13 +27,13 @@ function run({ root, packagePaths }) {
     root: root.directory,
   });
   const prettierOptions = {
-    ...root.packageJson.prettier,
+    ...prettierConfig,
     parser: 'markdown',
   };
 
   return Promise.all(
     packagePaths
-      .filter(pkg => !packageDenyList.has(pkg.packageJson.name))
+      .filter((pkg) => !packageDenyList.has(pkg.packageJson.name))
       .map(async ({ packagePath }) => {
         const README_PATH = path.join(packagePath, 'README.md');
         if (!(await fs.pathExists(README_PATH))) {

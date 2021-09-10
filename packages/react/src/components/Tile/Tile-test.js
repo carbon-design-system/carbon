@@ -134,11 +134,10 @@ describe('Tile', () => {
 
     beforeEach(() => {
       wrapper = mount(
-        <SelectableTile className="extra-class">
+        <SelectableTile className="extra-class" onClick={jest.fn()}>
           <div className="child">Test</div>
         </SelectableTile>
       );
-      wrapper.state().selected = false;
       label = wrapper.find('label');
     });
 
@@ -155,42 +154,51 @@ describe('Tile', () => {
     });
 
     it('toggles the selectable state on click', () => {
-      expect(wrapper.state().selected).toEqual(false);
+      expect(wrapper.hasClass(`${prefix}--tile--is-selected`)).toEqual(false);
       label.simulate('click');
-      expect(wrapper.state().selected).toEqual(true);
-    });
-
-    it('toggles the selectable state when using enter or space', () => {
-      expect(wrapper.state().selected).toEqual(false);
-      label.simulate('keydown', { which: 32 });
-      expect(wrapper.state().selected).toEqual(true);
-      label.simulate('keydown', { which: 13 });
-      expect(wrapper.state().selected).toEqual(false);
-    });
-
-    it('the input should be checked when state is selected', () => {
-      wrapper.setState({ selected: true });
-      expect(wrapper.find('input').props().checked).toEqual(true);
-    });
-
-    it('supports setting initial selected state from props', () => {
-      expect(shallow(<SelectableTile selected />).state().selected).toEqual(
+      expect(wrapper.props().onClick).toHaveBeenCalledTimes(1);
+      expect(wrapper.render().hasClass(`${prefix}--tile--is-selected`)).toEqual(
         true
       );
     });
 
+    it('toggles the selectable state when using enter or space', () => {
+      expect(wrapper.hasClass(`${prefix}--tile--is-selected`)).toEqual(false);
+      label.simulate('keydown', { which: 32 });
+      expect(wrapper.render().hasClass(`${prefix}--tile--is-selected`)).toEqual(
+        true
+      );
+      label.simulate('keydown', { which: 13 });
+      expect(wrapper.render().hasClass(`${prefix}--tile--is-selected`)).toEqual(
+        false
+      );
+    });
+
+    it('the input should be checked when state is selected', () => {
+      label.simulate('click');
+      expect(wrapper.find('input').props().checked).toEqual(true);
+    });
+
+    it('supports setting initial selected state from props', () => {
+      expect(
+        shallow(<SelectableTile selected />)
+          .render()
+          .hasClass(`${prefix}--tile--is-selected`)
+      ).toEqual(true);
+    });
+
     it('supports setting selected state from props', () => {
       wrapper.setProps({ selected: true });
-      wrapper.setState({ selected: true });
-      wrapper.setProps({ selected: false });
-      expect(wrapper.state().selected).toEqual(false);
+      expect(wrapper.render().hasClass(`${prefix}--tile--is-selected`)).toEqual(
+        true
+      );
     });
 
     it('avoids changing selected state upon setting props, unless actual value change is detected', () => {
       wrapper.setProps({ selected: true });
-      wrapper.setState({ selected: false });
+      label.simulate('click');
       wrapper.setProps({ selected: true });
-      expect(wrapper.state().selected).toEqual(false);
+      expect(wrapper.hasClass(`${prefix}--tile--is-selected`)).toEqual(false);
     });
 
     it('supports light version', () => {
@@ -219,6 +227,11 @@ describe('Tile', () => {
       // Tile becomes un-selected
       content.simulate('click');
       expect(onChange).toHaveBeenCalledTimes(2);
+    });
+
+    it('supports disabled state', () => {
+      wrapper.setProps({ disabled: true });
+      expect(wrapper.find('input').props().disabled).toEqual(true);
     });
   });
 
@@ -273,7 +286,7 @@ describe('Tile', () => {
 
     it('ignores allows click events to be ignored using onBeforeClick', () => {
       wrapper.setProps({
-        onBeforeClick: evt => evt.target.tagName.toLowerCase() !== 'a', // ignore link clicks
+        onBeforeClick: (evt) => evt.target.tagName.toLowerCase() !== 'a', // ignore link clicks
       });
       expect(wrapper.state().expanded).toEqual(false);
       wrapper.simulate('click');
@@ -290,17 +303,14 @@ describe('Tile', () => {
 
       // Force the expanded tile to be collapsed.
       wrapper.setState({ expanded: false });
-      const collapsedDescription = wrapper.find('button').getElements()[0]
-        .props['aria-label'];
+      const collapsedDescription = wrapper.find('button').prop('title');
       expect(collapsedDescription).toEqual(defaultCollapsedIconText);
 
       // click on the item to expand it.
       wrapper.simulate('click');
 
       // Validate the description change
-      const expandedDescription = wrapper.find('button').getElements()[0].props[
-        'aria-label'
-      ];
+      const expandedDescription = wrapper.find('button').prop('title');
       expect(expandedDescription).toEqual(defaultExpandedIconText);
     });
 
@@ -313,17 +323,15 @@ describe('Tile', () => {
 
       // Force the expanded tile to be collapsed.
       wrapper.setState({ expanded: false });
-      const collapsedDescription = wrapper.find('button').getElements()[0]
-        .props['aria-label'];
+      const collapsedDescription = wrapper.find('button').prop('title');
+
       expect(collapsedDescription).toEqual(tileCollapsedIconText);
 
       // click on the item to expand it.
       wrapper.simulate('click');
 
       // Validate the description change
-      const expandedDescription = wrapper.find('button').getElements()[0].props[
-        'aria-label'
-      ];
+      const expandedDescription = wrapper.find('button').prop('title');
       expect(expandedDescription).toEqual(tileExpandedIconText);
     });
 

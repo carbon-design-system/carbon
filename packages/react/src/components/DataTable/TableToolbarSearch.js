@@ -19,7 +19,7 @@ const translationKeys = {
   'carbon.table.toolbar.search.label': 'Filter table',
   'carbon.table.toolbar.search.placeholder': 'Filter table',
 };
-const translateWithId = id => {
+const translateWithId = (id) => {
   return translationKeys[id];
 };
 const TableToolbarSearch = ({
@@ -28,15 +28,16 @@ const TableToolbarSearch = ({
   onChange: onChangeProp,
   translateWithId: t,
   placeHolderText,
+  placeholder,
   labelText,
   expanded: expandedProp,
   defaultExpanded,
   defaultValue,
+  disabled,
   onExpand,
   persistent,
   persistant,
   id,
-  tabIndex,
   ...rest
 }) => {
   const { current: controlled } = useRef(expandedProp !== undefined);
@@ -44,7 +45,6 @@ const TableToolbarSearch = ({
     defaultExpanded || defaultValue
   );
   const expanded = controlled ? expandedProp : expandedState;
-  const searchRef = useRef(null);
   const [value, setValue] = useState(defaultValue || '');
   const uniqueId = useMemo(getInstanceId, []);
 
@@ -67,10 +67,10 @@ const TableToolbarSearch = ({
     []
   );
 
-  const searchContainerClasses = cx({
+  const searchClasses = cx(className, {
     [searchContainerClass]: searchContainerClass,
-    [`${prefix}--toolbar-action`]: true,
     [`${prefix}--toolbar-search-container-active`]: expanded,
+    [`${prefix}--toolbar-search-container-disabled`]: disabled,
     [`${prefix}--toolbar-search-container-expandable`]:
       !persistent || (!persistent && !persistant),
     [`${prefix}--toolbar-search-container-persistent`]:
@@ -78,20 +78,17 @@ const TableToolbarSearch = ({
   });
 
   const handleExpand = (event, value = !expanded) => {
-    if (!controlled && (!persistent || (!persistent && !persistant))) {
-      setExpandedState(value);
-    }
-    if (onExpand) {
-      onExpand(event, value);
+    if (!disabled) {
+      if (!controlled && (!persistent || (!persistent && !persistant))) {
+        setExpandedState(value);
+      }
+      if (onExpand) {
+        onExpand(event, value);
+      }
     }
   };
 
-  const onClick = e => {
-    setFocusTarget(searchRef);
-    handleExpand(e, true);
-  };
-
-  const onChange = e => {
+  const onChange = (e) => {
     setValue(e.target.value);
     if (onChangeProp) {
       onChangeProp(e);
@@ -99,29 +96,22 @@ const TableToolbarSearch = ({
   };
 
   return (
-    <div
-      tabIndex={expandedState ? '-1' : tabIndex}
-      role="search"
-      ref={searchRef}
-      onClick={event => onClick(event)}
-      onFocus={event => handleExpand(event, true)}
-      onBlur={event => !value && handleExpand(event, false)}
-      className={searchContainerClasses}>
-      <Search
-        size="sm"
-        tabIndex={expandedState ? tabIndex : '-1'}
-        className={className}
-        value={value}
-        id={typeof id !== 'undefined' ? id : uniqueId.toString()}
-        aria-hidden={!expanded}
-        labelText={labelText || t('carbon.table.toolbar.search.label')}
-        placeHolderText={
-          placeHolderText || t('carbon.table.toolbar.search.placeholder')
-        }
-        onChange={onChange}
-        {...rest}
-      />
-    </div>
+    <Search
+      disabled={disabled}
+      className={searchClasses}
+      value={value}
+      id={typeof id !== 'undefined' ? id : uniqueId.toString()}
+      labelText={labelText || t('carbon.table.toolbar.search.label')}
+      placeholder={
+        placeHolderText ||
+        placeholder ||
+        t('carbon.table.toolbar.search.placeholder')
+      }
+      onChange={onChange}
+      onFocus={(event) => handleExpand(event, true)}
+      onBlur={(event) => !value && handleExpand(event, false)}
+      {...rest}
+    />
   );
 };
 
@@ -134,29 +124,9 @@ TableToolbarSearch.propTypes = {
   className: PropTypes.string,
 
   /**
-   * Provide an optional id for the search container
+   * Specifies if the search should initially render in an expanded state
    */
-  id: PropTypes.string,
-
-  /**
-   * Provide an optional className for the overal container of the Search
-   */
-  searchContainerClasses: PropTypes.string,
-
-  /**
-   * Provide an optional hook that is called each time the input is updated
-   */
-  onChange: PropTypes.func,
-
-  /**
-   * Provide an optional placeholder text for the Search component
-   */
-  placeHolderText: PropTypes.string,
-
-  /**
-   * Provide an optional label text for the Search component icon
-   */
-  labelText: PropTypes.string,
+  defaultExpanded: PropTypes.bool,
 
   /**
    * Provide an optional default value for the Search component
@@ -164,23 +134,71 @@ TableToolbarSearch.propTypes = {
   defaultValue: PropTypes.string,
 
   /**
-   * Provide custom text for the component for each translation id
+   * Specifies if the search should be disabled
    */
-  translateWithId: PropTypes.func.isRequired,
+  disabled: PropTypes.bool,
 
   /**
-   * Optional prop to specify the tabIndex of the <Search> (in expanded state) or the container (in collapsed state)
+   * Specifies if the search should expand
    */
-  tabIndex: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
+  expanded: PropTypes.bool,
+
+  /**
+   * Provide an optional id for the search container
+   */
+  id: PropTypes.string,
+
+  /**
+   * Provide an optional label text for the Search component icon
+   */
+  labelText: PropTypes.string,
+
+  /**
+   * Provide an optional hook that is called each time the input is updated
+   */
+  onChange: PropTypes.func,
+
+  /**
+   * Provide an optional hook that is called each time the input is expanded
+   */
+  onExpand: PropTypes.func,
+
+  persistant: deprecate(
+    PropTypes.bool,
+    `\nThe prop \`persistant\` for TableToolbarSearch has been deprecated in favor of \`persistent\`. Please use \`persistent\` instead.`
+  ),
 
   /**
    * Whether the search should be allowed to expand
    */
   persistent: PropTypes.bool,
-  persistant: deprecate(
-    PropTypes.bool,
-    `\nThe prop \`persistant\` for TableToolbarSearch has been deprecated in favor of \`persistent\`. Please use \`persistent\` instead.`
+
+  /**
+   * Deprecated in favor of `placeholder`
+   */
+  placeHolderText: deprecate(
+    PropTypes.string,
+    `\nThe prop \`placeHolderText\` for TableToolbarSearch has been deprecated in favor of \`placeholder\`. Please use \`placeholder\` instead.`
   ),
+
+  /**
+   * Provide an optional placeholder text for the Search component
+   */
+  placeholder: PropTypes.string,
+
+  /**
+   * Provide an optional className for the overall container of the Search
+   */
+  searchContainerClass: PropTypes.string,
+
+  /**
+   * Optional prop to specify the tabIndex of the <Search> (in expanded state) or the container (in collapsed state)
+   */
+  tabIndex: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
+  /**
+   * Provide custom text for the component for each translation id
+   */
+  translateWithId: PropTypes.func.isRequired,
 };
 
 TableToolbarSearch.defaultProps = {

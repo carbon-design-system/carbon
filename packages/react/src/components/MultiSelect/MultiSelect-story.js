@@ -5,8 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React from 'react';
-import { storiesOf } from '@storybook/react';
+import React, { useState } from 'react';
 import { action } from '@storybook/addon-actions';
 import {
   withKnobs,
@@ -18,6 +17,9 @@ import {
 import { withReadme } from 'storybook-readme';
 import readme from './README.md';
 import MultiSelect from '../MultiSelect';
+import FilterableMultiSelect from '../MultiSelect/FilterableMultiSelect';
+import Checkbox from '../Checkbox';
+import mdx from './MultiSelect.mdx';
 
 const items = [
   {
@@ -41,6 +43,10 @@ const items = [
     text:
       'An example option that is really long to show what should be done to handle long text',
   },
+  {
+    id: 'downshift-1-item-5',
+    text: 'Option 5',
+  },
 ];
 
 const defaultLabel = 'MultiSelect Label';
@@ -52,27 +58,39 @@ const types = {
 };
 
 const sizes = {
-  'Extra large size (xl)': 'xl',
-  'Regular size (lg)': '',
-  'Small size (sm)': 'sm',
+  'Small  (sm)': 'sm',
+  'Medium (md) - default': undefined,
+  'Large  (lg)': 'lg',
+};
+
+const directions = {
+  'Bottom (default)': 'bottom',
+  'Top ': 'top',
 };
 
 const props = () => ({
   id: text('MultiSelect ID (id)', 'carbon-multiselect-example'),
   titleText: text('Title (titleText)', 'Multiselect title'),
-  helperText: text('Helper text (helperText)', 'This is not helper text'),
+  helperText: text('Helper text (helperText)', 'This is helper text'),
   disabled: boolean('Disabled (disabled)', false),
   light: boolean('Light variant (light)', false),
   useTitleInItem: boolean('Show tooltip on hover', false),
   type: select('UI type (Only for `<MultiSelect>`) (type)', types, 'default'),
-  size: select('Field size (size)', sizes, '') || undefined,
+  size: select('Field size (size)', sizes, undefined) || undefined,
+  direction: select('Dropdown direction (direction)', directions, 'bottom'),
   label: text('Label (label)', defaultLabel),
   invalid: boolean('Show form validation UI (invalid)', false),
   invalidText: text(
     'Form validation UI content (invalidText)',
     'Invalid Selection'
   ),
+  warn: boolean('Show warning state (warn)', false),
+  warnText: text(
+    'Warning state text (warnText)',
+    'Selecting more items may increase processing time'
+  ),
   onChange: action('onChange'),
+  onMenuChange: action('onMenuChange'),
   listBoxMenuIconTranslationIds: object(
     'Listbox menu icon translation IDs (for translateWithId callback)',
     {
@@ -89,93 +107,205 @@ const props = () => ({
   ),
 });
 
-storiesOf('MultiSelect', module)
-  .addDecorator(withKnobs)
-  .add(
-    'default',
-    withReadme(readme, () => {
-      const {
-        listBoxMenuIconTranslationIds,
-        selectionFeedback,
-        ...multiSelectProps
-      } = props();
-      return (
-        <div style={{ width: 300 }}>
-          <MultiSelect
-            {...multiSelectProps}
-            items={items}
-            itemToString={item => (item ? item.text : '')}
-            translateWithId={id => listBoxMenuIconTranslationIds[id]}
-            selectionFeedback={selectionFeedback}
-          />
-        </div>
-      );
-    }),
-    {
-      info: {
-        text: `
-            MultiSelect
-          `,
-      },
-    }
-  )
-  .add(
-    'with initial selected items',
-    withReadme(readme, () => {
-      const {
-        listBoxMenuIconTranslationIds,
-        selectionFeedback,
-        ...multiSelectProps
-      } = props();
+export default {
+  title: 'Components/MultiSelect',
+  decorators: [withKnobs],
 
-      return (
-        <div style={{ width: 300 }}>
-          <MultiSelect
-            {...multiSelectProps}
-            items={items}
-            itemToString={item => (item ? item.text : '')}
-            initialSelectedItems={[items[0], items[1]]}
-            translateWithId={id => listBoxMenuIconTranslationIds[id]}
-            selectionFeedback={selectionFeedback}
-          />
-        </div>
-      );
-    }),
-    {
-      info: {
-        text: `
-            Provide a set of items to initially select in the control
-          `,
-      },
-    }
-  )
-  .add(
-    'filterable',
-    withReadme(readme, () => {
-      const {
-        listBoxMenuIconTranslationIds,
-        selectionFeedback,
-        ...multiSelectProps
-      } = props();
+  parameters: {
+    component: MultiSelect,
+    docs: {
+      page: mdx,
+    },
+    subcomponents: {
+      FilterableMultiSelect,
+    },
+  },
+};
 
-      return (
-        <div style={{ width: 300 }}>
-          <MultiSelect.Filterable
-            {...multiSelectProps}
-            items={items}
-            itemToString={item => (item ? item.text : '')}
-            placeholder={defaultPlaceholder}
-            translateWithId={id => listBoxMenuIconTranslationIds[id]}
-            selectionFeedback={selectionFeedback}
-          />
-        </div>
-      );
-    }),
-    {
-      info: {
-        text: `
-            When a list contains more than 25 items, use \`MultiSelect.Filterable\` to help find options from the list.
-          `,
-      },
-    }
+export const Default = withReadme(readme, () => {
+  const {
+    listBoxMenuIconTranslationIds,
+    selectionFeedback,
+    ...multiSelectProps
+  } = props();
+  return (
+    <div style={{ width: 300 }}>
+      <MultiSelect
+        {...multiSelectProps}
+        items={items}
+        itemToString={(item) => (item ? item.text : '')}
+        translateWithId={(id) => listBoxMenuIconTranslationIds[id]}
+        selectionFeedback={selectionFeedback}
+      />
+    </div>
   );
+});
+
+export const ItemToElement = withReadme(readme, () => {
+  return (
+    <div style={{ width: 300 }}>
+      <MultiSelect
+        titleText="Multiselect with element items"
+        label="Choose an item"
+        items={items}
+        itemToString={(item) => (item ? item.text : '')}
+        itemToElement={(item) =>
+          item ? (
+            <span className="test">
+              {item.text}{' '}
+              <span role="img" alt="fire">
+                {' '}
+                🔥
+              </span>
+            </span>
+          ) : (
+            ''
+          )
+        }
+      />
+      <br />
+      <FilterableMultiSelect
+        titleText="Filterable Multiselect with element items"
+        placeholder="itemToElement example"
+        items={items}
+        itemToString={(item) => (item ? item.text : '')}
+        itemToElement={(item) =>
+          item ? (
+            <span className="test">
+              {item.text}{' '}
+              <span role="img" alt="fire">
+                {' '}
+                🔥
+              </span>
+            </span>
+          ) : (
+            ''
+          )
+        }
+      />
+    </div>
+  );
+});
+
+Default.storyName = 'default';
+
+Default.parameters = {
+  info: {
+    text: `
+        MultiSelect
+      `,
+  },
+};
+
+export const WithInitialSelectedItems = withReadme(readme, () => {
+  const {
+    listBoxMenuIconTranslationIds,
+    selectionFeedback,
+    ...multiSelectProps
+  } = props();
+
+  return (
+    <div style={{ width: 300 }}>
+      <MultiSelect
+        {...multiSelectProps}
+        items={items}
+        itemToString={(item) => (item ? item.text : '')}
+        initialSelectedItems={[items[0], items[1]]}
+        translateWithId={(id) => listBoxMenuIconTranslationIds[id]}
+        selectionFeedback={selectionFeedback}
+      />
+    </div>
+  );
+});
+
+WithInitialSelectedItems.storyName = 'with initial selected items';
+
+WithInitialSelectedItems.parameters = {
+  info: {
+    text: `
+        Provide a set of items to initially select in the control
+      `,
+  },
+};
+
+export const _Filterable = withReadme(readme, () => {
+  const {
+    listBoxMenuIconTranslationIds,
+    selectionFeedback,
+    ...multiSelectProps
+  } = props();
+
+  return (
+    <div style={{ width: 300 }}>
+      <FilterableMultiSelect
+        {...multiSelectProps}
+        items={items}
+        itemToString={(item) => (item ? item.text : '')}
+        placeholder={defaultPlaceholder}
+        translateWithId={(id) => listBoxMenuIconTranslationIds[id]}
+        selectionFeedback={selectionFeedback}
+        onMenuChange={(e) => {
+          multiSelectProps.onMenuChange(e);
+        }}
+      />
+    </div>
+  );
+});
+
+_Filterable.storyName = 'filterable';
+
+_Filterable.parameters = {
+  info: {
+    text: `
+        When a list contains more than 25 items, use \`MultiSelect.Filterable\` to help find options from the list.
+      `,
+  },
+};
+
+export const WithChangeOnClose = withReadme(readme, () => {
+  const {
+    listBoxMenuIconTranslationIds,
+    selectionFeedback,
+    ...multiSelectProps
+  } = props();
+
+  const [hasFocus, setHasFocus] = useState(false);
+  const [active, setActive] = useState(false);
+  const [selItems, setSelItems] = useState([items[0]]);
+  if (!hasFocus && active && selItems.length == 0) {
+    setActive(false);
+  }
+
+  return (
+    <div style={{ width: 300 }}>
+      <Checkbox
+        id="active"
+        checked={active}
+        onChange={(a) => {
+          setActive(a);
+          if (a) {
+            setSelItems([items[0]]);
+          }
+        }}
+        labelText="Active"
+      />
+      <MultiSelect
+        {...multiSelectProps}
+        items={items}
+        itemToString={(item) => (item ? item.text : '')}
+        translateWithId={(id) => listBoxMenuIconTranslationIds[id]}
+        selectionFeedback={selectionFeedback}
+        key={active}
+        disabled={!active}
+        initialSelectedItems={selItems}
+        onMenuChange={(e) => {
+          multiSelectProps.onMenuChange(e);
+          setHasFocus(e);
+        }}
+        onChange={(e) => {
+          setSelItems(e.selectedItems);
+        }}
+      />
+    </div>
+  );
+});

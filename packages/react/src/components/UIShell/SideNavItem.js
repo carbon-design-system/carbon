@@ -27,15 +27,15 @@ const SideNavItem = ({
 
 SideNavItem.propTypes = {
   /**
-   * Provide an optional class to be applied to the containing node
-   */
-  className: PropTypes.string,
-
-  /**
    * Provide a single icon as the child to `SideNavIcon` to render in the
    * container
    */
   children: PropTypes.node.isRequired,
+
+  /**
+   * Provide an optional class to be applied to the containing node
+   */
+  className: PropTypes.string,
 
   /**
    * Specify if this is a large variation of the SideNavItem

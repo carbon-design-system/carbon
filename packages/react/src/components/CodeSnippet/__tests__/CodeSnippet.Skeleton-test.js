@@ -19,17 +19,17 @@ describe('CodeSnippetSkeleton', () => {
   describe('automated accessibility testing', () => {
     it.each(snippetTypes)(
       'should have no Axe violations with type="%s"',
-      async type => {
+      async (type) => {
         const { container } = render(<CodeSnippetSkeleton type={type} />);
         await expect(container).toHaveNoAxeViolations();
       }
     );
 
     it.each(snippetTypes)(
-      'should have no DAP violations with type="%s"',
-      async type => {
+      'should have no AC violations with type="%s"',
+      async (type) => {
         const { container } = render(<CodeSnippetSkeleton type={type} />);
-        await expect(container).toHaveNoDAPViolations(
+        await expect(container).toHaveNoACViolations(
           `CodeSnippetSkeleton-${type}`
         );
       }

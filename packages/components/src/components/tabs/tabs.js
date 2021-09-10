@@ -10,7 +10,7 @@ import eventMatches from '../../globals/js/misc/event-matches';
 import ContentSwitcher from '../content-switcher/content-switcher';
 import on from '../../globals/js/misc/on';
 
-const toArray = arrayLike => Array.prototype.slice.call(arrayLike);
+const toArray = (arrayLike) => Array.prototype.slice.call(arrayLike);
 
 class Tab extends ContentSwitcher {
   /**
@@ -36,12 +36,12 @@ class Tab extends ContentSwitcher {
     super(element, options);
 
     this.manage(
-      on(this.element, 'keydown', event => {
+      on(this.element, 'keydown', (event) => {
         this._handleKeyDown(event);
       })
     );
     this.manage(
-      on(this.element.ownerDocument, 'click', event => {
+      on(this.element.ownerDocument, 'click', (event) => {
         this._handleDocumentClick(event);
       })
     );
@@ -195,7 +195,7 @@ class Tab extends ContentSwitcher {
   /**
    * The component options.
    * If `options` is specified in the constructor, {@linkcode ContentSwitcher.create .create()}, or {@linkcode Tab.init .init()},
-   * properties in this object are overriden for the instance being create and how {@linkcode Tab.init .init()} works.
+   * properties in this object are overridden for the instance being create and how {@linkcode Tab.init .init()} works.
    * @member Tab.options
    * @type {object}
    * @property {string} selectorInit The CSS selector to find tab containers.

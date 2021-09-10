@@ -6,68 +6,68 @@
  */
 
 import React from 'react';
-import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
-import { withKnobs, text, boolean } from '@storybook/addon-knobs';
+import { withKnobs, text, boolean, select } from '@storybook/addon-knobs';
 import Toggle from '../Toggle';
-import ToggleSkeleton from '../Toggle/Toggle.Skeleton';
 
-const a11yProps = () => ({
-  labelText: text('Label toggle input control (labelText)', ''),
-  ['aria-label']: text('ARIA label of the toggle (aria-label)', ''),
-});
+const sizes = {
+  'Small  (sm)': 'sm',
+  'Medium (md) - default': undefined,
+};
 
 const toggleProps = () => ({
-  ...a11yProps(),
+  labelText: text(
+    'Label toggle input control (labelText)',
+    'Toggle element label'
+  ),
   className: 'some-class',
   labelA: text('Label for untoggled state (labelA)', 'Off'),
   labelB: text('Label for toggled state (labelB)', 'On'),
   disabled: boolean('Disabled (disabled)', false),
   onChange: action('onChange'),
   onToggle: action('onToggle'),
+  size: select('Field size (size)', sizes, undefined) || undefined,
 });
 
-storiesOf('Toggle', module)
-  .addDecorator(withKnobs)
-  .add(
-    'toggled',
-    () => (
-      <Toggle
-        defaultToggled
-        {...toggleProps()}
-        className="some-class"
-        id="toggle-1"
-      />
-    ),
-    {
-      info: {
-        text: `
-            Toggles are controls that are used to quickly switch between two possible states. The example below shows
-            an uncontrolled Toggle component. To use the Toggle component as a controlled component, set the toggled property.
-            Setting the toggled property will allow you to change the value dynamically, whereas setting the defaultToggled
-            prop will only set the value initially. This example has defaultToggled set to true.
-          `,
-      },
-    }
-  )
-  .add(
-    'untoggled',
-    () => <Toggle {...toggleProps()} className="some-class" id="toggle-1" />,
-    {
-      info: {
-        text: `
-            Toggles are controls that are used to quickly switch between two possible states. The example below shows
-            an uncontrolled Toggle component. To use the Toggle component as a controlled component, set the toggled property.
-            Setting the toggled property will allow you to change the value dynamically, whereas setting the defaultToggled
-            prop will only set the value initially. This example has defaultToggled set to false.
-          `,
-      },
-    }
-  )
-  .add('skeleton', () => <ToggleSkeleton {...a11yProps()} />, {
-    info: {
-      text: `
-            Placeholder skeleton state to use when content is loading.
-          `,
-    },
-  });
+export default {
+  title: 'Components/Toggle',
+  decorators: [withKnobs],
+
+  parameters: {
+    component: Toggle,
+    subcomponents: {},
+  },
+};
+
+export const Default = () => (
+  <>
+    <Toggle
+      labelText="Toggle (md)"
+      size="md"
+      labelA="Off"
+      labelB="On"
+      defaultToggled
+      className="some-class"
+      id="toggle-1"
+    />
+    <br />
+    <Toggle
+      labelText="Toggle (sm)"
+      size="sm"
+      defaultToggled
+      className="some-class"
+      id="toggle-2"
+    />
+  </>
+);
+
+export const Playground = () => (
+  <Toggle
+    defaultToggled
+    {...toggleProps()}
+    className="some-class"
+    id="toggle-3"
+  />
+);
+
+Default.storyName = 'Toggle';

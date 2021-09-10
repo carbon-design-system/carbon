@@ -11,7 +11,7 @@ import { unstable_tokens as tokens } from '../tokens';
 import * as Layout from '../';
 
 describe('@carbon/layout tokens', () => {
-  test.each(tokens)('%s should be exported', token => {
+  test.each(tokens)('%s should be exported', (token) => {
     expect(Layout[token]).toBeDefined();
   });
 });

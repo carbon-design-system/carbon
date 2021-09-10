@@ -1,0 +1,180 @@
+//
+// Copyright IBM Corp. 2016, 2020
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+$css--helpers: true;
+
+@import '../../globals/scss/vars';
+@import '../../globals/scss/helper-mixins';
+@import '../../globals/scss/typography';
+@import '../../globals/scss/layout';
+@import '../../globals/scss/css--helpers';
+@import '../../globals/scss/vendor/@carbon/elements/scss/import-once/import-once';
+@import '../select/select';
+
+/// Unstable pagination styles
+/// @access private
+/// @group pagination
+@mixin unstable_pagination {
+  .#{$prefix}--unstable-pagination {
+    @include reset;
+    @include carbon--type-style('body-short-01');
+
+    display: flex;
+    width: 100%;
+    height: rem(48px);
+    align-items: center;
+    justify-content: space-between;
+    border-top: 1px solid $ui-03;
+    border-bottom: 1px solid transparent;
+    background-color: $ui-01;
+  }
+
+  .#{$prefix}--unstable-pagination__text {
+    @include carbon--breakpoint('md') {
+      display: inline-block;
+    }
+
+    margin: 0 $carbon--spacing-05;
+    color: $text-02;
+  }
+
+  .#{$prefix}--unstable-pagination__left,
+  .#{$prefix}--unstable-pagination__right {
+    display: flex;
+    height: 100%;
+    align-items: center;
+  }
+
+  .#{$prefix}--unstable-pagination__left {
+    padding: 0 $carbon--spacing-05 0 0;
+  }
+
+  .#{$prefix}--unstable-pagination__left > .#{$prefix}--form-item,
+  .#{$prefix}--unstable-pagination__right > .#{$prefix}--form-item {
+    height: 100%;
+  }
+
+  .#{$prefix}--unstable-pagination__left
+    .#{$prefix}--unstable-pagination__text {
+    margin-right: rem(1px);
+  }
+
+  .#{$prefix}--unstable-pagination__right
+    .#{$prefix}--unstable-pagination__text {
+    margin-right: $carbon--spacing-05;
+    margin-left: rem(1px);
+  }
+
+  .#{$prefix}--unstable-pagination__button {
+    @include reset;
+
+    display: flex;
+    height: 100%;
+    align-items: center;
+    justify-content: center;
+    padding: 0 rem(14px);
+    border: none;
+    border-left: 1px solid $ui-03;
+    margin: 0;
+    background: none;
+    color: $ui-05;
+    cursor: pointer;
+    fill: $ui-05;
+    transition: outline $duration--fast-02 motion(standard, productive),
+      background-color $duration--fast-02 motion(standard, productive);
+  }
+
+  // Unset height/width set by icon-only button:
+  .#{$prefix}--unstable-pagination__button .#{$prefix}--btn__icon {
+    width: initial;
+    height: initial;
+  }
+
+  .#{$prefix}--unstable-pagination__button.#{$prefix}--btn--icon-only.#{$prefix}--tooltip__trigger:focus {
+    @include focus-outline('outline');
+  }
+
+  .#{$prefix}--unstable-pagination__button:hover {
+    background: $hover-ui;
+    color: $ui-05;
+  }
+
+  .#{$prefix}--unstable-pagination__button--no-index {
+    cursor: not-allowed;
+    fill: $disabled-02;
+  }
+
+  .#{$prefix}--unstable-pagination__button.#{$prefix}--btn:disabled {
+    border-color: $ui-03;
+    background: transparent;
+  }
+
+  .#{$prefix}--unstable-pagination__button:disabled:hover,
+  .#{$prefix}--unstable-pagination__button--no-index:hover {
+    background: transparent;
+    cursor: not-allowed;
+    fill: $disabled-02;
+  }
+
+  .#{$prefix}--unstable-pagination__page-selector,
+  .#{$prefix}--unstable-pagination__page-sizer {
+    height: 100%;
+    align-items: center;
+  }
+
+  .#{$prefix}--unstable-pagination__page-selector
+    .#{$prefix}--select-input--inline__wrapper,
+  .#{$prefix}--unstable-pagination__page-sizer
+    .#{$prefix}--select-input--inline__wrapper {
+    display: flex;
+    height: 100%;
+  }
+
+  .#{$prefix}--unstable-pagination__page-selector .#{$prefix}--select-input,
+  .#{$prefix}--unstable-pagination__page-sizer .#{$prefix}--select-input {
+    @include carbon--type-style('body-short-01');
+
+    width: auto;
+    min-width: auto;
+    height: 100%;
+    padding: 0 $carbon--spacing-08 0 $carbon--spacing-05;
+    margin-right: -0.65rem;
+
+    @include carbon--breakpoint('md') {
+      padding-right: carbon--mini-units(4.5);
+      margin-right: 0;
+    }
+  }
+
+  .#{$prefix}--unstable-pagination__page-selector
+    .#{$prefix}--select-input:hover,
+  .#{$prefix}--unstable-pagination__page-sizer .#{$prefix}--select-input:hover {
+    background: $hover-ui;
+  }
+
+  .#{$prefix}--unstable-pagination__page-selector .#{$prefix}--select__arrow,
+  .#{$prefix}--unstable-pagination__page-sizer .#{$prefix}--select__arrow {
+    top: 50%;
+    transform: translateY(-50%);
+
+    @include carbon--breakpoint('md') {
+      right: $carbon--spacing-05;
+    }
+  }
+
+  .#{$prefix}--unstable-pagination__page-selector {
+    border-left: 1px solid $ui-03;
+  }
+
+  .#{$prefix}--unstable-pagination__page-sizer {
+    border-right: 1px solid $ui-03;
+  }
+}
+
+@include exports('unstable_pagination') {
+  @include unstable_pagination;
+}

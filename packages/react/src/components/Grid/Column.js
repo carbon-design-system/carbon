@@ -9,6 +9,7 @@ import { settings } from 'carbon-components';
 import cx from 'classnames';
 import PropTypes from 'prop-types';
 import React from 'react';
+import { useFeatureFlag } from '../FeatureFlags';
 
 const { prefix } = settings;
 
@@ -23,7 +24,11 @@ function Column({
   max,
   ...rest
 }) {
-  const columnClassName = getClassNameForBreakpoints([sm, md, lg, xlg, max]);
+  const hasCSSGrid = useFeatureFlag('enable-css-grid');
+  const columnClassName = hasCSSGrid
+    ? getClassNameForBreakpoints([sm, md, lg, xlg, max])
+    : getClassNameForFlexGridBreakpoints([sm, md, lg, xlg, max]);
+
   const className = cx(containerClassName, columnClassName, {
     [`${prefix}--col`]: columnClassName.length === 0,
   });
@@ -51,20 +56,14 @@ Column.propTypes = {
   as: PropTypes.oneOfType([PropTypes.string, PropTypes.elementType]),
 
   /**
-   * Specify column span for the `sm` breakpoint (Default breakpoint up to 672px)
-   * This breakpoint supports 4 columns by default.
-   *
-   * @see https://www.carbondesignsystem.com/guidelines/layout#breakpoints
+   * Pass in content that will be rendered within the `Column`
    */
-  sm: spanPropType,
+  children: PropTypes.node,
 
   /**
-   * Specify column span for the `md` breakpoint (Default breakpoint up to 1056px)
-   * This breakpoint supports 8 columns by default.
-   *
-   * @see https://www.carbondesignsystem.com/guidelines/layout#breakpoints
+   * Specify a custom className to be applied to the `Column`
    */
-  md: spanPropType,
+  className: PropTypes.string,
 
   /**
    * Specify column span for the `lg` breakpoint (Default breakpoint up to 1312px)
@@ -75,14 +74,6 @@ Column.propTypes = {
   lg: spanPropType,
 
   /**
-   * Specify column span for the `xlg` breakpoint (Default breakpoint up to
-   * 1584px) This breakpoint supports 16 columns by default.
-   *
-   * @see https://www.carbondesignsystem.com/guidelines/layout#breakpoints
-   */
-  xlg: spanPropType,
-
-  /**
    * Specify column span for the `max` breakpoint. This breakpoint supports 16
    * columns by default.
    *
@@ -91,14 +82,28 @@ Column.propTypes = {
   max: spanPropType,
 
   /**
-   * Specify a custom className to be applied to the `Column`
+   * Specify column span for the `md` breakpoint (Default breakpoint up to 1056px)
+   * This breakpoint supports 8 columns by default.
+   *
+   * @see https://www.carbondesignsystem.com/guidelines/layout#breakpoints
    */
-  className: PropTypes.string,
+  md: spanPropType,
 
   /**
-   * Pass in content that will be rendered within the `Column`
+   * Specify column span for the `sm` breakpoint (Default breakpoint up to 672px)
+   * This breakpoint supports 4 columns by default.
+   *
+   * @see https://www.carbondesignsystem.com/guidelines/layout#breakpoints
    */
-  children: PropTypes.node,
+  sm: spanPropType,
+
+  /**
+   * Specify column span for the `xlg` breakpoint (Default breakpoint up to
+   * 1584px) This breakpoint supports 16 columns by default.
+   *
+   * @see https://www.carbondesignsystem.com/guidelines/layout#breakpoints
+   */
+  xlg: spanPropType,
 };
 
 const breakpointNames = ['sm', 'md', 'lg', 'xlg', 'max'];
@@ -119,7 +124,59 @@ function getClassNameForBreakpoints(breakpoints) {
 
   for (let i = 0; i < breakpoints.length; i++) {
     const breakpoint = breakpoints[i];
-    if (!breakpoint) {
+    if (breakpoint === undefined || breakpoint === null) {
+      continue;
+    }
+
+    const name = breakpointNames[i];
+
+    // If our breakpoint is a boolean, the user has specified that the column
+    // should be "auto" at this size
+    if (breakpoint === true) {
+      classNames.push(`${prefix}--${name}:col-span-auto`);
+      continue;
+    }
+
+    // If our breakpoint is a number, the user has specified the number of
+    // columns they'd like this column to span
+    if (typeof breakpoint === 'number') {
+      classNames.push(`${prefix}--${name}:col-span-${breakpoint}`);
+      continue;
+    }
+
+    const { span, offset } = breakpoint;
+
+    if (typeof offset === 'number' && offset > 0) {
+      classNames.push(`${prefix}--${name}:col-start-${offset + 1}`);
+    }
+
+    if (typeof span === 'number') {
+      if (typeof offset === 'number' && offset > 0) {
+        classNames.push(`${prefix}--${name}:col-end-${offset + span + 1}`);
+      } else {
+        classNames.push(`${prefix}--${name}:col-span-${span}`);
+      }
+    }
+
+    if (span === true) {
+      classNames.push(`${prefix}--${name}:col-span-auto`);
+    }
+  }
+
+  return classNames.join(' ');
+}
+
+/**
+ * Build the appropriate className for the given set of breakpoints.
+ * @param {Array<boolean|number|Breakpoint>} breakpoints
+ * @returns {string}
+ */
+function getClassNameForFlexGridBreakpoints(breakpoints) {
+  const classNames = [];
+
+  for (let i = 0; i < breakpoints.length; i++) {
+    const breakpoint = breakpoints[i];
+    if (breakpoint === undefined || breakpoint === null) {
       continue;
     }
 

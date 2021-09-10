@@ -4,11 +4,12 @@
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
-
 export Accordion from './components/Accordion';
 export AccordionItem from './components/AccordionItem';
+export { AspectRatio } from './components/AspectRatio';
 export { Breadcrumb, BreadcrumbItem } from './components/Breadcrumb';
 export Button from './components/Button';
+export ButtonSet from './components/ButtonSet';
 export Checkbox from './components/Checkbox';
 export CodeSnippet from './components/CodeSnippet';
 export ComboBox from './components/ComboBox';
@@ -57,7 +58,9 @@ export FileUploader, {
   FileUploaderDropContainer,
   FileUploaderItem,
 } from './components/FileUploader';
+export FilterableMultiSelect from './components/FilterableMultiSelect';
 export Form from './components/Form';
+export FluidForm from './components/FluidForm';
 export FormGroup from './components/FormGroup';
 export FormItem from './components/FormItem';
 export FormLabel from './components/FormLabel';
@@ -82,6 +85,11 @@ export OrderedList from './components/OrderedList';
 export OverflowMenu from './components/OverflowMenu';
 export OverflowMenuItem from './components/OverflowMenuItem';
 export Pagination from './components/Pagination';
+export PaginationNav from './components/PaginationNav';
+export {
+  ControlledPasswordInput,
+  PasswordInput,
+} from './components/PasswordInput';
 export PrimaryButton from './components/PrimaryButton';
 export {
   ProgressIndicator,
@@ -92,6 +100,7 @@ export RadioButtonGroup from './components/RadioButtonGroup';
 export Search from './components/Search';
 export SearchFilterButton from './components/SearchFilterButton';
 export SearchLayoutButton from './components/SearchLayoutButton';
+export ExpandableSearch from './components/ExpandableSearch';
 export SecondaryButton from './components/SecondaryButton';
 export Select from './components/Select';
 export SelectItem from './components/SelectItem';
@@ -105,6 +114,7 @@ export {
   StructuredListRow,
   StructuredListInput,
   StructuredListCell,
+  StructuredListSkeleton,
 } from './components/StructuredList';
 export Tab from './components/Tab';
 export TabContent from './components/TabContent';
@@ -148,12 +158,12 @@ export CodeSnippetSkeleton from './components/CodeSnippet/CodeSnippet.Skeleton';
 export DropdownSkeleton from './components/Dropdown/Dropdown.Skeleton';
 export FileUploaderSkeleton from './components/FileUploader/FileUploader.Skeleton';
 export NumberInputSkeleton from './components/NumberInput/NumberInput.Skeleton';
+export PaginationSkeleton from './components/Pagination/Pagination.Skeleton';
 export ProgressIndicatorSkeleton from './components/ProgressIndicator/ProgressIndicator.Skeleton';
 export RadioButtonSkeleton from './components/RadioButton/RadioButton.Skeleton';
 export SearchSkeleton from './components/Search/Search.Skeleton';
 export SelectSkeleton from './components/Select/Select.Skeleton';
 export SliderSkeleton from './components/Slider/Slider.Skeleton';
-export StructuredListSkeleton from './components/StructuredList/StructuredList.Skeleton';
 export TabsSkeleton from './components/Tabs/Tabs.Skeleton';
 export TagSkeleton from './components/Tag/Tag.Skeleton';
 export TextAreaSkeleton from './components/TextArea/TextArea.Skeleton';
@@ -162,4 +172,61 @@ export ToggleSkeleton from './components/Toggle/Toggle.Skeleton';
 export ToggleSmallSkeleton from './components/ToggleSmall/ToggleSmall.Skeleton';
 export IconSkeleton from './components/Icon/Icon.Skeleton';
 export DatePickerSkeleton from './components/DatePicker/DatePicker.Skeleton';
-export * from './components/UIShell';
+export {
+  Content,
+  Header,
+  HeaderContainer,
+  HeaderGlobalAction,
+  HeaderGlobalBar,
+  HeaderMenu,
+  HeaderMenuButton,
+  HeaderMenuItem,
+  HeaderName,
+  HeaderNavigation,
+  HeaderPanel,
+  HeaderSideNavItems,
+  Switcher,
+  SwitcherItem,
+  SwitcherDivider,
+  SkipToContent,
+  SideNav,
+  SideNavDetails,
+  SideNavDivider,
+  SideNavFooter,
+  SideNavHeader,
+  SideNavIcon,
+  SideNavItem,
+  SideNavItems,
+  SideNavLink,
+  SideNavLinkText,
+  SideNavMenu,
+  SideNavMenuItem,
+  SideNavSwitcher,
+} from './components/UIShell';
+
+// Experimental
+export {
+  FeatureFlags as unstable_FeatureFlags,
+  useFeatureFlag as unstable_useFeatureFlag,
+  useFeatureFlags as unstable_useFeatureFlags,
+} from './components/FeatureFlags';
+export {
+  PageSelector as unstable_PageSelector,
+  Pagination as unstable_Pagination,
+} from './components/Pagination/experimental';
+export unstable_TreeView, {
+  TreeNode as unstable_TreeNode,
+} from './components/TreeView';
+export unstable_Menu, {
+  MenuDivider as unstable_MenuDivider,
+  MenuGroup as unstable_MenuGroup,
+  MenuItem as unstable_MenuItem,
+  MenuRadioGroup as unstable_MenuRadioGroup,
+  MenuSelectableItem as unstable_MenuSelectableItem,
+} from './components/Menu';
+export { useContextMenu as unstable_useContextMenu } from './components/ContextMenu';
+export {
+  Heading as unstable_Heading,
+  Section as unstable_Section,
+} from './components/Heading';
+export { default as unstable_ProgressBar } from './components/ProgressBar';

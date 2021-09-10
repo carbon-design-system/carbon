@@ -12,13 +12,20 @@ import handles from '../../globals/js/mixins/handles';
 import on from '../../globals/js/misc/on';
 import settings from '../../globals/js/settings';
 
-const toArray = arrayLike => Array.prototype.slice.call(arrayLike);
+const toArray = (arrayLike) => Array.prototype.slice.call(arrayLike);
 
-export default class HeaderNav extends mixin(
-  createComponent,
-  initComponentBySearch,
-  handles
-) {
+class HeaderNav extends mixin(createComponent, initComponentBySearch, handles) {
+  /**
+   * Header nav.
+   * @extends CreateComponent
+   * @extends InitComponentBySearch
+   * @extends Handles
+   * @param {HTMLElement} element The element working as an header nav.
+   * @param {object} [options] The component options.
+   * @param {string} [options.selectorSubmenu] The CSS selector to find sub menus.
+   * @param {string} [options.selectorSubmenuLink] The CSS selector to find the trigger buttons of sub menus.
+   * @param {string} [options.selectorSubmenuItem] The CSS selector to find the sub menu items.
+   */
   constructor(element, options) {
     super(element, options);
     this.manage(on(this.element, 'keydown', this._handleKeyDown));
@@ -47,12 +54,12 @@ export default class HeaderNav extends mixin(
    * Moves the focus up/down.
    * @param {number} direction The direction of navigating.
    */
-  navigate = direction => {
+  navigate = (direction) => {
     const items = toArray(
       this.element.querySelectorAll(this.options.selectorSubmenuLink)
     );
     const start = this.getCurrentNavigation();
-    const getNextItem = old => {
+    const getNextItem = (old) => {
       const handleUnderflow = (index, length) =>
         index + (index >= 0 ? 0 : length);
       const handleOverflow = (index, length) =>
@@ -71,7 +78,7 @@ export default class HeaderNav extends mixin(
    * Handles keydown event.
    * @param {Event} event The event triggering this method.
    */
-  _handleKeyDown = event => {
+  _handleKeyDown = (event) => {
     const keyCodes = {
       37: this.constructor.NAVIGATE.BACKWARD, // left arrow
       39: this.constructor.NAVIGATE.FORWARD, // right arrow
@@ -87,11 +94,14 @@ export default class HeaderNav extends mixin(
    * If `options` is specified in the constructor,
    * {@linkcode HeaderNav.create .create()}, or
    * {@linkcode HeaderNav.init .init()},
-   * properties in this object are overriden for the instance being create and
+   * properties in this object are overridden for the instance being create and
    * how {@linkcode HeaderNav.init .init()} works.
    * @member HeaderNav.options
    * @type {object}
    * @property {string} selectorInit The data attribute to find side navs.
+   * @property {string} [selectorSubmenu] The CSS selector to find sub menus.
+   * @property {string} [selectorSubmenuLink] The CSS selector to find the trigger buttons of sub menus.
+   * @property {string} [selectorSubmenuItem] The CSS selector to find the sub menu items.
    */
   static get options() {
     const { prefix } = settings;
@@ -117,3 +127,5 @@ export default class HeaderNav extends mixin(
     FORWARD: 1,
   };
 }
+
+export default HeaderNav;

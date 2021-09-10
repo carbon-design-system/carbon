@@ -1,0 +1,11 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`@carbon/grid Public API 1`] = `
+Array [
+  "prefix",
+  "grid-gutter",
+  "grid-gutter--condensed",
+  "grid-breakpoints",
+  "carbon--aspect-ratios",
+]
+`;

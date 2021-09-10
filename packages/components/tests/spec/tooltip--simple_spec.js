@@ -2,9 +2,9 @@ import Tooltip from '../../src/components/tooltip/tooltip--simple';
 import TooltipDefinitionHTML from '../../html/tooltip/tooltip--definition.html';
 import TooltipIconHTML from '../../html/tooltip/tooltip--icon.html';
 
-describe('Test simple tooltip', function() {
-  describe('Constructor', function() {
-    it('Should throw if root element is not given', function() {
+describe('Test simple tooltip', function () {
+  describe('Constructor', function () {
+    it('Should throw if root element is not given', function () {
       expect(() => {
         new Tooltip();
       }).toThrowError(
@@ -13,7 +13,7 @@ describe('Test simple tooltip', function() {
       );
     });
 
-    it('Should throw if root element is not a DOM element', function() {
+    it('Should throw if root element is not a DOM element', function () {
       expect(() => {
         new Tooltip(document.createTextNode(''));
       }).toThrowError(
@@ -23,7 +23,7 @@ describe('Test simple tooltip', function() {
     });
   });
 
-  describe('Showing/hiding definition tooltip', function() {
+  describe('Showing/hiding definition tooltip', function () {
     const container = document.createElement('div');
     container.innerHTML = TooltipDefinitionHTML;
 
@@ -31,22 +31,22 @@ describe('Test simple tooltip', function() {
     const button = container.querySelector('.bx--tooltip__trigger--definition');
     let tooltip;
 
-    beforeAll(function() {
+    beforeAll(function () {
       document.body.appendChild(container);
       tooltip = new Tooltip(element);
     });
 
-    it('Should not have hidden class after mouseenter', function() {
+    it('Should not have hidden class after mouseenter', function () {
       element.dispatchEvent(new CustomEvent('mouseenter', { bubbles: true }));
       expect(button.classList.contains('bx--tooltip--hidden')).toBe(false);
     });
 
-    it('Should not have hidden class after focus', function() {
+    it('Should not have hidden class after focus', function () {
       element.dispatchEvent(new CustomEvent('focus', { bubbles: true }));
       expect(button.classList.contains('bx--tooltip--hidden')).toBe(false);
     });
 
-    it('Should have hidden class after Esc keydown', function() {
+    it('Should have hidden class after Esc keydown', function () {
       element.dispatchEvent(
         Object.assign(new CustomEvent('keydown', { bubbles: true }), {
           which: 27,
@@ -55,11 +55,11 @@ describe('Test simple tooltip', function() {
       expect(button.classList.contains('bx--tooltip--hidden')).toBe(true);
     });
 
-    afterEach(function() {
+    afterEach(function () {
       button.classList.remove('bx--tooltip--hidden');
     });
 
-    afterAll(function() {
+    afterAll(function () {
       if (document.body.contains(button)) {
         button.parentNode.removeChild(button);
       }
@@ -71,29 +71,45 @@ describe('Test simple tooltip', function() {
     });
   });
 
-  describe('Showing/hiding icon tooltip', function() {
+  describe('Showing/hiding icon tooltip', function () {
     const container = document.createElement('div');
     container.innerHTML = TooltipIconHTML;
 
     const element = container.querySelector('[data-tooltip-icon]');
     let tooltip;
 
-    beforeAll(function() {
+    beforeAll(function () {
       document.body.appendChild(container);
       tooltip = new Tooltip(element);
     });
 
-    it('Should not have hidden class after mouseenter', function() {
+    it('Should not have hidden class after mouseenter', function () {
       element.dispatchEvent(new CustomEvent('mouseenter', { bubbles: true }));
       expect(element.classList.contains('bx--tooltip--hidden')).toBe(false);
     });
 
-    it('Should not have hidden class after focus', function() {
+    it('Should have visible class after mouseenter', function () {
+      element.dispatchEvent(new CustomEvent('mouseenter', { bubbles: true }));
+      expect(element.classList.contains('bx--tooltip--visible')).toBe(true);
+    });
+
+    it('Should not have visible class after mouseleave', async function () {
+      return Tooltip.__with__({
+        debounce: (fn) => fn,
+      })(() => {
+        tooltip.release();
+        tooltip = new Tooltip(element);
+        element.dispatchEvent(new CustomEvent('mouseleave', { bubbles: true }));
+        expect(element.classList.contains('bx--tooltip--visible')).toBe(false);
+      });
+    });
+
+    it('Should not have hidden class after focus', function () {
       element.dispatchEvent(new CustomEvent('focus', { bubbles: true }));
       expect(element.classList.contains('bx--tooltip--hidden')).toBe(false);
     });
 
-    it('Should have hidden class after Esc keydown', function() {
+    it('Should have hidden class after Esc keydown', function () {
       element.dispatchEvent(
         Object.assign(new CustomEvent('keydown', { bubbles: true }), {
           which: 27,
@@ -102,11 +118,11 @@ describe('Test simple tooltip', function() {
       expect(element.classList.contains('bx--tooltip--hidden')).toBe(true);
     });
 
-    afterEach(function() {
+    afterEach(function () {
       element.classList.remove('bx--tooltip--hidden');
     });
 
-    afterAll(function() {
+    afterAll(function () {
       if (document.body.contains(element)) {
         element.parentNode.removeChild(element);
       }

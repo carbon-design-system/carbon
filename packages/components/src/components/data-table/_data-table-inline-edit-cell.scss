@@ -14,14 +14,14 @@
 /// @group data-table
 @mixin assistive-text {
   position: absolute;
+  overflow: hidden;
   width: 1px;
   height: 1px;
   padding: 0;
-  margin: -1px;
-  overflow: hidden;
-  clip: rect(0, 0, 0, 0);
   border: 0;
-  visibility: visible;
+  margin: -1px;
+  clip: rect(0, 0, 0, 0);
+  visibility: inherit;
   white-space: nowrap;
 }
 
@@ -53,17 +53,17 @@
 
   // Reset hover styles while editing
   .#{$prefix}--data-table--editing tr:hover td {
+    border-top: 1px solid $border-strong;
+    border-bottom: 1px solid $border-strong;
     background-color: inherit;
-    border-top: 1px solid $ui-04;
-    border-bottom: 1px solid $ui-04;
   }
 
   .#{$prefix}--data-table--editing tr:hover td:first-of-type {
-    border-left: 1px solid $ui-04;
+    border-left: 1px solid $border-strong;
   }
 
   .#{$prefix}--data-table--editing tr:hover td:last-of-type {
-    border-right: 1px solid $ui-04;
+    border-right: 1px solid $border-strong;
   }
 
   //----------------------------------------------------------------------------
@@ -108,14 +108,14 @@
   // Styles used for getting 100% width and height on an descendant of a table
   // cell. Display is used for alignment of most items to the end of the cell
   .#{$prefix}--data-table-cell__activity {
-    display: flex;
-    justify-content: flex-end;
-    align-items: center;
     position: absolute;
     top: 0;
     right: 1rem;
     bottom: 0;
     left: 0;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
   }
 
   //----------------------------------------------------------------------------
@@ -124,6 +124,7 @@
 
   .#{$prefix}--data-table-cell__edit {
     @include button-reset(false);
+
     opacity: 0;
   }
 
@@ -134,16 +135,16 @@
   }
 
   .#{$prefix}--data-table-cell__icon--edit {
-    fill: $ui-05;
+    fill: $icon-primary;
   }
 
   .#{$prefix}--data-table-cell__edit:active
     > .#{$prefix}--data-table-cell__icon--edit {
-    fill: $brand-01;
+    fill: $interactive;
   }
 
   .#{$prefix}--data-table-cell__edit:focus {
-    outline: 1px solid $brand-01;
+    outline: 1px solid $focus;
     outline-offset: 2px;
   }
 
@@ -152,15 +153,15 @@
   //----------------------------------------------------------------------------
 
   .#{$prefix}--data-table__edit-field {
-    display: flex;
-    justify-content: flex-end;
-    align-items: center;
     position: absolute;
+    z-index: 100;
     top: 0;
     right: 0;
     bottom: 0;
     left: 0;
-    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
   }
 
   .#{$prefix}--data-table__edit-field > label.#{$prefix}--label {
@@ -173,8 +174,8 @@
   // still buffer the right hand side with some padding to allow space for
   // status indicators to render without clipping the input content
   .#{$prefix}--data-table__edit-field > input {
-    min-height: 100%;
     min-width: 100%;
+    min-height: 100%;
     padding: 0 $spacing--cell--status 0 0;
   }
 
@@ -207,17 +208,17 @@
   .#{$prefix}--data-table__edit-actions {
     @include box-shadow;
 
-    display: flex;
-    justify-content: flex-end;
-    align-items: center;
     position: absolute;
+    z-index: z('overlay');
     top: $size--edit-actions--height;
     right: 0;
     bottom: 0;
+    display: flex;
     height: $size--edit-actions--height;
-    background-color: $inverse-01;
+    align-items: center;
+    justify-content: flex-end;
     padding: $spacing--cell-actions;
-    z-index: z('overlay');
+    background-color: $background-inverse;
   }
 
   // Undo default margin-left from btn classes
@@ -233,9 +234,6 @@
 
   // Containing node
   .#{$prefix}--data-table__edit-status {
-    display: flex;
-    justify-content: flex-end;
-    align-items: center;
     position: absolute;
     top: 0;
     // Value should be 0.5rem, but doing so will cause the loading box to clip
@@ -245,6 +243,9 @@
     right: 1rem;
     bottom: 0;
     left: 0;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
   }
 
   // Status - Saving -----------------------------------------------------------
@@ -267,82 +268,75 @@
 
   // Status - Success ----------------------------------------------------------
   .#{$prefix}--data-table__icon--success {
-    fill: $support-02;
+    fill: $support-success;
   }
 
   // Status - Error ------------------------------------------------------------
 
   .#{$prefix}--data-table__status--error {
+    position: relative;
     display: flex;
-    justify-content: flex-end;
-    align-items: center;
-    fill: $support-01;
     width: 100%;
     height: 100%;
+    align-items: center;
+    justify-content: flex-end;
+    fill: $support-error;
+    // Specify outline on child SVG node instead
+    outline: none;
   }
 
   .#{$prefix}--data-table__edit-field--error {
-    border-bottom: 2px solid $support-01;
-  }
-
-  .#{$prefix}--data-table__status--error {
-    position: relative;
+    border-bottom: 2px solid $support-error;
   }
 
   .#{$prefix}--data-table__error-text {
     @include box-shadow;
 
     position: absolute;
+    z-index: 1000;
     top: rem(-1px);
     right: -1rem;
-    color: $text-error;
-    // TODO: sync with caption sizes
-    font-size: rem(12px);
-    background-color: $inverse-01;
     padding: 1rem;
-    transform: translateY(-100%);
-    border: 1px solid $ui-03;
-    z-index: 1000;
+    border: 1px solid $border-subtle;
+    background-color: $icon-inverse;
     box-shadow: 0 -4px 8px rgba(0, 0, 0, 0.1);
+    color: $text-error;
+    font-size: rem(12px);
     opacity: 0;
+    transform: translateY(-100%);
   }
 
   .#{$prefix}--data-table__error-text::after {
-    content: '';
     position: absolute;
+    z-index: 10;
     // Manually offset and center triangle
     right: 1rem;
     // TODO: shift down half of height
     bottom: -7px;
     width: rem(10px);
     height: rem(10px);
-    background-color: $inverse-01;
-    border: 1px solid $ui-03;
+    border: 1px solid $border-subtle;
     border-top: 1px solid transparent;
     border-left: 1px solid transparent;
-    transform: rotate(45deg);
-    z-index: 10;
+    background-color: $icon-inverse;
+    content: '';
     opacity: 0;
+    transform: rotate(45deg);
   }
 
   .#{$prefix}--data-table__icon--error {
     z-index: 1000;
   }
 
-  .#{$prefix}--data-table__status--error {
-    // Specify outline on child SVG node instead
-    outline: none;
-  }
-
   .#{$prefix}--data-table__status--error:focus
     .#{$prefix}--data-table__error-text {
-    box-shadow: 0 0 0 1px $brand-01;
+    box-shadow: 0 0 0 1px $focus;
   }
 
   .#{$prefix}--data-table__status--error:focus
     .#{$prefix}--data-table__error-text::after {
-    border-right-color: $brand-01;
-    border-bottom-color: $brand-01;
+    border-right-color: $focus;
+    border-bottom-color: $focus;
   }
 
   // Visually show the error message

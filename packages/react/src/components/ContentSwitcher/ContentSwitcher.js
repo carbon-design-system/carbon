@@ -11,6 +11,7 @@ import classNames from 'classnames';
 import { settings } from 'carbon-components';
 import { composeEventHandlers } from '../../tools/events';
 import { getNextIndex, matches, keys } from '../../internal/keyboard';
+import deprecate from '../../prop-types/deprecate';
 
 const { prefix } = settings;
 
@@ -36,6 +37,15 @@ export default class ContentSwitcher extends React.Component {
     className: PropTypes.string,
 
     /**
+     * `true` to use the light variant.
+     */
+    light: deprecate(
+      PropTypes.bool,
+      'The `light` prop for `ContentSwitcher` is no longer needed and has ' +
+        'been deprecated. It will be removed in the next major release.'
+    ),
+
+    /**
      * Specify an `onChange` handler that is called whenever the ContentSwitcher
      * changes which item is selected
      */
@@ -45,10 +55,23 @@ export default class ContentSwitcher extends React.Component {
      * Specify a selected index for the initially selected content
      */
     selectedIndex: PropTypes.number,
+
+    /**
+     * Choose whether or not to automatically change selection on focus
+     */
+    selectionMode: PropTypes.oneOf(['automatic', 'manual']),
+
+    /**
+     * Specify the size of the Content Switcher. Currently supports either `sm`, 'md' (default) or 'lg` as an option.
+     * TODO V11: remove `xl` (replaced with lg)
+     */
+    size: PropTypes.oneOf(['sm', 'md', 'lg', 'xl']),
   };
 
   static defaultProps = {
     selectedIndex: 0,
+    selectionMode: 'automatic',
+    onChange: () => {},
   };
 
   static getDerivedStateFromProps({ selectedIndex }, state) {
@@ -61,11 +84,12 @@ export default class ContentSwitcher extends React.Component {
         };
   }
 
-  handleItemRef = index => ref => {
+  handleItemRef = (index) => (ref) => {
     this._switchRefs[index] = ref;
   };
 
-  handleChildChange = data => {
+  handleChildChange = (data) => {
+    const { selectionMode } = this.props;
     // the currently selected child index
     const { selectedIndex } = this.state;
     // the newly selected child index
@@ -73,29 +97,35 @@ export default class ContentSwitcher extends React.Component {
     const { key } = data;
 
     if (matches(data, [keys.ArrowRight, keys.ArrowLeft])) {
-      const nextIndex = getNextIndex(
-        key,
-        selectedIndex,
-        this.props.children.length
-      );
-      this.setState(
-        {
-          selectedIndex: nextIndex,
-        },
-        () => {
-          const switchRef = this._switchRefs[nextIndex];
-          switchRef && switchRef.focus();
-          this.props.onChange(data);
-        }
-      );
-    } else {
-      if (selectedIndex !== index) {
-        this.setState({ selectedIndex: index }, () => {
-          const switchRef = this._switchRefs[index];
-          switchRef && switchRef.focus();
-          this.props.onChange(data);
-        });
+      const nextIndex = getNextIndex(key, index, this.props.children.length);
+      const children = React.Children.toArray(this.props.children);
+      if (selectionMode === 'manual') {
+        const switchRef = this._switchRefs[nextIndex];
+        switchRef && switchRef.focus();
+      } else {
+        this.setState(
+          {
+            selectedIndex: nextIndex,
+          },
+          () => {
+            const child = children[this.state.selectedIndex];
+            const switchRef = this._switchRefs[this.state.selectedIndex];
+            switchRef && switchRef.focus();
+            this.props.onChange({
+              ...data,
+              index: this.state.selectedIndex,
+              name: child.props.name,
+              text: child.props.text,
+            });
+          }
+        );
       }
+    } else if (selectedIndex !== index) {
+      this.setState({ selectedIndex: index }, () => {
+        const switchRef = this._switchRefs[index];
+        switchRef && switchRef.focus();
+        this.props.onChange(data);
+      });
     }
   };
 
@@ -103,11 +133,17 @@ export default class ContentSwitcher extends React.Component {
     const {
       children,
       className,
+      light,
       selectedIndex, // eslint-disable-line no-unused-vars
+      selectionMode, // eslint-disable-line no-unused-vars
+      size,
       ...other
     } = this.props;
 
-    const classes = classNames(`${prefix}--content-switcher`, className);
+    const classes = classNames(`${prefix}--content-switcher`, className, {
+      [`${prefix}--content-switcher--light`]: light,
+      [`${prefix}--content-switcher--${size}`]: size,
+    });
 
     return (
       <div {...other} className={classes} role="tablist">

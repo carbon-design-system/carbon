@@ -44,7 +44,7 @@ function primitive(value) {
   }
   if (typeof value === 'object') {
     return t.SassMap({
-      properties: Object.keys(value).map(key => {
+      properties: Object.keys(value).map((key) => {
         const quoted = key.includes(' ');
         const identifier = quoted
           ? t.Identifier(key)

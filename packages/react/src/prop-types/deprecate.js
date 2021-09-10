@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import warning from 'warning';
+import { warning } from '../internal/warning';
 
 const didWarnAboutDeprecation = {};
 

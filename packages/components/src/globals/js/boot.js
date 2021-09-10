@@ -25,10 +25,10 @@ const lazyInitHandles = [];
  */
 const init = () => {
   const componentClasses = Object.keys(components)
-    .map(key => components[key])
-    .filter(component => typeof component.init === 'function');
+    .map((key) => components[key])
+    .filter((component) => typeof component.init === 'function');
   if (!settings.disableAutoInit) {
-    componentClasses.forEach(Clz => {
+    componentClasses.forEach((Clz) => {
       const h = Clz.init();
       if (h) {
         lazyInitHandles.push(h);
@@ -41,7 +41,7 @@ const init = () => {
  * Replaces the list of components to initialize.
  * @param {object} componentsToReplaceWith The new list of components.
  */
-export const setComponents = componentsToReplaceWith => {
+export const setComponents = (componentsToReplaceWith) => {
   components = componentsToReplaceWith;
 };
 

@@ -21,8 +21,8 @@ but can be unexpected.
 6. Install nvm via their install and update script
    [found here](https://github.com/nvm-sh/nvm#install--update-script)
 7. Source your newly NVMed .bashrc `source ~/.bashrc`
-8. Install Node 10 `nvm install 10`
-9. Install Python 2 `sudo apt install python-minimal`
+8. Install latest LTS Node release `nvm install --lts`
+9. Install Python 2 `sudo apt install python2-minimal`
 10. Install Yarn by running:
     - `curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -`
     - `echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list`
@@ -31,11 +31,18 @@ but can be unexpected.
     WSL)
     - `sudo umount /mnt/c`
     - `sudo mount -t drvfs C: /mnt/c -o metadata`
-12. Change directories into your projects folder
+12. Increase Linux OS limits to avoid errors in build process (limited by WSL by
+    default).
+    - https://muhammadtriwibowo.medium.com/set-permanently-ulimit-n-open-files-in-ubuntu-4d61064429a
+    - `ulimit -l 65536` -> Increases the maximum amount of locked memory
+      available to OS
+    - `ulimit -n 1048576` -> Increases the maximum amount of files that can be
+      in an open state
+13. Change directories into your projects folder
     `cd /mnt/c/Users/{username}/projects` (Only an example, use whatever you'd
     like)
-13. Clone our repo
+14. Clone our repo
     `git clone https://github.com/carbon-design-system/carbon.git`
-14. In the root folder of your freshly cloned repo install and build
+15. In the root folder of your freshly cloned repo install and build
     - `yarn install`
     - `yarn build`

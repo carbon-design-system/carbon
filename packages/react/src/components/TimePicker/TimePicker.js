@@ -9,6 +9,7 @@ import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import classNames from 'classnames';
 import { settings } from 'carbon-components';
+import { FeatureFlagContext } from '../FeatureFlags';
 
 const { prefix } = settings;
 
@@ -27,53 +28,19 @@ export default class TimePicker extends Component {
     className: PropTypes.string,
 
     /**
-     * Specify a custom `id` for the <input>
+     * Specify whether the `<input>` should be disabled
+     */
+    disabled: PropTypes.bool,
+
+    /**
+     * Specify whether you want the underlying label to be visually hidden
+     */
+    hideLabel: PropTypes.bool,
+
+    /**
+     * Specify a custom `id` for the `<input>`
      */
     id: PropTypes.string.isRequired,
-
-    /**
-     * Provide the text that will be read by a screen reader when visiting this
-     * control
-     */
-    labelText: PropTypes.node,
-
-    /**
-     * Optionally provide an `onClick` handler that is called whenever the
-     * <input> is clicked
-     */
-    onClick: PropTypes.func,
-
-    /**
-     * Optionally provide an `onChange` handler that is called whenever <input>
-     * is updated
-     */
-    onChange: PropTypes.func,
-
-    /**
-     * Optionally provide an `onBlur` handler that is called whenever the
-     * <input> loses focus
-     */
-    onBlur: PropTypes.func,
-
-    /**
-     * Specify the type of the <input>
-     */
-    type: PropTypes.string,
-
-    /**
-     * Specify the regular expression working as the pattern of the time string in <input>
-     */
-    pattern: PropTypes.string,
-
-    /**
-     * Specify the placeholder attribute for the <input>
-     */
-    placeholder: PropTypes.string,
-
-    /**
-     * Specify the maximum length of the time string in <input>
-     */
-    maxLength: PropTypes.number,
 
     /**
      * Specify whether the control is currently invalid
@@ -83,27 +50,67 @@ export default class TimePicker extends Component {
     /**
      * Provide the text that is displayed when the control is in an invalid state
      */
-    invalidText: PropTypes.string,
+    invalidText: PropTypes.node,
 
     /**
-     * Specify whether you want the underlying label to be visually hidden
+     * Provide the text that will be read by a screen reader when visiting this
+     * control
      */
-    hideLabel: PropTypes.bool,
-
-    /**
-     * Specify whether the <input> should be disabled
-     */
-    disabled: PropTypes.bool,
-
-    /**
-     * Specify the value of the <input>
-     */
-    value: PropTypes.string,
+    labelText: PropTypes.node,
 
     /**
      * `true` to use the light version.
      */
     light: PropTypes.bool,
+
+    /**
+     * Specify the maximum length of the time string in `<input>`
+     */
+    maxLength: PropTypes.number,
+
+    /**
+     * Optionally provide an `onBlur` handler that is called whenever the
+     * `<input>` loses focus
+     */
+    onBlur: PropTypes.func,
+
+    /**
+     * Optionally provide an `onChange` handler that is called whenever `<input>`
+     * is updated
+     */
+    onChange: PropTypes.func,
+
+    /**
+     * Optionally provide an `onClick` handler that is called whenever the
+     * `<input>` is clicked
+     */
+    onClick: PropTypes.func,
+
+    /**
+     * Specify the regular expression working as the pattern of the time string in `<input>`
+     */
+    pattern: PropTypes.string,
+
+    /**
+     * Specify the placeholder attribute for the `<input>`
+     */
+    placeholder: PropTypes.string,
+
+    /**
+     * Specify the size of the Time Picker. Currently supports either `sm`, 'md' (default) or 'lg` as an option.
+     * TODO V11: remove `xl` (replaced with lg)
+     */
+    size: PropTypes.oneOf(['sm', 'md', 'lg', 'xl']),
+
+    /**
+     * Specify the type of the `<input>`
+     */
+    type: PropTypes.string,
+
+    /**
+     * Specify the value of the `<input>`
+     */
+    value: PropTypes.string,
   };
 
   static defaultProps = {
@@ -119,6 +126,8 @@ export default class TimePicker extends Component {
     onBlur: () => {},
     light: false,
   };
+
+  static contextType = FeatureFlagContext;
 
   static getDerivedStateFromProps({ value }, state) {
     const { prevValue } = state;
@@ -147,20 +156,28 @@ export default class TimePicker extends Component {
       invalid,
       hideLabel,
       light,
+      size,
       ...other
     } = this.props;
+
+    const scope = this.context;
+    let enabled;
+
+    if (scope.enabled) {
+      enabled = scope.enabled('enable-v11-release');
+    }
 
     const timePickerInputProps = {
       className: classNames(
         `${prefix}--time-picker__input-field`,
         `${prefix}--text-input`,
-        className,
+        [enabled ? null : className],
         {
           [`${prefix}--text-input--light`]: light,
-          [`${prefix}--text-input--invalid`]: invalid,
         }
       ),
-      onChange: evt => {
+
+      onChange: (evt) => {
         if (!other.disabled) {
           this.setState({
             value: evt.target.value,
@@ -168,7 +185,7 @@ export default class TimePicker extends Component {
           onChange(evt);
         }
       },
-      onClick: evt => {
+      onClick: (evt) => {
         if (!other.disabled) {
           this.setState({
             value: evt.target.value,
@@ -176,7 +193,7 @@ export default class TimePicker extends Component {
           onClick(evt);
         }
       },
-      onBlur: evt => {
+      onBlur: (evt) => {
         if (!other.disabled) {
           this.setState({
             value: evt.target.value,
@@ -195,6 +212,8 @@ export default class TimePicker extends Component {
     const timePickerClasses = classNames({
       [`${prefix}--time-picker`]: true,
       [`${prefix}--time-picker--light`]: light,
+      [`${prefix}--time-picker--invalid`]: invalid,
+      [`${prefix}--time-picker--${size}`]: size,
       [className]: className,
     });
 
@@ -214,19 +233,24 @@ export default class TimePicker extends Component {
     ) : null;
 
     return (
-      <div className={`${prefix}--form-item`}>
+      <div
+        className={
+          enabled
+            ? classNames(`${prefix}--form-item`, className)
+            : `${prefix}--form-item`
+        }>
+        {label}
         <div className={timePickerClasses}>
           <div className={`${prefix}--time-picker__input`}>
-            {label}
             <input
               {...other}
               {...timePickerInputProps}
               data-invalid={invalid ? invalid : undefined}
             />
-            {error}
           </div>
           {children}
         </div>
+        {error}
       </div>
     );
   }

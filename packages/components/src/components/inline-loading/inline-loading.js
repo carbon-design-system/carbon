@@ -41,7 +41,7 @@ class InlineLoading extends mixin(
    */
   setState(state) {
     const { states } = this.constructor;
-    const values = Object.keys(states).map(key => states[key]);
+    const values = Object.keys(states).map((key) => states[key]);
     if (values.indexOf(state) < 0) {
       throw new Error(
         `One of the following value should be given as the state: ${values.join(
@@ -123,7 +123,7 @@ class InlineLoading extends mixin(
    * The component options.
    * If `options` is specified in the constructor, {@linkcode InlineLoading.create .create()},
    * or {@linkcode InlineLoading.init .init()},
-   * properties in this object are overriden for the instance being create and how {@linkcode InlineLoading.init .init()} works.
+   * properties in this object are overridden for the instance being create and how {@linkcode InlineLoading.init .init()} works.
    * @member InlineLoading.options
    * @type {object}
    * @property {string} selectorInit The CSS selector to find inline loading components.

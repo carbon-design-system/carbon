@@ -11,5 +11,7 @@ export const ButtonKinds = [
   'danger',
   'ghost',
   'danger--primary',
+  'danger--ghost',
+  'danger--tertiary',
   'tertiary',
 ];

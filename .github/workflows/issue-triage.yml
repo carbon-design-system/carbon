@@ -1,0 +1,15 @@
+name: Issue Triage
+on:
+  issues:
+    types: [opened]
+  issue_comment:
+    types: [created]
+jobs:
+  comment:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@main
+      - uses: ./actions/issues
+        with:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          enabled: true

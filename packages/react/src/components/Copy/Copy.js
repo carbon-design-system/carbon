@@ -24,21 +24,23 @@ export default function Copy({
   ...other
 }) {
   const [animation, setAnimation] = useState('');
-  const classNames = classnames(className, {
+  const classNames = classnames(className, `${prefix}--copy`, {
     [`${prefix}--copy-btn--animating`]: animation,
     [`${prefix}--copy-btn--${animation}`]: animation,
   });
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   const handleFadeOut = useCallback(
     debounce(() => {
       setAnimation('fade-out');
     }, feedbackTimeout),
     [feedbackTimeout]
   );
+
   const handleClick = useCallback(() => {
     setAnimation('fade-in');
     handleFadeOut();
   }, [handleFadeOut]);
-  const handleAnimationEnd = event => {
+  const handleAnimationEnd = (event) => {
     if (event.animationName === 'hide-feedback') {
       setAnimation('');
     }
@@ -60,9 +62,15 @@ export default function Copy({
         onAnimationEnd,
         handleAnimationEnd,
       ])}
-      {...other}>
+      {...other}
+      aria-live="polite"
+      aria-label={
+        (!children && (animation ? feedback : other['aria-label'])) || null
+      }>
       {children}
+      {animation ? feedback : other['aria-label']}
       <span
+        aria-hidden="true"
         className={`${prefix}--assistive-text ${prefix}--copy-btn__feedback`}>
         {feedback}
       </span>
@@ -72,12 +80,12 @@ export default function Copy({
 
 Copy.propTypes = {
   /**
-   * Pass in content to be rendred in the underlying <button>
+   * Pass in content to be rendered in the underlying `<button>`
    */
   children: PropTypes.node,
 
   /**
-   * Specify an optional className to be applied to the underlying <button>
+   * Specify an optional className to be applied to the underlying `<button>`
    */
   className: PropTypes.string,
 
@@ -93,8 +101,14 @@ Copy.propTypes = {
   feedbackTimeout: PropTypes.number,
 
   /**
+   * Specify an optional `onAnimationEnd` handler that is called when the underlying
+   * animation ends
+   */
+  onAnimationEnd: PropTypes.func,
+
+  /**
    * Specify an optional `onClick` handler that is called when the underlying
-   * <button> is clicked
+   * `<button>` is clicked
    */
   onClick: PropTypes.func,
 };

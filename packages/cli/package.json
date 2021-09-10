@@ -1,12 +1,16 @@
 {
   "name": "@carbon/cli",
   "description": "Task automation for working with the Carbon Design System",
-  "version": "10.7.0",
+  "version": "10.28.0",
   "license": "Apache-2.0",
   "bin": {
     "carbon-cli": "./bin/carbon-cli.js"
   },
-  "repository": "https://github.com/carbon-design-system/carbon/tree/master/packages/cli",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/carbon-design-system/carbon.git",
+    "directory": "packages/cli"
+  },
   "bugs": "https://github.com/carbon-design-system/carbon/issues",
   "keywords": [
     "ibm",
@@ -19,18 +23,33 @@
     "access": "public"
   },
   "dependencies": {
-    "@carbon/cli-reporter": "10.3.0",
-    "@octokit/plugin-retry": "^2.2.0",
+    "@babel/core": "^7.14.6",
+    "@carbon/cli-reporter": "^10.5.0",
+    "@octokit/plugin-retry": "^3.0.7",
     "@octokit/plugin-throttling": "^2.6.0",
     "@octokit/rest": "^16.28.1",
-    "chalk": "^2.4.2",
+    "@rollup/plugin-babel": "^5.3.0",
+    "@rollup/plugin-commonjs": "^18.0.0",
+    "@rollup/plugin-node-resolve": "^11.2.1",
+    "chalk": "^4.1.1",
+    "change-case": "^4.1.2",
     "child-process-promise": "^2.2.1",
     "clipboardy": "^2.1.0",
+    "enquirer": "^2.3.6",
+    "fast-glob": "^3.2.7",
     "fs-extra": "^8.0.1",
     "inquirer": "^6.4.1",
-    "prettier": "^1.19.1",
+    "klaw-sync": "^6.0.0",
+    "lodash.template": "^4.5.0",
+    "markdown-toc": "^1.2.0",
+    "prettier": "^2.2.1",
+    "prettier-config-carbon": "^0.6.0",
     "progress-estimator": "^0.2.2",
     "remark": "^10.0.1",
-    "yargs": "^15.1.0"
+    "replace-in-file": "^6.1.0",
+    "rollup": "^2.46.0",
+    "sass": "^1.36.0",
+    "sassdoc": "^2.7.3",
+    "yargs": "^17.0.1"
   }
 }

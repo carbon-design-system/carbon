@@ -1,0 +1,231 @@
+//
+// Copyright IBM Corp. 2016, 2018
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+//-----------------------------
+// Slider
+//-----------------------------
+
+@use '../../config' as *;
+@use '../../motion' as *;
+@use '../../spacing' as *;
+@use '../../theme' as *;
+@use '../../type' as *;
+
+@use '../../utilities/focus-outline' as *;
+@use '../../utilities/skeleton' as *;
+@use '../../utilities/high-contrast-mode' as *;
+@use '../../utilities/convert' as *;
+
+@use '../form';
+@use '../text-input';
+
+/// Slider styles
+/// @access public
+/// @group slider
+@mixin slider {
+  .#{$prefix}--slider-container {
+    display: flex;
+    align-items: center;
+    user-select: none;
+  }
+
+  .#{$prefix}--slider {
+    position: relative;
+    width: 100%;
+    min-width: rem(200px);
+    max-width: rem(640px);
+    margin: 0 $spacing-05;
+  }
+
+  .#{$prefix}--slider__range-label {
+    @include type-style('code-02');
+
+    color: $text-primary;
+    white-space: nowrap;
+
+    &:last-of-type {
+      margin-right: $spacing-05;
+    }
+  }
+
+  .#{$prefix}--slider__track {
+    position: absolute;
+    width: 100%;
+    height: rem(2px);
+    background: $border-subtle;
+    cursor: pointer;
+    transform: translate(0%, -50%);
+  }
+
+  .#{$prefix}--slider__track:before {
+    position: absolute;
+    top: rem(-5px);
+    left: 50%;
+    display: inline-block;
+    width: rem(2px);
+    height: rem(4px);
+    background: $border-subtle;
+    content: '';
+    transform: translate(-50%, 0);
+  }
+
+  .#{$prefix}--slider__filled-track {
+    position: absolute;
+    width: 100%;
+    height: rem(2px);
+    background: $layer-selected-inverse;
+    pointer-events: none;
+    transform: translate(0%, -50%);
+    transform-origin: left;
+    transition: background $duration-fast-02 motion(standard, productive);
+  }
+
+  .#{$prefix}--slider__thumb {
+    position: absolute;
+    z-index: 3;
+    top: 0;
+    width: rem(14px);
+    height: rem(14px);
+    background: $layer-selected-inverse;
+    border-radius: 50%;
+    box-shadow: inset 0 0 0 1px transparent, inset 0 0 0 2px transparent;
+    cursor: pointer;
+    outline: none;
+    transform: translate(-50%, -50%);
+    transition: transform $duration-fast-02 motion(standard, productive),
+      background $duration-fast-02 motion(standard, productive),
+      box-shadow $duration-fast-02 motion(standard, productive);
+
+    &:hover {
+      // 20px / 14px = 1.4286
+      transform: translate(-50%, -50%) scale(1.4286);
+    }
+
+    &:focus {
+      background-color: $interactive;
+      box-shadow: inset 0 0 0 2px $interactive, inset 0 0 0 3px $layer;
+      // 20px / 14px = 1.4286
+      transform: translate(-50%, -50%) scale(1.4286);
+    }
+
+    &:active {
+      box-shadow: inset 0 0 0 2px $interactive;
+      transform: translate(-50%, -50%) scale(1.4286);
+    }
+  }
+
+  .#{$prefix}--slider__input {
+    display: none;
+  }
+
+  .#{$prefix}--slider-text-input,
+  .#{$prefix}-slider-text-input {
+    width: auto;
+    height: rem(40px);
+    -moz-appearance: textfield;
+    text-align: center;
+
+    &::-webkit-outer-spin-button,
+    &::-webkit-inner-spin-button {
+      display: none;
+    }
+  }
+
+  .#{$prefix}--slider__thumb:focus ~ .#{$prefix}--slider__filled-track {
+    background-color: $interactive;
+  }
+
+  // Disabled state
+  .#{$prefix}--label--disabled
+    ~ .#{$prefix}--slider-container
+    > .#{$prefix}--slider__range-label {
+    color: $text-disabled;
+  }
+
+  .#{$prefix}--slider--disabled .#{$prefix}--slider__thumb {
+    background-color: $border-subtle;
+
+    &:hover {
+      cursor: not-allowed;
+      transform: translate(-50%, -50%);
+    }
+
+    &:focus {
+      background-color: $border-subtle;
+      box-shadow: none;
+      outline: none;
+      transform: translate(-50%, -50%);
+    }
+
+    &:active {
+      background: $border-subtle;
+      transform: translate(-50%, -50%);
+    }
+  }
+
+  .#{$prefix}--slider--disabled .#{$prefix}--slider__track,
+  .#{$prefix}--slider--disabled .#{$prefix}--slider__filled-track,
+  .#{$prefix}--slider--disabled
+    .#{$prefix}--slider__thumb:focus
+    ~ .#{$prefix}--slider__filled-track {
+    background-color: $border-subtle;
+    cursor: not-allowed;
+  }
+
+  .#{$prefix}--slider--disabled
+    ~ .#{$prefix}--form-item
+    .#{$prefix}--slider-text-input,
+  .#{$prefix}--slider--disabled ~ .#{$prefix}--slider-text-input {
+    border: none;
+    background-color: $field-disabled;
+    color: $text-disabled;
+    cursor: not-allowed;
+    transition: none;
+
+    &:active,
+    &:focus,
+    &:hover {
+      color: $text-disabled;
+      outline: none;
+    }
+  }
+
+  // Skeleton state
+  .#{$prefix}--slider-container.#{$prefix}--skeleton
+    .#{$prefix}--slider__range-label {
+    @include skeleton;
+
+    width: rem(20px);
+    height: rem(12px);
+  }
+
+  .#{$prefix}--slider-container.#{$prefix}--skeleton
+    .#{$prefix}--slider__track {
+    cursor: default;
+    pointer-events: none;
+  }
+
+  .#{$prefix}--slider-container.#{$prefix}--skeleton
+    .#{$prefix}--slider__thumb {
+    left: 50%;
+    cursor: default;
+    pointer-events: none;
+  }
+
+  // Windows HCM fix
+  /* stylelint-disable */
+  .#{$prefix}--slider__thumb {
+    @include high-contrast-mode('outline');
+  }
+  .#{$prefix}--slider__thumb:focus {
+    @include high-contrast-mode('focus');
+  }
+  .#{$prefix}--slider__track {
+    @include high-contrast-mode('outline');
+  }
+  /* stylelint-enable */
+}

@@ -6,13 +6,13 @@
 //
 
 @mixin content-visible {
-  visibility: visible;
   opacity: 1;
+  visibility: inherit;
 }
 
 @mixin content-hidden {
-  visibility: hidden;
   opacity: 0;
+  visibility: hidden;
 }
 
 @keyframes hide-feedback {

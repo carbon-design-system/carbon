@@ -9,6 +9,7 @@ import { settings } from 'carbon-components';
 import cx from 'classnames';
 import PropTypes from 'prop-types';
 import React from 'react';
+import { CARBON_SIDENAV_ITEMS } from './_utils';
 
 const { prefix } = settings;
 
@@ -18,9 +19,16 @@ const SideNavItems = ({
   isSideNavExpanded,
 }) => {
   const className = cx([`${prefix}--side-nav__items`], customClassName);
-  const childrenWithExpandedState = React.Children.map(children, child => {
+  const childrenWithExpandedState = React.Children.map(children, (child) => {
     if (React.isValidElement(child)) {
-      return React.cloneElement(child, { isSideNavExpanded });
+      // avoid spreading `isSideNavExpanded` to non-Carbon UI Shell children
+      return React.cloneElement(child, {
+        ...(CARBON_SIDENAV_ITEMS.includes(child.type?.displayName)
+          ? {
+              isSideNavExpanded,
+            }
+          : {}),
+      });
     }
   });
   return <ul className={className}>{childrenWithExpandedState}</ul>;
@@ -28,15 +36,15 @@ const SideNavItems = ({
 
 SideNavItems.propTypes = {
   /**
-   * Provide an optional class to be applied to the containing node
-   */
-  className: PropTypes.string,
-
-  /**
    * Provide a single icon as the child to `SideNavIcon` to render in the
    * container
    */
   children: PropTypes.node.isRequired,
+
+  /**
+   * Provide an optional class to be applied to the containing node
+   */
+  className: PropTypes.string,
 
   /**
    * Property to indicate if the side nav container is open (or not). Use to

@@ -6,7 +6,7 @@
  */
 
 import React from 'react';
-import { Search16, Close16, Close20 } from '@carbon/icons-react';
+import { Search16, Close16 } from '@carbon/icons-react';
 import Search from '../Search';
 import SearchSkeleton from '../Search/Search.Skeleton';
 import { mount, shallow } from 'enzyme';
@@ -59,7 +59,7 @@ describe('Search', () => {
 
       it('should set placeholder as expected', () => {
         expect(textInput.props().placeholder).toEqual('');
-        wrapper.setProps({ placeHolderText: 'Enter text' });
+        wrapper.setProps({ placeholder: 'Enter text' });
         expect(wrapper.find('input').props().placeholder).toEqual('Enter text');
       });
     });
@@ -77,43 +77,6 @@ describe('Search', () => {
         expect(wrapper.props().label).toEqual('Search Field');
         wrapper.setProps({ label: 'Email Input' });
         expect(wrapper.props().label).toEqual('Email Input');
-      });
-    });
-
-    describe('Large Search', () => {
-      describe('buttons', () => {
-        const btns = wrapper.find('button');
-
-        it('should be one button', () => {
-          expect(btns.length).toBe(1);
-        });
-
-        it('should have type="button"', () => {
-          const type1 = btns
-            .first()
-            .instance()
-            .getAttribute('type');
-          const type2 = btns
-            .last()
-            .instance()
-            .getAttribute('type');
-          expect(type1).toEqual('button');
-          expect(type2).toEqual('button');
-        });
-      });
-
-      describe('icons', () => {
-        it('renders "search" icon', () => {
-          const icons = wrapper.find(Search16);
-          expect(icons.length).toBe(1);
-        });
-
-        it('renders two Icons', () => {
-          wrapper.setProps({ size: undefined });
-          const iconTypes = [Search16, Close20];
-          const icons = wrapper.findWhere(n => iconTypes.includes(n.type()));
-          expect(icons.length).toEqual(2);
-        });
       });
     });
 
@@ -146,8 +109,37 @@ describe('Search', () => {
 
       it('renders two Icons', () => {
         const iconTypes = [Search16, Close16];
-        const icons = large.findWhere(n => iconTypes.includes(n.type()));
+        const icons = large.findWhere((n) => iconTypes.includes(n.type()));
         expect(icons.length).toEqual(2);
+      });
+
+      describe('buttons', () => {
+        const btns = wrapper.find('button');
+
+        it('should be one button', () => {
+          expect(btns.length).toBe(1);
+        });
+
+        it('should have type="button"', () => {
+          const type1 = btns.first().instance().getAttribute('type');
+          const type2 = btns.last().instance().getAttribute('type');
+          expect(type1).toEqual('button');
+          expect(type2).toEqual('button');
+        });
+      });
+
+      describe('icons', () => {
+        it('renders "search" icon', () => {
+          const icons = wrapper.find(Search16);
+          expect(icons.length).toBe(1);
+        });
+
+        it('renders two Icons', () => {
+          wrapper.setProps({ size: undefined });
+          const iconTypes = [Search16, Close16];
+          const icons = wrapper.findWhere((n) => iconTypes.includes(n.type()));
+          expect(icons.length).toEqual(2);
+        });
       });
     });
 
@@ -155,7 +147,7 @@ describe('Search', () => {
       const small = mount(
         <Search
           id="test"
-          small
+          size="sm"
           className="extra-class"
           label="Search Field"
           labelText="testlabel"
@@ -179,8 +171,8 @@ describe('Search', () => {
       });
 
       it('renders two Icons', () => {
-        const iconTypes = [Search16, Close20];
-        const icons = wrapper.findWhere(n => iconTypes.includes(n.type()));
+        const iconTypes = [Search16, Close16];
+        const icons = wrapper.findWhere((n) => iconTypes.includes(n.type()));
         expect(icons.length).toEqual(2);
       });
     });
@@ -209,12 +201,12 @@ describe('Search', () => {
 
       it('should invoke onClick when input is clicked', () => {
         input.simulate('click');
-        expect(onClick).toBeCalled();
+        expect(onClick).toHaveBeenCalled();
       });
 
       it('should invoke onChange when input value is changed', () => {
         input.simulate('change', eventObject);
-        expect(onChange).toBeCalledWith(eventObject);
+        expect(onChange).toHaveBeenCalledWith(eventObject);
       });
     });
   });

@@ -1,15 +1,15 @@
 import 'url-polyfill';
 
-import { getAttributes } from '@carbon/icon-helpers';
+import { getAttributes, toString } from '@carbon/icon-helpers';
 import Prism from 'prismjs';
 import React, { useState } from 'react';
 import ReactDOM from 'react-dom';
-import meta from '../../build-info.json';
+import metadata from '../../metadata.json';
 
 const GITHUB_ICON_URL =
-  'https://github.com/carbon-design-system/carbon/tree/master/packages/icons/svg';
+  'https://github.com/carbon-design-system/carbon/tree/master/packages/icons/src/svg';
 
-function App({ meta }) {
+function App({ metadata }) {
   const headers = ['Name', 'Size', 'Preview', 'GitHub', 'Issues', 'Path'];
 
   return (
@@ -41,6 +41,9 @@ function App({ meta }) {
               </li>
               <li>
                 <a href="//www.npmjs.com/package/@carbon/icons-vue">Vue</a>
+              </li>
+              <li>
+                <a href="//www.npmjs.com/package/carbon-icons-svelte">Svelte</a>
               </li>
             </ul>
             <p>
@@ -105,62 +108,73 @@ function App({ meta }) {
           <div className="bx--row">
             <div className="bx--col">
               <Table headers={headers}>
-                {meta.map(info => {
-                  const {
-                    basename,
-                    descriptor,
-                    filename,
-                    moduleName,
-                    original,
-                    outputOptions,
-                    prefix,
-                    size,
-                  } = info;
-                  const { attrs } = descriptor;
-                  const svg = js2svg(descriptor);
-                  const name = original
-                    ? prefix.join('/') +
-                      '/' +
-                      basename +
-                      ` (Downsized to ${size})`
-                    : prefix.join('/') + '/' + basename;
-                  const id = window.encodeURIComponent(name);
-                  const source = [GITHUB_ICON_URL, ...prefix, filename].join(
-                    '/'
-                  );
+                {metadata.icons.flatMap(icon => {
+                  const { assets, output } = icon;
+                  const defaultAsset = assets.find(asset => asset.size === 32);
 
-                  return (
-                    <tr key={id} id={id}>
-                      <td className="icon-name">
-                        <a href={`#${id}`}>{name}</a>
-                      </td>
-                      <td className="icon-size">{`${attrs.width}x${attrs.height}`}</td>
-                      <td className="icon-preview-container">
-                        <div className="icon-preview">{svg}</div>
-                      </td>
-                      <td>
-                        <a
-                          href={source}
-                          rel="noopener noreferrer"
-                          target="_blank">
-                          Source
-                        </a>
-                      </td>
-                      <td>
-                        <a
-                          href={getBugTemplate(info, source)}
-                          rel="noopener noreferrer"
-                          target="_blank">
-                          Create
-                        </a>
-                      </td>
-                      <td>
-                        <div className="icon-code-snippets">
-                          <code>{outputOptions.file}</code>
-                        </div>
-                      </td>
-                    </tr>
-                  );
+                  return output.map(info => {
+                    const id = window.encodeURIComponent(info.moduleName);
+                    let asset = assets.find(asset => {
+                      if (info.size === 'glyph') {
+                        return asset.size === 'glyph';
+                      }
+                      return asset.size === info.size;
+                    });
+                    let downsized = false;
+
+                    if (!asset) {
+                      downsized = true;
+                      asset = defaultAsset;
+                    }
+
+                    const source = [GITHUB_ICON_URL, asset.filepath].join('/');
+                    let name = icon.name;
+                    if (downsized) {
+                      name = `${name} (Downsized to ${info.size})`;
+                    }
+                    const size =
+                      info.size === 'glyph'
+                        ? 'glyph'
+                        : `${info.size}x${info.size}`;
+
+                    return (
+                      <tr key={id} id={id}>
+                        <td className="icon-name">
+                          <a href={`#${id}`}>{name}</a>
+                        </td>
+                        <td>{size}</td>
+                        <td className="icon-preview-container">
+                          <div
+                            className="icon-preview"
+                            dangerouslySetInnerHTML={{
+                              __html: toString(info.descriptor),
+                            }}
+                          />
+                        </td>
+                        <td>
+                          <a
+                            href={source}
+                            rel="noopener noreferrer"
+                            target="_blank">
+                            Source
+                          </a>
+                        </td>
+                        <td>
+                          <a
+                            href={getBugTemplate(icon.name, source)}
+                            rel="noopener noreferrer"
+                            target="_blank">
+                            Create
+                          </a>
+                        </td>
+                        <td>
+                          <div className="icon-code-snippets">
+                            <code>{info.filepath}</code>
+                          </div>
+                        </td>
+                      </tr>
+                    );
+                  });
                 })}
               </Table>
             </div>
@@ -187,61 +201,20 @@ function Table({ children, headers }) {
 }
 
 function render() {
-  ReactDOM.render(<App meta={meta} />, document.getElementById('root'));
+  ReactDOM.render(<App metadata={metadata} />, document.getElementById('root'));
 }
 
-function js2svg(descriptor) {
-  const { elem, attrs = {}, content = [] } = descriptor;
-  let attributes = attrs;
-
-  if (elem === 'svg') {
-    const { style, ...iconAttributes } = getAttributes(attrs);
-    attributes = {
-      ...iconAttributes,
-      style: style
-        ? style
-            .split(';')
-            .map(declaration => {
-              const [property, value] = declaration
-                .split(':')
-                .map(string => string.trim());
-              return {
-                [property]: value,
-              };
-            })
-            .reduce(
-              (acc, declaration) => ({
-                ...acc,
-                ...declaration,
-              }),
-              {}
-            )
-        : null,
-    };
-  }
-
-  return React.createElement(elem, format(attributes), ...content.map(js2svg));
-}
-
-function format(attrs) {
-  const { 'fill-rule': fillRule, ...rest } = attrs;
-  return {
-    ...rest,
-    fillRule,
-  };
-}
-
-function getBugTemplate(info, source) {
+function getBugTemplate(name, source) {
   const url = new URL(
     'https://github.com/carbon-design-system/carbon/issues/new'
   );
   const params = new URLSearchParams();
-  params.append('title', `🔍 Visual bug for the \`${info.filename}\` icon`);
+  params.append('title', `🔍 Visual bug for the \`${name}\` icon`);
   params.append(
     'body',
     `<!-- Feel free to remove sections that aren't relevant. -->
 
-There is an issue for the \`${info.basename}\` icon when viewing [the elements demo](https://carbon-elements.netlify.com/icons/examples/preview/).
+There is an issue for the \`${name}\` icon when viewing [the elements demo](https://carbon-elements.netlify.com/icons/examples/preview/).
 
 The source for this icon is available [here](${source}).
 

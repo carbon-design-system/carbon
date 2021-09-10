@@ -28,7 +28,7 @@ ListItem.propTypes = {
   children: PropTypes.node,
 
   /**
-   * Specify an optional className to apply to the underlying <li> node
+   * Specify an optional className to apply to the underlying `<li>` node
    */
   className: PropTypes.string,
 };

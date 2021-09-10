@@ -21,15 +21,15 @@ export default class HeaderNavigation extends React.Component {
     ...AriaLabelPropType,
 
     /**
-     * Optionally provide a custom class to apply to the underlying <nav> node
-     */
-    className: PropTypes.string,
-
-    /**
      * Provide valid children of HeaderNavigation, for example `HeaderMenuItem`
      * or `HeaderMenu`
      */
     children: PropTypes.node,
+
+    /**
+     * Optionally provide a custom class to apply to the underlying <nav> node
+     */
+    className: PropTypes.string,
   };
 
   constructor(props) {
@@ -44,7 +44,7 @@ export default class HeaderNavigation extends React.Component {
    * Handles individual menuitem refs. We assign them to a class instance
    * property so that we can properly manage focus of our children.
    */
-  handleItemRef = index => node => {
+  handleItemRef = (index) => (node) => {
     this.items[index] = node;
   };
 
@@ -66,10 +66,7 @@ export default class HeaderNavigation extends React.Component {
 
     return (
       <nav {...rest} {...accessibilityLabel} className={className}>
-        <ul
-          {...accessibilityLabel}
-          className={`${prefix}--header__menu-bar`}
-          role="menubar">
+        <ul {...accessibilityLabel} className={`${prefix}--header__menu-bar`}>
           {React.Children.map(children, this._renderNavItem)}
         </ul>
       </nav>
