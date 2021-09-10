@@ -429,10 +429,11 @@ export default class DataTable extends React.Component {
    * Helper utility to get the TableContainer Props.
    */
   getTableContainerProps = () => {
-    const { stickyHeader } = this.props;
+    const { stickyHeader, useStaticWidth } = this.props;
 
     return {
       stickyHeader,
+      useStaticWidth,
     };
   };
 

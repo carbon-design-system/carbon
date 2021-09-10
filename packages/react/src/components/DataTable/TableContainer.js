@@ -18,13 +18,16 @@ const TableContainer = ({
   title,
   description,
   stickyHeader,
+  useStaticWidth,
   ...rest
 }) => {
+  console.log(useStaticWidth);
   const tableContainerClasses = cx(
     className,
     `${prefix}--data-table-container`,
     {
       [`${prefix}--data-table--max-width`]: stickyHeader,
+      [`${prefix}--data-table-container--static`]: useStaticWidth,
     }
   );
 
@@ -60,6 +63,11 @@ TableContainer.propTypes = {
    * Provide a title for the Table
    */
   title: PropTypes.node,
+
+  /**
+   * If true, will use a width of 'fit-content' to match the inner table width
+   */
+  useStaticWidth: PropTypes.bool,
 };
 
 export default TableContainer;
