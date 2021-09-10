@@ -25,16 +25,20 @@ export default class Tab extends React.Component {
     disabled: PropTypes.bool,
 
     /**
-     * A handler that is invoked when a user clicks on the control.
-     * Reserved for usage in Tabs
+     * Deprecated in v11. Use 'handleTabClick' instead.
      */
-    handleTabClick: PropTypes.func,
+    handleTabClick: deprecate(
+      PropTypes.func,
+      'The handleTabClick prop for Tab has been deprecated in favor of handleTabClick. It will be removed in the next major release.'
+    ),
 
     /**
-     * A handler that is invoked on the key down event for the control.
-     * Reserved for usage in Tabs
+     * Deprecated in v11. Use 'onTabKeyDown' instead.
      */
-    handleTabKeyDown: PropTypes.func,
+    handleTabKeyDown: deprecate(
+      PropTypes.func,
+      'The handleTabKeyDown prop for Tab has been deprecated in favor of onTabKeyDown. It will be removed in the next major release.'
+    ),
 
     /**
      * Provide a string that represents the `href` of the Tab
@@ -65,6 +69,18 @@ export default class Tab extends React.Component {
      * Provide a handler that is invoked on the key down event for the control
      */
     onKeyDown: PropTypes.func.isRequired,
+
+    /**
+     * A handler that is invoked when a user clicks on the control.
+     * Reserved for usage in Tabs
+     */
+    onTabClick: PropTypes.func,
+
+    /**
+     * A handler that is invoked on the key down event for the control.
+     * Reserved for usage in Tabs
+     */
+    onTabKeyDown: PropTypes.func,
 
     /*
      * An optional parameter to allow overriding the anchor rendering.
@@ -118,6 +134,8 @@ export default class Tab extends React.Component {
       tabIndex = 0,
       onClick,
       onKeyDown,
+      onTabClick,
+      onTabKeyDown,
       // TODO: rename renderAnchor to renderButton in next major version
       renderAnchor,
       renderButton,
@@ -164,8 +182,9 @@ export default class Tab extends React.Component {
           if (disabled) {
             return;
           }
-          if (handleTabClick) {
-            handleTabClick(index, evt);
+          // Remove handleTabClick when deprecated.
+          if (onTabClick || handleTabClick) {
+            onTabClick(index, evt);
           }
           onClick(evt);
         }}
@@ -173,8 +192,9 @@ export default class Tab extends React.Component {
           if (disabled) {
             return;
           }
-          if (handleTabKeyDown) {
-            handleTabKeyDown(index, evt);
+          // Remove handleTabKeyDown when deprecated.
+          if (onTabKeyDown || handleTabKeyDown) {
+            onTabKeyDown(index, evt);
           }
           onKeyDown(evt);
         }}

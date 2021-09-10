@@ -294,7 +294,7 @@ export default class Tabs extends React.Component {
     }
   };
 
-  handleTabKeyDown = (onSelectionChange) => {
+  onTabKeyDown = (onSelectionChange) => {
     return (index, evt) => {
       if (matches(evt, [keys.Enter, keys.Space])) {
         this.selectTabAt(evt, { index, onSelectionChange });
@@ -330,7 +330,7 @@ export default class Tabs extends React.Component {
   getTabs = () => React.Children.map(this.props.children, (tab) => tab);
 
   // following functions (handle*) are Props on Tab.js, see Tab.js for parameters
-  handleTabClick = (onSelectionChange) => (index, evt) => {
+  onTabClick = (onSelectionChange) => (index, evt) => {
     evt.preventDefault();
     this.selectTabAt(evt, { index, onSelectionChange });
   };
@@ -423,12 +423,12 @@ export default class Tabs extends React.Component {
       const newTab = React.cloneElement(tab, {
         index,
         selected: index === this.state.selected,
-        handleTabClick: this.handleTabClick(onSelectionChange),
+        onTabClick: this.onTabClick(onSelectionChange),
         tabIndex,
         ref: (e) => {
           this.setTabAt(index, e);
         },
-        handleTabKeyDown: this.handleTabKeyDown(onSelectionChange),
+        onTabKeyDown: this.onTabKeyDown(onSelectionChange),
       });
 
       return newTab;

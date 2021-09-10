@@ -101,18 +101,18 @@ describe('Tab', () => {
     describe('click', () => {
       let wrapper;
       let onClick;
-      let handleTabClick;
+      let onTabClick;
 
       beforeEach(() => {
         wrapper = mount(<Tab label="firstTab" />);
         onClick = jest.fn();
-        handleTabClick = jest.fn();
+        onTabClick = jest.fn();
       });
 
-      it('invokes handleTabClick from onClick prop', () => {
-        wrapper.setProps({ handleTabClick });
+      it('invokes onTabClick from onClick prop', () => {
+        wrapper.setProps({ onTabClick });
         wrapper.simulate('click');
-        expect(handleTabClick).toHaveBeenCalled();
+        expect(onTabClick).toHaveBeenCalled();
       });
 
       it('invokes onClick when a function is passed to onClick prop', () => {
@@ -124,17 +124,17 @@ describe('Tab', () => {
 
     describe('keydown', () => {
       let onKeyDown;
-      let handleTabKeyDown;
+      let onTabKeyDown;
       let wrapper;
 
       beforeEach(() => {
         onKeyDown = jest.fn();
-        handleTabKeyDown = jest.fn();
+        onTabKeyDown = jest.fn();
         wrapper = mount(
           <Tab
             label="firstTab"
             onKeyDown={onKeyDown}
-            handleTabKeyDown={handleTabKeyDown}
+            onTabKeyDown={onTabKeyDown}
           />
         );
       });
