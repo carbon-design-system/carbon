@@ -17,7 +17,6 @@ import {
 import Dropdown from '../Dropdown';
 import DropdownSkeleton from './Dropdown.Skeleton';
 import mdx from './Dropdown.mdx';
-import { FeatureFlags } from '../FeatureFlags';
 
 const items = [
   {
@@ -120,34 +119,6 @@ export const Default = () => (
       itemToString={(item) => (item ? item.text : '')}
       onChange={action('onChange')}
     />
-  </div>
-);
-
-export const classNameChangeTest = () => (
-  <div style={{ width: 400 }}>
-    <Dropdown
-      className="TEST_CLASS"
-      id="default"
-      titleText="Dropdown label"
-      helperText="The class should be added to the input"
-      label="Dropdown menu options"
-      items={items}
-      itemToString={(item) => (item ? item.text : '')}
-      onChange={action('onChange')}
-    />
-    <br />
-    <FeatureFlags flags={{ 'enable-v11-release': true }}>
-      <Dropdown
-        className="TEST_CLASS"
-        id="default-2"
-        titleText="Dropdown label"
-        helperText="The class should be added to the wrapper"
-        label="Dropdown menu options"
-        items={items}
-        itemToString={(item) => (item ? item.text : '')}
-        onChange={action('onChange')}
-      />
-    </FeatureFlags>
   </div>
 );
 

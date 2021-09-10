@@ -20,7 +20,6 @@ import MultiSelect from '../MultiSelect';
 import FilterableMultiSelect from '../MultiSelect/FilterableMultiSelect';
 import Checkbox from '../Checkbox';
 import mdx from './MultiSelect.mdx';
-import { FeatureFlags } from '../FeatureFlags';
 
 const items = [
   {
@@ -187,60 +186,6 @@ export const ItemToElement = withReadme(readme, () => {
     </div>
   );
 });
-
-export const classNameChangeTest = () => (
-  <div style={{ width: 400 }}>
-    <MultiSelect
-      className="TEST_CLASS"
-      label="Multiselect label"
-      id="multiselect-1"
-      items={items}
-      itemToString={(item) => (item ? item.text : '')}
-      titleText="Multiselect title"
-      helperText="The class should be added to the wrapper"
-    />
-    <br />
-    <FeatureFlags flags={{ 'enable-v11-release': true }}>
-      <MultiSelect
-        className="TEST_CLASS"
-        label="Multiselect label"
-        id="multiselect-2"
-        items={items}
-        itemToString={(item) => (item ? item.text : '')}
-        titleText="Multiselect title"
-        helperText="The class should be added to the wrapper"
-      />
-    </FeatureFlags>
-
-    <br />
-    <h3>Filterable Mutliselect</h3>
-    <br />
-
-    <FilterableMultiSelect
-      className="TEST_CLASS"
-      label="Multiselect label"
-      placeholder="Filterable..."
-      id="multiselect-3"
-      items={items}
-      itemToString={(item) => (item ? item.text : '')}
-      titleText="Multiselect title"
-      helperText="The class should be added to the wrapper"
-    />
-    <br />
-    <FeatureFlags flags={{ 'enable-v11-release': true }}>
-      <FilterableMultiSelect
-        className="TEST_CLASS"
-        label="Multiselect label"
-        placeholder="Filterable..."
-        id="multiselect-4"
-        items={items}
-        itemToString={(item) => (item ? item.text : '')}
-        titleText="Multiselect title"
-        helperText="The class should be added to the wrapper"
-      />
-    </FeatureFlags>
-  </div>
-);
 
 Default.storyName = 'default';
 

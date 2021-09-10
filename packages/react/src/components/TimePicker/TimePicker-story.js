@@ -19,7 +19,6 @@ import TimePicker from '../TimePicker';
 import TimePickerSelect from '../TimePickerSelect';
 import SelectItem from '../SelectItem';
 import mdx from './TimePicker.mdx';
-import { FeatureFlags } from '../FeatureFlags';
 
 const sizes = {
   'Small  (sm)': 'sm',
@@ -105,37 +104,3 @@ Default.parameters = {
       `,
   },
 };
-
-export const classNameChangeTest = () => (
-  <>
-    <TimePicker
-      className="TEST_CLASS"
-      labelText="The class should be placed on the input"
-      id="time-picker">
-      <TimePickerSelect className="TEST_CLASS" id="time-picker-select-1">
-        <SelectItem value="AM" text="AM" />
-        <SelectItem value="PM" text="PM" />
-      </TimePickerSelect>
-      <TimePickerSelect id="time-picker-select-2">
-        <SelectItem value="Time zone 1" text="Time zone 1" />
-        <SelectItem value="Time zone 2" text="Time zone 2" />
-      </TimePickerSelect>
-    </TimePicker>
-    <br />
-    <FeatureFlags flags={{ 'enable-v11-release': true }}>
-      <TimePicker
-        className="TEST_CLASS"
-        labelText="The class should be placed on the wrapper"
-        id="time-picker">
-        <TimePickerSelect id="time-picker-select-3">
-          <SelectItem value="AM" text="AM" />
-          <SelectItem value="PM" text="PM" />
-        </TimePickerSelect>
-        <TimePickerSelect id="time-picker-select-4">
-          <SelectItem value="Time zone 1" text="Time zone 1" />
-          <SelectItem value="Time zone 2" text="Time zone 2" />
-        </TimePickerSelect>
-      </TimePicker>
-    </FeatureFlags>
-  </>
-);
