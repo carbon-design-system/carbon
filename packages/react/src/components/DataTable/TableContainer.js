@@ -21,7 +21,6 @@ const TableContainer = ({
   useStaticWidth,
   ...rest
 }) => {
-  console.log(useStaticWidth);
   const tableContainerClasses = cx(
     className,
     `${prefix}--data-table-container`,
