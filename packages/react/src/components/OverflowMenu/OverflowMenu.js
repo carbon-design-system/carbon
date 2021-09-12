@@ -353,7 +353,7 @@ class OverflowMenu extends Component {
    * @param {number} params.direction - number denoting the direction to move
    * focus (1 for forwards, -1 for backwards)
    */
-  handleOverflowMenuItemFocus = ({ currentIndex, direction }) => {
+  onOverflowMenuItemFocus = ({ currentIndex, direction }) => {
     const enabledIndices = React.Children.toArray(this.props.children).reduce(
       (acc, curr, i) => {
         if (!curr.props.disabled) {
@@ -495,7 +495,9 @@ class OverflowMenu extends Component {
       (child, index) =>
         React.cloneElement(child, {
           closeMenu: child?.props?.closeMenu || this.closeMenu,
-          handleOverflowMenuItemFocus: this.handleOverflowMenuItemFocus,
+          onOverflowMenuItemFocus: this.onOverflowMenuItemFocus,
+          // Deprecated in v11. Use 'onHandleOverflowItemFocus' instead.
+          handleOverflowMenuItemFocus: this.onOverflowMenuItemFocus,
           ref: (e) => {
             this[`overflowMenuItem${index}`] = e;
           },
