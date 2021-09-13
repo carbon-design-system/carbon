@@ -32,13 +32,7 @@ export default class OverflowMenuItem extends React.Component {
      */
     disabled: PropTypes.bool,
 
-    /**
-     * * Deprecated in v11. Use 'onHandleOverflowItemFocus' instead.
-     */
-    handleOverflowMenuItemFocus: deprecate(
-      PropTypes.func,
-      'The handleOverflowMenuItemFocus prop for OverflowMenuItem has been deprecated in favor of onOverflowMenuItemFocus. It will be removed in the next major release.'
-    ),
+    handleOverflowMenuItemFocus: PropTypes.func,
 
     /**
      * `true` to make this menu item a divider.
@@ -74,7 +68,6 @@ export default class OverflowMenuItem extends React.Component {
     onMouseEnter: PropTypes.func,
     onMouseLeave: PropTypes.func,
     onMouseUp: PropTypes.func,
-    onOverflowMenuItemFocus: PropTypes.func,
 
     /**
      * `true` if this menu item should get focus when the menu gets open.
@@ -116,26 +109,16 @@ export default class OverflowMenuItem extends React.Component {
 
   setTabFocus = (evt) => {
     if (match(evt, keys.ArrowDown)) {
-      // TODO: Remove handleOverflowMenuItemFocus prop when handleOverflowMenuItemFocus is deprecated
-      this.props.handleOverflowMenuItemFocus?.({
+      this.props.handleOverflowMenuItemFocus({
         currentIndex: this.props.index,
         direction: 1,
-      }) ||
-        this.props.onOverflowMenuItemFocus({
-          currentIndex: this.props.index,
-          direction: 1,
-        });
+      });
     }
     if (match(evt, keys.ArrowUp)) {
-      // TODO: Remove handleOverflowMenuItemFocus prop when handleOverflowMenuItemFocus is deprecated
-      this.props.handleOverflowMenuItemFocus?.({
+      this.props.handleOverflowMenuItemFocus({
         currentIndex: this.props.index,
         direction: -1,
-      }) ||
-        this.props.onOverflowMenuItemFocus({
-          currentIndex: this.props.index,
-          direction: -1,
-        });
+      });
     }
   };
 
@@ -161,8 +144,6 @@ export default class OverflowMenuItem extends React.Component {
       // eslint-disable-next-line no-unused-vars
       handleOverflowMenuItemFocus,
       onKeyDown,
-      // eslint-disable-next-line no-unused-vars
-      onOverflowMenuItemFocus,
       primaryFocus,
       wrapperClassName,
       requireTitle,
