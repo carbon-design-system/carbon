@@ -23,11 +23,6 @@ export default {
       </FeatureFlags>
     ),
   ],
-  parameters: {
-    // controls: {
-    //   hideNoControlsWarning: true,
-    // },
-  },
   argTypes: {
     kind: {
       options: [
