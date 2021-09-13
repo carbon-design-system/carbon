@@ -288,7 +288,7 @@ class HeaderSubmenu extends mixin(
    * If `options` is specified in the constructor,
    * {@linkcode HeaderSubmenu.create .create()}, or
    * {@linkcode HeaderSubmenu.init .init()},
-   * properties in this object are overriden for the instance being create and
+   * properties in this object are overridden for the instance being create and
    * how {@linkcode HeaderSubmenu.init .init()} works.
    * @member HeaderSubmenu.options
    * @type {object}

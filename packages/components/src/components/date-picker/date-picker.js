@@ -489,7 +489,7 @@ class DatePicker extends mixin(
    * The component options.
    * If `options` is specified in the constructor,
    * {@linkcode DatePicker.create .create()}, or {@linkcode DatePicker.init .init()},
-   * properties in this object are overriden for the instance being create and how {@linkcode DatePicker.init .init()} works.
+   * properties in this object are overridden for the instance being create and how {@linkcode DatePicker.init .init()} works.
    * @property {string} selectorInit The CSS selector to find date picker UIs.
    */
   static get options() {

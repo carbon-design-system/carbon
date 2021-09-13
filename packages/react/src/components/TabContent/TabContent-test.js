@@ -8,7 +8,6 @@
 import React from 'react';
 import TabContent from '../TabContent';
 import { render, screen } from '@testing-library/react';
-import '@testing-library/jest-dom';
 
 describe('TabContent', () => {
   describe('renders as expected', () => {
@@ -39,7 +38,7 @@ describe('TabContent', () => {
       expect(screen.getByRole('tabpanel')).toBeVisible();
     });
 
-    it('includes the content container in the tabbable index when no tabble contents is provided', () => {
+    it('includes the content container in the tabbable index when no tab contents are provided', () => {
       render(
         <TabContent selected>
           <p>content</p>
@@ -48,7 +47,7 @@ describe('TabContent', () => {
       expect(screen.getByRole('tabpanel')).toHaveAttribute('tabindex', '0');
     });
 
-    it('does not include the content container in the tabbable index when tabble contents is provided', () => {
+    it('does not include the content container in the tabbable index when tab contents are provided', () => {
       render(
         <TabContent selected>
           <a href="https://www.ibm.com/">content</a>

@@ -24,7 +24,8 @@
     "lint:styles": "stylelint '**/*.{css,scss}' --report-needless-disables --report-invalid-scope-disables",
     "sync": "carbon-cli sync",
     "test": "cross-env BABEL_ENV=test jest",
-    "test:e2e": "cross-env BABEL_ENV=test jest -c jest.e2e.config.js"
+    "test:e2e": "cross-env BABEL_ENV=test jest -c jest.e2e.config.js",
+    "postinstall": "husky install"
   },
   "resolutions": {
     "ast-types": "^0.14.0",
@@ -35,22 +36,22 @@
     "react-test-renderer": "~16.9.0"
   },
   "devDependencies": {
-    "@babel/core": "^7.14.2",
-    "@babel/plugin-proposal-class-properties": "^7.13.0",
-    "@babel/plugin-proposal-export-default-from": "^7.12.13",
-    "@babel/plugin-proposal-export-namespace-from": "^7.14.2",
-    "@babel/plugin-transform-runtime": "^7.14.2",
-    "@babel/preset-env": "^7.14.2",
-    "@babel/preset-react": "^7.13.13",
-    "@babel/runtime": "^7.14.0",
+    "@babel/core": "^7.14.6",
+    "@babel/plugin-proposal-class-properties": "^7.14.5",
+    "@babel/plugin-proposal-export-default-from": "^7.14.5",
+    "@babel/plugin-proposal-export-namespace-from": "^7.14.5",
+    "@babel/plugin-transform-runtime": "^7.14.5",
+    "@babel/preset-env": "^7.14.7",
+    "@babel/preset-react": "^7.14.5",
+    "@babel/runtime": "^7.14.6",
     "@carbon/cli": "workspace:packages/cli",
-    "@commitlint/cli": "^8.3.5",
-    "@commitlint/config-conventional": "^8.3.4",
-    "@percy/cli": "^1.0.0-beta.48",
-    "@testing-library/dom": "^7.26.6",
-    "@testing-library/jest-dom": "^5.11.5",
-    "@testing-library/react": "^11.1.1",
-    "@testing-library/user-event": "^13.1.9",
+    "@commitlint/cli": "^13.1.0",
+    "@commitlint/config-conventional": "^13.1.0",
+    "@percy/cli": "^1.0.0-beta.61",
+    "@testing-library/dom": "^8.1.0",
+    "@testing-library/jest-dom": "^5.14.1",
+    "@testing-library/react": "^12.0.0",
+    "@testing-library/user-event": "^13.2.1",
     "all-contributors-cli": "^6.19.0",
     "cross-env": "^5.2.0",
     "cross-spawn": "^6.0.5",
@@ -58,11 +59,11 @@
     "eslint": "^7.28.0",
     "fs-extra": "^8.1.0",
     "glob": "^7.1.4",
-    "husky": "^4.0.10",
-    "jest": "^27.0.5",
+    "husky": "^7.0.0",
+    "jest": "^27.0.6",
     "jest-junit": "^10.0.0",
     "lerna": "^3.20.2",
-    "lint-staged": "^9.5.0",
+    "lint-staged": "^11.1.1",
     "node-gyp": "^7.1.2",
     "prettier": "^2.2.1",
     "react": "^16.8.6",
@@ -118,17 +119,14 @@
   "lint-staged": {
     "**/*.js": [
       "prettier --write",
-      "eslint",
-      "git add"
+      "eslint"
     ],
     "**/*.scss": [
       "prettier --write",
-      "stylelint --report-needless-disables --report-invalid-scope-disables --allow-empty-input",
-      "git add"
+      "stylelint --report-needless-disables --report-invalid-scope-disables --allow-empty-input"
     ],
     "!(*sass).md": [
-      "prettier --write",
-      "git add"
+      "prettier --write"
     ]
   },
   "eslintConfig": {

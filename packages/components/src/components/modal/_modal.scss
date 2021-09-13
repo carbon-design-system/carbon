@@ -55,7 +55,8 @@
     .#{$prefix}--dropdown,
     .#{$prefix}--dropdown-list,
     .#{$prefix}--number input[type='number'],
-    .#{$prefix}--date-picker__input {
+    .#{$prefix}--date-picker__input,
+    .#{$prefix}--multi-select {
       background-color: $field-02;
     }
   }

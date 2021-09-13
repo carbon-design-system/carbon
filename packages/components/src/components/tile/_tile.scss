@@ -231,22 +231,6 @@
     }
   }
 
-  // Fix double border
-  .#{$prefix}--tile-input--checked + .#{$prefix}--tile--is-selected {
-    border-top: 1px solid $ui-01;
-  }
-
-  .#{$prefix}--tile:not(.#{$prefix}--tile--is-selected)
-    + .#{$prefix}--tile-input--checked
-    + .#{$prefix}--tile--is-selected {
-    border-top: 1px solid $ui-05;
-  }
-
-  .#{$prefix}--tile-input--checked:first-of-type
-    + .#{$prefix}--tile--is-selected {
-    border-top: 1px solid $ui-05;
-  }
-
   .#{$prefix}--tile-content {
     width: 100%;
     height: 100%;

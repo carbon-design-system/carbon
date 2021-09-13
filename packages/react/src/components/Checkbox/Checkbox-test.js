@@ -12,7 +12,6 @@ import { mount } from 'enzyme';
 import { settings } from 'carbon-components';
 import { cleanup, render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import '@testing-library/jest-dom';
 
 const { prefix } = settings;
 

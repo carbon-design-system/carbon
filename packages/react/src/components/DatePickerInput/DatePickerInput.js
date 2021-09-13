@@ -34,6 +34,11 @@ export default class DatePickerInput extends Component {
     disabled: PropTypes.bool,
 
     /**
+     * Provide text that is used alongside the control label for additional help
+     */
+    helperText: PropTypes.node,
+
+    /**
      * Specify if the label should be hidden
      */
     hideLabel: PropTypes.bool,
@@ -137,6 +142,7 @@ export default class DatePickerInput extends Component {
       disabled,
       invalid,
       invalidText,
+      helperText,
       hideLabel,
       onChange,
       onClick,
@@ -177,6 +183,10 @@ export default class DatePickerInput extends Component {
     const labelClasses = classNames(`${prefix}--label`, {
       [`${prefix}--visually-hidden`]: hideLabel,
       [`${prefix}--label--disabled`]: disabled,
+    });
+
+    const helperTextClasses = classNames(`${prefix}--form__helper-text`, {
+      [`${prefix}--form__helper-text--disabled`]: disabled,
     });
 
     const inputClasses = classNames(`${prefix}--date-picker__input`, {
@@ -220,6 +230,10 @@ export default class DatePickerInput extends Component {
       <label htmlFor={id} className={labelClasses}>
         {labelText}
       </label>
+    ) : null;
+
+    const helper = helperText ? (
+      <div className={helperTextClasses}>{helperText}</div>
     ) : null;
 
     let error = null;
@@ -266,6 +280,7 @@ export default class DatePickerInput extends Component {
           {datePickerIcon}
         </div>
         {error}
+        {helper}
       </div>
     );
   }

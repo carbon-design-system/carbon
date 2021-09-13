@@ -357,9 +357,7 @@ Map {
       "title": Object {
         "type": "string",
       },
-      "wrapperClassName": Object {
-        "type": "string",
-      },
+      "wrapperClassName": [Function],
     },
     "render": [Function],
   },
@@ -438,6 +436,7 @@ Map {
     },
   },
   "ComboBox" => Object {
+    "$$typeof": Symbol(react.forward_ref),
     "defaultProps": Object {
       "ariaLabel": "Choose an item",
       "direction": "bottom",
@@ -606,6 +605,9 @@ Map {
             Object {
               "type": "string",
             },
+            Object {
+              "type": "number",
+            },
           ],
         ],
         "type": "oneOfType",
@@ -652,6 +654,9 @@ Map {
             Object {
               "type": "string",
             },
+            Object {
+              "type": "number",
+            },
           ],
         ],
         "type": "oneOfType",
@@ -692,6 +697,7 @@ Map {
         "type": "node",
       },
     },
+    "render": [Function],
   },
   "ComposedModal" => Object {
     "defaultProps": Object {
@@ -983,9 +989,7 @@ Map {
         "overflowMenuOnHover": Object {
           "type": "bool",
         },
-        "shouldShowBorder": Object {
-          "type": "bool",
-        },
+        "shouldShowBorder": [Function],
         "size": Object {
           "args": Array [
             Array [
@@ -1622,9 +1626,7 @@ Map {
       "overflowMenuOnHover": Object {
         "type": "bool",
       },
-      "shouldShowBorder": Object {
-        "type": "bool",
-      },
+      "shouldShowBorder": [Function],
       "size": Object {
         "args": Array [
           Array [
@@ -2127,6 +2129,38 @@ Map {
     },
   },
   "DatePicker" => Object {
+    "contextType": Object {
+      "$$typeof": Symbol(react.context),
+      "Consumer": Object {
+        "$$typeof": Symbol(react.context),
+        "_calculateChangedBits": null,
+        "_context": [Circular],
+      },
+      "Provider": Object {
+        "$$typeof": Symbol(react.provider),
+        "_context": [Circular],
+      },
+      "_calculateChangedBits": null,
+      "_currentRenderer": null,
+      "_currentRenderer2": null,
+      "_currentValue": FeatureFlagScope {
+        "flags": Map {
+          "enable-css-custom-properties" => false,
+          "enable-use-controlled-state-with-value" => false,
+          "enable-css-grid" => false,
+          "enable-v11-release" => false,
+        },
+      },
+      "_currentValue2": FeatureFlagScope {
+        "flags": Map {
+          "enable-css-custom-properties" => false,
+          "enable-use-controlled-state-with-value" => false,
+          "enable-css-grid" => false,
+          "enable-v11-release" => false,
+        },
+      },
+      "_threadCount": 0,
+    },
     "defaultProps": Object {
       "dateFormat": "m/d/Y",
       "light": false,
@@ -2326,6 +2360,9 @@ Map {
       "disabled": Object {
         "type": "bool",
       },
+      "helperText": Object {
+        "type": "node",
+      },
       "hideLabel": Object {
         "type": "bool",
       },
@@ -2445,6 +2482,9 @@ Map {
             Object {
               "type": "string",
             },
+            Object {
+              "type": "number",
+            },
           ],
         ],
         "type": "oneOfType",
@@ -2484,6 +2524,9 @@ Map {
             },
             Object {
               "type": "string",
+            },
+            Object {
+              "type": "number",
             },
           ],
         ],
@@ -2867,6 +2910,278 @@ Map {
       },
     },
   },
+  "FilterableMultiSelect" => Object {
+    "contextType": Object {
+      "$$typeof": Symbol(react.context),
+      "Consumer": Object {
+        "$$typeof": Symbol(react.context),
+        "_calculateChangedBits": null,
+        "_context": [Circular],
+      },
+      "Provider": Object {
+        "$$typeof": Symbol(react.provider),
+        "_context": [Circular],
+      },
+      "_calculateChangedBits": null,
+      "_currentRenderer": null,
+      "_currentRenderer2": null,
+      "_currentValue": FeatureFlagScope {
+        "flags": Map {
+          "enable-css-custom-properties" => false,
+          "enable-use-controlled-state-with-value" => false,
+          "enable-css-grid" => false,
+          "enable-v11-release" => false,
+        },
+      },
+      "_currentValue2": FeatureFlagScope {
+        "flags": Map {
+          "enable-css-custom-properties" => false,
+          "enable-use-controlled-state-with-value" => false,
+          "enable-css-grid" => false,
+          "enable-v11-release" => false,
+        },
+      },
+      "_threadCount": 0,
+    },
+    "defaultProps": Object {
+      "ariaLabel": "Choose an item",
+      "compareItems": [Function],
+      "direction": "bottom",
+      "disabled": false,
+      "filterItems": [Function],
+      "initialSelectedItems": Array [],
+      "itemToString": [Function],
+      "light": false,
+      "locale": "en",
+      "open": false,
+      "selectionFeedback": "top-after-reopen",
+      "sortItems": [Function],
+    },
+    "displayName": "MultiSelect.Filterable",
+    "propTypes": Object {
+      "ariaLabel": Object {
+        "type": "string",
+      },
+      "compareItems": Object {
+        "isRequired": true,
+        "type": "func",
+      },
+      "direction": Object {
+        "args": Array [
+          Array [
+            "top",
+            "bottom",
+          ],
+        ],
+        "type": "oneOf",
+      },
+      "disabled": Object {
+        "type": "bool",
+      },
+      "downshiftProps": Object {
+        "args": Array [
+          Object {
+            "children": Object {
+              "type": "func",
+            },
+            "defaultHighlightedIndex": Object {
+              "type": "number",
+            },
+            "defaultIsOpen": Object {
+              "type": "bool",
+            },
+            "environment": Object {
+              "args": Array [
+                Object {
+                  "addEventListener": Object {
+                    "type": "func",
+                  },
+                  "document": Object {
+                    "args": Array [
+                      Object {
+                        "activeElement": Object {
+                          "type": "any",
+                        },
+                        "body": Object {
+                          "type": "any",
+                        },
+                        "getElementById": Object {
+                          "type": "func",
+                        },
+                      },
+                    ],
+                    "type": "shape",
+                  },
+                  "removeEventListener": Object {
+                    "type": "func",
+                  },
+                },
+              ],
+              "type": "shape",
+            },
+            "getA11yStatusMessage": Object {
+              "type": "func",
+            },
+            "getItemId": Object {
+              "type": "func",
+            },
+            "highlightedIndex": Object {
+              "type": "number",
+            },
+            "id": Object {
+              "type": "string",
+            },
+            "initialHighlightedIndex": Object {
+              "type": "number",
+            },
+            "initialInputValue": Object {
+              "type": "string",
+            },
+            "initialIsOpen": Object {
+              "type": "bool",
+            },
+            "initialSelectedItem": Object {
+              "type": "any",
+            },
+            "inputId": Object {
+              "type": "string",
+            },
+            "inputValue": Object {
+              "type": "string",
+            },
+            "isOpen": Object {
+              "type": "bool",
+            },
+            "itemCount": Object {
+              "type": "number",
+            },
+            "itemToString": Object {
+              "type": "func",
+            },
+            "labelId": Object {
+              "type": "string",
+            },
+            "menuId": Object {
+              "type": "string",
+            },
+            "onChange": Object {
+              "type": "func",
+            },
+            "onInputValueChange": Object {
+              "type": "func",
+            },
+            "onOuterClick": Object {
+              "type": "func",
+            },
+            "onSelect": Object {
+              "type": "func",
+            },
+            "onStateChange": Object {
+              "type": "func",
+            },
+            "onUserAction": Object {
+              "type": "func",
+            },
+            "scrollIntoView": Object {
+              "type": "func",
+            },
+            "selectedItem": Object {
+              "type": "any",
+            },
+            "selectedItemChanged": Object {
+              "type": "func",
+            },
+            "stateReducer": Object {
+              "type": "func",
+            },
+            "suppressRefError": Object {
+              "type": "bool",
+            },
+          },
+        ],
+        "type": "shape",
+      },
+      "id": Object {
+        "isRequired": true,
+        "type": "string",
+      },
+      "initialSelectedItems": Object {
+        "type": "array",
+      },
+      "invalid": Object {
+        "type": "bool",
+      },
+      "invalidText": Object {
+        "type": "node",
+      },
+      "itemToElement": Object {
+        "type": "func",
+      },
+      "itemToString": Object {
+        "type": "func",
+      },
+      "items": Object {
+        "isRequired": true,
+        "type": "array",
+      },
+      "light": Object {
+        "type": "bool",
+      },
+      "locale": Object {
+        "type": "string",
+      },
+      "onChange": Object {
+        "type": "func",
+      },
+      "onMenuChange": Object {
+        "type": "func",
+      },
+      "open": Object {
+        "type": "bool",
+      },
+      "placeholder": Object {
+        "isRequired": true,
+        "type": "string",
+      },
+      "selectionFeedback": Object {
+        "args": Array [
+          Array [
+            "top",
+            "fixed",
+            "top-after-reopen",
+          ],
+        ],
+        "type": "oneOf",
+      },
+      "size": Object {
+        "args": Array [
+          Array [
+            "sm",
+            "md",
+            "lg",
+            "xl",
+          ],
+        ],
+        "type": "oneOf",
+      },
+      "sortItems": Object {
+        "isRequired": true,
+        "type": "func",
+      },
+      "translateWithId": Object {
+        "type": "func",
+      },
+      "useTitleInItem": Object {
+        "type": "bool",
+      },
+      "warn": Object {
+        "type": "bool",
+      },
+      "warnText": Object {
+        "type": "node",
+      },
+    },
+  },
   "Form" => Object {
     "propTypes": Object {
       "children": Object {
@@ -2906,6 +3221,9 @@ Map {
       },
       "invalid": Object {
         "type": "bool",
+      },
+      "legendId": Object {
+        "type": "node",
       },
       "legendText": Object {
         "isRequired": true,
@@ -3558,9 +3876,42 @@ Map {
   "MultiSelect" => Object {
     "$$typeof": Symbol(react.forward_ref),
     "Filterable": Object {
+      "contextType": Object {
+        "$$typeof": Symbol(react.context),
+        "Consumer": Object {
+          "$$typeof": Symbol(react.context),
+          "_calculateChangedBits": null,
+          "_context": [Circular],
+        },
+        "Provider": Object {
+          "$$typeof": Symbol(react.provider),
+          "_context": [Circular],
+        },
+        "_calculateChangedBits": null,
+        "_currentRenderer": null,
+        "_currentRenderer2": null,
+        "_currentValue": FeatureFlagScope {
+          "flags": Map {
+            "enable-css-custom-properties" => false,
+            "enable-use-controlled-state-with-value" => false,
+            "enable-css-grid" => false,
+            "enable-v11-release" => false,
+          },
+        },
+        "_currentValue2": FeatureFlagScope {
+          "flags": Map {
+            "enable-css-custom-properties" => false,
+            "enable-use-controlled-state-with-value" => false,
+            "enable-css-grid" => false,
+            "enable-v11-release" => false,
+          },
+        },
+        "_threadCount": 0,
+      },
       "defaultProps": Object {
         "ariaLabel": "Choose an item",
         "compareItems": [Function],
+        "direction": "bottom",
         "disabled": false,
         "filterItems": [Function],
         "initialSelectedItems": Array [],
@@ -3579,6 +3930,15 @@ Map {
         "compareItems": Object {
           "isRequired": true,
           "type": "func",
+        },
+        "direction": Object {
+          "args": Array [
+            Array [
+              "top",
+              "bottom",
+            ],
+          ],
+          "type": "oneOf",
         },
         "disabled": Object {
           "type": "bool",
@@ -3718,6 +4078,9 @@ Map {
         },
         "invalidText": Object {
           "type": "node",
+        },
+        "itemToElement": Object {
+          "type": "func",
         },
         "itemToString": Object {
           "type": "func",
@@ -3960,6 +4323,9 @@ Map {
       "invalidText": Object {
         "type": "node",
       },
+      "itemToElement": Object {
+        "type": "func",
+      },
       "itemToString": Object {
         "type": "func",
       },
@@ -4040,22 +4406,27 @@ Map {
   },
   "ToastNotification" => Object {
     "$$typeof": Symbol(react.forward_ref),
+    "displayName": "FeatureToggle(ToastNotification)",
     "render": [Function],
   },
   "InlineNotification" => Object {
     "$$typeof": Symbol(react.forward_ref),
+    "displayName": "FeatureToggle(InlineNotification)",
     "render": [Function],
   },
   "NotificationActionButton" => Object {
     "$$typeof": Symbol(react.forward_ref),
+    "displayName": "FeatureToggle(NotificationActionButton)",
     "render": [Function],
   },
   "NotificationButton" => Object {
     "$$typeof": Symbol(react.forward_ref),
+    "displayName": "FeatureToggle(NotificationButton)",
     "render": [Function],
   },
   "NotificationTextDetails" => Object {
     "$$typeof": Symbol(react.forward_ref),
+    "displayName": "FeatureToggle(NotificationTextDetails)",
     "render": [Function],
   },
   "NumberInput" => Object {
@@ -4088,6 +4459,7 @@ Map {
   },
   "OverflowMenu" => Object {
     "$$typeof": Symbol(react.forward_ref),
+    "displayName": "FeatureToggle(OverflowMenu)",
     "render": [Function],
   },
   "OverflowMenuItem" => Object {
@@ -4279,6 +4651,16 @@ Map {
       "pagesUnknown": Object {
         "type": "bool",
       },
+      "size": Object {
+        "args": Array [
+          Array [
+            "sm",
+            "md",
+            "lg",
+          ],
+        ],
+        "type": "oneOf",
+      },
       "totalItems": Object {
         "type": "number",
       },
@@ -4307,6 +4689,249 @@ Map {
       },
       "translateWithId": Object {
         "type": "func",
+      },
+    },
+    "render": [Function],
+  },
+  "ControlledPasswordInput" => Object {
+    "$$typeof": Symbol(react.forward_ref),
+    "defaultProps": Object {
+      "className": "\${prefix}--text__input",
+      "disabled": false,
+      "helperText": "",
+      "invalid": false,
+      "invalidText": "",
+      "light": false,
+      "onChange": [Function],
+      "onClick": [Function],
+      "size": "",
+    },
+    "propTypes": Object {
+      "className": Object {
+        "type": "string",
+      },
+      "defaultValue": Object {
+        "args": Array [
+          Array [
+            Object {
+              "type": "string",
+            },
+            Object {
+              "type": "number",
+            },
+          ],
+        ],
+        "type": "oneOfType",
+      },
+      "disabled": Object {
+        "type": "bool",
+      },
+      "helperText": Object {
+        "type": "node",
+      },
+      "hideLabel": Object {
+        "type": "bool",
+      },
+      "hidePasswordLabel": Object {
+        "type": "string",
+      },
+      "id": Object {
+        "isRequired": true,
+        "type": "string",
+      },
+      "invalid": Object {
+        "type": "bool",
+      },
+      "invalidText": Object {
+        "type": "node",
+      },
+      "labelText": Object {
+        "isRequired": true,
+        "type": "node",
+      },
+      "light": Object {
+        "type": "bool",
+      },
+      "onChange": Object {
+        "type": "func",
+      },
+      "onClick": Object {
+        "type": "func",
+      },
+      "placeholder": Object {
+        "type": "string",
+      },
+      "showPasswordLabel": Object {
+        "type": "string",
+      },
+      "size": Object {
+        "type": "string",
+      },
+      "tooltipAlignment": Object {
+        "args": Array [
+          Array [
+            "start",
+            "center",
+            "end",
+          ],
+        ],
+        "type": "oneOf",
+      },
+      "tooltipPosition": Object {
+        "args": Array [
+          Array [
+            "top",
+            "right",
+            "bottom",
+            "left",
+          ],
+        ],
+        "type": "oneOf",
+      },
+      "value": Object {
+        "args": Array [
+          Array [
+            Object {
+              "type": "string",
+            },
+            Object {
+              "type": "number",
+            },
+          ],
+        ],
+        "type": "oneOfType",
+      },
+    },
+    "render": [Function],
+  },
+  "PasswordInput" => Object {
+    "$$typeof": Symbol(react.forward_ref),
+    "defaultProps": Object {
+      "className": "\${prefix}--text__input",
+      "disabled": false,
+      "helperText": "",
+      "invalid": false,
+      "invalidText": "",
+      "light": false,
+      "onChange": [Function],
+      "onClick": [Function],
+      "size": "",
+    },
+    "propTypes": Object {
+      "className": Object {
+        "type": "string",
+      },
+      "defaultValue": Object {
+        "args": Array [
+          Array [
+            Object {
+              "type": "string",
+            },
+            Object {
+              "type": "number",
+            },
+          ],
+        ],
+        "type": "oneOfType",
+      },
+      "disabled": Object {
+        "type": "bool",
+      },
+      "helperText": Object {
+        "type": "node",
+      },
+      "hideLabel": Object {
+        "type": "bool",
+      },
+      "hidePasswordLabel": Object {
+        "type": "string",
+      },
+      "id": Object {
+        "isRequired": true,
+        "type": "string",
+      },
+      "inline": Object {
+        "type": "bool",
+      },
+      "invalid": Object {
+        "type": "bool",
+      },
+      "invalidText": Object {
+        "type": "node",
+      },
+      "labelText": Object {
+        "isRequired": true,
+        "type": "node",
+      },
+      "light": Object {
+        "type": "bool",
+      },
+      "onChange": Object {
+        "type": "func",
+      },
+      "onClick": Object {
+        "type": "func",
+      },
+      "onTogglePasswordVisibility": Object {
+        "type": "func",
+      },
+      "placeholder": Object {
+        "type": "string",
+      },
+      "showPasswordLabel": Object {
+        "type": "string",
+      },
+      "size": Object {
+        "type": "string",
+      },
+      "tooltipAlignment": Object {
+        "args": Array [
+          Array [
+            "start",
+            "center",
+            "end",
+          ],
+        ],
+        "type": "oneOf",
+      },
+      "tooltipPosition": Object {
+        "args": Array [
+          Array [
+            "top",
+            "right",
+            "bottom",
+            "left",
+          ],
+        ],
+        "type": "oneOf",
+      },
+      "type": Object {
+        "args": Array [
+          Array [
+            "password",
+            "text",
+          ],
+        ],
+        "type": "oneOf",
+      },
+      "value": Object {
+        "args": Array [
+          Array [
+            Object {
+              "type": "string",
+            },
+            Object {
+              "type": "number",
+            },
+          ],
+        ],
+        "type": "oneOfType",
+      },
+      "warn": Object {
+        "type": "bool",
+      },
+      "warnText": Object {
+        "type": "node",
       },
     },
     "render": [Function],
@@ -4393,6 +5018,38 @@ Map {
     "render": [Function],
   },
   "RadioButtonGroup" => Object {
+    "contextType": Object {
+      "$$typeof": Symbol(react.context),
+      "Consumer": Object {
+        "$$typeof": Symbol(react.context),
+        "_calculateChangedBits": null,
+        "_context": [Circular],
+      },
+      "Provider": Object {
+        "$$typeof": Symbol(react.provider),
+        "_context": [Circular],
+      },
+      "_calculateChangedBits": null,
+      "_currentRenderer": null,
+      "_currentRenderer2": null,
+      "_currentValue": FeatureFlagScope {
+        "flags": Map {
+          "enable-css-custom-properties" => false,
+          "enable-use-controlled-state-with-value" => false,
+          "enable-css-grid" => false,
+          "enable-v11-release" => false,
+        },
+      },
+      "_currentValue2": FeatureFlagScope {
+        "flags": Map {
+          "enable-css-custom-properties" => false,
+          "enable-use-controlled-state-with-value" => false,
+          "enable-css-grid" => false,
+          "enable-v11-release" => false,
+        },
+      },
+      "_threadCount": 0,
+    },
     "defaultProps": Object {
       "labelPosition": "right",
       "onChange": [Function],
@@ -4895,6 +5552,38 @@ Map {
     "render": [Function],
   },
   "Slider" => Object {
+    "contextType": Object {
+      "$$typeof": Symbol(react.context),
+      "Consumer": Object {
+        "$$typeof": Symbol(react.context),
+        "_calculateChangedBits": null,
+        "_context": [Circular],
+      },
+      "Provider": Object {
+        "$$typeof": Symbol(react.provider),
+        "_context": [Circular],
+      },
+      "_calculateChangedBits": null,
+      "_currentRenderer": null,
+      "_currentRenderer2": null,
+      "_currentValue": FeatureFlagScope {
+        "flags": Map {
+          "enable-css-custom-properties" => false,
+          "enable-use-controlled-state-with-value" => false,
+          "enable-css-grid" => false,
+          "enable-v11-release" => false,
+        },
+      },
+      "_currentValue2": FeatureFlagScope {
+        "flags": Map {
+          "enable-css-custom-properties" => false,
+          "enable-use-controlled-state-with-value" => false,
+          "enable-css-grid" => false,
+          "enable-v11-release" => false,
+        },
+      },
+      "_threadCount": 0,
+    },
     "defaultProps": Object {
       "ariaLabelInput": "Slider number input",
       "disabled": false,
@@ -4981,26 +5670,32 @@ Map {
   },
   "StructuredListWrapper" => Object {
     "$$typeof": Symbol(react.forward_ref),
+    "displayName": "FeatureToggle(StructuredListWrapper)",
     "render": [Function],
   },
   "StructuredListHead" => Object {
     "$$typeof": Symbol(react.forward_ref),
+    "displayName": "FeatureToggle(StructuredListHead)",
     "render": [Function],
   },
   "StructuredListBody" => Object {
     "$$typeof": Symbol(react.forward_ref),
+    "displayName": "FeatureToggle(StructuredListBody)",
     "render": [Function],
   },
   "StructuredListRow" => Object {
     "$$typeof": Symbol(react.forward_ref),
+    "displayName": "FeatureToggle(StructuredListRow)",
     "render": [Function],
   },
   "StructuredListInput" => Object {
     "$$typeof": Symbol(react.forward_ref),
+    "displayName": "FeatureToggle(StructuredListInput)",
     "render": [Function],
   },
   "StructuredListCell" => Object {
     "$$typeof": Symbol(react.forward_ref),
+    "displayName": "FeatureToggle(StructuredListCell)",
     "render": [Function],
   },
   "StructuredListSkeleton" => Object {
@@ -5570,6 +6265,7 @@ Map {
       "warn": false,
       "warnText": "",
     },
+    "displayName": "TextInput",
     "propTypes": Object {
       "className": Object {
         "type": "string",
@@ -5953,6 +6649,38 @@ Map {
     },
   },
   "TimePicker" => Object {
+    "contextType": Object {
+      "$$typeof": Symbol(react.context),
+      "Consumer": Object {
+        "$$typeof": Symbol(react.context),
+        "_calculateChangedBits": null,
+        "_context": [Circular],
+      },
+      "Provider": Object {
+        "$$typeof": Symbol(react.provider),
+        "_context": [Circular],
+      },
+      "_calculateChangedBits": null,
+      "_currentRenderer": null,
+      "_currentRenderer2": null,
+      "_currentValue": FeatureFlagScope {
+        "flags": Map {
+          "enable-css-custom-properties" => false,
+          "enable-use-controlled-state-with-value" => false,
+          "enable-css-grid" => false,
+          "enable-v11-release" => false,
+        },
+      },
+      "_currentValue2": FeatureFlagScope {
+        "flags": Map {
+          "enable-css-custom-properties" => false,
+          "enable-use-controlled-state-with-value" => false,
+          "enable-css-grid" => false,
+          "enable-v11-release" => false,
+        },
+      },
+      "_threadCount": 0,
+    },
     "defaultProps": Object {
       "disabled": false,
       "invalid": false,
@@ -6071,6 +6799,7 @@ Map {
   },
   "Toggle" => Object {
     "$$typeof": Symbol(react.forward_ref),
+    "displayName": "FeatureToggle(Toggle)",
     "render": [Function],
   },
   "ToggleSmall" => Object {
@@ -7374,6 +8103,9 @@ Map {
       "itemsPerPageText": Object {
         "type": "string",
       },
+      "onChange": Object {
+        "type": "func",
+      },
       "pageRangeText": Object {
         "type": "func",
       },
@@ -7701,11 +8433,11 @@ Map {
       },
     },
     "propTypes": Object {
-      "autoclose": Object {
-        "type": "bool",
-      },
       "children": Object {
         "type": "node",
+      },
+      "id": Object {
+        "type": "string",
       },
       "level": Object {
         "type": "number",
@@ -7715,6 +8447,16 @@ Map {
       },
       "open": Object {
         "type": "bool",
+      },
+      "size": Object {
+        "args": Array [
+          Array [
+            "sm",
+            "md",
+            "lg",
+          ],
+        ],
+        "type": "oneOf",
       },
       "x": Object {
         "args": Array [

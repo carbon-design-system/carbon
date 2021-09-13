@@ -11,6 +11,7 @@
 @use '../../spacing' as *;
 @use '../../theme' as *;
 @use '../../type' as *;
+@use '../button/tokens' as button;
 @use '../../utilities/convert' as *;
 @use '../../utilities/high-contrast-mode' as *;
 @use '../../utilities/visually-hidden' as *;
@@ -125,7 +126,7 @@
     }
 
     .#{$prefix}--toggle--disabled .#{$prefix}--toggle__switch {
-      background-color: $button-disabled;
+      background-color: button.$button-disabled;
 
       &::before {
         background-color: $icon-on-color-disabled;
@@ -133,7 +134,7 @@
     }
 
     .#{$prefix}--toggle--disabled .#{$prefix}--toggle__check {
-      fill: $button-disabled;
+      fill: button.$button-disabled;
     }
 
     // HCM
@@ -304,7 +305,7 @@
       }
 
       &::after {
-        background-color: $button-disabled;
+        background-color: button.$button-disabled;
       }
 
       &::before,
@@ -518,7 +519,7 @@
       cursor: not-allowed;
 
       &::before {
-        background-color: $button-disabled;
+        background-color: button.$button-disabled;
       }
 
       &::after {

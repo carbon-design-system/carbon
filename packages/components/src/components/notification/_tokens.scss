@@ -23,6 +23,10 @@ $notification-colors: (
         value: $carbon__red-10,
       ),
       (
+        theme: $carbon--theme--g80,
+        value: $layer,
+      ),
+      (
         theme: $carbon--theme--g90,
         value: $ui-01,
       ),
@@ -46,6 +50,10 @@ $notification-colors: (
       (
         theme: $carbon--theme--g10,
         value: $carbon__green-10,
+      ),
+      (
+        theme: $carbon--theme--g80,
+        value: $layer,
       ),
       (
         theme: $carbon--theme--g90,
@@ -73,6 +81,10 @@ $notification-colors: (
         value: $carbon__blue-10,
       ),
       (
+        theme: $carbon--theme--g80,
+        value: $layer,
+      ),
+      (
         theme: $carbon--theme--g90,
         value: $ui-01,
       ),
@@ -98,6 +110,10 @@ $notification-colors: (
         value: mix($carbon__yellow-30, $carbon__white-0, 15%),
       ),
       (
+        theme: $carbon--theme--g80,
+        value: $layer,
+      ),
+      (
         theme: $carbon--theme--g90,
         value: $ui-01,
       ),
@@ -121,6 +137,10 @@ $notification-colors: (
       (
         theme: $carbon--theme--g10,
         value: $carbon__white-0,
+      ),
+      (
+        theme: $carbon--theme--g80,
+        value: $layer-hover,
       ),
       (
         theme: $carbon--theme--g90,

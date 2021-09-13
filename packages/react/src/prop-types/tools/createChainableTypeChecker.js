@@ -32,7 +32,7 @@ const createChainableTypeChecker = (validate) => {
   };
 
   // By default, the validator will have `isRequired` set to false. However, we
-  // also define the `isRequired` property on the validtor so that consumers can
+  // also define the `isRequired` property on the validator so that consumers can
   // chain their prop validator and assert that the property is required.
   let chainedCheckType = checkType.bind(null, false);
   chainedCheckType.isRequired = checkType.bind(null, true);

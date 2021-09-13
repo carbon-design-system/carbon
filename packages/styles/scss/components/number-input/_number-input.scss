@@ -9,7 +9,7 @@
 @use '../../config' as *;
 @use '../../motion' as *;
 @use '../../spacing' as *;
-@use '../../theme' as *;
+@use '../../compat/theme' as *;
 @use '../../type' as *;
 @use '../../utilities/skeleton' as *;
 @use '../../utilities/button-reset';
@@ -437,7 +437,9 @@
   }
 
   //No label positioning adjustment
-  .#{$prefix}--number--nolabel .bx--label + .bx--form__helper-text {
+  .#{$prefix}--number--nolabel
+    .#{$prefix}--label
+    + .#{$prefix}--form__helper-text {
     margin-top: 0;
   }
 

@@ -16,7 +16,8 @@ import mdx from './FormGroup.mdx';
 
 const props = () => ({
   disabled: boolean('Disabled (disabled)', false),
-  legendText: text('Legend (legendText)', 'FormGroup Legend'),
+  legendId: text('Legend ID (legendId)', 'formgroup-legend-id'),
+  legendText: text('Legend text (legendText)', 'FormGroup Legend'),
   hasMargin: boolean('Fieldset has bottom margin (hasMargin)', true),
 });
 
@@ -32,17 +33,16 @@ export default {
 };
 
 export const _Default = () => (
-  <FormGroup legendText="FormGroup Legend" style={{ maxWidth: '400px' }}>
-    <TextInput
-      id="one"
-      labelText="First Name"
-      style={{ marginBottom: '1rem' }}
-    />
-    <TextInput
-      id="two"
-      labelText="Last Name"
-      style={{ marginBottom: '1rem' }}
-    />
+  <FormGroup
+    legendId="formgroup-legend-id"
+    legendText="FormGroup Legend"
+    style={{ maxWidth: '400px' }}>
+    <div style={{ marginBottom: '1rem' }}>
+      <TextInput id="one" labelText="First Name" />
+    </div>
+    <div style={{ marginBottom: '1rem' }}>
+      <TextInput id="two" labelText="Last Name" />
+    </div>
 
     <RadioButtonGroup
       legendText="Radio button heading"

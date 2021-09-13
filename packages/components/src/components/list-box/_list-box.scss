@@ -277,7 +277,7 @@ $list-box-menu-width: rem(300px);
     max-width: rem(480px);
   }
 
-  .#{$prefix}--dropdown--inline .bx--list-box__menu {
+  .#{$prefix}--dropdown--inline .#{$prefix}--list-box__menu {
     min-width: rem(288px);
     max-width: rem(480px);
   }
@@ -701,8 +701,8 @@ $list-box-menu-width: rem(300px);
 
   .#{$prefix}--list-box__menu-item--active:hover,
   .#{$prefix}--list-box__menu-item--active.#{$prefix}--list-box__menu-item--highlighted {
-    border-bottom-color: $selected-ui;
-    background-color: $selected-ui;
+    border-bottom-color: $hover-selected-ui;
+    background-color: $hover-selected-ui;
   }
 
   .#{$prefix}--list-box__menu-item--active
@@ -754,6 +754,9 @@ $list-box-menu-width: rem(300px);
   .#{$prefix}--list-box--up.#{$prefix}--dropdown--sm
     .#{$prefix}--list-box__menu,
   .#{$prefix}--list-box--up.#{$prefix}--list-box--sm
+    .#{$prefix}--list-box__menu,
+  .#{$prefix}--list-box--up
+    .#{$prefix}--list-box--sm
     .#{$prefix}--list-box__menu {
     bottom: 2rem;
   }
@@ -766,6 +769,9 @@ $list-box-menu-width: rem(300px);
   .#{$prefix}--list-box--up.#{$prefix}--dropdown--lg
     .#{$prefix}--list-box__menu,
   .#{$prefix}--list-box--up.#{$prefix}--list-box--lg
+    .#{$prefix}--list-box__menu,
+  .#{$prefix}--list-box--up
+    .#{$prefix}--list-box--lg
     .#{$prefix}--list-box__menu {
     bottom: 3rem;
   }

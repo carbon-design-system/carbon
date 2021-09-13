@@ -36,7 +36,7 @@ bx--form-item
 
 ### SCSS
 
-One change to an exisiting selector, two new selectors.
+One change to an existing selector, two new selectors.
 
 | v9                    | v10                                           | Note                                                                                        |
 | --------------------- | --------------------------------------------- | ------------------------------------------------------------------------------------------- |

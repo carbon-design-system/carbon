@@ -383,7 +383,7 @@ describe('Test modal', function () {
     beforeAll(function () {
       container = document.createElement('div');
       container.innerHTML = ModalHtml;
-      // Reset primary focus eleemnt for testing
+      // Reset primary focus element for testing
       delete container.querySelector(
         '[data-modal-primary-focus]'
       ).dataset.modalPrimaryFocus;

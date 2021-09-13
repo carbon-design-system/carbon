@@ -10,17 +10,21 @@ import 'carbon-components/scss/components/breadcrumb/_breadcrumb.scss';
 import React from 'react';
 import { mount } from '@cypress/react';
 import { Breadcrumb, BreadcrumbItem } from '../index';
+import { BreadcrumbSkeleton } from '../';
 
 describe('Breadcrumb', () => {
   beforeEach(() => {
     mount(
-      <Breadcrumb>
-        <BreadcrumbItem>
-          <a href="/#">Breadcrumb 1</a>
-        </BreadcrumbItem>
-        <BreadcrumbItem href="#">Breadcrumb 2</BreadcrumbItem>
-        <BreadcrumbItem href="#">Breadcrumb 3</BreadcrumbItem>
-      </Breadcrumb>
+      <>
+        <Breadcrumb>
+          <BreadcrumbItem>
+            <a href="/#">Breadcrumb 1</a>
+          </BreadcrumbItem>
+          <BreadcrumbItem href="#">Breadcrumb 2</BreadcrumbItem>
+          <BreadcrumbItem href="#">Breadcrumb 3</BreadcrumbItem>
+        </Breadcrumb>
+        <BreadcrumbSkeleton />
+      </>
     );
   });
 

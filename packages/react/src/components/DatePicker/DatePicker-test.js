@@ -101,7 +101,7 @@ describe('DatePicker', () => {
       expect(wrapper.props().value).toEqual('11/08/2017');
     });
 
-    it('should not initalize a calendar', () => {
+    it('should not initialize a calendar', () => {
       expect(wrapper.cal).toEqual(undefined);
     });
   });
@@ -127,7 +127,7 @@ describe('DatePicker', () => {
       ).toBe(true);
     });
 
-    it('should initalize a calendar', () => {
+    it('should initialize a calendar', () => {
       expect(wrapper.instance().cal).toBeDefined();
     });
 
@@ -206,7 +206,7 @@ describe('DatePicker', () => {
       ).toBe(true);
     });
 
-    it('should initalize a calendar', () => {
+    it('should initialize a calendar', () => {
       expect(wrapper.instance().cal).toBeDefined();
     });
 

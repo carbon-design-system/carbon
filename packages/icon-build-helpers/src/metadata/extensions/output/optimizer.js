@@ -29,7 +29,7 @@ const plugins = [
       description: 'removes transparent rectangles used for bounding box',
       fn(item) {
         // Two potential situations can happen if we have a bounding Transparent
-        // Rectangle, namly the node has a `<rect>` element for the rectangle or
+        // Rectangle, namely the node has a `<rect>` element for the rectangle or
         // the group has valid content inside of it. As a result, we can return
         // the content and then have multipass remove the `<rect>` if that is
         // what is contained inside.

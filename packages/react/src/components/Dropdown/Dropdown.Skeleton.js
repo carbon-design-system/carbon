@@ -55,7 +55,7 @@ DropdownSkeleton.propTypes = {
   ),
 
   /**
-   * Specify the size of the ListBox. Currently supports either `sm`, `md` or `lg` as an option.
+   * Specify the size of the ListBox.
    */
   size: ListBoxPropTypes.ListBoxSize,
 };

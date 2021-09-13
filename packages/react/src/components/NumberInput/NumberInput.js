@@ -17,6 +17,7 @@ import requiredIfValueExists from '../../prop-types/requiredIfValueExists';
 import { useNormalizedInputProps as getNormalizedInputProps } from '../../internal/useNormalizedInputProps';
 import { useControlledStateWithValue } from '../../internal/FeatureFlags';
 import deprecate from '../../prop-types/deprecate';
+import { FeatureFlagContext } from '../FeatureFlags';
 
 const { prefix } = settings;
 
@@ -161,7 +162,7 @@ class NumberInput extends Component {
     size: PropTypes.oneOf(['sm', 'md', 'lg', 'xl']),
 
     /**
-     * Specify how much the valus should increase/decrease upon clicking on up/down button
+     * Specify how much the values should increase/decrease upon clicking on up/down button
      */
     step: PropTypes.number,
 
@@ -202,7 +203,9 @@ class NumberInput extends Component {
     translateWithId: (id) => defaultTranslations[id],
   };
 
-  static getDerivedStateFromProps({ min, max, value }, state) {
+  static contextType = FeatureFlagContext;
+
+  static getDerivedStateFromProps({ value }, state) {
     const { prevValue } = state;
 
     if (useControlledStateWithValue && value === '' && prevValue !== '') {
@@ -214,10 +217,12 @@ class NumberInput extends Component {
 
     // If `useControlledStateWithValue` feature flag is on, do nothing here.
     // Otherwise, do prop -> state sync with "value capping".
+    //// Value capping removed in #8965
+    //// value: capMax(max, capMin(min, value)), (L223)
     return useControlledStateWithValue || prevValue === value
       ? null
       : {
-          value: capMax(max, capMin(min, value)),
+          value,
           prevValue: value,
         };
   }
@@ -344,9 +349,16 @@ class NumberInput extends Component {
       ...other
     } = this.props;
 
+    const scope = this.context;
+    let enabled;
+
+    if (scope.enabled) {
+      enabled = scope.enabled('enable-v11-release');
+    }
+
     const numberInputClasses = classNames(
       `${prefix}--number ${prefix}--number--helpertext`,
-      className,
+      [enabled ? null : className],
       {
         [`${prefix}--number--readonly`]: readOnly,
         [`${prefix}--number--light`]: light,
@@ -456,7 +468,12 @@ class NumberInput extends Component {
     }
 
     return (
-      <div className={`${prefix}--form-item`}>
+      <div
+        className={
+          enabled
+            ? classNames(`${prefix}--form-item`, className)
+            : `${prefix}--form-item`
+        }>
         <div className={numberInputClasses} {...inputWrapperProps}>
           {(() => {
             return (

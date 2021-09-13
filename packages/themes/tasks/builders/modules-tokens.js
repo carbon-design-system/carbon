@@ -8,23 +8,65 @@
 'use strict';
 
 const { types: t } = require('@carbon/scss-generator');
-const { formatTokenName } = require('../../lib');
+const { group } = require('../../src/next');
 const { FILE_BANNER } = require('./shared');
 
-function buildThemeTokens(tokens) {
-  const names = Object.values(tokens).flatMap((values) => {
-    return values.map(formatTokenName);
+function buildThemeTokens() {
+  const tokens = group.getTokens();
+  const variables = tokens.flatMap((token) => {
+    const id = token.name;
+    return [
+      t.Newline(),
+      t.Comment(`/ The CSS Custom Property for the \`${id}\` token`),
+      t.Assignment({
+        id: t.Identifier(id),
+        init: t.SassFunctionCall({
+          id: t.Identifier('_get'),
+          params: [t.SassString(id)],
+        }),
+        default: true,
+      }),
+    ];
   });
 
   return t.StyleSheet([
+    // Preamble
     FILE_BANNER,
     t.Newline(),
-    ...names.map((name) => {
-      return t.Assignment({
-        id: t.Identifier(name),
-        init: t.SassValue(`var(--cds-${name})`),
-      });
+
+    // Modules
+    t.SassModule('sass:map'),
+    t.SassModule('../config'),
+    t.SassModule('../theme'),
+    t.Newline(),
+
+    t.Comment('/ Internal helper for generating CSS Custom Properties'),
+    t.SassFunction({
+      id: t.Identifier('_get'),
+      params: [t.Identifier('token')],
+      body: t.BlockStatement([
+        t.IfStatement({
+          test: t.LogicalExpression({
+            left: t.SassValue('config.$use-fallback-value'),
+            operator: '==',
+            right: t.SassBoolean(false),
+          }),
+          consequent: t.BlockStatement([
+            t.AtReturn(t.SassValue('var(--#{config.$prefix}-#{$token})')),
+          ]),
+          alternate: t.BlockStatement([
+            t.AtReturn(
+              t.SassValue(
+                'var(--#{config.$prefix}-#{$token}, #{theme.get($token)})'
+              )
+            ),
+          ]),
+        }),
+      ]),
     }),
+
+    // Variables
+    ...variables,
   ]);
 }
 

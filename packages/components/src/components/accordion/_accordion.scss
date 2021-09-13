@@ -100,11 +100,11 @@
 
   .#{$prefix}--accordion__item--disabled,
   .#{$prefix}--accordion__item--disabled + .#{$prefix}--accordion__item {
-    border-top: 1px solid $disabled-02;
+    border-top: 1px solid $disabled-01;
   }
 
   li.#{$prefix}--accordion__item--disabled:last-of-type {
-    border-bottom: 1px solid $disabled-02;
+    border-bottom: 1px solid $disabled-01;
   }
 
   .#{$prefix}--accordion__arrow {

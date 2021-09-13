@@ -4,7 +4,7 @@ const regexPure = /^\s*[#@]__PURE__\s*$/;
 const regexPureClassProperty = /^\s*[#@]__PURE_CLASS_PROPERTY__\s*$/;
 
 /**
- * @param {Map} map The `Map` instanve.
+ * @param {Map} map The `Map` instance.
  * @param {string} key The key in the given `map`.
  * @param createFn
  *   A function that returns the value for the new map item.

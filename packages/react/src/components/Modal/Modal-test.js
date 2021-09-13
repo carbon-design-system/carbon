@@ -72,7 +72,7 @@ describe('Modal', () => {
       expect(primaryButton.prop('disabled')).toEqual(false);
     });
 
-    it('disables primary button when diablePrimaryButton prop is passed', () => {
+    it('disables primary button when disablePrimaryButton prop is passed', () => {
       mounted.setProps({ primaryButtonDisabled: true });
       const primaryButton = mounted
         .find(`.${prefix}--btn.${prefix}--btn--primary`)

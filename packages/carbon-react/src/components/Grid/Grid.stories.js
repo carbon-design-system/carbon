@@ -15,7 +15,7 @@ import React from 'react';
 import mdx from './Grid.mdx';
 
 export default {
-  title: 'Components/Grid',
+  title: 'Elements/Grid',
   component: Grid,
   subcomponents: {
     Column,
@@ -28,16 +28,12 @@ export default {
     ),
   ],
   parameters: {
+    controls: {
+      include: [], // ensure props are not displayed on the controls pane
+      hideNoControlsWarning: true,
+    },
     docs: {
       page: mdx,
-    },
-  },
-  argTypes: {
-    narrow: {
-      control: false,
-    },
-    condensed: {
-      control: false,
     },
   },
 };

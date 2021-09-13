@@ -25,6 +25,11 @@ const toastNotificationProps = () => ({
 
 export default {
   title: 'Components/Notifications',
+  parameters: {
+    controls: {
+      hideNoControlsWarning: true,
+    },
+  },
 };
 
 export const Toast = () => (
@@ -34,6 +39,45 @@ export const Toast = () => (
     style={{ marginBottom: '.5rem' }}
   />
 );
+
+export const ToastPlayground = ({
+  kind = 'info',
+  title = 'Notification title',
+  subtitle = 'Notification subtitle',
+  caption = '00:00:00 AM',
+  lowContrast = false,
+}) => {
+  return (
+    <ToastNotification
+      kind={kind}
+      title={title}
+      subtitle={subtitle}
+      lowContrast={lowContrast}
+      caption={caption}
+    />
+  );
+};
+ToastPlayground.argTypes = {
+  kind: {
+    options: [
+      'error',
+      'info',
+      'info-square',
+      'success',
+      'warning',
+      'warning-alt',
+    ],
+    control: {
+      type: 'select',
+    },
+  },
+  lowContrast: {
+    value: false,
+    control: {
+      type: 'boolean',
+    },
+  },
+};
 
 export const Inline = () => (
   <InlineNotification

@@ -7,6 +7,8 @@
 
 import React from 'react';
 import { mount } from 'enzyme';
+import { render, screen, within } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import {
   findListBoxNode,
   findMenuNode,
@@ -197,9 +199,53 @@ describe('ComboBox', () => {
       expect(findMenuNode(wrapper).length).toBe(1);
     });
 
-    it('should set `inputValue` to an empty string if a falsey-y value is given', () => {
+    it('should set `inputValue` to an empty string if a false-y value is given', () => {
       const wrapper = mount(<ComboBox {...mockProps} />);
       expect(wrapper.find('input').instance().value).toBe('');
+    });
+
+    it('should only render one listbox at a time when multiple comboboxes are present', () => {
+      render(
+        <>
+          <div data-testid="combobox-1">
+            <ComboBox {...mockProps} id="combobox-1" />
+          </div>
+          <div data-testid="combobox-2">
+            <ComboBox {...mockProps} id="combobox-2" />
+          </div>
+        </>
+      );
+      const firstCombobox = screen.getByTestId('combobox-1');
+      const secondCombobox = screen.getByTestId('combobox-2');
+
+      const firstComboboxChevron = within(firstCombobox).getByRole('button');
+      const secondComboboxChevron = within(secondCombobox).getByRole('button');
+
+      function firstListBox() {
+        return within(firstCombobox).getByRole('listbox');
+      }
+
+      function secondListBox() {
+        return within(secondCombobox).getByRole('listbox');
+      }
+
+      expect(firstListBox()).toBeEmptyDOMElement();
+      expect(secondListBox()).toBeEmptyDOMElement();
+
+      userEvent.click(firstComboboxChevron);
+
+      expect(firstListBox()).not.toBeEmptyDOMElement();
+      expect(secondListBox()).toBeEmptyDOMElement();
+
+      userEvent.click(secondComboboxChevron);
+
+      expect(firstListBox()).toBeEmptyDOMElement();
+      expect(secondListBox()).not.toBeEmptyDOMElement();
+
+      userEvent.click(secondComboboxChevron);
+
+      expect(firstListBox()).toBeEmptyDOMElement();
+      expect(secondListBox()).toBeEmptyDOMElement();
     });
   });
 });

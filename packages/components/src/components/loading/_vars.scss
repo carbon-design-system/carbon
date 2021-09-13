@@ -8,12 +8,12 @@
 /// @type Number
 /// @access private
 /// @group loading
-$loading__gap: 16;
+$radius: 44;
 
 /// @type Number
 /// @access private
 /// @group loading
-$loading--small__gap: 110;
+$circumference: $radius * 2 * 3.1416;
 
 /// @type Number
 /// @access private

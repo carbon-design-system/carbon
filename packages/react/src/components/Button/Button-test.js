@@ -14,7 +14,6 @@ import { shallow, mount } from 'enzyme';
 import { settings } from 'carbon-components';
 import { cleanup, render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import '@testing-library/jest-dom';
 
 const { prefix } = settings;
 
@@ -305,7 +304,7 @@ describe('DangerButton', () => {
 });
 
 describe('danger--primaryButton', () => {
-  describe('Renders as exptected', () => {
+  describe('Renders as expected', () => {
     const wrapper = shallow(
       <Button kind="danger--primary" className="extra-class" />
     );
@@ -321,7 +320,7 @@ describe('danger--primaryButton', () => {
 });
 
 describe('TertiaryButton', () => {
-  describe('Renders as exptected', () => {
+  describe('Renders as expected', () => {
     const wrapper = shallow(<Button kind="tertiary" className="extra-class" />);
 
     it('has the expected classes', () => {

@@ -100,7 +100,7 @@
   }
 
   .#{$prefix}--file-browse-btn--disabled .#{$prefix}--file__drop-container {
-    border: 1px dashed $button-disabled;
+    border: 1px dashed button.$button-disabled;
   }
 
   .#{$prefix}--label-description {

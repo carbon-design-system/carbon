@@ -11,50 +11,48 @@
 @import '@carbon/layout/scss/spacing';
 @import '@carbon/type/scss/styles';
 
-.example > .bx--css-grid,
-.example > .bx--css-grid--12 {
-  // background-color: #d0e2ff;
-  border: 1px dashed black;
+@import '~carbon-components/scss/globals/scss/vars';
+
+// Grid
+.bx--css-grid {
+  background-color: $blue-20;
+  outline: 1px dashed $blue-40;
 }
 
-.example .bx--subgrid,
-.subgrid {
-  background-color: rgba(#ffe056, 0.25);
-  outline: 1px solid #ffe056;
+.bx--css-grid.bx--css-grid--narrow {
+  background-color: $teal-20;
+  outline: 1px dashed $teal-40;
 }
 
-.example .content,
-.column {
-  background-color: #edf4ff;
-  outline: 1px solid #a6c8ff;
+.bx--css-grid.bx--css-grid--condensed {
+  background-color: $purple-20;
+  outline: 1px dashed $purple-40;
 }
 
-.example .content {
+// Only use background for subgrid example, not other subgrids in "mixed modes" example or others
+.bx--subgrid.example {
+  background-color: $green-20;
+}
+
+// Columns
+.bx--css-grid > [class*='col'],
+.bx--subgrid > [class*='col'] {
   min-height: 80px;
 }
 
-h2, h3, p {
-  $heading-spacing: $carbon--layout-01;
-
-  margin-top: $heading-spacing;
-  margin-bottom: $heading-spacing;
+.bx--css-grid > [class*='col'] {
+  background: $blue-10;
 }
 
-h2 {
-  @include carbon--type-style($name: productive-heading-03);
+.bx--subgrid > [class*='col'] {
+  background: $green-10;
+  outline: 1px dashed $green-30;
 }
 
-h3 {
-  @include carbon--type-style($name: productive-heading-01);
+.bx--css-grid.bx--css-grid--narrow > [class*='col'] {
+  background: $teal-10;
 }
 
-p {
-  @include carbon--type-style($name: body-short-02);
-}
-
-.content-focused {
-  display: grid;
-  grid-template-columns: max-content 1fr;
-  grid-column-gap: var(--cds-grid-gutter);
-  grid-row-gap: var(--cds-grid-margin);
+.bx--css-grid.bx--css-grid--condensed > [class*='col'] {
+  background: $purple-10;
 }
