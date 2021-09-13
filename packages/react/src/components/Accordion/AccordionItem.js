@@ -85,11 +85,13 @@ function AccordionItem({
         onKeyDown={onKeyDown}
         type="button">
         <ChevronRight16 className={`${prefix}--accordion__arrow`} />
-        <div className={`${prefix}--accordion__title`}>{title}</div>
+        <Text as="div" className={`${prefix}--accordion__title`}>
+          {title}
+        </Text>
       </Expando>
-      <Text as="div" id={id} className={`${prefix}--accordion__content`}>
+      <div id={id} className={`${prefix}--accordion__content`}>
         {children}
-      </Text>
+      </div>
     </li>
   );
 }
