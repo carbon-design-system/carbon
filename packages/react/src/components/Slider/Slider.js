@@ -14,6 +14,7 @@ import throttle from 'lodash.throttle';
 import * as keys from '../../internal/keyboard/keys';
 import { matches } from '../../internal/keyboard/match';
 import deprecate from '../../prop-types/deprecate';
+import { FeatureFlagContext } from '../FeatureFlags';
 
 const { prefix } = settings;
 
@@ -170,6 +171,8 @@ export default class Slider extends PureComponent {
     ariaLabelInput: 'Slider number input',
     light: false,
   };
+
+  static contextType = FeatureFlagContext;
 
   state = {
     value: this.props.value,
@@ -515,6 +518,13 @@ export default class Slider extends PureComponent {
 
     const { value, left } = this.state;
 
+    const scope = this.context;
+    let enabled;
+
+    if (scope.enabled) {
+      enabled = scope.enabled('enable-v11-release');
+    }
+
     const labelId = `${id}-label`;
     const labelClasses = classNames(`${prefix}--label`, {
       [`${prefix}--label--disabled`]: disabled,
@@ -523,7 +533,7 @@ export default class Slider extends PureComponent {
     const sliderClasses = classNames(
       `${prefix}--slider`,
       { [`${prefix}--slider--disabled`]: disabled },
-      className
+      [enabled ? null : className]
     );
 
     const inputClasses = classNames(
@@ -546,7 +556,12 @@ export default class Slider extends PureComponent {
     };
 
     return (
-      <div className={`${prefix}--form-item`}>
+      <div
+        className={
+          enabled
+            ? classNames(`${prefix}--form-item`, className)
+            : `${prefix}--form-item`
+        }>
         <label htmlFor={id} className={labelClasses} id={labelId}>
           {labelText}
         </label>

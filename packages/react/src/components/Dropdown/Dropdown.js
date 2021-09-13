@@ -19,6 +19,7 @@ import ListBox, { PropTypes as ListBoxPropTypes } from '../ListBox';
 import { mapDownshiftProps } from '../../tools/createPropAdapter';
 import mergeRefs from '../../tools/mergeRefs';
 import deprecate from '../../prop-types/deprecate';
+import { useFeatureFlag } from '../FeatureFlags';
 
 const { prefix } = settings;
 
@@ -86,16 +87,22 @@ const Dropdown = React.forwardRef(function Dropdown(
   const inline = type === 'inline';
   const showWarning = !invalid && warn;
 
-  const className = cx(`${prefix}--dropdown`, containerClassName, {
-    [`${prefix}--dropdown--invalid`]: invalid,
-    [`${prefix}--dropdown--warning`]: showWarning,
-    [`${prefix}--dropdown--open`]: isOpen,
-    [`${prefix}--dropdown--inline`]: inline,
-    [`${prefix}--dropdown--disabled`]: disabled,
-    [`${prefix}--dropdown--light`]: light,
-    [`${prefix}--dropdown--${size}`]: size,
-    [`${prefix}--list-box--up`]: direction === 'top',
-  });
+  const enabled = useFeatureFlag('enable-v11-release');
+
+  const className = cx(
+    `${prefix}--dropdown`,
+    [enabled ? null : containerClassName],
+    {
+      [`${prefix}--dropdown--invalid`]: invalid,
+      [`${prefix}--dropdown--warning`]: showWarning,
+      [`${prefix}--dropdown--open`]: isOpen,
+      [`${prefix}--dropdown--inline`]: inline,
+      [`${prefix}--dropdown--disabled`]: disabled,
+      [`${prefix}--dropdown--light`]: light,
+      [`${prefix}--dropdown--${size}`]: size,
+      [`${prefix}--list-box--up`]: direction === 'top',
+    }
+  );
 
   const titleClasses = cx(`${prefix}--label`, {
     [`${prefix}--label--disabled`]: disabled,
@@ -109,6 +116,7 @@ const Dropdown = React.forwardRef(function Dropdown(
   const wrapperClasses = cx(
     `${prefix}--dropdown__wrapper`,
     `${prefix}--list-box__wrapper`,
+    [enabled ? containerClassName : null],
     {
       [`${prefix}--dropdown__wrapper--inline`]: inline,
       [`${prefix}--list-box__wrapper--inline`]: inline,

@@ -16,6 +16,7 @@ import carbonFlatpickrAppendToPlugin from './plugins/appendToPlugin';
 import carbonFlatpickrFixEventsPlugin from './plugins/fixEventsPlugin';
 import carbonFlatpickrRangePlugin from './plugins/rangePlugin';
 import { match, keys } from '../../internal/keyboard';
+import { FeatureFlagContext } from '../FeatureFlags';
 
 const { prefix } = settings;
 
@@ -292,6 +293,8 @@ export default class DatePicker extends Component {
     dateFormat: 'm/d/Y',
     locale: 'en',
   };
+
+  static contextType = FeatureFlagContext;
 
   componentDidMount() {
     const {
@@ -605,15 +608,30 @@ export default class DatePicker extends Component {
       ...other
     } = this.props;
 
-    const datePickerClasses = classNames(`${prefix}--date-picker`, className, {
-      [`${prefix}--date-picker--short`]: short,
-      [`${prefix}--date-picker--light`]: light,
-      [`${prefix}--date-picker--simple`]: datePickerType === 'simple',
-      [`${prefix}--date-picker--single`]: datePickerType === 'single',
-      [`${prefix}--date-picker--range`]: datePickerType === 'range',
-      [`${prefix}--date-picker--nolabel`]:
-        datePickerType === 'range' && this.isLabelTextEmpty(children),
-    });
+    const scope = this.context;
+    let enabled;
+
+    if (scope.enabled) {
+      enabled = scope.enabled('enable-v11-release');
+    }
+
+    const datePickerClasses = classNames(
+      `${prefix}--date-picker`,
+      [enabled ? null : className],
+      {
+        [`${prefix}--date-picker--short`]: short,
+        [`${prefix}--date-picker--light`]: light,
+        [`${prefix}--date-picker--simple`]: datePickerType === 'simple',
+        [`${prefix}--date-picker--single`]: datePickerType === 'single',
+        [`${prefix}--date-picker--range`]: datePickerType === 'range',
+        [`${prefix}--date-picker--nolabel`]:
+          datePickerType === 'range' && this.isLabelTextEmpty(children),
+      }
+    );
+
+    const wrapperClasses = classNames(`${prefix}--form-item`, [
+      enabled ? className : null,
+    ]);
 
     const childArray = React.Children.toArray(children);
     const childrenWithProps = childArray.map((child, index) => {
@@ -649,7 +667,7 @@ export default class DatePicker extends Component {
       }
     });
     return (
-      <div className={`${prefix}--form-item`}>
+      <div className={wrapperClasses}>
         <div className={datePickerClasses} {...other}>
           {childrenWithProps}
         </div>
