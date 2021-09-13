@@ -263,14 +263,6 @@ Button.propTypes = {
   disabled: PropTypes.bool,
 
   /**
-   * Deprecated in v11. Use 'onClick' instead.
-   */
-  handleClick: deprecate(
-    PropTypes.func,
-    'The handleClick prop for Button has been deprecated in favor of onClick. It will be removed in the next major release.'
-  ),
-
-  /**
    * Specify if the button is an icon-only button
    */
   hasIconOnly: PropTypes.bool,
