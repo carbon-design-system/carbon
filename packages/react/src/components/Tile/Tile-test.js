@@ -18,6 +18,7 @@ import { shallow, mount } from 'enzyme';
 import { settings } from 'carbon-components';
 
 const { prefix } = settings;
+let nativeResizeObserver = null;
 
 describe('Tile', () => {
   describe('Renders default tile as expected', () => {
@@ -236,6 +237,19 @@ describe('Tile', () => {
   });
 
   describe('Renders expandable tile as expected', () => {
+    window.ResizeObserver = jest.fn(() => {
+      return {
+        observe: jest.fn(),
+        unobserve: jest.fn(),
+      };
+    });
+
+    nativeResizeObserver = window.ResizeObserver;
+
+    afterAll(() => {
+      window.ResizeObserver = nativeResizeObserver;
+    });
+
     const wrapper = mount(
       <ExpandableTile className="extra-class">
         <TileAboveTheFoldContent className="child">
@@ -250,22 +264,8 @@ describe('Tile', () => {
       </ExpandableTile>
     );
 
-    let nativeResizeObserver = null;
-
     beforeEach(() => {
       wrapper.state().expanded = false;
-
-      nativeResizeObserver = window.ResizeObserver;
-      window.ResizeObserver = jest.fn(() => {
-        return {
-          observe: jest.fn(),
-          unobserve: jest.fn(),
-        };
-      });
-    });
-
-    afterEach(() => {
-      window.ResizeObserver = nativeResizeObserver;
     });
 
     it('renders children as expected', () => {
