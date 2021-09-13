@@ -188,7 +188,6 @@ Map {
       "disabled": Object {
         "type": "bool",
       },
-      "handleClick": [Function],
       "hasIconOnly": Object {
         "type": "bool",
       },
