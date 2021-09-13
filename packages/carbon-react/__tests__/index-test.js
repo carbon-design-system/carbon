@@ -18,6 +18,7 @@ Array [
   "Accordion",
   "AccordionItem",
   "AccordionSkeleton",
+  "ActionableNotification",
   "AspectRatio",
   "Breadcrumb",
   "BreadcrumbItem",

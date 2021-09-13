@@ -286,7 +286,7 @@
 
   .#{$prefix}--actionable-notification:not(.#{$prefix}--actionable-notification--low-contrast)
     .#{$prefix}--actionable-notification__action-button.#{$prefix}--btn--tertiary:hover {
-    color: $notification-action-tertiary-inverse-text; // TODO - this value isn't changing with the theme, and I don't know why
+    color: $notification-action-tertiary-inverse-text;
   }
 
   .#{$prefix}--actionable-notification:not(.#{$prefix}--actionable-notification--low-contrast)
@@ -295,14 +295,14 @@
     background-color: $notification-action-tertiary-inverse;
     box-shadow: inset 0 0 0 button-vars.$button-outline-width $focus-inverse,
       inset 0 0 0 button-vars.$button-border-width $background-inverse;
-    color: $notification-action-tertiary-inverse-text; // TODO - this value isn't changing with the theme, and I don't know why
+    color: $notification-action-tertiary-inverse-text;
   }
 
   .#{$prefix}--actionable-notification:not(.#{$prefix}--actionable-notification--low-contrast)
     .#{$prefix}--actionable-notification__action-button.#{$prefix}--btn--tertiary:active {
     border-color: transparent;
-    background-color: $notification-action-tertiary-inverse-active; // TODO - this value isn't changing with the theme, and I don't know why
-    color: $notification-action-tertiary-inverse-text; // TODO - this value isn't changing with the theme, and I don't know why
+    background-color: $notification-action-tertiary-inverse-active;
+    color: $notification-action-tertiary-inverse-text;
   }
 
   .#{$prefix}--actionable-notification:not(.#{$prefix}--actionable-notification--low-contrast)

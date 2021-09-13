@@ -145,11 +145,6 @@ $notification-action-tertiary-inverse: (
   ),
 ) !default;
 
-// TODO - this confirms that the values are different per theme, but why aren't they being applied correctly?
-@debug map.get(button-tokens.$g100, button-tertiary-active);
-@debug map.get(button-tokens.$g90, button-tertiary-active);
-@debug map.get(button-tokens.$g10, button-tertiary-active);
-@debug map.get(button-tokens.$white, button-tertiary-active);
 $notification-action-tertiary-inverse-active: (
   fallback: map.get(button-tokens.$white, button-tertiary-active),
   values: (

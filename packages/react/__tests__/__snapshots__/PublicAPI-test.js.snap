@@ -4310,6 +4310,11 @@ Map {
     },
     "render": [Function],
   },
+  "ActionableNotification" => Object {
+    "$$typeof": Symbol(react.forward_ref),
+    "displayName": "FeatureToggle(ActionableNotification)",
+    "render": [Function],
+  },
   "ToastNotification" => Object {
     "$$typeof": Symbol(react.forward_ref),
     "displayName": "FeatureToggle(ToastNotification)",
