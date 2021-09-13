@@ -5,12 +5,16 @@ exports[`AccordionSkeleton should render 1`] = `
   align="end"
   count={4}
   open={true}
+  testId="accordionSkeleton"
 >
   <ul
     className="bx--accordion bx--skeleton bx--accordion--end"
+    data-testid="accordionSkeleton"
   >
     <li
       className="bx--accordion__item bx--accordion__item--active"
+      data-testid="accordionSkeleton-open-item"
+      open={true}
     >
       <span
         className="bx--accordion__heading"
@@ -113,9 +117,11 @@ exports[`AccordionSkeleton should render 1`] = `
     </li>
     <AccordionSkeletonItem
       key="0"
+      testId="accordionSkeleton-item-0"
     >
       <li
         className="bx--accordion__item"
+        data-testid="accordionSkeleton-item-0"
       >
         <span
           className="bx--accordion__heading"
@@ -170,9 +176,11 @@ exports[`AccordionSkeleton should render 1`] = `
     </AccordionSkeletonItem>
     <AccordionSkeletonItem
       key="1"
+      testId="accordionSkeleton-item-1"
     >
       <li
         className="bx--accordion__item"
+        data-testid="accordionSkeleton-item-1"
       >
         <span
           className="bx--accordion__heading"
@@ -227,9 +235,11 @@ exports[`AccordionSkeleton should render 1`] = `
     </AccordionSkeletonItem>
     <AccordionSkeletonItem
       key="2"
+      testId="accordionSkeleton-item-2"
     >
       <li
         className="bx--accordion__item"
+        data-testid="accordionSkeleton-item-2"
       >
         <span
           className="bx--accordion__heading"

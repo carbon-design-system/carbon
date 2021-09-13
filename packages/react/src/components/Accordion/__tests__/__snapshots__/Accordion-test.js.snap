@@ -4,14 +4,17 @@ exports[`Accordion should render 1`] = `
 <DocumentFragment>
   <ul
     class="bx--accordion extra-class bx--accordion--end"
+    data-testid="accordion"
   >
     <li
       class="bx--accordion__item child"
+      data-testid="accordionItem"
     >
       <button
-        aria-controls="accordion-item-1"
+        aria-controls="accordion-item-7"
         aria-expanded="false"
         class="bx--accordion__heading"
+        data-testid="accordionItem-expando"
         type="button"
       >
         <svg
@@ -37,18 +40,21 @@ exports[`Accordion should render 1`] = `
       </button>
       <div
         class="bx--accordion__content"
-        id="accordion-item-1"
+        data-testid="accordionItem-content"
+        id="accordion-item-7"
       >
         Panel A
       </div>
     </li>
     <li
       class="bx--accordion__item child"
+      data-testid="accordionItem"
     >
       <button
-        aria-controls="accordion-item-2"
+        aria-controls="accordion-item-8"
         aria-expanded="false"
         class="bx--accordion__heading"
+        data-testid="accordionItem-expando"
         type="button"
       >
         <svg
@@ -74,18 +80,21 @@ exports[`Accordion should render 1`] = `
       </button>
       <div
         class="bx--accordion__content"
-        id="accordion-item-2"
+        data-testid="accordionItem-content"
+        id="accordion-item-8"
       >
         Panel B
       </div>
     </li>
     <li
       class="bx--accordion__item child"
+      data-testid="accordionItem"
     >
       <button
-        aria-controls="accordion-item-3"
+        aria-controls="accordion-item-9"
         aria-expanded="false"
         class="bx--accordion__heading"
+        data-testid="accordionItem-expando"
         type="button"
       >
         <svg
@@ -111,7 +120,8 @@ exports[`Accordion should render 1`] = `
       </button>
       <div
         class="bx--accordion__content"
-        id="accordion-item-3"
+        data-testid="accordionItem-content"
+        id="accordion-item-9"
       >
         Panel C
       </div>

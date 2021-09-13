@@ -5,6 +5,7 @@ Map {
   "Accordion" => Object {
     "defaultProps": Object {
       "align": "end",
+      "testId": "accordion",
     },
     "propTypes": Object {
       "align": Object {
@@ -36,6 +37,9 @@ Map {
         ],
         "type": "oneOf",
       },
+      "testId": Object {
+        "type": "string",
+      },
     },
   },
   "AccordionItem" => Object {
@@ -61,6 +65,9 @@ Map {
       },
       "renderExpando": Object {
         "type": "func",
+      },
+      "testId": Object {
+        "type": "string",
       },
       "title": Object {
         "type": "node",
@@ -7176,6 +7183,7 @@ Map {
       "align": "end",
       "count": 4,
       "open": true,
+      "testId": "accordionSkeleton",
     },
     "propTypes": Object {
       "align": Object {
@@ -7195,6 +7203,9 @@ Map {
       },
       "open": Object {
         "type": "bool",
+      },
+      "testId": Object {
+        "type": "string",
       },
       "uid": [Function],
     },

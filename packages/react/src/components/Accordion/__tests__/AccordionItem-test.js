@@ -18,6 +18,29 @@ const { prefix } = settings;
 describe('AccordionItem', () => {
   afterEach(cleanup);
 
+  it('should get default testIds', () => {
+    const wrapper = mount(
+      <AccordionItem title="A heading">Lorem ipsum.</AccordionItem>
+    );
+
+    expect(wrapper.find('[data-testid="accordionItem"]')).toHaveLength(1);
+    expect(wrapper.find('[data-testid="accordionItem-expando"]')).toHaveLength(
+      1
+    );
+    expect(wrapper.find('[data-testid="accordionItem-content"]')).toHaveLength(
+      1
+    );
+  });
+
+  it('should use provided testId', () => {
+    const wrapper = mount(
+      <AccordionItem testId="test-1">Lorem ipsum.</AccordionItem>
+    );
+    expect(wrapper.find('[data-testid="test-1"]')).toHaveLength(1);
+    expect(wrapper.find('[data-testid="test-1-expando"]')).toHaveLength(1);
+    expect(wrapper.find('[data-testid="test-1-content"]')).toHaveLength(1);
+  });
+
   it('should render', () => {
     const wrapper = mount(
       <AccordionItem title="A heading" className="extra-class">

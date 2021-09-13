@@ -15,17 +15,20 @@ import { useId } from '../../internal/useId';
 import deprecate from '../../prop-types/deprecate.js';
 
 const { prefix } = settings;
-const defaultRenderExpando = (props) => <button type="button" {...props} />;
+const defaultRenderExpando = ({ testId, ...props }) => (
+  <button type="button" data-testid={testId} {...props} />
+);
 
 function AccordionItem({
   children,
   className: customClassName,
+  disabled,
   iconDescription, // eslint-disable-line
   open = false,
   onHeadingClick,
   renderExpando: Expando = defaultRenderExpando,
+  testId = 'accordionItem',
   title = 'title',
-  disabled,
   ...rest
 }) {
   const [isOpen, setIsOpen] = useState(open);
@@ -74,7 +77,11 @@ function AccordionItem({
   }
 
   return (
-    <li className={className} {...rest} onAnimationEnd={handleAnimationEnd}>
+    <li
+      className={className}
+      data-testid={testId}
+      {...rest}
+      onAnimationEnd={handleAnimationEnd}>
       <Expando
         disabled={disabled}
         aria-controls={id}
@@ -82,11 +89,15 @@ function AccordionItem({
         className={`${prefix}--accordion__heading`}
         onClick={onClick}
         onKeyDown={onKeyDown}
-        type="button">
+        type="button"
+        testId={`${testId}-expando`}>
         <ChevronRight16 className={`${prefix}--accordion__arrow`} />
         <div className={`${prefix}--accordion__title`}>{title}</div>
       </Expando>
-      <div id={id} className={`${prefix}--accordion__content`}>
+      <div
+        id={id}
+        className={`${prefix}--accordion__content`}
+        data-testid={`${testId}-content`}>
         {children}
       </div>
     </li>
@@ -140,6 +151,11 @@ AccordionItem.propTypes = {
    * Can be a React component class.
    */
   renderExpando: PropTypes.func,
+
+  /**
+   * Id that can be used for testing. Will be added as data-testid attribute to the li element.
+   */
+  testId: PropTypes.string,
 
   /**
    * The accordion title.

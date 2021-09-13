@@ -14,6 +14,32 @@ import SkeletonText from '../../SkeletonText';
 const { prefix } = settings;
 
 describe('AccordionSkeleton', () => {
+  it('should get default testIds', () => {
+    const wrapper = mount(<AccordionSkeleton />);
+    expect(wrapper.find('[data-testid="accordionSkeleton"]')).toHaveLength(1);
+    expect(
+      wrapper.find('[data-testid="accordionSkeleton-open-item"]')
+    ).toHaveLength(1);
+    expect(
+      wrapper.find('[data-testid="accordionSkeleton-item-0"]')
+    ).toHaveLength(1);
+    expect(
+      wrapper.find('[data-testid="accordionSkeleton-item-1"]')
+    ).toHaveLength(1);
+    expect(
+      wrapper.find('[data-testid="accordionSkeleton-item-2"]')
+    ).toHaveLength(1);
+  });
+
+  it('should use provided testId', () => {
+    const wrapper = mount(<AccordionSkeleton testId="test-1" />);
+    expect(wrapper.find('[data-testid="test-1"]')).toHaveLength(1);
+    expect(wrapper.find('[data-testid="test-1-open-item"]')).toHaveLength(1);
+    expect(wrapper.find('[data-testid="test-1-item-0"]')).toHaveLength(1);
+    expect(wrapper.find('[data-testid="test-1-item-1"]')).toHaveLength(1);
+    expect(wrapper.find('[data-testid="test-1-item-2"]')).toHaveLength(1);
+  });
+
   it('should render', () => {
     const wrapper = mount(<AccordionSkeleton />);
     expect(wrapper).toMatchSnapshot();

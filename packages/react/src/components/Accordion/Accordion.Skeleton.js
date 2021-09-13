@@ -15,15 +15,17 @@ import deprecate from '../../prop-types/deprecate';
 
 const { prefix } = settings;
 
-function AccordionSkeleton({ align, open, count, className, ...rest }) {
+function AccordionSkeleton({ align, open, count, className, testId, ...rest }) {
   const classes = cx(`${prefix}--accordion`, `${prefix}--skeleton`, className, {
     [`${prefix}--accordion--${align}`]: align,
   });
   const numSkeletonItems = open ? count - 1 : count;
   return (
-    <ul className={classes} {...rest}>
+    <ul className={classes} data-testid={testId} {...rest}>
       {open && (
         <li
+          data-testid={`${testId}-open-item`}
+          open
           className={`${prefix}--accordion__item ${prefix}--accordion__item--active`}>
           <span className={`${prefix}--accordion__heading`}>
             <ChevronRight16 className={`${prefix}--accordion__arrow`} />
@@ -37,7 +39,7 @@ function AccordionSkeleton({ align, open, count, className, ...rest }) {
         </li>
       )}
       {Array.from({ length: numSkeletonItems }).map((_, i) => (
-        <AccordionSkeletonItem key={i} />
+        <AccordionSkeletonItem key={i} testId={`${testId}-item-${i}`} />
       ))}
     </ul>
   );
@@ -65,6 +67,11 @@ AccordionSkeleton.propTypes = {
   open: PropTypes.bool,
 
   /**
+   * Id that can be used for testing. Will be added as data-testid attribute to the ul element.
+   */
+  testId: PropTypes.string,
+
+  /**
    * Set unique identifier to generate unique item keys
    */
   uid: deprecate(PropTypes.any),
@@ -74,11 +81,12 @@ AccordionSkeleton.defaultProps = {
   open: true,
   count: 4,
   align: 'end',
+  testId: 'accordionSkeleton',
 };
 
-function AccordionSkeletonItem() {
+function AccordionSkeletonItem({ testId }) {
   return (
-    <li className={`${prefix}--accordion__item`}>
+    <li className={`${prefix}--accordion__item`} data-testid={testId}>
       <span className={`${prefix}--accordion__heading`}>
         <ChevronRight16 className={`${prefix}--accordion__arrow`} />
         <SkeletonText className={`${prefix}--accordion__title`} />
@@ -86,5 +94,8 @@ function AccordionSkeletonItem() {
     </li>
   );
 }
+AccordionSkeletonItem.propTypes = {
+  testId: PropTypes.string,
+};
 
 export default AccordionSkeleton;

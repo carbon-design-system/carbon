@@ -13,6 +13,42 @@ import userEvent from '@testing-library/user-event';
 describe('Accordion', () => {
   afterEach(cleanup);
 
+  it('should get a default testId', () => {
+    render(
+      <Accordion className="extra-class">
+        <AccordionItem className="child" title="Heading A">
+          Panel A
+        </AccordionItem>
+        <AccordionItem className="child" title="Heading B">
+          Panel B
+        </AccordionItem>
+        <AccordionItem className="child" title="Heading C">
+          Panel C
+        </AccordionItem>
+      </Accordion>
+    );
+
+    expect(screen.getByTestId('accordion')).toBeDefined();
+  });
+
+  it('should use provided testId', () => {
+    render(
+      <Accordion className="extra-class" testId="test-1">
+        <AccordionItem className="child" title="Heading A">
+          Panel A
+        </AccordionItem>
+        <AccordionItem className="child" title="Heading B">
+          Panel B
+        </AccordionItem>
+        <AccordionItem className="child" title="Heading C">
+          Panel C
+        </AccordionItem>
+      </Accordion>
+    );
+
+    expect(screen.getByTestId('test-1')).toBeDefined();
+  });
+
   it('should render', () => {
     const { asFragment } = render(
       <Accordion className="extra-class">

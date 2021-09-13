@@ -7,20 +7,23 @@ exports[`AccordionItem should render 1`] = `
 >
   <li
     className="bx--accordion__item extra-class"
+    data-testid="accordionItem"
     onAnimationEnd={[Function]}
   >
     <defaultRenderExpando
-      aria-controls="accordion-item-1"
+      aria-controls="accordion-item-3"
       aria-expanded={false}
       className="bx--accordion__heading"
       onClick={[Function]}
       onKeyDown={[Function]}
+      testId="accordionItem-expando"
       type="button"
     >
       <button
-        aria-controls="accordion-item-1"
+        aria-controls="accordion-item-3"
         aria-expanded={false}
         className="bx--accordion__heading"
+        data-testid="accordionItem-expando"
         onClick={[Function]}
         onKeyDown={[Function]}
         type="button"
@@ -63,7 +66,8 @@ exports[`AccordionItem should render 1`] = `
     </defaultRenderExpando>
     <div
       className="bx--accordion__content"
-      id="accordion-item-1"
+      data-testid="accordionItem-content"
+      id="accordion-item-3"
     >
       Lorem ipsum.
     </div>

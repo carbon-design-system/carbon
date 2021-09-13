@@ -18,6 +18,7 @@ function Accordion({
   className: customClassName,
   disabled,
   size,
+  testId,
   ...rest
 }) {
   const className = cx(`${prefix}--accordion`, customClassName, {
@@ -25,7 +26,7 @@ function Accordion({
     [`${prefix}--accordion--${size}`]: size,
   });
   return (
-    <ul className={className} {...rest}>
+    <ul className={className} data-testid={testId} {...rest}>
       {disabled
         ? React.Children.toArray(children).map((child) => {
             return React.cloneElement(child, { disabled });
@@ -37,6 +38,7 @@ function Accordion({
 
 Accordion.defaultProps = {
   align: 'end',
+  testId: 'accordion',
 };
 
 Accordion.propTypes = {
@@ -65,6 +67,11 @@ Accordion.propTypes = {
    * TODO V11: remove `xl` (replaced with lg)
    */
   size: PropTypes.oneOf(['sm', 'md', 'lg', 'xl']),
+
+  /**
+   * Id that can be used for testing. Will be added as data-testid attribute to the ul element.
+   */
+  testId: PropTypes.string,
 };
 
 export default Accordion;
