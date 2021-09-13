@@ -21,6 +21,7 @@ import { match, keys } from '../../internal/keyboard';
 import setupGetInstanceId from '../../tools/setupGetInstanceId';
 import { mapDownshiftProps } from '../../tools/createPropAdapter';
 import mergeRefs from '../../tools/mergeRefs';
+import { useFeatureFlag } from '../FeatureFlags';
 
 const { prefix } = settings;
 
@@ -190,11 +191,17 @@ const ComboBox = React.forwardRef((props, ref) => {
     }
   };
 
+  const enabled = useFeatureFlag('enable-v11-release');
+
   const showWarning = !invalid && warn;
-  const className = cx(`${prefix}--combo-box`, containerClassName, {
-    [`${prefix}--list-box--up`]: direction === 'top',
-    [`${prefix}--combo-box--warning`]: showWarning,
-  });
+  const className = cx(
+    `${prefix}--combo-box`,
+    [enabled ? null : containerClassName],
+    {
+      [`${prefix}--list-box--up`]: direction === 'top',
+      [`${prefix}--combo-box--warning`]: showWarning,
+    }
+  );
   const titleClasses = cx(`${prefix}--label`, {
     [`${prefix}--label--disabled`]: disabled,
   });
@@ -204,7 +211,10 @@ const ComboBox = React.forwardRef((props, ref) => {
   const helperClasses = cx(`${prefix}--form__helper-text`, {
     [`${prefix}--form__helper-text--disabled`]: disabled,
   });
-  const wrapperClasses = cx(`${prefix}--list-box__wrapper`);
+  const wrapperClasses = cx(`${prefix}--list-box__wrapper`, [
+    enabled ? containerClassName : null,
+  ]);
+
   const inputClasses = cx(`${prefix}--text-input`, {
     [`${prefix}--text-input--empty`]: !inputValue,
   });
