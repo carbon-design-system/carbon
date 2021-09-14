@@ -336,6 +336,7 @@ export const BatchExpansion = () => (
               <TableExpandHeader
                 enableExpando={true}
                 {...getExpandHeaderProps()}
+                ariaLabel={undefined}
               />
               {headers.map((header, i) => (
                 <TableHeader key={i} {...getHeaderProps({ header })}>

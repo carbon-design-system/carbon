@@ -8,6 +8,7 @@
 import cx from 'classnames';
 import PropTypes from 'prop-types';
 import requiredIfGivenPropIsTruthy from '../../prop-types/requiredIfGivenPropIsTruthy';
+import deprecate from '../../prop-types/deprecate';
 import React from 'react';
 import { ChevronRight16 } from '@carbon/icons-react';
 import { settings } from 'carbon-components';
@@ -18,6 +19,7 @@ const TableExpandHeader = ({
   ariaLabel,
   className: headerClassName,
   enableExpando,
+  enableToggle,
   isExpanded,
   onExpand,
   expandIconDescription,
@@ -33,7 +35,7 @@ const TableExpandHeader = ({
       className={className}
       data-previous-value={previousValue}
       {...rest}>
-      {!enableExpando ? null : (
+      {enableExpando || enableToggle ? (
         <button
           type="button"
           className={`${prefix}--table-expand__button`}
@@ -45,7 +47,20 @@ const TableExpandHeader = ({
             aria-label={expandIconDescription}
           />
         </button>
-      )}
+      ) : null}
+      {/* {!enableExpando ? null : (
+        <button
+          type="button"
+          className={`${prefix}--table-expand__button`}
+          onClick={onExpand}
+          title={expandIconDescription}
+          aria-label={ariaLabel}>
+          <ChevronRight16
+            className={`${prefix}--table-expand__svg`}
+            aria-label={expandIconDescription}
+          />
+        </button>
+      )} */}
       {children}
     </th>
   );
@@ -56,7 +71,11 @@ TableExpandHeader.propTypes = {
    * Specify the string read by a voice reader when the expand trigger is
    * focused
    */
-  ariaLabel: requiredIfGivenPropIsTruthy('enableExpando', PropTypes.string),
+  ariaLabel: PropTypes.oneOfType([
+    requiredIfGivenPropIsTruthy('enableExpando', PropTypes.string),
+    requiredIfGivenPropIsTruthy('enableToggle', PropTypes.string),
+  ]),
+  // ariaLabel: requiredIfGivenPropIsTruthy('enableExpando', PropTypes.string),
   children: PropTypes.node,
 
   className: PropTypes.string,
@@ -64,7 +83,16 @@ TableExpandHeader.propTypes = {
   /**
    * Specify whether an expand all button should be displayed
    */
-  enableExpando: PropTypes.bool,
+  // enableExpando:PropTypes.bool,
+  enableExpando: deprecate(
+    PropTypes.bool,
+    'The `renableExpando` prop has been deprecated in favor of `enableToggle`. This prop will be removed in the next major release.'
+  ),
+
+  /**
+   * Specify whether an expand all button should be displayed
+   */
+  enableToggle: PropTypes.bool,
 
   /**
    * The description of the chevron right icon, to be put in its SVG `<title>` element.
@@ -75,12 +103,18 @@ TableExpandHeader.propTypes = {
    * Specify whether this row is expanded or not. This helps coordinate data
    * attributes so that `TableExpandRow` and `TableExpandedRow` work together
    */
-  isExpanded: requiredIfGivenPropIsTruthy('enableExpando', PropTypes.bool),
+  isExpanded: PropTypes.oneOfType([
+    requiredIfGivenPropIsTruthy('enableExpando', PropTypes.bool),
+    requiredIfGivenPropIsTruthy('enableToggle', PropTypes.bool),
+  ]),
 
   /**
    * Hook for when a listener initiates a request to expand the given row
    */
-  onExpand: requiredIfGivenPropIsTruthy('enableExpando', PropTypes.func),
+  onExpand: PropTypes.oneOfType([
+    requiredIfGivenPropIsTruthy('enableExpando', PropTypes.func),
+    requiredIfGivenPropIsTruthy('enableToggle', PropTypes.func),
+  ]),
 };
 
 export default TableExpandHeader;
