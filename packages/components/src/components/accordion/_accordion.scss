@@ -25,11 +25,11 @@
 
   .#{$prefix}--accordion__item {
     overflow: visible;
-    border-top: 1px solid $border-subtle;
+    border-top: 1px solid $ui-03;
     transition: all $duration--fast-02 motion(standard, productive);
 
     &:last-child {
-      border-bottom: 1px solid $border-subtle;
+      border-bottom: 1px solid $ui-03;
     }
   }
 
@@ -45,7 +45,7 @@
     justify-content: $accordion-justify-content;
     padding: rem(10px) 0;
     margin: 0;
-    color: $text-primary;
+    color: $text-01;
     cursor: pointer;
     transition: background-color motion(standard, productive) $duration--fast-02;
 
@@ -60,7 +60,7 @@
     }
 
     &:hover::before {
-      background-color: $background-hover;
+      background-color: $hover-ui;
     }
 
     &:focus {
@@ -86,12 +86,12 @@
 
   // Disabled styles
   .#{$prefix}--accordion__heading[disabled] {
-    color: $text-disabled;
+    color: $disabled-02;
     cursor: not-allowed;
   }
 
   .#{$prefix}--accordion__heading[disabled] .#{$prefix}--accordion__arrow {
-    fill: $icon-disabled;
+    fill: $disabled-02;
   }
 
   .#{$prefix}--accordion__heading[disabled]:hover::before {
@@ -100,11 +100,11 @@
 
   .#{$prefix}--accordion__item--disabled,
   .#{$prefix}--accordion__item--disabled + .#{$prefix}--accordion__item {
-    border-top: 1px solid $border-disabled;
+    border-top: 1px solid $disabled-01;
   }
 
   li.#{$prefix}--accordion__item--disabled:last-of-type {
-    border-bottom: 1px solid $border-disabled;
+    border-bottom: 1px solid $disabled-01;
   }
 
   .#{$prefix}--accordion__arrow {
@@ -116,7 +116,7 @@
     // <16px and cause the icon to render in the incorrect artboard size
     flex: 0 0 1rem;
     margin: $accordion-arrow-margin;
-    fill: $icon-primary;
+    fill: $ui-05;
     transform: rotate(-270deg) #{'/*rtl:ignore*/'};
     transition: all $duration--fast-02 motion(standard, productive);
   }
@@ -192,7 +192,7 @@
     }
 
     .#{$prefix}--accordion__arrow {
-      fill: $icon-primary;
+      fill: $ui-05;
       transform: rotate(-90deg) #{'/*rtl:ignore*/'};
     }
   }
@@ -205,7 +205,7 @@
 
   .#{$prefix}--accordion.#{$prefix}--skeleton .#{$prefix}--accordion__arrow {
     cursor: default;
-    fill: $icon-primary;
+    fill: $ui-05;
     pointer-events: none;
 
     &:hover,

@@ -10,6 +10,7 @@ import React from 'react';
 import classNames from 'classnames';
 import { useFeatureFlag } from '../FeatureFlags';
 import { settings } from 'carbon-components';
+import deprecate from '../../prop-types/deprecate';
 
 const { prefix } = settings;
 
@@ -27,17 +28,20 @@ const Checkbox = React.forwardRef(function Checkbox(
   },
   ref
 ) {
-  const labelClasses = classNames(`${prefix}--checkbox-label`, className);
+  const enabled = useFeatureFlag('enable-v11-release');
+
+  const labelClasses = classNames(`${prefix}--checkbox-label`, [
+    enabled ? null : className,
+  ]);
   const innerLabelClasses = classNames(`${prefix}--checkbox-label-text`, {
     [`${prefix}--visually-hidden`]: hideLabel,
   });
+
   const wrapperClasses = classNames(
     `${prefix}--form-item`,
     `${prefix}--checkbox-wrapper`,
-    wrapperClassName
+    [enabled ? className : wrapperClassName]
   );
-
-  const enabled = useFeatureFlag('enable-v11-release');
 
   return (
     <div className={wrapperClasses}>
@@ -127,7 +131,10 @@ Checkbox.propTypes = {
   /**
    * The CSS class name to be placed on the wrapping element
    */
-  wrapperClassName: PropTypes.string,
+  wrapperClassName: deprecate(
+    PropTypes.string,
+    `\nThe prop \`wrapperClassName\` for Checkbox will be deprecated in V11 in favor of \`className\`. \`className\` will then be placed on the outer wrapper.`
+  ),
 };
 
 Checkbox.defaultProps = {

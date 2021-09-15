@@ -130,7 +130,7 @@ class SideNav extends mixin(createComponent, initComponentBySearch, handles) {
   /**
    * The component options.
    * If `options` is specified in the constructor, {@linkcode SideNav.create .create()}, or {@linkcode SideNav.init .init()},
-   * properties in this object are overriden for the instance being create and how {@linkcode SideNav.init .init()} works.
+   * properties in this object are overridden for the instance being create and how {@linkcode SideNav.init .init()} works.
    * @member SideNav.options
    * @type {object}
    * @property {string} selectorInit The data attribute to find side navs.

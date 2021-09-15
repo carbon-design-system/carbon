@@ -31,11 +31,18 @@ but can be unexpected.
     WSL)
     - `sudo umount /mnt/c`
     - `sudo mount -t drvfs C: /mnt/c -o metadata`
-12. Change directories into your projects folder
+12. Increase Linux OS limits to avoid errors in build process (limited by WSL by
+    default).
+    - https://muhammadtriwibowo.medium.com/set-permanently-ulimit-n-open-files-in-ubuntu-4d61064429a
+    - `ulimit -l 65536` -> Increases the maximum amount of locked memory
+      available to OS
+    - `ulimit -n 1048576` -> Increases the maximum amount of files that can be
+      in an open state
+13. Change directories into your projects folder
     `cd /mnt/c/Users/{username}/projects` (Only an example, use whatever you'd
     like)
-13. Clone our repo
+14. Clone our repo
     `git clone https://github.com/carbon-design-system/carbon.git`
-14. In the root folder of your freshly cloned repo install and build
+15. In the root folder of your freshly cloned repo install and build
     - `yarn install`
     - `yarn build`

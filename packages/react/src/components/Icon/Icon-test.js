@@ -46,15 +46,15 @@ describe('Icon', () => {
       expect(wrapper.props().className).toEqual('extra-class');
     });
 
-    it('should recieve width props', () => {
+    it('should receive width props', () => {
       expect(wrapper.props().width).toEqual('20');
     });
 
-    it('should recieve height props', () => {
+    it('should receive height props', () => {
       expect(wrapper.props().height).toEqual('20');
     });
 
-    it('should recieve style props', () => {
+    it('should receive style props', () => {
       expect(wrapper.props().style).toEqual({ transition: '2s' });
     });
   });

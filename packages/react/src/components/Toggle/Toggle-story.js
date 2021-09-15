@@ -40,23 +40,34 @@ export default {
 };
 
 export const Default = () => (
+  <>
+    <Toggle
+      labelText="Toggle (md)"
+      size="md"
+      labelA="Off"
+      labelB="On"
+      defaultToggled
+      className="some-class"
+      id="toggle-1"
+    />
+    <br />
+    <Toggle
+      labelText="Toggle (sm)"
+      size="sm"
+      defaultToggled
+      className="some-class"
+      id="toggle-2"
+    />
+  </>
+);
+
+export const Playground = () => (
   <Toggle
     defaultToggled
     {...toggleProps()}
     className="some-class"
-    id="toggle-1"
+    id="toggle-3"
   />
 );
 
 Default.storyName = 'Toggle';
-
-Default.parameters = {
-  info: {
-    text: `
-        Toggles are controls that are used to quickly switch between two possible states. The example below shows
-        an uncontrolled Toggle component. To use the Toggle component as a controlled component, set the toggled property.
-        Setting the toggled property will allow you to change the value dynamically, whereas setting the defaultToggled
-        prop will only set the value initially. This example has defaultToggled set to true.
-      `,
-  },
-};

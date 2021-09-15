@@ -100,7 +100,7 @@ class Toggle extends React.Component {
     });
 
     const toggleClasses = classNames(`${prefix}--toggle-input`, {
-      [`${prefix}--toggle-input--small`]: size,
+      [`${prefix}--toggle-input--small`]: size === 'sm',
     });
 
     const checkedProps = {};

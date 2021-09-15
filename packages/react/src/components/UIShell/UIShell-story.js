@@ -539,34 +539,34 @@ export const HeaderBaseWSideNav = withReadme(readme, () => (
 
 HeaderBaseWSideNav.storyName = 'Header Base w/ SideNav';
 
-export const HeaderBaseWActionsAndRightPanel = withReadme(readme, () => (
-  <Header aria-label="IBM Platform Name">
-    <HeaderName href="#" prefix="IBM">
-      [Platform]
-    </HeaderName>
-    <HeaderGlobalBar>
-      <HeaderGlobalAction aria-label="Search" onClick={action('search click')}>
-        <Search20 />
-      </HeaderGlobalAction>
-      <HeaderGlobalAction
-        aria-label="Notifications"
-        isActive
-        onClick={action('notification click')}>
-        <Notification20 />
-      </HeaderGlobalAction>
-      <HeaderGlobalAction
-        aria-label="App Switcher"
-        onClick={action('app-switcher click')}
-        tooltipAlignment="end">
-        <AppSwitcher20 />
-      </HeaderGlobalAction>
-    </HeaderGlobalBar>
-    <HeaderPanel aria-label="Header Panel" expanded />
-  </Header>
-));
+export const HeaderBaseWActionsAndRightPanel = withReadme(readme, () => {
+  const [expanded, setExpanded] = useState(false);
+
+  const toggleRightPanel = () => {
+    setExpanded(!expanded);
+  };
+
+  return (
+    <Header aria-label="IBM Platform Name">
+      <HeaderName href="#" prefix="IBM">
+        [Platform]
+      </HeaderName>
+      <HeaderGlobalBar>
+        <HeaderGlobalAction
+          tooltipAlignment="end"
+          isActive={expanded}
+          aria-label="Notifications"
+          onClick={toggleRightPanel}>
+          <Notification20 />
+        </HeaderGlobalAction>
+      </HeaderGlobalBar>
+      <HeaderPanel aria-label="Header Panel" expanded={expanded} />
+    </Header>
+  );
+});
 
 HeaderBaseWActionsAndRightPanel.storyName =
-  'Header Base w/ Actions and Right Panel';
+  'Header Base w/ Actions and Right Panel with Animation';
 
 export const HeaderBaseWActionsAndSwitcher = withReadme(readme, () => (
   <Header aria-label="IBM Platform Name">

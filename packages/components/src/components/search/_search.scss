@@ -39,10 +39,10 @@
     order: 1;
     padding: 0 $carbon--spacing-08;
     border: none;
-    border-bottom: 1px solid $border-strong;
+    border-bottom: 1px solid $ui-04;
     appearance: none;
-    background-color: $field;
-    color: $text-primary;
+    background-color: $field-01;
+    color: $text-01;
     text-overflow: ellipsis;
     transition: background-color $duration--fast-02 motion(standard, productive),
       outline $duration--fast-02 motion(standard, productive);
@@ -70,7 +70,12 @@
       color: $disabled;
     }
   }
+
   .#{$prefix}--search--light .#{$prefix}--search-input {
+    background: $field-02;
+  }
+
+  .#{$prefix}--search--light .#{$prefix}--search-close::before {
     background: $field-02;
   }
 
@@ -118,7 +123,7 @@
     left: $spacing-05;
     width: rem(16px);
     height: rem(16px);
-    fill: $icon-secondary;
+    fill: $icon-02;
     pointer-events: none;
     transform: translateY(-50%);
   }
@@ -138,14 +143,14 @@
       display: block;
       width: 2px;
       height: calc(100% - 2px);
-      background-color: $field;
+      background-color: $field-01;
       content: '';
       transition: background-color $duration--fast-02
         motion(standard, productive);
     }
 
     &:hover {
-      border-bottom: 1px solid $border-strong;
+      border-bottom: 1px solid $ui-04;
 
       &::before {
         background-color: $hover-field;
@@ -156,7 +161,7 @@
   .#{$prefix}--search-button {
     flex-shrink: 0;
     margin-left: $carbon--spacing-01;
-    background-color: $field;
+    background-color: $field-01;
 
     svg {
       fill: currentColor;
@@ -179,7 +184,7 @@
     border-style: solid;
     border-color: transparent;
     cursor: pointer;
-    fill: $icon-primary;
+    fill: $icon-01;
     opacity: 1;
     transition: opacity $duration--fast-02 motion(standard, productive),
       background-color $duration--fast-02 motion(standard, productive),
@@ -198,7 +203,7 @@
     &:active {
       @include focus-outline('outline');
 
-      background-color: $background-selected;
+      background-color: $selected-ui;
     }
   }
 
@@ -336,7 +341,7 @@
   }
 
   .#{$prefix}--search--expandable .#{$prefix}--search-magnifier:hover {
-    background-color: $background-hover;
+    background-color: $hover-ui;
   }
 
   .#{$prefix}--search--expandable.#{$prefix}--search--expanded
@@ -345,12 +350,12 @@
   }
 
   .#{$prefix}--search--expandable .#{$prefix}--search-magnifier-icon {
-    fill: $icon-primary;
+    fill: $icon-01;
   }
 
   .#{$prefix}--search--expandable.#{$prefix}--search--expanded
     .#{$prefix}--search-magnifier-icon {
-    fill: $icon-secondary;
+    fill: $icon-02;
   }
 
   // Windows HCM fix

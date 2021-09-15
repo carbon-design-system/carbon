@@ -71,7 +71,7 @@ describe('Tag', () => {
         This is a tag
       </Tag>
     );
-    expect(tag.childAt(0).hasClass('bx--tag__custom-icon'));
+    expect(tag.childAt(0).hasClass('bx--tag__custom-icon')).toBe(true);
   });
 
   it('should support extra class names', () => {

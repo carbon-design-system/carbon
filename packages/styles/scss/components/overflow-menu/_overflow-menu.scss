@@ -8,8 +8,9 @@
 @use '../../config' as *;
 @use '../../motion' as *;
 @use '../../spacing' as *;
-@use '../../theme' as *;
+@use '../../compat/theme' as *;
 @use '../../type' as *;
+@use '../button/tokens' as button;
 @use '../../utilities/box-shadow' as *;
 @use '../../utilities/button-reset';
 @use '../../utilities/focus-outline' as *;
@@ -295,7 +296,7 @@
     .#{$prefix}--overflow-menu-options__btn:hover,
   .#{$prefix}--overflow-menu-options__option--danger
     .#{$prefix}--overflow-menu-options__btn:focus {
-    background-color: $button-danger-primary;
+    background-color: button.$button-danger-primary;
     color: $text-on-color;
 
     svg {

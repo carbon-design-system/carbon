@@ -2,7 +2,7 @@
 /**
  * prism.js Coy theme for JavaScript, CoffeeScript, CSS and HTML
  * Based on https://github.com/tshedor/workshop-wp-theme (Example: http://workshop.kansan.com/category/sessions/basics or http://workshop.timshedor.com/category/sessions/basics);
- * @author Tim  Shedor
+ * @author Tim Shedor
  */
 
 code[class*='language-'],
@@ -52,7 +52,7 @@ code[class*='language'] {
   overflow: auto;
 }
 
-/* Margin bottom to accomodate shadow */
+/* Margin bottom to accommodate shadow */
 :not(pre) > code[class*='language-'],
 pre[class*='language-'] {
   background-color: #fdfdfd;

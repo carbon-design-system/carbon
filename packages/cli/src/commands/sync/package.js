@@ -19,7 +19,7 @@ const DEFAULT_KEYWORDS = [
 ];
 
 // We're going to use this in our `sortFields` method. The idea is that we want
-// our `package.json` packageJsons to be ordered in the order given in this array. To
+// our `package.json` files to be ordered in the order given in this array. To
 // accomplish this, we create an object where we can reference the value
 // assigned to a field when sorting. By default, highest priority fields start
 // with 1 and go up. Unknown fields are all given the same priority, which is

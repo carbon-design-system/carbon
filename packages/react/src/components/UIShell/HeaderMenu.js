@@ -173,6 +173,8 @@ class HeaderMenu extends React.Component {
       children,
       renderMenuContent: MenuContent,
       menuLinkName,
+      focusRef, // eslint-disable-line no-unused-vars
+      ...rest
     } = this.props;
     const accessibilityLabel = {
       'aria-label': ariaLabel,
@@ -188,6 +190,7 @@ class HeaderMenu extends React.Component {
     // - href can be set to javascript:void(0), ideally this will be a button
     return (
       <li // eslint-disable-line jsx-a11y/mouse-events-have-key-events,jsx-a11y/no-noninteractive-element-interactions
+        {...rest}
         className={className}
         onKeyDown={this.handleMenuClose}
         onClick={this.handleOnClick}

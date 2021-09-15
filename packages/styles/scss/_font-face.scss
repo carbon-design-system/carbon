@@ -1,0 +1,13 @@
+@use 'config';
+@use '@ibm/plex/default' as sans;
+@use '@ibm/plex/mono' as mono;
+@use '@ibm/plex/arabic' as arabic;
+
+@if config.$css--font-face == true {
+  @include sans.all;
+  @include mono.all;
+
+  @if config.$css--plex-arabic == true {
+    @include arabic.all;
+  }
+} ;

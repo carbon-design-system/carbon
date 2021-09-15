@@ -271,9 +271,9 @@
 
   .#{$prefix}--data-table--zebra tbody tr[data-parent-row]:nth-child(4n + 1) td,
   .#{$prefix}--data-table--zebra tbody tr[data-child-row]:nth-child(4n + 2) td {
-    border-top: 1px solid $layer-accent;
-    border-bottom: 1px solid $layer-accent;
-    background-color: $layer-accent;
+    border-top: 1px solid $data-table-zebra-color;
+    border-bottom: 1px solid $data-table-zebra-color;
+    background-color: $data-table-zebra-color;
   }
 
   .#{$prefix}--data-table--zebra tr.#{$prefix}--parent-row td,

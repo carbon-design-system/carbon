@@ -94,7 +94,7 @@ class HeaderNav extends mixin(createComponent, initComponentBySearch, handles) {
    * If `options` is specified in the constructor,
    * {@linkcode HeaderNav.create .create()}, or
    * {@linkcode HeaderNav.init .init()},
-   * properties in this object are overriden for the instance being create and
+   * properties in this object are overridden for the instance being create and
    * how {@linkcode HeaderNav.init .init()} works.
    * @member HeaderNav.options
    * @type {object}

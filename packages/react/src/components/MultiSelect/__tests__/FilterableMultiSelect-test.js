@@ -7,7 +7,7 @@
 
 import React from 'react';
 import { mount } from 'enzyme';
-import MultiSelect from '../../MultiSelect';
+import FilterableMultiSelect from '../../MultiSelect/FilterableMultiSelect';
 import {
   assertMenuOpen,
   assertMenuClosed,
@@ -21,10 +21,12 @@ const openMenu = (wrapper) => {
   wrapper.find(`[role="combobox"]`).simulate('click');
 };
 
-describe('MultiSelect.Filterable', () => {
+describe('FilterableMultiSelect', () => {
   let mockProps;
 
   beforeEach(() => {
+    // jest.mock('../../../internal/deprecateFieldOnObject');
+
     mockProps = {
       id: 'test-filterable-multiselect',
       disabled: false,
@@ -37,23 +39,23 @@ describe('MultiSelect.Filterable', () => {
   });
 
   it('should render', () => {
-    const wrapper = mount(<MultiSelect.Filterable {...mockProps} />);
+    const wrapper = mount(<FilterableMultiSelect {...mockProps} />);
     expect(wrapper).toMatchSnapshot();
   });
 
   it('should display all items when the menu is open initially', () => {
-    const wrapper = mount(<MultiSelect.Filterable {...mockProps} />);
+    const wrapper = mount(<FilterableMultiSelect {...mockProps} />);
     openMenu(wrapper);
     expect(wrapper.find(listItemName).length).toBe(mockProps.items.length);
   });
 
   it('should initially have the menu open when open prop is provided', () => {
-    const wrapper = mount(<MultiSelect.Filterable {...mockProps} open />);
+    const wrapper = mount(<FilterableMultiSelect {...mockProps} open />);
     assertMenuOpen(wrapper, mockProps);
   });
 
   it('should open the menu with a down arrow', () => {
-    const wrapper = mount(<MultiSelect.Filterable {...mockProps} />);
+    const wrapper = mount(<FilterableMultiSelect {...mockProps} />);
     const menuIconNode = findMenuIconNode(wrapper);
 
     menuIconNode.simulate('keyDown', { key: 'ArrowDown' });
@@ -61,7 +63,7 @@ describe('MultiSelect.Filterable', () => {
   });
 
   it('should let the user toggle the menu by the menu icon', () => {
-    const wrapper = mount(<MultiSelect.Filterable {...mockProps} />);
+    const wrapper = mount(<FilterableMultiSelect {...mockProps} />);
     findMenuIconNode(wrapper).simulate('click');
     assertMenuOpen(wrapper, mockProps);
     findMenuIconNode(wrapper).simulate('click');
@@ -69,7 +71,7 @@ describe('MultiSelect.Filterable', () => {
   });
 
   it('should not close the menu after a user makes a selection', () => {
-    const wrapper = mount(<MultiSelect.Filterable {...mockProps} />);
+    const wrapper = mount(<FilterableMultiSelect {...mockProps} />);
     openMenu(wrapper);
 
     const firstListItem = wrapper.find(listItemName).at(0);
@@ -79,7 +81,7 @@ describe('MultiSelect.Filterable', () => {
   });
 
   it('should filter a list of items by the input value', () => {
-    const wrapper = mount(<MultiSelect.Filterable {...mockProps} />);
+    const wrapper = mount(<FilterableMultiSelect {...mockProps} />);
     openMenu(wrapper);
     expect(wrapper.find(listItemName).length).toBe(mockProps.items.length);
 
@@ -93,7 +95,7 @@ describe('MultiSelect.Filterable', () => {
 
   it('should call `onChange` with each update to selected items', () => {
     const wrapper = mount(
-      <MultiSelect.Filterable {...mockProps} selectionFeedback="top" />
+      <FilterableMultiSelect {...mockProps} selectionFeedback="top" />
     );
     openMenu(wrapper);
 
@@ -128,7 +130,7 @@ describe('MultiSelect.Filterable', () => {
 
   it('should let items stay at their position after selecting', () => {
     const wrapper = mount(
-      <MultiSelect.Filterable {...mockProps} selectionFeedback="fixed" />
+      <FilterableMultiSelect {...mockProps} selectionFeedback="fixed" />
     );
     openMenu(wrapper);
 
@@ -149,7 +151,7 @@ describe('MultiSelect.Filterable', () => {
   });
 
   it('should not clear input value after a user makes a selection', () => {
-    const wrapper = mount(<MultiSelect.Filterable {...mockProps} />);
+    const wrapper = mount(<FilterableMultiSelect {...mockProps} />);
     openMenu(wrapper);
 
     wrapper

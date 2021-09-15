@@ -17,7 +17,7 @@ export default function (ToMix) {
     /**
      * Mix-in class to manage lifecycle of component.
      * The constructor sets up this component's effective options,
-     * and registers this component't instance associated to an element.
+     * and registers this component's instance associated to an element.
      * @implements Handle
      * @param {HTMLElement} element The element working as this component.
      * @param {object} [options] The component options.

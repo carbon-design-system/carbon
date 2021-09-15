@@ -33,7 +33,7 @@ const SideNavMenuItem = React.forwardRef(function SideNavMenuItem(props, ref) {
 
 SideNavMenuItem.propTypes = {
   /**
-   * Specify the childrento be rendered inside of the `SideNavMenuItem`
+   * Specify the children to be rendered inside of the `SideNavMenuItem`
    */
   children: PropTypes.node,
 

@@ -16,7 +16,7 @@ export const rows = [
     port: 3000,
     rule: 'Round robin',
     attached_groups: 'Kevin’s VM Groups',
-    status: <Link>Disabled</Link>,
+    status: <Link disabled={true}>Disabled</Link>,
   },
   {
     id: 'b',
@@ -43,7 +43,7 @@ export const rows = [
     port: 3000,
     rule: 'Round robin',
     attached_groups: 'Marc’s VM Groups',
-    status: <Link>Disabled</Link>,
+    status: <Link disabled={true}>Disabled</Link>,
   },
   {
     id: 'e',

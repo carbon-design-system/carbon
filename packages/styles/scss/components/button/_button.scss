@@ -17,13 +17,14 @@
 @use '../../utilities/skeleton' as *;
 @use '../../utilities/tooltip' as *;
 @use '../../utilities/visually-hidden' as *;
+@use 'tokens' as *;
 
 @mixin button {
   .#{$prefix}--btn {
     @include button-base;
   }
 
-  // Reset intrisic padding in Firefox (see #731)
+  // Reset intrinsic padding in Firefox (see #731)
   .#{$prefix}--btn::-moz-focus-inner {
     padding: 0;
     border: 0;

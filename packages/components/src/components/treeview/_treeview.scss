@@ -23,8 +23,8 @@
 
     .#{$prefix}--tree-node {
       padding-left: $spacing-05;
-      background-color: $layer;
-      color: $text-secondary;
+      background-color: $ui-01;
+      color: $text-02;
 
       &:focus {
         outline: none;
@@ -44,8 +44,8 @@
     .#{$prefix}--tree-node--disabled
       .#{$prefix}--tree-node__label:hover
       .#{$prefix}--tree-node__label__details {
-      background-color: $layer-disabled;
-      color: $text-disabled;
+      background-color: $disabled-01;
+      color: $disabled-02;
     }
 
     .#{$prefix}--tree-node--disabled .#{$prefix}--tree-parent-node__toggle-icon,
@@ -56,7 +56,7 @@
     .#{$prefix}--tree-node--disabled
       .#{$prefix}--tree-node__label:hover
       .#{$prefix}--tree-node__icon {
-      fill: $icon-disabled;
+      fill: $disabled-02;
     }
 
     .#{$prefix}--tree-node--disabled,
@@ -72,19 +72,19 @@
       align-items: center;
 
       &:hover {
-        background-color: $layer-hover;
-        color: $text-primary;
+        background-color: $hover-ui;
+        color: $text-01;
       }
     }
 
     .#{$prefix}--tree-node__label:hover .#{$prefix}--tree-node__label__details {
-      color: $text-primary;
+      color: $text-01;
     }
 
     .#{$prefix}--tree-node__label:hover
       .#{$prefix}--tree-parent-node__toggle-icon,
     .#{$prefix}--tree-node__label:hover .#{$prefix}--tree-node__icon {
-      fill: $icon-primary;
+      fill: $icon-01;
     }
 
     .#{$prefix}--tree-leaf-node {
@@ -120,7 +120,7 @@
     }
 
     .#{$prefix}--tree-parent-node__toggle-icon {
-      fill: $icon-secondary;
+      fill: $icon-02;
       transform: rotate(-90deg);
       transition: all $duration--fast-02 motion(standard, productive);
     }
@@ -130,18 +130,17 @@
     }
 
     .#{$prefix}--tree-node__icon {
-      min-width: 1rem;
-      min-height: 1rem;
+      flex-shrink: 0;
       margin-right: $spacing-03;
-      fill: $icon-secondary;
+      fill: $icon-02;
     }
 
     .#{$prefix}--tree-node--selected > .#{$prefix}--tree-node__label {
-      background-color: $layer-selected;
-      color: $text-primary;
+      background-color: $selected-ui;
+      color: $text-01;
 
       &:hover {
-        background-color: $layer-selected-hover;
+        background-color: $hover-selected-ui;
       }
     }
 
@@ -151,7 +150,7 @@
     .#{$prefix}--tree-node--selected
       > .#{$prefix}--tree-node__label
       .#{$prefix}--tree-node__icon {
-      fill: $icon-primary;
+      fill: $icon-01;
     }
 
     .#{$prefix}--tree-node--active > .#{$prefix}--tree-node__label {
@@ -163,7 +162,7 @@
         left: 0;
         width: rem(4px);
         height: 100%;
-        background-color: $interactive;
+        background-color: $interactive-04;
         content: '';
       }
     }

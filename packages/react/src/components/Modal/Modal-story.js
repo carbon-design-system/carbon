@@ -19,6 +19,8 @@ import {
 import Modal from '../Modal';
 import Button from '../Button';
 import Select from '../Select';
+import MultiSelect from '../MultiSelect';
+import Dropdown from '../Dropdown';
 import SelectItem from '../SelectItem';
 import TextInput from '../TextInput';
 import mdx from './Modal.mdx';
@@ -161,6 +163,30 @@ export const Default = () => {
         <SelectItem value="us-south" text="US South" />
         <SelectItem value="us-east" text="US East" />
       </Select>
+      <Dropdown
+        id="drop"
+        label="Dropdown"
+        titleText="Dropdown"
+        items={[
+          { id: 'one', label: 'one', name: 'one' },
+          { id: 'two', label: 'two', name: 'two' },
+        ]}
+      />
+      <MultiSelect
+        id="test"
+        label="Multiselect"
+        items={[
+          {
+            id: 'downshift-1-item-0',
+            text: 'Option 1',
+          },
+          {
+            id: 'downshift-1-item-1',
+            text: 'Option 2',
+          },
+        ]}
+        itemToString={(item) => (item ? item.text : '')}
+      />
     </Modal>
   );
 };

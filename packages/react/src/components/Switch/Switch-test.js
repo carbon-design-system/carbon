@@ -87,12 +87,12 @@ describe('Switch', () => {
 
     it('should invoke button onClick handler', () => {
       buttonWrapper.simulate('click', { preventDefault() {} });
-      expect(buttonOnClick).toBeCalledWith({ index, name, text });
+      expect(buttonOnClick).toHaveBeenCalledWith({ index, name, text });
     });
 
     it('should invoke link onClick handler', () => {
       linkWrapper.simulate('click', { preventDefault() {} });
-      expect(buttonOnClick).toBeCalledWith({ index, name, text });
+      expect(buttonOnClick).toHaveBeenCalledWith({ index, name, text });
     });
   });
 });

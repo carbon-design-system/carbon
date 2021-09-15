@@ -21,7 +21,7 @@ function ProgressBar({
   value,
   helperText,
 }) {
-  const id = useId('progress-bar');
+  const labelId = useId('progress-bar');
   const helperId = useId('progress-bar-helper');
 
   const indeterminate = value === null || value === undefined;
@@ -50,17 +50,17 @@ function ProgressBar({
 
   return (
     <div className={wrapperClasses}>
-      <label className={labelClasses} htmlFor={id}>
+      <span className={labelClasses} id={labelId}>
         {label}
-      </label>
+      </span>
       <div
         className={`${prefix}--progress-bar__track`}
-        id={id}
         role="progressbar"
+        aria-labelledby={labelId}
+        aria-describedby={helperText ? helperId : null}
         aria-valuemin={!indeterminate ? 0 : null}
         aria-valuemax={!indeterminate ? max : null}
-        aria-valuenow={!indeterminate ? cappedValue : null}
-        aria-describedby={helperText ? helperId : null}>
+        aria-valuenow={!indeterminate ? cappedValue : null}>
         <div
           className={`${prefix}--progress-bar__bar`}
           style={{ transform: `scaleX(${percentage})` }}

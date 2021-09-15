@@ -110,7 +110,7 @@ class Tile extends mixin(createComponent, initComponentBySearch) {
   /**
    * The component options.
    * If `options` is specified in the constructor,
-   * properties in this object are overriden for the instance being created.
+   * properties in this object are overridden for the instance being created.
    * @property {string} selectorInit The CSS selector to find Tile instances.
    */
   static get options() {

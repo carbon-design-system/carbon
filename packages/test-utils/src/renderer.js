@@ -34,6 +34,7 @@ const SassRenderer = {
           },
         },
         includePaths: [cwd, ...nodeModules],
+        quietDeps: true,
       });
 
       return {

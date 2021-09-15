@@ -9,6 +9,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 import { settings } from 'carbon-components';
+import deprecate from '../../prop-types/deprecate.js';
 
 const { prefix } = settings;
 
@@ -70,7 +71,12 @@ Table.propTypes = {
   /**
    * `false` If true, will remove the table border
    */
-  shouldShowBorder: PropTypes.bool,
+  shouldShowBorder: deprecate(
+    PropTypes.bool,
+    'The `shouldShowBorder` prop has been deprecated and can be safely removed.' +
+      'This prop will be removed in the next major release of ' +
+      '`carbon-components-react`'
+  ),
 
   /**
    *  Change the row height of table. Currently supports `xs`, `sm`, `md`, `lg`, and `xl`.

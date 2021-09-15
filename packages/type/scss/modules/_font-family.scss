@@ -13,16 +13,44 @@
 $font-families: (
   'mono':
     unquote(
-      "'IBM Plex Mono', 'Menlo', 'DejaVu Sans Mono', 'Bitstream Vera Sans Mono', Courier, monospace"
+      "'IBM Plex Mono', system-ui, -apple-system, BlinkMacSystemFont, '.SFNSText-Regular', monospace"
     ),
-  'sans': unquote("'IBM Plex Sans', 'Helvetica Neue', Arial, sans-serif"),
+  'sans':
+    unquote(
+      "'IBM Plex Sans', system-ui, -apple-system, BlinkMacSystemFont, '.SFNSText-Regular', sans-serif"
+    ),
   'sans-condensed':
-    unquote("'IBM Plex Sans Condensed', 'Helvetica Neue', Arial, sans-serif"),
+    unquote(
+      "'IBM Plex Sans Condensed', system-ui, -apple-system, BlinkMacSystemFont, '.SFNSText-Regular', sans-serif"
+    ),
+  'sans-arabic':
+    unquote(
+      "'IBM Plex Sans Arabic', system-ui, -apple-system, BlinkMacSystemFont, '.SFNSText-Regular', sans-serif"
+    ),
+  'sans-devanagari':
+    unquote(
+      "'IBM Plex Sans Devanagari', system-ui, -apple-system, BlinkMacSystemFont, '.SFNSText-Regular', sans-serif"
+    ),
   'sans-hebrew':
     unquote(
-      "'IBM Plex Sans Hebrew', 'Helvetica Hebrew', 'Arial Hebrew', sans-serif"
+      "'IBM Plex Sans Hebrew', system-ui, -apple-system, BlinkMacSystemFont, '.SFNSText-Regular', sans-serif"
     ),
-  'serif': unquote("'IBM Plex Serif', 'Georgia', Times, serif"),
+  'sans-jp':
+    unquote(
+      "'IBM Plex Sans JP', system-ui, -apple-system, BlinkMacSystemFont, '.SFNSText-Regular', sans-serif"
+    ),
+  'sans-kr':
+    unquote(
+      "'IBM Plex Sans KR', system-ui, -apple-system, BlinkMacSystemFont, '.SFNSText-Regular', sans-serif"
+    ),
+  'sans-thai':
+    unquote(
+      "'IBM Plex Sans Thai', system-ui, -apple-system, BlinkMacSystemFont, '.SFNSText-Regular', sans-serif"
+    ),
+  'serif':
+    unquote(
+      "'IBM Plex Serif', system-ui, -apple-system, BlinkMacSystemFont, '.SFNSText-Regular', serif"
+    ),
 ) !default;
 
 /// Get the font-family for an IBM Plex font

@@ -236,7 +236,7 @@ export default class NavigationMenu extends NavigationMenuPanel {
    * If `options` is specified in the constructor,
    * {@linkcode NavigationMenu.create .create()}, or
    * {@linkcode NavigationMenu.init .init()},
-   * properties in this object are overriden for the instance being create and
+   * properties in this object are overridden for the instance being create and
    * how {@linkcode NavigationMenu.init .init()} works.
    * @member NavigationMenu.options
    * @type {object}

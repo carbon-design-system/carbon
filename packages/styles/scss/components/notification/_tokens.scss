@@ -7,120 +7,149 @@
 
 @use 'sass:color';
 @use '../../colors';
-@use '../../theme' as *;
 @use '../../themes';
+@use '../../theme';
 @use '../../utilities/component-tokens';
 
-// prettier-ignore
-$-tokens: (
-  'notification-background-error': (
-    fallback: colors.$red-10,
-    values: (
-      (
-        theme: themes.$white,
-        value: colors.$red-10,
-      ),
-      (
-        theme: themes.$g10,
-        value: colors.$red-10,
-      ),
-      (
-        theme: themes.$g90,
-        value: $layer,
-      ),
-      (
-        theme: themes.$g100,
-        value: $layer,
-      ),
+$notification-background-error: (
+  fallback: colors.$red-10,
+  values: (
+    (
+      theme: themes.$white,
+      value: colors.$red-10,
+    ),
+    (
+      theme: themes.$g10,
+      value: colors.$red-10,
+    ),
+    (
+      theme: themes.$g90,
+      value: theme.$layer,
+    ),
+    (
+      theme: themes.$g100,
+      value: theme.$layer,
     ),
   ),
-  'notification-background-success': (
-    fallback: colors.$green-10,
-    values: (
-      (
-        theme: themes.$white,
-        value: colors.$green-10,
-      ),
-      (
-        theme: themes.$g10,
-        value: colors.$green-10,
-      ),
-      (
-        theme: themes.$g90,
-        value: $layer,
-      ),
-      (
-        theme: themes.$g100,
-        value: $layer,
-      ),
+) !default;
+
+$notification-background-success: (
+  fallback: colors.$green-10,
+  values: (
+    (
+      theme: themes.$white,
+      value: colors.$green-10,
+    ),
+    (
+      theme: themes.$g10,
+      value: colors.$green-10,
+    ),
+    (
+      theme: themes.$g90,
+      value: theme.$layer,
+    ),
+    (
+      theme: themes.$g100,
+      value: theme.$layer,
     ),
   ),
-  'notification-background-info': (
-    fallback: colors.$blue-10,
-    values: (
-      (
-        theme: themes.$white,
-        value: colors.$blue-10,
-      ),
-      (
-        theme: themes.$g10,
-        value: colors.$blue-10,
-      ),
-      (
-        theme: themes.$g90,
-        value: $layer,
-      ),
-      (
-        theme: themes.$g100,
-        value: $layer,
-      ),
+) !default;
+
+$notification-background-info: (
+  fallback: colors.$blue-10,
+  values: (
+    (
+      theme: themes.$white,
+      value: colors.$blue-10,
+    ),
+    (
+      theme: themes.$g10,
+      value: colors.$blue-10,
+    ),
+    (
+      theme: themes.$g90,
+      value: theme.$layer,
+    ),
+    (
+      theme: themes.$g100,
+      value: theme.$layer,
     ),
   ),
-  'notification-background-warning': (
-    fallback: mix(colors.$yellow-30, colors.$white-0, 15%),
-    values: (
-      (
-        theme: themes.$white,
-        value: mix(colors.$yellow-30, colors.$white-0, 15%),
-      ),
-      (
-        theme: themes.$g10,
-        value: mix(colors.$yellow-30, colors.$white-0, 15%),
-      ),
-      (
-        theme: themes.$g90,
-        value: $layer,
-      ),
-      (
-        theme: themes.$g100,
-        value: $layer,
-      ),
+) !default;
+
+$notification-background-warning: (
+  fallback: color.mix(colors.$yellow-30, colors.$white-0, 15%),
+  values: (
+    (
+      theme: themes.$white,
+      value: color.mix(colors.$yellow-30, colors.$white-0, 15%),
+    ),
+    (
+      theme: themes.$g10,
+      value: color.mix(colors.$yellow-30, colors.$white-0, 15%),
+    ),
+    (
+      theme: themes.$g90,
+      value: theme.$layer,
+    ),
+    (
+      theme: themes.$g100,
+      value: theme.$layer,
     ),
   ),
-  'notification-action-hover': (
-    fallback: colors.$white-0,
-    values: (
-      (
-        theme: themes.$white,
-        value: colors.$white-0,
-      ),
-      (
-        theme: themes.$g10,
-        value: colors.$white-0,
-      ),
-      (
-        theme: themes.$g90,
-        value: $layer-hover,
-      ),
-      (
-        theme: themes.$g100,
-        value: $layer-hover,
-      ),
+) !default;
+
+$notification-action-hover: (
+  fallback: colors.$white-0,
+  values: (
+    (
+      theme: themes.$white,
+      value: colors.$white-0,
+    ),
+    (
+      theme: themes.$g10,
+      value: colors.$white-0,
+    ),
+    (
+      theme: themes.$g90,
+      value: theme.$layer-hover,
+    ),
+    (
+      theme: themes.$g100,
+      value: theme.$layer-hover,
     ),
   ),
+) !default;
+
+$notification-tokens: (
+  notification-background-error: $notification-background-error,
+  notification-background-success: $notification-background-success,
+  notification-background-info: $notification-background-info,
+  notification-background-warning: $notification-background-warning,
+  notification-action-hover: $notification-action-hover,
 );
 
-$white: component-tokens.get-tokens($-tokens, themes.$white);
-$g10: component-tokens.get-tokens($-tokens, themes.$g10);
-$g90: component-tokens.get-tokens($-tokens, themes.$g90);
-$g100: component-tokens.get-tokens($-tokens, themes.$g100);
+$notification-background-error: component-tokens.get-var(
+  $notification-background-error,
+  'notification-background-error'
+);
+
+$notification-background-success: component-tokens.get-var(
+  $notification-background-success,
+  'notification-background-success'
+);
+
+$notification-background-info: component-tokens.get-var(
+  $notification-background-info,
+  'notification-background-info'
+);
+
+$notification-background-warning: component-tokens.get-var(
+  $notification-background-warning,
+  'notification-background-warning'
+);
+
+$notification-action-hover: component-tokens.get-var(
+  $notification-action-hover,
+  'notification-action-hover'
+);

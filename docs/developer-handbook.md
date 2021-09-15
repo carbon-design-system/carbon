@@ -746,9 +746,10 @@ warning(
 #### Publishing older library versions
 
 We offer ad-hoc backwards-support for older version of the system. This work is
-primarly driven by external contributors who may still need these older versions
-for legacy code. When updates are received and merged into the codebase, the
-release process will be a bit different than the one described above.
+primarily driven by external contributors who may still need these older
+versions for legacy code. When updates are received and merged into the
+codebase, the release process will be a bit different than the one described
+above.
 
 For example, with
 [`carbon-components-react`](https://github.com/carbon-design-system/carbon-components-react)

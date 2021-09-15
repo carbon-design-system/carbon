@@ -14,6 +14,7 @@ import SelectItem from '../SelectItem';
 import SelectItemGroup from '../SelectItemGroup';
 import SelectSkeleton from '../Select/Select.Skeleton';
 import mdx from './Select.mdx';
+import { FeatureFlags } from '../FeatureFlags';
 
 const sizes = {
   'Small  (sm)': 'sm',
@@ -124,4 +125,52 @@ Skeleton.parameters = {
         Placeholder skeleton state to use when content is loading.
       `,
   },
+};
+
+export const classNameChangeTest = () => {
+  return (
+    <div style={{ width: 400 }}>
+      <Select
+        className="TEST_CLASS"
+        id="select-1"
+        defaultValue="placeholder-item">
+        <SelectItem
+          disabled
+          hidden
+          value="placeholder-item"
+          text="The class should be added to the label"
+        />
+        <SelectItemGroup label="Category 1">
+          <SelectItem value="option-1" text="Option 1" />
+          <SelectItem value="option-2" text="Option 2" />
+        </SelectItemGroup>
+        <SelectItemGroup label="Category 2">
+          <SelectItem value="option-3" text="Option 3" />
+          <SelectItem value="option-4" text="Option 4" />
+        </SelectItemGroup>
+      </Select>
+      <br />
+      <FeatureFlags flags={{ 'enable-v11-release': true }}>
+        <Select
+          className="TEST_CLASS"
+          id="select-1"
+          defaultValue="placeholder-item">
+          <SelectItem
+            disabled
+            hidden
+            value="placeholder-item"
+            text="The class should be added to the wrapper"
+          />
+          <SelectItemGroup label="Category 1">
+            <SelectItem value="option-1" text="Option 1" />
+            <SelectItem value="option-2" text="Option 2" />
+          </SelectItemGroup>
+          <SelectItemGroup label="Category 2">
+            <SelectItem value="option-3" text="Option 3" />
+            <SelectItem value="option-4" text="Option 4" />
+          </SelectItemGroup>
+        </Select>
+      </FeatureFlags>
+    </div>
+  );
 };

@@ -29,9 +29,9 @@
     height: rem(40px);
     padding: 0 $carbon--spacing-05;
     border: none;
-    border-bottom: 1px solid $border-strong;
-    background-color: $field;
-    color: $text-primary;
+    border-bottom: 1px solid $ui-04;
+    background-color: $field-01;
+    color: $text-01;
     transition: background-color $duration--fast-01 motion(standard, productive),
       outline $duration--fast-01 motion(standard, productive);
 
@@ -71,7 +71,6 @@
     @include placeholder-colors;
   }
 
-  // V11: Possibly deprecate
   .#{$prefix}--text-input--light {
     background-color: $field-02;
   }
@@ -95,11 +94,11 @@
   }
 
   .#{$prefix}--text-input__invalid-icon {
-    fill: $support-error;
+    fill: $support-01;
   }
 
   .#{$prefix}--text-input__invalid-icon--warning {
-    fill: $support-warning;
+    fill: $support-03;
   }
 
   .#{$prefix}--text-input__invalid-icon--warning path:first-of-type {
@@ -196,10 +195,10 @@
   .#{$prefix}--text-input:disabled
     + .#{$prefix}--text-input--password__visibility__toggle.#{$prefix}--tooltip__trigger svg {
     cursor: not-allowed;
-    fill: $icon-disabled;
+    fill: $disabled-02;
 
     &:hover {
-      fill: $icon-disabled;
+      fill: $disabled-02;
     }
   }
 
@@ -210,19 +209,19 @@
     // @include focus-outline('reset');
     border-bottom: 1px solid transparent;
     background-color: $field-disabled;
+
     color: $text-disabled;
     cursor: not-allowed;
     // Needed to fix disabled text in Safari #6673
-    -webkit-text-fill-color: currentColor;
+    -webkit-text-fill-color: $disabled-02;
   }
 
-  // V11: Possibly deprecate
   .#{$prefix}--text-input--light:disabled {
     background-color: $field-02;
   }
 
   .#{$prefix}--text-input:disabled::placeholder {
-    color: $text-disabled;
+    color: $disabled-02;
     opacity: 1;
   }
 
@@ -251,7 +250,7 @@
   //-----------------------------
   .#{$prefix}--form--fluid .#{$prefix}--text-input-wrapper {
     position: relative;
-    background: $field;
+    background: $field-01;
     transition: background-color $duration--fast-01 motion(standard, productive),
       outline $duration--fast-01 motion(standard, productive);
   }
@@ -291,7 +290,7 @@
     + .#{$prefix}--text-input__divider {
     display: block;
     border-style: solid;
-    border-color: $border-subtle;
+    border-color: $ui-03;
     border-bottom: none;
     margin: 0 1rem;
   }
@@ -300,7 +299,6 @@
     top: rem(80px);
   }
 
-  // V11: Possibly deprecate
   .#{$prefix}--form--fluid .#{$prefix}--text-input-wrapper--light {
     background: $field-02;
   }

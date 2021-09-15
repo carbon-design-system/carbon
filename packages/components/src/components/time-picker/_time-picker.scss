@@ -61,19 +61,18 @@
     }
   }
 
-  // V11: Possibly deprecate
   .#{$prefix}--time-picker--light .#{$prefix}--select-input {
     background-color: $field-02;
 
     &:hover {
-      background-color: $field-hover;
+      background-color: $hover-ui;
     }
 
     &:disabled,
     &:hover:disabled {
       border-bottom: 1px solid transparent;
       background-color: transparent;
-      color: $text-disabled;
+      color: $disabled-02;
       cursor: not-allowed;
     }
   }
