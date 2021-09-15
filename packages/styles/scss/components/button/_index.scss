@@ -8,6 +8,10 @@
 @forward 'vars';
 @forward 'button';
 @forward 'tokens';
-@use 'button';
 
+@use '../../theme';
+@use 'button';
+@use 'tokens';
+
+@include theme.add-component-tokens(tokens.$button-tokens);
 @include button.button;
