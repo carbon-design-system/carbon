@@ -449,6 +449,20 @@ async function build() {
           },
         ],
       },
+      {
+        type: 'directory',
+        filepath: 'compat',
+        files: [
+          {
+            type: 'file',
+            filepath: '_theme.scss',
+          },
+          {
+            type: 'file',
+            filepath: '_themes.scss',
+          },
+        ],
+      },
     ],
   };
   const files = collect(styles);
