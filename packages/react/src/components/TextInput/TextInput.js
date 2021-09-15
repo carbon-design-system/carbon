@@ -156,9 +156,11 @@ const TextInput = React.forwardRef(function TextInput(
             <normalizedProps.icon className={iconClasses} />
           )}
           {input}
+
           {isFluid && <hr className={`${prefix}--text-input__divider`} />}
           {isFluid && !inline && normalizedProps.validation}
         </div>
+        <span className="underline"></span>
         {!isFluid && !inline && (normalizedProps.validation || helper)}
       </div>
     </div>
