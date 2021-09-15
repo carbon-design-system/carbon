@@ -16,8 +16,7 @@ import Button from '../Button';
 import CopyButton from '../CopyButton';
 import getUniqueId from '../../tools/uniqueId';
 import copy from 'copy-to-clipboard';
-
-const { prefix } = settings;
+import { usePrefix } from '../../internal/usePrefix';
 
 const rowHeightInPixels = 16;
 const defaultMaxCollapsedNumberOfRows = 15;
@@ -62,6 +61,7 @@ function CodeSnippet({
       return codeContentRef;
     }
   }, [type]);
+  const prefix = usePrefix();
 
   const getCodeRefDimensions = useCallback(() => {
     const {

@@ -8,33 +8,35 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import cx from 'classnames';
-import { settings } from 'carbon-components';
+import { usePrefix } from '../../internal/usePrefix';
 
-const { prefix } = settings;
-
-const step = (
-  <li
-    className={`${prefix}--progress-step ${prefix}--progress-step--incomplete`}>
-    <div
-      className={`${prefix}--progress-step-button ${prefix}--progress-step-button--unclickable`}>
-      <svg>
-        <path d="M 7, 7 m -7, 0 a 7,7 0 1,0 14,0 a 7,7 0 1,0 -14,0" />
-      </svg>
-      <p className={`${prefix}--progress-label`} />
-      <span className={`${prefix}--progress-line`} />
-    </div>
-  </li>
-);
+const step = () => {
+  const prefix = usePrefix();
+  return (
+    <li
+      className={`${prefix}--progress-step ${prefix}--progress-step--incomplete`}>
+      <div
+        className={`${prefix}--progress-step-button ${prefix}--progress-step-button--unclickable`}>
+        <svg>
+          <path d="M 7, 7 m -7, 0 a 7,7 0 1,0 14,0 a 7,7 0 1,0 -14,0" />
+        </svg>
+        <p className={`${prefix}--progress-label`} />
+        <span className={`${prefix}--progress-line`} />
+      </div>
+    </li>
+  );
+};
 
 function ProgressIndicatorSkeleton({ className, ...rest }) {
+  const prefix = usePrefix();
   return (
     <ul
       className={cx(`${prefix}--progress`, `${prefix}--skeleton`, className)}
       {...rest}>
-      {step}
-      {step}
-      {step}
-      {step}
+      {step()}
+      {step()}
+      {step()}
+      {step()}
     </ul>
   );
 }

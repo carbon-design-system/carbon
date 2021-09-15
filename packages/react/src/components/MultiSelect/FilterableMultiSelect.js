@@ -6,8 +6,7 @@
  */
 
 import { WarningFilled16, WarningAltFilled16 } from '@carbon/icons-react';
-import { settings } from 'carbon-components';
-import cx from 'classnames';
+import { settings } from 'carbon-components'; import cx from 'classnames';
 import Downshift from 'downshift';
 import isEqual from 'lodash.isequal';
 import PropTypes from 'prop-types';

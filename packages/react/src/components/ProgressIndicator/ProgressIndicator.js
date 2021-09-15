@@ -8,7 +8,6 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import classnames from 'classnames';
-import { settings } from 'carbon-components';
 import {
   CheckmarkOutline16,
   Warning16,
@@ -16,8 +15,7 @@ import {
   CircleFilled16,
 } from '@carbon/icons-react';
 import { keys, matches } from '../../internal/keyboard';
-
-const { prefix } = settings;
+import { usePrefix, PrefixContext } from '../../internal/usePrefix';
 
 const defaultRenderLabel = (props) => <p {...props} />;
 
@@ -46,6 +44,7 @@ export function ProgressStep({
   translateWithId: t,
   ...rest
 }) {
+  const prefix = usePrefix();
   const classes = classnames({
     [`${prefix}--progress-step`]: true,
     [`${prefix}--progress-step--current`]: current,
@@ -252,6 +251,9 @@ export class ProgressIndicator extends Component {
      */
     vertical: PropTypes.bool,
   };
+  
+  static contextType = PrefixContext;
+  prefix = this.context;
 
   static defaultProps = {
     currentIndex: 0,
@@ -306,6 +308,7 @@ export class ProgressIndicator extends Component {
       spaceEqually,
       ...other
     } = this.props;
+    const prefix = this.prefix;
     const classes = classnames({
       [`${prefix}--progress`]: true,
       [`${prefix}--progress--vertical`]: vertical,

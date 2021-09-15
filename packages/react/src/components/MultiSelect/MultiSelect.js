@@ -6,7 +6,6 @@
  */
 
 import { WarningFilled16, WarningAltFilled16 } from '@carbon/icons-react';
-import { settings } from 'carbon-components';
 import cx from 'classnames';
 import Downshift, { useSelect } from 'downshift';
 import isEqual from 'lodash.isequal';
@@ -22,8 +21,8 @@ import { mapDownshiftProps } from '../../tools/createPropAdapter';
 import mergeRefs from '../../tools/mergeRefs';
 import { keys, match } from '../../internal/keyboard';
 import { useFeatureFlag } from '../FeatureFlags';
+import {usePrefix} from '../../internal/usePrefix';
 
-const { prefix } = settings;
 const noop = () => {};
 const getInstanceId = setupGetInstanceId();
 const {
@@ -71,6 +70,7 @@ const MultiSelect = React.forwardRef(function MultiSelect(
   },
   ref
 ) {
+  const prefix = usePrefix();
   const { current: multiSelectInstanceId } = useRef(getInstanceId());
   const [highlightedIndex, setHighlightedIndex] = useState(null);
   const [isOpen, setIsOpen] = useState(open);

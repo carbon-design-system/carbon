@@ -5,13 +5,11 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { settings } from 'carbon-components';
 import cx from 'classnames';
 import PropTypes from 'prop-types';
 import React from 'react';
 import { useFeatureFlag } from '../FeatureFlags';
-
-const { prefix } = settings;
+import { usePrefix } from '../../internal/usePrefix';
 
 function Column({
   as: BaseComponent = 'div',
@@ -24,6 +22,7 @@ function Column({
   max,
   ...rest
 }) {
+  const prefix = usePrefix();
   const hasCSSGrid = useFeatureFlag('enable-css-grid');
   const columnClassName = hasCSSGrid
     ? getClassNameForBreakpoints([sm, md, lg, xlg, max])

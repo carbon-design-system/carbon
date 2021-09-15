@@ -5,7 +5,6 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { settings } from 'carbon-components';
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
 import React from 'react';
@@ -13,8 +12,7 @@ import Filename from './Filename';
 import FileUploaderButton from './FileUploaderButton';
 import { ButtonKinds } from '../../prop-types/types';
 import { keys, matches } from '../../internal/keyboard';
-
-const { prefix } = settings;
+import { PrefixContext } from '../../internal/usePrefix';
 
 export default class FileUploader extends React.Component {
   static propTypes = {
@@ -96,6 +94,9 @@ export default class FileUploader extends React.Component {
     size: PropTypes.oneOf(['default', 'field', 'small', 'sm', 'md', 'lg']),
   };
 
+  static contextType = PrefixContext;
+  prefix = this.context;
+
   static defaultProps = {
     iconDescription: 'Provide icon description',
     filenameStatus: 'uploading',
@@ -173,6 +174,8 @@ export default class FileUploader extends React.Component {
       onDelete, // eslint-disable-line no-unused-vars
       ...other
     } = this.props;
+
+    const prefix = this.prefix;
 
     const classes = classNames({
       [`${prefix}--form-item`]: true,
