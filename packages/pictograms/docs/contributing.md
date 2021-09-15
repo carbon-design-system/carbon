@@ -32,7 +32,7 @@ pictogram. We go into more detail for each of the file formats below.
 This file contains information about a pictogram's name, "friendly" name, and
 aliases. The friendly name for an pictogram is what is displayed to an end-user
 on our website. The name for an pictogram matches the asset name in our folder
-of SVG assets. Finally, alises for an pictogram are used during search as
+of SVG assets. Finally, aliases for a pictogram are used during search as
 alternative ways of finding the pictogram.
 
 ### `categories.yml`
@@ -53,7 +53,7 @@ field to indicate that:
 - The icon has been removed
 
 Use `deprecated.yml` when assets are renamed to indicate the change. This will
-hide the depreacated name from display on the web site, and signal to teams that
+hide the deprecated name from display on the web site, and signal to teams that
 the originally named file is a candidate for future removal. It's recommended
 that you also add the deprecated name to `aliases` for the asset in `icons.yml`,
 so that the new asset name will be a search result for the deprecated name. We

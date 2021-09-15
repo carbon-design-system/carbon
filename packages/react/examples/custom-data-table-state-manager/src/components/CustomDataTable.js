@@ -52,7 +52,7 @@ import {
  * `<TableCell>`, etc.,
  * whereas `<DataTable>` is merely a state manager.
  *
- * Threfore, using a custom component in place of `<DataTable>` does _not_ mean
+ * Therefore, using a custom component in place of `<DataTable>` does _not_ mean
  * going away from Carbon design.
  *
  * THIS COMPONENT IS FOR DEMONSTRATION PURPOSES ONLY.

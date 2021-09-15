@@ -59,11 +59,28 @@ const output = (options = defaultOptions) => {
           continue;
         }
 
+        if (icon.sizes.length === 1 && icon.sizes[0] === 'glyph') {
+          const [asset] = icon.assets;
+          icon.output = [
+            {
+              descriptor: await createDescriptor(
+                icon.name,
+                asset.optimized.data,
+                'glyph'
+              ),
+              moduleName: getModuleName(icon.name, 'glyph', icon.namespace),
+              filepath: [...icon.namespace, icon.name, 'index.js'].join('/'),
+              size: 'glyph',
+            },
+          ];
+          continue;
+        }
+
         // If the target is not set to pictograms, then we're building up
         // metadata for icons
-        const defaultAsset =
-          icon.assets.find((asset) => asset.size === defaultSize) ??
-          icon.assets[0];
+        const defaultAsset = icon.assets.find(
+          (asset) => asset.size === defaultSize
+        );
         icon.output = await Promise.all(
           sizes.map(async (size) => {
             const asset = icon.assets.find((asset) => asset.size === size);
@@ -92,7 +109,7 @@ const output = (options = defaultOptions) => {
         // Handle glyph sizes that may not be one of our predetermined sizes
         const hasGlyphAsset = icon.sizes.find((size) => size === 'glyph');
         if (hasGlyphAsset) {
-          const asset = icon.assets.find((asset) => !asset.size);
+          const asset = icon.assets.find((asset) => asset.size === 'glyph');
           icon.output.push({
             descriptor: await createDescriptor(
               icon.name,

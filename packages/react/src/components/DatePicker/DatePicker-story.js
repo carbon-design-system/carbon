@@ -71,6 +71,7 @@ const props = {
       'mm/dd/yyyy'
     ),
     disabled: boolean('Disabled (disabled in <DatePickerInput>)', false),
+    helperText: text('Helper text (helperText)', 'Optional help text'),
     invalid: boolean(
       'Show form validation UI (invalid in <DatePickerInput>)',
       false

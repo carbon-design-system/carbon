@@ -10,7 +10,7 @@ import { withKnobs, select, text, boolean } from '@storybook/addon-knobs';
 import { Carbon16, Compass16, Tag16 } from '@carbon/icons-react';
 import Tag, { types as typesList } from '../Tag';
 import TagSkeleton from '../Tag/Tag.Skeleton';
-import { action } from '@storybook/addon-actions/dist/preview';
+import { action } from '@storybook/addon-actions';
 import mdx from './Tag.mdx';
 
 const icons = {

@@ -33,7 +33,7 @@
     margin-right: $carbon--spacing-05;
     margin-bottom: $carbon--spacing-03;
     box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.2);
-    color: $text-inverse;
+    color: $inverse-01;
 
     &:first-child {
       margin-top: $carbon--spacing-05;
@@ -46,7 +46,7 @@
 
   .#{$prefix}--toast-notification:not(.#{$prefix}--toast-notification--low-contrast)
     a {
-    color: $link-inverse;
+    color: $inverse-link;
   }
 
   .#{$prefix}--toast-notification a {
@@ -58,7 +58,7 @@
   }
 
   .#{$prefix}--toast-notification a:focus {
-    outline: 1px solid $link-inverse;
+    outline: 1px solid $inverse-link;
   }
 
   .#{$prefix}--toast-notification.#{$prefix}--toast-notification--low-contrast
@@ -67,65 +67,53 @@
   }
 
   .#{$prefix}--toast-notification--low-contrast {
-    color: $text-primary;
+    color: $text-01;
   }
 
   .#{$prefix}--toast-notification--error {
-    @include notification--experimental(
-      $support-error-inverse,
-      $background-inverse
-    );
+    @include notification--experimental($inverse-support-01, $inverse-02);
   }
 
   .#{$prefix}--toast-notification--low-contrast.#{$prefix}--toast-notification--error {
     @include notification--experimental(
-      $support-error,
+      $support-01,
       get-token-value($notification-colors, 'notification-background-error')
     );
   }
 
   .#{$prefix}--toast-notification--success {
-    @include notification--experimental(
-      $support-success-inverse,
-      $background-inverse
-    );
+    @include notification--experimental($inverse-support-02, $inverse-02);
   }
 
   .#{$prefix}--toast-notification--low-contrast.#{$prefix}--toast-notification--success {
     @include notification--experimental(
-      $support-success,
+      $support-02,
       get-token-value($notification-colors, 'notification-background-success')
     );
   }
 
   .#{$prefix}--toast-notification--info,
   .#{$prefix}--toast-notification--info-square {
-    @include notification--experimental(
-      $support-info-inverse,
-      $background-inverse
-    );
+    @include notification--experimental($inverse-support-04, $inverse-02);
   }
 
   .#{$prefix}--toast-notification--low-contrast.#{$prefix}--toast-notification--info,
   .#{$prefix}--toast-notification--low-contrast.#{$prefix}--toast-notification--info-square {
     @include notification--experimental(
-      $support-info,
+      $support-04,
       get-token-value($notification-colors, 'notification-background-info')
     );
   }
 
   .#{$prefix}--toast-notification--warning,
   .#{$prefix}--toast-notification--warning-alt {
-    @include notification--experimental(
-      $support-warning-inverse,
-      $background-inverse
-    );
+    @include notification--experimental($inverse-support-03, $inverse-02);
   }
 
   .#{$prefix}--toast-notification--low-contrast.#{$prefix}--toast-notification--warning,
   .#{$prefix}--toast-notification--low-contrast.#{$prefix}--toast-notification--warning-alt {
     @include notification--experimental(
-      $support-warning,
+      $support-03,
       get-token-value($notification-colors, 'notification-background-warning')
     );
   }
@@ -182,12 +170,12 @@
     transition: outline $transition--base, background-color $transition--base;
 
     &:focus {
-      outline: 2px solid $focus-inverse;
+      outline: 2px solid $inverse-focus-ui;
       outline-offset: -2px;
     }
 
     .#{$prefix}--toast-notification__close-icon {
-      fill: $icon-inverse;
+      fill: $inverse-01;
     }
   }
 
@@ -199,7 +187,7 @@
   .#{$prefix}--toast-notification--low-contrast
     .#{$prefix}--toast-notification__close-button
     .#{$prefix}--toast-notification__close-icon {
-    fill: $icon-primary;
+    fill: $icon-01;
   }
 
   @if not feature-flag-enabled('enable-v11-release') {
@@ -216,7 +204,7 @@
 
       margin-top: 0;
       margin-bottom: $carbon--spacing-05;
-      color: $text-inverse;
+      color: $inverse-01;
       word-break: break-word;
     }
 
@@ -230,12 +218,12 @@
 
       padding-top: $carbon--spacing-03;
       margin-bottom: $carbon--spacing-05;
-      color: $text-inverse;
+      color: $inverse-01;
     }
 
     .#{$prefix}--toast-notification--low-contrast
       .#{$prefix}--toast-notification__caption {
-      color: $text-primary;
+      color: $text-01;
     }
   }
 

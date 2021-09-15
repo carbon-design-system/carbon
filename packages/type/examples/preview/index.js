@@ -236,7 +236,7 @@ function TypeStyles() {
           </tr>
         </thead>
         <tbody>
-          {Object.keys(CarbonType.styles).map(token => (
+          {Object.keys(CarbonType.styles).map((token) => (
             <tr key={token}>
               <td>
                 <pre>

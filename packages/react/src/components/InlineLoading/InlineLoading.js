@@ -94,7 +94,7 @@ InlineLoading.propTypes = {
   iconDescription: PropTypes.string,
 
   /**
-   * Provide an optional handler to be inovked when <InlineLoading> is
+   * Provide an optional handler to be invoked when <InlineLoading> is
    * successful
    */
   onSuccess: PropTypes.func,

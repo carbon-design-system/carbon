@@ -79,6 +79,8 @@ async function create(directory) {
     const sizeFolderName = directories.find((directory) => !isNaN(directory));
     if (sizeFolderName) {
       asset.size = parseInt(sizeFolderName, 10);
+    } else {
+      asset.size = 'glyph';
     }
 
     if (!registry.has(asset.id)) {

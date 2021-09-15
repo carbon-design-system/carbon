@@ -9,6 +9,7 @@ import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import classNames from 'classnames';
 import { settings } from 'carbon-components';
+import { FeatureFlagContext } from '../FeatureFlags';
 
 const { prefix } = settings;
 
@@ -126,6 +127,8 @@ export default class TimePicker extends Component {
     light: false,
   };
 
+  static contextType = FeatureFlagContext;
+
   static getDerivedStateFromProps({ value }, state) {
     const { prevValue } = state;
     return prevValue === value
@@ -157,11 +160,18 @@ export default class TimePicker extends Component {
       ...other
     } = this.props;
 
+    const scope = this.context;
+    let enabled;
+
+    if (scope.enabled) {
+      enabled = scope.enabled('enable-v11-release');
+    }
+
     const timePickerInputProps = {
       className: classNames(
         `${prefix}--time-picker__input-field`,
         `${prefix}--text-input`,
-        className,
+        [enabled ? null : className],
         {
           [`${prefix}--text-input--light`]: light,
         }
@@ -223,7 +233,12 @@ export default class TimePicker extends Component {
     ) : null;
 
     return (
-      <div className={`${prefix}--form-item`}>
+      <div
+        className={
+          enabled
+            ? classNames(`${prefix}--form-item`, className)
+            : `${prefix}--form-item`
+        }>
         {label}
         <div className={timePickerClasses}>
           <div className={`${prefix}--time-picker__input`}>

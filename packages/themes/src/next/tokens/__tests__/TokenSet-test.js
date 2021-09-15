@@ -81,7 +81,7 @@ describe('TokenSet', () => {
   });
 
   describe('hasToken', () => {
-    it('should return a boolean indiciating if the token is in the set, or a child set', () => {
+    it('should return a boolean indicating if the token is in the set, or a child set', () => {
       const token01 = Token.create('token-01');
       const group = TokenSet.create({
         name: 'group',

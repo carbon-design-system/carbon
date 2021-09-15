@@ -5,6 +5,8 @@
 // LICENSE file in the root directory of this source tree.
 //
 
+@use "sass:math";
+
 @use 'config' as *;
 @use 'breakpoint' as *;
 
@@ -27,21 +29,21 @@
   // always setting `width: 100%;`. This works because we use `flex` values
   // later on to override this initial width.
   width: 100%;
-  padding-right: ($gutter / 2);
-  padding-left: ($gutter / 2);
+  padding-right: ($gutter * 0.5);
+  padding-left: ($gutter * 0.5);
 
   // For our condensed use-case, our gutters collapse to 2px solid, 1px on each
   // side.
   .#{$prefix}--row--condensed &,
   .#{$prefix}--grid--condensed & {
-    padding-right: ($condensed-gutter / 2);
-    padding-left: ($condensed-gutter / 2);
+    padding-right: ($condensed-gutter * 0.5);
+    padding-left: ($condensed-gutter * 0.5);
   }
 
   // For our narrow use-case, our container hangs 16px into the gutter
   .#{$prefix}--row--narrow &,
   .#{$prefix}--grid--narrow & {
-    padding-right: ($gutter / 2);
+    padding-right: ($gutter * 0.5);
     padding-left: 0;
   }
 }
@@ -61,8 +63,8 @@
     // Add a `max-width` to ensure content within each column does not blow out
     // the width of the column. Applies to IE10+ and Firefox. Chrome and Safari
     // do not appear to require this.
-    max-width: percentage($span / $columns);
-    flex: 0 0 percentage($span / $columns);
+    max-width: percentage(math.div($span, $columns));
+    flex: 0 0 percentage(math.div($span, $columns));
   }
 }
 
@@ -72,7 +74,7 @@
 /// @access private
 /// @group @carbon/grid
 @mixin -make-col-offset($span, $columns) {
-  $offset: $span / $columns;
+  $offset: math.div($span, $columns);
   @if $offset == 0 {
     margin-left: 0;
   } @else {
@@ -154,8 +156,8 @@
 @mixin make-row($gutter: $grid-gutter) {
   display: flex;
   flex-wrap: wrap;
-  margin-right: -1 * $gutter / 2;
-  margin-left: -1 * $gutter / 2;
+  margin-right: -1 * $gutter * 0.5;
+  margin-left: -1 * $gutter * 0.5;
 }
 
 // -----------------------------------------------------------------------------
@@ -206,20 +208,20 @@
 /// @group @carbon/grid
 @mixin -hang($gutter: $grid-gutter) {
   .#{$prefix}--hang--start {
-    padding-left: ($gutter / 2);
+    padding-left: ($gutter * 0.5);
   }
 
   .#{$prefix}--hang--end {
-    padding-right: ($gutter / 2);
+    padding-right: ($gutter * 0.5);
   }
 
   // Deprecated ☠️
   .#{$prefix}--hang--left {
-    padding-left: ($gutter / 2);
+    padding-left: ($gutter * 0.5);
   }
 
   .#{$prefix}--hang--right {
-    padding-right: ($gutter / 2);
+    padding-right: ($gutter * 0.5);
   }
 }
 
@@ -246,14 +248,14 @@
       $prev-margin: map-get($prev-breakpoint, margin);
       @if $prev-margin != $margin {
         @include breakpoint($name) {
-          padding-right: #{($grid-gutter / 2) + $margin};
-          padding-left: #{($grid-gutter / 2) + $margin};
+          padding-right: #{($grid-gutter * 0.5) + $margin};
+          padding-left: #{($grid-gutter * 0.5) + $margin};
         }
       }
     } @else {
       @include breakpoint($name) {
-        padding-right: #{($grid-gutter / 2) + $margin};
-        padding-left: #{($grid-gutter / 2) + $margin};
+        padding-right: #{($grid-gutter * 0.5) + $margin};
+        padding-left: #{($grid-gutter * 0.5) + $margin};
       }
     }
   }
@@ -308,13 +310,13 @@
 
   .#{$prefix}--row-padding [class*='#{$prefix}--col'],
   .#{$prefix}--col-padding {
-    padding-top: $grid-gutter / 2;
-    padding-bottom: $grid-gutter / 2;
+    padding-top: $grid-gutter * 0.5;
+    padding-bottom: $grid-gutter * 0.5;
   }
 
   .#{$prefix}--grid--condensed [class*='#{$prefix}--col'] {
-    padding-top: $condensed-gutter / 2;
-    padding-bottom: $condensed-gutter / 2;
+    padding-top: $condensed-gutter * 0.5;
+    padding-bottom: $condensed-gutter * 0.5;
   }
 
   @include -make-grid-columns($breakpoints, $grid-gutter);

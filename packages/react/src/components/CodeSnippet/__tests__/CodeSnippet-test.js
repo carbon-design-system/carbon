@@ -61,7 +61,7 @@ describe('Code Snippet', () => {
       const onClick = jest.fn();
       const clickWrapper = mount(<CodeSnippet onClick={onClick} />);
       clickWrapper.find(CopyButton).simulate('click');
-      expect(onClick).toBeCalled();
+      expect(onClick).toHaveBeenCalled();
     });
 
     it('should call the click handler with type="inline"', () => {
@@ -70,7 +70,7 @@ describe('Code Snippet', () => {
         <CodeSnippet type={'inline'} onClick={onClick} />
       );
       clickWrapper.find(Copy).simulate('click');
-      expect(onClick).toBeCalled();
+      expect(onClick).toHaveBeenCalled();
     });
   });
 

@@ -124,6 +124,8 @@ beforeEach(() => {
  * the components that we export and their corresponding API.
  */
 test('Public API should only change with a semver change', () => {
+  jest.mock('../src/internal/deprecateFieldOnObject');
+
   const CarbonReact = require('../src');
   const PublicAPI = new Map();
 

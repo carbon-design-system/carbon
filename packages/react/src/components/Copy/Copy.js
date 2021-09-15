@@ -80,7 +80,7 @@ export default function Copy({
 
 Copy.propTypes = {
   /**
-   * Pass in content to be rendred in the underlying `<button>`
+   * Pass in content to be rendered in the underlying `<button>`
    */
   children: PropTypes.node,
 

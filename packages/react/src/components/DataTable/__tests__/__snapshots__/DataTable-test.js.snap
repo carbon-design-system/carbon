@@ -591,11 +591,16 @@ exports[`DataTable selection -- radio buttons should render 1`] = `
                                 <span
                                   className="bx--radio-button__appearance"
                                 />
-                                <span
+                                <Text
                                   className="bx--visually-hidden"
                                 >
-                                  Select row
-                                </span>
+                                  <span
+                                    className="bx--visually-hidden"
+                                    dir="auto"
+                                  >
+                                    Select row
+                                  </span>
+                                </Text>
                               </label>
                             </div>
                           </RadioButton>
@@ -677,11 +682,16 @@ exports[`DataTable selection -- radio buttons should render 1`] = `
                                 <span
                                   className="bx--radio-button__appearance"
                                 />
-                                <span
+                                <Text
                                   className="bx--visually-hidden"
                                 >
-                                  Select row
-                                </span>
+                                  <span
+                                    className="bx--visually-hidden"
+                                    dir="auto"
+                                  >
+                                    Select row
+                                  </span>
+                                </Text>
                               </label>
                             </div>
                           </RadioButton>
@@ -763,11 +773,16 @@ exports[`DataTable selection -- radio buttons should render 1`] = `
                                 <span
                                   className="bx--radio-button__appearance"
                                 />
-                                <span
+                                <Text
                                   className="bx--visually-hidden"
                                 >
-                                  Select row
-                                </span>
+                                  <span
+                                    className="bx--visually-hidden"
+                                    dir="auto"
+                                  >
+                                    Select row
+                                  </span>
+                                </Text>
                               </label>
                             </div>
                           </RadioButton>
@@ -2436,7 +2451,7 @@ exports[`DataTable should render 1`] = `
                   }
                 }
               >
-                <ForwardRef(FeatureToggle(OverflowMenu))
+                <FeatureToggle(OverflowMenu)
                   ariaLabel="Settings"
                   className="bx--toolbar-action bx--overflow-menu"
                   flipped={true}
@@ -2549,7 +2564,7 @@ exports[`DataTable should render 1`] = `
                       </ClickListener>
                     </OverflowMenu>
                   </ForwardRef(OverflowMenu)>
-                </ForwardRef(FeatureToggle(OverflowMenu))>
+                </FeatureToggle(OverflowMenu)>
               </TableToolbarMenu>
               <Button
                 dangerDescription="danger"
@@ -3497,7 +3512,7 @@ exports[`DataTable sticky header should render 1`] = `
                   }
                 }
               >
-                <ForwardRef(FeatureToggle(OverflowMenu))
+                <FeatureToggle(OverflowMenu)
                   ariaLabel="Settings"
                   className="bx--toolbar-action bx--overflow-menu"
                   flipped={true}
@@ -3610,7 +3625,7 @@ exports[`DataTable sticky header should render 1`] = `
                       </ClickListener>
                     </OverflowMenu>
                   </ForwardRef(OverflowMenu)>
-                </ForwardRef(FeatureToggle(OverflowMenu))>
+                </FeatureToggle(OverflowMenu)>
               </TableToolbarMenu>
               <Button
                 dangerDescription="danger"

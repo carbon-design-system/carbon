@@ -1,8 +1,12 @@
 'use strict';
 
-const aChecker = require('accessibility-checker');
+let aChecker = null;
 
 async function toHaveNoACViolations(node, label) {
+  if (aChecker === null) {
+    aChecker = require('accessibility-checker');
+  }
+
   let results = await aChecker.getCompliance(node, label);
   if (aChecker.assertCompliance(results.report) === 0) {
     return {

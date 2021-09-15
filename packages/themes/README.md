@@ -93,6 +93,12 @@ import {
 } from '@carbon/themes';
 ```
 
+## 📖 API Documentation
+
+If you're looking for `@carbon/themes` API documentation, check out:
+
+- [Sass](./docs/sass.md)
+
 ## 📚 Examples
 
 If you're looking for more examples on how to use `@carbon/themes`, we have some

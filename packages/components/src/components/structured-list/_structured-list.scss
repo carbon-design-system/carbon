@@ -75,7 +75,7 @@
 
   .#{$prefix}--structured-list-row {
     display: table-row;
-    border-bottom: 1px solid $border-subtle;
+    border-bottom: 1px solid $ui-03;
     transition: background-color $duration--fast-02 motion(standard, productive);
   }
 
@@ -87,11 +87,11 @@
   }
 
   .#{$prefix}--structured-list-row.#{$prefix}--structured-list-row--selected {
-    background-color: $background-selected;
+    background-color: $selected-ui;
   }
 
   .#{$prefix}--structured-list-row.#{$prefix}--structured-list-row--header-row {
-    border-bottom: 1px solid $background-selected;
+    border-bottom: 1px solid $selected-ui;
     cursor: inherit;
   }
 
@@ -105,16 +105,16 @@
     > .#{$prefix}--structured-list-td,
   .#{$prefix}--structured-list-row.#{$prefix}--structured-list-row--selected
     > .#{$prefix}--structured-list-td {
-    color: $text-primary;
+    color: $text-01;
   }
 
   .#{$prefix}--structured-list--selection
     .#{$prefix}--structured-list-row:hover:not(.#{$prefix}--structured-list-row--header-row)
     > .#{$prefix}--structured-list-td {
-    @if feature-flag-enable('enabled-2021-release') {
+    @if feature-flag-enabled('enable-v11-release') {
       border-top: 1px solid $border-subtle;
     } @else {
-      border-top: 1px solid $layer;
+      border-top: 1px solid $ui-01;
     }
   }
 
@@ -130,7 +130,7 @@
 
     display: table-cell;
     height: rem(40px);
-    color: $text-primary;
+    color: $text-01;
     font-weight: 600;
     text-align: left;
     text-transform: $structured-list-text-transform;
@@ -150,9 +150,9 @@
     position: relative;
     display: table-cell;
     max-width: 36rem;
-    color: $text-primary;
+    color: $text-02;
     @if feature-flag-enabled('enable-v11-release') {
-      border-top: 1px solid $border-subtle;
+      border-top: 1px solid $ui-03;
     }
 
     transition: color $duration--fast-02 motion(standard, productive);
@@ -175,7 +175,7 @@
   .#{$prefix}--structured-list-input:checked
     + .#{$prefix}--structured-list-td
     .#{$prefix}--structured-list-svg {
-    fill: $icon-primary;
+    fill: $icon-01;
   }
 
   // Skeleton State

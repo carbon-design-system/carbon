@@ -17,7 +17,7 @@
     @return 12px;
   }
   // Yn = Yn-1 + {INT[(n-2)/4] + 1} * 2
-  @return get-type-size($step - 1) + (floor(($step - 2) / 4) + 1) * 2;
+  @return get-type-size($step - 1) + (floor(($step - 2) * 0.25) + 1) * 2;
 }
 
 /// Type scale follows a custom formula for determining each step size and supports sizes from 12px to 92px

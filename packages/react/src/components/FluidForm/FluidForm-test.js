@@ -52,7 +52,7 @@ describe('FluidForm', () => {
       );
       const btn = form1.find('button');
       btn.simulate('submit');
-      expect(onSubmit).toBeCalled();
+      expect(onSubmit).toHaveBeenCalled();
     });
   });
 });

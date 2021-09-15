@@ -204,7 +204,7 @@ class Checkbox extends mixin(createComponent, initComponentBySearch, handles) {
   /**
    * The component options.
    * If `options` is specified in the constructor, {@linkcode Checkbox.create .create()}, or {@linkcode Checkbox.init .init()},
-   * properties in this object are overriden for the instance being create and how {@linkcode Checkbox.init .init()} works.
+   * properties in this object are overridden for the instance being create and how {@linkcode Checkbox.init .init()} works.
    * @member Checkbox.options
    * @type {object}
    * @property {string} selectorInit The data attribute to find copy button UIs.

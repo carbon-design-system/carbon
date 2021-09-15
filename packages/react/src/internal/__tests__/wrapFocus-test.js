@@ -44,6 +44,25 @@ describe('wrapFocus', () => {
     spyButton2 = jest.spyOn(node.querySelector('#button-2'), 'focus');
   });
 
+  afterEach(() => {
+    if (spyButton2) {
+      spyButton2.mockRestore();
+      spyButton2 = null;
+    }
+    if (spyButton0) {
+      spyButton0.mockRestore();
+      spyButton0 = null;
+    }
+    if (spyInnerModal) {
+      spyInnerModal.mockRestore();
+      spyInnerModal = null;
+    }
+    if (node) {
+      node.parentNode.removeChild(node);
+      node = null;
+    }
+  });
+
   it('runs forward focus-wrap when following outer node is focused on', () => {
     wrapFocus({
       bodyNode: node.querySelector('#inner-modal'),
@@ -127,24 +146,5 @@ describe('wrapFocus', () => {
       oldActiveNode: node.querySelector('#dummy-old-active-node'),
     });
     expect(spyInnerModal).toHaveBeenCalled();
-  });
-
-  afterEach(() => {
-    if (spyButton2) {
-      spyButton2.mockRestore();
-      spyButton2 = null;
-    }
-    if (spyButton0) {
-      spyButton0.mockRestore();
-      spyButton0 = null;
-    }
-    if (spyInnerModal) {
-      spyInnerModal.mockRestore();
-      spyInnerModal = null;
-    }
-    if (node) {
-      node.parentNode.removeChild(node);
-      node = null;
-    }
   });
 });

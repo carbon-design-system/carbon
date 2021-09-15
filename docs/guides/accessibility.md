@@ -184,7 +184,7 @@ can dig into those points further:
 
    Obscuring all or some of the page on mouse hover with an overlay or blur is a
    problem for user of screen magnifiers. Maintain required contrast ration and
-   instead signal to your users with some other visual dinstinction.
+   instead signal to your users with some other visual distinction.
 
 #### How to test
 

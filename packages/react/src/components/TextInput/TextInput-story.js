@@ -8,10 +8,11 @@
 import React, { useState } from 'react';
 import { action } from '@storybook/addon-actions';
 import { withKnobs, boolean, select, text } from '@storybook/addon-knobs';
-import TextInput from '../TextInput';
+import { TextInput } from '../../index';
 import TextInputSkeleton from '../TextInput/TextInput.Skeleton';
 import FluidForm from '../FluidForm/FluidForm';
 import mdx from './TextInput.mdx';
+import { FeatureFlags } from '../FeatureFlags';
 
 const types = {
   None: '',
@@ -122,6 +123,30 @@ export default {
     },
   },
 };
+
+export const classNameChangeTest = () => (
+  <>
+    <TextInput
+      defaultValue="The class should be added to the label"
+      labelText="Text input label"
+      helperText="Optional help text"
+      type={select('Form control type (type)', types, 'text')}
+      {...props.TextInputProps()}
+      className="TEST_CLASS"
+    />
+    <br />
+    <FeatureFlags flags={{ 'enable-v11-release': true }}>
+      <TextInput
+        defaultValue="The class should be added to the wrapper"
+        labelText="Text input label"
+        helperText="Optional help text"
+        type={select('Form control type (type)', types, 'text')}
+        {...props.TextInputProps()}
+        className="TEST_CLASS"
+      />
+    </FeatureFlags>
+  </>
+);
 
 export const Default = () => (
   <TextInput

@@ -63,7 +63,7 @@
     flex-shrink: 0;
     margin: rem(10px) $carbon--spacing-03 0 0;
     border-radius: 50%;
-    fill: $interactive;
+    fill: $interactive-04;
   }
 
   .#{$prefix}--progress-label {
@@ -72,7 +72,7 @@
     overflow: hidden;
     max-width: rem(88px);
     margin: $carbon--spacing-03 0 0 0;
-    color: $text-primary;
+    color: $text-01;
     line-height: 1.45;
     text-overflow: ellipsis;
     transition: box-shadow $duration--fast-02 motion(standard, productive),
@@ -86,14 +86,14 @@
   }
 
   .#{$prefix}--progress-label:hover {
-    box-shadow: 0 rem(1px) $link-primary;
-    color: $link-primary;
+    box-shadow: 0 rem(1px) $link-01;
+    color: $link-01;
     cursor: pointer;
   }
 
   .#{$prefix}--progress-label:focus {
-    box-shadow: 0 rem(3px) 0 0 $link-primary;
-    color: $link-primary;
+    box-shadow: 0 rem(3px) 0 0 $link-01;
+    color: $link-01;
     outline: none;
   }
 
@@ -103,8 +103,8 @@
   }
 
   .#{$prefix}--progress-label:active {
-    box-shadow: 0 rem(3px) 0 0 $background-brand;
-    color: $background-brand;
+    box-shadow: 0 rem(3px) 0 0 $interactive-01;
+    color: $interactive-01;
   }
 
   //OVERFLOW STYLING
@@ -135,7 +135,7 @@
     padding: $carbon--spacing-03 $carbon--spacing-05;
     margin-top: rem(40px);
     margin-left: rem(22px);
-    color: $text-inverse;
+    color: $inverse-01;
     visibility: hidden;
   }
 
@@ -145,7 +145,7 @@
 
     width: rem(150px);
     height: auto;
-    color: $text-inverse;
+    color: $inverse-01;
   }
 
   //OPTIONAL HELPER TEXT STYLING
@@ -156,32 +156,32 @@
     left: 0;
     margin-top: rem(28px);
     margin-left: $carbon--spacing-06;
-    color: $text-secondary;
+    color: $text-02;
     text-align: start;
   }
 
   //CURRENT STYLING
   .#{$prefix}--progress-step--current {
     .#{$prefix}--progress-line {
-      background-color: $interactive;
+      background-color: $interactive-04;
     }
   }
 
   //INCOMPLETE STYLING
   .#{$prefix}--progress-step--incomplete {
     svg {
-      fill: $icon-primary;
+      fill: $ui-05;
     }
 
     .#{$prefix}--progress-line {
-      background-color: $border-subtle;
+      background-color: $ui-03;
     }
   }
 
   //COMPLETED STYLING
   .#{$prefix}--progress-step--complete {
     .#{$prefix}--progress-line {
-      background-color: $interactive;
+      background-color: $interactive-04;
     }
   }
 
@@ -202,14 +202,14 @@
   .#{$prefix}--progress-step-button--unclickable
     .#{$prefix}--progress-label:hover {
     box-shadow: none;
-    color: $text-primary;
+    color: $text-01;
     cursor: default;
   }
 
   .#{$prefix}--progress-step-button--unclickable
     .#{$prefix}--tooltip__label:hover {
-    box-shadow: 0 rem(1px) $link-primary;
-    color: $link-primary;
+    box-shadow: 0 rem(1px) $link-01;
+    color: $link-01;
     cursor: pointer;
   }
 
@@ -249,7 +249,7 @@
 
   // ERROR STYLING
   .#{$prefix}--progress__warning > * {
-    fill: $support-error;
+    fill: $support-01;
   }
 
   // Skeleton State
@@ -293,7 +293,9 @@
     white-space: initial;
   }
 
-  .#{$prefix}--progress--vertical .#{$prefix}--progress-step .bx--tooltip {
+  .#{$prefix}--progress--vertical
+    .#{$prefix}--progress-step
+    .#{$prefix}--tooltip {
     margin-top: 0.5rem;
   }
 

@@ -389,7 +389,7 @@ export function InlineNotification({
   });
 
   // Placing interactable element(s) within a notification requires a role of
-  // alertdialog. Additionaly, focus must be automatically moved to the component.
+  // alertdialog. Additionally, focus must be automatically moved to the component.
   const role = actions ? 'alertdialog' : initialRole;
   const ref = useRef(null);
   useIsomorphicEffect(() => {

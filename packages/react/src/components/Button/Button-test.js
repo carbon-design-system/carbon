@@ -14,7 +14,6 @@ import { shallow, mount } from 'enzyme';
 import { settings } from 'carbon-components';
 import { cleanup, render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import '@testing-library/jest-dom';
 
 const { prefix } = settings;
 
@@ -305,7 +304,7 @@ describe('DangerButton', () => {
 });
 
 describe('danger--primaryButton', () => {
-  describe('Renders as exptected', () => {
+  describe('Renders as expected', () => {
     const wrapper = shallow(
       <Button kind="danger--primary" className="extra-class" />
     );
@@ -321,7 +320,7 @@ describe('danger--primaryButton', () => {
 });
 
 describe('TertiaryButton', () => {
-  describe('Renders as exptected', () => {
+  describe('Renders as expected', () => {
     const wrapper = shallow(<Button kind="tertiary" className="extra-class" />);
 
     it('has the expected classes', () => {
@@ -373,6 +372,24 @@ describe('ButtonSkeleton', () => {
       expect(wrapper.hasClass(`${prefix}--skeleton`)).toEqual(true);
       expect(wrapper.hasClass(`${prefix}--btn`)).toEqual(true);
     });
+
+    const wrapperMd = shallow(<ButtonSkeleton size="md" />);
+
+    it('renders the medium size', () => {
+      expect(wrapperMd.hasClass(`${prefix}--btn--md`)).toEqual(true);
+    });
+
+    const wrapperLg = shallow(<ButtonSkeleton size="lg" />);
+
+    it('renders the large size', () => {
+      expect(wrapperLg.hasClass(`${prefix}--btn--lg`)).toEqual(true);
+    });
+
+    const wrapperXl = shallow(<ButtonSkeleton size="xl" />);
+
+    it('renders the extra-large size', () => {
+      expect(wrapperXl.hasClass(`${prefix}--btn--xl`)).toEqual(true);
+    });
   });
 
   describe('Renders <a> props as expected', () => {
@@ -387,17 +404,6 @@ describe('ButtonSkeleton', () => {
 
     it('should always render with [role="button"] by default', () => {
       expect(wrapper.props().role).toEqual('button');
-    });
-  });
-});
-
-describe('Small ButtonSkeleton', () => {
-  describe('Renders as expected', () => {
-    const wrapper = shallow(<ButtonSkeleton small />);
-
-    it('has the expected classes for small', () => {
-      expect(wrapper.hasClass(`${prefix}--btn--sm`)).toEqual(true);
-      expect(wrapper.hasClass(`${prefix}--skeleton`)).toEqual(true);
     });
   });
 });

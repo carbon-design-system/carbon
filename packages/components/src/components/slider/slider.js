@@ -235,7 +235,7 @@ class Slider extends mixin(
   /**
    * The component options.
    * If `options` is specified in the constructor,
-   * properties in this object are overriden for the instance being created.
+   * properties in this object are overridden for the instance being created.
    * @property {string} selectorInit The CSS selector to find slider instances.
    */
   static get options() {
