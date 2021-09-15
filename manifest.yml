@@ -1,0 +1,4 @@
+---
+applications:
+  - name: input-validation-animation
+    buildpack: https://github.com/cloudfoundry/staticfile-buildpack.git
