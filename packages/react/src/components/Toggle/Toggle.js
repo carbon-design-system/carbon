@@ -8,11 +8,10 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import classNames from 'classnames';
-import { settings } from 'carbon-components';
 import setupGetInstanceId from '../../tools/setupGetInstanceId';
 import { keys, match } from '../../internal/keyboard';
+import { PrefixContext } from '../../internal/usePrefix';
 
-const { prefix } = settings;
 const getInstanceId = setupGetInstanceId();
 
 class Toggle extends React.Component {
@@ -69,6 +68,8 @@ class Toggle extends React.Component {
      */
     toggled: PropTypes.bool,
   };
+  static contextType = PrefixContext;
+  prefix = this.context;
 
   static defaultProps = {
     defaultToggled: false,
@@ -79,6 +80,7 @@ class Toggle extends React.Component {
   };
 
   render() {
+    const prefix = this.prefix;
     const {
       className,
       defaultToggled,

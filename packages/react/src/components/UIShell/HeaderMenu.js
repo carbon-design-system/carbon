@@ -6,18 +6,12 @@
  */
 
 import { ChevronDown16 } from '@carbon/icons-react';
-import { settings } from 'carbon-components';
 import cx from 'classnames';
 import React from 'react';
 import PropTypes from 'prop-types';
 import { keys, matches } from '../../internal/keyboard';
 import { AriaLabelPropType } from '../../prop-types/AriaPropTypes';
-
-const { prefix } = settings;
-
-const defaultRenderMenuContent = () => (
-  <ChevronDown16 className={`${prefix}--header__menu-arrow`} />
-);
+import { PrefixContext } from '../../internal/usePrefix';
 
 /**
  * `HeaderMenu` is used to render submenu's in the `Header`. Most often children
@@ -53,8 +47,13 @@ class HeaderMenu extends React.Component {
     tabIndex: PropTypes.number,
   };
 
+  static contextType = PrefixContext;
+  prefix = this.context;
+
   static defaultProps = {
-    renderMenuContent: defaultRenderMenuContent,
+    renderMenuContent: (
+      <ChevronDown16 className={`${this.prefix}--header__menu-arrow`} />
+    ),
   };
 
   _subMenus = React.createRef();
@@ -166,6 +165,7 @@ class HeaderMenu extends React.Component {
   };
 
   render() {
+    const prefix = this.prefix;
     const {
       'aria-label': ariaLabel,
       'aria-labelledby': ariaLabelledBy,

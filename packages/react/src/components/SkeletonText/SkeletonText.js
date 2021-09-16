@@ -8,9 +8,7 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import classNames from 'classnames';
-import { settings } from 'carbon-components';
-
-const { prefix } = settings;
+import { usePrefix } from '../../internal/usePrefix';
 
 const randoms = [0.973051493507435, 0.15334737213558558, 0.5671034553053769];
 
@@ -26,6 +24,7 @@ const SkeletonText = ({
   className,
   ...other
 }) => {
+  const prefix = usePrefix();
   const skeletonTextClasses = classNames({
     [`${prefix}--skeleton__text`]: true,
     [`${prefix}--skeleton__heading`]: heading,
