@@ -1997,7 +1997,7 @@ __metadata:
     "@babel/preset-react": ^7.14.5
     "@carbon/feature-flags": ^0.6.0
     "@carbon/icons-react": ^10.38.0
-    "@carbon/styles": ^0.4.0
+    "@carbon/styles": ^0.5.0-rc.0
     "@carbon/telemetry": 0.0.0-alpha.6
     "@carbon/themes": ^10.42.0
     "@rollup/plugin-babel": ^5.3.0
@@ -2013,8 +2013,8 @@ __metadata:
     babel-plugin-dev-expression: ^0.2.2
     babel-preset-carbon: ^0.1.0
     browserslist-config-carbon: ^10.6.1
-    carbon-components: ^10.43.0
-    carbon-components-react: ^7.43.0
+    carbon-components: ^10.44.0-rc.0
+    carbon-components-react: ^7.44.0-rc.0
     carbon-icons: ^7.0.7
     css-loader: ^5.2.4
     fs-extra: ^10.0.0
@@ -2067,7 +2067,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@carbon/styles@^0.4.0, @carbon/styles@workspace:packages/styles":
+"@carbon/styles@^0.5.0-rc.0, @carbon/styles@workspace:packages/styles":
   version: 0.0.0-use.local
   resolution: "@carbon/styles@workspace:packages/styles"
   dependencies:
@@ -10285,7 +10285,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"carbon-components-react@^7.43.0, carbon-components-react@workspace:packages/react":
+"carbon-components-react@^7.44.0-rc.0, carbon-components-react@workspace:packages/react":
   version: 0.0.0-use.local
   resolution: "carbon-components-react@workspace:packages/react"
   dependencies:
@@ -10328,7 +10328,7 @@ __metadata:
     babel-plugin-react-docgen: ^4.2.1
     babel-plugin-transform-inline-environment-variables: ^0.4.3
     browserslist-config-carbon: ^10.6.1
-    carbon-components: ^10.43.0
+    carbon-components: ^10.44.0-rc.0
     carbon-icons: ^7.0.5
     chalk: ^4.1.1
     classnames: 2.3.1
@@ -10377,6 +10377,7 @@ __metadata:
     webpack: ^4.41.5
     webpack-dev-server: ^3.11.2
     whatwg-fetch: ^3.6.2
+    wicg-inert: ^3.1.1
     window-or-global: ^1.0.1
   peerDependencies:
     carbon-components: ^10.30.0
@@ -10411,7 +10412,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"carbon-components@^10.43.0, carbon-components@workspace:packages/components":
+"carbon-components@^10.44.0-rc.0, carbon-components@workspace:packages/components":
   version: 0.0.0-use.local
   resolution: "carbon-components@workspace:packages/components"
   dependencies:
@@ -34938,6 +34939,13 @@ resolve@^2.0.0-next.3:
   bin:
     node-which: ./bin/node-which
   checksum: 1a5c563d3c1b52d5f893c8b61afe11abc3bab4afac492e8da5bde69d550de701cf9806235f20a47b5c8fa8a1d6a9135841de2596535e998027a54589000e66d1
+  languageName: node
+  linkType: hard
+
+"wicg-inert@npm:^3.1.1":
+  version: 3.1.1
+  resolution: "wicg-inert@npm:3.1.1"
+  checksum: d4553ea762ad5808b2d20990f05695d3272cf5d24ee9b0008d0edb0c69466eb6a24824ed932070553a2dc8b25eee8fcde780e073de89d640882d9da99f874944
   languageName: node
   linkType: hard
 

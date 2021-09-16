@@ -212,9 +212,16 @@ export default class Search extends Component {
       [`${prefix}--search-close--hidden`]: !hasContent,
     });
 
+    let customIcon;
+    if (renderIcon) {
+      customIcon = React.cloneElement(renderIcon, {
+        className: `${prefix}--search-magnifier-icon`,
+      });
+    }
+
     const searchId = `${id}-search`;
     const searchIcon = renderIcon ? (
-      renderIcon
+      customIcon
     ) : (
       <Search16 className={`${prefix}--search-magnifier-icon`} />
     );
