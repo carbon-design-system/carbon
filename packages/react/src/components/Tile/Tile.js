@@ -133,7 +133,7 @@ export class ClickableTile extends Component {
       },
       () => {
         // TODO: Remove handleClick prop when handleClick is deprecated
-        this.props.handleClick?.(evt) || this.props.onClick(evt);
+        this.props.handleClick?.(evt) || this.props.onClick?.(evt);
       }
     );
   };
@@ -196,10 +196,8 @@ export class ClickableTile extends Component {
         href={href}
         className={classes}
         {...rest}
-        // TODO: replace with onClick when handleClick prop is deprecated
-        onClick={composeEventHandlers([this.onClick, this.handleClick])}
-        // TODO: replace with onKeyDown when handleKeyDown prop is deprecated
-        onKeyDown={composeEventHandlers([this.onKeyDown, this.handleKeyDown])}>
+        onClick={this.handleClick}
+        onKeyDown={this.handleKeyDown}>
         {children}
       </Link>
     );
@@ -210,7 +208,7 @@ export function SelectableTile(props) {
   const {
     children,
     id,
-    tabIndex = 0,
+    tabIndex,
     value,
     name,
     title,
@@ -580,7 +578,7 @@ export class ExpandableTile extends Component {
       () => {
         this.setMaxHeight();
         // TODO: Remove handleClick prop when handleClick is deprecated
-        this.props.handleClick?.(evt) || this.props.onClick(evt);
+        this.props.handleClick?.(evt) || this.props.onClick?.(evt);
       }
     );
   };
@@ -605,8 +603,8 @@ export class ExpandableTile extends Component {
       tileMaxHeight, // eslint-disable-line
       tilePadding, // eslint-disable-line
       handleClick, // eslint-disable-line
-      onClick, // eslint-disable-line
-      onKeyUp, // eslint-disable-line
+      onClick,
+      onKeyUp,
       tileCollapsedIconText,
       tileExpandedIconText,
       tileCollapsedLabel,
@@ -648,10 +646,8 @@ export class ExpandableTile extends Component {
         aria-expanded={isExpanded}
         title={isExpanded ? tileExpandedIconText : tileCollapsedIconText}
         {...rest}
-        // TODO: replace with onKeyUp when handleKeyup prop is deprecated
-        onKeyUp={composeEventHandlers([this.onKeyUp, this.handleKeyUp])}
-        // TODO: replace with onClick when handleClick prop is deprecated
-        onClick={composeEventHandlers([this.onClick, this.handleClick])}
+        onKeyUp={composeEventHandlers([onKeyUp, this.handleKeyUp])}
+        onClick={composeEventHandlers([onClick, this.handleClick])}
         tabIndex={tabIndex}>
         <div
           ref={(tileContent) => {
