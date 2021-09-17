@@ -17362,7 +17362,7 @@
     - 24
     - 32
 - name: ungroup-objects
-    friendly_name: Ungroup objects
+  friendly_name: Ungroup objects
   aliases:
     - formatting
     - objects
