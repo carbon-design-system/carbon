@@ -14741,7 +14741,7 @@
   sizes:
     - 32
 - name: settings--view
-    friendly_name: Settings view
+  friendly_name: Settings view
   aliases:
     - settings
     - controls
