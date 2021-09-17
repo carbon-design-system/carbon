@@ -16122,7 +16122,7 @@
   sizes:
     - 32
 - name: task--settings
-   friendly_name: Task settings
+  friendly_name: Task settings
   aliases:
     - file
     - task
