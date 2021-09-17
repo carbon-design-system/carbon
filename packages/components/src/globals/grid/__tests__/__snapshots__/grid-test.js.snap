@@ -1,7 +1,8 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`_grid.scss should generate grid code when the grid feature flag is on 1`] = `
-"h1 {
+"/* stylelint-disable number-max-precision */
+h1 {
   font-size: 2.625rem;
   font-weight: 300;
   line-height: 1.199;
@@ -16,7 +17,7 @@ h2 {
 h3 {
   font-size: 1.75rem;
   font-weight: 400;
-  line-height: 1.29;
+  line-height: 1.28572;
   letter-spacing: 0; }
 
 h4 {
@@ -34,7 +35,7 @@ h5 {
 h6 {
   font-size: 0.875rem;
   font-weight: 600;
-  line-height: 1.29;
+  line-height: 1.28572;
   letter-spacing: 0.16px; }
 
 p {
@@ -49,6 +50,7 @@ a {
 em {
   font-style: italic; }
 
+/* stylelint-disable number-max-precision */
 @keyframes skeleton {
   0% {
     opacity: 0.3;
@@ -81,6 +83,7 @@ em {
     transform: scaleX(0);
     transform-origin: left; } }
 
+/* stylelint-disable number-max-precision */
 .bx--grid {
   margin-right: auto;
   margin-left: auto;
