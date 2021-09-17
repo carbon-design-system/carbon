@@ -10896,7 +10896,7 @@
   sizes:
     - 32
 - name: media-cast
-    friendly_name: Media cast
+  friendly_name: Media cast
   aliases:
     - media
     - broadcast
