@@ -16078,7 +16078,7 @@
   sizes:
     - 32
 - name: task--approved
-    friendly_name: Task approved
+  friendly_name: Task approved
   aliases:
     - file
     - task
