@@ -16091,7 +16091,7 @@
   sizes:
     - 32
 - name: task--asset-view
- friendly_name: Task asset-view
+  friendly_name: Task asset-view
   aliases:
     - file
     - task
