@@ -16141,7 +16141,7 @@
   sizes:
     - 32
 - name: task--tools
- friendly_name: Task tools
+  friendly_name: Task tools
   aliases:
     - file
     - task
