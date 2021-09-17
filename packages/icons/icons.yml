@@ -14732,7 +14732,7 @@
   sizes:
     - 32
 - name: settings--services
-   friendly_name: Settings services
+  friendly_name: Settings services
   aliases:
     - settings
     - controls
