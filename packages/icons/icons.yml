@@ -18080,7 +18080,7 @@
   sizes:
     - 32
 - name: volume--block-storage
-    friendly_name: Volume block storage
+  friendly_name: Volume block storage
   aliases:
     - systems
     - volume
