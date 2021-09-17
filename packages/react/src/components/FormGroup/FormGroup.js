@@ -8,10 +8,8 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import classnames from 'classnames';
-import { settings } from 'carbon-components';
 import { useFeatureFlag } from '../FeatureFlags';
-
-const { prefix } = settings;
+import { usePrefix } from '../../internal/usePrefix';
 
 const FormGroup = ({
   legendId,
@@ -24,6 +22,7 @@ const FormGroup = ({
   hasMargin,
   ...other
 }) => {
+  const prefix = usePrefix();
   const enabled = useFeatureFlag('enable-v11-release');
   const classNamesLegend = classnames(`${prefix}--label`, [
     enabled ? null : className,
