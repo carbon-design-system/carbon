@@ -16047,7 +16047,7 @@
     - shop
     - marker
 - name: tank
-    friendly_name: Tank
+  friendly_name: Tank
   aliases:
     - tank
     - travel
