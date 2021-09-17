@@ -7204,7 +7204,7 @@
     - school
     - school of fish
 - name: fit-to-height
-    friendly_name: Fit-to-height
+  friendly_name: Fit-to-height
   aliases:
     - controls
     - height
