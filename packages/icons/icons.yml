@@ -16863,7 +16863,7 @@
   sizes:
     - 32
 - name: tool-kit
- friendly_name: Tool kit
+  friendly_name: Tool kit
   aliases:
     - tools
     - kit
