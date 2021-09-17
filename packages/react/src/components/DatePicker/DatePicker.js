@@ -10,15 +10,13 @@ import React, { Component } from 'react';
 import classNames from 'classnames';
 import flatpickr from 'flatpickr';
 import l10n from 'flatpickr/dist/l10n/index';
-import { settings } from 'carbon-components';
 import DatePickerInput from '../DatePickerInput';
 import carbonFlatpickrAppendToPlugin from './plugins/appendToPlugin';
 import carbonFlatpickrFixEventsPlugin from './plugins/fixEventsPlugin';
 import carbonFlatpickrRangePlugin from './plugins/rangePlugin';
 import { match, keys } from '../../internal/keyboard';
 import { FeatureFlagContext } from '../FeatureFlags';
-
-const { prefix } = settings;
+import { PrefixContext } from '../../internal/usePrefix';
 
 // Weekdays shorthand for english locale
 l10n.en.weekdays.shorthand.forEach((day, index) => {
@@ -523,31 +521,34 @@ export default class DatePicker extends Component {
     }
   };
 
+  static contextType = PrefixContext;
+  prefix = this.context;
+
   updateClassNames = (calendar) => {
     const calendarContainer = calendar.calendarContainer;
     const daysContainer = calendar.days;
     if (calendarContainer && daysContainer) {
       // calendarContainer and daysContainer are undefined if flatpickr detects a mobile device
-      calendarContainer.classList.add(`${prefix}--date-picker__calendar`);
+      calendarContainer.classList.add(`${this.prefix}--date-picker__calendar`);
       calendarContainer
         .querySelector('.flatpickr-month')
-        .classList.add(`${prefix}--date-picker__month`);
+        .classList.add(`${this.prefix}--date-picker__month`);
       calendarContainer
         .querySelector('.flatpickr-weekdays')
-        .classList.add(`${prefix}--date-picker__weekdays`);
+        .classList.add(`${this.prefix}--date-picker__weekdays`);
       calendarContainer
         .querySelector('.flatpickr-days')
-        .classList.add(`${prefix}--date-picker__days`);
+        .classList.add(`${this.prefix}--date-picker__days`);
       forEach.call(
         calendarContainer.querySelectorAll('.flatpickr-weekday'),
         (item) => {
           const currentItem = item;
           currentItem.innerHTML = currentItem.innerHTML.replace(/\s+/g, '');
-          currentItem.classList.add(`${prefix}--date-picker__weekday`);
+          currentItem.classList.add(`${this.prefix}--date-picker__weekday`);
         }
       );
       forEach.call(daysContainer.querySelectorAll('.flatpickr-day'), (item) => {
-        item.classList.add(`${prefix}--date-picker__day`);
+        item.classList.add(`${this.prefix}--date-picker__day`);
         if (
           item.classList.contains('today') &&
           calendar.selectedDates.length > 0
@@ -568,7 +569,7 @@ export default class DatePicker extends Component {
       ? null
       : // Child is a regular DOM node, seen in tests
       node.nodeType === Node.ELEMENT_NODE
-      ? node.querySelector(`.${prefix}--date-picker__input`)
+      ? node.querySelector(`.${this.prefix}--date-picker__input`)
       : // Child is a React component
       node.input && node.input.nodeType === Node.ELEMENT_NODE
       ? node.input
@@ -580,7 +581,7 @@ export default class DatePicker extends Component {
       ? null
       : // Child is a regular DOM node, seen in tests
       node.nodeType === Node.ELEMENT_NODE
-      ? node.querySelector(`.${prefix}--date-picker__input`)
+      ? node.querySelector(`.${this.prefix}--date-picker__input`)
       : // Child is a React component
       node.input && node.input.nodeType === Node.ELEMENT_NODE
       ? node.input
@@ -616,20 +617,20 @@ export default class DatePicker extends Component {
     }
 
     const datePickerClasses = classNames(
-      `${prefix}--date-picker`,
+      `${this.prefix}--date-picker`,
       [enabled ? null : className],
       {
-        [`${prefix}--date-picker--short`]: short,
-        [`${prefix}--date-picker--light`]: light,
-        [`${prefix}--date-picker--simple`]: datePickerType === 'simple',
-        [`${prefix}--date-picker--single`]: datePickerType === 'single',
-        [`${prefix}--date-picker--range`]: datePickerType === 'range',
-        [`${prefix}--date-picker--nolabel`]:
+        [`${this.prefix}--date-picker--short`]: short,
+        [`${this.prefix}--date-picker--light`]: light,
+        [`${this.prefix}--date-picker--simple`]: datePickerType === 'simple',
+        [`${this.prefix}--date-picker--single`]: datePickerType === 'single',
+        [`${this.prefix}--date-picker--range`]: datePickerType === 'range',
+        [`${this.prefix}--date-picker--nolabel`]:
           datePickerType === 'range' && this.isLabelTextEmpty(children),
       }
     );
 
-    const wrapperClasses = classNames(`${prefix}--form-item`, [
+    const wrapperClasses = classNames(`${this.prefix}--form-item`, [
       enabled ? className : null,
     ]);
 

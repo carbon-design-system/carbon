@@ -8,7 +8,6 @@
 import React, { Component, useEffect, useRef, useState } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
-import { settings } from 'carbon-components';
 import Link from '../Link';
 import {
   Checkbox16,
@@ -18,8 +17,7 @@ import {
 import { keys, matches } from '../../internal/keyboard';
 import deprecate from '../../prop-types/deprecate';
 import { composeEventHandlers } from '../../tools/events';
-
-const { prefix } = settings;
+import { PrefixContext, usePrefix } from '../../internal/usePrefix';
 
 export class Tile extends Component {
   static propTypes = {
@@ -40,11 +38,14 @@ export class Tile extends Component {
     light: PropTypes.bool,
   };
 
+  static contextType = PrefixContext;
+
   static defaultProps = {
     light: false,
   };
 
   render() {
+    const prefix = this.context;
     const { children, className, light, ...other } = this.props;
     const tileClasses = classNames(
       `${prefix}--tile`,
@@ -102,6 +103,8 @@ export class ClickableTile extends Component {
     rel: PropTypes.string,
   };
 
+  static contextType = PrefixContext;
+
   static defaultProps = {
     clicked: false,
     handleClick: () => {},
@@ -149,6 +152,7 @@ export class ClickableTile extends Component {
   }
 
   render() {
+    const prefix = this.context;
     const {
       children,
       href,
@@ -204,6 +208,8 @@ export function SelectableTile(props) {
     selected,
     ...other
   } = props;
+
+  const prefix = usePrefix();
 
   // TODO: replace with onClick when handleClick prop is deprecated
   const clickHandler = handleClick || onClick;
@@ -465,6 +471,8 @@ export class ExpandableTile extends Component {
     tileExpandedLabel: PropTypes.string,
   };
 
+  static contextType = PrefixContext;
+
   static defaultProps = {
     tabIndex: 0,
     expanded: false,
@@ -585,6 +593,8 @@ export class ExpandableTile extends Component {
       ...other
     } = this.props;
 
+    const prefix = this.context;
+
     const { expanded: isExpanded } = this.state;
 
     const classes = classNames(
@@ -650,7 +660,10 @@ export class TileAboveTheFoldContent extends Component {
     children: PropTypes.node,
   };
 
+  static contextType = PrefixContext;
+
   render() {
+    const prefix = this.context;
     const { children } = this.props;
 
     return (
@@ -669,8 +682,11 @@ export class TileBelowTheFoldContent extends Component {
     children: PropTypes.node,
   };
 
+  static contextType = PrefixContext;
+
   render() {
     const { children } = this.props;
+    const prefix = this.context;
 
     return (
       <span className={`${prefix}--tile-content__below-the-fold`}>

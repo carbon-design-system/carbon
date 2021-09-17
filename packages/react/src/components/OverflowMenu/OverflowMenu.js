@@ -9,7 +9,6 @@ import invariant from 'invariant';
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import classNames from 'classnames';
-import { settings } from 'carbon-components';
 import ClickListener from '../../internal/ClickListener';
 import FloatingMenu, {
   DIRECTION_TOP,
@@ -18,8 +17,7 @@ import FloatingMenu, {
 import { OverflowMenuVertical16 } from '@carbon/icons-react';
 import { keys, matches as keyCodeMatches } from '../../internal/keyboard';
 import mergeRefs from '../../tools/mergeRefs';
-
-const { prefix } = settings;
+import { PrefixContext } from '../../internal/usePrefix';
 
 const on = (element, ...args) => {
   element.addEventListener(...args);
@@ -216,6 +214,9 @@ class OverflowMenu extends Component {
      */
     size: PropTypes.oneOf(['sm', 'md', 'lg', 'xl']),
   };
+
+  static contextType = PrefixContext;
+  prefix = this.context;
 
   static defaultProps = {
     ariaLabel: 'open and close list of options',
@@ -416,7 +417,7 @@ class OverflowMenu extends Component {
               !menuBody.contains(target) &&
               triggerEl &&
               !target.matches(
-                `.${prefix}--overflow-menu,.${prefix}--overflow-menu-options`
+                `.${this.prefix}--overflow-menu,.${this.prefix}--overflow-menu-options`
               )
             ) {
               this.closeMenu();
@@ -441,6 +442,7 @@ class OverflowMenu extends Component {
   };
 
   render() {
+    const prefix = this.prefix;
     const {
       id,
       ariaLabel,

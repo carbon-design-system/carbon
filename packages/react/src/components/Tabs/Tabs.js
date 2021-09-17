@@ -8,13 +8,11 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import classNames from 'classnames';
-import { settings } from 'carbon-components';
 import { ChevronLeft16, ChevronRight16 } from '@carbon/icons-react';
 import debounce from 'lodash.debounce';
 import { keys, match, matches } from '../../internal/keyboard';
 import TabContent from '../TabContent';
-
-const { prefix } = settings;
+import { PrefixContext } from '../../internal/usePrefix';
 
 export default class Tabs extends React.Component {
   static propTypes = {
@@ -102,6 +100,9 @@ export default class Tabs extends React.Component {
     selected: 0,
     selectionMode: 'automatic',
   };
+
+  static contextType = PrefixContext;
+  prefix = this.context;
 
   state = {
     horizontalOverflow: false,
@@ -405,6 +406,8 @@ export default class Tabs extends React.Component {
       rightOverflowButtonProps,
       ...other
     } = this.props;
+
+    const prefix = this.prefix;
 
     /**
      * The tab panel acts like a tab panel when the screen is wider, but acts
