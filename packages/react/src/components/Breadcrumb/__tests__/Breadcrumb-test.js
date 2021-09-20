@@ -7,7 +7,7 @@
 
 import { cleanup, render } from '@testing-library/react';
 import React from 'react';
-import { mount } from 'enzyme';
+import { mount, shallow } from 'enzyme';
 import { settings } from 'carbon-components';
 
 const { prefix } = settings;
@@ -17,14 +17,13 @@ describe('Breadcrumb', () => {
   let BreadcrumbItem;
 
   beforeEach(() => {
-    jest.resetModules();
     const BreadcrumbEntrypoint = require('../');
     Breadcrumb = BreadcrumbEntrypoint.Breadcrumb;
     BreadcrumbItem = BreadcrumbEntrypoint.BreadcrumbItem;
   });
 
   it('should render', () => {
-    const wrapper = mount(
+    const wrapper = shallow(
       <Breadcrumb className="parent-class">
         <BreadcrumbItem
           className="some-class"
