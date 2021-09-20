@@ -49,4 +49,6 @@
 | `aria-label` | -           | Removed. No longer required. If still passed, it will be emitted on the `<button>` element.  |
 | -            | `hideLabel` | New. Visually hides the label above the toggle while keeping it available to screen readers. |
 | `onChange`   | -           | Removed. Not available on `<button>` elements.                                               |
-| -            | `onClick`   | New. To substitute previous `props.onChange`                                                 |
+| -            | `onClick`   | New. To substitute previous `props.onChange`.                                                |
+| `labelA`     | `labelA`    | Made optional. Default: "Off".                                                               |
+| `labelB`     | `labelB`    | Made optional. Default: "On".                                                                |

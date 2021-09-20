@@ -5,10 +5,6 @@
 // LICENSE file in the root directory of this source tree.
 //
 
-$feature-flags: (
-  enable-v11-release: true,
-);
-
 @use '../index.scss' as styles with (
   $css--font-face: true,
   $css--plex-arabic: true,
@@ -17,19 +13,23 @@ $feature-flags: (
 @use '../scss/components/tag';
 
 :root {
-  @include styles.theme(styles.$white, button.$white, tag.$white);
+  @include styles.theme(styles.$white);
 }
 
 [data-carbon-theme='g10'] {
-  @include styles.theme(styles.$g10, button.$g10, tag.$g10);
+  @include styles.theme(styles.$g10);
 }
 
 [data-carbon-theme='g90'] {
-  @include styles.theme(styles.$g90, button.$g90, tag.$g90);
+  @include styles.theme(styles.$g90);
 }
 
 [data-carbon-theme='g100'] {
-  @include styles.theme(styles.$g100, button.$g100, tag.$g100);
+  @include styles.theme(styles.$g100);
+}
+
+body {
+  background: styles.$background;
 }
 
 html[lang='en'] body {

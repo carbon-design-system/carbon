@@ -19,6 +19,7 @@
 @use '../../utilities/convert' as *;
 @use '../../utilities/high-contrast-mode' as *;
 @use '../../utilities/focus-outline' as *;
+@use './tokens' as *;
 
 /// Toast notification styles
 /// @access public
@@ -82,7 +83,7 @@
   .#{$prefix}--toast-notification--low-contrast.#{$prefix}--toast-notification--error {
     @include notification--experimental(
       $support-error,
-      get-token(var(--cds-background-error))
+      $notification-background-error
     );
   }
 
@@ -96,7 +97,7 @@
   .#{$prefix}--toast-notification--low-contrast.#{$prefix}--toast-notification--success {
     @include notification--experimental(
       $support-success,
-      get-token(var(--cds-background-success))
+      $notification-background-success
     );
   }
 
@@ -112,7 +113,7 @@
   .#{$prefix}--toast-notification--low-contrast.#{$prefix}--toast-notification--info-square {
     @include notification--experimental(
       $support-info,
-      get-token(var(--cds-background-info))
+      $notification-background-info
     );
   }
 
@@ -128,7 +129,7 @@
   .#{$prefix}--toast-notification--low-contrast.#{$prefix}--toast-notification--warning-alt {
     @include notification--experimental(
       $support-warning,
-      get-token(var(--cds-background-warning))
+      $notification-background-warning
     );
   }
 

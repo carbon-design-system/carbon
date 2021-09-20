@@ -22,6 +22,7 @@ import { match, keys } from '../../internal/keyboard';
 import setupGetInstanceId from '../../tools/setupGetInstanceId';
 import { mapDownshiftProps } from '../../tools/createPropAdapter';
 import mergeRefs from '../../tools/mergeRefs';
+import { useFeatureFlag } from '../FeatureFlags';
 
 const { prefix } = settings;
 
@@ -191,11 +192,17 @@ const ComboBox = React.forwardRef((props, ref) => {
     }
   };
 
+  const enabled = useFeatureFlag('enable-v11-release');
+
   const showWarning = !invalid && warn;
-  const className = cx(`${prefix}--combo-box`, containerClassName, {
-    [`${prefix}--list-box--up`]: direction === 'top',
-    [`${prefix}--combo-box--warning`]: showWarning,
-  });
+  const className = cx(
+    `${prefix}--combo-box`,
+    [enabled ? null : containerClassName],
+    {
+      [`${prefix}--list-box--up`]: direction === 'top',
+      [`${prefix}--combo-box--warning`]: showWarning,
+    }
+  );
   const titleClasses = cx(`${prefix}--label`, {
     [`${prefix}--label--disabled`]: disabled,
   });
@@ -205,7 +212,10 @@ const ComboBox = React.forwardRef((props, ref) => {
   const helperClasses = cx(`${prefix}--form__helper-text`, {
     [`${prefix}--form__helper-text--disabled`]: disabled,
   });
-  const wrapperClasses = cx(`${prefix}--list-box__wrapper`);
+  const wrapperClasses = cx(`${prefix}--list-box__wrapper`, [
+    enabled ? containerClassName : null,
+  ]);
+
   const inputClasses = cx(`${prefix}--text-input`, {
     [`${prefix}--text-input--empty`]: !inputValue,
   });
@@ -253,11 +263,13 @@ const ComboBox = React.forwardRef((props, ref) => {
           // https://github.com/downshift-js/downshift/blob/v5.2.1/src/downshift.js#L1051-L1065
           //
           // As a result, it will reset the state of the component and so we
-          // stop the event from propagating to prevent this. This allows the
-          // toggleMenu behavior for the toggleButton to correctly open and
+          // stop the event from propagating to prevent this if the menu is already open.
+          // This allows the toggleMenu behavior for the toggleButton to correctly open and
           // close the menu.
           onMouseUp(event) {
-            event.stopPropagation();
+            if (isOpen) {
+              event.stopPropagation();
+            }
           },
         });
         const inputProps = getInputProps({

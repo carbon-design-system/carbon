@@ -49,7 +49,7 @@ module.exports = {
     // In these cases, we don't need to handle prop type validation like we
     // would for code we ship to users.
     {
-      files: ['*-story.js'],
+      files: ['*-story.js', '*.stories.js'],
       rules: {
         'react/display-name': 0,
         'react/prop-types': 0,
