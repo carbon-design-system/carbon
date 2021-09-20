@@ -8,6 +8,7 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import classNames from 'classnames';
+import { Text } from '../Text';
 import { useFeatureFlag } from '../FeatureFlags';
 import deprecate from '../../prop-types/deprecate';
 import { usePrefix } from '../../internal/usePrefix';
@@ -68,7 +69,7 @@ const Checkbox = React.forwardRef(function Checkbox(
         }}
       />
       <label htmlFor={id} className={labelClasses} title={title || null}>
-        <span className={innerLabelClasses}>{labelText}</span>
+        <Text className={innerLabelClasses}>{labelText}</Text>
       </label>
     </div>
   );

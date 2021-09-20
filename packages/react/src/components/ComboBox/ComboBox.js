@@ -9,6 +9,7 @@ import cx from 'classnames';
 import Downshift from 'downshift';
 import PropTypes from 'prop-types';
 import React, { useEffect, useState, useRef } from 'react';
+import { Text } from '../Text';
 import {
   Checkmark16,
   WarningAltFilled16,
@@ -292,9 +293,9 @@ const ComboBox = React.forwardRef((props, ref) => {
         return (
           <div className={wrapperClasses}>
             {titleText && (
-              <label className={titleClasses} {...labelProps}>
+              <Text as="label" className={titleClasses} {...labelProps}>
                 {titleText}
-              </label>
+              </Text>
             )}
             <ListBox
               className={className}
@@ -390,9 +391,9 @@ const ComboBox = React.forwardRef((props, ref) => {
               </ListBox.Menu>
             </ListBox>
             {helperText && !invalid && !warn && (
-              <div id={comboBoxHelperId} className={helperClasses}>
+              <Text as="div" id={comboBoxHelperId} className={helperClasses}>
                 {helperText}
-              </div>
+              </Text>
             )}
           </div>
         );
