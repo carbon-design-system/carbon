@@ -14,7 +14,7 @@
     "parcel-bundler": "^1.12.4"
   },
   "dependencies": {
-    "prismjs": "^1.20.0",
+    "prismjs": "^1.25.0",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "url-polyfill": "^1.1.9"
