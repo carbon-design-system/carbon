@@ -11,6 +11,7 @@ import classNames from 'classnames';
 import { warning } from '../../internal/warning';
 import { settings } from 'carbon-components';
 import { Legend } from '../Text';
+import { FeatureFlagContext } from '../FeatureFlags';
 
 const { prefix } = settings;
 
@@ -75,6 +76,8 @@ export default class RadioButtonGroup extends React.Component {
     onChange: /* istanbul ignore next */ () => {},
   };
 
+  static contextType = FeatureFlagContext;
+
   static getDerivedStateFromProps({ valueSelected, defaultSelected }, state) {
     const { prevValueSelected } = state;
     return prevValueSelected === valueSelected
@@ -135,9 +138,16 @@ export default class RadioButtonGroup extends React.Component {
       legendText,
     } = this.props;
 
+    const scope = this.context;
+    let enabled;
+
+    if (scope.enabled) {
+      enabled = scope.enabled('enable-v11-release');
+    }
+
     const wrapperClasses = classNames(
       `${prefix}--radio-button-group`,
-      className,
+      [enabled ? null : className],
       {
         [`${prefix}--radio-button-group--${orientation}`]:
           orientation === 'vertical',
@@ -146,7 +156,12 @@ export default class RadioButtonGroup extends React.Component {
     );
 
     return (
-      <div className={`${prefix}--form-item`}>
+      <div
+        className={
+          enabled
+            ? classNames(`${prefix}--form-item`, className)
+            : `${prefix}--form-item`
+        }>
         <fieldset className={wrapperClasses} disabled={disabled}>
           {legendText && (
             <Legend className={`${prefix}--label`}>{legendText}</Legend>

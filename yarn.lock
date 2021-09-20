@@ -1997,7 +1997,7 @@ __metadata:
     "@babel/preset-react": ^7.14.5
     "@carbon/feature-flags": ^0.6.0
     "@carbon/icons-react": ^10.38.0
-    "@carbon/styles": ^0.4.0
+    "@carbon/styles": ^0.5.0-rc.0
     "@carbon/telemetry": 0.0.0-alpha.6
     "@carbon/themes": ^10.42.0
     "@rollup/plugin-babel": ^5.3.0
@@ -2013,8 +2013,8 @@ __metadata:
     babel-plugin-dev-expression: ^0.2.2
     babel-preset-carbon: ^0.1.0
     browserslist-config-carbon: ^10.6.1
-    carbon-components: ^10.43.0
-    carbon-components-react: ^7.43.0
+    carbon-components: ^10.44.0-rc.0
+    carbon-components-react: ^7.44.0-rc.0
     carbon-icons: ^7.0.7
     css-loader: ^5.2.4
     fs-extra: ^10.0.0
@@ -2067,7 +2067,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@carbon/styles@^0.4.0, @carbon/styles@workspace:packages/styles":
+"@carbon/styles@^0.5.0-rc.0, @carbon/styles@workspace:packages/styles":
   version: 0.0.0-use.local
   resolution: "@carbon/styles@workspace:packages/styles"
   dependencies:
@@ -2167,6 +2167,7 @@ __metadata:
     fast-glob: ^3.2.7
     fs-extra: ^10.0.0
     inquirer: ^8.1.0
+    is-git-clean: ^1.1.0
     jest-diff: ^27.0.6
     jscodeshift: ^0.13.0
     lodash.clonedeep: ^4.5.0
@@ -8298,6 +8299,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"array-differ@npm:^1.0.0":
+  version: 1.0.0
+  resolution: "array-differ@npm:1.0.0"
+  checksum: ac6060952c7cb0a534c06ea3c6c960432d605d905e9901afe386e841aadc6e102ed81e0e6abe5eb4b50dd43907fc6426f6012b5ca784ec7741a5b398690c0998
+  languageName: node
+  linkType: hard
+
 "array-differ@npm:^2.0.3":
   version: 2.1.0
   resolution: "array-differ@npm:2.1.0"
@@ -10285,7 +10293,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"carbon-components-react@^7.43.0, carbon-components-react@workspace:packages/react":
+"carbon-components-react@^7.44.0-rc.0, carbon-components-react@workspace:packages/react":
   version: 0.0.0-use.local
   resolution: "carbon-components-react@workspace:packages/react"
   dependencies:
@@ -10328,7 +10336,7 @@ __metadata:
     babel-plugin-react-docgen: ^4.2.1
     babel-plugin-transform-inline-environment-variables: ^0.4.3
     browserslist-config-carbon: ^10.6.1
-    carbon-components: ^10.43.0
+    carbon-components: ^10.44.0-rc.0
     carbon-icons: ^7.0.5
     chalk: ^4.1.1
     classnames: 2.3.1
@@ -10377,6 +10385,7 @@ __metadata:
     webpack: ^4.41.5
     webpack-dev-server: ^3.11.2
     whatwg-fetch: ^3.6.2
+    wicg-inert: ^3.1.1
     window-or-global: ^1.0.1
   peerDependencies:
     carbon-components: ^10.30.0
@@ -10411,7 +10420,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"carbon-components@^10.43.0, carbon-components@workspace:packages/components":
+"carbon-components@^10.44.0-rc.0, carbon-components@workspace:packages/components":
   version: 0.0.0-use.local
   resolution: "carbon-components@workspace:packages/components"
   dependencies:
@@ -12242,6 +12251,16 @@ __metadata:
     cross-env: dist/bin/cross-env.js
     cross-env-shell: dist/bin/cross-env-shell.js
   checksum: 364f72482f0d6b65c6d560b942ce9da7e71ea66ec2eaa8226f7127b49094355277aadd23e6ff922c1d154a6ab1ad828ebc4ec8af9b44a39936d9013fb23ae4df
+  languageName: node
+  linkType: hard
+
+"cross-spawn-async@npm:^2.1.1":
+  version: 2.2.5
+  resolution: "cross-spawn-async@npm:2.2.5"
+  dependencies:
+    lru-cache: ^4.0.0
+    which: ^1.2.8
+  checksum: 6d9059a68a643d9a7506c0d7ca518a803a4293d62cbd3763bdb18cac0dd7bfa9b07d6705361a23c486c7b790e4a2fbfc3d63b93e21de52ad862794b12c6f055f
   languageName: node
   linkType: hard
 
@@ -15173,6 +15192,20 @@ __metadata:
     signal-exit: ^3.0.2
     strip-final-newline: ^2.0.0
   checksum: e30d298934d9c52f90f3847704fd8224e849a081ab2b517bbc02f5f7732c24e56a21f14cb96a08256deffeb2d12b2b7cb7e2b014a12fb36f8d3357e06417ed55
+  languageName: node
+  linkType: hard
+
+"execa@npm:^0.4.0":
+  version: 0.4.0
+  resolution: "execa@npm:0.4.0"
+  dependencies:
+    cross-spawn-async: ^2.1.1
+    is-stream: ^1.1.0
+    npm-run-path: ^1.0.0
+    object-assign: ^4.0.1
+    path-key: ^1.0.0
+    strip-eof: ^1.0.0
+  checksum: aa78c841cbb11b279127f2155e243f7fd766369f8a928ccab9aaa88687ee765e60f7de626ed4056c540ea6c4d7347819a4ae4426076a481edc47585dce989f8e
   languageName: node
   linkType: hard
 
@@ -19491,6 +19524,17 @@ __metadata:
   languageName: node
   linkType: hard
 
+"is-git-clean@npm:^1.1.0":
+  version: 1.1.0
+  resolution: "is-git-clean@npm:1.1.0"
+  dependencies:
+    execa: ^0.4.0
+    is-obj: ^1.0.1
+    multimatch: ^2.1.0
+  checksum: aa89b03f97f02e9dbf5990ad002b33f75bdb83abd0626e60e76d03f62981ad2500b33e7b9eea9f2fdf861ae818ee40663d052902f4c7c0897067463d36072259
+  languageName: node
+  linkType: hard
+
 "is-glob@npm:^2.0.0, is-glob@npm:^2.0.1":
   version: 2.0.1
   resolution: "is-glob@npm:2.0.1"
@@ -23688,7 +23732,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"minimatch@npm:2 || 3, minimatch@npm:3.0.4, minimatch@npm:^3.0.2, minimatch@npm:^3.0.4, minimatch@npm:~3.0.2":
+"minimatch@npm:2 || 3, minimatch@npm:3.0.4, minimatch@npm:^3.0.0, minimatch@npm:^3.0.2, minimatch@npm:^3.0.4, minimatch@npm:~3.0.2":
   version: 3.0.4
   resolution: "minimatch@npm:3.0.4"
   dependencies:
@@ -24063,6 +24107,18 @@ __metadata:
   bin:
     multicast-dns: cli.js
   checksum: f515b49ca964429ab48a4ac8041fcf969c927aeb49ab65288bd982e52c849a870fc3b03565780b0d194a1a02da8821f28b6425e48e95b8107bc9fcc92f571a6f
+  languageName: node
+  linkType: hard
+
+"multimatch@npm:^2.1.0":
+  version: 2.1.0
+  resolution: "multimatch@npm:2.1.0"
+  dependencies:
+    array-differ: ^1.0.0
+    array-union: ^1.0.1
+    arrify: ^1.0.0
+    minimatch: ^3.0.0
+  checksum: 19259848ec28e5b3ee150ef3ac4a7d3d4afd0c285556e58f349e393b6b4cb6d99abe14415aa2183f4e6309c42d4d3cf941da7ad1b088753024c41ad8b280b03b
   languageName: node
   linkType: hard
 
@@ -24832,6 +24888,15 @@ __metadata:
     minizlib: ^2.0.0
     npm-package-arg: ^8.0.0
   checksum: d4ee70bc7228bbcc1f3022c860452b668c5f5af6f3820f5c60daa4c57c50afe58f1daea9d9b9b2a5f1d08e7f9988f2e6d894f93d6fbf784db3c976079da08324
+  languageName: node
+  linkType: hard
+
+"npm-run-path@npm:^1.0.0":
+  version: 1.0.0
+  resolution: "npm-run-path@npm:1.0.0"
+  dependencies:
+    path-key: ^1.0.0
+  checksum: ffabf15b6e4cb6f511a49cb9c824db67cd13198938988d18362fb62e793650b10d5e87695016625d3bed06fb9ab6a3b359265d97910d8971c8fdca845d3aaadd
   languageName: node
   linkType: hard
 
@@ -26033,6 +26098,13 @@ __metadata:
   version: 1.0.2
   resolution: "path-is-inside@npm:1.0.2"
   checksum: 0b5b6c92d3018b82afb1f74fe6de6338c4c654de4a96123cb343f2b747d5606590ac0c890f956ed38220a4ab59baddfd7b713d78a62d240b20b14ab801fa02cb
+  languageName: node
+  linkType: hard
+
+"path-key@npm:^1.0.0":
+  version: 1.0.0
+  resolution: "path-key@npm:1.0.0"
+  checksum: 41c4aa248d3b2e4f98b98c753b3721da7a25060cdce1ac95944ae19c71b7d85702b790558763c0371bab46269f40aa8b5ec4a3353954d0c05c8231c41dae9cf0
   languageName: node
   linkType: hard
 
@@ -34919,7 +34991,7 @@ resolve@^2.0.0-next.3:
   languageName: node
   linkType: hard
 
-"which@npm:^1.0.5, which@npm:^1.2.1, which@npm:^1.2.10, which@npm:^1.2.14, which@npm:^1.2.9, which@npm:^1.3.1":
+"which@npm:^1.0.5, which@npm:^1.2.1, which@npm:^1.2.10, which@npm:^1.2.14, which@npm:^1.2.8, which@npm:^1.2.9, which@npm:^1.3.1":
   version: 1.3.1
   resolution: "which@npm:1.3.1"
   dependencies:
@@ -34938,6 +35010,13 @@ resolve@^2.0.0-next.3:
   bin:
     node-which: ./bin/node-which
   checksum: 1a5c563d3c1b52d5f893c8b61afe11abc3bab4afac492e8da5bde69d550de701cf9806235f20a47b5c8fa8a1d6a9135841de2596535e998027a54589000e66d1
+  languageName: node
+  linkType: hard
+
+"wicg-inert@npm:^3.1.1":
+  version: 3.1.1
+  resolution: "wicg-inert@npm:3.1.1"
+  checksum: d4553ea762ad5808b2d20990f05695d3272cf5d24ee9b0008d0edb0c69466eb6a24824ed932070553a2dc8b25eee8fcde780e073de89d640882d9da99f874944
   languageName: node
   linkType: hard
 
