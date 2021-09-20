@@ -309,6 +309,7 @@ export default class DatePicker extends Component {
       onClose,
       disable,
       enable,
+      ...rest
     } = this.props;
     if (datePickerType === 'single' || datePickerType === 'range') {
       const onHook = (electedDates, dateStr, instance) => {
@@ -338,6 +339,7 @@ export default class DatePicker extends Component {
       // inputField ref might not be set in enzyme tests
       if (this.inputField) {
         this.cal = new flatpickr(this.inputField, {
+          inline: rest.inline ?? false,
           disableMobile: true,
           defaultDate: value,
           mode: datePickerType,
@@ -404,8 +406,17 @@ export default class DatePicker extends Component {
     value: prevValue,
     disable: prevDisable,
     enable: prevEnable,
+    ...prevRest
   }) {
-    const { dateFormat, minDate, maxDate, value, disable, enable } = this.props;
+    const {
+      dateFormat,
+      minDate,
+      maxDate,
+      value,
+      disable,
+      enable,
+      ...rest
+    } = this.props;
     if (this.cal) {
       if (prevDateFormat !== dateFormat) {
         this.cal.set({ dateFormat });
@@ -421,6 +432,9 @@ export default class DatePicker extends Component {
       }
       if (enable !== prevEnable) {
         this.cal.set('enable', enable);
+      }
+      if (rest.inline && rest.inline !== prevRest?.inline) {
+        this.cal.set('inline', rest.inline);
       }
     }
 
@@ -605,7 +619,7 @@ export default class DatePicker extends Component {
       onChange, // eslint-disable-line
       locale, // eslint-disable-line
       value, // eslint-disable-line
-      ...other
+      ...rest
     } = this.props;
 
     const scope = this.context;
@@ -668,7 +682,7 @@ export default class DatePicker extends Component {
     });
     return (
       <div className={wrapperClasses}>
-        <div className={datePickerClasses} {...other}>
+        <div className={datePickerClasses} {...rest}>
           {childrenWithProps}
         </div>
       </div>
