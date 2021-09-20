@@ -1132,6 +1132,9 @@ Map {
         "title": Object {
           "type": "node",
         },
+        "useStaticWidth": Object {
+          "type": "bool",
+        },
       },
     },
     "TableExpandHeader": Object {
@@ -1768,6 +1771,9 @@ Map {
       },
       "title": Object {
         "type": "node",
+      },
+      "useStaticWidth": Object {
+        "type": "bool",
       },
     },
   },
