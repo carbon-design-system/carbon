@@ -6385,9 +6385,9 @@ Map {
   "ClickableTile" => Object {
     "defaultProps": Object {
       "clicked": false,
-      "handleClick": [Function],
-      "handleKeyDown": [Function],
       "light": false,
+      "onClick": [Function],
+      "onKeyDown": [Function],
     },
     "propTypes": Object {
       "children": Object {
@@ -6396,17 +6396,19 @@ Map {
       "className": Object {
         "type": "string",
       },
-      "handleClick": Object {
-        "type": "func",
-      },
-      "handleKeyDown": Object {
-        "type": "func",
-      },
+      "handleClick": [Function],
+      "handleKeyDown": [Function],
       "href": Object {
         "type": "string",
       },
       "light": Object {
         "type": "bool",
+      },
+      "onClick": Object {
+        "type": "func",
+      },
+      "onKeyDown": Object {
+        "type": "func",
       },
       "rel": Object {
         "type": "string",
@@ -6416,6 +6418,9 @@ Map {
   "SelectableTile" => Object {
     "defaultProps": Object {
       "light": false,
+      "onChange": [Function],
+      "onClick": [Function],
+      "onKeyDown": [Function],
       "selected": false,
       "tabIndex": 0,
       "title": "title",
@@ -6480,9 +6485,9 @@ Map {
   "ExpandableTile" => Object {
     "defaultProps": Object {
       "expanded": false,
-      "handleClick": [Function],
       "light": false,
       "onBeforeClick": [Function],
+      "onClick": [Function],
       "tabIndex": 0,
       "tileCollapsedIconText": "Interact to expand Tile",
       "tileExpandedIconText": "Interact to collapse Tile",
@@ -6499,9 +6504,7 @@ Map {
       "expanded": Object {
         "type": "bool",
       },
-      "handleClick": Object {
-        "type": "func",
-      },
+      "handleClick": [Function],
       "id": Object {
         "type": "string",
       },
