@@ -17,6 +17,7 @@ import requiredIfValueExists from '../../prop-types/requiredIfValueExists';
 import { useNormalizedInputProps as getNormalizedInputProps } from '../../internal/useNormalizedInputProps';
 import { useControlledStateWithValue } from '../../internal/FeatureFlags';
 import deprecate from '../../prop-types/deprecate';
+import { FeatureFlagContext } from '../FeatureFlags';
 
 const { prefix } = settings;
 
@@ -202,6 +203,8 @@ class NumberInput extends Component {
     translateWithId: (id) => defaultTranslations[id],
   };
 
+  static contextType = FeatureFlagContext;
+
   static getDerivedStateFromProps({ value }, state) {
     const { prevValue } = state;
 
@@ -346,9 +349,16 @@ class NumberInput extends Component {
       ...other
     } = this.props;
 
+    const scope = this.context;
+    let enabled;
+
+    if (scope.enabled) {
+      enabled = scope.enabled('enable-v11-release');
+    }
+
     const numberInputClasses = classNames(
       `${prefix}--number ${prefix}--number--helpertext`,
-      className,
+      [enabled ? null : className],
       {
         [`${prefix}--number--readonly`]: readOnly,
         [`${prefix}--number--light`]: light,
@@ -458,7 +468,12 @@ class NumberInput extends Component {
     }
 
     return (
-      <div className={`${prefix}--form-item`}>
+      <div
+        className={
+          enabled
+            ? classNames(`${prefix}--form-item`, className)
+            : `${prefix}--form-item`
+        }>
         <div className={numberInputClasses} {...inputWrapperProps}>
           {(() => {
             return (
