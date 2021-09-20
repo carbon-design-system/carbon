@@ -101,6 +101,7 @@
   }
 
   .#{$prefix}--tile--selectable {
+    position: relative;
     padding-right: $carbon--spacing-09;
     border: 1px solid transparent;
   }
