@@ -54,26 +54,25 @@ exports[`AccordionItem should render 1`] = `
             </svg>
           </Icon>
         </ForwardRef(ChevronRight16)>
-        <div
+        <Text
+          as="div"
           className="bx--accordion__title"
         >
-          A heading
-        </div>
+          <div
+            className="bx--accordion__title"
+            dir="auto"
+          >
+            A heading
+          </div>
+        </Text>
       </button>
     </defaultRenderExpando>
-    <Text
-      as="div"
+    <div
       className="bx--accordion__content"
       id="accordion-item-1"
     >
-      <div
-        className="bx--accordion__content"
-        dir="auto"
-        id="accordion-item-1"
-      >
-        Lorem ipsum.
-      </div>
-    </Text>
+      Lorem ipsum.
+    </div>
   </li>
 </AccordionItem>
 `;
