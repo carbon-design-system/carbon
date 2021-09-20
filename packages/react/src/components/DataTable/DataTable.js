@@ -396,7 +396,7 @@ export default class DataTable extends React.Component {
     const totalSelected = this.getSelectedRows().length;
     return {
       ...props,
-      shouldShowBatchActions,
+      shouldShowBatchActions: shouldShowBatchActions && totalSelected > 0,
       totalSelected,
       onCancel: this.handleOnCancel,
     };

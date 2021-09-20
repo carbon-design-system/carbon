@@ -7,6 +7,10 @@
 
 @forward 'tag';
 @forward 'tokens';
-@use 'tag';
 
+@use '../../theme';
+@use 'tag';
+@use 'tokens';
+
+@include theme.add-component-tokens(tokens.$tag-tokens);
 @include tag.tag;

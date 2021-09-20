@@ -1,7 +1,7 @@
 name: Question ❓
 description: Usage question or discussion about Carbon components.
 title: '[Question]: '
-labels: [type: question ❓]
+labels: 'type: question ❓'
 body:
   - type: markdown
     attributes:
