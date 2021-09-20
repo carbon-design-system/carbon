@@ -46,6 +46,7 @@ const props = () => ({
     'lg'
   ),
   stickyHeader: boolean('Sticky header (experimental)', false),
+  useStaticWidth: boolean('Use static width (useStaticWidth)', false),
 });
 
 export default {
