@@ -8,11 +8,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
-import { settings } from 'carbon-components';
 import setupGetInstanceId from '../../tools/setupGetInstanceId';
 import deprecate from '../../prop-types/deprecate';
+import { usePrefix } from '../../internal/usePrefix';
 
-const { prefix } = settings;
 const getInstanceId = setupGetInstanceId();
 
 export function StructuredListWrapper(props) {
@@ -26,6 +25,7 @@ export function StructuredListWrapper(props) {
     border: _border,
     ...other
   } = props;
+  const prefix = usePrefix();
   const classes = classNames(`${prefix}--structured-list`, className, {
     [`${prefix}--structured-list--selection`]: selection,
     [`${prefix}--structured-list--condensed`]: isCondensed,
@@ -88,6 +88,7 @@ StructuredListWrapper.defaultProps = {
 
 export function StructuredListHead(props) {
   const { children, className, ...other } = props;
+  const prefix = usePrefix();
   const classes = classNames(`${prefix}--structured-list-thead`, className);
 
   return (
@@ -111,6 +112,7 @@ StructuredListHead.propTypes = {
 
 export function StructuredListBody(props) {
   const { children, className, ...other } = props;
+  const prefix = usePrefix();
   const classes = classNames(`${prefix}--structured-list-tbody`, className);
 
   return (
@@ -153,6 +155,7 @@ export function StructuredListRow(props) {
     label,
     ...other
   } = props;
+  const prefix = usePrefix();
   const classes = classNames(`${prefix}--structured-list-row`, className, {
     [`${prefix}--structured-list-row--header-row`]: head,
   });
@@ -215,6 +218,7 @@ StructuredListRow.defaultProps = {
 
 export function StructuredListInput(props) {
   const { className, value, name, title, id, ...other } = props;
+  const prefix = usePrefix();
   const classes = classNames(`${prefix}--structured-list-input`, className);
   const instanceId = id || getInstanceId();
 
@@ -277,6 +281,7 @@ StructuredListInput.defaultProps = {
 
 export function StructuredListCell(props) {
   const { children, className, head, noWrap, ...other } = props;
+  const prefix = usePrefix();
   const classes = classNames(className, {
     [`${prefix}--structured-list-th`]: head,
     [`${prefix}--structured-list-td`]: !head,
