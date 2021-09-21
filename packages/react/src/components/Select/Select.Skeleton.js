@@ -8,18 +8,21 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import cx from 'classnames';
-import { settings } from 'carbon-components';
+import { usePrefix } from '../../internal/usePrefix';
 
-const { prefix } = settings;
-
-const SelectSkeleton = ({ hideLabel, className, ...rest }) => (
-  <div className={cx(`${prefix}--form-item`, className)} {...rest}>
-    {!hideLabel && <span className={`${prefix}--label ${prefix}--skeleton`} />}
-    <div className={`${prefix}--select ${prefix}--skeleton`}>
-      <div className={`${prefix}--select-input`} />
+const SelectSkeleton = ({ hideLabel, className, ...rest }) => {
+  const prefix = usePrefix();
+  return (
+    <div className={cx(`${prefix}--form-item`, className)} {...rest}>
+      {!hideLabel && (
+        <span className={`${prefix}--label ${prefix}--skeleton`} />
+      )}
+      <div className={`${prefix}--select ${prefix}--skeleton`}>
+        <div className={`${prefix}--select-input`} />
+      </div>
     </div>
-  </div>
-);
+  );
+};
 
 SelectSkeleton.propTypes = {
   /**
