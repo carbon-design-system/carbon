@@ -1,21 +1,39 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Breadcrumb should render 1`] = `
-<nav
-  aria-label="Breadcrumb"
+<Breadcrumb
   className="parent-class"
 >
-  <ol
-    className="bx--breadcrumb"
+  <nav
+    aria-label="Breadcrumb"
+    className="parent-class"
   >
-    <BreadcrumbItem
-      className="some-class"
-      href="www.carbondesignsystem.com"
+    <ol
+      className="bx--breadcrumb"
     >
-      Breadcrumb 1
-    </BreadcrumbItem>
-  </ol>
-</nav>
+      <BreadcrumbItem
+        className="some-class"
+        href="www.carbondesignsystem.com"
+      >
+        <li
+          className="bx--breadcrumb-item some-class"
+        >
+          <Link
+            href="www.carbondesignsystem.com"
+          >
+            <a
+              className="bx--link"
+              href="www.carbondesignsystem.com"
+              rel={null}
+            >
+              Breadcrumb 1
+            </a>
+          </Link>
+        </li>
+      </BreadcrumbItem>
+    </ol>
+  </nav>
+</Breadcrumb>
 `;
 
 exports[`Breadcrumb should support rendering the current page 1`] = `
