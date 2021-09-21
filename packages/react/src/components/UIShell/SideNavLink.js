@@ -5,7 +5,6 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { settings } from 'carbon-components';
 import cx from 'classnames';
 import PropTypes from 'prop-types';
 import React from 'react';
@@ -13,8 +12,7 @@ import Link, { LinkPropTypes } from './Link';
 import SideNavIcon from './SideNavIcon';
 import SideNavItem from './SideNavItem';
 import SideNavLinkText from './SideNavLinkText';
-
-const { prefix } = settings;
+import { usePrefix } from '../../internal/usePrefix';
 
 const SideNavLink = React.forwardRef(function SideNavLink(
   {
@@ -27,6 +25,7 @@ const SideNavLink = React.forwardRef(function SideNavLink(
   },
   ref
 ) {
+  const prefix = usePrefix();
   const className = cx({
     [`${prefix}--side-nav__link`]: true,
     [`${prefix}--side-nav__link--current`]: isActive,
