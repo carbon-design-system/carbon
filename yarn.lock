@@ -1736,7 +1736,7 @@ __metadata:
     remark: ^10.0.1
     replace-in-file: ^6.1.0
     rollup: ^2.46.0
-    sass: ^1.36.0
+    sass: ^1.41.0
     sassdoc: ^2.7.3
     yargs: ^17.0.1
   bin:
@@ -2029,7 +2029,7 @@ __metadata:
     rollup: ^2.46.0
     rollup-plugin-strip-banner: ^2.0.0
     rtlcss: ^3.1.2
-    sass: ^1.36.0
+    sass: ^1.41.0
     sass-loader: 10
     style-loader: ^2.0.0
     webpack: ^4.41.5
@@ -2113,7 +2113,7 @@ __metadata:
     react: ^17.0.1
     react-dom: ^16.9.0
     resolve: ^1.12.0
-    sass: ^1.36.0
+    sass: ^1.41.0
     tabbable: ^4.0.0
   peerDependencies:
     node-sass: ^4.13.1
@@ -10376,7 +10376,7 @@ __metadata:
     rollup-plugin-strip-banner: ^2.0.0
     rollup-plugin-terser: ^7.0.2
     rtlcss: ^2.4.0
-    sass: ^1.36.0
+    sass: ^1.41.0
     sass-loader: ^10.1.1
     storybook-readme: ^5.0.9
     string-replace-loader: ^2.1.0
@@ -10518,7 +10518,7 @@ __metadata:
     rollup: ^2.46.0
     rollup-plugin-filesize: ^9.1.1
     rollup-plugin-terser: ^7.0.2
-    sass: ^1.36.0
+    sass: ^1.41.0
     sass-loader: ^8.0.2
     serve-static: ^1.13.0
     style-loader: ^1.1.3
@@ -29668,14 +29668,14 @@ resolve@^2.0.0-next.3:
   languageName: node
   linkType: hard
 
-"sass@npm:^1.36.0":
-  version: 1.36.0
-  resolution: "sass@npm:1.36.0"
+"sass@npm:^1.41.0":
+  version: 1.41.0
+  resolution: "sass@npm:1.41.0"
   dependencies:
     chokidar: ">=3.0.0 <4.0.0"
   bin:
     sass: sass.js
-  checksum: fdb03deed1769f182900c1b5505bc22e50cf1d3ce4d5253fc907865f784c430236937bd391d91ef714e59995584f13ff31d3776d5283e730f5172ac227585754
+  checksum: 12f791d1d336c304a75f69e54212ea840661a054b4d13b9c8a1a3ad9e44b7656e5eaf6d0372a826612ef08f8da9433159315c3ea1df5eed9832efaf8cb26358e
   languageName: node
   linkType: hard
 
