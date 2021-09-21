@@ -7,7 +7,7 @@
 
 import React, { Component, useEffect, useRef, useState } from 'react';
 import PropTypes from 'prop-types';
-import classNames from 'classnames';
+import cx from 'classnames';
 import { settings } from 'carbon-components';
 import Link from '../Link';
 import {
@@ -45,8 +45,8 @@ export class Tile extends Component {
   };
 
   render() {
-    const { children, className, light, ...other } = this.props;
-    const tileClasses = classNames(
+    const { children, className, light, ...rest } = this.props;
+    const tileClasses = cx(
       `${prefix}--tile`,
       {
         [`${prefix}--tile--light`]: light,
@@ -54,7 +54,7 @@ export class Tile extends Component {
       className
     );
     return (
-      <div className={tileClasses} {...other}>
+      <div className={tileClasses} {...rest}>
         {children}
       </div>
     );
@@ -76,14 +76,20 @@ export class ClickableTile extends Component {
     className: PropTypes.string,
 
     /**
-     * Specify the function to run when the ClickableTile is clicked
+     * Deprecated in v11. Use 'onClick' instead.
      */
-    handleClick: PropTypes.func,
+    handleClick: deprecate(
+      PropTypes.func,
+      'The handleClick prop for ClickableTile has been deprecated in favor of onClick. It will be removed in the next major release.'
+    ),
 
     /**
      * Specify the function to run when the ClickableTile is interacted with via a keyboard
      */
-    handleKeyDown: PropTypes.func,
+    handleKeyDown: deprecate(
+      PropTypes.func,
+      'The handleKeyDown prop for ClickableTile has been deprecated in favor of onKeyDown. It will be removed in the next major release.'
+    ),
 
     /**
      * The href for the link.
@@ -97,6 +103,16 @@ export class ClickableTile extends Component {
     light: PropTypes.bool,
 
     /**
+     * Specify the function to run when the ClickableTile is clicked
+     */
+    onClick: PropTypes.func,
+
+    /**
+     * Specify the function to run when the ClickableTile is interacted with via a keyboard
+     */
+    onKeyDown: PropTypes.func,
+
+    /**
      * The rel property for the link.
      */
     rel: PropTypes.string,
@@ -104,8 +120,8 @@ export class ClickableTile extends Component {
 
   static defaultProps = {
     clicked: false,
-    handleClick: () => {},
-    handleKeyDown: () => {},
+    onClick: () => {},
+    onKeyDown: () => {},
     light: false,
   };
 
@@ -116,7 +132,8 @@ export class ClickableTile extends Component {
         clicked: !this.state.clicked,
       },
       () => {
-        this.props.handleClick(evt);
+        // TODO: Remove handleClick prop when handleClick is deprecated
+        this.props.handleClick?.(evt) || this.props.onClick?.(evt);
       }
     );
   };
@@ -129,11 +146,13 @@ export class ClickableTile extends Component {
           clicked: !this.state.clicked,
         },
         () => {
-          this.props.handleKeyDown(evt);
+          // TODO: Remove handleKeyDown prop when handleKeyDown is deprecated
+          this.props.handleKeyDown?.(evt) || this.props.onKeyDown(evt);
         }
       );
     } else {
-      this.props.handleKeyDown(evt);
+      // TODO: Remove handleKeyDown prop when handleKeyDown is deprecated
+      this.props.handleKeyDown?.(evt) || this.props.onKeyDown(evt);
     }
   };
 
@@ -155,12 +174,14 @@ export class ClickableTile extends Component {
       className,
       handleClick, // eslint-disable-line
       handleKeyDown, // eslint-disable-line
+      onClick, // eslint-disable-line
+      onKeyDown, // eslint-disable-line
       clicked, // eslint-disable-line
       light,
-      ...other
+      ...rest
     } = this.props;
 
-    const classes = classNames(
+    const classes = cx(
       `${prefix}--tile`,
       `${prefix}--tile--clickable`,
       {
@@ -174,7 +195,7 @@ export class ClickableTile extends Component {
       <Link
         href={href}
         className={classes}
-        {...other}
+        {...rest}
         onClick={this.handleClick}
         onKeyDown={this.handleKeyDown}>
         {children}
@@ -187,7 +208,7 @@ export function SelectableTile(props) {
   const {
     children,
     id,
-    tabIndex = 0,
+    tabIndex,
     value,
     name,
     title,
@@ -196,24 +217,24 @@ export function SelectableTile(props) {
     className,
     handleClick,
     handleKeyDown,
-    onClick = () => {},
-    onChange = () => {},
-    onKeyDown = () => {},
+    onClick,
+    onChange,
+    onKeyDown,
     light,
     disabled,
     selected,
-    ...other
+    ...rest
   } = props;
 
   // TODO: replace with onClick when handleClick prop is deprecated
   const clickHandler = handleClick || onClick;
 
-  // TODO: replace with onClick when handleClick prop is deprecated
+  // TODO: replace with onKeyDown when handleKeyDown prop is deprecated
   const keyDownHandler = handleKeyDown || onKeyDown;
 
   const [isSelected, setIsSelected] = useState(selected);
   const input = useRef(null);
-  const classes = classNames(
+  const classes = cx(
     `${prefix}--tile`,
     `${prefix}--tile--selectable`,
     {
@@ -223,7 +244,7 @@ export function SelectableTile(props) {
     },
     className
   );
-  const inputClasses = classNames(`${prefix}--tile-input`, {
+  const inputClasses = cx(`${prefix}--tile-input`, {
     [`${prefix}--tile-input--checked`]: isSelected,
   });
 
@@ -277,7 +298,7 @@ export function SelectableTile(props) {
         className={classes}
         // eslint-disable-next-line jsx-a11y/no-noninteractive-tabindex
         tabIndex={!disabled ? tabIndex : null}
-        {...other}
+        {...rest}
         onClick={!disabled ? handleOnClick : null}
         onKeyDown={!disabled ? handleOnKeyDown : null}>
         <span
@@ -295,6 +316,9 @@ SelectableTile.defaultProps = {
   selected: false,
   tabIndex: 0,
   light: false,
+  onClick: () => {},
+  onChange: () => {},
+  onKeyDown: () => {},
 };
 SelectableTile.propTypes = {
   /**
@@ -409,9 +433,12 @@ export class ExpandableTile extends Component {
     expanded: PropTypes.bool,
 
     /**
-     * Specify the function to run when the ExpandableTile is clicked
+     * Deprecated in v11. Use 'onClick' instead.
      */
-    handleClick: PropTypes.func,
+    handleClick: deprecate(
+      PropTypes.func,
+      'The handleClick prop for ClickableTile has been deprecated in favor of onClick. It will be removed in the next major release.'
+    ),
 
     /**
      * An ID that can be provided to aria-labelledby
@@ -430,7 +457,8 @@ export class ExpandableTile extends Component {
     onBeforeClick: PropTypes.func,
 
     /**
-     * optional handler to trigger a function the Tile is clicked
+     * Specify the function to run when the ExpandableTile is clicked
+
      */
     onClick: PropTypes.func,
 
@@ -471,7 +499,7 @@ export class ExpandableTile extends Component {
     tileMaxHeight: 0,
     tilePadding: 0,
     onBeforeClick: () => true,
-    handleClick: () => {},
+    onClick: () => {},
     tileCollapsedIconText: 'Interact to expand Tile',
     tileExpandedIconText: 'Interact to collapse Tile',
     light: false,
@@ -549,7 +577,8 @@ export class ExpandableTile extends Component {
       },
       () => {
         this.setMaxHeight();
-        this.props.handleClick(evt);
+        // TODO: Remove handleClick prop when handleClick is deprecated
+        this.props.handleClick?.(evt) || this.props.onClick?.(evt);
       }
     );
   };
@@ -582,12 +611,12 @@ export class ExpandableTile extends Component {
       tileExpandedLabel,
       onBeforeClick, // eslint-disable-line
       light,
-      ...other
+      ...rest
     } = this.props;
 
     const { expanded: isExpanded } = this.state;
 
-    const classes = classNames(
+    const classes = cx(
       `${prefix}--tile`,
       `${prefix}--tile--expandable`,
       {
@@ -616,7 +645,7 @@ export class ExpandableTile extends Component {
         className={classes}
         aria-expanded={isExpanded}
         title={isExpanded ? tileExpandedIconText : tileCollapsedIconText}
-        {...other}
+        {...rest}
         onKeyUp={composeEventHandlers([onKeyUp, this.handleKeyUp])}
         onClick={composeEventHandlers([onClick, this.handleClick])}
         tabIndex={tabIndex}>

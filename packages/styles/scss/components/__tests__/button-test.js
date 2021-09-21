@@ -39,10 +39,6 @@ Array [
   "button-padding-ghost-sm",
   "button-border-width",
   "button-outline-width",
-  "white",
-  "g10",
-  "g90",
-  "g100",
   "button-separator",
   "button-primary",
   "button-secondary",
@@ -58,6 +54,7 @@ Array [
   "button-secondary-hover",
   "button-tertiary-hover",
   "button-disabled",
+  "button-tokens",
 ]
 `);
   });
