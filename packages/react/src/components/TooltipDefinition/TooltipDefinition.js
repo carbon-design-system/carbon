@@ -8,13 +8,12 @@
 import cx from 'classnames';
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
-import { settings } from 'carbon-components';
 import debounce from 'lodash.debounce';
 import setupGetInstanceId from '../../tools/setupGetInstanceId';
 import { composeEventHandlers } from '../../tools/events';
 import { keys, matches } from '../../internal/keyboard';
+import { usePrefix } from '../../internal/usePrefix';
 
-const { prefix } = settings;
 const getInstanceId = setupGetInstanceId();
 const TooltipDefinition = ({
   id,
@@ -30,6 +29,7 @@ const TooltipDefinition = ({
   tooltipText,
   ...rest
 }) => {
+  const prefix = usePrefix();
   const [allowTooltipVisibility, setAllowTooltipVisibility] = useState(true);
   const [tooltipVisible, setTooltipVisible] = useState(false);
   const tooltipId = id || `definition-tooltip-${getInstanceId()}`;
