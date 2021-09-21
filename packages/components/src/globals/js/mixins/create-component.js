@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-export default function(ToMix) {
+export default function (ToMix) {
   class CreateComponent extends ToMix {
     /**
      * The component instances managed by this component.
@@ -17,7 +17,7 @@ export default function(ToMix) {
     /**
      * Mix-in class to manage lifecycle of component.
      * The constructor sets up this component's effective options,
-     * and registers this component't instance associated to an element.
+     * and registers this component's instance associated to an element.
      * @implements Handle
      * @param {HTMLElement} element The element working as this component.
      * @param {object} [options] The component options.
@@ -39,7 +39,7 @@ export default function(ToMix) {
 
       /**
        * The component options.
-       * @type {Object}
+       * @type {object}
        */
       this.options = Object.assign(
         Object.create(this.constructor.options),

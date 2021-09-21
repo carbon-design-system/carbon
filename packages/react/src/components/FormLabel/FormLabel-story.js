@@ -6,33 +6,36 @@
  */
 
 import React from 'react';
-import { storiesOf } from '@storybook/react';
 
 import FormLabel from './FormLabel';
 import Tooltip from '../Tooltip';
+import mdx from './FormLabel.mdx';
 
-const additionalProps = {
-  className: 'some-class',
+export default {
+  title: 'Components/FormLabel',
+
+  parameters: {
+    component: FormLabel,
+    docs: {
+      page: mdx,
+    },
+  },
 };
 
-storiesOf('FormLabel', module)
-  .add('Default', () => <FormLabel {...additionalProps}>Label</FormLabel>, {
-    info: {
-      text: 'Form label.',
-    },
-  })
-  .add(
-    'With tooltip',
-    () => (
-      <FormLabel {...additionalProps}>
-        <Tooltip triggerText="Label">
-          This is the content of the tooltip.
-        </Tooltip>
-      </FormLabel>
-    ),
-    {
-      info: {
-        text: 'Form label with tooltip.',
-      },
-    }
-  );
+export const _Default = () => <FormLabel>Form label</FormLabel>;
+
+_Default.story = {
+  name: 'Form Label',
+};
+
+export const WithTooltip = () => (
+  <FormLabel>
+    <Tooltip triggerText="Form label">
+      This can be used to provide more information about a field.
+    </Tooltip>
+  </FormLabel>
+);
+
+WithTooltip.story = {
+  name: 'Form Label with Tooltip',
+};

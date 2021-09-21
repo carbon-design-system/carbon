@@ -21,9 +21,11 @@
 /// @group radio-button
 @mixin radio-button {
   .#{$prefix}--radio-button-group {
+    @include reset;
+
+    position: relative;
     display: flex;
     align-items: center;
-    margin-top: rem(6px);
   }
 
   // Remove spacing above collection of radio buttons if label is present
@@ -52,26 +54,29 @@
 
   .#{$prefix}--radio-button {
     @include hidden;
+
     visibility: inherit;
   }
 
   .#{$prefix}--radio-button__label {
     @include type-style('body-short-01');
+
     display: flex;
     align-items: center;
-    cursor: pointer;
     margin-right: $carbon--spacing-05;
+    cursor: pointer;
   }
 
   .#{$prefix}--radio-button__appearance {
     @include reset;
+
+    width: rem(18px);
+    height: rem(18px);
+    flex-shrink: 0;
+    border: $radio-border-width solid $icon-01;
+    margin: rem(1px) $carbon--spacing-03 rem(2px) rem(2px);
     background-color: transparent;
     border-radius: 50%;
-    border: $radio-border-width solid $icon-01;
-    flex-shrink: 0;
-    height: rem(18px);
-    width: rem(18px);
-    margin-right: $carbon--spacing-03;
   }
 
   .#{$prefix}--radio-button:checked
@@ -82,26 +87,28 @@
     justify-content: center;
     border-color: $icon-01;
 
-    &:before {
-      content: '';
-      display: inline-block;
+    &::before {
       position: relative;
-      width: 0.5rem;
-      height: 0.5rem;
-      border-radius: 50%;
+      display: inline-block;
+      width: 100%;
+      height: 100%;
       background-color: $icon-01;
+      border-radius: 50%;
+      content: '';
+      transform: scale(0.5);
 
       // Allow the selected button to be seen in Windows HCM for IE/Edge
       @media screen and (-ms-high-contrast: active) {
-        // Utilize a system color variable to accomodate any user HCM theme
-        background-color: windowText;
+        // Utilize a system color variable to accommodate any user HCM theme
+        background-color: WindowText;
+      }
+
+      // Firefox only HCM solution
+      @media screen and (prefers-contrast) {
+        // Utilize a system color variable to accommodate any user HCM theme
+        border: 2px solid WindowText;
       }
     }
-  }
-
-  // Workaround for: https://developer.microsoft.com/en-us/microsoft-edge/platform/issues/11295231
-  [disabled] ~ _ {
-    font-size: inherit;
   }
 
   .#{$prefix}--radio-button:disabled + .#{$prefix}--radio-button__label {
@@ -134,6 +141,7 @@
   // Skeleton State
   .#{$prefix}--radio-button__label.#{$prefix}--skeleton {
     @include skeleton;
+
     width: rem(100px);
     height: rem(18px);
   }
@@ -145,7 +153,7 @@
 
   .#{$prefix}--radio-button-wrapper .#{$prefix}--radio-button__label {
     display: flex;
-    align-items: center;
+    align-items: flex-start;
     justify-content: center;
     margin: 0;
   }

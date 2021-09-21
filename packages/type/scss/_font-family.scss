@@ -23,7 +23,7 @@ $carbon--font-families: (
       "'IBM Plex Sans Hebrew', 'Helvetica Hebrew', 'Arial Hebrew', sans-serif"
     ),
   'serif': unquote("'IBM Plex Serif', 'Georgia', Times, serif"),
-);
+) !default;
 
 /// Get the font-family for an IBM Plex font
 /// @param {String} $name
@@ -50,7 +50,7 @@ $carbon--font-weights: (
   'light': 300,
   'regular': 400,
   'semibold': 600,
-);
+) !default;
 
 /// Retrieve the font-weight value for a given name
 /// @param {String} $weight

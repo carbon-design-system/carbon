@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-export default function(ToMix) {
+export default function (ToMix) {
   /**
    * Mix-in class to instantiate components by searching for their root elements.
    * @class InitComponentBySearch
@@ -41,7 +41,7 @@ export default function(ToMix) {
       } else {
         Array.prototype.forEach.call(
           target.querySelectorAll(effectiveOptions.selectorInit),
-          element => this.create(element, options)
+          (element) => this.create(element, options)
         );
       }
     }

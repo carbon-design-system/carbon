@@ -9,13 +9,13 @@ jobs:
   release:
     runs-on: macOS-latest
     steps:
-      - uses: actions/checkout@master
-      - name: Use Node.js 10.x
-        uses: actions/setup-node@v1
+      - uses: actions/checkout@main
+      - name: Use Node.js 14.x
+        uses: actions/setup-node@v2.4.0
         with:
-          node-version: '10.x'
+          node-version: '14.x'
       - name: Install dependencies
-        run: yarn install --offline
+        run: yarn install --immutable --immutable-cache --check-cache
       - name: Build project
         run: yarn build
       - name: Publish nightly release
@@ -23,4 +23,4 @@ jobs:
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
         run: |
           echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" >> .npmrc
-          yarn lerna publish --canary minor --dist-tag nightly --no-push --no-git-tag-version --yes --force-publish='*'
+          yarn lerna publish --canary minor --force-publish --exact --dist-tag nightly --preid alpha --no-push --no-git-tag-version --yes

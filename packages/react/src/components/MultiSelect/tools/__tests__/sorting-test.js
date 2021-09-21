@@ -22,7 +22,7 @@ describe('defaultSortItems', () => {
   });
 
   it('should sort un-selected options alphabetically', () => {
-    const mockItems = ['d', 'c', 'b', 'a'].map(label => ({ label }));
+    const mockItems = ['d', 'c', 'b', 'a'].map((label) => ({ label }));
     expect(defaultSortItems(mockItems, mockOptions)).toEqual([
       {
         label: 'a',
@@ -40,7 +40,7 @@ describe('defaultSortItems', () => {
   });
 
   it('should sort un-selected numbers in increasing order', () => {
-    const mockItems = ['1', '10', '11', '2', '3'].map(label => ({ label }));
+    const mockItems = ['1', '10', '11', '2', '3'].map((label) => ({ label }));
     expect(defaultSortItems(mockItems, mockOptions)).toEqual([
       {
         label: '1',
@@ -61,9 +61,12 @@ describe('defaultSortItems', () => {
   });
 
   it('should sort un-selected alpha-numeric sequences with increasing order', () => {
-    const mockItems = ['Option 1', 'Option 10', 'Option 11', 'Option 2'].map(
-      label => ({ label })
-    );
+    const mockItems = [
+      'Option 1',
+      'Option 10',
+      'Option 11',
+      'Option 2',
+    ].map((label) => ({ label }));
     expect(defaultSortItems(mockItems, mockOptions)).toEqual([
       {
         label: 'Option 1',
@@ -81,9 +84,12 @@ describe('defaultSortItems', () => {
   });
 
   it('should order a selected item before all other options', () => {
-    const mockItems = ['Option 1', 'Option 10', 'Option 11', 'Option 2'].map(
-      label => ({ label })
-    );
+    const mockItems = [
+      'Option 1',
+      'Option 10',
+      'Option 11',
+      'Option 2',
+    ].map((label) => ({ label }));
 
     // Set `selectedItems` to ['Option 11']
     mockOptions.selectedItems = [mockItems[2]];
@@ -105,9 +111,12 @@ describe('defaultSortItems', () => {
   });
 
   it('should sort selected items and order them before all other options', () => {
-    const mockItems = ['Option 1', 'Option 10', 'Option 11', 'Option 2'].map(
-      label => ({ label })
-    );
+    const mockItems = [
+      'Option 1',
+      'Option 10',
+      'Option 11',
+      'Option 2',
+    ].map((label) => ({ label }));
 
     // Set `selectedItems` to ['Option 11', 'Option 2']
     mockOptions.selectedItems = [mockItems[2], mockItems[3]];

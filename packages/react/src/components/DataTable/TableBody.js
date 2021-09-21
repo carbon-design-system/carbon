@@ -15,13 +15,13 @@ const TableBody = ({ children, className, ...rest }) => (
 );
 
 TableBody.propTypes = {
-  className: PropTypes.string,
-  children: PropTypes.node,
-
   /**
    * `polite` Adjust the notification behavior of screen readers
    */
   'aria-live': PropTypes.oneOf(['polite', 'assertive', 'off']),
+  children: PropTypes.node,
+
+  className: PropTypes.string,
 };
 
 TableBody.defaultProps = {

@@ -43,7 +43,7 @@ assets, in addition to exporting the following assets:
   library!
 
 If you're curious about `@carbon/icons` and want to learn more, definitely check
-out our [Icon documentation](/docs/icons.md)!
+out our [Icon documentation](/docs/guides/icons.md)!
 
 ### Philosophy
 
@@ -134,7 +134,7 @@ high-level, the pattern for this file matches:
 const path = require('path');
 const build = require('../src/build');
 
-build({ cwd: path.resolve(__dirname, '../') }).catch(error => {
+build({ cwd: path.resolve(__dirname, '../') }).catch((error) => {
   console.error(error);
 });
 ```
@@ -177,7 +177,7 @@ async function build({ cwd }) {
   await Promise.all(
     // `meta` is a map that provides a hash of information about the current
     // icon to build
-    meta.map(async info => {
+    meta.map(async (info) => {
       // Typically, implementations will have a way to create a source module
       // from a source file and use that to write to the ESM path.
       const source = createModuleFromInfo(info);

@@ -22,7 +22,7 @@ const TableExpandedRow = ({
   const rowRef = useRef(null);
   const className = cx(`${prefix}--expandable-row`, customClassName);
 
-  const toggleParentHoverClass = eventType => {
+  const toggleParentHoverClass = (eventType) => {
     if (rowRef && rowRef.current && rowRef.current.previousElementSibling) {
       const parentNode = rowRef.current.previousElementSibling;
       if (eventType === 'enter') {

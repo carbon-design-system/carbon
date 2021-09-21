@@ -27,6 +27,21 @@ class CopyButton extends mixin(
   constructor(element, options) {
     super(element, options);
     this.manage(on(this.element, 'click', () => this.handleClick()));
+    this.manage(
+      on(this.element, 'animationend', (event) =>
+        this.handleAnimationEnd(event)
+      )
+    );
+  }
+
+  /**
+   * Cleanup animation classes
+   */
+  handleAnimationEnd(event) {
+    if (event.animationName === 'hide-feedback') {
+      this.element.classList.remove(this.options.classAnimating);
+      this.element.classList.remove(this.options.classFadeOut);
+    }
   }
 
   /**
@@ -38,6 +53,13 @@ class CopyButton extends mixin(
       feedback.classList.add(this.options.classShowFeedback);
       setTimeout(() => {
         feedback.classList.remove(this.options.classShowFeedback);
+      }, this.options.timeoutValue);
+    } else {
+      this.element.classList.add(this.options.classAnimating);
+      this.element.classList.add(this.options.classFadeIn);
+      setTimeout(() => {
+        this.element.classList.remove(this.options.classFadeIn);
+        this.element.classList.add(this.options.classFadeOut);
       }, this.options.timeoutValue);
     }
   }
@@ -52,7 +74,7 @@ class CopyButton extends mixin(
   /**
    * The component options.
    * If `options` is specified in the constructor, {@linkcode CopyBtn.create .create()}, or {@linkcode CopyBtn.init .init()},
-   * properties in this object are overriden for the instance being create and how {@linkcode CopyBtn.init .init()} works.
+   * properties in this object are overridden for the instance being create and how {@linkcode CopyBtn.init .init()} works.
    * @member CopyBtn.options
    * @type {object}
    * @property {string} selectorInit The data attribute to find copy button UIs.
@@ -66,6 +88,9 @@ class CopyButton extends mixin(
       selectorInit: '[data-copy-btn]',
       feedbackTooltip: '[data-feedback]',
       classShowFeedback: `${prefix}--btn--copy__feedback--displayed`,
+      classAnimating: `${prefix}--copy-btn--animating`,
+      classFadeIn: `${prefix}--copy-btn--fade-in`,
+      classFadeOut: `${prefix}--copy-btn--fade-out`,
       timeoutValue: 2000,
     };
   }

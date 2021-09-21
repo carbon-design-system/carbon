@@ -17,15 +17,22 @@ const HeaderSideNavItems = ({
   children,
   hasDivider,
 }) => {
-  const className = cx({
-    [`${prefix}--side-nav__header-navigation`]: true,
-    [`${prefix}--side-nav__header-divider`]: hasDivider,
-    customClassName,
-  });
+  const className = cx(
+    {
+      [`${prefix}--side-nav__header-navigation`]: true,
+      [`${prefix}--side-nav__header-divider`]: hasDivider,
+    },
+    customClassName
+  );
   return <div className={className}>{children}</div>;
 };
 
 HeaderSideNavItems.propTypes = {
+  /**
+   * The child nodes to be rendered
+   */
+  children: PropTypes.node,
+
   /**
    * Optionally provide a custom class name that is applied to the underlying
    * button

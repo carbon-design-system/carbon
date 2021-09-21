@@ -1,0 +1,175 @@
+import { Story, Props, Source, Preview } from '@storybook/addon-docs/blocks';
+import { Accordion, AccordionItem, AccordionSkeleton } from '../Accordion';
+
+# Accordion
+
+[Source code](https://github.com/carbon-design-system/carbon/tree/main/packages/react/src/components/Accordion)
+&nbsp;|&nbsp;
+[Usage guidelines](https://www.carbondesignsystem.com/components/accordion/usage)
+&nbsp;|&nbsp;
+[Accessibility](https://www.carbondesignsystem.com/components/accordion/accessibility)
+
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+
+## Table of Contents
+
+- [Overview](#overview)
+- [Skeleton state](#skeleton-state)
+- [Component API](#component-api)
+- [References](#references)
+- [Feedback](#feedback)
+
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+
+## Overview
+
+You can build an accordion using a combination of the `Accordion` and
+`AccordionItem` components. The `Accordion` components accepts a list of
+`AccordionItem` components as `children` and each `AccordionItem` is responsible
+for displaying the accordion's heading and panel content.
+
+You can configure the accordion item's heading using the `title` prop.
+Everything you pass in as a child of `AccordionItem` will be rendered in the
+accordion's panel.
+
+<Preview>
+  <Story id="components-accordion--accordion" />
+</Preview>
+
+## Skeleton state
+
+You can use the `AccordionSkeleton` component to render a skeleton variant of an
+accordion. This is useful to display while content in your accordion is being
+fetched from an external resource like an API.
+
+<Preview>
+  <Story id="components-accordion--skeleton" />
+</Preview>
+
+## Component API
+
+<Props />
+
+Additional props passed into `Accordion` will be forwarded along to the
+underlying accordion container.
+
+### Accordion align
+
+In rare cases, you may need to specify the alignment of the icon in the
+accordion. You can use the `align` prop to specify the side where the icon
+should be placed.
+
+_Note: This prop must not be used to create a tree view or set of nested
+accordions._
+
+```jsx
+<Accordion align="start">
+  <AccordionItem title="Panel A">Panel A</AccordionItem>
+  <AccordionItem title="Panel B">Panel B</AccordionItem>
+  <AccordionItem title="Panel C">Panel C</AccordionItem>
+</Accordion>
+```
+
+### Accordion className
+
+The `className` prop passed into `Accordion` will be forwarded along to the
+underlying accordion container. This is useful for specifying a custom class
+name for layout.
+
+```jsx
+<Accordion className="custom-class">
+  <AccordionItem title="Panel A">Panel A</AccordionItem>
+  <AccordionItem title="Panel B">Panel B</AccordionItem>
+  <AccordionItem title="Panel C">Panel C</AccordionItem>
+</Accordion>
+```
+
+### AccordionItem props
+
+Additional props passed into `AccordionItem`, such as `onClick`, will be passed
+through to the underlying accordion header.
+
+### AccordionItem className
+
+The `className` prop passed into `AccordionItem` will be forwarded along to the
+underlying accordion header. This is useful for specifying a custom class name
+for layout. As a reminder, the callback signature will look like
+`({ isOpen: boolean, event: Event })` rather than the usual
+`(event: Event, state: { isOpen: boolean })` until the next major version.
+
+```jsx
+<Accordion>
+  <AccordionItem title="Panel A" className="custom-class">
+    Panel A
+  </AccordionItem>
+  <AccordionItem title="Panel B">Panel B</AccordionItem>
+  <AccordionItem title="Panel C">Panel C</AccordionItem>
+</Accordion>
+```
+
+### AccordionItem onHeadingClick
+
+You can use the `onHeadingClick` prop to determine the state of the
+`AccordionItem` when it is clicked. it will return
+
+```jsx
+<Accordion>
+  <AccordionItem onHeadingClick={({ isOpen }) => console.log(isOpen)}>
+    Panel A
+  </AccordionItem>
+</Accordion>
+```
+
+### AccordionItem title
+
+You can use the `title` prop to specify the accordion item's heading. The
+default behavior is to pass in a `string` as the title, however you can also
+pass in a `node`.
+
+_Note: A custom title prop that renders an interactive element is considered an
+accessibility violation. For more information, visit our
+[reference section](#why-is-interactive-content-in-a-heading-considered-an-accessibility-violation)
+below._
+
+```jsx
+<Accordion align="start">
+  <AccordionItem title={() => <span>Panel A</span>}>Panel A</AccordionItem>
+  <AccordionItem title="Panel B">Panel B</AccordionItem>
+  <AccordionItem title="Panel C">Panel C</AccordionItem>
+</Accordion>
+```
+
+### AccordionSkeleton props
+
+Additional props passed into `AccordionSkeleton` will be forwarded along to the
+underlying skeleton container.
+
+### AccordionSkeleton className
+
+The `className` prop passed into `AccordionSkeleton` will be forwarded along to
+the underlying skeleton container. This is useful for specifying a custom class
+name for layout.
+
+```jsx
+<AccordionSkeleton className="custom-class" open count={3} />
+```
+
+## References
+
+### Why is interactive content in a heading considered an accessibility violation?
+
+When using the `title` prop from `Accordion`, it is possible to render arbitrary
+markup within the accordion header. The accordion header itself is rendered as a
+`<button>` and is considered an interactive element.
+
+If you render an interactive element inside this header, then it becomes nested
+inside the `<button>`. Common examples of this are buttons or links. Rendering
+interactive content inside the accordion heading is not reachable via a keyboard
+or screen reader.
+
+## Feedback
+
+Help us improve this component by providing feedback, asking questions on Slack,
+or updating this file on
+[GitHub](https://github.com/carbon-design-system/carbon/edit/main/packages/react/src/components/Accordion/Accordion.mdx).

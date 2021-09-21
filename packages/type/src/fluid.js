@@ -27,7 +27,7 @@ export function fluid(selector) {
 
   styles.fontSize = fluidTypeSize(styles, 'sm', fluidBreakpoints);
 
-  fluidBreakpointNames.forEach(name => {
+  fluidBreakpointNames.forEach((name) => {
     styles[bp(name)] = {
       ...fluidBreakpoints[name],
       fontSize: fluidTypeSize(styles, name, fluidBreakpoints),

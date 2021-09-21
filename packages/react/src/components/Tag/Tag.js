@@ -8,11 +8,11 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import classNames from 'classnames';
-import { settings } from 'carbon-components';
 import { Close16 } from '@carbon/icons-react';
+import setupGetInstanceId from '../../tools/setupGetInstanceId';
+import { usePrefix } from '../../internal/usePrefix';
 
-const { prefix } = settings;
-
+const getInstanceId = setupGetInstanceId();
 const TYPES = {
   red: 'Red',
   magenta: 'Magenta',
@@ -24,35 +24,86 @@ const TYPES = {
   gray: 'Gray',
   'cool-gray': 'Cool-Gray',
   'warm-gray': 'Warm-Gray',
+  'high-contrast': 'High-Contrast',
 };
 
 const Tag = ({
   children,
   className,
+  id,
   type,
   filter,
+  renderIcon: CustomIconElement,
   title,
   disabled,
+  onClose,
+  size,
   ...other
 }) => {
-  const tagClass = `${prefix}--tag--${type}`;
-  const tagClasses = classNames(`${prefix}--tag`, tagClass, className, {
+  const prefix = usePrefix();
+  const tagId = id || `tag-${getInstanceId()}`;
+  const tagClasses = classNames(`${prefix}--tag`, className, {
     [`${prefix}--tag--disabled`]: disabled,
     [`${prefix}--tag--filter`]: filter,
+    [`${prefix}--tag--${size}`]: size,
+    [`${prefix}--tag--${type}`]: type,
+    [`${prefix}--tag--interactive`]: other.onClick && !filter,
   });
-  return filter ? (
-    <span
+  const handleClose = (event) => {
+    if (onClose) {
+      event.stopPropagation();
+      onClose(event);
+    }
+  };
+
+  if (filter) {
+    return (
+      <div
+        className={tagClasses}
+        aria-label={
+          title !== undefined
+            ? `${title} ${children}`
+            : `Clear filter ${children}`
+        }
+        id={tagId}
+        {...other}>
+        <span
+          className={`${prefix}--tag__label`}
+          title={typeof children === 'string' ? children : null}>
+          {children !== null && children !== undefined ? children : TYPES[type]}
+        </span>
+        <button
+          type="button"
+          className={`${prefix}--tag__close-icon`}
+          onClick={handleClose}
+          disabled={disabled}
+          aria-labelledby={tagId}
+          title={title}>
+          <Close16 />
+        </button>
+      </div>
+    );
+  }
+
+  const ComponentTag = other.onClick ? 'button' : 'div';
+
+  return (
+    <ComponentTag
+      disabled={ComponentTag === 'button' ? disabled : null}
       className={tagClasses}
-      title={title || 'Clear filter'}
-      tabIndex="0" // eslint-disable-line jsx-a11y/no-noninteractive-tabindex
+      id={tagId}
       {...other}>
-      {children !== null && children !== undefined ? children : TYPES[type]}
-      <Close16 aria-label={title || 'Clear filter'} />
-    </span>
-  ) : (
-    <span className={tagClasses} {...other}>
-      {children !== null && children !== undefined ? children : TYPES[type]}
-    </span>
+      {CustomIconElement ? (
+        <div className={`${prefix}--tag__custom-icon`}>
+          <CustomIconElement />
+        </div>
+      ) : (
+        ''
+      )}
+      <span title={typeof children === 'string' ? children : null}>
+        {children !== null && children !== undefined ? children : TYPES[type]}
+      </span>
+    </ComponentTag>
   );
 };
 
@@ -68,11 +119,6 @@ Tag.propTypes = {
   className: PropTypes.string,
 
   /**
-   * Specify the type of the <Tag>
-   */
-  type: PropTypes.oneOf(Object.keys(TYPES)).isRequired,
-
-  /**
    * Specify if the <Tag> is disabled
    */
   disabled: PropTypes.bool,
@@ -83,9 +129,36 @@ Tag.propTypes = {
   filter: PropTypes.bool,
 
   /**
+   * Specify the id for the tag.
+   */
+  id: PropTypes.string,
+
+  /**
+   * Click handler for filter tag close button.
+   */
+  onClose: PropTypes.func,
+
+  /**
+   * Optional prop to render a custom icon.
+   * Can be a React component class
+   */
+  renderIcon: PropTypes.oneOfType([PropTypes.func, PropTypes.object]),
+
+  /**
+   * Specify the size of the Tag. Currently supports either `sm` or
+   * 'md' (default) sizes.
+   */
+  size: PropTypes.oneOf(['sm', 'md']),
+
+  /**
    * Text to show on clear filters
    */
   title: PropTypes.string,
+
+  /**
+   * Specify the type of the <Tag>
+   */
+  type: PropTypes.oneOf(Object.keys(TYPES)),
 };
 
 export const types = Object.keys(TYPES);

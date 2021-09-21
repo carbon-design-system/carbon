@@ -165,8 +165,8 @@ const columnsExpandable = [
     name: 'select',
     title: 'Label name',
     checkbox: true,
-    checkboxId: `${prefix}--checkbox-20`,
-    checkboxName: 'checkbox-20',
+    checkboxId: `${prefix}--checkbox-21`,
+    checkboxName: 'checkbox-21',
     checkboxValue: 'green',
   },
   {
@@ -202,17 +202,17 @@ const columnsExpandable = [
   },
 ];
 
-const columnsSmall = columns.slice(1, -1).map(column => ({
+const columnsSmall = columns.slice(1, -1).map((column) => ({
   ...column,
   sortable: false,
 }));
 
 const rows = [
   {
-    id: 'row-id-13',
+    id: 'row-id-16',
     select: {
-      id: `${prefix}--checkbox-13`,
-      name: 'checkbox-13',
+      id: `${prefix}--checkbox-16`,
+      name: 'checkbox-16',
       value: 'green',
       label: 'Label name',
     },
@@ -221,7 +221,7 @@ const rows = [
     secondaryText: 'Secondary Text',
     port: '80',
     rule: 'Round Robin',
-    attachedGroups: "Maureen's VM Groups Testing a really long text here",
+    attachedGroups: 'Maureen’s VM Groups Testing a really long text here',
     status: 'Active',
     menu: {
       label: 'Overflow menu description',
@@ -242,7 +242,7 @@ const rows = [
     secondaryText: 'Secondary Text',
     port: '80',
     rule: 'Round Robin',
-    attachedGroups: "Maureen's VM Groups",
+    attachedGroups: 'Maureen’s VM Groups',
     status: 'Active',
     menu: {
       label: 'Overflow menu description',
@@ -262,7 +262,7 @@ const rows = [
     protocol: 'HTTP',
     port: '80',
     rule: 'Round Robin',
-    attachedGroups: "Maureen's VM Groups",
+    attachedGroups: 'Maureen’s VM Groups',
     status: 'Active',
     menu: {
       label: 'Overflow menu description',
@@ -282,7 +282,7 @@ const rows = [
     protocol: 'HTTP',
     port: '80',
     rule: 'Round Robin',
-    attachedGroups: "Maureen's VM Groups",
+    attachedGroups: 'Maureen’s VM Groups',
     status: 'Active',
     menu: {
       label: 'Overflow menu description',
@@ -302,7 +302,7 @@ const rows = [
     protocol: 'HTTP',
     port: '80',
     rule: 'Round Robin',
-    attachedGroups: "Maureen's VM Groups",
+    attachedGroups: 'Maureen’s VM Groups',
     status: 'Active',
     menu: {
       label: 'Overflow menu description',
@@ -329,7 +329,7 @@ const rowsExpandable = [
     protocol: 'HTTP',
     port: '80',
     rule: 'Round Robin',
-    attachedGroups: "Maureen's VM Groups",
+    attachedGroups: 'Maureen’s VM Groups',
     status: 'Active',
   },
   {
@@ -338,8 +338,8 @@ const rowsExpandable = [
       ` <p>A variety of content types can live here. Be sure to follow Carbon design guidelines for spacing and alignment.</p>
     `,
     select: {
-      id: `${prefix}--checkbox-12`,
-      name: 'checkbox-12',
+      id: `${prefix}--checkbox-10`,
+      name: 'checkbox-10',
       value: 'green',
       label: 'Label name',
     },
@@ -348,7 +348,7 @@ const rowsExpandable = [
     protocol: 'HTTP',
     port: '80',
     rule: 'Round Robin',
-    attachedGroups: "Maureen's VM Groups",
+    attachedGroups: 'Maureen’s VM Groups',
     status: 'Active',
   },
 ];

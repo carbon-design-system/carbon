@@ -5,14 +5,14 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React from 'react';
-import { storiesOf } from '@storybook/react';
+import React, { useState } from 'react';
 import { action } from '@storybook/addon-actions';
 
 import { withKnobs, boolean, number, text } from '@storybook/addon-knobs';
 import Slider from '../Slider';
 import SliderSkeleton from '../Slider/Slider.Skeleton';
 import { sliderValuePropSync } from '../../internal/FeatureFlags';
+import mdx from './Slider.mdx';
 
 const props = () => ({
   name: text('Form item name (name)', ''),
@@ -28,9 +28,9 @@ const props = () => ({
   min: number('The minimum value (min)', 0),
   max: number('The maximum value (max)', 100),
   step: number('The step (step)', 1),
-  stepMuliplier: number(
-    'The step factor for Shift+arrow keys (stepMuliplier)',
-    4
+  stepMultiplier: number(
+    'The step factor for Shift+arrow keys (stepMultiplier)',
+    5
   ),
   labelText: text('Label text (labelText)', 'Slider Label'),
   minLabel: text('Label for minimum value (minLabel)', ''),
@@ -39,33 +39,57 @@ const props = () => ({
   onRelease: action('onRelease'),
 });
 
-storiesOf('Slider', module)
-  .addDecorator(withKnobs)
-  .add('default', () => <Slider id="slider" {...props()} />, {
-    info: {
-      text: `
-            Sliders provide a visual indication of adjustable content, where the user can move the handle along a horizontal track to increase or decrease the value.
-          `,
+export default {
+  title: 'Components/Slider',
+  decorators: [withKnobs],
+
+  parameters: {
+    component: Slider,
+    docs: {
+      page: mdx,
     },
-  })
-  .add(
-    'skeleton',
-    () => (
-      <div
-        style={{ marginTop: '2rem' }}
-        aria-label="loading slider"
-        aria-live="assertive"
-        role="status"
-        tabindex="0" // eslint-disable-line jsx-a11y/no-noninteractive-tabindex
-      >
-        <SliderSkeleton />
-      </div>
-    ),
-    {
-      info: {
-        text: `
-            Placeholder skeleton state to use when content is loading.
-          `,
-      },
-    }
+    subcomponents: {
+      SliderSkeleton,
+    },
+  },
+};
+
+export const Default = () => (
+  <Slider
+    labelText="Slider Label"
+    value={50}
+    min={30}
+    max={100}
+    step={1}
+    stepMultiplier={10}
+    novalidate
+  />
+);
+
+Default.story = {
+  name: 'Slider',
+};
+
+export const Playground = () => <Slider id="slider" {...props()} />;
+
+export const ControlledSlider = () => {
+  const [val, setVal] = useState(87);
+  return (
+    <>
+      <button
+        type="button"
+        onClick={() => setVal(Math.round(Math.random() * 100))}>
+        randomize value
+      </button>
+      <Slider
+        max={100}
+        min={0}
+        value={val}
+        onChange={({ value }) => setVal(value)}
+      />
+      <h1>{val}</h1>
+    </>
   );
+};
+
+export const Skeleton = () => <SliderSkeleton />;

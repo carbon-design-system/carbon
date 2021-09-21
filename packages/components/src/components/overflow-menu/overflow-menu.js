@@ -23,7 +23,7 @@ import on from '../../globals/js/misc/on';
 
 /**
  * The CSS property names of the arrow keyed by the floating menu direction.
- * @type {Object<string, string>}
+ * @type {object<string, string>}
  */
 const triggerButtonPositionProps = /* #__PURE__ */ (() => ({
   [DIRECTION_TOP]: 'bottom',
@@ -34,7 +34,7 @@ const triggerButtonPositionProps = /* #__PURE__ */ (() => ({
 
 /**
  * Determines how the position of arrow should affect the floating menu position.
- * @type {Object<string, number>}
+ * @type {object<string, number>}
  */
 const triggerButtonPositionFactors = /* #__PURE__ */ (() => ({
   [DIRECTION_TOP]: -2,
@@ -124,13 +124,13 @@ class OverflowMenu extends mixin(
       );
     }
     this.manage(
-      on(this.element.ownerDocument, 'click', event => {
+      on(this.element.ownerDocument, 'click', (event) => {
         this._handleDocumentClick(event);
         this.wasOpenBeforeClick = undefined;
       })
     );
     this.manage(
-      on(this.element.ownerDocument, 'keydown', event => {
+      on(this.element.ownerDocument, 'keydown', (event) => {
         this._handleKeyPress(event);
       })
     );
@@ -229,14 +229,14 @@ class OverflowMenu extends mixin(
    * Moves the focus up/down.
    * @param {number} direction The direction of navigating.
    */
-  navigate = direction => {
+  navigate = (direction) => {
     const items = [
       ...this.element.ownerDocument.querySelectorAll(this.options.selectorItem),
     ];
     const start =
       this.getCurrentNavigation() ||
       this.element.querySelector(this.options.selectorItemSelected);
-    const getNextItem = old => {
+    const getNextItem = (old) => {
       const handleUnderflow = (index, length) =>
         index + (index >= 0 ? 0 : length);
       const handleOverflow = (index, length) =>

@@ -1,0 +1,18 @@
+<svg id="icon" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: none;
+      }
+    </style>
+  </defs>
+  <title>chart--cluster-bar</title>
+  <path d="M30,30H4a2,2,0,0,1-2-2V2H4V28H30Z"/>
+  <rect x="10" y="16" width="2" height="10"/>
+  <rect x="7" y="22" width="2" height="4"/>
+  <rect x="26" y="8" width="2" height="18"/>
+  <rect x="23" y="14" width="2" height="12"/>
+  <rect x="15" y="12" width="2" height="14" transform="translate(32 38) rotate(-180)"/>
+  <rect x="18" y="18" width="2" height="8" transform="translate(38 44) rotate(-180)"/>
+  <rect id="_Transparent_Rectangle_" data-name="&lt;Transparent Rectangle&gt;" class="cls-1" width="32" height="32"/>
+</svg>

@@ -7,19 +7,28 @@
 
 import PropTypes from 'prop-types';
 import React from 'react';
+import cx from 'classnames';
 import { settings } from 'carbon-components';
 
 const { prefix } = settings;
 
-const IconSkeleton = ({ style }) => {
+const IconSkeleton = ({ style, className, ...rest }) => {
   const props = {
     style,
+    ...rest,
   };
 
-  return <div className={`${prefix}--icon--skeleton`} {...props} />;
+  return (
+    <div className={cx(`${prefix}--icon--skeleton`, className)} {...props} />
+  );
 };
 
 IconSkeleton.propTypes = {
+  /**
+   * Specify an optional className to add.
+   */
+  className: PropTypes.string,
+
   /**
    * The CSS styles.
    */

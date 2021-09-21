@@ -6,11 +6,11 @@
  */
 
 import React from 'react';
-import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 
 import { withKnobs, number, text } from '@storybook/addon-knobs';
 import CopyButton from '../CopyButton';
+import mdx from './CopyButton.mdx';
 
 const props = () => ({
   feedback: text('The text shown upon clicking (feedback)', 'Copied!'),
@@ -25,11 +25,22 @@ const props = () => ({
   onClick: action('onClick'),
 });
 
-storiesOf('CopyButton', module)
-  .addDecorator(withKnobs)
-  .add('Default', () => <CopyButton {...props()} />, {
-    info: {
-      text:
-        'The copy button can be used when the user needs to copy information, such as a code snippet, to their clipboard.',
+export default {
+  title: 'Components/CopyButton',
+  decorators: [withKnobs],
+
+  parameters: {
+    component: CopyButton,
+    docs: {
+      page: mdx,
     },
-  });
+  },
+};
+
+export const _Default = () => <CopyButton />;
+
+_Default.story = {
+  name: 'Copy Button',
+};
+
+export const Playground = () => <CopyButton {...props()} />;

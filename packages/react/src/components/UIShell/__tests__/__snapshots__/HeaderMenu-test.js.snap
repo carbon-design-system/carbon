@@ -1,84 +1,125 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`HeaderMenu should render 1`] = `
-<ForwardRef>
+<HeaderMenu
+  aria-label="Accessibility label"
+  className="custom-class"
+  menuLinkName="test"
+  tabIndex={-1}
+>
   <HeaderMenu
-    focusRef={null}
+    aria-label="Accessibility label"
+    className="custom-class"
+    focusRef={
+      [MockFunction] {
+        "calls": Array [
+          Array [
+            <a
+              aria-expanded="false"
+              aria-haspopup="menu"
+              aria-label="Accessibility label"
+              class="bx--header__menu-item bx--header__menu-title"
+              href="#"
+              tabindex="0"
+            >
+              test
+              <svg
+                aria-hidden="true"
+                class="bx--header__menu-arrow"
+                fill="currentColor"
+                focusable="false"
+                height="16"
+                preserveAspectRatio="xMidYMid meet"
+                viewBox="0 0 16 16"
+                width="16"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M8 11L3 6 3.7 5.3 8 9.6 12.3 5.3 13 6z"
+                />
+              </svg>
+            </a>,
+          ],
+        ],
+        "results": Array [
+          Object {
+            "type": "return",
+            "value": undefined,
+          },
+        ],
+      }
+    }
+    menuLinkName="test"
     renderMenuContent={[Function]}
+    tabIndex={-1}
   >
     <li
-      className="bx--header__submenu"
+      className="bx--header__submenu custom-class"
       onBlur={[Function]}
       onClick={[Function]}
       onKeyDown={[Function]}
+      tabIndex={-1}
     >
       <a
         aria-expanded={false}
         aria-haspopup="menu"
+        aria-label="Accessibility label"
         className="bx--header__menu-item bx--header__menu-title"
         href="#"
         onKeyDown={[Function]}
-        role="menuitem"
         tabIndex={0}
       >
+        test
         <defaultRenderMenuContent>
-          <ForwardRef(ChevronDownGlyph)
+          <ForwardRef(ChevronDown16)
             className="bx--header__menu-arrow"
           >
             <Icon
               className="bx--header__menu-arrow"
-              height={6}
+              fill="currentColor"
+              height={16}
               preserveAspectRatio="xMidYMid meet"
-              viewBox="0 0 10 6"
-              width={10}
+              viewBox="0 0 16 16"
+              width={16}
               xmlns="http://www.w3.org/2000/svg"
             >
               <svg
                 aria-hidden={true}
                 className="bx--header__menu-arrow"
+                fill="currentColor"
                 focusable="false"
-                height={6}
+                height={16}
                 preserveAspectRatio="xMidYMid meet"
-                style={
-                  Object {
-                    "willChange": "transform",
-                  }
-                }
-                viewBox="0 0 10 6"
-                width={10}
+                viewBox="0 0 16 16"
+                width={16}
                 xmlns="http://www.w3.org/2000/svg"
               >
                 <path
-                  d="M5 6L0 1 0.7 0.3 5 4.6 9.3 0.3 10 1z"
+                  d="M8 11L3 6 3.7 5.3 8 9.6 12.3 5.3 13 6z"
                 />
               </svg>
             </Icon>
-          </ForwardRef(ChevronDownGlyph)>
+          </ForwardRef(ChevronDown16)>
         </defaultRenderMenuContent>
       </a>
       <ul
+        aria-label="Accessibility label"
         className="bx--header__menu"
-        role="menu"
       >
         <ForwardRef(HeaderMenuItem)
           href="/a"
           key=".0"
-          role="none"
         >
-          <li
-            role="none"
-          >
+          <li>
             <Link
               className="bx--header__menu-item"
               element="a"
               href="/a"
-              role="menuitem"
               tabIndex={0}
             >
               <a
                 className="bx--header__menu-item"
                 href="/a"
-                role="menuitem"
                 tabIndex={0}
               >
                 <span
@@ -93,22 +134,17 @@ exports[`HeaderMenu should render 1`] = `
         <ForwardRef(HeaderMenuItem)
           href="/b"
           key=".1"
-          role="none"
         >
-          <li
-            role="none"
-          >
+          <li>
             <Link
               className="bx--header__menu-item"
               element="a"
               href="/b"
-              role="menuitem"
               tabIndex={0}
             >
               <a
                 className="bx--header__menu-item"
                 href="/b"
-                role="menuitem"
                 tabIndex={0}
               >
                 <span
@@ -123,22 +159,17 @@ exports[`HeaderMenu should render 1`] = `
         <ForwardRef(HeaderMenuItem)
           href="/c"
           key=".2"
-          role="none"
         >
-          <li
-            role="none"
-          >
+          <li>
             <Link
               className="bx--header__menu-item"
               element="a"
               href="/c"
-              role="menuitem"
               tabIndex={0}
             >
               <a
                 className="bx--header__menu-item"
                 href="/c"
-                role="menuitem"
                 tabIndex={0}
               >
                 <span
@@ -153,5 +184,5 @@ exports[`HeaderMenu should render 1`] = `
       </ul>
     </li>
   </HeaderMenu>
-</ForwardRef>
+</HeaderMenu>
 `;

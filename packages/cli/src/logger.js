@@ -16,7 +16,8 @@ const chalk = require('chalk');
  * @returns {object}
  */
 function createLogger(command) {
-  let start;
+  const timers = [];
+  let indentLevel = 0;
 
   /**
    * Display the given message with a box character. This also includes
@@ -29,24 +30,46 @@ function createLogger(command) {
     console.log(chalk`{yellow ${command} ▐} {gray ${boxCharacter}} ${message}`);
   }
 
+  function getLinePrefix() {
+    let prefix = '';
+    for (let i = 0; i < indentLevel; i++) {
+      prefix += '┃  ';
+    }
+    return prefix;
+  }
+
   return {
     info(message) {
-      log('┣', chalk.gray(message));
+      indentLevel -= 1;
+      const prefix = getLinePrefix();
+      indentLevel += 1;
+
+      log(prefix + '┣', chalk.gray(message));
     },
     start(message) {
-      start = Date.now();
-      log('┏', message);
+      const start = Date.now();
+      timers.push(start);
+
+      const prefix = getLinePrefix();
+      log(prefix + '┏', message);
+
+      indentLevel += 1;
     },
     stop(message) {
-      const duration = ((Date.now() - start) / 1000).toFixed(2);
+      indentLevel -= 1;
+
+      const duration = ((Date.now() - timers.pop()) / 1000).toFixed(2);
+      const prefix = getLinePrefix();
+
       if (message) {
-        log('┗', message);
+        log(prefix + '┗', message);
       } else {
-        log('┗', chalk`{gray Done in {italic ${duration}s}}`);
+        log(prefix + '┗', chalk`{gray Done in {italic ${duration}s}}`);
       }
     },
     newline() {
-      log('┃');
+      const prefix = getLinePrefix();
+      log(prefix + '┃');
     },
   };
 }
@@ -63,7 +86,6 @@ function displayBanner() {
   / __/ _\` | '__| '_ \\ / _ \\| '_ \\
  | (_| (_| | |  | |_) | (_) | | | |
   \\___\\__,_|_|  |_.__/ \\___/|_| |_|
-
 `);
 }
 

@@ -20,7 +20,8 @@ $shell-header-bg-01: $carbon--gray-100;
 /// @type Color
 /// @access private
 /// @group ui-shell
-$shell-header-bg-02: #2c2c2c; //TODO needs color var gray-100-hover
+/// TODO needs color var gray-100-hover
+$shell-header-bg-02: #2c2c2c;
 
 /// Header action active background
 /// @type Color
@@ -32,7 +33,8 @@ $shell-header-bg-03: $carbon--gray-80;
 /// @type Color
 /// @access private
 /// @group ui-shell
-$shell-header-bg-04: #353535; //TODO needs color var gray-90-hover
+/// TODO needs color var gray-90-hover
+$shell-header-bg-04: #353535;
 
 /// Header nav link active and focus background
 /// @type Color
@@ -108,7 +110,8 @@ $shell-panel-bg-01: $carbon--gray-100;
 /// @type Color
 /// @access private
 /// @group ui-shell
-$shell-panel-bg-02: #2c2c2c; //TODO needs color var gray-100-hover
+/// TODO needs color var gray-100-hover
+$shell-panel-bg-02: #2c2c2c;
 
 /// Panel item focus and active background
 /// @type Color
@@ -162,25 +165,29 @@ $shell-side-nav-bg-01: $carbon--white-0;
 /// @type Color
 /// @access private
 /// @group ui-shell
-$shell-side-nav-bg-02: $carbon--gray-80; //TODO waiting for updated color
+/// TODO waiting for updated color
+$shell-side-nav-bg-02: $carbon--gray-80;
 
 /// Selected L2 nested item
 /// @type Color
 /// @access private
 /// @group ui-shell
-$shell-side-nav-bg-03: $ibm-color__gray-70; //TODO waiting for updated color
+/// TODO waiting for updated color
+$shell-side-nav-bg-03: $ibm-color__gray-70;
 
 /// Side nav item hover background
 /// @type Color
 /// @access private
 /// @group ui-shell
-$shell-side-nav-bg-04: #e5e5e5; //TODO needs color var gray-90-hover
+/// TODO needs color var gray-90-hover
+$shell-side-nav-bg-04: #e5e5e5;
 
 /// Side nav menu item hover background
 /// @type Color
 /// @access private
 /// @group ui-shell
-$shell-side-nav-bg-05: #dcdcdc; //TODO needs color var gray-80-hover
+/// TODO needs color var gray-80-hover
+$shell-side-nav-bg-05: #dcdcdc;
 
 /// Primary text in side-nav
 /// L2 Flatten item text
@@ -189,7 +196,8 @@ $shell-side-nav-bg-05: #dcdcdc; //TODO needs color var gray-80-hover
 /// @type Color
 /// @access private
 /// @group ui-shell
-$shell-side-nav-text-01: $ibm-color__gray-70; //TODO waiting for updated color
+/// TODO waiting for updated color
+$shell-side-nav-text-01: $ibm-color__gray-70;
 
 /// Secondary text in side nav
 /// L2 Category label

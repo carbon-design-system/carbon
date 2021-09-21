@@ -26,9 +26,9 @@ class PaginationNav extends mixin(
    */
   constructor(element, options) {
     super(element, options);
-    this.manage(on(this.element, 'click', evt => this.handleClick(evt)));
+    this.manage(on(this.element, 'click', (evt) => this.handleClick(evt)));
     this.manage(
-      on(this.element, 'change', evt => {
+      on(this.element, 'change', (evt) => {
         if (evt.target.matches(this.options.selectorPageSelect)) {
           this.handleSelectChange(evt);
         }
@@ -53,14 +53,14 @@ class PaginationNav extends mixin(
   /**
    * Clear active page attributes
    */
-  clearActivePage = evt => {
+  clearActivePage = (evt) => {
     const pageButtonNodeList = this.element.querySelectorAll(
       this.options.selectorPageButton
     );
     const pageSelectElement = this.element.querySelector(
       this.options.selectorPageSelect
     );
-    Array.prototype.forEach.call(pageButtonNodeList, el => {
+    Array.prototype.forEach.call(pageButtonNodeList, (el) => {
       el.classList.remove(this.options.classActive, this.options.classDisabled);
       el.removeAttribute(this.options.attribActive);
       el.removeAttribute('aria-disabled');
@@ -69,7 +69,7 @@ class PaginationNav extends mixin(
     if (pageSelectElement) {
       pageSelectElement.removeAttribute('aria-current');
       const pageSelectElementOptions = pageSelectElement.options;
-      Array.prototype.forEach.call(pageSelectElementOptions, el => {
+      Array.prototype.forEach.call(pageSelectElementOptions, (el) => {
         el.removeAttribute(this.options.attribActive);
       });
       if (!evt.target.matches(this.options.selectorPageSelect)) {
@@ -82,7 +82,7 @@ class PaginationNav extends mixin(
   /**
    * Add active state on click
    */
-  handleClick = evt => {
+  handleClick = (evt) => {
     if (!evt.target.getAttribute('aria-disabled') === true) {
       let nextActivePageNumber = this.getActivePageNumber();
       const pageElementNodeList = this.element.querySelectorAll(
@@ -124,7 +124,7 @@ class PaginationNav extends mixin(
   /**
    * Handle select menu on change
    */
-  handleSelectChange = evt => {
+  handleSelectChange = (evt) => {
     this.clearActivePage(evt);
     const pageSelectElement = this.element.querySelector(
       this.options.selectorPageSelect
@@ -185,7 +185,7 @@ class PaginationNav extends mixin(
    * The component options.
    * If `options` is specified in the constructor, {@linkcode PaginationNav.create .create()},
    * or {@linkcode PaginationNav.init .init()},
-   * properties in this object are overriden for the instance being create and how {@linkcode PaginationNav.init .init()} works.
+   * properties in this object are overridden for the instance being create and how {@linkcode PaginationNav.init .init()} works.
    * @member PaginationNav.options
    * @type {object}
    * @property {string} selectorInit The data attribute to find pagination nav.

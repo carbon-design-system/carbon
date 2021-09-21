@@ -27,9 +27,11 @@ const TableToolbarMenu = ({
   );
   return (
     <OverflowMenu
+      ariaLabel={iconDescription}
       renderIcon={renderIcon}
       className={toolbarActionClasses}
       title={iconDescription}
+      iconDescription={iconDescription}
       flipped
       {...rest}>
       {children}
@@ -51,14 +53,14 @@ TableToolbarMenu.propTypes = {
   className: PropTypes.string,
 
   /**
-   * Optional prop to allow overriding the default menu icon
-   */
-  renderIcon: PropTypes.oneOfType([PropTypes.func, PropTypes.object]),
-
-  /**
    * The description of the menu icon.
    */
   iconDescription: PropTypes.string.isRequired,
+
+  /**
+   * Optional prop to allow overriding the default menu icon
+   */
+  renderIcon: PropTypes.oneOfType([PropTypes.func, PropTypes.object]),
 };
 
 export default TableToolbarMenu;

@@ -21,9 +21,13 @@
  * // @todo given that the default value is so long, is it appropriate to put in the JSDoc?
  * @property {string} [selectorTabbable]
  *   A selector selecting tabbable/focusable nodes.
- *   By default selectorTabbable refereneces links, areas, inputs, buttons, selects, textareas,
+ *   By default selectorTabbable references links, areas, inputs, buttons, selects, textareas,
  *   iframes, objects, embeds, or elements explicitly using tabindex or contenteditable attributes
  *   as long as the element is not `disabled` or the `tabindex="-1"`.
+ * @property {string} [selectorFocusable]
+ *   CSS selector that selects major nodes that are click focusable
+ *   This property is identical to selectorTabbable with the exception of
+ *   the `:not([tabindex='-1'])` pseudo class
  */
 const settings = {
   prefix: 'bx',

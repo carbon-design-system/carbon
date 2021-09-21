@@ -82,9 +82,7 @@ const navigationMenu = {
       ],
     },
   ],
-  idSuffix: Math.random()
-    .toString(36)
-    .substr(2),
+  idSuffix: Math.random().toString(36).substr(2),
 };
 
 const switcher = {
@@ -124,9 +122,7 @@ const switcher = {
       title: 'All Products',
     },
   ],
-  idSuffix: Math.random()
-    .toString(36)
-    .substr(2),
+  idSuffix: Math.random().toString(36).substr(2),
 };
 
 const header = {
@@ -293,15 +289,13 @@ module.exports = {
             expanded: true,
             category: true,
           },
-          sections: navigationMenu.sections.map(section => ({
-            items: section.items.map(item => ({
+          sections: navigationMenu.sections.map((section) => ({
+            items: section.items.map((item) => ({
               ...item,
               hasIcon: false,
             })),
           })),
-          idSuffix: Math.random()
-            .toString(36)
-            .substr(2),
+          idSuffix: Math.random().toString(36).substr(2),
         },
       },
     },

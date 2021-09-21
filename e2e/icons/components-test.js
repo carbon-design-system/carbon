@@ -9,21 +9,63 @@
 
 'use strict';
 
+const { Metadata } = require('@carbon/icon-build-helpers');
 const path = require('path');
-const meta = require('../../packages/icons/build-info.json');
+
+const ICONS_PACKAGE_DIR = path.resolve(__dirname, '../../packages/icons');
 
 describe('@carbon/icons', () => {
-  test.each(meta.map(icon => [icon.moduleName, icon]))(
-    '%s is require-able',
-    (name, icon) => {
-      const filepath = path.resolve(
-        __dirname,
-        '../../packages/icons',
-        icon.outputOptions.file.replace(/es/, 'lib')
-      );
-      expect(() => {
-        require(filepath);
-      }).not.toThrow();
+  let metadata;
+
+  beforeAll(async () => {
+    const mock = jest.spyOn(console, 'error').mockImplementation((error) => {
+      if (
+        error !== 'Error: infinite loop while processing mergePaths plugin.'
+      ) {
+        throw error;
+      }
+    });
+
+    metadata = await Metadata.load({
+      input: {
+        svg: path.join(ICONS_PACKAGE_DIR, 'src/svg'),
+        extensions: ICONS_PACKAGE_DIR,
+      },
+      extensions: [
+        Metadata.extensions.icons,
+        Metadata.extensions.deprecated,
+        Metadata.extensions.assets,
+        Metadata.extensions.output,
+      ],
+    });
+
+    mock.mockRestore();
+  });
+
+  it('should export each SVG asset', async () => {
+    const CarbonIconsCommonJS = require('@carbon/icons');
+    const CarbonIconsESM = await import('@carbon/icons');
+
+    for (const asset of metadata.icons) {
+      for (const icon of asset.output) {
+        const { moduleName } = icon;
+        expect(CarbonIconsCommonJS[moduleName]).toBeDefined();
+        expect(CarbonIconsESM[moduleName]).toBeDefined();
+      }
     }
-  );
+  });
+
+  it('should export each SVG asset as a direct path', async () => {
+    for (const asset of metadata.icons) {
+      for (const icon of asset.output) {
+        const esm = path.join(ICONS_PACKAGE_DIR, 'es', icon.filepath);
+        const commonjs = path.join(ICONS_PACKAGE_DIR, 'lib', icon.filepath);
+
+        expect(() => {
+          require(commonjs);
+        }).not.toThrow();
+        await expect(import(esm)).resolves.toBeDefined();
+      }
+    }
+  });
 });

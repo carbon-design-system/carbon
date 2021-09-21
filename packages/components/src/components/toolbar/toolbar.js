@@ -13,7 +13,7 @@ import handles from '../../globals/js/mixins/handles';
 import eventMatches from '../../globals/js/misc/event-matches';
 import on from '../../globals/js/misc/on';
 
-const toArray = arrayLike => Array.prototype.slice.call(arrayLike);
+const toArray = (arrayLike) => Array.prototype.slice.call(arrayLike);
 
 class Toolbar extends mixin(createComponent, initComponentBySearch, handles) {
   /**
@@ -37,7 +37,7 @@ class Toolbar extends mixin(createComponent, initComponentBySearch, handles) {
       );
       if (rowHeightBtns) {
         this.manage(
-          on(rowHeightBtns, 'click', event => {
+          on(rowHeightBtns, 'click', (event) => {
             this._handleRowHeightChange(event, boundTable);
           })
         );
@@ -48,12 +48,12 @@ class Toolbar extends mixin(createComponent, initComponentBySearch, handles) {
     }
 
     this.manage(
-      on(this.element.ownerDocument, 'keydown', evt => {
+      on(this.element.ownerDocument, 'keydown', (evt) => {
         this._handleKeyDown(evt);
       })
     );
     this.manage(
-      on(this.element.ownerDocument, 'click', evt => {
+      on(this.element.ownerDocument, 'click', (evt) => {
         this._handleDocumentClick(evt);
       })
     );
@@ -87,7 +87,7 @@ class Toolbar extends mixin(createComponent, initComponentBySearch, handles) {
     );
     toArray(
       this.element.ownerDocument.querySelectorAll(this.options.selectorSearch)
-    ).forEach(item => {
+    ).forEach((item) => {
       if (!targetComponentElement || !targetComponentElement.contains(item)) {
         item.classList.remove(this.options.classSearchActive);
       }
@@ -129,7 +129,7 @@ class Toolbar extends mixin(createComponent, initComponentBySearch, handles) {
   /**
    * The component options.
    * If `options` is specified in the constructor,
-   * properties in this object are overriden for the instance being created.
+   * properties in this object are overridden for the instance being created.
    * @property {string} selectorInit The CSS selector to find toolbar instances.
    * @property {string} selectorSearch The CSS selector to find search inputs in a toolbar.
    * @property {string} selectorRowHeight The CSS selector to find the row height inputs in a toolbar.

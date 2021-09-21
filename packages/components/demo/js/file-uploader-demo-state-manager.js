@@ -4,7 +4,7 @@ import createComponent from '../../src/globals/js/mixins/create-component';
 import initComponentByEvent from '../../src/globals/js/mixins/init-component-by-event';
 import handles from '../../src/globals/js/mixins/handles';
 import on from '../../src/globals/js/misc/on';
-import FileUplaoder from '../../src/components/file-uploader/file-uploader';
+import FileUploader from '../../src/components/file-uploader/file-uploader';
 
 class FileUploaderDemoStateManager extends mixin(
   createComponent,
@@ -54,8 +54,8 @@ class FileUploaderDemoStateManager extends mixin(
    * Handles `change` event of the "upload" button.
    * @param {Event} evt The event.
    */
-  _handleChange = evt => {
-    const uploader = FileUplaoder.components.get(this.element);
+  _handleChange = (evt) => {
+    const uploader = FileUploader.components.get(this.element);
     if (!uploader) {
       throw new TypeError('Cannot find the file uploader instance.');
     }
@@ -72,12 +72,12 @@ class FileUploaderDemoStateManager extends mixin(
       console.log('Simulated uploading files...:', files);
 
       setTimeout(() => {
-        Array.prototype.forEach.call(files, file => {
+        Array.prototype.forEach.call(files, (file) => {
           uploader.setState('complete', this._files.indexOf(file));
         });
 
         setTimeout(() => {
-          Array.prototype.forEach.call(files, file => {
+          Array.prototype.forEach.call(files, (file) => {
             uploader.setState('edit', this._files.indexOf(file));
           });
         }, 500);
@@ -90,8 +90,8 @@ class FileUploaderDemoStateManager extends mixin(
    * @param {MouseEvent} evt The event.
    * @private
    */
-  _handleDrop = evt => {
-    const uploader = FileUplaoder.components.get(this.element);
+  _handleDrop = (evt) => {
+    const uploader = FileUploader.components.get(this.element);
     if (!uploader) {
       throw new TypeError('Cannot find the file uploader instance.');
     }
@@ -108,12 +108,12 @@ class FileUploaderDemoStateManager extends mixin(
       console.log('Simulated uploading files...:', files);
 
       setTimeout(() => {
-        Array.prototype.forEach.call(files, file => {
+        Array.prototype.forEach.call(files, (file) => {
           uploader.setState('complete', this._files.indexOf(file));
         });
 
         setTimeout(() => {
-          Array.prototype.forEach.call(files, file => {
+          Array.prototype.forEach.call(files, (file) => {
             uploader.setState('edit', this._files.indexOf(file));
           });
         }, 500);
@@ -125,7 +125,7 @@ class FileUploaderDemoStateManager extends mixin(
    * Handles the event of deleting uploaded file.
    * @param {CustomEvent} evt The event.
    */
-  _handleDelete = evt => {
+  _handleDelete = (evt) => {
     if (evt.type === 'fileuploader-before-delete-filename') {
       evt.detail.filenameIndex = Array.prototype.indexOf.call(
         this.element.querySelectorAll(this.options.selectorSelectedFile),
@@ -147,7 +147,7 @@ class FileUploaderDemoStateManager extends mixin(
    * The component options.
    * If `options` is specified in the constructor, {@linkcode FileUploaderDemoStateManager.create .create()},
    * or {@linkcode FileUploaderDemoStateManager.init .init()},
-   * properties in this object are overriden for the instance being create
+   * properties in this object are overridden for the instance being create
    * and how {@linkcode FileUploaderDemoStateManager.init .init()} works.
    * @member FileUploaderDemoStateManager.options
    * @type {Object}

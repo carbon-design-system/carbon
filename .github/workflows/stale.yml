@@ -1,0 +1,26 @@
+name: stale
+on:
+  schedule:
+    - cron: '0 8 * * *'
+
+jobs:
+  comment:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/stale@v4
+        with:
+          any-of-issue-labels:
+            "status: waiting for author's response 💬,status: needs more info 🤷‍♀️"
+          only-pr-labels: ''
+          stale-issue-message: |
+            This issue has been marked as stale because it has required additional
+            info or a response from the author for over 7 days. When you get the
+            chance, please comment with the additional info requested.
+            Otherwise, this issue will be closed in 7 days.
+          close-issue-message: |
+            This issue has been closed because it has received no activity for
+            14 days.
+          stale-issue-label: 'status: stale 🍞'
+          days-before-stale: 7
+          days-before-close: 7
+          debug-only: true

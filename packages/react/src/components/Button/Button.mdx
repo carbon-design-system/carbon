@@ -1,0 +1,349 @@
+import { Story, Props, Source, Preview } from '@storybook/addon-docs/blocks';
+import { withKnobs, boolean, select, text } from '@storybook/addon-knobs';
+import * as stories from './Button-story.js';
+import Button from '../Button';
+import ButtonSet from '../ButtonSet';
+import { Add16, Delete16 } from '@carbon/icons-react';
+
+# Button
+
+[Source code](https://github.com/carbon-design-system/carbon/tree/main/packages/react/src/components/Button)
+&nbsp;|&nbsp;
+[Usage guidelines](https://www.carbondesignsystem.com/components/button/usage)
+&nbsp;|&nbsp;
+[Accessibility](https://www.carbondesignsystem.com/components/button/accessibility)
+
+## Table of Contents
+
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+
+- [Overview](#overview)
+- [Danger Buttons](#danger-buttons)
+- [Icon-only Buttons](#icon-only-buttons)
+- [Set of Buttons](#set-of-buttons)
+- [Skeleton state](#skeleton-state)
+- [Component API](#component-api)
+  - [Button `as`](#button-as)
+  - [Button `className`](#button-classname)
+  - [Button `hasIconOnly`](#button-hasicononly)
+  - [Button `href`](#button-href)
+  - [Button `iconDescription`](#button-icondescription)
+  - [Button `kind`](#button-kind)
+  - [Button `renderIcon`](#button-rendericon)
+  - [Button `role`](#button-role)
+  - [Button `size`](#button-size)
+  - [Button `tooltipAlignment`](#button-tooltipalignment)
+  - [Button `tooltipPosition`](#button-tooltipposition)
+  - [ButtonSet `stacked`](#buttonset-stacked)
+- [References](#references)
+- [Feedback](#feedback)
+
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+
+## Overview
+
+Buttons are clickable elements that are used to trigger actions. They
+communicate calls to action to the user and allow users to interact with pages
+in a variety of ways. `Button` labels express what action will occur when the
+user interacts with it.
+
+<Preview>
+  <Story id="components-button--default" />
+  <Story id="components-button--secondary" />
+  <Story id="components-button--tertiary" />
+  <Story id="components-button--ghost" />
+</Preview>
+
+## Danger Buttons
+
+The danger button has three different styles: primary, tertiary, and ghost.
+Determining which danger button style to use will depend on the level of
+emphasis you want to give to the danger action. Destructive actions that are
+considered a required or primary step in a workflow should use the primary
+danger button style. However, if a destructive action is just one of several
+actions a user could choose from, then a lower emphasis style like the tertiary
+danger button or the ghost danger button may be more appropriate.
+
+<Preview>
+  <Story id="components-button--danger" />
+</Preview>
+
+## Icon-only Buttons
+
+Icon buttons allow users to take actions, and make choices, with a single tap.
+Icon buttons can take the form of any of the seven types (Primary, Secondary,
+Tertiary, Danger, Danger tertiary, Danger ghost and Ghost) but most commonly
+will be styled as primary or ghost buttons.
+
+<Preview>
+  <Story id="components-button--icon-button" />
+</Preview>
+
+## Set of Buttons
+
+You can wrap two `Button` elements in a `ButtonSet` when an action required by
+the user has more than one option. Always use a negative action button
+(secondary) paired with a positive action button (primary) in that order.
+Negative action buttons will be on the left. Positive action buttons should be
+on the right. When these two types buttons are paired in the correct order, they
+will automatically space themselves apart.
+
+<Preview>
+  <Story id="components-button--set-of-buttons" />
+</Preview>
+
+## Skeleton state
+
+You can use the `ButtonSkeleton` component to render a skeleton variant of a
+button. This is useful to display on initial page load to indicate to users that
+content is being loaded.
+
+<Preview>
+  <Story id="components-button--skeleton" />
+</Preview>
+
+## Component API
+
+<Props />
+
+Additional props passed into `Button` will be forwarded along to the underlying
+button element.
+
+### Button `as`
+
+This prop allows you to specify a different element to be rendered as a
+`Button`. You may also need to add a [role](#button-role) for accessibility if
+an element other than a `button` is rendered.
+
+```jsx
+<Button as="div" role="button">
+  I'm a div tag
+</Button>
+```
+
+### Button `className`
+
+The className prop passed into `Button` will be forwarded along to the
+underlying `Button` element. This is useful for specifying a custom class name
+for layout.
+
+```jsx
+<Button className="custom-class">Submit</Button>
+```
+
+### Button `hasIconOnly`
+
+Use this prop to render the icon-only variant of `Button`. First you'll pass in
+the `renderIcon` prop to tell the `Button` which icon to render. Next, you'll
+need to specify the `iconDescription` ([read more](#button-icondescription)),
+which is used to populate the tooltip that is shown when the icon button is
+interacted with, as well as internal `aria-label` for screen-readers. Lastly,
+you can configure both the `tooltipAlignment`
+([read more](#button-tooltipalignment)) and `tooltipPosition`
+([read more](#button-tooltipposition)) props to tell the `Button` where your
+tooltip should be rendered. These props default to `center` and `bottom`,
+respectively.
+
+<Button hasIconOnly renderIcon={Add16} iconDescription="Add" />
+
+```jsx
+<Button hasIconOnly renderIcon={Add16} iconDescription="Add" />
+```
+
+### Button `href`
+
+This prop allows you to specify an address to navigate to on click. This will
+change the underlying `Button` element to be rendered as an `a` anchor element.
+
+<Button href="https://www.carbondesignsystem.com">Navigate</Button>
+
+```jsx
+<Button href="https://www.carbondesignsystem.com">Navigate</Button>
+```
+
+### Button `iconDescription`
+
+If using the `hasIconOnly` prop, `iconDescription` becomes a required prop for
+accessibility reasons. The text provided here populates the internal
+`aria-label` tag on the icon, as well as provides text to be shown when the icon
+button is interacted with.
+
+```jsx
+<Button hasIconOnly renderIcon={Add16} iconDescription="Add" />
+```
+
+### Button `kind`
+
+Carbon has seven types of buttons, `primary`, `secondary`, `tertiary`, `ghost`,
+`danger`, `danger--tertiary`, and `danger--ghost`. If no `kind` is specified, a
+`primary` button will be rendered. For more information on when to use each
+variant, check out the
+[design documentation](https://www.carbondesignsystem.com/components/button/usage#overview)
+
+<Button>Primary</Button> <Button kind="secondary">Secondary</Button> <Button kind="tertiary">
+  Tertiary{' '}
+</Button> <Button kind="danger">Danger</Button> <Button kind="danger--tertiary">
+  Danger Tertiary
+</Button>
+<Button kind="danger--ghost">Danger Ghost</Button> <Button kind="ghost">Ghost</Button>
+
+```jsx
+<Button>Primary</Button>
+<Button kind="secondary">Secondary</Button>
+<Button kind="tertiary">Tertiary</Button>
+<Button kind="danger">Danger</Button>
+<Button kind="danger--tertiary">Danger Tertiary</Button>
+<Button kind="danger--ghost">Danger Ghost</Button>
+<Button kind="ghost">Ghost</Button>
+```
+
+### Button `renderIcon`
+
+This prop is used to tell `Button` which icon should be rendered inside the
+button. Before you pass in the icon, you'll need to import the icon(s) you would
+like to render, like so:
+
+```js
+import { Add16, Delete16 } from '@carbon/icons-react';
+```
+
+Once the icons are imported, you can pass them directly in to the `Button`
+component. Keep in mind, you will also need to add an `iconDescription` to help
+with screen-reader support if you use the `renderIcon` prop. If you are trying
+to render icon-only buttons, please refer to the section on the
+[hasIconOnly](#button-hasicononly) prop
+
+<Button renderIcon={Add16} iconDescription="Add">
+  Add
+</Button> <Button renderIcon={Delete16} kind="danger" iconDescription="Delete">
+  Delete
+</Button>
+
+```jsx
+<Button renderIcon={Add16} iconDescription="Add">Add</Button>
+<Button renderIcon={Delete16} kind="danger"  iconDescription="Delete">Delete</Button>
+```
+
+### Button `role`
+
+If you use the [as](#button-as) prop to render a non-button as a button, you may
+need to add a `role` for accessibility reasons. Adding `role="button"` will make
+an element appear as a button control to a screen reader. Check out the
+[References](#references) section for more information.
+
+<Button as="div" role="button">
+  a11y Button
+</Button>
+
+```jsx
+<Button as="div" role="button">
+  a11y Button
+</Button>
+```
+
+### Button `size`
+
+This prop specifies which size the `Button` should be rendered at. Valid values
+are `field`, `sm`, `lg`, `xl` and `default`. If no `size` is specified, it
+renders as `default`.
+
+{' '}
+
+<Button>Submit</Button> <Button size="field">Submit</Button> <Button size="sm">
+  Submit
+</Button> <Button size="lg">Submit</Button> <Button size="xl">Submit</Button>
+
+```jsx
+<Button>Submit</Button>
+<Button size="field">Submit</Button>
+<Button size="sm">Submit</Button>
+<Button size="lg">Submit</Button>
+<Button size="xl">Submit</Button>
+```
+
+### Button `tooltipAlignment`
+
+The `tooltipAlignment` prop is used to change where the tooltip text and caret
+is rendered in relation to the `Button`. Accepted options are `start`, `center`,
+and `end`. The default alignment is `center`.
+
+<Button
+  hasIconOnly
+  renderIcon={Add16}
+  iconDescription="Add to selection"
+  tooltipAlignment="start"
+/> <Button hasIconOnly renderIcon={Add16} iconDescription="Add to selection" /> <Button
+  hasIconOnly
+  renderIcon={Add16}
+  iconDescription="Add to selection"
+  tooltipAlignment="end"
+/>
+
+```jsx
+<Button hasIconOnly renderIcon={Add16} iconDescription="Add to selection" tooltipAlignment="start" />
+<Button hasIconOnly renderIcon={Add16} iconDescription="Add to selection" />
+<Button hasIconOnly renderIcon={Add16} iconDescription="Add to selection" tooltipAlignment="end"/>
+```
+
+### Button `tooltipPosition`
+
+When using an icon-only button, you may be in a situation where you need to
+change where the tooltip is positioned on the screen. `tooltipPosition` takes in
+a position and will render the tooltip accordingly. Accepted options are `top`,
+`bottom`, `left`, and `right`. The default is position is `top`.
+
+<Button hasIconOnly renderIcon={Add16} iconDescription="Add" /> <Button
+  hasIconOnly
+  renderIcon={Add16}
+  iconDescription="Add"
+  tooltipPosition="right"
+/> <Button
+  hasIconOnly
+  renderIcon={Add16}
+  iconDescription="Add"
+  tooltipPosition="bottom"
+/> <Button
+  hasIconOnly
+  renderIcon={Add16}
+  iconDescription="Add"
+  tooltipPosition="left"
+/>
+
+```jsx
+<Button hasIconOnly renderIcon={Add16} iconDescription="Add" />
+<Button hasIconOnly renderIcon={Add16} iconDescription="Add" tooltipPosition="right"/>
+<Button hasIconOnly renderIcon={Add16} iconDescription="Add" tooltipPosition="bottom"/>
+<Button hasIconOnly renderIcon={Add16} iconDescription="Add" tooltipPosition="left" />
+```
+
+### ButtonSet `stacked`
+
+By passing in `stacked` to the `ButtonSet` component, you can arrange your two
+`Button` elements vertically
+
+<ButtonSet stacked>
+  <Button kind="secondary">Secondary button</Button>
+  <Button kind="primary">Primary button</Button>
+</ButtonSet>
+
+```jsx
+<ButtonSet stacked>
+  <Button kind="secondary">Secondary button</Button>
+  <Button kind="primary">Primary button</Button>
+</ButtonSet>
+```
+
+## References
+
+[MDN: ARIA button role](https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Roles/button_role)
+
+[W3: Role attribute](https://www.w3.org/WAI/PF/HTML/wiki/RoleAttribute)
+
+[W3: ARIA button role example](https://www.w3.org/TR/2016/WD-wai-aria-practices-1.1-20160317/examples/button/button.html)
+
+## Feedback
+
+Help us improve this component by providing feedback, asking questions on Slack,
+or updating this file on
+[GitHub](https://github.com/carbon-design-system/carbon/edit/main/packages/react/src/components/Button/Button.mdx)

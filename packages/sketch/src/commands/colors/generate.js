@@ -19,12 +19,28 @@ export function generate() {
   command('commands/colors/generate', () => {
     const document = Document.getSelectedDocument();
     const page = selectPage(findOrCreatePage(document, 'color'));
-    const sharedStyles = syncColorStyles(document);
-    const { black, white, colors, support } = groupByKey(
-      sharedStyles,
-      sharedStyle => {
-        const { name } = sharedStyle;
-        const [_category, swatch] = name.split('/');
+    const sharedStyles = syncColorStyles({ document });
+    const {
+      black,
+      white,
+      colors,
+      support,
+      blackHover,
+      whiteHover,
+      hoverColors,
+    } = groupByKey(sharedStyles, (sharedStyle) => {
+      const { name } = sharedStyle;
+      const [_root, _category, swatch] = name.split(' / ');
+      if (swatch.includes('hover')) {
+        switch (swatch) {
+          case 'black hover':
+            return 'blackHover';
+          case 'white hover':
+            return 'whiteHover';
+          default:
+            return 'hoverColors';
+        }
+      } else {
         switch (swatch) {
           case 'black':
             return 'black';
@@ -37,13 +53,18 @@ export function generate() {
             return 'colors';
         }
       }
-    );
+    });
 
     let X_OFFSET = 0;
     let Y_OFFSET = 0;
 
-    const swatches = groupByKey(colors, sharedStyle => {
-      const [_category, swatch] = sharedStyle.name.split('/');
+    const swatches = groupByKey(colors, (sharedStyle) => {
+      const [_root, _category, swatch] = sharedStyle.name.split('/');
+      return swatch;
+    });
+
+    const hoverSwatches = groupByKey(hoverColors, (sharedStyle) => {
+      const [_root, _category, swatch] = sharedStyle.name.split('/');
       return swatch;
     });
 
@@ -70,13 +91,30 @@ export function generate() {
       createArtboardFromSharedStyle(sharedStyle, page, X_OFFSET, Y_OFFSET);
       X_OFFSET = X_OFFSET + ARTBOARD_WIDTH + ARTBOARD_MARGIN;
     }
+
+    X_OFFSET = 0;
+    Y_OFFSET = Y_OFFSET + ARTBOARD_HEIGHT + ARTBOARD_MARGIN;
+
+    createArtboardFromSharedStyle(whiteHover[0], page, X_OFFSET, Y_OFFSET);
+    X_OFFSET = X_OFFSET + ARTBOARD_WIDTH + ARTBOARD_MARGIN;
+    createArtboardFromSharedStyle(blackHover[0], page, X_OFFSET, Y_OFFSET);
+
+    X_OFFSET = 0;
+    Y_OFFSET = Y_OFFSET + ARTBOARD_HEIGHT + ARTBOARD_MARGIN;
+
+    for (const swatch of Object.keys(hoverSwatches).sort(sortBySwatchName)) {
+      for (const sharedStyle of hoverSwatches[swatch].sort(sortBySwatchGrade)) {
+        createArtboardFromSharedStyle(sharedStyle, page, X_OFFSET, Y_OFFSET);
+        X_OFFSET = X_OFFSET + ARTBOARD_WIDTH + ARTBOARD_MARGIN;
+      }
+
+      X_OFFSET = 0;
+      Y_OFFSET = Y_OFFSET + ARTBOARD_HEIGHT + ARTBOARD_MARGIN;
+    }
   });
 }
 
 function createArtboardFromSharedStyle(sharedStyle, parent, offsetX, offsetY) {
-  const [category, swatch, grade] = sharedStyle.name.split('/');
-
-  const colorName = grade ? `${swatch}/${swatch}-${grade}` : swatch;
   const rectangle = new ShapePath({
     name: 'Color',
     frame: new Rectangle(0, 0, ARTBOARD_WIDTH, ARTBOARD_HEIGHT),
@@ -91,7 +129,7 @@ function createArtboardFromSharedStyle(sharedStyle, parent, offsetX, offsetY) {
 
   const artboard = new Artboard({
     parent,
-    name: `${category}/${colorName}`,
+    name: sharedStyle.name,
     frame: new Rectangle(offsetX, offsetY, ARTBOARD_WIDTH, ARTBOARD_HEIGHT),
     layers: [rectangle],
   });

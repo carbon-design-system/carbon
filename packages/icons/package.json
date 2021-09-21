@@ -1,17 +1,22 @@
 {
   "name": "@carbon/icons",
   "description": "Icons for digital and software products using the Carbon Design System",
-  "version": "10.6.0",
+  "version": "10.38.0",
   "license": "Apache-2.0",
   "main": "lib/index.js",
   "module": "es/index.js",
-  "repository": "https://github.com/carbon-design-system/carbon/tree/master/packages/icons",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/carbon-design-system/carbon.git",
+    "directory": "packages/icons"
+  },
   "bugs": "https://github.com/carbon-design-system/carbon/issues",
   "files": [
     "es",
     "lib",
     "scss",
     "svg",
+    "build-info.json",
     "metadata.json"
   ],
   "keywords": [
@@ -27,12 +32,17 @@
     "access": "public"
   },
   "scripts": {
-    "build": "yarn clean && node tasks/build.js && bundler sassdoc \"scss/*.scss\"",
+    "build": "yarn clean && node tasks/build.js",
     "ci-check": "node tasks/ci-check.js",
-    "clean": "rimraf es lib build-info.json metadata.json",
+    "clean": "rimraf es lib metadata.json svg",
     "prepublishOnly": "yarn build"
   },
+  "dependencies": {
+    "svgson": "^5.2.1"
+  },
   "devDependencies": {
-    "@carbon/icon-build-helpers": "0.2.0"
+    "@carbon/cli": "^10.28.0",
+    "@carbon/icon-build-helpers": "^0.27.0",
+    "rimraf": "^3.0.2"
   }
 }

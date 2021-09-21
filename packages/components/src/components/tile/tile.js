@@ -26,7 +26,7 @@ class Tile extends mixin(createComponent, initComponentBySearch) {
     this._hookActions(this._getClass(this.tileType));
   }
 
-  _getClass = type => {
+  _getClass = (type) => {
     const typeObj = {
       expandable: this.options.classExpandedTile,
       clickable: this.options.classClickableTile,
@@ -35,7 +35,7 @@ class Tile extends mixin(createComponent, initComponentBySearch) {
     return typeObj[type];
   };
 
-  _hookActions = tileClass => {
+  _hookActions = (tileClass) => {
     const isExpandable = this.tileType === 'expandable';
     if (isExpandable) {
       const aboveTheFold = this.element.querySelector(
@@ -66,7 +66,7 @@ class Tile extends mixin(createComponent, initComponentBySearch) {
       }
     }
 
-    this.element.addEventListener('click', evt => {
+    this.element.addEventListener('click', (evt) => {
       const input = eventMatches(evt, this.options.selectorTileInput);
       if (!input) {
         this.element.classList.toggle(tileClass);
@@ -75,7 +75,7 @@ class Tile extends mixin(createComponent, initComponentBySearch) {
         this._setTileHeight();
       }
     });
-    this.element.addEventListener('keydown', evt => {
+    this.element.addEventListener('keydown', (evt) => {
       const input = this.element.querySelector(this.options.selectorTileInput);
       if (input) {
         if (evt.which === 13 || evt.which === 32) {
@@ -110,7 +110,7 @@ class Tile extends mixin(createComponent, initComponentBySearch) {
   /**
    * The component options.
    * If `options` is specified in the constructor,
-   * properties in this object are overriden for the instance being created.
+   * properties in this object are overridden for the instance being created.
    * @property {string} selectorInit The CSS selector to find Tile instances.
    */
   static get options() {

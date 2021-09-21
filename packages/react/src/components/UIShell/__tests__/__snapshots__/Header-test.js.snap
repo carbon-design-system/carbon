@@ -8,7 +8,6 @@ exports[`Header should render 1`] = `
   <header
     aria-label="label"
     className="bx--header custom-class"
-    role="banner"
   />
 </Header>
 `;

@@ -29,9 +29,11 @@ const SkipToContent = ({
 
 SkipToContent.propTypes = {
   /**
-   * Provide an optional class to be applied to the containing node
+   * Provide text to display in the SkipToContent `a` tag
    */
   children: PropTypes.string.isRequired,
+
+  className: PropTypes.string,
 
   /**
    * Provide the `href` to the id of the element on your package that is the
@@ -42,7 +44,7 @@ SkipToContent.propTypes = {
   /**
    * Optionally override the default tabindex of 0
    */
-  tabIndex: PropTypes.string.isRequired,
+  tabIndex: PropTypes.string,
 };
 
 SkipToContent.defaultProps = {

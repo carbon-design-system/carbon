@@ -14,7 +14,7 @@ const variables = ['base-font-size'];
 const render = createSassRenderer(__dirname);
 
 describe('_typography.scss', () => {
-  describe.each(variables)('$%s', name => {
+  describe.each(variables)('$%s', (name) => {
     it('should be exported', async () => {
       const { calls } = await render(`
 @import '../typography';

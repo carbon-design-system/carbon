@@ -45,18 +45,18 @@ class Slider extends mixin(
       );
       this._updateInput();
       this.manage(
-        on(this.boundInput, 'change', evt => {
+        on(this.boundInput, 'change', (evt) => {
           this.setValue(evt.target.value);
         })
       );
       this.manage(
-        on(this.boundInput, 'focus', evt => {
+        on(this.boundInput, 'focus', (evt) => {
           evt.target.select();
         })
       );
       // workaround for safari
       this.manage(
-        on(this.boundInput, 'mouseup', evt => {
+        on(this.boundInput, 'mouseup', (evt) => {
           evt.preventDefault();
         })
       );
@@ -75,7 +75,7 @@ class Slider extends mixin(
       })
     );
     this.manage(
-      on(this.element.ownerDocument, 'mousemove', evt => {
+      on(this.element.ownerDocument, 'mousemove', (evt) => {
         const disabled = this.element.classList.contains(
           this.options.classDisabled
         );
@@ -85,7 +85,7 @@ class Slider extends mixin(
       })
     );
     this.manage(
-      on(this.thumb, 'keydown', evt => {
+      on(this.thumb, 'keydown', (evt) => {
         const disabled = this.element.classList.contains(
           this.options.classDisabled
         );
@@ -95,7 +95,7 @@ class Slider extends mixin(
       })
     );
     this.manage(
-      on(this.track, 'click', evt => {
+      on(this.track, 'click', (evt) => {
         const disabled = this.element.classList.contains(
           this.options.classDisabled
         );
@@ -122,8 +122,9 @@ class Slider extends mixin(
     requestAnimationFrame(() => {
       this.dragging = false;
       this.thumb.style.left = `${left}%`;
-      this.filledTrack.style.transform = `translate(0%, -50%) scaleX(${left /
-        100})`;
+      this.filledTrack.style.transform = `translate(0%, -50%) scaleX(${
+        left / 100
+      })`;
       this.input.value = newValue;
       this._updateInput();
       this.changeState('slider-value-change', { value: newValue });
@@ -234,7 +235,7 @@ class Slider extends mixin(
   /**
    * The component options.
    * If `options` is specified in the constructor,
-   * properties in this object are overriden for the instance being created.
+   * properties in this object are overridden for the instance being created.
    * @property {string} selectorInit The CSS selector to find slider instances.
    */
   static get options() {

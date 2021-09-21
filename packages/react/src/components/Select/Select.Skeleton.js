@@ -7,20 +7,29 @@
 
 import PropTypes from 'prop-types';
 import React from 'react';
-import { settings } from 'carbon-components';
+import cx from 'classnames';
+import { usePrefix } from '../../internal/usePrefix';
 
-const { prefix } = settings;
-
-const SelectSkeleton = ({ hideLabel }) => (
-  <div className={`${prefix}--form-item`}>
-    {!hideLabel && <span className={`${prefix}--label ${prefix}--skeleton`} />}
-    <div className={`${prefix}--select ${prefix}--skeleton`}>
-      <div className={`${prefix}--select-input`} />
+const SelectSkeleton = ({ hideLabel, className, ...rest }) => {
+  const prefix = usePrefix();
+  return (
+    <div className={cx(`${prefix}--form-item`, className)} {...rest}>
+      {!hideLabel && (
+        <span className={`${prefix}--label ${prefix}--skeleton`} />
+      )}
+      <div className={`${prefix}--select ${prefix}--skeleton`}>
+        <div className={`${prefix}--select-input`} />
+      </div>
     </div>
-  </div>
-);
+  );
+};
 
 SelectSkeleton.propTypes = {
+  /**
+   * Specify an optional className to add to the form item wrapper.
+   */
+  className: PropTypes.string,
+
   /**
    * Specify whether the label should be hidden, or not
    */

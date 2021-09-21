@@ -12,9 +12,11 @@ import flatpickr from 'flatpickr';
 import l10n from 'flatpickr/dist/l10n/index';
 import { settings } from 'carbon-components';
 import DatePickerInput from '../DatePickerInput';
+import carbonFlatpickrAppendToPlugin from './plugins/appendToPlugin';
 import carbonFlatpickrFixEventsPlugin from './plugins/fixEventsPlugin';
 import carbonFlatpickrRangePlugin from './plugins/rangePlugin';
 import { match, keys } from '../../internal/keyboard';
+import { FeatureFlagContext } from '../FeatureFlags';
 
 const { prefix } = settings;
 
@@ -48,13 +50,15 @@ const monthToStr = (monthNumber, shorthand, locale) =>
  * @param {string} config.classFlatpickrCurrentMonth The CSS class for the text-based month selection UI.
  * @returns {Plugin} A Flatpickr plugin to use text instead of `<select>` for month picker.
  */
-const carbonFlatpickrMonthSelectPlugin = config => fp => {
+const carbonFlatpickrMonthSelectPlugin = (config) => (fp) => {
   const setupElements = () => {
     if (!fp.monthElements) {
       return;
     }
-    fp.monthElements.forEach(elem => {
-      if (!elem.parentNode) return;
+    fp.monthElements.forEach((elem) => {
+      if (!elem.parentNode) {
+        return;
+      }
       elem.parentNode.removeChild(elem);
     });
     fp.monthElements.splice(
@@ -88,13 +92,13 @@ const carbonFlatpickrMonthSelectPlugin = config => fp => {
       config.shorthand === true,
       fp.l10n
     );
-    fp.yearElements.forEach(elem => {
+    fp.yearElements.forEach((elem) => {
       const currentMonthContainer = elem.closest(
         config.selectorFlatpickrMonthYearContainer
       );
       Array.prototype.forEach.call(
         currentMonthContainer.querySelectorAll('.cur-month'),
-        monthElement => {
+        (monthElement) => {
           monthElement.textContent = monthStr;
         }
       );
@@ -116,6 +120,17 @@ const carbonFlatpickrMonthSelectPlugin = config => fp => {
 export default class DatePicker extends Component {
   static propTypes = {
     /**
+     * flatpickr prop passthrough. Allows the user to enter a date directly
+     * into the input field
+     */
+    allowInput: PropTypes.bool,
+
+    /**
+     * The DOM element the Flatpicker should be inserted into. `<body>` by default.
+     */
+    appendTo: PropTypes.object,
+
+    /**
      * The child nodes.
      */
     children: PropTypes.node,
@@ -126,14 +141,9 @@ export default class DatePicker extends Component {
     className: PropTypes.string,
 
     /**
-     * `true` to use the short version.
+     * The date format.
      */
-    short: PropTypes.bool,
-
-    /**
-     * `true` to use the light version.
-     */
-    light: PropTypes.bool,
+    dateFormat: PropTypes.string,
 
     /**
      * The type of the date picker:
@@ -145,116 +155,119 @@ export default class DatePicker extends Component {
     datePickerType: PropTypes.oneOf(['simple', 'single', 'range']),
 
     /**
-     * The date format.
+     * The flatpickr `disable` option that allows a user to disable certain dates.
      */
-    dateFormat: PropTypes.string,
+    disable: PropTypes.array,
 
     /**
-     *  The language locale used to format the days of the week, months, and numbers.
-     *
-     * * `ar` - Arabic
-     * * `at` - Austria
-     * * `be` - Belarusian
-     * * `bg` - Bulgarian
-     * * `bn` - Bangla
-     * * `cat` - Catalan
-     * * `cs` - Czech
-     * * `cy` - Welsh
-     * * `da` - Danish
-     * * `de` - German
-     * * `en` - English
-     * * `eo` - Esperanto
-     * * `es` - Spanish
-     * * `et` - Estonian
-     * * `fa` - Persian
-     * * `fi` - Finnish
-     * * `fr` - French
-     * * `gr` - Greek
-     * * `he` - Hebrew
-     * * `hi` - Hindi
-     * * `hr` - Croatian
-     * * `hu` - Hungarian
-     * * `id` - Indonesian
-     * * `it` - Italian
-     * * `ja` - Japanese
-     * * `ko` - Korean
-     * * `lt` - Lithuanian
-     * * `lv` - Latvian
-     * * `mk` - Macedonian
-     * * `mn` - Mongolian
-     * * `ms` - Malaysian
-     * * `my` - Burmese
-     * * `nl` - Dutch
-     * * `no` - Norwegian
-     * * `pa` - Punjabi
-     * * `pl` - Polish
-     * * `pt` - Portuguese
-     * * `ro` - Romanian
-     * * `si` - Sinhala
-     * * `sk` - Slovak
-     * * `sl` - Slovenian
-     * * `sq` - Albanian
-     * * `sr` - Serbian
-     * * `sv` - Swedish
-     * * `th` - Thai
-     * * `tr` - Turkish
-     * * `uk` - Ukrainian
-     * * `vn` - Vietnamese
-     * * `zh` - Mandarin
+     * The flatpickr `enable` option that allows a user to enable certain dates.
      */
-    locale: PropTypes.oneOf([
-      'ar',
-      'at',
-      'be',
-      'bg',
-      'bn',
-      'cat',
-      'cs',
-      'cy',
-      'da',
-      'de',
-      'en',
-      'en',
-      'eo',
-      'es',
-      'et',
-      'fa',
-      'fi',
-      'fr',
-      'gr',
-      'he',
-      'hi',
-      'hr',
-      'hu',
-      'id',
-      'it',
-      'ja',
-      'ko',
-      'lt',
-      'lv',
-      'mk',
-      'mn',
-      'ms',
-      'my',
-      'nl',
-      'no',
-      'pa',
-      'pl',
-      'pt',
-      'ro',
-      'ru',
-      'si',
-      'sk',
-      'sl',
-      'sq',
-      'sr',
-      'sv',
-      'th',
-      'tr',
-      'uk',
-      'vn',
-      'zh',
+    enable: PropTypes.array,
+
+    /**
+     * `true` to use the light version.
+     */
+    light: PropTypes.bool,
+
+    /**
+     *  The language locale used to format the days of the week, months, and numbers. The full list of supported locales can be found here https://github.com/flatpickr/flatpickr/tree/master/src/l10n
+     */
+    locale: PropTypes.oneOfType([
+      PropTypes.object,
+      PropTypes.oneOf([
+        'ar', // Arabic
+        'at', // Austria
+        'az', // Azerbaijan
+        'be', // Belarusian
+        'bg', // Bulgarian
+        'bn', // Bangla
+        'bs', // Bosnia
+        'cat', // Catalan
+        'cs', // Czech
+        'cy', // Welsh
+        'da', // Danish
+        'de', // German
+        'en', // English
+        'eo', // Esperanto
+        'es', // Spanish
+        'et', // Estonian
+        'fa', // Persian
+        'fi', // Finnish
+        'fo', // Faroese
+        'fr', // French
+        'ga', // Gaelic
+        'gr', // Greek
+        'he', // Hebrew
+        'hi', // Hindi
+        'hr', // Croatian
+        'hu', // Hungarian
+        'id', // Indonesian
+        'is', // Icelandic
+        'it', // Italian
+        'ja', // Japanese
+        'ka', // Georgian
+        'km', // Khmer
+        'ko', // Korean
+        'kz', // Kazakh
+        'lt', // Lithuanian
+        'lv', // Latvian
+        'mk', // Macedonian
+        'mn', // Mongolian
+        'ms', // Malaysian
+        'my', // Burmese
+        'nl', // Dutch
+        'no', // Norwegian
+        'pa', // Punjabi
+        'pl', // Polish
+        'pt', // Portuguese
+        'ro', // Romanian
+        'ru', // Russian
+        'si', // Sinhala
+        'sk', // Slovak
+        'sl', // Slovenian
+        'sq', // Albanian
+        'sr', // Serbian
+        'sv', // Swedish
+        'th', // Thai
+        'tr', // Turkish
+        'uk', // Ukrainian
+        'uz', // Uzbek
+        'uz_latn', // Uzbek Latin
+        'vn', // Vietnamese
+        'zh_tw', // Mandarin Traditional
+        'zh', // Mandarin
+      ]),
     ]),
+
+    /**
+     * The maximum date that a user can pick to.
+     */
+    maxDate: PropTypes.string,
+
+    /**
+     * The minimum date that a user can start picking from.
+     */
+    minDate: PropTypes.string,
+
+    /**
+     * The `change` event handler.
+     */
+    onChange: PropTypes.func,
+
+    /**
+     * The `close` event handler.
+     */
+    onClose: PropTypes.func,
+
+    /**
+     * The `open` event handler.
+     */
+    onOpen: PropTypes.func,
+
+    /**
+     * `true` to use the short version.
+     */
+    short: PropTypes.bool,
 
     /**
      * The value of the date value provided to flatpickr, could
@@ -272,31 +285,6 @@ export default class DatePicker extends Component {
       PropTypes.object,
       PropTypes.number,
     ]),
-
-    /**
-     * The DOM element the Flatpicker should be inserted into. `<body>` by default.
-     */
-    appendTo: PropTypes.object,
-
-    /**
-     * The `change` event handler.
-     */
-    onChange: PropTypes.func,
-
-    /**
-     * The `close` event handler.
-     */
-    onClose: PropTypes.func,
-
-    /**
-     * The minimum date that a user can start picking from.
-     */
-    minDate: PropTypes.string,
-
-    /**
-     * The maximum date that a user can pick to.
-     */
-    maxDate: PropTypes.string,
   };
 
   static defaultProps = {
@@ -306,21 +294,11 @@ export default class DatePicker extends Component {
     locale: 'en',
   };
 
-  UNSAFE_componentWillUpdate(nextProps) {
-    if (nextProps.value !== this.props.value) {
-      if (this.cal) {
-        this.cal.setDate(nextProps.value);
-        this.updateClassNames(this.cal);
-      } else {
-        if (this.inputField) {
-          this.inputField.value = nextProps.value;
-        }
-      }
-    }
-  }
+  static contextType = FeatureFlagContext;
 
   componentDidMount() {
     const {
+      allowInput,
       appendTo,
       datePickerType,
       dateFormat,
@@ -329,27 +307,56 @@ export default class DatePicker extends Component {
       maxDate,
       value,
       onClose,
+      disable,
+      enable,
     } = this.props;
     if (datePickerType === 'single' || datePickerType === 'range') {
       const onHook = (electedDates, dateStr, instance) => {
         this.updateClassNames(instance);
       };
 
+      // Logic to determine if `enable` or `disable` will be passed down. If neither
+      // is provided, we return the default empty disabled array, allowing all dates.
+      let enableOrDisable = enable ? 'enable' : 'disable';
+      let enableOrDisableArr;
+      if (!enable && !disable) {
+        enableOrDisableArr = [];
+      } else if (enable) {
+        enableOrDisableArr = enable;
+      } else {
+        enableOrDisableArr = disable;
+      }
+
+      let localeData;
+      if (typeof locale === 'object') {
+        let location = locale.locale ? locale.locale : 'en';
+        localeData = { ...l10n[location], ...locale };
+      } else {
+        localeData = l10n[locale];
+      }
+
       // inputField ref might not be set in enzyme tests
       if (this.inputField) {
         this.cal = new flatpickr(this.inputField, {
           disableMobile: true,
           defaultDate: value,
-          appendTo,
           mode: datePickerType,
-          allowInput: true,
+          allowInput: allowInput ?? true,
           dateFormat: dateFormat,
-          locale: l10n[locale],
+          locale: localeData,
+          [enableOrDisable]: enableOrDisableArr,
           minDate: minDate,
           maxDate: maxDate,
           plugins: [
             datePickerType === 'range'
-              ? new carbonFlatpickrRangePlugin({ input: this.toInputField })
+              ? new carbonFlatpickrRangePlugin({
+                  input: this.toInputField,
+                })
+              : () => {},
+            appendTo
+              ? carbonFlatpickrAppendToPlugin({
+                  appendTo,
+                })
               : () => {},
             carbonFlatpickrMonthSelectPlugin({
               selectorFlatpickrMonthYearContainer: '.flatpickr-current-month',
@@ -375,10 +382,56 @@ export default class DatePicker extends Component {
           onReady: onHook,
           onMonthChange: onHook,
           onYearChange: onHook,
-          onOpen: onHook,
+          onOpen: (...args) => {
+            const { onOpen } = this.props;
+            onHook(...args);
+            if (onOpen) {
+              onOpen(...args);
+            }
+          },
           onValueUpdate: onHook,
         });
         this.addKeyboardEvents(this.cal);
+        this.addRoleAttributeToDialog();
+      }
+    }
+  }
+
+  componentDidUpdate({
+    dateFormat: prevDateFormat,
+    minDate: prevMinDate,
+    maxDate: prevMaxDate,
+    value: prevValue,
+    disable: prevDisable,
+    enable: prevEnable,
+  }) {
+    const { dateFormat, minDate, maxDate, value, disable, enable } = this.props;
+    if (this.cal) {
+      if (prevDateFormat !== dateFormat) {
+        this.cal.set({ dateFormat });
+      }
+      if (prevMinDate !== minDate) {
+        this.cal.set('minDate', minDate);
+      }
+      if (prevMaxDate !== maxDate) {
+        this.cal.set('maxDate', maxDate);
+      }
+      if (disable !== prevDisable) {
+        this.cal.set('disable', disable);
+      }
+      if (enable !== prevEnable) {
+        this.cal.set('enable', enable);
+      }
+    }
+
+    // Coordinate when the given `value` prop changes. When this happens, we
+    // should update the calendar to the new value.
+    if (prevValue !== value) {
+      if (this.cal) {
+        this.cal.setDate(this.props.value);
+        this.updateClassNames(this.cal);
+      } else if (this.inputField) {
+        this.inputField.value = this.props.value;
       }
     }
   }
@@ -395,46 +448,57 @@ export default class DatePicker extends Component {
     }
   }
 
-  onChange = e => {
-    if (
-      e.target.value === '' &&
-      this.cal &&
-      this.cal.selectedDates.length > 0
-    ) {
+  onChange = () => {
+    if (this.inputField.value === '' && this.cal?.selectedDates.length) {
       this.cal.clear();
+      this.cal.input.focus();
     }
   };
 
-  addKeyboardEvents = cal => {
+  /**
+   * Flatpickr's calendar dialog is not rendered in a landmark causing an
+   * error with IBM Equal Access Accessibility Checker so we add an aria
+   * role to the container div.
+   */
+  addRoleAttributeToDialog = () => {
     if (this.inputField) {
-      this.inputField.addEventListener('keydown', e => {
-        if (match(e, keys.ArrowDown)) {
-          (
-            cal.selectedDateElem ||
-            cal.todayDateElem ||
-            cal.calendarContainer
-          ).focus();
-        }
-      });
-      this.inputField.addEventListener('change', this.onChange);
+      this.cal.calendarContainer.setAttribute('role', 'region');
+      // IBM EAAC requires an aria-label on a role='region'
+      this.cal.calendarContainer.setAttribute(
+        'aria-label',
+        'calendar-container'
+      );
     }
-    if (this.toInputField) {
-      this.toInputField.addEventListener('blur', evt => {
-        if (!this.cal.calendarContainer.contains(evt.relatedTarget)) {
-          this.cal.close();
-        }
-      });
-      this.toInputField.addEventListener('keydown', e => {
-        if (match(e, keys.ArrowDown)) {
-          (
-            cal.selectedDateElem ||
-            cal.todayDateElem ||
-            cal.calendarContainer
-          ).focus();
-        }
-      });
-      this.toInputField.addEventListener('change', this.onChange);
-    }
+  };
+
+  addKeyboardEvents = (cal) => {
+    const initArrowDownListener = (element) => {
+      if (element) {
+        element.addEventListener('keydown', (e) => {
+          if (match(e, keys.ArrowDown)) {
+            const {
+              calendarContainer,
+              selectedDateElem: fpSelectedDateElem,
+              todayDateElem: fptodayDateElem,
+            } = cal;
+            const selectedDateElem =
+              calendarContainer.querySelector('.selected') &&
+              fpSelectedDateElem;
+            const todayDateElem =
+              calendarContainer.querySelector('.today') && fptodayDateElem;
+            (
+              selectedDateElem ||
+              todayDateElem ||
+              calendarContainer.querySelector('.flatpickr-day[tabindex]') ||
+              calendarContainer
+            ).focus();
+          }
+        });
+        element.addEventListener('change', this.onChange);
+      }
+    };
+    initArrowDownListener(this.inputField);
+    initArrowDownListener(this.toInputField);
   };
 
   rightArrowHTML() {
@@ -459,7 +523,7 @@ export default class DatePicker extends Component {
     }
   };
 
-  updateClassNames = calendar => {
+  updateClassNames = (calendar) => {
     const calendarContainer = calendar.calendarContainer;
     const daysContainer = calendar.days;
     if (calendarContainer && daysContainer) {
@@ -476,13 +540,13 @@ export default class DatePicker extends Component {
         .classList.add(`${prefix}--date-picker__days`);
       forEach.call(
         calendarContainer.querySelectorAll('.flatpickr-weekday'),
-        item => {
+        (item) => {
           const currentItem = item;
           currentItem.innerHTML = currentItem.innerHTML.replace(/\s+/g, '');
           currentItem.classList.add(`${prefix}--date-picker__weekday`);
         }
       );
-      forEach.call(daysContainer.querySelectorAll('.flatpickr-day'), item => {
+      forEach.call(daysContainer.querySelectorAll('.flatpickr-day'), (item) => {
         item.classList.add(`${prefix}--date-picker__day`);
         if (
           item.classList.contains('today') &&
@@ -499,7 +563,7 @@ export default class DatePicker extends Component {
     }
   };
 
-  assignInputFieldRef = node => {
+  assignInputFieldRef = (node) => {
     this.inputField = !node
       ? null
       : // Child is a regular DOM node, seen in tests
@@ -511,7 +575,7 @@ export default class DatePicker extends Component {
       : null;
   };
 
-  assignToInputFieldRef = node => {
+  assignToInputFieldRef = (node) => {
     this.toInputField = !node
       ? null
       : // Child is a regular DOM node, seen in tests
@@ -523,11 +587,12 @@ export default class DatePicker extends Component {
       : null;
   };
 
-  isLabelTextEmpty = children =>
-    children.every(child => !child.props.labelText);
+  isLabelTextEmpty = (children) =>
+    children.every((child) => !child.props.labelText);
 
   render() {
     const {
+      allowInput, // eslint-disable-line
       appendTo, // eslint-disable-line
       children,
       className,
@@ -543,26 +608,47 @@ export default class DatePicker extends Component {
       ...other
     } = this.props;
 
-    const datePickerClasses = classNames(`${prefix}--date-picker`, className, {
-      [`${prefix}--date-picker--short`]: short,
-      [`${prefix}--date-picker--light`]: light,
-      [`${prefix}--date-picker--simple`]: datePickerType === 'simple',
-      [`${prefix}--date-picker--single`]: datePickerType === 'single',
-      [`${prefix}--date-picker--range`]: datePickerType === 'range',
-      [`${prefix}--date-picker--nolabel`]:
-        datePickerType === 'range' && this.isLabelTextEmpty(children),
-    });
+    const scope = this.context;
+    let enabled;
+
+    if (scope.enabled) {
+      enabled = scope.enabled('enable-v11-release');
+    }
+
+    const datePickerClasses = classNames(
+      `${prefix}--date-picker`,
+      [enabled ? null : className],
+      {
+        [`${prefix}--date-picker--short`]: short,
+        [`${prefix}--date-picker--light`]: light,
+        [`${prefix}--date-picker--simple`]: datePickerType === 'simple',
+        [`${prefix}--date-picker--single`]: datePickerType === 'single',
+        [`${prefix}--date-picker--range`]: datePickerType === 'range',
+        [`${prefix}--date-picker--nolabel`]:
+          datePickerType === 'range' && this.isLabelTextEmpty(children),
+      }
+    );
+
+    const wrapperClasses = classNames(`${prefix}--form-item`, [
+      enabled ? className : null,
+    ]);
 
     const childArray = React.Children.toArray(children);
     const childrenWithProps = childArray.map((child, index) => {
-      if (index === 0 && child.type === DatePickerInput) {
+      if (
+        index === 0 &&
+        child.type === React.createElement(DatePickerInput, child.props).type
+      ) {
         return React.cloneElement(child, {
           datePickerType,
           ref: this.assignInputFieldRef,
           openCalendar: this.openCalendar,
         });
       }
-      if (index === 1 && child.type === DatePickerInput) {
+      if (
+        index === 1 &&
+        child.type === React.createElement(DatePickerInput, child.props).type
+      ) {
         return React.cloneElement(child, {
           datePickerType,
           ref: this.assignToInputFieldRef,
@@ -581,7 +667,7 @@ export default class DatePicker extends Component {
       }
     });
     return (
-      <div className={`${prefix}--form-item`}>
+      <div className={wrapperClasses}>
         <div className={datePickerClasses} {...other}>
           {childrenWithProps}
         </div>

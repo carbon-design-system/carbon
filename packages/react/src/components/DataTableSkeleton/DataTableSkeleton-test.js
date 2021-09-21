@@ -28,7 +28,7 @@ describe('DataTableSkeleton', () => {
 
     it('Has the expected classes', () => {
       expect(wrapper.hasClass(`${prefix}--skeleton`)).toEqual(true);
-      expect(wrapper.hasClass(`${prefix}--data-table`)).toEqual(true);
+      expect(wrapper.hasClass(`${prefix}--data-table-container`)).toEqual(true);
     });
 
     it('Has the correct number of rows and columns', () => {
@@ -37,12 +37,6 @@ describe('DataTableSkeleton', () => {
       expect(wrapper.find('tbody > tr > td').length).toEqual(
         rowCount * columnCount
       );
-    });
-
-    it('Has the correct headers', () => {
-      wrapper
-        .find('thead > tr > th')
-        .forEach((header, index) => expect(header.text()).toBe(headers[index]));
     });
   });
 });
@@ -53,8 +47,11 @@ describe('DataTableSkeleton Compact', () => {
 
     it('Has the expected classes', () => {
       expect(wrapper.hasClass(`${prefix}--skeleton`)).toEqual(true);
-      expect(wrapper.hasClass(`${prefix}--data-table`)).toEqual(true);
-      expect(wrapper.hasClass(`${prefix}--data-table--compact`)).toEqual(true);
+      expect(
+        wrapper
+          .find(`.${prefix}--data-table`)
+          .hasClass(`${prefix}--data-table--compact`)
+      ).toEqual(true);
     });
   });
 });
@@ -65,8 +62,11 @@ describe('DataTableSkeleton Zebra', () => {
 
     it('Has the expected classes', () => {
       expect(wrapper.hasClass(`${prefix}--skeleton`)).toEqual(true);
-      expect(wrapper.hasClass(`${prefix}--data-table`)).toEqual(true);
-      expect(wrapper.hasClass(`${prefix}--data-table--zebra`)).toEqual(true);
+      expect(
+        wrapper
+          .find(`.${prefix}--data-table`)
+          .hasClass(`${prefix}--data-table--zebra`)
+      ).toEqual(true);
     });
   });
 });

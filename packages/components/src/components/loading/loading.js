@@ -81,7 +81,7 @@ class Loading extends mixin(createComponent, initComponentBySearch, handles) {
   end() {
     this.set(false);
     let handleAnimationEnd = this.manage(
-      on(this.element, 'animationend', evt => {
+      on(this.element, 'animationend', (evt) => {
         if (handleAnimationEnd) {
           handleAnimationEnd = this.unmanage(handleAnimationEnd).release();
         }
@@ -115,7 +115,7 @@ class Loading extends mixin(createComponent, initComponentBySearch, handles) {
   /**
    * The component options.
    * If `options` is specified in the constructor, {@linkcode Loading.create .create()}, or {@linkcode Loading.init .init()},
-   * properties in this object are overriden for the instance being create and how {@linkcode Loading.init .init()} works.
+   * properties in this object are overridden for the instance being create and how {@linkcode Loading.init .init()} works.
    * @member Loading.options
    * @type {object}
    * @property {string} selectorInit The CSS selector to find spinners.

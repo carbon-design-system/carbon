@@ -21,7 +21,7 @@ directly importing icons from `carbon-icons` and supplying them as the `icon`
 prop. For example:
 
 ```js
-import { Icons } from 'carbon-components-react';
+import { Icon } from 'carbon-components-react';
 import { iconAdd } from 'carbon-icons';
 
 <Icon icon={iconAdd} />;

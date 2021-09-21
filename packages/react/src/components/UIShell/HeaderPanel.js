@@ -13,14 +13,17 @@ import { AriaLabelPropType } from '../../prop-types/AriaPropTypes';
 
 const { prefix } = settings;
 
-const HeaderPanel = ({
-  'aria-label': ariaLabel,
-  'aria-labelledby': ariaLabelledBy,
-  children,
-  className: customClassName,
-  expanded,
-  ...other
-}) => {
+const HeaderPanel = React.forwardRef(function HeaderPanel(
+  {
+    'aria-label': ariaLabel,
+    'aria-labelledby': ariaLabelledBy,
+    children,
+    className: customClassName,
+    expanded,
+    ...other
+  },
+  ref
+) {
   const accessibilityLabel = {
     'aria-label': ariaLabel,
     'aria-labelledby': ariaLabelledBy,
@@ -32,11 +35,11 @@ const HeaderPanel = ({
   });
 
   return (
-    <div {...other} className={className} {...accessibilityLabel}>
+    <div {...other} className={className} {...accessibilityLabel} ref={ref}>
       {children}
     </div>
   );
-};
+});
 
 HeaderPanel.propTypes = {
   /**
@@ -45,7 +48,7 @@ HeaderPanel.propTypes = {
   ...AriaLabelPropType,
 
   /**
-   * Optionally provide a custom class to apply to the underlying <li> node
+   * Optionally provide a custom class to apply to the underlying `<li>` node
    */
   className: PropTypes.string,
 
@@ -54,5 +57,7 @@ HeaderPanel.propTypes = {
    */
   expanded: PropTypes.bool,
 };
+
+HeaderPanel.displayName = 'HeaderPanel';
 
 export default HeaderPanel;

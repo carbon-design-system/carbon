@@ -5,26 +5,37 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+import PropTypes from 'prop-types';
 import React from 'react';
+import cx from 'classnames';
 import { settings } from 'carbon-components';
 import SkeletonText from '../SkeletonText';
 
 const { prefix } = settings;
 
-export default class PaginationSkeleton extends React.Component {
-  render() {
-    return (
-      <div className={`${prefix}--pagination ${prefix}--skeleton`}>
-        <div className={`${prefix}--pagination__left`}>
-          <SkeletonText width="70px" />
-          <SkeletonText width="35px" />
-          <SkeletonText width="105px" />
-        </div>
-        <div
-          className={`${prefix}--pagination__right ${prefix}--pagination--inline`}>
-          <SkeletonText width="70px" />
-        </div>
+function PaginationSkeleton({ className, ...rest }) {
+  return (
+    <div
+      className={cx(`${prefix}--pagination`, `${prefix}--skeleton`, className)}
+      {...rest}>
+      <div className={`${prefix}--pagination__left`}>
+        <SkeletonText width="70px" />
+        <SkeletonText width="35px" />
+        <SkeletonText width="105px" />
       </div>
-    );
-  }
+      <div
+        className={`${prefix}--pagination__right ${prefix}--pagination--inline`}>
+        <SkeletonText width="70px" />
+      </div>
+    </div>
+  );
 }
+
+PaginationSkeleton.propTypes = {
+  /**
+   * Specify an optional className to add.
+   */
+  className: PropTypes.string,
+};
+
+export default PaginationSkeleton;

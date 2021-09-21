@@ -24,7 +24,7 @@ class Accordion extends mixin(createComponent, initComponentBySearch, handles) {
   constructor(element, options) {
     super(element, options);
     this.manage(
-      on(this.element, 'click', event => {
+      on(this.element, 'click', (event) => {
         const item = eventMatches(event, this.options.selectorAccordionItem);
         if (
           item &&
@@ -39,7 +39,7 @@ class Accordion extends mixin(createComponent, initComponentBySearch, handles) {
      *
      *  DEPRECATE in v8
      *
-     *  Swapping to a button elemenet instead of a div
+     *  Swapping to a button element instead of a div
      *  automatically maps click events to keypress as well
      *  This event listener now is only added if user is using
      *  the older markup
@@ -47,7 +47,7 @@ class Accordion extends mixin(createComponent, initComponentBySearch, handles) {
 
     if (!this._checkIfButton()) {
       this.manage(
-        on(this.element, 'keypress', event => {
+        on(this.element, 'keypress', (event) => {
           const item = eventMatches(event, this.options.selectorAccordionItem);
 
           if (
@@ -97,7 +97,7 @@ class Accordion extends mixin(createComponent, initComponentBySearch, handles) {
    * The component options.
    * If `options` is specified in the constructor,
    * {@linkcode NumberInput.create .create()}, or {@linkcode NumberInput.init .init()},
-   * properties in this object are overriden for the instance being create and how {@linkcode NumberInput.init .init()} works.
+   * properties in this object are overridden for the instance being create and how {@linkcode NumberInput.init .init()} works.
    * @property {string} selectorInit The CSS selector to find accordion UIs.
    */
   static get options() {

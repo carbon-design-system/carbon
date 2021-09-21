@@ -1,0 +1,14 @@
+<svg id="icon" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: none;
+      }
+    </style>
+  </defs>
+  <title>chart--candlestick</title>
+  <path d="M26,10H24V6H22v4H20V22h2v4h2V22h2ZM24,20H22V12h2Z"/>
+  <path d="M14,8H12V4H10V8H8V18h2v4h2V18h2Zm-2,8H10V10h2Z"/>
+  <path d="M30,30H4a2,2,0,0,1-2-2V2H4V28H30Z"/>
+  <rect id="_Transparent_Rectangle_" data-name="&lt;Transparent Rectangle&gt;" class="cls-1" width="32" height="32"/>
+</svg>

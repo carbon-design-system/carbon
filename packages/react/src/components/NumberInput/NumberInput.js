@@ -9,14 +9,15 @@ import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import classNames from 'classnames';
 import { settings } from 'carbon-components';
-import {
-  WarningFilled16,
-  CaretDownGlyph,
-  CaretUpGlyph,
-} from '@carbon/icons-react';
+import { Add16, Subtract16 } from '@carbon/icons-react';
 import mergeRefs from '../../tools/mergeRefs';
 import requiredIfValueExists from '../../prop-types/requiredIfValueExists';
+// replace "use" prefix to avoid react thinking this is a hook that
+// can only be placed in a function component
+import { useNormalizedInputProps as getNormalizedInputProps } from '../../internal/useNormalizedInputProps';
 import { useControlledStateWithValue } from '../../internal/FeatureFlags';
+import deprecate from '../../prop-types/deprecate';
+import { FeatureFlagContext } from '../FeatureFlags';
 
 const { prefix } = settings;
 
@@ -40,55 +41,96 @@ const capMax = (max, value) =>
     : Math.min(max, value);
 
 class NumberInput extends Component {
-  constructor(props) {
-    super(props);
-    this.isControlled = props.value !== undefined;
-    if (useControlledStateWithValue && this.isControlled) {
-      // Skips the logic of setting initial state if this component is controlled
-      return;
-    }
-    let value = useControlledStateWithValue ? props.defaultValue : props.value;
-    value = value === undefined ? 0 : value;
-    if (props.min || props.min === 0) {
-      value = Math.max(props.min, value);
-    }
-    this.state = { value };
-  }
-
   static propTypes = {
+    /**
+     * `true` to allow empty string.
+     */
+    allowEmpty: PropTypes.bool,
+
+    /**
+     * Provide a description that would be used to best describe the use case of the NumberInput component
+     */
+    ariaLabel: PropTypes.string,
+
     /**
      * Specify an optional className to be applied to the wrapper node
      */
     className: PropTypes.string,
+
+    /**
+     * Optional starting value for uncontrolled state
+     */
+    defaultValue: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
+
     /**
      * Specify if the control should be disabled, or not
      */
     disabled: PropTypes.bool,
+
+    /**
+     * Provide text that is used alongside the control label for additional help
+     */
+    helperText: PropTypes.node,
+
     /**
      * Specify whether you want the underlying label to be visually hidden
      */
     hideLabel: PropTypes.bool,
+
+    /**
+     * Specify whether you want the steppers to be hidden
+     */
+    hideSteppers: PropTypes.bool,
+
     /**
      * Provide a description for up/down icons that can be read by screen readers
      */
     iconDescription: PropTypes.string.isRequired,
+
     /**
      * Specify a custom `id` for the input
      */
     id: PropTypes.string.isRequired,
+
+    /**
+     * Specify if the currently value is invalid.
+     */
+    invalid: PropTypes.bool,
+
+    /**
+     * Message which is displayed if the value is invalid.
+     */
+    invalidText: PropTypes.node,
+
+    /**
+     * `true` to use the mobile variant.
+     */
+    isMobile: deprecate(
+      PropTypes.bool,
+      `The \`isMobile\` prop no longer needed as the default NumberInput styles are now identical to the mobile variant styles. This prop will be removed in the next major version of \`carbon-components-react\``
+    ),
+
     /**
      * Generic `label` that will be used as the textual representation of what
      * this field is for
      */
     label: PropTypes.node,
+
+    /**
+     * `true` to use the light version.
+     */
+    light: PropTypes.bool,
+
     /**
      * The maximum value.
      */
     max: PropTypes.number,
+
     /**
      * The minimum value.
      */
     min: PropTypes.number,
+
     /**
      * The new value is available in 'imaginaryTarget.value'
      * i.e. to get the value: evt.imaginaryTarget.value
@@ -102,108 +144,131 @@ class NumberInput extends Component {
     onChange: !useControlledStateWithValue
       ? PropTypes.func
       : requiredIfValueExists(PropTypes.func),
+
     /**
      * Provide an optional function to be called when the up/down button is clicked
      */
     onClick: PropTypes.func,
-    /**
-     * Specify how much the valus should increase/decrease upon clicking on up/down button
-     */
-    step: PropTypes.number,
-    /**
-     * Optional starting value for uncontrolled state
-     */
-    defaultValue: PropTypes.number,
-    /**
-     * Specify the value of the input
-     */
-    value: PropTypes.number,
+
     /**
      * Specify if the component should be read-only
      */
     readOnly: PropTypes.bool,
+
     /**
-     * Specify if the currently value is invalid.
+     * Specify the size of the Number Input. Currently supports either `sm`, 'md' (default) or 'lg` as an option.
+     * TODO V11: remove `xl` (replaced with lg)
      */
-    invalid: PropTypes.bool,
+    size: PropTypes.oneOf(['sm', 'md', 'lg', 'xl']),
+
     /**
-     * Message which is displayed if the value is invalid.
+     * Specify how much the values should increase/decrease upon clicking on up/down button
      */
-    invalidText: PropTypes.string,
-    /**
-     * Provide text that is used alongside the control label for additional help
-     */
-    helperText: PropTypes.node,
-    /**
-     * Provide a description that would be used to best describe the use case of the NumberInput component
-     */
-    ariaLabel: PropTypes.string,
-    /**
-     * `true` to use the light version.
-     */
-    light: PropTypes.bool,
-    /**
-     * `true` to allow empty string.
-     */
-    allowEmpty: PropTypes.bool,
+    step: PropTypes.number,
+
     /**
      * Provide custom text for the component for each translation id
      */
     translateWithId: PropTypes.func.isRequired,
+
     /**
-     * `true` to use the mobile variant.
+     * Specify the value of the input
      */
-    isMobile: PropTypes.bool,
+    value: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
+
+    /**
+     * Specify whether the control is currently in warning state
+     */
+    warn: PropTypes.bool,
+
+    /**
+     * Provide the text that is displayed when the control is in warning state
+     */
+    warnText: PropTypes.node,
   };
 
   static defaultProps = {
     disabled: false,
     hideLabel: false,
     iconDescription: 'choose a number',
-    label: ' ',
     step: 1,
     invalid: false,
     invalidText: 'Provide invalidText',
+    warn: false,
+    warnText: '',
     ariaLabel: 'Numeric input field with increment and decrement buttons',
     helperText: '',
     light: false,
     allowEmpty: false,
-    translateWithId: id => defaultTranslations[id],
+    translateWithId: (id) => defaultTranslations[id],
   };
 
-  /**
-   * The DOM node refernce to the `<input>`.
-   * @type {HTMLInputElement}
-   */
-  _inputRef = null;
+  static contextType = FeatureFlagContext;
 
-  static getDerivedStateFromProps({ min, max, value = 0 }, state) {
+  static getDerivedStateFromProps({ value }, state) {
     const { prevValue } = state;
+
+    if (useControlledStateWithValue && value === '' && prevValue !== '') {
+      return {
+        value: '',
+        prevValue: '',
+      };
+    }
+
     // If `useControlledStateWithValue` feature flag is on, do nothing here.
     // Otherwise, do prop -> state sync with "value capping".
+    //// Value capping removed in #8965
+    //// value: capMax(max, capMin(min, value)), (L223)
     return useControlledStateWithValue || prevValue === value
       ? null
       : {
-          value: capMax(max, capMin(min, value)),
+          value,
           prevValue: value,
         };
   }
 
-  handleChange = evt => {
+  /**
+   * The DOM node reference to the `<input>`.
+   * @type {HTMLInputElement}
+   */
+  _inputRef = null;
+
+  constructor(props) {
+    super(props);
+    this.isControlled = props.value !== undefined;
+    if (useControlledStateWithValue && this.isControlled) {
+      // Skips the logic of setting initial state if this component is controlled
+      this.state = {};
+      return;
+    }
+    let value =
+      useControlledStateWithValue || typeof props.defaultValue !== 'undefined'
+        ? props.defaultValue
+        : props.value;
+    value = value === undefined ? 0 : value;
+    if (props.min || props.min === 0) {
+      value = Math.max(props.min, value);
+    }
+    this.state = { value };
+  }
+
+  handleChange = (evt) => {
     const { disabled, onChange } = this.props;
     if (!disabled) {
       evt.persist();
       evt.imaginaryTarget = this._inputRef;
+      const prevValue = this.state.value;
       const value = evt.target.value;
+      const direction = prevValue < value ? 'up' : 'down';
       this.setState(
         {
           value,
         },
         () => {
           if (useControlledStateWithValue) {
-            onChange(evt, { value });
+            onChange(evt, { value, direction });
           } else if (onChange) {
-            onChange(evt);
+            onChange(evt, { value, direction });
           }
         }
       );
@@ -223,6 +288,7 @@ class NumberInput extends Component {
 
     if (!disabled && conditional) {
       value = direction === 'down' ? value - step : value + step;
+      value = capMax(max, capMin(min, value));
       evt.persist();
       evt.imaginaryTarget = this._inputRef;
       this.setState(
@@ -230,12 +296,14 @@ class NumberInput extends Component {
           value,
         },
         () => {
+          //TO-DO v11: update these events to return the same things --> evt, {value, direction}
           if (useControlledStateWithValue) {
             onClick && onClick(evt, { value, direction });
             onChange && onChange(evt, { value, direction });
           } else {
-            onClick && onClick(evt, direction);
-            onChange && onChange(evt, direction);
+            // value added as a 3rd argument rather than in same obj so it doesn't break in v10
+            onClick && onClick(evt, direction, value);
+            onChange && onChange(evt, direction, value);
           }
         }
       );
@@ -246,7 +314,7 @@ class NumberInput extends Component {
    * Preserves the DOM node ref of `<input>`.
    * @param {HTMLInputElement} ref The DOM node ref of `<input>`.
    */
-  _handleInputRef = ref => {
+  _handleInputRef = (ref) => {
     this._inputRef = ref;
   };
 
@@ -257,6 +325,7 @@ class NumberInput extends Component {
       iconDescription, // eslint-disable-line
       id,
       hideLabel,
+      hideSteppers,
       label,
       max,
       min,
@@ -265,29 +334,73 @@ class NumberInput extends Component {
       readOnly,
       invalid,
       invalidText,
+      warn,
+      warnText,
       helperText,
       ariaLabel,
       light,
       allowEmpty,
+      // eslint-disable-next-line react/prop-types
       innerRef: ref,
       translateWithId: t,
       isMobile,
+      size,
+      defaultValue, // eslint-disable-line
       ...other
     } = this.props;
 
+    const scope = this.context;
+    let enabled;
+
+    if (scope.enabled) {
+      enabled = scope.enabled('enable-v11-release');
+    }
+
     const numberInputClasses = classNames(
       `${prefix}--number ${prefix}--number--helpertext`,
-      className,
+      [enabled ? null : className],
       {
         [`${prefix}--number--readonly`]: readOnly,
         [`${prefix}--number--light`]: light,
         [`${prefix}--number--nolabel`]: hideLabel,
+        [`${prefix}--number--nosteppers`]: hideSteppers,
         [`${prefix}--number--mobile`]: isMobile,
+        [`${prefix}--number--${size}`]: size,
       }
     );
 
-    const props = {
+    let isInputInvalid;
+
+    // If the user supplied `invalid` through props, we'll defer to the passed in value
+    if (invalid) {
+      isInputInvalid = true;
+    } else {
+      // Otherwise, if we don't allow an empty value then we check to see
+      // if the value is empty, or if it is out of range
+      if (!allowEmpty && this.state.value === '') {
+        isInputInvalid = true;
+      } else {
+        if (
+          this.state.value !== '' &&
+          (this.state.value > max || this.state.value < min)
+        ) {
+          isInputInvalid = true;
+        }
+      }
+    }
+
+    const normalizedProps = getNormalizedInputProps({
+      id,
+      readOnly,
       disabled,
+      invalid: isInputInvalid,
+      invalidText,
+      warn,
+      warnText,
+    });
+
+    const props = {
+      disabled: normalizedProps.disabled,
       id,
       max,
       min,
@@ -298,32 +411,29 @@ class NumberInput extends Component {
           ? value
           : this.state.value,
       readOnly,
-      'aria-label': ariaLabel,
+      'aria-label': label ? null : ariaLabel,
     };
 
     const buttonProps = {
       disabled,
-      type: 'button',
     };
 
     const inputWrapperProps = {};
-    let errorId = null;
-    let error = null;
-    if (invalid || (!allowEmpty && this.state.value === '')) {
+
+    if (normalizedProps.invalid) {
       inputWrapperProps['data-invalid'] = true;
-      errorId = `${id}-error-id`;
-      error = (
-        <div className={`${prefix}--form-requirement`} id={errorId}>
-          {invalidText}
-        </div>
-      );
     }
 
+    const helperTextClasses = classNames(`${prefix}--form__helper-text`, {
+      [`${prefix}--form__helper-text--disabled`]: normalizedProps.disabled,
+    });
+
     const helper = helperText ? (
-      <div className={`${prefix}--form__helper-text`}>{helperText}</div>
+      <div className={helperTextClasses}>{helperText}</div>
     ) : null;
 
     const labelClasses = classNames(`${prefix}--label`, {
+      [`${prefix}--label--disabled`]: normalizedProps.disabled,
       [`${prefix}--visually-hidden`]: hideLabel,
     });
 
@@ -338,101 +448,90 @@ class NumberInput extends Component {
       t('decrement.number'),
     ];
 
+    const wrapperClasses = classNames(`${prefix}--number__input-wrapper`, {
+      [`${prefix}--number__input-wrapper--warning`]: normalizedProps.warn,
+    });
+
+    const iconClasses = classNames({
+      [`${prefix}--number__invalid`]:
+        normalizedProps.invalid || normalizedProps.warn,
+      [`${prefix}--number__invalid--warning`]: normalizedProps.warn,
+      [`${prefix}--number__readonly-icon`]: readOnly,
+    });
+
+    let ariaDescribedBy = null;
+    if (normalizedProps.invalid) {
+      ariaDescribedBy = normalizedProps.invalidId;
+    }
+    if (normalizedProps.warn) {
+      ariaDescribedBy = normalizedProps.warnId;
+    }
+
     return (
-      <div className={`${prefix}--form-item`}>
+      <div
+        className={
+          enabled
+            ? classNames(`${prefix}--form-item`, className)
+            : `${prefix}--form-item`
+        }>
         <div className={numberInputClasses} {...inputWrapperProps}>
           {(() => {
-            if (isMobile) {
-              return (
-                <>
-                  {labelText}
-                  {helper}
-                  <div className={`${prefix}--number__input-wrapper`}>
-                    <button
-                      className={`${prefix}--number__control-btn down-icon`}
-                      {...buttonProps}
-                      onClick={evt => this.handleArrowClick(evt, 'down')}
-                      title={decrementNumLabel}
-                      aria-label={decrementNumLabel || iconDescription}
-                      aria-live="polite"
-                      aria-atomic="true">
-                      <CaretDownGlyph className="down-icon" />
-                    </button>
-                    <input
-                      type="number"
-                      pattern="[0-9]*"
-                      {...other}
-                      {...props}
-                      ref={mergeRefs(ref, this._handleInputRef)}
-                    />
-                    <button
-                      className={`${prefix}--number__control-btn up-icon`}
-                      {...buttonProps}
-                      onClick={evt => this.handleArrowClick(evt, 'up')}
-                      title={incrementNumLabel}
-                      aria-label={incrementNumLabel || iconDescription}
-                      aria-live="polite"
-                      aria-atomic="true">
-                      <CaretUpGlyph className="up-icon" />
-                    </button>
-                  </div>
-                </>
-              );
-            }
             return (
               <>
                 {labelText}
-                {helper}
-                <div className={`${prefix}--number__input-wrapper`}>
+                <div className={wrapperClasses}>
                   <input
-                    data-invalid={invalid || null}
-                    aria-invalid={invalid || null}
-                    aria-describedby={errorId}
+                    data-invalid={normalizedProps.invalid}
+                    aria-invalid={normalizedProps.invalid}
+                    aria-describedby={ariaDescribedBy}
                     type="number"
                     pattern="[0-9]*"
                     {...other}
                     {...props}
                     ref={mergeRefs(ref, this._handleInputRef)}
                   />
-                  {invalid && (
-                    <WarningFilled16
-                      className={`${prefix}--number__invalid`}
-                      role="img"
-                    />
+                  {normalizedProps.icon && (
+                    <normalizedProps.icon className={iconClasses} />
                   )}
-                  <div className={`${prefix}--number__controls`}>
-                    <button
-                      className={`${prefix}--number__control-btn up-icon`}
-                      {...buttonProps}
-                      onClick={evt => this.handleArrowClick(evt, 'up')}
-                      title={incrementNumLabel || iconDescription}
-                      aria-label={incrementNumLabel || iconDescription}
-                      aria-live="polite"
-                      aria-atomic="true">
-                      <CaretUpGlyph className="up-icon" />
-                    </button>
-                    <button
-                      className={`${prefix}--number__control-btn down-icon`}
-                      {...buttonProps}
-                      onClick={evt => this.handleArrowClick(evt, 'down')}
-                      title={decrementNumLabel || iconDescription}
-                      aria-label={decrementNumLabel || iconDescription}
-                      aria-live="polite"
-                      aria-atomic="true">
-                      <CaretDownGlyph className="down-icon" />
-                    </button>
-                  </div>
+                  {!hideSteppers && (
+                    <div className={`${prefix}--number__controls`}>
+                      <button
+                        type="button"
+                        className={`${prefix}--number__control-btn down-icon`}
+                        {...buttonProps}
+                        onClick={(evt) => this.handleArrowClick(evt, 'down')}
+                        title={decrementNumLabel || iconDescription}
+                        aria-label={decrementNumLabel || iconDescription}
+                        tabIndex="-1">
+                        <Subtract16 className="down-icon" />
+                      </button>
+                      <div className={`${prefix}--number__rule-divider`}></div>
+                      <button
+                        type="button"
+                        className={`${prefix}--number__control-btn up-icon`}
+                        {...buttonProps}
+                        onClick={(evt) => this.handleArrowClick(evt, 'up')}
+                        title={incrementNumLabel || iconDescription}
+                        aria-label={incrementNumLabel || iconDescription}
+                        tabIndex="-1">
+                        <Add16 className="up-icon" />
+                      </button>
+                      <div className={`${prefix}--number__rule-divider`}></div>
+                    </div>
+                  )}
                 </div>
+                {normalizedProps.validation ? null : helper}
               </>
             );
           })()}
-          {error}
+          {normalizedProps.validation}
         </div>
       </div>
     );
   }
 }
 
+export { NumberInput };
 export default (() => {
   const forwardRef = (props, ref) => <NumberInput {...props} innerRef={ref} />;
   forwardRef.displayName = 'NumberInput';

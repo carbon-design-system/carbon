@@ -13,15 +13,14 @@ to the Carbon community.
 
 We value all of our community members, and thus want to foster a positive
 contributing environment. Please take a look at our
-[code of conduct](https://github.com/carbon-design-system/carbon/blob/master/docs/developer-handbook.md#carbon-code-of-conduct)
-before engaging in our workspaces.
+[code of conduct](./CODE_OF_CONDUCT.md) before engaging in our workspaces.
 
 ## Prerequisites
 
 Before contributing to Carbon, you should make sure you have the following tools
 installed:
 
-- [Node.js](https://nodejs.org/en/download/) v10 or above here or follow their
+- [Node.js](https://nodejs.org/en/download/) v14 or above here or follow their
   installation through a package manager
   [here](https://nodejs.org/en/download/package-manager/))
   - If you're on macOS, we recommend using
@@ -99,7 +98,7 @@ To create a new branch, ensure you are in your forked branch in your terminal
 and run:
 
 ```sh
-git pull origin master
+git pull origin main
 git checkout -b {your-branch-name}
 ```
 
@@ -108,8 +107,8 @@ git checkout -b {your-branch-name}
 From the root directory of your fork, run:
 
 ```sh
-# To install the project's dependies
-yarn install --offline
+# To install the project's dependencies
+yarn install
 
 # To build the project:
 yarn build
@@ -138,7 +137,7 @@ http://localhost:9000 to see the changes happen on the fly.
 
 For information about our coding style, such as how we name our classes and our
 file structure, go to our
-[developer handbook](https://github.com/carbon-design-system/carbon/blob/master/docs/developer-handbook.md#coding-style)
+[developer handbook](https://github.com/carbon-design-system/carbon/blob/main/docs/developer-handbook.md#coding-style)
 
 ### 6. Test your JavaScript code
 
@@ -150,9 +149,28 @@ yarn test
 ```
 
 For more extensive testing information, see our
-[developer handbook](https://github.com/carbon-design-system/carbon/blob/master/docs/developer-handbook.md#common-tasks)
+[developer handbook](https://github.com/carbon-design-system/carbon/blob/main/docs/developer-handbook.md#common-tasks)
 
-### 7. Make a pull request
+### 7. Add yourself to the contributor list
+
+We want to make sure everyone is recognized for their contributions to Carbon!
+To add yourself to the `all-contributors` table in the README, you'll need to
+run the following commands from the root of the repo:
+
+```sh
+# Add new contributor <username>, who made a contribution of type <contribution>
+all-contributors add <username> <contribution>
+# Example:
+all-contributors add tw15egan code,doc
+```
+
+Then, you'll need to generate the updated `all-contributors` table by running
+
+```sh
+all-contributors generate
+```
+
+### 8. Make a pull request
 
 **Note:** Before you make a pull request,
 [search](https://github.com/IBM/carbon-components/issues) the issues to see if a
@@ -185,9 +203,9 @@ git commit -m "YOUR  COMMIT MESSAGE HERE"
 
 For more information about how to write your commit message, view our commit
 conventions detailed in a our
-[developer handbook](https://github.com/carbon-design-system/carbon/blob/master/docs/developer-handbook.md#commit-conventions).
+[developer handbook](https://github.com/carbon-design-system/carbon/blob/main/docs/developer-handbook.md#commit-conventions).
 
-After your changes are commited, run:
+After your changes are committed, run:
 
 ```sh
 git push -u origin { YOUR_BRANCH_NAME }
@@ -223,8 +241,8 @@ GitHub.
 
 - **Development:** If coding is your thing, you can help us by contributing bug
   fixes or community components. Checkout our
-  [Developer Handbook](../developer-handbook.md) to get your dev environment set
-  up, read up on our best practices and more.
+  [Developer Handbook](../docs/developer-handbook.md) to get your dev
+  environment set up, read up on our best practices and more.
 - **Design:** Design contributions can vary from visual assets, UX interactions,
   motion design, Sketch kit bug fixes and more.
 - **Content:** Our documentation is just as important as our design and code
@@ -252,8 +270,8 @@ GitHub.
 3. **Development environment:** If you haven't already, fork and clone whichever
    repo you want to contribute to. Then, create a new branch and add your
    contribution in it. Checkout our
-   [Developer Handbook](../developer-handbook.md) to read up on our best coding
-   practices and proper commit messages.
+   [Developer Handbook](../docs/developer-handbook.md) to read up on our best
+   coding practices and proper commit messages.
 4. **Pull request:** Submit a PR. Be sure to fill out the template properly.
 5. **Approval:** Get PR approved by design and developers, or make any necessary
    changes for approval. This process may be quick or take a few iterations of
@@ -277,23 +295,23 @@ Here are some contribution quick tips:
 
 ### What projects can I contribute to?
 
-- [`carbon-components`](https://github.com/carbon-design-system/carbon/tree/master/packages/components)
-- [`carbon-components-react`](https://github.com/carbon-design-system/carbon/tree/master/packages/react)
+- [`carbon-components`](https://github.com/carbon-design-system/carbon/tree/main/packages/components)
+- [`carbon-components-react`](https://github.com/carbon-design-system/carbon/tree/main/packages/react)
 - [`carbon-website`](https://github.com/carbon-design-system/carbon-website)
 - [`gatsby-theme-carbon`](https://github.com/carbon-design-system/gatsby-theme-carbon)
 - [`carbon-design-kit`](https://github.com/carbon-design-system/carbon-design-kit)
-- [`@carbon/elements`](https://github.com/carbon-design-system/carbon/tree/master/packages/elements)
-- [`@carbon/type`](https://github.com/carbon-design-system/carbon/tree/master/packages/type)
-- [`@carbon/colors`](https://github.com/carbon-design-system/carbon/tree/master/packages/colors)
-- [`@carbon/grid`](https://github.com/carbon-design-system/carbon/tree/master/packages/grid)
-- [`@carbon/icons`](https://github.com/carbon-design-system/carbon/tree/master/packages/icons)
-- [`@carbon/layout`](https://github.com/carbon-design-system/carbon/tree/master/packages/layout)
-- [`@carbon/motion`](https://github.com/carbon-design-system/carbon/tree/master/packages/motion)
-- [`@carbon/themes`](https://github.com/carbon-design-system/carbon/tree/master/packages/themes)
-- [`@carbon/icons-react`](https://github.com/carbon-design-system/carbon/tree/master/packages/icons-react)
+- [`@carbon/elements`](https://github.com/carbon-design-system/carbon/tree/main/packages/elements)
+- [`@carbon/type`](https://github.com/carbon-design-system/carbon/tree/main/packages/type)
+- [`@carbon/colors`](https://github.com/carbon-design-system/carbon/tree/main/packages/colors)
+- [`@carbon/grid`](https://github.com/carbon-design-system/carbon/tree/main/packages/grid)
+- [`@carbon/icons`](https://github.com/carbon-design-system/carbon/tree/main/packages/icons)
+- [`@carbon/layout`](https://github.com/carbon-design-system/carbon/tree/main/packages/layout)
+- [`@carbon/motion`](https://github.com/carbon-design-system/carbon/tree/main/packages/motion)
+- [`@carbon/themes`](https://github.com/carbon-design-system/carbon/tree/main/packages/themes)
+- [`@carbon/icons-react`](https://github.com/carbon-design-system/carbon/tree/main/packages/icons-react)
 
 And more! You can view a complete list of our packages
-[here](https://github.com/carbon-design-system/carbon/tree/master/packages).
+[here](https://github.com/carbon-design-system/carbon/tree/main/packages).
 
 ### Besides some of the obvious contributions mentioned above, how else can I contribute?
 

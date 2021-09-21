@@ -1,6 +1,7 @@
 name: Deploy React storybook to IBM Cloud
 
 on:
+  workflow_dispatch:
   push:
     tags:
       # Matches tags that have the shape `vX.Y.Z`. Reference:
@@ -15,13 +16,13 @@ jobs:
   build:
     runs-on: macOS-latest
     steps:
-      - uses: actions/checkout@master
-      - name: Use Node.js 10.x
-        uses: actions/setup-node@v1
+      - uses: actions/checkout@main
+      - name: Use Node.js 14.x
+        uses: actions/setup-node@v2.4.0
         with:
-          node-version: '10.x'
+          node-version: '14.x'
       - name: Install dependencies
-        run: yarn install --offline
+        run: yarn install --immutable --immutable-cache --check-cache
       - name: Build project
         run: yarn build
       - name: Install ibmcloud CLI
@@ -31,14 +32,13 @@ jobs:
           CLOUD_API_KEY: ${{ secrets.CLOUD_API_KEY}}
         run: |
           ibmcloud login \
-          -a 'https://cloud.ibm.com' \
-          -u 'apikey' \
-          -p "$CLOUD_API_KEY" \
-          -o 'carbon-design-system' \
-          -s 'production' \
-          -r 'us-south'
+            -a 'https://cloud.ibm.com' \
+            --apikey "$CLOUD_API_KEY" \
+            -r 'us-south'
+          ibmcloud target -o 'carbon-design-system' -s 'production'
       - name: Install IBM Cloud plugins
         run: |
+          ibmcloud cf install
           ibmcloud cf add-plugin-repo CF-Community https://plugins.cloudfoundry.org
           ibmcloud cf install-plugin blue-green-deploy -f -r CF-Community
       - name: Deploy React storybook

@@ -7,14 +7,20 @@
 
 import React from 'react';
 import Toggle from '../Toggle';
-import ToggleSkeleton from '../Toggle/Toggle.Skeleton';
-import { mount, shallow } from 'enzyme';
+import { mount } from 'enzyme';
 import { settings } from 'carbon-components';
 
 const { prefix } = settings;
 describe('Toggle', () => {
+  const commonProps = {
+    'aria-label': 'Toggle label',
+    labelA: 'Off',
+    labelB: 'On',
+    labelText: 'Toggle label',
+  };
+
   describe('Renders as expected', () => {
-    const wrapper = mount(<Toggle id="toggle-1" />);
+    const wrapper = mount(<Toggle {...commonProps} id="toggle-1" />);
 
     const input = wrapper.find('input');
 
@@ -64,7 +70,7 @@ describe('Toggle', () => {
   });
 
   it('toggled prop sets checked prop on input', () => {
-    const wrapper = mount(<Toggle id="test" toggled />);
+    const wrapper = mount(<Toggle {...commonProps} id="test" toggled />);
 
     const input = () => wrapper.find('input');
     expect(input().props().checked).toEqual(true);
@@ -77,7 +83,9 @@ describe('Toggle', () => {
     it('passes along onChange to <input>', () => {
       const onChange = jest.fn();
       const id = 'test-input';
-      const wrapper = mount(<Toggle id={id} onChange={onChange} />);
+      const wrapper = mount(
+        <Toggle {...commonProps} id={id} onChange={onChange} />
+      );
 
       const input = wrapper.find('input');
       const inputElement = input.instance();
@@ -86,7 +94,7 @@ describe('Toggle', () => {
       wrapper.find('input').simulate('change');
 
       expect(
-        onChange.mock.calls.map(call =>
+        onChange.mock.calls.map((call) =>
           call.map((arg, i) => (i > 0 ? arg : arg.target))
         )
       ).toEqual([[inputElement]]);
@@ -95,7 +103,9 @@ describe('Toggle', () => {
     it('should invoke onToggle with expected arguments', () => {
       const onToggle = jest.fn();
       const id = 'test-input';
-      const wrapper = mount(<Toggle id={id} onToggle={onToggle} />);
+      const wrapper = mount(
+        <Toggle {...commonProps} id={id} onToggle={onToggle} />
+      );
 
       const input = wrapper.find('input');
       const inputElement = input.instance();
@@ -110,18 +120,18 @@ describe('Toggle', () => {
       expect(call[2].target).toBe(inputElement);
     });
   });
-});
 
-describe('ToggleSkeleton', () => {
-  describe('Renders as expected', () => {
-    const wrapper = shallow(<ToggleSkeleton />);
-    const input = wrapper.find('input');
-    const toggleLabel = wrapper.find(`.${prefix}--toggle__label`);
+  describe('ToggleSmall', () => {
+    const wrapper = mount(<Toggle {...commonProps} id="toggle-1" size="sm" />);
 
-    it('Has the expected classes', () => {
-      expect(input.hasClass(`${prefix}--skeleton`)).toEqual(true);
-      expect(input.hasClass(`${prefix}--toggle`)).toEqual(true);
-      expect(toggleLabel.hasClass(`${prefix}--skeleton`)).toEqual(true);
+    it('Sets the `ToggleSmall` className', () => {
+      const input = wrapper.find('input');
+      expect(input.hasClass(`${prefix}--toggle-input--small`)).toEqual(true);
+    });
+
+    it('Renders a checkmark SVG', () => {
+      const svg = wrapper.find(`.${prefix}--toggle__check`);
+      expect(svg.length).toBe(1);
     });
   });
 });

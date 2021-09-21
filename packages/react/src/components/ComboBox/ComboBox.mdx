@@ -1,0 +1,132 @@
+import { Story, Props, Source, Preview } from '@storybook/addon-docs/blocks';
+import { withKnobs, boolean, select, text } from '@storybook/addon-knobs';
+import * as stories from './ComboBox-story.js';
+import ComboBox from '../ComboBox';
+
+# ComboBox
+
+[Source code](https://github.com/carbon-design-system/carbon/tree/main/packages/react/src/components/ComboBox)
+&nbsp;|&nbsp;
+[Usage guidelines](https://www.carbondesignsystem.com/components/dropdown/usage#combo-box)
+&nbsp;|&nbsp;
+[Accessibility](https://www.carbondesignsystem.com/components/dropdown/accessibility)
+
+## Table of Contents
+
+- [Overview](#overview)
+- [Component API](#component-api)
+- [Disabled](#disabled)
+- [Light](#light)
+- [downshiftProps](#combobox-downshiftprops)
+- [Placeholder and labeling](#placeholders-and-labeling)
+- [initialSelectedItem](#initialselecteditem)
+- [itemToElement](#itemtoelement)
+- [itemToString](#itemtostring)
+- [Feedback](#feedback)
+
+## Overview
+
+A combobox allows the user to make a selection from a predefined list of options
+and is typically used when there are a large amount of options to choose from.
+
+<Preview>
+  <Story id="components-combobox--combobox" />
+</Preview>
+
+## Component API
+
+<Props sort="asc" />
+
+## Disabled
+
+A disabled combobox is available but should not be used as the sole means of
+conveying information. For example, if the user must complete a previous form
+input before moving on to the combobox, make sure to make that clear to the user
+via an error state on the previous form element in addition to disabling the next
+element.
+
+<Preview>
+  <Story id="components-combobox--disabled" />
+</Preview>
+
+## Light
+
+The light prop should never be used against a light background. The form element
+must have proper contrast against the pages background.
+
+<Preview>
+  <Story id="components-combobox--light" />
+</Preview>
+
+## Combobox `downshiftProps`
+
+Our `Combobox` component utilizes [Downshift](https://www.downshift-js.com/)
+under the hood to help provide complex yet accessible custom dropdown
+components. We provide access to the built in Downshift features with this prop.
+For more information, checkout the Downshift prop
+[documentation](https://www.downshift-js.com/downshift#props-used-in-examples)
+
+## Placeholders and Labeling
+
+The placeholder is not a replacement for a label under any circumstances
+including space restraints. Placeholders should be used to provide additive
+information regarding the format of the input. In all cases a label is required
+_in addition to_ a placeholder.
+
+## `initialSelectedItem`
+
+If you want the Combobox to render with a value already selected, but do not
+want to fully control the component, you can use `initialSelectedItem`
+
+```
+const items = ['Option 1', 'Option 2', 'Option 3']
+
+<Combobox initialSelectedItem={items[2]} />;
+```
+
+## `itemToElement`
+
+The Combobox takes in an `items` array and can then be formatted by
+`itemToElement` and `itemToString`. `itemToElement` allows you to wrap each
+dropdown item in a custom element.
+
+```
+<Combobox
+  items={[
+    { id: 'option-0', text: 'Option 0'  },
+    { id: 'option-1', text: 'Option 1'  },
+    { id: 'option-2', text: 'Option 2'  },
+  ]}
+  itemToElement={(item) =>
+    item ? (
+      <span className="test" style={{ color: 'red'  }}>
+        {item.text} 🔥
+      </span>
+    ) : (
+      ''
+    )
+  }
+  label="Select an option..."
+/>
+```
+
+## `itemToString`
+
+If the `items` array is not an array of strings, you'll need to use
+`itemToString` to grab the text to be used as the `Combobox` item text.
+
+```
+<Combobox
+  items={[
+    { id: 'option-0', text: 'Option 0' },
+    { id: 'option-1', text: 'Option 1' },
+    { id: 'option-2', text: 'Option 2' },
+  ]}
+  itemToString={(item) => (item ? item.text : '')}
+/>
+```
+
+## Feedback
+
+Help us improve these docs by
+[editing this file on GitHub](https://github.com/carbon-design-system/carbon/edit/main/packages/react/src/components/ComboBox/ComboBox.mdx)

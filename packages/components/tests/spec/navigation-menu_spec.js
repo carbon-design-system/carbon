@@ -1,11 +1,11 @@
 import NavigationMenu from '../../src/components/ui-shell/navigation-menu';
 import UiShellHtml from '../../html/ui-shell/ui-shell.html';
 
-describe('Popup Nav', function() {
-  describe('Constructor', function() {
+describe('Popup Nav', function () {
+  describe('Constructor', function () {
     let navigationMenu;
 
-    it('Should throw if root element is not given', function() {
+    it('Should throw if root element is not given', function () {
       expect(() => {
         navigationMenu = new NavigationMenu();
       }).toThrowError(
@@ -14,7 +14,7 @@ describe('Popup Nav', function() {
       );
     });
 
-    it('Should throw if root element is not a DOM element', function() {
+    it('Should throw if root element is not a DOM element', function () {
       expect(() => {
         navigationMenu = new NavigationMenu(document.createTextNode(''));
       }).toThrowError(
@@ -23,20 +23,20 @@ describe('Popup Nav', function() {
       );
     });
 
-    afterEach(function() {
+    afterEach(function () {
       if (navigationMenu) {
         navigationMenu = navigationMenu.release();
       }
     });
   });
 
-  describe('Init Component by Launch functionality', function() {
+  describe('Init Component by Launch functionality', function () {
     let range;
     let button;
     let navigationMenu;
     let context;
 
-    beforeAll(function() {
+    beforeAll(function () {
       range = document.createRange();
       button = range
         .createContextualFragment(UiShellHtml)
@@ -49,12 +49,12 @@ describe('Popup Nav', function() {
       context = NavigationMenu.init();
     });
 
-    beforeEach(function() {
+    beforeEach(function () {
       button.classList.remove('bx--header__action--active');
       navigationMenu.setAttribute('hidden', '');
     });
 
-    it('Should open the popup nav on button click', function() {
+    it('Should open the popup nav on button click', function () {
       button.dispatchEvent(new CustomEvent('click', { bubbles: true }));
       expect(button.classList.contains('bx--header__action--active')).toBe(
         true
@@ -62,7 +62,7 @@ describe('Popup Nav', function() {
       expect(navigationMenu.hasAttribute('hidden')).toBe(false);
     });
 
-    it('Should close an open popup nav on button click', function() {
+    it('Should close an open popup nav on button click', function () {
       navigationMenu.removeAttribute('hidden');
       button.dispatchEvent(new CustomEvent('click', { bubbles: true }));
       expect(button.classList.contains('bx--header__action--active')).toBe(
@@ -71,14 +71,14 @@ describe('Popup Nav', function() {
       expect(navigationMenu.hasAttribute('hidden')).toBe(true);
     });
 
-    afterAll(function() {
+    afterAll(function () {
       document.body.removeChild(button);
       document.body.removeChild(navigationMenu);
       context.release();
     });
   });
 
-  describe('Keydown handler', function() {
+  describe('Keydown handler', function () {
     let range;
     let navigationMenuNode;
     let navigationMenuClass;
@@ -86,7 +86,7 @@ describe('Popup Nav', function() {
     let context;
     let escKeydown;
 
-    beforeAll(function() {
+    beforeAll(function () {
       range = document.createRange();
       navigationMenuNode = range
         .createContextualFragment(UiShellHtml)
@@ -95,7 +95,7 @@ describe('Popup Nav', function() {
         '.bx--navigation__category-toggle'
       );
       [...navigationMenuNode.querySelectorAll('.bx--navigation-link')].forEach(
-        link => {
+        (link) => {
           link.textContent = 'link';
         }
       );
@@ -106,19 +106,19 @@ describe('Popup Nav', function() {
       document.body.append(navigationMenuNode);
     });
 
-    it('should close navigation menu on Esc', function() {
+    it('should close navigation menu on Esc', function () {
       navigationMenuNode.removeAttribute('hidden');
       navigationMenuNode.dispatchEvent(escKeydown);
       expect(navigationMenuNode.hasAttribute('hidden'));
     });
 
-    describe('Up arrow navigation', function() {
+    describe('Up arrow navigation', function () {
       let navItems;
       let firstNavItem;
       let secondNavItem;
       let lastNavItem;
       let upArrowKeydown;
-      beforeAll(function() {
+      beforeAll(function () {
         navItems = navigationMenuNode.querySelectorAll(`
         .bx--navigation__category-toggle,
         .bx--navigation-item > .bx--navigation-link,
@@ -133,11 +133,11 @@ describe('Popup Nav', function() {
         });
       });
 
-      beforeEach(function() {
+      beforeEach(function () {
         navigationMenuNode.removeAttribute('hidden');
       });
 
-      it('should navigate backwards on up arrow', async function() {
+      it('should navigate backwards on up arrow', async function () {
         spyOn(firstNavItem, 'focus');
         secondNavItem.focus();
         secondNavItem.dispatchEvent(upArrowKeydown);
@@ -145,7 +145,7 @@ describe('Popup Nav', function() {
         expect(firstNavItem.focus).toHaveBeenCalledTimes(1);
       });
 
-      it('should wrap navigation from first to last item', function() {
+      it('should wrap navigation from first to last item', function () {
         spyOn(lastNavItem, 'focus');
         firstNavItem.focus();
         firstNavItem.dispatchEvent(upArrowKeydown);
@@ -153,7 +153,7 @@ describe('Popup Nav', function() {
         expect(lastNavItem.focus).toHaveBeenCalledTimes(1);
       });
 
-      it('should navigate out of submenus', function() {
+      it('should navigate out of submenus', function () {
         spyOn(button, 'focus');
         button.setAttribute('aria-expanded', 'true');
         firstNavItem.focus();
@@ -162,12 +162,12 @@ describe('Popup Nav', function() {
         expect(button.focus).toHaveBeenCalledTimes(1);
       });
 
-      afterEach(function() {
+      afterEach(function () {
         navigationMenuNode.setAttribute('hidden', '');
       });
     });
 
-    describe('Down arrow navigation', function() {
+    describe('Down arrow navigation', function () {
       let navItems;
       let firstNavItem;
       let secondNavItem;
@@ -175,7 +175,7 @@ describe('Popup Nav', function() {
       let downArrowKeydown;
       let firstNestedMenuItem;
 
-      beforeAll(function() {
+      beforeAll(function () {
         navItems = navigationMenuNode.querySelectorAll(`
         .bx--navigation__category-toggle,
         .bx--navigation-item > .bx--navigation-link,
@@ -193,11 +193,11 @@ describe('Popup Nav', function() {
         });
       });
 
-      beforeEach(function() {
+      beforeEach(function () {
         navigationMenuNode.removeAttribute('hidden');
       });
 
-      it('should navigate forwards on down arrow', async function() {
+      it('should navigate forwards on down arrow', async function () {
         spyOn(secondNavItem, 'focus');
         firstNavItem.focus();
         firstNavItem.dispatchEvent(downArrowKeydown);
@@ -205,7 +205,7 @@ describe('Popup Nav', function() {
         expect(secondNavItem.focus).toHaveBeenCalledTimes(1);
       });
 
-      it('should wrap navigation from last to first item', function() {
+      it('should wrap navigation from last to first item', function () {
         spyOn(firstNavItem, 'focus');
         lastNavItem.focus();
         lastNavItem.dispatchEvent(downArrowKeydown);
@@ -214,7 +214,7 @@ describe('Popup Nav', function() {
       });
 
       // eslint-disable-next-line no-undef
-      xit('should navigate into submenu', function() {
+      xit('should navigate into submenu', function () {
         // TODO: We may have removed "down arrow to open" feature, go ahead and remove this test if so
         navigationMenuClass.changeNavSubmenuState({
           matchesNavSubmenu: button,
@@ -225,12 +225,12 @@ describe('Popup Nav', function() {
         expect(firstNestedMenuItem.focus).toHaveBeenCalled();
       });
 
-      afterEach(function() {
+      afterEach(function () {
         navigationMenuNode.setAttribute('hidden', '');
       });
     });
 
-    afterAll(function() {
+    afterAll(function () {
       button.setAttribute('aria-expanded', 'false');
       navigationMenuClass.release();
       if (context) {
@@ -240,7 +240,7 @@ describe('Popup Nav', function() {
     });
   });
 
-  describe('Click handler', function() {
+  describe('Click handler', function () {
     let range;
     let element;
     let navigationMenu;
@@ -249,7 +249,7 @@ describe('Popup Nav', function() {
     let button;
     let anchors;
 
-    beforeAll(function() {
+    beforeAll(function () {
       range = document.createRange();
       element = range
         .createContextualFragment(UiShellHtml)
@@ -261,8 +261,8 @@ describe('Popup Nav', function() {
       anchors = element.querySelectorAll('.bx--navigation-link');
     });
 
-    describe('Submenu', function() {
-      it('should open submenu', function() {
+    describe('Submenu', function () {
+      it('should open submenu', function () {
         button.dispatchEvent(new CustomEvent('click', { bubbles: true }));
         expect(
           wrapper.classList.contains('bx--navigation__category--expanded')
@@ -270,7 +270,7 @@ describe('Popup Nav', function() {
         expect(button.getAttribute('aria-expanded')).toBe('true');
       });
 
-      it('should close an open submenu', function() {
+      it('should close an open submenu', function () {
         wrapper.classList.add('bx--navigation__category--expanded');
         button.dispatchEvent(new CustomEvent('click', { bubbles: true }));
         expect(
@@ -279,14 +279,14 @@ describe('Popup Nav', function() {
       });
     });
 
-    describe('Link', function() {
-      it('should attach active link CSS classes on click', function() {
+    describe('Link', function () {
+      it('should attach active link CSS classes on click', function () {
         anchors[0].dispatchEvent(new CustomEvent('click', { bubbles: true }));
         expect(li.classList.contains('bx--navigation-item--active')).toBe(true);
       });
     });
 
-    afterAll(function() {
+    afterAll(function () {
       navigationMenu.release();
     });
   });

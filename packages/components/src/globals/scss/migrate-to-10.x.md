@@ -140,7 +140,7 @@ No change
 
 ## `_layer.scss`
 
-No change
+- Removed, replaced with `box-shadow` mixin
 
 ### Internal
 
@@ -156,7 +156,7 @@ Replaced with `@carbon/grid`
 | `$padding`       | ☠️ Deprecated                                                                |
 | `padding`        | ☠️ Deprecated                                                                |
 | `breakpoint`     | ☠️ Deprecated, please use `carbon--breakpoint` instead                       |
-| `max-breakpoint` | ☠️ Deprecated, please use `carbon--breakpoint-down` isntead                  |
+| `max-breakpoint` | ☠️ Deprecated, please use `carbon--breakpoint-down` instead                  |
 | `grid-container` | ☠️ Deprecated, please use `carbon--grid` or `carbon--make-container` instead |
 | `$z-indexes`     | No change                                                                    |
 | `z`              | No change                                                                    |

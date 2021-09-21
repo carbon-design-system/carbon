@@ -3,95 +3,104 @@
 exports[`DataTable.TableExpandRow should render 1`] = `
 <Table
   isSortable={false}
+  overflowMenuOnHover={true}
 >
-  <table
-    className="bx--data-table bx--data-table--no-border"
+  <div
+    className="bx--data-table-content"
   >
-    <TableBody
-      aria-live="polite"
+    <table
+      className="bx--data-table bx--data-table--no-border"
     >
-      <tbody
+      <TableBody
         aria-live="polite"
       >
-        <TableExpandRow
-          ariaLabel="Aria label"
-          className="custom-class"
-          expandHeader="expand"
-          isExpanded={false}
-          onExpand={[MockFunction]}
+        <tbody
+          aria-live="polite"
         >
-          <tr
-            className="bx--parent-row custom-class"
-            data-parent-row={true}
+          <TableExpandRow
+            ariaLabel="Aria label"
+            className="custom-class"
+            expandHeader="expand"
+            isExpanded={false}
+            onExpand={[MockFunction]}
           >
-            <TableCell
-              className="bx--table-expand"
-              headers="expand"
+            <tr
+              className="bx--parent-row custom-class"
+              data-parent-row={true}
             >
-              <td
+              <TableCell
                 className="bx--table-expand"
                 headers="expand"
               >
-                <button
-                  aria-label="Aria label"
-                  className="bx--table-expand__button"
-                  onClick={[MockFunction]}
+                <td
+                  className="bx--table-expand"
+                  headers="expand"
                 >
-                  <ForwardRef(ChevronRight16)
-                    className="bx--table-expand__svg"
+                  <button
+                    aria-label="Aria label"
+                    className="bx--table-expand__button"
+                    onClick={[MockFunction]}
+                    type="button"
                   >
-                    <Icon
+                    <ForwardRef(ChevronRight16)
                       className="bx--table-expand__svg"
-                      height={16}
-                      preserveAspectRatio="xMidYMid meet"
-                      viewBox="0 0 16 16"
-                      width={16}
-                      xmlns="http://www.w3.org/2000/svg"
                     >
-                      <svg
-                        aria-hidden={true}
+                      <Icon
                         className="bx--table-expand__svg"
-                        focusable="false"
+                        fill="currentColor"
                         height={16}
                         preserveAspectRatio="xMidYMid meet"
-                        style={
-                          Object {
-                            "willChange": "transform",
-                          }
-                        }
                         viewBox="0 0 16 16"
                         width={16}
                         xmlns="http://www.w3.org/2000/svg"
                       >
-                        <path
-                          d="M11 8L6 13 5.3 12.3 9.6 8 5.3 3.7 6 3z"
-                        />
-                      </svg>
-                    </Icon>
-                  </ForwardRef(ChevronRight16)>
-                </button>
-              </td>
-            </TableCell>
-          </tr>
-        </TableExpandRow>
-        <TableExpandedRow>
-          <tr
-            className="bx--expandable-row"
-            data-child-row={true}
-            onMouseEnter={[Function]}
-            onMouseLeave={[Function]}
+                        <svg
+                          aria-hidden={true}
+                          className="bx--table-expand__svg"
+                          fill="currentColor"
+                          focusable="false"
+                          height={16}
+                          preserveAspectRatio="xMidYMid meet"
+                          viewBox="0 0 16 16"
+                          width={16}
+                          xmlns="http://www.w3.org/2000/svg"
+                        >
+                          <path
+                            d="M11 8L6 13 5.3 12.3 9.6 8 5.3 3.7 6 3z"
+                          />
+                        </svg>
+                      </Icon>
+                    </ForwardRef(ChevronRight16)>
+                  </button>
+                </td>
+              </TableCell>
+            </tr>
+          </TableExpandRow>
+          <TableExpandedRow
+            colSpan={1}
           >
-            <TableCell>
-              <td>
-                <div
-                  className="bx--child-row-inner-container"
-                />
-              </td>
-            </TableCell>
-          </tr>
-        </TableExpandedRow>
-      </tbody>
-    </TableBody>
-  </table>
+            <tr
+              className="bx--expandable-row"
+              data-child-row={true}
+              onMouseEnter={[Function]}
+              onMouseLeave={[Function]}
+            >
+              <TableCell
+                colSpan={1}
+              >
+                <td
+                  colSpan={1}
+                >
+                  <div
+                    className="bx--child-row-inner-container"
+                  />
+                </td>
+              </TableCell>
+            </tr>
+          </TableExpandedRow>
+        </tbody>
+      </TableBody>
+    </table>
+  </div>
 </Table>
 `;

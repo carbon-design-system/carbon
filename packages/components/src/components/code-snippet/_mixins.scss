@@ -12,9 +12,9 @@
 /// @group code-snippet
 @mixin bx--snippet {
   @include type-style('code-01');
-  background: $snippet-background-color;
-  border: 1px solid $snippet-border-color;
+
   position: relative;
-  max-width: rem(600px);
   width: 100%;
+  max-width: rem(768px);
+  background-color: $field-01;
 }

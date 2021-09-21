@@ -33,6 +33,7 @@
   - [Using `npm link`/`yarn link`](#using-npm-linkyarn-link)
   - [Pointing NPM dependency of `carbon-components` right to the source code](#pointing-npm-dependency-of-carbon-components-right-to-the-source-code)
 - [Maintainers](#maintainers)
+  - [Working with icons and pictograms](#working-with-icons-and-pictograms)
   - [Code Patterns](#code-patterns)
     - [Deprecating a component](#deprecating-a-component)
   - [Publishing](#publishing)
@@ -51,7 +52,7 @@ Carbon is built using a collection of packages all built in the same Git
 repository. You might have heard this setup described as a
 [monorepo](https://en.wikipedia.org/wiki/Monorepo).
 
-As a result, we use two pieces of tooling to help us managing installing
+As a result, we use two pieces of tooling to help us manage installing
 dependencies and publishing our packages. These include:
 
 - [Yarn workspaces](https://yarnpkg.com/lang/en/docs/workspaces/) for handling
@@ -259,13 +260,9 @@ The subject contains a succinct description of the change:
 
 ### Body
 
-<!-- alex disable just -->
-
 Just as in the subject, use the imperative, present tense: "change" not
 "changed" nor "changes". The body should include the motivation for the change
 and contrast this with previous behavior.
-
-<!-- alex enable just -->
 
 ### Footer
 
@@ -627,6 +624,65 @@ You don't need to do anything in `carbon-components` side.
 
 ## Maintainers
 
+### Working with icons and pictograms
+
+We get work submitted by the IBM Brand team, along with other designers at IBM,
+that contributes new or updated assets to our icons or pictograms packages. When
+you are requested to review these Pull Requests, here are some common things to
+look for:
+
+1. Do the assets follow a param-case naming convention?
+
+If not, we'll need to request changes so that they are named using the
+`param-case` convention.
+
+2. Is the CI check failing because of missing metadata?
+
+If so, you will need to help out the contributor by going into the package and
+running `node tasks/scaffold.js` to seed the metadata information required for
+the contribution.
+
+_Note: the scaffold task will only apply to the main metadata file, for new
+icons category information will have to be added by hand_
+
+3. Is the CI check failing because of a merge conflict?
+
+If so, you will need to help out the contributor by resolving the merge
+conflicts for the Pull Request.
+
+4. Is the CI check failing because of a snapshot change?
+
+If so, you will need to help out the contributor by updating the snapshot based
+on the changes. To update snapshot, you'll need to rebuild the relevant packages
+and then run Jest.
+
+For example, if icons changed you will want to run the following commands:
+
+```bash
+yarn lerna run build --scope='@carbon/icons-react' --include-dependencies
+yarn test:e2e -u
+```
+
+If pictograms changed, it would be:
+
+```bash
+yarn lerna run build --scope='@carbon/pictograms-react' --include-dependencies
+yarn test:e2e -u
+```
+
+5. Does the Pull Request have an appropriate title?
+
+If not, then you will need to update it to the correct commit convention for the
+contribution.
+
+6. Does the Pull Request remove an asset that used to exist?
+
+If so, remind the contributor that we can only remove assets in a major release.
+If an asset needs to be removed, they should add the asset back in under its
+original name and add it to the corresponding `deprecated.yml` file. They can
+still contribute the newly named asset, and it is recommended that they specify
+the replacement for the icon in `deprecated.yml` under the `reason` field.
+
 ### Code Patterns
 
 #### Deprecating a component
@@ -650,7 +706,7 @@ pattern that we tend to use:
 ```jsx
 // SomeComponent.js
 // React imports
-import warning from 'warning';
+import { warning } from '../../internal/warning';
 
 let didWarnAboutDeprecation = false;
 
@@ -690,9 +746,10 @@ warning(
 #### Publishing older library versions
 
 We offer ad-hoc backwards-support for older version of the system. This work is
-primarly driven by external contributors who may still need these older versions
-for legacy code. When updates are received and merged into the codebase, the
-release process will be a bit different than the one described above.
+primarily driven by external contributors who may still need these older
+versions for legacy code. When updates are received and merged into the
+codebase, the release process will be a bit different than the one described
+above.
 
 For example, with
 [`carbon-components-react`](https://github.com/carbon-design-system/carbon-components-react)

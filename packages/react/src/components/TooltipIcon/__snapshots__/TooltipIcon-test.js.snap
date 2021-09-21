@@ -10,10 +10,22 @@ exports[`TooltipIcon should allow the user to specify the direction 1`] = `
   <button
     aria-describedby="icon-tooltip-4"
     className="bx--tooltip__trigger bx--tooltip--a11y custom-class bx--tooltip--top bx--tooltip--align-center"
+    onBlur={[Function]}
+    onClick={[Function]}
+    onFocus={[Function]}
+    onMouseEnter={[Function]}
+    onMouseLeave={[Function]}
+    style={
+      Object {
+        "cursor": "default",
+      }
+    }
+    type="button"
   >
     <span
       className="bx--assistive-text"
       id="icon-tooltip-4"
+      onMouseEnter={[Function]}
     >
       tooltip text
     </span>
@@ -32,10 +44,22 @@ exports[`TooltipIcon should render 1`] = `
   <button
     aria-describedby="icon-tooltip-1"
     className="bx--tooltip__trigger bx--tooltip--a11y custom-class bx--tooltip--bottom bx--tooltip--align-center"
+    onBlur={[Function]}
+    onClick={[Function]}
+    onFocus={[Function]}
+    onMouseEnter={[Function]}
+    onMouseLeave={[Function]}
+    style={
+      Object {
+        "cursor": "default",
+      }
+    }
+    type="button"
   >
     <span
       className="bx--assistive-text"
       id="icon-tooltip-1"
+      onMouseEnter={[Function]}
     >
       tooltip text
     </span>

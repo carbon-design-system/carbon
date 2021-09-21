@@ -11,11 +11,11 @@ import { match, keys } from '../../../internal/keyboard';
  * @param {object} config Plugin configuration.
  * @returns {Plugin} A Flatpickr plugin to fix Flatpickr's behavior of certain events.
  */
-export default config => fp => {
+export default (config) => (fp) => {
   /**
    * Handles `keydown` event.
    */
-  const handleKeydown = event => {
+  const handleKeydown = (event) => {
     const { inputFrom, inputTo } = config;
     const { target } = event;
     if (inputFrom === target || inputTo === target) {
@@ -36,6 +36,9 @@ export default config => fp => {
         // so user can move the keyboard cursor for editing dates
         // Workaround for: https://github.com/flatpickr/flatpickr/issues/1943
         event.stopPropagation();
+      } else if (match(event, keys.ArrowDown)) {
+        event.preventDefault();
+        fp.open();
       }
     }
   };

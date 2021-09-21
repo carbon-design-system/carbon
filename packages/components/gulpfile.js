@@ -38,7 +38,7 @@ const through = require('through2');
 
 // Rollup
 const { rollup } = require('rollup');
-const commonjs = require('rollup-plugin-commonjs');
+const commonjs = require('@rollup/plugin-commonjs');
 const { terser: rollupTerser } = require('rollup-plugin-terser');
 const rollupConfigDev = require('./tools/rollup.config.dev');
 const rollupConfigProd = require('./tools/rollup.config');
@@ -74,7 +74,7 @@ function getTemplates() {
   }
 }
 
-const assign = v => v;
+const assign = (v) => v;
 const cloptions = commander
   .option(
     '-b, --use-breaking-changes',
@@ -165,7 +165,7 @@ gulp.task('scripts:dev:feature-flags', () => {
     replaceTable.grid = useExperimentalFeatures;
   }
   return readFile(path.resolve(__dirname, 'src/globals/js/feature-flags.js'))
-    .then(contents =>
+    .then((contents) =>
       contents
         .toString()
         .replace(
@@ -176,7 +176,7 @@ gulp.task('scripts:dev:feature-flags', () => {
               : `${definition}${!!replaceTable[name]}`
         )
     )
-    .then(contents =>
+    .then((contents) =>
       writeFile(path.resolve(__dirname, 'demo/feature-flags.js'), contents)
     );
 });
@@ -190,7 +190,7 @@ const buildDemoJS = () => {
         process.env.NODE_ENV !== 'production' ? {} : rollupTerser(),
       ],
     })
-      .then(bundle =>
+      .then((bundle) =>
         bundle.write({
           format: 'iife',
           name: 'CarbonComponents',
@@ -205,7 +205,7 @@ const buildDemoJS = () => {
       });
   }
   const webpackDemoConfig = require('./tools/webpack-demo.config'); // eslint-disable-line global-require
-  return webpackPromisified(webpackDemoConfig).then(stats => {
+  return webpackPromisified(webpackDemoConfig).then((stats) => {
     log(
       '[webpack:build]',
       stats.toString({
@@ -241,10 +241,12 @@ const convertToESMGulpPlugin = () =>
           }),
         ],
         onwarn: (warning, handle) => {
-          if (warning.code !== 'EMPTY_BUNDLE') handle(warning);
+          if (warning.code !== 'EMPTY_BUNDLE') {
+            handle(warning);
+          }
         },
       })
-        .then(bundle => bundle.generate({ format: 'esm' }))
+        .then((bundle) => bundle.generate({ format: 'esm' }))
         .then(
           ({ output }) => {
             file.contents = Buffer.from(
@@ -252,7 +254,7 @@ const convertToESMGulpPlugin = () =>
             );
             callback(null, file);
           },
-          err => {
+          (err) => {
             callback(err);
           }
         );
@@ -321,7 +323,7 @@ gulp.task('scripts:es', () => {
 });
 
 gulp.task('scripts:rollup', () =>
-  rollup(rollupConfigProd).then(bundle =>
+  rollup(rollupConfigProd).then((bundle) =>
     bundle.write({
       format: 'iife',
       name: 'CarbonComponents',
@@ -343,7 +345,7 @@ gulp.task('scripts:compiled', gulp.series('scripts:rollup', minifyJS));
  * Sass Tasks
  */
 
-const buildStyles = prod => {
+const buildStyles = (prod) => {
   const buildStylesForType = () =>
     gulp
       .src('src/globals/scss/styles.scss')
@@ -358,12 +360,13 @@ const buildStyles = prod => {
       .pipe(
         postcss([
           autoprefixer({
-            browsers: ['> 1%', 'last 2 versions'],
+            browsers: ['> 1%', 'last 2 versions', 'ie >= 11'],
+            grid: 'autoplace',
           }),
         ])
       )
       .pipe(
-        rename(filePath => {
+        rename((filePath) => {
           if (filePath.basename === 'styles') {
             filePath.basename = 'carbon-components';
           }
@@ -419,7 +422,8 @@ gulp.task('sass:dev', () => {
       postcss([
         customProperties(),
         autoprefixer({
-          browsers: ['> 1%', 'last 2 versions'],
+          browsers: ['> 1%', 'last 2 versions', 'ie >= 11'],
+          grid: 'autoplace',
         }),
       ])
     )
@@ -429,7 +433,7 @@ gulp.task('sass:dev', () => {
 });
 
 gulp.task('sass:dev:server', () => {
-  const debouncedSassBuild = debounce(switchTo => {
+  const debouncedSassBuild = debounce((switchTo) => {
     if (
       typeof useExperimentalFeatures === 'undefined' ||
       !useExperimentalFeatures !== !switchTo
@@ -439,7 +443,7 @@ gulp.task('sass:dev:server', () => {
       gulp.task('scripts:dev:feature-flags')();
     }
   }, 500);
-  return promisePortSassDevBuild.then(portSassDevBuild => {
+  return promisePortSassDevBuild.then((portSassDevBuild) => {
     http
       .createServer((req, res) => {
         const switchTo = (
@@ -485,21 +489,23 @@ const buildDemoHTML = () => {
         ),
         ...componentSource
           .map(({ handle }) =>
-            templates.render({ layout: false }, handle).then(renderedItems => {
-              const o = {};
-              renderedItems.forEach((rendered, item) => {
-                o[item.handle] = rendered.trim();
-              });
-              return writeFile(
-                path.resolve(__dirname, 'demo/code', handle),
-                JSON.stringify(o)
-              );
-            })
+            templates
+              .render({ layout: false }, handle)
+              .then((renderedItems) => {
+                const o = {};
+                renderedItems.forEach((rendered, item) => {
+                  o[item.handle] = rendered.trim();
+                });
+                return writeFile(
+                  path.resolve(__dirname, 'demo/code', handle),
+                  JSON.stringify(o)
+                );
+              })
           )
           .toArray(),
         templates
           .render({ layout: 'preview', layoutContext: { minify: true } })
-          .then(table =>
+          .then((table) =>
             Promise.all(
               Array.from(table.entries()).map(([{ handle }, value]) =>
                 writeFile(
@@ -522,14 +528,15 @@ const buildHTML = () => {
     'notification--toast': 'toast-notification',
   };
   getTemplates();
-  return templates.render({ layout: false }).then(renderedItems => {
+  return templates.render({ layout: false }).then((renderedItems) => {
     const promises = [];
     renderedItems.forEach((rendered, item) => {
       const dirname = path.dirname(
         path.resolve(__dirname, 'html', item.relViewPath)
       );
-      const filename = `${names[item.handle] ||
-        item.handle.replace(/--default$/, '')}.html`;
+      const filename = `${
+        names[item.handle] || item.handle.replace(/--default$/, '')
+      }.html`;
       promises.push(
         mkdirp(dirname).then(() =>
           writeFile(path.resolve(dirname, filename), rendered)
@@ -546,9 +553,9 @@ gulp.task('html:source', gulp.series('scripts:dev:feature-flags', buildHTML));
  * Dev server
  */
 
-const launchDevServer = cb => {
+const launchDevServer = (cb) => {
   promisePortSassDevBuild.then(
-    portSassDevBuild => {
+    (portSassDevBuild) => {
       let started;
       const options = {
         script: './server.js',
@@ -566,7 +573,7 @@ const launchDevServer = cb => {
         }
       });
     },
-    err => {
+    (err) => {
       console.log('Error finding the port for Sass dev build:', err); // eslint-disable-line no-console
     }
   );
@@ -584,7 +591,7 @@ gulp.task(
  * JSDoc
  */
 
-gulp.task('jsdoc', cb => {
+gulp.task('jsdoc', (cb) => {
   gulp
     .src('./src/**/*.js')
     .pipe(
@@ -606,7 +613,7 @@ gulp.task('jsdoc', cb => {
               destination: './docs/js',
             },
           }),
-          err => {
+          (err) => {
             if (err) {
               cb(err);
             } else {
@@ -623,7 +630,7 @@ gulp.task('jsdoc', cb => {
  * Test
  */
 
-const startTest = done => {
+const startTest = (done) => {
   new Server(
     {
       configFile: path.resolve(__dirname, 'tests/karma.conf.js'),
@@ -635,7 +642,7 @@ const startTest = done => {
 
 gulp.task('test:unit', gulp.series('html:source', startTest));
 
-const startAccessibilityTest = done => {
+const startAccessibilityTest = (done) => {
   const componentName = cloptions.name;
   const options = {
     a11yCheckOptions: {

@@ -8,9 +8,7 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import classNames from 'classnames';
-import { settings } from 'carbon-components';
-
-const { prefix } = settings;
+import { usePrefix } from '../../internal/usePrefix';
 
 const randoms = [0.973051493507435, 0.15334737213558558, 0.5671034553053769];
 
@@ -26,6 +24,7 @@ const SkeletonText = ({
   className,
   ...other
 }) => {
+  const prefix = usePrefix();
   const skeletonTextClasses = classNames({
     [`${prefix}--skeleton__text`]: true,
     [`${prefix}--skeleton__heading`]: heading,
@@ -76,25 +75,25 @@ const SkeletonText = ({
 
 SkeletonText.propTypes = {
   /**
-   * will generate multiple lines of text
+   * Specify an optional className to be applied to the container node
    */
-  paragraph: PropTypes.bool,
-  /**
-   * the number of lines in a paragraph
-   */
-  lineCount: PropTypes.number,
-  /**
-   * width (in px or %) of single line of text or max-width of paragraph lines
-   */
-  width: PropTypes.string,
+  className: PropTypes.string,
   /**
    * generates skeleton text at a larger size
    */
   heading: PropTypes.bool,
   /**
-   * Specify an optional className to be applied to the container node
+   * the number of lines in a paragraph
    */
-  className: PropTypes.string,
+  lineCount: PropTypes.number,
+  /**
+   * will generate multiple lines of text
+   */
+  paragraph: PropTypes.bool,
+  /**
+   * width (in px or %) of single line of text or max-width of paragraph lines
+   */
+  width: PropTypes.string,
 };
 
 SkeletonText.defaultProps = {

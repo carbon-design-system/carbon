@@ -7,18 +7,21 @@
 
 import PropTypes from 'prop-types';
 import React from 'react';
+import cx from 'classnames';
 import { ChevronRight16 } from '@carbon/icons-react';
-import { settings } from 'carbon-components';
 import SkeletonText from '../SkeletonText';
 import deprecate from '../../prop-types/deprecate';
+import { usePrefix } from '../../internal/usePrefix';
 
-const { prefix } = settings;
-
-function AccordionSkeleton(props) {
-  const numSkeletonItems = props.open ? props.count - 1 : props.count;
+function AccordionSkeleton({ align, open, count, className, ...rest }) {
+  const prefix = usePrefix();
+  const classes = cx(`${prefix}--accordion`, `${prefix}--skeleton`, className, {
+    [`${prefix}--accordion--${align}`]: align,
+  });
+  const numSkeletonItems = open ? count - 1 : count;
   return (
-    <ul className={`${prefix}--accordion ${prefix}--skeleton`}>
-      {props.open && (
+    <ul className={classes} {...rest}>
+      {open && (
         <li
           className={`${prefix}--accordion__item ${prefix}--accordion__item--active`}>
           <span className={`${prefix}--accordion__heading`}>
@@ -41,14 +44,24 @@ function AccordionSkeleton(props) {
 
 AccordionSkeleton.propTypes = {
   /**
-   * `false` to not display the first item opened
+   * Specify the alignment of the accordion heading title and chevron.
    */
-  open: PropTypes.bool,
+  align: PropTypes.oneOf(['start', 'end']),
+
+  /**
+   * Specify an optional className to add.
+   */
+  className: PropTypes.string,
 
   /**
    * Set number of items to render
    */
   count: PropTypes.number,
+
+  /**
+   * `false` to not display the first item opened
+   */
+  open: PropTypes.bool,
 
   /**
    * Set unique identifier to generate unique item keys
@@ -59,9 +72,11 @@ AccordionSkeleton.propTypes = {
 AccordionSkeleton.defaultProps = {
   open: true,
   count: 4,
+  align: 'end',
 };
 
 function AccordionSkeletonItem() {
+  const prefix = usePrefix();
   return (
     <li className={`${prefix}--accordion__item`}>
       <span className={`${prefix}--accordion__heading`}>

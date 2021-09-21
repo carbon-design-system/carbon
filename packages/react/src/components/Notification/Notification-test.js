@@ -12,7 +12,7 @@ import {
   NotificationTextDetails,
   ToastNotification,
   InlineNotification,
-} from '../Notification';
+} from './Notification';
 import { shallow, mount } from 'enzyme';
 import { settings } from 'carbon-components';
 
@@ -80,7 +80,7 @@ describe('NotificationTextDetails', () => {
     const wrapper = shallow(<NotificationTextDetails />);
 
     describe('When notificationType equals "toast"', () => {
-      it('div shoudld have correct className by default', () => {
+      it('div should have correct className by default', () => {
         expect(wrapper.hasClass(`${prefix}--toast-notification__details`)).toBe(
           true
         );
@@ -88,7 +88,7 @@ describe('NotificationTextDetails', () => {
     });
 
     describe('When notificationType equals "inline"', () => {
-      it('div shoudld have correct className', () => {
+      it('div should have correct className', () => {
         wrapper.setProps({ notificationType: 'inline' });
         expect(
           wrapper.hasClass(`${prefix}--inline-notification__text-wrapper`)
@@ -125,7 +125,7 @@ describe('ToastNotification', () => {
     it('interpolates matching className based on kind prop', () => {
       const kinds = ['error', 'info', 'success', 'warning'];
 
-      kinds.forEach(kind => {
+      kinds.forEach((kind) => {
         toast.setProps({ kind });
         expect(
           toast.hasClass(`${prefix}--toast-notification--${kind}`)
@@ -143,13 +143,16 @@ describe('ToastNotification', () => {
     });
 
     it('can render any node for the subtitle and caption', () => {
-      toast.setProps({ subtitle: <button />, caption: <button /> });
+      toast.setProps({
+        subtitle: <button type="button" />,
+        caption: <button type="button" />,
+      });
       expect(toast.length).toEqual(1);
     });
   });
   describe('events and state', () => {
     it('initial open state set to true', () => {
-      const mountedToast = mount(
+      const wrapper = mount(
         <ToastNotification
           kind="error"
           title="this is a title"
@@ -158,11 +161,11 @@ describe('ToastNotification', () => {
         />
       );
 
-      expect(mountedToast.state().open).toBe(true);
+      expect(wrapper.children().length > 0).toBe(true);
     });
 
     it('sets open state to false when close button is clicked', () => {
-      const mountedToast = mount(
+      const wrapper = mount(
         <ToastNotification
           kind="error"
           title="this is a title"
@@ -171,12 +174,42 @@ describe('ToastNotification', () => {
         />
       );
 
-      mountedToast.find('button').simulate('click');
-      expect(mountedToast.state().open).toEqual(false);
+      wrapper.find('button').simulate('click');
+      expect(wrapper.children().length).toBe(0);
+    });
+
+    it('closes notification if `onClose` is provided', () => {
+      const wrapper = mount(
+        <ToastNotification
+          kind="error"
+          title="this is a title"
+          subtitle="this is a subtitle"
+          caption="this is a caption"
+          onClose={() => {}}
+        />
+      );
+
+      wrapper.find('button').simulate('click');
+      expect(wrapper.children().length).toBe(0);
+    });
+
+    it('keeps notification open if `onClose` returns false', () => {
+      const wrapper = mount(
+        <ToastNotification
+          kind="error"
+          title="this is a title"
+          subtitle="this is a subtitle"
+          caption="this is a caption"
+          onClose={() => false}
+        />
+      );
+
+      wrapper.find('button').simulate('click');
+      expect(wrapper.children().length).not.toBe(0);
     });
 
     it('renders null when open state is false', () => {
-      const mountedToast = mount(
+      const wrapper = mount(
         <ToastNotification
           kind="error"
           title="this is a title"
@@ -185,8 +218,8 @@ describe('ToastNotification', () => {
         />
       );
 
-      mountedToast.setState({ open: false });
-      expect(mountedToast.html()).toBeNull();
+      wrapper.find('button').simulate('click');
+      expect(wrapper.html()).toBeNull();
     });
   });
 });
@@ -236,7 +269,7 @@ describe('InlineNotification', () => {
     it('interpolates matching className based on kind prop', () => {
       const kinds = ['error', 'info', 'success', 'warning'];
 
-      kinds.forEach(kind => {
+      kinds.forEach((kind) => {
         inline.setProps({ kind });
         expect(
           inline.find(`.${prefix}--inline-notification--${kind}`).exists()
@@ -254,14 +287,14 @@ describe('InlineNotification', () => {
     });
 
     it('can render any node for the subtitle', () => {
-      inline.setProps({ subtitle: <button /> });
+      inline.setProps({ subtitle: <button type="button" /> });
       expect(inline.length).toEqual(1);
     });
   });
 
   describe('events and state', () => {
     it('initial open state set to true', () => {
-      const mountedInline = mount(
+      const wrapper = mount(
         <InlineNotification
           title="this is a title"
           subtitle="this is a subtitle"
@@ -269,18 +302,55 @@ describe('InlineNotification', () => {
         />
       );
 
-      expect(mountedInline.state().open).toBe(true);
+      expect(wrapper.children().length > 0).toBe(true);
     });
 
     it('sets open state to false when close button is clicked', () => {
-      const mountedInline = mount(<InlineNotification {...props} />);
+      const wrapper = mount(
+        <InlineNotification
+          kind="success"
+          title="title"
+          subtitle="subtitle"
+          iconDescription="description"
+        />
+      );
 
-      mountedInline.find('button').simulate('click');
-      expect(mountedInline.state().open).toEqual(false);
+      wrapper.find('button').simulate('click');
+      expect(wrapper.children().length).toBe(0);
+    });
+
+    it('closes notification if `onClose` is provided', () => {
+      const wrapper = mount(
+        <InlineNotification
+          kind="success"
+          title="title"
+          subtitle="subtitle"
+          iconDescription="description"
+          onClose={() => {}}
+        />
+      );
+
+      wrapper.find('button').simulate('click');
+      expect(wrapper.children().length).toBe(0);
+    });
+
+    it('keeps notification open if `onClose` returns false', () => {
+      const wrapper = mount(
+        <InlineNotification
+          kind="success"
+          title="title"
+          subtitle="subtitle"
+          iconDescription="description"
+          onClose={() => false}
+        />
+      );
+
+      wrapper.find('button').simulate('click');
+      expect(wrapper.children().length).not.toBe(0);
     });
 
     it('renders null when open state is false', () => {
-      const mountedInline = mount(
+      const wrapper = mount(
         <InlineNotification
           title="this is a title"
           subtitle="this is a subtitle"
@@ -288,61 +358,10 @@ describe('InlineNotification', () => {
         />
       );
 
-      mountedInline.setState({ open: false });
-      expect(mountedInline.html()).toBeNull();
+      wrapper.find('button').simulate('click');
+      expect(wrapper.html()).toBeNull();
     });
   });
 });
 
 // Deprecated
-
-const props = {
-  kind: 'success',
-  title: 'title',
-  subtitle: 'subtitle',
-  iconDescription: 'description',
-};
-
-describe('events and state', () => {
-  it('initial open state set to true', () => {
-    const mountedToast = mount(
-      <ToastNotification {...props} caption="caption" />
-    );
-    const mountedInline = mount(<InlineNotification {...props} />);
-
-    expect(mountedToast.state().open).toBe(true);
-    expect(mountedInline.state().open).toBe(true);
-  });
-
-  it('sets open state to false when close button is clicked', () => {
-    const mountedToast = mount(
-      <ToastNotification {...props} caption="caption" />
-    );
-    const mountedInline = mount(<InlineNotification {...props} />);
-
-    mountedToast.find('button').simulate('click');
-    mountedInline.find('button').simulate('click');
-    expect(mountedToast.state().open).toEqual(false);
-    expect(mountedInline.state().open).toEqual(false);
-  });
-
-  it('close button is not shown if hideCloseButton prop set', () => {
-    const mountedToast = mount(
-      <ToastNotification {...props} hideCloseButton={true} />
-    );
-
-    expect(mountedToast.find('button')).toHaveLength(0);
-  });
-
-  it('renders null when open state is false', () => {
-    const mountedToast = mount(
-      <ToastNotification {...props} caption="caption" />
-    );
-    const mountedInline = mount(<InlineNotification {...props} />);
-
-    mountedToast.setState({ open: false });
-    mountedInline.setState({ open: false });
-    expect(mountedToast.html()).toBeNull();
-    expect(mountedInline.html()).toBeNull();
-  });
-});

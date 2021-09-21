@@ -3,14 +3,10 @@
 exports[`ListBoxField should render 1`] = `
 <ListBoxField
   id="test-listbox"
-  translateWithId={[Function]}
 >
   <div
-    aria-controls={null}
-    aria-label="Open menu"
-    aria-owns={null}
     className="bx--list-box__field"
-    role="combobox"
+    id="test-listbox"
     tabIndex={-1}
   >
     <ListBoxSelection
@@ -18,7 +14,8 @@ exports[`ListBoxField should render 1`] = `
       translateWithId={[Function]}
     >
       <div
-        aria-label="Clear Selection"
+        aria-hidden={true}
+        aria-label="Clear selected item"
         className="bx--list-box__selection"
         onClick={[Function]}
         onKeyDown={[Function]}
@@ -28,90 +25,25 @@ exports[`ListBoxField should render 1`] = `
       >
         <ForwardRef(Close16)>
           <Icon
+            fill="currentColor"
             height={16}
             preserveAspectRatio="xMidYMid meet"
-            viewBox="0 0 16 16"
+            viewBox="0 0 32 32"
             width={16}
             xmlns="http://www.w3.org/2000/svg"
           >
             <svg
               aria-hidden={true}
+              fill="currentColor"
               focusable="false"
               height={16}
               preserveAspectRatio="xMidYMid meet"
-              style={
-                Object {
-                  "willChange": "transform",
-                }
-              }
-              viewBox="0 0 16 16"
+              viewBox="0 0 32 32"
               width={16}
               xmlns="http://www.w3.org/2000/svg"
             >
               <path
-                d="M12 4.7L11.3 4 8 7.3 4.7 4 4 4.7 7.3 8 4 11.3 4.7 12 8 8.7 11.3 12 12 11.3 8.7 8z"
-              />
-            </svg>
-          </Icon>
-        </ForwardRef(Close16)>
-      </div>
-    </ListBoxSelection>
-  </div>
-</ListBoxField>
-`;
-
-exports[`ListBoxField should set \`aria-owns\` based when expanded 1`] = `
-<ListBoxField
-  aria-expanded={true}
-  id="test-listbox"
-  translateWithId={[Function]}
->
-  <div
-    aria-controls="test-listbox__menu"
-    aria-expanded={true}
-    aria-label="Close menu"
-    aria-owns="test-listbox__menu"
-    className="bx--list-box__field"
-    role="combobox"
-    tabIndex={-1}
-  >
-    <ListBoxSelection
-      clearSelection={[MockFunction]}
-      translateWithId={[Function]}
-    >
-      <div
-        aria-label="Clear Selection"
-        className="bx--list-box__selection"
-        onClick={[Function]}
-        onKeyDown={[Function]}
-        role="button"
-        tabIndex={0}
-        title="Clear selected item"
-      >
-        <ForwardRef(Close16)>
-          <Icon
-            height={16}
-            preserveAspectRatio="xMidYMid meet"
-            viewBox="0 0 16 16"
-            width={16}
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <svg
-              aria-hidden={true}
-              focusable="false"
-              height={16}
-              preserveAspectRatio="xMidYMid meet"
-              style={
-                Object {
-                  "willChange": "transform",
-                }
-              }
-              viewBox="0 0 16 16"
-              width={16}
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                d="M12 4.7L11.3 4 8 7.3 4.7 4 4 4.7 7.3 8 4 11.3 4.7 12 8 8.7 11.3 12 12 11.3 8.7 8z"
+                d="M24 9.4L22.6 8 16 14.6 9.4 8 8 9.4 14.6 16 8 22.6 9.4 24 16 17.4 22.6 24 24 22.6 17.4 16 24 9.4z"
               />
             </svg>
           </Icon>

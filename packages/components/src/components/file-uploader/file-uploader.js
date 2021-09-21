@@ -14,7 +14,7 @@ import handles from '../../globals/js/mixins/handles';
 import eventMatches from '../../globals/js/misc/event-matches';
 import on from '../../globals/js/misc/on';
 
-const toArray = arrayLike => Array.prototype.slice.call(arrayLike);
+const toArray = (arrayLike) => Array.prototype.slice.call(arrayLike);
 
 class FileUploader extends mixin(
   createComponent,
@@ -136,7 +136,7 @@ class FileUploader extends mixin(
       this.options.selectorContainer
     );
     const HTMLString = toArray(files)
-      .map(file => this._filenamesHTML(file.name, this.inputId))
+      .map((file) => this._filenamesHTML(file.name, this.inputId))
       .join('');
 
     container.insertAdjacentHTML('afterbegin', HTMLString);
@@ -155,7 +155,7 @@ class FileUploader extends mixin(
 
   _handleStateChange(elements, selectIndex, html) {
     if (selectIndex === undefined) {
-      elements.forEach(el => {
+      elements.forEach((el) => {
         this._removeState(el);
         el.insertAdjacentHTML('beforeend', html);
       });
@@ -174,7 +174,7 @@ class FileUploader extends mixin(
    * @param {Event} evt The event triggering this action.
    * @private
    */
-  _handleDeleteButton = evt => {
+  _handleDeleteButton = (evt) => {
     const target = eventMatches(evt, this.options.selectorCloseButton);
     if (target) {
       this.changeState('delete-filename-fileuploader', {
@@ -189,7 +189,7 @@ class FileUploader extends mixin(
    * @param {MouseEvent} evt The event.
    * @private
    */
-  _handleDragDrop = evt => {
+  _handleDragDrop = (evt) => {
     const isOfSelf = this.element.contains(evt.target);
     // In IE11 `evt.dataTransfer.types` is a `DOMStringList` instead of an array
     if (

@@ -6,7 +6,7 @@ addDecorator(
   withOptions({
     name: '@carbon/icons-vue',
     url:
-      'https://github.com/IBM/carbon-elements/tree/master/packages/icons-vue',
+      'https://github.com/carbon-design-system/carbon/tree/master/packages/icons-vue',
   })
 );
 

@@ -8,10 +8,14 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import classNames from 'classnames';
-import { settings } from 'carbon-components';
-import { ChevronDown16, WarningFilled16 } from '@carbon/icons-react';
-
-const { prefix } = settings;
+import {
+  ChevronDown16,
+  WarningFilled16,
+  WarningAltFilled16,
+} from '@carbon/icons-react';
+import deprecate from '../../prop-types/deprecate';
+import { useFeatureFlag } from '../FeatureFlags';
+import { usePrefix } from '../../internal/usePrefix';
 
 const Select = React.forwardRef(function Select(
   {
@@ -21,34 +25,59 @@ const Select = React.forwardRef(function Select(
     labelText,
     disabled,
     children,
-    noLabel, // reserved for use with <Pagination> component
+    // reserved for use with <Pagination> component
+    noLabel,
+    // eslint-disable-next-line no-unused-vars
     iconDescription,
     hideLabel,
     invalid,
     invalidText,
     helperText,
     light,
+    size,
+    warn,
+    warnText,
     ...other
   },
   ref
 ) {
-  const selectClasses = classNames({
-    [`${prefix}--select`]: true,
-    [`${prefix}--select--inline`]: inline,
-    [`${prefix}--select--light`]: light,
-    [`${prefix}--select--invalid`]: invalid,
-    [className]: className,
-  });
+  const prefix = usePrefix();
+  const enabled = useFeatureFlag('enable-v11-release');
+
+  const selectClasses = classNames(
+    {
+      [`${prefix}--select`]: true,
+      [`${prefix}--select--inline`]: inline,
+      [`${prefix}--select--light`]: light,
+      [`${prefix}--select--invalid`]: invalid,
+      [`${prefix}--select--disabled`]: disabled,
+      [`${prefix}--select--warning`]: warn,
+    },
+    [enabled ? null : className]
+  );
   const labelClasses = classNames(`${prefix}--label`, {
     [`${prefix}--visually-hidden`]: hideLabel,
     [`${prefix}--label--disabled`]: disabled,
   });
+  const inputClasses = classNames({
+    [`${prefix}--select-input`]: true,
+    [`${prefix}--select-input--${size}`]: size,
+  });
   const errorId = `${id}-error-msg`;
-  const error = invalid ? (
-    <div className={`${prefix}--form-requirement`} id={errorId}>
-      {invalidText}
-    </div>
-  ) : null;
+  const errorText = (() => {
+    if (invalid) {
+      return invalidText;
+    }
+    if (warn) {
+      return warnText;
+    }
+  })();
+  const error =
+    invalid || warn ? (
+      <div className={`${prefix}--form-requirement`} id={errorId}>
+        {errorText}
+      </div>
+    ) : null;
   const helperTextClasses = classNames(`${prefix}--form__helper-text`, {
     [`${prefix}--form__helper-text--disabled`]: disabled,
   });
@@ -66,45 +95,46 @@ const Select = React.forwardRef(function Select(
           {...other}
           {...ariaProps}
           id={id}
-          className={`${prefix}--select-input`}
+          className={inputClasses}
           disabled={disabled || undefined}
-          data-invalid={invalid || undefined}
           aria-invalid={invalid || undefined}
           ref={ref}>
           {children}
         </select>
-        <ChevronDown16
-          className={`${prefix}--select__arrow`}
-          aria-label={iconDescription}>
-          <title>{iconDescription}</title>
-        </ChevronDown16>
+        <ChevronDown16 className={`${prefix}--select__arrow`} />
         {invalid && (
           <WarningFilled16 className={`${prefix}--select__invalid-icon`} />
+        )}
+        {!invalid && warn && (
+          <WarningAltFilled16
+            className={`${prefix}--select__invalid-icon ${prefix}--select__invalid-icon--warning`}
+          />
         )}
       </>
     );
   })();
   return (
-    <div className={`${prefix}--form-item`}>
+    <div
+      className={
+        enabled
+          ? classNames(`${prefix}--form-item`, className)
+          : `${prefix}--form-item`
+      }>
       <div className={selectClasses}>
         {!noLabel && (
           <label htmlFor={id} className={labelClasses}>
             {labelText}
           </label>
         )}
-        {!inline && helper}
         {inline && (
-          <>
-            <div className={`${prefix}--select-input--inline__wrapper`}>
-              <div
-                className={`${prefix}--select-input__wrapper`}
-                data-invalid={invalid || null}>
-                {input}
-              </div>
-              {error}
+          <div className={`${prefix}--select-input--inline__wrapper`}>
+            <div
+              className={`${prefix}--select-input__wrapper`}
+              data-invalid={invalid || null}>
+              {input}
             </div>
-            {helper}
-          </>
+            {error}
+          </div>
         )}
         {!inline && (
           <div
@@ -113,11 +143,13 @@ const Select = React.forwardRef(function Select(
             {input}
           </div>
         )}
-        {!inline && error}
+        {!inline && error ? error : helper}
       </div>
     </div>
   );
 });
+
+Select.displayName = 'Select';
 
 Select.propTypes = {
   /**
@@ -131,6 +163,35 @@ Select.propTypes = {
   className: PropTypes.string,
 
   /**
+   * Optionally provide the default value of the `<select>`
+   */
+  defaultValue: PropTypes.any,
+
+  /**
+   * Specify whether the control is disabled
+   */
+  disabled: PropTypes.bool,
+
+  /**
+   * Provide text that is used alongside the control label for additional help
+   */
+  helperText: PropTypes.node,
+
+  /**
+   * Specify whether the label should be hidden, or not
+   */
+  hideLabel: PropTypes.bool,
+
+  /**
+   * Provide a description for the twistie icon that can be read by screen readers
+   */
+  iconDescription: deprecate(
+    PropTypes.string,
+    'The `iconDescription` prop for `Select` is no longer needed and has ' +
+      'been deprecated. It will be moved in the next major release.'
+  ),
+
+  /**
    * Specify a custom `id` for the `<select>`
    */
   id: PropTypes.string.isRequired,
@@ -141,38 +202,6 @@ Select.propTypes = {
   inline: PropTypes.bool,
 
   /**
-   * Provide label text to be read by screen readers when interacting with the
-   * control
-   */
-  labelText: PropTypes.node,
-
-  /**
-   * Provide an optional `onChange` hook that is called each time the value of
-   * the underlying <input> changes
-   */
-  onChange: PropTypes.func,
-
-  /**
-   * Specify whether the control is disabled
-   */
-  disabled: PropTypes.bool,
-
-  /**
-   * Optionally provide the default value of the `<select>`
-   */
-  defaultValue: PropTypes.any,
-
-  /**
-   * Provide a description for the twistie icon that can be read by screen readers
-   */
-  iconDescription: PropTypes.string.isRequired,
-
-  /**
-   * Specify whether the label should be hidden, or not
-   */
-  hideLabel: PropTypes.bool,
-
-  /**
    * Specify if the currently value is invalid.
    */
   invalid: PropTypes.bool,
@@ -180,12 +209,13 @@ Select.propTypes = {
   /**
    * Message which is displayed if the value is invalid.
    */
-  invalidText: PropTypes.string,
+  invalidText: PropTypes.node,
 
   /**
-   * Provide text that is used alongside the control label for additional help
+   * Provide label text to be read by screen readers when interacting with the
+   * control
    */
-  helperText: PropTypes.node,
+  labelText: PropTypes.node,
 
   /**
    * Specify whether you want the light version of this control
@@ -197,13 +227,34 @@ Select.propTypes = {
    * select since Pagination renders one for us.
    */
   noLabel: PropTypes.bool,
+
+  /**
+   * Provide an optional `onChange` hook that is called each time the value of
+   * the underlying `<input>` changes
+   */
+  onChange: PropTypes.func,
+
+  /**
+   * Specify the size of the Select Input. Currently supports either `sm`, 'md' (default) or 'lg` as an option.
+   * TODO V11: remove `xl` (replaced with lg)
+   */
+  size: PropTypes.oneOf(['sm', 'md', 'lg', 'xl']),
+
+  /**
+   * Specify whether the control is currently in warning state
+   */
+  warn: PropTypes.bool,
+
+  /**
+   * Provide the text that is displayed when the control is in warning state
+   */
+  warnText: PropTypes.node,
 };
 
 Select.defaultProps = {
   disabled: false,
   labelText: 'Select',
   inline: false,
-  iconDescription: 'open list of options',
   invalid: false,
   invalidText: '',
   helperText: '',

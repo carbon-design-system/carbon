@@ -5,12 +5,15 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import { settings } from 'carbon-components';
 import { ListBulleted16, Grid16 } from '@carbon/icons-react';
+import { settings } from 'carbon-components';
+import PropTypes from 'prop-types';
+import React, { Component } from 'react';
+import { warning } from '../../internal/warning';
 
 const { prefix } = settings;
+
+let didWarnAboutDeprecation = false;
 
 /**
  * The layout button for `<Search>`.
@@ -25,9 +28,9 @@ class SearchLayoutButton extends Component {
     format: PropTypes.oneOf(['list', 'grid']),
 
     /**
-     * The a11y label text.
+     * The description for the "grid" icon.
      */
-    labelText: PropTypes.string,
+    iconDescriptionGrid: PropTypes.string,
 
     /**
      * The description for the "list" icon.
@@ -35,9 +38,9 @@ class SearchLayoutButton extends Component {
     iconDescriptionList: PropTypes.string,
 
     /**
-     * The description for the "grid" icon.
+     * The a11y label text.
      */
-    iconDescriptionGrid: PropTypes.string,
+    labelText: PropTypes.string,
 
     /**
      * The callback called when layout switches.
@@ -60,6 +63,17 @@ class SearchLayoutButton extends Component {
           format: format || 'list',
           prevFormat: format,
         };
+  }
+
+  constructor(props) {
+    super(props);
+    if (__DEV__) {
+      warning(
+        didWarnAboutDeprecation,
+        'The SearchLayoutButton component has been deprecated and will be removed in the next major release of `carbon-components-react`'
+      );
+      didWarnAboutDeprecation = true;
+    }
   }
 
   /**

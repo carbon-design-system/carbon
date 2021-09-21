@@ -1,0 +1,357 @@
+import { Story, Props, Source, Preview } from '@storybook/addon-docs/blocks';
+
+# DataTable
+
+[Source code](https://github.com/carbon-design-system/carbon/tree/main/packages/react/src/components/DataTable)
+&nbsp;|&nbsp;
+[Usage guidelines](https://www.carbondesignsystem.com/components/data-table/usage)
+&nbsp;|&nbsp;
+[Accessibility](https://www.carbondesignsystem.com/components/data-table/accessibility)
+
+<Preview>
+  <Story id="components-datatable--usage" />
+</Preview>
+
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+
+## Table of Contents
+
+- [Getting started](#getting-started)
+- [Sorting](#sorting)
+  - [Programmatic sorting](#programmatic-sorting)
+  - [Custom sorting](#custom-sorting)
+- [Expansion](#expansion)
+  - [Programmatic expansion](#programmatic-expansion)
+- [Selection](#selection)
+  - [Programmatic selection](#programmatic-selection)
+- [Filtering](#filtering)
+- [Batch actions](#batch-actions)
+- [Props](#props)
+  - [Render props](#render-props)
+    - [Prop getters](#prop-getters)
+    - [Actions](#actions)
+    - [State](#state)
+- [Feedback](#feedback)
+
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+
+## Getting started
+
+You can implement a data table in your project by importing the `DataTable`
+component and using it along with any additional table components that you need.
+
+```js
+import {
+  DataTable,
+  Table,
+  TableHead,
+  TableRow,
+  TableHeader,
+  TableBody,
+  TableCell,
+} from 'carbon-components-react';
+```
+
+The `DataTable` component needs two props to be provided: `rows` and `headers`.
+The `rows` prop is the data you would like to display in the rows of your table,
+whereas `headers` specifies which table column headings should be displayed.
+
+Each row in the `rows` prop should provide a unique `id`, but everything else
+can be configured according to your data. For example:
+
+```js
+const rows = [
+  {
+    id: 'a',
+    name: 'Load balancer 1',
+    status: 'Disabled',
+  },
+  {
+    id: 'b',
+    name: 'Load balancer 2',
+    status: 'Starting',
+  },
+  {
+    id: 'c',
+    name: 'Load balancer 3',
+    status: 'Active',
+  },
+];
+```
+
+The `headers` will specify the column headers in your table. The `header`
+property for each item will describe what the user sees in the table column
+header. The `key` property is used to relate what value a row has for the given
+column.
+
+```js
+const headers = [
+  {
+    key: 'name',
+    header: 'Name',
+  },
+  {
+    key: 'status',
+    header: 'Status',
+  },
+];
+```
+
+You can use the `rows` and `headers` props above to render a `DataTable` by
+writing:
+
+```jsx
+<DataTable rows={rows} headers={headers}>
+  {({ rows, headers, getTableProps, getHeaderProps, getRowProps }) => (
+    <Table {...getTableProps()}>
+      <TableHead>
+        <TableRow>
+          {headers.map((header) => (
+            <TableHeader {...getHeaderProps({ header })}>
+              {header.header}
+            </TableHeader>
+          ))}
+        </TableRow>
+      </TableHead>
+      <TableBody>
+        {rows.map((row) => (
+          <TableRow {...getRowProps({ row })}>
+            {row.cells.map((cell) => (
+              <TableCell key={cell.id}>{cell.value}</TableCell>
+            ))}
+          </TableRow>
+        ))}
+      </TableBody>
+    </Table>
+  )}
+</DataTable>
+```
+
+After rendering a `DataTable` component using the code snippet above, you can
+optionally add any number of features including sorting, row expansion,
+filtering, row selection, batch actions.
+
+For more information, see each usage section below for the functionality that
+you're interested in. If you want to see a full list of the arguments passed
+into your render prop, visit the [render props](#render-props) section.
+
+## Sorting
+
+In order to sort the rows in your data table, you will need to pass in the
+`isSortable` prop to the `DataTable` component.
+
+<Preview>
+  <Story id="components-datatable-sorting--usage" />
+</Preview>
+
+Optionally, you can pass in `isSortable` to each `TableHeader` that you want to
+be sorted, or not sorted. This is useful if you only want to enable sorting on
+some table column headers, but not all.
+
+```jsx
+<TableHeader {...getHeaderProps({ header, isSortable: false })}>
+  {header.header}
+</TableHeader>
+```
+
+### Programmatic sorting
+
+In addition to the prop getter specified in the previous section, you can also
+change the sort status of the table by using the `sortBy` action made available
+in your `render` prop function. This `sortBy` utility takes in the `key` of the
+header you want to sort by as an argument. After invoking this method with the
+given `key`, the table should be sorted by the header that you've specified.
+
+### Custom sorting
+
+If the default sorting logic doesn't match your use-case, you can provide a
+custom sort method as a `sortRow` prop to `DataTable`.
+
+`sortRow` is a method that takes in the values of two cells, in addition to some
+info, and should return -1, 0, or 1 as a result (mirroring the native sort
+behavior in JavaScript).
+
+The two cells that are passed in are derived by accessing the value of the sort
+header in each row that we're comparing. For example, if we're sorting on the
+`Foo` header, with the `foo` key available in each row, then for row `a` and row
+`b` we would get the `a.foo` and `b.foo` field values.
+
+As a result, a custom `sortRow` function would take on the following shape:
+
+```js
+function customSortRow(cellA, cellB, { sortDirection, sortStates, locale }) {
+  if (sortDirection === sortStates.DESC) {
+    return compare(cellB, cellA, locale);
+  }
+
+  return compare(cellA, cellB, locale);
+}
+```
+
+## Expansion
+
+The `DataTable` components supports row-level expansion when combined with the
+`TableExpandHeader`, `TableExpandRow`, and `TableExpandedRow` components.
+
+<Preview>
+  <Story id="components-datatable-expansion--usage" />
+</Preview>
+
+_Note: press "Show code" above to view a code snippet of this example_
+
+The `TableExpandHeader` is placed before all the other headers as a placeholder
+column. In each row that you would like to be expanded, you will use
+`TableExpandRow`. It's important that `getRowProps` is applied to
+`TableExpandRow` so that it has the necessary props. `TableExpandedRow` is used
+for the content that will be displayed only when the row is expanded.
+
+### Programmatic expansion
+
+You can use the `expandRow` action made available through your `render` prop
+function to toggle the expansion state of a given row. This method takes in the
+row id as a single argument.
+
+## Selection
+
+The `DataTable` component supports row selection when used with the
+`TableSelectAll` and `TableSelectRow` components.
+
+<Preview>
+  <Story id="components-datatable-selection--usage" />
+</Preview>
+
+_Note: press "Show code" above to view a code snippet of this example_
+
+In the example above, `TableSelectAll` is placed before all other headers. You
+should use `getSelectionProps` on `TableSelectAll` to enable selecting all rows
+in the table.
+
+`TableSelectRow` is also used in this example, and is placed before all the
+cells in a row. It also uses `getSelectionProps` props, but also takes in the
+current `row` in order to retrieve selection state about the given row.
+
+You can access all the selected rows through the `selectedRows` property passed
+into your `render` prop function.
+
+#### Programmatic selection
+
+You can use either of the following actions from your `render` prop function to
+update the selection status of a row:
+
+- `selectAll`: invoking this will toggle the selection of all rows, either by
+  making all selected or de-selecting all rows
+- `selectRow`: invoking this will toggle the selection of a specific row. Takes
+  in a valid row id as an argument
+
+## Filtering
+
+Filtering in a `DataTable` is provided through usage of the `TableToolbar` and
+the `TableToolbarSearch` component. Any input entered through
+`TableToolbarSearch` will be used when the `filterRows` prop is applied
+
+By default `filterRows` is provided through our default implementation. However,
+you can provide your own method if needed.
+
+<Preview>
+  <Story id="components-datatable-filtering--usage" />
+</Preview>
+
+In order to integrate filtering into your data table, you will need to provide
+the `onInputChange` function provided to you from `DataTable`'s render prop and
+pass it to the `onChange` prop of `TableToolbarSearch` in your `TableToolbar`
+component.
+
+## Batch actions
+
+You can combine batch actions with the `DataTable` component to allow the user
+to perform a single action on multiple selected rows. To do this, you can use
+the following components:
+
+- `TableToolbar`
+- `TableToolbarAction`
+- `TableToolbarSearch`
+- `TableBatchActions`
+- `TableBatchAction`
+- `TableSelectAll`
+- `TableSelectRow`
+
+<Preview>
+  <Story id="components-datatable-batch-actions--usage" />
+</Preview>
+
+_Note: press "Show code" above to view a code snippet of this example_
+
+## Props
+
+<Props />
+
+### Render props
+
+The types of arguments that this function has are as follows:
+
+- [Prop Getters](#prop-getters)
+- [Actions](#actions)
+- [State](#state)
+
+#### Prop getters
+
+> See
+> [the blog post about prop getters](https://blog.kentcdodds.com/how-to-give-rendering-control-to-users-with-prop-getters-549eaef76acf)
+
+These functions are used to apply props to the elements that you render. The
+idea behind this is that it can allow you more flexibility when deciding when to
+render, and where, while still allowing `DataTable` to help orchestrate state
+changes inside of the Table itself.
+
+You are able to call these on specific elements in your `render` prop function
+by doing the following:
+
+```jsx
+<TableHeader {...getHeaderProps({ header })}>{header.header}</TableHeader>
+```
+
+In order to make sure that everything works as intended, it's important that you
+pass all of the `props` that you want to place on the component as fields on the
+object you give to a prop getter. For example, if you wanted to add an `onClick`
+handler to `TableHeader` above, you would do the following:
+
+```js
+<TableHeader {...getHeaderProps({ header, onClick: this.handleOnClick })}>
+  {header.header}
+</TableHeader>
+```
+
+| Property            | Type                    | Description                                              |
+| ------------------- | ----------------------- | -------------------------------------------------------- |
+| `getHeaderProps`    | `({ header }) => props` | returns the props you should apply to a specific header  |
+| `getRowProps`       | `({ row }) => props`    | returns the props you should apply to a specific row     |
+| `getSelectionProps` | `({ row? }) => props`   | returns the props you should apply to selection elements |
+
+#### Actions
+
+These are functions you can call to change the state of the `DataTable`
+component.
+
+| Property        | Type                          | Description                                     |
+| --------------- | ----------------------------- | ----------------------------------------------- |
+| `sortBy`        | `(headerKey: string) => void` | Sort by the given `headerKey` value             |
+| `selectAll`     | `() => void`                  | Toggle the selection status of all rows         |
+| `selectRow`     | `(rowId: string) => void`     | Select a specific row by the given `rowId`      |
+| `expandRow`     | `(rowId: string) => void`     | Expand a specific row by the given `rowId`      |
+| `onInputChange` | `(event: Event) => void`      | Handle the input change of a table search field |
+
+#### State
+
+These are values that represent the current state of the `DataTable` component.
+
+| Property     | Type    | Description                                     |
+| ------------ | ------- | ----------------------------------------------- |
+| rows         | `Array` | The array of rows to render for the given table |
+| selectedRows | `Array` | the array of currently selected rows            |
+
+## Feedback
+
+Help us improve this component by providing feedback, asking questions on Slack,
+or updating this file on
+[GitHub](https://github.com/carbon-design-system/carbon/edit/main/packages/react/src/components/DataTable/DataTable.mdx).

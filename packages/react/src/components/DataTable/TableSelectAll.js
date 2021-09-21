@@ -49,6 +49,16 @@ TableSelectAll.propTypes = {
   checked: PropTypes.bool.isRequired,
 
   /**
+   * The CSS class names of the cell that wraps the underlying input control
+   */
+  className: PropTypes.string,
+
+  /**
+   * Specify whether the checkbox input should be disabled
+   */
+  disabled: PropTypes.bool,
+
+  /**
    * Provide an `id` for the underlying input control
    */
   id: PropTypes.string.isRequired,
@@ -67,11 +77,6 @@ TableSelectAll.propTypes = {
    * Provide a handler to listen to when a user initiates a selection request
    */
   onSelect: PropTypes.func.isRequired,
-
-  /**
-   * The CSS class names of the cell that wraps the underlying input control
-   */
-  className: PropTypes.string,
 };
 
 TableSelectAll.defaultProps = {

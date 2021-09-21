@@ -15,6 +15,7 @@ const { prefix } = settings;
 const Switch = React.forwardRef(function Switch(props, tabRef) {
   const {
     className,
+    disabled,
     index,
     name,
     onClick,
@@ -24,12 +25,12 @@ const Switch = React.forwardRef(function Switch(props, tabRef) {
     ...other
   } = props;
 
-  const handleClick = e => {
+  const handleClick = (e) => {
     e.preventDefault();
     onClick({ index, name, text });
   };
 
-  const handleKeyDown = event => {
+  const handleKeyDown = (event) => {
     const key = event.key || event.which;
 
     onKeyDown({ index, name, text, key });
@@ -43,17 +44,21 @@ const Switch = React.forwardRef(function Switch(props, tabRef) {
     onClick: handleClick,
     onKeyDown: handleKeyDown,
     className: classes,
+    disabled,
   };
 
   return (
     <button
+      type="button"
       ref={tabRef}
       role="tab"
       tabIndex={selected ? '0' : '-1'}
       aria-selected={selected}
       {...other}
       {...commonProps}>
-      <span className={`${prefix}--content-switcher__label`}>{text}</span>
+      <span className={`${prefix}--content-switcher__label`} title={text}>
+        {text}
+      </span>
     </button>
   );
 });
@@ -65,6 +70,11 @@ Switch.propTypes = {
    * Specify an optional className to be added to your Switch
    */
   className: PropTypes.string,
+
+  /**
+   * Specify whether or not the Switch should be disabled
+   */
+  disabled: PropTypes.bool,
 
   /**
    * The index of your Switch in your ContentSwitcher that is used for event handlers.

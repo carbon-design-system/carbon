@@ -8,7 +8,7 @@
 import eventMatches from '../misc/event-matches';
 import on from '../misc/on';
 
-export default function(ToMix) {
+export default function (ToMix) {
   /**
    * Mix-in class to instantiate components events on launcher button.
    * @class InitComponentByLauncher
@@ -51,8 +51,8 @@ export default function(ToMix) {
       ) {
         this.create(target, options);
       } else {
-        const handles = effectiveOptions.initEventNames.map(name =>
-          on(target, name, event => {
+        const handles = effectiveOptions.initEventNames.map((name) =>
+          on(target, name, (event) => {
             const launcher = eventMatches(
               event,
               `[${effectiveOptions.attribInitTarget}]`

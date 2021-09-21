@@ -9,7 +9,6 @@ import React from 'react';
 import { settings } from 'carbon-components';
 import PropTypes from 'prop-types';
 import ListBoxMenuItem from './ListBoxMenuItem';
-import childrenOfType from '../../prop-types/childrenOfType';
 
 const { prefix } = settings;
 
@@ -18,21 +17,40 @@ const { prefix } = settings;
  * class into a single component. It is also being used to validate given
  * `children` components.
  */
-const ListBoxMenu = ({ children, id, ...rest }) => (
-  <div
-    id={`${id}__menu`}
-    className={`${prefix}--list-box__menu`}
-    role="listbox"
-    {...rest}>
-    {children}
-  </div>
-);
+const ListBoxMenu = React.forwardRef(function ListBoxMenu(
+  { children, id, ...rest },
+  ref
+) {
+  return (
+    <div
+      ref={ref}
+      id={id}
+      className={`${prefix}--list-box__menu`}
+      role="listbox"
+      {...rest}>
+      {children}
+    </div>
+  );
+});
 
+ListBoxMenu.displayName = 'ListBoxMenu';
 ListBoxMenu.propTypes = {
   /**
    * Provide the contents of your ListBoxMenu
    */
-  children: childrenOfType(ListBoxMenuItem),
+  children: PropTypes.oneOfType([
+    PropTypes.node,
+    PropTypes.arrayOf(ListBoxMenuItem),
+    /**
+     * allow single item using the workaround for functional components
+     * https://github.com/facebook/react/issues/2979#issuecomment-222379916
+     */
+    PropTypes.shape({
+      type: PropTypes.oneOf([ListBoxMenuItem]),
+    }),
+    PropTypes.bool, // used in Dropdown for closed state
+  ]),
+
   /**
    * Specify a custom `id`
    */

@@ -158,7 +158,7 @@ an issue over at:
 function indent(string, spaces = 2) {
   return string
     .split('\n')
-    .map(s => s.padStart(spaces + s.length, ' '))
+    .map((s) => s.padStart(spaces + s.length, ' '))
     .join('\n');
 }
 

@@ -16,8 +16,8 @@ import React from 'react';
 export default class InnerClickListener extends React.Component {
   static propTypes = {
     children: PropTypes.node.isRequired,
-    refKey: PropTypes.string.isRequired,
     onClickOutside: PropTypes.func.isRequired,
+    refKey: PropTypes.string.isRequired,
   };
 
   constructor(props) {

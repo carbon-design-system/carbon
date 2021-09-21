@@ -1,0 +1,86 @@
+//
+// Copyright IBM Corp. 2018, 2018
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+@use 'sass:map';
+
+/// Common component easings
+/// @type Map
+/// @access public
+/// @group @carbon/motion
+$easings: (
+  standard: (
+    productive: cubic-bezier(0.2, 0, 0.38, 0.9),
+    expressive: cubic-bezier(0.4, 0.14, 0.3, 1),
+  ),
+  entrance: (
+    productive: cubic-bezier(0, 0, 0.38, 0.9),
+    expressive: cubic-bezier(0, 0, 0.3, 1),
+  ),
+  exit: (
+    productive: cubic-bezier(0.2, 0, 1, 0.9),
+    expressive: cubic-bezier(0.4, 0.14, 1, 1),
+  ),
+);
+
+/// Get the transition-timing-function for a given easing and motion mode
+/// @param {String} $name - Can be `standard`, `entrance`, or `exit`
+/// @param {String} $mode [productive] - Can be `productive` or `expressive`
+/// @param {Map} $easings [$carbon--easings] - Easings map
+/// @access public
+/// @group @carbon/motion
+/// @return {Function} CSS `cubic-bezier()` function
+@function motion($name, $mode: productive, $easings: $easings) {
+  @if map.has-key($easings, $name) {
+    $easing: map.get($easings, $name);
+    @if map.has-key($easing, $mode) {
+      @return map.get($easing, $mode);
+    } @else {
+      @error 'Unable to find a mode for the easing #{$easing} called: #{$mode}.';
+    }
+  } @else {
+    @error 'Unable to find an easing named #{$name} in our supported easings.';
+  }
+}
+
+/// Set the transition-timing-function for a given easing and motion mode
+/// @param {String} $name - The name of the easing curve to apply
+/// @param {String} $mode - The mode for the easing curve to use
+/// @access public
+/// @group @carbon/motion
+@mixin motion($name, $mode) {
+  transition-timing-function: motion($name, $mode);
+}
+
+/// @access public
+/// @type Duration
+/// @group @carbon/motion
+$duration-fast-01: 70ms;
+
+/// @access public
+/// @type Duration
+/// @group @carbon/motion
+$duration-fast-02: 110ms;
+
+/// @access public
+/// @type Duration
+/// @group @carbon/motion
+$duration-moderate-01: 150ms;
+
+/// @access public
+/// @type Duration
+/// @group @carbon/motion
+$duration-moderate-02: 240ms;
+
+/// @access public
+/// @type Duration
+/// @group @carbon/motion
+$duration-slow-01: 400ms;
+
+/// @access public
+/// @type Duration
+/// @group @carbon/motion
+$duration-slow-02: 700ms;

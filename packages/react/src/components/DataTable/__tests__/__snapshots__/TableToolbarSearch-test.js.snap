@@ -6,36 +6,36 @@ exports[`DataTable.TableToolbarSearch should render 1`] = `
   id="custom-id"
   onChange={[MockFunction]}
   persistent={false}
+  tabIndex="0"
   translateWithId={[Function]}
 >
-  <div
-    className="bx--toolbar-action bx--toolbar-search-container-expandable"
+  <Search
+    className="custom-class bx--toolbar-search-container-expandable"
+    closeButtonLabelText="Clear search input"
+    id="custom-id"
+    labelText="Filter table"
     onBlur={[Function]}
-    onClick={[Function]}
+    onChange={[Function]}
     onFocus={[Function]}
-    role="searchbox"
+    placeholder="Filter table"
     tabIndex="0"
+    type="text"
+    value=""
   >
-    <Search
-      aria-hidden={true}
-      className="custom-class"
-      closeButtonLabelText="Clear search input"
-      id="custom-id"
-      labelText="Filter table"
-      onChange={[Function]}
-      placeHolderText="Filter table"
-      size="sm"
-      type="text"
-      value=""
+    <div
+      aria-labelledby="custom-id-search"
+      className="bx--search bx--search--xl custom-class bx--toolbar-search-container-expandable"
+      role="search"
     >
       <div
-        className="bx--search bx--search--sm custom-class"
+        className="bx--search-magnifier"
       >
         <ForwardRef(Search16)
-          className="bx--search-magnifier"
+          className="bx--search-magnifier-icon"
         >
           <Icon
-            className="bx--search-magnifier"
+            className="bx--search-magnifier-icon"
+            fill="currentColor"
             height={16}
             preserveAspectRatio="xMidYMid meet"
             viewBox="0 0 16 16"
@@ -44,15 +44,11 @@ exports[`DataTable.TableToolbarSearch should render 1`] = `
           >
             <svg
               aria-hidden={true}
-              className="bx--search-magnifier"
+              className="bx--search-magnifier-icon"
+              fill="currentColor"
               focusable="false"
               height={16}
               preserveAspectRatio="xMidYMid meet"
-              style={
-                Object {
-                  "willChange": "transform",
-                }
-              }
               viewBox="0 0 16 16"
               width={16}
               xmlns="http://www.w3.org/2000/svg"
@@ -63,58 +59,61 @@ exports[`DataTable.TableToolbarSearch should render 1`] = `
             </svg>
           </Icon>
         </ForwardRef(Search16)>
-        <label
-          className="bx--label"
-          htmlFor="custom-id"
-        >
-          Filter table
-        </label>
-        <input
-          aria-hidden={true}
-          className="bx--search-input"
-          id="custom-id"
-          onChange={[Function]}
-          placeholder="Filter table"
-          type="text"
-          value=""
-        />
-        <button
-          aria-label="Clear search input"
-          className="bx--search-close bx--search-close--hidden"
-          onClick={[Function]}
-          type="button"
-        >
-          <ForwardRef(Close16)>
-            <Icon
+      </div>
+      <label
+        className="bx--label"
+        htmlFor="custom-id"
+        id="custom-id-search"
+      >
+        Filter table
+      </label>
+      <input
+        autoComplete="off"
+        className="bx--search-input"
+        id="custom-id"
+        onBlur={[Function]}
+        onChange={[Function]}
+        onFocus={[Function]}
+        onKeyDown={[Function]}
+        placeholder="Filter table"
+        role="searchbox"
+        tabIndex="0"
+        type="text"
+        value=""
+      />
+      <button
+        aria-label="Clear search input"
+        className="bx--search-close bx--search-close--hidden"
+        onClick={[Function]}
+        type="button"
+      >
+        <ForwardRef(Close16)>
+          <Icon
+            fill="currentColor"
+            height={16}
+            preserveAspectRatio="xMidYMid meet"
+            viewBox="0 0 32 32"
+            width={16}
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <svg
+              aria-hidden={true}
+              fill="currentColor"
+              focusable="false"
               height={16}
               preserveAspectRatio="xMidYMid meet"
-              viewBox="0 0 16 16"
+              viewBox="0 0 32 32"
               width={16}
               xmlns="http://www.w3.org/2000/svg"
             >
-              <svg
-                aria-hidden={true}
-                focusable="false"
-                height={16}
-                preserveAspectRatio="xMidYMid meet"
-                style={
-                  Object {
-                    "willChange": "transform",
-                  }
-                }
-                viewBox="0 0 16 16"
-                width={16}
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  d="M12 4.7L11.3 4 8 7.3 4.7 4 4 4.7 7.3 8 4 11.3 4.7 12 8 8.7 11.3 12 12 11.3 8.7 8z"
-                />
-              </svg>
-            </Icon>
-          </ForwardRef(Close16)>
-        </button>
-      </div>
-    </Search>
-  </div>
+              <path
+                d="M24 9.4L22.6 8 16 14.6 9.4 8 8 9.4 14.6 16 8 22.6 9.4 24 16 17.4 22.6 24 24 22.6 17.4 16 24 9.4z"
+              />
+            </svg>
+          </Icon>
+        </ForwardRef(Close16)>
+      </button>
+    </div>
+  </Search>
 </TableToolbarSearch>
 `;

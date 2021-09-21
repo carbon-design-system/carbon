@@ -19,6 +19,8 @@ const HeaderMenuButton = ({
   'aria-label': ariaLabel,
   'aria-labelledby': ariaLabelledBy,
   className: customClassName,
+  renderMenuIcon,
+  renderCloseIcon,
   onClick,
   isActive,
   isCollapsible,
@@ -36,6 +38,8 @@ const HeaderMenuButton = ({
     'aria-label': ariaLabel,
     'aria-labelledby': ariaLabelledBy,
   };
+  const menuIcon = renderMenuIcon ? renderMenuIcon : <Menu20 />;
+  const closeIcon = renderCloseIcon ? renderCloseIcon : <Close20 />;
 
   return (
     <button
@@ -45,7 +49,7 @@ const HeaderMenuButton = ({
       title={ariaLabel}
       type="button"
       onClick={onClick}>
-      {isActive ? <Close20 /> : <Menu20 />}
+      {isActive ? closeIcon : menuIcon}
     </button>
   );
 };
@@ -62,13 +66,13 @@ HeaderMenuButton.propTypes = {
    */
   className: PropTypes.string,
 
+  isActive: PropTypes.bool,
+
   /**
    * Optionally provide an onClick handler that is called when the underlying
    * button fires it's onclick event
    */
   onClick: PropTypes.func,
-
-  isActive: PropTypes.bool,
 };
 
 export default HeaderMenuButton;

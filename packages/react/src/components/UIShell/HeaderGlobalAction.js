@@ -10,6 +10,7 @@ import cx from 'classnames';
 import React from 'react';
 import PropTypes from 'prop-types';
 import { AriaLabelPropType } from '../../prop-types/AriaPropTypes';
+import Button from '../Button';
 
 const { prefix } = settings;
 
@@ -21,15 +22,19 @@ const { prefix } = settings;
  *
  * Note: children passed to this component should be an Icon.
  */
-const HeaderGlobalAction = ({
-  'aria-label': ariaLabel,
-  'aria-labelledby': ariaLabelledBy,
-  children,
-  className: customClassName,
-  onClick,
-  isActive,
-  ...rest
-}) => {
+const HeaderGlobalAction = React.forwardRef(function HeaderGlobalAction(
+  {
+    'aria-label': ariaLabel,
+    'aria-labelledby': ariaLabelledBy,
+    children,
+    className: customClassName,
+    onClick,
+    isActive,
+    tooltipAlignment,
+    ...rest
+  },
+  ref
+) {
   const className = cx({
     [customClassName]: !!customClassName,
     [`${prefix}--header__action`]: true,
@@ -40,16 +45,21 @@ const HeaderGlobalAction = ({
     'aria-labelledby': ariaLabelledBy,
   };
   return (
-    <button
+    <Button
       {...rest}
       {...accessibilityLabel}
       className={className}
       onClick={onClick}
-      type="button">
+      type="button"
+      hasIconOnly
+      iconDescription={ariaLabel}
+      tooltipPosition="bottom"
+      tooltipAlignment={tooltipAlignment}
+      ref={ref}>
       {children}
-    </button>
+    </Button>
   );
-};
+});
 
 HeaderGlobalAction.propTypes = {
   /**
@@ -69,15 +79,23 @@ HeaderGlobalAction.propTypes = {
   className: PropTypes.string,
 
   /**
+   * Specify whether the action is currently active
+   */
+  isActive: PropTypes.bool,
+
+  /**
    * Optionally provide an onClick handler that is called when the underlying
    * button fires it's onclick event
    */
   onClick: PropTypes.func,
 
   /**
-   * Specify whether the action is currently active
+   * Specify the alignment of the tooltip to the icon-only button.
+   * Can be one of: start, center, or end.
    */
-  isActive: PropTypes.bool,
+  tooltipAlignment: PropTypes.oneOf(['start', 'center', 'end']),
 };
+
+HeaderGlobalAction.displayName = 'HeaderGlobalAction';
 
 export default HeaderGlobalAction;

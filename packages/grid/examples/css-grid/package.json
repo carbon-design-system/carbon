@@ -1,0 +1,17 @@
+{
+  "name": "grid-examples-css-grid",
+  "private": true,
+  "scripts": {
+    "develop": "next",
+    "build": "next build && next export -o build"
+  },
+  "dependencies": {
+    "@carbon/colors": "link:../../../colors",
+    "@carbon/grid": "link:../../",
+    "carbon-components": "link:../../../components",
+    "next": "^10.0.7",
+    "react": "^17.0.1",
+    "react-dom": "^17.0.1",
+    "sass": "^1.36.0"
+  }
+}

@@ -8,6 +8,7 @@
 import React from 'react';
 import { mount } from 'enzyme';
 import { SideNavMenu } from '../SideNavMenu';
+import { SideNavMenuItem } from '../';
 import { settings } from 'carbon-components';
 const { prefix } = settings;
 
@@ -42,6 +43,17 @@ describe('SideNavMenu', () => {
     expect(wrapper.state('isExpanded')).toBe(true);
   });
 
+  it('should collapse the menu when the Esc key is pressed', () => {
+    wrapper = mount(<SideNavMenu {...mockProps} defaultExpanded={true} />);
+    expect(wrapper.state('isExpanded')).toBe(true);
+    wrapper.simulate('keydown', {
+      key: 'Escape',
+      keyCode: 27,
+      which: 27,
+    });
+    expect(wrapper.state('isExpanded')).toBe(false);
+  });
+
   it('should reset expanded state if the isSideNavExpanded prop is false', () => {
     wrapper = mount(<SideNavMenu {...mockProps} />);
     expect(wrapper.state('isExpanded')).toBe(false);
@@ -71,20 +83,25 @@ describe('SideNavMenu', () => {
     ).toBe(false);
     // add a (single) child which is active
     wrapper.setProps({
-      children: <p isActive={true}>Test</p>,
+      children: <SideNavMenuItem isActive={true}>Test</SideNavMenuItem>,
     });
     expect(
-      wrapper.find('li').hasClass(`${prefix}--side-nav__item--active`)
+      wrapper.find('li').at(0).hasClass(`${prefix}--side-nav__item--active`)
     ).toBe(true);
     wrapper.setProps({
-      children: ['entry one', <p aria-current={'page'}>entry two</p>],
+      children: [
+        <SideNavMenuItem key="first">entry one</SideNavMenuItem>,
+        <SideNavMenuItem key="second" aria-current="page">
+          entry two
+        </SideNavMenuItem>,
+      ],
     });
     expect(
-      wrapper.find('li').hasClass(`${prefix}--side-nav__item--active`)
+      wrapper.find('li').at(0).hasClass(`${prefix}--side-nav__item--active`)
     ).toBe(true);
   });
 
-  it('should include a css class to render the large varient is large prop is set', () => {
+  it('should include a css class to render the large variant is large prop is set', () => {
     wrapper = mount(<SideNavMenu {...mockProps} />);
     expect(
       wrapper.find('li').hasClass(`${prefix}--side-nav__item--large`)

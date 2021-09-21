@@ -1,5 +1,3 @@
-<!-- alex disable colors -->
-
 # Colors
 
 <!-- prettier-ignore-start -->

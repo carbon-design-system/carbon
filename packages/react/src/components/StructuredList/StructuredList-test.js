@@ -13,7 +13,7 @@ import {
   StructuredListBody,
   StructuredListRow,
   StructuredListCell,
-} from '../StructuredList';
+} from './StructuredList';
 import { mount, shallow } from 'enzyme';
 import { settings } from 'carbon-components';
 
@@ -33,24 +33,9 @@ describe('StructuredListWrapper', () => {
       expect(wrapper.hasClass('extra-class')).toEqual(true);
     });
 
-    it('By default, border prop is false', () => {
-      wrapper.setProps({ border: false });
-      expect(wrapper.hasClass(`${prefix}--structured-list--border`)).toEqual(
-        false
-      );
-    });
-
     it('By default, selection prop is false', () => {
-      wrapper.setProps({ border: false });
       expect(wrapper.hasClass(`${prefix}--structured-list--selection`)).toEqual(
         false
-      );
-    });
-
-    it('Should add the modifier class for border when border prop is true', () => {
-      wrapper.setProps({ border: true });
-      expect(wrapper.hasClass(`${prefix}--structured-list--border`)).toEqual(
-        true
       );
     });
 
@@ -110,7 +95,7 @@ describe('StructuredListInput', () => {
     it('Should render unique id with multiple inputs when no id prop is given', () => {
       const wrapper1 = mount(<StructuredListInput className="extra-class" />);
       const wrapper2 = mount(<StructuredListInput className="extra-class" />);
-      expect(wrapper1.instance().uid).not.toEqual(wrapper2.instance().uid);
+      expect(wrapper1.find('[id]')).not.toEqual(wrapper2.find('[id]'));
     });
   });
 });

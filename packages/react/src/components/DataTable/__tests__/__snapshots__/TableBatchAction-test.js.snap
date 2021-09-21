@@ -3,6 +3,7 @@
 exports[`DataTable.TableBatchAction should render 1`] = `
 <TableBatchAction
   className="custom-class"
+  iconDescription="test"
   renderIcon={
     Object {
       "$$typeof": Symbol(react.forward_ref),
@@ -10,9 +11,12 @@ exports[`DataTable.TableBatchAction should render 1`] = `
     }
   }
 >
-  <ForwardRef(Button)
+  <Button
     className="custom-class"
+    dangerDescription="danger"
     disabled={false}
+    iconDescription="test"
+    isExpressive={false}
     kind="primary"
     renderIcon={
       Object {
@@ -20,50 +24,66 @@ exports[`DataTable.TableBatchAction should render 1`] = `
         "render": [Function],
       }
     }
+    size="default"
     tabIndex={0}
+    tooltipAlignment="center"
+    tooltipPosition="top"
     type="button"
   >
     <button
+      aria-describedby={null}
+      aria-pressed={null}
       className="custom-class bx--btn bx--btn--primary"
       disabled={false}
+      onBlur={[Function]}
+      onClick={[Function]}
+      onFocus={[Function]}
+      onMouseEnter={[Function]}
+      onMouseLeave={[Function]}
       tabIndex={0}
       type="button"
     >
       <ForwardRef(AddFilled16)
         aria-hidden="true"
+        aria-label="test"
         className="bx--btn__icon"
       >
         <Icon
           aria-hidden="true"
+          aria-label="test"
           className="bx--btn__icon"
+          fill="currentColor"
           height={16}
           preserveAspectRatio="xMidYMid meet"
-          viewBox="0 0 16 16"
+          viewBox="0 0 32 32"
           width={16}
           xmlns="http://www.w3.org/2000/svg"
         >
           <svg
-            aria-hidden={true}
+            aria-hidden="true"
+            aria-label="test"
             className="bx--btn__icon"
+            fill="currentColor"
             focusable="false"
             height={16}
             preserveAspectRatio="xMidYMid meet"
-            style={
-              Object {
-                "willChange": "transform",
-              }
-            }
-            viewBox="0 0 16 16"
+            role="img"
+            viewBox="0 0 32 32"
             width={16}
             xmlns="http://www.w3.org/2000/svg"
           >
             <path
-              d="M8,1C4.2,1,1,4.2,1,8s3.2,7,7,7s7-3.2,7-7S11.8,1,8,1z M12,9H9v3H7V9H4V7h3V4h2v3h3V9z"
+              d="M16,2A14.1725,14.1725,0,0,0,2,16,14.1725,14.1725,0,0,0,16,30,14.1725,14.1725,0,0,0,30,16,14.1725,14.1725,0,0,0,16,2Zm8,15H17v7H15V17H8V15h7V8h2v7h7Z"
+            />
+            <path
+              d="M24 17L17 17 17 24 15 24 15 17 8 17 8 15 15 15 15 8 17 8 17 15 24 15 24 17z"
+              data-icon-path="inner-path"
+              fill="none"
             />
           </svg>
         </Icon>
       </ForwardRef(AddFilled16)>
     </button>
-  </ForwardRef(Button)>
+  </Button>
 </TableBatchAction>
 `;

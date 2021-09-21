@@ -60,8 +60,6 @@ This issue was first reported by @cal-smith
 
 **Where we got lucky**
 
-<!-- alex disable period -->
-
 - We were still within the 72 hour time period required by `npm` for their
   `unpublish` feature to work
 

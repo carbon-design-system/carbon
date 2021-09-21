@@ -50,23 +50,6 @@ describe('Select', () => {
         expect(selectContainer.hasClass('extra-class')).toEqual(true);
       });
 
-      it('has the expected default iconDescription', () => {
-        expect(selectWrapper().props().iconDescription).toEqual(
-          'open list of options'
-        );
-      });
-
-      it('adds new iconDescription when passed via props', () => {
-        wrapper.setProps({ iconDescription: 'new description' });
-        expect(wrapper.props().iconDescription).toEqual('new description');
-      });
-
-      it('should have iconDescription match Icon component description prop', () => {
-        const description = wrapper.find(ChevronDown16).props()['aria-label'];
-        const matches = wrapper.props().iconDescription === description;
-        expect(matches).toEqual(true);
-      });
-
       it('should specify light select as expected', () => {
         expect(selectWrapper().props().light).toEqual(false);
         wrapper.setProps({ light: true });
@@ -128,17 +111,11 @@ describe('Select', () => {
 
       it('renders children as expected', () => {
         wrapper.setProps({
-          helperText: (
-            <span>
-              This helper text has <a href="#">a link</a>.
-            </span>
-          ),
+          helperText: <span>This is helper text.</span>,
         });
         const renderedHelper = wrapper.find(`.${prefix}--form__helper-text`);
         expect(renderedHelper.props().children).toEqual(
-          <span>
-            This helper text has <a href="#">a link</a>.
-          </span>
+          <span>This is helper text.</span>
         );
       });
 
@@ -148,7 +125,8 @@ describe('Select', () => {
       });
     });
   });
-  describe('Renders as expected', () => {
+
+  describe('Renders select as expected', () => {
     const wrapper = mount(
       <Select id="testing" labelText="Select" className="extra-class" inline>
         <SelectItem />
@@ -167,6 +145,15 @@ describe('Select', () => {
 });
 
 describe('refs', () => {
+  let container;
+
+  afterEach(() => {
+    if (container && container.parentNode) {
+      container.parentNode.removeChild(container);
+    }
+    container = null;
+  });
+
   it('should accept refs', () => {
     class MyComponent extends React.Component {
       constructor(props) {
@@ -181,7 +168,12 @@ describe('refs', () => {
         return <Select id="test" labelText="testlabel" ref={this.myRef} />;
       }
     }
-    const wrapper = mount(<MyComponent />);
+    container = document.createElement('div');
+    container.id = 'container';
+    document.body.appendChild(container);
+    const wrapper = mount(<MyComponent />, {
+      attachTo: document.querySelector('#container'),
+    });
     expect(document.activeElement.type).toBeUndefined();
     wrapper.instance().focus();
     expect(document.activeElement.type).toEqual('select-one');

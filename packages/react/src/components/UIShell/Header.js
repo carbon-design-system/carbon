@@ -17,7 +17,7 @@ const Header = ({ className: customClassName, children, ...rest }) => {
   const className = cx(`${prefix}--header`, customClassName);
 
   return (
-    <header {...rest} className={className} role="banner">
+    <header {...rest} className={className}>
       {children}
     </header>
   );

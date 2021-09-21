@@ -42,7 +42,7 @@ export default class NavigationMenu extends NavigationMenuPanel {
     this.manage(on(element, 'click', this._handleClick));
     this.manage(on(element, 'keydown', this._handleKeyDown));
     this.manage(
-      on(this.element.ownerDocument, 'click', event => {
+      on(this.element.ownerDocument, 'click', (event) => {
         if (
           !this.element.hasAttribute('hidden') &&
           !this.triggerButton.contains(event.target) &&
@@ -72,12 +72,12 @@ export default class NavigationMenu extends NavigationMenuPanel {
    * Moves the focus up/down.
    * @param {number} direction The direction of navigating.
    */
-  navigate = direction => {
+  navigate = (direction) => {
     const items = [
       ...this.element.querySelectorAll(this.options.selectorFocusableNavItems),
     ];
     const start = this.getCurrentNavigation();
-    const getNextItem = old => {
+    const getNextItem = (old) => {
       const handleUnderflow = (index, length) =>
         index + (index >= 0 ? 0 : length);
       const handleOverflow = (index, length) =>
@@ -98,7 +98,7 @@ export default class NavigationMenu extends NavigationMenuPanel {
    * Esc closes the menu
    * @param {Event} event The event triggering this method.
    */
-  _handleKeyDown = event => {
+  _handleKeyDown = (event) => {
     // handle Esc
     const isExpanded = !this.element.hasAttribute('hidden');
     if (event.which === 27 && isExpanded) {
@@ -134,7 +134,7 @@ export default class NavigationMenu extends NavigationMenuPanel {
   /**
    * @param {Event} event The event triggering this method
    */
-  _handleFocusOut = event => {
+  _handleFocusOut = (event) => {
     const nextTargetIsOfSelf =
       this.element.contains(event.relatedTarget) ||
       event.relatedTarget === this.triggerButton ||
@@ -159,7 +159,7 @@ export default class NavigationMenu extends NavigationMenuPanel {
     );
     Array.prototype.forEach.call(
       shellNavCategory.querySelectorAll(this.options.selectorShellNavLink),
-      item => {
+      (item) => {
         item.tabIndex = !shouldBeCollapsed ? 0 : -1;
       }
     );
@@ -169,7 +169,7 @@ export default class NavigationMenu extends NavigationMenuPanel {
    * toggle the state of the nav menu on click
    * @param {Event} event The event triggering this method
    */
-  _handleClick = event => {
+  _handleClick = (event) => {
     const matchesNavSubmenu = eventMatches(
       event,
       this.options.selectorShellNavSubmenu
@@ -190,7 +190,7 @@ export default class NavigationMenu extends NavigationMenuPanel {
         ...this.element.querySelectorAll(
           this.options.selectorShellNavLinkCurrent
         ),
-      ].forEach(el => {
+      ].forEach((el) => {
         el.classList.remove(
           this.options.classShellNavItemActive,
           this.options.classShellNavLinkCurrent
@@ -212,7 +212,7 @@ export default class NavigationMenu extends NavigationMenuPanel {
         ...this.element.querySelectorAll(
           this.options.selectorShellNavLinkCurrent
         ),
-      ].forEach(el => {
+      ].forEach((el) => {
         el.classList.remove(
           this.options.classShellNavItemActive,
           this.options.classShellNavLinkCurrent
@@ -236,7 +236,7 @@ export default class NavigationMenu extends NavigationMenuPanel {
    * If `options` is specified in the constructor,
    * {@linkcode NavigationMenu.create .create()}, or
    * {@linkcode NavigationMenu.init .init()},
-   * properties in this object are overriden for the instance being create and
+   * properties in this object are overridden for the instance being create and
    * how {@linkcode NavigationMenu.init .init()} works.
    * @member NavigationMenu.options
    * @type {object}
@@ -273,7 +273,7 @@ export default class NavigationMenu extends NavigationMenuPanel {
    * Enum for navigating backward/forward.
    * @readonly
    * @member NavigationMenuPanel.NAVIGATE
-   * @type {Object}
+   * @type {object}
    * @property {number} BACKWARD Navigating backward.
    * @property {number} FORWARD Navigating forward.
    */

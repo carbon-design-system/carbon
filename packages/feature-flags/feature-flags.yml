@@ -1,0 +1,24 @@
+#
+# Copyright IBM Corp. 2015, 2020
+#
+# This source code is licensed under the Apache-2.0 license found in the
+# LICENSE file in the root directory of this source tree.
+#
+
+feature-flags:
+  - name: enable-css-custom-properties
+    description: Describe what the flag does
+    enabled: false
+  - name: enable-use-controlled-state-with-value
+    description: >
+      Enable components to be created in either a controlled or uncontrolled
+      mode
+    enabled: false
+  - name: enable-css-grid
+    description: >
+      Enable CSS Grid Layout in the Grid and Column React components
+    enabled: false
+  - name: enable-v11-release
+    description: >
+      Enable the features and functionality for the v11 Release
+    enabled: false

@@ -1,0 +1,33 @@
+import { Props } from '@storybook/addon-docs/blocks';
+
+# OverflowMenu
+
+[Source code](https://github.com/carbon-design-system/carbon/tree/main/packages/react/src/components/OverflowMenu)
+&nbsp;|&nbsp;
+[Usage guidelines](https://www.carbondesignsystem.com/components/overflow-menu/usage)
+&nbsp;|&nbsp;
+[Accessibility](https://www.carbondesignsystem.com/components/overflow-menu/accessibility)
+
+## Table of Contents
+
+## Overview
+
+The overflow menu component is a clickable element that contains additional
+options that are available to the user, but there is a space constraint.
+
+### `data-floating-menu-container`
+
+`OverflowMenu` uses React Portals to render the overflow menu into the DOM. To
+determine where in the DOM the menu will be placed, it looks for a parent
+element with the `data-floating-menu-container` attribute. If no parent with
+this attribute is found, the menu will be placed on `document.body`.
+
+## Component API
+
+<Props />
+
+## Feedback
+
+Help us improve this component by providing feedback, asking questions on Slack,
+or updating this file on
+[GitHub](https://github.com/carbon-design-system/carbon/edit/main/packages/react/src/components/OverflowMenu/OverflowMenu.mdx).

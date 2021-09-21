@@ -15,16 +15,16 @@
 @mixin reset {
   @if variable-exists(css--reset) == false or $css--reset == false {
     box-sizing: border-box;
-    margin: 0;
     padding: 0;
     border: 0;
-    font-size: 100%;
+    margin: 0;
     font-family: inherit;
+    font-size: 100%;
     vertical-align: baseline;
 
     *,
-    *:before,
-    *:after {
+    *::before,
+    *::after {
       box-sizing: inherit;
     }
   }
@@ -114,11 +114,11 @@
     mark,
     audio,
     video {
-      margin: 0;
       padding: 0;
       border: 0;
-      font-size: 100%;
+      margin: 0;
       font: inherit;
+      font-size: 100%;
       vertical-align: baseline;
     }
 
@@ -173,12 +173,11 @@
       quotes: none;
     }
 
-    blockquote:before,
-    blockquote:after,
-    q:before,
-    q:after {
+    blockquote::before,
+    blockquote::after,
+    q::before,
+    q::after {
       content: '';
-      content: none;
     }
 
     table {
@@ -188,6 +187,11 @@
 
     * {
       box-sizing: border-box;
+    }
+
+    // Fix to remove added margins on buttons in safari (see #5155)
+    button {
+      margin: 0;
     }
 
     @include carbon--type-reset;

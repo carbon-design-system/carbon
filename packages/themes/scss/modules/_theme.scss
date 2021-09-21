@@ -1,0 +1,120 @@
+//
+// Copyright IBM Corp. 2018, 2018
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+@use 'sass:map';
+@use 'sass:meta';
+@use 'config';
+@use 'themes';
+
+/// Specify the fallback theme, used as a catch-all for tokens that you may not
+/// have defined in your custom theme
+$fallback: themes.$white !default;
+
+/// Specify the current theme. This can override existing tokens, or add new
+/// tokens. If you are adding new tokens, it's recommended that you set the
+/// fallback for your current theme
+$theme: () !default;
+$theme: map.merge($fallback, $theme);
+
+/// Local component tokens that can be updated with `@mixin add-component-tokens`.
+$-component-tokens: ();
+
+/// Include the CSS Custom Properties for the active theme or a given theme on
+/// a selector
+@mixin theme($active-theme: $theme, $component-tokens...) {
+  @each $token, $value in $active-theme {
+    @include -custom-property($token, $value);
+  }
+
+  @each $group in $component-tokens {
+    @each $token, $value in $group {
+      @include -custom-property($token, $value);
+    }
+  }
+
+  @each $token, $value in $-component-tokens {
+    @include -custom-property(
+      $token,
+      -resolve-token-value($active-theme, $value)
+    );
+  }
+}
+
+/// Retrieve the value for the given $token from the current $theme
+/// @param {String} $token
+@function get($token) {
+  @if map.has-key($theme, $token) {
+    @return map.get($theme, $token);
+  }
+  @error "Unable to find token: #{$token} in current $theme";
+}
+
+/// Compare two themes to see if the second theme is a superset of the first
+/// theme. In other words, this function will return true if every token in the
+/// first theme is available in the second theme and has the same value. The
+/// second theme is allowed to have additional values and it will still match.
+/// @param {Map} $a
+/// @param {Map} $b
+/// @returns {Boolean}
+@function matches($a, $b) {
+  @each $key, $value in $a {
+    @if map.has-key($b, $key) == false {
+      @return false;
+    }
+
+    @if map.get($b, $key) != $value {
+      @return false;
+    }
+  }
+
+  @return true;
+}
+
+/// Add component tokens which will be included any time the theme mixin is
+/// called
+@mixin add-component-tokens($token-map) {
+  $-component-tokens: map.merge($-component-tokens, $token-map) !global;
+}
+
+/// Determine the value from a component token that matches the given theme.
+/// This is helpful when a component token may change depending on what theme the
+/// component is being rendered in.
+@function -resolve-token-value($active-theme: $theme, $token-value) {
+  @if meta.type-of($token-value) == map and map.has-key($token-value, values) {
+    $fallback: map.get($token-value, fallback);
+    $theme-values: map.get($token-value, values);
+
+    @each $theme-value in $theme-values {
+      $theme-to-match: map.get($theme-value, theme);
+      $value: map.get($theme-value, value);
+
+      @if matches($theme-to-match, $active-theme) {
+        @return $value;
+      }
+    }
+
+    @return $fallback;
+  }
+
+  @return $token-value;
+}
+
+/// @access private
+/// @group @carbon/themes
+@mixin -custom-property($name, $value) {
+  @if meta.type-of($value) == map {
+    @each $property, $property-value in $value {
+      // Only support one-level of depth for values that are maps. This is to
+      // avoid bringing properties like `breakpoints` on type tokens
+      @if type-of($property-value) != map {
+        @include -custom-property('#{$name}-#{$property}', $property-value);
+      }
+    }
+  } @else {
+    --#{config.$prefix}-#{$name}: #{$value};
+  }
+}

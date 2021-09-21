@@ -14,7 +14,7 @@ import eventMatches from '../../globals/js/misc/event-matches';
 import on from '../../globals/js/misc/on';
 import svgToggleClass from '../../globals/js/misc/svg-toggle-class';
 
-const toArray = arrayLike => Array.prototype.slice.call(arrayLike);
+const toArray = (arrayLike) => Array.prototype.slice.call(arrayLike);
 
 class Search extends mixin(createComponent, initComponentBySearch, handles) {
   /**
@@ -57,7 +57,7 @@ class Search extends mixin(createComponent, initComponentBySearch, handles) {
     }
 
     this.manage(
-      on(this.element, 'click', evt => {
+      on(this.element, 'click', (evt) => {
         const toggleItem = eventMatches(
           evt,
           this.options.selectorIconContainer
@@ -67,7 +67,7 @@ class Search extends mixin(createComponent, initComponentBySearch, handles) {
     );
 
     this.manage(
-      on(input, 'input', evt => {
+      on(input, 'input', (evt) => {
         if (closeIcon) this.showClear(evt.target.value, closeIcon);
       })
     );
@@ -75,11 +75,11 @@ class Search extends mixin(createComponent, initComponentBySearch, handles) {
 
   /**
    * Toggles between the grid and list layout.
-   * @param {HTMLElement} element The element contining the layout toggle.
+   * @param {HTMLElement} element The element continuing the layout toggle.
    */
   toggleLayout(element) {
     toArray(element.querySelectorAll(this.options.selectorSearchView)).forEach(
-      item => {
+      (item) => {
         item.classList.toggle(this.options.classLayoutHidden);
       }
     );
@@ -98,7 +98,7 @@ class Search extends mixin(createComponent, initComponentBySearch, handles) {
    * The component options.
    * If `options` is specified in the constructor,
    * {@linkcode Search.create .create()}, or {@linkcode Search.init .init()},
-   * properties in this object are overriden for the instance being created
+   * properties in this object are overridden for the instance being created
    * and how {@linkcode Search.init .init()} works.
    * @member Search.options
    * @type {object}

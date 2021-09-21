@@ -7,14 +7,21 @@
 
 import PropTypes from 'prop-types';
 import React from 'react';
+import cx from 'classnames';
 import { settings } from 'carbon-components';
 
 const { prefix } = settings;
 
 export default class ToggleSmallSkeleton extends React.Component {
   static propTypes = {
+    ['aria-label']: PropTypes.string.isRequired,
+
     /**
-     * Provide an id that unique represents the underlying <input>
+     * Specify an optional className to add to the form item wrapper.
+     */
+    className: PropTypes.string,
+    /**
+     * Provide an id that unique represents the underlying `<input>`
      */
     id: PropTypes.string,
 
@@ -25,7 +32,6 @@ export default class ToggleSmallSkeleton extends React.Component {
      * provided
      */
     labelText: PropTypes.string,
-    ['aria-label']: PropTypes.string.isRequired,
   };
 
   static defaultProps = {
@@ -33,9 +39,9 @@ export default class ToggleSmallSkeleton extends React.Component {
   };
 
   render() {
-    const { id, labelText } = this.props;
+    const { id, labelText, className, ...rest } = this.props;
     return (
-      <div className={`${prefix}--form-item`}>
+      <div className={cx(`${prefix}--form-item`, className)} {...rest}>
         <input
           type="checkbox"
           id={id}

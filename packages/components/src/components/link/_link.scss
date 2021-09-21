@@ -24,18 +24,21 @@
   .#{$prefix}--link {
     @include reset;
     @include type-style('body-short-01');
+
+    display: inline-flex;
     color: $link-01;
-    text-decoration: none;
     outline: none;
-    transition: $duration--fast-01 motion(standard, productive);
+    text-decoration: none;
+    transition: color $duration--fast-01 motion(standard, productive);
 
     &:hover {
-      color: $link-01;
+      color: $hover-primary-text;
       text-decoration: underline;
     }
 
     &:active,
-    &:active:visited {
+    &:active:visited,
+    &:active:visited:hover {
       color: $text-01;
       text-decoration: underline;
     }
@@ -44,15 +47,8 @@
       @include focus-outline;
     }
 
-    &:not([href]) {
-      color: $disabled-02;
-      cursor: not-allowed;
-      pointer-events: none;
-      touch-action: none;
-    }
-
     &:visited {
-      color: $visited-link;
+      color: $link-01;
     }
 
     &:visited:hover {
@@ -60,26 +56,29 @@
     }
   }
 
-  .#{$prefix}--link--disabled {
+  .#{$prefix}--link--disabled,
+  .#{$prefix}--link--disabled:hover {
     @include reset;
     @include type-style('body-short-01');
-    display: inline;
+
     color: $disabled-02;
-    font-weight: 400;
     cursor: not-allowed;
+    font-weight: 400;
+    text-decoration: none;
+  }
+
+  .#{$prefix}--link.#{$prefix}--link--visited:visited {
+    color: $visited-link;
+  }
+
+  .#{$prefix}--link.#{$prefix}--link--visited:visited:hover {
+    color: $hover-primary-text;
   }
 
   .#{$prefix}--link.#{$prefix}--link--inline {
     text-decoration: underline;
 
-    &:hover {
-      color: $hover-primary-text;
-    }
-
-    &:focus {
-      text-decoration: none;
-    }
-
+    &:focus,
     &:visited {
       text-decoration: none;
     }
@@ -87,6 +86,20 @@
 
   .#{$prefix}--link--disabled.#{$prefix}--link--inline {
     text-decoration: underline;
+  }
+
+  .#{$prefix}--link--sm {
+    @include type-style('helper-text-01');
+  }
+
+  .#{$prefix}--link--lg {
+    @include type-style('body-short-02');
+  }
+
+  .#{$prefix}--link__icon {
+    display: inline-flex;
+    align-self: center;
+    margin-left: $spacing-03;
   }
 }
 

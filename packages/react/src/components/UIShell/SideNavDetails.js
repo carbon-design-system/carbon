@@ -26,15 +26,15 @@ const SideNavDetails = ({ children, className: customClassName, title }) => {
 
 SideNavDetails.propTypes = {
   /**
-   * Optionally provide a custom class to apply to the underlying <li> node
-   */
-  className: PropTypes.string,
-
-  /**
    * Provide optional children to render in `SideNavDetails`. Useful for
    * rendering the `SideNavSwitcher` component.
    */
   children: PropTypes.node,
+
+  /**
+   * Optionally provide a custom class to apply to the underlying `<li>` node
+   */
+  className: PropTypes.string,
 
   /**
    * Provide the text that will be rendered as the title in the component
