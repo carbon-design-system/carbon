@@ -253,7 +253,6 @@ export class ProgressIndicator extends Component {
   };
 
   static contextType = PrefixContext;
-  prefix = this.context;
 
   static defaultProps = {
     currentIndex: 0,

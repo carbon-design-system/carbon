@@ -25,7 +25,6 @@ export default class ComposedModal extends Component {
     selectorPrimaryFocus: '[data-modal-primary-focus]',
   };
 
-  prefix = this.context;
   outerModal = React.createRef();
   innerModal = React.createRef();
   button = React.createRef();
@@ -164,7 +163,7 @@ export default class ComposedModal extends Component {
     if (prevState.open !== this.state.open) {
       toggleClass(
         document.body,
-        `${this.prefix}--body--with-modal-open`,
+        `${this.context}--body--with-modal-open`,
         this.state.open
       );
     }
@@ -186,13 +185,13 @@ export default class ComposedModal extends Component {
   };
 
   componentWillUnmount() {
-    toggleClass(document.body, `${this.prefix}--body--with-modal-open`, false);
+    toggleClass(document.body, `${this.context}--body--with-modal-open`, false);
   }
 
   componentDidMount() {
     toggleClass(
       document.body,
-      `${this.prefix}--body--with-modal-open`,
+      `${this.context}--body--with-modal-open`,
       this.props.open
     );
     if (!this.props.open) {

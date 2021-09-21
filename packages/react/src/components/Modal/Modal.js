@@ -211,7 +211,6 @@ export default class Modal extends Component {
   };
 
   static contextType = PrefixContext;
-  prefix = this.context;
 
   static defaultProps = {
     onRequestClose: () => {},
@@ -234,10 +233,10 @@ export default class Modal extends Component {
   startTrap = React.createRef();
   endTrap = React.createRef();
   modalInstanceId = `modal-${getInstanceId()}`;
-  modalLabelId = `${this.prefix}--modal-header__label--${this.modalInstanceId}`;
-  modalHeadingId = `${this.prefix}--modal-header__heading--${this.modalInstanceId}`;
-  modalBodyId = `${this.prefix}--modal-body--${this.modalInstanceId}`;
-  modalCloseButtonClass = `${this.prefix}--modal-close`;
+  modalLabelId = `${this.context}--modal-header__label--${this.modalInstanceId}`;
+  modalHeadingId = `${this.context}--modal-header__heading--${this.modalInstanceId}`;
+  modalBodyId = `${this.context}--modal-body--${this.modalInstanceId}`;
+  modalCloseButtonClass = `${this.context}--modal-close`;
 
   isCloseButton = (element) => {
     return (
@@ -304,7 +303,7 @@ export default class Modal extends Component {
     }
     toggleClass(
       document.body,
-      `${this.prefix}--body--with-modal-open`,
+      `${this.context}--body--with-modal-open`,
       this.props.open
     );
   }
@@ -330,13 +329,13 @@ export default class Modal extends Component {
   };
 
   componentWillUnmount() {
-    toggleClass(document.body, `${this.prefix}--body--with-modal-open`, false);
+    toggleClass(document.body, `${this.context}--body--with-modal-open`, false);
   }
 
   componentDidMount() {
     toggleClass(
       document.body,
-      `${this.prefix}--body--with-modal-open`,
+      `${this.context}--body--with-modal-open`,
       this.props.open
     );
     if (!this.props.open) {
@@ -359,7 +358,7 @@ export default class Modal extends Component {
   };
 
   render() {
-    const prefix = this.prefix;
+    const prefix = this.context;
     const {
       modalHeading,
       modalLabel,
