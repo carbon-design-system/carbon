@@ -48,12 +48,13 @@ class HeaderMenu extends React.Component {
   };
 
   static contextType = PrefixContext;
-  prefix = this.context;
+
+  static defaultRenderMenuContent = () => (
+    <ChevronDown16 className={`${this.context}--header__menu-arrow`} />
+  );
 
   static defaultProps = {
-    renderMenuContent: (
-      <ChevronDown16 className={`${this.prefix}--header__menu-arrow`} />
-    ),
+    renderMenuContent: this.defaultRenderMenuContent,
   };
 
   _subMenus = React.createRef();
@@ -165,7 +166,7 @@ class HeaderMenu extends React.Component {
   };
 
   render() {
-    const prefix = this.prefix;
+    const prefix = this.context;
     const {
       'aria-label': ariaLabel,
       'aria-labelledby': ariaLabelledBy,

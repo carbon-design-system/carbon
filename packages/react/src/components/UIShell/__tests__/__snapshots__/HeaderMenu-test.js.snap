@@ -25,7 +25,7 @@ exports[`HeaderMenu should render 1`] = `
               test
               <svg
                 aria-hidden="true"
-                class="bx--header__menu-arrow"
+                class="undefined--header__menu-arrow"
                 fill="currentColor"
                 focusable="false"
                 height="16"
@@ -70,12 +70,12 @@ exports[`HeaderMenu should render 1`] = `
         tabIndex={0}
       >
         test
-        <defaultRenderMenuContent>
+        <Component>
           <ForwardRef(ChevronDown16)
-            className="bx--header__menu-arrow"
+            className="undefined--header__menu-arrow"
           >
             <Icon
-              className="bx--header__menu-arrow"
+              className="undefined--header__menu-arrow"
               fill="currentColor"
               height={16}
               preserveAspectRatio="xMidYMid meet"
@@ -85,7 +85,7 @@ exports[`HeaderMenu should render 1`] = `
             >
               <svg
                 aria-hidden={true}
-                className="bx--header__menu-arrow"
+                className="undefined--header__menu-arrow"
                 fill="currentColor"
                 focusable="false"
                 height={16}
@@ -100,7 +100,7 @@ exports[`HeaderMenu should render 1`] = `
               </svg>
             </Icon>
           </ForwardRef(ChevronDown16)>
-        </defaultRenderMenuContent>
+        </Component>
       </a>
       <ul
         aria-label="Accessibility label"
