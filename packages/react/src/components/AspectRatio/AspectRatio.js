@@ -6,9 +6,9 @@
  */
 
 import cx from 'classnames';
-import { usePrefix } from '../../internal/usePrefix';
 import PropTypes from 'prop-types';
 import React from 'react';
+import { usePrefix } from '../../internal/usePrefix';
 
 /**
  * The AspectRatio component provides a `ratio` prop that will be used to
