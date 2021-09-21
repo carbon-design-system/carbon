@@ -39,7 +39,7 @@ export default class HeaderNavigation extends React.Component {
   }
 
   static contextType = PrefixContext;
-  prefix = this.context;
+
   /**
    * Handles individual menuitem refs. We assign them to a class instance
    * property so that we can properly manage focus of our children.
@@ -49,7 +49,7 @@ export default class HeaderNavigation extends React.Component {
   };
 
   render() {
-    const prefix = this.prefix;
+    const prefix = this.context;
     const {
       'aria-label': ariaLabel,
       'aria-labelledby': ariaLabelledBy,
