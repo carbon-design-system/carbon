@@ -73,7 +73,7 @@ export const sortRows = ({
   rowIds.slice().sort((a, b) => {
     const cellA = cellsById[getCellId(a, key)];
     const cellB = cellsById[getCellId(b, key)];
-    return sortRow(cellA.value, cellB.value, {
+    return sortRow(cellA && cellA.value, cellB && cellB.value, {
       key,
       sortDirection,
       locale,
