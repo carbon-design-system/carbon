@@ -8,22 +8,23 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import cx from 'classnames';
-import { settings } from 'carbon-components';
+import { usePrefix } from '../../internal/usePrefix';
 
-const { prefix } = settings;
-
-const CheckboxSkeleton = ({ className, ...rest }) => (
-  <div
-    className={cx(
-      `${prefix}--form-item`,
-      `${prefix}--checkbox-wrapper`,
-      `${prefix}--checkbox-label`,
-      className
-    )}
-    {...rest}>
-    <span className={`${prefix}--checkbox-label-text ${prefix}--skeleton`} />
-  </div>
-);
+const CheckboxSkeleton = ({ className, ...rest }) => {
+  const prefix = usePrefix();
+  return (
+    <div
+      className={cx(
+        `${prefix}--form-item`,
+        `${prefix}--checkbox-wrapper`,
+        `${prefix}--checkbox-label`,
+        className
+      )}
+      {...rest}>
+      <span className={`${prefix}--checkbox-label-text ${prefix}--skeleton`} />
+    </div>
+  );
+};
 
 CheckboxSkeleton.propTypes = {
   /**

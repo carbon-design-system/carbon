@@ -10,7 +10,6 @@ import Downshift from 'downshift';
 import PropTypes from 'prop-types';
 import React, { useEffect, useState, useRef } from 'react';
 import { Text } from '../Text';
-import { settings } from 'carbon-components';
 import {
   Checkmark16,
   WarningAltFilled16,
@@ -23,8 +22,7 @@ import setupGetInstanceId from '../../tools/setupGetInstanceId';
 import { mapDownshiftProps } from '../../tools/createPropAdapter';
 import mergeRefs from '../../tools/mergeRefs';
 import { useFeatureFlag } from '../FeatureFlags';
-
-const { prefix } = settings;
+import { usePrefix } from '../../internal/usePrefix';
 
 const defaultItemToString = (item) => {
   if (typeof item === 'string') {
@@ -102,6 +100,7 @@ const ComboBox = React.forwardRef((props, ref) => {
     warnText,
     ...rest
   } = props;
+  const prefix = usePrefix();
 
   const textInput = useRef();
   const comboBoxInstanceId = getInstanceId();

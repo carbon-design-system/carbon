@@ -8,16 +8,15 @@
 import PropTypes from 'prop-types';
 import React, { useState, useEffect, useRef } from 'react';
 import classNames from 'classnames';
-import { settings } from 'carbon-components';
 import { ButtonKinds } from '../../prop-types/types';
 import deprecate from '../../prop-types/deprecate';
 import { composeEventHandlers } from '../../tools/events';
 import { keys, matches } from '../../internal/keyboard';
+import { usePrefix } from '../../internal/usePrefix';
 import { useId } from '../../internal/useId';
 import toggleClass from '../../tools/toggleClass';
 import { useFeatureFlag } from '../FeatureFlags';
 
-const { prefix } = settings;
 const Button = React.forwardRef(function Button(
   {
     children,
@@ -52,6 +51,7 @@ const Button = React.forwardRef(function Button(
   const [isFocused, setIsFocused] = useState(false);
   const tooltipRef = useRef(null);
   const tooltipTimeout = useRef(null);
+  const prefix = usePrefix();
 
   const closeTooltips = (evt) => {
     const tooltipNode = document?.querySelectorAll(`.${prefix}--tooltip--a11y`);
