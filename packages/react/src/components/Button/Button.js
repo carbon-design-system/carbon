@@ -212,6 +212,7 @@ const Button = React.forwardRef(function Button(
     component = 'a';
     otherProps = anchorProps;
   }
+
   return React.createElement(
     component,
     {
@@ -219,7 +220,7 @@ const Button = React.forwardRef(function Button(
       onMouseLeave: composeEventHandlers([onMouseLeave, handleMouseLeave]),
       onFocus: composeEventHandlers([onFocus, handleFocus]),
       onBlur: composeEventHandlers([onBlur, handleBlur]),
-      onClick: composeEventHandlers([handleClick, onClick]),
+      onClick: composeEventHandlers([onClick, handleClick]),
       ...other,
       ...commonProps,
       ...otherProps,
