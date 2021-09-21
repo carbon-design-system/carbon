@@ -619,6 +619,7 @@ export default class DatePicker extends Component {
       onChange, // eslint-disable-line
       locale, // eslint-disable-line
       value, // eslint-disable-line
+      inline, // eslint-disable-line
       ...rest
     } = this.props;
 
