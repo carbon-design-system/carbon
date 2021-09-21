@@ -76,6 +76,7 @@ Array [
   "IconSkeleton",
   "InlineLoading",
   "InlineNotification",
+  "Layer",
   "Link",
   "ListItem",
   "Loading",
