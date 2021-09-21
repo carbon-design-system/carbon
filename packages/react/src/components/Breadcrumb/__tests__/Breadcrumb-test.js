@@ -7,7 +7,7 @@
 
 import { cleanup, render } from '@testing-library/react';
 import React from 'react';
-import { mount, shallow } from 'enzyme';
+import { mount } from 'enzyme';
 import { settings } from 'carbon-components';
 
 const { prefix } = settings;
