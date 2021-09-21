@@ -5,13 +5,11 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { settings } from 'carbon-components';
 import cx from 'classnames';
 import PropTypes from 'prop-types';
 import React, { useContext } from 'react';
 import { useFeatureFlag } from '../FeatureFlags';
-
-const { prefix } = settings;
+import { usePrefix } from '../../internal/usePrefix';
 
 const SubgridContext = React.createContext(false);
 
@@ -25,6 +23,7 @@ function Grid({
   children,
   ...rest
 }) {
+  const prefix = usePrefix();
   const hasCSSGrid = useFeatureFlag('enable-css-grid');
   const isSubgrid = useContext(SubgridContext);
 
