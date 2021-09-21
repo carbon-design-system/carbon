@@ -23,7 +23,7 @@ describe('Breadcrumb', () => {
   });
 
   it('should render', () => {
-    const wrapper = shallow(
+    const wrapper = mount(
       <Breadcrumb className="parent-class">
         <BreadcrumbItem
           className="some-class"
