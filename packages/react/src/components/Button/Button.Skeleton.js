@@ -8,13 +8,12 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import cx from 'classnames';
-import { settings } from 'carbon-components';
 import { useFeatureFlag } from '../FeatureFlags';
-
-const { prefix } = settings;
+import { usePrefix } from '../../internal/usePrefix';
 
 const ButtonSkeleton = ({ className, small, href, size, ...rest }) => {
   const enabled = useFeatureFlag('enable-v11-release');
+  const prefix = usePrefix();
 
   const buttonClasses = cx(className, {
     [`${prefix}--skeleton`]: true,
