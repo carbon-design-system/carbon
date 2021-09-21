@@ -49,14 +49,6 @@ class HeaderMenu extends React.Component {
 
   static contextType = PrefixContext;
 
-  static defaultRenderMenuContent = () => (
-    <ChevronDown16 className={`${this.context}--header__menu-arrow`} />
-  );
-
-  static defaultProps = {
-    renderMenuContent: this.defaultRenderMenuContent,
-  };
-
   _subMenus = React.createRef();
 
   constructor(props) {
@@ -177,6 +169,7 @@ class HeaderMenu extends React.Component {
       focusRef, // eslint-disable-line no-unused-vars
       ...rest
     } = this.props;
+
     const accessibilityLabel = {
       'aria-label': ariaLabel,
       'aria-labelledby': ariaLabelledBy,
@@ -206,7 +199,11 @@ class HeaderMenu extends React.Component {
           tabIndex={0}
           {...accessibilityLabel}>
           {menuLinkName}
-          <MenuContent />
+          {MenuContent ? (
+            <MenuContent />
+          ) : (
+            <ChevronDown16 className={`${this.context}--header__menu-arrow`} />
+          )}
         </a>
         <ul
           {...accessibilityLabel}
