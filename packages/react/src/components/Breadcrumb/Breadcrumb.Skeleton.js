@@ -26,9 +26,9 @@ function BreadcrumbSkeleton({ className, ...rest }) {
 
   return (
     <div className={classes} {...rest}>
-      {Item()}
-      {Item()}
-      {Item()}
+      <Item />
+      <Item />
+      <Item />
     </div>
   );
 }
