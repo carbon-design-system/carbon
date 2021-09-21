@@ -383,9 +383,7 @@ you're using from `scss/compat/themes` and set that as your theme.
 
 ```scss
 @use '@carbon/styles/scss/compat/themes' as compat;
-@use '@carbon/styles/scss/themes';
 @use '@carbon/styles/scss/compat/theme' with (
-  $fallback: themes.$g100,
   $theme: compat.$g100,
 );
 ```
