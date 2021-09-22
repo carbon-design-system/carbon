@@ -5,27 +5,35 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+import PropTypes from 'prop-types';
 import React from 'react';
+import cx from 'classnames';
 import { settings } from 'carbon-components';
 
 const { prefix } = settings;
 
 const tab = (
-  <li className={`${prefix}--tabs__nav-item`}>
-    <div className={`${prefix}--tabs__nav-link`}>&nbsp;</div>
+  <li className={`${prefix}--tabs--scrollable__nav-item`}>
+    <div className={`${prefix}--tabs__nav-link`}>
+      <span></span>
+    </div>
   </li>
 );
 
-function TabsSkeleton() {
+function TabsSkeleton({ className, type, ...rest }) {
+  const tabClasses = cx(
+    className,
+    `${prefix}--tabs`,
+    `${prefix}--skeleton`,
+    `${prefix}--tabs--scrollable`,
+    {
+      [`${prefix}--tabs--scrollable--container`]: type === 'container',
+    }
+  );
   return (
-    <div className={`${prefix}--tabs ${prefix}--skeleton`}>
-      <div className={`${prefix}--tabs-trigger`}>
-        <div className={`${prefix}--tabs-trigger-text`}>&nbsp;</div>
-        <svg width="10" height="5" viewBox="0 0 10 5" fillRule="evenodd">
-          <path d="M10 0L5 5 0 0z" />
-        </svg>
-      </div>
-      <ul className={`${prefix}--tabs__nav ${prefix}--tabs__nav--hidden`}>
+    <div className={tabClasses} {...rest}>
+      <ul className={`${prefix}--tabs--scrollable__nav`}>
+        {tab}
         {tab}
         {tab}
         {tab}
@@ -34,5 +42,17 @@ function TabsSkeleton() {
     </div>
   );
 }
+
+TabsSkeleton.propTypes = {
+  /**
+   * Specify an optional className to add.
+   */
+  className: PropTypes.string,
+
+  /**
+   * Provide the type of Tab
+   */
+  type: PropTypes.oneOf(['', 'default', 'container']),
+};
 
 export default TabsSkeleton;

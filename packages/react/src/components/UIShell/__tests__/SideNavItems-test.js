@@ -7,7 +7,7 @@
 
 import React from 'react';
 import { mount } from 'enzyme';
-import SideNavItems from '../SideNavItems';
+import { SideNavItems, SideNavItem } from '../';
 
 describe('SideNavItems', () => {
   let mockProps;
@@ -15,7 +15,7 @@ describe('SideNavItems', () => {
   beforeEach(() => {
     mockProps = {
       className: 'custom-classname',
-      children: <span>foo</span>,
+      children: <SideNavItem>test</SideNavItem>,
     };
   });
 

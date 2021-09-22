@@ -5,15 +5,19 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React, { Component } from 'react';
+import React, { Component, useEffect, useRef, useState } from 'react';
 import PropTypes from 'prop-types';
-import classNames from 'classnames';
+import cx from 'classnames';
 import { settings } from 'carbon-components';
+import Link from '../Link';
 import {
-  CheckmarkFilled16 as CheckmarkFilled,
+  Checkbox16,
+  CheckboxCheckedFilled16,
   ChevronDown16,
 } from '@carbon/icons-react';
 import { keys, matches } from '../../internal/keyboard';
+import deprecate from '../../prop-types/deprecate';
+import { composeEventHandlers } from '../../tools/events';
 
 const { prefix } = settings;
 
@@ -41,8 +45,8 @@ export class Tile extends Component {
   };
 
   render() {
-    const { children, className, light, ...other } = this.props;
-    const tileClasses = classNames(
+    const { children, className, light, ...rest } = this.props;
+    const tileClasses = cx(
       `${prefix}--tile`,
       {
         [`${prefix}--tile--light`]: light,
@@ -50,7 +54,7 @@ export class Tile extends Component {
       className
     );
     return (
-      <div className={tileClasses} {...other}>
+      <div className={tileClasses} {...rest}>
         {children}
       </div>
     );
@@ -72,42 +76,69 @@ export class ClickableTile extends Component {
     className: PropTypes.string,
 
     /**
+     * Deprecated in v11. Use 'onClick' instead.
+     */
+    handleClick: deprecate(
+      PropTypes.func,
+      'The handleClick prop for ClickableTile has been deprecated in favor of onClick. It will be removed in the next major release.'
+    ),
+
+    /**
+     * Specify the function to run when the ClickableTile is interacted with via a keyboard
+     */
+    handleKeyDown: deprecate(
+      PropTypes.func,
+      'The handleKeyDown prop for ClickableTile has been deprecated in favor of onKeyDown. It will be removed in the next major release.'
+    ),
+
+    /**
      * The href for the link.
      */
     href: PropTypes.string,
-
-    /**
-     * The rel property for the link.
-     */
-    rel: PropTypes.string,
 
     /**
      * `true` to use the light version. For use on $ui-01 backgrounds only.
      * Don't use this to make tile background color same as container background color.
      */
     light: PropTypes.bool,
+
+    /**
+     * Specify the function to run when the ClickableTile is clicked
+     */
+    onClick: PropTypes.func,
+
+    /**
+     * Specify the function to run when the ClickableTile is interacted with via a keyboard
+     */
+    onKeyDown: PropTypes.func,
+
+    /**
+     * The rel property for the link.
+     */
+    rel: PropTypes.string,
   };
 
   static defaultProps = {
     clicked: false,
-    handleClick: () => {},
-    handleKeyDown: () => {},
+    onClick: () => {},
+    onKeyDown: () => {},
     light: false,
   };
 
-  handleClick = evt => {
+  handleClick = (evt) => {
     evt.persist();
     this.setState(
       {
         clicked: !this.state.clicked,
       },
       () => {
-        this.props.handleClick(evt);
+        // TODO: Remove handleClick prop when handleClick is deprecated
+        this.props.handleClick?.(evt) || this.props.onClick?.(evt);
       }
     );
   };
 
-  handleKeyDown = evt => {
+  handleKeyDown = (evt) => {
     evt.persist();
     if (matches(evt, [keys.Enter, keys.Space])) {
       this.setState(
@@ -115,14 +146,17 @@ export class ClickableTile extends Component {
           clicked: !this.state.clicked,
         },
         () => {
-          this.props.handleKeyDown(evt);
+          // TODO: Remove handleKeyDown prop when handleKeyDown is deprecated
+          this.props.handleKeyDown?.(evt) || this.props.onKeyDown(evt);
         }
       );
     } else {
-      this.props.handleKeyDown(evt);
+      // TODO: Remove handleKeyDown prop when handleKeyDown is deprecated
+      this.props.handleKeyDown?.(evt) || this.props.onKeyDown(evt);
     }
   };
 
+  // eslint-disable-next-line react/prop-types
   static getDerivedStateFromProps({ clicked }, state) {
     const { prevClicked } = state;
     return prevClicked === clicked
@@ -140,13 +174,14 @@ export class ClickableTile extends Component {
       className,
       handleClick, // eslint-disable-line
       handleKeyDown, // eslint-disable-line
+      onClick, // eslint-disable-line
+      onKeyDown, // eslint-disable-line
       clicked, // eslint-disable-line
       light,
-      ...other
+      ...rest
     } = this.props;
 
-    const classes = classNames(
-      `${prefix}--link`,
+    const classes = cx(
       `${prefix}--tile`,
       `${prefix}--tile--clickable`,
       {
@@ -157,199 +192,226 @@ export class ClickableTile extends Component {
     );
 
     return (
-      <a
+      <Link
         href={href}
         className={classes}
-        {...other}
+        {...rest}
         onClick={this.handleClick}
         onKeyDown={this.handleKeyDown}>
         {children}
-      </a>
+      </Link>
     );
   }
 }
 
-export class SelectableTile extends Component {
-  state = {
-    selected: this.props.selected,
-  };
+export function SelectableTile(props) {
+  const {
+    children,
+    id,
+    tabIndex,
+    value,
+    name,
+    title,
+    // eslint-disable-next-line no-unused-vars
+    iconDescription,
+    className,
+    handleClick,
+    handleKeyDown,
+    onClick,
+    onChange,
+    onKeyDown,
+    light,
+    disabled,
+    selected,
+    ...rest
+  } = props;
 
-  static propTypes = {
-    /**
-     * The child nodes.
-     */
-    children: PropTypes.node,
+  // TODO: replace with onClick when handleClick prop is deprecated
+  const clickHandler = handleClick || onClick;
 
-    /**
-     * The CSS class names.
-     */
-    className: PropTypes.string,
+  // TODO: replace with onKeyDown when handleKeyDown prop is deprecated
+  const keyDownHandler = handleKeyDown || onKeyDown;
 
-    /**
-     * `true` to select this tile.
-     */
-    selected: PropTypes.bool,
+  const [isSelected, setIsSelected] = useState(selected);
+  const input = useRef(null);
+  const classes = cx(
+    `${prefix}--tile`,
+    `${prefix}--tile--selectable`,
+    {
+      [`${prefix}--tile--is-selected`]: isSelected,
+      [`${prefix}--tile--light`]: light,
+      [`${prefix}--tile--disabled`]: disabled,
+    },
+    className
+  );
+  const inputClasses = cx(`${prefix}--tile-input`, {
+    [`${prefix}--tile-input--checked`]: isSelected,
+  });
 
-    /**
-     * The ID of the `<input>`.
-     */
-    id: PropTypes.string,
-
-    /**
-     * The value of the `<input>`.
-     */
-    value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
-
-    /**
-     * The `name` of the `<input>`.
-     */
-    name: PropTypes.string,
-
-    /**
-     * The `title` of the `<input>`.
-     */
-    title: PropTypes.string,
-
-    /**
-     * The empty handler of the `<input>`.
-     */
-    onChange: PropTypes.func,
-
-    /**
-     * The description of the checkmark icon.
-     */
-    iconDescription: PropTypes.string,
-
-    /**
-     * Specify the tab index of the wrapper element
-     */
-    tabIndex: PropTypes.number,
-
-    /**
-     * `true` to use the light version. For use on $ui-01 backgrounds only.
-     * Don't use this to make tile background color same as container background color.
-     */
-    light: PropTypes.bool,
-  };
-
-  static defaultProps = {
-    value: 'value',
-    title: 'title',
-    iconDescription: 'Tile checkmark',
-    selected: false,
-    handleClick: () => {},
-    handleKeyDown: () => {},
-    onChange: () => {},
-    tabIndex: 0,
-    light: false,
-  };
-
-  handleClick = evt => {
+  // TODO: rename to handleClick when handleClick prop is deprecated
+  function handleOnClick(evt) {
     evt.preventDefault();
     evt.persist();
-    const isInput = evt.target === this.input;
-    if (!isInput) {
-      this.setState(
-        {
-          selected: !this.state.selected,
-        },
-        () => {
-          this.props.handleClick(evt);
-        }
-      );
-    } else {
-      this.props.handleClick(evt);
-    }
-  };
+    setIsSelected(!isSelected);
+    clickHandler(evt);
+    onChange(evt);
+  }
 
-  handleKeyDown = evt => {
+  // TODO: rename to handleKeyDown when handleKeyDown prop is deprecated
+  function handleOnKeyDown(evt) {
     evt.persist();
     if (matches(evt, [keys.Enter, keys.Space])) {
       evt.preventDefault();
-      this.setState(
-        {
-          selected: !this.state.selected,
-        },
-        () => {
-          this.props.handleKeyDown(evt);
-        }
-      );
-    } else {
-      this.props.handleKeyDown(evt);
+      setIsSelected(!isSelected);
+      onChange(evt);
     }
-  };
-
-  static getDerivedStateFromProps({ selected }, state) {
-    const { prevSelected } = state;
-    return prevSelected === selected
-      ? null
-      : {
-          selected,
-          prevSelected: selected,
-        };
+    keyDownHandler(evt);
   }
 
-  render() {
-    const {
-      children,
-      id,
-      tabIndex,
-      value,
-      name,
-      title,
-      iconDescription,
-      className,
-      handleClick, // eslint-disable-line
-      handleKeyDown, // eslint-disable-line
-      onChange,
-      light,
-      ...other
-    } = this.props;
-
-    const classes = classNames(
-      `${prefix}--tile`,
-      `${prefix}--tile--selectable`,
-      {
-        [`${prefix}--tile--is-selected`]: this.state.selected,
-        [`${prefix}--tile--light`]: light,
-      },
-      className
-    );
-
-    return (
-      <>
-        <input
-          ref={input => {
-            this.input = input;
-          }}
-          tabIndex={-1}
-          id={id}
-          className={`${prefix}--tile-input`}
-          value={value}
-          onChange={onChange}
-          type="checkbox"
-          name={name}
-          title={title}
-          checked={this.state.selected}
-        />
-        <label
-          htmlFor={id}
-          className={classes}
-          tabIndex={tabIndex}
-          {...other}
-          onClick={this.handleClick}
-          onKeyDown={this.handleKeyDown}>
-          <div className={`${prefix}--tile__checkmark`}>
-            <CheckmarkFilled aria-label={iconDescription}>
-              {iconDescription && <title>{iconDescription}</title>}
-            </CheckmarkFilled>
-          </div>
-          <div className={`${prefix}--tile-content`}>{children}</div>
-        </label>
-      </>
-    );
+  function handleChange(event) {
+    setIsSelected(event.target.checked);
+    onChange(event);
   }
+
+  useEffect(() => {
+    setIsSelected(selected);
+  }, [selected]);
+
+  return (
+    <>
+      <input
+        ref={input}
+        tabIndex={-1}
+        id={id}
+        className={inputClasses}
+        value={value}
+        onChange={!disabled ? handleChange : null}
+        type="checkbox"
+        disabled={disabled}
+        name={name}
+        title={title}
+        checked={isSelected}
+      />
+      {/* eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions */}
+      <label
+        htmlFor={id}
+        className={classes}
+        // eslint-disable-next-line jsx-a11y/no-noninteractive-tabindex
+        tabIndex={!disabled ? tabIndex : null}
+        {...rest}
+        onClick={!disabled ? handleOnClick : null}
+        onKeyDown={!disabled ? handleOnKeyDown : null}>
+        <span
+          className={`${prefix}--tile__checkmark ${prefix}--tile__checkmark--persistent`}>
+          {isSelected ? <CheckboxCheckedFilled16 /> : <Checkbox16 />}
+        </span>
+        <span className={`${prefix}--tile-content`}>{children}</span>
+      </label>
+    </>
+  );
 }
+SelectableTile.defaultProps = {
+  value: 'value',
+  title: 'title',
+  selected: false,
+  tabIndex: 0,
+  light: false,
+  onClick: () => {},
+  onChange: () => {},
+  onKeyDown: () => {},
+};
+SelectableTile.propTypes = {
+  /**
+   * The child nodes.
+   */
+  children: PropTypes.node,
+
+  /**
+   * The CSS class names.
+   */
+  className: PropTypes.string,
+
+  /**
+   * Specify whether the SelectableTile should be disabled
+   */
+  disabled: PropTypes.bool,
+
+  /**
+   * Specify the function to run when the SelectableTile is clicked
+   */
+  handleClick: deprecate(
+    PropTypes.func,
+    'The `handleClick` prop for `SelectableTile` has been deprecated in favor of `onClick`. It will be removed in the next major release.'
+  ),
+
+  /**
+   * Specify the function to run when the SelectableTile is interacted with via a keyboard
+   */
+  handleKeyDown: deprecate(
+    PropTypes.func,
+    'The `handleKeyDown` prop for `SelectableTile` has been deprecated in favor of `onKeyDown`. It will be removed in the next major release.'
+  ),
+
+  /**
+   * The description of the checkmark icon.
+   */
+  iconDescription: deprecate(
+    PropTypes.string,
+    'The `iconDescription` prop for `SelectableTile` is no longer needed and has ' +
+      'been deprecated. It will be removed in the next major release.'
+  ),
+
+  /**
+   * The ID of the `<input>`.
+   */
+  id: PropTypes.string,
+
+  /**
+   * `true` to use the light version. For use on $ui-01 backgrounds only.
+   * Don't use this to make tile background color same as container background color.
+   */
+  light: PropTypes.bool,
+
+  /**
+   * The `name` of the `<input>`.
+   */
+  name: PropTypes.string,
+
+  /**
+   * The empty handler of the `<input>`.
+   */
+  onChange: PropTypes.func,
+
+  /**
+   * Specify the function to run when the SelectableTile is clicked
+   */
+  onClick: PropTypes.func,
+
+  /**
+   * Specify the function to run when the SelectableTile is interacted with via a keyboard
+   */
+  onKeyDown: PropTypes.func,
+
+  /**
+   * `true` to select this tile.
+   */
+  selected: PropTypes.bool,
+
+  /**
+   * Specify the tab index of the wrapper element
+   */
+  tabIndex: PropTypes.number,
+
+  /**
+   * The `title` of the `<input>`.
+   */
+  title: PropTypes.string,
+
+  /**
+   * The value of the `<input>`.
+   */
+  value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
+};
 
 export class ExpandableTile extends Component {
   state = {};
@@ -371,9 +433,39 @@ export class ExpandableTile extends Component {
     expanded: PropTypes.bool,
 
     /**
+     * Deprecated in v11. Use 'onClick' instead.
+     */
+    handleClick: deprecate(
+      PropTypes.func,
+      'The handleClick prop for ClickableTile has been deprecated in favor of onClick. It will be removed in the next major release.'
+    ),
+
+    /**
+     * An ID that can be provided to aria-labelledby
+     */
+    id: PropTypes.string,
+
+    /**
+     * `true` to use the light version. For use on $ui-01 backgrounds only.
+     * Don't use this to make tile background color same as container background color.
+     */
+    light: PropTypes.bool,
+
+    /**
      * optional handler to decide whether to ignore a click. returns false if click should be ignored
      */
     onBeforeClick: PropTypes.func,
+
+    /**
+     * Specify the function to run when the ExpandableTile is clicked
+
+     */
+    onClick: PropTypes.func,
+
+    /**
+     * optional handler to trigger a function when a key is pressed
+     */
+    onKeyUp: PropTypes.func,
 
     /**
      * The `tabindex` attribute.
@@ -386,34 +478,35 @@ export class ExpandableTile extends Component {
     tileCollapsedIconText: PropTypes.string,
 
     /**
+     * When "collapsed", a label to appear next to the chevron (e.g., "View more").
+     */
+    tileCollapsedLabel: PropTypes.string,
+
+    /**
      * The description of the "expanded" icon that can be read by screen readers.
      */
     tileExpandedIconText: PropTypes.string,
 
     /**
-     * An ID that can be provided to aria-labelledby
+     * When "expanded", a label to appear next to the chevron (e.g., "View less").
      */
-    id: PropTypes.string,
-
-    /**
-     * `true` to use the light version. For use on $ui-01 backgrounds only.
-     * Don't use this to make tile background color same as container background color.
-     */
-    light: PropTypes.bool,
+    tileExpandedLabel: PropTypes.string,
   };
 
   static defaultProps = {
     tabIndex: 0,
     expanded: false,
-    tileMaxHeight: '0',
+    tileMaxHeight: 0,
+    tilePadding: 0,
     onBeforeClick: () => true,
-    handleClick: () => {},
+    onClick: () => {},
     tileCollapsedIconText: 'Interact to expand Tile',
     tileExpandedIconText: 'Interact to collapse Tile',
     light: false,
   };
 
   static getDerivedStateFromProps(
+    // eslint-disable-next-line react/prop-types
     { expanded, tileMaxHeight, tilePadding },
     state
   ) {
@@ -443,31 +536,40 @@ export class ExpandableTile extends Component {
   }
 
   componentDidMount = () => {
-    const getStyle = window.getComputedStyle(this.tile, null);
+    if (this.tile) {
+      const getStyle = window.getComputedStyle(this.tile, null);
 
-    if (this.aboveTheFold) {
+      if (this.aboveTheFold) {
+        this.setState({
+          tileMaxHeight: this.aboveTheFold.getBoundingClientRect().height,
+          tilePadding:
+            parseInt(getStyle.getPropertyValue('padding-top'), 10) +
+            parseInt(getStyle.getPropertyValue('padding-bottom'), 10),
+        });
+      }
+    }
+  };
+
+  componentDidUpdate = (prevProps) => {
+    if (prevProps.expanded !== this.props.expanded) {
+      this.setMaxHeight();
+    }
+  };
+
+  setMaxHeight = () => {
+    if (this.state.expanded ? this.tileContent : this.aboveTheFold) {
       this.setState({
-        tileMaxHeight: this.aboveTheFold.getBoundingClientRect().height,
-        tilePadding:
-          parseInt(getStyle.getPropertyValue('padding-top'), 10) +
-          parseInt(getStyle.getPropertyValue('padding-bottom'), 10),
+        tileMaxHeight: this.state.expanded
+          ? this.tileContent.getBoundingClientRect().height
+          : this.aboveTheFold.getBoundingClientRect().height,
       });
     }
   };
 
-  componentDidUpdate = prevProps => {
-    if (prevProps.expanded !== this.props.expanded) this.setMaxHeight();
-  };
-
-  setMaxHeight = () =>
-    this.setState({
-      tileMaxHeight: this.state.expanded
-        ? this.tileContent.getBoundingClientRect().height
-        : this.aboveTheFold.getBoundingClientRect().height,
-    });
-
-  handleClick = evt => {
-    if (!this.props.onBeforeClick(evt)) return;
+  handleClick = (evt) => {
+    if (!this.props.onBeforeClick(evt) || evt.target.tagName === 'INPUT') {
+      return;
+    }
     evt.persist();
     this.setState(
       {
@@ -475,23 +577,17 @@ export class ExpandableTile extends Component {
       },
       () => {
         this.setMaxHeight();
-        this.props.handleClick(evt);
+        // TODO: Remove handleClick prop when handleClick is deprecated
+        this.props.handleClick?.(evt) || this.props.onClick?.(evt);
       }
     );
   };
 
-  handleKeyDown = evt => {
-    if (matches(evt, [keys.Enter, keys.Space])) {
-      evt.persist();
-      this.setState(
-        {
-          expanded: !this.state.expanded,
-        },
-        () => {
-          this.setMaxHeight();
-          this.props.handleClick(evt);
-        }
-      );
+  handleKeyUp = (evt) => {
+    if (evt.target !== this.tile) {
+      if (matches(evt, [keys.Enter, keys.Space])) {
+        evt.preventDefault();
+      }
     }
   };
 
@@ -503,29 +599,35 @@ export class ExpandableTile extends Component {
     const {
       tabIndex,
       className,
+      expanded, // eslint-disable-line
       tileMaxHeight, // eslint-disable-line
       tilePadding, // eslint-disable-line
       handleClick, // eslint-disable-line
-      tileCollapsedIconText, // eslint-disable-line
-      tileExpandedIconText, // eslint-disable-line
+      onClick,
+      onKeyUp,
+      tileCollapsedIconText,
+      tileExpandedIconText,
+      tileCollapsedLabel,
+      tileExpandedLabel,
+      onBeforeClick, // eslint-disable-line
       light,
-      ...other
+      ...rest
     } = this.props;
 
-    const { expanded } = this.state;
+    const { expanded: isExpanded } = this.state;
 
-    const classes = classNames(
+    const classes = cx(
       `${prefix}--tile`,
       `${prefix}--tile--expandable`,
       {
-        [`${prefix}--tile--is-expanded`]: expanded,
+        [`${prefix}--tile--is-expanded`]: isExpanded,
         [`${prefix}--tile--light`]: light,
       },
       className
     );
 
     const tileStyle = {
-      maxHeight: expanded
+      maxHeight: isExpanded
         ? null
         : this.state.tileMaxHeight + this.state.tilePadding,
     };
@@ -534,36 +636,37 @@ export class ExpandableTile extends Component {
 
     return (
       // eslint-disable-next-line jsx-a11y/click-events-have-key-events,jsx-a11y/no-static-element-interactions
-      <div
-        ref={tile => {
+      <button
+        type="button"
+        ref={(tile) => {
           this.tile = tile;
         }}
         style={tileStyle}
         className={classes}
-        {...other}
-        onClick={this.handleClick}
-        onKeyPress={this.handleKeyDown}
+        aria-expanded={isExpanded}
+        title={isExpanded ? tileExpandedIconText : tileCollapsedIconText}
+        {...rest}
+        onKeyUp={composeEventHandlers([onKeyUp, this.handleKeyUp])}
+        onClick={composeEventHandlers([onClick, this.handleClick])}
         tabIndex={tabIndex}>
         <div
-          ref={tileContent => {
+          ref={(tileContent) => {
             this.tileContent = tileContent;
           }}>
           <div
-            ref={aboveTheFold => {
+            ref={(aboveTheFold) => {
               this.aboveTheFold = aboveTheFold;
             }}
             className={`${prefix}--tile-content`}>
             {childrenAsArray[0]}
           </div>
-          <button
-            aria-expanded={expanded}
-            aria-label={expanded ? tileExpandedIconText : tileCollapsedIconText}
-            className={`${prefix}--tile__chevron`}>
+          <div className={`${prefix}--tile__chevron`}>
+            <span>{isExpanded ? tileExpandedLabel : tileCollapsedLabel}</span>
             <ChevronDown16 />
-          </button>
+          </div>
           <div className={`${prefix}--tile-content`}>{childrenAsArray[1]}</div>
         </div>
-      </div>
+      </button>
     );
   }
 }

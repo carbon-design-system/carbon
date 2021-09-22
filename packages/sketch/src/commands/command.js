@@ -22,7 +22,7 @@ export function command(name, fn) {
     sketch.UI.message('Done! 🎉');
   } catch (error) {
     console.log(error);
-    sketch.UI.message('An error occured, please check the development logs');
+    sketch.UI.message('An error occurred, please check the development logs');
   }
 
   if (process.env.NODE_ENV === 'development') {

@@ -35,6 +35,7 @@ $disabled: $disabled-02 !default;
 /// @type Color
 /// @access public
 /// @group global-themes
+/// @deprecated
 $disabled-background-color: $disabled-01 !default;
 
 /// @type Color
@@ -88,12 +89,12 @@ $button-border-radius: 0 !default;
 /// @type Number
 /// @access public
 /// @group button
-$button-height: 48px !default;
+$button-height: 3rem !default;
 
 /// @type Value
 /// @access public
 /// @group button
-$button-padding: calc(0.875rem - 3px) 60px calc(0.875rem - 3px) 12px !default;
+$button-padding: calc(0.875rem - 3px) 63px calc(0.875rem - 3px) 15px !default;
 
 /// @type Value
 /// @access public
@@ -114,24 +115,24 @@ $button-padding-lg: $carbon--spacing-04 !default;
 /// @access public
 /// @group button
 /// Uses the same padding-y as normal buttons, but removes extra padding-right
-$button-padding-ghost: calc(0.875rem - 3px) 12px !default;
+$button-padding-ghost: calc(0.875rem - 3px) 16px !default;
 
 /// @type Number
 /// @access public
 /// @group button
 /// Uses the same padding-y as field buttons, but removes extra padding-right
-$button-padding-ghost-field: calc(0.675rem - 3px) 12px !default;
+$button-padding-ghost-field: calc(0.675rem - 3px) 16px !default;
 
 /// @type Number
 /// @access public
 /// @group button
 /// Uses the same padding-y as small buttons, but removes extra padding-right
-$button-padding-ghost-sm: calc(0.375rem - 3px) 1rem !default;
+$button-padding-ghost-sm: calc(0.375rem - 3px) 16px !default;
 
 /// @type Number
 /// @access public
 /// @group button
-$button-border-width: 3px !default;
+$button-border-width: 2px !default;
 
 /// @type Number
 /// @access public
@@ -141,11 +142,13 @@ $button-outline-width: 1px !default;
 /// @type Number
 /// @access public
 /// @group button
+/// @deprecated
 $button-outline-offset: -5px !default;
 
 /// @type Value
 /// @access public
 /// @group button
+/// @deprecated
 $button-outline: 1px solid $ibm-color__white-0 !default;
 
 // Accordion
@@ -187,19 +190,21 @@ $checkbox-border-width: 2px !default;
 /// @type Color
 /// @access public
 /// @group code-snippet
-$snippet-background-color: $ui-01 !default; // TODO: Define for experimental
+/// @deprecated
+$snippet-background-color: $field-01 !default;
 
 /// @type Color
 /// @access public
 /// @group code-snippet
-$snippet-border-color: $ui-03 !default; // TODO: Define for experimental
+/// TODO: Define for experimental
+$snippet-border-color: $ui-03 !default;
 
 // Content Switcher
 
 /// @type Number
 /// @access public
 /// @group content-switcher
-$content-switcher-border-radius: 0px !default;
+$content-switcher-border-radius: 0 !default;
 
 /// @type Number
 /// @access public
@@ -243,6 +248,7 @@ $data-table-column-hover: $hover-selected-ui !default;
 /// @type Color
 /// @access public
 /// @group date-picker
+/// @deprecated
 $date-picker-in-range-background-color: $ibm-color__blue-20 !default;
 
 // Modal
@@ -255,6 +261,7 @@ $modal-border-top: $brand-01 4px solid !default;
 /// @type Color
 /// @access public
 /// @group modal
+/// @deprecated
 $modal-footer-background-color: $ui-03 !default;
 
 // Notification
@@ -262,16 +269,19 @@ $modal-footer-background-color: $ui-03 !default;
 /// @type Color
 /// @access public
 /// @group notification
+/// @deprecated
 $notification-info-background-color: $ibm-color__blue-10 !default;
 
 /// @type Color
 /// @access public
 /// @group notification
+/// @deprecated
 $notification-error-background-color: $ibm-color__red-10 !default;
 
 /// @type Color
 /// @access public
 /// @group notification
+/// @deprecated
 $notification-warning-background-color: mix(
   $ibm-color__yellow-30,
   $ibm-color__white-0,
@@ -281,6 +291,7 @@ $notification-warning-background-color: mix(
 /// @type Color
 /// @access public
 /// @group notification
+/// @deprecated
 $notification-success-background-color: $ibm-color__green-10 !default;
 
 // Progress Indicator
@@ -336,12 +347,12 @@ $structured-list-text-transform: none !default;
 /// @type Value
 /// @access public
 /// @group tabs
-$tab-underline-color: 3px solid $ui-03 !default;
+$tab-underline-color: 2px solid $ui-03 !default;
 
 /// @type Value
 /// @access public
 /// @group tabs
-$tab-underline-color-hover: 3px solid $ui-04 !default;
+$tab-underline-color-hover: 2px solid $ui-04 !default;
 
 /// @type Color
 /// @access public
@@ -351,14 +362,15 @@ $tab-text-disabled: $disabled-02 !default;
 /// @type Value
 /// @access public
 /// @group tabs
-$tab-underline-disabled: 3px solid $disabled-01 !default;
+$tab-underline-disabled: 2px solid $disabled-01 !default;
 
 // Skeleton Loading
 
 /// @type Color
 /// @access public
 /// @group skeleton
-$skeleton: $skeleton-01 !default; // TODO: Remove this in next major release
+/// TODO: Remove this in next major release
+$skeleton: $skeleton-01 !default;
 
 // Light UI
 

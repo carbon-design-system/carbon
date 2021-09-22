@@ -1,0 +1,57 @@
+{
+  "name": "@carbon/feature-flags",
+  "description": "Build with feature flags in Carbon",
+  "version": "0.6.0",
+  "license": "Apache-2.0",
+  "main": "lib/index.js",
+  "module": "es/index.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/carbon-design-system/carbon.git",
+    "directory": "packages/feature-flags"
+  },
+  "bugs": "https://github.com/carbon-design-system/carbon/issues",
+  "files": [
+    "es",
+    "lib",
+    "scss",
+    "index.scss"
+  ],
+  "keywords": [
+    "ibm",
+    "carbon",
+    "carbon-design-system",
+    "components",
+    "react"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "scripts": {
+    "build": "yarn clean && node tasks/build.js && rollup -c",
+    "clean": "rimraf es lib scss/generated src/generated",
+    "watch": "yarn clean && node tasks/build.js && rollup -c -w"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.14.6",
+    "@babel/generator": "^7.14.5",
+    "@babel/preset-env": "^7.14.7",
+    "@babel/template": "^7.14.5",
+    "@babel/types": "^7.14.5",
+    "@carbon/scss-generator": "^10.13.0",
+    "@rollup/plugin-babel": "^5.3.0",
+    "@rollup/plugin-node-resolve": "^13.0.0",
+    "change-case": "^4.1.2",
+    "fs-extra": "^9.0.1",
+    "js-yaml": "^3.14.0",
+    "rimraf": "^3.0.2",
+    "rollup": "^2.46.0",
+    "rollup-plugin-strip-banner": "^2.0.0"
+  },
+  "sideEffects": false,
+  "babel": {
+    "presets": [
+      "@babel/env"
+    ]
+  }
+}

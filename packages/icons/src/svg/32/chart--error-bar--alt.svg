@@ -1,0 +1,14 @@
+<svg id="icon" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: none;
+      }
+    </style>
+  </defs>
+  <title>chart--error-bar-alt</title>
+  <path d="M14,10V8H8v2h2v4.1836a2.983,2.983,0,0,0,0,5.6328V24H8v2h6V24H12V19.8164a2.983,2.983,0,0,0,0-5.6328V10Z"/>
+  <path d="M26,6V4H20V6h2V8.1836a2.983,2.983,0,0,0,0,5.6328V18H20v2h6V18H24V13.8164a2.983,2.983,0,0,0,0-5.6328V6Z"/>
+  <path d="M30,30H4a2,2,0,0,1-2-2V2H4V28H30Z"/>
+  <rect id="_Transparent_Rectangle_" data-name="&lt;Transparent Rectangle&gt;" class="cls-1" width="32" height="32"/>
+</svg>

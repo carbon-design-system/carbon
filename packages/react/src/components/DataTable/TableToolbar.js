@@ -5,6 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+import cx from 'classnames';
 import PropTypes from 'prop-types';
 import React from 'react';
 import { settings } from 'carbon-components';
@@ -12,22 +13,34 @@ import { AriaLabelPropType } from '../../prop-types/AriaPropTypes';
 
 const { prefix } = settings;
 
-const TableToolbar = ({ children, ...rest }) => (
-  <section {...rest} className={`${prefix}--table-toolbar`}>
-    {children}
-  </section>
-);
+const TableToolbar = ({ children, size, ...rest }) => {
+  const className = cx({
+    [`${prefix}--table-toolbar`]: true,
+    [`${prefix}--table-toolbar--${size}`]: size,
+  });
+  return (
+    <section {...rest} className={className}>
+      {children}
+    </section>
+  );
+};
 
 TableToolbar.propTypes = {
+  /**
+   * Required props for the accessibility label of the TableToolbar
+   */
+  ...AriaLabelPropType,
+
   /**
    * Pass in the children that will be rendered inside the TableToolbar
    */
   children: PropTypes.node,
 
   /**
-   * Required props for the accessibility label of the TableToolbar
+   * `normal` Change the row height of table
+   * V11: remove small, normal
    */
-  ...AriaLabelPropType,
+  size: PropTypes.oneOf(['small', 'sm', 'normal', 'lg']),
 };
 
 TableToolbar.defaultProps = {

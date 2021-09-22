@@ -21,12 +21,10 @@ async function check(args, env) {
     stdio: 'inherit',
   };
   const tasks = [
-    'yarn format:diff',
-    'yarn lint --quiet',
-    'yarn lint:docs',
-    `yarn bundler check --ignore '**/@(node_modules|examples|components|react|fixtures)/**' 'packages/**/*.scss'`,
+    `yarn carbon-cli check --ignore '**/@(node_modules|examples|components|react|fixtures|compat)/**' 'packages/**/*.scss'`,
     `cross-env BABEL_ENV=test yarn test --ci --maxWorkers 2 --reporters=default --reporters=jest-junit`,
     `cross-env BABEL_ENV=test yarn test:e2e --ci --maxWorkers 2 --reporters=default --reporters=jest-junit`,
+    `cross-env PERCY_TOKEN=dd3392142006a6483c8f524697f39f052755fa9dc087ff4437cac3d64227abdd yarn run percy exec -- yarn workspace carbon-components-react test:e2e`,
   ];
 
   try {

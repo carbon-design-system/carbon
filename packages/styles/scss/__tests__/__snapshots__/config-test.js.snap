@@ -1,0 +1,11 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`@carbon/styles/scss/config Public API 1`] = `
+Object {
+  "css--default-type": true,
+  "css--font-face": true,
+  "css--plex-arabic": false,
+  "css--reset": true,
+  "prefix": "bx",
+}
+`;

@@ -55,21 +55,6 @@ describe('TimePicker', () => {
         expect(textInput().props().placeholder).toEqual('ss:mm');
       });
     });
-    /*
-    describe('Light', () => {
-      describe('Renders as expected', () => {
-        wrapper = mount(<TimePicker id="test" light className="extra-class" />);
-    
-        it('Has the expected classes for light', () => {
-          expect(wrapper.hasClass(`${prefix}--time-picker--light`)).toEqual(true);
-        });
-    
-        it('Should add extra classes that are passed via className', () => {
-          expect(wrapper.hasClass('extra-class')).toEqual(true);
-        });
-      });
-    });
-    */
 
     describe('label', () => {
       let wrapper;
@@ -118,12 +103,12 @@ describe('TimePicker', () => {
 
       it('should not invoke onClick', () => {
         input.simulate('click');
-        expect(onClick).not.toBeCalled();
+        expect(onClick).not.toHaveBeenCalled();
       });
 
       it('should not invoke onChange', () => {
         input.simulate('change');
-        expect(onChange).not.toBeCalled();
+        expect(onChange).not.toHaveBeenCalled();
       });
     });
 
@@ -150,25 +135,24 @@ describe('TimePicker', () => {
 
       it('should invoke onBlur when input is clicked', () => {
         input.simulate('blur', eventObject);
-        expect(onBlur).toBeCalledWith(eventObject);
+        expect(onBlur).toHaveBeenCalledWith(eventObject);
       });
 
       it('should invoke onClick when input is clicked', () => {
         input.simulate('click', eventObject);
-        expect(onClick).toBeCalledWith(eventObject);
+        expect(onClick).toHaveBeenCalledWith(eventObject);
       });
 
       it('should invoke onChange when input value is changed', () => {
         input.simulate('change', eventObject);
-        expect(onChange).toBeCalledWith(eventObject);
+        expect(onChange).toHaveBeenCalledWith(eventObject);
       });
     });
   });
 
   describe('Getting derived state from props', () => {
-    const wrapper = shallow(<TimePicker />);
-
     it('should change the value upon change in props', () => {
+      const wrapper = shallow(<TimePicker id="test" />);
       wrapper.setProps({ value: 'foo' });
       wrapper.setState({ value: 'foo' });
       wrapper.setProps({ value: 'bar' });
@@ -176,6 +160,7 @@ describe('TimePicker', () => {
     });
 
     it('should avoid change the value upon setting props, unless there the value actually changes', () => {
+      const wrapper = shallow(<TimePicker id="test" />);
       wrapper.setProps({ value: 'foo' });
       wrapper.setState({ value: 'bar' });
       wrapper.setProps({ value: 'foo' });

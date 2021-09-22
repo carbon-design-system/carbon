@@ -35,7 +35,7 @@ describe('type.scss', () => {
 
       expect(style.length).toBe(Object.keys(productiveHeading01).length);
 
-      Object.keys(productiveHeading01).forEach(key => {
+      Object.keys(productiveHeading01).forEach((key) => {
         const property = paramCase(key);
         // We stringify the value from JS due to the fact that most of these
         // values (like numbers) are represented as strings when we get the

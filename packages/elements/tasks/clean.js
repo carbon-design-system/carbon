@@ -15,7 +15,7 @@ const packageJson = require('../package.json');
 
 const WORKSPACE_NODE_MODULES = path.resolve(__dirname, '../../../node_modules');
 const BUNDLE_DIR = path.resolve(__dirname, '../scss');
-const dependencies = Object.keys(packageJson.dependencies).map(key => {
+const dependencies = Object.keys(packageJson.dependencies).map((key) => {
   return [key, path.join(WORKSPACE_NODE_MODULES, key)];
 });
 
@@ -27,6 +27,6 @@ async function clean() {
   );
 }
 
-clean().catch(error => {
+clean().catch((error) => {
   console.error(error);
 });

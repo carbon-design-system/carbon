@@ -2,7 +2,7 @@ import mixin from '../../../src/globals/js/misc/mixin';
 import initComponentByLauncher from '../../../src/globals/js/mixins/init-component-by-launcher';
 import EventManager from '../../utils/event-manager';
 
-describe('Test init component by launcher', function() {
+describe('Test init component by launcher', function () {
   let container;
   let launcherButton;
   let context;
@@ -25,7 +25,7 @@ describe('Test init component by launcher', function() {
     createdByLauncher = spyCreatedByLauncher;
   };
 
-  it('Should throw if given element is null', function() {
+  it('Should throw if given element is null', function () {
     expect(() => {
       Class.init(null);
     }).toThrowError(
@@ -34,7 +34,7 @@ describe('Test init component by launcher', function() {
     );
   });
 
-  it('Should throw if given element is neither a DOM element or a document', function() {
+  it('Should throw if given element is neither a DOM element or a document', function () {
     expect(() => {
       Class.init(document.createTextNode(''));
     }).toThrowError(
@@ -43,7 +43,7 @@ describe('Test init component by launcher', function() {
     );
   });
 
-  it('Should do nothing if there is no target modals for a button upon button click', function() {
+  it('Should do nothing if there is no target modals for a button upon button click', function () {
     launcherButton = document.createElement('a');
     document.body.appendChild(launcherButton);
     expect(
@@ -53,14 +53,14 @@ describe('Test init component by launcher', function() {
     ).toBe(true);
   });
 
-  it('Should create an instance if the given element is of the widget', function() {
+  it('Should create an instance if the given element is of the widget', function () {
     container = document.createElement('div');
     container.dataset.myComponent = '';
     context = Class.init(container, initOptions);
     expect(spyCreate.calls.allArgs()).toEqual([[container, initOptions]]);
   });
 
-  it('Should throw if launcher targets to multiple components', function() {
+  it('Should throw if launcher targets to multiple components', function () {
     const origOnError = window.onError;
     window.onerror = null; // Mocha sets its own global `onerror` handler that causes test to fail
     try {
@@ -84,7 +84,7 @@ describe('Test init component by launcher', function() {
     }
   });
 
-  it('Should launch the component', function() {
+  it('Should launch the component', function () {
     container = document.createElement('div');
     container.dataset.myComponent = '';
     document.body.appendChild(container);
@@ -104,7 +104,7 @@ describe('Test init component by launcher', function() {
     ).toHaveBeenCalledTimes(1);
   });
 
-  it('Should cancel the event if launcher button is <a>', function() {
+  it('Should cancel the event if launcher button is <a>', function () {
     container = document.createElement('div');
     container.dataset.myComponent = '';
     document.body.appendChild(container);
@@ -119,7 +119,7 @@ describe('Test init component by launcher', function() {
     ).toBe(false);
   });
 
-  afterEach(function() {
+  afterEach(function () {
     spyCreatedByLauncher.calls.reset();
     spyCreate.calls.reset();
     events.reset();

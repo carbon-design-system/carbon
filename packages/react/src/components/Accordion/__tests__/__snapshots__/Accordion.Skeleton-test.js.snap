@@ -2,11 +2,12 @@
 
 exports[`AccordionSkeleton should render 1`] = `
 <AccordionSkeleton
+  align="end"
   count={4}
   open={true}
 >
   <ul
-    className="bx--accordion bx--skeleton"
+    className="bx--accordion bx--skeleton bx--accordion--end"
   >
     <li
       className="bx--accordion__item bx--accordion__item--active"
@@ -19,6 +20,7 @@ exports[`AccordionSkeleton should render 1`] = `
         >
           <Icon
             className="bx--accordion__arrow"
+            fill="currentColor"
             height={16}
             preserveAspectRatio="xMidYMid meet"
             viewBox="0 0 16 16"
@@ -28,14 +30,10 @@ exports[`AccordionSkeleton should render 1`] = `
             <svg
               aria-hidden={true}
               className="bx--accordion__arrow"
+              fill="currentColor"
               focusable="false"
               height={16}
               preserveAspectRatio="xMidYMid meet"
-              style={
-                Object {
-                  "willChange": "transform",
-                }
-              }
               viewBox="0 0 16 16"
               width={16}
               xmlns="http://www.w3.org/2000/svg"
@@ -127,6 +125,7 @@ exports[`AccordionSkeleton should render 1`] = `
           >
             <Icon
               className="bx--accordion__arrow"
+              fill="currentColor"
               height={16}
               preserveAspectRatio="xMidYMid meet"
               viewBox="0 0 16 16"
@@ -136,14 +135,10 @@ exports[`AccordionSkeleton should render 1`] = `
               <svg
                 aria-hidden={true}
                 className="bx--accordion__arrow"
+                fill="currentColor"
                 focusable="false"
                 height={16}
                 preserveAspectRatio="xMidYMid meet"
-                style={
-                  Object {
-                    "willChange": "transform",
-                  }
-                }
                 viewBox="0 0 16 16"
                 width={16}
                 xmlns="http://www.w3.org/2000/svg"
@@ -187,6 +182,7 @@ exports[`AccordionSkeleton should render 1`] = `
           >
             <Icon
               className="bx--accordion__arrow"
+              fill="currentColor"
               height={16}
               preserveAspectRatio="xMidYMid meet"
               viewBox="0 0 16 16"
@@ -196,14 +192,10 @@ exports[`AccordionSkeleton should render 1`] = `
               <svg
                 aria-hidden={true}
                 className="bx--accordion__arrow"
+                fill="currentColor"
                 focusable="false"
                 height={16}
                 preserveAspectRatio="xMidYMid meet"
-                style={
-                  Object {
-                    "willChange": "transform",
-                  }
-                }
                 viewBox="0 0 16 16"
                 width={16}
                 xmlns="http://www.w3.org/2000/svg"
@@ -247,6 +239,7 @@ exports[`AccordionSkeleton should render 1`] = `
           >
             <Icon
               className="bx--accordion__arrow"
+              fill="currentColor"
               height={16}
               preserveAspectRatio="xMidYMid meet"
               viewBox="0 0 16 16"
@@ -256,14 +249,10 @@ exports[`AccordionSkeleton should render 1`] = `
               <svg
                 aria-hidden={true}
                 className="bx--accordion__arrow"
+                fill="currentColor"
                 focusable="false"
                 height={16}
                 preserveAspectRatio="xMidYMid meet"
-                style={
-                  Object {
-                    "willChange": "transform",
-                  }
-                }
                 viewBox="0 0 16 16"
                 width={16}
                 xmlns="http://www.w3.org/2000/svg"

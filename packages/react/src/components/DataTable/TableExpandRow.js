@@ -42,6 +42,7 @@ const TableExpandRow = ({
         data-previous-value={previousValue}
         headers={expandHeader}>
         <button
+          type="button"
           className={`${prefix}--table-expand__button`}
           onClick={onExpand}
           title={expandIconDescription}
@@ -63,18 +64,12 @@ TableExpandRow.propTypes = {
    * focused
    */
   ariaLabel: PropTypes.string.isRequired,
-  className: PropTypes.string,
   children: PropTypes.node,
+  className: PropTypes.string,
   /**
-   * Specify whether this row is expanded or not. This helps coordinate data
-   * attributes so that `TableExpandRow` and `TableExapndedRow` work together
+   * The id of the matching th node in the table head. Addresses a11y concerns outlined here: https://www.ibm.com/able/guidelines/ci162/info_and_relationships.html and https://www.w3.org/TR/WCAG20-TECHS/H43
    */
-  isExpanded: PropTypes.bool.isRequired,
-
-  /**
-   * Hook for when a listener initiates a request to expand the given row
-   */
-  onExpand: PropTypes.func.isRequired,
+  expandHeader: PropTypes.string,
 
   /**
    * The description of the chevron right icon, to be put in its SVG `<title>` element.
@@ -82,9 +77,20 @@ TableExpandRow.propTypes = {
   expandIconDescription: PropTypes.string,
 
   /**
-   * The id of the matching th node in the table head. Addresses a11y concerns outlined here: https://www.ibm.com/able/guidelines/ci162/info_and_relationships.html and https://www.w3.org/TR/WCAG20-TECHS/H43
+   * Specify whether this row is expanded or not. This helps coordinate data
+   * attributes so that `TableExpandRow` and `TableExpandedRow` work together
    */
-  expandHeader: PropTypes.string,
+  isExpanded: PropTypes.bool.isRequired,
+
+  /**
+   * Specify if the row is selected
+   */
+  isSelected: PropTypes.bool,
+
+  /**
+   * Hook for when a listener initiates a request to expand the given row
+   */
+  onExpand: PropTypes.func.isRequired,
 };
 
 TableExpandRow.defaultProps = {

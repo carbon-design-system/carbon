@@ -31,7 +31,7 @@ const Switcher = React.forwardRef(function Switcher(props, ref) {
   });
 
   return (
-    <ul ref={ref} className={className} role="menu" {...accessibilityLabel}>
+    <ul ref={ref} className={className} {...accessibilityLabel}>
       {children}
     </ul>
   );
@@ -44,14 +44,14 @@ Switcher.propTypes = {
   ...AriaLabelPropType,
 
   /**
-   * Optionally provide a custom class to apply to the underlying <ul> node
-   */
-  className: PropTypes.string,
-
-  /**
    * expects to receive <SwitcherItem />
    */
   children: PropTypes.node.isRequired,
+
+  /**
+   * Optionally provide a custom class to apply to the underlying `<ul>` node
+   */
+  className: PropTypes.string,
 };
 
 export default Switcher;

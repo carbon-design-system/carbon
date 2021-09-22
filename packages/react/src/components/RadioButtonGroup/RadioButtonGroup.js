@@ -8,15 +8,14 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import classNames from 'classnames';
-import RadioButton from '../RadioButton';
-import warning from 'warning';
+import { warning } from '../../internal/warning';
 import { settings } from 'carbon-components';
+import { Legend } from '../Text';
+import { FeatureFlagContext } from '../FeatureFlags';
 
 const { prefix } = settings;
 
 export default class RadioButtonGroup extends React.Component {
-  state = { selected: this.props.valueSelected || this.props.defaultSelected };
-
   static propTypes = {
     /**
      * Provide a collection of <RadioButton> components to render in the group
@@ -34,9 +33,9 @@ export default class RadioButtonGroup extends React.Component {
     defaultSelected: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
 
     /**
-     * Provide where radio buttons should be placed
+     * Specify whether the group is disabled
      */
-    orientation: PropTypes.oneOf(['horizontal', 'vertical']),
+    disabled: PropTypes.bool,
 
     /**
      * Provide where label text should be placed
@@ -44,20 +43,26 @@ export default class RadioButtonGroup extends React.Component {
     labelPosition: PropTypes.oneOf(['left', 'right']),
 
     /**
-     * Specify the name of the underlying <input> nodes
+     * Provide a legend to the RadioButtonGroup input that you are
+     * exposing to the user
      */
-    name: PropTypes.string.isRequired,
+    legendText: PropTypes.node,
 
     /**
-     * Specify whether the group is disabled
+     * Specify the name of the underlying `<input>` nodes
      */
-    disabled: PropTypes.bool,
+    name: PropTypes.string.isRequired,
 
     /**
      * Provide an optional `onChange` hook that is called whenever the value of
      * the group changes
      */
     onChange: PropTypes.func,
+
+    /**
+     * Provide where radio buttons should be placed
+     */
+    orientation: PropTypes.oneOf(['horizontal', 'vertical']),
 
     /**
      * Specify the value that is currently selected in the group
@@ -71,19 +76,31 @@ export default class RadioButtonGroup extends React.Component {
     onChange: /* istanbul ignore next */ () => {},
   };
 
+  static contextType = FeatureFlagContext;
+
   static getDerivedStateFromProps({ valueSelected, defaultSelected }, state) {
     const { prevValueSelected } = state;
     return prevValueSelected === valueSelected
       ? null
       : {
-          selected: valueSelected || defaultSelected,
+          selected:
+            typeof valueSelected !== 'undefined'
+              ? valueSelected
+              : defaultSelected,
           prevValueSelected: valueSelected,
         };
   }
 
+  state = {
+    selected:
+      typeof this.props.valueSelected !== 'undefined'
+        ? this.props.valueSelected
+        : this.props.defaultSelected,
+  };
+
   getRadioButtons = () => {
-    const children = React.Children.map(this.props.children, radioButton => {
-      const { value, ...other } = radioButton.props;
+    const children = React.Children.map(this.props.children, (radioButton) => {
+      const { value } = radioButton.props;
       /* istanbul ignore if */
       if (typeof radioButton.props.checked !== 'undefined') {
         warning(
@@ -93,16 +110,13 @@ export default class RadioButtonGroup extends React.Component {
         );
       }
 
-      return (
-        <RadioButton
-          {...other}
-          name={this.props.name}
-          key={value}
-          value={value}
-          onChange={this.handleChange}
-          checked={value === this.state.selected}
-        />
-      );
+      return React.cloneElement(radioButton, {
+        name: this.props.name,
+        key: value,
+        value: value,
+        onChange: this.handleChange,
+        checked: value === this.state.selected,
+      });
     });
 
     return children;
@@ -116,11 +130,24 @@ export default class RadioButtonGroup extends React.Component {
   };
 
   render() {
-    const { disabled, className, orientation, labelPosition } = this.props;
+    const {
+      disabled,
+      className,
+      orientation,
+      labelPosition,
+      legendText,
+    } = this.props;
+
+    const scope = this.context;
+    let enabled;
+
+    if (scope.enabled) {
+      enabled = scope.enabled('enable-v11-release');
+    }
 
     const wrapperClasses = classNames(
       `${prefix}--radio-button-group`,
-      className,
+      [enabled ? null : className],
       {
         [`${prefix}--radio-button-group--${orientation}`]:
           orientation === 'vertical',
@@ -129,10 +156,18 @@ export default class RadioButtonGroup extends React.Component {
     );
 
     return (
-      <div className={`${prefix}--form-item`}>
-        <div className={wrapperClasses} disabled={disabled}>
+      <div
+        className={
+          enabled
+            ? classNames(`${prefix}--form-item`, className)
+            : `${prefix}--form-item`
+        }>
+        <fieldset className={wrapperClasses} disabled={disabled}>
+          {legendText && (
+            <Legend className={`${prefix}--label`}>{legendText}</Legend>
+          )}
           {this.getRadioButtons()}
-        </div>
+        </fieldset>
       </div>
     );
   }

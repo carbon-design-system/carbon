@@ -3,11 +3,20 @@
 **/examples/**
 **/vendor/**
 **/_inlined/**
+**/coverage/**
 
 # Generated SCSS directories and files
 **/packages/colors/**/*.scss
 **/packages/elements/scss/**/*.scss
 **/packages/themes/**/*.scss
 
-# Components
-**/packages/components/**
+# packages/components
+packages/components/demo/**
+packages/components/tests/**
+packages/components/css/**
+packages/components/scss/**
+packages/components/src/components/date-picker/_flatpickr.scss
+
+# packages/react
+packages/react/storybook-static/**
+packages/react/src/components/**

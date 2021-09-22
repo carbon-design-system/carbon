@@ -16,13 +16,16 @@ import getDisplayName from './tools/getDisplayName';
  *
  * This prop validator also supports chaining through `isRequired`
  */
-const childrenOfType = expectedChildType => {
+const childrenOfType = (expectedChildType) => {
   const expectedDisplayName = getDisplayName(
     // Support both React elements and components by using `type` if it exists
     expectedChildType.type || expectedChildType
   );
   const validate = (props, propName, componentName) => {
-    Children.forEach(props[propName], child => {
+    Children.forEach(props[propName], (child) => {
+      if (!child) {
+        return;
+      }
       const childDisplayName = getDisplayName(child.type);
       if (
         child.type !== expectedChildType.type &&

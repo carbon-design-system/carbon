@@ -2,9 +2,9 @@ import EventManager from '../utils/event-manager';
 import OverflowMenu from '../../src/components/overflow-menu/overflow-menu';
 import HTML from '../../html/overflow-menu/overflow-menu.html';
 
-describe('Test Overflow menu', function() {
-  describe('Constructor', function() {
-    it('Should throw if root element is not given', function() {
+describe('Test Overflow menu', function () {
+  describe('Constructor', function () {
+    it('Should throw if root element is not given', function () {
       expect(() => {
         new OverflowMenu();
       }).toThrowError(
@@ -13,7 +13,7 @@ describe('Test Overflow menu', function() {
       );
     });
 
-    it('Should throw if root element is not a DOM element', function() {
+    it('Should throw if root element is not a DOM element', function () {
       expect(() => {
         new OverflowMenu(document.createTextNode(''));
       }).toThrowError(
@@ -23,19 +23,19 @@ describe('Test Overflow menu', function() {
     });
   });
 
-  describe('Toggling a single overflow-menu', function() {
+  describe('Toggling a single overflow-menu', function () {
     let menu;
     let element;
     const container = document.createElement('div');
     container.innerHTML = HTML;
 
-    beforeAll(function() {
+    beforeAll(function () {
       document.body.appendChild(container);
       element = document.querySelector('[data-overflow-menu]');
       menu = new OverflowMenu(element);
     });
 
-    it('Should set and remove "bx--overflow-menu--open" class on the element on click event', function() {
+    it('Should set and remove "bx--overflow-menu--open" class on the element on click event', function () {
       // Initial click to open overflow-menu:
       element.dispatchEvent(new CustomEvent('click', { bubbles: true }));
       expect(element.classList.contains('bx--overflow-menu--open')).toBe(true);
@@ -46,17 +46,17 @@ describe('Test Overflow menu', function() {
       expect(element.classList.contains('bx--overflow-menu--open')).toBe(false);
     });
 
-    afterEach(function() {
+    afterEach(function () {
       element.classList.remove('bx--overflow-menu--open');
     });
 
-    afterAll(function() {
+    afterAll(function () {
       menu.release();
       document.body.removeChild(container);
     });
   });
 
-  describe('Custom event emission', function() {
+  describe('Custom event emission', function () {
     let menu;
     let element;
     let optionsElement;
@@ -65,16 +65,16 @@ describe('Test Overflow menu', function() {
 
     const events = new EventManager();
 
-    beforeAll(function() {
+    beforeAll(function () {
       document.body.appendChild(container);
       element = document.querySelector('.bx--overflow-menu');
       optionsElement = element.querySelector('.bx--overflow-menu-options');
       menu = new OverflowMenu(element);
     });
 
-    it('Should provide a way to cancel showing overflow menu', function() {
+    it('Should provide a way to cancel showing overflow menu', function () {
       const spyOverflowEvent = jasmine.createSpy();
-      events.on(element.ownerDocument.body, 'floating-menu-beingshown', e => {
+      events.on(element.ownerDocument.body, 'floating-menu-beingshown', (e) => {
         e.preventDefault();
       });
       events.on(
@@ -93,7 +93,7 @@ describe('Test Overflow menu', function() {
       ).toBe(false);
     });
 
-    describe('Arrow key navigation', function() {
+    describe('Arrow key navigation', function () {
       const upArrowKeydown = new KeyboardEvent('keydown', { bubbles: true });
       Object.defineProperty(upArrowKeydown, 'which', {
         value: 38,
@@ -117,8 +117,8 @@ describe('Test Overflow menu', function() {
         items[0].focus();
       });
 
-      describe('Up/Down arrow keys', function() {
-        it('should move focus from currently focused item to previous menu item', function() {
+      describe('Up/Down arrow keys', function () {
+        it('should move focus from currently focused item to previous menu item', function () {
           spyOn(items[0], 'focus');
           items[1].focus();
           element.dispatchEvent(upArrowKeydown);
@@ -126,20 +126,20 @@ describe('Test Overflow menu', function() {
           expect(items[0].focus).toHaveBeenCalledTimes(1);
         });
 
-        it('should wrap focus from first menu item to last menu item', function() {
+        it('should wrap focus from first menu item to last menu item', function () {
           spyOn(items[items.length - 1], 'focus');
           element.dispatchEvent(upArrowKeydown);
           expect(items[items.length - 1].focus).toHaveBeenCalled();
           expect(items[items.length - 1].focus).toHaveBeenCalledTimes(1);
         });
 
-        it('should move focus from currently focused item to next menu item', function() {
+        it('should move focus from currently focused item to next menu item', function () {
           spyOn(items[1], 'focus');
           optionsElement.dispatchEvent(downArrowKeydown);
           expect(items[1].focus).toHaveBeenCalledTimes(1);
         });
 
-        it('should wrap focus from last menu item to first menu item', function() {
+        it('should wrap focus from last menu item to first menu item', function () {
           spyOn(items[0], 'focus');
           items[items.length - 1].focus();
           optionsElement.dispatchEvent(downArrowKeydown);
@@ -153,18 +153,22 @@ describe('Test Overflow menu', function() {
       });
     });
 
-    it('Should emit an event after showing', function() {
+    it('Should emit an event after showing', function () {
       const spyOverflowEvent = jasmine.createSpy();
       events.on(document, 'floating-menu-shown', spyOverflowEvent);
       element.dispatchEvent(new CustomEvent('click', { bubbles: true }));
       expect(spyOverflowEvent).toHaveBeenCalled();
     });
 
-    it('Should provide a way to cancel hiding overflow menu', function() {
+    it('Should provide a way to cancel hiding overflow menu', function () {
       const spyOverflowEvent = jasmine.createSpy();
-      events.on(element.ownerDocument.body, 'floating-menu-beinghidden', e => {
-        e.preventDefault();
-      });
+      events.on(
+        element.ownerDocument.body,
+        'floating-menu-beinghidden',
+        (e) => {
+          e.preventDefault();
+        }
+      );
       events.on(
         element.ownerDocument.body,
         'floating-menu-hidden',
@@ -183,7 +187,7 @@ describe('Test Overflow menu', function() {
       ).toBe(true);
     });
 
-    it('Should emit an event after hiding', function() {
+    it('Should emit an event after hiding', function () {
       const spyOverflowEvent = jasmine.createSpy();
       events.on(document, 'floating-menu-hidden', spyOverflowEvent);
       element.classList.add('bx--overflow-menu--open');
@@ -193,19 +197,19 @@ describe('Test Overflow menu', function() {
       expect(spyOverflowEvent).toHaveBeenCalled();
     });
 
-    afterEach(function() {
+    afterEach(function () {
       optionsElement.classList.remove('bx--overflow-menu-options--open');
       element.classList.remove('bx--overflow-menu--open');
       events.reset();
     });
 
-    afterAll(function() {
+    afterAll(function () {
       menu.release();
       document.body.removeChild(container);
     });
   });
 
-  describe('Toggling multiple overflow-menus', function() {
+  describe('Toggling multiple overflow-menus', function () {
     let elements;
     let element1;
     let element2;
@@ -214,11 +218,11 @@ describe('Test Overflow menu', function() {
     const container = document.createElement('div');
     container.innerHTML = [HTML, HTML, HTML].join('');
 
-    beforeAll(function() {
+    beforeAll(function () {
       document.body.appendChild(container);
       elements = [...document.querySelectorAll('.bx--overflow-menu')];
       [element1, element2, element3] = elements;
-      optionElements = elements.map(element =>
+      optionElements = elements.map((element) =>
         element.querySelector('.bx--overflow-menu-options')
       );
       new OverflowMenu(element1);
@@ -226,7 +230,7 @@ describe('Test Overflow menu', function() {
       new OverflowMenu(element3);
     });
 
-    it('Should open one menu on a single click event', function() {
+    it('Should open one menu on a single click event', function () {
       element1.dispatchEvent(new CustomEvent('click', { bubbles: true }));
       expect(
         element1.classList.contains('bx--overflow-menu--open'),
@@ -242,7 +246,7 @@ describe('Test Overflow menu', function() {
       ).toBe(false);
     });
 
-    it('Should open one menu on multiple click events', function() {
+    it('Should open one menu on multiple click events', function () {
       element1.dispatchEvent(new CustomEvent('click', { bubbles: true }));
       element2.dispatchEvent(new CustomEvent('click', { bubbles: true }));
       expect(
@@ -259,28 +263,28 @@ describe('Test Overflow menu', function() {
       ).toBe(false);
     });
 
-    afterEach(function() {
-      optionElements.forEach(optionElement => {
+    afterEach(function () {
+      optionElements.forEach((optionElement) => {
         optionElement.classList.remove('bx--overflow-menu-options--open');
       });
-      elements.forEach(element => {
+      elements.forEach((element) => {
         element.classList.remove('bx--overflow-menu--open');
       });
     });
 
-    afterAll(function() {
+    afterAll(function () {
       document.body.removeChild(container);
     });
   });
 
-  describe('Managing focus', function() {
+  describe('Managing focus', function () {
     let menu;
     let element;
     let firstItemNode;
     const container = document.createElement('div');
     container.innerHTML = HTML;
 
-    beforeAll(function() {
+    beforeAll(function () {
       document.body.appendChild(container);
       element = document.querySelector('.bx--overflow-menu');
       firstItemNode = element.querySelector(
@@ -289,24 +293,24 @@ describe('Test Overflow menu', function() {
       menu = new OverflowMenu(element);
     });
 
-    it('Should focus on the floating menu when the menu is open', function() {
+    it('Should focus on the floating menu when the menu is open', function () {
       spyOn(firstItemNode, 'focus');
       element.dispatchEvent(new CustomEvent('click', { bubbles: true }));
       expect(firstItemNode.focus).toHaveBeenCalledTimes(1);
     });
 
-    afterAll(function() {
+    afterAll(function () {
       menu.release();
       document.body.removeChild(container);
     });
   });
 
-  describe('Managing instances', function() {
+  describe('Managing instances', function () {
     let menu;
     let element;
     let container;
 
-    beforeEach(function() {
+    beforeEach(function () {
       container = document.createElement('div');
       container.innerHTML = HTML;
       document.body.appendChild(container);
@@ -314,14 +318,14 @@ describe('Test Overflow menu', function() {
       menu = OverflowMenu.create(element);
     });
 
-    it('Should remove click event listener on document object once the instance is released', function() {
+    it('Should remove click event listener on document object once the instance is released', function () {
       element.classList.add('bx--overflow-menu--open');
       menu.release();
       document.body.dispatchEvent(new CustomEvent('click', { bubbles: true }));
       expect(element.classList.contains('bx--overflow-menu--open')).toBe(true);
     });
 
-    it('Should remove keypress event listener on document object once the instance is released', function() {
+    it('Should remove keypress event listener on document object once the instance is released', function () {
       element.classList.add('bx--overflow-menu--open');
       menu.release();
       const event = new CustomEvent('keypress', { bubbles: true });
@@ -330,7 +334,7 @@ describe('Test Overflow menu', function() {
       expect(element.classList.contains('bx--overflow-menu--open')).toBe(true);
     });
 
-    afterEach(function() {
+    afterEach(function () {
       document.body.removeChild(container);
       menu.release();
     });

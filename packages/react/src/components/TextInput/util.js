@@ -1,10 +1,21 @@
-const invalidProps = ({ invalid, errorId }) => ({
-  'data-invalid': invalid,
-  'aria-invalid': invalid,
-  'aria-describedby': errorId,
+const invalidProps = (invalidId) => ({
+  'data-invalid': true,
+  'aria-invalid': true,
+  'aria-describedby': invalidId,
 });
 
-export const textInputProps = ({ invalid, sharedTextInputProps, errorId }) => ({
+const warnProps = (warnId) => ({
+  'aria-describedby': warnId,
+});
+
+export const textInputProps = ({
+  sharedTextInputProps,
+  invalid,
+  invalidId,
+  warn,
+  warnId,
+}) => ({
   ...sharedTextInputProps,
-  ...(invalid ? invalidProps({ invalid, errorId }) : {}),
+  ...(invalid ? invalidProps(invalidId) : {}),
+  ...(warn ? warnProps(warnId) : {}),
 });

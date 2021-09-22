@@ -20,35 +20,54 @@
 @mixin lists {
   .#{$prefix}--list--nested,
   .#{$prefix}--list--unordered,
-  .#{$prefix}--list--ordered {
+  .#{$prefix}--list--ordered,
+  .#{$prefix}--list--ordered--native {
     @include reset;
-    @include type-style('body-short-01');
+    @include type-style('body-long-01');
+
+    list-style: none;
+  }
+
+  .#{$prefix}--list--expressive,
+  .#{$prefix}--list--expressive .#{$prefix}--list--nested {
+    @include type-style('body-long-02');
+  }
+
+  .#{$prefix}--list--ordered--native {
+    list-style: decimal;
   }
 
   .#{$prefix}--list__item {
     color: $text-01;
-    margin-bottom: $carbon--spacing-02;
   }
 
   .#{$prefix}--list--nested {
-    margin-top: $carbon--spacing-02;
-    margin-left: $carbon--spacing-06;
+    margin-left: rem(32px);
   }
 
-  .#{$prefix}--list--nested > .#{$prefix}--list__item {
-    margin-top: 0;
-    margin-bottom: 0;
+  .#{$prefix}--list--nested .#{$prefix}--list__item {
+    padding-left: $carbon--spacing-02;
   }
 
-  .#{$prefix}--list--nested .#{$prefix}--list--nested {
-    margin-top: 0;
+  .#{$prefix}--list--ordered:not(.#{$prefix}--list--nested) {
+    counter-reset: item;
   }
 
-  .#{$prefix}--list--ordered {
-    list-style-type: decimal;
+  .#{$prefix}--list--ordered:not(.#{$prefix}--list--nested)
+    > .#{$prefix}--list__item {
+    position: relative;
   }
 
-  .#{$prefix}--list--ordered.#{$prefix}--list--nested {
+  .#{$prefix}--list--ordered:not(.#{$prefix}--list--nested)
+    > .#{$prefix}--list__item::before {
+    position: absolute;
+    left: rem(-24px);
+    content: counter(item) '.';
+    counter-increment: item;
+  }
+
+  .#{$prefix}--list--ordered.#{$prefix}--list--nested,
+  .#{$prefix}--list--ordered--native.#{$prefix}--list--nested {
     list-style-type: lower-latin;
   }
 
@@ -58,14 +77,17 @@
     &::before {
       position: absolute;
       left: -$carbon--spacing-05;
-      content: '\002013'; // – en dash
+      // – en dash
+      content: '\002013';
     }
   }
 
   .#{$prefix}--list--unordered.#{$prefix}--list--nested
     > .#{$prefix}--list__item::before {
-    left: -$carbon--spacing-04; // offset to account for smaller ▪ vs –
-    content: '\0025AA'; // ▪ square
+    // offset to account for smaller ▪ vs –
+    left: -$carbon--spacing-04;
+    // ▪ square
+    content: '\0025AA';
   }
 }
 

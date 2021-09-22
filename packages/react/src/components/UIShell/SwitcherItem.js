@@ -38,7 +38,7 @@ const SwitcherItem = React.forwardRef(function SwitcherItem(props, ref) {
   });
 
   return (
-    <li className={className} role="menuitem">
+    <li className={className}>
       <Link
         {...rest}
         ref={ref}
@@ -58,14 +58,14 @@ SwitcherItem.propTypes = {
   ...AriaLabelPropType,
 
   /**
-   * Optionally provide a custom class to apply to the underlying <li> node
-   */
-  className: PropTypes.string,
-
-  /**
    * Specify the text content for the link
    */
   children: PropTypes.node.isRequired,
+
+  /**
+   * Optionally provide a custom class to apply to the underlying `<li>` node
+   */
+  className: PropTypes.string,
 };
 
 export default SwitcherItem;

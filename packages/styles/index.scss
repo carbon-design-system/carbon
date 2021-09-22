@@ -1,0 +1,18 @@
+//
+// Copyright IBM Corp. 2018, 2018
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+@forward 'scss/config';
+@forward 'scss/colors' hide $white;
+@forward 'scss/font-face';
+@forward 'scss/grid';
+@forward 'scss/motion';
+@forward 'scss/type';
+@forward 'scss/themes';
+@forward 'scss/theme';
+
+@use 'scss/reset';
+@use 'scss/components';

@@ -5,15 +5,16 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-/* eslint-disable no-console */
-
 'use strict';
 
 const cli = require('yargs');
+const isGitClean = require('is-git-clean');
 const packageJson = require('../package.json');
 const { UpgradeError } = require('./error');
-const { reporter } = require('./reporter');
-const { run, runInDirectory } = require('./runner');
+const { Migration } = require('./migration');
+const { Planner } = require('./planner');
+const { Project } = require('./project');
+const { Runner } = require('./runner');
 
 async function main({ argv, cwd }) {
   cli.scriptName(packageJson.name).version(packageJson.version);
@@ -23,82 +24,77 @@ async function main({ argv, cwd }) {
       default: false,
       describe: 'display the full output while running a command',
     })
-    .option('dry', {
-      alias: 'd',
-      describe:
-        'view the result of running this command without changing any files',
+    .option('write', {
+      alias: 'w',
+      describe: 'update the files with changes found by running the migration',
       default: false,
     })
     .option('ignore', {
       alias: 'i',
       describe:
         'provide a list of glob pattern for directories you would like ignored',
-      default: '',
+      default: [],
       array: true,
     });
 
-  cli
-    .usage('Usage: $0 [options]')
-    .command('$0', 'run to upgrade your project', {}, async args => {
-      const { dry, ignore, verbose } = args;
-      const options = {
-        cwd: cwd(),
-        dry,
-        ignore,
-        verbose,
-      };
-
-      await runCommand(() => runInDirectory(options), options);
-    });
-
-  cli.command(
-    'migrate <package> <from> <to>',
-    'run a specific migration for a package',
+  cli.usage('Usage: $0 [options]').command(
+    '$0',
+    'run to upgrade your project',
     {},
-    async args => {
-      const { dry, from, ignore, package: packageName, to, verbose } = args;
+    run(async (args) => {
+      const { ignore, verbose, write } = args;
       const options = {
         cwd: cwd(),
-        dry,
         ignore,
         verbose,
+        write,
       };
 
-      await runCommand(() => run(packageName, from, to, options), options);
-    }
+      const project = await Project.detect(options.cwd);
+      const migrationsByWorkspace = await Migration.getMigrationsByWorkspace(
+        Array.from(project.getWorkspaces()),
+        Migration.getMigrations()
+      );
+      const migrationsToRun = await Planner.getSelectedMigrations(
+        migrationsByWorkspace
+      );
+
+      await Runner.run(migrationsToRun, options);
+    })
   );
 
-  cli
-    .demandCommand()
-    .recommendCommands()
-    .strict()
-    .parse(argv.slice(2)).argv;
+  cli.strict().parse(argv.slice(2)).argv;
 }
 
-async function runCommand(makePromise, options) {
-  reporter.info('Thanks for trying out carbon-upgrade! 🙏');
-  reporter.info(
-    'To help prevent any accidental changes, make sure to check in your ' +
-      'work in version control first and use dry mode (-d flag) to ' +
-      'preview any updates!'
-  );
+function run(command) {
+  return async (...args) => {
+    // checks git status on pwd, returns true if clean / false if not
+    let isClean = isGitClean.sync();
 
-  if (options.verbose) {
-    reporter.setLogLevel('verbose');
-  }
+    console.log('Thanks for trying out @carbon/upgrade! 🙏');
+    console.log('Checking git status...👀');
 
-  try {
-    await makePromise();
-    console.log('Done! ✨');
-  } catch (error) {
-    if (error instanceof UpgradeError) {
-      reporter.error(error.message);
-      return;
+    if (!isClean) {
+      console.error(
+        'Git directory is not clean. Please stash or commit your changes.'
+      );
+      process.exit(1);
     }
-    reporter.error('Yikes, looks like something really went wrong.');
-    reporter.error('Please make an issue with the following info:');
-    console.log(error);
-  }
+
+    try {
+      await command(...args);
+      console.log('Done! ✨');
+    } catch (error) {
+      if (error instanceof UpgradeError) {
+        console.error(error.message);
+        process.exit(1);
+      }
+      console.error('Yikes, looks like something really went wrong.');
+      console.error('Please make an issue with the following info:');
+      console.log(error);
+      process.exit(1);
+    }
+  };
 }
 
 module.exports = main;

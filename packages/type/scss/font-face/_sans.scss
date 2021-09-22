@@ -13,56 +13,56 @@
 @mixin carbon--font-face-sans {
   // .woff support for IE11
   @font-face {
+    font-display: $carbon--font-display;
     font-family: 'IBM Plex Sans';
     font-style: italic;
     font-weight: 300;
-    font-display: $carbon--font-display;
     src: local('IBM Plex Sans Light Italic'), local('IBMPlexSans-LightItalic'),
       url(https://fonts.gstatic.com/s/ibmplexsans/v6/zYX7KVElMYYaJe8bpLHnCwDKhdTmvIRcdvfo.woff)
         format('woff');
   }
   @font-face {
+    font-display: $carbon--font-display;
     font-family: 'IBM Plex Sans';
     font-style: italic;
     font-weight: 400;
-    font-display: $carbon--font-display;
     src: local('IBM Plex Sans Italic'), local('IBMPlexSans-Italic'),
       url(https://fonts.gstatic.com/s/ibmplexsans/v6/zYX-KVElMYYaJe8bpLHnCwDKhdTuF6ZP.woff)
         format('woff');
   }
   @font-face {
+    font-display: $carbon--font-display;
     font-family: 'IBM Plex Sans';
     font-style: italic;
     font-weight: 600;
-    font-display: $carbon--font-display;
     src: local('IBM Plex Sans SemiBold Italic'),
       local('IBMPlexSans-SemiBoldItalic'),
       url(https://fonts.gstatic.com/s/ibmplexsans/v6/zYX7KVElMYYaJe8bpLHnCwDKhdTmyIJcdvfo.woff)
         format('woff');
   }
   @font-face {
+    font-display: $carbon--font-display;
     font-family: 'IBM Plex Sans';
     font-style: normal;
     font-weight: 300;
-    font-display: $carbon--font-display;
     src: local('IBM Plex Sans Light'), local('IBMPlexSans-Light'),
       url(https://fonts.gstatic.com/s/ibmplexsans/v6/zYX9KVElMYYaJe8bpLHnCwDKjXr8AIFscg.woff)
         format('woff');
   }
   @font-face {
+    font-display: $carbon--font-display;
     font-family: 'IBM Plex Sans';
     font-style: normal;
     font-weight: 400;
-    font-display: $carbon--font-display;
     src: local('IBM Plex Sans'), local('IBMPlexSans'),
       url(https://fonts.gstatic.com/s/ibmplexsans/v6/zYXgKVElMYYaJe8bpLHnCwDKhdHeEw.woff)
         format('woff');
   }
   @font-face {
+    font-display: $carbon--font-display;
     font-family: 'IBM Plex Sans';
     font-style: normal;
     font-weight: 600;
-    font-display: $carbon--font-display;
     src: local('IBM Plex Sans SemiBold'), local('IBMPlexSans-SemiBold'),
       url(https://fonts.gstatic.com/s/ibmplexsans/v6/zYX9KVElMYYaJe8bpLHnCwDKjQ76AIFscg.woff)
         format('woff');
@@ -70,10 +70,10 @@
 
   /* cyrillic-ext */
   @font-face {
+    font-display: $carbon--font-display;
     font-family: 'IBM Plex Sans';
     font-style: italic;
     font-weight: 300;
-    font-display: $carbon--font-display;
     src: local('IBM Plex Sans Light Italic'), local('IBMPlexSans-LightItalic'),
       url(https://fonts.gstatic.com/s/ibmplexsans/v6/zYX7KVElMYYaJe8bpLHnCwDKhdTmvIRce_fuJGl18QRY.woff2)
         format('woff2');
@@ -82,10 +82,10 @@
   }
   /* cyrillic */
   @font-face {
+    font-display: $carbon--font-display;
     font-family: 'IBM Plex Sans';
     font-style: italic;
     font-weight: 300;
-    font-display: $carbon--font-display;
     src: local('IBM Plex Sans Light Italic'), local('IBMPlexSans-LightItalic'),
       url(https://fonts.gstatic.com/s/ibmplexsans/v6/zYX7KVElMYYaJe8bpLHnCwDKhdTmvIRccvfuJGl18QRY.woff2)
         format('woff2');
@@ -93,10 +93,10 @@
   }
   /* greek */
   @font-face {
+    font-display: $carbon--font-display;
     font-family: 'IBM Plex Sans';
     font-style: italic;
     font-weight: 300;
-    font-display: $carbon--font-display;
     src: local('IBM Plex Sans Light Italic'), local('IBMPlexSans-LightItalic'),
       url(https://fonts.gstatic.com/s/ibmplexsans/v6/zYX7KVElMYYaJe8bpLHnCwDKhdTmvIRcdffuJGl18QRY.woff2)
         format('woff2');
@@ -104,10 +104,10 @@
   }
   /* vietnamese */
   @font-face {
+    font-display: $carbon--font-display;
     font-family: 'IBM Plex Sans';
     font-style: italic;
     font-weight: 300;
-    font-display: $carbon--font-display;
     src: local('IBM Plex Sans Light Italic'), local('IBMPlexSans-LightItalic'),
       url(https://fonts.gstatic.com/s/ibmplexsans/v6/zYX7KVElMYYaJe8bpLHnCwDKhdTmvIRceffuJGl18QRY.woff2)
         format('woff2');
@@ -115,10 +115,10 @@
   }
   /* latin-ext */
   @font-face {
+    font-display: $carbon--font-display;
     font-family: 'IBM Plex Sans';
     font-style: italic;
     font-weight: 300;
-    font-display: $carbon--font-display;
     src: local('IBM Plex Sans Light Italic'), local('IBMPlexSans-LightItalic'),
       url(https://fonts.gstatic.com/s/ibmplexsans/v6/zYX7KVElMYYaJe8bpLHnCwDKhdTmvIRcePfuJGl18QRY.woff2)
         format('woff2');
@@ -127,10 +127,10 @@
   }
   /* latin */
   @font-face {
+    font-display: $carbon--font-display;
     font-family: 'IBM Plex Sans';
     font-style: italic;
     font-weight: 300;
-    font-display: $carbon--font-display;
     src: local('IBM Plex Sans Light Italic'), local('IBMPlexSans-LightItalic'),
       url(https://fonts.gstatic.com/s/ibmplexsans/v6/zYX7KVElMYYaJe8bpLHnCwDKhdTmvIRcdvfuJGl18Q.woff2)
         format('woff2');
@@ -140,10 +140,10 @@
   }
   /* cyrillic-ext */
   @font-face {
+    font-display: $carbon--font-display;
     font-family: 'IBM Plex Sans';
     font-style: italic;
     font-weight: 400;
-    font-display: $carbon--font-display;
     src: local('IBM Plex Sans Italic'), local('IBMPlexSans-Italic'),
       url(https://fonts.gstatic.com/s/ibmplexsans/v6/zYX-KVElMYYaJe8bpLHnCwDKhdTuGqZJW9XjDlN8.woff2)
         format('woff2');
@@ -152,10 +152,10 @@
   }
   /* cyrillic */
   @font-face {
+    font-display: $carbon--font-display;
     font-family: 'IBM Plex Sans';
     font-style: italic;
     font-weight: 400;
-    font-display: $carbon--font-display;
     src: local('IBM Plex Sans Italic'), local('IBMPlexSans-Italic'),
       url(https://fonts.gstatic.com/s/ibmplexsans/v6/zYX-KVElMYYaJe8bpLHnCwDKhdTuE6ZJW9XjDlN8.woff2)
         format('woff2');
@@ -163,10 +163,10 @@
   }
   /* greek */
   @font-face {
+    font-display: $carbon--font-display;
     font-family: 'IBM Plex Sans';
     font-style: italic;
     font-weight: 400;
-    font-display: $carbon--font-display;
     src: local('IBM Plex Sans Italic'), local('IBMPlexSans-Italic'),
       url(https://fonts.gstatic.com/s/ibmplexsans/v6/zYX-KVElMYYaJe8bpLHnCwDKhdTuFKZJW9XjDlN8.woff2)
         format('woff2');
@@ -174,10 +174,10 @@
   }
   /* vietnamese */
   @font-face {
+    font-display: $carbon--font-display;
     font-family: 'IBM Plex Sans';
     font-style: italic;
     font-weight: 400;
-    font-display: $carbon--font-display;
     src: local('IBM Plex Sans Italic'), local('IBMPlexSans-Italic'),
       url(https://fonts.gstatic.com/s/ibmplexsans/v6/zYX-KVElMYYaJe8bpLHnCwDKhdTuGKZJW9XjDlN8.woff2)
         format('woff2');
@@ -185,10 +185,10 @@
   }
   /* latin-ext */
   @font-face {
+    font-display: $carbon--font-display;
     font-family: 'IBM Plex Sans';
     font-style: italic;
     font-weight: 400;
-    font-display: $carbon--font-display;
     src: local('IBM Plex Sans Italic'), local('IBMPlexSans-Italic'),
       url(https://fonts.gstatic.com/s/ibmplexsans/v6/zYX-KVElMYYaJe8bpLHnCwDKhdTuGaZJW9XjDlN8.woff2)
         format('woff2');
@@ -197,10 +197,10 @@
   }
   /* latin */
   @font-face {
+    font-display: $carbon--font-display;
     font-family: 'IBM Plex Sans';
     font-style: italic;
     font-weight: 400;
-    font-display: $carbon--font-display;
     src: local('IBM Plex Sans Italic'), local('IBMPlexSans-Italic'),
       url(https://fonts.gstatic.com/s/ibmplexsans/v6/zYX-KVElMYYaJe8bpLHnCwDKhdTuF6ZJW9XjDg.woff2)
         format('woff2');
@@ -210,10 +210,10 @@
   }
   /* cyrillic-ext */
   @font-face {
+    font-display: $carbon--font-display;
     font-family: 'IBM Plex Sans';
     font-style: italic;
     font-weight: 600;
-    font-display: $carbon--font-display;
     src: local('IBM Plex Sans SemiBold Italic'),
       local('IBMPlexSans-SemiBoldItalic'),
       url(https://fonts.gstatic.com/s/ibmplexsans/v6/zYX7KVElMYYaJe8bpLHnCwDKhdTmyIJce_fuJGl18QRY.woff2)
@@ -223,10 +223,10 @@
   }
   /* cyrillic */
   @font-face {
+    font-display: $carbon--font-display;
     font-family: 'IBM Plex Sans';
     font-style: italic;
     font-weight: 600;
-    font-display: $carbon--font-display;
     src: local('IBM Plex Sans SemiBold Italic'),
       local('IBMPlexSans-SemiBoldItalic'),
       url(https://fonts.gstatic.com/s/ibmplexsans/v6/zYX7KVElMYYaJe8bpLHnCwDKhdTmyIJccvfuJGl18QRY.woff2)
@@ -235,10 +235,10 @@
   }
   /* greek */
   @font-face {
+    font-display: $carbon--font-display;
     font-family: 'IBM Plex Sans';
     font-style: italic;
     font-weight: 600;
-    font-display: $carbon--font-display;
     src: local('IBM Plex Sans SemiBold Italic'),
       local('IBMPlexSans-SemiBoldItalic'),
       url(https://fonts.gstatic.com/s/ibmplexsans/v6/zYX7KVElMYYaJe8bpLHnCwDKhdTmyIJcdffuJGl18QRY.woff2)
@@ -247,10 +247,10 @@
   }
   /* vietnamese */
   @font-face {
+    font-display: $carbon--font-display;
     font-family: 'IBM Plex Sans';
     font-style: italic;
     font-weight: 600;
-    font-display: $carbon--font-display;
     src: local('IBM Plex Sans SemiBold Italic'),
       local('IBMPlexSans-SemiBoldItalic'),
       url(https://fonts.gstatic.com/s/ibmplexsans/v6/zYX7KVElMYYaJe8bpLHnCwDKhdTmyIJceffuJGl18QRY.woff2)
@@ -259,10 +259,10 @@
   }
   /* latin-ext */
   @font-face {
+    font-display: $carbon--font-display;
     font-family: 'IBM Plex Sans';
     font-style: italic;
     font-weight: 600;
-    font-display: $carbon--font-display;
     src: local('IBM Plex Sans SemiBold Italic'),
       local('IBMPlexSans-SemiBoldItalic'),
       url(https://fonts.gstatic.com/s/ibmplexsans/v6/zYX7KVElMYYaJe8bpLHnCwDKhdTmyIJcePfuJGl18QRY.woff2)
@@ -272,10 +272,10 @@
   }
   /* latin */
   @font-face {
+    font-display: $carbon--font-display;
     font-family: 'IBM Plex Sans';
     font-style: italic;
     font-weight: 600;
-    font-display: $carbon--font-display;
     src: local('IBM Plex Sans SemiBold Italic'),
       local('IBMPlexSans-SemiBoldItalic'),
       url(https://fonts.gstatic.com/s/ibmplexsans/v6/zYX7KVElMYYaJe8bpLHnCwDKhdTmyIJcdvfuJGl18Q.woff2)
@@ -286,10 +286,10 @@
   }
   /* cyrillic-ext */
   @font-face {
+    font-display: $carbon--font-display;
     font-family: 'IBM Plex Sans';
     font-style: normal;
     font-weight: 300;
-    font-display: $carbon--font-display;
     src: local('IBM Plex Sans Light'), local('IBMPlexSans-Light'),
       url(https://fonts.gstatic.com/s/ibmplexsans/v6/zYX9KVElMYYaJe8bpLHnCwDKjXr8AIxsdP3pBmtF8A.woff2)
         format('woff2');
@@ -298,10 +298,10 @@
   }
   /* cyrillic */
   @font-face {
+    font-display: $carbon--font-display;
     font-family: 'IBM Plex Sans';
     font-style: normal;
     font-weight: 300;
-    font-display: $carbon--font-display;
     src: local('IBM Plex Sans Light'), local('IBMPlexSans-Light'),
       url(https://fonts.gstatic.com/s/ibmplexsans/v6/zYX9KVElMYYaJe8bpLHnCwDKjXr8AIVsdP3pBmtF8A.woff2)
         format('woff2');
@@ -309,10 +309,10 @@
   }
   /* greek */
   @font-face {
+    font-display: $carbon--font-display;
     font-family: 'IBM Plex Sans';
     font-style: normal;
     font-weight: 300;
-    font-display: $carbon--font-display;
     src: local('IBM Plex Sans Light'), local('IBMPlexSans-Light'),
       url(https://fonts.gstatic.com/s/ibmplexsans/v6/zYX9KVElMYYaJe8bpLHnCwDKjXr8AIJsdP3pBmtF8A.woff2)
         format('woff2');
@@ -320,10 +320,10 @@
   }
   /* vietnamese */
   @font-face {
+    font-display: $carbon--font-display;
     font-family: 'IBM Plex Sans';
     font-style: normal;
     font-weight: 300;
-    font-display: $carbon--font-display;
     src: local('IBM Plex Sans Light'), local('IBMPlexSans-Light'),
       url(https://fonts.gstatic.com/s/ibmplexsans/v6/zYX9KVElMYYaJe8bpLHnCwDKjXr8AI5sdP3pBmtF8A.woff2)
         format('woff2');
@@ -331,10 +331,10 @@
   }
   /* latin-ext */
   @font-face {
+    font-display: $carbon--font-display;
     font-family: 'IBM Plex Sans';
     font-style: normal;
     font-weight: 300;
-    font-display: $carbon--font-display;
     src: local('IBM Plex Sans Light'), local('IBMPlexSans-Light'),
       url(https://fonts.gstatic.com/s/ibmplexsans/v6/zYX9KVElMYYaJe8bpLHnCwDKjXr8AI9sdP3pBmtF8A.woff2)
         format('woff2');
@@ -343,10 +343,10 @@
   }
   /* latin */
   @font-face {
+    font-display: $carbon--font-display;
     font-family: 'IBM Plex Sans';
     font-style: normal;
     font-weight: 300;
-    font-display: $carbon--font-display;
     src: local('IBM Plex Sans Light'), local('IBMPlexSans-Light'),
       url(https://fonts.gstatic.com/s/ibmplexsans/v6/zYX9KVElMYYaJe8bpLHnCwDKjXr8AIFsdP3pBms.woff2)
         format('woff2');
@@ -356,10 +356,10 @@
   }
   /* cyrillic-ext */
   @font-face {
+    font-display: $carbon--font-display;
     font-family: 'IBM Plex Sans';
     font-style: normal;
     font-weight: 400;
-    font-display: $carbon--font-display;
     src: local('IBM Plex Sans'), local('IBMPlexSans'),
       url(https://fonts.gstatic.com/s/ibmplexsans/v6/zYXgKVElMYYaJe8bpLHnCwDKhdzeFaxOedfTDw.woff2)
         format('woff2');
@@ -368,10 +368,10 @@
   }
   /* cyrillic */
   @font-face {
+    font-display: $carbon--font-display;
     font-family: 'IBM Plex Sans';
     font-style: normal;
     font-weight: 400;
-    font-display: $carbon--font-display;
     src: local('IBM Plex Sans'), local('IBMPlexSans'),
       url(https://fonts.gstatic.com/s/ibmplexsans/v6/zYXgKVElMYYaJe8bpLHnCwDKhdXeFaxOedfTDw.woff2)
         format('woff2');
@@ -379,10 +379,10 @@
   }
   /* greek */
   @font-face {
+    font-display: $carbon--font-display;
     font-family: 'IBM Plex Sans';
     font-style: normal;
     font-weight: 400;
-    font-display: $carbon--font-display;
     src: local('IBM Plex Sans'), local('IBMPlexSans'),
       url(https://fonts.gstatic.com/s/ibmplexsans/v6/zYXgKVElMYYaJe8bpLHnCwDKhdLeFaxOedfTDw.woff2)
         format('woff2');
@@ -390,10 +390,10 @@
   }
   /* vietnamese */
   @font-face {
+    font-display: $carbon--font-display;
     font-family: 'IBM Plex Sans';
     font-style: normal;
     font-weight: 400;
-    font-display: $carbon--font-display;
     src: local('IBM Plex Sans'), local('IBMPlexSans'),
       url(https://fonts.gstatic.com/s/ibmplexsans/v6/zYXgKVElMYYaJe8bpLHnCwDKhd7eFaxOedfTDw.woff2)
         format('woff2');
@@ -401,10 +401,10 @@
   }
   /* latin-ext */
   @font-face {
+    font-display: $carbon--font-display;
     font-family: 'IBM Plex Sans';
     font-style: normal;
     font-weight: 400;
-    font-display: $carbon--font-display;
     src: local('IBM Plex Sans'), local('IBMPlexSans'),
       url(https://fonts.gstatic.com/s/ibmplexsans/v6/zYXgKVElMYYaJe8bpLHnCwDKhd_eFaxOedfTDw.woff2)
         format('woff2');
@@ -413,10 +413,10 @@
   }
   /* latin */
   @font-face {
+    font-display: $carbon--font-display;
     font-family: 'IBM Plex Sans';
     font-style: normal;
     font-weight: 400;
-    font-display: $carbon--font-display;
     src: local('IBM Plex Sans'), local('IBMPlexSans'),
       url(https://fonts.gstatic.com/s/ibmplexsans/v6/zYXgKVElMYYaJe8bpLHnCwDKhdHeFaxOedc.woff2)
         format('woff2');
@@ -426,10 +426,10 @@
   }
   /* cyrillic-ext */
   @font-face {
+    font-display: $carbon--font-display;
     font-family: 'IBM Plex Sans';
     font-style: normal;
     font-weight: 600;
-    font-display: $carbon--font-display;
     src: local('IBM Plex Sans SemiBold'), local('IBMPlexSans-SemiBold'),
       url(https://fonts.gstatic.com/s/ibmplexsans/v6/zYX9KVElMYYaJe8bpLHnCwDKjQ76AIxsdP3pBmtF8A.woff2)
         format('woff2');
@@ -438,10 +438,10 @@
   }
   /* cyrillic */
   @font-face {
+    font-display: $carbon--font-display;
     font-family: 'IBM Plex Sans';
     font-style: normal;
     font-weight: 600;
-    font-display: $carbon--font-display;
     src: local('IBM Plex Sans SemiBold'), local('IBMPlexSans-SemiBold'),
       url(https://fonts.gstatic.com/s/ibmplexsans/v6/zYX9KVElMYYaJe8bpLHnCwDKjQ76AIVsdP3pBmtF8A.woff2)
         format('woff2');
@@ -449,10 +449,10 @@
   }
   /* greek */
   @font-face {
+    font-display: $carbon--font-display;
     font-family: 'IBM Plex Sans';
     font-style: normal;
     font-weight: 600;
-    font-display: $carbon--font-display;
     src: local('IBM Plex Sans SemiBold'), local('IBMPlexSans-SemiBold'),
       url(https://fonts.gstatic.com/s/ibmplexsans/v6/zYX9KVElMYYaJe8bpLHnCwDKjQ76AIJsdP3pBmtF8A.woff2)
         format('woff2');
@@ -460,10 +460,10 @@
   }
   /* vietnamese */
   @font-face {
+    font-display: $carbon--font-display;
     font-family: 'IBM Plex Sans';
     font-style: normal;
     font-weight: 600;
-    font-display: $carbon--font-display;
     src: local('IBM Plex Sans SemiBold'), local('IBMPlexSans-SemiBold'),
       url(https://fonts.gstatic.com/s/ibmplexsans/v6/zYX9KVElMYYaJe8bpLHnCwDKjQ76AI5sdP3pBmtF8A.woff2)
         format('woff2');
@@ -471,10 +471,10 @@
   }
   /* latin-ext */
   @font-face {
+    font-display: $carbon--font-display;
     font-family: 'IBM Plex Sans';
     font-style: normal;
     font-weight: 600;
-    font-display: $carbon--font-display;
     src: local('IBM Plex Sans SemiBold'), local('IBMPlexSans-SemiBold'),
       url(https://fonts.gstatic.com/s/ibmplexsans/v6/zYX9KVElMYYaJe8bpLHnCwDKjQ76AI9sdP3pBmtF8A.woff2)
         format('woff2');
@@ -483,10 +483,10 @@
   }
   /* latin */
   @font-face {
+    font-display: $carbon--font-display;
     font-family: 'IBM Plex Sans';
     font-style: normal;
     font-weight: 600;
-    font-display: $carbon--font-display;
     src: local('IBM Plex Sans SemiBold'), local('IBMPlexSans-SemiBold'),
       url(https://fonts.gstatic.com/s/ibmplexsans/v6/zYX9KVElMYYaJe8bpLHnCwDKjQ76AIFsdP3pBms.woff2)
         format('woff2');

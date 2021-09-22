@@ -14,7 +14,7 @@ import handles from '../../globals/js/mixins/handles';
 import eventMatches from '../../globals/js/misc/event-matches';
 import on from '../../globals/js/misc/on';
 
-const toArray = arrayLike => Array.prototype.slice.call(arrayLike);
+const toArray = (arrayLike) => Array.prototype.slice.call(arrayLike);
 
 class ContentSwitcher extends mixin(
   createComponent,
@@ -41,7 +41,7 @@ class ContentSwitcher extends mixin(
   constructor(element, options) {
     super(element, options);
     this.manage(
-      on(this.element, 'click', event => {
+      on(this.element, 'click', (event) => {
         this._handleClick(event);
       })
     );
@@ -76,7 +76,7 @@ class ContentSwitcher extends mixin(
     const itemLink = item.querySelector(this.options.selectorLink);
     if (itemLink) {
       toArray(this.element.querySelectorAll(this.options.selectorLink)).forEach(
-        link => {
+        (link) => {
           if (link !== itemLink) {
             link.setAttribute('aria-selected', 'false');
           }
@@ -89,13 +89,13 @@ class ContentSwitcher extends mixin(
       this.element.querySelectorAll(this.options.selectorButton)
     );
 
-    selectorButtons.forEach(button => {
+    selectorButtons.forEach((button) => {
       if (button !== item) {
         button.setAttribute('aria-selected', false);
         button.classList.toggle(this.options.classActive, false);
         toArray(
           button.ownerDocument.querySelectorAll(button.dataset.target)
-        ).forEach(element => {
+        ).forEach((element) => {
           element.setAttribute('hidden', '');
           element.setAttribute('aria-hidden', 'true');
         });
@@ -105,7 +105,7 @@ class ContentSwitcher extends mixin(
     item.classList.toggle(this.options.classActive, true);
     item.setAttribute('aria-selected', true);
     toArray(item.ownerDocument.querySelectorAll(item.dataset.target)).forEach(
-      element => {
+      (element) => {
         element.removeAttribute('hidden');
         element.setAttribute('aria-hidden', 'false');
       }
@@ -130,7 +130,7 @@ class ContentSwitcher extends mixin(
         group: 'selected',
         item,
       },
-      error => {
+      (error) => {
         if (error) {
           if (callback) {
             callback(Object.assign(error, { item }));
@@ -153,7 +153,7 @@ class ContentSwitcher extends mixin(
    * The component options.
    * If `options` is specified in the constructor,
    * {@linkcode ContentSwitcher.create .create()}, or {@linkcode ContentSwitcher.init .init()},
-   * properties in this object are overriden for the instance being create and how {@linkcode ContentSwitcher.init .init()} works.
+   * props in this object are overridden for the instance being created and how {@linkcode ContentSwitcher.init .init()} works.
    * @member ContentSwitcher.options
    * @type {object}
    * @property {string} selectorInit The CSS selector to find content switcher button set.

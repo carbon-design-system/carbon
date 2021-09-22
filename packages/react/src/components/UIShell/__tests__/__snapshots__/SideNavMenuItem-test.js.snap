@@ -8,18 +8,15 @@ exports[`SideNavMenuItem should render 1`] = `
 >
   <li
     className="bx--side-nav__menu-item custom-classname"
-    role="none"
   >
     <Link
       className="bx--side-nav__link"
       element="a"
       href="#"
-      role="menuitem"
     >
       <a
         className="bx--side-nav__link"
         href="#"
-        role="menuitem"
       >
         <SideNavLinkText>
           <span
@@ -42,18 +39,15 @@ exports[`SideNavMenuItem should render active styles with \`isActive\` or \`aria
 >
   <li
     className="bx--side-nav__menu-item custom-classname"
-    role="none"
   >
     <Link
       className="bx--side-nav__link bx--side-nav__link--current"
       element="a"
       href="#"
-      role="menuitem"
     >
       <a
         className="bx--side-nav__link bx--side-nav__link--current"
         href="#"
-        role="menuitem"
       >
         <SideNavLinkText>
           <span
@@ -77,20 +71,17 @@ exports[`SideNavMenuItem should render active styles with \`isActive\` or \`aria
 >
   <li
     className="bx--side-nav__menu-item custom-classname"
-    role="none"
   >
     <Link
       aria-current="page"
       className="bx--side-nav__link"
       element="a"
       href="#"
-      role="menuitem"
     >
       <a
         aria-current="page"
         className="bx--side-nav__link"
         href="#"
-        role="menuitem"
       >
         <SideNavLinkText>
           <span

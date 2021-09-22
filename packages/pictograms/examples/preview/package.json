@@ -1,0 +1,22 @@
+{
+  "name": "esm",
+  "private": true,
+  "version": "0.0.0",
+  "license": "Apache-2.0",
+  "scripts": {
+    "build": "parcel build -d build --public-url \"/pictograms/examples/preview\" index.html",
+    "develop": "parcel index.html --no-cache"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.10.1",
+    "@babel/plugin-transform-react-jsx": "^7.10.1",
+    "@babel/preset-env": "^7.10.1",
+    "parcel-bundler": "^1.12.4"
+  },
+  "dependencies": {
+    "prismjs": "^1.20.0",
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1",
+    "url-polyfill": "^1.1.9"
+  }
+}

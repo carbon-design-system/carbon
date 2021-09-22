@@ -18,8 +18,16 @@ describe('DatePicker', () => {
   describe('Renders as expected', () => {
     const wrapper = mount(
       <DatePicker onChange={() => {}} className="extra-class">
-        <div className="test-child" />
-        <div className="test-child" />
+        <DatePickerInput
+          id="date-picker-input-id-start"
+          placeholder="mm/dd/yyyy"
+          labelText="Start date"
+        />
+        <DatePickerInput
+          id="date-picker-input-id-finish"
+          placeholder="mm/dd/yyyy"
+          labelText="End date"
+        />
       </DatePicker>
     );
     const datepicker = wrapper.childAt(0);
@@ -72,7 +80,11 @@ describe('DatePicker', () => {
   describe('Simple date picker', () => {
     const wrapper = mount(
       <DatePicker datePickerType="simple" className="extra-class">
-        <div className="test-child" />
+        <DatePickerInput
+          placeholder="mm/dd/yyyy"
+          labelText="Date Picker label"
+          id="date-picker-single"
+        />
       </DatePicker>
     );
     const datepicker = wrapper.childAt(0);
@@ -89,7 +101,7 @@ describe('DatePicker', () => {
       expect(wrapper.props().value).toEqual('11/08/2017');
     });
 
-    it('should not initalize a calendar', () => {
+    it('should not initialize a calendar', () => {
       expect(wrapper.cal).toEqual(undefined);
     });
   });
@@ -100,14 +112,14 @@ describe('DatePicker', () => {
         onChange={() => {}}
         datePickerType="single"
         className="extra-class">
-        <div className="test-child">
-          <input type="text" className={`${prefix}--date-picker__input`} />
-        </div>
+        <DatePickerInput
+          placeholder="mm/dd/yyyy"
+          labelText="Date Picker label"
+          id="date-picker-single"
+        />
       </DatePicker>
     );
     const datepicker = wrapper.childAt(0);
-    const input = wrapper.find(`.${prefix}--date-picker__input`);
-    const icon = wrapper.find('svg');
 
     it('has the single date picker class', () => {
       expect(
@@ -115,7 +127,7 @@ describe('DatePicker', () => {
       ).toBe(true);
     });
 
-    it('should initalize a calendar', () => {
+    it('should initialize a calendar', () => {
       expect(wrapper.instance().cal).toBeDefined();
     });
 
@@ -133,10 +145,6 @@ describe('DatePicker', () => {
       expect(wrapper.props().value).toEqual(undefined);
       wrapper.setProps({ value: '11/08/2017' });
       expect(wrapper.props().value).toEqual('11/08/2017');
-    });
-
-    it('should not render an icon', () => {
-      expect(icon.length).toEqual(0);
     });
   });
 
@@ -178,20 +186,16 @@ describe('DatePicker', () => {
         onChange={() => {}}
         datePickerType="range"
         className="extra-class">
-        <div className="test-child">
-          <input
-            type="text"
-            className={`${prefix}--date-picker__input`}
-            id="input-from"
-          />
-        </div>
-        <div className="test-child">
-          <input
-            type="text"
-            className={`${prefix}--date-picker__input`}
-            id="input-to"
-          />
-        </div>
+        <DatePickerInput
+          id="date-picker-input-id-start"
+          placeholder="mm/dd/yyyy"
+          labelText="Start date"
+        />
+        <DatePickerInput
+          id="date-picker-input-id-finish"
+          placeholder="mm/dd/yyyy"
+          labelText="End date"
+        />
       </DatePicker>
     );
     const datepicker = wrapper.childAt(0);
@@ -202,7 +206,7 @@ describe('DatePicker', () => {
       ).toBe(true);
     });
 
-    it('should initalize a calendar', () => {
+    it('should initialize a calendar', () => {
       expect(wrapper.instance().cal).toBeDefined();
     });
 
@@ -230,20 +234,16 @@ describe('DatePicker', () => {
         datePickerType="range"
         className="extra-class"
         locale="es">
-        <div className="test-child">
-          <input
-            type="text"
-            className={`${prefix}--date-picker__input`}
-            id="input-from"
-          />
-        </div>
-        <div className="test-child">
-          <input
-            type="text"
-            className={`${prefix}--date-picker__input`}
-            id="input-to"
-          />
-        </div>
+        <DatePickerInput
+          id="date-picker-input-id-start"
+          placeholder="mm/dd/yyyy"
+          labelText="Start date"
+        />
+        <DatePickerInput
+          id="date-picker-input-id-finish"
+          placeholder="mm/dd/yyyy"
+          labelText="End date"
+        />
       </DatePicker>
     );
 
@@ -252,20 +252,16 @@ describe('DatePicker', () => {
         onChange={() => {}}
         datePickerType="range"
         className="extra-class">
-        <div className="test-child">
-          <input
-            type="text"
-            className={`${prefix}--date-picker__input`}
-            id="input-from"
-          />
-        </div>
-        <div className="test-child">
-          <input
-            type="text"
-            className={`${prefix}--date-picker__input`}
-            id="input-to"
-          />
-        </div>
+        <DatePickerInput
+          id="date-picker-input-id-start"
+          placeholder="mm/dd/yyyy"
+          labelText="Start date"
+        />
+        <DatePickerInput
+          id="date-picker-input-id-finish"
+          placeholder="mm/dd/yyyy"
+          labelText="End date"
+        />
       </DatePicker>
     );
 
@@ -281,12 +277,15 @@ describe('DatePicker', () => {
   });
 
   describe('Date picker can be used with enzyme shallow', () => {
-    beforeEach(done => {
-      const spy = {};
-      spy.console = jest.spyOn(console, 'error').mockImplementation(e => {
-        done(e);
-      });
-      done();
+    let spy;
+
+    beforeEach(() => {
+      spy = {};
+      spy.console = jest.spyOn(console, 'error').mockImplementation(() => {});
+    });
+
+    afterEach(() => {
+      spy.console.mockRestore();
     });
 
     it('date picker should not throw exception when mounted or unmounted', () => {
@@ -296,20 +295,16 @@ describe('DatePicker', () => {
           datePickerType="range"
           className="extra-class"
           locale="es">
-          <div className="test-child">
-            <input
-              type="text"
-              className={`${prefix}--date-picker__input`}
-              id="input-from"
-            />
-          </div>
-          <div className="test-child">
-            <input
-              type="text"
-              className={`${prefix}--date-picker__input`}
-              id="input-to"
-            />
-          </div>
+          <DatePickerInput
+            id="date-picker-input-id-start"
+            placeholder="mm/dd/yyyy"
+            labelText="Start date"
+          />
+          <DatePickerInput
+            id="date-picker-input-id-finish"
+            placeholder="mm/dd/yyyy"
+            labelText="End date"
+          />
         </DatePicker>
       );
       expect(wrapper.find('DatePicker')).toBeDefined();
@@ -318,7 +313,15 @@ describe('DatePicker', () => {
   });
 
   describe('Date picker with minDate and maxDate', () => {
-    console.error = jest.fn(); // eslint-disable-line no-console
+    let mockConsoleError;
+
+    beforeEach(() => {
+      mockConsoleError = jest.spyOn(console, 'error');
+    });
+
+    afterEach(() => {
+      mockConsoleError.mockRestore();
+    });
 
     const wrapper = mount(
       <DatePicker
@@ -327,20 +330,16 @@ describe('DatePicker', () => {
         className="extra-class"
         minDate="01/01/2018"
         maxDate="01/30/2018">
-        <div className="test-child">
-          <input
-            type="text"
-            className={`${prefix}--date-picker__input`}
-            id="input-from"
-          />
-        </div>
-        <div className="test-child">
-          <input
-            type="text"
-            className={`${prefix}--date-picker__input`}
-            id="input-to"
-          />
-        </div>
+        <DatePickerInput
+          id="date-picker-input-id-start"
+          placeholder="mm/dd/yyyy"
+          labelText="Start date"
+        />
+        <DatePickerInput
+          id="date-picker-input-id-finish"
+          placeholder="mm/dd/yyyy"
+          labelText="End date"
+        />
       </DatePicker>
     );
 
@@ -351,7 +350,7 @@ describe('DatePicker', () => {
     });
 
     it('should not have "console.error" being created', () => {
-      expect(console.error).not.toBeCalled(); // eslint-disable-line no-console
+      expect(mockConsoleError).not.toHaveBeenCalled();
     });
   });
 });
@@ -384,5 +383,27 @@ describe('DatePickerSkeleton', () => {
         wrapper.children().hasClass(`${prefix}--date-picker--range`)
       ).toEqual(true);
     });
+  });
+});
+
+describe('Opening up calendar dropdown', () => {
+  const wrapper = mount(
+    <DatePicker datePickerType="range" className="extra-class">
+      <DatePickerInput labelText="Date Picker label" id="input-from" />
+      <DatePickerInput labelText="Date Picker label" id="input-to" />
+    </DatePicker>
+  );
+
+  it('has the range date picker with min and max dates', () => {
+    const datePicker = wrapper.instance();
+    const input = wrapper.find('input').at(0);
+
+    jest.spyOn(datePicker.cal, 'open');
+
+    input
+      .getDOMNode()
+      .dispatchEvent(new window.KeyboardEvent('keydown', { key: 'ArrowDown' }));
+
+    expect(datePicker.cal.open).toHaveBeenCalled();
   });
 });

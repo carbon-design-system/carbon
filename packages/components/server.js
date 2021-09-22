@@ -1,7 +1,7 @@
 'use strict';
 
 const path = require('path');
-const pathRegexp = require('path-to-regexp');
+const { pathToRegexp } = require('path-to-regexp');
 const browserSync = require('browser-sync');
 const serveStatic = require('serve-static');
 
@@ -23,7 +23,7 @@ const hotMiddleware = devMode && webpackHotMiddleware(compiler);
 let dummyHashSeq = 0;
 let templateOrConfigChanged = false;
 const watchCallback = debounce(() => {
-  const featureFlagCacheKey = Object.keys(require.cache).find(key =>
+  const featureFlagCacheKey = Object.keys(require.cache).find((key) =>
     /feature-flags\.js$/i.test(key)
   );
   if (featureFlagCacheKey) {
@@ -41,7 +41,7 @@ const watchCallback = debounce(() => {
   }
 }, 500);
 
-const invokeWatchCallback = name => {
+const invokeWatchCallback = (name) => {
   if (!/feature-flags\.js$/i.test(name)) {
     templateOrConfigChanged = true;
   }
@@ -61,9 +61,9 @@ if (devMode) {
     .on('unlink', invokeWatchCallback);
 }
 
-const reComponentPath = pathRegexp('/component/:component');
-const reDemoComponentPath = pathRegexp('/demo/:component');
-const reCodePath = pathRegexp('/code/:component');
+const reComponentPath = pathToRegexp('/component/:component');
+const reDemoComponentPath = pathToRegexp('/demo/:component');
+const reCodePath = pathToRegexp('/code/:component');
 const demoStaticRoute = serveStatic('demo');
 
 function noopRoute(req, res, next) {
@@ -96,7 +96,7 @@ function navRoute(req, res, next) {
           })
         );
       })
-      .catch(err => {
+      .catch((err) => {
         console.error(err.stack); // eslint-disable-line no-console
         res.writeHead(500);
         res.end();
@@ -117,7 +117,7 @@ function componentRoute(req, res, next) {
   } else {
     templates
       .render({ layout: 'preview', concat: true }, name)
-      .then(rendered => {
+      .then((rendered) => {
         // eslint-disable-next-line eqeqeq
         if (rendered == null) {
           res.writeHead(404);
@@ -127,7 +127,7 @@ function componentRoute(req, res, next) {
           res.end(rendered);
         }
       })
-      .catch(error => {
+      .catch((error) => {
         console.error(error.stack); // eslint-disable-line no-console
         res.writeHead(500);
         res.end();
@@ -148,7 +148,7 @@ function codeRoute(req, res, next) {
   } else {
     templates
       .render({ layout: false }, name)
-      .then(renderedItems => {
+      .then((renderedItems) => {
         const o = {};
         renderedItems.forEach((rendered, item) => {
           o[item.handle] = rendered.trim();
@@ -156,7 +156,7 @@ function codeRoute(req, res, next) {
         res.setHeader('Content-Type', 'application/json');
         res.end(JSON.stringify(o));
       })
-      .catch(error => {
+      .catch((error) => {
         console.error(error.stack); // eslint-disable-line no-console
         res.writeHead(500);
         res.end();

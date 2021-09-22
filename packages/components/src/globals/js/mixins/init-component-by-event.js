@@ -8,7 +8,7 @@
 import eventMatches from '../misc/event-matches';
 import on from '../misc/on';
 
-export default function(ToMix) {
+export default function (ToMix) {
   /**
    * Mix-in class to instantiate components upon events.
    * @class InitComponentByEvent
@@ -56,12 +56,12 @@ export default function(ToMix) {
             ? target.ownerDocument
             : target
           ).defaultView;
-        const handles = effectiveOptions.initEventNames.map(name => {
+        const handles = effectiveOptions.initEventNames.map((name) => {
           const eventName = name === 'focus' && hasFocusin ? 'focusin' : name;
           return on(
             target,
             eventName,
-            event => {
+            (event) => {
               const element = eventMatches(
                 event,
                 effectiveOptions.selectorInit

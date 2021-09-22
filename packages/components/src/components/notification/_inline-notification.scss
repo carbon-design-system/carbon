@@ -11,11 +11,12 @@
 
 @import '../../globals/scss/vars';
 @import '../../globals/scss/helper-mixins';
-@import '../../globals/scss/layer';
 @import '../../globals/scss/layout';
+@import '../../globals/scss/component-tokens';
 @import '../../globals/scss/vendor/@carbon/elements/scss/import-once/import-once';
 @import '../../globals/scss/css--reset';
 @import 'mixins';
+@import 'tokens';
 
 /// Inline notification styles
 /// @access private
@@ -24,18 +25,21 @@
   .#{$prefix}--inline-notification {
     @include reset;
 
-    display: flex;
     position: relative;
-    height: auto;
-    min-height: rem(48px);
+    display: flex;
+    width: 100%;
     min-width: rem(288px);
     max-width: rem(288px);
-    color: $inverse-01;
+    height: auto;
+    min-height: rem(48px);
+    flex-wrap: wrap;
     margin-top: $carbon--spacing-05;
     margin-bottom: $carbon--spacing-05;
+    color: $inverse-01;
 
     @include carbon--breakpoint(md) {
       max-width: rem(608px);
+      flex-wrap: nowrap;
     }
 
     @include carbon--breakpoint(lg) {
@@ -47,21 +51,43 @@
     }
   }
 
+  .#{$prefix}--inline-notification:not(.#{$prefix}--inline-notification--low-contrast)
+    a {
+    color: $inverse-link;
+  }
+
+  .#{$prefix}--inline-notification a {
+    text-decoration: none;
+  }
+
+  .#{$prefix}--inline-notification a:hover {
+    text-decoration: underline;
+  }
+
+  .#{$prefix}--inline-notification a:focus {
+    outline: 1px solid $inverse-link;
+  }
+
+  .#{$prefix}--inline-notification.#{$prefix}--inline-notification--low-contrast
+    a:focus {
+    @include focus-outline;
+  }
+
   .#{$prefix}--inline-notification--low-contrast {
-    // Stop-gap to ensure color contrast (vs. fixed background color) until we have component-specific theme tokens
-    color: map-get($carbon--theme--white, 'text-01');
+    color: $text-01;
 
     &::before {
-      content: '';
       position: absolute;
       top: 0;
       left: 0;
       width: 100%;
       height: 100%;
       box-sizing: border-box;
-      filter: opacity(0.4);
-      border-style: solid;
       border-width: 1px 1px 1px 0;
+      border-style: solid;
+      content: '';
+      filter: opacity(0.4);
+      pointer-events: none;
     }
   }
 
@@ -72,10 +98,10 @@
   .#{$prefix}--inline-notification--low-contrast.#{$prefix}--inline-notification--error {
     @include notification--experimental(
       $support-01,
-      $notification-error-background-color
+      get-token-value($notification-colors, 'notification-background-error')
     );
 
-    &:before {
+    &::before {
       border-color: $support-01;
     }
   }
@@ -87,44 +113,44 @@
   .#{$prefix}--inline-notification--low-contrast.#{$prefix}--inline-notification--success {
     @include notification--experimental(
       $support-02,
-      $notification-success-background-color
+      get-token-value($notification-colors, 'notification-background-success')
     );
 
-    &:before {
+    &::before {
       border-color: $support-02;
     }
   }
 
-  .#{$prefix}--inline-notification--info {
+  .#{$prefix}--inline-notification--info,
+  .#{$prefix}--inline-notification--info-square {
     @include notification--experimental($inverse-support-04, $inverse-02);
   }
 
-  .#{$prefix}--inline-notification--low-contrast.#{$prefix}--inline-notification--info {
+  .#{$prefix}--inline-notification--low-contrast.#{$prefix}--inline-notification--info,
+  .#{$prefix}--inline-notification--low-contrast.#{$prefix}--inline-notification--info-square {
     @include notification--experimental(
       $support-04,
-      $notification-info-background-color
+      get-token-value($notification-colors, 'notification-background-info')
     );
 
-    &:before {
+    &::before {
       border-color: $support-04;
     }
   }
 
-  .#{$prefix}--inline-notification--info .bx--inline-notification__icon {
-    display: none;
-  }
-
-  .#{$prefix}--inline-notification--warning {
+  .#{$prefix}--inline-notification--warning,
+  .#{$prefix}--inline-notification--warning-alt {
     @include notification--experimental($inverse-support-03, $inverse-02);
   }
 
-  .#{$prefix}--inline-notification--low-contrast.#{$prefix}--inline-notification--warning {
+  .#{$prefix}--inline-notification--low-contrast.#{$prefix}--inline-notification--warning,
+  .#{$prefix}--inline-notification--low-contrast.#{$prefix}--inline-notification--warning-alt {
     @include notification--experimental(
       $support-03,
-      $notification-warning-background-color
+      get-token-value($notification-colors, 'notification-background-warning')
     );
 
-    &:before {
+    &::before {
       border-color: $support-03;
     }
   }
@@ -139,90 +165,153 @@
   .#{$prefix}--inline-notification__details {
     display: flex;
     flex-grow: 1;
-    margin: 0 $carbon--spacing-05;
+    margin: 0 $carbon--spacing-09 0 $carbon--spacing-05;
+
+    @include carbon--breakpoint(md) {
+      margin: 0 $carbon--spacing-05;
+    }
   }
 
   .#{$prefix}--inline-notification__icon {
     flex-shrink: 0;
-    margin-right: $carbon--spacing-05;
     margin-top: rem(14px);
+    margin-right: $carbon--spacing-05;
   }
 
   .#{$prefix}--inline-notification__text-wrapper {
     display: flex;
     flex-wrap: wrap;
-    align-items: center;
-    padding: $carbon--spacing-04 0;
+    padding: rem(15px) 0;
   }
 
-  .#{$prefix}--inline-notification__title {
-    @include type-style('productive-heading-01');
-    margin: 0 $carbon--spacing-02 0 0;
-    line-height: rem(24px);
+  @if feature-flag-enabled('enable-v11-release') {
+    .#{$prefix}--inline-notification__content {
+      @include type-style('body-short-01');
+
+      word-break: break-word;
+    }
+  } @else {
+    .#{$prefix}--inline-notification__title {
+      @include type-style('productive-heading-01');
+
+      margin: 0 $carbon--spacing-02 0 0;
+    }
+
+    .#{$prefix}--inline-notification__subtitle {
+      @include type-style('body-short-01');
+
+      word-break: break-word;
+    }
   }
 
-  .#{$prefix}--inline-notification__subtitle {
-    @include type-style('body-short-01');
-    word-break: break-word;
-  }
-
-  .#{$prefix}--inline-notification__action-button {
+  .#{$prefix}--inline-notification__action-button.#{$prefix}--btn--ghost {
     height: rem(32px);
-    margin: $carbon--spacing-03 0;
+    margin-bottom: $carbon--spacing-03;
+    margin-left: $carbon--spacing-08;
 
-    &,
-    &:hover,
-    &:focus,
-    &:active {
-      color: $inverse-link;
+    @include carbon--breakpoint(md) {
+      margin: $carbon--spacing-03 0;
     }
+  }
 
-    &:hover {
-      background-color: $inverse-hover-ui;
-    }
+  .#{$prefix}--inline-notification:not(.#{$prefix}--inline-notification--low-contrast)
+    .#{$prefix}--inline-notification__action-button.#{$prefix}--btn--ghost {
+    color: $inverse-link;
+  }
+
+  .#{$prefix}--inline-notification__action-button.#{$prefix}--btn--ghost:active,
+  .#{$prefix}--inline-notification__action-button.#{$prefix}--btn--ghost:hover {
+    background-color: $inverse-hover-ui;
+  }
+
+  .#{$prefix}--inline-notification--low-contrast
+    .#{$prefix}--inline-notification__action-button.#{$prefix}--btn--ghost:active,
+  .#{$prefix}--inline-notification--low-contrast
+    .#{$prefix}--inline-notification__action-button.#{$prefix}--btn--ghost:hover {
+    background-color: get-token-value(
+      $notification-colors,
+      'notification-action-hover'
+    );
+  }
+
+  .#{$prefix}--inline-notification__action-button.#{$prefix}--btn--ghost:focus {
+    border-color: transparent;
+    box-shadow: none;
+    outline: 2px solid $inverse-focus-ui;
+    outline-offset: -2px;
+  }
+
+  .#{$prefix}--inline-notification--low-contrast
+    .#{$prefix}--inline-notification__action-button.#{$prefix}--btn--ghost:focus {
+    outline-color: $focus;
+  }
+
+  .#{$prefix}--inline-notification--hide-close-button
+    .#{$prefix}--inline-notification__action-button.#{$prefix}--btn--ghost {
+    margin-right: $carbon--spacing-03;
   }
 
   .#{$prefix}--inline-notification__close-button {
     @include focus-outline('reset');
+
+    position: absolute;
+    top: 0;
+    right: 0;
     display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    background: transparent;
-    border: none;
-    cursor: pointer;
-    padding: 0;
-    height: rem(48px);
     width: rem(48px);
     min-width: rem(48px);
     max-width: rem(48px);
+    height: rem(48px);
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    border: none;
+    background: transparent;
+    cursor: pointer;
     transition: outline $duration--fast-02 motion(standard, productive),
       background-color $duration--fast-02 motion(standard, productive);
+
+    &:focus {
+      outline: 2px solid $inverse-focus-ui;
+      outline-offset: -2px;
+    }
 
     .#{$prefix}--inline-notification__close-icon {
       fill: $inverse-01;
     }
+
+    @include carbon--breakpoint(md) {
+      position: static;
+    }
   }
 
-  .#{$prefix}--inline-notification--low-contrast {
+  .#{$prefix}--inline-notification--low-contrast
+    .#{$prefix}--inline-notification__close-button:focus {
+    @include focus-outline('outline');
+  }
+
+  .#{$prefix}--inline-notification--low-contrast
     .#{$prefix}--inline-notification__close-button
-      .#{$prefix}--inline-notification__close-icon {
-      fill: map-get($carbon--theme--white, 'text-01');
-    }
-
-    .#{$prefix}--inline-notification__action-button {
-      color: $carbon--blue-60;
-
-      &:active {
-        color: $carbon--blue-80;
-      }
-
-      &:active,
-      &:hover {
-        background-color: $carbon--white-0;
-      }
-    }
+    .#{$prefix}--inline-notification__close-icon {
+    fill: $icon-01;
   }
+
+  // Windows HCM fix
+  /* stylelint-disable */
+  .#{$prefix}--inline-notification {
+    @include high-contrast-mode('outline');
+  }
+
+  .#{$prefix}--inline-notification__close-button:focus,
+  .#{$prefix}--btn.#{$prefix}--btn--ghost.#{$prefix}--inline-notification__action-button:focus {
+    @include high-contrast-mode('focus');
+  }
+
+  .#{$prefix}--inline-notification__icon {
+    @include high-contrast-mode('icon-fill');
+  }
+  /* stylelint-enable */
 }
 
 @include exports('inline-notifications') {

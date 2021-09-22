@@ -29,7 +29,7 @@ describe('Selection', () => {
       <Selection
         {...mockProps}
         render={({ onItemChange }) => (
-          <button onClick={() => onItemChange(1)} />
+          <button type="button" onClick={() => onItemChange(1)} />
         )}
       />
     );
@@ -46,7 +46,7 @@ describe('Selection', () => {
         {...mockProps}
         render={({ selectedItems, onItemChange }) => (
           <div>
-            <button onClick={() => onItemChange(1)} />
+            <button type="button" onClick={() => onItemChange(1)} />
             <ul>
               {selectedItems.map((item, index) => (
                 <li key={index}>{item}</li>
@@ -67,8 +67,16 @@ describe('Selection', () => {
         {...mockProps}
         render={({ onItemChange, clearSelection }) => (
           <div>
-            <button id="add-item" onClick={() => onItemChange(1)} />
-            <button id="clear-selection" onClick={clearSelection} />
+            <button
+              type="button"
+              id="add-item"
+              onClick={() => onItemChange(1)}
+            />
+            <button
+              type="button"
+              id="clear-selection"
+              onClick={clearSelection}
+            />
           </div>
         )}
       />
@@ -85,7 +93,7 @@ describe('Selection', () => {
       <Selection
         {...mockProps}
         render={({ onItemChange }) => (
-          <button onClick={() => onItemChange(1)} />
+          <button type="button" onClick={() => onItemChange(1)} />
         )}
         disabled
       />

@@ -1,9 +1,10 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`MultiSelect.Filterable should render 1`] = `
+exports[`FilterableMultiSelect should render 1`] = `
 <FilterableMultiSelect
   ariaLabel="Choose an item"
   compareItems={[Function]}
+  direction="bottom"
   disabled={false}
   filterItems={[Function]}
   id="test-filterable-multiselect"
@@ -41,47 +42,49 @@ exports[`MultiSelect.Filterable should render 1`] = `
   light={false}
   locale="en"
   onChange={[MockFunction]}
+  onMenuChange={[MockFunction]}
   open={false}
   placeholder="Placeholder..."
   selectionFeedback="top-after-reopen"
   sortItems={[Function]}
 >
-  <div
-    className="bx--multi-select__wrapper bx--list-box__wrapper"
+  <Selection
+    disabled={false}
+    initialSelectedItems={Array []}
+    onChange={[Function]}
+    render={[Function]}
   >
-    <Selection
-      disabled={false}
-      initialSelectedItems={Array []}
+    <Downshift
+      defaultHighlightedIndex={null}
+      defaultIsOpen={false}
+      environment={[Window]}
+      getA11yStatusMessage={[Function]}
+      highlightedIndex={null}
+      id="test-filterable-multiselect"
+      inputId="test-filterable-multiselect-input"
+      inputValue=""
+      isOpen={false}
+      itemToString={[Function]}
+      labelId="test-filterable-multiselect-label"
+      menuId="test-filterable-multiselect__menu"
       onChange={[Function]}
-      render={[Function]}
+      onInputValueChange={[Function]}
+      onOuterClick={[Function]}
+      onSelect={[Function]}
+      onStateChange={[Function]}
+      onUserAction={[Function]}
+      scrollIntoView={[Function]}
+      selectedItem={Array []}
+      selectedItemChanged={[Function]}
+      stateReducer={[Function]}
+      suppressRefError={false}
     >
-      <Downshift
-        breakingChanges={Object {}}
-        defaultHighlightedIndex={null}
-        defaultInputValue=""
-        defaultIsOpen={false}
-        defaultSelectedItem={null}
-        environment={[Window]}
-        getA11yStatusMessage={[Function]}
-        highlightedIndex={null}
-        inputValue=""
-        isOpen={false}
-        itemToString={[Function]}
-        onChange={[Function]}
-        onInputValueChange={[Function]}
-        onOuterClick={[Function]}
-        onSelect={[Function]}
-        onStateChange={[Function]}
-        onUserAction={[Function]}
-        render={[Function]}
-        selectedItem={Array []}
-        selectedItemChanged={[Function]}
-        stateReducer={[Function]}
+      <div
+        className="bx--multi-select__wrapper bx--list-box__wrapper"
       >
         <ListBox
           className="bx--multi-select bx--combo-box bx--multi-select--filterable"
           disabled={false}
-          innerRef={[Function]}
           isOpen={false}
           light={false}
           type="default"
@@ -90,107 +93,95 @@ exports[`MultiSelect.Filterable should render 1`] = `
             className="bx--multi-select bx--combo-box bx--multi-select--filterable bx--list-box"
             onClick={[Function]}
             onKeyDown={[Function]}
-            role="listbox"
-            tabIndex="-1"
           >
-            <ListBoxField
-              aria-expanded={false}
-              aria-haspopup={true}
-              aria-label="open menu"
-              data-toggle={true}
-              disabled={false}
-              id="test-filterable-multiselect"
-              onBlur={[Function]}
-              onClick={[Function]}
-              onKeyDown={[Function]}
-              role="button"
-              translateWithId={[Function]}
-              type="button"
+            <div
+              className="bx--list-box__field"
             >
-              <div
+              <input
+                aria-activedescendant={null}
+                aria-autocomplete="list"
                 aria-controls={null}
+                aria-describedby={null}
                 aria-expanded={false}
-                aria-haspopup={true}
-                aria-label="Open menu"
+                aria-haspopup="listbox"
+                aria-labelledby={null}
                 aria-owns={null}
-                className="bx--list-box__field"
+                autoComplete="off"
+                className="bx--text-input bx--text-input--empty"
+                disabled={false}
+                id="test-filterable-multiselect-input"
+                onBlur={[Function]}
+                onChange={[Function]}
+                onClick={[Function]}
+                onFocus={[Function]}
+                onKeyDown={[Function]}
+                placeholder="Placeholder..."
+                role="combobox"
+                value=""
+              />
+              <ListBoxTrigger
+                aria-haspopup={true}
+                aria-label="open menu"
                 data-toggle={true}
+                disabled={false}
+                isOpen={false}
                 onBlur={[Function]}
                 onClick={[Function]}
                 onKeyDown={[Function]}
+                onKeyUp={[Function]}
+                onMouseUp={[Function]}
                 role="button"
-                tabIndex={-1}
+                translateWithId={[Function]}
                 type="button"
               >
-                <input
-                  aria-activedescendant={null}
-                  aria-autocomplete="list"
-                  aria-controls="test-filterable-multiselect__menu"
-                  aria-expanded={false}
-                  autoComplete="off"
-                  className="bx--text-input bx--text-input--empty"
+                <button
+                  aria-haspopup={true}
+                  aria-label="Open"
+                  className="bx--list-box__menu-icon"
+                  data-toggle={true}
                   disabled={false}
-                  id="test-filterable-multiselect"
                   onBlur={[Function]}
-                  onChange={[Function]}
+                  onClick={[Function]}
                   onKeyDown={[Function]}
-                  placeholder="Placeholder..."
-                  role="combobox"
-                  value=""
-                />
-                <ListBoxMenuIcon
-                  isOpen={false}
-                  translateWithId={[Function]}
+                  onKeyUp={[Function]}
+                  onMouseUp={[Function]}
+                  role="button"
+                  tabIndex="-1"
+                  title="Open"
+                  type="button"
                 >
-                  <div
-                    className="bx--list-box__menu-icon"
-                  >
-                    <ForwardRef(ChevronDown16)
-                      aria-label="Open menu"
-                      name="chevron--down"
+                  <ForwardRef(ChevronDown16)>
+                    <Icon
+                      fill="currentColor"
+                      height={16}
+                      preserveAspectRatio="xMidYMid meet"
+                      viewBox="0 0 16 16"
+                      width={16}
+                      xmlns="http://www.w3.org/2000/svg"
                     >
-                      <Icon
-                        aria-label="Open menu"
+                      <svg
+                        aria-hidden={true}
+                        fill="currentColor"
+                        focusable="false"
                         height={16}
-                        name="chevron--down"
                         preserveAspectRatio="xMidYMid meet"
                         viewBox="0 0 16 16"
                         width={16}
                         xmlns="http://www.w3.org/2000/svg"
                       >
-                        <svg
-                          aria-label="Open menu"
-                          focusable="false"
-                          height={16}
-                          name="chevron--down"
-                          preserveAspectRatio="xMidYMid meet"
-                          role="img"
-                          style={
-                            Object {
-                              "willChange": "transform",
-                            }
-                          }
-                          viewBox="0 0 16 16"
-                          width={16}
-                          xmlns="http://www.w3.org/2000/svg"
-                        >
-                          <path
-                            d="M8 11L3 6 3.7 5.3 8 9.6 12.3 5.3 13 6z"
-                          />
-                          <title>
-                            Open menu
-                          </title>
-                        </svg>
-                      </Icon>
-                    </ForwardRef(ChevronDown16)>
-                  </div>
-                </ListBoxMenuIcon>
-              </div>
-            </ListBoxField>
+                        <path
+                          d="M8 11L3 6 3.7 5.3 8 9.6 12.3 5.3 13 6z"
+                        />
+                      </svg>
+                    </Icon>
+                  </ForwardRef(ChevronDown16)>
+                </button>
+              </ListBoxTrigger>
+            </div>
           </div>
         </ListBox>
-      </Downshift>
-    </Selection>
-  </div>
+      </div>
+    </Downshift>
+  </Selection>
 </FilterableMultiSelect>
 `;

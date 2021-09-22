@@ -8,38 +8,45 @@
 /* eslint-disable no-console */
 
 import React from 'react';
-import { storiesOf } from '@storybook/react';
-
-import { withKnobs, boolean, array } from '@storybook/addon-knobs';
+import { withKnobs, boolean } from '@storybook/addon-knobs';
 import DataTableSkeleton from '../DataTableSkeleton';
+import { headers } from '../DataTable/stories/shared';
 
 const props = () => ({
-  headers: array(
-    'Optional table headers (headers)',
-    ['Name', 'Protocol', 'Port', 'Rule', 'Attached Groups'],
-    ','
-  ),
+  showHeaders: boolean('Show table headers', true),
   zebra: boolean('Use zebra stripe (zebra)', false),
   compact: boolean('Compact variant (compact)', false),
+  showHeader: boolean('Show the Table Header (showHeader)', true),
+  showToolbar: boolean('Show the Table Toolbar (showToolbar)', true),
 });
 
-storiesOf('DataTableSkeleton', module)
-  .addDecorator(withKnobs)
-  .add(
-    'default',
-    () => (
-      <div style={{ width: '800px' }}>
-        <DataTableSkeleton {...props()} />
-        <br />
-      </div>
-    ),
-    {
-      info: {
-        text: `
-            Skeleton states are used as a progressive loading state while the user waits for content to load.
-    
-            This example shows a skeleton state for a data table.
-          `,
-      },
-    }
+export default {
+  title: 'Components/DataTable',
+  decorators: [withKnobs],
+
+  parameters: {
+    component: DataTableSkeleton,
+  },
+};
+
+export const Skeleton = () => {
+  const { showHeaders, ...rest } = props();
+  return (
+    <div style={{ width: '800px' }}>
+      <DataTableSkeleton {...rest} headers={showHeaders ? headers : null} />
+      <br />
+    </div>
   );
+};
+
+Skeleton.storyName = 'default';
+
+Skeleton.parameters = {
+  info: {
+    text: `
+        Skeleton states are used as a progressive loading state while the user waits for content to load.
+
+        This example shows a skeleton state for a data table.
+      `,
+  },
+};

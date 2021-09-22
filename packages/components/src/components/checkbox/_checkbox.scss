@@ -45,17 +45,23 @@
 
   // The label corresponds to the content inside of the `label` tag. Since we're
   // creating our own checkbox style, we'll need to position this in order to
-  // accomodate the spacing needed for the checkbox.
+  // accommodate the spacing needed for the checkbox.
   .#{$prefix}--checkbox-label {
     @include reset;
     @include type-style('body-short-01');
-    line-height: 1.5rem;
+
     position: relative;
     display: flex;
-    cursor: pointer;
-    padding-left: rem(26px); //width of checkbox 16px + 10px of padding
     min-height: rem(24px);
+    padding-top: rem(3px);
+    padding-left: rem(20px);
+    cursor: pointer;
     user-select: none;
+  }
+
+  .#{$prefix}--checkbox-label-text {
+    // Add extra spacing when label is present
+    padding-left: rem(6px);
   }
 
   // Required because `$css--reset: true` cannot currently apply to this `::before` and `::after`
@@ -66,44 +72,43 @@
 
   // Spacing for presentational checkbox
   .#{$prefix}--checkbox-label::before {
-    content: '';
+    // We need to position the pseudo-element absolutely in the space that we've
+    // created with the padding from the label itself. We position only with
+    // `top` since we don't want the checkbox to be centered vertically with the
+    // text overflows.
+    position: absolute;
+    top: rem(2px);
+    left: 0;
 
     // According to the spec, we'll want the bounding box for our checkbox to
     // be 16px. The border size will be what will be updated during the
     // different checkbox states.
     width: rem(16px);
     height: rem(16px);
-    margin: rem(2px);
-
-    // We need to position the pseudo-element absolutely in the space that we've
-    // created with the padding from the label itself. We position only with
-    // `top` since we don't want the checkbox to be centered vertically with the
-    // text overflows.
-    position: absolute;
-    left: 0;
-    top: rem(2px);
+    border: 1px solid $icon-01;
+    // increase left margin for #6480
+    margin: rem(2px) rem(2px) rem(2px) rem(3px);
 
     // Checkboxes with a background color look visually off against a parent container.
     background-color: transparent;
-    border: 1px solid $ui-05;
     border-radius: 1px;
+    content: '';
   }
 
   // Create the appearance of the check in the `after` pseudo-element
   .#{$prefix}--checkbox-label::after {
-    content: '';
-
     position: absolute;
-    left: rem(6px);
     top: rem(8px);
+    left: rem(7px);
     width: rem(9px);
     height: rem(5px);
-    background: none;
-    border-left: 2px solid $inverse-01;
     border-bottom: 2px solid $inverse-01;
+    border-left: 2px solid $inverse-01;
+    margin-top: rem(-3px) #{'/*rtl:0rem*/'};
+    background: none;
+    content: '';
     transform: scale(0) rotate(-45deg);
-    transform-origin: bottom right;
-    margin-top: rem(-3px);
+    transform-origin: bottom right #{'/*rtl:center*/'};
   }
 
   //----------------------------------------------
@@ -115,25 +120,25 @@
   .#{$prefix}--checkbox:indeterminate + .#{$prefix}--checkbox-label::before,
   .#{$prefix}--checkbox-label[data-contained-checkbox-state='true']::before,
   .#{$prefix}--checkbox-label[data-contained-checkbox-state='mixed']::before {
-    background-color: $icon-01;
-    border-color: $icon-01;
     border-width: 1px;
+    border-color: $icon-01;
+    background-color: $icon-01;
   }
 
   // Display the check
   .#{$prefix}--checkbox:checked + .#{$prefix}--checkbox-label::after,
   .#{$prefix}--checkbox-label[data-contained-checkbox-state='true']::after {
-    transform: scale(1) rotate(-45deg);
+    transform: scale(1) rotate(-45deg) #{'/*rtl:scale(1.2) rotate3d(.5, 1, 0, 158deg)*/'};
   }
 
   // Indeterminate symbol
   .#{$prefix}--checkbox:indeterminate + .#{$prefix}--checkbox-label::after,
   .#{$prefix}--checkbox-label[data-contained-checkbox-state='mixed']::after {
-    transform: scale(1) rotate(0deg);
-    border-left: 0 solid $inverse-01;
-    border-bottom: 2px solid $inverse-01;
-    width: rem(8px);
     top: rem(11px);
+    width: rem(8px);
+    border-bottom: 2px solid $inverse-01;
+    border-left: 0 solid $inverse-01;
+    transform: scale(1) rotate(0deg);
   }
 
   //----------------------------------------------
@@ -149,28 +154,18 @@
   // Indeterminate
   .#{$prefix}--checkbox:indeterminate:focus + .#{$prefix}--checkbox-label::before,
   .#{$prefix}--checkbox-label[data-contained-checkbox-state='mixed'].#{$prefix}--checkbox-label__focus::before {
-    // We can't use outline here because of the rounded corners so have to increase the width/height to fake an outline.
-    border-color: $focus;
-    border-width: 3px;
-    width: rem(20px);
-    height: rem(20px);
-    left: -2px;
-    top: 0;
+    outline: 2px solid $focus;
+    outline-offset: 1px;
   }
 
   //----------------------------------------------
   // Disabled
   // ---------------------------------------------
 
-  // Workaround for: https://developer.microsoft.com/en-us/microsoft-edge/platform/issues/11295231
-  [disabled] ~ _ {
-    font-size: inherit;
-  }
-
   .#{$prefix}--checkbox:disabled + .#{$prefix}--checkbox-label,
   .#{$prefix}--checkbox-label[data-contained-checkbox-disabled='true'] {
-    cursor: not-allowed;
     color: $disabled-02;
+    cursor: not-allowed;
   }
 
   .#{$prefix}--checkbox:disabled + .#{$prefix}--checkbox-label::before,
@@ -184,6 +179,20 @@
   .#{$prefix}--checkbox-label[data-contained-checkbox-state='true'][data-contained-checkbox-disabled='true']::before,
   .#{$prefix}--checkbox-label[data-contained-checkbox-state='mixed'][data-contained-checkbox-disabled='true']::before {
     background-color: $disabled-02;
+  }
+
+  //-----------------------------------------------
+  // Skeleton
+  //-----------------------------------------------
+
+  .#{$prefix}--checkbox-label-text.#{$prefix}--skeleton {
+    @include skeleton;
+
+    width: rem(100px);
+    height: $spacing-05;
+
+    // Add extra spacing when label is present
+    margin: rem(1px) 0 0 rem(6px);
   }
 }
 

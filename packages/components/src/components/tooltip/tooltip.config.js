@@ -24,19 +24,13 @@ module.exports = {
       `,
       context: {
         noHeading: {
-          idSuffix: `example-${Math.random()
-            .toString(36)
-            .substr(2)}`,
+          idSuffix: `example-${Math.random().toString(36).substr(2)}`,
         },
         heading: {
-          idSuffix: `example-${Math.random()
-            .toString(36)
-            .substr(2)}`,
+          idSuffix: `example-${Math.random().toString(36).substr(2)}`,
         },
         label: {
-          idSuffix: `example-${Math.random()
-            .toString(36)
-            .substr(2)}`,
+          idSuffix: `example-${Math.random().toString(36).substr(2)}`,
         },
       },
     },

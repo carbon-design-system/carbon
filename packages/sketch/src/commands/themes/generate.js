@@ -23,7 +23,7 @@ export function generate() {
     const page = selectPage(findOrCreatePage(document, 'themes'));
     const sharedStyles = syncThemeColorStyles(document);
 
-    const tokens = groupByKey(sharedStyles, sharedStyle => {
+    const tokens = groupByKey(sharedStyles, (sharedStyle) => {
       const [_namespace, _category, _group, token] = sharedStyle.name.split(
         '/'
       );

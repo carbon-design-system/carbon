@@ -27,6 +27,15 @@ describe('TextInput', () => {
     const textInput = () => wrapper.find('input');
 
     describe('input', () => {
+      let container;
+
+      afterEach(() => {
+        if (container && container.parentNode) {
+          container.parentNode.removeChild(container);
+        }
+        container = null;
+      });
+
       it('renders as expected', () => {
         expect(textInput().length).toBe(1);
       });
@@ -47,7 +56,12 @@ describe('TextInput', () => {
             );
           }
         }
-        const wrapper = mount(<MyComponent />);
+        container = document.createElement('div');
+        container.id = 'container';
+        document.body.appendChild(container);
+        const wrapper = mount(<MyComponent />, {
+          attachTo: document.querySelector('#container'),
+        });
         expect(document.activeElement.type).toBeUndefined();
         wrapper.instance().focus();
         expect(document.activeElement.type).toEqual('text');
@@ -118,17 +132,11 @@ describe('TextInput', () => {
 
       it('renders children as expected', () => {
         wrapper.setProps({
-          helperText: (
-            <span>
-              This helper text has <a href="#">a link</a>.
-            </span>
-          ),
+          helperText: <span>This is helper text.</span>,
         });
         const renderedHelper = wrapper.find(`.${prefix}--form__helper-text`);
         expect(renderedHelper.props().children).toEqual(
-          <span>
-            This helper text has <a href="#">a link</a>.
-          </span>
+          <span>This is helper text.</span>
         );
       });
 
@@ -159,12 +167,12 @@ describe('TextInput', () => {
 
       it('should not invoke onClick', () => {
         input.simulate('click');
-        expect(onClick).not.toBeCalled();
+        expect(onClick).not.toHaveBeenCalled();
       });
 
       it('should not invoke onChange', () => {
         input.simulate('change');
-        expect(onChange).not.toBeCalled();
+        expect(onChange).not.toHaveBeenCalled();
       });
     });
 
@@ -190,12 +198,12 @@ describe('TextInput', () => {
 
       it('should invoke onClick when input is clicked', () => {
         input.simulate('click');
-        expect(onClick).toBeCalled();
+        expect(onClick).toHaveBeenCalled();
       });
 
       it('should invoke onChange when input value is changed', () => {
         input.simulate('change', eventObject);
-        expect(onChange).toBeCalledWith(eventObject);
+        expect(onChange).toHaveBeenCalledWith(eventObject);
       });
     });
   });

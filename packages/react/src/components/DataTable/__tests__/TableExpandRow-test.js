@@ -26,7 +26,7 @@ describe('DataTable.TableExpandRow', () => {
       <Table>
         <TableBody>
           <TableExpandRow {...mockProps} />
-          <TableExpandedRow />
+          <TableExpandedRow colSpan={1} />
         </TableBody>
       </Table>
     );
@@ -38,23 +38,17 @@ describe('DataTable.TableExpandRow', () => {
       <Table>
         <TableBody>
           <TableExpandRow {...mockProps} />
-          <TableExpandedRow />
+          <TableExpandedRow colSpan={1} />
         </TableBody>
       </Table>
     );
     expect(
-      Object.keys(
-        wrapper
-          .find('TableCell')
-          .first()
-          .props()
-      ).indexOf('data-previous-value') !== -1
+      Object.keys(wrapper.find('TableCell').first().props()).indexOf(
+        'data-previous-value'
+      ) !== -1
     ).toBe(true);
     expect(
-      wrapper
-        .find('TableCell')
-        .first()
-        .prop('data-previous-value')
+      wrapper.find('TableCell').first().prop('data-previous-value')
     ).not.toBeDefined();
   });
 
@@ -63,7 +57,7 @@ describe('DataTable.TableExpandRow', () => {
       <Table>
         <TableBody>
           <TableExpandRow {...mockProps} />
-          <TableExpandedRow />
+          <TableExpandedRow colSpan={1} />
         </TableBody>
       </Table>
     );
@@ -74,15 +68,12 @@ describe('DataTable.TableExpandRow', () => {
       <Table>
         <TableBody>
           <TableExpandRow {...mockProps} isExpanded />
-          <TableExpandedRow />
+          <TableExpandedRow colSpan={1} />
         </TableBody>
       </Table>
     );
     expect(
-      expandedWrapper
-        .find('TableCell')
-        .first()
-        .prop('data-previous-value')
+      expandedWrapper.find('TableCell').first().prop('data-previous-value')
     ).toBe('collapsed');
   });
 });

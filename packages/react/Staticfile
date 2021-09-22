@@ -1,1 +1,2 @@
 root: storybook-static
+force_https: true

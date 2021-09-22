@@ -12,9 +12,6 @@ export const defaultAttributes = {
   // `focusable` is a string attribute which is why we do not use a boolean here
   focusable: 'false',
   preserveAspectRatio: 'xMidYMid meet',
-  // Reference:
-  // https://github.com/ckeditor/ckeditor5/issues/668#issuecomment-344844027
-  style: 'will-change: transform;',
 };
 
 /**

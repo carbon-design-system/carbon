@@ -24,22 +24,6 @@ $css--font-face: false;
     expect(result.css.toString()).toMatchSnapshot();
   });
 
-  it('should output helvetica if $css--font-face is true and $css--plex is false', async () => {
-    const { result } = await render(`
-$css--reset: false;
-$css--font-face: true;
-$css--plex: false;
-@import '../css--font-face';
-`);
-
-    expect(result.css.toString()).toEqual(
-      expect.stringContaining('@font-face')
-    );
-    expect(result.css.toString()).toEqual(
-      expect.stringContaining(`font-family: 'IBM Helvetica'`)
-    );
-  });
-
   describe('experimental', () => {
     it('should output @font-face blocks from elements if components-x flag is enabled', async () => {
       const { result } = await render(`

@@ -42,13 +42,17 @@ export function testSyncSharedStyles() {
     /**
      * Testing shared layer styles
      */
-    const sharedStyle = syncColorStyle(document, 'black', '#000000');
+    const sharedStyle = syncColorStyle({
+      document,
+      name: 'black',
+      value: '#000000',
+    });
 
     if (document.sharedLayerStyles.length !== 1) {
       throw new Error('Expected sync command to generate a shared layer style');
     }
 
-    syncColorStyle(document, 'black', '#000000');
+    syncColorStyle({ document, name: 'black', value: '#000000' });
 
     if (document.sharedLayerStyles.length !== 1) {
       throw new Error(
@@ -118,7 +122,7 @@ export function testSyncSharedStyles() {
       throw new Error('The layer is not in sync with the shared style');
     }
 
-    syncColorStyle(document, 'black', '#dedede');
+    syncColorStyle({ document, name: 'black', value: '#dedede' });
 
     if (getLayerFillColor() !== '#dededeff') {
       throw new Error('The layer did not update to the new shared style');
@@ -129,10 +133,10 @@ export function testSyncSharedStyles() {
      */
     clear();
 
-    const textSharedStyle = syncSharedStyle(
+    const textSharedStyle = syncSharedStyle({
       document,
-      'test-shared-text-style',
-      {
+      name: 'test-shared-text-style',
+      style: {
         textColor: '#000000ff',
         fontSize: 16,
         textTransform: 'none',
@@ -145,19 +149,19 @@ export function testSyncSharedStyles() {
         alignment: 'left',
         styleType: SharedStyle.StyleType.Text,
       },
-      SharedStyle.StyleType.Text
-    );
+      styleType: SharedStyle.StyleType.Text,
+    });
 
     if (document.sharedTextStyles.length !== 1) {
       throw new Error('Expected sync command to generate a shared text style');
     }
 
-    syncSharedStyle(
+    syncSharedStyle({
       document,
-      'test-shared-text-style',
-      {},
-      SharedStyle.StyleType.Text
-    );
+      name: 'test-shared-text-style',
+      style: {},
+      styleType: SharedStyle.StyleType.Text,
+    });
 
     if (document.sharedTextStyles.length !== 1) {
       throw new Error(
@@ -185,14 +189,14 @@ export function testSyncSharedStyles() {
       throw new Error('Inserted layer is out of sync with shared text style');
     }
 
-    syncSharedStyle(
+    syncSharedStyle({
       document,
-      'test-shared-text-style',
-      {
+      name: 'test-shared-text-style',
+      style: {
         textColor: '#343434ff',
       },
-      SharedStyle.StyleType.Text
-    );
+      styleType: SharedStyle.StyleType.Text,
+    });
 
     if (getTextFillColor() !== '#343434ff') {
       throw new Error('Shared text style textColor was not updated');

@@ -9,26 +9,31 @@
 
 const execa = require('execa');
 const fs = require('fs-extra');
+const glob = require('fast-glob');
 const path = require('path');
 const packageJson = require('../../../package.json');
 
-const PACKAGES_DIR = path.resolve(__dirname, '../..');
-const packagePaths = fs.readdirSync(PACKAGES_DIR).map(pkg => {
-  const packageJsonPath = path.join(PACKAGES_DIR, pkg, 'package.json');
-  return {
-    basename: pkg,
-    packageJsonPath,
-    packageJson: fs.readJsonSync(packageJsonPath),
-    packagePath: path.join(PACKAGES_DIR, pkg),
-  };
-});
+const WORKSPACE_ROOT = path.resolve(__dirname, '../../../');
+const packagePaths = glob
+  .sync(packageJson.workspaces.map((pattern) => `${pattern}/package.json`))
+  .map((match) => {
+    const packageJsonPath = path.join(WORKSPACE_ROOT, match);
+    return {
+      packageJsonPath,
+      packageJson: fs.readJsonSync(packageJsonPath),
+      packagePath: path.dirname(packageJsonPath),
+      packageFolder: path.relative(
+        WORKSPACE_ROOT,
+        path.dirname(packageJsonPath)
+      ),
+    };
+  });
 
 const env = {
   root: {
-    directory: path.resolve(__dirname, '../../..'),
+    directory: WORKSPACE_ROOT,
     packageJson,
   },
-  packagesDir: PACKAGES_DIR,
   packagePaths,
 };
 
@@ -46,14 +51,7 @@ async function getPackages() {
     'list',
     '--json',
   ]);
-  return JSON.parse(
-    // Clean-up output by stripping out `yarn` information related to the
-    // command and how long it took to run
-    lernaListOutput
-      .split('\n')
-      .slice(2, -1)
-      .join('\n')
-  ).filter(pkg => !pkg.private);
+  return JSON.parse(lernaListOutput).filter((pkg) => !pkg.private);
 }
 
 module.exports = {

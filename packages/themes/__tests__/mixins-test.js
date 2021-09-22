@@ -9,95 +9,69 @@
 
 'use strict';
 
-const { convert, createSassRenderer } = require('@carbon/test-utils/scss');
+const { SassRenderer } = require('@carbon/test-utils/scss');
 const { themes } = require('../src');
 
-const render = createSassRenderer(__dirname);
+const { render } = SassRenderer.create(__dirname);
 
 describe('_mixins.scss', () => {
   it('should export a carbon--theme mixin', async () => {
-    const { calls } = await render(`
+    const { unwrap } = await render(`
       @import '../scss/mixins';
 
-      $t: test(mixin-exists(carbon--theme));
+      $_: get('mixin', mixin-exists(carbon--theme));
     `);
 
-    for (const call of calls) {
-      expect(call[0].getValue()).toBe(true);
-    }
+    expect(unwrap('mixin')).toBe(true);
   });
 
   it('should set token variables for the given theme', async () => {
-    const themeTests = Object.keys(themes).map(key => {
+    const themeTests = Object.keys(themes).map((key) => {
       const variable = `$carbon--theme--${key}`;
       const test = `
         @include carbon--theme(${variable}) {
-          $t: test($interactive-01);
+          $_: get('${variable}', $interactive-01);
         }
       `;
       return [variable, themes[key].interactive01, test];
     });
+
     const tests = themeTests
       .map(([_variable, _expectedColor, test]) => test)
       .join('\n');
-    const { calls } = await render(`
+    const { unwrap } = await render(`
       @import '../scss/themes';
       ${tests}
     `);
 
-    themeTests.forEach(([_variable, expectedColor], i) => {
-      expect(convert(calls[i][0])).toBe(expectedColor);
-    });
-  });
-
-  it('should set token variables for the given theme', async () => {
-    const themeTests = Object.keys(themes).map(key => {
-      const variable = `$carbon--theme--${key}`;
-      const test = `
-        $feature-flags: (enable-css-custom-properties: true);
-        @include carbon--theme(${variable}) {
-          $t: test($field-01);
-        }
-      `;
-      return [variable, themes[key].interactive01, test];
-    });
-    const tests = themeTests
-      .map(([_variable, _expectedColor, test]) => test)
-      .join('\n');
-    const { calls } = await render(`
-      @import '../scss/themes';
-      ${tests}
-    `);
-    const colors = calls.map(([call]) => convert(call));
-    themeTests.forEach((_, i) => {
-      expect(convert(calls[i][0])).toBe(`${colors[i]}`);
+    themeTests.forEach(([variable, expectedColor]) => {
+      expect(unwrap(variable)).toBe(expectedColor);
     });
   });
 
   it('should reset token variables after using the theme', async () => {
-    const { calls } = await render(`
+    const { unwrap } = await render(`
       @import '../scss/themes';
 
       $custom-theme: map-merge($carbon--theme--white, (
         interactive-01: #ffffff,
       ));
 
-      $t: test($interactive-01);
+      $_: get('before', $interactive-01);
 
       @include carbon--theme($custom-theme) {
-        $t: test($interactive-01);
+        $_: get('mixin', $interactive-01);
       }
 
-      $t: test($interactive-01);
+      $_: get('after', $interactive-01);
     `);
 
-    const colors = calls.map(call => convert(call[0]));
-    expect(colors[0]).toEqual(colors[2]);
-    expect(colors[1]).toBe('#ffffff');
+    expect(unwrap('before')).toBe(unwrap('after'));
+    expect(unwrap('mixin')).toBe('#ffffff');
   });
 
   it('should reset token variables after using the theme with css custom properties', async () => {
-    const { calls } = await render(`
+    const { unwrap } = await render(`
       $feature-flags: (enable-css-custom-properties: true);
 
       @import '../scss/themes';
@@ -106,18 +80,39 @@ describe('_mixins.scss', () => {
         interactive-01: #ffffff,
       ));
 
-      $t: test($interactive-01);
+      $_: get('before', $interactive-01);
 
       @include carbon--theme($custom-theme) {
-        $t: test($interactive-01);
+        $_: get('mixin', $interactive-01);
       }
 
-      $t: test($interactive-01);
+      $_: get('after', $interactive-01);
     `);
 
-    const colors = calls.map(([call]) => convert(call));
-    expect(colors[1]).toBe('var(--cds-interactive-01, #ffffff)');
-    expect(colors[2]).toBe(`var(--cds-interactive-01, ${colors[0]})`);
+    expect(unwrap('mixin')).toBe('var(--cds-interactive-01, #ffffff)');
+    expect(unwrap('after')).toBe(
+      `var(--cds-interactive-01, ${unwrap('before')})`
+    );
+  });
+
+  it('should set the global carbon--theme to match the given theme', async () => {
+    const { unwrap } = await render(`
+      @import '../scss/themes';
+      $carbon--theme: ( value-01: #000000 );
+      $custom-theme: ( value-01: #ffffff );
+
+      @include carbon--theme($custom-theme) {
+        $_: get('mixin', $carbon--theme);
+      }
+
+      $_: get('after', $carbon--theme);
+    `);
+
+    const mixin = unwrap('mixin');
+    const after = unwrap('after');
+
+    expect(mixin['value-01']).toBe('#ffffff');
+    expect(after['value-01']).toBe('#000000');
   });
 
   describe('@mixin custom-property', () => {
@@ -157,7 +152,7 @@ describe('_mixins.scss', () => {
 
   describe('@function should-emit', () => {
     it('should emit a value only if they are different', async () => {
-      const { calls } = await render(`
+      const { unwrap } = await render(`
         @import '../scss/mixins';
 
         $theme-a: (
@@ -182,18 +177,37 @@ describe('_mixins.scss', () => {
         );
 
         // The properties are different, so should emit
-        $t: test(should-emit($theme-a, $theme-b, 'property-01', true));
-        $t: test(should-emit($theme-a, $theme-b, 'property-04', true));
+        $_: get('first', should-emit($theme-a, $theme-b, 'property-01', true));
+        $_: get('second', should-emit($theme-a, $theme-b, 'property-04', true));
 
         // The properties are the same so should not emit
-        $t: test(should-emit($theme-a, $theme-b, 'property-02', true));
-        $t: test(should-emit($theme-a, $theme-b, 'property-03', true));
+        $_: get('third', should-emit($theme-a, $theme-b, 'property-02', true));
+        $_: get('fourth', should-emit($theme-a, $theme-b, 'property-03', true));
       `);
 
-      expect(convert(calls[0][0])).toBe(true);
-      expect(convert(calls[1][0])).toBe(true);
-      expect(convert(calls[2][0])).toBe(false);
-      expect(convert(calls[3][0])).toBe(false);
+      expect(unwrap('first')).toBe(true);
+      expect(unwrap('second')).toBe(true);
+      expect(unwrap('third')).toBe(false);
+      expect(unwrap('fourth')).toBe(false);
+    });
+  });
+
+  describe('v11', () => {
+    it('should use fallback values for v11 tokens', async () => {
+      const { unwrap } = await render(`
+        @import '../scss/mixins';
+        @import '../scss/theme-maps';
+
+        $carbon--theme: (
+          ui-background: #ffffff,
+        );
+        @include carbon--theme();
+
+        $_: get('token', $background);
+      `);
+
+      // `ui-background` is the fallback for `background`
+      expect(unwrap('token')).toBe('#ffffff');
     });
   });
 });

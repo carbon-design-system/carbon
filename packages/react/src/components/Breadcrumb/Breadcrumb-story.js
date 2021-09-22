@@ -8,82 +8,74 @@
 /* eslint-disable no-console */
 
 import React from 'react';
-import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 import { withKnobs, boolean } from '@storybook/addon-knobs';
 import { Breadcrumb, BreadcrumbItem, BreadcrumbSkeleton } from '../Breadcrumb';
+import OverflowMenu from '../OverflowMenu';
+import OverflowMenuItem from '../OverflowMenuItem';
+import mdx from './Breadcrumb.mdx';
+
+export default {
+  title: 'Components/Breadcrumb',
+  component: Breadcrumb,
+  subcomponents: {
+    BreadcrumbItem,
+    BreadcrumbSkeleton,
+  },
+  decorators: [withKnobs],
+  parameters: {
+    docs: {
+      page: mdx,
+    },
+  },
+};
+
+export const breadcrumb = () => (
+  <Breadcrumb>
+    <BreadcrumbItem>
+      <a href="/#">Breadcrumb 1</a>
+    </BreadcrumbItem>
+    <BreadcrumbItem href="#">Breadcrumb 2</BreadcrumbItem>
+    <BreadcrumbItem href="#">Breadcrumb 3</BreadcrumbItem>
+    <BreadcrumbItem>Breadcrumb 4</BreadcrumbItem>
+  </Breadcrumb>
+);
+
+export const breadcrumbWithOverflowMenu = () => (
+  <Breadcrumb>
+    <BreadcrumbItem>
+      <a href="/#">Breadcrumb 1</a>
+    </BreadcrumbItem>
+    <BreadcrumbItem href="#">Breadcrumb 2</BreadcrumbItem>
+    <BreadcrumbItem data-floating-menu-container>
+      <OverflowMenu>
+        <OverflowMenuItem itemText="Breadcrumb 3" />
+        <OverflowMenuItem itemText="Breadcrumb 4" />
+      </OverflowMenu>
+    </BreadcrumbItem>
+    <BreadcrumbItem href="#">Breadcrumb 5</BreadcrumbItem>
+    <BreadcrumbItem>Breadcrumb 6</BreadcrumbItem>
+  </Breadcrumb>
+);
+
+export const skeleton = () => <BreadcrumbSkeleton />;
 
 const props = () => ({
   className: 'some-class',
   noTrailingSlash: boolean('No trailing slash (noTrailingSlash)', false),
+  isCurrentPage: boolean('Is current page (isCurrentPage)', false),
   onClick: action('onClick'),
 });
 
-storiesOf('Breadcrumb', module)
-  .addDecorator(withKnobs)
-  .add(
-    'default',
-    () => (
-      <Breadcrumb {...props()}>
-        <BreadcrumbItem>
-          <a href="/#">Breadcrumb 1</a>
-        </BreadcrumbItem>
-        <BreadcrumbItem href="#">Breadcrumb 2</BreadcrumbItem>
-        <BreadcrumbItem href="#">Breadcrumb 3</BreadcrumbItem>
-      </Breadcrumb>
-    ),
-    {
-      info: {
-        text: `
-          Breadcrumb enables users to quickly see their location within a path of navigation and move up to a parent level if desired.
-        `,
-      },
-    }
-  )
-  .add('skeleton', () => <BreadcrumbSkeleton />, {
-    info: {
-      text: `
-          Placeholder skeleton state to use when content is loading.
-          `,
-    },
-  })
-  .add(
-    'current page',
-    () => (
-      <Breadcrumb {...props()} noTrailingSlash>
-        <BreadcrumbItem>
-          <a href="/#">Breadcrumb 1</a>
-        </BreadcrumbItem>
-        <BreadcrumbItem href="#">Breadcrumb 2</BreadcrumbItem>
-        <BreadcrumbItem href="#" isCurrentPage>
-          Breadcrumb 3
-        </BreadcrumbItem>
-      </Breadcrumb>
-    ),
-    {
-      info: {
-        text:
-          'You can specify a BreadcrumbItem component as the current page with the `isCurrentPage` prop',
-      },
-    }
-  )
-  .add(
-    'current page with aria-current',
-    () => (
-      <Breadcrumb {...props()} noTrailingSlash>
-        <BreadcrumbItem>
-          <a href="/#">Breadcrumb 1</a>
-        </BreadcrumbItem>
-        <BreadcrumbItem href="#">Breadcrumb 2</BreadcrumbItem>
-        <BreadcrumbItem href="#" aria-current="page">
-          Breadcrumb 3
-        </BreadcrumbItem>
-      </Breadcrumb>
-    ),
-    {
-      info: {
-        text:
-          'You can specify a BreadcrumbItem component as the current page with the `aria-current` prop by specifying `aria-current="page"`',
-      },
-    }
-  );
+export const playground = () => (
+  <Breadcrumb {...props()}>
+    <BreadcrumbItem>
+      <a href="/#">Breadcrumb 1</a>
+    </BreadcrumbItem>
+    <BreadcrumbItem href="#">Breadcrumb 2</BreadcrumbItem>
+    <BreadcrumbItem href="#" {...props()}>
+      Breadcrumb 3
+    </BreadcrumbItem>
+    <BreadcrumbItem>Breadcrumb 4</BreadcrumbItem>
+  </Breadcrumb>
+);

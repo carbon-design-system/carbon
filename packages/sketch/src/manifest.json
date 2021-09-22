@@ -11,6 +11,12 @@
       "handler": "syncColors"
     },
     {
+      "name": "Sync color variables",
+      "identifier": "carbon.elements.colors.syncvars",
+      "script": "commands/index.js",
+      "handler": "syncColorVars"
+    },
+    {
       "name": "Generate color page",
       "identifier": "carbon.elements.colors.generate",
       "script": "commands/index.js",
@@ -47,10 +53,16 @@
       "handler": "generateIcons"
     },
     {
-      "name": "Sync icon symbols",
-      "identifier": "carbon.elements.icons.sync",
+      "name": "Sync icon symbols (24 / 32)",
+      "identifier": "carbon.elements.icons.sync.large",
       "script": "commands/index.js",
-      "handler": "syncIcons"
+      "handler": "syncLargeIcons"
+    },
+    {
+      "name": "Sync icon symbols (16 / 20)",
+      "identifier": "carbon.elements.icons.sync.small",
+      "script": "commands/index.js",
+      "handler": "syncSmallIcons"
     },
     {
       "name": "Run symbol-id-sync fixture",
@@ -71,6 +83,7 @@
         "title": "Colors",
         "items": [
           "carbon.elements.colors.sync",
+          "carbon.elements.colors.syncvars",
           "carbon.elements.colors.generate"
         ]
       },
@@ -84,7 +97,8 @@
       {
         "title": "Icons",
         "items": [
-          "carbon.elements.icons.sync",
+          "carbon.elements.icons.sync.small",
+          "carbon.elements.icons.sync.large",
           "carbon.elements.icons.generate"
         ]
       },

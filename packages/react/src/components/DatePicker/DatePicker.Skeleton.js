@@ -7,11 +7,12 @@
 
 import PropTypes from 'prop-types';
 import React from 'react';
+import cx from 'classnames';
 import { settings } from 'carbon-components';
 
 const { prefix } = settings;
 
-const DatePickerSkeleton = ({ range, id }) => {
+const DatePickerSkeleton = ({ range, id, className, ...rest }) => {
   const dateInput = (
     <div className={`${prefix}--date-picker-container`}>
       {
@@ -26,7 +27,13 @@ const DatePickerSkeleton = ({ range, id }) => {
     return (
       <div className={`${prefix}--form-item`}>
         <div
-          className={`${prefix}--date-picker ${prefix}--date-picker--range ${prefix}--skeleton`}>
+          className={cx(
+            `${prefix}--date-picker`,
+            `${prefix}--date-picker--range`,
+            `${prefix}--skeleton`,
+            className
+          )}
+          {...rest}>
           {dateInput}
           {dateInput}
         </div>
@@ -37,7 +44,14 @@ const DatePickerSkeleton = ({ range, id }) => {
   return (
     <div className={`${prefix}--form-item`}>
       <div
-        className={`${prefix}--date-picker ${prefix}--date-picker--short ${prefix}--date-picker--simple ${prefix}--skeleton`}>
+        className={cx(
+          `${prefix}--date-picker`,
+          `${prefix}--date-picker--short`,
+          `${prefix}--date-picker--simple`,
+          `${prefix}--skeleton`,
+          className
+        )}
+        {...rest}>
         {dateInput}
       </div>
     </div>
@@ -45,6 +59,16 @@ const DatePickerSkeleton = ({ range, id }) => {
 };
 
 DatePickerSkeleton.propTypes = {
+  /**
+   * Specify an optional className to add.
+   */
+  className: PropTypes.string,
+
+  /**
+   * Specify the id to add.
+   */
+  id: PropTypes.string,
+
   /**
    * Specify whether the skeleton should be of range date picker.
    */

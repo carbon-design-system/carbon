@@ -1,0 +1,12 @@
+<svg id="icon" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: none;
+      }
+    </style>
+  </defs>
+  <path d="M16,2A14,14,0,1,0,30,16,14,14,0,0,0,16,2Zm8,15H11.85l5.58,5.5728L16,24,8,16l8-8,1.43,1.3926L11.85,15H24Z"/>
+  <polygon id="inner-path" class="cls-1" points="16 8 17.43 9.393 11.85 15 24 15 24 17 11.85 17 17.43 22.573 16 24 8 16 16 8"/>
+  <rect id="_Transparent_Rectangle_" data-name="&lt;Transparent Rectangle&gt;" class="cls-1" width="32" height="32"/>
+</svg>

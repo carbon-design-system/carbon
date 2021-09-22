@@ -14,8 +14,8 @@ describe('TileGroup', () => {
   describe('renders as expected', () => {
     const wrapper = mount(
       <TileGroup defaultSelected="female" name="gender">
-        <RadioTile labelText="Male" value="male" />
-        <RadioTile labelText="Female" value="female" />
+        <RadioTile value="male" />
+        <RadioTile value="female" />
       </TileGroup>
     );
 
@@ -28,7 +28,7 @@ describe('TileGroup', () => {
 
       it('sets classes that are passed via className prop', () => {
         wrapper.setProps({ className: 'extra-class' });
-        expect(div.hasClass('extra-class'));
+        expect(wrapper.first('div').hasClass('extra-class')).toBe(true);
       });
 
       it('sets disabled attribute if disabled prop is set', () => {
@@ -45,26 +45,14 @@ describe('TileGroup', () => {
       });
 
       it('should set checked property based on defaultSelected prop', () => {
-        expect(
-          tileButton()
-            .last()
-            .props().checked
-        ).toEqual(true);
+        expect(tileButton().last().props().checked).toEqual(true);
       });
 
       it('should set checked property based on valueSelected prop', () => {
         wrapper.setProps({ valueSelected: 'male' });
-        expect(
-          tileButton()
-            .first()
-            .props().checked
-        ).toEqual(true);
+        expect(tileButton().first().props().checked).toEqual(true);
         wrapper.setProps({ valueSelected: 'female' });
-        expect(
-          tileButton()
-            .last()
-            .props().checked
-        ).toEqual(true);
+        expect(tileButton().last().props().checked).toEqual(true);
       });
 
       it('should set expected props on children', () => {
@@ -79,8 +67,8 @@ describe('TileGroup', () => {
     const onChange = jest.fn();
     const wrapper = mount(
       <TileGroup onChange={onChange} name="gender">
-        <RadioTile labelText="Male" value="male" />
-        <RadioTile labelText="Female" value="female" />
+        <RadioTile value="male" />
+        <RadioTile value="female" />
       </TileGroup>
     );
 
@@ -94,16 +82,11 @@ describe('TileGroup', () => {
     it('invoking onChange sets checked on correct child', () => {
       firstRadio.props().onChange(...args);
       wrapper.update();
-      expect(
-        wrapper
-          .find(RadioTile)
-          .first()
-          .props().checked
-      ).toEqual(true);
+      expect(wrapper.find(RadioTile).first().props().checked).toEqual(true);
     });
 
     it('should invoke onChange with correct arguments', () => {
-      expect(onChange).toBeCalledWith(...args);
+      expect(onChange).toHaveBeenCalledWith(...args);
     });
 
     it('calling onChange with same args should not call onChange prop', () => {
@@ -117,8 +100,8 @@ describe('TileGroup', () => {
     it('should change the selected item upon change in props', () => {
       const wrapper = shallow(
         <TileGroup name="gender" valueSelected="male">
-          <RadioTile labelText="Male" value="male" />
-          <RadioTile labelText="Female" value="female" />
+          <RadioTile value="male" />
+          <RadioTile value="female" />
         </TileGroup>
       );
       expect(wrapper.state().selected).toEqual('male');
@@ -129,8 +112,8 @@ describe('TileGroup', () => {
     it('should avoid change the selected item upon setting props, unless there the value actually changes', () => {
       const wrapper = shallow(
         <TileGroup name="gender">
-          <RadioTile labelText="Male" value="male" />
-          <RadioTile labelText="Female" value="female" />
+          <RadioTile value="male" />
+          <RadioTile value="female" />
         </TileGroup>
       );
       wrapper.setProps({ valueSelected: 'male' });

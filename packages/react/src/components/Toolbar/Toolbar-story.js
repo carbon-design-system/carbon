@@ -6,7 +6,6 @@
  */
 
 import React from 'react';
-import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 import { Filter16 } from '@carbon/icons-react';
 import Toolbar, {
@@ -29,57 +28,70 @@ const inputProps = {
   onChange: action('onChange'),
 };
 
-storiesOf('[Deprecated] Toolbar', module).add(
-  'Default',
-  () => (
-    <Toolbar {...toolbarProps} className="some-class">
-      <ToolbarItem type="search" placeHolderText="Search" />
-      <ToolbarItem>
-        <OverflowMenu renderIcon={Filter16}>
-          <ToolbarTitle title="FILTER BY" />
-          <ToolbarOption>
-            <Checkbox {...inputProps} id="opt-1" labelText="Filter option 1" />
-          </ToolbarOption>
-          <ToolbarOption>
-            <Checkbox {...inputProps} id="opt-2" labelText="Filter option 2" />
-          </ToolbarOption>
-          <ToolbarOption>
-            <Checkbox {...inputProps} id="opt-3" labelText="Filter option 3" />
-          </ToolbarOption>
-        </OverflowMenu>
-      </ToolbarItem>
-      <ToolbarItem>
-        <OverflowMenu>
-          <OverflowMenuItem itemText="Refresh table" />
-          <ToolbarDivider />
-          <ToolbarTitle title="ROW HEIGHT" />
-          <ToolbarOption>
-            <RadioButton
-              {...inputProps}
-              value="short"
-              id="radio-1"
-              name="toolbar-radio"
-              labelText="Short"
-            />
-          </ToolbarOption>
-          <ToolbarOption>
-            <RadioButton
-              {...inputProps}
-              value="tall"
-              id="radio-2"
-              name="toolbar-radio"
-              labelText="Tall"
-            />
-          </ToolbarOption>
-        </OverflowMenu>
-      </ToolbarItem>
-    </Toolbar>
-  ),
-  {
-    info: {
-      text: `
-          Toolbar stuff
-        `,
+export default {
+  title: 'Deprecated/Toolbar',
+
+  parameters: {
+    component: Toolbar,
+
+    subcomponents: {
+      ToolbarItem,
+      ToolbarTitle,
+      ToolbarOption,
+      ToolbarDivider,
     },
-  }
+  },
+};
+
+export const Default = () => (
+  <Toolbar {...toolbarProps} className="some-class">
+    <ToolbarItem type="search" placeHolderText="Search" />
+    <ToolbarItem>
+      <OverflowMenu renderIcon={Filter16}>
+        <ToolbarTitle title="FILTER BY" />
+        <ToolbarOption>
+          <Checkbox {...inputProps} id="opt-1" labelText="Filter option 1" />
+        </ToolbarOption>
+        <ToolbarOption>
+          <Checkbox {...inputProps} id="opt-2" labelText="Filter option 2" />
+        </ToolbarOption>
+        <ToolbarOption>
+          <Checkbox {...inputProps} id="opt-3" labelText="Filter option 3" />
+        </ToolbarOption>
+      </OverflowMenu>
+    </ToolbarItem>
+    <ToolbarItem>
+      <OverflowMenu>
+        <OverflowMenuItem itemText="Refresh table" />
+        <ToolbarDivider />
+        <ToolbarTitle title="ROW HEIGHT" />
+        <ToolbarOption>
+          <RadioButton
+            {...inputProps}
+            value="short"
+            id="radio-1"
+            name="toolbar-radio"
+            labelText="Short"
+          />
+        </ToolbarOption>
+        <ToolbarOption>
+          <RadioButton
+            {...inputProps}
+            value="tall"
+            id="radio-2"
+            name="toolbar-radio"
+            labelText="Tall"
+          />
+        </ToolbarOption>
+      </OverflowMenu>
+    </ToolbarItem>
+  </Toolbar>
 );
+
+Default.parameters = {
+  info: {
+    text: `
+      Toolbar stuff
+    `,
+  },
+};

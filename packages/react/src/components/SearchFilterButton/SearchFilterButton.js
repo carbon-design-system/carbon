@@ -5,40 +5,52 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React from 'react';
-import PropTypes from 'prop-types';
-import { settings } from 'carbon-components';
 import { Filter16 } from '@carbon/icons-react';
+import { settings } from 'carbon-components';
+import PropTypes from 'prop-types';
+import React from 'react';
+import { warning } from '../../internal/warning';
 
 const { prefix } = settings;
+
+let didWarnAboutDeprecation = false;
 
 /**
  * The filter button for `<Search>`.
  */
-const SearchFilterButton = ({ labelText, iconDescription, ...other }) => (
-  <button
-    className={`${prefix}--search-button`}
-    type="button"
-    aria-label={labelText}
-    title={labelText}
-    {...other}>
-    <Filter16
-      className={`${prefix}--search-filter`}
-      aria-label={iconDescription}
-    />
-  </button>
-);
+const SearchFilterButton = ({ labelText, iconDescription, ...other }) => {
+  if (__DEV__) {
+    warning(
+      didWarnAboutDeprecation,
+      'The SearchFilterButton component has been deprecated and will be removed in the next major release of `carbon-components-react`'
+    );
+    didWarnAboutDeprecation = true;
+  }
+  return (
+    <button
+      className={`${prefix}--search-button`}
+      type="button"
+      aria-label={labelText}
+      title={labelText}
+      {...other}>
+      <Filter16
+        className={`${prefix}--search-filter`}
+        aria-label={iconDescription}
+      />
+    </button>
+  );
+};
 
 SearchFilterButton.propTypes = {
-  /**
-   * The a11y label text.
-   */
-  labelText: PropTypes.string,
-
   /**
    * The icon description.
    */
   iconDescription: PropTypes.string,
+
+  /**
+   * The a11y label text.
+   */
+  labelText: PropTypes.string,
 };
 
 SearchFilterButton.defaultProps = {

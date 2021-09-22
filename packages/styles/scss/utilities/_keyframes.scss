@@ -1,0 +1,76 @@
+//
+// Copyright IBM Corp. 2021
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+@mixin content-visible {
+  opacity: 1;
+  visibility: inherit;
+}
+
+@mixin content-hidden {
+  opacity: 0;
+  visibility: hidden;
+}
+
+@keyframes hide-feedback {
+  0% {
+    @include content-visible;
+  }
+  100% {
+    @include content-hidden;
+  }
+}
+
+@keyframes show-feedback {
+  0% {
+    @include content-hidden;
+  }
+  100% {
+    @include content-visible;
+  }
+}
+
+@keyframes skeleton {
+  0% {
+    opacity: 0.3;
+    transform: scaleX(0);
+    transform-origin: left;
+  }
+  20% {
+    opacity: 1;
+    transform: scaleX(1);
+    transform-origin: left;
+  }
+  28% {
+    transform: scaleX(1);
+    transform-origin: right;
+  }
+  51% {
+    transform: scaleX(0);
+    transform-origin: right;
+  }
+  58% {
+    transform: scaleX(0);
+    transform-origin: right;
+  }
+  82% {
+    transform: scaleX(1);
+    transform-origin: right;
+  }
+  83% {
+    transform: scaleX(1);
+    transform-origin: left;
+  }
+  96% {
+    transform: scaleX(0);
+    transform-origin: left;
+  }
+  100% {
+    opacity: 0.3;
+    transform: scaleX(0);
+    transform-origin: left;
+  }
+}

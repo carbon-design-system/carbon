@@ -6,13 +6,25 @@
  */
 
 import React from 'react';
-import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 
-import { withKnobs, boolean, number, text } from '@storybook/addon-knobs';
+import {
+  withKnobs,
+  boolean,
+  number,
+  select,
+  text,
+} from '@storybook/addon-knobs';
 import TimePicker from '../TimePicker';
 import TimePickerSelect from '../TimePickerSelect';
 import SelectItem from '../SelectItem';
+import mdx from './TimePicker.mdx';
+
+const sizes = {
+  'Small  (sm)': 'sm',
+  'Medium (md) - default': undefined,
+  'Large  (lg)': 'lg',
+};
 
 const props = {
   timepicker: () => ({
@@ -26,7 +38,6 @@ const props = {
     ),
     disabled: boolean('Disabled (disabled in <TimePicker>)', false),
     light: boolean('Light variant (light in <TimePicker>)', false),
-    hideLabel: boolean('No label (hideLabel in <TimePicker>)', false),
     labelText: text('Label text (labelText in <TimePicker>)', 'Select a time'),
     invalid: boolean(
       'Show form validation UI (invalid in <TimePicker>)',
@@ -37,13 +48,13 @@ const props = {
       'A valid value is required'
     ),
     maxLength: number('Maximum length (maxLength in <TimePicker>)', 5),
+    size: select('Field size (size)', sizes, undefined) || undefined,
     onClick: action('onClick'),
     onChange: action('onChange'),
     onBlur: action('onBlur'),
   }),
   select: () => ({
     disabled: boolean('Disabled (disabled in <TimePickerSelect>)', false),
-    hideLabel: boolean('No label (hideLabel in <TimePickerSelect>)', true),
     labelText: text(
       'Label text (labelText in <TimePickerSelect>)',
       'Please select'
@@ -55,30 +66,41 @@ const props = {
   }),
 };
 
-storiesOf('TimePicker', module)
-  .addDecorator(withKnobs)
-  .add(
-    'Default',
-    () => {
-      const selectProps = props.select();
-      return (
-        <TimePicker id="time-picker" {...props.timepicker()}>
-          <TimePickerSelect id="time-picker-select-1" {...selectProps}>
-            <SelectItem value="AM" text="AM" />
-            <SelectItem value="PM" text="PM" />
-          </TimePickerSelect>
-          <TimePickerSelect id="time-picker-select-2" {...selectProps}>
-            <SelectItem value="Time zone 1" text="Time zone 1" />
-            <SelectItem value="Time zone 2" text="Time zone 2" />
-          </TimePickerSelect>
-        </TimePicker>
-      );
+export default {
+  title: 'Components/TimePicker',
+  decorators: [withKnobs],
+  parameters: {
+    component: TimePicker,
+    docs: {
+      page: mdx,
     },
-    {
-      info: {
-        text: `
-            The time picker allow users to select a time.
-          `,
-      },
-    }
+    subcomponents: {
+      TimePickerSelect,
+      SelectItem,
+    },
+  },
+};
+
+export const Default = () => {
+  const selectProps = props.select();
+  return (
+    <TimePicker id="time-picker" {...props.timepicker()}>
+      <TimePickerSelect id="time-picker-select-1" {...selectProps}>
+        <SelectItem value="AM" text="AM" />
+        <SelectItem value="PM" text="PM" />
+      </TimePickerSelect>
+      <TimePickerSelect id="time-picker-select-2" {...selectProps}>
+        <SelectItem value="Time zone 1" text="Time zone 1" />
+        <SelectItem value="Time zone 2" text="Time zone 2" />
+      </TimePickerSelect>
+    </TimePicker>
   );
+};
+
+Default.parameters = {
+  info: {
+    text: `
+        The time picker allow users to select a time.
+      `,
+  },
+};

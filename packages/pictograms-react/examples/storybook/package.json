@@ -1,5 +1,5 @@
 {
-  "name": "carbon-icons-react-storybook",
+  "name": "carbon-pictograms-react-storybook",
   "license": "Apache-2.0",
   "scripts": {
     "storybook": "start-storybook -p 6006",

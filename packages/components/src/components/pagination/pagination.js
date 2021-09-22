@@ -43,7 +43,7 @@ class Pagination extends mixin(
     super(element, options);
 
     this.manage(
-      on(this.element, 'click', evt => {
+      on(this.element, 'click', (evt) => {
         if (eventMatches(evt, this.options.selectorPageBackward)) {
           const detail = {
             initialEvt: evt,
@@ -63,7 +63,7 @@ class Pagination extends mixin(
     );
 
     this.manage(
-      on(this.element, 'input', evt => {
+      on(this.element, 'input', (evt) => {
         if (eventMatches(evt, this.options.selectorItemsPerPageInput)) {
           const detail = {
             initialEvt: evt,
@@ -108,7 +108,7 @@ class Pagination extends mixin(
    * The component options.
    * If `options` is specified in the constructor,
    * {@linkcode Pagination.create .create()}, or {@linkcode Pagination.init .init()},
-   * properties in this object are overriden for the instance being create and how {@linkcode Pagination.init .init()} works.
+   * properties in this object are overridden for the instance being create and how {@linkcode Pagination.init .init()} works.
    * @property {string} [selectorInit] The CSS selector to find pagination components.
    * @property {string} [selectorItemsPerPageInput] The CSS selector to find the input that determines
    * the number of items per page.

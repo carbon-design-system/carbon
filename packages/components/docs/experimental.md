@@ -155,7 +155,7 @@ For now, you can click the "expanded" viewing mode option and see the module
 name available for each icon in the second-to-last column. So if you are looking
 for the glyph version of an icon, you might see `/chevron--down` and in the far
 right-hand side of the table (when in expanded mode) you'd see
-`ChevronDownGlyph`. You can use this identifier alongside the `carbon-icons`
+`ChevronDownGlyph`. You can use this identifier alongside the `carbon-icon`
 helper by doing:
 
 ```hbs

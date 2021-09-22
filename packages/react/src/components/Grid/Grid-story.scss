@@ -1,0 +1,89 @@
+@use '../../../../grid/scss/modules/css-grid';
+
+@import '~carbon-components/scss/globals/scss/colors';
+
+// base of project work area
+#root > div:first-child > div:first-child {
+  width: 100%;
+}
+
+// grid styles
+.bx--grid .outside {
+  min-height: 80px;
+  height: 100%;
+}
+
+.bx--grid .inside {
+  min-height: 80px;
+  height: 100%;
+}
+
+// hack to enable zoom feature to trigger
+.bx--grid--full-width {
+  max-width: 100%;
+}
+
+.default .bx--col code {
+  display: flex;
+  justify-content: center;
+}
+
+// template hard-coded styles
+#templates .inside {
+  background-color: $blue-10;
+}
+
+#templates .bx--grid [class*='col'] {
+  background-color: $blue-20;
+  outline: 1px dashed $blue-40;
+}
+
+#templates .bx--grid--condensed,
+#templates .bx--row--condensed {
+  background-color: $warm-gray-100;
+  color: $gray-10;
+}
+
+#templates .bx--grid--condensed [class*='col'],
+#templates .bx--row--condensed [class*='col'] {
+  background: none;
+  outline: none;
+}
+
+#templates .bx--grid--condensed .outside,
+#templates .bx--row--condensed .outside {
+  background-color: $gray-80;
+  outline: none;
+}
+
+#templates .bx--grid--condensed .inside,
+#templates .bx--row--condensed .inside {
+  background: none;
+}
+
+#templates .bx--grid--narrow .inside,
+#templates .bx--row--narrow .inside {
+  background-color: $teal-10;
+}
+
+#templates .bx--grid--narrow [class*='col'],
+#templates .bx--row--narrow [class*='col'] {
+  background-color: $teal-20;
+  outline: 1px dashed $teal-40;
+}
+
+// css grid
+#templates > .bx--css-grid {
+  border: 1px dashed black;
+}
+
+#templates .bx--css-grid .bx--subgrid [class*='col'] {
+  background-color: rgba(#ffe056, 0.25);
+  outline: 1px solid #ffe056;
+}
+
+#templates .bx--css-grid [class*='col'] {
+  background-color: #edf4ff;
+  outline: 1px solid #a6c8ff;
+  min-height: 80px;
+}

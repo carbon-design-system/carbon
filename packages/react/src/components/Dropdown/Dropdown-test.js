@@ -5,12 +5,12 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+import { cleanup, render } from '@testing-library/react';
 import React from 'react';
 import { mount, shallow } from 'enzyme';
 import {
   assertMenuOpen,
   assertMenuClosed,
-  findMenuItemNode,
   openMenu,
   generateItems,
   generateGenericItem,
@@ -59,7 +59,7 @@ describe('Dropdown', () => {
   it('should render custom item components', () => {
     const wrapper = mount(<Dropdown {...mockProps} />);
     wrapper.setProps({
-      itemToElement: item => <div className="mock-item">{item.label}</div>,
+      itemToElement: (item) => <div className="mock-item">{item.label}</div>,
     });
     openMenu(wrapper);
     expect(wrapper).toMatchSnapshot();
@@ -71,7 +71,7 @@ describe('Dropdown', () => {
 
     beforeEach(() => {
       wrapper = mount(<Dropdown titleText="Email Input" {...mockProps} />);
-      renderedLabel = wrapper.find('label');
+      renderedLabel = wrapper.find('label[className="bx--label"]');
     });
 
     it('renders a title', () => {
@@ -133,7 +133,7 @@ describe('Dropdown', () => {
   it('should let the user select an option by clicking on the option node', () => {
     const wrapper = mount(<Dropdown {...mockProps} />);
     openMenu(wrapper);
-    findMenuItemNode(wrapper, 0).simulate('click');
+    wrapper.find('ForwardRef(ListBoxMenuItem)').at(0).simulate('click');
     expect(mockProps.onChange).toHaveBeenCalledTimes(1);
     expect(mockProps.onChange).toHaveBeenCalledWith({
       selectedItem: mockProps.items[0],
@@ -143,7 +143,7 @@ describe('Dropdown', () => {
     mockProps.onChange.mockClear();
 
     openMenu(wrapper);
-    findMenuItemNode(wrapper, 1).simulate('click');
+    wrapper.find('ForwardRef(ListBoxMenuItem)').at(1).simulate('click');
     expect(mockProps.onChange).toHaveBeenCalledTimes(1);
     expect(mockProps.onChange).toHaveBeenCalledWith({
       selectedItem: mockProps.items[1],
@@ -177,16 +177,26 @@ describe('Dropdown', () => {
       );
     });
   });
+
+  describe('Component API', () => {
+    afterEach(cleanup);
+
+    it('should accept a `ref` for the underlying button element', () => {
+      const ref = React.createRef();
+      render(<Dropdown {...mockProps} ref={ref} />);
+      expect(ref.current.getAttribute('aria-haspopup')).toBe('listbox');
+    });
+  });
 });
 
 describe('DropdownSkeleton', () => {
   describe('Renders as expected', () => {
-    const wrapper = shallow(<DropdownSkeleton inline />);
+    const wrapper = shallow(<DropdownSkeleton size="sm" />);
 
     it('Has the expected classes', () => {
       expect(wrapper.hasClass(`${prefix}--skeleton`)).toEqual(true);
       expect(wrapper.hasClass(`${prefix}--dropdown-v2`)).toEqual(true);
-      expect(wrapper.hasClass(`${prefix}--list-box--inline`)).toEqual(true);
+      expect(wrapper.hasClass(`${prefix}--list-box--sm`)).toEqual(true);
     });
   });
 });

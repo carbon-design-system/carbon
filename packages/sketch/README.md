@@ -62,9 +62,9 @@ Then in our `manifest.json` we would create an entry under `commands` like:
 {
   "commands": [
     {
-      "name": "The name of the command"
+      "name": "The name of the command",
       "identifier": "the.command.identifier",
-      "script": "commands/greeting.",
+      "script": "commands/greeting",
       "handler": "greeting"
     }
   ]

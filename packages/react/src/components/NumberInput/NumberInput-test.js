@@ -7,7 +7,7 @@
 
 import React from 'react';
 import { mount, shallow } from 'enzyme';
-import { CaretDownGlyph, CaretUpGlyph } from '@carbon/icons-react';
+import { Subtract16, Add16 } from '@carbon/icons-react';
 import NumberInput from '../NumberInput';
 import NumberInputSkeleton from '../NumberInput/NumberInput.Skeleton';
 import { settings } from 'carbon-components';
@@ -22,33 +22,34 @@ describe('NumberInput', () => {
     let formItem;
     let icons;
     let helper;
+    let mockProps;
 
     beforeEach(() => {
-      wrapper = mount(
-        <NumberInput
-          min={0}
-          max={100}
-          id="test"
-          label="Number Input"
-          className="extra-class"
-          invalidText="invalid text"
-          helperText="testHelper"
-          translateWithId={
-            /*
-              Simulates a condition where up/down button's hover over text matches `iconDescription` in `v10`,
-              which is, when the translation for up/down button are not there
-            */
-            () => undefined
-          }
-        />
-      );
+      mockProps = {
+        min: 0,
+        max: 100,
+        id: 'test',
+        label: 'Number Input',
+        ariaLabel: 'Number Input',
+        className: 'extra-class',
+        invalidText: 'invalid text',
+        helperText: 'testHelper',
+        translateWithId:
+          /*
+          Simulates a condition where up/down button's hover over text matches `iconDescription` in `v10`,
+          which is, when the translation for up/down button are not there
+        */
+          () => undefined,
+      };
 
-      const iconTypes = [CaretDownGlyph, CaretUpGlyph];
+      wrapper = mount(<NumberInput {...mockProps} />);
+
+      const iconTypes = [Subtract16, Add16];
       label = wrapper.find('label');
       numberInput = wrapper.find('input');
       container = wrapper.find(`.${prefix}--number`);
       formItem = wrapper.find(`.${prefix}--form-item`);
-      icons = wrapper.findWhere(n => iconTypes.includes(n.type()));
+      icons = wrapper.findWhere((n) => iconTypes.includes(n.type()));
       helper = wrapper.find(`.${prefix}--form__helper-text`);
     });
 
@@ -103,6 +104,16 @@ describe('NumberInput', () => {
         );
       });
 
+      it('should apply aria-label based on the label', () => {
+        const getInputRegion = () => wrapper.find('input');
+        expect(getInputRegion().prop('aria-label')).toEqual(null);
+
+        wrapper.setProps({ label: '' });
+        expect(getInputRegion().prop('aria-label')).toEqual(
+          mockProps.ariaLabel
+        );
+      });
+
       it('should set invalidText as expected', () => {
         expect(wrapper.find(`.${prefix}--form-requirement`).length).toEqual(0);
         wrapper.setProps({ invalid: true });
@@ -140,9 +151,28 @@ describe('NumberInput', () => {
               id="test"
               label="Number Input"
               className="extra-class"
+              invalidText="Number is not valid"
             />
           );
-        const getNumberInput = wrapper => wrapper.find('input');
+        const getNumberInput = (wrapper) => wrapper.find('input');
+
+        it('should correctly set defaultValue on uncontrolled input', () => {
+          const wrapper = mount(
+            <NumberInput
+              min={-1}
+              max={100}
+              defaultValue={10}
+              id="test"
+              label="Number Input"
+              className="extra-class"
+            />
+          );
+          const numberInput = getNumberInput(wrapper);
+          expect(wrapper.find('NumberInput').instance().state.value).toEqual(
+            10
+          );
+          expect(numberInput.prop('value')).toEqual(10);
+        });
 
         it('should set value as expected when value > min', () => {
           const wrapper = getWrapper(-1, 100, 0);
@@ -156,10 +186,13 @@ describe('NumberInput', () => {
           expect(numberInput.prop('value')).toEqual(1);
         });
 
-        it('should set value to equal min when value < min', () => {
+        it('should set value when value < min and set invalid state', () => {
           let wrapper = getWrapper(5, 100, 0);
           let numberInput = wrapper.find('input');
-          expect(numberInput.prop('value')).toEqual(5);
+          let invalidText = wrapper.find(`.${prefix}--form-requirement`);
+          expect(numberInput.prop('value')).toEqual(0);
+          expect(invalidText.length).toEqual(1);
+          expect(invalidText.text()).toEqual('Number is not valid');
         });
 
         it('should set value when min is undefined', () => {
@@ -170,10 +203,7 @@ describe('NumberInput', () => {
 
         it('should set invalidText when value is empty string', () => {
           // Enzyme doesn't seem to allow setState() in a forwardRef-wrapped class component
-          wrapper
-            .find('NumberInput')
-            .instance()
-            .setState({ value: '' });
+          wrapper.find('NumberInput').instance().setState({ value: '' });
           wrapper.update();
           const invalidText = wrapper.find(`.${prefix}--form-requirement`);
           expect(invalidText.length).toEqual(1);
@@ -183,12 +213,21 @@ describe('NumberInput', () => {
 
         it('allow empty string value', () => {
           // Enzyme doesn't seem to allow setState() in a forwardRef-wrapped class component
-          wrapper
-            .find('NumberInput')
-            .instance()
-            .setState({ value: '' });
+          wrapper.find('NumberInput').instance().setState({ value: '' });
+
           wrapper.update();
           wrapper.setProps({ allowEmpty: true });
+          const invalidText = wrapper.find(`.${prefix}--form-requirement`);
+          expect(invalidText.length).toEqual(0);
+        });
+
+        it('should allow updating the value with empty string and not be invalid', () => {
+          // Enzyme doesn't seem to allow setState() in a forwardRef-wrapped class component
+          wrapper.find('NumberInput').instance().setState({ value: 50 });
+
+          wrapper.update();
+          wrapper.setProps({ value: '', allowEmpty: true });
+          wrapper.update();
           const invalidText = wrapper.find(`.${prefix}--form-requirement`);
           expect(invalidText.length).toEqual(0);
         });
@@ -196,41 +235,31 @@ describe('NumberInput', () => {
         it('should change the value upon change in props', () => {
           wrapper.setProps({ value: 1 });
           // Enzyme doesn't seem to allow setState() in a forwardRef-wrapped class component
-          wrapper
-            .find('NumberInput')
-            .instance()
-            .setState({ value: 1 });
+          wrapper.find('NumberInput').instance().setState({ value: 1 });
           wrapper.update();
           wrapper.setProps({ value: 2 });
           // Enzyme doesn't seem to allow state() in a forwardRef-wrapped class component
           expect(wrapper.find('NumberInput').instance().state.value).toEqual(2);
         });
 
-        it('should cap the number given to value prop', () => {
+        it('should not cap the number given to value prop', () => {
           // Enzyme doesn't seem to allow setState() in a forwardRef-wrapped class component
-          wrapper
-            .find('NumberInput')
-            .instance()
-            .setState({ value: 0 });
+          wrapper.find('NumberInput').instance().setState({ value: 0 });
           wrapper.update();
           wrapper.setProps({ value: 5, min: 10, max: 20 });
           // Enzyme doesn't seem to allow state() in a forwardRef-wrapped class component
-          expect(wrapper.find('NumberInput').instance().state.value).toEqual(
-            10
-          );
+          expect(wrapper.find('NumberInput').instance().state.value).toEqual(5);
           wrapper.setProps({ value: 25, min: 10, max: 20 });
           // Enzyme doesn't seem to allow state() in a forwardRef-wrapped class component
           expect(wrapper.find('NumberInput').instance().state.value).toEqual(
-            20
+            25
           );
         });
 
-        it('should avoid capping when non-number prop is given to value prop', () => {
+        // NumberInput propTypes do not allow a string to be passed
+        it.skip('should avoid capping when non-number prop is given to value prop', () => {
           // Enzyme doesn't seem to allow setState() in a forwardRef-wrapped class component
-          wrapper
-            .find('NumberInput')
-            .instance()
-            .setState({ value: 2 });
+          wrapper.find('NumberInput').instance().setState({ value: 2 });
           wrapper.update();
           wrapper.setProps({ value: '', min: 1, max: 3 });
           // Enzyme doesn't seem to allow state() in a forwardRef-wrapped class component
@@ -242,10 +271,7 @@ describe('NumberInput', () => {
         it('should avoid change the value upon setting props, unless there the value actually changes', () => {
           wrapper.setProps({ value: 1 });
           // Enzyme doesn't seem to allow setState() in a forwardRef-wrapped class component
-          wrapper
-            .find('NumberInput')
-            .instance()
-            .setState({ value: 2 });
+          wrapper.find('NumberInput').instance().setState({ value: 2 });
           wrapper.update();
           wrapper.setProps({ value: 1 });
           // Enzyme doesn't seem to allow state() in a forwardRef-wrapped class component
@@ -266,8 +292,8 @@ describe('NumberInput', () => {
       });
 
       it('should use correct icons', () => {
-        expect(icons.at(0).type()).toBe(CaretUpGlyph);
-        expect(icons.at(1).type()).toBe(CaretDownGlyph);
+        expect(icons.at(0).type()).toBe(Subtract16);
+        expect(icons.at(1).type()).toBe(Add16);
       });
 
       it('adds new iconDescription when passed via props', () => {
@@ -305,17 +331,11 @@ describe('NumberInput', () => {
 
       it('renders children as expected', () => {
         wrapper.setProps({
-          helperText: (
-            <span>
-              This helper text has <a href="#">a link</a>.
-            </span>
-          ),
+          helperText: <span>This is helper text.</span>,
         });
         const renderedHelper = wrapper.find(`.${prefix}--form__helper-text`);
         expect(renderedHelper.props().children).toEqual(
-          <span>
-            This helper text has <a href="#">a link</a>.
-          </span>
+          <span>This is helper text.</span>
         );
       });
 
@@ -346,17 +366,17 @@ describe('NumberInput', () => {
 
       it('should not invoke onClick when up arrow is clicked', () => {
         upArrow.simulate('click');
-        expect(onClick).not.toBeCalled();
+        expect(onClick).not.toHaveBeenCalled();
       });
 
       it('should not invoke onClick when down arrow is clicked', () => {
         downArrow.simulate('click');
-        expect(onClick).not.toBeCalled();
+        expect(onClick).not.toHaveBeenCalled();
       });
 
       it('should not invoke onChange when numberInput is changed', () => {
         input.simulate('change');
-        expect(onChange).not.toBeCalled();
+        expect(onChange).not.toHaveBeenCalled();
       });
     });
 
@@ -383,19 +403,20 @@ describe('NumberInput', () => {
         );
 
         input = wrapper.find('input');
-        upArrow = wrapper.find(CaretUpGlyph).closest('button');
-        downArrow = wrapper.find(CaretDownGlyph).closest('button');
+        upArrow = wrapper.find(Add16).closest('button');
+        downArrow = wrapper.find(Subtract16).closest('button');
       });
 
       it('should invoke onClick when numberInput is clicked', () => {
         input.simulate('click');
-        expect(onClick).toBeCalled();
+        expect(onClick).toHaveBeenCalled();
       });
 
       it('should invoke onClick when up arrow is clicked', () => {
+        wrapper.setProps({ value: 1 });
         upArrow.simulate('click');
-        expect(onClick).toBeCalled();
-        expect(onClick).toHaveBeenCalledWith(expect.anything(), 'up');
+        expect(onClick).toHaveBeenCalled();
+        expect(onClick).toHaveBeenCalledWith(expect.anything(), 'up', 2);
       });
 
       it('should only increase the value on up arrow click if value is less than max', () => {
@@ -403,7 +424,7 @@ describe('NumberInput', () => {
         upArrow.simulate('click');
         // Enzyme doesn't seem to allow state() in a forwardRef-wrapped class component
         expect(wrapper.find('NumberInput').instance().state.value).toEqual(100);
-        expect(onClick).not.toBeCalled();
+        expect(onClick).not.toHaveBeenCalled();
       });
 
       it('should only decrease the value on down arrow click if value is greater than min', () => {
@@ -411,7 +432,7 @@ describe('NumberInput', () => {
         downArrow.simulate('click');
         // Enzyme doesn't seem to allow state() in a forwardRef-wrapped class component
         expect(wrapper.find('NumberInput').instance().state.value).toEqual(0);
-        expect(onClick).not.toBeCalled();
+        expect(onClick).not.toHaveBeenCalled();
       });
 
       it('should increase by the value of step', () => {
@@ -440,21 +461,24 @@ describe('NumberInput', () => {
 
       it('should not invoke onClick when down arrow is clicked and value is 0', () => {
         downArrow.simulate('click');
-        expect(onClick).not.toBeCalled();
+        expect(onClick).not.toHaveBeenCalled();
       });
 
       it('should invoke onClick when down arrow is clicked and value is above min', () => {
         wrapper.setProps({ value: 1 });
         downArrow.simulate('click');
-        expect(onClick).toBeCalled();
-        expect(onChange).toBeCalled();
-        expect(onClick).toHaveBeenCalledWith(expect.anything(), 'down');
+        expect(onClick).toHaveBeenCalled();
+        expect(onChange).toHaveBeenCalled();
+        expect(onClick).toHaveBeenCalledWith(expect.anything(), 'down', 0);
       });
 
       it('should invoke onChange when numberInput is changed', () => {
         input.simulate('change');
-        expect(onChange).toBeCalled();
-        expect(onChange).toHaveBeenCalledWith(expect.anything());
+        expect(onChange).toHaveBeenCalled();
+        expect(onChange).toHaveBeenCalledWith(
+          expect.anything(),
+          expect.anything()
+        );
       });
     });
   });

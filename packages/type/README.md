@@ -84,8 +84,9 @@ Instead of using a type scale, `@carbon/type` provides tokens that represent
 what we call type styles. These tokens have a variety of properties for styling
 how text is rendered on a page.
 
-You can find a full reference of the type styles that are available
-[here](https://next.carbondesignsystem.com/guidelines/typography/productive) .
+You can find a full reference of the type styles that are available on the
+[Carbon Design System website](https://www.carbondesignsystem.com/guidelines/typography/productive)
+.
 
 You can include a token in your Sass file by writing:
 
@@ -248,12 +249,6 @@ There is also a `type-scale` mixin that will set `font-size` for your directly:
   @include carbon--type-scale(1);
 }
 ```
-
-## 📖 API Documentation
-
-If you're looking for `@carbon/type` API documentation, check out:
-
-- [Sass](./docs/sass.md)
 
 ## 📚 Examples
 

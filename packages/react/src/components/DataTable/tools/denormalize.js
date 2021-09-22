@@ -20,9 +20,9 @@
  * @param {object} cellsById object containing lookups for cells by id
  */
 const denormalize = (rowIds, rowsById, cellsById) => {
-  return rowIds.map(id => ({
+  return rowIds.map((id) => ({
     ...rowsById[id],
-    cells: rowsById[id].cells.map(cellId => cellsById[cellId]),
+    cells: rowsById[id].cells.map((cellId) => cellsById[cellId]),
   }));
 };
 

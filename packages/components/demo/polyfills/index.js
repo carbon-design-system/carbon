@@ -1,7 +1,7 @@
 /* eslint-disable import/no-extraneous-dependencies */
-import 'core-js/modules/es6.array.from';
-import 'core-js/modules/es6.math.sign';
-import 'core-js/modules/es6.object.assign';
+import 'core-js/modules/es.array.from';
+import 'core-js/modules/es.math.sign';
+import 'core-js/modules/es.object.assign';
 /* eslint-enable import/no-extraneous-dependencies */
 
 import './custom-event';

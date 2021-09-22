@@ -44,7 +44,7 @@ file:
 ```
 
 Include in the example above is how to access nested packages. These packages
-are ones that you could optinonally install as a package, like `@carbon/themes`,
+are ones that you could optionally install as a package, like `@carbon/themes`,
 but we've included them inline as a convenience.
 
 To include the module entrypoint, you can include the following in your Sass
@@ -70,12 +70,6 @@ With `@carbon/elements`, you can also import `colors`:
 ```js
 import { colors } from '@carbon/elements';
 ```
-
-## 📖 API Documentation
-
-If you're looking for `@carbon/elements` API documentation, check out:
-
-- [Sass](./docs/sass.md)
 
 ## 🙌 Contributing
 

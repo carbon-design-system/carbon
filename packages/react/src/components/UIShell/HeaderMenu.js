@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { ChevronDownGlyph } from '@carbon/icons-react';
+import { ChevronDown16 } from '@carbon/icons-react';
 import { settings } from 'carbon-components';
 import cx from 'classnames';
 import React from 'react';
@@ -16,7 +16,7 @@ import { AriaLabelPropType } from '../../prop-types/AriaPropTypes';
 const { prefix } = settings;
 
 const defaultRenderMenuContent = () => (
-  <ChevronDownGlyph className={`${prefix}--header__menu-arrow`} />
+  <ChevronDown16 className={`${prefix}--header__menu-arrow`} />
 );
 
 /**
@@ -38,11 +38,6 @@ class HeaderMenu extends React.Component {
     focusRef: PropTypes.func,
 
     /**
-     * Optionally provide a tabIndex for the underlying menu button
-     */
-    tabIndex: PropTypes.number,
-
-    /**
      * Provide a label for the link text
      */
     menuLinkName: PropTypes.string.isRequired,
@@ -51,11 +46,18 @@ class HeaderMenu extends React.Component {
      * Optional component to render instead of string
      */
     renderMenuContent: PropTypes.func,
+
+    /**
+     * Optionally provide a tabIndex for the underlying menu button
+     */
+    tabIndex: PropTypes.number,
   };
 
   static defaultProps = {
     renderMenuContent: defaultRenderMenuContent,
   };
+
+  _subMenus = React.createRef();
 
   constructor(props) {
     super(props);
@@ -72,10 +74,13 @@ class HeaderMenu extends React.Component {
   /**
    * Toggle the expanded state of the menu on click.
    */
-  handleOnClick = e => {
-    e.preventDefault();
+  handleOnClick = (e) => {
+    const { current: subMenusNode } = this._subMenus;
+    if (!subMenusNode || !subMenusNode.contains(e.target)) {
+      e.preventDefault();
+    }
 
-    this.setState(prevState => ({
+    this.setState((prevState) => ({
       expanded: !prevState.expanded,
     }));
   };
@@ -83,13 +88,13 @@ class HeaderMenu extends React.Component {
   /**
    * Keyboard event handler for the entire menu.
    */
-  handleOnKeyDown = event => {
+  handleOnKeyDown = (event) => {
     // Handle enter or space key for toggling the expanded state of the menu.
     if (matches(event, [keys.Enter, keys.Space])) {
       event.stopPropagation();
       event.preventDefault();
 
-      this.setState(prevState => ({
+      this.setState((prevState) => ({
         expanded: !prevState.expanded,
       }));
 
@@ -102,24 +107,33 @@ class HeaderMenu extends React.Component {
    * for toggling the expansion status of our menu in response to a user
    * clicking off of the menu or menubar.
    */
-  handleOnBlur = event => {
+  handleOnBlur = (event) => {
     // Rough guess for a blur event that is triggered outside of our menu or
     // menubar context
-    if (!event.relatedTarget) {
-      this.setState({ expanded: false, selectedIndex: null });
+    const itemTriggeredBlur = this.items.find(
+      (element) => element === event.relatedTarget
+    );
+    if (
+      event.relatedTarget &&
+      ((event.relatedTarget.getAttribute('href') &&
+        event.relatedTarget.getAttribute('href') !== '#') ||
+        itemTriggeredBlur)
+    ) {
+      return;
     }
+
+    this.setState({ expanded: false, selectedIndex: null });
   };
 
   /**
-   * ref handler for our menu button. This node is represented by the
-   * `role="menu"` attribute. If we are supplied a `focusRef` prop, we also
+   * ref handler for our menu button. If we are supplied a `focusRef` prop, we also
    * forward along the node.
    *
    * This is useful when this component is a child in a
    * menu or menubar as it will allow the parent to explicitly focus the menu
    * button node when that child should receive focus.
    */
-  handleMenuButtonRef = node => {
+  handleMenuButtonRef = (node) => {
     if (this.props.focusRef) {
       this.props.focusRef(node);
     }
@@ -130,11 +144,11 @@ class HeaderMenu extends React.Component {
    * Handles individual menuitem refs. We assign them to a class instance
    * property so that we can properly manage focus of our children.
    */
-  handleItemRef = index => node => {
+  handleItemRef = (index) => (node) => {
     this.items[index] = node;
   };
 
-  handleMenuClose = event => {
+  handleMenuClose = (event) => {
     // Handle ESC keydown for closing the expanded menu.
     if (matches(event, [keys.Escape]) && this.state.expanded) {
       event.stopPropagation();
@@ -159,6 +173,8 @@ class HeaderMenu extends React.Component {
       children,
       renderMenuContent: MenuContent,
       menuLinkName,
+      focusRef, // eslint-disable-line no-unused-vars
+      ...rest
     } = this.props;
     const accessibilityLabel = {
       'aria-label': ariaLabel,
@@ -174,6 +190,7 @@ class HeaderMenu extends React.Component {
     // - href can be set to javascript:void(0), ideally this will be a button
     return (
       <li // eslint-disable-line jsx-a11y/mouse-events-have-key-events,jsx-a11y/no-noninteractive-element-interactions
+        {...rest}
         className={className}
         onKeyDown={this.handleMenuClose}
         onClick={this.handleOnClick}
@@ -185,7 +202,6 @@ class HeaderMenu extends React.Component {
           href="#"
           onKeyDown={this.handleOnKeyDown}
           ref={this.handleMenuButtonRef}
-          role="menuitem"
           tabIndex={0}
           {...accessibilityLabel}>
           {menuLinkName}
@@ -193,8 +209,8 @@ class HeaderMenu extends React.Component {
         </a>
         <ul
           {...accessibilityLabel}
-          className={`${prefix}--header__menu`}
-          role="menu">
+          ref={this._subMenus}
+          className={`${prefix}--header__menu`}>
           {React.Children.map(children, this._renderMenuItem)}
         </ul>
       </li>
@@ -202,23 +218,23 @@ class HeaderMenu extends React.Component {
   }
 
   /**
-   * Render an individual menuitem, passing along `role: 'none'` because the
-   * host node <li> doesn't apply when in a <ul> with `role="menu"` and so we
-   * need to revert the semantics.
-   *
-   * We also capture the `ref` for each child inside of `this.items` to properly
+   * We capture the `ref` for each child inside of `this.items` to properly
    * manage focus. In addition to this focus management, all items receive a
    * `tabIndex: -1` so the user won't hit a large number of items in their tab
    * sequence when they might not want to go through all the items.
    */
   _renderMenuItem = (item, index) => {
-    return React.cloneElement(item, {
-      ref: this.handleItemRef(index),
-      role: 'none',
-    });
+    if (React.isValidElement(item)) {
+      return React.cloneElement(item, {
+        ref: this.handleItemRef(index),
+      });
+    }
   };
 }
 
-export default React.forwardRef((props, ref) => {
+const HeaderMenuForwardRef = React.forwardRef((props, ref) => {
   return <HeaderMenu {...props} focusRef={ref} />;
 });
+
+HeaderMenuForwardRef.displayName = 'HeaderMenu';
+export default HeaderMenuForwardRef;

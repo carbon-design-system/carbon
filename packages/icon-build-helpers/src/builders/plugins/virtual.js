@@ -14,7 +14,7 @@ const PREFIX = 'virtual:';
 module.exports = function virtual(modules) {
   const resolvedIds = new Map();
 
-  Object.keys(modules).forEach(id => {
+  Object.keys(modules).forEach((id) => {
     resolvedIds.set(path.resolve(id), modules[id]);
   });
 
@@ -22,13 +22,18 @@ module.exports = function virtual(modules) {
     name: 'virtual',
 
     resolveId(id, importer) {
-      if (id in modules) return PREFIX + id;
+      if (id in modules) {
+        return PREFIX + id;
+      }
 
       if (importer) {
-        if (importer.startsWith(PREFIX))
+        if (importer.startsWith(PREFIX)) {
           importer = importer.slice(PREFIX.length);
+        }
         const resolved = path.resolve(path.dirname(importer), id);
-        if (resolvedIds.has(resolved)) return PREFIX + resolved;
+        if (resolvedIds.has(resolved)) {
+          return PREFIX + resolved;
+        }
       }
     },
 

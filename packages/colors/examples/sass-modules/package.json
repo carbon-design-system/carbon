@@ -1,0 +1,16 @@
+{
+  "name": "carbon-colors-sass-modules",
+  "private": true,
+  "version": "0.0.0",
+  "license": "Apache-2.0",
+  "scripts": {
+    "develop": "next"
+  },
+  "dependencies": {
+    "@carbon/colors": "file:../../",
+    "next": "^10.0.3",
+    "react": "^17.0.1",
+    "react-dom": "^17.0.1",
+    "sass": "^1.36.0"
+  }
+}

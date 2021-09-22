@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-export default function(ToMix) {
+export default function (ToMix) {
   /**
    * Mix-in class to manage events associated with states.
    * @class EventedState
@@ -23,7 +23,7 @@ export default function(ToMix) {
      */
     _changeState() {
       throw new Error(
-        '_changeState() should be overriden to perform actual change in state.'
+        '_changeState() should be overridden to perform actual change in state.'
       );
     }
 
@@ -62,7 +62,7 @@ export default function(ToMix) {
         .filter(Boolean)
         .join('-')
         .split('-') // Group or state may contain hyphen
-        .map(item => item[0].toUpperCase() + item.substr(1))
+        .map((item) => item[0].toUpperCase() + item.substr(1))
         .join('');
 
       const eventStart = new CustomEvent(
@@ -108,7 +108,7 @@ export default function(ToMix) {
      * Classes inheriting {@link EventedState `EventedState`} should override this function.
      * @function EventedState#shouldStateBeChanged
      * @param {string} [state] The new state. Can be an omitted, which means toggling.
-     * @param {Object} [detail]
+     * @param {object} [detail]
      *   The object that should be put to event details that is fired before/after changing state.
      *   Can have a `group` property, which specifies what state to be changed.
      * @returns {boolean}

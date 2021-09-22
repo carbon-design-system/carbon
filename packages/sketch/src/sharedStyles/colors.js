@@ -1,3 +1,4 @@
+/* eslint-disable no-case-declarations */
 /**
  * Copyright IBM Corp. 2018, 2018
  *
@@ -5,28 +6,86 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { colors } from '@carbon/colors';
+import { colors, unstable_hoverColors } from '@carbon/colors';
 import { formatTokenName } from '@carbon/themes';
 import { syncColorStyle } from '../tools/sharedStyles';
+import { syncColorVariable } from '../tools/colorVariables';
 
 // We separate out certain colors that are not a part of the primary swatches
 // that we need to render
 const { black, white, orange, yellow, ...swatches } = colors;
 
+// We separate out certain colors that are not a part of the primary swatches
+// that we need to render
+const { blackHover, whiteHover, ...hoverSwatches } = unstable_hoverColors;
+
+const coreFolderName = 'core';
+const hoverFolderName = 'hover';
+
+/**
+ * Format name for shared layer styles or color variables
+ * Shared styles names will need to have the `color` namespace
+ * Both shared styles and color variables need a name for the swatch and an
+ * optional grade.
+ * @param {object} params
+ * @param {string} params.name - kebab cased color name
+ * @param {string?} params.grade - color grade
+ * @param {string?} params.formatFor - color name output format
+ * @returns {string}
+ */
+function formatColorName({ name, grade, formatFor }) {
+  const formattedName = name.split('-').join(' ');
+  const folderName = name.includes('hover') ? hoverFolderName : coreFolderName;
+  switch (formatFor) {
+    case 'sharedLayerStyle':
+      return ['color', folderName, formattedName, grade]
+        .filter(Boolean)
+        .join(' / ');
+    case 'colorVariable':
+      return [
+        grade
+          ? `${folderName}/${formattedName}/${formattedName}`
+          : `${folderName}/${formattedName}`,
+        grade,
+      ]
+        .filter(Boolean)
+        .join(' ');
+    default:
+      return '';
+  }
+}
+
 /**
  * Sync color shared styles to the given document and return the result
- * @param {Document} document
+ * @param {object} params - syncColorStyles parameters
+ * @param {Document} params.document
  * @returns {Array<SharedStyle>}
  */
-export function syncColorStyles(document) {
-  const sharedStyles = Object.keys(swatches).flatMap(swatchName => {
+export function syncColorStyles({ document }) {
+  const sharedCoreStyles = Object.keys(swatches).flatMap((swatchName) => {
     const name = formatTokenName(swatchName);
-    const result = Object.keys(swatches[swatchName]).map(grade => {
-      return syncColorStyle(
+    const result = Object.keys(swatches[swatchName]).map((grade) => {
+      return syncColorStyle({
         document,
-        formatSharedStyleName(name, grade),
-        swatches[swatchName][grade]
-      );
+        name: formatColorName({ name, grade, formatFor: 'sharedLayerStyle' }),
+        value: swatches[swatchName][grade],
+      });
+    });
+    return result;
+  });
+
+  const sharedHoverStyles = Object.keys(hoverSwatches).flatMap((swatchName) => {
+    const name = formatTokenName(swatchName);
+    const result = Object.keys(hoverSwatches[swatchName]).map((grade) => {
+      return syncColorStyle({
+        document,
+        name: formatColorName({
+          name,
+          grade,
+          formatFor: 'sharedLayerStyle',
+        }),
+        value: hoverSwatches[swatchName][grade],
+      });
     });
     return result;
   });
@@ -37,19 +96,97 @@ export function syncColorStyles(document) {
     ['orange', orange['40']],
     ['yellow', yellow['30']],
   ].map(([name, value]) => {
-    return syncColorStyle(document, formatSharedStyleName(name), value);
+    return syncColorStyle({
+      document,
+      name: formatColorName({ name, formatFor: 'sharedLayerStyle' }),
+      value,
+    });
   });
 
-  return sharedStyles.concat(singleColors);
+  const singleHoverColors = [
+    ['black hover', blackHover],
+    ['white hover', whiteHover],
+  ].map(([name, value]) => {
+    return syncColorStyle({
+      document,
+      name: formatColorName({ name, formatFor: 'sharedLayerStyle' }),
+      value,
+    });
+  });
+
+  return sharedCoreStyles.concat(
+    singleColors,
+    singleHoverColors,
+    sharedHoverStyles
+  );
 }
 
 /**
- * Our shared style name will need to have the `color` namespace alongside a
- * name for the swatch and an optional grade.
- * @param {string} name
- * @param {string?} grade
- * @returns {string}
+ * Sync color variables (Swatches) in the given document and return an array
+ * @param {object} params - syncColorVariables parameters
+ * @param {Document} params.document
+ * @returns {Array<Swatch>}
  */
-function formatSharedStyleName(name, grade) {
-  return ['color', name.split('-').join(' '), grade].filter(Boolean).join('/');
+export function syncColorVariables({ document }) {
+  const colorVariables = Object.keys(swatches).flatMap((swatchName) => {
+    const name = formatTokenName(swatchName);
+    const result = Object.keys(swatches[swatchName]).map((grade) => {
+      return syncColorVariable({
+        document,
+        name: formatColorName({ name, grade, formatFor: 'colorVariable' }),
+        color: swatches[swatchName][grade],
+      });
+    });
+    return result;
+  });
+
+  const singleColors = [
+    ['black', black['100']],
+    ['white', white['0']],
+    ['orange', orange['40']],
+    ['yellow', yellow['30']],
+  ].map(([name, color]) => {
+    return syncColorVariable({
+      document,
+      name: formatColorName({
+        name,
+        formatFor: 'colorVariable',
+      }),
+      color,
+    });
+  });
+
+  const hoverColorVariables = Object.keys(hoverSwatches).flatMap(
+    (swatchName) => {
+      const name = formatTokenName(swatchName);
+      const result = Object.keys(hoverSwatches[swatchName]).map((grade) => {
+        return syncColorVariable({
+          document,
+          name: formatColorName({ name, grade, formatFor: 'colorVariable' }),
+          color: hoverSwatches[swatchName][grade],
+        });
+      });
+      return result;
+    }
+  );
+
+  const hoverSingleColors = [
+    ['black hover', blackHover],
+    ['white hover', whiteHover],
+  ].map(([name, color]) => {
+    return syncColorVariable({
+      document,
+      name: formatColorName({
+        name,
+        formatFor: 'colorVariable',
+      }),
+      color,
+    });
+  });
+
+  return colorVariables.concat(
+    singleColors,
+    hoverColorVariables,
+    hoverSingleColors
+  );
 }

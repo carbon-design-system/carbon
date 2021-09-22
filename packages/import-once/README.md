@@ -46,12 +46,6 @@ This looks like:
 }
 ```
 
-## 📖 API Documentation
-
-If you're looking for `@carbon/import-once` API documentation, check out:
-
-- [Sass](./docs/sass.md)
-
 ## 🙌 Contributing
 
 We're always looking for contributors to help us fix bugs, build new features,

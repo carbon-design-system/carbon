@@ -45,24 +45,28 @@ const TableBatchActions = ({
   );
 
   return (
-    <div {...rest} className={batchActionsClasses}>
-      <TableActionList>
-        {children}
-        <Button
-          className={`${prefix}--batch-summary__cancel`}
-          onClick={onCancel}>
-          {t('carbon.table.batch.cancel')}
-        </Button>
-      </TableActionList>
+    <div
+      {...rest}
+      aria-hidden={!shouldShowBatchActions}
+      className={batchActionsClasses}>
       <div className={`${prefix}--batch-summary`}>
         <p className={`${prefix}--batch-summary__para`}>
           <span>
-            {totalSelected > 1
+            {totalSelected > 1 || totalSelected === 0
               ? t('carbon.table.batch.items.selected', { totalSelected })
               : t('carbon.table.batch.item.selected', { totalSelected })}
           </span>
         </p>
       </div>
+      <TableActionList>
+        {children}
+        <Button
+          className={`${prefix}--batch-summary__cancel`}
+          tabIndex={shouldShowBatchActions ? 0 : -1}
+          onClick={onCancel}>
+          {t('carbon.table.batch.cancel')}
+        </Button>
+      </TableActionList>
     </div>
   );
 };
@@ -72,6 +76,12 @@ TableBatchActions.translationKeys = Object.keys(translationKeys);
 TableBatchActions.propTypes = {
   children: PropTypes.node,
   className: PropTypes.string,
+
+  /**
+   * Hook required to listen for when the user initiates a cancel request
+   * through this component
+   */
+  onCancel: PropTypes.func.isRequired,
 
   /**
    * Boolean specifier for whether or not the batch action bar should be
@@ -86,14 +96,8 @@ TableBatchActions.propTypes = {
   totalSelected: PropTypes.number.isRequired,
 
   /**
-   * Hook required to listen for when the user initiates a cancel request
-   * through this comopnent
-   */
-  onCancel: PropTypes.func.isRequired,
-
-  /**
    * Supply a method to translate internal strings with your i18n tool of
-   * choice. Translation keys are avabile on the `translationKeys` field for
+   * choice. Translation keys are available on the `translationKeys` field for
    * this component.
    */
   translateWithId: PropTypes.func,

@@ -1,0 +1,60 @@
+import { Preview, Props, Story } from '@storybook/addon-docs/blocks';
+
+# Heading
+
+[Source code](https://github.com/carbon-design-system/carbon/tree/master/packages/react/src/components/Heading)
+
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+
+## Table of Contents
+
+- [Overview](#overview)
+- [Component API](#component-api)
+- [Feedback](#feedback)
+
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+
+## Overview
+
+For people using screen readers, headings in HTML are one of the most common
+ways to navigate a page. Correctly using headings and levels helps with
+understanding a page and its hierarchy and can be used to jump between sections
+on a page.
+
+Normally, in a component you would have to specify the heading level manually.
+This can become problematic if your component is used in various parts of a page
+where the heading level needs to be different.
+
+To help address this, the `Heading` component will automatically infer the
+appropriate heading level without you having to manually specify it. To do this,
+you use the `Section` component for each section of your page. Every `Heading`
+component in that `Section` will use the correct heading level.
+
+<Preview>
+  <Story id="experimental-unstable-heading--heading" />
+</Preview>
+
+## Component API
+
+<Props />
+
+### Section as
+
+You can use the `as` prop to support rendering the outermost node in the
+component with a specific tag, or custom component, as opposed to the default
+`<section>` that is used.
+
+For example, to render an `article` you could use `as="article"`:
+
+```jsx
+<Section as="article">
+  <Heading>Your heading</Heading>
+</Section>
+```
+
+## Feedback
+
+Help us improve this component by providing feedback, asking questions on Slack,
+or updating this file on
+[GitHub](https://github.com/carbon-design-system/carbon/edit/main/packages/react/src/components/Heading/Heading.mdx).

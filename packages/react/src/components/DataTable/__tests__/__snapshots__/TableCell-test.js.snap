@@ -3,29 +3,34 @@
 exports[`DataTable.TableCell should render 1`] = `
 <Table
   isSortable={false}
+  overflowMenuOnHover={true}
 >
-  <table
-    className="bx--data-table bx--data-table--no-border"
+  <div
+    className="bx--data-table-content"
   >
-    <TableBody
-      aria-live="polite"
+    <table
+      className="bx--data-table bx--data-table--no-border"
     >
-      <tbody
+      <TableBody
         aria-live="polite"
       >
-        <TableRow>
-          <tr>
-            <TableCell
-              className="custom-class"
-            >
-              <td
+        <tbody
+          aria-live="polite"
+        >
+          <TableRow>
+            <tr>
+              <TableCell
                 className="custom-class"
-              />
-            </TableCell>
-          </tr>
-        </TableRow>
-      </tbody>
-    </TableBody>
-  </table>
+              >
+                <td
+                  className="custom-class"
+                />
+              </TableCell>
+            </tr>
+          </TableRow>
+        </tbody>
+      </TableBody>
+    </table>
+  </div>
 </Table>
 `;

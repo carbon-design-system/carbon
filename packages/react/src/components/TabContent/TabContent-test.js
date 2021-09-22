@@ -7,29 +7,53 @@
 
 import React from 'react';
 import TabContent from '../TabContent';
-import { shallow } from 'enzyme';
+import { render, screen } from '@testing-library/react';
 
 describe('TabContent', () => {
   describe('renders as expected', () => {
-    const wrapper = shallow(
-      <TabContent>
-        <div className="child">content</div>
-        <div className="child">content</div>
-      </TabContent>
-    );
-
     it('renders children as expected', () => {
-      expect(wrapper.props().children.length).toEqual(2);
-    });
-
-    it('sets selected if passed in via props', () => {
-      wrapper.setProps({ selected: true });
-      expect(wrapper.props().selected).toEqual(true);
+      render(
+        <TabContent selected>
+          <div className="child">content</div>
+          <div className="child">content</div>
+        </TabContent>
+      );
+      expect(screen.getByRole('tabpanel').children.length).toEqual(2);
     });
 
     it('sets selected and hidden props with opposite boolean values', () => {
-      wrapper.setProps({ selected: true });
-      expect(wrapper.props().hidden).toEqual(false);
+      const { rerender } = render(
+        <TabContent>
+          <div className="child">content</div>
+          <div className="child">content</div>
+        </TabContent>
+      );
+      expect(screen.queryByRole('tabpanel')).not.toBeInTheDocument();
+      rerender(
+        <TabContent selected>
+          <div className="child">content</div>
+          <div className="child">content</div>
+        </TabContent>
+      );
+      expect(screen.getByRole('tabpanel')).toBeVisible();
+    });
+
+    it('includes the content container in the tabbable index when no tab contents are provided', () => {
+      render(
+        <TabContent selected>
+          <p>content</p>
+        </TabContent>
+      );
+      expect(screen.getByRole('tabpanel')).toHaveAttribute('tabindex', '0');
+    });
+
+    it('does not include the content container in the tabbable index when tab contents are provided', () => {
+      render(
+        <TabContent selected>
+          <a href="https://www.ibm.com/">content</a>
+        </TabContent>
+      );
+      expect(screen.getByRole('tabpanel')).not.toHaveAttribute('tabindex', '0');
     });
   });
 });

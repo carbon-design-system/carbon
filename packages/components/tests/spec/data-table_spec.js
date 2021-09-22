@@ -5,9 +5,9 @@ import HTML from '../../html/data-table/data-table.html';
 import ExpandableHTML from '../../html/data-table/data-table--expandable.html';
 import ExpandableAllHTML from '../../html/data-table/data-table--expandable-with-expand-all.html';
 
-describe('DataTable', function() {
-  describe('Constructor', function() {
-    it('Should throw if root element is not given', function() {
+describe('DataTable', function () {
+  describe('Constructor', function () {
+    it('Should throw if root element is not given', function () {
       expect(() => {
         new DataTable();
       }).toThrowError(
@@ -16,7 +16,7 @@ describe('DataTable', function() {
       );
     });
 
-    it('Should throw if root element is not a DOM element', function() {
+    it('Should throw if root element is not a DOM element', function () {
       expect(() => {
         new DataTable(document.createTextNode(''));
       }).toThrowError(
@@ -25,7 +25,7 @@ describe('DataTable', function() {
       );
     });
 
-    it('Should set default options', function() {
+    it('Should set default options', function () {
       const table = new DataTable(document.createElement('div'));
       expect(flattenOptions(table.options)).toEqual({
         selectorInit: `[data-table]`,
@@ -65,12 +65,12 @@ describe('DataTable', function() {
     });
   });
 
-  describe('Initial tasks', function() {
+  describe('Initial tasks', function () {
     let container;
     let element;
     let table;
 
-    beforeAll(function() {
+    beforeAll(function () {
       container = document.createElement('div');
       container.innerHTML = HTML;
       document.body.appendChild(container);
@@ -78,27 +78,27 @@ describe('DataTable', function() {
       table = new DataTable(element);
     });
 
-    it('Expandable rows should be removed from the DOM', function() {
+    it('Expandable rows should be removed from the DOM', function () {
       const rows = [...element.querySelectorAll('tbody > tr')];
 
-      rows.forEach(row => {
+      rows.forEach((row) => {
         expect(row.classList.contains('[data-child-row]')).toBe(false);
       });
     });
 
-    afterAll(function() {
+    afterAll(function () {
       document.body.removeChild(container);
       table.release();
     });
   });
 
-  describe('Row Expansion', function() {
+  describe('Row Expansion', function () {
     const events = new EventManager();
     let element;
     let table;
     let container;
 
-    beforeEach(function() {
+    beforeEach(function () {
       container = document.createElement('div');
       container.innerHTML = ExpandableHTML;
       document.body.appendChild(container);
@@ -106,7 +106,7 @@ describe('DataTable', function() {
       table = new DataTable(element);
     });
 
-    it('Should toggle the row on click', function() {
+    it('Should toggle the row on click', function () {
       const firstRowExpand = document.querySelector('[data-event="expand"]');
       firstRowExpand.dispatchEvent(new CustomEvent('click', { bubbles: true }));
       expect(
@@ -122,7 +122,7 @@ describe('DataTable', function() {
       ).toBe(false);
     });
 
-    it('Should emit an event on row expansion click', function() {
+    it('Should emit an event on row expansion click', function () {
       const firstRowExpand = document.querySelector('[data-event="expand"]');
       const spyToggleRowExpandEvent = jasmine.createSpy();
       events.on(
@@ -134,27 +134,27 @@ describe('DataTable', function() {
       expect(spyToggleRowExpandEvent).toHaveBeenCalled();
     });
 
-    it('The event should trigger the function', function() {
+    it('The event should trigger the function', function () {
       const firstRowExpand = document.querySelector('[data-event="expand"]');
       spyOn(table, '_rowExpandToggle');
       firstRowExpand.dispatchEvent(new CustomEvent('click', { bubbles: true }));
       expect(table._rowExpandToggle).toHaveBeenCalled();
     });
 
-    afterEach(function() {
+    afterEach(function () {
       events.reset();
       table.release();
       document.body.removeChild(container);
     });
   });
 
-  describe('Batch row Expansion', function() {
+  describe('Batch row Expansion', function () {
     const events = new EventManager();
     let element;
     let table;
     let container;
 
-    beforeEach(function() {
+    beforeEach(function () {
       container = document.createElement('div');
       container.innerHTML = ExpandableAllHTML;
       document.body.appendChild(container);
@@ -162,25 +162,25 @@ describe('DataTable', function() {
       table = new DataTable(element);
     });
 
-    it('Should toggle the rows on click', function() {
+    it('Should toggle the rows on click', function () {
       const headerExpand = element.querySelector('[data-event="expandAll"]');
       headerExpand.dispatchEvent(new CustomEvent('click', { bubbles: true }));
       const expandedStateAfterExpand = Array.prototype.map.call(
         element.querySelectorAll('[data-child-row]'),
-        elem =>
+        (elem) =>
           elem.previousElementSibling.classList.contains(`bx--expandable-row`)
       );
       expect(expandedStateAfterExpand).toEqual([true, true]);
       headerExpand.dispatchEvent(new CustomEvent('click', { bubbles: true }));
       const expandedStateAfterCollapse = Array.prototype.map.call(
         element.querySelectorAll('[data-child-row]'),
-        elem =>
+        (elem) =>
           elem.previousElementSibling.classList.contains(`bx--expandable-row`)
       );
       expect(expandedStateAfterCollapse).toEqual([false, false]);
     });
 
-    it('Should emit an event on row expansion click', function() {
+    it('Should emit an event on row expansion click', function () {
       const headerExpand = element.querySelector('[data-event="expandAll"]');
       const spyToggleRowExpandEvent = jasmine.createSpy();
       events.on(
@@ -192,28 +192,28 @@ describe('DataTable', function() {
       expect(spyToggleRowExpandEvent).toHaveBeenCalled();
     });
 
-    it('The event should trigger the function', function() {
+    it('The event should trigger the function', function () {
       const headerExpand = element.querySelector('[data-event="expandAll"]');
       spyOn(table, '_rowExpandToggleAll');
       headerExpand.dispatchEvent(new CustomEvent('click', { bubbles: true }));
       expect(table._rowExpandToggleAll).toHaveBeenCalled();
     });
 
-    afterEach(function() {
+    afterEach(function () {
       events.reset();
       table.release();
       document.body.removeChild(container);
     });
   });
 
-  describe('Sort', function() {
+  describe('Sort', function () {
     const events = new EventManager();
     let element;
     let table;
     let container;
     let firstSort;
 
-    beforeAll(function() {
+    beforeAll(function () {
       container = document.createElement('div');
       container.innerHTML = HTML;
       document.body.appendChild(container);
@@ -222,7 +222,7 @@ describe('DataTable', function() {
       table = new DataTable(element);
     });
 
-    it('Should switch through tri-state sort', function() {
+    it('Should switch through tri-state sort', function () {
       firstSort.dispatchEvent(new CustomEvent('click', { bubbles: true }));
       expect(firstSort.classList.contains(`bx--table-sort--ascending`)).toBe(
         true
@@ -246,7 +246,7 @@ describe('DataTable', function() {
       expect(firstSort.hasAttribute('data-previous-value')).toBe(false);
     });
 
-    it('Should emit an event on sort click', function() {
+    it('Should emit an event on sort click', function () {
       const spyToggleSortEvent = jasmine.createSpy();
       events.on(
         element.ownerDocument.body,
@@ -257,25 +257,25 @@ describe('DataTable', function() {
       expect(spyToggleSortEvent).toHaveBeenCalled();
     });
 
-    afterEach(function() {
+    afterEach(function () {
       firstSort.classList.remove(`bx--table-sort--ascending`);
       firstSort.dataset.previousValue = '';
       events.reset();
     });
 
-    afterAll(function() {
+    afterAll(function () {
       document.body.removeChild(container);
       table.release();
     });
   });
 
-  describe('Action bar', function() {
+  describe('Action bar', function () {
     const events = new EventManager();
     let element;
     let table;
     let container;
 
-    beforeAll(function() {
+    beforeAll(function () {
       container = document.createElement('div');
       container.innerHTML = HTML;
       document.body.appendChild(container);
@@ -283,7 +283,7 @@ describe('DataTable', function() {
       table = new DataTable(element);
     });
 
-    it('Should toggle the action bar on checkbox select', function() {
+    it('Should toggle the action bar on checkbox select', function () {
       const firstSelect = document.querySelector('[data-event="select"]');
       firstSelect.click();
 
@@ -303,7 +303,7 @@ describe('DataTable', function() {
 
     // it('Should close the action bar on ESC key', function() {});
 
-    it('Should select all checkboxes on select all event', function() {
+    it('Should select all checkboxes on select all event', function () {
       const firstSelect = document.querySelector('[data-event="select-all"]');
       firstSelect.click();
 
@@ -313,23 +313,23 @@ describe('DataTable', function() {
       );
     });
 
-    afterEach(function() {
+    afterEach(function () {
       table._actionBarCancel();
       events.reset();
     });
 
-    afterAll(function() {
+    afterAll(function () {
       document.body.removeChild(container);
       table.release();
     });
   });
 
-  describe('Toggle active search bar', function() {
+  describe('Toggle active search bar', function () {
     let table;
     let container;
     let dt;
 
-    beforeEach(function() {
+    beforeEach(function () {
       container = document.createElement('div');
       container.innerHTML = HTML;
       document.body.appendChild(container);
@@ -337,7 +337,7 @@ describe('DataTable', function() {
       table = new DataTable(container);
     });
 
-    it('Should open search bar on click', function() {
+    it('Should open search bar on click', function () {
       const search = document.querySelector(
         '.bx--toolbar-search-container-expandable'
       );
@@ -348,7 +348,7 @@ describe('DataTable', function() {
       ).toBe(true);
     });
 
-    it('Should close search bar on click', function() {
+    it('Should close search bar on click', function () {
       const search = document.querySelector(
         '.bx--toolbar-search-container-expandable'
       );
@@ -359,7 +359,7 @@ describe('DataTable', function() {
       ).toBe(false);
     });
 
-    it('Should open search bar on keydown', function() {
+    it('Should open search bar on keydown', function () {
       const search = document.querySelector(
         '.bx--toolbar-search-container-expandable'
       );
@@ -372,7 +372,7 @@ describe('DataTable', function() {
       ).toBe(true);
     });
 
-    it('Should close search bar on keydown', function() {
+    it('Should close search bar on keydown', function () {
       const search = document.querySelector(
         '.bx--toolbar-search-container-expandable'
       );
@@ -386,7 +386,7 @@ describe('DataTable', function() {
       ).toBe(false);
     });
 
-    afterEach(function() {
+    afterEach(function () {
       document.body.removeChild(container);
       table.release();
     });

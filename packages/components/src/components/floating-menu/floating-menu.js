@@ -18,7 +18,7 @@ import on from '../../globals/js/misc/on';
 
 /**
  * The structure for the position of floating menu.
- * @typedef {Object} FloatingMenu~position
+ * @typedef {object} FloatingMenu~position
  * @property {number} left The left position.
  * @property {number} top The top position.
  * @property {number} right The right position.
@@ -27,14 +27,14 @@ import on from '../../globals/js/misc/on';
 
 /**
  * The structure for the size of floating menu.
- * @typedef {Object} FloatingMenu~size
+ * @typedef {object} FloatingMenu~size
  * @property {number} width The width.
  * @property {number} height The height.
  */
 
 /**
  * The structure for the position offset of floating menu.
- * @typedef {Object} FloatingMenu~offset
+ * @typedef {object} FloatingMenu~offset
  * @property {number} top The top position.
  * @property {number} left The left position.
  */
@@ -142,7 +142,7 @@ class FloatingMenu extends mixin(
       );
     }
     this.manage(
-      on(this.element.ownerDocument, 'keydown', event => {
+      on(this.element.ownerDocument, 'keydown', (event) => {
         this._handleKeydown(event);
       })
     );
@@ -246,7 +246,7 @@ class FloatingMenu extends mixin(
       right: 'auto',
       margin: 0,
     };
-    Object.keys(styles).forEach(key => {
+    Object.keys(styles).forEach((key) => {
       const expected =
         typeof styles[key] === 'number' ? parseFloat(styles[key]) : styles[key];
       const actual = computedStyle.getPropertyValue(key);

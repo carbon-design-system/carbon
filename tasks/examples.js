@@ -21,6 +21,7 @@ const PACKAGES_TO_BUILD = new Set([
   'icons',
   'layout',
   'motion',
+  'pictograms',
   'themes',
   'type',
 ]);
@@ -28,6 +29,7 @@ const IGNORE_EXAMPLE_DIRS = new Set([
   'styled-components',
   'vue-cli',
   'storybook',
+  'sass-modules',
 ]);
 
 /**
@@ -46,8 +48,8 @@ async function main() {
 
   const packages = await Promise.all(
     packageNames
-      .filter(name => PACKAGES_TO_BUILD.has(name))
-      .map(async name => {
+      .filter((name) => PACKAGES_TO_BUILD.has(name))
+      .map(async (name) => {
         // Verify that each file that we read from the packages directory is
         // actually a folder. Typically used to catch `.DS_store` files that
         // accidentally appear when opening with MacOS Finder
@@ -68,13 +70,18 @@ async function main() {
           return descriptor;
         }
 
-        const examples = (await fs.readdir(examplesDir)).filter(example => {
-          return example !== '.yarnrc' && !IGNORE_EXAMPLE_DIRS.has(example);
+        const examples = (await fs.readdir(examplesDir)).filter((example) => {
+          return (
+            example !== '.yarnrc' &&
+            example !== '.yarnrc.yml' &&
+            !IGNORE_EXAMPLE_DIRS.has(example) &&
+            example !== '.DS_Store'
+          );
         });
 
         return {
           ...descriptor,
-          examples: examples.map(name => ({
+          examples: examples.map((name) => ({
             filepath: path.join(examplesDir, name),
             name,
           })),
@@ -83,20 +90,20 @@ async function main() {
   );
 
   const packagesWithExamples = packages.filter(
-    pkg => Array.isArray(pkg.examples) && pkg.examples.length !== 0
+    (pkg) => Array.isArray(pkg.examples) && pkg.examples.length !== 0
   );
 
   await Promise.all(
-    packagesWithExamples.map(async pkg => {
+    packagesWithExamples.map(async (pkg) => {
       reporter.info(`Building examples in package \`${pkg.name}\``);
 
-      const { examples, filepath, name } = pkg;
+      const { examples, name } = pkg;
       const packageDir = path.join(BUILD_DIR, name, 'examples');
 
       await fs.ensureDir(packageDir);
 
       await Promise.all(
-        examples.map(async example => {
+        examples.map(async (example) => {
           reporter.info(
             `Building example \`${example.name}\` in package \`${pkg.name}\``
           );
@@ -109,14 +116,25 @@ async function main() {
           await fs.ensureDir(exampleDir);
 
           if (packageJson.scripts.build) {
-            spawn.sync('yarn', ['install'], {
-              stdio: 'ignore',
+            const installResult = spawn.sync('yarn', ['install'], {
+              stdio: 'inherit',
               cwd: example.filepath,
             });
-            spawn.sync('yarn', ['build'], {
-              stdio: 'ignore',
+            if (installResult.status !== 0) {
+              throw new Error(
+                `Error installing dependencies for ${pkg.name}:${example.name}`
+              );
+            }
+
+            const buildResult = spawn.sync('yarn', ['build'], {
+              stdio: 'inherit',
               cwd: example.filepath,
             });
+            if (buildResult.status !== 0) {
+              throw new Error(
+                `Error building example ${example.name} for ${pkg.name}`
+              );
+            }
           }
 
           if (await fs.pathExists(exampleBuildDir)) {
@@ -125,7 +143,7 @@ async function main() {
           }
 
           await fs.copy(example.filepath, exampleDir, {
-            filter(src, dest) {
+            filter(src) {
               const relativePath = path.relative(example.filepath, src);
               if (relativePath.includes('node_modules')) {
                 return false;
@@ -188,6 +206,7 @@ async function main() {
   );
 }
 
-main().catch(error => {
+main().catch((error) => {
   console.log(error);
+  process.exit(1);
 });

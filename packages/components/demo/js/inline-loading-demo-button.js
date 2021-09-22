@@ -20,7 +20,7 @@ class InlineLoadingDemoButton extends mixin(
   constructor(element) {
     super(element);
     this.manage(
-      on(element, 'click', event => {
+      on(element, 'click', (event) => {
         this.toggle(event);
       })
     );
@@ -58,7 +58,7 @@ class InlineLoadingDemoButton extends mixin(
    * The component options.
    * If `options` is specified in the constructor, {@linkcode InlineLoadingDemoButton.create .create()},
    * or {@linkcode InlineLoadingDemoButton.init .init()},
-   * properties in this object are overriden for the instance being create
+   * properties in this object are overridden for the instance being create
    * and how {@linkcode InlineLoadingDemoButton.init .init()} works.
    * @member InlineLoadingDemoButton.options
    * @type {Object}

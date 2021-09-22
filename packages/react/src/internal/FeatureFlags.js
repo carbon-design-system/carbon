@@ -5,6 +5,8 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+import { enabled } from '@carbon/feature-flags';
+
 /**
  * This file contains the list of the default values of compile-time feature flags.
  *
@@ -33,7 +35,7 @@
  *   However, if value is provided and a handler is not, we'll throw a warning indicating the component is now read-only
  * * `readOnly` → silences the above warning, acknowledging the read-only state of the component
  *
- * This flag also disables prop -> state sync in several components, notablly `<NumberInput>`.
+ * This flag also disables prop -> state sync in several components, notably `<NumberInput>`.
  *
  * This flag also updates event handlers to pass an up-to-date value in the second parameter,
  * so applications can use it in both controlled and uncontrolled components.
@@ -44,4 +46,6 @@
  *   * `rest` tells you additional information based on the source component
  * * _Without_ this feature flag the event handler has component-specific signature, e.g. `onChange(event, direction)`.
  */
-export const useControlledStateWithValue = false;
+export const useControlledStateWithValue = enabled(
+  'enable-use-controlled-state-with-value'
+);

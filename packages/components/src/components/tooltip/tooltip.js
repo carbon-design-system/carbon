@@ -59,7 +59,7 @@ const getMenuOffset = (menuBody, menuDirection) => {
     );
   }
   values[arrowPositionProp] = values[arrowPositionProp] || -6; // IE, etc.
-  if (Object.keys(values).every(name => !isNaN(values[name]))) {
+  if (Object.keys(values).every((name) => !isNaN(values[name]))) {
     const {
       [arrowPositionProp]: arrowPosition,
       'border-bottom-width': borderBottomWidth,
@@ -191,7 +191,7 @@ class Tooltip extends mixin(
         on(
           this.element,
           'keydown',
-          event => {
+          (event) => {
             handleClickContextMenu(event, allowedOpenKeys);
           },
           false
@@ -223,7 +223,8 @@ class Tooltip extends mixin(
       // Note: SVGElement in IE11 does not have `.contains()`
       const wentToSelf =
         (relatedTarget &&
-          (this.element.contains && this.element.contains(relatedTarget))) ||
+          this.element.contains &&
+          this.element.contains(relatedTarget)) ||
         (this.tooltip && this.tooltip.element.contains(relatedTarget));
       shouldPreventClose = hadContextMenu || wentToSelf;
     }

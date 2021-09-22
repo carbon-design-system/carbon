@@ -11,5 +11,5 @@ import BreadcrumbSkeleton from './Breadcrumb.Skeleton';
 
 export { Breadcrumb, BreadcrumbItem, BreadcrumbSkeleton };
 
-// Maintain default export as Breadcrumb for backwards-compatability
+// Maintain default export as Breadcrumb for backwards-compatibility
 export default Breadcrumb;

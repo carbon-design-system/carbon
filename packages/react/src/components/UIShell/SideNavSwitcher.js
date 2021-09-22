@@ -38,7 +38,7 @@ const SideNavSwitcher = React.forwardRef(function SideNavSwitcher(props, ref) {
           value="">
           {labelText}
         </option>
-        {options.map(option => (
+        {options.map((option) => (
           <option
             key={option}
             className={`${prefix}--side-nav__option`}
@@ -61,7 +61,7 @@ SideNavSwitcher.propTypes = {
   className: PropTypes.string,
 
   /**
-   * Provide the label for the switcher. This will be the firt visible option
+   * Provide the label for the switcher. This will be the first visible option
    * when someone views this control
    */
   labelText: PropTypes.string.isRequired,

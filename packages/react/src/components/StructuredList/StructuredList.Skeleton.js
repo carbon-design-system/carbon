@@ -7,13 +7,12 @@
 
 import PropTypes from 'prop-types';
 import React from 'react';
-import classNames from 'classnames';
-import { settings } from 'carbon-components';
+import cx from 'classnames';
+import { usePrefix } from '../../internal/usePrefix';
 
-const { prefix } = settings;
-
-const StructuredListSkeleton = ({ rowCount, border }) => {
-  const StructuredListSkeletonClasses = classNames({
+const StructuredListSkeleton = ({ rowCount, border, className, ...rest }) => {
+  const prefix = usePrefix();
+  const StructuredListSkeletonClasses = cx(className, {
     [`${prefix}--skeleton`]: true,
     [`${prefix}--structured-list`]: true,
     [`${prefix}--structured-list--border`]: border,
@@ -31,7 +30,7 @@ const StructuredListSkeleton = ({ rowCount, border }) => {
   }
 
   return (
-    <section className={StructuredListSkeletonClasses}>
+    <div className={StructuredListSkeletonClasses} {...rest}>
       <div className={`${prefix}--structured-list-thead`}>
         <div
           className={`${prefix}--structured-list-row ${prefix}--structured-list-row--header-row`}>
@@ -47,20 +46,25 @@ const StructuredListSkeleton = ({ rowCount, border }) => {
         </div>
       </div>
       <div className={`${prefix}--structured-list-tbody`}>{rows}</div>
-    </section>
+    </div>
   );
 };
 
 StructuredListSkeleton.propTypes = {
   /**
-   * number of table rows
-   */
-  rowCount: PropTypes.number,
-
-  /**
    * Specify whether a border should be added to your StructuredListSkeleton
    */
   border: PropTypes.bool,
+
+  /**
+   * Specify an optional className to add.
+   */
+  className: PropTypes.string,
+
+  /**
+   * number of table rows
+   */
+  rowCount: PropTypes.number,
 };
 
 StructuredListSkeleton.defaultProps = {

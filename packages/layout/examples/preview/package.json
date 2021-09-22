@@ -8,6 +8,6 @@
     "develop": "parcel index.html --no-cache"
   },
   "devDependencies": {
-    "parcel-bundler": "^1.10.0-beta.1"
+    "parcel-bundler": "^1.12.4"
   }
 }

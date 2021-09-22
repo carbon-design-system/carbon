@@ -1,0 +1,46 @@
+//
+// Copyright IBM Corp. 2018, 2018
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+@use '../index.scss' as styles with (
+  $css--font-face: true,
+  $css--plex-arabic: true,
+);
+@use '../scss/components/button';
+@use '../scss/components/tag';
+
+:root {
+  @include styles.theme(styles.$white);
+}
+
+[data-carbon-theme='g10'] {
+  @include styles.theme(styles.$g10);
+}
+
+[data-carbon-theme='g90'] {
+  @include styles.theme(styles.$g90);
+}
+
+[data-carbon-theme='g100'] {
+  @include styles.theme(styles.$g100);
+}
+
+body {
+  background: styles.$background;
+}
+
+html[lang='en'] body {
+  font-family: 'IBM Plex Sans', 'Helvetica Neue', Arial, sans-serif;
+}
+
+html[lang='ar'] body {
+  font-family: 'IBM Plex Sans Arabic', 'Helvetica Neue', Arial, sans-serif;
+}
+
+.text-mono {
+  font-family: 'IBM Plex Mono', Menlo, 'DejaVu Sans Mono',
+    'Bitstream Vera Sans Mono', Courier, monospace;
+}

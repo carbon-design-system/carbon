@@ -7,10 +7,9 @@
 
 'use strict';
 
-const fs = require('fs');
 const { render, types } = require('node-sass');
-const path = require('path');
-const resolve = require('resolve');
+const { SassRenderer } = require('./src/renderer');
+const { Importer } = require('./src/importer');
 
 function sassAsync(options) {
   return new Promise((resolve, reject) => {
@@ -24,65 +23,6 @@ function sassAsync(options) {
   });
 }
 
-const defaultResolveOptions = {
-  extensions: ['.scss'],
-};
-
-/**
- * Create an importer for sass with the given `cwd`. This importer will try and
- * mimic the default sass resolution algorithm
- * @param {string} cwd
- * @returns {Function}
- */
-function createImporter(cwd) {
-  return (url, prev, done) => {
-    const baseDirectory = prev !== 'stdin' ? path.dirname(prev) : cwd;
-
-    if (url.startsWith('@')) {
-      const file = resolve.sync(url, {
-        ...defaultResolveOptions,
-        basedir: cwd,
-        packageFilter(pkg) {
-          if (pkg.eyeglass !== undefined) {
-            // Replace JavaScript entrypoint with Sass module entrypoing
-            pkg.main = `${pkg.eyeglass.sassDir}/index.scss`;
-          }
-          return pkg;
-        },
-        pathFilter(pkg, path, relativePath) {
-          // Transforms `scss/filename` to `scss/_filename.scss`
-          return relativePath.replace(/^(scss\/)([a-z-]+)/, '$1_$2.scss');
-        },
-      });
-      done({ file });
-      return;
-    }
-
-    const partialFilepath = path.resolve(
-      baseDirectory,
-      path.dirname(url),
-      `_${path.basename(url)}.scss`
-    );
-    const filepath = path.resolve(
-      baseDirectory,
-      path.dirname(url),
-      `${path.basename(url)}.scss`
-    );
-
-    if (fs.existsSync(partialFilepath)) {
-      done({ file: partialFilepath });
-      return;
-    }
-
-    if (fs.existsSync(filepath)) {
-      done({ file: filepath });
-      return;
-    }
-
-    done();
-  };
-}
-
 /**
  * Create a sass renderer for the given current working directory. Setting `cwd`
  * is useful so that we can resolve sass files relative to the test file.
@@ -91,8 +31,8 @@ function createImporter(cwd) {
  * @returns {Function}
  */
 function createSassRenderer(cwd, initialData = '') {
-  const importer = createImporter(cwd);
-  return async data => {
+  const importer = Importer.create(cwd);
+  return async (data) => {
     const calls = [];
     const warn = jest.fn(() => types.Null());
     const mockError = jest.fn(() => types.Null());
@@ -127,6 +67,9 @@ function createSassRenderer(cwd, initialData = '') {
       if (
         !error.message.includes('Function breakpoint finished without @return')
       ) {
+        if (error.formatted) {
+          throw new Error(error.formatted);
+        }
         throw error;
       }
       renderError = error;
@@ -139,7 +82,7 @@ function createSassRenderer(cwd, initialData = '') {
       output,
       getOutput(level = 'debug') {
         return output[level].mock.calls
-          .map(call => convert(call[0]))
+          .map((call) => convert(call[0]))
           .join('\n');
       },
     };
@@ -163,6 +106,9 @@ function convert(value) {
   }
 
   if (value instanceof types.Number) {
+    if (value.getValue() === 0) {
+      return value.getValue();
+    }
     return `${value.getValue()}${value.getUnit()}`;
   }
 
@@ -211,8 +157,11 @@ function convert(value) {
 }
 
 module.exports = {
-  convert,
+  // Existing sass renderer using node-sass
   createSassRenderer,
-  createImporter,
+  convert,
   types,
+
+  // New sass renderer using sass
+  SassRenderer,
 };

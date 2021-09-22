@@ -6,19 +6,23 @@
 //
 
 @import 'helper-classes';
+@import './vendor/@carbon/elements/scss/layout/layout';
 
 /// @access private
 /// @type Map
 /// @group global-layout
 $z-indexes: (
-  modal: 9000,
-  overlay: 8000,
+  // Dropdowns that render outside of a Modal should render above a Modal.
+  // Dropdowns below the modal will close when the Modal is opened, so
+  // having a higher z-index *should* not cause issues.
   dropdown: 9100,
-  header: 6000,
+  modal: 9000,
+  header: 8000,
+  overlay: 6000,
+  floating: 6000,
   footer: 5000,
   hidden: - 1,
-  overflowHidden: - 1,
-  floating: 10000,
+  overflowHidden: - 1
 );
 
 /// @access public

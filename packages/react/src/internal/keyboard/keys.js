@@ -80,3 +80,9 @@ export const ArrowDown = {
   which: 40,
   keyCode: 40,
 };
+
+export const Delete = {
+  key: 'Delete',
+  which: 8 || 46,
+  keyCode: 8 || 46,
+};

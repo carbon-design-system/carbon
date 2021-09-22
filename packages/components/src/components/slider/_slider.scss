@@ -11,7 +11,6 @@
 
 @import '../../globals/scss/vars';
 @import '../../globals/scss/helper-mixins';
-@import '../../globals/scss/layer';
 @import '../../globals/scss/typography';
 @import '../../globals/scss/vendor/@carbon/elements/scss/import-once/import-once';
 @import '../form/form';
@@ -30,14 +29,18 @@
   .#{$prefix}--slider {
     position: relative;
     width: 100%;
-    margin: 0 $carbon--spacing-05;
-    max-width: rem(640px);
     min-width: rem(200px);
+    max-width: rem(640px);
+    padding: $spacing-05 0;
+    margin: 0 $carbon--spacing-05;
+    cursor: pointer;
   }
 
   .#{$prefix}--slider__range-label {
     @include type-style('code-02');
+
     color: $text-01;
+    white-space: nowrap;
 
     &:last-of-type {
       margin-right: $carbon--spacing-05;
@@ -49,20 +52,19 @@
     width: 100%;
     height: rem(2px);
     background: $ui-03;
-    cursor: pointer;
     transform: translate(0%, -50%);
   }
 
   .#{$prefix}--slider__track:before {
-    content: '';
     position: absolute;
-    display: inline-block;
-    height: rem(4px);
-    width: rem(2px);
-    left: 50%;
-    transform: translate(-50%, 0);
     top: rem(-5px);
+    left: 50%;
+    display: inline-block;
+    width: rem(2px);
+    height: rem(4px);
     background: $ui-03;
+    content: '';
+    transform: translate(-50%, 0);
   }
 
   .#{$prefix}--slider__filled-track {
@@ -70,43 +72,41 @@
     width: 100%;
     height: rem(2px);
     background: $ui-05;
-    transform-origin: left;
     pointer-events: none;
     transform: translate(0%, -50%);
+    transform-origin: left;
     transition: background $duration--fast-02 motion(standard, productive);
   }
 
   .#{$prefix}--slider__thumb {
     position: absolute;
-    height: rem(14px);
+    z-index: 3;
     width: rem(14px);
+    height: rem(14px);
     background: $ui-05;
     border-radius: 50%;
     box-shadow: inset 0 0 0 1px transparent, inset 0 0 0 2px transparent;
-    top: 0;
+    outline: none;
     transform: translate(-50%, -50%);
     transition: transform $duration--fast-02 motion(standard, productive),
       background $duration--fast-02 motion(standard, productive),
       box-shadow $duration--fast-02 motion(standard, productive);
-    cursor: pointer;
-    outline: none;
-    z-index: 3;
 
     &:hover {
-      // 20px / 14px = 1.4285714286
-      transform: translate(-50%, -50%) scale(1.4285714286);
+      // 20px / 14px = 1.4286
+      transform: translate(-50%, -50%) scale(1.4286);
     }
 
     &:focus {
-      // 20px / 14px = 1.4285714286
-      transform: translate(-50%, -50%) scale(1.4285714286);
-      box-shadow: inset 0 0 0 2px $interactive-04, inset 0 0 0 3px $ui-01;
       background-color: $interactive-04;
+      box-shadow: inset 0 0 0 2px $interactive-04, inset 0 0 0 3px $ui-01;
+      // 20px / 14px = 1.4286
+      transform: translate(-50%, -50%) scale(1.4286);
     }
 
     &:active {
-      transform: translate(-50%, -50%) scale(1.4285714286);
       box-shadow: inset 0 0 0 2px $interactive-04;
+      transform: translate(-50%, -50%) scale(1.4286);
     }
   }
 
@@ -116,16 +116,19 @@
 
   .#{$prefix}--slider-text-input,
   .#{$prefix}-slider-text-input {
-    width: rem(64px);
+    width: auto;
     height: rem(40px);
-    padding: 0;
-    text-align: center;
     -moz-appearance: textfield;
+    text-align: center;
 
     &::-webkit-outer-spin-button,
     &::-webkit-inner-spin-button {
       display: none;
     }
+  }
+
+  .#{$prefix}--slider-text-input.#{$prefix}--text-input--invalid {
+    padding-right: 1rem;
   }
 
   .#{$prefix}--slider__thumb:focus ~ .#{$prefix}--slider__filled-track {
@@ -139,18 +142,22 @@
     color: $disabled-02;
   }
 
+  .#{$prefix}--slider--disabled.#{$prefix}--slider {
+    cursor: not-allowed;
+  }
+
   .#{$prefix}--slider--disabled .#{$prefix}--slider__thumb {
     background-color: $ui-03;
 
     &:hover {
-      transform: translate(-50%, -50%);
       cursor: not-allowed;
+      transform: translate(-50%, -50%);
     }
 
     &:focus {
+      background-color: $ui-03;
       box-shadow: none;
       outline: none;
-      background-color: $ui-03;
       transform: translate(-50%, -50%);
     }
 
@@ -166,24 +173,23 @@
     .#{$prefix}--slider__thumb:focus
     ~ .#{$prefix}--slider__filled-track {
     background-color: $ui-03;
-    cursor: not-allowed;
   }
 
   .#{$prefix}--slider--disabled
     ~ .#{$prefix}--form-item
     .#{$prefix}--slider-text-input,
   .#{$prefix}--slider--disabled ~ .#{$prefix}--slider-text-input {
+    border: none;
     background-color: $disabled-01;
     color: $disabled-02;
-    transition: none;
     cursor: not-allowed;
-    border: none;
+    transition: none;
 
     &:active,
     &:focus,
     &:hover {
-      outline: none;
       color: $disabled-02;
+      outline: none;
     }
   }
 
@@ -191,6 +197,7 @@
   .#{$prefix}--slider-container.#{$prefix}--skeleton
     .#{$prefix}--slider__range-label {
     @include skeleton;
+
     width: rem(20px);
     height: rem(12px);
   }
@@ -207,6 +214,19 @@
     cursor: default;
     pointer-events: none;
   }
+
+  // Windows HCM fix
+  /* stylelint-disable */
+  .#{$prefix}--slider__thumb {
+    @include high-contrast-mode('outline');
+  }
+  .#{$prefix}--slider__thumb:focus {
+    @include high-contrast-mode('focus');
+  }
+  .#{$prefix}--slider__track {
+    @include high-contrast-mode('outline');
+  }
+  /* stylelint-enable */
 }
 
 @include exports('slider') {

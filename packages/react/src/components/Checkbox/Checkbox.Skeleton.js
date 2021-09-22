@@ -5,15 +5,32 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+import PropTypes from 'prop-types';
 import React from 'react';
-import { settings } from 'carbon-components';
+import cx from 'classnames';
+import { usePrefix } from '../../internal/usePrefix';
 
-const { prefix } = settings;
+const CheckboxSkeleton = ({ className, ...rest }) => {
+  const prefix = usePrefix();
+  return (
+    <div
+      className={cx(
+        `${prefix}--form-item`,
+        `${prefix}--checkbox-wrapper`,
+        `${prefix}--checkbox-label`,
+        className
+      )}
+      {...rest}>
+      <span className={`${prefix}--checkbox-label-text ${prefix}--skeleton`} />
+    </div>
+  );
+};
 
-const CheckboxSkeleton = () => (
-  <div className={`${prefix}--form-item ${prefix}--checkbox-wrapper`}>
-    <span className={`${prefix}--checkbox-label ${prefix}--skeleton`} />
-  </div>
-);
+CheckboxSkeleton.propTypes = {
+  /**
+   * Specify an optional className to add.
+   */
+  className: PropTypes.string,
+};
 
 export default CheckboxSkeleton;

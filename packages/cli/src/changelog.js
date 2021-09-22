@@ -7,7 +7,7 @@
 
 'use strict';
 
-const parse = require('@commitlint/parse');
+const { default: parse } = require('@commitlint/parse');
 const execa = require('execa');
 
 // We keep a list of commits that are process-oriented that we never want to
@@ -38,7 +38,7 @@ const headerDenyList = new Set([
  */
 async function generate(packages, lastTag, latestTag) {
   const packageCommitsInRange = await Promise.all(
-    packages.map(pkg => getCommitsInRange(pkg, `${lastTag}...${latestTag}`))
+    packages.map((pkg) => getCommitsInRange(pkg, `${lastTag}...${latestTag}`))
   );
   const packageCommitsToInclude = packageCommitsInRange.filter(
     ({ commits }) => {
@@ -86,7 +86,7 @@ function getMarkdownSections(packages) {
     let section = `## \`${name}@${version}\`\n`;
 
     for (const { title, types } of sectionTypes) {
-      const commitsForSection = commits.filter(commit => {
+      const commitsForSection = commits.filter((commit) => {
         return types.includes(commit.info.type);
       });
 
@@ -139,7 +139,7 @@ function getMarkdownTitle(lastTag, latestTag) {
  * @returns {Array}
  */
 async function getCommitsInRange(pkg, range) {
-  // Using the `rev-list` subcommand of `git` we can list out all of the commits
+  // Using the `rev-list` sub-command of `git` we can list out all of the commits
   // for the given range inside of the package's location. This will allow us to
   // find all the commits associated with this package that we'll display in the
   // changelog
@@ -152,7 +152,7 @@ async function getCommitsInRange(pkg, range) {
   ]);
 
   // If the git sub-command returns nothing, then no commits have occurred for
-  // this package in the given commit rnage
+  // this package in the given commit range
   if (stdout === '') {
     return {
       ...pkg,
@@ -161,7 +161,7 @@ async function getCommitsInRange(pkg, range) {
   }
 
   const commitsInFolder = await Promise.all(
-    stdout.split('\n').map(async commit => {
+    stdout.split('\n').map(async (commit) => {
       // The output from `git rev-list` follows the pattern: `HASH <header>`, so
       // we will need to trim the string to get the appropriate hash and text
       // values for `parse` to consume.
@@ -184,7 +184,7 @@ async function getCommitsInRange(pkg, range) {
   // CHANGELOG, namely when we cannot parse the commit info type or when the
   // commit header is in our deny list
   const commits = commitsInFolder
-    .filter(commit => {
+    .filter((commit) => {
       if (commit.info.type === null) {
         return false;
       }
@@ -195,9 +195,9 @@ async function getCommitsInRange(pkg, range) {
 
       return true;
     })
-    .filter(commit => {
-      // Running into an issue with duplicate headers when viewing "commited by"
-      // and "commited and authored by", as a result we'll keep a set of all
+    .filter((commit) => {
+      // Running into an issue with duplicate headers when viewing "committed by"
+      // and "committed and authored by", as a result we'll keep a set of all
       // headers and exclude the commit if we've seen it already
       if (headers.has(commit.info.header)) {
         return false;

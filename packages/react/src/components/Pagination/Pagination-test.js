@@ -6,7 +6,7 @@
  */
 
 import React from 'react';
-import { CaretRight24, CaretLeft24 } from '@carbon/icons-react';
+import { CaretRight16, CaretLeft16 } from '@carbon/icons-react';
 import Pagination from '../Pagination';
 import Select from '../Select';
 import SelectItem from '../SelectItem';
@@ -19,13 +19,13 @@ jest.useFakeTimers();
 
 describe('Pagination', () => {
   describe('renders as expected', () => {
-    const pagination = shallow(
+    const pagination = mount(
       <Pagination className="extra-class" pageSizes={[5, 10]} totalItems={50} />
     );
 
     describe('icons', () => {
-      const iconTypes = [CaretLeft24, CaretRight24];
-      const icons = pagination.findWhere(n => iconTypes.includes(n.type()));
+      const iconTypes = [CaretLeft16, CaretRight16];
+      const icons = pagination.findWhere((n) => iconTypes.includes(n.type()));
 
       it('should have 2 icons', () => {
         expect(icons.length).toEqual(2);
@@ -34,8 +34,10 @@ describe('Pagination', () => {
 
     describe('pagination container', () => {
       it('should render the expected classes', () => {
-        expect(pagination.hasClass(`${prefix}--pagination`)).toBe(true);
-        expect(pagination.hasClass('extra-class')).toBe(true);
+        expect(pagination.childAt(0).hasClass(`${prefix}--pagination`)).toBe(
+          true
+        );
+        expect(pagination.childAt(0).hasClass('extra-class')).toBe(true);
       });
     });
 
@@ -222,11 +224,13 @@ describe('Pagination', () => {
         const pager = mount(<Pagination pageSizes={[5, 10]} totalItems={0} />);
         const labels = pager.find(`.${prefix}--pagination__text`);
         expect(labels.at(1).text()).toBe('0–0 of 0 items');
-        expect(labels.at(2).text()).toBe('of 1 pages');
+        expect(labels.at(2).text()).toBe('of 1 page');
       });
 
       it('should have two buttons for navigation', () => {
-        const buttons = right.find(`.${prefix}--pagination__button`);
+        const buttons = right
+          .find(`.${prefix}--pagination__button`)
+          .hostNodes();
         expect(buttons.length).toBe(2);
         expect(
           buttons.at(0).hasClass(`${prefix}--pagination__button--backward`)
@@ -237,7 +241,9 @@ describe('Pagination', () => {
       });
 
       it('should disable backward navigation for the first page', () => {
-        const buttons = right.find(`.${prefix}--pagination__button`);
+        const buttons = right
+          .find(`.${prefix}--pagination__button`)
+          .hostNodes();
         expect(buttons.at(0).props().disabled).toBe(true);
         expect(buttons.at(1).props().disabled).toBe(false);
       });
@@ -272,7 +278,9 @@ describe('Pagination', () => {
         });
 
         it('should have two buttons for navigation', () => {
-          const buttons = right.find(`.${prefix}--pagination__button`);
+          const buttons = right
+            .find(`.${prefix}--pagination__button`)
+            .hostNodes();
           expect(buttons.length).toBe(2);
           expect(
             buttons.at(0).hasClass(`${prefix}--pagination__button--backward`)
@@ -283,7 +291,9 @@ describe('Pagination', () => {
         });
 
         it('should disable backward navigation for the first page', () => {
-          const buttons = right.find(`.${prefix}--pagination__button`);
+          const buttons = right
+            .find(`.${prefix}--pagination__button`)
+            .hostNodes();
           expect(buttons.at(0).props().disabled).toBe(true);
           expect(buttons.at(1).props().disabled).toBe(false);
         });
@@ -303,11 +313,7 @@ describe('Pagination', () => {
 
         it('should hide text input if disabled', () => {
           const noTextInput = shallow(
-            <Pagination
-              pageSizes={[100]}
-              pagesUnknown={true}
-              pageInputDisabled={true}
-            />
+            <Pagination pageSizes={[100]} pagesUnknown={true} disabled={true} />
           );
           const right = noTextInput.find(
             `.${prefix}--pagination__right .${prefix}--text__input`
@@ -315,13 +321,13 @@ describe('Pagination', () => {
           expect(right.length).toEqual(0);
         });
 
-        it('should not append `pagination__button--no-index` class if input is disabled', () => {
+        it('should append `pagination__button--no-index` class if input is disabled', () => {
           const pagination = shallow(
             <Pagination
               page={2}
               pageSizes={[100]}
               pagesUnknown={true}
-              pageInputDisabled={true}
+              disabled={true}
             />
           );
           const forwardButton = pagination.find(
@@ -332,10 +338,10 @@ describe('Pagination', () => {
           );
           expect(
             backwardButton.hasClass(`${prefix}--pagination__button--no-index`)
-          ).toEqual(false);
+          ).toEqual(true);
           expect(
             forwardButton.hasClass(`${prefix}--pagination__button--no-index`)
-          ).toEqual(false);
+          ).toEqual(true);
         });
       });
 
@@ -355,6 +361,7 @@ describe('Pagination', () => {
           expect(pager.state().page).toBe(1);
           pager
             .find(`.${prefix}--pagination__button--forward`)
+            .hostNodes()
             .simulate('click');
           expect(actualPage).toBe(2);
           expect(pager.state().page).toBe(2);
@@ -376,6 +383,7 @@ describe('Pagination', () => {
           expect(pager.state().page).toBe(2);
           pager
             .find(`.${prefix}--pagination__button--backward`)
+            .hostNodes()
             .simulate('click');
           expect(actualPage).toBe(1);
           expect(pager.state().page).toBe(1);

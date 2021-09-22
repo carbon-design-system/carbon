@@ -1,0 +1,13 @@
+<svg id="icon" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: none;
+      }
+    </style>
+  </defs>
+  <title>direction--right--01--filled</title>
+  <path d="M28,2H4A2,2,0,0,0,2,4V28a2,2,0,0,0,2,2H28a2,2,0,0,0,2-2V4A2,2,0,0,0,28,2ZM19,18l-1.4141-1.4141L22.1719,12H10V26H8V12a2,2,0,0,1,2-2H22.1719l-4.586-4.5859L19,4l7,7Z"/>
+  <path id="inner-path" class="cls-1" d="M19,18l-1.4141-1.4141L22.1719,12H10V26H8V12a2,2,0,0,1,2-2H22.1719l-4.586-4.5859L19,4l7,7Z"/>
+  <rect id="_Transparent_Rectangle_" data-name="&lt;Transparent Rectangle&gt;" class="cls-1" width="32" height="32"/>
+</svg>

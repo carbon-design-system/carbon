@@ -33,45 +33,25 @@ $default-feature-flags: (
   grid-columns-16: false,
   grid--fallback: false,
   enable-css-custom-properties: false,
+  enable-v11-release: false,
 );
 
-/// @access private
-/// @type Bool
-/// @group feature-flags
-$did-warn-diverged-feature-flags: false !default;
+$feature-flags: map-merge($default-feature-flags, $feature-flags);
 
-/// Look for user-defined feature flags that are different from default ones, and warn them before merging them.
-/// @access private
-/// @param {Map} $dst - The feature flags to merge to (default feature flags)
-/// @param {Map} $src - The feature flags to merge from (user-defined feature flags)
-/// @returns {Map} - The result of `map-merge($dst, $src)`
-/// @example scss
-///   $feature-flags: merge-feature-flags($default-feature-flags, $feature-flags);
-/// @group feature-flags
-@function merge-feature-flags($dst, $src) {
-  @if (not $did-warn-diverged-feature-flags) {
-    $diverged: ();
-
-    @each $name, $value in $src {
-      @if (
-        map-has-key($dst, $name) == true and map-get($dst, $name) != $value
-      ) {
-        $diverged: append($diverged, $name);
-      }
-    }
-
-    @if (length($diverged) > 0) {
-      @warn 'Usage of non-default feature flags was found: #{$diverged}. ' +
-        'Feature/code under non-default feature flags are either experimental, deprecated, or support for edge cases. ' +
-        'They are subject to change any time. Use them at your own risk.';
-      $did-warn-diverged-feature-flags: true !global;
-    }
+@if feature-flag-enabled('enable-v11-release') == true {
+  @if variable-exists(css--disable-css-custom-properties) ==
+    false or
+    $css--disable-css-custom-properties ==
+    false
+  {
+    $feature-flags: map-merge(
+      $feature-flags,
+      (
+        enable-css-custom-properties: true,
+      )
+    );
   }
-
-  @return map-merge($dst, $src);
 }
-
-$feature-flags: merge-feature-flags($default-feature-flags, $feature-flags);
 
 @if map-get($feature-flags, grid) != true {
   // We supported a flag for experimental grid in the past that we want to keep

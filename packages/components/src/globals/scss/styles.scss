@@ -27,12 +27,6 @@ $css--helpers: true !default;
 /// @group feature-flags
 $css--body: true !default;
 
-/// If true, the `layer()` mixin sets `box-shadow` values
-/// @access public
-/// @type Bool
-/// @group feature-flags
-$css--use-layer: true !default;
-
 /// If true, include reset CSS
 /// @access public
 /// @type Bool
@@ -66,6 +60,13 @@ $css--use-experimental-grid: false !default;
 /// @group feature-flags
 /// @deprecated (For v10) v10 always uses `@carbon/grid`
 $css--use-experimental-grid-fallback: false !default;
+
+/// If `enable-v11-release` is set to `true`, it automatically enables the custom properties flag.
+/// If so, we need a way to disable custom properties, but use the new tokens.
+/// @access public
+/// @type Bool
+/// @group feature-flags
+$css--disable-css-custom-properties: false !default;
 
 @import 'feature-flags';
 @import 'vars';
@@ -115,53 +116,58 @@ $deprecations--message: 'Deprecated code was found, this code will be removed be
 // 🍕 Components
 //-------------------------
 
+@import '../../components/accordion/accordion';
+@import '../../components/breadcrumb/breadcrumb';
 @import '../../components/button/button';
-@import '../../components/copy-button/copy-button';
-@import '../../components/file-uploader/file-uploader';
 @import '../../components/checkbox/checkbox';
+@import '../../components/code-snippet/code-snippet';
 @import '../../components/combo-box/combo-box';
-@import '../../components/radio-button/radio-button';
-@import '../../components/toggle/toggle';
-@import '../../components/search/search';
-@import '../../components/select/select';
-@import '../../components/text-input/text-input';
-@import '../../components/text-area/text-area';
-@import '../../components/number-input/number-input';
+@import '../../components/content-switcher/content-switcher';
+@import '../../components/copy-button/copy-button';
+@import '../../components/data-table/data-table';
+@import '../../components/date-picker/date-picker';
+@import '../../components/dropdown/dropdown';
+@import '../../components/file-uploader/file-uploader';
 @import '../../components/form/form';
+@import '../../components/inline-loading/inline-loading';
 @import '../../components/link/link';
 @import '../../components/list-box/list-box';
 @import '../../components/list/list';
-@import '../../components/data-table/data-table';
-@import '../../components/structured-list/structured-list';
-@import '../../components/code-snippet/code-snippet';
-@import '../../components/overflow-menu/overflow-menu';
-@import '../../components/content-switcher/content-switcher';
-@import '../../components/date-picker/date-picker';
-@import '../../components/dropdown/dropdown';
 @import '../../components/loading/loading';
+@import '../../components/menu/menu';
 @import '../../components/modal/modal';
 @import '../../components/multi-select/multi-select';
 @import '../../components/notification/inline-notification';
 @import '../../components/notification/toast-notification';
-@import '../../components/tooltip/tooltip';
+@import '../../components/number-input/number-input';
+@import '../../components/overflow-menu/overflow-menu';
+@import '../../components/pagination-nav/pagination-nav';
+@import '../../components/pagination/pagination';
+@import '../../components/progress-bar/progress-bar';
+@import '../../components/progress-indicator/progress-indicator';
+@import '../../components/radio-button/radio-button';
+@import '../../components/search/search';
+@import '../../components/select/select';
+@import '../../components/skeleton/skeleton';
+@import '../../components/slider/slider';
+@import '../../components/structured-list/structured-list';
 @import '../../components/tabs/tabs';
 @import '../../components/tag/tag';
-@import '../../components/pagination/pagination';
-@import '../../components/accordion/accordion';
-@import '../../components/progress-indicator/progress-indicator';
-@import '../../components/breadcrumb/breadcrumb';
-@import '../../components/toolbar/toolbar';
-@import '../../components/time-picker/time-picker';
-@import '../../components/slider/slider';
+@import '../../components/text-area/text-area';
+@import '../../components/text-input/text-input';
 @import '../../components/tile/tile';
-@import '../../components/skeleton/skeleton';
-@import '../../components/inline-loading/inline-loading';
-@import '../../components/pagination-nav/pagination-nav';
+@import '../../components/time-picker/time-picker';
+@import '../../components/toggle/toggle';
+@import '../../components/toolbar/toolbar';
+@import '../../components/tooltip/tooltip';
 
 //-------------------------------------
 // 🔬 Experimental
 //-------------------------------------
+@import '../../components/pagination/unstable_pagination';
 @import '../../components/ui-shell/ui-shell';
+@import '../../components/popover/popover';
+@import '../../components/treeview/treeview';
 
 //-------------------------------------
 // 🙈 Hidden (Not exposed on website)

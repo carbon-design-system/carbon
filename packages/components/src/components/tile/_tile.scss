@@ -11,7 +11,6 @@
 
 @import '../../globals/scss/vars';
 @import '../../globals/scss/helper-mixins';
-@import '../../globals/scss/layer';
 @import '../../globals/scss/vendor/@carbon/elements/scss/import-once/import-once';
 @import '../../globals/scss/css--reset';
 
@@ -19,13 +18,17 @@
 /// @access private
 /// @group tile
 @mixin tile {
+  .#{$prefix}--tile-group {
+    @include reset;
+  }
+
   .#{$prefix}--tile {
+    position: relative;
     display: block;
     min-width: 8rem;
     min-height: 4rem;
-    background-color: $ui-01;
-    position: relative;
     padding: $carbon--spacing-05;
+    background-color: $ui-01;
     outline: 2px solid transparent;
     outline-offset: -2px;
 
@@ -41,11 +44,21 @@
   .#{$prefix}--tile--clickable,
   .#{$prefix}--tile--selectable,
   .#{$prefix}--tile--expandable {
-    transition: $duration--moderate-01 motion(standard, productive);
     cursor: pointer;
+    transition: $duration--moderate-01 motion(standard, productive);
 
     &:hover {
       background: $hover-ui;
+    }
+  }
+  .#{$prefix}--tile--expandable .#{$prefix}--link {
+    color: $link-secondary;
+  }
+
+  .#{$prefix}--tile--clickable,
+  .#{$prefix}--tile--expandable {
+    &:focus {
+      @include focus-outline('outline');
     }
 
     &:hover,
@@ -56,29 +69,55 @@
     }
   }
 
-  .#{$prefix}--tile--clickable,
-  .#{$prefix}--tile--expandable {
-    &:focus {
-      @include focus-outline('outline');
-    }
+  // Removes Firefox automatic border on buttons
+  .#{$prefix}--tile--expandable::-moz-focus-inner {
+    border: 0;
+  }
+
+  .#{$prefix}--tile--clickable {
+    @include reset;
+    @include type-style('body-short-01');
+
+    color: $text-01;
+    text-decoration: none;
+  }
+
+  .#{$prefix}--tile--clickable:hover,
+  .#{$prefix}--tile--clickable:active,
+  .#{$prefix}--tile--clickable:visited,
+  .#{$prefix}--tile--clickable:visited:hover {
+    color: $text-01;
+    text-decoration: none;
+  }
+
+  // Disabled ClickableTile
+  .#{$prefix}--tile--clickable.#{$prefix}--link--disabled {
+    color: $disabled-02;
+  }
+
+  .#{$prefix}--tile--clickable:hover.#{$prefix}--link--disabled {
+    display: block;
+    background-color: $disabled-01;
+    color: $disabled-02;
   }
 
   .#{$prefix}--tile--selectable {
     padding-right: $carbon--spacing-09;
+    border: 1px solid transparent;
   }
 
   .#{$prefix}--tile__checkmark,
   .#{$prefix}--tile__chevron {
     position: absolute;
-    transition: $duration--fast-02 motion(standard, productive);
     border: none;
     background: transparent;
+    transition: $duration--fast-02 motion(standard, productive);
   }
 
   .#{$prefix}--tile__checkmark {
-    height: 1rem;
     top: 1rem;
     right: 1rem;
+    height: 1rem;
     opacity: 0;
 
     svg {
@@ -91,16 +130,30 @@
     }
   }
 
+  .#{$prefix}--tile__checkmark--persistent {
+    opacity: 1;
+  }
+
   .#{$prefix}--tile__chevron {
     position: absolute;
-    bottom: 0.5rem;
-    right: 0.5rem;
+    right: $carbon--spacing-05;
+    bottom: $carbon--spacing-05;
+    display: flex;
     height: 1rem;
+    align-items: flex-end;
 
     svg {
+      margin-left: $carbon--spacing-03;
+      fill: $ui-05;
       transform-origin: center;
       transition: $duration--fast-02 motion(standard, productive);
-      fill: $ui-05;
+
+      // Windows, Firefox HCM Fix
+      @media screen and (-ms-high-contrast: active),
+        screen and (prefers-contrast) {
+        // `ButtonText` is a CSS2 system color to help improve colors in HCM
+        fill: ButtonText;
+      }
     }
 
     &:hover {
@@ -114,6 +167,11 @@
 
   .#{$prefix}--tile--expandable {
     overflow: hidden;
+    width: 100%;
+    border: 0;
+    color: inherit;
+    font-size: inherit;
+    text-align: left;
     transition: max-height $duration--moderate-01 motion(standard, productive);
   }
 
@@ -123,10 +181,10 @@
 
   .#{$prefix}--tile-content__below-the-fold {
     display: block;
-    visibility: hidden;
     opacity: 0;
     transition: opacity $duration--fast-02 motion(standard, productive),
       visibility $duration--fast-02 motion(standard, productive);
+    visibility: hidden;
   }
 
   .#{$prefix}--tile--is-expanded {
@@ -134,31 +192,43 @@
     transition: max-height $duration--fast-02 motion(standard, productive);
 
     .#{$prefix}--tile__chevron svg {
-      transform: rotate(-180deg);
+      transform: rotate(180deg);
     }
 
     .#{$prefix}--tile-content__below-the-fold {
-      visibility: visible;
       opacity: 1;
       transition: opacity $duration--fast-02 motion(standard, productive),
         visibility $duration--fast-02 motion(standard, productive);
+      visibility: inherit;
+
+      // Safari-only media query
+      // Fixes an issue with scrolling
+      // and absolutely positioned elements (#8119)
+      @media not all and (min-resolution: 0.001dpcm) {
+        @supports (-webkit-appearance: none) and (stroke-color: transparent) {
+          overflow-y: auto;
+        }
+      }
     }
   }
 
   .#{$prefix}--tile--is-selected {
-    outline: 1px solid $interactive-02;
-    outline-offset: -1px;
+    border: 1px solid $ui-05;
   }
 
   .#{$prefix}--tile--is-selected .#{$prefix}--tile__checkmark {
     opacity: 1;
   }
 
-  .#{$prefix}--tile-input:checked
-    + .#{$prefix}--tile
-    > .#{$prefix}--tile__checkmark
-    svg {
+  .#{$prefix}--tile--is-selected .#{$prefix}--tile__checkmark svg {
     fill: $ui-05;
+
+    // Windows, Firefox HCM Fix
+    @media screen and (-ms-high-contrast: active),
+      screen and (prefers-contrast) {
+      // `ButtonText` is a CSS2 system color to help improve colors in HCM
+      fill: ButtonText;
+    }
   }
 
   .#{$prefix}--tile-content {
@@ -168,6 +238,30 @@
 
   .#{$prefix}--tile-input {
     @include hidden;
+  }
+
+  .#{$prefix}--tile-input:focus + .#{$prefix}--tile {
+    @include focus-outline('outline');
+  }
+
+  .#{$prefix}--tile--disabled.#{$prefix}--tile--selectable {
+    background-color: $ui-01;
+    color: $disabled-02;
+    cursor: not-allowed;
+  }
+
+  .#{$prefix}--tile--disabled.#{$prefix}--tile--selectable.#{$prefix}--tile--light {
+    background-color: $ui-02;
+  }
+
+  .#{$prefix}--tile--disabled.#{$prefix}--tile--is-selected {
+    outline-color: $disabled-02;
+  }
+
+  .#{$prefix}--tile--disabled.#{$prefix}--tile--is-selected
+    .#{$prefix}--tile__checkmark
+    svg {
+    fill: $disabled-02;
   }
 }
 

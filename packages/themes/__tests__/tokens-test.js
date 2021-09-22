@@ -16,7 +16,7 @@ const render = createSassRenderer(__dirname);
 
 describe('_tokens.scss', () => {
   it('should export all tokens', async () => {
-    const tokenVariableTests = tokens.colors.map(token => {
+    const tokenVariableTests = tokens.colors.map((token) => {
       return `$t: test(global-variable-exists(${formatTokenName(token)}));`;
     });
     const { calls } = await render(`

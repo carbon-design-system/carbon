@@ -10,8 +10,7 @@
 /// @group structured-list
 /// @param {Number} $padding [$structured-list-padding]
 @mixin padding-td--condensed($padding: $structured-list-padding) {
-  padding: $padding / 4;
-  padding-left: 0;
+  padding: $padding * 0.25;
 }
 
 /// Used only for [data-structured-list]
@@ -19,13 +18,13 @@
 /// @group structured-list
 /// @param {Number} $padding [$structured-list-padding]
 @mixin padding--data-structured-list($padding: $structured-list-padding) {
-  padding-left: $padding / 2;
-  padding-right: $padding / 2;
+  padding-right: $padding * 0.5;
+  padding-left: $padding * 0.5;
 
   // Controls gutter sizes for check
   &:first-child {
-    padding-left: $padding / 2;
-    padding-right: $padding / 2;
+    padding-right: $padding * 0.5;
+    padding-left: $padding * 0.5;
   }
 }
 
@@ -34,10 +33,8 @@
 /// @group structured-list
 /// @param {Number} $padding [$structured-list-padding]
 @mixin padding-th($padding: $structured-list-padding) {
-  padding-left: $carbon--spacing-05;
-  padding-right: $carbon--spacing-05;
-  padding-top: $carbon--spacing-05;
-  padding-bottom: $carbon--spacing-03;
+  padding: $carbon--spacing-05 $carbon--spacing-03 $carbon--spacing-03
+    $carbon--spacing-03;
 }
 
 /// Used only for normal structured-list
@@ -45,8 +42,6 @@
 /// @group structured-list
 /// @param {Number} $padding [$structured-list-padding]
 @mixin padding-td($padding: $structured-list-padding) {
-  padding-top: $carbon--spacing-05;
-  padding-right: $carbon--spacing-05;
-  padding-bottom: $carbon--spacing-06;
-  padding-left: $carbon--spacing-05;
+  padding: $carbon--spacing-05 $carbon--spacing-03 $carbon--spacing-06
+    $carbon--spacing-03;
 }

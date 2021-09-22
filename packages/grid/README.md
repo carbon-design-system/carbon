@@ -20,6 +20,9 @@ yarn add @carbon/grid
 
 ## Usage
 
+_More examples and documentation can be found on this
+[live demo website](https://carbon-elements.netlify.com/grid/examples/preview/)._
+
 `@carbon/grid` has three primitive class types to use in order to structure your
 application. They include:
 
@@ -67,11 +70,12 @@ The `.bx--col-sm-1` class names tells us that this `<div>` should only span one
 column at our `sm` breakpoint. By default, as we scale beyond the breakpoint the
 layout will still take up a percentage of the overall width.
 
-## 📖 API Documentation
+## 📚 Examples
 
-If you're looking for `@carbon/grid` API documentation, check out:
+If you're looking for more examples on how to use `@carbon/grid`, we have some
+examples that you can check out:
 
-- [Sass](./docs/sass.md)
+- [css-grid](./examples/css-grid)
 
 ## 🙌 Contributing
 

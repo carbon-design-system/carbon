@@ -1,0 +1,159 @@
+//
+// Copyright IBM Corp. 2021
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+@import '../../globals/scss/theme-tokens';
+@import '../../globals/scss/vendor/@carbon/elements/scss/colors/colors';
+@import '../../globals/scss/vendor/@carbon/elements/scss/import-once/import-once';
+
+// prettier-ignore
+$notification-colors: (
+  'notification-background-error': (
+    fallback: $carbon__red-10,
+    values: (
+      (
+        theme: $carbon--theme--white,
+        value: $carbon__red-10,
+      ),
+      (
+        theme: $carbon--theme--g10,
+        value: $carbon__red-10,
+      ),
+      (
+        theme: $carbon--theme--g80,
+        value: $layer,
+      ),
+      (
+        theme: $carbon--theme--g90,
+        value: $ui-01,
+      ),
+      (
+        theme: $carbon--theme--g100,
+        value: $ui-01,
+      ),
+      (
+        theme: $carbon--theme--v9,
+        value: $carbon__red-10,
+      ),
+    ),
+  ),
+  'notification-background-success': (
+    fallback: $carbon__green-10,
+    values: (
+      (
+        theme: $carbon--theme--white,
+        value: $carbon__green-10,
+      ),
+      (
+        theme: $carbon--theme--g10,
+        value: $carbon__green-10,
+      ),
+      (
+        theme: $carbon--theme--g80,
+        value: $layer,
+      ),
+      (
+        theme: $carbon--theme--g90,
+        value: $ui-01,
+      ),
+      (
+        theme: $carbon--theme--g100,
+        value: $ui-01,
+      ),
+      (
+        theme: $carbon--theme--v9,
+        value: $carbon__green-10,
+      ),
+    ),
+  ),
+  'notification-background-info': (
+    fallback: $carbon__blue-10,
+    values: (
+      (
+        theme: $carbon--theme--white,
+        value: $carbon__blue-10,
+      ),
+      (
+        theme: $carbon--theme--g10,
+        value: $carbon__blue-10,
+      ),
+      (
+        theme: $carbon--theme--g80,
+        value: $layer,
+      ),
+      (
+        theme: $carbon--theme--g90,
+        value: $ui-01,
+      ),
+      (
+        theme: $carbon--theme--g100,
+        value: $ui-01,
+      ),
+      (
+        theme: $carbon--theme--v9,
+        value: $carbon__blue-10,
+      ),
+    ),
+  ),
+  'notification-background-warning': (
+    fallback: mix($carbon__yellow-30, $carbon__white-0, 15%),
+    values: (
+      (
+        theme: $carbon--theme--white,
+        value: mix($carbon__yellow-30, $carbon__white-0, 15%),
+      ),
+      (
+        theme: $carbon--theme--g10,
+        value: mix($carbon__yellow-30, $carbon__white-0, 15%),
+      ),
+      (
+        theme: $carbon--theme--g80,
+        value: $layer,
+      ),
+      (
+        theme: $carbon--theme--g90,
+        value: $ui-01,
+      ),
+      (
+        theme: $carbon--theme--g100,
+        value: $ui-01,
+      ),
+      (
+        theme: $carbon--theme--v9,
+        value: mix($carbon__yellow-30, $carbon__white-0, 15%),
+      ),
+    ),
+  ),
+  'notification-action-hover': (
+    fallback: $carbon__white-0,
+    values: (
+      (
+        theme: $carbon--theme--white,
+        value: $carbon__white-0,
+      ),
+      (
+        theme: $carbon--theme--g10,
+        value: $carbon__white-0,
+      ),
+      (
+        theme: $carbon--theme--g80,
+        value: $layer-hover,
+      ),
+      (
+        theme: $carbon--theme--g90,
+        value: $hover-ui,
+      ),
+      (
+        theme: $carbon--theme--g100,
+        value: $hover-ui,
+      ),
+      (
+        theme: $carbon--theme--v9,
+        value: $carbon__white-0,
+      ),
+    ),
+  ),
+);

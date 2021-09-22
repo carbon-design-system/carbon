@@ -50,20 +50,20 @@ HeaderName.propTypes = {
   children: PropTypes.node.isRequired,
 
   /**
-   * Optionally provide a custom class to apply to the underlying <li> node
+   * Optionally provide a custom class to apply to the underlying `<li>` node
    */
   className: PropTypes.string,
+
+  /**
+   * Provide an href for the name to link to
+   */
+  href: PropTypes.string,
 
   /**
    * Optionally specify a prefix to your header name. Useful for companies, for
    * example: IBM [Product Name] versus solely [Product Name]
    */
   prefix: PropTypes.string,
-
-  /**
-   * Provide an href for the name to link to
-   */
-  href: PropTypes.string,
 };
 
 HeaderName.defaultProps = {

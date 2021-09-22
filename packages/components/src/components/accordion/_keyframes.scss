@@ -1,13 +1,13 @@
 @mixin content-visible {
   height: 100%;
-  visibility: visible;
   opacity: 1;
+  visibility: inherit;
 }
 
 @mixin content-hidden {
   height: 0;
-  visibility: hidden;
   opacity: 0;
+  visibility: hidden;
 }
 
 @keyframes collapse-accordion {

@@ -8,6 +8,7 @@
 import PropTypes from 'prop-types';
 import React, { useState, useCallback } from 'react';
 
+// eslint-disable-next-line react/prop-types
 const HeaderContainer = ({ isSideNavExpanded, render: Children }) => {
   //state for expandable sidenav
   const [isSideNavExpandedState, setIsSideNavExpandedState] = useState(
@@ -15,8 +16,10 @@ const HeaderContainer = ({ isSideNavExpanded, render: Children }) => {
   );
 
   const handleHeaderMenuButtonClick = useCallback(() => {
-    setIsSideNavExpandedState(!isSideNavExpandedState);
-  }, [isSideNavExpandedState, setIsSideNavExpandedState]);
+    setIsSideNavExpandedState(
+      (prevIsSideNavExpanded) => !prevIsSideNavExpanded
+    );
+  }, [setIsSideNavExpandedState]);
 
   return (
     <Children

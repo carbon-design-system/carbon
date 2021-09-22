@@ -9,22 +9,49 @@ exports[`SideNav should render 1`] = `
   isChildOfHeader={true}
   isFixedNav={false}
   isPersistent={true}
-  translateById={[Function]}
 >
   <div
     className="bx--side-nav__overlay"
   />
   <nav
+    aria-hidden={true}
     aria-label="Navigation"
     className="bx--side-nav__navigation bx--side-nav bx--side-nav--ux"
     onBlur={[Function]}
     onFocus={[Function]}
-    onMouseEnter={[Function]}
-    onMouseLeave={[Function]}
   >
-    <h2>
-      Navigation
-    </h2>
+    <ForwardRef(SideNavLink)
+      element="a"
+      href="/"
+      large={false}
+    >
+      <SideNavItem
+        large={false}
+      >
+        <li
+          className="bx--side-nav__item"
+        >
+          <Link
+            className="bx--side-nav__link"
+            element="a"
+            href="/"
+          >
+            <a
+              className="bx--side-nav__link"
+              href="/"
+            >
+              <SideNavLinkText>
+                <span
+                  className="bx--side-nav__link-text"
+                >
+                  Navigation
+                </span>
+              </SideNavLinkText>
+            </a>
+          </Link>
+        </li>
+      </SideNavItem>
+    </ForwardRef(SideNavLink)>
   </nav>
 </ForwardRef(SideNav)>
 `;

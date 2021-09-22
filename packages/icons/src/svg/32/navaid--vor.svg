@@ -1,0 +1,16 @@
+<svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #171717;
+      }
+
+      .cls-2 {
+        fill: none;
+      }
+    </style>
+  </defs>
+  <circle cx="16" cy="16" r="2"/>
+  <path class="cls-1" d="M30.8638,15.4961l-7-12A1,1,0,0,0,23,3H9a1,1,0,0,0-.8638.4961l-7,12a1,1,0,0,0,0,1.0078l7,12A1,1,0,0,0,9,29H23a1,1,0,0,0,.8638-.4961l7-12a1,1,0,0,0,0-1.0078ZM22.4258,27H9.5742L3.1577,16,9.5742,5H22.4258l6.4165,11Z" transform="translate(0 0)"/>
+  <rect id="_Transparent_Rectangle_" data-name="&lt;Transparent Rectangle&gt;" class="cls-2" width="32" height="32" transform="translate(32 32) rotate(-180)"/>
+</svg>

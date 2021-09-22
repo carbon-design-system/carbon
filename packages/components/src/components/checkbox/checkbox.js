@@ -30,17 +30,17 @@ class Checkbox extends mixin(createComponent, initComponentBySearch, handles) {
   constructor(element, options) {
     super(element, options);
     this.manage(
-      on(this.element, 'click', event => {
+      on(this.element, 'click', (event) => {
         this._handleClick(event);
       })
     );
     this.manage(
-      on(this.element, 'focus', event => {
+      on(this.element, 'focus', (event) => {
         this._handleFocus(event);
       })
     );
     this.manage(
-      on(this.element, 'blur', event => {
+      on(this.element, 'blur', (event) => {
         this._handleBlur(event);
       })
     );
@@ -204,7 +204,7 @@ class Checkbox extends mixin(createComponent, initComponentBySearch, handles) {
   /**
    * The component options.
    * If `options` is specified in the constructor, {@linkcode Checkbox.create .create()}, or {@linkcode Checkbox.init .init()},
-   * properties in this object are overriden for the instance being create and how {@linkcode Checkbox.init .init()} works.
+   * properties in this object are overridden for the instance being create and how {@linkcode Checkbox.init .init()} works.
    * @member Checkbox.options
    * @type {object}
    * @property {string} selectorInit The data attribute to find copy button UIs.

@@ -26,6 +26,37 @@ describe('PasswordInput', () => {
         expect(passwordInput().length).toBe(1);
       });
 
+      it('should accept refs', () => {
+        class MyComponent extends React.Component {
+          constructor(props) {
+            super(props);
+            this.passwordInput = React.createRef();
+            this.focus = this.focus.bind(this);
+          }
+          focus() {
+            this.passwordInput.current.focus();
+          }
+          render() {
+            return (
+              <PasswordInput
+                id="test"
+                labelText="testlabel"
+                ref={this.passwordInput}
+              />
+            );
+          }
+        }
+        const container = document.createElement('div');
+        container.id = 'container';
+        document.body.appendChild(container);
+        const wrapper = mount(<MyComponent />, {
+          attachTo: document.querySelector('#container'),
+        });
+        expect(document.activeElement.type).toBeUndefined();
+        wrapper.instance().focus();
+        expect(document.activeElement.type).toEqual('password');
+      });
+
       it('has the expected classes', () => {
         expect(passwordInput().hasClass(`${prefix}--text-input`)).toEqual(true);
       });
@@ -69,6 +100,7 @@ describe('PasswordInput', () => {
 
       it('should set password visibility toggle text as expected', () => {
         const { hidePasswordLabel, showPasswordLabel } = wrapper.props();
+        wrapper.setProps({ disabled: false });
         expect(
           wrapper.find('.bx--text-input--password__visibility__toggle').text()
         ).toEqual(showPasswordLabel);
@@ -147,12 +179,12 @@ describe('PasswordInput', () => {
 
       it('should not invoke onClick', () => {
         input.simulate('click');
-        expect(onClick).not.toBeCalled();
+        expect(onClick).not.toHaveBeenCalled();
       });
 
       it('should not invoke onChange', () => {
         input.simulate('change');
-        expect(onChange).not.toBeCalled();
+        expect(onChange).not.toHaveBeenCalled();
       });
     });
 
@@ -178,12 +210,12 @@ describe('PasswordInput', () => {
 
       it('should invoke onClick when input is clicked', () => {
         input.simulate('click');
-        expect(onClick).toBeCalled();
+        expect(onClick).toHaveBeenCalled();
       });
 
       it('should invoke onChange when input value is changed', () => {
         input.simulate('change', eventObject);
-        expect(onChange).toBeCalledWith(eventObject);
+        expect(onChange).toHaveBeenCalledWith(eventObject);
       });
     });
   });

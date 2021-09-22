@@ -6,41 +6,66 @@
  */
 
 import React from 'react';
-import { storiesOf } from '@storybook/react';
-import { action } from '@storybook/addon-actions';
 import { withKnobs, boolean, select, text } from '@storybook/addon-knobs';
-import { settings } from 'carbon-components';
 import { iconAddSolid, iconSearch } from 'carbon-icons';
-import { Add16, Search16 } from '@carbon/icons-react';
+import {
+  Add16,
+  AddFilled16,
+  Search16,
+  PlayOutlineFilled32,
+  PlayOutlineFilled16,
+} from '@carbon/icons-react';
 import Button from '../Button';
 import ButtonSkeleton from '../Button/Button.Skeleton';
-
-const { prefix } = settings;
+import ButtonSet from '../ButtonSet';
+import mdx from './Button.mdx';
 
 const icons = {
   None: 'None',
-  'Add with filled circle (Add16 from `@carbon/icons-react`)': 'Add16',
+  'Add (Add16 from `@carbon/icons-react`)': 'Add16',
+  'Add (Filled) (AddFilled16 from `@carbon/icons-react`)': 'AddFilled16',
   'Search (Search16 from `@carbon/icons-react`)': 'Search16',
+  'PlayOutlineFilled16 (PlayOutlineFilled16 from `@carbon/icons-react`)':
+    'PlayOutlineFilled16',
+  'PlayOutlineFilled32 (PlayOutlineFilled32 from `@carbon/icons-react`)':
+    'PlayOutlineFilled32',
 };
 
 const iconMap = {
   iconAddSolid,
   iconSearch,
   Add16,
+  AddFilled16,
   Search16,
+  PlayOutlineFilled16,
+  PlayOutlineFilled32,
 };
 
 const kinds = {
   'Primary button (primary)': 'primary',
   'Secondary button (secondary)': 'secondary',
+  'Tertiary button (tertiary)': 'tertiary',
   'Danger button (danger)': 'danger',
+  'Danger tertiary button (danger--tertiary)': 'danger--tertiary',
+  'Danger ghost button (danger--ghost)': 'danger--ghost',
   'Ghost button (ghost)': 'ghost',
 };
 
+// V11: New size table
+// const sizes = {
+//   'Small  (sm)': 'sm',
+//   'Medium (md)': 'md',
+//   'Large  (lg)  - default': null,
+//   'Extra Large (xl)': 'xl',
+//   'Extra Extra Large (2xl)': '2xl',
+// };
+
 const sizes = {
-  Default: 'default',
-  Field: 'field',
-  Small: 'small',
+  'Small  (sm)': 'sm',
+  'Medium (md)': 'md',
+  Default: null,
+  'Large (lg)': 'lg',
+  'Extra Large (xl)': 'xl',
 };
 
 const props = {
@@ -48,6 +73,7 @@ const props = {
     const iconToUse = iconMap[select('Icon (icon)', icons, 'none')];
     return {
       className: 'some-class',
+      isExpressive: boolean('Expressive', false),
       kind: select('Button kind (kind)', kinds, 'primary'),
       disabled: boolean('Disabled (disabled)', false),
       size: select('Button size (size)', sizes, 'default'),
@@ -56,17 +82,22 @@ const props = {
         'Icon description (iconDescription)',
         'Button icon'
       ),
-      onClick: action('onClick'),
-      onFocus: action('onFocus'),
-      small: boolean('Small (small) - Deprecated in favor of `size`', false),
     };
   },
   iconOnly: () => {
-    const iconToUse = iconMap[select('Icon (icon)', icons, 'Add16')];
+    let iconToUse;
+
+    if (iconMap[select('Icon (icon)', icons, 'Add16')] == undefined) {
+      iconToUse = Add16;
+    } else {
+      iconToUse = iconMap[select('Icon (icon)', icons, 'Add16')];
+    }
     return {
       className: 'some-class',
+      isExpressive: boolean('Expressive', false),
       kind: select('Button kind (kind)', kinds, 'primary'),
       disabled: boolean('Disabled (disabled)', false),
+      isSelected: boolean('Selected (isSelected)', false),
       size: select('Button size (size)', sizes, 'default'),
       renderIcon: !iconToUse || iconToUse.svgData ? undefined : iconToUse,
       iconDescription: text(
@@ -83,140 +114,201 @@ const props = {
         ['start', 'center', 'end'],
         'center'
       ),
-      onClick: action('onClick'),
-      onFocus: action('onFocus'),
     };
   },
   set: () => {
     const iconToUse = iconMap[select('Icon (icon)', icons, 'none')];
     return {
       className: 'some-class',
+      isExpressive: boolean('Expressive', false),
       disabled: boolean('Disabled (disabled)', false),
-      small: boolean('Small (small)', false),
       size: select('Button size (size)', sizes, 'default'),
       renderIcon: !iconToUse || iconToUse.svgData ? undefined : iconToUse,
       iconDescription: text(
         'Icon description (iconDescription)',
         'Button icon'
       ),
-      onClick: action('onClick'),
-      onFocus: action('onFocus'),
+      stacked: boolean('Stack buttons vertically (stacked)', false),
     };
   },
 };
 
-Button.displayName = 'Button';
-
-const CustomLink = ({ children, href, ...other }) => (
-  <a href={href} {...other}>
-    {children}
-  </a>
-);
-
-storiesOf('Buttons', module)
-  .addDecorator(withKnobs)
-  .add(
-    'Default',
-    () => {
-      const regularProps = props.regular();
-      return (
-        <div
-          style={{
-            display: 'flex',
-            alignItems: 'center',
-            flexWrap: 'wrap',
-          }}>
-          <Button {...regularProps} className="some-class">
-            Button
-          </Button>
-          &nbsp;
-          <Button {...regularProps} href="#" className="some-class">
-            Link
-          </Button>
-          &nbsp;
-          <Button {...regularProps} as="p" href="#" className="some-class">
-            Element
-          </Button>
-          &nbsp;
-          <Button
-            {...regularProps}
-            as={CustomLink}
-            href="#"
-            className="some-class">
-            Custom component
-          </Button>
-        </div>
-      );
+export default {
+  title: 'Components/Button',
+  decorators: [withKnobs],
+  parameters: {
+    component: Button,
+    subcomponents: {
+      ButtonSet,
+      ButtonSkeleton,
     },
-    {
-      info: {
-        text: `
-          Buttons are used to initialize an action, either in the background or
-          foreground of an experience.
+    docs: {
+      page: mdx,
+    },
+  },
+};
 
-          There are several kinds of buttons.
+export const _Default = () => {
+  return <Button>Button</Button>;
+};
 
-          Primary buttons should be used for the principle call to action
-          on the page.
+_Default.story = {
+  name: 'Button',
+};
 
-          Secondary buttons should be used for secondary actions on each page.
+export const Secondary = () => {
+  return <Button kind="secondary">Button</Button>;
+};
 
-          Danger buttons should be used for a negative action (such as Delete) on the page.
+export const Tertiary = () => {
+  return <Button kind="tertiary">Button</Button>;
+};
 
-          Modify the behavior of the button by changing its event properties.
+export const Danger = () => {
+  return (
+    <>
+      <Button kind="danger">Button</Button>
+      &nbsp;
+      <Button kind="danger--tertiary">Tertiary Danger Button</Button>
+      &nbsp;
+      <Button kind="danger--ghost">Ghost Danger Button</Button>
+    </>
+  );
+};
 
-          Field buttons may be use directly next to an input element, to visually align their heights.
+export const Ghost = () => {
+  return <Button kind="ghost">Button</Button>;
+};
 
-          Small buttons may be used when there is not enough space for a
-          regular sized button. This issue is most found in tables. Small button should have three words
-          or less.
-
-          When words are not enough, icons can be used in buttons to better communicate what the button does. Icons are
-          always paired with text.
-        `,
-      },
-    }
-  )
-  .add('Icon-only buttons', () => <Button {...props.iconOnly()} hasIconOnly />)
-  .add(
-    'Sets of Buttons',
-    () => {
-      const setProps = props.set();
-      return (
-        <div className={`${prefix}--btn-set`}>
-          <Button kind="secondary" {...setProps}>
+export const Playground = () => {
+  const regularProps = props.regular();
+  const iconOnly = props.iconOnly();
+  const { stacked, ...buttonProps } = props.set();
+  return (
+    <>
+      <div
+        style={{
+          display: 'flex',
+          alignItems: 'center',
+          flexWrap: 'wrap',
+        }}>
+        <Button {...regularProps}>Buttons</Button>
+        &nbsp;
+        {!regularProps.kind.includes('danger') && (
+          <>
+            <Button hasIconOnly {...iconOnly}></Button>
+            &nbsp;
+            <Button hasIconOnly {...iconOnly} kind="ghost"></Button>
+          </>
+        )}
+      </div>
+      <div
+        style={{
+          marginTop: '1rem',
+        }}>
+        <ButtonSet stacked={stacked}>
+          <Button kind="secondary" {...buttonProps}>
             Secondary button
           </Button>
-          <Button kind="primary" {...setProps}>
+          <Button kind="primary" {...buttonProps}>
             Primary button
           </Button>
-        </div>
-      );
-    },
-    {
-      info: {
-        text: `
-          When an action required by the user has more than one option, always use a a negative action button (secondary) paired with a positive action button (primary) in that order. Negative action buttons will be on the left. Positive action buttons should be on the right. When these two types buttons are paired in the correct order, they will automatically space themselves apart.
-        `,
-      },
-    }
-  )
-  .add(
-    'skeleton',
-    () => (
-      <div>
-        <ButtonSkeleton />
-        &nbsp;
-        <ButtonSkeleton href="#" />
-        &nbsp;
-        <ButtonSkeleton size="small" />
+        </ButtonSet>
       </div>
-    ),
-    {
-      info: {
-        text: `
-          Placeholder skeleton state to use when content is loading.
-        `,
-      },
-    }
+    </>
   );
+};
+
+export const IconButton = () => (
+  <Button renderIcon={Add16} iconDescription="Icon Description" hasIconOnly />
+);
+
+IconButton.story = {
+  name: 'Icon Button',
+};
+
+export const SetOfButtons = () => {
+  return (
+    <ButtonSet>
+      <Button kind="secondary">Secondary button</Button>
+      <Button kind="primary">Primary button</Button>
+    </ButtonSet>
+  );
+};
+
+export const ExpressiveButtons = () => {
+  return (
+    <>
+      <div
+        style={{
+          margin: '1rem',
+        }}>
+        <Button isExpressive size="default">
+          Button
+        </Button>
+      </div>
+      <div
+        style={{
+          margin: '1rem',
+        }}>
+        <Button isExpressive size="lg">
+          Button
+        </Button>
+      </div>
+      <div
+        style={{
+          margin: '1rem',
+        }}>
+        <Button isExpressive size="xl">
+          Button
+        </Button>
+      </div>
+      <div
+        style={{
+          margin: '1rem',
+        }}>
+        <Button isExpressive size="default" renderIcon={Add16}>
+          Button
+        </Button>
+      </div>
+      <div
+        style={{
+          margin: '1rem',
+        }}>
+        <Button
+          isExpressive
+          renderIcon={Add16}
+          hasIconOnly
+          iconDescription="Icon description"
+        />
+      </div>
+      <div
+        style={{
+          marginTop: '1rem',
+        }}>
+        <ButtonSet>
+          <Button kind="secondary" isExpressive>
+            Secondary button
+          </Button>
+          <Button kind="primary" isExpressive>
+            Primary button
+          </Button>
+        </ButtonSet>
+      </div>
+    </>
+  );
+};
+
+export const Skeleton = () => (
+  <div>
+    <ButtonSkeleton size="xl" />
+    &nbsp;
+    <ButtonSkeleton size="lg" />
+    &nbsp;
+    <ButtonSkeleton />
+    &nbsp;
+    <ButtonSkeleton size="md" />
+    &nbsp;
+    <ButtonSkeleton small />
+  </div>
+);

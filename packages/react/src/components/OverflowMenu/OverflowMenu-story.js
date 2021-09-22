@@ -6,17 +6,22 @@
  */
 
 import React from 'react';
-import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 import { withKnobs, boolean, select, text } from '@storybook/addon-knobs';
-import { withReadme } from 'storybook-readme';
-import OverflowMenu from '../OverflowMenu';
+import { OverflowMenu } from './OverflowMenu';
 import OverflowMenuItem from '../OverflowMenuItem';
-import OverflowREADME from './README.md';
+import mdx from './OverflowMenu.mdx';
+import { Filter16 } from '@carbon/icons-react';
 
 const directions = {
   'Bottom of the trigger button (bottom)': 'bottom',
   'Top of the trigger button (top)': 'top',
+};
+
+const sizes = {
+  'Small  (sm)': 'sm',
+  'Medium (md) - default': undefined,
+  'Large  (lg)': 'lg',
 };
 
 const props = {
@@ -26,6 +31,11 @@ const props = {
     iconDescription: text('Icon description (iconDescription)', ''),
     flipped: boolean('Flipped (flipped)', false),
     light: boolean('Light (light)', false),
+    selectorPrimaryFocus: text(
+      'Primary focus element selector (selectorPrimaryFocus)',
+      ''
+    ),
+    size: select('Size (size)', sizes, undefined) || undefined,
     onClick: action('onClick'),
     onFocus: action('onFocus'),
     onKeyDown: action('onKeyDown'),
@@ -40,93 +50,66 @@ const props = {
       false
     ),
     onClick: action('onClick'),
+    hasDivider: boolean('Has divider (hasDivider)', false),
+    isDelete: boolean('Is delete (isDelete)', false),
   }),
 };
 
-const OverflowMenuExample = ({ overflowMenuProps, overflowMenuItemProps }) => (
-  <>
-    <OverflowMenu {...overflowMenuProps}>
-      <OverflowMenuItem
-        {...overflowMenuItemProps}
-        itemText="Option 1"
-        primaryFocus
-      />
-      <OverflowMenuItem
-        {...overflowMenuItemProps}
-        itemText="Option 2 is an example of a really long string and how we recommend handling this"
-        requireTitle
-      />
-      <OverflowMenuItem {...overflowMenuItemProps} itemText="Option 3" />
-      <OverflowMenuItem {...overflowMenuItemProps} itemText="Option 4" />
-      <OverflowMenuItem
-        {...overflowMenuItemProps}
-        itemText="Danger option"
-        hasDivider
-        isDelete
-      />
-    </OverflowMenu>
-  </>
+OverflowMenu.displayName = 'OverflowMenu';
+
+export default {
+  title: 'Components/OverflowMenu',
+  decorators: [withKnobs],
+  component: OverflowMenu,
+  subcomponents: {
+    OverflowMenuItem,
+  },
+
+  parameters: {
+    docs: {
+      page: mdx,
+    },
+  },
+};
+
+export const _Default = () => (
+  <OverflowMenu>
+    <OverflowMenuItem itemText="Stop app" />
+    <OverflowMenuItem itemText="Restart app" />
+    <OverflowMenuItem itemText="Rename app" />
+    <OverflowMenuItem itemText="Edit routes and access" requireTitle />
+    <OverflowMenuItem hasDivider isDelete itemText="Delete app" />
+  </OverflowMenu>
 );
 
-storiesOf('OverflowMenu', module)
-  .addDecorator(withKnobs)
-  .add(
-    'basic',
-    withReadme(OverflowREADME, () => (
-      <OverflowMenuExample
-        overflowMenuProps={props.menu()}
-        overflowMenuItemProps={props.menuItem()}
-      />
-    )),
-    {
-      info: {
-        text: `
-            Overflow Menu is used when additional options are available to the user and there is a space constraint.
-            Create Overflow Menu Item components for each option on the menu.
-          `,
-      },
-    }
-  )
-  .add(
-    'with links',
-    withReadme(OverflowREADME, () => (
-      <OverflowMenuExample
-        overflowMenuProps={props.menu()}
-        overflowMenuItemProps={{
-          ...props.menuItem(),
-          href: 'https://www.ibm.com',
-        }}
-      />
-    )),
-    {
-      info: {
-        text: `
-            Overflow Menu is used when additional options are available to the user and there is a space constraint.
-            Create Overflow Menu Item components for each option on the menu.
+_Default.story = {
+  name: 'Overflow Menu',
+};
 
-            When given \`href\` props, menu items render as <a> tags to facilitate usability.
-          `,
-      },
-    }
-  )
-  .add(
-    'custom trigger',
-    withReadme(OverflowREADME, () => (
-      <OverflowMenuExample
-        overflowMenuProps={{
-          ...props.menu(),
-          ariaLabel: null,
-          style: { width: 'auto' },
-          renderIcon: () => <div style={{ padding: '0 1rem' }}>Menu</div>,
-        }}
-        overflowMenuItemProps={props.menuItem()}
-      />
-    )),
-    {
-      info: {
-        text: `
-            Sometimes you just want to render something other than an icon
-          `,
-      },
-    }
-  );
+export const RenderCustomIcon = () => (
+  <OverflowMenu renderIcon={Filter16}>
+    <OverflowMenuItem itemText="Filter A" />
+    <OverflowMenuItem itemText="Filter B" />
+  </OverflowMenu>
+);
+
+export const Playground = () => (
+  <OverflowMenu {...props.menu()}>
+    <OverflowMenuItem {...props.menuItem()} itemText="Option 1" />
+    <OverflowMenuItem
+      {...props.menuItem()}
+      itemText="Option 2 is an example of a really long string and how we recommend handling this"
+      requireTitle
+      title="Custom tooltip title"
+    />
+    <OverflowMenuItem {...props.menuItem()} itemText="Option 3" />
+    <OverflowMenuItem {...props.menuItem()} itemText="Option 4" />
+    <OverflowMenuItem
+      {...props.menuItem()}
+      requireTitle
+      itemText="Danger option"
+      hasDivider
+      isDelete
+    />
+  </OverflowMenu>
+);

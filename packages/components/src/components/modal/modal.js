@@ -4,6 +4,7 @@
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
+
 import warning from 'warning';
 import settings from '../../globals/js/settings';
 import mixin from '../../globals/js/misc/mixin';
@@ -165,7 +166,7 @@ class Modal extends mixin(
 
   _hookCloseActions() {
     this.manage(
-      on(this.element, 'click', evt => {
+      on(this.element, 'click', (evt) => {
         const closeButton = eventMatches(evt, this.options.selectorModalClose);
         if (closeButton) {
           evt.delegateTarget = closeButton; // eslint-disable-line no-param-reassign
@@ -183,7 +184,7 @@ class Modal extends mixin(
     }
 
     this._handleKeydownListener = this.manage(
-      on(this.element.ownerDocument.body, 'keydown', evt => {
+      on(this.element.ownerDocument.body, 'keydown', (evt) => {
         // Avoid running `evt.stopPropagation()` only when modal is shown
         if (evt.which === 27 && this.shouldStateBeChanged('hidden')) {
           evt.stopPropagation();
@@ -198,7 +199,7 @@ class Modal extends mixin(
    * @param {Event} evt The event.
    * @private
    */
-  _handleFocusin = evt => {
+  _handleFocusin = (evt) => {
     const focusWrapNode =
       this.element.querySelector(this.options.selectorModalContainer) ||
       this.element;
@@ -206,7 +207,7 @@ class Modal extends mixin(
       this.element.classList.contains(this.options.classVisible) &&
       !focusWrapNode.contains(evt.target) &&
       this.options.selectorsFloatingMenus.every(
-        selector => !eventMatches(evt, selector)
+        (selector) => !eventMatches(evt, selector)
       )
     ) {
       this.element.querySelector(settings.selectorTabbable).focus();
@@ -223,7 +224,7 @@ class Modal extends mixin(
   /**
    * The component options.
    * If `options` is specified in the constructor, {@linkcode Modal.create .create()}, or {@linkcode Modal.init .init()},
-   * properties in this object are overriden for the instance being create and how {@linkcode Modal.init .init()} works.
+   * properties in this object are overridden for the instance being create and how {@linkcode Modal.init .init()} works.
    * @member Modal.options
    * @type {object}
    * @property {string} selectorInit The CSS class to find modal dialogs.

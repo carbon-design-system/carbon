@@ -6,9 +6,9 @@
  */
 
 import React from 'react';
-import { storiesOf } from '@storybook/react';
 import { withKnobs, boolean, text } from '@storybook/addon-knobs';
 import Loading from '../Loading';
+import mdx from './Loading.mdx';
 
 const props = () => ({
   active: boolean('Active (active)', true),
@@ -17,20 +17,28 @@ const props = () => ({
   description: text('Description (description)', 'Active loading indicator'),
 });
 
-storiesOf('Loading', module)
-  .addDecorator(withKnobs)
-  .add(
-    'Default',
-    () => {
-      return <Loading {...props()} className={'some-class'} />;
+export default {
+  title: 'Components/Loading',
+  decorators: [withKnobs],
+
+  parameters: {
+    component: Loading,
+    docs: {
+      page: mdx,
     },
-    {
-      info: {
-        text: `
-            Loading spinners are used when retrieving data or performing slow computations,
-            and help to notify users that loading is underway. The 'active' property is true by default;
-            set to false to end the animation.
-          `,
-      },
-    }
-  );
+  },
+};
+
+export const Default = () => {
+  return <Loading {...props()} className={'some-class'} />;
+};
+
+Default.parameters = {
+  info: {
+    text: `
+        Loading spinners are used when retrieving data or performing slow computations,
+        and help to notify users that loading is underway. The 'active' property is true by default;
+        set to false to end the animation.
+      `,
+  },
+};
