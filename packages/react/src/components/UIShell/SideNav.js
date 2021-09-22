@@ -6,15 +6,13 @@
  */
 
 import React, { useState, useRef } from 'react';
-import { settings } from 'carbon-components';
 import cx from 'classnames';
 import PropTypes from 'prop-types';
 import { AriaLabelPropType } from '../../prop-types/AriaPropTypes';
 import { CARBON_SIDENAV_ITEMS } from './_utils';
+import { usePrefix } from '../../internal/usePrefix';
 // TO-DO: comment back in when footer is added for rails
 // import SideNavFooter from './SideNavFooter';
-
-const { prefix } = settings;
 
 const SideNav = React.forwardRef(function SideNav(props, ref) {
   const {
@@ -37,6 +35,7 @@ const SideNav = React.forwardRef(function SideNav(props, ref) {
     ...other
   } = props;
 
+  const prefix = usePrefix();
   const { current: controlled } = useRef(expandedProp !== undefined);
   const [expandedState, setExpandedState] = useState(defaultExpanded);
   const [expandedViaHoverState, setExpandedViaHoverState] = useState(

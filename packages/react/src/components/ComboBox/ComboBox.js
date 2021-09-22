@@ -9,7 +9,7 @@ import cx from 'classnames';
 import Downshift from 'downshift';
 import PropTypes from 'prop-types';
 import React, { useEffect, useState, useRef } from 'react';
-import { settings } from 'carbon-components';
+import { Text } from '../Text';
 import {
   Checkmark16,
   WarningAltFilled16,
@@ -22,8 +22,7 @@ import setupGetInstanceId from '../../tools/setupGetInstanceId';
 import { mapDownshiftProps } from '../../tools/createPropAdapter';
 import mergeRefs from '../../tools/mergeRefs';
 import { useFeatureFlag } from '../FeatureFlags';
-
-const { prefix } = settings;
+import { usePrefix } from '../../internal/usePrefix';
 
 const defaultItemToString = (item) => {
   if (typeof item === 'string') {
@@ -101,6 +100,7 @@ const ComboBox = React.forwardRef((props, ref) => {
     warnText,
     ...rest
   } = props;
+  const prefix = usePrefix();
 
   const textInput = useRef();
   const comboBoxInstanceId = getInstanceId();
@@ -293,9 +293,9 @@ const ComboBox = React.forwardRef((props, ref) => {
         return (
           <div className={wrapperClasses}>
             {titleText && (
-              <label className={titleClasses} {...labelProps}>
+              <Text as="label" className={titleClasses} {...labelProps}>
                 {titleText}
-              </label>
+              </Text>
             )}
             <ListBox
               className={className}
@@ -391,9 +391,9 @@ const ComboBox = React.forwardRef((props, ref) => {
               </ListBox.Menu>
             </ListBox>
             {helperText && !invalid && !warn && (
-              <div id={comboBoxHelperId} className={helperClasses}>
+              <Text as="div" id={comboBoxHelperId} className={helperClasses}>
                 {helperText}
-              </div>
+              </Text>
             )}
           </div>
         );
