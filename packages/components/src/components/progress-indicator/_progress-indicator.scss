@@ -268,12 +268,17 @@
     flex-direction: column;
   }
 
+  .#{$prefix}--progress--vertical,
+  .#{$prefix}--progress-text {
+    display: flex;
+    flex-direction: column;
+  }
+
   .#{$prefix}--progress--vertical .#{$prefix}--progress-step,
   .#{$prefix}--progress--vertical .#{$prefix}--progress-step-button {
     width: initial;
     min-width: initial;
     min-height: 3.625rem;
-    flex-wrap: wrap;
     align-content: flex-start;
   }
 
@@ -302,8 +307,7 @@
   .#{$prefix}--progress--vertical .#{$prefix}--progress-optional {
     position: static;
     width: 100%;
-    margin-top: auto;
-    margin-left: $carbon--spacing-07;
+    margin: auto 0;
   }
 
   .#{$prefix}--progress--vertical .#{$prefix}--progress-line {
