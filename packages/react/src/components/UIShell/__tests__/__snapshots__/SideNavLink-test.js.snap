@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`SideNavLink should render 1`] = `
-<ForwardRef(SideNavLink)
+<SideNavLink
   className="custom-classname"
   element="a"
   icon={
@@ -46,11 +46,11 @@ exports[`SideNavLink should render 1`] = `
       </Link>
     </li>
   </SideNavItem>
-</ForwardRef(SideNavLink)>
+</SideNavLink>
 `;
 
 exports[`SideNavLink should render 2`] = `
-<ForwardRef(SideNavLink)
+<SideNavLink
   className="custom-classname"
   element="a"
   icon={
@@ -95,5 +95,5 @@ exports[`SideNavLink should render 2`] = `
       </Link>
     </li>
   </SideNavItem>
-</ForwardRef(SideNavLink)>
+</SideNavLink>
 `;
