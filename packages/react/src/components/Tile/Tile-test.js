@@ -15,9 +15,8 @@ import {
   TileBelowTheFoldContent,
 } from '../Tile';
 import { shallow, mount } from 'enzyme';
-import { settings } from 'carbon-components';
 
-const { prefix } = settings;
+const prefix = 'bx';
 
 describe('Tile', () => {
   describe('Renders default tile as expected', () => {
@@ -29,10 +28,6 @@ describe('Tile', () => {
 
     it('renders children as expected', () => {
       expect(wrapper.find('.child').length).toBe(1);
-    });
-
-    it('has the expected classes', () => {
-      expect(wrapper.hasClass(`${prefix}--tile`)).toEqual(true);
     });
 
     it('renders extra classes passed in via className', () => {
@@ -54,7 +49,7 @@ describe('Tile', () => {
   });
 
   describe('Renders clickable tile as expected', () => {
-    const wrapper = shallow(
+    const wrapper = mount(
       <ClickableTile className="extra-class">
         <div className="child">Test</div>
       </ClickableTile>
@@ -68,18 +63,18 @@ describe('Tile', () => {
       expect(wrapper.find('.child').length).toBe(1);
     });
 
-    it('has the expected classes', () => {
-      expect(wrapper.hasClass(`${prefix}--tile--clickable`)).toEqual(true);
-    });
-
     it('renders extra classes passed in via className', () => {
       expect(wrapper.hasClass('extra-class')).toEqual(true);
     });
 
     it('toggles the clickable class on click', () => {
-      expect(wrapper.hasClass(`${prefix}--tile--is-clicked`)).toEqual(false);
+      expect(
+        wrapper.find('Link').hasClass(`${prefix}--tile--is-clicked`)
+      ).toEqual(false);
       wrapper.simulate('click', { persist: () => {} });
-      expect(wrapper.hasClass(`${prefix}--tile--is-clicked`)).toEqual(true);
+      expect(
+        wrapper.find('Link').hasClass(`${prefix}--tile--is-clicked`)
+      ).toEqual(true);
     });
 
     it('toggles the clickable state on click', () => {
@@ -143,10 +138,6 @@ describe('Tile', () => {
 
     it('renders children as expected', () => {
       expect(wrapper.find('.child').length).toBe(1);
-    });
-
-    it('has the expected classes', () => {
-      expect(label.hasClass(`${prefix}--tile--selectable`)).toEqual(true);
     });
 
     it('renders extra classes passed in via className', () => {

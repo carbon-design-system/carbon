@@ -6,20 +6,19 @@
  */
 
 import React from 'react';
-import { settings } from 'carbon-components';
 import { shallow, mount } from 'enzyme';
 import Tabs from '../Tabs';
 import Tab from '../Tab';
 import TabsSkeleton from '../Tabs/Tabs.Skeleton';
 
-const { prefix } = settings;
+const prefix = 'bx';
 
 Element.prototype.scrollIntoView = jest.fn();
 
 describe('Tabs', () => {
   describe('renders as expected', () => {
     describe('navigation (<div>)', () => {
-      const wrapper = shallow(
+      const wrapper = mount(
         <Tabs className="extra-class">
           <Tab label="firstTab">content1</Tab>
           <Tab label="lastTab">content2</Tab>
@@ -48,7 +47,7 @@ describe('Tabs', () => {
 
       it('supports container variant', () => {
         expect(
-          shallow(
+          mount(
             <Tabs className="extra-class" type="container">
               <Tab label="firstTab">content1</Tab>
               <Tab label="lastTab">content2</Tab>

@@ -109,6 +109,12 @@ function getRollupConfig(input) {
               moduleSideEffects: true,
             };
           }
+
+          if (id === path.join(__dirname, '..', 'src', 'prefix.js')) {
+            return {
+              moduleSideEffects: true,
+            };
+          }
         },
       },
     ],
