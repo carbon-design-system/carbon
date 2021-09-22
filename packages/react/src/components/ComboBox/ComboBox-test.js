@@ -94,7 +94,7 @@ describe('ComboBox', () => {
   it('should let the user select an option by clicking on the option node', () => {
     const wrapper = mount(<ComboBox {...mockProps} />);
     openMenu(wrapper);
-    wrapper.find('ForwardRef(ListBoxMenuItem)').at(0).simulate('click');
+    wrapper.find('ListBoxMenuItem').at(0).simulate('click');
     expect(mockProps.onChange).toHaveBeenCalledTimes(1);
     expect(mockProps.onChange).toHaveBeenCalledWith({
       selectedItem: mockProps.items[0],
@@ -104,7 +104,7 @@ describe('ComboBox', () => {
     mockProps.onChange.mockClear();
 
     openMenu(wrapper);
-    wrapper.find('ForwardRef(ListBoxMenuItem)').at(1).simulate('click');
+    wrapper.find('ListBoxMenuItem').at(1).simulate('click');
     expect(mockProps.onChange).toHaveBeenCalledTimes(1);
     expect(mockProps.onChange).toHaveBeenCalledWith({
       selectedItem: mockProps.items[1],

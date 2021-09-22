@@ -16,7 +16,7 @@ import {
   generateGenericItem,
 } from '../../ListBox/test-helpers';
 
-const listItemName = 'ForwardRef(ListBoxMenuItem)';
+const listItemName = 'ListBoxMenuItem';
 const openMenu = (wrapper) => {
   wrapper.find(`[role="combobox"]`).simulate('click');
 };
