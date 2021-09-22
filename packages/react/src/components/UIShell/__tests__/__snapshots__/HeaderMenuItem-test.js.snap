@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`HeaderMenuItem should render 1`] = `
-<ForwardRef(HeaderMenuItem)
+<HeaderMenuItem
   className="custom-class"
   role="none"
 >
@@ -26,5 +26,5 @@ exports[`HeaderMenuItem should render 1`] = `
       </a>
     </Link>
   </li>
-</ForwardRef(HeaderMenuItem)>
+</HeaderMenuItem>
 `;

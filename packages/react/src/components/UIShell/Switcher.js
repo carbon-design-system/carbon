@@ -36,6 +36,7 @@ const Switcher = React.forwardRef(function Switcher(props, ref) {
   );
 });
 
+Switcher.displayName = 'Switcher';
 Switcher.propTypes = {
   /**
    * Required props for accessibility label on the underlying menu
