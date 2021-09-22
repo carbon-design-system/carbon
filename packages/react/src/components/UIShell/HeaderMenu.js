@@ -6,18 +6,12 @@
  */
 
 import { ChevronDown16 } from '@carbon/icons-react';
-import { settings } from 'carbon-components';
 import cx from 'classnames';
 import React from 'react';
 import PropTypes from 'prop-types';
 import { keys, matches } from '../../internal/keyboard';
 import { AriaLabelPropType } from '../../prop-types/AriaPropTypes';
-
-const { prefix } = settings;
-
-const defaultRenderMenuContent = () => (
-  <ChevronDown16 className={`${prefix}--header__menu-arrow`} />
-);
+import { PrefixContext } from '../../internal/usePrefix';
 
 /**
  * `HeaderMenu` is used to render submenu's in the `Header`. Most often children
@@ -53,9 +47,7 @@ class HeaderMenu extends React.Component {
     tabIndex: PropTypes.number,
   };
 
-  static defaultProps = {
-    renderMenuContent: defaultRenderMenuContent,
-  };
+  static contextType = PrefixContext;
 
   _subMenus = React.createRef();
 
@@ -166,6 +158,7 @@ class HeaderMenu extends React.Component {
   };
 
   render() {
+    const prefix = this.context;
     const {
       'aria-label': ariaLabel,
       'aria-labelledby': ariaLabelledBy,
@@ -176,6 +169,7 @@ class HeaderMenu extends React.Component {
       focusRef, // eslint-disable-line no-unused-vars
       ...rest
     } = this.props;
+
     const accessibilityLabel = {
       'aria-label': ariaLabel,
       'aria-labelledby': ariaLabelledBy,
@@ -205,7 +199,11 @@ class HeaderMenu extends React.Component {
           tabIndex={0}
           {...accessibilityLabel}>
           {menuLinkName}
-          <MenuContent />
+          {MenuContent ? (
+            <MenuContent />
+          ) : (
+            <ChevronDown16 className={`${this.context}--header__menu-arrow`} />
+          )}
         </a>
         <ul
           {...accessibilityLabel}

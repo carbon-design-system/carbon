@@ -10,14 +10,12 @@ import React, { useState, useRef, useEffect, useCallback } from 'react';
 import classNames from 'classnames';
 import useResizeObserver from 'use-resize-observer/polyfilled';
 import { ChevronDown16 } from '@carbon/icons-react';
-import { settings } from 'carbon-components';
 import Copy from '../Copy';
 import Button from '../Button';
 import CopyButton from '../CopyButton';
 import getUniqueId from '../../tools/uniqueId';
 import copy from 'copy-to-clipboard';
-
-const { prefix } = settings;
+import { usePrefix } from '../../internal/usePrefix';
 
 const rowHeightInPixels = 16;
 const defaultMaxCollapsedNumberOfRows = 15;
@@ -62,6 +60,7 @@ function CodeSnippet({
       return codeContentRef;
     }
   }, [type]);
+  const prefix = usePrefix();
 
   const getCodeRefDimensions = useCallback(() => {
     const {
