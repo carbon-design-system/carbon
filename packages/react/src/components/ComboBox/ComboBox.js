@@ -402,6 +402,7 @@ const ComboBox = React.forwardRef((props, ref) => {
   );
 });
 
+ComboBox.displayName = 'ComboBox';
 ComboBox.propTypes = {
   /**
    * 'aria-label' of the ListBox component.

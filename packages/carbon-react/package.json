@@ -92,6 +92,8 @@
   },
   "sideEffects": [
     "es/feature-flags.js",
-    "lib/feature-flags.js"
+    "lib/feature-flags.js",
+    "es/prefix.js",
+    "lib/prefix.js"
   ]
 }

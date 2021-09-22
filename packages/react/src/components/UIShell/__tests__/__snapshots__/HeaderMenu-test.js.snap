@@ -103,7 +103,7 @@ exports[`HeaderMenu should render 1`] = `
         aria-label="Accessibility label"
         className="bx--header__menu"
       >
-        <ForwardRef(HeaderMenuItem)
+        <HeaderMenuItem
           href="/a"
           key=".0"
         >
@@ -127,8 +127,8 @@ exports[`HeaderMenu should render 1`] = `
               </a>
             </Link>
           </li>
-        </ForwardRef(HeaderMenuItem)>
-        <ForwardRef(HeaderMenuItem)
+        </HeaderMenuItem>
+        <HeaderMenuItem
           href="/b"
           key=".1"
         >
@@ -152,8 +152,8 @@ exports[`HeaderMenu should render 1`] = `
               </a>
             </Link>
           </li>
-        </ForwardRef(HeaderMenuItem)>
-        <ForwardRef(HeaderMenuItem)
+        </HeaderMenuItem>
+        <HeaderMenuItem
           href="/c"
           key=".2"
         >
@@ -177,7 +177,7 @@ exports[`HeaderMenu should render 1`] = `
               </a>
             </Link>
           </li>
-        </ForwardRef(HeaderMenuItem)>
+        </HeaderMenuItem>
       </ul>
     </li>
   </HeaderMenu>
