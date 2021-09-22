@@ -8,11 +8,10 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import classnames from 'classnames';
-import { settings } from 'carbon-components';
-
-const { prefix } = settings;
+import { usePrefix } from '../../internal/usePrefix';
 
 const FormLabel = ({ className, children, id, ...other }) => {
+  const prefix = usePrefix();
   const classNames = classnames(`${prefix}--label`, className);
 
   return (

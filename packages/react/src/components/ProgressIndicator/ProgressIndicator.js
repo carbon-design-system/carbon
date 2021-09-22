@@ -126,12 +126,14 @@ export function ProgressStep({
           invalid={invalid}
           prefix={prefix}
         />
-        <ProgressStepLabel className={`${prefix}--progress-label`}>
-          {label}
-        </ProgressStepLabel>
-        {secondaryLabel !== null && secondaryLabel !== undefined ? (
-          <p className={`${prefix}--progress-optional`}>{secondaryLabel}</p>
-        ) : null}
+        <div className={`${prefix}--progress-text`}>
+          <ProgressStepLabel className={`${prefix}--progress-label`}>
+            {label}
+          </ProgressStepLabel>
+          {secondaryLabel !== null && secondaryLabel !== undefined ? (
+            <p className={`${prefix}--progress-optional`}>{secondaryLabel}</p>
+          ) : null}
+        </div>
         <span className={`${prefix}--progress-line`} />
       </button>
     </li>

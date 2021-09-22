@@ -5,19 +5,18 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { settings } from 'carbon-components';
 import cx from 'classnames';
 import PropTypes from 'prop-types';
 import React from 'react';
 import { CARBON_SIDENAV_ITEMS } from './_utils';
-
-const { prefix } = settings;
+import { usePrefix } from '../../internal/usePrefix';
 
 const SideNavItems = ({
   className: customClassName,
   children,
   isSideNavExpanded,
 }) => {
+  const prefix = usePrefix();
   const className = cx([`${prefix}--side-nav__items`], customClassName);
   const childrenWithExpandedState = React.Children.map(children, (child) => {
     if (React.isValidElement(child)) {

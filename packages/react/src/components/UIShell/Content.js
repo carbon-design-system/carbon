@@ -5,12 +5,10 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { settings } from 'carbon-components';
 import cx from 'classnames';
 import PropTypes from 'prop-types';
 import React from 'react';
-
-const { prefix } = settings;
+import { usePrefix } from '../../internal/usePrefix';
 
 const Content = ({
   className: customClassName,
@@ -18,6 +16,7 @@ const Content = ({
   tagName,
   ...rest
 }) => {
+  const prefix = usePrefix();
   const className = cx(`${prefix}--content`, customClassName);
   return React.createElement(
     tagName,

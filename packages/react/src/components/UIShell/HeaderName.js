@@ -4,14 +4,11 @@
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
-
-import { settings } from 'carbon-components';
 import cx from 'classnames';
 import React from 'react';
 import PropTypes from 'prop-types';
 import Link, { LinkPropTypes } from './Link';
-
-const { prefix: selectorPrefix } = settings;
+import { usePrefix } from '../../internal/usePrefix';
 
 const HeaderName = ({
   children,
@@ -20,6 +17,7 @@ const HeaderName = ({
   href,
   ...rest
 }) => {
+  const selectorPrefix = usePrefix();
   const className = cx(`${selectorPrefix}--header__name`, customClassName);
   return (
     <Link {...rest} className={className} href={href}>
