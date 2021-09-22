@@ -9,15 +9,15 @@ import React, { Component, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 import { settings } from 'carbon-components';
-import Link from '../Link';
+import Link from '../../Link';
 import {
   Checkbox16,
   CheckboxCheckedFilled16,
   ChevronDown16,
 } from '@carbon/icons-react';
-import { keys, matches } from '../../internal/keyboard';
-import deprecate from '../../prop-types/deprecate';
-import { composeEventHandlers } from '../../tools/events';
+import { keys, matches } from '../../../internal/keyboard';
+import deprecate from '../../../prop-types/deprecate';
+import { composeEventHandlers } from '../../../tools/events';
 
 const { prefix } = settings;
 
