@@ -216,7 +216,6 @@ class OverflowMenu extends Component {
   };
 
   static contextType = PrefixContext;
-  prefix = this.context;
 
   static defaultProps = {
     ariaLabel: 'open and close list of options',
@@ -417,7 +416,7 @@ class OverflowMenu extends Component {
               !menuBody.contains(target) &&
               triggerEl &&
               !target.matches(
-                `.${this.prefix}--overflow-menu,.${this.prefix}--overflow-menu-options`
+                `.${this.context}--overflow-menu,.${this.context}--overflow-menu-options`
               )
             ) {
               this.closeMenu();
@@ -442,7 +441,7 @@ class OverflowMenu extends Component {
   };
 
   render() {
-    const prefix = this.prefix;
+    const prefix = this.context;
     const {
       id,
       ariaLabel,

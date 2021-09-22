@@ -102,7 +102,6 @@ export default class Tabs extends React.Component {
   };
 
   static contextType = PrefixContext;
-  prefix = this.context;
 
   state = {
     horizontalOverflow: false,
@@ -407,7 +406,7 @@ export default class Tabs extends React.Component {
       ...other
     } = this.props;
 
-    const prefix = this.prefix;
+    const prefix = this.context;
 
     /**
      * The tab panel acts like a tab panel when the screen is wider, but acts

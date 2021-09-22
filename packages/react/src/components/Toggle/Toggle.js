@@ -68,8 +68,8 @@ class Toggle extends React.Component {
      */
     toggled: PropTypes.bool,
   };
+
   static contextType = PrefixContext;
-  prefix = this.context;
 
   static defaultProps = {
     defaultToggled: false,
@@ -80,7 +80,7 @@ class Toggle extends React.Component {
   };
 
   render() {
-    const prefix = this.prefix;
+    const prefix = this.context;
     const {
       className,
       defaultToggled,

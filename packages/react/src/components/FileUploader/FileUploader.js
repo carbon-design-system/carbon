@@ -95,7 +95,6 @@ export default class FileUploader extends React.Component {
   };
 
   static contextType = PrefixContext;
-  prefix = this.context;
 
   static defaultProps = {
     iconDescription: 'Provide icon description',
@@ -175,7 +174,7 @@ export default class FileUploader extends React.Component {
       ...other
     } = this.props;
 
-    const prefix = this.prefix;
+    const prefix = this.context;
 
     const classes = classNames({
       [`${prefix}--form-item`]: true,

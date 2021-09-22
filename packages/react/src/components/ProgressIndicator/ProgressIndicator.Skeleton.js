@@ -33,10 +33,10 @@ function ProgressIndicatorSkeleton({ className, ...rest }) {
     <ul
       className={cx(`${prefix}--progress`, `${prefix}--skeleton`, className)}
       {...rest}>
-      {Step()}
-      {Step()}
-      {Step()}
-      {Step()}
+      <Step />
+      <Step />
+      <Step />
+      <Step />
     </ul>
   );
 }

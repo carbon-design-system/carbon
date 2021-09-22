@@ -292,7 +292,7 @@ export default class DatePicker extends Component {
     locale: 'en',
   };
 
-  static contextType = FeatureFlagContext;
+  static contextType = PrefixContext;
 
   componentDidMount() {
     const {
@@ -521,34 +521,31 @@ export default class DatePicker extends Component {
     }
   };
 
-  static contextType = PrefixContext;
-  prefix = this.context;
-
   updateClassNames = (calendar) => {
     const calendarContainer = calendar.calendarContainer;
     const daysContainer = calendar.days;
     if (calendarContainer && daysContainer) {
       // calendarContainer and daysContainer are undefined if flatpickr detects a mobile device
-      calendarContainer.classList.add(`${this.prefix}--date-picker__calendar`);
+      calendarContainer.classList.add(`${this.context}--date-picker__calendar`);
       calendarContainer
         .querySelector('.flatpickr-month')
-        .classList.add(`${this.prefix}--date-picker__month`);
+        .classList.add(`${this.context}--date-picker__month`);
       calendarContainer
         .querySelector('.flatpickr-weekdays')
-        .classList.add(`${this.prefix}--date-picker__weekdays`);
+        .classList.add(`${this.context}--date-picker__weekdays`);
       calendarContainer
         .querySelector('.flatpickr-days')
-        .classList.add(`${this.prefix}--date-picker__days`);
+        .classList.add(`${this.context}--date-picker__days`);
       forEach.call(
         calendarContainer.querySelectorAll('.flatpickr-weekday'),
         (item) => {
           const currentItem = item;
           currentItem.innerHTML = currentItem.innerHTML.replace(/\s+/g, '');
-          currentItem.classList.add(`${this.prefix}--date-picker__weekday`);
+          currentItem.classList.add(`${this.context}--date-picker__weekday`);
         }
       );
       forEach.call(daysContainer.querySelectorAll('.flatpickr-day'), (item) => {
-        item.classList.add(`${this.prefix}--date-picker__day`);
+        item.classList.add(`${this.context}--date-picker__day`);
         if (
           item.classList.contains('today') &&
           calendar.selectedDates.length > 0
@@ -569,7 +566,7 @@ export default class DatePicker extends Component {
       ? null
       : // Child is a regular DOM node, seen in tests
       node.nodeType === Node.ELEMENT_NODE
-      ? node.querySelector(`.${this.prefix}--date-picker__input`)
+      ? node.querySelector(`.${this.context}--date-picker__input`)
       : // Child is a React component
       node.input && node.input.nodeType === Node.ELEMENT_NODE
       ? node.input
@@ -581,7 +578,7 @@ export default class DatePicker extends Component {
       ? null
       : // Child is a regular DOM node, seen in tests
       node.nodeType === Node.ELEMENT_NODE
-      ? node.querySelector(`.${this.prefix}--date-picker__input`)
+      ? node.querySelector(`.${this.context}--date-picker__input`)
       : // Child is a React component
       node.input && node.input.nodeType === Node.ELEMENT_NODE
       ? node.input
@@ -592,87 +589,97 @@ export default class DatePicker extends Component {
     children.every((child) => !child.props.labelText);
 
   render() {
-    const {
-      allowInput, // eslint-disable-line
-      appendTo, // eslint-disable-line
-      children,
-      className,
-      short,
-      light,
-      datePickerType,
-      minDate, // eslint-disable-line
-      maxDate, // eslint-disable-line
-      dateFormat, // eslint-disable-line
-      onChange, // eslint-disable-line
-      locale, // eslint-disable-line
-      value, // eslint-disable-line
-      ...other
-    } = this.props;
-
-    const scope = this.context;
-    let enabled;
-
-    if (scope.enabled) {
-      enabled = scope.enabled('enable-v11-release');
-    }
-
-    const datePickerClasses = classNames(
-      `${this.prefix}--date-picker`,
-      [enabled ? null : className],
-      {
-        [`${this.prefix}--date-picker--short`]: short,
-        [`${this.prefix}--date-picker--light`]: light,
-        [`${this.prefix}--date-picker--simple`]: datePickerType === 'simple',
-        [`${this.prefix}--date-picker--single`]: datePickerType === 'single',
-        [`${this.prefix}--date-picker--range`]: datePickerType === 'range',
-        [`${this.prefix}--date-picker--nolabel`]:
-          datePickerType === 'range' && this.isLabelTextEmpty(children),
-      }
-    );
-
-    const wrapperClasses = classNames(`${this.prefix}--form-item`, [
-      enabled ? className : null,
-    ]);
-
-    const childArray = React.Children.toArray(children);
-    const childrenWithProps = childArray.map((child, index) => {
-      if (
-        index === 0 &&
-        child.type === React.createElement(DatePickerInput, child.props).type
-      ) {
-        return React.cloneElement(child, {
-          datePickerType,
-          ref: this.assignInputFieldRef,
-          openCalendar: this.openCalendar,
-        });
-      }
-      if (
-        index === 1 &&
-        child.type === React.createElement(DatePickerInput, child.props).type
-      ) {
-        return React.cloneElement(child, {
-          datePickerType,
-          ref: this.assignToInputFieldRef,
-          openCalendar: this.openCalendar,
-        });
-      }
-      if (index === 0) {
-        return React.cloneElement(child, {
-          ref: this.assignInputFieldRef,
-        });
-      }
-      if (index === 1) {
-        return React.cloneElement(child, {
-          ref: this.assignToInputFieldRef,
-        });
-      }
-    });
     return (
-      <div className={wrapperClasses}>
-        <div className={datePickerClasses} {...other}>
-          {childrenWithProps}
-        </div>
-      </div>
+      <FeatureFlagContext.Consumer>
+        {(scope) => {
+          const {
+            allowInput, // eslint-disable-line
+            appendTo, // eslint-disable-line
+            children,
+            className,
+            short,
+            light,
+            datePickerType,
+            minDate, // eslint-disable-line
+            maxDate, // eslint-disable-line
+            dateFormat, // eslint-disable-line
+            onChange, // eslint-disable-line
+            locale, // eslint-disable-line
+            value, // eslint-disable-line
+            ...other
+          } = this.props;
+
+          let enabled;
+
+          if (scope.enabled) {
+            enabled = scope.enabled('enable-v11-release');
+          }
+
+          const datePickerClasses = classNames(
+            `${this.context}--date-picker`,
+            [enabled ? null : className],
+            {
+              [`${this.context}--date-picker--short`]: short,
+              [`${this.context}--date-picker--light`]: light,
+              [`${this.context}--date-picker--simple`]:
+                datePickerType === 'simple',
+              [`${this.context}--date-picker--single`]:
+                datePickerType === 'single',
+              [`${this.context}--date-picker--range`]:
+                datePickerType === 'range',
+              [`${this.context}--date-picker--nolabel`]:
+                datePickerType === 'range' && this.isLabelTextEmpty(children),
+            }
+          );
+
+          const wrapperClasses = classNames(`${this.context}--form-item`, [
+            enabled ? className : null,
+          ]);
+
+          const childArray = React.Children.toArray(children);
+          const childrenWithProps = childArray.map((child, index) => {
+            if (
+              index === 0 &&
+              child.type ===
+                React.createElement(DatePickerInput, child.props).type
+            ) {
+              return React.cloneElement(child, {
+                datePickerType,
+                ref: this.assignInputFieldRef,
+                openCalendar: this.openCalendar,
+              });
+            }
+            if (
+              index === 1 &&
+              child.type ===
+                React.createElement(DatePickerInput, child.props).type
+            ) {
+              return React.cloneElement(child, {
+                datePickerType,
+                ref: this.assignToInputFieldRef,
+                openCalendar: this.openCalendar,
+              });
+            }
+            if (index === 0) {
+              return React.cloneElement(child, {
+                ref: this.assignInputFieldRef,
+              });
+            }
+            if (index === 1) {
+              return React.cloneElement(child, {
+                ref: this.assignToInputFieldRef,
+              });
+            }
+          });
+          return (
+            <div className={wrapperClasses}>
+              <div className={datePickerClasses} {...other}>
+                {childrenWithProps}
+              </div>
+            </div>
+          );
+        }}
+      </FeatureFlagContext.Consumer>
     );
   }
 }
