@@ -9,11 +9,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { CheckmarkFilled16, ErrorFilled16 } from '@carbon/icons-react';
-import { settings } from 'carbon-components';
 import deprecate from '../../prop-types/deprecate';
 import Loading from '../Loading';
-
-const { prefix } = settings;
+import { usePrefix } from '../../internal/usePrefix';
 
 export default function InlineLoading({
   className,
@@ -25,6 +23,7 @@ export default function InlineLoading({
   successDelay,
   ...other
 }) {
+  const prefix = usePrefix();
   const loadingClasses = classNames(`${prefix}--inline-loading`, className);
   const getLoading = () => {
     if (status === 'error') {

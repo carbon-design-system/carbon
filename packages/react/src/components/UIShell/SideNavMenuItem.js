@@ -5,16 +5,15 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { settings } from 'carbon-components';
 import cx from 'classnames';
 import PropTypes from 'prop-types';
 import React from 'react';
 import SideNavLinkText from './SideNavLinkText';
 import Link from './Link';
-
-const { prefix } = settings;
+import { usePrefix } from '../../internal/usePrefix';
 
 const SideNavMenuItem = React.forwardRef(function SideNavMenuItem(props, ref) {
+  const prefix = usePrefix();
   const { children, className: customClassName, isActive, ...rest } = props;
   const className = cx(`${prefix}--side-nav__menu-item`, customClassName);
   const linkClassName = cx({
