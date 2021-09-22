@@ -60,7 +60,7 @@ describe('ComboBox', () => {
 
     for (let i = 0; i < mockProps.items.length; i++) {
       openMenu(wrapper);
-      wrapper.find('ForwardRef(ListBoxMenuItem)').at(i).simulate('click');
+      wrapper.find('ListBoxMenuItem').at(i).simulate('click');
       expect(mockProps.onChange).toHaveBeenCalledTimes(i + 1);
       expect(mockProps.onChange).toHaveBeenCalledWith({
         selectedItem: mockProps.items[i],
