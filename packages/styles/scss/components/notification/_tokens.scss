@@ -7,6 +7,7 @@
 
 @use 'sass:color';
 @use "sass:map";
+@use "sass:list";
 @use '../../colors';
 @use '../../themes';
 @use '../../theme';
@@ -124,69 +125,29 @@ $notification-action-hover: (
 ) !default;
 
 $notification-action-tertiary-inverse: (
-  fallback: map.get(button-tokens.$white, button-tertiary),
-  values: (
-    (
-      theme: themes.$white,
-      value: map.get(button-tokens.$g100, button-tertiary),
+  fallback: map.get(button-tokens.$button-tokens, button-tertiary, fallback),
+  values:
+    component-tokens.get-inverse-theme-values(
+      map.get(button-tokens.$button-tokens, button-tertiary)
     ),
-    (
-      theme: themes.$g10,
-      value: map.get(button-tokens.$g90, button-tertiary),
-    ),
-    (
-      theme: themes.$g90,
-      value: map.get(button-tokens.$g10, button-tertiary),
-    ),
-    (
-      theme: themes.$g100,
-      value: map.get(button-tokens.$white, button-tertiary),
-    ),
-  ),
 ) !default;
 
 $notification-action-tertiary-inverse-active: (
-  fallback: map.get(button-tokens.$white, button-tertiary-active),
-  values: (
-    (
-      theme: themes.$white,
-      value: map.get(button-tokens.$g100, button-tertiary-active),
+  fallback:
+    map.get(button-tokens.$button-tokens, button-tertiary-active, fallback),
+  values:
+    component-tokens.get-inverse-theme-values(
+      map.get(button-tokens.$button-tokens, button-tertiary-active)
     ),
-    (
-      theme: themes.$g10,
-      value: map.get(button-tokens.$g90, button-tertiary-active),
-    ),
-    (
-      theme: themes.$g90,
-      value: map.get(button-tokens.$g10, button-tertiary-active),
-    ),
-    (
-      theme: themes.$g100,
-      value: map.get(button-tokens.$white, button-tertiary-active),
-    ),
-  ),
 ) !default;
 
 $notification-action-tertiary-inverse-hover: (
-  fallback: map.get(button-tokens.$white, button-tertiary-hover),
-  values: (
-    (
-      theme: themes.$white,
-      value: map.get(button-tokens.$g100, button-tertiary-hover),
+  fallback:
+    map.get(button-tokens.$button-tokens, button-tertiary-hover, fallback),
+  values:
+    component-tokens.get-inverse-theme-values(
+      map.get(button-tokens.$button-tokens, button-tertiary-hover)
     ),
-    (
-      theme: themes.$g10,
-      value: map.get(button-tokens.$g90, button-tertiary-hover),
-    ),
-    (
-      theme: themes.$g90,
-      value: map.get(button-tokens.$g10, button-tertiary-hover),
-    ),
-    (
-      theme: themes.$g100,
-      value: map.get(button-tokens.$white, button-tertiary-hover),
-    ),
-  ),
 ) !default;
 
 $notification-action-tertiary-inverse-text: (
