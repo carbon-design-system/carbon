@@ -46,6 +46,7 @@ const SideNavLink = React.forwardRef(function SideNavLink(
   );
 });
 
+SideNavLink.displayName = 'SideNavLink';
 SideNavLink.propTypes = {
   ...LinkPropTypes,
 
