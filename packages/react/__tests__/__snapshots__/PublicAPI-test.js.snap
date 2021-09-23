@@ -8863,5 +8863,6 @@ Map {
       },
     },
   },
+  "unstable_usePrefix" => Object {},
 }
 `;
