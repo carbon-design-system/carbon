@@ -21,17 +21,10 @@ import {
   TileAboveTheFoldContent as TileAboveTheFoldContentClassic,
   TileBelowTheFoldContent as TileBelowTheFoldContentClassic,
 } from './Tile';
-import { createComponentToggle } from '../../internal/ComponentToggle';
 
-export const Tile = createComponentToggle({
-  name: 'Tile',
-  next: TileNext,
-  classic: TileClassic,
-});
-
-// export const Tile = FeatureFlags.enabled('enable-v11-release')
-//   ? TileNext
-//   : TileClassic;
+export const Tile = FeatureFlags.enabled('enable-v11-release')
+  ? TileNext
+  : TileClassic;
 
 export const ClickableTile = FeatureFlags.enabled('enable-v11-release')
   ? ClickableTileNext

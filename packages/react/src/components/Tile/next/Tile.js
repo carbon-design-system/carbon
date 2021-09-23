@@ -8,7 +8,6 @@
 import React, { Component, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
-import { settings } from 'carbon-components';
 import Link from '../../Link';
 import {
   Checkbox16,
@@ -18,13 +17,14 @@ import {
 import { keys, matches } from '../../../internal/keyboard';
 import deprecate from '../../../prop-types/deprecate';
 import { composeEventHandlers } from '../../../tools/events';
-
-const { prefix } = settings;
+import { PrefixContext, usePrefix } from '../../../internal/usePrefix';
 
 export const Tile = React.forwardRef(function Tile(
   { children, className, light = false, ...rest },
   ref
 ) {
+  const prefix = usePrefix();
+
   const tileClasses = cx(
     `${prefix}--tile`,
     {
@@ -39,6 +39,7 @@ export const Tile = React.forwardRef(function Tile(
   );
 });
 
+Tile.contextType = PrefixContext;
 Tile.displayName = 'Tile';
 Tile.propTypes = {
   /**
@@ -63,8 +64,8 @@ export const ClickableTile = React.forwardRef(function ClickableTile(
     children,
     href,
     className,
-    onClick,
-    onKeyDown,
+    onClick = () => {},
+    onKeyDown = () => {},
     handleClick,
     handleKeyDown,
     clicked = false,
@@ -73,6 +74,8 @@ export const ClickableTile = React.forwardRef(function ClickableTile(
   },
   ref
 ) {
+  const prefix = usePrefix();
+
   const classes = cx(
     `${prefix}--tile`,
     `${prefix}--tile--clickable`,
@@ -120,6 +123,7 @@ export const ClickableTile = React.forwardRef(function ClickableTile(
   );
 });
 
+Tile.contextType = PrefixContext;
 ClickableTile.displayName = 'ClickableTile';
 ClickableTile.propTypes = {
   /**
@@ -204,6 +208,8 @@ export const SelectableTile = React.forwardRef(function SelectableTile(
   },
   ref
 ) {
+  const prefix = usePrefix();
+
   // TODO: replace with onClick when handleClick prop is deprecated
   const clickHandler = handleClick || onClick;
 
@@ -288,7 +294,8 @@ export const SelectableTile = React.forwardRef(function SelectableTile(
   );
 });
 
-SelectableTile.name = 'SelectableTile';
+SelectableTile.contextType = PrefixContext;
+SelectableTile.displayName = 'SelectableTile';
 SelectableTile.propTypes = {
   /**
    * The child nodes.
@@ -474,6 +481,8 @@ export class ExpandableTile extends Component {
     light: false,
   };
 
+  static contextType = PrefixContext;
+
   static getDerivedStateFromProps(
     // eslint-disable-next-line react/prop-types
     { expanded, tileMaxHeight, tilePadding },
@@ -583,6 +592,8 @@ export class ExpandableTile extends Component {
       ...rest
     } = this.props;
 
+    const prefix = this.context;
+
     const { expanded: isExpanded } = this.state;
 
     const classes = cx(
@@ -642,6 +653,8 @@ export class ExpandableTile extends Component {
 
 export const TileAboveTheFoldContent = React.forwardRef(
   function TileAboveTheFoldContent({ children }, ref) {
+    const prefix = usePrefix();
+
     return (
       <span ref={ref} className={`${prefix}--tile__above-the-fold`}>
         {children}
@@ -650,6 +663,7 @@ export const TileAboveTheFoldContent = React.forwardRef(
   }
 );
 
+TileAboveTheFoldContent.contextType = PrefixContext;
 TileAboveTheFoldContent.displayName = 'TileAboveTheFoldContent';
 TileAboveTheFoldContent.propTypes = {
   /**
@@ -660,6 +674,8 @@ TileAboveTheFoldContent.propTypes = {
 
 export const TileBelowTheFoldContent = React.forwardRef(
   function TileBelowTheFoldContent({ children }, ref) {
+    const prefix = usePrefix();
+
     return (
       <span ref={ref} className={`${prefix}--tile-content__below-the-fold`}>
         {children}
@@ -668,6 +684,7 @@ export const TileBelowTheFoldContent = React.forwardRef(
   }
 );
 
+TileBelowTheFoldContent.contextType = PrefixContext;
 TileBelowTheFoldContent.displayName = 'TileBelowTheFoldContent';
 TileBelowTheFoldContent.propTypes = {
   /**
