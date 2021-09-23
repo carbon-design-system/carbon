@@ -9,6 +9,7 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import classNames from 'classnames';
 import { settings } from 'carbon-components';
+import * as FeatureFlags from '@carbon/feature-flags';
 
 const { prefix } = settings;
 
@@ -112,7 +113,7 @@ Switch.propTypes = {
 
 Switch.defaultProps = {
   selected: false,
-  text: 'Provide text',
+  text: FeatureFlags.enabled('enable-v11-release') ? null : 'Provide text',
   onClick: () => {},
   onKeyDown: () => {},
 };
