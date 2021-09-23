@@ -8,6 +8,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
+import { settings } from 'carbon-components';
+
+const { prefix } = settings;
 
 export function Layer({
   as: BaseComponent = 'div',
@@ -15,7 +18,7 @@ export function Layer({
   children,
   ...rest
 }) {
-  const className = cx('bx--layer', customClassName);
+  const className = cx(`${prefix}--layer`, customClassName);
   return (
     <BaseComponent {...rest} className={className}>
       {children}
