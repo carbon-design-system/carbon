@@ -396,7 +396,7 @@ export default class DataTable extends React.Component {
     const totalSelected = this.getSelectedRows().length;
     return {
       ...props,
-      shouldShowBatchActions,
+      shouldShowBatchActions: shouldShowBatchActions && totalSelected > 0,
       totalSelected,
       onCancel: this.handleOnCancel,
     };
@@ -429,10 +429,11 @@ export default class DataTable extends React.Component {
    * Helper utility to get the TableContainer Props.
    */
   getTableContainerProps = () => {
-    const { stickyHeader } = this.props;
+    const { stickyHeader, useStaticWidth } = this.props;
 
     return {
       stickyHeader,
+      useStaticWidth,
     };
   };
 

@@ -8,11 +8,10 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import classNames from 'classnames';
+import { Text } from '../Text';
 import { useFeatureFlag } from '../FeatureFlags';
-import { settings } from 'carbon-components';
 import deprecate from '../../prop-types/deprecate';
-
-const { prefix } = settings;
+import { usePrefix } from '../../internal/usePrefix';
 
 const Checkbox = React.forwardRef(function Checkbox(
   {
@@ -29,6 +28,7 @@ const Checkbox = React.forwardRef(function Checkbox(
   ref
 ) {
   const enabled = useFeatureFlag('enable-v11-release');
+  const prefix = usePrefix();
 
   const labelClasses = classNames(`${prefix}--checkbox-label`, [
     enabled ? null : className,
@@ -69,7 +69,7 @@ const Checkbox = React.forwardRef(function Checkbox(
         }}
       />
       <label htmlFor={id} className={labelClasses} title={title || null}>
-        <span className={innerLabelClasses}>{labelText}</span>
+        <Text className={innerLabelClasses}>{labelText}</Text>
       </label>
     </div>
   );

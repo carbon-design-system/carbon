@@ -724,6 +724,10 @@
     width: auto;
   }
 
+  .#{$prefix}--data-table-container--static {
+    width: fit-content;
+  }
+
   // -------------
   // Sticky header
   // -------------

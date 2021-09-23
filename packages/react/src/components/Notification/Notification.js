@@ -8,7 +8,6 @@
 import PropTypes from 'prop-types';
 import React, { useEffect, useRef, useState } from 'react';
 import cx from 'classnames';
-import { settings } from 'carbon-components';
 import {
   Close20,
   ErrorFilled20,
@@ -18,10 +17,8 @@ import {
   InformationFilled20,
   InformationSquareFilled20,
 } from '@carbon/icons-react';
-
 import Button from '../Button';
-
-const { prefix } = settings;
+import { usePrefix } from '../../internal/usePrefix';
 
 export function NotificationActionButton({
   children,
@@ -29,6 +26,7 @@ export function NotificationActionButton({
   onClick,
   ...rest
 }) {
+  const prefix = usePrefix();
   const className = cx(
     customClassName,
     `${prefix}--inline-notification__action-button`
@@ -73,6 +71,7 @@ export function NotificationButton({
   notificationType,
   ...rest
 }) {
+  const prefix = usePrefix();
   const buttonClassName = cx(className, {
     [`${prefix}--${notificationType}-notification__close-button`]: notificationType,
   });
@@ -150,6 +149,7 @@ export function NotificationTextDetails({
   children,
   ...rest
 }) {
+  const prefix = usePrefix();
   if (notificationType === 'toast') {
     return (
       <div {...rest} className={`${prefix}--toast-notification__details`}>
@@ -218,6 +218,7 @@ const iconTypes = {
 };
 
 function NotificationIcon({ iconDescription, kind, notificationType }) {
+  const prefix = usePrefix();
   const IconForKind = iconTypes[kind];
   if (!IconForKind) {
     return null;
@@ -261,6 +262,7 @@ export function ToastNotification({
   timeout,
   ...rest
 }) {
+  const prefix = usePrefix();
   const [isOpen, setIsOpen] = useState(true);
   const containerClassName = cx(className, {
     [`${prefix}--toast-notification`]: true,
@@ -444,6 +446,7 @@ export function InlineNotification({
   children,
   ...rest
 }) {
+  const prefix = usePrefix();
   const [isOpen, setIsOpen] = useState(true);
   const containerClassName = cx(className, {
     [`${prefix}--inline-notification`]: true,

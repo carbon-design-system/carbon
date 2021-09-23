@@ -5,14 +5,12 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { settings } from 'carbon-components';
 import cx from 'classnames';
 import React from 'react';
 import PropTypes from 'prop-types';
 import { AriaLabelPropType } from '../../prop-types/AriaPropTypes';
 import Button from '../Button';
-
-const { prefix } = settings;
+import { usePrefix } from '../../internal/usePrefix';
 
 /**
  * HeaderGlobalAction is used as a part of the `HeaderGlobalBar`. It is
@@ -35,6 +33,7 @@ const HeaderGlobalAction = React.forwardRef(function HeaderGlobalAction(
   },
   ref
 ) {
+  const prefix = usePrefix();
   const className = cx({
     [customClassName]: !!customClassName,
     [`${prefix}--header__action`]: true,
