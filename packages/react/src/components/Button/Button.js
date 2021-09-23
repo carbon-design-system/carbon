@@ -42,7 +42,7 @@ const Button = React.forwardRef(function Button(
     onFocus,
     onMouseEnter,
     onMouseLeave,
-    ...other
+    ...rest
   },
   ref
 ) {
@@ -213,6 +213,21 @@ const Button = React.forwardRef(function Button(
     otherProps = anchorProps;
   }
 
+  if (enabled) {
+    return React.createElement(
+      component,
+      {
+        onMouseEnter,
+        onMouseLeave,
+        onFocus,
+        onBlur,
+        ...rest,
+        ...commonProps,
+      },
+      children
+    );
+  }
+
   return React.createElement(
     component,
     {
@@ -221,7 +236,7 @@ const Button = React.forwardRef(function Button(
       onFocus: composeEventHandlers([onFocus, handleFocus]),
       onBlur: composeEventHandlers([onBlur, handleBlur]),
       onClick: composeEventHandlers([onClick, handleClick]),
-      ...other,
+      ...rest,
       ...commonProps,
       ...otherProps,
     },
