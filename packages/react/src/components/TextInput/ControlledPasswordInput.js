@@ -153,6 +153,7 @@ const ControlledPasswordInput = React.forwardRef(
   }
 );
 
+ControlledPasswordInput.displayName = 'ControlledPasswordInput';
 ControlledPasswordInput.propTypes = {
   /**
    * Provide a custom className that is applied directly to the underlying

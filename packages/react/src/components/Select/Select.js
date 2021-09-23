@@ -8,7 +8,6 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import classNames from 'classnames';
-import { settings } from 'carbon-components';
 import {
   ChevronDown16,
   WarningFilled16,
@@ -16,8 +15,7 @@ import {
 } from '@carbon/icons-react';
 import deprecate from '../../prop-types/deprecate';
 import { useFeatureFlag } from '../FeatureFlags';
-
-const { prefix } = settings;
+import { usePrefix } from '../../internal/usePrefix';
 
 const Select = React.forwardRef(function Select(
   {
@@ -43,6 +41,7 @@ const Select = React.forwardRef(function Select(
   },
   ref
 ) {
+  const prefix = usePrefix();
   const enabled = useFeatureFlag('enable-v11-release');
 
   const selectClasses = classNames(

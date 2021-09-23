@@ -5,15 +5,14 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { settings } from 'carbon-components';
 import cx from 'classnames';
 import PropTypes from 'prop-types';
 import React from 'react';
 import { AriaLabelPropType } from '../../prop-types/AriaPropTypes';
-
-const { prefix } = settings;
+import { usePrefix } from '../../internal/usePrefix';
 
 const Header = ({ className: customClassName, children, ...rest }) => {
+  const prefix = usePrefix();
   const className = cx(`${prefix}--header`, customClassName);
 
   return (

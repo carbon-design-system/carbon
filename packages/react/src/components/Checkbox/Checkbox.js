@@ -8,10 +8,10 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import classNames from 'classnames';
+import { Text } from '../Text';
 import { useFeatureFlag } from '../FeatureFlags';
-import { settings } from 'carbon-components';
-
-const { prefix } = settings;
+import deprecate from '../../prop-types/deprecate';
+import { usePrefix } from '../../internal/usePrefix';
 
 const Checkbox = React.forwardRef(function Checkbox(
   {
@@ -27,17 +27,21 @@ const Checkbox = React.forwardRef(function Checkbox(
   },
   ref
 ) {
-  const labelClasses = classNames(`${prefix}--checkbox-label`, className);
+  const enabled = useFeatureFlag('enable-v11-release');
+  const prefix = usePrefix();
+
+  const labelClasses = classNames(`${prefix}--checkbox-label`, [
+    enabled ? null : className,
+  ]);
   const innerLabelClasses = classNames(`${prefix}--checkbox-label-text`, {
     [`${prefix}--visually-hidden`]: hideLabel,
   });
+
   const wrapperClasses = classNames(
     `${prefix}--form-item`,
     `${prefix}--checkbox-wrapper`,
-    wrapperClassName
+    [enabled ? className : wrapperClassName]
   );
-
-  const enabled = useFeatureFlag('enable-v11-release');
 
   return (
     <div className={wrapperClasses}>
@@ -65,7 +69,7 @@ const Checkbox = React.forwardRef(function Checkbox(
         }}
       />
       <label htmlFor={id} className={labelClasses} title={title || null}>
-        <span className={innerLabelClasses}>{labelText}</span>
+        <Text className={innerLabelClasses}>{labelText}</Text>
       </label>
     </div>
   );
@@ -127,7 +131,10 @@ Checkbox.propTypes = {
   /**
    * The CSS class name to be placed on the wrapping element
    */
-  wrapperClassName: PropTypes.string,
+  wrapperClassName: deprecate(
+    PropTypes.string,
+    `\nThe prop \`wrapperClassName\` for Checkbox will be deprecated in V11 in favor of \`className\`. \`className\` will then be placed on the outer wrapper.`
+  ),
 };
 
 Checkbox.defaultProps = {

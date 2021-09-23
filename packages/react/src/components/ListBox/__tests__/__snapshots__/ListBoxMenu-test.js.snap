@@ -9,7 +9,7 @@ exports[`ListBoxMenu should render 1`] = `
     id="test-listbox"
     role="listbox"
   >
-    <ForwardRef(ListBoxMenuItem)
+    <ListBoxMenuItem
       isActive={false}
       isHighlighted={false}
     >
@@ -22,7 +22,7 @@ exports[`ListBoxMenu should render 1`] = `
           Hello
         </div>
       </div>
-    </ForwardRef(ListBoxMenuItem)>
+    </ListBoxMenuItem>
   </div>
 </ListBoxMenu>
 `;

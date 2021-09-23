@@ -6,6 +6,6 @@ Object {
   "css--font-face": true,
   "css--plex-arabic": false,
   "css--reset": true,
-  "prefix": "bx",
+  "prefix": "cds",
 }
 `;

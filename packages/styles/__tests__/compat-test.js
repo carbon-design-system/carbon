@@ -51,7 +51,6 @@ describe('@carbon/styles/scss/compat', () => {
       @use '../scss/themes';
       @use '../scss/compat/themes' as compat;
       @use '../scss/compat/theme' with (
-        $fallback: themes.$g100,
         $theme: compat.$g100,
       );
 

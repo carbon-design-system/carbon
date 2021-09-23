@@ -10,10 +10,9 @@ import { Close20 } from '@carbon/icons-react';
 import Modal from '../Modal';
 import ModalWrapper from '../ModalWrapper';
 import InlineLoading from '../InlineLoading';
-import { shallow, mount } from 'enzyme';
-import { settings } from 'carbon-components';
+import { mount } from 'enzyme';
 
-const { prefix } = settings;
+const prefix = 'bx';
 
 // The modal is the 0th child inside the wrapper on account of focus-trap-react
 const getModal = (wrapper) => wrapper.find('.bx--modal');
@@ -21,9 +20,7 @@ const getModalBody = (wrapper) => wrapper.find('.bx--modal-container');
 
 describe('Modal', () => {
   describe('Renders as expected', () => {
-    const wrapper = shallow(
-      <Modal aria-label="test" className="extra-class" />
-    );
+    const wrapper = mount(<Modal aria-label="test" className="extra-class" />);
     const mounted = mount(<Modal aria-label="test" className="extra-class" />);
 
     it('has the expected classes', () => {
@@ -46,7 +43,7 @@ describe('Modal', () => {
     });
 
     it('should set id if one is passed via props', () => {
-      const modal = shallow(<Modal aria-label="test" id="modal-1" />);
+      const modal = mount(<Modal aria-label="test" id="modal-1" />);
       expect(getModal(modal).props().id).toEqual('modal-1');
     });
 
@@ -127,15 +124,13 @@ describe('Modal', () => {
 
   describe('Adds props as expected to the right children', () => {
     it('should set label if one is passed via props', () => {
-      const wrapper = shallow(<Modal aria-label="test" modalLabel="modal-1" />);
+      const wrapper = mount(<Modal aria-label="test" modalLabel="modal-1" />);
       const label = wrapper.find(`.${prefix}--modal-header__label`);
       expect(label.props().children).toEqual('modal-1');
     });
 
     it('should set modal heading if one is passed via props', () => {
-      const wrapper = shallow(
-        <Modal aria-label="test" modalHeading="modal-1" />
-      );
+      const wrapper = mount(<Modal aria-label="test" modalHeading="modal-1" />);
       const heading = wrapper.find(`.${prefix}--modal-header__heading`);
       expect(heading.props().children).toEqual('modal-1');
     });
@@ -329,7 +324,7 @@ describe('Danger Modal', () => {
 });
 describe('Alert Modal', () => {
   describe('Renders as expected', () => {
-    const wrapper = shallow(<Modal aria-label="test" alert />);
+    const wrapper = mount(<Modal aria-label="test" alert />);
 
     it('has the expected attributes', () => {
       expect(getModalBody(wrapper).props()).toEqual(
