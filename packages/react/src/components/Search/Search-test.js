@@ -182,6 +182,7 @@ describe('Search', () => {
     describe('enabled textinput', () => {
       const onClick = jest.fn();
       const onChange = jest.fn();
+      const onClear = jest.fn();
 
       const wrapper = shallow(
         <Search
@@ -189,6 +190,7 @@ describe('Search', () => {
           labelText="testlabel"
           onClick={onClick}
           onChange={onChange}
+          onClear={onClear}
         />
       );
 
@@ -207,6 +209,12 @@ describe('Search', () => {
       it('should invoke onChange when input value is changed', () => {
         input.simulate('change', eventObject);
         expect(onChange).toHaveBeenCalledWith(eventObject);
+      });
+
+      it('should invoke onClear when input value is cleared', () => {
+        wrapper.setProps({ defaultValue: 'test' });
+        wrapper.find('button').simulate('click');
+        expect(onClear).toHaveBeenCalled();
       });
     });
   });

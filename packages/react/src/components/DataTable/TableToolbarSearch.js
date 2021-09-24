@@ -26,6 +26,7 @@ const TableToolbarSearch = ({
   className,
   searchContainerClass,
   onChange: onChangeProp,
+  onClear,
   translateWithId: t,
   placeHolderText,
   placeholder,
@@ -108,6 +109,7 @@ const TableToolbarSearch = ({
         t('carbon.table.toolbar.search.placeholder')
       }
       onChange={onChange}
+      onClear={onClear}
       onFocus={(event) => handleExpand(event, true)}
       onBlur={(event) => !value && handleExpand(event, false)}
       {...rest}
@@ -157,6 +159,11 @@ TableToolbarSearch.propTypes = {
    * Provide an optional hook that is called each time the input is updated
    */
   onChange: PropTypes.func,
+
+  /**
+   * Optional callback called when the search value is cleared.
+   */
+  onClear: PropTypes.func,
 
   /**
    * Provide an optional hook that is called each time the input is expanded

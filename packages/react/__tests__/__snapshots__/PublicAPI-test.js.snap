@@ -1534,6 +1534,9 @@ Map {
         "onChange": Object {
           "type": "func",
         },
+        "onClear": Object {
+          "type": "func",
+        },
         "onExpand": Object {
           "type": "func",
         },
@@ -2137,6 +2140,9 @@ Map {
         "type": "string",
       },
       "onChange": Object {
+        "type": "func",
+      },
+      "onClear": Object {
         "type": "func",
       },
       "onExpand": Object {
@@ -5261,6 +5267,7 @@ Map {
     "defaultProps": Object {
       "closeButtonLabelText": "Clear search input",
       "onChange": [Function],
+      "onClear": [Function],
       "placeholder": "",
       "type": "text",
     },
@@ -5298,6 +5305,9 @@ Map {
         "type": "bool",
       },
       "onChange": Object {
+        "type": "func",
+      },
+      "onClear": Object {
         "type": "func",
       },
       "onKeyDown": Object {
@@ -5429,6 +5439,9 @@ Map {
         "type": "bool",
       },
       "onChange": Object {
+        "type": "func",
+      },
+      "onClear": Object {
         "type": "func",
       },
       "onKeyDown": Object {
