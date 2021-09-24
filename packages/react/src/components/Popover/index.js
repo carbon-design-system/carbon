@@ -122,6 +122,7 @@ const PopoverContent = React.forwardRef(function PopoverContent(
   );
 });
 
+PopoverContent.displayName = 'PopoverContent';
 PopoverContent.propTypes = {
   /**
    * Provide a custom element or component to render the top-level node for the

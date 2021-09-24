@@ -8,11 +8,9 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import cx from 'classnames';
-import { settings } from 'carbon-components';
 import deprecate from '../../prop-types/deprecate';
 import { PropTypes as ListBoxPropTypes } from '../ListBox';
-
-const { prefix } = settings;
+import { usePrefix } from '../../internal/usePrefix';
 
 const DropdownSkeleton = ({
   className,
@@ -22,6 +20,7 @@ const DropdownSkeleton = ({
   inline,
   ...rest
 }) => {
+  const prefix = usePrefix();
   const wrapperClasses = cx(className, {
     [`${prefix}--skeleton`]: true,
     [`${prefix}--dropdown-v2`]: true,

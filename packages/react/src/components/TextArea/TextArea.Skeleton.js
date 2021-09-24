@@ -8,16 +8,19 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import cx from 'classnames';
-import { settings } from 'carbon-components';
+import { usePrefix } from '../../internal/usePrefix';
 
-const { prefix } = settings;
-
-const TextAreaSkeleton = ({ hideLabel, className, ...rest }) => (
-  <div className={cx(`${prefix}--form-item`, className)} {...rest}>
-    {!hideLabel && <span className={`${prefix}--label ${prefix}--skeleton`} />}
-    <div className={`${prefix}--skeleton ${prefix}--text-area`} />
-  </div>
-);
+const TextAreaSkeleton = ({ hideLabel, className, ...rest }) => {
+  const prefix = usePrefix();
+  return (
+    <div className={cx(`${prefix}--form-item`, className)} {...rest}>
+      {!hideLabel && (
+        <span className={`${prefix}--label ${prefix}--skeleton`} />
+      )}
+      <div className={`${prefix}--skeleton ${prefix}--text-area`} />
+    </div>
+  );
+};
 
 TextAreaSkeleton.propTypes = {
   /**

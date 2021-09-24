@@ -6,12 +6,10 @@
  */
 
 import React from 'react';
-import { settings } from 'carbon-components';
 import cx from 'classnames';
 import PropTypes from 'prop-types';
 import { AriaLabelPropType } from '../../prop-types/AriaPropTypes';
-
-const { prefix } = settings;
+import { usePrefix } from '../../internal/usePrefix';
 
 const HeaderPanel = React.forwardRef(function HeaderPanel(
   {
@@ -24,6 +22,7 @@ const HeaderPanel = React.forwardRef(function HeaderPanel(
   },
   ref
 ) {
+  const prefix = usePrefix();
   const accessibilityLabel = {
     'aria-label': ariaLabel,
     'aria-labelledby': ariaLabelledBy,

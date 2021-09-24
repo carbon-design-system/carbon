@@ -23,11 +23,10 @@
   }
 
   .#{$prefix}--tile {
-    position: relative;
     display: block;
     min-width: 8rem;
     min-height: 4rem;
-    padding: $carbon--spacing-05;
+    padding: $spacing-05;
     background-color: $ui-01;
     outline: 2px solid transparent;
     outline-offset: -2px;
@@ -102,6 +101,7 @@
   }
 
   .#{$prefix}--tile--selectable {
+    position: relative;
     padding-right: $carbon--spacing-09;
     border: 1px solid transparent;
   }
