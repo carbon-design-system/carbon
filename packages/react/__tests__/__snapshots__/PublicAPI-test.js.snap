@@ -1502,6 +1502,7 @@ Map {
     },
     "TableToolbarSearch": Object {
       "defaultProps": Object {
+        "onClear": [Function],
         "persistent": false,
         "tabIndex": "0",
         "translateWithId": [Function],
@@ -2110,6 +2111,7 @@ Map {
   },
   "TableToolbarSearch" => Object {
     "defaultProps": Object {
+      "onClear": [Function],
       "persistent": false,
       "tabIndex": "0",
       "translateWithId": [Function],

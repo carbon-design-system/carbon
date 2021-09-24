@@ -212,6 +212,7 @@ TableToolbarSearch.defaultProps = {
   tabIndex: '0',
   translateWithId,
   persistent: false,
+  onClear: () => {},
 };
 
 export default TableToolbarSearch;

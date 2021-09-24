@@ -1870,6 +1870,7 @@ exports[`DataTable should render 1`] = `
                 <TableToolbarSearch
                   id="custom-id"
                   onChange={[Function]}
+                  onClear={[Function]}
                   persistent={true}
                   tabIndex="0"
                   translateWithId={[Function]}
@@ -2331,6 +2332,7 @@ exports[`DataTable should render 1`] = `
               <TableToolbarSearch
                 id="custom-id"
                 onChange={[Function]}
+                onClear={[Function]}
                 persistent={true}
                 tabIndex="0"
                 translateWithId={[Function]}
@@ -2929,6 +2931,7 @@ exports[`DataTable sticky header should render 1`] = `
                 <TableToolbarSearch
                   id="custom-id"
                   onChange={[Function]}
+                  onClear={[Function]}
                   persistent={true}
                   tabIndex="0"
                   translateWithId={[Function]}
@@ -3393,6 +3396,7 @@ exports[`DataTable sticky header should render 1`] = `
               <TableToolbarSearch
                 id="custom-id"
                 onChange={[Function]}
+                onClear={[Function]}
                 persistent={true}
                 tabIndex="0"
                 translateWithId={[Function]}
