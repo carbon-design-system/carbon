@@ -8,6 +8,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
+import { usePrefix } from '../../internal/usePrefix';
 
 export function Layer({
   as: BaseComponent = 'div',
@@ -15,7 +16,8 @@ export function Layer({
   children,
   ...rest
 }) {
-  const className = cx('bx--layer', customClassName);
+  const prefix = usePrefix();
+  const className = cx(`${prefix}--layer`, customClassName);
   return (
     <BaseComponent {...rest} className={className}>
       {children}
