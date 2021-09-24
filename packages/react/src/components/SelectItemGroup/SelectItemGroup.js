@@ -8,6 +8,7 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import classnames from 'classnames';
+import * as FeatureFlags from '@carbon/feature-flags';
 import { settings } from 'carbon-components';
 
 const { prefix } = settings;
@@ -55,7 +56,7 @@ SelectItemGroup.propTypes = {
 
 SelectItemGroup.defaultProps = {
   disabled: false,
-  label: 'Provide label',
+  label: FeatureFlags.enabled('enable-v11-release') ? '' : 'Provide label',
 };
 
 export default SelectItemGroup;
