@@ -7,7 +7,6 @@
 
 import React, { useRef } from 'react';
 import { useSelect } from 'downshift';
-import { settings } from 'carbon-components';
 import cx from 'classnames';
 import PropTypes from 'prop-types';
 import {
@@ -20,8 +19,7 @@ import { mapDownshiftProps } from '../../tools/createPropAdapter';
 import mergeRefs from '../../tools/mergeRefs';
 import deprecate from '../../prop-types/deprecate';
 import { useFeatureFlag } from '../FeatureFlags';
-
-const { prefix } = settings;
+import { usePrefix } from '../../internal/usePrefix';
 
 const defaultItemToString = (item) => {
   if (typeof item === 'string') {
@@ -61,6 +59,7 @@ const Dropdown = React.forwardRef(function Dropdown(
   },
   ref
 ) {
+  const prefix = usePrefix();
   const selectProps = mapDownshiftProps({
     ...downshiftProps,
     items,

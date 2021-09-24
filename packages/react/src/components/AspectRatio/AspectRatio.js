@@ -5,12 +5,10 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { settings } from 'carbon-components';
 import cx from 'classnames';
 import PropTypes from 'prop-types';
 import React from 'react';
-
-const { prefix } = settings;
+import { usePrefix } from '../../internal/usePrefix';
 
 /**
  * The AspectRatio component provides a `ratio` prop that will be used to
@@ -25,6 +23,7 @@ function AspectRatio({
   ratio = '1x1',
   ...rest
 }) {
+  const prefix = usePrefix();
   const className = cx(
     containerClassName,
     `${prefix}--aspect-ratio`,

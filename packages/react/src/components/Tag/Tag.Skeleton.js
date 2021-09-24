@@ -8,11 +8,10 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import cx from 'classnames';
-import { settings } from 'carbon-components';
-
-const { prefix } = settings;
+import { usePrefix } from '../../internal/usePrefix';
 
 function TagSkeleton({ className, size, ...rest }) {
+  const prefix = usePrefix();
   return (
     <span
       className={cx(`${prefix}--tag`, `${prefix}--skeleton`, className, {
