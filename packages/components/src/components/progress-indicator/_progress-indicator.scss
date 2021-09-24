@@ -102,7 +102,8 @@
     margin-right: 0.75rem;
   }
 
-  .#{$prefix}--tooltip__label.#{$prefix}--progress-label:active {
+  .#{$prefix}--tooltip__label.#{$prefix}--progress-label:active,
+  .#{$prefix}--progress-label:active {
     box-shadow: 0 rem(3px) 0 0 $interactive-01;
     color: $interactive-01;
   }
