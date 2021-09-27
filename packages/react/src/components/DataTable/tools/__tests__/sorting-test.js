@@ -5,8 +5,55 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { defaultSortRow } from '../sorting';
+import { sortRows, defaultSortRow } from '../sorting';
 import { sortStates } from '../../state/sorting';
+
+describe('sortRow', () => {
+  const rowIds = ['row2', 'row1'];
+  const cellsById = {
+    'row1:header1': { value: 'cell11' },
+    'row2:header1': { value: 'cell21' },
+  };
+
+  it('should sort data in ascending order', () => {
+    expect(
+      sortRows({
+        rowIds,
+        cellsById,
+        sortDirection: sortStates.ASC,
+        key: 'header1',
+        locale: 'en',
+        sortRow: defaultSortRow,
+      })
+    ).toEqual(['row1', 'row2']);
+  });
+
+  it('should sort data in descending order', () => {
+    expect(
+      sortRows({
+        rowIds,
+        cellsById,
+        sortDirection: sortStates.DESC,
+        key: 'header1',
+        locale: 'en',
+        sortRow: defaultSortRow,
+      })
+    ).toEqual(['row2', 'row1']);
+  });
+
+  it('should return unsorted data if cells not found', () => {
+    expect(
+      sortRows({
+        rowIds,
+        cellsById,
+        sortDirection: sortStates.ASC,
+        key: 'header2',
+        locale: 'en',
+        sortRow: defaultSortRow,
+      })
+    ).toEqual(['row2', 'row1']);
+  });
+});
 
 describe('defaultSortRow', () => {
   it('should sort data in ascending order', () => {

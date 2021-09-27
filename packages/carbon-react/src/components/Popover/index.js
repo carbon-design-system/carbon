@@ -42,6 +42,7 @@ function Popover({
   );
 }
 
+Popover.displayName = 'Popover';
 Popover.propTypes = {
   /**
    * Specify how the popover should align with the trigger element
@@ -121,6 +122,8 @@ const PopoverContent = React.forwardRef(function PopoverContent(
     </BaseComponent>
   );
 });
+
+PopoverContent.displayName = 'PopoverContent';
 
 PopoverContent.propTypes = {
   /**

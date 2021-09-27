@@ -39,3 +39,13 @@ if (global.window) {
   const { getComputedStyle } = window;
   window.getComputedStyle = (element) => getComputedStyle(element);
 }
+
+if (global.window) {
+  window.ResizeObserver = jest.fn(() => {
+    return {
+      observe: jest.fn(),
+      unobserve: jest.fn(),
+      disconnect: jest.fn(),
+    };
+  });
+}
