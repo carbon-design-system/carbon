@@ -8,11 +8,9 @@
 import React, { useRef, useState } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
-import { settings } from 'carbon-components';
 import { keys, matches } from '../../internal/keyboard';
 import uniqueId from '../../tools/uniqueId';
-
-const { prefix } = settings;
+import { usePrefix } from '../../internal/usePrefix';
 
 function FileUploaderDropContainer({
   accept,
@@ -27,6 +25,7 @@ function FileUploaderDropContainer({
   tabIndex,
   ...rest
 }) {
+  const prefix = usePrefix();
   const inputRef = useRef(null);
   const { current: uid } = useRef(id || uniqueId());
   const [isActive, setActive] = useState(false);

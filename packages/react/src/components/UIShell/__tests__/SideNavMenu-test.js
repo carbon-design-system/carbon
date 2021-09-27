@@ -9,9 +9,8 @@ import React from 'react';
 import { mount } from 'enzyme';
 import { SideNavMenu } from '../SideNavMenu';
 import { SideNavMenuItem } from '../';
-import { settings } from 'carbon-components';
-const { prefix } = settings;
 
+const prefix = 'bx';
 describe('SideNavMenu', () => {
   let mockProps, wrapper;
 

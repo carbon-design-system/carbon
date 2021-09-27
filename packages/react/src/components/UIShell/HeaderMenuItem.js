@@ -5,13 +5,11 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { settings } from 'carbon-components';
 import PropTypes from 'prop-types';
 import React from 'react';
 import cx from 'classnames';
 import Link, { LinkPropTypes } from './Link';
-
-const { prefix } = settings;
+import { usePrefix } from '../../internal/usePrefix';
 
 const HeaderMenuItem = React.forwardRef(function HeaderMenuItem(
   {
@@ -24,6 +22,7 @@ const HeaderMenuItem = React.forwardRef(function HeaderMenuItem(
   },
   ref
 ) {
+  const prefix = usePrefix();
   const linkClassName = cx({
     [`${prefix}--header__menu-item`]: true,
     // We set the current class only if `isCurrentPage` is passed in and we do
@@ -46,6 +45,7 @@ const HeaderMenuItem = React.forwardRef(function HeaderMenuItem(
   );
 });
 
+HeaderMenuItem.displayName = 'HeaderMenuItem';
 HeaderMenuItem.propTypes = {
   /**
    * Pass in a valid `element` to replace the underlying `<a>` tag with a
