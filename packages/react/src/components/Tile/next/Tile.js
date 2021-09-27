@@ -33,7 +33,11 @@ export const Tile = React.forwardRef(function Tile(
     className
   );
   return (
-    <div className={tileClasses} ref={ref} {...rest}>
+    <div
+      className={tileClasses}
+      ref={ref}
+      style={{ backgroundColor: 'limegreen' }}
+      {...rest}>
       {children}
     </div>
   );
