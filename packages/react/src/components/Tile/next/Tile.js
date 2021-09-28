@@ -39,7 +39,6 @@ export const Tile = React.forwardRef(function Tile(
   );
 });
 
-Tile.contextType = PrefixContext;
 Tile.displayName = 'Tile';
 Tile.propTypes = {
   /**
