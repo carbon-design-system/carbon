@@ -38,6 +38,11 @@ describe('scss/components/notification', () => {
       'notification-background-info',
       'notification-background-warning',
       'notification-action-hover',
+      'notification-action-tertiary-inverse',
+      'notification-action-tertiary-inverse-active',
+      'notification-action-tertiary-inverse-hover',
+      'notification-action-tertiary-inverse-text',
+      'notification-action-tertiary-inverse-text-on-color-disabled',
       'notification-tokens',
     ]);
   });
