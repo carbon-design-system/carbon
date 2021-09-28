@@ -15,17 +15,14 @@ import { useId } from '../../internal/useId';
 import deprecate from '../../prop-types/deprecate.js';
 
 const { prefix } = settings;
-const defaultRenderToggle = (props) => <button type="button" {...props} />;
-// const defaultRenderExpando = (props) => <button type="button" {...props} />;
-// const Toggle = renderExpando || renderToggle;
+const defaultRenderExpando = (props) => <button type="button" {...props} />;
 function AccordionItem({
   children,
   className: customClassName,
   iconDescription, // eslint-disable-line
   open = false,
   onHeadingClick,
-  // renderExpando,
-  renderToggle: Toggle = defaultRenderToggle,
+  renderExpando: Expando = defaultRenderExpando,
   title = 'title',
   disabled,
   ...rest
@@ -77,7 +74,7 @@ function AccordionItem({
 
   return (
     <li className={className} {...rest} onAnimationEnd={handleAnimationEnd}>
-      <Toggle
+      <Expando
         disabled={disabled}
         aria-controls={id}
         aria-expanded={isOpen}
@@ -87,7 +84,7 @@ function AccordionItem({
         type="button">
         <ChevronRight16 className={`${prefix}--accordion__arrow`} />
         <div className={`${prefix}--accordion__title`}>{title}</div>
-      </Toggle>
+      </Expando>
       <div id={id} className={`${prefix}--accordion__content`}>
         {children}
       </div>
@@ -141,16 +138,7 @@ AccordionItem.propTypes = {
    * The callback function to render the expando button.
    * Can be a React component class.
    */
-  renderExpando: deprecate(
-    PropTypes.func,
-    'The `renderExpando` prop has been deprecated in favor of `renderToggleBtn`. This prop will be removed in the next major release.'
-  ),
-
-  /**
-   * The callback function to render the toggle button.
-   * Can be a React component class.
-   */
-  renderToggle: PropTypes.func,
+  renderExpando: PropTypes.func,
 
   /**
    * The accordion title.
