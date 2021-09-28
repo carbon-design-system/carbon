@@ -660,7 +660,6 @@ export const TileAboveTheFoldContent = React.forwardRef(
   }
 );
 
-TileAboveTheFoldContent.contextType = PrefixContext;
 TileAboveTheFoldContent.displayName = 'TileAboveTheFoldContent';
 TileAboveTheFoldContent.propTypes = {
   /**
