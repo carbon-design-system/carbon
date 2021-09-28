@@ -292,7 +292,6 @@ export const SelectableTile = React.forwardRef(function SelectableTile(
   );
 });
 
-SelectableTile.contextType = PrefixContext;
 SelectableTile.displayName = 'SelectableTile';
 SelectableTile.propTypes = {
   /**
