@@ -13,7 +13,6 @@ import { configureActions } from '@storybook/addon-actions';
 import { CARBON_CURRENT_THEME, CARBON_TYPE_TOKEN } from './shared';
 import Container from './Container';
 import carbonTheme from './theme';
-import { FeatureFlagContext } from 'carbon-components-react/lib/components/FeatureFlags';
 
 const customPropertyPrefix = 'cds';
 
