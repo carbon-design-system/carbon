@@ -5,13 +5,11 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { settings } from 'carbon-components';
 import cx from 'classnames';
 import React from 'react';
 import PropTypes from 'prop-types';
 import { AriaLabelPropType } from '../../prop-types/AriaPropTypes';
-
-const { prefix } = settings;
+import { PrefixContext } from '../../internal/usePrefix';
 
 export default class HeaderNavigation extends React.Component {
   static propTypes = {
@@ -40,6 +38,8 @@ export default class HeaderNavigation extends React.Component {
     };
   }
 
+  static contextType = PrefixContext;
+
   /**
    * Handles individual menuitem refs. We assign them to a class instance
    * property so that we can properly manage focus of our children.
@@ -49,6 +49,7 @@ export default class HeaderNavigation extends React.Component {
   };
 
   render() {
+    const prefix = this.context;
     const {
       'aria-label': ariaLabel,
       'aria-labelledby': ariaLabelledBy,

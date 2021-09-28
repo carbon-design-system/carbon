@@ -8,9 +8,8 @@
 import React from 'react';
 import { mount } from 'enzyme';
 import { HeaderMenu, HeaderMenuItem } from '../';
-import { settings } from 'carbon-components';
 
-const { prefix } = settings;
+const prefix = 'bx';
 
 describe('HeaderMenu', () => {
   let mountNode;

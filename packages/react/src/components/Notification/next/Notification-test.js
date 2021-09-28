@@ -11,7 +11,7 @@ import {
   NotificationButton,
   ToastNotification,
   InlineNotification,
-  NotificationActionButton,
+  ActionableNotification,
 } from '../next/Notification';
 import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
@@ -101,7 +101,7 @@ describe('ToastNotification', () => {
     expect(() => {
       render(
         <ToastNotification>
-          <button type="button">Sample text</button>
+          <button type="button">Sample button text</button>
         </ToastNotification>
       );
     }).toThrow();
@@ -174,9 +174,17 @@ describe('ToastNotification', () => {
       />
     );
 
+    // without focus being on/in the notification, it should not close via escape
+    userEvent.keyboard('{Escape}');
+    expect(onCloseButtonClick).toHaveBeenCalledTimes(0);
+    expect(onClose).toHaveBeenCalledTimes(0);
+
+    // after focus is placed, the notification should close via escape
+    userEvent.tab();
     userEvent.keyboard('{Escape}');
     expect(onCloseButtonClick).toHaveBeenCalledTimes(1);
     expect(onClose).toHaveBeenCalledTimes(1);
+
     await waitFor(() => {
       expect(screen.queryByRole('status')).not.toBeInTheDocument();
     });
@@ -221,13 +229,19 @@ describe('InlineNotification', () => {
     expect(screen.queryByText(/Sample text/i)).toBeInTheDocument();
   });
 
-  it('allows interactive elements as children', () => {
-    render(
-      <InlineNotification>
-        <button type="button">Sample text</button>
-      </InlineNotification>
-    );
-    expect(screen.queryByText(/Sample text/i)).toBeInTheDocument();
+  it('does not allow interactive elements as children', () => {
+    const spy = jest.spyOn(console, 'error').mockImplementation(() => {});
+
+    expect(() => {
+      render(
+        <InlineNotification>
+          <button type="button">Sample button text</button>
+        </InlineNotification>
+      );
+    }).toThrow();
+
+    expect(spy).toHaveBeenCalled();
+    spy.mockRestore();
   });
 
   it('close button is rendered by default and includes aria-hidden=true', () => {
@@ -293,26 +307,64 @@ describe('InlineNotification', () => {
       />
     );
 
+    // without focus being on/in the notification, it should not close via escape
+    userEvent.keyboard('{Escape}');
+    expect(onCloseButtonClick).toHaveBeenCalledTimes(0);
+    expect(onClose).toHaveBeenCalledTimes(0);
+
+    // after focus is placed, the notification should close via escape
+    userEvent.tab();
     userEvent.keyboard('{Escape}');
     expect(onCloseButtonClick).toHaveBeenCalledTimes(1);
     expect(onClose).toHaveBeenCalledTimes(1);
+
     await waitFor(() => {
       expect(screen.queryByRole('status')).not.toBeInTheDocument();
     });
   });
+});
 
-  it('renders actions when provided, and overrides role to be alertdialog', () => {
+describe('ActionableNotification', () => {
+  it('uses role=alertdialog', () => {
     const { container } = render(
-      <InlineNotification
-        actions={
-          <NotificationActionButton>Button text</NotificationActionButton>
-        }
-      />
+      <ActionableNotification actionButtonLabel="My custom action" />
     );
+
+    expect(container.firstChild).toHaveAttribute('role', 'alertdialog');
+  });
+
+  it('renders correct action label', () => {
+    render(<ActionableNotification actionButtonLabel="My custom action" />);
     const actionButton = screen.queryByRole('button', {
-      name: 'Button text',
+      name: 'My custom action',
     });
     expect(actionButton).toBeInTheDocument();
-    expect(container.firstChild).toHaveAttribute('role', 'alertdialog');
+  });
+
+  it('closes notification via escape button when focus is placed on the notification', async () => {
+    const onCloseButtonClick = jest.fn();
+    const onClose = jest.fn();
+    render(
+      <ActionableNotification
+        onClose={onClose}
+        onCloseButtonClick={onCloseButtonClick}
+        actionButtonLabel="My custom action"
+      />
+    );
+
+    // without focus being on/in the notification, it should not close via escape
+    userEvent.keyboard('{Escape}');
+    expect(onCloseButtonClick).toHaveBeenCalledTimes(0);
+    expect(onClose).toHaveBeenCalledTimes(0);
+
+    // after focus is placed, the notification should close via escape
+    userEvent.tab();
+    userEvent.keyboard('{Escape}');
+    expect(onCloseButtonClick).toHaveBeenCalledTimes(1);
+    expect(onClose).toHaveBeenCalledTimes(1);
+
+    await waitFor(() => {
+      expect(screen.queryByRole('alertdialog')).not.toBeInTheDocument();
+    });
   });
 });

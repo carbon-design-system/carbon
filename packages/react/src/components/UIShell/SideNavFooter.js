@@ -7,12 +7,10 @@
 
 import { Close20, ChevronRight20 } from '@carbon/icons-react';
 
-import { settings } from 'carbon-components';
 import cx from 'classnames';
 import React from 'react';
 import PropTypes from 'prop-types';
-
-const { prefix } = settings;
+import { usePrefix } from '../../internal/usePrefix';
 
 /**
  * SideNavFooter is used for rendering the button at the bottom of the side
@@ -25,6 +23,7 @@ const SideNavFooter = ({
   expanded,
   onToggle,
 }) => {
+  const prefix = usePrefix();
   const className = cx(`${prefix}--side-nav__footer`, customClassName);
   return (
     <footer className={className}>

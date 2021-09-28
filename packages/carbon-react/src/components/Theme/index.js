@@ -8,6 +8,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
+import { usePrefix } from '../../internal/usePrefix';
 
 const ThemeContext = React.createContext({
   theme: 'white',
@@ -23,11 +24,12 @@ export function Theme({
   theme,
   ...rest
 }) {
+  const prefix = usePrefix();
   const className = cx(customClassName, {
-    'bx--white': theme === 'white',
-    'bx--g10': theme === 'g10',
-    'bx--g90': theme === 'g90',
-    'bx--g100': theme === 'g100',
+    [`${prefix}--white`]: theme === 'white',
+    [`${prefix}--g10`]: theme === 'g10',
+    [`${prefix}--g90`]: theme === 'g90',
+    [`${prefix}--g100`]: theme === 'g100',
   });
   const value = React.useMemo(() => {
     return {

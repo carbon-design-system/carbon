@@ -8,6 +8,7 @@
 'use strict';
 
 const cli = require('yargs');
+const isGitClean = require('is-git-clean');
 const packageJson = require('../package.json');
 const { UpgradeError } = require('./error');
 const { Migration } = require('./migration');
@@ -67,7 +68,18 @@ async function main({ argv, cwd }) {
 
 function run(command) {
   return async (...args) => {
+    // checks git status on pwd, returns true if clean / false if not
+    let isClean = isGitClean.sync();
+
     console.log('Thanks for trying out @carbon/upgrade! 🙏');
+    console.log('Checking git status...👀');
+
+    if (!isClean) {
+      console.error(
+        'Git directory is not clean. Please stash or commit your changes.'
+      );
+      process.exit(1);
+    }
 
     try {
       await command(...args);
