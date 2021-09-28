@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React, { Component, useEffect, useState } from 'react';
+import React, { Component, useState } from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 import Link from '../../Link';
@@ -215,6 +215,8 @@ export const SelectableTile = React.forwardRef(function SelectableTile(
   const keyDownHandler = handleKeyDown || onKeyDown;
 
   const [isSelected, setIsSelected] = useState(selected);
+  const [prevSelected, setPrevSelected] = useState(selected);
+
   const classes = cx(
     `${prefix}--tile`,
     `${prefix}--tile--selectable`,
@@ -254,9 +256,10 @@ export const SelectableTile = React.forwardRef(function SelectableTile(
     onChange(event);
   }
 
-  useEffect(() => {
+  if (selected !== prevSelected) {
     setIsSelected(selected);
-  }, [selected]);
+    setPrevSelected(selected);
+  }
 
   return (
     <>
