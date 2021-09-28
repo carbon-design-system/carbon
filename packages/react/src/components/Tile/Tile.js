@@ -55,10 +55,7 @@ export class Tile extends Component {
       className
     );
     return (
-      <div
-        className={tileClasses}
-        style={{ backgroundColor: 'hotpink' }}
-        {...rest}>
+      <div className={tileClasses} {...rest}>
         {children}
       </div>
     );
