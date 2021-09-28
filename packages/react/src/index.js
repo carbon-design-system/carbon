@@ -74,6 +74,7 @@ export Modal from './components/Modal';
 export ModalWrapper from './components/ModalWrapper';
 export MultiSelect from './components/MultiSelect';
 export {
+  ActionableNotification,
   ToastNotification,
   InlineNotification,
   NotificationActionButton,
