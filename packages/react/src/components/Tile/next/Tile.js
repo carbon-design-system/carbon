@@ -122,7 +122,6 @@ export const ClickableTile = React.forwardRef(function ClickableTile(
   );
 });
 
-Tile.contextType = PrefixContext;
 ClickableTile.displayName = 'ClickableTile';
 ClickableTile.propTypes = {
   /**
