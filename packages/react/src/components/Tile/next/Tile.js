@@ -61,14 +61,14 @@ Tile.propTypes = {
 export const ClickableTile = React.forwardRef(function ClickableTile(
   {
     children,
-    href,
     className,
-    onClick = () => {},
-    onKeyDown = () => {},
+    clicked = false,
     handleClick,
     handleKeyDown,
-    clicked = false,
+    href,
     light = false,
+    onClick = () => {},
+    onKeyDown = () => {},
     ...rest
   },
   ref
@@ -111,12 +111,12 @@ export const ClickableTile = React.forwardRef(function ClickableTile(
 
   return (
     <Link
-      href={href}
       className={classes}
-      {...rest}
+      href={href}
       onClick={handleOnClick}
       onKeyDown={handleOnKeyDown}
       ref={ref}>
+      {...rest}
       {children}
     </Link>
   );
@@ -184,24 +184,24 @@ ClickableTile.propTypes = {
 
 export const SelectableTile = React.forwardRef(function SelectableTile(
   {
-    value = 'value',
-    title = 'title',
-    selected = false,
-    tabIndex = 0,
-    light = false,
-    onClick = () => {},
-    onChange = () => {},
-    onKeyDown = () => {},
     children,
-    id,
-    name,
+    className,
+    disabled,
+    handleClick,
+    handleKeyDown,
     // TODO: Remove iconDescription prop in the next major release
     // eslint-disable-next-line no-unused-vars
     iconDescription,
-    className,
-    handleClick,
-    handleKeyDown,
-    disabled,
+    id,
+    light = false,
+    name,
+    onClick = () => {},
+    onChange = () => {},
+    onKeyDown = () => {},
+    selected = false,
+    tabIndex = 0,
+    title = 'title',
+    value = 'value',
     ...rest
   },
   ref
@@ -264,27 +264,27 @@ export const SelectableTile = React.forwardRef(function SelectableTile(
   return (
     <>
       <input
+        checked={isSelected}
+        className={inputClasses}
+        disabled={disabled}
+        id={id}
+        name={name}
+        onChange={!disabled ? handleChange : null}
         ref={ref}
         tabIndex={-1}
-        id={id}
-        className={inputClasses}
-        value={value}
-        onChange={!disabled ? handleChange : null}
-        type="checkbox"
-        disabled={disabled}
-        name={name}
         title={title}
-        checked={isSelected}
+        type="checkbox"
+        value={value}
       />
       {/* eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions */}
       <label
-        htmlFor={id}
         className={classes}
+        htmlFor={id}
+        onClick={!disabled ? handleOnClick : null}
+        onKeyDown={!disabled ? handleOnKeyDown : null}
         // eslint-disable-next-line jsx-a11y/no-noninteractive-tabindex
         tabIndex={!disabled ? tabIndex : null}
-        {...rest}
-        onClick={!disabled ? handleOnClick : null}
-        onKeyDown={!disabled ? handleOnKeyDown : null}>
+        {...rest}>
         <span
           className={`${prefix}--tile__checkmark ${prefix}--tile__checkmark--persistent`}>
           {isSelected ? <CheckboxCheckedFilled16 /> : <Checkbox16 />}
