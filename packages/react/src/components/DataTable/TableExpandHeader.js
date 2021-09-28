@@ -48,19 +48,6 @@ const TableExpandHeader = ({
           />
         </button>
       ) : null}
-      {/* {!enableExpando ? null : (
-        <button
-          type="button"
-          className={`${prefix}--table-expand__button`}
-          onClick={onExpand}
-          title={expandIconDescription}
-          aria-label={ariaLabel}>
-          <ChevronRight16
-            className={`${prefix}--table-expand__svg`}
-            aria-label={expandIconDescription}
-          />
-        </button>
-      )} */}
       {children}
     </th>
   );
@@ -75,7 +62,7 @@ TableExpandHeader.propTypes = {
     requiredIfGivenPropIsTruthy('enableExpando', PropTypes.string),
     requiredIfGivenPropIsTruthy('enableToggle', PropTypes.string),
   ]),
-  // ariaLabel: requiredIfGivenPropIsTruthy('enableExpando', PropTypes.string),
+
   children: PropTypes.node,
 
   className: PropTypes.string,

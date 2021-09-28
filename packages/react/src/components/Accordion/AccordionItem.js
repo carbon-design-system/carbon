@@ -13,10 +13,11 @@ import React, { useState } from 'react';
 import { Text } from '../Text';
 import { match, keys } from '../../internal/keyboard';
 import { useId } from '../../internal/useId';
-import deprecate from '../../prop-types/deprecate.js';
+import deprecate from '../../prop-types/deprecate';
 
 const { prefix } = settings;
 const defaultRenderExpando = (props) => <button type="button" {...props} />;
+
 function AccordionItem({
   children,
   className: customClassName,
