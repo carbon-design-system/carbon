@@ -216,6 +216,7 @@ Array [
   "unstable_useContextMenu",
   "unstable_useFeatureFlag",
   "unstable_useFeatureFlags",
+  "unstable_usePrefix",
 ]
 `);
   });

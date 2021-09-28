@@ -309,7 +309,7 @@ export class ProgressIndicator extends Component {
       spaceEqually,
       ...other
     } = this.props;
-    const prefix = this.prefix;
+    const prefix = this.context;
     const classes = classnames({
       [`${prefix}--progress`]: true,
       [`${prefix}--progress--vertical`]: vertical,
