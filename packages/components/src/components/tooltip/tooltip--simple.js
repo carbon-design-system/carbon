@@ -94,7 +94,7 @@ export default class TooltipSimple extends mixin(
    * If `options` is specified in the constructor,
    * {@linkcode TooltipSimple.create .create()},
    * or {@linkcode TooltipSimple.init .init()},
-   * properties in this object are overriden for the instance being
+   * properties in this object are overridden for the instance being
    * created and how {@linkcode TooltipSimple.init .init()} works.
    * @property {string} selectorInit The CSS selector to find simple tooltip UIs.
    */

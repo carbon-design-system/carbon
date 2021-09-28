@@ -10,12 +10,12 @@ import React from 'react';
 import classNames from 'classnames';
 import { warning } from '../../internal/warning';
 import { settings } from 'carbon-components';
+import { Legend } from '../Text';
+import { FeatureFlagContext } from '../FeatureFlags';
 
 const { prefix } = settings;
 
 export default class RadioButtonGroup extends React.Component {
-  state = { selected: this.props.valueSelected || this.props.defaultSelected };
-
   static propTypes = {
     /**
      * Provide a collection of <RadioButton> components to render in the group
@@ -76,15 +76,27 @@ export default class RadioButtonGroup extends React.Component {
     onChange: /* istanbul ignore next */ () => {},
   };
 
+  static contextType = FeatureFlagContext;
+
   static getDerivedStateFromProps({ valueSelected, defaultSelected }, state) {
     const { prevValueSelected } = state;
     return prevValueSelected === valueSelected
       ? null
       : {
-          selected: valueSelected || defaultSelected,
+          selected:
+            typeof valueSelected !== 'undefined'
+              ? valueSelected
+              : defaultSelected,
           prevValueSelected: valueSelected,
         };
   }
+
+  state = {
+    selected:
+      typeof this.props.valueSelected !== 'undefined'
+        ? this.props.valueSelected
+        : this.props.defaultSelected,
+  };
 
   getRadioButtons = () => {
     const children = React.Children.map(this.props.children, (radioButton) => {
@@ -126,9 +138,16 @@ export default class RadioButtonGroup extends React.Component {
       legendText,
     } = this.props;
 
+    const scope = this.context;
+    let enabled;
+
+    if (scope.enabled) {
+      enabled = scope.enabled('enable-v11-release');
+    }
+
     const wrapperClasses = classNames(
       `${prefix}--radio-button-group`,
-      className,
+      [enabled ? null : className],
       {
         [`${prefix}--radio-button-group--${orientation}`]:
           orientation === 'vertical',
@@ -137,10 +156,15 @@ export default class RadioButtonGroup extends React.Component {
     );
 
     return (
-      <div className={`${prefix}--form-item`}>
+      <div
+        className={
+          enabled
+            ? classNames(`${prefix}--form-item`, className)
+            : `${prefix}--form-item`
+        }>
         <fieldset className={wrapperClasses} disabled={disabled}>
           {legendText && (
-            <legend className={`${prefix}--label`}>{legendText}</legend>
+            <Legend className={`${prefix}--label`}>{legendText}</Legend>
           )}
           {this.getRadioButtons()}
         </fieldset>

@@ -90,7 +90,7 @@ svg [data-icon-path='inner-path'] {
 }
 ```
 
-In the code snippet above, we are targetting the inner path attribute with
+In the code snippet above, we are targeting the inner path attribute with
 `[data-icon-path="inner-path"]`. The value of `fill` will be the custom color
 you would like to set for the inner path. We also need to set `opacity` to `1`
 in order to get this inner path to be visible on the page.

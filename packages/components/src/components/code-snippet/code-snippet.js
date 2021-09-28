@@ -74,7 +74,7 @@ class CodeSnippet extends mixin(
    * The component options.
    * If `options` is specified in the constructor, {@linkcode CodeSnippet.create .create()},
    * or {@linkcode CodeSnippet.init .init()},
-   * properties in this object are overriden for the instance being create and how {@linkcode CodeSnippet.init .init()} works.
+   * properties in this object are overridden for the instance being create and how {@linkcode CodeSnippet.init .init()} works.
    * @member CodeSnippet.options
    * @type {object}
    * @property {string} selectorInit The data attribute to find code snippet UIs.

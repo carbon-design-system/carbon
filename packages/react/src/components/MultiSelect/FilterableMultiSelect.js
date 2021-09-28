@@ -23,6 +23,7 @@ import { defaultItemToString } from './tools/itemToString';
 import mergeRefs from '../../tools/mergeRefs';
 import setupGetInstanceId from '../../tools/setupGetInstanceId';
 import { defaultSortItems, defaultCompareItems } from './tools/sorting';
+import { FeatureFlagContext } from '../FeatureFlags';
 
 const { prefix } = settings;
 
@@ -34,6 +35,11 @@ export default class FilterableMultiSelect extends React.Component {
      * 'aria-label' of the ListBox component.
      */
     ariaLabel: PropTypes.string,
+
+    /**
+     * Specify the direction of the multiselect dropdown. Can be either top or bottom.
+     */
+    direction: PropTypes.oneOf(['top', 'bottom']),
 
     /**
      * Disable the control
@@ -67,6 +73,12 @@ export default class FilterableMultiSelect extends React.Component {
     invalidText: PropTypes.node,
 
     /**
+     * Function to render items as custom components instead of strings.
+     * Defaults to null and is overridden by a getter
+     */
+    itemToElement: PropTypes.func,
+
+    /**
      * Helper function passed to downshift that allows the library to render a
      * given item to a string label. By default, it extracts the `label` field
      * from a given item to serve as the item label in the list.
@@ -92,7 +104,7 @@ export default class FilterableMultiSelect extends React.Component {
 
     /**
      * `onChange` is a utility for this controlled component to communicate to a
-     * consuming component what kind of internal state changes are occuring.
+     * consuming component what kind of internal state changes are occurring.
      */
     onChange: PropTypes.func,
 
@@ -149,6 +161,8 @@ export default class FilterableMultiSelect extends React.Component {
     warnText: PropTypes.node,
   };
 
+  static contextType = FeatureFlagContext;
+
   static getDerivedStateFromProps({ open }, state) {
     /**
      * programmatically control this `open` prop
@@ -165,6 +179,7 @@ export default class FilterableMultiSelect extends React.Component {
   static defaultProps = {
     ariaLabel: 'Choose an item',
     compareItems: defaultCompareItems,
+    direction: 'bottom',
     disabled: false,
     filterItems: defaultFilterItems,
     initialSelectedItems: [],
@@ -277,9 +292,11 @@ export default class FilterableMultiSelect extends React.Component {
     const {
       ariaLabel,
       className: containerClassName,
+      direction,
       disabled,
       filterItems,
       items,
+      itemToElement,
       itemToString,
       titleText,
       helperText,
@@ -303,15 +320,27 @@ export default class FilterableMultiSelect extends React.Component {
     const inline = type === 'inline';
     const showWarning = !invalid && warn;
 
+    // needs to be capitalized for react to render it correctly
+    const ItemToElement = itemToElement;
+
+    const scope = this.context;
+    let enabled;
+
+    if (scope.enabled) {
+      enabled = scope.enabled('enable-v11-release');
+    }
+
     const wrapperClasses = cx(
       `${prefix}--multi-select__wrapper`,
       `${prefix}--list-box__wrapper`,
+      [enabled ? containerClassName : null],
       {
         [`${prefix}--multi-select__wrapper--inline`]: inline,
         [`${prefix}--list-box__wrapper--inline`]: inline,
         [`${prefix}--multi-select__wrapper--inline--invalid`]:
           inline && invalid,
         [`${prefix}--list-box__wrapper--inline--invalid`]: inline && invalid,
+        [`${prefix}--list-box--up`]: direction === 'top',
       }
     );
     const helperId = !helperText
@@ -379,7 +408,7 @@ export default class FilterableMultiSelect extends React.Component {
                 `${prefix}--multi-select`,
                 `${prefix}--combo-box`,
                 `${prefix}--multi-select--filterable`,
-                containerClassName,
+                [enabled ? null : containerClassName],
                 {
                   [`${prefix}--multi-select--invalid`]: invalid,
                   [`${prefix}--multi-select--open`]: isOpen,
@@ -553,7 +582,14 @@ export default class FilterableMultiSelect extends React.Component {
                                   className={`${prefix}--checkbox-label`}
                                   data-contained-checkbox-state={isChecked}
                                   id={`${itemProps.id}-item`}>
-                                  {itemText}
+                                  {itemToElement ? (
+                                    <ItemToElement
+                                      key={itemProps.id}
+                                      {...item}
+                                    />
+                                  ) : (
+                                    itemText
+                                  )}
                                 </span>
                               </div>
                             </ListBox.MenuItem>

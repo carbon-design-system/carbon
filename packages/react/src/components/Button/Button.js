@@ -8,16 +8,15 @@
 import PropTypes from 'prop-types';
 import React, { useState, useEffect, useRef } from 'react';
 import classNames from 'classnames';
-import { settings } from 'carbon-components';
 import { ButtonKinds } from '../../prop-types/types';
 import deprecate from '../../prop-types/deprecate';
 import { composeEventHandlers } from '../../tools/events';
 import { keys, matches } from '../../internal/keyboard';
+import { usePrefix } from '../../internal/usePrefix';
 import { useId } from '../../internal/useId';
 import toggleClass from '../../tools/toggleClass';
 import { useFeatureFlag } from '../FeatureFlags';
 
-const { prefix } = settings;
 const Button = React.forwardRef(function Button(
   {
     children,
@@ -52,6 +51,7 @@ const Button = React.forwardRef(function Button(
   const [isFocused, setIsFocused] = useState(false);
   const tooltipRef = useRef(null);
   const tooltipTimeout = useRef(null);
+  const prefix = usePrefix();
 
   const closeTooltips = (evt) => {
     const tooltipNode = document?.querySelectorAll(`.${prefix}--tooltip--a11y`);
@@ -67,7 +67,6 @@ const Button = React.forwardRef(function Button(
   const handleFocus = (evt) => {
     if (hasIconOnly) {
       closeTooltips(evt);
-      setIsHovered(!isHovered);
       setIsFocused(true);
       setAllowTooltipVisibility(true);
     }
@@ -83,7 +82,6 @@ const Button = React.forwardRef(function Button(
 
   const handleMouseEnter = (evt) => {
     if (hasIconOnly) {
-      setIsHovered(true);
       tooltipTimeout.current && clearTimeout(tooltipTimeout.current);
 
       if (evt.target === tooltipRef.current) {
@@ -142,8 +140,8 @@ const Button = React.forwardRef(function Button(
     [`${prefix}--btn--${kind}`]: kind,
     [`${prefix}--btn--disabled`]: disabled,
     [`${prefix}--btn--expressive`]: isExpressive,
-    [`${prefix}--tooltip--hidden`]: hasIconOnly && !allowTooltipVisibility,
     [`${prefix}--tooltip--visible`]: isHovered,
+    [`${prefix}--tooltip--hidden`]: hasIconOnly && !allowTooltipVisibility,
     [`${prefix}--btn--icon-only`]: hasIconOnly,
     [`${prefix}--btn--selected`]: hasIconOnly && isSelected && kind === 'ghost',
     [`${prefix}--tooltip__trigger`]: hasIconOnly,
@@ -214,6 +212,7 @@ const Button = React.forwardRef(function Button(
     component = 'a';
     otherProps = anchorProps;
   }
+
   return React.createElement(
     component,
     {
@@ -221,7 +220,7 @@ const Button = React.forwardRef(function Button(
       onMouseLeave: composeEventHandlers([onMouseLeave, handleMouseLeave]),
       onFocus: composeEventHandlers([onFocus, handleFocus]),
       onBlur: composeEventHandlers([onBlur, handleBlur]),
-      onClick: composeEventHandlers([handleClick, onClick]),
+      onClick: composeEventHandlers([onClick, handleClick]),
       ...other,
       ...commonProps,
       ...otherProps,

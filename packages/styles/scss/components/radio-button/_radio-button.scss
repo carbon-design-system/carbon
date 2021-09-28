@@ -9,7 +9,7 @@
 // Radio
 //-----------------------------
 
-@use '../../theme' as *;
+@use '../../compat/theme' as *;
 @use '../../type';
 @use '../form';
 @use '../../utilities/focus-outline' as *;
@@ -107,13 +107,13 @@ $radio-border-width: 1px !default;
 
       // Allow the selected button to be seen in Windows HCM for IE/Edge
       @media screen and (-ms-high-contrast: active) {
-        // Utilize a system color variable to accomodate any user HCM theme
+        // Utilize a system color variable to accommodate any user HCM theme
         background-color: WindowText;
       }
 
       // Firefox only HCM solution
       @media screen and (prefers-contrast) {
-        // Utilize a system color variable to accomodate any user HCM theme
+        // Utilize a system color variable to accommodate any user HCM theme
         border: 2px solid WindowText;
       }
     }

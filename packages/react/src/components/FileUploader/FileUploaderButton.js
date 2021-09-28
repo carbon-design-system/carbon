@@ -5,15 +5,13 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { settings } from 'carbon-components';
 import cx from 'classnames';
 import PropTypes from 'prop-types';
 import React, { useRef, useState } from 'react';
 import { matches, keys } from '../../internal/keyboard';
 import { ButtonKinds } from '../../prop-types/types';
 import uid from '../../tools/uniqueId';
-
-const { prefix } = settings;
+import { usePrefix } from '../../internal/usePrefix';
 
 function noop() {}
 
@@ -33,6 +31,7 @@ function FileUploaderButton({
   tabIndex = 0,
   ...other
 }) {
+  const prefix = usePrefix();
   const [labelText, setLabelText] = useState(ownerLabelText);
   const [prevOwnerLabelText, setPrevOwnerLabelText] = useState(ownerLabelText);
   const { current: inputId } = useRef(id || uid());
@@ -79,12 +78,13 @@ function FileUploaderButton({
       {/* eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions */}
       <label
         tabIndex={disabled ? -1 : tabIndex || 0}
-        aria-disabled={disabled}
         className={classes}
         onKeyDown={onKeyDown}
         htmlFor={inputId}
         {...other}>
-        <span role={role}>{labelText}</span>
+        <span role={role} aria-disabled={disabled}>
+          {labelText}
+        </span>
       </label>
       <input
         className={`${prefix}--visually-hidden`}

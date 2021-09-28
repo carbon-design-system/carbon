@@ -8,11 +8,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
-import { settings } from 'carbon-components';
-
-const { prefix } = settings;
+import { usePrefix } from '../../internal/usePrefix';
 
 const SkeletonPlaceholder = ({ className, ...other }) => {
+  const prefix = usePrefix();
   const skeletonPlaceholderClasses = classNames({
     [`${prefix}--skeleton__placeholder`]: true,
     [className]: className,

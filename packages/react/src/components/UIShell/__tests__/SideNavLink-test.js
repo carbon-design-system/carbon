@@ -8,8 +8,8 @@
 import React from 'react';
 import { mount } from 'enzyme';
 import SideNavLink from '../SideNavLink';
-import { settings } from 'carbon-components';
-const { prefix } = settings;
+
+const prefix = 'bx';
 
 describe('SideNavLink', () => {
   let mockProps, wrapper;
@@ -34,7 +34,7 @@ describe('SideNavLink', () => {
     expect(active).toMatchSnapshot();
   });
 
-  it('should include a css class to render the large varient is large prop is set', () => {
+  it('should include a css class to render the large variant is large prop is set', () => {
     wrapper = mount(<SideNavLink {...mockProps} />);
     expect(
       wrapper.find('li').hasClass(`${prefix}--side-nav__item--large`)

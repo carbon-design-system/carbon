@@ -5,13 +5,12 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { settings } from 'carbon-components';
 import cx from 'classnames';
 import PropTypes from 'prop-types';
 import React, { useRef } from 'react';
 import setupGetInstanceId from '../../tools/setupGetInstanceId';
+import { usePrefix } from '../../internal/usePrefix';
 
-const { prefix } = settings;
 const getInstanceId = setupGetInstanceId();
 
 function Loading({
@@ -23,6 +22,7 @@ function Loading({
   description,
   ...rest
 }) {
+  const prefix = usePrefix();
   const { current: instanceId } = useRef(getInstanceId());
   const loadingClassName = cx(customClassName, {
     [`${prefix}--loading`]: true,
@@ -34,7 +34,6 @@ function Loading({
     [`${prefix}--loading-overlay--stop`]: !active,
   });
   const loadingId = id || `loading-id-${instanceId}`;
-  const spinnerRadius = small ? '42' : '44';
 
   const loading = (
     <div
@@ -53,14 +52,14 @@ function Loading({
             className={`${prefix}--loading__background`}
             cx="50%"
             cy="50%"
-            r={spinnerRadius}
+            r="44"
           />
         ) : null}
         <circle
           className={`${prefix}--loading__stroke`}
           cx="50%"
           cy="50%"
-          r={spinnerRadius}
+          r="44"
         />
       </svg>
     </div>

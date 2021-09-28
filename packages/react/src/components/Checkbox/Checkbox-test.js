@@ -12,7 +12,6 @@ import { mount } from 'enzyme';
 import { settings } from 'carbon-components';
 import { cleanup, render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import '@testing-library/jest-dom';
 
 const { prefix } = settings;
 
@@ -115,6 +114,13 @@ describe('Checkbox', () => {
 describe('refs', () => {
   let container;
 
+  afterEach(() => {
+    if (container && container.parentNode) {
+      container.parentNode.removeChild(container);
+    }
+    container = null;
+  });
+
   it('should accept refs', () => {
     class MyComponent extends React.Component {
       constructor(props) {
@@ -166,13 +172,6 @@ describe('refs', () => {
     }
     const wrapper = mount(<MyComponent />);
     expect(wrapper.find('input').getDOMNode().indeterminate).toBe(true);
-  });
-
-  afterEach(() => {
-    if (container && container.parentNode) {
-      container.parentNode.removeChild(container);
-    }
-    container = null;
   });
 });
 

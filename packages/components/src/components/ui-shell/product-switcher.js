@@ -168,7 +168,7 @@ class ProductSwitcher extends NavigationMenuPanel {
    * If `options` is specified in the constructor,
    * {@linkcode ProductSwitcher.create .create()}, or
    * {@linkcode ProductSwitcher.init .init()},
-   * properties in this object are overriden for the instance being create and
+   * properties in this object are overridden for the instance being create and
    * how {@linkcode ProductSwitcher.init .init()} works.
    * @member ProductSwitcher.options
    * @type {object}

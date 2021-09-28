@@ -7,7 +7,6 @@
 
 import React, { useRef } from 'react';
 import { useSelect } from 'downshift';
-import { settings } from 'carbon-components';
 import cx from 'classnames';
 import PropTypes from 'prop-types';
 import {
@@ -19,8 +18,8 @@ import ListBox, { PropTypes as ListBoxPropTypes } from '../ListBox';
 import { mapDownshiftProps } from '../../tools/createPropAdapter';
 import mergeRefs from '../../tools/mergeRefs';
 import deprecate from '../../prop-types/deprecate';
-
-const { prefix } = settings;
+import { useFeatureFlag } from '../FeatureFlags';
+import { usePrefix } from '../../internal/usePrefix';
 
 const defaultItemToString = (item) => {
   if (typeof item === 'string') {
@@ -60,6 +59,7 @@ const Dropdown = React.forwardRef(function Dropdown(
   },
   ref
 ) {
+  const prefix = usePrefix();
   const selectProps = mapDownshiftProps({
     ...downshiftProps,
     items,
@@ -86,16 +86,22 @@ const Dropdown = React.forwardRef(function Dropdown(
   const inline = type === 'inline';
   const showWarning = !invalid && warn;
 
-  const className = cx(`${prefix}--dropdown`, containerClassName, {
-    [`${prefix}--dropdown--invalid`]: invalid,
-    [`${prefix}--dropdown--warning`]: showWarning,
-    [`${prefix}--dropdown--open`]: isOpen,
-    [`${prefix}--dropdown--inline`]: inline,
-    [`${prefix}--dropdown--disabled`]: disabled,
-    [`${prefix}--dropdown--light`]: light,
-    [`${prefix}--dropdown--${size}`]: size,
-    [`${prefix}--list-box--up`]: direction === 'top',
-  });
+  const enabled = useFeatureFlag('enable-v11-release');
+
+  const className = cx(
+    `${prefix}--dropdown`,
+    [enabled ? null : containerClassName],
+    {
+      [`${prefix}--dropdown--invalid`]: invalid,
+      [`${prefix}--dropdown--warning`]: showWarning,
+      [`${prefix}--dropdown--open`]: isOpen,
+      [`${prefix}--dropdown--inline`]: inline,
+      [`${prefix}--dropdown--disabled`]: disabled,
+      [`${prefix}--dropdown--light`]: light,
+      [`${prefix}--dropdown--${size}`]: size,
+      [`${prefix}--list-box--up`]: direction === 'top',
+    }
+  );
 
   const titleClasses = cx(`${prefix}--label`, {
     [`${prefix}--label--disabled`]: disabled,
@@ -109,6 +115,7 @@ const Dropdown = React.forwardRef(function Dropdown(
   const wrapperClasses = cx(
     `${prefix}--dropdown__wrapper`,
     `${prefix}--list-box__wrapper`,
+    [enabled ? containerClassName : null],
     {
       [`${prefix}--dropdown__wrapper--inline`]: inline,
       [`${prefix}--list-box__wrapper--inline`]: inline,
@@ -163,6 +170,7 @@ const Dropdown = React.forwardRef(function Dropdown(
           className={`${prefix}--list-box__field`}
           disabled={disabled}
           aria-disabled={disabled}
+          title={selectedItem ? itemToString(selectedItem) : label}
           {...toggleButtonProps}
           ref={mergeRefs(toggleButtonProps.ref, ref)}>
           <span className={`${prefix}--list-box__label`}>
@@ -259,6 +267,7 @@ Dropdown.propTypes = {
   initialSelectedItem: PropTypes.oneOfType([
     PropTypes.object,
     PropTypes.string,
+    PropTypes.number,
   ]),
 
   /**
@@ -282,7 +291,7 @@ Dropdown.propTypes = {
 
   /**
    * Function to render items as custom components instead of strings.
-   * Defaults to null and is overriden by a getter
+   * Defaults to null and is overridden by a getter
    */
   itemToElement: PropTypes.func,
 
@@ -312,14 +321,18 @@ Dropdown.propTypes = {
 
   /**
    * `onChange` is a utility for this controlled component to communicate to a
-   * consuming component what kind of internal state changes are occuring.
+   * consuming component what kind of internal state changes are occurring.
    */
   onChange: PropTypes.func,
 
   /**
    * In the case you want to control the dropdown selection entirely.
    */
-  selectedItem: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
+  selectedItem: PropTypes.oneOfType([
+    PropTypes.object,
+    PropTypes.string,
+    PropTypes.number,
+  ]),
 
   /**
    * Specify the size of the ListBox. Currently supports either `sm`, `md` or `lg` as an option.

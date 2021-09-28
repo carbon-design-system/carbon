@@ -50,7 +50,6 @@ exports[`HeaderMenu should render 1`] = `
       }
     }
     menuLinkName="test"
-    renderMenuContent={[Function]}
     tabIndex={-1}
   >
     <li
@@ -58,6 +57,7 @@ exports[`HeaderMenu should render 1`] = `
       onBlur={[Function]}
       onClick={[Function]}
       onKeyDown={[Function]}
+      tabIndex={-1}
     >
       <a
         aria-expanded={false}
@@ -69,43 +69,41 @@ exports[`HeaderMenu should render 1`] = `
         tabIndex={0}
       >
         test
-        <defaultRenderMenuContent>
-          <ForwardRef(ChevronDown16)
+        <ForwardRef(ChevronDown16)
+          className="bx--header__menu-arrow"
+        >
+          <Icon
             className="bx--header__menu-arrow"
+            fill="currentColor"
+            height={16}
+            preserveAspectRatio="xMidYMid meet"
+            viewBox="0 0 16 16"
+            width={16}
+            xmlns="http://www.w3.org/2000/svg"
           >
-            <Icon
+            <svg
+              aria-hidden={true}
               className="bx--header__menu-arrow"
               fill="currentColor"
+              focusable="false"
               height={16}
               preserveAspectRatio="xMidYMid meet"
               viewBox="0 0 16 16"
               width={16}
               xmlns="http://www.w3.org/2000/svg"
             >
-              <svg
-                aria-hidden={true}
-                className="bx--header__menu-arrow"
-                fill="currentColor"
-                focusable="false"
-                height={16}
-                preserveAspectRatio="xMidYMid meet"
-                viewBox="0 0 16 16"
-                width={16}
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  d="M8 11L3 6 3.7 5.3 8 9.6 12.3 5.3 13 6z"
-                />
-              </svg>
-            </Icon>
-          </ForwardRef(ChevronDown16)>
-        </defaultRenderMenuContent>
+              <path
+                d="M8 11L3 6 3.7 5.3 8 9.6 12.3 5.3 13 6z"
+              />
+            </svg>
+          </Icon>
+        </ForwardRef(ChevronDown16)>
       </a>
       <ul
         aria-label="Accessibility label"
         className="bx--header__menu"
       >
-        <ForwardRef(HeaderMenuItem)
+        <HeaderMenuItem
           href="/a"
           key=".0"
         >
@@ -129,8 +127,8 @@ exports[`HeaderMenu should render 1`] = `
               </a>
             </Link>
           </li>
-        </ForwardRef(HeaderMenuItem)>
-        <ForwardRef(HeaderMenuItem)
+        </HeaderMenuItem>
+        <HeaderMenuItem
           href="/b"
           key=".1"
         >
@@ -154,8 +152,8 @@ exports[`HeaderMenu should render 1`] = `
               </a>
             </Link>
           </li>
-        </ForwardRef(HeaderMenuItem)>
-        <ForwardRef(HeaderMenuItem)
+        </HeaderMenuItem>
+        <HeaderMenuItem
           href="/c"
           key=".2"
         >
@@ -179,7 +177,7 @@ exports[`HeaderMenu should render 1`] = `
               </a>
             </Link>
           </li>
-        </ForwardRef(HeaderMenuItem)>
+        </HeaderMenuItem>
       </ul>
     </li>
   </HeaderMenu>

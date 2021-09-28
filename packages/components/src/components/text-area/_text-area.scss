@@ -31,9 +31,9 @@
     min-height: rem(40px);
     padding: rem(11px) $carbon--spacing-05;
     border: none;
-    border-bottom: 1px solid $border-strong;
-    background-color: $field;
-    color: $text-primary;
+    border-bottom: 1px solid $ui-04;
+    background-color: $field-01;
+    color: $text-01;
     resize: vertical;
     transition: background-color $duration--fast-01 motion(standard, productive),
       outline $duration--fast-01 motion(standard, productive);
@@ -49,7 +49,6 @@
     @include type-style('body-long-01');
   }
 
-  // V11: Possibly deprecate
   .#{$prefix}--text-area--light {
     background-color: $field-02;
   }
@@ -68,7 +67,7 @@
     position: absolute;
     top: $carbon--spacing-04;
     right: $carbon--spacing-05;
-    fill: $support-error;
+    fill: $support-01;
   }
 
   //-----------------------------
@@ -76,17 +75,16 @@
   //-----------------------------
   .#{$prefix}--text-area:disabled {
     border-bottom: 1px solid transparent;
-    background-color: $field-disabled;
-    color: $text-disabled;
+    background-color: $disabled-01;
+    color: $disabled-02;
     cursor: not-allowed;
     outline: none;
   }
 
   .#{$prefix}--text-area:disabled::placeholder {
-    color: $text-disabled;
+    color: $disabled-02;
   }
 
-  // V11: Possibly deprecate
   .#{$prefix}--text-area.#{$prefix}--text-area--light:disabled {
     background-color: $field-02;
   }

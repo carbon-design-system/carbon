@@ -9,9 +9,8 @@ import React from 'react';
 import { mount } from 'enzyme';
 import { SideNavMenu } from '../SideNavMenu';
 import { SideNavMenuItem } from '../';
-import { settings } from 'carbon-components';
-const { prefix } = settings;
 
+const prefix = 'bx';
 describe('SideNavMenu', () => {
   let mockProps, wrapper;
 
@@ -101,7 +100,7 @@ describe('SideNavMenu', () => {
     ).toBe(true);
   });
 
-  it('should include a css class to render the large varient is large prop is set', () => {
+  it('should include a css class to render the large variant is large prop is set', () => {
     wrapper = mount(<SideNavMenu {...mockProps} />);
     expect(
       wrapper.find('li').hasClass(`${prefix}--side-nav__item--large`)

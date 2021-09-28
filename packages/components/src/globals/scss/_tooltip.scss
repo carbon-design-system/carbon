@@ -41,9 +41,9 @@
     rem(8px) rem(16px),
     rem(3px) rem(16px)
   );
-  background-color: $background-inverse;
+  background-color: $inverse-02;
   border-radius: rem(2px);
-  color: $text-inverse;
+  color: $inverse-01;
   font-weight: 400;
   text-align: left;
   transform: translateX(-50%);
@@ -289,25 +289,25 @@
     @if ($position == 'top') {
       top: -$caret-spacing;
       border-width: rem(5px) rem(4px) 0 rem(4px);
-      border-color: $background-inverse transparent transparent transparent;
+      border-color: $inverse-02 transparent transparent transparent;
       transform: translate(-50%, -100%);
     }
     @if ($position == 'right') {
       right: -$caret-spacing;
       border-width: rem(4px) rem(5px) rem(4px) 0;
-      border-color: transparent $background-inverse transparent transparent;
+      border-color: transparent $inverse-02 transparent transparent;
       transform: translate(100%, -50%);
     }
     @if ($position == 'bottom') {
       bottom: -$caret-spacing;
       border-width: 0 rem(4px) rem(5px) rem(4px);
-      border-color: transparent transparent $background-inverse transparent;
+      border-color: transparent transparent $inverse-02 transparent;
       transform: translate(-50%, 100%);
     }
     @if ($position == 'left') {
       left: -$caret-spacing;
       border-width: rem(4px) 0 rem(4px) rem(5px);
-      border-color: transparent transparent transparent $background-inverse;
+      border-color: transparent transparent transparent $inverse-02;
       transform: translate(-100%, -50%);
     }
   }

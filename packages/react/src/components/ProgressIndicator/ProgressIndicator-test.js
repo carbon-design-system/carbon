@@ -9,9 +9,8 @@ import React from 'react';
 import { ProgressIndicator, ProgressStep } from '../ProgressIndicator';
 import ProgressIndicatorSkeleton from '../ProgressIndicator/ProgressIndicator.Skeleton';
 import { shallow, mount } from 'enzyme';
-import { settings } from 'carbon-components';
 
-const { prefix } = settings;
+const prefix = 'bx';
 
 describe('ProgressIndicator', () => {
   describe('Renders as expected', () => {
@@ -52,11 +51,6 @@ describe('ProgressIndicator', () => {
 
     it('should be a ul element', () => {
       expect(list.find('ul').length).toEqual(1);
-    });
-
-    it('should render with the appropriate classes', () => {
-      expect(list.hasClass(`${prefix}--progress`)).toEqual(true);
-      expect(list.hasClass('some-class')).toEqual(true);
     });
 
     it('should render children as expected', () => {
@@ -152,7 +146,7 @@ describe('ProgressIndicator', () => {
       });
 
       describe('incomplete', () => {
-        it('should render any incompleted ProgressSteps with correct className', () => {
+        it('should render any incomplete ProgressSteps with correct className', () => {
           expect(
             mountedList
               .find(ProgressStep)
@@ -161,7 +155,7 @@ describe('ProgressIndicator', () => {
               .hasClass(`${prefix}--progress-step--incomplete`)
           ).toEqual(true);
         });
-        it('should render any incompleted ProgressSteps with correct props', () => {
+        it('should render any incomplete ProgressSteps with correct props', () => {
           expect(list.find(ProgressStep).at(5).prop('complete')).toBe(false);
         });
 

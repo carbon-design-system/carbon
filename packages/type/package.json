@@ -1,7 +1,7 @@
 {
   "name": "@carbon/type",
   "description": "Typography for digital and software products using the Carbon Design System",
-  "version": "10.30.0",
+  "version": "10.36.0",
   "license": "Apache-2.0",
   "main": "lib/index.js",
   "module": "es/index.js",
@@ -16,7 +16,8 @@
     "lib",
     "scss",
     "src",
-    "umd"
+    "umd",
+    "index.scss"
   ],
   "keywords": [
     "eyeglass-module",
@@ -37,11 +38,11 @@
   },
   "dependencies": {
     "@carbon/import-once": "^10.6.0",
-    "@carbon/layout": "^10.26.0"
+    "@carbon/layout": "^10.32.0"
   },
   "devDependencies": {
-    "@carbon/cli": "^10.25.0",
-    "@carbon/test-utils": "^10.16.0",
+    "@carbon/cli": "^10.29.0",
+    "@carbon/test-utils": "^10.19.0",
     "change-case": "^4.1.1",
     "rimraf": "^3.0.0"
   },

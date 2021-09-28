@@ -30,13 +30,13 @@ $input-label-weight: 400 !default;
 /// @type Color
 /// @access public
 /// @group global-themes
-$disabled: $text-disabled !default;
+$disabled: $disabled-02 !default;
 
 /// @type Color
 /// @access public
 /// @group global-themes
 /// @deprecated
-$disabled-background-color: $layer-disabled !default;
+$disabled-background-color: $disabled-01 !default;
 
 /// @type Color
 /// @access public
@@ -67,7 +67,7 @@ $link-inverse-color: #6ea6ff !default;
 /// @type Color
 /// @access public
 /// @group tooltip
-$tooltip-background-color: $background-inverse !default;
+$tooltip-background-color: $inverse-02 !default;
 
 // Button
 
@@ -191,13 +191,13 @@ $checkbox-border-width: 2px !default;
 /// @access public
 /// @group code-snippet
 /// @deprecated
-$snippet-background-color: $field !default;
+$snippet-background-color: $field-01 !default;
 
 /// @type Color
 /// @access public
 /// @group code-snippet
 /// TODO: Define for experimental
-$snippet-border-color: $border-subtle !default;
+$snippet-border-color: $ui-03 !default;
 
 // Content Switcher
 
@@ -209,12 +209,12 @@ $content-switcher-border-radius: 0 !default;
 /// @type Number
 /// @access public
 /// @group content-switcher
-$content-switcher-option-border: 1px solid $border-interactive !default;
+$content-switcher-option-border: 1px solid $brand-01 !default;
 
 /// @type Color
 /// @access public
 /// @group content-switcher
-$content-switcher-divider: $border-subtle !default;
+$content-switcher-divider: $ui-03 !default;
 
 // Data Table
 
@@ -226,7 +226,7 @@ $data-table-heading-transform: uppercase !default;
 /// @type Value
 /// @access public
 /// @group data-table
-$data-table-heading-border-bottom: 1px solid $border-interactive !default;
+$data-table-heading-border-bottom: 1px solid $brand-01 !default;
 
 /// @type Number
 /// @access public
@@ -236,12 +236,12 @@ $data-table-row-height: 2rem !default;
 /// @type Color
 /// @access public
 /// @group data-table
-$data-table-zebra-color: $layer-accent !default;
+$data-table-zebra-color: $ui-02 !default;
 
 /// @type Color
 /// @access public
 /// @group data-table
-$data-table-column-hover: $layer-selected-hover !default;
+$data-table-column-hover: $hover-selected-ui !default;
 
 // Date Picker
 
@@ -256,13 +256,13 @@ $date-picker-in-range-background-color: $ibm-color__blue-20 !default;
 /// @type Color
 /// @access public
 /// @group modal
-$modal-border-top: 4px solid $border-interactive !default;
+$modal-border-top: $brand-01 4px solid !default;
 
 /// @type Color
 /// @access public
 /// @group modal
 /// @deprecated
-$modal-footer-background-color: $layer-accent !default;
+$modal-footer-background-color: $ui-03 !default;
 
 // Notification
 
@@ -316,12 +316,12 @@ $progress-indicator-line-offset: 0.625rem !default;
 /// @type Color
 /// @access public
 /// @group copy-button
-$copy-active: $layer-active !default;
+$copy-active: $active-ui !default;
 
 /// @type Color
 /// @access public
 /// @group copy-button
-$copy-btn-feedback: $background-inverse !default;
+$copy-btn-feedback: $inverse-02 !default;
 
 // Radio Button
 
@@ -347,22 +347,22 @@ $structured-list-text-transform: none !default;
 /// @type Value
 /// @access public
 /// @group tabs
-$tab-underline-color: 2px solid $border-subtle !default;
+$tab-underline-color: 2px solid $ui-03 !default;
 
 /// @type Value
 /// @access public
 /// @group tabs
-$tab-underline-color-hover: 2px solid $border-strong !default;
+$tab-underline-color-hover: 2px solid $ui-04 !default;
 
 /// @type Color
 /// @access public
 /// @group tabs
-$tab-text-disabled: $text-disabled !default;
+$tab-text-disabled: $disabled-02 !default;
 
 /// @type Value
 /// @access public
 /// @group tabs
-$tab-underline-disabled: 2px solid $border-disabled !default;
+$tab-underline-disabled: 2px solid $disabled-01 !default;
 
 // Skeleton Loading
 
@@ -370,7 +370,7 @@ $tab-underline-disabled: 2px solid $border-disabled !default;
 /// @access public
 /// @group skeleton
 /// TODO: Remove this in next major release
-$skeleton: $skeleton-background !default;
+$skeleton: $skeleton-01 !default;
 
 // Light UI
 
@@ -408,5 +408,4 @@ $skeleton: $skeleton-background !default;
 /// @type Color
 /// @access public
 /// @group light-ui
-// V11: No longer needed
 $hover-ui-light: get-light-value('ui-01');

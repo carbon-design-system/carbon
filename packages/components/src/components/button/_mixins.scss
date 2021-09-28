@@ -41,10 +41,10 @@
   &.#{$prefix}--btn--disabled,
   &.#{$prefix}--btn--disabled:hover,
   &.#{$prefix}--btn--disabled:focus {
-    border-color: $button-disabled;
-    background: $button-disabled;
+    border-color: $disabled-02;
+    background: $disabled-02;
     box-shadow: none;
-    color: $text-on-color-disabled;
+    color: $disabled-03;
     cursor: not-allowed;
   }
 
@@ -81,7 +81,7 @@
   &:focus {
     border-color: $focus;
     box-shadow: inset 0 0 0 $button-outline-width $focus,
-      inset 0 0 0 $button-border-width $background;
+      inset 0 0 0 $button-border-width $ui-background;
   }
 
   &:active {

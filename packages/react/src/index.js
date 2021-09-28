@@ -4,7 +4,6 @@
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
-
 export Accordion from './components/Accordion';
 export AccordionItem from './components/AccordionItem';
 export { AspectRatio } from './components/AspectRatio';
@@ -59,6 +58,7 @@ export FileUploader, {
   FileUploaderDropContainer,
   FileUploaderItem,
 } from './components/FileUploader';
+export FilterableMultiSelect from './components/FilterableMultiSelect';
 export Form from './components/Form';
 export FluidForm from './components/FluidForm';
 export FormGroup from './components/FormGroup';
@@ -86,6 +86,10 @@ export OverflowMenu from './components/OverflowMenu';
 export OverflowMenuItem from './components/OverflowMenuItem';
 export Pagination from './components/Pagination';
 export PaginationNav from './components/PaginationNav';
+export {
+  ControlledPasswordInput,
+  PasswordInput,
+} from './components/PasswordInput';
 export PrimaryButton from './components/PrimaryButton';
 export {
   ProgressIndicator,
@@ -226,3 +230,4 @@ export {
   Section as unstable_Section,
 } from './components/Heading';
 export { default as unstable_ProgressBar } from './components/ProgressBar';
+export { usePrefix as unstable_usePrefix } from './internal/usePrefix';

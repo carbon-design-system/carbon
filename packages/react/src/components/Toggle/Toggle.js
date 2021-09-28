@@ -8,11 +8,10 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import classNames from 'classnames';
-import { settings } from 'carbon-components';
 import setupGetInstanceId from '../../tools/setupGetInstanceId';
 import { keys, match } from '../../internal/keyboard';
+import { PrefixContext } from '../../internal/usePrefix';
 
-const { prefix } = settings;
 const getInstanceId = setupGetInstanceId();
 
 class Toggle extends React.Component {
@@ -70,6 +69,8 @@ class Toggle extends React.Component {
     toggled: PropTypes.bool,
   };
 
+  static contextType = PrefixContext;
+
   static defaultProps = {
     defaultToggled: false,
     ['aria-label']: 'Toggle',
@@ -79,6 +80,7 @@ class Toggle extends React.Component {
   };
 
   render() {
+    const prefix = this.context;
     const {
       className,
       defaultToggled,
@@ -100,7 +102,7 @@ class Toggle extends React.Component {
     });
 
     const toggleClasses = classNames(`${prefix}--toggle-input`, {
-      [`${prefix}--toggle-input--small`]: size,
+      [`${prefix}--toggle-input--small`]: size === 'sm',
     });
 
     const checkedProps = {};

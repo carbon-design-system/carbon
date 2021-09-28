@@ -127,17 +127,13 @@
   }
 
   .#{$prefix}--tag--high-contrast {
-    @include tag-theme(
-      $background-inverse,
-      $text-inverse,
-      $background-inverse-hover
-    );
+    @include tag-theme($inverse-02, $inverse-01, $inverse-hover-ui);
   }
 
   .#{$prefix}--tag--disabled,
   .#{$prefix}--tag--filter.#{$prefix}--tag--disabled,
   .#{$prefix}--tag--interactive.#{$prefix}--tag--disabled {
-    @include tag-theme($layer-disabled, $text-disabled);
+    @include tag-theme($disabled-01, $disabled-02);
 
     &:hover {
       cursor: not-allowed;
@@ -224,7 +220,7 @@
   }
 
   .#{$prefix}--tag--high-contrast .#{$prefix}--tag__close-icon:focus {
-    box-shadow: inset 0 0 0 1px $focus-inverse;
+    box-shadow: inset 0 0 0 1px $inverse-focus-ui;
   }
 
   .#{$prefix}--tag--filter.#{$prefix}--tag--disabled
@@ -233,7 +229,7 @@
   }
 
   .#{$prefix}--tag--filter.#{$prefix}--tag--disabled svg {
-    fill: $icon-disabled;
+    fill: $disabled-02;
   }
 
   // small tags
@@ -255,10 +251,7 @@
   // Skeleton state
   .#{$prefix}--tag.#{$prefix}--skeleton {
     @include skeleton;
-    @include tag-theme(
-      $bg-color: $skeleton-background,
-      $text-color: $text-primary
-    );
+    @include tag-theme($bg-color: $skeleton-01, $text-color: $text-01);
 
     overflow: hidden;
     width: rem(60px);

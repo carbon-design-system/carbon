@@ -1,7 +1,7 @@
 {
   "name": "@carbon/grid",
   "description": "Grid for digital and software products using the Carbon Design System",
-  "version": "10.30.0",
+  "version": "10.36.0",
   "license": "Apache-2.0",
   "repository": {
     "type": "git",
@@ -11,7 +11,8 @@
   "bugs": "https://github.com/carbon-design-system/carbon/issues",
   "files": [
     "css",
-    "scss"
+    "scss",
+    "index.scss"
   ],
   "keywords": [
     "eyeglass-module",
@@ -32,10 +33,10 @@
   },
   "dependencies": {
     "@carbon/import-once": "^10.6.0",
-    "@carbon/layout": "^10.26.0"
+    "@carbon/layout": "^10.32.0"
   },
   "devDependencies": {
-    "@carbon/cli": "^10.25.0",
+    "@carbon/cli": "^10.29.0",
     "rimraf": "^3.0.0"
   },
   "eyeglass": {

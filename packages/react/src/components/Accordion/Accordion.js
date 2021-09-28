@@ -5,12 +5,10 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { settings } from 'carbon-components';
 import cx from 'classnames';
+import { usePrefix } from '../../internal/usePrefix';
 import PropTypes from 'prop-types';
 import React from 'react';
-
-const { prefix } = settings;
 
 function Accordion({
   align,
@@ -20,6 +18,7 @@ function Accordion({
   size,
   ...rest
 }) {
+  const prefix = usePrefix();
   const className = cx(`${prefix}--accordion`, customClassName, {
     [`${prefix}--accordion--${align}`]: align,
     [`${prefix}--accordion--${size}`]: size,

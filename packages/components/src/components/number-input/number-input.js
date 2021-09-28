@@ -99,7 +99,7 @@ class NumberInput extends mixin(
    * The component options.
    * If `options` is specified in the constructor,
    * {@linkcode NumberInput.create .create()}, or {@linkcode NumberInput.init .init()},
-   * properties in this object are overriden for the instance being create and how {@linkcode NumberInput.init .init()} works.
+   * properties in this object are overridden for the instance being create and how {@linkcode NumberInput.init .init()} works.
    * @member NumberInput.options
    * @type {object}
    * @property {string} selectorInit The CSS selector to find number input UIs.

@@ -31,13 +31,15 @@
     width: 100%;
     min-width: rem(200px);
     max-width: rem(640px);
+    padding: $spacing-05 0;
     margin: 0 $carbon--spacing-05;
+    cursor: pointer;
   }
 
   .#{$prefix}--slider__range-label {
     @include type-style('code-02');
 
-    color: $text-primary;
+    color: $text-01;
     white-space: nowrap;
 
     &:last-of-type {
@@ -49,8 +51,7 @@
     position: absolute;
     width: 100%;
     height: rem(2px);
-    background: $border-subtle;
-    cursor: pointer;
+    background: $ui-03;
     transform: translate(0%, -50%);
   }
 
@@ -61,7 +62,7 @@
     display: inline-block;
     width: rem(2px);
     height: rem(4px);
-    background: $border-subtle;
+    background: $ui-03;
     content: '';
     transform: translate(-50%, 0);
   }
@@ -70,7 +71,7 @@
     position: absolute;
     width: 100%;
     height: rem(2px);
-    background: $layer-selected-inverse;
+    background: $ui-05;
     pointer-events: none;
     transform: translate(0%, -50%);
     transform-origin: left;
@@ -80,13 +81,11 @@
   .#{$prefix}--slider__thumb {
     position: absolute;
     z-index: 3;
-    top: 0;
     width: rem(14px);
     height: rem(14px);
-    background: $layer-selected-inverse;
+    background: $ui-05;
     border-radius: 50%;
     box-shadow: inset 0 0 0 1px transparent, inset 0 0 0 2px transparent;
-    cursor: pointer;
     outline: none;
     transform: translate(-50%, -50%);
     transition: transform $duration--fast-02 motion(standard, productive),
@@ -99,14 +98,14 @@
     }
 
     &:focus {
-      background-color: $interactive;
-      box-shadow: inset 0 0 0 2px $interactive, inset 0 0 0 3px $layer;
+      background-color: $interactive-04;
+      box-shadow: inset 0 0 0 2px $interactive-04, inset 0 0 0 3px $ui-01;
       // 20px / 14px = 1.4286
       transform: translate(-50%, -50%) scale(1.4286);
     }
 
     &:active {
-      box-shadow: inset 0 0 0 2px $interactive;
+      box-shadow: inset 0 0 0 2px $interactive-04;
       transform: translate(-50%, -50%) scale(1.4286);
     }
   }
@@ -128,19 +127,27 @@
     }
   }
 
+  .#{$prefix}--slider-text-input.#{$prefix}--text-input--invalid {
+    padding-right: 1rem;
+  }
+
   .#{$prefix}--slider__thumb:focus ~ .#{$prefix}--slider__filled-track {
-    background-color: $interactive;
+    background-color: $interactive-04;
   }
 
   // Disabled state
   .#{$prefix}--label--disabled
     ~ .#{$prefix}--slider-container
     > .#{$prefix}--slider__range-label {
-    color: $text-disabled;
+    color: $disabled-02;
+  }
+
+  .#{$prefix}--slider--disabled.#{$prefix}--slider {
+    cursor: not-allowed;
   }
 
   .#{$prefix}--slider--disabled .#{$prefix}--slider__thumb {
-    background-color: $border-subtle;
+    background-color: $ui-03;
 
     &:hover {
       cursor: not-allowed;
@@ -148,14 +155,14 @@
     }
 
     &:focus {
-      background-color: $border-subtle;
+      background-color: $ui-03;
       box-shadow: none;
       outline: none;
       transform: translate(-50%, -50%);
     }
 
     &:active {
-      background: $border-subtle;
+      background: $ui-03;
       transform: translate(-50%, -50%);
     }
   }
@@ -165,8 +172,7 @@
   .#{$prefix}--slider--disabled
     .#{$prefix}--slider__thumb:focus
     ~ .#{$prefix}--slider__filled-track {
-    background-color: $border-subtle;
-    cursor: not-allowed;
+    background-color: $ui-03;
   }
 
   .#{$prefix}--slider--disabled
@@ -174,15 +180,15 @@
     .#{$prefix}--slider-text-input,
   .#{$prefix}--slider--disabled ~ .#{$prefix}--slider-text-input {
     border: none;
-    background-color: $field-disabled;
-    color: $text-disabled;
+    background-color: $disabled-01;
+    color: $disabled-02;
     cursor: not-allowed;
     transition: none;
 
     &:active,
     &:focus,
     &:hover {
-      color: $text-disabled;
+      color: $disabled-02;
       outline: none;
     }
   }

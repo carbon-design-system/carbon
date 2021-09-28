@@ -5,6 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+import './prefix';
 import './feature-flags';
 
 export {
@@ -86,6 +87,7 @@ export {
   RadioButton,
   RadioButtonGroup,
   Search,
+  ExpandableSearch,
   SearchFilterButton,
   SearchLayoutButton,
   SecondaryButton,
@@ -106,6 +108,7 @@ export {
   Tag,
   TextArea,
   TextInput,
+  PasswordInput,
   Tile,
   ClickableTile,
   SelectableTile,
@@ -184,16 +187,11 @@ export {
   SideNavMenuItem,
   SideNavSwitcher,
   // Experimental
+  unstable_ProgressBar,
   unstable_PageSelector,
   unstable_Pagination,
   unstable_TreeView,
   unstable_TreeNode,
-  unstable_ContextMenu,
-  unstable_ContextMenuDivider,
-  unstable_ContextMenuGroup,
-  unstable_ContextMenuItem,
-  unstable_ContextMenuRadioGroup,
-  unstable_ContextMenuSelectableItem,
   unstable_useContextMenu,
   unstable_Heading,
   unstable_Section,
@@ -204,3 +202,7 @@ export {
   Grid,
   Column,
 } from './components/Grid';
+
+export { Theme, useTheme } from './components/Theme';
+
+export { Layer } from './components/Layer';

@@ -86,7 +86,7 @@ const icons = () => {
         for (const size of metadata.sizes) {
           const match = item.assets.find((asset) => {
             if (size === 'glyph') {
-              return asset.size === undefined;
+              return asset.size === 'glyph';
             }
             return asset.size === size;
           });
@@ -101,9 +101,6 @@ const icons = () => {
 
         for (const asset of item.assets) {
           const match = metadata.sizes.find((size) => {
-            if (asset.size === undefined) {
-              return size === 'glyph';
-            }
             return size === asset.size;
           });
           if (!match) {

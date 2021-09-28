@@ -115,36 +115,4 @@ describe('@carbon/feature-flags', () => {
       expect(getValue(2)).toBe(true);
     });
   });
-
-  // it('should support default feature flags before the import', async () => {
-  // const { calls } = await render(`
-  // $feature-flags: ('test': true);
-  // @import '../scss/feature-flags';
-  // @if feature-flag-enabled('test') {
-  // $t: test(true);
-  // }
-  // `);
-  // expect(calls.length).toBe(1);
-  // expect(convert(calls[0][0])).toBe(true);
-  // });
-  // it('should support modifying flags', async () => {
-  // const { calls } = await render(`
-  // @import '../scss/feature-flags';
-  // $feature-flags: map-merge($feature-flags, (
-  // 'test': true,
-  // ));
-  // @if feature-flag-enabled('test') {
-  // $t: test('feature-flag-enabled');
-  // }
-  // $feature-flags: map-merge($feature-flags, (
-  // 'test': false,
-  // ));
-  // @if not feature-flag-enabled('test') {
-  // $t: test('feature-flag-disabled');
-  // }
-  // `);
-  // expect(calls.length).toBe(2);
-  // expect(convert(calls[0][0])).toBe('feature-flag-enabled');
-  // expect(convert(calls[1][0])).toBe('feature-flag-disabled');
-  // });
 });

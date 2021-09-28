@@ -9,9 +9,6 @@ import React from 'react';
 import ContentSwitcher from '../ContentSwitcher';
 import Switch from '../Switch';
 import { mount, shallow } from 'enzyme';
-import { settings } from 'carbon-components';
-
-const { prefix } = settings;
 
 describe('ContentSwitcher', () => {
   describe('component initial rendering', () => {
@@ -23,10 +20,6 @@ describe('ContentSwitcher', () => {
     );
 
     const children = wrapper.find(Switch);
-
-    it('should have the correct class', () => {
-      expect(wrapper.hasClass(`${prefix}--content-switcher`)).toEqual(true);
-    });
 
     it('should render children as expected', () => {
       expect(children.length).toEqual(2);
@@ -107,7 +100,7 @@ describe('ContentSwitcher', () => {
     children.first().props().onClick(mockData);
 
     it('should invoke onChange', () => {
-      expect(onChange).toBeCalledWith(mockData);
+      expect(onChange).toHaveBeenCalledWith(mockData);
     });
 
     it('should set the correct selectedIndex', () => {
@@ -141,7 +134,7 @@ describe('ContentSwitcher', () => {
     children.first().props().onKeyDown(mockData);
 
     it('should invoke onChange', () => {
-      expect(onChange).toBeCalledWith(mockData);
+      expect(onChange).toHaveBeenCalledWith(mockData);
     });
 
     it('should set the correct selectedIndex', () => {

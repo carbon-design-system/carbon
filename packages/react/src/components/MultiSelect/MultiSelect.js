@@ -6,7 +6,6 @@
  */
 
 import { WarningFilled16, WarningAltFilled16 } from '@carbon/icons-react';
-import { settings } from 'carbon-components';
 import cx from 'classnames';
 import Downshift, { useSelect } from 'downshift';
 import isEqual from 'lodash.isequal';
@@ -21,8 +20,9 @@ import setupGetInstanceId from '../../tools/setupGetInstanceId';
 import { mapDownshiftProps } from '../../tools/createPropAdapter';
 import mergeRefs from '../../tools/mergeRefs';
 import { keys, match } from '../../internal/keyboard';
+import { useFeatureFlag } from '../FeatureFlags';
+import { usePrefix } from '../../internal/usePrefix';
 
-const { prefix } = settings;
 const noop = () => {};
 const getInstanceId = setupGetInstanceId();
 const {
@@ -41,6 +41,7 @@ const MultiSelect = React.forwardRef(function MultiSelect(
     className: containerClassName,
     id,
     items,
+    itemToElement,
     itemToString,
     titleText,
     helperText,
@@ -69,6 +70,7 @@ const MultiSelect = React.forwardRef(function MultiSelect(
   },
   ref
 ) {
+  const prefix = usePrefix();
   const { current: multiSelectInstanceId } = useRef(getInstanceId());
   const [highlightedIndex, setHighlightedIndex] = useState(null);
   const [isOpen, setIsOpen] = useState(open);
@@ -125,9 +127,12 @@ const MultiSelect = React.forwardRef(function MultiSelect(
   const inline = type === 'inline';
   const showWarning = !invalid && warn;
 
+  const enabled = useFeatureFlag('enable-v11-release');
+
   const wrapperClasses = cx(
     `${prefix}--multi-select__wrapper`,
     `${prefix}--list-box__wrapper`,
+    [enabled ? containerClassName : null],
     {
       [`${prefix}--multi-select__wrapper--inline`]: inline,
       [`${prefix}--list-box__wrapper--inline`]: inline,
@@ -146,14 +151,21 @@ const MultiSelect = React.forwardRef(function MultiSelect(
     [`${prefix}--form__helper-text--disabled`]: disabled,
   });
 
-  const className = cx(`${prefix}--multi-select`, containerClassName, {
-    [`${prefix}--multi-select--invalid`]: invalid,
-    [`${prefix}--multi-select--warning`]: showWarning,
-    [`${prefix}--multi-select--inline`]: inline,
-    [`${prefix}--multi-select--selected`]:
-      selectedItems && selectedItems.length > 0,
-    [`${prefix}--list-box--up`]: direction === 'top',
-  });
+  const className = cx(
+    `${prefix}--multi-select`,
+    [enabled ? null : containerClassName],
+    {
+      [`${prefix}--multi-select--invalid`]: invalid,
+      [`${prefix}--multi-select--warning`]: showWarning,
+      [`${prefix}--multi-select--inline`]: inline,
+      [`${prefix}--multi-select--selected`]:
+        selectedItems && selectedItems.length > 0,
+      [`${prefix}--list-box--up`]: direction === 'top',
+    }
+  );
+
+  // needs to be capitalized for react to render it correctly
+  const ItemToElement = itemToElement;
 
   const sortOptions = {
     selectedItems: controlledSelectedItems,
@@ -284,7 +296,11 @@ const MultiSelect = React.forwardRef(function MultiSelect(
                       className={`${prefix}--checkbox-label`}
                       data-contained-checkbox-state={isChecked}
                       id={`${itemProps.id}__checkbox`}>
-                      {itemText}
+                      {itemToElement ? (
+                        <ItemToElement key={itemProps.id} {...item} />
+                      ) : (
+                        itemText
+                      )}
                     </span>
                   </div>
                 </ListBox.MenuItem>
@@ -352,6 +368,12 @@ MultiSelect.propTypes = {
   invalidText: PropTypes.node,
 
   /**
+   * Function to render items as custom components instead of strings.
+   * Defaults to null and is overridden by a getter
+   */
+  itemToElement: PropTypes.func,
+
+  /**
    * Helper function passed to downshift that allows the library to render a
    * given item to a string label. By default, it extracts the `label` field
    * from a given item to serve as the item label in the list.
@@ -383,7 +405,7 @@ MultiSelect.propTypes = {
 
   /**
    * `onChange` is a utility for this controlled component to communicate to a
-   * consuming component what kind of internal state changes are occuring.
+   * consuming component what kind of internal state changes are occurring.
    */
   onChange: PropTypes.func,
 

@@ -5,14 +5,13 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { settings } from 'carbon-components';
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
 import React from 'react';
 import { warning } from '../../internal/warning';
 import uid from '../../tools/uniqueId';
-
-const { prefix } = settings;
+import { Text } from '../Text';
+import { PrefixContext } from '../../internal/usePrefix';
 
 class RadioButton extends React.Component {
   static propTypes = {
@@ -80,6 +79,9 @@ class RadioButton extends React.Component {
     value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
   };
 
+  static contextType = PrefixContext;
+  prefix = this.context;
+
   static defaultProps = {
     labelText: '',
     labelPosition: 'right',
@@ -94,6 +96,7 @@ class RadioButton extends React.Component {
   };
 
   render() {
+    const prefix = this.prefix;
     const {
       className,
       labelText,
@@ -133,7 +136,7 @@ class RadioButton extends React.Component {
         />
         <label htmlFor={this.uid} className={`${prefix}--radio-button__label`}>
           <span className={`${prefix}--radio-button__appearance`} />
-          {labelText && <span className={innerLabelClasses}>{labelText}</span>}
+          {labelText && <Text className={innerLabelClasses}>{labelText}</Text>}
         </label>
       </div>
     );

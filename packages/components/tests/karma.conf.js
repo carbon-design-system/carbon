@@ -19,7 +19,7 @@ const cloptions = commander
   )
   .option(
     '-d, --debug',
-    'Disables collection of code coverage, useful for runinng debugger against specs or sources'
+    'Disables collection of code coverage, useful for running debugger against specs or sources'
   )
   .option('--file [file]', 'Spec files to run', collect, defaultFiles)
   .option('-r, --random', 'Enable random execution order of tests')
@@ -80,9 +80,9 @@ module.exports = function (config) {
       ...cloptions.file,
       ...(isFilesDefault
         ? [
-            'node_modules/core-js/modules/es6.weak-map.js', // For generatoring coverage report for untested files
-            'src/components/**/!(*.config).js', // For generatoring coverage report for untested files
-            'src/globals/js/{misc,mixins}/**/*.js', // For generatoring coverage report for untested files
+            'node_modules/core-js/modules/es6.weak-map.js', // For generating coverage report for untested files
+            'src/components/**/!(*.config).js', // For generating coverage report for untested files
+            'src/globals/js/{misc,mixins}/**/*.js', // For generating coverage report for untested files
             // Excluding tests for removed components
             'tests/spec/**/!(carousel|data-table|fab|left-nav|lightbox|profile-switcher)_spec.js',
           ]
@@ -90,8 +90,8 @@ module.exports = function (config) {
     ],
 
     preprocessors: {
-      '**/core-js/**/*.js': ['webpack', 'sourcemap'], // For generatoring coverage report for untested files
-      'src/**/*.js': ['webpack', 'sourcemap'], // For generatoring coverage report for untested files
+      '**/core-js/**/*.js': ['webpack', 'sourcemap'], // For generating coverage report for untested files
+      'src/**/*.js': ['webpack', 'sourcemap'], // For generating coverage report for untested files
       'tests/spec/**/*.js': ['webpack', 'sourcemap'],
       'demo/polyfills/**/*.js': ['webpack', 'sourcemap'],
     },
@@ -225,7 +225,7 @@ module.exports = function (config) {
                   // Files in this exclude list are of either:
                   // - Not meeting the code coverage standard set here, which shouldn't have happened
                   // - Very browser dependent code that wouldn't get code coverage unless we run the suite with Sauce Labs
-                  // That said, new files should never be added, except for misc code that is very broser-specific
+                  // That said, new files should never be added, except for misc code that is very browser-specific
                   'src/components/removed-component.js',
                   'src/components/carousel/carousel.js', // Removed for `v10`
                   'src/components/code-snippet/code-snippet.js',

@@ -18,6 +18,7 @@
   // Container
   //----------------------------------------------------------------------------
   .#{$prefix}--data-table-container {
+    position: relative;
     // Allow space for focus styles
     padding-top: $spacing-01;
   }
@@ -95,6 +96,11 @@
   .#{$prefix}--data-table tbody tr:hover td .#{$prefix}--link,
   .#{$prefix}--data-table tbody tr:hover th .#{$prefix}--link {
     color: $link-secondary;
+  }
+
+  .#{$prefix}--data-table tbody tr:hover td .#{$prefix}--link--disabled,
+  .#{$prefix}--data-table tbody tr:hover th .#{$prefix}--link--disabled {
+    color: $disabled-02;
   }
 
   .#{$prefix}--data-table th,
@@ -281,9 +287,9 @@
     tbody
     tr:not(.#{$prefix}--parent-row):nth-child(even)
     td {
-    border-top: 1px solid $layer-accent;
-    border-bottom: 1px solid $layer-accent;
-    background-color: $layer-accent;
+    border-top: 1px solid $data-table-zebra-color;
+    border-bottom: 1px solid $data-table-zebra-color;
+    background-color: $data-table-zebra-color;
   }
 
   .#{$prefix}--data-table--zebra
@@ -398,10 +404,6 @@
   .#{$prefix}--data-table--tall .#{$prefix}--table-column-radio,
   .#{$prefix}--data-table--xl .#{$prefix}--table-column-radio {
     padding-top: $spacing-05;
-  }
-
-  .#{$prefix}--date-table tbody th.#{$prefix}--table-column-checkbox:hover {
-    background: $data-table-column-hover;
   }
 
   //----------------------------------------------------------------------------
@@ -722,6 +724,10 @@
     width: auto;
   }
 
+  .#{$prefix}--data-table-container--static {
+    width: fit-content;
+  }
+
   // -------------
   // Sticky header
   // -------------
@@ -968,7 +974,8 @@
   // -------------------
   // with boolean column
   // -------------------
-  .#{$prefix}--data-table .bx--form-item.bx--checkbox-wrapper:last-of-type {
+  .#{$prefix}--data-table
+    .#{$prefix}--form-item.#{$prefix}--checkbox-wrapper:last-of-type {
     margin: 0;
   }
 

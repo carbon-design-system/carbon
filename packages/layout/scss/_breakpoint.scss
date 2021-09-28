@@ -54,7 +54,7 @@ $carbon--grid-breakpoints: (
 ) !default;
 
 /// Get the value of the next breakpoint, or null for the last breakpoint
-/// @param {String} $name - The name of the brekapoint
+/// @param {String} $name - The name of the breakpoint
 /// @param {Map} $breakpoints [$carbon--grid-breakpoints] - A map of breakpoints where the key is the name of the breakpoint and the value is the values for the breakpoint
 /// @param {List} $breakpoint-names [map-keys($breakpoints)] - A list of names from the `$breakpoints` map
 /// @return {String}
@@ -73,7 +73,7 @@ $carbon--grid-breakpoints: (
 }
 
 /// Get the value of the previous breakpoint, or null for the first breakpoint
-/// @param {String} $name - The name of the brekapoint
+/// @param {String} $name - The name of the breakpoint
 /// @param {Map} $breakpoints [$carbon--grid-breakpoints] - A map of breakpoints where the key is the name of the breakpoint and the value is the values for the breakpoint
 /// @param {List} $breakpoint-names [map-keys($breakpoints)] - A list of names from the `$breakpoints` map
 /// @return {String}
@@ -92,7 +92,7 @@ $carbon--grid-breakpoints: (
 }
 
 /// Check to see if the given breakpoint name
-/// @param {String} $name - The name of the brekapoint
+/// @param {String} $name - The name of the breakpoint
 /// @param {Map} $breakpoints [$carbon--grid-breakpoints] - A map of breakpoints where the key is the name of the breakpoint and the value is the values for the breakpoint
 /// @return {Bool}
 /// @access public
@@ -116,7 +116,7 @@ $carbon--grid-breakpoints: (
   @return carbon--key-by-index($breakpoints, $total-breakpoints);
 }
 
-/// Get the infix for a given breakpoint in a list of breakpoints. Usesful for generate the size part in a selector, for example: `.prefix--col-sm-2`.
+/// Get the infix for a given breakpoint in a list of breakpoints. Useful for generating the size part in a selector, for example: `.prefix--col-sm-2`.
 /// @param {String} $name - The name of the breakpoint
 /// @return {String}
 /// @access public
@@ -198,12 +198,12 @@ $carbon--grid-breakpoints: (
   @if $min and $max {
     $min-width: if(
       not $is-number-lower and $min,
-      map-get($min, width + 0.02),
+      map-get($min, width) + 0.02,
       $min
     );
     $max-width: if(
       not $is-number-upper and $max,
-      map-get($max, width - 0.02),
+      map-get($max, width) - 0.02,
       $max
     );
     @media (min-width: $min-width) and (max-width: $max-width) {

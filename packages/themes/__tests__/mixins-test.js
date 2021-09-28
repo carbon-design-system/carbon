@@ -49,29 +49,6 @@ describe('_mixins.scss', () => {
     });
   });
 
-  it('should set token variables for the given theme', async () => {
-    const themeTests = Object.keys(themes).map((key) => {
-      const variable = `$carbon--theme--${key}`;
-      const test = `
-        $feature-flags: (enable-css-custom-properties: true);
-        @include carbon--theme(${variable}) {
-          $_: get('${variable}', $field-01);
-        }
-      `;
-      return [variable, themes[key].interactive01, test];
-    });
-    const tests = themeTests
-      .map(([_variable, _expectedColor, test]) => test)
-      .join('\n');
-    const { unwrap } = await render(`
-      @import '../scss/themes';
-      ${tests}
-    `);
-    themeTests.forEach(([variable]) => {
-      expect(unwrap(variable)).toBeDefined();
-    });
-  });
-
   it('should reset token variables after using the theme', async () => {
     const { unwrap } = await render(`
       @import '../scss/themes';

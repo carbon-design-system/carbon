@@ -28,6 +28,7 @@ export default {
 
     subcomponents: {
       ProgressStep,
+      Tooltip
     },
   },
 };
@@ -82,13 +83,13 @@ const stepData = [
   {
     label: 'Fourth step',
     description: 'Step 4: Getting started with Carbon Design System',
-    invalid: 'invalid',
+    invalid: true,
     secondaryLabel: 'Example invalid step',
   },
   {
     label: 'Fifth step',
     description: 'Step 5: Getting started with Carbon Design System',
-    disabled: 'disabled',
+    disabled: true,
   },
 ];
 

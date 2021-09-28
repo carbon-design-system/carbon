@@ -8,7 +8,7 @@ several internal mechanisms. This section explains some of those.
 
 The build toolchain has a mechanism to create a temporary feature flags
 (`demo/feature-flags.js`) from the original JavaScript feature flags
-(`src/globals/js/feature-flags.js`). Tempoary feature flags contain the
+(`src/globals/js/feature-flags.js`). Temporary feature flags contain the
 effective feature flag values, which changes upon theme switcher.
 
 In our vanilla development environment, requests for the original JavaScript
@@ -25,7 +25,7 @@ that triggers build tasks associated with theme change, with its new effective
 feature flag values:
 
 1. Sass build
-2. Build to create a tempoarary JavaScript feature flags
+2. Build to create a temporary JavaScript feature flags
 
 When
 [the theme switcher toggle button](https://github.com/IBM/carbon-components/blob/v9.23.0/demo/js/components/RootPage.js#L357-L364)

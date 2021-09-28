@@ -50,7 +50,8 @@
     width: 0;
     height: 2px;
     transform: translateY(-2px);
-    transition: width 150ms cubic-bezier(0.2, 0, 0.38, 0.9) 150ms;
+    transition: width $duration--moderate-01 motion(standard, productive)
+      $duration--moderate-01;
   }
 
   .#{$prefix}--progress--space-equal .#{$prefix}--progress-line {
@@ -65,7 +66,7 @@
     flex-shrink: 0;
     margin: rem(10px) $carbon--spacing-03 0 0;
     border-radius: 50%;
-    fill: $interactive;
+    fill: $interactive-04;
   }
 
   .#{$prefix}--progress-label {
@@ -74,7 +75,7 @@
     overflow: hidden;
     max-width: rem(88px);
     margin: $carbon--spacing-03 0 0 0;
-    color: $text-primary;
+    color: $text-01;
     line-height: 1.45;
     text-overflow: ellipsis;
     transition: box-shadow $duration--fast-02 motion(standard, productive),
@@ -88,14 +89,14 @@
   }
 
   .#{$prefix}--progress-label:hover {
-    box-shadow: 0 rem(1px) $link-primary;
-    color: $link-primary;
+    box-shadow: 0 rem(1px) $link-01;
+    color: $link-01;
     cursor: pointer;
   }
 
   .#{$prefix}--progress-label:focus {
-    box-shadow: 0 rem(3px) 0 0 $link-primary;
-    color: $link-primary;
+    box-shadow: 0 rem(3px) 0 0 $link-01;
+    color: $link-01;
     outline: none;
   }
 
@@ -104,9 +105,9 @@
     margin-right: 0.75rem;
   }
 
-  .#{$prefix}--progress-label:active {
-    box-shadow: 0 rem(3px) 0 0 $background-brand;
-    color: $background-brand;
+  .#{$prefix}--tooltip__label.#{$prefix}--progress-label:active {
+    box-shadow: 0 rem(3px) 0 0 $interactive-01;
+    color: $interactive-01;
   }
 
   //OVERFLOW STYLING
@@ -136,7 +137,7 @@
     padding: $carbon--spacing-03 $carbon--spacing-05;
     margin-top: rem(40px);
     margin-left: rem(22px);
-    color: $text-inverse;
+    color: $inverse-01;
     visibility: hidden;
   }
 
@@ -146,7 +147,7 @@
 
     width: rem(150px);
     height: auto;
-    color: $text-inverse;
+    color: $inverse-01;
   }
 
   //OPTIONAL HELPER TEXT STYLING
@@ -157,9 +158,9 @@
     left: 0;
     margin-top: rem(28px);
     margin-left: $carbon--spacing-06;
-    animation: 150ms optional-text-entrance 150ms motion(standard, productive)
-      forwards;
-    color: $text-secondary;
+    animation: $duration--moderate-01 optional-text-entrance
+      $duration--moderate-01 motion(standard, productive) forwards;
+    color: $text-02;
     opacity: 0;
     text-align: start;
     transform: translateY(-10px);
@@ -168,12 +169,12 @@
   //CURRENT STYLING
   .#{$prefix}--progress-step--current {
     .#{$prefix}--progress-line {
-      background-color: $interactive;
+      background-color: $interactive-04;
     }
 
     svg circle {
-      animation: 150ms progress-indicator-icon-fade 150ms
-        motion(standard, productive) forwards;
+      animation: $duration--moderate-01 progress-indicator-icon-fade
+        $duration--moderate-01 motion(standard, productive) forwards;
       opacity: 0;
     }
   }
@@ -181,11 +182,11 @@
   //INCOMPLETE STYLING
   .#{$prefix}--progress-step--incomplete {
     svg {
-      fill: $icon-primary;
+      fill: $ui-05;
     }
 
     .#{$prefix}--progress-line {
-      background-color: $border-subtle;
+      background-color: $ui-03;
     }
   }
 
@@ -193,12 +194,12 @@
   .#{$prefix}--progress-step--complete {
     .#{$prefix}--progress-line {
       width: 100%;
-      background-color: $interactive;
+      background-color: $interactive-04;
     }
 
     svg {
-      animation: 150ms progress-indicator-icon-fade motion(standard, productive)
-        forwards;
+      animation: $duration--moderate-01 progress-indicator-icon-fade
+        motion(standard, productive) forwards;
       opacity: 0;
     }
   }
@@ -220,14 +221,14 @@
   .#{$prefix}--progress-step-button--unclickable
     .#{$prefix}--progress-label:hover {
     box-shadow: none;
-    color: $text-primary;
+    color: $text-01;
     cursor: default;
   }
 
   .#{$prefix}--progress-step-button--unclickable
     .#{$prefix}--tooltip__label:hover {
-    box-shadow: 0 rem(1px) $link-primary;
-    color: $link-primary;
+    box-shadow: 0 rem(1px) $link-01;
+    color: $link-01;
     cursor: pointer;
   }
 
@@ -242,8 +243,8 @@
     }
 
     svg circle {
-      animation: 150ms progress-indicator-icon-fade 150ms
-        motion(standard, productive) forwards;
+      animation: $duration--moderate-01 progress-indicator-icon-fade
+        $duration--moderate-01 motion(standard, productive) forwards;
       opacity: 0;
     }
 
@@ -273,7 +274,7 @@
 
   // ERROR STYLING
   .#{$prefix}--progress__warning > * {
-    fill: $support-error;
+    fill: $support-01;
   }
 
   // Skeleton State
@@ -302,12 +303,17 @@
     }
   }
 
+  .#{$prefix}--progress--vertical,
+  .#{$prefix}--progress-text {
+    display: flex;
+    flex-direction: column;
+  }
+
   .#{$prefix}--progress--vertical .#{$prefix}--progress-step,
   .#{$prefix}--progress--vertical .#{$prefix}--progress-step-button {
     width: initial;
     min-width: initial;
     min-height: 3.625rem;
-    flex-wrap: wrap;
     align-content: flex-start;
   }
 
@@ -327,15 +333,16 @@
     white-space: initial;
   }
 
-  .#{$prefix}--progress--vertical .#{$prefix}--progress-step .bx--tooltip {
+  .#{$prefix}--progress--vertical
+    .#{$prefix}--progress-step
+    .#{$prefix}--tooltip {
     margin-top: 0.5rem;
   }
 
   .#{$prefix}--progress--vertical .#{$prefix}--progress-optional {
     position: static;
     width: 100%;
-    margin-top: auto;
-    margin-left: $carbon--spacing-07;
+    margin: auto 0;
   }
 
   .#{$prefix}--progress--vertical .#{$prefix}--progress-line {
@@ -346,7 +353,7 @@
     height: 0;
     background-color: $interactive;
     transform: translateX(-2px);
-    transition: height 150ms cubic-bezier(0.2, 0, 0.38, 0.9) 150ms;
+    transition: height $duration--moderate-01 cubic-bezier(0.2, 0, 0.38, 0.9);
   }
 
   // No animations or transitions if user prefers reduced motion

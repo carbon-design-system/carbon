@@ -8,15 +8,14 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import classNames from 'classnames';
-import { settings } from 'carbon-components';
 import {
   ChevronDown16,
   WarningFilled16,
   WarningAltFilled16,
 } from '@carbon/icons-react';
 import deprecate from '../../prop-types/deprecate';
-
-const { prefix } = settings;
+import { useFeatureFlag } from '../FeatureFlags';
+import { usePrefix } from '../../internal/usePrefix';
 
 const Select = React.forwardRef(function Select(
   {
@@ -42,15 +41,20 @@ const Select = React.forwardRef(function Select(
   },
   ref
 ) {
-  const selectClasses = classNames({
-    [`${prefix}--select`]: true,
-    [`${prefix}--select--inline`]: inline,
-    [`${prefix}--select--light`]: light,
-    [`${prefix}--select--invalid`]: invalid,
-    [`${prefix}--select--disabled`]: disabled,
-    [`${prefix}--select--warning`]: warn,
-    [className]: className,
-  });
+  const prefix = usePrefix();
+  const enabled = useFeatureFlag('enable-v11-release');
+
+  const selectClasses = classNames(
+    {
+      [`${prefix}--select`]: true,
+      [`${prefix}--select--inline`]: inline,
+      [`${prefix}--select--light`]: light,
+      [`${prefix}--select--invalid`]: invalid,
+      [`${prefix}--select--disabled`]: disabled,
+      [`${prefix}--select--warning`]: warn,
+    },
+    [enabled ? null : className]
+  );
   const labelClasses = classNames(`${prefix}--label`, {
     [`${prefix}--visually-hidden`]: hideLabel,
     [`${prefix}--label--disabled`]: disabled,
@@ -110,7 +114,12 @@ const Select = React.forwardRef(function Select(
     );
   })();
   return (
-    <div className={`${prefix}--form-item`}>
+    <div
+      className={
+        enabled
+          ? classNames(`${prefix}--form-item`, className)
+          : `${prefix}--form-item`
+      }>
       <div className={selectClasses}>
         {!noLabel && (
           <label htmlFor={id} className={labelClasses}>

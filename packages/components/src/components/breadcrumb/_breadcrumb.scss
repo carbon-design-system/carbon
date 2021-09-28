@@ -36,16 +36,16 @@
   }
 
   .#{$prefix}--breadcrumb-item .#{$prefix}--link:visited {
-    color: $link-primary;
+    color: $link-01;
 
     &:hover {
-      color: $link-primary-hover;
+      color: $hover-primary-text;
     }
   }
 
   .#{$prefix}--breadcrumb-item::after {
     margin-left: $carbon--spacing-03;
-    color: $text-primary;
+    color: $text-01;
     content: '/';
   }
 
@@ -66,7 +66,7 @@
   .#{$prefix}--breadcrumb-item [aria-current='page'],
   .#{$prefix}--breadcrumb-item.#{$prefix}--breadcrumb-item--current
     .#{$prefix}--link {
-    color: $text-primary;
+    color: $text-01;
     cursor: auto;
 
     &:hover {
@@ -94,7 +94,7 @@
       bottom: 2px;
       width: rem(12px);
       height: 1px;
-      background: $link-primary-hover;
+      background: $hover-primary-text;
       content: '';
       opacity: 0;
       transition: opacity $duration--fast-01 motion(standard, productive);
@@ -113,14 +113,14 @@
 
   .#{$prefix}--breadcrumb-item .#{$prefix}--overflow-menu__icon {
     position: relative;
-    fill: $link-primary;
+    fill: $link-01;
     transform: translateY(4px);
   }
 
   .#{$prefix}--breadcrumb-item
     .#{$prefix}--overflow-menu:hover
     .#{$prefix}--overflow-menu__icon {
-    fill: $link-primary-hover;
+    fill: $hover-primary-text;
   }
 
   .#{$prefix}--breadcrumb-menu-options:focus {
@@ -128,13 +128,13 @@
   }
 
   $caret-size: rem(7px);
-  .#{$prefix}--breadcrumb-menu-options.#{$prefix}--overflow-menu-options::after {
+  .#{$prefix}--breadcrumb-menu-options.#{$prefix}--overflow-menu-options[data-floating-menu-direction='bottom']::after {
     top: -$caret-size;
     left: $caret-size * 2;
     width: 0;
     height: 0;
     border-right: $caret-size solid transparent;
-    border-bottom: $caret-size solid $field;
+    border-bottom: $caret-size solid $field-01;
     border-left: $caret-size solid transparent;
     margin: 0 auto;
     background: transparent;

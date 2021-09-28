@@ -22,7 +22,6 @@ $css--helpers: true;
 /// Toolbar styles
 /// @access private
 /// @group toolbar
-// V11: Remove this component
 @mixin toolbar {
   .#{$prefix}--toolbar {
     display: flex;

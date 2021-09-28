@@ -10,9 +10,8 @@ import DatePicker from '../DatePicker';
 import DatePickerSkeleton from '../DatePicker/DatePicker.Skeleton';
 import { mount, shallow } from 'enzyme';
 import DatePickerInput from '../DatePickerInput/DatePickerInput';
-import { settings } from 'carbon-components';
 
-const { prefix } = settings;
+const prefix = 'bx';
 
 describe('DatePicker', () => {
   describe('Renders as expected', () => {
@@ -101,7 +100,7 @@ describe('DatePicker', () => {
       expect(wrapper.props().value).toEqual('11/08/2017');
     });
 
-    it('should not initalize a calendar', () => {
+    it('should not initialize a calendar', () => {
       expect(wrapper.cal).toEqual(undefined);
     });
   });
@@ -127,7 +126,7 @@ describe('DatePicker', () => {
       ).toBe(true);
     });
 
-    it('should initalize a calendar', () => {
+    it('should initialize a calendar', () => {
       expect(wrapper.instance().cal).toBeDefined();
     });
 
@@ -206,7 +205,7 @@ describe('DatePicker', () => {
       ).toBe(true);
     });
 
-    it('should initalize a calendar', () => {
+    it('should initialize a calendar', () => {
       expect(wrapper.instance().cal).toBeDefined();
     });
 
@@ -278,12 +277,10 @@ describe('DatePicker', () => {
 
   describe('Date picker can be used with enzyme shallow', () => {
     let spy;
-    beforeEach((done) => {
+
+    beforeEach(() => {
       spy = {};
-      spy.console = jest.spyOn(console, 'error').mockImplementation((e) => {
-        done(e);
-      });
-      done();
+      spy.console = jest.spyOn(console, 'error').mockImplementation(() => {});
     });
 
     afterEach(() => {
@@ -352,7 +349,7 @@ describe('DatePicker', () => {
     });
 
     it('should not have "console.error" being created', () => {
-      expect(mockConsoleError).not.toBeCalled();
+      expect(mockConsoleError).not.toHaveBeenCalled();
     });
   });
 });

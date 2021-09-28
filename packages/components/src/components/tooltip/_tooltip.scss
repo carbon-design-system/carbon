@@ -47,7 +47,7 @@
     height: 0;
     border-width: 0 rem(4px) rem(5px) rem(4px);
     border-style: solid;
-    border-color: transparent transparent $background-inverse transparent;
+    border-color: transparent transparent $inverse-02 transparent;
     margin: 0 auto;
     margin-top: 1px;
     margin-left: 50%;
@@ -62,9 +62,9 @@
     height: rem(24px);
     padding: 0 1rem;
     margin-left: 50%;
-    background-color: $background-inverse;
+    background-color: $inverse-02;
     border-radius: rem(2px);
-    color: $text-inverse;
+    color: $inverse-01;
     content: attr(aria-label);
     font-weight: 400;
     pointer-events: none;
@@ -135,7 +135,6 @@
 /// @access private
 /// @deprecated
 /// @group tooltip
-// V11: possibly remove in V11
 @mixin tooltip--definition--legacy {
   .#{$prefix}--tooltip--definition {
     @include reset;
@@ -147,8 +146,8 @@
 
       position: relative;
       display: inline-flex;
-      border-bottom: 1px dotted $highlight;
-      color: $text-primary;
+      border-bottom: 1px dotted $interactive-01;
+      color: $text-01;
 
       &:hover {
         + .#{$prefix}--tooltip--definition__top,
@@ -178,14 +177,14 @@
     width: rem(208px);
     padding: $carbon--spacing-03 $carbon--spacing-05;
     margin-top: $carbon--spacing-04;
-    background: $background-inverse;
+    background: $inverse-02;
     border-radius: rem(2px);
     pointer-events: none;
 
     p {
       @include type-style('body-short-01');
 
-      color: $text-inverse;
+      color: $inverse-01;
     }
 
     .#{$prefix}--tooltip__caret {
@@ -195,7 +194,7 @@
       width: 0.6rem;
       height: 0.6rem;
       margin-left: $carbon--spacing-05;
-      background: $background-inverse;
+      background: $inverse-02;
     }
   }
 
@@ -248,7 +247,6 @@
 /// @access private
 /// @deprecated
 /// @group tooltip
-// V11: possibly remove in V11
 @mixin tooltip--icon--legacy {
   // Icon CSS only tooltip
   .#{$prefix}--tooltip--icon {
@@ -263,7 +261,7 @@
     &:hover,
     &:focus {
       svg {
-        fill: $icon-secondary;
+        fill: $icon-02;
       }
     }
 
@@ -324,7 +322,7 @@
 
     display: inline-flex;
     align-items: center;
-    color: $text-secondary;
+    color: $text-02;
 
     &:focus {
       @include focus-outline('border');
@@ -332,7 +330,7 @@
   }
 
   .#{$prefix}--tooltip__trigger svg {
-    fill: $icon-secondary;
+    fill: $icon-02;
   }
 
   .#{$prefix}--tooltip__trigger:not(.#{$prefix}--btn--icon-only) {
@@ -345,7 +343,7 @@
     &:focus {
       @include focus-outline('border');
 
-      fill: $button-primary-hover;
+      fill: $hover-primary;
     }
   }
 
@@ -374,16 +372,14 @@
     max-width: rem(288px);
     padding: $carbon--spacing-05;
     margin-top: $carbon--spacing-02;
-    background: $background-inverse;
+    background: $inverse-02;
     border-radius: rem(2px);
-    color: $text-inverse;
+    color: $inverse-01;
     word-wrap: break-word;
 
     // @todo this can be deprecated in v11 since focus should always be on the content container not the tooltip
-    // V11: remove in V11
     &:focus {
-      box-shadow: inset 0 0 0 1px $background-inverse,
-        inset 0 0 0 2px $background;
+      box-shadow: inset 0 0 0 1px $inverse-02, inset 0 0 0 2px $ui-background;
       outline: 0;
     }
 
@@ -448,27 +444,27 @@
     }
 
     .#{$prefix}--btn:focus {
-      border-color: $focus-inverse;
-      outline-color: $background-inverse;
+      border-color: $inverse-focus-ui;
+      outline-color: $inverse-02;
     }
 
     .#{$prefix}--link {
-      color: $link-inverse;
+      color: $inverse-link;
       font-size: rem(14px);
 
       &:focus {
-        outline: 1px solid $focus-inverse;
+        outline: 1px solid $inverse-focus-ui;
         outline-offset: 2px;
       }
 
       &:active,
       &:active:visited,
       &:active:visited:hover {
-        color: $text-inverse;
+        color: $inverse-01;
       }
 
       &:visited {
-        color: $link-inverse;
+        color: $inverse-link;
       }
     }
 
@@ -487,7 +483,7 @@
       width: 0;
       height: 0;
       border-right: $caret-size solid transparent;
-      border-bottom: $caret-size solid $background-inverse;
+      border-bottom: $caret-size solid $inverse-02;
       border-left: $caret-size solid transparent;
       margin: 0 auto;
       content: '';
@@ -569,13 +565,13 @@
   .#{$prefix}--tooltip__trigger.#{$prefix}--tooltip__trigger--definition {
     @include type-style('label-01');
 
-    border-bottom: rem(1px) dotted $icon-secondary;
+    border-bottom: rem(1px) dotted $text-02;
     transition: border-color $duration--fast-02;
   }
 
   .#{$prefix}--tooltip__trigger.#{$prefix}--tooltip__trigger--definition:hover,
   .#{$prefix}--tooltip__trigger.#{$prefix}--tooltip__trigger--definition:focus {
-    border-bottom-color: $interactive;
+    border-bottom-color: $interactive-04;
   }
 
   .#{$prefix}--tooltip__trigger.#{$prefix}--tooltip__trigger--definition.#{$prefix}--tooltip--top {
@@ -623,7 +619,7 @@
     &:hover,
     &:focus {
       svg {
-        fill: $icon-secondary;
+        fill: $icon-02;
       }
     }
   }

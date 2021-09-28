@@ -5,6 +5,8 @@
 // LICENSE file in the root directory of this source tree.
 //
 
+@use "sass:math";
+
 @use 'sass:map';
 @use 'config' as *;
 @use 'breakpoint' as *;
@@ -110,7 +112,7 @@
 // Condensed
 // -----------------------------------------------------------------------------
 .#{$prefix}--css-grid--condensed {
-  --cds-grid-gutter: 2px;
+  --cds-grid-gutter: 1px;
 
   column-gap: var(--cds-grid-gutter);
   row-gap: var(--cds-grid-gutter);
@@ -128,7 +130,7 @@
 // -----------------------------------------------------------------------------
 .#{$prefix}--css-grid--no-gutter {
   // This is set to 0px (versus 0) so that the calc expression for padding for
-  // a grid container works as epxected. Without the unit, the calc() will
+  // a grid container works as expected. Without the unit, the calc() will
   // result in a value of 0.
   // stylelint-disable-next-line length-zero-no-unit
   --cds-grid-gutter: 0px;
@@ -270,7 +272,7 @@
   $columns: map.get($value, columns);
 
   @include breakpoint($name) {
-    // The `grid-column-end` and `grid-column-start` properies are *not* inclusive.
+    // The `grid-column-end` and `grid-column-start` properties are *not* inclusive.
     // It starts/ends the column *at* the column, not *on* the column. We must
     // ensure that there is one additional class available for each breakpoint.
     @for $i from 1 through $columns + 1 {
@@ -411,7 +413,7 @@ $carbon--aspect-ratios: (
     $height: nth($aspect-ratio, 2);
 
     .#{$prefix}--aspect-ratio--#{$width}x#{$height}::before {
-      padding-top: percentage($height / $width);
+      padding-top: percentage(math.div($height, $width));
     }
   }
 }

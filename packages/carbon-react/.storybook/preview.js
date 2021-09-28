@@ -11,6 +11,9 @@ import { configureActions } from '@storybook/addon-actions';
 import { white, g10, g90, g100 } from '@carbon/themes';
 import React from 'react';
 import { breakpoints } from '@carbon/layout';
+import { settings } from 'carbon-components';
+
+settings.prefix = 'cds';
 
 export const globalTypes = {
   locale: {
@@ -136,7 +139,7 @@ export const decorators = [
     const { locale, theme } = context.globals;
 
     React.useEffect(() => {
-      document.body.setAttribute('data-carbon-theme', theme);
+      document.documentElement.setAttribute('data-carbon-theme', theme);
     }, [theme]);
 
     React.useEffect(() => {

@@ -8,13 +8,12 @@
 import cx from 'classnames';
 import React, { useState, useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
-import { settings } from 'carbon-components';
 import setupGetInstanceId from '../../tools/setupGetInstanceId';
 import { composeEventHandlers } from '../../tools/events';
 import { keys, matches } from '../../internal/keyboard';
 import toggleClass from '../../tools/toggleClass';
+import { usePrefix } from '../../internal/usePrefix';
 
-const { prefix } = settings;
 const getInstanceId = setupGetInstanceId();
 const TooltipIcon = ({
   id,
@@ -32,6 +31,7 @@ const TooltipIcon = ({
   tooltipText,
   ...rest
 }) => {
+  const prefix = usePrefix();
   const [allowTooltipVisibility, setAllowTooltipVisibility] = useState(true);
   const [isHovered, setIsHovered] = useState(false);
   const [isFocused, setIsFocused] = useState(false);
@@ -63,7 +63,6 @@ const TooltipIcon = ({
 
   const handleFocus = (evt) => {
     closeTooltips(evt);
-    setIsHovered(!isHovered);
     setIsFocused(true);
     setAllowTooltipVisibility(true);
   };
@@ -76,7 +75,6 @@ const TooltipIcon = ({
 
   const handleMouseEnter = (evt) => {
     if (!disabled) {
-      setIsHovered(true);
       tooltipTimeout.current && clearTimeout(tooltipTimeout.current);
 
       if (evt.target === tooltipRef.current) {

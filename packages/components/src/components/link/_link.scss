@@ -26,20 +26,20 @@
     @include type-style('body-short-01');
 
     display: inline-flex;
-    color: $link-primary;
+    color: $link-01;
     outline: none;
     text-decoration: none;
     transition: color $duration--fast-01 motion(standard, productive);
 
     &:hover {
-      color: $link-primary-hover;
+      color: $hover-primary-text;
       text-decoration: underline;
     }
 
     &:active,
     &:active:visited,
     &:active:visited:hover {
-      color: $text-primary;
+      color: $text-01;
       text-decoration: underline;
     }
 
@@ -48,11 +48,11 @@
     }
 
     &:visited {
-      color: $link-primary;
+      color: $link-01;
     }
 
     &:visited:hover {
-      color: $link-primary-hover;
+      color: $hover-primary-text;
     }
   }
 
@@ -61,18 +61,18 @@
     @include reset;
     @include type-style('body-short-01');
 
-    color: $text-disabled;
+    color: $disabled-02;
     cursor: not-allowed;
     font-weight: 400;
     text-decoration: none;
   }
 
   .#{$prefix}--link.#{$prefix}--link--visited:visited {
-    color: $link-visited;
+    color: $visited-link;
   }
 
   .#{$prefix}--link.#{$prefix}--link--visited:visited:hover {
-    color: $link-primary-hover;
+    color: $hover-primary-text;
   }
 
   .#{$prefix}--link.#{$prefix}--link--inline {

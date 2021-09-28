@@ -6,7 +6,7 @@ started with Carbon SCSS.
 ## Usage with another design system
 
 While we do _not_ recommend using Carbon along with another design system in one
-application because doing so loses coheisiveness in your application's user
+application because doing so loses cohesiveness in your application's user
 experience, you can use "selector namspacing" technique e.g. while you are
 migrating from another design system to Carbon and just flipping the switch at
 once is extremely hard.
@@ -65,7 +65,7 @@ gulp.task('postcss', ['postcss:carbon', 'postcss:another-design-system']);
 ```
 
 Below HTML is an example using a Carbon button is used along with a button with
-another design system, using what above build step generaes:
+another design system, using what above build step generates:
 
 ```html
 <!DOCTYPE html>
