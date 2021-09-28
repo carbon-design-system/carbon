@@ -70,6 +70,7 @@ export {
   Loading,
   Modal,
   MultiSelect,
+  ActionableNotification,
   ToastNotification,
   InlineNotification,
   NotificationActionButton,
