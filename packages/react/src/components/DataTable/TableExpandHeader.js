@@ -68,12 +68,11 @@ TableExpandHeader.propTypes = {
   className: PropTypes.string,
 
   /**
-   * Specify whether an expand all button should be displayed
+   * The enableExpando prop is being replaced by enableToggle
    */
-  // enableExpando:PropTypes.bool,
   enableExpando: deprecate(
     PropTypes.bool,
-    'The `renableExpando` prop has been deprecated in favor of `enableToggle`. This prop will be removed in the next major release.'
+    'The `enableExpando` prop has been deprecated in favor of `enableToggle`. This prop will be removed in the next major release.'
   ),
 
   /**
