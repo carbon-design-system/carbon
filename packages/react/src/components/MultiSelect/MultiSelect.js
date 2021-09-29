@@ -190,7 +190,7 @@ const MultiSelect = React.forwardRef(function MultiSelect(
       case ItemClick:
       case MenuKeyDownSpaceButton:
       case MenuKeyDownEnter:
-        if (changes.selectedItems === undefined) {
+        if (changes.selectedItem === undefined) {
           break;
         }
         onItemChange(changes.selectedItem);
