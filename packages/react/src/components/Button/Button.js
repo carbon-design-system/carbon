@@ -274,17 +274,12 @@ Button.propTypes = {
   href: PropTypes.string,
 
   /**
-   * If specifying the `renderIcon` prop, provide a description for that icon that can
-   * be read by screen readers
+   * The iconDescription prop is deprecated. Use aria-label, aria-labelledby, or aria-describedby to label your component.
    */
-  iconDescription: (props) => {
-    if (props.renderIcon && !props.children && !props.iconDescription) {
-      return new Error(
-        'renderIcon property specified without also providing an iconDescription property.'
-      );
-    }
-    return undefined;
-  },
+  iconDescription: deprecate(
+    PropTypes.string,
+    'The iconDescription prop is no longer needed and can be safely removed. This prop will be removed in the next major release of Carbon.'
+  ),
 
   /**
    * Specify whether the Button is expressive, or not

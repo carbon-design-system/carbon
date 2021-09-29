@@ -14,10 +14,11 @@ import { settings } from 'carbon-components';
 import PropTypes from 'prop-types';
 import React from 'react';
 import Loading from '../Loading';
+import deprecate from '../../prop-types/deprecate.js';
 
 const { prefix } = settings;
 
-function Filename({ iconDescription, status, invalid, ...rest }) {
+function Filename({ iconDescription, status, label, invalid, ...rest }) {
   switch (status) {
     case 'uploading':
       return (
@@ -28,7 +29,7 @@ function Filename({ iconDescription, status, invalid, ...rest }) {
         <>
           {invalid && <WarningFilled16 className={`${prefix}--file-invalid`} />}
           <button
-            aria-label={iconDescription}
+            aria-label={iconDescription ? iconDescription : label}
             className={`${prefix}--file-close`}
             type="button"
             {...rest}>
@@ -52,14 +53,21 @@ function Filename({ iconDescription, status, invalid, ...rest }) {
 
 Filename.propTypes = {
   /**
-   * Provide a description of the SVG icon to denote file upload status
+   * The iconDescription prop is deprecated. Use aria-label, aria-labelledby, or aria-describedby to label your component.
    */
-  iconDescription: PropTypes.string,
-
+  iconDescription: deprecate(
+    PropTypes.string,
+    'The iconDescription prop has been deprecated, use the `label` prop instead. This prop will be removed in the next major release of Carbon.'
+  ),
   /**
    * Specify if the file is invalid
    */
   invalid: PropTypes.bool,
+
+  /**
+   * Use the label prop to describe the Filename. This is needed for accessibility.
+   */
+  label: PropTypes.string,
 
   /**
    * Status of the file upload

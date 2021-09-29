@@ -11,14 +11,21 @@ import classnames from 'classnames';
 import { Copy16 } from '@carbon/icons-react';
 import Copy from '../Copy';
 import { usePrefix } from '../../internal/usePrefix';
+import deprecate from '../../prop-types/deprecate';
 
-export default function CopyButton({ iconDescription, className, ...other }) {
+export default function CopyButton({
+  iconDescription,
+  className,
+  label,
+  ...other
+}) {
   const prefix = usePrefix();
   return (
     <Copy
       className={classnames(className, `${prefix}--copy-btn`)}
       aria-label={iconDescription}
       title={iconDescription}
+      label={label}
       {...other}>
       <Copy16 className={`${prefix}--snippet__icon`} />
     </Copy>
@@ -43,10 +50,17 @@ CopyButton.propTypes = {
   feedbackTimeout: PropTypes.number,
 
   /**
-   * Provide a description for the icon representing the copy action that can
-   * be read by screen readers
+   * The iconDescription prop is deprecated. Use aria-label, aria-labelledby, or aria-describedby to label your component.
    */
-  iconDescription: PropTypes.string,
+  iconDescription: deprecate(
+    PropTypes.string,
+    'The iconDescription prop is no longer needed and can be safely removed. This prop will be removed in the next major release of Carbon.'
+  ),
+
+  /**
+   * Use the label prop to describe the copy button. This is needed for accessibility.
+   */
+  label: PropTypes.string,
 
   /**
    * Specify an optional `onClick` handler that is called when the underlying

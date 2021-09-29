@@ -75,9 +75,12 @@ export default class Modal extends Component {
     hasScrollingContent: PropTypes.bool,
 
     /**
-     * Provide a description for "close" icon that can be read by screen readers
+     * The iconDescription prop is deprecated. Use aria-label, aria-labelledby, or aria-describedby to label your component.
      */
-    iconDescription: PropTypes.string,
+    iconDescription: deprecate(
+      PropTypes.string,
+      'The iconDescription prop is no longer needed and can be safely removed. This prop will be removed in the next major release of Carbon.'
+    ),
 
     /**
      * Specify the DOM element ID of the top-level node.
