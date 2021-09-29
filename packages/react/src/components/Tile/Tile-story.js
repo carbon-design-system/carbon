@@ -6,7 +6,6 @@
  */
 
 import React from 'react';
-import { action } from '@storybook/addon-actions';
 import './tile-story.scss';
 
 import {
@@ -51,8 +50,6 @@ const props = {
   }),
   selectable: () => ({
     selected: boolean('Selected (selected)', false),
-    handleClick: action('handleClick'),
-    handleKeyDown: action('handleKeyDown'),
     light: boolean('Light variant (light)', false),
     disabled: boolean('Disabled (disabled)', false),
   }),
@@ -63,11 +60,9 @@ const props = {
       radioValues,
       ''
     ),
-    onChange: action('onChange'),
   }),
   radio: () => ({
     name: text('Form item name (name in <RadioTile>)', 'tiles'),
-    onChange: action('onChange'),
     light: boolean('Light variant (light)', false),
     disabled: boolean('Disabled (disabled)', false),
   }),
@@ -84,7 +79,6 @@ const props = {
     ),
     tileCollapsedLabel: text('Collapsed icon text (tileCollapsedLabel)'),
     tileExpandedLabel: text('Collapsed icon text (tileExpandedLabel)'),
-    handleClick: action('handleClick'),
     light: boolean('Light variant (light)', false),
   }),
 };

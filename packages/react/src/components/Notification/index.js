@@ -10,6 +10,7 @@ import {
   NotificationButton as NotificationButtonNext,
   ToastNotification as ToastNotificationNext,
   InlineNotification as InlineNotificationNext,
+  ActionableNotification as ActionableNotificationNext,
 } from './next/Notification';
 import {
   NotificationActionButton as NotificationActionButtonClassic,
@@ -47,4 +48,10 @@ export const InlineNotification = createComponentToggle({
   name: 'InlineNotification',
   next: InlineNotificationNext,
   classic: InlineNotificationClassic,
+});
+
+export const ActionableNotification = createComponentToggle({
+  name: 'ActionableNotification',
+  next: ActionableNotificationNext,
+  classic: null,
 });

@@ -10,9 +10,8 @@ import DatePicker from '../DatePicker';
 import DatePickerSkeleton from '../DatePicker/DatePicker.Skeleton';
 import { mount, shallow } from 'enzyme';
 import DatePickerInput from '../DatePickerInput/DatePickerInput';
-import { settings } from 'carbon-components';
 
-const { prefix } = settings;
+const prefix = 'bx';
 
 describe('DatePicker', () => {
   describe('Renders as expected', () => {

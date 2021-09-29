@@ -8,13 +8,12 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import classnames from 'classnames';
-import { settings } from 'carbon-components';
 import { Copy16 } from '@carbon/icons-react';
 import Copy from '../Copy';
-
-const { prefix } = settings;
+import { usePrefix } from '../../internal/usePrefix';
 
 export default function CopyButton({ iconDescription, className, ...other }) {
+  const prefix = usePrefix();
   return (
     <Copy
       className={classnames(className, `${prefix}--copy-btn`)}

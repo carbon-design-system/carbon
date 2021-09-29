@@ -8,8 +8,8 @@
 import React from 'react';
 import { mount } from 'enzyme';
 import SideNavLink from '../SideNavLink';
-import { settings } from 'carbon-components';
-const { prefix } = settings;
+
+const prefix = 'bx';
 
 describe('SideNavLink', () => {
   let mockProps, wrapper;

@@ -17,7 +17,6 @@ describe('Breadcrumb', () => {
   let BreadcrumbItem;
 
   beforeEach(() => {
-    jest.resetModules();
     const BreadcrumbEntrypoint = require('../');
     Breadcrumb = BreadcrumbEntrypoint.Breadcrumb;
     BreadcrumbItem = BreadcrumbEntrypoint.BreadcrumbItem;
