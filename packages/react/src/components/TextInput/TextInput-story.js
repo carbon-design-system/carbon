@@ -245,3 +245,116 @@ Skeleton.parameters = {
         `,
   },
 };
+
+export const Animation1 = () => (
+  <div className={'input-animation-one'}>
+    <TextInput
+      type={select('Form control type (type)', types, 'text')}
+      {...props.SharedInputProps()}
+      {...props.TextInputProps()}
+    />
+  </div>
+);
+
+Animation1.storyName = 'Animation One: Input Field Wiggles';
+Animation1.parameters = {
+  info: {
+    text: `
+        Text fields enable the user to interact with and input data. A single line
+        field is used when the input anticipated by the user is a single line of
+        text as opposed to a paragraph.
+        The default type is 'text' and its value can be either 'string' or 'number'.
+      `,
+  },
+};
+
+export const Animation2 = () => (
+  <div className={'input-animation-two'}>
+    <TextInput
+      type={select('Form control type (type)', types, 'text')}
+      {...props.SharedInputProps()}
+      {...props.TextInputProps()}
+    />
+  </div>
+);
+
+Animation2.storyName = 'Animation Two: Helper Text Wiggles';
+Animation2.parameters = {
+  info: {
+    text: `
+        Text fields enable the user to interact with and input data. A single line
+        field is used when the input anticipated by the user is a single line of
+        text as opposed to a paragraph.
+        The default type is 'text' and its value can be either 'string' or 'number'.
+      `,
+  },
+};
+
+
+export const Animation3 = () => (
+  <div className={'input-animation-three'}>
+    <TextInput
+      type={select('Form control type (type)', types, 'text')}
+      {...props.SharedInputProps()}
+      {...props.TextInputProps()}
+    />
+  </div>
+);
+
+Animation3.storyName = 'Animation Three: Underline/Opacity - simultaneous, from center';
+Animation3.parameters = {
+  info: {
+    text: `
+        Text fields enable the user to interact with and input data. A single line
+        field is used when the input anticipated by the user is a single line of
+        text as opposed to a paragraph.
+        The default type is 'text' and its value can be either 'string' or 'number'.
+      `,
+  },
+};
+
+export const Animation4 = () => (
+  <div className={'input-animation-four'}>
+    <TextInput
+      type={select('Form control type (type)', types, 'text')}
+      {...props.SharedInputProps()}
+      {...props.TextInputProps()}
+    />
+  </div>
+);
+
+Animation4.storyName = 'Animation Four: Underline/Opacity - staggered, from center';
+Animation4.parameters = {
+  info: {
+    text: `
+        Text fields enable the user to interact with and input data. A single line
+        field is used when the input anticipated by the user is a single line of
+        text as opposed to a paragraph.
+        The default type is 'text' and its value can be either 'string' or 'number'.
+      `,
+  },
+};
+
+export const Animation5 = () => (
+  <div className={'input-animation-five'}>
+    <TextInput
+      type={select('Form control type (type)', types, 'text')}
+      {...props.SharedInputProps()}
+      {...props.TextInputProps()}
+    />
+  </div>
+);
+
+Animation5.storyName = 'Animation Five: Underline/Opacity - staggered, from L to R';
+Animation5.parameters = {
+  info: {
+    text: `
+        Text fields enable the user to interact with and input data. A single line
+        field is used when the input anticipated by the user is a single line of
+        text as opposed to a paragraph.
+        The default type is 'text' and its value can be either 'string' or 'number'.
+      `,
+  },
+};
+
+

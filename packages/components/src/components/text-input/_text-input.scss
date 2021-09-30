@@ -320,51 +320,128 @@
     @include focus-outline('outline');
   }
 
-  // Versions One and Two
-  // .#{$prefix}--text-input--invalid {
-  //     animation: shake 0.82s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
-  //     transform: translate3d(0, 0, 0);
-  //     backface-visibility: hidden;
-  //     perspective: 1000px;
-  //   }
+  // Validation Error Animations
 
-  // @keyframes shake {
-  //   10%,
-  //   90% {
-  //     transform: translate3d(-1px, 0, 0);
-  //   }
-
-  //   20%,
-  //   80% {
-  //     transform: translate3d(2px, 0, 0);
-  //   }
-
-  //   30%,
-  //   50%,
-  //   70% {
-  //     transform: translate3d(-4px, 0, 0);
-  //   }
-
-  //   40%,
-  //   60% {
-  //     transform: translate3d(4px, 0, 0);
-  //   }
-  // }
-
-  input[data-invalid]:not(:focus),
-  .bx--text-input__field-wrapper[data-invalid]
-    > .bx--text-input--invalid:not(:focus) {
-    @include focus-outline('reset');
+  // InputValidationOne
+  .input-animation-one {
+    .#{$prefix}--text-input--invalid {
+      animation: shake 0.82s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
+    }
   }
 
-  .bx--text-input-wrapper {
-    .bx--text-input__invalid-icon,
+  // InputValidationTwo
+  .input-animation-two {
     .bx--form-requirement {
-      // InputValidationThree
-      // animation: 120ms fade-in 120ms cubic-bezier(0.2, 0, 0.38, 0.9) forwards;
-      // InputValidationFour
-      animation: 240ms fade-in 120ms cubic-bezier(0.2, 0, 0.38, 0.9) forwards;
-      opacity: 0;
+      animation: shake 0.82s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
+    }
+  }
+
+  .input-animation-three,
+  .input-animation-four,
+  .input-animation-five {
+    input[data-invalid]:not(:focus),
+    .bx--text-input__field-wrapper[data-invalid]
+      > .bx--text-input--invalid:not(:focus) {
+      @include focus-outline('reset');
+    }
+
+    .bx--text-input-wrapper {
+      .bx--text-input__invalid-icon,
+      .bx--form-requirement {
+        animation: 120ms fade-in 120ms cubic-bezier(0.2, 0, 0.38, 0.9) forwards;
+        opacity: 0;
+      }
+    }
+
+    .bx--text-input__field-wrapper[data-invalid] {
+      #test2 {
+        border-bottom: none;
+      }
+
+      .underline {
+        transform: translateY(-1px);
+      }
+    }
+
+    .bx--form__helper-text {
+      margin-top: 6px;
+    }
+  }
+
+  // InputValidationThree
+  .input-animation-three {
+    .bx--text-input__field-wrapper[data-invalid] + .underline {
+      width: 0;
+      height: 2px;
+      background-color: #da1e28;
+      animation: $duration--moderate-02 draw-underline
+        motion(standard, productive) forwards;
+    }
+  }
+
+  // Input ValidationFour
+  .input-animation-four,
+  .input-animation-five {
+    .bx--text-input-wrapper {
+      .bx--text-input__invalid-icon,
+      .bx--form-requirement {
+        animation: 240ms fade-in 120ms cubic-bezier(0.2, 0, 0.38, 0.9) forwards;
+        opacity: 0;
+      }
+    }
+
+    .bx--text-input__field-wrapper[data-invalid] + .underline {
+      width: 0;
+      height: 2px;
+      background-color: #da1e28;
+      animation: $duration--moderate-02 draw-underline
+        motion(standard, productive) forwards;
+    }
+  }
+
+  // InputValidationFive
+  .input-animation-five {
+    .bx--text-input__field-wrapper[data-invalid] + .underline {
+      margin-left: auto;
+      margin-right: auto;
+    }
+  }
+
+  // InputValidationSix
+  // .input-animation-two {
+  // .bx--form__helper-text {
+  // transform: translate(16px, -32px);
+  // animation: 2s move-helper-text cubic-bezier(0.4, 0.14, 0.3, 1) forwards;
+  // }
+  // }
+
+  // keyframes
+  @keyframes move-helper-text {
+    100% {
+      transform: translate(16px, -32px);
+    }
+  }
+
+  @keyframes shake {
+    10%,
+    90% {
+      transform: translate3d(-1px, 0, 0);
+    }
+
+    20%,
+    80% {
+      transform: translate3d(2px, 0, 0);
+    }
+
+    30%,
+    50%,
+    70% {
+      transform: translate3d(-4px, 0, 0);
+    }
+
+    40%,
+    60% {
+      transform: translate3d(4px, 0, 0);
     }
   }
 
@@ -379,42 +456,6 @@
       width: 100%;
     }
   }
-
-  .bx--text-input__field-wrapper[data-invalid] + .underline {
-    width: 0;
-    height: 2px;
-
-    // InpurValidationFour
-    animation: $duration--moderate-02 draw-underline
-      motion(standard, productive) forwards;
-    // InputValidationFive
-    // margin-left: auto;
-    // margin-right: auto;
-    background-color: #da1e28;
-    transform: translateY(-2px);
-  }
-
-  .bx--form-requirement {
-    transform: translateY(-2px);
-  }
-
-  .bx--text-input__field-wrapper[data-invalid] {
-    #test2 {
-      border-bottom: none;
-    }
-  }
-
-  // .bx--form__helper-text {
-  // transform: translate(16px, -32px);
-  // animation: 2s move-helper-text cubic-bezier(0.4, 0.14, 0.3, 1) forwards;
-  // }
-
-  // @keyframes move-helper-text {
-  // 100% {
-  // transform: translate(16px, -32px);
-  // }
-  // }
-
   //-----------------------------
   // Inline Text Input
   //-----------------------------
