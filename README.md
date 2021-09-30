@@ -187,6 +187,7 @@ check out our [Contributing Guide](/.github/CONTRIBUTING.md) and our
     <td align="center"><a href="https://github.com/adamalston"><img src="https://avatars.githubusercontent.com/u/18297826?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Adam Alston</b></sub></a><br /><a href="https://github.com/carbon-design-system/carbon/commits?author=adamalston" title="Documentation">📖</a></td>
     <td align="center"><a href="https://github.com/Kiittyka"><img src="https://avatars.githubusercontent.com/u/41021851?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Krithika S Udupa</b></sub></a><br /><a href="https://github.com/carbon-design-system/carbon/commits?author=Kiittyka" title="Documentation">📖</a></td>
     <td align="center"><a href="https://github.com/egriff38"><img src="https://avatars.githubusercontent.com/u/6627718?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Eshin Griffith</b></sub></a><br /><a href="https://github.com/carbon-design-system/carbon/commits?author=egriff38" title="Code">💻</a></td>
+    <td align="center"><a href="https://riantavares.github.io/"><img src="https://avatars.githubusercontent.com/u/8935295?v=4?s=100" width="100px;" alt=""/><br /><sub><b>@RianTavaresOn</b></sub></a><br /><a href="https://github.com/carbon-design-system/carbon/commits?author=RianTavares" title="Code">💻</a> <a href="#design-RianTavares" title="Design">🎨</a></td>
   </tr>
 </table>
 
