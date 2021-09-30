@@ -13,6 +13,7 @@ const customProperties = require('postcss-custom-properties');
 const rtlcss = require('rtlcss');
 
 const {
+  CARBON_ENABLE_V11_RELEASE,
   CARBON_REACT_STORYBOOK_USE_CUSTOM_PROPERTIES = 'false',
   CARBON_REACT_STORYBOOK_USE_RTL,
   CARBON_REACT_STORYBOOK_USE_SASS_LOADER,
@@ -157,6 +158,18 @@ module.exports = {
         })
       );
     }
+
+    // Enable process.env variables other than STORYBOOK_* in our preview
+    // environment
+    // @see https://github.com/storybookjs/storybook/issues/12270#issuecomment-755398949
+    const definePlugin = config.plugins.find((plugin) => {
+      return plugin.definitions && plugin.definitions['process.env'];
+    });
+
+    definePlugin.definitions['process.env'] = {
+      ...definePlugin.definitions['process.env'],
+      CARBON_ENABLE_V11_RELEASE: JSON.stringify(CARBON_ENABLE_V11_RELEASE),
+    };
 
     return config;
   },
