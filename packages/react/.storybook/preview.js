@@ -13,6 +13,9 @@ import { configureActions } from '@storybook/addon-actions';
 import { CARBON_CURRENT_THEME, CARBON_TYPE_TOKEN } from './shared';
 import Container from './Container';
 import carbonTheme from './theme';
+// import * as FeatureFlags from '@carbon/feature-flags';
+
+// FeatureFlags.enable('enable-v11-release');
 
 const customPropertyPrefix = 'cds';
 
