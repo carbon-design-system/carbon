@@ -74,6 +74,7 @@ export Modal from './components/Modal';
 export ModalWrapper from './components/ModalWrapper';
 export MultiSelect from './components/MultiSelect';
 export {
+  ActionableNotification,
   ToastNotification,
   InlineNotification,
   NotificationActionButton,
@@ -230,3 +231,4 @@ export {
   Section as unstable_Section,
 } from './components/Heading';
 export { default as unstable_ProgressBar } from './components/ProgressBar';
+export { usePrefix as unstable_usePrefix } from './internal/usePrefix';

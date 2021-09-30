@@ -9,13 +9,12 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import cx from 'classnames';
 import { ChevronRight16 } from '@carbon/icons-react';
-import { settings } from 'carbon-components';
 import SkeletonText from '../SkeletonText';
 import deprecate from '../../prop-types/deprecate';
-
-const { prefix } = settings;
+import { usePrefix } from '../../internal/usePrefix';
 
 function AccordionSkeleton({ align, open, count, className, ...rest }) {
+  const prefix = usePrefix();
   const classes = cx(`${prefix}--accordion`, `${prefix}--skeleton`, className, {
     [`${prefix}--accordion--${align}`]: align,
   });
@@ -77,6 +76,7 @@ AccordionSkeleton.defaultProps = {
 };
 
 function AccordionSkeletonItem() {
+  const prefix = usePrefix();
   return (
     <li className={`${prefix}--accordion__item`}>
       <span className={`${prefix}--accordion__heading`}>
