@@ -138,6 +138,7 @@ const SideNav = React.forwardRef(function SideNav(props, ref) {
   );
 });
 
+SideNav.displayName = 'SideNav';
 SideNav.defaultProps = {
   // TO-DO: comment back in when footer is added for rails
   // translateById: (id) => {
