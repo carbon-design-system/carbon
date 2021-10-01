@@ -75,7 +75,7 @@ export default class Modal extends Component {
     hasScrollingContent: PropTypes.bool,
 
     /**
-     * The iconDescription prop is deprecated. Use aria-label, aria-labelledby, or aria-describedby to label your component.
+     * The iconDescription prop is deprecated. Use aria-label, aria-labelledby, or aria-describedby to label your component
      */
     iconDescription: deprecate(
       PropTypes.string,
