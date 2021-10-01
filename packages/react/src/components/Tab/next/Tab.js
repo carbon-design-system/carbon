@@ -8,12 +8,10 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import classNames from 'classnames';
-import { settings } from 'carbon-components';
 import deprecate from '../../../prop-types/deprecate';
+import { usePrefix } from '../../../internal/usePrefix';
 
-const { prefix } = settings;
-
-const Tab = React.forwardRef(function Tab(
+export const Tab = React.forwardRef(function Tab(
   {
     className,
     disabled,
@@ -32,6 +30,8 @@ const Tab = React.forwardRef(function Tab(
   },
   ref
 ) {
+  const { prefix } = usePrefix();
+
   const classes = classNames(className, `${prefix}--tabs__nav-link`, {
     [`${prefix}--tabs__nav-item--disabled`]: disabled,
     [`${prefix}--tabs__nav-item--selected`]: selected,

@@ -170,6 +170,7 @@ export default class Tabs extends React.Component {
       scrollLeft: tablistScrollLeft,
       scrollWidth: tablistScrollWidth,
     } = this.tablist?.current || {};
+
     const tab = this.getTabAt(this.state.selected);
     const horizontalOverflow = tablistScrollWidth > tablistClientWidth;
 
@@ -187,6 +188,8 @@ export default class Tabs extends React.Component {
         this.tablist.current.scrollLeft += this.OVERFLOW_BUTTON_OFFSET * 2;
       }
     }
+
+    console.log('THIS', this);
   }
 
   componentWillUnmount() {
@@ -203,6 +206,7 @@ export default class Tabs extends React.Component {
       scrollLeft: tablistScrollLeft,
       scrollWidth: tablistScrollWidth,
     } = this.tablist.current;
+
     const {
       tablistClientWidth: currentStateClientWidth,
       tablistScrollLeft: currentStateScrollLeft,
@@ -337,6 +341,8 @@ export default class Tabs extends React.Component {
 
   setTabAt = (index, tabRef) => {
     this[`tab${index}`] = tabRef;
+    console.log(this[`tab${index}`]);
+    console.log(tabRef);
   };
 
   overflowNavInterval = null;

@@ -20,7 +20,7 @@ import './Tabs-story.scss';
 import CodeSnippet from '../CodeSnippet';
 import Button from '../Button';
 import Tabs from '../Tabs';
-import { Tab } from '../Tab';
+import Tab from '../Tab';
 import TabsSkeleton from '../Tabs/Tabs.Skeleton';
 import mdx from './Tabs.mdx';
 

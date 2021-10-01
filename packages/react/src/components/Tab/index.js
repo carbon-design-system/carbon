@@ -7,7 +7,7 @@
 
 import * as FeatureFlags from '@carbon/feature-flags';
 import { Tab as TabNext } from './next/Tab';
-import TabClassic from './Tab';
+import { Tab as TabClassic } from './Tab';
 
 export const Tab = FeatureFlags.enabled('enable-v11-release')
   ? TabNext
