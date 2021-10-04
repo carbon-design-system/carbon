@@ -408,7 +408,7 @@ $list-box-menu-width: rem(300px);
     position: absolute;
     top: 50%;
     /* to preserve .5rem space between icons according to spec top/transform used to center the combobox clear selection icon in IE11 */
-    right: rem(36px);
+    right: rem(40px);
     display: flex;
     width: rem(24px);
     height: rem(24px);

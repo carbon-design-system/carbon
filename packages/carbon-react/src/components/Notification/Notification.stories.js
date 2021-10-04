@@ -6,84 +6,87 @@
  */
 
 import {
+  ActionableNotification,
   ToastNotification,
   InlineNotification,
-  NotificationActionButton,
+  unstable_FeatureFlags as FeatureFlags,
 } from 'carbon-components-react';
 import React from 'react';
-
-const notificationProps = () => ({
-  kind: 'info',
-  role: 'alert',
-  title: 'Notification title',
-  subtitle: 'Subtitle text goes here.',
-});
-
-const toastNotificationProps = () => ({
-  ...notificationProps(),
-});
+import { action } from '@storybook/addon-actions';
 
 export default {
   title: 'Components/Notifications',
-  parameters: {
-    controls: {
-      hideNoControlsWarning: true,
+  decorators: [
+    (Story) => (
+      <FeatureFlags flags={{ 'enable-v11-release': true }}>
+        <Story />
+      </FeatureFlags>
+    ),
+  ],
+  argTypes: {
+    kind: {
+      options: [
+        'error',
+        'info',
+        'info-square',
+        'success',
+        'warning',
+        'warning-alt',
+      ],
+      control: {
+        type: 'select',
+      },
     },
+    className: {
+      control: {
+        type: 'text',
+      },
+    },
+  },
+  args: {
+    kind: 'error',
+    children: 'Notification content',
+    lowContrast: false,
+    closeOnEscape: false,
+    hideCloseButton: false,
+    iconDescription: 'closes notification',
+    statusIconDescription: 'notification',
+    onClose: action('onClose'),
+    onCloseButtonClick: action('onCloseButtonClick'),
   },
 };
 
-export const Toast = () => (
-  <ToastNotification
-    {...toastNotificationProps()}
-    caption={('Caption (caption)', '00:00:00 AM')}
-    style={{ marginBottom: '.5rem' }}
-  />
-);
-
-export const ToastPlayground = ({
-  kind = 'info',
-  title = 'Notification title',
-  subtitle = 'Notification subtitle',
-  caption = '00:00:00 AM',
-  lowContrast = false,
-}) => {
-  return (
-    <ToastNotification
-      kind={kind}
-      title={title}
-      subtitle={subtitle}
-      lowContrast={lowContrast}
-      caption={caption}
-    />
-  );
-};
-ToastPlayground.argTypes = {
-  kind: {
-    options: [
-      'error',
-      'info',
-      'info-square',
-      'success',
-      'warning',
-      'warning-alt',
-    ],
+export const Toast = (args) => <ToastNotification {...args} />;
+Toast.argTypes = {
+  role: {
+    options: ['alert', 'log', 'status'],
     control: {
       type: 'select',
     },
   },
-  lowContrast: {
-    value: false,
+};
+Toast.args = { role: 'status', timeout: 0 };
+
+export const Inline = (args) => (
+  <>
+    <InlineNotification {...args} />
+    <InlineNotification {...args} />
+    <InlineNotification {...args} />
+  </>
+);
+Inline.argTypes = {
+  role: {
+    options: ['alert', 'log', 'status'],
     control: {
-      type: 'boolean',
+      type: 'select',
     },
   },
 };
+Inline.args = { role: 'status' };
 
-export const Inline = () => (
-  <InlineNotification
-    {...notificationProps()}
-    actions={<NotificationActionButton>{'Action'}</NotificationActionButton>}
-  />
-);
+export const Actionable = (args) => <ActionableNotification {...args} />;
 
-Inline.storyName = 'Inline';
+Actionable.args = {
+  actionButtonLabel: 'Action',
+  inline: false,
+};

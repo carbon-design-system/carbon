@@ -16,6 +16,9 @@ export default {
     docs: {
       page: mdx,
     },
+    controls: {
+      hideNoControlsWarning: true,
+    },
   },
 };
 
