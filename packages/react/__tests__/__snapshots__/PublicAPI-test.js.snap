@@ -4487,6 +4487,11 @@ Map {
     },
     "render": [Function],
   },
+  "ActionableNotification" => Object {
+    "$$typeof": Symbol(react.forward_ref),
+    "displayName": "FeatureToggle(ActionableNotification)",
+    "render": [Function],
+  },
   "ToastNotification" => Object {
     "$$typeof": Symbol(react.forward_ref),
     "displayName": "FeatureToggle(ToastNotification)",
@@ -6035,6 +6040,7 @@ Map {
             "cool-gray",
             "warm-gray",
             "high-contrast",
+            "outline",
           ],
         ],
         "type": "oneOf",
