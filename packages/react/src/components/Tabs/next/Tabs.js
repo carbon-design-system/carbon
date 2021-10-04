@@ -21,7 +21,7 @@ import TabContent from '../../TabContent';
 import deprecate from '../../../prop-types/deprecate';
 import { usePrefix } from '../../../internal/usePrefix';
 
-export const Tabs = React.forwardRef(function Tabs(
+const Tabs = React.forwardRef(function Tabs(
   {
     children,
     className,
@@ -555,3 +555,5 @@ Tabs.propTypes = {
    */
   type: PropTypes.oneOf(['default', 'container']),
 };
+
+export default Tabs;

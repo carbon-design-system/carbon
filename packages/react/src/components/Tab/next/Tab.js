@@ -11,7 +11,7 @@ import classNames from 'classnames';
 import deprecate from '../../../prop-types/deprecate';
 import { usePrefix } from '../../../internal/usePrefix';
 
-export const Tab = React.forwardRef(function Tab(
+const Tab = React.forwardRef(function Tab(
   {
     className,
     disabled,
@@ -172,3 +172,5 @@ Tab.propTypes = {
    */
   tabIndex: PropTypes.number,
 };
+
+export default Tab;
