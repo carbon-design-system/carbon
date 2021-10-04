@@ -101,7 +101,7 @@ export default class FileUploader extends React.Component {
 
   static defaultProps = {
     iconDescription: FeatureFlags.enabled('enable-v11-release')
-      ? ''
+      ? undefined
       : 'Provide icon description',
     filenameStatus: 'uploading',
     buttonLabel: '',
