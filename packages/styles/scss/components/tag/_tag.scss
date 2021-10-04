@@ -114,6 +114,12 @@
     );
   }
 
+  .#{$prefix}--tag--outline {
+    @include tag-theme($background, $text-primary, $layer-hover);
+
+    box-shadow: inset 0 0 0 1px $background-inverse;
+  }
+
   .#{$prefix}--tag--disabled,
   .#{$prefix}--tag--filter.#{$prefix}--tag--disabled,
   .#{$prefix}--tag--interactive.#{$prefix}--tag--disabled {
