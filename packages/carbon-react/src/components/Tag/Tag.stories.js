@@ -42,13 +42,25 @@ export const Default = () => {
       <Tag className="some-class" type="gray" size="sm" title="Clear Filter">
         {'Tag content'}
       </Tag>
-      <Tag className="some-class" type="cool-gray" size="sm" title="Clear Filter">
+      <Tag
+        className="some-class"
+        type="cool-gray"
+        size="sm"
+        title="Clear Filter">
         {'Tag content'}
       </Tag>
-      <Tag className="some-class" type="warm-gray" size="sm" title="Clear Filter">
+      <Tag
+        className="some-class"
+        type="warm-gray"
+        size="sm"
+        title="Clear Filter">
         {'Tag content'}
       </Tag>
-      <Tag className="some-class" type="high-contrast" size="sm" title="Clear Filter">
+      <Tag
+        className="some-class"
+        type="high-contrast"
+        size="sm"
+        title="Clear Filter">
         {'Tag content'}
       </Tag>
       <Tag className="some-class" type="outline" size="sm" title="Clear Filter">
