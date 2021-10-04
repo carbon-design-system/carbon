@@ -3772,9 +3772,7 @@ Map {
         "type": "bool",
       },
       "focusTrap": [Function],
-      "hasForm": Object {
-        "type": "bool",
-      },
+      "hasForm": [Function],
       "hasScrollingContent": Object {
         "type": "bool",
       },
