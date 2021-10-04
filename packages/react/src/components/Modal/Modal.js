@@ -419,7 +419,8 @@ export default class Modal extends Component {
         onClick={onRequestClose}
         title={iconDescription}
         aria-label={iconDescription}
-        ref={this.button}>
+        ref={this.button}
+      >
         <Close20
           aria-label={iconDescription}
           className={`${this.modalCloseButtonClass}__icon`}
@@ -451,32 +452,6 @@ export default class Modal extends Component {
       alertDialogProps['aria-describedby'] = this.modalBodyId;
     }
 
-    const SecondaryButtonSet = () => {
-      if (Array.isArray(secondaryButtons) && secondaryButtons.length <= 2) {
-        return secondaryButtons.map(
-          ({ buttonText, onClick: onButtonClick }, i) => (
-            <Button
-              key={`${buttonText}-${i}`}
-              kind="secondary"
-              onClick={onButtonClick}>
-              {buttonText}
-            </Button>
-          )
-        );
-      }
-      if (secondaryButtonText) {
-        return (
-          <Button
-            kind="secondary"
-            onClick={onSecondaryButtonClick}
-            ref={this.secondaryButton}>
-            {secondaryButtonText}
-          </Button>
-        );
-      }
-      return null;
-    };
-
     const modalBody = (
       <div
         ref={this.innerModal}
@@ -485,19 +460,22 @@ export default class Modal extends Component {
         className={containerClasses}
         aria-label={ariaLabel}
         aria-modal="true"
-        tabIndex="-1">
+        tabIndex="-1"
+      >
         <div className={`${prefix}--modal-header`}>
           {passiveModal && modalButton}
           {modalLabel && (
             <h2
               id={this.modalLabelId}
-              className={`${prefix}--modal-header__label`}>
+              className={`${prefix}--modal-header__label`}
+            >
               {modalLabel}
             </h2>
           )}
           <h3
             id={this.modalHeadingId}
-            className={`${prefix}--modal-header__heading`}>
+            className={`${prefix}--modal-header__heading`}
+          >
             {modalHeading}
           </h3>
           {!passiveModal && modalButton}
@@ -506,7 +484,8 @@ export default class Modal extends Component {
           id={this.modalBodyId}
           className={contentClasses}
           {...hasScrollingContentProps}
-          aria-labelledby={getAriaLabelledBy}>
+          aria-labelledby={getAriaLabelledBy}
+        >
           {this.props.children}
         </div>
         {hasScrollingContent && (
@@ -514,12 +493,33 @@ export default class Modal extends Component {
         )}
         {!passiveModal && (
           <ButtonSet className={footerClasses}>
-            <SecondaryButtonSet />
+            {Array.isArray(secondaryButtons) && secondaryButtons.length <= 2
+              ? secondaryButtons.map(
+                  ({ buttonText, onClick: onButtonClick }, i) => (
+                    <Button
+                      key={`${buttonText}-${i}`}
+                      kind="secondary"
+                      onClick={onButtonClick}
+                    >
+                      {buttonText}
+                    </Button>
+                  )
+                )
+              : secondaryButtonText && (
+                  <Button
+                    kind="secondary"
+                    onClick={onSecondaryButtonClick}
+                    ref={this.secondaryButton}
+                  >
+                    {secondaryButtonText}
+                  </Button>
+                )}
             <Button
               kind={danger ? 'danger' : 'primary'}
               disabled={primaryButtonDisabled}
               onClick={onRequestSubmit}
-              ref={this.button}>
+              ref={this.button}
+            >
               {primaryButtonText}
             </Button>
           </ButtonSet>
@@ -536,13 +536,15 @@ export default class Modal extends Component {
         className={modalClasses}
         role="presentation"
         onTransitionEnd={this.props.open ? this.handleTransitionEnd : undefined}
-        ref={this.outerModal}>
+        ref={this.outerModal}
+      >
         {/* Non-translatable: Focus-wrap code makes this `<span>` not actually read by screen readers */}
         <span
           ref={this.startTrap}
           tabIndex="0"
           role="link"
-          className={`${prefix}--visually-hidden`}>
+          className={`${prefix}--visually-hidden`}
+        >
           Focus sentinel
         </span>
         {modalBody}
@@ -551,7 +553,8 @@ export default class Modal extends Component {
           ref={this.endTrap}
           tabIndex="0"
           role="link"
-          className={`${prefix}--visually-hidden`}>
+          className={`${prefix}--visually-hidden`}
+        >
           Focus sentinel
         </span>
       </div>
