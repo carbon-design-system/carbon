@@ -25,6 +25,7 @@ const TYPES = {
   'cool-gray': 'Cool-Gray',
   'warm-gray': 'Warm-Gray',
   'high-contrast': 'High-Contrast',
+  outline: 'Outline',
 };
 
 const Tag = ({
