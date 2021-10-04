@@ -6038,6 +6038,7 @@ Map {
             "cool-gray",
             "warm-gray",
             "high-contrast",
+            "outline",
           ],
         ],
         "type": "oneOf",
