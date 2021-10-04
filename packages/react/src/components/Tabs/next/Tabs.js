@@ -6,13 +6,7 @@
  */
 
 import PropTypes from 'prop-types';
-import React, {
-  useState,
-  useRef,
-  useEffect,
-  useCallback,
-  useMemo,
-} from 'react';
+import React, { useState, useRef, useEffect, useCallback } from 'react';
 import classNames from 'classnames';
 import { ChevronLeft16, ChevronRight16 } from '@carbon/icons-react';
 import debounce from 'lodash.debounce';
@@ -43,20 +37,13 @@ const Tabs = React.forwardRef(function Tabs(
   const tablist = useRef();
   const leftOverflowNavButton = useRef();
   const rightOverflowNavButton = useRef();
+  const tabs = useRef([]);
 
   //state
   const [horizontalOverflow, setHorizontalOverflow] = useState(false);
-  const [tablistClientWidth, setTablistClientWidth] = useState(
-    tablist.current.clientWidth
-  );
-  const [tablistScrollWidth, setTablistScrollWidth] = useState(
-    tablist.current.scrollWidth
-  );
-  const [tablistScrollLeft, setTablistScrollLeft] = useState(
-    tablist.current.scrollLeft
-  );
-
-  let tabs = useMemo(() => {}, []);
+  const [tablistClientWidth, setTablistClientWidth] = useState(null);
+  const [tablistScrollWidth, setTablistScrollWidth] = useState(null);
+  const [tablistScrollLeft, setTablistScrollLeft] = useState(null);
 
   //prop + state alignment - getDerivedStateFromProps
   const [isSelected, setIsSelected] = useState(selected);
@@ -90,9 +77,13 @@ const Tabs = React.forwardRef(function Tabs(
    * @type {Function}
    * @private
    */
-  const _debouncedHandleWindowResize = debounce(_handleWindowResize, 200);
+  const _debouncedHandleWindowResize = useRef();
 
-  const _handleWindowResize = handleScroll();
+  const _handleWindowResize = handleScroll;
+
+  useEffect(() => {
+    _debouncedHandleWindowResize.current = debounce(_handleWindowResize, 200);
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   const getEnabledTabs = () =>
     React.Children.toArray(children).reduce(
@@ -127,7 +118,7 @@ const Tabs = React.forwardRef(function Tabs(
 
   const getTabAt = useCallback(
     (index, useFresh) =>
-      (!useFresh && tabs[`tab${index}`]) ||
+      (!useFresh && tabs.current[index]) ||
       React.Children.toArray(children)[index],
     [tabs, children]
   );
@@ -204,7 +195,7 @@ const Tabs = React.forwardRef(function Tabs(
   };
 
   const setTabAt = (index, tabRef) => {
-    tabs[`tab${index}`] = tabRef;
+    tabs.current[index] = tabRef;
   };
 
   let overflowNavInterval = null;
@@ -268,10 +259,15 @@ const Tabs = React.forwardRef(function Tabs(
   //component did mount equivalent
   useEffect(() => {
     _handleWindowResize();
-    window.addEventListener('resize', _debouncedHandleWindowResize);
+    window.addEventListener('resize', _debouncedHandleWindowResize.current);
 
     // scroll selected tab into view on mount
     const { clientWidth, scrollLeft, scrollWidth } = tablist?.current || {};
+
+    setTablistClientWidth(clientWidth);
+    setTablistScrollWidth(scrollWidth);
+    setTablistScrollLeft(scrollLeft);
+
     const tab = getTabAt(isSelected);
     const horizontalOverflow = scrollWidth > clientWidth;
 
@@ -296,10 +292,13 @@ const Tabs = React.forwardRef(function Tabs(
 
     //component will unmount equivalent
     return () => {
-      if (_debouncedHandleWindowResize) {
-        _debouncedHandleWindowResize.cancel();
+      if (_debouncedHandleWindowResize.current) {
+        _debouncedHandleWindowResize.current.cancel();
       }
-      window.removeEventListener('resize', _debouncedHandleWindowResize);
+      window.removeEventListener(
+        'resize',
+        _debouncedHandleWindowResize.current
+      );
     };
   }, [
     isSelected,
@@ -434,7 +433,7 @@ const Tabs = React.forwardRef(function Tabs(
             handleOverflowNavMouseDown(event, { direction: -1 })
           }
           onMouseUp={handleOverflowNavMouseUp}
-          ref={leftOverflowNavButton.current}
+          ref={leftOverflowNavButton}
           tabIndex="-1"
           type="button"
           {...leftOverflowButtonProps}>
@@ -447,7 +446,7 @@ const Tabs = React.forwardRef(function Tabs(
           role="tablist"
           tabIndex={-1}
           className={classes.tablist}
-          ref={tablist.current}>
+          ref={tablist}>
           {tabsWithProps}
         </ul>
         {!rightOverflowNavButtonHidden && (
@@ -462,7 +461,7 @@ const Tabs = React.forwardRef(function Tabs(
             handleOverflowNavMouseDown(event, { direction: 1 })
           }
           onMouseUp={handleOverflowNavMouseUp}
-          ref={rightOverflowNavButton.current}
+          ref={rightOverflowNavButton}
           tabIndex="-1"
           type="button"
           {...rightOverflowButtonProps}>
