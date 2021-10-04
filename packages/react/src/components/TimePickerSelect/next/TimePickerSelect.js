@@ -11,7 +11,7 @@ import cx from 'classnames';
 import { ChevronDown16 } from '@carbon/icons-react';
 import { usePrefix } from '../../../internal/usePrefix';
 
-export const TimePickerSelect = React.forwardRef(function TimePickerSelect(
+const TimePickerSelect = React.forwardRef(function TimePickerSelect(
   {
     children,
     id,
@@ -92,3 +92,5 @@ TimePickerSelect.propTypes = {
    */
   labelText: PropTypes.node.isRequired,
 };
+
+export default TimePickerSelect;
