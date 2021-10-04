@@ -192,7 +192,7 @@ class NumberInput extends Component {
     disabled: false,
     hideLabel: false,
     iconDescription: FeatureFlags.enabled('enable-v11-release')
-      ? ''
+      ? undefined
       : 'choose a number',
     step: 1,
     invalid: false,
