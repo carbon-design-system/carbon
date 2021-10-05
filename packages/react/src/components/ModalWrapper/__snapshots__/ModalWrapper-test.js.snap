@@ -117,10 +117,12 @@ exports[`ModalWrapper should render 1`] = `
               type="button"
             >
               <ForwardRef(Close20)
+                aria-hidden="true"
                 aria-label="Close"
                 className="bx--modal-close__icon"
               >
                 <Icon
+                  aria-hidden="true"
                   aria-label="Close"
                   className="bx--modal-close__icon"
                   fill="currentColor"
@@ -131,6 +133,7 @@ exports[`ModalWrapper should render 1`] = `
                   xmlns="http://www.w3.org/2000/svg"
                 >
                   <svg
+                    aria-hidden="true"
                     aria-label="Close"
                     className="bx--modal-close__icon"
                     fill="currentColor"
