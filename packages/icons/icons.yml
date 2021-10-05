@@ -938,7 +938,7 @@
     - 32
 - name: application--mobile
   friendly_name: Application mobile
-  aliases: 
+  aliases:
     - application
     - mobile
     - systems
@@ -951,8 +951,8 @@
     - 32
 - name: application--virtual
   friendly_name: Application virtual
-  aliases: 
-    - application 
+  aliases:
+    - application
     - virtual
     - systems
     - app
@@ -962,7 +962,7 @@
     - 32
 - name: application--web
   friendly_name: Application web
-  aliases: 
+  aliases:
     - application
     - web
     - systems
@@ -1462,7 +1462,7 @@
     - 32
 - name: bastion-host
   friendly_name: bastion-host
-  aliases: 
+  aliases:
     - bastion
     - host
     - castle
@@ -1612,7 +1612,7 @@
     - 32
 - name: block-storage
   friendly_name: Block storage
-  aliases: 
+  aliases:
     - block storage
     - storage
     - systems
@@ -1620,7 +1620,7 @@
     - 32
 - name: block-storage--alt
   friendly_name: Block storage alt
-  aliases: 
+  aliases:
     - block storage
     - storage
     - alternate
@@ -2248,7 +2248,7 @@
     - 32
 - name: carbon-accounting
   friendly_name: carbon-accounting
-  aliases: 
+  aliases:
     - carbon
     - accounting
     - CO2
@@ -2533,7 +2533,7 @@
     - 32
 - name: cell-tower
   friendly_name: Cell tower
-  aliases: 
+  aliases:
     - cell
     - tower
     - mobile carrier
@@ -3213,8 +3213,8 @@
     - 32
 - name: chat--operational
   friendly_name: Chat operational
-  aliases: 
-    - chat 
+  aliases:
+    - chat
     - operational
   sizes:
     - 32
@@ -3757,7 +3757,7 @@
     - 32
 - name: cloud--alerting
   friendly_name: Cloud alerting
-  aliases: 
+  aliases:
     - cloud
     - alerting
     - alert
@@ -3773,7 +3773,7 @@
     - 32
 - name: cloud--auditing
   friendly_name: Cloud auditing
-  aliases: 
+  aliases:
     - cloud
     - auditing
     - review
@@ -3817,7 +3817,7 @@
     - forecast
 - name: cloud--logging
   friendly_name: Cloud logging
-  aliases: 
+  aliases:
     - cloud
     - logging
     - log
@@ -3830,9 +3830,9 @@
     - 32
 - name: cloud--monitoring
   friendly_name: Cloud monitoring
-  aliases: 
+  aliases:
     - cloud
-    - monitoring 
+    - monitoring
     - monitor
     - health
     - interface
@@ -3865,7 +3865,7 @@
     - forecast
 - name: cloud--service-management
   friendly_name: Cloud service management
-  aliases: 
+  aliases:
     - cloud
     - service
     - management
@@ -3955,7 +3955,7 @@
     - 32
 - name: cloud-services
   friendly_name: Cloud services
-  aliases: 
+  aliases:
     - cloud
     - settings
     - preferences
@@ -4025,7 +4025,7 @@
     - 32
 - name: code-signing-service
   friendly_name: Code signing service
-  aliases: 
+  aliases:
     - systems
     - code
     - signing
@@ -4291,7 +4291,7 @@
     - 32
 - name: container-registry
   friendly_name: Container registry
-  aliases: 
+  aliases:
     - container
     - registry
     - Kubernetes
@@ -4301,11 +4301,11 @@
     - 32
 - name: container-services
   friendly_name: Container services
-  aliases: 
+  aliases:
     - container
     - registry
     - Kubernetes
-    - cloud 
+    - cloud
     - services
     - network
     - cloud
@@ -4320,9 +4320,9 @@
     - 32
 - name: content-delivery-network
   friendly_name: Content delivery network
-  aliases: 
+  aliases:
     - content
-    - delivery 
+    - delivery
     - network
     - app
     - application
@@ -4525,7 +4525,7 @@
     - glyph
 - name: critical-severity
   friendly_name: Critical severity
-  aliases: 
+  aliases:
     - critical
     - severe
     - warning
@@ -4903,7 +4903,7 @@
     - 32
 - name: data--center
   friendly_name: data--center
-  aliases: 
+  aliases:
     - data
     - center
     - systems
@@ -5014,7 +5014,7 @@
     - 32
 - name: data-accessor
   friendly_name: Data accessor
-  aliases: 
+  aliases:
     - systems
     - data
     - accessor
@@ -5022,7 +5022,7 @@
     - 32
 - name: data-backup
   friendly_name: Data backup
-  aliases: 
+  aliases:
     - systems
     - data
     - backup
@@ -5040,7 +5040,7 @@
     - 32
 - name: data-blob
   friendly_name: Data blob
-  aliases: 
+  aliases:
     - systems
     - data
     - blob
@@ -5066,10 +5066,7 @@
   sizes:
     - 32
 - name: data-diode
-  friendly_name: Data diode
-    - data
-    - diode
-    - systems
+  friendly_name: Data diode - data - diode - systems
   sizes:
     - 32
 - name: data-player
@@ -5215,7 +5212,7 @@
   sizes:
     - 32
 - name: database--etcd
-  friendly_name: Database etcd 
+  friendly_name: Database etcd
   aliases:
     - enterprise
     - database
@@ -5566,7 +5563,7 @@
     - communication
 - name: direct-link
   friendly_name: Direct link
-  aliases: 
+  aliases:
     - app
     - application
     - direct
@@ -5899,12 +5896,12 @@
     - 32
 - name: dns-services
   friendly_name: DNS services
-  aliases: 
+  aliases:
     - app
     - application
     - catalogue
     - catalog
-    - DNS 
+    - DNS
     - services
     - domain
     - name
@@ -5977,7 +5974,7 @@
     - PDF
     - ePDF
     - electronic
-    - digital 
+    - digital
     - interactive
     - publication
   sizes:
@@ -6022,7 +6019,7 @@
     - 32
 - name: document--protected
   friendly_name: Document protected
-  aliases: 
+  aliases:
     - file
     - doc
     - paper
@@ -6032,7 +6029,7 @@
     - 32
 - name: document--security
   friendly_name: Document security
-  aliases: 
+  aliases:
     - file
     - doc
     - paper
@@ -6042,7 +6039,7 @@
     - 32
 - name: document--signed
   friendly_name: Document signed
-  aliases: 
+  aliases:
     - file
     - doc
     - paper
@@ -6088,7 +6085,7 @@
     - 32
 - name: document--unprotected
   friendly_name: Document unprotected
-  aliases: 
+  aliases:
     - file
     - doc
     - paper
@@ -6155,7 +6152,7 @@
     - 32
 - name: dog-walker
   friendly_name: Dog walker
-  aliases: 
+  aliases:
     - user
     - person
     - pet
@@ -6302,7 +6299,7 @@
     - 32
 - name: drone--front
   friendly_name: Drone front
-  aliases: 
+  aliases:
     - drone
     - technology
     - robot
@@ -6312,7 +6309,7 @@
     - 32
 - name: drone--video
   friendly_name: Drone video
-  aliases: 
+  aliases:
     - drone
     - video
     - technology
@@ -6503,7 +6500,7 @@
     - 32
 - name: edge-node--alt
   friendly_name: Edge node alt
-  aliases: 
+  aliases:
     - edge node
     - edge
     - technology
@@ -6593,7 +6590,7 @@
     - 32
 - name: energy--renewable
   friendly_name: Energy renewable
-  aliases: 
+  aliases:
     - energy
     - renewable
     - conservation
@@ -7093,11 +7090,11 @@
     - 32
 - name: file-storage
   friendly_name: file-storage
-  aliases: 
-   - file
-   - storage
-   - repository
-   - systems
+  aliases:
+    - file
+    - storage
+    - repository
+    - systems
   sizes:
     - 32
 - name: filter
@@ -7169,7 +7166,7 @@
     - 32
 - name: firewall
   friendly_name: Firewall
-  aliases: 
+  aliases:
     - firewall
     - security
     - protect
@@ -7179,7 +7176,7 @@
     - 32
 - name: firewall--classic
   friendly_name: Firewall classic
-  aliases: 
+  aliases:
     - firewall
     - security
     - protect
@@ -7354,7 +7351,7 @@
     - 32
 - name: floating-ip
   friendly_name: floating-ip
-  aliases: 
+  aliases:
     - floating
     - IP
     - routable
@@ -7448,7 +7445,7 @@
     - 32
 - name: flow-logs-vpc
   friendly_name: flow-logs-vpc
-  aliases: 
+  aliases:
     - flow
     - logs
     - vpc
@@ -7688,14 +7685,14 @@
     - 32
 - name: friendship
   friendly_name: friendship
-  aliases: 
-   - people
-   - friends
-   - friendship
-   - relationship
-   - partner
-   - human
-   - user
+  aliases:
+    - people
+    - friends
+    - friendship
+    - relationship
+    - partner
+    - human
+    - user
   sizes:
     - 32
 - name: fruit-bowl
@@ -7794,14 +7791,14 @@
     - 32
 - name: gateway
   friendly_name: Gateway
-  aliases: 
+  aliases:
     - gateway
     - systems
   sizes:
     - 32
 - name: gateway--api
   friendly_name: Gateway api
-  aliases: 
+  aliases:
     - gateway
     - systems
     - api
@@ -7812,7 +7809,7 @@
     - 32
 - name: gateway--mail
   friendly_name: Gateway mail
-  aliases: 
+  aliases:
     - gateway
     - systems
     - mail
@@ -7822,7 +7819,7 @@
     - 32
 - name: gateway--public
   friendly_name: Gateway public
-  aliases: 
+  aliases:
     - gateway
     - systems
     - public
@@ -7832,7 +7829,7 @@
     - 32
 - name: gateway--security
   friendly_name: Gateway security
-  aliases: 
+  aliases:
     - gateway
     - systems
     - security
@@ -7842,7 +7839,7 @@
     - 32
 - name: gateway--user-access
   friendly_name: Gateway user access
-  aliases:  
+  aliases:
     - gateway
     - systems
     - user
@@ -7853,7 +7850,7 @@
     - 32
 - name: gateway--vpn
   friendly_name: Gateway VPN
-  aliases:  
+  aliases:
     - gateway
     - systems
     - VPN
@@ -8036,7 +8033,7 @@
     - 32
 - name: group--access
   friendly_name: Group access
-  aliases:  
+  aliases:
     - group
     - systems
     - access
@@ -8045,7 +8042,7 @@
     - 32
 - name: group--account
   friendly_name: Group account
-  aliases:  
+  aliases:
     - group
     - systems
     - account
@@ -8065,7 +8062,7 @@
     - 32
 - name: group--resource
   friendly_name: Group resource
-  aliases:  
+  aliases:
     - group
     - systems
     - resource
@@ -8073,7 +8070,7 @@
     - 32
 - name: group--security
   friendly_name: Group security
-  aliases:  
+  aliases:
     - group
     - systems
     - security
@@ -8121,7 +8118,7 @@
     - 32
 - name: gui
   friendly_name: GUI
-  aliases: 
+  aliases:
     - graphical user interface
     - interface
     - GUI
@@ -8130,7 +8127,7 @@
     - 32
 - name: gui--management
   friendly_name: GUI management
-  aliases: 
+  aliases:
     - graphical user interface
     - interface
     - GUI
@@ -8179,7 +8176,7 @@
     - 32
 - name: hardware-security-module
   friendly_name: Hardware security module
-  aliases: 
+  aliases:
     - hardware
     - secure
     - key
@@ -8541,7 +8538,7 @@
     - 32
 - name: hybrid-networking--alt
   friendly_name: Hybrid networking alt
-  aliases: 
+  aliases:
     - hybrid networking
     - networking
     - linking
@@ -8565,7 +8562,7 @@
     - 32
 - name: ibm-cloud--dedicated-host
   friendly_name: IBM Cloud® dedicated host
-  aliases: 
+  aliases:
     - product
     - cloud
     - hybrid
@@ -8577,7 +8574,7 @@
     - 32
 - name: ibm-cloud--internet-services
   friendly_name: IBM Cloud® Internet Services
-  aliases: 
+  aliases:
     - services
     - cloud
     - hybrid
@@ -8588,7 +8585,7 @@
     - 32
 - name: ibm-cloud--subnets
   friendly_name: IBM Cloud® subnets
-  aliases:  
+  aliases:
     - subnets
     - cloud
     - hybrid
@@ -8599,7 +8596,7 @@
     - 32
 - name: ibm-cloud--vpc-endpoints
   friendly_name: IBM Cloud® VPC endpoints
-  aliases:  
+  aliases:
     - virtual private cloud
     - VPC
     - endpoints
@@ -8614,7 +8611,7 @@
   friendly_name: IBM Cloud Pak® Applications
   aliases:
     - enterprise
-    - app 
+    - app
     - applications
     - IBM Cloud Pak®
     - cloud
@@ -8690,7 +8687,7 @@
     - 32
 - name: ibm-security--services
   friendly_name: IBM Security™ Services
-  aliases: 
+  aliases:
     - IBM Security™
     - services
     - app
@@ -8740,7 +8737,7 @@
     - 32
 - name: id-management
   friendly_name: ID management
-  aliases: 
+  aliases:
     - ID
     - identity
     - settings
@@ -8858,7 +8855,7 @@
     - 32
 - name: image-service
   friendly_name: Image service
-  aliases: 
+  aliases:
     - image
     - service
   sizes:
@@ -9029,7 +9026,7 @@
     - 32
 - name: infrastructure--classic
   friendly_name: Infrastructure classic
-  aliases: 
+  aliases:
     - infrastructure
     - app
     - cloud
@@ -9076,7 +9073,7 @@
     - 32
 - name: instance--bx
   friendly_name: Instance Bx
-  aliases: 
+  aliases:
     - instance
     - bx
     - systems
@@ -9084,14 +9081,14 @@
     - 32
 - name: instance--classic
   friendly_name: Instance classic
-  aliases: 
+  aliases:
     - instance
     - systems
   sizes:
     - 32
 - name: instance--cx
   friendly_name: Instance Cx
-  aliases: 
+  aliases:
     - instance
     - Cx
     - systems
@@ -9107,7 +9104,7 @@
     - 32
 - name: instance--virtual
   friendly_name: Instance virtual
-  aliases: 
+  aliases:
     - instance
     - virtual
     - systems
@@ -9372,7 +9369,7 @@
     - 32
 - name: kubernetes
   friendly_name: Kubernetes
-  aliases: 
+  aliases:
     - Kubernetes
     - container
     - cloud
@@ -9906,8 +9903,8 @@
     - tally
 - name: load-balancer--application
   friendly_name: Load balancer application
-  aliases: 
-    - load 
+  aliases:
+    - load
     - balancer
     - app
     - application
@@ -9915,8 +9912,8 @@
     - 32
 - name: load-balancer--classic
   friendly_name: Load balancer classic
-  aliases:  
-    - load 
+  aliases:
+    - load
     - balancer
     - app
     - application
@@ -9924,8 +9921,8 @@
     - 32
 - name: load-balancer--global
   friendly_name: Load balancer global
-  aliases:  
-    - load 
+  aliases:
+    - load
     - balancer
     - app
     - application
@@ -9934,8 +9931,8 @@
     - 32
 - name: load-balancer--listener
   friendly_name: Load balancer listener
-  aliases:  
-    - load 
+  aliases:
+    - load
     - balancer
     - app
     - application
@@ -9944,8 +9941,8 @@
     - 32
 - name: load-balancer--local
   friendly_name: Load balancer local
-  aliases:  
-    - load 
+  aliases:
+    - load
     - balancer
     - app
     - application
@@ -9954,8 +9951,8 @@
     - 32
 - name: load-balancer--network
   friendly_name: Load balancer network
-  aliases: 
-    - load 
+  aliases:
+    - load
     - balancer
     - app
     - application
@@ -9964,8 +9961,8 @@
     - 32
 - name: load-balancer--pool
   friendly_name: Load balancer--pool
-  aliases: 
-    - load 
+  aliases:
+    - load
     - balancer
     - app
     - application
@@ -9974,8 +9971,8 @@
     - 32
 - name: load-balancer--vpc
   friendly_name: Load balancer VPC
-  aliases: 
-    - load 
+  aliases:
+    - load
     - balancer
     - app
     - application
@@ -10570,7 +10567,7 @@
     - identification
 - name: logo--wechat
   friendly_name: Logo WeChat
-  aliases: 
+  aliases:
     - brand
     - emblem
     - logotype
@@ -10647,7 +10644,7 @@
     - 32
 - name: low-severity
   friendly_name: Low severity
-  aliases: 
+  aliases:
     - glyph
     - severity
     - status
@@ -10972,7 +10969,7 @@
     - 32
 - name: message-queue
   friendly_name: Message queue
-  aliases: 
+  aliases:
     - message
     - queue
     - inbox
@@ -11235,7 +11232,7 @@
     - device
 - name: mobility--services
   friendly_name: Mobility services
-  aliases: 
+  aliases:
     - service
     - mobility
     - vehicle
@@ -11666,7 +11663,7 @@
     - 32
 - name: network--enterprise
   friendly_name: Network enterprise
-  aliases: 
+  aliases:
     - cloud
     - business
     - enterprise
@@ -11677,7 +11674,7 @@
     - 32
 - name: network--overlay
   friendly_name: Network overlay
-  aliases: 
+  aliases:
     - cloud
     - communications
     - overlay
@@ -11687,7 +11684,7 @@
     - 32
 - name: network--public
   friendly_name: Network public
-  aliases: 
+  aliases:
     - cloud
     - global
     - open
@@ -12128,7 +12125,7 @@
     - 32
 - name: object-storage--alt
   friendly_name: Object storage alt
-  aliases: 
+  aliases:
     - object
     - storage
   sizes:
@@ -12642,7 +12639,7 @@
     - 32
 - name: pcn--e-node
   friendly_name: PCN E-Node
-  aliases: 
+  aliases:
     - protected core
     - network
     - node
@@ -12662,7 +12659,7 @@
     - 32
 - name: pcn--p-node
   friendly_name: PCN P node
-  aliases: 
+  aliases:
     - protected core
     - network
     - node
@@ -12672,7 +12669,7 @@
     - 32
 - name: pcn--z-node
   friendly_name: PCN Z node
-  aliases: 
+  aliases:
     - protected core
     - network
     - node
@@ -12845,7 +12842,7 @@
     - 32
 - name: phone--application
   friendly_name: Phone application
-  aliases: 
+  aliases:
     - call
     - phone
     - application
@@ -12953,7 +12950,7 @@
     - 32
 - name: phone--settings
   friendly_name: Phone settings
-  aliases: 
+  aliases:
     - call
     - phone
     - preferences
@@ -13211,8 +13208,8 @@
     - 32
 - name: point-of-presence
   friendly_name: Point of presence
-  aliases: 
-    - point 
+  aliases:
+    - point
     - presence
     - interface
     - communications
@@ -13444,7 +13441,7 @@
     - 32
 - name: radio--combat
   friendly_name: Radio combat
-  aliases: 
+  aliases:
     - radio
     - combat
     - military
@@ -13454,7 +13451,7 @@
     - 32
 - name: radio--push-to-talk
   friendly_name: Radio push-to-talk
-  aliases: 
+  aliases:
     - radio
     - push-to-talk
     - communications
@@ -13679,7 +13676,7 @@
     - control
 - name: replicate
   friendly_name: Replicate
-  aliases: 
+  aliases:
     - replicate
     - duplicate
     - copy
@@ -13814,7 +13811,7 @@
     - eat
 - name: result
   friendly_name: Result
-  aliases: 
+  aliases:
     - clipboard
     - result
     - file
@@ -13822,7 +13819,7 @@
     - 32
 - name: result--new
   friendly_name: Result new
-  aliases: 
+  aliases:
     - clipboard
     - result
     - file
@@ -13832,7 +13829,7 @@
     - 32
 - name: result--old
   friendly_name: Result old
-  aliases: 
+  aliases:
     - clipboard
     - result
     - file
@@ -14022,7 +14019,7 @@
     - launch
 - name: router
   friendly_name: Router
-  aliases: 
+  aliases:
     - arrows
     - signal
     - network
@@ -14032,7 +14029,7 @@
     - 32
 - name: router--voice
   friendly_name: Router voice
-  aliases: 
+  aliases:
     - arrows
     - phone
     - signal
@@ -14043,7 +14040,7 @@
     - 32
 - name: router--wifi
   friendly_name: Router WiFi
-  aliases: 
+  aliases:
     - arrows
     - signal
     - network
@@ -14121,7 +14118,7 @@
     - 32
 - name: rule--cancelled
   friendly_name: Rule cancelled
-  aliases: 
+  aliases:
     - rule
     - governance
     - control
@@ -14133,7 +14130,7 @@
     - 32
 - name: rule--draft
   friendly_name: Rule draft
-  aliases: 
+  aliases:
     - rule
     - governance
     - control
@@ -14145,7 +14142,7 @@
     - 32
 - name: rule--filled
   friendly_name: Rule filled
-  aliases: 
+  aliases:
     - rule
     - governance
     - control
@@ -14157,7 +14154,7 @@
     - 32
 - name: rule--test
   friendly_name: Rule test
-  aliases: 
+  aliases:
     - rule
     - governance
     - control
@@ -14433,7 +14430,7 @@
   sizes:
     - 32
 - name: scan--alt
- friendly_name: Scan alt
+  friendly_name: Scan alt
   aliases:
     - scan
     - alternate
@@ -14560,7 +14557,7 @@
     - 32
 - name: security-services
   friendly_name: Security services
-  aliases: 
+  aliases:
     - shield
     - gear
     - systems
@@ -14664,7 +14661,7 @@
     - 32
 - name: server--dns
   friendly_name: Server DNS
-  aliases: 
+  aliases:
     - systems
     - server
     - DNS
@@ -14675,7 +14672,7 @@
     - 32
 - name: server--proxy
   friendly_name: Server proxy
-  aliases: 
+  aliases:
     - system
     - proxy
     - server
@@ -14683,7 +14680,7 @@
     - 32
 - name: server--time
   friendly_name: Server time
-  aliases: 
+  aliases:
     - server
     - time
     - clock
@@ -15018,7 +15015,7 @@
     - 32
 - name: sim-card
   friendly_name: SIM card
-  aliases: 
+  aliases:
     - SIM
     - chip
     - subscriber
@@ -15254,7 +15251,7 @@
     - 32
 - name: slisor
   friendly_name: slisor
-  aliases: 
+  aliases:
     - analysis
     - communication
     - messaging
@@ -15411,9 +15408,9 @@
     - 32
 - name: solar-panel
   friendly_name: Solar panel
-  aliases: 
+  aliases:
     - weather
-    - solar 
+    - solar
     - panel
     - green
     - energy
@@ -15829,7 +15826,7 @@
     - 32
 - name: subnet-acl-rules
   friendly_name: Subnet ACL rules
-  aliases: 
+  aliases:
     - lock
     - ACL
     - rules
@@ -15914,16 +15911,16 @@
     - 32
 - name: switch-layer-2
   friendly_name: Switch layer 2
-  aliases: 
+  aliases:
     - switch
     - layer
   sizes:
     - 32
 - name: switch-layer-3
   friendly_name: Switch layer 3
-  aliases: 
-   - switch
-   - layer
+  aliases:
+    - switch
+    - layer
   sizes:
     - 32
 - name: switcher
@@ -16197,7 +16194,7 @@
     - 32
 - name: temperature--celsius
   friendly_name: Temperature Celsius
-  aliases: 
+  aliases:
     - weather
     - thermometer
     - degree
@@ -16223,7 +16220,7 @@
     - 32
 - name: temperature--fahrenheit
   friendly_name: Temperature Fahrenheit
-  aliases: 
+  aliases:
     - weather
     - thermometer
     - degree
@@ -16235,7 +16232,7 @@
     - 32
 - name: temperature--fahrenheit--alt
   friendly_name: Temperature Fahrenheit alt
-  aliases: 
+  aliases:
     - weather
     - F
     - degree
@@ -17078,7 +17075,7 @@
     - 32
 - name: train--speed
   friendly_name: Train speed
-  aliases: 
+  aliases:
     - train
     - fast
     - transportation
@@ -17131,7 +17128,7 @@
     - 32
 - name: transmission-lte
   friendly_name: Transmission LTE
-  aliases: 
+  aliases:
     - cellular
     - communications
     - tower
@@ -17270,7 +17267,7 @@
   friendly_name: Two-factor authentication
   aliases:
     - 2FA
-    - two factor 
+    - two factor
     - authentication
     - ID
     - identity
@@ -17650,7 +17647,7 @@
     - my account
 - name: user--military
   friendly_name: user--military
-  aliases: 
+  aliases:
     - person
     - avatar
     - man
@@ -17710,7 +17707,7 @@
     - my account
 - name: user--service-desk
   friendly_name: User service desk
-  aliases: 
+  aliases:
     - person
     - avatar
     - man
@@ -17725,7 +17722,7 @@
     - 32
 - name: user--settings
   friendly_name: User settings
-  aliases: 
+  aliases:
     - person
     - avatar
     - man
@@ -17816,7 +17813,7 @@
     - 32
 - name: vehicle--api
   friendly_name: Vehicle API
-  aliases: 
+  aliases:
     - vehicle
     - car
     - application
@@ -17828,7 +17825,7 @@
     - 32
 - name: vehicle--connected
   friendly_name: Vehicle connected
-  aliases: 
+  aliases:
     - vehicle
     - car
     - signal
@@ -17838,7 +17835,7 @@
     - 32
 - name: vehicle--insights
   friendly_name: Vehicle insights
-  aliases: 
+  aliases:
     - vehicle
     - car
     - log
@@ -17858,7 +17855,7 @@
     - 32
 - name: version
   friendly_name: Version
-  aliases: 
+  aliases:
     - file
     - document
     - version
@@ -18004,7 +18001,7 @@
     - virtual column key
 - name: virtual-desktop
   friendly_name: Virtual desktop
-  aliases: 
+  aliases:
     - cloud
     - monitor
     - desktop
@@ -18044,7 +18041,7 @@
     - 32
 - name: vlan
   friendly_name: VLAN
-  aliases: 
+  aliases:
     - virtual
     - LAN
     - network
@@ -18053,7 +18050,7 @@
     - 32
 - name: vlan--ibm
   friendly_name: VLAN IBM
-  aliases: 
+  aliases:
     - virtual
     - LAN
     - network
@@ -18214,7 +18211,7 @@
     - 32
 - name: vpn--policy
   friendly_name: VPN policy
-  aliases: 
+  aliases:
     - lock
     - virtual
     - connection
@@ -18460,14 +18457,14 @@
     - 32
 - name: wifi--controller
   friendly_name: WiFi controller
-  aliases: 
+  aliases:
     - wifi
     - internet
   sizes:
     - 32
 - name: wifi--not-secure
   friendly_name: WiFi not secure
-  aliases: 
+  aliases:
     - wifi
     - internet
     - unlocked
@@ -18476,7 +18473,7 @@
     - 32
 - name: wifi--off
   friendly_name: WiFi off
-  aliases: 
+  aliases:
     - wifi
     - internet
     - off
@@ -18485,7 +18482,7 @@
     - 32
 - name: wifi--secure
   friendly_name: WiFi secure
-  aliases: 
+  aliases:
     - wifi
     - internet
     - locked
@@ -18494,7 +18491,7 @@
     - 32
 - name: wifi-bridge
   friendly_name: WiFi bridge
-  aliases: 
+  aliases:
     - wifi
     - internet
     - connection
@@ -18503,7 +18500,7 @@
     - 32
 - name: wifi-bridge--alt
   friendly_name: WiFi bridge alt
-  aliases:  
+  aliases:
     - wifi
     - internet
     - connection
@@ -18531,7 +18528,7 @@
     - 32
 - name: wind-power
   friendly_name: Wind power
-  aliases: 
+  aliases:
     - turbine
     - wind energy
     - energy
