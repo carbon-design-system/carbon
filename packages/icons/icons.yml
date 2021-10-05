@@ -516,14 +516,14 @@
     - attendant
   sizes:
     - 32
-- name: airplay.svg
+- name: airplay
   friendly_name: Airplay
   aliases:
     - technology
     - podcast
   sizes:
     - 32
-- name: airplay--filled.svg
+- name: airplay--filled
   friendly_name: Airplay filled
   aliases:
     - technology
@@ -1228,7 +1228,7 @@
     - benefit
   sizes:
     - 32
-- name: asset--confirm.svg
+- name: asset--confirm
   friendly_name: Asset confirm
   aliases:
     - technology
@@ -1237,7 +1237,7 @@
     - asset
   sizes:
     - 32
-- name: asset--digital-twin.svg
+- name: asset--digital-twin
   friendly_name: Asset digital twin
   aliases:
     - technology
@@ -1246,7 +1246,7 @@
     - asset
   sizes:
     - 32
-- name: asset--view.svg
+- name: asset--view
   friendly_name: Asset view
   aliases:
     - technology
@@ -1254,7 +1254,7 @@
     - asset
   sizes:
     - 32
-- name: asterisk.svg
+- name: asterisk
   friendly_name: Asterisk
   aliases:
     - formatting
@@ -1421,7 +1421,7 @@
     - server
   sizes:
     - 32
-- name: bare-metal-server--01.svg
+- name: bare-metal-server--01
   friendly_name: Bare metal server 01
   aliases:
     - systems
@@ -1721,7 +1721,7 @@
     - data
   sizes:
     - 32
-- name: boot.svg
+- name: boot
   friendly_name: Boot
   aliases:
     - travel
@@ -4355,7 +4355,7 @@
     - filled
   sizes:
     - 32
-- name: contour--draw.svg
+- name: contour--draw
   friendly_name: Contour draw
   aliases:
     - Watson
@@ -4368,7 +4368,7 @@
     - draw
   sizes:
     - 32
-- name: contour--edit.svg
+- name: contour--edit
   friendly_name: Contour edit
   aliases:
     - Watson
@@ -5264,6 +5264,7 @@
     - app
     - catalog
     - catalogue
+  sizes:
     - 32
 - name: datastore
   friendly_name: Data store
@@ -18561,8 +18562,8 @@
     - brightness
     - contrast
     - sun
-- name: window--black-saturation.svg
-  friendly_name: Window black saturation.svg
+- name: window--black-saturation
+  friendly_name: Window black saturation
   aliases:
     - Watson
     - IBM Watson
