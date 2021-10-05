@@ -8,11 +8,10 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import classNames from 'classnames';
-import { settings } from 'carbon-components';
 import { Close16 } from '@carbon/icons-react';
 import setupGetInstanceId from '../../tools/setupGetInstanceId';
+import { usePrefix } from '../../internal/usePrefix';
 
-const { prefix } = settings;
 const getInstanceId = setupGetInstanceId();
 const TYPES = {
   red: 'Red',
@@ -26,6 +25,7 @@ const TYPES = {
   'cool-gray': 'Cool-Gray',
   'warm-gray': 'Warm-Gray',
   'high-contrast': 'High-Contrast',
+  outline: 'Outline',
 };
 
 const Tag = ({
@@ -41,6 +41,7 @@ const Tag = ({
   size,
   ...other
 }) => {
+  const prefix = usePrefix();
   const tagId = id || `tag-${getInstanceId()}`;
   const tagClasses = classNames(`${prefix}--tag`, className, {
     [`${prefix}--tag--disabled`]: disabled,

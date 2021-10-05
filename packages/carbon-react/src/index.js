@@ -5,6 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+import './prefix';
 import './feature-flags';
 
 export {
@@ -69,6 +70,7 @@ export {
   Loading,
   Modal,
   MultiSelect,
+  ActionableNotification,
   ToastNotification,
   InlineNotification,
   NotificationActionButton,
@@ -203,3 +205,5 @@ export {
 } from './components/Grid';
 
 export { Theme, useTheme } from './components/Theme';
+
+export { Layer } from './components/Layer';

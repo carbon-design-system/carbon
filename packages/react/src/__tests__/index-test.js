@@ -18,6 +18,7 @@ Array [
   "Accordion",
   "AccordionItem",
   "AccordionSkeleton",
+  "ActionableNotification",
   "AspectRatio",
   "Breadcrumb",
   "BreadcrumbItem",
@@ -215,6 +216,7 @@ Array [
   "unstable_useContextMenu",
   "unstable_useFeatureFlag",
   "unstable_useFeatureFlags",
+  "unstable_usePrefix",
 ]
 `);
   });
