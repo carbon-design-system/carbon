@@ -30,7 +30,7 @@ const Tab = React.forwardRef(function Tab(
   },
   ref
 ) {
-  const { prefix } = usePrefix();
+  const prefix = usePrefix();
 
   const classes = classNames(className, `${prefix}--tabs__nav-link`, {
     [`${prefix}--tabs__nav-item--disabled`]: disabled,

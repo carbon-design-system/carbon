@@ -31,7 +31,7 @@ const Tabs = React.forwardRef(function Tabs(
   },
   ref
 ) {
-  const { prefix } = usePrefix();
+  const prefix = usePrefix();
 
   //refs
   const tablist = useRef();
