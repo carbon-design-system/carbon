@@ -10809,10 +10809,14 @@
   sizes:
     - 32
 - name: map--identify
-  - map
+  friendly_name: Map identify
+  aliases:
+    - map
     - travel
     - point
     - identify
+    - target
+    - exact
     - ID
     - center
     - locate
