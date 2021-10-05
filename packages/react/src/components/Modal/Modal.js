@@ -220,6 +220,7 @@ export default class Modal extends Component {
     primaryButtonDisabled: false,
     onKeyDown: () => {},
     passiveModal: false,
+    // iconDescription is deprecated in v11 use aria-label instead
     iconDescription: 'Close',
     modalHeading: '',
     modalLabel: '',
@@ -412,15 +413,21 @@ export default class Modal extends Component {
         Array.isArray(secondaryButtons) && secondaryButtons.length === 2,
     });
 
+    // ['aria-label']: ariaLabel,
+
     const modalButton = (
       <button
         className={this.modalCloseButtonClass}
         type="button"
         onClick={onRequestClose}
-        title={iconDescription}
-        aria-label={iconDescription}
+        // iconDescription is deprecated in v11. Use ariaLabel instead.
+        title={ariaLabel ? ariaLabel : iconDescription}
+        // iconDescription is deprecated in v11. Use ariaLabel instead.
+        aria-label={ariaLabel ? ariaLabel : iconDescription}
         ref={this.button}>
         <Close20
+          aria-hidden="true"
+          // iconDescription is deprecated in v11. Use aria-hidden="true" instead.
           aria-label={iconDescription}
           className={`${this.modalCloseButtonClass}__icon`}
         />
