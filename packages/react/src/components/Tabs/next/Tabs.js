@@ -45,14 +45,18 @@ const Tabs = React.forwardRef(function Tabs(
   const [tablistScrollWidth, setTablistScrollWidth] = useState(null);
   const [tablistScrollLeft, setTablistScrollLeft] = useState(null);
   const [isSelected, setIsSelected] = useState(selected);
-  const [prevSelected, setPrevSelected] = useState(null);
+  const [prevSelected, setPrevSelected] = useState(isSelected);
 
-  //prop + state alignment - getDerivedStateFromProps
-  // THIS IS NOT WORKING!!!!
-  // if (selected !== prevSelected) {
-  //   setIsSelected(selected);
-  //   setPrevSelected(selected);
-  // }
+  /**
+   * prop + state alignment - getDerivedStateFromProps
+   * only update if selected prop changes
+   */
+  useEffect(() => {
+    if (selected !== prevSelected) {
+      setIsSelected(selected);
+      setPrevSelected(selected);
+    }
+  }, [selected]); //eslint-disable-line react-hooks/exhaustive-deps
 
   // width of the overflow buttons
   let OVERFLOW_BUTTON_OFFSET = 40;
@@ -203,7 +207,7 @@ const Tabs = React.forwardRef(function Tabs(
         } else {
           scrollTabIntoView(evt, { index: nextIndex });
         }
-        tab?.tabAnchor?.focus();
+        tab?.focus();
       }
     };
   };
