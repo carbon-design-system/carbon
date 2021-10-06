@@ -187,8 +187,6 @@ export default class Tabs extends React.Component {
         this.tablist.current.scrollLeft += this.OVERFLOW_BUTTON_OFFSET * 2;
       }
     }
-    // remove this before merging!
-    console.log('THIS', this);
   }
 
   componentWillUnmount() {
