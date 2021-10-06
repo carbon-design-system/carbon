@@ -9,6 +9,7 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import cx from 'classnames';
 import { usePrefix } from '../../../internal/usePrefix';
+import deprecate from '../../../prop-types/deprecate';
 
 const TimePicker = React.forwardRef(function TimePicker(
   {
@@ -29,7 +30,7 @@ const TimePicker = React.forwardRef(function TimePicker(
     placeholder = 'hh:mm',
     size,
     type = 'text',
-    value = 'value',
+    value,
     ...rest
   },
   ref
@@ -38,6 +39,11 @@ const TimePicker = React.forwardRef(function TimePicker(
 
   const [isValue, setValue] = React.useState(value);
   const [prevValue, setPrevValue] = React.useState(value);
+
+  if (value !== prevValue) {
+    setValue(value);
+    setPrevValue(value);
+  }
 
   const timePickerInputProps = {
     className: cx(
@@ -51,20 +57,23 @@ const TimePicker = React.forwardRef(function TimePicker(
 
     onChange: (evt) => {
       if (!disabled) {
+        evt.persist();
         setValue(isValue);
         onChange(evt);
       }
     },
     onClick: (evt) => {
       if (!disabled) {
+        evt.persist();
         setValue(isValue);
         onClick(evt);
       }
     },
-    onBlur: (evt) => {
+    onBlur: (event) => {
       if (!disabled) {
+        event.persist();
         setValue(isValue);
-        onBlur(evt);
+        onBlur(event);
       }
     },
     pattern,
@@ -72,7 +81,7 @@ const TimePicker = React.forwardRef(function TimePicker(
     maxLength,
     id,
     type,
-    // value: this.state.value,
+    // value: value,
   };
 
   const timePickerClasses = cx({
@@ -97,11 +106,6 @@ const TimePicker = React.forwardRef(function TimePicker(
   const error = invalid ? (
     <div className={`${prefix}--form-requirement`}>{invalidText}</div>
   ) : null;
-
-  if (value !== prevValue) {
-    setValue(value);
-    setPrevValue(value);
-  }
 
   return (
     <div className={cx(`${prefix}--form-item`, className)} ref={ref}>
@@ -166,7 +170,10 @@ TimePicker.propTypes = {
   /**
    * `true` to use the light version.
    */
-  light: PropTypes.bool,
+  light: deprecate(
+    PropTypes.bool,
+    'The `light` prop for `Tile` is no longer needed and has been deprecated. It will be removed in the next major release. Use the Layer component instead.'
+  ),
 
   /**
    * Specify the maximum length of the time string in `<input>`
