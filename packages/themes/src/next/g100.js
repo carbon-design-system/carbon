@@ -201,7 +201,6 @@ export const overlay = rgba(black, 0.65);
 export const toggleOff = gray50;
 export const shadow = rgba(black, 0.8);
 
-
 export {
   // Type
   caption01,
