@@ -47,18 +47,18 @@ describe('Modal', () => {
       expect(getModal(modal).props().id).toEqual('modal-1');
     });
 
-    it('has the expected default iconDescription', () => {
-      expect(mounted.props().iconDescription).toEqual('Close');
+    it('has the expected default ariaLabel', () => {
+      expect(mounted.props().ariaLabel).toEqual('Close');
     });
 
-    it('adds new iconDescription when passed via props', () => {
-      mounted.setProps({ iconDescription: 'new description' });
-      expect(mounted.props().iconDescription).toEqual('new description');
+    it('adds new ariaLabel when passed via props', () => {
+      mounted.setProps({ ariaLabel: 'new description' });
+      expect(mounted.props().ariaLabel).toEqual('new description');
     });
 
-    it('should have iconDescription match Icon component description prop', () => {
+    it('should have ariaLabel match Icon component description prop', () => {
       const description = mounted.find(Close20).props()['aria-label'];
-      const matches = mounted.props().iconDescription === description;
+      const matches = mounted.props().ariaLabel === description;
       expect(matches).toEqual(true);
     });
 
