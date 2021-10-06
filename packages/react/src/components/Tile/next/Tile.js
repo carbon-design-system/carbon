@@ -20,7 +20,7 @@ import { composeEventHandlers } from '../../../tools/events';
 import { PrefixContext, usePrefix } from '../../../internal/usePrefix';
 
 export const Tile = React.forwardRef(function Tile(
-  { children, className, light = false, ...rest },
+  { children, className, ...rest },
   ref
 ) {
   const prefix = usePrefix();
@@ -28,7 +28,7 @@ export const Tile = React.forwardRef(function Tile(
   const tileClasses = cx(
     `${prefix}--tile`,
     {
-      [`${prefix}--tile--light`]: light,
+      [`${prefix}--tile--light`]: rest.light,
     },
     className
   );
@@ -69,7 +69,6 @@ export const ClickableTile = React.forwardRef(function ClickableTile(
     handleClick,
     handleKeyDown,
     href,
-    light = false,
     onClick = () => {},
     onKeyDown = () => {},
     ...rest
@@ -83,7 +82,7 @@ export const ClickableTile = React.forwardRef(function ClickableTile(
     `${prefix}--tile--clickable`,
     {
       [`${prefix}--tile--is-clicked`]: clicked,
-      [`${prefix}--tile--light`]: light,
+      [`${prefix}--tile--light`]: rest.light,
     },
     className
   );
@@ -195,11 +194,7 @@ export const SelectableTile = React.forwardRef(function SelectableTile(
     disabled,
     handleClick,
     handleKeyDown,
-    // TODO: Remove iconDescription prop in the next major release
-    // eslint-disable-next-line no-unused-vars
-    iconDescription,
     id,
-    light = false,
     name,
     onClick = () => {},
     onChange = () => {},
@@ -228,7 +223,7 @@ export const SelectableTile = React.forwardRef(function SelectableTile(
     `${prefix}--tile--selectable`,
     {
       [`${prefix}--tile--is-selected`]: isSelected,
-      [`${prefix}--tile--light`]: light,
+      [`${prefix}--tile--light`]: rest.light,
       [`${prefix}--tile--disabled`]: disabled,
     },
     className
@@ -490,7 +485,6 @@ export class ExpandableTile extends Component {
     onClick: () => {},
     tileCollapsedIconText: 'Interact to expand Tile',
     tileExpandedIconText: 'Interact to collapse Tile',
-    light: false,
   };
 
   static contextType = PrefixContext;
@@ -600,7 +594,6 @@ export class ExpandableTile extends Component {
       tileCollapsedLabel,
       tileExpandedLabel,
       onBeforeClick, // eslint-disable-line
-      light,
       ...rest
     } = this.props;
 
@@ -613,7 +606,7 @@ export class ExpandableTile extends Component {
       `${prefix}--tile--expandable`,
       {
         [`${prefix}--tile--is-expanded`]: isExpanded,
-        [`${prefix}--tile--light`]: light,
+        [`${prefix}--tile--light`]: rest.light,
       },
       className
     );
