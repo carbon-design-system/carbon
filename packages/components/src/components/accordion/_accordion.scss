@@ -158,11 +158,15 @@
 
   .#{$prefix}--accordion--start .#{$prefix}--accordion__arrow {
     // Alters `$accordion-arrow-margin` token:
-    margin: 2px 0 0 $carbon--spacing-03;
+    margin: 2px 0 0 $carbon--spacing-05;
+  }
+
+  .#{$prefix}--accordion--start .#{$prefix}--accordion__title {
+    margin-right: $carbon--spacing-05;
   }
 
   .#{$prefix}--accordion--start .#{$prefix}--accordion__content {
-    margin-left: $carbon--spacing-06;
+    margin-left: $carbon--spacing-07;
   }
 
   .#{$prefix}--accordion__item--collapsing .#{$prefix}--accordion__content,
