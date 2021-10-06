@@ -212,9 +212,14 @@ describe('Search', () => {
       });
 
       it('should invoke onClear when input value is cleared', () => {
-        wrapper.setProps({ defaultValue: 'test' });
-        wrapper.find('button').simulate('click');
+        wrapper.setProps({ value: 'test' });
+        const focus = jest.fn();
+        input.getElement().ref({
+          focus,
+        });
+        wrapper.find('button').simulate('click', { target: { value: 'test' } });
         expect(onClear).toHaveBeenCalled();
+        expect(focus).toHaveBeenCalled();
       });
     });
   });
