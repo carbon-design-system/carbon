@@ -55,7 +55,10 @@ Tile.propTypes = {
    * `true` to use the light version. For use on $ui-01 backgrounds only.
    * Don't use this to make tile background color same as container background color.
    */
-  light: PropTypes.bool,
+  light: deprecate(
+    PropTypes.bool,
+    'The `light` prop for `Tile` is no longer needed and has been deprecated. It will be removed in the next major release. Use the Layer component instead.'
+  ),
 };
 
 export const ClickableTile = React.forwardRef(function ClickableTile(
@@ -164,7 +167,10 @@ ClickableTile.propTypes = {
    * `true` to use the light version. For use on $ui-01 backgrounds only.
    * Don't use this to make tile background color same as container background color.
    */
-  light: PropTypes.bool,
+  light: deprecate(
+    PropTypes.bool,
+    'The `light` prop for `Tile` is no longer needed and has been deprecated. It will be removed in the next major release. Use the Layer component instead.'
+  ),
 
   /**
    * Specify the function to run when the ClickableTile is clicked
@@ -346,7 +352,10 @@ SelectableTile.propTypes = {
    * `true` to use the light version. For use on $ui-01 backgrounds only.
    * Don't use this to make tile background color same as container background color.
    */
-  light: PropTypes.bool,
+  light: deprecate(
+    PropTypes.bool,
+    'The `light` prop for `Tile` is no longer needed and has been deprecated. It will be removed in the next major release. Use the Layer component instead.'
+  ),
 
   /**
    * The `name` of the `<input>`.
@@ -425,7 +434,10 @@ export class ExpandableTile extends Component {
      * `true` to use the light version. For use on $ui-01 backgrounds only.
      * Don't use this to make tile background color same as container background color.
      */
-    light: PropTypes.bool,
+    light: deprecate(
+      PropTypes.bool,
+      'The `light` prop for `Tile` is no longer needed and has been deprecated. It will be removed in the next major release. Use the Layer component instead.'
+    ),
 
     /**
      * optional handler to decide whether to ignore a click. returns false if click should be ignored
