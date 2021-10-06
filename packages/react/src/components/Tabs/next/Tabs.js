@@ -402,11 +402,22 @@ const Tabs = React.forwardRef(function Tabs(
     tablistScrollLeft + tablistClientWidth === tablistScrollWidth;
 
   const classes = {
-    tabs: classNames(className, `${prefix}--tabs`, {
-      [`${prefix}--tabs--container`]: type === 'container',
-      // [`${prefix}--tabs--light`]: light,
-    }),
-    tablist: classNames(`${prefix}--tabs__nav`),
+    // TODO: remove scrollable from classnames in next major release and uncomment classnames that don't contain scrollable
+    tabs: classNames(
+      className,
+      // `${prefix}--tabs`,
+      `${prefix}--tabs--scrollable`,
+      {
+        // [`${prefix}--tabs--container`]: type === 'container',
+        [`${prefix}--tabs--scrollable--container`]: type === 'container',
+        // [`${prefix}--tabs--light`]: light,
+      }
+    ),
+    // TODO: remove scrollable from classnames in next major release and uncomment classnames that don't contain scrollable
+    tablist: classNames(
+      // `${prefix}--tabs__nav`,
+      `${prefix}--tabs--scrollable__nav`
+    ),
     leftOverflowButtonClasses: classNames({
       [`${prefix}--tab--overflow-nav-button`]: horizontalOverflow,
       [`${prefix}--tab--overflow-nav-button--hidden`]: leftOverflowNavButtonHidden,
