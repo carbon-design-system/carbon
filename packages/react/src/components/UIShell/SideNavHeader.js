@@ -5,19 +5,18 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { settings } from 'carbon-components';
 import cx from 'classnames';
 import PropTypes from 'prop-types';
 import React from 'react';
 import SideNavIcon from './SideNavIcon';
-
-const { prefix } = settings;
+import { usePrefix } from '../../internal/usePrefix';
 
 const SideNavHeader = ({
   className: customClassName,
   children,
   renderIcon: IconElement,
 }) => {
+  const prefix = usePrefix();
   const className = cx(`${prefix}--side-nav__header`, customClassName);
   return (
     <header className={className}>

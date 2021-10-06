@@ -8,19 +8,29 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import cx from 'classnames';
-import { settings } from 'carbon-components';
+import { usePrefix } from '../../internal/usePrefix';
 
-const { prefix } = settings;
+// const tab = (
+//   <li className={`${prefix}--tabs--scrollable__nav-item`}>
+//     <div className={`${prefix}--tabs__nav-link`}>
+//       <span></span>
+//     </div>
+//   </li>
+// );
 
-const tab = (
-  <li className={`${prefix}--tabs--scrollable__nav-item`}>
-    <div className={`${prefix}--tabs__nav-link`}>
-      <span></span>
-    </div>
-  </li>
-);
+function Tab() {
+  const prefix = usePrefix();
+  return (
+    <li className={`${prefix}--tabs--scrollable__nav-item`}>
+      <div className={`${prefix}--tabs__nav-link`}>
+        <span></span>
+      </div>
+    </li>
+  );
+}
 
 function TabsSkeleton({ className, type, ...rest }) {
+  const prefix = usePrefix();
   const tabClasses = cx(
     className,
     `${prefix}--tabs`,
@@ -33,11 +43,11 @@ function TabsSkeleton({ className, type, ...rest }) {
   return (
     <div className={tabClasses} {...rest}>
       <ul className={`${prefix}--tabs--scrollable__nav`}>
-        {tab}
-        {tab}
-        {tab}
-        {tab}
-        {tab}
+        {Tab()}
+        {Tab()}
+        {Tab()}
+        {Tab()}
+        {Tab()}
       </ul>
     </div>
   );

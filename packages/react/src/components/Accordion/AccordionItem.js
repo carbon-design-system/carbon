@@ -10,9 +10,10 @@ import { settings } from 'carbon-components';
 import cx from 'classnames';
 import PropTypes from 'prop-types';
 import React, { useState } from 'react';
+import { Text } from '../Text';
 import { match, keys } from '../../internal/keyboard';
 import { useId } from '../../internal/useId';
-import deprecate from '../../prop-types/deprecate.js';
+import deprecate from '../../prop-types/deprecate';
 
 const { prefix } = settings;
 const defaultRenderExpando = (props) => <button type="button" {...props} />;
@@ -84,7 +85,9 @@ function AccordionItem({
         onKeyDown={onKeyDown}
         type="button">
         <ChevronRight16 className={`${prefix}--accordion__arrow`} />
-        <div className={`${prefix}--accordion__title`}>{title}</div>
+        <Text as="div" className={`${prefix}--accordion__title`}>
+          {title}
+        </Text>
       </Expando>
       <div id={id} className={`${prefix}--accordion__content`}>
         {children}

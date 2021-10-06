@@ -8,9 +8,7 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import cx from 'classnames';
-import { settings } from 'carbon-components';
-
-const { prefix } = settings;
+import { usePrefix } from '../../internal/usePrefix';
 
 const Breadcrumb = React.forwardRef(function Breadcrumb(
   {
@@ -22,6 +20,7 @@ const Breadcrumb = React.forwardRef(function Breadcrumb(
   },
   ref
 ) {
+  const prefix = usePrefix();
   const className = cx({
     [`${prefix}--breadcrumb`]: true,
     [`${prefix}--breadcrumb--no-trailing-slash`]: noTrailingSlash,

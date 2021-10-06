@@ -267,7 +267,7 @@ class FloatingMenu extends React.Component {
    *
    * @private
    */
-  _updateMenuSize = (prevProps = {}) => {
+  _updateMenuSize = (prevProps = {}, isAdjustment = false) => {
     const menuBody = this._menuBody;
     warning(
       menuBody,
@@ -285,7 +285,8 @@ class FloatingMenu extends React.Component {
 
     if (
       hasChangeInOffset(oldMenuOffset, menuOffset) ||
-      oldMenuDirection !== menuDirection
+      oldMenuDirection !== menuDirection ||
+      isAdjustment
     ) {
       const { flipped, triggerRef, updateOrientation } = this.props;
 
@@ -317,20 +318,30 @@ class FloatingMenu extends React.Component {
       // a) Menu body has `display:none`
       // b) `menuOffset` as a callback returns `undefined` (The callback saw that it couldn't calculate the value)
       if ((menuSize.width > 0 && menuSize.height > 0) || !offset) {
-        this.setState({
-          floatingPosition: getFloatingPosition({
-            menuSize,
-            refPosition,
-            direction: menuDirection,
-            offset,
-            scrollX: window.pageXOffset,
-            scrollY: window.pageYOffset,
-            container: {
-              rect: this.props.target().getBoundingClientRect(),
-              position: getComputedStyle(this.props.target()).position,
-            },
-          }),
-        });
+        this.setState(
+          {
+            floatingPosition: getFloatingPosition({
+              menuSize,
+              refPosition,
+              direction: menuDirection,
+              offset,
+              scrollX: window.pageXOffset,
+              scrollY: window.pageYOffset,
+              container: {
+                rect: this.props.target().getBoundingClientRect(),
+                position: getComputedStyle(this.props.target()).position,
+              },
+            }),
+          },
+          () => {
+            if (!isAdjustment) {
+              const newMenuSize = menuBody.getBoundingClientRect();
+              if (newMenuSize !== menuSize) {
+                this._updateMenuSize(this.props, true);
+              }
+            }
+          }
+        );
       }
     }
   };
