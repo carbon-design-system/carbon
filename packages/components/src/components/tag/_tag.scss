@@ -130,6 +130,12 @@
     @include tag-theme($inverse-02, $inverse-01, $inverse-hover-ui);
   }
 
+  .#{$prefix}--tag--outline {
+    @include tag-theme($background, $text-01, $hover-ui);
+
+    box-shadow: inset 0 0 0 1px $inverse-02;
+  }
+
   .#{$prefix}--tag--disabled,
   .#{$prefix}--tag--filter.#{$prefix}--tag--disabled,
   .#{$prefix}--tag--interactive.#{$prefix}--tag--disabled {
