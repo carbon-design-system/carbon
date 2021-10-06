@@ -1212,21 +1212,46 @@ Map {
     },
     "TableExpandHeader": Object {
       "propTypes": Object {
-        "ariaLabel": [Function],
+        "ariaLabel": Object {
+          "args": Array [
+            Array [
+              [Function],
+              [Function],
+            ],
+          ],
+          "type": "oneOfType",
+        },
         "children": Object {
           "type": "node",
         },
         "className": Object {
           "type": "string",
         },
-        "enableExpando": Object {
+        "enableExpando": [Function],
+        "enableToggle": Object {
           "type": "bool",
         },
         "expandIconDescription": Object {
           "type": "string",
         },
-        "isExpanded": [Function],
-        "onExpand": [Function],
+        "isExpanded": Object {
+          "args": Array [
+            Array [
+              [Function],
+              [Function],
+            ],
+          ],
+          "type": "oneOfType",
+        },
+        "onExpand": Object {
+          "args": Array [
+            Array [
+              [Function],
+              [Function],
+            ],
+          ],
+          "type": "oneOfType",
+        },
       },
     },
     "TableExpandRow": Object {
@@ -1852,21 +1877,46 @@ Map {
   },
   "TableExpandHeader" => Object {
     "propTypes": Object {
-      "ariaLabel": [Function],
+      "ariaLabel": Object {
+        "args": Array [
+          Array [
+            [Function],
+            [Function],
+          ],
+        ],
+        "type": "oneOfType",
+      },
       "children": Object {
         "type": "node",
       },
       "className": Object {
         "type": "string",
       },
-      "enableExpando": Object {
+      "enableExpando": [Function],
+      "enableToggle": Object {
         "type": "bool",
       },
       "expandIconDescription": Object {
         "type": "string",
       },
-      "isExpanded": [Function],
-      "onExpand": [Function],
+      "isExpanded": Object {
+        "args": Array [
+          Array [
+            [Function],
+            [Function],
+          ],
+        ],
+        "type": "oneOfType",
+      },
+      "onExpand": Object {
+        "args": Array [
+          Array [
+            [Function],
+            [Function],
+          ],
+        ],
+        "type": "oneOfType",
+      },
     },
   },
   "TableExpandRow" => Object {
@@ -3772,9 +3822,7 @@ Map {
         "type": "bool",
       },
       "focusTrap": [Function],
-      "hasForm": Object {
-        "type": "bool",
-      },
+      "hasForm": [Function],
       "hasScrollingContent": Object {
         "type": "bool",
       },
@@ -6040,6 +6088,7 @@ Map {
             "cool-gray",
             "warm-gray",
             "high-contrast",
+            "outline",
           ],
         ],
         "type": "oneOf",
