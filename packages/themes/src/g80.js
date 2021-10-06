@@ -87,7 +87,7 @@ export const supportSuccessInverse = green50;
 export const supportWarningInverse = yellow30;
 export const supportInfoInverse = blue60;
 
-export const overlay = rgba(gray100, 0.7);
+export const overlay = rgba(black, 0.65);
 export const toggleOff = gray50;
 export const shadow = rgba(black, 0.8);
 
