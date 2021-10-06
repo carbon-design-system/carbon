@@ -41,6 +41,10 @@ import {
 
   // Constants
   white,
+  black,
+
+  // Tools
+  rgba,
 } from '@carbon/colors';
 import { adjustLightness } from '../tools';
 
@@ -193,8 +197,10 @@ export const skeletonElement = gray80;
 // Misc
 export const interactive = blue50;
 export const highlight = blue20;
-export const overlay = 'rgba(22, 22, 22, 0.5)';
+export const overlay = rgba(black, 0.65);
 export const toggleOff = gray50;
+export const shadow = rgba(black, 0.8);
+
 
 export {
   // Type

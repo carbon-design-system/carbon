@@ -150,6 +150,7 @@ const colors = [
 
   'overlay',
   'toggleOff',
+  'shadow',
 
   'buttonPrimary',
   'buttonSecondary',
@@ -346,6 +347,7 @@ export const unstable__meta = {
 
         'overlay',
         'toggleOff',
+        'shadow',
 
         'buttonPrimary',
         'buttonSecondary',

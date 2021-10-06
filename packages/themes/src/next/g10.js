@@ -192,6 +192,7 @@ export const interactive = blue60;
 export const highlight = blue20;
 export const overlay = 'rgba(22, 22, 22, 0.5)';
 export const toggleOff = gray50;
+export const shadow = 'rgba(0, 0, 0, 0.3)';
 
 export {
   // Type

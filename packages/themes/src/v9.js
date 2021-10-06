@@ -6,7 +6,7 @@
  */
 
 import { adjustLightness } from './tools';
-import { white, red60, gray40 } from '@carbon/colors';
+import { white, red60, gray40, black, rgba } from '@carbon/colors';
 
 export const interactive01 = '#3d70b2';
 export const interactive02 = '#4d5358';
@@ -147,6 +147,7 @@ export const supportInfoInverse = inverseSupport04;
 
 export const overlay = overlay01;
 export const toggleOff = ui04;
+export const shadow = rgba(black, 0.3);
 
 export const buttonPrimary = interactive01;
 export const buttonSecondary = interactive02;
