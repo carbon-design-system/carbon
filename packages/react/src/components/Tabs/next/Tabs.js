@@ -39,19 +39,20 @@ const Tabs = React.forwardRef(function Tabs(
   const rightOverflowNavButton = useRef();
   const tabs = useRef([]);
 
-  //state
+  //states
   const [horizontalOverflow, setHorizontalOverflow] = useState(false);
   const [tablistClientWidth, setTablistClientWidth] = useState(null);
   const [tablistScrollWidth, setTablistScrollWidth] = useState(null);
   const [tablistScrollLeft, setTablistScrollLeft] = useState(null);
+  const [isSelected, setIsSelected] = useState(selected);
+  const [prevSelected, setPrevSelected] = useState(null);
 
   //prop + state alignment - getDerivedStateFromProps
-  const [isSelected, setIsSelected] = useState(selected);
-  const [prevSelected, setPrevSelected] = useState(isSelected);
-  if (selected !== prevSelected) {
-    setIsSelected(selected);
-    setPrevSelected(selected);
-  }
+  // THIS IS NOT WORKING!!!!
+  // if (selected !== prevSelected) {
+  //   setIsSelected(selected);
+  //   setPrevSelected(selected);
+  // }
 
   // width of the overflow buttons
   let OVERFLOW_BUTTON_OFFSET = 40;
@@ -81,10 +82,10 @@ const Tabs = React.forwardRef(function Tabs(
 
   const _handleWindowResize = handleScroll;
 
-  useEffect(() => {
-    _debouncedHandleWindowResize.current = debounce(_handleWindowResize, 200);
-  }, []); // eslint-disable-line react-hooks/exhaustive-deps
-
+  /**
+   * returns all tabs that are not disabled
+   * used for keyboard navigation
+   */
   const getEnabledTabs = () =>
     React.Children.toArray(children).reduce(
       (enabledTabs, tab, index) =>
@@ -92,6 +93,10 @@ const Tabs = React.forwardRef(function Tabs(
       []
     );
 
+  /**
+   * returns the index of the next tab we are going to when navigating L/R arrow keys (i.e. 0, 1, 2)
+   * used in handleTabKeyDown to get the next index after keyboard arrow evt, which then updates selected tab
+   */
   const getNextIndex = (index, direction) => {
     const enabledTabs = getEnabledTabs();
     const nextIndex = Math.max(
@@ -106,6 +111,11 @@ const Tabs = React.forwardRef(function Tabs(
     return enabledTabs[nextIndexLooped];
   };
 
+  /**
+   * used as second argument for getNextIndex(i,d)
+   * returns -1, 1 or 0 depending on arrow key
+   * number is then used in math calculations to find the index of the next tab we are navigating to
+   */
   const getDirection = (evt) => {
     if (match(evt, keys.ArrowLeft)) {
       return -1;
@@ -116,6 +126,9 @@ const Tabs = React.forwardRef(function Tabs(
     return 0;
   };
 
+  /**
+   * creates an array of all the child tab items
+   */
   const getTabAt = useCallback(
     (index, useFresh) =>
       (!useFresh && tabs.current[index]) ||
@@ -142,6 +155,11 @@ const Tabs = React.forwardRef(function Tabs(
     }
   };
 
+  /**
+   * selecting tab on click and on keyboard nav
+   * index = tab to be selected, returned in handleTabKeyDown
+   * onSelectionChange = optional prop for event handler
+   */
   const selectTabAt = (event, { index, onSelectionChange }) => {
     scrollTabIntoView(event, { index });
     if (isSelected !== index) {
@@ -153,6 +171,9 @@ const Tabs = React.forwardRef(function Tabs(
     }
   };
 
+  /**
+   *  keyboard event handler
+   */
   const handleTabKeyDown = (onSelectionChange) => {
     return (index, evt) => {
       if (matches(evt, [keys.Enter, keys.Space])) {
@@ -172,6 +193,7 @@ const Tabs = React.forwardRef(function Tabs(
       })();
       const tab = getTabAt(nextIndex);
 
+      // updating selected tab
       if (
         matches(evt, [keys.ArrowLeft, keys.ArrowRight, keys.Home, keys.End])
       ) {
@@ -188,7 +210,11 @@ const Tabs = React.forwardRef(function Tabs(
 
   const getTabs = () => React.Children.map(children, (tab) => tab);
 
-  // following functions (handle*) are Props on Tab.js, see Tab.js for parameters
+  /**
+   *  click handler
+   *  passed down to Tab children as a prop in `tabsWithProps`
+   *  following functions (handle*) are Props on Tab.js, see Tab.js for parameters
+   */
   const handleTabClick = (onSelectionChange) => (index, evt) => {
     evt.preventDefault();
     selectTabAt(evt, { index, onSelectionChange });
@@ -200,6 +226,11 @@ const Tabs = React.forwardRef(function Tabs(
 
   let overflowNavInterval = null;
 
+  /**
+   * group - overflow scroll
+   * scrolling via overflow btn click
+   * click handler for scrollable tabs L/R arrow buttons
+   */
   const handleOverflowNavClick = (_, { direction, multiplier = 10 }) => {
     // account for overflow button appearing and causing tablist width change
     const { clientWidth, scrollLeft, scrollWidth } = tablist?.current;
@@ -226,6 +257,11 @@ const Tabs = React.forwardRef(function Tabs(
     }
   };
 
+  /**
+   * group - overflow scroll
+   * scrolling w/ mouse event
+   * mousedown handler for scrollable tabs
+   */
   const handleOverflowNavMouseDown = (event, { direction }) => {
     // disregard mouse buttons aside from LMB
     if (event.buttons !== 1) {
@@ -252,12 +288,21 @@ const Tabs = React.forwardRef(function Tabs(
     });
   };
 
+  /**
+   * group - overflow scroll
+   * scrolling w/ mouse event
+   * mouseup handler for scrollable tabs
+   */
   const handleOverflowNavMouseUp = () => {
     clearInterval(overflowNavInterval);
   };
 
-  //component did mount equivalent
+  /**
+   * only run once - component did mount equivalent
+   */
   useEffect(() => {
+    _debouncedHandleWindowResize.current = debounce(_handleWindowResize, 200);
+
     _handleWindowResize();
     window.addEventListener('resize', _debouncedHandleWindowResize.current);
 
@@ -300,16 +345,11 @@ const Tabs = React.forwardRef(function Tabs(
         _debouncedHandleWindowResize.current
       );
     };
-  }, [
-    isSelected,
-    scrollIntoView,
-    getTabAt,
-    OVERFLOW_BUTTON_OFFSET,
-    _debouncedHandleWindowResize,
-    _handleWindowResize,
-  ]);
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
-  //component did update equivalent
+  /**
+   * component did update equivalent
+   */
   useEffect(() => {
     // compare current tablist properties to current state
     const {
