@@ -32,7 +32,7 @@ describe('Tile', () => {
       </Tile>
     );
 
-    screen.debug();
+    // screen.debug();
     expect(screen.getByText('Default tile')).toBeInTheDocument();
   });
 });
