@@ -107,7 +107,7 @@ Switch.propTypes = {
   /**
    * Provide the contents of your Switch
    */
-  text: PropTypes.string.isRequired,
+  text: PropTypes.node.isRequired,
 };
 
 Switch.defaultProps = {

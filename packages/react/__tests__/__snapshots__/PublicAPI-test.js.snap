@@ -5653,7 +5653,7 @@ Map {
       },
       "text": Object {
         "isRequired": true,
-        "type": "string",
+        "type": "node",
       },
     },
     "render": [Function],
