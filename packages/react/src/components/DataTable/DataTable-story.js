@@ -213,7 +213,10 @@ export const WithToolbar = () => (
         {...getTableContainerProps()}>
         <TableToolbar {...getToolbarProps()} aria-label="data table toolbar">
           <TableToolbarContent>
-            <TableToolbarSearch onChange={onInputChange} />
+            <TableToolbarSearch
+              onChange={onInputChange}
+              onClear={action('onClear')}
+            />
             <TableToolbarMenu light>
               <TableToolbarAction onClick={action('Action 1 Click')}>
                 Action 1
