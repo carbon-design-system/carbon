@@ -451,32 +451,6 @@ export default class Modal extends Component {
       alertDialogProps['aria-describedby'] = this.modalBodyId;
     }
 
-    const SecondaryButtonSet = () => {
-      if (Array.isArray(secondaryButtons) && secondaryButtons.length <= 2) {
-        return secondaryButtons.map(
-          ({ buttonText, onClick: onButtonClick }, i) => (
-            <Button
-              key={`${buttonText}-${i}`}
-              kind="secondary"
-              onClick={onButtonClick}>
-              {buttonText}
-            </Button>
-          )
-        );
-      }
-      if (secondaryButtonText) {
-        return (
-          <Button
-            kind="secondary"
-            onClick={onSecondaryButtonClick}
-            ref={this.secondaryButton}>
-            {secondaryButtonText}
-          </Button>
-        );
-      }
-      return null;
-    };
-
     const modalBody = (
       <div
         ref={this.innerModal}
@@ -514,7 +488,25 @@ export default class Modal extends Component {
         )}
         {!passiveModal && (
           <ButtonSet className={footerClasses}>
-            <SecondaryButtonSet />
+            {Array.isArray(secondaryButtons) && secondaryButtons.length <= 2
+              ? secondaryButtons.map(
+                  ({ buttonText, onClick: onButtonClick }, i) => (
+                    <Button
+                      key={`${buttonText}-${i}`}
+                      kind="secondary"
+                      onClick={onButtonClick}>
+                      {buttonText}
+                    </Button>
+                  )
+                )
+              : secondaryButtonText && (
+                  <Button
+                    kind="secondary"
+                    onClick={onSecondaryButtonClick}
+                    ref={this.secondaryButton}>
+                    {secondaryButtonText}
+                  </Button>
+                )}
             <Button
               kind={danger ? 'danger' : 'primary'}
               disabled={primaryButtonDisabled}
