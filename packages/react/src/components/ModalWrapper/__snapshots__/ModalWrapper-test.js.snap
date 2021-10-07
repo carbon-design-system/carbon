@@ -56,7 +56,6 @@ exports[`ModalWrapper should render 1`] = `
     <Modal
       aria-label="test modal"
       hasScrollingContent={false}
-      iconDescription="Close"
       id="modal"
       modalHeading="Transactional Modal"
       modalLabel="Test Modal Label"
@@ -110,20 +109,16 @@ exports[`ModalWrapper should render 1`] = `
               Transactional Modal
             </h3>
             <button
-              aria-label="Close"
               className="bx--modal-close"
               onClick={[Function]}
-              title="Close"
               type="button"
             >
               <ForwardRef(Close20)
                 aria-hidden="true"
-                aria-label="Close"
                 className="bx--modal-close__icon"
               >
                 <Icon
                   aria-hidden="true"
-                  aria-label="Close"
                   className="bx--modal-close__icon"
                   fill="currentColor"
                   height={20}
@@ -133,14 +128,12 @@ exports[`ModalWrapper should render 1`] = `
                   xmlns="http://www.w3.org/2000/svg"
                 >
                   <svg
-                    aria-hidden="true"
-                    aria-label="Close"
+                    aria-hidden={true}
                     className="bx--modal-close__icon"
                     fill="currentColor"
                     focusable="false"
                     height={20}
                     preserveAspectRatio="xMidYMid meet"
-                    role="img"
                     viewBox="0 0 32 32"
                     width={20}
                     xmlns="http://www.w3.org/2000/svg"

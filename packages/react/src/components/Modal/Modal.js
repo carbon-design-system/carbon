@@ -221,7 +221,7 @@ export default class Modal extends Component {
     onKeyDown: () => {},
     passiveModal: false,
     // iconDescription is deprecated in v11 use aria-label instead
-    iconDescription: 'Close',
+    // iconDescription: 'Close',
     modalHeading: '',
     modalLabel: '',
     preventCloseOnClickOutside: false,
@@ -427,8 +427,6 @@ export default class Modal extends Component {
         ref={this.button}>
         <Close20
           aria-hidden="true"
-          // iconDescription is deprecated in v11. Use aria-hidden="true" instead.
-          aria-label={iconDescription}
           className={`${this.modalCloseButtonClass}__icon`}
         />
       </button>
