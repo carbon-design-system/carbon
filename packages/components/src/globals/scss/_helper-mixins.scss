@@ -55,7 +55,7 @@
 /// @example @include box-shadow;
 /// @group global-helpers
 @mixin box-shadow {
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 2px 6px $shadow;
 }
 
 /// Adds outline styles depending on specific type
