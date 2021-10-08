@@ -34,8 +34,6 @@
     height: auto;
     min-height: rem(48px);
     flex-wrap: wrap;
-    margin-top: $spacing-05;
-    margin-bottom: $spacing-05;
     color: $text-inverse;
 
     @include breakpoint(md) {
