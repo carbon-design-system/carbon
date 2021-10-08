@@ -40,7 +40,6 @@ $input-label-weight: 400 !default;
     @include type-style('label-01');
 
     display: inline-block;
-    margin-bottom: $spacing-03;
     color: $text-secondary;
     font-weight: $input-label-weight;
     line-height: 1rem;
