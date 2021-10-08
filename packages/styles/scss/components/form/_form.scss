@@ -21,12 +21,6 @@ $input-label-weight: 400 !default;
 @mixin form {
   .#{$prefix}--fieldset {
     @include reset;
-
-    margin-bottom: $spacing-07;
-  }
-
-  .#{$prefix}--fieldset--no-margin {
-    margin-bottom: 0;
   }
 
   .#{$prefix}--form-item {
@@ -127,10 +121,6 @@ $input-label-weight: 400 !default;
   .#{$prefix}--form--fluid .#{$prefix}--text-input__field-wrapper[data-invalid],
   .#{$prefix}--form--fluid .#{$prefix}--text-input__field-wrapper--warning {
     display: block;
-  }
-
-  .#{$prefix}--form--fluid .#{$prefix}--fieldset {
-    margin: 0;
   }
 
   .#{$prefix}--form--fluid input[data-invalid] {
