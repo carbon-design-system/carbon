@@ -124,7 +124,7 @@
 
   .#{$prefix}--slider-text-input,
   .#{$prefix}-slider-text-input {
-    width: auto;
+    width: rem(64px);
     height: rem(40px);
     -moz-appearance: textfield;
     text-align: center;
