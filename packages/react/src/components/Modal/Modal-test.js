@@ -47,19 +47,9 @@ describe('Modal', () => {
       expect(getModal(modal).props().id).toEqual('modal-1');
     });
 
-    it('has the expected default iconDescription', () => {
-      expect(mounted.props().iconDescription).toEqual('Close');
-    });
-
-    it('adds new iconDescription when passed via props', () => {
-      mounted.setProps({ iconDescription: 'new description' });
-      expect(mounted.props().iconDescription).toEqual('new description');
-    });
-
-    it('should have iconDescription match Icon component description prop', () => {
-      const description = mounted.find(Close20).props()['aria-label'];
-      const matches = mounted.props().iconDescription === description;
-      expect(matches).toEqual(true);
+    it('should have aria-hidden on the Icon component', () => {
+      const ariaHidden = mounted.find(Close20).props()['aria-hidden'];
+      expect(ariaHidden).toEqual('true');
     });
 
     it('enables primary button by default', () => {
