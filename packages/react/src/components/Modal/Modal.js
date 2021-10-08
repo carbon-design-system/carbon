@@ -64,10 +64,13 @@ export default class Modal extends Component {
     ),
 
     /**
-     * Provide whether the modal content has a form element.
-     * If `true` is used here, non-form child content should have `bx--modal-content__regular-content` class.
+     * Deprecated: Used to determine whether the modal content has a form element to adjust spacing,
+     * but now spacing styles account for all types of elements
      */
-    hasForm: PropTypes.bool,
+    hasForm: deprecate(
+      PropTypes.bool,
+      `\nThe prop \`hasForm\` for Modal has been deprecated, as the feature of \`hasForm\` runs by default.`
+    ),
 
     /**
      * Specify whether the modal contains scrolling content
@@ -400,7 +403,7 @@ export default class Modal extends Component {
     });
 
     const contentClasses = classNames(`${prefix}--modal-content`, {
-      [`${prefix}--modal-content--with-form`]: hasForm,
+      [`${prefix}--modal-content--with-form`]: hasForm, //TO-DO: deprecate & remove this with v11
       [`${prefix}--modal-scroll-content`]: hasScrollingContent,
     });
 
@@ -448,32 +451,6 @@ export default class Modal extends Component {
       alertDialogProps['aria-describedby'] = this.modalBodyId;
     }
 
-    const SecondaryButtonSet = () => {
-      if (Array.isArray(secondaryButtons) && secondaryButtons.length <= 2) {
-        return secondaryButtons.map(
-          ({ buttonText, onClick: onButtonClick }, i) => (
-            <Button
-              key={`${buttonText}-${i}`}
-              kind="secondary"
-              onClick={onButtonClick}>
-              {buttonText}
-            </Button>
-          )
-        );
-      }
-      if (secondaryButtonText) {
-        return (
-          <Button
-            kind="secondary"
-            onClick={onSecondaryButtonClick}
-            ref={this.secondaryButton}>
-            {secondaryButtonText}
-          </Button>
-        );
-      }
-      return null;
-    };
-
     const modalBody = (
       <div
         ref={this.innerModal}
@@ -511,7 +488,25 @@ export default class Modal extends Component {
         )}
         {!passiveModal && (
           <ButtonSet className={footerClasses}>
-            <SecondaryButtonSet />
+            {Array.isArray(secondaryButtons) && secondaryButtons.length <= 2
+              ? secondaryButtons.map(
+                  ({ buttonText, onClick: onButtonClick }, i) => (
+                    <Button
+                      key={`${buttonText}-${i}`}
+                      kind="secondary"
+                      onClick={onButtonClick}>
+                      {buttonText}
+                    </Button>
+                  )
+                )
+              : secondaryButtonText && (
+                  <Button
+                    kind="secondary"
+                    onClick={onSecondaryButtonClick}
+                    ref={this.secondaryButton}>
+                    {secondaryButtonText}
+                  </Button>
+                )}
             <Button
               kind={danger ? 'danger' : 'primary'}
               disabled={primaryButtonDisabled}
