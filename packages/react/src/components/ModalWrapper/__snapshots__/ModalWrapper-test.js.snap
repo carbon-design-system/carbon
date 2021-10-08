@@ -167,36 +167,34 @@ exports[`ModalWrapper should render 1`] = `
             <div
               className="bx--modal-footer bx--btn-set"
             >
-              <SecondaryButtonSet>
-                <Button
-                  dangerDescription="danger"
+              <Button
+                dangerDescription="danger"
+                disabled={false}
+                isExpressive={false}
+                kind="secondary"
+                onClick={[Function]}
+                size="default"
+                tabIndex={0}
+                tooltipAlignment="center"
+                tooltipPosition="top"
+                type="button"
+              >
+                <button
+                  aria-describedby={null}
+                  aria-pressed={null}
+                  className="bx--btn bx--btn--secondary"
                   disabled={false}
-                  isExpressive={false}
-                  kind="secondary"
+                  onBlur={[Function]}
                   onClick={[Function]}
-                  size="default"
+                  onFocus={[Function]}
+                  onMouseEnter={[Function]}
+                  onMouseLeave={[Function]}
                   tabIndex={0}
-                  tooltipAlignment="center"
-                  tooltipPosition="top"
                   type="button"
                 >
-                  <button
-                    aria-describedby={null}
-                    aria-pressed={null}
-                    className="bx--btn bx--btn--secondary"
-                    disabled={false}
-                    onBlur={[Function]}
-                    onClick={[Function]}
-                    onFocus={[Function]}
-                    onMouseEnter={[Function]}
-                    onMouseLeave={[Function]}
-                    tabIndex={0}
-                    type="button"
-                  >
-                    Cancel
-                  </button>
-                </Button>
-              </SecondaryButtonSet>
+                  Cancel
+                </button>
+              </Button>
               <Button
                 dangerDescription="danger"
                 disabled={false}

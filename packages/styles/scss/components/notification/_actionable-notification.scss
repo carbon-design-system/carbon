@@ -190,7 +190,10 @@
     display: flex;
     flex-grow: 1;
     margin: 0 $spacing-09 0 $spacing-05;
+  }
 
+  .#{$prefix}--actionable-notification:not(.#{$prefix}--actionable-notification--toast)
+    .#{$prefix}--actionable-notification__details {
     @include breakpoint(md) {
       margin: 0 $spacing-05;
     }
