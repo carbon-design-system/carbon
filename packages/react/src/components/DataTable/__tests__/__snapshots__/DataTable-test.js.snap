@@ -1870,6 +1870,7 @@ exports[`DataTable should render 1`] = `
                 <TableToolbarSearch
                   id="custom-id"
                   onChange={[Function]}
+                  onClear={[Function]}
                   persistent={true}
                   tabIndex="0"
                   translateWithId={[Function]}
@@ -2331,6 +2332,7 @@ exports[`DataTable should render 1`] = `
               <TableToolbarSearch
                 id="custom-id"
                 onChange={[Function]}
+                onClear={[Function]}
                 persistent={true}
                 tabIndex="0"
                 translateWithId={[Function]}
@@ -2342,6 +2344,7 @@ exports[`DataTable should render 1`] = `
                   labelText="Filter table"
                   onBlur={[Function]}
                   onChange={[Function]}
+                  onClear={[Function]}
                   onFocus={[Function]}
                   placeholder="Filter table"
                   tabIndex="0"
@@ -2928,6 +2931,7 @@ exports[`DataTable sticky header should render 1`] = `
                 <TableToolbarSearch
                   id="custom-id"
                   onChange={[Function]}
+                  onClear={[Function]}
                   persistent={true}
                   tabIndex="0"
                   translateWithId={[Function]}
@@ -3392,6 +3396,7 @@ exports[`DataTable sticky header should render 1`] = `
               <TableToolbarSearch
                 id="custom-id"
                 onChange={[Function]}
+                onClear={[Function]}
                 persistent={true}
                 tabIndex="0"
                 translateWithId={[Function]}
@@ -3403,6 +3408,7 @@ exports[`DataTable sticky header should render 1`] = `
                   labelText="Filter table"
                   onBlur={[Function]}
                   onChange={[Function]}
+                  onClear={[Function]}
                   onFocus={[Function]}
                   placeholder="Filter table"
                   tabIndex="0"
