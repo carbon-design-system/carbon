@@ -4519,6 +4519,9 @@ Map {
       "titleText": Object {
         "type": "node",
       },
+      "hideLabel": Object {
+        "type": "bool",
+      },
       "translateWithId": Object {
         "type": "func",
       },
