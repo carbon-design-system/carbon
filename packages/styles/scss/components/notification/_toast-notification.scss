@@ -32,14 +32,19 @@
     width: rem(288px);
     height: auto;
     padding-left: $spacing-05;
-    margin-top: $spacing-03;
-    margin-right: $spacing-05;
-    margin-bottom: $spacing-03;
+    @if not enabled('enable-v11-release') {
+      margin-top: $spacing-03;
+      margin-right: $spacing-05;
+      margin-bottom: $spacing-03;
+    }
+
     box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.2);
     color: $text-inverse;
 
-    &:first-child {
-      margin-top: $spacing-05;
+    @if not enabled('enable-v11-release') {
+      &:first-child {
+        margin-top: $spacing-05;
+      }
     }
 
     @include breakpoint(max) {
