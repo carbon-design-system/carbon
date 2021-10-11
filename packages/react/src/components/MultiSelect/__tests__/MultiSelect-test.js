@@ -7,7 +7,7 @@
 
 import { getByText, isElementVisible } from '@carbon/test-utils/dom';
 import { pressEnter, pressSpace, pressTab } from '@carbon/test-utils/keyboard';
-import { cleanup, render } from '@testing-library/react';
+import { cleanup, render, fireEvent } from '@testing-library/react';
 import React from 'react';
 import { act, Simulate } from 'react-dom/test-utils';
 import MultiSelect from '../';
@@ -56,11 +56,11 @@ describe('MultiSelect', () => {
     const items = generateItems(4, generateGenericItem);
     const label = 'test-label';
     const { container } = render(
-      <MultiSelect id="test" label={label} items={items} />
+      <MultiSelect id="test" titleText={label} label={label} items={items} />
     );
-
     const labelNode = getByText(container, label);
-    Simulate.click(labelNode);
+
+    fireEvent.click(labelNode);
 
     expect(
       container.querySelector('[aria-expanded="true"][aria-haspopup="listbox"]')
