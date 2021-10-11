@@ -66,6 +66,9 @@
     transition: transform $duration--moderate-02 motion(entrance, expressive);
   }
 
+  // -----------------------------
+  // Modal container
+  // -----------------------------
   .#{$prefix}--modal-container {
     position: fixed;
     top: 0;
@@ -89,17 +92,6 @@
       width: 84%;
       height: auto;
       max-height: 90%;
-
-      .#{$prefix}--modal-header,
-      .#{$prefix}--modal-content,
-      .#{$prefix}--modal-content__regular-content {
-        padding-right: 20%;
-      }
-
-      .#{$prefix}--modal-content--with-form {
-        // Override for `.#{$prefix}--modal-content`
-        padding-right: $spacing-05;
-      }
     }
 
     @include carbon--breakpoint(lg) {
@@ -112,121 +104,52 @@
     }
   }
 
-  .#{$prefix}--modal-header,
+  // -----------------------------
+  // Modal content
+  // -----------------------------
   .#{$prefix}--modal-content {
-    padding-left: $spacing-05;
-  }
+    @include type-style('body-long-01');
 
-  .#{$prefix}--modal-header,
-  .#{$prefix}--modal-content,
-  .#{$prefix}--modal-content__regular-content {
+    position: relative;
+    // Required to accommodate focus outline's negative offset:
+    padding-top: $spacing-03;
+    // anything besides text/p spans full width, with just 16px padding
     padding-right: $spacing-05;
+    padding-left: $spacing-05;
+    margin-bottom: $spacing-09;
+    color: $text-01;
+
+    font-weight: 400;
+    grid-column: 1/-1;
+    grid-row: 2/-2;
+    overflow-y: auto;
+
+    &:focus {
+      @include focus-outline('outline');
+    }
   }
 
+  //TO-DO: remove .#{$prefix}--modal-content__regular-content in v11 since hasForm has been deprecated
+  // text/p gets 20% right padding
+  .#{$prefix}--modal-content p,
+  .#{$prefix}--modal-content__regular-content {
+    padding-right: 20%;
+    @include type-style('body-long-01');
+  }
+
+  //TO-DO: remove .#{$prefix}--modal-content--with-form in v11 since hasForm has been deprecated\
+  // anything besides text/p spans full width, with just 16px padding
   .#{$prefix}--modal-content--with-form {
     padding-right: $spacing-05;
   }
 
-  .#{$prefix}--modal-container--xs {
-    .#{$prefix}--modal-header {
-      padding-right: $carbon--spacing-09;
-    }
-
-    .#{$prefix}--modal-content,
-    .#{$prefix}--modal-content__regular-content,
-    .#{$prefix}--modal-content--with-form {
-      padding-right: $spacing-05;
-    }
-
-    @include carbon--breakpoint(md) {
-      width: 48%;
-    }
-
-    @include carbon--breakpoint(lg) {
-      width: 32%;
-      max-height: 48%;
-    }
-
-    @include carbon--breakpoint(xlg) {
-      width: 24%;
-    }
-  }
-
-  .#{$prefix}--modal-container--sm {
-    .#{$prefix}--modal-header {
-      padding-right: $carbon--spacing-09;
-    }
-
-    .#{$prefix}--modal-content,
-    .#{$prefix}--modal-content__regular-content,
-    .#{$prefix}--modal-content--with-form {
-      padding-right: $spacing-05;
-    }
-
-    @include carbon--breakpoint(md) {
-      width: 60%;
-    }
-
-    @include carbon--breakpoint(lg) {
-      width: 42%;
-      max-height: 72%;
-    }
-
-    @include carbon--breakpoint(xlg) {
-      width: 36%;
-
-      .#{$prefix}--modal-header,
-      .#{$prefix}--modal-content,
-      .#{$prefix}--modal-content__regular-content {
-        padding-right: 20%;
-      }
-
-      .#{$prefix}--modal-content--with-form {
-        // Override for `.#{$prefix}--modal-content`
-        padding-right: $spacing-05;
-      }
-    }
-  }
-
-  .#{$prefix}--modal-container--lg {
-    .#{$prefix}--modal-header {
-      padding-right: $carbon--spacing-09;
-    }
-
-    .#{$prefix}--modal-content,
-    .#{$prefix}--modal-content__regular-content,
-    .#{$prefix}--modal-content--with-form {
-      padding-right: $spacing-05;
-    }
-
-    @include carbon--breakpoint(md) {
-      width: 96%;
-
-      .#{$prefix}--modal-header,
-      .#{$prefix}--modal-content,
-      .#{$prefix}--modal-content__regular-content {
-        padding-right: 20%;
-      }
-
-      .#{$prefix}--modal-content--with-form {
-        // Override for `.#{$prefix}--modal-content`
-        padding-right: $spacing-05;
-      }
-    }
-
-    @include carbon--breakpoint(lg) {
-      width: 84%;
-      max-height: 96%;
-    }
-
-    @include carbon--breakpoint(xlg) {
-      width: 72%;
-    }
-  }
-
+  // -----------------------------
+  // Modal header
+  // -----------------------------
   .#{$prefix}--modal-header {
     padding-top: $spacing-05;
     padding-right: $spacing-09;
+    padding-left: $spacing-05;
     margin-bottom: $spacing-03;
     grid-column: 1/-1;
     grid-row: 1/1;
@@ -245,29 +168,88 @@
     color: $text-01;
   }
 
-  .#{$prefix}--modal-content {
-    @include type-style('body-long-01');
+  // -----------------------------
+  // XS Modal
+  // -----------------------------
+  .#{$prefix}--modal-container--xs {
+    //text always spans full width in xs modals
+    .#{$prefix}--modal-content__regular-content {
+      padding-right: $spacing-05;
+    }
 
-    position: relative;
-    // Required to accommodate focus outline's negative offset:
-    padding-top: $spacing-03;
-    margin-bottom: $spacing-09;
-    color: $text-01;
+    .#{$prefix}--modal-content p {
+      //.#{$prefix}--modal-content already has 16px padding so this doesn't need any
+      padding-right: 0;
+    }
 
-    font-weight: 400;
-    grid-column: 1/-1;
-    grid-row: 2/-2;
-    overflow-y: auto;
+    @include carbon--breakpoint(md) {
+      width: 48%;
+    }
 
-    &:focus {
-      @include focus-outline('outline');
+    @include carbon--breakpoint(lg) {
+      width: 32%;
+      max-height: 48%;
+    }
+
+    @include carbon--breakpoint(xlg) {
+      width: 24%;
     }
   }
 
-  .#{$prefix}--modal-content > p {
-    @include type-style('body-long-01');
+  // -----------------------------
+  // SM Modal
+  // -----------------------------
+  .#{$prefix}--modal-container--sm {
+    //text spans full width in sm modals below 1056
+    .#{$prefix}--modal-content__regular-content {
+      padding-right: $spacing-05;
+    }
+
+    .#{$prefix}--modal-content p {
+      //.#{$prefix}--modal-content already has 16px padding so this doesn't need any
+      padding-right: 0;
+    }
+
+    @include carbon--breakpoint(md) {
+      width: 60%;
+    }
+
+    @include carbon--breakpoint(lg) {
+      width: 42%;
+      max-height: 72%;
+
+      .#{$prefix}--modal-content p,
+      .#{$prefix}--modal-content__regular-content {
+        padding-right: 20%;
+      }
+    }
+
+    @include carbon--breakpoint(xlg) {
+      width: 36%;
+    }
   }
 
+  // -----------------------------
+  // LG Modal
+  // -----------------------------
+  .#{$prefix}--modal-container--lg {
+    @include carbon--breakpoint(md) {
+      width: 96%;
+    }
+
+    @include carbon--breakpoint(lg) {
+      width: 84%;
+      max-height: 96%;
+    }
+
+    @include carbon--breakpoint(xlg) {
+      width: 72%;
+    }
+  }
+
+  // -----------------------------
+  // Modal overflow
+  // -----------------------------
   // Required so overflow-indicator disappears at end of content
   .#{$prefix}--modal-scroll-content > *:last-child {
     padding-bottom: $spacing-07;
@@ -314,6 +296,9 @@
     }
   }
 
+  // -----------------------------
+  // Modal footer
+  // -----------------------------
   .#{$prefix}--modal-footer {
     display: flex;
     height: rem(64px);
@@ -337,6 +322,9 @@
     align-items: flex-start;
   }
 
+  // -----------------------------
+  // Modal close btn
+  // -----------------------------
   .#{$prefix}--modal-close {
     position: absolute;
     z-index: 2;

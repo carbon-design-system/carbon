@@ -172,9 +172,10 @@
     opacity: 1;
   }
 
-  .#{$prefix}--select-optgroup,
+  optgroup.#{$prefix}--select-optgroup,
   .#{$prefix}--select-option {
     // For the options to show in IE11
+    background-color: $background-hover;
     color: $text-01;
 
     &:disabled {
@@ -211,7 +212,7 @@
     padding-right: $spacing-07;
     padding-left: $carbon--spacing-03;
     border-bottom: none;
-    background-color: transparent;
+    background-color: $background;
     color: $text-01;
   }
 
