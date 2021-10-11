@@ -25,7 +25,7 @@
   .#{$prefix}--dropdown__wrapper--inline {
     display: inline-grid;
     align-items: center;
-    grid-gap: rem(24px);
+    grid-gap: 0 rem(24px);
     grid-template: auto auto / auto min-content;
 
     .#{$prefix}--label {

@@ -183,11 +183,15 @@ $content-padding: 0 0 0 $spacing-05 !default;
 
   .#{$prefix}--accordion--start .#{$prefix}--accordion__arrow {
     // Alters `$arrow-margin` token:
-    margin: 2px 0 0 $spacing-03;
+    margin: 2px 0 0 $spacing-05;
+  }
+
+  .#{$prefix}--accordion--start .#{$prefix}--accordion__title {
+    margin-right: $spacing-05;
   }
 
   .#{$prefix}--accordion--start .#{$prefix}--accordion__content {
-    margin-left: $spacing-06;
+    margin-left: $spacing-07;
   }
 
   .#{$prefix}--accordion__item--collapsing .#{$prefix}--accordion__content,
