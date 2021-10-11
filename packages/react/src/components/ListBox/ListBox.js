@@ -9,6 +9,7 @@ import cx from 'classnames';
 import React from 'react';
 import PropTypes from 'prop-types';
 import { settings } from 'carbon-components';
+import deprecate from '../../prop-types/deprecate';
 import { ListBoxType, ListBoxSize } from './ListBoxPropTypes';
 
 const { prefix } = settings;
@@ -112,9 +113,12 @@ ListBox.propTypes = {
   isOpen: PropTypes.bool,
 
   /**
-   * Specify if the control should use the light variant
+   * The light prop functionality is being replaced with the Layer component
    */
-  light: PropTypes.bool,
+  light: deprecate(
+    PropTypes.bool,
+    'The `light` prop has been deprecated and will be removed in the next major release in favor of the Layer component'
+  ),
 
   /**
    * Specify the size of the ListBox. Currently supports either `sm`, `md` or `lg` as an option.

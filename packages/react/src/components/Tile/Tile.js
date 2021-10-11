@@ -32,10 +32,12 @@ export class Tile extends Component {
     className: PropTypes.string,
 
     /**
-     * `true` to use the light version. For use on $ui-01 backgrounds only.
-     * Don't use this to make tile background color same as container background color.
+     * The light prop functionality is being replaced with the Layer component that will be available in Carbon V11.
      */
-    light: PropTypes.bool,
+    light: deprecate(
+      PropTypes.bool,
+      'The `light` prop has been deprecated and will be removed in the next major release in favor of the Layer component'
+    ),
   };
 
   static contextType = PrefixContext;
@@ -98,10 +100,12 @@ export class ClickableTile extends Component {
     href: PropTypes.string,
 
     /**
-     * `true` to use the light version. For use on $ui-01 backgrounds only.
-     * Don't use this to make tile background color same as container background color.
+     * The light prop functionality is being replaced with the Layer component that will be available in Carbon V11.
      */
-    light: PropTypes.bool,
+    light: deprecate(
+      PropTypes.bool,
+      'The `light` prop has been deprecated and will be removed in the next major release in favor of the Layer component'
+    ),
 
     /**
      * Specify the function to run when the ClickableTile is clicked
@@ -316,6 +320,7 @@ export function SelectableTile(props) {
     </>
   );
 }
+
 SelectableTile.defaultProps = {
   value: 'value',
   title: 'title',
@@ -326,6 +331,7 @@ SelectableTile.defaultProps = {
   onChange: () => {},
   onKeyDown: () => {},
 };
+
 SelectableTile.propTypes = {
   /**
    * The child nodes.
@@ -373,10 +379,12 @@ SelectableTile.propTypes = {
   id: PropTypes.string,
 
   /**
-   * `true` to use the light version. For use on $ui-01 backgrounds only.
-   * Don't use this to make tile background color same as container background color.
+   * The light prop functionality is being replaced with the Layer component that will be available in Carbon V11.
    */
-  light: PropTypes.bool,
+  light: deprecate(
+    PropTypes.bool,
+    'The `light` prop has been deprecated and will be removed in the next major release in favor of the Layer component'
+  ),
 
   /**
    * The `name` of the `<input>`.
@@ -452,10 +460,12 @@ export class ExpandableTile extends Component {
     id: PropTypes.string,
 
     /**
-     * `true` to use the light version. For use on $ui-01 backgrounds only.
-     * Don't use this to make tile background color same as container background color.
+     * The light prop functionality is being replaced with the Layer component that will be available in Carbon V11.
      */
-    light: PropTypes.bool,
+    light: deprecate(
+      PropTypes.bool,
+      'The `light` prop has been deprecated and will be removed in the next major release in favor of the Layer component'
+    ),
 
     /**
      * optional handler to decide whether to ignore a click. returns false if click should be ignored

@@ -120,9 +120,12 @@ RadioTile.propTypes = {
   id: PropTypes.string,
 
   /**
-   * `true` to use the light version.
+   * The light prop functionality is being replaced with the Layer component that will be available in Carbon V11.
    */
-  light: PropTypes.bool,
+  light: deprecate(
+    PropTypes.bool,
+    'The `light` prop has been deprecated and will be removed in the next major release in favor of the Layer component'
+  ),
 
   /**
    * The `name` of the `<input>`.

@@ -3,6 +3,7 @@ import classNames from 'classnames';
 import PropTypes from 'prop-types';
 import { settings } from 'carbon-components';
 import { View16, ViewOff16, WarningFilled16 } from '@carbon/icons-react';
+import deprecate from '../../prop-types/deprecate';
 import { textInputProps } from './util';
 import { warning } from '../../internal/warning';
 
@@ -208,9 +209,12 @@ ControlledPasswordInput.propTypes = {
   labelText: PropTypes.node.isRequired,
 
   /**
-   * Specify light version or default version of this control
+   * The light prop functionality is being replaced with the Layer component that will be available in Carbon V11.
    */
-  light: PropTypes.bool,
+  light: deprecate(
+    PropTypes.bool,
+    'The `light` prop has been deprecated and will be removed in the next major release in favor of the Layer component'
+  ),
 
   /**
    * Optionally provide an `onChange` handler that is called whenever `<input>`

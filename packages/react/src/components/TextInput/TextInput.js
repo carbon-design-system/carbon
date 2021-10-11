@@ -9,6 +9,7 @@ import PropTypes from 'prop-types';
 import React, { useContext } from 'react';
 import classNames from 'classnames';
 import { useNormalizedInputProps } from '../../internal/useNormalizedInputProps';
+import { deprecate } from '../../prop-types/deprecate';
 import PasswordInput from './PasswordInput';
 import ControlledPasswordInput from './ControlledPasswordInput';
 import { textInputProps } from './util';
@@ -235,9 +236,12 @@ TextInput.propTypes = {
   labelText: PropTypes.node.isRequired,
 
   /**
-   * `true` to use the light version.
+   * The light prop functionality is being replaced with the Layer component that will be available in Carbon V11.
    */
-  light: PropTypes.bool,
+  light: deprecate(
+    PropTypes.bool,
+    'The `light` prop has been deprecated and will be removed in the next major release in favor of the Layer component'
+  ),
 
   /**
    * Optionally provide an `onChange` handler that is called whenever `<input>`
