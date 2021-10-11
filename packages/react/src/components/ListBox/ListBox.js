@@ -113,7 +113,7 @@ ListBox.propTypes = {
   isOpen: PropTypes.bool,
 
   /**
-   * The light prop functionality is being replaced with the Layer component
+   * The light prop functionality is being replaced with the Layer component that will be available in Carbon V11.ß
    */
   light: deprecate(
     PropTypes.bool,
