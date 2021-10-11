@@ -130,9 +130,6 @@ const Tabs = React.forwardRef(function Tabs(
     return 0;
   };
 
-  /**
-   * creates an array of all the child tab items
-   */
   const getTabAt = useCallback(
     (index, useFresh) =>
       (!useFresh && tabs.current[index]) ||
@@ -224,6 +221,9 @@ const Tabs = React.forwardRef(function Tabs(
     selectTabAt(evt, { index, onSelectionChange });
   };
 
+  /**
+   * creates an array of all the child tab items
+   */
   const setTabAt = (index, tabRef) => {
     tabs.current[index] = tabRef;
   };
