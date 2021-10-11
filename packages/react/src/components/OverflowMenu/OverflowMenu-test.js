@@ -160,6 +160,15 @@ describe('OverflowMenu', () => {
       );
     });
 
+    it('fires onClick only once per button click', () => {
+      const mockOnClick = jest.fn();
+      const rootWrapper = mount(<OverflowMenu onClick={mockOnClick} />);
+
+      rootWrapper.find('button').simulate('click');
+
+      expect(mockOnClick).toHaveBeenCalledTimes(1);
+    });
+
     it('should NOT toggle state in response to Enter or Space when the menu is open', () => {
       const enterKey = 13;
       const spaceKey = 32;
