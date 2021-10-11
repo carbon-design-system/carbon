@@ -5,15 +5,13 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { settings } from 'carbon-components';
 import cx from 'classnames';
 import PropTypes from 'prop-types';
 import React, { useRef } from 'react';
 import Filename from './Filename';
 import { keys, matches } from '../../internal/keyboard';
 import uid from '../../tools/uniqueId';
-
-const { prefix } = settings;
+import { usePrefix } from '../../internal/usePrefix';
 
 function FileUploaderItem({
   uuid,
@@ -27,6 +25,7 @@ function FileUploaderItem({
   size,
   ...other
 }) {
+  const prefix = usePrefix();
   const { current: id } = useRef(uuid || uid());
   const classes = cx(`${prefix}--file__selected-file`, {
     [`${prefix}--file__selected-file--invalid`]: invalid,

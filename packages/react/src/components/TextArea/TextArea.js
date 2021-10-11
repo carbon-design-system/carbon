@@ -8,11 +8,9 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import classNames from 'classnames';
-import { settings } from 'carbon-components';
 import { WarningFilled16 } from '@carbon/icons-react';
 import { useFeatureFlag } from '../FeatureFlags';
-
-const { prefix } = settings;
+import { usePrefix } from '../../internal/usePrefix';
 
 const TextArea = React.forwardRef(function TextArea(
   {
@@ -31,6 +29,7 @@ const TextArea = React.forwardRef(function TextArea(
   },
   ref
 ) {
+  const prefix = usePrefix();
   const enabled = useFeatureFlag('enable-v11-release');
 
   const textareaProps = {

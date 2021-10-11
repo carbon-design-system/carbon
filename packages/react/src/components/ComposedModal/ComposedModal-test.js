@@ -20,8 +20,8 @@ const { prefix } = settings;
 
 describe('<ModalHeader />', () => {
   describe('Renders as expected', () => {
-    const titleWrapper = shallow(<ModalHeader title="Something" />);
-    const labelWrapper = shallow(<ModalHeader label="Something" />);
+    const titleWrapper = mount(<ModalHeader title="Something" />);
+    const labelWrapper = mount(<ModalHeader label="Something" />);
 
     it('does not render title if no title', () => {
       expect(
@@ -75,7 +75,7 @@ describe('<ModalBody />', () => {
 
 describe('<ModalFooter />', () => {
   describe('Renders as expected', () => {
-    const wrapper = shallow(
+    const wrapper = mount(
       <ModalFooter className="extra-class">
         <p>Test</p>
       </ModalFooter>
@@ -87,10 +87,6 @@ describe('<ModalFooter />', () => {
 
     it('renders wrapper as expected', () => {
       expect(wrapper.length).toBe(1);
-    });
-
-    it('has the expected classes', () => {
-      expect(wrapper.hasClass(`${prefix}--modal-footer`)).toEqual(true);
     });
 
     it('renders extra classes passed in via className', () => {
@@ -231,7 +227,7 @@ describe('<ComposedModal />', () => {
   });
 
   it('avoids change the open state upon setting props, unless there the value actually changes', () => {
-    const wrapper = shallow(<ComposedModal />);
+    const wrapper = mount(<ComposedModal />);
     wrapper.setProps({ open: true });
     wrapper.setState({ open: false });
     wrapper.setProps({ open: true });

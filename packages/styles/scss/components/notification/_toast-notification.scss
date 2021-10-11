@@ -146,7 +146,7 @@
     margin-right: $spacing-05;
   }
 
-  @if enabled('enable-v11-release') {
+  @if feature-flag-enabled('enable-v11-release') {
     .#{$prefix}--toast-notification__content {
       @include type-style('body-short-01');
 
@@ -205,7 +205,7 @@
     fill: $icon-primary;
   }
 
-  @if not enabled('enable-v11-release') {
+  @if not feature-flag-enabled('enable-v11-release') {
     .#{$prefix}--toast-notification__title {
       @include type-style('productive-heading-01');
 

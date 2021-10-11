@@ -8,13 +8,12 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import cx from 'classnames';
-import { settings } from 'carbon-components';
 import SkeletonText from '../SkeletonText';
 import ButtonSkeleton from '../Button/Button.Skeleton';
-
-const { prefix } = settings;
+import { usePrefix } from '../../internal/usePrefix';
 
 function FileUploaderSkeleton({ className, ...rest }) {
+  const prefix = usePrefix();
   return (
     <div className={cx(`${prefix}--form-item`, className)} {...rest}>
       <SkeletonText heading width="100px" />

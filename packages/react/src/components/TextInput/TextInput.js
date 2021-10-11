@@ -8,19 +8,18 @@
 import PropTypes from 'prop-types';
 import React, { useContext } from 'react';
 import classNames from 'classnames';
-import { settings } from 'carbon-components';
 import { useNormalizedInputProps } from '../../internal/useNormalizedInputProps';
 import PasswordInput from './PasswordInput';
 import ControlledPasswordInput from './ControlledPasswordInput';
 import { textInputProps } from './util';
 import { FormContext } from '../FluidForm';
 import { useFeatureFlag } from '../FeatureFlags';
+import { usePrefix } from '../../internal/usePrefix';
 
-const { prefix } = settings;
 const TextInput = React.forwardRef(function TextInput(
   {
     labelText,
-    className = `${prefix}--text__input`,
+    className,
     id,
     placeholder,
     type,
@@ -41,6 +40,8 @@ const TextInput = React.forwardRef(function TextInput(
   },
   ref
 ) {
+  const prefix = usePrefix();
+
   const enabled = useFeatureFlag('enable-v11-release');
 
   const normalizedProps = useNormalizedInputProps({
@@ -53,10 +54,12 @@ const TextInput = React.forwardRef(function TextInput(
     warnText,
   });
 
+  const customClassName = className ?? `${prefix}--text__input`;
   const textInputClasses = classNames(
     `${prefix}--text-input`,
     [enabled ? null : className],
     {
+      [customClassName]: enabled,
       [`${prefix}--text-input--light`]: light,
       [`${prefix}--text-input--invalid`]: normalizedProps.invalid,
       [`${prefix}--text-input--warning`]: normalizedProps.warn,

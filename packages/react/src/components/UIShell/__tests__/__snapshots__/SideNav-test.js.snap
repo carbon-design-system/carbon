@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`SideNav should render 1`] = `
-<ForwardRef(SideNav)
+<SideNav
   addFocusListeners={true}
   addMouseListeners={true}
   aria-label="Navigation"
@@ -20,7 +20,7 @@ exports[`SideNav should render 1`] = `
     onBlur={[Function]}
     onFocus={[Function]}
   >
-    <ForwardRef(SideNavLink)
+    <SideNavLink
       element="a"
       href="/"
       large={false}
@@ -51,7 +51,7 @@ exports[`SideNav should render 1`] = `
           </Link>
         </li>
       </SideNavItem>
-    </ForwardRef(SideNavLink)>
+    </SideNavLink>
   </nav>
-</ForwardRef(SideNav)>
+</SideNav>
 `;
