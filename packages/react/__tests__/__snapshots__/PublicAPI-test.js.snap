@@ -322,6 +322,7 @@ Map {
     "defaultProps": Object {
       "indeterminate": false,
       "onChange": [Function],
+      "onClick": [Function],
     },
     "displayName": "Checkbox",
     "propTypes": Object {
@@ -352,6 +353,9 @@ Map {
         "type": "node",
       },
       "onChange": Object {
+        "type": "func",
+      },
+      "onClick": Object {
         "type": "func",
       },
       "title": Object {
@@ -1527,6 +1531,7 @@ Map {
     },
     "TableToolbarSearch": Object {
       "defaultProps": Object {
+        "onClear": [Function],
         "persistent": false,
         "tabIndex": "0",
         "translateWithId": [Function],
@@ -1557,6 +1562,9 @@ Map {
           "type": "string",
         },
         "onChange": Object {
+          "type": "func",
+        },
+        "onClear": Object {
           "type": "func",
         },
         "onExpand": Object {
@@ -2157,6 +2165,7 @@ Map {
   },
   "TableToolbarSearch" => Object {
     "defaultProps": Object {
+      "onClear": [Function],
       "persistent": false,
       "tabIndex": "0",
       "translateWithId": [Function],
@@ -2187,6 +2196,9 @@ Map {
         "type": "string",
       },
       "onChange": Object {
+        "type": "func",
+      },
+      "onClear": Object {
         "type": "func",
       },
       "onExpand": Object {
@@ -5314,6 +5326,7 @@ Map {
     "defaultProps": Object {
       "closeButtonLabelText": "Clear search input",
       "onChange": [Function],
+      "onClear": [Function],
       "placeholder": "",
       "type": "text",
     },
@@ -5351,6 +5364,9 @@ Map {
         "type": "bool",
       },
       "onChange": Object {
+        "type": "func",
+      },
+      "onClear": Object {
         "type": "func",
       },
       "onKeyDown": Object {
@@ -5482,6 +5498,9 @@ Map {
         "type": "bool",
       },
       "onChange": Object {
+        "type": "func",
+      },
+      "onClear": Object {
         "type": "func",
       },
       "onKeyDown": Object {
