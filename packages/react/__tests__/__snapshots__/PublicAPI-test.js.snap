@@ -322,6 +322,7 @@ Map {
     "defaultProps": Object {
       "indeterminate": false,
       "onChange": [Function],
+      "onClick": [Function],
     },
     "displayName": "Checkbox",
     "propTypes": Object {
@@ -352,6 +353,9 @@ Map {
         "type": "node",
       },
       "onChange": Object {
+        "type": "func",
+      },
+      "onClick": Object {
         "type": "func",
       },
       "title": Object {
