@@ -354,7 +354,7 @@ MultiSelect.propTypes = {
   /**
    * Specify whether the title text should be hidden or not
    */
-   hideLabel: PropTypes.bool,
+  hideLabel: PropTypes.bool,
 
   /**
    * Specify a custom `id`
