@@ -8,7 +8,7 @@
 import React from 'react';
 import {
   Tile,
-  // ClickableTile,
+  ClickableTile,
   // SelectableTile,
   // ExpandableTile,
   // TileAboveTheFoldContent,
@@ -17,14 +17,15 @@ import {
 
 import Link from '../../Link';
 import { render, cleanup, screen } from '@testing-library/react';
+// import userEvent from '@testing-library/user-event';
 import '@testing-library/jest-dom';
 
 describe('Tile', () => {
   afterEach(cleanup);
 
-  it('should render', () => {
+  it('adds extra classes that are passed via className', () => {
     render(
-      <Tile>
+      <Tile className="🚀">
         Default tile
         <br />
         <br />
@@ -32,7 +33,53 @@ describe('Tile', () => {
       </Tile>
     );
 
-    // screen.debug();
-    expect(screen.getByText('Default tile')).toBeInTheDocument();
+    expect(screen.getByText('Default tile').classList.contains('🚀')).toBe(
+      true
+    );
   });
 });
+
+describe('ClickableTile', () => {
+  afterEach(cleanup);
+
+  it('renders with a link', () => {
+    render(
+      <ClickableTile href="https://www.carbondesignsystem.com">
+        Clickable Tile
+      </ClickableTile>
+    );
+    // screen.debug();
+    expect(screen.getByRole('link')).toBeInTheDocument();
+  });
+
+  it('is disabled', () => {
+    const onClick = jest.fn();
+    render(
+      <ClickableTile
+        href="https://www.carbondesignsystem.com"
+        onClick={() => {}}>
+        Clickable Tile
+      </ClickableTile>
+    );
+    // const link = screen.getByText('Clickable Tile');
+    // console.log(link);
+    // console.log(userEvent.click(link));
+    // userEvent.click(notLink);
+    expect(onClick).not.toHaveBeenCalled();
+  });
+});
+
+// disabled: boolean('disabled (disabled)', false),
+// href: text(
+//   'Href for clickable UI (href)',
+//   'https://www.carbondesignsystem.com/'
+// ),
+// light: boolean('Light variant (light)', false),
+
+// expect(screen.getByText('Default tile')).toBeInTheDocument();
+
+// expect(
+//   screen.getByRole('presentation').classList.contains('custom-class')
+// ).toBe(true);
+
+// screen.debug();
