@@ -6,21 +6,14 @@
  */
 
 import React from 'react';
-import {
-  Tile,
-  ClickableTile,
-  // SelectableTile,
-  // ExpandableTile,
-  // TileAboveTheFoldContent,
-  // TileBelowTheFoldContent,
-} from './Tile';
+import { Tile, ClickableTile, SelectableTile } from './Tile';
 
 import Link from '../../Link';
 import { render, cleanup, screen } from '@testing-library/react';
-// import userEvent from '@testing-library/user-event';
+import userEvent from '@testing-library/user-event';
 import '@testing-library/jest-dom';
 
-describe('Tile', () => {
+describe('Default', () => {
   afterEach(cleanup);
 
   it('adds extra classes that are passed via className', () => {
@@ -48,38 +41,85 @@ describe('ClickableTile', () => {
         Clickable Tile
       </ClickableTile>
     );
-    // screen.debug();
     expect(screen.getByRole('link')).toBeInTheDocument();
-  });
-
-  it('is disabled', () => {
-    const onClick = jest.fn();
-    render(
-      <ClickableTile
-        href="https://www.carbondesignsystem.com"
-        onClick={() => {}}>
-        Clickable Tile
-      </ClickableTile>
-    );
-    // const link = screen.getByText('Clickable Tile');
-    // console.log(link);
-    // console.log(userEvent.click(link));
-    // userEvent.click(notLink);
-    expect(onClick).not.toHaveBeenCalled();
   });
 });
 
-// disabled: boolean('disabled (disabled)', false),
-// href: text(
-//   'Href for clickable UI (href)',
-//   'https://www.carbondesignsystem.com/'
-// ),
-// light: boolean('Light variant (light)', false),
+describe('Multi Select', () => {
+  afterEach(cleanup);
 
-// expect(screen.getByText('Default tile')).toBeInTheDocument();
+  it('does not invoke the click handler if SelectableTile is disabled', () => {
+    const onClick = jest.fn();
+    render(
+      <div role="group" aria-label="selectable tiles">
+        <SelectableTile
+          id="tile-1"
+          name="tiles"
+          value="value"
+          onClick={onClick}
+          disabled>
+          <span role="img" aria-label="see no evil">
+            🚦
+          </span>
+        </SelectableTile>
+      </div>
+    );
+    const tile = screen.getByText('🚦');
+    userEvent.click(tile);
+    expect(onClick).not.toHaveBeenCalled();
+  });
 
-// expect(
-//   screen.getByRole('presentation').classList.contains('custom-class')
-// ).toBe(true);
+  it('should cycle elements in document tab order', () => {
+    render(
+      <div role="group" aria-label="selectable tiles">
+        <SelectableTile
+          data-testid="element"
+          id="tile-1"
+          name="tiles"
+          value="value">
+          tile 1
+        </SelectableTile>
+        <SelectableTile
+          data-testid="element"
+          id="tile-2"
+          name="tiles"
+          value="value">
+          tile 2
+        </SelectableTile>
+        <SelectableTile
+          data-testid="element"
+          id="tile-3"
+          name="tiles"
+          value="value">
+          tile 3
+        </SelectableTile>
+      </div>
+    );
+    const [id1, id2, id3] = screen.getAllByTestId('element');
+    expect(document.body).toHaveFocus();
 
-// screen.debug();
+    userEvent.tab();
+
+    expect(id1).toHaveFocus();
+
+    userEvent.tab();
+
+    expect(id2).toHaveFocus();
+
+    userEvent.tab();
+
+    expect(id3).toHaveFocus();
+
+    userEvent.tab();
+
+    // cycle goes back to the body element
+    expect(document.body).toHaveFocus();
+
+    userEvent.tab();
+
+    expect(id1).toHaveFocus();
+  });
+});
+
+// Todo: Testing for ExpandableTile
+// Todo: Testing for RadioTile
