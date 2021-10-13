@@ -513,15 +513,13 @@
         );
       }
 
-      // .#{$prefix}--tabs--light
-      //   .#{$prefix}--tabs__overflow-indicator--left {
-      //   background-image: linear-gradient(to left, transparent, $ui-01);
-      // }
+      .#{$prefix}--tabs--light .#{$prefix}--tabs__overflow-indicator--left {
+        background-image: linear-gradient(to left, transparent, $ui-01);
+      }
 
-      // .#{$prefix}--tabs--light
-      //   .#{$prefix}--tabs__overflow-indicator--right {
-      //   background-image: linear-gradient(to right, transparent, $ui-01);
-      // }
+      .#{$prefix}--tabs--light .#{$prefix}--tabs__overflow-indicator--right {
+        background-image: linear-gradient(to right, transparent, $ui-01);
+      }
 
       &.#{$prefix}--tabs--container
         .#{$prefix}--tabs__overflow-indicator--left {

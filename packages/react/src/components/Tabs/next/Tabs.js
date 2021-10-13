@@ -20,6 +20,7 @@ const Tabs = React.forwardRef(function Tabs(
     children,
     className,
     leftOverflowButtonProps,
+    light = false,
     onSelectionChange,
     rightOverflowButtonProps,
     scrollIntoView = true,
@@ -455,6 +456,7 @@ const Tabs = React.forwardRef(function Tabs(
         // [`${prefix}--tabs--container`]: type === 'container',
         [`${prefix}--tabs--scrollable--container`]: type === 'container',
         // [`${prefix}--tabs--light`]: light,
+        [`${prefix}--tabs--scrollable--light`]: light,
       }
     ),
     // TODO: remove scrollable from classnames in next major release and uncomment classnames that don't contain scrollable
