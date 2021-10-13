@@ -227,8 +227,8 @@ $progress-indicator-bar-width: 1px inset transparent !default;
 
   .#{$prefix}--progress-step-button:not(.#{$prefix}--progress-step-button--unclickable)
     .#{$prefix}--progress-label:active {
-    box-shadow: 0 rem(3px) 0 0 $interactive-01;
-    color: $interactive-01;
+    box-shadow: 0 rem(3px) 0 0 $interactive;
+    color: $interactive;
   }
 
   //DISABLED STYLING
