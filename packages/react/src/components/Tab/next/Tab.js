@@ -141,12 +141,12 @@ Tab.propTypes = {
   /**
    * Provide a handler that is invoked when a user clicks on the control
    */
-  onClick: PropTypes.func.isRequired,
+  onClick: PropTypes.func,
 
   /**
    * Provide a handler that is invoked on the key down event for the control
    */
-  onKeyDown: PropTypes.func.isRequired,
+  onKeyDown: PropTypes.func,
 
   /*
    * An optional parameter to allow overriding the anchor rendering.
@@ -176,7 +176,7 @@ Tab.propTypes = {
    * Whether your Tab is selected.
    * Reserved for usage in Tabs
    */
-  selected: PropTypes.bool.isRequired,
+  selected: PropTypes.bool,
 
   /**
    * Specify the tab index of the `<button>` node
