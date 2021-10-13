@@ -58,7 +58,7 @@ describe('Multi Select', () => {
           value="value"
           onClick={onClick}
           disabled>
-          <span role="img" aria-label="see no evil">
+          <span role="img" aria-label="vertical traffic light">
             🚦
           </span>
         </SelectableTile>
