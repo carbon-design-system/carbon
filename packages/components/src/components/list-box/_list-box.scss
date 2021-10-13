@@ -658,6 +658,34 @@ $list-box-menu-width: rem(300px);
     color: $disabled-02;
   }
 
+  .#{$prefix}--list-box__menu-item[disabled],
+  .#{$prefix}--list-box__menu-item[disabled] *,
+  .#{$prefix}--list-box__menu-item[disabled]:hover {
+    color: $disabled-03;
+    cursor: not-allowed;
+    outline: none;
+  }
+
+  .#{$prefix}--list-box__menu-item[disabled]:hover {
+    background-color: revert;
+  }
+
+  .#{$prefix}--list-box__menu-item[disabled]
+    .#{$prefix}--checkbox-label::before {
+    border-color: $disabled-03;
+  }
+
+  .#{$prefix}--list-box__menu-item[disabled]
+    .#{$prefix}--list-box__menu-item__option {
+    border-top-color: $ui-03;
+  }
+
+  .#{$prefix}--list-box__menu-item[disabled]:hover
+    + .#{$prefix}--list-box__menu-item
+    .#{$prefix}--list-box__menu-item__option {
+    border-top-color: $ui-03;
+  }
+
   .#{$prefix}--list-box.#{$prefix}--list-box--inline
     .#{$prefix}--list-box__menu-item__option {
     margin: 0 $carbon--spacing-03;
