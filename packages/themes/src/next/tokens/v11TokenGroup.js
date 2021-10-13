@@ -350,6 +350,9 @@ export const group = TokenGroup.create({
     {
       name: 'toggle-off',
     },
+    {
+      name: 'shadow',
+    },
 
     focus,
     skeleton,

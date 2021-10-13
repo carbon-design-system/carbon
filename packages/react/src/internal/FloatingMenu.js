@@ -210,11 +210,17 @@ class FloatingMenu extends React.Component {
         current: PropTypes.any,
       }),
     ]),
+
+    /**
+     * Optional function to change orientation of tooltip based on parent
+     */
+    updateOrientation: PropTypes.func,
   };
 
   static defaultProps = {
     menuOffset: {},
     menuDirection: DIRECTION_BOTTOM,
+    updateOrientation: null,
   };
 
   // `true` if the menu body is mounted and calculation of the position is in progress.
@@ -261,7 +267,7 @@ class FloatingMenu extends React.Component {
    *
    * @private
    */
-  _updateMenuSize = (prevProps = {}) => {
+  _updateMenuSize = (prevProps = {}, isAdjustment = false) => {
     const menuBody = this._menuBody;
     warning(
       menuBody,
@@ -279,9 +285,11 @@ class FloatingMenu extends React.Component {
 
     if (
       hasChangeInOffset(oldMenuOffset, menuOffset) ||
-      oldMenuDirection !== menuDirection
+      oldMenuDirection !== menuDirection ||
+      isAdjustment
     ) {
-      const { flipped, triggerRef } = this.props;
+      const { flipped, triggerRef, updateOrientation } = this.props;
+
       const { current: triggerEl } = triggerRef;
       const menuSize = menuBody.getBoundingClientRect();
       const refPosition = triggerEl && triggerEl.getBoundingClientRect();
@@ -289,24 +297,51 @@ class FloatingMenu extends React.Component {
         typeof menuOffset !== 'function'
           ? menuOffset
           : menuOffset(menuBody, menuDirection, triggerEl, flipped);
+
+      // Optional function to allow parent component to check
+      // if the orientation needs to be changed based on params
+      if (updateOrientation) {
+        updateOrientation({
+          menuSize,
+          refPosition,
+          direction: menuDirection,
+          offset,
+          scrollX: window.pageXOffset,
+          scrollY: window.pageYOffset,
+          container: {
+            rect: this.props.target().getBoundingClientRect(),
+            position: getComputedStyle(this.props.target()).position,
+          },
+        });
+      }
       // Skips if either in the following condition:
       // a) Menu body has `display:none`
       // b) `menuOffset` as a callback returns `undefined` (The callback saw that it couldn't calculate the value)
       if ((menuSize.width > 0 && menuSize.height > 0) || !offset) {
-        this.setState({
-          floatingPosition: getFloatingPosition({
-            menuSize,
-            refPosition,
-            direction: menuDirection,
-            offset,
-            scrollX: window.pageXOffset,
-            scrollY: window.pageYOffset,
-            container: {
-              rect: this.props.target().getBoundingClientRect(),
-              position: getComputedStyle(this.props.target()).position,
-            },
-          }),
-        });
+        this.setState(
+          {
+            floatingPosition: getFloatingPosition({
+              menuSize,
+              refPosition,
+              direction: menuDirection,
+              offset,
+              scrollX: window.pageXOffset,
+              scrollY: window.pageYOffset,
+              container: {
+                rect: this.props.target().getBoundingClientRect(),
+                position: getComputedStyle(this.props.target()).position,
+              },
+            }),
+          },
+          () => {
+            if (!isAdjustment) {
+              const newMenuSize = menuBody.getBoundingClientRect();
+              if (newMenuSize !== menuSize) {
+                this._updateMenuSize(this.props, true);
+              }
+            }
+          }
+        );
       }
     }
   };
