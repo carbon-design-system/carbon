@@ -46,6 +46,7 @@ const props = () => ({
   placeholder: text('Placeholder text (placeholder)', 'Search'),
   onChange: action('onChange'),
   onKeyDown: action('onKeyDown'),
+  onClear: action('onClear'),
 });
 
 export default {

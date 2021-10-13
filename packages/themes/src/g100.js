@@ -36,6 +36,7 @@ import {
 
   // Constants
   white,
+  black,
 
   // Tools
   rgba,
@@ -86,7 +87,7 @@ export const inverseSupport02 = green50;
 export const inverseSupport03 = yellow;
 export const inverseSupport04 = blue60;
 
-export const overlay01 = rgba(gray100, 0.7);
+export const overlay01 = rgba(black, 0.65);
 
 export const danger01 = red60;
 export const danger02 = red50;
@@ -181,6 +182,7 @@ export const supportInfoInverse = inverseSupport04;
 
 export const overlay = overlay01;
 export const toggleOff = ui04;
+export const shadow = rgba(black, 0.8);
 
 export const buttonPrimary = interactive01;
 export const buttonSecondary = interactive02;
