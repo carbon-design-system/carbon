@@ -150,11 +150,7 @@ function getClassNameForBreakpoints(breakpoints, prefix) {
     }
 
     if (typeof span === 'number') {
-      if (typeof offset === 'number' && offset > 0) {
-        classNames.push(`${prefix}--${name}:col-end-${offset + span + 1}`);
-      } else {
-        classNames.push(`${prefix}--${name}:col-span-${span}`);
-      }
+      classNames.push(`${prefix}--${name}:col-span-${span}`);
     }
 
     if (span === true) {
