@@ -7,6 +7,7 @@
 
 import { Search, ExpandableSearch } from 'carbon-components-react';
 import React from 'react';
+import { Layer } from '../Layer';
 
 export default { title: 'Components/Search' };
 
@@ -32,3 +33,76 @@ export const Expandable = () => (
     onKeyDown={() => {}}
   />
 );
+
+export const withLayer = () => {
+  return (
+    <>
+      <Search
+        size="lg"
+        defaultValue="First Layer"
+        labelText="Search"
+        closeButtonLabelText="Clear search input"
+        id="search-1"
+        onChange={() => {}}
+        onKeyDown={() => {}}
+      />
+      <Layer>
+        <Search
+          size="lg"
+          defaultValue="Second Layer"
+          labelText="Search"
+          closeButtonLabelText="Clear search input"
+          id="search-1"
+          onChange={() => {}}
+          onKeyDown={() => {}}
+        />
+        <Layer>
+          <Search
+            size="lg"
+            defaultValue="Third Layer"
+            labelText="Search"
+            closeButtonLabelText="Clear search input"
+            id="search-1"
+            onChange={() => {}}
+            onKeyDown={() => {}}
+          />
+        </Layer>
+      </Layer>
+    </>
+  );
+};
+
+export const ExpandableWithLayer = () => {
+  return (
+    <>
+      <ExpandableSearch
+        size="lg"
+        labelText="First Layer"
+        closeButtonLabelText="Clear search input"
+        id="search-expandable-1"
+        onChange={() => {}}
+        onKeyDown={() => {}}
+      />
+      <Layer>
+        <ExpandableSearch
+          size="lg"
+          labelText="Second Layer"
+          closeButtonLabelText="Clear search input"
+          id="search-expandable-1"
+          onChange={() => {}}
+          onKeyDown={() => {}}
+        />
+        <Layer>
+          <ExpandableSearch
+            size="lg"
+            labelText="Third Layer"
+            closeButtonLabelText="Clear search input"
+            id="search-expandable-1"
+            onChange={() => {}}
+            onKeyDown={() => {}}
+          />
+        </Layer>
+      </Layer>
+    </>
+  );
+};
