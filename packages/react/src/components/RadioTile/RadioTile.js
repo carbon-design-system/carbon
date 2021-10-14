@@ -120,12 +120,10 @@ RadioTile.propTypes = {
   id: PropTypes.string,
 
   /**
-   * The light prop functionality is being replaced with the Layer component that will be available in Carbon V11.
+   * `true` to use the light version. For use on $ui-01 backgrounds only.
+   * Don't use this to make tile background color same as container background color.
    */
-  light: deprecate(
-    PropTypes.bool,
-    'The `light` prop has been deprecated and will be removed in the next major release in favor of the Layer component'
-  ),
+  light: PropTypes.bool,
 
   /**
    * The `name` of the `<input>`.

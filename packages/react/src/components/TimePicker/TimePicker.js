@@ -9,7 +9,6 @@ import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import classNames from 'classnames';
 import { settings } from 'carbon-components';
-import deprecate from '../../prop-types/deprecate';
 import { FeatureFlagContext } from '../FeatureFlags';
 
 const { prefix } = settings;
@@ -60,12 +59,10 @@ export default class TimePicker extends Component {
     labelText: PropTypes.node,
 
     /**
-     * The light prop functionality is being replaced with the Layer component that will be available in Carbon V11.
+     * `true` to use the light version. For use on $ui-01 backgrounds only.
+     * Don't use this to make tile background color same as container background color.
      */
-    light: deprecate(
-      PropTypes.bool,
-      'The `light` prop has been deprecated and will be removed in the next major release in favor of the Layer component'
-    ),
+    light: PropTypes.bool,
 
     /**
      * Specify the maximum length of the time string in `<input>`

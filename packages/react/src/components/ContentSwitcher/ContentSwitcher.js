@@ -10,7 +10,6 @@ import React from 'react';
 import classNames from 'classnames';
 import { composeEventHandlers } from '../../tools/events';
 import { getNextIndex, matches, keys } from '../../internal/keyboard';
-import deprecate from '../../prop-types/deprecate';
 import { PrefixContext } from '../../internal/usePrefix';
 
 export default class ContentSwitcher extends React.Component {
@@ -35,13 +34,10 @@ export default class ContentSwitcher extends React.Component {
     className: PropTypes.string,
 
     /**
-     * `true` to use the light variant.
+     * `true` to use the light version. For use on $ui-01 backgrounds only.
+     * Don't use this to make tile background color same as container background color.
      */
-    light: deprecate(
-      PropTypes.bool,
-      'The `light` prop for `ContentSwitcher` is no longer needed and has ' +
-        'been deprecated. It will be removed in the next major release.'
-    ),
+    light: PropTypes.bool,
 
     /**
      * Specify an `onChange` handler that is called whenever the ContentSwitcher

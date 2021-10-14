@@ -9,7 +9,6 @@ import cx from 'classnames';
 import React from 'react';
 import PropTypes from 'prop-types';
 import { settings } from 'carbon-components';
-import deprecate from '../../prop-types/deprecate';
 import { ListBoxType, ListBoxSize } from './ListBoxPropTypes';
 
 const { prefix } = settings;
@@ -113,12 +112,10 @@ ListBox.propTypes = {
   isOpen: PropTypes.bool,
 
   /**
-   * The light prop functionality is being replaced with the Layer component that will be available in Carbon V11.ß
+   * `true` to use the light version. For use on $ui-01 backgrounds only.
+   * Don't use this to make tile background color same as container background color.
    */
-  light: deprecate(
-    PropTypes.bool,
-    'The `light` prop has been deprecated and will be removed in the next major release in favor of the Layer component'
-  ),
+  light: PropTypes.bool,
 
   /**
    * Specify the size of the ListBox. Currently supports either `sm`, `md` or `lg` as an option.
