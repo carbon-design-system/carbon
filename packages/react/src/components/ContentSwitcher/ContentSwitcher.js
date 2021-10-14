@@ -35,6 +35,11 @@ export default class ContentSwitcher extends React.Component {
     className: PropTypes.string,
 
     /**
+     * Specify if the button is an icon-only button
+     */
+    hasIconOnly: PropTypes.bool,
+
+    /**
      * `true` to use the light variant.
      */
     light: deprecate(
@@ -138,18 +143,21 @@ export default class ContentSwitcher extends React.Component {
       selectedIndex, // eslint-disable-line no-unused-vars
       selectionMode, // eslint-disable-line no-unused-vars
       size,
+      hasIconOnly,
       ...other
     } = this.props;
 
     const classes = classNames(`${prefix}--content-switcher`, className, {
       [`${prefix}--content-switcher--light`]: light,
       [`${prefix}--content-switcher--${size}`]: size,
+      [`${prefix}--content-switcher--icon-only`]: hasIconOnly,
     });
 
     return (
       <div {...other} className={classes} role="tablist">
         {React.Children.map(children, (child, index) =>
           React.cloneElement(child, {
+            hasIconOnly,
             index,
             onClick: composeEventHandlers([
               this.handleChildChange,

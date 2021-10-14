@@ -32,6 +32,15 @@
     height: rem(48px);
   }
 
+  .#{$prefix}--content-switcher--icon-only {
+    width: rem(160px);
+
+    .#{$prefix}--content-switcher-btn {
+      display: flex;
+      justify-content: center;
+    }
+  }
+
   .#{$prefix}--content-switcher-btn {
     @include reset;
     @include type-style('body-short-01');

@@ -14,6 +14,7 @@ const { prefix } = settings;
 
 const Switch = React.forwardRef(function Switch(props, tabRef) {
   const {
+    children,
     className,
     disabled,
     index,
@@ -22,6 +23,7 @@ const Switch = React.forwardRef(function Switch(props, tabRef) {
     onKeyDown,
     selected,
     text,
+    hasIconOnly,
     ...other
   } = props;
 
@@ -56,9 +58,17 @@ const Switch = React.forwardRef(function Switch(props, tabRef) {
       aria-selected={selected}
       {...other}
       {...commonProps}>
-      <span className={`${prefix}--content-switcher__label`} title={text}>
-        {text}
-      </span>
+      {hasIconOnly ? (
+        React.Children.map(children, (child) =>
+          React.cloneElement(child, {
+            className: `${prefix}--content-switcher__icon`,
+          })
+        )
+      ) : (
+        <span className={`${prefix}--content-switcher__label`} title={text}>
+          {text}
+        </span>
+      )}
     </button>
   );
 });
@@ -66,6 +76,11 @@ const Switch = React.forwardRef(function Switch(props, tabRef) {
 Switch.displayName = 'Switch';
 
 Switch.propTypes = {
+  /**
+   * Pass in an icon to be rendered in an iconOnly content switcher button
+   */
+  children: PropTypes.node,
+
   /**
    * Specify an optional className to be added to your Switch
    */
@@ -75,6 +90,18 @@ Switch.propTypes = {
    * Specify whether or not the Switch should be disabled
    */
   disabled: PropTypes.bool,
+
+  /**
+   * If specifying the `hasIconOnly` prop, provide an aria-label for each tab that can
+   * be read by screen readers
+   */
+  hasIconOnly: (props) => {
+    if (props.hasIconOnly && !props['aria-label']) {
+      return new Error(
+        'hasIconOnly property specified without also providing aria-labels.'
+      );
+    }
+  },
 
   /**
    * The index of your Switch in your ContentSwitcher that is used for event handlers.
@@ -107,12 +134,11 @@ Switch.propTypes = {
   /**
    * Provide the contents of your Switch
    */
-  text: PropTypes.string.isRequired,
+  text: PropTypes.string,
 };
 
 Switch.defaultProps = {
   selected: false,
-  text: 'Provide text',
   onClick: () => {},
   onKeyDown: () => {},
 };

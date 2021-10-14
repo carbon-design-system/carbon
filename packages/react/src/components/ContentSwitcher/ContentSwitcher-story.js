@@ -11,6 +11,7 @@ import { withKnobs, boolean, select } from '@storybook/addon-knobs';
 import ContentSwitcher from '../ContentSwitcher';
 import Switch from '../Switch';
 import mdx from './ContentSwitcher.mdx';
+import { Sunrise16, Sun16, Sunset16 } from '@carbon/icons-react';
 
 const selectionModes = {
   'Change selection automatically upon focus (automatic)': 'automatic',
@@ -62,6 +63,20 @@ export const Default = () => (
     <Switch name="one" text="First section" />
     <Switch name="two" text="Second section" />
     <Switch name="three" text="Third section" />
+  </ContentSwitcher>
+);
+
+export const IconOnly = () => (
+  <ContentSwitcher hasIconOnly onChange={() => {}}>
+    <Switch name="one" aria-label="breakfast menu">
+      <Sunrise16 />
+    </Switch>
+    <Switch name="two" aria-label="lunch menu">
+      <Sun16 />
+    </Switch>
+    <Switch name="three" aria-label="dinner menu">
+      <Sunset16 />
+    </Switch>
   </ContentSwitcher>
 );
 
