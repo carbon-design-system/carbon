@@ -34,7 +34,7 @@
     "chalk": "^4.1.1",
     "change-case": "^4.1.2",
     "child-process-promise": "^2.2.1",
-    "clipboardy": "^2.1.0",
+    "clipboardy": "^3.0.0",
     "enquirer": "^2.3.6",
     "fast-glob": "^3.2.7",
     "fs-extra": "^8.0.1",
