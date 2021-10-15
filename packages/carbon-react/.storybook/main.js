@@ -28,6 +28,8 @@ module.exports = {
     './Welcome/Welcome.stories.js',
     '../src/**/*.stories.js',
     '../src/**/*.stories.mdx',
+    '../../react/src/components/Stack/*.stories.js',
+    '../../react/src/components/Stack/*.stories.mdx',
   ],
   webpack(config) {
     const babelLoader = config.module.rules.find((rule) => {

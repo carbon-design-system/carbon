@@ -40,6 +40,7 @@ module.exports = {
     './Welcome/Welcome.stories.js',
     '../src/**/*-story.js',
     '../src/**/*.stories.mdx',
+    '!../src/components/Stack',
   ],
 
   webpack(config) {
