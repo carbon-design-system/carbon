@@ -80,8 +80,8 @@ export default class TimePickerSelect extends Component {
       children,
       iconDescription,
       className,
-      hideLabel = true,
-      labelText,
+      // hideLabel = true,
+      // labelText,
       inline, // eslint-disable-line
       ...other
     } = this.props;
@@ -92,20 +92,15 @@ export default class TimePickerSelect extends Component {
       [className]: className,
     });
 
-    const labelClasses = classNames(`${prefix}--label`, {
-      // TODO: set to always be `true` after `hideLabel` is deprecated
-      [`${prefix}--visually-hidden`]: hideLabel,
-    });
+    // const labelClasses = classNames(`${prefix}--label`, {
+    //   // TODO: set to always be `true` after `hideLabel` is deprecated
+    //   [`${prefix}--visually-hidden`]: hideLabel,
+    // });
 
-    const label = labelText ? (
-      <label htmlFor={id} className={labelClasses}>
-        {labelText}
-      </label>
-    ) : null;
+    // const label = labelText ? <label htmlFor={id}>{labelText}</label> : null;
 
     return (
       <div className={selectClasses}>
-        {label}
         <select
           {...other}
           id={id}

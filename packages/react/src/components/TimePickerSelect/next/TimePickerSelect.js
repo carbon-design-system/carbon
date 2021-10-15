@@ -8,17 +8,18 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import cx from 'classnames';
-import { ChevronDown16 } from '@carbon/icons-react';
+import { ChevronDown } from '@carbon/react/icons';
 import { usePrefix } from '../../../internal/usePrefix';
+import deprecate from '../../../prop-types/deprecate';
 
 const TimePickerSelect = React.forwardRef(function TimePickerSelect(
   {
+    ['aria-label']: ariaLabel = 'open list of options',
     children,
     id,
     disabled = false,
-    iconDescription = 'open list of options',
     className,
-    labelText,
+    // labelText,
     ...rest
   },
   ref
@@ -31,26 +32,17 @@ const TimePickerSelect = React.forwardRef(function TimePickerSelect(
     [className]: className,
   });
 
-  const label = labelText ? <label htmlFor={id}>{labelText}</label> : null;
-
   return (
-    <div
-      style={{ backgroundColor: 'hotpink' }}
-      className={selectClasses}
-      ref={ref}>
-      {label}
+    <div className={selectClasses} ref={ref}>
       <select
         id={id}
         className={`${prefix}--select-input`}
         disabled={disabled}
+        aria-label={ariaLabel}
         {...rest}>
         {children}
       </select>
-      <ChevronDown16
-        className={`${prefix}--select__arrow`}
-        aria-label={iconDescription}>
-        {iconDescription && <title>{iconDescription}</title>}
-      </ChevronDown16>
+      <ChevronDown className={`${prefix}--select__arrow`} aria-hidden={true} />
     </div>
   );
 });
@@ -79,7 +71,11 @@ TimePickerSelect.propTypes = {
   /**
    * Provide a description for the twistie icon that can be read by screen readers
    */
-  iconDescription: PropTypes.string.isRequired,
+  iconDescription: deprecate(
+    PropTypes.string,
+    'The `iconDescription` prop for `TimePickerSelect` is no longer needed and has ' +
+      'been deprecated. It will be moved in the next major release. Use "aria-label" instead'
+  ),
 
   /**
    * Specify a custom `id` for the `<select>`

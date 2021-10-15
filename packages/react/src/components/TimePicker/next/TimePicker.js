@@ -57,6 +57,7 @@ const TimePicker = React.forwardRef(function TimePicker(
 
     onChange: (evt) => {
       if (!disabled) {
+        // https://github.com/carbon-design-system/carbon/issues/9535
         evt.persist();
         setValue(isValue);
         onChange(evt);
@@ -64,6 +65,7 @@ const TimePicker = React.forwardRef(function TimePicker(
     },
     onClick: (evt) => {
       if (!disabled) {
+        // https://github.com/carbon-design-system/carbon/issues/9535
         evt.persist();
         setValue(isValue);
         onClick(evt);
@@ -71,6 +73,7 @@ const TimePicker = React.forwardRef(function TimePicker(
     },
     onBlur: (event) => {
       if (!disabled) {
+        // https://github.com/carbon-design-system/carbon/issues/9535
         event.persist();
         setValue(isValue);
         onBlur(event);
@@ -81,7 +84,8 @@ const TimePicker = React.forwardRef(function TimePicker(
     maxLength,
     id,
     type,
-    // value: value,
+    disabled,
+    value,
   };
 
   const timePickerClasses = cx({
@@ -168,7 +172,7 @@ TimePicker.propTypes = {
   labelText: PropTypes.node,
 
   /**
-   * `true` to use the light version.
+   * `true` to use the light version. TODO: V12 remove this.
    */
   light: deprecate(
     PropTypes.bool,
@@ -210,9 +214,8 @@ TimePicker.propTypes = {
 
   /**
    * Specify the size of the Time Picker. Currently supports either `sm`, 'md' (default) or 'lg` as an option.
-   * TODO V11: remove `xl` (replaced with lg)
    */
-  size: PropTypes.oneOf(['sm', 'md', 'lg', 'xl']),
+  size: PropTypes.oneOf(['sm', 'md', 'lg']),
 
   /**
    * Specify the type of the `<input>`
