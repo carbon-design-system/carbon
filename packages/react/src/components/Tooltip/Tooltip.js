@@ -703,8 +703,16 @@ class Tooltip extends Component {
               this._tooltipEl = node;
             }}
             updateOrientation={this.updateOrientation}>
+            {/* This rule is disabled becuase the onKeyDown event handler is only
+             * being used to capture and prevent the event from bubbling: */}
+            {/* eslint-disable-next-line jsx-a11y/no-static-element-interactions */}
             <div
               className={tooltipClasses}
+              onKeyDown={(event) => {
+                if (keyDownMatch(event, [keys.Escape])) {
+                  event.stopPropagation();
+                }
+              }}
               {...other}
               id={this._tooltipId}
               data-floating-menu-direction={storedDirection}
