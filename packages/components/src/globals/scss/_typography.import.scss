@@ -19,6 +19,7 @@
 // compatibility file to ensure we continue to support node-sass and dart-sass
 // in v10.
 
+@use 'sass:meta';
 @use 'sass:math';
 @import 'vars'; /* stylelint-disable-line no-invalid-position-at-import-rule */
 
@@ -42,7 +43,11 @@ $base-font-size: 16px !default;
     @warn "Expected argument $px to be of type `px`, instead received: `#{unit($px)}`";
   }
 
-  @return math.div($px, $base-font-size) * 1rem;
+  @if meta.function-exists('div', 'math') {
+    @return math.div($px, $base-font-size) * 1rem;
+  } @else {
+    @return ($px / $base-font-size) * 1rem;
+  }
 }
 
 /// Convert px to em
@@ -58,7 +63,11 @@ $base-font-size: 16px !default;
     @warn "Expected argument $px to be of type `px`, instead received: `#{unit($px)}`";
   }
 
-  @return math.div($px, $base-font-size) * 1em;
+  @if meta.function-exists('div', 'math') {
+    @return math.div($px, $base-font-size) * 1em;
+  } @else {
+    @return ($px / $base-font-size) * 1em;
+  }
 }
 
 // 🔬 Experimental
