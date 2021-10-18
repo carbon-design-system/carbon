@@ -7,6 +7,7 @@
 
 import React from 'react';
 import { ContentSwitcher, Switch } from 'carbon-components-react';
+import { Layer } from '../Layer';
 
 export default {
   title: 'Components/ContentSwitcher',
@@ -27,3 +28,29 @@ export const Default = () => (
     <Switch name="three" text="Third section" />
   </ContentSwitcher>
 );
+
+export const withLayer = () => {
+  return (
+    <>
+      <ContentSwitcher onChange={() => {}}>
+        <Switch name="one" text="First section" />
+        <Switch name="two" text="Second section" />
+        <Switch name="three" text="Third section" />
+      </ContentSwitcher>
+      <Layer>
+        <ContentSwitcher onChange={() => {}}>
+          <Switch name="one" text="First section" />
+          <Switch name="two" text="Second section" />
+          <Switch name="three" text="Third section" />
+        </ContentSwitcher>
+        <Layer>
+          <ContentSwitcher onChange={() => {}}>
+            <Switch name="one" text="First section" />
+            <Switch name="two" text="Second section" />
+            <Switch name="three" text="Third section" />
+          </ContentSwitcher>
+        </Layer>
+      </Layer>
+    </>
+  );
+};

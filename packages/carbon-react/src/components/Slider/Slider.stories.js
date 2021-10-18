@@ -11,6 +11,7 @@ import React, { useState } from 'react';
 // import { withKnobs, boolean, number, text } from '@storybook/addon-knobs';
 import { Slider, SliderSkeleton } from '.';
 // import { sliderValuePropSync } from '../../../../react/src/internal/FeatureFlags';
+import { Layer } from '../Layer';
 import mdx from './Slider.mdx';
 
 export default {
@@ -59,6 +60,92 @@ export const ControlledSlider = () => {
         onChange={({ value }) => setVal(value)}
       />
       <h1>{val}</h1>
+    </>
+  );
+};
+
+export const withLayer = () => {
+  return (
+    <>
+      <Slider
+        labelText="First Layer"
+        value={50}
+        min={0}
+        max={100}
+        step={1}
+        stepMultiplier={10}
+        novalidate
+      />
+      <Layer>
+        <Slider
+          labelText="Second Layer"
+          value={50}
+          min={0}
+          max={100}
+          step={1}
+          stepMultiplier={10}
+          novalidate
+        />
+        <Layer>
+          <Slider
+            labelText="Third Layer"
+            value={50}
+            min={0}
+            max={100}
+            step={1}
+            stepMultiplier={10}
+            novalidate
+          />
+        </Layer>
+      </Layer>
+    </>
+  );
+};
+
+export const ControlledSliderWithLayer = () => {
+  const [val, setVal] = useState(87);
+  return (
+    <>
+      <button
+        type="button"
+        onClick={() => setVal(Math.round(Math.random() * 100))}>
+        randomize value
+      </button>
+      <Slider
+        max={100}
+        min={0}
+        value={val}
+        onChange={({ value }) => setVal(value)}
+      />
+      <h1>{val}</h1>
+      <Layer>
+        <button
+          type="button"
+          onClick={() => setVal(Math.round(Math.random() * 100))}>
+          randomize value
+        </button>
+        <Slider
+          max={100}
+          min={0}
+          value={val}
+          onChange={({ value }) => setVal(value)}
+        />
+        <h1>{val}</h1>
+        <Layer>
+          <button
+            type="button"
+            onClick={() => setVal(Math.round(Math.random() * 100))}>
+            randomize value
+          </button>
+          <Slider
+            max={100}
+            min={0}
+            value={val}
+            onChange={({ value }) => setVal(value)}
+          />
+          <h1>{val}</h1>
+        </Layer>
+      </Layer>
     </>
   );
 };
