@@ -8,7 +8,6 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import classNames from 'classnames';
-import deprecate from '../../../prop-types/deprecate';
 import { usePrefix } from '../../../internal/usePrefix';
 
 const Tab = React.forwardRef(function Tab(
@@ -23,7 +22,6 @@ const Tab = React.forwardRef(function Tab(
     onClick = () => {},
     onKeyDown = () => {},
     renderButton,
-    renderContent, // eslint-disable-line no-unused-vars
     selected = false,
     tabIndex = 0,
     ...other
@@ -116,14 +114,6 @@ Tab.propTypes = {
   handleTabKeyDown: PropTypes.func,
 
   /**
-   * Provide a string that represents the `href` of the Tab
-   */
-  href: deprecate(
-    PropTypes.string,
-    'The href prop has been deprecated and removed in v11.'
-  ),
-
-  /**
    * The element ID for the top-level element.
    */
   id: PropTypes.string,
@@ -153,24 +143,7 @@ Tab.propTypes = {
    * Useful for using Tab along with react-router or other client
    * side router libraries.
    **/
-  renderAnchor: deprecate(
-    PropTypes.func,
-    'The renderAnchor prop has been deprecated in favor of renderButton. It has been removed in v11.'
-  ),
   renderButton: PropTypes.func,
-
-  /*
-   * An optional parameter to allow overriding the content rendering.
-   **/
-  renderContent: PropTypes.func,
-
-  /**
-   * Provide an accessibility role for your Tab
-   */
-  role: deprecate(
-    PropTypes.string,
-    'The role prop has been deprecated and removed in v11. Role is now built into the element.'
-  ),
 
   /**
    * Whether your Tab is selected.

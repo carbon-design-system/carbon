@@ -1,11 +1,9 @@
 import React from 'react';
 import { default as Tab } from './Tab';
-import { cleanup, render, screen } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
 describe('Tab', () => {
-  afterEach(cleanup);
-
   it('adds extra classes that are passed via className', async () => {
     render(
       <Tab
