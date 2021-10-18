@@ -188,8 +188,7 @@ describe('ExpandableTile', () => {
     wrapper.setProps({
       onBeforeClick: (evt) => evt.target.tagName.toLowerCase() !== 'a', // ignore link clicks
     });
-    console.log(wrapper.debug());
-    // expect(wrapper.state().isExpanded).toEqual(false);
+
     wrapper.simulate('click');
     expect(wrapper.children().hasClass(`${prefix}--tile--is-expanded`)).toEqual(
       true
