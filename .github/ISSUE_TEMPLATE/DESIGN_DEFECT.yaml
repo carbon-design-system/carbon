@@ -62,7 +62,7 @@ body:
       placeholder: What did you see? What did you expect to see?
     validations:
       required: true
-  - type: input
+  - type: textarea
     id: example-url
     attributes:
       label: Screenshots
