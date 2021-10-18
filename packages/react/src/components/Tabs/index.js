@@ -14,6 +14,5 @@ const Tabs = FeatureFlags.enabled('enable-v11-release')
   : TabsClassic;
 
 export * from './Tabs.Skeleton';
-// export default from './Tabs';
 
 export default Tabs;

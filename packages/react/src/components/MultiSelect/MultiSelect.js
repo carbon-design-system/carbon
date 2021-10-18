@@ -44,6 +44,7 @@ const MultiSelect = React.forwardRef(function MultiSelect(
     itemToElement,
     itemToString,
     titleText,
+    hideLabel,
     helperText,
     label,
     type,
@@ -142,6 +143,7 @@ const MultiSelect = React.forwardRef(function MultiSelect(
   );
   const titleClasses = cx(`${prefix}--label`, {
     [`${prefix}--label--disabled`]: disabled,
+    [`${prefix}--visually-hidden`]: hideLabel,
   });
   const helperId = !helperText
     ? undefined
@@ -190,6 +192,9 @@ const MultiSelect = React.forwardRef(function MultiSelect(
       case ItemClick:
       case MenuKeyDownSpaceButton:
       case MenuKeyDownEnter:
+        if (changes.selectedItem === undefined) {
+          break;
+        }
         onItemChange(changes.selectedItem);
         break;
       case MenuKeyDownArrowDown:
@@ -345,6 +350,11 @@ MultiSelect.propTypes = {
    * Additional props passed to Downshift
    */
   downshiftProps: PropTypes.shape(Downshift.propTypes),
+
+  /**
+   * Specify whether the title text should be hidden or not
+   */
+  hideLabel: PropTypes.bool,
 
   /**
    * Specify a custom `id`

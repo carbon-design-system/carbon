@@ -278,6 +278,7 @@ class OverflowMenu extends Component {
   }
 
   handleClick = (evt) => {
+    evt.stopPropagation();
     if (!this._menuBody || !this._menuBody.contains(evt.target)) {
       this.setState({ open: !this.state.open });
       this.props.onClick(evt);
