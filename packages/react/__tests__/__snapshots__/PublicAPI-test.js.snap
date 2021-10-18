@@ -5865,13 +5865,8 @@ Map {
       "renderButton": Object {
         "type": "func",
       },
-      "renderContent": Object {
-        "type": "func",
-      },
-      "role": Object {
-        "isRequired": true,
-        "type": "string",
-      },
+      "renderContent": [Function],
+      "role": [Function],
       "selected": Object {
         "isRequired": true,
         "type": "bool",
