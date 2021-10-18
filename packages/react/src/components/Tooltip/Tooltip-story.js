@@ -159,32 +159,23 @@ export default {
   },
 };
 
-export const DefaultBottom = () => {
-  return (
-    <>
-      {/* eslint-disable-next-line jsx-a11y/no-static-element-interactions */}
-      <div
-        style={containerStyles}
-        onKeyDown={() => {
-          console.log(`this should not be logged to the console`);
-        }}>
-        <Tooltip {...props.withIcon()} tooltipBodyId="tooltip-body">
-          <p id="tooltip-body">
-            This is some tooltip text. This box shows the maximum amount of text
-            that should appear inside. If more room is needed please use a modal
-            instead.
-          </p>
-          <div className={`${prefix}--tooltip__footer`}>
-            <a href="/" className={`${prefix}--link`}>
-              Learn More
-            </a>
-            <Button size="small">Create</Button>
-          </div>
-        </Tooltip>
+export const DefaultBottom = () => (
+  <div style={containerStyles}>
+    <Tooltip {...props.withIcon()} tooltipBodyId="tooltip-body">
+      <p id="tooltip-body">
+        This is some tooltip text. This box shows the maximum amount of text
+        that should appear inside. If more room is needed please use a modal
+        instead.
+      </p>
+      <div className={`${prefix}--tooltip__footer`}>
+        <a href="/" className={`${prefix}--link`}>
+          Learn More
+        </a>
+        <Button size="small">Create</Button>
       </div>
-    </>
-  );
-};
+    </Tooltip>
+  </div>
+);
 
 DefaultBottom.storyName = 'default (bottom)';
 
