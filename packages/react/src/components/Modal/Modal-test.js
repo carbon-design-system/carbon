@@ -47,7 +47,7 @@ describe('Modal', () => {
       expect(getModal(modal).props().id).toEqual('modal-1');
     });
 
-    it('should have aria-hidden on the Icon component', () => {
+    it('should not place the svg icon in the accessibility tree', () => {
       const ariaHidden = mounted.find(Close20).props()['aria-hidden'];
       expect(ariaHidden).toEqual('true');
     });
