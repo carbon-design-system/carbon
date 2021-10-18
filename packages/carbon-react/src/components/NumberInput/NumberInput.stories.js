@@ -7,6 +7,7 @@
 
 import React from 'react';
 import { NumberInput, NumberInputSkeleton } from 'carbon-components-react';
+import { Layer } from '../Layer';
 
 export default {
   title: 'Components/NumberInput',
@@ -31,6 +32,20 @@ const numberInputProps = {
 
 export const Default = () => {
   return <NumberInput {...numberInputProps} />;
+};
+
+export const withLayer = () => {
+  return (
+    <>
+      <NumberInput {...numberInputProps} />
+      <Layer>
+        <NumberInput {...numberInputProps} />
+        <Layer>
+          <NumberInput {...numberInputProps} />
+        </Layer>
+      </Layer>
+    </>
+  );
 };
 
 export const Skeleton = () => (
