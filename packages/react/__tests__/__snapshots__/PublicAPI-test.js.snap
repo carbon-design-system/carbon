@@ -322,6 +322,7 @@ Map {
     "defaultProps": Object {
       "indeterminate": false,
       "onChange": [Function],
+      "onClick": [Function],
     },
     "displayName": "Checkbox",
     "propTypes": Object {
@@ -352,6 +353,9 @@ Map {
         "type": "node",
       },
       "onChange": Object {
+        "type": "func",
+      },
+      "onClick": Object {
         "type": "func",
       },
       "title": Object {
@@ -3242,6 +3246,9 @@ Map {
         ],
         "type": "shape",
       },
+      "hideLabel": Object {
+        "type": "bool",
+      },
       "id": Object {
         "isRequired": true,
         "type": "string",
@@ -4205,6 +4212,9 @@ Map {
           ],
           "type": "shape",
         },
+        "hideLabel": Object {
+          "type": "bool",
+        },
         "id": Object {
           "isRequired": true,
           "type": "string",
@@ -4448,6 +4458,9 @@ Map {
           },
         ],
         "type": "shape",
+      },
+      "hideLabel": Object {
+        "type": "bool",
       },
       "id": Object {
         "isRequired": true,
