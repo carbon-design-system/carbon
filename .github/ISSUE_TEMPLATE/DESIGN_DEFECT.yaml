@@ -1,0 +1,93 @@
+name: Design defect 🎨
+description: Report a visual design issue
+title: '[Bug]: '
+labels: 'type: bug 🐛'
+body:
+  - type: markdown
+    attributes:
+      value: '## Welcome!'
+  - type: markdown
+    attributes:
+      value:
+        Thanks for taking the time to fill out the details below for this design
+        defect.
+  - type: dropdown
+    id: package
+    attributes:
+      label: Package
+      description: Which package(s) are you using?
+      multiple: true
+      options:
+        - 'carbon-components'
+        - 'carbon-components-react'
+        - '@carbon/colors'
+        - '@carbon/elements'
+        - '@carbon/grid'
+        - '@carbon/icons'
+        - '@carbon/icons-react'
+        - '@carbon/icons-vue'
+        - '@carbon/layout'
+        - '@carbon/motion'
+        - '@carbon/pictograms'
+        - '@carbon/pictograms-react'
+        - '@carbon/themes'
+        - '@carbon/type'
+        - '@carbon/upgrade'
+    validations:
+      required: true
+  - type: dropdown
+    id: browser
+    attributes:
+      label: Browser
+      description: Which browser(s) are you experiencing the issue?
+      multiple: true
+      options:
+        - Chrome
+        - Safari
+        - Firefox
+        - Edge
+  - type: input
+    id: version
+    attributes:
+      label: Package version
+      description: 'Which version(s) are you using?'
+      placeholder: e.g. v10.42.0
+    validations:
+      required: true
+  - type: textarea
+    id: description
+    attributes:
+      label: Description
+      description: "Tell us more about the problem that you're running into"
+      placeholder: What did you see? What did you expect to see?
+    validations:
+      required: true
+  - type: textarea
+    id: example-url
+    attributes:
+      label: Screenshots
+      description: 'Provide screenshots of the problem'
+    validations:
+      required: true
+  - type: textarea
+    id: reproduce
+    attributes:
+      label: Steps to reproduce
+      description:
+        'How do we reproduce the problem displayed in the screenshots above?'
+    validations:
+      required: true
+  - type: checkboxes
+    id: terms
+    attributes:
+      label: Code of Conduct
+      description: Please confirm the following
+      options:
+        - label:
+            I agree to follow this project's [Code of
+            Conduct](https://github.com/carbon-design-system/carbon/blob/f555616971a03fd454c0f4daea184adf41fff05b/.github/CODE_OF_CONDUCT.md)
+          required: true
+        - label:
+            I checked the [current
+            issues](https://github.com/carbon-design-system/carbon/issues) for
+            duplicate problems

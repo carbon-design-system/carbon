@@ -19,6 +19,7 @@
 // compatibility file to ensure we continue to support node-sass and dart-sass
 // in v10.
 
+@use 'sass:meta';
 @use "sass:math";
 @import 'breakpoint'; /* stylelint-disable-line no-invalid-position-at-import-rule */
 @import 'utilities'; /* stylelint-disable-line no-invalid-position-at-import-rule */
@@ -39,7 +40,11 @@
     $margin: map-get($values, margin);
     $columns: map-get($values, columns);
 
-    @return math.div($width - (2 * $margin), $columns);
+    @if meta.function-exists('div', 'math') {
+      @return math.div($width - (2 * $margin), $columns);
+    } @else {
+      @return (($width - (2 * $margin)) / $columns);
+    }
   } @else {
     @warn 'Breakpoint: `#{$breakpoint}` is not a valid breakpoint.';
   }
