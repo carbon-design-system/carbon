@@ -562,8 +562,10 @@ ExpandableTile.propTypes = {
    * `true` to use the light version. For use on $ui-01 backgrounds only.
    * Don't use this to make tile background color same as container background color.
    */
-  light: PropTypes.bool,
-
+  light: deprecate(
+    PropTypes.bool,
+    'The `light` prop for `Tile` is no longer needed and has been deprecated. It will be removed in the next major release. Use the Layer component instead.'
+  ),
   /**
    * optional handler to decide whether to ignore a click. returns false if click should be ignored
    */
@@ -619,15 +621,17 @@ ExpandableTile.defaultProps = {
 
 ExpandableTile.displayName = 'ExpandableTile';
 
-export function TileAboveTheFoldContent({ children }) {
-  const prefix = usePrefix();
+export const TileAboveTheFoldContent = React.forwardRef(
+  function TilAboveTheFoldContent({ children }, ref) {
+    const prefix = usePrefix();
 
-  return (
-    <span className={`${prefix}--tile-content__above-the-fold`}>
-      {children}
-    </span>
-  );
-}
+    return (
+      <span ref={ref} className={`${prefix}--tile-content__above-the-fold`}>
+        {children}
+      </span>
+    );
+  }
+);
 
 TileAboveTheFoldContent.propTypes = {
   /**
@@ -638,15 +642,17 @@ TileAboveTheFoldContent.propTypes = {
 
 TileAboveTheFoldContent.displayName = 'TileAboveTheFoldContent';
 
-export function TileBelowTheFoldContent({ children }) {
-  const prefix = usePrefix();
+export const TileBelowTheFoldContent = React.forwardRef(
+  function TileBelowTheFoldContent({ children }, ref) {
+    const prefix = usePrefix();
 
-  return (
-    <span className={`${prefix}--tile-content__below-the-fold`}>
-      {children}
-    </span>
-  );
-}
+    return (
+      <span ref={ref} className={`${prefix}--tile-content__below-the-fold`}>
+        {children}
+      </span>
+    );
+  }
+);
 
 TileBelowTheFoldContent.propTypes = {
   /**
