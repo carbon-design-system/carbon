@@ -225,6 +225,12 @@ $progress-indicator-bar-width: 1px inset transparent !default;
     cursor: pointer;
   }
 
+  .#{$prefix}--progress-step-button:not(.#{$prefix}--progress-step-button--unclickable)
+    .#{$prefix}--progress-label:active {
+    box-shadow: 0 rem(3px) 0 0 $interactive;
+    color: $interactive;
+  }
+
   //DISABLED STYLING
   .#{$prefix}--progress-step--disabled {
     cursor: not-allowed;
