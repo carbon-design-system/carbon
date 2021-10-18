@@ -52,6 +52,11 @@ describe('Modal', () => {
       expect(ariaHidden).toEqual('true');
     });
 
+    it("icon isn't a focusable tab stop", () => {
+      const icon = mounted.find(Close20).props().tabIndex;
+      expect(icon).toEqual('-1');
+    });
+
     it('enables primary button by default', () => {
       const primaryButton = mounted
         .find(`.${prefix}--btn.${prefix}--btn--primary`)
