@@ -703,7 +703,7 @@ class Tooltip extends Component {
               this._tooltipEl = node;
             }}
             updateOrientation={this.updateOrientation}>
-            {/* This rule is disabled becuase the onKeyDown event handler is only
+            {/* This rule is disabled because the onKeyDown event handler is only
              * being used to capture and prevent the event from bubbling: */}
             {/* eslint-disable-next-line jsx-a11y/no-static-element-interactions */}
             <div
