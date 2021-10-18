@@ -5905,7 +5905,6 @@ Map {
       "label": "provide a label",
       "onClick": [Function],
       "onKeyDown": [Function],
-      "role": "presentation",
       "selected": false,
     },
     "propTypes": Object {
@@ -5943,7 +5942,9 @@ Map {
       "renderButton": Object {
         "type": "func",
       },
-      "renderContent": [Function],
+      "renderContent": Object {
+        "type": "func",
+      },
       "role": [Function],
       "selected": Object {
         "isRequired": true,

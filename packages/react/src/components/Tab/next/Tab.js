@@ -22,6 +22,7 @@ const Tab = React.forwardRef(function Tab(
     onClick = () => {},
     onKeyDown = () => {},
     renderButton,
+    renderContent, // eslint-disable-line no-unused-vars
     selected = false,
     tabIndex = 0,
     ...other
@@ -144,6 +145,11 @@ Tab.propTypes = {
    * side router libraries.
    **/
   renderButton: PropTypes.func,
+
+  /*
+   * An optional parameter to allow overriding the content rendering.
+   **/
+  renderContent: PropTypes.func,
 
   /**
    * Whether your Tab is selected.

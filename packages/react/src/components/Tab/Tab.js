@@ -77,7 +77,7 @@ export default class Tab extends React.Component {
     /*
      * An optional parameter to allow overriding the content rendering.
      **/
-    renderContent: deprecate(PropTypes.func),
+    renderContent: PropTypes.func,
 
     /**
      * Provide an accessibility role for your Tab
@@ -97,7 +97,6 @@ export default class Tab extends React.Component {
   };
 
   static defaultProps = {
-    role: 'presentation',
     label: 'provide a label',
     selected: false,
     onClick: () => {},
