@@ -15,7 +15,7 @@ import {
   CircleFilled16,
 } from '@carbon/icons-react';
 import { keys, matches } from '../../internal/keyboard';
-import { usePrefix, PrefixContext } from '../../internal/usePrefix';
+import { PrefixContext } from '../../internal/usePrefix';
 
 const defaultRenderLabel = (props) => <p {...props} />;
 
@@ -34,8 +34,6 @@ export class ProgressStep extends React.PureComponent {
   constructor(props) {
     super(props);
   }
-
-  static contextType = PrefixContext;
 
   static propTypes = {
     /**
@@ -111,12 +109,15 @@ export class ProgressStep extends React.PureComponent {
     translateWithId: PropTypes.func,
   };
 
+  static contextType = PrefixContext;
+
   static defaultProps = {
     renderLabel: defaultRenderLabel,
     translateWithId,
   };
 
   render() {
+    const prefix = this.context;
     const {
       label,
       description,
@@ -131,8 +132,6 @@ export class ProgressStep extends React.PureComponent {
       translateWithId: t,
       ...rest
     } = this.props;
-
-    const prefix = this.context;
 
     const classes = classnames({
       [`${prefix}--progress-step`]: true,
@@ -205,7 +204,7 @@ export class ProgressStep extends React.PureComponent {
           aria-disabled={disabled}
           tabIndex={!current && onClick && !disabled ? 0 : -1}
           onClick={!current ? onClick : undefined}
-          onKeyDown={this.handleKeyDown}
+          onKeyDown={handleKeyDown}
           title={label}
           {...rest}>
           <span className={`${prefix}--assistive-text`}>{message}</span>
@@ -232,7 +231,7 @@ export class ProgressStep extends React.PureComponent {
 export class ProgressIndicator extends Component {
   state = {};
 
-  static contextType = PrefixContext;
+  // static contextType = PrefixContext;
 
   static propTypes = {
     /**
@@ -285,6 +284,8 @@ export class ProgressIndicator extends Component {
      */
     vertical: PropTypes.bool,
   };
+
+  static contextType = PrefixContext;
 
   static defaultProps = {
     currentIndex: 0,
@@ -356,6 +357,7 @@ export class ProgressIndicator extends Component {
   };
 
   render() {
+    const prefix = this.context;
     const {
       className,
       currentIndex, // eslint-disable-line no-unused-vars
@@ -364,7 +366,7 @@ export class ProgressIndicator extends Component {
       stepData,
       ...other
     } = this.props;
-    const prefix = this.context;
+
     const classes = classnames({
       [`${prefix}--progress`]: true,
       [`${prefix}--progress--vertical`]: vertical,

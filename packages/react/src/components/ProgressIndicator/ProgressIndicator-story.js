@@ -6,7 +6,7 @@
  */
 
 import React from 'react';
-import { withKnobs, number, boolean, text } from '@storybook/addon-knobs';
+import { withKnobs, number, boolean } from '@storybook/addon-knobs';
 import { action } from '@storybook/addon-actions';
 import { ProgressIndicator, ProgressStep } from '../ProgressIndicator';
 import ProgressIndicatorSkeleton from '../ProgressIndicator/ProgressIndicator.Skeleton';
@@ -28,7 +28,7 @@ export default {
 
     subcomponents: {
       ProgressStep,
-      Tooltip
+      Tooltip,
     },
   },
 };
