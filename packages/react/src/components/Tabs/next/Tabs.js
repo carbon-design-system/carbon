@@ -132,9 +132,7 @@ const Tabs = React.forwardRef(function Tabs(
   };
 
   const getTabAt = useCallback(
-    (index, useFresh) =>
-      (!useFresh && tabs.current[index]) ||
-      React.Children.toArray(children)[index],
+    (index) => tabs.current[index] || React.Children.toArray(children)[index],
     [tabs, children]
   );
 
