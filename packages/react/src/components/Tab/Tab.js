@@ -82,7 +82,7 @@ export default class Tab extends React.Component {
     /**
      * Provide an accessibility role for your Tab
      */
-    role: PropTypes.string.isRequired,
+    role: deprecate(PropTypes.string),
 
     /**
      * Whether your Tab is selected.
@@ -97,7 +97,6 @@ export default class Tab extends React.Component {
   };
 
   static defaultProps = {
-    role: 'presentation',
     label: 'provide a label',
     selected: false,
     onClick: () => {},
@@ -122,6 +121,7 @@ export default class Tab extends React.Component {
       renderAnchor,
       renderButton,
       renderContent, // eslint-disable-line no-unused-vars
+      role, // eslint-disable-line no-unused-vars
       ...other
     } = this.props;
 
