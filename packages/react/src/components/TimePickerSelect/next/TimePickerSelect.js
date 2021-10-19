@@ -42,7 +42,7 @@ const TimePickerSelect = React.forwardRef(function TimePickerSelect(
         {...rest}>
         {children}
       </select>
-      <ChevronDown className={`${prefix}--select__arrow`} aria-hidden={true} />
+      <ChevronDown className={`${prefix}--select__arrow`} aria-hidden="true" />
     </div>
   );
 });
