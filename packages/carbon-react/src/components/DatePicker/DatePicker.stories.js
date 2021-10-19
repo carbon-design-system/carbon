@@ -12,6 +12,7 @@ import {
   DatePickerInput,
   DatePickerSkeleton,
 } from 'carbon-components-react';
+import { Layer } from '../Layer';
 
 // const patterns = {
 //   'Short (d{1,2}/d{4})': '\\d{1,2}/\\d{4}',
@@ -105,6 +106,117 @@ export const RangeWithCalendar = () => {
         labelText="End date"
       />
     </DatePicker>
+  );
+};
+
+export const SimpleWithLayer = () => {
+  return (
+    <>
+      <DatePicker datePickerType="simple">
+        <DatePickerInput
+          placeholder="mm/dd/yyyy"
+          labelText="Date Picker label"
+          id="date-picker-simple"
+        />
+      </DatePicker>
+      <Layer>
+        <DatePicker datePickerType="simple">
+          <DatePickerInput
+            placeholder="mm/dd/yyyy"
+            labelText="Date Picker label"
+            id="date-picker-simple"
+          />
+        </DatePicker>
+        <Layer>
+          <DatePicker datePickerType="simple">
+            <DatePickerInput
+              placeholder="mm/dd/yyyy"
+              labelText="Date Picker label"
+              id="date-picker-simple"
+            />
+          </DatePicker>
+        </Layer>
+      </Layer>
+    </>
+  );
+};
+
+export const SingleWithCalendarWithLayer = () => {
+  return (
+    <>
+      <DatePicker datePickerType="single">
+        <DatePickerInput
+          placeholder="mm/dd/yyyy"
+          labelText="Date Picker label"
+          id="date-picker-single"
+        />
+      </DatePicker>
+      <Layer>
+        <DatePicker datePickerType="single">
+          <DatePickerInput
+            placeholder="mm/dd/yyyy"
+            labelText="Date Picker label"
+            id="date-picker-single"
+          />
+        </DatePicker>
+        <Layer>
+          <DatePicker datePickerType="single">
+            <DatePickerInput
+              placeholder="mm/dd/yyyy"
+              labelText="Date Picker label"
+              id="date-picker-single"
+            />
+          </DatePicker>
+        </Layer>
+      </Layer>
+    </>
+  );
+};
+
+export const RangeWithCalendarWithLayer = () => {
+  return (
+    <>
+      <DatePicker datePickerType="range">
+        <DatePickerInput
+          id="date-picker-input-id-start"
+          placeholder="mm/dd/yyyy"
+          labelText="Start date"
+        />
+        <DatePickerInput
+          id="date-picker-input-id-finish"
+          placeholder="mm/dd/yyyy"
+          labelText="End date"
+        />
+      </DatePicker>
+      <Layer>
+        <DatePicker datePickerType="range">
+          <DatePickerInput
+            id="date-picker-input-id-start"
+            placeholder="mm/dd/yyyy"
+            labelText="Start date"
+          />
+          <DatePickerInput
+            id="date-picker-input-id-finish"
+            placeholder="mm/dd/yyyy"
+            labelText="End date"
+          />
+        </DatePicker>
+        <Layer>
+          <DatePicker datePickerType="range">
+            <DatePickerInput
+              id="date-picker-input-id-start"
+              placeholder="mm/dd/yyyy"
+              labelText="Start date"
+            />
+            <DatePickerInput
+              id="date-picker-input-id-finish"
+              placeholder="mm/dd/yyyy"
+              labelText="End date"
+            />
+          </DatePicker>
+        </Layer>
+      </Layer>
+    </>
   );
 };
 
