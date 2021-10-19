@@ -163,7 +163,7 @@ ClickableTile.propTypes = {
    */
   light: deprecate(
     PropTypes.bool,
-    'The `light` prop for `Tile` is no longer needed and has been deprecated. It will be removed in the next major release. Use the Layer component instead.'
+    'The `light` prop for `ClickableTile` is no longer needed and has been deprecated. It will be removed in the next major release. Use the Layer component instead.'
   ),
 
   /**
@@ -348,7 +348,7 @@ SelectableTile.propTypes = {
    */
   light: deprecate(
     PropTypes.bool,
-    'The `light` prop for `Tile` is no longer needed and has been deprecated. It will be removed in the next major release. Use the Layer component instead.'
+    'The `light` prop for `SelectableTile` is no longer needed and has been deprecated. It will be removed in the next major release. Use the Layer component instead.'
   ),
 
   /**
@@ -510,7 +510,6 @@ export function ExpandableTile({
 
     return () => resizeObserver.disconnect();
   }, []);
-
   return (
     <button
       type="button"
@@ -564,8 +563,9 @@ ExpandableTile.propTypes = {
    */
   light: deprecate(
     PropTypes.bool,
-    'The `light` prop for `Tile` is no longer needed and has been deprecated. It will be removed in the next major release. Use the Layer component instead.'
+    'The `light` prop for `ExpandableTile` is no longer needed and has been deprecated. It will be removed in the next major release. Use the Layer component instead.'
   ),
+
   /**
    * optional handler to decide whether to ignore a click. returns false if click should be ignored
    */
@@ -616,7 +616,6 @@ ExpandableTile.defaultProps = {
   onClick: () => {},
   tileCollapsedIconText: 'Interact to expand Tile',
   tileExpandedIconText: 'Interact to collapse Tile',
-  light: false,
 };
 
 ExpandableTile.displayName = 'ExpandableTile';

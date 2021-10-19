@@ -297,17 +297,6 @@ describe('ExpandableTile', () => {
       false
     );
   });
-
-  it('supports light version', () => {
-    const wrapper = mount(<ExpandableTile>Test</ExpandableTile>);
-    expect(wrapper.props().light).toEqual(false);
-    expect(wrapper.childAt(0).hasClass(`${prefix}--tile--light`)).toEqual(
-      false
-    );
-    wrapper.setProps({ light: true });
-    expect(wrapper.props().light).toEqual(true);
-    expect(wrapper.childAt(0).hasClass(`${prefix}--tile--light`)).toEqual(true);
-  });
 });
 
 // Todo: Testing for a disabled ClickableTile
