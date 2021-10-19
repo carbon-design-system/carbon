@@ -285,6 +285,9 @@
     path:not([data-icon-path]):not([fill='none']),
   .#{$prefix}--btn--ghost.#{$prefix}--btn--icon-only .#{$prefix}--btn__icon {
     fill: $icon-01;
+    @include high-contrast-mode {
+      fill: $icon-03;
+    }
   }
 
   .#{$prefix}--btn--ghost.#{$prefix}--btn--icon-only[disabled]
