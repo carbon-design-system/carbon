@@ -19,7 +19,7 @@ const FormGroup = ({
   className,
   message,
   messageText,
-  hasMargin,
+  hasMargin, // TODO - remove in v11
   ...other
 }) => {
   const prefix = usePrefix();
@@ -27,6 +27,7 @@ const FormGroup = ({
   const classNamesLegend = classnames(`${prefix}--label`, [
     enabled ? null : className,
   ]);
+  // TODO - remove `fieldset--no-margin` in v11
   const classNamesFieldset = classnames(`${prefix}--fieldset`, className, {
     [`${prefix}--fieldset--no-margin`]: !hasMargin,
   });
