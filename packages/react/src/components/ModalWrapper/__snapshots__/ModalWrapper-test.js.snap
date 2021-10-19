@@ -116,6 +116,7 @@ exports[`ModalWrapper should render 1`] = `
               <ForwardRef(Close20)
                 aria-hidden="true"
                 className="bx--modal-close__icon"
+                tabIndex="-1"
               >
                 <Icon
                   aria-hidden="true"
@@ -123,6 +124,7 @@ exports[`ModalWrapper should render 1`] = `
                   fill="currentColor"
                   height={20}
                   preserveAspectRatio="xMidYMid meet"
+                  tabIndex="-1"
                   viewBox="0 0 32 32"
                   width={20}
                   xmlns="http://www.w3.org/2000/svg"
