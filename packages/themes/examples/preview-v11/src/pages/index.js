@@ -277,7 +277,7 @@ export default function IndexPage() {
                           />
                           <div className="details">
                             <span>
-                              {getColorByValue(themes.g90[exportName], 'gray')}
+                              {getColorByValue(themes.g100[exportName], 'gray')}
                             </span>
                             <span className="hex-value">
                               {themes.g100[exportName]}
