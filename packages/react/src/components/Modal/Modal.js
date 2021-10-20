@@ -424,6 +424,7 @@ export default class Modal extends Component {
         ref={this.button}>
         <Close20
           aria-hidden="true"
+          aria-label="close"
           tabIndex="-1"
           className={`${this.modalCloseButtonClass}__icon`}
         />
