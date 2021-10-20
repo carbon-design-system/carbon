@@ -5,17 +5,23 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+import * as FeatureFlags from '@carbon/feature-flags';
+import HeaderNavigationClassic from './HeaderNavigation';
+import { HeaderNavigation as HeaderNavigationNext } from './next';
+
 export Content from './Content';
 
 export Header from './Header';
 export HeaderContainer from './HeaderContainer';
 export HeaderGlobalAction from './HeaderGlobalAction';
 export HeaderGlobalBar from './HeaderGlobalBar';
-export HeaderMenu from './HeaderMenu';
+
 export HeaderMenuButton from './HeaderMenuButton';
 export HeaderMenuItem from './HeaderMenuItem';
 export HeaderName from './HeaderName';
-export HeaderNavigation from './HeaderNavigation';
+export const HeaderNavigation = FeatureFlags.enabled('enable-v11-release')
+  ? HeaderNavigationNext
+  : HeaderNavigationClassic;
 export HeaderPanel from './HeaderPanel';
 export HeaderSideNavItems from './HeaderSideNavItems';
 
