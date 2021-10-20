@@ -8,8 +8,8 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import cx from 'classnames';
-// import { ChevronDown } from '@carbon/react/icons';
-import { ChevronDown16 } from '@carbon/icons-react';
+import { ChevronDown } from '@carbon/react/icons';
+// import { ChevronDown16 } from '@carbon/icons-react';
 
 import { usePrefix } from '../../../internal/usePrefix';
 import deprecate from '../../../prop-types/deprecate';
@@ -44,10 +44,7 @@ const TimePickerSelect = React.forwardRef(function TimePickerSelect(
         {...rest}>
         {children}
       </select>
-      <ChevronDown16
-        className={`${prefix}--select__arrow`}
-        aria-hidden="true"
-      />
+      <ChevronDown className={`${prefix}--select__arrow`} aria-hidden="true" />
     </div>
   );
 });
