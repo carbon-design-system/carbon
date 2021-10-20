@@ -184,7 +184,7 @@ const Dropdown = React.forwardRef(function Dropdown(
               const itemProps = getItemProps({
                 item,
                 index,
-                disabled: item?.disabled,
+                disabled: item.disabled,
               });
               const title = itemToElement ? item.text : itemToString(item);
               const { offsetWidth, scrollWidth } =
