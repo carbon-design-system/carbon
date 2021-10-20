@@ -357,6 +357,7 @@ const ComboBox = React.forwardRef((props, ref) => {
                           ['aria-current']: selectedItem === item ? true : null,
                           ['aria-selected']:
                             highlightedIndex === index ? true : null,
+                          disabled: item?.disabled,
                         });
                         return (
                           <ListBox.MenuItem
