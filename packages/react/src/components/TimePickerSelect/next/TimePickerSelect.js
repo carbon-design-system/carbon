@@ -8,7 +8,9 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import cx from 'classnames';
-import { ChevronDown } from '@carbon/react/icons';
+// import { ChevronDown } from '@carbon/react/icons';
+import { ChevronDown } from '@carbon/icons-react/next';
+
 // import { ChevronDown16 } from '@carbon/icons-react';
 
 import { usePrefix } from '../../../internal/usePrefix';
