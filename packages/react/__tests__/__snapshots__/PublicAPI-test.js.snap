@@ -2907,9 +2907,6 @@ Map {
       "labelText": Object {
         "type": "node",
       },
-      "listFiles": Object {
-        "type": "bool",
-      },
       "multiple": Object {
         "type": "bool",
       },
