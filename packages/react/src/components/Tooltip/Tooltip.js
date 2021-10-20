@@ -83,7 +83,11 @@ class Tooltip extends Component {
       return;
     }
     const open = useControlledStateWithValue ? props.defaultOpen : props.open;
-    this.state = { open };
+    this.state = {
+      open,
+      storedDirection: props.direction,
+      storedAlign: props.align,
+    };
   }
 
   static propTypes = {
@@ -93,6 +97,11 @@ class Tooltip extends Component {
      */
     align: PropTypes.oneOf(['start', 'center', 'end']),
 
+    /**
+     * Whether or not to re-orientate the tooltip if it goes outside,
+     * of the bounds of the parent.
+     */
+    autoOrientation: PropTypes.bool,
     /**
      * Contents to put into the tooltip.
      */
@@ -263,6 +272,172 @@ class Tooltip extends Component {
     document.addEventListener('keydown', this.handleEscKeyPress, false);
   }
 
+  componentDidUpdate(prevProps, prevState) {
+    if (prevProps.direction != this.props.direction) {
+      this.setState({ storedDirection: this.props.direction });
+    }
+    if (prevProps.align != this.props.align) {
+      this.setState({ storedAlign: this.props.align });
+    }
+    if (prevState.open && !this.state.open) {
+      // Reset orientation when closing
+      this.setState({
+        storedDirection: this.props.direction,
+        storedAlign: this.props.align,
+      });
+    }
+  }
+
+  updateOrientation = (params) => {
+    if (this.props.autoOrientation) {
+      const newOrientation = this.getBestDirection(params);
+      const { direction, align } = newOrientation;
+
+      if (direction !== this.state.storedDirection) {
+        this.setState({ open: false }, () => {
+          this.setState({ open: true, storedDirection: direction });
+        });
+      }
+
+      if (align === 'original') {
+        this.setState({ storedAlign: this.props.align });
+      } else {
+        this.setState({ storedAlign: align });
+      }
+    }
+  };
+
+  getBestDirection = ({
+    menuSize,
+    refPosition = {},
+    offset = {},
+    direction = DIRECTION_BOTTOM,
+    scrollX: pageXOffset = 0,
+    scrollY: pageYOffset = 0,
+    container,
+  }) => {
+    const {
+      left: refLeft = 0,
+      top: refTop = 0,
+      right: refRight = 0,
+      bottom: refBottom = 0,
+    } = refPosition;
+    const scrollX = container.position !== 'static' ? 0 : pageXOffset;
+    const scrollY = container.position !== 'static' ? 0 : pageYOffset;
+    const relativeDiff = {
+      top: container.position !== 'static' ? container.rect.top : 0,
+      left: container.position !== 'static' ? container.rect.left : 0,
+    };
+    const { width, height } = menuSize;
+    const { top = 0, left = 0 } = offset;
+    const refCenterHorizontal = (refLeft + refRight) / 2;
+    const refCenterVertical = (refTop + refBottom) / 2;
+
+    // Calculate whether a new direction is needed to stay in parent.
+    // It will switch the current direction to the opposite i.e.
+    // If the direction="top" and the top boundary is overflowed
+    // then it switches the direction to "bottom".
+    const newDirection = () => {
+      switch (direction) {
+        case DIRECTION_LEFT:
+          return refLeft - width + scrollX - left - relativeDiff.left < 0
+            ? DIRECTION_RIGHT
+            : direction;
+        case DIRECTION_TOP:
+          return refTop - height + scrollY - top - relativeDiff.top < 0
+            ? DIRECTION_BOTTOM
+            : direction;
+        case DIRECTION_RIGHT:
+          return refRight + scrollX + left - relativeDiff.left + width >
+            container.rect.width
+            ? DIRECTION_LEFT
+            : direction;
+        case DIRECTION_BOTTOM:
+          return refBottom + scrollY + top - relativeDiff.top + height >
+            container.rect.height
+            ? DIRECTION_TOP
+            : direction;
+        default:
+          // If there is a new direction then ignore the logic above
+          return direction;
+      }
+    };
+
+    // Calculate whether a new alignment is needed to stay in parent
+    // If the direction is left or right this involves checking the
+    // overflow in the vertical direction. If the direction is top or
+    // bottom, this involves checking overflow in the horizontal direction.
+    // "original" is used to signify no change.
+    const newAlignment = () => {
+      switch (direction) {
+        case DIRECTION_LEFT:
+        case DIRECTION_RIGHT:
+          if (
+            refCenterVertical -
+              height / 2 +
+              scrollY +
+              top -
+              9 -
+              relativeDiff.top <
+            0
+          ) {
+            // If goes above the top boundary
+            return 'start';
+          } else if (
+            refCenterVertical -
+              height / 2 +
+              scrollY +
+              top -
+              9 -
+              relativeDiff.top +
+              height >
+            container.rect.height
+          ) {
+            // If goes below the bottom boundary
+            return 'end';
+          } else {
+            // No need to change alignment
+            return 'original';
+          }
+        case DIRECTION_TOP:
+        case DIRECTION_BOTTOM:
+          if (
+            refCenterHorizontal -
+              width / 2 +
+              scrollX +
+              left -
+              relativeDiff.left <
+            0
+          ) {
+            // If goes below the left boundary
+            return 'start';
+          } else if (
+            refCenterHorizontal -
+              width / 2 +
+              scrollX +
+              left -
+              relativeDiff.left +
+              width >
+            container.rect.width
+          ) {
+            // If it goes over the right boundary
+            return 'end';
+          } else {
+            // No need to change alignment
+            return 'original';
+          }
+        default:
+          // No need to change alignment
+          return 'original';
+      }
+    };
+
+    return {
+      direction: newDirection(),
+      align: newAlignment(),
+    };
+  };
+
   componentWillUnmount() {
     if (this._debouncedHandleFocus) {
       this._debouncedHandleFocus.cancel();
@@ -430,8 +605,6 @@ class Tooltip extends Component {
       children,
       className,
       triggerClassName,
-      direction,
-      align,
       focusTrap,
       triggerText,
       showIcon,
@@ -447,13 +620,14 @@ class Tooltip extends Component {
     } = this.props;
 
     const { open } = this.isControlled ? this.props : this.state;
+    const { storedDirection, storedAlign } = this.state;
 
     const tooltipClasses = classNames(
       `${prefix}--tooltip`,
       {
         [`${prefix}--tooltip--shown`]: open,
-        [`${prefix}--tooltip--${direction}`]: direction,
-        [`${prefix}--tooltip--align-${align}`]: align,
+        [`${prefix}--tooltip--${storedDirection}`]: storedDirection,
+        [`${prefix}--tooltip--align-${storedAlign}`]: storedAlign,
       },
       className
     );
@@ -523,16 +697,25 @@ class Tooltip extends Component {
             selectorPrimaryFocus={this.props.selectorPrimaryFocus}
             target={this._getTarget}
             triggerRef={this._triggerRef}
-            menuDirection={direction}
+            menuDirection={storedDirection}
             menuOffset={menuOffset}
             menuRef={(node) => {
               this._tooltipEl = node;
-            }}>
+            }}
+            updateOrientation={this.updateOrientation}>
+            {/* This rule is disabled because the onKeyDown event handler is only
+             * being used to capture and prevent the event from bubbling: */}
+            {/* eslint-disable-next-line jsx-a11y/no-static-element-interactions */}
             <div
               className={tooltipClasses}
+              onKeyDown={(event) => {
+                if (keyDownMatch(event, [keys.Escape])) {
+                  event.stopPropagation();
+                }
+              }}
               {...other}
               id={this._tooltipId}
-              data-floating-menu-direction={direction}
+              data-floating-menu-direction={storedDirection}
               onMouseOver={this.handleMouse}
               onMouseOut={this.handleMouse}
               onFocus={this.handleMouse}
