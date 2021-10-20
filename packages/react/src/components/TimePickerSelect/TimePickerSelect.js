@@ -17,6 +17,11 @@ const { prefix } = settings;
 export default class TimePickerSelect extends Component {
   static propTypes = {
     /**
+     * Provide aria-label to the <select> element
+     */
+    ariaLabel: PropTypes.string,
+
+    /**
      * Provide the contents of your TimePickerSelect
      */
     children: PropTypes.node,
@@ -37,28 +42,18 @@ export default class TimePickerSelect extends Component {
     disabled: PropTypes.bool,
 
     /**
-     * Specify whether the label should be hidden, or not
+     * iconDescription is deprecated and will be removed in the next major release.
      */
-    hideLabel: deprecate(
-      PropTypes.bool,
+    iconDescription: deprecate(
+      PropTypes.string,
       'The `hideLabel` prop for `TimePickerSelect` is no longer needed and has ' +
         'been deprecated. It will be removed in the next major release.'
     ),
 
     /**
-     * Provide a description for the twistie icon that can be read by screen readers
-     */
-    iconDescription: PropTypes.string.isRequired,
-
-    /**
      * Specify a custom `id` for the `<select>`
      */
     id: PropTypes.string.isRequired,
-
-    /**
-     * Specify whether you want the inline version of this control
-     */
-    inline: PropTypes.bool,
 
     /**
      * Provide label text to be read by screen readers when interacting with the
@@ -69,21 +64,17 @@ export default class TimePickerSelect extends Component {
 
   static defaultProps = {
     disabled: false,
-    inline: true,
-    iconDescription: 'open list of options',
   };
 
   render() {
     const {
-      id,
-      disabled,
+      ['aria-label']: ariaLabel = 'open list of options',
       children,
-      iconDescription,
       className,
-      hideLabel = true,
-      labelText,
-      inline, // eslint-disable-line
-      ...other
+      disabled,
+      id,
+      iconDescription,
+      ...rest
     } = this.props;
 
     const selectClasses = classNames({
@@ -92,32 +83,21 @@ export default class TimePickerSelect extends Component {
       [className]: className,
     });
 
-    const labelClasses = classNames(`${prefix}--label`, {
-      // TODO: set to always be `true` after `hideLabel` is deprecated
-      [`${prefix}--visually-hidden`]: hideLabel,
-    });
-
-    const label = labelText ? (
-      <label htmlFor={id} className={labelClasses}>
-        {labelText}
-      </label>
-    ) : null;
-
     return (
       <div className={selectClasses}>
-        {label}
         <select
-          {...other}
-          id={id}
           className={`${prefix}--select-input`}
-          disabled={disabled}>
+          disabled={disabled}
+          id={id}
+          aria-label={ariaLabel}
+          {...rest}>
           {children}
         </select>
         <ChevronDown16
           className={`${prefix}--select__arrow`}
-          aria-label={iconDescription}>
-          {iconDescription && <title>{iconDescription}</title>}
-        </ChevronDown16>
+          aria-label={ariaLabel ? ariaLabel : iconDescription}
+          aria-hidden="true"
+        />
       </div>
     );
   }
