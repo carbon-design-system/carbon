@@ -22,7 +22,6 @@ const TimePickerSelect = React.forwardRef(function TimePickerSelect(
     id,
     disabled = false,
     className,
-    // labelText,
     ...rest
   },
   ref
@@ -87,12 +86,6 @@ TimePickerSelect.propTypes = {
    * Specify a custom `id` for the `<select>`
    */
   id: PropTypes.string.isRequired,
-
-  /**
-   * Provide label text to be read by screen readers when interacting with the
-   * control
-   */
-  labelText: PropTypes.node.isRequired,
 };
 
 export default TimePickerSelect;

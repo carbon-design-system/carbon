@@ -161,7 +161,6 @@ export default class TimePicker extends Component {
     } = this.props;
 
     const scope = this.context;
-
     let enabled;
 
     if (scope.enabled) {

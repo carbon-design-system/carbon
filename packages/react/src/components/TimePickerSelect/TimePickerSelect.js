@@ -37,18 +37,13 @@ export default class TimePickerSelect extends Component {
     disabled: PropTypes.bool,
 
     /**
-     * Specify whether the label should be hidden, or not
+     * Provide a description for the twistie icon that can be read by screen readers
      */
-    hideLabel: deprecate(
-      PropTypes.bool,
+    iconDescription: deprecate(
+      PropTypes.string,
       'The `hideLabel` prop for `TimePickerSelect` is no longer needed and has ' +
         'been deprecated. It will be removed in the next major release.'
     ),
-
-    /**
-     * Provide a description for the twistie icon that can be read by screen readers
-     */
-    iconDescription: PropTypes.string.isRequired,
 
     /**
      * Specify a custom `id` for the `<select>`
@@ -70,7 +65,6 @@ export default class TimePickerSelect extends Component {
   static defaultProps = {
     disabled: false,
     inline: true,
-    iconDescription: 'open list of options',
   };
 
   render() {
@@ -78,10 +72,8 @@ export default class TimePickerSelect extends Component {
       id,
       disabled,
       children,
-      iconDescription,
+      ['aria-label']: ariaLabel = 'open list of options',
       className,
-      // hideLabel = true,
-      // labelText,
       inline, // eslint-disable-line
       ...other
     } = this.props;
@@ -92,27 +84,19 @@ export default class TimePickerSelect extends Component {
       [className]: className,
     });
 
-    // const labelClasses = classNames(`${prefix}--label`, {
-    //   // TODO: set to always be `true` after `hideLabel` is deprecated
-    //   [`${prefix}--visually-hidden`]: hideLabel,
-    // });
-
-    // const label = labelText ? <label htmlFor={id}>{labelText}</label> : null;
-
     return (
       <div className={selectClasses}>
         <select
           {...other}
           id={id}
           className={`${prefix}--select-input`}
-          disabled={disabled}>
+          disabled={disabled}
+          aria-label={ariaLabel}>
           {children}
         </select>
         <ChevronDown16
           className={`${prefix}--select__arrow`}
-          aria-label={iconDescription}>
-          {iconDescription && <title>{iconDescription}</title>}
-        </ChevronDown16>
+          aria-hidden="true"></ChevronDown16>
       </div>
     );
   }

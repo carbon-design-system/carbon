@@ -55,14 +55,6 @@ const props = {
   }),
   select: () => ({
     disabled: boolean('Disabled (disabled in <TimePickerSelect>)', false),
-    labelText: text(
-      'Label text (labelText in <TimePickerSelect>)',
-      'Please select'
-    ),
-    iconDescription: text(
-      'Trigger icon description (iconDescription in <TimePickerSelect>)',
-      'open list of options'
-    ),
   }),
 };
 
