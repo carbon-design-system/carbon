@@ -24,7 +24,7 @@ const items = [
   },
   {
     id: 'option-3',
-    text: 'Option 3',
+    text: 'Option 3 - a disabled item',
     disabled: true,
   },
   {
