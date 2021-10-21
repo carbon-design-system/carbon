@@ -160,6 +160,7 @@ class HeaderMenu extends React.Component {
   render() {
     const prefix = this.context;
     const {
+      isCurrentPage,
       'aria-label': ariaLabel,
       'aria-labelledby': ariaLabelledBy,
       className: customClassName,
@@ -174,7 +175,12 @@ class HeaderMenu extends React.Component {
       'aria-label': ariaLabel,
       'aria-labelledby': ariaLabelledBy,
     };
-    const className = cx(`${prefix}--header__submenu`, customClassName);
+    const className = cx({
+      [`${prefix}--header__submenu`]: true,
+      [customClassName]: true,
+      [`${prefix}--header__submenu--current`]: isCurrentPage,
+    });
+
     // Notes on eslint comments and based on the examples in:
     // https://www.w3.org/TR/wai-aria-practices/examples/menubar/menubar-1/menubar-1.html#
     // - The focus is handled by the <a> menuitem, onMouseOver is for mouse

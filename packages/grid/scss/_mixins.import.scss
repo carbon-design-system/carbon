@@ -23,6 +23,7 @@
 // and often derived from, bootstrap:
 // https://github.com/twbs/bootstrap/blob/v4-dev/scss/mixins/_grid.scss
 
+@use 'sass:meta';
 @use 'sass:math';
 @import '@carbon/layout/scss/breakpoint'; /* stylelint-disable-line no-invalid-position-at-import-rule */
 @import 'prefix'; /* stylelint-disable-line no-invalid-position-at-import-rule */
@@ -46,21 +47,21 @@
   // always setting `width: 100%;`. This works because we use `flex` values
   // later on to override this initial width.
   width: 100%;
-  padding-right: math.div($gutter, 2);
-  padding-left: math.div($gutter, 2);
+  padding-right: $gutter * 0.5;
+  padding-left: $gutter * 0.5;
 
   // For our condensed use-case, our gutters collapse to 2px solid, 1px on each
   // side.
   .#{$prefix}--row--condensed &,
   .#{$prefix}--grid--condensed & {
-    padding-right: math.div($condensed-gutter, 2);
-    padding-left: math.div($condensed-gutter, 2);
+    padding-right: $condensed-gutter * 0.5;
+    padding-left: $condensed-gutter * 0.5;
   }
 
   // For our narrow use-case, our container hangs 16px into the gutter
   .#{$prefix}--row--narrow &,
   .#{$prefix}--grid--narrow & {
-    padding-right: math.div($gutter, 2);
+    padding-right: $gutter * 0.5;
     padding-left: 0;
   }
 }
@@ -80,8 +81,13 @@
     // Add a `max-width` to ensure content within each column does not blow out
     // the width of the column. Applies to IE10+ and Firefox. Chrome and Safari
     // do not appear to require this.
-    max-width: percentage(math.div($span, $columns));
-    flex: 0 0 percentage(math.div($span, $columns));
+    @if meta.function-exists('div', 'math') {
+      max-width: percentage(math.div($span, $columns));
+      flex: 0 0 percentage(math.div($span, $columns));
+    } @else {
+      max-width: percentage(($span / $columns));
+      flex: 0 0 percentage(($span / $columns));
+    }
   }
 }
 
@@ -91,7 +97,12 @@
 /// @access private
 /// @group @carbon/grid
 @mixin carbon--make-col-offset($span, $columns) {
-  $offset: math.div($span, $columns);
+  $offset: 0;
+  @if meta.function-exists('div', 'math') {
+    $offset: math.div($span, $columns);
+  } @else {
+    $offset: ($span / $columns);
+  }
   @if $offset == 0 {
     margin-left: 0;
   } @else {
@@ -173,8 +184,8 @@
 @mixin carbon--make-row($gutter: $carbon--grid-gutter) {
   display: flex;
   flex-wrap: wrap;
-  margin-right: -1 * math.div($gutter, 2);
-  margin-left: -1 * math.div($gutter, 2);
+  margin-right: -1 * $gutter * 0.5;
+  margin-left: -1 * $gutter * 0.5;
 }
 
 // -----------------------------------------------------------------------------
@@ -225,20 +236,20 @@
 /// @group @carbon/grid
 @mixin carbon--hang($gutter: $carbon--grid-gutter) {
   .#{$prefix}--hang--start {
-    padding-left: math.div($gutter, 2);
+    padding-left: $gutter * 0.5;
   }
 
   .#{$prefix}--hang--end {
-    padding-right: math.div($gutter, 2);
+    padding-right: $gutter * 0.5;
   }
 
   // Deprecated ☠️
   .#{$prefix}--hang--left {
-    padding-left: math.div($gutter, 2);
+    padding-left: $gutter * 0.5;
   }
 
   .#{$prefix}--hang--right {
-    padding-right: math.div($gutter, 2);
+    padding-right: $gutter * 0.5;
   }
 }
 
@@ -299,7 +310,11 @@ $carbon--aspect-ratios: (
     $height: nth($aspect-ratio, 2);
 
     .#{$prefix}--aspect-ratio--#{$width}x#{$height}::before {
-      padding-top: percentage(math.div($height, $width));
+      @if meta.function-exists('div', 'math') {
+        padding-top: percentage(math.div($height, $width));
+      } @else {
+        padding-top: percentage(($height / $width));
+      }
     }
   }
 
@@ -336,14 +351,14 @@ $carbon--aspect-ratios: (
       $prev-margin: map-get($prev-breakpoint, margin);
       @if $prev-margin != $margin {
         @include carbon--breakpoint($name) {
-          padding-right: #{math.div($carbon--grid-gutter, 2) + $margin};
-          padding-left: #{math.div($carbon--grid-gutter, 2) + $margin};
+          padding-right: #{($carbon--grid-gutter * 0.5) + $margin};
+          padding-left: #{($carbon--grid-gutter * 0.5) + $margin};
         }
       }
     } @else {
       @include carbon--breakpoint($name) {
-        padding-right: #{math.div($carbon--grid-gutter, 2) + $margin};
-        padding-left: #{math.div($carbon--grid-gutter, 2) + $margin};
+        padding-right: #{($carbon--grid-gutter * 0.5) + $margin};
+        padding-left: #{($carbon--grid-gutter * 0.5) + $margin};
       }
     }
   }
@@ -400,13 +415,13 @@ $carbon--aspect-ratios: (
 
   .#{$prefix}--row-padding [class*='#{$prefix}--col'],
   .#{$prefix}--col-padding {
-    padding-top: math.div($grid-gutter, 2);
-    padding-bottom: math.div($grid-gutter, 2);
+    padding-top: $grid-gutter * 0.5;
+    padding-bottom: $grid-gutter * 0.5;
   }
 
   .#{$prefix}--grid--condensed [class*='#{$prefix}--col'] {
-    padding-top: math.div($condensed-gutter, 2);
-    padding-bottom: math.div($condensed-gutter, 2);
+    padding-top: $condensed-gutter * 0.5;
+    padding-bottom: $condensed-gutter * 0.5;
   }
 
   @include carbon--make-grid-columns($breakpoints, $grid-gutter);

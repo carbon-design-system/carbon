@@ -7,6 +7,7 @@
 
 import React from 'react';
 import { MultiSelect } from 'carbon-components-react';
+import { Layer } from '../Layer';
 
 const items = [
   {
@@ -19,7 +20,8 @@ const items = [
   },
   {
     id: 'downshift-1-item-2',
-    text: 'Option 3',
+    text: 'Option 3 - a disabled item',
+    disabled: true,
   },
   {
     id: 'downshift-1-item-3',
@@ -91,6 +93,82 @@ export const _Filterable = () => {
         placeholder="Filter"
         selectionFeedback="top-after-reopen"
       />
+    </div>
+  );
+};
+
+export const withLayer = () => {
+  return (
+    <div style={{ width: 300 }}>
+      <MultiSelect
+        label="First Layer"
+        id="carbon-multiselect-example"
+        titleText="Multiselect title"
+        helperText="This is helper text"
+        items={items}
+        itemToString={(item) => (item ? item.text : '')}
+        selectionFeedback="top-after-reopen"
+      />
+      <Layer>
+        <MultiSelect
+          label="Second Layer"
+          id="carbon-multiselect-example"
+          titleText="Multiselect title"
+          helperText="This is helper text"
+          items={items}
+          itemToString={(item) => (item ? item.text : '')}
+          selectionFeedback="top-after-reopen"
+        />
+        <Layer>
+          <MultiSelect
+            label="Third Layer"
+            id="carbon-multiselect-example"
+            titleText="Multiselect title"
+            helperText="This is helper text"
+            items={items}
+            itemToString={(item) => (item ? item.text : '')}
+            selectionFeedback="top-after-reopen"
+          />
+        </Layer>
+      </Layer>
+    </div>
+  );
+};
+
+export const _FilterableWithLayer = () => {
+  return (
+    <div style={{ width: 300 }}>
+      <MultiSelect.Filterable
+        id="carbon-multiselect-example-3"
+        titleText="First Layer"
+        helperText="This is helper text"
+        items={items}
+        itemToString={(item) => (item ? item.text : '')}
+        placeholder="Filter"
+        selectionFeedback="top-after-reopen"
+      />
+      <Layer>
+        <MultiSelect.Filterable
+          id="carbon-multiselect-example-3"
+          titleText="Second Layer"
+          helperText="This is helper text"
+          items={items}
+          itemToString={(item) => (item ? item.text : '')}
+          placeholder="Filter"
+          selectionFeedback="top-after-reopen"
+        />
+        <Layer>
+          <MultiSelect.Filterable
+            id="carbon-multiselect-example-3"
+            titleText="Third Layer"
+            helperText="This is helper text"
+            items={items}
+            itemToString={(item) => (item ? item.text : '')}
+            placeholder="Filter"
+            selectionFeedback="top-after-reopen"
+          />
+        </Layer>
+      </Layer>
     </div>
   );
 };

@@ -5,6 +5,7 @@
 // LICENSE file in the root directory of this source tree.
 //
 
+@use 'sass:meta';
 @use "sass:math";
 
 @use 'config' as *;
@@ -63,8 +64,13 @@
     // Add a `max-width` to ensure content within each column does not blow out
     // the width of the column. Applies to IE10+ and Firefox. Chrome and Safari
     // do not appear to require this.
-    max-width: percentage(math.div($span, $columns));
-    flex: 0 0 percentage(math.div($span, $columns));
+    @if meta.function-exists('div', 'math') {
+      max-width: percentage(math.div($span, $columns));
+      flex: 0 0 percentage(math.div($span, $columns));
+    } @else {
+      max-width: percentage(($span / $columns));
+      flex: 0 0 percentage(($span / $columns));
+    }
   }
 }
 
@@ -74,7 +80,12 @@
 /// @access private
 /// @group @carbon/grid
 @mixin -make-col-offset($span, $columns) {
-  $offset: math.div($span, $columns);
+  $offset: 0;
+  @if meta.function-exists('div', 'math') {
+    $offset: math.div($span, $columns);
+  } @else {
+    $offset: ($span / $columns);
+  }
   @if $offset == 0 {
     margin-left: 0;
   } @else {
