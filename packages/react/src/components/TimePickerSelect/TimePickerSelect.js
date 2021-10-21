@@ -42,7 +42,16 @@ export default class TimePickerSelect extends Component {
     disabled: PropTypes.bool,
 
     /**
-     * iconDescription is deprecated and will be removed in the next major release.
+     * hideLable has been deprecated in v10 and will be removed in v11.
+     */
+    hideLabel: deprecate(
+      PropTypes.bool,
+      'The `hideLabel` prop for `TimePickerSelect` is no longer needed and has ' +
+        'been deprecated. It will be removed in the next major release.'
+    ),
+
+    /**
+     * iconDescription is deprecated in v10 and will be removed in v11.
      */
     iconDescription: deprecate(
       PropTypes.string,
@@ -72,6 +81,7 @@ export default class TimePickerSelect extends Component {
       children,
       className,
       disabled,
+      hideLabel,
       id,
       iconDescription,
       labelText,
@@ -84,10 +94,10 @@ export default class TimePickerSelect extends Component {
       [className]: className,
     });
 
-    const labelClasses = classNames(
-      `${prefix}--label`,
-      `${prefix}--visually-hidden`
-    );
+    const labelClasses = classNames(`${prefix}--label`, {
+      // TODO: set to always be `true` after `hideLabel` is deprecated
+      [`${prefix}--visually-hidden`]: hideLabel,
+    });
 
     const label = labelText ? (
       <label htmlFor={id} className={labelClasses}>

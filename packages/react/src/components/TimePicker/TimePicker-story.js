@@ -55,6 +55,10 @@ const props = {
   }),
   select: () => ({
     disabled: boolean('Disabled (disabled in <TimePickerSelect>)', false),
+    labelText: text(
+      'Label text (labelText in <TimePickerSelect>)',
+      'Please select'
+    ),
     ['aria-label']: text(
       'ARIA label (aria-label in <TimePickerSelect>)',
       'open list of options'
