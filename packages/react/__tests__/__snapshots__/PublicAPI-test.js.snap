@@ -7075,6 +7075,7 @@ Map {
       "disabled": Object {
         "type": "bool",
       },
+      "hideLabel": [Function],
       "iconDescription": [Function],
       "id": Object {
         "isRequired": true,
