@@ -59,7 +59,8 @@ export default class TimePicker extends Component {
     labelText: PropTypes.node,
 
     /**
-     * `true` to use the light version.
+     * `true` to use the light version. For use on $ui-01 backgrounds only.
+     * Don't use this to make tile background color same as container background color.
      */
     light: PropTypes.bool,
 

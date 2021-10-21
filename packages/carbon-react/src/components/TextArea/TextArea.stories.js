@@ -7,6 +7,7 @@
 
 import React from 'react';
 import { TextArea, TextAreaSkeleton } from 'carbon-components-react';
+import { Layer } from '../Layer';
 
 export default {
   title: 'Components/TextArea',
@@ -28,5 +29,40 @@ export const Default = () => (
     id="text-area-1"
   />
 );
+
+export const withLayer = () => {
+  return (
+    <>
+      <TextArea
+        labelText="First layer"
+        helperText="Optional helper text"
+        placeholder="Placeholder text"
+        cols={50}
+        rows={4}
+        id="text-area-1"
+      />
+      <Layer>
+        <TextArea
+          labelText="Second layer"
+          helperText="Optional helper text"
+          placeholder="Placeholder text"
+          cols={50}
+          rows={4}
+          id="text-area-1"
+        />
+        <Layer>
+          <TextArea
+            labelText="Third layer"
+            helperText="Optional helper text"
+            placeholder="Placeholder text"
+            cols={50}
+            rows={4}
+            id="text-area-1"
+          />
+        </Layer>
+      </Layer>
+    </>
+  );
+};
 
 export const Skeleton = () => <TextAreaSkeleton />;
