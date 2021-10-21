@@ -125,7 +125,9 @@ export const ComponentExamples = () => {
       <ContentSwitcher
         helperText="Using <Text> within <Switch>"
         onChange={() => {}}>
-        <Switch name="one" text={<Text>{rtlText}</Text>} />
+        <Switch name="one">
+          <Text>{rtlText}</Text>
+        </Switch>
         <Switch name="two" text="Second section" />
         <Switch name="three" text="Third section" />
       </ContentSwitcher>
