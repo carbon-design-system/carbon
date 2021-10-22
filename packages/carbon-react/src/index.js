@@ -196,7 +196,9 @@ export {
   unstable_useContextMenu,
   unstable_Heading,
   unstable_Section,
+  unstable_HStack as HStack,
   unstable_Stack as Stack,
+  unstable_VStack as VStack,
 } from 'carbon-components-react';
 
 export {
