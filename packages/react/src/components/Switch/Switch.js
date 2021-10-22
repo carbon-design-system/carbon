@@ -58,8 +58,7 @@ const Switch = React.forwardRef(function Switch(props, tabRef) {
       {...other}
       {...commonProps}>
       <span className={`${prefix}--content-switcher__label`} title={text}>
-        {text}
-        {children}
+        {text !== undefined ? text : children}
       </span>
     </button>
   );
