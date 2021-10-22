@@ -12,7 +12,7 @@ const HStack = React.forwardRef(function HStack(props, ref) {
   return <Stack {...props} ref={ref} orientation="horizontal" />;
 });
 
-const VStack = React.forwardRef(function HStack(props, ref) {
+const VStack = React.forwardRef(function VStack(props, ref) {
   return <Stack {...props} ref={ref} orientation="vertical" />;
 });
 
