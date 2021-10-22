@@ -2907,9 +2907,6 @@ Map {
       "labelText": Object {
         "type": "node",
       },
-      "listFiles": Object {
-        "type": "bool",
-      },
       "multiple": Object {
         "type": "bool",
       },
@@ -3811,7 +3808,6 @@ Map {
   "Modal" => Object {
     "defaultProps": Object {
       "hasScrollingContent": false,
-      "iconDescription": "Close",
       "modalHeading": "",
       "modalLabel": "",
       "onKeyDown": [Function],
@@ -3841,9 +3837,7 @@ Map {
       "hasScrollingContent": Object {
         "type": "bool",
       },
-      "iconDescription": Object {
-        "type": "string",
-      },
+      "iconDescription": [Function],
       "id": Object {
         "type": "string",
       },
