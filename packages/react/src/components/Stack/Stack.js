@@ -12,10 +12,14 @@ import React from 'react';
 import { usePrefix } from '../../internal/usePrefix';
 
 /**
- * The number of steps in the spacing scale
- * @type {number}
+ * The steps in the spacing scale
+ * @type {Array<number>}
  */
-const SPACING_STEPS = spacing.length;
+const SPACING_STEPS = Array.from({ length: spacing.length - 1 }).map(
+  (_, step) => {
+    return step + 1;
+  }
+);
 
 /**
  * The Stack component is a useful layout utility in a component-based model.
@@ -41,17 +45,16 @@ const Stack = React.forwardRef(function Stack(props, ref) {
     className: customClassName,
     gap,
     orientation = 'vertical',
-    step,
     ...rest
   } = props;
   const prefix = usePrefix();
   const className = cx(customClassName, {
     [`${prefix}--stack-${orientation}`]: true,
-    [`${prefix}--stack-scale-${step}`]: step !== undefined,
+    [`${prefix}--stack-scale-${gap}`]: typeof gap === 'number',
   });
   const style = {};
 
-  if (step === undefined && gap !== undefined) {
+  if (typeof gap === 'string') {
     style[`--${prefix}-stack-gap`] = gap;
   }
 
@@ -83,24 +86,15 @@ Stack.propTypes = {
   className: PropTypes.string,
 
   /**
-   * Provide a custom value for the gap used by the Stack layout
+   * Provide either a custom value or a step from the spacing scale to be used
+   * as the gap in the layout
    */
-  gap: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  gap: PropTypes.oneOfType([PropTypes.string, PropTypes.oneOf(SPACING_STEPS)]),
 
   /**
    * Specify the orientation of them items in the Stack
    */
   orientation: PropTypes.oneOf(['horizontal', 'vertical']),
-
-  /**
-   * Provide the step from the spacing scale to be used as the gap for the
-   * items rendered by the Stack
-   */
-  step: PropTypes.oneOf(
-    Array.from({ length: SPACING_STEPS }).map((_, step) => {
-      return step;
-    })
-  ),
 };
 
-export default Stack;
+export { Stack };

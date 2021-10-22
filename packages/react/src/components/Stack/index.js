@@ -5,4 +5,15 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-export { default as Stack } from './Stack';
+import React from 'react';
+import { Stack } from './Stack';
+
+const HStack = React.forwardRef(function HStack(props, ref) {
+  return <Stack {...props} ref={ref} orientation="horizontal" />;
+});
+
+const VStack = React.forwardRef(function HStack(props, ref) {
+  return <Stack {...props} ref={ref} orientation="vertical" />;
+});
+
+export { HStack, Stack, VStack };

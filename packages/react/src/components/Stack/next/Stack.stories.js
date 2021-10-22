@@ -27,7 +27,7 @@ export default {
 
 export const Default = () => {
   return (
-    <Stack step={6}>
+    <Stack gap={6}>
       <div>Item 1</div>
       <div>Item 2</div>
       <div>Item 3</div>
@@ -37,7 +37,7 @@ export const Default = () => {
 
 export const Horizontal = () => {
   return (
-    <Stack step={6} orientation="horizontal">
+    <Stack gap={6} orientation="horizontal">
       <div>Item 1</div>
       <div>Item 2</div>
       <div>Item 3</div>
@@ -59,18 +59,13 @@ export const Playground = PlaygroundStory.bind({});
 
 Playground.argTypes = {
   gap: {
-    control: {
-      type: 'text',
-    },
-  },
-  orientation: {
-    options: ['horizontal', 'vertical'],
+    options: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
     control: {
       type: 'select',
     },
   },
-  step: {
-    options: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
+  orientation: {
+    options: ['horizontal', 'vertical'],
     control: {
       type: 'select',
     },
