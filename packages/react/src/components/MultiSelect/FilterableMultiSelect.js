@@ -569,7 +569,10 @@ export default class FilterableMultiSelect extends React.Component {
                             locale,
                           }
                         ).map((item, index) => {
-                          const itemProps = getItemProps({ item });
+                          const itemProps = getItemProps({
+                            item,
+                            disabled: item.disabled,
+                          });
                           const itemText = itemToString(item);
                           const isChecked =
                             selectedItem.filter((selected) =>

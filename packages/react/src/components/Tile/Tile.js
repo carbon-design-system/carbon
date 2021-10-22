@@ -316,6 +316,7 @@ export function SelectableTile(props) {
     </>
   );
 }
+
 SelectableTile.defaultProps = {
   value: 'value',
   title: 'title',
@@ -326,6 +327,7 @@ SelectableTile.defaultProps = {
   onChange: () => {},
   onKeyDown: () => {},
 };
+
 SelectableTile.propTypes = {
   /**
    * The child nodes.
