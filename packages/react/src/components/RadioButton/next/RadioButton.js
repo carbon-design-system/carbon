@@ -2,8 +2,7 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import classNames from 'classnames';
 import { usePrefix } from '../../../internal/usePrefix';
-import { default as uid } from '../../../tools/uniqueId';
-// import { useId } from '../../../internal/useId';
+import { uid } from '../../../tools/uniqueId';
 import { Text } from '../../Text';
 
 const RadioButton = React.forwardRef(function RadioButton(
