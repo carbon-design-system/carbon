@@ -25,6 +25,8 @@ describe('@carbon/styles/scss/type', () => {
         mixins: (
           reset: meta.mixin-exists('reset', 'type'),
           type-style: meta.mixin-exists('type-style', 'type'),
+          font-family: meta.mixin-exists('font-family', 'type'),
+          default-type: meta.mixin-exists('default-type', 'type'),
         ),
       ));
     `);
@@ -33,6 +35,8 @@ describe('@carbon/styles/scss/type', () => {
     expect(api.mixins).toEqual({
       reset: true,
       'type-style': true,
+      'font-family': true,
+      'default-type': true,
     });
     expect(api.variables).toMatchInlineSnapshot(`
       Array [

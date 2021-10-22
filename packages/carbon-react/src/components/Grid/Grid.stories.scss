@@ -2,54 +2,54 @@
 @use '@carbon/styles/scss/type' as *;
 
 // Grid modes
-.bx--css-grid {
+.cds--css-grid {
   background-color: $blue-20;
   outline: 1px dashed $blue-40;
 }
 
-.bx--css-grid p {
+.cds--css-grid p {
   @include type-style('code-02');
 }
 
-.bx--css-grid p:first-of-type {
+.cds--css-grid p:first-of-type {
   //messing up progress indicator stories
   margin-top: 0;
 }
 
-.bx--css-grid.bx--css-grid--narrow {
+.cds--css-grid.cds--css-grid--narrow {
   background-color: $teal-20;
   outline: 1px dashed $teal-40;
 }
 
-.bx--css-grid.bx--css-grid--condensed {
+.cds--css-grid.cds--css-grid--condensed {
   background-color: $purple-20;
   outline: 1px dashed $purple-40;
 }
 
 // Only use background for subgrid example, not other subgrids in "mixed modes" story or others
-.bx--subgrid.example {
+.cds--subgrid.example {
   background-color: $green-20;
 }
 
 // Columns
-.bx--css-grid > [class*='col'],
-.bx--subgrid > [class*='col'] {
+.cds--css-grid > [class*='col'],
+.cds--subgrid > [class*='col'] {
   min-height: 80px;
 }
 
-.bx--css-grid > [class*='col'] {
+.cds--css-grid > [class*='col'] {
   background: $blue-10;
 }
 
-.bx--subgrid > [class*='col'] {
+.cds--subgrid > [class*='col'] {
   background: $green-10;
   outline: 1px dashed $green-30;
 }
 
-.bx--css-grid.bx--css-grid--narrow > [class*='col'] {
+.cds--css-grid.cds--css-grid--narrow > [class*='col'] {
   background: $teal-10;
 }
 
-.bx--css-grid.bx--css-grid--condensed > [class*='col'] {
+.cds--css-grid.cds--css-grid--condensed > [class*='col'] {
   background: $purple-10;
 }

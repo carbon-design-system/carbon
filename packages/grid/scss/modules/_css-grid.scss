@@ -5,6 +5,7 @@
 // LICENSE file in the root directory of this source tree.
 //
 
+@use 'sass:meta';
 @use "sass:math";
 
 @use 'sass:map';
@@ -254,10 +255,6 @@
   .#{$prefix}--col-start-#{$i} {
     grid-column-start: $i;
   }
-
-  .#{$prefix}--col-end-#{$i} {
-    grid-column-end: $i;
-  }
 }
 
 .#{$prefix}--col-start-auto {
@@ -272,16 +269,12 @@
   $columns: map.get($value, columns);
 
   @include breakpoint($name) {
-    // The `grid-column-end` and `grid-column-start` properties are *not* inclusive.
-    // It starts/ends the column *at* the column, not *on* the column. We must
+    // The `grid-column-start` property is *not* inclusive.
+    // It starts the column *at* the column, not *on* the column. We must
     // ensure that there is one additional class available for each breakpoint.
     @for $i from 1 through $columns + 1 {
       .#{$prefix}--#{$name}\:col-start-#{$i} {
         grid-column-start: $i;
-      }
-
-      .#{$prefix}--#{$name}\:col-end-#{$i} {
-        grid-column-end: $i;
       }
     }
 
@@ -413,7 +406,11 @@ $carbon--aspect-ratios: (
     $height: nth($aspect-ratio, 2);
 
     .#{$prefix}--aspect-ratio--#{$width}x#{$height}::before {
-      padding-top: percentage(math.div($height, $width));
+      @if meta.function-exists('div', 'math') {
+        padding-top: percentage(math.div($height, $width));
+      } @else {
+        padding-top: percentage(($height / $width));
+      }
     }
   }
 }

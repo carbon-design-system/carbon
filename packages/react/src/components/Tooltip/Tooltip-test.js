@@ -6,22 +6,26 @@
  */
 
 import React, { Component } from 'react';
-import debounce from 'lodash.debounce';
+import debounce from 'lodash.debounce'; // eslint-disable-line no-unused-vars
 import FloatingMenu from '../../internal/FloatingMenu';
 import Tooltip from '../Tooltip';
 import { mount } from 'enzyme';
+import { screen, render } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import {
   Information16 as Information,
   Add16 as Add,
   OverflowMenuVertical16,
 } from '@carbon/icons-react';
 import { settings } from 'carbon-components';
+import '@testing-library/jest-dom';
 
 const { prefix } = settings;
 
-jest.mock('lodash.debounce');
-
-debounce.mockImplementation((fn) => fn);
+jest.mock('lodash.debounce', () => (fn) => {
+  fn.cancel = jest.fn();
+  return fn;
+});
 
 describe('Tooltip', () => {
   // An icon component class
@@ -190,5 +194,22 @@ describe('Tooltip', () => {
       // Enzyme doesn't seem to allow state() in a forwardRef-wrapped class component
       expect(rootWrapper.find('Tooltip').instance().state.open).toEqual(false);
     });
+  });
+
+  it('escape key keyDown should not bubble outside the tooltip', () => {
+    const onKeyDown = jest.fn();
+    render(
+      <>
+        {/* eslint-disable-next-line jsx-a11y/no-static-element-interactions */}
+        <div onKeyDown={onKeyDown}>
+          <Tooltip triggerText="Tooltip" />
+        </div>
+      </>
+    );
+
+    userEvent.click(screen.getAllByRole('button')[0]);
+    userEvent.keyboard('{esc}');
+
+    expect(onKeyDown).not.toHaveBeenCalled();
   });
 });
