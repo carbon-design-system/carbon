@@ -80,7 +80,10 @@ export default class Modal extends Component {
     /**
      * Provide a description for "close" icon that can be read by screen readers
      */
-    iconDescription: PropTypes.string,
+    iconDescription: deprecate(
+      PropTypes.string,
+      'The iconDescription prop is no longer needed and can be safely removed. This prop will be removed in the next major release of Carbon.'
+    ),
 
     /**
      * Specify the DOM element ID of the top-level node.
@@ -220,7 +223,6 @@ export default class Modal extends Component {
     primaryButtonDisabled: false,
     onKeyDown: () => {},
     passiveModal: false,
-    iconDescription: 'Close',
     modalHeading: '',
     modalLabel: '',
     preventCloseOnClickOutside: false,
@@ -417,11 +419,13 @@ export default class Modal extends Component {
         className={this.modalCloseButtonClass}
         type="button"
         onClick={onRequestClose}
-        title={iconDescription}
-        aria-label={iconDescription}
+        title={ariaLabel ? ariaLabel : iconDescription}
+        aria-label={ariaLabel ? ariaLabel : iconDescription}
         ref={this.button}>
         <Close20
-          aria-label={iconDescription}
+          aria-hidden="true"
+          aria-label="close"
+          tabIndex="-1"
           className={`${this.modalCloseButtonClass}__icon`}
         />
       </button>
@@ -450,32 +454,6 @@ export default class Modal extends Component {
       alertDialogProps.role = 'alertdialog';
       alertDialogProps['aria-describedby'] = this.modalBodyId;
     }
-
-    const SecondaryButtonSet = () => {
-      if (Array.isArray(secondaryButtons) && secondaryButtons.length <= 2) {
-        return secondaryButtons.map(
-          ({ buttonText, onClick: onButtonClick }, i) => (
-            <Button
-              key={`${buttonText}-${i}`}
-              kind="secondary"
-              onClick={onButtonClick}>
-              {buttonText}
-            </Button>
-          )
-        );
-      }
-      if (secondaryButtonText) {
-        return (
-          <Button
-            kind="secondary"
-            onClick={onSecondaryButtonClick}
-            ref={this.secondaryButton}>
-            {secondaryButtonText}
-          </Button>
-        );
-      }
-      return null;
-    };
 
     const modalBody = (
       <div
@@ -514,7 +492,25 @@ export default class Modal extends Component {
         )}
         {!passiveModal && (
           <ButtonSet className={footerClasses}>
-            <SecondaryButtonSet />
+            {Array.isArray(secondaryButtons) && secondaryButtons.length <= 2
+              ? secondaryButtons.map(
+                  ({ buttonText, onClick: onButtonClick }, i) => (
+                    <Button
+                      key={`${buttonText}-${i}`}
+                      kind="secondary"
+                      onClick={onButtonClick}>
+                      {buttonText}
+                    </Button>
+                  )
+                )
+              : secondaryButtonText && (
+                  <Button
+                    kind="secondary"
+                    onClick={onSecondaryButtonClick}
+                    ref={this.secondaryButton}>
+                    {secondaryButtonText}
+                  </Button>
+                )}
             <Button
               kind={danger ? 'danger' : 'primary'}
               disabled={primaryButtonDisabled}

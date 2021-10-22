@@ -33,8 +33,11 @@
     height: auto;
     min-height: rem(48px);
     flex-wrap: wrap;
-    margin-top: $carbon--spacing-05;
-    margin-bottom: $carbon--spacing-05;
+    @if not feature-flag-enabled('enable-v11-release') {
+      margin-top: $carbon--spacing-05;
+      margin-bottom: $carbon--spacing-05;
+    }
+
     color: $inverse-01;
 
     @include carbon--breakpoint(md) {

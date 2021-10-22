@@ -322,6 +322,7 @@ Map {
     "defaultProps": Object {
       "indeterminate": false,
       "onChange": [Function],
+      "onClick": [Function],
     },
     "displayName": "Checkbox",
     "propTypes": Object {
@@ -352,6 +353,9 @@ Map {
         "type": "node",
       },
       "onChange": Object {
+        "type": "func",
+      },
+      "onClick": Object {
         "type": "func",
       },
       "title": Object {
@@ -1212,21 +1216,46 @@ Map {
     },
     "TableExpandHeader": Object {
       "propTypes": Object {
-        "ariaLabel": [Function],
+        "ariaLabel": Object {
+          "args": Array [
+            Array [
+              [Function],
+              [Function],
+            ],
+          ],
+          "type": "oneOfType",
+        },
         "children": Object {
           "type": "node",
         },
         "className": Object {
           "type": "string",
         },
-        "enableExpando": Object {
+        "enableExpando": [Function],
+        "enableToggle": Object {
           "type": "bool",
         },
         "expandIconDescription": Object {
           "type": "string",
         },
-        "isExpanded": [Function],
-        "onExpand": [Function],
+        "isExpanded": Object {
+          "args": Array [
+            Array [
+              [Function],
+              [Function],
+            ],
+          ],
+          "type": "oneOfType",
+        },
+        "onExpand": Object {
+          "args": Array [
+            Array [
+              [Function],
+              [Function],
+            ],
+          ],
+          "type": "oneOfType",
+        },
       },
     },
     "TableExpandRow": Object {
@@ -1502,6 +1531,7 @@ Map {
     },
     "TableToolbarSearch": Object {
       "defaultProps": Object {
+        "onClear": [Function],
         "persistent": false,
         "tabIndex": "0",
         "translateWithId": [Function],
@@ -1532,6 +1562,9 @@ Map {
           "type": "string",
         },
         "onChange": Object {
+          "type": "func",
+        },
+        "onClear": Object {
           "type": "func",
         },
         "onExpand": Object {
@@ -1852,21 +1885,46 @@ Map {
   },
   "TableExpandHeader" => Object {
     "propTypes": Object {
-      "ariaLabel": [Function],
+      "ariaLabel": Object {
+        "args": Array [
+          Array [
+            [Function],
+            [Function],
+          ],
+        ],
+        "type": "oneOfType",
+      },
       "children": Object {
         "type": "node",
       },
       "className": Object {
         "type": "string",
       },
-      "enableExpando": Object {
+      "enableExpando": [Function],
+      "enableToggle": Object {
         "type": "bool",
       },
       "expandIconDescription": Object {
         "type": "string",
       },
-      "isExpanded": [Function],
-      "onExpand": [Function],
+      "isExpanded": Object {
+        "args": Array [
+          Array [
+            [Function],
+            [Function],
+          ],
+        ],
+        "type": "oneOfType",
+      },
+      "onExpand": Object {
+        "args": Array [
+          Array [
+            [Function],
+            [Function],
+          ],
+        ],
+        "type": "oneOfType",
+      },
     },
   },
   "TableExpandRow" => Object {
@@ -2107,6 +2165,7 @@ Map {
   },
   "TableToolbarSearch" => Object {
     "defaultProps": Object {
+      "onClear": [Function],
       "persistent": false,
       "tabIndex": "0",
       "translateWithId": [Function],
@@ -2137,6 +2196,9 @@ Map {
         "type": "string",
       },
       "onChange": Object {
+        "type": "func",
+      },
+      "onClear": Object {
         "type": "func",
       },
       "onExpand": Object {
@@ -2845,9 +2907,6 @@ Map {
       "labelText": Object {
         "type": "node",
       },
-      "listFiles": Object {
-        "type": "bool",
-      },
       "multiple": Object {
         "type": "bool",
       },
@@ -3183,6 +3242,9 @@ Map {
           },
         ],
         "type": "shape",
+      },
+      "hideLabel": Object {
+        "type": "bool",
       },
       "id": Object {
         "isRequired": true,
@@ -3746,7 +3808,6 @@ Map {
   "Modal" => Object {
     "defaultProps": Object {
       "hasScrollingContent": false,
-      "iconDescription": "Close",
       "modalHeading": "",
       "modalLabel": "",
       "onKeyDown": [Function],
@@ -3776,9 +3837,7 @@ Map {
       "hasScrollingContent": Object {
         "type": "bool",
       },
-      "iconDescription": Object {
-        "type": "string",
-      },
+      "iconDescription": [Function],
       "id": Object {
         "type": "string",
       },
@@ -4147,6 +4206,9 @@ Map {
           ],
           "type": "shape",
         },
+        "hideLabel": Object {
+          "type": "bool",
+        },
         "id": Object {
           "isRequired": true,
           "type": "string",
@@ -4390,6 +4452,9 @@ Map {
           },
         ],
         "type": "shape",
+      },
+      "hideLabel": Object {
+        "type": "bool",
       },
       "id": Object {
         "isRequired": true,
@@ -5264,6 +5329,7 @@ Map {
     "defaultProps": Object {
       "closeButtonLabelText": "Clear search input",
       "onChange": [Function],
+      "onClear": [Function],
       "placeholder": "",
       "type": "text",
     },
@@ -5301,6 +5367,9 @@ Map {
         "type": "bool",
       },
       "onChange": Object {
+        "type": "func",
+      },
+      "onClear": Object {
         "type": "func",
       },
       "onKeyDown": Object {
@@ -5432,6 +5501,9 @@ Map {
         "type": "bool",
       },
       "onChange": Object {
+        "type": "func",
+      },
+      "onClear": Object {
         "type": "func",
       },
       "onKeyDown": Object {
@@ -5829,7 +5901,6 @@ Map {
       "label": "provide a label",
       "onClick": [Function],
       "onKeyDown": [Function],
-      "role": "presentation",
       "selected": false,
     },
     "propTypes": Object {
@@ -5870,10 +5941,7 @@ Map {
       "renderContent": Object {
         "type": "func",
       },
-      "role": Object {
-        "isRequired": true,
-        "type": "string",
-      },
+      "role": [Function],
       "selected": Object {
         "isRequired": true,
         "type": "bool",

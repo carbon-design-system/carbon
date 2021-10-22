@@ -19,6 +19,7 @@
 // compatibility file to ensure we continue to support node-sass and dart-sass
 // in v10.
 
+@use "sass:meta";
 @use "sass:math";
 @import '@carbon/layout/scss/breakpoint'; /* stylelint-disable-line no-invalid-position-at-import-rule */
 @import 'font-family'; /* stylelint-disable-line no-invalid-position-at-import-rule */
@@ -582,7 +583,11 @@ $tokens: (
 /// @access public
 /// @group @carbon/type
 @function strip-unit($value) {
-  @return math.div($value, $value * 0 + 1);
+  @if meta.function-exists('div', 'math') {
+    @return math.div($value, $value * 0 + 1);
+  } @else {
+    @return $value / ($value * 0 + 1);
+  }
 }
 
 /// This helper includes fluid type styles for the given token value. Fluid type
