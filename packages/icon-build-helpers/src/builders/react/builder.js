@@ -161,6 +161,17 @@ const didWarnAboutDeprecation = {};`;
     };
 
     await bundle.write(outputOptions);
+
+    const delDirs = fs
+      .readdirSync(directory, { withFileTypes: true })
+      .filter(
+        (dirent) => dirent.isDirectory() && dirent.name !== '__generated__'
+      )
+      .map((dirent) => dirent.name);
+
+    delDirs.forEach((d) => {
+      fs.rmSync(path.join(directory, d), { recursive: true, force: true });
+    });
   }
 
   const umd = await rollup({
