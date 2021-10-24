@@ -32,6 +32,7 @@ function CodeSnippet({
   feedbackTimeout,
   onClick,
   ariaLabel,
+  copyText,
   copyLabel, //TODO: Merge this prop to `ariaLabel` in `v11`
   copyButtonDescription,
   light,
@@ -147,8 +148,8 @@ function CodeSnippet({
   }, [handleScroll]);
 
   const handleCopyClick = (evt) => {
-    if (innerCodeRef?.current) {
-      copy(innerCodeRef.current.textContent);
+    if (copyText || innerCodeRef?.current) {
+      copy(copyText ?? innerCodeRef?.current?.textContent);
     }
 
     if (onClick) {
@@ -303,6 +304,12 @@ CodeSnippet.propTypes = {
    * node
    */
   copyLabel: PropTypes.string,
+
+  /**
+   * Optional text to copy. If not specified, the `children` node's `textContent`
+   * will be used as the copy value.
+   */
+  copyText: PropTypes.string,
 
   /**
    * Specify whether or not the CodeSnippet should be disabled
