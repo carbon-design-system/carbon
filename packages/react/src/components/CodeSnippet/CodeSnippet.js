@@ -287,7 +287,7 @@ CodeSnippet.propTypes = {
   /**
    * Provide the content of your CodeSnippet as a node or string
    */
-  children: PropTypes.oneOf([PropTypes.node, PropTypes.string]),
+  children: PropTypes.node,
 
   /**
    * Specify an optional className to be applied to the container node
