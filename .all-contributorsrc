@@ -820,6 +820,15 @@
       "contributions": [
         "code"
       ]
+    },
+    {
+      "login": "imp-dance",
+      "name": "Håkon",
+      "avatar_url": "https://avatars.githubusercontent.com/u/1190770?v=4",
+      "profile": "https://haakon.dev/",
+      "contributions": [
+        "code"
+      ]
     }
   ],
   "commitConvention": "none"
