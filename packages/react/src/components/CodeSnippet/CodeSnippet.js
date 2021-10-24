@@ -50,6 +50,7 @@ function CodeSnippet({
   const { current: uid } = useRef(getUniqueId());
   const codeContentRef = useRef();
   const codeContainerRef = useRef();
+  const innerCodeRef = useRef();
   const [hasLeftOverflow, setHasLeftOverflow] = useState(false);
   const [hasRightOverflow, setHasRightOverflow] = useState(false);
   const getCodeRef = useCallback(() => {
@@ -146,7 +147,9 @@ function CodeSnippet({
   }, [handleScroll]);
 
   const handleCopyClick = (evt) => {
-    copy(children);
+    if (innerCodeRef?.current) {
+      copy(innerCodeRef.current.textContent);
+    }
 
     if (onClick) {
       onClick(evt);
@@ -168,7 +171,9 @@ function CodeSnippet({
     if (hideCopyButton) {
       return (
         <span className={codeSnippetClasses}>
-          <code id={uid}>{children}</code>
+          <code id={uid} ref={innerCodeRef}>
+            {children}
+          </code>
         </span>
       );
     }
@@ -182,7 +187,9 @@ function CodeSnippet({
         className={codeSnippetClasses}
         feedback={feedback}
         feedbackTimeout={feedbackTimeout}>
-        <code id={uid}>{children}</code>
+        <code id={uid} ref={innerCodeRef}>
+          {children}
+        </code>
       </Copy>
     );
   }
@@ -225,7 +232,7 @@ function CodeSnippet({
         <pre
           ref={codeContentRef}
           onScroll={(type === 'multi' && handleScroll) || null}>
-          <code>{children}</code>
+          <code ref={innerCodeRef}>{children}</code>
         </pre>
       </div>
       {/**
@@ -277,9 +284,9 @@ CodeSnippet.propTypes = {
   ariaLabel: PropTypes.string,
 
   /**
-   * Provide the content of your CodeSnippet as a string
+   * Provide the content of your CodeSnippet as a node or string
    */
-  children: PropTypes.string,
+  children: PropTypes.oneOf([PropTypes.node, PropTypes.string]),
 
   /**
    * Specify an optional className to be applied to the container node
