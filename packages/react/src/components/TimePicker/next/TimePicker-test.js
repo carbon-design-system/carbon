@@ -24,7 +24,7 @@ describe('TimePicker', () => {
     });
 
     it('should set type as expected', () => {
-      render(<TimePicker id="time-picker"></TimePicker>);
+      render(<TimePicker id="time-picker" />);
       expect(screen.getByRole('textbox')).toHaveAttribute('type', 'text');
     });
 
