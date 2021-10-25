@@ -395,7 +395,7 @@ $copy-btn-feedback: $background-inverse !default;
   .#{$prefix}--snippet--light
     .#{$prefix}--btn.#{$prefix}--snippet-btn--expand:hover,
   .#{$prefix}--snippet--light .#{$prefix}--copy-btn:hover {
-    background-color: $hover-light-ui;
+    background-color: $layer-hover-02;
   }
 
   .#{$prefix}--snippet--light.#{$prefix}--snippet--inline:active,
@@ -403,7 +403,7 @@ $copy-btn-feedback: $background-inverse !default;
   .#{$prefix}--snippet--light
     .#{$prefix}--btn.#{$prefix}--snippet-btn--expand:active,
   .#{$prefix}--snippet--light .#{$prefix}--copy-btn:active {
-    background-color: $active-light-ui;
+    background-color: $layer-active-02;
   }
 
   .#{$prefix}--snippet--light.#{$prefix}--snippet--single::after,
