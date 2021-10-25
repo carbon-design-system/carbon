@@ -29,7 +29,7 @@ describe('TimePicker', () => {
     });
 
     it('should set value as expected', () => {
-      render(<TimePicker id="time-picker" value="🐶"></TimePicker>);
+      render(<TimePicker id="time-picker" value="🐶" />);
       expect(screen.getByRole('textbox')).toHaveAttribute('value', '🐶');
     });
 
