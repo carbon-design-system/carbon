@@ -10,7 +10,6 @@ import { default as TimePicker } from './TimePicker';
 
 import { render, cleanup, screen, fireEvent } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import '@testing-library/jest-dom';
 
 describe('TimePicker', () => {
   describe('input', () => {
