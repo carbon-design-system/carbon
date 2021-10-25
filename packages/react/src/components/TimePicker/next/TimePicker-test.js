@@ -59,6 +59,7 @@ describe('TimePicker', () => {
       expect(screen.getByLabelText('🐳')).toBeInTheDocument();
     });
   });
+
   describe('events', () => {
     it('should write text inside the textbox', () => {
       render(<TimePicker id="time-picker"></TimePicker>);
