@@ -10348,6 +10348,7 @@ __metadata:
     cypress: ^8.1.0
     cypress-real-events: ^1.5.1
     downshift: 5.2.1
+    fast-glob: ^3.2.7
     fast-sass-loader: ^1.5.0
     flatpickr: 4.6.9
     gzip-size: ^6.0.0

@@ -14,10 +14,10 @@ import {
 } from '@carbon/icons-react';
 import { withKnobs, boolean, select } from '@storybook/addon-knobs';
 import React from 'react';
-import { Popover, PopoverContent } from '../Popover';
-import Button from '../Button';
+import { Popover, PopoverContent } from '../../Popover';
+import Button from '../../Button';
 import mdx from './Popover.mdx';
-import { useOutsideClick } from '../../internal/useOutsideClick';
+import { useOutsideClick } from '../../../internal/useOutsideClick';
 
 export default {
   title: 'Experimental/unstable_Popover',
