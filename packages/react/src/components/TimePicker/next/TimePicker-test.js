@@ -43,7 +43,7 @@ describe('TimePicker', () => {
     });
 
     it('should set placeholder as expected', () => {
-      render(<TimePicker id="time-picker" placeholder="🧸"></TimePicker>);
+      render(<TimePicker id="time-picker" placeholder="🧸" />);
       expect(screen.getByPlaceholderText('🧸')).toBeInTheDocument();
     });
   });
