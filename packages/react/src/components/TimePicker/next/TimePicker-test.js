@@ -8,12 +8,11 @@
 import React from 'react';
 import { default as TimePicker } from './TimePicker';
 
-import { render, cleanup, screen, fireEvent } from '@testing-library/react';
+import { render, screen, fireEvent } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
 describe('TimePicker', () => {
   describe('input', () => {
-
     it('renders as expected', () => {
       render(<TimePicker id="time-picker" />);
       expect(screen.getByRole('textbox')).toBeInTheDocument();
@@ -49,7 +48,6 @@ describe('TimePicker', () => {
     });
   });
   describe('label', () => {
-
     it('does not render a label by default', () => {
       render(<TimePicker id="time-picker"></TimePicker>);
       expect(screen.queryByLabelText('🐳')).not.toBeInTheDocument();
