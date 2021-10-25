@@ -42,7 +42,7 @@ export default class TimePickerSelect extends Component {
     disabled: PropTypes.bool,
 
     /**
-     * hideLable has been deprecated in v10 and will be removed in v11.
+     * hideLabel has been deprecated in v10 and will be removed in v11.
      */
     hideLabel: deprecate(
       PropTypes.bool,
