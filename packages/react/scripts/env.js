@@ -14,7 +14,10 @@ const docgenConfig = {
 };
 
 module.exports = () => ({
-  plugins: BABEL_ENV === 'es' ? ['@babel/plugin-transform-runtime'] : undefined,
+  plugins:
+    BABEL_ENV === 'es' || BABEL_ENV === 'cjs'
+      ? ['@babel/plugin-transform-runtime']
+      : undefined,
   presets: [
     [
       require.resolve('@babel/preset-env'),
