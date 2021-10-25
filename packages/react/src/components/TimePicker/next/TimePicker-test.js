@@ -62,7 +62,7 @@ describe('TimePicker', () => {
 
   describe('events', () => {
     it('should write text inside the textbox', () => {
-      render(<TimePicker id="time-picker"></TimePicker>);
+      render(<TimePicker id="time-picker" />);
       userEvent.type(screen.getByRole('textbox'), '🧛');
       expect(screen.getByRole('textbox')).toHaveValue('🧛');
     });
