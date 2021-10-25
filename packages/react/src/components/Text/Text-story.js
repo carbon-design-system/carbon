@@ -10,6 +10,11 @@ import { LayoutDirection } from '../Layout';
 import { TextDirection, Text } from '../Text';
 import RadioButtonGroup from '../RadioButtonGroup';
 import RadioButton from '../RadioButton';
+import Button from '../Button';
+import Dropdown from '../Dropdown';
+import ContentSwitcher from '../ContentSwitcher';
+import Switch from '../Switch';
+import { Heading } from '../Heading';
 
 export default {
   title: 'Experimental/unstable_Text',
@@ -86,5 +91,46 @@ export const SetTextDirection = () => {
         />
       </RadioButtonGroup>
     </TextDirection>
+  );
+};
+
+export const ComponentExamples = () => {
+  const rtlText = 'שלום!!';
+  const dropdownItems = [
+    {
+      id: 'option-0',
+      text: 'Lorem, ipsum dolor sit amet consectetur adipisicing elit.',
+    },
+    {
+      id: 'option-1',
+      text: rtlText,
+    },
+  ];
+  return (
+    <>
+      <Heading>{rtlText}</Heading>
+      <Button kind="ghost">
+        <Text>{rtlText}</Text>
+      </Button>
+      <div style={{ width: 400 }}>
+        <Dropdown
+          id="default"
+          titleText="Using <Text> with `itemToElement`"
+          helperText="This is some helper text"
+          label="Dropdown menu options"
+          items={dropdownItems}
+          itemToElement={(item) => <Text>{item.text}</Text>}
+        />
+      </div>
+      <ContentSwitcher
+        helperText="Using <Text> within <Switch>"
+        onChange={() => {}}>
+        <Switch name="one">
+          <Text>{rtlText}</Text>
+        </Switch>
+        <Switch name="two" text="Second section" />
+        <Switch name="three" text="Third section" />
+      </ContentSwitcher>
+    </>
   );
 };
