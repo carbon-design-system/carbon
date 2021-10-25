@@ -36,7 +36,7 @@ describe('TimePicker', () => {
     it('should set disabled as expected', () => {
       const onClick = jest.fn();
       render(
-        <TimePicker id="time-picker" onClick={onClick} disabled></TimePicker>
+        <TimePicker id="time-picker" onClick={onClick} disabled />
       );
       fireEvent.click(screen.getByRole('textbox'));
       expect(onClick).not.toHaveBeenCalled();
