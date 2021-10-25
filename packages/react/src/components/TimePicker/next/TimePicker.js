@@ -45,42 +45,35 @@ const TimePicker = React.forwardRef(function TimePicker(
     setPrevValue(value);
   }
 
-  const timePickerInputProps = {
-    className: cx(
-      `${prefix}--time-picker__input-field`,
-      `${prefix}--text-input`,
-      [className],
-      {
-        [`${prefix}--text-input--light`]: light,
-      }
-    ),
+  function handleOnClick(evt) {
+    if (!disabled) {
+      setValue(isValue);
+      onClick(evt);
+    }
+  }
 
-    onChange: (evt) => {
-      if (!disabled) {
-        setValue(isValue);
-        onChange(evt);
-      }
-    },
-    onClick: (evt) => {
-      if (!disabled) {
-        setValue(isValue);
-        onClick(evt);
-      }
-    },
-    onBlur: (event) => {
-      if (!disabled) {
-        setValue(isValue);
-        onBlur(event);
-      }
-    },
-    pattern,
-    placeholder,
-    maxLength,
-    id,
-    type,
-    disabled,
-    value,
-  };
+  function handleOnChange(evt) {
+    if (!disabled) {
+      setValue(isValue);
+      onChange(evt);
+    }
+  }
+
+  function handleOnBlur(evt) {
+    if (!disabled) {
+      setValue(isValue);
+      onBlur(evt);
+    }
+  }
+
+  const timePickerInputClasses = cx(
+    `${prefix}--time-picker__input-field`,
+    `${prefix}--text-input`,
+    [className],
+    {
+      [`${prefix}--text-input--light`]: light,
+    }
+  );
 
   const timePickerClasses = cx({
     [`${prefix}--time-picker`]: true,
@@ -106,13 +99,24 @@ const TimePicker = React.forwardRef(function TimePicker(
   ) : null;
 
   return (
-    <div className={cx(`${prefix}--form-item`, className)} ref={ref}>
+    <div className={cx(`${prefix}--form-item`, className)}>
       {label}
       <div className={timePickerClasses}>
         <div className={`${prefix}--time-picker__input`}>
           <input
+            className={timePickerInputClasses}
             data-invalid={invalid ? invalid : undefined}
-            {...timePickerInputProps}
+            disabled={disabled}
+            id={id}
+            maxLength={maxLength}
+            onClick={handleOnClick}
+            onChange={handleOnChange}
+            onBlur={handleOnBlur}
+            placeholder={placeholder}
+            pattern={pattern}
+            ref={ref}
+            type={type}
+            value={value}
             {...rest}
           />
         </div>
