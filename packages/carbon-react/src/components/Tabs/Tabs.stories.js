@@ -7,10 +7,18 @@
 
 import React from 'react';
 import { Button, Tab, Tabs, TabsSkeleton } from '../Tabs';
+import { unstable_FeatureFlags as FeatureFlags } from 'carbon-components-react';
 import { Layer } from '../Layer';
 
 export default {
   title: 'Components/Tabs',
+  decorators: [
+    (Story) => (
+      <FeatureFlags flags={{ 'enable-v11-release': true }}>
+        <Story />
+      </FeatureFlags>
+    ),
+  ],
   parameters: {
     component: Tabs,
     subcomponents: {

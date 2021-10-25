@@ -181,7 +181,11 @@ const Dropdown = React.forwardRef(function Dropdown(
         <ListBox.Menu {...getMenuProps()}>
           {isOpen &&
             items.map((item, index) => {
-              const itemProps = getItemProps({ item, index });
+              const itemProps = getItemProps({
+                item,
+                index,
+                disabled: item.disabled,
+              });
               const title = itemToElement ? item.text : itemToString(item);
               const { offsetWidth, scrollWidth } =
                 menuItemOptionRefs?.current[index]?.current || {};
