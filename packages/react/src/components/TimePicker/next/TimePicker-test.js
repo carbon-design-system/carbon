@@ -47,6 +47,7 @@ describe('TimePicker', () => {
       expect(screen.getByPlaceholderText('🧸')).toBeInTheDocument();
     });
   });
+
   describe('label', () => {
     it('does not render a label by default', () => {
       render(<TimePicker id="time-picker"></TimePicker>);
