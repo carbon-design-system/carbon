@@ -55,7 +55,7 @@ describe('TimePicker', () => {
     });
 
     it('renders a label as expected', () => {
-      render(<TimePicker id="time-picker" labelText="🐳"></TimePicker>);
+      render(<TimePicker id="time-picker" labelText="🐳" />);
       expect(screen.getByLabelText('🐳')).toBeInTheDocument();
     });
   });
