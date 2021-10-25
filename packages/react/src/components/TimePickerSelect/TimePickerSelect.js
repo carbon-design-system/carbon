@@ -56,7 +56,7 @@ export default class TimePickerSelect extends Component {
     iconDescription: deprecate(
       PropTypes.string,
       'The `iconDescription` prop for `TimePickerSelect` is no longer needed and has ' +
-        'been deprecated. It will be removed in the next major release.'
+        'been deprecated. It will be removed in the next major release. Use `ariaLabel` instead.'
     ),
 
     /**
