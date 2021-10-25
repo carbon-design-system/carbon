@@ -19,7 +19,7 @@ describe('TimePicker', () => {
     });
 
     it('passes classNames as expected', () => {
-      render(<TimePicker id="time-picker" className="🚀"></TimePicker>);
+      render(<TimePicker id="time-picker" className="🚀" />);
       expect(screen.getByRole('textbox')).toHaveClass('🚀');
     });
 
