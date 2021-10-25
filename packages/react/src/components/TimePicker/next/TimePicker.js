@@ -57,24 +57,18 @@ const TimePicker = React.forwardRef(function TimePicker(
 
     onChange: (evt) => {
       if (!disabled) {
-        // https://github.com/carbon-design-system/carbon/issues/9535
-        evt.persist();
         setValue(isValue);
         onChange(evt);
       }
     },
     onClick: (evt) => {
       if (!disabled) {
-        // https://github.com/carbon-design-system/carbon/issues/9535
-        evt.persist();
         setValue(isValue);
         onClick(evt);
       }
     },
     onBlur: (event) => {
       if (!disabled) {
-        // https://github.com/carbon-design-system/carbon/issues/9535
-        event.persist();
         setValue(isValue);
         onBlur(event);
       }
