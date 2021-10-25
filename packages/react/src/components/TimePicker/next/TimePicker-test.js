@@ -35,9 +35,7 @@ describe('TimePicker', () => {
 
     it('should set disabled as expected', () => {
       const onClick = jest.fn();
-      render(
-        <TimePicker id="time-picker" onClick={onClick} disabled />
-      );
+      render(<TimePicker id="time-picker" onClick={onClick} disabled />);
       fireEvent.click(screen.getByRole('textbox'));
       expect(onClick).not.toHaveBeenCalled();
     });
@@ -68,22 +66,3 @@ describe('TimePicker', () => {
     });
   });
 });
-
-//// Old tests to possibly migrate
-//
-// Time Picker
-//
-// label
-// - has the expected classes
-// - should set label as expected
-// events
-// - disabled time picker
-// - should not invoke onClick
-// - should not invoke onChange
-// enabled textinput
-// - should invoke onBlur when input is clicked
-// - should invoke onClick when input is clicked
-// - should invoke onChange when input value is changed
-// Getting derived state from props
-// - should change the value upon change in props
-// - should avoid change the value upon setting props, unless there the value actually changes
