@@ -49,7 +49,6 @@ describe('TimePicker', () => {
     });
   });
   describe('label', () => {
-    afterEach(cleanup);
 
     it('does not render a label by default', () => {
       render(<TimePicker id="time-picker"></TimePicker>);
