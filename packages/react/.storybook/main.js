@@ -7,6 +7,7 @@
 
 'use strict';
 
+const glob = require('fast-glob');
 const path = require('path');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const customProperties = require('postcss-custom-properties');
@@ -36,12 +37,17 @@ module.exports = {
     require.resolve('./addon-theme/register'),
   ],
 
-  stories: [
-    './Welcome/Welcome.stories.js',
-    '../src/**/*-story.js',
-    '../src/**/*.stories.mdx',
-    '!../src/components/Stack',
-  ],
+  stories: glob.sync(
+    [
+      './Welcome/Welcome.stories.js',
+      '../src/**/*-story.js',
+      '../src/**/*.stories.mdx',
+    ],
+    {
+      cwd: __dirname,
+      ignore: ['../**/next/**'],
+    }
+  ),
 
   webpack(config) {
     const babelLoader = config.module.rules.find((rule) => {
