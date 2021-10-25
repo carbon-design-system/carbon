@@ -81,7 +81,7 @@ export default class TimePickerSelect extends Component {
       children,
       className,
       disabled,
-      hideLabel,
+      hideLabel = true,
       id,
       iconDescription,
       labelText,
