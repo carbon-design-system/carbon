@@ -13,7 +13,6 @@ import userEvent from '@testing-library/user-event';
 
 describe('TimePicker', () => {
   describe('input', () => {
-    afterEach(cleanup);
 
     it('renders as expected', () => {
       render(<TimePicker id="time-picker"></TimePicker>);
