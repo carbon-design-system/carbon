@@ -15,7 +15,7 @@ describe('TimePicker', () => {
   describe('input', () => {
 
     it('renders as expected', () => {
-      render(<TimePicker id="time-picker"></TimePicker>);
+      render(<TimePicker id="time-picker" />);
       expect(screen.getByRole('textbox')).toBeInTheDocument();
     });
 
