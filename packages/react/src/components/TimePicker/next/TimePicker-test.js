@@ -50,7 +50,7 @@ describe('TimePicker', () => {
 
   describe('label', () => {
     it('does not render a label by default', () => {
-      render(<TimePicker id="time-picker"></TimePicker>);
+      render(<TimePicker id="time-picker" />);
       expect(screen.queryByLabelText('🐳')).not.toBeInTheDocument();
     });
 
