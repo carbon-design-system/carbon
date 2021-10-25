@@ -11,6 +11,7 @@ import {
   TimePickerSelect,
   SelectItem,
 } from 'carbon-components-react';
+import { Layer } from '../Layer';
 
 // const props = {
 //   timepicker: () => ({
@@ -75,5 +76,46 @@ export const Default = () => {
         <SelectItem value="Time zone 2" text="Time zone 2" />
       </TimePickerSelect>
     </TimePicker>
+  );
+};
+
+export const withLayer = () => {
+  return (
+    <>
+      <TimePicker id="time-picker" labelText="First layer">
+        <TimePickerSelect id="time-picker-select-1">
+          <SelectItem value="AM" text="AM" />
+          <SelectItem value="PM" text="PM" />
+        </TimePickerSelect>
+        <TimePickerSelect id="time-picker-select-2">
+          <SelectItem value="Time zone 1" text="Time zone 1" />
+          <SelectItem value="Time zone 2" text="Time zone 2" />
+        </TimePickerSelect>
+      </TimePicker>
+      <Layer>
+        <TimePicker id="time-picker" labelText="Second layer">
+          <TimePickerSelect id="time-picker-select-1">
+            <SelectItem value="AM" text="AM" />
+            <SelectItem value="PM" text="PM" />
+          </TimePickerSelect>
+          <TimePickerSelect id="time-picker-select-2">
+            <SelectItem value="Time zone 1" text="Time zone 1" />
+            <SelectItem value="Time zone 2" text="Time zone 2" />
+          </TimePickerSelect>
+        </TimePicker>
+        <Layer>
+          <TimePicker id="time-picker" labelText="Third layer">
+            <TimePickerSelect id="time-picker-select-1">
+              <SelectItem value="AM" text="AM" />
+              <SelectItem value="PM" text="PM" />
+            </TimePickerSelect>
+            <TimePickerSelect id="time-picker-select-2">
+              <SelectItem value="Time zone 1" text="Time zone 1" />
+              <SelectItem value="Time zone 2" text="Time zone 2" />
+            </TimePickerSelect>
+          </TimePicker>
+        </Layer>
+      </Layer>
+    </>
   );
 };

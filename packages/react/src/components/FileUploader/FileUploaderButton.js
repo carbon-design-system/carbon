@@ -142,12 +142,6 @@ FileUploaderButton.propTypes = {
   labelText: PropTypes.node,
 
   /**
-   * Specify whether you want the component to list the files that have been
-   * submitted to be uploaded
-   */
-  listFiles: PropTypes.bool,
-
-  /**
    * Specify if the component should accept multiple files to upload
    */
   multiple: PropTypes.bool,
