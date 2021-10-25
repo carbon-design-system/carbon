@@ -110,6 +110,7 @@
     "css-loader": "^3.4.2",
     "cypress": "^8.1.0",
     "cypress-real-events": "^1.5.1",
+    "fast-glob": "^3.2.7",
     "fast-sass-loader": "^1.5.0",
     "gzip-size": "^6.0.0",
     "lcov2badge": "^0.1.0",

@@ -45,7 +45,7 @@ describe('Tab', () => {
     });
 
     it('renders <li> with [role="presentation"]', () => {
-      expect(wrapper.props().role).toEqual('presentation');
+      expect(wrapper.find('li').prop('role')).toEqual('presentation');
     });
 
     it('renders <button> with tabindex set to 0', () => {

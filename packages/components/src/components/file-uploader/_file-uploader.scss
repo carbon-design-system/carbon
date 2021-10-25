@@ -57,7 +57,10 @@
     display: inline-block;
     width: 100%;
     max-width: rem(320px);
-    margin-bottom: $carbon--spacing-03;
+    @if not feature-flag-enabled('enable-v11-release') {
+      margin-bottom: $carbon--spacing-03;
+    }
+
     color: $link-01;
     cursor: pointer;
     outline: 2px solid transparent;

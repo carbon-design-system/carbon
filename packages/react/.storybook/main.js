@@ -7,13 +7,14 @@
 
 'use strict';
 
+const glob = require('fast-glob');
 const path = require('path');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const customProperties = require('postcss-custom-properties');
 const rtlcss = require('rtlcss');
 
 const {
-  CARBON_ENABLE_V11_RELEASE,
+  CARBON_ENABLE_V11_RELEASE = 'false',
   CARBON_REACT_STORYBOOK_USE_CUSTOM_PROPERTIES = 'false',
   CARBON_REACT_STORYBOOK_USE_RTL,
   CARBON_REACT_STORYBOOK_USE_SASS_LOADER,
@@ -36,11 +37,17 @@ module.exports = {
     require.resolve('./addon-theme/register'),
   ],
 
-  stories: [
-    './Welcome/Welcome.stories.js',
-    '../src/**/*-story.js',
-    '../src/**/*.stories.mdx',
-  ],
+  stories: glob.sync(
+    [
+      './Welcome/Welcome.stories.js',
+      '../src/**/*-story.js',
+      '../src/**/*.stories.mdx',
+    ],
+    {
+      cwd: __dirname,
+      ignore: ['../**/next/**'],
+    }
+  ),
 
   webpack(config) {
     const babelLoader = config.module.rules.find((rule) => {
@@ -69,6 +76,7 @@ module.exports = {
             $feature-flags: (
               ui-shell: true,
               enable-css-custom-properties: ${CARBON_REACT_STORYBOOK_USE_CUSTOM_PROPERTIES},
+              enable-v11-release: ${CARBON_ENABLE_V11_RELEASE},
             );
             ${content}
           `;
@@ -88,6 +96,7 @@ module.exports = {
           $feature-flags: (
             ui-shell: true,
             enable-css-custom-properties: ${CARBON_REACT_STORYBOOK_USE_CUSTOM_PROPERTIES},
+            enable-v11-release: ${CARBON_ENABLE_V11_RELEASE},
           );
         `,
         implementation: require('sass'),
