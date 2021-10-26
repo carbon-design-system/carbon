@@ -310,8 +310,8 @@ export default class ComposedModal extends Component {
   }
 }
 
-const ModalHeader = React.forwardRef(function ModalHeader(props, ref) {
-  const {
+export const ModalHeader = React.forwardRef(function ModalHeader(
+  {
     className,
     labelClassName,
     titleClassName,
@@ -325,8 +325,9 @@ const ModalHeader = React.forwardRef(function ModalHeader(props, ref) {
     buttonOnClick, // eslint-disable-line
     preventCloseOnClickOutside, // eslint-disable-line
     ...other
-  } = props;
-
+  },
+  ref
+) {
   const prefix = usePrefix();
 
   function handleCloseButtonClick(evt) {
@@ -438,8 +439,6 @@ ModalHeader.propTypes = {
    */
   titleClassName: PropTypes.string,
 };
-
-export { ModalHeader };
 
 export function ModalBody(props) {
   const {
