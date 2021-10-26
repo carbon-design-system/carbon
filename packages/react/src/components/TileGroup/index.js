@@ -5,4 +5,12 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-export default from './TileGroup';
+import * as FeatureFlags from '@carbon/feature-flags';
+import { default as TileGroupNext } from './next/TileGroup';
+import { default as TileGroupClassic } from './TileGroup';
+
+const TileGroup = FeatureFlags.enabled('enable-v11-release')
+  ? TileGroupNext
+  : TileGroupClassic;
+
+export default TileGroup;
