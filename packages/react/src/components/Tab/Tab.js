@@ -103,7 +103,7 @@ export default class Tab extends React.Component {
 
   static defaultProps = {
     role: 'presentation',
-    label: FeatureFlags.enabled('enable-v11-release') ? '' : 'provide a label',
+    label: FeatureFlags.enabled('enable-v11-release') ? undefined : 'provide a label',
     selected: false,
     onClick: () => {},
     onKeyDown: () => {},
