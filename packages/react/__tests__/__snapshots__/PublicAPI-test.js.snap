@@ -7056,7 +7056,7 @@ Map {
       "disabled": false,
     },
     "propTypes": Object {
-      "ariaLabel": Object {
+      "aria-label": Object {
         "type": "string",
       },
       "children": Object {
