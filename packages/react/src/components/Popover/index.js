@@ -14,7 +14,7 @@ const { prefix } = settings;
 
 function Popover({
   as: BaseComponent = 'div',
-  caret = true,
+  tip = true,
   className: customClassName,
   children,
   align = 'bottom',
@@ -26,7 +26,7 @@ function Popover({
 }) {
   const className = cx({
     [`${prefix}--popover`]: true,
-    [`${prefix}--popover--caret`]: caret,
+    [`${prefix}--popover-tip`]: tip,
     [`${prefix}--popover--light`]: light,
     [`${prefix}--popover--high-contrast`]: highContrast,
     [`${prefix}--popover--${align}`]: true,
@@ -71,9 +71,9 @@ Popover.propTypes = {
   as: PropTypes.oneOfType([PropTypes.string, PropTypes.elementType]),
 
   /**
-   * Specify whether a caret should be rendered
+   * Specify whether a tip should be rendered
    */
-  caret: PropTypes.bool,
+  tip: PropTypes.bool,
 
   /**
    * Provide elements to be rendered inside of the component
