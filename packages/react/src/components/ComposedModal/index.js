@@ -23,3 +23,5 @@ export const ModalHeader = FeatureFlags.enabled('enable-v11-release')
 export { ModalBody };
 
 export { ModalFooter };
+
+export default from './ComposedModal';

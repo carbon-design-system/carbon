@@ -310,24 +310,21 @@ export default class ComposedModal extends Component {
   }
 }
 
-export const ModalHeader = React.forwardRef(function ModalHeader(
-  {
-    className,
-    labelClassName,
-    titleClassName,
-    closeClassName,
-    closeIconClassName,
-    label,
-    title,
-    children,
-    iconDescription,
-    closeModal, // eslint-disable-line
-    buttonOnClick, // eslint-disable-line
-    preventCloseOnClickOutside, // eslint-disable-line
-    ...other
-  },
-  ref
-) {
+export function ModalHeader({
+  className,
+  labelClassName,
+  titleClassName,
+  closeClassName,
+  closeIconClassName,
+  label,
+  title,
+  children,
+  iconDescription,
+  closeModal, // eslint-disable-line
+  buttonOnClick, // eslint-disable-line
+  preventCloseOnClickOutside, // eslint-disable-line
+  ...other
+}) {
   const prefix = usePrefix();
 
   function handleCloseButtonClick(evt) {
@@ -373,13 +370,12 @@ export const ModalHeader = React.forwardRef(function ModalHeader(
         className={closeClass}
         title={iconDescription}
         aria-label={iconDescription}
-        ref={ref}
         type="button">
         <Close20 className={closeIconClass} />
       </button>
     </div>
   );
-});
+}
 
 ModalHeader.propTypes = {
   /**
@@ -438,6 +434,11 @@ ModalHeader.propTypes = {
    * Specify an optional className to be applied to the modal heading
    */
   titleClassName: PropTypes.string,
+};
+
+ModalHeader.defaultProps = {
+  iconDescription: 'Close',
+  buttonOnClick: () => {},
 };
 
 export function ModalBody(props) {
