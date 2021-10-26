@@ -9,6 +9,7 @@
 @use '../../config' as *;
 @use '../../compat/theme' as *;
 @use '../../utilities/box-shadow' as *;
+@use '../../utilities/custom-property';
 @use '../../utilities/high-contrast-mode' as *;
 @use '../../utilities/focus-outline' as *;
 @use '../../utilities/' as *;
