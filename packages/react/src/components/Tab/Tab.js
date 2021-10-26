@@ -45,9 +45,7 @@ export default class Tab extends React.Component {
     /**
      * The element ID for the top-level element.
      */
-    id: FeatureFlags.enabled('enable-v11-release')
-      ? PropTypes.string.isRequired
-      : PropTypes.string,
+    id: PropTypes.string,
 
     /**
      * The index of your Tab in your Tabs. Reserved for usage in Tabs
@@ -103,7 +101,9 @@ export default class Tab extends React.Component {
 
   static defaultProps = {
     role: 'presentation',
-    label: FeatureFlags.enabled('enable-v11-release') ? undefined : 'provide a label',
+    label: FeatureFlags.enabled('enable-v11-release')
+      ? undefined
+      : 'provide a label',
     selected: false,
     onClick: () => {},
     onKeyDown: () => {},
