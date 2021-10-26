@@ -15,13 +15,13 @@ describe('ModalHeader', () => {
   it('should render title if has title text', () => {
     render(<ModalHeader title="Carbon" />);
 
-    expect(screen.getAllByTitle('Carbon')).toHaveAttribute('title', 'Carbon');
+    expect(screen.getByTitle('Carbon')).toHaveAttribute('title', 'Carbon');
   });
 
   it('should label if has label text', () => {
     render(<ModalHeader label="Carbon label" />);
 
-    expect(screen.getAllByLabelText('Carbon label')).toHaveAttribute(
+    expect(screen.getByLabelText('Carbon label')).toHaveAttribute(
       'label',
       'Carbon label'
     );
