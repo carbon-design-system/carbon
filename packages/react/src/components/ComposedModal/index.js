@@ -5,5 +5,21 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-export * from './ComposedModal';
-export default from './ComposedModal';
+import * as FeatureFlags from '@carbon/feature-flags';
+import { ModalHeader as ModalHeaderNext } from './next/ComposedModal';
+import {
+  ComposedModal,
+  ModalHeader as ModalHeaderClassic,
+  ModalBody,
+  ModalFooter,
+} from './ComposedModal';
+
+export { ComposedModal };
+
+export const ModalHeader = FeatureFlags.enabled('enable-v11-release')
+  ? ModalHeaderNext
+  : ModalHeaderClassic;
+
+export { ModalBody };
+
+export { ModalFooter };
