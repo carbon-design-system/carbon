@@ -232,3 +232,8 @@ export {
 } from './components/Heading';
 export { default as unstable_ProgressBar } from './components/ProgressBar';
 export { usePrefix as unstable_usePrefix } from './internal/usePrefix';
+export {
+  HStack as unstable_HStack,
+  Stack as unstable_Stack,
+  VStack as unstable_VStack,
+} from './components/Stack';
