@@ -7694,6 +7694,7 @@ Map {
   "ToggleSkeleton" => Object {
     "defaultProps": Object {
       "aria-label": "Toggle is loading",
+      "size": "md",
     },
     "propTypes": Object {
       "aria-label": Object {
@@ -7708,6 +7709,15 @@ Map {
       },
       "labelText": Object {
         "type": "string",
+      },
+      "size": Object {
+        "args": Array [
+          Array [
+            "sm",
+            "md",
+          ],
+        ],
+        "type": "oneOf",
       },
     },
   },
