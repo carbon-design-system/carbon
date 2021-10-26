@@ -119,7 +119,6 @@ export default class TimePickerSelect extends Component {
         <ChevronDown16
           className={`${prefix}--select__arrow`}
           aria-label={ariaLabel ? ariaLabel : iconDescription}
-          aria-hidden="true"
         />
       </div>
     );
