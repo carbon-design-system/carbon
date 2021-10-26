@@ -8933,5 +8933,66 @@ Map {
     },
   },
   "unstable_usePrefix" => Object {},
+  "unstable_HStack" => Object {
+    "$$typeof": Symbol(react.forward_ref),
+    "render": [Function],
+  },
+  "unstable_Stack" => Object {
+    "$$typeof": Symbol(react.forward_ref),
+    "propTypes": Object {
+      "as": Object {
+        "type": "elementType",
+      },
+      "children": Object {
+        "type": "node",
+      },
+      "className": Object {
+        "type": "string",
+      },
+      "gap": Object {
+        "args": Array [
+          Array [
+            Object {
+              "type": "string",
+            },
+            Object {
+              "args": Array [
+                Array [
+                  1,
+                  2,
+                  3,
+                  4,
+                  5,
+                  6,
+                  7,
+                  8,
+                  9,
+                  10,
+                  11,
+                  12,
+                ],
+              ],
+              "type": "oneOf",
+            },
+          ],
+        ],
+        "type": "oneOfType",
+      },
+      "orientation": Object {
+        "args": Array [
+          Array [
+            "horizontal",
+            "vertical",
+          ],
+        ],
+        "type": "oneOf",
+      },
+    },
+    "render": [Function],
+  },
+  "unstable_VStack" => Object {
+    "$$typeof": Symbol(react.forward_ref),
+    "render": [Function],
+  },
 }
 `;
