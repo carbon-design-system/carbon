@@ -68,7 +68,6 @@ const props = {
       '[data-modal-primary-focus]'
     ),
     size: select('Size (size)', sizes, 'md'),
-    iconDescription: text('Close icon description (iconDescription)', 'Close'),
     onBlur: action('onBlur'),
     onClick: action('onClick'),
     onFocus: action('onFocus'),

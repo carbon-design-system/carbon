@@ -7,7 +7,7 @@
 
 import React from 'react';
 import { TextInput, TextInputSkeleton, FluidForm } from '.';
-
+import { Layer } from '../Layer';
 import mdx from './TextInput.mdx';
 
 export default {
@@ -51,6 +51,35 @@ export const TogglePasswordVisibility = () => {
       defaultValue="This is not a default value"
       helperText="Optional help text"
     />
+  );
+};
+
+export const withLayer = () => {
+  return (
+    <>
+      <TextInput
+        type="text"
+        labelText="First layer"
+        defaultValue="This is not a default value"
+        helperText="Optional help text"
+      />
+      <Layer>
+        <TextInput
+          type="text"
+          labelText="Second layer"
+          defaultValue="This is not a default value"
+          helperText="Optional help text"
+        />
+        <Layer>
+          <TextInput
+            type="text"
+            labelText="Third layer"
+            defaultValue="This is not a default value"
+            helperText="Optional help text"
+          />
+        </Layer>
+      </Layer>
+    </>
   );
 };
 
