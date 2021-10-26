@@ -197,7 +197,7 @@ class NumberInput extends Component {
     step: 1,
     invalid: false,
     invalidText: FeatureFlags.enabled('enable-v11-release')
-      ? ''
+      ? undefined
       : 'Provide invalidText',
     warn: false,
     warnText: '',
