@@ -19,7 +19,7 @@ export default class TimePickerSelect extends Component {
     /**
      * Provide aria-label to the <select> element
      */
-   ['aria-label']: PropTypes.string,
+    ['aria-label']: PropTypes.string,
 
     /**
      * Provide the contents of your TimePickerSelect
