@@ -7,10 +7,10 @@
 
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
+import RadioTile from '../../RadioTile';
 import React, { useState } from 'react';
-import RadioTile from '../RadioTile';
 import { usePrefix } from '../../../internal/usePrefix';
-import { warning } from '../../internal/warning';
+import { warning } from '../../../internal/warning';
 
 const getRadioTiles = ({ children, name, handleChange, selected }) => {
   const childrenArray = React.Children.toArray(children);
