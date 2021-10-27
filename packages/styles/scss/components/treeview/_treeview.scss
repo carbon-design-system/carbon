@@ -44,7 +44,7 @@
     .#{$prefix}--tree-node--disabled
       .#{$prefix}--tree-node__label:hover
       .#{$prefix}--tree-node__label__details {
-      background-color: $field-disabled-01;
+      background-color: $field-disabled;
       color: $text-disabled;
     }
 
@@ -56,7 +56,7 @@
     .#{$prefix}--tree-node--disabled
       .#{$prefix}--tree-node__label:hover
       .#{$prefix}--tree-node__icon {
-      fill: $field-disabled-02;
+      fill: $icon-disabled;
     }
 
     .#{$prefix}--tree-node--disabled,
