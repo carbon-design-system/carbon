@@ -15,7 +15,7 @@ const RadioButton = React.forwardRef(function RadioButton(
     name,
     onChange = () => {},
     value = '',
-    ...other
+    ...rest
   },
   ref
 ) {
