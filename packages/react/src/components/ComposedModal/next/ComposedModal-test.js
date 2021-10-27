@@ -6,24 +6,22 @@
  */
 
 import React from 'react';
-import { render, screen, cleanup } from '@testing-library/react';
+import { render, cleanup } from '@testing-library/react';
 import { ModalHeader } from '../ComposedModal';
 
 describe('ModalHeader', () => {
   afterEach(cleanup);
 
   it('should render title if has title text', () => {
-    render(<ModalHeader title="Carbon" />);
+    const { container } = render(<ModalHeader title="Carbon" />);
 
-    expect(screen.getByTitle('Carbon')).toHaveDisplayValue('Carbon');
+    expect(container.firstChild).toHaveDisplayValue('Carbon');
   });
 
   it('should label if has label text', () => {
-    render(<ModalHeader label="Carbon label" />);
+    const { container } = render(<ModalHeader label="Carbon label" />);
 
-    expect(screen.getByLabelText('Carbon label')).toHaveDisplayValue(
-      'Carbon Label'
-    );
+    expect(container.firstChild).toHaveDisplayValue('Carbon Label');
   });
 });
 
