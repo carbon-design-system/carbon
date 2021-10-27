@@ -13,7 +13,23 @@ import { Tooltip } from './Tooltip';
 export default {
   title: 'Experimental/unstable_Tooltip',
   component: Tooltip,
-  includeStories: [],
+  parameters: {
+    controls: {
+      hideNoControlsWarning: true,
+    },
+  },
+  argTypes: {
+    children: {
+      table: {
+        disable: true,
+      },
+    },
+    className: {
+      table: {
+        disable: true,
+      },
+    },
+  },
 };
 
 export const Default = () => {
