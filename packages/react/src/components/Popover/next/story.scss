@@ -5,7 +5,9 @@
 // LICENSE file in the root directory of this source tree.
 //
 
+@use '@carbon/styles/scss/spacing';
 @use '@carbon/styles/scss/theme';
+@use '@carbon/styles/scss/type';
 
 /// Utilities
 .flex {
@@ -60,6 +62,10 @@
   padding-top: 3rem;
 }
 
+.mt-10 {
+  padding-top: 4rem;
+}
+
 .p-3 {
   padding: 1rem;
 }
@@ -83,4 +89,24 @@
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
+}
+
+.popover-content {
+  max-width: 30ch;
+}
+
+.popover-title {
+  @include type.type-style('productive-heading-01');
+  margin-bottom: spacing.$spacing-01;
+}
+
+.popover-details {
+  @include type.type-style('body-short-01');
+}
+
+.popover-story {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
 }

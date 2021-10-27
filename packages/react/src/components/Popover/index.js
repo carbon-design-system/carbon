@@ -5,16 +5,14 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { settings } from 'carbon-components';
 import cx from 'classnames';
 import PropTypes from 'prop-types';
 import React from 'react';
-
-const { prefix } = settings;
+import { usePrefix } from '../../internal/usePrefix';
 
 function Popover({
   as: BaseComponent = 'div',
-  tip = true,
+  caret = true,
   className: customClassName,
   children,
   align = 'bottom',
@@ -24,9 +22,10 @@ function Popover({
   relative,
   ...rest
 }) {
+  const prefix = usePrefix();
   const className = cx({
     [`${prefix}--popover`]: true,
-    [`${prefix}--popover-tip`]: tip,
+    [`${prefix}--popover-caret`]: caret,
     [`${prefix}--popover--light`]: light,
     [`${prefix}--popover--high-contrast`]: highContrast,
     [`${prefix}--popover--${align}`]: true,
@@ -71,9 +70,9 @@ Popover.propTypes = {
   as: PropTypes.oneOfType([PropTypes.string, PropTypes.elementType]),
 
   /**
-   * Specify whether a tip should be rendered
+   * Specify whether a caret should be rendered
    */
-  tip: PropTypes.bool,
+  caret: PropTypes.bool,
 
   /**
    * Provide elements to be rendered inside of the component
@@ -112,6 +111,7 @@ const PopoverContent = React.forwardRef(function PopoverContent(
   { as: BaseComponent = 'div', className, children, ...rest },
   ref
 ) {
+  const prefix = usePrefix();
   return (
     <BaseComponent
       {...rest}

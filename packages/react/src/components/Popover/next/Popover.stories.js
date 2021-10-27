@@ -49,15 +49,20 @@ export default {
 };
 
 const PlaygroundStory = (props) => {
-  const { align, tip, highContrast, light, open } = props;
+  const { align, caret, highContrast, light, open } = props;
   return (
     <Popover
       align={align}
-      tip={tip}
+      caret={caret}
       highContrast={highContrast}
       light={light}
       open={open}>
-      <PopoverContent className="p-3">Sample content</PopoverContent>
+      <PopoverContent className="p-3 popover-content">
+        <p className="popover-title">Available storage</p>
+        <p className="popover-details">
+          This server has 150 GB of block storage remaining.
+        </p>
+      </PopoverContent>
     </Popover>
   );
 };
@@ -87,7 +92,7 @@ Playground.argTypes = {
       type: 'select',
     },
   },
-  tip: {
+  caret: {
     control: {
       type: 'boolean',
     },
@@ -116,7 +121,7 @@ Playground.argTypes = {
 Playground.story = {
   decorators: [
     (story) => (
-      <div className="mt-9 flex justify-center">
+      <div className="mt-10 flex justify-center">
         <div className="position-relative display-inline-block">
           <div className="playground-trigger" />
           {story()}

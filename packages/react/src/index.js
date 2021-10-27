@@ -237,3 +237,7 @@ export {
   Stack as unstable_Stack,
   VStack as unstable_VStack,
 } from './components/Stack';
+export {
+  Popover as unstable_Popover,
+  PopoverContent as unstable_PopoverContent,
+} from './components/Popover';
