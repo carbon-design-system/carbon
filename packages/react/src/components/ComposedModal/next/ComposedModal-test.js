@@ -15,13 +15,13 @@ describe('ModalHeader', () => {
   it('should render title if has title text', () => {
     const { container } = render(<ModalHeader title="Carbon" />);
 
-    expect(container.firstChild).toHaveDisplayValue('Carbon');
+    expect(container.firstChild).toHaveTextContent('Carbon');
   });
 
   it('should label if has label text', () => {
     const { container } = render(<ModalHeader label="Carbon label" />);
 
-    expect(container.firstChild).toHaveDisplayValue('Carbon Label');
+    expect(container.firstChild).toHaveTextContent('Carbon Label');
   });
 });
 
