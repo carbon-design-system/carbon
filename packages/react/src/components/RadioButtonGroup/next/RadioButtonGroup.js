@@ -30,14 +30,12 @@ const RadioButtonGroup = React.forwardRef(function RadioButtonGroup(
    * prop + state alignment - getDerivedStateFromProps
    * only update if selected prop changes
    */
-  useEffect(() => {
     if (prevValueSelected !== valueSelected) {
       setSelected(
         valueSelected !== 'undefined' ? valueSelected : defaultSelected
       );
       setPrevValueSelected(valueSelected);
     }
-  }, [valueSelected]); //eslint-disable-line react-hooks/exhaustive-deps
 
   const getRadioButtons = () => {
     const mappedChildren = React.Children.map(children, (radioButton) => {
