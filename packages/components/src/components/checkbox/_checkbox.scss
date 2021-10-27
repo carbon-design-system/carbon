@@ -18,6 +18,7 @@
 @mixin checkbox {
   // Spacing between checkboxes
   .#{$prefix}--form-item.#{$prefix}--checkbox-wrapper {
+    position: relative;
     margin-bottom: $carbon--spacing-02;
   }
 
