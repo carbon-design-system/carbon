@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import classNames from 'classnames';
+import cx from 'classnames';
 import PropTypes from 'prop-types';
 import RadioTile from '../../RadioTile';
 import React, { useState } from 'react';
@@ -73,7 +73,7 @@ const TileGroup = React.forwardRef(function TileGroup(
 
   return (
     <fieldset
-      className={classNames(`${prefix}--tile-group`, className)}
+      className={cx(`${prefix}--tile-group`, className)}
       disabled={disabled}
       ref={ref}>
       {legend ? <legend className={`${prefix}--label`}>{legend}</legend> : null}
