@@ -43,7 +43,7 @@ const RadioButton = React.forwardRef(function RadioButton(
   return (
     <div className={wrapperClasses}>
       <input
-        {...other}
+        {...rest}
         type="radio"
         className={`${prefix}--radio-button`}
         onChange={handleChange}
