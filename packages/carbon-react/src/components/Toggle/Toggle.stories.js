@@ -6,7 +6,7 @@
  */
 
 import React from 'react';
-import { Toggle } from 'carbon-components-react';
+import { Toggle, ToggleSkeleton } from 'carbon-components-react';
 
 export default {
   title: 'Components/Toggle',
@@ -35,3 +35,19 @@ export const SmallToggle = () => (
     id="toggle-2"
   />
 );
+
+export const Skeleton = () => {
+  return (
+    <>
+      <p>Medium toggle skeleton with label</p>
+      <ToggleSkeleton labelText="Toggle label" id="toggle-skeleton-id" />
+      <br />
+      <p>Small toggle skeleton with label</p>
+      <ToggleSkeleton
+        labelText="Toggle label"
+        id="toggle-skeleton-id"
+        size="sm"
+      />
+    </>
+  );
+};
