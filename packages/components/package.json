@@ -171,7 +171,7 @@
     "terser-webpack-plugin": "^2.3.2",
     "through2": "^3.0.0",
     "vinyl-named": "^1.1.0",
-    "webpack": "^4.41.5",
+    "webpack": "^5.60.0",
     "webpack-dev-middleware": "^3.7.2",
     "webpack-hot-middleware": "^2.21.0",
     "whatwg-fetch": "^3.6.2"
