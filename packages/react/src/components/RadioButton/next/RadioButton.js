@@ -23,9 +23,9 @@ const RadioButton = React.forwardRef(function RadioButton(
   const { current: uid } = useRef(getUniqueId());
   const uniqueId = id || uid;
 
-  const handleChange = (evt) => {
-    onChange(value, name, evt);
-  };
+  function handleOnChange(event) {
+    onChange(value, name, event);
+  }
 
   const innerLabelClasses = classNames({
     [`${prefix}--visually-hidden`]: hideLabel,
