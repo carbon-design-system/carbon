@@ -21,7 +21,7 @@ describe('ModalHeader', () => {
   it('should label if has label text', () => {
     const { container } = render(<ModalHeader label="Carbon label" />);
 
-    expect(container.firstChild).toHaveTextContent('Carbon Label');
+    expect(container.firstChild).toHaveTextContent('Carbon label');
   });
 });
 
