@@ -56,7 +56,9 @@ SelectItemGroup.propTypes = {
 
 SelectItemGroup.defaultProps = {
   disabled: false,
-  label: FeatureFlags.enabled('enable-v11-release') ? undefined : 'Provide label',
+  label: FeatureFlags.enabled('enable-v11-release')
+    ? undefined
+    : 'Provide label',
 };
 
 export default SelectItemGroup;
