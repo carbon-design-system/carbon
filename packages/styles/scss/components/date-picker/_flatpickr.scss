@@ -230,12 +230,12 @@
   .flatpickr-next-month.disabled svg,
   .flatpickr-prev-month.disabled svg {
     cursor: not-allowed;
-    fill: $border-inverse;
+    fill: $icon-disabled;
   }
 
   .flatpickr-next-month.disabled:hover svg,
   .flatpickr-prev-month.disabled:hover svg {
-    fill: $border-inverse;
+    fill: $icon-disabled;
   }
 
   .flatpickr-current-month {
@@ -305,7 +305,7 @@
     border-bottom: 0;
 
     &::after {
-      border-bottom: rem(4px) solid $icon-primary;
+      border-bottom: rem(4px) solid $border-subtle;
     }
   }
 
@@ -313,7 +313,7 @@
     top: rem(11px);
 
     &::after {
-      border-top: rem(4px) solid $icon-primary;
+      border-top: rem(4px) solid $border-subtle;
     }
   }
 
