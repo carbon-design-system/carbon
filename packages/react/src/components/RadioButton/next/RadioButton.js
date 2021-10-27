@@ -1,8 +1,9 @@
 import PropTypes from 'prop-types';
-import React, { useRef } from 'react';
+import React from 'react';
 import classNames from 'classnames';
 import { usePrefix } from '../../../internal/usePrefix';
-import getUniqueId from '../../../tools/uniqueId';
+import { useId } from '../../../internal/useId';
+
 import { Text } from '../../Text';
 
 const RadioButton = React.forwardRef(function RadioButton(
@@ -20,7 +21,7 @@ const RadioButton = React.forwardRef(function RadioButton(
   ref
 ) {
   const prefix = usePrefix();
-  const { current: uid } = useRef(getUniqueId());
+  const uid = useId('radio-button');
   const uniqueId = id || uid;
 
   function handleOnChange(event) {
