@@ -9,6 +9,8 @@ import React from 'react';
 import { action } from '@storybook/addon-actions';
 import { withKnobs, text, boolean, select } from '@storybook/addon-knobs';
 import Toggle from '../Toggle';
+import ToggleSkeleton from '../Toggle/Toggle.Skeleton';
+import { Text } from '../Text';
 
 const sizes = {
   'Small  (sm)': 'sm',
@@ -60,6 +62,22 @@ export const Default = () => (
     />
   </>
 );
+
+export const Skeleton = () => {
+  return (
+    <>
+      <Text as="p">Md skeleton with label</Text>
+      <ToggleSkeleton labelText="Toggle label" id="toggle-skeleton-id" />
+      <br />
+      <Text as="p">Sm skeleton with label</Text>
+      <ToggleSkeleton
+        labelText="Toggle label"
+        id="toggle-skeleton-id"
+        size="sm"
+      />
+    </>
+  );
+};
 
 export const Playground = () => (
   <Toggle
