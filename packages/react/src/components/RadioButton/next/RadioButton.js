@@ -46,7 +46,7 @@ const RadioButton = React.forwardRef(function RadioButton(
         {...rest}
         type="radio"
         className={`${prefix}--radio-button`}
-        onChange={handleChange}
+        onChange={handleOnChange}
         id={uniqueId}
         ref={ref}
       />

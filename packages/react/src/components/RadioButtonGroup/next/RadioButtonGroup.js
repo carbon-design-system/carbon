@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import classNames from 'classnames';
 import { Legend } from '../../Text';
 import { usePrefix } from '../../../internal/usePrefix';
@@ -30,34 +30,34 @@ const RadioButtonGroup = React.forwardRef(function RadioButtonGroup(
    * prop + state alignment - getDerivedStateFromProps
    * only update if selected prop changes
    */
-    if (prevValueSelected !== valueSelected) {
-      setSelected(
-        valueSelected !== 'undefined' ? valueSelected : defaultSelected
-      );
-      setPrevValueSelected(valueSelected);
-    }
+  if (prevValueSelected !== valueSelected) {
+    setSelected(
+      valueSelected !== 'undefined' ? valueSelected : defaultSelected
+    );
+    setPrevValueSelected(valueSelected);
+  }
 
-  const getRadioButtons = () => {
+  function getRadioButtons() {
     const mappedChildren = React.Children.map(children, (radioButton) => {
       const { value } = radioButton.props;
       return React.cloneElement(radioButton, {
         name: name,
         key: value,
         value: value,
-        onChange: handleChange,
+        onChange: handleOnChange,
         checked: value === selected,
       });
     });
 
     return mappedChildren;
-  };
+  }
 
-  const handleChange = (newSelection, value, evt) => {
+  function handleOnChange(newSelection, value, evt) {
     if (newSelection !== selected) {
       setSelected(newSelection);
       onChange(newSelection, name, evt);
     }
-  };
+  }
 
   const fieldsetClasses = classNames(`${prefix}--radio-button-group`, {
     [`${prefix}--radio-button-group--${orientation}`]:
