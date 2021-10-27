@@ -6,7 +6,7 @@
  */
 
 import * as FeatureFlags from '@carbon/feature-flags';
-import { ModalHeader as ModalHeaderNext } from './next/ComposedModal';
+import { ModalHeader as ModalHeaderNext } from './next/ModalHeader';
 import ComposedModal, {
   ModalHeader as ModalHeaderClassic,
   ModalBody,

@@ -7,7 +7,7 @@
 
 import React from 'react';
 import { render, cleanup } from '@testing-library/react';
-import { ModalHeader } from '../ComposedModal';
+import { ModalHeader } from './ModalHeader';
 
 describe('ModalHeader', () => {
   afterEach(cleanup);
