@@ -89,8 +89,8 @@
 
   .#{$prefix}--structured-list--selection
     .#{$prefix}--structured-list-row:hover:not(.#{$prefix}--structured-list-row--header-row):not(.#{$prefix}--structured-list-row--selected) {
-    border-bottom: 1px solid $hover-row;
-    background-color: $hover-row;
+    border-bottom: 1px solid $background-hover;
+    background-color: $background-hover;
     cursor: pointer;
   }
 
