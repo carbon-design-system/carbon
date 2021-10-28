@@ -9,7 +9,7 @@
 // Search
 //-----------------------------
 
-@use '../../compat/theme' as *;
+@use '../../theme' as *;
 @use '../../config' as *;
 @use '../../type';
 @use '../../motion' as *;
@@ -70,12 +70,12 @@
 
   .#{$prefix}--search-input[disabled] {
     border-bottom: 1px solid transparent;
-    background-color: $field-disabled;
-    color: $disabled-01;
+    background-color: $field;
+    color: $field;
     cursor: not-allowed;
 
     &::placeholder {
-      color: $disabled-01;
+      color: $field;
     }
   }
   .#{$prefix}--search--light .#{$prefix}--search-input {
@@ -160,7 +160,7 @@
       border-bottom: 1px solid $border-strong;
 
       &::before {
-        background-color: $hover-field;
+        background-color: $field-hover;
       }
     }
   }
@@ -200,7 +200,7 @@
     visibility: inherit;
 
     &:hover {
-      background-color: $hover-field;
+      background-color: $field-hover;
     }
 
     &:focus {
@@ -231,7 +231,7 @@
   }
 
   .#{$prefix}--search--disabled svg {
-    fill: $disabled-01;
+    fill: $icon-on-color-disabled;
   }
 
   .#{$prefix}--search-close:focus,
