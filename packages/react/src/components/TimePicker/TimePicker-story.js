@@ -59,8 +59,8 @@ const props = {
       'Label text (labelText in <TimePickerSelect>)',
       'Please select'
     ),
-    iconDescription: text(
-      'Trigger icon description (iconDescription in <TimePickerSelect>)',
+    ['aria-label']: text(
+      'ARIA label (aria-label in <TimePickerSelect>)',
       'open list of options'
     ),
   }),
