@@ -91,10 +91,6 @@
   transform: translate(-50%, -50%);
 }
 
-.popover-content {
-  max-width: 30ch;
-}
-
 .popover-title {
   @include type.type-style('productive-heading-01');
   margin-bottom: spacing.$spacing-01;
