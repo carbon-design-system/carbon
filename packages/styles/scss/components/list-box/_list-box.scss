@@ -11,7 +11,7 @@
 @use '../tag/mixins' as *;
 @use '../../config' as *;
 @use '../../colors' as *;
-@use '../../compat/theme' as *;
+@use '../../theme' as *;
 @use '../../type' as *;
 @use '../../spacing' as *;
 @use '../../motion' as *;
@@ -158,7 +158,7 @@ $list-box-menu-width: rem(300px);
     background-color: $field-02;
 
     &:hover {
-      background-color: $hover-light-ui;
+      background-color: $layer-hover-02;
     }
   }
 
@@ -169,7 +169,7 @@ $list-box-menu-width: rem(300px);
 
   // V11: Possibly deprecate
   .#{$prefix}--list-box--light .#{$prefix}--list-box__menu-item__option {
-    border-top-color: $decorative-01;
+    border-top-color: $border-subtle-02;
   }
 
   .#{$prefix}--list-box--light.#{$prefix}--list-box--expanded {
@@ -561,7 +561,7 @@ $list-box-menu-width: rem(300px);
 
   // V11: Possibly deprecate
   .#{$prefix}--list-box--light .#{$prefix}--list-box__menu-item:hover {
-    background-color: $hover-light-ui;
+    background-color: $layer-hover-02;
   }
 
   .#{$prefix}--list-box--sm .#{$prefix}--list-box__menu-item {
@@ -670,6 +670,8 @@ $list-box-menu-width: rem(300px);
 
   .#{$prefix}--list-box__menu-item[disabled],
   .#{$prefix}--list-box__menu-item[disabled] *,
+  .#{$prefix}--list-box__menu-item[disabled]
+    .#{$prefix}--list-box__menu-item__option,
   .#{$prefix}--list-box__menu-item[disabled]:hover {
     color: $text-disabled;
     cursor: not-allowed;
