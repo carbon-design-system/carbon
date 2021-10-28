@@ -6,3 +6,4 @@
  */
 
 export { HeaderNavigation } from './HeaderNavigation';
+export { SideNavMenu } from './SideNavMenu';

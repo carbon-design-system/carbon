@@ -98,6 +98,7 @@ const TooltipIcon = ({
   };
 
   const handleClick = (evt) => {
+    setAllowTooltipVisibility(false);
     // Prevent clicks on the tooltip from triggering the button click event
     if (evt.target === tooltipRef.current) {
       evt.preventDefault();

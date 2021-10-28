@@ -8,6 +8,8 @@
 import * as FeatureFlags from '@carbon/feature-flags';
 import HeaderNavigationClassic from './HeaderNavigation';
 import { HeaderNavigation as HeaderNavigationNext } from './next';
+import SideNavMenuClassic from './SideNavMenu';
+import { SideNavMenu as SideNavMenuNext } from './next/SideNavMenu';
 
 export Content from './Content';
 
@@ -24,7 +26,6 @@ export const HeaderNavigation = FeatureFlags.enabled('enable-v11-release')
   : HeaderNavigationClassic;
 export HeaderPanel from './HeaderPanel';
 export HeaderSideNavItems from './HeaderSideNavItems';
-
 export Switcher from './Switcher';
 export SwitcherItem from './SwitcherItem';
 export SwitcherDivider from './SwitcherDivider';
@@ -41,6 +42,8 @@ export SideNavItem from './SideNavItem';
 export SideNavItems from './SideNavItems';
 export SideNavLink from './SideNavLink';
 export SideNavLinkText from './SideNavLinkText';
-export SideNavMenu from './SideNavMenu';
+export const SideNavMenu = FeatureFlags.enabled('enable-v11-release')
+  ? SideNavMenuNext
+  : SideNavMenuClassic;
 export SideNavMenuItem from './SideNavMenuItem';
 export SideNavSwitcher from './SideNavSwitcher';
