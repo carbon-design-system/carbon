@@ -18,7 +18,7 @@
     "react"
   ],
   "dependencies": {
-    "@babel/preset-env": "^7.14.7",
+    "@babel/preset-env": "^7.15.8",
     "jscodeshift": "^0.13.0"
   }
 }

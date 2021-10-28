@@ -36,14 +36,14 @@
     "react-test-renderer": "~16.9.0"
   },
   "devDependencies": {
-    "@babel/core": "^7.14.6",
+    "@babel/core": "^7.15.8",
     "@babel/plugin-proposal-class-properties": "^7.14.5",
     "@babel/plugin-proposal-export-default-from": "^7.14.5",
     "@babel/plugin-proposal-export-namespace-from": "^7.14.5",
-    "@babel/plugin-transform-runtime": "^7.14.5",
-    "@babel/preset-env": "^7.14.7",
+    "@babel/plugin-transform-runtime": "^7.15.8",
+    "@babel/preset-env": "^7.15.8",
     "@babel/preset-react": "^7.14.5",
-    "@babel/runtime": "^7.14.6",
+    "@babel/runtime": "^7.15.4",
     "@carbon/cli": "workspace:packages/cli",
     "@commitlint/cli": "^13.2.1",
     "@commitlint/config-conventional": "^13.2.0",
