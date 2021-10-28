@@ -20,7 +20,7 @@
     // Need for batch actions
     position: relative;
     display: flex;
-    // overflow: hidden;
+    overflow: hidden;
     width: 100%;
     height: $spacing-09;
     background-color: $layer;
@@ -424,12 +424,6 @@
     opacity: 0;
     transition: opacity $transition--base $carbon--standard-easing;
   }
-
-  // cancel btn
-  // .#{$prefix}--batch-summary__cancel {
-  //   position: relative;
-  //   padding-right: $spacing-05;
-  // }
 
   // items selected text
   .#{$prefix}--batch-summary {
