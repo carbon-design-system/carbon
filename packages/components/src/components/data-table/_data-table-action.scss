@@ -580,6 +580,7 @@
   .#{$prefix}--table-toolbar--sm
     .#{$prefix}--toolbar-action
     ~ .#{$prefix}--btn {
+    overflow: hidden;
     height: rem(32px);
   }
 }
