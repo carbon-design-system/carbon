@@ -7,7 +7,7 @@
 
 @use '../../theme' as *;
 @use '../../config' as *;
-@use '../../compat/theme' as *;
+@use '../../theme' as *;
 @use '../../utilities/box-shadow' as *;
 @use '../../utilities/high-contrast-mode' as *;
 @use '../../utilities/focus-outline' as *;
@@ -18,7 +18,7 @@
 /// @access private
 /// @group components
 @mixin popover {
-  $popover-text-color: $text-01;
+  $popover-text-color: $text-primary;
   $popover-caret-offset: 1rem;
   $popover-offset: 8px;
 
@@ -57,7 +57,7 @@
     position: relative;
     width: max-content;
     max-width: rem(368px);
-    background-color: $ui-01;
+    background-color: $layer-01;
     border-radius: 2px;
     color: $popover-text-color;
   }
