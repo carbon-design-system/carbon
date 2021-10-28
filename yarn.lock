@@ -1736,7 +1736,7 @@ __metadata:
     remark: ^10.0.1
     replace-in-file: ^6.1.0
     rollup: ^2.46.0
-    sass: ^1.43.3
+    sass: ^1.43.4
     sassdoc: ^2.7.3
     yargs: ^17.0.1
   bin:
@@ -2016,7 +2016,7 @@ __metadata:
     carbon-components: ^10.47.0-rc.0
     carbon-components-react: ^7.47.0-rc.0
     carbon-icons: ^7.0.7
-    css-loader: ^5.2.4
+    css-loader: ^6.5.0
     fs-extra: ^10.0.0
     mini-css-extract-plugin: ^1.6.0
     postcss: ^8.2.14
@@ -2029,8 +2029,8 @@ __metadata:
     rollup: ^2.46.0
     rollup-plugin-strip-banner: ^2.0.0
     rtlcss: ^3.1.2
-    sass: ^1.43.3
-    sass-loader: 10
+    sass: ^1.43.4
+    sass-loader: 12.3.0
     style-loader: ^2.0.0
     webpack: ^4.41.5
   peerDependencies:
@@ -2113,7 +2113,7 @@ __metadata:
     react: ^17.0.1
     react-dom: ^16.9.0
     resolve: ^1.12.0
-    sass: ^1.43.3
+    sass: ^1.43.4
     tabbable: ^4.0.0
   peerDependencies:
     node-sass: ^4.13.1
@@ -10321,7 +10321,7 @@ __metadata:
     copy-to-clipboard: ^3.3.1
     core-js: ^3.16.0
     cross-env: ^5.2.0
-    css-loader: ^3.4.2
+    css-loader: ^6.5.0
     cypress: ^8.1.0
     cypress-real-events: ^1.5.1
     downshift: 5.2.1
@@ -10354,8 +10354,8 @@ __metadata:
     rollup-plugin-strip-banner: ^2.0.0
     rollup-plugin-terser: ^7.0.2
     rtlcss: ^2.4.0
-    sass: ^1.43.3
-    sass-loader: ^10.1.1
+    sass: ^1.43.4
+    sass-loader: ^12.3.0
     storybook-readme: ^5.0.9
     string-replace-loader: ^2.1.0
     terser-webpack-plugin: ^2.3.2
@@ -10438,7 +10438,7 @@ __metadata:
     commander: ^2.13.0
     core-js: ^3.16.0
     cross-env: ^5.2.0
-    css-loader: ^3.4.2
+    css-loader: ^6.5.0
     custom-event: ^1.0.0
     del: ~2.0.2
     diff: ^5.0.0
@@ -10496,8 +10496,8 @@ __metadata:
     rollup: ^2.46.0
     rollup-plugin-filesize: ^9.1.1
     rollup-plugin-terser: ^7.0.2
-    sass: ^1.43.3
-    sass-loader: ^8.0.2
+    sass: ^1.43.4
+    sass-loader: ^12.3.0
     serve-static: ^1.13.0
     style-loader: ^1.1.3
     terser: ^5.7.0
@@ -12329,7 +12329,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"css-loader@npm:^3.4.2, css-loader@npm:^3.6.0":
+"css-loader@npm:^3.6.0":
   version: 3.6.0
   resolution: "css-loader@npm:3.6.0"
   dependencies:
@@ -12352,24 +12352,21 @@ __metadata:
   languageName: node
   linkType: hard
 
-"css-loader@npm:^5.2.4":
-  version: 5.2.4
-  resolution: "css-loader@npm:5.2.4"
+"css-loader@npm:^6.5.0":
+  version: 6.5.0
+  resolution: "css-loader@npm:6.5.0"
   dependencies:
-    camelcase: ^6.2.0
     icss-utils: ^5.1.0
-    loader-utils: ^2.0.0
-    postcss: ^8.2.10
+    postcss: ^8.2.15
     postcss-modules-extract-imports: ^3.0.0
     postcss-modules-local-by-default: ^4.0.0
     postcss-modules-scope: ^3.0.0
     postcss-modules-values: ^4.0.0
     postcss-value-parser: ^4.1.0
-    schema-utils: ^3.0.0
     semver: ^7.3.5
   peerDependencies:
-    webpack: ^4.27.0 || ^5.0.0
-  checksum: b5b158597ccdd8889ba1ea7aa1f5544c8a0725e13cad97af29fd4f954045803985080532f60ef206e7578fac5cff5f912ac6176a84c00a199c1697c2c94d8f95
+    webpack: ^5.0.0
+  checksum: 4f3e7b93df79293dca910de41c741486155ea8248e048ea51a74fc5570d3acb962b5be0b6740f3ad8006b40eb4ef375124de4f9507aebf7a42f5ca7b8a7807d1
   languageName: node
   linkType: hard
 
@@ -26702,7 +26699,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"postcss@npm:^8.2.10, postcss@npm:^8.2.14, postcss@npm:^8.2.4, postcss@npm:^8.3.11, postcss@npm:^8.3.6":
+"postcss@npm:^8.2.14, postcss@npm:^8.2.15, postcss@npm:^8.2.4, postcss@npm:^8.3.11, postcss@npm:^8.3.6":
   version: 8.3.11
   resolution: "postcss@npm:8.3.11"
   dependencies:
@@ -29486,20 +29483,17 @@ resolve@^2.0.0-next.3:
   languageName: node
   linkType: hard
 
-"sass-loader@npm:10, sass-loader@npm:^10.1.1":
-  version: 10.2.0
-  resolution: "sass-loader@npm:10.2.0"
+"sass-loader@npm:12.3.0, sass-loader@npm:^12.3.0":
+  version: 12.3.0
+  resolution: "sass-loader@npm:12.3.0"
   dependencies:
     klona: ^2.0.4
-    loader-utils: ^2.0.0
     neo-async: ^2.6.2
-    schema-utils: ^3.0.0
-    semver: ^7.3.2
   peerDependencies:
     fibers: ">= 3.1.0"
     node-sass: ^4.0.0 || ^5.0.0 || ^6.0.0
     sass: ^1.3.0
-    webpack: ^4.36.0 || ^5.0.0
+    webpack: ^5.0.0
   peerDependenciesMeta:
     fibers:
       optional: true
@@ -29507,43 +29501,18 @@ resolve@^2.0.0-next.3:
       optional: true
     sass:
       optional: true
-  checksum: d53212e5d199cdd221a67046ab4276c352d56b50ca64347115b36e8ebbb2c68ec396a14d6cf5a08853c830a6b0ec1fd2b016cdc53cbe90a0332a908f50ec2043
+  checksum: b755e6d5ceddb70d54334b53f70546b4afc9af5f9704cc0e2666894d0568bdaeccb2b07056bd35465c22c51c55e1d790023b32b9aa0977080403036ef6c47b29
   languageName: node
   linkType: hard
 
-"sass-loader@npm:^8.0.2":
-  version: 8.0.2
-  resolution: "sass-loader@npm:8.0.2"
-  dependencies:
-    clone-deep: ^4.0.1
-    loader-utils: ^1.2.3
-    neo-async: ^2.6.1
-    schema-utils: ^2.6.1
-    semver: ^6.3.0
-  peerDependencies:
-    fibers: ">= 3.1.0"
-    node-sass: ^4.0.0
-    sass: ^1.3.0
-    webpack: ^4.36.0 || ^5.0.0
-  peerDependenciesMeta:
-    fibers:
-      optional: true
-    node-sass:
-      optional: true
-    sass:
-      optional: true
-  checksum: 3e9ba97432fcf1092600a31501298f37a0a913f86086b841740f9f8371ee33de55b9740b31563b089524aeb9020fbc51126730fa51d18b2e724a4ada71e2ff81
-  languageName: node
-  linkType: hard
-
-"sass@npm:^1.43.3":
-  version: 1.43.3
-  resolution: "sass@npm:1.43.3"
+"sass@npm:^1.43.4":
+  version: 1.43.4
+  resolution: "sass@npm:1.43.4"
   dependencies:
     chokidar: ">=3.0.0 <4.0.0"
   bin:
     sass: sass.js
-  checksum: d253980cdafe6eab223cd57a44a49a43fc3123c0459c3d09d7f95ab4d4f2a8e3559996c6bfeed5be8dc428c85fd5b8f3cd165a0ede695df9fbd002f2094f8ea1
+  checksum: 9af80105dabd32752c60b4557115832982cf1019c02c952db6a26c61a3e18dc95044c896685e6e9a6d6dd6643fc411ecf2ea4a8a431a8a08a7510a45d5a492ae
   languageName: node
   linkType: hard
 
