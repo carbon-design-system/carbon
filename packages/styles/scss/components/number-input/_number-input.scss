@@ -9,7 +9,7 @@
 @use '../../config' as *;
 @use '../../motion' as *;
 @use '../../spacing' as *;
-@use '../../compat/theme' as *;
+@use '../../theme' as *;
 @use '../../type' as *;
 @use '../../utilities/skeleton' as *;
 @use '../../utilities/button-reset';
@@ -280,7 +280,7 @@
     .#{$prefix}--number__invalid
     + .#{$prefix}--number__controls
     .#{$prefix}--number__rule-divider:first-of-type {
-    background-color: $decorative-01;
+    background-color: $border-subtle-02;
   }
 
   .#{$prefix}--number
@@ -385,7 +385,7 @@
   .#{$prefix}--number--light .#{$prefix}--number__control-btn:hover,
   .#{$prefix}--number--light .#{$prefix}--number__control-btn:hover::before,
   .#{$prefix}--number--light .#{$prefix}--number__control-btn:hover::after {
-    background-color: $hover-light-ui;
+    background-color: $layer-hover-02;
   }
 
   .#{$prefix}--number--light .#{$prefix}--number__control-btn:focus::before,
