@@ -17,6 +17,11 @@ const { prefix } = settings;
 export default class TimePickerSelect extends Component {
   static propTypes = {
     /**
+     * Provide aria-label to the <select> element
+     */
+    ['aria-label']: PropTypes.string,
+
+    /**
      * Provide the contents of your TimePickerSelect
      */
     children: PropTypes.node,
@@ -37,7 +42,7 @@ export default class TimePickerSelect extends Component {
     disabled: PropTypes.bool,
 
     /**
-     * Specify whether the label should be hidden, or not
+     * hideLabel has been deprecated in v10 and will be removed in v11.
      */
     hideLabel: deprecate(
       PropTypes.bool,
@@ -46,19 +51,18 @@ export default class TimePickerSelect extends Component {
     ),
 
     /**
-     * Provide a description for the twistie icon that can be read by screen readers
+     * iconDescription is deprecated in v10 and will be removed in v11.
      */
-    iconDescription: PropTypes.string.isRequired,
+    iconDescription: deprecate(
+      PropTypes.string,
+      'The `iconDescription` prop for `TimePickerSelect` is no longer needed and has ' +
+        'been deprecated. It will be removed in the next major release. Use `aria-label` instead.'
+    ),
 
     /**
      * Specify a custom `id` for the `<select>`
      */
     id: PropTypes.string.isRequired,
-
-    /**
-     * Specify whether you want the inline version of this control
-     */
-    inline: PropTypes.bool,
 
     /**
      * Provide label text to be read by screen readers when interacting with the
@@ -69,21 +73,19 @@ export default class TimePickerSelect extends Component {
 
   static defaultProps = {
     disabled: false,
-    inline: true,
-    iconDescription: 'open list of options',
   };
 
   render() {
     const {
-      id,
-      disabled,
+      ['aria-label']: ariaLabel = 'open list of options',
       children,
-      iconDescription,
       className,
+      disabled,
       hideLabel = true,
+      id,
+      iconDescription,
       labelText,
-      inline, // eslint-disable-line
-      ...other
+      ...rest
     } = this.props;
 
     const selectClasses = classNames({
@@ -107,17 +109,17 @@ export default class TimePickerSelect extends Component {
       <div className={selectClasses}>
         {label}
         <select
-          {...other}
-          id={id}
           className={`${prefix}--select-input`}
-          disabled={disabled}>
+          disabled={disabled}
+          id={id}
+          aria-label={ariaLabel}
+          {...rest}>
           {children}
         </select>
         <ChevronDown16
           className={`${prefix}--select__arrow`}
-          aria-label={iconDescription}>
-          {iconDescription && <title>{iconDescription}</title>}
-        </ChevronDown16>
+          aria-label={ariaLabel ? ariaLabel : iconDescription}
+        />
       </div>
     );
   }
