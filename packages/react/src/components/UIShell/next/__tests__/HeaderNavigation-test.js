@@ -41,18 +41,6 @@ describe('HeaderNavigation', () => {
     expect(screen.getByLabelText('navigation')).toBeVisible();
   });
 
-  it('should add a ref to the outermost element', () => {
-    const ref = jest.fn();
-    const { container } = render(
-      <HeaderNavigation aria-label="navigation" ref={ref}>
-        <li data-testid="child" />
-      </HeaderNavigation>
-    );
-
-    expect(ref).toHaveBeenCalled();
-    expect(ref).toHaveBeenCalledWith(container.firstChild);
-  });
-
   it('should support a custom className', () => {
     const { container } = render(
       <HeaderNavigation aria-label="navigation" className="test">

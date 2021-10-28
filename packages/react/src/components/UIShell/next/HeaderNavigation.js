@@ -11,10 +11,7 @@ import PropTypes from 'prop-types';
 import { AriaLabelPropType } from '../../../prop-types/AriaPropTypes';
 import { usePrefix } from '../../../internal/usePrefix';
 
-const HeaderNavigation = React.forwardRef(function HeaderNavigation(
-  props,
-  ref
-) {
+function HeaderNavigation(props) {
   const {
     'aria-label': ariaLabel,
     'aria-labelledby': ariaLabelledBy,
@@ -32,11 +29,11 @@ const HeaderNavigation = React.forwardRef(function HeaderNavigation(
   };
 
   return (
-    <nav {...rest} {...accessibilityLabel} className={className} ref={ref}>
+    <nav {...rest} {...accessibilityLabel} className={className}>
       <ul className={`${prefix}--header__menu-bar`}>{children}</ul>
     </nav>
   );
-});
+}
 
 HeaderNavigation.propTypes = {
   /**
