@@ -52,6 +52,11 @@ export default class FilterableMultiSelect extends React.Component {
     downshiftProps: PropTypes.shape(Downshift.propTypes),
 
     /**
+     * Specify whether the title text should be hidden or not
+     */
+    hideLabel: PropTypes.bool,
+
+    /**
      * Specify a custom `id`
      */
     id: PropTypes.string.isRequired,
@@ -299,6 +304,7 @@ export default class FilterableMultiSelect extends React.Component {
       itemToElement,
       itemToString,
       titleText,
+      hideLabel,
       helperText,
       type,
       initialSelectedItems,
@@ -350,6 +356,7 @@ export default class FilterableMultiSelect extends React.Component {
     const titleClasses = cx({
       [`${prefix}--label`]: true,
       [`${prefix}--label--disabled`]: disabled,
+      [`${prefix}--visually-hidden`]: hideLabel,
     });
     const helperClasses = cx({
       [`${prefix}--form__helper-text`]: true,
@@ -562,7 +569,10 @@ export default class FilterableMultiSelect extends React.Component {
                             locale,
                           }
                         ).map((item, index) => {
-                          const itemProps = getItemProps({ item });
+                          const itemProps = getItemProps({
+                            item,
+                            disabled: item.disabled,
+                          });
                           const itemText = itemToString(item);
                           const isChecked =
                             selectedItem.filter((selected) =>

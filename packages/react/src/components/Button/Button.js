@@ -106,6 +106,7 @@ const Button = React.forwardRef(function Button(
 
   const handleClick = (evt) => {
     // Prevent clicks on the tooltip from triggering the button click event
+    setAllowTooltipVisibility(false);
     if (evt.target === tooltipRef.current) {
       evt.preventDefault();
       return;

@@ -112,7 +112,8 @@ ListBox.propTypes = {
   isOpen: PropTypes.bool,
 
   /**
-   * Specify if the control should use the light variant
+   * `true` to use the light version. For use on $ui-01 backgrounds only.
+   * Don't use this to make tile background color same as container background color.
    */
   light: PropTypes.bool,
 
