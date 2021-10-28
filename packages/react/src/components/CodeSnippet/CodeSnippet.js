@@ -149,7 +149,7 @@ function CodeSnippet({
 
   const handleCopyClick = (evt) => {
     if (copyText || innerCodeRef?.current) {
-      copy(copyText ?? innerCodeRef?.current?.textContent);
+      copy(copyText ?? innerCodeRef?.current?.innerText);
     }
 
     if (onClick) {
@@ -306,7 +306,7 @@ CodeSnippet.propTypes = {
   copyLabel: PropTypes.string,
 
   /**
-   * Optional text to copy. If not specified, the `children` node's `textContent`
+   * Optional text to copy. If not specified, the `children` node's `innerText`
    * will be used as the copy value.
    */
   copyText: PropTypes.string,
