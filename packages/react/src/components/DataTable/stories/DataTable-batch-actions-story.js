@@ -231,30 +231,6 @@ export const LotsOfBatchActions = () => (
               onClick={batchActionClick(selectedRows)}>
               Item 9
             </TableBatchAction>
-            <TableBatchAction
-              tabIndex={getBatchActionProps().shouldShowBatchActions ? 0 : -1}
-              renderIcon={Download}
-              onClick={batchActionClick(selectedRows)}>
-              Item 10
-            </TableBatchAction>
-            <TableBatchAction
-              tabIndex={getBatchActionProps().shouldShowBatchActions ? 0 : -1}
-              renderIcon={Download}
-              onClick={batchActionClick(selectedRows)}>
-              Item 11
-            </TableBatchAction>
-            <TableBatchAction
-              tabIndex={getBatchActionProps().shouldShowBatchActions ? 0 : -1}
-              renderIcon={Download}
-              onClick={batchActionClick(selectedRows)}>
-              Item 12
-            </TableBatchAction>
-            <TableBatchAction
-              tabIndex={getBatchActionProps().shouldShowBatchActions ? 0 : -1}
-              renderIcon={Download}
-              onClick={batchActionClick(selectedRows)}>
-              Item 13
-            </TableBatchAction>
           </TableBatchActions>
           <TableToolbarContent>
             <TableToolbarSearch
