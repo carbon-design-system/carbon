@@ -5,32 +5,36 @@
 // LICENSE file in the root directory of this source tree.
 //
 
-@use '../../theme' as *;
-@use '../../type';
-@use '../../motion' as *;
 @use '../../config' as *;
-@use '../../spacing' as *;
-@use '../button/tokens' as button;
-@use '../../utilities/focus-outline' as *;
-@use '../../utilities/component-reset' as *;
-@use '../../utilities/visually-hidden' as *;
-@use '../../utilities/tooltip' as *;
-@use '../../utilities/button-reset';
-@use '../../utilities/high-contrast-mode' as *;
-@use '../../utilities/skeleton' as *;
-@use '../../utilities/convert' as *;
-@use '../../utilities/box-shadow' as *;
+@use '../../spacing';
+@use '../../theme';
+@use '../../type';
+@use '../../utilities/custom-property';
 
-/// Tooltip styles for v11
-/// @access private
-/// @group tooltip
 @mixin tooltip {
   .#{$prefix}--tooltip {
-    display: inline-block;
     position: relative;
+    display: inline-block;
   }
 
   .#{$prefix}--tooltip-content {
-    padding: $spacing-05;
+    @include type.type-style('body-long-01');
+
+    max-width: rem(288px);
+    padding: spacing.$spacing-05;
+    // TODO: remove when popover merged
+    box-shadow: none;
+    color: theme.$text-inverse;
+  }
+
+  // TODO: remove when popover merged
+  .#{$prefix}--tooltip-content.#{$prefix}--popover-contents::before {
+    box-shadow: none;
+  }
+}
+
+@mixin icon-tooltip {
+  .#{$prefix}--icon-tooltip {
+    padding: 3px spacing.$spacing-05;
   }
 }

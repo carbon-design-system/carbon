@@ -5,10 +5,10 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { Add24 } from '@carbon/icons-react';
-import { select } from '@storybook/addon-knobs';
+import './story.scss';
+
 import React from 'react';
-import { Tooltip } from './Tooltip';
+import { Tooltip } from '../next';
 
 export default {
   title: 'Experimental/unstable_Tooltip',
@@ -17,6 +17,7 @@ export default {
     controls: {
       hideNoControlsWarning: true,
     },
+    layout: 'centered',
   },
   argTypes: {
     children: {
@@ -33,39 +34,15 @@ export default {
 };
 
 export const Default = () => {
-  const sizes = [
-    'top',
-    'top-left',
-    'top-right',
-    'bottom',
-    'bottom-left',
-    'bottom-right',
-    'left',
-    'left-top',
-    'left-bottom',
-    'right',
-    'right-top',
-    'right-bottom',
-  ];
+  const label =
+    'Occassionally, services are updated in a specified time window to ensure no down time for customers.';
   return (
-    <Tooltip
-      align={select(
-        'Specify where the target should be relative to the tooltip',
-        sizes,
-        'top'
-      )}
-      label="Close">
-      <button type="button">
-        <Add24 />
-      </button>
-    </Tooltip>
-  );
-};
-
-export const Description = () => {
-  return (
-    <Tooltip description="Modify account settings">
-      <button type="button">Edit</button>
+    <Tooltip align="bottom" defaultOpen label={label}>
+      <button
+        aria-label="demo tooltip button"
+        className="demo-tooltip-trigger"
+        type="button"
+      />
     </Tooltip>
   );
 };
@@ -73,21 +50,86 @@ export const Description = () => {
 export const Duration = () => {
   return (
     <>
-      <Tooltip label="Close" enterDelayMs={500} leaveDelayMs={500}>
-        <button type="button">
-          <Add24 />
-        </button>
+      <Tooltip label="Label one" enterDelayMs={500} leaveDelayMs={500}>
+        <button
+          aria-label="demo tooltip button"
+          className="demo-tooltip-trigger"
+          type="button"
+        />
       </Tooltip>
-      <Tooltip label="Close" enterDelayMs={500} leaveDelayMs={500}>
-        <button type="button">
-          <Add24 />
-        </button>
+      <Tooltip label="Label two" enterDelayMs={500} leaveDelayMs={500}>
+        <button
+          aria-label="demo tooltip button"
+          className="demo-tooltip-trigger"
+          type="button"
+        />
       </Tooltip>
-      <Tooltip label="Close" enterDelayMs={500} leaveDelayMs={500}>
-        <button type="button">
-          <Add24 />
-        </button>
+      <Tooltip label="Label two" enterDelayMs={500} leaveDelayMs={500}>
+        <button
+          aria-label="demo tooltip button"
+          className="demo-tooltip-trigger"
+          type="button"
+        />
       </Tooltip>
     </>
   );
+};
+
+const PlaygroundStory = (props) => {
+  const { align, defaultOpen, description, label } = props;
+  return (
+    <Tooltip
+      align={align}
+      label={label}
+      defaultOpen={defaultOpen}
+      description={description}>
+      <button
+        aria-label="demo tooltip button"
+        className="demo-tooltip-trigger"
+        type="button"
+      />
+    </Tooltip>
+  );
+};
+
+export const Playground = PlaygroundStory.bind({});
+
+Playground.argTypes = {
+  align: {
+    defaultValue: 'bottom',
+    options: [
+      'top',
+      'top-left',
+      'top-right',
+
+      'bottom',
+      'bottom-left',
+      'bottom-right',
+
+      'left',
+      'left-bottom',
+      'left-top',
+
+      'right',
+      'right-bottom',
+      'right-top',
+    ],
+    control: {
+      type: 'select',
+    },
+  },
+  defaultOpen: {
+    defaultValue: true,
+  },
+  label: {
+    control: {
+      type: 'text',
+    },
+    defaultValue: 'Custom label',
+  },
+  description: {
+    control: {
+      type: 'text',
+    },
+  },
 };

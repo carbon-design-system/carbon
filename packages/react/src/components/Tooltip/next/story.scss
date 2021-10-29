@@ -1,0 +1,39 @@
+//
+// Copyright IBM Corp. 2016, 2018
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+@use '@carbon/styles/scss/spacing';
+@use '@carbon/styles/scss/theme';
+@use '@carbon/styles/scss/type';
+@use '@carbon/styles/scss/utilities/button-reset';
+
+.sb-show-main.sb-main-centered #root {
+  display: flex;
+  justify-content: center;
+}
+
+.demo-tooltip-trigger {
+  @include button-reset.reset();
+
+  display: block;
+  position: relative;
+  width: 3rem;
+  height: 3rem;
+  border: 1px solid theme.$border-subtle;
+}
+
+.demo-tooltip-trigger::before {
+  content: '';
+  display: inline-block;
+  width: 1.5rem;
+  height: 1.5rem;
+  border: 2px solid theme.$border-inverse;
+  border-radius: 2px;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}

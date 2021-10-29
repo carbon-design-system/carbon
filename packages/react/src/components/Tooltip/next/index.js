@@ -5,18 +5,15 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { settings } from 'carbon-components';
 import cx from 'classnames';
 import PropTypes from 'prop-types';
 import React, { useRef } from 'react';
 import { Popover, PopoverContent } from '../../Popover';
-import { canUseDOM } from '../../../internal/environment';
+import { keys, match } from '../../../internal/keyboard';
 import { useDelayedState } from '../../../internal/useDelayedState';
-import { useEvent } from '../../../internal/useEvent';
 import { useId } from '../../../internal/useId';
 import { useNoInteractiveChildren } from '../../../internal/useNoInteractiveChildren';
-
-const { prefix } = settings;
+import { usePrefix } from '../../../internal/usePrefix';
 
 function Tooltip({
   align = 'top',
@@ -26,12 +23,14 @@ function Tooltip({
   description,
   enterDelayMs = 100,
   leaveDelayMs = 300,
+  defaultOpen = false,
   ...rest
 }) {
   const containerRef = useRef(null);
   const tooltipRef = useRef(null);
-  const [open, setOpen] = useDelayedState(false);
+  const [open, setOpen] = useDelayedState(defaultOpen);
   const id = useId('tooltip');
+  const prefix = usePrefix();
   const child = React.Children.only(children);
 
   const triggerProps = {
@@ -43,6 +42,13 @@ function Tooltip({
     triggerProps['aria-labelledby'] = id;
   } else {
     triggerProps['aria-describedby'] = id;
+  }
+
+  function onKeyDown(event) {
+    if (open && match(event, keys.Escape)) {
+      event.stopPropagation();
+      setOpen(false);
+    }
   }
 
   function onMouseEnter() {
@@ -59,18 +65,12 @@ function Tooltip({
       '`label` or `description` prop'
   );
 
-  if (canUseDOM) {
-    // eslint-disable-next-line react-hooks/rules-of-hooks
-    useEvent(window, 'keydown', (event) => {
-      event.stopPropagation();
-      setOpen(false);
-    });
-  }
-
   return (
+    // eslint-disable-next-line jsx-a11y/no-static-element-interactions
     <div
       {...rest}
       className={cx(`${prefix}--tooltip`, customClassName)}
+      onKeyDown={onKeyDown}
       onMouseEnter={onMouseEnter}
       onMouseLeave={onMouseLeave}
       ref={containerRef}>
@@ -120,6 +120,11 @@ Tooltip.propTypes = {
    * Specify an optional className to be applied to the container node
    */
   className: PropTypes.string,
+
+  /**
+   * Specify whether the tooltip should be open when it first renders
+   */
+  defaultOpen: PropTypes.bool,
 
   /**
    * Provide the description to be rendered inside of the Tooltip. The
