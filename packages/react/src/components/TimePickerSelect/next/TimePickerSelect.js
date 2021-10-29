@@ -33,12 +33,13 @@ const TimePickerSelect = React.forwardRef(function TimePickerSelect(
   });
 
   return (
-    <div className={selectClasses} ref={ref}>
+    <div className={selectClasses}>
       <select
-        id={id}
+        aria-label={ariaLabel}
         className={`${prefix}--select-input`}
         disabled={disabled}
-        aria-label={ariaLabel}
+        id={id}
+        ref={ref}
         {...rest}>
         {children}
       </select>
