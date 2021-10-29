@@ -5,6 +5,10 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+import * as FeatureFlags from '@carbon/feature-flags';
+import SideNavMenuClassic from './SideNavMenu';
+import { SideNavMenu as SideNavMenuNext } from './next/SideNavMenu';
+
 export Content from './Content';
 
 export Header from './Header';
@@ -18,7 +22,6 @@ export HeaderName from './HeaderName';
 export HeaderNavigation from './HeaderNavigation';
 export HeaderPanel from './HeaderPanel';
 export HeaderSideNavItems from './HeaderSideNavItems';
-
 export Switcher from './Switcher';
 export SwitcherItem from './SwitcherItem';
 export SwitcherDivider from './SwitcherDivider';
@@ -35,6 +38,8 @@ export SideNavItem from './SideNavItem';
 export SideNavItems from './SideNavItems';
 export SideNavLink from './SideNavLink';
 export SideNavLinkText from './SideNavLinkText';
-export SideNavMenu from './SideNavMenu';
+export const SideNavMenu = FeatureFlags.enabled('enable-v11-release')
+  ? SideNavMenuNext
+  : SideNavMenuClassic;
 export SideNavMenuItem from './SideNavMenuItem';
 export SideNavSwitcher from './SideNavSwitcher';
