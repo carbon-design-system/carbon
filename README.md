@@ -189,6 +189,7 @@ check out our [Contributing Guide](/.github/CONTRIBUTING.md) and our
     <td align="center"><a href="https://github.com/egriff38"><img src="https://avatars.githubusercontent.com/u/6627718?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Eshin Griffith</b></sub></a><br /><a href="https://github.com/carbon-design-system/carbon/commits?author=egriff38" title="Code">💻</a></td>
     <td align="center"><a href="https://riantavares.github.io/"><img src="https://avatars.githubusercontent.com/u/8935295?v=4?s=100" width="100px;" alt=""/><br /><sub><b>@RianTavaresOn</b></sub></a><br /><a href="https://github.com/carbon-design-system/carbon/commits?author=RianTavares" title="Code">💻</a> <a href="#design-RianTavares" title="Design">🎨</a></td>
     <td align="center"><a href="https://github.com/ColbyJohnIBM"><img src="https://avatars.githubusercontent.com/u/19613692?v=4?s=100" width="100px;" alt=""/><br /><sub><b>ColbyJohnIBM</b></sub></a><br /><a href="https://github.com/carbon-design-system/carbon/commits?author=ColbyJohnIBM" title="Code">💻</a></td>
+    <td align="center"><a href="https://github.com/TannerS"><img src="https://avatars.githubusercontent.com/u/8866319?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Tanner Summers</b></sub></a><br /><a href="https://github.com/carbon-design-system/carbon/commits?author=TannerS" title="Code">💻</a></td>
   </tr>
 </table>
 
