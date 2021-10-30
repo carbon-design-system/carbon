@@ -148,8 +148,8 @@ export const borderDisabled = gray80;
 // Text
 export const textPrimary = gray10;
 export const textSecondary = gray30;
-export const textPlaceholder = gray60;
-export const textHelper = gray50;
+export const textPlaceholder = gray50;
+export const textHelper = gray30;
 export const textError = red30;
 export const textInverse = gray100;
 export const textOnColor = white;
