@@ -6,6 +6,8 @@
  */
 
 import * as FeatureFlags from '@carbon/feature-flags';
+import HeaderNavigationClassic from './HeaderNavigation';
+import { HeaderNavigation as HeaderNavigationNext } from './next';
 import SideNavMenuClassic from './SideNavMenu';
 import { SideNavMenu as SideNavMenuNext } from './next/SideNavMenu';
 
@@ -19,7 +21,9 @@ export HeaderMenu from './HeaderMenu';
 export HeaderMenuButton from './HeaderMenuButton';
 export HeaderMenuItem from './HeaderMenuItem';
 export HeaderName from './HeaderName';
-export HeaderNavigation from './HeaderNavigation';
+export const HeaderNavigation = FeatureFlags.enabled('enable-v11-release')
+  ? HeaderNavigationNext
+  : HeaderNavigationClassic;
 export HeaderPanel from './HeaderPanel';
 export HeaderSideNavItems from './HeaderSideNavItems';
 export Switcher from './Switcher';
