@@ -5,4 +5,5 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+export { HeaderNavigation } from './HeaderNavigation';
 export { SideNavMenu } from './SideNavMenu';
