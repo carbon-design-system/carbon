@@ -3829,6 +3829,9 @@ Map {
       "className": Object {
         "type": "string",
       },
+      "closeButtonLabel": Object {
+        "type": "string",
+      },
       "danger": Object {
         "type": "bool",
       },
