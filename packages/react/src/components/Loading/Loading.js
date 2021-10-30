@@ -84,7 +84,7 @@ Loading.propTypes = {
   className: PropTypes.string,
 
   /**
-   * Specify an description that would be used to best describe the loading state
+   * Specify a description that would be used to best describe the loading state
    */
   description: PropTypes.string,
 
