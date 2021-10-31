@@ -76,7 +76,6 @@ const ListBoxSelection = ({
         onKeyDown={handleOnKeyDown}
         disabled={disabled}
         aria-label={t('clear.all')}
-        aria-hidden={true}
         title={description}>
         <Close16 />
       </div>
@@ -89,7 +88,6 @@ const ListBoxSelection = ({
       onClick={handleOnClick}
       onKeyDown={handleOnKeyDown}
       aria-label={description}
-      aria-hidden={true}
       title={description}>
       {selectionCount}
       <Close16 />
