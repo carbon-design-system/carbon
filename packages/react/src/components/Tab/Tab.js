@@ -8,6 +8,7 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import classNames from 'classnames';
+import * as FeatureFlags from '@carbon/feature-flags';
 import { settings } from 'carbon-components';
 import deprecate from '../../prop-types/deprecate';
 
@@ -54,7 +55,9 @@ export default class Tab extends React.Component {
     /**
      * Provide the contents of your Tab
      */
-    label: PropTypes.node,
+    label: FeatureFlags.enabled('enable-v11-release')
+      ? PropTypes.node.isRequired
+      : PropTypes.node,
 
     /**
      * Provide a handler that is invoked when a user clicks on the control
@@ -97,7 +100,9 @@ export default class Tab extends React.Component {
   };
 
   static defaultProps = {
-    label: 'provide a label',
+    label: FeatureFlags.enabled('enable-v11-release')
+      ? undefined
+      : 'provide a label',
     selected: false,
     onClick: () => {},
     onKeyDown: () => {},
