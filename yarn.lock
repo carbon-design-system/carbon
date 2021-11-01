@@ -2014,7 +2014,7 @@ __metadata:
     babel-preset-carbon: ^0.1.0
     browserslist-config-carbon: ^10.6.1
     carbon-components: ^10.47.0
-    carbon-components-react: ^7.47.0
+    carbon-components-react: ^7.47.1
     carbon-icons: ^7.0.7
     css-loader: ^5.2.4
     fs-extra: ^10.0.0
@@ -10293,7 +10293,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"carbon-components-react@^7.47.0, carbon-components-react@workspace:packages/react":
+"carbon-components-react@^7.47.1, carbon-components-react@workspace:packages/react":
   version: 0.0.0-use.local
   resolution: "carbon-components-react@workspace:packages/react"
   dependencies:
