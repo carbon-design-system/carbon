@@ -90,7 +90,9 @@ const SideNav = React.forwardRef(function SideNav(props, ref) {
         : expanded;
       // avoid spreading `isSideNavExpanded` to non-Carbon UI Shell children
       return React.cloneElement(child, {
-        ...(CARBON_SIDENAV_ITEMS.includes(child.type?.displayName)
+        ...(CARBON_SIDENAV_ITEMS.includes(
+          child.type?.displayName ?? child.type?.name
+        )
           ? {
               isSideNavExpanded: currentExpansionState,
             }
