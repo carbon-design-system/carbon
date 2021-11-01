@@ -4,5 +4,13 @@
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
+import { default as ModalNext } from './next/Modal';
 
-export default from './Modal';
+import { default as ModalClassic } from './Modal';
+import { createComponentToggle } from '../../internal/ComponentToggle';
+
+export const Modal = createComponentToggle({
+  name: 'Modal',
+  next: ModalNext,
+  classic: ModalClassic,
+});
