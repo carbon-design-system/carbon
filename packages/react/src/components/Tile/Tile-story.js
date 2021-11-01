@@ -168,8 +168,6 @@ export const Expandable = () => (
         Below the fold content here
         <TextInput id="test2" invalidText="A valid value is required" />
       </div>
-      {/* TODO: Remove before merge */}
-      <Link>hello</Link>
     </TileBelowTheFoldContent>
   </ExpandableTile>
 );
