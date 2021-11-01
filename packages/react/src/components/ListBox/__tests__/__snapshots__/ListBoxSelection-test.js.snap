@@ -34,7 +34,6 @@ exports[`ListBoxSelection should render 1`] = `
   }
 >
   <div
-    aria-hidden={true}
     aria-label="translation"
     className="bx--list-box__selection"
     onClick={[Function]}
@@ -116,7 +115,6 @@ exports[`ListBoxSelection should render 2`] = `
       3
     </span>
     <div
-      aria-hidden={true}
       aria-label="translation"
       className="bx--tag__close-icon"
       onClick={[Function]}
