@@ -733,8 +733,13 @@
       @include focus-outline('reset');
       @include type-style('body-short-01');
 
+      @if feature-flag-enabled('enable-v11-release') {
+        width: auto;
+      } @else {
+        width: rem(160px);
+      }
+
       overflow: hidden;
-      width: rem(160px);
       padding: $spacing-04 $spacing-05 $spacing-03;
       border-bottom: $tab-underline-color;
       color: $text-secondary;
