@@ -2023,8 +2023,8 @@ __metadata:
     postcss-custom-properties: ^11.0.0
     postcss-loader: 4
     prop-types: ^15.7.2
-    react: ^16.8.6
-    react-dom: ^16.8.6
+    react: ^17.0.2
+    react-dom: ^17.0.2
     rimraf: ^3.0.2
     rollup: ^2.46.0
     rollup-plugin-strip-banner: ^2.0.0
@@ -10368,10 +10368,10 @@ __metadata:
     postcss-loader: ^3.0.0
     promise: ^8.0.1
     prop-types: ^15.7.2
-    react: ^16.8.6
-    react-dom: ^16.8.6
-    react-is: ^16.8.6
-    react-test-renderer: ^16.8.6
+    react: ^17.0.2
+    react-dom: ^17.0.2
+    react-is: ^17.0.2
+    react-test-renderer: ^17.0.2
     requestanimationframe: ^0.0.23
     rimraf: ^3.0.0
     rollup: ^2.46.0
@@ -10514,9 +10514,9 @@ __metadata:
     postcss-loader: ^3.0.0
     promise: ^8.0.1
     prop-types: ^15.6.0
-    react: ^16.8.6
+    react: ^17.0.2
     react-copy-to-clipboard: ^5.0.0
-    react-dom: ^16.8.6
+    react-dom: ^17.0.2
     react-ga: ^3.3.0
     rollup: ^2.46.0
     rollup-plugin-filesize: ^9.1.1
@@ -10590,8 +10590,8 @@ __metadata:
     lint-staged: ^11.1.1
     node-gyp: ^7.1.2
     prettier: ^2.2.1
-    react: ^16.8.6
-    react-dom: ^16.8.6
+    react: ^17.0.2
+    react-dom: ^17.0.2
     rimraf: ^3.0.0
     stylelint: ^13.13.1
   languageName: unknown
@@ -27707,17 +27707,16 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-dom@npm:~16.9.0":
-  version: 16.9.0
-  resolution: "react-dom@npm:16.9.0"
+"react-dom@npm:~17.0.2":
+  version: 17.0.2
+  resolution: "react-dom@npm:17.0.2"
   dependencies:
     loose-envify: ^1.1.0
     object-assign: ^4.1.1
-    prop-types: ^15.6.2
-    scheduler: ^0.15.0
+    scheduler: ^0.20.2
   peerDependencies:
-    react: ^16.0.0
-  checksum: a053a86f9bb30d7738cac21e399246d4399f163c5c272cfd1f92c8b80e381c5514d540fded733b15f1873810324765378d39b4105839ada48aff52cfaf17cbe3
+    react: 17.0.2
+  checksum: 1c1eaa3bca7c7228d24b70932e3d7c99e70d1d04e13bb0843bbf321582bc25d7961d6b8a6978a58a598af2af496d1cedcfb1bf65f6b0960a0a8161cb8dab743c
   languageName: node
   linkType: hard
 
@@ -27824,10 +27823,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-is@npm:~16.9.0":
-  version: 16.9.0
-  resolution: "react-is@npm:16.9.0"
-  checksum: 7a137450539af42d342082b985c518c92af1664f3f8b06835398d902e33a6c4e9ab8d7897db3941fd692ef3af1ac81cfc3861b8a4f830ecbfd210a23e1e80914
+"react-is@npm:~17.0.2":
+  version: 17.0.2
+  resolution: "react-is@npm:17.0.2"
+  checksum: 9d6d111d8990dc98bc5402c1266a808b0459b5d54830bbea24c12d908b536df7883f268a7868cfaedde3dd9d4e0d574db456f84d2e6df9c4526f99bb4b5344d8
   languageName: node
   linkType: hard
 
@@ -27921,6 +27920,18 @@ __metadata:
   languageName: node
   linkType: hard
 
+"react-shallow-renderer@npm:^16.13.1":
+  version: 16.14.1
+  resolution: "react-shallow-renderer@npm:16.14.1"
+  dependencies:
+    object-assign: ^4.1.1
+    react-is: ^16.12.0 || ^17.0.0
+  peerDependencies:
+    react: ^16.0.0 || ^17.0.0
+  checksum: f344c663c48720d19559b4198b1f63ad47a3f11bedc92ede053a6c0706b5209e6110086f3ccc6db04eda9f0d1a415845956ddfb6ce09a922167d4831fcba9314
+  languageName: node
+  linkType: hard
+
 "react-sizeme@npm:^3.0.1":
   version: 3.0.1
   resolution: "react-sizeme@npm:3.0.1"
@@ -27966,17 +27977,17 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-test-renderer@npm:~16.9.0":
-  version: 16.9.0
-  resolution: "react-test-renderer@npm:16.9.0"
+"react-test-renderer@npm:~17.0.2":
+  version: 17.0.2
+  resolution: "react-test-renderer@npm:17.0.2"
   dependencies:
     object-assign: ^4.1.1
-    prop-types: ^15.6.2
-    react-is: ^16.9.0
-    scheduler: ^0.15.0
+    react-is: ^17.0.2
+    react-shallow-renderer: ^16.13.1
+    scheduler: ^0.20.2
   peerDependencies:
-    react: ^16.0.0
-  checksum: fae8d354ed4c3e4355cc40e3ea31912cf70f0080c638a369e40252cc43e593bd8a44d62c8f56efaffa05e716b982c46051cb9dc2adbbf2b5fa91e1964d6d79de
+    react: 17.0.2
+  checksum: e6b5c6ed2a0bde2c34f1ab9523ff9bc4c141a271daf730d6b852374e83acc0155d58ab71a318251e953ebfa65b8bebb9c5dce3eba1ccfcbef7cc4e1e8261c401
   languageName: node
   linkType: hard
 
@@ -28020,14 +28031,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react@npm:~16.9.0":
-  version: 16.9.0
-  resolution: "react@npm:16.9.0"
+"react@npm:~17.0.2":
+  version: 17.0.2
+  resolution: "react@npm:17.0.2"
   dependencies:
     loose-envify: ^1.1.0
     object-assign: ^4.1.1
-    prop-types: ^15.6.2
-  checksum: 47346b93777f06793d0585ec9ec9546016600a19987ce0d8613cd937fc642f479b12865043ba046b04d23bc9afd511fd35683382f158bd761d8ca84638f187a6
+  checksum: b254cc17ce3011788330f7bbf383ab653c6848902d7936a87b09d835d091e3f295f7e9dd1597c6daac5dc80f90e778c8230218ba8ad599f74adcc11e33b9d61b
   languageName: node
   linkType: hard
 
@@ -29758,13 +29768,13 @@ resolve@^2.0.0-next.3:
   languageName: node
   linkType: hard
 
-"scheduler@npm:^0.15.0":
-  version: 0.15.0
-  resolution: "scheduler@npm:0.15.0"
+"scheduler@npm:^0.20.2":
+  version: 0.20.2
+  resolution: "scheduler@npm:0.20.2"
   dependencies:
     loose-envify: ^1.1.0
     object-assign: ^4.1.1
-  checksum: 75920a8288daac05d1c26a6aaa94cddfe302f03c7b1108191696b4cfcb2e2d2038810a4d44ac4d6c6687bb26fa1f8db4b19d0655a4e79ccf2a253749a394de1d
+  checksum: c4b35cf967c8f0d3e65753252d0f260271f81a81e427241295c5a7b783abf4ea9e905f22f815ab66676f5313be0a25f47be582254db8f9241b259213e999b8fc
   languageName: node
   linkType: hard
 
