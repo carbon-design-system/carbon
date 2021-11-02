@@ -72,16 +72,16 @@
 
 .playground-trigger {
   display: block;
-  width: 3rem;
-  height: 3rem;
+  width: 2rem;
+  height: 2rem;
   border: 1px solid theme.$border-subtle;
 }
 
 .playground-trigger::before {
   content: '';
   display: inline-block;
-  width: 1.5rem;
-  height: 1.5rem;
+  width: 1rem;
+  height: 1rem;
   border: 2px solid theme.$border-inverse;
   border-radius: 2px;
   position: absolute;
