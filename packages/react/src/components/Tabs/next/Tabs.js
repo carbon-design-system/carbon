@@ -27,7 +27,6 @@ const Tabs = React.forwardRef(function Tabs(
     selected = 0,
     selectionMode = 'automatic',
     tabContentClassName,
-    type = 'default',
     ...other
   },
   ref
@@ -451,8 +450,6 @@ const Tabs = React.forwardRef(function Tabs(
       // `${prefix}--tabs`,
       `${prefix}--tabs--scrollable`,
       {
-        // [`${prefix}--tabs--container`]: type === 'container',
-        [`${prefix}--tabs--scrollable--container`]: type === 'container',
         // [`${prefix}--tabs--light`]: light,
         [`${prefix}--tabs--scrollable--light`]: light,
       }
@@ -603,11 +600,6 @@ Tabs.propTypes = {
    * Provide a className that is applied to the <TabContent> components
    */
   tabContentClassName: PropTypes.string,
-
-  /**
-   * Provide the type of Tab
-   */
-  type: PropTypes.oneOf(['default', 'container']),
 };
 
 export default Tabs;
