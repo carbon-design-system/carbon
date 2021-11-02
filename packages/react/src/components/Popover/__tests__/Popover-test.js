@@ -38,37 +38,24 @@ describe('Popover', () => {
   });
 
   describe('PopoverContent', () => {
-    it('should support custom rendering with the `as` prop', () => {
+    it('should support a custom class name on the popover content', () => {
       render(
-        <Popover open>
-          <PopoverContent as="article" data-testid="test">
-            test
-          </PopoverContent>
-        </Popover>
+        <PopoverContent className="test" data-testid="test">
+          test
+        </PopoverContent>
       );
-      expect(screen.getByTestId('test').tagName).toBe('ARTICLE');
-    });
-
-    it('should support a custom class name on the outermost element', () => {
-      render(
-        <Popover open>
-          <PopoverContent className="test" data-testid="test">
-            test
-          </PopoverContent>
-        </Popover>
-      );
-      expect(screen.getByTestId('test')).toHaveClass('test');
+      // NOTE: the popover should render popover-content as the first child and
+      // popover-caret as the second child
+      expect(screen.getByTestId('test').firstChild).toHaveClass('test');
     });
 
     it('should forward additional props on the outermost element', () => {
-      render(
-        <Popover open>
-          <PopoverContent id="test" data-testid="test">
-            test
-          </PopoverContent>
-        </Popover>
+      const { container } = render(
+        <PopoverContent id="test" data-testid="test">
+          test
+        </PopoverContent>
       );
-      expect(screen.getByTestId('test')).toHaveAttribute('id', 'test');
+      expect(container.firstChild).toHaveAttribute('id', 'test');
     });
   });
 });

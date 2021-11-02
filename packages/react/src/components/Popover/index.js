@@ -11,26 +11,26 @@ import React from 'react';
 import { usePrefix } from '../../internal/usePrefix';
 
 function Popover({
+  align = 'bottom',
   as: BaseComponent = 'div',
   caret = true,
   className: customClassName,
   children,
-  align = 'bottom',
+  dropShadow = true,
   highContrast = false,
   light = false,
   open,
-  relative,
   ...rest
 }) {
   const prefix = usePrefix();
   const className = cx({
-    [`${prefix}--popover`]: true,
-    [`${prefix}--popover-caret`]: caret,
-    [`${prefix}--popover--light`]: light,
+    [`${prefix}--popover-container`]: true,
+    [`${prefix}--popover--caret`]: caret,
+    [`${prefix}--popover--drop-shadow`]: dropShadow,
     [`${prefix}--popover--high-contrast`]: highContrast,
-    [`${prefix}--popover--${align}`]: true,
+    [`${prefix}--popover--light`]: light,
     [`${prefix}--popover--open`]: open,
-    [`${prefix}--popover--relative`]: relative,
+    [`${prefix}--popover--${align}`]: true,
     [customClassName]: !!customClassName,
   });
 
@@ -86,6 +86,11 @@ Popover.propTypes = {
   className: PropTypes.string,
 
   /**
+   * Specify whether a drop shadow should be rendered on the popover
+   */
+  dropShadow: PropTypes.bool,
+
+  /**
    * Render the component using the high-contrast variant
    */
   highContrast: PropTypes.bool,
@@ -99,37 +104,21 @@ Popover.propTypes = {
    * Specify whether the component is currently open or closed
    */
   open: PropTypes.bool.isRequired,
-
-  /**
-   * Specify whether the component should be positioned using position:
-   * relative. By default, it will use position: absolute
-   */
-  relative: PropTypes.bool,
 };
 
-const PopoverContent = React.forwardRef(function PopoverContent(
-  { as: BaseComponent = 'div', className, children, ...rest },
-  ref
-) {
+function PopoverContent({ className, children, ...rest }) {
   const prefix = usePrefix();
   return (
-    <BaseComponent
-      {...rest}
-      className={cx(`${prefix}--popover-contents`, className)}
-      ref={ref}>
-      {children}
-    </BaseComponent>
+    <div {...rest} className={`${prefix}--popover`}>
+      <div className={cx(`${prefix}--popover-content`, className)}>
+        {children}
+      </div>
+      <span className={`${prefix}--popover-caret`} />
+    </div>
   );
-});
+}
 
-PopoverContent.displayName = 'PopoverContent';
 PopoverContent.propTypes = {
-  /**
-   * Provide a custom element or component to render the top-level node for the
-   * component.
-   */
-  as: PropTypes.oneOfType([PropTypes.string, PropTypes.elementType]),
-
   /**
    * Provide elements to be rendered inside of the component
    */

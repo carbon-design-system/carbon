@@ -49,15 +49,17 @@ export default {
 };
 
 const PlaygroundStory = (props) => {
-  const { align, caret, highContrast, light, open } = props;
+  const { align, caret, dropShadow, highContrast, light, open } = props;
   return (
     <Popover
       align={align}
       caret={caret}
+      dropShadow={dropShadow}
       highContrast={highContrast}
       light={light}
       open={open}>
-      <PopoverContent className="p-3 popover-content">
+      <div className="playground-trigger" />
+      <PopoverContent className="p-3">
         <p className="popover-title">Available storage</p>
         <p className="popover-details">
           This server has 150 GB of block storage remaining.
@@ -98,6 +100,12 @@ Playground.argTypes = {
     },
     defaultValue: true,
   },
+  dropShadow: {
+    control: {
+      type: 'boolean',
+    },
+    defaultValue: true,
+  },
   highContrast: {
     control: {
       type: 'boolean',
@@ -120,13 +128,6 @@ Playground.argTypes = {
 
 Playground.story = {
   decorators: [
-    (story) => (
-      <div className="mt-10 flex justify-center">
-        <div className="position-relative display-inline-block">
-          <div className="playground-trigger" />
-          {story()}
-        </div>
-      </div>
-    ),
+    (story) => <div className="mt-10 flex justify-center">{story()}</div>,
   ],
 };
