@@ -1,23 +1,17 @@
-/**
- * Copyright IBM Corp. 2016, 2018
- *
- * This source code is licensed under the Apache-2.0 license found in the
- * LICENSE file in the root directory of this source tree.
- */
-
-import React, { Component, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
-import Link from '../../Link';
 import {
   Checkbox16,
   CheckboxCheckedFilled16,
   ChevronDown16,
 } from '@carbon/icons-react';
+import Link from '../../Link';
 import { keys, matches } from '../../../internal/keyboard';
 import deprecate from '../../../prop-types/deprecate';
 import { composeEventHandlers } from '../../../tools/events';
-import { PrefixContext, usePrefix } from '../../../internal/usePrefix';
+import { usePrefix } from '../../../internal/usePrefix';
+import useIsomorphicEffect from '../../../internal/useIsomorphicEffect';
 
 export const Tile = React.forwardRef(function Tile(
   { children, className, light = false, ...rest },
@@ -169,7 +163,7 @@ ClickableTile.propTypes = {
    */
   light: deprecate(
     PropTypes.bool,
-    'The `light` prop for `Tile` is no longer needed and has been deprecated. It will be removed in the next major release. Use the Layer component instead.'
+    'The `light` prop for `ClickableTile` is no longer needed and has been deprecated. It will be removed in the next major release. Use the Layer component instead.'
   ),
 
   /**
@@ -354,7 +348,7 @@ SelectableTile.propTypes = {
    */
   light: deprecate(
     PropTypes.bool,
-    'The `light` prop for `Tile` is no longer needed and has been deprecated. It will be removed in the next major release. Use the Layer component instead.'
+    'The `light` prop for `SelectableTile` is no longer needed and has been deprecated. It will be removed in the next major release. Use the Layer component instead.'
   ),
 
   /**
@@ -398,290 +392,254 @@ SelectableTile.propTypes = {
   value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
 };
 
-export class ExpandableTile extends Component {
-  state = {};
+export function ExpandableTile({
+  tabIndex,
+  className,
+  children,
+  expanded,
+  tileMaxHeight, // eslint-disable-line
+  tilePadding, // eslint-disable-line
+  onClick,
+  onKeyUp,
+  tileCollapsedIconText,
+  tileExpandedIconText,
+  tileCollapsedLabel,
+  tileExpandedLabel,
+  onBeforeClick,
+  light,
+  ...rest
+}) {
+  const [isTileMaxHeight, setIsTileMaxHeight] = useState(tileMaxHeight);
+  const [isTilePadding, setIsTilePadding] = useState(tilePadding);
+  const [prevExpanded, setPrevExpanded] = useState(expanded);
+  const [prevTileMaxHeight, setPrevTileMaxHeight] = useState(tileMaxHeight);
+  const [prevTilePadding, setPrevTilePadding] = useState(tilePadding);
+  const [isExpanded, setIsExpanded] = useState(expanded);
+  const aboveTheFold = useRef(null);
+  const tileContent = useRef(null);
+  const tile = useRef(null);
+  const prefix = usePrefix();
 
-  static propTypes = {
-    /**
-     * The child nodes.
-     */
-    children: PropTypes.node,
-
-    /**
-     * The CSS class names.
-     */
-    className: PropTypes.string,
-
-    /**
-     * `true` if the tile is expanded.
-     */
-    expanded: PropTypes.bool,
-
-    /**
-     * Deprecated in v11. Use 'onClick' instead.
-     */
-    handleClick: deprecate(
-      PropTypes.func,
-      'The handleClick prop for ClickableTile has been deprecated in favor of onClick. It will be removed in the next major release.'
-    ),
-
-    /**
-     * An ID that can be provided to aria-labelledby
-     */
-    id: PropTypes.string,
-
-    /**
-     * `true` to use the light version. For use on $ui-01 backgrounds only.
-     * Don't use this to make tile background color same as container background color.
-     */
-    light: deprecate(
-      PropTypes.bool,
-      'The `light` prop for `Tile` is no longer needed and has been deprecated. It will be removed in the next major release. Use the Layer component instead.'
-    ),
-
-    /**
-     * optional handler to decide whether to ignore a click. returns false if click should be ignored
-     */
-    onBeforeClick: PropTypes.func,
-
-    /**
-      * Specify the function to run when the ExpandableTile is clicked
- 
-      */
-    onClick: PropTypes.func,
-
-    /**
-     * optional handler to trigger a function when a key is pressed
-     */
-    onKeyUp: PropTypes.func,
-
-    /**
-     * The `tabindex` attribute.
-     */
-    tabIndex: PropTypes.number,
-
-    /**
-     * The description of the "collapsed" icon that can be read by screen readers.
-     */
-    tileCollapsedIconText: PropTypes.string,
-
-    /**
-     * When "collapsed", a label to appear next to the chevron (e.g., "View more").
-     */
-    tileCollapsedLabel: PropTypes.string,
-
-    /**
-     * The description of the "expanded" icon that can be read by screen readers.
-     */
-    tileExpandedIconText: PropTypes.string,
-
-    /**
-     * When "expanded", a label to appear next to the chevron (e.g., "View less").
-     */
-    tileExpandedLabel: PropTypes.string,
-  };
-
-  static defaultProps = {
-    tabIndex: 0,
-    expanded: false,
-    tileMaxHeight: 0,
-    tilePadding: 0,
-    onBeforeClick: () => true,
-    onClick: () => {},
-    tileCollapsedIconText: 'Interact to expand Tile',
-    tileExpandedIconText: 'Interact to collapse Tile',
-    light: false,
-  };
-
-  static contextType = PrefixContext;
-
-  static getDerivedStateFromProps(
-    // eslint-disable-next-line react/prop-types
-    { expanded, tileMaxHeight, tilePadding },
-    state
-  ) {
-    const {
-      prevExpanded,
-      prevTileMaxHeight,
-      prevTilePadding,
-      expanded: currentExpanded,
-      tileMaxHeight: currentTileMaxHeight,
-      tilePadding: currentTilePadding,
-    } = state;
-    const expandedChanged = prevExpanded !== expanded;
-    const tileMaxHeightChanged = prevTileMaxHeight !== tileMaxHeight;
-    const tilePaddingChanged = prevTilePadding !== tilePadding;
-    return !expandedChanged && !tileMaxHeightChanged && !tilePaddingChanged
-      ? null
-      : {
-          expanded: !expandedChanged ? currentExpanded : expanded,
-          tileMaxHeight: !tileMaxHeightChanged
-            ? currentTileMaxHeight
-            : tileMaxHeight,
-          tilePadding: !tilePaddingChanged ? currentTilePadding : tilePadding,
-          prevExpanded: expanded,
-          prevTileMaxHeight: tileMaxHeight,
-          prevTilePadding: tilePadding,
-        };
+  if (expanded !== prevExpanded) {
+    setIsExpanded(expanded);
+    setPrevExpanded(expanded);
+    setMaxHeight();
   }
 
-  componentDidMount = () => {
-    if (this.tile) {
-      const getStyle = window.getComputedStyle(this.tile, null);
+  if (tileMaxHeight !== prevTileMaxHeight) {
+    setIsTileMaxHeight(tileMaxHeight);
+    setPrevTileMaxHeight(tileMaxHeight);
+  }
 
-      if (this.aboveTheFold) {
-        this.setState({
-          tileMaxHeight: this.aboveTheFold.getBoundingClientRect().height,
-          tilePadding:
-            parseInt(getStyle.getPropertyValue('padding-top'), 10) +
-            parseInt(getStyle.getPropertyValue('padding-bottom'), 10),
-        });
-      }
+  if (tilePadding !== prevTilePadding) {
+    setIsTilePadding(tilePadding);
+    setPrevTilePadding(tilePadding);
+  }
+
+  function setMaxHeight() {
+    if (isExpanded) {
+      setIsTileMaxHeight(tileContent.current.getBoundingClientRect().height);
     }
-  };
 
-  componentDidUpdate = (prevProps) => {
-    if (prevProps.expanded !== this.props.expanded) {
-      this.setMaxHeight();
-    }
-  };
+    setIsTileMaxHeight(aboveTheFold.current.getBoundingClientRect().height);
+  }
 
-  setMaxHeight = () => {
-    if (this.state.expanded ? this.tileContent : this.aboveTheFold) {
-      this.setState({
-        tileMaxHeight: this.state.expanded
-          ? this.tileContent.getBoundingClientRect().height
-          : this.aboveTheFold.getBoundingClientRect().height,
-      });
-    }
-  };
-
-  handleClick = (evt) => {
-    if (!this.props.onBeforeClick(evt) || evt.target.tagName === 'INPUT') {
+  function handleClick(evt) {
+    if (!onBeforeClick(evt) || evt.target.tagName === 'INPUT') {
       return;
     }
-    evt.persist();
-    this.setState(
-      {
-        expanded: !this.state.expanded,
-      },
-      () => {
-        this.setMaxHeight();
-        // TODO: Remove handleClick prop when handleClick is deprecated
-        this.props.handleClick?.(evt) || this.props.onClick?.(evt);
-      }
-    );
-  };
 
-  handleKeyUp = (evt) => {
-    if (evt.target !== this.tile) {
+    evt.persist();
+    setIsExpanded(!isExpanded);
+    setMaxHeight();
+
+    if (onClick) {
+      onClick(evt);
+    }
+  }
+
+  function handleKeyUp(evt) {
+    if (evt.target !== tile.current) {
       if (matches(evt, [keys.Enter, keys.Space])) {
         evt.preventDefault();
       }
     }
-  };
-
-  getChildren = () => {
-    return React.Children.toArray(this.props.children);
-  };
-
-  render() {
-    const {
-      tabIndex,
-      className,
-      expanded, // eslint-disable-line
-      tileMaxHeight, // eslint-disable-line
-      tilePadding, // eslint-disable-line
-      handleClick, // eslint-disable-line
-      onClick,
-      onKeyUp,
-      tileCollapsedIconText,
-      tileExpandedIconText,
-      tileCollapsedLabel,
-      tileExpandedLabel,
-      onBeforeClick, // eslint-disable-line
-      light,
-      ...rest
-    } = this.props;
-
-    const prefix = this.context;
-
-    const { expanded: isExpanded } = this.state;
-
-    const classes = cx(
-      `${prefix}--tile`,
-      `${prefix}--tile--expandable`,
-      {
-        [`${prefix}--tile--is-expanded`]: isExpanded,
-        [`${prefix}--tile--light`]: light,
-      },
-      className
-    );
-
-    const tileStyle = {
-      maxHeight: isExpanded
-        ? null
-        : this.state.tileMaxHeight + this.state.tilePadding,
-    };
-
-    const childrenAsArray = this.getChildren();
-
-    return (
-      // eslint-disable-next-line jsx-a11y/click-events-have-key-events,jsx-a11y/no-static-element-interactions
-      <button
-        type="button"
-        ref={(tile) => {
-          this.tile = tile;
-        }}
-        style={tileStyle}
-        className={classes}
-        aria-expanded={isExpanded}
-        title={isExpanded ? tileExpandedIconText : tileCollapsedIconText}
-        {...rest}
-        onKeyUp={composeEventHandlers([onKeyUp, this.handleKeyUp])}
-        onClick={composeEventHandlers([onClick, this.handleClick])}
-        tabIndex={tabIndex}>
-        <div
-          ref={(tileContent) => {
-            this.tileContent = tileContent;
-          }}>
-          <div
-            ref={(aboveTheFold) => {
-              this.aboveTheFold = aboveTheFold;
-            }}
-            className={`${prefix}--tile-content`}>
-            {childrenAsArray[0]}
-          </div>
-          <div className={`${prefix}--tile__chevron`}>
-            <span>{isExpanded ? tileExpandedLabel : tileCollapsedLabel}</span>
-            <ChevronDown16 />
-          </div>
-          <div className={`${prefix}--tile-content`}>{childrenAsArray[1]}</div>
-        </div>
-      </button>
-    );
   }
+
+  function getChildren() {
+    return React.Children.toArray(children);
+  }
+
+  const classes = cx(
+    `${prefix}--tile`,
+    `${prefix}--tile--expandable`,
+    {
+      [`${prefix}--tile--is-expanded`]: isExpanded,
+      [`${prefix}--tile--light`]: light,
+    },
+    className
+  );
+
+  const tileStyle = {
+    maxHeight: isExpanded ? null : isTileMaxHeight + isTilePadding,
+  };
+
+  const childrenAsArray = getChildren();
+
+  useIsomorphicEffect(() => {
+    const getStyle = window.getComputedStyle(tile.current, null);
+    const { current: node } = aboveTheFold;
+    const { height } = node.getBoundingClientRect();
+    const paddingTop = parseInt(getStyle.getPropertyValue('padding-top'), 10);
+    const paddingBottom = parseInt(
+      getStyle.getPropertyValue('padding-bottom'),
+      10
+    );
+
+    setIsTileMaxHeight(height);
+    setIsTilePadding(paddingTop + paddingBottom);
+  }, []);
+
+  useEffect(() => {
+    const resizeObserver = new ResizeObserver((entries) => {
+      const [aboveTheFold] = entries;
+      setIsTileMaxHeight(aboveTheFold.contentRect.height);
+    });
+
+    resizeObserver.observe(aboveTheFold.current);
+
+    return () => resizeObserver.disconnect();
+  }, []);
+  return (
+    <button
+      type="button"
+      ref={tile}
+      style={tileStyle}
+      className={classes}
+      aria-expanded={isExpanded}
+      title={isExpanded ? tileExpandedIconText : tileCollapsedIconText}
+      {...rest}
+      onKeyUp={composeEventHandlers([onKeyUp, handleKeyUp])}
+      onClick={composeEventHandlers([onClick, handleClick])}
+      tabIndex={tabIndex}>
+      <div ref={tileContent}>
+        <div ref={aboveTheFold} className={`${prefix}--tile-content`}>
+          {childrenAsArray[0]}
+        </div>
+        <div className={`${prefix}--tile__chevron`}>
+          <span>{isExpanded ? tileExpandedLabel : tileCollapsedLabel}</span>
+          <ChevronDown16 />
+        </div>
+        <div className={`${prefix}--tile-content`}>{childrenAsArray[1]}</div>
+      </div>
+    </button>
+  );
 }
 
+ExpandableTile.propTypes = {
+  /**
+   * The child nodes.
+   */
+  children: PropTypes.node,
+
+  /**
+   * The CSS class names.
+   */
+  className: PropTypes.string,
+
+  /**
+   * `true` if the tile is expanded.
+   */
+  expanded: PropTypes.bool,
+
+  /**
+   * An ID that can be provided to aria-labelledby
+   */
+  id: PropTypes.string,
+
+  /**
+   * `true` to use the light version. For use on $ui-01 backgrounds only.
+   * Don't use this to make tile background color same as container background color.
+   */
+  light: deprecate(
+    PropTypes.bool,
+    'The `light` prop for `ExpandableTile` is no longer needed and has been deprecated. It will be removed in the next major release. Use the Layer component instead.'
+  ),
+
+  /**
+   * optional handler to decide whether to ignore a click. returns false if click should be ignored
+   */
+  onBeforeClick: PropTypes.func,
+
+  /**
+   * Specify the function to run when the ExpandableTile is clicked
+   */
+  onClick: PropTypes.func,
+
+  /**
+   * optional handler to trigger a function when a key is pressed
+   */
+  onKeyUp: PropTypes.func,
+
+  /**
+   * The `tabindex` attribute.
+   */
+  tabIndex: PropTypes.number,
+
+  /**
+   * The description of the "collapsed" icon that can be read by screen readers.
+   */
+  tileCollapsedIconText: PropTypes.string,
+
+  /**
+   * When "collapsed", a label to appear next to the chevron (e.g., "View more").
+   */
+  tileCollapsedLabel: PropTypes.string,
+
+  /**
+   * The description of the "expanded" icon that can be read by screen readers.
+   */
+  tileExpandedIconText: PropTypes.string,
+
+  /**
+   * When "expanded", a label to appear next to the chevron (e.g., "View less").
+   */
+  tileExpandedLabel: PropTypes.string,
+};
+
+ExpandableTile.defaultProps = {
+  tabIndex: 0,
+  expanded: false,
+  tileMaxHeight: 0,
+  tilePadding: 0,
+  onBeforeClick: () => true,
+  onClick: () => {},
+  tileCollapsedIconText: 'Interact to expand Tile',
+  tileExpandedIconText: 'Interact to collapse Tile',
+};
+
+ExpandableTile.displayName = 'ExpandableTile';
+
 export const TileAboveTheFoldContent = React.forwardRef(
-  function TileAboveTheFoldContent({ children }, ref) {
+  function TilAboveTheFoldContent({ children }, ref) {
     const prefix = usePrefix();
 
     return (
-      <span ref={ref} className={`${prefix}--tile__above-the-fold`}>
+      <span ref={ref} className={`${prefix}--tile-content__above-the-fold`}>
         {children}
       </span>
     );
   }
 );
 
-TileAboveTheFoldContent.displayName = 'TileAboveTheFoldContent';
 TileAboveTheFoldContent.propTypes = {
   /**
    * The child nodes.
    */
   children: PropTypes.node,
 };
+
+TileAboveTheFoldContent.displayName = 'TileAboveTheFoldContent';
 
 export const TileBelowTheFoldContent = React.forwardRef(
   function TileBelowTheFoldContent({ children }, ref) {
@@ -695,10 +653,11 @@ export const TileBelowTheFoldContent = React.forwardRef(
   }
 );
 
-TileBelowTheFoldContent.displayName = 'TileBelowTheFoldContent';
 TileBelowTheFoldContent.propTypes = {
   /**
    * The child nodes.
    */
   children: PropTypes.node,
 };
+
+TileBelowTheFoldContent.displayName = 'TileBelowTheFoldContent';

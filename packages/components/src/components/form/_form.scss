@@ -18,11 +18,15 @@
   .#{$prefix}--fieldset {
     @include reset;
 
-    margin-bottom: $carbon--spacing-07;
+    @if not feature-flag-enabled('enable-v11-release') {
+      margin-bottom: $carbon--spacing-07;
+    }
   }
 
-  .#{$prefix}--fieldset--no-margin {
-    margin-bottom: 0;
+  @if not feature-flag-enabled('enable-v11-release') {
+    .#{$prefix}--fieldset--no-margin {
+      margin-bottom: 0;
+    }
   }
 
   .#{$prefix}--form-item {
@@ -43,10 +47,17 @@
 
     display: inline-block;
     margin-bottom: $carbon--spacing-03;
+
     color: $text-02;
     font-weight: $input-label-weight;
     line-height: 1rem;
     vertical-align: baseline;
+  }
+
+  @if feature-flag-enabled('enable-v11-release') {
+    .#{$prefix}--label {
+      margin-bottom: 0;
+    }
   }
 
   .#{$prefix}--label .#{$prefix}--tooltip__trigger {
@@ -125,8 +136,10 @@
     display: block;
   }
 
-  .#{$prefix}--form--fluid .#{$prefix}--fieldset {
-    margin: 0;
+  @if not feature-flag-enabled('enable-v11-release') {
+    .#{$prefix}--form--fluid .#{$prefix}--fieldset {
+      margin: 0;
+    }
   }
 
   .#{$prefix}--form--fluid input[data-invalid] {

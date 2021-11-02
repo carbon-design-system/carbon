@@ -32,7 +32,8 @@ const items = [
   },
   {
     id: 'downshift-1-item-2',
-    text: 'Option 3',
+    text: 'Option 3 - a disabled item',
+    disabled: true,
   },
   {
     id: 'downshift-1-item-3',

@@ -36,10 +36,12 @@ const defaultSize = 'sm';
 
 const Menu = function Menu({
   children,
+  className,
   id,
   level = 1,
   open,
   size = defaultSize,
+  target = document.body,
   x = 0,
   y = 0,
   onClose = () => {},
@@ -257,10 +259,12 @@ const Menu = function Menu({
         open && position[0] === 0 && position[1] === 0,
       [`${prefix}--menu--root`]: isRootMenu,
     },
-    size !== defaultSize && `${prefix}--menu--${size}`
+    size !== defaultSize && `${prefix}--menu--${size}`,
+    className
   );
 
   const ulAttributes = {
+    ...rest,
     id,
     ref: rootRef,
     className: classes,
@@ -306,7 +310,7 @@ const Menu = function Menu({
   const menu = <ul {...ulAttributes}>{childrenToRender}</ul>;
 
   return isRootMenu
-    ? (open && ReactDOM.createPortal(menu, document.body)) || null
+    ? (open && ReactDOM.createPortal(menu, target)) || null
     : menu;
 };
 
@@ -315,6 +319,11 @@ Menu.propTypes = {
    * Specify the children of the Menu
    */
   children: PropTypes.node,
+
+  /**
+   * Specify a custom className to apply to the ul node
+   */
+  className: PropTypes.string,
 
   /**
    * Define an ID for this menu
@@ -340,6 +349,11 @@ Menu.propTypes = {
    * Specify the size of the menu, from a list of available sizes.
    */
   size: PropTypes.oneOf(['sm', 'md', 'lg']),
+
+  /**
+   * Optionally pass an element the Menu should be appended to as a child. Defaults to document.body.
+   */
+  target: PropTypes.element,
 
   /**
    * Specify the x position where this menu is rendered

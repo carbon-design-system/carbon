@@ -50,6 +50,11 @@ export default class Modal extends Component {
     className: PropTypes.string,
 
     /**
+     * Specify an label for the close button of the modal; defaults to close
+     */
+    closeButtonLabel: PropTypes.string,
+
+    /**
      * Specify whether the Modal is for dangerous actions
      */
     danger: PropTypes.bool,
@@ -80,7 +85,10 @@ export default class Modal extends Component {
     /**
      * Provide a description for "close" icon that can be read by screen readers
      */
-    iconDescription: PropTypes.string,
+    iconDescription: deprecate(
+      PropTypes.string,
+      'The iconDescription prop is no longer needed and can be safely removed. This prop will be removed in the next major release of Carbon.'
+    ),
 
     /**
      * Specify the DOM element ID of the top-level node.
@@ -220,7 +228,6 @@ export default class Modal extends Component {
     primaryButtonDisabled: false,
     onKeyDown: () => {},
     passiveModal: false,
-    iconDescription: 'Close',
     modalHeading: '',
     modalLabel: '',
     preventCloseOnClickOutside: false,
@@ -382,6 +389,7 @@ export default class Modal extends Component {
       shouldSubmitOnEnter, // eslint-disable-line
       size,
       hasScrollingContent,
+      closeButtonLabel,
       preventCloseOnClickOutside, // eslint-disable-line
       ...other
     } = this.props;
@@ -417,11 +425,12 @@ export default class Modal extends Component {
         className={this.modalCloseButtonClass}
         type="button"
         onClick={onRequestClose}
-        title={iconDescription}
-        aria-label={iconDescription}
+        title={ariaLabel ? ariaLabel : iconDescription}
+        aria-label={closeButtonLabel ? closeButtonLabel : 'close'}
         ref={this.button}>
         <Close20
-          aria-label={iconDescription}
+          aria-hidden="true"
+          tabIndex="-1"
           className={`${this.modalCloseButtonClass}__icon`}
         />
       </button>
