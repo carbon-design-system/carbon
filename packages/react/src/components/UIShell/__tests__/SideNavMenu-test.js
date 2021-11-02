@@ -11,6 +11,7 @@ import { SideNavMenu } from '../SideNavMenu';
 import { SideNavMenuItem } from '../';
 
 const prefix = 'bx';
+
 describe('SideNavMenu', () => {
   let mockProps, wrapper;
 
