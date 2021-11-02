@@ -71,7 +71,7 @@
   .#{$prefix}--search-input[disabled] {
     border-bottom: 1px solid transparent;
     background-color: $field;
-    color: $field;
+    color: $text-disabled;
     cursor: not-allowed;
 
     &::placeholder {
