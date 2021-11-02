@@ -8861,6 +8861,9 @@ Map {
       "children": Object {
         "type": "node",
       },
+      "className": Object {
+        "type": "string",
+      },
       "id": Object {
         "type": "string",
       },
@@ -8882,6 +8885,9 @@ Map {
           ],
         ],
         "type": "oneOf",
+      },
+      "target": Object {
+        "type": "element",
       },
       "x": Object {
         "args": Array [
