@@ -15,7 +15,7 @@ import TabContent from '../../TabContent';
 import deprecate from '../../../prop-types/deprecate';
 import { usePrefix } from '../../../internal/usePrefix';
 
-const Tabs = React.forwardRef(function Tabs(
+const ContainedTabs = React.forwardRef(function ContainedTabs(
   {
     children,
     className,
@@ -449,8 +449,8 @@ const Tabs = React.forwardRef(function Tabs(
       className,
       // `${prefix}--tabs`,
       `${prefix}--tabs--scrollable`,
+      `${prefix}--tabs--scrollable--container`,
       {
-        // [`${prefix}--tabs--light`]: light,
         [`${prefix}--tabs--scrollable--light`]: light,
       }
     ),
@@ -525,7 +525,7 @@ const Tabs = React.forwardRef(function Tabs(
   );
 });
 
-Tabs.propTypes = {
+ContainedTabs.propTypes = {
   /**
    * Pass in a collection of <Tab> children to be rendered depending on the
    * currently selected tab
@@ -600,6 +600,11 @@ Tabs.propTypes = {
    * Provide a className that is applied to the <TabContent> components
    */
   tabContentClassName: PropTypes.string,
+
+  //   /**
+  //    * Provide the type of Tab
+  //    */
+  //   type: PropTypes.oneOf(['default', 'container']),
 };
 
-export default Tabs;
+export default ContainedTabs;
