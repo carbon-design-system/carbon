@@ -10,6 +10,7 @@ import {
   Tile as TileNext,
   ClickableTile as ClickableTileNext,
   SelectableTile as SelectableTileNext,
+  ExpandableTile as ExpandableTileNext,
   TileAboveTheFoldContent as TileAboveTheFoldContentNext,
   TileBelowTheFoldContent as TileBelowTheFoldContentNext,
 } from './next/Tile';
@@ -17,7 +18,7 @@ import {
   Tile as TileClassic,
   ClickableTile as ClickableTileClassic,
   SelectableTile as SelectableTileClassic,
-  ExpandableTile,
+  ExpandableTile as ExpandableTileClassic,
   TileAboveTheFoldContent as TileAboveTheFoldContentClassic,
   TileBelowTheFoldContent as TileBelowTheFoldContentClassic,
 } from './Tile';
@@ -34,7 +35,9 @@ export const SelectableTile = FeatureFlags.enabled('enable-v11-release')
   ? SelectableTileNext
   : SelectableTileClassic;
 
-export { ExpandableTile };
+export const ExpandableTile = FeatureFlags.enabled('enable-v11-release')
+  ? ExpandableTileNext
+  : ExpandableTileClassic;
 
 export const TileAboveTheFoldContent = FeatureFlags.enabled(
   'enable-v11-release'
