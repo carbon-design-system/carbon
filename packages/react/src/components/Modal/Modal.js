@@ -50,6 +50,11 @@ export default class Modal extends Component {
     className: PropTypes.string,
 
     /**
+     * Specify an label for the close button of the modal; defaults to close
+     */
+    closeButtonLabel: PropTypes.string,
+
+    /**
      * Specify whether the Modal is for dangerous actions
      */
     danger: PropTypes.bool,
@@ -384,6 +389,7 @@ export default class Modal extends Component {
       shouldSubmitOnEnter, // eslint-disable-line
       size,
       hasScrollingContent,
+      closeButtonLabel,
       preventCloseOnClickOutside, // eslint-disable-line
       ...other
     } = this.props;
@@ -420,11 +426,10 @@ export default class Modal extends Component {
         type="button"
         onClick={onRequestClose}
         title={ariaLabel ? ariaLabel : iconDescription}
-        aria-label={ariaLabel ? ariaLabel : iconDescription}
+        aria-label={closeButtonLabel ? closeButtonLabel : 'close'}
         ref={this.button}>
         <Close20
           aria-hidden="true"
-          aria-label="close"
           tabIndex="-1"
           className={`${this.modalCloseButtonClass}__icon`}
         />

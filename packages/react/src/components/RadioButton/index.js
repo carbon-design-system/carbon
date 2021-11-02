@@ -5,6 +5,13 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+import * as FeatureFlags from '@carbon/feature-flags';
+import { default as RadioButtonNext } from './next/RadioButton';
+import { default as RadioButtonClassic } from './RadioButton';
+
+const RadioButton = FeatureFlags.enabled('enable-v11-release')
+  ? RadioButtonNext
+  : RadioButtonClassic;
+
+export default RadioButton;
 export * from './RadioButton.Skeleton';
-export * from './RadioButton';
-export default from './RadioButton';
