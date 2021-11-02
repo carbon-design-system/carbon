@@ -437,6 +437,8 @@
 
     p {
       @include type-style('body-short-01');
+
+      text-align: left;
     }
 
     button {
