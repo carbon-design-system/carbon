@@ -6,7 +6,7 @@
  */
 
 import PropTypes from 'prop-types';
-import React, { Component, useState, useRef } from 'react';
+import React, { Component, useState, useRef, useEffect } from 'react';
 import classNames from 'classnames';
 import { Close20 } from '@carbon/icons-react';
 import toggleClass from '../../tools/toggleClass';
@@ -60,6 +60,50 @@ function Modal({
   const modalHeadingId = `${prefix}--modal-header__heading--${modalInstanceId}`;
   const modalBodyId = `${prefix}--modal-body--${modalInstanceId}`;
   const modalCloseButtonClass = `${prefix}--modal-close`;
+  const [isOpen, setIsOpen] = useState(open);
+  const [prevOpen, setPrevOpen] = useState(open);
+
+  if (open !== prevOpen) {
+    setIsOpen(open);
+    setPrevOpen(open);
+  }
+
+  useEffect(() => {
+    toggleClass(document.body, `${prefix}--body--with-modal-open`, open);
+    if (open) {
+      focusButton(innerModal.current);
+    }
+    return () =>
+      toggleClass(document.body, `${prefix}--body--with-modal-open`, false);
+  }, [open]);
+
+  // componentDidMount() {
+  //   toggleClass(
+  //     document.body,
+  //     `${prefix}--body--with-modal-open`,
+  //     open
+  //   );
+  //   if (!open) {
+  //     return;
+  //   }
+  //   focusButton(innerModal.current);
+  // }
+  // componentDidUpdate(prevProps) {
+  //   if (!prevProps.open && open) {
+  //     beingOpen = true;
+  //   } else if (prevProps.open && !open) {
+  //     beingOpen = false;
+  //   }
+  //   toggleClass(
+  //     document.body,
+  //     `${prefix}--body--with-modal-open`,
+  //     open
+  //   );
+  // }
+
+  // componentWillUnmount() {
+  //   toggleClass(document.body, `${prefix}--body--with-modal-open`, false);
+  // }
 
   const isCloseButton = (element) => {
     return (
@@ -114,19 +158,6 @@ function Modal({
     }
   };
 
-  // componentDidUpdate(prevProps) {
-  //   if (!prevProps.open && open) {
-  //     beingOpen = true;
-  //   } else if (prevProps.open && !open) {
-  //     beingOpen = false;
-  //   }
-  //   toggleClass(
-  //     document.body,
-  //     `${prefix}--body--with-modal-open`,
-  //     open
-  //   );
-  // }
-
   const initialFocus = (focusContainerElement) => {
     const containerElement = focusContainerElement || innerModal.current;
     const primaryFocusElement = containerElement
@@ -146,22 +177,6 @@ function Modal({
       target.focus();
     }
   };
-
-  // componentWillUnmount() {
-  //   toggleClass(document.body, `${prefix}--body--with-modal-open`, false);
-  // }
-
-  // componentDidMount() {
-  //   toggleClass(
-  //     document.body,
-  //     `${prefix}--body--with-modal-open`,
-  //     open
-  //   );
-  //   if (!open) {
-  //     return;
-  //   }
-  //   focusButton(innerModal.current);
-  // }
 
   const handleTransitionEnd = (evt) => {
     if (

@@ -16,14 +16,14 @@ import {
   text,
   withKnobs,
 } from '@storybook/addon-knobs';
-import Modal from '../Modal';
-import Button from '../Button';
-import Select from '../Select';
-import MultiSelect from '../MultiSelect';
-import Dropdown from '../Dropdown';
-import SelectItem from '../SelectItem';
-import TextInput from '../TextInput';
-import mdx from './Modal.mdx';
+import { Modal } from '../Modal';
+import Button from '../../Button';
+import Select from '../../Select';
+import MultiSelect from '../../MultiSelect';
+import Dropdown from '../../Dropdown';
+import SelectItem from '../../SelectItem';
+import TextInput from '../../TextInput';
+import mdx from '../Modal.mdx';
 
 const sizes = {
   'Extra small (xs)': 'xs',
