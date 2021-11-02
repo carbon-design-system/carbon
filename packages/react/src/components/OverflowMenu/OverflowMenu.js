@@ -533,8 +533,6 @@ class OverflowMenu extends Component {
     );
 
     const iconProps = {
-      onClick: this.handleClick,
-      onKeyDown: this.handleKeyDown,
       className: overflowMenuIconClasses,
       'aria-label': iconDescription,
     };
