@@ -212,6 +212,8 @@ Array [
   "unstable_MenuSelectableItem",
   "unstable_PageSelector",
   "unstable_Pagination",
+  "unstable_Popover",
+  "unstable_PopoverContent",
   "unstable_ProgressBar",
   "unstable_Section",
   "unstable_Stack",
