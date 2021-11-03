@@ -1327,7 +1327,7 @@
   sizes:
     - 32
 - name: autoscaling
-  friendly_name: Autoscaling
+  friendly_name: IBM Cloud® autoscaling
   aliases:
     - auto scaling
     - increase
@@ -1461,7 +1461,7 @@
   sizes:
     - 32
 - name: bastion-host
-  friendly_name: bastion-host
+  friendly_name: Bastion-Host
   aliases:
     - bastion
     - host
@@ -1611,7 +1611,7 @@
   sizes:
     - 32
 - name: block-storage
-  friendly_name: Block storage
+  friendly_name: IBM Cloud® Block Storage for VPC
   aliases:
     - block storage
     - storage
@@ -3816,7 +3816,7 @@
     - lightning
     - forecast
 - name: cloud--logging
-  friendly_name: Cloud logging
+  friendly_name: IBM Cloud® Log Analysis
   aliases:
     - cloud
     - logging
@@ -3829,7 +3829,7 @@
   sizes:
     - 32
 - name: cloud--monitoring
-  friendly_name: Cloud monitoring
+  friendly_name: IBM Cloud® Monitoring
   aliases:
     - cloud
     - monitoring
@@ -3918,7 +3918,7 @@
   sizes:
     - 32
 - name: cloud-foundry--1
-  friendly_name: IBM Cloud® Foundry 1
+  friendly_name: IBM Cloud® Foundry
   sizes:
     - 32
   aliases:
@@ -3938,15 +3938,16 @@
     - cloud
     - foundry
 - name: cloud-registry
-  friendly_name: Cloud registry
+  friendly_name: IBM Cloud® Container Registry
   aliases:
     - cloud
+    - container
     - registry
     - data
   sizes:
     - 32
 - name: cloud-satellite
-  friendly_name: Cloud satellite
+  friendly_name: CIBM Cloud® Satellite
   aliases:
     - cloud
     - satellite
@@ -4319,9 +4320,10 @@
   sizes:
     - 32
 - name: content-delivery-network
-  friendly_name: Content delivery network
+  friendly_name: IBM Cloud® Content Delivery Network
   aliases:
     - content
+    - cloud
     - delivery
     - network
     - app
@@ -4902,7 +4904,7 @@
   sizes:
     - 32
 - name: data--center
-  friendly_name: data--center
+  friendly_name: Data center
   aliases:
     - data
     - center
@@ -5066,7 +5068,7 @@
   sizes:
     - 32
 - name: data-diode
-  friendly_name: Data diode - data - diode - systems
+  friendly_name: Data diode
   sizes:
     - 32
 - name: data-player
@@ -5179,7 +5181,7 @@
     - stats
     - web
 - name: database--datastax
-  friendly_name: Database DataStax
+  friendly_name: IBM Cloud® Databases for DataStax
   aliases:
     - enterprise
     - datastax
@@ -5190,7 +5192,7 @@
   sizes:
     - 32
 - name: database--elastic
-  friendly_name: Database elastic
+  friendly_name: IBM Cloud® Databases for Elasticsearch
   aliases:
     - enterprise
     - elastic
@@ -5201,18 +5203,18 @@
   sizes:
     - 32
 - name: database--enterprise-db2
-  friendly_name: Database enterprise Db2
+  friendly_name: IBM Cloud® Databases for EnterpriseDB
   aliases:
     - enterprise
     - database
-    - Db2
+    - Db
     - app
     - catalog
     - catalogue
   sizes:
     - 32
 - name: database--etcd
-  friendly_name: Database etcd
+  friendly_name: IBM Cloud® Databases for etcd
   aliases:
     - enterprise
     - database
@@ -5223,7 +5225,7 @@
   sizes:
     - 32
 - name: database--mongodb
-  friendly_name: Database MongoDB
+  friendly_name: IBM Cloud® Databases for MongoDB
   aliases:
     - enterprise
     - database
@@ -5234,7 +5236,7 @@
   sizes:
     - 32
 - name: database--postgreSQL
-  friendly_name: Database PostgreSQL
+  friendly_name: IBM Cloud® Databases for PostgreSQL
   aliases:
     - enterprise
     - database
@@ -5245,7 +5247,7 @@
   sizes:
     - 32
 - name: database--rabbit
-  friendly_name: Database Rabbit
+  friendly_name: IBM Cloud® Databases for Rabbit
   aliases:
     - enterprise
     - database
@@ -5256,7 +5258,7 @@
   sizes:
     - 32
 - name: database--redis
-  friendly_name: Database Redis
+  friendly_name: IBM Cloud® Databases for Redis
   aliases:
     - enterprise
     - database
@@ -5563,7 +5565,7 @@
     - imaging
     - communication
 - name: direct-link
-  friendly_name: Direct link
+  friendly_name: IBM Cloud® Direct Link 2.0
   aliases:
     - app
     - application
@@ -5896,7 +5898,7 @@
   sizes:
     - 32
 - name: dns-services
-  friendly_name: DNS services
+  friendly_name: IBM Cloud® DNS services
   aliases:
     - app
     - application
@@ -7090,7 +7092,7 @@
   sizes:
     - 32
 - name: file-storage
-  friendly_name: file-storage
+  friendly_name: File storage
   aliases:
     - file
     - storage
@@ -7351,7 +7353,7 @@
   sizes:
     - 32
 - name: floating-ip
-  friendly_name: floating-ip
+  friendly_name: Floating IP
   aliases:
     - floating
     - IP
@@ -7445,7 +7447,7 @@
   sizes:
     - 32
 - name: flow-logs-vpc
-  friendly_name: flow-logs-vpc
+  friendly_name: IBM Cloud® Flow Logs for VPC
   aliases:
     - flow
     - logs
@@ -8562,7 +8564,7 @@
   sizes:
     - 32
 - name: ibm-cloud--dedicated-host
-  friendly_name: IBM Cloud® dedicated host
+  friendly_name: IBM Cloud® Dedicated Host
   aliases:
     - product
     - cloud
@@ -8609,7 +8611,7 @@
   sizes:
     - 32
 - name: ibm-cloud-pak--applications
-  friendly_name: IBM Cloud Pak® Applications
+  friendly_name: IBM Cloud Pak® for Applications
   aliases:
     - enterprise
     - app
@@ -8621,7 +8623,7 @@
   sizes:
     - 32
 - name: ibm-cloud-pak--data
-  friendly_name: IBM Cloud Pak® data
+  friendly_name: IBM Cloud Pak® for Data
   aliases:
     - enterprise
     - app catalog
@@ -8631,7 +8633,7 @@
   sizes:
     - 32
 - name: ibm-cloud-pak--integration
-  friendly_name: IBM Cloud Pak® Integration
+  friendly_name: IBM Cloud Pak® for Integration
   aliases:
     - enterprise
     - app catalog
@@ -8641,7 +8643,7 @@
   sizes:
     - 32
 - name: ibm-cloud-pak--multicloud-mgmt
-  friendly_name: IBM Cloud Pak® Multicloud Management
+  friendly_name: IBM Cloud Pak® for Multicloud Management
   aliases:
     - enterprise
     - app catalog
@@ -8651,7 +8653,7 @@
   sizes:
     - 32
 - name: ibm-cloud-pak--security
-  friendly_name: IBM Cloud Pak® Security
+  friendly_name: IBM Cloud Pak® for Security
   aliases:
     - enterprise
     - app catalog
@@ -9026,10 +9028,13 @@
   sizes:
     - 32
 - name: infrastructure--classic
-  friendly_name: Infrastructure classic
+  friendly_name: IBM Cloud® Classic Infrastructure
   aliases:
     - infrastructure
+    - classic infrastructure
     - app
+    - catalogue
+    - catalog
     - cloud
     - application
   sizes:
@@ -9152,7 +9157,7 @@
   sizes:
     - 32
 - name: intrusion-prevention
-  friendly_name: intrusion-prevention
+  friendly_name: Intrusion prevention
   aliases:
     - intrustion
     - prevent
@@ -9971,7 +9976,7 @@
   sizes:
     - 32
 - name: load-balancer--vpc
-  friendly_name: Load balancer VPC
+  friendly_name: IBM Cloud® Load Balancer for VPC
   aliases:
     - load
     - balancer
@@ -18025,7 +18030,7 @@
   sizes:
     - 32
 - name: virtual-private-cloud--alt
-  friendly_name: Virtual private cloud alt
+  friendly_name: IBM Cloud® VPC
   sizes:
     - 32
   aliases:
@@ -18050,7 +18055,7 @@
   sizes:
     - 32
 - name: vlan--ibm
-  friendly_name: VLAN IBM
+  friendly_name: IBM Cloud® VLAN
   aliases:
     - virtual
     - LAN
@@ -18082,7 +18087,7 @@
   sizes:
     - 32
 - name: volume--block-storage
-  friendly_name: Volume block storage
+  friendly_name: Block volume
   aliases:
     - systems
     - volume
@@ -18125,7 +18130,7 @@
   sizes:
     - 32
 - name: volume--file-storage
-  friendly_name: Volume file storage
+  friendly_name: File system
   aliases:
     - systems
     - volume
@@ -18149,7 +18154,7 @@
     - sound
     - noise
 - name: volume--object-storage
-  friendly_name: Volume object storage
+  friendly_name: Object bucket
   aliases:
     - systems
     - volume
