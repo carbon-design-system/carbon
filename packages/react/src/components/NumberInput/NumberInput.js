@@ -10,6 +10,7 @@ import React, { Component } from 'react';
 import classNames from 'classnames';
 import { settings } from 'carbon-components';
 import { Add16, Subtract16 } from '@carbon/icons-react';
+import * as FeatureFlags from '@carbon/feature-flags';
 import mergeRefs from '../../tools/mergeRefs';
 import requiredIfValueExists from '../../prop-types/requiredIfValueExists';
 // replace "use" prefix to avoid react thinking this is a hook that
@@ -190,10 +191,14 @@ class NumberInput extends Component {
   static defaultProps = {
     disabled: false,
     hideLabel: false,
-    iconDescription: 'choose a number',
+    iconDescription: FeatureFlags.enabled('enable-v11-release')
+      ? undefined
+      : 'choose a number',
     step: 1,
     invalid: false,
-    invalidText: 'Provide invalidText',
+    invalidText: FeatureFlags.enabled('enable-v11-release')
+      ? undefined
+      : 'Provide invalidText',
     warn: false,
     warnText: '',
     ariaLabel: 'Numeric input field with increment and decrement buttons',
