@@ -710,9 +710,7 @@
       @include focus-outline('reset');
       @include type-style('body-short-01');
 
-      @if feature-flag-enabled('enable-v11-release') {
-        width: auto;
-      } @else {
+      @if not feature-flag-enabled('enable-v11-release') {
         width: rem(160px);
       }
 
