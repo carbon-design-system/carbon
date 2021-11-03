@@ -79,16 +79,12 @@ exports[`DataTable.TableToolbarMenu should render 1`] = `
             <ForwardRef(Download16)
               aria-label="Add"
               className="bx--overflow-menu__icon"
-              onClick={[Function]}
-              onKeyDown={[Function]}
             >
               <Icon
                 aria-label="Add"
                 className="bx--overflow-menu__icon"
                 fill="currentColor"
                 height={16}
-                onClick={[Function]}
-                onKeyDown={[Function]}
                 preserveAspectRatio="xMidYMid meet"
                 viewBox="0 0 16 16"
                 width={16}
@@ -100,8 +96,6 @@ exports[`DataTable.TableToolbarMenu should render 1`] = `
                   fill="currentColor"
                   focusable="false"
                   height={16}
-                  onClick={[Function]}
-                  onKeyDown={[Function]}
                   preserveAspectRatio="xMidYMid meet"
                   role="img"
                   viewBox="0 0 16 16"
