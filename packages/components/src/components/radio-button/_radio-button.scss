@@ -135,7 +135,6 @@
     + .#{$prefix}--radio-button__label
     .#{$prefix}--radio-button__appearance {
     outline: 2px solid $focus;
-    // 1px offset is visually too small
     outline-offset: 1.5px;
   }
 
