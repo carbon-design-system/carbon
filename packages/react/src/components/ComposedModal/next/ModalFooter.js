@@ -5,22 +5,25 @@ import ButtonSet from '../../ButtonSet';
 import classNames from 'classnames';
 import { usePrefix } from '../../../internal/usePrefix';
 
-export function ModalFooter({
-  className,
-  primaryClassName,
-  secondaryButtons,
-  secondaryClassName,
-  secondaryButtonText,
-  primaryButtonText,
-  primaryButtonDisabled,
-  closeModal, // eslint-disable-line
-  onRequestClose, // eslint-disable-line
-  onRequestSubmit, // eslint-disable-line
-  children,
-  danger,
-  inputref,
-  ...other
-}) {
+export const ModalFooter = React.forwardRef(function ModalFooter(
+  {
+    className,
+    primaryClassName,
+    secondaryButtons,
+    secondaryClassName,
+    secondaryButtonText,
+    primaryButtonText,
+    primaryButtonDisabled,
+    closeModal, // eslint-disable-line
+    onRequestClose, // eslint-disable-line
+    onRequestSubmit, // eslint-disable-line
+    children,
+    danger,
+    inputref,
+    ...other
+  },
+  ref
+) {
   const prefix = usePrefix();
 
   function handleRequestClose(evt) {
@@ -71,7 +74,7 @@ export function ModalFooter({
   };
 
   return (
-    <ButtonSet className={footerClass} {...other}>
+    <ButtonSet ref={ref} className={footerClass} {...other}>
       <SecondaryButtonSet />
       {primaryButtonText && (
         <Button
@@ -87,7 +90,7 @@ export function ModalFooter({
       {children}
     </ButtonSet>
   );
-}
+});
 
 ModalFooter.propTypes = {
   /**

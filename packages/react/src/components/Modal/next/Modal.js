@@ -22,38 +22,40 @@ import { usePrefix } from '../../../internal/usePrefix';
 
 const getInstanceId = setupGetInstanceId();
 
-export default function Modal({
-  children,
-  className,
-  modalHeading,
-  modalLabel,
-  modalAriaLabel,
-  passiveModal,
-  hasForm,
-  secondaryButtonText,
-  primaryButtonText,
-  open,
-  onRequestClose,
-  onRequestSubmit,
-  onSecondarySubmit,
-  iconDescription,
-  primaryButtonDisabled,
-  danger,
-  alert,
-  secondaryButtons,
-  selectorPrimaryFocus, // eslint-disable-line
-  selectorsFloatingMenus, // eslint-disable-line
-  shouldSubmitOnEnter, // eslint-disable-line
-  size,
-  hasScrollingContent,
-  closeButtonLabel,
-  preventCloseOnClickOutside, // eslint-disable-line
-  ...other
-}) {
+const Modal = React.forwardRef(function Modal(
+  {
+    children,
+    className,
+    modalHeading,
+    modalLabel,
+    modalAriaLabel,
+    passiveModal,
+    hasForm,
+    secondaryButtonText,
+    primaryButtonText,
+    open,
+    onRequestClose,
+    onRequestSubmit,
+    onSecondarySubmit,
+    iconDescription,
+    primaryButtonDisabled,
+    danger,
+    alert,
+    secondaryButtons,
+    selectorPrimaryFocus, // eslint-disable-line
+    selectorsFloatingMenus, // eslint-disable-line
+    shouldSubmitOnEnter, // eslint-disable-line
+    size,
+    hasScrollingContent,
+    closeButtonLabel,
+    preventCloseOnClickOutside, // eslint-disable-line
+    ...other
+  },
+  ref
+) {
   const prefix = usePrefix();
   const button = useRef();
   const secondaryButton = useRef();
-  const outerModal = useRef();
   const innerModal = useRef();
   const startTrap = useRef();
   const endTrap = useRef();
@@ -288,7 +290,7 @@ export default function Modal({
       onBlur={handleBlur}
       className={modalClasses}
       role="presentation"
-      ref={outerModal}>
+      ref={ref}>
       {/* Non-translatable: Focus-wrap code makes this `<span>` not actually read by screen readers */}
       <span
         ref={startTrap}
@@ -308,7 +310,7 @@ export default function Modal({
       </span>
     </div>
   );
-}
+});
 
 Modal.propTypes = {
   /**
@@ -520,3 +522,5 @@ Modal.defaultProps = {
   selectorPrimaryFocus: '[data-modal-primary-focus]',
   hasScrollingContent: false,
 };
+
+export default Modal;
