@@ -5,4 +5,14 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-export default from './TimePickerSelect';
+import * as FeatureFlags from '@carbon/feature-flags';
+
+import { default as TimePickerSelectNext } from './next/TimePickerSelect';
+
+import { default as TimePickerSelectClassic } from './TimePickerSelect';
+
+const TimePickerSelect = FeatureFlags.enabled('enable-v11-release')
+  ? TimePickerSelectNext
+  : TimePickerSelectClassic;
+
+export default TimePickerSelect;

@@ -6,7 +6,6 @@
  */
 
 import React from 'react';
-import { action } from '@storybook/addon-actions';
 
 import {
   withKnobs,
@@ -49,9 +48,6 @@ const props = {
     ),
     maxLength: number('Maximum length (maxLength in <TimePicker>)', 5),
     size: select('Field size (size)', sizes, undefined) || undefined,
-    onClick: action('onClick'),
-    onChange: action('onChange'),
-    onBlur: action('onBlur'),
   }),
   select: () => ({
     disabled: boolean('Disabled (disabled in <TimePickerSelect>)', false),
@@ -59,8 +55,8 @@ const props = {
       'Label text (labelText in <TimePickerSelect>)',
       'Please select'
     ),
-    iconDescription: text(
-      'Trigger icon description (iconDescription in <TimePickerSelect>)',
+    ['aria-label']: text(
+      'ARIA label (aria-label in <TimePickerSelect>)',
       'open list of options'
     ),
   }),
