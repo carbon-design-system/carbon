@@ -471,11 +471,7 @@ const ContainedTabs = React.forwardRef(function ContainedTabs(
 
   return (
     <>
-      <div
-        className={classes.tabs}
-        onScroll={handleScroll}
-        ref={ref}
-        {...other}>
+      <div className={classes.tabs} ref={ref} {...other}>
         <button
           aria-hidden="true"
           aria-label="Scroll left"
@@ -498,7 +494,8 @@ const ContainedTabs = React.forwardRef(function ContainedTabs(
           role="tablist"
           tabIndex={-1}
           className={classes.tablist}
-          ref={tablist}>
+          ref={tablist}
+          onScroll={handleScroll}>
           {tabsWithProps}
         </ul>
         {!rightOverflowNavButtonHidden && (
