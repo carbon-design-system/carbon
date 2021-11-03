@@ -8,7 +8,7 @@
 @use '../../config' as *;
 @use '../../motion' as *;
 @use '../../spacing' as *;
-@use '../../compat/theme' as *;
+@use '../../theme' as *;
 @use '../../type' as *;
 @use '../button/tokens' as button;
 @use '../../utilities/focus-outline' as *;
@@ -40,7 +40,7 @@
 
   // V11: Possibly deprecate
   .#{$prefix}--tile--light {
-    background-color: $ui-02;
+    background-color: $layer-02;
   }
 
   .#{$prefix}--tile--clickable,
@@ -249,7 +249,7 @@
 
   // V11: Possibly deprecate
   .#{$prefix}--tile--disabled.#{$prefix}--tile--selectable.#{$prefix}--tile--light {
-    background-color: $ui-02;
+    background-color: $layer-02;
   }
 
   .#{$prefix}--tile--disabled.#{$prefix}--tile--is-selected {
