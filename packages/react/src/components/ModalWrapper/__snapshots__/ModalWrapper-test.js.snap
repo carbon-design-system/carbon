@@ -53,187 +53,200 @@ exports[`ModalWrapper should render 1`] = `
         Test Modal
       </button>
     </Button>
-    <Modal
+    <FeatureToggle(Modal)
       aria-label="test modal"
-      hasScrollingContent={false}
       id="modal"
       modalHeading="Transactional Modal"
       modalLabel="Test Modal Label"
-      onKeyDown={[Function]}
       onRequestClose={[Function]}
       onRequestSubmit={[Function]}
       open={false}
-      passiveModal={false}
-      preventCloseOnClickOutside={false}
-      primaryButtonDisabled={false}
       primaryButtonText="Save"
       secondaryButtonText="Cancel"
       selectorPrimaryFocus="[data-modal-primary-focus]"
     >
-      <div
+      <Modal
         aria-label="test modal"
-        className="bx--modal bx--modal-tall"
+        hasScrollingContent={false}
         id="modal"
-        onBlur={[Function]}
+        modalHeading="Transactional Modal"
+        modalLabel="Test Modal Label"
         onKeyDown={[Function]}
-        onMouseDown={[Function]}
-        role="presentation"
+        onRequestClose={[Function]}
+        onRequestSubmit={[Function]}
+        open={false}
+        passiveModal={false}
+        preventCloseOnClickOutside={false}
+        primaryButtonDisabled={false}
+        primaryButtonText="Save"
+        secondaryButtonText="Cancel"
+        selectorPrimaryFocus="[data-modal-primary-focus]"
       >
-        <span
-          className="bx--visually-hidden"
-          role="link"
-          tabIndex="0"
-        >
-          Focus sentinel
-        </span>
         <div
-          aria-label="Test Modal Label"
-          aria-modal="true"
-          className="bx--modal-container"
-          role="dialog"
-          tabIndex="-1"
+          aria-label="test modal"
+          className="bx--modal bx--modal-tall"
+          id="modal"
+          onBlur={[Function]}
+          onKeyDown={[Function]}
+          onMouseDown={[Function]}
+          role="presentation"
         >
-          <div
-            className="bx--modal-header"
+          <span
+            className="bx--visually-hidden"
+            role="link"
+            tabIndex="0"
           >
-            <h2
-              className="bx--modal-header__label"
-              id="bx--modal-header__label--modal-1"
+            Focus sentinel
+          </span>
+          <div
+            aria-label="Test Modal Label"
+            aria-modal="true"
+            className="bx--modal-container"
+            role="dialog"
+            tabIndex="-1"
+          >
+            <div
+              className="bx--modal-header"
             >
-              Test Modal Label
-            </h2>
-            <h3
-              className="bx--modal-header__heading"
-              id="bx--modal-header__heading--modal-1"
-            >
-              Transactional Modal
-            </h3>
-            <button
-              aria-label="close"
-              className="bx--modal-close"
-              onClick={[Function]}
-              type="button"
-            >
-              <ForwardRef(Close20)
-                aria-hidden="true"
-                className="bx--modal-close__icon"
-                tabIndex="-1"
+              <h2
+                className="bx--modal-header__label"
+                id="bx--modal-header__label--modal-1"
               >
-                <Icon
+                Test Modal Label
+              </h2>
+              <h3
+                className="bx--modal-header__heading"
+                id="bx--modal-header__heading--modal-1"
+              >
+                Transactional Modal
+              </h3>
+              <button
+                aria-label="close"
+                className="bx--modal-close"
+                onClick={[Function]}
+                type="button"
+              >
+                <ForwardRef(Close20)
                   aria-hidden="true"
                   className="bx--modal-close__icon"
-                  fill="currentColor"
-                  height={20}
-                  preserveAspectRatio="xMidYMid meet"
                   tabIndex="-1"
-                  viewBox="0 0 32 32"
-                  width={20}
-                  xmlns="http://www.w3.org/2000/svg"
                 >
-                  <svg
-                    aria-hidden={true}
+                  <Icon
+                    aria-hidden="true"
                     className="bx--modal-close__icon"
                     fill="currentColor"
-                    focusable="false"
                     height={20}
                     preserveAspectRatio="xMidYMid meet"
+                    tabIndex="-1"
                     viewBox="0 0 32 32"
                     width={20}
                     xmlns="http://www.w3.org/2000/svg"
                   >
-                    <path
-                      d="M24 9.4L22.6 8 16 14.6 9.4 8 8 9.4 14.6 16 8 22.6 9.4 24 16 17.4 22.6 24 24 22.6 17.4 16 24 9.4z"
-                    />
-                  </svg>
-                </Icon>
-              </ForwardRef(Close20)>
-            </button>
-          </div>
-          <div
-            aria-labelledby="bx--modal-header__label--modal-1"
-            className="bx--modal-content"
-            id="bx--modal-body--modal-1"
-          >
-            <p
-              className="bx--modal-content__text"
-            >
-              Text
-            </p>
-          </div>
-          <ButtonSet
-            className="bx--modal-footer"
-          >
-            <div
-              className="bx--modal-footer bx--btn-set"
-            >
-              <Button
-                dangerDescription="danger"
-                disabled={false}
-                isExpressive={false}
-                kind="secondary"
-                onClick={[Function]}
-                size="default"
-                tabIndex={0}
-                tooltipAlignment="center"
-                tooltipPosition="top"
-                type="button"
-              >
-                <button
-                  aria-describedby={null}
-                  aria-pressed={null}
-                  className="bx--btn bx--btn--secondary"
-                  disabled={false}
-                  onBlur={[Function]}
-                  onClick={[Function]}
-                  onFocus={[Function]}
-                  onMouseEnter={[Function]}
-                  onMouseLeave={[Function]}
-                  tabIndex={0}
-                  type="button"
-                >
-                  Cancel
-                </button>
-              </Button>
-              <Button
-                dangerDescription="danger"
-                disabled={false}
-                isExpressive={false}
-                kind="primary"
-                onClick={[Function]}
-                size="default"
-                tabIndex={0}
-                tooltipAlignment="center"
-                tooltipPosition="top"
-                type="button"
-              >
-                <button
-                  aria-describedby={null}
-                  aria-pressed={null}
-                  className="bx--btn bx--btn--primary"
-                  disabled={false}
-                  onBlur={[Function]}
-                  onClick={[Function]}
-                  onFocus={[Function]}
-                  onMouseEnter={[Function]}
-                  onMouseLeave={[Function]}
-                  tabIndex={0}
-                  type="button"
-                >
-                  Save
-                </button>
-              </Button>
+                    <svg
+                      aria-hidden={true}
+                      className="bx--modal-close__icon"
+                      fill="currentColor"
+                      focusable="false"
+                      height={20}
+                      preserveAspectRatio="xMidYMid meet"
+                      viewBox="0 0 32 32"
+                      width={20}
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        d="M24 9.4L22.6 8 16 14.6 9.4 8 8 9.4 14.6 16 8 22.6 9.4 24 16 17.4 22.6 24 24 22.6 17.4 16 24 9.4z"
+                      />
+                    </svg>
+                  </Icon>
+                </ForwardRef(Close20)>
+              </button>
             </div>
-          </ButtonSet>
+            <div
+              aria-labelledby="bx--modal-header__label--modal-1"
+              className="bx--modal-content"
+              id="bx--modal-body--modal-1"
+            >
+              <p
+                className="bx--modal-content__text"
+              >
+                Text
+              </p>
+            </div>
+            <ButtonSet
+              className="bx--modal-footer"
+            >
+              <div
+                className="bx--modal-footer bx--btn-set"
+              >
+                <Button
+                  dangerDescription="danger"
+                  disabled={false}
+                  isExpressive={false}
+                  kind="secondary"
+                  onClick={[Function]}
+                  size="default"
+                  tabIndex={0}
+                  tooltipAlignment="center"
+                  tooltipPosition="top"
+                  type="button"
+                >
+                  <button
+                    aria-describedby={null}
+                    aria-pressed={null}
+                    className="bx--btn bx--btn--secondary"
+                    disabled={false}
+                    onBlur={[Function]}
+                    onClick={[Function]}
+                    onFocus={[Function]}
+                    onMouseEnter={[Function]}
+                    onMouseLeave={[Function]}
+                    tabIndex={0}
+                    type="button"
+                  >
+                    Cancel
+                  </button>
+                </Button>
+                <Button
+                  dangerDescription="danger"
+                  disabled={false}
+                  isExpressive={false}
+                  kind="primary"
+                  onClick={[Function]}
+                  size="default"
+                  tabIndex={0}
+                  tooltipAlignment="center"
+                  tooltipPosition="top"
+                  type="button"
+                >
+                  <button
+                    aria-describedby={null}
+                    aria-pressed={null}
+                    className="bx--btn bx--btn--primary"
+                    disabled={false}
+                    onBlur={[Function]}
+                    onClick={[Function]}
+                    onFocus={[Function]}
+                    onMouseEnter={[Function]}
+                    onMouseLeave={[Function]}
+                    tabIndex={0}
+                    type="button"
+                  >
+                    Save
+                  </button>
+                </Button>
+              </div>
+            </ButtonSet>
+          </div>
+          <span
+            className="bx--visually-hidden"
+            role="link"
+            tabIndex="0"
+          >
+            Focus sentinel
+          </span>
         </div>
-        <span
-          className="bx--visually-hidden"
-          role="link"
-          tabIndex="0"
-        >
-          Focus sentinel
-        </span>
-      </div>
-    </Modal>
+      </Modal>
+    </FeatureToggle(Modal)>
   </div>
 </ModalWrapper>
 `;

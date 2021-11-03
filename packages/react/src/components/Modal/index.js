@@ -9,8 +9,10 @@ import { default as ModalNext } from './next/Modal';
 import { default as ModalClassic } from './Modal';
 import { createComponentToggle } from '../../internal/ComponentToggle';
 
-export const Modal = createComponentToggle({
+const Modal = createComponentToggle({
   name: 'Modal',
   next: ModalNext,
   classic: ModalClassic,
 });
+
+export default Modal;

@@ -16,7 +16,7 @@ import {
   text,
   withKnobs,
 } from '@storybook/addon-knobs';
-import { Modal } from '../Modal';
+import Modal from './Modal';
 import Button from '../../Button';
 import Select from '../../Select';
 import MultiSelect from '../../MultiSelect';
