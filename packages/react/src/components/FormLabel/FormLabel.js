@@ -9,10 +9,19 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import classnames from 'classnames';
 import { usePrefix } from '../../internal/usePrefix';
+import * as FeatureFlags from '@carbon/feature-flags';
 
 const FormLabel = ({ className, children, id, ...other }) => {
   const prefix = usePrefix();
-  const classNames = classnames(`${prefix}--label`, className);
+  const classNames = classnames(
+    {
+      [`${prefix}--label`]: !FeatureFlags.enabled('enable-v11-release'),
+      [`${prefix}--label--no-margin`]: FeatureFlags.enabled(
+        'enable-v11-release'
+      ),
+    },
+    className
+  );
 
   return (
     <label htmlFor={id} className={classNames} {...other}>
