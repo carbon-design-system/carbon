@@ -180,7 +180,6 @@ const Modal = React.forwardRef(function Modal(
     alertDialogProps['aria-describedby'] = modalBodyId;
   }
 
-  // cDM, cWUM
   useEffect(() => {
     return () => {
       toggleClass(document.body, `${prefix}--body--with-modal-open`, false);
