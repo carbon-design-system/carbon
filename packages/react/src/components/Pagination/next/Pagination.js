@@ -8,20 +8,26 @@
 import { CaretRight16, CaretLeft16 } from '@carbon/icons-react';
 import cx from 'classnames';
 import PropTypes from 'prop-types';
-import React from 'react';
+import React, { useState } from 'react';
 import Button from '../Button';
 import Select from '../Select';
 import SelectItem from '../SelectItem';
 import { equals } from '../../tools/array';
+import { useFallbackId } from '../../../internal/useId';
 import { usePrefix } from '../../../internal/usePrefix';
-
-let instanceId = 0;
 
 const mapPageSizesToObject = (sizes) => {
   return typeof sizes[0] === 'object' && sizes[0] !== null
     ? sizes
     : sizes.map((size) => ({ text: size, value: size }));
 };
+
+// State
+// page
+// pageSize
+// prevPageSizes
+// prevPage
+// prevPageSize
 
 function Pagination({
   backwardText = 'Previous page',
@@ -37,26 +43,28 @@ function Pagination({
   pageInputDisabled,
   pageNumberText = 'Page Number',
   pageSizeInputDisabled,
-  pageRangeText = (current, total) =>
+  pageRangeText = (_current, total) =>
     `of ${total} ${total === 1 ? 'page' : 'pages'}`,
-  page: pageNumber = 1,
+  page: controlledPage = 1,
   pageNumberText,
-  pageSize,
-  pageSizes,
+  pageSize: controlledPageSize,
+  pageSizes: _pageSizes,
   pageText = (page) => `page ${page}`,
   pagesUnknown = false,
   size,
   totalItems,
   ...rest
 }) {
+  const [page, setPage] = useState(controlledPage);
+  const [pageSize, setPageSize] = useState(controlledPageSize);
   const prefix = usePrefix();
+  const inputId = useFallbackId(id);
   const className = cx({
     [`${prefix}--pagination`]: true,
     [`${prefix}--pagination--${size}`]: size,
     [className]: !!className,
   });
-  const inputId = id || this.uniqueId;
-  const { page: statePage, pageSize: statePageSize } = this.state;
+
   const totalPages = Math.max(Math.ceil(totalItems / statePageSize), 1);
   const backButtonDisabled = disabled || statePage === 1;
   const backButtonClasses = cx(
@@ -74,36 +82,35 @@ function Pagination({
       [`${prefix}--pagination__button--no-index`]: forwardButtonDisabled,
     }
   );
-  const selectItems = this.renderSelectItems(totalPages);
+  const selectItems = renderSelectItems(totalPages);
   const pageSizes = mapPageSizesToObject(_pageSizes);
 
   function handleSizeChange(evt) {
     const pageSize = Number(evt.target.value);
-    this.setState({ pageSize, page: 1 });
-    this.props.onChange({ page: 1, pageSize });
-  }
 
-  function handlePageChange(evt) {
-    this.setState({ page: evt.target.value });
+    setPageSize(pageSize);
+    setPage(1);
+
+    if (onChange) {
+      onChange({ page: 1, pageSize });
+    }
   }
 
   function handlePageInputChange(evt) {
     const page = Number(evt.target.value);
-    if (
-      page > 0 &&
-      page <=
-        Math.max(Math.ceil(this.props.totalItems / this.state.pageSize), 1)
-    ) {
-      this.setState({ page });
-      this.props.onChange({
-        page,
-        pageSize: this.state.pageSize,
-      });
+    if (page > 0 && page <= Math.max(Math.ceil(totalItems / pageSize), 1)) {
+      setPage(page);
+      if (onChange) {
+        onChange({
+          page,
+          pageSize,
+        });
+      }
     }
   }
 
   function incrementPage() {
-    const page = this.state.page + 1;
+    const page = page + 1;
     this.setState({ page });
     this.props.onChange({ page, pageSize: this.state.pageSize });
   }
@@ -127,7 +134,7 @@ function Pagination({
   }
 
   return (
-    <div className={classNames} {...rest}>
+    <div className={className} {...rest}>
       <div className={`${prefix}--pagination__left`}>
         <label
           id={`${prefix}-pagination-select-${inputId}-count-label`}
@@ -142,9 +149,9 @@ function Pagination({
           hideLabel
           noLabel
           inline
-          onChange={this.handleSizeChange}
+          onChange={handleSizeChange}
           disabled={pageSizeInputDisabled || disabled}
-          value={statePageSize}>
+          value={pageSize}>
           {pageSizes.map((sizeObj) => (
             <SelectItem
               key={sizeObj.value}
@@ -174,7 +181,7 @@ function Pagination({
           labelText={`Page number, of ${totalPages} pages`}
           inline
           hideLabel
-          onChange={this.handlePageInputChange}
+          onChange={handlePageInputChange}
           value={statePage}
           disabled={pageInputDisabled || disabled}>
           {selectItems}
@@ -193,7 +200,7 @@ function Pagination({
             iconDescription={backwardText}
             tooltipAlignment="center"
             tooltipPosition="top"
-            onClick={this.decrementPage}
+            onClick={decrementPage}
             disabled={backButtonDisabled}
           />
           <Button
@@ -204,7 +211,7 @@ function Pagination({
             iconDescription={forwardText}
             tooltipAlignment="end"
             tooltipPosition="top"
-            onClick={this.incrementPage}
+            onClick={incrementPage}
             disabled={forwardButtonDisabled || isLastPage}
           />
         </div>
@@ -384,6 +391,4 @@ class Paginationz extends React.Component {
           prevPageSize: pageSize,
         };
   }
-
-  render() {}
 }
