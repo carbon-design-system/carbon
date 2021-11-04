@@ -492,7 +492,7 @@ export default class Tabs extends React.Component {
 
     return (
       <>
-        <div {...other} className={classes.tabs} onScroll={this.handleScroll}>
+        <div {...other} className={classes.tabs}>
           <button
             aria-hidden="true"
             aria-label="Scroll left"
@@ -515,7 +515,8 @@ export default class Tabs extends React.Component {
             role="tablist"
             tabIndex={-1}
             className={classes.tablist}
-            ref={this.tablist}>
+            ref={this.tablist}
+            onScroll={this.handleScroll}>
             {tabsWithProps}
           </ul>
           {!rightOverflowNavButtonHidden && (

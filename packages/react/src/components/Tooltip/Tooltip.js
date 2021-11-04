@@ -550,7 +550,6 @@ class Tooltip extends Component {
     }
 
     if (state === 'click') {
-      evt.stopPropagation();
       evt.preventDefault();
       const shouldOpen = this.isControlled
         ? !this.props.open
