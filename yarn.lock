@@ -2013,8 +2013,8 @@ __metadata:
     babel-plugin-dev-expression: ^0.2.2
     babel-preset-carbon: ^0.1.0
     browserslist-config-carbon: ^10.6.1
-    carbon-components: ^10.47.0
-    carbon-components-react: ^7.47.1
+    carbon-components: ^10.47.1
+    carbon-components-react: ^7.47.2
     carbon-icons: ^7.0.7
     css-loader: ^5.2.4
     fs-extra: ^10.0.0
@@ -10293,7 +10293,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"carbon-components-react@^7.47.1, carbon-components-react@workspace:packages/react":
+"carbon-components-react@^7.47.2, carbon-components-react@workspace:packages/react":
   version: 0.0.0-use.local
   resolution: "carbon-components-react@workspace:packages/react"
   dependencies:
@@ -10338,7 +10338,7 @@ __metadata:
     babel-plugin-react-docgen: ^4.2.1
     babel-plugin-transform-inline-environment-variables: ^0.4.3
     browserslist-config-carbon: ^10.6.1
-    carbon-components: ^10.47.0
+    carbon-components: ^10.47.1
     carbon-icons: ^7.0.5
     chalk: ^4.1.1
     classnames: 2.3.1
@@ -10423,7 +10423,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"carbon-components@^10.47.0, carbon-components@workspace:packages/components":
+"carbon-components@^10.47.1, carbon-components@workspace:packages/components":
   version: 0.0.0-use.local
   resolution: "carbon-components@workspace:packages/components"
   dependencies:
