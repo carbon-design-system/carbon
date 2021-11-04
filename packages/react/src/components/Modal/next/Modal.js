@@ -186,7 +186,6 @@ const Modal = React.forwardRef(function Modal(
     };
   }, [prefix]);
 
-  // cDU
   useEffect(() => {
     toggleClass(document.body, `${prefix}--body--with-modal-open`, open);
   }, [open, prefix]);
