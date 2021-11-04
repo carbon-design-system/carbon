@@ -526,16 +526,15 @@ categories:
     subcategories:
       - name: App Catalogue
         members:
-          - cloud--alerting
+          - autoscaling
+          - block-storage
+          - object-storage
           - cloud--auditing
-          - cloud--data-ops
           - cloud--logging
           - cloud--monitoring
-          - cloud--service-management
           - cloud-foundry--1
           - cloud-registry
           - cloud-satellite
-          - cloud-services
           - content-delivery-network
           - database--datastax
           - database--elastic
@@ -972,7 +971,6 @@ categories:
           - network--3--reference
           - network--4
           - nominal
-          - object-storage
           - ordinal
           - parent-child
           - parameter
@@ -1262,17 +1260,19 @@ categories:
           - application--mobile
           - application--virtual
           - application--web
-          - autoscaling
           - bare-metal-server
           - bare-metal-server--01
           - bare-metal-server--02
           - bastion-host
-          - block-storage
           - block-storage--alt
           - box--extra-large
           - box--large
           - box--medium
           - box--small
+          - cloud--alerting
+          - cloud--data-ops
+          - cloud-services
+          - cloud--service-management
           - chat--operational
           - code-signing-service
           - communication--unified
