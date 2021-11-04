@@ -18,22 +18,14 @@
 .demo-tooltip-trigger {
   @include button-reset.reset();
 
-  display: block;
-  position: relative;
-  width: 3rem;
-  height: 3rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2rem;
+  height: 2rem;
   border: 1px solid theme.$border-subtle;
 }
 
-.demo-tooltip-trigger::before {
-  content: '';
-  display: inline-block;
-  width: 1.5rem;
-  height: 1.5rem;
-  border: 2px solid theme.$border-inverse;
-  border-radius: 2px;
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
+.demo-tooltip-trigger svg {
+  fill: theme.$background-inverse;
 }

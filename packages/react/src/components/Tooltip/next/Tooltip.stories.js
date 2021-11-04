@@ -7,6 +7,7 @@
 
 import './story.scss';
 
+import { Checkbox16 } from '@carbon/icons-react';
 import React from 'react';
 import { Tooltip } from '../next';
 
@@ -38,11 +39,9 @@ export const Default = () => {
     'Occassionally, services are updated in a specified time window to ensure no down time for customers.';
   return (
     <Tooltip align="bottom" defaultOpen label={label}>
-      <button
-        aria-label="demo tooltip button"
-        className="demo-tooltip-trigger"
-        type="button"
-      />
+      <button className="demo-tooltip-trigger" type="button">
+        <Checkbox16 />
+      </button>
     </Tooltip>
   );
 };
@@ -51,25 +50,19 @@ export const Duration = () => {
   return (
     <>
       <Tooltip label="Label one" enterDelayMs={500} leaveDelayMs={500}>
-        <button
-          aria-label="demo tooltip button"
-          className="demo-tooltip-trigger"
-          type="button"
-        />
+        <button className="demo-tooltip-trigger" type="button">
+          <Checkbox16 />
+        </button>
       </Tooltip>
       <Tooltip label="Label two" enterDelayMs={500} leaveDelayMs={500}>
-        <button
-          aria-label="demo tooltip button"
-          className="demo-tooltip-trigger"
-          type="button"
-        />
+        <button className="demo-tooltip-trigger" type="button">
+          <Checkbox16 />
+        </button>
       </Tooltip>
       <Tooltip label="Label two" enterDelayMs={500} leaveDelayMs={500}>
-        <button
-          aria-label="demo tooltip button"
-          className="demo-tooltip-trigger"
-          type="button"
-        />
+        <button className="demo-tooltip-trigger" type="button">
+          <Checkbox16 />
+        </button>
       </Tooltip>
     </>
   );
@@ -83,11 +76,9 @@ const PlaygroundStory = (props) => {
       label={label}
       defaultOpen={defaultOpen}
       description={description}>
-      <button
-        aria-label="demo tooltip button"
-        className="demo-tooltip-trigger"
-        type="button"
-      />
+      <button className="demo-tooltip-trigger" type="button">
+        <Checkbox16 />
+      </button>
     </Tooltip>
   );
 };

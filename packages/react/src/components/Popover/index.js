@@ -10,18 +10,19 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import { usePrefix } from '../../internal/usePrefix';
 
-function Popover({
-  align = 'bottom',
-  as: BaseComponent = 'div',
-  caret = true,
-  className: customClassName,
-  children,
-  dropShadow = true,
-  highContrast = false,
-  light = false,
-  open,
-  ...rest
-}) {
+const Popover = React.forwardRef(function Popover(props, ref) {
+  const {
+    align = 'bottom',
+    as: BaseComponent = 'div',
+    caret = true,
+    className: customClassName,
+    children,
+    dropShadow = true,
+    highContrast = false,
+    light = false,
+    open,
+    ...rest
+  } = props;
   const prefix = usePrefix();
   const className = cx({
     [`${prefix}--popover-container`]: true,
@@ -35,11 +36,11 @@ function Popover({
   });
 
   return (
-    <BaseComponent {...rest} className={className}>
+    <BaseComponent {...rest} className={className} ref={ref}>
       {children}
     </BaseComponent>
   );
-}
+});
 
 Popover.propTypes = {
   /**

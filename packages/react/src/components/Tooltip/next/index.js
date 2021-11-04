@@ -66,26 +66,27 @@ function Tooltip({
   );
 
   return (
-    // eslint-disable-next-line jsx-a11y/no-static-element-interactions
-    <div
+    <Popover
       {...rest}
+      align={align}
       className={cx(`${prefix}--tooltip`, customClassName)}
+      dropShadow={false}
+      highContrast
       onKeyDown={onKeyDown}
       onMouseEnter={onMouseEnter}
       onMouseLeave={onMouseLeave}
+      open={open}
       ref={containerRef}>
       {React.cloneElement(child, triggerProps)}
-      <Popover align={align} open={open} highContrast>
-        <PopoverContent
-          aria-hidden="true"
-          className={`${prefix}--tooltip-content`}
-          id={id}
-          ref={tooltipRef}
-          role="tooltip">
-          {label || description}
-        </PopoverContent>
-      </Popover>
-    </div>
+      <PopoverContent
+        aria-hidden="true"
+        className={`${prefix}--tooltip-content`}
+        id={id}
+        ref={tooltipRef}
+        role="tooltip">
+        {label || description}
+      </PopoverContent>
+    </Popover>
   );
 }
 

@@ -36,31 +36,32 @@
 ///   Popover caret
 ///   This caret is an optional modifier that displays a character centered with
 ///   respect to the trigger element
+
+// The background color for the popover container
+$popover-background-color: custom-property.get-var(
+  'popover-background-color',
+  theme.$layer
+);
+
+// The drop shadow value used for the popover container
+$popover-drop-shadow: custom-property.get-var('popover-drop-shadow', 'none');
+
+// The border radius value for the popover container
+$popover-border-radius: custom-property.get-var('popover-border-radius', 2px);
+
+// The text color used for text placed inside of the popover
+$popover-text-color: custom-property.get-var(
+  'popover-text-color',
+  theme.$text-primary
+);
+
+// The distance between the popover container and the triggering element
+// Specify the distance between the popover and the trigger. This value must
+// have a unit otherwise the `calc()` expression will not work
+// stylelint-disable-next-line length-zero-no-unit
+$popover-offset: custom-property.get-var('popover-offset', 0rem);
+
 @mixin popover {
-  // The background color for the popover container
-  $popover-background-color: custom-property.get-var(
-    'popover-background-color',
-    theme.$layer
-  );
-
-  // The drop shadow value used for the popover container
-  $popover-drop-shadow: custom-property.get-var('popover-drop-shadow', 'none');
-
-  // The border radius value for the popover container
-  $popover-border-radius: custom-property.get-var('popover-border-radius', 2px);
-
-  // The text color used for text placed inside of the popover
-  $popover-text-color: custom-property.get-var(
-    'popover-text-color',
-    theme.$text-primary
-  );
-
-  // The distance between the popover container and the triggering element
-  // Specify the distance between the popover and the trigger. This value must
-  // have a unit otherwise the `calc()` expression will not work
-  // stylelint-disable-next-line length-zero-no-unit
-  $popover-offset: custom-property.get-var('popover-offset', 0rem);
-
   // Container
   .#{$prefix}--popover-container {
     position: relative;
@@ -77,7 +78,7 @@
   }
 
   // High contrast modifier
-  .#{$prefix}--popover--high-contrast .#{$prefix}--popover-content {
+  .#{$prefix}--popover--high-contrast .#{$prefix}--popover {
     @include custom-property.declaration(
       'popover-background-color',
       theme.$background-inverse

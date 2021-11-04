@@ -10,26 +10,20 @@
 @use '../../theme';
 @use '../../type';
 @use '../../utilities/custom-property';
+@use '../../utilities/convert';
 
 @mixin tooltip {
   .#{$prefix}--tooltip {
-    position: relative;
-    display: inline-block;
+    @include custom-property.declaration('popover-offset', 12px);
   }
 
   .#{$prefix}--tooltip-content {
     @include type.type-style('body-long-01');
 
-    max-width: rem(288px);
+    max-width: convert.rem(288px);
     padding: spacing.$spacing-05;
-    // TODO: remove when popover merged
-    box-shadow: none;
-    color: theme.$text-inverse;
-  }
 
-  // TODO: remove when popover merged
-  .#{$prefix}--tooltip-content.#{$prefix}--popover-contents::before {
-    box-shadow: none;
+    color: theme.$text-inverse;
   }
 }
 
