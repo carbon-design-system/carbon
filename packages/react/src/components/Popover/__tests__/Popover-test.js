@@ -10,6 +10,16 @@ import React from 'react';
 import { Popover, PopoverContent } from '../../Popover';
 
 describe('Popover', () => {
+  it('should support a ref on the outermost element', () => {
+    const ref = jest.fn();
+    const { container } = render(
+      <Popover open ref={ref}>
+        <PopoverContent>test</PopoverContent>
+      </Popover>
+    );
+    expect(ref).toHaveBeenCalledWith(container.firstChild);
+  });
+
   it('should support custom rendering with the `as` prop', () => {
     const { container } = render(
       <Popover as="article" open data-testid="test">
