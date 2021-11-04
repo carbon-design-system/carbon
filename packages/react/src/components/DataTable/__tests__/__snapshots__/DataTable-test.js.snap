@@ -2036,6 +2036,7 @@ exports[`DataTable should render 1`] = `
             <div
               aria-hidden={true}
               className="bx--batch-actions"
+              onScroll={[Function]}
             >
               <div
                 className="bx--batch-summary"
@@ -3094,6 +3095,7 @@ exports[`DataTable sticky header should render 1`] = `
             <div
               aria-hidden={true}
               className="bx--batch-actions"
+              onScroll={[Function]}
             >
               <div
                 className="bx--batch-summary"
