@@ -5928,6 +5928,51 @@ Map {
       },
     },
   },
+  "unstable_ContainedTab" => Object {
+    "$$typeof": Symbol(react.forward_ref),
+    "propTypes": Object {
+      "className": Object {
+        "type": "string",
+      },
+      "disabled": Object {
+        "type": "bool",
+      },
+      "handleTabClick": Object {
+        "type": "func",
+      },
+      "handleTabKeyDown": Object {
+        "type": "func",
+      },
+      "id": Object {
+        "type": "string",
+      },
+      "index": Object {
+        "type": "number",
+      },
+      "label": Object {
+        "type": "node",
+      },
+      "onClick": Object {
+        "type": "func",
+      },
+      "onKeyDown": Object {
+        "type": "func",
+      },
+      "renderButton": Object {
+        "type": "func",
+      },
+      "renderContent": Object {
+        "type": "func",
+      },
+      "selected": Object {
+        "type": "bool",
+      },
+      "tabIndex": Object {
+        "type": "number",
+      },
+    },
+    "render": [Function],
+  },
   "TabContent" => Object {
     "defaultProps": Object {
       "selected": false,
@@ -6025,6 +6070,55 @@ Map {
         "type": "oneOf",
       },
     },
+  },
+  "unstable_ContainedTabs" => Object {
+    "$$typeof": Symbol(react.forward_ref),
+    "propTypes": Object {
+      "children": Object {
+        "type": "node",
+      },
+      "className": Object {
+        "type": "string",
+      },
+      "hidden": Object {
+        "type": "bool",
+      },
+      "leftOverflowButtonProps": Object {
+        "type": "object",
+      },
+      "light": [Function],
+      "onClick": Object {
+        "type": "func",
+      },
+      "onKeyDown": Object {
+        "type": "func",
+      },
+      "onSelectionChange": Object {
+        "type": "func",
+      },
+      "rightOverflowButtonProps": Object {
+        "type": "object",
+      },
+      "scrollIntoView": Object {
+        "type": "bool",
+      },
+      "selected": Object {
+        "type": "number",
+      },
+      "selectionMode": Object {
+        "args": Array [
+          Array [
+            "automatic",
+            "manual",
+          ],
+        ],
+        "type": "oneOf",
+      },
+      "tabContentClassName": Object {
+        "type": "string",
+      },
+    },
+    "render": [Function],
   },
   "Tag" => Object {
     "propTypes": Object {
@@ -8718,6 +8812,9 @@ Map {
       "children": Object {
         "type": "node",
       },
+      "className": Object {
+        "type": "string",
+      },
       "id": Object {
         "type": "string",
       },
@@ -8739,6 +8836,9 @@ Map {
           ],
         ],
         "type": "oneOf",
+      },
+      "target": Object {
+        "type": "element",
       },
       "x": Object {
         "args": Array [
@@ -8901,6 +9001,74 @@ Map {
     },
   },
   "unstable_usePrefix" => Object {},
+  "unstable_Popover" => Object {
+    "propTypes": Object {
+      "align": Object {
+        "args": Array [
+          Array [
+            "top",
+            "top-left",
+            "top-right",
+            "bottom",
+            "bottom-left",
+            "bottom-right",
+            "left",
+            "left-bottom",
+            "left-top",
+            "right",
+            "right-bottom",
+            "right-top",
+          ],
+        ],
+        "type": "oneOf",
+      },
+      "as": Object {
+        "args": Array [
+          Array [
+            Object {
+              "type": "string",
+            },
+            Object {
+              "type": "elementType",
+            },
+          ],
+        ],
+        "type": "oneOfType",
+      },
+      "caret": Object {
+        "type": "bool",
+      },
+      "children": Object {
+        "type": "node",
+      },
+      "className": Object {
+        "type": "string",
+      },
+      "dropShadow": Object {
+        "type": "bool",
+      },
+      "highContrast": Object {
+        "type": "bool",
+      },
+      "light": Object {
+        "type": "bool",
+      },
+      "open": Object {
+        "isRequired": true,
+        "type": "bool",
+      },
+    },
+  },
+  "unstable_PopoverContent" => Object {
+    "propTypes": Object {
+      "children": Object {
+        "type": "node",
+      },
+      "className": Object {
+        "type": "string",
+      },
+    },
+  },
   "unstable_HStack" => Object {
     "$$typeof": Symbol(react.forward_ref),
     "render": [Function],
