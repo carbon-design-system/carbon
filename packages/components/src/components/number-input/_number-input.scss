@@ -371,9 +371,13 @@
     background-color: transparent;
   }
 
+  // We include `:not(:focus)` here because the pseudo elements will overlap the
+  // focus outline on the button if we set their background-color on focus
   .#{$prefix}--number--light .#{$prefix}--number__control-btn:hover,
-  .#{$prefix}--number--light .#{$prefix}--number__control-btn:hover::before,
-  .#{$prefix}--number--light .#{$prefix}--number__control-btn:hover::after {
+  .#{$prefix}--number--light
+    .#{$prefix}--number__control-btn:not(:focus):hover::before,
+  .#{$prefix}--number--light
+    .#{$prefix}--number__control-btn:not(:focus):hover::after {
     background-color: $hover-light-ui;
   }
 
