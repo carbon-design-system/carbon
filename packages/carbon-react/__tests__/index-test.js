@@ -98,6 +98,8 @@ Array [
   "PaginationNav",
   "PaginationSkeleton",
   "PasswordInput",
+  "Popover",
+  "PopoverContent",
   "PrimaryButton",
   "ProgressIndicator",
   "ProgressIndicatorSkeleton",
