@@ -11,6 +11,7 @@ import React from 'react';
 import { settings } from 'carbon-components';
 import Button from '../Button';
 import TableActionList from './TableActionList';
+import { Text } from '../Text';
 
 const { prefix } = settings;
 
@@ -58,13 +59,13 @@ const TableBatchActions = ({
       className={batchActionsClasses}
       {...rest}>
       <div className={batchSummaryClasses}>
-        <p className={`${prefix}--batch-summary__para`}>
+        <Text as="p" className={`${prefix}--batch-summary__para`}>
           <span>
             {totalSelected > 1 || totalSelected === 0
               ? t('carbon.table.batch.items.selected', { totalSelected })
               : t('carbon.table.batch.item.selected', { totalSelected })}
           </span>
-        </p>
+        </Text>
       </div>
       <TableActionList>
         {children}

@@ -44,7 +44,8 @@ describe('Link', () => {
 
     it('should support disabled link', () => {
       link.setProps({ disabled: true });
-      expect(link.name()).toEqual('p');
+      console.log(link);
+      expect(link.is('p')).toEqual(true);
       expect(link.hasClass(`${prefix}--link--disabled`)).toEqual(true);
     });
 

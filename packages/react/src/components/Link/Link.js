@@ -9,6 +9,7 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import classnames from 'classnames';
 import { usePrefix } from '../../internal/usePrefix';
+import { Text } from '../Text';
 
 const Link = ({
   children,
@@ -29,10 +30,10 @@ const Link = ({
     [`${prefix}--link--${size}`]: size,
   });
 
-  const Tag = disabled ? 'p' : 'a';
   const rel = other.target === '_blank' ? 'noopener' : null;
   return (
-    <Tag
+    <Text
+      as={disabled ? 'p' : 'a'}
       href={disabled ? null : href}
       className={classNames}
       rel={rel}
@@ -43,7 +44,7 @@ const Link = ({
           <Icon />
         </div>
       )}
-    </Tag>
+    </Text>
   );
 };
 

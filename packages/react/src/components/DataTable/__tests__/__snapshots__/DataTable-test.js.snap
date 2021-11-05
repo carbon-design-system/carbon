@@ -110,14 +110,17 @@ exports[`DataTable selection -- radio buttons should not have select-all checkbo
       <div
         className="bx--data-table-header"
       >
-        <h4
+        <Text
+          as="h4"
           className="bx--data-table-header__title"
         >
-          DataTable with selection
-        </h4>
-        <p
-          className="bx--data-table-header__description"
-        />
+          <h4
+            className="bx--data-table-header__title"
+            dir="auto"
+          >
+            DataTable with selection
+          </h4>
+        </Text>
       </div>
       <Table
         isSortable={false}
@@ -461,14 +464,17 @@ exports[`DataTable selection -- radio buttons should render 1`] = `
       <div
         className="bx--data-table-header"
       >
-        <h4
+        <Text
+          as="h4"
           className="bx--data-table-header__title"
         >
-          DataTable with selection
-        </h4>
-        <p
-          className="bx--data-table-header__description"
-        />
+          <h4
+            className="bx--data-table-header__title"
+            dir="auto"
+          >
+            DataTable with selection
+          </h4>
+        </Text>
       </div>
       <Table
         isSortable={false}
@@ -932,14 +938,17 @@ exports[`DataTable selection should have select-all default to un-checked if no 
       <div
         className="bx--data-table-header"
       >
-        <h4
+        <Text
+          as="h4"
           className="bx--data-table-header__title"
         >
-          DataTable with selection
-        </h4>
-        <p
-          className="bx--data-table-header__description"
-        />
+          <h4
+            className="bx--data-table-header__title"
+            dir="auto"
+          >
+            DataTable with selection
+          </h4>
+        </Text>
       </div>
       <Table
         isSortable={false}
@@ -1338,14 +1347,17 @@ exports[`DataTable selection should render 1`] = `
       <div
         className="bx--data-table-header"
       >
-        <h4
+        <Text
+          as="h4"
           className="bx--data-table-header__title"
         >
-          DataTable with selection
-        </h4>
-        <p
-          className="bx--data-table-header__description"
-        />
+          <h4
+            className="bx--data-table-header__title"
+            dir="auto"
+          >
+            DataTable with selection
+          </h4>
+        </Text>
       </div>
       <Table
         isSortable={false}
@@ -2011,14 +2023,17 @@ exports[`DataTable should render 1`] = `
       <div
         className="bx--data-table-header"
       >
-        <h4
+        <Text
+          as="h4"
           className="bx--data-table-header__title"
         >
-          DataTable with toolbar
-        </h4>
-        <p
-          className="bx--data-table-header__description"
-        />
+          <h4
+            className="bx--data-table-header__title"
+            dir="auto"
+          >
+            DataTable with toolbar
+          </h4>
+        </Text>
       </div>
       <TableToolbar
         aria-label="data table toolbar"
@@ -2041,13 +2056,19 @@ exports[`DataTable should render 1`] = `
               <div
                 className="bx--batch-summary"
               >
-                <p
+                <Text
+                  as="p"
                   className="bx--batch-summary__para"
                 >
-                  <span>
-                    0 items selected
-                  </span>
-                </p>
+                  <p
+                    className="bx--batch-summary__para"
+                    dir="auto"
+                  >
+                    <span>
+                      0 items selected
+                    </span>
+                  </p>
+                </Text>
               </div>
               <TableActionList>
                 <div
@@ -3070,14 +3091,17 @@ exports[`DataTable sticky header should render 1`] = `
       <div
         className="bx--data-table-header"
       >
-        <h4
+        <Text
+          as="h4"
           className="bx--data-table-header__title"
         >
-          DataTable with toolbar
-        </h4>
-        <p
-          className="bx--data-table-header__description"
-        />
+          <h4
+            className="bx--data-table-header__title"
+            dir="auto"
+          >
+            DataTable with toolbar
+          </h4>
+        </Text>
       </div>
       <TableToolbar
         aria-label="data table toolbar"
@@ -3100,13 +3124,19 @@ exports[`DataTable sticky header should render 1`] = `
               <div
                 className="bx--batch-summary"
               >
-                <p
+                <Text
+                  as="p"
                   className="bx--batch-summary__para"
                 >
-                  <span>
-                    0 items selected
-                  </span>
-                </p>
+                  <p
+                    className="bx--batch-summary__para"
+                    dir="auto"
+                  >
+                    <span>
+                      0 items selected
+                    </span>
+                  </p>
+                </Text>
               </div>
               <TableActionList>
                 <div

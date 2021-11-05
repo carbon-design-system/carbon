@@ -20,6 +20,7 @@ import mergeRefs from '../../tools/mergeRefs';
 import deprecate from '../../prop-types/deprecate';
 import { useFeatureFlag } from '../FeatureFlags';
 import { usePrefix } from '../../internal/usePrefix';
+import { Text } from '../Text';
 
 const defaultItemToString = (item) => {
   if (typeof item === 'string') {
@@ -128,7 +129,9 @@ const Dropdown = React.forwardRef(function Dropdown(
   const ItemToElement = itemToElement;
   const toggleButtonProps = getToggleButtonProps();
   const helper = helperText ? (
-    <div className={helperClasses}>{helperText}</div>
+    <Text as="div" className={helperClasses}>
+      {helperText}
+    </Text>
   ) : null;
 
   function onSelectedItemChange({ selectedItem }) {
@@ -142,9 +145,9 @@ const Dropdown = React.forwardRef(function Dropdown(
   return (
     <div className={wrapperClasses} {...other}>
       {titleText && (
-        <label className={titleClasses} {...getLabelProps()}>
+        <Text as="label" className={titleClasses} {...getLabelProps()}>
           {titleText}
-        </label>
+        </Text>
       )}
       <ListBox
         aria-label={ariaLabel}

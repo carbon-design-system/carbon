@@ -9,6 +9,7 @@ import cx from 'classnames';
 import PropTypes from 'prop-types';
 import React from 'react';
 import { settings } from 'carbon-components';
+import { Text } from '../Text';
 
 const { prefix } = settings;
 
@@ -34,10 +35,16 @@ const TableContainer = ({
     <div {...rest} className={tableContainerClasses}>
       {title && (
         <div className={`${prefix}--data-table-header`}>
-          <h4 className={`${prefix}--data-table-header__title`}>{title}</h4>
-          <p className={`${prefix}--data-table-header__description`}>
-            {description}
-          </p>
+          <Text as="h4" className={`${prefix}--data-table-header__title`}>
+            {title}
+          </Text>
+          {description && (
+            <Text
+              as="p"
+              className={`${prefix}--data-table-header__description`}>
+              {description}
+            </Text>
+          )}
         </div>
       )}
       {children}

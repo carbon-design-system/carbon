@@ -15,6 +15,7 @@ import {
 } from '@carbon/icons-react';
 import { sortStates } from './state/sorting';
 import { useId } from '../../internal/useId';
+import { Text } from '../Text';
 
 const { prefix } = settings;
 
@@ -115,7 +116,9 @@ const TableHeader = React.forwardRef(function TableHeader(
         onClick={onClick}
         {...rest}>
         <span className={`${prefix}--table-sort__flex`}>
-          <div className={`${prefix}--table-header-label`}>{children}</div>
+          <Text as="div" className={`${prefix}--table-header-label`}>
+            {children}
+          </Text>
           <Arrow className={`${prefix}--table-sort__icon`} />
           <Arrows className={`${prefix}--table-sort__icon-unsorted`} />
         </span>

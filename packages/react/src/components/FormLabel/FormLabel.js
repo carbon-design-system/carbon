@@ -10,6 +10,7 @@ import React from 'react';
 import classnames from 'classnames';
 import { usePrefix } from '../../internal/usePrefix';
 import * as FeatureFlags from '@carbon/feature-flags';
+import { Text } from '../Text';
 
 const FormLabel = ({ className, children, id, ...other }) => {
   const prefix = usePrefix();
@@ -24,9 +25,9 @@ const FormLabel = ({ className, children, id, ...other }) => {
   );
 
   return (
-    <label htmlFor={id} className={classNames} {...other}>
+    <Text as="label" htmlFor={id} className={classNames} {...other}>
       {children}
-    </label>
+    </Text>
   );
 };
 
