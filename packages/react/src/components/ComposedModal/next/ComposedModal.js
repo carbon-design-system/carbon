@@ -10,26 +10,28 @@ import toggleClass from '../../../tools/toggleClass';
 import wrapFocus from '../../../internal/wrapFocus';
 import { usePrefix } from '../../../internal/usePrefix';
 
-export default function ComposedModal({
-  ['aria-labelledby']: ariaLabelledBy,
-  ['aria-label']: ariaLabel,
-  children,
-  className,
-  containerClassName,
-  danger,
-  onClose,
-  onKeyDown,
-  open,
-  preventCloseOnClickOutside,
-  selectorPrimaryFocus,
-  selectorsFloatingMenus,
-  size,
-  ...other
-}) {
+const ComposedModal = React.forwardRef(function ComposedModal(
+  {
+    ['aria-labelledby']: ariaLabelledBy,
+    ['aria-label']: ariaLabel,
+    children,
+    className,
+    containerClassName,
+    danger,
+    onClose,
+    onKeyDown,
+    open,
+    preventCloseOnClickOutside,
+    selectorPrimaryFocus,
+    selectorsFloatingMenus,
+    size,
+    ...other
+  },
+  ref
+) {
   const prefix = usePrefix();
   const [isOpen, setisOpen] = useState(open);
   const [prevOpen, setPrevOpen] = useState(open);
-  const outerModal = useRef();
   const innerModal = useRef();
   const button = useRef();
   const startSentinel = useRef();
@@ -162,7 +164,7 @@ export default function ComposedModal({
     <div
       {...other}
       role="presentation"
-      ref={outerModal}
+      ref={ref}
       onBlur={handleBlur}
       onClick={handleClick}
       onKeyDown={handleKeyDown}
@@ -194,7 +196,7 @@ export default function ComposedModal({
       </span>
     </div>
   );
-}
+});
 
 ComposedModal.propTypes = {
   /**
@@ -268,3 +270,5 @@ ComposedModal.defaultProps = {
   onKeyDown: () => {},
   selectorPrimaryFocus: '[data-modal-primary-focus]',
 };
+
+export default ComposedModal;

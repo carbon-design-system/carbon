@@ -1,0 +1,37 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<ComposedModal /> renders 1`] = `
+<ForwardRef(ComposedModal)
+  onKeyDown={[Function]}
+  open={true}
+  selectorPrimaryFocus="[data-modal-primary-focus]"
+>
+  <div
+    className="bx--modal is-visible"
+    onBlur={[Function]}
+    onClick={[Function]}
+    onKeyDown={[Function]}
+    role="presentation"
+  >
+    <span
+      className="bx--visually-hidden"
+      role="link"
+      tabIndex="0"
+    >
+      Focus sentinel
+    </span>
+    <div
+      aria-modal="true"
+      className="bx--modal-container"
+      role="dialog"
+    />
+    <span
+      className="bx--visually-hidden"
+      role="link"
+      tabIndex="0"
+    >
+      Focus sentinel
+    </span>
+  </div>
+</ForwardRef(ComposedModal)>
+`;
