@@ -198,7 +198,6 @@ export default class ComposedModal extends Component {
       return;
     }
     if (this.innerModal.current) {
-      console.log('useEffect', this.innerModal.current);
       this.focusButton(this.innerModal.current);
     }
   }
@@ -209,7 +208,6 @@ export default class ComposedModal extends Component {
       this.outerModal.current.offsetHeight &&
       this.beingOpen
     ) {
-      console.log('handleTransitionEnd', evt.currentTarget);
       this.focusButton(evt.currentTarget);
       this.beingOpen = false;
     }
