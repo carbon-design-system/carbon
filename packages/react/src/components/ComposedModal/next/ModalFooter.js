@@ -5,31 +5,101 @@ import ButtonSet from '../../ButtonSet';
 import classNames from 'classnames';
 import { usePrefix } from '../../../internal/usePrefix';
 
+function SecondaryButtonSet({
+  secondaryButtons,
+  secondaryButtonText,
+  secondaryClassName,
+  closeModal,
+  onRequestClose,
+}) {
+  function handleRequestClose(evt) {
+    closeModal(evt);
+    onRequestClose(evt);
+  }
+
+  const secondaryClass = classNames({
+    [secondaryClassName]: secondaryClassName,
+  });
+
+  if (Array.isArray(secondaryButtons) && secondaryButtons.length <= 2) {
+    return secondaryButtons.map(({ buttonText, onClick: onButtonClick }, i) => (
+      <Button
+        key={`${buttonText}-${i}`}
+        className={secondaryClass}
+        kind="secondary"
+        onClick={onButtonClick || handleRequestClose}>
+        {buttonText}
+      </Button>
+    ));
+  }
+  if (secondaryButtonText) {
+    return (
+      <Button
+        className={secondaryClass}
+        onClick={handleRequestClose}
+        kind="secondary">
+        {secondaryButtonText}
+      </Button>
+    );
+  }
+  return null;
+}
+
+SecondaryButtonSet.propTypes = {
+  closeModal: PropTypes.func,
+  onRequestClose: PropTypes.func,
+  secondaryButtonText: PropTypes.string,
+  secondaryButtons: (props, propName, componentName) => {
+    if (props.secondaryButtons) {
+      if (
+        !Array.isArray(props.secondaryButtons) ||
+        props.secondaryButtons.length !== 2
+      ) {
+        return new Error(
+          `${propName} needs to be an array of two button config objects`
+        );
+      }
+
+      const shape = {
+        buttonText: PropTypes.node,
+        onClick: PropTypes.func,
+      };
+
+      props[propName].forEach((secondaryButton) => {
+        PropTypes.checkPropTypes(
+          shape,
+          secondaryButton,
+          propName,
+          componentName
+        );
+      });
+    }
+
+    return null;
+  },
+  secondaryClassName: PropTypes.string,
+};
+
 export const ModalFooter = React.forwardRef(function ModalFooter(
   {
-    className,
-    primaryClassName,
-    secondaryButtons,
-    secondaryClassName,
-    secondaryButtonText,
-    primaryButtonText,
-    primaryButtonDisabled,
-    closeModal, // eslint-disable-line
-    onRequestClose, // eslint-disable-line
-    onRequestSubmit, // eslint-disable-line
     children,
+    className,
+    closeModal,
     danger,
     inputref,
+    onRequestClose,
+    onRequestSubmit,
+    primaryButtonDisabled,
+    primaryButtonText,
+    primaryClassName,
+    secondaryButtonText,
+    secondaryButtons,
+    secondaryClassName,
     ...other
   },
   ref
 ) {
   const prefix = usePrefix();
-
-  function handleRequestClose(evt) {
-    closeModal(evt);
-    onRequestClose(evt);
-  }
 
   const footerClass = classNames({
     [`${prefix}--modal-footer`]: true,
@@ -42,40 +112,17 @@ export const ModalFooter = React.forwardRef(function ModalFooter(
     [primaryClassName]: primaryClassName,
   });
 
-  const secondaryClass = classNames({
-    [secondaryClassName]: secondaryClassName,
-  });
-
-  const SecondaryButtonSet = () => {
-    if (Array.isArray(secondaryButtons) && secondaryButtons.length <= 2) {
-      return secondaryButtons.map(
-        ({ buttonText, onClick: onButtonClick }, i) => (
-          <Button
-            key={`${buttonText}-${i}`}
-            className={secondaryClass}
-            kind="secondary"
-            onClick={onButtonClick || handleRequestClose}>
-            {buttonText}
-          </Button>
-        )
-      );
-    }
-    if (secondaryButtonText) {
-      return (
-        <Button
-          className={secondaryClass}
-          onClick={handleRequestClose}
-          kind="secondary">
-          {secondaryButtonText}
-        </Button>
-      );
-    }
-    return null;
+  const secondaryButtonProps = {
+    closeModal,
+    secondaryButtons,
+    secondaryButtonText,
+    secondaryClassName,
+    onRequestClose,
   };
 
   return (
     <ButtonSet ref={ref} className={footerClass} {...other}>
-      <SecondaryButtonSet />
+      <SecondaryButtonSet {...secondaryButtonProps} />
       {primaryButtonText && (
         <Button
           onClick={onRequestSubmit}
@@ -201,4 +248,5 @@ ModalFooter.propTypes = {
 ModalFooter.defaultProps = {
   onRequestClose: () => {},
   onRequestSubmit: () => {},
+  closeModal: () => {},
 };
