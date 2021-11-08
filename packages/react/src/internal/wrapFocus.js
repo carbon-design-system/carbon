@@ -20,16 +20,15 @@ const { prefix } = settings;
  * @param {string[]} selectorsFloatingMenus The CSS selectors that matches floating menus.
  * @returns {boolean} `true` of the given `node` is in a floating menu.
  */
-function elementOrParentIsFloatingMenu(
-  node,
-  selectorsFloatingMenus = [
-    `.${prefix}--overflow-menu-options`,
-    `.${prefix}--tooltip`,
-    '.flatpickr-calendar',
-  ]
-) {
+function elementOrParentIsFloatingMenu(node, selectorsFloatingMenus = []) {
   if (node && typeof node.closest === 'function') {
-    return selectorsFloatingMenus.some((selector) => node.closest(selector));
+    const allSelectorsFloatingMenus = [
+      `.${prefix}--overflow-menu-options`,
+      `.${prefix}--tooltip`,
+      '.flatpickr-calendar',
+      ...selectorsFloatingMenus,
+    ];
+    return allSelectorsFloatingMenus.some((selector) => node.closest(selector));
   }
 }
 
