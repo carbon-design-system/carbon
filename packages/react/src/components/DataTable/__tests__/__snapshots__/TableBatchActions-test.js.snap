@@ -11,6 +11,7 @@ exports[`DataTable.TableBatchActions should render 1`] = `
   <div
     aria-hidden={true}
     className="bx--batch-actions custom-class"
+    onScroll={[Function]}
   >
     <div
       className="bx--batch-summary"
@@ -73,6 +74,7 @@ exports[`DataTable.TableBatchActions should render 2`] = `
   <div
     aria-hidden={false}
     className="bx--batch-actions bx--batch-actions--active custom-class"
+    onScroll={[Function]}
   >
     <div
       className="bx--batch-summary"
