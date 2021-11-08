@@ -69,13 +69,22 @@ export const Duration = () => {
 };
 
 const PlaygroundStory = (props) => {
-  const { align, defaultOpen, description, label } = props;
+  const {
+    align,
+    defaultOpen,
+    description,
+    enterDelayMs,
+    label,
+    leaveDelayMs,
+  } = props;
   return (
     <Tooltip
       align={align}
-      label={label}
       defaultOpen={defaultOpen}
-      description={description}>
+      description={description}
+      enterDelayMs={enterDelayMs}
+      label={label}
+      leaveDelayMs={leaveDelayMs}>
       <button className="demo-tooltip-trigger" type="button">
         <Checkbox16 />
       </button>
