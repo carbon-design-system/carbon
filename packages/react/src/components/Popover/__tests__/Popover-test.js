@@ -48,6 +48,14 @@ describe('Popover', () => {
   });
 
   describe('PopoverContent', () => {
+    it('should support a ref on the popover-content element', () => {
+      const ref = jest.fn();
+      const { container } = render(
+        <PopoverContent ref={ref}>test</PopoverContent>
+      );
+      expect(ref).toHaveBeenCalledWith(container.firstChild.firstChild);
+    });
+
     it('should support a custom class name on the popover content', () => {
       render(
         <PopoverContent className="test" data-testid="test">

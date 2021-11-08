@@ -107,17 +107,20 @@ Popover.propTypes = {
   open: PropTypes.bool.isRequired,
 };
 
-function PopoverContent({ className, children, ...rest }) {
+const PopoverContent = React.forwardRef(function PopoverContent(
+  { className, children, ...rest },
+  ref
+) {
   const prefix = usePrefix();
   return (
     <div {...rest} className={`${prefix}--popover`}>
-      <div className={cx(`${prefix}--popover-content`, className)}>
+      <div className={cx(`${prefix}--popover-content`, className)} ref={ref}>
         {children}
       </div>
       <span className={`${prefix}--popover-caret`} />
     </div>
   );
-}
+});
 
 PopoverContent.propTypes = {
   /**
