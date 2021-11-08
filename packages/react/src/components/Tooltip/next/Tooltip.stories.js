@@ -59,7 +59,7 @@ export const Duration = () => {
           <Checkbox16 />
         </button>
       </Tooltip>
-      <Tooltip label="Label two" enterDelayMs={500} leaveDelayMs={500}>
+      <Tooltip label="Label three" enterDelayMs={500} leaveDelayMs={500}>
         <button className="demo-tooltip-trigger" type="button">
           <Checkbox16 />
         </button>
