@@ -259,6 +259,8 @@ $popover-offset: custom-property.get-var('popover-offset', 0rem);
   .#{$prefix}--popover--right .#{$prefix}--popover-content {
     top: 50%;
     left: 100%;
+    // Add in 0.1px to prevent rounding errors where the content is
+    // moved farther than the caret
     transform: translate($popover-offset, -50%);
   }
 
@@ -305,19 +307,25 @@ $popover-offset: custom-property.get-var('popover-offset', 0rem);
   .#{$prefix}--popover--left .#{$prefix}--popover-content {
     top: 50%;
     right: 100%;
-    transform: translate(calc(-1 * $popover-offset), -50%);
+    // Add in 0.1px to prevent rounding errors where the content is
+    // moved farther than the caret
+    transform: translate(calc(-1 * $popover-offset + 0.1px), -50%);
   }
 
   .#{$prefix}--popover--left-top .#{$prefix}--popover-content {
     top: 0;
     right: 100%;
-    transform: translate(calc(-1 * $popover-offset), 0);
+    // Add in 0.1px to prevent rounding errors where the content is
+    // moved farther than the caret
+    transform: translate(calc(-1 * $popover-offset + 0.1px), 0);
   }
 
   .#{$prefix}--popover--left-bottom .#{$prefix}--popover-content {
     right: 100%;
     bottom: 0;
-    transform: translate(calc(-1 * $popover-offset), 0);
+    // Add in 0.1px to prevent rounding errors where the content is
+    // moved farther than the caret
+    transform: translate(calc(-1 * $popover-offset + 0.1px), 0);
   }
 
   // Popover hover area placement
