@@ -218,7 +218,8 @@ Select.propTypes = {
   labelText: PropTypes.node,
 
   /**
-   * Specify whether you want the light version of this control
+   * `true` to use the light version. For use on $ui-01 backgrounds only.
+   * Don't use this to make tile background color same as container background color.
    */
   light: PropTypes.bool,
 

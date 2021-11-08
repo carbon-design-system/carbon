@@ -24,7 +24,7 @@ describe('Tab', () => {
         mount = enzyme.mount;
         Tab = require('../Tab').default;
 
-        const Adapter = require('enzyme-adapter-react-16');
+        const Adapter = require('@wojtekmaj/enzyme-adapter-react-17');
         enzyme.configure({ adapter: new Adapter() });
 
         wrapper = mount(<Tab label="firstTab" />);
@@ -45,7 +45,7 @@ describe('Tab', () => {
     });
 
     it('renders <li> with [role="presentation"]', () => {
-      expect(wrapper.props().role).toEqual('presentation');
+      expect(wrapper.find('li').prop('role')).toEqual('presentation');
     });
 
     it('renders <button> with tabindex set to 0', () => {
@@ -92,7 +92,7 @@ describe('Tab', () => {
         mount = enzyme.mount;
         Tab = require('../Tab').default;
 
-        const Adapter = require('enzyme-adapter-react-16');
+        const Adapter = require('@wojtekmaj/enzyme-adapter-react-17');
 
         enzyme.configure({ adapter: new Adapter() });
       });
@@ -168,7 +168,7 @@ describe('Tab', () => {
         mount = enzyme.mount;
         Tab = require('../Tab').default;
 
-        const Adapter = require('enzyme-adapter-react-16');
+        const Adapter = require('@wojtekmaj/enzyme-adapter-react-17');
 
         enzyme.configure({ adapter: new Adapter() });
       });

@@ -7,6 +7,7 @@
 
 import React from 'react';
 import { ComboBox } from 'carbon-components-react';
+import { Layer } from '../Layer';
 
 const items = [
   {
@@ -24,7 +25,8 @@ const items = [
   },
   {
     id: 'option-3',
-    text: 'Option 3',
+    text: 'Option 3 - a disabled item',
+    disabled: true,
   },
   {
     id: 'option-4',
@@ -52,5 +54,41 @@ export const Combobox = () => (
       titleText="ComboBox title"
       helperText="Combobox helper text"
     />
+  </div>
+);
+
+export const withLayer = () => (
+  <div style={{ width: 300 }}>
+    <ComboBox
+      onChange={() => {}}
+      id="carbon-combobox"
+      items={items}
+      itemToString={(item) => (item ? item.text : '')}
+      placeholder="Filter..."
+      titleText="First Layer"
+      helperText="Combobox helper text"
+    />
+    <Layer>
+      <ComboBox
+        onChange={() => {}}
+        id="carbon-combobox"
+        items={items}
+        itemToString={(item) => (item ? item.text : '')}
+        placeholder="Filter..."
+        titleText="Second Layer"
+        helperText="Combobox helper text"
+      />
+      <Layer>
+        <ComboBox
+          onChange={() => {}}
+          id="carbon-combobox"
+          items={items}
+          itemToString={(item) => (item ? item.text : '')}
+          placeholder="Filter..."
+          titleText="Third Layer"
+          helperText="Combobox helper text"
+        />
+      </Layer>
+    </Layer>
   </div>
 );

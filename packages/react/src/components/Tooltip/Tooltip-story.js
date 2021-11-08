@@ -44,6 +44,17 @@ const props = {
       ''
     ),
   }),
+  autoOrientation: () => ({
+    align: select('Tooltip alignment (align)', alignments, 'center'),
+    direction: select('Tooltip direction (direction)', directions, 'bottom'),
+    triggerText: text('Trigger text (triggerText)', 'Test'),
+    tabIndex: number('Tab index (tabIndex in <Tooltip>)', 0),
+    selectorPrimaryFocus: text(
+      'Primary focus element selector (selectorPrimaryFocus)',
+      ''
+    ),
+    autoOrientation: boolean('Auto orientation', true),
+  }),
   withoutIcon: () => ({
     showIcon: false,
     align: select('Tooltip alignment (align)', alignments, 'center'),
@@ -169,6 +180,93 @@ export const DefaultBottom = () => (
 DefaultBottom.storyName = 'default (bottom)';
 
 DefaultBottom.parameters = {
+  info: {
+    text: `
+        Interactive tooltip should be used if there are actions a user can take in the tooltip (e.g. a link or a button).
+        For more regular use case, e.g. giving the user more text information about something, use definition tooltip or icon tooltip.
+        By default, the tooltip will render above the element. The example below shows the default scenario.
+      `,
+  },
+};
+
+export const AutoOrientation = () => (
+  <div
+    style={{
+      ...containerStyles,
+      justifyContent: 'unset',
+      alignItems: 'unset',
+      flexWrap: 'wrap',
+    }}>
+    {/* Top Left */}
+    <div style={{ flex: '50%' }}>
+      <Tooltip {...props.autoOrientation()} tooltipBodyId="tooltip-body">
+        <p id="tooltip-body">
+          This is some tooltip text. This box shows the maximum amount of text
+          that should appear inside. If more room is needed please use a modal
+          instead.
+        </p>
+        <div className={`${prefix}--tooltip__footer`}>
+          <a href="/" className={`${prefix}--link`}>
+            Learn More
+          </a>
+          <Button size="small">Create</Button>
+        </div>
+      </Tooltip>
+    </div>
+    {/* Top Right */}
+    <div style={{ flex: '50%', textAlign: 'right' }}>
+      <Tooltip {...props.autoOrientation()} tooltipBodyId="tooltip-body">
+        <p id="tooltip-body">
+          This is some tooltip text. This box shows the maximum amount of text
+          that should appear inside. If more room is needed please use a modal
+          instead.
+        </p>
+        <div className={`${prefix}--tooltip__footer`}>
+          <a href="/" className={`${prefix}--link`}>
+            Learn More
+          </a>
+          <Button size="small">Create</Button>
+        </div>
+      </Tooltip>
+    </div>
+    {/* Bottom Left */}
+    <div style={{ flex: '50%', marginTop: 'auto' }}>
+      <Tooltip {...props.autoOrientation()} tooltipBodyId="tooltip-body">
+        <p id="tooltip-body">
+          This is some tooltip text. This box shows the maximum amount of text
+          that should appear inside. If more room is needed please use a modal
+          instead.
+        </p>
+        <div className={`${prefix}--tooltip__footer`}>
+          <a href="/" className={`${prefix}--link`}>
+            Learn More
+          </a>
+          <Button size="small">Create</Button>
+        </div>
+      </Tooltip>
+    </div>
+    {/* Bottom Right */}
+    <div style={{ flex: '50%', textAlign: 'right', marginTop: 'auto' }}>
+      <Tooltip {...props.autoOrientation()} tooltipBodyId="tooltip-body">
+        <p id="tooltip-body">
+          This is some tooltip text. This box shows the maximum amount of text
+          that should appear inside. If more room is needed please use a modal
+          instead.
+        </p>
+        <div className={`${prefix}--tooltip__footer`}>
+          <a href="/" className={`${prefix}--link`}>
+            Learn More
+          </a>
+          <Button size="small">Create</Button>
+        </div>
+      </Tooltip>
+    </div>
+  </div>
+);
+
+AutoOrientation.storyName = 'auto orientation';
+
+AutoOrientation.parameters = {
   info: {
     text: `
         Interactive tooltip should be used if there are actions a user can take in the tooltip (e.g. a link or a button).

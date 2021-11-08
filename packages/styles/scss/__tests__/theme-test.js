@@ -126,6 +126,7 @@ Array [
   "highlight",
   "overlay",
   "toggle-off",
+  "shadow",
   "focus",
   "focus-inset",
   "focus-inverse",

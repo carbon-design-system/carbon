@@ -50,9 +50,10 @@ describe('ClickListener', () => {
       </ClickListener>
     );
     expect(mockConsoleError).toHaveBeenCalledWith(
-      expect.stringContaining(
-        'Warning: Failed prop type: Invalid prop `children` of type `array`'
-      )
+      'Warning: Failed %s type: %s%s',
+      'prop',
+      'Invalid prop `children` of type `array` supplied to `ClickListener`, expected a single ReactElement.',
+      expect.anything() // this argument is the stack trace/report of the source file line and can change
     );
 
     // eslint-disable-next-line no-console

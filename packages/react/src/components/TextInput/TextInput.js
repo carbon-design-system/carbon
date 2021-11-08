@@ -85,6 +85,7 @@ const TextInput = React.forwardRef(function TextInput(
     title: placeholder,
     disabled: normalizedProps.disabled,
     readOnly,
+    ['aria-describedby']: normalizedProps.helperId,
     ...other,
   };
   const inputWrapperClasses = classNames(
@@ -134,8 +135,11 @@ const TextInput = React.forwardRef(function TextInput(
       {labelText}
     </label>
   ) : null;
+
   const helper = helperText ? (
-    <div className={helperTextClasses}>{helperText}</div>
+    <div id={normalizedProps.helperId} className={helperTextClasses}>
+      {helperText}
+    </div>
   ) : null;
 
   const input = (
@@ -235,7 +239,8 @@ TextInput.propTypes = {
   labelText: PropTypes.node.isRequired,
 
   /**
-   * `true` to use the light version.
+   * `true` to use the light version. For use on $ui-01 backgrounds only.
+   * Don't use this to make tile background color same as container background color.
    */
   light: PropTypes.bool,
 

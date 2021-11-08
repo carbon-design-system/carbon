@@ -1870,6 +1870,7 @@ exports[`DataTable should render 1`] = `
                 <TableToolbarSearch
                   id="custom-id"
                   onChange={[Function]}
+                  onClear={[Function]}
                   persistent={true}
                   tabIndex="0"
                   translateWithId={[Function]}
@@ -2035,6 +2036,7 @@ exports[`DataTable should render 1`] = `
             <div
               aria-hidden={true}
               className="bx--batch-actions"
+              onScroll={[Function]}
             >
               <div
                 className="bx--batch-summary"
@@ -2331,6 +2333,7 @@ exports[`DataTable should render 1`] = `
               <TableToolbarSearch
                 id="custom-id"
                 onChange={[Function]}
+                onClear={[Function]}
                 persistent={true}
                 tabIndex="0"
                 translateWithId={[Function]}
@@ -2342,6 +2345,7 @@ exports[`DataTable should render 1`] = `
                   labelText="Filter table"
                   onBlur={[Function]}
                   onChange={[Function]}
+                  onClear={[Function]}
                   onFocus={[Function]}
                   placeholder="Filter table"
                   tabIndex="0"
@@ -2519,16 +2523,12 @@ exports[`DataTable should render 1`] = `
                           <ForwardRef(Settings16)
                             aria-label="Settings"
                             className="bx--overflow-menu__icon"
-                            onClick={[Function]}
-                            onKeyDown={[Function]}
                           >
                             <Icon
                               aria-label="Settings"
                               className="bx--overflow-menu__icon"
                               fill="currentColor"
                               height={16}
-                              onClick={[Function]}
-                              onKeyDown={[Function]}
                               preserveAspectRatio="xMidYMid meet"
                               viewBox="0 0 16 16"
                               width={16}
@@ -2540,8 +2540,6 @@ exports[`DataTable should render 1`] = `
                                 fill="currentColor"
                                 focusable="false"
                                 height={16}
-                                onClick={[Function]}
-                                onKeyDown={[Function]}
                                 preserveAspectRatio="xMidYMid meet"
                                 role="img"
                                 viewBox="0 0 16 16"
@@ -2928,6 +2926,7 @@ exports[`DataTable sticky header should render 1`] = `
                 <TableToolbarSearch
                   id="custom-id"
                   onChange={[Function]}
+                  onClear={[Function]}
                   persistent={true}
                   tabIndex="0"
                   translateWithId={[Function]}
@@ -3096,6 +3095,7 @@ exports[`DataTable sticky header should render 1`] = `
             <div
               aria-hidden={true}
               className="bx--batch-actions"
+              onScroll={[Function]}
             >
               <div
                 className="bx--batch-summary"
@@ -3392,6 +3392,7 @@ exports[`DataTable sticky header should render 1`] = `
               <TableToolbarSearch
                 id="custom-id"
                 onChange={[Function]}
+                onClear={[Function]}
                 persistent={true}
                 tabIndex="0"
                 translateWithId={[Function]}
@@ -3403,6 +3404,7 @@ exports[`DataTable sticky header should render 1`] = `
                   labelText="Filter table"
                   onBlur={[Function]}
                   onChange={[Function]}
+                  onClear={[Function]}
                   onFocus={[Function]}
                   placeholder="Filter table"
                   tabIndex="0"
@@ -3580,16 +3582,12 @@ exports[`DataTable sticky header should render 1`] = `
                           <ForwardRef(Settings16)
                             aria-label="Settings"
                             className="bx--overflow-menu__icon"
-                            onClick={[Function]}
-                            onKeyDown={[Function]}
                           >
                             <Icon
                               aria-label="Settings"
                               className="bx--overflow-menu__icon"
                               fill="currentColor"
                               height={16}
-                              onClick={[Function]}
-                              onKeyDown={[Function]}
                               preserveAspectRatio="xMidYMid meet"
                               viewBox="0 0 16 16"
                               width={16}
@@ -3601,8 +3599,6 @@ exports[`DataTable sticky header should render 1`] = `
                                 fill="currentColor"
                                 focusable="false"
                                 height={16}
-                                onClick={[Function]}
-                                onKeyDown={[Function]}
                                 preserveAspectRatio="xMidYMid meet"
                                 role="img"
                                 viewBox="0 0 16 16"

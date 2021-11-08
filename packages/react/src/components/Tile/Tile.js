@@ -316,6 +316,7 @@ export function SelectableTile(props) {
     </>
   );
 }
+
 SelectableTile.defaultProps = {
   value: 'value',
   title: 'title',
@@ -326,6 +327,7 @@ SelectableTile.defaultProps = {
   onChange: () => {},
   onKeyDown: () => {},
 };
+
 SelectableTile.propTypes = {
   /**
    * The child nodes.
@@ -543,11 +545,22 @@ export class ExpandableTile extends Component {
         };
   }
 
+  resizeObserver = null;
+
   componentDidMount = () => {
+    this.resizeObserver = new ResizeObserver((entries) => {
+      const [aboveTheFold] = entries;
+      this.setState({
+        tileMaxHeight: aboveTheFold.contentRect.height,
+      });
+    });
+
     if (this.tile) {
       const getStyle = window.getComputedStyle(this.tile, null);
 
       if (this.aboveTheFold) {
+        this.resizeObserver.observe(this.aboveTheFold);
+
         this.setState({
           tileMaxHeight: this.aboveTheFold.getBoundingClientRect().height,
           tilePadding:
@@ -557,6 +570,12 @@ export class ExpandableTile extends Component {
       }
     }
   };
+
+  componentWillUnmount() {
+    if (this.resizeObserver) {
+      this.resizeObserver.disconnect();
+    }
+  }
 
   componentDidUpdate = (prevProps) => {
     if (prevProps.expanded !== this.props.expanded) {

@@ -9,7 +9,7 @@
 @use '../../config' as *;
 @use '../../motion' as *;
 @use '../../spacing' as *;
-@use '../../compat/theme' as *;
+@use '../../theme' as *;
 @use '../../type' as *;
 @use '../../utilities/box-shadow' as *;
 @use '../../utilities/convert' as *;
@@ -25,7 +25,7 @@
   .#{$prefix}--dropdown__wrapper--inline {
     display: inline-grid;
     align-items: center;
-    grid-gap: rem(24px);
+    grid-gap: 0 rem(24px);
     grid-template: auto auto / auto min-content;
 
     .#{$prefix}--label {
@@ -139,7 +139,7 @@
     background-color: $field-02;
 
     &:hover {
-      background-color: $hover-light-ui;
+      background-color: $layer-hover-02;
     }
   }
 
@@ -262,13 +262,13 @@
 
     &:hover {
       border-color: transparent;
-      color: $text-01;
+      color: $text-primary;
     }
   }
 
   // V11: Possibly deprecate
   .#{$prefix}--dropdown--light .#{$prefix}--dropdown-link {
-    border-top-color: $decorative-01;
+    border-top-color: $border-subtle-02;
   }
 
   .#{$prefix}--dropdown--sm .#{$prefix}--dropdown-link {

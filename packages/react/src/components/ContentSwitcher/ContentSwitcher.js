@@ -8,9 +8,9 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import classNames from 'classnames';
+import deprecate from '../../prop-types/deprecate';
 import { composeEventHandlers } from '../../tools/events';
 import { getNextIndex, matches, keys } from '../../internal/keyboard';
-import deprecate from '../../prop-types/deprecate';
 import { PrefixContext } from '../../internal/usePrefix';
 
 export default class ContentSwitcher extends React.Component {
