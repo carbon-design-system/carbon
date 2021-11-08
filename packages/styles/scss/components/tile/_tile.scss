@@ -162,6 +162,7 @@
   }
 
   .#{$prefix}--tile--expandable {
+    position: relative;
     overflow: hidden;
     width: 100%;
     border: 0;
