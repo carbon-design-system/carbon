@@ -67,6 +67,7 @@ export function useNormalizedInputProps({
     warnId: `${id}-warn-msg`,
     validation: null,
     icon: null,
+    helperId: `${id}-helper-text`,
   };
 
   if (readOnly) {
