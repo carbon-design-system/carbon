@@ -3,8 +3,6 @@ import { default as Search } from './Search';
 import { render, screen } from '@testing-library/react';
 
 describe('Search', () => {
-  afterEach(cleanup);
-
   it('adds extra classes that are passed via className prop', () => {
     render(
       <Search
@@ -81,7 +79,7 @@ describe('Search', () => {
         size="sm" />
       );
 
-      expect(container.classList.contains(`${prefix}--skeleton`)).toEqual(true);
+      expect(container.classList.contains(`bx--skeleton`)).toEqual(true);
   });
 });
 
