@@ -3805,7 +3805,6 @@ Map {
   },
   "Modal" => Object {
     "$$typeof": Symbol(react.forward_ref),
-    "displayName": "FeatureToggle(Modal)",
     "render": [Function],
   },
   "ModalWrapper" => Object {
