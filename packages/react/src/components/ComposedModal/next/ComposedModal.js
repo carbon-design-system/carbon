@@ -25,7 +25,7 @@ const ComposedModal = React.forwardRef(function ComposedModal(
     selectorPrimaryFocus,
     selectorsFloatingMenus,
     size,
-    ...other
+    ...rest
   },
   ref
 ) {
