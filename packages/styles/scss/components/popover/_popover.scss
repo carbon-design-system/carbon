@@ -64,6 +64,7 @@
   // Container
   .#{$prefix}--popover-container {
     position: relative;
+    display: inline-block;
   }
 
   /// Modifiers
@@ -109,6 +110,7 @@
     bottom: 0;
     left: 0;
     filter: $popover-drop-shadow;
+    pointer-events: none;
   }
 
   // Popover content
@@ -121,6 +123,7 @@
     background-color: $popover-background-color;
     border-radius: $popover-border-radius;
     color: $popover-text-color;
+    pointer-events: auto;
   }
 
   .#{$prefix}--popover--open .#{$prefix}--popover-content {

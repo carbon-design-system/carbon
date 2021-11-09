@@ -16,7 +16,7 @@ import {
   text,
   withKnobs,
 } from '@storybook/addon-knobs';
-import ComposedModal, { ModalBody } from '../ComposedModal';
+import ComposedModal, { ModalBody } from './ComposedModal';
 import { ModalHeader } from './ModalHeader';
 import { ModalFooter } from './ModalFooter';
 import Select from '../../Select';
