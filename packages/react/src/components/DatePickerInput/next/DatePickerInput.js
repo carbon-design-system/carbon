@@ -3,10 +3,10 @@ import React from 'react';
 import classNames from 'classnames';
 import { usePrefix } from '../../../internal/usePrefix';
 import {
-  Calendar,
-  WarningFilled,
-  WarningAltFilled,
-} from '@carbon/icons-react/next';
+  Calendar16,
+  WarningFilled16,
+  WarningAltFilled16,
+} from '@carbon/icons-react';
 
 const DatePickerInput = React.forwardRef(function DatePickerInput(
   {
@@ -80,8 +80,7 @@ const DatePickerInput = React.forwardRef(function DatePickerInput(
 
     if (invalid) {
       return (
-        <WarningFilled
-          size={16}
+        <WarningFilled16
           className={`${prefix}--date-picker__icon ${prefix}--date-picker__icon--invalid`}
         />
       );
@@ -89,22 +88,20 @@ const DatePickerInput = React.forwardRef(function DatePickerInput(
 
     if (!invalid && warn) {
       return (
-        <WarningAltFilled
-          size={16}
+        <WarningAltFilled16
           className={`${prefix}--date-picker__icon ${prefix}--date-picker__icon--warn`}
         />
       );
     }
 
     return (
-      <Calendar
-        size={16}
+      <Calendar16
         className={`${prefix}--date-picker__icon`}
         aria-label={iconDescription}
         onClick={openCalendar}
         role="img">
         {iconDescription && <title>{iconDescription}</title>}
-      </Calendar>
+      </Calendar16>
     );
   })();
 
