@@ -37,10 +37,14 @@ describe('Search', () => {
         className="extra-class"
         label="Search Field"
         labelText="testlabel"
-        placeholder="Placeholder" />
+        placeholder="Placeholder"
+      />
     );
 
-      expect(screen.getByRole('searchbox')).toHaveAttribute('placeholder', 'Placeholder');
+    expect(screen.getByRole('searchbox')).toHaveAttribute(
+      'placeholder',
+      'Placeholder'
+    );
   });
 
   it('should have a label', () => {
@@ -53,7 +57,10 @@ describe('Search', () => {
       />
     );
 
-      expect(screen.getByRole('searchbox')).toHaveAttribute('placeholder', 'Placeholder');
+    expect(screen.getByRole('searchbox')).toHaveAttribute(
+      'placeholder',
+      'Placeholder'
+    );
   });
 
   it('should have small size class', () => {
@@ -63,10 +70,11 @@ describe('Search', () => {
         className="extra-class"
         label="Search Field"
         labelText="testlabel"
-        size="sm" />
-      );
+        size="sm"
+      />
+    );
 
-      expect(container.classList.contains('bx--search--sm')).toBe(true);
+    expect(container.classList.contains('bx--search--sm')).toBe(true);
   });
 
   it('should render skeleton', () => {
@@ -76,11 +84,10 @@ describe('Search', () => {
         className="extra-class"
         label="Search Field"
         labelText="testlabel"
-        size="sm" />
-      );
+        size="sm"
+      />
+    );
 
-      expect(container.classList.contains(`bx--skeleton`)).toEqual(true);
+    expect(container.classList.contains(`bx--skeleton`)).toEqual(true);
   });
 });
-
-

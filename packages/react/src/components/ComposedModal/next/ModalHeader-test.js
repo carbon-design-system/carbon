@@ -24,4 +24,3 @@ describe('ModalHeader', () => {
     expect(container.firstChild).toHaveTextContent('Carbon label');
   });
 });
-
