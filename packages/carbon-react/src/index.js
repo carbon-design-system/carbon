@@ -199,6 +199,8 @@ export {
   unstable_HStack as HStack,
   unstable_Stack as Stack,
   unstable_VStack as VStack,
+  unstable_Popover as Popover,
+  unstable_PopoverContent as PopoverContent,
 } from 'carbon-components-react';
 
 export {
