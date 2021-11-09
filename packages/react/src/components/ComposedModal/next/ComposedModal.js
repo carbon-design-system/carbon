@@ -162,7 +162,7 @@ const ComposedModal = React.forwardRef(function ComposedModal(
 
   return (
     <div
-      {...other}
+      {...rest}
       role="presentation"
       ref={ref}
       onBlur={handleBlur}
