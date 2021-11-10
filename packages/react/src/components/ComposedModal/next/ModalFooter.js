@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Button from '../../Button';
 import ButtonSet from '../../ButtonSet';
-import classNames from 'classnames';
+import cx from 'classnames';
 import { usePrefix } from '../../../internal/usePrefix';
 
 function SecondaryButtonSet({
@@ -17,15 +17,11 @@ function SecondaryButtonSet({
     onRequestClose(evt);
   }
 
-  const secondaryClass = classNames({
-    [secondaryClassName]: secondaryClassName,
-  });
-
   if (Array.isArray(secondaryButtons) && secondaryButtons.length <= 2) {
     return secondaryButtons.map(({ buttonText, onClick: onButtonClick }, i) => (
       <Button
         key={`${buttonText}-${i}`}
-        className={secondaryClass}
+        className={secondaryClassName}
         kind="secondary"
         onClick={onButtonClick || handleRequestClose}>
         {buttonText}
@@ -35,7 +31,7 @@ function SecondaryButtonSet({
   if (secondaryButtonText) {
     return (
       <Button
-        className={secondaryClass}
+        className={secondaryClassName}
         onClick={handleRequestClose}
         kind="secondary">
         {secondaryButtonText}
@@ -80,36 +76,29 @@ SecondaryButtonSet.propTypes = {
   secondaryClassName: PropTypes.string,
 };
 
-export const ModalFooter = React.forwardRef(function ModalFooter(
-  {
-    children,
-    className,
-    closeModal,
-    danger,
-    inputref,
-    onRequestClose,
-    onRequestSubmit,
-    primaryButtonDisabled,
-    primaryButtonText,
-    primaryClassName,
-    secondaryButtonText,
-    secondaryButtons,
-    secondaryClassName,
-    ...other
-  },
-  ref
-) {
+export function ModalFooter({
+  children,
+  className: customClassName,
+  closeModal,
+  danger,
+  inputref,
+  onRequestClose,
+  onRequestSubmit,
+  primaryButtonDisabled,
+  primaryButtonText,
+  primaryClassName,
+  secondaryButtonText,
+  secondaryButtons,
+  secondaryClassName,
+  ...rest
+}) {
   const prefix = usePrefix();
 
-  const footerClass = classNames({
+  const footerClass = cx({
     [`${prefix}--modal-footer`]: true,
-    [className]: className,
+    [customClassName]: customClassName,
     [`${prefix}--modal-footer--three-button`]:
       Array.isArray(secondaryButtons) && secondaryButtons.length === 2,
-  });
-
-  const primaryClass = classNames({
-    [primaryClassName]: primaryClassName,
   });
 
   const secondaryButtonProps = {
@@ -121,12 +110,12 @@ export const ModalFooter = React.forwardRef(function ModalFooter(
   };
 
   return (
-    <ButtonSet ref={ref} className={footerClass} {...other}>
+    <ButtonSet className={footerClass} {...rest}>
       <SecondaryButtonSet {...secondaryButtonProps} />
       {primaryButtonText && (
         <Button
           onClick={onRequestSubmit}
-          className={primaryClass}
+          className={primaryClassName}
           disabled={primaryButtonDisabled}
           kind={danger ? 'danger' : 'primary'}
           ref={inputref}>
@@ -137,7 +126,7 @@ export const ModalFooter = React.forwardRef(function ModalFooter(
       {children}
     </ButtonSet>
   );
-});
+}
 
 ModalFooter.propTypes = {
   /**

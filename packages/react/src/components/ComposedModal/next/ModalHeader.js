@@ -14,7 +14,7 @@ import { usePrefix } from '../../../internal/usePrefix';
 export function ModalHeader({
   buttonOnClick,
   children,
-  className,
+  className: customClassName,
   closeClassName,
   closeIconClassName,
   closeModal,
@@ -23,7 +23,7 @@ export function ModalHeader({
   labelClassName,
   title,
   titleClassName,
-  ...other
+  ...rest
 }) {
   const prefix = usePrefix();
 
@@ -34,7 +34,7 @@ export function ModalHeader({
 
   const headerClass = cx({
     [`${prefix}--modal-header`]: true,
-    [className]: className,
+    [customClassName]: customClassName,
   });
 
   const labelClass = cx({
@@ -58,7 +58,7 @@ export function ModalHeader({
   });
 
   return (
-    <div className={headerClass} {...other}>
+    <div className={headerClass} {...rest}>
       {label && <h2 className={labelClass}>{label}</h2>}
 
       {title && <h3 className={titleClass}>{title}</h3>}

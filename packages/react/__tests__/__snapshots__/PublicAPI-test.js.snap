@@ -3804,8 +3804,110 @@ Map {
     },
   },
   "Modal" => Object {
-    "$$typeof": Symbol(react.forward_ref),
-    "render": [Function],
+    "defaultProps": Object {
+      "hasScrollingContent": false,
+      "modalHeading": "",
+      "modalLabel": "",
+      "onKeyDown": [Function],
+      "onRequestClose": [Function],
+      "onRequestSubmit": [Function],
+      "passiveModal": false,
+      "preventCloseOnClickOutside": false,
+      "primaryButtonDisabled": false,
+      "selectorPrimaryFocus": "[data-modal-primary-focus]",
+    },
+    "propTypes": Object {
+      "alert": Object {
+        "type": "bool",
+      },
+      "aria-label": [Function],
+      "children": Object {
+        "type": "node",
+      },
+      "className": Object {
+        "type": "string",
+      },
+      "closeButtonLabel": Object {
+        "type": "string",
+      },
+      "danger": Object {
+        "type": "bool",
+      },
+      "focusTrap": [Function],
+      "hasForm": [Function],
+      "hasScrollingContent": Object {
+        "type": "bool",
+      },
+      "iconDescription": [Function],
+      "id": Object {
+        "type": "string",
+      },
+      "modalAriaLabel": Object {
+        "type": "string",
+      },
+      "modalHeading": Object {
+        "type": "node",
+      },
+      "modalLabel": Object {
+        "type": "node",
+      },
+      "onKeyDown": Object {
+        "type": "func",
+      },
+      "onRequestClose": Object {
+        "type": "func",
+      },
+      "onRequestSubmit": Object {
+        "type": "func",
+      },
+      "onSecondarySubmit": Object {
+        "type": "func",
+      },
+      "open": Object {
+        "type": "bool",
+      },
+      "passiveModal": Object {
+        "type": "bool",
+      },
+      "preventCloseOnClickOutside": Object {
+        "type": "bool",
+      },
+      "primaryButtonDisabled": Object {
+        "type": "bool",
+      },
+      "primaryButtonText": Object {
+        "type": "node",
+      },
+      "secondaryButtonText": Object {
+        "type": "node",
+      },
+      "secondaryButtons": [Function],
+      "selectorPrimaryFocus": Object {
+        "type": "string",
+      },
+      "selectorsFloatingMenus": Object {
+        "args": Array [
+          Object {
+            "type": "string",
+          },
+        ],
+        "type": "arrayOf",
+      },
+      "shouldSubmitOnEnter": Object {
+        "type": "bool",
+      },
+      "size": Object {
+        "args": Array [
+          Array [
+            "xs",
+            "sm",
+            "md",
+            "lg",
+          ],
+        ],
+        "type": "oneOf",
+      },
+    },
   },
   "ModalWrapper" => Object {
     "defaultProps": Object {

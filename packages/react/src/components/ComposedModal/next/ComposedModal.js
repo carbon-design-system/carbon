@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { ModalHeader } from './ModalHeader';
 import { ModalFooter } from '../ComposedModal';
 
-import classNames from 'classnames';
+import cx from 'classnames';
 
 import toggleClass from '../../../tools/toggleClass';
 import requiredIfGivenPropIsTruthy from '../../../prop-types/requiredIfGivenPropIsTruthy';
@@ -11,21 +11,19 @@ import requiredIfGivenPropIsTruthy from '../../../prop-types/requiredIfGivenProp
 import wrapFocus from '../../../internal/wrapFocus';
 import { usePrefix } from '../../../internal/usePrefix';
 
-export function ModalBody(props) {
-  const {
-    className,
-    children,
-    hasForm,
-    hasScrollingContent,
-    preventCloseOnClickOutside, // eslint-disable-line
-    ...other
-  } = props;
+export function ModalBody({
+  className: customClassName,
+  children,
+  hasForm,
+  hasScrollingContent,
+  ...rest
+}) {
   const prefix = usePrefix();
-  const contentClass = classNames({
+  const contentClass = cx({
     [`${prefix}--modal-content`]: true,
     [`${prefix}--modal-content--with-form`]: hasForm,
     [`${prefix}--modal-scroll-content`]: hasScrollingContent,
-    [className]: className,
+    [customClassName]: customClassName,
   });
   const hasScrollingContentProps = hasScrollingContent
     ? {
@@ -35,7 +33,7 @@ export function ModalBody(props) {
     : {};
   return (
     <>
-      <div className={contentClass} {...hasScrollingContentProps} {...other}>
+      <div className={contentClass} {...hasScrollingContentProps} {...rest}>
         {children}
       </div>
       {hasScrollingContent && (
@@ -81,7 +79,7 @@ const ComposedModal = React.forwardRef(function ComposedModal(
     ['aria-labelledby']: ariaLabelledBy,
     ['aria-label']: ariaLabel,
     children,
-    className,
+    className: customClassName,
     containerClassName,
     danger,
     onClose,
@@ -154,14 +152,14 @@ const ComposedModal = React.forwardRef(function ComposedModal(
     }
   }
 
-  const modalClass = classNames({
+  const modalClass = cx({
     [`${prefix}--modal`]: true,
     'is-visible': isOpen,
-    [className]: className,
+    [customClassName]: customClassName,
     [`${prefix}--modal--danger`]: danger,
   });
 
-  const containerClass = classNames({
+  const containerClass = cx({
     [`${prefix}--modal-container`]: true,
     [`${prefix}--modal-container--${size}`]: size,
     [containerClassName]: containerClassName,
