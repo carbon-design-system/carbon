@@ -9,6 +9,7 @@ import React from 'react';
 import { Search16, Close16 } from '@carbon/icons-react';
 import Search from '../Search';
 import { mount, shallow } from 'enzyme';
+import '@testing-library/jest-dom';
 import { settings } from 'carbon-components';
 
 const { prefix } = settings;
@@ -44,11 +45,9 @@ describe('Search', () => {
       });
 
       it('should set type as expected', () => {
-        expect(textInput.toHaveAttribute('type', 'text')).toBe(true);
+        expect(textInput).toHaveAttribute('type', 'text');
         wrapper.setProps({ type: 'email' });
-        expect(wrapper.find('input').toHaveAttribute('type', 'email')).toBe(
-          true
-        );
+        expect(wrapper.find('input')).toHaveAttribute('type', 'email');
       });
 
       it('should set placeholder as expected', () => {
@@ -234,9 +233,13 @@ describe('Detecting change in value from props', () => {
         value="foo"
       />
     );
-    expect(wrapper).not.toHaveClass(`${prefix}--search-close--hidden`);
+    expect(wrapper.find('input')).not.toHaveClass(
+      `${prefix}--search-close--hidden`
+    );
     wrapper.setProps({ value: '' });
-    expect(wrapper).toHaveClass(`${prefix}--search-close--hidden`);
+    expect(wrapper.find('input')).toHaveClass(
+      `${prefix}--search-close--hidden`
+    );
   });
 
   it('avoids change the hasContent state upon setting props, unless the value actually changes', () => {
@@ -249,9 +252,13 @@ describe('Detecting change in value from props', () => {
         value="foo"
       />
     );
-    expect(wrapper).toHaveClass(`${prefix}--search-close--hidden`);
+    expect(wrapper.find('input')).toHaveClass(
+      `${prefix}--search-close--hidden`
+    );
     wrapper.setState({ hasContent: false });
     wrapper.setProps({ value: 'foo' });
-    expect(wrapper).not.toHaveClass(`${prefix}--search-close--hidden`);
+    expect(wrapper.find('input')).not.toHaveClass(
+      `${prefix}--search-close--hidden`
+    );
   });
 });
