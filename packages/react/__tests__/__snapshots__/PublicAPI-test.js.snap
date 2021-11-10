@@ -96,7 +96,6 @@ Map {
   },
   "Breadcrumb" => Object {
     "$$typeof": Symbol(react.forward_ref),
-    "displayName": "Breadcrumb",
     "propTypes": Object {
       "aria-label": Object {
         "type": "string",
@@ -115,7 +114,6 @@ Map {
   },
   "BreadcrumbItem" => Object {
     "$$typeof": Symbol(react.forward_ref),
-    "displayName": "BreadcrumbItem",
     "propTypes": Object {
       "aria-current": Object {
         "args": Array [
@@ -158,7 +156,6 @@ Map {
       "tooltipPosition": "top",
       "type": "button",
     },
-    "displayName": "Button",
     "propTypes": Object {
       "as": Object {
         "args": Array [
@@ -303,7 +300,6 @@ Map {
   },
   "ButtonSet" => Object {
     "$$typeof": Symbol(react.forward_ref),
-    "displayName": "ButtonSet",
     "propTypes": Object {
       "children": Object {
         "type": "node",
@@ -324,7 +320,6 @@ Map {
       "onChange": [Function],
       "onClick": [Function],
     },
-    "displayName": "Checkbox",
     "propTypes": Object {
       "checked": Object {
         "type": "bool",
@@ -451,7 +446,6 @@ Map {
       "shouldFilterItem": [Function],
       "type": "default",
     },
-    "displayName": "ComboBox",
     "propTypes": Object {
       "ariaLabel": Object {
         "type": "string",
@@ -762,7 +756,12 @@ Map {
         "type": "string",
       },
       "selectorsFloatingMenus": Object {
-        "type": "string",
+        "args": Array [
+          Object {
+            "type": "string",
+          },
+        ],
+        "type": "arrayOf",
       },
       "size": Object {
         "args": Array [
@@ -1321,7 +1320,6 @@ Map {
         "scope": "col",
         "translateWithId": [Function],
       },
-      "displayName": "TableHeader",
       "propTypes": Object {
         "children": Object {
           "type": "node",
@@ -1471,7 +1469,6 @@ Map {
     },
     "TableToolbarAction": Object {
       "$$typeof": Symbol(react.forward_ref),
-      "displayName": "TableToolbarAction",
       "propTypes": Object {
         "children": Object {
           "type": "node",
@@ -1990,7 +1987,6 @@ Map {
       "scope": "col",
       "translateWithId": [Function],
     },
-    "displayName": "TableHeader",
     "propTypes": Object {
       "children": Object {
         "type": "node",
@@ -2140,7 +2136,6 @@ Map {
   },
   "TableToolbarAction" => Object {
     "$$typeof": Symbol(react.forward_ref),
-    "displayName": "TableToolbarAction",
     "propTypes": Object {
       "children": Object {
         "type": "node",
@@ -2557,7 +2552,6 @@ Map {
       "titleText": "",
       "type": "default",
     },
-    "displayName": "Dropdown",
     "propTypes": Object {
       "ariaLabel": Object {
         "type": "string",
@@ -2946,6 +2940,7 @@ Map {
       "labelText": "Add file",
       "multiple": false,
       "onAddFiles": [Function],
+      "pattern": ".[0-9a-z]+$",
       "tabIndex": 0,
     },
     "propTypes": Object {
@@ -2978,6 +2973,9 @@ Map {
       },
       "onAddFiles": Object {
         "type": "func",
+      },
+      "pattern": Object {
+        "type": "string",
       },
       "role": Object {
         "type": "string",
@@ -3829,6 +3827,9 @@ Map {
       "className": Object {
         "type": "string",
       },
+      "closeButtonLabel": Object {
+        "type": "string",
+      },
       "danger": Object {
         "type": "bool",
       },
@@ -4306,7 +4307,6 @@ Map {
       "title": false,
       "type": "default",
     },
-    "displayName": "MultiSelect",
     "propTypes": Object {
       "clearSelectionDescription": Object {
         "type": "string",
@@ -4552,32 +4552,26 @@ Map {
   },
   "ActionableNotification" => Object {
     "$$typeof": Symbol(react.forward_ref),
-    "displayName": "FeatureToggle(ActionableNotification)",
     "render": [Function],
   },
   "ToastNotification" => Object {
     "$$typeof": Symbol(react.forward_ref),
-    "displayName": "FeatureToggle(ToastNotification)",
     "render": [Function],
   },
   "InlineNotification" => Object {
     "$$typeof": Symbol(react.forward_ref),
-    "displayName": "FeatureToggle(InlineNotification)",
     "render": [Function],
   },
   "NotificationActionButton" => Object {
     "$$typeof": Symbol(react.forward_ref),
-    "displayName": "FeatureToggle(NotificationActionButton)",
     "render": [Function],
   },
   "NotificationButton" => Object {
     "$$typeof": Symbol(react.forward_ref),
-    "displayName": "FeatureToggle(NotificationButton)",
     "render": [Function],
   },
   "NotificationTextDetails" => Object {
     "$$typeof": Symbol(react.forward_ref),
-    "displayName": "FeatureToggle(NotificationTextDetails)",
     "render": [Function],
   },
   "NumberInput" => Object {
@@ -4610,7 +4604,6 @@ Map {
   },
   "OverflowMenu" => Object {
     "$$typeof": Symbol(react.forward_ref),
-    "displayName": "FeatureToggle(OverflowMenu)",
     "render": [Function],
   },
   "OverflowMenuItem" => Object {
@@ -4819,7 +4812,6 @@ Map {
   },
   "PaginationNav" => Object {
     "$$typeof": Symbol(react.forward_ref),
-    "displayName": "PaginationNav",
     "propTypes": Object {
       "className": Object {
         "type": "string",
@@ -4858,7 +4850,6 @@ Map {
       "onClick": [Function],
       "size": "",
     },
-    "displayName": "ControlledPasswordInput",
     "propTypes": Object {
       "className": Object {
         "type": "string",
@@ -4970,7 +4961,6 @@ Map {
       "onClick": [Function],
       "size": "",
     },
-    "displayName": "PasswordInput",
     "propTypes": Object {
       "className": Object {
         "type": "string",
@@ -5568,7 +5558,6 @@ Map {
       "labelText": "Select",
       "light": false,
     },
-    "displayName": "Select",
     "propTypes": Object {
       "children": Object {
         "type": "node",
@@ -5690,7 +5679,6 @@ Map {
       "selected": false,
       "text": "Provide text",
     },
-    "displayName": "Switch",
     "propTypes": Object {
       "children": Object {
         "type": "node",
@@ -5851,32 +5839,26 @@ Map {
   },
   "StructuredListWrapper" => Object {
     "$$typeof": Symbol(react.forward_ref),
-    "displayName": "FeatureToggle(StructuredListWrapper)",
     "render": [Function],
   },
   "StructuredListHead" => Object {
     "$$typeof": Symbol(react.forward_ref),
-    "displayName": "FeatureToggle(StructuredListHead)",
     "render": [Function],
   },
   "StructuredListBody" => Object {
     "$$typeof": Symbol(react.forward_ref),
-    "displayName": "FeatureToggle(StructuredListBody)",
     "render": [Function],
   },
   "StructuredListRow" => Object {
     "$$typeof": Symbol(react.forward_ref),
-    "displayName": "FeatureToggle(StructuredListRow)",
     "render": [Function],
   },
   "StructuredListInput" => Object {
     "$$typeof": Symbol(react.forward_ref),
-    "displayName": "FeatureToggle(StructuredListInput)",
     "render": [Function],
   },
   "StructuredListCell" => Object {
     "$$typeof": Symbol(react.forward_ref),
-    "displayName": "FeatureToggle(StructuredListCell)",
     "render": [Function],
   },
   "StructuredListSkeleton" => Object {
@@ -5950,6 +5932,51 @@ Map {
         "type": "number",
       },
     },
+  },
+  "unstable_ContainedTab" => Object {
+    "$$typeof": Symbol(react.forward_ref),
+    "propTypes": Object {
+      "className": Object {
+        "type": "string",
+      },
+      "disabled": Object {
+        "type": "bool",
+      },
+      "handleTabClick": Object {
+        "type": "func",
+      },
+      "handleTabKeyDown": Object {
+        "type": "func",
+      },
+      "id": Object {
+        "type": "string",
+      },
+      "index": Object {
+        "type": "number",
+      },
+      "label": Object {
+        "type": "node",
+      },
+      "onClick": Object {
+        "type": "func",
+      },
+      "onKeyDown": Object {
+        "type": "func",
+      },
+      "renderButton": Object {
+        "type": "func",
+      },
+      "renderContent": Object {
+        "type": "func",
+      },
+      "selected": Object {
+        "type": "bool",
+      },
+      "tabIndex": Object {
+        "type": "number",
+      },
+    },
+    "render": [Function],
   },
   "TabContent" => Object {
     "defaultProps": Object {
@@ -6049,6 +6076,55 @@ Map {
       },
     },
   },
+  "unstable_ContainedTabs" => Object {
+    "$$typeof": Symbol(react.forward_ref),
+    "propTypes": Object {
+      "children": Object {
+        "type": "node",
+      },
+      "className": Object {
+        "type": "string",
+      },
+      "hidden": Object {
+        "type": "bool",
+      },
+      "leftOverflowButtonProps": Object {
+        "type": "object",
+      },
+      "light": [Function],
+      "onClick": Object {
+        "type": "func",
+      },
+      "onKeyDown": Object {
+        "type": "func",
+      },
+      "onSelectionChange": Object {
+        "type": "func",
+      },
+      "rightOverflowButtonProps": Object {
+        "type": "object",
+      },
+      "scrollIntoView": Object {
+        "type": "bool",
+      },
+      "selected": Object {
+        "type": "number",
+      },
+      "selectionMode": Object {
+        "args": Array [
+          Array [
+            "automatic",
+            "manual",
+          ],
+        ],
+        "type": "oneOf",
+      },
+      "tabContentClassName": Object {
+        "type": "string",
+      },
+    },
+    "render": [Function],
+  },
   "Tag" => Object {
     "propTypes": Object {
       "children": Object {
@@ -6129,7 +6205,6 @@ Map {
       "placeholder": "",
       "rows": 4,
     },
-    "displayName": "TextArea",
     "propTypes": Object {
       "className": Object {
         "type": "string",
@@ -6218,7 +6293,6 @@ Map {
         "onClick": [Function],
         "size": "",
       },
-      "displayName": "ControlledPasswordInput",
       "propTypes": Object {
         "className": Object {
           "type": "string",
@@ -6330,7 +6404,6 @@ Map {
         "onClick": [Function],
         "size": "",
       },
-      "displayName": "PasswordInput",
       "propTypes": Object {
         "className": Object {
           "type": "string",
@@ -6463,7 +6536,6 @@ Map {
       "warn": false,
       "warnText": "",
     },
-    "displayName": "TextInput",
     "propTypes": Object {
       "className": Object {
         "type": "string",
@@ -7054,10 +7126,11 @@ Map {
   "TimePickerSelect" => Object {
     "defaultProps": Object {
       "disabled": false,
-      "iconDescription": "open list of options",
-      "inline": true,
     },
     "propTypes": Object {
+      "aria-label": Object {
+        "type": "string",
+      },
       "children": Object {
         "type": "node",
       },
@@ -7071,16 +7144,10 @@ Map {
         "type": "bool",
       },
       "hideLabel": [Function],
-      "iconDescription": Object {
-        "isRequired": true,
-        "type": "string",
-      },
+      "iconDescription": [Function],
       "id": Object {
         "isRequired": true,
         "type": "string",
-      },
-      "inline": Object {
-        "type": "bool",
       },
       "labelText": Object {
         "isRequired": true,
@@ -7090,7 +7157,6 @@ Map {
   },
   "Toggle" => Object {
     "$$typeof": Symbol(react.forward_ref),
-    "displayName": "FeatureToggle(Toggle)",
     "render": [Function],
   },
   "ToggleSmall" => Object {
@@ -7165,7 +7231,6 @@ Map {
   },
   "ToolbarTitle" => Object {
     "$$typeof": Symbol(react.forward_ref),
-    "displayName": "ToolbarTitle",
     "propTypes": Object {
       "title": Object {
         "type": "string",
@@ -7175,7 +7240,6 @@ Map {
   },
   "ToolbarOption" => Object {
     "$$typeof": Symbol(react.forward_ref),
-    "displayName": "ToolbarOption",
     "propTypes": Object {
       "children": Object {
         "type": "node",
@@ -7185,7 +7249,6 @@ Map {
   },
   "ToolbarDivider" => Object {
     "$$typeof": Symbol(react.forward_ref),
-    "displayName": "ToolbarDivider",
     "render": [Function],
   },
   "ToolbarSearch" => Object {
@@ -7699,6 +7762,7 @@ Map {
   "ToggleSkeleton" => Object {
     "defaultProps": Object {
       "aria-label": "Toggle is loading",
+      "size": "md",
     },
     "propTypes": Object {
       "aria-label": Object {
@@ -7713,6 +7777,15 @@ Map {
       },
       "labelText": Object {
         "type": "string",
+      },
+      "size": Object {
+        "args": Array [
+          Array [
+            "sm",
+            "md",
+          ],
+        ],
+        "type": "oneOf",
       },
     },
   },
@@ -7796,7 +7869,6 @@ Map {
   },
   "HeaderGlobalAction" => Object {
     "$$typeof": Symbol(react.forward_ref),
-    "displayName": "HeaderGlobalAction",
     "propTypes": Object {
       "aria-label": [Function],
       "aria-labelledby": [Function],
@@ -7836,7 +7908,6 @@ Map {
   },
   "HeaderMenu" => Object {
     "$$typeof": Symbol(react.forward_ref),
-    "displayName": "HeaderMenu",
     "render": [Function],
   },
   "HeaderMenuButton" => Object {
@@ -7856,7 +7927,6 @@ Map {
   },
   "HeaderMenuItem" => Object {
     "$$typeof": Symbol(react.forward_ref),
-    "displayName": "HeaderMenuItem",
     "propTypes": Object {
       "children": Object {
         "isRequired": true,
@@ -7938,7 +8008,6 @@ Map {
   },
   "HeaderPanel" => Object {
     "$$typeof": Symbol(react.forward_ref),
-    "displayName": "HeaderPanel",
     "propTypes": Object {
       "aria-label": [Function],
       "aria-labelledby": [Function],
@@ -7969,7 +8038,6 @@ Map {
   },
   "Switcher" => Object {
     "$$typeof": Symbol(react.forward_ref),
-    "displayName": "Switcher",
     "propTypes": Object {
       "aria-label": [Function],
       "aria-labelledby": [Function],
@@ -7985,7 +8053,6 @@ Map {
   },
   "SwitcherItem" => Object {
     "$$typeof": Symbol(react.forward_ref),
-    "displayName": "SwitcherItem",
     "propTypes": Object {
       "aria-label": [Function],
       "aria-labelledby": [Function],
@@ -8039,7 +8106,6 @@ Map {
       "isFixedNav": false,
       "isPersistent": true,
     },
-    "displayName": "SideNav",
     "propTypes": Object {
       "addFocusListeners": Object {
         "type": "bool",
@@ -8207,7 +8273,6 @@ Map {
       "element": "a",
       "large": false,
     },
-    "displayName": "SideNavLink",
     "propTypes": Object {
       "children": Object {
         "isRequired": true,
@@ -8254,12 +8319,10 @@ Map {
   },
   "SideNavMenu" => Object {
     "$$typeof": Symbol(react.forward_ref),
-    "displayName": "SideNavMenu",
     "render": [Function],
   },
   "SideNavMenuItem" => Object {
     "$$typeof": Symbol(react.forward_ref),
-    "displayName": "SideNavMenuItem",
     "propTypes": Object {
       "children": Object {
         "type": "node",
@@ -8275,7 +8338,6 @@ Map {
   },
   "SideNavSwitcher" => Object {
     "$$typeof": Symbol(react.forward_ref),
-    "displayName": "SideNavSwitcher",
     "propTypes": Object {
       "className": Object {
         "type": "string",
@@ -8755,6 +8817,9 @@ Map {
       "children": Object {
         "type": "node",
       },
+      "className": Object {
+        "type": "string",
+      },
       "id": Object {
         "type": "string",
       },
@@ -8776,6 +8841,9 @@ Map {
           ],
         ],
         "type": "oneOf",
+      },
+      "target": Object {
+        "type": "element",
       },
       "x": Object {
         "args": Array [
@@ -8938,5 +9006,134 @@ Map {
     },
   },
   "unstable_usePrefix" => Object {},
+  "unstable_Popover" => Object {
+    "propTypes": Object {
+      "align": Object {
+        "args": Array [
+          Array [
+            "top",
+            "top-left",
+            "top-right",
+            "bottom",
+            "bottom-left",
+            "bottom-right",
+            "left",
+            "left-bottom",
+            "left-top",
+            "right",
+            "right-bottom",
+            "right-top",
+          ],
+        ],
+        "type": "oneOf",
+      },
+      "as": Object {
+        "args": Array [
+          Array [
+            Object {
+              "type": "string",
+            },
+            Object {
+              "type": "elementType",
+            },
+          ],
+        ],
+        "type": "oneOfType",
+      },
+      "caret": Object {
+        "type": "bool",
+      },
+      "children": Object {
+        "type": "node",
+      },
+      "className": Object {
+        "type": "string",
+      },
+      "dropShadow": Object {
+        "type": "bool",
+      },
+      "highContrast": Object {
+        "type": "bool",
+      },
+      "light": Object {
+        "type": "bool",
+      },
+      "open": Object {
+        "isRequired": true,
+        "type": "bool",
+      },
+    },
+  },
+  "unstable_PopoverContent" => Object {
+    "propTypes": Object {
+      "children": Object {
+        "type": "node",
+      },
+      "className": Object {
+        "type": "string",
+      },
+    },
+  },
+  "unstable_HStack" => Object {
+    "$$typeof": Symbol(react.forward_ref),
+    "render": [Function],
+  },
+  "unstable_Stack" => Object {
+    "$$typeof": Symbol(react.forward_ref),
+    "propTypes": Object {
+      "as": Object {
+        "type": "elementType",
+      },
+      "children": Object {
+        "type": "node",
+      },
+      "className": Object {
+        "type": "string",
+      },
+      "gap": Object {
+        "args": Array [
+          Array [
+            Object {
+              "type": "string",
+            },
+            Object {
+              "args": Array [
+                Array [
+                  1,
+                  2,
+                  3,
+                  4,
+                  5,
+                  6,
+                  7,
+                  8,
+                  9,
+                  10,
+                  11,
+                  12,
+                ],
+              ],
+              "type": "oneOf",
+            },
+          ],
+        ],
+        "type": "oneOfType",
+      },
+      "orientation": Object {
+        "args": Array [
+          Array [
+            "horizontal",
+            "vertical",
+          ],
+        ],
+        "type": "oneOf",
+      },
+    },
+    "render": [Function],
+  },
+  "unstable_VStack" => Object {
+    "$$typeof": Symbol(react.forward_ref),
+    "render": [Function],
+  },
 }
 `;

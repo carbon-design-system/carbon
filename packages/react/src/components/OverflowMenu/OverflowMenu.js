@@ -18,6 +18,7 @@ import { OverflowMenuVertical16 } from '@carbon/icons-react';
 import { keys, matches as keyCodeMatches } from '../../internal/keyboard';
 import mergeRefs from '../../tools/mergeRefs';
 import { PrefixContext } from '../../internal/usePrefix';
+import * as FeatureFlags from '@carbon/feature-flags';
 
 const on = (element, ...args) => {
   element.addEventListener(...args);
@@ -97,7 +98,9 @@ class OverflowMenu extends Component {
     /**
      * The ARIA label.
      */
-    ariaLabel: PropTypes.string,
+    ariaLabel: FeatureFlags.enabled('enable-v11-release')
+      ? PropTypes.string.isRequired
+      : PropTypes.string,
 
     /**
      * The child nodes.
@@ -218,7 +221,9 @@ class OverflowMenu extends Component {
   static contextType = PrefixContext;
 
   static defaultProps = {
-    ariaLabel: 'open and close list of options',
+    ariaLabel: FeatureFlags.enabled('enable-v11-release')
+      ? null
+      : 'open and close list of options',
     iconDescription: 'open and close list of options',
     open: false,
     direction: DIRECTION_BOTTOM,
@@ -533,8 +538,6 @@ class OverflowMenu extends Component {
     );
 
     const iconProps = {
-      onClick: this.handleClick,
-      onKeyDown: this.handleKeyDown,
       className: overflowMenuIconClasses,
       'aria-label': iconDescription,
     };

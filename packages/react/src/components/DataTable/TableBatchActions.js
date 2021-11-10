@@ -36,6 +36,7 @@ const TableBatchActions = ({
   translateWithId: t,
   ...rest
 }) => {
+  const [isScrolling, setIsScrolling] = React.useState();
   const batchActionsClasses = cx(
     {
       [`${prefix}--batch-actions`]: true,
@@ -44,12 +45,19 @@ const TableBatchActions = ({
     className
   );
 
+  const batchSummaryClasses = cx(`${prefix}--batch-summary`, {
+    [`${prefix}--batch-summary__scroll`]: isScrolling,
+  });
+
   return (
     <div
-      {...rest}
+      onScroll={() => {
+        setIsScrolling(!isScrolling);
+      }}
       aria-hidden={!shouldShowBatchActions}
-      className={batchActionsClasses}>
-      <div className={`${prefix}--batch-summary`}>
+      className={batchActionsClasses}
+      {...rest}>
+      <div className={batchSummaryClasses}>
         <p className={`${prefix}--batch-summary__para`}>
           <span>
             {totalSelected > 1 || totalSelected === 0
