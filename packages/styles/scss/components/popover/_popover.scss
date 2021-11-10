@@ -65,6 +65,7 @@ $popover-offset: custom-property.get-var('popover-offset', 0rem);
   // Container
   .#{$prefix}--popover-container {
     position: relative;
+    display: inline-block;
   }
 
   /// Modifiers
@@ -110,6 +111,7 @@ $popover-offset: custom-property.get-var('popover-offset', 0rem);
     bottom: 0;
     left: 0;
     filter: $popover-drop-shadow;
+    pointer-events: none;
   }
 
   // Popover content
@@ -122,6 +124,7 @@ $popover-offset: custom-property.get-var('popover-offset', 0rem);
     background-color: $popover-background-color;
     border-radius: $popover-border-radius;
     color: $popover-text-color;
+    pointer-events: auto;
   }
 
   .#{$prefix}--popover--open .#{$prefix}--popover-content {

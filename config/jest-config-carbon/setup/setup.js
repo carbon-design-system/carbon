@@ -18,7 +18,7 @@ global.requestAnimationFrame = function requestAnimationFrame(callback) {
 };
 
 const enzyme = jest.requireActual('enzyme');
-const Adapter = jest.requireActual('enzyme-adapter-react-16');
+const Adapter = jest.requireActual('@wojtekmaj/enzyme-adapter-react-17');
 
 enzyme.configure({ adapter: new Adapter() });
 

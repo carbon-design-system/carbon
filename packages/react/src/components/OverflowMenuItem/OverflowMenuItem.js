@@ -12,6 +12,7 @@ import React from 'react';
 import { match, keys } from '../../internal/keyboard';
 import { warning } from '../../internal/warning';
 import deprecate from '../../prop-types/deprecate.js';
+import * as FeatureFlags from '@carbon/feature-flags';
 
 const { prefix } = settings;
 
@@ -100,7 +101,9 @@ export default class OverflowMenuItem extends React.Component {
     hasDivider: false,
     isDelete: false,
     disabled: false,
-    itemText: 'Provide itemText',
+    itemText: FeatureFlags.enabled('enable-v11-release')
+      ? null
+      : 'Provide itemText',
     onClick: () => {},
     onKeyDown: () => {},
   };
