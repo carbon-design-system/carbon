@@ -44,22 +44,19 @@ describe('Search', () => {
       });
 
       it('should set type as expected', () => {
-        expect(textInput.props().type).toBe('text');
+        expect(textInput.toHaveAttribute('type', 'text')).toBe(true);
         wrapper.setProps({ type: 'email' });
-        expect(textInput.props().type).toBe('email');
-      });
-
-      it('should set value as expected', () => {
-        expect(textInput.props().defaultValue).toBe(undefined);
-        wrapper.setProps({ defaultValue: 'test' });
-        expect(textInput.props().defaultValue).toBe('test');
-        expect(textInput.props().value).toBe(undefined);
+        expect(wrapper.find('input').toHaveAttribute('type', 'email')).toBe(
+          true
+        );
       });
 
       it('should set placeholder as expected', () => {
-        expect(textInput.props().placeholder).toBe('');
+        expect(textInput.getByPlaceholderText('')).toBe(true);
         wrapper.setProps({ placeholder: 'Enter text' });
-        expect(textInput.props().placeholder).toBe('Enter text');
+        expect(wrapper.find('input').getByPlaceholderText('Enter text')).toBe(
+          true
+        );
       });
     });
 
@@ -73,9 +70,9 @@ describe('Search', () => {
       });
 
       it('should set label as expected', () => {
-        expect(wrapper.props().label).toBe('Search Field');
+        expect(wrapper.getByLabelText('Search Field')).toBe(true);
         wrapper.setProps({ label: 'Email Input' });
-        expect(wrapper.props().label).toBe('Email Input');
+        expect(wrapper.getByLabelText('Email Input')).toBe(true);
       });
     });
 
@@ -237,13 +234,9 @@ describe('Detecting change in value from props', () => {
         value="foo"
       />
     );
-    expect(
-      wrapper.classList.contains(`${prefix}--search-close--hidden`)
-    ).toBeFalsy();
+    expect(wrapper).not.toHaveClass(`${prefix}--search-close--hidden`);
     wrapper.setProps({ value: '' });
-    expect(
-      wrapper.classList.contains(`${prefix}--search-close--hidden`)
-    ).toBeTruthy();
+    expect(wrapper).toHaveClass(`${prefix}--search-close--hidden`);
   });
 
   it('avoids change the hasContent state upon setting props, unless the value actually changes', () => {
@@ -256,13 +249,9 @@ describe('Detecting change in value from props', () => {
         value="foo"
       />
     );
-    expect(
-      wrapper.classList.contains(`${prefix}--search-close--hidden`)
-    ).toBeTruthy();
+    expect(wrapper).toHaveClass(`${prefix}--search-close--hidden`);
     wrapper.setState({ hasContent: false });
     wrapper.setProps({ value: 'foo' });
-    expect(
-      wrapper.classList.contains(`${prefix}--search-close--hidden`)
-    ).toBeFalsy();
+    expect(wrapper).not.toHaveClass(`${prefix}--search-close--hidden`);
   });
 });
