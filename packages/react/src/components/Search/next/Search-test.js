@@ -1,8 +1,11 @@
 import React from 'react';
 import { default as Search } from './Search';
-import { render, screen } from '@testing-library/react';
+import SearchSkeleton from '../Search.Skeleton';
+import { render, screen, cleanup } from '@testing-library/react';
 
 describe('Search', () => {
+  afterEach(cleanup);
+
   it('adds extra classes that are passed via className prop', () => {
     render(
       <Search
@@ -13,7 +16,7 @@ describe('Search', () => {
       />
     );
 
-    const search = screen.getByDisplayValue('test');
+    const search = screen.getByRole('search');
     expect(search.classList.contains('extra-class')).toBe(true);
   });
 
@@ -33,17 +36,17 @@ describe('Search', () => {
   it('should have placeholder', () => {
     render(
       <Search
-        id="test"
+        id="testId"
         className="extra-class"
         label="Search Field"
         labelText="testlabel"
-        placeholder="Placeholder"
+        placeholder="test"
       />
     );
 
     expect(screen.getByRole('searchbox')).toHaveAttribute(
       'placeholder',
-      'Placeholder'
+      'test'
     );
   });
 
@@ -78,15 +81,7 @@ describe('Search', () => {
   });
 
   it('should render skeleton', () => {
-    const { container } = render(
-      <Search
-        id="test"
-        className="extra-class"
-        label="Search Field"
-        labelText="testlabel"
-        size="sm"
-      />
-    );
+    const { container } = render(<SearchSkeleton />);
 
     expect(container.classList.contains(`bx--skeleton`)).toEqual(true);
   });
