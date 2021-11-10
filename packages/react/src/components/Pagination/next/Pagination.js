@@ -9,25 +9,43 @@ import { CaretRight16, CaretLeft16 } from '@carbon/icons-react';
 import cx from 'classnames';
 import PropTypes from 'prop-types';
 import React, { useState } from 'react';
-import Button from '../Button';
-import Select from '../Select';
-import SelectItem from '../SelectItem';
-import { equals } from '../../tools/array';
+import Button from '../../Button';
+import Select from '../../Select';
+import SelectItem from '../../SelectItem';
+import { equals } from '../../../tools/array';
 import { useFallbackId } from '../../../internal/useId';
 import { usePrefix } from '../../../internal/usePrefix';
 
-const mapPageSizesToObject = (sizes) => {
+function mapPageSizesToObject(sizes) {
   return typeof sizes[0] === 'object' && sizes[0] !== null
     ? sizes
     : sizes.map((size) => ({ text: size, value: size }));
-};
+}
 
-// State
-// page
-// pageSize
-// prevPageSizes
-// prevPage
-// prevPageSize
+function renderSelectItems(total) {
+  let counter = 1;
+  let itemArr = [];
+  while (counter <= total) {
+    itemArr.push(
+      <SelectItem key={counter} value={counter} text={String(counter)} />
+    );
+    counter++;
+  }
+  return itemArr;
+}
+
+function getPageSize(pageSizes, pageSize) {
+  if (pageSize) {
+    const hasSize = pageSizes.find((size) => {
+      return pageSize === size.value;
+    });
+
+    if (hasSize) {
+      return pageSize;
+    }
+  }
+  return pageSizes[0].value;
+}
 
 function Pagination({
   backwardText = 'Previous page',
@@ -37,69 +55,108 @@ function Pagination({
   id,
   isLastPage = false,
   itemText = (min, max) => `${min}–${max} items`,
-  itemsPerPageText = 'Items per page:',
   itemRangeText = (min, max, total) => `${min}–${max} of ${total} items`,
+  itemsPerPageText = 'Items per page:',
   onChange,
-  pageInputDisabled,
-  pageNumberText = 'Page Number',
-  pageSizeInputDisabled,
+  pageNumberText: _pageNumberText = 'Page Number',
   pageRangeText = (_current, total) =>
     `of ${total} ${total === 1 ? 'page' : 'pages'}`,
   page: controlledPage = 1,
-  pageNumberText,
+  pageInputDisabled,
   pageSize: controlledPageSize,
-  pageSizes: _pageSizes,
+  pageSizeInputDisabled,
+  pageSizes: controlledPageSizes,
   pageText = (page) => `page ${page}`,
   pagesUnknown = false,
   size,
   totalItems,
   ...rest
 }) {
-  const [page, setPage] = useState(controlledPage);
-  const [pageSize, setPageSize] = useState(controlledPageSize);
   const prefix = usePrefix();
   const inputId = useFallbackId(id);
+  const [pageSizes, setPageSizes] = useState(() => {
+    return mapPageSizesToObject(controlledPageSizes);
+  });
+  const [prevPageSizes, setPrevPageSizes] = useState(controlledPageSizes);
+
+  const [page, setPage] = useState(controlledPage);
+  const [prevControlledPage, setPrevControlledPage] = useState(controlledPage);
+
+  const [pageSize, setPageSize] = useState(() => {
+    return getPageSize(pageSizes, controlledPageSize);
+  });
+  const [prevControlledPageSize, setPrevControlledPageSize] = useState(
+    controlledPageSize
+  );
+
   const className = cx({
     [`${prefix}--pagination`]: true,
     [`${prefix}--pagination--${size}`]: size,
-    [className]: !!className,
+    [customClassName]: !!customClassName,
   });
-
-  const totalPages = Math.max(Math.ceil(totalItems / statePageSize), 1);
-  const backButtonDisabled = disabled || statePage === 1;
-  const backButtonClasses = cx(
-    `${prefix}--pagination__button`,
-    `${prefix}--pagination__button--backward`,
-    {
-      [`${prefix}--pagination__button--no-index`]: backButtonDisabled,
-    }
-  );
-  const forwardButtonDisabled = disabled || statePage === totalPages;
-  const forwardButtonClasses = cx(
-    `${prefix}--pagination__button`,
-    `${prefix}--pagination__button--forward`,
-    {
-      [`${prefix}--pagination__button--no-index`]: forwardButtonDisabled,
-    }
-  );
+  const totalPages = Math.max(Math.ceil(totalItems / pageSize), 1);
+  const backButtonDisabled = disabled || page === 1;
+  const backButtonClasses = cx({
+    [`${prefix}--pagination__button`]: true,
+    [`${prefix}--pagination__button--backward`]: true,
+    [`${prefix}--pagination__button--no-index`]: backButtonDisabled,
+  });
+  const forwardButtonDisabled = disabled || page === totalPages;
+  const forwardButtonClasses = cx({
+    [`${prefix}--pagination__button`]: true,
+    [`${prefix}--pagination__button--forward`]: true,
+    [`${prefix}--pagination__button--no-index`]: forwardButtonDisabled,
+  });
   const selectItems = renderSelectItems(totalPages);
-  const pageSizes = mapPageSizesToObject(_pageSizes);
 
-  function handleSizeChange(evt) {
-    const pageSize = Number(evt.target.value);
+  // Sync state with props
+  if (controlledPage !== prevControlledPage) {
+    setPage(controlledPage);
+    setPrevControlledPage(controlledPage);
+  }
 
-    setPageSize(pageSize);
-    setPage(1);
+  if (controlledPageSize !== prevControlledPageSize) {
+    setPageSize(getPageSize(pageSizes, controlledPageSize));
+    setPrevControlledPageSize(controlledPageSize);
+  }
+
+  if (!equals(controlledPageSizes, prevPageSizes)) {
+    const pageSizes = mapPageSizesToObject(controlledPageSizes);
+
+    const hasPageSize = pageSizes.find((size) => {
+      return size.value === pageSize;
+    });
+
+    // Reset page to 1 if the current pageSize is not included in the new page
+    // sizes
+    if (!hasPageSize) {
+      setPage(1);
+    }
+
+    setPageSizes(pageSizes);
+    setPrevPageSizes(controlledPageSizes);
+  }
+
+  function handleSizeChange(event) {
+    const pageSize = Number(event.target.value);
+    const changes = {
+      pageSize,
+      page: 1,
+    };
+
+    setPage(changes.page);
+    setPageSize(changes.pageSize);
 
     if (onChange) {
-      onChange({ page: 1, pageSize });
+      onChange(changes);
     }
   }
 
-  function handlePageInputChange(evt) {
-    const page = Number(evt.target.value);
+  function handlePageInputChange(event) {
+    const page = Number(event.target.value);
     if (page > 0 && page <= Math.max(Math.ceil(totalItems / pageSize), 1)) {
       setPage(page);
+
       if (onChange) {
         onChange({
           page,
@@ -110,27 +167,25 @@ function Pagination({
   }
 
   function incrementPage() {
-    const page = page + 1;
-    this.setState({ page });
-    this.props.onChange({ page, pageSize: this.state.pageSize });
+    const nextPage = page + 1;
+    setPage(nextPage);
+    if (onChange) {
+      onChange({
+        page: nextPage,
+        pageSize,
+      });
+    }
   }
 
   function decrementPage() {
-    const page = this.state.page - 1;
-    this.setState({ page });
-    this.props.onChange({ page, pageSize: this.state.pageSize });
-  }
-
-  function renderSelectItems(total) {
-    let counter = 1;
-    let itemArr = [];
-    while (counter <= total) {
-      itemArr.push(
-        <SelectItem key={counter} value={counter} text={String(counter)} />
-      );
-      counter++;
+    const nextPage = page - 1;
+    setPage(nextPage);
+    if (onChange) {
+      onChange({
+        page: nextPage,
+        pageSize,
+      });
     }
-    return itemArr;
   }
 
   return (
@@ -163,13 +218,10 @@ function Pagination({
         <span
           className={`${prefix}--pagination__text ${prefix}--pagination__items-count`}>
           {pagesUnknown
-            ? itemText(
-                statePageSize * (statePage - 1) + 1,
-                statePage * statePageSize
-              )
+            ? itemText(pageSize * (page - 1) + 1, page * pageSize)
             : itemRangeText(
-                Math.min(statePageSize * (statePage - 1) + 1, totalItems),
-                Math.min(statePage * statePageSize, totalItems),
+                Math.min(pageSize * (page - 1) + 1, totalItems),
+                Math.min(page * pageSize, totalItems),
                 totalItems
               )}
         </span>
@@ -182,14 +234,12 @@ function Pagination({
           inline
           hideLabel
           onChange={handlePageInputChange}
-          value={statePage}
+          value={page}
           disabled={pageInputDisabled || disabled}>
           {selectItems}
         </Select>
         <span className={`${prefix}--pagination__text`}>
-          {pagesUnknown
-            ? pageText(statePage)
-            : pageRangeText(statePage, totalPages)}
+          {pagesUnknown ? pageText(page) : pageRangeText(page, totalPages)}
         </span>
         <div className={`${prefix}--pagination__control-buttons`}>
           <Button
@@ -335,60 +385,3 @@ Pagination.propTypes = {
 };
 
 export default Pagination;
-
-class Paginationz extends React.Component {
-  constructor(props) {
-    super(props);
-    const { pageSizes: _pageSizes, page, pageSize } = this.props;
-
-    const pageSizes = mapPageSizesToObject(_pageSizes);
-
-    this.state = {
-      page: page,
-      pageSize:
-        pageSize && pageSizes.some((sizeObj) => pageSize === sizeObj.value)
-          ? pageSize
-          : pageSizes[0].value,
-      prevPageSizes: pageSizes,
-      prevPage: page,
-      prevPageSize: pageSize,
-    };
-    this.uniqueId = ++instanceId;
-  }
-
-  static getDerivedStateFromProps(
-    { pageSizes: _pageSizes, page, pageSize },
-    state
-  ) {
-    const {
-      prevPageSizes,
-      prevPage,
-      prevPageSize,
-      page: currentPage,
-      pageSize: currentPageSize,
-    } = state;
-
-    const pageSizes = mapPageSizesToObject(_pageSizes);
-    const pageSizesValues = pageSizes.map((sizeObj) => sizeObj.value);
-    const prevPageSizesValues = prevPageSizes.map((sizeObj) => sizeObj.value);
-
-    const pageSizesChanged = !equals(pageSizesValues, prevPageSizesValues);
-    if (
-      pageSizesChanged &&
-      !pageSizes.some((sizeObj) => pageSize === sizeObj.value)
-    ) {
-      pageSize = pageSizes[0].value;
-    }
-    const pageChanged = page !== prevPage;
-    const pageSizeChanged = pageSize !== prevPageSize;
-    return !pageSizesChanged && !pageChanged && !pageSizeChanged
-      ? null
-      : {
-          page: (pageSizeChanged && 1) || (pageChanged && page) || currentPage,
-          pageSize: pageSizeChanged ? pageSize : currentPageSize,
-          prevPageSizes: pageSizes,
-          prevPage: page,
-          prevPageSize: pageSize,
-        };
-  }
-}

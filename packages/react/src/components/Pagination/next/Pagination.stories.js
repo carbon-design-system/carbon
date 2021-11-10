@@ -16,8 +16,8 @@ import {
   select,
   text,
 } from '@storybook/addon-knobs';
-import Pagination from '../Pagination';
-import mdx from './Pagination.mdx';
+import Pagination from './Pagination';
+import mdx from '../Pagination.mdx';
 
 const sizes = {
   'Small  (sm)': 'sm',
