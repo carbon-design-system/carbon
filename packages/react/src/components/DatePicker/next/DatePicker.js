@@ -142,6 +142,7 @@ const DatePicker = React.forwardRef(function DatePicker(
   const [prevDisable, setPrevDisable] = useState(disable);
   const [prevEnable, setPrevEnable] = useState(enable);
   const [prevValue, setPrevValue] = useState(value);
+  const [prevInline, setPrevInline] = useState(rest.inline);
 
   /**
    * only run once - component did mount equivalent
@@ -272,10 +273,10 @@ const DatePicker = React.forwardRef(function DatePicker(
         cal.current.set('enable', enable);
         setPrevEnable(enable);
       }
-      //need to figure out wtf this is RIP
-      //   if (rest.inline && rest.inline !== prevRest?.inline) {
-      //     cal.current.set('inline', rest.inline);
-      //   }
+      if (rest.inline && rest.inline !== prevInline) {
+        cal.current.set('inline', rest.inline);
+        setPrevInline(rest.inline);
+      }
     }
 
     // Coordinate when the given `value` prop changes. When this happens, we
@@ -307,6 +308,7 @@ const DatePicker = React.forwardRef(function DatePicker(
     prevMaxDate,
     prevMinDate,
     prevValue,
+    prevInline,
   ]);
 
   const onChangeHandler = () => {
