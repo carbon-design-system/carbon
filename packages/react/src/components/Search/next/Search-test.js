@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2021
+ * Copyright IBM Corp. 2016, 2018
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -7,73 +7,30 @@
 
 import React from 'react';
 import { Search16, Close16 } from '@carbon/icons-react';
-import Search from '../Search';
-// import { render, render } from 'enzyme';
-import { render, screen } from '@testing-library/react';
-import '@testing-library/jest-dom';
+import Search from './Search';
+import { mount, shallow } from 'enzyme';
 import { settings } from 'carbon-components';
 
 const { prefix } = settings;
 
-// /**
-//  * Find the <div> element thats the search.
-//  * @param {Enzymecontainer} container
-//  * @returns {Enzymecontainer}
-//  */
-//  const container = (container) => {
-//   return container.find(`.${prefix}--search`);
-// };
-
-// /**
-//  * Find the <input> element.
-//  * @param {Enzymecontainer} container
-//  * @returns {Enzymecontainer}
-//  */
-//  const label = (container) => {
-//   return container.find(`.${prefix}--search .${prefix}--label`);
-// };
-
-// /**
-//  * Find the <input> element.
-//  * @param {Enzymecontainer} container
-//  * @returns {Enzymecontainer}
-//  */
-//  const textInput = (container) => {
-//   return container.find(`.${prefix}--search-input`);
-// };
-
 describe('Search', () => {
-  // let search;
-
-  // beforeEach(() => {
-  //   search = render(
-  //     <Search
-  //       id="test"
-  //       className="extra-class"
-  //       label="Search Field"
-  //       labelText="testlabel"
-  //     />
-  //   );
-  // });
-
   describe('renders as expected', () => {
-    const container = render(
+    const wrapper = mount(
       <Search
-        data-testid="search-test"
+        id="test"
         className="extra-class"
         label="Search Field"
         labelText="testlabel"
       />
     );
 
-    const textInput = screen.getByRole('searchbox');
-    const label = screen.getByLabelText('testlabel');
-
-    screen.debug();
+    const label = wrapper.find('label');
+    const textInput = wrapper.find('input');
+    const container = wrapper.find(`.${prefix}--search`);
 
     describe('container', () => {
       it('should add extra classes that are passed via className', () => {
-        expect(container.hasClass('extra-class')).toBe(true);
+        expect(container.hasClass('extra-class')).toEqual(true);
       });
     });
 
@@ -83,21 +40,26 @@ describe('Search', () => {
       });
 
       it('has the expected classes', () => {
-        expect(textInput.hasClass(`${prefix}--search-input`)).toBe(true);
+        expect(textInput.hasClass(`${prefix}--search-input`)).toEqual(true);
       });
 
       it('should set type as expected', () => {
-        expect(textInput).toHaveAttribute('type', 'text');
-        container.setProps({ type: 'email' });
-        expect(container.find('input')).toHaveAttribute('type', 'email');
+        expect(textInput.props().type).toEqual('text');
+        wrapper.setProps({ type: 'email' });
+        expect(wrapper.find('input').props().type).toEqual('email');
+      });
+
+      it('should set value as expected', () => {
+        expect(textInput.props().defaultValue).toEqual(undefined);
+        wrapper.setProps({ defaultValue: 'test' });
+        expect(wrapper.find('input').props().defaultValue).toEqual('test');
+        expect(wrapper.find('input').props().value).toEqual(undefined);
       });
 
       it('should set placeholder as expected', () => {
-        expect(textInput.getByPlaceholderText('')).toBe(true);
-        container.setProps({ placeholder: 'Enter text' });
-        expect(container.find('input').getByPlaceholderText('Enter text')).toBe(
-          true
-        );
+        expect(textInput.props().placeholder).toEqual('');
+        wrapper.setProps({ placeholder: 'Enter text' });
+        expect(wrapper.find('input').props().placeholder).toEqual('Enter text');
       });
     });
 
@@ -107,20 +69,20 @@ describe('Search', () => {
       });
 
       it('has the expected classes', () => {
-        expect(label.hasClass(`${prefix}--label`)).toBe(true);
+        expect(label.hasClass(`${prefix}--label`)).toEqual(true);
       });
 
       it('should set label as expected', () => {
-        expect(label).toBe(true);
-        container.setProps({ labelText: 'email label' });
-        expect(label.getByLabelText('email label')).toBe(true);
+        expect(wrapper.props().label).toEqual('Search Field');
+        wrapper.setProps({ label: 'Email Input' });
+        expect(wrapper.props().label).toEqual('Email Input');
       });
     });
 
     describe('Large Search', () => {
-      const large = render(
+      const large = mount(
         <Search
-          data-testid="search-test"
+          id="test"
           size="lg"
           className="extra-class"
           label="Search Field"
@@ -136,22 +98,22 @@ describe('Search', () => {
       });
 
       it('should have the expected large class', () => {
-        expect(largeContainer.hasClass(`${prefix}--search--lg`)).toBe(true);
+        expect(largeContainer.hasClass(`${prefix}--search--lg`)).toEqual(true);
       });
 
       it('should only have 1 button (clear)', () => {
         const btn = large.find('button');
-        expect(btn.length).toBe(1);
+        expect(btn.length).toEqual(1);
       });
 
       it('renders two Icons', () => {
         const iconTypes = [Search16, Close16];
         const icons = large.findWhere((n) => iconTypes.includes(n.type()));
-        expect(icons.length).toBe(2);
+        expect(icons.length).toEqual(2);
       });
 
       describe('buttons', () => {
-        const btns = container.find('button');
+        const btns = wrapper.find('button');
 
         it('should be one button', () => {
           expect(btns.length).toBe(1);
@@ -160,30 +122,28 @@ describe('Search', () => {
         it('should have type="button"', () => {
           const type1 = btns.first().instance().getAttribute('type');
           const type2 = btns.last().instance().getAttribute('type');
-          expect(type1).toBe('button');
-          expect(type2).toBe('button');
+          expect(type1).toEqual('button');
+          expect(type2).toEqual('button');
         });
       });
 
       describe('icons', () => {
         it('renders "search" icon', () => {
-          const icons = container.find(Search16);
+          const icons = wrapper.find(Search16);
           expect(icons.length).toBe(1);
         });
 
         it('renders two Icons', () => {
-          container.setProps({ size: undefined });
+          wrapper.setProps({ size: undefined });
           const iconTypes = [Search16, Close16];
-          const icons = container.findWhere((n) =>
-            iconTypes.includes(n.type())
-          );
-          expect(icons.length).toBe(2);
+          const icons = wrapper.findWhere((n) => iconTypes.includes(n.type()));
+          expect(icons.length).toEqual(2);
         });
       });
     });
 
     describe('Small Search', () => {
-      const small = render(
+      const small = mount(
         <Search
           id="test"
           size="sm"
@@ -201,18 +161,18 @@ describe('Search', () => {
       });
 
       it('should have the expected small class', () => {
-        expect(smallContainer.hasClass(`${prefix}--search--sm`)).toBe(true);
+        expect(smallContainer.hasClass(`${prefix}--search--sm`)).toEqual(true);
       });
 
       it('should only have 1 button (clear)', () => {
         const btn = small.find('button');
-        expect(btn.length).toBe(1);
+        expect(btn.length).toEqual(1);
       });
 
       it('renders two Icons', () => {
         const iconTypes = [Search16, Close16];
-        const icons = container.findWhere((n) => iconTypes.includes(n.type()));
-        expect(icons.length).toBe(2);
+        const icons = wrapper.findWhere((n) => iconTypes.includes(n.type()));
+        expect(icons.length).toEqual(2);
       });
     });
   });
@@ -223,9 +183,9 @@ describe('Search', () => {
       const onChange = jest.fn();
       const onClear = jest.fn();
 
-      const container = render(
+      const wrapper = shallow(
         <Search
-          data-testid="search-test"
+          id="test"
           labelText="testlabel"
           onClick={onClick}
           onChange={onChange}
@@ -233,7 +193,7 @@ describe('Search', () => {
         />
       );
 
-      const input = container.find('input');
+      const input = wrapper.find('input');
       const eventObject = {
         target: {
           defaultValue: 'test',
@@ -251,14 +211,12 @@ describe('Search', () => {
       });
 
       it('should invoke onClear when input value is cleared', () => {
-        container.setProps({ value: 'test' });
+        wrapper.setProps({ value: 'test' });
         const focus = jest.fn();
         input.getElement().ref({
           focus,
         });
-        container
-          .find('button')
-          .simulate('click', { target: { value: 'test' } });
+        wrapper.find('button').simulate('click', { target: { value: 'test' } });
         expect(onClear).toHaveBeenCalled();
         expect(focus).toHaveBeenCalled();
       });
@@ -266,45 +224,40 @@ describe('Search', () => {
   });
 });
 
-// TODO Add skeleton tests
+/**
+ * Find the <input> element.
+ * @param {Enzymecontainer} wrapper
+ * @returns {Enzymecontainer}
+ */
+const getInput = (wrapper) => {
+  return wrapper.find(`.${prefix}--search-input`);
+};
+
+/**
+ * Find the value of the <input> element
+ * @param {EnzymeWrapper} wrapper
+ * @returns {number}
+ */
+const getInputValue = (wrapper) => {
+  return getInput(wrapper).prop('value');
+};
 
 describe('Detecting change in value from props', () => {
-  it('changes the hasContent state upon change in props', () => {
-    const container = render(
-      <Search
-        data-testid="search-test"
-        className="extra-class"
-        label="Search Field"
-        labelText="testlabel"
-        value="foo"
-      />
-    );
-    expect(container.find('input')).not.toHaveClass(
-      `${prefix}--search-close--hidden`
-    );
-    container.setProps({ value: '' });
-    expect(container.find('input')).toHaveClass(
-      `${prefix}--search-close--hidden`
-    );
+  it('should have empty value', () => {
+    shallow(<Search id="test" className="extra-class" labelText="testlabel" />);
+    expect(getInputValue).toBe('');
   });
 
-  it('avoids change the hasContent state upon setting props, unless the value actually changes', () => {
-    const container = render(
+  it('should set value if value prop is added', () => {
+    shallow(
       <Search
-        data-testid="search-test"
+        id="test"
         className="extra-class"
-        label="Search Field"
         labelText="testlabel"
         value="foo"
       />
     );
-    expect(container.find('input')).toHaveClass(
-      `${prefix}--search-close--hidden`
-    );
-    container.setState({ hasContent: false });
-    container.setProps({ value: 'foo' });
-    expect(container.find('input')).not.toHaveClass(
-      `${prefix}--search-close--hidden`
-    );
+
+    expect(getInputValue).toBe('foo');
   });
 });
