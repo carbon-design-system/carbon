@@ -67,7 +67,7 @@ describe('Search', () => {
     );
 
     const textInput = screen.getByRole('searchbox');
-    const label = screen.getByLabelText('Search Field', { selector: 'input' });
+    const label = screen.getByLabelText('testlabel');
 
     screen.debug();
 
@@ -111,9 +111,9 @@ describe('Search', () => {
       });
 
       it('should set label as expected', () => {
-        expect(container.getByLabelText('Search Field')).toBe(true);
-        container.setProps({ label: 'Email Input' });
-        expect(container.getByLabelText('Email Input')).toBe(true);
+        expect(label).toBe(true);
+        container.setProps({ labelText: 'email label' });
+        expect(label.getByLabelText('email label')).toBe(true);
       });
     });
 
