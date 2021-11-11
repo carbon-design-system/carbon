@@ -204,6 +204,7 @@ Array [
   "unstable_FeatureFlags",
   "unstable_HStack",
   "unstable_Heading",
+  "unstable_IconButton",
   "unstable_Menu",
   "unstable_MenuDivider",
   "unstable_MenuGroup",
