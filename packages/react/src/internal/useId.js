@@ -63,7 +63,7 @@ export function useId(prefix = 'id') {
 /**
  * Generate a unique id if a given `id` is not provided
  * @param {string} id
- * @return {string}
+ * @returns {string}
  */
 export function useFallbackId(id) {
   const fallback = useId();
