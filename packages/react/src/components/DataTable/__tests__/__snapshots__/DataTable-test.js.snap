@@ -2056,19 +2056,19 @@ exports[`DataTable should render 1`] = `
               <div
                 className="bx--batch-summary"
               >
-                <Text
-                  as="p"
+                <p
                   className="bx--batch-summary__para"
                 >
-                  <p
-                    className="bx--batch-summary__para"
-                    dir="auto"
+                  <Text
+                    as="span"
                   >
-                    <span>
+                    <span
+                      dir="auto"
+                    >
                       0 items selected
                     </span>
-                  </p>
-                </Text>
+                  </Text>
+                </p>
               </div>
               <TableActionList>
                 <div
@@ -3124,19 +3124,19 @@ exports[`DataTable sticky header should render 1`] = `
               <div
                 className="bx--batch-summary"
               >
-                <Text
-                  as="p"
+                <p
                   className="bx--batch-summary__para"
                 >
-                  <p
-                    className="bx--batch-summary__para"
-                    dir="auto"
+                  <Text
+                    as="span"
                   >
-                    <span>
+                    <span
+                      dir="auto"
+                    >
                       0 items selected
                     </span>
-                  </p>
-                </Text>
+                  </Text>
+                </p>
               </div>
               <TableActionList>
                 <div

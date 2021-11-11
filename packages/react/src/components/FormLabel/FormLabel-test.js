@@ -6,12 +6,12 @@
  */
 
 import React from 'react';
-import { mount } from 'enzyme';
+import { shallow } from 'enzyme';
 import FormLabel from '../FormLabel';
 
 describe('FormLabel', () => {
   it('should render', () => {
-    const wrapper = mount(<FormLabel>label text</FormLabel>);
+    const wrapper = shallow(<FormLabel>label text</FormLabel>);
     expect(wrapper).toMatchSnapshot();
   });
 });

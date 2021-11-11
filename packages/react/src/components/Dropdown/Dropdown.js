@@ -145,9 +145,9 @@ const Dropdown = React.forwardRef(function Dropdown(
   return (
     <div className={wrapperClasses} {...other}>
       {titleText && (
-        <Text as="label" className={titleClasses} {...getLabelProps()}>
+        <label className={titleClasses} {...getLabelProps()}>
           {titleText}
-        </Text>
+        </label>
       )}
       <ListBox
         aria-label={ariaLabel}

@@ -16,19 +16,19 @@ exports[`DataTable.TableBatchActions should render 1`] = `
     <div
       className="bx--batch-summary"
     >
-      <Text
-        as="p"
+      <p
         className="bx--batch-summary__para"
       >
-        <p
-          className="bx--batch-summary__para"
-          dir="auto"
+        <Text
+          as="span"
         >
-          <span>
+          <span
+            dir="auto"
+          >
             10 items selected
           </span>
-        </p>
-      </Text>
+        </Text>
+      </p>
     </div>
     <TableActionList>
       <div
@@ -85,19 +85,19 @@ exports[`DataTable.TableBatchActions should render 2`] = `
     <div
       className="bx--batch-summary"
     >
-      <Text
-        as="p"
+      <p
         className="bx--batch-summary__para"
       >
-        <p
-          className="bx--batch-summary__para"
-          dir="auto"
+        <Text
+          as="span"
         >
-          <span>
+          <span
+            dir="auto"
+          >
             10 items selected
           </span>
-        </p>
-      </Text>
+        </Text>
+      </p>
     </div>
     <TableActionList>
       <div

@@ -59,13 +59,13 @@ const TableBatchActions = ({
       className={batchActionsClasses}
       {...rest}>
       <div className={batchSummaryClasses}>
-        <Text as="p" className={`${prefix}--batch-summary__para`}>
-          <span>
+        <p className={`${prefix}--batch-summary__para`}>
+          <Text as="span">
             {totalSelected > 1 || totalSelected === 0
               ? t('carbon.table.batch.items.selected', { totalSelected })
               : t('carbon.table.batch.item.selected', { totalSelected })}
-          </span>
-        </Text>
+          </Text>
+        </p>
       </div>
       <TableActionList>
         {children}
