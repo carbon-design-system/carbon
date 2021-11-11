@@ -121,6 +121,13 @@ const SideNav = React.forwardRef(function SideNav(props, ref) {
     eventHandlers.onMouseLeave = () => handleToggle(false, false);
   }
 
+  function getAriaHiddenValue() {
+    if (expanded === false && window.innerWidth < 1056) {
+      return true;
+    }
+    return false;
+  }
+
   return (
     <>
       {isFixedNav ? null : (
@@ -128,7 +135,7 @@ const SideNav = React.forwardRef(function SideNav(props, ref) {
         <div className={overlayClassName} onClick={onOverlayClick} />
       )}
       <nav
-        aria-hidden={!expanded}
+        aria-hidden={getAriaHiddenValue()}
         ref={ref}
         className={`${prefix}--side-nav__navigation ${className}`}
         {...accessibilityLabel}
