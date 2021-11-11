@@ -244,12 +244,14 @@ const getInputValue = (wrapper) => {
 
 describe('Detecting change in value from props', () => {
   it('should have empty value', () => {
-    shallow(<Search id="test" className="extra-class" labelText="testlabel" />);
-    expect(getInputValue).toBe('');
+    const search = shallow(
+      <Search id="test" className="extra-class" labelText="testlabel" />
+    );
+    expect(getInputValue(search)).toBe('');
   });
 
   it('should set value if value prop is added', () => {
-    shallow(
+    const search = shallow(
       <Search
         id="test"
         className="extra-class"
@@ -258,6 +260,6 @@ describe('Detecting change in value from props', () => {
       />
     );
 
-    expect(getInputValue).toBe('foo');
+    expect(getInputValue(search)).toBe('foo');
   });
 });
