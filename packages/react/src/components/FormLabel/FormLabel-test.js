@@ -11,7 +11,7 @@ import FormLabel from '../FormLabel';
 
 describe('FormLabel', () => {
   it('should render', () => {
-    const wrapper = shallow(<FormLabel>label text</FormLabel>);
+    const wrapper = shallow(<FormLabel />);
     expect(wrapper).toMatchSnapshot();
   });
 });
