@@ -217,6 +217,7 @@ Array [
   "unstable_ProgressBar",
   "unstable_Section",
   "unstable_Stack",
+  "unstable_Tooltip",
   "unstable_TreeNode",
   "unstable_TreeView",
   "unstable_VStack",
