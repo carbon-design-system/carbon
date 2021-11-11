@@ -91,7 +91,7 @@ Playground.argTypes = {
     control: {
       type: 'select',
     },
-    defaultValue: 'ghost',
+    defaultValue: 'primary',
     options: [
       'primary',
       'secondary',

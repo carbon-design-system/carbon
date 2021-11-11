@@ -9,6 +9,7 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import Button from '../Button';
 import { Tooltip } from '../Tooltip/next';
+import { usePrefix } from '../../internal/usePrefix';
 
 const IconButton = React.forwardRef(function IconButton(props, ref) {
   const {
@@ -20,14 +21,17 @@ const IconButton = React.forwardRef(function IconButton(props, ref) {
     leaveDelayMs,
     ...rest
   } = props;
+  const prefix = usePrefix();
+
   return (
     <Tooltip
       align={align}
+      className={`${prefix}--icon-tooltip`}
       defaultOpen={defaultOpen}
       enterDelayMs={enterDelayMs}
       label={label}
       leaveDelayMs={leaveDelayMs}>
-      <Button {...rest} hasIconOnly ref={ref}>
+      <Button {...rest} hasIconOnly ref={ref} size="sm">
         {children}
       </Button>
     </Tooltip>
