@@ -49,7 +49,7 @@ const Modal = React.forwardRef(function Modal(
     hasScrollingContent,
     closeButtonLabel,
     preventCloseOnClickOutside, // eslint-disable-line
-    ...other
+    ...rest
   },
   ref
 ) {
@@ -282,7 +282,7 @@ const Modal = React.forwardRef(function Modal(
 
   return (
     <div
-      {...other}
+      {...rest}
       onKeyDown={handleKeyDown}
       onMouseDown={handleMousedown}
       onBlur={handleBlur}

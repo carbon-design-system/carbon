@@ -8,14 +8,6 @@
 import React, { useState } from 'react';
 import ReactDOM from 'react-dom';
 import { action } from '@storybook/addon-actions';
-import {
-  boolean,
-  object,
-  optionsKnob as options,
-  select,
-  text,
-  withKnobs,
-} from '@storybook/addon-knobs';
 import Modal from './Modal';
 import Button from '../../Button';
 import Select from '../../Select';
@@ -24,13 +16,6 @@ import Dropdown from '../../Dropdown';
 import SelectItem from '../../SelectItem';
 import TextInput from '../../TextInput';
 import mdx from '../Modal.mdx';
-
-const sizes = {
-  'Extra small (xs)': 'xs',
-  'Small (sm)': 'sm',
-  'Medium (md)': 'md',
-  'Large (lg)': 'lg',
-};
 
 const buttons = {
   'None (0)': '0',
@@ -41,87 +26,56 @@ const buttons = {
 
 const props = {
   modal: () => ({
-    numberOfButtons: options('Number of Buttons', buttons, '2', {
-      display: 'inline-radio',
-    }),
+    numberOfButtons: ('Number of Buttons', buttons, '2'),
     className: 'some-class',
-    open: boolean('Open (open)', true),
-    danger: boolean('Danger mode (danger)', false),
-    alert: boolean('Alert mode (alert)', false),
-    shouldSubmitOnEnter: boolean(
-      'Enter key to submit (shouldSubmitOnEnter)',
-      false
-    ),
-    hasScrollingContent: boolean(
-      'Modal contains scrollable content (hasScrollingContent)',
-      false
-    ),
-    hasForm: boolean('Modal contains a form (hasForm)', false),
-    modalHeading: text('Modal heading (modalHeading)', 'Modal heading'),
-    modalLabel: text('Optional label (modalLabel)', 'Label'),
-    modalAriaLabel: text(
-      'ARIA label, used only if modalLabel not provided (modalAriaLabel)',
-      'A label to be read by screen readers on the modal root node'
-    ),
-    selectorPrimaryFocus: text(
-      'Primary focus element selector (selectorPrimaryFocus)',
-      '[data-modal-primary-focus]'
-    ),
-    size: select('Size (size)', sizes, 'md'),
+    open: true,
+    danger: false,
+    alert: false,
+    shouldSubmitOnEnter: false,
+    hasScrollingContent: false,
+    hasForm: false,
+    modalHeading: 'Modal heading',
+    modalLabel: 'Label',
+    modalAriaLabel:
+      'A label to be read by screen readers on the modal root node',
+    selectorPrimaryFocus: '[data-modal-primary-focus]',
+    size: 'md',
     onBlur: action('onBlur'),
     onClick: action('onClick'),
     onFocus: action('onFocus'),
     onRequestClose: action('onRequestClose'),
     onRequestSubmit: action('onRequestSubmit'),
     onSecondarySubmit: action('onSecondarySubmit'),
-    preventCloseOnClickOutside: boolean(
-      'Prevent closing on click outside of modal (preventCloseOnClickOutside)',
-      true
-    ),
-    primaryButtonDisabled: boolean(
-      'Disable primary button (primaryButtonDisabled)',
-      false
-    ),
-    primaryButtonText: text(
-      'Primary button text (primaryButtonText)',
-      'Primary button'
-    ),
+    preventCloseOnClickOutside: true,
+    primaryButtonDisabled: false,
+    primaryButtonText: 'Primary button',
   }),
   modalFooter: (numberOfButtons) => {
     const secondaryButtons = () => {
       switch (numberOfButtons) {
         case '2':
           return {
-            secondaryButtonText: text(
-              'Secondary button text (secondaryButtonText in <ModalFooter>)',
-              'Secondary button'
-            ),
+            secondaryButtonText: 'Secondary button',
           };
         case '3':
           return {
-            secondaryButtons: object(
-              'Secondary button config array (secondaryButtons)',
-              [
-                {
-                  buttonText: 'Keep both',
-                  onClick: action('onClick'),
-                },
-                {
-                  buttonText: 'Rename',
-                  onClick: action('onClick'),
-                },
-              ]
-            ),
+            secondaryButtons: [
+              {
+                buttonText: 'Keep both',
+                onClick: action('onClick'),
+              },
+              {
+                buttonText: 'Rename',
+                onClick: action('onClick'),
+              },
+            ],
           };
         default:
           return null;
       }
     };
     return {
-      passiveModal: boolean(
-        'Without footer (passiveModal)',
-        false || numberOfButtons === '0'
-      ),
+      passiveModal: false || numberOfButtons === '0',
       ...secondaryButtons(),
     };
   },
@@ -129,7 +83,6 @@ const props = {
 
 export default {
   title: 'Components/Modal',
-  decorators: [withKnobs],
   parameters: {
     component: Modal,
     docs: {
