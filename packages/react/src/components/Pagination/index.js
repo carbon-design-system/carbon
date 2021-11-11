@@ -11,6 +11,6 @@ import { Pagination as PaginationNext } from './next';
 
 export * from './Pagination.Skeleton';
 
-export const Pagination = FeatureFlag.enabled('enable-v11-release')
+export default FeatureFlag.enabled('enable-v11-release')
   ? PaginationNext
   : PaginationClassic;
