@@ -247,7 +247,7 @@ describe('Detecting change in value from props', () => {
     const search = shallow(
       <Search id="test" className="extra-class" labelText="testlabel" />
     );
-    expect(getInputValue(search)).toBe('');
+    expect(getInputValue(search)).toBe(undefined);
   });
 
   it('should set value if value prop is added', () => {

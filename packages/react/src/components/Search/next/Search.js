@@ -6,7 +6,7 @@
  */
 
 import PropTypes from 'prop-types';
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import cx from 'classnames';
 import { Search16, Close16 } from '@carbon/icons-react';
 import { composeEventHandlers } from '../../../tools/events';
@@ -15,26 +15,29 @@ import { useId } from '../../../internal/useId';
 import deprecate from '../../../prop-types/deprecate';
 import { usePrefix } from '../../../internal/usePrefix';
 
-export default function Search({
-  className,
-  closeButtonLabelText,
-  defaultValue,
-  disabled,
-  id,
-  labelText,
-  light,
-  onChange,
-  onClear,
-  onKeyDown,
-  placeHolderText,
-  placeholder,
-  renderIcon,
-  size = !small ? 'lg' : 'sm',
-  small,
-  type,
-  value,
-  ...rest
-}) {
+const Search = React.forwardRef(function Search(
+  {
+    className,
+    closeButtonLabelText,
+    defaultValue,
+    disabled,
+    id,
+    labelText,
+    light,
+    onChange,
+    onClear,
+    onKeyDown,
+    placeHolderText,
+    placeholder,
+    renderIcon,
+    size = !small ? 'lg' : 'sm',
+    small,
+    type,
+    value,
+    ...rest
+  },
+  ref
+) {
   const prefix = usePrefix();
 
   const input = useRef(null);
@@ -68,8 +71,14 @@ export default function Search({
 
     onClear();
 
-    setHasContent(false, () => input.current.focus());
+    setHasContent(false);
   }
+
+  useEffect(() => {
+    if (!hasContent) {
+      input.current.focus();
+    }
+  }, [hasContent]);
 
   function handleChange(evt) {
     setHasContent(evt.target.value !== '');
@@ -110,7 +119,11 @@ export default function Search({
   );
 
   return (
-    <div role="search" aria-labelledby={searchId} className={searchClasses}>
+    <div
+      role="search"
+      aria-labelledby={searchId}
+      className={searchClasses}
+      ref={ref}>
       <div className={`${prefix}--search-magnifier`} ref={magnifier}>
         {searchIcon}
       </div>
@@ -120,6 +133,8 @@ export default function Search({
       <input
         role="searchbox"
         autoComplete="off"
+        defaultValue={defaultValue}
+        value={value}
         {...rest}
         type={type}
         disabled={disabled}
@@ -140,7 +155,7 @@ export default function Search({
       </button>
     </div>
   );
-}
+});
 
 Search.propTypes = {
   /**
@@ -249,3 +264,5 @@ Search.defaultProps = {
   onChange: () => {},
   onClear: () => {},
 };
+
+export default Search;
