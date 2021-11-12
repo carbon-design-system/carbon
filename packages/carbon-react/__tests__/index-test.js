@@ -198,8 +198,6 @@ Array [
   "ToolbarSearch",
   "ToolbarTitle",
   "Tooltip",
-  "TooltipDefinition",
-  "TooltipIcon",
   "UnorderedList",
   "VStack",
   "unstable_Heading",

@@ -79,6 +79,10 @@
   border: 1px solid theme.$border-subtle;
 }
 
+.playground-trigger svg {
+  fill: theme.$background-inverse;
+}
+
 .popover-title {
   @include type.type-style('productive-heading-01');
   margin-bottom: spacing.$spacing-01;
