@@ -5,319 +5,352 @@
 // LICENSE file in the root directory of this source tree.
 //
 
-@use '../../theme' as *;
 @use '../../config' as *;
-@use '../../compat/theme' as *;
+@use '../../theme';
 @use '../../utilities/box-shadow' as *;
+@use '../../utilities/custom-property';
 @use '../../utilities/high-contrast-mode' as *;
 @use '../../utilities/focus-outline' as *;
 @use '../../utilities/' as *;
 @use '../../utilities/convert' as *;
 
-/// Popover component
-/// @access private
-/// @group components
+/// The Popover component is used for triggering a pop-up next to a trigger
+/// element, typically a button, in a given direction. It is made up of several
+/// parts and includes a handful of modifiers to change the appearance.
+///
+/// The parts of a popover include:
+///   The popover container `.cds-popover-container`
+///   This container contains the trigger and the popover and is used to
+///   coordinate positioning relative to the trigger button
+///
+///   The popover
+///   This is an intermediate container that is used for the
+///   `filter: drop-shadow()` effect on the popover content and the caret. It is
+///   an absolutely positioned container that matches the dimensions of the
+///   container so that popover content and caret can be positioned absolutely.
+///
+///   Popover content
+///   This is the containing element for user-provided content and sets the
+///   background and text color for the area.
+///
+///   Popover caret
+///   This caret is an optional modifier that displays a character centered with
+///   respect to the trigger element
+
+// The background color for the popover container
+$popover-background-color: custom-property.get-var(
+  'popover-background-color',
+  theme.$layer
+);
+
+// The drop shadow value used for the popover container
+$popover-drop-shadow: custom-property.get-var('popover-drop-shadow', 'none');
+
+// The border radius value for the popover container
+$popover-border-radius: custom-property.get-var('popover-border-radius', 2px);
+
+// The text color used for text placed inside of the popover
+$popover-text-color: custom-property.get-var(
+  'popover-text-color',
+  theme.$text-primary
+);
+
+// The distance between the popover container and the triggering element
+// Specify the distance between the popover and the trigger. This value must
+// have a unit otherwise the `calc()` expression will not work
+// stylelint-disable-next-line length-zero-no-unit
+$popover-offset: custom-property.get-var('popover-offset', 0rem);
+
 @mixin popover {
-  $popover-text-color: $text-01;
-  $popover-caret-offset: 1rem;
-  $popover-offset: 8px;
+  // Container
+  .#{$prefix}--popover-container {
+    position: relative;
+    display: inline-block;
+  }
 
+  /// Modifiers
+
+  // Light modifier
+  .#{$prefix}--popover--light .#{$prefix}--popover-content {
+    @include custom-property.declaration(
+      'popover-background-color',
+      theme.$layer-02
+    );
+  }
+
+  // High contrast modifier
+  .#{$prefix}--popover--high-contrast .#{$prefix}--popover {
+    @include custom-property.declaration(
+      'popover-background-color',
+      theme.$background-inverse
+    );
+    @include custom-property.declaration(
+      'popover-text-color',
+      theme.$text-inverse
+    );
+  }
+
+  // Drop shadow modifier
+  .#{$prefix}--popover--drop-shadow .#{$prefix}--popover {
+    @include custom-property.declaration(
+      'popover-drop-shadow',
+      drop-shadow(0 2px 2px rgba(0, 0, 0, 0.2))
+    );
+  }
+
+  // Caret tip modifier
+  .#{$prefix}--popover--caret {
+    @include custom-property.declaration('popover-offset', rem(10px));
+  }
+
+  // Popover, this element contains both the caret and the popover content
   .#{$prefix}--popover {
-    // Specify the distance between the popover and the trigger. This value must
-    // have a unit otherwise the `calc()` expression will not work
-    // stylelint-disable-next-line length-zero-no-unit
-    --cds-popover-offset: 0rem;
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    filter: $popover-drop-shadow;
+    pointer-events: none;
+  }
 
-    // Specify the distance that the caret should be offset from the side of the
-    // popover when not centered
-    --cds-popover-caret-offset: 1rem;
-
+  // Popover content
+  .#{$prefix}--popover-content {
     position: absolute;
     z-index: z('floating');
     display: none;
+    width: max-content;
+    max-width: rem(368px);
+    background-color: $popover-background-color;
+    border-radius: $popover-border-radius;
+    color: $popover-text-color;
+    pointer-events: auto;
+  }
+
+  .#{$prefix}--popover--open .#{$prefix}--popover-content {
+    display: block;
   }
 
   // We use a pseudo element inside of the popover to create a space between the
-  // target and the popover. This helps in situations like tooltips where you do
-  // not want the tooltip to disappear when the user moves from the target to
+  // target and the popover. This helps in situations like toolcarets where you do
+  // not want the toolcaret to disappear when the user moves from the target to
   // the popover.
-  .#{$prefix}--popover::before {
+  .#{$prefix}--popover-content::before {
     position: absolute;
-    display: block;
+    display: none;
     content: '';
   }
 
-  .#{$prefix}--popover--open {
+  .#{$prefix}--popover--open .#{$prefix}--popover-content::before {
     display: block;
   }
 
-  .#{$prefix}--popover-contents {
-    @include box-shadow;
-
-    position: relative;
-    width: max-content;
-    max-width: rem(368px);
-    background-color: $ui-01;
-    border-radius: 2px;
-    color: $popover-text-color;
-  }
-
-  .#{$prefix}--popover--light .#{$prefix}--popover-contents {
-    background-color: $background;
-  }
-
-  .#{$prefix}--popover--high-contrast .#{$prefix}--popover-contents {
-    background-color: $background-inverse;
-    color: $icon-inverse;
-  }
-
-  .#{$prefix}--popover--caret {
-    --cds-popover-offset: 0.5rem;
-  }
-
-  .#{$prefix}--popover--caret .#{$prefix}--popover-contents::before,
-  .#{$prefix}--popover--caret .#{$prefix}--popover-contents::after {
+  // Popover caret
+  .#{$prefix}--popover-caret {
     position: absolute;
-    display: inline-block;
-    width: rem(8px);
-    height: rem(8px);
-    background-color: inherit;
-    content: '';
+    z-index: z('floating');
+    display: none;
+    background-color: $popover-background-color;
+    // We use `will-change: transform` to prevent antialiasing when our caret
+    // has subpixel rendering. When this happens, a single pixel line appears
+    // between the caret and popover-content that we would like to avoid
+    will-change: transform;
   }
 
-  .#{$prefix}--popover--caret .#{$prefix}--popover-contents::before {
-    z-index: -1;
-    box-shadow: 2px 2px 6px 0 rgba(0, 0, 0, 0.2);
+  .#{$prefix}--popover--open.#{$prefix}--popover--caret
+    .#{$prefix}--popover-caret {
+    display: block;
   }
-
-  // The popover's tooltip is created by drawing two 8px x 8px boxes, one for
-  // rendering the box-shadow that the popover content uses and another for
-  // layering on top of this box to create an effect of a popover caret with a
-  // box-shadow. The layer with the box-shadow is rendered behind the popover
-  // content, while the other is rendered above of the popover content.
 
   //-----------------------------------------------------------------------------
   // Bottom
   //-----------------------------------------------------------------------------
-  .#{$prefix}--popover--bottom {
+
+  // Popover content placement
+  .#{$prefix}--popover--bottom .#{$prefix}--popover-content {
     bottom: 0;
     left: 50%;
-    transform: translate(-50%, calc(100% + var(--cds-popover-offset)));
+    transform: translate(-50%, calc(100% + $popover-offset));
   }
 
-  @include place-caret(bottom) {
-    top: 0;
-    left: 50%;
-    transform: translate(-50%, -50%) rotate(45deg);
-  }
-
-  // Bottom left
-  .#{$prefix}--popover--bottom-left {
+  .#{$prefix}--popover--bottom-left .#{$prefix}--popover-content {
     bottom: 0;
     left: 0;
-    transform: translateY(calc(100% + var(--cds-popover-offset)));
+    transform: translate(0, calc(100% + $popover-offset));
   }
 
-  @include place-caret(bottom-left) {
-    top: 0;
-    left: 0;
-    transform: translate(var(--cds-popover-caret-offset), -50%) rotate(45deg);
-  }
-
-  // Bottom right
-  .#{$prefix}--popover--bottom-right {
+  .#{$prefix}--popover--bottom-right .#{$prefix}--popover-content {
     right: 0;
     bottom: 0;
-    transform: translateY(calc(100% + var(--cds-popover-offset)));
+    transform: translate(0, calc(100% + $popover-offset));
   }
 
-  @include place-caret(bottom-right) {
-    top: 0;
-    right: 0;
-    transform: translate(calc(-1 * var(--cds-popover-caret-offset)), -50%)
-      rotate(45deg);
-  }
-
-  // Hover area
-  .#{$prefix}--popover--bottom.#{$prefix}--popover::before,
-  .#{$prefix}--popover--bottom-left.#{$prefix}--popover::before,
-  .#{$prefix}--popover--bottom-right.#{$prefix}--popover::before {
+  // Popover hover area placement
+  .#{$prefix}--popover--bottom .#{$prefix}--popover-content::before,
+  .#{$prefix}--popover--bottom-left .#{$prefix}--popover-content::before,
+  .#{$prefix}--popover--bottom-right .#{$prefix}--popover-content::before {
     top: 0;
     right: 0;
     left: 0;
-    height: var(--cds-popover-offset);
+    height: $popover-offset;
     transform: translateY(-100%);
   }
 
-  //-----------------------------------------------------------------------------
-  // TOP
-  //-----------------------------------------------------------------------------
-  .#{$prefix}--popover--top {
-    bottom: 100%;
-    left: 50%;
-    transform: translate(-50%, calc(-1 * var(--cds-popover-offset)));
-  }
-
-  @include place-caret(top) {
+  // Caret placement
+  .#{$prefix}--popover--bottom .#{$prefix}--popover-caret,
+  .#{$prefix}--popover--bottom-left .#{$prefix}--popover-caret,
+  .#{$prefix}--popover--bottom-right .#{$prefix}--popover-caret {
     bottom: 0;
     left: 50%;
-    transform: translate(-50%, 50%) rotate(45deg);
+    width: rem(12px);
+    height: rem(6px);
+    clip-path: polygon(0% 100%, 50% 0%, 100% 100%);
+    transform: translate(-50%, $popover-offset);
   }
 
-  // Top left
-  .#{$prefix}--popover--top-left {
-    bottom: 100%;
+  //-----------------------------------------------------------------------------
+  // Top
+  //-----------------------------------------------------------------------------
+
+  // Popover content placement
+  .#{$prefix}--popover--top .#{$prefix}--popover-content {
+    top: 0;
+    left: 50%;
+    transform: translate(-50%, calc(-100% - $popover-offset));
+  }
+
+  .#{$prefix}--popover--top-left .#{$prefix}--popover-content {
+    top: 0;
     left: 0;
-    transform: translateY(calc(-1 * var(--cds-popover-offset)));
+    transform: translate(0, calc(-100% - $popover-offset));
   }
 
-  @include place-caret(top-left) {
+  .#{$prefix}--popover--top-right .#{$prefix}--popover-content {
+    top: 0;
+    right: 0;
+    transform: translate(0, calc(-100% - $popover-offset));
+  }
+
+  // Popover hover area placement
+  .#{$prefix}--popover--top .#{$prefix}--popover-content::before,
+  .#{$prefix}--popover--top-left .#{$prefix}--popover-content::before,
+  .#{$prefix}--popover--top-right .#{$prefix}--popover-content::before {
+    right: 0;
     bottom: 0;
     left: 0;
-    transform: translate(var(--cds-popover-caret-offset), 50%) rotate(45deg);
-  }
-
-  // Top right
-  .#{$prefix}--popover--top-right {
-    right: 0;
-    bottom: 100%;
-    transform: translateY(calc(-1 * var(--cds-popover-offset)));
-  }
-
-  @include place-caret(top-right) {
-    right: 0;
-    bottom: 0;
-    transform: translate(calc(-1 * var(--cds-popover-caret-offset)), 50%)
-      rotate(45deg);
-  }
-
-  // Hover area
-  .#{$prefix}--popover--top.#{$prefix}--popover::before,
-  .#{$prefix}--popover--top-left.#{$prefix}--popover::before,
-  .#{$prefix}--popover--top-right.#{$prefix}--popover::before {
-    right: 0;
-    bottom: 0;
-    left: 0;
-    height: var(--cds-popover-offset);
+    height: $popover-offset;
     transform: translateY(100%);
+  }
+
+  // Caret placement
+  .#{$prefix}--popover--top .#{$prefix}--popover-caret,
+  .#{$prefix}--popover--top-left .#{$prefix}--popover-caret,
+  .#{$prefix}--popover--top-right .#{$prefix}--popover-caret {
+    top: 0;
+    left: 50%;
+    width: rem(12px);
+    height: rem(6px);
+    clip-path: polygon(0% 0%, 50% 100%, 100% 0%);
+    transform: translate(-50%, calc(-1 * $popover-offset));
   }
 
   //-----------------------------------------------------------------------------
   // Right
   //-----------------------------------------------------------------------------
-  .#{$prefix}--popover--right {
+
+  // Popover content placement
+  .#{$prefix}--popover--right .#{$prefix}--popover-content {
     top: 50%;
     left: 100%;
-    transform: translate(var(--cds-popover-offset), -50%);
+    // Add in 0.1px to prevent rounding errors where the content is
+    // moved farther than the caret
+    transform: translate($popover-offset, -50%);
   }
 
-  @include place-caret(right) {
-    top: 50%;
-    left: 0;
-    transform: translate(-50%, -50%) rotate(45deg);
-  }
-
-  // Right top
-  .#{$prefix}--popover--right-top {
+  .#{$prefix}--popover--right-top .#{$prefix}--popover-content {
     top: 0;
     left: 100%;
-    transform: translateX($popover-offset);
+    transform: translate($popover-offset, 0);
   }
 
-  @include place-caret(right-top) {
-    top: 0;
-    left: 0;
-    transform: translate(-50%, var(--cds-popover-caret-offset)) rotate(45deg);
-  }
-
-  // Right bottom
-  .#{$prefix}--popover--right-bottom {
+  .#{$prefix}--popover--right-bottom .#{$prefix}--popover-content {
     bottom: 0;
     left: 100%;
-    transform: translateX(var(--cds-popover-offset));
+    transform: translate($popover-offset, 0);
   }
 
-  @include place-caret(right-bottom) {
-    bottom: 0;
-    left: 0;
-    transform: translate(-50%, calc(-1 * var(--cds-popover-caret-offset)))
-      rotate(45deg);
-  }
-
-  // Hover area
-  .#{$prefix}--popover--right.#{$prefix}--popover::before,
-  .#{$prefix}--popover--right-top.#{$prefix}--popover::before,
-  .#{$prefix}--popover--right-bottom.#{$prefix}--popover::before {
+  // Popover hover area placement
+  .#{$prefix}--popover--right .#{$prefix}--popover-content::before,
+  .#{$prefix}--popover--right-top .#{$prefix}--popover-content::before,
+  .#{$prefix}--popover--right-bottom .#{$prefix}--popover-content::before {
     top: 0;
     bottom: 0;
     left: 0;
-    width: var(--cds-popover-offset);
+    width: $popover-offset;
     transform: translateX(-100%);
+  }
+
+  // Caret placement
+  .#{$prefix}--popover--right .#{$prefix}--popover-caret,
+  .#{$prefix}--popover--right-top .#{$prefix}--popover-caret,
+  .#{$prefix}--popover--right-bottom .#{$prefix}--popover-caret {
+    top: 50%;
+    left: 100%;
+    width: rem(6px);
+    height: rem(12px);
+    clip-path: polygon(0% 50%, 100% 0%, 100% 100%);
+    transform: translate(calc($popover-offset - 100%), -50%);
   }
 
   //-----------------------------------------------------------------------------
   // Left
   //-----------------------------------------------------------------------------
-  .#{$prefix}--popover--left {
+
+  // Popover content placement
+  .#{$prefix}--popover--left .#{$prefix}--popover-content {
     top: 50%;
     right: 100%;
-    transform: translate(calc(-1 * var(--cds-popover-offset)), -50%);
+    // Add in 0.1px to prevent rounding errors where the content is
+    // moved farther than the caret
+    transform: translate(calc(-1 * $popover-offset + 0.1px), -50%);
   }
 
-  @include place-caret(left) {
-    top: 50%;
-    right: 0;
-    transform: translate(50%, -50%) rotate(45deg);
-  }
-
-  // Left top
-  .#{$prefix}--popover--left-top {
+  .#{$prefix}--popover--left-top .#{$prefix}--popover-content {
     top: 0;
     right: 100%;
-    transform: translateX(calc(-1 * var(--cds-popover-offset)));
+    // Add in 0.1px to prevent rounding errors where the content is
+    // moved farther than the caret
+    transform: translate(calc(-1 * $popover-offset + 0.1px), 0);
   }
 
-  @include place-caret(left-top) {
-    top: 0;
-    right: 0;
-    transform: translate(50%, var(--cds-popover-caret-offset)) rotate(45deg);
-  }
-
-  // Left bottom
-  .#{$prefix}--popover--left-bottom {
+  .#{$prefix}--popover--left-bottom .#{$prefix}--popover-content {
     right: 100%;
     bottom: 0;
-    transform: translateX(calc(-1 * var(--cds-popover-offset)));
+    // Add in 0.1px to prevent rounding errors where the content is
+    // moved farther than the caret
+    transform: translate(calc(-1 * $popover-offset + 0.1px), 0);
   }
 
-  @include place-caret(left-bottom) {
-    right: 0;
-    bottom: 0;
-    transform: translate(50%, calc(-1 * var(--cds-popover-caret-offset)))
-      rotate(45deg);
-  }
-
-  // Hover area
-  .#{$prefix}--popover--left.#{$prefix}--popover::before,
-  .#{$prefix}--popover--left-top.#{$prefix}--popover::before,
-  .#{$prefix}--popover--left-bottom.#{$prefix}--popover::before {
+  // Popover hover area placement
+  .#{$prefix}--popover--left .#{$prefix}--popover-content::before,
+  .#{$prefix}--popover--left-top .#{$prefix}--popover-content::before,
+  .#{$prefix}--popover--left-bottom .#{$prefix}--popover-content::before {
     top: 0;
     right: 0;
     bottom: 0;
-    width: var(--cds-popover-offset);
+    width: $popover-offset;
     transform: translateX(100%);
   }
-}
 
-/// Helper for placing the caret inside a popover. The selectors here can get
-/// distracting in the main stylesheet, but ultimately they target the ::before
-/// and ::after pseudo-elements for the given direction. The @content block
-/// passed in should appropriately position the caret for the given direction.
-@mixin place-caret($direction) {
-  .#{$prefix}--popover--caret.#{$prefix}--popover--#{$direction}
-    .#{$prefix}--popover-contents::before,
-  .#{$prefix}--popover--caret.#{$prefix}--popover--#{$direction}
-    .#{$prefix}--popover-contents::after {
-    @content;
+  // Caret placement
+  .#{$prefix}--popover--left .#{$prefix}--popover-caret,
+  .#{$prefix}--popover--left-top .#{$prefix}--popover-caret,
+  .#{$prefix}--popover--left-bottom .#{$prefix}--popover-caret {
+    top: 50%;
+    right: 100%;
+    width: rem(6px);
+    height: rem(12px);
+    clip-path: polygon(0% 0%, 100% 50%, 0% 100%);
+    transform: translate(calc(-1 * $popover-offset + 100%), -50%);
   }
 }

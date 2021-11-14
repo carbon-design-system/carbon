@@ -59,11 +59,10 @@ describe('childrenOfType', () => {
     </ChildElementInvalidTest>;
     expect(spy).toHaveBeenCalledTimes(1);
     expect(spy).toHaveBeenCalledWith(
-      expect.stringContaining(
-        'Invalid prop `children` of type `div` supplied to ' +
-          '`ChildElementInvalidTest`, expected each child to be a ' +
-          '`span` component.'
-      )
+      'Warning: Failed %s type: %s%s',
+      'prop',
+      'Invalid prop `children` of type `div` supplied to `ChildElementInvalidTest`, expected each child to be a `span` component.',
+      expect.anything() // this argument is the stack trace/report of the source file line and can change
     );
   });
 
@@ -94,11 +93,10 @@ describe('childrenOfType', () => {
     </ChildSFCInvalidTest>;
     expect(spy).toHaveBeenCalledTimes(1);
     expect(spy).toHaveBeenCalledWith(
-      expect.stringContaining(
-        'Invalid prop `children` of type `BadStatelessComponent` supplied to ' +
-          '`ChildSFCInvalidTest`, expected each child to be a ' +
-          '`StatelessComponent` component.'
-      )
+      'Warning: Failed %s type: %s%s',
+      'prop',
+      'Invalid prop `children` of type `BadStatelessComponent` supplied to `ChildSFCInvalidTest`, expected each child to be a `StatelessComponent` component.',
+      expect.anything()
     );
   });
 
@@ -132,11 +130,10 @@ describe('childrenOfType', () => {
     </ChildClassInvalidTest>;
     expect(spy).toHaveBeenCalledTimes(1);
     expect(spy).toHaveBeenCalledWith(
-      expect.stringContaining(
-        'Invalid prop `children` of type `BadClassComponent` supplied to ' +
-          '`ChildClassInvalidTest`, expected each child to be a ' +
-          '`ClassComponent` component.'
-      )
+      'Warning: Failed %s type: %s%s',
+      'prop',
+      'Invalid prop `children` of type `BadClassComponent` supplied to `ChildClassInvalidTest`, expected each child to be a `ClassComponent` component.',
+      expect.anything() // this argument is the stack trace/report of the source file line and can change
     );
   });
 
@@ -148,10 +145,10 @@ describe('childrenOfType', () => {
     <RequiredTest />;
     expect(spy).toHaveBeenCalledTimes(1);
     expect(spy).toHaveBeenCalledWith(
-      expect.stringContaining(
-        'The prop `children` is marked as required in RequiredTest, but its ' +
-          'value is `undefined`.'
-      )
+      'Warning: Failed %s type: %s%s',
+      'prop',
+      'The prop `children` is marked as required in RequiredTest, but its value is `undefined`.',
+      expect.anything() // this argument is the stack trace/report of the source file line and can change
     );
   });
 });
