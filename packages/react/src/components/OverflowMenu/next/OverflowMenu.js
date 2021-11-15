@@ -12,6 +12,7 @@ import { settings } from 'carbon-components';
 import { OverflowMenuVertical16 } from '@carbon/icons-react';
 import { useId } from '../../../internal/useId';
 import Menu from '../../Menu';
+import { keys, matches as keyCodeMatches } from '../../../internal/keyboard';
 
 const { prefix } = settings;
 
@@ -68,6 +69,20 @@ function OverflowMenu({
     e.preventDefault();
   }
 
+  function handleKeyPress(e) {
+    if (
+      open &&
+      keyCodeMatches(e, [
+        keys.ArrowUp,
+        keys.ArrowRight,
+        keys.ArrowDown,
+        keys.ArrowLeft,
+      ])
+    ) {
+      e.preventDefault();
+    }
+  }
+
   const containerClasses = classNames(`${prefix}--overflow-menu__container`);
 
   const triggerClasses = classNames(
@@ -88,6 +103,7 @@ function OverflowMenu({
         className={triggerClasses}
         onClick={handleClick}
         onMouseDown={handleMousedown}
+        onKeyDown={handleKeyPress}
         ref={triggerRef}>
         <IconElement />
       </button>
