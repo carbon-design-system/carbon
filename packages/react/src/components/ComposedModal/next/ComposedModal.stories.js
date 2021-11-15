@@ -16,9 +16,9 @@ import {
   text,
   withKnobs,
 } from '@storybook/addon-knobs';
-import { ModalBody, ModalFooter } from '../ComposedModal';
-import ComposedModal from './ComposedModal';
+import ComposedModal, { ModalBody } from './ComposedModal';
 import { ModalHeader } from './ModalHeader';
+import { ModalFooter } from './ModalFooter';
 import Select from '../../Select';
 import SelectItem from '../../SelectItem';
 import TextInput from '../../TextInput';
@@ -120,8 +120,8 @@ const props = {
         false
       ),
       ...secondaryButtons(numberOfButtons),
-      onRequestClose: action('onRequestClose'),
-      onRequestSubmit: action('onRequestSubmit'),
+      onRequestClose: () => action('onRequestClose')(),
+      onRequestSubmit: () => action('onRequestSubmit')(),
     };
   },
 };

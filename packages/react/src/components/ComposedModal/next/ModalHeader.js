@@ -12,19 +12,18 @@ import { Close20 } from '@carbon/icons-react';
 import { usePrefix } from '../../../internal/usePrefix';
 
 export function ModalHeader({
-  className,
-  labelClassName,
-  titleClassName,
+  buttonOnClick,
+  children,
+  className: customClassName,
   closeClassName,
   closeIconClassName,
-  label,
-  title,
-  children,
+  closeModal,
   iconDescription,
-  closeModal, // eslint-disable-line
-  buttonOnClick, // eslint-disable-line
-  preventCloseOnClickOutside, // eslint-disable-line
-  ...other
+  label,
+  labelClassName,
+  title,
+  titleClassName,
+  ...rest
 }) {
   const prefix = usePrefix();
 
@@ -35,7 +34,7 @@ export function ModalHeader({
 
   const headerClass = cx({
     [`${prefix}--modal-header`]: true,
-    [className]: className,
+    [customClassName]: customClassName,
   });
 
   const labelClass = cx({
@@ -59,7 +58,7 @@ export function ModalHeader({
   });
 
   return (
-    <div className={headerClass} {...other}>
+    <div className={headerClass} {...rest}>
       {label && <h2 className={labelClass}>{label}</h2>}
 
       {title && <h3 className={titleClass}>{title}</h3>}
@@ -140,4 +139,5 @@ ModalHeader.propTypes = {
 ModalHeader.defaultProps = {
   iconDescription: 'Close',
   buttonOnClick: () => {},
+  closeModal: () => {},
 };
