@@ -55,18 +55,11 @@ Playground.argTypes = {
       'top',
       'top-left',
       'top-right',
-
       'bottom',
       'bottom-left',
       'bottom-right',
-
       'left',
-      'left-bottom',
-      'left-top',
-
       'right',
-      'right-bottom',
-      'right-top',
     ],
     control: {
       type: 'select',
@@ -92,15 +85,6 @@ Playground.argTypes = {
       type: 'select',
     },
     defaultValue: 'primary',
-    options: [
-      'primary',
-      'secondary',
-      'danger',
-      'ghost',
-      'danger--primary',
-      'danger--ghost',
-      'danger--tertiary',
-      'tertiary',
-    ],
+    options: ['primary', 'secondary', 'ghost', 'tertiary'],
   },
 };

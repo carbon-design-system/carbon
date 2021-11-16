@@ -39,10 +39,18 @@ $tooltip-padding-inline: custom-property.get-var(
 
 @mixin icon-tooltip {
   .#{$prefix}--icon-tooltip {
-    @include custom-property.declaration('popover-offset', 10px);
     @include custom-property.declaration(
       'tooltip-padding-block',
-      convert.rem(3px)
+      convert.rem(2px)
     );
+    @include custom-property.declaration(
+      'popover-caret-width',
+      convert.rem(8px)
+    );
+    @include custom-property.declaration(
+      'popover-caret-height',
+      convert.rem(4px)
+    );
+    @include custom-property.declaration('popover-offset', convert.rem(8px));
   }
 }

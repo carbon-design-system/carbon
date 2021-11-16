@@ -17,6 +17,7 @@ const IconButton = React.forwardRef(function IconButton(props, ref) {
     children,
     defaultOpen = false,
     enterDelayMs,
+    kind,
     label,
     leaveDelayMs,
     ...rest
@@ -31,7 +32,7 @@ const IconButton = React.forwardRef(function IconButton(props, ref) {
       enterDelayMs={enterDelayMs}
       label={label}
       leaveDelayMs={leaveDelayMs}>
-      <Button {...rest} hasIconOnly ref={ref} size="sm">
+      <Button {...rest} hasIconOnly kind={kind} ref={ref} size="sm">
         {children}
       </Button>
     </Tooltip>
@@ -46,18 +47,11 @@ IconButton.propTypes = {
     'top',
     'top-left',
     'top-right',
-
     'bottom',
     'bottom-left',
     'bottom-right',
-
     'left',
-    'left-bottom',
-    'left-top',
-
     'right',
-    'right-bottom',
-    'right-top',
   ]),
 
   /**
@@ -74,6 +68,11 @@ IconButton.propTypes = {
    * Specify the duration in milliseconds to delay before displaying the tooltip
    */
   enterDelayMs: PropTypes.number,
+
+  /**
+   * Specify the type of button to be used as the base for the IconButton
+   */
+  kind: PropTypes.oneOf(['primary', 'secondary', 'ghost', 'tertiary']),
 
   /**
    * Provide the label to be rendered inside of the Tooltip. The label will use
