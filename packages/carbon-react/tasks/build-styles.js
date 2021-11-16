@@ -369,6 +369,16 @@ async function build() {
           },
           {
             type: 'directory',
+            filepath: 'stack',
+            files: [
+              {
+                type: 'file',
+                filepath: '_index.scss',
+              },
+            ],
+          },
+          {
+            type: 'directory',
             filepath: 'structured-list',
             files: [
               {
