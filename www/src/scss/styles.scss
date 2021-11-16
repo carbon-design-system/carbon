@@ -1,0 +1,9 @@
+@use '@carbon/react/scss/reset';
+@use '@carbon/react/scss/components/stack';
+@use '@carbon/react/scss/spacing';
+
+.statistics {
+  display: grid;
+  grid-template-columns: max-content 1fr;
+  grid-gap: spacing.$spacing-04 spacing.$spacing-06;
+}

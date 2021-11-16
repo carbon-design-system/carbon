@@ -11,7 +11,8 @@
     "actions/*",
     "codemods",
     "config/*",
-    "packages/*"
+    "packages/*",
+    "www"
   ],
   "scripts": {
     "build": "lerna run build --stream --prefix --npm-client yarn",
