@@ -580,8 +580,6 @@ categories:
           - ibm-security--services
           - infrastructure--classic
           - load-balancer--vpc
-          - subflow
-          - subflow--local
           - virtual-private-cloud--alt
           - vlan--ibm
       - name: Commerce
@@ -1036,6 +1034,8 @@ categories:
           - storage-request
           - string-integer
           - string-text
+          - subflow
+          - subflow--local
           - summary--KPI
           - sys-provision
           - table
