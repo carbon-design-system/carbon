@@ -104,7 +104,9 @@ categories:
           - border--right
           - border--top
           - brightness-contrast
+          - bring-forward
           - bring-to-front
+          - circle--solid
           - color-palette
           - color-switch
           - column--delete
@@ -134,6 +136,7 @@ categories:
           - group-objects
           - group-objects--new
           - group-objects--save
+          - horizontal-view
           - image
           - image--copy
           - image--reference
@@ -177,6 +180,7 @@ categories:
           - save
           - select--01
           - select--02
+          - send-backward
           - send-to-back
           - shape--except
           - shape--exclude
@@ -220,6 +224,7 @@ categories:
           - trash-can
           - ungroup-objects
           - unlink
+          - vertical-view
       - name: Navigation
         members:
           - add
@@ -289,6 +294,7 @@ categories:
           - change-catalog
           - chat
           - chat--launch
+          - chat--off
           - chevron--mini
           - chevron--sort
           - chevron--sort--down
@@ -377,6 +383,8 @@ categories:
           - reset
           - reset--alt
           - restart
+          - retry--failed
+          - review
           - rotate
           - run
           - save--model
@@ -384,6 +392,7 @@ categories:
           - scan--alt
           - scan--disabled
           - search
+          - search--advanced
           - search--locate
           - send
           - send--alt
@@ -396,7 +405,10 @@ categories:
           - split-screen
           - tag
           - tag--edit
+          - tag--export
           - tag--group
+          - tag--import
+          - tag--none
           - translate
           - transpose
           - undo
@@ -524,7 +536,7 @@ categories:
           - logo--stumbleupon
   - name: Enterprise
     subcategories:
-      - name: App Catalogue
+      - name: App catalogue
         members:
           - autoscaling
           - block-storage
@@ -535,6 +547,9 @@ categories:
           - cloud-foundry--1
           - cloud-registry
           - cloud-satellite
+          - cloud-satellite--config
+          - cloud-satellite--link
+          - cloud-satellite--services
           - content-delivery-network
           - database--datastax
           - database--elastic
@@ -547,19 +562,26 @@ categories:
           - direct-link
           - dns-services
           - flow-logs-vpc
+          - ibm--data-replication
+          - ibm--match-360
           - ibm-cloud--dedicated-host
           - ibm-cloud--internet-services
           - ibm-cloud--subnets
+          - ibm-cloud--transit-gateway
           - ibm-cloud--vpc-endpoints
           - ibm-cloud-pak--applications
           - ibm-cloud-pak--data
           - ibm-cloud-pak--integration
           - ibm-cloud-pak--multicloud-mgmt
+          - ibm-cloud-pak--network-automation
           - ibm-cloud-pak--security
           - ibm-cloud-pak--system
+          - ibm-cloud-pak--watson-aiops
           - ibm-security--services
           - infrastructure--classic
           - load-balancer--vpc
+          - subflow
+          - subflow--local
           - virtual-private-cloud--alt
           - vlan--ibm
       - name: Commerce
@@ -681,6 +703,7 @@ categories:
           - fusion-blender
           - hanging-protocol
           - health-cross
+          - HL7-attributes
           - hole-filling
           - hole-filling--cursor
           - iCA-2D
@@ -703,6 +726,7 @@ categories:
           - pills--add
           - pills--subtract
           - pointer-text
+          - QC-launch
           - region-analysis--area
           - region-analysis--volume
           - registration
@@ -721,10 +745,18 @@ categories:
           - stacked-move
           - stacked-scrolling--1
           - stacked-scrolling--2
+          - status--acknowledge
+          - status--change
+          - status--partial-fail
+          - status--resolved
           - stress-breath-editor
           - study--next
           - study--previous
+          - study--read
           - study--skip
+          - study--transfer
+          - study--unread
+          - study--view
           - sub-volume
           - threshold
           - thumbnail-preview
@@ -817,6 +849,7 @@ categories:
           - number--small--7
           - number--small--8
           - number--small--9
+          - beta
           - omega
           - sigma
       - name: Data
@@ -918,6 +951,7 @@ categories:
           - data-bin
           - data-class
           - data-collection
+          - data-definition
           - data-player
           - data-refinery
           - data-refinery--reference
@@ -940,6 +974,7 @@ categories:
           - flow--connection
           - flow--data
           - flow--modeler
+          - flow--modeler--reference
           - flow--stream
           - flow--stream--reference
           - graphical-data-flow
@@ -970,6 +1005,7 @@ categories:
           - network--3
           - network--3--reference
           - network--4
+          - network--4--reference
           - nominal
           - ordinal
           - parent-child
@@ -1003,7 +1039,9 @@ categories:
           - summary--KPI
           - sys-provision
           - table
+          - table--alias
           - table--built
+          - table--shortcut
           - table--split
           - term
           - text-link
@@ -1015,6 +1053,7 @@ categories:
           - tree-view--alt
           - type-pattern
           - types
+          - value--variable
           - virtual-column
           - virtual-column--key
           - virtual-machine
@@ -1067,6 +1106,7 @@ categories:
           - document--export
           - document--import
           - document--pdf
+          - document--preliminary
           - document--protected
           - document--security
           - document--signed
@@ -1101,6 +1141,7 @@ categories:
           - HTML
           - HTML--reference
           - HTTP
+          - import-export
           - ISO
           - ISO--filled
           - ISO--outline
@@ -1133,6 +1174,7 @@ categories:
           - non-certified
           - notebook
           - notebook--reference
+          - order-details
           - panel-expansion
           - paste
           - PDF
@@ -1168,6 +1210,7 @@ categories:
           - task--asset-view
           - task--complete
           - task--location
+          - task--remove
           - task--settings
           - task--star
           - task--tools
@@ -1269,6 +1312,14 @@ categories:
           - box--large
           - box--medium
           - box--small
+          - cics--cmas
+          - cics--explorer
+          - cics--system-group
+          - cics--wui-region
+          - cics-region
+          - cics-region--routing
+          - cics-region--target
+          - cicsplex
           - cloud--alerting
           - cloud--data-ops
           - cloud-services
@@ -1329,6 +1380,7 @@ categories:
           - load-balancer--local
           - load-balancer--network
           - load-balancer--pool
+          - logical-partition
           - message-queue
           - mobility--services
           - network--admin-control
@@ -1353,6 +1405,7 @@ categories:
           - subnet-acl-rules
           - switch-layer-2
           - switch-layer-3
+          - terminal--3270
           - two-factor-authentication
           - vehicle--api
           - vehicle--connected
@@ -1377,6 +1430,7 @@ categories:
           - hearing
           - idea
           - movement
+          - need
           - smell
           - taste
           - touch--1
@@ -1677,6 +1731,7 @@ categories:
           - ice--accretion
           - ice--vision
           - lightning
+          - map-boundary--vegetation
           - marine-warning
           - mixed-rain-hail
           - moon
@@ -1748,6 +1803,7 @@ categories:
           - tides
           - tornado
           - tornado-warning
+          - tree--fall-risk
           - tropical-storm
           - tropical-storm--model-tracks
           - tropical-storm--tracks
@@ -1756,6 +1812,7 @@ categories:
           - uv-index
           - uv-index--alt
           - uv-index--filled
+          - vegetation--asset
           - wave-direction
           - wave-height
           - wave-period
@@ -1892,6 +1949,7 @@ categories:
           - voicemail
           - VPN
           - watch
+          - webhook
           - wifi
           - wifi--controller
           - wifi--off
