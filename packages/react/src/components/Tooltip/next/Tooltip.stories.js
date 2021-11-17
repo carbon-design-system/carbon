@@ -10,6 +10,7 @@ import './story.scss';
 import { Checkbox16 } from '@carbon/icons-react';
 import React from 'react';
 import { Tooltip } from '../next';
+import { DefinitionTooltip } from './DefinitionTooltip.js';
 
 export default {
   title: 'Experimental/unstable_Tooltip',
@@ -65,6 +66,22 @@ export const Duration = () => {
         </button>
       </Tooltip>
     </>
+  );
+};
+
+export const Definition = () => {
+  const definition =
+    'Starfleet was the deep space exploratory and defense service maintained by the United Federation of Planets.';
+  return (
+    <div>
+      <span>
+        The first duty of every
+        <DefinitionTooltip definition={definition}>Starfleet</DefinitionTooltip>
+        officer is to the truth, whether it’s scientific truth, or historical
+        truth, or personal truth! It is the guiding principle on which Starfleet
+        is based.
+      </span>
+    </div>
   );
 };
 
