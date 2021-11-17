@@ -16,8 +16,7 @@
     class="bx--toggle__button"
     role="switch"
     type="button"
-    aria-checked="true"
-  ></button>
+    aria-checked="true"></button>
   <label class="bx--toggle__label" for="toggle-id">
     <span class="bx--toggle__label-text bx--visually-hidden">Toggle label</span>
     <div class="bx--toggle__appearance">

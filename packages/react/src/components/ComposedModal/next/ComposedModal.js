@@ -202,9 +202,8 @@ const ComposedModal = React.forwardRef(function ComposedModal(
   useEffect(() => {
     const focusButton = (focusContainerElement) => {
       if (focusContainerElement) {
-        const primaryFocusElement = focusContainerElement.querySelector(
-          selectorPrimaryFocus
-        );
+        const primaryFocusElement =
+          focusContainerElement.querySelector(selectorPrimaryFocus);
         if (primaryFocusElement) {
           primaryFocusElement.focus();
           return;

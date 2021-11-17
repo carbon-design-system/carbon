@@ -462,9 +462,8 @@ class DatePicker extends mixin(
         ).value = this._formatDate(selectedDates[0]);
       }
     } else if (selectedDates.length === 1) {
-      this.element.querySelector(
-        this.options.selectorDatePickerInput
-      ).value = this._formatDate(selectedDates[0]);
+      this.element.querySelector(this.options.selectorDatePickerInput).value =
+        this._formatDate(selectedDates[0]);
     }
     this._updateClassNames(this.calendar);
   };

@@ -193,15 +193,13 @@ const Menu = function Menu({
     const targetBoundaries = getTargetBoundaries();
     const containerBoundaries = getContainerBoundaries();
 
-    const {
-      position: correctedPosition,
-      direction: correctedDirection,
-    } = getPosition(
-      elementDimensions,
-      targetBoundaries,
-      containerBoundaries,
-      preferredDirection
-    );
+    const { position: correctedPosition, direction: correctedDirection } =
+      getPosition(
+        elementDimensions,
+        targetBoundaries,
+        containerBoundaries,
+        preferredDirection
+      );
 
     setDirection(correctedDirection);
 

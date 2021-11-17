@@ -137,7 +137,7 @@ This will register a helper for us to use in our `hbs` files called
 helper by doing the following:
 
 ```hbs
-{{ carbon-icon 'ChevronDownGlyph' }}
+{{carbon-icon 'ChevronDownGlyph'}}
 ```
 
 This will place in the icon named `ChevronDownGlyph` glyph from `@carbon/icons`
@@ -159,7 +159,7 @@ right-hand side of the table (when in expanded mode) you'd see
 helper by doing:
 
 ```hbs
-{{ carbon-icon 'ChevronDownGlyph' }}
+{{carbon-icon 'ChevronDownGlyph'}}
 ```
 
 #### How do I add a class to an icon?
@@ -168,7 +168,7 @@ You can add in a class by passing in `class=''` at the end of the partial. For
 example, in our dropdown we could do:
 
 ```hbs
-{{ carbon-icon 'ChevronDownGlyph' class=(add @root.prefix '--dropdown__arrow') }}
+{{carbon-icon 'ChevronDownGlyph' class=(add @root.prefix '--dropdown__arrow')}}
 ```
 
 This would take in the `@root.prefix` value and prepends the `--dropdown__arrow`
@@ -183,7 +183,7 @@ You can pass in any attributes, especially things like `aria-label` as a
 `aria-label` we would do the following:
 
 ```hbs
-{{ carbon-icon 'ChevronDownGlyph' aria-label='Aria label for icon' }}
+{{carbon-icon 'ChevronDownGlyph' aria-label='Aria label for icon'}}
 ```
 
 #### How do I only use `carbon-icon` for experimental components?
@@ -218,10 +218,19 @@ For most components, this will look like:
 
 ```hbs
 {{#if featureFlags.componentsX}}
-  {{ carbon-icon 'ChevronDownGlyph' class=(add @root.prefix '--dropdown__arrow') }}
+  {{carbon-icon
+    'ChevronDownGlyph'
+    class=(add @root.prefix '--dropdown__arrow')
+  }}
 {{else}}
-  <svg class="{{@root.prefix}}--dropdown__arrow" width="10" height="5" viewBox="0 0 10 5" fill-rule="evenodd">
-    <path d="M10 0L5 5 0 0z"></path>
+  <svg
+    class='{{@root.prefix}}--dropdown__arrow'
+    width='10'
+    height='5'
+    viewBox='0 0 10 5'
+    fill-rule='evenodd'
+  >
+    <path d='M10 0L5 5 0 0z'></path>
   </svg>
 {{/if}}
 ```

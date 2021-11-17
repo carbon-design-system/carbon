@@ -265,8 +265,7 @@ delays instantiating the components until user clicks on a launcher button.
   <button
     class="bx--btn bx--btn--secondary"
     type="button"
-    data-my-component-target="#id-of-my-component"
-  >
+    data-my-component-target="#id-of-my-component">
     Launch
   </button>
   <div data-my-component id="id-of-my-component">

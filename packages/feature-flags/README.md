@@ -74,12 +74,13 @@ In Sass, you can configure whether a feature flag is enabled when you include
 the module or by using `enable`, `disable`, and `merge`.
 
 ```scss
-@use '@carbon/feature-flags' with (
-  $feature-flags: (
-    'feature-flag-a': false,
-    'feature-flag-b': true,
-  ),
-);
+@use '@carbon/feature-flags' with
+  (
+    $feature-flags: (
+      'feature-flag-a': false,
+      'feature-flag-b': true,
+    )
+  );
 
 // Enable `feature-flag-a`
 @include feature-flags.enable('feature-flag-a');

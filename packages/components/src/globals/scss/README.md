@@ -74,13 +74,11 @@ another design system, using what above build step generates:
     <link
       rel="stylesheet"
       type="text/css"
-      href="./dist/carbon-components.css"
-    />
+      href="./dist/carbon-components.css" />
     <link
       rel="stylesheet"
       type="text/css"
-      href="./dist/another-design-system.css"
-    />
+      href="./dist/another-design-system.css" />
   </head>
   <body>
     <div class="bx--body carbon--body carbon--html">

@@ -144,12 +144,8 @@ export const Default = () => {
 };
 
 export const Playground = () => {
-  const {
-    size,
-    numberOfButtons,
-    hasScrollingContent,
-    ...modalProps
-  } = props.modal();
+  const { size, numberOfButtons, hasScrollingContent, ...modalProps } =
+    props.modal();
   const { passiveModal, ...footerProps } = props.modalFooter(numberOfButtons);
   return (
     <Modal

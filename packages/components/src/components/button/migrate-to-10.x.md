@@ -20,8 +20,7 @@ automatically.
   width="16"
   height="16"
   viewBox="0 0 16 16"
-  aria-hidden="true"
->
+  aria-hidden="true">
   <path d="M8.5 7.5V3h-1v4.5H3v1h4.5V13h1V8.5H13v-1z"></path>
 </svg>
 ```
@@ -35,12 +34,10 @@ automatically.
   height="16"
   viewBox="0 0 16 16"
   xmlns="http://www.w3.org/2000/svg"
-  aria-hidden="true"
->
+  aria-hidden="true">
   <path
     d="M7 7H4v2h3v3h2V9h3V7H9V4H7v3zm1 9A8 8 0 1 1 8 0a8 8 0 0 1 0 16z"
-    fill-rule="evenodd"
-  />
+    fill-rule="evenodd" />
 </svg>
 ```
 

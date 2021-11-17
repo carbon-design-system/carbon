@@ -115,9 +115,7 @@ the font-face declarations to be emitted, you can set the `css--font-face` token
 to `false`:
 
 ```scss
-@use '@carbon/styles/scss/config' with (
-  $css--font-face: false,
-);
+@use '@carbon/styles/scss/config' with ($css--font-face: false);
 ```
 
 ### Emitting additional typefaces
@@ -127,9 +125,7 @@ are emitted. If you would like to emit additional typefaces, like
 `IBM Plex Sans Arabic`, you can set additional config tokens:
 
 ```scss
-@use '@carbon/styles/scss/config' with (
-  $css--plex-arabic: true,
-);
+@use '@carbon/styles/scss/config' with ($css--plex-arabic: true);
 ```
 
 | IBM Plex Language | Token               |
@@ -350,9 +346,7 @@ like to see changed. For example, if you wanted to change the component token
 `button-separator` for `button` you would do the following:
 
 ```scss
-@use '@carbon/styles/scss/components/button' with (
-  $button-separator: #e4e4e4,
-);
+@use '@carbon/styles/scss/components/button' with ($button-separator: #e4e4e4);
 ```
 
 **Files**
@@ -383,9 +377,7 @@ you're using from `scss/compat/themes` and set that as your theme.
 
 ```scss
 @use '@carbon/styles/scss/compat/themes' as compat;
-@use '@carbon/styles/scss/compat/theme' with (
-  $theme: compat.$g100,
-);
+@use '@carbon/styles/scss/compat/theme' with ($theme: compat.$g100);
 ```
 
 It's important that you specify the `$fallback` theme as a value from the

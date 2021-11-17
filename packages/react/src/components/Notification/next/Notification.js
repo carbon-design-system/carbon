@@ -106,10 +106,12 @@ export function NotificationButton({
   ...rest
 }) {
   const buttonClassName = cx(className, {
-    [`${prefix}--${notificationType}-notification__close-button`]: notificationType,
+    [`${prefix}--${notificationType}-notification__close-button`]:
+      notificationType,
   });
   const iconClassName = cx({
-    [`${prefix}--${notificationType}-notification__close-icon`]: notificationType,
+    [`${prefix}--${notificationType}-notification__close-icon`]:
+      notificationType,
   });
 
   return (

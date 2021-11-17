@@ -422,8 +422,8 @@ export default class FilterableMultiSelect extends React.Component {
                   [`${prefix}--multi-select--inline`]: inline,
                   [`${prefix}--multi-select--selected`]:
                     selectedItem.length > 0,
-                  [`${prefix}--multi-select--filterable--input-focused`]: this
-                    .state.inputFocused,
+                  [`${prefix}--multi-select--filterable--input-focused`]:
+                    this.state.inputFocused,
                 }
               );
               const rootProps = getRootProps(

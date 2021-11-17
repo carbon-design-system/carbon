@@ -80,9 +80,7 @@ You can change the default theme of Carbon by doing the following:
 
 ```scss
 @use '@carbon/styles/scss/themes';
-@use '@carbon/styles/scss/theme' with (
-  $theme: themes.$g100,
-);
+@use '@carbon/styles/scss/theme' with ($theme: themes.$g100);
 ```
 
 This example uses a built-in theme from Carbon provided by the `scss/themes`
@@ -91,23 +89,25 @@ extend the theme.
 
 ```scss
 // Configure with a custom theme
-@use '@carbon/styles/scss/theme' with (
-  $theme: (
-    background: #e2e2e2,
-    text-primary: #ffffff,
-  ),
-);
+@use '@carbon/styles/scss/theme' with
+  (
+    $theme: (
+      background: #e2e2e2,
+      text-primary: #ffffff,
+    )
+  );
 ```
 
 ```scss
 // Extend the g100 theme with your own tokens
 @use '@carbon/styles/scss/themes';
-@use '@carbon/styles/scss/theme' with (
-  $fallback: themes.$g100,
-  $theme: (
-    custom-token-01: #000000,
-  ),
-);
+@use '@carbon/styles/scss/theme' with
+  (
+    $fallback: themes.$g100,
+    $theme: (
+      custom-token-01: #000000,
+    )
+  );
 ```
 
 ### Design tokens

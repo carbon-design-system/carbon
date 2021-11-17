@@ -277,10 +277,8 @@ class FloatingMenu extends React.Component {
       return;
     }
 
-    const {
-      menuOffset: oldMenuOffset = {},
-      menuDirection: oldMenuDirection,
-    } = prevProps;
+    const { menuOffset: oldMenuOffset = {}, menuDirection: oldMenuDirection } =
+      prevProps;
     const { menuOffset = {}, menuDirection } = this.props;
 
     if (

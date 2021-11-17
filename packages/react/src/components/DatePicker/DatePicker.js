@@ -406,15 +406,8 @@ export default class DatePicker extends Component {
     enable: prevEnable,
     ...prevRest
   }) {
-    const {
-      dateFormat,
-      minDate,
-      maxDate,
-      value,
-      disable,
-      enable,
-      ...rest
-    } = this.props;
+    const { dateFormat, minDate, maxDate, value, disable, enable, ...rest } =
+      this.props;
     if (this.cal) {
       if (prevDateFormat !== dateFormat) {
         this.cal.set({ dateFormat });

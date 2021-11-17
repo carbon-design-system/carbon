@@ -16,9 +16,8 @@ const FormLabel = ({ className, children, id, ...other }) => {
   const classNames = classnames(
     {
       [`${prefix}--label`]: !FeatureFlags.enabled('enable-v11-release'),
-      [`${prefix}--label--no-margin`]: FeatureFlags.enabled(
-        'enable-v11-release'
-      ),
+      [`${prefix}--label--no-margin`]:
+        FeatureFlags.enabled('enable-v11-release'),
     },
     className
   );

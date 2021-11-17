@@ -57,21 +57,20 @@ You can configure the current theme with the `$theme` option:
 
 ```scss
 @use '@carbon/themes/scss/modules/themes';
-@use '@carbon/themes' with (
-  $theme: themes.$g100,
-);
+@use '@carbon/themes' with ($theme: themes.$g100);
 ```
 
 You can also extend the theme with your own custom tokens:
 
 ```scss
 @use '@carbon/themes/scss/modules/themes';
-@use '@carbon/themes' with (
-  $fallback: themes.$g100,
-  $theme: (
-    token-01: #000000,
-  ),
-);
+@use '@carbon/themes' with
+  (
+    $fallback: themes.$g100,
+    $theme: (
+      token-01: #000000,
+    )
+  );
 ```
 
 ## Tokens
@@ -89,9 +88,7 @@ Sass would not compile when doing the following:
 
 ```scss
 @use '@carbon/themes/scss/modules/themes';
-@use '@carbon/themes' with (
-  $theme: themes.$g100,
-);
+@use '@carbon/themes' with ($theme: themes.$g100);
 ```
 
 This is because the `scss/modules/themes` file will have been initialized twice

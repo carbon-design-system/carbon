@@ -98,12 +98,8 @@ function ContentTabs({
   size = 'md',
   ...rest
 }) {
-  const {
-    activeIndex,
-    selectedIndex,
-    setSelectedIndex,
-    setActiveIndex,
-  } = React.useContext(ContentSwitcherContext);
+  const { activeIndex, selectedIndex, setSelectedIndex, setActiveIndex } =
+    React.useContext(ContentSwitcherContext);
   const ref = React.useRef(null);
   const className = cx(customClassName, `${prefix}--content-switcher`, {
     [`${prefix}--content-switcher--${size}`]: size,

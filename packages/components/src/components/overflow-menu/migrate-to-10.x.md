@@ -19,8 +19,7 @@ automatically.
   width="16"
   height="16"
   viewBox="0 0 16 16"
-  aria-hidden="true"
->
+  aria-hidden="true">
   <circle cx="8" cy="3" r="1"></circle>
   <circle cx="8" cy="8" r="1"></circle>
   <circle cx="8" cy="13" r="1"></circle>
@@ -35,8 +34,7 @@ automatically.
   class="bx--overflow-menu__icon"
   width="3"
   height="15"
-  viewBox="0 0 3 15"
->
+  viewBox="0 0 3 15">
   <g fill-rule="evenodd">
     <circle cx="1.5" cy="1.5" r="1.5" />
     <circle cx="1.5" cy="7.5" r="1.5" />

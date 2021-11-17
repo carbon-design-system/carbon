@@ -130,13 +130,8 @@ export default class RadioButtonGroup extends React.Component {
   };
 
   render() {
-    const {
-      disabled,
-      className,
-      orientation,
-      labelPosition,
-      legendText,
-    } = this.props;
+    const { disabled, className, orientation, labelPosition, legendText } =
+      this.props;
 
     const scope = this.context;
     let enabled;
@@ -151,7 +146,8 @@ export default class RadioButtonGroup extends React.Component {
       {
         [`${prefix}--radio-button-group--${orientation}`]:
           orientation === 'vertical',
-        [`${prefix}--radio-button-group--label-${labelPosition}`]: labelPosition,
+        [`${prefix}--radio-button-group--label-${labelPosition}`]:
+          labelPosition,
       }
     );
 

@@ -9,14 +9,6 @@
 
 const fs = require('fs-extra');
 const path = require('path');
-const prettier = require('prettier');
-const lerna = require('../lerna.json');
-const packageJson = require('../package.json');
-
-const prettierOptions = {
-  ...packageJson.prettier,
-  parser: 'markdown',
-};
 
 const PACKAGES_DIR = path.resolve(__dirname, '../packages');
 const REPO_URL_BASE =
@@ -81,7 +73,9 @@ function sortFields(a, b) {
 
 async function sync() {
   const packagePaths = await Promise.all(
-    (await fs.readdir(PACKAGES_DIR)).map(async (pkg) => {
+    (
+      await fs.readdir(PACKAGES_DIR)
+    ).map(async (pkg) => {
       const packageJsonPath = path.join(PACKAGES_DIR, pkg, 'package.json');
       return {
         basename: pkg,
@@ -141,7 +135,7 @@ async function sync() {
     '**/tasks/**',
   ];
   await Promise.all(
-    packages.map(async ({ packageJson, packagePath }) => {
+    packages.map(async ({ packagePath }) => {
       const ignorePath = path.join(packagePath, '.npmignore');
       const ignorePatterns = [...defaultIgnorePatterns];
 

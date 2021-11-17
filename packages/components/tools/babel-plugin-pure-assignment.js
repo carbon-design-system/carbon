@@ -96,9 +96,8 @@ module.exports = function convertPureAssignment(babel) {
     VariableDeclarator(path) {
       const { name } = path.node.id;
       const binding = path.scope.getBinding(name);
-      const pureAssignments = this.pureAssignmentsState.pureAssignmentsMap.get(
-        binding
-      );
+      const pureAssignments =
+        this.pureAssignmentsState.pureAssignmentsMap.get(binding);
       if (pureAssignments) {
         const declarator = t.cloneDeep(path.node);
         const { body } = declarator.init.callee.body;

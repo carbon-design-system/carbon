@@ -20,8 +20,7 @@ automatically.
   width="16"
   height="16"
   viewBox="0 0 16 16"
-  aria-hidden="true"
->
+  aria-hidden="true">
   <path d="M11 8l-5 5-.7-.7L9.6 8 5.3 3.7 6 3z"></path>
 </svg>
 ```
@@ -32,8 +31,7 @@ automatically.
 <svg class="bx--accordion__arrow" width="7" height="12" viewBox="0 0 7 12">
   <path
     fill-rule="nonzero"
-    d="M5.569 5.994L0 .726.687 0l6.336 5.994-6.335 6.002L0 11.27z"
-  />
+    d="M5.569 5.994L0 .726.687 0l6.336 5.994-6.335 6.002L0 11.27z" />
 </svg>
 ```
 

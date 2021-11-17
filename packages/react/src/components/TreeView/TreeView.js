@@ -60,20 +60,16 @@ export default function TreeView({
   }
   function handleFocusEvent(event) {
     if (event.type === 'blur') {
-      const {
-        relatedTarget: currentFocusedNode,
-        target: prevFocusedNode,
-      } = event;
+      const { relatedTarget: currentFocusedNode, target: prevFocusedNode } =
+        event;
       if (treeRootRef?.current?.contains(currentFocusedNode)) {
         prevFocusedNode.tabIndex = -1;
       }
     }
     if (event.type === 'focus') {
       resetNodeTabIndices();
-      const {
-        relatedTarget: prevFocusedNode,
-        target: currentFocusedNode,
-      } = event;
+      const { relatedTarget: prevFocusedNode, target: currentFocusedNode } =
+        event;
       if (treeRootRef?.current?.contains(prevFocusedNode)) {
         prevFocusedNode.tabIndex = -1;
       }

@@ -238,9 +238,8 @@ class FloatingMenu extends mixin(
       return;
     }
     const { element } = this;
-    const computedStyle = element.ownerDocument.defaultView.getComputedStyle(
-      element
-    );
+    const computedStyle =
+      element.ownerDocument.defaultView.getComputedStyle(element);
     const styles = {
       position: 'absolute',
       right: 'auto',

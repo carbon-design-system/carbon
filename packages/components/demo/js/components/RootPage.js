@@ -475,12 +475,8 @@ class RootPage extends Component {
 
   render() {
     const { portSassBuild, useStaticFullRenderPage } = this.props;
-    const {
-      componentItems,
-      isComponentsX,
-      selectedNavItemId,
-      currentTheme,
-    } = this.state;
+    const { componentItems, isComponentsX, selectedNavItemId, currentTheme } =
+      this.state;
     const metadata = this.getCurrentComponentItem();
     const { name, label } = metadata || {};
     return !metadata ? null : (

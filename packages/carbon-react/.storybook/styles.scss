@@ -5,10 +5,8 @@
 // LICENSE file in the root directory of this source tree.
 //
 
-@use '../index.scss' as styles with (
-  $css--font-face: true,
-  $css--plex-arabic: true,
-);
+@use '../index.scss' as styles with
+  ($css--font-face: true, $css--plex-arabic: true);
 @use '../scss/components/button';
 @use '../scss/components/tag';
 

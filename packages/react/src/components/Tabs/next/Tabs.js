@@ -461,11 +461,13 @@ const Tabs = React.forwardRef(function Tabs(
     ),
     leftOverflowButtonClasses: classNames({
       [`${prefix}--tab--overflow-nav-button`]: horizontalOverflow,
-      [`${prefix}--tab--overflow-nav-button--hidden`]: leftOverflowNavButtonHidden,
+      [`${prefix}--tab--overflow-nav-button--hidden`]:
+        leftOverflowNavButtonHidden,
     }),
     rightOverflowButtonClasses: classNames({
       [`${prefix}--tab--overflow-nav-button`]: horizontalOverflow,
-      [`${prefix}--tab--overflow-nav-button--hidden`]: rightOverflowNavButtonHidden,
+      [`${prefix}--tab--overflow-nav-button--hidden`]:
+        rightOverflowNavButtonHidden,
     }),
   };
 
