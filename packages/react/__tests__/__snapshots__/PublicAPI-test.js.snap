@@ -9196,11 +9196,7 @@ Map {
             "bottom-left",
             "bottom-right",
             "left",
-            "left-bottom",
-            "left-top",
             "right",
-            "right-bottom",
-            "right-top",
           ],
         ],
         "type": "oneOf",
@@ -9213,6 +9209,17 @@ Map {
       },
       "enterDelayMs": Object {
         "type": "number",
+      },
+      "kind": Object {
+        "args": Array [
+          Array [
+            "primary",
+            "secondary",
+            "ghost",
+            "tertiary",
+          ],
+        ],
+        "type": "oneOf",
       },
       "label": Object {
         "isRequired": true,
