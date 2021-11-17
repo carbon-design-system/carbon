@@ -6,7 +6,7 @@
  */
 
 import { useState, useEffect } from 'react';
-import { canUseDOM } from '../../internal/environment';
+import { canUseDOM } from './environment';
 
 export function useMatchMedia(mediaQueryString) {
   const [matches, setMatches] = useState(() => {
