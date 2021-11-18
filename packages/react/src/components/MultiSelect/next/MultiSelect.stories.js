@@ -6,8 +6,9 @@
  */
 
 import React from 'react';
-import { MultiSelect } from 'carbon-components-react';
-import { Layer } from '../Layer';
+import MultiSelect from '../MultiSelect';
+import FilterableMultiSelect from './FilterableMultiSelect';
+import { Layer } from '../../../../../carbon-react/src/components/Layer';
 
 const items = [
   {
@@ -84,7 +85,7 @@ export const WithInitialSelectedItems = () => {
 export const _Filterable = () => {
   return (
     <div style={{ width: 300 }}>
-      <MultiSelect.Filterable
+      <FilterableMultiSelect
         id="carbon-multiselect-example-3"
         titleText="Multiselect title"
         helperText="This is helper text"
@@ -138,7 +139,7 @@ export const withLayer = () => {
 export const _FilterableWithLayer = () => {
   return (
     <div style={{ width: 300 }}>
-      <MultiSelect.Filterable
+      <FilterableMultiSelect
         id="carbon-multiselect-example-3"
         titleText="First Layer"
         helperText="This is helper text"
@@ -148,7 +149,7 @@ export const _FilterableWithLayer = () => {
         selectionFeedback="top-after-reopen"
       />
       <Layer>
-        <MultiSelect.Filterable
+        <FilterableMultiSelect
           id="carbon-multiselect-example-3"
           titleText="Second Layer"
           helperText="This is helper text"
@@ -158,7 +159,7 @@ export const _FilterableWithLayer = () => {
           selectionFeedback="top-after-reopen"
         />
         <Layer>
-          <MultiSelect.Filterable
+          <FilterableMultiSelect
             id="carbon-multiselect-example-3"
             titleText="Third Layer"
             helperText="This is helper text"
