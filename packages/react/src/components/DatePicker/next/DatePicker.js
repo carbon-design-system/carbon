@@ -1,5 +1,11 @@
 import PropTypes from 'prop-types';
-import React, { useState, useRef, useCallback, useEffect } from 'react';
+import React, {
+  useState,
+  useRef,
+  useCallback,
+  useEffect,
+  useLayoutEffect,
+} from 'react';
 import classNames from 'classnames';
 import { usePrefix } from '../../../internal/usePrefix';
 import flatpickr from 'flatpickr';
@@ -107,6 +113,54 @@ const carbonFlatpickrMonthSelectPlugin = (config) => (fp) => {
   };
 };
 
+function useStartInputHookWithRefCallback() {
+  const prefix = usePrefix();
+
+  const ref = useRef(null);
+  const setRef = useCallback((node) => {
+    if (!node) {
+      ref.current = null;
+    } else {
+      // Child is a regular DOM node, seen in tests
+      if (node.nodeType === Node.ELEMENT_NODE) {
+        ref.current = node.querySelector(`.${prefix}--date-picker__input`);
+      } else {
+        // Child is a React component
+        if (node.input && node.input.nodeType === Node.ELEMENT_NODE) {
+          ref.current = node.input;
+        } else {
+          ref.current = null;
+        }
+      }
+    }
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
+
+  return [setRef, ref.current];
+}
+
+function useEndInputHookWithRefCallback() {
+  const prefix = usePrefix();
+
+  const ref = useRef(null);
+  const setRef = useCallback((node) => {
+    if (!node) {
+      ref.current = null;
+    } else {
+      if (node.nodeType === Node.ELEMENT_NODE) {
+        ref.current = node.querySelector(`.${prefix}--date-picker__input`);
+      } else {
+        if (node.input && node.input.nodeType === Node.ELEMENT_NODE) {
+          ref.current = node.input;
+        } else {
+          ref.current = null;
+        }
+      }
+    }
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
+
+  return [setRef, ref.current];
+}
+
 const DatePicker = React.forwardRef(function DatePicker(
   {
     allowInput,
@@ -132,9 +186,9 @@ const DatePicker = React.forwardRef(function DatePicker(
 ) {
   const prefix = usePrefix();
 
-  const cal = useRef({});
-  const toInputField = useRef(null);
-  const inputField = useRef(null);
+  const cal = useRef(null);
+  const [setToInputField, toInputField] = useEndInputHookWithRefCallback();
+  const [setInputField, inputField] = useStartInputHookWithRefCallback();
 
   const [prevDateFormat, setPrevDateFormat] = useState(dateFormat);
   const [prevMinDate, setPrevMinDate] = useState(minDate);
@@ -147,7 +201,7 @@ const DatePicker = React.forwardRef(function DatePicker(
   /**
    * only run once - component did mount equivalent
    */
-  useEffect(() => {
+  useLayoutEffect(() => {
     if (datePickerType === 'single' || datePickerType === 'range') {
       const onHook = (electedDates, dateStr, instance) => {
         updateClassNames(instance);
@@ -174,8 +228,11 @@ const DatePicker = React.forwardRef(function DatePicker(
       }
 
       // inputField ref might not be set in enzyme tests
-      if (inputField.current) {
-        cal.current = new flatpickr(inputField.current, {
+
+      console.log('input field', inputField);
+
+      if (inputField) {
+        cal.current = new flatpickr(inputField, {
           inline: rest.inline ?? false,
           disableMobile: true,
           defaultDate: value,
@@ -189,7 +246,7 @@ const DatePicker = React.forwardRef(function DatePicker(
           plugins: [
             datePickerType === 'range'
               ? new carbonFlatpickrRangePlugin({
-                  input: toInputField.current,
+                  input: toInputField,
                 })
               : () => {},
             appendTo
@@ -204,8 +261,8 @@ const DatePicker = React.forwardRef(function DatePicker(
               classFlatpickrCurrentMonth: 'cur-month',
             }),
             carbonFlatpickrFixEventsPlugin({
-              inputFrom: inputField.current,
-              inputTo: toInputField.current,
+              inputFrom: inputField,
+              inputTo: toInputField,
             }),
           ],
           clickOpens: true,
@@ -236,16 +293,17 @@ const DatePicker = React.forwardRef(function DatePicker(
     //component will unmount equivalent
     return () => {
       if (cal.current) {
+        console.log(cal.current);
         cal.current.destroy();
       }
-      if (inputField.current) {
-        inputField.current.removeEventListener('change', onChangeHandler);
+      if (inputField) {
+        inputField.removeEventListener('change', onChangeHandler);
       }
-      if (toInputField.current) {
-        toInputField.current.removeEventListener('change', onChangeHandler);
+      if (toInputField) {
+        toInputField.removeEventListener('change', onChangeHandler);
       }
     };
-  }, []); // eslint-disable-line react-hooks/exhaustive-deps
+  }, [inputField, toInputField]); // eslint-disable-line react-hooks/exhaustive-deps
 
   /**
    * component will update equivalent
@@ -286,8 +344,8 @@ const DatePicker = React.forwardRef(function DatePicker(
         cal.current.setDate(value);
         updateClassNames(cal.current);
         setPrevValue(value);
-      } else if (inputField.current) {
-        inputField.current.value = value;
+      } else if (inputField) {
+        inputField.value = value;
         setPrevValue(value);
       }
     }
@@ -312,7 +370,7 @@ const DatePicker = React.forwardRef(function DatePicker(
   ]);
 
   const onChangeHandler = () => {
-    if (inputField.current.value === '' && cal.current?.selectedDates.length) {
+    if (inputField.value === '' && cal.current?.selectedDates.length) {
       cal.current.clear();
       cal.current.input.focus();
     }
@@ -324,7 +382,7 @@ const DatePicker = React.forwardRef(function DatePicker(
    * role to the container div.
    */
   const addRoleAttributeToDialog = () => {
-    if (inputField.current) {
+    if (inputField) {
       cal.current.calendarContainer.setAttribute('role', 'region');
       // IBM EAAC requires an aria-label on a role='region'
       cal.current.calendarContainer.setAttribute(
@@ -360,8 +418,8 @@ const DatePicker = React.forwardRef(function DatePicker(
         element.addEventListener('change', onChangeHandler);
       }
     };
-    initArrowDownListener(inputField.current);
-    initArrowDownListener(toInputField.current);
+    initArrowDownListener(inputField);
+    initArrowDownListener(toInputField);
   };
 
   const rightArrowHTML = () => {
@@ -432,43 +490,43 @@ const DatePicker = React.forwardRef(function DatePicker(
     [prefix]
   );
 
-  const assignInputFieldRef = (node) => {
-    if (!node) {
-      inputField.current = null;
-    } else {
-      // Child is a regular DOM node, seen in tests
-      if (node.nodeType === Node.ELEMENT_NODE) {
-        inputField.current = node.querySelector(
-          `.${prefix}--date-picker__input`
-        );
-      } else {
-        // Child is a React component
-        if (node.input && node.input.nodeType === Node.ELEMENT_NODE) {
-          inputField.current = node.input;
-        } else {
-          inputField.current = null;
-        }
-      }
-    }
-  };
+  // const assignInputFieldRef = (node) => {
+  //   if (!node) {
+  //     inputField = null;
+  //   } else {
+  //     // Child is a regular DOM node, seen in tests
+  //     if (node.nodeType === Node.ELEMENT_NODE) {
+  //       inputField = node.querySelector(
+  //         `.${prefix}--date-picker__input`
+  //       );
+  //     } else {
+  //       // Child is a React component
+  //       if (node.input && node.input.nodeType === Node.ELEMENT_NODE) {
+  //         inputField = node.input;
+  //       } else {
+  //         inputField = null;
+  //       }
+  //     }
+  //   }
+  // };
 
-  const assignToInputFieldRef = (node) => {
-    if (!node) {
-      toInputField.current = null;
-    } else {
-      if (node.nodeType === Node.ELEMENT_NODE) {
-        toInputField.current = node.querySelector(
-          `.${prefix}--date-picker__input`
-        );
-      } else {
-        if (node.input && node.input.nodeType === Node.ELEMENT_NODE) {
-          toInputField.current = node.input;
-        } else {
-          toInputField.current = null;
-        }
-      }
-    }
-  };
+  // const assignToInputFieldRef = (node) => {
+  //   if (!node) {
+  //     toInputField = null;
+  //   } else {
+  //     if (node.nodeType === Node.ELEMENT_NODE) {
+  //       toInputField = node.querySelector(
+  //         `.${prefix}--date-picker__input`
+  //       );
+  //     } else {
+  //       if (node.input && node.input.nodeType === Node.ELEMENT_NODE) {
+  //         toInputField = node.input;
+  //       } else {
+  //         toInputField = null;
+  //       }
+  //     }
+  //   }
+  // };
 
   const isLabelTextEmpty = (children) =>
     children.every((child) => !child.props.labelText);
@@ -492,7 +550,7 @@ const DatePicker = React.forwardRef(function DatePicker(
     ) {
       return React.cloneElement(child, {
         datePickerType,
-        ref: assignInputFieldRef,
+        ref: setInputField,
         openCalendar: openCalendar,
       });
     }
@@ -502,18 +560,18 @@ const DatePicker = React.forwardRef(function DatePicker(
     ) {
       return React.cloneElement(child, {
         datePickerType,
-        ref: assignToInputFieldRef,
+        ref: setToInputField,
         openCalendar: openCalendar,
       });
     }
     if (index === 0) {
       return React.cloneElement(child, {
-        ref: assignInputFieldRef,
+        ref: setInputField,
       });
     }
     if (index === 1) {
       return React.cloneElement(child, {
-        ref: assignToInputFieldRef,
+        ref: setToInputField,
       });
     }
   });
