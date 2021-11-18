@@ -12,6 +12,8 @@ import cx from 'classnames';
 import { match, matches, keys } from '../../../internal/keyboard';
 import { useId } from '../../../internal/useId';
 import { useControllableState } from './useControllableState';
+import { Tab, Tabs } from 'carbon-components-react';
+import { TabPanel } from '../../NewTabs/Tabs';
 
 const { prefix } = settings;
 
@@ -315,3 +317,12 @@ export {
   ContentPanels,
   ContentPanel,
 };
+
+
+
+
+[X] - ContentSwitcher -> Tabs 
+[X] - ContentTab -> Tab 
+[X] - ContentTabs -> TabList
+[] - ContentPanel -> TabPanel
+[X] - ContentPanels -> TabPanels
