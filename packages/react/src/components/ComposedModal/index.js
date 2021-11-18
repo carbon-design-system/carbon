@@ -7,16 +7,26 @@
 
 import * as FeatureFlags from '@carbon/feature-flags';
 import { ModalHeader as ModalHeaderNext } from './next/ModalHeader';
-import ComposedModal, {
+import { ModalFooter as ModalFooterNext } from './next/ModalFooter';
+import { default as ComposedModalNext } from './next/ComposedModal';
+import {
+  default as ComposedModalClassic,
   ModalHeader as ModalHeaderClassic,
   ModalBody,
-  ModalFooter,
+  ModalFooter as ModalFooterClassic,
 } from './ComposedModal';
 
 export const ModalHeader = FeatureFlags.enabled('enable-v11-release')
   ? ModalHeaderNext
   : ModalHeaderClassic;
 
-export { ComposedModal, ModalBody, ModalFooter };
+export const ModalFooter = FeatureFlags.enabled('enable-v11-release')
+  ? ModalFooterNext
+  : ModalFooterClassic;
 
+export const ComposedModal = FeatureFlags.enabled('enable-v11-release')
+  ? ComposedModalNext
+  : ComposedModalClassic;
+
+export { ModalBody };
 export default from './ComposedModal';

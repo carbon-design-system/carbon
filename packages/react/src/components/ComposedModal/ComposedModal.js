@@ -91,7 +91,7 @@ export default class ComposedModal extends Component {
     /**
      * Specify the CSS selectors that match the floating menus
      */
-    selectorsFloatingMenus: PropTypes.string,
+    selectorsFloatingMenus: PropTypes.arrayOf(PropTypes.string),
 
     /**
      * Specify the size variant.
@@ -234,6 +234,7 @@ export default class ComposedModal extends Component {
       danger,
       preventCloseOnClickOutside, // eslint-disable-line
       selectorPrimaryFocus, // eslint-disable-line
+      selectorsFloatingMenus, // eslint-disable-line
       size,
       ...other
     } = this.props;
