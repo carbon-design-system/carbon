@@ -5,4 +5,4 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-export { Pagination } from 'carbon-components-react';
+export { default as Pagination } from './Pagination';

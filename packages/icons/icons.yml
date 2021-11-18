@@ -1578,6 +1578,11 @@
     - IBM bee bat
   sizes:
     - 32
+- name: beta
+  friendly_name: beta
+  aliases: []
+  sizes:
+    - 32
 - name: bicycle
   friendly_name: Bicycle
   aliases:
@@ -1864,6 +1869,11 @@
     - formatting
     - brightness
     - brightness contrast
+  sizes:
+    - 32
+- name: bring-forward
+  friendly_name: bring-forward
+  aliases: []
   sizes:
     - 32
 - name: bring-to-front
@@ -3211,6 +3221,11 @@
     - communications
   sizes:
     - 32
+- name: chat--off
+  friendly_name: chat--off
+  aliases: []
+  sizes:
+    - 32
 - name: chat--operational
   friendly_name: Chat operational
   aliases:
@@ -3608,6 +3623,46 @@
     - data
   sizes:
     - 32
+- name: cics--cmas
+  friendly_name: cics--cmas
+  aliases: []
+  sizes:
+    - 32
+- name: cics--explorer
+  friendly_name: cics--explorer
+  aliases: []
+  sizes:
+    - 32
+- name: cics--system-group
+  friendly_name: cics--system-group
+  aliases: []
+  sizes:
+    - 32
+- name: cics--wui-region
+  friendly_name: cics--wui-region
+  aliases: []
+  sizes:
+    - 32
+- name: cics-region
+  friendly_name: cics-region
+  aliases: []
+  sizes:
+    - 32
+- name: cics-region--routing
+  friendly_name: cics-region--routing
+  aliases: []
+  sizes:
+    - 32
+- name: cics-region--target
+  friendly_name: cics-region--target
+  aliases: []
+  sizes:
+    - 32
+- name: cicsplex
+  friendly_name: cicsplex
+  aliases: []
+  sizes:
+    - 32
 - name: circle--filled
   friendly_name: Circle filled
   aliases:
@@ -3615,6 +3670,11 @@
     - filled circle
     - circle
     - data
+  sizes:
+    - 32
+- name: circle--solid
+  friendly_name: circle--solid
+  aliases: []
   sizes:
     - 32
 - name: circle-dash
@@ -3952,6 +4012,21 @@
     - cloud
     - satellite
     - hybrid
+  sizes:
+    - 32
+- name: cloud-satellite--config
+  friendly_name: cloud-satellite--config
+  aliases: []
+  sizes:
+    - 32
+- name: cloud-satellite--link
+  friendly_name: cloud-satellite--link
+  aliases: []
+  sizes:
+    - 32
+- name: cloud-satellite--services
+  friendly_name: cloud-satellite--services
+  aliases: []
   sizes:
     - 32
 - name: cloud-services
@@ -5067,6 +5142,11 @@
     - repository
   sizes:
     - 32
+- name: data-definition
+  friendly_name: data-definition
+  aliases: []
+  sizes:
+    - 32
 - name: data-diode
   friendly_name: Data diode
   sizes:
@@ -6018,6 +6098,11 @@
     - pdf
     - document format
     - portable document format
+  sizes:
+    - 32
+- name: document--preliminary
+  friendly_name: document--preliminary
+  aliases: []
   sizes:
     - 32
 - name: document--protected
@@ -7421,6 +7506,11 @@
     - flow modeler
   sizes:
     - 32
+- name: flow--modeler--reference
+  friendly_name: flow--modeler--reference
+  aliases: []
+  sizes:
+    - 32
 - name: flow--stream
   friendly_name: Flow stream
   sizes:
@@ -8390,6 +8480,11 @@
     - Hinton plot
   sizes:
     - 32
+- name: HL7-attributes
+  friendly_name: HL7-attributes
+  aliases: []
+  sizes:
+    - 32
 - name: hole-filling
   friendly_name: Hole filling
   aliases:
@@ -8414,6 +8509,11 @@
     - home
     - start
     - main
+  sizes:
+    - 32
+- name: horizontal-view
+  friendly_name: horizontal-view
+  aliases: []
   sizes:
     - 32
 - name: hospital
@@ -8548,6 +8648,16 @@
     - interactive
   sizes:
     - 32
+- name: ibm--data-replication
+  friendly_name: ibm--data-replication
+  aliases: []
+  sizes:
+    - 32
+- name: ibm--match-360
+  friendly_name: ibm--match-360
+  aliases: []
+  sizes:
+    - 32
 - name: ibm-cloud
   friendly_name: IBM Cloud®
   aliases:
@@ -8595,6 +8705,11 @@
     - IBM Cloud®
     - internet
     - cloud
+  sizes:
+    - 32
+- name: ibm-cloud--transit-gateway
+  friendly_name: ibm-cloud--transit-gateway
+  aliases: []
   sizes:
     - 32
 - name: ibm-cloud--vpc-endpoints
@@ -8652,6 +8767,11 @@
     - IBM Cloud Pak®
   sizes:
     - 32
+- name: ibm-cloud-pak--network-automation
+  friendly_name: ibm-cloud-pak--network-automation
+  aliases: []
+  sizes:
+    - 32
 - name: ibm-cloud-pak--security
   friendly_name: IBM Cloud Pak® for Security
   aliases:
@@ -8670,6 +8790,11 @@
     - catalogue
     - system
     - IBM Cloud Pak®
+  sizes:
+    - 32
+- name: ibm-cloud-pak--watson-aiops
+  friendly_name: ibm-cloud-pak--watson-aiops
+  aliases: []
   sizes:
     - 32
 - name: ibm-security
@@ -8861,6 +8986,11 @@
   aliases:
     - image
     - service
+  sizes:
+    - 32
+- name: import-export
+  friendly_name: import-export
+  aliases: []
   sizes:
     - 32
 - name: improve-relevance
@@ -10236,6 +10366,11 @@
     - padlock
   sizes:
     - 32
+- name: logical-partition
+  friendly_name: logical-partition
+  aliases: []
+  sizes:
+    - 32
 - name: login
   friendly_name: Login
   aliases:
@@ -10839,6 +10974,11 @@
     - location
     - boundary
     - travel
+  sizes:
+    - 32
+- name: map-boundary--vegetation
+  friendly_name: map-boundary--vegetation
+  aliases: []
   sizes:
     - 32
 - name: marine-warning
@@ -11618,6 +11758,11 @@
     - vortac
   sizes:
     - 32
+- name: need
+  friendly_name: need
+  aliases: []
+  sizes:
+    - 32
 - name: network--1
   friendly_name: Network 1
   sizes:
@@ -11655,6 +11800,11 @@
   aliases:
     - network
     - data
+- name: network--4--reference
+  friendly_name: network--4--reference
+  aliases: []
+  sizes:
+    - 32
 - name: network--admin-control
   friendly_name: Network admin control
   aliases:
@@ -12313,6 +12463,11 @@
     - operations
     - record
     - data
+  sizes:
+    - 32
+- name: order-details
+  friendly_name: order-details
+  aliases: []
   sizes:
     - 32
 - name: ordinal
@@ -13364,6 +13519,11 @@
     - debit
   sizes:
     - 32
+- name: QC-launch
+  friendly_name: QC-launch
+  aliases: []
+  sizes:
+    - 32
 - name: qq-plot
   friendly_name: QQ plot
   aliases:
@@ -13841,6 +14001,16 @@
     - file
     - previous
     - old
+  sizes:
+    - 32
+- name: retry--failed
+  friendly_name: retry--failed
+  aliases: []
+  sizes:
+    - 32
+- name: review
+  friendly_name: review
+  aliases: []
   sizes:
     - 32
 - name: rewind--10
@@ -14542,6 +14712,11 @@
   sizes:
     - 16
     - 32
+- name: search--advanced
+  friendly_name: search--advanced
+  aliases: []
+  sizes:
+    - 32
 - name: search--locate
   friendly_name: Search locate
   aliases:
@@ -14654,6 +14829,11 @@
     - deliver
     - letter
     - email
+- name: send-backward
+  friendly_name: send-backward
+  aliases: []
+  sizes:
+    - 32
 - name: send-to-back
   friendly_name: Send to back
   aliases:
@@ -15623,6 +15803,26 @@
     - comment
   sizes:
     - 32
+- name: status--acknowledge
+  friendly_name: status--acknowledge
+  aliases: []
+  sizes:
+    - 32
+- name: status--change
+  friendly_name: status--change
+  aliases: []
+  sizes:
+    - 32
+- name: status--partial-fail
+  friendly_name: status--partial-fail
+  aliases: []
+  sizes:
+    - 32
+- name: status--resolved
+  friendly_name: status--resolved
+  aliases: []
+  sizes:
+    - 32
 - name: stay-inside
   friendly_name: Stay inside
   aliases:
@@ -15814,6 +16014,11 @@
     - patient
     - user
     - profile
+- name: study--read
+  friendly_name: study--read
+  aliases: []
+  sizes:
+    - 32
 - name: study--skip
   friendly_name: Study skip
   sizes:
@@ -15822,12 +16027,37 @@
     - patient
     - user
     - profile
+- name: study--transfer
+  friendly_name: study--transfer
+  aliases: []
+  sizes:
+    - 32
+- name: study--unread
+  friendly_name: study--unread
+  aliases: []
+  sizes:
+    - 32
+- name: study--view
+  friendly_name: study--view
+  aliases: []
+  sizes:
+    - 32
 - name: sub-volume
   friendly_name: Sub volume
   aliases:
     - sub volume
     - health
     - layers
+  sizes:
+    - 32
+- name: subflow
+  friendly_name: subflow
+  aliases: []
+  sizes:
+    - 32
+- name: subflow--local
+  friendly_name: subflow--local
+  aliases: []
   sizes:
     - 32
 - name: subnet-acl-rules
@@ -15969,6 +16199,11 @@
     - grid
   sizes:
     - 32
+- name: table--alias
+  friendly_name: table--alias
+  aliases: []
+  sizes:
+    - 32
 - name: table--built
   friendly_name: Table built
   aliases:
@@ -15979,6 +16214,11 @@
     - rows
     - grid
     - table built
+  sizes:
+    - 32
+- name: table--shortcut
+  friendly_name: table--shortcut
+  aliases: []
   sizes:
     - 32
 - name: table--split
@@ -16042,6 +16282,11 @@
     - sale
     - shop
     - marker
+- name: tag--export
+  friendly_name: tag--export
+  aliases: []
+  sizes:
+    - 32
 - name: tag--group
   friendly_name: Tag group
   sizes:
@@ -16053,6 +16298,16 @@
     - sale
     - shop
     - marker
+- name: tag--import
+  friendly_name: tag--import
+  aliases: []
+  sizes:
+    - 32
+- name: tag--none
+  friendly_name: tag--none
+  aliases: []
+  sizes:
+    - 32
 - name: tank
   friendly_name: Tank
   aliases:
@@ -16126,6 +16381,11 @@
     - clipboard
     - pin
     - location
+  sizes:
+    - 32
+- name: task--remove
+  friendly_name: task--remove
+  aliases: []
   sizes:
     - 32
 - name: task--settings
@@ -16374,6 +16634,11 @@
     - code
     - code editor
     - command line
+  sizes:
+    - 32
+- name: terminal--3270
+  friendly_name: terminal--3270
+  aliases: []
   sizes:
     - 32
 - name: text--align--center
@@ -17174,6 +17439,11 @@
     - agriculture
   sizes:
     - 32
+- name: tree--fall-risk
+  friendly_name: tree--fall-risk
+  aliases: []
+  sizes:
+    - 32
 - name: tree-view
   friendly_name: Tree view
   aliases:
@@ -17807,6 +18077,11 @@
     - forecast
   sizes:
     - 32
+- name: value--variable
+  friendly_name: value--variable
+  aliases: []
+  sizes:
+    - 32
 - name: van
   friendly_name: Van
   aliases:
@@ -17815,6 +18090,11 @@
     - delivery
     - truck
     - cargo
+  sizes:
+    - 32
+- name: vegetation--asset
+  friendly_name: vegetation--asset
+  aliases: []
   sizes:
     - 32
 - name: vehicle--api
@@ -17865,6 +18145,11 @@
     - file
     - document
     - version
+  sizes:
+    - 32
+- name: vertical-view
+  friendly_name: vertical-view
+  aliases: []
   sizes:
     - 32
 - name: video
@@ -18438,6 +18723,11 @@
     - weather
   sizes:
     - 32
+- name: webhook
+  friendly_name: webhook
+  aliases: []
+  sizes:
+    - 32
 - name: websheet
   friendly_name: Websheet
   aliases:
@@ -18482,7 +18772,7 @@
   aliases:
     - wifi
     - internet
-    - off
+    - 'off'
     - unavailable
   sizes:
     - 32
