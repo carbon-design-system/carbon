@@ -1580,7 +1580,7 @@
     - 32
 - name: beta
   friendly_name: Beta
-  aliases: 
+  aliases:
     - beta
     - symbol
   sizes:
@@ -1875,8 +1875,8 @@
     - 32
 - name: bring-forward
   friendly_name: Bring forward
-  aliases: 
-    - bring 
+  aliases:
+    - bring
     - forward
     - layer
     - arrange
@@ -3641,7 +3641,7 @@
     - 32
 - name: cics--cmas
   friendly_name: CICS® CMAS
-  aliases: 
+  aliases:
     - CICS®
     - CMAS
     - CICSPlex®
@@ -3650,35 +3650,35 @@
     - 32
 - name: cics--explorer
   friendly_name: CICS Explorer®
-  aliases: 
+  aliases:
     - CICS Explorer®
     - system management
   sizes:
     - 32
 - name: cics--system-group
   friendly_name: CICS® system group
-  aliases: 
+  aliases:
     - CICS®
     - System group
   sizes:
     - 32
 - name: cics--wui-region
   friendly_name: CICS® WUI region
-  aliases: 
+  aliases:
     - CICS®
     - WUI region
   sizes:
     - 32
 - name: cics-region
   friendly_name: CICS® region
-  aliases: 
+  aliases:
     - CICS®
     - region
   sizes:
     - 32
 - name: cics-region--routing
   friendly_name: CICS® region routing
-  aliases: 
+  aliases:
     - CICS®
     - region
     - routing
@@ -3686,7 +3686,7 @@
     - 32
 - name: cics-region--target
   friendly_name: CICS® region target
-  aliases: 
+  aliases:
     - CICS®
     - region
     - target
@@ -3694,7 +3694,7 @@
     - 32
 - name: cicsplex
   friendly_name: CICSPlex®
-  aliases: 
+  aliases:
     - CICSPlex®
   sizes:
     - 32
@@ -3709,7 +3709,7 @@
     - 32
 - name: circle--solid
   friendly_name: Circle solid
-  aliases: 
+  aliases:
     - circle filled
     - filled circle
     - circle
@@ -4057,7 +4057,7 @@
     - 32
 - name: cloud-satellite--config
   friendly_name: IBM Cloud Satellite® config
-  aliases: 
+  aliases:
     - cloud
     - satellite
     - hybrid
@@ -4067,7 +4067,7 @@
     - 32
 - name: cloud-satellite--link
   friendly_name: IBM Cloud Satellite® link
-  aliases: 
+  aliases:
     - cloud
     - satellite
     - hybrid
@@ -4077,7 +4077,7 @@
     - 32
 - name: cloud-satellite--services
   friendly_name: IBM Cloud Satellite® services
-  aliases: 
+  aliases:
     - cloud
     - satellite
     - hybrid
@@ -5200,7 +5200,7 @@
     - 32
 - name: data-definition
   friendly_name: Data definition
-  aliases: 
+  aliases:
     - data
     - definition
     - tag
@@ -5211,8 +5211,8 @@
   friendly_name: Data diode
   sizes:
     - 32
-  aliases: 
-    - data 
+  aliases:
+    - data
     - diode
 - name: data-player
   friendly_name: Data player
@@ -6165,7 +6165,7 @@
     - 32
 - name: document--preliminary
   friendly_name: Document preliminary
-  aliases: 
+  aliases:
     - document
     - preliminary
     - file
@@ -7575,7 +7575,7 @@
     - 32
 - name: flow--modeler--reference
   friendly_name: Flow modeler reference
-  aliases: 
+  aliases:
     - flow chart
     - chart
     - graph
@@ -8556,7 +8556,7 @@
     - 32
 - name: HL7-attributes
   friendly_name: HL7 attributes
-  aliases: 
+  aliases:
     - attributes
     - HL7
     - interoperability
@@ -8734,14 +8734,14 @@
     - 32
 - name: ibm--data-replication
   friendly_name: IBM® Data Replication
-  aliases: 
+  aliases:
     - data
     - replication
   sizes:
     - 32
 - name: ibm--match-360
   friendly_name: IBM® Match 360
-  aliases: 
+  aliases:
     - Match 360
   sizes:
     - 32
@@ -8796,7 +8796,7 @@
     - 32
 - name: ibm-cloud--transit-gateway
   friendly_name: IBM Cloud® Transit Gateway
-  aliases: 
+  aliases:
     - IBM Cloud®
     - transit
     - gateway
@@ -8859,7 +8859,7 @@
     - 32
 - name: ibm-cloud-pak--network-automation
   friendly_name: IBM Cloud Pak® Network Automation
-  aliases: 
+  aliases:
     - IBM Cloud Pak®
     - network
     - automation
@@ -8887,7 +8887,7 @@
     - 32
 - name: ibm-cloud-pak--watson-aiops
   friendly_name: IBM Cloud Pak® Watson AIOps
-  aliases: 
+  aliases:
     - IBM Cloud Pak®
     - Watson
     - AIOps
@@ -9087,7 +9087,7 @@
     - 32
 - name: import-export
   friendly_name: Import export
-  aliases: 
+  aliases:
     - import
     - export
     - file
@@ -10468,8 +10468,8 @@
     - 32
 - name: logical-partition
   friendly_name: Logical partition
-  aliases: 
-    - logical 
+  aliases:
+    - logical
     - partition
     - systems
   sizes:
@@ -11081,7 +11081,7 @@
     - 32
 - name: map-boundary--vegetation
   friendly_name: Map boundary vegetation
-  aliases: 
+  aliases:
     - place
     - locate
     - destination
@@ -11873,7 +11873,7 @@
     - 32
 - name: need
   friendly_name: need
-  aliases: 
+  aliases:
     - need
     - charity
     - charitable
@@ -11923,7 +11923,7 @@
     - data
 - name: network--4--reference
   friendly_name: Network 4 reference
-  aliases: 
+  aliases:
     - network 4 reference
     - data
     - source
@@ -12592,7 +12592,7 @@
     - 32
 - name: order-details
   friendly_name: Order details
-  aliases: 
+  aliases:
     - order
     - details
     - file
@@ -13651,7 +13651,7 @@
     - 32
 - name: QC-launch
   friendly_name: QC launch
-  aliases: 
+  aliases:
     - QC
     - launch
     - Watson Health®
@@ -14138,7 +14138,7 @@
     - 32
 - name: retry--failed
   friendly_name: Retry failed
-  aliases: 
+  aliases:
     - retry
     - failed
     - operations
@@ -14146,7 +14146,7 @@
     - 32
 - name: review
   friendly_name: Review
-  aliases: 
+  aliases:
     - review
     - reference
     - opinion
@@ -14854,7 +14854,7 @@
     - 32
 - name: search--advanced
   friendly_name: Search advanced
-  aliases: 
+  aliases:
     - find
     - investigate
     - explore
@@ -14976,7 +14976,7 @@
     - email
 - name: send-backward
   friendly_name: Send backward
-  aliases: 
+  aliases:
     - send
     - backward
     - formatting
@@ -15958,7 +15958,7 @@
     - 32
 - name: status--acknowledge
   friendly_name: Status acknowledge
-  aliases: 
+  aliases:
     - status
     - acknowledge
     - checkmark
@@ -15967,7 +15967,7 @@
     - 32
 - name: status--change
   friendly_name: Status change
-  aliases: 
+  aliases:
     - status
     - change
     - Watson Health®
@@ -15975,7 +15975,7 @@
     - 32
 - name: status--partial-fail
   friendly_name: Status partial fail
-  aliases: 
+  aliases:
     - status
     - fail
     - partial
@@ -15985,7 +15985,7 @@
     - 32
 - name: status--resolved
   friendly_name: Status resolved
-  aliases: 
+  aliases:
     - status
     - fail
     - partial
@@ -16190,7 +16190,7 @@
     - study
 - name: study--read
   friendly_name: Study read
-  aliases: 
+  aliases:
     - study
     - read
     - checkmark
@@ -16208,7 +16208,7 @@
     - study
 - name: study--transfer
   friendly_name: Study transfer
-  aliases: 
+  aliases:
     - study
     - transfer
     - move forward
@@ -16216,7 +16216,7 @@
     - 32
 - name: study--unread
   friendly_name: Study unread
-  aliases: 
+  aliases:
     - study
     - unread
     - open circle
@@ -16224,7 +16224,7 @@
     - 32
 - name: study--view
   friendly_name: Study view
-  aliases: 
+  aliases:
     - study
     - view
   sizes:
@@ -16239,20 +16239,20 @@
     - 32
 - name: subflow
   friendly_name: Subflow
-  aliases: 
-  - subflow
-  - data
-  - node
-  - integration
+  aliases:
+    - subflow
+    - data
+    - node
+    - integration
   sizes:
     - 32
 - name: subflow--local
   friendly_name: Subflow local
-  aliases: 
-  - subflow
-  - local
-  - node 
-  - integration
+  aliases:
+    - subflow
+    - local
+    - node
+    - integration
   sizes:
     - 32
 - name: subnet-acl-rules
@@ -16398,7 +16398,7 @@
     - 32
 - name: table--alias
   friendly_name: Table alias
-  aliases: 
+  aliases:
     - data
     - spreadsheet
     - excel
@@ -16423,7 +16423,7 @@
     - 32
 - name: table--shortcut
   friendly_name: Table shortcut
-  aliases: 
+  aliases:
     - data
     - spreadsheet
     - excel
@@ -16497,7 +16497,7 @@
     - marker
 - name: tag--export
   friendly_name: Tag export
-  aliases: 
+  aliases:
     - label
     - mark
     - price
@@ -16520,7 +16520,7 @@
     - marker
 - name: tag--import
   friendly_name: Tag import
-  aliases: 
+  aliases:
     - label
     - mark
     - price
@@ -16532,7 +16532,7 @@
     - 32
 - name: tag--none
   friendly_name: Tag none
-  aliases: 
+  aliases:
     - label
     - mark
     - price
@@ -16619,7 +16619,7 @@
     - 32
 - name: task--remove
   friendly_name: Task remove
-  aliases: 
+  aliases:
     - file
     - task
     - clipboard
@@ -16877,7 +16877,7 @@
     - 32
 - name: terminal--3270
   friendly_name: Terminal 3270
-  aliases: 
+  aliases:
     - terminal
     - 3270
   sizes:
@@ -17682,7 +17682,7 @@
     - 32
 - name: tree--fall-risk
   friendly_name: Tree fall risk
-  aliases: 
+  aliases:
     - tree
     - danger
     - caution
@@ -18325,7 +18325,7 @@
     - 32
 - name: value--variable
   friendly_name: Value variable
-  aliases: 
+  aliases:
     - value
     - figure
     - amount
@@ -18345,7 +18345,7 @@
     - 32
 - name: vegetation--asset
   friendly_name: Vegetation asset
-  aliases: 
+  aliases:
     - vegetation
     - asset
     - tree
@@ -18404,7 +18404,7 @@
     - 32
 - name: vertical-view
   friendly_name: Vertical view
-  aliases: 
+  aliases:
     - Vertical
     - view
     - orientation
@@ -18984,9 +18984,9 @@
     - 32
 - name: webhook
   friendly_name: Webhook
-  aliases: 
+  aliases:
     - webhook
-    - callback 
+    - callback
   sizes:
     - 32
 - name: websheet
