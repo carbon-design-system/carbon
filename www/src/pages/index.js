@@ -1,50 +1,19 @@
-import {
-  Stack,
-  HStack,
-  unstable_Heading as Heading,
-  unstable_Section as Section,
-} from '@carbon/react';
+/**
+ * Copyright IBM Corp. 2016, 2018
+ *
+ * This source code is licensed under the Apache-2.0 license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
 
-export default function IndexPage({ issues, pulls }) {
+import React from 'react';
+
+export default function IndexPage() {
   return (
     <>
-      <header>Carbon Support</header>
-      <Stack as="main" gap={6}>
-        <Heading>Support</Heading>
-        <HStack gap={6}>
-          <Section>
-            <Heading>Issues</Heading>
-            <dl className="statistics">
-              <dt>Opened last week</dt>
-              <dd>53</dd>
-              <dt>Closed last week</dt>
-              <dd>50</dd>
-              <dt>Delta Δ</dt>
-              <dd>+3</dd>
-            </dl>
-          </Section>
-          <Section>
-            <Heading>Pull Requests</Heading>
-            <dl className="statistics">
-              <dt>Opened last week</dt>
-              <dd>53</dd>
-              <dt>Closed last week</dt>
-              <dd>50</dd>
-              <dt>Delta Δ</dt>
-              <dd>+3</dd>
-            </dl>
-          </Section>
-        </HStack>
-      </Stack>
+      <header>Carbon</header>
+      <main>
+        <h1>Support</h1>
+      </main>
     </>
   );
-}
-
-export async function getServerSideProps() {
-  return {
-    props: {
-      issues: [],
-      pulls: [],
-    },
-  };
 }
