@@ -2,8 +2,7 @@
   "name": "www",
   "private": true,
   "scripts": {
-    "build": "next build",
-    "clean": "rimraf .next",
+    "clean": "rimraf .next data",
     "develop": "next",
     "start": "next start"
   },
