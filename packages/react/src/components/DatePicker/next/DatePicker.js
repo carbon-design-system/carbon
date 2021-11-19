@@ -187,6 +187,7 @@ const DatePicker = React.forwardRef(function DatePicker(
   const prefix = usePrefix();
 
   const cal = useRef(null);
+  // destructure useEndInputHookWithRefCallback return: [setRef, ref.current]
   const [setToInputField, toInputField] = useEndInputHookWithRefCallback();
   const [setInputField, inputField] = useStartInputHookWithRefCallback();
 
