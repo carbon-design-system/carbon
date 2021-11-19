@@ -16879,7 +16879,7 @@
   friendly_name: Terminal 3270
   aliases:
     - terminal
-    - 3270
+    - '3270'
   sizes:
     - 32
 - name: text--align--center
