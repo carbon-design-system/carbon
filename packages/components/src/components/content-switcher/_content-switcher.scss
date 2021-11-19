@@ -54,7 +54,7 @@
     transition: all $duration--moderate-01 motion(standard, productive);
     white-space: nowrap;
 
-    &::after {
+    &::after:not(&:disabled) {
       position: absolute;
       top: 0;
       left: 0;
