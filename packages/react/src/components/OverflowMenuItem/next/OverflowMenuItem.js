@@ -5,7 +5,6 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-// import { settings } from 'carbon-components';
 import cx from 'classnames';
 import PropTypes from 'prop-types';
 import React from 'react';
@@ -54,7 +53,6 @@ const OverflowMenuItem = React.forwardRef(function OverflowMenuItem(
   }
 
   function handleClick(evt) {
-    // const { onClick, closeMenu } = this.props;
     onClick(evt);
     if (closeMenu) {
       closeMenu();
@@ -188,3 +186,5 @@ OverflowMenuItem.propTypes = {
    */
   wrapperClassName: PropTypes.string,
 };
+
+export default OverflowMenuItem;
