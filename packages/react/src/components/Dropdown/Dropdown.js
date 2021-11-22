@@ -20,7 +20,6 @@ import mergeRefs from '../../tools/mergeRefs';
 import deprecate from '../../prop-types/deprecate';
 import { useFeatureFlag } from '../FeatureFlags';
 import { usePrefix } from '../../internal/usePrefix';
-import { Text } from '../Text';
 
 const defaultItemToString = (item) => {
   if (typeof item === 'string') {
@@ -129,9 +128,7 @@ const Dropdown = React.forwardRef(function Dropdown(
   const ItemToElement = itemToElement;
   const toggleButtonProps = getToggleButtonProps();
   const helper = helperText ? (
-    <Text as="div" className={helperClasses}>
-      {helperText}
-    </Text>
+    <div className={helperClasses}>{helperText}</div>
   ) : null;
 
   function onSelectedItemChange({ selectedItem }) {
@@ -255,7 +252,7 @@ Dropdown.propTypes = {
    * Provide helper text that is used alongside the control label for
    * additional help
    */
-  helperText: PropTypes.oneOfType([PropTypes.string, PropTypes.node]),
+  helperText: PropTypes.node,
 
   /**
    * Specify whether the title text should be hidden or not

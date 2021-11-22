@@ -92,7 +92,7 @@ describe('Dropdown', () => {
       const wrapper = mount(
         <Dropdown helperText="Email Input" {...mockProps} />
       );
-      const renderedHelper = wrapper.find(`div.${prefix}--form__helper-text`);
+      const renderedHelper = wrapper.find(`.${prefix}--form__helper-text`);
       expect(renderedHelper.length).toEqual(1);
     });
 
@@ -107,7 +107,7 @@ describe('Dropdown', () => {
           {...mockProps}
         />
       );
-      const renderedHelper = wrapper.find(`div.${prefix}--form__helper-text`);
+      const renderedHelper = wrapper.find(`.${prefix}--form__helper-text`);
       expect(renderedHelper.props().children).toEqual(
         <span>
           This helper text has <a href="/">a link</a>.
@@ -118,7 +118,7 @@ describe('Dropdown', () => {
     it('should set helper text as expected', () => {
       const wrapper = mount(<Dropdown {...mockProps} />);
       wrapper.setProps({ helperText: 'Helper text' });
-      const renderedHelper = wrapper.find(`div.${prefix}--form__helper-text`);
+      const renderedHelper = wrapper.find(`.${prefix}--form__helper-text`);
       expect(renderedHelper.text()).toEqual('Helper text');
     });
   });

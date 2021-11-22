@@ -22,7 +22,6 @@ import mergeRefs from '../../tools/mergeRefs';
 import { keys, match } from '../../internal/keyboard';
 import { useFeatureFlag } from '../FeatureFlags';
 import { usePrefix } from '../../internal/usePrefix';
-import { Text } from '../Text';
 
 const noop = () => {};
 const getInstanceId = setupGetInstanceId();
@@ -225,7 +224,7 @@ const MultiSelect = React.forwardRef(function MultiSelect(
 
   return (
     <div className={wrapperClasses}>
-      <Text as="label" className={titleClasses} {...getLabelProps()}>
+      <label className={titleClasses} {...getLabelProps()}>
         {titleText && titleText}
         {selectedItems.length > 0 && (
           <span className={`${prefix}--visually-hidden`}>
@@ -233,7 +232,7 @@ const MultiSelect = React.forwardRef(function MultiSelect(
             {clearSelectionText}
           </span>
         )}
-      </Text>
+      </label>
       <ListBox
         type={type}
         size={size}
@@ -316,9 +315,9 @@ const MultiSelect = React.forwardRef(function MultiSelect(
         </ListBox.Menu>
       </ListBox>
       {!inline && !invalid && !warn && helperText && (
-        <Text as="div" id={helperId} className={helperClasses}>
+        <div id={helperId} className={helperClasses}>
           {helperText}
-        </Text>
+        </div>
       )}
     </div>
   );

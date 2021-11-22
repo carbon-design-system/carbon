@@ -21,21 +21,13 @@ exports[`Breadcrumb should render 1`] = `
           <Link
             href="www.carbondesignsystem.com"
           >
-            <Text
-              as="a"
+            <a
               className="bx--link"
               href="www.carbondesignsystem.com"
               rel={null}
             >
-              <a
-                className="bx--link"
-                dir="auto"
-                href="www.carbondesignsystem.com"
-                rel={null}
-              >
-                Breadcrumb 1
-              </a>
-            </Text>
+              Breadcrumb 1
+            </a>
           </Link>
         </li>
       </BreadcrumbItem>
@@ -61,21 +53,13 @@ exports[`Breadcrumb should support rendering the current page 1`] = `
           <Link
             href="#a"
           >
-            <Text
-              as="a"
+            <a
               className="bx--link"
               href="#a"
               rel={null}
             >
-              <a
-                className="bx--link"
-                dir="auto"
-                href="#a"
-                rel={null}
-              >
-                A
-              </a>
-            </Text>
+              A
+            </a>
           </Link>
         </li>
       </BreadcrumbItem>
@@ -88,21 +72,13 @@ exports[`Breadcrumb should support rendering the current page 1`] = `
           <Link
             href="#b"
           >
-            <Text
-              as="a"
+            <a
               className="bx--link"
               href="#b"
               rel={null}
             >
-              <a
-                className="bx--link"
-                dir="auto"
-                href="#b"
-                rel={null}
-              >
-                B
-              </a>
-            </Text>
+              B
+            </a>
           </Link>
         </li>
       </BreadcrumbItem>
@@ -116,21 +92,13 @@ exports[`Breadcrumb should support rendering the current page 1`] = `
           <Link
             href="#c"
           >
-            <Text
-              as="a"
+            <a
               className="bx--link"
               href="#c"
               rel={null}
             >
-              <a
-                className="bx--link"
-                dir="auto"
-                href="#c"
-                rel={null}
-              >
-                C
-              </a>
-            </Text>
+              C
+            </a>
           </Link>
         </li>
       </BreadcrumbItem>
@@ -156,21 +124,13 @@ exports[`Breadcrumb should support rendering the current page 2`] = `
           <Link
             href="#a"
           >
-            <Text
-              as="a"
+            <a
               className="bx--link"
               href="#a"
               rel={null}
             >
-              <a
-                className="bx--link"
-                dir="auto"
-                href="#a"
-                rel={null}
-              >
-                A
-              </a>
-            </Text>
+              A
+            </a>
           </Link>
         </li>
       </BreadcrumbItem>
@@ -183,21 +143,13 @@ exports[`Breadcrumb should support rendering the current page 2`] = `
           <Link
             href="#b"
           >
-            <Text
-              as="a"
+            <a
               className="bx--link"
               href="#b"
               rel={null}
             >
-              <a
-                className="bx--link"
-                dir="auto"
-                href="#b"
-                rel={null}
-              >
-                B
-              </a>
-            </Text>
+              B
+            </a>
           </Link>
         </li>
       </BreadcrumbItem>
@@ -212,23 +164,14 @@ exports[`Breadcrumb should support rendering the current page 2`] = `
             aria-current="page"
             href="#c"
           >
-            <Text
+            <a
               aria-current="page"
-              as="a"
               className="bx--link"
               href="#c"
               rel={null}
             >
-              <a
-                aria-current="page"
-                className="bx--link"
-                dir="auto"
-                href="#c"
-                rel={null}
-              >
-                C
-              </a>
-            </Text>
+              C
+            </a>
           </Link>
         </li>
       </BreadcrumbItem>
@@ -256,21 +199,13 @@ exports[`Breadcrumb should support rendering without a trailing slash 1`] = `
           <Link
             href="www.carbondesignsystem.com"
           >
-            <Text
-              as="a"
+            <a
               className="bx--link"
               href="www.carbondesignsystem.com"
               rel={null}
             >
-              <a
-                className="bx--link"
-                dir="auto"
-                href="www.carbondesignsystem.com"
-                rel={null}
-              >
-                Breadcrumb 1
-              </a>
-            </Text>
+              Breadcrumb 1
+            </a>
           </Link>
         </li>
       </BreadcrumbItem>

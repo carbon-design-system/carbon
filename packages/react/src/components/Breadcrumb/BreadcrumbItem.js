@@ -11,7 +11,6 @@ import cx from 'classnames';
 import { settings } from 'carbon-components';
 import Link from '../Link';
 import { OverflowMenuHorizontal16 } from '@carbon/icons-react';
-import { Text } from '../Text';
 
 const { prefix } = settings;
 
@@ -62,7 +61,7 @@ const BreadcrumbItem = React.forwardRef(function BreadcrumbItem(
             {children}
           </Link>
         ) : (
-          <Text className={`${prefix}--link`}>{children}</Text>
+          <span className={`${prefix}--link`}>{children}</span>
         )}
       </li>
     );

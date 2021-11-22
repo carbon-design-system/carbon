@@ -2575,17 +2575,7 @@ Map {
         "type": "object",
       },
       "helperText": Object {
-        "args": Array [
-          Array [
-            Object {
-              "type": "string",
-            },
-            Object {
-              "type": "node",
-            },
-          ],
-        ],
-        "type": "oneOfType",
+        "type": "node",
       },
       "hideLabel": Object {
         "type": "bool",

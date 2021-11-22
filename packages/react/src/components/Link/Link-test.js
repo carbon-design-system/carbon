@@ -26,7 +26,7 @@ describe('Link', () => {
     );
 
     it('should use the appropriate link class', () => {
-      expect(link.props().as).toEqual('a');
+      expect(link.name()).toEqual('a');
       expect(link.hasClass(`${prefix}--link`)).toEqual(true);
     });
 
@@ -35,7 +35,7 @@ describe('Link', () => {
     });
 
     it('should include child content', () => {
-      expect(link.children().text()).toEqual('A simple link');
+      expect(link.text()).toEqual('A simple link');
     });
 
     it('should all for custom classes to be applied', () => {
@@ -44,7 +44,7 @@ describe('Link', () => {
 
     it('should support disabled link', () => {
       link.setProps({ disabled: true });
-      expect(link.props().as).toEqual('p');
+      expect(link.name()).toEqual('p');
       expect(link.hasClass(`${prefix}--link--disabled`)).toEqual(true);
     });
 
