@@ -85,7 +85,7 @@ const TextInput = React.forwardRef(function TextInput(
     title: placeholder,
     disabled: normalizedProps.disabled,
     readOnly,
-    ['aria-describedby']: normalizedProps.helperId,
+    ['aria-describedby']: helperText && normalizedProps.helperId,
     ...other,
   };
   const inputWrapperClasses = classNames(
