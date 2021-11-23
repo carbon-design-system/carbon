@@ -46,6 +46,7 @@ const numberInputProps = {
 
 const toggleProps = {
   className: 'some-class',
+  hideLabel: true,
 };
 
 const fieldsetToggleProps = {
@@ -74,6 +75,7 @@ const fieldsetRadioProps = {
 
 const searchProps = {
   className: 'some-class',
+  size: 'md',
 };
 
 const fieldsetSearchProps = {
@@ -137,8 +139,10 @@ export const Default = () => (
       <NumberInput {...numberInputProps} />
 
       <FormGroup {...fieldsetToggleProps}>
-        <Toggle {...toggleProps} id="toggle-1" />
-        <Toggle disabled {...toggleProps} id="toggle-2" />
+        <Stack gap={3}>
+          <Toggle {...toggleProps} id="toggle-1" />
+          <Toggle disabled {...toggleProps} id="toggle-2" />
+        </Stack>
       </FormGroup>
 
       <FormGroup {...fieldsetFileUploaderProps}>
