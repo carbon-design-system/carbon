@@ -1,0 +1,30 @@
+//
+// Copyright IBM Corp. 2018, 2018
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+@use '../../../scss/fonts/mono';
+@use '../../../scss/fonts/sans-arabic';
+@use '../../../scss/fonts/sans-devanagari';
+@use '../../../scss/fonts/sans-hebrew';
+@use '../../../scss/fonts/sans-jp';
+@use '../../../scss/fonts/sans-kr';
+@use '../../../scss/fonts/sans-thai-looped';
+@use '../../../scss/fonts/sans-thai';
+@use '../../../scss/fonts/sans-variable';
+@use '../../../scss/fonts/sans';
+@use '../../../scss/fonts/serif';
+
+@include mono.all();
+@include sans-arabic.all();
+@include sans-devanagari.all();
+@include sans-hebrew.all();
+@include sans-jp.default();
+@include sans-kr.default();
+@include sans-thai-looped.all();
+@include sans-thai.all();
+@include sans-variable.all();
+@include sans.all();
+@include serif.all();

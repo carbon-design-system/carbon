@@ -10,9 +10,10 @@
 @forward 'scss/font-face';
 @forward 'scss/grid';
 @forward 'scss/motion';
-@forward 'scss/type';
+@forward 'scss/type' as type-*;
 @forward 'scss/themes';
 @forward 'scss/theme';
 
-@use 'scss/reset';
-@use 'scss/components';
+@forward 'scss/reset';
+@forward 'scss/fonts';
+@forward 'scss/components';

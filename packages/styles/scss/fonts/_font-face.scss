@@ -1,0 +1,206 @@
+//
+// Copyright IBM Corp. 2018, 2018
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+@use 'sass:list';
+@use 'sass:map';
+@use 'sass:string';
+@use './config';
+@use './unicode';
+
+@function get-font-weight($name) {
+  $font-weights: (
+    Thin: 100,
+    ExtraLight: 200,
+    Light: 300,
+    Regular: 400,
+    Text: 450,
+    Medium: 500,
+    SemiBold: 600,
+    Bold: 700,
+  );
+  @return map.get($font-weights, $name);
+}
+
+@function get-font-url(
+  $font,
+  $style,
+  $weight,
+  $unicode: false,
+  $format,
+  $hinted: null
+) {
+  $filename-bases: (
+    IBM-Plex-Mono: 'IBMPlexMono',
+    IBM-Plex-Sans-Arabic: 'IBMPlexSansArabic',
+    IBM-Plex-Sans-Condensed: 'IBMPlexSansCondensed',
+    IBM-Plex-Sans-Devanagari: 'IBMPlexSansDevanagari',
+    IBM-Plex-Sans-Hebrew: 'IBMPlexSansHebrew',
+    IBM-Plex-Sans-JP: 'IBMPlexSansJP',
+    IBM-Plex-Sans-KR: 'IBMPlexSansKR',
+    IBM-Plex-Sans-Thai: 'IBMPlexSansThai',
+    IBM-Plex-Sans-Thai-Looped: 'IBMPlexSansThaiLooped',
+    IBM-Plex-Sans-Variable: 'IBMPlexSansVar',
+    IBM-Plex-Sans: 'IBMPlexSans',
+    IBM-Plex-Serif: 'IBMPlexSerif',
+  );
+
+  // Basename -> IBMPlexSans
+  $filename: map.get($filename-bases, $font);
+
+  @if $font == IBM-Plex-Sans-Variable {
+    @if $style == italic {
+      $filename: '#{$filename}-Italic';
+    } @else {
+      $filename: '#{$filename}-Roman';
+    }
+    $filename: '#{config.$font-path}/#{$font}/fonts/complete/#{$format}/#{$filename}.#{$format}';
+    @return $filename;
+  }
+
+  // Special case for weight = Regular (400)
+  @if $weight == Regular {
+    @if $style == italic {
+      $filename: '#{$filename}-Italic';
+    } @else {
+      $filename: '#{$filename}-#{$weight}';
+    }
+  } @else {
+    // Otherwise add weight + optional style (italic)
+    $filename: '#{$filename}-#{$weight}';
+    @if $style == italic {
+      $filename: '#{$filename}Italic';
+    }
+  }
+
+  // Find complete path
+  @if $unicode {
+    @if string.index($unicode, 'JP-') != null {
+      $index: string.index($unicode, 'JP-');
+      $unicode: string.slice($unicode, $index + 3, -1);
+    } @else if string.index($unicode, 'KR-') != null {
+      $index: string.index($unicode, 'KR-');
+      $unicode: string.slice($unicode, $index + 3, -1);
+    }
+
+    $filename: '#{$filename}-#{$unicode}';
+
+    @if $hinted == true {
+      $filename: '#{config.$font-path}/#{$font}/fonts/split/#{$format}/hinted/#{$filename}';
+    } @else if $hinted == false {
+      $filename: '#{config.$font-path}/#{$font}/fonts/split/#{$format}/unhinted/#{$filename}';
+    } @else {
+      $filename: '#{config.$font-path}/#{$font}/fonts/split/#{$format}/#{$filename}';
+    }
+  } @else {
+    $filename: '#{config.$font-path}/#{$font}/fonts/complete/#{$format}/#{$filename}';
+  }
+
+  // Add extension
+  $filename: '#{$filename}.#{$format}';
+
+  @return $filename;
+}
+
+@mixin font-face(
+  $font-family,
+  $font-display,
+  $font,
+  $formats: (woff2, woff),
+  $styles: (normal, italic),
+  $weight,
+  $unicode-ranges: false,
+  $hinted: null
+) {
+  @if $weight == variable {
+    @each $style in $styles {
+      $src: ();
+
+      @each $format in $formats {
+        $url: get-font-url(
+          $font: $font,
+          $style: $style,
+          $weight: $weight,
+          $format: $format,
+        );
+        $src: list.append(
+          $src,
+          url('#{$url}') format('#{$format}'),
+          $separator: comma
+        );
+      }
+
+      @font-face {
+        font-family: $font-family;
+        font-display: $font-display;
+        font-style: $style;
+        src: $src;
+      }
+    }
+  } @else {
+    $font-weight: get-font-weight($weight);
+
+    @if $unicode-ranges {
+      @each $unicode in $unicode-ranges {
+        @each $style in $styles {
+          $src: ();
+
+          @each $format in $formats {
+            $url: get-font-url(
+              $font: $font,
+              $style: $style,
+              $weight: $weight,
+              $format: $format,
+              $unicode: $unicode,
+              $hinted: $hinted,
+            );
+            $src: list.append(
+              $src,
+              url('#{$url}') format('#{$format}'),
+              $separator: comma
+            );
+          }
+
+          @font-face {
+            font-family: $font-family;
+            font-display: $font-display;
+            font-style: $style;
+            font-weight: $font-weight;
+            src: $src;
+            unicode-range: map.get(unicode.$unicodes, $unicode);
+          }
+        }
+      }
+    } @else {
+      @each $style in $styles {
+        $src: ();
+
+        @each $format in $formats {
+          $url: get-font-url(
+            $font: $font,
+            $style: $style,
+            $weight: $weight,
+            $format: $format,
+            $hinted: $hinted,
+          );
+          $src: list.append(
+            $src,
+            url('#{$url}') format('#{$format}'),
+            $separator: comma
+          );
+        }
+
+        @font-face {
+          font-family: $font-family;
+          font-display: $font-display;
+          font-style: $style;
+          font-weight: $font-weight;
+          src: $src;
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,221 @@
+//
+// Copyright IBM Corp. 2018, 2018
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+@use 'sass:map';
+@use './unicode/jp';
+@use './unicode/kr';
+
+$-weights: (Thin, ExtraLight, Light, Regular, Text, Medium, SemiBold, Bold);
+
+$ibm-plex-mono: (
+  font: IBM-Plex-Mono,
+  weights: $-weights,
+  styles: (
+    normal,
+    italic,
+  ),
+  unicode-ranges: (
+    Latin1,
+    Latin2,
+    Latin3,
+    Pi,
+    Cyrillic,
+  ),
+);
+
+$ibm-plex-sans-arabic: (
+  font: IBM-Plex-Sans-Arabic,
+  weights: $-weights,
+  styles: (
+    normal,
+  ),
+  defaults: (
+    weights: (
+      Light: normal,
+      Regular: normal,
+      SemiBold: normal,
+    ),
+  ),
+);
+
+$ibm-plex-sans-condensed: (
+  font: IBM-Plex-Sans-Condensed,
+  weights: $-weights,
+  styles: (
+    normal,
+    italic,
+  ),
+);
+
+$ibm-plex-sans-devanagari: (
+  font: IBM-Plex-Sans-Devanagari,
+  weights: $-weights,
+  styles: (
+    normal,
+  ),
+);
+
+$ibm-plex-sans-hebrew: (
+  font: IBM-Plex-Sans-Hebrew,
+  weights: $-weights,
+  styles: (
+    normal,
+  ),
+);
+
+// TODO hinting
+$ibm-plex-sans-jp: (
+  font: IBM-Plex-Sans-JP,
+  weights: $-weights,
+  styles: (
+    normal,
+  ),
+  hinting: (
+    hinted,
+    unhinted,
+  ),
+  unicode-ranges: jp.$unicode-ranges,
+);
+
+// TODO hinting
+$ibm-plex-sans-kr: (
+  font: IBM-Plex-Sans-KR,
+  weights: $-weights,
+  styles: (
+    normal,
+  ),
+  hinting: (
+    hinted,
+    unhinted,
+  ),
+  unicode-ranges: kr.$unicode-ranges,
+);
+
+$ibm-plex-sans-thai-looped: (
+  font: IBM-Plex-Sans-Thai-Looped,
+  weights: $-weights,
+  styles: (
+    normal,
+  ),
+);
+
+$ibm-plex-sans-thai: (
+  font: IBM-Plex-Sans-Thai,
+  weights: $-weights,
+  styles: (
+    normal,
+  ),
+);
+
+// TODO variable
+$ibm-plex-sans-variable: (
+  font: IBM-Plex-Sans-Variable,
+  styles: (
+    normal,
+    italic,
+  ),
+  variable: true,
+);
+
+$ibm-plex-sans: (
+  font: IBM-Plex-Sans,
+  weights: $-weights,
+  styles: (
+    normal,
+    italic,
+  ),
+  unicode-ranges: (
+    Latin1,
+    Latin2,
+    Latin3,
+    Pi,
+    Cyrillic,
+  ),
+  defaults: (
+    weights: (
+      Light: (
+        normal,
+        italic,
+      ),
+      Regular: (
+        normal,
+        italic,
+      ),
+      SemiBold: (
+        normal,
+        italic,
+      ),
+    ),
+    unicode-ranges: (
+      Latin1,
+      Latin2,
+      Latin3,
+      Pi,
+      Cyrillic,
+    ),
+  ),
+);
+
+$ibm-plex-serif: (
+  font: IBM-Plex-Serif,
+  weights: $-weights,
+  styles: (
+    normal,
+    italic,
+  ),
+  unicode-ranges: (
+    Latin1,
+    Latin2,
+    Latin3,
+    Pi,
+    Cyrillic,
+  ),
+  defaults: (
+    weights: (
+      Light: (
+        normal,
+        italic,
+      ),
+      Regular: (
+        normal,
+        italic,
+      ),
+      SemiBold: (
+        normal,
+        italic,
+      ),
+    ),
+    unicode-ranges: (
+      Latin1,
+      Latin2,
+      Latin3,
+      Pi,
+      Cyrillic,
+    ),
+  ),
+);
+
+$-fonts: (
+  $ibm-plex-mono,
+  $ibm-plex-sans-arabic,
+  $ibm-plex-sans-condensed,
+  $ibm-plex-sans-devanagari,
+  $ibm-plex-sans-hebrew,
+  $ibm-plex-sans-jp,
+  $ibm-plex-sans-kr,
+  $ibm-plex-sans-thai-looped,
+  $ibm-plex-sans-thai,
+  $ibm-plex-sans-variable,
+  $ibm-plex-sans,
+  $ibm-plex-serif
+);
+$capabilities: ();
+
+@each $value in $-fonts {
+  $font: map.get($value, font);
+  $capabilities: map.set($capabilities, $font, $value);
+}

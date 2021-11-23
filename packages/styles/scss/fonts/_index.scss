@@ -1,0 +1,271 @@
+//
+// Copyright IBM Corp. 2018, 2018
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+@use 'sass:list';
+@use 'sass:map';
+@use 'sass:meta';
+@use 'unicode';
+@use 'capabilities';
+
+$font-display: swap !default;
+$font-path: '~@ibm/plex' !default;
+
+$default-fonts: (
+  IBM-Plex-Mono: false,
+  IBM-Plex-Sans-Arabic: false,
+  IBM-Plex-Sans-Condensed: false,
+  IBM-Plex-Sans-Devanagari: false,
+  IBM-Plex-Sans-Hebrew: false,
+  IBM-Plex-Sans-JP: false,
+  IBM-Plex-Sans-KR: false,
+  IBM-Plex-Sans-Thai: false,
+  IBM-Plex-Sans-Thai-Looped: false,
+  IBM-Plex-Sans-Variable: false,
+  IBM-Plex-Sans: false,
+  IBM-Plex-Serif: false,
+) !default;
+$fonts: () !default;
+$fonts: map.deep-merge($default-fonts, $fonts);
+
+$font-weights: (
+  Thin: 100,
+  ExtraLight: 200,
+  Light: 300,
+  Regular: 400,
+  Text: 450,
+  Medium: 500,
+  SemiBold: 600,
+  Bold: 700,
+);
+$font-styles: (
+  normal: true,
+  italic: true,
+);
+
+@function get-font-family($name) {
+  $font-families: (
+    IBM-Plex-Mono: 'IBM Plex Mono',
+    IBM-Plex-Sans-Arabic: 'IBM Plex Sans Arabic',
+    IBM-Plex-Sans-Condensed: 'IBM Plex Sans Condensed',
+    IBM-Plex-Sans-Devanagari: 'IBM Plex Sans Devanagari',
+    IBM-Plex-Sans-Hebrew: 'IBM Plex Sans Hebrew',
+    IBM-Plex-Sans-JP: 'IBM Plex Sans JP',
+    IBM-Plex-Sans-KR: 'IBM Plex Sans KR',
+    IBM-Plex-Sans-Thai: 'IBM Plex Sans Thai',
+    IBM-Plex-Sans-Thai-Looped: 'IBM Plex Sans Thai Looped',
+    IBM-Plex-Sans-Variable: 'IBM Plex Sans VF',
+    IBM-Plex-Sans: 'IBM Plex Sans',
+    IBM-Plex-Serif: 'IBM Plex Serif',
+  );
+  @return map.get($font-families, $name);
+}
+
+@function normalize($config) {
+  @if map.has-key($config, font) == false {
+    @error 'Expected the key "font" to be defined in $config';
+  }
+
+  $font: map.get($config, font);
+  $font-family: get-font-family($font);
+
+  @if $font-family == null {
+    @error 'Unable to get font-family for font: "#{$font}"';
+  }
+
+  $unicode-ranges: null;
+
+  @if map.has-key($config, unicode-ranges) == true {
+    $value: map.get($config, unicode-ranges);
+    @if meta.type-of($value) != list {
+      @error 'Expected the key "unicode-ranges" to be of type: "list", instead received: "#{meta.type-of($value)}"';
+    }
+
+    $ranges: ();
+
+    @each $unicode-range in $value {
+      @if map.has-key(unicode.$unicodes, $unicode-range) == false {
+        @error 'Unexpected unicode range name given: #{$unicode-range}';
+      }
+      $ranges: list.append($ranges, $unicode-range);
+    }
+
+    $unicode-ranges: $ranges;
+  }
+
+  @if map.has-key($config, weights) == false {
+    @error 'Expected the key "weights" to be defined in $config';
+  }
+
+  @if meta.type-of(map.get($config, weights)) != map {
+    @error 'Unexpected type for key "weights". Received: #{$weight-type} Expected to be of type: map';
+  }
+
+  $weights: ();
+
+  @each $weight, $styles in map.get($config, weights) {
+    @each $style in $styles {
+      @if map.get($font-styles, $style) == true {
+        $weights: list.append(
+          $weights,
+          (
+            name: $weight,
+            style: $style,
+          )
+        );
+      }
+    }
+  }
+
+  $normalized: (
+    font: $font,
+    font-face: (
+      font-family: $font-family,
+    ),
+    weights: $weights,
+    unicode-ranges: $unicode-ranges,
+  );
+
+  @return $normalized;
+}
+
+$filename-bases: (
+  IBM-Plex-Mono: 'IBMPlexMono',
+  IBM-Plex-Sans-Arabic: 'IBMPlexSansArabic',
+  IBM-Plex-Sans-Condensed: 'IBMPlexSansCondensed',
+  IBM-Plex-Sans-Devanagari: 'IBMPlexSansDevanagari',
+  IBM-Plex-Sans-Hebrew: 'IBMPlexSansHebrew',
+  IBM-Plex-Sans-KR: 'IBMPlexSansKR',
+  IBM-Plex-Sans-Thai: 'IBMPlexSansThai',
+  IBM-Plex-Sans-Thai-Looped: 'IBMPlexSansThaiLooped',
+  IBM-Plex-Sans-Variable: 'IBMPlexSansVar',
+  IBM-Plex-Sans: 'IBMPlexSans',
+  IBM-Plex-Serif: 'IBMPlexSerif',
+);
+
+@function get-file-path($config) {
+  $font: map.get($config, font);
+  $style: map.get($config, style);
+  $weight: map.get($config, weight);
+  $unicode-range: map.get($config, unicode-range);
+  $format: map.get($config, format);
+
+  // Basename -> IBMPlexSans
+  $filename: map.get($filename-bases, $font);
+
+  // Special case for weight = Regular (400)
+  @if $weight == Regular {
+    @if $style == italic {
+      $filename: '#{$filename}-Italic';
+    } @else {
+      $filename: '#{$filename}-#{$weight}';
+    }
+  } @else {
+    // Otherwise add weight + optional style (italic)
+    $filename: '#{$filename}-#{$weight}';
+    @if $style == italic {
+      $filename: '#{$filename}Italic';
+    }
+  }
+
+  // Find complete path
+  @if $unicode-range {
+    $filename: '#{$filename}-#{$unicode-range}';
+    $filename: '#{$font-path}/#{$font}/fonts/split/#{$format}/#{$filename}';
+  } @else {
+    $filename: '#{$font-path}/#{$font}/fonts/complete/#{$format}/#{$filename}';
+  }
+
+  // Add extension
+  $filename: '#{$filename}.#{$format}';
+
+  @return $filename;
+}
+
+@mixin font-face($config) {
+  $font: map.get($config, font);
+  $font-family: map.get(map.get($config, font-face), font-family);
+  $weights: map.get($config, weights);
+  $unicode-ranges: map.get($config, unicode-ranges);
+
+  @each $weight in $weights {
+    $name: map.get($weight, name);
+    $style: map.get($weight, style);
+    $font-weight: map.get($font-weights, $name);
+
+    @if $unicode-ranges {
+      @each $range in $unicode-ranges {
+        $woff: get-file-path(
+          (
+            font: $font,
+            style: $style,
+            weight: $name,
+            format: woff,
+            unicode-range: $range,
+          )
+        );
+        $woff2: get-file-path(
+          (
+            font: $font,
+            style: $style,
+            weight: $name,
+            format: woff2,
+            unicode-range: $range,
+          )
+        );
+
+        @font-face {
+          font-family: $font-family;
+          font-display: $font-display;
+          font-style: $style;
+          font-weight: $font-weight;
+          src: url('#{$woff2}') format('woff2'), url('#{$woff}') format('woff');
+          unicode-range: map.get(unicode.$unicodes, $range);
+        }
+      }
+    } @else {
+      $woff: get-file-path(
+        (
+          font: $font,
+          style: $style,
+          weight: $name,
+          format: woff,
+        )
+      );
+      $woff2: get-file-path(
+        (
+          font: $font,
+          style: $style,
+          weight: $name,
+          format: woff2,
+        )
+      );
+
+      @font-face {
+        font-family: $font-family;
+        font-display: $font-display;
+        font-style: $style;
+        font-weight: $font-weight;
+        src: url('#{$woff2}') format('woff2'), url('#{$woff}') format('woff');
+      }
+    }
+  }
+}
+
+@each $key, $value in $fonts {
+  $config: $value;
+
+  @if $value == true {
+    $resolved: map.get(capabilities.$capabilities, $key);
+    $config: map.get($resolved, defaults);
+  }
+
+  @if $config != false {
+    $config: normalize(map.set($config, font, $key));
+
+    @include font-face($config);
+  }
+}

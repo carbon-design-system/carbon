@@ -6,8 +6,28 @@
 //
 
 @use '../index.scss' as styles with (
-  $css--font-face: true,
-  $css--plex-arabic: true,
+  $fonts: (
+    IBM-Plex-Mono: (
+      weights: (
+        Thin: (normal, italic),
+        ExtraLight: (normal, italic),
+        Light: (normal, italic),
+        Regular: (normal, italic),
+        Text: (normal, italic),
+        Medium: (normal, italic),
+        SemiBold: (normal, italic),
+        Bold: (normal, italic),
+      ),
+      unicode-ranges: (
+        Latin1,
+        Latin2,
+        Latin3,
+        Pi,
+        Cyrillic,
+      ),
+    ),
+    IBM-Plex-Sans-Arabic: true,
+  ),
 );
 @use '../scss/components/button';
 @use '../scss/components/tag';

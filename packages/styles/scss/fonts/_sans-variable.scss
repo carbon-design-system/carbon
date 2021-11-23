@@ -1,0 +1,53 @@
+//
+// Copyright IBM Corp. 2018, 2018
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+@use 'config';
+@use 'font-face';
+
+$font-path: config.$font-path !default;
+$font-display: config.$font-display !default;
+$font-family: 'IBM Plex Sans Variable';
+
+$-font: 'IBM-Plex-Sans-Variable';
+$-default-styles: (normal, italic);
+$-default-formats: (woff2);
+
+@mixin italic($formats: $-default-formats) {
+  @include font-face.font-face(
+    $font: $-font,
+    $font-family: $font-family,
+    $font-display: $font-display,
+    $styles: (
+      italic,
+    ),
+    $weight: variable,
+    $formats: $formats
+  );
+}
+
+@mixin regular($formats: $-default-formats) {
+  @include font-face.font-face(
+    $font: $-font,
+    $font-family: $font-family,
+    $font-display: $font-display,
+    $styles: (
+      normal,
+    ),
+    $weight: variable,
+    $formats: $formats
+  );
+}
+
+@mixin all($formats: $-default-formats) {
+  @include regular($formats);
+  @include italic($formats);
+}
+
+@mixin default($formats: $-default-formats) {
+  @include regular($formats);
+  @include italic($formats);
+}
