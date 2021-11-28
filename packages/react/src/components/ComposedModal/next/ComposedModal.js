@@ -3,19 +3,83 @@ import PropTypes from 'prop-types';
 import { ModalHeader } from './ModalHeader';
 import { ModalFooter } from '../ComposedModal';
 
-import classNames from 'classnames';
+import cx from 'classnames';
 
 import toggleClass from '../../../tools/toggleClass';
+import requiredIfGivenPropIsTruthy from '../../../prop-types/requiredIfGivenPropIsTruthy';
 
 import wrapFocus from '../../../internal/wrapFocus';
 import { usePrefix } from '../../../internal/usePrefix';
+
+export function ModalBody({
+  className: customClassName,
+  children,
+  hasForm,
+  hasScrollingContent,
+  ...rest
+}) {
+  const prefix = usePrefix();
+  const contentClass = cx({
+    [`${prefix}--modal-content`]: true,
+    [`${prefix}--modal-content--with-form`]: hasForm,
+    [`${prefix}--modal-scroll-content`]: hasScrollingContent,
+    [customClassName]: customClassName,
+  });
+  const hasScrollingContentProps = hasScrollingContent
+    ? {
+        tabIndex: 0,
+        role: 'region',
+      }
+    : {};
+  return (
+    <>
+      <div className={contentClass} {...hasScrollingContentProps} {...rest}>
+        {children}
+      </div>
+      {hasScrollingContent && (
+        <div className={`${prefix}--modal-content--overflow-indicator`} />
+      )}
+    </>
+  );
+}
+
+ModalBody.propTypes = {
+  /**
+   * Required props for the accessibility label of the header
+   */
+  ['aria-label']: requiredIfGivenPropIsTruthy(
+    'hasScrollingContent',
+    PropTypes.string
+  ),
+
+  /**
+   * Specify the content to be placed in the ModalBody
+   */
+  children: PropTypes.node,
+
+  /**
+   * Specify an optional className to be added to the Modal Body node
+   */
+  className: PropTypes.string,
+
+  /**
+   * Provide whether the modal content has a form element.
+   * If `true` is used here, non-form child content should have `bx--modal-content__regular-content` class.
+   */
+  hasForm: PropTypes.bool,
+
+  /**
+   * Specify whether the modal contains scrolling content
+   */
+  hasScrollingContent: PropTypes.bool,
+};
 
 const ComposedModal = React.forwardRef(function ComposedModal(
   {
     ['aria-labelledby']: ariaLabelledBy,
     ['aria-label']: ariaLabel,
     children,
-    className,
+    className: customClassName,
     containerClassName,
     danger,
     onClose,
@@ -88,14 +152,14 @@ const ComposedModal = React.forwardRef(function ComposedModal(
     }
   }
 
-  const modalClass = classNames({
+  const modalClass = cx({
     [`${prefix}--modal`]: true,
     'is-visible': isOpen,
-    [className]: className,
+    [customClassName]: customClassName,
     [`${prefix}--modal--danger`]: danger,
   });
 
-  const containerClass = classNames({
+  const containerClass = cx({
     [`${prefix}--modal-container`]: true,
     [`${prefix}--modal-container--${size}`]: size,
     [containerClassName]: containerClassName,
