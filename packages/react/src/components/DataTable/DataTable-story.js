@@ -217,11 +217,11 @@ export const WithToolbar = () => (
               onChange={onInputChange}
               onClear={action('onClear')}
               onFocus={(event, handleExpand) => {
-                action('onFocus')();
+                action('onFocus')(event, handleExpand);
                 handleExpand(event, true);
               }}
               onBlur={(event, handleExpand) => {
-                action('onBlur')();
+                action('onBlur')(event, handleExpand);
                 const { value } = event.target;
                 if (!value) {
                   handleExpand(event, false);
