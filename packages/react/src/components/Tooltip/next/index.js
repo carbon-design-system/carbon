@@ -36,6 +36,8 @@ function Tooltip({
   const triggerProps = {
     onFocus: () => setOpen(true),
     onBlur: () => setOpen(false),
+    // This should be placed on the trigger in case the element is disabled
+    onMouseEnter,
   };
 
   if (label) {
@@ -73,7 +75,6 @@ function Tooltip({
       dropShadow={false}
       highContrast
       onKeyDown={onKeyDown}
-      onMouseEnter={onMouseEnter}
       onMouseLeave={onMouseLeave}
       open={open}
       ref={containerRef}>
