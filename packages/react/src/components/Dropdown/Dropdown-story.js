@@ -17,6 +17,7 @@ import {
 import Dropdown from '../Dropdown';
 import DropdownSkeleton from './Dropdown.Skeleton';
 import mdx from './Dropdown.mdx';
+import { Checkmark16 } from '@carbon/icons-react';
 
 const items = [
   {
@@ -118,6 +119,24 @@ export const Default = () => (
       label="Dropdown menu options"
       items={items}
       itemToString={(item) => (item ? item.text : '')}
+      onChange={action('onChange')}
+    />
+  </div>
+);
+export const RenderSelectedItem = () => (
+  <div style={{ width: 400 }}>
+    <Dropdown
+      id="default"
+      titleText="Dropdown label"
+      helperText="This is some helper text"
+      label="Dropdown menu options"
+      items={items}
+      itemToString={(item) => (item ? item.text : '')}
+      renderSelectedItem={(item) => (
+        <div id="custom-render-selected-item">
+          <Checkmark16 /> {item.text}
+        </div>
+      )}
       onChange={action('onChange')}
     />
   </div>
