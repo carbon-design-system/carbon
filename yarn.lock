@@ -2411,9 +2411,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@cypress/request@npm:^2.88.5":
-  version: 2.88.5
-  resolution: "@cypress/request@npm:2.88.5"
+"@cypress/request@npm:^2.88.7":
+  version: 2.88.9
+  resolution: "@cypress/request@npm:2.88.9"
   dependencies:
     aws-sign2: ~0.7.0
     aws4: ^1.8.0
@@ -2423,19 +2423,18 @@ __metadata:
     forever-agent: ~0.6.1
     form-data: ~2.3.2
     har-validator: ~5.1.3
-    http-signature: ~1.2.0
+    http-signature: ~1.3.6
     is-typedarray: ~1.0.0
     isstream: ~0.1.2
     json-stringify-safe: ~5.0.1
     mime-types: ~2.1.19
-    oauth-sign: ~0.9.0
     performance-now: ^2.1.0
     qs: ~6.5.2
     safe-buffer: ^5.1.2
     tough-cookie: ~2.5.0
     tunnel-agent: ^0.6.0
-    uuid: ^3.3.2
-  checksum: a605f8a623f4665402768f4d7730315a420967d41c44194eeb2a946ce0b74ce3eb8205a73b0cab879fcf65870dbb1189ac60ea67d163c7acd64228e39e65611a
+    uuid: ^8.3.2
+  checksum: eac611b785d34855d5148897a03e528b13fb6852a4e3eeb47658d5f5e0d488606d7d7db515edb453e7c30bff0cb2ecc364fa21718de3d0fdc9a60c4e460e3aba
   languageName: node
   linkType: hard
 
@@ -9637,7 +9636,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"bluebird@npm:^3.0.5, bluebird@npm:^3.1.1, bluebird@npm:^3.3.0, bluebird@npm:^3.3.5, bluebird@npm:^3.4.1, bluebird@npm:^3.5.0, bluebird@npm:^3.5.1, bluebird@npm:^3.5.2, bluebird@npm:^3.5.3, bluebird@npm:^3.5.4, bluebird@npm:^3.5.5, bluebird@npm:^3.7.1, bluebird@npm:^3.7.2":
+"bluebird@npm:3.7.2, bluebird@npm:^3.0.5, bluebird@npm:^3.1.1, bluebird@npm:^3.3.0, bluebird@npm:^3.3.5, bluebird@npm:^3.4.1, bluebird@npm:^3.5.0, bluebird@npm:^3.5.1, bluebird@npm:^3.5.2, bluebird@npm:^3.5.3, bluebird@npm:^3.5.4, bluebird@npm:^3.5.5, bluebird@npm:^3.7.1":
   version: 3.7.2
   resolution: "bluebird@npm:3.7.2"
   checksum: 869417503c722e7dc54ca46715f70e15f4d9c602a423a02c825570862d12935be59ed9c7ba34a9b31f186c017c23cac6b54e35446f8353059c101da73eac22ef
@@ -10624,7 +10623,7 @@ __metadata:
     core-js: ^3.16.0
     cross-env: ^5.2.0
     css-loader: ^3.4.2
-    cypress: ^8.1.0
+    cypress: ^9.1.0
     cypress-real-events: ^1.5.1
     downshift: 5.2.1
     fast-glob: ^3.2.7
@@ -12922,18 +12921,18 @@ __metadata:
   languageName: node
   linkType: hard
 
-"cypress@npm:^8.1.0":
-  version: 8.1.0
-  resolution: "cypress@npm:8.1.0"
+"cypress@npm:^9.1.0":
+  version: 9.1.0
+  resolution: "cypress@npm:9.1.0"
   dependencies:
-    "@cypress/request": ^2.88.5
+    "@cypress/request": ^2.88.7
     "@cypress/xvfb": ^1.2.4
     "@types/node": ^14.14.31
     "@types/sinonjs__fake-timers": ^6.0.2
     "@types/sizzle": ^2.3.2
     arch: ^2.2.0
     blob-util: ^2.0.2
-    bluebird: ^3.7.2
+    bluebird: 3.7.2
     cachedir: ^2.3.0
     chalk: ^4.1.0
     check-more-types: ^2.24.0
@@ -12960,7 +12959,7 @@ __metadata:
     minimist: ^1.2.5
     ospath: ^1.2.2
     pretty-bytes: ^5.6.0
-    ramda: ~0.27.1
+    proxy-from-env: 1.0.0
     request-progress: ^3.0.0
     supports-color: ^8.1.1
     tmp: ~0.2.1
@@ -12969,7 +12968,7 @@ __metadata:
     yauzl: ^2.10.0
   bin:
     cypress: bin/cypress
-  checksum: 564093b5f33e2967437b6579b6911915dddacb323b23c436545f108c72f689de079ba220c4ca7ebaf98a91e5832f3b1940b2354276ddab7f87e4a166359c670f
+  checksum: 37f2cd704d9e67c4b525e2e8a723f82b0e0eb573cd276fa6460d86ce665cf2a53fd490a4a0ca79394694ba0d91306a03194479089b57457fdc6b9cb9e9747b54
   languageName: node
   linkType: hard
 
@@ -18886,6 +18885,17 @@ __metadata:
   languageName: node
   linkType: hard
 
+"http-signature@npm:~1.3.6":
+  version: 1.3.6
+  resolution: "http-signature@npm:1.3.6"
+  dependencies:
+    assert-plus: ^1.0.0
+    jsprim: ^2.0.2
+    sshpk: ^1.14.1
+  checksum: 10be2af4764e71fee0281392937050201ee576ac755c543f570d6d87134ce5e858663fe999a7adb3e4e368e1e356d0d7fec6b9542295b875726ff615188e7a0c
+  languageName: node
+  linkType: hard
+
 "http2-wrapper@npm:^1.0.0-beta.5.2":
   version: 1.0.0-beta.5.2
   resolution: "http2-wrapper@npm:1.0.0-beta.5.2"
@@ -21709,6 +21719,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"json-schema@npm:0.4.0":
+  version: 0.4.0
+  resolution: "json-schema@npm:0.4.0"
+  checksum: 66389434c3469e698da0df2e7ac5a3281bcff75e797a5c127db7c5b56270e01ae13d9afa3c03344f76e32e81678337a8c912bdbb75101c62e487dc3778461d72
+  languageName: node
+  linkType: hard
+
 "json-stable-stringify-without-jsonify@npm:^1.0.1":
   version: 1.0.1
   resolution: "json-stable-stringify-without-jsonify@npm:1.0.1"
@@ -21840,6 +21857,18 @@ __metadata:
     json-schema: 0.2.3
     verror: 1.10.0
   checksum: 6bcb20ec265ae18bb48e540a6da2c65f9c844f7522712d6dfcb01039527a49414816f4869000493363f1e1ea96cbad00e46188d5ecc78257a19f152467587373
+  languageName: node
+  linkType: hard
+
+"jsprim@npm:^2.0.2":
+  version: 2.0.2
+  resolution: "jsprim@npm:2.0.2"
+  dependencies:
+    assert-plus: 1.0.0
+    extsprintf: 1.3.0
+    json-schema: 0.4.0
+    verror: 1.10.0
+  checksum: d175f6b1991e160cb0aa39bc857da780e035611986b5492f32395411879fdaf4e513d98677f08f7352dac93a16b66b8361c674b86a3fa406e2e7af6b26321838
   languageName: node
   linkType: hard
 
@@ -27792,6 +27821,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"proxy-from-env@npm:1.0.0":
+  version: 1.0.0
+  resolution: "proxy-from-env@npm:1.0.0"
+  checksum: 292e28d1de0c315958d71d8315eb546dd3cd8c8cbc2dab7c54eeb9f5c17f421771964ad0b5e1f77011bab2305bdae42e1757ce33bdb1ccc3e87732322a8efcf1
+  languageName: node
+  linkType: hard
+
 "proxy-from-env@npm:^1.0.0, proxy-from-env@npm:^1.1.0":
   version: 1.1.0
   resolution: "proxy-from-env@npm:1.1.0"
@@ -28070,13 +28106,6 @@ __metadata:
   version: 0.21.0
   resolution: "ramda@npm:0.21.0"
   checksum: e08d63c12ed4bab70bfd700a843901d9fa340d1a88c50085a6ef0ecf25f528e5ac7c71848481270923491e7315a34301bb35905d45861cb13cc75b8ca05add32
-  languageName: node
-  linkType: hard
-
-"ramda@npm:~0.27.1":
-  version: 0.27.1
-  resolution: "ramda@npm:0.27.1"
-  checksum: 31a0c0ef739b2525d7615f84cbb5d3cb89ee0c795469b711f729ea1d8df0dccc3cd75d3717a1e9742d42315ce86435680b7c87743eb7618111c60c144a5b8059
   languageName: node
   linkType: hard
 
@@ -31814,7 +31843,7 @@ resolve@^2.0.0-next.3:
   languageName: node
   linkType: hard
 
-"sshpk@npm:^1.7.0":
+"sshpk@npm:^1.14.1, sshpk@npm:^1.7.0":
   version: 1.16.1
   resolution: "sshpk@npm:1.16.1"
   dependencies:
@@ -34988,6 +35017,15 @@ resolve@^2.0.0-next.3:
   bin:
     uuid: ./bin/uuid
   checksum: 58de2feed61c59060b40f8203c0e4ed7fd6f99d42534a499f1741218a1dd0c129f4aa1de797bcf822c8ea5da7e4137aa3673431a96dae729047f7aca7b27866f
+  languageName: node
+  linkType: hard
+
+"uuid@npm:^8.3.2":
+  version: 8.3.2
+  resolution: "uuid@npm:8.3.2"
+  bin:
+    uuid: dist/bin/uuid
+  checksum: 5575a8a75c13120e2f10e6ddc801b2c7ed7d8f3c8ac22c7ed0c7b2ba6383ec0abda88c905085d630e251719e0777045ae3236f04c812184b7c765f63a70e58df
   languageName: node
   linkType: hard
 
