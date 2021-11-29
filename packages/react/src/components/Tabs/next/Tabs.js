@@ -11,8 +11,6 @@ import cx from 'classnames';
 // import { ChevronLeft16, ChevronRight16 } from '@carbon/icons-react';
 // import debounce from 'lodash.debounce';
 import { keys, match, matches } from '../../../internal/keyboard';
-// import TabContent from '../../TabContent';
-// import deprecate from '../../../prop-types/deprecate';
 import { usePrefix } from '../../../internal/usePrefix';
 import { useId } from '../../../internal/useId';
 import { useControllableState } from '../../ContentSwitcher/next/useControllableState';
@@ -25,8 +23,7 @@ const TabContext = React.createContext();
 
 // Used to keep track of position in a list of tab panels
 const TabPanelContext = React.createContext();
-
-export function Tabs({
+function Tabs({
   children,
   defaultSelectedIndex = 0,
   onChange,
@@ -82,63 +79,30 @@ Tabs.propTypes = {
   selectedIndex: PropTypes.number,
 };
 
-const TabPanel = React.forwardRef(function TabPanel(
-  { children, className: customClassName, ...rest },
-  ref
-) {
-  const prefix = usePrefix();
+function useEffectOnce(callback) {
+  const savedCallback = useRef(callback);
+  const effectGuard = useRef(false);
 
-  const { selectedIndex, baseId } = React.useContext(TabsContext);
-  const index = React.useContext(TabPanelContext);
-  const id = `${baseId}-tabpanel-${index}`;
-  const tabId = `${baseId}-tab-${index}`;
-  const className = cx(`${prefix}--tab-content`, {
-    customClassName: customClassName,
+  useEffect(() => {
+    savedCallback.current = callback;
   });
 
-  // TODO: tabindex should only be 0 if no interactive content in children
-  return (
-    <div
-      {...rest}
-      aria-labelledby={tabId}
-      id={id}
-      className={className}
-      ref={ref}
-      role="tabpanel"
-      tabIndex="0"
-      hidden={selectedIndex !== index}>
-      {children}
-    </div>
-  );
-});
-
-TabPanel.propTypes = {
-  /**
-   * Provide child elements to be rendered inside of `TabPanel`.
-   */
-  children: PropTypes.node,
-};
-
-export function TabPanels({ children }) {
-  return React.Children.map(children, (child, index) => {
-    return (
-      <TabPanelContext.Provider value={index}>{child}</TabPanelContext.Provider>
-    );
-  });
+  useEffect(() => {
+    if (effectGuard.current !== true) {
+      effectGuard.current = true;
+      savedCallback.current();
+    }
+  }, []);
 }
 
-TabPanels.propTypes = {
-  /**
-   * Provide child elements to be rendered inside of `TabPanels`.
-   */
-  children: PropTypes.node,
-};
-
-export function TabList({
+function TabList({
   activation = 'automatic',
   'aria-label': label,
   children,
   className: customClassName,
+  light,
+  scrollIntoView,
+  contained = false,
   ...rest
 }) {
   const {
@@ -149,14 +113,23 @@ export function TabList({
   } = React.useContext(TabsContext);
   const prefix = usePrefix();
   const ref = useRef(null);
-  const className = cx(
-    `${prefix}--tabs`,
-    `${prefix}--tabs--scrollable`,
-    `${prefix}--tabs--scrollable__nav`,
-    customClassName
-  );
+  const className = cx(`${prefix}--tabs`, {
+    [`${prefix}--tabs--contained`]: contained,
+    [`${prefix}--tabs--light`]: light,
+    customClassName: customClassName,
+  });
   const count = React.Children.count(children);
   const tabs = [];
+
+  useEffectOnce(() => {
+    const tab = tabs[selectedIndex];
+    if (scrollIntoView && tab) {
+      tab.current.scrollIntoView({
+        block: 'nearest',
+        inline: 'nearest',
+      });
+    }
+  });
 
   function onKeyDown(event) {
     if (
@@ -225,6 +198,20 @@ TabList.propTypes = {
    * Specify an optional className to be added to the container node
    */
   className: PropTypes.string,
+  /**
+   * Specify whether component is contained type
+   */
+
+  contained: PropTypes.bool,
+  /**
+   * Specify whether or not to use the light component variant
+   */
+  light: PropTypes.bool,
+  /**
+   * Choose whether or not to automatically scroll to newly selected tabs
+   * on component rerender
+   */
+  scrollIntoView: PropTypes.bool,
 };
 
 /**
@@ -254,7 +241,6 @@ const Tab = React.forwardRef(function Tab(
     disabled,
     onClick,
     onKeyDown,
-    renderButton,
     ...rest
   },
   ref
@@ -267,30 +253,14 @@ const Tab = React.forwardRef(function Tab(
   const id = `${baseId}-tab-${index}`;
   const panelId = `${baseId}-tabpanel-${index}`;
   const className = cx(
-    `${prefix}--tabs--scrollable__nav-item`,
     `${prefix}--tabs__nav-item`,
     `${prefix}--tabs__nav-link`,
     {
-      [`${prefix}--tabs--scrollable__nav-item--selected`]:
-        selectedIndex === index,
+      [`${prefix}--tabs__nav-item--selected`]: selectedIndex === index,
       [`${prefix}--tabs__nav-item--disabled`]: disabled,
-      [`${prefix}--tabs--scrollable__nav-item--disabled`]: disabled,
       customClassName: customClassName,
     }
   );
-
-  // const classes = classNames(
-  //   className,
-  //   // TODO: remove scrollable in next major release
-  //   // `${prefix}--tabs__nav-item`,
-  //   `${prefix}--tabs--scrollable__nav-item`,
-  //   {
-  //     [`${prefix}--tabs__nav-item--disabled`]: disabled,
-  //     [`${prefix}--tabs__nav-item--selected`]: selected,
-  //     // TODO: remove scrollable in next major release
-  //     [`${prefix}--tabs--scrollable__nav-item--disabled`]: disabled,
-  //     [`${prefix}--tabs--scrollable__nav-item--selected`]: selected,
-  //  }
 
   return (
     <button
@@ -303,11 +273,11 @@ const Tab = React.forwardRef(function Tab(
       className={className}
       onClick={(evt) => {
         setSelectedIndex(index);
-        onClick(evt);
+        if (onClick) {
+          onClick(evt);
+        }
       }}
-      onKeyDown={(evt) => {
-        onKeyDown(evt);
-      }}
+      onKeyDown={onKeyDown}
       tabIndex={selectedIndex === index ? '0' : '-1'}
       type="button">
       {children}
@@ -344,7 +314,59 @@ Tab.propTypes = {
   renderButton: PropTypes.func,
 };
 
-export { Tab, TabPanel };
+const TabPanel = React.forwardRef(function TabPanel(
+  { children, className: customClassName, ...rest },
+  ref
+) {
+  const prefix = usePrefix();
+
+  const { selectedIndex, baseId } = React.useContext(TabsContext);
+  const index = React.useContext(TabPanelContext);
+  const id = `${baseId}-tabpanel-${index}`;
+  const tabId = `${baseId}-tab-${index}`;
+  const className = cx(`${prefix}--tab-content`, {
+    customClassName: customClassName,
+  });
+
+  // TODO: tabindex should only be 0 if no interactive content in children
+  return (
+    <div
+      {...rest}
+      aria-labelledby={tabId}
+      id={id}
+      className={className}
+      ref={ref}
+      role="tabpanel"
+      tabIndex="0"
+      hidden={selectedIndex !== index}>
+      {children}
+    </div>
+  );
+});
+
+TabPanel.propTypes = {
+  /**
+   * Provide child elements to be rendered inside of `TabPanel`.
+   */
+  children: PropTypes.node,
+};
+
+function TabPanels({ children }) {
+  return React.Children.map(children, (child, index) => {
+    return (
+      <TabPanelContext.Provider value={index}>{child}</TabPanelContext.Provider>
+    );
+  });
+}
+
+TabPanels.propTypes = {
+  /**
+   * Provide child elements to be rendered inside of `TabPanels`.
+   */
+  children: PropTypes.node,
+};
+
+export { Tab, TabPanel, TabPanels, TabList };
 
 export default Tabs;
 
@@ -356,22 +378,6 @@ export default Tabs;
 // leftOverflowButtonProps: PropTypes.object,
 
 /**
- * Specify whether or not to use the light component variant
- */
-// light: PropTypes.bool,
-
-/**
  * Provide the props that describe the right overflow button
  */
 // rightOverflowButtonProps: PropTypes.object,
-
-/**
- * Choose whether or not to automatically scroll to newly selected tabs
- * on component rerender
- */
-// scrollIntoView: PropTypes.bool,
-
-/**
- * Provide the type of Tab
- */
-// type: PropTypes.oneOf(['default', 'container']),
