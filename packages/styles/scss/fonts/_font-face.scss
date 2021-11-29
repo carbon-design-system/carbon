@@ -89,9 +89,9 @@
     $filename: '#{$filename}-#{$unicode}';
 
     @if $hinted == true {
-      $filename: '#{config.$font-path}/#{$font}/fonts/split/#{$format}/hinted/#{$filename}';
+      @error 'Hinted fonts are currently unsupported';
     } @else if $hinted == false {
-      $filename: '#{config.$font-path}/#{$font}/fonts/split/#{$format}/unhinted/#{$filename}';
+      $filename: '#{config.$font-path}/#{$font}/fonts/unhinted/split/#{$format}/#{$filename}';
     } @else {
       $filename: '#{config.$font-path}/#{$font}/fonts/split/#{$format}/#{$filename}';
     }

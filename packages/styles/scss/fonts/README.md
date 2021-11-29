@@ -105,6 +105,7 @@ How to deal with large file sizes?
   - Inspect the text, make sure it says "network resource" for the font
 - Seems like TTF is missing for Sans Variable
 - Seems like JP is missing in latest beta
+- Are hinted fonts always `complete` instead of split?
 
 Fonts
 
