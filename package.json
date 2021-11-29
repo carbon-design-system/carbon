@@ -11,7 +11,8 @@
     "actions/*",
     "codemods",
     "config/*",
-    "packages/*"
+    "packages/*",
+    "www"
   ],
   "scripts": {
     "build": "lerna run build --stream --prefix --npm-client yarn",
@@ -20,7 +21,7 @@
     "doctoc": "doctoc --title '## Table of Contents'",
     "format": "prettier --write '**/*.{js,md,scss,ts}' '!**/{build,es,lib,storybook,ts,umd}/**'",
     "format:diff": "prettier --list-different '**/*.{js,md,scss,ts}' '!**/{build,es,lib,storybook,ts,umd}/**' '!packages/components/**'",
-    "lint": "eslint actions config codemods packages",
+    "lint": "eslint actions config codemods packages www",
     "lint:styles": "stylelint '**/*.{css,scss}' --report-needless-disables --report-invalid-scope-disables",
     "sync": "carbon-cli sync",
     "test": "cross-env BABEL_ENV=test jest",
