@@ -98,8 +98,8 @@ const TableToolbarSearch = ({
     }
   };
 
-  const internalOnFocus = (event) => handleExpand(event, true);
-  const internalOnBlur = (event) => !value && handleExpand(event, false);
+  const handleOnFocus = (event) => handleExpand(event, true);
+  const handleOnBlur = (event) => !value && handleExpand(event, false);
 
   return (
     <Search
@@ -116,9 +116,9 @@ const TableToolbarSearch = ({
       onChange={onChange}
       onClear={onClear}
       onFocus={
-        onFocus ? (event) => onFocus(event, handleExpand) : internalOnFocus
+        onFocus ? (event) => onFocus(event, handleExpand) : handleOnFocus
       }
-      onBlur={onBlur ? (event) => onBlur(event, handleExpand) : internalOnBlur}
+      onBlur={onBlur ? (event) => onBlur(event, handleExpand) : handleOnBlur}
       {...rest}
     />
   );
