@@ -199,6 +199,7 @@ export {
   unstable_Tooltip as Tooltip,
   unstable_Popover as Popover,
   unstable_PopoverContent as PopoverContent,
+  unstable_IconButton as IconButton,
 } from 'carbon-components-react';
 
 export {
