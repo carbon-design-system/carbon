@@ -11,6 +11,8 @@
 @use '../../type';
 @use '../../utilities/custom-property';
 @use '../../utilities/convert';
+@use '../../utilities/_button-reset';
+@use '../../utilities/_focus-outline';
 
 $tooltip-padding-block: custom-property.get-var(
   'tooltip-padding-block',
@@ -34,6 +36,27 @@ $tooltip-padding-inline: custom-property.get-var(
     padding: $tooltip-padding-block $tooltip-padding-inline;
 
     color: theme.$text-inverse;
+  }
+}
+
+@mixin definition-tooltip {
+  .#{$prefix}--definition-term {
+    @include button-reset.reset;
+
+    &:focus {
+      @include focus-outline.focus-outline;
+
+      border-bottom-color: theme.$border-interactive;
+      border-radius: 0;
+    }
+
+    border-bottom: 1px dotted theme.$border-strong;
+  }
+  .#{$prefix}--definition-tooltip {
+    @include type.type-style('body-long-01');
+
+    max-width: convert.rem(176px);
+    padding: convert.rem(8px) convert.rem(16px);
   }
 }
 

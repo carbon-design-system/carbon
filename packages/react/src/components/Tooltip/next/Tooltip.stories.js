@@ -74,13 +74,13 @@ export const Definition = () => {
     'Starfleet was the deep space exploratory and defense service maintained by the United Federation of Planets.';
   return (
     <div>
-      <span>
-        The first duty of every
-        <DefinitionTooltip definition={definition}>Starfleet</DefinitionTooltip>
+      <p>
+        The first duty of every{' '}
+        <DefinitionTooltip definition={definition}>Starfleet</DefinitionTooltip>{' '}
         officer is to the truth, whether it’s scientific truth, or historical
         truth, or personal truth! It is the guiding principle on which Starfleet
         is based.
-      </span>
+      </p>
     </div>
   );
 };

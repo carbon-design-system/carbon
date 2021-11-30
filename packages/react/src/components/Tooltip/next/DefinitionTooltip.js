@@ -7,12 +7,13 @@
 
 import PropTypes from 'prop-types';
 import React, { useState } from 'react';
-import './DefinitionTooltip.scss';
 import { Popover, PopoverContent } from '../../Popover';
 import { match, keys } from '../../../internal/keyboard';
+import { usePrefix } from '../../../internal/usePrefix';
 
 const DefinitionTooltip = ({ children, definition }) => {
   const [isOpen, setOpen] = useState(false);
+  const prefix = usePrefix();
 
   function handleKeyDown(event) {
     if (match(event, keys.Escape) && isOpen) {
@@ -21,12 +22,15 @@ const DefinitionTooltip = ({ children, definition }) => {
   }
 
   return (
-    <Popover as="span" open={isOpen}>
+    <Popover open={isOpen} highContrast dropShadow={false} align="bottom-left">
       <button
-        className="term-class"
+        type="button"
+        className={`${prefix}--definition-term`}
         aria-controls="definition-id"
         aria-expanded={isOpen}
         onMouseOut={() => setOpen(!isOpen)}
+        onFocus={() => setOpen(!isOpen)}
+        onBlur={() => setOpen(!isOpen)}
         onMouseOver={() => setOpen(!isOpen)}
         onKeyDown={handleKeyDown}
         onClick={() => {
@@ -34,7 +38,11 @@ const DefinitionTooltip = ({ children, definition }) => {
         }}>
         {children}
       </button>
-      <PopoverContent id="definition-id">{definition}</PopoverContent>
+      <PopoverContent
+        className={`${prefix}--definition-tooltip`}
+        id="definition-id">
+        {definition}
+      </PopoverContent>
     </Popover>
   );
 };
@@ -52,4 +60,3 @@ DefinitionTooltip.propTypes = {
 };
 
 export { DefinitionTooltip };
-
