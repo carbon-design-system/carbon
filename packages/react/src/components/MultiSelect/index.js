@@ -12,8 +12,8 @@ import MultiSelect from './MultiSelect';
 import { default as FilterableMultiSelectClassic } from './FilterableMultiSelect';
 import { default as FilterableMultiSelectNext } from './next/FilterableMultiSelect';
 
-// FilterableMultiSelectNext.displayName = 'MultiSelect.Filterable';
-// MultiSelect.Filterable = FilterableMultiSelectNext;
+FilterableMultiSelectNext.displayName = 'MultiSelect.Filterable';
+MultiSelect.Filterable = FilterableMultiSelectClassic;
 
 export const FilterableMultiSelect = FeatureFlags.enabled('enable-v11-release')
   ? FilterableMultiSelectNext
