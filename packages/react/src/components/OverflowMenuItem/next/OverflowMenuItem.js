@@ -10,7 +10,6 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import { match, keys } from '../../../internal/keyboard';
 import { warning } from '../../../internal/warning';
-import * as FeatureFlags from '@carbon/feature-flags';
 import { usePrefix } from '../../../internal/usePrefix';
 
 const OverflowMenuItem = React.forwardRef(function OverflowMenuItem(
@@ -23,9 +22,7 @@ const OverflowMenuItem = React.forwardRef(function OverflowMenuItem(
     href,
     isDelete = false,
     index,
-    itemText = FeatureFlags.enabled('enable-v11-release')
-      ? null
-      : 'Provide itemText',
+    itemText = 'Provide itemText',
     onClick = () => {},
     onKeyDown = () => {},
     requireTitle,
