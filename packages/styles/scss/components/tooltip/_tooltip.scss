@@ -43,14 +43,14 @@ $tooltip-padding-inline: custom-property.get-var(
   .#{$prefix}--definition-term {
     @include button-reset.reset;
 
-    &:focus {
-      @include focus-outline.focus-outline;
-
-      border-bottom-color: theme.$border-interactive;
-      border-radius: 0;
-    }
-
     border-bottom: 1px dotted theme.$border-strong;
+    border-radius: 0;
+  }
+  
+  .#{$prefix}--definition-term:focus {
+    @include focus-outline.focus-outline;
+
+    border-bottom-color: theme.$border-interactive;
   }
   .#{$prefix}--definition-tooltip {
     @include type.type-style('body-long-01');
