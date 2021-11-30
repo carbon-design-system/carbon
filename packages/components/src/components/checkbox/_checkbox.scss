@@ -42,6 +42,9 @@
   // to match the specs.
   .#{$prefix}--checkbox {
     @include hidden;
+    //even though its hidden, positioning is for native validation to be aligned to checkbox
+    top: 1.25rem;
+    left: 0.7rem;
   }
 
   // The label corresponds to the content inside of the `label` tag. Since we're

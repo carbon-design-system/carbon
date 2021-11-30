@@ -91,6 +91,8 @@
     "webpack": "^4.41.5"
   },
   "sideEffects": [
+    "es/index.js",
+    "lib/index.js",
     "es/feature-flags.js",
     "lib/feature-flags.js",
     "es/prefix.js",

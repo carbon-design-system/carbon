@@ -244,3 +244,4 @@ export {
 export { Tooltip as unstable_Tooltip } from './components/Tooltip/next';
 export { ContainedTab as unstable_ContainedTab } from './components/Tab';
 export { ContainedTabs as unstable_ContainedTabs } from './components/Tabs';
+export { IconButton as unstable_IconButton } from './components/IconButton';
