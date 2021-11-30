@@ -31,27 +31,16 @@ const Tab = React.forwardRef(function Tab(
 ) {
   const prefix = usePrefix();
 
-  const classes = classNames(
-    className,
-    // TODO: remove scrollable in next major release
-    // `${prefix}--tabs__nav-item`,
-    `${prefix}--tabs__nav-item`,
-    {
-      // [`${prefix}--tabs__nav-item--disabled`]: disabled,
-      // [`${prefix}--tabs__nav-item--selected`]: selected,
-      // TODO: remove scrollable in next major release
-      [`${prefix}--tabs__nav-item--disabled`]: disabled,
-      [`${prefix}--tabs__nav-item--selected`]: selected,
-    }
-  );
+  const classes = classNames(className, `${prefix}--tabs__nav-item`, {
+    [`${prefix}--tabs__nav-item--disabled`]: disabled,
+    [`${prefix}--tabs__nav-item--selected`]: selected,
+  });
 
   const buttonProps = {
     ['aria-selected']: selected,
     ['aria-disabled']: disabled,
     ['aria-controls']: id && `${id}__panel`,
     id,
-    // TODO: remove scrollable in next major release
-    // className:  `${prefix}--tabs__nav-link`,
     className: `${prefix}--tabs__nav-link`,
     tabIndex: !disabled ? tabIndex : -1,
     ref: ref,
