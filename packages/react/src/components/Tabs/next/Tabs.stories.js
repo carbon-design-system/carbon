@@ -6,13 +6,13 @@
  */
 
 import React from 'react';
-import {
-  Tab,
-  Button,
-  Tabs,
-  unstable_ContainedTab as ContainedTab,
-  unstable_ContainedTabs as ContainedTabs,
-} from 'carbon-components-react';
+import { Button } from 'carbon-components-react';
+
+import ContainedTab from '../../Tab/next/ContainedTab';
+import ContainedTabs from './ContainedTabs';
+import TabsSkeleton from './Tabs.Skeleton';
+import Tab from '../../Tab/next/Tab';
+import Tabs from './Tabs';
 
 import { unstable_FeatureFlags as FeatureFlags } from 'carbon-components-react';
 
@@ -80,3 +80,11 @@ export const Contained = () => (
     </ContainedTab>
   </ContainedTabs>
 );
+
+export const Skeleton = () => {
+  return (
+    <div style={{ maxWidth: '100%' }}>
+      <TabsSkeleton />
+    </div>
+  );
+};
