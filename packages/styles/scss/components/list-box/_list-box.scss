@@ -556,6 +556,10 @@ $list-box-menu-width: rem(300px);
 
     &:active {
       background-color: $layer-selected;
+
+      &:hover {
+        background-color: $layer-selected-hover;
+      }
     }
   }
 
