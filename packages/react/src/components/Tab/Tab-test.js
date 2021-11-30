@@ -37,11 +37,9 @@ describe('Tab', () => {
     });
 
     it('renders <button> with expected className', () => {
-      expect(
-        // TODO: uncomment and replace assertion in next major version
-        // wrapper.find('button').hasClass(`${prefix}--tabs__nav-link`)
-        wrapper.find('button').hasClass(`${prefix}--tabs__nav-link`)
-      ).toBe(true);
+      expect(wrapper.find('button').hasClass(`${prefix}--tabs__nav-link`)).toBe(
+        true
+      );
     });
 
     it('renders <li> with [role="presentation"]', () => {
