@@ -556,10 +556,6 @@ $list-box-menu-width: rem(300px);
 
     &:active {
       background-color: $layer-selected;
-
-      &:hover {
-        background-color: $layer-selected-hover;
-      }
     }
   }
 
@@ -747,8 +743,8 @@ $list-box-menu-width: rem(300px);
 
   .#{$prefix}--list-box__menu-item--active:hover,
   .#{$prefix}--list-box__menu-item--active.#{$prefix}--list-box__menu-item--highlighted {
-    border-bottom-color: $layer-selected-hover-01;
-    background-color: $layer-selected-hover-01;
+    border-bottom-color: $layer-selected-hover;
+    background-color: $layer-selected-hover;
   }
 
   .#{$prefix}--list-box__menu-item--active
