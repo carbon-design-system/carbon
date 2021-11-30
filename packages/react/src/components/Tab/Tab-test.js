@@ -37,9 +37,9 @@ describe('Tab', () => {
     });
 
     it('renders <button> with expected className', () => {
-      expect(wrapper.find('button').hasClass(`${prefix}--tabs__nav-link`)).toBe(
-        true
-      );
+      expect(
+        wrapper.find('button').hasClass(`${prefix}--tabs--scrollable__nav-link`)
+      ).toBe(true);
     });
 
     it('renders <li> with [role="presentation"]', () => {
