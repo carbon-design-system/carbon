@@ -58,7 +58,6 @@ const FilterableMultiSelect = React.forwardRef(function FilterableMultiSelect(
     useTitleInItem,
     warn,
     warnText,
-    ...rest
   },
   ref
 ) {
@@ -126,10 +125,6 @@ const FilterableMultiSelect = React.forwardRef(function FilterableMultiSelect(
     }
   }
 
-  function handleOnInputKeyDown(event) {
-    event.stopPropagation();
-  }
-
   function handleOnInputValueChange(inputValue, { type }) {
     if (type !== Downshift.stateChangeTypes.changeInput) {
       return;
@@ -167,7 +162,7 @@ const FilterableMultiSelect = React.forwardRef(function FilterableMultiSelect(
   let enabled;
 
   if (context.enabled) {
-    enabled = scope.enabled('enable-v11-release');
+    enabled = context.enabled('enable-v11-release');
   }
 
   const wrapperClasses = cx(
@@ -332,6 +327,7 @@ const FilterableMultiSelect = React.forwardRef(function FilterableMultiSelect(
                   className={className}
                   disabled={disabled}
                   light={light}
+                  ref={ref}
                   invalid={invalid}
                   invalidText={invalidText}
                   warn={warn}
