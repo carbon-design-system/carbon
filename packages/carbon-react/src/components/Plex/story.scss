@@ -7,14 +7,20 @@
 
 @use '../../../scss/type';
 @use '../../../scss/fonts/sans-arabic';
+@use '../../../scss/fonts/sans-devanagari';
 
 @include sans-arabic.default();
+@include sans-devanagari.default();
 
 .text-mono {
   font-family: type.font-family('mono');
 }
 
 .text-sans-arabic {
+  font-family: type.font-family('sans-arabic');
+}
+
+.text-sans-devanagari {
   font-family: type.font-family('sans-arabic');
 }
 

@@ -521,6 +521,10 @@ async function build() {
           },
           {
             type: 'file',
+            filepath: '_sans-devanagari.scss',
+          },
+          {
+            type: 'file',
             filepath: '_sans.scss',
           },
           {

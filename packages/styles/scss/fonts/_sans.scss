@@ -5,6 +5,7 @@
 // LICENSE file in the root directory of this source tree.
 //
 
+@use '../config';
 @use './src';
 @use './unicode';
 
@@ -18,6 +19,7 @@ $formats: (woff2, woff);
   @each $style in $styles {
     @each $unicode-range in $unicode-ranges {
       @font-face {
+        font-display: config.$font-display;
         font-family: $font-family;
         font-style: $style;
         font-weight: 100;
@@ -32,6 +34,7 @@ $formats: (woff2, woff);
   @each $style in $styles {
     @each $unicode-range in $unicode-ranges {
       @font-face {
+        font-display: config.$font-display;
         font-family: $font-family;
         font-style: $style;
         font-weight: 200;
@@ -46,6 +49,7 @@ $formats: (woff2, woff);
   @each $style in $styles {
     @each $unicode-range in $unicode-ranges {
       @font-face {
+        font-display: config.$font-display;
         font-family: $font-family;
         font-style: $style;
         font-weight: 300;
@@ -60,6 +64,7 @@ $formats: (woff2, woff);
   @each $style in $styles {
     @each $unicode-range in $unicode-ranges {
       @font-face {
+        font-display: config.$font-display;
         font-family: $font-family;
         font-style: $style;
         font-weight: 400;
@@ -74,6 +79,7 @@ $formats: (woff2, woff);
   @each $style in $styles {
     @each $unicode-range in $unicode-ranges {
       @font-face {
+        font-display: config.$font-display;
         font-family: $font-family;
         font-style: $style;
         font-weight: 450;
@@ -88,6 +94,7 @@ $formats: (woff2, woff);
   @each $style in $styles {
     @each $unicode-range in $unicode-ranges {
       @font-face {
+        font-display: config.$font-display;
         font-family: $font-family;
         font-style: $style;
         font-weight: 500;
@@ -102,6 +109,7 @@ $formats: (woff2, woff);
   @each $style in $styles {
     @each $unicode-range in $unicode-ranges {
       @font-face {
+        font-display: config.$font-display;
         font-family: $font-family;
         font-style: $style;
         font-weight: 600;
@@ -116,6 +124,7 @@ $formats: (woff2, woff);
   @each $style in $styles {
     @each $unicode-range in $unicode-ranges {
       @font-face {
+        font-display: config.$font-display;
         font-family: $font-family;
         font-style: $style;
         font-weight: 700;

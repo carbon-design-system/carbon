@@ -129,3 +129,6 @@ You will need to do the following:
         whether it should be included automatically
   - [ ] Update the block at the end of the file to call the default mixin of the
         file if the font is enabled
+- [ ] Update `packages/carbon-react/tasks/build-styles.js` to include the font
+      file as a re-export
+- [ ] Add a story for the font in `Plex.stories.js`
