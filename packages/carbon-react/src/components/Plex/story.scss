@@ -1,0 +1,27 @@
+//
+// Copyright IBM Corp. 2018, 2018
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+@use '../../../scss/type';
+@use '../../../scss/fonts/sans-arabic';
+
+@include sans-arabic.default();
+
+.text-mono {
+  font-family: type.font-family('mono');
+}
+
+.text-sans-arabic {
+  font-family: type.font-family('sans-arabic');
+}
+
+.text-sans {
+  font-family: type.font-family('sans');
+}
+
+.text-serif {
+  font-family: type.font-family('serif');
+}
