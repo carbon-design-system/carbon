@@ -11,6 +11,7 @@
 @use './mono';
 @use './sans-arabic';
 @use './sans-devanagari';
+@use './sans-hebrew';
 @use './sans';
 @use './serif';
 
@@ -18,6 +19,7 @@ $-fonts: (
   IBM-Plex-Mono: true,
   IBM-Plex-Sans-Arabic: false,
   IBM-Plex-Sans-Devanagari: false,
+  IBM-Plex-Sans-Hebrew: false,
   IBM-Plex-Sans: true,
   IBM-Plex-Serif: true,
 );
@@ -45,6 +47,10 @@ $fonts: map.merge($-fonts, $fonts);
 
   @if enabled(sans-devanagari.$name) {
     @include sans-devanagari.default();
+  }
+
+  @if enabled(sans-hebrew.$name) {
+    @include sans-hebrew.default();
   }
 
   @if enabled(sans.$name) {

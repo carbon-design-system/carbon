@@ -14,7 +14,14 @@ const css = require('css');
 
 const { render } = SassRenderer.create(__dirname);
 
-const fonts = ['mono', 'sans-arabic', 'sans', 'serif'];
+const fonts = [
+  'mono',
+  'sans-arabic',
+  'sans-devanagari',
+  'sans-hebrew',
+  'sans',
+  'serif',
+];
 const weights = [
   'thin',
   'extralight',

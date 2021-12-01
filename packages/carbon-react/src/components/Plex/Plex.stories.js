@@ -57,6 +57,17 @@ export const IBMPlexSansDevanagari = (args) => {
   );
 };
 
+export const IBMPlexSansHebrew = (args) => {
+  return (
+    <p dir="auto" style={args} className="text-sans-hebrew">
+      גם החלה ואלקטרוניקה שער, כתב החול משפטית אדריכלות אם. אנא אודות חרטומים
+      דת, אחר תחבורה מדריכים דת. ראשי ומהימנה לרפובליקה כדי גם, של בקר מתוך
+      ביוני, ויקימדיה בהיסטוריה אם מלא. הבהרה הספרות האטמוספירה או אחר, את ביוני
+      תאולוגיה אנא, סדר ב לתרום בחירות בלשנות.
+    </p>
+  );
+};
+
 export const IBMPlexSans = (args) => {
   return (
     <p dir="auto" style={args} className="text-sans">

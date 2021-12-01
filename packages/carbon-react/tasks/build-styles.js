@@ -525,6 +525,10 @@ async function build() {
           },
           {
             type: 'file',
+            filepath: '_sans-hebrew.scss',
+          },
+          {
+            type: 'file',
             filepath: '_sans.scss',
           },
           {

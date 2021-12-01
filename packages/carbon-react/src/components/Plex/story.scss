@@ -8,9 +8,11 @@
 @use '../../../scss/type';
 @use '../../../scss/fonts/sans-arabic';
 @use '../../../scss/fonts/sans-devanagari';
+@use '../../../scss/fonts/sans-hebrew';
 
 @include sans-arabic.default();
 @include sans-devanagari.default();
+@include sans-hebrew.default();
 
 .text-mono {
   font-family: type.font-family('mono');
@@ -21,7 +23,11 @@
 }
 
 .text-sans-devanagari {
-  font-family: type.font-family('sans-arabic');
+  font-family: type.font-family('sans-devanagari');
+}
+
+.text-sans-hebrew {
+  font-family: type.font-family('sans-hebrew');
 }
 
 .text-sans {
