@@ -105,7 +105,7 @@
     "browserslist-config-carbon": "^10.6.1",
     "carbon-components": "^10.48.0",
     "carbon-icons": "^7.0.5",
-    "chalk": "^4.1.1",
+    "chalk": "^5.0.0",
     "cli-table": "^0.3.0",
     "core-js": "^3.16.0",
     "cross-env": "^5.2.0",
