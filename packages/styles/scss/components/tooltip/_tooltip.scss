@@ -12,6 +12,16 @@
 @use '../../utilities/custom-property';
 @use '../../utilities/convert';
 
+$tooltip-padding-block: custom-property.get-var(
+  'tooltip-padding-block',
+  spacing.$spacing-05
+);
+
+$tooltip-padding-inline: custom-property.get-var(
+  'tooltip-padding-inline',
+  spacing.$spacing-05
+);
+
 @mixin tooltip {
   .#{$prefix}--tooltip {
     @include custom-property.declaration('popover-offset', 12px);
@@ -21,7 +31,7 @@
     @include type.type-style('body-long-01');
 
     max-width: convert.rem(288px);
-    padding: spacing.$spacing-05;
+    padding: $tooltip-padding-block $tooltip-padding-inline;
 
     color: theme.$text-inverse;
   }
@@ -29,6 +39,22 @@
 
 @mixin icon-tooltip {
   .#{$prefix}--icon-tooltip {
-    padding: 3px spacing.$spacing-05;
+    @include custom-property.declaration(
+      'tooltip-padding-block',
+      convert.rem(2px)
+    );
+    @include custom-property.declaration(
+      'popover-caret-width',
+      convert.rem(8px)
+    );
+    @include custom-property.declaration(
+      'popover-caret-height',
+      convert.rem(4px)
+    );
+    @include custom-property.declaration('popover-offset', convert.rem(8px));
+  }
+
+  .#{$prefix}--icon-tooltip .#{$prefix}--tooltip-content {
+    @include type.type-style('body-short-01');
   }
 }

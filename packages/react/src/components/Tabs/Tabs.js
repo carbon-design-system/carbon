@@ -153,6 +153,15 @@ export default class Tabs extends React.Component {
 
   _handleWindowResize = this.handleScroll;
 
+  /**
+   * The debounced version of the `scroll` event handler.
+   * @type {Function}
+   * @private
+   */
+  _debouncedHandleScroll = null;
+
+  _handleScroll = this.handleScroll;
+
   componentDidMount() {
     if (!this._debouncedHandleWindowResize) {
       this._debouncedHandleWindowResize = debounce(
@@ -163,6 +172,10 @@ export default class Tabs extends React.Component {
 
     this._handleWindowResize();
     window.addEventListener('resize', this._debouncedHandleWindowResize);
+
+    if (!this._debouncedHandleScroll) {
+      this._debouncedHandleScroll = debounce(this._handleScroll, 125);
+    }
 
     // scroll selected tab into view on mount
     const {
@@ -516,7 +529,7 @@ export default class Tabs extends React.Component {
             tabIndex={-1}
             className={classes.tablist}
             ref={this.tablist}
-            onScroll={this.handleScroll}>
+            onScroll={this._debouncedHandleScroll}>
             {tabsWithProps}
           </ul>
           {!rightOverflowNavButtonHidden && (
