@@ -68,6 +68,22 @@ export const IBMPlexSansHebrew = (args) => {
   );
 };
 
+export const IBMPlexSansThaiLooped = (args) => {
+  return (
+    <p dir="auto" style={args} className="text-sans-thai-looped">
+      ลักษณะของตัวพิมพ์แต่ละตัวสามารถแสดงออกได้ถึงระดับเสียง
+    </p>
+  );
+};
+
+export const IBMPlexSansThai = (args) => {
+  return (
+    <p dir="auto" style={args} className="text-sans-thai">
+      ลักษณะของตัวพิมพ์แต่ละตัวสามารถแสดงออกได้ถึงระดับเสียง
+    </p>
+  );
+};
+
 export const IBMPlexSans = (args) => {
   return (
     <p dir="auto" style={args} className="text-sans">

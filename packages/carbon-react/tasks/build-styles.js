@@ -529,6 +529,14 @@ async function build() {
           },
           {
             type: 'file',
+            filepath: '_sans-thai-looped.scss',
+          },
+          {
+            type: 'file',
+            filepath: '_sans-thai.scss',
+          },
+          {
+            type: 'file',
             filepath: '_sans.scss',
           },
           {

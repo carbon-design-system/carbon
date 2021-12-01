@@ -19,6 +19,8 @@ const fonts = [
   'sans-arabic',
   'sans-devanagari',
   'sans-hebrew',
+  'sans-thai-looped',
+  'sans-thai',
   'sans',
   'serif',
 ];

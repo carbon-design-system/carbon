@@ -9,10 +9,14 @@
 @use '../../../scss/fonts/sans-arabic';
 @use '../../../scss/fonts/sans-devanagari';
 @use '../../../scss/fonts/sans-hebrew';
+@use '../../../scss/fonts/sans-thai-looped';
+@use '../../../scss/fonts/sans-thai';
 
 @include sans-arabic.default();
 @include sans-devanagari.default();
 @include sans-hebrew.default();
+@include sans-thai-looped.default();
+@include sans-thai.default();
 
 .text-mono {
   font-family: type.font-family('mono');
@@ -28,6 +32,14 @@
 
 .text-sans-hebrew {
   font-family: type.font-family('sans-hebrew');
+}
+
+.text-sans-thai-looped {
+  font-family: type.font-family('sans-thai-looped');
+}
+
+.text-sans-thai {
+  font-family: type.font-family('sans-thai');
 }
 
 .text-sans {

@@ -12,6 +12,8 @@
 @use './sans-arabic';
 @use './sans-devanagari';
 @use './sans-hebrew';
+@use './sans-thai-looped';
+@use './sans-thai';
 @use './sans';
 @use './serif';
 
@@ -20,6 +22,8 @@ $-fonts: (
   IBM-Plex-Sans-Arabic: false,
   IBM-Plex-Sans-Devanagari: false,
   IBM-Plex-Sans-Hebrew: false,
+  IBM-Plex-Sans-Thai-Looped: false,
+  IBM-Plex-Sans-Thai: false,
   IBM-Plex-Sans: true,
   IBM-Plex-Serif: true,
 );
@@ -51,6 +55,14 @@ $fonts: map.merge($-fonts, $fonts);
 
   @if enabled(sans-hebrew.$name) {
     @include sans-hebrew.default();
+  }
+
+  @if enabled(sans-thai-looped.$name) {
+    @include sans-thai-looped.default();
+  }
+
+  @if enabled(sans-thai.$name) {
+    @include sans-thai.default();
   }
 
   @if enabled(sans.$name) {
