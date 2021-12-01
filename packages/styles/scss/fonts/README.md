@@ -4,18 +4,18 @@ The `scss/fonts` folder provides a way to incorporate IBM Plex into your
 project. Below is a table of what fonts are currently supported from IBM Plex in
 Carbon:
 
-| Font                      | Available | Entrypoint         |
-| ------------------------- | --------- | ------------------ |
-| IBM Plex Mono             | ✅        | `scss/fonts/mono`  |
-| IBM Plex Sans Arabic      |           |                    |
-| IBM Plex Sans Devanagari  |           |                    |
-| IBM Plex Sans Hebrew      |           |                    |
-| IBM Plex Sans KR          |           |                    |
-| IBM Plex Sans JP          |           |                    |
-| IBM Plex Sans Thai        |           |                    |
-| IBM Plex Sans Thai Looped |           |                    |
-| IBM Plex Sans             | ✅        | `scss/fonts/sans`  |
-| IBM Plex Serif            | ✅        | `scss/fonts/serif` |
+| Font                      | Available | Entrypoint                    |
+| ------------------------- | --------- | ----------------------------- |
+| IBM Plex Mono             | ✅        | `scss/fonts/mono`             |
+| IBM Plex Sans Arabic      | ✅        | `scss/fonts/sans-arabic`      |
+| IBM Plex Sans Devanagari  | ✅        | `scss/fonts/sans-devanagari`  |
+| IBM Plex Sans Hebrew      | ✅        | `scss/fonts/sans-hebrew`      |
+| IBM Plex Sans KR          |           |                               |
+| IBM Plex Sans JP          |           |                               |
+| IBM Plex Sans Thai Looped | ✅        | `scss/fonts/sans-thai-looped` |
+| IBM Plex Sans Thai        | ✅        | `scss/fonts/sans-thai`        |
+| IBM Plex Sans             | ✅        | `scss/fonts/sans`             |
+| IBM Plex Serif            | ✅        | `scss/fonts/serif`            |
 
 By default, Carbon provides the default font weights for: IBM Plex Mono, IBM
 Plex Sans, and IBM Plex Serif. To bring in additional fonts, you can include the
