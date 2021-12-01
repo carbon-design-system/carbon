@@ -1,0 +1,51 @@
+//
+// Copyright IBM Corp. 2018, 2018
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+@use 'sass:meta';
+@use 'sass:map';
+@use '../config';
+@use './mono';
+@use './sans-arabic';
+@use './sans';
+@use './serif';
+
+$-fonts: (
+  IBM-Plex-Mono: true,
+  IBM-Plex-Sans-Arabic: false,
+  IBM-Plex-Sans: true,
+  IBM-Plex-Serif: true,
+);
+$fonts: () !default;
+$fonts: map.merge($-fonts, $fonts);
+
+/// Determine if the given font has been enabled or not
+/// @param String $name
+/// @returns Boolean
+@function enabled($name) {
+  @if map.has-key($fonts, $name) {
+    @return map.get($fonts, $name);
+  }
+  @return false;
+}
+
+@if config.$css--font-face == true {
+  @if enabled(mono.$name) {
+    @include mono.default();
+  }
+
+  @if enabled(sans-arabic.$name) {
+    @include sans-arabic.default();
+  }
+
+  @if enabled(sans.$name) {
+    @include sans.default();
+  }
+
+  @if enabled(serif.$name) {
+    @include serif.default();
+  }
+}
