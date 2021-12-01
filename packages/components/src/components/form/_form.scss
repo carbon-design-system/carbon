@@ -47,7 +47,6 @@
 
     display: inline-block;
     margin-bottom: $carbon--spacing-03;
-
     color: $text-02;
     font-weight: $input-label-weight;
     line-height: 1rem;
@@ -55,7 +54,7 @@
   }
 
   @if feature-flag-enabled('enable-v11-release') {
-    .#{$prefix}--label {
+    .#{$prefix}--label--no-margin {
       margin-bottom: 0;
     }
   }
