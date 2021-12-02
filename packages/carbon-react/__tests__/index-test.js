@@ -74,6 +74,7 @@ Array [
   "HeaderNavigation",
   "HeaderPanel",
   "HeaderSideNavItems",
+  "IconButton",
   "IconSkeleton",
   "InlineLoading",
   "InlineNotification",
