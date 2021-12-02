@@ -400,7 +400,10 @@ export const Playground = () => (
           <TableHead>
             <TableRow>
               {headers.map((header, i) => (
-                <TableHeader key={i} {...getHeaderProps({ header })}>
+                <TableHeader
+                  headerId={header.key}
+                  key={i}
+                  {...getHeaderProps({ header })}>
                   {header.header}
                 </TableHeader>
               ))}
