@@ -88,7 +88,7 @@ export const Usage = () => (
             <TableRow>
               {headers.map((header) => (
                 <TableHeader
-                  headerId={header.key}
+                  id={header.key}
                   key={header.key}
                   {...getHeaderProps({ header })}
                   isSortable>
@@ -140,7 +140,7 @@ export const BasicTable = () => {
       <TableHead>
         <TableRow>
           {headers.map((header) => (
-            <TableHeader headerId={header.key} key={header}>
+            <TableHeader id={header.key} key={header}>
               {header}
             </TableHeader>
           ))}
@@ -401,7 +401,7 @@ export const Playground = () => (
             <TableRow>
               {headers.map((header, i) => (
                 <TableHeader
-                  headerId={header.key}
+                  id={header.key}
                   key={i}
                   {...getHeaderProps({ header })}>
                   {header.header}

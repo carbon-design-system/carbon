@@ -62,7 +62,7 @@ const TableHeader = React.forwardRef(function TableHeader(
     scope,
     sortDirection,
     translateWithId: t,
-    headerId,
+    id,
     ...rest
   },
   ref
@@ -73,7 +73,7 @@ const TableHeader = React.forwardRef(function TableHeader(
     return (
       <th
         {...rest}
-        id={headerId}
+        id={id}
         className={headerClassName}
         scope={scope}
         colSpan={colSpan}
@@ -102,7 +102,7 @@ const TableHeader = React.forwardRef(function TableHeader(
 
   return (
     <th
-      id={headerId}
+      id={id}
       aria-sort={ariaSort}
       className={headerClassName}
       colSpan={colSpan}
@@ -147,7 +147,7 @@ TableHeader.propTypes = {
   /**
    * Supply an id to the th element.
    */
-  headerId: PropTypes.string,
+  id: PropTypes.string,
 
   /**
    * Specify whether this header is the header by which a table is being sorted
