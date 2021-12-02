@@ -61,6 +61,15 @@ $popover-text-color: custom-property.get-var(
 // stylelint-disable-next-line length-zero-no-unit
 $popover-offset: custom-property.get-var('popover-offset', 0rem);
 
+// Customize the dimensions of the caret by specifying its width or height.
+// These values will be flipped in left or right directions to have the
+// correct dimensions
+$popover-caret-width: custom-property.get-var('popover-caret-width', rem(12px));
+$popover-caret-height: custom-property.get-var(
+  'popover-caret-height',
+  rem(6px)
+);
+
 @mixin popover {
   // Container
   .#{$prefix}--popover-container {
@@ -202,8 +211,8 @@ $popover-offset: custom-property.get-var('popover-offset', 0rem);
   .#{$prefix}--popover--bottom-right .#{$prefix}--popover-caret {
     bottom: 0;
     left: 50%;
-    width: rem(12px);
-    height: rem(6px);
+    width: $popover-caret-width;
+    height: $popover-caret-height;
     clip-path: polygon(0% 100%, 50% 0%, 100% 100%);
     transform: translate(-50%, $popover-offset);
   }
@@ -248,8 +257,8 @@ $popover-offset: custom-property.get-var('popover-offset', 0rem);
   .#{$prefix}--popover--top-right .#{$prefix}--popover-caret {
     top: 0;
     left: 50%;
-    width: rem(12px);
-    height: rem(6px);
+    width: $popover-caret-width;
+    height: $popover-caret-height;
     clip-path: polygon(0% 0%, 50% 100%, 100% 0%);
     transform: translate(-50%, calc(-1 * $popover-offset));
   }
@@ -296,8 +305,8 @@ $popover-offset: custom-property.get-var('popover-offset', 0rem);
   .#{$prefix}--popover--right-bottom .#{$prefix}--popover-caret {
     top: 50%;
     left: 100%;
-    width: rem(6px);
-    height: rem(12px);
+    width: $popover-caret-height;
+    height: $popover-caret-width;
     clip-path: polygon(0% 50%, 100% 0%, 100% 100%);
     transform: translate(calc($popover-offset - 100%), -50%);
   }
@@ -348,8 +357,8 @@ $popover-offset: custom-property.get-var('popover-offset', 0rem);
   .#{$prefix}--popover--left-bottom .#{$prefix}--popover-caret {
     top: 50%;
     right: 100%;
-    width: rem(6px);
-    height: rem(12px);
+    width: $popover-caret-height;
+    height: $popover-caret-width;
     clip-path: polygon(0% 0%, 100% 50%, 0% 100%);
     transform: translate(calc(-1 * $popover-offset + 100%), -50%);
   }
