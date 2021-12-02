@@ -88,6 +88,7 @@ export const Usage = () => (
             <TableRow>
               {headers.map((header) => (
                 <TableHeader
+                  headerId={header.key}
                   key={header.key}
                   {...getHeaderProps({ header })}
                   isSortable>
@@ -139,7 +140,9 @@ export const BasicTable = () => {
       <TableHead>
         <TableRow>
           {headers.map((header) => (
-            <TableHeader key={header}>{header}</TableHeader>
+            <TableHeader headerId={header.key} key={header}>
+              {header}
+            </TableHeader>
           ))}
         </TableRow>
       </TableHead>
