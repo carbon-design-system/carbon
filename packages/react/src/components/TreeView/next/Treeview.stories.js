@@ -8,7 +8,7 @@
 import React, { useState } from 'react';
 import { Document16, Folder16 } from '@carbon/icons-react';
 import { InlineNotification } from '../../Notification';
-import { TreeView, TreeNode } from '../';
+import { default as TreeView, TreeNode } from '../';
 import './story.scss';
 
 const props = () => ({

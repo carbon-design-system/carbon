@@ -7,11 +7,8 @@
 
 import React from 'react';
 import { action } from '@storybook/addon-actions';
-import {
-  default as DatePicker,
-  DatePickerInput,
-  DatePickerSkeleton,
-} from '../';
+import { default as DatePicker, DatePickerSkeleton } from '../';
+import DatePickerInput from '../../DatePickerInput';
 import { Layer } from '../../Layer';
 
 // const patterns = {

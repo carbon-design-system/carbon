@@ -6,8 +6,8 @@
  */
 
 import React from 'react';
-import { FluidForm } from '../../FluidForm';
-import { TextInput, TextInputSkeleton } from '../../TextInput';
+import FluidForm from '../../FluidForm';
+import { default as TextInput, TextInputSkeleton } from '../../TextInput';
 import { Layer } from '../../Layer';
 import mdx from './TextInput.mdx';
 

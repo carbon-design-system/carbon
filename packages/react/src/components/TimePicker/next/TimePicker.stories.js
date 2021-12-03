@@ -6,8 +6,9 @@
  */
 
 import React from 'react';
-import { SelectItem } from '../../SelectItem';
-import { TimePicker, TimePickerSelect } from '../';
+import SelectItem from '../../SelectItem';
+import TimePicker from '../';
+import TimePickerSelect from '../../TimePickerSelect';
 import { Layer } from '../../Layer';
 
 // const props = {

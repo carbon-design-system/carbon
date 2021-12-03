@@ -6,8 +6,8 @@
  */
 
 import React from 'react';
-import { SkeletonText } from '../../SkeletonText';
-import { SkeletonPlaceholder } from '../../SkeletonPlaceholder';
+import SkeletonText from '../../SkeletonText';
+import SkeletonPlaceholder from '../../SkeletonPlaceholder';
 import { withKnobs, select, boolean, number } from '@storybook/addon-knobs';
 
 const classNames = {

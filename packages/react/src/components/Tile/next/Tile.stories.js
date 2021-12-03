@@ -6,18 +6,18 @@
  */
 
 import React from 'react';
-import { Link } from '../../Link';
-import { TextInput } from '../../TextInput';
+import Link from '../../Link';
+import TextInput from '../../TextInput';
+import RadioTile from '../../RadioTile';
 import {
   ClickableTile,
   ExpandableTile,
-  RadioTile,
   SelectableTile,
   Tile,
-  TileGroup,
   TileAboveTheFoldContent,
   TileBelowTheFoldContent,
 } from '../';
+import TileGroup from '../../TileGroup';
 import { Layer } from '../../Layer';
 import './tile-story.scss';
 

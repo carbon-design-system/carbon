@@ -10,7 +10,7 @@
 import React from 'react';
 import { settings } from 'carbon-components';
 import {
-  FileUploader,
+  default as FileUploader,
   FileUploaderButton,
   FileUploaderDropContainer,
   FileUploaderItem,

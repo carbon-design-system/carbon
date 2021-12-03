@@ -9,7 +9,7 @@ import React, { useState } from 'react';
 // import { action } from '@storybook/addon-actions';
 
 // import { withKnobs, boolean, number, text } from '@storybook/addon-knobs';
-import { Slider, SliderSkeleton } from '../../Slider';
+import { default as Slider, SliderSkeleton } from '../../Slider';
 // import { sliderValuePropSync } from '../../../../react/src/internal/FeatureFlags';
 import { Layer } from '../../Layer';
 import mdx from './Slider.mdx';

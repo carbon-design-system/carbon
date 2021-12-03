@@ -6,7 +6,9 @@
  */
 
 import React from 'react';
-import { Select, SelectItem, SelectItemGroup, SelectSkeleton } from '../';
+import { default as Select, SelectSkeleton } from '../';
+import SelectItem from '../../SelectItem';
+import SelectItemGroup from '../../SelectItemGroup';
 import { Layer } from '../../Layer';
 
 export default {

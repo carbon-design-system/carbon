@@ -5,7 +5,8 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { RadioButton, RadioButtonGroup } from '../';
+import RadioButton from '../';
+import RadioButtonGroup from '../../RadioButtonGroup';
 import React from 'react';
 
 export default { title: 'Components/RadioButton' };
