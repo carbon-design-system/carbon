@@ -180,7 +180,6 @@
       display: flex;
       padding: 0;
       cursor: pointer;
-      align-items: center;
       transition: background-color $duration-fast-01
         motion(standard, productive);
     }
@@ -240,9 +239,9 @@
       height: rem(48px);
       padding: $spacing-03 $spacing-05;
       border-bottom: 0;
-      text-align: left;
       // height - vertical padding
       line-height: calc(#{rem(48px)} - (#{$spacing-03} * 2));
+      text-align: left;
     }
 
     //-----------------------------
@@ -252,29 +251,12 @@
       background-color: $layer-selected-hover;
     }
 
-    //---------------------------------------------
-    // Item Disabled
-    //---------------------------------------------
-    .#{$prefix}--tabs__nav-item--disabled,
-    .#{$prefix}--tabs__nav-item--disabled:hover {
-      background-color: transparent;
-      cursor: not-allowed;
-      outline: none;
-    }
-
-    &.#{$prefix}--tabs--contained
-      .#{$prefix}--tabs__nav-item.#{$prefix}--tabs__nav-item--disabled,
-    &.#{$prefix}--tabs--contained
-      .#{$prefix}--tabs__nav-item.#{$prefix}--tabs__nav-item--disabled:hover {
-      background-color: button.$button-disabled;
-    }
-
     //-----------------------------
     // Item Selected
     //-----------------------------
     .#{$prefix}--tabs__nav-item--selected {
-      transition: color $duration-fast-01 motion(standard, productive);
       border-bottom: 2px solid $border-interactive;
+      transition: color $duration-fast-01 motion(standard, productive);
     }
 
     &.#{$prefix}--tabs--contained
@@ -302,9 +284,9 @@
 
     &.#{$prefix}--tabs--contained .#{$prefix}--tabs__nav-item--selected,
     &.#{$prefix}--tabs--contained .#{$prefix}--tabs__nav-item--selected:hover {
+      background-color: $layer;
       // height - vertical padding
       line-height: calc(#{rem(48px)} - (#{$spacing-03} * 2));
-      background-color: $layer;
 
       .#{$prefix}--tabs__nav-link:focus,
       .#{$prefix}--tabs__nav-link:active {
@@ -334,18 +316,27 @@
     // }
 
     //-----------------------------
-    //  Link Disabled
+    //  Item Disabled
     //-----------------------------
+
     .#{$prefix}--tabs__nav-item--disabled {
       border-bottom: $tab-underline-disabled;
+      background-color: transparent;
       color: $tab-text-disabled;
+      outline: none;
     }
 
     .#{$prefix}--tabs__nav-item--disabled:hover {
       border-bottom: $tab-underline-disabled;
       color: $tab-text-disabled;
-      pointer-events: none;
       cursor: not-allowed;
+    }
+
+    &.#{$prefix}--tabs--contained
+      .#{$prefix}--tabs__nav-item.#{$prefix}--tabs__nav-item--disabled,
+    &.#{$prefix}--tabs--contained
+      .#{$prefix}--tabs__nav-item.#{$prefix}--tabs__nav-item--disabled:hover {
+      background-color: button.$button-disabled;
     }
 
     .#{$prefix}--tabs__nav-item--disabled:focus,
@@ -428,7 +419,6 @@
     @include high-contrast-mode('focus');
   }
 
-  // stylelint-disable-next-line no-duplicate-selectors
   .#{$prefix}--tabs
     .#{$prefix}--tabs__nav-item--disabled
     .#{$prefix}--tabs__nav-link {

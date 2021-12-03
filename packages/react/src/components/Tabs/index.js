@@ -6,13 +6,11 @@
  */
 
 import * as FeatureFlags from '@carbon/feature-flags';
-import { default as TabsNext } from './next/Tabs';
+import { Tabs as TabsNext, TabPanel, TabPanels, TabList } from './next/Tabs';
 import { default as TabsClassic } from './Tabs';
 import { default as TabsSkeletonClassic } from './Tabs.Skeleton';
 import { default as TabsSkeletonNext } from './next/Tabs.Skeleton';
 import ContainedTabs from './next/ContainedTabs';
-import { default as TabsSkeletonClassic } from './Tabs.Skeleton';
-import { default as TabsSkeletonNext } from './next/Tabs.Skeleton';
 
 const Tabs = FeatureFlags.enabled('enable-v11-release')
   ? TabsNext
@@ -22,6 +20,6 @@ const TabsSkeleton = FeatureFlags.enabled('enable-v11-release')
   ? TabsSkeletonNext
   : TabsSkeletonClassic;
 
-export { ContainedTabs, TabsSkeleton };
+export { ContainedTabs, TabsSkeleton, TabPanels, TabPanel, TabList };
 
 export default Tabs;

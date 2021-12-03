@@ -6,14 +6,14 @@
  */
 
 import PropTypes from 'prop-types';
-import React, { useState, useRef, useEffect, useCallback } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import cx from 'classnames';
-// import { ChevronLeft16, ChevronRight16 } from '@carbon/icons-react';
-// import debounce from 'lodash.debounce';
 import { keys, match, matches } from '../../../internal/keyboard';
 import { usePrefix } from '../../../internal/usePrefix';
 import { useId } from '../../../internal/useId';
+import { getInteractiveContent } from '../../../internal/useNoInteractiveChildren';
 import { useControllableState } from '../../ContentSwitcher/next/useControllableState';
+import { useMergedRefs } from '../../../internal/useMergedRefs';
 
 // Used to manage the overall state of the Tabs
 const TabsContext = React.createContext();
@@ -138,26 +138,8 @@ function TabList({
     [`${prefix}--tabs--light`]: light,
     customClassName: customClassName,
   });
-  // const tabsList = React.Children.toArray(children).filter((child) => {
-  //   console.log('hello');
-  //   if (!child.props.disabled) {
-  //     return true;
-  //   }
-  // });
 
-  // console.log(tabsList.length);
-  // const count = React.Children.count(children);
   const tabs = [];
-
-  useEffectOnce(() => {
-    const tab = tabs[selectedIndex];
-    if (scrollIntoView && tab) {
-      tab.current.scrollIntoView({
-        block: 'nearest',
-        inline: 'nearest',
-      });
-    }
-  });
 
   function onKeyDown(event) {
     if (
@@ -174,15 +156,6 @@ function TabList({
         activeTabs[getNextIndex(event, activeTabs.length, currentIndex)]
       );
 
-      // return;
-      // const count = React.Children.count(children);
-
-      // const nextIndex = getNextIndex(
-      //   event,
-      //   count,
-      //   activation === 'automatic' ? selectedIndex : activeIndex
-      // );
-
       if (activation === 'automatic') {
         setSelectedIndex(nextIndex);
       } else if (activation === 'manual') {
@@ -192,6 +165,27 @@ function TabList({
       tabs[nextIndex].current.focus();
     }
   }
+
+  useEffectOnce(() => {
+    const tab = tabs[selectedIndex];
+    if (scrollIntoView && tab) {
+      tab.current.scrollIntoView({
+        block: 'nearest',
+        inline: 'nearest',
+      });
+    }
+  });
+
+  useEffectOnce(() => {
+    const activeTabs = tabs.filter((tab) => {
+      return !tab.current.disabled;
+    });
+
+    if (activeTabs.length > 0) {
+      const tab = activeTabs[0];
+      setSelectedIndex(tabs.indexOf(tab));
+    }
+  });
 
   return (
     // eslint-disable-next-line jsx-a11y/interactive-supports-focus
@@ -348,10 +342,13 @@ Tab.propTypes = {
 
 const TabPanel = React.forwardRef(function TabPanel(
   { children, className: customClassName, ...rest },
-  ref
+  forwardRef
 ) {
   const prefix = usePrefix();
+  const panel = useRef(null);
+  const ref = useMergedRefs([forwardRef, panel]);
 
+  const [tabIndex, setTabIndex] = useState('0');
   const { selectedIndex, baseId } = React.useContext(TabsContext);
   const index = React.useContext(TabPanelContext);
   const id = `${baseId}-tabpanel-${index}`;
@@ -360,7 +357,14 @@ const TabPanel = React.forwardRef(function TabPanel(
     customClassName: customClassName,
   });
 
-  // TODO: tabindex should only be 0 if no interactive content in children
+  // tabindex should only be 0 if no interactive content in children
+  useEffect(() => {
+    const interactiveContent = getInteractiveContent(panel.current);
+    if (interactiveContent) {
+      setTabIndex('-1');
+    }
+  }, []);
+
   return (
     <div
       {...rest}
@@ -369,7 +373,7 @@ const TabPanel = React.forwardRef(function TabPanel(
       className={className}
       ref={ref}
       role="tabpanel"
-      tabIndex="0"
+      tabIndex={tabIndex}
       hidden={selectedIndex !== index}>
       {children}
     </div>
@@ -381,6 +385,10 @@ TabPanel.propTypes = {
    * Provide child elements to be rendered inside of `TabPanel`.
    */
   children: PropTypes.node,
+  /**
+   * Specify an optional className to be added to TabPanel.
+   */
+  className: PropTypes.string,
 };
 
 function TabPanels({ children }) {
@@ -398,10 +406,8 @@ TabPanels.propTypes = {
   children: PropTypes.node,
 };
 
-export { Tab, TabPanel, TabPanels, TabList };
+export { Tabs, Tab, TabPanel, TabPanels, TabList };
 
-export default Tabs;
-
-// TO DO: implement scroll logic and the following props:
+// TO DO: implement horizontal scroll and the following props:
 // leftOverflowButtonProps
 // rightOverflowButtonProps
