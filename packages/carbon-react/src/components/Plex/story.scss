@@ -1,0 +1,51 @@
+//
+// Copyright IBM Corp. 2018, 2018
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+@use '../../../scss/type';
+@use '../../../scss/fonts/sans-arabic';
+@use '../../../scss/fonts/sans-devanagari';
+@use '../../../scss/fonts/sans-hebrew';
+@use '../../../scss/fonts/sans-thai-looped';
+@use '../../../scss/fonts/sans-thai';
+
+@include sans-arabic.default();
+@include sans-devanagari.default();
+@include sans-hebrew.default();
+@include sans-thai-looped.default();
+@include sans-thai.default();
+
+.text-mono {
+  font-family: type.font-family('mono');
+}
+
+.text-sans-arabic {
+  font-family: type.font-family('sans-arabic');
+}
+
+.text-sans-devanagari {
+  font-family: type.font-family('sans-devanagari');
+}
+
+.text-sans-hebrew {
+  font-family: type.font-family('sans-hebrew');
+}
+
+.text-sans-thai-looped {
+  font-family: type.font-family('sans-thai-looped');
+}
+
+.text-sans-thai {
+  font-family: type.font-family('sans-thai');
+}
+
+.text-sans {
+  font-family: type.font-family('sans');
+}
+
+.text-serif {
+  font-family: type.font-family('serif');
+}
