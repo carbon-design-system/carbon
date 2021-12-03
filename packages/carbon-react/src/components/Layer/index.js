@@ -9,6 +9,10 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 import { usePrefix } from '../../internal/usePrefix';
+import { LayerContext } from './LayerContext';
+
+const levels = ['one', 'two', 'three'];
+const MAX_LEVEL = levels.length - 1;
 
 export function Layer({
   as: BaseComponent = 'div',
@@ -16,12 +20,17 @@ export function Layer({
   children,
   ...rest
 }) {
+  const level = React.useContext(LayerContext);
   const prefix = usePrefix();
-  const className = cx(`${prefix}--layer`, customClassName);
+  const className = cx(`${prefix}--layer-${levels[level]}`, customClassName);
+
   return (
-    <BaseComponent {...rest} className={className}>
-      {children}
-    </BaseComponent>
+    // The level should be between 0 and MAX_LEVEL
+    <LayerContext.Provider value={Math.max(0, Math.min(level + 1, MAX_LEVEL))}>
+      <BaseComponent {...rest} className={className}>
+        {children}
+      </BaseComponent>
+    </LayerContext.Provider>
   );
 }
 

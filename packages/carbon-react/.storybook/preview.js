@@ -8,19 +8,10 @@
 import './styles.scss';
 
 import { configureActions } from '@storybook/addon-actions';
-import * as FeatureFlags from '@carbon/feature-flags';
 import { white, g10, g90, g100 } from '@carbon/themes';
 import React from 'react';
 import { breakpoints } from '@carbon/layout';
-import { settings } from 'carbon-components';
-
-FeatureFlags.merge({
-  'enable-css-custom-properties': true,
-  'enable-css-grid': true,
-  'enable-v11-release': true,
-});
-
-settings.prefix = 'cds';
+import { ThemeContext } from '../src';
 
 export const globalTypes = {
   locale: {
@@ -153,6 +144,10 @@ export const decorators = [
       document.documentElement.lang = locale;
     }, [locale]);
 
-    return <Story {...context} />;
+    return (
+      <ThemeContext.Provider value={{ theme }}>
+        <Story {...context} />
+      </ThemeContext.Provider>
+    );
   },
 ];

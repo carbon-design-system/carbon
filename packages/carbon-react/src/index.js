@@ -208,6 +208,6 @@ export {
   Column,
 } from './components/Grid';
 
-export { Theme, useTheme } from './components/Theme';
+export { Theme, useTheme, ThemeContext } from './components/Theme';
 
 export { Layer } from './components/Layer';

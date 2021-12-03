@@ -93,9 +93,12 @@
   "sideEffects": [
     "es/index.js",
     "lib/index.js",
+    "src/index.js",
     "es/feature-flags.js",
     "lib/feature-flags.js",
+    "src/feature-flags.js",
     "es/prefix.js",
-    "lib/prefix.js"
+    "lib/prefix.js",
+    "src/prefix.js"
   ]
 }
