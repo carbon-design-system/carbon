@@ -44,7 +44,7 @@ in:
 
 ```scss
 @use '@carbon/styles/scss/config' with (
-  $css-font-face: false,
+  $css--font-face: false,
 );
 ```
 
@@ -58,8 +58,22 @@ then you could do the following:
 ```scss
 @use '@carbon/styles/scss/fonts/sans';
 
-@include sans.regular($weights: normal);
+@include sans.regular($styles: normal);
 ```
+
+Each font entrypoint supports the following weights:
+
+- `thin`
+- `extralight`
+- `light`
+- `regular`
+- `tex`
+- `medium`
+- `semibold`
+- `bold`
+
+All fonts support the `normal` font style, some fonts include support for the
+`italic` font style, as well.
 
 ### Custom font src resolver
 
