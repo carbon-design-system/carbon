@@ -242,7 +242,6 @@ export {
   VStack as unstable_VStack,
 } from './components/Stack';
 export { Tooltip as unstable_Tooltip } from './components/Tooltip/next';
-export { ContainedTab as unstable_ContainedTab } from './components/Tab';
 export { ContainedTabs as unstable_ContainedTabs } from './components/Tabs';
 export {
   TabPanel as unstable_TabPanel,
