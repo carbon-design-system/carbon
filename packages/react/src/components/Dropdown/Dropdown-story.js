@@ -17,7 +17,11 @@ import {
 import Dropdown from '../Dropdown';
 import DropdownSkeleton from './Dropdown.Skeleton';
 import mdx from './Dropdown.mdx';
-import { Checkmark16 } from '@carbon/icons-react';
+import {
+  ChartBubble16,
+  ChartColumnFloating16,
+  ChartVennDiagram16,
+} from '@carbon/icons-react';
 
 const items = [
   {
@@ -130,12 +134,39 @@ export const RenderSelectedItem = () => (
       titleText="Dropdown label"
       helperText="This is some helper text"
       label="Dropdown menu options"
-      items={items}
+      items={[
+        {
+          id: 'option-0',
+          icon: ChartColumnFloating16,
+          text: 'Column Chart',
+        },
+        {
+          id: 'option-1',
+          icon: ChartBubble16,
+          text: 'Bubble Chart',
+        },
+        {
+          id: 'option-2',
+          icon: ChartVennDiagram16,
+          text: 'Venn Diagram',
+        },
+      ]}
       itemToString={(item) => (item ? item.text : '')}
+      itemToElement={(item) => (
+        <>
+          {React.createElement(item.icon)}
+          <span style={{ paddingLeft: '1rem', paddingBottom: '1rem' }}>
+            {item.text}
+          </span>
+        </>
+      )}
       renderSelectedItem={(item) => (
-        <div id="custom-render-selected-item">
-          <Checkmark16 /> {item.text}
-        </div>
+        <>
+          {React.createElement(item.icon)}
+          <span style={{ paddingLeft: '1rem', paddingBottom: '1rem' }}>
+            {item.text}
+          </span>
+        </>
       )}
       onChange={action('onChange')}
     />
