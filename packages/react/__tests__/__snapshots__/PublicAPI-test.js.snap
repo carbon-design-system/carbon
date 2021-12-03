@@ -1330,6 +1330,9 @@ Map {
         "colSpan": Object {
           "type": "number",
         },
+        "id": Object {
+          "type": "string",
+        },
         "isSortHeader": Object {
           "type": "bool",
         },
@@ -1558,6 +1561,9 @@ Map {
         "labelText": Object {
           "type": "string",
         },
+        "onBlur": Object {
+          "type": "func",
+        },
         "onChange": Object {
           "type": "func",
         },
@@ -1565,6 +1571,9 @@ Map {
           "type": "func",
         },
         "onExpand": Object {
+          "type": "func",
+        },
+        "onFocus": Object {
           "type": "func",
         },
         "persistant": [Function],
@@ -1997,6 +2006,9 @@ Map {
       "colSpan": Object {
         "type": "number",
       },
+      "id": Object {
+        "type": "string",
+      },
       "isSortHeader": Object {
         "type": "bool",
       },
@@ -2190,6 +2202,9 @@ Map {
       "labelText": Object {
         "type": "string",
       },
+      "onBlur": Object {
+        "type": "func",
+      },
       "onChange": Object {
         "type": "func",
       },
@@ -2197,6 +2212,9 @@ Map {
         "type": "func",
       },
       "onExpand": Object {
+        "type": "func",
+      },
+      "onFocus": Object {
         "type": "func",
       },
       "persistant": [Function],
@@ -2575,17 +2593,7 @@ Map {
         "type": "object",
       },
       "helperText": Object {
-        "args": Array [
-          Array [
-            Object {
-              "type": "string",
-            },
-            Object {
-              "type": "node",
-            },
-          ],
-        ],
-        "type": "oneOfType",
+        "type": "node",
       },
       "hideLabel": Object {
         "type": "bool",

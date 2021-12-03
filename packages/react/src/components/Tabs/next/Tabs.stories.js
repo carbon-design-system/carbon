@@ -73,14 +73,6 @@ export const IconOnly = () => (
   </Tabs>
 );
 
-export const Skeleton = () => {
-  return (
-    <div style={{ maxWidth: '100%' }}>
-      <TabsSkeleton />
-    </div>
-  );
-};
-
 export const Contained = () => (
   <Tabs>
     <TabList aria-label="List of tabs" contained>
@@ -101,3 +93,11 @@ export const Contained = () => (
     </TabPanels>
   </Tabs>
 );
+
+export const Skeleton = () => {
+  return (
+    <div style={{ maxWidth: '100%' }}>
+      <TabsSkeleton />
+    </div>
+  );
+};

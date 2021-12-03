@@ -194,22 +194,44 @@ describe('Tooltip', () => {
       // Enzyme doesn't seem to allow state() in a forwardRef-wrapped class component
       expect(rootWrapper.find('Tooltip').instance().state.open).toEqual(false);
     });
-  });
 
-  it('escape key keyDown should not bubble outside the tooltip', () => {
-    const onKeyDown = jest.fn();
-    render(
-      <>
-        {/* eslint-disable-next-line jsx-a11y/no-static-element-interactions */}
-        <div onKeyDown={onKeyDown}>
-          <Tooltip triggerText="Tooltip" />
-        </div>
-      </>
-    );
+    it('escape key keyDown should not bubble outside the tooltip', () => {
+      const onKeyDown = jest.fn();
+      render(
+        <>
+          {/* eslint-disable-next-line jsx-a11y/no-static-element-interactions */}
+          <div onKeyDown={onKeyDown}>
+            <Tooltip triggerText="Tooltip" />
+          </div>
+        </>
+      );
 
-    userEvent.click(screen.getAllByRole('button')[0]);
-    userEvent.keyboard('{esc}');
+      userEvent.click(screen.getAllByRole('button')[0]);
+      userEvent.keyboard('{esc}');
 
-    expect(onKeyDown).not.toHaveBeenCalled();
+      expect(onKeyDown).not.toHaveBeenCalled();
+    });
+
+    it('should close the tooltip when escape key is pressed', () => {
+      render(
+        <Tooltip triggerText="trigger text" tooltipBodyId="tooltip-body">
+          <p id="tooltip-body">tooltip body</p>
+        </Tooltip>
+      );
+
+      expect(screen.queryByText('trigger text')).toBeInTheDocument();
+      expect(screen.queryByText('tooltip body')).not.toBeInTheDocument();
+
+      const triggerButton = screen.getByRole('button');
+      userEvent.click(triggerButton);
+      // I am unsure why, but the trigger must be clicked a second time for the tooltip body to appear
+      userEvent.click(triggerButton);
+
+      expect(screen.queryByText('tooltip body')).toBeInTheDocument();
+
+      userEvent.keyboard('{esc}');
+
+      expect(screen.queryByText('tooltip body')).not.toBeInTheDocument();
+    });
   });
 });
