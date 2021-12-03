@@ -133,7 +133,6 @@ const FilterableMultiSelect = React.forwardRef(function FilterableMultiSelect(
     }
   }
 
-  /// look into this weirdness
   function handleOnMenuChange(forceIsOpen) {
     const nextIsOpen = forceIsOpen ?? !isOpen;
     setIsOpen(nextIsOpen);
