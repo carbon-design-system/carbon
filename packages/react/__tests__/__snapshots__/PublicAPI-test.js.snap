@@ -1330,6 +1330,9 @@ Map {
         "colSpan": Object {
           "type": "number",
         },
+        "id": Object {
+          "type": "string",
+        },
         "isSortHeader": Object {
           "type": "bool",
         },
@@ -2002,6 +2005,9 @@ Map {
       },
       "colSpan": Object {
         "type": "number",
+      },
+      "id": Object {
+        "type": "string",
       },
       "isSortHeader": Object {
         "type": "bool",
