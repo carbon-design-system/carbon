@@ -71,12 +71,61 @@ const FilterableMultiSelect = React.forwardRef(function FilterableMultiSelect(
   const filterableMultiSelectInstanceId = useId();
 
   const context = FeatureFlagContext;
+  let enabled;
+
+  if (context.enabled) {
+    enabled = context.enabled('enable-v11-release');
+  }
   const prefix = usePrefix();
 
   if (prevOpen !== open) {
     setIsOpen(open);
     setPrevOpen(open);
   }
+
+  const inline = type === 'inline';
+  const showWarning = !invalid && warn;
+
+  // needs to be capitalized for react to render it correctly
+  const ItemToElement = itemToElement;
+
+  const wrapperClasses = cx(
+    `${prefix}--multi-select__wrapper`,
+    `${prefix}--list-box__wrapper`,
+    [enabled ? containerClassName : null],
+    {
+      [`${prefix}--multi-select__wrapper--inline`]: inline,
+      [`${prefix}--list-box__wrapper--inline`]: inline,
+      [`${prefix}--multi-select__wrapper--inline--invalid`]: inline && invalid,
+      [`${prefix}--list-box__wrapper--inline--invalid`]: inline && invalid,
+      [`${prefix}--list-box--up`]: direction === 'top',
+    }
+  );
+  const helperId = !helperText
+    ? undefined
+    : `filterablemultiselect-helper-text-${filterableMultiSelectInstanceId}`;
+  const labelId = `${id}-label`;
+  const titleClasses = cx({
+    [`${prefix}--label`]: true,
+    [`${prefix}--label--disabled`]: disabled,
+    [`${prefix}--visually-hidden`]: hideLabel,
+  });
+  const helperClasses = cx({
+    [`${prefix}--form__helper-text`]: true,
+    [`${prefix}--form__helper-text--disabled`]: disabled,
+  });
+  const inputClasses = cx({
+    [`${prefix}--text-input`]: true,
+    [`${prefix}--text-input--empty`]: !inputValue,
+    [`${prefix}--text-input--light`]: light,
+  });
+  const helper = helperText ? (
+    <div id={helperId} className={helperClasses}>
+      {helperText}
+    </div>
+  ) : null;
+  const menuId = `${id}__menu`;
+  const inputId = `${id}-input`;
 
   function handleOnChange(changes) {
     if (onChange) {
@@ -143,65 +192,15 @@ const FilterableMultiSelect = React.forwardRef(function FilterableMultiSelect(
     }
   }
 
+  function clearInputValue() {
+    setInputValue('');
+  }
+
   useEffect(() => {
     if (textInput.current && inputValue == '') {
       textInput.current.focus();
     }
   }, [inputValue]);
-
-  function clearInputValue() {
-    setInputValue('');
-  }
-
-  const inline = type === 'inline';
-  const showWarning = !invalid && warn;
-
-  // needs to be capitalized for react to render it correctly
-  const ItemToElement = itemToElement;
-
-  let enabled;
-
-  if (context.enabled) {
-    enabled = context.enabled('enable-v11-release');
-  }
-
-  const wrapperClasses = cx(
-    `${prefix}--multi-select__wrapper`,
-    `${prefix}--list-box__wrapper`,
-    [enabled ? containerClassName : null],
-    {
-      [`${prefix}--multi-select__wrapper--inline`]: inline,
-      [`${prefix}--list-box__wrapper--inline`]: inline,
-      [`${prefix}--multi-select__wrapper--inline--invalid`]: inline && invalid,
-      [`${prefix}--list-box__wrapper--inline--invalid`]: inline && invalid,
-      [`${prefix}--list-box--up`]: direction === 'top',
-    }
-  );
-  const helperId = !helperText
-    ? undefined
-    : `filterablemultiselect-helper-text-${filterableMultiSelectInstanceId}`;
-  const labelId = `${id}-label`;
-  const titleClasses = cx({
-    [`${prefix}--label`]: true,
-    [`${prefix}--label--disabled`]: disabled,
-    [`${prefix}--visually-hidden`]: hideLabel,
-  });
-  const helperClasses = cx({
-    [`${prefix}--form__helper-text`]: true,
-    [`${prefix}--form__helper-text--disabled`]: disabled,
-  });
-  const inputClasses = cx({
-    [`${prefix}--text-input`]: true,
-    [`${prefix}--text-input--empty`]: !inputValue,
-    [`${prefix}--text-input--light`]: light,
-  });
-  const helper = helperText ? (
-    <div id={helperId} className={helperClasses}>
-      {helperText}
-    </div>
-  ) : null;
-  const menuId = `${id}__menu`;
-  const inputId = `${id}-input`;
 
   return (
     <Selection
