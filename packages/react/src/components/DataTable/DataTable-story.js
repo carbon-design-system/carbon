@@ -216,6 +216,17 @@ export const WithToolbar = () => (
             <TableToolbarSearch
               onChange={onInputChange}
               onClear={action('onClear')}
+              onFocus={(event, handleExpand) => {
+                action('onFocus')();
+                handleExpand(event, true);
+              }}
+              onBlur={(event, handleExpand) => {
+                action('onBlur')();
+                const { value } = event.target;
+                if (!value) {
+                  handleExpand(event, false);
+                }
+              }}
             />
             <TableToolbarMenu light>
               <TableToolbarAction onClick={action('Action 1 Click')}>

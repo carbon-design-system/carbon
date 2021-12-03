@@ -5,12 +5,7 @@
 // LICENSE file in the root directory of this source tree.
 //
 
-@use '../index.scss' as styles with (
-  $css--font-face: true,
-  $css--plex-arabic: true,
-);
-@use '../scss/components/button';
-@use '../scss/components/tag';
+@use '../index.scss' as styles;
 
 :root {
   @include styles.theme(styles.$white);
@@ -30,17 +25,4 @@
 
 body {
   background: styles.$background;
-}
-
-html[lang='en'] body {
-  font-family: 'IBM Plex Sans', 'Helvetica Neue', Arial, sans-serif;
-}
-
-html[lang='ar'] body {
-  font-family: 'IBM Plex Sans Arabic', 'Helvetica Neue', Arial, sans-serif;
-}
-
-.text-mono {
-  font-family: 'IBM Plex Mono', Menlo, 'DejaVu Sans Mono',
-    'Bitstream Vera Sans Mono', Courier, monospace;
 }
