@@ -8,6 +8,7 @@
 import React from 'react';
 import Tabs, { TabList, Tab, TabPanels, TabPanel } from './Tabs';
 import TabsSkeleton from './Tabs.Skeleton';
+import { Monster20, Corn20, Bat20 } from '@carbon/icons-react';
 
 import { unstable_FeatureFlags as FeatureFlags } from 'carbon-components-react';
 
@@ -33,7 +34,7 @@ export const Default = () => (
     <TabList>
       <Tab>Tab Label 1</Tab>
       <Tab>Tab Label 2</Tab>
-      <Tab disabled>Tab Label 3</Tab>
+      <Tab>Tab Label 3</Tab>
       <Tab>Tab Label 4 with a very long long label</Tab>
       <Tab>Tab Label 5</Tab>
     </TabList>
@@ -43,6 +44,27 @@ export const Default = () => (
       <TabPanel>Tab Panel 3</TabPanel>
       <TabPanel>Tab Panel 4</TabPanel>
       <TabPanel>Tab Panel 5</TabPanel>
+    </TabPanels>
+  </Tabs>
+);
+
+export const IconOnly = () => (
+  <Tabs>
+    <TabList>
+      <Tab>
+        <Monster20 />
+      </Tab>
+      <Tab>
+        <Corn20 />
+      </Tab>
+      <Tab>
+        <Bat20 />
+      </Tab>
+    </TabList>
+    <TabPanels>
+      <TabPanel>Tab Panel 1</TabPanel>
+      <TabPanel>Tab Panel 2</TabPanel>
+      <TabPanel>Tab Panel 3</TabPanel>
     </TabPanels>
   </Tabs>
 );
@@ -62,7 +84,7 @@ export const Skeleton = () => {
           <Tab id="tab-2" label="Tab label 2">
             <p>Content for second tab goes here.</p>
           </Tab>
-          <Tab id="tab-3" label="Tab label 3" disabled>
+          <Tab id="tab-3" label="Tab label 3">
             <p>Content for third tab goes here.</p>
           </Tab>
           <Tab

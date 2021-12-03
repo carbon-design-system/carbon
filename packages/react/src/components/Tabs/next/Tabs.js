@@ -95,6 +95,26 @@ function useEffectOnce(callback) {
   }, []);
 }
 
+/**
+ * Get the next index for a given keyboard event given a count of the total
+ * items and the current index
+ * @param {Event} event
+ * @param {number} total
+ * @param {number} index
+ * @returns {number}
+ */
+function getNextIndex(event, total, index) {
+  if (match(event, keys.ArrowRight)) {
+    return (index + 1) % total;
+  } else if (match(event, keys.ArrowLeft)) {
+    return (total + index - 1) % total;
+  } else if (match(event, keys.Home)) {
+    return 0;
+  } else if (match(event, keys.End)) {
+    return total - 1;
+  }
+}
+
 function TabList({
   activation = 'automatic',
   'aria-label': label,
@@ -118,7 +138,15 @@ function TabList({
     [`${prefix}--tabs--light`]: light,
     customClassName: customClassName,
   });
-  const count = React.Children.count(children);
+  // const tabsList = React.Children.toArray(children).filter((child) => {
+  //   console.log('hello');
+  //   if (!child.props.disabled) {
+  //     return true;
+  //   }
+  // });
+
+  // console.log(tabsList.length);
+  // const count = React.Children.count(children);
   const tabs = [];
 
   useEffectOnce(() => {
@@ -135,11 +163,25 @@ function TabList({
     if (
       matches(event, [keys.ArrowRight, keys.ArrowLeft, keys.Home, keys.End])
     ) {
-      const nextIndex = getNextIndex(
-        event,
-        count,
-        activation === 'automatic' ? selectedIndex : activeIndex
+      const activeTabs = tabs.filter((tab) => {
+        return !tab.current.disabled;
+      });
+
+      const currentIndex = activeTabs.indexOf(
+        tabs[activation === 'automatic' ? selectedIndex : activeIndex]
       );
+      const nextIndex = tabs.indexOf(
+        activeTabs[getNextIndex(event, activeTabs.length, currentIndex)]
+      );
+
+      // return;
+      // const count = React.Children.count(children);
+
+      // const nextIndex = getNextIndex(
+      //   event,
+      //   count,
+      //   activation === 'automatic' ? selectedIndex : activeIndex
+      // );
 
       if (activation === 'automatic') {
         setSelectedIndex(nextIndex);
@@ -214,28 +256,9 @@ TabList.propTypes = {
   scrollIntoView: PropTypes.bool,
 };
 
-/**
- * Get the next index for a given keyboard event given a count of the total
- * items and the current index
- * @param {Event} event
- * @param {number} total
- * @param {number} index
- * @returns {number}
- */
-function getNextIndex(event, total, index) {
-  if (match(event, keys.ArrowRight)) {
-    return (index + 1) % total;
-  } else if (match(event, keys.ArrowLeft)) {
-    return (total + index - 1) % total;
-  } else if (match(event, keys.Home)) {
-    return 0;
-  } else if (match(event, keys.End)) {
-    return total - 1;
-  }
-}
-
 const Tab = React.forwardRef(function Tab(
   {
+    as: BaseComponent = 'button',
     children,
     className: customClassName,
     disabled,
@@ -263,15 +286,20 @@ const Tab = React.forwardRef(function Tab(
   );
 
   return (
-    <button
+    <BaseComponent
       {...rest}
       aria-controls={panelId}
+      aria-disabled={disabled}
       aria-selected={selectedIndex === index}
       ref={ref}
       id={id}
       role="tab"
       className={className}
+      disabled={disabled}
       onClick={(evt) => {
+        if (disabled) {
+          return;
+        }
         setSelectedIndex(index);
         if (onClick) {
           onClick(evt);
@@ -281,11 +309,15 @@ const Tab = React.forwardRef(function Tab(
       tabIndex={selectedIndex === index ? '0' : '-1'}
       type="button">
       {children}
-    </button>
+    </BaseComponent>
   );
 });
 
 Tab.propTypes = {
+  /**
+   * Provide a custom element to render instead of the default button
+   */
+  as: PropTypes.oneOfType([PropTypes.string, PropTypes.elementType]),
   /**
    * Provide child elements to be rendered inside of `Tab`.
    */
@@ -370,14 +402,6 @@ export { Tab, TabPanel, TabPanels, TabList };
 
 export default Tabs;
 
-// static propTypes = {
-
-/**
- * Provide the props that describe the left overflow button
- */
-// leftOverflowButtonProps: PropTypes.object,
-
-/**
- * Provide the props that describe the right overflow button
- */
-// rightOverflowButtonProps: PropTypes.object,
+// TO DO: implement scroll logic and the following props:
+// leftOverflowButtonProps
+// rightOverflowButtonProps

@@ -180,6 +180,7 @@
       display: flex;
       padding: 0;
       cursor: pointer;
+      align-items: center;
       transition: background-color $duration-fast-01
         motion(standard, productive);
     }
@@ -335,22 +336,23 @@
     //-----------------------------
     //  Link Disabled
     //-----------------------------
-    .#{$prefix}--tabs__nav-item--disabled .#{$prefix}--tabs__nav-link {
+    .#{$prefix}--tabs__nav-item--disabled {
       border-bottom: $tab-underline-disabled;
       color: $tab-text-disabled;
     }
 
-    .#{$prefix}--tabs__nav-item--disabled:hover .#{$prefix}--tabs__nav-link {
+    .#{$prefix}--tabs__nav-item--disabled:hover {
       border-bottom: $tab-underline-disabled;
       color: $tab-text-disabled;
-      cursor: not-allowed;
       pointer-events: none;
+      cursor: not-allowed;
     }
 
-    .#{$prefix}--tabs__nav-item--disabled .#{$prefix}--tabs__nav-link:focus,
-    .#{$prefix}--tabs__nav-item--disabled .#{$prefix}--tabs__nav-link:active {
+    .#{$prefix}--tabs__nav-item--disabled:focus,
+    .#{$prefix}--tabs__nav-item--disabled:active {
       border-bottom: $tab-underline-disabled;
       outline: none;
+      pointer-events: none;
     }
 
     .#{$prefix}--tabs--light
@@ -374,9 +376,7 @@
       border-bottom-color: $border-subtle;
     }
 
-    &.#{$prefix}--tabs--contained
-      .#{$prefix}--tabs__nav-item--disabled
-      .#{$prefix}--tabs__nav-link {
+    &.#{$prefix}--tabs--contained .#{$prefix}--tabs__nav-item--disabled {
       border-bottom: none;
       color: $text-on-color-disabled;
     }
