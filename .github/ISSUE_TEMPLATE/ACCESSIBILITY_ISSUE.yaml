@@ -67,6 +67,12 @@ body:
     validations:
       required: true
   - type: input
+    id: react-version
+    attributes:
+      label: React version
+      description: 'Which React version are you using?'
+      placeholder: e.g. v17.0.2
+  - type: input
     id: tool
     attributes:
       label: Automated testing tool and ruleset

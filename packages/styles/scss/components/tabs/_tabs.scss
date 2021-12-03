@@ -33,48 +33,8 @@
 /// @access public
 /// @group tabs
 @mixin tabs {
-  //-----------------------------
-  //  Tab Content Container
-  //-----------------------------
-  .#{$prefix}--tab-content {
-    padding: $spacing-05;
-
-    &:focus {
-      @include focus-outline('outline');
-    }
-  }
-
-  //-----------------------------
-  // Skeleton state
-  //-----------------------------
-  .#{$prefix}--tabs.#{$prefix}--skeleton {
-    cursor: default;
-    pointer-events: none;
-  }
-
-  .#{$prefix}--skeleton.#{$prefix}--tabs--scrollable:not(.#{$prefix}--tabs--scrollable--container)
-    .#{$prefix}--tabs--scrollable__nav-item {
-    border-bottom: 2px solid $skeleton-element;
-  }
-
-  .#{$prefix}--tabs.#{$prefix}--skeleton .#{$prefix}--tabs__nav-link {
-    display: flex;
-    width: 10rem;
-    height: 100%;
-    align-items: center;
-    padding: 0 1rem;
-  }
-
-  .#{$prefix}--tabs.#{$prefix}--skeleton .#{$prefix}--tabs__nav-link span {
-    @include skeleton;
-
-    display: block;
-    width: 100%;
-    height: rem(14px);
-  }
-
   // TODO: remove namespace and suffix in next major release
-  .#{$prefix}--tabs--scrollable {
+  .#{$prefix}--tabs {
     @include reset;
     @include type-style('body-short-01');
 
@@ -84,11 +44,11 @@
     min-height: rem(40px);
     color: $text-primary;
 
-    &.#{$prefix}--tabs--scrollable--container {
+    &.#{$prefix}--tabs--container {
       min-height: rem(48px);
     }
 
-    .#{$prefix}--tabs--scrollable__nav {
+    .#{$prefix}--tabs__nav {
       display: flex;
       overflow: auto hidden;
       width: auto;
@@ -127,23 +87,19 @@
       background-image: linear-gradient(to right, transparent, $background);
     }
 
-    .#{$prefix}--tabs--scrollable--light
-      .#{$prefix}--tabs__overflow-indicator--left {
+    .#{$prefix}--tabs--light .#{$prefix}--tabs__overflow-indicator--left {
       background-image: linear-gradient(to left, transparent, $layer);
     }
 
-    .#{$prefix}--tabs--scrollable--light
-      .#{$prefix}--tabs__overflow-indicator--right {
+    .#{$prefix}--tabs--light .#{$prefix}--tabs__overflow-indicator--right {
       background-image: linear-gradient(to right, transparent, $layer);
     }
 
-    &.#{$prefix}--tabs--scrollable--container
-      .#{$prefix}--tabs__overflow-indicator--left {
+    &.#{$prefix}--tabs--container .#{$prefix}--tabs__overflow-indicator--left {
       background-image: linear-gradient(to left, transparent, $layer-accent);
     }
 
-    &.#{$prefix}--tabs--scrollable--container
-      .#{$prefix}--tabs__overflow-indicator--right {
+    &.#{$prefix}--tabs--container .#{$prefix}--tabs__overflow-indicator--right {
       background-image: linear-gradient(to right, transparent, $layer-accent);
     }
 
@@ -168,7 +124,7 @@
           );
         }
 
-        &.#{$prefix}--tabs--scrollable--container
+        &.#{$prefix}--tabs--container
           .#{$prefix}--tabs__overflow-indicator--left {
           background-image: linear-gradient(
             to left,
@@ -177,7 +133,7 @@
           );
         }
 
-        &.#{$prefix}--tabs--scrollable--container
+        &.#{$prefix}--tabs--container
           .#{$prefix}--tabs__overflow-indicator--right {
           background-image: linear-gradient(
             to right,
@@ -206,8 +162,7 @@
       display: none;
     }
 
-    &.#{$prefix}--tabs--scrollable--container
-      .#{$prefix}--tab--overflow-nav-button {
+    &.#{$prefix}--tabs--container .#{$prefix}--tab--overflow-nav-button {
       width: $spacing-09;
       margin: 0;
       background-color: $layer-accent;
@@ -220,7 +175,7 @@
     //-----------------------------
     // Item
     //-----------------------------
-    .#{$prefix}--tabs--scrollable__nav-item {
+    .#{$prefix}--tabs__nav-item {
       @include reset;
 
       display: flex;
@@ -230,35 +185,32 @@
         motion(standard, productive);
     }
 
-    .#{$prefix}--tabs--scrollable__nav-item
-      + .#{$prefix}--tabs--scrollable__nav-item {
+    .#{$prefix}--tabs__nav-item + .#{$prefix}--tabs__nav-item {
       margin-left: rem(1px);
     }
 
-    &.#{$prefix}--tabs--scrollable--container
-      .#{$prefix}--tabs--scrollable__nav-item {
+    &.#{$prefix}--tabs--container .#{$prefix}--tabs__nav-item {
       background-color: $layer-accent;
     }
 
-    &.#{$prefix}--tabs--scrollable--container
-      .#{$prefix}--tabs--scrollable__nav-item
-      + .#{$prefix}--tabs--scrollable__nav-item {
+    &.#{$prefix}--tabs--container
+      .#{$prefix}--tabs__nav-item
+      + .#{$prefix}--tabs__nav-item {
       margin-left: 0;
       // Draws the border without affecting the inner-content
       box-shadow: rem(-1px) 0 0 0 $border-strong;
     }
 
-    &.#{$prefix}--tabs--scrollable--container
-      .#{$prefix}--tabs--scrollable__nav-item
-      + .#{$prefix}--tabs--scrollable__nav-item.#{$prefix}--tabs--scrollable__nav-item--selected,
-    &.#{$prefix}--tabs--scrollable--container
-      .#{$prefix}--tabs--scrollable__nav-item.#{$prefix}--tabs--scrollable__nav-item--selected
-      + .#{$prefix}--tabs--scrollable__nav-item {
+    &.#{$prefix}--tabs--container
+      .#{$prefix}--tabs__nav-item
+      + .#{$prefix}--tabs__nav-item.#{$prefix}--tabs__nav-item--selected,
+    &.#{$prefix}--tabs--container
+      .#{$prefix}--tabs__nav-item.#{$prefix}--tabs__nav-item--selected
+      + .#{$prefix}--tabs__nav-item {
       box-shadow: none;
     }
 
-    .#{$prefix}--tabs--scrollable__nav-item
-      .#{$prefix}--tabs--scrollable__nav-link {
+    .#{$prefix}--tabs__nav-item .#{$prefix}--tabs__nav-link {
       transition: color $duration-fast-01 motion(standard, productive),
         border-bottom-color $duration-fast-01 motion(standard, productive),
         outline $duration-fast-01 motion(standard, productive);
@@ -267,79 +219,73 @@
     //-----------------------------
     // Item Hover
     //-----------------------------
-    &.#{$prefix}--tabs--scrollable--container
-      .#{$prefix}--tabs--scrollable__nav-item:hover {
+    &.#{$prefix}--tabs--container .#{$prefix}--tabs__nav-item:hover {
       background-color: $layer-selected-hover;
     }
 
     //---------------------------------------------
     // Item Disabled
     //---------------------------------------------
-    .#{$prefix}--tabs--scrollable__nav-item--disabled,
-    .#{$prefix}--tabs--scrollable__nav-item--disabled:hover {
+    .#{$prefix}--tabs__nav-item--disabled,
+    .#{$prefix}--tabs__nav-item--disabled:hover {
       background-color: transparent;
       cursor: not-allowed;
       outline: none;
     }
 
-    &.#{$prefix}--tabs--scrollable--container
-      .#{$prefix}--tabs--scrollable__nav-item.#{$prefix}--tabs--scrollable__nav-item--disabled,
-    &.#{$prefix}--tabs--scrollable--container
-      .#{$prefix}--tabs--scrollable__nav-item.#{$prefix}--tabs--scrollable__nav-item--disabled:hover {
+    &.#{$prefix}--tabs--container
+      .#{$prefix}--tabs__nav-item.#{$prefix}--tabs__nav-item--disabled,
+    &.#{$prefix}--tabs--container
+      .#{$prefix}--tabs__nav-item.#{$prefix}--tabs__nav-item--disabled:hover {
       background-color: button.$button-disabled;
     }
 
     //-----------------------------
     // Item Selected
     //-----------------------------
-    .#{$prefix}--tabs--scrollable__nav-item--selected {
+    .#{$prefix}--tabs__nav-item--selected {
       transition: color $duration-fast-01 motion(standard, productive);
     }
 
-    .#{$prefix}--tabs--scrollable__nav-item--selected
-      .#{$prefix}--tabs--scrollable__nav-link,
-    .#{$prefix}--tabs--scrollable__nav-item--selected
-      .#{$prefix}--tabs--scrollable__nav-link:focus,
-    .#{$prefix}--tabs--scrollable__nav-item--selected
-      .#{$prefix}--tabs--scrollable__nav-link:active {
+    .#{$prefix}--tabs__nav-item--selected .#{$prefix}--tabs__nav-link,
+    .#{$prefix}--tabs__nav-item--selected .#{$prefix}--tabs__nav-link:focus,
+    .#{$prefix}--tabs__nav-item--selected .#{$prefix}--tabs__nav-link:active {
       @include type-style('productive-heading-01');
 
       border-bottom: 2px solid $border-interactive;
       color: $text-primary;
     }
 
-    &.#{$prefix}--tabs--scrollable--container
-      .#{$prefix}--tabs--scrollable__nav-item--selected,
-    &.#{$prefix}--tabs--scrollable--container
-      .#{$prefix}--tabs--scrollable__nav-item--selected:hover {
+    &.#{$prefix}--tabs--container .#{$prefix}--tabs__nav-item--selected,
+    &.#{$prefix}--tabs--container .#{$prefix}--tabs__nav-item--selected:hover {
       background-color: $layer;
 
-      .#{$prefix}--tabs--scrollable__nav-link:focus,
-      .#{$prefix}--tabs--scrollable__nav-link:active {
+      .#{$prefix}--tabs__nav-link:focus,
+      .#{$prefix}--tabs__nav-link:active {
         box-shadow: none;
       }
     }
 
-    &.#{$prefix}--tabs--scrollable--container
-      .#{$prefix}--tabs--scrollable__nav-item--selected
-      .#{$prefix}--tabs--scrollable__nav-link {
+    &.#{$prefix}--tabs--container
+      .#{$prefix}--tabs__nav-item--selected
+      .#{$prefix}--tabs__nav-link {
       // Draws the border without affecting the inner-content
       box-shadow: inset 0 2px 0 0 $border-interactive;
       // height - vertical padding
       line-height: calc(#{rem(48px)} - (#{$spacing-03} * 2));
     }
 
-    &.#{$prefix}--tabs--scrollable--light.#{$prefix}--tabs--scrollable--container
-      .#{$prefix}--tabs--scrollable__nav-item--selected,
-    &.#{$prefix}--tabs--scrollable--light.#{$prefix}--tabs--scrollable--container
-      .#{$prefix}--tabs--scrollable__nav-item--selected:hover {
+    &.#{$prefix}--tabs--light.#{$prefix}--tabs--container
+      .#{$prefix}--tabs__nav-item--selected,
+    &.#{$prefix}--tabs--light.#{$prefix}--tabs--container
+      .#{$prefix}--tabs__nav-item--selected:hover {
       background-color: $background;
     }
 
     //-----------------------------
     // Link
     //-----------------------------
-    .#{$prefix}--tabs--scrollable__nav-link {
+    .#{$prefix}--tabs__nav-link {
       @include button-reset.reset($width: false);
       @include focus-outline('reset');
       @include type-style('body-short-01');
@@ -365,8 +311,7 @@
       }
     }
 
-    &.#{$prefix}--tabs--scrollable--container
-      .#{$prefix}--tabs--scrollable__nav-link {
+    &.#{$prefix}--tabs--container .#{$prefix}--tabs__nav-link {
       height: rem(48px);
       padding: $spacing-03 $spacing-05;
       border-bottom: 0;
@@ -377,109 +322,117 @@
     //-----------------------------
     //  Link Hover
     //-----------------------------
-    .#{$prefix}--tabs--scrollable__nav-item:hover
-      .#{$prefix}--tabs--scrollable__nav-link {
+    .#{$prefix}--tabs__nav-item:hover .#{$prefix}--tabs__nav-link {
       border-bottom: $tab-underline-color-hover;
       color: $text-primary;
     }
 
-    &.#{$prefix}--tabs--scrollable--container
-      .#{$prefix}--tabs--scrollable__nav-item
-      .#{$prefix}--tabs--scrollable__nav-link {
+    &.#{$prefix}--tabs--container
+      .#{$prefix}--tabs__nav-item
+      .#{$prefix}--tabs__nav-link {
       border-bottom: none;
     }
 
     //-----------------------------
     //  Link Disabled
     //-----------------------------
-    .#{$prefix}--tabs--scrollable__nav-item--disabled
-      .#{$prefix}--tabs--scrollable__nav-link {
+    .#{$prefix}--tabs__nav-item--disabled .#{$prefix}--tabs__nav-link {
       border-bottom: $tab-underline-disabled;
       color: $tab-text-disabled;
     }
 
-    .#{$prefix}--tabs--scrollable__nav-item--disabled:hover
-      .#{$prefix}--tabs--scrollable__nav-link {
+    .#{$prefix}--tabs__nav-item--disabled:hover .#{$prefix}--tabs__nav-link {
       border-bottom: $tab-underline-disabled;
       color: $tab-text-disabled;
       cursor: not-allowed;
       pointer-events: none;
     }
 
-    .#{$prefix}--tabs--scrollable__nav-item--disabled
-      .#{$prefix}--tabs--scrollable__nav-link:focus,
-    .#{$prefix}--tabs--scrollable__nav-item--disabled
-      .#{$prefix}--tabs--scrollable__nav-link:active {
+    .#{$prefix}--tabs__nav-item--disabled .#{$prefix}--tabs__nav-link:focus,
+    .#{$prefix}--tabs__nav-item--disabled .#{$prefix}--tabs__nav-link:active {
       border-bottom: $tab-underline-disabled;
       outline: none;
     }
 
-    .#{$prefix}--tabs--scrollable--light
-      .#{$prefix}--tabs--scrollable__nav-item--disabled
-      .#{$prefix}--tabs--scrollable__nav-link {
+    .#{$prefix}--tabs--light
+      .#{$prefix}--tabs__nav-item--disabled
+      .#{$prefix}--tabs__nav-link {
       border-bottom-color: $border-subtle;
     }
 
-    .#{$prefix}--tabs--scrollable--light
-      .#{$prefix}--tabs--scrollable__nav-item--disabled:hover
-      .#{$prefix}--tabs--scrollable__nav-link {
+    .#{$prefix}--tabs--light
+      .#{$prefix}--tabs__nav-item--disabled:hover
+      .#{$prefix}--tabs__nav-link {
       border-bottom-color: $border-subtle;
     }
 
-    .#{$prefix}--tabs--scrollable--light
-      .#{$prefix}--tabs--scrollable__nav-item--disabled
-      .#{$prefix}--tabs--scrollable__nav-link:focus,
-    .#{$prefix}--tabs--scrollable--light
-      .#{$prefix}--tabs--scrollable__nav-item--disabled
-      .#{$prefix}--tabs--scrollable__nav-link:active {
+    .#{$prefix}--tabs--light
+      .#{$prefix}--tabs__nav-item--disabled
+      .#{$prefix}--tabs__nav-link:focus,
+    .#{$prefix}--tabs--light
+      .#{$prefix}--tabs__nav-item--disabled
+      .#{$prefix}--tabs__nav-link:active {
       border-bottom-color: $border-subtle;
     }
 
-    &.#{$prefix}--tabs--scrollable--container
-      .#{$prefix}--tabs--scrollable__nav-item--disabled
-      .#{$prefix}--tabs--scrollable__nav-link {
+    &.#{$prefix}--tabs--container
+      .#{$prefix}--tabs__nav-item--disabled
+      .#{$prefix}--tabs__nav-link {
       border-bottom: none;
       color: $text-on-color-disabled;
     }
+  }
+  //-----------------------------
+  //  Tab Content Container
+  //-----------------------------
+  .#{$prefix}--tab-content {
+    padding: $spacing-05;
 
-    //-----------------------------
-    // Skeleton state
-    //-----------------------------
-    .#{$prefix}--tabs.#{$prefix}--skeleton {
-      cursor: default;
-      pointer-events: none;
-    }
-
-    .#{$prefix}--tabs.#{$prefix}--skeleton
-      .#{$prefix}--tabs--scrollable__nav-link {
-      @include skeleton;
-
-      width: rem(75px);
-    }
-
-    .#{$prefix}--tabs.#{$prefix}--skeleton .#{$prefix}--tabs-trigger {
-      @include skeleton;
-
-      width: rem(75px);
-      margin-right: rem(1px);
-    }
-
-    .#{$prefix}--tabs.#{$prefix}--skeleton .#{$prefix}--tabs-trigger svg {
-      @include visually-hidden;
+    &:focus {
+      @include focus-outline('outline');
     }
   }
 
+  //-----------------------------
+  // Skeleton state
+  //-----------------------------
+  .#{$prefix}--tabs.#{$prefix}--skeleton {
+    cursor: default;
+    pointer-events: none;
+  }
+
+  .#{$prefix}--skeleton.#{$prefix}--tabs:not(.#{$prefix}--tabs--container)
+    .#{$prefix}--tabs__nav-link {
+    border-bottom: 2px solid $skeleton-element;
+  }
+
+  .#{$prefix}--tabs.#{$prefix}--skeleton .#{$prefix}--tabs__nav-link {
+    display: flex;
+    width: 10rem;
+    height: 100%;
+    align-items: center;
+    padding: 0 1rem;
+  }
+
+  .#{$prefix}--tabs.#{$prefix}--skeleton .#{$prefix}--tabs__nav-link span {
+    @include skeleton;
+
+    display: block;
+    width: 100%;
+    height: rem(14px);
+  }
+
   // Windows HCM fix
-  .#{$prefix}--tabs--scrollable__nav-item
+  .#{$prefix}--tabs__nav-item
     .#{$prefix}--tabs__nav-item--selected
-    .#{$prefix}--tabs--scrollable__nav-item--selected {
+    .#{$prefix}--tabs__nav-item--selected {
     @include high-contrast-mode('focus');
   }
 
   // stylelint-disable-next-line no-duplicate-selectors
-  .#{$prefix}--tabs--scrollable
-    .#{$prefix}--tabs--scrollable__nav-item--disabled
-    .#{$prefix}--tabs--scrollable__nav-link {
+  .#{$prefix}--tabs
+    .#{$prefix}--tabs__nav-item--disabled
+    .#{$prefix}--tabs__nav-link {
     @include high-contrast-mode('disabled');
   }
 }
