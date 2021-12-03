@@ -257,7 +257,7 @@ Dropdown.propTypes = {
    * Provide helper text that is used alongside the control label for
    * additional help
    */
-  helperText: PropTypes.oneOfType([PropTypes.string, PropTypes.node]),
+  helperText: PropTypes.node,
 
   /**
    * Specify whether the title text should be hidden or not
