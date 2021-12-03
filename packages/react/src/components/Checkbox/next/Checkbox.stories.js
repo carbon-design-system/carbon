@@ -6,7 +6,7 @@
  */
 
 import React from 'react';
-import { Checkbox, CheckboxSkeleton } from 'carbon-components-react';
+import { default as Checkbox, CheckboxSkeleton } from '../';
 import { settings } from 'carbon-components';
 const { prefix } = settings;
 

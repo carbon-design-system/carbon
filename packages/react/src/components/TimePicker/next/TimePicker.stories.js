@@ -6,11 +6,8 @@
  */
 
 import React from 'react';
-import {
-  TimePicker,
-  TimePickerSelect,
-  SelectItem,
-} from 'carbon-components-react';
+import { SelectItem } from '../../SelectItem';
+import { TimePicker, TimePickerSelect } from '../';
 import { Layer } from '../../Layer';
 
 // const props = {

@@ -5,12 +5,12 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+import { FeatureFlags } from '../../FeatureFlags';
 import {
   ActionableNotification,
   ToastNotification,
   InlineNotification,
-  unstable_FeatureFlags as FeatureFlags,
-} from 'carbon-components-react';
+} from '../';
 import React from 'react';
 import { action } from '@storybook/addon-actions';
 

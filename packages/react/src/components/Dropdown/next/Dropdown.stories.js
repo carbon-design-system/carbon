@@ -6,7 +6,7 @@
  */
 
 import React from 'react';
-import { Dropdown, DropdownSkeleton } from 'carbon-components-react';
+import { Dropdown, DropdownSkeleton } from '../';
 import { Layer } from '../../Layer';
 
 const items = [

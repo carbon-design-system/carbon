@@ -6,7 +6,8 @@
  */
 
 import React, { useState } from 'react';
-import { Button, InlineLoading } from 'carbon-components-react';
+import Button from '../../Button';
+import InlineLoading from '../';
 
 export default {
   title: 'Components/InlineLoading',

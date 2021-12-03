@@ -31,7 +31,7 @@ import {
   Switcher,
   SwitcherItem,
   SwitcherDivider,
-} from 'carbon-components-react';
+} from '../';
 import { Modal, Button } from 'carbon-components-react';
 import {
   Search20,

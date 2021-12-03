@@ -15,7 +15,7 @@ import {
   FileUploaderDropContainer,
   FileUploaderItem,
   FileUploaderSkeleton,
-} from 'carbon-components-react';
+} from '../';
 import mdx from './FileUploader.mdx';
 import './FileUploader-story.scss';
 

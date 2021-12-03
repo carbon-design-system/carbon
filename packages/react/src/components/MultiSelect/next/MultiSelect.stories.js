@@ -6,7 +6,7 @@
  */
 
 import React from 'react';
-import { MultiSelect } from 'carbon-components-react';
+import MultiSelect from '../';
 import { Layer } from '../../Layer';
 
 const items = [

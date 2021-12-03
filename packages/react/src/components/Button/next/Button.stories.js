@@ -8,7 +8,8 @@
 import React from 'react';
 import { action } from '@storybook/addon-actions';
 import { Add16 } from '@carbon/icons-react';
-import { Button, ButtonSet, ButtonSkeleton } from 'carbon-components-react';
+import { default as Button, ButtonSkeleton } from '../';
+import ButtonSet from '../../ButtonSet';
 
 export default {
   title: 'Components/Button',

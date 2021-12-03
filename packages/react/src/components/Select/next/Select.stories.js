@@ -6,12 +6,7 @@
  */
 
 import React from 'react';
-import {
-  Select,
-  SelectItem,
-  SelectItemGroup,
-  SelectSkeleton,
-} from 'carbon-components-react';
+import { Select, SelectItem, SelectItemGroup, SelectSkeleton } from '../';
 import { Layer } from '../../Layer';
 
 export default {

@@ -7,7 +7,7 @@
 
 import { screen, render } from '@testing-library/react';
 import React from 'react';
-import { Layer } from '../Layer';
+import { Layer } from '../../Layer';
 
 describe('Layer', () => {
   it('should render the children passed in as a prop', () => {

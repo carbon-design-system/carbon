@@ -8,10 +8,10 @@
 import React from 'react';
 import { action } from '@storybook/addon-actions';
 import {
-  DatePicker,
+  default as DatePicker,
   DatePickerInput,
   DatePickerSkeleton,
-} from 'carbon-components-react';
+} from '../';
 import { Layer } from '../../Layer';
 
 // const patterns = {

@@ -6,23 +6,21 @@
  */
 
 import React from 'react';
-import {
-  Checkbox,
-  Form,
-  FormGroup,
-  FileUploader,
-  NumberInput,
-  RadioButton,
-  RadioButtonGroup,
-  Button,
-  Search,
-  Select,
-  SelectItem,
-  TextArea,
-  TextInput,
-  Toggle,
-  unstable_Stack as Stack,
-} from 'carbon-components-react';
+import Checkbox from '../../Checkbox';
+import Form from '../';
+import FormGroup from '../../FormGroup';
+import FileUploader from '../../FileUploader';
+import NumberInput from '../../NumberInput';
+import RadioButton from '../../RadioButton';
+import RadioButtonGroup from '../../RadioButtonGroup';
+import Button from '../../Button';
+import Search from '../../Search';
+import Select from '../../Select';
+import SelectItem from '../../SelectItem';
+import TextArea from '../../TextArea';
+import TextInput from '../../TextInput';
+import Toggle from '../../Toggle';
+import { Stack } from '../../Stack';
 
 const checkboxEvents = {
   className: 'some-class',

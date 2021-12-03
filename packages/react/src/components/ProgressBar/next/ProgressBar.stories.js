@@ -7,7 +7,7 @@
 
 import React, { useState, useEffect } from 'react';
 
-import { unstable_ProgressBar as ProgressBar } from 'carbon-components-react';
+import ProgressBar from '../';
 
 export default {
   title: 'Experimental/unstable_ProgressBar',

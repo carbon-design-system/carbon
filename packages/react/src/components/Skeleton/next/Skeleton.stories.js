@@ -1,5 +1,13 @@
+/**
+ * Copyright IBM Corp. 2016, 2018
+ *
+ * This source code is licensed under the Apache-2.0 license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
 import React from 'react';
-import { SkeletonPlaceholder, SkeletonText } from 'carbon-components-react';
+import { SkeletonText } from '../../SkeletonText';
+import { SkeletonPlaceholder } from '../../SkeletonPlaceholder';
 import { withKnobs, select, boolean, number } from '@storybook/addon-knobs';
 
 const classNames = {

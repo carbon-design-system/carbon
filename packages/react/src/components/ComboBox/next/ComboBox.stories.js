@@ -6,7 +6,7 @@
  */
 
 import React from 'react';
-import { ComboBox } from 'carbon-components-react';
+import ComboBox from '../';
 import { Layer } from '../../Layer';
 
 const items = [

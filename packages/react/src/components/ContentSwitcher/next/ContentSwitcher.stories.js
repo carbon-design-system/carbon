@@ -6,7 +6,8 @@
  */
 
 import React from 'react';
-import { ContentSwitcher, Switch } from 'carbon-components-react';
+import { ContentSwitcher } from '../';
+import { Switch } from '../../Switch';
 import { Layer } from '../../Layer';
 
 export default {

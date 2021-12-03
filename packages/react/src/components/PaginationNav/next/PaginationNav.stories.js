@@ -6,7 +6,7 @@
  */
 
 import React from 'react';
-import { PaginationNav } from 'carbon-components-react';
+import PaginationNav from '../';
 
 const props = () => ({
   loop: false,

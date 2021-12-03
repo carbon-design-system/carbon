@@ -6,7 +6,7 @@
  */
 
 import React from 'react';
-import { CodeSnippet, CodeSnippetSkeleton } from 'carbon-components-react';
+import { default as CodeSnippet, CodeSnippetSkeleton } from '../';
 import { Layer } from '../../Layer';
 
 export default {

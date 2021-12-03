@@ -6,7 +6,7 @@
  */
 
 import React from 'react';
-import { NumberInput, NumberInputSkeleton } from 'carbon-components-react';
+import { default as NumberInput, NumberInputSkeleton } from '../';
 import { Layer } from '../../Layer';
 
 export default {

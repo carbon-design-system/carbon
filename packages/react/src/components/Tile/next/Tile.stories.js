@@ -6,18 +6,18 @@
  */
 
 import React from 'react';
+import { Link } from '../../Link';
+import { TextInput } from '../../TextInput';
 import {
   ClickableTile,
   ExpandableTile,
-  Link,
   RadioTile,
   SelectableTile,
-  TextInput,
   Tile,
   TileGroup,
   TileAboveTheFoldContent,
   TileBelowTheFoldContent,
-} from 'carbon-components-react';
+} from '../';
 import { Layer } from '../../Layer';
 import './tile-story.scss';
 

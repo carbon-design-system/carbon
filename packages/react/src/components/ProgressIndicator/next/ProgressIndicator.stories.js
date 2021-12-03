@@ -10,9 +10,8 @@ import {
   ProgressIndicator,
   ProgressStep,
   ProgressIndicatorSkeleton,
-  Tooltip,
-} from 'carbon-components-react';
-// import Tooltip from '../Tooltip';
+} from '../';
+import Tooltip from '../../Tooltip';
 
 export default {
   title: 'Components/ProgressIndicator',

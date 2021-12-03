@@ -7,11 +7,8 @@
 
 import React, { useState } from 'react';
 import { Document16, Folder16 } from '@carbon/icons-react';
-import {
-  unstable_TreeView as TreeView,
-  unstable_TreeNode as TreeNode,
-  InlineNotification,
-} from 'carbon-components-react';
+import { InlineNotification } from '../../Notification';
+import { TreeView, TreeNode } from '../';
 import './story.scss';
 
 const props = () => ({
