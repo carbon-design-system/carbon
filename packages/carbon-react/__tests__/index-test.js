@@ -181,6 +181,7 @@ Array [
   "TextInput",
   "TextInputSkeleton",
   "Theme",
+  "ThemeContext",
   "Tile",
   "TileAboveTheFoldContent",
   "TileBelowTheFoldContent",
