@@ -68,6 +68,7 @@ const MultiSelect = React.forwardRef(function MultiSelect(
     onChange,
     onMenuChange,
     direction,
+    value,
   },
   ref
 ) {
@@ -85,6 +86,7 @@ const MultiSelect = React.forwardRef(function MultiSelect(
     disabled,
     initialSelectedItems,
     onChange,
+    controlledItems: value,
   });
 
   const {
@@ -466,6 +468,11 @@ MultiSelect.propTypes = {
   useTitleInItem: PropTypes.bool,
 
   /**
+   * Specify value to control items selected
+   */
+  value: PropTypes.array,
+
+  /**
    * Specify whether the control is currently in warning state
    */
   warn: PropTypes.bool,
@@ -491,6 +498,7 @@ MultiSelect.defaultProps = {
   direction: 'bottom',
   clearSelectionText: 'To clear selection, press Delete or Backspace,',
   clearSelectionDescription: 'Total items selected: ',
+  value: null,
 };
 
 export default MultiSelect;

@@ -4314,6 +4314,7 @@ Map {
       "sortItems": [Function],
       "title": false,
       "type": "default",
+      "value": null,
     },
     "propTypes": Object {
       "clearSelectionDescription": Object {
@@ -4548,6 +4549,9 @@ Map {
       },
       "useTitleInItem": Object {
         "type": "bool",
+      },
+      "value": Object {
+        "type": "array",
       },
       "warn": Object {
         "type": "bool",
