@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React, { useState } from 'react';
+import React, { useCallback, useState } from 'react';
 import { action } from '@storybook/addon-actions';
 import {
   withKnobs,
@@ -138,6 +138,31 @@ export const Default = withReadme(readme, () => {
         itemToString={(item) => (item ? item.text : '')}
         translateWithId={(id) => listBoxMenuIconTranslationIds[id]}
         selectionFeedback={selectionFeedback}
+      />
+    </div>
+  );
+});
+
+export const controlled = withReadme(readme, () => {
+  const {
+    listBoxMenuIconTranslationIds,
+    selectionFeedback,
+    ...multiSelectProps
+  } = props();
+  const [selectedItems, setSelectedItems] = useState([]);
+  const onChange = useCallback(({ selectedItems: newSelectedItems }) => {
+    setSelectedItems(newSelectedItems);
+  }, []);
+  return (
+    <div style={{ width: 300 }}>
+      <MultiSelect
+        {...multiSelectProps}
+        items={items}
+        itemToString={(item) => (item ? item.text : '')}
+        translateWithId={(id) => listBoxMenuIconTranslationIds[id]}
+        selectionFeedback={selectionFeedback}
+        onChange={onChange}
+        value={selectedItems}
       />
     </div>
   );
