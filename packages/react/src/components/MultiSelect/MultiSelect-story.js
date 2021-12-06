@@ -20,6 +20,7 @@ import MultiSelect from '../MultiSelect';
 import FilterableMultiSelect from '../MultiSelect/FilterableMultiSelect';
 import Checkbox from '../Checkbox';
 import mdx from './MultiSelect.mdx';
+import Button from '../Button';
 
 const items = [
   {
@@ -153,6 +154,7 @@ export const controlled = withReadme(readme, () => {
   const onChange = useCallback(({ selectedItems: newSelectedItems }) => {
     setSelectedItems(newSelectedItems);
   }, []);
+
   return (
     <div style={{ width: 300 }}>
       <MultiSelect
@@ -164,6 +166,18 @@ export const controlled = withReadme(readme, () => {
         onChange={onChange}
         value={selectedItems}
       />
+      <Button
+        onClick={() => {
+          setSelectedItems([{ id: 'downshift-1-item-0', text: 'Option 1' }]);
+        }}>
+        click to select only Option 1
+      </Button>
+      <Button
+        onClick={() => {
+          setSelectedItems([]);
+        }}>
+        click to clear selections
+      </Button>
     </div>
   );
 });
