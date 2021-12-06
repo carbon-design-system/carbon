@@ -39,6 +39,8 @@ const TableToolbarSearch = ({
   persistent,
   persistant,
   id,
+  onBlur,
+  onFocus,
   ...rest
 }) => {
   const { current: controlled } = useRef(expandedProp !== undefined);
@@ -96,6 +98,9 @@ const TableToolbarSearch = ({
     }
   };
 
+  const handleOnFocus = (event) => handleExpand(event, true);
+  const handleOnBlur = (event) => !value && handleExpand(event, false);
+
   return (
     <Search
       disabled={disabled}
@@ -110,8 +115,10 @@ const TableToolbarSearch = ({
       }
       onChange={onChange}
       onClear={onClear}
-      onFocus={(event) => handleExpand(event, true)}
-      onBlur={(event) => !value && handleExpand(event, false)}
+      onFocus={
+        onFocus ? (event) => onFocus(event, handleExpand) : handleOnFocus
+      }
+      onBlur={onBlur ? (event) => onBlur(event, handleExpand) : handleOnBlur}
       {...rest}
     />
   );
@@ -156,6 +163,13 @@ TableToolbarSearch.propTypes = {
   labelText: PropTypes.string,
 
   /**
+   * Provide an optional function to be called when the search input loses focus, this will be
+   * passed the event as the first parameter and a function to handle the expanding of the search
+   * input as the second
+   */
+  onBlur: PropTypes.func,
+
+  /**
    * Provide an optional hook that is called each time the input is updated
    */
   onChange: PropTypes.func,
@@ -169,6 +183,13 @@ TableToolbarSearch.propTypes = {
    * Provide an optional hook that is called each time the input is expanded
    */
   onExpand: PropTypes.func,
+
+  /**
+   * Provide an optional function to be called when the search input gains focus, this will be
+   * passed the event as the first parameter and a function to handle the expanding of the search
+   * input as the second.
+   */
+  onFocus: PropTypes.func,
 
   persistant: deprecate(
     PropTypes.bool,
