@@ -25,8 +25,6 @@ describe('FilterableMultiSelect', () => {
   let mockProps;
 
   beforeEach(() => {
-    // jest.mock('../../../internal/deprecateFieldOnObject');
-
     mockProps = {
       id: 'test-filterable-multiselect',
       disabled: false,
