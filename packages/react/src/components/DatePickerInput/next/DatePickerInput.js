@@ -310,12 +310,5 @@ DatePickerIcon.propTypes = {
   warn: PropTypes.bool,
 };
 
-DatePickerInput.propTypes = {
-  datePickerType: PropTypes.oneOf(['simple', 'single', 'range']),
-  iconDescription: PropTypes.string,
-  invalid: PropTypes.bool,
-  openCalendar: PropTypes.func,
-  warn: PropTypes.bool,
-};
 
 export default DatePickerInput;
