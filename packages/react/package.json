@@ -110,7 +110,7 @@
     "core-js": "^3.16.0",
     "cross-env": "^5.2.0",
     "css-loader": "^3.4.2",
-    "cypress": "^8.1.0",
+    "cypress": "^9.1.1",
     "cypress-real-events": "^1.5.1",
     "fast-glob": "^3.2.7",
     "fast-sass-loader": "^1.5.0",
