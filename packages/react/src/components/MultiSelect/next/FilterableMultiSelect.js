@@ -70,12 +70,7 @@ const FilterableMultiSelect = React.forwardRef(function FilterableMultiSelect(
   const textInput = useRef();
   const filterableMultiSelectInstanceId = useId();
 
-  const context = FeatureFlagContext;
-  let enabled;
-
-  if (context.enabled) {
-    enabled = context.enabled('enable-v11-release');
-  }
+  const enabled = useFeatureFlag('enable-v11-release');
   const prefix = usePrefix();
 
   if (prevOpen !== open) {
