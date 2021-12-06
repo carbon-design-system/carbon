@@ -5941,51 +5941,6 @@ Map {
       },
     },
   },
-  "unstable_ContainedTab" => Object {
-    "$$typeof": Symbol(react.forward_ref),
-    "propTypes": Object {
-      "className": Object {
-        "type": "string",
-      },
-      "disabled": Object {
-        "type": "bool",
-      },
-      "handleTabClick": Object {
-        "type": "func",
-      },
-      "handleTabKeyDown": Object {
-        "type": "func",
-      },
-      "id": Object {
-        "type": "string",
-      },
-      "index": Object {
-        "type": "number",
-      },
-      "label": Object {
-        "type": "node",
-      },
-      "onClick": Object {
-        "type": "func",
-      },
-      "onKeyDown": Object {
-        "type": "func",
-      },
-      "renderButton": Object {
-        "type": "func",
-      },
-      "renderContent": Object {
-        "type": "func",
-      },
-      "selected": Object {
-        "type": "bool",
-      },
-      "tabIndex": Object {
-        "type": "number",
-      },
-    },
-    "render": [Function],
-  },
   "TabContent" => Object {
     "defaultProps": Object {
       "selected": false,
@@ -6132,6 +6087,57 @@ Map {
       },
     },
     "render": [Function],
+  },
+  "unstable_TabPanel" => Object {
+    "$$typeof": Symbol(react.forward_ref),
+    "propTypes": Object {
+      "children": Object {
+        "type": "node",
+      },
+      "className": Object {
+        "type": "string",
+      },
+    },
+    "render": [Function],
+  },
+  "unstable_TabPanels" => Object {
+    "propTypes": Object {
+      "children": Object {
+        "type": "node",
+      },
+    },
+  },
+  "unstable_TabList" => Object {
+    "propTypes": Object {
+      "activation": Object {
+        "args": Array [
+          Array [
+            "automatic",
+            "manual",
+          ],
+        ],
+        "type": "oneOf",
+      },
+      "aria-label": Object {
+        "isRequired": true,
+        "type": "string",
+      },
+      "children": Object {
+        "type": "node",
+      },
+      "className": Object {
+        "type": "string",
+      },
+      "contained": Object {
+        "type": "bool",
+      },
+      "light": Object {
+        "type": "bool",
+      },
+      "scrollIntoView": Object {
+        "type": "bool",
+      },
+    },
   },
   "Tag" => Object {
     "propTypes": Object {

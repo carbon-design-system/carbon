@@ -42,9 +42,11 @@ function Tabs({
       }
     },
   });
+
   const value = {
     baseId,
     activeIndex,
+    defaultSelectedIndex,
     setActiveIndex,
     selectedIndex,
     setSelectedIndex,
@@ -133,10 +135,9 @@ function TabList({
   } = React.useContext(TabsContext);
   const prefix = usePrefix();
   const ref = useRef(null);
-  const className = cx(`${prefix}--tabs`, {
+  const className = cx(`${prefix}--tabs`, customClassName, {
     [`${prefix}--tabs--contained`]: contained,
     [`${prefix}--tabs--light`]: light,
-    customClassName: customClassName,
   });
 
   const tabs = [];
@@ -177,13 +178,15 @@ function TabList({
   });
 
   useEffectOnce(() => {
-    const activeTabs = tabs.filter((tab) => {
-      return !tab.current.disabled;
-    });
+    if (tabs[selectedIndex].current.disabled) {
+      const activeTabs = tabs.filter((tab) => {
+        return !tab.current.disabled;
+      });
 
-    if (activeTabs.length > 0) {
-      const tab = activeTabs[0];
-      setSelectedIndex(tabs.indexOf(tab));
+      if (activeTabs.length > 0) {
+        const tab = activeTabs[0];
+        setSelectedIndex(tabs.indexOf(tab));
+      }
     }
   });
 
@@ -272,10 +275,10 @@ const Tab = React.forwardRef(function Tab(
   const className = cx(
     `${prefix}--tabs__nav-item`,
     `${prefix}--tabs__nav-link`,
+    customClassName,
     {
       [`${prefix}--tabs__nav-item--selected`]: selectedIndex === index,
       [`${prefix}--tabs__nav-item--disabled`]: disabled,
-      customClassName: customClassName,
     }
   );
 
@@ -353,9 +356,7 @@ const TabPanel = React.forwardRef(function TabPanel(
   const index = React.useContext(TabPanelContext);
   const id = `${baseId}-tabpanel-${index}`;
   const tabId = `${baseId}-tab-${index}`;
-  const className = cx(`${prefix}--tab-content`, {
-    customClassName: customClassName,
-  });
+  const className = cx(`${prefix}--tab-content`, customClassName);
 
   // tabindex should only be 0 if no interactive content in children
   useEffect(() => {

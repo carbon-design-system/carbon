@@ -26,7 +26,10 @@ export default {
   parameters: {
     component: Tabs,
     subcomponents: {
+      TabList,
       Tab,
+      TabPanels,
+      TabPanel,
     },
   },
 };
@@ -35,8 +38,8 @@ export const Default = () => (
   <Tabs>
     <TabList aria-label="List of tabs">
       <Tab>Tab Label 1</Tab>
-      <Tab disabled>Tab Label 2</Tab>
-      <Tab>Tab Label 3</Tab>
+      <Tab>Tab Label 2</Tab>
+      <Tab disabled>Tab Label 3</Tab>
       <Tab>Tab Label 4 with a very long long label</Tab>
       <Tab>Tab Label 5</Tab>
     </TabList>
