@@ -164,7 +164,7 @@ export const controlled = withReadme(readme, () => {
         translateWithId={(id) => listBoxMenuIconTranslationIds[id]}
         selectionFeedback={selectionFeedback}
         onChange={onChange}
-        value={selectedItems}
+        selectedItems={selectedItems}
       />
       <Button
         onClick={() => {

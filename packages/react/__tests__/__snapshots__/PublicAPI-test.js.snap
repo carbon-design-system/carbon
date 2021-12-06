@@ -4310,11 +4310,11 @@ Map {
       "light": false,
       "locale": "en",
       "open": false,
+      "selectedItems": null,
       "selectionFeedback": "top-after-reopen",
       "sortItems": [Function],
       "title": false,
       "type": "default",
-      "value": null,
     },
     "propTypes": Object {
       "clearSelectionDescription": Object {
@@ -4507,6 +4507,9 @@ Map {
       "open": Object {
         "type": "bool",
       },
+      "selectedItems": Object {
+        "type": "array",
+      },
       "selectionFeedback": Object {
         "args": Array [
           Array [
@@ -4549,9 +4552,6 @@ Map {
       },
       "useTitleInItem": Object {
         "type": "bool",
-      },
-      "value": Object {
-        "type": "array",
       },
       "warn": Object {
         "type": "bool",
