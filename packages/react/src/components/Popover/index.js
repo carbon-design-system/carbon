@@ -13,7 +13,7 @@ import { usePrefix } from '../../internal/usePrefix';
 const Popover = React.forwardRef(function Popover(props, ref) {
   const {
     align = 'bottom',
-    as: BaseComponent = 'div',
+    as: BaseComponent = 'span',
     caret = true,
     className: customClassName,
     children,
@@ -113,12 +113,12 @@ const PopoverContent = React.forwardRef(function PopoverContent(
 ) {
   const prefix = usePrefix();
   return (
-    <div {...rest} className={`${prefix}--popover`}>
-      <div className={cx(`${prefix}--popover-content`, className)} ref={ref}>
+    <span {...rest} className={`${prefix}--popover`}>
+      <span className={cx(`${prefix}--popover-content`, className)} ref={ref}>
         {children}
-      </div>
+      </span>
       <span className={`${prefix}--popover-caret`} />
-    </div>
+    </span>
   );
 });
 

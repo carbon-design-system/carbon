@@ -1,0 +1,85 @@
+import { Preview, Props, Story } from '@storybook/addon-docs/blocks';
+
+# Text
+
+[Source code](https://github.com/carbon-design-system/carbon/tree/main/packages/react/src/components/Text)
+
+<!-- &nbsp;|&nbsp;
+[Usage guidelines](https://www.carbondesignsystem.com/components/select/usage)
+&nbsp;|&nbsp;
+[Accessibility](https://www.carbondesignsystem.com/components/select/accessibility) -->
+
+## Table of Contents
+
+- [Overview](#overview)
+- [Layout and Text](#layout-and-text)
+- [Set Text Direction](#set-text-direction)
+- [Usage Examples](#useage-examples)
+- [Component API](#component-api)
+- [Feedback](#feedback)
+
+## Overview
+
+You may be familiar with the `dir` or `direction` property in HTML and CSS. This
+direction is commonly seen as the way to enable LTR (left to right) or RTL
+(right to left) experiences on the web. However, one common misconception is
+that you will want a page to always be LTR or RTL. In certain situations, you
+may want the layout direction to be different than the text direction. This
+series of primitive components is provided to enable the changing of directions
+for individual text nodes, entire sections of your app, or to change layout
+direction independently of text direction.
+
+## Text
+
+`Text` can be used for applying the correct `dir` attribute on a particular text
+node based on the `TextDirection`, defaulting to `auto`.
+
+<Preview>
+  <Story id="experimental-unstable-text--default" />
+</Preview>
+
+## Layout Direction
+
+`LayoutDirection` can be used for setting the layout direction in a part of an
+application.
+
+<Preview>
+  <Story id="experimental-unstable-text--layout-and-text" />
+</Preview>
+
+## Text Direction
+
+`TextDirection` can be used for setting the text direction in a part of an
+application. It allows you to force the text direction of any particular text in
+the sub-tree.
+
+<Preview>
+  <Story id="experimental-unstable-text--set-text-direction" />
+</Preview>
+
+## Usage Examples
+
+It is important to note that not all Carbon components will use `Text`
+internally. Carbon components that accept a property of type `string` should use
+`Text` internally around any usage of the property.
+
+For components that accept properties of type `node`, such as the common
+`children`, `Text` will not be used internally. You can compose `Text` within
+these properties directly. This also applies to components that utilize string
+transformation functions that return nodes, like `itemToElement` on `Dropdown`.
+The Usage Examples story below provides some examples of how to do this with
+various components.
+
+<Preview>
+  <Story id="experimental-unstable-text--usage-examples" />
+</Preview>
+
+## Component API
+
+<Props />
+
+## Feedback
+
+Help us improve this component by providing feedback, asking questions on Slack,
+or updating this file on
+[GitHub](https://github.com/carbon-design-system/carbon/edit/main/packages/react/src/components/Text/Text.mdx).

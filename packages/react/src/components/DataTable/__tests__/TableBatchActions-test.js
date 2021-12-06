@@ -37,14 +37,14 @@ describe('DataTable.TableBatchActions', () => {
     const singleWrapper = mount(
       <TableBatchActions {...mockProps} totalSelected={1} />
     );
-    expect(singleWrapper.find(`.${prefix}--batch-summary__para`).text()).toBe(
+    expect(singleWrapper.find(`p.${prefix}--batch-summary__para`).text()).toBe(
       '1 item selected'
     );
 
     const multiWrapper = mount(
       <TableBatchActions {...mockProps} totalSelected={2} />
     );
-    expect(multiWrapper.find(`.${prefix}--batch-summary__para`).text()).toBe(
+    expect(multiWrapper.find(`p.${prefix}--batch-summary__para`).text()).toBe(
       '2 items selected'
     );
   });

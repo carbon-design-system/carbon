@@ -78,4 +78,27 @@ describe('ModalWrapper', () => {
     wrapper.find({ children: mockProps.primaryButtonText }).simulate('click');
     expect(wrapper.state('isOpen')).toBe(true);
   });
+
+  it('should default to primary button', () => {
+    const wrapper = mount(<ModalWrapper aria-label="test" />);
+    expect(wrapper.find(`.${prefix}--btn--primary`).length).toEqual(2);
+  });
+
+  it('should render ghost button when ghost is passed', () => {
+    const wrapper = mount(<ModalWrapper aria-label="test" />);
+    wrapper.setProps({ triggerButtonKind: 'ghost' });
+    expect(wrapper.find(`.${prefix}--btn--ghost`).length).toEqual(1);
+  });
+
+  it('should render danger button when danger is passed', () => {
+    const wrapper = mount(<ModalWrapper aria-label="test" />);
+    wrapper.setProps({ triggerButtonKind: 'danger' });
+    expect(wrapper.find(`.${prefix}--btn--danger`).length).toEqual(1);
+  });
+
+  it('should render secondary button when secondary is passed', () => {
+    const wrapper = mount(<ModalWrapper aria-label="test" />);
+    wrapper.setProps({ triggerButtonKind: 'secondary' });
+    expect(wrapper.find(`.${prefix}--btn--secondary`).length).toEqual(2);
+  });
 });

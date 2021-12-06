@@ -16,6 +16,7 @@ import {
   text,
   withKnobs,
 } from '@storybook/addon-knobs';
+import { settings } from 'carbon-components';
 import Modal from '../Modal';
 import Button from '../Button';
 import Select from '../Select';
@@ -24,6 +25,9 @@ import Dropdown from '../Dropdown';
 import SelectItem from '../SelectItem';
 import TextInput from '../TextInput';
 import mdx from './Modal.mdx';
+import Tooltip from '../Tooltip';
+
+const { prefix } = settings;
 
 const sizes = {
   'Extra small (xs)': 'xs',
@@ -319,6 +323,19 @@ export const WithStateManager = () => {
             Custom domains direct requests for your apps in this Cloud Foundry
             organization to a URL that you own. A custom domain can be a shared
             domain, a shared subdomain, or a shared domain and host.
+            <Tooltip tooltipBodyId="tooltip-body">
+              <p id="tooltip-body">
+                This is some tooltip text. This box shows the maximum amount of
+                text that should appear inside. If more room is needed please
+                use a modal instead.
+              </p>
+              <div className={`${prefix}--tooltip__footer`}>
+                <a href="/" className={`${prefix}--link`}>
+                  Learn More
+                </a>
+                <Button size="small">Create</Button>
+              </div>
+            </Tooltip>
           </p>
           <TextInput
             data-modal-primary-focus

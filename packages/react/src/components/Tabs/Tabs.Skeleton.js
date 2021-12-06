@@ -10,14 +10,6 @@ import React from 'react';
 import cx from 'classnames';
 import { usePrefix } from '../../internal/usePrefix';
 
-// const tab = (
-//   <li className={`${prefix}--tabs--scrollable__nav-item`}>
-//     <div className={`${prefix}--tabs__nav-link`}>
-//       <span></span>
-//     </div>
-//   </li>
-// );
-
 function Tab() {
   const prefix = usePrefix();
   return (
