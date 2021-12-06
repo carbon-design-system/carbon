@@ -69,26 +69,8 @@ const DatePickerInput = React.forwardRef(function DatePickerInput(props, ref) {
     [`${prefix}--date-picker__input--${size}`]: size,
     [`${prefix}--date-picker__input--invalid`]: invalid,
   });
-
-  const label = labelText ? (
-    <label htmlFor={id} className={labelClasses}>
-      {labelText}
-    </label>
-  ) : null;
-
-  const helper = helperText ? (
-    <div className={helperTextClasses}>{helperText}</div>
-  ) : null;
-
-  let error = null;
-  if (invalid) {
-    error = <div className={`${prefix}--form-requirement`}>{invalidText}</div>;
-  } else if (warn) {
-    error = <div className={`${prefix}--form-requirement`}>{warnText}</div>;
-  }
-
   const containerClasses = cx(`${prefix}--date-picker-container`, {
-    [`${prefix}--date-picker--nolabel`]: !label,
+    [`${prefix}--date-picker--nolabel`]: !labelText,
   });
 
   const input = invalid ? (
@@ -112,7 +94,11 @@ const DatePickerInput = React.forwardRef(function DatePickerInput(props, ref) {
 
   return (
     <div className={containerClasses}>
-      {label}
+      {labelText && (
+        <label htmlFor={id} className={labelClasses}>
+          {labelText}
+        </label>
+      )}
       <div className={wrapperClasses}>
         {input}
         <DatePickerIcon
@@ -123,8 +109,11 @@ const DatePickerInput = React.forwardRef(function DatePickerInput(props, ref) {
           warn={warn}
         />
       </div>
-      {error}
-      {helper}
+      {invalid && (
+        <div className={`${prefix}--form-requirement`}>{invalidText}</div>
+      )}
+      {warn && <div className={`${prefix}--form-requirement`}>{warnText}</div>}
+      {helperText && <div className={helperTextClasses}>{helperText}</div>}
     </div>
   );
 });
@@ -307,14 +296,6 @@ DatePickerIcon.propTypes = {
   /**
    * Specify whether the control is currently in warning state
    */
-  warn: PropTypes.bool,
-};
-
-DatePickerInput.propTypes = {
-  datePickerType: PropTypes.oneOf(['simple', 'single', 'range']),
-  iconDescription: PropTypes.string,
-  invalid: PropTypes.bool,
-  openCalendar: PropTypes.func,
   warn: PropTypes.bool,
 };
 
