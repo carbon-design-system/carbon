@@ -5,5 +5,5 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-export * from './Checkbox.Skeleton';
+export { default as CheckboxSkeleton } from './Checkbox.Skeleton';
 export default from './Checkbox';
