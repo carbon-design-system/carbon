@@ -35,7 +35,7 @@ export function useSelection({
   disabled,
   onChange,
   initialSelectedItems = [],
-  controlledItems,
+  selectedItems: controlledItems,
 }) {
   const isMounted = useRef(false);
   const savedOnChange = useRef(onChange);
