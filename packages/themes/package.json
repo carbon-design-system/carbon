@@ -32,7 +32,7 @@
     "@carbon/colors": "^10.34.0",
     "@carbon/layout": "^10.34.0",
     "@carbon/type": "^10.38.0",
-    "color": "^3.1.2"
+    "color": "^4.1.0"
   },
   "devDependencies": {
     "@babel/node": "^7.14.2",
