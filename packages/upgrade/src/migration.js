@@ -31,6 +31,17 @@ function getMigrationsByWorkspace(workspaces, migrations) {
   return workspaces
     .map((workspace) => {
       const { dependencies } = workspace;
+      // console.log('DEPENDENCIES', dependencies);
+
+      dependencies.forEach((dependency) => {
+        if (dependency.name === 'carbon-components-react') {
+          if (dependency.version !== '7.50.0') {
+            console.log('does not meet range limit');
+          } else {
+            console.log('meets range limit. we can upgrade to @carbon/react');
+          }
+        }
+      });
 
       return {
         workspace,

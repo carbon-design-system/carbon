@@ -51,13 +51,18 @@ async function main({ argv, cwd }) {
       };
 
       const project = await Project.detect(options.cwd);
+      console.log('project', project);
       const migrationsByWorkspace = await Migration.getMigrationsByWorkspace(
         Array.from(project.getWorkspaces()),
         Migration.getMigrations()
       );
+      // console.log('migrations by workspace', migrationsByWorkspace);
+
       const migrationsToRun = await Planner.getSelectedMigrations(
         migrationsByWorkspace
       );
+
+      // console.log('migrations to run?', migrationsToRun);
 
       await Runner.run(migrationsToRun, options);
     })
@@ -78,7 +83,8 @@ function run(command) {
       console.error(
         'Git directory is not clean. Please stash or commit your changes.'
       );
-      process.exit(1);
+      // process.exit(1);
+      console.log('would normally exit here');
     }
 
     try {
@@ -98,3 +104,20 @@ function run(command) {
 }
 
 module.exports = main;
+
+// UPGRADE FLOW:
+// 1. run upgrade command
+// 2. check git status
+// 3. check what version you're on
+//     - "Looks like you're using `vX.X.X` of ..."
+// 4. check what migrations are available fo them
+//     - "These are the migrations available to you:"
+// 5. List out migrations with ability to choose which to upgrade to
+//     - can upgrade to v10 newer version, or v11 if within range
+// 6. user picks migration
+// 7. confirm user selection (y/N)
+// 8. we run migration (install update or new package)
+//     - this just updates package.json
+// 9. log diff for user
+
+// QUESTIONS: this flow implies a single workspace, but would it work for multiple workspaces?
