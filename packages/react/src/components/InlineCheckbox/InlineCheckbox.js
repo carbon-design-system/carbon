@@ -134,12 +134,15 @@ class InlineCheckbox extends React.Component {
       <>
         <input {...inputProps} />
         {
-          /* eslint-disable jsx-a11y/label-has-for,jsx-a11y/label-has-associated-control */
+          /* eslint-disable jsx-a11y/label-has-for,jsx-a11y/label-has-associated-control,jsx-a11y/click-events-have-key-events,jsx-a11y/no-noninteractive-element-interactions */
           <label
             htmlFor={id}
             className={`${prefix}--checkbox-label`}
             aria-label={ariaLabel}
             title={title}
+            onClick={(evt) => {
+              evt.stopPropagation();
+            }}
           />
         }
       </>
