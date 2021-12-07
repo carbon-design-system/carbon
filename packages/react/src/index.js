@@ -58,7 +58,7 @@ export FileUploader, {
   FileUploaderDropContainer,
   FileUploaderItem,
 } from './components/FileUploader';
-export FilterableMultiSelect from './components/FilterableMultiSelect';
+export { FilterableMultiSelect } from './components/FilterableMultiSelect';
 export Form from './components/Form';
 export FluidForm from './components/FluidForm';
 export FormGroup from './components/FormGroup';
