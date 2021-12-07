@@ -65,7 +65,11 @@ function updatePackageJson(packageJson, dependencies) {
   const result = clone(packageJson);
 
   for (const { name, version, type } of dependencies) {
-    result[type][name] = version;
+    if (version === '@carbon/react') {
+      result[type][`@carbon/react`] = `0.10.1`;
+    } else {
+      result[type][name] = version;
+    }
   }
 
   return result;
