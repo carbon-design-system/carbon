@@ -6,9 +6,10 @@
  */
 
 import React from 'react';
-import MultiSelect from '../MultiSelect';
+import MultiSelect from '../';
 import FilterableMultiSelect from './FilterableMultiSelect';
-import { Layer } from '../../../../../carbon-react/src/components/Layer';
+import { Layer } from '../../Layer';
+
 
 const items = [
   {
