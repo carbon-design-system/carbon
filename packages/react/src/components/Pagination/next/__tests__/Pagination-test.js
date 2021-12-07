@@ -515,4 +515,11 @@ describe('Pagination', () => {
       });
     });
   });
+
+  it('should render with ref', () => {
+    const ref = React.createRef();
+    mount(<Pagination pageSizes={[10]} totalItems={5} ref={ref} />);
+
+    expect(ref.current).toHaveClass(`${prefix}--pagination`);
+  });
 });
