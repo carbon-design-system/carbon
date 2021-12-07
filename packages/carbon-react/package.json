@@ -88,7 +88,7 @@
     "sass": "^1.43.3",
     "sass-loader": "10",
     "style-loader": "^2.0.0",
-    "webpack": "^4.41.5"
+    "webpack": "^5.65.0"
   },
   "sideEffects": [
     "es/index.js",
