@@ -6,7 +6,6 @@
  */
 import { deprecateFieldOnObject } from '../../internal/deprecateFieldOnObject';
 
-export * from './TextInput.Skeleton';
 import ControlledPasswordInput from './ControlledPasswordInput';
 import PasswordInput from './PasswordInput';
 import TextInput from './TextInput';
@@ -23,4 +22,5 @@ if (__DEV__) {
   deprecateFieldOnObject(TextInput, 'PasswordInput', PasswordInput);
 }
 
+export { default as TextInputSkeleton } from './TextInput.Skeleton';
 export default TextInput;

@@ -55,6 +55,7 @@ exports[`DataTable.TableSelectRow should render 1`] = `
                         aria-label="Aria label"
                         className="bx--checkbox-label"
                         htmlFor="id"
+                        onClick={[Function]}
                       />
                     </InlineCheckbox>
                   </ForwardRef(InlineCheckbox)>
