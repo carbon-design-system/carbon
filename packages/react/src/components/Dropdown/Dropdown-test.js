@@ -65,6 +65,31 @@ describe('Dropdown', () => {
     expect(wrapper).toMatchSnapshot();
   });
 
+  it('should render selectedItem as an element', () => {
+    const wrapper = mount(
+      <Dropdown
+        {...mockProps}
+        selectedItem={{
+          id: `id-1`,
+          label: `Item 1`,
+          value: 1,
+        }}
+        renderSelectedItem={(selectedItem) => (
+          <div id="a-custom-element-for-selected-item">
+            {selectedItem.label}
+          </div>
+        )}
+      />
+    );
+    // custom element should be rendered for the selected item
+    expect(wrapper.find('#a-custom-element-for-selected-item')).toHaveLength(1);
+    // the title should use the normal itemToString method
+    expect(wrapper.find('button').instance()).toHaveAttribute(
+      'title',
+      'Item 1'
+    );
+  });
+
   describe('title', () => {
     let wrapper;
     let renderedLabel;
