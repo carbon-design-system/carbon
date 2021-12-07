@@ -77,7 +77,14 @@ const Checkbox = React.forwardRef(function Checkbox(
           }
         }}
       />
-      <label htmlFor={id} className={labelClasses} title={title || null}>
+      {/* eslint-disable jsx-a11y/label-has-for,jsx-a11y/label-has-associated-control,jsx-a11y/click-events-have-key-events,jsx-a11y/no-noninteractive-element-interactions */}
+      <label
+        htmlFor={id}
+        className={labelClasses}
+        title={title || null}
+        onClick={(evt) => {
+          evt.stopPropagation();
+        }}>
         <Text className={innerLabelClasses}>{labelText}</Text>
       </label>
     </div>

@@ -109,6 +109,17 @@ describe('Checkbox', () => {
       expect(call[2].target).toBe(inputElement);
     });
   });
+  it('should only propagate click events from the input', () => {
+    const onClick = jest.fn();
+    render(
+      /* eslint-disable jsx-a11y/click-events-have-key-events,jsx-a11y/no-static-element-interactions */
+      <div onClick={onClick}>
+        <Checkbox id="checkbox" labelText="checkbox" />
+      </div>
+    );
+    userEvent.click(screen.getByRole('checkbox'));
+    expect(onClick).toHaveBeenCalledTimes(1);
+  });
 });
 
 describe('refs', () => {
