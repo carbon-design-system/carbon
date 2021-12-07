@@ -210,15 +210,31 @@ describe('Search', () => {
         expect(onChange).toHaveBeenCalledWith(eventObject);
       });
 
-      it('should invoke onClear when input value is cleared', () => {
-        wrapper.setProps({ value: 'test' });
-        const focus = jest.fn();
-        input.getElement().ref({
-          focus,
+      it('should call onClear when input value is cleared', () => {
+        const node = document.createElement('div');
+        document.body.appendChild(node);
+
+        const wrapper = mount(
+          <Search
+            id="test"
+            labelText="testlabel"
+            onClear={onClear}
+            value="test"
+          />,
+          {
+            attachTo: node,
+          }
+        );
+
+        wrapper.find('button').simulate('click', {
+          target: {
+            value: 'test',
+          },
         });
-        wrapper.find('button').simulate('click', { target: { value: 'test' } });
         expect(onClear).toHaveBeenCalled();
-        expect(focus).toHaveBeenCalled();
+        expect(wrapper.find('input').getDOMNode()).toHaveFocus();
+
+        document.body.removeChild(node);
       });
     });
   });

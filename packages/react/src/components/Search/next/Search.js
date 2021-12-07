@@ -5,91 +5,47 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import PropTypes from 'prop-types';
-import React, { useState, useRef, useEffect } from 'react';
-import cx from 'classnames';
 import { Search16, Close16 } from '@carbon/icons-react';
-import { composeEventHandlers } from '../../../tools/events';
+import cx from 'classnames';
+import PropTypes from 'prop-types';
+import React, { useRef, useState } from 'react';
+import { focus } from '../../../internal/focus';
 import { keys, match } from '../../../internal/keyboard';
 import { useId } from '../../../internal/useId';
-import deprecate from '../../../prop-types/deprecate';
 import { usePrefix } from '../../../internal/usePrefix';
+import deprecate from '../../../prop-types/deprecate';
+import { composeEventHandlers } from '../../../tools/events';
 
-const Search = React.forwardRef(function Search(
-  {
-    className,
-    closeButtonLabelText,
-    defaultValue,
-    disabled,
-    id,
-    labelText,
-    light,
-    onChange,
-    onClear,
-    onKeyDown,
-    placeHolderText,
-    placeholder,
-    renderIcon,
-    size = !small ? 'lg' : 'sm',
-    small,
-    type,
-    value,
-    ...rest
-  },
-  ref
-) {
+function Search({
+  autoComplete = 'off',
+  className,
+  closeButtonLabelText = 'Clear search input',
+  defaultValue,
+  disabled,
+  id,
+  labelText,
+  light,
+  onChange = () => {},
+  onClear = () => {},
+  onKeyDown,
+  placeHolderText,
+  placeholder = '',
+  renderIcon,
+  role = 'searchbox',
+  size = !small ? 'lg' : 'sm',
+  small,
+  type = 'text',
+  value,
+  ...rest
+}) {
   const prefix = usePrefix();
-
   const input = useRef(null);
   const magnifier = useRef(null);
-
   const inputId = useId('search-input');
   const uniqueId = id || inputId;
   const searchId = `${uniqueId}-search`;
-
   const [hasContent, setHasContent] = useState(value || defaultValue || false);
-
   const [prevValue, setPrevValue] = useState(value);
-
-  if (value !== prevValue) {
-    setHasContent(!!value);
-    setPrevValue(value);
-  }
-
-  function clearInput(evt) {
-    if (!value) {
-      input.current.value = '';
-      onChange(evt);
-    } else {
-      const clearedEvt = Object.assign({}, evt.target, {
-        target: {
-          value: '',
-        },
-      });
-      onChange(clearedEvt);
-    }
-
-    onClear();
-
-    setHasContent(false);
-  }
-
-  useEffect(() => {
-    if (!hasContent) {
-      input.current.focus();
-    }
-  }, [hasContent]);
-
-  function handleChange(evt) {
-    setHasContent(evt.target.value !== '');
-  }
-
-  function handleKeyDown(evt) {
-    if (match(evt, keys.Escape)) {
-      clearInput(evt);
-    }
-  }
-
   const searchClasses = cx({
     [`${prefix}--search`]: true,
     [`${prefix}--search--sm`]: size === 'sm',
@@ -99,65 +55,86 @@ const Search = React.forwardRef(function Search(
     [`${prefix}--search--disabled`]: disabled,
     [className]: className,
   });
-
   const clearClasses = cx({
     [`${prefix}--search-close`]: true,
     [`${prefix}--search-close--hidden`]: !hasContent,
   });
 
-  let customIcon;
-  if (renderIcon) {
-    customIcon = React.cloneElement(renderIcon, {
-      className: `${prefix}--search-magnifier-icon`,
-    });
+  if (value !== prevValue) {
+    setHasContent(!!value);
+    setPrevValue(value);
   }
 
-  const searchIcon = renderIcon ? (
-    customIcon
-  ) : (
-    <Search16 className={`${prefix}--search-magnifier-icon`} />
-  );
+  function clearInput(event) {
+    if (!value) {
+      input.current.value = '';
+      onChange(event);
+    } else {
+      const clearedEvt = Object.assign({}, event.target, {
+        target: {
+          value: '',
+        },
+      });
+      onChange(clearedEvt);
+    }
+
+    onClear();
+    setHasContent(false);
+    focus(input);
+  }
+
+  function handleChange(event) {
+    setHasContent(event.target.value !== '');
+  }
+
+  function handleKeyDown(event) {
+    if (match(event, keys.Escape)) {
+      clearInput(event);
+    }
+  }
 
   return (
-    <div
-      role="search"
-      aria-labelledby={searchId}
-      className={searchClasses}
-      ref={ref}>
+    <div role="search" aria-labelledby={searchId} className={searchClasses}>
       <div className={`${prefix}--search-magnifier`} ref={magnifier}>
-        {searchIcon}
+        <SearchIcon icon={renderIcon} />
       </div>
       <label id={searchId} htmlFor={uniqueId} className={`${prefix}--label`}>
         {labelText}
       </label>
       <input
-        role="searchbox"
-        autoComplete="off"
-        defaultValue={defaultValue}
-        value={value}
         {...rest}
-        type={type}
-        disabled={disabled}
+        autoComplete={autoComplete}
         className={`${prefix}--search-input`}
+        defaultValue={defaultValue}
+        disabled={disabled}
+        role={role}
+        ref={input}
         id={uniqueId}
-        placeholder={placeHolderText || placeholder}
         onChange={composeEventHandlers([onChange, handleChange])}
         onKeyDown={composeEventHandlers([onKeyDown, handleKeyDown])}
-        ref={input}
+        placeholder={placeHolderText || placeholder}
+        type={type}
+        value={value}
       />
       <button
+        aria-label={closeButtonLabelText}
         className={clearClasses}
         disabled={disabled}
         onClick={clearInput}
-        type="button"
-        aria-label={closeButtonLabelText}>
+        type="button">
         <Close16 />
       </button>
     </div>
   );
-});
+}
 
 Search.propTypes = {
+  /**
+   * Specify an optional value for the `autocomplete` property on the underlying
+   * `<input>`, defaults to "off"
+   */
+  autoComplete: PropTypes.string,
+
   /**
    * Specify an optional className to be applied to the container node
    */
@@ -230,6 +207,11 @@ Search.propTypes = {
   renderIcon: PropTypes.oneOfType([PropTypes.func, PropTypes.object]),
 
   /**
+   * Specify the role for the underlying `<input>`, defaults to `searchbox`
+   */
+  role: PropTypes.string,
+
+  /**
    * Specify the search size
    */
   size: PropTypes.oneOf(['sm', 'md', 'lg', 'xl']),
@@ -257,12 +239,22 @@ Search.propTypes = {
   value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
 };
 
-Search.defaultProps = {
-  type: 'text',
-  placeholder: '',
-  closeButtonLabelText: 'Clear search input',
-  onChange: () => {},
-  onClear: () => {},
+function SearchIcon({ icon }) {
+  const prefix = usePrefix();
+
+  if (icon) {
+    return React.cloneElement(icon, {
+      className: `${prefix}--search-magnifier-icon`,
+    });
+  }
+  return <Search16 className={`${prefix}--search-magnifier-icon`} />;
+}
+
+SearchIcon.propTypes = {
+  /**
+   * Rendered icon for the Search. Can be a React component class
+   */
+  icon: PropTypes.oneOfType([PropTypes.func, PropTypes.object]),
 };
 
 export default Search;
