@@ -199,7 +199,6 @@ Array [
   "TooltipDefinition",
   "TooltipIcon",
   "UnorderedList",
-  "unstable_ContainedTabs",
   "unstable_FeatureFlags",
   "unstable_HStack",
   "unstable_Heading",

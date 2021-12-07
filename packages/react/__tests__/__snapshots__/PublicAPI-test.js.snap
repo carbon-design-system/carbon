@@ -6039,55 +6039,6 @@ Map {
       },
     },
   },
-  "unstable_ContainedTabs" => Object {
-    "$$typeof": Symbol(react.forward_ref),
-    "propTypes": Object {
-      "children": Object {
-        "type": "node",
-      },
-      "className": Object {
-        "type": "string",
-      },
-      "hidden": Object {
-        "type": "bool",
-      },
-      "leftOverflowButtonProps": Object {
-        "type": "object",
-      },
-      "light": [Function],
-      "onClick": Object {
-        "type": "func",
-      },
-      "onKeyDown": Object {
-        "type": "func",
-      },
-      "onSelectionChange": Object {
-        "type": "func",
-      },
-      "rightOverflowButtonProps": Object {
-        "type": "object",
-      },
-      "scrollIntoView": Object {
-        "type": "bool",
-      },
-      "selected": Object {
-        "type": "number",
-      },
-      "selectionMode": Object {
-        "args": Array [
-          Array [
-            "automatic",
-            "manual",
-          ],
-        ],
-        "type": "oneOf",
-      },
-      "tabContentClassName": Object {
-        "type": "string",
-      },
-    },
-    "render": [Function],
-  },
   "unstable_TabPanel" => Object {
     "$$typeof": Symbol(react.forward_ref),
     "propTypes": Object {

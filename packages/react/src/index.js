@@ -239,7 +239,6 @@ export {
   Stack as unstable_Stack,
   VStack as unstable_VStack,
 } from './components/Stack';
-export { ContainedTabs as unstable_ContainedTabs } from './components/Tabs';
 export { Tooltip as unstable_Tooltip } from './components/Tooltip/next';
 export unstable_TreeView, {
   TreeNode as unstable_TreeNode,
