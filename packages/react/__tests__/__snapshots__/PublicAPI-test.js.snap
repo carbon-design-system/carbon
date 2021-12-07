@@ -4719,6 +4719,26 @@ Map {
       "forwardText": Object {
         "type": "string",
       },
+      "forwardedRef": Object {
+        "args": Array [
+          Array [
+            Object {
+              "type": "func",
+            },
+            Object {
+              "args": Array [
+                Object {
+                  "current": Object {
+                    "type": "any",
+                  },
+                },
+              ],
+              "type": "shape",
+            },
+          ],
+        ],
+        "type": "oneOfType",
+      },
       "id": Object {
         "args": Array [
           Array [
