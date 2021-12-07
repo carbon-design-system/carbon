@@ -59,7 +59,7 @@ const supported = [
 
     async migrate(workspace) {
       console.log(
-        'upgrading the carbon-components-react package in the %s workspace',
+        'upgrading the carbon-components-react package to @carbon/react in the %s workspace',
         workspace.name
       );
     },

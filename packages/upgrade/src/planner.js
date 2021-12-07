@@ -53,7 +53,20 @@ const Planner = {
         name: 'selected',
         choices: migrationOptions
           .filter((migrationOption) => {
-            return migrationOption.code === 'supported';
+            // example of what migrationOption contains
+            // if migration doesn't match, available = false, code = 'range_mistmatch'
+            // {
+            //   dependency: { type: 'peerDependencies', name: 'react', version: '>=16' },
+            //   migration: {
+            //     packageName: 'react',
+            //     from: '>=16',
+            //     to: '18.0.0',
+            //     migrate: [AsyncFunction: migrate]
+            //   },
+            //   available: true,
+            //   code: 'supported'
+            // }
+            return migrationOption.available === true;
           })
           .map((migrationOption) => {
             const { dependency, migration } = migrationOption;
@@ -66,8 +79,6 @@ const Planner = {
       });
 
       answers.push(answer);
-
-      console.log(answers);
     }
 
     return migrationsByWorkspace.map(({ workspace, migrationOptions }, i) => {
