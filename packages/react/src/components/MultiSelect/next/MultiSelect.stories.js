@@ -10,7 +10,6 @@ import MultiSelect from '../';
 import FilterableMultiSelect from './FilterableMultiSelect';
 import { Layer } from '../../Layer';
 
-
 const items = [
   {
     id: 'downshift-1-item-0',
