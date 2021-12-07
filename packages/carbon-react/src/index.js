@@ -204,6 +204,7 @@ export {
   unstable_ProgressBar,
   unstable_Section as Section,
   unstable_Stack as Stack,
+  unstable_ThemeContext,
   unstable_Theme as Theme,
   unstable_Tooltip as Tooltip,
   unstable_TreeNode,

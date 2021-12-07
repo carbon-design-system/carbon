@@ -9223,6 +9223,11 @@ Map {
     },
   },
   "unstable_usePrefix" => Object {},
+  "unstable_ThemeContext" => Object {
+    "$$typeof": Symbol(react.context),
+    "Consumer": "React.Consumer",
+    "Provider": "React.Provider",
+  },
   "unstable_Theme" => Object {
     "propTypes": Object {
       "as": Object {

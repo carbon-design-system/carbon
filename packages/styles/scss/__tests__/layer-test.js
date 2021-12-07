@@ -14,13 +14,13 @@ const css = require('css');
 
 const { render } = SassRenderer.create(__dirname);
 
-describe('scss/utilities/layer-set', () => {
+describe('scss/layer', () => {
   it('should map layer set values to scoped $prefix--layer selectors', async () => {
     const { result } = await render(`
-      @use '../../config' with (
+      @use '../config' with (
         $prefix: 'cds',
       );
-      @use '../layer-set' with (
+      @use '../layer' with (
         $layer-sets: (
           field: (
             rgba(0, 0, 0, 0.3),
@@ -51,10 +51,14 @@ describe('scss/utilities/layer-set', () => {
       });
     }
 
-    const layer1 = findSelector(stylesheet, ':root');
-    const layer2 = findSelector(stylesheet, '.cds--layer');
-    const layer3 = findSelector(stylesheet, '.cds--layer .cds--layer');
+    const root = findSelector(stylesheet, ':root');
+    const layer1 = findSelector(stylesheet, '.cds--layer-one');
+    const layer2 = findSelector(stylesheet, '.cds--layer-two');
+    const layer3 = findSelector(stylesheet, '.cds--layer-three');
 
+    expect(findDeclaration(root, '--cds-field').value).toBe(
+      'rgba(0, 0, 0, 0.3)'
+    );
     expect(findDeclaration(layer1, '--cds-field').value).toBe(
       'rgba(0, 0, 0, 0.3)'
     );
