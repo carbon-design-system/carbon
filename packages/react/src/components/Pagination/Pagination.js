@@ -71,7 +71,7 @@ export default class Pagination extends Component {
      */
     forwardedRef: PropTypes.oneOfType([
       PropTypes.func,
-      PropTypes.shape({ current: PropTypes.instanceOf(Element) }),
+      PropTypes.shape({ current: PropTypes.any }),
     ]),
 
     /**
