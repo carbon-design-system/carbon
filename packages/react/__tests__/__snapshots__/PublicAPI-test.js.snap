@@ -2645,6 +2645,9 @@ Map {
       "onChange": Object {
         "type": "func",
       },
+      "renderSelectedItem": Object {
+        "type": "func",
+      },
       "selectedItem": Object {
         "args": Array [
           Array [
@@ -3105,7 +3108,6 @@ Map {
       "selectionFeedback": "top-after-reopen",
       "sortItems": [Function],
     },
-    "displayName": "MultiSelect.Filterable",
     "propTypes": Object {
       "ariaLabel": Object {
         "type": "string",
@@ -4071,7 +4073,6 @@ Map {
         "selectionFeedback": "top-after-reopen",
         "sortItems": [Function],
       },
-      "displayName": "MultiSelect.Filterable",
       "propTypes": Object {
         "ariaLabel": Object {
           "type": "string",
