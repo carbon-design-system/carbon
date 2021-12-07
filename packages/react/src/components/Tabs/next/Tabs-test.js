@@ -1,264 +1,178 @@
 import React from 'react';
-import { default as Tabs } from './Tabs';
-import { default as Tab } from '../../Tab/next/Tab';
+import { Tabs, Tab, TabPanel, TabPanels, TabList } from './Tabs';
 import { render, screen } from '@testing-library/react';
-import { fireEvent } from '@testing-library/dom';
+import userEvent from '@testing-library/user-event';
 
 describe('Tabs', () => {
-  it('adds extra classes that are passed via className prop', async () => {
+  it('should update selected index based on the default provided', () => {
     render(
-      <Tabs className="custom-class" data-testid="tabs-test">
-        <Tab label="firstTab">content1</Tab>
-        <Tab label="lastTab">content2</Tab>
+      <Tabs defaultSelectedIndex={1}>
+        <TabList aria-label="List of tabs">
+          <Tab>Tab Label 1</Tab>
+          <Tab>Tab Label 2</Tab>
+          <Tab>Tab Label 3</Tab>
+        </TabList>
+        <TabPanels>
+          <TabPanel>Tab Panel 1</TabPanel>
+          <TabPanel>Tab Panel 2</TabPanel>
+          <TabPanel>Tab Panel 3</TabPanel>
+        </TabPanels>
       </Tabs>
     );
 
-    const tabs = screen.getByTestId('tabs-test');
-    await expect(tabs.classList.contains('custom-class')).toBe(true);
+    expect(screen.getByText('Tab Label 2')).toHaveAttribute(
+      'aria-selected',
+      'true'
+    );
   });
 
-  it('renders <ul> with tablist role by default', async () => {
+  it('should set a className from props on outermost element in TabList', () => {
     render(
-      <Tabs className="custom-class">
-        <Tab label="firstTab">content1</Tab>
-        <Tab label="lastTab">content2</Tab>
+      <Tabs>
+        <TabList aria-label="List of tabs" className="custom-class">
+          <Tab disabled>Tab Label 1</Tab>
+          <Tab>Tab Label 2</Tab>
+          <Tab>Tab Label 3</Tab>
+        </TabList>
+        <TabPanels>
+          <TabPanel>Tab Panel 1</TabPanel>
+          <TabPanel>Tab Panel 2</TabPanel>
+          <TabPanel>Tab Panel 3</TabPanel>
+        </TabPanels>
       </Tabs>
     );
 
-    const tablist = screen.getByRole('tablist');
-    await expect(tablist).toBeTruthy();
+    expect(screen.getByRole('tablist')).toHaveClass('custom-class');
   });
 });
 
-describe('Children tabs', () => {
-  it('renders children', async () => {
+describe('Tab', () => {
+  it('should set a className from props on outermost element in Tab', () => {
     render(
-      <Tabs className="custom-class">
-        <Tab label="firstTab">content1</Tab>
-        <Tab label="lastTab">content2</Tab>
+      <Tabs>
+        <TabList aria-label="List of tabs">
+          <Tab disabled>Tab Label 1</Tab>
+          <Tab className="custom-class">Tab Label 2</Tab>
+          <Tab>Tab Label 3</Tab>
+        </TabList>
+        <TabPanels>
+          <TabPanel>Tab Panel 1</TabPanel>
+          <TabPanel>Tab Panel 2</TabPanel>
+          <TabPanel>Tab Panel 3</TabPanel>
+        </TabPanels>
       </Tabs>
     );
 
-    const tabArray = screen.getAllByRole('presentation');
-    await expect(tabArray.length).toEqual(2);
+    expect(screen.getByText('Tab Label 2')).toHaveClass('custom-class');
   });
 
-  it('first tab is selected by default', async () => {
+  it('should not select a disabled tab and select next tab', () => {
     render(
-      <Tabs className="custom-class">
-        <Tab label="firstTab" data-testid="first-tab">
-          content1
-        </Tab>
-        <Tab label="lastTab">content2</Tab>
+      <Tabs>
+        <TabList aria-label="List of tabs">
+          <Tab disabled>Tab Label 1</Tab>
+          <Tab>Tab Label 2</Tab>
+          <Tab>Tab Label 3</Tab>
+        </TabList>
+        <TabPanels>
+          <TabPanel>Tab Panel 1</TabPanel>
+          <TabPanel>Tab Panel 2</TabPanel>
+          <TabPanel>Tab Panel 3</TabPanel>
+        </TabPanels>
       </Tabs>
     );
 
-    const firstTab = screen.getByTestId('first-tab');
-    await expect(
-      firstTab.classList.contains('bx--tabs__nav-item--selected')
-    ).toBe(true);
+    expect(screen.getByText('Tab Label 1')).toHaveAttribute(
+      'aria-selected',
+      'false'
+    );
+
+    // By default, if a Tab is disabled, the next Tab should be selected
+    expect(screen.getByText('Tab Label 2')).toHaveAttribute(
+      'aria-selected',
+      'true'
+    );
   });
 
-  it('overrides default selected tab when selected prop is provided', async () => {
+  it('should provide a custom element to render instead of default button if provided', () => {
     render(
-      <Tabs className="custom-class" selected={1}>
-        <Tab label="firstTab" data-testid="first-tab">
-          content1
-        </Tab>
-        <Tab label="lastTab" data-testid="second-tab">
-          content2
-        </Tab>
+      <Tabs>
+        <TabList aria-label="List of tabs">
+          <Tab as="div">Tab Label 1</Tab>
+          <Tab>Tab Label 2</Tab>
+          <Tab>Tab Label 3</Tab>
+        </TabList>
+        <TabPanels>
+          <TabPanel>Tab Panel 1</TabPanel>
+          <TabPanel>Tab Panel 2</TabPanel>
+          <TabPanel>Tab Panel 3</TabPanel>
+        </TabPanels>
+      </Tabs>
+    );
+    expect(screen.getByText('Tab Label 1').tagName).toBe('DIV');
+  });
+
+  it('should call onClick from props if provided', () => {
+    const onClick = jest.fn();
+    render(
+      <Tabs>
+        <TabList aria-label="List of tabs">
+          <Tab onClick={onClick}>Tab Label 1</Tab>
+          <Tab>Tab Label 2</Tab>
+          <Tab>Tab Label 3</Tab>
+        </TabList>
+        <TabPanels>
+          <TabPanel>Tab Panel 1</TabPanel>
+          <TabPanel>Tab Panel 2</TabPanel>
+          <TabPanel>Tab Panel 3</TabPanel>
+        </TabPanels>
       </Tabs>
     );
 
-    const firstTab = screen.getByTestId('first-tab');
-    const secondTab = screen.getByTestId('second-tab');
+    userEvent.click(screen.getByText('Tab Label 1'));
 
-    await expect(
-      firstTab.classList.contains('bx--tabs__nav-item--selected')
-    ).toBe(false);
-    await expect(
-      secondTab.classList.contains('bx--tabs__nav-item--selected')
-    ).toBe(true);
+    expect(onClick).toHaveBeenCalled();
+  });
+
+  it('should call onKeyDown from props if provided', () => {
+    const onKeyDown = jest.fn();
+    render(
+      <Tabs>
+        <TabList aria-label="List of tabs">
+          <Tab onKeyDown={onKeyDown}>Tab Label 1</Tab>
+          <Tab>Tab Label 2</Tab>
+          <Tab>Tab Label 3</Tab>
+        </TabList>
+        <TabPanels>
+          <TabPanel>Tab Panel 1</TabPanel>
+          <TabPanel>Tab Panel 2</TabPanel>
+          <TabPanel>Tab Panel 3</TabPanel>
+        </TabPanels>
+      </Tabs>
+    );
+
+    userEvent.type(screen.getByText('Tab Label 1'), 'enter');
+
+    expect(onKeyDown).toHaveBeenCalled();
   });
 });
 
-describe('Children tab content', () => {
-  it('renders correct number of children content as expected', async () => {
-    render(
-      <Tabs className="custom-class">
-        <Tab label="firstTab">content1</Tab>
-        <Tab label="lastTab">content2</Tab>
-      </Tabs>
-    );
-
-    const contentArray = screen.getAllByRole('tabpanel', { hidden: true });
-    await expect(contentArray.length).toEqual(2);
-  });
-
-  it('only shows one content tabpanel at a time', async () => {
-    render(
-      <Tabs className="custom-class">
-        <Tab label="firstTab">content1</Tab>
-        <Tab label="secondTab">content2</Tab>
-        <Tab label="lastTab">content3</Tab>
-      </Tabs>
-    );
-
-    const contentArray = screen.getAllByRole('tabpanel');
-    await expect(contentArray.length).toEqual(1);
-  });
-
-  it('adds extra classes that are passed via tabContentClassName prop', async () => {
-    render(
-      <Tabs tabContentClassName="content-class">
-        <Tab label="firstTab">content1</Tab>
-        <Tab label="lastTab">content2</Tab>
-      </Tabs>
-    );
-
-    const content = screen.getByRole('tabpanel');
-    await expect(content.classList.contains('content-class')).toBe(true);
-  });
-
-  it('renders unselected tab content with hidden attribute', async () => {
-    render(
-      <Tabs className="custom-class">
-        <Tab label="firstTab">content1</Tab>
-        <Tab label="lastTab">content2</Tab>
-      </Tabs>
-    );
-
-    const contentArray = screen.getAllByRole('tabpanel', { hidden: true });
-    await expect(contentArray[1]).toHaveAttribute('hidden');
-  });
-});
-
-describe('Keyboard events', () => {
-  it('updates selected tab and content, and loops from first tab to last tab when pressing left arrow key', async () => {
+describe('TabPanel', () => {
+  it('should have a className if provided by props', () => {
     render(
       <Tabs>
-        <Tab label="firstTab" data-testid="tab1">
-          content1
-        </Tab>
-        <Tab label="lastTab" data-testid="tab2">
-          content2
-        </Tab>
+        <TabList aria-label="List of tabs">
+          <Tab>Tab Label 1</Tab>
+          <Tab>Tab Label 2</Tab>
+          <Tab>Tab Label 3</Tab>
+        </TabList>
+        <TabPanels>
+          <TabPanel className="custom-class">Tab Panel 1</TabPanel>
+          <TabPanel>Tab Panel 2</TabPanel>
+          <TabPanel>Tab Panel 3</TabPanel>
+        </TabPanels>
       </Tabs>
     );
-
-    const tab1 = screen.getByTestId('tab1');
-    const tab2 = screen.getByTestId('tab2');
-
-    const tabContent = screen.getAllByRole('tabpanel');
-    const tab1Content = tabContent[0];
-    fireEvent.keyDown(tab1, {
-      key: 'ArrowLeft',
-      code: 'ArrowLeft',
-      charCode: 37,
-    });
-    await expect(tab2.classList.contains('bx--tabs__nav-item--selected')).toBe(
-      true
-    );
-    await expect(tab1Content).toHaveAttribute('hidden');
-  });
-
-  it('updates selected tab and content when pressing right arrow key', async () => {
-    render(
-      <Tabs>
-        <Tab label="firstTab" data-testid="tab1">
-          content1
-        </Tab>
-        <Tab label="lastTab" data-testid="tab2">
-          content2
-        </Tab>
-      </Tabs>
-    );
-
-    const tab1 = screen.getByTestId('tab1');
-    const tab2 = screen.getByTestId('tab2');
-    const tabContent = screen.getAllByRole('tabpanel');
-    const tab1Content = tabContent[0];
-
-    fireEvent.keyDown(tab1, {
-      key: 'ArrowRight',
-      code: 'ArrowRight',
-      charCode: 39,
-    });
-    await expect(tab2.classList.contains('bx--tabs__nav-item--selected')).toBe(
-      true
-    );
-    await expect(tab1Content).toHaveAttribute('hidden');
-  });
-
-  it('ignores disabled tabs', async () => {
-    render(
-      <Tabs>
-        <Tab label="firstTab" data-testid="tab1">
-          content1
-        </Tab>
-        <Tab label="lastTab" data-testid="tab2" disabled>
-          content2
-        </Tab>
-        <Tab label="thirdTab" data-testid="tab3">
-          content3
-        </Tab>
-      </Tabs>
-    );
-    const tab1 = screen.getByTestId('tab1');
-    const tab3 = screen.getByTestId('tab3');
-    fireEvent.keyDown(tab1, {
-      key: 'ArrowRight',
-      code: 'ArrowRight',
-      charCode: 39,
-    });
-
-    await expect(tab3.classList.contains('bx--tabs__nav-item--selected')).toBe(
-      true
-    );
-  });
-});
-
-describe('Click events', () => {
-  it('updates selected tab and content on click', async () => {
-    render(
-      <Tabs>
-        <Tab label="firstTab" data-testid="tab1">
-          content1
-        </Tab>
-        <Tab label="lastTab" data-testid="tab2">
-          content2
-        </Tab>
-      </Tabs>
-    );
-    const tab2 = screen.getByTestId('tab2');
-    const tabContent = screen.getAllByRole('tabpanel');
-    const tab1Content = tabContent[0];
-    fireEvent.click(tab2);
-    await expect(tab2.classList.contains('bx--tabs__nav-item--selected')).toBe(
-      true
-    );
-    await expect(tab1Content).toHaveAttribute('hidden');
-  });
-
-  it('ignores disabled tab on click', async () => {
-    render(
-      <Tabs>
-        <Tab label="firstTab" data-testid="tab1">
-          content1
-        </Tab>
-        <Tab label="lastTab" data-testid="tab2" disabled>
-          content2
-        </Tab>
-      </Tabs>
-    );
-    const tab2 = screen.getByTestId('tab2');
-    const tabContent = screen.getAllByRole('tabpanel', { hidden: true });
-    const tab2Content = tabContent[1];
-    fireEvent.click(tab2);
-    await expect(tab2.classList.contains('bx--tabs__nav-item--selected')).toBe(
-      false
-    );
-    await expect(tab2Content).toHaveAttribute('hidden');
+    expect(screen.getByText('Tab Panel 1')).toHaveClass('custom-class');
   });
 });
