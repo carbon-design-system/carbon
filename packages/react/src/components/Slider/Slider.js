@@ -10,6 +10,7 @@ import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { settings } from 'carbon-components';
 import throttle from 'lodash.throttle';
+import * as FeatureFlags from '@carbon/feature-flags';
 
 import * as keys from '../../internal/keyboard/keys';
 import { matches } from '../../internal/keyboard/match';
@@ -168,7 +169,9 @@ export default class Slider extends PureComponent {
     minLabel: '',
     maxLabel: '',
     inputType: 'number',
-    ariaLabelInput: 'Slider number input',
+    ariaLabelInput: FeatureFlags.enabled('enable-v11-release')
+      ? undefined
+      : 'Slider number input',
     light: false,
   };
 
