@@ -89,6 +89,7 @@ function Search({
 
   function handleKeyDown(event) {
     if (match(event, keys.Escape)) {
+      event.stopPropagation();
       clearInput(event);
     }
   }
