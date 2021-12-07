@@ -67,6 +67,14 @@ export default class Pagination extends Component {
     forwardText: PropTypes.string,
 
     /**
+     * An optional ref to pass to the pagination wrapper div
+     */
+    forwardedRef: PropTypes.oneOfType([
+      PropTypes.func,
+      PropTypes.shape({ current: PropTypes.instanceOf(Element) }),
+    ]),
+
+    /**
      * The unique ID of this component instance.
      */
     id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
@@ -283,6 +291,7 @@ export default class Pagination extends Component {
       onChange, // eslint-disable-line no-unused-vars
       page: pageNumber, // eslint-disable-line no-unused-vars
       size,
+      forwardedRef,
       ...other
     } = this.props;
 
@@ -312,7 +321,7 @@ export default class Pagination extends Component {
     const pageSizes = mapPageSizesToObject(_pageSizes);
 
     return (
-      <div className={classNames} {...other}>
+      <div className={classNames} ref={forwardedRef} {...other}>
         <div className={`${prefix}--pagination__left`}>
           <label
             id={`${prefix}-pagination-select-${inputId}-count-label`}
