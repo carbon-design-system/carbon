@@ -268,8 +268,6 @@ class Tooltip extends Component {
     if (!this._debouncedHandleFocus) {
       this._debouncedHandleFocus = debounce(this._handleFocus, 200);
     }
-
-    document.addEventListener('keydown', this.handleEscKeyPress, false);
   }
 
   componentDidUpdate(prevProps, prevState) {
@@ -443,8 +441,6 @@ class Tooltip extends Component {
       this._debouncedHandleFocus.cancel();
       this._debouncedHandleFocus = null;
     }
-
-    document.removeEventListener('keydown', this.handleEscKeyPress, false);
   }
 
   static getDerivedStateFromProps({ open }, state) {
@@ -707,11 +703,7 @@ class Tooltip extends Component {
             {/* eslint-disable-next-line jsx-a11y/no-static-element-interactions */}
             <div
               className={tooltipClasses}
-              onKeyDown={(event) => {
-                if (keyDownMatch(event, [keys.Escape])) {
-                  event.stopPropagation();
-                }
-              }}
+              onKeyDown={this.handleEscKeyPress}
               {...other}
               id={this._tooltipId}
               data-floating-menu-direction={storedDirection}

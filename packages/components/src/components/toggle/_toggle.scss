@@ -518,11 +518,11 @@
       cursor: not-allowed;
 
       &::before {
-        background-color: $disabled-01;
+        background-color: $disabled-02;
       }
 
       &::after {
-        background-color: $disabled-02;
+        background-color: $disabled-03;
       }
 
       &::before,

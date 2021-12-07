@@ -19,6 +19,7 @@ import DataTable, {
 } from '../../DataTable';
 import { rows, headers } from './shared';
 import mdx from '../DataTable.mdx';
+import { action } from '@storybook/addon-actions';
 
 export default {
   title: 'Components/DataTable/Selection',
@@ -69,8 +70,19 @@ export const Usage = () => (
           </TableHead>
           <TableBody>
             {rows.map((row, i) => (
-              <TableRow key={i} {...getRowProps({ row })}>
-                <TableSelectRow {...getSelectionProps({ row })} />
+              <TableRow
+                key={i}
+                {...getRowProps({ row })}
+                onClick={(evt) => {
+                  action('TableRow onClick')(evt);
+                }}>
+                <TableSelectRow
+                  {...getSelectionProps({ row })}
+                  onSelect={(evt) => {
+                    action('TableSelectRow onSelect')(evt);
+                    getSelectionProps({ row }).onSelect(evt);
+                  }}
+                />
                 {row.cells.map((cell) => (
                   <TableCell key={cell.id}>{cell.value}</TableCell>
                 ))}
