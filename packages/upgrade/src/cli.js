@@ -71,25 +71,6 @@ async function main({ argv, cwd }) {
         Migration.getMigrations()
       );
 
-      migrationsByWorkspace.forEach((migration) => {
-        console.log('Migration options in workspace', migration.workspace.name);
-        //returns available migration options for each worskpace:
-        // {
-        //   dependency: { type: 'peerDependencies', name: 'react', version: '>=16' },
-        //   migration: {
-        //     packageName: 'react',
-        //     from: '>=16',
-        //     to: '18.0.0',
-        //     migrate: [AsyncFunction: migrate]
-        //   },
-        //   available: true,
-        //   code: 'supported'
-        // }
-        migration.migrationOptions.forEach((option) => {
-          console.log(option);
-        });
-      });
-
       // This is where we choose (checkbox) what migrations to run
       // based on the available migrationOptions
       const migrationsToRun = await Planner.getSelectedMigrations(

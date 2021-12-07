@@ -17,28 +17,43 @@ const Planner = {
    * @returns {Array<WorkspaceMigration>}
    */
   async getSelectedMigrations(migrationsByWorkspace) {
+    // will eventually contain all migration selections
+    // each workspace receives an individual selection
+    // and each selection, can contain one or more migrations (dependencies to be updated)
+    // [
+    //   { selected: [ [Object], [Object] ] }, // workspace 1
+    //   { selected: [ [Object], [Object] ] }  // workspace 2
+    // ]
     const answers = [];
 
+    // migrationOptions: {
+    //   dependency: { type: 'peerDependencies', name: 'react', version: '>=16' },
+    //   migration: {
+    //     packageName: 'react',
+    //     from: '>=16',
+    //     to: '18.0.0',
+    //     migrate: [AsyncFunction: migrate]
+    //   },
+    //   available: true,
+    //   code: 'supported'
+    // }
     for (const { workspace, migrationOptions } of migrationsByWorkspace) {
-      // migrationOptions:
-      // {
-      //   dependency: { type: 'peerDependencies', name: 'react', version: '>=16' },
-      //   migration: {
-      //     packageName: 'react',
-      //     from: '>=16',
-      //     to: '18.0.0',
-      //     migrate: [AsyncFunction: migrate]
-      //   },
-      //   available: true,
-      //   code: 'supported'
-      // }
+      // answer returns array of objects (example below):
+      //   selected: [
+      //     {
+      //       packageName: 'react-dom',
+      //       from: '>=16',
+      //       to: '18.0.0',
+      //       migrate: [AsyncFunction: migrate]
+      //     }
+      //   ]
       const answer = await prompt({
         type: 'checkbox',
         message: `Migrations available for ${workspace.name}`,
         name: 'selected',
         choices: migrationOptions
           .filter((migrationOption) => {
-            return migrationOption.available === true;
+            return migrationOption.code === 'supported';
           })
           .map((migrationOption) => {
             const { dependency, migration } = migrationOption;
@@ -51,6 +66,8 @@ const Planner = {
       });
 
       answers.push(answer);
+
+      console.log(answers);
     }
 
     return migrationsByWorkspace.map(({ workspace, migrationOptions }, i) => {

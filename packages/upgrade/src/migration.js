@@ -32,16 +32,6 @@ function getMigrationsByWorkspace(workspaces, migrations) {
     .map((workspace) => {
       const { dependencies } = workspace;
 
-      dependencies.forEach((dependency) => {
-        if (dependency.name === 'carbon-components-react') {
-          if (dependency.version !== '7.50.0') {
-            // console.log('does not meet range limit');
-          } else {
-            // console.log('meets range limit. we can upgrade to @carbon/react');
-          }
-        }
-      });
-
       return {
         workspace,
         migrationOptions: migrations
@@ -65,13 +55,6 @@ function getMigrationsByWorkspace(workspaces, migrations) {
             //checking to see if the dependency is within the migration range
             if (semver.intersects(migration.from, dependency.version)) {
               // dependency is within range to migrate
-              console.log(
-                'SEMVER INTERSECTS',
-                migration.packageName,
-                dependency.version,
-                'to',
-                migration.to
-              );
               return {
                 dependency,
                 migration,
