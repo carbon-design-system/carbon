@@ -10,7 +10,7 @@ import cx from 'classnames';
 import Downshift from 'downshift';
 import isEqual from 'lodash.isequal';
 import PropTypes from 'prop-types';
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef } from 'react';
 import { defaultFilterItems } from '../../ComboBox/tools/filter';
 import { sortingPropTypes } from '../MultiSelectPropTypes';
 import ListBox, { PropTypes as ListBoxPropTypes } from '../../ListBox';
@@ -22,7 +22,7 @@ import { defaultItemToString } from '../tools/itemToString';
 import mergeRefs from '../../../tools/mergeRefs';
 import { useId } from '../../../internal/useId';
 import { defaultSortItems, defaultCompareItems } from '../tools/sorting';
-import { FeatureFlagContext } from '../../FeatureFlags';
+import { useFeatureFlag } from '../../FeatureFlags';
 import { usePrefix } from '../../../internal/usePrefix';
 
 const FilterableMultiSelect = React.forwardRef(function FilterableMultiSelect(
@@ -41,7 +41,7 @@ const FilterableMultiSelect = React.forwardRef(function FilterableMultiSelect(
     invalid,
     invalidText,
     items,
-    itemToElement,
+    itemToElement: ItemToElement, // needs to be capitalized for react to render it correctly
     itemToString,
     light,
     locale,
@@ -80,9 +80,6 @@ const FilterableMultiSelect = React.forwardRef(function FilterableMultiSelect(
 
   const inline = type === 'inline';
   const showWarning = !invalid && warn;
-
-  // needs to be capitalized for react to render it correctly
-  const ItemToElement = itemToElement;
 
   const wrapperClasses = cx(
     `${prefix}--multi-select__wrapper`,
@@ -174,7 +171,7 @@ const FilterableMultiSelect = React.forwardRef(function FilterableMultiSelect(
     }
 
     if (Array.isArray(inputValue)) {
-      setInputValue('');
+      clearInputValue();
     } else {
       setInputValue(inputValue);
     }
@@ -188,13 +185,10 @@ const FilterableMultiSelect = React.forwardRef(function FilterableMultiSelect(
 
   function clearInputValue() {
     setInputValue('');
-  }
-
-  useEffect(() => {
-    if (textInput.current && inputValue == '') {
+    if (textInput.current) {
       textInput.current.focus();
     }
-  }, [inputValue]);
+  }
 
   return (
     <Selection
@@ -416,7 +410,7 @@ const FilterableMultiSelect = React.forwardRef(function FilterableMultiSelect(
                                 className={`${prefix}--checkbox-label`}
                                 data-contained-checkbox-state={isChecked}
                                 id={`${itemProps.id}-item`}>
-                                {itemToElement ? (
+                                {ItemToElement ? (
                                   <ItemToElement key={itemProps.id} {...item} />
                                 ) : (
                                   itemText
