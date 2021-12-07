@@ -31,14 +31,13 @@ function getMigrationsByWorkspace(workspaces, migrations) {
   return workspaces
     .map((workspace) => {
       const { dependencies } = workspace;
-      // console.log('DEPENDENCIES', dependencies);
 
       dependencies.forEach((dependency) => {
         if (dependency.name === 'carbon-components-react') {
           if (dependency.version !== '7.50.0') {
-            console.log('does not meet range limit');
+            // console.log('does not meet range limit');
           } else {
-            console.log('meets range limit. we can upgrade to @carbon/react');
+            // console.log('meets range limit. we can upgrade to @carbon/react');
           }
         }
       });
@@ -47,16 +46,32 @@ function getMigrationsByWorkspace(workspaces, migrations) {
         workspace,
         migrationOptions: migrations
           .filter((migration) => {
+            // returns undefined if a dependency does not match any
+            // of the supported dependencies for migration
+            // if it matches a supported dependency, it returns
+            // type, name, and version in an object.
+            //{type: 'devDependencies', name: 'carbon-components-react', version: '^6.0.0'}
             return dependencies.find((dependency) => {
               return dependency.name === migration.packageName;
             });
           })
           .map((migration) => {
+            // returns similar object but only for dependencies that have a migration
+            //{type: 'devDependencies', name: 'carbon-components-react', version: '^6.0.0'}
             const dependency = dependencies.find((dependency) => {
               return dependency.name === migration.packageName;
             });
 
+            //checking to see if the dependency is within the migration range
             if (semver.intersects(migration.from, dependency.version)) {
+              // dependency is within range to migrate
+              console.log(
+                'SEMVER INTERSECTS',
+                migration.packageName,
+                dependency.version,
+                'to',
+                migration.to
+              );
               return {
                 dependency,
                 migration,
@@ -65,6 +80,7 @@ function getMigrationsByWorkspace(workspaces, migrations) {
               };
             }
 
+            // dependency is not within range to migrate
             return {
               dependency,
               migration,

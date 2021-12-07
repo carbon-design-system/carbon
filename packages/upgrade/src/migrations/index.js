@@ -36,6 +36,34 @@ const supported = [
       );
     },
   },
+  {
+    packageName: 'carbon-components-react',
+    // the range we would like to migrate *from*
+    from: '<7.50.0',
+    // the version we would like to migrate *to*
+    to: '7.50.0',
+
+    async migrate(workspace) {
+      console.log(
+        'migrate the carbon-components-react package in the %s workspace',
+        workspace.name
+      );
+    },
+  },
+  {
+    packageName: 'carbon-components-react',
+    // the range we would like to migrate *from*
+    from: '>=7.50.0',
+    // the version we would like to migrate *to*
+    to: '@carbon/react',
+
+    async migrate(workspace) {
+      console.log(
+        'upgrading the carbon-components-react package in the %s workspace',
+        workspace.name
+      );
+    },
+  },
 ];
 
 module.exports = supported;

@@ -20,6 +20,18 @@ const Planner = {
     const answers = [];
 
     for (const { workspace, migrationOptions } of migrationsByWorkspace) {
+      // migrationOptions:
+      // {
+      //   dependency: { type: 'peerDependencies', name: 'react', version: '>=16' },
+      //   migration: {
+      //     packageName: 'react',
+      //     from: '>=16',
+      //     to: '18.0.0',
+      //     migrate: [AsyncFunction: migrate]
+      //   },
+      //   available: true,
+      //   code: 'supported'
+      // }
       const answer = await prompt({
         type: 'checkbox',
         message: `Migrations available for ${workspace.name}`,

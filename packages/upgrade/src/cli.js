@@ -50,20 +50,54 @@ async function main({ argv, cwd }) {
         write,
       };
 
+      //Returns all the workspaces
       const project = await Project.detect(options.cwd);
-      console.log('project', project);
+
+      // This is where we get available migrations
+      // returns obj with worskpace & migration options
+      //  {
+      //   workspace: Workspace {
+      //     directory: '/Users/[username]/Desktop/carbon/packages/test-utils',
+      //     name: '@carbon/test-utils',
+      //     version: '10.20.0',
+      //     dependencies: [Array],
+      //     workspaces: Set(0) {},
+      //     id: '4zWe7Y'
+      //   },
+      //   migrationOptions: [ [Object], [Object] ]
+      // }
       const migrationsByWorkspace = await Migration.getMigrationsByWorkspace(
         Array.from(project.getWorkspaces()),
         Migration.getMigrations()
       );
-      // console.log('migrations by workspace', migrationsByWorkspace);
 
+      migrationsByWorkspace.forEach((migration) => {
+        console.log('Migration options in workspace', migration.workspace.name);
+        //returns available migration options for each worskpace:
+        // {
+        //   dependency: { type: 'peerDependencies', name: 'react', version: '>=16' },
+        //   migration: {
+        //     packageName: 'react',
+        //     from: '>=16',
+        //     to: '18.0.0',
+        //     migrate: [AsyncFunction: migrate]
+        //   },
+        //   available: true,
+        //   code: 'supported'
+        // }
+        migration.migrationOptions.forEach((option) => {
+          console.log(option);
+        });
+      });
+
+      // This is where we choose (checkbox) what migrations to run
+      // based on the available migrationOptions
       const migrationsToRun = await Planner.getSelectedMigrations(
         migrationsByWorkspace
       );
 
-      // console.log('migrations to run?', migrationsToRun);
-
+      // This is where we run the migration (update package.json, etc)
+      // based on the migrations we selected above
       await Runner.run(migrationsToRun, options);
     })
   );
