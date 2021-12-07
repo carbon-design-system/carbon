@@ -7,7 +7,7 @@
 
 import './Theme-story.scss';
 import React from 'react';
-import { Theme, useTheme } from '../Theme';
+import { Theme, useTheme } from '../../Theme';
 import { Layer } from '../../Layer';
 import mdx from './Theme.mdx';
 

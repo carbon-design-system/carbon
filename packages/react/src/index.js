@@ -247,6 +247,7 @@ export unstable_TreeView, {
 } from './components/TreeView';
 export { usePrefix as unstable_usePrefix } from './internal/usePrefix';
 export {
+  ThemeContext as unstable_ThemeContext,
   Theme as unstable_Theme,
   useTheme as unstable_useTheme,
 } from './components/Theme';

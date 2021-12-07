@@ -220,6 +220,7 @@ Array [
   "unstable_Section",
   "unstable_Stack",
   "unstable_Theme",
+  "unstable_ThemeContext",
   "unstable_Tooltip",
   "unstable_TreeNode",
   "unstable_TreeView",
