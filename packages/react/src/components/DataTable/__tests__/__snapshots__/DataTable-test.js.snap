@@ -998,6 +998,7 @@ exports[`DataTable selection should have select-all default to un-checked if no 
                               aria-label="Select all rows"
                               className="bx--checkbox-label"
                               htmlFor="data-table-7__select-all"
+                              onClick={[Function]}
                             />
                           </InlineCheckbox>
                         </ForwardRef(InlineCheckbox)>
@@ -1404,6 +1405,7 @@ exports[`DataTable selection should render 1`] = `
                               aria-label="Select all rows"
                               className="bx--checkbox-label"
                               htmlFor="data-table-6__select-all"
+                              onClick={[Function]}
                             />
                           </InlineCheckbox>
                         </ForwardRef(InlineCheckbox)>
@@ -1505,6 +1507,7 @@ exports[`DataTable selection should render 1`] = `
                               aria-label="Select row"
                               className="bx--checkbox-label"
                               htmlFor="data-table-6__select-row-b"
+                              onClick={[Function]}
                             />
                           </InlineCheckbox>
                         </ForwardRef(InlineCheckbox)>
@@ -1574,6 +1577,7 @@ exports[`DataTable selection should render 1`] = `
                               aria-label="Select row"
                               className="bx--checkbox-label"
                               htmlFor="data-table-6__select-row-a"
+                              onClick={[Function]}
                             />
                           </InlineCheckbox>
                         </ForwardRef(InlineCheckbox)>
@@ -1643,6 +1647,7 @@ exports[`DataTable selection should render 1`] = `
                               aria-label="Select row"
                               className="bx--checkbox-label"
                               htmlFor="data-table-6__select-row-c"
+                              onClick={[Function]}
                             />
                           </InlineCheckbox>
                         </ForwardRef(InlineCheckbox)>
