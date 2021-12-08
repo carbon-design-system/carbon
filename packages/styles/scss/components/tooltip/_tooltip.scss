@@ -52,6 +52,7 @@ $tooltip-padding-inline: custom-property.get-var(
 
     border-bottom-color: theme.$border-interactive;
   }
+
   .#{$prefix}--definition-tooltip {
     @include type.type-style('body-long-01');
 
