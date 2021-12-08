@@ -33,5 +33,5 @@ export function adjustLightness(token, shift) {
  * @returns {string}
  */
 export function adjustAlpha(token, alpha) {
-  return Color(token).rgba().alpha(alpha).string();
+  return Color(token).rgb().alpha(alpha).string();
 }
