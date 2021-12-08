@@ -11,8 +11,8 @@
 @use '../../type';
 @use '../../utilities/custom-property';
 @use '../../utilities/convert';
-@use '../../utilities/_button-reset';
-@use '../../utilities/_focus-outline';
+@use '../../utilities/button-reset';
+@use '../../utilities/focus-outline';
 
 $tooltip-padding-block: custom-property.get-var(
   'tooltip-padding-block',
